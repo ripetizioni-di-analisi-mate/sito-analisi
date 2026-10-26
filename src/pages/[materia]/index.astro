@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { MATERIE, SEZIONI, materia as trovaMateria } from '../../data/materie';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return MATERIE.filter((m) => m.attiva).map((m) => ({ params: { materia: m.slug } }));
+}
+const { materia } = Astro.params;
+const m = trovaMateria(materia!);
+const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
+const svolti = await getCollection('svolti');
+const dafare = await getCollection('dafare');
+const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
+---
+<Base titolo="Argomenti" descrizione={m.descrizione} materia={materia}>
+  <p class="sopratitolo">{m.titolo}</p>
+  <h1>Gli argomenti dell'esame</h1>
+  <p class="sommario">{m.descrizione}</p>
+  <ol class="griglia-argomenti">
+    {m.argomenti.map((a) => {
+      const pronto = teorie.has(`${materia}/${a.slug}`);
+      const ns = conta(svolti, a.slug), nd = conta(dafare, a.slug);
+      return (
+        <li class:list={{ 'in-preparazione': !pronto }}>
+          <h2>{pronto ? <a href={url(`/${materia}/${a.slug}/teoria`)}>{a.titolo}</a> : a.titolo}</h2>
+          {pronto ? (
+            <nav aria-label={a.titolo}>
+              {SEZIONI.map((s) => <a href={url(`/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
+            </nav>
+          ) : (
+            <span class="conteggio">in preparazione</span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</Base>

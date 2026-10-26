@@ -1,0 +1,136 @@
+---
+import '@fontsource-variable/source-serif-4';
+import '@fontsource/source-sans-3/400.css';
+import '@fontsource/source-sans-3/600.css';
+import '@fontsource/source-sans-3/700.css';
+import '@fontsource-variable/literata';
+import '@fontsource/fira-sans/400.css';
+import '@fontsource/fira-sans/600.css';
+import '@fontsource/fira-sans/700.css';
+import '@fontsource-variable/inter';
+import '@fontsource-variable/fraunces';
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import Indice from '../components/Indice.astro';
+import { materia as trovaMateria } from '../data/materie';
+import { url } from '../lib/url';
+
+const NOME_SITO = 'Ripetizioni di Analisi';
+
+interface Passo { titolo: string; sotto?: string; href: string }
+interface Props {
+  titolo: string;
+  descrizione?: string;
+  percorso?: { titolo: string; href?: string }[];
+  materia?: string;
+  argomento?: string;
+  sezione?: string;
+  precedente?: Passo;
+  successivo?: Passo;
+}
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo } = Astro.props;
+const m = materia ? trovaMateria(materia) : undefined;
+const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`;
+---
+<!doctype html>
+<html lang="it" style={m ? `--accento: ${m.colore}` : undefined}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{titoloCompleto}</title>
+  {descrizione && <meta name="description" content={descrizione} />}
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#faf8f2" />
+  <script is:inline>
+    try { var f = localStorage.getItem('font'); if (f) document.documentElement.dataset.font = f; } catch (e) {}
+    try { if (localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="testata">
+    <div class="testata-interna">
+      <button class="bottone-indice" type="button" aria-label="Apri l'indice" data-apri-indice>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        <span>Indice</span>
+      </button>
+      <a class="marchio" href={url('/')}>{NOME_SITO}</a>
+      {m && <a class="materia-corrente" href={url(`/${m.slug}`)}>{m.breve}</a>}
+      <a class="bottone-cerca" href={url('/cerca')}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        <span>Cerca</span>
+      </a>
+    </div>
+  </header>
+
+  <div class="corpo">
+    <Indice materia={materia} argomento={argomento} sezione={sezione} />
+    <main>
+      <div class="pagina">
+        {(percorso.length > 0 || m) && (
+          <nav class="percorso" aria-label="Percorso">
+            <ol>
+              <li><a href={url('/')}>Materie</a></li>
+              {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={url(`/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
+              {percorso.map((p, i) => (
+                <li aria-current={i === percorso.length - 1 ? 'page' : undefined}>
+                  {p.href && i < percorso.length - 1 ? <a href={p.href}>{p.titolo}</a> : p.titolo}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+        <slot />
+        {(precedente || successivo) && (
+          <nav class="passi" aria-label="Pagina precedente e successiva">
+            {precedente && <a class="precedente" href={precedente.href}><small>← Precedente{precedente.sotto ? ` · ${precedente.sotto}` : ''}</small>{precedente.titolo}</a>}
+            {successivo && <a class="successivo" href={successivo.href}><small>Successivo →{successivo.sotto ? ` · ${successivo.sotto}` : ''}</small>{successivo.titolo}</a>}
+          </nav>
+        )}
+      </div>
+    </main>
+  </div>
+
+  <footer class="pie">
+    <a href={url('/prova-font')}>Prova dei font</a> · Privacy · Note legali · © Carmine Tornincasa
+  </footer>
+
+  <dialog class="cassetto" id="cassetto-indice">
+    <div class="cassetto-testa"><strong>Indice</strong><button type="button" aria-label="Chiudi" data-chiudi-indice>×</button></div>
+    <Indice materia={materia} argomento={argomento} sezione={sezione} />
+  </dialog>
+
+  <script>
+    // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
+    // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
+    function adattaFormule() {
+      document.querySelectorAll<HTMLElement>('.katex-display').forEach((d) => {
+        const k = d.querySelector<HTMLElement>('.katex');
+        if (!k) return;
+        k.style.fontSize = '';
+        const disp = d.clientWidth, larg = k.scrollWidth;
+        if (larg > disp) k.style.fontSize = `${Math.max(0.74, (disp / larg) * 1.08 - 0.01)}em`;
+      });
+    }
+    adattaFormule();
+    document.fonts?.ready.then(adattaFormule);
+    addEventListener('resize', adattaFormule);
+
+    // Il tasto Indice: su schermi larghi apre e chiude la colonna laterale (scelta ricordata),
+    // su telefono apre il cassetto.
+    const d = document.getElementById('cassetto-indice') as HTMLDialogElement;
+    const largo = matchMedia('(min-width: 60rem)');
+    const bottone = document.querySelector<HTMLButtonElement>('[data-apri-indice]');
+    const aggiorna = () => bottone?.setAttribute('aria-pressed', String(largo.matches && !document.documentElement.classList.contains('indice-chiuso')));
+    aggiorna(); largo.addEventListener('change', aggiorna);
+    bottone?.addEventListener('click', () => {
+      if (largo.matches) {
+        const chiuso = document.documentElement.classList.toggle('indice-chiuso');
+        try { localStorage.setItem('indice', chiuso ? 'chiuso' : 'aperto'); } catch {}
+        aggiorna();
+      } else d.showModal();
+    });
+    document.querySelector('[data-chiudi-indice]')?.addEventListener('click', () => d.close());
+    d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+  </script>
+</body>
+</html>

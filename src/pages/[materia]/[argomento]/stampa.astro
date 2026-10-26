@@ -1,0 +1,46 @@
+---
+// Versione di stampa di un argomento: teoria, esercizi svolti ed esercizi da fare
+// in un'unica pagina, da cui si genera il PDF.
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { coppie, argomento as trovaArgomento, materia as trovaMateria } from '../../../data/materie';
+import { perArgomento, numero } from '../../../lib/nav';
+
+export function getStaticPaths() {
+  return coppie().map((c) => ({ params: c }));
+}
+const { materia, argomento } = Astro.params;
+const arg = trovaArgomento(materia!, argomento!);
+const m = trovaMateria(materia!);
+const voce = await getEntry('teoria', `${materia}/${argomento}`);
+const Teoria = voce ? (await render(voce)).Content : null;
+const svolti = await Promise.all(perArgomento(await getCollection('svolti'), materia!, argomento!).map(async (v) => ({ v, Content: (await render(v)).Content })));
+const dafare = await Promise.all(perArgomento(await getCollection('dafare'), materia!, argomento!).map(async (v) => ({ v, Content: (await render(v)).Content })));
+---
+<Base titolo={`${arg.titolo} · Stampa`} materia={materia} argomento={argomento}>
+  <div class="stampa">
+    <p class="sopratitolo">{m.titolo}</p>
+    <h1>{arg.titolo}</h1>
+    <p class="sommario">{voce?.data.sommario}</p>
+    <p class="nota-pdf">Teoria, esercizi svolti ed esercizi da fare. © Carmine Tornincasa.</p>
+
+    <h1 class="parte">Teoria</h1>
+    {Teoria && <Teoria />}
+
+    <h1 class="parte">Esercizi svolti</h1>
+    {svolti.map(({ v, Content }) => (
+      <section class="esercizio-stampa">
+        <h2>Scheda {numero(v.id)} · {v.data.titolo}</h2>
+        <Content />
+      </section>
+    ))}
+
+    <h1 class="parte">Esercizi da fare</h1>
+    {dafare.map(({ v, Content }) => (
+      <section class="esercizio-stampa">
+        <h2>Esercizio {numero(v.id)} · {v.data.titolo}</h2>
+        <Content />
+      </section>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,41 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { titoliAncore } from '../../../../lib/ancore';
+import Base from '../../../../layouts/Base.astro';
+import { argomento as trovaArgomento } from '../../../../data/materie';
+import { url } from '../../../../lib/url';
+import { numero } from '../../../../lib/nav';
+
+export async function getStaticPaths() {
+  const voci = await getCollection('dafare');
+  return voci.map((v) => {
+    const [materia, argomento, n] = v.id.split('/');
+    const fratelli = voci.filter((x) => x.id.startsWith(`${materia}/${argomento}/`)).sort((a, b) => numero(a.id) - numero(b.id));
+    const i = fratelli.findIndex((x) => x.id === v.id);
+    return { params: { materia, argomento, n }, props: { voce: v, prec: fratelli[i - 1], succ: fratelli[i + 1] } };
+  });
+}
+const { materia, argomento, n } = Astro.params;
+const { voce, prec, succ } = Astro.props;
+const arg = trovaArgomento(materia!, argomento!);
+const { Content } = await render(voce);
+const ancore = titoliAncore((await getEntry('teoria', `${materia}/${argomento}`))?.body);
+const base = `/${materia}/${argomento}`;
+const lista = url(`${base}/esercizi`);
+const passo = (v: typeof voce | undefined) => v && { titolo: `Esercizio ${numero(v.id)}`, sotto: v.data.titolo, href: url(`${base}/esercizi/${numero(v.id)}`) };
+---
+<Base
+  titolo={`${arg.breve} · Esercizio da fare ${n}`}
+  descrizione={voce.data.titolo}
+  percorso={[{ titolo: arg.breve, href: url(`${base}/teoria`) }, { titolo: 'Esercizi da fare', href: lista }, { titolo: `Esercizio ${n}` }]}
+  materia={materia} argomento={argomento} sezione="esercizi"
+  precedente={passo(prec) ?? { titolo: 'Tutti gli esercizi da fare', sotto: arg.breve, href: lista }}
+  successivo={passo(succ)}
+>
+  <p class="sopratitolo">Esercizio da fare {n}</p>
+  <h1>{voce.data.titolo}</h1>
+  {voce.data.teoria.length > 0 && (
+    <p class="collegamenti">Teoria usata: {voce.data.teoria.map((t) => <a href={url(`${base}/teoria#${t}`)}>{ancore[t] ?? t.replace(/-/g, ' ')}</a>)}</p>
+  )}
+  <Content />
+</Base>

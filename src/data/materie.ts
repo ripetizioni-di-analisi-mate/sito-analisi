@@ -1,0 +1,82 @@
+// Materie del sito. Ogni materia ha i suoi argomenti, il suo colore di accento
+// e i suoi contenuti in src/content/<collezione>/<materia>/…
+export interface Argomento { slug: string; titolo: string; breve: string }
+export interface Materia {
+  slug: string;
+  titolo: string;
+  breve: string;
+  descrizione: string;
+  colore: string;      // accento della materia (titoli, indice, striscia in testata)
+  attiva: boolean;     // false = in preparazione, compare in home senza link
+  argomenti: Argomento[];
+}
+
+export const MATERIE: Materia[] = [
+  {
+    slug: 'precorso',
+    titolo: 'Precorso',
+    breve: 'Precorso',
+    descrizione: 'La matematica che serve prima di Analisi 1: logica, polinomi, equazioni e disequazioni di ogni tipo, geometria analitica.',
+    colore: '#a8762b',
+    attiva: true,
+    argomenti: [
+      { slug: 'logica', titolo: 'Logica elementare', breve: 'Logica' },
+      { slug: 'potenze-e-radici', titolo: 'Potenze e radici', breve: 'Potenze e radici' },
+      { slug: 'polinomi', titolo: 'Fattorizzazione, Ruffini e divisione tra polinomi', breve: 'Polinomi' },
+      { slug: 'equazioni-polinomiali', titolo: 'Equazioni e disequazioni polinomiali e fratte', breve: 'Polinomiali e fratte' },
+      { slug: 'valore-assoluto', titolo: 'Equazioni e disequazioni con il valore assoluto', breve: 'Valore assoluto' },
+      { slug: 'irrazionali', titolo: 'Equazioni e disequazioni irrazionali', breve: 'Irrazionali' },
+      { slug: 'logaritmiche', titolo: 'Equazioni e disequazioni logaritmiche', breve: 'Logaritmiche' },
+      { slug: 'esponenziali', titolo: 'Equazioni e disequazioni esponenziali', breve: 'Esponenziali' },
+      { slug: 'goniometriche', titolo: 'Equazioni e disequazioni goniometriche', breve: 'Goniometriche' },
+      { slug: 'geometria-analitica', titolo: 'Geometria analitica e coniche', breve: 'Geometria analitica' },
+    ],
+  },
+  {
+    slug: 'analisi-1',
+    titolo: 'Analisi 1',
+    breve: 'Analisi 1',
+    descrizione: 'Limiti, derivate, integrali, serie ed equazioni differenziali: la teoria e gli esercizi per l\'esame.',
+    colore: '#2f6f68',
+    attiva: true,
+    argomenti: [
+      { slug: 'insiemi', titolo: 'Insiemi', breve: 'Insiemi' },
+      { slug: 'induzione', titolo: 'Induzione e binomio di Newton', breve: 'Induzione' },
+      { slug: 'funzioni', titolo: 'Funzioni elementari', breve: 'Funzioni' },
+      { slug: 'numeri-complessi', titolo: 'Numeri complessi', breve: 'Numeri complessi' },
+      { slug: 'limiti', titolo: 'Limiti e continuità', breve: 'Limiti' },
+      { slug: 'derivate', titolo: 'Calcolo differenziale e Taylor', breve: 'Derivate' },
+      { slug: 'studio-di-funzione', titolo: 'Studio di funzione', breve: 'Studio di funzione' },
+      { slug: 'integrali', titolo: 'Calcolo integrale', breve: 'Integrali' },
+      { slug: 'integrali-impropri', titolo: 'Integrali impropri', breve: 'Integrali impropri' },
+      { slug: 'serie', titolo: 'Serie numeriche', breve: 'Serie' },
+      { slug: 'equazioni-differenziali', titolo: 'Equazioni differenziali', breve: 'Equazioni differenziali' },
+    ],
+  },
+  {
+    slug: 'analisi-2',
+    titolo: 'Analisi 2',
+    breve: 'Analisi 2',
+    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
+    colore: '#3b5f8f',
+    attiva: false,
+    argomenti: [],
+  },
+];
+
+export const SEZIONI = [
+  { slug: 'teoria', titolo: 'Teoria' },
+  { slug: 'esercizi-svolti', titolo: 'Esercizi svolti' },
+  { slug: 'esercizi', titolo: 'Esercizi da fare' },
+] as const;
+
+export function materia(slug: string): Materia {
+  return MATERIE.find((m) => m.slug === slug)!;
+}
+export function argomento(m: string, a: string): Argomento {
+  return materia(m).argomenti.find((x) => x.slug === a)!;
+}
+// Tutte le coppie (materia, argomento) delle materie attive, per getStaticPaths.
+export function coppie() {
+  return MATERIE.filter((m) => m.attiva).flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
+}

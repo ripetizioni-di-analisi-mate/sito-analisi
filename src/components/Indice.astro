@@ -1,0 +1,51 @@
+---
+import { MATERIE, SEZIONI, materia as trovaMateria } from '../data/materie';
+import { url } from '../lib/url';
+interface Props { materia?: string; argomento?: string; sezione?: string }
+const { materia, argomento, sezione } = Astro.props;
+const m = materia ? trovaMateria(materia) : undefined;
+---
+<nav class="indice" aria-label="Indice">
+  {m ? (
+    <>
+      <p class="indice-materia">
+        <a href={url(`/${m.slug}`)}>{m.titolo}</a>
+        <a class="cambia-materia" href={url('/')}>altre materie</a>
+      </p>
+      <ol>
+        {m.argomenti.map((a) => {
+          const corrente = a.slug === argomento;
+          return (
+            <li class:list={{ corrente }}>
+              <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento>{a.titolo}</button>
+              <ol class:list={{ aperta: corrente }}>
+                {SEZIONI.map((s) => (
+                  <li><a href={url(`/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }}>{s.titolo}</a></li>
+                ))}
+              </ol>
+            </li>
+          );
+        })}
+      </ol>
+    </>
+  ) : (
+    <>
+      <p class="indice-materia"><span>Materie</span></p>
+      <ol>
+        {MATERIE.map((x) => (
+          <li>{x.attiva ? <a class="argomento" href={url(`/${x.slug}`)}>{x.titolo}</a> : <span class="argomento in-preparazione">{x.titolo} <small>in preparazione</small></span>}</li>
+        ))}
+      </ol>
+    </>
+  )}
+</nav>
+<script>
+  // Un tocco sul nome dell'argomento apre le sue tre sezioni, un secondo tocco le richiude.
+  document.querySelectorAll<HTMLButtonElement>('[data-apri-argomento]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const ol = b.nextElementSibling as HTMLElement;
+      const aperto = ol.classList.toggle('aperta');
+      b.setAttribute('aria-expanded', String(aperto));
+    });
+  });
+</script>
