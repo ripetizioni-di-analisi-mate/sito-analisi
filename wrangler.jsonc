@@ -1,0 +1,6 @@
+{
+  // Pubblicazione su Cloudflare (Worker con risorse statiche)
+  "name": "sito-analisi",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist" }
+}
