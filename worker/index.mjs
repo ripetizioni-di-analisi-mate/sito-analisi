@@ -221,6 +221,14 @@ export default {
         { headers: { 'content-type': 'text/html; charset=utf-8', 'set-cookie': cookie } });
     }
 
+    // --- esci: torna ospite su questo dispositivo ---
+    if (p === '/esci') {
+      return new Response(null, { status: 302, headers: {
+        location: '/',
+        'set-cookie': 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax',
+      } });
+    }
+
     // --- webhook Paddle ---
     if (p === '/api/paddle/webhook' && req.method === 'POST') {
       const corpo = await req.text();
@@ -281,9 +289,11 @@ export default {
     const info = analizza(url.pathname);
     const protetta = vendita && info && A_PAGAMENTO.includes(info.materia);
     let risposta;
+    let sbloccataQui = false;
     if (protetta) {
       const sbloccate = await materieSbloccate(env, req);
       const ha = sbloccate.includes(info.materia) || sbloccate.includes('tutte');
+      sbloccataQui = ha;
       if (!ha) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa' || (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE)) {
           risposta = await rispostaVetrina(env, req, `/${info.materia}/sblocca.html`);
@@ -295,6 +305,9 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(req);
+    if (sbloccataQui && (risposta.headers.get('content-type') || '').includes('text/html')) {
+      risposta = new HTMLRewriter().on('html', { element(e) { e.setAttribute('class', ((e.getAttribute('class') || '') + ' sbloccato').trim()); } }).transform(risposta);
+    }
 
     // --- conteggio visite (solo pagine, non risorse) ---
     if (req.method === 'GET' && (risposta.headers.get('content-type') || '').includes('text/html') && !p.startsWith('/admin')) {

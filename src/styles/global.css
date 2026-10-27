@@ -350,3 +350,6 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .riquadro-acquisto button:hover { filter: brightness(1.08); }
 #acquisto-alternativo { margin: 0; color: var(--inchiostro-2); }
 .nota-accesso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
+
+/* materia sbloccata su questo dispositivo: spunta sulla pillola in testata */
+html.sbloccato .materia-corrente::after { content: ' ✓'; font-weight: 700; }
