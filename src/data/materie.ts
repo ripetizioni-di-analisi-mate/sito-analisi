@@ -59,8 +59,20 @@ export const MATERIE: Materia[] = [
     breve: 'Analisi 2',
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
     colore: '#3b5f8f',
-    attiva: false,
-    argomenti: [],
+    attiva: true,
+    argomenti: [
+      { slug: 'funzioni-di-piu-variabili', titolo: 'Funzioni di più variabili', breve: 'Più variabili' },
+      { slug: 'calcolo-differenziale', titolo: 'Calcolo differenziale in più variabili', breve: 'Calcolo differenziale' },
+      { slug: 'funzioni-implicite', titolo: 'Funzioni implicite', breve: 'Funzioni implicite' },
+      { slug: 'massimi-e-minimi', titolo: 'Massimi e minimi liberi e vincolati', breve: 'Massimi e minimi' },
+      { slug: 'curve-e-integrali-di-linea', titolo: 'Curve e integrali di linea', breve: 'Curve' },
+      { slug: 'campi-vettoriali', titolo: 'Campi vettoriali e teorema di Green', breve: 'Campi vettoriali' },
+      { slug: 'integrali-doppi-e-tripli', titolo: 'Integrali doppi e tripli', breve: 'Integrali multipli' },
+      { slug: 'superfici-e-flussi', titolo: 'Superfici, flussi e teoremi di Gauss e Stokes', breve: 'Superfici e flussi' },
+      { slug: 'successioni-e-serie-di-funzioni', titolo: 'Successioni e serie di funzioni', breve: 'Serie di funzioni' },
+      { slug: 'serie-di-potenze', titolo: 'Serie di potenze e serie di Taylor', breve: 'Serie di potenze' },
+      { slug: 'serie-di-fourier', titolo: 'Serie di Fourier', breve: 'Serie di Fourier' },
+    ],
   },
 ];
 
