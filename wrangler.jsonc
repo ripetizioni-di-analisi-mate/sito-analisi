@@ -9,7 +9,11 @@
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Archivio"] }],
   "vars": {
     // "0" = sito tutto aperto; qualsiasi altro valore = oscuramento attivo
-    "VENDITA": "1"
+    "VENDITA": "1",
+    // Paddle: identificativi pubblici dei due prezzi (non sono segreti)
+    "PADDLE_AMBIENTE": "production",
+    "PADDLE_PREZZO_ANALISI_1": "pri_01m5z6aynthpe6w821c27ycaxk",
+    "PADDLE_PREZZO_ANALISI_2": "pri_01m5z6cfsrj5ss4kd532hkgpd7"
     // Segreti da impostare nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets),
     // mai in questo file: "ADMIN_PASSWORD" (password della dashboard) e
     // "CHIAVE_ACCESSO" (firma dei link personali; cambiarla invalida i link gia' consegnati).
