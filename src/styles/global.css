@@ -353,3 +353,53 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 
 /* materia sbloccata su questo dispositivo: spunta sulla pillola in testata */
 html.sbloccato .materia-corrente::after { content: ' ✓'; font-weight: 700; }
+
+/* ---------- un po' di pepe: benvenuto, filo di lettura, rifiniture ---------- */
+
+/* Benvenuto in home: il foglio a quadretti con la curva, come un quaderno di analisi */
+.benvenuto { position: relative; padding: 1.5rem 0 0.75rem; }
+.benvenuto .quaderno { position: absolute; inset: -1.25rem -16px auto; height: 103%; width: calc(100% + 32px); pointer-events: none; z-index: -1; }
+.benvenuto .trama { color: var(--riga); opacity: 0.33; }
+.benvenuto .disegno line { stroke: var(--inchiostro-2); stroke-width: 1.3; opacity: 0.35; }
+.benvenuto .curva-benvenuto { stroke: var(--accento); stroke-width: 2.4; opacity: 0.4; stroke-linecap: round; }
+.benvenuto .punto-pieno { fill: var(--accento); opacity: 0.45; }
+.benvenuto .freccia { fill: var(--inchiostro-2); opacity: 0.35; }
+.benvenuto h1 { font-size: clamp(2rem, 6vw, 2.6rem); line-height: 1.12; letter-spacing: -0.01em; }
+.benvenuto .sommario { max-width: 34rem; }
+.firma-benvenuto { font-style: italic; color: var(--inchiostro-2); margin: 1rem 0 0.5rem; }
+.firma-benvenuto span { white-space: nowrap; font-style: normal; font-family: var(--ui); font-size: 0.9rem; }
+.firma-benvenuto a { color: var(--accento); text-decoration: none; }
+.firma-benvenuto a:hover { text-decoration: underline; }
+
+/* Filo di lettura: si riempie del colore della materia mentre si scorre */
+.filo-lettura { position: fixed; top: 3.25rem; left: 0; right: 0; height: 3px; z-index: 21; background: color-mix(in srgb, var(--accento) 18%, var(--carta)); }
+body:has(.filo-lettura) .testata::after { background: transparent; }
+.filo-lettura span { display: block; height: 100%; width: 0%; background: var(--accento); }
+@media print { .filo-lettura { display: none; } }
+
+/* Velatura del colore di materia sulle card della home */
+.griglia-materie li { background: linear-gradient(105deg, color-mix(in srgb, var(--accento) 6%, var(--carta)), var(--carta) 55%); }
+
+/* Capitoli numerati in medaglione */
+.griglia-argomenti li { align-items: start; }
+.griglia-argomenti li::before { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: color-mix(in srgb, var(--accento) 10%, var(--carta)); font-size: 1rem; line-height: 1; }
+.griglia-argomenti h2 { padding-top: 0.2rem; }
+
+/* Le card rispondono al tocco del mouse, con discrezione */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .griglia-materie li, .griglia-argomenti li, .elenco-esercizi a, .risultati a, .passi a {
+    transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+  }
+  .griglia-materie li:hover, .griglia-argomenti li:hover, .elenco-esercizi a:hover, .risultati a:hover, .passi a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px color-mix(in srgb, var(--inchiostro) 9%, transparent);
+    border-color: color-mix(in srgb, var(--accento) 55%, var(--riga));
+  }
+  details.blocco > summary:hover { color: var(--c); }
+}
+
+/* Il nome del sito porta il verde su "Analisi" */
+.marchio em { font-style: normal; color: var(--accento); }
+
+/* Piè di pagina firmato */
+.pie-firma { font-family: var(--testo); font-style: italic; font-size: 0.95rem; color: var(--inchiostro-2); margin: 0 0 0.5rem; }

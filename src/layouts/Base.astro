@@ -54,7 +54,7 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
         <span>Indice</span>
       </button>
-      <a class="marchio" href={url('/')}>{NOME_SITO}</a>
+      <a class="marchio" href={url("/")}>Ripetizioni di <em>Analisi</em></a>
       {m && <a class="materia-corrente" href={url(`/${m.slug}`)}>{m.breve}</a>}
       <a class="bottone-cerca" href={url('/cerca')}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
@@ -62,6 +62,7 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
       </a>
     </div>
   </header>
+  {materia && argomento && <div class="filo-lettura" aria-hidden="true"><span></span></div>}
 
   <div class="corpo">
     <Indice materia={materia} argomento={argomento} sezione={sezione} />
@@ -93,6 +94,7 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
   </div>
 
   <footer class="pie">
+    <p class="pie-firma">Fatto a mano, un esercizio alla volta.</p>
     <a href={url('/prova-font')}>Prova dei font</a> · <a href={url('/privacy')}>Privacy</a> · <a href={url('/termini')}>Termini e rimborsi</a> · © Carmine Tornincasa
   </footer>
 
@@ -137,6 +139,18 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
     });
     document.querySelector('[data-chiudi-indice]')?.addEventListener('click', () => d.close());
     d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+
+    // Filo di lettura: la barra sotto la testata si riempie scorrendo la pagina.
+    const filo = document.querySelector<HTMLElement>('.filo-lettura span');
+    if (filo) {
+      const aggiornaFilo = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        filo.style.width = max > 60 ? `${Math.min(100, (scrollY / max) * 100)}%` : '0%';
+      };
+      aggiornaFilo();
+      addEventListener('scroll', aggiornaFilo, { passive: true });
+      addEventListener('resize', aggiornaFilo);
+    }
 
     // Torna su: compare dopo un po' di scorrimento, riporta in cima.
     const su = document.querySelector<HTMLButtonElement>('.torna-su');
