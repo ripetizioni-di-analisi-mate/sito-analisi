@@ -333,3 +333,20 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
   details.blocco > summary::before { display: none; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* ---------- oscuramento e pagina Sblocca ---------- */
+.velo-blocco { position: relative; margin: 2rem 0; padding: 2.5rem 1.25rem 1.5rem; border: 1px solid var(--riga); border-radius: var(--raggio); text-align: center; font-family: var(--ui); }
+.velo-blocco::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 7rem; background: linear-gradient(to bottom, transparent, var(--carta)); pointer-events: none; }
+.velo-blocco p { margin: 0 0 1rem; color: var(--inchiostro-2); }
+.bottone-sblocca { display: inline-block; background: var(--accento); color: white; text-decoration: none; font-weight: 600; padding: 0.65rem 1.4rem; border-radius: 999px; }
+.bottone-sblocca:hover { filter: brightness(1.08); }
+.cosa-include { padding-left: 1.2rem; }
+.cosa-include li { margin: 0.5rem 0; }
+.riquadro-acquisto { border: 1px solid var(--accento); border-radius: var(--raggio); padding: 1.25rem; margin: 1.5rem 0 1rem; text-align: center; font-family: var(--ui); }
+.riquadro-acquisto .prezzo { margin: 0 0 0.8rem; font-size: 1.15rem; }
+.riquadro-acquisto .prezzo strong { font-size: 2rem; color: var(--accento); }
+.riquadro-acquisto .prezzo span { color: var(--inchiostro-2); }
+.riquadro-acquisto button { font: inherit; font-weight: 600; font-size: 1.05rem; background: var(--accento); color: white; border: none; border-radius: 999px; padding: 0.7rem 2rem; cursor: pointer; }
+.riquadro-acquisto button:hover { filter: brightness(1.08); }
+#acquisto-alternativo { margin: 0; color: var(--inchiostro-2); }
+.nota-accesso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }

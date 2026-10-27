@@ -8,6 +8,7 @@ export interface Materia {
   descrizione: string;
   colore: string;      // accento della materia (titoli, indice, striscia in testata)
   gruppo: string;      // percorso di studi: la home e l'indice raggruppano per questo
+  prezzo?: number;     // in euro: presente = materia a pagamento (tenere allineato worker/index.mjs e scripts/vetrine.mjs)
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
 }
@@ -41,6 +42,7 @@ export const MATERIE: Materia[] = [
     descrizione: 'Limiti, derivate, integrali, serie ed equazioni differenziali: la teoria e gli esercizi per l\'esame.',
     colore: '#2f6f68',
     gruppo: 'Università',
+    prezzo: 29,
     attiva: true,
     argomenti: [
       { slug: 'insiemi', titolo: 'Insiemi, induzione e funzioni elementari', breve: 'Nozioni di base' },
@@ -61,6 +63,7 @@ export const MATERIE: Materia[] = [
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
     colore: '#3b5f8f',
     gruppo: 'Università',
+    prezzo: 29,
     attiva: true,
     argomenti: [
       { slug: 'funzioni-di-piu-variabili', titolo: 'Funzioni di più variabili', breve: 'Più variabili' },

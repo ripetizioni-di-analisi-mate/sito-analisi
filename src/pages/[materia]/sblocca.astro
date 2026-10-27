@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { MATERIE, materia as trovaMateria } from '../../data/materie';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ params: { materia: m.slug } }));
+}
+const { materia } = Astro.params;
+const m = trovaMateria(materia!);
+const svolti = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+---
+<Base titolo={`Sblocca ${m.titolo}`} descrizione={`Accesso completo a ${m.titolo}: teoria, schede di esercizi svolti, soluzioni e PDF.`} materia={materia} percorso={[{ titolo: 'Sblocca' }]}>
+  <p class="sopratitolo">{m.titolo}</p>
+  <h1>Sblocca {m.titolo}</h1>
+  <p class="sommario">Un acquisto unico, senza abbonamento: tuo per sempre, su tutti i tuoi dispositivi.</p>
+  <ul class="cosa-include">
+    <li>La <strong>teoria completa</strong> di tutti gli {m.argomenti.length} argomenti, con definizioni, teoremi e dimostrazioni</li>
+    <li>Tutte le <strong>{svolti} schede di esercizi svolti</strong> per tipologia, con ogni passaggio spiegato</li>
+    <li>Le <strong>soluzioni</strong> dei {dafare} esercizi da fare</li>
+    <li>Il <strong>PDF scaricabile</strong> di ogni argomento, per studiare anche senza connessione</li>
+  </ul>
+  <div class="riquadro-acquisto" data-materia={materia}>
+    <p class="prezzo"><strong>{m.prezzo} €</strong> <span>una volta sola</span></p>
+    <button type="button" id="compra" hidden>Sblocca ora</button>
+    <p id="acquisto-alternativo" hidden>
+      I pagamenti sul sito stanno per arrivare. Nel frattempo puoi sbloccare subito scrivendomi su Instagram:
+      <a href="https://instagram.com/ripetizioni_di_analisi_mate" rel="noopener">@ripetizioni_di_analisi_mate</a> — riceverai il tuo link personale di accesso.
+    </p>
+  </div>
+  <p class="nota-accesso">Dopo l'acquisto ricevi un <strong>link personale</strong>: aprendolo, i contenuti si sbloccano sul dispositivo. Hai già acquistato? Riapri il tuo link, oppure scrivimi e te lo rimando.</p>
+
+  <script is:inline define:vars={{ materia }}>
+    (async () => {
+      const r = await fetch('/api/config').catch(() => null);
+      const conf = r && r.ok ? (await r.json()).paddle : null;
+      const bottone = document.getElementById('compra');
+      const alternativo = document.getElementById('acquisto-alternativo');
+      if (!conf || !conf.prezzi[materia]) { alternativo.hidden = false; return; }
+      const s = document.createElement('script');
+      s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+      s.onload = () => {
+        if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
+        Paddle.Initialize({ token: conf.token });
+        bottone.hidden = false;
+        bottone.addEventListener('click', () => {
+          Paddle.Checkout.open({
+            items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
+            customData: { materia },
+            settings: { locale: 'it' },
+          });
+        });
+      };
+      s.onerror = () => { alternativo.hidden = false; };
+      document.head.appendChild(s);
+    })();
+  </script>
+</Base>
