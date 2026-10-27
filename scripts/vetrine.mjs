@@ -50,7 +50,8 @@ for (const materia of A_PAGAMENTO) {
     let t = readFileSync(join(cartella, 'teoria.html'), 'utf8');
     const posizioni = [...t.matchAll(/<h2 id="([^"]+)"/g)];
     if (posizioni.length >= 2) {
-      const tenute = Math.max(2, Math.floor(posizioni.length / 2));
+      // restano visibili solo i primi due paragrafi: un assaggio, non mezza dispensa
+      const tenute = Math.min(2, posizioni.length - 1);
       const taglio = posizioni[tenute].index;
       let coda = t.indexOf('<nav class="passi"', taglio);
       if (coda === -1) coda = t.indexOf('<script', taglio);
