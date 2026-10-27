@@ -101,7 +101,7 @@ Sia $F$ un campo vettoriale continuo su un aperto connesso $A$. Le tre condizion
 2. Il lavoro di $F$ dipende solo dagli estremi: per ogni coppia di curve regolari a tratti in $A$ con gli stessi estremi e lo stesso verso, i due lavori coincidono.
 3. La circuitazione di $F$ lungo ogni curva chiusa regolare a tratti in $A$ è nulla.
 
-Il teorema fornisce il criterio con cui si dimostra che un campo non è conservativo: trovata una sola curva chiusa con circuitazione diversa da zero, la condizione 3 non è soddisfatta, quindi il potenziale non esiste. La stessa equivalenza giustifica la costruzione del potenziale come lavoro lungo una spezzata, descritta più avanti.
+Il teorema fornisce il criterio con cui si dimostra che un campo non è conservativo: trovata una sola curva chiusa con circuitazione diversa da zero, la condizione 3 non è soddisfatta, quindi il potenziale non esiste. La stessa equivalenza giustifica la costruzione del potenziale come lavoro lungo una spezzata.
 
 :::dimostrazione
 La condizione 1 implica la condizione 2 per il teorema sul lavoro di un campo conservativo, poiché il lavoro vale $U(Q) - U(P)$ qualunque sia la curva da $P$ a $Q$.
@@ -275,7 +275,7 @@ Se $f$ è continua sul dominio normale $D = \{ (x,y) : a \leq x \leq b, \ g_1(x)
 :::
 
 :::osservazione
-Il teorema di Green chiude il cerchio sulla condizione necessaria. Se $F$ è irrotazionale, l'integrando $\dfrac{\partial F_2}{\partial x} - \dfrac{\partial F_1}{\partial y}$ è nullo, quindi la circuitazione lungo il bordo di ogni dominio regolare contenuto nel dominio del campo insieme al suo interno è nulla. Per il campo di rotazione la circuitazione lungo la circonferenza unitaria vale $2\pi$ e il teorema di Green non si applica al cerchio unitario, poiché il campo non è definito nell'origine: le due affermazioni sono coerenti.
+Il teorema di Green spiega il legame tra irrotazionalità e circuitazioni. Se $F$ è irrotazionale, l'integrando $\dfrac{\partial F_2}{\partial x} - \dfrac{\partial F_1}{\partial y}$ è nullo, quindi la circuitazione lungo il bordo di ogni dominio regolare contenuto nel dominio del campo insieme al suo interno è nulla. Per il campo di rotazione la circuitazione lungo la circonferenza unitaria vale $2\pi$ e il teorema di Green non si applica al cerchio unitario, poiché il campo non è definito nell'origine: le due affermazioni sono coerenti.
 :::
 
 ## Aree con la formula di Green
