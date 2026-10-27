@@ -43,8 +43,7 @@ export const MATERIE: Materia[] = [
     gruppo: 'Università',
     attiva: true,
     argomenti: [
-      { slug: 'insiemi', titolo: 'Insiemi e induzione', breve: 'Insiemi' },
-      { slug: 'funzioni', titolo: 'Funzioni elementari', breve: 'Funzioni' },
+      { slug: 'insiemi', titolo: 'Insiemi, induzione e funzioni elementari', breve: 'Nozioni di base' },
       { slug: 'numeri-complessi', titolo: 'Numeri complessi', breve: 'Numeri complessi' },
       { slug: 'limiti', titolo: 'Limiti e continuità', breve: 'Limiti' },
       { slug: 'derivate', titolo: 'Calcolo differenziale e Taylor', breve: 'Derivate' },

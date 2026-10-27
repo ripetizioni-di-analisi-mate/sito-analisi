@@ -9,7 +9,10 @@ export function getStaticPaths() {
 }
 const { materia } = Astro.params;
 const m = trovaMateria(materia!);
-const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
+const vociTeoria = await getCollection('teoria');
+const teorie = new Set(vociTeoria.map((v) => v.id));
+// Riassunto di ogni argomento: la pagina è il programma del corso, non la copia dell'indice.
+const riassunti = Object.fromEntries(vociTeoria.map((v) => [v.id, v.data.sommario]));
 const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
@@ -25,6 +28,7 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
       return (
         <li class:list={{ 'in-preparazione': !pronto }}>
           <h2>{pronto ? <a href={url(`/${materia}/${a.slug}/teoria`)}>{a.titolo}</a> : a.titolo}</h2>
+          {pronto && riassunti[`${materia}/${a.slug}`] && <p class="riassunto">{riassunti[`${materia}/${a.slug}`]}</p>}
           {pronto ? (
             <nav aria-label={a.titolo}>
               {SEZIONI.map((s) => <a href={url(`/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
