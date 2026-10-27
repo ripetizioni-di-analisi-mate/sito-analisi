@@ -4,36 +4,9 @@ import { MATERIE, gruppi } from '../data/materie';
 import { url } from '../lib/url';
 ---
 <Base titolo="Ripetizioni di Analisi" descrizione="Teoria ed esercizi per gli esami di matematica dell'università, materia per materia.">
-  <section class="benvenuto">
-    <svg class="quaderno" viewBox="0 0 640 300" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <pattern id="quadretti" width="25" height="25" patternUnits="userSpaceOnUse">
-          <path d="M 25 0 L 0 0 0 25" fill="none" stroke="currentColor" stroke-width="1"/>
-        </pattern>
-        <linearGradient id="sfuma" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="42%" stop-color="white" stop-opacity="1"/>
-          <stop offset="100%" stop-color="white" stop-opacity="0"/>
-        </linearGradient>
-        <mask id="velo"><rect width="640" height="300" fill="url(#sfuma)"/></mask>
-      </defs>
-      <g mask="url(#velo)">
-        <rect width="640" height="300" fill="url(#quadretti)" class="trama"/>
-        <g class="disegno">
-          <line x1="40" y1="250" x2="610" y2="250"/>
-          <line x1="75" y1="290" x2="75" y2="30"/>
-          <path d="M 40 288 L 75 250 L 610 250" fill="none" stroke="none"/>
-          <path class="curva-benvenuto" d="M 90 240 C 200 235, 260 180, 330 120 S 500 30, 600 42" fill="none"/>
-          <circle cx="330" cy="120" r="4.5" class="punto-pieno"/>
-          <path d="M 602 46 l 10 -5 l -6 10 z" class="freccia"/>
-          <path d="M 71 34 l 4 -10 l 4 10 z" class="freccia"/>
-        </g>
-      </g>
-    </svg>
-    <p class="sopratitolo">Teoria ed esercizi universitari</p>
-    <h1>Tutto l'esame,<br />un argomento alla volta.</h1>
-    <p class="sommario">La teoria con definizioni, teoremi e dimostrazioni. Gli esercizi svolti con ogni passaggio spiegato. Gli esercizi da fare, con la soluzione. Dal telefono o dal computer, al tuo ritmo.</p>
-    <p class="firma-benvenuto">Ogni pagina è scritta e ricontrollata come una lezione. <span>— Carmine, <a href="https://instagram.com/ripetizioni_di_analisi_mate" rel="noopener">@ripetizioni_di_analisi_mate</a></span></p>
-  </section>
+  <p class="sopratitolo">Teoria ed esercizi</p>
+  <h1>Scegli la materia</h1>
+  <p class="sommario">Per ogni materia gli argomenti dell'esame, uno alla volta: la teoria con definizioni, teoremi e dimostrazioni; gli esercizi svolti con tutti i passaggi; gli esercizi da fare con la soluzione.</p>
   <form class="cerca-home" action={url('/cerca')} role="search">
     <input type="search" name="q" placeholder="Cerca un argomento, un teorema, un tipo di esercizio…" aria-label="Cerca nel sito" autocomplete="off" />
     <button type="submit">Cerca</button>
@@ -63,4 +36,3 @@ import { url } from '../lib/url';
     </section>
   ))}
 </Base>
-
