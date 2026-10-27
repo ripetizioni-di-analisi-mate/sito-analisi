@@ -18,7 +18,9 @@ export async function getStaticPaths() {
 const { materia, argomento, n } = Astro.params;
 const { voce, prec, succ } = Astro.props;
 const arg = trovaArgomento(materia!, argomento!);
-const { Content } = await render(voce);
+const resa = await render(voce);
+const Content = resa.Content;
+const salti = resa.headings.filter((h) => h.depth === 2);
 const ancore = titoliAncore((await getEntry('teoria', `${materia}/${argomento}`))?.body);
 const base = `/${materia}/${argomento}`;
 const lista = url(`${base}/esercizi-svolti`);
@@ -36,6 +38,9 @@ const passo = (v: typeof voce | undefined) => v && { titolo: `Scheda ${numero(v.
   <h1>{voce.data.titolo}</h1>
   {voce.data.teoria.length > 0 && (
     <p class="collegamenti">Teoria usata: {voce.data.teoria.map((t) => <a href={url(`${base}/teoria#${t}`)}>{ancore[t] ?? t.replace(/-/g, ' ')}</a>)}</p>
+  )}
+  {salti.length > 1 && (
+    <p class="salta-esercizi">Vai a: {salti.map((s) => <a href={`#${s.slug}`}>{s.text}</a>)}</p>
   )}
   <Content />
 </Base>

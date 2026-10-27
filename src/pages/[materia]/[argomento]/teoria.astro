@@ -2,7 +2,7 @@
 import { existsSync } from 'node:fs';
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import { coppie, argomento as trovaArgomento } from '../../../data/materie';
+import { coppie, argomento as trovaArgomento, materia as trovaMateria } from '../../../data/materie';
 import { url } from '../../../lib/url';
 import { vicini, perArgomento, numero } from '../../../lib/nav';
 
@@ -12,10 +12,16 @@ export function getStaticPaths() {
 const { materia, argomento } = Astro.params;
 const arg = trovaArgomento(materia!, argomento!);
 const voce = await getEntry('teoria', `${materia}/${argomento}`);
-const Contenuto = voce ? (await render(voce)).Content : null;
+const resa = voce ? await render(voce) : null;
+const Contenuto = resa?.Content ?? null;
+const sezioni = resa?.headings.filter((h) => h.depth === 2) ?? [];
 const svolti = perArgomento(await getCollection('svolti'), materia!, argomento!);
 const dafare = perArgomento(await getCollection('dafare'), materia!, argomento!);
 const { precedente, successivo } = vicini(materia!, argomento!, 'teoria');
+// Argomento successivo della materia, per chi segue solo il filo della teoria.
+const elenco = trovaMateria(materia!).argomenti;
+const dopo = elenco[elenco.findIndex((a) => a.slug === argomento) + 1];
+const prossimo = dopo && { titolo: dopo.titolo, href: url(`/${materia}/${dopo.slug}/teoria`) };
 const pdf = existsSync(new URL(`../../../../public/pdf/${materia}/${argomento}.pdf`, import.meta.url));
 const base = `/${materia}/${argomento}`;
 
@@ -30,12 +36,20 @@ const basi = { s: url(`${base}/esercizi-svolti`), d: url(`${base}/esercizi`) };
   descrizione={voce?.data.sommario}
   percorso={[{ titolo: arg.breve, href: url(`${base}/teoria`) }, { titolo: 'Teoria' }]}
   materia={materia} argomento={argomento} sezione="teoria"
-  precedente={precedente} successivo={successivo}
+  precedente={precedente} successivo={successivo} prossimo={prossimo}
 >
   <p class="sopratitolo">Teoria</p>
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
   {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
   {pdf && <p class="collegamenti">PDF dell'argomento: <a href={url(`/pdf/${materia}/${argomento}.pdf`)}>scarica {arg.titolo} in PDF</a> (teoria, esercizi svolti ed esercizi da fare).</p>}
+  {sezioni.length > 1 && (
+    <details class="sommario-pagina">
+      <summary>In questa pagina</summary>
+      <ol>
+        {sezioni.map((s) => <li><a href={`#${s.slug}`}>{s.text}</a></li>)}
+      </ol>
+    </details>
+  )}
   {Contenuto ? <Contenuto /> : <p class="nota-segnaposto">La teoria di questo argomento è in preparazione.</p>}
   <script is:inline define:vars={{ usi, basi }}>
     for (const [id, u] of Object.entries(usi)) {

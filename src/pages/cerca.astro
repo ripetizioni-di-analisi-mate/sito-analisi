@@ -13,6 +13,8 @@ import Base from '../layouts/Base.astro';
     const campo = document.getElementById('cerca') as HTMLInputElement;
     const lista = document.getElementById('risultati') as HTMLUListElement;
     const esito = document.getElementById('esito') as HTMLParagraphElement;
+    // La ricerca dalla home arriva come ?q=…: il campo parte già compilato.
+    if (!campo.value) campo.value = new URLSearchParams(location.search).get('q') ?? '';
     let voci: { t: string; s: string; m: string; h: string; p: string }[] = [];
 
     const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');

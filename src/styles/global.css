@@ -249,12 +249,43 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .riservato p { margin: 0.3rem 0; }
 .spiegazione { margin-top: 1rem; }
 
+/* ---------- sommario interno della teoria ---------- */
+.sommario-pagina { margin: 1.25rem 0; border: 1px solid var(--riga); border-radius: var(--raggio); font-family: var(--ui); }
+.sommario-pagina summary { cursor: pointer; padding: 0.6rem 0.9rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accento); list-style: none; }
+.sommario-pagina summary::-webkit-details-marker { display: none; }
+.sommario-pagina summary::before { content: '›'; display: inline-block; margin-right: 0.5rem; transition: transform 0.15s; }
+.sommario-pagina[open] summary::before { transform: rotate(90deg); }
+.sommario-pagina ol { margin: 0; padding: 0 0.9rem 0.75rem 2.1rem; }
+.sommario-pagina li { margin: 0.3rem 0; }
+.sommario-pagina a { color: var(--inchiostro); text-decoration: none; }
+.sommario-pagina a:hover { color: var(--accento); text-decoration: underline; }
+
+/* ---------- salto rapido fra gli esercizi di una scheda ---------- */
+.salta-esercizi { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: baseline; }
+.salta-esercizi a { text-decoration: none; color: var(--accento); border: 1px solid var(--riga); border-radius: 999px; padding: 0.15rem 0.7rem; }
+.salta-esercizi a:hover { border-color: var(--accento); }
+
+/* ---------- argomento successivo e torna su ---------- */
+.prossimo-argomento { margin: 0.9rem 0 0; text-align: right; font-family: var(--ui); }
+.prossimo-argomento a { color: var(--accento); text-decoration: none; font-weight: 600; }
+.prossimo-argomento a:hover { text-decoration: underline; }
+.torna-su { position: fixed; right: 1rem; bottom: 1rem; z-index: 5; width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--riga); background: white; color: var(--accento); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: grid; place-items: center; }
+.torna-su svg { width: 1.1rem; height: 1.1rem; }
+.torna-su:hover { border-color: var(--accento); }
+.torna-su[hidden] { display: none; }
+
 /* ---------- home: materie ---------- */
-.griglia-materie { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 0.9rem; }
+.cerca-home { display: flex; gap: 0.5rem; margin: 1.25rem 0 0.5rem; font-family: var(--ui); }
+.cerca-home input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
+.cerca-home input:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
+.cerca-home button { font: inherit; font-size: 0.95rem; padding: 0.6rem 1rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: var(--accento); color: white; cursor: pointer; }
+.nome-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
+.griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
+@media (min-width: 44rem) { .griglia-materie { grid-template-columns: 1fr 1fr; } }
 .griglia-materie li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); }
-.griglia-materie a, .griglia-materie div { display: block; padding: 1rem 1.1rem; text-decoration: none; color: var(--inchiostro); }
-.griglia-materie h2 { margin: 0; font-size: 1.3rem; color: var(--accento); }
-.griglia-materie p { margin: 0.35rem 0 0.5rem; color: var(--inchiostro-2); }
+.griglia-materie a, .griglia-materie div { display: block; height: 100%; box-sizing: border-box; padding: 0.9rem 1rem; text-decoration: none; color: var(--inchiostro); }
+.griglia-materie h3 { margin: 0; font-size: 1.25rem; color: var(--accento); }
+.griglia-materie p { margin: 0.3rem 0 0.45rem; color: var(--inchiostro-2); font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .griglia-materie .conteggio, .griglia-argomenti .conteggio { font-family: var(--ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .griglia-materie li.in-preparazione { opacity: 0.75; }
 .griglia-argomenti li.in-preparazione { opacity: 0.7; }
@@ -291,7 +322,7 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .blocco, .grafico { break-inside: avoid-page; }
 .stampa .collegamenti { display: none; }
 @media print {
-  .testata, .indice, .passi, .pie, .cassetto, .bottone-indice, .bottone-cerca { display: none !important; }
+  .testata, .indice, .passi, .pie, .cassetto, .bottone-indice, .bottone-cerca, .torna-su, .prossimo-argomento, .sommario-pagina, .salta-esercizi, .cerca-home { display: none !important; }
   .corpo { display: block; }
   main { padding: 0; }
   .pagina { max-width: none; }

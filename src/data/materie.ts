@@ -7,6 +7,7 @@ export interface Materia {
   breve: string;
   descrizione: string;
   colore: string;      // accento della materia (titoli, indice, striscia in testata)
+  gruppo: string;      // percorso di studi: la home e l'indice raggruppano per questo
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
 }
@@ -18,6 +19,7 @@ export const MATERIE: Materia[] = [
     breve: 'Precorso',
     descrizione: 'La matematica che serve prima di Analisi 1: logica, polinomi, equazioni e disequazioni di ogni tipo, geometria analitica.',
     colore: '#a8762b',
+    gruppo: 'Università',
     attiva: true,
     argomenti: [
       { slug: 'logica', titolo: 'Logica elementare', breve: 'Logica' },
@@ -38,10 +40,10 @@ export const MATERIE: Materia[] = [
     breve: 'Analisi 1',
     descrizione: 'Limiti, derivate, integrali, serie ed equazioni differenziali: la teoria e gli esercizi per l\'esame.',
     colore: '#2f6f68',
+    gruppo: 'Università',
     attiva: true,
     argomenti: [
-      { slug: 'insiemi', titolo: 'Insiemi', breve: 'Insiemi' },
-      { slug: 'induzione', titolo: 'Induzione e binomio di Newton', breve: 'Induzione' },
+      { slug: 'insiemi', titolo: 'Insiemi e induzione', breve: 'Insiemi' },
       { slug: 'funzioni', titolo: 'Funzioni elementari', breve: 'Funzioni' },
       { slug: 'numeri-complessi', titolo: 'Numeri complessi', breve: 'Numeri complessi' },
       { slug: 'limiti', titolo: 'Limiti e continuità', breve: 'Limiti' },
@@ -59,6 +61,7 @@ export const MATERIE: Materia[] = [
     breve: 'Analisi 2',
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
     colore: '#3b5f8f',
+    gruppo: 'Università',
     attiva: true,
     argomenti: [
       { slug: 'funzioni-di-piu-variabili', titolo: 'Funzioni di più variabili', breve: 'Più variabili' },
@@ -91,4 +94,8 @@ export function argomento(m: string, a: string): Argomento {
 // Tutte le coppie (materia, argomento) delle materie attive, per getStaticPaths.
 export function coppie() {
   return MATERIE.filter((m) => m.attiva).flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
+}
+// I gruppi (percorsi di studi) nell'ordine in cui compaiono in home e nell'indice.
+export function gruppi(): string[] {
+  return [...new Set(MATERIE.map((m) => m.gruppo))];
 }

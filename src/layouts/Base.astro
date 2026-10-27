@@ -27,8 +27,9 @@ interface Props {
   sezione?: string;
   precedente?: Passo;
   successivo?: Passo;
+  prossimo?: { titolo: string; href: string };
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo } = Astro.props;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo } = Astro.props;
 const m = materia ? trovaMateria(materia) : undefined;
 const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`;
 ---
@@ -86,6 +87,7 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
             {successivo && <a class="successivo" href={successivo.href}><small>Successivo →{successivo.sotto ? ` · ${successivo.sotto}` : ''}</small>{successivo.titolo}</a>}
           </nav>
         )}
+        {prossimo && <p class="prossimo-argomento"><a href={prossimo.href}>Argomento successivo: {prossimo.titolo} →</a></p>}
       </div>
     </main>
   </div>
@@ -93,6 +95,10 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
   <footer class="pie">
     <a href={url('/prova-font')}>Prova dei font</a> · Privacy · Note legali · © Carmine Tornincasa
   </footer>
+
+  <button class="torna-su" type="button" aria-label="Torna all'inizio della pagina" hidden>
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg>
+  </button>
 
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>Indice</strong><button type="button" aria-label="Chiudi" data-chiudi-indice>×</button></div>
@@ -131,6 +137,15 @@ const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? t
     });
     document.querySelector('[data-chiudi-indice]')?.addEventListener('click', () => d.close());
     d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+
+    // Torna su: compare dopo un po' di scorrimento, riporta in cima.
+    const su = document.querySelector<HTMLButtonElement>('.torna-su');
+    if (su) {
+      const mostra = () => { su.hidden = scrollY < 900; };
+      mostra();
+      addEventListener('scroll', mostra, { passive: true });
+      su.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+    }
   </script>
 </body>
 </html>
