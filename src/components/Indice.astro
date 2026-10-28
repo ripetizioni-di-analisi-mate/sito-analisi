@@ -7,6 +7,8 @@ const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
+// Un simbolo per materia, nel suo colore: rende riconoscibile la voce a colpo d'occhio.
+const SIMBOLI: Record<string, string> = { precorso: 'x²', 'analisi-1': '∫', 'analisi-2': '∬', 'algebra-lineare': 'λ', 'fisica-1': 'ω' };
 ---
 <nav class="indice" aria-label="Indice">
   {m ? (
@@ -36,10 +38,24 @@ const SEZIONI = sezioniL(lingua);
       {gruppiL(lingua).map((g) => (
         <>
           <p class="indice-materia"><span>{g}</span></p>
-          <ol>
-            {MATERIE.filter((x) => x.gruppo === g).map((x) => (
-              <li data-materia={x.slug}>{x.attiva ? <a class="argomento" href={link(lingua, `/${x.slug}`)}>{x.titolo}<Stato prezzo={x.prezzo} compatto lingua={lingua} /></a> : <span class="argomento in-preparazione">{x.titolo} <small>{t.inPreparazione}</small></span>}</li>
-            ))}
+          <ol class="indice-materie">
+            {MATERIE.filter((x) => x.gruppo === g).map((x) => {
+              const dentro = (
+                <>
+                  <span class="materia-simbolo" aria-hidden="true">{SIMBOLI[x.slug] ?? x.titolo[0]}</span>
+                  <span class="materia-testo">
+                    <span class="materia-nome">{x.titolo}</span>
+                    <small>{x.attiva ? `${x.argomenti.length} ${t.argomenti}` : t.inPreparazione}</small>
+                  </span>
+                  {x.attiva && <Stato prezzo={x.prezzo} compatto lingua={lingua} />}
+                </>
+              );
+              return (
+                <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
+                  {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                </li>
+              );
+            })}
           </ol>
         </>
       ))}
