@@ -6,7 +6,7 @@ sommario: What a proposition is, how propositions are combined with connectives,
 ## Propositions
 
 :::definizione{#proposizioni titolo="Proposition"}
-A **proposition** is a statement for which it makes sense to ask whether it is true or false, and which has exactly one of the two truth values. Propositions are denoted by letters such as $p$, $q$, $r$. Every mathematical statement, such as an equality or a theorem, is a proposition.
+A **proposition** is a statement for which it makes sense to ask whether it is true or false, and which has exactly one of the two truth values. Propositions are denoted by letters such as $p$, $q$, $r$. An equality between numbers and a theorem are examples of propositions.
 
 - "$7$ is a prime number": true proposition.
 - "$2 + 2 = 5$": false proposition.
@@ -109,7 +109,7 @@ From $p \Rightarrow q$ true and $q$ true it does *not* follow that $p$ is true. 
 If the implication $p \Rightarrow q$ is true:
 
 - $p$ is a **sufficient condition** for $q$: the truth of $p$ is enough to guarantee the truth of $q$;
-- $q$ is a **necessary condition** for $p$: whenever $p$ is true, $q$ is also true.
+- $q$ is a **necessary condition** for $p$: if $q$ is false, then $p$ is false too, by the contrapositive $\lnot q \Rightarrow \lnot p$; hence $p$ can be true *only if* $q$ is true.
 
 If both $p \Rightarrow q$ and $q \Rightarrow p$ hold, one writes $p \Leftrightarrow q$ ("$p$ *if and only if* $q$") and each of the two is a necessary and sufficient condition for the other. In theorems the hypothesis is a sufficient condition for the conclusion; recognizing which direction of the implication has been proved makes it possible to use the theorem in the correct direction.
 :::
