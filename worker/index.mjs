@@ -92,6 +92,8 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS visite (giorno TEXT, sezione TEXT, n INTEGER, PRIMARY KEY (giorno, sezione));
       CREATE TABLE IF NOT EXISTS ingressi (giorno TEXT, fonte TEXT, n INTEGER, PRIMARY KEY (giorno, fonte));
       CREATE TABLE IF NOT EXISTS visitatori (giorno TEXT, h TEXT, mobile INTEGER, PRIMARY KEY (giorno, h));
+      -- pagine viste da persone (dal 28/10/2026); la vecchia tabella visite contava anche i robot e resta solo come archivio
+      CREATE TABLE IF NOT EXISTS pagine (giorno TEXT, sezione TEXT, n INTEGER, PRIMARY KEY (giorno, sezione));
       CREATE TABLE IF NOT EXISTS utenti (email TEXT PRIMARY KEY, hash TEXT, sale TEXT, iterazioni INTEGER, versione INTEGER DEFAULT 1,
         falliti INTEGER DEFAULT 0, bloccato_fino INTEGER DEFAULT 0, creato TEXT, ultimo_accesso TEXT);
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
@@ -113,7 +115,7 @@ export class Archivio {
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
-        this.sql.exec(`INSERT INTO visite (giorno, sezione, n) VALUES (?, ?, 1)
+        this.sql.exec(`INSERT INTO pagine (giorno, sezione, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, sezione) DO UPDATE SET n = n + 1`, c.giorno, c.sezione);
         if (c.fonte) this.sql.exec(`INSERT INTO ingressi (giorno, fonte, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, fonte) DO UPDATE SET n = n + 1`, c.giorno, c.fonte);
@@ -192,10 +194,10 @@ export class Archivio {
         return Response.json({ ok: true });
 
       case '/dati': {
-        const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM visite WHERE giorno >= date('now', '-${giorni - 1} days')
+        const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-${giorni - 1} days')
                                                GROUP BY sezione ORDER BY n DESC LIMIT 15`);
         return Response.json({
-          visite: this.righe(`SELECT giorno, SUM(n) AS n FROM visite WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
+          visite: this.righe(`SELECT giorno, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           visitatori: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM visitatori
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
