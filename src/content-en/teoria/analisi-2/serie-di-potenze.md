@@ -63,11 +63,11 @@ so $E$ is an interval centered at $x_0$ that contains the open interval and may 
 ## Computing the radius
 
 :::teorema{#calcolo-raggio-rapporto titolo="Ratio test for the radius"}
-If $a_n \neq 0$ eventually and the limit
+If $a_n \neq 0$ eventually and there exists
 $$
-\lim_{n \to \infty} \frac{|a_{n+1}|}{|a_n|} = \ell \in [0, +\infty]
+\lim_{n \to \infty} \frac{|a_{n+1}|}{|a_n|} = \ell \in [0, +\infty] ,
 $$
-exists, then $R = \dfrac{1}{\ell}$, with the conventions $R = +\infty$ for $\ell = 0$ and $R = 0$ for $\ell = +\infty$. The statement follows by applying the **ratio test** to the series of absolute values: for $x \neq x_0$ the ratio between two consecutive terms tends to $\ell \, |x - x_0|$, which is less than $1$ *if and only if* $|x - x_0| < \dfrac{1}{\ell}$, and greater than $1$ (with a general term that does not tend to $0$) if $|x - x_0| > \dfrac{1}{\ell}$. For the series $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!}$ the ratio is $\dfrac{n!}{(n+1)!} = \dfrac{1}{n+1} \to 0$, so $R = +\infty$.
+then $R = \dfrac{1}{\ell}$, with the conventions $R = +\infty$ for $\ell = 0$ and $R = 0$ for $\ell = +\infty$. The statement follows by applying the **ratio test** to the series of absolute values: for $x \neq x_0$ the ratio between two consecutive terms tends to $\ell \, |x - x_0|$, which is less than $1$ *if and only if* $|x - x_0| < \dfrac{1}{\ell}$, and greater than $1$ (with a general term that does not tend to $0$) if $|x - x_0| > \dfrac{1}{\ell}$. For the series $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!}$ the ratio is $\dfrac{n!}{(n+1)!} = \dfrac{1}{n+1} \to 0$, so $R = +\infty$.
 :::
 
 :::richiamo{titolo="Ratio test for numerical series"}
@@ -75,11 +75,11 @@ Let $\sum b_n$ have positive terms with $\dfrac{b_{n+1}}{b_n} \to L$. If $L < 1$
 :::
 
 :::teorema{#calcolo-raggio-radice titolo="Root test for the radius"}
-If the limit
+If there exists
 $$
-\lim_{n \to \infty} \sqrt[n]{|a_n|} = \ell \in [0, +\infty]
+\lim_{n \to \infty} \sqrt[n]{|a_n|} = \ell \in [0, +\infty] ,
 $$
-exists, then $R = \dfrac{1}{\ell}$, with the same conventions as in the ratio test. The justification is identical, with the **root test** in place of the ratio test. This test is suited to the case where the coefficient $a_n$ is an $n$-th power: for $\displaystyle\sum_{n=1}^{\infty} \left( \frac{n}{2n+1} \right)^{\! n} x^n$ we have $\sqrt[n]{|a_n|} = \dfrac{n}{2n+1} \to \dfrac{1}{2}$, so $R = 2$.
+then $R = \dfrac{1}{\ell}$, with the same conventions as in the ratio test. The justification is identical, with the **root test** in place of the ratio test. This test is suited to the case where the coefficient $a_n$ is an $n$-th power: for $\displaystyle\sum_{n=1}^{\infty} \left( \frac{n}{2n+1} \right)^{\! n} x^n$ we have $\sqrt[n]{|a_n|} = \dfrac{n}{2n+1} \to \dfrac{1}{2}$, so $R = 2$.
 :::
 
 :::osservazione{#serie-lacunari titolo="Lacunary series"}

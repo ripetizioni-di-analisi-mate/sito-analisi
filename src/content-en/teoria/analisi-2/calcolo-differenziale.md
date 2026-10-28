@@ -51,7 +51,7 @@ By differentiability, as $(h, k) \to (0, 0)$ we have
 $$
 f(x_0 + h,\, y_0 + k) - f(x_0, y_0) = f_x\, h + f_y\, k + o\!\left(\sqrt{h^2 + k^2}\right).
 $$
-The terms $f_x h$ and $f_y k$ tend to $0$ because they are products of a constant and an infinitesimal; the remainder tends to $0$ because it is the ratio of an $o\!\left(\sqrt{h^2 + k^2}\right)$ and $1$. Hence $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, and this is the **continuity** of $f$ at $(x_0, y_0)$.
+The terms $f_x h$ and $f_y k$ tend to $0$ because they are products of a constant and an infinitesimal; the remainder tends to $0$ because it is an $o\!\left(\sqrt{h^2 + k^2}\right)$ and $\sqrt{h^2 + k^2} \to 0$. Hence $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, and this is the **continuity** of $f$ at $(x_0, y_0)$.
 :::
 ::::
 

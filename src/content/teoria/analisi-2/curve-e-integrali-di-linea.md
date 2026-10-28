@@ -245,7 +245,7 @@ $$
 $$
 quindi l'integrale di seconda specie è l'integrale di prima specie della **componente tangenziale** del campo. La dipendenza dal verso di percorrenza entra attraverso $T$, che cambia segno con l'orientazione.
 
-::grafico{xmin=-1 xmax=3 ymin=-0.4 ymax=3.4 uguale=1 curve="t,t^2,-0.6,1.8" vettori="1,1,0,2,F;1,1,2,3,γ′(1);1,1,1.2,1.4" segmenti="0,2,1.2,1.4" punti="1,1" titolo="Il campo $F(x, y) = (-y, x)$ nel punto $(1, 1)$ della parabola $\gamma(t) = (t, t^2)$: nell'integrale di seconda specie conta solo la proiezione di $F$ sulla direzione tangente, in grigio"}
+::grafico{xmin=-1 xmax=3 ymin=-0.4 ymax=3.4 uguale=1 curve="t,t^2,-0.6,1.8" vettori="1,1,0,2,F;1,1,2,3,γ′(1);1,1,1.2,1.4" segmenti="0,2,1.2,1.4" punti="1,1" titolo="Per esempio, il campo $F(x, y) = (-y, x)$ nel punto $(1, 1)$ della parabola $\gamma(t) = (t, t^2)$: nell'integrale di seconda specie conta solo la proiezione di $F$ sulla direzione tangente, in grigio"}
 
 :::
 

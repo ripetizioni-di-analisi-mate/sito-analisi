@@ -51,7 +51,7 @@ Per la differenziabilità, per $(h, k) \to (0, 0)$ si ha
 $$
 f(x_0 + h,\, y_0 + k) - f(x_0, y_0) = f_x\, h + f_y\, k + o\!\left(\sqrt{h^2 + k^2}\right).
 $$
-I termini $f_x h$ e $f_y k$ tendono a $0$ perché prodotti di una costante per un infinitesimo; il resto tende a $0$ perché rapporto fra un $o\!\left(\sqrt{h^2 + k^2}\right)$ e $1$. Quindi $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, e questa è la **continuità** di $f$ in $(x_0, y_0)$.
+I termini $f_x h$ e $f_y k$ tendono a $0$ perché prodotti di una costante per un infinitesimo; il resto tende a $0$ perché è un $o\!\left(\sqrt{h^2 + k^2}\right)$ e $\sqrt{h^2 + k^2} \to 0$. Quindi $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, e questa è la **continuità** di $f$ in $(x_0, y_0)$.
 :::
 ::::
 

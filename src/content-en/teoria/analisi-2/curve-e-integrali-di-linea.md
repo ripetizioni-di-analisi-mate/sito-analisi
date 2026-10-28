@@ -245,7 +245,7 @@ $$
 $$
 hence the integral of the second kind is the integral of the first kind of the **tangential component** of the field. The dependence on the direction of travel enters through $T$, which changes sign with the orientation.
 
-::grafico{xmin=-1 xmax=3 ymin=-0.4 ymax=3.4 uguale=1 curve="t,t^2,-0.6,1.8" vettori="1,1,0,2,F;1,1,2,3,γ′(1);1,1,1.2,1.4" segmenti="0,2,1.2,1.4" punti="1,1" titolo="The field $F(x, y) = (-y, x)$ at the point $(1, 1)$ of the parabola $\gamma(t) = (t, t^2)$: in the integral of the second kind only the projection of $F$ onto the tangent direction counts, in gray"}
+::grafico{xmin=-1 xmax=3 ymin=-0.4 ymax=3.4 uguale=1 curve="t,t^2,-0.6,1.8" vettori="1,1,0,2,F;1,1,2,3,γ′(1);1,1,1.2,1.4" segmenti="0,2,1.2,1.4" punti="1,1" titolo="For example, the field $F(x, y) = (-y, x)$ at the point $(1, 1)$ of the parabola $\gamma(t) = (t, t^2)$: in the integral of the second kind only the projection of $F$ onto the tangent direction counts, in gray"}
 
 :::
 
