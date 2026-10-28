@@ -145,7 +145,7 @@ Sia $I_C$ il momento d'inerzia di un corpo di massa $M$ rispetto a un asse passa
 $$
 I = I_C + M d^2 .
 $$
-Il teorema riduce il calcolo rispetto a un asse qualsiasi a quello rispetto all'asse parallelo per il centro di massa, che si trova nella tabella dei corpi omogenei; mostra inoltre che, fra gli assi con una direzione assegnata, quello per il centro di massa ha il momento d'inerzia minimo. Per un'asta, con $d = \dfrac{L}{2}$, si ritrova $I = \dfrac{1}{12} M L^2 + \dfrac{1}{4} M L^2 = \dfrac{1}{3} M L^2$; per un disco, rispetto all'asse perpendicolare passante per un punto del bordo, $I = \dfrac{1}{2} M R^2 + M R^2 = \dfrac{3}{2} M R^2$.
+Il teorema riduce il calcolo rispetto a un asse qualsiasi a quello rispetto all'asse parallelo per il centro di massa, e mostra che quest'ultimo ha il momento d'inerzia minimo fra gli assi con la stessa direzione. Per un'asta, con $d = \dfrac{L}{2}$, si ritrova $I = \dfrac{1}{12} M L^2 + \dfrac{1}{4} M L^2 = \dfrac{1}{3} M L^2$; per un disco, rispetto all'asse perpendicolare passante per un punto del bordo, $I = \dfrac{1}{2} M R^2 + M R^2 = \dfrac{3}{2} M R^2$.
 
 ::grafico{area="0.15;-0.15;0;6" asintoti="x=3" segmenti="0,1.5,3,1.5" punti="3,0,pieno,C" etichette="1.4,1.75,d" xmin=-1 xmax=7 ymin=-1 ymax=2.6 uguale=1 titolo="Per un'asta di lunghezza $L$ l'asse per l'estremo $O$ dista $d = \dfrac{L}{2}$ dall'asse parallelo per il centro di massa $C$"}
 
@@ -172,7 +172,7 @@ Sia dato un sistema di punti materiali in un riferimento inerziale, con forze in
 $$
 \frac{d\vec{L}_O}{dt} = \vec{M}_O^{(e)} ,
 $$
-dove $\vec{L}_O$ è il momento angolare del sistema e $\vec{M}_O^{(e)}$ è il momento risultante delle sole forze esterne. La stessa equazione vale prendendo come polo il centro di massa, anche quando questo è in moto; la verifica si omette. Le forze interne quindi non modificano il momento angolare totale. Per un corpo rigido la prima e la seconda equazione cardinale, insieme, determinano il moto.
+dove $\vec{L}_O$ è il momento angolare del sistema e $\vec{M}_O^{(e)}$ è il momento risultante delle sole forze esterne. La stessa equazione vale con il polo nel centro di massa, anche quando questo è in moto; la verifica si omette. Per un corpo rigido le due equazioni cardinali, insieme, determinano il moto.
 
 :::dimostrazione
 Sia $\vec{r}_i$ la posizione del punto $i$-esimo rispetto a $O$; poiché $O$ è fisso, $\dfrac{d\vec{r}_i}{dt} = \vec{v}_i$. Derivando $\vec{L}_O = \sum_i \vec{r}_i \times m_i\vec{v}_i$ con la regola del prodotto si ottiene
@@ -220,19 +220,8 @@ Il blocco scende con accelerazione minore di $g$ e la tensione è minore del pes
 
 :::
 
-:::osservazione{#analogia-traslazione-rotazione titolo="Analogia tra traslazione e rotazione"}
-Le grandezze della rotazione attorno a un asse fisso corrispondono una a una a quelle del moto rettilineo, e le leggi hanno la stessa forma.
-
-- Posizione $x$ e posizione angolare $\theta$; velocità $v$ e velocità angolare $\omega$; accelerazione $a$ e accelerazione angolare $\alpha$.
-- Massa $m$ e momento d'inerzia $I$; forza $F$ e momento assiale $M_z$.
-- Quantità di moto $p = m v$ e momento angolare $L_z = I\omega$; secondo principio $F = m a$ ed equazione $M_z = I\alpha$.
-- Energia cinetica $\dfrac{1}{2} m v^2$ e $\dfrac{1}{2} I\omega^2$; lavoro $F\,dx$ e $M_z\,d\theta$; potenza $F v$ e $M_z\,\omega$.
-
-Per questo un problema di rotazione si imposta come il corrispondente problema di traslazione, con il momento d'inerzia al posto della massa.
-:::
-
 :::osservazione{#pendolo-fisico titolo="Pendolo fisico"}
-Un **pendolo fisico** è un corpo rigido che oscilla in un piano verticale attorno a un asse orizzontale fisso, privo di attrito, che non passa per il centro di massa. Siano $d$ la distanza del centro di massa $C$ dall'asse, $I_O$ il momento d'inerzia rispetto all'asse e $\theta$ l'angolo che il segmento $OC$ forma con la verticale. Per il momento della forza peso, il peso agisce come una forza applicata in $C$, con braccio $d\sin\theta$, e tende a riportare il corpo verso $\theta = 0$; quindi l'equazione del moto di rotazione dà
+Un **pendolo fisico** è un corpo rigido che oscilla in un piano verticale attorno a un asse orizzontale fisso, privo di attrito, che non passa per il centro di massa. Siano $d$ la distanza del centro di massa $C$ dall'asse, $I_O$ il momento d'inerzia rispetto all'asse e $\theta$ l'angolo tra $OC$ e la verticale. Il peso, applicato in $C$, ha braccio $d\sin\theta$ e tende a riportare il corpo verso $\theta = 0$, quindi l'equazione del moto di rotazione dà
 $$
 I_O\,\frac{d^2\theta}{dt^2} = -M g d\sin\theta .
 $$
@@ -268,7 +257,7 @@ In una rotazione da $\theta_1$ a $\theta_2$ il lavoro è $W = \displaystyle\int_
 $$
 W = \frac{1}{2} I\omega_2^2 - \frac{1}{2} I\omega_1^2 ,
 $$
-che è il teorema dell'energia cinetica, per il quale si rimanda all'argomento sul lavoro e l'energia, scritto per le rotazioni. Un motore che applica $12\,\mathrm{N\cdot m}$ a un albero che gira a $100\,\mathrm{rad/s}$ eroga una potenza di $1{,}2\,\mathrm{kW}$.
+cioè il teorema dell'energia cinetica, trattato nell'argomento sul lavoro e l'energia. Un motore che applica $12\,\mathrm{N\cdot m}$ a un albero che gira a $100\,\mathrm{rad/s}$ eroga una potenza di $1{,}2\,\mathrm{kW}$.
 
 :::dimostrazione
 Il punto di applicazione della forza, a distanza $R$ dall'asse, percorre l'arco $ds = R\,d\theta$ lungo la tangente alla sua circonferenza. Le componenti della forza radiale e assiale sono perpendicolari allo spostamento e non compiono lavoro, quindi $dW = F_t\,R\,d\theta$, dove $F_t$ è la componente tangenziale, presa positiva nel verso in cui $\theta$ cresce. Le stesse due componenti hanno momento assiale nullo, perciò $M_z = F_t R$ e $dW = M_z\,d\theta$; dividendo per $dt$ si ottiene $P = M_z\,\dfrac{d\theta}{dt} = M_z\,\omega$. Per l'ultima uguaglianza si somma su tutte le forze e si usa l'equazione del moto di rotazione $M_z = I\,\dfrac{d\omega}{dt}$:
