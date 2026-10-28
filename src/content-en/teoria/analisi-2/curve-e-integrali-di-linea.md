@@ -71,7 +71,7 @@ A continuous curve $\gamma : [a, b] \to \mathbb{R}^n$ is **piecewise regular** i
 :::
 
 :::esempio{titolo="A cusp"}
-The curve $\gamma(t) = (t^2, t^3)$, $t \in [-1, 1]$, has $\gamma'(t) = (2t, 3t^2)$, which vanishes for $t = 0$. The curve **is not regular** on $[-1, 1]$, but it is **piecewise regular**, with the partition into the two intervals $[-1, 0]$ and $[0, 1]$. The trace has a cusp at the origin: the curve reaches the origin moving down along the branch with $y < 0$ and leaves along the branch with $y > 0$, with a reversal of the vertical direction of motion.
+The curve $\gamma(t) = (t^2, t^3)$, $t \in [-1, 1]$, has $\gamma'(t) = (2t, 3t^2)$, which vanishes for $t = 0$. The curve **is not regular** on $[-1, 1]$, but it is **piecewise regular**, with the partition into the two intervals $[-1, 0]$ and $[0, 1]$. The trace has a cusp at the origin: the curve reaches the origin along the branch with $y < 0$ moving to the left, since $x'(t) = 2t < 0$ for $t < 0$, and leaves along the branch with $y > 0$ moving to the right, with a reversal of the horizontal direction of motion.
 
 ::grafico{xmin=-0.8 xmax=1.8 ymin=-1.2 ymax=1.2 uguale=1 curve="t^2,t^3,-1,1" vettori="0.72,-0.61,0.38,-0.18;0.72,0.61,1.06,1.05" punti="0,0;1,-1,pieno,γ(−1);1,1,pieno,γ(1)" titolo="The curve $\gamma(t) = (t^2, t^3)$: the velocity vanishes for $t = 0$ and the trace has a cusp at the origin"}
 
@@ -96,7 +96,7 @@ Since $\varphi'$ is continuous and never zero on an interval, its sign is consta
 $$
 -\gamma(t) = \gamma(a + b - t), \qquad t \in [a, b],
 $$
-which traverses the same trace from the final point to the initial one. Orientation is *irrelevant* for integrals of the first kind and determines the sign of those of the second kind, as specified at the end of the chapter.
+which traverses the same trace from the final point to the initial one. Orientation is *irrelevant* for integrals of the first kind and determines the sign of those of the second kind.
 
 ::grafico{xmin=-1.8 xmax=1.8 ymin=-0.5 ymax=1.8 uguale=1 curve="cos(t),sin(t),0,3.1416" vettori="0.707,0.707,0,1.414,γ′;0.707,0.707,1.414,0,(−γ)′" punti="1,0,pieno,γ(a);-1,0,pieno,γ(b)" titolo="A curve and its opposite: same trace, tangent vectors pointing in opposite directions"}
 
@@ -105,7 +105,7 @@ which traverses the same trace from the final point to the initial one. Orientat
 ## Length of a curve
 
 :::definizione{#lunghezza-di-una-curva titolo="Length of a curve"}
-Let $\gamma : [a, b] \to \mathbb{R}^n$ be a curve. To each partition $a = t_0 < t_1 < \dots < t_k = b$ one associates the polygonal path with vertices $\gamma(t_0), \gamma(t_1), \dots, \gamma(t_k)$, whose length is the sum of the lengths of the segments. The curve is **rectifiable** if the set of the lengths of these polygonal paths is bounded above, and in that case its **length** $L(\gamma)$ is the supremum of this set. The definition formalizes the idea of approximating the curve with ever finer polygonal paths; for the actual computation one uses the integral formula of the following theorem.
+Let $\gamma : [a, b] \to \mathbb{R}^n$ be a curve. To each partition $a = t_0 < t_1 < \dots < t_k = b$ one associates the polygonal path with vertices $\gamma(t_0), \gamma(t_1), \dots, \gamma(t_k)$, whose length is the sum of the lengths of the segments. The curve is **rectifiable** if the set of the lengths of these polygonal paths is bounded above, and in that case its **length** $L(\gamma)$ is the supremum of this set. The definition formalizes the idea of approximating the curve with ever finer polygonal paths; for the actual computation one uses the length formula.
 
 ::grafico{xmin=-0.5 xmax=4 ymin=-0.5 ymax=3.6 uguale=1 curve="3*cos(t),3*sin(t),0,1.5708" segmenti="3,0,2.598,1.5;2.598,1.5,1.5,2.598;1.5,2.598,0,3" punti="3,0,pieno,γ(t₀);2.598,1.5,pieno,γ(t₁);1.5,2.598,pieno,γ(t₂);0,3,pieno,γ(t₃)" titolo="An arc of a circle and an inscribed polygonal path: the length of the curve is the supremum of the lengths of these polygonal paths"}
 

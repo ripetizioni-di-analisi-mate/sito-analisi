@@ -71,7 +71,7 @@ Una curva $\gamma : [a, b] \to \mathbb{R}^n$ continua è **regolare a tratti** s
 :::
 
 :::esempio{titolo="Una cuspide"}
-La curva $\gamma(t) = (t^2, t^3)$, $t \in [-1, 1]$, ha $\gamma'(t) = (2t, 3t^2)$, che si annulla per $t = 0$. La curva **non è regolare** su $[-1, 1]$, ma è **regolare a tratti**, con la suddivisione nei due intervalli $[-1, 0]$ e $[0, 1]$. Il sostegno presenta una cuspide nell'origine: la curva arriva nell'origine scendendo lungo il ramo con $y < 0$ e riparte lungo il ramo con $y > 0$, con un'inversione del verso di avanzamento verticale.
+La curva $\gamma(t) = (t^2, t^3)$, $t \in [-1, 1]$, ha $\gamma'(t) = (2t, 3t^2)$, che si annulla per $t = 0$. La curva **non è regolare** su $[-1, 1]$, ma è **regolare a tratti**, con la suddivisione nei due intervalli $[-1, 0]$ e $[0, 1]$. Il sostegno presenta una cuspide nell'origine: la curva arriva nell'origine lungo il ramo con $y < 0$ muovendosi verso sinistra, poiché $x'(t) = 2t < 0$ per $t < 0$, e riparte lungo il ramo con $y > 0$ muovendosi verso destra, con un'inversione del verso di avanzamento orizzontale.
 
 ::grafico{xmin=-0.8 xmax=1.8 ymin=-1.2 ymax=1.2 uguale=1 curve="t^2,t^3,-1,1" vettori="0.72,-0.61,0.38,-0.18;0.72,0.61,1.06,1.05" punti="0,0;1,-1,pieno,γ(−1);1,1,pieno,γ(1)" titolo="La curva $\gamma(t) = (t^2, t^3)$: la velocità si annulla per $t = 0$ e il sostegno ha una cuspide nell'origine"}
 
@@ -96,7 +96,7 @@ Poiché $\varphi'$ è continua e mai nulla su un intervallo, il suo segno è cos
 $$
 -\gamma(t) = \gamma(a + b - t), \qquad t \in [a, b],
 $$
-che percorre lo stesso sostegno dal punto finale a quello iniziale. L'orientazione è *irrilevante* per gli integrali di prima specie e determina il segno di quelli di seconda specie, come precisato alla fine del capitolo.
+che percorre lo stesso sostegno dal punto finale a quello iniziale. L'orientazione è *irrilevante* per gli integrali di prima specie e determina il segno di quelli di seconda specie.
 
 ::grafico{xmin=-1.8 xmax=1.8 ymin=-0.5 ymax=1.8 uguale=1 curve="cos(t),sin(t),0,3.1416" vettori="0.707,0.707,0,1.414,γ′;0.707,0.707,1.414,0,(−γ)′" punti="1,0,pieno,γ(a);-1,0,pieno,γ(b)" titolo="Una curva e la sua opposta: stesso sostegno, vettori tangenti di verso opposto"}
 
@@ -105,7 +105,7 @@ che percorre lo stesso sostegno dal punto finale a quello iniziale. L'orientazio
 ## Lunghezza di una curva
 
 :::definizione{#lunghezza-di-una-curva titolo="Lunghezza di una curva"}
-Sia $\gamma : [a, b] \to \mathbb{R}^n$ una curva. A ogni suddivisione $a = t_0 < t_1 < \dots < t_k = b$ si associa la poligonale di vertici $\gamma(t_0), \gamma(t_1), \dots, \gamma(t_k)$, la cui lunghezza è la somma delle lunghezze dei segmenti. La curva è **rettificabile** se l'insieme delle lunghezze di queste poligonali è limitato superiormente, e in tal caso la sua **lunghezza** $L(\gamma)$ è l'estremo superiore di tale insieme. La definizione formalizza l'idea di approssimare la curva con spezzate sempre più fitte; per il calcolo effettivo si usa la formula integrale del teorema seguente.
+Sia $\gamma : [a, b] \to \mathbb{R}^n$ una curva. A ogni suddivisione $a = t_0 < t_1 < \dots < t_k = b$ si associa la poligonale di vertici $\gamma(t_0), \gamma(t_1), \dots, \gamma(t_k)$, la cui lunghezza è la somma delle lunghezze dei segmenti. La curva è **rettificabile** se l'insieme delle lunghezze di queste poligonali è limitato superiormente, e in tal caso la sua **lunghezza** $L(\gamma)$ è l'estremo superiore di tale insieme. La definizione formalizza l'idea di approssimare la curva con spezzate sempre più fitte; per il calcolo effettivo si usa la formula della lunghezza.
 
 ::grafico{xmin=-0.5 xmax=4 ymin=-0.5 ymax=3.6 uguale=1 curve="3*cos(t),3*sin(t),0,1.5708" segmenti="3,0,2.598,1.5;2.598,1.5,1.5,2.598;1.5,2.598,0,3" punti="3,0,pieno,γ(t₀);2.598,1.5,pieno,γ(t₁);1.5,2.598,pieno,γ(t₂);0,3,pieno,γ(t₃)" titolo="Un arco di circonferenza e una poligonale inscritta: la lunghezza della curva è l'estremo superiore delle lunghezze di queste poligonali"}
 
