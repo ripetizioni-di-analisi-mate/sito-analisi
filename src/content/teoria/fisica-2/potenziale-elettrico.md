@@ -47,7 +47,7 @@ $$
 Su questa proprietà si fondano l'energia potenziale elettrica e il potenziale. Una carica che percorre una curva chiusa e torna al punto di partenza riceve dal campo elettrostatico un lavoro totale nullo; per questo, per far circolare una corrente in un circuito chiuso, serve un generatore, come si vede nell'argomento sulla corrente elettrica e i circuiti in corrente continua.
 
 :::dimostrazione
-Per una sola carica puntiforme si applica il **lavoro nel campo di una carica puntiforme**: su una curva chiusa il punto iniziale e il punto finale coincidono, quindi $r_A = r_B$ e il lavoro è nullo. Per un sistema di cariche $Q_1, \dots, Q_n$ il campo è la somma dei campi $\vec{E}_i$ delle singole cariche, per il principio di sovrapposizione, e l'integrale di linea è lineare, perciò
+Per una sola carica puntiforme si applica il **lavoro nel campo di una carica puntiforme**. Su una curva chiusa il punto iniziale e il punto finale coincidono, quindi $r_A = r_B$ e il lavoro è nullo. Per un sistema di cariche $Q_1, \dots, Q_n$ il campo è la somma dei campi $\vec{E}_i$ delle singole cariche, per il principio di sovrapposizione, e l'integrale di linea è lineare, perciò
 $$
 \oint_\gamma \vec{E} \cdot d\vec{\ell} = \sum_{i=1}^{n} \oint_\gamma \vec{E}_i \cdot d\vec{\ell} = 0 .
 $$

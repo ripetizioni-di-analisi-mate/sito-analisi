@@ -12,7 +12,7 @@ In regime stazionario, per ogni linea chiusa orientata $\gamma$ vale $\displayst
 :::
 
 :::osservazione{#incoerenza-legge-ampere titolo="Legge di Ampère e condensatore in carica"}
-Si consideri un condensatore piano che si carica attraverso un filo percorso dalla corrente $i$, e una linea chiusa $\gamma$ che circonda il filo. La corrente concatenata con $\gamma$ si può calcolare su una superficie qualsiasi che abbia $\gamma$ come bordo. La superficie piana $S_1$ è attraversata dal filo, quindi la corrente che la attraversa vale $i$. La superficie $S_2$, che ha lo stesso bordo, passa tra le armature, dove non ci sono cariche in moto, quindi la corrente che la attraversa è nulla. La legge di Ampère darebbe perciò due valori diversi per la stessa circuitazione $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l}$, e nella forma del richiamo vale solo per correnti stazionarie.
+Si consideri un condensatore piano che si carica attraverso un filo percorso dalla corrente $i$, e una linea chiusa $\gamma$ che circonda il filo. La superficie piana $S_1$ è attraversata dal filo, quindi la corrente che la attraversa vale $i$. La superficie $S_2$, che ha lo stesso bordo, passa tra le armature, dove non ci sono cariche in moto, quindi la corrente che la attraversa è nulla. La legge di Ampère darebbe perciò due valori diversi per la stessa circuitazione $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l}$, e nella forma del richiamo vale solo per correnti stazionarie.
 
 Tra le armature c'è però un campo elettrico che cresce mentre il condensatore si carica, e il suo flusso attraverso $S_2$ varia nel tempo. Maxwell aggiunse alla legge di Ampère un termine proporzionale alla rapidità di variazione di quel flusso.
 
@@ -25,7 +25,7 @@ Sia $S$ una superficie orientata e sia $\Phi_E = \displaystyle\iint_S \vec{E} \c
 $$
 i_s = \varepsilon_0 \frac{d\Phi_E}{dt} .
 $$
-Si misura in ampere, come una corrente di conduzione, perché il prodotto $\varepsilon_0 \Phi_E$ si misura in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$. La corrente di spostamento *non* corrisponde a un moto di cariche; il nome ricorda che questo termine entra nella legge di Ampère-Maxwell accanto alla corrente di conduzione e con le stesse unità. Per esempio, se il campo uniforme tra le armature di un condensatore di area $A = 0{,}010\,\mathrm{m^2}$ cresce con rapidità $\dfrac{dE}{dt} = 1{,}0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, la corrente di spostamento è $i_s = \varepsilon_0 A \dfrac{dE}{dt} = 8{,}85 \cdot 10^{-12} \cdot 0{,}010 \cdot 1{,}0 \cdot 10^{12}\,\mathrm{A} \approx 0{,}089\,\mathrm{A}$.
+Si misura in ampere, come una corrente di conduzione, perché il prodotto $\varepsilon_0 \Phi_E$ si misura in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$. La corrente di spostamento *non* corrisponde a un moto di cariche. Per esempio, se il campo uniforme tra le armature di un condensatore di area $A = 0{,}010\,\mathrm{m^2}$ cresce con rapidità $\dfrac{dE}{dt} = 1{,}0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, la corrente di spostamento è $i_s = \varepsilon_0 A \dfrac{dE}{dt} = 8{,}85 \cdot 10^{-12} \cdot 0{,}010 \cdot 1{,}0 \cdot 10^{12}\,\mathrm{A} \approx 0{,}089\,\mathrm{A}$.
 :::
 
 ::::teorema{#corrente-spostamento-condensatore titolo="Corrente di spostamento in un condensatore piano"}
@@ -33,7 +33,7 @@ Si consideri un condensatore piano nel vuoto, con armature di area $A$, collegat
 $$
 i_s = i .
 $$
-La corrente di spostamento prosegue quindi tra le armature la corrente di conduzione, che sulle armature si interrompe. Con questo termine le superfici $S_1$ e $S_2$ che hanno lo stesso bordo $\gamma$ danno la stessa corrente concatenata, e la contraddizione della legge di Ampère scompare. Un condensatore che si carica con $i = 2{,}0\,\mathrm{A}$ è attraversato da una corrente di spostamento di $2{,}0\,\mathrm{A}$, qualunque siano l'area delle armature e la loro distanza.
+La corrente di spostamento prosegue quindi tra le armature la corrente di conduzione, che sulle armature si interrompe. Perciò le superfici $S_1$ e $S_2$, che hanno lo stesso bordo $\gamma$, danno la stessa corrente concatenata. Un condensatore che si carica con $i = 2{,}0\,\mathrm{A}$ è attraversato da una corrente di spostamento di $2{,}0\,\mathrm{A}$, qualunque siano l'area delle armature e la loro distanza.
 
 :::dimostrazione
 Trascurando gli effetti di bordo, tra le armature il campo è uniforme, perpendicolare alle armature, di modulo $E = \dfrac{\sigma}{\varepsilon_0} = \dfrac{q}{\varepsilon_0 A}$, mentre all'esterno è nullo. Il flusso attraverso la superficie, orientata dall'armatura positiva verso la negativa, è perciò
@@ -99,12 +99,12 @@ Insieme alla **forza di Lorentz** $\vec{F} = q \left( \vec{E} + \vec{v} \times \
 :::
 
 :::osservazione{#significato-equazioni-maxwell titolo="Significato delle quattro equazioni"}
-- La legge di Gauss afferma che le cariche sono le sorgenti del campo elettrico, e che il flusso uscente da una superficie chiusa dipende solo dalla carica contenuta; si rimanda all'argomento sul flusso del campo elettrico e la legge di Gauss.
+- La legge di Gauss afferma che le cariche sono le sorgenti del campo elettrico; si rimanda all'argomento sul flusso del campo elettrico e la legge di Gauss.
 - La legge di Gauss per il magnetismo afferma che il flusso del campo magnetico attraverso ogni superficie chiusa è nullo, quindi non esistono cariche magnetiche isolate e le linee del campo magnetico non hanno né inizio né fine.
 - La legge di Faraday-Neumann-Lenz afferma che un campo magnetico variabile genera un campo elettrico con circuitazione diversa da zero, quindi *non* conservativo; si rimanda all'argomento sull'induzione elettromagnetica.
 - La legge di Ampère-Maxwell afferma che il campo magnetico è generato dalle correnti e dai campi elettrici variabili.
 
-In elettrostatica e in magnetostatica le derivate rispetto al tempo sono nulle, e le equazioni si separano in due coppie indipendenti, una per $\vec{E}$ e una per $\vec{B}$. Quando i campi variano nel tempo, la terza e la quarta equazione legano invece $\vec{E}$ e $\vec{B}$ tra loro.
+In statica le derivate rispetto al tempo sono nulle e le equazioni per $\vec{E}$ e per $\vec{B}$ si separano; quando i campi variano, la terza e la quarta li legano tra loro.
 :::
 
 :::osservazione{#maxwell-nel-vuoto titolo="Equazioni di Maxwell lontano da cariche e correnti"}
@@ -136,7 +136,7 @@ $$
 \nabla \times \vec{B} = \mu_0 \vec{J} + \mu_0 \varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}
 \end{cases}
 $$
-in ogni punto e in ogni istante. La forma locale lega i campi in un punto alle cariche e alle correnti nello stesso punto. Il termine $\varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}$ è la **densità di corrente di spostamento**, che integrata su una superficie fissa dà la corrente di spostamento.
+in ogni punto e in ogni istante. Il termine $\varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}$ è la **densità di corrente di spostamento**, che integrata su una superficie fissa dà la corrente di spostamento.
 
 :::dimostrazione
 Si dimostra che la legge di Gauss implica la prima equazione. Sia $V$ una regione qualsiasi con bordo $S$. La carica contenuta è $Q_{\text{int}} = \displaystyle\iiint_V \rho\, dV$, e per il teorema della divergenza la legge di Gauss diventa
@@ -184,7 +184,7 @@ e ciascuno dei due campi soddisfa l'**equazione delle onde**
 $$
 \frac{\partial^2 E}{\partial x^2} = \mu_0 \varepsilon_0 \frac{\partial^2 E}{\partial t^2} , \qquad \frac{\partial^2 B}{\partial x^2} = \mu_0 \varepsilon_0 \frac{\partial^2 B}{\partial t^2} .
 $$
-Le prime due relazioni legano la variazione nello spazio di ciascun campo alla variazione nel tempo dell'altro, e servono a ricavare $B$ quando è noto $E$. L'equazione delle onde contiene la sola costante $\mu_0 \varepsilon_0$, che si misura in $\mathrm{s^2/m^2}$ ed è quindi l'inverso del quadrato di una velocità; il significato di questa velocità si ricava dalle soluzioni dell'equazione.
+Le prime due relazioni legano la variazione nello spazio di ciascun campo alla variazione nel tempo dell'altro, e servono a ricavare $B$ quando è noto $E$. La costante $\mu_0 \varepsilon_0$ si misura in $\mathrm{s^2/m^2}$, quindi è l'inverso del quadrato di una velocità.
 
 ::grafico{assi=0 uguale=1 linee="2,0 4.4,0 4.4,3 2,3 2,0" vettori="2,0.7,2,2.1,E(x);4.4,0.5,4.4,2.7,E(x+dx);3.6,3.35,3.0,3.35" etichette="3.0,1.4,⊙ B;3.0,-0.45,dx;1.15,1.4,h" riferimento="-0.6,-0.4,0,1.1,x,y" xmin=-1 xmax=6.6 ymin=-1 ymax=3.9 titolo="Rettangolo di lati $dx$ e $h$ nel piano $xy$, percorso in verso antiorario: la circuitazione di $\vec{E}$ è $\left[ E(x+dx) - E(x) \right] h$, e il campo $\vec{B}$, perpendicolare al foglio, ne attraversa la superficie"}
 
@@ -236,11 +236,11 @@ Le onde elettromagnetiche si propagano nel vuoto con velocità
 $$
 c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = \frac{1}{\sqrt{4\pi \cdot 10^{-7} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{m/s} \approx 3{,}00 \cdot 10^{8}\,\mathrm{m/s} .
 $$
-Il risultato segue dal teorema sulle onde progressive, e il valore calcolato dalle costanti dell'elettricità e del magnetismo coincide con la velocità della luce misurata; da questa coincidenza Maxwell concluse che la luce è un'onda elettromagnetica. La velocità non dipende né dalla frequenza né dall'ampiezza dell'onda. Per esempio la luce del Sole, che dista $1{,}50 \cdot 10^{11}\,\mathrm{m}$ dalla Terra, arriva dopo $\dfrac{1{,}50 \cdot 10^{11}}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 500\,\mathrm{s}$, cioè circa $8{,}3$ minuti.
+Il risultato segue dal teorema sulle onde progressive, e il valore coincide con la velocità della luce misurata; da questa coincidenza Maxwell concluse che la luce è un'onda elettromagnetica. La velocità non dipende né dalla frequenza né dall'ampiezza dell'onda. La luce del Sole, che dista $1{,}50 \cdot 10^{11}\,\mathrm{m}$ dalla Terra, arriva dopo $\dfrac{1{,}50 \cdot 10^{11}}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 500\,\mathrm{s}$, cioè circa $8{,}3$ minuti.
 :::
 
 :::osservazione{#sorgenti-onde titolo="Come si producono le onde elettromagnetiche"}
-Le onde elettromagnetiche sono prodotte da cariche **accelerate**. In un'antenna le cariche oscillano lungo un conduttore con la frequenza $f$ della corrente alternata che lo percorre, e l'antenna emette un'onda della stessa frequenza, che a grande distanza è con buona approssimazione piana. La corrente nell'antenna è prodotta da un circuito oscillante, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata.
+Le onde elettromagnetiche sono prodotte da cariche **accelerate**. In un'antenna le cariche oscillano lungo un conduttore con la frequenza $f$ della corrente alternata che lo percorre, e l'antenna emette un'onda della stessa frequenza. La corrente nell'antenna è prodotta da un circuito oscillante, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata.
 :::
 
 ## Onde piane armoniche
@@ -279,7 +279,7 @@ quindi $g = \dfrac{f}{c}$ a meno di una costante additiva. La costante rappresen
 ::::
 
 :::osservazione{#sovrapposizione-onde titolo="Sovrapposizione di onde"}
-L'equazione delle onde è lineare, quindi la somma di due soluzioni è ancora una soluzione. Due onde elettromagnetiche che si incontrano si sovrappongono, il campo risultante è la somma vettoriale dei campi, e dopo l'incontro ciascuna onda prosegue invariata. Sulla sovrapposizione si basano l'interferenza e la diffrazione, per le quali si rimanda all'argomento sull'ottica geometrica e ondulatoria. Per esempio, la somma di due onde armoniche con la stessa ampiezza che si propagano in versi opposti è
+L'equazione delle onde è lineare, quindi la somma di due soluzioni è ancora una soluzione. Due onde che si incontrano si sovrappongono, e il campo risultante è la somma vettoriale dei campi. Sulla sovrapposizione si basano l'interferenza e la diffrazione, per le quali si rimanda all'argomento sull'ottica geometrica e ondulatoria. Per esempio, la somma di due onde armoniche con la stessa ampiezza che si propagano in versi opposti è
 $$
 E_0 \sin(kx - \omega t) + E_0 \sin(kx + \omega t) = 2 E_0 \sin(kx) \cos(\omega t) ,
 $$
@@ -317,7 +317,7 @@ e si misura in $\mathrm{W/m^2}$, perché $\dfrac{\mathrm{V/m} \cdot \mathrm{T}}{
 $$
 S = \frac{EB}{\mu_0} = \frac{E^2}{\mu_0 c} .
 $$
-Il modulo di $\vec{S}$ è la potenza che attraversa una superficie di area unitaria perpendicolare alla direzione di propagazione, come afferma il teorema sul flusso di energia di un'onda piana; il vettore di Poynting indica quindi dove va l'energia e quanta ne passa. In un punto in cui $E = 300\,\mathrm{V/m}$ e $B = 1{,}00\,\mu\mathrm{T}$ si ha $S = \dfrac{300 \cdot 1{,}00 \cdot 10^{-6}}{4\pi \cdot 10^{-7}}\,\mathrm{W/m^2} \approx 239\,\mathrm{W/m^2}$.
+Il modulo di $\vec{S}$ è la potenza che attraversa una superficie di area unitaria perpendicolare alla direzione di propagazione, come afferma il teorema sul flusso di energia di un'onda piana. In un punto in cui $E = 300\,\mathrm{V/m}$ e $B = 1{,}00\,\mu\mathrm{T}$ si ha $S = \dfrac{300 \cdot 1{,}00 \cdot 10^{-6}}{4\pi \cdot 10^{-7}}\,\mathrm{W/m^2} \approx 239\,\mathrm{W/m^2}$.
 :::
 
 ::::teorema{#poynting-e-densita titolo="Flusso di energia di un'onda piana"}
@@ -350,7 +350,7 @@ Una sorgente puntiforme che emette la potenza media $P$ in modo uniforme in tutt
 $$
 I(r) = \frac{P}{4\pi r^2} .
 $$
-La formula segue dalla conservazione dell'energia. In regime stazionario la potenza media che attraversa ogni sfera centrata nella sorgente è $P$, e si distribuisce uniformemente sull'area $4\pi r^2$ della sfera. L'intensità diminuisce come l'inverso del quadrato della distanza e l'ampiezza del campo, proporzionale a $\sqrt{I}$, come l'inverso della distanza. Una lampada che emette la potenza luminosa $P = 10\,\mathrm{W}$ produce a $r = 2{,}0\,\mathrm{m}$ l'intensità $I = \dfrac{10}{4\pi \cdot 2{,}0^2}\,\mathrm{W/m^2} \approx 0{,}20\,\mathrm{W/m^2}$.
+La formula segue dalla conservazione dell'energia. La potenza media $P$ attraversa ogni sfera centrata nella sorgente e si distribuisce uniformemente sull'area $4\pi r^2$. L'intensità diminuisce come l'inverso del quadrato della distanza e l'ampiezza del campo, proporzionale a $\sqrt{I}$, come l'inverso della distanza. Una lampada che emette la potenza luminosa $P = 10\,\mathrm{W}$ produce a $r = 2{,}0\,\mathrm{m}$ l'intensità $I = \dfrac{10}{4\pi \cdot 2{,}0^2}\,\mathrm{W/m^2} \approx 0{,}20\,\mathrm{W/m^2}$.
 :::
 
 ## Quantità di moto e pressione di radiazione
@@ -360,7 +360,7 @@ Un'onda elettromagnetica che trasporta nel vuoto l'energia $U$ trasporta anche u
 $$
 p = \frac{U}{c} ,
 $$
-diretta nel verso di propagazione. È una conseguenza delle equazioni di Maxwell e della forza di Lorentz, che qui si assume senza dimostrazione, ed è confermata dalla misura della forza che la luce esercita su una superficie. Il fattore $\dfrac{1}{c}$ è molto piccolo, quindi la quantità di moto della radiazione è piccola anche per energie grandi; un impulso laser di $1{,}0\,\mathrm{J}$ trasporta $p = \dfrac{1{,}0}{3{,}00 \cdot 10^{8}}\,\mathrm{kg \cdot m/s} \approx 3{,}3 \cdot 10^{-9}\,\mathrm{kg \cdot m/s}$.
+diretta nel verso di propagazione. Segue dalle equazioni di Maxwell e dalla forza di Lorentz, qui senza dimostrazione, ed è confermata dalla misura della forza esercitata dalla luce. Il fattore $\dfrac{1}{c}$ è molto piccolo; per esempio un impulso laser di $1{,}0\,\mathrm{J}$ trasporta $p = \dfrac{1{,}0}{3{,}00 \cdot 10^{8}}\,\mathrm{kg \cdot m/s} \approx 3{,}3 \cdot 10^{-9}\,\mathrm{kg \cdot m/s}$.
 :::
 
 :::richiamo{titolo="Teorema dell'impulso"}
@@ -373,7 +373,7 @@ Si consideri un'onda piana di intensità $I$ che incide perpendicolarmente su un
 - $p_{\text{rad}} = \dfrac{I}{c}$ se la superficie assorbe tutta la radiazione;
 - $p_{\text{rad}} = \dfrac{2I}{c}$ se la superficie riflette tutta la radiazione.
 
-Con $I = 1{,}36\,\mathrm{kW/m^2}$ e una superficie assorbente si ha $p_{\text{rad}} = \dfrac{1360}{3{,}00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4{,}5 \cdot 10^{-6}\,\mathrm{Pa}$, dell'ordine di $10^{-11}$ volte la pressione atmosferica. Perciò la pressione di radiazione conta solo per corpi molto leggeri con una grande superficie, come le vele solari, e per granelli di polvere molto piccoli. Una vela perfettamente riflettente di $100\,\mathrm{m^2}$, perpendicolare alla luce solare alla distanza della Terra, riceve la forza $F = \dfrac{2 \cdot 1360 \cdot 100}{3{,}00 \cdot 10^{8}}\,\mathrm{N} \approx 9{,}1 \cdot 10^{-4}\,\mathrm{N}$.
+Con $I = 1{,}36\,\mathrm{kW/m^2}$ e una superficie assorbente si ha $p_{\text{rad}} = \dfrac{1360}{3{,}00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4{,}5 \cdot 10^{-6}\,\mathrm{Pa}$, dell'ordine di $10^{-11}$ volte la pressione atmosferica. Perciò la pressione di radiazione conta solo per corpi molto leggeri con una grande superficie, come le vele solari, e per granelli di polvere molto piccoli.
 
 :::dimostrazione
 Nel tempo $\Delta t$ arriva sulla superficie l'energia $U = I A\, \Delta t$, che per il teorema sulla quantità di moto di un'onda elettromagnetica trasporta la quantità di moto $\dfrac{U}{c} = \dfrac{I A\, \Delta t}{c}$, perpendicolare alla superficie. Se la superficie assorbe la radiazione, questa quantità di moto passa alla superficie. Se la riflette, l'onda riflessa ha quantità di moto opposta a quella incidente; quindi la quantità di moto della radiazione varia di $\dfrac{2U}{c}$ in modulo, e la superficie riceve una quantità di moto uguale e opposta. Per il **teorema dell'impulso** la forza media è la quantità di moto ricevuta divisa per $\Delta t$, perciò
@@ -397,7 +397,7 @@ Le onde elettromagnetiche hanno tutte la stessa natura e nel vuoto la stessa vel
 - raggi X, con $\lambda$ da circa $0{,}01\,\mathrm{nm}$ a $10\,\mathrm{nm}$;
 - raggi gamma, con $\lambda$ minore di circa $0{,}01\,\mathrm{nm}$, emessi nei processi nucleari.
 
-Le bande dei raggi X e dei raggi gamma si sovrappongono, e i due nomi indicano soprattutto l'origine della radiazione. La luce gialla con $\lambda = 580\,\mathrm{nm}$ ha frequenza $f = \dfrac{3{,}00 \cdot 10^{8}}{5{,}80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5{,}17 \cdot 10^{14}\,\mathrm{Hz}$.
+La luce gialla con $\lambda = 580\,\mathrm{nm}$ ha frequenza $f = \dfrac{3{,}00 \cdot 10^{8}}{5{,}80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5{,}17 \cdot 10^{14}\,\mathrm{Hz}$.
 
 ::grafico{assi=0 poligoni="-13,0 3,0 3,0.8 -13,0.8;-6.4,0 -6.15,0 -6.15,0.8 -6.4,0.8" segmenti="-11,0,-11,0.8;-8,0,-8,0.8;-6.4,0,-6.4,0.8;-6.15,0,-6.15,0.8;-3,0,-3,0.8;0,0,0,0.8" vettori="-6.27,2.0,-6.27,0.95" etichette="-12.3,0.3,γ;-9.75,0.3,X;-7.55,0.3,UV;-4.9,0.3,IR;-2.85,0.3,microonde;0.9,0.3,radio;-7.0,2.25,visibile;-12.35,-0.6,1 pm;-9.35,-0.6,1 nm;-6.35,-0.6,1 μm;-3.4,-0.6,1 mm;-0.2,-0.6,1 m;2.55,-0.6,1 km" xmin=-13.5 xmax=3.5 ymin=-1.1 ymax=2.7 uguale=1 titolo="Spettro elettromagnetico in scala logaritmica della lunghezza d'onda $\lambda$, che diminuisce verso sinistra mentre la frequenza $f = \dfrac{c}{\lambda}$ aumenta; la luce visibile occupa la stretta banda tra $400\,\mathrm{nm}$ e $700\,\mathrm{nm}$"}
 
