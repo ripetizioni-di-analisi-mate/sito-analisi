@@ -525,3 +525,11 @@ html.collegato .bottone-account .iniziale { display: inline-grid; place-items: c
 .blocco:not(details) > .blocco-etichetta { font-family: var(--titoli); font-size: 1.18rem; font-weight: 700; letter-spacing: 0; text-transform: none; margin: 0 0 0.45rem; line-height: 1.25; }
 .blocco-esempio > .blocco-etichetta, .blocco-osservazione > .blocco-etichetta, .blocco-attenzione > .blocco-etichetta, .blocco-richiamo > .blocco-etichetta { font-size: 1.05rem; }
 .numero-blocco { font-variant-numeric: tabular-nums; margin-right: 0.15rem; }
+.vai-esercizi { font-family: var(--ui); margin: 1.2rem 0 0; }
+.vai-esercizi a { font-weight: 600; color: var(--accento); text-decoration: none; }
+.vai-esercizi a:hover { text-decoration: underline; }
+
+/* campi di ricerca con la lente */
+.con-lente { position: relative; flex: 1 1 auto; min-width: 0; display: flex; }
+.con-lente .lente { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); width: 1.15rem; height: 1.15rem; color: var(--inchiostro-2); pointer-events: none; }
+.con-lente input { flex: 1; width: 100%; padding-left: 2.6rem !important; box-sizing: border-box; }

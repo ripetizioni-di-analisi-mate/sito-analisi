@@ -14,7 +14,7 @@ import { SITO, assoluto, ORGANIZZAZIONE, briciole } from '../lib/seo';
 const NOME_SITO = 'Ripetizioni di Analisi';
 const WHATSAPP = 'https://wa.me/393885680393';
 
-interface Passo { titolo: string; sotto?: string; href: string }
+interface Passo { titolo: string; sotto?: string; href: string; etichetta?: string }
 interface Props {
   titolo: string;
   descrizione?: string;
@@ -150,7 +150,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <slot />
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
-            {successivo && <a class="successivo" href={successivo.href}><small>{t.successivo}</small><span>{successivo.titolo}{successivo.sotto ? <em> · {successivo.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
+            {successivo && <a class="successivo" href={successivo.href}><small>{successivo.etichetta ?? t.successivo}</small><span>{successivo.titolo}{successivo.sotto ? <em> · {successivo.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
             {precedente && <a class="precedente" href={precedente.href}>← {precedente.titolo}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</a>}
           </nav>
         )}

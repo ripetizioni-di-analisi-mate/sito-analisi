@@ -12,7 +12,9 @@ const js = testiJs(lingua);
   <p class="sopratitolo">{t.ricerca}</p>
   <h1>{t.cercaNelSito}</h1>
   <p class="sommario">{t.cercaSommario}</p>
+  <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
   <input class="campo-cerca" id="cerca" type="search" placeholder={t.cercaEsempio} autocomplete="off" autofocus data-testi={JSON.stringify(js)} />
+  </div>
   <p id="esito" class="nota-segnaposto" hidden></p>
   <ul class="risultati" id="risultati"></ul>
 

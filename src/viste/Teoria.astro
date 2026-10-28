@@ -46,8 +46,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 }, teaches: sezioni.map((x: { text: string }) => x.text) }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria }]}
   materia={materia} argomento={argomento} sezione="teoria"
-  precedente={precedente} successivo={successivo} prossimo={prossimo}
-  lingua={lingua} nonTradotta={!tradotta}
+  precedente={precedente} successivo={successivo}   lingua={lingua} nonTradotta={!tradotta}
 >
   <p class="sopratitolo">{t.sezioni.teoria}</p>
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
@@ -85,5 +84,8 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
         ))}
       </ul>
     </>
+  )}
+  {dafare.length > 0 && (
+    <p class="vai-esercizi"><a href={link(lingua, `${base}/esercizi`)}>{t.dafareSuArgomento(dafare.length)} →</a></p>
   )}
 </Base>
