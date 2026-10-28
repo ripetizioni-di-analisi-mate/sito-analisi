@@ -257,7 +257,7 @@ W^\perp = \langle \text{rows of } A \rangle ,
 $$
 of dimension $\operatorname{rk} A$. The two conversions from parametric to Cartesian form and vice versa thus become a computation of complements: the plane $W = \{ x + y - z = 0 \}$ of $\mathbb{R}^3$ has complement $W^\perp = \langle (1, 1, -1) \rangle$, and the vector $(1, 1, -1)$ is the normal vector to the plane.
 
-::grafico{f="x/2;-2*x" vettori="0,0,2,1,w;0,0,-1,2,n" etichette="2.3,1.55,W;-0.7,2.7,W⊥" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="In $\mathbb{R}^2$ the orthogonal complement of the line $W = \langle (2, 1) \rangle$ is the line $W^\perp = \langle (-1, 2) \rangle$, with equation $2x + y = 0$"}
+::grafico{f="x/2;-2*x" vettori="0,0,2,1;0,0,-1,2,n" etichette="1.3,0.2,w;2.3,1.55,W;-0.7,2.7,W⊥" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="In $\mathbb{R}^2$ the orthogonal complement of the line $W = \langle (2, 1) \rangle$ is the line $W^\perp = \langle (-1, 2) \rangle$, with equation $2x + y = 0$"}
 
 :::
 

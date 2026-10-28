@@ -257,7 +257,7 @@ W^\perp = \langle \text{righe di } A \rangle ,
 $$
 di dimensione $\operatorname{rk} A$. I due passaggi da forma parametrica a cartesiana e viceversa diventano così un calcolo di complementi: il piano $W = \{ x + y - z = 0 \}$ di $\mathbb{R}^3$ ha complemento $W^\perp = \langle (1, 1, -1) \rangle$, e il vettore $(1, 1, -1)$ è il vettore normale al piano.
 
-::grafico{f="x/2;-2*x" vettori="0,0,2,1,w;0,0,-1,2,n" etichette="2.3,1.55,W;-0.7,2.7,W⊥" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="In $\mathbb{R}^2$ il complemento ortogonale della retta $W = \langle (2, 1) \rangle$ è la retta $W^\perp = \langle (-1, 2) \rangle$, di equazione $2x + y = 0$"}
+::grafico{f="x/2;-2*x" vettori="0,0,2,1;0,0,-1,2,n" etichette="1.3,0.2,w;2.3,1.55,W;-0.7,2.7,W⊥" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="In $\mathbb{R}^2$ il complemento ortogonale della retta $W = \langle (2, 1) \rangle$ è la retta $W^\perp = \langle (-1, 2) \rangle$, di equazione $2x + y = 0$"}
 
 :::
 
