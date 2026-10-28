@@ -65,10 +65,12 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS utenti (email TEXT PRIMARY KEY, hash TEXT, sale TEXT, iterazioni INTEGER, versione INTEGER DEFAULT 1,
         falliti INTEGER DEFAULT 0, bloccato_fino INTEGER DEFAULT 0, creato TEXT, ultimo_accesso TEXT);
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
+      CREATE TABLE IF NOT EXISTS dispositivi (email TEXT, id TEXT, nome TEXT, creato TEXT, ultimo_uso INTEGER, PRIMARY KEY (email, id));
     `);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
+  dispositiviDi(email) { return this.righe('SELECT id, nome, creato, ultimo_uso FROM dispositivi WHERE email = ? ORDER BY ultimo_uso DESC', email); }
   materieDi(email) { return this.righe('SELECT materia FROM abilitazioni WHERE email = ?', email).map((r) => r.materia); }
 
   async fetch(req) {
@@ -105,8 +107,29 @@ export class Archivio {
       case '/sessione': { // verifica che la sessione sia ancora valida e restituisce le materie
         const u = this.riga('SELECT email, versione, creato FROM utenti WHERE email = ?', c.email);
         if (!u || u.versione !== c.versione) return Response.json(null);
-        return Response.json({ email: u.email, creato: u.creato, materie: this.materieDi(u.email) });
+        // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
+        const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
+        if (!d) return Response.json(null);
+        if (Date.now() - d.ultimo_uso > 3600 * 1000) this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
+        const dispositivi = this.dispositiviDi(u.email).map((x) => ({ nome: x.nome, questo: x.id === c.dispositivo }));
+        return Response.json({ email: u.email, creato: u.creato, materie: this.materieDi(u.email), dispositivi });
       }
+      case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
+        this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND ultimo_uso < ?', c.email, Date.now() - 60 * 86400 * 1000);
+        if (this.riga('SELECT id FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id)) {
+          this.sql.exec('UPDATE dispositivi SET ultimo_uso = ?, nome = ? WHERE email = ? AND id = ?', Date.now(), c.nome, c.email, c.id);
+          return Response.json({ ok: true });
+        }
+        const presenti = this.dispositiviDi(c.email);
+        if (presenti.length >= c.max) return Response.json({ ok: false, dispositivi: presenti.map((x) => x.nome) });
+        this.sql.exec('INSERT INTO dispositivi (email, id, nome, creato, ultimo_uso) VALUES (?, ?, ?, ?, ?)', c.email, c.id, c.nome, ora, Date.now());
+        return Response.json({ ok: true });
+      }
+      case '/dispositivo-rimuovi':
+        if (c.id) this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id);
+        else this.sql.exec('DELETE FROM dispositivi WHERE email = ?', c.email);
+        return Response.json({ ok: true });
+
       case '/abilita':
         for (const m of c.materie) {
           this.sql.exec('INSERT OR IGNORE INTO abilitazioni (email, materia, origine, creato) VALUES (?, ?, ?, ?)', c.email, m, c.origine, ora);
@@ -134,6 +157,7 @@ export class Archivio {
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
+          dispositivi: this.righe('SELECT email, nome, creato, ultimo_uso FROM dispositivi ORDER BY ultimo_uso DESC LIMIT 2000'),
         });
     }
     return new Response('non trovato', { status: 404 });
@@ -148,8 +172,39 @@ async function aDO(env, percorso, dati = {}) {
 // ---------- sessione ----------
 const cookieSessione = (valore, durata) =>
   `sessione=${encodeURIComponent(valore)}; Path=/; Max-Age=${durata}; HttpOnly; Secure; SameSite=Lax`;
-async function apriSessione(env, email, versione) {
-  return cookieSessione(await firmaToken(env, { e: email, v: versione, t: Date.now() }), DURATA_SESSIONE);
+async function apriSessione(env, email, versione, dispositivo) {
+  return cookieSessione(await firmaToken(env, { e: email, v: versione, d: dispositivo, t: Date.now() }), DURATA_SESSIONE);
+}
+
+// ---------- dispositivi: al massimo MAX_DISPOSITIVI per account ----------
+const MAX_DISPOSITIVI = 2;
+// Il cookie "dispositivo" resta anche dopo l'uscita: rientrando dallo stesso browser si riusa lo stesso posto.
+const cookieDispositivo = (id) => `dispositivo=${id}; Path=/; Max-Age=34560000; HttpOnly; Secure; SameSite=Lax`;
+function idDispositivo(req) {
+  const c = leggiCookie(req, 'dispositivo');
+  return c && /^[0-9a-f]{32}$/.test(c) ? c : [...crypto.getRandomValues(new Uint8Array(16))].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+function nomeDispositivo(req) {
+  const ua = req.headers.get('user-agent') || '';
+  const so = /iPhone/.test(ua) ? 'iPhone' : /iPad/.test(ua) ? 'iPad' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' : /Mac OS X|Macintosh/.test(ua) ? 'Mac' : /Linux/.test(ua) ? 'Linux' : 'Dispositivo';
+  const br = /Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung Internet' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Chrome|CriOS/.test(ua) ? 'Chrome' : /Safari/.test(ua) ? 'Safari' : 'browser';
+  return `${so} · ${br}`;
+}
+const MSG = {
+  limite: {
+    it: (l) => `Questo account è già in uso su ${MAX_DISPOSITIVI} dispositivi (${l}). Esci da uno dei due, oppure scrivimi dalla pagina Contatti per scollegarli.`,
+    en: (l) => `This account is already in use on ${MAX_DISPOSITIVI} devices (${l}). Log out on one of them, or message me from the Contact page to disconnect them.`,
+  },
+};
+// Registra il dispositivo e apre la sessione; se il limite è raggiunto risponde con l'errore.
+async function entraDaDispositivo(env, req, email, versione, lingua) {
+  const id = idDispositivo(req);
+  const r = await aDO(env, '/dispositivo-registra', { email, id, nome: nomeDispositivo(req), max: MAX_DISPOSITIVI });
+  const h = new Headers({ 'content-type': 'application/json' });
+  h.append('set-cookie', cookieDispositivo(id));
+  if (!r.ok) return new Response(JSON.stringify({ errore: MSG.limite[lingua === 'en' ? 'en' : 'it'](r.dispositivi.join(', ')), limite: true }), { status: 403, headers: h });
+  h.append('set-cookie', await apriSessione(env, email, versione, id));
+  return new Response('{"ok":true}', { headers: h });
 }
 async function tokenSessione(env, req) {
   const t = leggiCookie(req, 'sessione');
@@ -159,7 +214,7 @@ async function tokenSessione(env, req) {
 async function utenteCollegato(env, req) {
   const t = await tokenSessione(env, req);
   if (!t?.e) return null;
-  return aDO(env, '/sessione', { email: t.e, versione: t.v });
+  return aDO(env, '/sessione', { email: t.e, versione: t.v, dispositivo: t.d });
 }
 
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
@@ -210,7 +265,7 @@ export default {
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {
-      const { email: e, password } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
       if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
@@ -218,10 +273,10 @@ export default {
       const hash = await hashPassword(password, sale);
       const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2 });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
-      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, email, r.versione) });
+      return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
-      const { email: e, password } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const u = emailValida(email) ? await aDO(env, '/utente', { email }) : null;
       const sbagliato = () => json({ errore: 'Email o password non corrette.' }, 401);
@@ -230,9 +285,11 @@ export default {
       const ok = confrontoCostante(await hashPassword(password, u.sale, u.iterazioni), u.hash);
       ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok }));
       if (!ok) return sbagliato();
-      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, email, u.versione) });
+      return entraDaDispositivo(env, req, email, u.versione, lingua);
     }
     if (p === '/api/esci' && POST) {
+      const t = await tokenSessione(env, req);
+      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d });
       const h = new Headers({ 'content-type': 'application/json' });
       h.append('set-cookie', cookieSessione('', 0));
       h.append('set-cookie', 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax');
@@ -253,7 +310,7 @@ export default {
         return json({ errore: 'La password attuale non è corretta.' }, 401);
       const sale = nuovoSale();
       const r = await aDO(env, '/utente-password', { email: t.e, hash: await hashPassword(nuova, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
-      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione) });
+      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d) });
     }
 
     // ===== vecchi link personali: non danno più accesso, serve l'account =====
@@ -264,6 +321,8 @@ export default {
       } });
     }
     if (p === '/esci') {
+      const t = await tokenSessione(env, req);
+      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d });
       const h = new Headers({ location: '/' });
       h.append('set-cookie', cookieSessione('', 0));
       h.append('set-cookie', 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax');
@@ -338,7 +397,12 @@ export default {
         const sale = nuovoSale();
         const r = await aDO(env, '/utente-password', { email, hash: await hashPassword(provvisoria, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
         if (!r.ok) return json({ errore: 'Nessun account con questa email.' }, 404);
+        await aDO(env, '/dispositivo-rimuovi', { email });
         return json({ password: provvisoria });
+      }
+      if (p === '/admin/api/scollega' && POST) {
+        const email = normalizza((await req.json()).email);
+        return json(await aDO(env, '/dispositivo-rimuovi', { email }));
       }
       return new Response('non trovato', { status: 404 });
     }

@@ -46,6 +46,12 @@ Il modello da seguire è `src/content/teoria/analisi-1/limiti.md` con i relativi
 - Nominare le espressioni, non dire "la parentesi".
 - Frasi di lunghezza variabile; ogni frase dice qualcosa di nuovo.
 
+## Grassetto e corsivo (per rendere la lettura scorrevole)
+
+- **Grassetto** (`**…**`): il termine che si sta definendo, nel punto in cui viene definito; il nome di un teorema, di un criterio o di un metodo quando la frase lo applica; la conclusione di un ragionamento o di un esercizio detta a parole ("la serie **converge**", "il sistema **non ha soluzioni**"). Al massimo due o tre grassetti per blocco o per spiegazione: servono a far trovare all'occhio i punti di appoggio scorrendo la pagina.
+- *Corsivo* (`*…*`): la parola su cui cade l'accento logico della frase (*necessaria*, *sufficiente*, *ogni*, *almeno uno*, *solo se*, *non*), un termine citato come parola o un'espressione in un'altra lingua, il nome di una tipologia di esercizio quando la si richiama nel testo.
+- Mai dentro le formule `$…$`, mai attorno a una formula, mai nei titoli `##`, nel frontmatter o negli attributi delle direttive. Mai intere frasi in grassetto.
+
 ## Controllo prima di consegnare
 
 Rileggere ogni frase: un docente la direbbe così a lezione? c'è un verbo figurato? un passaggio logico affidato ai due punti? uno studente che legge solo quella frase capisce cosa si afferma e perché? Ricalcolare ogni esercizio da capo, compresi i risultati finali delle tracce.

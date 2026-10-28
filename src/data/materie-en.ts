@@ -18,7 +18,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'analisi-1': {
-    titolo: 'Mathematical Analysis 1 (Module A)',
+    titolo: 'Mathematical Analysis 1',
     breve: 'Analysis 1',
     descrizione: 'Limits, derivatives, integrals, series and differential equations: the theory and the exercises for the exam.',
     argomenti: {
@@ -34,7 +34,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'analisi-2': {
-    titolo: 'Mathematical Analysis 2 (Module B)',
+    titolo: 'Mathematical Analysis 2',
     breve: 'Analysis 2',
     descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions.',
     argomenti: {

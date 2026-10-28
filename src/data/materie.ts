@@ -39,7 +39,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'analisi-1',
-    titolo: 'Analisi matematica 1 (Modulo A)',
+    titolo: 'Analisi matematica 1',
     breve: 'Analisi 1',
     descrizione: 'Limiti, derivate, integrali, serie ed equazioni differenziali: la teoria e gli esercizi per l\'esame.',
     colore: '#2f6f68',
@@ -59,7 +59,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'analisi-2',
-    titolo: 'Analisi matematica 2 (Modulo B)',
+    titolo: 'Analisi matematica 2',
     breve: 'Analisi 2',
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
     colore: '#3b5f8f',

@@ -1,5 +1,5 @@
 // Pagina della dashboard riservata (/admin). I dati arrivano da /admin/api/*.
-const NOMI = { precorso: 'Precorso', 'analisi-1': 'Analisi matematica 1 (Modulo A)', 'analisi-2': 'Analisi matematica 2 (Modulo B)', 'algebra-lineare': 'Algebra lineare e geometria analitica' };
+const NOMI = { precorso: 'Precorso', 'analisi-1': 'Analisi matematica 1', 'analisi-2': 'Analisi matematica 2', 'algebra-lineare': 'Algebra lineare e geometria analitica' };
 
 export function paginaAdmin(materie) {
   const caselle = materie.map((m) => `<label class="casella"><input type="checkbox" value="${m}"> ${NOMI[m] || m}</label>`).join('');
@@ -24,6 +24,7 @@ button.piccolo{padding:.15rem .5rem;font-size:.8rem;background:#fff;color:var(--
 .nota{color:var(--grigio);font-size:.85rem;font-weight:400}#login{max-width:22rem;margin:15vh auto;text-align:center}
 .pill{display:inline-block;font-size:.78rem;padding:0 .45rem;border-radius:999px;background:#e8efed;color:var(--acc);margin:0 .2rem .2rem 0}
 .pill.manuale{background:#f3ece0;color:#8a5a1a}
+.pill.dispositivo{background:#eef0f4;color:#3b4a5a}
 </style></head><body>
 <div id="login"><h1>Dashboard</h1><form onsubmit="entra();return false"><p><input id="pw" type="password" placeholder="Password" style="width:100%" autocomplete="current-password"></p><p><button>Entra</button></p></form><p class="nota" id="login-errore"></p></div>
 <main id="pannello" hidden>
@@ -34,7 +35,7 @@ button.piccolo{padding:.15rem .5rem;font-size:.8rem;background:#fff;color:var(--
 <div class="riga-modulo"><input id="a-email" type="email" placeholder="email dello studente" style="min-width:16rem">${caselle}<button onclick="abilita()">Attiva</button></div>
 <div class="esito" id="esito-abilita"></div>
 
-<h2>Reimposta password <span class="nota">genera una password provvisoria da comunicare allo studente</span></h2>
+<h2>Reimposta password <span class="nota">genera una password provvisoria da comunicare allo studente e scollega i suoi dispositivi</span></h2>
 <div class="riga-modulo"><input id="r-email" type="email" placeholder="email dell'account" style="min-width:16rem"><button class="secondario" onclick="reimposta()">Genera password provvisoria</button></div>
 <div class="esito" id="esito-reset"></div>
 
@@ -81,10 +82,12 @@ function disegnaIscritti(){
   const registrati=new Set(D.utenti.map(u=>u.email));
   const inAttesa=[...new Set(D.abilitazioni.filter(a=>!registrati.has(a.email)&&(!f||a.email.includes(f))).map(a=>a.email))];
   const pill=(email,m)=>'<span class="pill '+(origine[email+'|'+m]==='manuale'?'manuale':'')+'">'+esc(NOMI[m]||m)+' <button class="piccolo" title="Revoca" onclick="revoca(\\''+esc(email)+'\\',\\''+m+'\\')">×</button></span>';
-  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th></tr>'+
-    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td></tr>').join('')+
-    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td></tr>').join('')+
-    (righe.length+inAttesa.length?'':'<tr><td colspan="4" class="nota">Nessun iscritto.</td></tr>');
+  const disp={};(D.dispositivi||[]).forEach(d=>{(disp[d.email]||=[]).push(d)});
+  const celDisp=email=>{const l=disp[email]||[];return l.length?(l.map(d=>'<span class="pill dispositivo">'+esc(d.nome)+'</span>').join('')+' <button class="piccolo" title="Scollega tutti i dispositivi" onclick="scollega(\\''+esc(email)+'\\')">scollega</button>'):'<span class="nota">nessuno</span>'};
+  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th><th>Dispositivi (max 2)</th></tr>'+
+    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td><td>'+celDisp(u.email)+'</td></tr>').join('')+
+    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td><td></td></tr>').join('')+
+    (righe.length+inAttesa.length?'':'<tr><td colspan="5" class="nota">Nessun iscritto.</td></tr>');
 }
 async function abilita(){
   const email=document.getElementById('a-email').value.trim();
@@ -96,6 +99,7 @@ async function abilita(){
   e.innerHTML=r.errore?esc(r.errore):('Fatto: '+materie.map(m=>NOMI[m]||m).join(', ')+' per <b>'+esc(email)+'</b>. '+(r.account?'Lo studente le vede già nel suo account.':'Le troverà appena si registra con questa email su ripetizionidianalisi.com/accedi.'));
   carica();
 }
+async function scollega(email){if(!confirm('Scollegare tutti i dispositivi di '+email+'? Dovrà accedere di nuovo.'))return;await api('scollega',{email});carica()}
 async function revoca(email,materia){if(!confirm('Revocare '+(NOMI[materia]||materia)+' a '+email+'?'))return;await api('revoca',{email,materia});carica()}
 async function reimposta(){
   const email=document.getElementById('r-email').value.trim();if(!email)return;
