@@ -197,7 +197,7 @@ e il valore comune si chiama **integrale definito** di $f$ su $[a, b]$, indicato
 :::
 
 :::teorema{#funzioni-integrabili titolo="Classi di funzioni integrabili"}
-Se $f$ è continua su $[a, b]$, oppure monotona su $[a, b]$, allora $f$ è **integrabile** su $[a, b]$. La dimostrazione per le funzioni continue usa l'uniforme continuità e si omette. *Non* ogni funzione limitata è integrabile: la **funzione di Dirichlet**, che vale $1$ sui razionali e $0$ sugli irrazionali, ha ogni somma inferiore uguale a $0$ e ogni somma superiore uguale a $b - a$, quindi non è integrabile.
+Se $f$ è continua su $[a, b]$, oppure monotona su $[a, b]$, allora $f$ è **integrabile** su $[a, b]$. Le dimostrazioni si omettono. *Non* ogni funzione limitata è integrabile: la **funzione di Dirichlet**, che vale $1$ sui razionali e $0$ sugli irrazionali, ha ogni somma inferiore uguale a $0$ e ogni somma superiore uguale a $b - a$, quindi non è integrabile.
 :::
 
 ## Proprietà dell'integrale e teorema della media
@@ -255,9 +255,9 @@ La variabile $x$ è l'estremo superiore di integrazione; la variabile di integra
 ::::teorema{#teorema-fondamentale titolo="Teorema fondamentale del calcolo"}
 Sia $f$ continua su $[a, b]$. Allora la funzione integrale $F(x) = \displaystyle\int_a^x f(t)\, dt$ è derivabile su $[a, b]$ e
 $$
-F'(x) = f(x) \qquad \text{per ogni } x \in [a, b] .
+F'(x) = f(x) \qquad \text{per ogni } x \in [a, b] ,
 $$
-Quindi *ogni* funzione continua su un intervallo **ammette primitive**, e la funzione integrale è una di esse. Il teorema collega la derivazione e l'integrazione, e da esso segue la formula fondamentale del calcolo.
+dove negli estremi $a$ e $b$ si intendono la derivata destra e la derivata sinistra. Quindi *ogni* funzione continua su un intervallo **ammette primitive**, e la funzione integrale è una di esse. Il teorema collega la derivazione e l'integrazione, e da esso segue la formula fondamentale del calcolo.
 
 ::grafico{f="2+sin(x)" area="2+sin(x);0;1;2" punti="1,0,pieno,x;2,0,pieno,x + h" nomi="t,y" xmin=-0.4 xmax=3.6 ymin=-0.4 ymax=3.6 titolo="$F(x + h) - F(x)$ è l'area della striscia colorata tra $x$ e $x + h$, sotto il grafico di $f$; per il teorema della media vale $f(c_h) \cdot h$"}
 
@@ -334,6 +334,6 @@ $$
 \mathcal{A} = \int_0^1 (x - x^2)\, dx = \left[ \frac{x^2}{2} - \frac{x^3}{3} \right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6} .
 $$
 
-::grafico{f="x-x*x" xmin=-0.5 xmax=1.5 ymin=-0.3 ymax=0.5 titolo="$y = x - x^2$: l'area sottesa su $[0, 1]$ è l'area della regione tra la retta e la parabola"}
+::grafico{f="x;x^2" area="x;x^2;0;1" punti="0,0,pieno;1,1,pieno" xmin=-0.5 xmax=1.6 ymin=-0.4 ymax=1.6 titolo="La regione tra la retta $y = x$ e la parabola $y = x^2$ (tratteggiata) per $0 \leq x \leq 1$: la sua area vale $\dfrac{1}{6}$"}
 
 :::

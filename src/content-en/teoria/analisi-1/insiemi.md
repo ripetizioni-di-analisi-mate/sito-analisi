@@ -1,6 +1,6 @@
 ---
 titolo: Sets, induction and elementary functions
-sommario: The language of sets and the number sets from N to R, the principle of induction and the binomial theorem, then the elementary functions with their graphs — the starting toolkit for all of analysis.
+sommario: The language of sets and the number sets from N to R, the principle of induction and the binomial theorem, then the elementary functions with their graphs, the starting toolkit for all of analysis.
 ---
 
 ## The language of sets
@@ -181,7 +181,7 @@ Every nonempty subset of $\mathbb{R}$ that is bounded above has a **supremum** i
 :::
 
 :::osservazione
-In $\mathbb{Q}$ completeness **does not hold**. Let $A = \{x \in \mathbb{Q} : x \geq 0,\ x^2 < 2\}$: it is nonempty, because $1 \in A$, and it is bounded above, because $x \geq 2$ implies $x^2 \geq 4 > 2$, so $2$ is an upper bound. In $\mathbb{R}$ its supremum is $\sqrt{2}$, which is not rational. Among the rational numbers alone, on the other hand, $A$ has no supremum. Every rational upper bound $L$ satisfies $L > \sqrt{2}$: if $L < \sqrt{2}$, by the **density** of $\mathbb{Q}$ there would exist a rational $q$ with $L < q < \sqrt{2}$, which would belong to $A$ (it is positive, because $L \geq 1$, and its square is less than $2$) and would exceed $L$; the equality $L = \sqrt{2}$ is excluded because $\sqrt{2} \notin \mathbb{Q}$. Again by density there then exists a rational $q'$ with $\sqrt{2} < q' < L$, and $q'$ is an upper bound of $A$ smaller than $L$, since every $x \in A$ satisfies $x < \sqrt{2} < q'$. Hence no rational upper bound is the least of the rational upper bounds and, within $\mathbb{Q}$, the set $A$ **has no supremum**.
+In $\mathbb{Q}$ completeness **does not hold**. Let $A = \{x \in \mathbb{Q} : x \geq 0,\ x^2 < 2\}$: it is nonempty, because $1 \in A$, and it is bounded above, because $x \geq 2$ implies $x^2 \geq 4 > 2$, so $2$ is an upper bound. In $\mathbb{R}$ its supremum is $\sqrt{2}$, which is not rational. Among the rational numbers alone, on the other hand, $A$ has no supremum. Every rational upper bound $L$ satisfies $L > \sqrt{2}$: if $L < \sqrt{2}$, by the **density** of $\mathbb{Q}$ there would exist a rational $q$ with $L < q < \sqrt{2}$, which would belong to $A$ (it is positive, because $q > L \geq 1$, since $L$ is an upper bound and $1 \in A$, and its square is less than $2$) and would exceed $L$; the equality $L = \sqrt{2}$ is excluded because $\sqrt{2} \notin \mathbb{Q}$. Again by density there then exists a rational $q'$ with $\sqrt{2} < q' < L$, and $q'$ is an upper bound of $A$ smaller than $L$, since every $x \in A$ satisfies $x < \sqrt{2} < q'$. Hence no rational upper bound is the least of the rational upper bounds and, within $\mathbb{Q}$, the set $A$ **has no supremum**.
 :::
 
 ## The principle of induction
@@ -333,7 +333,7 @@ $f : A \to B$ is
 - **surjective** if the range coincides with the codomain, that is if every $y \in B$ is of the form $f(x)$ for some $x \in A$;
 - **bijective** if it is injective and surjective, that is if every $y \in B$ comes from one and only one $x \in A$.
 
-On the graph, injectivity is read with **horizontal lines**: $f$ is injective if every line $y = c$ meets the graph in *at most* one point. $f(x) = x^2$ on $\mathbb{R}$ takes the same value at $1$ and at $-1$, so on $\mathbb{R}$ the line $y = 1$ meets the graph in two points; the restriction to $[0, +\infty)$ is injective. Injectivity decides whether a function is **invertible**, as specified in the next block.
+On the graph, injectivity is read with **horizontal lines**: $f$ is injective if every line $y = c$ meets the graph in *at most* one point. $f(x) = x^2$ on $\mathbb{R}$ takes the same value at $1$ and at $-1$, so on $\mathbb{R}$ the line $y = 1$ meets the graph in two points; the restriction to $[0, +\infty)$ is injective. Injectivity is the condition that makes it possible to define the **inverse function**.
 
 ::grafico{f="x^2;1" xmin=-3 xmax=3 ymin=-1 ymax=6 punti="-1,1,pieno;1,1,pieno" titolo="The line $y = 1$ (dashed) meets the parabola $y = x^2$ at the two points with abscissa $-1$ and $1$: on $\mathbb{R}$ the function $x^2$ is not injective"}
 
@@ -383,11 +383,11 @@ The functions $x^2$, $x^4$, $|x|$, $\cos x$ are even; $x$, $x^3$, $\sin x$, $\ta
 :::
 
 :::definizione{#periodica titolo="Periodic function"}
-$f$ is **periodic** with period $T > 0$ if $f(x + T) = f(x)$ for every $x$ in the domain with $x + T$ in the domain. The smallest positive period, when it exists, is the **fundamental period**. $\sin x$ and $\cos x$ have fundamental period $2\pi$; $\tan x$ has fundamental period $\pi$. The graph repeats under horizontal translation by $T$, so the study of a periodic function is carried out on a *single* interval of length $T$. For the same reason trigonometric equations have **infinitely many solutions**, listed with an integer $k$.
+$f$ is **periodic** with period $T > 0$ if, for every $x$ in the domain, $x + T$ also belongs to the domain and $f(x + T) = f(x)$. The smallest positive period, when it exists, is the **fundamental period**. $\sin x$ and $\cos x$ have fundamental period $2\pi$; $\tan x$ has fundamental period $\pi$. The graph repeats under horizontal translation by $T$, so the study of a periodic function is carried out on a *single* interval of length $T$. For the same reason trigonometric equations have **infinitely many solutions**, listed with an integer $k$.
 :::
 
 :::definizione{#monotona titolo="Monotonic function"}
-$f$ is **increasing** on a set $I$ of the domain if $x_1 < x_2$ implies $f(x_1) \leq f(x_2)$, **strictly increasing** if it implies $f(x_1) < f(x_2)$; decreasing and strictly decreasing are defined with the opposite inequalities. A strictly monotonic function is **injective**, because distinct points have distinct images, so it is invertible on its range; the inverse is strictly monotonic in the same direction. Applying a strictly increasing function to both sides of an inequality *preserves* its direction; applying a strictly decreasing function *reverses* it. The exponential and logarithmic inequalities of this chapter are based on this property.
+$f$ is **increasing** on a set $I$ of the domain if $x_1 < x_2$ implies $f(x_1) \leq f(x_2)$, **strictly increasing** if it implies $f(x_1) < f(x_2)$; decreasing and strictly decreasing are defined with the opposite inequalities. A strictly monotonic function is **injective**, because $x_1 < x_2$ implies, depending on the direction of monotonicity, $f(x_1) < f(x_2)$ or $f(x_1) > f(x_2)$, and in both cases $f(x_1) \neq f(x_2)$; so it is invertible on its range; the inverse is strictly monotonic in the same direction. Applying a strictly increasing function to both sides of an inequality *preserves* its direction; applying a strictly decreasing function *reverses* it. The exponential and logarithmic inequalities of this chapter are based on this property.
 :::
 
 :::definizione{#limitata titolo="Bounded function"}
@@ -608,7 +608,16 @@ f(x) > g(x) \\[4pt]
 g(x) > 0
 \end{cases}
 $$
-where the condition $f(x) > 0$ follows from the other two; for $0 < a < 1$ the direction of the comparison between the arguments is **reversed**. These criteria reduce every elementary exponential or logarithmic inequality to an algebraic inequality.
+where the condition $f(x) > 0$ follows from the other two. For $0 < a < 1$ the direction of the comparison between the arguments is **reversed** and the existence condition to impose becomes the one on $f$:
+$$
+\log_a f(x) > \log_a g(x)
+\iff
+\begin{cases}
+f(x) < g(x) \\[4pt]
+f(x) > 0
+\end{cases}
+$$
+and in this case $g(x) > 0$ follows from the other two. These criteria reduce every elementary exponential or logarithmic inequality to an algebraic inequality.
 :::
 
 :::esempio

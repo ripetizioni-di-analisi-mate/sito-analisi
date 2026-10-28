@@ -255,9 +255,9 @@ The variable $x$ is the upper limit of integration; the integration variable $t$
 ::::teorema{#teorema-fondamentale titolo="Fundamental theorem of calculus"}
 Let $f$ be continuous on $[a, b]$. Then the integral function $F(x) = \displaystyle\int_a^x f(t)\, dt$ is differentiable on $[a, b]$ and
 $$
-F'(x) = f(x) \qquad \text{for every } x \in [a, b] .
+F'(x) = f(x) \qquad \text{for every } x \in [a, b] ,
 $$
-Therefore *every* continuous function on an interval **has antiderivatives**, and the integral function is one of them. The theorem links differentiation and integration, and the fundamental formula of calculus follows from it.
+where at the endpoints $a$ and $b$ the right and the left derivative are meant. Therefore *every* continuous function on an interval **has antiderivatives**, and the integral function is one of them. The theorem links differentiation and integration, and the fundamental formula of calculus follows from it.
 
 ::grafico{f="2+sin(x)" area="2+sin(x);0;1;2" punti="1,0,pieno,x;2,0,pieno,x + h" nomi="t,y" xmin=-0.4 xmax=3.6 ymin=-0.4 ymax=3.6 titolo="$F(x + h) - F(x)$ is the area of the colored strip between $x$ and $x + h$, under the graph of $f$; by the mean value theorem for integrals it equals $f(c_h) \cdot h$"}
 
@@ -334,6 +334,6 @@ $$
 \mathcal{A} = \int_0^1 (x - x^2)\, dx = \left[ \frac{x^2}{2} - \frac{x^3}{3} \right]_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6} .
 $$
 
-::grafico{f="x-x*x" xmin=-0.5 xmax=1.5 ymin=-0.3 ymax=0.5 titolo="$y = x - x^2$: the area under it on $[0, 1]$ is the area of the region between the line and the parabola"}
+::grafico{f="x;x^2" area="x;x^2;0;1" punti="0,0,pieno;1,1,pieno" xmin=-0.5 xmax=1.6 ymin=-0.4 ymax=1.6 titolo="The region between the line $y = x$ and the parabola $y = x^2$ (dashed) for $0 \leq x \leq 1$: its area is $\dfrac{1}{6}$"}
 
 :::

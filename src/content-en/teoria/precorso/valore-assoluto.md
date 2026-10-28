@@ -16,7 +16,7 @@ x & \text{if } x \geq 0 \\
 $$
 The result is **never negative**: when $x < 0$, the number $-x$ is positive. For example $|7| = 7$ and $|-7| = -(-7) = 7$. *Every* solving rule in this chapter follows from this piecewise definition.
 
-::grafico{f="abs(x)" xmin=-5 xmax=5 ymin=-1 ymax=5 titolo="y = |x|: for x ≥ 0 it coincides with y = x, for x < 0 with y = −x"}
+::grafico{f="abs(x)" xmin=-5 xmax=5 ymin=-1 ymax=5 titolo="$y = |x|$ coincides with $y = x$ for $x \geq 0$ and with $y = -x$ for $x < 0$"}
 :::
 
 :::definizione{#modulo-come-distanza titolo="Absolute value as distance"}
@@ -30,7 +30,7 @@ For all $a, b \in \mathbb{R}$,
 $$
 |ab| = |a|\,|b|, \qquad |a|^2 = a^2, \qquad |a + b| \leq |a| + |b| .
 $$
-The first is verified by examining the four cases for the signs of $a$ and $b$, and it is used to split an absolute value, for example $|{-3x}| = 3\,|x|$. The second holds because $a$ and $|a|$ differ at most in sign, which squaring cancels; since absolute values are *not* negative, comparing two absolute values is equivalent to **comparing their squares**, and this observation is the basis for solving $|A| > |B|$ by squaring. The third is the **triangle inequality** and is used in estimates, for example in the chapter on limits: for $a = 5$ and $b = -3$ we have $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, and equality holds when $a$ and $b$ have the same sign.
+The first is verified by examining the four cases for the signs of $a$ and $b$, and it is used to split an absolute value, for example $|{-3x}| = 3\,|x|$. The second holds because $a$ and $|a|$ differ at most in sign, which squaring cancels; since absolute values are *not* negative, comparing two absolute values is equivalent to **comparing their squares**, and this observation is the basis for solving $|A| > |B|$ by squaring. The third is the **triangle inequality** and is used in estimates, for example in the chapter on limits: for $a = 5$ and $b = -3$ we have $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, and equality holds if and only if $ab \geq 0$.
 :::
 
 :::attenzione
@@ -40,9 +40,9 @@ The absolute value is *not* removed by rewriting $|A| = A$: the equality holds *
 ## The equation |A| = k
 
 :::teorema{#equazioni-con-modulo titolo="Equation of the form |A| = k"}
-$A$ is an expression in the variable $x$ and $k$ is a constant. The *only* numbers with absolute value $k > 0$ are $k$ and $-k$, so there are three cases.
+$A$ is an expression in the variable $x$ and $k$ is a constant. The cases to distinguish depend on the sign of $k$.
 
-- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$.
+- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, because the *only* numbers with absolute value $k$ are $k$ and $-k$.
 - $k = 0$: $\ |A| = 0 \iff A = 0$, because the only number with absolute value zero is $0$.
 - $k < 0$: **no solution**, because $|A| \geq 0$ for every $x$.
 :::

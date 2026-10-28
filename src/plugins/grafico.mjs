@@ -105,7 +105,7 @@ export function grafico(a) {
   const ty = tacche(ymin, ymax).map((v) =>
     `<line x1="${ox - 4}" y1="${sy(v).toFixed(1)}" x2="${ox + 4}" y2="${sy(v).toFixed(1)}"/>` +
     `<text x="${ox - 8}" y="${(sy(v) + 4).toFixed(1)}" text-anchor="end">${v}</text>`).join('');
-  const [nx, ny] = a.nomi ? lista(a.nomi, ',') : ['x', 'y'];
+  const [nx = '', ny = ''] = a.nomi ? String(a.nomi).split(',').map((v) => v.trim()) : ['x', 'y'];
 
   // Aree colorate tra due curve
   const aree = lista(a.area, '|').map((s) => {

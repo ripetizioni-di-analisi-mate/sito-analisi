@@ -6,7 +6,7 @@ sommario: Che cosa è una proposizione, come si combinano le proposizioni con i 
 ## Proposizioni
 
 :::definizione{#proposizioni titolo="Proposizione"}
-Una **proposizione** è un enunciato per il quale ha senso chiedersi se è vero o falso, e che ha *uno solo* dei due valori di verità. Le proposizioni si indicano con lettere come $p$, $q$, $r$. Ogni enunciato matematico, come un'uguaglianza o un teorema, è una proposizione.
+Una **proposizione** è un enunciato per il quale ha senso chiedersi se è vero o falso, e che ha *uno solo* dei due valori di verità. Le proposizioni si indicano con lettere come $p$, $q$, $r$. Un'uguaglianza tra numeri e un teorema sono esempi di proposizioni.
 
 - "$7$ è un numero primo": proposizione vera.
 - "$2 + 2 = 5$": proposizione falsa.
@@ -69,7 +69,7 @@ Il simbolo $\equiv$ indica che le due proposizioni hanno la **stessa tavola di v
 :::
 
 :::esempio{titolo="Negare una congiunzione"}
-La negazione di "$x > 0$ e $x < 5$" è "$x \leq 0$ oppure $x \geq 5$". Poiché negare $x > 0$ significa affermare $x \leq 0$, per le **leggi di De Morgan** la congiunzione si trasforma nella disgiunzione delle due negazioni.
+La negazione di "$x > 0$ e $x < 5$" è "$x \leq 0$ oppure $x \geq 5$". Per le **leggi di De Morgan** la negazione di una congiunzione è la disgiunzione delle due negazioni; poiché negare $x > 0$ significa affermare $x \leq 0$ e negare $x < 5$ significa affermare $x \geq 5$, si ottiene $x \leq 0 \lor x \geq 5$.
 :::
 
 ## Implicazione
@@ -125,7 +125,7 @@ Da $p \Rightarrow q$ vera e $q$ vera *non* segue che $p$ sia vera. L'implicazion
 Se l'implicazione $p \Rightarrow q$ è vera:
 
 - $p$ è **condizione sufficiente** per $q$: *basta* la verità di $p$ per garantire la verità di $q$;
-- $q$ è **condizione necessaria** per $p$: *ogni volta* che $p$ è vera, anche $q$ è vera.
+- $q$ è **condizione necessaria** per $p$: se $q$ è falsa, anche $p$ è falsa, per la contronominale $\lnot q \Rightarrow \lnot p$; quindi $p$ può essere vera *solo se* è vera $q$.
 
 Se valgono sia $p \Rightarrow q$ sia $q \Rightarrow p$, si scrive $p \Leftrightarrow q$ ("$p$ se e solo se $q$") e ciascuna delle due è **condizione necessaria e sufficiente** per l'altra. Nei teoremi l'ipotesi è una condizione sufficiente per la tesi; riconoscere quale verso dell'implicazione è stato dimostrato permette di usare il teorema nel verso corretto.
 :::
@@ -148,7 +148,7 @@ Per dimostrare una proposizione universale serve un argomento valido per ogni el
 :::esempio
 "$\forall x \in \mathbb{R} : x^2 \geq 0$" è **vera**, perché il quadrato di ogni numero reale è maggiore o uguale a zero. "$\forall x \in \mathbb{R} : x^2 > 0$" è **falsa**, perché per $x = 0$ si ha $x^2 = 0$, quindi $x = 0$ è un controesempio. "$\exists x \in \mathbb{R} : x^2 = 2$" è vera, perché $x = \sqrt{2}$ soddisfa l'uguaglianza.
 
-::grafico{f="x^2;2" xmin=-3 xmax=3 ymin=-1 ymax=5 punti="0,0,pieno,x = 0;1.4142,2,pieno,x = √2" titolo="$y = x^2$ sta sopra l'asse $x$ in ogni punto diverso da $x = 0$, che è il controesempio per $x^2 > 0$; la retta $y = 2$ incontra il grafico in $x = \sqrt{2}$"}
+::grafico{f="x^2;2" xmin=-3 xmax=3 ymin=-1 ymax=5 punti="0,0,pieno;1.4142,2,pieno;-1.4142,2,pieno" etichette="0.2,-0.6,x = 0;1.6,1.5,x = √2;-2.35,1.5,x = −√2" titolo="$y = x^2$ sta sopra l'asse $x$ in ogni punto diverso da $x = 0$, che è il controesempio per $x^2 > 0$; la retta $y = 2$ incontra il grafico in $x = \sqrt{2}$ e in $x = -\sqrt{2}$"}
 
 :::
 
@@ -162,7 +162,7 @@ La negazione **scambia** $\forall$ con $\exists$ e **nega il predicato**. Con pi
 :::
 
 :::esempio{titolo="Negazione con due quantificatori"}
-La proposizione "$\forall x \in \mathbb{R} \ \exists y \in \mathbb{R} : y > x$" è vera, perché per ogni $x$ il numero $y = x + 1$ soddisfa $y > x$. La sua negazione è "$\exists x \in \mathbb{R} \ \forall y \in \mathbb{R} : y \leq x$", che afferma l'esistenza di un numero reale maggiore o uguale a ogni numero reale ed è **falsa**.
+La proposizione "$\forall x \in \mathbb{R} \ \exists y \in \mathbb{R} : y > x$" è vera, perché per ogni $x$ il numero $y = x + 1$ soddisfa $y > x$. La sua negazione è "$\exists x \in \mathbb{R} \ \forall y \in \mathbb{R} : y \leq x$", che afferma l'esistenza di un numero reale maggiore o uguale a ogni numero reale; poiché è la negazione di una proposizione vera, è **falsa**.
 :::
 
 :::osservazione
