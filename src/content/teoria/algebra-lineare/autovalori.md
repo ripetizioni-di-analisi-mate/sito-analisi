@@ -148,7 +148,7 @@ V_2 = \langle (1, -2) \rangle, \qquad V_5 = \langle (1, 1) \rangle .
 $$
 I due autospazi sono **rette per l'origine**, e su ciascuna di esse $A$ agisce come una moltiplicazione per lo scalare corrispondente.
 
-::grafico{f="x;-2*x" vettori="0,0,1,1,u;0,0,1,-2,w" etichette="0.2,2.5,V₅ : y = x;-2.9,1.9,V₂ : y = −2x" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="Gli autospazi $V_5$ e $V_2$ di $A$ sono due rette per l'origine, generate da $u = (1, 1)$ e da $w = (1, -2)$"}
+::grafico{f="x;-2*x" vettori="0,0,1,1,u;0,0,1,-2,w" etichette="1.85,1.3,V₅ : y = x;-2.5,2.2,V₂ : y = −2x" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 titolo="Gli autospazi $V_5$ e $V_2$ di $A$ sono due rette per l'origine, generate da $u = (1, 1)$ e da $w = (1, -2)$"}
 
 :::
 
