@@ -201,11 +201,11 @@ Per piccoli spostamenti si trascura il resto. Con la variabile $s = x - x_e$ il 
 ## Pendolo semplice
 
 :::definizione{#pendolo-semplice titolo="Pendolo semplice"}
-Il **pendolo semplice** è un punto materiale di massa $m$ appeso a un filo inestensibile, di massa trascurabile e lunghezza $\ell $, il cui altro estremo è fissato in un punto $O$; il punto si muove in un piano verticale e l'attrito dell'aria è trascurabile. La posizione è descritta dall'angolo $\theta$ che il filo forma con la verticale per $O$, con segno positivo in un verso fissato. Il punto percorre un arco di circonferenza di raggio $\ell $, e la sua ascissa curvilinea, misurata dal punto più basso, è $s = \ell\theta$ con $\theta$ in radianti. Il modello descrive un corpo piccolo e pesante appeso a un filo leggero, come una sfera di metallo appesa a un filo sottile.
+Il **pendolo semplice** è un punto materiale di massa $m$ appeso a un filo inestensibile, di massa trascurabile e lunghezza $\ell$, il cui altro estremo è fissato in un punto $O$; il punto si muove in un piano verticale e l'attrito dell'aria è trascurabile. La posizione è descritta dall'angolo $\theta$ che il filo forma con la verticale per $O$, con segno positivo in un verso fissato. Il punto percorre un arco di circonferenza di raggio $\ell$, e la sua ascissa curvilinea, misurata dal punto più basso, è $s = \ell\theta$ con $\theta$ in radianti. Il modello descrive un corpo piccolo e pesante appeso a un filo leggero, come una sfera di metallo appesa a un filo sottile. Nel pendolo il periodo si indica con $T_0$, perché la lettera $T$ indica il modulo della tensione del filo.
 :::
 
 ::::teorema{#periodo-del-pendolo titolo="Periodo del pendolo per piccole oscillazioni"}
-Per un pendolo semplice di lunghezza $\ell $ l'angolo soddisfa l'equazione
+Per un pendolo semplice di lunghezza $\ell$ l'angolo soddisfa l'equazione
 $$
 \ddot{\theta} = -\frac{g}{\ell}\sin\theta .
 $$
@@ -213,27 +213,27 @@ Per piccole oscillazioni, cioè per ampiezze angolari tali che $\sin\theta \appr
 $$
 \omega = \sqrt{\frac{g}{\ell}},
 \qquad
-T = 2\pi\sqrt{\frac{\ell}{g}} .
+T_0 = 2\pi\sqrt{\frac{\ell}{g}} .
 $$
-Il periodo *non* dipende dalla massa e, nel limite delle piccole oscillazioni, nemmeno dall'ampiezza. La formula serve sia a calcolare il periodo sia, misurando $T$ e $\ell $, a ricavare l'accelerazione di gravità $g = \dfrac{4\pi^2 \ell}{T^2}$. Un pendolo lungo $1{,}00\,\mathrm{m}$ ha $T = 2{,}01\,\mathrm{s}$.
+Il periodo *non* dipende dalla massa e, nel limite delle piccole oscillazioni, nemmeno dall'ampiezza. La formula serve sia a calcolare il periodo sia, misurando $T_0$ e $\ell$, a ricavare l'accelerazione di gravità $g = \dfrac{4\pi^2 \ell}{T_0^2}$. Un pendolo lungo $1{,}00\,\mathrm{m}$ ha $T_0 = 2{,}01\,\mathrm{s}$.
 
-::grafico{curve="3.5*sin(t),-3.5*cos(t),-0.6,0.6" segmenti="0,0,1.75,-3.031;0,0,0,-3.9" vettori="1.75,-3.031,0.75,-1.299;1.75,-3.031,1.75,-5.431;1.75,-3.031,0.711,-3.631;1.75,-3.031,2.789,-4.831" punti="0,0,pieno,O;1.75,-3.031,pieno" etichette="0.12,-1.5,θ;1.4,-1.9,τ;1.9,-5.2,mg;2.75,-4.3,mg cosθ;-1.3,-3.95,mg sinθ" xmin=-2.5 xmax=4 ymin=-5.9 ymax=0.8 uguale=1 titolo="Forze sul pendolo: la tensione $\vec{\tau}$ lungo il filo e il peso $m\vec{g}$, che si scompone in $mg\cos\theta$ lungo il filo e $mg\sin\theta$ lungo la tangente alla traiettoria, verso la posizione di equilibrio"}
+::grafico{curve="3.5*sin(t),-3.5*cos(t),-0.6,0.6" segmenti="0,0,1.75,-3.031;0,0,0,-3.9" vettori="1.75,-3.031,0.75,-1.299;1.75,-3.031,1.75,-5.431;1.75,-3.031,0.711,-3.631;1.75,-3.031,2.789,-4.831" punti="0,0,pieno,O;1.75,-3.031,pieno" etichette="0.12,-1.5,θ;1.4,-1.9,T;1.9,-5.2,mg;2.75,-4.3,mg cosθ;-1.3,-3.95,mg sinθ" xmin=-2.5 xmax=4 ymin=-5.9 ymax=0.8 uguale=1 titolo="Forze sul pendolo: la tensione $\vec{T}$ lungo il filo e il peso $m\vec{g}$, che si scompone in $mg\cos\theta$ lungo il filo e $mg\sin\theta$ lungo la tangente alla traiettoria, verso la posizione di equilibrio"}
 
 :::dimostrazione
-Sul punto agiscono il peso $m\vec{g}$ e la tensione del filo, che si indica con $\vec{T}$ per distinguerla dal periodo. La tensione è diretta lungo il filo, quindi è perpendicolare alla traiettoria e non ha componente tangente. La componente del peso lungo la tangente, nel verso in cui $\theta$ cresce, è $-mg\sin\theta$. L'accelerazione tangenziale di un moto lungo una circonferenza di raggio $\ell $ è $\ddot{s} = \ell\ddot{\theta}$, perciò il secondo principio lungo la tangente dà
+Sul punto agiscono il peso $m\vec{g}$ e la tensione del filo $\vec{T}$. La tensione è diretta lungo il filo, quindi è perpendicolare alla traiettoria e non ha componente tangente. La componente del peso lungo la tangente, nel verso in cui $\theta$ cresce, è $-mg\sin\theta$. L'accelerazione tangenziale di un moto lungo una circonferenza di raggio $\ell$ è $\ddot{s} = \ell\ddot{\theta}$, perciò il secondo principio lungo la tangente dà
 $$
 mL\ddot{\theta} = -mg\sin\theta,
 \qquad\text{cioè}\qquad
 \ddot{\theta} = -\frac{g}{\ell}\sin\theta .
 $$
-La massa si semplifica perché compare sia nel peso sia nel prodotto massa per accelerazione. Per angoli piccoli si sostituisce $\sin\theta$ con $\theta$, poiché $\sin\theta = \theta + o(\theta)$ per $\theta \to 0$, e si ottiene $\ddot{\theta} = -\dfrac{g}{\ell}\,\theta$. Per l'**equazione del moto armonico** l'angolo oscilla con $\omega = \sqrt{\dfrac{g}{\ell}}$, quindi $T = 2\pi\sqrt{\dfrac{\ell}{g}}$.
+La massa si semplifica perché compare sia nel peso sia nel prodotto massa per accelerazione. Per angoli piccoli si sostituisce $\sin\theta$ con $\theta$, poiché $\sin\theta = \theta + o(\theta)$ per $\theta \to 0$, e si ottiene $\ddot{\theta} = -\dfrac{g}{\ell}\,\theta$. Per l'**equazione del moto armonico** l'angolo oscilla con $\omega = \sqrt{\dfrac{g}{\ell}}$, quindi $T_0 = 2\pi\sqrt{\dfrac{\ell}{g}}$.
 :::
 ::::
 
 :::osservazione{#approssimazione-piccoli-angoli titolo="Validità dell'approssimazione"}
 L'approssimazione $\sin\theta \approx \theta$ richiede l'angolo in radianti. A $10°$, cioè $0{,}1745\,\mathrm{rad}$, si ha $\sin\theta = 0{,}1736$, con uno scarto relativo dello $0{,}5\%$; perciò la formula del periodo è accurata per ampiezze fino a una decina di gradi. Per ampiezze maggiori il moto resta periodico ma non è più armonico, e il periodo cresce con l'ampiezza $\theta_0$; il primo termine della correzione dà
 $$
-T \approx 2\pi\sqrt{\frac{\ell}{g}}\left(1 + \frac{\theta_0^2}{16}\right) .
+T_0 \approx 2\pi\sqrt{\frac{\ell}{g}}\left(1 + \frac{\theta_0^2}{16}\right) .
 $$
 :::
 
@@ -244,13 +244,13 @@ T - mg\cos\theta = m\,\frac{v^2}{\ell},
 \qquad\text{quindi}\qquad
 T = mg\cos\theta + m\,\frac{v^2}{\ell} .
 $$
-La tensione è massima nel punto più basso, dove $\cos\theta = 1$ e la velocità è massima, e minima agli estremi, dove $v = 0$. Per un pendolo che parte da fermo dall'angolo $\theta_0$, la conservazione dell'energia meccanica dà la velocità nel punto più basso, $v^2 = 2gL\,(1 - \cos\theta_0)$. Per la forza centripeta si rimanda all'argomento sulle leggi di Newton.
+La tensione è massima nel punto più basso, dove $\cos\theta = 1$ e la velocità è massima, e minima agli estremi, dove $v = 0$. Per un pendolo che parte da fermo dall'angolo $\theta_0$, la conservazione dell'energia meccanica dà la velocità nel punto più basso, $v^2 = 2g\ell\,(1 - \cos\theta_0)$. Per la forza centripeta si rimanda all'argomento sulle leggi di Newton.
 :::
 
 :::osservazione{#pendolo-in-un-sistema-accelerato titolo="Pendolo in un sistema accelerato"}
 In un ascensore che sale con accelerazione costante $a$, nel riferimento dell'ascensore sul punto agisce anche la forza apparente $-m\vec{a}$, diretta verso il basso, che si somma al peso. Il pendolo si comporta quindi come in un campo di gravità di intensità $g + a$, e il periodo per piccole oscillazioni diventa
 $$
-T = 2\pi\sqrt{\frac{\ell}{g + a}} ,
+T_0 = 2\pi\sqrt{\frac{\ell}{g + a}} ,
 $$
 più breve che con l'ascensore fermo. Se l'ascensore ha accelerazione $a < g$ diretta verso il basso, al posto di $g + a$ si scrive $g - a$. Per le forze apparenti si rimanda all'argomento sulle leggi di Newton.
 :::
@@ -268,7 +268,7 @@ $$
 \qquad
 T = 2\pi\sqrt{\frac{I}{mgd}} .
 $$
-Il pendolo fisico oscilla con lo stesso periodo di un pendolo semplice di lunghezza $\ell = \dfrac{I}{md}$, detta **lunghezza ridotta**. Per un pendolo semplice $I = mL^2$ e $d = L$, e la formula restituisce $T = 2\pi\sqrt{\dfrac{L}{g}}$. Per un'asta omogenea di lunghezza $L$ sospesa a un estremo si ha $I = \dfrac{1}{3}mL^2$ e $d = \dfrac{L}{2}$, quindi $T = 2\pi\sqrt{\dfrac{2L}{3g}}$; con $L = 1{,}00\,\mathrm{m}$ si ottiene $T = 1{,}64\,\mathrm{s}$, contro i $2{,}01\,\mathrm{s}$ del pendolo semplice della stessa lunghezza.
+Il pendolo fisico oscilla con lo stesso periodo di un pendolo semplice di lunghezza $\ell = \dfrac{I}{md}$, detta **lunghezza ridotta**. Per un pendolo semplice di lunghezza $\ell$ si ha $I = m\ell^2$ e $d = \ell$, e la formula restituisce il periodo $2\pi\sqrt{\dfrac{\ell}{g}}$ del pendolo semplice. Per un'asta omogenea di lunghezza $L$ sospesa a un estremo si ha $I = \dfrac{1}{3}mL^2$ e $d = \dfrac{L}{2}$, quindi $T = 2\pi\sqrt{\dfrac{2L}{3g}}$; con $L = 1{,}00\,\mathrm{m}$ si ottiene $T = 1{,}64\,\mathrm{s}$, contro i $2{,}01\,\mathrm{s}$ del pendolo semplice della stessa lunghezza.
 
 :::dimostrazione
 Sia $\theta$ l'angolo tra la verticale per l'asse e il segmento che congiunge l'asse con $G$. Le forze esterne sono il peso, applicato in $G$, e la reazione dell'asse, che ha momento nullo perché è applicata sull'asse. Il peso ha braccio $d\sin\theta$ e tende a riportare il corpo nella posizione $\theta = 0$, quindi il suo momento è $M = -mgd\sin\theta$. La **seconda equazione cardinale** dà
@@ -348,7 +348,7 @@ x(t) = A(\Omega)\cos(\Omega t - \delta),
 \qquad
 A(\Omega) = \frac{F_0}{m\sqrt{(\omega_0^2 - \Omega^2)^2 + 4\gamma^2\Omega^2}},
 $$
-dove lo sfasamento $\delta \in (0, \pi)$ soddisfa $\tan\delta = \dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$. Il corpo oscilla alla pulsazione della forzante, con un'ampiezza che dipende da $\Omega$ e in ritardo rispetto alla forza. Il transitorio è la soluzione dell'omogenea, che si smorza come $e^{-\gamma t}$; per questo il **regime stazionario** non dipende dalle condizioni iniziali. La soluzione particolare si trova con il metodo di somiglianza, nella forma $a\cos(\Omega t) + c\sin(\Omega t)$ (si rimanda all'argomento di Analisi 1 sulle equazioni differenziali). Per $\Omega \to 0$ l'ampiezza tende a $\dfrac{F_0}{m\omega_0^2} = \dfrac{F_0}{k}$, l'allungamento statico prodotto dalla forza $F_0$, e per $\Omega \to +\infty$ tende a $0$. Se lo smorzamento è trascurabile si pone $\gamma = 0$, e per $\Omega \neq \omega_0$ la soluzione particolare ha ampiezza $\dfrac{F_0}{m\,|\omega_0^2 - \Omega^2|}$.
+dove lo sfasamento $\delta \in (0, \pi)$ soddisfa $\tan\delta = \dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$. Il corpo oscilla alla pulsazione della forzante, con un'ampiezza che dipende da $\Omega$ e in ritardo rispetto alla forza. Il transitorio è la soluzione dell'omogenea, che tende a zero esponenzialmente (come $e^{-\gamma t}$ nel caso di smorzamento debole); per questo il **regime stazionario** non dipende dalle condizioni iniziali. La soluzione particolare si trova con il metodo di somiglianza, nella forma $a\cos(\Omega t) + c\sin(\Omega t)$ (si rimanda all'argomento di Analisi 1 sulle equazioni differenziali). Per $\Omega \to 0$ l'ampiezza tende a $\dfrac{F_0}{m\omega_0^2} = \dfrac{F_0}{k}$, l'allungamento statico prodotto dalla forza $F_0$, e per $\Omega \to +\infty$ tende a $0$. Se lo smorzamento è trascurabile si pone $\gamma = 0$, e per $\Omega \neq \omega_0$ la soluzione particolare ha ampiezza $\dfrac{F_0}{m\,|\omega_0^2 - \Omega^2|}$.
 :::
 
 ::::teorema{#risonanza titolo="Risonanza"}
