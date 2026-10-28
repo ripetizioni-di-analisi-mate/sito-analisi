@@ -49,7 +49,10 @@ export default function remarkBlocchi() {
       const classi = ['blocco', `blocco-${nome}`];
 
       if (APRIBILI[nome]) {
-        const summary = h('summary', { class: 'blocco-etichetta' }, APRIBILI[nome]);
+        // La soluzione cambia etichetta quando è aperta: "Mostra soluzione" / "Nascondi soluzione".
+        const summary = nome === 'soluzione'
+          ? h('summary', { class: 'blocco-etichetta' }, [h('span', { class: 'se-chiuso' }, 'Mostra soluzione'), h('span', { class: 'se-aperto' }, 'Nascondi soluzione')])
+          : h('summary', { class: 'blocco-etichetta' }, APRIBILI[nome]);
         data.hName = 'details';
         data.hProperties = { class: classi.join(' '), id: a.id };
         node.children.unshift({ type: 'html', value: toHtml(summary) });

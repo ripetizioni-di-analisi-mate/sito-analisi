@@ -3,11 +3,11 @@
 //  - esercizi da fare: traccia visibile, soluzione sostituita dall'invito.
 // Il Worker serve queste varianti a chi non ha l'accesso. Le schede svolte
 // oltre la terza e i PDF non hanno variante: il Worker manda alla pagina Sblocca.
-// Tenere l'elenco allineato a "prezzo" in src/data/materie.ts.
+// Le materie a pagamento sono quelle elencate in src/data/prezzi.json.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 
-const A_PAGAMENTO = ['analisi-1', 'analisi-2'];
+const A_PAGAMENTO = Object.keys(JSON.parse(readFileSync(new URL('../src/data/prezzi.json', import.meta.url), 'utf8')));
 const DIST = new URL('../dist', import.meta.url).pathname;
 
 // Sostituisce i blocchi <details> "Mostra soluzione" rispettando l'annidamento.
@@ -33,7 +33,7 @@ function senzaSoluzioni(html, invito) {
 }
 
 function invitoHtml(materia, cosa) {
-  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="/${materia}/sblocca">Sblocca ora →</a></div>`;
+  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="/${materia}/sblocca">Sblocca ora</a></div>`;
 }
 
 let teorie = 0, esercizi = 0;
@@ -65,6 +65,12 @@ for (const materia of A_PAGAMENTO) {
       vetrina = vetrina.replace(/<p class="collegamenti">PDF dell'argomento[\s\S]*?<\/p>/, '');
       writeFileSync(join(dest, 'teoria.html'), vetrina);
       teorie++;
+    }
+
+    // --- elenco degli esercizi da fare: tracce visibili, soluzioni tolte ---
+    if (existsSync(join(cartella, 'esercizi.html'))) {
+      const el = readFileSync(join(cartella, 'esercizi.html'), 'utf8');
+      writeFileSync(join(dest, 'esercizi.html'), senzaSoluzioni(el, '<p class="soluzione-riservata">Soluzione riservata a chi ha sbloccato la materia.</p>'));
     }
 
     // --- esercizi da fare: soluzioni oscurate ---

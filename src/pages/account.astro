@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+const aPagamento = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.titolo, prezzo: m.prezzo, colore: m.colore }));
+---
+<Base titolo="Il tuo account" percorso={[{ titolo: 'Account' }]} descrizione="Le tue materie e i dati del tuo account.">
+  <h1>Il tuo account</h1>
+  <p class="sommario" id="chi">Caricamento…</p>
+
+  <section id="pannello" hidden>
+    <h2>Le tue materie</h2>
+    <ul class="materie-account" id="materie"></ul>
+
+    <h2>Cambia password</h2>
+    <form class="modulo" id="cambio" novalidate>
+      <label>Password attuale<input type="password" name="attuale" autocomplete="current-password" required /></label>
+      <label>Nuova password<input type="password" name="nuova" autocomplete="new-password" minlength="8" required /></label>
+      <p class="esito-modulo" id="esito-cambio" role="status"></p>
+      <button class="bottone-secondario" type="submit">Aggiorna la password</button>
+    </form>
+
+    <p><button class="bottone-secondario" type="button" id="esci">Esci dall'account</button></p>
+  </section>
+
+  <script is:inline define:vars={{ aPagamento }}>
+    (async () => {
+      const r = await fetch('/api/io').catch(() => null);
+      if (!r || r.status === 401) { location.href = '/accedi?dopo=/account'; return; }
+      const io = await r.json();
+      document.getElementById('chi').textContent = `Hai effettuato l'accesso come ${io.email}.`;
+      const lista = document.getElementById('materie');
+      for (const m of aPagamento) {
+        const li = document.createElement('li');
+        li.style.setProperty('--accento', m.colore);
+        const ha = io.materie.includes(m.slug);
+        li.innerHTML = `<span class="tacca"></span><span class="nome">${m.titolo}</span>` + (ha
+          ? `<span class="stato-ok">Sbloccata ✓</span> <a class="bottone-secondario" href="/${m.slug}">Studia</a>`
+          : `<a class="bottone-primario" href="/${m.slug}/sblocca">Sblocca · ${m.prezzo} €</a>`);
+        lista.appendChild(li);
+      }
+      document.getElementById('pannello').hidden = false;
+
+      document.getElementById('esci').addEventListener('click', async () => {
+        await fetch('/api/esci', { method: 'POST' }).catch(() => {});
+        location.href = '/';
+      });
+
+      const cambio = document.getElementById('cambio');
+      const esito = document.getElementById('esito-cambio');
+      cambio.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (cambio.nuova.value.length < 8) { esito.textContent = 'La nuova password deve avere almeno 8 caratteri.'; esito.className = 'esito-modulo errore'; return; }
+        const r = await fetch('/api/password', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ attuale: cambio.attuale.value, nuova: cambio.nuova.value }) });
+        const d = await r.json().catch(() => ({}));
+        esito.textContent = r.ok ? 'Password aggiornata.' : (d.errore || 'Non è stato possibile aggiornare la password.');
+        esito.className = r.ok ? 'esito-modulo' : 'esito-modulo errore';
+        if (r.ok) cambio.reset();
+      });
+    })();
+  </script>
+</Base>

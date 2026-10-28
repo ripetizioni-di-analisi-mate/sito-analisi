@@ -12,14 +12,12 @@
     "VENDITA": "1",
     // Paddle: identificativi pubblici dei due prezzi (non sono segreti)
     "PADDLE_AMBIENTE": "production",
+    "PADDLE_PREZZO_PRECORSO": "pri_01m60xgef8rr7t089736k3fa3z",
     "PADDLE_PREZZO_ANALISI_1": "pri_01m5z6aynthpe6w821c27ycaxk",
     "PADDLE_PREZZO_ANALISI_2": "pri_01m5z6cfsrj5ss4kd532hkgpd7"
-    // Segreti da impostare nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets),
-    // mai in questo file: "ADMIN_PASSWORD" (password della dashboard) e
-    // "CHIAVE_ACCESSO" (firma dei link personali; cambiarla invalida i link gia' consegnati).
-    // Quando Paddle è pronto, aggiungere lì anche:
-    // "PADDLE_CLIENT_TOKEN", "PADDLE_AMBIENTE" ("sandbox" o "production"),
-    // "PADDLE_PREZZO_ANALISI_1", "PADDLE_PREZZO_ANALISI_2", e come segreto "PADDLE_WEBHOOK_SECRET".
-    // Per le email: "RESEND_API_KEY" (segreto) e "MITTENTE".
+    // Dopo l'approvazione Paddle va aggiunto qui "PADDLE_CLIENT_TOKEN" (token pubblico del checkout).
+    // Segreti, solo nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets), mai in questo file:
+    // "ADMIN_PASSWORD" (dashboard), "CHIAVE_ACCESSO" (firma di sessioni e link: cambiarla scollega tutti),
+    // "PADDLE_WEBHOOK_SECRET". Per le email automatiche: "RESEND_API_KEY" (segreto) e "MITTENTE".
   }
 }

@@ -17,7 +17,7 @@ const Teoria = voce ? (await render(voce)).Content : null;
 const svolti = await Promise.all(perArgomento(await getCollection('svolti'), materia!, argomento!).map(async (v) => ({ v, Content: (await render(v)).Content })));
 const dafare = await Promise.all(perArgomento(await getCollection('dafare'), materia!, argomento!).map(async (v) => ({ v, Content: (await render(v)).Content })));
 ---
-<Base titolo={`${arg.titolo} · Stampa`} materia={materia} argomento={argomento}>
+<Base titolo={`${arg.titolo} · Stampa`} materia={materia} argomento={argomento} sezione="stampa">
   <div class="stampa">
     <p class="sopratitolo">{m.titolo}</p>
     <h1>{arg.titolo}</h1>
