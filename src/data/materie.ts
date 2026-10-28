@@ -107,7 +107,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: 'Cinematica, dinamica del punto e del corpo rigido, lavoro ed energia, urti, oscillazioni, gravitazione, fluidi e termodinamica.',
     colore: '#b0543a',
     gruppo: 'Università',
-    attiva: false, // diventa true quando gli argomenti sono scritti e verificati
+    attiva: true,
     argomenti: [
       { slug: 'grandezze-e-vettori', titolo: 'Grandezze fisiche, unità di misura e vettori', breve: 'Grandezze e vettori' },
       { slug: 'cinematica-1d', titolo: 'Cinematica in una dimensione', breve: 'Cinematica 1D' },
