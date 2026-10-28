@@ -1,4 +1,6 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import { existsSync } from 'node:fs';
 import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
@@ -21,6 +23,7 @@ const { precedente, successivo } = vicini(materia, argomento, 'teoria', lingua);
 const elenco = materiaL(lingua, materia).argomenti;
 const dopo = elenco[elenco.findIndex((a) => a.slug === argomento) + 1];
 const prossimo = dopo && { titolo: dopo.titolo, href: link(lingua, `/${materia}/${dopo.slug}/teoria`) };
+const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'teoria', `${materia}/${argomento}`)).tradotta;
 const pdf = existsSync(new URL(`../../public/pdf/${materia}/${argomento}.pdf`, import.meta.url));
 const base = `/${materia}/${argomento}`;
 
@@ -34,6 +37,13 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
   descrizione={voce?.data.sommario}
+  seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, schema: [{ ...{
+  '@type': 'LearningResource', name: arg.titolo, description: voce?.data.sommario, learningResourceType: 'Lesson', inLanguage: lingua,
+  educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
+  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
+  provider: { '@id': `${SITO}/#organizzazione` },
+  isAccessibleForFree: !materiaL(lingua, materia).prezzo,
+}, teaches: sezioni.map((x: { text: string }) => x.text) }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria }]}
   materia={materia} argomento={argomento} sezione="teoria"
   precedente={precedente} successivo={successivo} prossimo={prossimo}
@@ -54,7 +64,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   {Contenuto ? <div class="testo-studio"><Contenuto /></div> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
   <script is:inline define:vars={{ usi, basi, parole }}>
     for (const [id, u] of Object.entries(usi)) {
-      const b = document.getElementById(id);
+      const b = document.querySelector(`.blocco[id="${CSS.escape(id)}"]`) || document.getElementById(id);
       if (!b) continue;
       const link = (base, n) => `<a href="${base.replace(/\.html$/, '')}/${n}${base.endsWith('.html') ? '.html' : ''}">${n}</a>`;
       const parti = [];

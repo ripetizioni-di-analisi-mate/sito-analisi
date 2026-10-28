@@ -9,6 +9,7 @@ import Indice from '../components/Indice.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
+import { SITO, assoluto, ORGANIZZAZIONE, briciole } from '../lib/seo';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
 const WHATSAPP = 'https://wa.me/393885680393';
@@ -26,13 +27,34 @@ interface Props {
   prossimo?: { titolo: string; href: string };
   lingua?: Lingua;
   nonTradotta?: boolean; // pagina inglese non ancora tradotta: si mostra l'italiano con un avviso
+  // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
+  // pagine senza versione nell'altra lingua.
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean };
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false } = Astro.props;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, seo = {} } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const altra: Lingua = lingua === 'it' ? 'en' : 'it';
 const versoAltra = altraLingua(Astro.url.pathname, altra);
-const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`;
+const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
+
+// Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
+const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+const versioneIt = qui.replace(/^\/en(?=\/|$)/, '') || '/';
+const versioneEn = versioneIt === '/' ? '/en' : `/en${versioneIt}`;
+const canonico = assoluto(nonTradotta ? versioneIt : qui);
+const bilingue = !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa';
+const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
+const descrizioneSeo = descrizione ?? t.homeDescrizione;
+const percorsoSchema = [
+  { nome: t.materie, url: assoluto(link(lingua, '/')) },
+  ...(m ? [{ nome: m.titolo, url: assoluto(link(lingua, `/${m.slug}`)) }] : []),
+  ...percorso.map((p, i) => ({ nome: p.titolo, url: p.href && i < percorso.length - 1 ? assoluto(p.href) : canonico })),
+];
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [ORGANIZZAZIONE, ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
+};
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
 // Spunte delle materie sbloccate: il Worker scrive su <html> data-materie="analisi-1 precorso ...".
@@ -48,9 +70,25 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <style is:inline set:html={regoleStato}></style>
   <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
-  <link rel="alternate" hreflang={altra} href={versoAltra} />
   <title>{titoloCompleto}</title>
-  {descrizione && <meta name="description" content={descrizione} />}
+  <meta name="description" content={descrizioneSeo} />
+  <link rel="canonical" href={canonico} />
+  {bilingue && <link rel="alternate" hreflang="it" href={assoluto(versioneIt)} />}
+  {bilingue && <link rel="alternate" hreflang="en" href={assoluto(versioneEn)} />}
+  {bilingue && <link rel="alternate" hreflang="x-default" href={assoluto(versioneIt)} />}
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  <meta property="og:type" content={seo.tipo ?? 'website'} />
+  <meta property="og:site_name" content={NOME_SITO} />
+  <meta property="og:title" content={titoloCompleto} />
+  <meta property="og:description" content={descrizioneSeo} />
+  <meta property="og:url" content={canonico} />
+  <meta property="og:image" content={`${SITO}/og.png`} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lingua === 'it' ? 'it_IT' : 'en_US'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="apple-touch-icon" href={url('/logo-180.png')} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#faf8f2" />
   <script is:inline>
@@ -85,6 +123,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       </a>
       <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
+        <span class="iniziale" aria-hidden="true"></span>
         <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
       </a>
     </div>
@@ -111,11 +150,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <slot />
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
-            {precedente && <a class="precedente" href={precedente.href}><small>← {t.precedente}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</small>{precedente.titolo}</a>}
-            {successivo && <a class="successivo" href={successivo.href}><small>{t.successivo} →{successivo.sotto ? ` · ${successivo.sotto}` : ''}</small>{successivo.titolo}</a>}
+            {successivo && <a class="successivo" href={successivo.href}><small>{t.successivo}</small><span>{successivo.titolo}{successivo.sotto ? <em> · {successivo.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
+            {precedente && <a class="precedente" href={precedente.href}>← {precedente.titolo}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</a>}
           </nav>
         )}
-        {prossimo && <p class="prossimo-argomento"><a href={prossimo.href}>{t.argomentoSuccessivo}: {prossimo.titolo} →</a></p>}
       </div>
     </main>
   </div>

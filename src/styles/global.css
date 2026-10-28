@@ -67,7 +67,7 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
   font-family: var(--ui);
 }
 .marchio { font-family: var(--titoli); font-weight: 700; font-size: 1.1rem; color: var(--inchiostro); text-decoration: none; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-@media (max-width: 30rem) { .marchio { font-size: 0.95rem; } .bottone-cerca span, .bottone-indice span, .bottone-account span { display: none !important; } .bottone-cerca, .bottone-indice, .bottone-account, .bottone-lingua { padding: 0.4rem 0.5rem; } .bottone-lingua svg { display: none; } .testata-interna { gap: 0.5rem; } }
+@media (max-width: 30rem) { .marchio { font-size: 0.95rem; } .bottone-cerca span, .bottone-indice span, .bottone-account span:not(.iniziale) { display: none !important; } .bottone-cerca, .bottone-indice, .bottone-account, .bottone-lingua { padding: 0.4rem 0.5rem; } .bottone-lingua svg { display: none; } .testata-interna { gap: 0.5rem; } }
 @media (max-width: 24rem) { .marchio > span { display: none; } }
 .marchio { display: inline-flex; align-items: center; gap: 0.5rem; }
 .marchio .logo { width: 32px; height: 32px; flex: none; }
@@ -154,11 +154,16 @@ main {
 .sommario { color: var(--inchiostro-2); font-size: 1.05rem; margin-top: 0.5rem; }
 
 /* precedente / successivo */
-.passi { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--riga); font-family: var(--ui); }
-.passi a { display: block; text-decoration: none; color: var(--inchiostro); padding: 0.6rem 0.75rem; border: 1px solid var(--riga); border-radius: var(--raggio); min-width: 0; }
-.passi a:hover { border-color: var(--accento); }
-.passi .successivo { text-align: right; grid-column: 2; }
-.passi small { display: block; color: var(--inchiostro-2); font-size: 0.78rem; }
+/* fine pagina: un solo invito ad andare avanti, il ritorno è un collegamento discreto */
+.passi { display: flex; flex-direction: column; align-items: stretch; gap: 0.7rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--riga); font-family: var(--ui); }
+.passi .successivo { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 0.8rem; text-decoration: none; color: var(--inchiostro); padding: 0.75rem 1rem; border-radius: var(--raggio); border: 1px solid color-mix(in srgb, var(--accento) 35%, transparent); background: color-mix(in srgb, var(--accento) 7%, transparent); }
+.passi .successivo:hover { background: color-mix(in srgb, var(--accento) 12%, transparent); }
+.passi .successivo small { grid-column: 1; color: var(--accento); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.passi .successivo span { grid-column: 1; font-size: 1.05rem; font-weight: 600; }
+.passi .successivo em { font-style: normal; font-weight: 400; color: var(--inchiostro-2); }
+.passi .successivo .freccia-avanti { grid-column: 2; grid-row: 1 / span 2; font-size: 1.4rem; color: var(--accento); }
+.passi .precedente { align-self: flex-start; color: var(--inchiostro-2); font-size: 0.88rem; text-decoration: none; }
+.passi .precedente:hover { text-decoration: underline; }
 
 .pie { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); border-top: 1px solid var(--riga); padding: 1.25rem max(16px, env(safe-area-inset-left, 0px)) 2rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.6rem 1.5rem; max-width: 76rem; margin: 0 auto; }
 .pie-link { display: flex; flex-wrap: wrap; gap: 0.3rem 0; }
@@ -267,9 +272,6 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .salta-esercizi a:hover { border-color: var(--accento); }
 
 /* ---------- argomento successivo e torna su ---------- */
-.prossimo-argomento { margin: 0.9rem 0 0; text-align: right; font-family: var(--ui); }
-.prossimo-argomento a { color: var(--accento); text-decoration: none; font-weight: 600; }
-.prossimo-argomento a:hover { text-decoration: underline; }
 .bottoni-fissi { position: fixed; right: 1rem; bottom: 1rem; z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
 .torna-su { width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--riga); background: white; color: var(--accento); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: grid; place-items: center; }
 .torna-su svg { width: 1.1rem; height: 1.1rem; }
@@ -508,3 +510,18 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .venn .universo { fill: none; stroke: var(--inchiostro-2); stroke-width: 1.5; }
 .venn .nome-insieme { font-family: var(--testo); font-style: italic; font-size: 26px; fill: var(--inchiostro); }
 .venn .elementi { font-family: var(--testo); font-size: 19px; fill: var(--inchiostro); }
+
+/* studente collegato: cerchietto con l'iniziale e nome nel pulsante dell'account */
+.bottone-account .iniziale { display: none; }
+html.collegato .bottone-account { background: color-mix(in srgb, var(--verde) 8%, transparent); border-color: color-mix(in srgb, var(--verde) 45%, transparent); color: var(--inchiostro); font-weight: 600; }
+html.collegato .bottone-account svg { display: none; }
+html.collegato .bottone-account .iniziale { display: inline-grid; place-items: center; width: 1.55rem; height: 1.55rem; border-radius: 50%; background: var(--verde); color: #fff; font-size: 0.85rem; font-weight: 700; line-height: 1; }
+@media (max-width: 30rem) { html.collegato .bottone-account { padding: 0.25rem; border-radius: 999px; width: 2.4rem; justify-content: center; } }
+.modulo-riga { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.modulo-riga input { flex: 1 1 12rem; }
+.modulo-riga .esito-modulo { flex-basis: 100%; margin: 0; }
+
+/* titoli dei blocchi: in evidenza, nel colore del blocco, un gradino sotto i titoli di sezione */
+.blocco:not(details) > .blocco-etichetta { font-family: var(--titoli); font-size: 1.18rem; font-weight: 700; letter-spacing: 0; text-transform: none; margin: 0 0 0.45rem; line-height: 1.25; }
+.blocco-esempio > .blocco-etichetta, .blocco-osservazione > .blocco-etichetta, .blocco-attenzione > .blocco-etichetta, .blocco-richiamo > .blocco-etichetta { font-size: 1.05rem; }
+.numero-blocco { font-variant-numeric: tabular-nums; margin-right: 0.15rem; }

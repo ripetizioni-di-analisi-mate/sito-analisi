@@ -1,4 +1,6 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
@@ -14,9 +16,16 @@ const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 ---
-<Base titolo={t.argomentiEsame} descrizione={m.descrizione} materia={materia} lingua={lingua}>
-  <p class="sopratitolo">{m.titolo}</p>
-  <h1>{t.argomentiEsame}</h1>
+<Base titolo={t.argomentiEsame} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
+  '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
+  url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livello,
+  provider: { '@id': `${SITO}/#organizzazione` },
+  syllabusSections: m.argomenti.map((a) => ({ '@type': 'Syllabus', name: a.titolo, url: assoluto(link(lingua, `/${m.slug}/${a.slug}/teoria`)) })),
+  hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'P30D' },
+  ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
+}] }}>
+  <p class="sopratitolo">{t.argomentiEsame}</p>
+  <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {m.prezzo && (
     <div class="riquadro-stato" data-materia={m.slug}>

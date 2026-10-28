@@ -1,8 +1,10 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
 import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
-import { argomentoL, link, voceL, T, type Lingua } from '../i18n';
+import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { numero, perArgomento } from '../lib/nav';
 interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
 const { lingua, materia, argomento, n } = Astro.props;
@@ -13,6 +15,7 @@ const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'svolti', id);
 const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'svolti', v.id)).voce.data.titolo;
 const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
+const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'svolti', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
 const resa = await render(voce);
 const Content = resa.Content;
@@ -24,7 +27,14 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
 ---
 <Base
   titolo={`${arg.breve} · ${t.sezioni['esercizi-svolti']} ${n}`}
-  descrizione={voce.data.titolo}
+  descrizione={SEO(lingua).schedaDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo)}
+  seo={{ titolo: SEO(lingua).scheda(voce.data.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, schema: [{ ...{
+  '@type': 'LearningResource', name: voce.data.titolo, description: SEO(lingua).schedaDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo), learningResourceType: 'Worked example', inLanguage: lingua,
+  educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
+  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
+  provider: { '@id': `${SITO}/#organizzazione` },
+  isAccessibleForFree: !materiaL(lingua, materia).prezzo,
+}, keywords: (voce.data.parole ?? []).join(', ') }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'], href: lista }, { titolo: `${t.scheda} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"
   precedente={passo(fratelli[i - 1], tPrec) ?? { titolo: t.tutteLeSchede, sotto: arg.breve, href: lista }}

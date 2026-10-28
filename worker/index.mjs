@@ -67,6 +67,8 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
       CREATE TABLE IF NOT EXISTS dispositivi (email TEXT, id TEXT, nome TEXT, creato TEXT, ultimo_uso INTEGER, PRIMARY KEY (email, id));
     `);
+    // colonne aggiunte dopo: il nome dello studente
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -88,8 +90,8 @@ export class Archivio {
 
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
-        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso) VALUES (?, ?, ?, ?, 1, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora);
+        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome) VALUES (?, ?, ?, ?, 1, ?, ?, ?)',
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null);
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
@@ -105,14 +107,14 @@ export class Archivio {
         return Response.json({ ok: Boolean(u), versione: u?.versione });
       }
       case '/sessione': { // verifica che la sessione sia ancora valida e restituisce le materie
-        const u = this.riga('SELECT email, versione, creato FROM utenti WHERE email = ?', c.email);
+        const u = this.riga('SELECT email, versione, creato, nome FROM utenti WHERE email = ?', c.email);
         if (!u || u.versione !== c.versione) return Response.json(null);
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
         const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
         if (!d) return Response.json(null);
         if (Date.now() - d.ultimo_uso > 3600 * 1000) this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
         const dispositivi = this.dispositiviDi(u.email).map((x) => ({ nome: x.nome, questo: x.id === c.dispositivo }));
-        return Response.json({ email: u.email, creato: u.creato, materie: this.materieDi(u.email), dispositivi });
+        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi });
       }
       case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
         this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND ultimo_uso < ?', c.email, Date.now() - 60 * 86400 * 1000);
@@ -128,6 +130,10 @@ export class Archivio {
       case '/dispositivo-rimuovi':
         if (c.id) this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id);
         else this.sql.exec('DELETE FROM dispositivi WHERE email = ?', c.email);
+        return Response.json({ ok: true });
+
+      case '/utente-nome':
+        this.sql.exec('UPDATE utenti SET nome = ? WHERE email = ?', c.nome || null, c.email);
         return Response.json({ ok: true });
 
       case '/abilita':
@@ -153,7 +159,7 @@ export class Archivio {
           visitePerSezione: this.righe('SELECT sezione, SUM(n) AS n FROM visite GROUP BY sezione ORDER BY n DESC LIMIT 12'),
           acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
-          utenti: this.righe(`SELECT u.email, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
+          utenti: this.righe(`SELECT u.email, u.nome, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
@@ -217,6 +223,9 @@ async function utenteCollegato(env, req) {
   return aDO(env, '/sessione', { email: t.e, versione: t.v, dispositivo: t.d });
 }
 
+// Nome mostrato in testata: quello scelto dallo studente, altrimenti la parte dell'email prima della @.
+const pulisciNome = (n) => String(n || '').replace(/[<>"\u0000-\u001f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40);
+const nomeVisibile = (io) => (io.nome || io.email.split('@')[0]).trim();
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
 // ---------- percorsi protetti ----------
@@ -265,13 +274,13 @@ export default {
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
       if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2 });
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome) });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
@@ -299,6 +308,13 @@ export default {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'non collegato' }, 401);
       return json(io);
+    }
+    if (p === '/api/nome' && POST) {
+      const io = await utenteCollegato(env, req);
+      if (!io) return json({ errore: 'Accedi di nuovo.' }, 401);
+      const { nome } = await req.json().catch(() => ({}));
+      await aDO(env, '/utente-nome', { email: io.email, nome: pulisciNome(nome) });
+      return json({ ok: true, nome: pulisciNome(nome) });
     }
     if (p === '/api/password' && POST) {
       const t = await tokenSessione(env, req);
@@ -365,7 +381,7 @@ export default {
     }
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -432,6 +448,11 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
+    // Copie interne delle anteprime: mai negli indici dei motori di ricerca (la pagina vera è quella canonica).
+    if (url.pathname.startsWith('/vetrine/')) {
+      risposta = new Response(risposta.body, risposta);
+      risposta.headers.set('x-robots-tag', 'noindex');
+    }
     const html = (risposta.headers.get('content-type') || '').includes('text/html');
 
     // Pagine: mai copie riusate, né dal browser né da cache intermedie.
@@ -443,7 +464,14 @@ export default {
     }
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
-      risposta = new HTMLRewriter().on('html', {
+      const nome = nomeVisibile(io);
+      risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
+        element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
+      }).on('.bottone-account .iniziale', {
+        element(e) { e.setInnerContent([...nome][0]?.toUpperCase() || '·'); },
+      }).on('.bottone-account', {
+        element(e) { e.setAttribute('aria-label', `Account di ${nome}`); },
+      }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
           e.setAttribute('class', classi);

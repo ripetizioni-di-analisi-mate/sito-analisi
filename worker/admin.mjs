@@ -84,10 +84,10 @@ function disegnaIscritti(){
   const pill=(email,m)=>'<span class="pill '+(origine[email+'|'+m]==='manuale'?'manuale':'')+'">'+esc(NOMI[m]||m)+' <button class="piccolo" title="Revoca" onclick="revoca(\\''+esc(email)+'\\',\\''+m+'\\')">×</button></span>';
   const disp={};(D.dispositivi||[]).forEach(d=>{(disp[d.email]||=[]).push(d)});
   const celDisp=email=>{const l=disp[email]||[];return l.length?(l.map(d=>'<span class="pill dispositivo">'+esc(d.nome)+'</span>').join('')+' <button class="piccolo" title="Scollega tutti i dispositivi" onclick="scollega(\\''+esc(email)+'\\')">scollega</button>'):'<span class="nota">nessuno</span>'};
-  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th><th>Dispositivi (max 2)</th></tr>'+
-    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td><td>'+celDisp(u.email)+'</td></tr>').join('')+
-    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td><td></td></tr>').join('')+
-    (righe.length+inAttesa.length?'':'<tr><td colspan="5" class="nota">Nessun iscritto.</td></tr>');
+  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Nome</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th><th>Dispositivi (max 2)</th></tr>'+
+    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+esc(u.nome||'')+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td><td>'+celDisp(u.email)+'</td></tr>').join('')+
+    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td></td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td><td></td></tr>').join('')+
+    (righe.length+inAttesa.length?'':'<tr><td colspan="6" class="nota">Nessun iscritto.</td></tr>');
 }
 async function abilita(){
   const email=document.getElementById('a-email').value.trim();
@@ -107,7 +107,7 @@ async function reimposta(){
   e.innerHTML=r.errore?esc(r.errore):('Password provvisoria per <b>'+esc(email)+'</b>: <b>'+esc(r.password)+'</b><br><span class="nota">Comunicala allo studente: potrà cambiarla dal suo account. Le sessioni aperte con la vecchia password vengono chiuse.</span>');
 }
 function esporta(){
-  if(!D)return;const righe=[['email','iscritto','ultimo_accesso','materie']].concat(D.utenti.map(u=>[u.email,u.creato,u.ultimo_accesso||'',u.materie||'']));
+  if(!D)return;const righe=[['email','nome','iscritto','ultimo_accesso','materie']].concat(D.utenti.map(u=>[u.email,u.nome||'',u.creato,u.ultimo_accesso||'',u.materie||'']));
   const csv=righe.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='iscritti.csv';a.click();
 }

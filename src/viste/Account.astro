@@ -1,4 +1,6 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -9,7 +11,7 @@ const pref = prefisso(lingua);
 const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.titolo, prezzo: m.prezzo, colore: m.colore }));
 const sblocca = t.sblocca;
 ---
-<Base titolo={t.ilTuoAccount} percorso={[{ titolo: t.account }]} descrizione={t.accountDescrizione} lingua={lingua}>
+<Base titolo={t.ilTuoAccount} percorso={[{ titolo: t.account }]} descrizione={t.accountDescrizione} lingua={lingua} seo={{ noindex: true }}>
   <h1>{t.ilTuoAccount}</h1>
   <p class="sommario" id="chi">{t.caricamento}</p>
 
@@ -21,6 +23,12 @@ const sblocca = t.sblocca;
       <details class="impostazioni-account">
         <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>{t.impostazioni}</summary>
         <div class="pannello-impostazioni">
+          <h2>{t.tuoNome}</h2>
+          <form class="modulo modulo-riga" id="form-nome" novalidate>
+            <input type="text" name="nome" autocomplete="given-name" maxlength="40" aria-label={t.tuoNome} />
+            <button class="bottone-secondario" type="submit">{t.salva}</button>
+            <p class="esito-modulo" id="esito-nome" role="status"></p>
+          </form>
           <h2>{t.tuoiDispositivi}</h2>
           <p class="nota-accesso">{t.notaDispositivi}</p>
           <ul class="elenco-dispositivi" id="dispositivi"></ul>
@@ -42,7 +50,7 @@ const sblocca = t.sblocca;
       const r = await fetch('/api/io').catch(() => null);
       if (!r || r.status === 401) { location.href = `${pref}/accedi?dopo=${pref}/account`; return; }
       const io = await r.json();
-      document.getElementById('chi').textContent = js.collegatoCome.replace('§', io.email);
+      document.getElementById('chi').textContent = js.collegatoCome.replace('§', io.nome ? `${io.nome} (${io.email})` : io.email);
       const lista = document.getElementById('materie');
       for (const m of aPagamento) {
         const li = document.createElement('li');
@@ -53,6 +61,16 @@ const sblocca = t.sblocca;
           : `<a class="bottone-primario" href="${pref}/${m.slug}/sblocca">${sblocca} · ${m.prezzo} €</a>`);
         lista.appendChild(li);
       }
+      const fn = document.getElementById('form-nome');
+      fn.nome.value = io.nome || '';
+      fn.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const en = document.getElementById('esito-nome');
+        if (!fn.nome.value.trim()) { en.textContent = js.nomeMancante; en.className = 'esito-modulo errore'; return; }
+        const r = await fetch('/api/nome', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ nome: fn.nome.value }) });
+        en.textContent = r.ok ? js.nomeSalvato : js.erroreGenerico; en.className = r.ok ? 'esito-modulo' : 'esito-modulo errore';
+        if (r.ok) setTimeout(() => location.reload(), 600);
+      });
       const ld = document.getElementById('dispositivi');
       for (const d of io.dispositivi || []) {
         const li = document.createElement('li');

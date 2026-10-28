@@ -9,7 +9,7 @@ import remarkBlocchi from './src/plugins/remark-blocchi.mjs';
 const anteprima = process.env.ANTEPRIMA === '1';
 
 export default defineConfig({
-  site: 'https://analisi1.example',
+  site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse' },
   markdown: {

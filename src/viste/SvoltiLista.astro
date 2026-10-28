@@ -1,7 +1,9 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { argomentoL, link, voceL, T, type Lingua } from '../i18n';
+import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero } from '../lib/nav';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
@@ -14,6 +16,8 @@ const base = `/${materia}/${argomento}`;
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
+  descrizione={SEO(lingua).svoltiListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
+  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'] }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"
   precedente={precedente} successivo={successivo}

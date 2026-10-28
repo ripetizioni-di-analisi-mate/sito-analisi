@@ -1,4 +1,6 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
 import { materieL, gruppiL, link, T, type Lingua } from '../i18n';
@@ -7,7 +9,11 @@ const { lingua } = Astro.props;
 const t = T(lingua);
 const MATERIE = materieL(lingua);
 ---
-<Base titolo={t.nomeSito} descrizione={t.homeDescrizione} lingua={lingua}>
+<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home, schema: [{
+  '@type': 'WebSite', '@id': `${SITO}/#sito`, name: t.nomeSito, url: assoluto(link(lingua, '/')), inLanguage: lingua,
+  publisher: { '@id': `${SITO}/#organizzazione` },
+  potentialAction: { '@type': 'SearchAction', target: `${assoluto(link(lingua, '/cerca'))}?q={q}`, 'query-input': 'required name=q' },
+}] }}>
   <p class="sopratitolo">{t.homeSopra}</p>
   <h1>{t.homeTitolo}</h1>
   <p class="sommario">{t.homeSommario}</p>

@@ -1,4 +1,6 @@
 ---
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import { testiJs, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -6,7 +8,7 @@ const { lingua } = Astro.props;
 const t = T(lingua);
 const js = testiJs(lingua);
 ---
-<Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua}>
+<Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua} seo={{ noindex: true }}>
   <p class="sopratitolo">{t.ricerca}</p>
   <h1>{t.cercaNelSito}</h1>
   <p class="sommario">{t.cercaSommario}</p>
