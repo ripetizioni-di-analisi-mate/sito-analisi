@@ -19,6 +19,9 @@ These definitions are the only ones that preserve the properties of powers: from
 
 :::osservazione
 With a negative base the sign of the power depends on the **parity of the exponent**: $(-2)^4 = 16$ and $(-2)^3 = -8$. The expression $-2^4$ denotes the opposite of $2^4$, that is, $-16$, because exponentiation precedes the change of sign.
+
+::grafico{f="x^2;x^3" xmin=-2.6 xmax=2.6 ymin=-9 ymax=9 punti="-2,4,pieno;-2,-8,pieno" etichette="1,7,y = x³;-2.5,7.5,y = x²;-1.85,5,(−2)² = 4;-1.75,-8.3,(−2)³ = −8" titolo="With a negative base $x^2$ is positive and $x^3$ is negative: the graph of $y = x^2$ is symmetric with respect to the $y$-axis, that of $y = x^3$ with respect to the origin"}
+
 :::
 
 ## Properties of powers
@@ -50,6 +53,9 @@ For $n$ natural with $n \geq 2$:
 With an even index the root is by definition greater than or equal to zero: the equation $x^2 = 49$ has the two solutions $x = \pm 7$, while the symbol $\sqrt{49}$ denotes *only* $7$. The condition "radicand greater than or equal to zero for an even index" is the **domain condition** that opens every exercise with roots.
 
 ::grafico{f="sqrt(x)" xmin=-1 xmax=9 ymin=-1 ymax=4 titolo="y = √x: the square root is defined for x ≥ 0 and has values greater than or equal to zero"}
+
+::grafico{f="sqrt(x)^4;x;sqrt(x)" xmin=-1 xmax=5 ymin=-1 ymax=5 uguale=1 legenda="y = x^2 \ (x \geq 0);y = x;y = \sqrt{x}" punti="2,4,pieno,P;4,2,pieno,P′" segmenti="2,4,4,2" etichette="0.3,4.5,y = x²;4.1,1.4,y = √x;4.2,4.6,y = x" titolo="For $x \geq 0$ the graphs of $y = x^2$ and $y = \sqrt{x}$ are symmetric with respect to the bisector $y = x$: the point $P(2, 4)$ of the first corresponds to the point $P'(4, 2)$ of the second"}
+
 :::
 
 :::esempio{titolo="Domain conditions"}
@@ -61,6 +67,9 @@ x - 1 \geq 0 \\
 \end{cases}
 \qquad\Longrightarrow\qquad 1 \leq x \leq 5 .
 $$
+
+::grafico{f="sqrt(2*x-6);cbrt(2*x-6)" xmin=-2 xmax=9 ymin=-3 ymax=4 punti="3,0,pieno" etichette="6.6,3.4,y = √(2x − 6);6.6,1,y = ∛(2x − 6)" titolo="$y = \sqrt{2x - 6}$ exists only for $x \geq 3$, while $y = \sqrt[3]{2x - 6}$ (dashed) exists for every real $x$"}
+
 :::
 
 :::teorema{#proprieta-delle-radici titolo="Properties of roots"}
@@ -80,6 +89,9 @@ With the first property factors are taken out of the radical sign, for example $
 
 :::attenzione
 For the square root of a square $\sqrt{a^2} = |a|$ holds, while the equality $\sqrt{a^2} = a$ is **false** for $a < 0$: for example $\sqrt{(-5)^2} = \sqrt{25} = 5 = |-5|$.
+
+::grafico{f="sqrt(x^2);x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="-3,3,pieno;-3,-3,vuoto" titolo="$y = \sqrt{x^2}$ coincides with $y = |x|$; the line $y = x$ (dashed) coincides with the graph only for $x \geq 0$, and at $x = -3$ the graph passes through $(-3, 3)$, the line through $(-3, -3)$"}
+
 :::
 
 ## Powers with rational and real exponents
@@ -134,6 +146,9 @@ To compare two powers one distinguishes according to the base and the exponent:
 - same base $0 < a < 1$: the power **decreases** as the exponent increases, therefore $x < y \Rightarrow a^x > a^y$; for example $\left(\dfrac{1}{2}\right)^3 > \left(\dfrac{1}{2}\right)^5$;
 - same exponent $x > 0$ and bases $0 < a < b$: $a^x < b^x$ holds; for example $3^4 < 5^4$. With a negative exponent the inequality is **reversed**: $3^{-1} > 5^{-1}$, because $\dfrac{1}{3} > \dfrac{1}{5}$;
 - different bases and exponents: with the power of a power the powers are rewritten with the same base or with the same exponent; for example $2^{30} = (2^3)^{10} = 8^{10}$ and $3^{20} = (3^2)^{10} = 9^{10}$, therefore $2^{30} < 3^{20}$.
+
+::grafico{f="2^x;0.5^x" xmin=-3.5 xmax=3.5 ymin=-1 ymax=9 etichette="1.6,6.5,y = 2ˣ" titolo="$y = 2^x$ increases as the exponent increases (base greater than $1$), $y = \left(\dfrac{1}{2}\right)^x$ (dashed) decreases (base between $0$ and $1$); both are positive for every $x$"}
+
 :::
 
 :::teorema{#confronto-tra-radici titolo="Comparison of roots"}

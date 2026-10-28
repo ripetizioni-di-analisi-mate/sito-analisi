@@ -1,24 +1,12 @@
 ---
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua } from '../i18n';
 import Stato from './Stato.astro';
-import katex from 'katex';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
-// Un simbolo per materia, nel suo colore: rende riconoscibile la voce a colpo d'occhio.
-// Scritti in LaTeX e resi con KaTeX, come le formule delle pagine.
-const SIMBOLI: Record<string, string> = {
-  precorso: '\\sqrt{x}',
-  'analisi-1': '\\int',
-  'analisi-2': '\\iint',
-  'algebra-lineare': '\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}',
-  'fisica-1': '\\omega',
-  'fisica-2': '\\vec{E}',
-};
-const simbolo = (slug: string, titolo: string) => (SIMBOLI[slug] ? katex.renderToString(SIMBOLI[slug], { throwOnError: false }) : titolo[0]);
 ---
 <nav class="indice" aria-label="Indice">
   {m ? (
@@ -52,12 +40,12 @@ const simbolo = (slug: string, titolo: string) => (SIMBOLI[slug] ? katex.renderT
             {MATERIE.filter((x) => x.gruppo === g).map((x) => {
               const dentro = (
                 <>
-                  <span class:list={['materia-simbolo', { piccolo: x.slug === 'algebra-lineare' }]} aria-hidden="true" set:html={simbolo(x.slug, x.titolo)} />
+                  <span class="materia-punto" aria-hidden="true" />
                   <span class="materia-testo">
                     <span class="materia-nome">{x.titolo}</span>
-                    <small>{x.attiva ? `${x.argomenti.length} ${t.argomenti}` : t.inPreparazione}</small>
+                    
                   </span>
-                  {x.attiva && <Stato prezzo={x.prezzo} compatto lingua={lingua} />}
+                  {x.attiva ? <Stato prezzo={x.prezzo} compatto lingua={lingua} /> : <small class="materia-prossima">{t.inPreparazione}</small>}
                 </>
               );
               return (

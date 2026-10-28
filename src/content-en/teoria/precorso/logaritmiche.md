@@ -16,6 +16,9 @@ $$
 a^{\log_a x} = x \quad (x > 0),
 $$
 which are used to pass from exponential form to logarithmic form and vice versa; equations of the types $\log_a A = k$ and $a^{A} = k$ are based on these identities.
+
+::grafico{f="2^x;x;log(x)/log(2)" uguale=1 xmin=-4 xmax=6 ymin=-4 ymax=6 punti="1,2,pieno;2,1,pieno" etichette="0.2,4.6,y = 2ˣ;4.2,1.4,y = log₂ x" titolo="The graphs of $y = 2^{x}$ and of $y = \log_2 x$, in red, are symmetric with respect to the line $y = x$: the point $(1, 2)$ of the first corresponds to the point $(2, 1)$ of the second"}
+
 :::
 
 :::esempio
@@ -96,6 +99,9 @@ $$
 
 :::attenzione
 Solving without the domain conditions produces **extraneous solutions**. The equation $\log_{10} x + \log_{10} (x - 3) = 1$ leads to $x(x - 3) = 10$, that is $x = 5$ or $x = -2$; for $x = -2$ the arguments $x$ and $x - 3$ are negative, so the logarithms in the given equation do *not* exist and $x = -2$ is **discarded**. The **only solution** is $x = 5$.
+
+::grafico{f="log(x)/log(10)+log(x-3)/log(10);1;log(x*(x-3))/log(10)+0*sqrt(-x)" xmin=-4 xmax=8 ymin=-2 ymax=2 asintoti="x=3" punti="5,1,pieno;-2,1,vuoto" titolo="$y = \log_{10} x + \log_{10} (x - 3)$ meets the line $y = 1$ only at $x = 5$; the red curve, $y = \log_{10} \bigl(x(x - 3)\bigr)$ for $x < 0$, meets the line at $x = -2$"}
+
 :::
 
 ## Logarithmic equations
@@ -194,6 +200,9 @@ x > -4
 \iff x > 3
 $$
 The base $2$ is greater than $1$, so the direction is **preserved** when passing to the arguments.
+
+::grafico{f="log(3*x-2)/log(2);log(x+4)/log(2)" xmin=-4.5 xmax=8.5 ymin=-3 ymax=5 area="log(3*x-2)/log(2);log(x+4)/log(2);3;8.5" punti="3,2.807,vuoto" titolo="The graph of $y = \log_2 (3x - 2)$ lies above that of $y = \log_2 (x + 4)$, dashed, for $x > 3$"}
+
 :::
 
 :::esempio{titolo="Base between 0 and 1"}
@@ -211,6 +220,9 @@ x > -1
 \iff -1 < x < 2
 $$
 The base $\dfrac{1}{3}$ lies between $0$ and $1$, so the direction is **reversed** when passing to the arguments.
+
+::grafico{f="log(x+1)/log(1/3);log(5-x)/log(1/3)" xmin=-2 xmax=6 ymin=-3 ymax=3 area="log(x+1)/log(1/3);log(5-x)/log(1/3);-0.99;2" punti="2,-1,vuoto" legenda="y = \log_{\frac{1}{3}} (x + 1);y = \log_{\frac{1}{3}} (5 - x)" titolo="With base $\dfrac{1}{3}$ the graphs are decreasing: $y = \log_{\frac{1}{3}} (x + 1)$ lies above $y = \log_{\frac{1}{3}} (5 - x)$, dashed, for $-1 < x < 2$"}
+
 :::
 
 :::teorema{#disequazioni-logaritmo-numero titolo="Inequality with a number on the right-hand side"}
@@ -234,4 +246,7 @@ A > 0
 $$
 
 For example, with base greater than $1$: $\log_3 (x - 1) > 2$ is equivalent to $x - 1 > 3^{2} = 9$, that is $x > 10$.
+
+::grafico{f="log(x-1)/log(3);2" xmin=-0.5 xmax=14 ymin=-3 ymax=4 area="log(x-1)/log(3);2;10;14" asintoti="x=1" punti="10,2,vuoto" titolo="The graph of $y = \log_3 (x - 1)$ lies above the line $y = 2$ for $x > 10$"}
+
 :::

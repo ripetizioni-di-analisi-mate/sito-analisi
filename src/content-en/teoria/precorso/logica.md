@@ -43,6 +43,11 @@ p & q & p \land q & p \lor q \\
 \end{array}
 $$
 For $x = 2$: the proposition "$x > 0 \land x > 3$" is false, because the second part is false; the proposition "$x > 0 \lor x > 3$" is true, because the first part is true.
+
+::venn{zone="ab" nomi="P,Q" universo=1 titolo="$P$ and $Q$ are the truth sets of $p(x)$ and $q(x)$: $p \land q$ is true in the intersection $P \cap Q$"}
+
+::venn{zone="a,ab,b" nomi="P,Q" universo=1 titolo="$p \lor q$ is true in the union $P \cup Q$, including the part common to the two sets"}
+
 :::
 
 :::osservazione
@@ -56,6 +61,11 @@ $$
 \lnot (p \lor q) \equiv \lnot p \land \lnot q .
 $$
 The symbol $\equiv$ indicates that the two propositions have the same truth table. Negation swaps "and" with "or" and negates the individual parts. These laws are used whenever a compound condition is negated, for example a pair of inequalities; they are verified by comparing the truth tables row by row.
+
+::venn{zone="a,b,u" nomi="P,Q" titolo="$\lnot(p \land q)$ is true in the complement of $P \cap Q$, that is, outside $P$ or outside $Q$: it is the truth set of $\lnot p \lor \lnot q$"}
+
+::venn{zone="u" nomi="P,Q" titolo="$\lnot(p \lor q)$ is true in the complement of $P \cup Q$, that is, outside $P$ and outside $Q$: it is the truth set of $\lnot p \land \lnot q$"}
+
 :::
 
 :::esempio{titolo="Negating a conjunction"}
@@ -77,6 +87,9 @@ p & q & p \Rightarrow q \\
 \end{array}
 $$
 When $p$ is false the implication is true whatever $q$ is: the implication makes a claim only in the cases in which the hypothesis is true. For example "if $x > 3$ then $x > 1$" is true for every real $x$; for $x = 0$ the hypothesis is false and the implication remains true. Every theorem has this form, therefore the truth table of the implication governs the use of theorems.
+
+::venn{tipo="incluso" zone="ab" nomi="Q,P" universo=1 titolo="$p(x) \Rightarrow q(x)$ true for every $x$: the truth set $P$ of the hypothesis is contained in the truth set $Q$ of the conclusion"}
+
 :::
 
 :::teorema{#negazione-dell-implicazione titolo="Negation of an implication"}
@@ -97,6 +110,9 @@ The contrapositive is **equivalent** to the original implication: $p \Rightarrow
 
 :::esempio
 Implication: "if $n$ is a multiple of $4$, then $n$ is even", true. Contrapositive: "if $n$ is odd, then $n$ is not a multiple of $4$", true, as the equivalence guarantees. Converse: "if $n$ is even, then $n$ is a multiple of $4$", **false**, because $n = 6$ is even and $6 = 4 \cdot 1 + 2$ has remainder $2$ in the division by $4$.
+
+::venn{tipo="incluso" nomi="Even,M" zone="ab" elementi="a:2,6,10;ab:4,8,12;u:1,3,5" titolo="The set $M$ of the multiples of $4$ is contained in the set of even numbers: an odd number lies outside the even numbers and therefore outside the multiples of $4$, while $2$, $6$, $10$ are even and not multiples of $4$"}
+
 :::
 
 :::attenzione
@@ -131,6 +147,9 @@ To prove a universal proposition one needs an argument valid for every element, 
 
 :::esempio
 "$\forall x \in \mathbb{R} : x^2 \geq 0$" is true, because the square of every real number is greater than or equal to zero. "$\forall x \in \mathbb{R} : x^2 > 0$" is false, because for $x = 0$ one has $x^2 = 0$, therefore $x = 0$ is a **counterexample**. "$\exists x \in \mathbb{R} : x^2 = 2$" is true, because $x = \sqrt{2}$ satisfies the equality.
+
+::grafico{f="x^2;2" xmin=-3 xmax=3 ymin=-1 ymax=5 punti="0,0,pieno;1.4142,2,pieno;-1.4142,2,pieno" etichette="0.2,-0.6,x = 0;1.6,1.5,x = √2;-2.35,1.5,x = −√2" titolo="$y = x^2$ lies above the $x$-axis at every point other than $x = 0$, which is the counterexample for $x^2 > 0$; the line $y = 2$ meets the graph at $x = \sqrt{2}$ and at $x = -\sqrt{2}$"}
+
 :::
 
 :::teorema{#negazione-dei-quantificatori titolo="Negation of quantifiers"}

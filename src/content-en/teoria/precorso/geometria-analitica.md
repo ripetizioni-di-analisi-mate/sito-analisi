@@ -17,6 +17,9 @@ The distance is the **Pythagorean theorem** applied to the right triangle with l
 
 :::esempio
 $A(1, 2)$ and $B(4, 6)$: the distance is $\overline{AB} = \sqrt{3^2 + 4^2} = \sqrt{25} = 5$ and the midpoint is $M\left(\dfrac{5}{2}, 4\right)$.
+
+::grafico{f="4/3*x+2/3+0*sqrt(x-1)+0*sqrt(4-x)" uguale=1 xmin=-1.5 xmax=7 ymin=-1 ymax=7 punti="1,2,pieno,A;4,6,pieno,B;2.5,4,pieno,M" legenda=0 segmenti="1,2,4,2;4,2,4,6" etichette="2.4,1.5,3;4.2,3.9,4;1.4,4,5" titolo="Distance between $A(1, 2)$ and $B(4, 6)$: the legs measure $3$ and $4$, the hypotenuse $AB$ measures $5$; $M$ is the midpoint"}
+
 :::
 
 ## The line
@@ -47,6 +50,9 @@ Two non-vertical lines with slopes $m_1$ and $m_2$ are **parallel** *if and only
 
 :::esempio
 The line through $P(1, 3)$ perpendicular to $y = 2x - 5$ has slope $m = -\dfrac{1}{2}$, therefore it is $y - 3 = -\dfrac{1}{2}(x - 1)$, that is $y = -\dfrac{1}{2}x + \dfrac{7}{2}$.
+
+::grafico{f="2*x-5;-0.5*x+3.5" uguale=1 xmin=-2.5 xmax=6 ymin=-4 ymax=4 punti="1,3,pieno,P" titolo="The dashed line passes through $P(1, 3)$ and is perpendicular to $y = 2x - 5$"}
+
 :::
 
 :::teorema{#distanza-punto-retta titolo="Distance from a point to a line"}
@@ -62,6 +68,9 @@ Distance from $P(2, 1)$ to the line $3x - 4y + 1 = 0$:
 $$
 d = \frac{|3 \cdot 2 - 4 \cdot 1 + 1|}{\sqrt{9 + 16}} = \frac{3}{5} .
 $$
+
+::grafico{f="(3*x+1)/4" uguale=1 xmin=-1 xmax=4 ymin=-1 ymax=3 punti="2,1,pieno,P;1.64,1.48,pieno,H" segmenti="2,1,1.64,1.48" titolo="The distance of $P(2, 1)$ from the line $3x - 4y + 1 = 0$ is the length of the segment $PH$, perpendicular to the line"}
+
 :::
 
 ## The parabola
@@ -119,6 +128,9 @@ $$
 (x - 1)^2 + (y - 2)^2 = 4 :
 $$
 a **circle** with center $C(1, 2)$ and radius $r = 2$. To draw it, one marks the center and the four points at distance $2$ from it along the directions of the axes: $(3, 2)$, $(-1, 2)$, $(1, 4)$ and $(1, 0)$.
+
+::grafico{curve="1+2*cos(t),2+2*sin(t),0,6.29" uguale=1 xmin=-2 xmax=4.5 ymin=-1 ymax=5 punti="1,2,pieno,C;3,2;-1,2;1,4;1,0" segmenti="1,2,3,2" etichette="1.8,2.2,r = 2" titolo="$(x - 1)^2 + (y - 2)^2 = 4$: center $C(1, 2)$, radius $2$ and the four points along the directions of the axes"}
+
 :::
 
 :::attenzione
@@ -142,6 +154,9 @@ To draw the ellipse, one marks the four vertices and joins them with an oval cur
 
 :::esempio
 $\dfrac{x^2}{9} + \dfrac{y^2}{4} = 1$: the semi-axes are $a = 3$ and $b = 2$, the vertices are $(\pm 3, 0)$ and $(0, \pm 2)$. Since $a > b$, the foci lie on the $x$-axis: from $c^2 = 9 - 4 = 5$ it follows that they are $(\pm\sqrt{5}, 0)$.
+
+::grafico{curve="3*cos(t),2*sin(t),0,6.29" uguale=1 xmin=-4 xmax=4 ymin=-3 ymax=3 punti="3,0;-3,0;0,2;0,-2;2.236,0,vuoto,F₁;-2.236,0,vuoto,F₂" titolo="Ellipse $\dfrac{x^2}{9} + \dfrac{y^2}{4} = 1$: vertices $(\pm 3, 0)$ and $(0, \pm 2)$, foci $F_1$ and $F_2$ at $(\pm\sqrt{5}, 0)$"}
+
 :::
 
 ## The hyperbola
@@ -160,6 +175,9 @@ The equation $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = -1$ represents a hyperbola w
 
 :::esempio
 $\dfrac{x^2}{4} - \dfrac{y^2}{9} = 1$: the vertices are $(\pm 2, 0)$, from $c^2 = 4 + 9 = 13$ the foci are $(\pm\sqrt{13}, 0)$, the asymptotes are $y = \pm\dfrac{3}{2}x$. The branches pass through the vertices and **flatten onto the asymptotes** moving away from the origin.
+
+::grafico{curve="2/cos(t),3*tan(t),0,6.2832" uguale=1 xmin=-6.5 xmax=6.5 ymin=-6 ymax=6 segmenti="-4,-6,4,6;-4,6,4,-6;2,-3,2,3;-2,-3,-2,3;-2,3,2,3;-2,-3,2,-3" punti="2,0;-2,0;3.606,0,vuoto,F₁;-3.606,0,vuoto,F₂" titolo="Hyperbola $\dfrac{x^2}{4} - \dfrac{y^2}{9} = 1$: vertices $(\pm 2, 0)$, foci $(\pm\sqrt{13}, 0)$; the branches approach the asymptotes $y = \pm\dfrac{3}{2}x$, diagonals of the rectangle with sides $x = \pm 2$ and $y = \pm 3$"}
+
 :::
 
 ## Recognizing a conic
@@ -204,4 +222,7 @@ $$
 \frac{(x - 1)^2}{4} + \frac{(y - 2)^2}{9} = 1 .
 $$
 It is an ellipse with center $(1, 2)$ and semi-axes $2$ along $x$ and $3$ along $y$: the vertices are $(3, 2)$, $(-1, 2)$, $(1, 5)$ and $(1, -1)$. Since the major semi-axis is **vertical**, from $c^2 = 9 - 4 = 5$ the foci are $(1, 2 \pm \sqrt{5})$.
+
+::grafico{curve="1+2*cos(t),2+3*sin(t),0,6.29" uguale=1 xmin=-2.6 xmax=4.6 ymin=-1.5 ymax=5.5 segmenti="1,-1.5,1,5.5;-2.6,2,4.6,2" punti="1,2,pieno,C;3,2;-1,2;1,5;1,-1;1,4.236,vuoto,F₁;1,-0.236,vuoto,F₂" titolo="Ellipse $\dfrac{(x - 1)^2}{4} + \dfrac{(y - 2)^2}{9} = 1$ with center $C(1, 2)$: the foci lie on the vertical axis $x = 1$"}
+
 :::

@@ -125,6 +125,23 @@ Il binomio $x - c$ divide $P(x)$ *se e solo se* $P(c) = 0$, cioè se e solo se $
 
 :::
 
+:::definizione{#molteplicita-di-una-radice titolo="Molteplicità di una radice"}
+Sia $c$ una radice del polinomio $P$ e sia $m \geq 1$ un intero. La radice $c$ ha **molteplicità** $m$ se
+$$
+P(x) = (x - c)^m\, Q(x) \qquad \text{con } Q(c) \neq 0 ,
+$$
+cioè se $(x - c)^m$ divide $P$ e $(x - c)^{m + 1}$ non lo divide. Una radice di molteplicità $1$ si dice **semplice**, di molteplicità $2$ **doppia**, di molteplicità $3$ tripla. La molteplicità si determina dividendo per $x - c$ finché il quoziente ottenuto non ha più $c$ come radice: il numero di divisioni esatte è $m$.
+
+La molteplicità stabilisce il segno di $P$ vicino a $c$. Per $x \neq c$ il fattore $(x - c)^m$ è positivo se $m$ è *pari*, mentre se $m$ è *dispari* ha il segno di $x - c$, che cambia in $c$. Il fattore $Q$ non si annulla in $c$, quindi vicino a $c$ ha il segno di $Q(c)$ (è la **permanenza del segno**, che si trova nel capitolo sui limiti di Analisi 1). Perciò il grafico di $P$ **attraversa** l'asse $x$ nelle radici di molteplicità dispari e lo **tocca senza attraversarlo** in quelle di molteplicità pari; nello studio del segno questa proprietà decide se una riga della tabella dei segni cambia segno, come si vede nel capitolo sulle equazioni e disequazioni polinomiali.
+:::
+
+:::esempio
+$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. La radice $2$ è **doppia**, poiché $P(x) = (x - 2)^2\, Q(x)$ con $Q(x) = x + 1$ e $Q(2) = 3 \neq 0$; la radice $-1$ è **semplice**, poiché $P(x) = (x + 1)\,(x - 2)^2$ e $(-1 - 2)^2 = 9 \neq 0$. Vicino a $2$ il polinomio ha il segno di $3\,(x - 2)^2$, positivo da entrambe le parti, mentre vicino a $-1$ ha il segno di $9\,(x + 1)$, che cambia in $-1$.
+
+::grafico{f="x^3-3*x^2+4" xmin=-1.8 xmax=3.3 ymin=-4 ymax=7 punti="-1,0,pieno;2,0,pieno" titolo="$y = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$ attraversa l'asse $x$ nella radice semplice $-1$ e lo tocca senza attraversarlo nella radice doppia $2$"}
+
+:::
+
 ## La regola di Ruffini
 
 :::definizione{#ruffini titolo="Regola di Ruffini"}
@@ -202,7 +219,7 @@ La scomposizione di un polinomio procede nell'ordine seguente, e dopo *ogni* pas
 2. Riconoscimento dei prodotti notevoli: quadrato e cubo di binomio, differenza di quadrati, somma e differenza di cubi.
 3. Per i trinomi della forma $x^2 + sx + p$, trinomio speciale.
 4. Con quattro o più termini, raccoglimento parziale.
-5. Ricerca delle radici razionali e regola di Ruffini: ogni radice $c$ trovata produce il fattore $x - c$ e abbassa di uno il grado del quoziente.
+5. Ricerca delle radici razionali e regola di Ruffini: ogni radice $c$ trovata produce il fattore $x - c$ e abbassa di uno il grado del quoziente. Il passo si applica anche ai trinomi di secondo grado $ax^2 + bx + c$ con $a \neq 1$ e radici razionali, che non sono trinomi speciali.
 
 La scomposizione **termina** quando ogni fattore ha grado $1$ oppure è un fattore di secondo grado **privo di radici reali**; il riconoscimento di questi ultimi con il discriminante si trova nel capitolo sulle equazioni e disequazioni polinomiali.
 :::
@@ -213,6 +230,6 @@ $$
 $$
 Il primo passaggio è il **raccoglimento totale** di $2x^2$. Il fattore $x^2 + x - 6$ è un **trinomio speciale**, poiché $3 + (-2) = 1$ e $3 \cdot (-2) = -6$, quindi si scompone in $(x + 3)(x - 2)$. I fattori non costanti, cioè $x$ (che compare due volte), $x + 3$ e $x - 2$, hanno tutti grado $1$, perciò la scomposizione è **completa**.
 
-::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: nelle radici $-3$ e $2$ il grafico attraversa l'asse $x$; nella radice $0$, che compare due volte per il fattore $x^2$, lo tocca senza attraversarlo"}
+::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: nelle radici semplici $-3$ e $2$ il grafico attraversa l'asse $x$; nella radice $0$, doppia per il fattore $x^2$, lo tocca senza attraversarlo"}
 
 :::

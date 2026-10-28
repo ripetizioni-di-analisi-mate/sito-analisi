@@ -1,6 +1,6 @@
 ---
 titolo: Equazioni e disequazioni polinomiali e fratte
-sommario: Come si risolvono le equazioni di primo e secondo grado, come si abbassa il grado con la fattorizzazione, e come si studiano le disequazioni con il segno della parabola, la tabella dei segni e i sistemi.
+sommario: Come si risolvono le equazioni di primo e secondo grado, come si abbassa il grado con la fattorizzazione, come si trattano equazioni e disequazioni fratte a partire dalle condizioni di esistenza, e come si studiano le disequazioni con il segno della parabola, la tabella dei segni e i sistemi.
 ---
 
 ## Equazioni di primo grado
@@ -70,7 +70,7 @@ e il trinomio si scompone come
 $$
 ax^2 + bx + c = a\,(x - x_1)(x - x_2) .
 $$
-Le due uguaglianze seguono dalla **formula risolutiva**, sommando e moltiplicando le espressioni delle radici; la scomposizione si verifica sviluppando $a\,(x - x_1)(x - x_2) = ax^2 - a\,(x_1 + x_2)\,x + a\,x_1 x_2$ e sostituendo la somma e il prodotto. Con esse si trovano a mente le radici intere e si scompongono i trinomi: per $x^2 - 7x + 12$ due numeri con somma $7$ e prodotto $12$ sono $3$ e $4$, quindi le radici sono $3$ e $4$ e il trinomio è $(x - 3)(x - 4)$.
+Le due uguaglianze seguono dalla **formula risolutiva**, sommando e moltiplicando le espressioni delle radici; la scomposizione si verifica sviluppando $a\,(x - x_1)(x - x_2) = ax^2 - a\,(x_1 + x_2)\,x + a\,x_1 x_2$ e sostituendo la somma e il prodotto. Con esse si trovano a mente le radici intere e si scompongono i trinomi: per $x^2 - 7x + 12$ due numeri con somma $7$ e prodotto $12$ sono $3$ e $4$, quindi le radici sono $3$ e $4$ e il trinomio è $(x - 3)(x - 4)$. Quando le radici sono razionali, la stessa scomposizione si ottiene anche con la ricerca delle radici razionali e la regola di Ruffini del capitolo sulla fattorizzazione dei polinomi; la formula risolutiva la fornisce anche quando le radici sono irrazionali.
 :::
 
 ## Equazioni di grado superiore
@@ -158,6 +158,70 @@ Il prodotto è positivo nelle colonne con un numero **pari** di segni meno, quin
 
 :::
 
+:::teorema{#segno-e-molteplicita titolo="Segno di un fattore elevato a potenza"}
+Sia $c$ una radice di $P$ di molteplicità $m$, cioè $P(x) = (x - c)^m\, Q(x)$ con $Q(c) \neq 0$; la definizione di molteplicità si trova nel capitolo sulla fattorizzazione dei polinomi. Per $x \neq c$ il fattore $(x - c)^m$ ha segno:
+
+- positivo, se $m = 2k$ è pari, poiché $(x - c)^m = \left( (x - c)^{k} \right)^2$ è il quadrato di un numero diverso da zero;
+- uguale a quello di $x - c$, se $m$ è dispari, poiché $(x - c)^m = (x - c)^{m - 1}\,(x - c)$ e $(x - c)^{m - 1}$ è positivo, perché $m - 1$ è pari.
+
+Nella tabella dei segni il fattore $(x - c)^m$ occupa quindi una *sola* riga, che cambia segno in $c$ *solo se* $m$ è dispari. I fattori di $Q$ non si annullano in $c$, quindi le loro righe non cambiano segno in $c$. Perciò $P$ cambia segno nelle radici di molteplicità dispari e conserva il segno in quelle di molteplicità pari, dove il grafico tocca l'asse $x$ senza attraversarlo. Nella disequazione $(x - 1)^2 (x + 3) < 0$ la riga di $(x - 1)^2$ porta soltanto segni più, quindi il segno del prodotto è quello di $x + 3$ e le soluzioni sono $x < -3$.
+:::
+
+## Equazioni fratte
+
+:::definizione{#condizioni-di-esistenza titolo="Condizioni di esistenza"}
+Un'espressione con l'incognita al denominatore è definita soltanto nei punti in cui *ogni* denominatore è diverso da zero. Le **condizioni di esistenza** sono le condizioni $D(x) \neq 0$ imposte a tutti i denominatori, e l'insieme dei numeri reali che le soddisfano è il **dominio** dell'equazione o della disequazione. Le condizioni si ricavano dall'espressione di partenza, perché la riduzione allo stesso denominatore e le semplificazioni possono far scomparire un denominatore. Per $\dfrac{1}{x} + \dfrac{3}{x^2 - 4}$ le condizioni di esistenza formano il sistema
+$$
+\begin{cases}
+x \neq 0 \\[2pt]
+x^2 - 4 \neq 0
+\end{cases}
+$$
+e il dominio è l'insieme dei numeri reali diversi da $0$, da $2$ e da $-2$.
+:::
+
+:::definizione{#equazioni-fratte titolo="Equazione fratta"}
+Un'equazione è **fratta** quando l'incognita compare in almeno un denominatore. Trasportando ogni termine al primo membro e riducendo allo stesso denominatore, l'equazione assume la forma
+$$
+\frac{N(x)}{D(x)} = 0 ,
+$$
+con $N$ e $D$ polinomi. Per esempio $\dfrac{x + 1}{x - 2} = 3$, con la condizione di esistenza $x \neq 2$, diventa $\dfrac{x + 1 - 3\,(x - 2)}{x - 2} = 0$, cioè $\dfrac{7 - 2x}{x - 2} = 0$.
+:::
+
+::::teorema{#annullamento-di-una-frazione titolo="Annullamento di una frazione"}
+Siano $N$ e $D$ polinomi. La frazione $\dfrac{N(x)}{D(x)}$ è nulla *se e solo se* il numeratore è nullo e il denominatore è diverso da zero:
+$$
+\frac{N(x)}{D(x)} = 0 \iff
+\begin{cases}
+N(x) = 0 \\[2pt]
+D(x) \neq 0
+\end{cases}
+$$
+Il teorema riduce un'equazione fratta all'equazione polinomiale $N(x) = 0$; le sue soluzioni si confrontano poi con le condizioni di esistenza, e quelle che annullano un denominatore si **scartano**. Per $\dfrac{7 - 2x}{x - 2} = 0$ il numeratore si annulla in $x = \dfrac{7}{2}$, che è diverso da $2$, quindi $x = \dfrac{7}{2}$ è la **soluzione**.
+
+:::dimostrazione
+Se $D(x) = 0$, la frazione non è definita in $x$, quindi $x$ non è soluzione qualunque sia il valore di $N(x)$. Sia allora $D(x) \neq 0$. Se $\dfrac{N(x)}{D(x)} = 0$, moltiplicando i due membri per il numero $D(x)$, diverso da zero, si ottiene $N(x) = 0$. Viceversa, se $N(x) = 0$, la frazione vale $\dfrac{0}{D(x)} = 0$. Perciò le soluzioni sono i numeri che soddisfano *insieme* $N(x) = 0$ e $D(x) \neq 0$.
+:::
+::::
+
+:::esempio{titolo="Una soluzione da scartare"}
+$\dfrac{x^2}{x - 2} = \dfrac{4}{x - 2}$. La condizione di esistenza è $x \neq 2$. Trasportando il secondo membro si ottiene
+$$
+\frac{x^2 - 4}{x - 2} = 0 ,
+$$
+e il numeratore $x^2 - 4 = (x - 2)(x + 2)$ si annulla in $x = 2$ e in $x = -2$. Il valore $x = 2$ non soddisfa la condizione di esistenza, perciò si **scarta**; l'unica soluzione è $x = -2$.
+
+::grafico{f="x^2/(x-2);4/(x-2)" xmin=-5 xmax=6 ymin=-6 ymax=11 asintoti="x=2" punti="-2,-1,pieno" titolo="I grafici di $y = \dfrac{x^2}{x - 2}$ e di $y = \dfrac{4}{x - 2}$ (tratteggiato) si incontrano soltanto nel punto di ascissa $-2$; in $x = 2$ nessuna delle due frazioni è definita"}
+
+:::
+
+:::attenzione
+Moltiplicare i due membri per il denominatore elimina la condizione $D(x) \neq 0$ e può produrre valori esterni al dominio. L'equazione $\dfrac{x}{x - 1} = \dfrac{1}{x - 1}$, moltiplicata per $x - 1$, diventa $x = 1$; il valore $1$ annulla il denominatore, quindi l'equazione di partenza **non ha soluzioni**.
+
+::grafico{f="x/(x-1);1/(x-1)" xmin=-4 xmax=5 ymin=-6 ymax=7 asintoti="x=1" titolo="Per $x \neq 1$ si ha $\dfrac{x}{x - 1} - \dfrac{1}{x - 1} = 1$: i due grafici distano sempre $1$ in verticale e non si incontrano mai"}
+
+:::
+
 ## Disequazioni fratte
 
 :::definizione{#disequazioni-fratte titolo="Disequazioni fratte"}
@@ -165,8 +229,20 @@ Una **disequazione fratta** si porta nella forma
 $$
 \frac{N(x)}{D(x)} > 0 \quad (\text{o con } \geq,\ <,\ \leq)
 $$
-trasportando ogni termine al primo membro e riducendo allo stesso denominatore. Il segno del quoziente si studia con la tabella dei segni, con una riga per il segno di $N$ e una per il segno di $D$: il quoziente ha lo **stesso segno del prodotto** $N \cdot D$. I punti che annullano il denominatore sono **esclusi** dalle soluzioni per *ogni* verso, perché in quei punti la frazione non è definita; con il verso $\geq$ oppure $\leq$ gli zeri del numeratore sono inclusi.
+trasportando ogni termine al primo membro e riducendo allo stesso denominatore. Il segno del quoziente si studia con la tabella dei segni, con una riga per il segno di $N$ e una per il segno di $D$ (o una per ciascuno dei loro fattori), poiché il quoziente ha lo **stesso segno del prodotto** $N \cdot D$. I punti che annullano il denominatore sono **esclusi** dalle soluzioni per *ogni* verso, perché non soddisfano le condizioni di esistenza; con il verso $\geq$ oppure $\leq$ gli zeri del numeratore sono inclusi.
 :::
+
+::::teorema{#segno-del-quoziente titolo="Segno di un quoziente"}
+Siano $N$ e $D$ polinomi. Per ogni $x$ con $D(x) \neq 0$ il quoziente $\dfrac{N(x)}{D(x)}$ ha lo **stesso segno** del prodotto $N(x)\, D(x)$. Il teorema giustifica la tabella dei segni delle disequazioni fratte: i fattori del numeratore e quelli del denominatore occupano ciascuno una riga, e il segno della frazione su ogni intervallo è il **prodotto dei segni** della colonna. Per esempio $\dfrac{x - 3}{x + 1}$ e $(x - 3)(x + 1)$ sono entrambi negativi per $-1 < x < 3$ ed entrambi positivi per $x < -1$ e per $x > 3$.
+
+:::dimostrazione
+Poiché $D(x) \neq 0$, il quadrato $D(x)^2$ è positivo. Moltiplicando numeratore e denominatore per $D(x)$ si ottiene
+$$
+\frac{N(x)}{D(x)} = \frac{N(x)\, D(x)}{D(x)^2} ,
+$$
+che è il quoziente tra $N(x)\, D(x)$ e un numero positivo. Perciò la frazione ha il segno di $N(x)\, D(x)$.
+:::
+::::
 
 :::attenzione
 Moltiplicare i due membri per il denominatore ne presuppone il **segno**, che dipende da $x$. Da $\dfrac{1}{x} < 1$ *non* segue $1 < x$: il valore $x = -1$ soddisfa la prima disuguaglianza, poiché $-1 < 1$, e non la seconda. Le soluzioni corrette sono $x < 0$ oppure $x > 1$, e si ottengono dalla **tabella dei segni** di $\dfrac{1 - x}{x}$.
@@ -179,6 +255,28 @@ Moltiplicare i due membri per il denominatore ne presuppone il **segno**, che di
 $\dfrac{x + 2}{x - 1} \leq 0$. Il numeratore è positivo per $x > -2$ e nullo in $-2$; il denominatore è positivo per $x > 1$. Il quoziente è negativo dove i segni sono **discordi**, cioè per $-2 < x < 1$. Il verso $\leq$ **include** lo zero del numeratore ed **esclude** quello del denominatore, quindi le soluzioni sono $-2 \leq x < 1$.
 
 ::grafico{f="(x+2)/(x-1)" xmin=-5 xmax=5 ymin=-6 ymax=6 asintoti="x=1;y=1" area="0;(x+2)/(x-1);-2;0.99" punti="-2,0,pieno" titolo="$y = \dfrac{x + 2}{x - 1}$ sta sotto l'asse $x$ o lo incontra per $-2 \leq x < 1$; in $x = 1$ la frazione non è definita (asintoto verticale)"}
+
+:::
+
+:::esempio{titolo="Una disequazione fratta con quattro fattori"}
+$\dfrac{x}{x + 2} \geq \dfrac{1}{x}$. Le condizioni di esistenza sono $x \neq -2$ e $x \neq 0$. Trasportando il secondo membro e riducendo allo stesso denominatore si ottiene
+$$
+\frac{x^2 - (x + 2)}{x\,(x + 2)} \geq 0 \quad\Longrightarrow\quad \frac{(x + 1)(x - 2)}{x\,(x + 2)} \geq 0 ,
+$$
+dove il numeratore $x^2 - x - 2$ è un trinomio speciale. Ogni fattore di primo grado è negativo prima del proprio zero e positivo dopo.
+$$
+\begin{array}{c|ccccc}
+ & x < -2 & -2 < x < -1 & -1 < x < 0 & 0 < x < 2 & x > 2 \\ \hline
+x + 2 & - & + & + & + & + \\
+x + 1 & - & - & + & + & + \\
+x & - & - & - & + & + \\
+x - 2 & - & - & - & - & + \\ \hline
+\text{quoziente} & + & - & + & - & +
+\end{array}
+$$
+Il quoziente è positivo nelle colonne con un numero **pari** di segni meno. Il verso $\geq$ include gli zeri $-1$ e $2$ del numeratore, mentre $-2$ e $0$ sono esclusi dalle condizioni di esistenza, quindi le soluzioni sono $x < -2$ oppure $-1 \leq x < 0$ oppure $x \geq 2$.
+
+::grafico{f="x/(x+2);1/x" xmin=-6 xmax=5 ymin=-6 ymax=6 asintoti="x=-2;x=0" punti="-1,-1,pieno;2,0.5,pieno" titolo="Il grafico di $y = \dfrac{x}{x + 2}$ sta sopra quello di $y = \dfrac{1}{x}$ (tratteggiato) o lo incontra per $x < -2$, per $-1 \leq x < 0$ e per $x \geq 2$"}
 
 :::
 

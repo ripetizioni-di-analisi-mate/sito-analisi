@@ -35,6 +35,9 @@ The first is verified by examining the four cases for the signs of $a$ and $b$, 
 
 :::attenzione
 The absolute value is *not* removed by rewriting $|A| = A$: the equality holds *only* where $A \geq 0$. For example $|x - 5| = x - 5$ is **false** at $x = 0$, since $|0 - 5| = 5$ while $0 - 5 = -5$. Where $A < 0$, instead, $|A| = -A$.
+
+::grafico{f="abs(x-5);x-5" xmin=-1 xmax=9 ymin=-5 ymax=6 punti="0,5,pieno;0,-5,vuoto" titolo="$y = |x - 5|$ is obtained from $y = x - 5$ (dashed) by reflecting across the $x$-axis the part that lies below the axis; the two graphs coincide only for $x \geq 5$"}
+
 :::
 
 ## The equation |A| = k
@@ -53,6 +56,9 @@ $$
 x - 4 = 6 \ \vee \ x - 4 = -6 ,
 $$
 so $x = 10$ or $x = -2$: the two points at distance $6$ from $4$.
+
+::grafico{f="abs(x-4);6" xmin=-4 xmax=12 ymin=-1 ymax=8 punti="-2,6,pieno;10,6,pieno" segmenti="-2,0,-2,6;10,0,10,6" titolo="The line $y = 6$ meets the graph of $y = |x - 4|$ at the points with abscissas $-2$ and $10$"}
+
 :::
 
 ## The equation |A| = |B|
@@ -71,6 +77,9 @@ $$
 2x - 1 = x + 5 \ \vee \ 2x - 1 = -(x + 5) ,
 $$
 so $x = 6$ or $3x = -4$, that is $x = -\dfrac{4}{3}$.
+
+::grafico{f="abs(2*x-1);abs(x+5)" xmin=-7 xmax=8 ymin=-1 ymax=13 punti="-1.3333,3.6667,pieno;6,11,pieno" segmenti="-1.3333,0,-1.3333,3.6667;6,0,6,11" titolo="The solutions $x = -\dfrac{4}{3}$ and $x = 6$ of $|2x - 1| = |x + 5|$ are the abscissas of the intersection points of $y = |2x - 1|$ and $y = |x + 5|$ (dashed)"}
+
 :::
 
 ## The equation |A| = B
@@ -106,6 +115,9 @@ x = -(2x - 3)
 \end{cases}
 $$
 The first system gives $x = 3$, which satisfies the condition since $2 \cdot 3 - 3 = 3 \geq 0$; the second gives $x = 1$, which does *not* satisfy it, since $2 \cdot 1 - 3 = -1 < 0$. The solution is $x = 3$.
+
+::grafico{f="abs(x);2*x-3" xmin=-3 xmax=5 ymin=-4 ymax=6 punti="3,3,pieno;1,-1,vuoto" titolo="$y = |x|$ and the line $y = 2x - 3$ (dashed) meet only at $x = 3$; at $x = 1$ the line has ordinate $-1 < 0$, so $x = 1$ is discarded"}
+
 :::
 
 ## The inequalities |A| < k and |A| ≤ k
@@ -127,6 +139,9 @@ For $|A| \leq k$ with $k > 0$ we have $-k \leq A \leq k$; for $k = 0$ only the e
 
 :::esempio
 $|x - 1| < 4$ is equivalent to $-4 < x - 1 < 4$, so $-3 < x < 5$: the interval of points at distance less than $4$ from $1$.
+
+::grafico{f="abs(x-1);4" xmin=-5 xmax=7 ymin=-1 ymax=7 area="4;abs(x-1);-3;5" punti="-3,4,vuoto;5,4,vuoto" titolo="$y = |x - 1|$ lies below the line $y = 4$ for $-3 < x < 5$"}
+
 :::
 
 ## The inequalities |A| > k and |A| ≥ k
@@ -147,6 +162,9 @@ $$
 x + 2 < -3 \ \vee \ x + 2 > 3 ,
 $$
 so $x < -5 \ \vee \ x > 1$.
+
+::grafico{f="abs(x+2);3" xmin=-9 xmax=5 ymin=-1 ymax=8 punti="-5,3,vuoto;1,3,vuoto" titolo="$y = |x + 2|$ lies above the line $y = 3$ for $x < -5$ and for $x > 1$"}
+
 :::
 
 ## Inequalities with an expression on the right-hand side
@@ -179,6 +197,9 @@ x > \dfrac{1}{3}
 \end{cases}
 $$
 The two conditions hold together for $x > \dfrac{1}{3}$.
+
+::grafico{f="abs(x-1);2*x" xmin=-2 xmax=4 ymin=-3 ymax=7 punti="0.3333,0.6667,vuoto" titolo="The line $y = 2x$ (dashed) lies above $y = |x - 1|$ for $x > \dfrac{1}{3}$; where $2x \leq 0$ no point satisfies the inequality"}
+
 :::
 
 :::esempio{titolo="Absolute value greater than an expression"}
@@ -214,4 +235,7 @@ x + (x - 2) = 4
 \end{cases}
 $$
 In the first region $2 - 2x = 4$ gives $x = -1$, which is **acceptable** since $-1 < 0$; in the second the equation $2 = 4$ is **false**; in the third $2x - 2 = 4$ gives $x = 3$, which is acceptable since $3 \geq 2$. The solutions are $x = -1$ and $x = 3$.
+
+::grafico{f="abs(x)+abs(x-2);4" xmin=-3 xmax=5 ymin=-1 ymax=7 punti="-1,4,pieno;3,4,pieno" titolo="$y = |x| + |x - 2|$ is constantly equal to $2$ in the region $0 \leq x \leq 2$, where the equation has no solutions; the line $y = 4$ meets the graph at $x = -1$ and at $x = 3$"}
+
 :::

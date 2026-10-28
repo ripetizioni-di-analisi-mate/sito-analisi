@@ -15,6 +15,9 @@ $$
 \sin(x + 2\pi) = \sin x, \qquad \cos(x + 2\pi) = \cos x .
 $$
 Because of this periodicity, a trigonometric equation that has one solution has infinitely many, and the solutions are written as **families** depending on an integer.
+
+::grafico{curve="cos(t),sin(t),0,6.29;0.25*cos(t),0.25*sin(t),0,1.047" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="0,0,0.5,0.866" vettori="0,0,0.5,0;0.5,0,0.5,0.866,sin x" punti="0.5,0.866,pieno,P" etichette="0.28,0.2,x;0.1,-0.17,cos x" titolo="Unit circle: the angle $x$ determines the point $P$, with abscissa $\cos x$ and ordinate $\sin x$"}
+
 :::
 
 :::definizione{#tangente titolo="Tangent"}
@@ -22,6 +25,9 @@ $$
 \tan x = \frac{\sin x}{\cos x}, \qquad \text{for } \cos x \neq 0, \ \text{that is } x \neq \frac{\pi}{2} + n\pi, \ n \in \mathbb{Z} .
 $$
 The **tangent** is periodic with period $\pi$: adding $\pi$ to the angle changes the sign of *both* sine and cosine, therefore their ratio does **not change**. On the unit circle, $\tan x$ is the ordinate of the point where the line through the origin and $P$ intersects the line tangent to the circle at the point $(1, 0)$.
+
+::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.6 ymin=-1.3 ymax=1.4 segmenti="1,-1.3,1,1.4;0,0,1,1" vettori="1,0,1,1,tan x" punti="0.7071,0.7071,pieno,P;1,1,pieno,T" titolo="$\tan x$ is the ordinate of the point $T$ where the line $OP$ meets the line tangent to the circle at $(1, 0)$; here $x = \dfrac{\pi}{4}$ and $\tan x = 1$"}
+
 :::
 
 :::definizione{#valori-notevoli titolo="Special values"}
@@ -57,6 +63,9 @@ For every $x \in \mathbb{R}$:
 - $\sin\left(\dfrac{\pi}{2} - x\right) = \cos x$ and $\cos\left(\dfrac{\pi}{2} - x\right) = \sin x$.
 
 They follow from the **symmetries of the unit circle** with respect to the axes and to the bisector of the first quadrant. They make it possible to reduce *every* angle to the first quadrant and to turn a cosine into a sine, for example in equations of the form $\sin A = \cos B$. From the second line it follows that $\cos\dfrac{5\pi}{6} = \cos\left(\pi - \dfrac{\pi}{6}\right) = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$.
+
+::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.7 xmax=1.7 ymin=-1.3 ymax=1.3 segmenti="0,0,0.866,0.5;0,0,-0.866,0.5;0,0,-0.866,-0.5;0,0,0.866,-0.5;-0.866,0.5,0.866,0.5;0.866,0.5,0.866,-0.5" punti="0.866,0.5;-0.866,0.5;-0.866,-0.5;0.866,-0.5" etichette="0.95,0.6,x;-1.35,0.62,π − x;-1.35,-0.72,π + x;0.95,-0.72,−x" titolo="With $x = \dfrac{\pi}{6}$: the point of $\pi - x$ is symmetric with respect to the $y$-axis, that of $-x$ with respect to the $x$-axis, that of $\pi + x$ with respect to the origin"}
+
 :::
 
 :::teorema{#formule-di-addizione titolo="Addition and double-angle formulas"}
@@ -118,6 +127,9 @@ $$
 - $\sin x = k$ and $\cos x = k$ with $|k| > 1$ have **no solutions**, since sine and cosine take *only* values between $-1$ and $1$.
 
 On the unit circle: the points with ordinate $k$ are the two points of angles $\alpha$ and $\pi - \alpha$, **symmetric with respect to the vertical axis**; the points with abscissa $k$ are the two points of angles $\alpha$ and $-\alpha$, **symmetric with respect to the horizontal axis**. The tangent has period $\pi$, hence its solutions are half a turn apart.
+
+::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="-1.4,0.866,1.4,0.866;0,0,0.5,0.866;0,0,-0.5,0.866" punti="0.5,0.866,pieno,π/3;-0.5,0.866,pieno,2π/3" titolo="$\sin x = \dfrac{\sqrt{3}}{2}$: the line $y = \dfrac{\sqrt{3}}{2}$ meets the circle at the two points of angles $\dfrac{\pi}{3}$ and $\dfrac{2\pi}{3}$"}
+
 :::
 
 :::esempio{titolo="Three elementary equations"}
@@ -197,6 +209,9 @@ $$
 x + \frac{\pi}{3} = \frac{\pi}{6} + 2n\pi \quad \text{or} \quad x + \frac{\pi}{3} = \frac{5\pi}{6} + 2n\pi ,
 $$
 which gives $x = -\dfrac{\pi}{6} + 2n\pi$ or $x = \dfrac{\pi}{2} + 2n\pi$.
+
+::grafico{f="sin(x)+sqrt(3)*cos(x);1" xmin=-3.5 xmax=6.5 ymin=-2.5 ymax=2.5 punti="-0.5236,1,pieno;1.5708,1,pieno,π/2;5.7596,1,pieno,11π/6" etichette="-1.75,1.3,−π/6" titolo="$y = \sin x + \sqrt{3}\cos x = 2\sin\left(x + \dfrac{\pi}{3}\right)$ oscillates between $-2$ and $2$ and meets the line $y = 1$ at $-\dfrac{\pi}{6}$ and $\dfrac{\pi}{2}$, up to multiples of $2\pi$"}
+
 :::
 
 :::attenzione
@@ -221,6 +236,9 @@ $\sin x > \dfrac{1}{2}$. On $[0, 2\pi)$ the equation $\sin x = \dfrac{1}{2}$ has
 $$
 \frac{\pi}{6} + 2n\pi < x < \frac{5\pi}{6} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
+
+::grafico{curve="cos(t),sin(t),0.5236,2.618;cos(t),sin(t),2.618,6.8068" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="-1.4,0.5,1.4,0.5;0,0,0.866,0.5;0,0,-0.866,0.5" punti="0.866,0.5,vuoto,π/6;-0.866,0.5,vuoto,5π/6" titolo="$\sin x > \dfrac{1}{2}$: the solid arc, with ordinate greater than $\dfrac{1}{2}$, goes from $\dfrac{\pi}{6}$ to $\dfrac{5\pi}{6}$, endpoints excluded"}
+
 :::
 
 :::esempio
@@ -228,4 +246,7 @@ $\cos x > -\dfrac{\sqrt{2}}{2}$. On $[0, 2\pi)$ the equation $\cos x = -\dfrac{\
 $$
 -\frac{3\pi}{4} + 2n\pi < x < \frac{3\pi}{4} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
+
+::grafico{f="cos(x);-0.7071" xmin=-6.5 xmax=6.5 ymin=-1.5 ymax=1.5 area="cos(x);-0.7071;-2.356;2.356|cos(x);-0.7071;3.927;6.5|cos(x);-0.7071;-6.5;-3.927" punti="-2.356,-0.7071,vuoto,−3π/4;2.356,-0.7071,vuoto,3π/4" titolo="$\cos x > -\dfrac{\sqrt{2}}{2}$: the graph of the cosine lies above the line $y = -\dfrac{\sqrt{2}}{2}$ for $-\dfrac{3\pi}{4} < x < \dfrac{3\pi}{4}$, up to multiples of $2\pi$"}
+
 :::
