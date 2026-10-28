@@ -283,7 +283,7 @@ If the coefficients are eventually nonzero and
 $$
 \lim_{n \to +\infty} \frac{|c_{n+1}|}{|c_n|} = \ell
 \qquad\text{or}\qquad
-\lim_{n \to +\infty} \sqrt[n]{|c_n|} = \ell
+\lim_{n \to +\infty} \sqrt[n]{|c_n|} = \ell ,
 $$
 exists, finite or $+\infty$, then $R = \dfrac{1}{\ell}$, with the conventions $R = +\infty$ for $\ell = 0$ and $R = 0$ for $\ell = +\infty$. The statement follows by applying the **ratio test** or the **root test** to the series of absolute values. For example $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!}$ has $\dfrac{|c_{n+1}|}{|c_n|} = \dfrac{1}{n+1} \to 0$, therefore $R = +\infty$: the series **converges** for *every* $x \in \mathbb{R}$.
 :::
