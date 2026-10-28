@@ -202,7 +202,7 @@ From the first two equations $\lambda \neq 0$ and $x = y = \dfrac{1}{2\lambda}$;
 :::
 
 :::attenzione
-The hypothesis $\nabla g \neq (0, 0)$ *cannot* be omitted. On the curve $g(x, y) = y^3 - x^2 = 0$ the function $f(x, y) = y$ has a **constrained minimum** at the origin, because on the constraint $y = x^{2/3} \geq 0$; the Lagrange system requires $(0, 1) = \lambda\,(-2x, 3y^2)$, which at the origin becomes $(0, 1) = (0, 0)$ and has no solution. The point escapes the system because $\nabla g(0, 0) = (0, 0)$: the points of the constraint where the gradient of $g$ vanishes must be **added by hand** to the candidates.
+The hypothesis $\nabla g \neq (0, 0)$ *cannot* be omitted. On the curve $g(x, y) = y^3 - x^2 = 0$ the function $f(x, y) = y$ has a **constrained minimum** at the origin, because on the constraint $y = x^{\frac{2}{3}} \geq 0$; the Lagrange system requires $(0, 1) = \lambda\,(-2x, 3y^2)$, which at the origin becomes $(0, 1) = (0, 0)$ and has no solution. The point escapes the system because $\nabla g(0, 0) = (0, 0)$: the points of the constraint where the gradient of $g$ vanishes must be **added by hand** to the candidates.
 
 ::grafico{f="cbrt(x*x)" punti="0,0,pieno" xmin=-2 xmax=2 ymin=-0.6 ymax=2 titolo="The constraint $y^3 - x^2 = 0$, that is $y = \sqrt[3]{x^2}$: the function $f(x, y) = y$ has a constrained minimum at the origin, where $\nabla g = (0, 0)$ and the curve has a cusp"}
 

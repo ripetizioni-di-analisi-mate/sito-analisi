@@ -202,7 +202,7 @@ Dalle prime due equazioni $\lambda \neq 0$ e $x = y = \dfrac{1}{2\lambda}$; sost
 :::
 
 :::attenzione
-L'ipotesi $\nabla g \neq (0, 0)$ *non* si può omettere. Sulla curva $g(x, y) = y^3 - x^2 = 0$ la funzione $f(x, y) = y$ ha **minimo vincolato** nell'origine, perché sul vincolo $y = x^{2/3} \geq 0$; il sistema di Lagrange richiede $(0, 1) = \lambda\,(-2x, 3y^2)$, che nell'origine diventa $(0, 1) = (0, 0)$ e non ha soluzione. Il punto sfugge al sistema poiché $\nabla g(0, 0) = (0, 0)$: i punti del vincolo dove il gradiente di $g$ si annulla vanno **aggiunti a mano** ai candidati.
+L'ipotesi $\nabla g \neq (0, 0)$ *non* si può omettere. Sulla curva $g(x, y) = y^3 - x^2 = 0$ la funzione $f(x, y) = y$ ha **minimo vincolato** nell'origine, perché sul vincolo $y = x^{\frac{2}{3}} \geq 0$; il sistema di Lagrange richiede $(0, 1) = \lambda\,(-2x, 3y^2)$, che nell'origine diventa $(0, 1) = (0, 0)$ e non ha soluzione. Il punto sfugge al sistema poiché $\nabla g(0, 0) = (0, 0)$: i punti del vincolo dove il gradiente di $g$ si annulla vanno **aggiunti a mano** ai candidati.
 
 ::grafico{f="cbrt(x*x)" punti="0,0,pieno" xmin=-2 xmax=2 ymin=-0.6 ymax=2 titolo="Il vincolo $y^3 - x^2 = 0$, cioè $y = \sqrt[3]{x^2}$: la funzione $f(x, y) = y$ ha minimo vincolato nell'origine, dove $\nabla g = (0, 0)$ e la curva ha una cuspide"}
 

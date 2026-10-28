@@ -209,41 +209,41 @@ A field with identically zero divergence is called **solenoidal**. The geometric
 :::definizione{#rotore titolo="Curl"}
 The **curl** of a field $\mathbf{F} = (F_1, F_2, F_3)$ of class $C^1$ is the vector field
 $$
-\operatorname{rot} \mathbf{F} =
+\operatorname{curl} \mathbf{F} =
 \left( \frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z},\;
 \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x},\;
 \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y} \right),
 $$
 which is remembered through the formal expansion of the determinant
 $$
-\operatorname{rot} \mathbf{F} = \nabla \wedge \mathbf{F} =
+\operatorname{curl} \mathbf{F} = \nabla \wedge \mathbf{F} =
 \begin{vmatrix}
 \mathbf{i} & \mathbf{j} & \mathbf{k} \\[4pt]
 \dfrac{\partial}{\partial x} & \dfrac{\partial}{\partial y} & \dfrac{\partial}{\partial z} \\[6pt]
 F_1 & F_2 & F_3
 \end{vmatrix} .
 $$
-A field with identically zero curl is called **irrotational**. The meaning of the curl is given by **Stokes' theorem**: the flux of the curl through a surface is the circulation of the field along the boundary, so the curl measures the tendency of the field to locally rotate the fluid that follows it. For the field $\mathbf{F} = (-y, x, 0)$, which rotates about the $z$-axis, we compute $\operatorname{rot} \mathbf{F} = (0, 0, 2)$: a vector directed along the axis of rotation.
+A field with identically zero curl is called **irrotational**. The meaning of the curl is given by **Stokes' theorem**: the flux of the curl through a surface is the circulation of the field along the boundary, so the curl measures the tendency of the field to locally rotate the fluid that follows it. For the field $\mathbf{F} = (-y, x, 0)$, which rotates about the $z$-axis, we compute $\operatorname{curl} \mathbf{F} = (0, 0, 2)$: a vector directed along the axis of rotation.
 :::
 
 ::::teorema{#proprieta-divergenza-rotore titolo="Properties of divergence and curl"}
 Divergence and curl are **linear**. Moreover, for every function $f$ of class $C^2$ and every field $\mathbf{F}$ of class $C^2$ on an open set $A \subseteq \mathbb{R}^3$ the following identities hold:
 $$
-\operatorname{rot} \bigl( \nabla f \bigr) = \mathbf{0},
+\operatorname{curl} \bigl( \nabla f \bigr) = \mathbf{0},
 \qquad
-\operatorname{div} \bigl( \operatorname{rot} \mathbf{F} \bigr) = 0 .
+\operatorname{div} \bigl( \operatorname{curl} \mathbf{F} \bigr) = 0 .
 $$
 The first identity says that *every* gradient field is **irrotational**; since conservative fields are gradient fields, computing the curl is the preliminary test for conservativeness used in the chapter on vector fields. The second says that every curl is **solenoidal**, so a field with nonzero divergence is not the curl of any $C^2$ field.
 
 :::dimostrazione
-For the first identity, the first component of $\operatorname{rot}(\nabla f)$ is
+For the first identity, the first component of $\operatorname{curl}(\nabla f)$ is
 $$
 \frac{\partial}{\partial y} \frac{\partial f}{\partial z} - \frac{\partial}{\partial z} \frac{\partial f}{\partial y}
 = f_{zy} - f_{yz} = 0 ,
 $$
 since $f$ is of class $C^2$ and **Schwarz's theorem** applies; the other two components vanish in the same way. For the second identity we compute
 $$
-\operatorname{div} \bigl( \operatorname{rot} \mathbf{F} \bigr)
+\operatorname{div} \bigl( \operatorname{curl} \mathbf{F} \bigr)
 = \frac{\partial}{\partial x} \left( \frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z} \right)
 + \frac{\partial}{\partial y} \left( \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x} \right)
 + \frac{\partial}{\partial z} \left( \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y} \right),
@@ -310,12 +310,12 @@ Let $\Sigma$ be a regular surface oriented by the unit vector $\mathbf{n}$, whos
 Let $\Sigma$ be an oriented regular surface with boundary $\partial\Sigma$ oriented compatibly, and let $\mathbf{F}$ be a vector field of class $C^1$ on an open set containing $\Sigma$. Then
 $$
 \oint_{\partial\Sigma} \mathbf{F} \cdot d\mathbf{r}
-= \iint_\Sigma \operatorname{rot} \mathbf{F} \cdot \mathbf{n} \; d\sigma .
+= \iint_\Sigma \operatorname{curl} \mathbf{F} \cdot \mathbf{n} \; d\sigma .
 $$
 The **circulation** of a field along a closed curve in space is the **flux of the curl** through *any* oriented surface that has that curve as compatible boundary. In exercises the theorem is used in both directions: a complicated circulation becomes the flux of a curl that is often simple, and as the surface we choose the most convenient among those with the same boundary, usually a portion of a plane.
 
 :::dimostrazione
-For a Cartesian surface $z = f(x, y)$ over a domain $D$ of the plane, the line integral along $\partial\Sigma$ is rewritten, by substituting the parametrization of the boundary, as a line integral along the boundary of $D$ in the $xy$-plane; **Green's theorem** is applied to the latter, and a direct computation with the chain rule shows that the resulting integrand coincides with $\operatorname{rot} \mathbf{F} \cdot (-f_x, -f_y, 1)$, that is, with the integrand of the flux of the curl. The general case is obtained by decomposing the surface into Cartesian portions: along the interior cuts the circulations cancel in pairs, since each cut is traversed twice in opposite directions. Writing out all the steps requires only manipulations of derivatives but is lengthy, and we refer to the course's standard textbooks.
+For a Cartesian surface $z = f(x, y)$ over a domain $D$ of the plane, the line integral along $\partial\Sigma$ is rewritten, by substituting the parametrization of the boundary, as a line integral along the boundary of $D$ in the $xy$-plane; **Green's theorem** is applied to the latter, and a direct computation with the chain rule shows that the resulting integrand coincides with $\operatorname{curl} \mathbf{F} \cdot (-f_x, -f_y, 1)$, that is, with the integrand of the flux of the curl. The general case is obtained by decomposing the surface into Cartesian portions: along the interior cuts the circulations cancel in pairs, since each cut is traversed twice in opposite directions. Writing out all the steps requires only manipulations of derivatives but is lengthy, and we refer to the course's standard textbooks.
 :::
 ::::
 
@@ -329,12 +329,12 @@ $$
 :::osservazione{#green-caso-particolare}
 Green's theorem is the **special case of Stokes' theorem** in which the surface is flat. Let $\Sigma = D$ be a regular domain in the plane $z = 0$ oriented with $\mathbf{n} = \mathbf{k}$, and let $\mathbf{F} = (P, Q, 0)$ with $P$ and $Q$ independent of $z$. The compatible boundary is the boundary of $D$ traversed counterclockwise, the circulation reduces to $\oint_{\partial D} P \, dx + Q \, dy$, and the flux of the curl reduces to
 $$
-\iint_D \operatorname{rot} \mathbf{F} \cdot \mathbf{k} \; d\sigma
+\iint_D \operatorname{curl} \mathbf{F} \cdot \mathbf{k} \; d\sigma
 = \iint_D \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dx \, dy ,
 $$
 since the third component of the curl of $(P, Q, 0)$ is $Q_x - P_y$. Stokes' equality becomes **Green's formula**.
 :::
 
 :::osservazione
-Stokes' theorem explains the link between irrotational fields and conservative fields. If $\operatorname{rot} \mathbf{F} = \mathbf{0}$ on an open set in which every closed curve is the boundary of a surface contained in the open set, then *every* circulation of $\mathbf{F}$ is zero, so the field is **conservative**. The condition on the domain and its consequences are treated in the chapter on vector fields.
+Stokes' theorem explains the link between irrotational fields and conservative fields. If $\operatorname{curl} \mathbf{F} = \mathbf{0}$ on an open set in which every closed curve is the boundary of a surface contained in the open set, then *every* circulation of $\mathbf{F}$ is zero, so the field is **conservative**. The condition on the domain and its consequences are treated in the chapter on vector fields.
 :::

@@ -213,9 +213,9 @@ The order is determined by replacing the factors of the integrand with simpler a
 
 :::esempio{titolo="Order via a Taylor expansion"}
 $$
-\int_0^{1} \frac{x - \sin x}{x^{7/2}}\,dx
+\int_0^{1} \frac{x - \sin x}{x^{\frac{7}{2}}}\,dx
 $$
-The expansion $\sin x = x - \dfrac{x^{3}}{6} + o(x^{3})$ gives $x - \sin x \sim \dfrac{x^{3}}{6}$ as $x \to 0^{+}$, therefore the integrand is asymptotic to $\dfrac{x^{3}}{6\,x^{7/2}} = \dfrac{1}{6\sqrt{x}}$. The **order of infinity** at the critical point $0$ is $\dfrac{1}{2} < 1$, hence the integral **converges**.
+The expansion $\sin x = x - \dfrac{x^{3}}{6} + o(x^{3})$ gives $x - \sin x \sim \dfrac{x^{3}}{6}$ as $x \to 0^{+}$, therefore the integrand is asymptotic to $\dfrac{x^{3}}{6\,x^{\frac{7}{2}}} = \dfrac{1}{6\sqrt{x}}$. The **order of infinity** at the critical point $0$ is $\dfrac{1}{2} < 1$, hence the integral **converges**.
 :::
 
 :::esempio{titolo="Order via a standard limit"}

@@ -213,9 +213,9 @@ L'ordine si determina sostituendo i fattori dell'integranda con funzioni asintot
 
 :::esempio{titolo="Ordine con uno sviluppo di Taylor"}
 $$
-\int_0^{1} \frac{x - \sin x}{x^{7/2}}\,dx
+\int_0^{1} \frac{x - \sin x}{x^{\frac{7}{2}}}\,dx
 $$
-Dallo sviluppo $\sin x = x - \dfrac{x^{3}}{6} + o(x^{3})$ segue $x - \sin x \sim \dfrac{x^{3}}{6}$ per $x \to 0^{+}$, quindi l'integranda è asintotica a $\dfrac{x^{3}}{6\,x^{7/2}} = \dfrac{1}{6\sqrt{x}}$. L'**ordine di infinito** nel punto critico $0$ è $\dfrac{1}{2} < 1$, perciò l'integrale **converge**.
+Dallo sviluppo $\sin x = x - \dfrac{x^{3}}{6} + o(x^{3})$ segue $x - \sin x \sim \dfrac{x^{3}}{6}$ per $x \to 0^{+}$, quindi l'integranda è asintotica a $\dfrac{x^{3}}{6\,x^{\frac{7}{2}}} = \dfrac{1}{6\sqrt{x}}$. L'**ordine di infinito** nel punto critico $0$ è $\dfrac{1}{2} < 1$, perciò l'integrale **converge**.
 :::
 
 :::esempio{titolo="Ordine con un limite notevole"}
