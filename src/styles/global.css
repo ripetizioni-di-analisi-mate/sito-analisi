@@ -489,3 +489,22 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 /* grassetto nei testi di studio: semigrassetto nel colore della materia, distinto dai titoli */
 .testo-studio strong { font-weight: 600; color: var(--accento); }
 @media print { .testo-studio strong { color: inherit; } }
+
+/* figure: più curve, aree, vettori, etichette */
+.grafico .curva.c1 { stroke: var(--inchiostro-2); stroke-dasharray: 7 5; }
+.grafico .curva.c2 { stroke: var(--c-attenzione); }
+.grafico .area { fill: color-mix(in srgb, var(--accento) 22%, transparent); stroke: none; }
+.grafico .segmento { stroke: var(--inchiostro-2); stroke-width: 1.3; stroke-dasharray: 4 4; }
+.grafico .vettore { stroke-width: 2.6; stroke-linecap: round; }
+.grafico .vettore.v0, .grafico .punta.v0 { stroke: var(--accento); fill: var(--accento); }
+.grafico .vettore.v1, .grafico .punta.v1 { stroke: var(--c-attenzione); fill: var(--c-attenzione); }
+.grafico .vettore.v2, .grafico .punta.v2 { stroke: var(--inchiostro-2); fill: var(--inchiostro-2); }
+.grafico .punta { stroke: none !important; }
+.grafico .etichetta, .grafico .etichetta-vettore { font-family: var(--testo); font-style: italic; font-size: 17px; fill: var(--inchiostro); }
+/* diagrammi di Venn */
+.venn svg { max-width: 30rem; margin: 0 auto; }
+.venn .zona { fill: color-mix(in srgb, var(--accento) 32%, transparent); }
+.venn .contorno { fill: none; stroke: var(--inchiostro); stroke-width: 2; }
+.venn .universo { fill: none; stroke: var(--inchiostro-2); stroke-width: 1.5; }
+.venn .nome-insieme { font-family: var(--testo); font-style: italic; font-size: 26px; fill: var(--inchiostro); }
+.venn .elementi { font-family: var(--testo); font-size: 19px; fill: var(--inchiostro); }

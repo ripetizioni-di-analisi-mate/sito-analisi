@@ -6,10 +6,12 @@
 //   :::esempio  :::osservazione  :::attenzione
 //   :::richiamo{titolo="Teorema di ..."}   solo ipotesi e tesi
 //   :::soluzione   (apribile, "Mostra soluzione")
-//   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}
+//   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}   (tutti gli attributi in grafico.mjs)
+//   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
 import { visit } from 'unist-util-visit';
 import { h } from 'hastscript';
 import { grafico } from './grafico.mjs';
+import { venn } from './venn.mjs';
 
 const ETICHETTE = {
   definizione: 'Definizione',
@@ -38,16 +40,9 @@ export default function remarkBlocchi() {
     const percorso = String(file?.path || file?.history?.[0] || '');
     const E = /content-en[\\/]/.test(percorso) ? EN : IT;
     visit(tree, (node) => {
-      if (node.type === 'leafDirective' && node.name === 'grafico') {
-        const a = node.attributes || {};
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn')) {
         node.type = 'html';
-        node.value = grafico({
-          f: a.f,
-          xmin: Number(a.xmin ?? -5), xmax: Number(a.xmax ?? 5),
-          ymin: a.ymin !== undefined ? Number(a.ymin) : undefined,
-          ymax: a.ymax !== undefined ? Number(a.ymax) : undefined,
-          punti: a.punti, asintoti: a.asintoti, titolo: a.titolo,
-        });
+        node.value = node.name === 'grafico' ? grafico(node.attributes || {}) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;
