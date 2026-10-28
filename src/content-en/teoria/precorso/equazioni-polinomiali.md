@@ -1,6 +1,6 @@
 ---
 titolo: Polynomial and rational equations and inequalities
-sommario: How to solve first- and second-degree equations, how to lower the degree by factorization, and how to study inequalities with the sign of the parabola, the sign chart and systems.
+sommario: How to solve first- and second-degree equations, how to lower the degree by factorization, how to handle rational equations and inequalities starting from the domain conditions, and how to study inequalities with the sign of the parabola, the sign chart and systems.
 ---
 
 ## First-degree equations
@@ -47,6 +47,9 @@ The sign of $\Delta = b^2 - 4ac$ counts the real solutions:
 - $\Delta < 0$: **no real solution**.
 
 For $x^2 - 2x - 3 = 0$ we have $\Delta = 4 + 12 = 16 > 0$ and the solutions are $x = \dfrac{2 \pm 4}{2}$, that is, $3$ and $-1$. For $x^2 + 2x + 1 = 0$ we have $\Delta = 0$ and $x = -1$ double. For $x^2 + x + 1 = 0$ we have $\Delta = -3 < 0$ and no real solution.
+
+::grafico{f="x^2-2*x-3;x^2+2*x+1;x^2+x+1" xmin=-4 xmax=4 ymin=-5 ymax=8 punti="3,0,pieno;-1,0,pieno" titolo="$y = x^2 - 2x - 3$ ($\Delta > 0$) meets the $x$-axis at $-1$ and at $3$; $y = x^2 + 2x + 1$ (dashed, $\Delta = 0$) touches it only at $-1$; $y = x^2 + x + 1$ (red, $\Delta < 0$) does not meet it"}
+
 :::
 
 :::definizione{#equazioni-incomplete titolo="Incomplete equations"}
@@ -67,7 +70,7 @@ and the trinomial factors as
 $$
 ax^2 + bx + c = a\,(x - x_1)(x - x_2) .
 $$
-The two equalities follow from the **quadratic formula**, by adding and multiplying the expressions of the roots. With them one finds integer roots mentally and factors trinomials: for $x^2 - 7x + 12$ two numbers with sum $7$ and product $12$ are $3$ and $4$, so the roots are $3$ and $4$ and the trinomial is $(x - 3)(x - 4)$.
+The two equalities follow from the **quadratic formula**, by adding and multiplying the expressions of the roots; the factorization is checked by expanding $a\,(x - x_1)(x - x_2) = ax^2 - a\,(x_1 + x_2)\,x + a\,x_1 x_2$ and substituting the sum and the product. With them one finds integer roots mentally and factors trinomials: for $x^2 - 7x + 12$ two numbers with sum $7$ and product $12$ are $3$ and $4$, so the roots are $3$ and $4$ and the trinomial is $(x - 3)(x - 4)$. When the roots are rational, the same factorization is also obtained by finding the rational roots and applying Ruffini's rule, as in the chapter on factoring polynomials; the quadratic formula gives it also when the roots are irrational.
 :::
 
 ## Higher-degree equations
@@ -90,6 +93,9 @@ $$
 x^3 - 3x + 2 = (x - 1)(x^2 + x - 2) = (x - 1)^2 (x + 2) ,
 $$
 where $x^2 + x - 2 = (x - 1)(x + 2)$ is a special trinomial. By the **zero product property** the solutions are $x = 1$ (double) and $x = -2$.
+
+::grafico{f="x^3-3*x+2" xmin=-2.8 xmax=2.4 ymin=-3 ymax=7 punti="-2,0,pieno;1,0,pieno" titolo="$y = x^3 - 3x + 2 = (x - 1)^2 (x + 2)$ crosses the $x$-axis at the simple solution $-2$ and touches it at the double solution $1$"}
+
 :::
 
 :::definizione{#biquadratiche titolo="Biquadratic equations"}
@@ -100,6 +106,9 @@ A **biquadratic equation** has the form $ax^4 + bx^2 + c = 0$. With the **substi
 - if $t_i < 0$, no real $x$ satisfies it, because a square is never negative.
 
 For example, $x^4 - 5x^2 + 4 = 0$ becomes $t^2 - 5t + 4 = 0$, with solutions $t = 1$ and $t = 4$, so $x = \pm 1$ and $x = \pm 2$.
+
+::grafico{f="x^4-5*x^2+4" xmin=-2.7 xmax=2.7 ymin=-3 ymax=6 punti="-2,0,pieno;-1,0,pieno;1,0,pieno;2,0,pieno" titolo="$y = x^4 - 5x^2 + 4$ is symmetric with respect to the $y$-axis and meets the $x$-axis at the four solutions $-2$, $-1$, $1$, $2$"}
+
 :::
 
 ## First-degree inequalities
@@ -119,7 +128,7 @@ Let $y = ax^2 + bx + c$ with $a > 0$ and $\Delta = b^2 - 4ac$. The graph is a pa
 
 For $a < 0$ the signs are the **opposite**; alternatively, both sides are multiplied by $-1$ reversing the direction, so as to reduce to the case $a > 0$.
 
-::grafico{f="x*x-2*x-3" xmin=-4 xmax=6 ymin=-5 ymax=7 titolo="y = x² − 2x − 3: the parabola lies above the x-axis for x < −1 and for x > 3, below it between the roots"}
+::grafico{f="x*x-2*x-3" xmin=-4 xmax=6 ymin=-5 ymax=7 punti="-1,0,pieno;3,0,pieno" titolo="$y = x^2 - 2x - 3$: the parabola lies above the $x$-axis for $x < -1$ and for $x > 3$, below it between the roots"}
 :::
 
 :::esempio
@@ -144,6 +153,73 @@ x\,(x+2)(x-2) & - & + & - & +
 \end{array}
 $$
 The product is positive in the columns with an **even number of minus signs**, so the solutions are $-2 < x < 0$ or $x > 2$.
+
+::grafico{f="x^3-4*x" xmin=-2.8 xmax=2.8 ymin=-6 ymax=6 area="x^3-4*x;0;-2;0|x^3-4*x;0;2;2.8" punti="-2,0,vuoto;0,0,vuoto;2,0,vuoto" titolo="$y = x^3 - 4x$ lies above the $x$-axis for $-2 < x < 0$ and for $x > 2$, the shaded intervals where the product is positive"}
+
+:::
+
+:::teorema{#segno-e-molteplicita titolo="Sign of a factor raised to a power"}
+Let $c$ be a root of $P$ of multiplicity $m$, that is, $P(x) = (x - c)^m\, Q(x)$ with $Q(c) \neq 0$; the definition of multiplicity is found in the chapter on factoring polynomials. For $x \neq c$ the factor $(x - c)^m$ has sign:
+
+- positive, if $m = 2k$ is even, since $(x - c)^m = \left( (x - c)^{k} \right)^2$ is the square of a nonzero number;
+- equal to that of $x - c$, if $m$ is odd, since $(x - c)^m = (x - c)^{m - 1}\,(x - c)$ and $(x - c)^{m - 1}$ is positive, because $m - 1$ is even.
+
+In the sign chart the factor $(x - c)^m$ therefore takes a *single* row, which changes sign at $c$ *only if* $m$ is odd. The factors of $Q$ do not vanish at $c$, so their rows do not change sign at $c$. Therefore $P$ changes sign at the roots of odd multiplicity and keeps its sign at those of even multiplicity, where the graph touches the $x$-axis without crossing it. In the inequality $(x - 1)^2 (x + 3) < 0$ the row of $(x - 1)^2$ has only plus signs, so the sign of the product is that of $x + 3$ and the solutions are $x < -3$.
+:::
+
+## Rational equations
+
+:::definizione{#condizioni-di-esistenza titolo="Domain conditions"}
+An expression with the unknown in a denominator is defined only at the points where *every* denominator is nonzero. The **domain conditions** are the conditions $D(x) \neq 0$ imposed on all the denominators, and the set of real numbers that satisfy them is the **domain** of the equation or inequality. The conditions are derived from the original expression, because reducing to a common denominator and simplifying can make a denominator disappear. For $\dfrac{1}{x} + \dfrac{3}{x^2 - 4}$ the domain conditions form the system
+$$
+\begin{cases}
+x \neq 0 \\[2pt]
+x^2 - 4 \neq 0
+\end{cases}
+$$
+and the domain is the set of real numbers different from $0$, from $2$ and from $-2$.
+:::
+
+:::definizione{#equazioni-fratte titolo="Rational equation"}
+An equation is **rational** when the unknown appears in at least one denominator. Moving every term to the left-hand side and reducing to a common denominator, the equation takes the form
+$$
+\frac{N(x)}{D(x)} = 0 ,
+$$
+with $N$ and $D$ polynomials. For example $\dfrac{x + 1}{x - 2} = 3$, with the domain condition $x \neq 2$, becomes $\dfrac{x + 1 - 3\,(x - 2)}{x - 2} = 0$, that is, $\dfrac{7 - 2x}{x - 2} = 0$.
+:::
+
+::::teorema{#annullamento-di-una-frazione titolo="Zero of a fraction"}
+Let $N$ and $D$ be polynomials. The fraction $\dfrac{N(x)}{D(x)}$ is zero *if and only if* the numerator is zero and the denominator is nonzero:
+$$
+\frac{N(x)}{D(x)} = 0 \iff
+\begin{cases}
+N(x) = 0 \\[2pt]
+D(x) \neq 0
+\end{cases}
+$$
+The theorem reduces a rational equation to the polynomial equation $N(x) = 0$; its solutions are then compared with the domain conditions, and those that make a denominator vanish are **discarded**. For $\dfrac{7 - 2x}{x - 2} = 0$ the numerator vanishes at $x = \dfrac{7}{2}$, which is different from $2$, so $x = \dfrac{7}{2}$ is the **solution**.
+
+:::dimostrazione
+If $D(x) = 0$, the fraction is not defined at $x$, so $x$ is not a solution whatever the value of $N(x)$. Now let $D(x) \neq 0$. If $\dfrac{N(x)}{D(x)} = 0$, multiplying both sides by the nonzero number $D(x)$ gives $N(x) = 0$. Conversely, if $N(x) = 0$, the fraction equals $\dfrac{0}{D(x)} = 0$. Therefore the solutions are the numbers that satisfy $N(x) = 0$ and $D(x) \neq 0$ *together*.
+:::
+::::
+
+:::esempio{titolo="A solution to be discarded"}
+$\dfrac{x^2}{x - 2} = \dfrac{4}{x - 2}$. The domain condition is $x \neq 2$. Moving the right-hand side gives
+$$
+\frac{x^2 - 4}{x - 2} = 0 ,
+$$
+and the numerator $x^2 - 4 = (x - 2)(x + 2)$ vanishes at $x = 2$ and at $x = -2$. The value $x = 2$ does not satisfy the domain condition, therefore it is **discarded**; the only solution is $x = -2$.
+
+::grafico{f="x^2/(x-2);4/(x-2)" xmin=-5 xmax=6 ymin=-6 ymax=11 asintoti="x=2" punti="-2,-1,pieno" titolo="The graphs of $y = \dfrac{x^2}{x - 2}$ and of $y = \dfrac{4}{x - 2}$ (dashed) meet only at the point with abscissa $-2$; at $x = 2$ neither fraction is defined"}
+
+:::
+
+:::attenzione
+Multiplying both sides by the denominator removes the condition $D(x) \neq 0$ and can produce values outside the domain. The equation $\dfrac{x}{x - 1} = \dfrac{1}{x - 1}$, multiplied by $x - 1$, becomes $x = 1$; the value $1$ makes the denominator vanish, so the original equation **has no solutions**.
+
+::grafico{f="x/(x-1);1/(x-1)" xmin=-4 xmax=5 ymin=-6 ymax=7 asintoti="x=1" titolo="For $x \neq 1$ we have $\dfrac{x}{x - 1} - \dfrac{1}{x - 1} = 1$: the two graphs are always $1$ apart vertically and never meet"}
+
 :::
 
 ## Rational inequalities
@@ -153,15 +229,55 @@ A **rational inequality** is brought to the form
 $$
 \frac{N(x)}{D(x)} > 0 \quad (\text{or with } \geq,\ <,\ \leq)
 $$
-by moving every term to the left-hand side and reducing to a common denominator. The sign of the quotient is studied with the sign chart, with one row for the sign of $N$ and one for the sign of $D$: the quotient has the **same sign** as the product $N \cdot D$. The points where the denominator vanishes are **excluded** from the solutions for *every* direction, because at those points the fraction is not defined; with the direction $\geq$ or $\leq$ the zeros of the numerator are included.
+by moving every term to the left-hand side and reducing to a common denominator. The sign of the quotient is studied with the sign chart, with one row for the sign of $N$ and one for the sign of $D$ (or one for each of their factors), since the quotient has the **same sign** as the product $N \cdot D$. The points where the denominator vanishes are **excluded** from the solutions for *every* direction, because they do not satisfy the domain conditions; with the direction $\geq$ or $\leq$ the zeros of the numerator are included.
 :::
+
+::::teorema{#segno-del-quoziente titolo="Sign of a quotient"}
+Let $N$ and $D$ be polynomials. For every $x$ with $D(x) \neq 0$ the quotient $\dfrac{N(x)}{D(x)}$ has the **same sign** as the product $N(x)\, D(x)$. The theorem justifies the sign chart of rational inequalities: the factors of the numerator and those of the denominator each take a row, and the sign of the fraction on each interval is the **product of the signs** in the column. For example $\dfrac{x - 3}{x + 1}$ and $(x - 3)(x + 1)$ are both negative for $-1 < x < 3$ and both positive for $x < -1$ and for $x > 3$.
+
+:::dimostrazione
+Since $D(x) \neq 0$, the square $D(x)^2$ is positive. Multiplying numerator and denominator by $D(x)$ gives
+$$
+\frac{N(x)}{D(x)} = \frac{N(x)\, D(x)}{D(x)^2} ,
+$$
+which is the quotient of $N(x)\, D(x)$ by a positive number. Therefore the fraction has the sign of $N(x)\, D(x)$.
+:::
+::::
 
 :::attenzione
 Multiplying both sides by the denominator presupposes its sign, which depends on $x$. From $\dfrac{1}{x} < 1$ it does *not* follow that $1 < x$: the value $x = -1$ satisfies the first inequality, since $-1 < 1$, and not the second. The correct solutions are $x < 0$ or $x > 1$, and they are obtained from the sign chart of $\dfrac{1 - x}{x}$.
+
+::grafico{f="1/x;1" xmin=-4 xmax=4 ymin=-4 ymax=4 punti="1,1,vuoto" titolo="$y = \dfrac{1}{x}$ lies below the line $y = 1$ (dashed) for $x < 0$ and for $x > 1$"}
+
 :::
 
 :::esempio
 $\dfrac{x + 2}{x - 1} \leq 0$. The numerator is positive for $x > -2$ and zero at $-2$; the denominator is positive for $x > 1$. The quotient is negative where the **signs differ**, that is, for $-2 < x < 1$. The direction $\leq$ includes the zero of the numerator and excludes that of the denominator, so the solutions are $-2 \leq x < 1$.
+
+::grafico{f="(x+2)/(x-1)" xmin=-5 xmax=5 ymin=-6 ymax=6 asintoti="x=1;y=1" area="0;(x+2)/(x-1);-2;0.99" punti="-2,0,pieno" titolo="$y = \dfrac{x + 2}{x - 1}$ lies below the $x$-axis or meets it for $-2 \leq x < 1$; at $x = 1$ the fraction is not defined (vertical asymptote)"}
+
+:::
+
+:::esempio{titolo="A rational inequality with four factors"}
+$\dfrac{x}{x + 2} \geq \dfrac{1}{x}$. The domain conditions are $x \neq -2$ and $x \neq 0$. Moving the right-hand side and reducing to a common denominator gives
+$$
+\frac{x^2 - (x + 2)}{x\,(x + 2)} \geq 0 \quad\Longrightarrow\quad \frac{(x + 1)(x - 2)}{x\,(x + 2)} \geq 0 ,
+$$
+where the numerator $x^2 - x - 2$ is a special trinomial. Each first-degree factor is negative before its zero and positive after it.
+$$
+\begin{array}{c|ccccc}
+ & x < -2 & -2 < x < -1 & -1 < x < 0 & 0 < x < 2 & x > 2 \\ \hline
+x + 2 & - & + & + & + & + \\
+x + 1 & - & - & + & + & + \\
+x & - & - & - & + & + \\
+x - 2 & - & - & - & - & + \\ \hline
+\text{quotient} & + & - & + & - & +
+\end{array}
+$$
+The quotient is positive in the columns with an **even** number of minus signs. The direction $\geq$ includes the zeros $-1$ and $2$ of the numerator, while $-2$ and $0$ are excluded by the domain conditions, so the solutions are $x < -2$ or $-1 \leq x < 0$ or $x \geq 2$.
+
+::grafico{f="x/(x+2);1/x" xmin=-6 xmax=5 ymin=-6 ymax=6 asintoti="x=-2;x=0" punti="-1,-1,pieno;2,0.5,pieno" titolo="The graph of $y = \dfrac{x}{x + 2}$ lies above that of $y = \dfrac{1}{x}$ (dashed) or meets it for $x < -2$, for $-1 \leq x < 0$ and for $x \geq 2$"}
+
 :::
 
 ## Systems of inequalities
