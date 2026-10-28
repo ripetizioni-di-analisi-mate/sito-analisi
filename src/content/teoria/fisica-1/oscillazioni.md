@@ -268,7 +268,7 @@ $$
 \qquad
 T = 2\pi\sqrt{\frac{I}{mgd}} .
 $$
-Il pendolo fisico oscilla con lo stesso periodo di un pendolo semplice di lunghezza $\ell = \dfrac{I}{md}$, detta **lunghezza ridotta**. Per un pendolo semplice di lunghezza $\ell$ si ha $I = m\ell^2$ e $d = \ell$, e la formula restituisce il periodo $2\pi\sqrt{\dfrac{\ell}{g}}$ del pendolo semplice. Per un'asta omogenea di lunghezza $L$ sospesa a un estremo si ha $I = \dfrac{1}{3}mL^2$ e $d = \dfrac{L}{2}$, quindi $T = 2\pi\sqrt{\dfrac{2L}{3g}}$; con $L = 1{,}00\,\mathrm{m}$ si ottiene $T = 1{,}64\,\mathrm{s}$, contro i $2{,}01\,\mathrm{s}$ del pendolo semplice della stessa lunghezza.
+Il pendolo fisico oscilla con lo stesso periodo di un pendolo semplice di lunghezza $\ell_r = \dfrac{I}{md}$, detta **lunghezza ridotta**. Per un pendolo semplice di lunghezza $\ell$ si ha $I = m\ell^2$ e $d = \ell$, e la formula restituisce il periodo $2\pi\sqrt{\dfrac{\ell}{g}}$ del pendolo semplice. Per un'asta omogenea di lunghezza $L$ sospesa a un estremo si ha $I = \dfrac{1}{3}mL^2$ e $d = \dfrac{L}{2}$, quindi $T = 2\pi\sqrt{\dfrac{2L}{3g}}$; con $L = 1{,}00\,\mathrm{m}$ si ottiene $T = 1{,}64\,\mathrm{s}$, contro i $2{,}01\,\mathrm{s}$ del pendolo semplice della stessa lunghezza.
 
 :::dimostrazione
 Sia $\theta$ l'angolo tra la verticale per l'asse e il segmento che congiunge l'asse con $G$. Le forze esterne sono il peso, applicato in $G$, e la reazione dell'asse, che ha momento nullo perché è applicata sull'asse. Il peso ha braccio $d\sin\theta$ e tende a riportare il corpo nella posizione $\theta = 0$, quindi il suo momento è $M = -mgd\sin\theta$. La **seconda equazione cardinale** dà
