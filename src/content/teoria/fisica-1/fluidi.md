@@ -49,7 +49,7 @@ Si considera, all'interno del fluido, un cilindro immaginario con l'asse vertica
 $$
 p_2 A - p_1 A - \rho g A\,(y_1 - y_2) = 0 ,
 $$
-e dividendo per $A$ si ottiene la tesi. Con un cilindro orizzontale il peso non ha componenti lungo l'asse, perciò le pressioni sulle due basi sono uguali: punti alla stessa quota hanno la stessa pressione. Infine, prendendo il punto $1$ sulla superficie libera, dove $p_1 = p_0$, e posto $h = y_1 - y_2$, si ottiene $p = p_0 + \rho g h$.
+e dividendo per $A$ si ottiene la tesi. Con un cilindro orizzontale il peso non ha componenti lungo l'asse, perciò le pressioni sulle due basi sono uguali, quindi punti alla stessa quota hanno la stessa pressione. Infine, prendendo il punto $1$ sulla superficie libera, dove $p_1 = p_0$, e posto $h = y_1 - y_2$, si ottiene $p = p_0 + \rho g h$.
 
 ::grafico{curve="1+6*(abs(t-1)-abs(t-2)+1)/2-3.5*(abs(t-4)-abs(t-5)+1)/2+1*(abs(t-6)-abs(t-7)+1)/2-1*(abs(t-8)-abs(t-9)+1)/2+1*(abs(t-10)-abs(t-11)+1)/2,4.8-4.8*(abs(t)-abs(t-1)+1)/2+4.8*(abs(t-2)-abs(t-3)+1)/2+995.2*(abs(t-3)-abs(t-4)+1)/2-999*(abs(t-5)-abs(t-6)+1)/2+1.5*(abs(t-7)-abs(t-8)+1)/2-1.5*(abs(t-9)-abs(t-10)+1)/2,0,14" area="4;0;1;7" vettori="4,3.3,4,2.5,p₁A;4,0.2,4,1,p₂A;4,1.75,4,1.2,mg" segmenti="0,1,3.5,1;0,2.5,3.5,2.5" etichette="0.15,1.15,y₂;0.15,2.65,y₁" xmin=0 xmax=8 ymin=0 ymax=4.8 uguale=1 titolo="Il cilindro di liquido fra le quote $y_2$ e $y_1$ è in equilibrio sotto il peso e le forze di pressione sulle due basi"}
 
@@ -61,7 +61,7 @@ La pressione $p$ che compare nella legge di Stevino è la **pressione assoluta**
 :::
 
 :::osservazione{#vasi-comunicanti titolo="Vasi comunicanti e tubo a U"}
-In recipienti comunicanti che contengono lo stesso liquido in quiete le superfici libere, tutte alla pressione $p_0$, stanno alla stessa quota, qualunque sia la forma dei recipienti: è una conseguenza diretta della **legge di Stevino**, perché punti dello stesso liquido alla stessa pressione hanno la stessa quota. Se un tubo a U contiene due liquidi che non si mescolano, di densità $\rho_1$ e $\rho_2$, si sceglie la quota della superficie di separazione: i punti $A$ e $B$ a quella quota nei due rami stanno nello stesso liquido connesso, quindi hanno la stessa pressione. Indicate con $h_1$ e $h_2$ le altezze delle colonne di liquido sopra quella quota, si ha $p_0 + \rho_1 g h_1 = p_0 + \rho_2 g h_2$, cioè
+In recipienti comunicanti che contengono lo stesso liquido in quiete le superfici libere, tutte alla pressione $p_0$, stanno alla stessa quota, qualunque sia la forma dei recipienti. È una conseguenza diretta della **legge di Stevino**, perché punti dello stesso liquido alla stessa pressione hanno la stessa quota. Se un tubo a U contiene due liquidi che non si mescolano, di densità $\rho_1$ e $\rho_2$, si sceglie la quota della superficie di separazione: i punti $A$ e $B$ a quella quota nei due rami stanno nello stesso liquido connesso, quindi hanno la stessa pressione. Indicate con $h_1$ e $h_2$ le altezze delle colonne di liquido sopra quella quota, si ha $p_0 + \rho_1 g h_1 = p_0 + \rho_2 g h_2$, cioè
 $$
 \rho_1 h_1 = \rho_2 h_2 .
 $$
@@ -111,7 +111,7 @@ e se il pistone piccolo si abbassa di $s_1$, il pistone grande si alza di $s_2 =
 ::grafico{curve="1+5*(abs(t-1)-abs(t-2)+1)/2-3*(abs(t-4)-abs(t-5)+1)/2-1.4*(abs(t-7)-abs(t-8)+1)/2,4-4*(abs(t)-abs(t-1)+1)/2+4*(abs(t-2)-abs(t-3)+1)/2+996*(abs(t-3)-abs(t-4)+1)/2-996*(abs(t-5)-abs(t-6)+1)/2-3.2*(abs(t-6)-abs(t-7)+1)/2+3.2*(abs(t-8)-abs(t-9)+1)/2,0,10" area="0.8;0;1;6|2.5;0.8;1;1.6|2.5;0.8;3;6" segmenti="1,2.5,1.6,2.5;3,2.5,6,2.5" vettori="1.3,3.5,1.3,2.55,F₁;4.5,2.55,4.5,3.95,F₂" etichette="1.75,2.6,A₁;5.2,2.1,A₂" xmin=0 xmax=7 ymin=0 ymax=4 uguale=1 titolo="Torchio idraulico: la pressione $\dfrac{F_1}{A_1}$ si trasmette al pistone grande, che riceve la forza $F_2 = \dfrac{A_2}{A_1}\,F_1$"}
 
 :::dimostrazione
-La forza $F_1$ produce sotto il pistone piccolo la pressione $\dfrac{F_1}{A_1}$ in più rispetto a quella dovuta al solo liquido. I due pistoni sono alla stessa quota, quindi per il **principio di Pascal** la stessa variazione di pressione agisce sul pistone grande, che riceve la forza $F_2 = \dfrac{F_1}{A_1}\, A_2$. Il liquido è incomprimibile, perciò il volume $A_1 s_1$ che esce dal cilindro piccolo entra nel cilindro grande: da $A_1 s_1 = A_2 s_2$ segue la relazione tra gli spostamenti. Moltiplicando le due relazioni membro a membro si ottiene $F_2 s_2 = F_1 s_1$.
+La forza $F_1$ produce sotto il pistone piccolo la pressione $\dfrac{F_1}{A_1}$ in più rispetto a quella dovuta al solo liquido. I due pistoni sono alla stessa quota, quindi per il **principio di Pascal** la stessa variazione di pressione agisce sul pistone grande, che riceve la forza $F_2 = \dfrac{F_1}{A_1}\, A_2$. Il liquido è incomprimibile, perciò il volume $A_1 s_1$ che esce dal cilindro piccolo entra nel cilindro grande, quindi da $A_1 s_1 = A_2 s_2$ segue la relazione tra gli spostamenti. Moltiplicando le due relazioni membro a membro si ottiene $F_2 s_2 = F_1 s_1$.
 :::
 ::::
 
@@ -195,7 +195,7 @@ In un condotto, o in un tubo di flusso, percorso in moto stazionario da un fluid
 $$
 A_1 v_1 = A_2 v_2 .
 $$
-La velocità è inversamente proporzionale all'area della sezione: dove il condotto si restringe il fluido accelera. Se un tubo circolare dimezza il diametro, l'area diventa un quarto e la velocità quadruplica.
+La velocità è inversamente proporzionale all'area della sezione, quindi dove il condotto si restringe il fluido accelera. Se un tubo circolare dimezza il diametro, l'area diventa un quarto e la velocità quadruplica.
 
 ::grafico{curve="0+3*(abs(t)-abs(t-1)+1)/2+2*(abs(t-1)-abs(t-2)+1)/2+3*(abs(t-2)-abs(t-3)+1)/2-8*(abs(t-4)-abs(t-5)+1)/2+3*(abs(t-6)-abs(t-7)+1)/2+2*(abs(t-7)-abs(t-8)+1)/2+3*(abs(t-8)-abs(t-9)+1)/2,1.2-0.35*(abs(t-1)-abs(t-2)+1)/2+999.15*(abs(t-3)-abs(t-4)+1)/2-1001.2*(abs(t-5)-abs(t-6)+1)/2+0.35*(abs(t-7)-abs(t-8)+1)/2,0,10" area="1.2-0.35*(abs((x-3)/2)-abs((x-3)/2-1)+1)/2;-(1.2-0.35*(abs((x-3)/2)-abs((x-3)/2-1)+1)/2);0;8" segmenti="1.5,-1.2,1.5,1.2;6.5,-0.85,6.5,0.85" vettori="0.3,0.5,1.1,0.5,v₁;5.4,0.4,7,0.4,v₂" etichette="1.65,-0.95,A₁;6.65,-0.65,A₂" xmin=0 xmax=8 ymin=-1.6 ymax=1.6 uguale=1 titolo="Dove la sezione si dimezza la velocità raddoppia, perché la portata $Q = A_1 v_1 = A_2 v_2$ è la stessa in ogni sezione"}
 
@@ -261,7 +261,7 @@ Un condotto orizzontale di sezione $A_1$ presenta una strozzatura di sezione $A_
 $$
 v_1 = \sqrt{\frac{2\,\Delta p}{\rho\left( \dfrac{A_1^2}{A_2^2} - 1 \right)}} ,
 $$
-e la portata è $Q = A_1 v_1$. Il tubo di Venturi è quindi un misuratore di portata: basta misurare una differenza di pressione. Quando la pressione si legge con due tubi verticali aperti, collegati alle due sezioni e riempiti dallo stesso liquido che scorre nel condotto, la **legge di Stevino** applicata nei tubi dà $\Delta p = \rho g\, \Delta h$, dove $\Delta h$ è il dislivello tra le colonne.
+e la portata è $Q = A_1 v_1$. Il tubo di Venturi è quindi un misuratore di portata che richiede soltanto la misura di una differenza di pressione. Quando la pressione si legge con due tubi verticali aperti, collegati alle due sezioni e riempiti dallo stesso liquido che scorre nel condotto, la **legge di Stevino** applicata nei tubi dà $\Delta p = \rho g\, \Delta h$, dove $\Delta h$ è il dislivello tra le colonne.
 
 ::grafico{curve="0+1.3*(abs(t)-abs(t-1)+1)/2+0.4*(abs(t-3)-abs(t-4)+1)/2+0.8*(abs(t-6)-abs(t-7)+1)/2+1*(abs(t-7)-abs(t-8)+1)/2+0.3*(abs(t-8)-abs(t-9)+1)/2+0.4*(abs(t-11)-abs(t-12)+1)/2+0.3*(abs(t-14)-abs(t-15)+1)/2+1*(abs(t-15)-abs(t-16)+1)/2+2.5*(abs(t-16)-abs(t-17)+1)/2-8*(abs(t-18)-abs(t-19)+1)/2+2.5*(abs(t-20)-abs(t-21)+1)/2+1*(abs(t-21)-abs(t-22)+1)/2+1*(abs(t-22)-abs(t-23)+1)/2+1*(abs(t-23)-abs(t-24)+1)/2+2.5*(abs(t-24)-abs(t-25)+1)/2,1+2.6*(abs(t-1)-abs(t-2)+1)/2+996.4*(abs(t-2)-abs(t-3)+1)/2-996.4*(abs(t-4)-abs(t-5)+1)/2-2.6*(abs(t-5)-abs(t-6)+1)/2-0.5*(abs(t-7)-abs(t-8)+1)/2+3.1*(abs(t-9)-abs(t-10)+1)/2+996.4*(abs(t-10)-abs(t-11)+1)/2-996.4*(abs(t-12)-abs(t-13)+1)/2-3.1*(abs(t-13)-abs(t-14)+1)/2+0.5*(abs(t-15)-abs(t-16)+1)/2+999*(abs(t-17)-abs(t-18)+1)/2-1001*(abs(t-19)-abs(t-20)+1)/2+0.5*(abs(t-21)-abs(t-22)+1)/2-0.5*(abs(t-23)-abs(t-24)+1)/2,0,25" area="1-0.5*(abs(x-2.5)-abs(x-2.5-1)+1)/2+0.5*(abs(x-4.5)-abs(x-4.5-1)+1)/2;-(1-0.5*(abs(x-2.5)-abs(x-2.5-1)+1)/2+0.5*(abs(x-4.5)-abs(x-4.5-1)+1)/2);0;8|3;1;1.3;1.7|1.8;0.5;3.8;4.2" segmenti="1.7,3,4.8,3;4.2,1.8,4.8,1.8;4.8,1.8,4.8,3" etichette="4.95,2.35,Δh;0.95,-0.75,A₁;3.6,-0.3,A₂" vettori="0.3,0.4,0.7,0.4,v₁;3.2,0.2,4.8,0.2,v₂" xmin=0 xmax=8 ymin=-1.4 ymax=3.8 uguale=1 titolo="Tubo di Venturi: nella strozzatura la velocità è maggiore e la pressione minore, e il dislivello $\Delta h$ nei tubi verticali misura $p_1 - p_2$"}
 
@@ -289,7 +289,7 @@ In un tubo cilindrico orizzontale di raggio $R$ e lunghezza $L$, un fluido newto
 $$
 Q = \frac{\pi R^4\, \Delta p}{8\, \eta L} ,
 $$
-dove $\Delta p$ è la differenza di pressione tra le estremità. La legge si ricava imponendo l'equilibrio tra le forze di pressione e le forze viscose su ogni strato cilindrico di fluido; ne risulta un profilo di velocità parabolico, massimo sull'asse e nullo sulla parete, la cui integrazione sulla sezione dà $Q$. Il calcolo si omette. A parità di $\Delta p$, la portata è proporzionale alla quarta potenza del raggio: dimezzando il raggio di un tubo la portata diventa $\dfrac{1}{16}$ di quella iniziale.
+dove $\Delta p$ è la differenza di pressione tra le estremità. La legge si ricava imponendo l'equilibrio tra le forze di pressione e le forze viscose su ogni strato cilindrico di fluido; ne risulta un profilo di velocità parabolico, massimo sull'asse e nullo sulla parete, la cui integrazione sulla sezione dà $Q$. Il calcolo si omette. A parità di $\Delta p$, la portata è proporzionale alla quarta potenza del raggio, perciò dimezzando il raggio di un tubo la portata diventa $\dfrac{1}{16}$ di quella iniziale.
 :::
 
 :::osservazione{#numero-di-reynolds titolo="Moto laminare e turbolento"}
