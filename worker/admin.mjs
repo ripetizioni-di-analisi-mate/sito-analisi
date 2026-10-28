@@ -281,12 +281,14 @@ td.destra,th.destra{text-align:right}
 <div class="velo" id="velo" hidden></div>
 <aside class="cassetto" id="cassetto" aria-hidden="true" role="dialog" aria-label="Scheda dello studente"></aside>
 <div class="toast" id="toast" role="status"></div>
-<script>(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)});</script>
+<script>var __name = function (f) { return f; };
+(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)});</script>
 </body></html>`;
 }
 
 // ---------------------------------------------------------------------------
 // Codice eseguito nel browser. Non usa variabili esterne: riceve i dati come argomenti.
+// Il bundler di Wrangler può inserire chiamate a __name nel sorgente: la pagina ne definisce una versione vuota.
 function cliente(MATERIE, A_PAGAMENTO) {
   const M = Object.fromEntries(MATERIE.map((m) => [m.slug, m]));
   const $ = (s, r = document) => r.querySelector(s);
