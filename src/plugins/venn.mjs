@@ -86,7 +86,7 @@ export function venn(attr) {
   }).join('');
 
   const descr = attr.titolo || 'Diagramma di Venn';
-  return `<figure class="grafico venn"><svg viewBox="0 0 ${S.W} ${S.H}" role="img" aria-label="${esc(testoSemplice(descr))}">
+  return `<figure class="grafico venn"><svg viewBox="0 0 ${S.W} ${S.H}" style="max-width: 480px" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs>${clip}${maschere}</defs>
 ${universo}${colori}${contorni}${etichette}${elementi}
 </svg>${attr.titolo ? `<figcaption>${didascalia(attr.titolo)}</figcaption>` : ''}</figure>`;

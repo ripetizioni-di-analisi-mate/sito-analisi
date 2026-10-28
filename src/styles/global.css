@@ -231,7 +231,7 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 
 /* ---------- grafici ---------- */
 .grafico { margin: 1.5rem 0; }
-.grafico > svg { width: 100%; height: auto; display: block; font-family: var(--ui); font-size: 15px; }
+.grafico > svg { width: 100%; height: auto; display: block; margin: 0 auto; font-family: var(--ui); font-size: 15px; }
 .grafico .assi line { stroke: var(--inchiostro); stroke-width: 1.4; }
 .grafico .assi text { fill: var(--inchiostro-2); }
 .grafico .nome-asse { font-style: italic; font-size: 17px; fill: var(--inchiostro) !important; font-family: var(--testo); }
@@ -516,6 +516,11 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .grafico .vettore.v1, .grafico .punta.v1 { stroke: var(--c-attenzione); fill: var(--c-attenzione); }
 .grafico .vettore.v2, .grafico .punta.v2 { stroke: var(--inchiostro-2); fill: var(--inchiostro-2); }
 .grafico .punta { stroke: none !important; }
+.grafico .legenda { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.2rem 1.1rem; margin-top: 0.3rem; font-size: 0.85rem; color: var(--inchiostro); }
+.grafico .voce-legenda { display: inline-flex; align-items: center; gap: 0.4rem; }
+.grafico .legenda .campione { width: 1.6rem; height: 0.5rem; overflow: visible; }
+.grafico .legenda .campione .curva { stroke-width: 3; }
+.grafico .legenda .katex { font-size: 1em; }
 .grafico .linea { fill: none; stroke: var(--inchiostro); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
 .grafico .poligono { fill: color-mix(in srgb, var(--accento) 16%, transparent); stroke: color-mix(in srgb, var(--accento) 45%, transparent); stroke-width: 1; }
 .grafico .riferimento line { stroke: var(--inchiostro-2); stroke-width: 1.3; }

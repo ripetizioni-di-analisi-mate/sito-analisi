@@ -1,4 +1,5 @@
 import katex from 'katex';
+import { inLatex } from './espressione.mjs';
 // Genera a tempo di build un grafico SVG nel piano cartesiano.
 // Assi sempre orientati: frecce ed etichette x, y; tacche con valori interi.
 // Le discontinuità (salti grandi tra punti consecutivi) interrompono la curva.
@@ -18,6 +19,8 @@ import katex from 'katex';
 //   poligoni="0,0 4,0 4,2 0,2;…"  regioni chiuse colorate (un liquido, un corpo), punti come in linee
 //   assi=0                        nessun asse cartesiano: per schemi fisici (piano inclinato, recipienti, corpi e forze)
 //   riferimento="x0,y0,30,1.5,x′,y′"  sistema di assi orientati in (x0,y0), ruotato di 30° e lungo 1,5 unità, con i nomi
+//   legenda="y = x^2;y = 2x-1"    voci della legenda in LaTeX, nell'ordine delle curve (prima f, poi curve);
+//                                 senza legenda, le funzioni di f compaiono da sole come "y = …"; legenda=0 la toglie
 //   titolo="…"                    didascalia
 
 const FUNZ = ['sin', 'cos', 'tan', 'exp', 'log', 'sqrt', 'abs', 'atan', 'asin', 'acos', 'sinh', 'cosh', 'tanh', 'floor', 'ceil', 'sign', 'cbrt', 'PI', 'E'];
@@ -166,9 +169,29 @@ export function grafico(a) {
   const senzaAssi = String(a.assi) === '0';
 
   const punta = (k) => `<marker id="${id}-punta${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta v${k}" d="M0 0 L10 5 L0 10 z"/></marker>`;
+  // Legenda: un campione del tratto di ogni curva accanto alla sua formula
+  const voci = [];
+  if (String(a.legenda) !== '0') {
+    const date = a.legenda ? String(a.legenda).split(';').map((x) => x.trim()) : null;
+    const nCurve = funzioni.length + parametriche.length;
+    for (let k = 0; k < nCurve; k++) {
+      let tex = date ? date[k] : (k < funzioni.length ? (() => {
+                const [vx, vy] = (a.nomi ? lista(a.nomi, ',') : ['x', 'y']).map((v) => v.trim());
+        // la voce automatica solo per i grafici y = f(x): in fisica il nome dell'asse non è sempre quello della curva
+        if (vy !== 'y' || !/^[A-Za-zα-ωΑ-Ω]$/.test(vx)) return null;
+        const l = inLatex(lista(a.f)[k], vx);
+        return l ? `${vy} = ${l}` : null;
+      })() : null);
+      if (tex) voci.push(`<span class="voce-legenda"><svg class="campione" viewBox="0 0 26 8" aria-hidden="true"><line class="curva c${k % 3}" x1="2" y1="4" x2="24" y2="4"/></svg>${katex.renderToString(tex, { throwOnError: false })}</span>`);
+    }
+  }
+  const legenda = voci.length ? `<div class="legenda">${voci.join('')}</div>` : '';
+  // Larghezza massima: i grafici alti si stringono, così non riempiono lo schermo
+  const larghezza = Math.min(520, Math.round((340 * W) / H));
+
   const descr = a.titolo || (a.f ? `Grafico di y = ${a.f}` : 'Figura nel piano cartesiano');
 
-  return `<figure class="grafico"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(testoSemplice(descr))}">
+  return `<figure class="grafico"><svg viewBox="0 0 ${W} ${H}" style="max-width: ${larghezza}px" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs><marker id="${id}-freccia" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>${punta(0)}${punta(1)}${punta(2)}</defs>
 ${aree}${pol}${senzaAssi ? '' : `<g class="assi">
 <line x1="${m.l - 12}" y1="${oy}" x2="${W - m.r + 12}" y2="${oy}" marker-end="url(#${id}-freccia)"/>
@@ -179,5 +202,5 @@ ${aree}${pol}${senzaAssi ? '' : `<g class="assi">
 <text x="${ox - 8}" y="${oy + 17}" text-anchor="end">O</text>
 </g>`}
 ${lin}${rif}${asint}${segm}${curve}${vett}${pt}${etich}
-</svg>${a.titolo ? `<figcaption>${didascalia(a.titolo)}</figcaption>` : ''}</figure>`;
+</svg>${legenda}${a.titolo ? `<figcaption>${didascalia(a.titolo)}</figcaption>` : ''}</figure>`;
 }
