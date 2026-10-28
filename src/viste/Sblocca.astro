@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; materia: string }
+const { lingua, materia } = Astro.props;
+const t = T(lingua);
+const m = materiaL(lingua, materia);
+const svolti = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const js = testiJs(lingua);
+const pref = prefisso(lingua);
+const localePaddle = lingua;
+---
+<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
+  <p class="sopratitolo">{m.titolo}</p>
+  <h1>{t.sbloccaTitolo(m.titolo)}</h1>
+  <p class="sommario">{t.sbloccaSommario}</p>
+  <ul class="cosa-include">
+    <li set:html={t.includeTeoria(m.argomenti.length)} />
+    <li set:html={t.includeSvolti(svolti)} />
+    <li set:html={t.includeSoluzioni(dafare)} />
+    <li set:html={t.includePdf} />
+  </ul>
+  <div class="riquadro-acquisto">
+    <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
+    <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>
+  </div>
+
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle }}>
+    (async () => {
+      const f = (s, x) => s.replace('§', x);
+      const azione = document.getElementById('azione');
+      const qui = location.pathname;
+      const [rIo, rConf] = await Promise.all([fetch('/api/io').catch(() => null), fetch('/api/config').catch(() => null)]);
+      const io = rIo && rIo.ok ? await rIo.json() : null;
+      const conf = rConf && rConf.ok ? (await rConf.json()).paddle : null;
+
+      if (!io) {
+        azione.innerHTML = `<a class="bottone-primario" href="${pref}/accedi?nuovo=1&dopo=${encodeURIComponent(qui)}">${js.creaESblocca}</a>
+          <p class="nota-accesso">${js.haiAccount} <a href="${pref}/accedi?dopo=${encodeURIComponent(qui)}">${js.accedi}</a></p>`;
+        return;
+      }
+      if (io.materie.includes(materia)) {
+        azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
+        return;
+      }
+      if (!conf || !conf.prezzi[materia]) {
+        azione.innerHTML = `<p>${f(js.pagamentiInArrivo, io.email)}</p>`;
+        return;
+      }
+      azione.innerHTML = `<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
+        <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
+      const s = document.createElement('script');
+      s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+      s.onload = () => {
+        if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
+        Paddle.Initialize({
+          token: conf.token,
+          eventCallback: (ev) => {
+            if (ev.name !== 'checkout.completed') return;
+            azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
+            let tentativi = 0;
+            const controlla = async () => {
+              const r = await fetch('/api/io').catch(() => null);
+              const d = r && r.ok ? await r.json() : null;
+              if (d && d.materie.includes(materia)) { location.href = `${pref}/${materia}`; return; }
+              if (++tentativi < 30) setTimeout(controlla, 2000);
+              else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
+            };
+            controlla();
+          },
+        });
+        document.getElementById('compra').addEventListener('click', () => {
+          Paddle.Checkout.open({
+            items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
+            customer: { email: io.email },
+            customData: { materia, email: io.email },
+            settings: { locale: localePaddle },
+          });
+        });
+      };
+      s.onerror = () => { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; };
+      document.head.appendChild(s);
+    })();
+  </script>
+</Base>

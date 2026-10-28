@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import Svolto from '../../../../../viste/Svolto.astro';
+export async function getStaticPaths() {
+  return (await getCollection('svolti')).map((v) => {
+    const [materia, argomento, n] = v.id.split('/');
+    return { params: { materia, argomento, n } };
+  });
+}
+const { materia, argomento, n } = Astro.params;
+---
+<Svolto lingua="en" materia={materia!} argomento={argomento!} n={n!} />

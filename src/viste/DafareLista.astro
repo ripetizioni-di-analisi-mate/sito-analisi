@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { argomentoL, link, voceL, T, type Lingua } from '../i18n';
+import { vicini, perArgomento, numero } from '../lib/nav';
+interface Props { lingua: Lingua; materia: string; argomento: string }
+const { lingua, materia, argomento } = Astro.props;
+const t = T(lingua);
+const arg = argomentoL(lingua, materia, argomento);
+const voci = await Promise.all(perArgomento(await getCollection('dafare'), materia, argomento).map((e) => voceL(lingua, 'dafare', e.id)));
+const nonTradotta = voci.some((v) => !v.tradotta);
+const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
+const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua);
+const base = `/${materia}/${argomento}`;
+---
+<Base
+  titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi }]}
+  materia={materia} argomento={argomento} sezione="esercizi"
+  precedente={precedente} successivo={successivo}
+  lingua={lingua} nonTradotta={nonTradotta}
+>
+  <p class="sopratitolo">{t.sezioni.esercizi}</p>
+  <h1>{arg.titolo}</h1>
+  <p class="sommario">{t.dafareSommario}</p>
+  {voci.length === 0 && <p class="nota-segnaposto">{t.dafareInPreparazione}</p>}
+  {resi.map(({ v, Content }) => (
+    <section class="traccia" id={`esercizio-${numero(v.id)}`}>
+      <h2><a href={link(lingua, `${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
+      <Content />
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,9 @@
+---
+import DafareLista from '../../../../viste/DafareLista.astro';
+import { coppie } from '../../../../data/materie';
+export function getStaticPaths() {
+  return coppie().map((c) => ({ params: c }));
+}
+const { materia, argomento } = Astro.params;
+---
+<DafareLista lingua="en" materia={materia!} argomento={argomento!} />

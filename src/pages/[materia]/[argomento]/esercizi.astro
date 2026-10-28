@@ -1,34 +1,9 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Base from '../../../layouts/Base.astro';
-import { coppie, argomento as trovaArgomento } from '../../../data/materie';
-import { url } from '../../../lib/url';
-import { vicini, perArgomento, numero } from '../../../lib/nav';
-
+import DafareLista from '../../../viste/DafareLista.astro';
+import { coppie } from '../../../data/materie';
 export function getStaticPaths() {
   return coppie().map((c) => ({ params: c }));
 }
 const { materia, argomento } = Astro.params;
-const arg = trovaArgomento(materia!, argomento!);
-const voci = perArgomento(await getCollection('dafare'), materia!, argomento!);
-const resi = await Promise.all(voci.map(async (v) => ({ v, Content: (await render(v)).Content })));
-const { precedente, successivo } = vicini(materia!, argomento!, 'esercizi');
-const base = `/${materia}/${argomento}`;
 ---
-<Base
-  titolo={`${arg.titolo} · Esercizi da fare`}
-  percorso={[{ titolo: arg.breve, href: url(`${base}/teoria`) }, { titolo: 'Esercizi da fare' }]}
-  materia={materia} argomento={argomento} sezione="esercizi"
-  precedente={precedente} successivo={successivo}
->
-  <p class="sopratitolo">Esercizi da fare</p>
-  <h1>{arg.titolo}</h1>
-  <p class="sommario">Tracce da svolgere in autonomia. La soluzione finale compare con il pulsante sotto ogni traccia; ogni esercizio ha anche una pagina propria, da condividere con il link.</p>
-  {voci.length === 0 && <p class="nota-segnaposto">Le tracce di questo argomento sono in preparazione.</p>}
-  {resi.map(({ v, Content }) => (
-    <section class="traccia" id={`esercizio-${numero(v.id)}`}>
-      <h2><a href={url(`${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
-      <Content />
-    </section>
-  ))}
-</Base>
+<DafareLista lingua="it" materia={materia!} argomento={argomento!} />

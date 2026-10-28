@@ -1,0 +1,79 @@
+---
+import { existsSync } from 'node:fs';
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
+import { vicini, perArgomento, numero } from '../lib/nav';
+import { url } from '../lib/url';
+interface Props { lingua: Lingua; materia: string; argomento: string }
+const { lingua, materia, argomento } = Astro.props;
+const t = T(lingua);
+const arg = argomentoL(lingua, materia, argomento);
+const { voce, tradotta } = await voceL(lingua, 'teoria', `${materia}/${argomento}`);
+const resa = voce ? await render(voce) : null;
+const Contenuto = resa?.Content ?? null;
+const sezioni = resa?.headings.filter((h: { depth: number }) => h.depth === 2) ?? [];
+const svolti = perArgomento(await getCollection('svolti'), materia, argomento);
+const dafare = perArgomento(await getCollection('dafare'), materia, argomento);
+const titoliSvolti = Object.fromEntries((await Promise.all(svolti.map((e) => voceL(lingua, 'svolti', e.id)))).map(({ voce: v }) => [v.id, v.data.titolo]));
+const { precedente, successivo } = vicini(materia, argomento, 'teoria', lingua);
+// Argomento successivo della materia, per chi segue solo il filo della teoria.
+const elenco = materiaL(lingua, materia).argomenti;
+const dopo = elenco[elenco.findIndex((a) => a.slug === argomento) + 1];
+const prossimo = dopo && { titolo: dopo.titolo, href: link(lingua, `/${materia}/${dopo.slug}/teoria`) };
+const pdf = existsSync(new URL(`../../public/pdf/${materia}/${argomento}.pdf`, import.meta.url));
+const base = `/${materia}/${argomento}`;
+
+// ancora → esercizi che la usano, per i collegamenti dalla teoria agli esercizi
+const usi: Record<string, { s: number[]; d: number[] }> = {};
+for (const e of svolti) for (const x of e.data.teoria) ((usi[x] ||= { s: [], d: [] }).s.push(numero(e.id)));
+for (const e of dafare) for (const x of e.data.teoria) ((usi[x] ||= { s: [], d: [] }).d.push(numero(e.id)));
+const basi = { s: link(lingua, `${base}/esercizi-svolti`), d: link(lingua, `${base}/esercizi`) };
+const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFareMin };
+---
+<Base
+  titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
+  descrizione={voce?.data.sommario}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria }]}
+  materia={materia} argomento={argomento} sezione="teoria"
+  precedente={precedente} successivo={successivo} prossimo={prossimo}
+  lingua={lingua} nonTradotta={!tradotta}
+>
+  <p class="sopratitolo">{t.sezioni.teoria}</p>
+  <h1>{voce?.data.titolo ?? arg.titolo}</h1>
+  {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
+  {pdf && <p class="collegamenti">{t.pdfArgomento}: <a href={url(`/pdf/${materia}/${argomento}.pdf`)}>{t.scaricaPdf(arg.titolo)}</a> {t.pdfContiene}</p>}
+  {sezioni.length > 1 && (
+    <details class="sommario-pagina">
+      <summary>{t.inQuestaPagina}</summary>
+      <ol>
+        {sezioni.map((s: { slug: string; text: string }) => <li><a href={`#${s.slug}`}>{s.text}</a></li>)}
+      </ol>
+    </details>
+  )}
+  {Contenuto ? <Contenuto /> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
+  <script is:inline define:vars={{ usi, basi, parole }}>
+    for (const [id, u] of Object.entries(usi)) {
+      const b = document.getElementById(id);
+      if (!b) continue;
+      const link = (base, n) => `<a href="${base.replace(/\.html$/, '')}/${n}${base.endsWith('.html') ? '.html' : ''}">${n}</a>`;
+      const parti = [];
+      if (u.s.length) parti.push(parole.svolti + ' ' + u.s.map((n) => link(basi.s, n)).join(', '));
+      if (u.d.length) parti.push(parole.dafare + ' ' + u.d.map((n) => link(basi.d, n)).join(', '));
+      const p = document.createElement('p');
+      p.className = 'blocco-esercizi';
+      p.innerHTML = parole.esercizi + ': ' + parti.join(' · ');
+      b.appendChild(p);
+    }
+  </script>
+  {svolti.length > 0 && (
+    <>
+      <h2>{t.svoltiSuArgomento}</h2>
+      <ul class="elenco-esercizi">
+        {svolti.map((e) => (
+          <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{titoliSvolti[e.id]}</span></a></li>
+        ))}
+      </ul>
+    </>
+  )}
+</Base>

@@ -1,0 +1,9 @@
+---
+import Teoria from '../../../../viste/Teoria.astro';
+import { coppie } from '../../../../data/materie';
+export function getStaticPaths() {
+  return coppie().map((c) => ({ params: c }));
+}
+const { materia, argomento } = Astro.params;
+---
+<Teoria lingua="en" materia={materia!} argomento={argomento!} />

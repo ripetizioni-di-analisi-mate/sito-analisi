@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import Dafare from '../../../../../viste/Dafare.astro';
+export async function getStaticPaths() {
+  return (await getCollection('dafare')).map((v) => {
+    const [materia, argomento, n] = v.id.split('/');
+    return { params: { materia, argomento, n } };
+  });
+}
+const { materia, argomento, n } = Astro.params;
+---
+<Dafare lingua="en" materia={materia!} argomento={argomento!} n={n!} />

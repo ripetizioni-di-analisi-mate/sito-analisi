@@ -1,17 +1,19 @@
 ---
-import { MATERIE, SEZIONI, materia as trovaMateria, gruppi } from '../data/materie';
-import { url } from '../lib/url';
+import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua } from '../i18n';
 import Stato from './Stato.astro';
-interface Props { materia?: string; argomento?: string; sezione?: string }
-const { materia, argomento, sezione } = Astro.props;
-const m = materia ? trovaMateria(materia) : undefined;
+interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
+const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
+const t = T(lingua);
+const m = materia ? materiaL(lingua, materia) : undefined;
+const MATERIE = materieL(lingua);
+const SEZIONI = sezioniL(lingua);
 ---
 <nav class="indice" aria-label="Indice">
   {m ? (
     <>
       <p class="indice-materia">
-        <a href={url(`/${m.slug}`)}>{m.titolo}</a>
-        <a class="cambia-materia" href={url('/')}>altre materie</a>
+        <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a>
+        <a class="cambia-materia" href={link(lingua, '/')}>{t.altreMaterie}</a>
       </p>
       <ol>
         {m.argomenti.map((a) => {
@@ -21,7 +23,7 @@ const m = materia ? trovaMateria(materia) : undefined;
               <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento>{a.titolo}</button>
               <ol class:list={{ aperta: corrente }}>
                 {SEZIONI.map((s) => (
-                  <li><a href={url(`/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }}>{s.titolo}</a></li>
+                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }}>{s.titolo}</a></li>
                 ))}
               </ol>
             </li>
@@ -31,19 +33,19 @@ const m = materia ? trovaMateria(materia) : undefined;
     </>
   ) : (
     <>
-      {gruppi().map((g) => (
+      {gruppiL(lingua).map((g) => (
         <>
           <p class="indice-materia"><span>{g}</span></p>
           <ol>
             {MATERIE.filter((x) => x.gruppo === g).map((x) => (
-              <li data-materia={x.slug}>{x.attiva ? <a class="argomento" href={url(`/${x.slug}`)}>{x.titolo}<Stato prezzo={x.prezzo} compatto /></a> : <span class="argomento in-preparazione">{x.titolo} <small>in preparazione</small></span>}</li>
+              <li data-materia={x.slug}>{x.attiva ? <a class="argomento" href={link(lingua, `/${x.slug}`)}>{x.titolo}<Stato prezzo={x.prezzo} compatto lingua={lingua} /></a> : <span class="argomento in-preparazione">{x.titolo} <small>{t.inPreparazione}</small></span>}</li>
             ))}
           </ol>
         </>
       ))}
     </>
   )}
-  <p class="indice-contatti"><a href={url('/contatti')}>Contatti e assistenza</a></p>
+  <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>
 </nav>
 <script>
   // Un tocco sul nome dell'argomento apre le sue tre sezioni, un secondo tocco le richiude.

@@ -1,20 +1,19 @@
-import { materia as trovaMateria, SEZIONI } from '../data/materie';
-import { url } from './url';
+import { materiaL, sezioniL, link, T, type Lingua } from '../i18n';
 
 export interface Passo { titolo: string; sotto?: string; href: string }
 
 // Ordine di lettura dentro una materia: per ogni argomento teoria, esercizi svolti, esercizi da fare.
-function pagine(m: string) {
-  return trovaMateria(m).argomenti.flatMap((a) =>
-    SEZIONI.map((s) => ({ chiave: `${a.slug}/${s.slug}`, titolo: s.titolo, sotto: a.breve, href: url(`/${m}/${a.slug}/${s.slug}`) })),
+function pagine(m: string, l: Lingua) {
+  return materiaL(l, m).argomenti.flatMap((a) =>
+    sezioniL(l).map((s) => ({ chiave: `${a.slug}/${s.slug}`, titolo: s.titolo, sotto: a.breve, href: link(l, `/${m}/${a.slug}/${s.slug}`) })),
   );
 }
 
-export function vicini(m: string, argomento: string, sezione: string): { precedente?: Passo; successivo?: Passo } {
-  const P = pagine(m);
+export function vicini(m: string, argomento: string, sezione: string, l: Lingua = 'it'): { precedente?: Passo; successivo?: Passo } {
+  const P = pagine(m, l);
   const i = P.findIndex((p) => p.chiave === `${argomento}/${sezione}`);
   return {
-    precedente: i > 0 ? P[i - 1] : { titolo: 'Indice degli argomenti', sotto: trovaMateria(m).breve, href: url(`/${m}`) },
+    precedente: i > 0 ? P[i - 1] : { titolo: T(l).indiceArgomenti, sotto: materiaL(l, m).breve, href: link(l, `/${m}`) },
     successivo: i >= 0 && i < P.length - 1 ? P[i + 1] : undefined,
   };
 }

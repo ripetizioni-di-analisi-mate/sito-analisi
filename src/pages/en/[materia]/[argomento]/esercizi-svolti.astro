@@ -1,0 +1,9 @@
+---
+import SvoltiLista from '../../../../viste/SvoltiLista.astro';
+import { coppie } from '../../../../data/materie';
+export function getStaticPaths() {
+  return coppie().map((c) => ({ params: c }));
+}
+const { materia, argomento } = Astro.params;
+---
+<SvoltiLista lingua="en" materia={materia!} argomento={argomento!} />

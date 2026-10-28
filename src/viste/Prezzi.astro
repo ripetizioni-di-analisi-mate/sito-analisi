@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { materieL, link, T, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const t = T(lingua);
+const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
+---
+<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua}>
+  <p class="sopratitolo">{t.prezzi}</p>
+  <h1>{t.prezzi}</h1>
+  <p class="sommario">{t.prezziSommario}</p>
+
+  <ul class="griglia-materie">
+    {aPagamento.map((m) => (
+      <li style={`--accento: ${m.colore}`}>
+        <a href={link(lingua, `/${m.slug}/sblocca`)}>
+          <h3>{m.titolo} — {m.prezzo} €</h3>
+          <p>{m.descrizione}</p>
+          <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>{t.cosaComprende}</h2>
+  <ul class="cosa-include">
+    {t.comprende.map((x) => <li>{x}</li>)}
+  </ul>
+</Base>

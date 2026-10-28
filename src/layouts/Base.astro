@@ -6,8 +6,9 @@ import '@fontsource/source-sans-3/700.css';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
-import { MATERIE, materia as trovaMateria } from '../data/materie';
+import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
+import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
 const WHATSAPP = 'https://wa.me/393885680393';
@@ -23,9 +24,14 @@ interface Props {
   precedente?: Passo;
   successivo?: Passo;
   prossimo?: { titolo: string; href: string };
+  lingua?: Lingua;
+  nonTradotta?: boolean; // pagina inglese non ancora tradotta: si mostra l'italiano con un avviso
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo } = Astro.props;
-const m = materia ? trovaMateria(materia) : undefined;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false } = Astro.props;
+const t = T(lingua);
+const m = materia ? materiaL(lingua, materia) : undefined;
+const altra: Lingua = lingua === 'it' ? 'en' : 'it';
+const versoAltra = altraLingua(Astro.url.pathname, altra);
 const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`;
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
@@ -36,12 +42,13 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 }).join('');
 ---
 <!doctype html>
-<html lang="it" style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }}>
+<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <style is:inline set:html={regoleStato}></style>
   <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
+  <link rel="alternate" hreflang={altra} href={versoAltra} />
   <title>{titoloCompleto}</title>
   {descrizione && <meta name="description" content={descrizione} />}
   <meta name="color-scheme" content="light" />
@@ -53,42 +60,46 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 <body>
   <header class="testata">
     <div class="testata-interna">
-      <button class="bottone-indice" type="button" aria-label="Apri l'indice" data-apri-indice>
+      <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
-        <span>Indice</span>
+        <span>{t.indice}</span>
       </button>
-      <a class="marchio" href={url('/')}>
+      <a class="marchio" href={link(lingua, '/')}>
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
       {m && (
-        <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={url(`/${m.slug}`)}>
+        <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
           {m.prezzo && <svg class="lucchetto chiuso" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>}
           {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 5.9-.8"/></svg>}
           <span>{m.breve}</span>
-          {m.prezzo && <span class="dicitura-sbloccata">Sbloccata</span>}
+          {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
         </a>
       )}
-      <a class="bottone-cerca" href={url('/cerca')} aria-label="Cerca">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-        <span>Cerca</span>
+      <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.3 2.2 12.7 0 15M10 2.5c-2.2 2.3-2.2 12.7 0 15"/></svg>
+        <span>{altra.toUpperCase()}</span>
       </a>
-      <a class="bottone-account" href={url('/account')} aria-label="Il tuo account">
+      <a class="bottone-cerca" href={link(lingua, '/cerca')} aria-label={t.cerca}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        <span>{t.cerca}</span>
+      </a>
+      <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
-        <span class="se-ospite">Accedi</span><span class="se-collegato">Account</span>
+        <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
       </a>
     </div>
   </header>
 
   <div class="corpo">
-    <Indice materia={materia} argomento={argomento} sezione={sezione} />
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
     <main>
       <div class="pagina">
         {(percorso.length > 0 || m) && (
           <nav class="percorso" aria-label="Percorso">
             <ol>
-              <li><a href={url('/')}>Materie</a></li>
-              {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={url(`/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
+              <li><a href={link(lingua, '/')}>{t.materie}</a></li>
+              {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
               {percorso.map((p, i) => (
                 <li aria-current={i === percorso.length - 1 ? 'page' : undefined}>
                   {p.href && i < percorso.length - 1 ? <a href={p.href}>{p.titolo}</a> : p.titolo}
@@ -97,39 +108,41 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
             </ol>
           </nav>
         )}
+        {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra}>Italiano</a></p>}
         <slot />
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
-            {precedente && <a class="precedente" href={precedente.href}><small>← Precedente{precedente.sotto ? ` · ${precedente.sotto}` : ''}</small>{precedente.titolo}</a>}
-            {successivo && <a class="successivo" href={successivo.href}><small>Successivo →{successivo.sotto ? ` · ${successivo.sotto}` : ''}</small>{successivo.titolo}</a>}
+            {precedente && <a class="precedente" href={precedente.href}><small>← {t.precedente}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</small>{precedente.titolo}</a>}
+            {successivo && <a class="successivo" href={successivo.href}><small>{t.successivo} →{successivo.sotto ? ` · ${successivo.sotto}` : ''}</small>{successivo.titolo}</a>}
           </nav>
         )}
-        {prossimo && <p class="prossimo-argomento"><a href={prossimo.href}>Argomento successivo: {prossimo.titolo} →</a></p>}
+        {prossimo && <p class="prossimo-argomento"><a href={prossimo.href}>{t.argomentoSuccessivo}: {prossimo.titolo} →</a></p>}
       </div>
     </main>
   </div>
 
   <footer class="pie">
     <nav class="pie-link" aria-label="Informazioni">
-      <a href={url('/prezzi')}>Prezzi</a>
-      <a href={url('/contatti')}>Contatti e assistenza</a>
-      <a href={url('/privacy')}>Privacy</a>
+      <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
+      <a href={link(lingua, '/contatti')}>{t.contatti}</a>
+      <a href={link(lingua, '/privacy')}>{t.privacy}</a>
+      <a href={versoAltra} hreflang={altra} lang={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
     </nav>
     <span class="pie-copyright">© Carmine Tornincasa</span>
   </footer>
 
   <div class="bottoni-fissi">
-    <button class="torna-su" type="button" aria-label="Torna all'inizio della pagina" hidden>
+    <button class="torna-su" type="button" aria-label={t.tornaSu} hidden>
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg>
     </button>
-    <a class="bottone-whatsapp" href={WHATSAPP} target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp">
+    <a class="bottone-whatsapp" href={WHATSAPP} target="_blank" rel="noopener" aria-label={t.whatsapp}>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48a.92.92 0 0 0-.66.31c-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
     </a>
   </div>
 
   <dialog class="cassetto" id="cassetto-indice">
-    <div class="cassetto-testa"><strong>Indice</strong><button type="button" aria-label="Chiudi" data-chiudi-indice>×</button></div>
-    <Indice materia={materia} argomento={argomento} sezione={sezione} />
+    <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
   </dialog>
 
   <script>
@@ -146,6 +159,18 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     }
     adattaFormule();
     document.fonts?.ready.then(adattaFormule);
+
+    // Occhietto accanto alle password: mostra o nasconde quello che si è scritto.
+    document.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-mostra-password]');
+      if (!b) return;
+      e.preventDefault();
+      const campo = b.previousElementSibling as HTMLInputElement;
+      const visibile = campo.type === 'password';
+      campo.type = visibile ? 'text' : 'password';
+      b.setAttribute('aria-pressed', String(visibile));
+      campo.focus();
+    });
     addEventListener('resize', adattaFormule);
 
     // Il tasto Indice: su schermi larghi apre e chiude la colonna laterale (scelta ricordata),

@@ -31,4 +31,9 @@ const dafare = defineCollection({
   }),
 });
 
-export const collections = { teoria, svolti, dafare };
+// Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.
+const teoria_en = defineCollection({ loader: glob({ pattern: '*/*.md', base: './src/content-en/teoria' }), schema: teoria.schema });
+const svolti_en = defineCollection({ loader: glob({ pattern: '*/*/*.md', base: './src/content-en/svolti' }), schema: svolti.schema });
+const dafare_en = defineCollection({ loader: glob({ pattern: '*/*/*.md', base: './src/content-en/dafare' }), schema: dafare.schema });
+
+export const collections = { teoria, svolti, dafare, teoria_en, svolti_en, dafare_en };

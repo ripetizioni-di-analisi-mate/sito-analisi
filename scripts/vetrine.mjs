@@ -32,18 +32,28 @@ function senzaSoluzioni(html, invito) {
   return out;
 }
 
+// Testi delle vetrine in ogni lingua del sito (l'italiano alla radice, le altre sotto /<lingua>).
+const LINGUE = [
+  { pref: '', sblocca: 'Sblocca ora', pdf: /<p class="collegamenti">PDF dell'argomento[\s\S]*?<\/p>/,
+    continua: (n, nomi) => `La teoria continua con ${n} altri paragrafi (${nomi}…), oltre a tutte le schede svolte, le soluzioni e il PDF.`,
+    riservata: 'Soluzione riservata a chi ha sbloccato la materia.', soluzione: 'La soluzione completa di questo esercizio è nella versione sbloccata.' },
+  { pref: '/en', sblocca: 'Unlock now', pdf: /<p class="collegamenti">Topic PDF[\s\S]*?<\/p>/,
+    continua: (n, nomi) => `The theory continues with ${n} more sections (${nomi}…), plus all worked examples, the solutions and the PDF.`,
+    riservata: 'Solution available to those who have unlocked the subject.', soluzione: 'The full solution of this exercise is in the unlocked version.' },
+];
+let L = LINGUE[0];
 function invitoHtml(materia, cosa) {
-  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="/${materia}/sblocca">Sblocca ora</a></div>`;
+  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.sblocca}</a></div>`;
 }
 
 let teorie = 0, esercizi = 0;
-for (const materia of A_PAGAMENTO) {
-  const base = join(DIST, materia);
+for (L of LINGUE) for (const materia of A_PAGAMENTO) {
+  const base = join(DIST, L.pref, materia);
   if (!existsSync(base)) continue;
   for (const argomento of readdirSync(base)) {
     const cartella = join(base, argomento);
     if (!existsSync(join(cartella, 'teoria.html'))) continue;
-    const dest = join(DIST, 'vetrine', materia, argomento);
+    const dest = join(DIST, 'vetrine', L.pref, materia, argomento);
     mkdirSync(join(dest, 'esercizi'), { recursive: true });
 
     // --- teoria a metà ---
@@ -56,13 +66,13 @@ for (const materia of A_PAGAMENTO) {
       let coda = t.indexOf('<nav class="passi"', taglio);
       if (coda === -1) coda = t.indexOf('<script', taglio);
       const nascoste = posizioni.length - tenute;
-      const invito = invitoHtml(materia, `La teoria continua con ${nascoste} altri paragrafi (${posizioni.slice(tenute).map((m2) => m2[1].replace(/-/g, ' ')).slice(0, 3).join(', ')}…), oltre a tutte le schede svolte, le soluzioni e il PDF.`);
+      const invito = invitoHtml(materia, L.continua(nascoste, posizioni.slice(tenute).map((m2) => m2[1].replace(/-/g, ' ')).slice(0, 3).join(', ')));
       let vetrina = t.slice(0, taglio) + invito + t.slice(coda);
       // nel riquadro "In questa pagina" restano solo i paragrafi visibili
       const visibili = new Set(posizioni.slice(0, tenute).map((m2) => m2[1]));
       vetrina = vetrina.replace(/<li><a href="#([^"]+)">(.*?)<\/a><\/li>/g, (tutto, slug) => (visibili.has(slug) ? tutto : ''));
       // niente scaricamento del PDF dalla vetrina
-      vetrina = vetrina.replace(/<p class="collegamenti">PDF dell'argomento[\s\S]*?<\/p>/, '');
+      vetrina = vetrina.replace(L.pdf, '');
       writeFileSync(join(dest, 'teoria.html'), vetrina);
       teorie++;
     }
@@ -70,7 +80,7 @@ for (const materia of A_PAGAMENTO) {
     // --- elenco degli esercizi da fare: tracce visibili, soluzioni tolte ---
     if (existsSync(join(cartella, 'esercizi.html'))) {
       const el = readFileSync(join(cartella, 'esercizi.html'), 'utf8');
-      writeFileSync(join(dest, 'esercizi.html'), senzaSoluzioni(el, '<p class="soluzione-riservata">Soluzione riservata a chi ha sbloccato la materia.</p>'));
+      writeFileSync(join(dest, 'esercizi.html'), senzaSoluzioni(el, `<p class="soluzione-riservata">${L.riservata}</p>`));
     }
 
     // --- esercizi da fare: soluzioni oscurate ---
@@ -79,7 +89,7 @@ for (const materia of A_PAGAMENTO) {
       for (const f of readdirSync(cartellaEs)) {
         if (!/^\d+\.html$/.test(f)) continue;
         const e = readFileSync(join(cartellaEs, f), 'utf8');
-        writeFileSync(join(dest, 'esercizi', f), senzaSoluzioni(e, invitoHtml(materia, 'La soluzione completa di questo esercizio è nella versione sbloccata.')));
+        writeFileSync(join(dest, 'esercizi', f), senzaSoluzioni(e, invitoHtml(materia, L.soluzione)));
         esercizi++;
       }
     }

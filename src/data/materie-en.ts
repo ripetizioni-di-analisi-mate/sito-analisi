@@ -1,0 +1,55 @@
+// Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
+export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  precorso: {
+    titolo: 'Precalculus',
+    breve: 'Precalculus',
+    descrizione: 'The mathematics you need before Analysis 1: logic, polynomials, equations and inequalities of every kind, analytic geometry.',
+    argomenti: {
+      logica: { titolo: 'Elementary logic', breve: 'Logic' },
+      'potenze-e-radici': { titolo: 'Powers and roots', breve: 'Powers and roots' },
+      polinomi: { titolo: 'Factorization, Ruffini’s rule and polynomial division', breve: 'Polynomials' },
+      'equazioni-polinomiali': { titolo: 'Polynomial and rational equations and inequalities', breve: 'Polynomial and rational' },
+      'valore-assoluto': { titolo: 'Equations and inequalities with absolute value', breve: 'Absolute value' },
+      irrazionali: { titolo: 'Irrational equations and inequalities', breve: 'Irrational' },
+      logaritmiche: { titolo: 'Logarithmic equations and inequalities', breve: 'Logarithmic' },
+      esponenziali: { titolo: 'Exponential equations and inequalities', breve: 'Exponential' },
+      goniometriche: { titolo: 'Trigonometric equations and inequalities', breve: 'Trigonometric' },
+      'geometria-analitica': { titolo: 'Analytic geometry and conic sections', breve: 'Analytic geometry' },
+    },
+  },
+  'analisi-1': {
+    titolo: 'Mathematical Analysis 1',
+    breve: 'Analysis 1',
+    descrizione: 'Limits, derivatives, integrals, series and differential equations: the theory and the exercises for the exam.',
+    argomenti: {
+      insiemi: { titolo: 'Sets, induction and elementary functions', breve: 'Basics' },
+      'numeri-complessi': { titolo: 'Complex numbers', breve: 'Complex numbers' },
+      limiti: { titolo: 'Limits and continuity', breve: 'Limits' },
+      derivate: { titolo: 'Differential calculus and Taylor', breve: 'Derivatives' },
+      'studio-di-funzione': { titolo: 'Graphing functions', breve: 'Graphing functions' },
+      integrali: { titolo: 'Integral calculus', breve: 'Integrals' },
+      'integrali-impropri': { titolo: 'Improper integrals', breve: 'Improper integrals' },
+      serie: { titolo: 'Numerical series', breve: 'Series' },
+      'equazioni-differenziali': { titolo: 'Differential equations', breve: 'Differential equations' },
+    },
+  },
+  'analisi-2': {
+    titolo: 'Mathematical Analysis 2',
+    breve: 'Analysis 2',
+    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions.',
+    argomenti: {
+      'funzioni-di-piu-variabili': { titolo: 'Functions of several variables', breve: 'Several variables' },
+      'calcolo-differenziale': { titolo: 'Differential calculus in several variables', breve: 'Differential calculus' },
+      'funzioni-implicite': { titolo: 'Implicit functions', breve: 'Implicit functions' },
+      'massimi-e-minimi': { titolo: 'Free and constrained maxima and minima', breve: 'Maxima and minima' },
+      'curve-e-integrali-di-linea': { titolo: 'Curves and line integrals', breve: 'Curves' },
+      'campi-vettoriali': { titolo: 'Vector fields and Green’s theorem', breve: 'Vector fields' },
+      'integrali-doppi-e-tripli': { titolo: 'Double and triple integrals', breve: 'Multiple integrals' },
+      'superfici-e-flussi': { titolo: 'Surfaces, fluxes and the theorems of Gauss and Stokes', breve: 'Surfaces and fluxes' },
+      'successioni-e-serie-di-funzioni': { titolo: 'Sequences and series of functions', breve: 'Series of functions' },
+      'serie-di-potenze': { titolo: 'Power series and Taylor series', breve: 'Power series' },
+      'serie-di-fourier': { titolo: 'Fourier series', breve: 'Fourier series' },
+    },
+  },
+};
+export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };

@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { testiJs, T, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const t = T(lingua);
+const js = testiJs(lingua);
+---
+<Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua}>
+  <p class="sopratitolo">{t.ricerca}</p>
+  <h1>{t.cercaNelSito}</h1>
+  <p class="sommario">{t.cercaSommario}</p>
+  <input class="campo-cerca" id="cerca" type="search" placeholder={t.cercaEsempio} autocomplete="off" autofocus data-testi={JSON.stringify(js)} />
+  <p id="esito" class="nota-segnaposto" hidden></p>
+  <ul class="risultati" id="risultati"></ul>
+
+  <script>
+    const campo = document.getElementById('cerca') as HTMLInputElement;
+    const lista = document.getElementById('risultati') as HTMLUListElement;
+    const esito = document.getElementById('esito') as HTMLParagraphElement;
+    const js = JSON.parse(campo.dataset.testi || '{}');
+    // La ricerca dalla home arriva come ?q=…: il campo parte già compilato.
+    if (!campo.value) campo.value = new URLSearchParams(location.search).get('q') ?? '';
+    let voci: { t: string; s: string; m: string; h: string; p: string }[] = [];
+
+    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const evid = (t: string, q: string[]) => {
+      let out = t;
+      for (const w of q) out = out.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig'), '<mark>$1</mark>');
+      return out;
+    };
+
+    async function carica() {
+      const indice = location.pathname.startsWith('/en/') || location.pathname === '/en' ? '/en/indice-ricerca.json' : '/indice-ricerca.json';
+      const r = await fetch(indice);
+      voci = await r.json();
+      cerca();
+    }
+    function cerca() {
+      const q = norm(campo.value).split(/\s+/).filter((w) => w.length > 1);
+      lista.innerHTML = '';
+      if (q.length === 0) { esito.hidden = true; return; }
+      const trovate = voci
+        .map((v) => {
+          const testo = norm(`${v.t} ${v.s} ${v.m} ${v.p}`);
+          const punti = q.reduce((acc, w) => acc + (norm(v.t).includes(w) ? 3 : testo.includes(w) ? 1 : 0), 0);
+          return { v, punti, tutte: q.every((w) => testo.includes(w)) };
+        })
+        .filter((x) => x.tutte)
+        .sort((a, b) => b.punti - a.punti)
+        .slice(0, 40);
+      esito.hidden = false;
+      esito.textContent = trovate.length === 0 ? js.nessunRisultato : trovate.length === 1 ? js.unRisultato : js.risultati.replace('§', String(trovate.length));
+      for (const { v } of trovate) {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${v.h}">${evid(v.t, q)}<small>${v.m} · ${v.s}</small></a>`;
+        lista.appendChild(li);
+      }
+    }
+    campo.addEventListener('input', cerca);
+    carica();
+  </script>
+</Base>

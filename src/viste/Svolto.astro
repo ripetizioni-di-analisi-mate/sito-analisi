@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import { titoliAncore } from '../lib/ancore';
+import Base from '../layouts/Base.astro';
+import { argomentoL, link, voceL, T, type Lingua } from '../i18n';
+import { numero, perArgomento } from '../lib/nav';
+interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
+const { lingua, materia, argomento, n } = Astro.props;
+const t = T(lingua);
+const id = `${materia}/${argomento}/${n}`;
+const fratelli = perArgomento(await getCollection('svolti'), materia, argomento);
+const i = fratelli.findIndex((x) => x.id === id);
+const { voce, tradotta } = await voceL(lingua, 'svolti', id);
+const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'svolti', v.id)).voce.data.titolo;
+const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
+const arg = argomentoL(lingua, materia, argomento);
+const resa = await render(voce);
+const Content = resa.Content;
+const salti = resa.headings.filter((h: { depth: number }) => h.depth === 2);
+const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomento}`)).voce?.body);
+const base = `/${materia}/${argomento}`;
+const lista = link(lingua, `${base}/esercizi-svolti`);
+const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.scheda} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi-svolti/${numero(v.id)}`) };
+---
+<Base
+  titolo={`${arg.breve} · ${t.sezioni['esercizi-svolti']} ${n}`}
+  descrizione={voce.data.titolo}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'], href: lista }, { titolo: `${t.scheda} ${n}` }]}
+  materia={materia} argomento={argomento} sezione="esercizi-svolti"
+  precedente={passo(fratelli[i - 1], tPrec) ?? { titolo: t.tutteLeSchede, sotto: arg.breve, href: lista }}
+  successivo={passo(fratelli[i + 1], tSucc) ?? { titolo: t.sezioni.esercizi, sotto: arg.breve, href: link(lingua, `${base}/esercizi`) }}
+  lingua={lingua} nonTradotta={!tradotta}
+>
+  <p class="sopratitolo">{t.sezioni['esercizi-svolti']} · {t.scheda} {n}</p>
+  <h1>{voce.data.titolo}</h1>
+  {voce.data.teoria.length > 0 && (
+    <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
+  )}
+  {salti.length > 1 && (
+    <p class="salta-esercizi">{t.vaiA}: {salti.map((s: { slug: string; text: string }) => <a href={`#${s.slug}`}>{s.text}</a>)}</p>
+  )}
+  <Content />
+</Base>

@@ -1,0 +1,8 @@
+---
+import Materia from '../../../viste/Materia.astro';
+import { MATERIE } from '../../../data/materie';
+export function getStaticPaths() {
+  return MATERIE.filter((m) => m.attiva).map((m) => ({ params: { materia: m.slug } }));
+}
+---
+<Materia lingua="en" materia={Astro.params.materia!} />

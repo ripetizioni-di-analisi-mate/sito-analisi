@@ -165,11 +165,14 @@ async function utenteCollegato(env, req) {
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
 // ---------- percorsi protetti ----------
+// Le pagine inglesi stanno sotto /en: stessa protezione, vetrine in /vetrine/en.
 function analizza(pathname) {
   let m = pathname.match(/^\/pdf\/([^/]+)\/([^/]+)\.pdf$/);
-  if (m) return { materia: m[1], argomento: m[2], tipo: 'pdf' };
+  if (m) return { materia: m[1], argomento: m[2], tipo: 'pdf', pref: '' };
+  const pref = /^\/en(?=\/)/.test(pathname) ? '/en' : '';
+  pathname = pathname.slice(pref.length);
   m = pathname.replace(/\.html$/, '').match(/^\/([^/]+)\/([^/]+)\/(teoria|stampa|esercizi-svolti|esercizi)(?:\/(\d+))?\/?$/);
-  if (m) return { materia: m[1], argomento: m[2], tipo: m[3], n: m[4] ? Number(m[4]) : undefined };
+  if (m) return { materia: m[1], argomento: m[2], tipo: m[3], n: m[4] ? Number(m[4]) : undefined, pref };
   return null;
 }
 // Le pagine cambiano a seconda di chi le guarda (ospite, iscritto, materia sbloccata): niente risposte
@@ -347,19 +350,19 @@ export default {
     const io = pagina ? await utenteCollegato(env, req).catch(() => null) : null;
     let risposta;
     // Materia della pagina (anche la pagina principale della materia): serve per la spunta.
-    const primo = url.pathname.split('/')[1]?.replace(/\.html$/, '');
+    const primo = url.pathname.replace(/^\/en(?=\/)/, '').split('/')[1]?.replace(/\.html$/, '');
     let sbloccataQui = Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       if (!sbloccataQui) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa' || (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE)) {
-          risposta = await rispostaVetrina(env, req, `/${info.materia}/sblocca`);
+          risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
         } else if (info.tipo === 'teoria') {
-          risposta = await rispostaVetrina(env, req, `/vetrine/${info.materia}/${info.argomento}/teoria`);
+          risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/teoria`);
         } else if (info.tipo === 'esercizi') {
           risposta = await rispostaVetrina(env, req, info.n
-            ? `/vetrine/${info.materia}/${info.argomento}/esercizi/${info.n}`
-            : `/vetrine/${info.materia}/${info.argomento}/esercizi`);
+            ? `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi/${info.n}`
+            : `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi`);
         }
       }
     }

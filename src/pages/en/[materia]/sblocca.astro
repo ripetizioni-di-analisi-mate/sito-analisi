@@ -1,0 +1,8 @@
+---
+import Sblocca from '../../../viste/Sblocca.astro';
+import { MATERIE } from '../../../data/materie';
+export function getStaticPaths() {
+  return MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ params: { materia: m.slug } }));
+}
+---
+<Sblocca lingua="en" materia={Astro.params.materia!} />

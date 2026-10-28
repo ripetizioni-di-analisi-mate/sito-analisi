@@ -1,34 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../../layouts/Base.astro';
-import { coppie, argomento as trovaArgomento } from '../../../data/materie';
-import { url } from '../../../lib/url';
-import { vicini, perArgomento, numero } from '../../../lib/nav';
-
+import SvoltiLista from '../../../viste/SvoltiLista.astro';
+import { coppie } from '../../../data/materie';
 export function getStaticPaths() {
   return coppie().map((c) => ({ params: c }));
 }
 const { materia, argomento } = Astro.params;
-const arg = trovaArgomento(materia!, argomento!);
-const voci = perArgomento(await getCollection('svolti'), materia!, argomento!);
-const { precedente, successivo } = vicini(materia!, argomento!, 'esercizi-svolti');
-const base = `/${materia}/${argomento}`;
 ---
-<Base
-  titolo={`${arg.titolo} · Esercizi svolti`}
-  percorso={[{ titolo: arg.breve, href: url(`${base}/teoria`) }, { titolo: 'Esercizi svolti' }]}
-  materia={materia} argomento={argomento} sezione="esercizi-svolti"
-  precedente={precedente} successivo={successivo}
->
-  <p class="sopratitolo">Esercizi svolti</p>
-  <h1>{arg.titolo}</h1>
-  <p class="sommario">Una scheda per ogni tipologia, con più esercizi svolti in difficoltà crescente: prima il calcolo, poi la spiegazione a parole. In testa a ogni scheda ci sono i collegamenti alla teoria che usa.</p>
-  {voci.length === 0 && <p class="nota-segnaposto">Gli esercizi di questo argomento sono in preparazione.</p>}
-  {voci.length > 0 && (
-    <ul class="elenco-esercizi">
-      {voci.map((e) => (
-        <li><a href={url(`${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}</span></a></li>
-      ))}
-    </ul>
-  )}
-</Base>
+<SvoltiLista lingua="it" materia={materia!} argomento={argomento!} />

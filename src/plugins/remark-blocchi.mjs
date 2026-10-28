@@ -25,8 +25,18 @@ const ETICHETTE = {
 
 const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione' };
 
+// Contenuti inglesi (src/content-en/): stesse direttive, etichette in inglese.
+const EN = {
+  definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition', dimostrazione: 'Proof',
+  esempio: 'Example', osservazione: 'Remark', attenzione: 'Warning', richiamo: 'Recall', soluzione: 'Solution',
+  mostra: 'Show solution', nascondi: 'Hide solution',
+};
+const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };
+
 export default function remarkBlocchi() {
-  return (tree) => {
+  return (tree, file) => {
+    const percorso = String(file?.path || file?.history?.[0] || '');
+    const E = /content-en[\\/]/.test(percorso) ? EN : IT;
     visit(tree, (node) => {
       if (node.type === 'leafDirective' && node.name === 'grafico') {
         const a = node.attributes || {};
@@ -51,15 +61,15 @@ export default function remarkBlocchi() {
       if (APRIBILI[nome]) {
         // La soluzione cambia etichetta quando è aperta: "Mostra soluzione" / "Nascondi soluzione".
         const summary = nome === 'soluzione'
-          ? h('summary', { class: 'blocco-etichetta' }, [h('span', { class: 'se-chiuso' }, 'Mostra soluzione'), h('span', { class: 'se-aperto' }, 'Nascondi soluzione')])
-          : h('summary', { class: 'blocco-etichetta' }, APRIBILI[nome]);
+          ? h('summary', { class: 'blocco-etichetta' }, [h('span', { class: 'se-chiuso' }, E.mostra), h('span', { class: 'se-aperto' }, E.nascondi)])
+          : h('summary', { class: 'blocco-etichetta' }, E[nome]);
         data.hName = 'details';
         data.hProperties = { class: classi.join(' '), id: a.id };
         node.children.unshift({ type: 'html', value: toHtml(summary) });
         return;
       }
 
-      const intestazione = `<p class="blocco-etichetta">${titolo || ETICHETTE[nome]}</p>`;
+      const intestazione = `<p class="blocco-etichetta">${titolo || E[nome]}</p>`;
       data.hName = nome === 'richiamo' ? 'aside' : 'div';
       data.hProperties = { class: classi.join(' '), id: a.id };
       node.children.unshift({ type: 'html', value: intestazione });

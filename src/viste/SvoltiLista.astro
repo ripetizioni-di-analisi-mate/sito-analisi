@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { argomentoL, link, voceL, T, type Lingua } from '../i18n';
+import { vicini, perArgomento, numero } from '../lib/nav';
+interface Props { lingua: Lingua; materia: string; argomento: string }
+const { lingua, materia, argomento } = Astro.props;
+const t = T(lingua);
+const arg = argomentoL(lingua, materia, argomento);
+const voci = await Promise.all(perArgomento(await getCollection('svolti'), materia, argomento).map((e) => voceL(lingua, 'svolti', e.id)));
+const nonTradotta = voci.some((v) => !v.tradotta);
+const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua);
+const base = `/${materia}/${argomento}`;
+---
+<Base
+  titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'] }]}
+  materia={materia} argomento={argomento} sezione="esercizi-svolti"
+  precedente={precedente} successivo={successivo}
+  lingua={lingua} nonTradotta={nonTradotta}
+>
+  <p class="sopratitolo">{t.sezioni['esercizi-svolti']}</p>
+  <h1>{arg.titolo}</h1>
+  <p class="sommario">{t.svoltiSommario}</p>
+  {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
+  {voci.length > 0 && (
+    <ul class="elenco-esercizi">
+      {voci.map(({ voce: e }) => (
+        <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}</span></a></li>
+      ))}
+    </ul>
+  )}
+</Base>

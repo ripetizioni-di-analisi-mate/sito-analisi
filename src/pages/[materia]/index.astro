@@ -1,56 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
-import Base from '../../layouts/Base.astro';
-import { MATERIE, SEZIONI, materia as trovaMateria } from '../../data/materie';
-import { url } from '../../lib/url';
-
+import Materia from '../../viste/Materia.astro';
+import { MATERIE } from '../../data/materie';
 export function getStaticPaths() {
   return MATERIE.filter((m) => m.attiva).map((m) => ({ params: { materia: m.slug } }));
 }
-const { materia } = Astro.params;
-const m = trovaMateria(materia!);
-const vociTeoria = await getCollection('teoria');
-const teorie = new Set(vociTeoria.map((v) => v.id));
-// Riassunto di ogni argomento: la pagina è il programma del corso, non la copia dell'indice.
-const riassunti = Object.fromEntries(vociTeoria.map((v) => [v.id, v.data.sommario]));
-const svolti = await getCollection('svolti');
-const dafare = await getCollection('dafare');
-const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 ---
-<Base titolo="Argomenti" descrizione={m.descrizione} materia={materia}>
-  <p class="sopratitolo">{m.titolo}</p>
-  <h1>Gli argomenti dell'esame</h1>
-  <p class="sommario">{m.descrizione}</p>
-  {m.prezzo && (
-    <div class="riquadro-stato" data-materia={m.slug}>
-      <div class="stato-sbloccata">
-        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="currentColor"/><path d="M12 20.5l5.5 5.3L28.5 15" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div class="testo"><strong>Accesso completo attivo</strong><span>Teoria, tutte le schede svolte, soluzioni e PDF di {m.titolo} sono sbloccati nel tuo account.</span></div>
-      </div>
-      <div class="stato-bloccata">
-        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="9" y="18" width="22" height="16" rx="3.5"/><path d="M14 18v-4.5a6 6 0 0 1 12 0V18"/></svg>
-        <div class="testo"><strong>Stai vedendo un'anteprima</strong><span>Di ogni argomento puoi leggere l'inizio della teoria e le prime 3 schede svolte.</span></div>
-        <a class="bottone-sblocca" href={url(`/${m.slug}/sblocca`)}>Sblocca · {m.prezzo} €</a>
-      </div>
-    </div>
-  )}
-  <ol class="griglia-argomenti">
-    {m.argomenti.map((a) => {
-      const pronto = teorie.has(`${materia}/${a.slug}`);
-      const ns = conta(svolti, a.slug), nd = conta(dafare, a.slug);
-      return (
-        <li class:list={{ 'in-preparazione': !pronto }}>
-          <h2>{pronto ? <a href={url(`/${materia}/${a.slug}/teoria`)}>{a.titolo}</a> : a.titolo}</h2>
-          {pronto && riassunti[`${materia}/${a.slug}`] && <p class="riassunto">{riassunti[`${materia}/${a.slug}`]}</p>}
-          {pronto ? (
-            <nav aria-label={a.titolo}>
-              {SEZIONI.map((s) => <a href={url(`/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
-            </nav>
-          ) : (
-            <span class="conteggio">in preparazione</span>
-          )}
-        </li>
-      );
-    })}
-  </ol>
-</Base>
+<Materia lingua="it" materia={Astro.params.materia!} />

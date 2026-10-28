@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Stato from '../components/Stato.astro';
+import { materieL, gruppiL, link, T, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const t = T(lingua);
+const MATERIE = materieL(lingua);
+---
+<Base titolo={t.nomeSito} descrizione={t.homeDescrizione} lingua={lingua}>
+  <p class="sopratitolo">{t.homeSopra}</p>
+  <h1>{t.homeTitolo}</h1>
+  <p class="sommario">{t.homeSommario}</p>
+  <form class="cerca-home" action={link(lingua, '/cerca')} role="search">
+    <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
+    <button type="submit">{t.cerca}</button>
+  </form>
+  {gruppiL(lingua).map((g) => (
+    <section class="gruppo">
+      <h2 class="nome-gruppo">{g}</h2>
+      <ul class="griglia-materie">
+        {MATERIE.filter((m) => m.gruppo === g).map((m) => (
+          <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
+            {m.attiva ? (
+              <a href={link(lingua, `/${m.slug}`)}>
+                <h3>{m.titolo}</h3>
+                <p>{m.descrizione}</p>
+                <span class="piede-scheda"><span class="conteggio">{m.argomenti.length} {t.argomenti}</span><Stato prezzo={m.prezzo} lingua={lingua} /></span>
+              </a>
+            ) : (
+              <div>
+                <h3>{m.titolo}</h3>
+                <p>{m.descrizione}</p>
+                <span class="conteggio">{t.inPreparazione}</span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>
