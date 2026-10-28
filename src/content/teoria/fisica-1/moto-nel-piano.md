@@ -75,7 +75,7 @@ Se $f$ è continua su $[a, b]$ e $F$ è una sua primitiva, cioè $F' = f$, allor
 :::
 
 :::osservazione{#forma-della-traiettoria titolo="Forma della traiettoria"}
-Con accelerazione costante la traiettoria è un segmento di retta oppure un arco di parabola. Se $\vec{v}_0$ è nulla oppure parallela ad $\vec{a}$, il moto avviene lungo la retta per il punto iniziale con la direzione di $\vec{a}$, ed è un moto rettilineo uniformemente accelerato. Se $\vec{v}_0$ e $\vec{a}$ non sono paralleli, si sceglie l'asse $y$ parallelo ad $\vec{a}$; allora $a_x = 0$ e $v_{0x} \neq 0$, quindi $x$ è una funzione di primo grado di $t$ e $y$ una funzione di secondo grado. Ricavando $t$ da $x$ e sostituendo, $y$ risulta un polinomio di secondo grado in $x$, perciò la traiettoria è una **parabola** con asse parallelo ad $\vec{a}$. Il moto del proiettile è l'esempio principale di questo caso.
+Con accelerazione costante e non nulla la traiettoria è un segmento di retta oppure un arco di parabola. Se $\vec{v}_0$ è nulla oppure parallela ad $\vec{a}$, il moto avviene lungo la retta per il punto iniziale con la direzione di $\vec{a}$, ed è un moto rettilineo uniformemente accelerato. Se $\vec{v}_0$ e $\vec{a}$ non sono paralleli, si sceglie l'asse $y$ parallelo ad $\vec{a}$; allora $a_x = 0$ e $v_{0x} \neq 0$, quindi $x$ è una funzione di primo grado di $t$ e $y$ una funzione di secondo grado. Ricavando $t$ da $x$ e sostituendo, $y$ risulta un polinomio di secondo grado in $x$, perciò la traiettoria è una **parabola** con asse parallelo ad $\vec{a}$. Il moto del proiettile è l'esempio principale di questo caso.
 :::
 
 ## Moto del proiettile
@@ -179,7 +179,7 @@ Il corpo tocca il suolo quando $y = 0$, quindi il **tempo di caduta** e la dista
 $$
 t_c = \sqrt{\frac{2h}{g}}, \qquad d = v_0\,\sqrt{\frac{2h}{g}} .
 $$
-Il tempo di caduta non dipende da $v_0$, perché in ogni caso il moto verticale parte con velocità verticale nulla; un corpo lanciato in orizzontale e uno lasciato cadere dalla stessa quota nello stesso istante toccano il suolo insieme. Nell'istante dell'impatto $v_x = v_0$ e $v_y = -g\,t_c$, e l'angolo $\alpha$ della velocità sotto l'orizzontale soddisfa $\tan\alpha = \dfrac{|v_y|}{v_x}$. Per $h = 20\,\mathrm{m}$ e $v_0 = 8{,}0\,\mathrm{m/s}$ si ha $t_c = 2{,}02\,\mathrm{s}$ e $d = 16{,}2\,\mathrm{m}$.
+Il tempo di caduta non dipende da $v_0$, perché in ogni caso il moto verticale parte con velocità verticale nulla; un corpo lanciato in orizzontale e uno lasciato cadere dalla stessa quota nello stesso istante toccano il suolo insieme. Nell'istante dell'impatto $v_x = v_0$ e $v_y = -g\,t_c$, e l'angolo $\beta$ della velocità sotto l'orizzontale soddisfa $\tan\beta = \dfrac{|v_y|}{v_x}$. Per $h = 20\,\mathrm{m}$ e $v_0 = 8{,}0\,\mathrm{m/s}$ si ha $t_c = 2{,}02\,\mathrm{s}$ e $d = 16{,}2\,\mathrm{m}$.
 
 ::grafico{curve="8*t,20-4.905*t^2,0,2.0193" punti="0,20,pieno;4,18.774,pieno;8,15.095,pieno;12,8.964,pieno;16,0.38,pieno" segmenti="4,18.774,4,0;8,15.095,8,0;12,8.964,12,0;16,0.38,16,0;4,18.774,0,18.774;8,15.095,0,15.095;12,8.964,0,8.964" xmin=-2 xmax=18 ymin=-3 ymax=24 uguale=1 titolo="Lancio orizzontale da $h = 20\,\mathrm{m}$ con $v_0 = 8{,}0\,\mathrm{m/s}$, posizioni ogni $0{,}5\,\mathrm{s}$: gli spostamenti orizzontali sono uguali, quelli verticali crescono nel tempo"}
 

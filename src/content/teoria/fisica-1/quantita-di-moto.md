@@ -176,7 +176,7 @@ Se il corpo $A$ esercita sul corpo $B$ la forza $\vec{F}_{BA}$, allora $B$ eserc
 :::
 
 :::esempio{titolo="Proiettile che esplode in volo"}
-Un proiettile viene lanciato dal suolo e la sua traiettoria raggiungerebbe terra a distanza $R$ dal punto di lancio. Nel punto più alto esplode in due frammenti di uguale massa: il primo, subito dopo l'esplosione, ha velocità nulla e cade in verticale, quindi tocca terra a distanza $\dfrac{R}{2}$. Il secondo ha velocità orizzontale, quindi i due frammenti cadono dalla stessa quota con velocità verticale iniziale nulla e toccano terra nello stesso istante. In quell'istante il centro di massa, che segue la parabola originaria, si trova a distanza $R$; poiché le masse sono uguali, $R = \dfrac{1}{2}\left(\dfrac{R}{2} + x_2\right)$, perciò il secondo frammento tocca terra a $x_2 = \dfrac{3R}{2}$.
+Un proiettile viene lanciato da un terreno orizzontale e, trascurando la resistenza dell'aria, la sua traiettoria raggiungerebbe terra a distanza $R$ dal punto di lancio. Nel punto più alto esplode in due frammenti di uguale massa: il primo, subito dopo l'esplosione, ha velocità nulla e cade in verticale, quindi tocca terra a distanza $\dfrac{R}{2}$. Subito prima dell'esplosione la quantità di moto è orizzontale e si conserva, perché il peso non è impulsivo; poiché il primo frammento è fermo, il secondo ha velocità orizzontale. Quindi i due frammenti cadono dalla stessa quota con velocità verticale iniziale nulla e toccano terra nello stesso istante. In quell'istante il centro di massa, che segue la parabola originaria, si trova a distanza $R$; poiché le masse sono uguali, $R = \dfrac{1}{2}\left(\dfrac{R}{2} + x_2\right)$, perciò il secondo frammento tocca terra a $x_2 = \dfrac{3R}{2}$.
 
 ::grafico{curve="t,t-t^2/20,0,10;t,t-t^2/20,10,20;t,5-(t-10)^2/80,10,30" vettori="10,5,10,0.15" punti="10,5,pieno;10,0,vuoto,A;20,0,vuoto,CM;30,0,vuoto,B" xmin=-0.5 xmax=33 ymin=-0.6 ymax=7 titolo="Con $R = 20\,\mathrm{m}$ il frammento $A$ cade in verticale e tocca terra a $10\,\mathrm{m}$, il frammento $B$ tocca terra a $30\,\mathrm{m}$ e il centro di massa (curva tratteggiata) prosegue la parabola fino a $20\,\mathrm{m}$, punto medio tra $A$ e $B$"}
 
@@ -277,7 +277,7 @@ v_2' = \frac{(m_2 - m_1)\,v_2 + 2 m_1 v_1}{m_1 + m_2} ,
 $$
 e la velocità relativa cambia segno: $v_2' - v_1' = -(v_2 - v_1)$. Le formule danno direttamente le velocità finali; la relazione sulla velocità relativa, insieme alla conservazione della quantità di moto, forma un sistema lineare più semplice da risolvere a mano. Per $m_1 = 1{,}0\,\mathrm{kg}$ a $3{,}0\,\mathrm{m/s}$ contro $m_2 = 2{,}0\,\mathrm{kg}$ fermo si ottiene $v_1' = -1{,}0\,\mathrm{m/s}$ e $v_2' = 2{,}0\,\mathrm{m/s}$.
 
-::grafico{f="min(3*x,8-x);x+4;max(6,2*x+2)" punti="2,6,pieno" etichette="4.7,2.0,corpo 1;3.3,11.6,corpo 2;4.9,8.0,CM" xmin=-0.3 xmax=5.6 ymin=-0.6 ymax=14 nomi="t,x" titolo="Leggi orarie nell'urto elastico tra $m_1 = 1\,\mathrm{kg}$ con $v_1 = 3\,\mathrm{m/s}$ e $m_2 = 2\,\mathrm{kg}$ fermo in $x = 6\,\mathrm{m}$; dopo l'urto $v_1' = -1\,\mathrm{m/s}$ e $v_2' = 2\,\mathrm{m/s}$, mentre il centro di massa (retta tratteggiata) si muove con velocità costante $v_{cm} = 1\,\mathrm{m/s}$"}
+::grafico{f="min(3*x,8-x);x+4;max(6,2*x+2)" punti="2,6,pieno" etichette="4.7,2.0,corpo 1;3.9,11.2,corpo 2;4.9,8.0,CM" xmin=-0.3 xmax=5.6 ymin=-0.6 ymax=14 nomi="t,x" titolo="Leggi orarie nell'urto elastico tra $m_1 = 1\,\mathrm{kg}$ con $v_1 = 3\,\mathrm{m/s}$ e $m_2 = 2\,\mathrm{kg}$ fermo in $x = 6\,\mathrm{m}$; dopo l'urto $v_1' = -1\,\mathrm{m/s}$ e $v_2' = 2\,\mathrm{m/s}$, mentre il centro di massa (retta tratteggiata) si muove con velocità costante $v_{cm} = 1\,\mathrm{m/s}$"}
 
 :::dimostrazione
 La conservazione della quantità di moto e quella dell'energia cinetica, dopo aver raccolto i termini di ciascun corpo, si scrivono
@@ -287,7 +287,7 @@ m_1\,(v_1 - v_1') = m_2\,(v_2' - v_2) \\[6pt]
 m_1\,(v_1 - v_1')(v_1 + v_1') = m_2\,(v_2' - v_2)(v_2' + v_2)
 \end{cases}
 $$
-dove la seconda equazione si ottiene da $m_1 v_1^2 + m_2 v_2^2 = m_1 v_1'^2 + m_2 v_2'^2$ moltiplicata per $\dfrac{1}{2}$ e scomponendo le differenze di quadrati. La soluzione $v_1' = v_1$, $v_2' = v_2$ corrisponde all'assenza di urto e si scarta; quindi $v_1' \neq v_1$, il primo membro della prima equazione è diverso da zero e si può dividere la seconda equazione per la prima, ottenendo $v_1 + v_1' = v_2' + v_2$, cioè $v_2' - v_1' = -(v_2 - v_1)$. Ricavando $v_2' = v_1 + v_1' - v_2$ e sostituendo nella prima equazione si ottiene $(m_1 + m_2)\,v_1' = (m_1 - m_2)\,v_1 + 2 m_2 v_2$, che è la formula di $v_1'$; quella di $v_2'$ segue scambiando gli indici.
+dove la seconda equazione si ottiene moltiplicando per $2$ la conservazione dell'energia cinetica, che diventa $m_1 v_1^2 + m_2 v_2^2 = m_1 v_1'^2 + m_2 v_2'^2$, e scomponendo le differenze di quadrati. La soluzione $v_1' = v_1$, $v_2' = v_2$ corrisponde all'assenza di urto e si scarta; quindi $v_1' \neq v_1$, il primo membro della prima equazione è diverso da zero e si può dividere la seconda equazione per la prima, ottenendo $v_1 + v_1' = v_2' + v_2$, cioè $v_2' - v_1' = -(v_2 - v_1)$. Ricavando $v_2' = v_1 + v_1' - v_2$ e sostituendo nella prima equazione si ottiene $(m_1 + m_2)\,v_1' = (m_1 - m_2)\,v_1 + 2 m_2 v_2$, che è la formula di $v_1'$; quella di $v_2'$ segue scambiando gli indici.
 :::
 ::::
 
