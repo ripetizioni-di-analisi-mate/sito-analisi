@@ -277,7 +277,7 @@ Per la definizione di induttanza $L = \dfrac{\Phi_B}{i} = \dfrac{\mu_0 N^2 A}{\e
 ## Circuito RL
 
 :::osservazione{#maglia-con-induttore titolo="Legge delle maglie con un induttore"}
-In un circuito con un induttore ideale, privo di resistenza, la legge delle maglie si applica considerando la f.e.m. autoindotta come un generatore: la somma delle f.e.m. lungo la maglia è uguale alla somma delle cadute di tensione $R i$. Per una maglia con un generatore ideale $\mathcal{E}$, un resistore $R$ e un induttore $L$ in serie si ha quindi
+In un circuito con un induttore ideale, privo di resistenza, la legge delle maglie si applica considerando la f.e.m. autoindotta come un generatore, cioè uguagliando la somma delle f.e.m. lungo la maglia alla somma delle cadute di tensione $R i$. Per una maglia con un generatore ideale $\mathcal{E}$, un resistore $R$ e un induttore $L$ in serie si ha quindi
 $$
 \mathcal{E} - L\,\frac{di}{dt} = R\,i .
 $$
@@ -377,7 +377,7 @@ Siano dati due circuiti rigidi e fermi. Il flusso $\Phi_{21}$ del campo generato
 $$
 \Phi_{21} = M\,i_1 , \qquad \mathcal{E}_2 = -M\,\frac{di_1}{dt} .
 $$
-La seconda formula segue dalla legge di Faraday-Neumann-Lenz e dice che una corrente variabile in un circuito induce una f.e.m. nell'altro. Vale la proprietà di reciprocità, che qui si assume senza dimostrazione: il flusso concatenato con il primo circuito dovuto alla corrente $i_2$ del secondo è $M\,i_2$, con la *stessa* costante $M$. La mutua induttanza si misura in henry e dipende dalla forma dei circuiti e dalla loro posizione reciproca. Su questo principio funziona il trasformatore, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata.
+La seconda formula segue dalla legge di Faraday-Neumann-Lenz e dice che una corrente variabile in un circuito induce una f.e.m. nell'altro. Vale la proprietà di reciprocità, che qui si assume senza dimostrazione, secondo cui il flusso concatenato con il primo circuito dovuto alla corrente $i_2$ del secondo è $M\,i_2$, con la *stessa* costante $M$. La mutua induttanza si misura in henry e dipende dalla forma dei circuiti e dalla loro posizione reciproca. Su questo principio funziona il trasformatore, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata.
 :::
 
 ::::teorema{#mutua-induttanza-solenoidi titolo="Mutua induttanza di due solenoidi coassiali"}

@@ -144,7 +144,7 @@ $$
 A parità di distanza il campo sull'asse mediano è circa la metà del campo sull'asse del dipolo. Per il dipolo con $p = 8{,}0 \cdot 10^{-12}\,\mathrm{C\cdot m}$, a $10\,\mathrm{cm}$ dal centro sull'asse mediano si ha $E \approx 72\,\mathrm{N/C}$.
 
 :::dimostrazione
-Le due cariche distano entrambe $s = \sqrt{r^2 + \dfrac{d^2}{4}}$ da $P$, quindi i due campi hanno lo stesso modulo $k\,\dfrac{q}{s^2}$. Il campo di $+q$ è uscente da $+q$ e quello di $-q$ è diretto verso $-q$; le loro componenti perpendicolari all'asse del dipolo sono opposte e si annullano, mentre le componenti parallele all'asse sono entrambe opposte a $\vec{p}$ e valgono ciascuna $k\,\dfrac{q}{s^2} \cdot \dfrac{d/2}{s}$, dove $\dfrac{d/2}{s}$ è il coseno dell'angolo tra ciascun campo e l'asse. Sommando si ottiene
+Le due cariche distano entrambe $s = \sqrt{r^2 + \dfrac{d^2}{4}}$ da $P$, quindi i due campi hanno lo stesso modulo $k\,\dfrac{q}{s^2}$. Il campo di $+q$ è uscente da $+q$ e quello di $-q$ è diretto verso $-q$; le loro componenti perpendicolari all'asse del dipolo sono opposte e si annullano, mentre le componenti parallele all'asse sono entrambe opposte a $\vec{p}$ e valgono ciascuna $k\,\dfrac{q}{s^2} \cdot \dfrac{d}{2s}$, dove $\dfrac{d}{2s}$ è il coseno dell'angolo tra ciascun campo e l'asse. Sommando si ottiene
 $$
 E = 2\,k\,\frac{q}{s^2} \cdot \frac{d}{2 s} = \frac{k\,q\,d}{s^3} = \frac{k\,p}{\left( r^2 + \dfrac{d^2}{4} \right)^{\frac{3}{2}}} .
 $$
@@ -215,7 +215,7 @@ E_z = \frac{k\,Q\,z}{\left( z^2 + R^2 \right)^{\frac{3}{2}}} .
 $$
 Nel centro il campo è nullo, perché i contributi di elementi opposti si compensano; per $|z| \gg R$ si ha $E_z \approx \dfrac{kQ}{z^2}$, cioè l'anello si comporta come una carica puntiforme. Il modulo del campo è massimo per $|z| = \dfrac{R}{\sqrt{2}}$, dove la derivata di $E_z$ rispetto a $z$ si annulla. Per $R = 3{,}0\,\mathrm{cm}$ e $Q = 1{,}0\,\mathrm{nC}$ il massimo si trova a $2{,}1\,\mathrm{cm}$ dal centro e vale circa $3{,}8 \cdot 10^{3}\,\mathrm{N/C}$.
 
-::grafico{assi=0 uguale=1 curve="0.6*cos(t),2*sin(t),0,6.29" linee="-1.2,0 6.8,0" punti="0,0,pieno,O;4,0,pieno,P;0,2,pieno,dq;0,-2,pieno,dq′" segmenti="0,2,4,0;0,-2,4,0;0,0,0,2" vettori="4,0,5.16,-0.58,dE;4,0,5.16,0.58,dE′" etichette="0.12,0.95,R;2,-0.45,z" legenda=0 xmin=-1.4 xmax=7 ymin=-2.6 ymax=2.6 titolo="Elementi opposti $dq$ e $dq'$ dell'anello producono in $P$ campi le cui componenti perpendicolari all'asse si annullano"}
+::grafico{assi=0 uguale=1 curve="0.6*cos(t),2*sin(t),0,6.29" linee="-1.2,0 6.8,0" punti="0,0,pieno,O;4,0,pieno,P;0,2,pieno,dq;0,-2,pieno,dq′" segmenti="0,2,4,0;0,-2,4,0;0,0,0,2" vettori="4,0,5.16,-0.58;4,0,5.16,0.58" etichette="0.12,0.95,R;2,-0.45,z;5.3,-0.9,dE;5.3,0.75,dE′" legenda=0 xmin=-1.4 xmax=7 ymin=-2.6 ymax=2.6 titolo="Elementi opposti $dq$ e $dq'$ dell'anello producono in $P$ campi le cui componenti perpendicolari all'asse si annullano"}
 
 ::grafico{f="89.9*x/(x^2+9)^1.5" punti="2.12,3.84,pieno;-2.12,-3.84,pieno" segmenti="2.12,0,2.12,3.84;-2.12,0,-2.12,-3.84" nomi="z,E" legenda="E_z" xmin=-12 xmax=12 ymin=-4.6 ymax=4.6 titolo="Campo sull'asse di un anello con $R = 3{,}0\,\mathrm{cm}$ e $Q = 1{,}0\,\mathrm{nC}$, con $z$ in centimetri ed $E_z$ in $\mathrm{kN/C}$: il modulo è massimo per $|z| = \dfrac{R}{\sqrt{2}}$"}
 
@@ -289,7 +289,7 @@ E = \frac{\sigma}{2\varepsilon_0} ,
 $$
 uscente dal piano se $\sigma > 0$ ed entrante se $\sigma < 0$, da entrambe le parti. Il campo non dipende dalla distanza dal piano. Il modello descrive una lastra carica finita nei punti la cui distanza dalla lastra è piccola rispetto alle dimensioni della lastra e che sono lontani dai bordi. Per $\sigma = 8{,}85\,\mathrm{nC/m^2}$ si ottiene $E = \dfrac{8{,}85 \cdot 10^{-9}}{2 \cdot 8{,}85 \cdot 10^{-12}}\,\mathrm{N/C} = 500\,\mathrm{N/C}$.
 
-::grafico{f="1-x/sqrt(x^2+1);1" nomi="z,E" legenda="E_{\text{disco}};E_{\text{piano}}" xmin=-0.4 xmax=4.5 ymin=-0.2 ymax=1.3 titolo="Campo sull'asse di un disco e campo del piano infinito con la stessa $\sigma$, con $z$ in unità di $R$ ed $E$ in unità di $\dfrac{\sigma}{2\varepsilon_0}$: vicino al disco i due campi coincidono"}
+::grafico{f="1-x/sqrt(x^2+1)+0*sqrt(x);1+0*sqrt(x)" nomi="z,E" legenda="E_{\text{disco}};E_{\text{piano}}" xmin=-0.4 xmax=4.5 ymin=-0.2 ymax=1.3 titolo="Campo sull'asse di un disco e campo del piano infinito con la stessa $\sigma$, con $z$ in unità di $R$ ed $E$ in unità di $\dfrac{\sigma}{2\varepsilon_0}$: vicino al disco i due campi coincidono"}
 
 :::dimostrazione
 Ogni punto è sull'asse di un disco di raggio $R$ centrato nella sua proiezione sul piano. Per il campo sull'asse di un disco carico, a distanza $z > 0$,
