@@ -38,6 +38,33 @@ function leggiCookie(req, nome) {
   return m ? decodeURIComponent(m[1]) : null;
 }
 
+// ---------- provenienza dei visitatori ----------
+// Un "ingresso" è una pagina aperta arrivando da fuori dal sito (referer esterno o assente).
+// Il browser interno di Instagram si riconosce dallo user agent anche quando il referer manca.
+const ROBOT = /bot|crawl|spider|slurp|preview|facebookexternalhit|meta-externalagent|headless|lighthouse|curl|wget|python|httpclient/i;
+const FONTI = [
+  [/(^|\.)instagram\.com$/, 'Instagram'], [/(^|\.)google\./, 'Google'], [/(^|\.)bing\.com$/, 'Bing'],
+  [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, 'Facebook'], [/(^|\.)tiktok\.com$/, 'TikTok'],
+  [/(^|\.)(whatsapp\.com|wa\.me)$/, 'WhatsApp'], [/(^|\.)(t\.co|x\.com|twitter\.com)$/, 'X'],
+  [/(^|\.)(youtube\.com|youtu\.be)$/, 'YouTube'], [/(^|\.)duckduckgo\.com$/, 'DuckDuckGo'],
+  [/(^|\.)(chatgpt\.com|openai\.com)$/, 'ChatGPT'], [/(^|\.)perplexity\.ai$/, 'Perplexity'], [/(^|\.)claude\.ai$/, 'Claude'],
+  [/(^|\.)(t\.me|telegram\.org)$/, 'Telegram'], [/(^|\.)ripetizioni-di-analisi-matematica\.it$/, 'Altro sito di Carmine'],
+];
+function fonteIngresso(req, url) {
+  const ua = req.headers.get('user-agent') || '';
+  if (!ua || ROBOT.test(ua)) return null;
+  let host = '';
+  try { host = new URL(req.headers.get('referer') || '').hostname.replace(/^www\./, ''); } catch { /* nessun referer */ }
+  if (host && host === url.hostname.replace(/^www\./, '')) return null; // navigazione interna
+  const utm = (url.searchParams.get('utm_source') || '').toLowerCase();
+  if (/^(ig|instagram)$/.test(utm) || /Instagram/.test(ua)) return 'Instagram';
+  if (/FBAN|FBAV|FB_IAB/.test(ua)) return 'Facebook';
+  if (utm) return utm.slice(0, 30);
+  if (!host) return 'Diretto o app';
+  for (const [re, nome] of FONTI) if (re.test(host)) return nome;
+  return host.slice(0, 60);
+}
+
 // ---------- password ----------
 async function hashPassword(password, saleB64, iterazioni = ITERAZIONI_PBKDF2) {
   const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
@@ -62,6 +89,7 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS accessi (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materie TEXT, origine TEXT, creato TEXT);
       CREATE TABLE IF NOT EXISTS acquisti (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materia TEXT, importo REAL, valuta TEXT, transazione TEXT UNIQUE, creato TEXT);
       CREATE TABLE IF NOT EXISTS visite (giorno TEXT, sezione TEXT, n INTEGER, PRIMARY KEY (giorno, sezione));
+      CREATE TABLE IF NOT EXISTS ingressi (giorno TEXT, fonte TEXT, n INTEGER, PRIMARY KEY (giorno, fonte));
       CREATE TABLE IF NOT EXISTS utenti (email TEXT PRIMARY KEY, hash TEXT, sale TEXT, iterazioni INTEGER, versione INTEGER DEFAULT 1,
         falliti INTEGER DEFAULT 0, bloccato_fino INTEGER DEFAULT 0, creato TEXT, ultimo_accesso TEXT);
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
@@ -69,6 +97,8 @@ export class Archivio {
     `);
     // colonne aggiunte dopo: il nome dello studente
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
+    // e la provenienza della prima visita (Instagram, Google, …)
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -83,6 +113,8 @@ export class Archivio {
       case '/visita':
         this.sql.exec(`INSERT INTO visite (giorno, sezione, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, sezione) DO UPDATE SET n = n + 1`, c.giorno, c.sezione);
+        if (c.fonte) this.sql.exec(`INSERT INTO ingressi (giorno, fonte, n) VALUES (?, ?, 1)
+                       ON CONFLICT(giorno, fonte) DO UPDATE SET n = n + 1`, c.giorno, c.fonte);
         return Response.json({ ok: true });
 
       case '/utente': // dati per il login
@@ -90,8 +122,8 @@ export class Archivio {
 
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
-        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome) VALUES (?, ?, ?, ?, 1, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null);
+        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?)',
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null);
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
@@ -157,9 +189,14 @@ export class Archivio {
         return Response.json({
           visite: this.righe('SELECT giorno, SUM(n) AS n FROM visite GROUP BY giorno ORDER BY giorno DESC LIMIT 30'),
           visitePerSezione: this.righe('SELECT sezione, SUM(n) AS n FROM visite GROUP BY sezione ORDER BY n DESC LIMIT 12'),
+          ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-29 days') ORDER BY giorno`),
+          fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
+                              COUNT(DISTINCT a.email) AS paganti FROM utenti u
+                              LEFT JOIN (SELECT DISTINCT email FROM acquisti) a ON a.email = u.email
+                              GROUP BY COALESCE(u.fonte, 'Non registrata') ORDER BY iscritti DESC`),
           acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
-          utenti: this.righe(`SELECT u.email, u.nome, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
+          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
@@ -280,7 +317,8 @@ export default {
       if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome) });
+      const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
@@ -486,7 +524,12 @@ export default {
     if (req.method === 'GET' && html) {
       const giorno = new Date().toISOString().slice(0, 10);
       const sezione = info ? `${info.materia}/${info.argomento}` : (url.pathname.split('/')[1]?.replace(/\.html$/, '') || 'home');
-      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione }).catch(() => {}));
+      const fonte = url.pathname.startsWith('/vetrine/') ? null : fonteIngresso(req, url);
+      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte }).catch(() => {}));
+      // La prima provenienza resta in un cookie per 90 giorni: serve a sapere da dove arriva chi poi si iscrive.
+      if (fonte && !leggiCookie(req, 'fonte')) {
+        try { risposta.headers.append('set-cookie', `fonte=${encodeURIComponent(fonte)}; Path=/; Max-Age=7776000; HttpOnly; Secure; SameSite=Lax`); } catch { /* intestazioni bloccate */ }
+      }
     }
     return risposta;
   },

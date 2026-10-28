@@ -45,6 +45,10 @@ button.piccolo{padding:.15rem .5rem;font-size:.8rem;background:#fff;color:var(--
 <h2>Pagamenti</h2>
 <div class="tabella"><table id="pagamenti"></table></div>
 
+<h2>Da dove arrivano <span class="nota">ingressi dall'esterno, ultimi 30 giorni</span></h2>
+<div class="tabella"><table id="fonti"></table></div>
+<p class="nota">Un ingresso è una pagina aperta arrivando da fuori dal sito. Instagram comprende il link nella bio, le storie e i DM aperti nell'app. "Diretto o app" sono indirizzi scritti a mano, preferiti e link aperti da app che non dicono la provenienza (WhatsApp, Telegram, email). Iscritti e paganti contano chi si è registrato dopo l'attivazione di questo conteggio.</p>
+
 <h2>Visite <span class="nota" id="visite-note"></span></h2>
 <div class="barre" id="barre"></div>
 <div class="tabella"><table id="sezioni"></table></div>
@@ -71,6 +75,13 @@ async function carica(){
   const giorni=[...D.visite].reverse(),max=Math.max(1,...giorni.map(g=>g.n));
   document.getElementById('barre').innerHTML=giorni.map(g=>'<div style="height:'+Math.round(g.n/max*100)+'%" title="'+g.giorno+': '+g.n+'"></div>').join('');
   document.getElementById('visite-note').textContent=giorni.length?('ultimi 30 giorni, dal '+giorni[0].giorno):'nessuna visita registrata';
+  const F={};const ieri=new Date(Date.now()-864e5).toISOString().slice(0,10);
+  (D.ingressi||[]).forEach(r=>{const f=F[r.fonte]||(F[r.fonte]={n:0,oggi:0,ieri:0});f.n+=r.n;if(r.giorno===oggi)f.oggi+=r.n;if(r.giorno===ieri)f.ieri+=r.n});
+  (D.fontiIscritti||[]).forEach(r=>{const f=F[r.fonte]||(F[r.fonte]={n:0,oggi:0,ieri:0});f.iscritti=r.iscritti;f.paganti=r.paganti});
+  const tot=Object.values(F).reduce((a,f)=>a+f.n,0)||1;
+  const elenco=Object.entries(F).sort((a,b)=>b[1].n-a[1].n);
+  document.getElementById('fonti').innerHTML='<tr><th>Provenienza</th><th>Ingressi 30 giorni</th><th>Quota</th><th>Oggi</th><th>Ieri</th><th>Iscritti</th><th>Paganti</th></tr>'+
+    (elenco.length?elenco.map(([k,f])=>'<tr'+(k==='Instagram'?' style="font-weight:700"':'')+'><td>'+esc(k)+'</td><td>'+f.n+'</td><td>'+Math.round(f.n/tot*100)+'%</td><td>'+f.oggi+'</td><td>'+f.ieri+'</td><td>'+(f.iscritti||0)+'</td><td>'+(f.paganti||0)+'</td></tr>').join(''):'<tr><td colspan="7" class="nota">Nessun ingresso registrato ancora.</td></tr>');
   document.getElementById('sezioni').innerHTML='<tr><th>Sezione più visitata</th><th>Visite</th></tr>'+D.visitePerSezione.map(s=>'<tr><td>'+esc(s.sezione)+'</td><td>'+s.n+'</td></tr>').join('');
 }
 function disegnaIscritti(){
@@ -84,9 +95,9 @@ function disegnaIscritti(){
   const pill=(email,m)=>'<span class="pill '+(origine[email+'|'+m]==='manuale'?'manuale':'')+'">'+esc(NOMI[m]||m)+' <button class="piccolo" title="Revoca" onclick="revoca(\\''+esc(email)+'\\',\\''+m+'\\')">×</button></span>';
   const disp={};(D.dispositivi||[]).forEach(d=>{(disp[d.email]||=[]).push(d)});
   const celDisp=email=>{const l=disp[email]||[];return l.length?(l.map(d=>'<span class="pill dispositivo">'+esc(d.nome)+'</span>').join('')+' <button class="piccolo" title="Scollega tutti i dispositivi" onclick="scollega(\\''+esc(email)+'\\')">scollega</button>'):'<span class="nota">nessuno</span>'};
-  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Nome</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th><th>Dispositivi (max 2)</th></tr>'+
-    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+esc(u.nome||'')+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td><td>'+celDisp(u.email)+'</td></tr>').join('')+
-    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td></td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td><td></td></tr>').join('')+
+  document.getElementById('iscritti').innerHTML='<tr><th>Email</th><th>Nome</th><th>Arrivato da</th><th>Iscritto il</th><th>Ultimo accesso</th><th>Materie sbloccate</th><th>Dispositivi (max 2)</th></tr>'+
+    righe.map(u=>'<tr><td>'+esc(u.email)+'</td><td>'+esc(u.nome||'')+'</td><td>'+esc(u.fonte||'')+'</td><td>'+dataIt(u.creato)+'</td><td>'+dataIt(u.ultimo_accesso)+'</td><td>'+(u.materie?u.materie.split(', ').map(m=>pill(u.email,m)).join(''):'<span class="nota">nessuna</span>')+'</td><td>'+celDisp(u.email)+'</td></tr>').join('')+
+    inAttesa.map(e=>'<tr><td>'+esc(e)+'</td><td></td><td></td><td class="nota" colspan="2">non ancora registrato</td><td>'+D.abilitazioni.filter(a=>a.email===e).map(a=>pill(e,a.materia)).join('')+'</td><td></td></tr>').join('')+
     (righe.length+inAttesa.length?'':'<tr><td colspan="6" class="nota">Nessun iscritto.</td></tr>');
 }
 async function abilita(){
