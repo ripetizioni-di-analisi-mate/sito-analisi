@@ -10,12 +10,12 @@ Let $f : A \to \mathbb{R}$ and let $x_0$ be an interior point of $A$. The **diff
 $$
 \frac{f(x_0 + h) - f(x_0)}{h} ,
 $$
-the slope of the line through the points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$ of the graph. $f$ is **differentiable** at $x_0$ if the limit
+the slope of the line through the points $(x_0, f(x_0))$ and $(x_0 + h, f(x_0 + h))$ of the graph. $f$ is **differentiable** at $x_0$ if the following limit exists and is *finite*:
 $$
 f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}
-= \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}
+= \lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} ;
 $$
-exists and is *finite*; the two expressions coincide under the substitution $x = x_0 + h$. If $f$ is differentiable at every point of a set, the function $x \mapsto f'(x)$ is the **derivative function**. The derivative measures how quickly $f$ changes near $x_0$; its sign is used to study monotonicity, maxima and minima, as the theorems of this chapter show.
+the two expressions coincide under the substitution $x = x_0 + h$. If $f$ is differentiable at every point of a set, the function $x \mapsto f'(x)$ is the **derivative function**. The derivative measures how quickly $f$ changes near $x_0$; its sign is used to study monotonicity, maxima and minima, as the theorems of this chapter show.
 
 ::grafico{f="x^2;3*x-2" xmin=-1 xmax=3 ymin=-1.5 ymax=6 punti="1,1,pieno;2,4,pieno" segmenti="1,1,2,1;2,1,2,4" etichette="1.4,0.55,h;2.08,2.4,f(x₀ + h) − f(x₀)" titolo="For $f(x) = x^2$, $x_0 = 1$ and $h = 1$ the difference quotient equals $\dfrac{4 - 1}{1} = 3$: it is the slope of the secant $y = 3x - 2$ (dashed)"}
 
