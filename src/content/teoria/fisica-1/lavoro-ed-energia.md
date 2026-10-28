@@ -20,7 +20,7 @@ dove $\theta$ è l'angolo tra $\vec{F}$ e $\vec{s}$. Nel Sistema Internazionale 
 
 Il lavoro dipende solo dalla componente $F\cos\theta$ della forza parallela allo spostamento, perché la componente perpendicolare ha prodotto scalare nullo con $\vec{s}$. Per esempio, un carrello tirato per $10\,\mathrm{m}$ su un piano orizzontale con una forza di $50\,\mathrm{N}$ inclinata di $30^\circ$ riceve dalla forza il lavoro $L = 50 \cdot 10 \cdot \cos 30^\circ\,\mathrm{J} \approx 433\,\mathrm{J}$.
 
-::grafico{vettori="0,0,6,0,s;0,0,3.46,2,F" segmenti="3.46,0,3.46,2" etichette="0.75,0.18,θ;1.1,-0.45,F cos θ" xmin=-0.6 xmax=6.6 ymin=-0.9 ymax=2.6 uguale=1 titolo="Una forza costante $\vec{F}$ inclinata di $\theta$ sullo spostamento $\vec{s}$ compie il lavoro $F s \cos\theta$, che dipende solo dalla proiezione di $\vec{F}$ sulla direzione di $\vec{s}$"}
+::grafico{assi=0 vettori="0,0,6,0,s;0,0,3.46,2,F" segmenti="3.46,0,3.46,2" etichette="0.75,0.18,θ;1.7,-0.4,F cos θ" xmin=-0.6 xmax=6.6 ymin=-0.9 ymax=2.6 uguale=1 titolo="Una forza costante $\vec{F}$ inclinata di $\theta$ sullo spostamento $\vec{s}$ compie il lavoro $F s \cos\theta$, che dipende solo dalla proiezione di $\vec{F}$ sulla direzione di $\vec{s}$"}
 
 :::
 
@@ -174,7 +174,7 @@ L_P = -mg\,(y_B - y_A) = mg\,(y_A - y_B) .
 $$
 Il lavoro è positivo quando il corpo scende e negativo quando sale, e dipende solo dal dislivello; perciò il peso è una **forza conservativa**. Una cassa di $20\,\mathrm{kg}$ portata da terra su uno scaffale alto $1{,}5\,\mathrm{m}$, con una scala o lungo una rampa, subisce dal peso il lavoro $-20 \cdot 9{,}81 \cdot 1{,}5\,\mathrm{J} \approx -294\,\mathrm{J}$.
 
-::grafico{curve="4*t,3-2*t,0,1;4*t,3-2*t+1.4*sin(pi*t),0,1" segmenti="0,3,4,3;4,3,4,1" punti="0,3,pieno,A;4,1,pieno,B" etichette="4.15,2.1,Δy;1.4,1.75,γ₁;1.6,3.85,γ₂" xmin=-0.6 xmax=5.2 ymin=-0.6 ymax=4.8 uguale=1 titolo="Lungo i percorsi $\gamma_1$ e $\gamma_2$ da $A$ a $B$ il peso compie lo stesso lavoro $-mg\,\Delta y$, con $\Delta y = y_B - y_A$"}
+::grafico{assi=0 curve="4*t,3-2*t,0,1;4*t,3-2*t+1.4*sin(pi*t),0,1" segmenti="0,3,4,3;4,3,4,1" punti="0,3,pieno,A;4,1,pieno,B" etichette="4.15,2.1,Δy;1.4,1.75,γ₁;1.6,3.85,γ₂" xmin=-0.6 xmax=5.2 ymin=0.4 ymax=4.5 uguale=1 titolo="Lungo i percorsi $\gamma_1$ e $\gamma_2$ da $A$ a $B$ il peso compie lo stesso lavoro $-mg\,\Delta y$, con $\Delta y = y_B - y_A$"}
 
 :::dimostrazione
 Lo spostamento infinitesimo lungo il percorso è $d\vec{r} = dx\,\hat{\imath} + dy\,\hat{\jmath} + dz\,\hat{k}$, quindi $\vec{P} \cdot d\vec{r} = -mg\,dy$. Nel prodotto scalare intervengono solo gli spostamenti verticali, perciò sommando i contributi lungo il percorso si ottiene
@@ -263,7 +263,7 @@ K_A + U_A = K_B + U_B .
 $$
 Il teorema dà la velocità in funzione della posizione senza conoscere la forma della traiettoria né la durata del moto. Un corpo che scivola partendo da fermo lungo una guida liscia con un dislivello $h$ arriva in fondo con $mgh = \dfrac{1}{2} m v^2$, cioè con $v = \sqrt{2gh}$, qualunque sia il profilo della guida; per $h = 5{,}0\,\mathrm{m}$ si ottiene $v \approx 9{,}9\,\mathrm{m/s}$.
 
-::grafico{f="5*max(0,1-x/4)^2" vettori="5,0,6.4,0,v" punti="0,5,pieno,A;5,0,pieno,B" etichette="0.2,2.6,h" xmin=-0.6 xmax=7 ymin=-0.6 ymax=5.8 uguale=1 titolo="Lungo una guida liscia il corpo partito da fermo in $A$ arriva in $B$ con $v = \sqrt{2gh}$, qualunque sia la forma del profilo"}
+::grafico{assi=0 linee="0.00,5.000 0.25,4.395 0.50,3.828 0.75,3.301 1.00,2.812 1.25,2.363 1.50,1.953 1.75,1.582 2.00,1.250 2.25,0.957 2.50,0.703 2.75,0.488 3.00,0.312 3.25,0.176 3.50,0.078 3.75,0.020 4.00,0.000 6.8,0;-0.4,-0.12 6.8,-0.12" segmenti="-0.25,0,-0.25,5" vettori="5,0,6.4,0,v" punti="0,5,pieno,A;5,0,pieno,B" etichette="-0.55,2.6,h" xmin=-0.9 xmax=7 ymin=-0.6 ymax=5.8 uguale=1 titolo="Lungo una guida liscia il corpo partito da fermo in $A$ arriva in $B$ con $v = \sqrt{2gh}$, qualunque sia la forma del profilo"}
 
 :::dimostrazione
 Le forze che non compiono lavoro non contribuiscono al lavoro totale, quindi $L_{\text{tot}}$ coincide con il lavoro $L_c$ delle forze conservative. Per la definizione di energia potenziale $L_c = U_A - U_B$, e per il **teorema dell'energia cinetica** $L_{\text{tot}} = K_B - K_A$. Uguagliando le due espressioni si ottiene
@@ -336,7 +336,7 @@ v = \sqrt{2 g d\,(\sin\alpha - \mu_d \cos\alpha)} ,
 $$
 e numericamente $v = \sqrt{2 \cdot 9{,}81 \cdot 4{,}0 \cdot (0{,}50 - 0{,}20 \cdot 0{,}866)}\,\mathrm{m/s} \approx 5{,}1\,\mathrm{m/s}$. Senza attrito la velocità sarebbe $\sqrt{2gh} \approx 6{,}3\,\mathrm{m/s}$.
 
-::grafico{segmenti="0,0,6.93,4;6.93,0,6.93,4" vettori="3.46,2,2.36,3.91,N;3.46,2,3.46,-0.6,P;3.46,2,4.24,2.45,f" punti="3.46,2,pieno" etichette="1.3,0.25,α" xmin=-0.6 xmax=7.6 ymin=-1 ymax=4.6 uguale=1 titolo="Blocco che scende lungo un piano inclinato scabro: la normale $\vec{N}$ non compie lavoro, il peso $\vec{P}$ compie lavoro positivo e l'attrito $\vec{f}$, rivolto verso l'alto, lavoro negativo"}
+::grafico{assi=0 poligoni="0,0 6.93,0 6.93,4;3.20,1.85 3.72,2.15 3.42,2.67 2.90,2.37" vettori="3.31,2.26,2.21,4.17,N;3.31,2.26,3.31,-0.34,P;3.31,2.26,4.09,2.71,f" punti="3.31,2.26,pieno" etichette="1.3,0.25,α" xmin=-0.6 xmax=7.6 ymin=-0.8 ymax=4.8 uguale=1 titolo="Blocco che scende lungo un piano inclinato scabro: la normale $\vec{N}$ non compie lavoro, il peso $\vec{P}$ compie lavoro positivo e l'attrito $\vec{f}$, rivolto verso l'alto, lavoro negativo"}
 
 :::
 

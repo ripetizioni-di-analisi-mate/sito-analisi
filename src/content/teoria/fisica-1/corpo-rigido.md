@@ -50,7 +50,7 @@ Per due vettori $\vec{a}$ e $\vec{b}$ che formano l'angolo $\varphi$, il prodott
 :::
 
 :::definizione{#momento-di-una-forza titolo="Momento di una forza"}
-Sia $\vec{F}$ una forza applicata nel punto $P$ e sia $O$ un punto fissato, detto **polo**. Il **momento della forza** rispetto a $O$ è
+Sia $\vec{F}$ una forza applicata nel punto $P$ e sia $O$ un punto fissato, detto *polo*. Il **momento della forza** rispetto a $O$ è
 $$
 \vec{M}_O = \vec{r} \times \vec{F} ,
 \qquad

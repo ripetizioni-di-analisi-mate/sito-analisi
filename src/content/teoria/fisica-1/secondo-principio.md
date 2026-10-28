@@ -12,7 +12,7 @@ Un **serbatoio termico** (o sorgente di calore) è un sistema con capacità term
 :::definizione{#trasformazione-reversibile titolo="Trasformazione reversibile"}
 Una trasformazione di un sistema è **reversibile** se può essere percorsa in verso opposto riportando allo stato iniziale sia il sistema sia l'ambiente con cui ha interagito. Una trasformazione reversibile è quasistatica, cioè formata da stati di equilibrio, e priva di effetti dissipativi. Inoltre il calore vi viene scambiato solo tra corpi a temperature che differiscono di una quantità infinitesima.
 
-Le trasformazioni reali sono **irreversibili**. Le cause tipiche sono l'attrito, gli scambi di calore tra corpi a temperature diverse, l'espansione libera di un gas nel vuoto e il mescolamento di sostanze diverse. Una trasformazione reversibile è quindi un modello ideale; serve come termine di confronto, perché, come mostra il teorema di Carnot, fornisce il massimo lavoro ottenibile tra due stati assegnati.
+Le trasformazioni reali sono **irreversibili**. Le cause tipiche sono l'attrito, gli scambi di calore tra corpi a temperature diverse, l'espansione libera di un gas nel vuoto e il mescolamento di sostanze diverse. Una trasformazione reversibile è quindi un modello ideale; serve come termine di confronto, perché, come mostra il teorema di Carnot, una macchina reversibile ha il rendimento massimo tra due serbatoi assegnati.
 :::
 
 :::richiamo{titolo="Primo principio della termodinamica"}
@@ -22,20 +22,20 @@ Per un sistema chiuso che passa da uno stato $A$ a uno stato $B$ vale $\Delta U 
 ## Macchine termiche e rendimento
 
 :::definizione{#macchina-termica titolo="Macchina termica"}
-Una **macchina termica** è un sistema che compie una trasformazione ciclica, assorbe calore da uno o più serbatoi, ne cede una parte ad altri serbatoi e produce un lavoro positivo. Si indica con $Q_{ass} > 0$ la somma dei calori assorbiti in un ciclo e con $Q_{ced} > 0$ la somma dei valori assoluti dei calori ceduti. Poiché in un ciclo $L = Q$, il lavoro prodotto in un ciclo è
+Una **macchina termica** è un sistema che compie una trasformazione ciclica, assorbe calore da uno o più serbatoi, ne cede una parte ad altri serbatoi e produce un lavoro positivo. Si indica con $Q_{\text{ass}} > 0$ la somma dei calori assorbiti in un ciclo e con $Q_{\text{ced}} > 0$ la somma dei valori assoluti dei calori ceduti. Poiché in un ciclo $L = Q$, il lavoro prodotto in un ciclo è
 $$
-L = Q_{ass} - Q_{ced} .
+L = Q_{\text{ass}} - Q_{\text{ced}} .
 $$
-Nel caso più semplice la macchina lavora tra due serbatoi a temperature $T_1 > T_2$; si indicano allora con $Q_1$ e $Q_2$ i calori scambiati con il serbatoio caldo e con quello freddo, presi con il segno della convenzione del primo principio. Per un motore si ha $Q_1 > 0$, $Q_2 < 0$ e $L = Q_1 + Q_2 > 0$. Se il fluido della macchina percorre un ciclo quasistatico, il lavoro è l'area racchiusa dal ciclo nel piano $pV$, positiva quando il ciclo è percorso in verso orario.
+Nel caso più semplice la macchina lavora tra due serbatoi a temperature $T_1 > T_2$; si indicano allora con $Q_1$ e $Q_2$ i calori scambiati con il serbatoio caldo e con quello freddo, presi con il segno della convenzione del primo principio. Per un motore si ha $Q_1 > 0$, $Q_2 < 0$ e $L = Q_1 + Q_2 > 0$. Se il fluido della macchina percorre un ciclo quasistatico, il lavoro è l'area racchiusa dal ciclo nel piano $(V, p)$, positiva quando il ciclo è percorso in senso orario.
 
-::grafico{curve="3+2*cos(t),3+1.5*sin(t),0,6.29" area="3+1.5*sqrt(1-((x-3)/2)^2);3-1.5*sqrt(1-((x-3)/2)^2);1;5" vettori="2.6,4.47,3.4,4.47;3.4,1.53,2.6,1.53" etichette="2.2,3.1,L = area" xmin=-0.5 xmax=6 ymin=-0.5 ymax=5.5 nomi="V,p" titolo="Un ciclo percorso in verso orario nel piano $pV$: il lavoro fatto dal fluido in un ciclo è positivo ed è uguale all'area racchiusa"}
+::grafico{curve="3+2*cos(t),3+1.5*sin(t),0,6.29" area="3+1.5*sqrt(1-((x-3)/2)^2);3-1.5*sqrt(1-((x-3)/2)^2);1;5" vettori="2.6,4.47,3.4,4.47;3.4,1.53,2.6,1.53" etichette="2.2,3.1,L = area" xmin=-0.5 xmax=6 ymin=-0.5 ymax=5.5 nomi="V,p" titolo="Un ciclo percorso in senso orario nel piano $(V, p)$, in unità arbitrarie: il lavoro fatto dal fluido in un ciclo è positivo ed è uguale all'area racchiusa"}
 
 :::
 
 :::definizione{#rendimento titolo="Rendimento"}
 Il **rendimento** di una macchina termica è il rapporto tra il lavoro prodotto in un ciclo e il calore assorbito nello stesso ciclo:
 $$
-\eta = \frac{L}{Q_{ass}} = 1 - \frac{Q_{ced}}{Q_{ass}} .
+\eta = \frac{L}{Q_{\text{ass}}} = 1 - \frac{Q_{\text{ced}}}{Q_{\text{ass}}} .
 $$
 Per una macchina tra due serbatoi la formula diventa $\eta = 1 + \dfrac{Q_2}{Q_1} = 1 - \dfrac{|Q_2|}{Q_1}$. Il rendimento è un numero puro e misura quale frazione del calore assorbito diventa lavoro. Dalla formula segue $\eta < 1$ ogni volta che la macchina cede calore; il secondo principio afferma che questa cessione è inevitabile. Per esempio una macchina che in ogni ciclo assorbe $2000\,\mathrm{J}$ e ne cede $1500\,\mathrm{J}$ produce $L = 500\,\mathrm{J}$ e ha rendimento $\eta = 0{,}25$.
 :::
@@ -47,7 +47,7 @@ Una **macchina frigorifera** è una macchina che percorre un ciclo in cui assorb
 $$
 |Q_1| = Q_2 + |L| ,
 $$
-cioè il serbatoio caldo riceve sia il calore sottratto al serbatoio freddo sia l'equivalente del lavoro speso. Nel piano $pV$ il ciclo di un frigorifero è percorso in verso antiorario, e l'area racchiusa è il lavoro ricevuto. Un frigorifero domestico sottrae calore all'interno e lo cede alla cucina; una **pompa di calore** è la stessa macchina usata per scaldare un ambiente con il calore prelevato dall'esterno più freddo.
+cioè il serbatoio caldo riceve sia il calore sottratto al serbatoio freddo sia l'equivalente del lavoro speso. Nel piano $(V, p)$ il ciclo di un frigorifero è percorso in senso antiorario, e l'area racchiusa è il lavoro ricevuto. Un frigorifero domestico sottrae calore all'interno e lo cede alla cucina; una **pompa di calore** è la stessa macchina usata per scaldare un ambiente con il calore prelevato dall'esterno più freddo.
 :::
 
 :::definizione{#efficienza titolo="Efficienza di frigoriferi e pompe di calore"}
@@ -57,9 +57,9 @@ $$
 $$
 Per una pompa di calore l'effetto utile è il calore ceduto al serbatoio caldo, quindi la sua efficienza è
 $$
-\varepsilon_{pc} = \frac{|Q_1|}{|L|} = \frac{Q_2 + |L|}{|L|} = \varepsilon + 1 .
+\varepsilon_{\text{pc}} = \frac{|Q_1|}{|L|} = \frac{Q_2 + |L|}{|L|} = \varepsilon + 1 .
 $$
-Le efficienze possono superare $1$, poiché il lavoro speso serve solo a trasferire calore da un serbatoio all'altro. Per esempio un frigorifero che sottrae $300\,\mathrm{J}$ all'interno spendendo un lavoro di $100\,\mathrm{J}$ ha $\varepsilon = 3$ e cede alla cucina $400\,\mathrm{J}$; la stessa macchina usata come pompa di calore ha $\varepsilon_{pc} = 4$.
+Le efficienze possono superare $1$, poiché il lavoro speso serve solo a trasferire calore da un serbatoio all'altro. Per esempio un frigorifero che sottrae $300\,\mathrm{J}$ all'interno spendendo un lavoro di $100\,\mathrm{J}$ ha $\varepsilon = 3$ e cede alla cucina $400\,\mathrm{J}$; la stessa macchina usata come pompa di calore ha $\varepsilon_{\text{pc}} = 4$.
 :::
 
 ## Enunciati del secondo principio
@@ -102,7 +102,7 @@ Il **ciclo di Carnot** è un ciclo reversibile che scambia calore con due soli s
 
 Gli scambi di calore avvengono solo lungo le isoterme, alla stessa temperatura del serbatoio con cui il fluido è in contatto, e per questo il ciclo è reversibile. Percorso in verso opposto, $A \to D \to C \to B \to A$, il ciclo di Carnot è un frigorifero.
 
-::grafico{curve="t<1?(1+(1.5)*(t-0)):(t<2?(2.5+(2.5)*(t-1)):(t<3?(5+(-3)*(t-2)):((2+(-1)*(t-3))))),t<1?8/(1+(1.5)*(t-0)):(t<2?14.74/(2.5+(2.5)*(t-1))^1.6667:(t<3?5.04/(5+(-3)*(t-2)):(8/(2+(-1)*(t-3))^1.6667))),0,4" vettori="1.6,5,1.9,4.21;3.5,1.83,4,1.46;3.8,1.33,3.2,1.57;1.6,3.65,1.4,4.57" punti="1,8,pieno,A;2.5,3.2,pieno,B;5,1.01,pieno,C;2,2.52,pieno,D" etichette="1.95,5.3,T₁;3.3,2.1,T₂" xmin=-0.3 xmax=6 ymin=-0.5 ymax=9 nomi="V,p" titolo="Ciclo di Carnot di un gas perfetto monoatomico: isoterme $AB$ e $CD$, adiabatiche $BC$ e $DA$, più ripide delle isoterme"}
+::grafico{curve="t<1?(1+(1.5)*(t-0)):(t<2?(2.5+(2.5)*(t-1)):(t<3?(5+(-3)*(t-2)):((2+(-1)*(t-3))))),t<1?8/(1+(1.5)*(t-0)):(t<2?14.74/(2.5+(2.5)*(t-1))^1.6667:(t<3?5.04/(5+(-3)*(t-2)):(8/(2+(-1)*(t-3))^1.6667))),0,4" vettori="1.6,5,1.9,4.21;3.5,1.83,4,1.46;3.8,1.33,3.2,1.57;1.6,3.65,1.4,4.57" punti="1,8,pieno,A;2.5,3.2,pieno,B;5,1.01,pieno,C;2,2.52,pieno,D" etichette="1.95,5.3,T₁;3.3,2.1,T₂" xmin=-0.3 xmax=6 ymin=-0.5 ymax=9 nomi="V,p" titolo="Ciclo di Carnot di un gas perfetto monoatomico nel piano $(V, p)$, in unità arbitrarie: isoterme $AB$ e $CD$, adiabatiche $BC$ e $DA$, più ripide delle isoterme"}
 
 :::
 
@@ -148,9 +148,9 @@ Il ciclo di Carnot percorso in verso inverso scambia gli stessi calori cambiati 
 $$
 \varepsilon_C = \frac{Q_2}{|Q_1| - Q_2} = \frac{T_2}{T_1 - T_2} ,
 \qquad
-\varepsilon_{pc,C} = \frac{|Q_1|}{|Q_1| - Q_2} = \frac{T_1}{T_1 - T_2} .
+\varepsilon_{\text{pc},C} = \frac{|Q_1|}{|Q_1| - Q_2} = \frac{T_1}{T_1 - T_2} .
 $$
-Le efficienze crescono quando le due temperature sono vicine. Un frigorifero di Carnot tra $T_2 = 260\,\mathrm{K}$ e $T_1 = 300\,\mathrm{K}$ ha $\varepsilon_C = \dfrac{260}{40} = 6{,}5$; una pompa di calore di Carnot che scalda una casa a $300\,\mathrm{K}$ prelevando calore dall'esterno a $270\,\mathrm{K}$ ha $\varepsilon_{pc,C} = \dfrac{300}{30} = 10$.
+Le efficienze crescono quando le due temperature sono vicine. Un frigorifero di Carnot tra $T_2 = 260\,\mathrm{K}$ e $T_1 = 300\,\mathrm{K}$ ha $\varepsilon_C = \dfrac{260}{40} = 6{,}5$; una pompa di calore di Carnot che scalda una casa a $300\,\mathrm{K}$ prelevando calore dall'esterno a $270\,\mathrm{K}$ ha $\varepsilon_{\text{pc},C} = \dfrac{300}{30} = 10$.
 :::
 
 ## Teorema di Carnot e temperatura termodinamica
@@ -241,19 +241,19 @@ cioè i due integrali sono uguali.
 :::definizione{#entropia titolo="Entropia"}
 L'**entropia** è la funzione di stato $S$ definita, a meno di una costante additiva, dalla relazione
 $$
-S(B) - S(A) = \int_A^B \left( \frac{\delta Q}{T} \right)_{rev} ,
+S(B) - S(A) = \int_A^B \left( \frac{\delta Q}{T} \right)_{\text{rev}} ,
 $$
 dove l'integrale è calcolato lungo una qualsiasi trasformazione reversibile da $A$ a $B$. L'unità di misura è il $\mathrm{J/K}$. Poiché $S$ è una funzione di stato, la variazione $\Delta S$ dipende solo dagli stati iniziale e finale; per una trasformazione irreversibile si calcola quindi lungo una trasformazione reversibile scelta con comodo tra gli stessi stati. In una trasformazione reversibile si ha $dS = \dfrac{\delta Q}{T}$, quindi $\delta Q = T\, dS$; una trasformazione adiabatica reversibile ha $\Delta S = 0$ e si dice **isoentropica**. Per esempio un sistema che assorbe reversibilmente $1200\,\mathrm{J}$ alla temperatura costante di $300\,\mathrm{K}$ ha $\Delta S = \dfrac{1200}{300} = 4{,}0\,\mathrm{J/K}$.
 :::
 
 :::osservazione{#diagramma-ts titolo="Il piano TS"}
-Lungo una trasformazione reversibile rappresentata nel piano $TS$ si ha $Q = \displaystyle\int_{S_A}^{S_B} T\, dS$, quindi il calore assorbito è l'area sotto la curva, positiva quando l'entropia cresce.
+Lungo una trasformazione reversibile rappresentata nel piano $(S, T)$ si ha $Q = \displaystyle\int_{S_A}^{S_B} T\, dS$, quindi il calore assorbito è l'area sotto la curva, positiva quando l'entropia cresce.
 
-::grafico{f="250+150*(x-1)-25*(x-1)^2" area="250+150*(x-1)-25*(x-1)^2;0;1.5;4" punti="1.5,318.75,pieno,A;4,475,pieno,B" segmenti="1.5,0,1.5,318.75;4,0,4,475" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="In una trasformazione reversibile da $A$ a $B$ il calore assorbito è $Q = \displaystyle\int_{S_A}^{S_B} T\, dS$, area sotto la curva nel piano $TS$"}
+::grafico{f="250+150*(x-1)-25*(x-1)^2" area="250+150*(x-1)-25*(x-1)^2;0;1.5;4" punti="1.5,318.75,pieno,A;4,475,pieno,B" segmenti="1.5,0,1.5,318.75;4,0,4,475" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="In una trasformazione reversibile da $A$ a $B$ il calore assorbito è $Q = \displaystyle\int_{S_A}^{S_B} T\, dS$, area sotto la curva nel piano $(S, T)$, con $T$ in kelvin e $S$ in unità arbitrarie"}
 
-Per un ciclo reversibile l'area racchiusa è il calore netto assorbito, cioè il lavoro. Il ciclo di Carnot nel piano $TS$ è un rettangolo, perché le isoterme sono segmenti orizzontali e le adiabatiche reversibili segmenti verticali. Il calore assorbito è $Q_1 = T_1 \Delta S$, il lavoro è $(T_1 - T_2)\,\Delta S$, e il loro rapporto è di nuovo $\eta_C = 1 - \dfrac{T_2}{T_1}$.
+Per un ciclo reversibile l'area racchiusa è il calore netto assorbito, cioè il lavoro. Il ciclo di Carnot nel piano $(S, T)$ è un rettangolo, perché le isoterme sono segmenti orizzontali e le adiabatiche reversibili segmenti verticali. Il calore assorbito è $Q_1 = T_1 \Delta S$, il lavoro è $(T_1 - T_2)\,\Delta S$, e il loro rapporto è di nuovo $\eta_C = 1 - \dfrac{T_2}{T_1}$.
 
-::grafico{vettori="1,800,4,800,Q₁;4,800,4,300;4,300,1,300,Q₂;1,300,1,800" area="800;300;1;4" etichette="2.3,550,L" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="Ciclo di Carnot tra $T_1 = 800\,\mathrm{K}$ e $T_2 = 300\,\mathrm{K}$ nel piano $TS$: l'area del rettangolo è il lavoro $L = (T_1 - T_2)\,\Delta S$"}
+::grafico{vettori="1,800,4,800,Q₁;4,800,4,300;4,300,1,300,Q₂;1,300,1,800" area="800;300;1;4" etichette="2.3,550,L" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="Ciclo di Carnot tra $T_1 = 800\,\mathrm{K}$ e $T_2 = 300\,\mathrm{K}$ nel piano $(S, T)$, con $S$ in unità arbitrarie: l'area del rettangolo è il lavoro $L = (T_1 - T_2)\,\Delta S$"}
 
 :::
 
@@ -311,7 +311,7 @@ Dalla formula generale seguono le variazioni di entropia nelle trasformazioni el
 
 A parità di aumento di temperatura l'isobara ha variazione di entropia maggiore dell'isocora, poiché $c_p > c_V$. A pressione costante il gas assorbe più calore, perché ne restituisce una parte come lavoro di espansione.
 
-::grafico{curve="t,300*exp((t-1)/3),1,4.3;t,300*exp((t-1)/5),1,4.3" punti="1,300,pieno,A" etichette="2.3,640,isocora;3.5,420,isobara" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="Nel piano $TS$ l'isocora $T = T_A \exp\left(\dfrac{S - S_A}{n c_V}\right)$ è più ripida dell'isobara $T = T_A \exp\left(\dfrac{S - S_A}{n c_p}\right)$ uscente dallo stesso stato $A$"}
+::grafico{curve="t,300*exp((t-1)/3),1,4.3;t,300*exp((t-1)/5),1,4.3" punti="1,300,pieno,A" etichette="2.3,640,isocora;3.5,420,isobara" xmin=-0.3 xmax=5 ymin=0 ymax=1000 nomi="S,T" titolo="Nel piano $(S, T)$, con $T$ in kelvin e $S$ in unità arbitrarie, l'isocora $T = T_A \exp\left(\dfrac{S - S_A}{n c_V}\right)$ è più ripida dell'isobara $T = T_A \exp\left(\dfrac{S - S_A}{n c_p}\right)$ uscente dallo stesso stato $A$"}
 
 :::
 
@@ -330,9 +330,9 @@ Valgono le formule seguenti, dove $Q$ è il calore assorbito.
 
 - Un serbatoio a temperatura $T$ che assorbe il calore $Q$ ha $\Delta S = \dfrac{Q}{T}$.
 - Un corpo di massa $m$ e calore specifico $c$ costante, scaldato o raffreddato da $T_A$ a $T_B$, ha $\Delta S = m c \ln\dfrac{T_B}{T_A}$.
-- Una massa $m$ che cambia stato alla temperatura $T$ con calore latente $\lambda$ ha $\Delta S = \pm\dfrac{m \lambda}{T}$, con il segno positivo per fusione ed evaporazione.
+- Una massa $m$ che cambia stato alla temperatura $T$ con calore latente $\lambda$ ha $\Delta S = \pm\dfrac{m \lambda}{T}$, con il segno positivo per fusione ed vaporizzazione.
 
-Il serbatoio scambia calore a temperatura costante, e lo scambio si può pensare reversibile per il serbatoio, quindi $\Delta S = \dfrac{Q}{T}$ anche quando il corpo con cui è in contatto ha un'altra temperatura. Per il corpo si considera un riscaldamento con una successione di serbatoi a temperature via via crescenti, in modo che ogni scambio sia reversibile; allora $\delta Q = m c\, dT$ e $\Delta S = \displaystyle\int_{T_A}^{T_B} \frac{m c\, dT}{T}$. Nel cambiamento di stato la temperatura resta costante, quindi si divide il calore $m\lambda$ per $T$. Per esempio $1{,}0\,\mathrm{kg}$ d'acqua scaldato da $293\,\mathrm{K}$ a $353\,\mathrm{K}$, con $c = 4186\,\mathrm{J/(kg\cdot K)}$, ha $\Delta S = 4186 \ln\dfrac{353}{293} \approx 780\,\mathrm{J/K}$, e $1{,}0\,\mathrm{kg}$ di ghiaccio che fonde a $273\,\mathrm{K}$, con $\lambda = 3{,}33 \cdot 10^5\,\mathrm{J/kg}$, ha $\Delta S \approx 1{,}22 \cdot 10^3\,\mathrm{J/K}$.
+Il serbatoio scambia calore a temperatura costante, e lo scambio si può pensare reversibile per il serbatoio, quindi $\Delta S = \dfrac{Q}{T}$ anche quando il corpo con cui è in contatto ha un'altra temperatura. Per il corpo si considera un riscaldamento con una successione di serbatoi a temperature via via crescenti, in modo che ogni scambio sia reversibile; allora $\delta Q = m c\, dT$ e $\Delta S = \displaystyle\int_{T_A}^{T_B} \frac{m c\, dT}{T}$. Nel cambiamento di stato la temperatura resta costante, quindi si divide il calore $m\lambda$ per $T$. Per esempio $1{,}0\,\mathrm{kg}$ d'acqua scaldato da $293\,\mathrm{K}$ a $353\,\mathrm{K}$, con $c = 4186\,\mathrm{J/(kg\cdot K)}$, ha $\Delta S = 4186 \ln\dfrac{353}{293} \approx 780\,\mathrm{J/K}$, e $1{,}0\,\mathrm{kg}$ di ghiaccio che fonde a $273\,\mathrm{K}$, con $\lambda_f = 3{,}33 \cdot 10^5\,\mathrm{J/kg}$, ha $\Delta S \approx 1{,}22 \cdot 10^3\,\mathrm{J/K}$.
 :::
 
 ## Principio di aumento dell'entropia
@@ -342,7 +342,7 @@ Sia un sistema isolato, cioè che non scambia né calore né lavoro con l'estern
 $$
 \Delta S = S(B) - S(A) \geq 0 ,
 $$
-con il segno di uguaglianza solo se la trasformazione è reversibile. Il sistema formato da un corpo e da tutti i serbatoi e i corpi con cui interagisce si chiama **universo** ed è isolato, perciò in ogni trasformazione reale $\Delta S_{universo} > 0$. Il principio stabilisce il verso dei processi spontanei, poiché esclude ogni processo che diminuirebbe l'entropia di un sistema isolato.
+con il segno di uguaglianza solo se la trasformazione è reversibile. Il sistema formato da un corpo e da tutti i serbatoi e i corpi con cui interagisce si chiama **universo** ed è isolato; perciò, indicando con $\Delta S_{\text{u}}$ la variazione della sua entropia, in ogni trasformazione reale $\Delta S_{\text{u}} > 0$. Il principio stabilisce il verso dei processi spontanei, poiché esclude ogni processo che diminuirebbe l'entropia di un sistema isolato.
 
 :::dimostrazione
 Il sistema è isolato, quindi in ogni tratto della trasformazione $\delta Q = 0$ e l'integrale di Clausius è nullo. Per l'**entropia nelle trasformazioni irreversibili** si ha allora $S(B) - S(A) \geq 0$, con l'uguaglianza solo nel caso reversibile.
@@ -352,9 +352,9 @@ Il sistema è isolato, quindi in ogni tratto della trasformazione $\delta Q = 0$
 :::esempio{titolo="Passaggio di calore tra due serbatoi"}
 Un calore $Q = 1000\,\mathrm{J}$ passa per conduzione da un serbatoio a $500\,\mathrm{K}$ a un serbatoio a $250\,\mathrm{K}$. Il serbatoio caldo assorbe $-1000\,\mathrm{J}$ e quello freddo $+1000\,\mathrm{J}$, quindi
 $$
-\Delta S_{universo} = -\frac{1000}{500} + \frac{1000}{250} = -2{,}0 + 4{,}0 = 2{,}0\,\mathrm{J/K} > 0 .
+\Delta S_{\text{u}} = -\frac{1000}{500} + \frac{1000}{250} = -2{,}0 + 4{,}0 = 2{,}0\,\mathrm{J/K} > 0 .
 $$
-Il passaggio inverso darebbe $\Delta S_{universo} = -2{,}0\,\mathrm{J/K}$, e il principio lo esclude; si ritrova così l'**enunciato di Clausius**.
+Il passaggio inverso darebbe $\Delta S_{\text{u}} = -2{,}0\,\mathrm{J/K}$, e il principio lo esclude; si ritrova così l'**enunciato di Clausius**.
 :::
 
 :::osservazione{#equilibrio-e-massimo-di-entropia titolo="Equilibrio e massimo dell'entropia"}
@@ -369,9 +369,9 @@ La funzione cresce finché il corpo caldo è più caldo dell'altro e ha il massi
 :::
 
 :::osservazione{#lavoro-perso titolo="Entropia e lavoro perso"}
-Sia un motore che lavora tra i serbatoi $T_1 > T_2$, assorbe $Q_1$ e produce $L = Q_1 + Q_2$. In un ciclo l'entropia del fluido non cambia, quindi l'entropia dell'universo è la somma di quelle dei serbatoi, $\Delta S_{universo} = -\dfrac{Q_1}{T_1} - \dfrac{Q_2}{T_2}$. Una macchina reversibile che assorbe lo stesso $Q_1$ produrrebbe $L_{rev} = Q_1\left(1 - \dfrac{T_2}{T_1}\right)$, e la differenza vale
+Sia un motore che lavora tra i serbatoi $T_1 > T_2$, assorbe $Q_1$ e produce $L = Q_1 + Q_2$. In un ciclo l'entropia del fluido non cambia, quindi l'entropia dell'universo è la somma di quelle dei serbatoi, $\Delta S_{\text{u}} = -\dfrac{Q_1}{T_1} - \dfrac{Q_2}{T_2}$. Una macchina reversibile che assorbe lo stesso $Q_1$ produrrebbe $L_{\text{rev}} = Q_1\left(1 - \dfrac{T_2}{T_1}\right)$, e la differenza vale
 $$
-L_{rev} - L = -\,Q_2 - \frac{T_2}{T_1}\, Q_1 = T_2\, \Delta S_{universo} .
+L_{\text{rev}} - L = -\,Q_2 - \frac{T_2}{T_1}\, Q_1 = T_2\, \Delta S_{\text{u}} .
 $$
-Il lavoro perso a causa delle irreversibilità è quindi proporzionale all'entropia prodotta. Per esempio un motore tra $500\,\mathrm{K}$ e $300\,\mathrm{K}$ che assorbe $1000\,\mathrm{J}$ e produce $250\,\mathrm{J}$ genera $\Delta S_{universo} = -2{,}0 + 2{,}5 = 0{,}5\,\mathrm{J/K}$ e perde $300 \cdot 0{,}5 = 150\,\mathrm{J}$ rispetto ai $400\,\mathrm{J}$ della macchina reversibile.
+Il lavoro perso a causa delle irreversibilità è quindi proporzionale all'entropia prodotta. Per esempio un motore tra $500\,\mathrm{K}$ e $300\,\mathrm{K}$ che assorbe $1000\,\mathrm{J}$ e produce $250\,\mathrm{J}$ genera $\Delta S_{\text{u}} = -2{,}0 + 2{,}5 = 0{,}5\,\mathrm{J/K}$ e perde $300 \cdot 0{,}5 = 150\,\mathrm{J}$ rispetto ai $400\,\mathrm{J}$ della macchina reversibile.
 :::

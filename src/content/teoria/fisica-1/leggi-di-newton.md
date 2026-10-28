@@ -148,7 +148,7 @@ $$
 \quad\Longrightarrow\quad
 T = \frac{mg}{2 \sin 30^\circ} = mg = 39{,}2\,\mathrm{N} .
 $$
-Quanto più i fili sono vicini all'orizzontale, tanto più piccolo è $\sin\theta$ e tanto più grande è la tensione.
+Quanto più i fili sono vicini all'orizzontale, tanto più piccolo è il seno dell'angolo che formano con l'orizzontale e tanto più grande è la tensione.
 
 ::grafico{vettori="0,0,-3.4,1.96,T;0,0,3.4,1.96,T;0,0,0,-3.92,P" segmenti="-3.4,1.96,-4,2.31;3.4,1.96,4,2.31" etichette="-1.6,0.25,30°;1.1,0.25,30°" xmin=-4.4 xmax=4.4 ymin=-4.6 ymax=2.9 uguale=1 titolo="Le due tensioni hanno componenti verticali $T \sin 30^\circ$ che insieme equilibrano il peso"}
 
@@ -185,22 +185,22 @@ L'attrito si oppone allo scorrimento *relativo* delle superfici, e per questo pu
 ## Piano inclinato
 
 ::::teorema{#piano-inclinato titolo="Corpo su un piano inclinato liscio"}
-Un punto materiale di massa $m$ appoggiato su un piano inclinato liscio, di inclinazione $\theta$ rispetto all'orizzontale, è soggetto soltanto al peso e alla reazione normale. Allora
+Un punto materiale di massa $m$ appoggiato su un piano inclinato liscio, di inclinazione $\alpha$ rispetto all'orizzontale, è soggetto soltanto al peso e alla reazione normale. Allora
 $$
-N = m g \cos\theta ,
+N = m g \cos\alpha ,
 \qquad
-a = g \sin\theta ,
+a = g \sin\alpha ,
 $$
 con l'accelerazione diretta lungo il piano verso il basso. L'accelerazione non dipende dalla massa e varia fra $0$ (piano orizzontale) e $g$ (piano verticale, caduta libera). Su un piano liscio inclinato di $30^\circ$ ogni corpo scende con $a = 9{,}81 \cdot \dfrac{1}{2}\,\mathrm{m/s^2} = 4{,}91\,\mathrm{m/s^2}$.
 
-::grafico{f="x>=0&&x<=6?3.4641-0.57735*x:NaN" vettori="2,2.309,2,0.309,P;2,2.309,2.866,3.809,N" segmenti="2,2.309,2.866,1.809;2,2.309,1.134,0.809;2,0.309,2.866,1.809;2,0.309,1.134,0.809" etichette="3.1,1.15,mg sin θ;0.1,0.4,mg cos θ;5.05,0.15,θ" xmin=-0.6 xmax=6.6 ymin=-0.6 ymax=4.4 uguale=1 titolo="Il peso si scompone in $mg\sin\theta$ lungo il piano e $mg\cos\theta$ perpendicolare al piano, che la reazione normale equilibra"}
+::grafico{f="x>=0&&x<=6?3.4641-0.57735*x:NaN" vettori="2,2.309,2,0.309,P;2,2.309,2.866,3.809,N" segmenti="2,2.309,2.866,1.809;2,2.309,1.134,0.809;2,0.309,2.866,1.809;2,0.309,1.134,0.809" etichette="3.1,1.15,mg sin α;0.1,0.4,mg cos α;5.05,0.15,α" xmin=-0.6 xmax=6.6 ymin=-0.6 ymax=4.4 uguale=1 titolo="Il peso si scompone in $mg\sin\alpha$ lungo il piano e $mg\cos\alpha$ perpendicolare al piano, che la reazione normale equilibra"}
 
 :::dimostrazione
-Si sceglie l'asse $x$ lungo il piano, con verso positivo verso il basso, e l'asse $y$ perpendicolare al piano, con verso uscente. L'angolo tra il peso e la direzione perpendicolare al piano è uguale a $\theta$, perché i due angoli hanno i lati rispettivamente perpendicolari; perciò le componenti del peso sono $P_x = mg\sin\theta$ e $P_y = -mg\cos\theta$. La reazione normale ha solo la componente $N_y = N$. Il corpo resta sul piano, quindi $a_y = 0$, e il secondo principio per componenti dà
+Si sceglie l'asse $x$ lungo il piano, con verso positivo verso il basso, e l'asse $y$ perpendicolare al piano, con verso uscente. L'angolo tra il peso e la direzione perpendicolare al piano è uguale a $\alpha$, perché i due angoli hanno i lati rispettivamente perpendicolari; perciò le componenti del peso sono $P_x = mg\sin\alpha$ e $P_y = -mg\cos\alpha$. La reazione normale ha solo la componente $N_y = N$. Il corpo resta sul piano, quindi $a_y = 0$, e il secondo principio per componenti dà
 $$
 \begin{cases}
-m g \sin\theta = m\,a \\[4pt]
-N - m g \cos\theta = 0
+m g \sin\alpha = m\,a \\[4pt]
+N - m g \cos\alpha = 0
 \end{cases}
 $$
 da cui seguono le due formule.
@@ -208,30 +208,30 @@ da cui seguono le due formule.
 ::::
 
 ::::teorema{#piano-inclinato-con-attrito titolo="Piano inclinato con attrito"}
-Un punto materiale scivola lungo un piano inclinato di $\theta$, con coefficiente di attrito dinamico $\mu_d$. Allora l'accelerazione lungo il piano ha modulo
+Un punto materiale scivola lungo un piano inclinato di $\alpha$, con coefficiente di attrito dinamico $\mu_d$. Allora l'accelerazione lungo il piano ha modulo
 $$
-a_{\text{discesa}} = g\,(\sin\theta - \mu_d \cos\theta)
+a_{\text{discesa}} = g\,(\sin\alpha - \mu_d \cos\alpha)
 $$
 se il corpo scende, ed è diretta verso il basso; ha modulo
 $$
-a_{\text{salita}} = g\,(\sin\theta + \mu_d \cos\theta)
+a_{\text{salita}} = g\,(\sin\alpha + \mu_d \cos\alpha)
 $$
 se il corpo sale, ed è anche in questo caso diretta verso il basso, quindi il corpo rallenta. Su un piano di $30^\circ$ con $\mu_d = 0{,}20$ un corpo scende con $a = 9{,}81\,(0{,}500 - 0{,}173)\,\mathrm{m/s^2} = 3{,}21\,\mathrm{m/s^2}$.
 
 :::dimostrazione
-Con gli assi del piano inclinato liscio, l'equazione lungo $y$ è la stessa e dà $N = mg\cos\theta$, quindi l'attrito dinamico ha modulo $f_d = \mu_d N = \mu_d m g \cos\theta$ ed è diretto lungo il piano, in verso opposto alla velocità. Se il corpo scende, l'attrito punta verso l'alto e l'equazione lungo l'asse $x$, orientato verso il basso, è $mg\sin\theta - \mu_d mg\cos\theta = m a$. Se il corpo sale, l'attrito punta verso il basso come la componente del peso, e la componente dell'accelerazione verso il basso soddisfa $mg\sin\theta + \mu_d mg\cos\theta = m a$. Dividendo per $m$ si ottengono le due formule.
+Con gli assi del piano inclinato liscio, l'equazione lungo $y$ è la stessa e dà $N = mg\cos\alpha$, quindi l'attrito dinamico ha modulo $f_d = \mu_d N = \mu_d m g \cos\alpha$ ed è diretto lungo il piano, in verso opposto alla velocità. Se il corpo scende, l'attrito punta verso l'alto e l'equazione lungo l'asse $x$, orientato verso il basso, è $mg\sin\alpha - \mu_d mg\cos\alpha = m a$. Se il corpo sale, l'attrito punta verso il basso come la componente del peso, e la componente dell'accelerazione verso il basso soddisfa $mg\sin\alpha + \mu_d mg\cos\alpha = m a$. Dividendo per $m$ si ottengono le due formule.
 :::
 ::::
 
 ::::teorema{#angolo-limite titolo="Angolo limite di attrito"}
-Un corpo fermo su un piano inclinato di $\theta$, con coefficiente di attrito statico $\mu_s$, resta in quiete se e solo se
+Un corpo fermo su un piano inclinato di $\alpha$, con coefficiente di attrito statico $\mu_s$, resta in quiete se e solo se
 $$
-\tan\theta \leq \mu_s .
+\tan\alpha \leq \mu_s .
 $$
-L'angolo $\theta_{\lim} = \arctan \mu_s$ non dipende dalla massa e permette di misurare $\mu_s$, inclinando gradualmente il piano fino a quando il corpo comincia a muoversi. Se lo scivolamento inizia a $22^\circ$, allora $\mu_s = \tan 22^\circ = 0{,}40$.
+L'angolo $\alpha_{\lim} = \arctan \mu_s$ non dipende dalla massa e permette di misurare $\mu_s$, inclinando gradualmente il piano fino a quando il corpo comincia a muoversi. Se lo scivolamento inizia a $22^\circ$, allora $\mu_s = \tan 22^\circ = 0{,}40$.
 
 :::dimostrazione
-All'equilibrio l'accelerazione è nulla. Lungo la perpendicolare al piano si ha $N = mg\cos\theta$; lungo il piano l'attrito statico deve equilibrare la componente del peso, quindi $f_s = mg\sin\theta$. Per la legge dell'attrito statico l'equilibrio è possibile se e solo se $f_s \leq \mu_s N$, cioè $mg\sin\theta \leq \mu_s\,mg\cos\theta$. Poiché $\cos\theta > 0$ per $0 \leq \theta < 90^\circ$, dividendo per $mg\cos\theta$ si ottiene $\tan\theta \leq \mu_s$.
+All'equilibrio l'accelerazione è nulla. Lungo la perpendicolare al piano si ha $N = mg\cos\alpha$; lungo il piano l'attrito statico deve equilibrare la componente del peso, quindi $f_s = mg\sin\alpha$. Per la legge dell'attrito statico l'equilibrio è possibile se e solo se $f_s \leq \mu_s N$, cioè $mg\sin\alpha \leq \mu_s\,mg\cos\alpha$. Poiché $\cos\alpha > 0$ per $0 \leq \alpha < 90^\circ$, dividendo per $mg\cos\alpha$ si ottiene $\tan\alpha \leq \mu_s$.
 :::
 ::::
 
@@ -310,23 +310,23 @@ La legge dell'attrito statico richiede $f_s \leq \mu_s N$, cioè $m\dfrac{v^2}{r
 ::::
 
 ::::teorema{#curva-sopraelevata titolo="Curva sopraelevata"}
-Una curva circolare di raggio $r$ ha la carreggiata inclinata di un angolo $\theta$ verso il centro. In assenza di attrito un veicolo la percorre senza scivolare verso l'interno o verso l'esterno se e solo se la sua velocità è
+Una curva circolare di raggio $r$ ha la carreggiata inclinata di un angolo $\alpha$ verso il centro. In assenza di attrito un veicolo la percorre senza scivolare verso l'interno o verso l'esterno se e solo se la sua velocità è
 $$
-v = \sqrt{g\,r \tan\theta} .
+v = \sqrt{g\,r \tan\alpha} .
 $$
-È la velocità di progetto della curva; a velocità diverse l'attrito fornisce la differenza. Con $r = 100\,\mathrm{m}$ e una velocità di progetto di $20\,\mathrm{m/s}$ serve $\tan\theta = \dfrac{v^2}{g r} = 0{,}408$, cioè $\theta = 22^\circ$.
+È la velocità di progetto della curva; a velocità diverse l'attrito fornisce la differenza. Con $r = 100\,\mathrm{m}$ e una velocità di progetto di $20\,\mathrm{m/s}$ serve $\tan\alpha = \dfrac{v^2}{g r} = 0{,}408$, cioè $\alpha = 22^\circ$.
 
-::grafico{f="x>=-2.4&&x<=2?0.57735*x:NaN" vettori="0,0,0,-2,P;0,0,-1.155,2,N;0,0,-1.155,0,R" segmenti="-1.155,2,-1.155,0" etichette="-3.1,-0.45,verso il centro;1.2,0.25,θ" xmin=-3.4 xmax=2.4 ymin=-2.6 ymax=2.6 uguale=1 titolo="Sulla curva sopraelevata la risultante di $\vec{P}$ e $\vec{N}$ è orizzontale e diretta verso il centro"}
+::grafico{f="x>=-2.4&&x<=2?0.57735*x:NaN" vettori="0,0,0,-2,P;0,0,-1.155,2,N;0,0,-1.155,0,R" segmenti="-1.155,2,-1.155,0" etichette="-3.1,-0.45,verso il centro;1.2,0.25,α" xmin=-3.4 xmax=2.4 ymin=-2.6 ymax=2.6 uguale=1 titolo="Sulla curva sopraelevata la risultante di $\vec{P}$ e $\vec{N}$ è orizzontale e diretta verso il centro"}
 
 :::dimostrazione
-Le sole forze sono il peso e la reazione normale, che è perpendicolare alla carreggiata e quindi forma l'angolo $\theta$ con la verticale. L'accelerazione è centripeta e orizzontale, quindi lungo la verticale la risultante è nulla e lungo l'orizzontale vale $m\dfrac{v^2}{r}$:
+Le sole forze sono il peso e la reazione normale, che è perpendicolare alla carreggiata e quindi forma l'angolo $\alpha$ con la verticale. L'accelerazione è centripeta e orizzontale, quindi lungo la verticale la risultante è nulla e lungo l'orizzontale vale $m\dfrac{v^2}{r}$:
 $$
 \begin{cases}
-N \cos\theta = m g \\[4pt]
-N \sin\theta = m\,\dfrac{v^2}{r}
+N \cos\alpha = m g \\[4pt]
+N \sin\alpha = m\,\dfrac{v^2}{r}
 \end{cases}
 $$
-Dividendo la seconda equazione per la prima si ottiene $\tan\theta = \dfrac{v^2}{g r}$, da cui la formula.
+Dividendo la seconda equazione per la prima si ottiene $\tan\alpha = \dfrac{v^2}{g r}$, da cui la formula.
 :::
 ::::
 
@@ -427,7 +427,7 @@ $$
 $$
 La **forza apparente** $\vec{F}_{\text{app}}$ non è esercitata da alcun corpo e quindi non ha una reazione secondo il terzo principio. La relazione segue dalle trasformazioni di Galileo, $\vec{a} = \vec{a}' + \vec{A}$, sostituite nel secondo principio $\vec{R} = m\,\vec{a}$.
 
-Un pendolo appeso al soffitto di un vagone che accelera con $A = 2{,}0\,\mathrm{m/s^2}$ resta in quiete rispetto al vagone inclinato all'indietro. Nel vagone la tensione equilibra il peso e la forza apparente $mA$, quindi il filo forma con la verticale l'angolo $\alpha$ con $\tan\alpha = \dfrac{A}{g} = 0{,}20$, cioè $\alpha = 11{,}5^\circ$.
+Un pendolo appeso al soffitto di un vagone che accelera con $A = 2{,}0\,\mathrm{m/s^2}$ resta in quiete rispetto al vagone inclinato all'indietro. Nel vagone la tensione equilibra il peso e la forza apparente $mA$, quindi il filo forma con la verticale l'angolo $\theta$ con $\tan\theta = \dfrac{A}{g} = 0{,}20$, cioè $\theta = 11{,}3^\circ$.
 :::
 
 ::::teorema{#peso-apparente titolo="Peso apparente in ascensore"}

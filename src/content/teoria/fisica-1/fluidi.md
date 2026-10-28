@@ -102,7 +102,7 @@ Una variazione di pressione prodotta in un punto di un fluido incomprimibile in 
 :::
 
 ::::teorema{#torchio-idraulico titolo="Torchio idraulico"}
-Due cilindri verticali di sezioni $A_1 < A_2$, chiusi da pistoni alla stessa quota, sono collegati da un condotto pieno di liquido incomprimibile. Se sul pistone piccolo agisce la forza $F_1$, il pistone grande è in equilibrio con la forza
+Due cilindri verticali di sezioni $A_1 < A_2$, chiusi da pistoni di massa trascurabile alla stessa quota, sono collegati da un condotto pieno di liquido incomprimibile. Se sul pistone piccolo agisce la forza $F_1$, il pistone grande è in equilibrio con la forza
 $$
 F_2 = \frac{A_2}{A_1}\, F_1 ,
 $$
@@ -131,7 +131,7 @@ Si considera prima un parallelepipedo immerso, con le basi orizzontali di area $
 $$
 F_2 - F_1 = \rho_f g\,(y_1 - y_2)\,A = \rho_f\, V g .
 $$
-Per un corpo di forma qualunque si ragiona per sostituzione. Si immagina di togliere il corpo e di riempire la regione che occupava con lo stesso fluido che lo circonda. Questo fluido è in equilibrio, quindi la risultante delle forze di pressione sulla sua superficie è opposta al suo peso: è verticale, verso l'alto, di modulo $\rho_f V_{\mathrm{imm}}\, g$, e la sua retta d'azione passa per il baricentro del fluido sostituito. Le forze di pressione dipendono solo dal fluido esterno e dalla forma della superficie, non da ciò che la superficie racchiude; perciò sul corpo agisce la stessa risultante. Se il corpo è immerso solo in parte, il ragionamento si applica alla parte immersa, poiché sulla parte emersa agisce la sola pressione atmosferica, il cui effetto sui fluidi si trascura.
+Per un corpo di forma qualunque si ragiona per sostituzione. Si immagina di togliere il corpo e di riempire la regione che occupava con lo stesso fluido che lo circonda. Questo fluido è in equilibrio, quindi la risultante delle forze di pressione sulla sua superficie è opposta al suo peso: è verticale, verso l'alto, di modulo $\rho_f V_{\mathrm{imm}}\, g$, e la sua retta d'azione passa per il baricentro del fluido sostituito. Le forze di pressione dipendono solo dal fluido esterno e dalla forma della superficie, non da ciò che la superficie racchiude; perciò sul corpo agisce la stessa risultante. Se il corpo è immerso solo in parte, sulla parte emersa agisce la pressione atmosferica $p_0$, uniforme perché il peso dell'aria si trascura. Una pressione uniforme su tutta la superficie chiusa del corpo ha risultante nulla, quindi resta la sola pressione relativa sulla parte immersa, e il ragionamento per sostituzione si applica alla regione occupata dalla parte immersa.
 :::
 ::::
 

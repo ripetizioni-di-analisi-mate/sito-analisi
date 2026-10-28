@@ -108,7 +108,7 @@ Q = m\,\lambda ,
 $$
 dove $\lambda$ è il **calore latente** della trasformazione, in $\mathrm{J/kg}$. Per l'acqua a $1\,\mathrm{atm}$ il calore latente di fusione è $\lambda_f = 3{,}33 \cdot 10^5\,\mathrm{J/kg}$ a $0\,^\circ\mathrm{C}$ e quello di vaporizzazione è $\lambda_v = 2{,}26 \cdot 10^6\,\mathrm{J/kg}$ a $100\,^\circ\mathrm{C}$. Nella trasformazione inversa (solidificazione, condensazione) la sostanza cede lo stesso calore, quindi $Q = -m\,\lambda$. Fondere $1\,\mathrm{kg}$ di ghiaccio richiede quanto scaldare $1\,\mathrm{kg}$ di acqua di circa $80\,\mathrm{K}$.
 
-::grafico{f="min(0,-20+20*x/0.418)+max(0,min(100,100*(x-3.748)/4.186))+max(0,20*(x-30.534)/0.402)" xmin=0 xmax=31 ymin=-40 ymax=160 nomi="Q,T" etichette="0.6,12,fusione;13,112,vaporizzazione" titolo="Temperatura di $0{,}10\,\mathrm{kg}$ di acqua in funzione del calore assorbito, da ghiaccio a $-20\,^\circ\mathrm{C}$ a vapore a $120\,^\circ\mathrm{C}$, con $Q$ in $10^4\,\mathrm{J}$; i tratti orizzontali corrispondono ai cambiamenti di stato"}
+::grafico{f="min(0,-20+20*x/0.418)+max(0,min(100,100*(x-3.748)/4.186))+max(0,20*(x-30.534)/0.402)+0*sqrt(30.936-x)" xmin=0 xmax=31 ymin=-40 ymax=160 nomi="Q,T" etichette="0.6,12,fusione;13,112,vaporizzazione" titolo="Temperatura di $0{,}10\,\mathrm{kg}$ di acqua in funzione del calore assorbito, da ghiaccio a $-20\,^\circ\mathrm{C}$ a vapore a $120\,^\circ\mathrm{C}$, con $Q$ in $10^4\,\mathrm{J}$; i tratti orizzontali corrispondono ai cambiamenti di stato"}
 
 :::
 
@@ -158,7 +158,7 @@ pV = nRT ,
 $$
 con $p$ in pascal, $V$ in metri cubi, $T$ in kelvin e $R = 8{,}314\,\mathrm{J/(mol\cdot K)}$ (**costante dei gas**). L'equazione riassume in una sola relazione le leggi di Boyle e di Gay-Lussac e la legge di Avogadro, secondo cui volumi uguali di gas diversi, alla stessa pressione e temperatura, contengono lo stesso numero di moli. Scritta con il numero di molecole $N = n N_A$ diventa $pV = N k_B T$, con $k_B = \dfrac{R}{N_A} = 1{,}38 \cdot 10^{-23}\,\mathrm{J/K}$ (**costante di Boltzmann**). Due delle tre variabili $p$, $V$, $T$ determinano la terza, quindi lo stato di equilibrio di una quantità fissata di gas è un punto del **piano di Clapeyron** $(V, p)$. Una mole a $0\,^\circ\mathrm{C}$ e $1{,}013 \cdot 10^5\,\mathrm{Pa}$ occupa $V = \dfrac{8{,}314 \cdot 273{,}15}{1{,}013 \cdot 10^5}\,\mathrm{m^3} = 22{,}4 \cdot 10^{-3}\,\mathrm{m^3}$, cioè $22{,}4\,\mathrm{L}$.
 
-::grafico{f="2/x;4/x;6/x" xmin=0 xmax=6 ymin=0 ymax=5 nomi="V,p" etichette="3.05,2.15,T₃;3.05,1.48,T₂;3.05,0.82,T₁" titolo="Isoterme del gas perfetto nel piano $(V, p)$: sono rami di iperbole $pV = nRT$, più lontani dagli assi per temperature maggiori, con $T_1 < T_2 < T_3$"}
+::grafico{f="2/x;4/x;6/x" xmin=0 xmax=6 ymin=0 ymax=5 nomi="V,p" etichette="3.05,2.15,T₃;3.05,1.48,T₂;3.05,0.82,T₁" titolo="Isoterme del gas perfetto nel piano $(V, p)$, in unità arbitrarie: sono rami di iperbole $pV = nRT$, più lontani dagli assi per temperature maggiori, con $T_1 < T_2 < T_3$"}
 
 :::
 
@@ -183,9 +183,9 @@ Se $f$ è continua su $[a, b]$ e $F$ è una sua primitiva, allora $\displaystyle
 :::osservazione{#lavoro-come-area titolo="Lavoro come area nel piano (V, p)"}
 Poiché $L$ è l'integrale di $p$ rispetto a $V$, il lavoro di un'espansione quasistatica è l'**area** sotto la curva della trasformazione nel piano $(V, p)$, tra $V_i$ e $V_f$; in una compressione l'area è la stessa e il lavoro ha segno negativo. Due trasformazioni con gli stessi stati iniziale e finale possono avere aree diverse sotto la curva, perciò il lavoro *dipende dalla trasformazione* e non è una funzione di stato.
 
-::grafico{f="6/x" area="6/x;0;1.5;4" punti="1.5,4,pieno,A;4,1.5,pieno,B" segmenti="1.5,0,1.5,4;4,0,4,1.5" xmin=0 xmax=6 ymin=0 ymax=5 nomi="V,p" titolo="Il lavoro dell'espansione da $A$ a $B$ è l'area sotto la curva, $L = \displaystyle\int_{V_A}^{V_B} p\,dV$"}
+::grafico{f="6/x" area="6/x;0;1.5;4" punti="1.5,4,pieno,A;4,1.5,pieno,B" segmenti="1.5,0,1.5,4;4,0,4,1.5" xmin=0 xmax=6 ymin=0 ymax=5 nomi="V,p" titolo="Il lavoro dell'espansione da $A$ a $B$ è l'area sotto la curva, $L = \displaystyle\int_{V_A}^{V_B} p\,dV$; $V$ e $p$ in unità arbitrarie"}
 
-::grafico{vettori="1,1,1,3;1,3,4,3;1,1,4,1;4,1,4,3" area="3;0;1;4" punti="1,1,pieno,A;4,3,pieno,B;1,3,pieno,C;4,1,pieno,D" xmin=0 xmax=5 ymin=0 ymax=4 nomi="V,p" titolo="Da $A$ a $B$ lungo $ACB$ il lavoro è l'area colorata, $3 \cdot 3 = 9$ nelle unità del grafico; lungo $ADB$ è l'area sotto il segmento $AD$, $3 \cdot 1 = 3$"}
+::grafico{vettori="1,1,1,3;1,3,4,3;1,1,4,1;4,1,4,3" area="3;0;1;4" punti="1,1,pieno,A;4,3,pieno,B;1,3,pieno,C;4,1,pieno,D" xmin=0 xmax=5 ymin=0 ymax=4 nomi="V,p" titolo="Da $A$ a $B$ lungo $ACB$ il lavoro è l'area colorata, $3 \cdot 3 = 9$ con $V$ e $p$ in unità arbitrarie; lungo $ADB$ è l'area sotto il segmento $AD$, $3 \cdot 1 = 3$"}
 
 :::
 
@@ -307,7 +307,7 @@ L = -\Delta U = n\,c_V\,(T_i - T_f) = \frac{p_i V_i - p_f V_f}{\gamma - 1} .
 $$
 Poiché $\gamma > 1$, nel piano $(V, p)$ l'adiabatica passante per un punto è più ripida dell'isoterma passante per lo stesso punto. In un'espansione adiabatica il gas compie lavoro e si raffredda; in una compressione si scalda, come l'aria in una pompa da bicicletta. Un gas biatomico compresso adiabaticamente a metà del volume passa da $300\,\mathrm{K}$ a $300 \cdot 2^{0{,}40}\,\mathrm{K} \approx 396\,\mathrm{K}$.
 
-::grafico{f="4/x;2*(2/x)^1.4" punti="2,2,pieno,A" xmin=0 xmax=6 ymin=0 ymax=6 nomi="V,p" etichette="4.8,1.05,isoterma;4.4,0.3,adiabatica" titolo="Isoterma $pV = \text{costante}$ e adiabatica $pV^{\gamma} = \text{costante}$ con $\gamma = 1{,}4$ passanti per lo stesso stato $A$; l'adiabatica è più ripida"}
+::grafico{f="4/x;2*(2/x)^1.4" punti="2,2,pieno,A" xmin=0 xmax=6 ymin=0 ymax=6 nomi="V,p" etichette="4.8,1.05,isoterma;4.4,0.3,adiabatica" titolo="Isoterma $pV = \text{costante}$ e adiabatica $pV^{\gamma} = \text{costante}$ con $\gamma = 1{,}4$ passanti per lo stesso stato $A$, in unità arbitrarie; l'adiabatica è più ripida"}
 
 :::dimostrazione
 Il calore scambiato è nullo, quindi per il primo principio $dU = -p\,dV$; per la variazione di energia interna del gas perfetto, inoltre, $dU = n\,c_V\,dT$. Sostituendo $p = \dfrac{nRT}{V}$ si ottiene
@@ -352,7 +352,7 @@ Il lavoro totale di un ciclo quasistatico è, in valore assoluto, l'area racchiu
 
 Il risultato permette di calcolare il lavoro di un ciclo senza sommare i singoli contributi. Il ciclo rettangolare della figura, formato da due isobare e due isocore e percorso in senso orario, compie il lavoro $L = (p_2 - p_1)(V_2 - V_1)$.
 
-::grafico{vettori="1,1,1,3;1,3,4,3;4,3,4,1;4,1,1,1" area="3;1;1;4" punti="1,1,pieno,A;1,3,pieno,B;4,3,pieno,C;4,1,pieno,D" segmenti="0,1,1,1;0,3,1,3;1,0,1,1;4,0,4,1" etichette="0.25,3.15,p₂;0.25,1.15,p₁;1.1,0.3,V₁;4.1,0.3,V₂" xmin=0 xmax=5 ymin=0 ymax=4 nomi="V,p" titolo="Ciclo $ABCDA$ percorso in senso orario: il lavoro totale è positivo e uguale all'area del rettangolo, $(p_2 - p_1)(V_2 - V_1)$"}
+::grafico{vettori="1,1,1,3;1,3,4,3;4,3,4,1;4,1,1,1" area="3;1;1;4" punti="1,1,pieno,A;1,3,pieno,B;4,3,pieno,C;4,1,pieno,D" segmenti="0,1,1,1;0,3,1,3;1,0,1,1;4,0,4,1" etichette="0.25,3.15,p₂;0.25,1.15,p₁;1.1,0.3,V₁;4.1,0.3,V₂" xmin=0 xmax=5 ymin=0 ymax=4 nomi="V,p" titolo="Ciclo $ABCDA$ percorso in senso orario, in unità arbitrarie: il lavoro totale è positivo e uguale all'area del rettangolo, $(p_2 - p_1)(V_2 - V_1)$"}
 
 :::dimostrazione
 Si considera un ciclo percorso in senso orario e lo si divide nel tratto superiore, percorso da sinistra verso destra con $dV > 0$, e nel tratto inferiore, percorso da destra verso sinistra con $dV < 0$. Il lavoro del tratto superiore è l'area sotto di esso, con segno positivo; il lavoro del tratto inferiore è l'area sotto di esso, con segno negativo. La somma è la differenza delle due aree, cioè l'area racchiusa dal ciclo. Nel verso antiorario i ruoli dei due tratti si scambiano, quindi il lavoro cambia segno.
