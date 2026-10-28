@@ -373,7 +373,7 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .stato .stato-sbloccata { color: var(--verde); background: color-mix(in srgb, var(--verde) 12%, transparent); }
 .stato.compatto > span { padding: 0; background: none; }
 .stato.compatto svg { width: 0.95rem; height: 0.95rem; }
-.griglia-materie .piede-scheda { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.griglia-materie .piede-scheda { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; }
 .indice .argomento .stato { margin-left: 0.35rem; vertical-align: -0.15rem; }
 
 .riquadro-stato { margin: 1.1rem 0 1.6rem; font-family: var(--ui); }

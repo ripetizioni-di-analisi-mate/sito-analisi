@@ -6,6 +6,7 @@
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
+import { MATERIE } from '../src/data/materie.ts';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const SCHEDE_LIBERE = 3;          // le prime N schede svolte di ogni argomento restano aperte
@@ -90,6 +91,7 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS acquisti (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materia TEXT, importo REAL, valuta TEXT, transazione TEXT UNIQUE, creato TEXT);
       CREATE TABLE IF NOT EXISTS visite (giorno TEXT, sezione TEXT, n INTEGER, PRIMARY KEY (giorno, sezione));
       CREATE TABLE IF NOT EXISTS ingressi (giorno TEXT, fonte TEXT, n INTEGER, PRIMARY KEY (giorno, fonte));
+      CREATE TABLE IF NOT EXISTS visitatori (giorno TEXT, h TEXT, mobile INTEGER, PRIMARY KEY (giorno, h));
       CREATE TABLE IF NOT EXISTS utenti (email TEXT PRIMARY KEY, hash TEXT, sale TEXT, iterazioni INTEGER, versione INTEGER DEFAULT 1,
         falliti INTEGER DEFAULT 0, bloccato_fino INTEGER DEFAULT 0, creato TEXT, ultimo_accesso TEXT);
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
@@ -115,6 +117,10 @@ export class Archivio {
                        ON CONFLICT(giorno, sezione) DO UPDATE SET n = n + 1`, c.giorno, c.sezione);
         if (c.fonte) this.sql.exec(`INSERT INTO ingressi (giorno, fonte, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, fonte) DO UPDATE SET n = n + 1`, c.giorno, c.fonte);
+        if (c.h) {
+          this.sql.exec('INSERT OR IGNORE INTO visitatori (giorno, h, mobile) VALUES (?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0);
+          if (Math.random() < 0.01) this.sql.exec("DELETE FROM visitatori WHERE giorno < date('now', '-200 days')");
+        }
         return Response.json({ ok: true });
 
       case '/utente': // dati per il login
@@ -185,11 +191,16 @@ export class Archivio {
         } catch { return Response.json({ ok: false, doppio: true }); }
         return Response.json({ ok: true });
 
-      case '/dati':
+      case '/dati': {
+        const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM visite WHERE giorno >= date('now', '-${giorni - 1} days')
+                                               GROUP BY sezione ORDER BY n DESC LIMIT 15`);
         return Response.json({
-          visite: this.righe('SELECT giorno, SUM(n) AS n FROM visite GROUP BY giorno ORDER BY giorno DESC LIMIT 30'),
-          visitePerSezione: this.righe('SELECT sezione, SUM(n) AS n FROM visite GROUP BY sezione ORDER BY n DESC LIMIT 12'),
-          ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-29 days') ORDER BY giorno`),
+          visite: this.righe(`SELECT giorno, SUM(n) AS n FROM visite WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
+          visitatori: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM visitatori
+                                  WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
+          inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
+          sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
+          ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`),
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
                               LEFT JOIN (SELECT DISTINCT email FROM acquisti) a ON a.email = u.email
@@ -202,6 +213,7 @@ export class Archivio {
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
           dispositivi: this.righe('SELECT email, nome, creato, ultimo_uso FROM dispositivi ORDER BY ultimo_uso DESC LIMIT 2000'),
         });
+      }
     }
     return new Response('non trovato', { status: 404 });
   }
@@ -421,7 +433,7 @@ export default {
     }
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO, MATERIE), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -429,6 +441,9 @@ export default {
         if (typeof pw !== 'string' || !confrontoCostante(pw, pwGiusta)) return new Response('no', { status: 401 });
         const t = await firmaToken(env, { admin: true, t: Date.now() });
         return new Response('ok', { headers: { 'set-cookie': `admin=${encodeURIComponent(t)}; Path=/admin; Max-Age=604800; HttpOnly; Secure; SameSite=Strict` } });
+      }
+      if (p === '/admin/api/esci' && POST) {
+        return new Response('ok', { headers: { 'set-cookie': 'admin=; Path=/admin; Max-Age=0; HttpOnly; Secure; SameSite=Strict' } });
       }
       const ma = leggiCookie(req, 'admin');
       const sess = ma ? await leggiToken(env, ma) : null;
@@ -521,11 +536,18 @@ export default {
     }
 
     // Conteggio visite (solo pagine).
-    if (req.method === 'GET' && html) {
+    // Si contano solo le persone: robot, anteprime dei link e strumenti automatici restano fuori.
+    const ua = req.headers.get('user-agent') || '';
+    if (req.method === 'GET' && html && ua && !ROBOT.test(ua) && risposta.status < 400) {
       const giorno = new Date().toISOString().slice(0, 10);
-      const sezione = info ? `${info.materia}/${info.argomento}` : (url.pathname.split('/')[1]?.replace(/\.html$/, '') || 'home');
+      const sezione = info ? (info.argomento ? `${info.materia}/${info.argomento}` : info.materia)
+        : (url.pathname.split('/')[1]?.replace(/\.html$/, '') || 'home');
       const fonte = url.pathname.startsWith('/vetrine/') ? null : fonteIngresso(req, url);
-      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte }).catch(() => {}));
+      // Visitatore unico del giorno: impronta non reversibile di giorno, indirizzo e browser (nessun dato personale salvato).
+      const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
+      const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
+      const mobile = /Mobi|Android|iPhone|iPad/i.test(ua);
+      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, h, mobile }).catch(() => {}));
       // La prima provenienza resta in un cookie per 90 giorni: serve a sapere da dove arriva chi poi si iscrive.
       if (fonte && !leggiCookie(req, 'fonte')) {
         try { risposta.headers.append('set-cookie', `fonte=${encodeURIComponent(fonte)}; Path=/; Max-Age=7776000; HttpOnly; Secure; SameSite=Lax`); } catch { /* intestazioni bloccate */ }

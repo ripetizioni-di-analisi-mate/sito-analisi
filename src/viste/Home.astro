@@ -34,7 +34,7 @@ const MATERIE = materieL(lingua);
               <a href={link(lingua, `/${m.slug}`)}>
                 <h3>{m.titolo}</h3>
                 <p>{m.descrizione}</p>
-                <span class="piede-scheda"><span class="conteggio">{m.argomenti.length} {t.argomenti}</span><Stato prezzo={m.prezzo} lingua={lingua} /></span>
+                <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>
               </a>
             ) : (
               <div>
