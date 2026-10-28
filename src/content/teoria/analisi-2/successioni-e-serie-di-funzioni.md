@@ -28,9 +28,9 @@ f(x) =
 $$
 Al crescere di $n$ il grafico si abbassa verso l'asse $x$ su tutto l'intervallo $[0, 1)$, ma *ogni* curva risale fino al punto $(1, 1)$.
 
-::grafico{f="x^3" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="y = x³: la curva è già vicina a 0 su metà intervallo, ma arriva comunque in (1, 1)"}
+::grafico{f="x^3" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="$y = x^3$: la curva è già vicina a $0$ su metà intervallo, ma arriva comunque in $(1, 1)$"}
 
-::grafico{f="x^15" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="y = x¹⁵: quasi tutto il grafico è schiacciato sull'asse x, poi risale di colpo verso (1, 1)"}
+::grafico{f="x^15" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="$y = x^{15}$: quasi tutto il grafico è schiacciato sull'asse $x$, poi risale di colpo verso $(1, 1)$"}
 :::
 
 :::attenzione
@@ -223,7 +223,7 @@ $$
 $$
 e la serie geometrica $\sum \dfrac{1}{2^n}$ converge. Quindi la serie **converge totalmente** su $\mathbb{R}$, perciò anche uniformemente e puntualmente in ogni punto.
 
-::grafico{f="(0.5*cos(x)-0.25)/(1.25-cos(x));cos(x)/2;cos(x)/2+cos(2*x)/4" xmin=-3.5 xmax=3.5 ymin=-0.8 ymax=1.2 titolo="Somma della serie (in colore) e somme parziali $s_1$ (tratteggiata) e $s_2$ (rossa): su tutto $\mathbb{R}$ lo scarto tra $s_N$ e la somma è al più $\dfrac{1}{2^N}$"}
+::grafico{f="(0.5*cos(x)-0.25)/(1.25-cos(x));cos(x)/2;cos(x)/2+cos(2*x)/4" legenda="y = f(x);y = s_1(x);y = s_2(x)" xmin=-3.5 xmax=3.5 ymin=-0.8 ymax=1.2 titolo="Somma della serie (in colore) e somme parziali $s_1$ (tratteggiata) e $s_2$ (rossa): su tutto $\mathbb{R}$ lo scarto tra $s_N$ e la somma è al più $\dfrac{1}{2^N}$"}
 :::
 
 :::attenzione

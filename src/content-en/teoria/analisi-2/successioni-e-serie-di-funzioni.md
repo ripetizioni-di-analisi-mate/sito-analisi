@@ -28,9 +28,9 @@ f(x) =
 $$
 As $n$ increases the graph drops toward the $x$-axis on the whole interval $[0, 1)$, but *every* curve rises back up to the point $(1, 1)$.
 
-::grafico{f="x^3" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="y = x³: the curve is already close to 0 on half the interval, but it still reaches (1, 1)"}
+::grafico{f="x^3" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="$y = x^3$: the curve is already close to $0$ on half the interval, but it still reaches $(1, 1)$"}
 
-::grafico{f="x^15" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="y = x¹⁵: almost the whole graph is flattened onto the x-axis, then it rises sharply toward (1, 1)"}
+::grafico{f="x^15" xmin=0 xmax=1.15 ymin=0 ymax=1.15 punti="1,1" titolo="$y = x^{15}$: almost the whole graph is flattened onto the $x$-axis, then it rises sharply toward $(1, 1)$"}
 :::
 
 :::attenzione
@@ -223,7 +223,7 @@ $$
 $$
 and the geometric series $\sum \dfrac{1}{2^n}$ converges. Hence the series **converges totally** on $\mathbb{R}$, therefore also uniformly, and pointwise at every point.
 
-::grafico{f="(0.5*cos(x)-0.25)/(1.25-cos(x));cos(x)/2;cos(x)/2+cos(2*x)/4" xmin=-3.5 xmax=3.5 ymin=-0.8 ymax=1.2 titolo="Sum of the series (in color) and partial sums $s_1$ (dashed) and $s_2$ (red): on all of $\mathbb{R}$ the gap between $s_N$ and the sum is at most $\dfrac{1}{2^N}$"}
+::grafico{f="(0.5*cos(x)-0.25)/(1.25-cos(x));cos(x)/2;cos(x)/2+cos(2*x)/4" legenda="y = f(x);y = s_1(x);y = s_2(x)" xmin=-3.5 xmax=3.5 ymin=-0.8 ymax=1.2 titolo="Sum of the series (in color) and partial sums $s_1$ (dashed) and $s_2$ (red): on all of $\mathbb{R}$ the gap between $s_N$ and the sum is at most $\dfrac{1}{2^N}$"}
 :::
 
 :::attenzione
