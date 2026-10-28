@@ -8,7 +8,7 @@ sommario: Che cos'è la carica elettrica e quali proprietà ha, come si elettriz
 In tutto l'argomento le cariche sono ferme in un sistema di riferimento inerziale e si trovano nel vuoto, salvo dove è detto diversamente.
 
 :::definizione{#carica-elettrica titolo="Carica elettrica"}
-La **carica elettrica** è la grandezza scalare che misura l'attitudine di un corpo a esercitare e a subire forze elettriche. Esistono due specie di carica, dette per convenzione positiva e negativa: due corpi con cariche dello stesso segno si respingono, due corpi con cariche di segno opposto si attraggono. La carica di un corpo è la somma algebrica delle cariche dei suoi costituenti, e un corpo con carica totale nulla si dice **neutro**.
+La **carica elettrica** è la grandezza scalare che misura l'attitudine di un corpo a esercitare e a subire forze elettriche. Esistono due specie di carica, dette per convenzione positiva e negativa; due corpi con cariche dello stesso segno si respingono, due corpi con cariche di segno opposto si attraggono. La carica di un corpo è la somma algebrica delle cariche dei suoi costituenti, e un corpo con carica totale nulla si dice **neutro**.
 
 La materia ordinaria è formata da atomi, con un nucleo di protoni e neutroni circondato da elettroni. Il protone ha carica $+e$, l'elettrone ha carica $-e$ e il neutrone è neutro, con
 $$
@@ -32,7 +32,7 @@ elettroni in eccesso. Poiché $e$ è molto piccola, nei corpi macroscopici $n$ �
 :::
 
 :::teorema{#conservazione-della-carica titolo="Conservazione della carica"}
-È un principio sperimentale, verificato in tutti i processi noti, comprese le reazioni tra particelle elementari: in un sistema isolato la somma algebrica delle cariche resta costante nel tempo,
+È un principio sperimentale, verificato in tutti i processi noti, comprese le reazioni tra particelle elementari, secondo il quale in un sistema isolato la somma algebrica delle cariche resta costante nel tempo,
 $$
 \sum_i q_i = \text{costante} .
 $$
@@ -185,7 +185,7 @@ Se tutte le cariche stanno sull'asse $x$, ogni forza è diretta lungo l'asse, e 
 $$
 F_x = \sum_{i} k\,\frac{q_i q_0}{(x_0 - x_i)^2}\,\operatorname{sgn}(x_0 - x_i) ,
 $$
-dove $\operatorname{sgn}(x_0 - x_i)$ vale $+1$ se $q_0$ sta a destra di $q_i$ e $-1$ se sta a sinistra. La formula traduce la regola dei segni: il contributo di $q_i$ è positivo se spinge $q_0$ verso destra. Il problema si riduce così a una somma di numeri con segno, e il segno di $F_x$ dà il verso della forza totale.
+dove $\operatorname{sgn}(x_0 - x_i)$ vale $+1$ se $q_0$ sta a destra di $q_i$ e $-1$ se sta a sinistra. La formula traduce la regola dei segni, secondo la quale il contributo di $q_i$ è positivo se spinge $q_0$ verso destra. Il problema si riduce così a una somma di numeri con segno, e il segno di $F_x$ dà il verso della forza totale.
 :::
 
 :::esempio{titolo="Carica esterna a due cariche di segno opposto"}

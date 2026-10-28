@@ -51,7 +51,7 @@ which is the claim.
 ::::
 
 :::richiamo{titolo="Fundamental theorem of calculus"}
-If $g$ has a continuous derivative on $[a, b]$, then $\displaystyle\int_a^b g'(t)\,dt = g(b) - g(a)$. We refer to the Analysis 1 topic on integration.
+If $g$ has a continuous derivative on $[a, b]$, then $\displaystyle\int_a^b g'(t)\,dt = g(b) - g(a)$. We refer to the topic on integrals in Analysis 1.
 :::
 
 :::definizione{#forza-media titolo="Average force"}
@@ -416,5 +416,5 @@ $$
 ::::
 
 :::richiamo{titolo="Integral of a function and change of variable"}
-An antiderivative of $\dfrac{1}{x}$ for $x > 0$ is $\ln x$; moreover, with the change of variable $M = M(t)$, we have $\displaystyle\int_{t_1}^{t_2} \frac{1}{M(t)}\,\frac{dM}{dt}\,dt = \int_{M(t_1)}^{M(t_2)} \frac{dM}{M}$. We refer to the Analysis 1 topic on integration.
+An antiderivative of $\dfrac{1}{x}$ for $x > 0$ is $\ln x$; moreover, with the change of variable $M = M(t)$, we have $\displaystyle\int_{t_1}^{t_2} \frac{1}{M(t)}\,\frac{dM}{dt}\,dt = \int_{M(t_1)}^{M(t_2)} \frac{dM}{M}$. We refer to the topic on integrals in Analysis 1.
 :::

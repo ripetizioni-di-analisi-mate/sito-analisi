@@ -167,7 +167,7 @@ Il potenziale prodotto in un punto $P$ dalle cariche puntiformi $Q_1, \dots, Q_n
 $$
 V(P) = \sum_{i=1}^{n} \frac{k Q_i}{r_i} .
 $$
-La somma è tra scalari, quindi non richiede di scomporre vettori in componenti, e per questo il potenziale si calcola più facilmente del campo. Nel punto medio tra due cariche $+q$ e $-q$ il potenziale è nullo, perché i due termini sono opposti, mentre il campo è diverso da zero, perché i due campi hanno lo stesso verso. Il potenziale in un punto misura il lavoro per unità di carica necessario a portarvi una carica dall'infinito, il campo misura la forza per unità di carica in quel punto.
+La somma è tra scalari, quindi non richiede di scomporre vettori in componenti, e per questo il potenziale si calcola più facilmente del campo. Nel punto medio tra due cariche $+q$ e $-q$ il potenziale è nullo, perché i due termini sono opposti, mentre il campo è diverso da zero, perché i due campi hanno lo stesso verso. Il potenziale in un punto misura il lavoro esterno per unità di carica necessario a portarvi lentamente una carica dall'infinito, il campo misura la forza per unità di carica in quel punto.
 
 :::dimostrazione
 Per il principio di sovrapposizione il campo è $\vec{E} = \sum_i \vec{E}_i$. Per la differenza di potenziale e campo, con il riferimento all'infinito,
