@@ -118,7 +118,7 @@ x \sim \sum_{n=1}^{\infty} \frac{2\,(-1)^{n+1}}{n} \sin(nx)
 = 2 \sin x - \sin(2x) + \frac{2}{3} \sin(3x) - \cdots
 $$
 
-::grafico{f="(x-2*pi*floor((x+pi)/(2*pi)));2*sin(x)-sin(2*x)+2*sin(3*x)/3;2*(sin(x)-sin(2*x)/2+sin(3*x)/3-sin(4*x)/4+sin(5*x)/5-sin(6*x)/6+sin(7*x)/7-sin(8*x)/8+sin(9*x)/9-sin(10*x)/10)" xmin=-7 xmax=7.3 ymin=-4.5 ymax=4.5 punti="-3.1416,0,pieno;3.1416,0,pieno" titolo="Sawtooth wave with the partial sums $s_3$ (dashed) and $s_{10}$ (red): at the jump points $\pm\pi$ every partial sum equals $0$"}
+::grafico{f="(x-2*pi*floor((x+pi)/(2*pi)));2*sin(x)-sin(2*x)+2*sin(3*x)/3;2*(sin(x)-sin(2*x)/2+sin(3*x)/3-sin(4*x)/4+sin(5*x)/5-sin(6*x)/6+sin(7*x)/7-sin(8*x)/8+sin(9*x)/9-sin(10*x)/10)" legenda="y = f(x);y = s_3(x);y = s_{10}(x)" xmin=-7 xmax=7.3 ymin=-4.5 ymax=4.5 punti="-3.1416,0,pieno;3.1416,0,pieno" titolo="Sawtooth wave with the partial sums $s_3$ (dashed) and $s_{10}$ (red): at the jump points $\pm\pi$ every partial sum equals $0$"}
 :::
 
 ## Even functions and odd functions
@@ -175,7 +175,7 @@ $$
 $$
 At the points where $f$ is continuous the two one-sided limits coincide with $f(x)$, therefore the sum of the series is $f(x)$; at the jump points the sum is the **mean of the two one-sided values**, whatever value is assigned to $f$ at that point. The proof requires the study of the Dirichlet kernel and is left to the reference texts. The theorem turns the symbol $\sim$ into an equality that holds point by point, and evaluating the equality at chosen points is the method by which sums of numerical series are obtained from Fourier series.
 
-::grafico{f="sign(sin(x));4/pi*(sin(x)+sin(3*x)/3);4/pi*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13+sin(15*x)/15)" xmin=-7 xmax=7.3 ymin=-1.6 ymax=1.6 punti="-3.1416,0,pieno;0,0,pieno;3.1416,0,pieno" titolo="Square wave ($-1$ on $(-\pi, 0)$, $1$ on $(0, \pi)$) with the partial sums up to $\sin(3x)$ (dashed) and up to $\sin(15x)$ (red): at the jumps every partial sum equals $0$, the mean of the one-sided limits"}
+::grafico{f="sign(sin(x));4/pi*(sin(x)+sin(3*x)/3);4/pi*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13+sin(15*x)/15)" legenda="y = f(x);y = s_3(x);y = s_{15}(x)" xmin=-7 xmax=7.3 ymin=-1.6 ymax=1.6 punti="-3.1416,0,pieno;0,0,pieno;3.1416,0,pieno" titolo="Square wave ($-1$ on $(-\pi, 0)$, $1$ on $(0, \pi)$) with the partial sums up to $\sin(3x)$ (dashed) and up to $\sin(15x)$ (red): at the jumps every partial sum equals $0$, the mean of the one-sided limits"}
 :::
 
 :::esempio{titolo="Sum of the series Σ 1/n²"}

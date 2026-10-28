@@ -118,7 +118,7 @@ x \sim \sum_{n=1}^{\infty} \frac{2\,(-1)^{n+1}}{n} \sin(nx)
 = 2 \sin x - \sin(2x) + \frac{2}{3} \sin(3x) - \cdots
 $$
 
-::grafico{f="(x-2*pi*floor((x+pi)/(2*pi)));2*sin(x)-sin(2*x)+2*sin(3*x)/3;2*(sin(x)-sin(2*x)/2+sin(3*x)/3-sin(4*x)/4+sin(5*x)/5-sin(6*x)/6+sin(7*x)/7-sin(8*x)/8+sin(9*x)/9-sin(10*x)/10)" xmin=-7 xmax=7.3 ymin=-4.5 ymax=4.5 punti="-3.1416,0,pieno;3.1416,0,pieno" titolo="Dente di sega con le somme parziali $s_3$ (tratteggiata) e $s_{10}$ (rossa): nei punti di salto $\pm\pi$ ogni somma parziale vale $0$"}
+::grafico{f="(x-2*pi*floor((x+pi)/(2*pi)));2*sin(x)-sin(2*x)+2*sin(3*x)/3;2*(sin(x)-sin(2*x)/2+sin(3*x)/3-sin(4*x)/4+sin(5*x)/5-sin(6*x)/6+sin(7*x)/7-sin(8*x)/8+sin(9*x)/9-sin(10*x)/10)" legenda="y = f(x);y = s_3(x);y = s_{10}(x)" xmin=-7 xmax=7.3 ymin=-4.5 ymax=4.5 punti="-3.1416,0,pieno;3.1416,0,pieno" titolo="Dente di sega con le somme parziali $s_3$ (tratteggiata) e $s_{10}$ (rossa): nei punti di salto $\pm\pi$ ogni somma parziale vale $0$"}
 :::
 
 ## Funzioni pari e funzioni dispari
@@ -175,7 +175,7 @@ $$
 $$
 Nei punti in cui $f$ è continua i due limiti laterali coincidono con $f(x)$, quindi la somma della serie è $f(x)$; nei punti di salto la somma è la **media dei due valori laterali**, qualunque sia il valore assegnato a $f$ nel punto. La dimostrazione richiede lo studio del nucleo di Dirichlet e si rimanda ai testi di riferimento. Il teorema trasforma il simbolo $\sim$ in un'uguaglianza vera punto per punto, e valutare l'uguaglianza in punti scelti è il metodo con cui dalle serie di Fourier si ricavano le somme di serie numeriche.
 
-::grafico{f="sign(sin(x));4/pi*(sin(x)+sin(3*x)/3);4/pi*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13+sin(15*x)/15)" xmin=-7 xmax=7.3 ymin=-1.6 ymax=1.6 punti="-3.1416,0,pieno;0,0,pieno;3.1416,0,pieno" titolo="Onda quadra ($-1$ su $(-\pi, 0)$, $1$ su $(0, \pi)$) con le somme parziali fino a $\sin(3x)$ (tratteggiata) e fino a $\sin(15x)$ (rossa): nei salti ogni somma parziale vale $0$, la media dei limiti laterali"}
+::grafico{f="sign(sin(x));4/pi*(sin(x)+sin(3*x)/3);4/pi*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13+sin(15*x)/15)" legenda="y = f(x);y = s_3(x);y = s_{15}(x)" xmin=-7 xmax=7.3 ymin=-1.6 ymax=1.6 punti="-3.1416,0,pieno;0,0,pieno;3.1416,0,pieno" titolo="Onda quadra ($-1$ su $(-\pi, 0)$, $1$ su $(0, \pi)$) con le somme parziali fino a $\sin(3x)$ (tratteggiata) e fino a $\sin(15x)$ (rossa): nei salti ogni somma parziale vale $0$, la media dei limiti laterali"}
 :::
 
 :::esempio{titolo="Somma della serie Σ 1/n²"}

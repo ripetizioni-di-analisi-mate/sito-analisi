@@ -12,7 +12,7 @@ $$
 $$
 Il vettore $\vec{n}$ si chiama **vettore normale** al piano. Un piano è quindi individuato da un punto e da una direzione ortogonale; poiché la condizione $\vec{n} \cdot \overrightarrow{P_0 P} = 0$ non cambia se si moltiplica $\vec{n}$ per un numero non nullo, il vettore normale è definito a meno di un fattore. Per il prodotto scalare e l'ortogonalità si rimanda all'argomento sui vettori.
 
-::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1;1,1,0.5,2.5,P₀Q" punti="1,1,pieno,P₀;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π;2.2,0.2,P₀P" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$, di vettore normale $\vec{n} = (1, 0, 1)$: il vettore $\overrightarrow{P_0 P}$ con $P \in \pi$ è ortogonale a $\vec{n}$, mentre per il punto $Q$ fuori dal piano $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
+::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1;1,1,0.5,2.5,P₀Q" punti="1,1,pieno;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π;2.2,0.2,P₀P;0.5,0.72,P₀" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$, di vettore normale $\vec{n} = (1, 0, 1)$: il vettore $\overrightarrow{P_0 P}$ con $P \in \pi$ è ortogonale a $\vec{n}$, mentre per il punto $Q$ fuori dal piano $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
 
 :::
 
@@ -227,7 +227,7 @@ d(P_1, \pi) = \frac{|a x_1 + b y_1 + c z_1 + d|}{\sqrt{a^2 + b^2 + c^2}} ,
 $$
 e il minimo è raggiunto nel piede $H$ della perpendicolare a $\pi$ condotta da $P_1$. La formula è l'analoga di quella della distanza di un punto da una retta nel piano: al numeratore si sostituiscono le coordinate del punto nel primo membro dell'equazione, al denominatore c'è la norma del vettore normale. Per $P_1 = (2, 1, -1)$ e $\pi : x + 2y + 2z - 6 = 0$ si ottiene $d = \dfrac{|2 + 2 - 2 - 6|}{3} = \dfrac{4}{3}$.
 
-::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π;2.45,-1.45,P₀" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$ e del punto $P_1 = (3, 0, 3)$: la distanza $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ è il valore assoluto della componente di $\overrightarrow{P_0 P_1}$ lungo $\vec{n} = (1, 0, 1)$"}
+::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π;2.5,-1.35,P₀" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$ e del punto $P_1 = (3, 0, 3)$: la distanza $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ è il valore assoluto della componente di $\overrightarrow{P_0 P_1}$ lungo $\vec{n} = (1, 0, 1)$"}
 
 :::dimostrazione
 Sia $\vec{n} = (a, b, c)$ e sia $H$ il punto in cui la retta per $P_1$ con vettore direttore $\vec{n}$ incontra $\pi$; tale punto esiste ed è unico per il teorema sulla posizione reciproca di una retta e un piano, poiché $\vec{n} \cdot \vec{n} \neq 0$. Per ogni $Q \in \pi$ il vettore $\overrightarrow{HQ}$ è ortogonale a $\vec{n}$, mentre $\overrightarrow{H P_1}$ è parallelo a $\vec{n}$, quindi per il **teorema di Pitagora**
