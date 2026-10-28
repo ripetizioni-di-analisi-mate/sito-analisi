@@ -79,6 +79,27 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'serie-di-fourier', titolo: 'Serie di Fourier', breve: 'Serie di Fourier' },
     ],
   },
+  {
+    slug: 'algebra-lineare',
+    titolo: 'Algebra lineare e geometria analitica',
+    breve: 'Algebra lineare',
+    descrizione: 'Vettori, matrici e sistemi lineari, spazi vettoriali e applicazioni lineari, autovalori e diagonalizzazione, rette, piani, coniche e quadriche.',
+    colore: '#6b5ca5',
+    gruppo: 'Università',
+    attiva: false, // diventa true quando i 10 argomenti sono scritti e verificati
+    argomenti: [
+      { slug: 'vettori', titolo: 'Vettori nel piano e nello spazio', breve: 'Vettori' },
+      { slug: 'matrici', titolo: 'Matrici e operazioni tra matrici', breve: 'Matrici' },
+      { slug: 'determinanti', titolo: 'Determinante e matrice inversa', breve: 'Determinanti' },
+      { slug: 'sistemi-lineari', titolo: 'Sistemi lineari e rango', breve: 'Sistemi lineari' },
+      { slug: 'spazi-vettoriali', titolo: 'Spazi vettoriali, basi e dimensione', breve: 'Spazi vettoriali' },
+      { slug: 'applicazioni-lineari', titolo: 'Applicazioni lineari', breve: 'Applicazioni lineari' },
+      { slug: 'autovalori', titolo: 'Autovalori, autovettori e diagonalizzazione', breve: 'Autovalori' },
+      { slug: 'prodotto-scalare', titolo: 'Prodotto scalare, ortogonalità e teorema spettrale', breve: 'Ortogonalità' },
+      { slug: 'rette-e-piani', titolo: 'Rette e piani nello spazio', breve: 'Rette e piani' },
+      { slug: 'coniche-e-quadriche', titolo: 'Coniche e quadriche', breve: 'Coniche e quadriche' },
+    ],
+  },
 ];
 
 export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));

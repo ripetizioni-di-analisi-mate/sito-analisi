@@ -1,5 +1,5 @@
 // Pagina della dashboard riservata (/admin). I dati arrivano da /admin/api/*.
-const NOMI = { precorso: 'Precorso', 'analisi-1': 'Analisi matematica 1 (Modulo A)', 'analisi-2': 'Analisi matematica 2 (Modulo B)' };
+const NOMI = { precorso: 'Precorso', 'analisi-1': 'Analisi matematica 1 (Modulo A)', 'analisi-2': 'Analisi matematica 2 (Modulo B)', 'algebra-lineare': 'Algebra lineare e geometria analitica' };
 
 export function paginaAdmin(materie) {
   const caselle = materie.map((m) => `<label class="casella"><input type="checkbox" value="${m}"> ${NOMI[m] || m}</label>`).join('');

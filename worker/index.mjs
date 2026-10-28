@@ -299,6 +299,7 @@ export default {
             precorso: env.PADDLE_PREZZO_PRECORSO || null,
             'analisi-1': env.PADDLE_PREZZO_ANALISI_1 || null,
             'analisi-2': env.PADDLE_PREZZO_ANALISI_2 || null,
+            'algebra-lineare': env.PADDLE_PREZZO_ALGEBRA_LINEARE || null,
           },
         } : null,
       });

@@ -51,5 +51,22 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'serie-di-fourier': { titolo: 'Fourier series', breve: 'Fourier series' },
     },
   },
+  'algebra-lineare': {
+    titolo: 'Linear algebra and analytic geometry',
+    breve: 'Linear algebra',
+    descrizione: 'Vectors, matrices and linear systems, vector spaces and linear maps, eigenvalues and diagonalization, lines, planes, conics and quadrics.',
+    argomenti: {
+      vettori: { titolo: 'Vectors in the plane and in space', breve: 'Vectors' },
+      matrici: { titolo: 'Matrices and matrix operations', breve: 'Matrices' },
+      determinanti: { titolo: 'Determinant and inverse matrix', breve: 'Determinants' },
+      'sistemi-lineari': { titolo: 'Linear systems and rank', breve: 'Linear systems' },
+      'spazi-vettoriali': { titolo: 'Vector spaces, bases and dimension', breve: 'Vector spaces' },
+      'applicazioni-lineari': { titolo: 'Linear maps', breve: 'Linear maps' },
+      autovalori: { titolo: 'Eigenvalues, eigenvectors and diagonalization', breve: 'Eigenvalues' },
+      'prodotto-scalare': { titolo: 'Inner product, orthogonality and the spectral theorem', breve: 'Orthogonality' },
+      'rette-e-piani': { titolo: 'Lines and planes in space', breve: 'Lines and planes' },
+      'coniche-e-quadriche': { titolo: 'Conics and quadrics', breve: 'Conics and quadrics' },
+    },
+  },
 };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };
