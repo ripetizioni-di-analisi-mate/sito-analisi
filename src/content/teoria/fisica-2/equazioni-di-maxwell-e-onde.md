@@ -14,7 +14,7 @@ In regime stazionario, per ogni linea chiusa orientata $\gamma$ vale $\displayst
 :::osservazione{#incoerenza-legge-ampere titolo="Legge di Ampère e condensatore in carica"}
 Si consideri un condensatore piano che si carica attraverso un filo percorso dalla corrente $i$, e una linea chiusa $\gamma$ che circonda il filo. La corrente concatenata con $\gamma$ si può calcolare su una superficie qualsiasi che abbia $\gamma$ come bordo. La superficie piana $S_1$ è attraversata dal filo, quindi la corrente che la attraversa vale $i$. La superficie $S_2$, che ha lo stesso bordo, passa tra le armature, dove non ci sono cariche in moto, quindi la corrente che la attraversa è nulla. La legge di Ampère darebbe perciò due valori diversi per la stessa circuitazione $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l}$, e nella forma del richiamo vale solo per correnti stazionarie.
 
-Tra le armature c'è però un campo elettrico che cresce mentre il condensatore si carica, e il suo flusso attraverso $S_2$ varia nel tempo. Maxwell aggiunse alla legge di Ampère un termine proporzionale alla rapidità di variazione di quel flusso, scelto in modo che le due superfici diano lo stesso risultato.
+Tra le armature c'è però un campo elettrico che cresce mentre il condensatore si carica, e il suo flusso attraverso $S_2$ varia nel tempo. Maxwell aggiunse alla legge di Ampère un termine proporzionale alla rapidità di variazione di quel flusso.
 
 ::grafico{assi=0 uguale=1 linee="0,0 4,0;5,0 9,0;4,-1.6 4,1.6;5,-1.6 5,1.6" curve="2.5+0.25*cos(t),1.0*sin(t),0,6.29" segmenti="2.5,1,2.9,1.6;2.9,1.6,3.5,2.05;3.5,2.05,4.1,2.1;4.1,2.1,4.5,1.85;4.5,1.85,4.5,-1.85;4.5,-1.85,4.1,-2.1;4.1,-2.1,3.5,-2.05;3.5,-2.05,2.9,-1.6;2.9,-1.6,2.5,-1" vettori="0.6,0,1.6,0,i;6.8,0,7.8,0,i" etichette="2.0,1.2,γ;1.85,-0.65,S₁;3.3,2.35,S₂;3.35,-1.25,+q;5.15,-1.25,−q" xmin=-0.2 xmax=9.2 ymin=-2.6 ymax=2.7 titolo="Condensatore in carica: la superficie piana $S_1$ è attraversata dalla corrente $i$, la superficie $S_2$ con lo stesso bordo $\gamma$ passa tra le armature, dove scorre solo la corrente di spostamento"}
 
@@ -53,7 +53,7 @@ $$
 $$
 dove $i_{\text{conc}}$ è la corrente di conduzione che attraversa $S$ e $\Phi_E$ è il flusso del campo elettrico attraverso $S$. È un postulato, introdotto da Maxwell per rendere la legge di Ampère coerente con la conservazione della carica e confermato dalla scoperta sperimentale delle onde elettromagnetiche.
 
-La legge afferma che il campo magnetico è generato sia dalle correnti sia dai campi elettrici che variano nel tempo. In regime stazionario il flusso $\Phi_E$ è costante e si ritrova la legge di Ampère. Per esempio, attorno a un condensatore che si carica con $i = 2{,}0\,\mathrm{A}$, la circuitazione di $\vec{B}$ lungo una linea che circonda il filo vale $\mu_0 i \approx 2{,}5 \cdot 10^{-6}\,\mathrm{T\cdot m}$ anche se la superficie scelta passa tra le armature.
+La legge afferma che il campo magnetico è generato sia dalle correnti sia dai campi elettrici che variano nel tempo. In regime stazionario il flusso $\Phi_E$ è costante e si ritrova la legge di Ampère. Per esempio, se un condensatore si carica con $i = 2{,}0\,\mathrm{A}$, la circuitazione di $\vec{B}$ lungo una linea che circonda il filo vale $\mu_0 i \approx 2{,}5 \cdot 10^{-6}\,\mathrm{T\cdot m}$ anche con una superficie che passa tra le armature.
 :::
 
 ::::teorema{#campo-magnetico-nel-condensatore titolo="Campo magnetico tra le armature di un condensatore"}
@@ -95,7 +95,7 @@ $$
 $$
 dove $Q_{\text{int}}$ è la carica contenuta in $S$, $\Phi_B$ e $\Phi_E$ sono i flussi dei due campi attraverso $\Sigma$ e $i_{\text{conc}}$ è la corrente di conduzione che attraversa $\Sigma$. Sono postulati, che riuniscono la legge di Gauss, la legge di Gauss per il magnetismo, la legge di Faraday-Neumann-Lenz e la legge di Ampère-Maxwell; le loro conseguenze sono confermate dagli esperimenti finché gli effetti quantistici sono trascurabili.
 
-Insieme alla **forza di Lorentz** $\vec{F} = q \left( \vec{E} + \vec{v} \times \vec{B} \right)$, che descrive l'azione dei campi sulle cariche, le equazioni di Maxwell contengono tutto l'elettromagnetismo classico: assegnate le cariche e le correnti, determinano i campi, e i campi determinano le forze sulle cariche.
+Insieme alla **forza di Lorentz** $\vec{F} = q \left( \vec{E} + \vec{v} \times \vec{B} \right)$, che descrive l'azione dei campi sulle cariche, le equazioni di Maxwell contengono tutto l'elettromagnetismo classico.
 :::
 
 :::osservazione{#significato-equazioni-maxwell titolo="Significato delle quattro equazioni"}
@@ -117,7 +117,7 @@ $$
 \displaystyle\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt}
 \end{cases}
 $$
-Un campo magnetico variabile genera un campo elettrico, e un campo elettrico variabile genera un campo magnetico. I due campi possono quindi sostenersi a vicenda anche lontano dalle cariche che li hanno prodotti, e propagarsi nello spazio come **onde elettromagnetiche**. Le equazioni sono quasi simmetriche rispetto allo scambio di $\vec{E}$ e $\vec{B}$; la differenza di segno tra la terza e la quarta è quella che produce la propagazione, come mostra l'equazione delle onde.
+Un campo magnetico variabile genera un campo elettrico, e un campo elettrico variabile genera un campo magnetico. I due campi possono quindi sostenersi a vicenda anche lontano dalle cariche che li hanno prodotti, e propagarsi nello spazio come **onde elettromagnetiche**.
 :::
 
 ## Forma locale delle equazioni di Maxwell
@@ -136,20 +136,20 @@ $$
 \nabla \times \vec{B} = \mu_0 \vec{J} + \mu_0 \varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}
 \end{cases}
 $$
-in ogni punto e in ogni istante. La forma locale lega i campi in un punto alle cariche e alle correnti nello stesso punto, ed è il punto di partenza dei corsi successivi di elettromagnetismo. Il termine $\varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}$ è la **densità di corrente di spostamento**, che integrata su una superficie fissa dà la corrente di spostamento.
+in ogni punto e in ogni istante. La forma locale lega i campi in un punto alle cariche e alle correnti nello stesso punto. Il termine $\varepsilon_0 \dfrac{\partial \vec{E}}{\partial t}$ è la **densità di corrente di spostamento**, che integrata su una superficie fissa dà la corrente di spostamento.
 
 :::dimostrazione
 Si dimostra che la legge di Gauss implica la prima equazione. Sia $V$ una regione qualsiasi con bordo $S$. La carica contenuta è $Q_{\text{int}} = \displaystyle\iiint_V \rho\, dV$, e per il teorema della divergenza la legge di Gauss diventa
 $$
 \iiint_V \left( \nabla \cdot \vec{E} - \frac{\rho}{\varepsilon_0} \right) dV = 0 .
 $$
-La funzione integranda è continua. Se fosse positiva in un punto, per la permanenza del segno lo sarebbe in una piccola sfera attorno a quel punto, e l'integrale su quella sfera sarebbe positivo; lo stesso vale se fosse negativa. Poiché l'integrale è nullo su *ogni* regione, l'integranda è nulla ovunque, cioè $\nabla \cdot \vec{E} = \dfrac{\rho}{\varepsilon_0}$. La seconda equazione segue nello stesso modo.
+L'integranda è continua; se fosse diversa da zero in un punto, per la permanenza del segno l'integrale su una piccola sfera attorno a quel punto sarebbe diverso da zero. Poiché l'integrale è nullo su *ogni* regione, si ha $\nabla \cdot \vec{E} = \dfrac{\rho}{\varepsilon_0}$ ovunque. La seconda equazione segue nello stesso modo.
 
 Per la terza si applica il teorema di Stokes alla legge di Faraday-Neumann-Lenz su una superficie fissa $\Sigma$; poiché $\Sigma$ non dipende dal tempo, la derivata del flusso è il flusso della derivata, e
 $$
 \iint_\Sigma \left( \nabla \times \vec{E} + \frac{\partial \vec{B}}{\partial t} \right) \cdot \hat{n}\, dA = 0
 $$
-per ogni $\Sigma$. Scegliendo come $\Sigma$ un piccolo disco centrato in un punto e perpendicolare al vettore integrando in quel punto, lo stesso ragionamento mostra che il vettore integrando è nullo. La quarta si ricava allo stesso modo, scrivendo $i_{\text{conc}} = \displaystyle\iint_\Sigma \vec{J} \cdot \hat{n}\, dA$. Le implicazioni inverse si ottengono integrando le equazioni locali e applicando gli stessi teoremi.
+per ogni $\Sigma$, e scegliendo piccoli dischi perpendicolari al vettore integrando si conclude che questo è nullo. La quarta si ricava allo stesso modo, con $i_{\text{conc}} = \displaystyle\iint_\Sigma \vec{J} \cdot \hat{n}\, dA$. Le implicazioni inverse si ottengono integrando.
 :::
 ::::
 
@@ -168,7 +168,7 @@ Un'onda elettromagnetica si dice **piana** se, in ogni istante, i campi sono ugu
 $$
 \vec{E} = E(x,t)\,\hat{\jmath} , \qquad \vec{B} = B(x,t)\,\hat{k} ,
 $$
-in cui il campo elettrico è diretto lungo $y$ e il campo magnetico lungo $z$. Dalle equazioni di Maxwell nel vuoto segue che le componenti dei campi lungo la direzione di propagazione sono costanti, e in un'onda si possono porre uguali a zero; per questo le onde elettromagnetiche si dicono **trasversali**. L'onda piana è un modello. L'onda emessa da una sorgente piccola ha fronti sferici, e lontano dalla sorgente, in una regione piccola rispetto alla distanza, quei fronti sono con buona approssimazione piani.
+in cui il campo elettrico è diretto lungo $y$ e il campo magnetico lungo $z$. Dalle equazioni di Maxwell nel vuoto segue che le componenti dei campi lungo la direzione di propagazione sono costanti, e in un'onda si possono porre uguali a zero; per questo le onde elettromagnetiche si dicono **trasversali**. L'onda emessa da una sorgente piccola ha fronti sferici, che lontano dalla sorgente sono con buona approssimazione piani.
 :::
 
 :::richiamo{titolo="Teorema di Schwarz"}
@@ -240,7 +240,7 @@ Il risultato segue dal teorema sulle onde progressive, e il valore calcolato dal
 :::
 
 :::osservazione{#sorgenti-onde titolo="Come si producono le onde elettromagnetiche"}
-Le onde elettromagnetiche sono prodotte da cariche **accelerate**. In un'antenna le cariche oscillano lungo un conduttore con la frequenza $f$ della corrente alternata che lo percorre, e l'antenna emette un'onda della stessa frequenza, che a grande distanza è con buona approssimazione piana. La corrente nell'antenna è prodotta da un circuito oscillante, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata. La luce visibile è emessa invece dagli atomi e dalle molecole, e la descrizione di questa emissione richiede la fisica quantistica.
+Le onde elettromagnetiche sono prodotte da cariche **accelerate**. In un'antenna le cariche oscillano lungo un conduttore con la frequenza $f$ della corrente alternata che lo percorre, e l'antenna emette un'onda della stessa frequenza, che a grande distanza è con buona approssimazione piana. La corrente nell'antenna è prodotta da un circuito oscillante, per il quale si rimanda all'argomento sulle oscillazioni elettriche e i circuiti in corrente alternata.
 :::
 
 ## Onde piane armoniche
@@ -265,7 +265,7 @@ In un'onda piana progressiva nel vuoto che si propaga nel verso positivo dell'as
 $$
 B(x,t) = \frac{E(x,t)}{c} .
 $$
-In ogni punto e in ogni istante i moduli soddisfano quindi $E = cB$. I due campi oscillano in fase, sono perpendicolari tra loro e alla direzione di propagazione, e il prodotto vettoriale $\vec{E} \times \vec{B}$ ha il verso di propagazione dell'onda. Per un'onda che si propaga nel verso negativo dell'asse $x$ vale invece $B = -\dfrac{E}{c}$, e $\vec{E} \times \vec{B}$ è diretto come $-\hat{\imath}$. La relazione dà il campo magnetico di un'onda noto il campo elettrico; per esempio, a $E_0 = 300\,\mathrm{V/m}$ corrisponde $B_0 = \dfrac{300}{3{,}00 \cdot 10^{8}}\,\mathrm{T} = 1{,}00\,\mu\mathrm{T}$. Su una carica con velocità $v$ le forze magnetica ed elettrica dell'onda stanno al più nel rapporto $\dfrac{vB}{E} = \dfrac{v}{c}$, perciò per cariche lente l'effetto del campo magnetico è trascurabile.
+In ogni punto e in ogni istante i moduli soddisfano quindi $E = cB$. I due campi oscillano in fase, sono perpendicolari tra loro e alla direzione di propagazione, e il prodotto vettoriale $\vec{E} \times \vec{B}$ ha il verso di propagazione dell'onda. Per un'onda che si propaga nel verso negativo dell'asse $x$ vale invece $B = -\dfrac{E}{c}$, e $\vec{E} \times \vec{B}$ è diretto come $-\hat{\imath}$. La relazione dà il campo magnetico di un'onda noto il campo elettrico; per esempio, a $E_0 = 300\,\mathrm{V/m}$ corrisponde $B_0 = \dfrac{300}{3{,}00 \cdot 10^{8}}\,\mathrm{T} = 1{,}00\,\mu\mathrm{T}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 10.2,0;0,0 0,2.3;0,0 -1.2,-1.2" curve="t,1.6*sin(t),0,9.42;t-0.75*sin(t),-0.75*sin(t),0,9.42" vettori="7.854,0,7.854,1.6,E;8.9,-1.4,10.3,-1.4,c;7.854,0,7.104,-0.75,B" etichette="10.35,-0.1,x;0.12,2.4,y;-1.55,-1.45,z" xmin=-1.8 xmax=10.8 ymin=-2 ymax=2.6 legenda=0 titolo="Onda piana armonica che si propaga lungo l'asse $x$: il campo elettrico oscilla lungo $y$, il campo magnetico lungo $z$, in fase, e $\vec{E} \times \vec{B}$ ha il verso di propagazione"}
 
@@ -342,7 +342,7 @@ L'**intensità** $I$ di un'onda è il valore medio nel tempo del modulo del vett
 $$
 I = \langle S \rangle = \frac{E_0^2}{2\mu_0 c} = \frac{1}{2}\, c\, \varepsilon_0 E_0^2 = \frac{E_0 B_0}{2\mu_0} = c \langle u \rangle .
 $$
-L'intensità è proporzionale al quadrato dell'ampiezza, quindi raddoppiando l'ampiezza del campo elettrico l'intensità quadruplica. Dalla formula si ricava l'ampiezza nota l'intensità, $E_0 = \sqrt{\dfrac{2I}{c\, \varepsilon_0}}$. La radiazione solare, fuori dall'atmosfera terrestre, ha intensità $I \approx 1{,}36\,\mathrm{kW/m^2}$; un'onda armonica con la stessa intensità ha $E_0 = \sqrt{\dfrac{2 \cdot 1360}{3{,}00 \cdot 10^{8} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{V/m} \approx 1{,}0 \cdot 10^{3}\,\mathrm{V/m}$ e $B_0 = \dfrac{E_0}{c} \approx 3{,}4\,\mu\mathrm{T}$.
+L'intensità è proporzionale al quadrato dell'ampiezza, quindi raddoppiando l'ampiezza del campo elettrico l'intensità quadruplica. Nota l'intensità, $E_0 = \sqrt{\dfrac{2I}{c\, \varepsilon_0}}$. La radiazione solare, fuori dall'atmosfera terrestre, ha intensità $I \approx 1{,}36\,\mathrm{kW/m^2}$; un'onda armonica con la stessa intensità ha $E_0 = \sqrt{\dfrac{2 \cdot 1360}{3{,}00 \cdot 10^{8} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{V/m} \approx 1{,}0 \cdot 10^{3}\,\mathrm{V/m}$ e $B_0 = \dfrac{E_0}{c} \approx 3{,}4\,\mu\mathrm{T}$.
 :::
 
 :::teorema{#sorgente-isotropa titolo="Intensità di una sorgente isotropa"}
@@ -373,7 +373,7 @@ Si consideri un'onda piana di intensità $I$ che incide perpendicolarmente su un
 - $p_{\text{rad}} = \dfrac{I}{c}$ se la superficie assorbe tutta la radiazione;
 - $p_{\text{rad}} = \dfrac{2I}{c}$ se la superficie riflette tutta la radiazione.
 
-Con $I = 1{,}36\,\mathrm{kW/m^2}$ e una superficie assorbente si ha $p_{\text{rad}} = \dfrac{1360}{3{,}00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4{,}5 \cdot 10^{-6}\,\mathrm{Pa}$, dell'ordine di $10^{-11}$ volte la pressione atmosferica. La pressione di radiazione è perciò trascurabile sugli oggetti di uso comune, e diventa importante per corpi molto leggeri con una grande superficie, come le vele solari, e per particelle di polvere molto piccole. Una vela perfettamente riflettente di $100\,\mathrm{m^2}$, perpendicolare alla luce solare alla distanza della Terra, riceve la forza $F = \dfrac{2 \cdot 1360 \cdot 100}{3{,}00 \cdot 10^{8}}\,\mathrm{N} \approx 9{,}1 \cdot 10^{-4}\,\mathrm{N}$.
+Con $I = 1{,}36\,\mathrm{kW/m^2}$ e una superficie assorbente si ha $p_{\text{rad}} = \dfrac{1360}{3{,}00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4{,}5 \cdot 10^{-6}\,\mathrm{Pa}$, dell'ordine di $10^{-11}$ volte la pressione atmosferica. Perciò la pressione di radiazione conta solo per corpi molto leggeri con una grande superficie, come le vele solari, e per granelli di polvere molto piccoli. Una vela perfettamente riflettente di $100\,\mathrm{m^2}$, perpendicolare alla luce solare alla distanza della Terra, riceve la forza $F = \dfrac{2 \cdot 1360 \cdot 100}{3{,}00 \cdot 10^{8}}\,\mathrm{N} \approx 9{,}1 \cdot 10^{-4}\,\mathrm{N}$.
 
 :::dimostrazione
 Nel tempo $\Delta t$ arriva sulla superficie l'energia $U = I A\, \Delta t$, che per il teorema sulla quantità di moto di un'onda elettromagnetica trasporta la quantità di moto $\dfrac{U}{c} = \dfrac{I A\, \Delta t}{c}$, perpendicolare alla superficie. Se la superficie assorbe la radiazione, questa quantità di moto passa alla superficie. Se la riflette, l'onda riflessa ha quantità di moto opposta a quella incidente; quindi la quantità di moto della radiazione varia di $\dfrac{2U}{c}$ in modulo, e la superficie riceve una quantità di moto uguale e opposta. Per il **teorema dell'impulso** la forza media è la quantità di moto ricevuta divisa per $\Delta t$, perciò
@@ -397,7 +397,7 @@ Le onde elettromagnetiche hanno tutte la stessa natura e nel vuoto la stessa vel
 - raggi X, con $\lambda$ da circa $0{,}01\,\mathrm{nm}$ a $10\,\mathrm{nm}$;
 - raggi gamma, con $\lambda$ minore di circa $0{,}01\,\mathrm{nm}$, emessi nei processi nucleari.
 
-Le bande dei raggi X e dei raggi gamma si sovrappongono, e i due nomi indicano soprattutto l'origine della radiazione. L'occhio umano è sensibile a un intervallo molto stretto dello spettro. La luce gialla con $\lambda = 580\,\mathrm{nm}$ ha frequenza $f = \dfrac{3{,}00 \cdot 10^{8}}{5{,}80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5{,}17 \cdot 10^{14}\,\mathrm{Hz}$.
+Le bande dei raggi X e dei raggi gamma si sovrappongono, e i due nomi indicano soprattutto l'origine della radiazione. La luce gialla con $\lambda = 580\,\mathrm{nm}$ ha frequenza $f = \dfrac{3{,}00 \cdot 10^{8}}{5{,}80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5{,}17 \cdot 10^{14}\,\mathrm{Hz}$.
 
 ::grafico{assi=0 poligoni="-13,0 3,0 3,0.8 -13,0.8;-6.4,0 -6.15,0 -6.15,0.8 -6.4,0.8" segmenti="-11,0,-11,0.8;-8,0,-8,0.8;-6.4,0,-6.4,0.8;-6.15,0,-6.15,0.8;-3,0,-3,0.8;0,0,0,0.8" vettori="-6.27,2.0,-6.27,0.95" etichette="-12.3,0.3,γ;-9.75,0.3,X;-7.55,0.3,UV;-4.9,0.3,IR;-2.85,0.3,microonde;0.9,0.3,radio;-7.0,2.25,visibile;-12.35,-0.6,1 pm;-9.35,-0.6,1 nm;-6.35,-0.6,1 μm;-3.4,-0.6,1 mm;-0.2,-0.6,1 m;2.55,-0.6,1 km" xmin=-13.5 xmax=3.5 ymin=-1.1 ymax=2.7 uguale=1 titolo="Spettro elettromagnetico in scala logaritmica della lunghezza d'onda $\lambda$, che diminuisce verso sinistra mentre la frequenza $f = \dfrac{c}{\lambda}$ aumenta; la luce visibile occupa la stretta banda tra $400\,\mathrm{nm}$ e $700\,\mathrm{nm}$"}
 
@@ -408,5 +408,5 @@ In un mezzo isolante e omogeneo con costante dielettrica relativa $\varepsilon_r
 $$
 v = \frac{1}{\sqrt{\mu_0 \mu_r\, \varepsilon_0 \varepsilon_r}} = \frac{c}{\sqrt{\mu_r\, \varepsilon_r}} .
 $$
-Il rapporto $n = \dfrac{c}{v}$ è l'**indice di rifrazione** del mezzo, per il quale si rimanda all'argomento sull'ottica geometrica e ondulatoria. Nei mezzi trasparenti $\mu_r \approx 1$, e $\varepsilon_r$ va presa alla frequenza dell'onda, perché dipende dalla frequenza. Per esempio l'acqua ha $\varepsilon_r \approx 80$ in un campo statico, mentre per la luce visibile il suo indice di rifrazione è circa $1{,}33$, molto minore di $\sqrt{80} \approx 8{,}9$.
+Il rapporto $n = \dfrac{c}{v}$ è l'**indice di rifrazione** del mezzo, per il quale si rimanda all'argomento sull'ottica geometrica e ondulatoria. Nei mezzi trasparenti $\mu_r \approx 1$, e $\varepsilon_r$ dipende dalla frequenza dell'onda.
 :::
