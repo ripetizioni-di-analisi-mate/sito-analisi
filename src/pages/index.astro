@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Stato from '../components/Stato.astro';
 import { MATERIE, gruppi } from '../data/materie';
 import { url } from '../lib/url';
 ---
@@ -16,12 +17,12 @@ import { url } from '../lib/url';
       <h2 class="nome-gruppo">{g}</h2>
       <ul class="griglia-materie">
         {MATERIE.filter((m) => m.gruppo === g).map((m) => (
-          <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`}>
+          <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
             {m.attiva ? (
               <a href={url(`/${m.slug}`)}>
                 <h3>{m.titolo}</h3>
                 <p>{m.descrizione}</p>
-                <span class="conteggio">{m.argomenti.length} argomenti</span>
+                <span class="piede-scheda"><span class="conteggio">{m.argomenti.length} argomenti</span><Stato prezzo={m.prezzo} /></span>
               </a>
             ) : (
               <div>

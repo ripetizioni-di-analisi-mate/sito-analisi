@@ -350,8 +350,38 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 #acquisto-alternativo { margin: 0; color: var(--inchiostro-2); }
 .nota-accesso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
 
-/* materia sbloccata su questo dispositivo: spunta sulla pillola in testata */
-html.sbloccato .materia-corrente::after { content: ' ✓'; font-weight: 700; }
+/* ---------- Accesso: materia sbloccata o in anteprima ---------- */
+:root { --verde: #1f7a4d; }
+.materia-corrente { display: inline-flex; align-items: center; gap: 0.3rem; }
+.materia-corrente .lucchetto { width: 0.95rem; height: 0.95rem; flex: none; }
+.materia-corrente .aperto, .materia-corrente .dicitura-sbloccata { display: none; }
+html.sbloccato .materia-corrente { background: var(--verde); border-color: var(--verde); color: #fff; box-shadow: 0 0 0 3px color-mix(in srgb, var(--verde) 18%, transparent); }
+html.sbloccato .materia-corrente .chiuso { display: none; }
+html.sbloccato .materia-corrente .aperto { display: block; }
+html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-weight: 600; padding-left: 0.35rem; border-left: 1px solid rgba(255,255,255,0.45); }
+@media (max-width: 30rem) { html.sbloccato .materia-corrente .dicitura-sbloccata { display: none; } }
+
+.stato { font-family: var(--ui); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; }
+.stato > span { display: none; align-items: center; gap: 0.3rem; padding: 0.12rem 0.55rem 0.12rem 0.35rem; border-radius: 999px; }
+.stato svg { width: 1rem; height: 1rem; flex: none; }
+.stato .stato-bloccata { display: inline-flex; color: var(--inchiostro-2); background: color-mix(in srgb, var(--inchiostro) 6%, transparent); }
+.stato .stato-sbloccata { color: var(--verde); background: color-mix(in srgb, var(--verde) 12%, transparent); }
+.stato.compatto > span { padding: 0; background: none; }
+.stato.compatto svg { width: 0.95rem; height: 0.95rem; }
+.griglia-materie .piede-scheda { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.indice .argomento .stato { margin-left: 0.35rem; vertical-align: -0.15rem; }
+
+.riquadro-stato { margin: 1.1rem 0 1.6rem; font-family: var(--ui); }
+.riquadro-stato > div { display: none; align-items: center; gap: 0.9rem; padding: 0.95rem 1.1rem; border-radius: var(--raggio); }
+.riquadro-stato .stato-bloccata { display: flex; flex-wrap: wrap; border: 1px solid var(--riga); background: color-mix(in srgb, var(--accento) 5%, transparent); }
+.riquadro-stato .stato-sbloccata { background: color-mix(in srgb, var(--verde) 10%, transparent); border: 1px solid color-mix(in srgb, var(--verde) 35%, transparent); }
+.riquadro-stato .icona { width: 2.4rem; height: 2.4rem; flex: none; }
+.riquadro-stato .stato-sbloccata .icona { color: var(--verde); }
+.riquadro-stato .stato-bloccata .icona { color: var(--inchiostro-2); }
+.riquadro-stato .testo { flex: 1; min-width: 12rem; }
+.riquadro-stato strong { display: block; font-size: 1.05rem; }
+.riquadro-stato .stato-sbloccata strong { color: var(--verde); }
+.riquadro-stato .testo span { color: var(--inchiostro-2); font-size: 0.92rem; }
 
 /* ---------- WhatsApp ---------- */
 .bottone-whatsapp { width: 3.1rem; height: 3.1rem; border-radius: 50%; background: #25d366; color: white; display: grid; place-items: center; box-shadow: 0 3px 10px rgba(0,0,0,0.18); }

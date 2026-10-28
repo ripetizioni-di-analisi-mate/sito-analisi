@@ -161,12 +161,6 @@ async function utenteCollegato(env, req) {
   if (!t?.e) return null;
   return aDO(env, '/sessione', { email: t.e, versione: t.v });
 }
-// Materie sbloccate dai vecchi link personali (/accesso?t=...), ancora validi.
-async function materieDaLink(env, req) {
-  const t = leggiCookie(req, 'accesso');
-  if (!t) return [];
-  return (await leggiToken(env, t))?.m ?? [];
-}
 
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
@@ -178,9 +172,16 @@ function analizza(pathname) {
   if (m) return { materia: m[1], argomento: m[2], tipo: m[3], n: m[4] ? Number(m[4]) : undefined };
   return null;
 }
+// Le pagine cambiano a seconda di chi le guarda (ospite, iscritto, materia sbloccata): niente risposte
+// "non modificata" (304), altrimenti il browser mostrerebbe la copia vista prima di accedere o di pagare.
+function senzaCondizioni(req, u = req.url) {
+  const h = new Headers(req.headers);
+  h.delete('if-none-match'); h.delete('if-modified-since');
+  return new Request(u, { method: req.method, headers: h });
+}
 async function rispostaVetrina(env, req, percorso) {
   const u = new URL(req.url); u.pathname = percorso; u.search = '';
-  const r = await env.ASSETS.fetch(new Request(u, { headers: req.headers }));
+  const r = await env.ASSETS.fetch(senzaCondizioni(req, u));
   return new Response(r.body, { status: r.status, headers: r.headers });
 }
 
@@ -237,8 +238,7 @@ export default {
     if (p === '/api/io') {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      const daLink = await materieDaLink(env, req);
-      return json({ ...io, materie: [...new Set([...io.materie, ...daLink])] });
+      return json(io);
     }
     if (p === '/api/password' && POST) {
       const t = await tokenSessione(env, req);
@@ -253,13 +253,11 @@ export default {
       return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione) });
     }
 
-    // ===== vecchi link personali: restano validi =====
+    // ===== vecchi link personali: non danno più accesso, serve l'account =====
     if (p === '/accesso') {
-      const dati = await leggiToken(env, url.searchParams.get('t') || '');
-      if (!dati) return new Response('Link di accesso non valido.', { status: 403, headers: { 'content-type': 'text/plain; charset=utf-8' } });
       return new Response(null, { status: 302, headers: {
-        location: '/account',
-        'set-cookie': `accesso=${encodeURIComponent(url.searchParams.get('t'))}; Path=/; Max-Age=31536000; HttpOnly; Secure; SameSite=Lax`,
+        location: '/accedi',
+        'set-cookie': 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax',
       } });
     }
     if (p === '/esci') {
@@ -348,10 +346,11 @@ export default {
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);
     const io = pagina ? await utenteCollegato(env, req).catch(() => null) : null;
     let risposta;
-    let sbloccataQui = false;
+    // Materia della pagina (anche la pagina principale della materia): serve per la spunta.
+    const primo = url.pathname.split('/')[1]?.replace(/\.html$/, '');
+    let sbloccataQui = Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
-      const sbloccate = [...(io?.materie ?? []), ...(await materieDaLink(env, req))];
-      sbloccataQui = sbloccate.includes(info.materia);
+      sbloccataQui = Boolean(io?.materie.includes(info.materia));
       if (!sbloccataQui) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa' || (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE)) {
           risposta = await rispostaVetrina(env, req, `/${info.materia}/sblocca`);
@@ -364,21 +363,24 @@ export default {
         }
       }
     }
-    if (!risposta) risposta = await env.ASSETS.fetch(req);
+    if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
     const html = (risposta.headers.get('content-type') || '').includes('text/html');
 
-    // Pagine personali e contenuti a pagamento: niente copie in cache intermedie.
-    if (html && (io || protetta)) {
+    // Pagine: mai copie riusate, né dal browser né da cache intermedie.
+    if (html) {
       risposta = new Response(risposta.body, risposta);
       risposta.headers.set('cache-control', 'private, no-store');
+      risposta.headers.delete('etag');
+      risposta.headers.delete('last-modified');
     }
-    // Segni sulla pagina: utente collegato, materia sbloccata (spunta e filigrana).
-    if (html && (io || sbloccataQui)) {
+    // Segni sulla pagina: utente collegato, materie sbloccate (spunte), filigrana.
+    if (html && io) {
       risposta = new HTMLRewriter().on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
           e.setAttribute('class', classi);
-          if (io && sbloccataQui) e.setAttribute('data-utente', io.email);
+          e.setAttribute('data-materie', io.materie.join(' '));
+          if (sbloccataQui) e.setAttribute('data-utente', io.email);
         },
       }).transform(risposta);
     }

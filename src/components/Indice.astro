@@ -1,6 +1,7 @@
 ---
 import { MATERIE, SEZIONI, materia as trovaMateria, gruppi } from '../data/materie';
 import { url } from '../lib/url';
+import Stato from './Stato.astro';
 interface Props { materia?: string; argomento?: string; sezione?: string }
 const { materia, argomento, sezione } = Astro.props;
 const m = materia ? trovaMateria(materia) : undefined;
@@ -35,7 +36,7 @@ const m = materia ? trovaMateria(materia) : undefined;
           <p class="indice-materia"><span>{g}</span></p>
           <ol>
             {MATERIE.filter((x) => x.gruppo === g).map((x) => (
-              <li>{x.attiva ? <a class="argomento" href={url(`/${x.slug}`)}>{x.titolo}</a> : <span class="argomento in-preparazione">{x.titolo} <small>in preparazione</small></span>}</li>
+              <li data-materia={x.slug}>{x.attiva ? <a class="argomento" href={url(`/${x.slug}`)}>{x.titolo}<Stato prezzo={x.prezzo} compatto /></a> : <span class="argomento in-preparazione">{x.titolo} <small>in preparazione</small></span>}</li>
             ))}
           </ol>
         </>

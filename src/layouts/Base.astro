@@ -6,7 +6,7 @@ import '@fontsource/source-sans-3/700.css';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
-import { materia as trovaMateria } from '../data/materie';
+import { MATERIE, materia as trovaMateria } from '../data/materie';
 import { url } from '../lib/url';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
@@ -29,12 +29,18 @@ const m = materia ? trovaMateria(materia) : undefined;
 const titoloCompleto = m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`;
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
+// Spunte delle materie sbloccate: il Worker scrive su <html> data-materie="analisi-1 precorso ...".
+const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
+  const sel = `html[data-materie~="${x.slug}"] [data-materia="${x.slug}"]`;
+  return `${sel} .stato-bloccata{display:none}${sel} .stato-sbloccata{display:inline-flex}${sel}.riquadro-stato .stato-bloccata{display:none}${sel}.riquadro-stato .stato-sbloccata{display:flex}`;
+}).join('');
 ---
 <!doctype html>
 <html lang="it" style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style is:inline set:html={regoleStato}></style>
   <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
   <title>{titoloCompleto}</title>
   {descrizione && <meta name="description" content={descrizione} />}
@@ -55,7 +61,14 @@ const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
-      {m && <a class="materia-corrente" href={url(`/${m.slug}`)}>{m.breve}</a>}
+      {m && (
+        <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={url(`/${m.slug}`)}>
+          {m.prezzo && <svg class="lucchetto chiuso" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>}
+          {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 5.9-.8"/></svg>}
+          <span>{m.breve}</span>
+          {m.prezzo && <span class="dicitura-sbloccata">Sbloccata</span>}
+        </a>
+      )}
       <a class="bottone-cerca" href={url('/cerca')} aria-label="Cerca">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
         <span>Cerca</span>
