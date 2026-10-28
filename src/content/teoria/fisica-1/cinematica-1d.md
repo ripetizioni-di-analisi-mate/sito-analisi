@@ -19,7 +19,7 @@ La posizione del punto all'istante $t$ è la sua coordinata $x$ sull'asse, posit
 :::
 
 :::definizione{#legge-oraria titolo="Legge oraria"}
-La **legge oraria** del moto è la funzione $t \mapsto x(t)$ che a ogni istante associa la posizione del punto. Il suo grafico nel piano $(t, x)$, con il tempo in ascissa e la posizione in ordinata, è il **grafico orario**. Il grafico orario è diverso dalla traiettoria, che nel moto rettilineo è un tratto dell'asse $x$: il grafico mostra *quando* il punto occupa ciascuna posizione. Per esempio la legge $x(t) = 4t - t^2$, con $x$ in metri e $t$ in secondi, descrive un punto che parte dall'origine, avanza fino a $x = 4\,\mathrm{m}$ all'istante $t = 2\,\mathrm{s}$ e poi torna indietro, ripassando per l'origine all'istante $t = 4\,\mathrm{s}$. In una legge scritta con i soli numeri i coefficienti hanno le unità che rendono omogenei i termini; qui $4\,\mathrm{m/s}$ e $1\,\mathrm{m/s^2}$.
+La **legge oraria** del moto è la funzione $t \mapsto x(t)$ che a ogni istante associa la posizione del punto. Il suo grafico nel piano $(t, x)$, con il tempo in ascissa e la posizione in ordinata, è il **grafico orario**. Il grafico orario è diverso dalla traiettoria, che nel moto rettilineo è un tratto dell'asse $x$; il grafico mostra in più *quando* il punto occupa ciascuna posizione. Per esempio la legge $x(t) = 4t - t^2$, con $x$ in metri e $t$ in secondi, descrive un punto che parte dall'origine, avanza fino a $x = 4\,\mathrm{m}$ all'istante $t = 2\,\mathrm{s}$ e poi torna indietro, ripassando per l'origine all'istante $t = 4\,\mathrm{s}$. In una legge scritta con i soli numeri i coefficienti hanno le unità che rendono omogenei i termini; qui $4\,\mathrm{m/s}$ e $1\,\mathrm{m/s^2}$.
 
 ::grafico{f="4*x-x^2+0*sqrt(x*(5-x))" punti="0,0,pieno;2,4,pieno;5,-5,pieno" segmenti="2,0,2,4;5,0,5,-5" xmin=-1 xmax=6 ymin=-6 ymax=5 nomi="t,x" titolo="Grafico orario di $x(t) = 4t - t^2$, con $x$ in metri e $t$ in secondi: il punto avanza fino a $x = 4\,\mathrm{m}$, è fermo all'istante $t = 2\,\mathrm{s}$ e poi torna indietro fino a $x = -5\,\mathrm{m}$"}
 
@@ -189,7 +189,7 @@ t_s = \frac{v_0}{g} ,
 \qquad
 h_{\max} = y_0 + \frac{v_0^2}{2g} .
 $$
-Il moto è simmetrico: il corpo ripassa per la quota di partenza all'istante $2\,t_s$ con velocità $-v_0$, e passa per ogni quota intermedia due volte, con velocità opposte. Per $v_0 = 15\,\mathrm{m/s}$ si ha $t_s = 1{,}53\,\mathrm{s}$, e il corpo sale di $\dfrac{v_0^2}{2g} = 11{,}5\,\mathrm{m}$ sopra il punto di lancio.
+Il moto è simmetrico, cioè il corpo ripassa per la quota di partenza all'istante $2\,t_s$ con velocità $-v_0$, e passa per ogni quota intermedia due volte, con velocità opposte. Per $v_0 = 15\,\mathrm{m/s}$ si ha $t_s = 1{,}53\,\mathrm{s}$, e il corpo sale di $\dfrac{v_0^2}{2g} = 11{,}5\,\mathrm{m}$ sopra il punto di lancio.
 
 ::grafico{f="15*x-4.905*x^2+0*sqrt(x*(3.0581-x))" punti="1.529,11.47,pieno" segmenti="1.529,0,1.529,11.47" xmin=-1 xmax=4 ymin=-2 ymax=14 nomi="t,y" titolo="Lancio dal suolo con $v_0 = 15\,\mathrm{m/s}$: la quota $y(t) = v_0\,t - \dfrac{1}{2}\,g\,t^2$ è massima, $11{,}5\,\mathrm{m}$, all'istante $t_s = 1{,}53\,\mathrm{s}$, e il grafico è simmetrico rispetto alla retta $t = t_s$"}
 

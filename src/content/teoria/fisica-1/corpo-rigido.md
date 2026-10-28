@@ -6,9 +6,9 @@ sommario: Come si descrive la rotazione di un corpo rigido, come momento delle f
 ## Corpo rigido e grandezze angolari
 
 :::definizione{#corpo-rigido titolo="Corpo rigido"}
-Un **corpo rigido** è un sistema di punti materiali le cui distanze reciproche restano costanti durante il moto, qualunque siano le forze applicate. È un modello: ogni corpo reale si deforma sotto l'azione delle forze, e il modello è adeguato quando le deformazioni sono trascurabili rispetto alle dimensioni del corpo. La massa può essere concentrata in punti, per esempio masse fissate a un'asta di massa trascurabile, oppure distribuita in modo continuo; in questo caso un elemento di volume $dV$ ha massa $dm = \rho\,dV$, dove $\rho$ è la densità, e le somme sui punti diventano integrali.
+Un **corpo rigido** è un sistema di punti materiali le cui distanze reciproche restano costanti durante il moto. È un modello, adeguato quando le deformazioni del corpo reale sono trascurabili rispetto alle sue dimensioni. La massa può essere concentrata in punti oppure distribuita con densità $\rho$; in questo caso un elemento di volume $dV$ ha massa $dm = \rho\,dV$ e le somme sui punti diventano integrali.
 
-Il moto di un corpo rigido è di **traslazione** se ogni segmento che congiunge due punti del corpo resta parallelo a sé stesso; allora tutti i punti hanno in ogni istante la stessa velocità, e il moto è descritto dal moto del centro di massa. È di **rotazione attorno a un asse fisso** se i punti di una retta restano fermi e ogni altro punto descrive una circonferenza con centro sull'asse, in un piano perpendicolare all'asse. Il moto più generale si scompone in una traslazione del centro di massa e in una rotazione attorno a un asse passante per il centro di massa, la cui direzione in generale cambia nel tempo.
+Il moto è di **traslazione** se ogni segmento che congiunge due punti del corpo resta parallelo a sé stesso, e allora tutti i punti hanno la stessa velocità. È di **rotazione attorno a un asse fisso** se i punti di una retta restano fermi e ogni altro punto descrive una circonferenza con centro sull'asse. Il moto più generale si scompone in una traslazione del centro di massa e in una rotazione attorno a un asse passante per il centro di massa.
 :::
 
 :::definizione{#grandezze-angolari titolo="Posizione, velocità e accelerazione angolare"}
@@ -56,9 +56,9 @@ $$
 \qquad
 \vec{r} = \overrightarrow{OP} .
 $$
-Il suo modulo è $M_O = rF\sin\varphi = F b$, dove $\varphi$ è l'angolo tra $\vec{r}$ e $\vec{F}$ e $b = r\sin\varphi$ è il **braccio**, cioè la distanza di $O$ dalla retta d'azione della forza; si misura in $\mathrm{N\cdot m}$. Il momento misura l'efficacia della forza nel far ruotare il corpo attorno a $O$: a parità di forza cresce con il braccio, ed è nullo quando la retta d'azione passa per $O$. Una chiave lunga $0{,}25\,\mathrm{m}$ spinta all'estremità con $40\,\mathrm{N}$ perpendicolari al manico produce un momento di $10\,\mathrm{N\cdot m}$; se la forza forma un angolo di $30^\circ$ con il manico il momento scende a $5{,}0\,\mathrm{N\cdot m}$.
+Il suo modulo è $M_O = rF\sin\varphi = F b$, dove $\varphi$ è l'angolo tra $\vec{r}$ e $\vec{F}$ e $b = r\sin\varphi$ è il **braccio**, cioè la distanza di $O$ dalla retta d'azione della forza; si misura in $\mathrm{N\cdot m}$. A parità di forza il momento cresce con il braccio, ed è nullo quando la retta d'azione passa per $O$. Una chiave lunga $0{,}25\,\mathrm{m}$ spinta all'estremità con $40\,\mathrm{N}$ perpendicolari al manico produce un momento di $10\,\mathrm{N\cdot m}$; con la forza a $30^\circ$ dal manico il momento è $5{,}0\,\mathrm{N\cdot m}$.
 
-Quando il corpo ruota attorno a un asse $z$ conta la componente del momento lungo l'asse, il **momento assiale** $M_z = \hat{k} \cdot \vec{M}_O$, con $O$ sull'asse. Non dipende dalla scelta di $O$ sull'asse, perché spostando il polo lungo l'asse $\vec{r}$ cambia di un vettore parallelo a $\hat{k}$, il cui prodotto vettoriale con $\vec{F}$ è ortogonale a $\hat{k}$. Per una forza in un piano perpendicolare all'asse, $M_z = \pm F b$, con il segno positivo quando la forza tende a far ruotare il corpo in verso antiorario.
+Per un corpo che ruota attorno a un asse $z$ conta il **momento assiale** $M_z = \hat{k} \cdot \vec{M}_O$, con $O$ sull'asse; non dipende dalla posizione di $O$ sull'asse, perché spostando il polo lungo l'asse $\vec{r}$ cambia di un vettore parallelo a $\hat{k}$. Per una forza in un piano perpendicolare all'asse $M_z = \pm F b$, con il segno positivo quando la forza tende a far ruotare il corpo in verso antiorario.
 
 ::grafico{vettori="0,0,3,1,r;3,1,4.6,0.2,F" segmenti="0,0,1,2;1,2,3,1;3,1,4.5,1.5" punti="3,1,pieno,P;1,2,vuoto" etichette="0.2,1.2,b;3.65,0.95,φ" xmin=-0.6 xmax=5.2 ymin=-0.6 ymax=2.6 uguale=1 titolo="Il braccio $b$ è la distanza del polo $O$ dalla retta d'azione di $\vec{F}$, quindi $b = r\sin\varphi$ e $M_O = F b$"}
 
@@ -77,7 +77,7 @@ Sia un corpo rigido, formato da punti di massa $m_i$, che ruota con velocità an
 $$
 L_z = \Big( \sum_i m_i R_i^2 \Big)\,\omega .
 $$
-Il coefficiente di $\omega$ dipende solo da come la massa è distribuita attorno all'asse ed è il momento d'inerzia del corpo rispetto all'asse. Il vettore $\vec{L}$ può avere anche componenti perpendicolari all'asse; queste sono nulle quando il corpo è simmetrico rispetto all'asse di rotazione. Due masse di $0{,}50\,\mathrm{kg}$ agli estremi di un'asta leggera lunga $0{,}60\,\mathrm{m}$, che ruota a $4{,}0\,\mathrm{rad/s}$ attorno all'asse perpendicolare per il punto medio, hanno $L_z = 2 \cdot 0{,}50 \cdot 0{,}30^2 \cdot 4{,}0 = 0{,}36\,\mathrm{kg\cdot m^2/s}$.
+Il coefficiente di $\omega$ dipende solo da come la massa è distribuita attorno all'asse ed è il momento d'inerzia del corpo rispetto all'asse. Due masse di $0{,}50\,\mathrm{kg}$ agli estremi di un'asta leggera lunga $0{,}60\,\mathrm{m}$, che ruota a $4{,}0\,\mathrm{rad/s}$ attorno all'asse perpendicolare per il punto medio, hanno $L_z = 2 \cdot 0{,}50 \cdot 0{,}30^2 \cdot 4{,}0 = 0{,}36\,\mathrm{kg\cdot m^2/s}$.
 
 :::dimostrazione
 Si sceglie il polo $O$ sull'asse e si scrive la posizione del punto $i$-esimo come $\vec{r}_i = \vec{R}_i + z_i\,\hat{k}$, con $\vec{R}_i$ perpendicolare all'asse e di modulo $R_i$. Il punto descrive una circonferenza di raggio $R_i$, quindi la sua velocità $\vec{v}_i$ è perpendicolare sia a $\hat{k}$ sia a $\vec{R}_i$ e ha modulo $|\omega| R_i$. Allora
@@ -93,7 +93,7 @@ In un campo di gravità uniforme il momento risultante, rispetto a un polo $O$, 
 $$
 \sum_i \vec{r}_i \times m_i\vec{g} = \vec{r}_C \times M\vec{g} .
 $$
-Per questo il centro di massa si chiama anche **baricentro**, e nel calcolo dei momenti il peso di un corpo esteso si tratta come una sola forza applicata in $C$. In un'asta omogenea il baricentro è il punto medio, in un disco o in una sfera omogenei è il centro.
+Per questo il centro di massa si chiama anche **baricentro**, e nel calcolo dei momenti il peso si tratta come una sola forza applicata in $C$; in un'asta omogenea $C$ è il punto medio.
 
 :::dimostrazione
 Il vettore $\vec{g}$ è lo stesso per tutti i punti, quindi si raccoglie a destra: $\sum_i \vec{r}_i \times m_i\vec{g} = \big( \sum_i m_i\vec{r}_i \big) \times \vec{g}$. Per definizione di centro di massa $\sum_i m_i\vec{r}_i = M\vec{r}_C$, e perciò il momento è $\vec{r}_C \times M\vec{g}$.
@@ -107,7 +107,7 @@ Il **momento d'inerzia** di un sistema di punti materiali rispetto a un asse è
 $$
 I = \sum_i m_i R_i^2 ,
 $$
-dove $R_i$ è la distanza dall'asse del punto di massa $m_i$; per un corpo con massa distribuita in modo continuo la somma diventa l'integrale $I = \displaystyle\int R^2\,dm$ esteso a tutto il corpo. Si misura in $\mathrm{kg\cdot m^2}$. Nelle rotazioni ha il ruolo che la massa ha nelle traslazioni: compare nel momento angolare $L_z = I\omega$, nell'equazione del moto di rotazione $M_z = I\alpha$ e nell'energia cinetica di rotazione $\dfrac{1}{2} I\omega^2$. Dipende dall'asse scelto e cresce quanto più la massa è lontana dall'asse. Il momento d'inerzia è **additivo**: quello di un corpo formato da più parti è la somma dei momenti d'inerzia delle parti rispetto allo stesso asse.
+dove $R_i$ è la distanza dall'asse del punto di massa $m_i$; per un corpo con massa distribuita in modo continuo la somma diventa l'integrale $I = \displaystyle\int R^2\,dm$ esteso a tutto il corpo. Si misura in $\mathrm{kg\cdot m^2}$. Nelle rotazioni ha il ruolo che la massa ha nelle traslazioni: compare nel momento angolare $L_z = I\omega$, nell'equazione del moto $M_z = I\alpha$ e nell'energia cinetica $\dfrac{1}{2} I\omega^2$. Dipende dall'asse e cresce quanto più la massa è lontana dall'asse. È **additivo**: il momento d'inerzia di un corpo composto è la somma di quelli delle parti rispetto allo stesso asse.
 :::
 
 :::richiamo{titolo="Integrale definito"}

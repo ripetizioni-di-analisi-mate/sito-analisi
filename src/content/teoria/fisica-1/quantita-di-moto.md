@@ -10,7 +10,7 @@ Sia $P$ un punto materiale di massa $m$ che si muove con velocità $\vec{v}$. La
 $$
 \vec{p} = m\,\vec{v} .
 $$
-Ha la direzione e il verso della velocità e si misura in $\mathrm{kg\cdot m/s}$, unità che coincide con $\mathrm{N\cdot s}$. Due corpi con la stessa velocità hanno quantità di moto proporzionali alle masse: un'automobile di $1200\,\mathrm{kg}$ a $15\,\mathrm{m/s}$ ha $p = 1{,}8 \cdot 10^4\,\mathrm{kg\cdot m/s}$, una palla da tennis di $0{,}058\,\mathrm{kg}$ a $30\,\mathrm{m/s}$ ha $p \approx 1{,}7\,\mathrm{kg\cdot m/s}$. La quantità di moto è la grandezza che si scambiano i corpi quando interagiscono, e nei problemi di urto è la prima a essere scritta.
+Ha la direzione e il verso della velocità e si misura in $\mathrm{kg\cdot m/s}$, unità che coincide con $\mathrm{N\cdot s}$. Due corpi con la stessa velocità hanno quantità di moto proporzionali alle masse; per esempio un'automobile di $1200\,\mathrm{kg}$ a $15\,\mathrm{m/s}$ ha $p = 1{,}8 \cdot 10^4\,\mathrm{kg\cdot m/s}$, una palla da tennis di $0{,}058\,\mathrm{kg}$ a $30\,\mathrm{m/s}$ ha $p \approx 1{,}7\,\mathrm{kg\cdot m/s}$. La quantità di moto è la grandezza che si scambiano i corpi quando interagiscono, e nei problemi di urto è la prima a essere scritta.
 :::
 
 :::teorema{#secondo-principio-quantita-di-moto titolo="Secondo principio della dinamica in termini di quantità di moto"}
@@ -39,7 +39,7 @@ Sia $\vec{F}(t)$ la risultante delle forze che agiscono su un punto materiale ne
 $$
 \vec{J} = \vec{p}(t_2) - \vec{p}(t_1) = \Delta \vec{p} .
 $$
-Il teorema collega una grandezza che dipende da tutta la storia della forza, l'impulso, a una differenza tra due istanti. Serve quando la forza è intensa, breve e difficile da misurare istante per istante, come nel colpo di una racchetta o nell'urto contro un muro: dalla variazione della velocità si ricava l'impulso, e da questo la forza media.
+Il teorema collega una grandezza che dipende da tutta la storia della forza, l'impulso, a una differenza tra due istanti. Serve quando la forza è intensa, breve e non misurabile istante per istante, come nel colpo di una racchetta o nell'urto contro un muro; in questi casi dalla variazione della velocità si ricava l'impulso, e da questo la forza media.
 
 :::dimostrazione
 Per il secondo principio in termini di quantità di moto, in ogni istante $\vec{F}(t) = \dfrac{d\vec{p}}{dt}$. Integrando i due membri tra $t_1$ e $t_2$, componente per componente, e applicando il **teorema fondamentale del calcolo integrale** al secondo membro si ottiene
@@ -83,7 +83,7 @@ Un **sistema di punti materiali** è un insieme di $N$ punti $P_1, \dots, P_N$ c
 $$
 \vec{P} = \sum_{i=1}^{N} m_i\,\vec{v}_i .
 $$
-La divisione tra interne ed esterne dipende dalla scelta del sistema: per due carrelli che si urtano, la forza dell'uno sull'altro è interna se il sistema è formato da entrambi, esterna se il sistema è un carrello solo.
+La divisione tra interne ed esterne dipende dalla scelta del sistema; per esempio, per due carrelli che si urtano, la forza dell'uno sull'altro è interna se il sistema è formato da entrambi, esterna se il sistema è un carrello solo.
 :::
 
 :::definizione{#centro-di-massa titolo="Centro di massa"}
@@ -106,7 +106,7 @@ Ogni coordinata del centro di massa è la media delle coordinate dei punti, pesa
 :::
 
 :::definizione{#centro-di-massa-corpi-continui titolo="Centro di massa di un corpo continuo"}
-Per un corpo esteso la somma diventa un integrale: si divide il corpo in elementi di massa $dm$ e si pone
+Per un corpo esteso la somma diventa un integrale. Si divide il corpo in elementi di massa $dm$ e si pone
 $$
 \vec{r}_{cm} = \frac{1}{M} \int \vec{r}\,dm .
 $$
@@ -373,7 +373,7 @@ La somma $\sum_i m_i\,\vec{v}_i^{\,*}$ è la quantità di moto totale nel sistem
 ::::
 
 :::osservazione{#energia-disponibile-negli-urti titolo="Energia dissipabile in un urto"}
-In un urto senza forze esterne impulsive $\vec{v}_{cm}$ non cambia, quindi per il teorema di König il termine $\dfrac{1}{2}\,M v_{cm}^2$ è lo stesso prima e dopo l'urto, e l'urto può modificare solo $K^{*}$. Nell'urto completamente anelastico i corpi restano uniti e fermi rispetto al centro di massa, quindi $K^{*}$ dopo l'urto è nulla: l'energia dissipata è tutta la $K^{*}$ iniziale, ed è la massima perdita possibile. Per due corpi si ottiene
+In un urto senza forze esterne impulsive $\vec{v}_{cm}$ non cambia, quindi per il teorema di König il termine $\dfrac{1}{2}\,M v_{cm}^2$ è lo stesso prima e dopo l'urto, e l'urto può modificare solo $K^{*}$. Nell'urto completamente anelastico i corpi restano uniti e fermi rispetto al centro di massa, quindi $K^{*}$ dopo l'urto è nulla; perciò l'energia dissipata è tutta la $K^{*}$ iniziale, ed è la massima perdita possibile. Per due corpi si ottiene
 $$
 K^{*} = \frac{1}{2}\,\mu\,(v_1 - v_2)^2,
 \qquad

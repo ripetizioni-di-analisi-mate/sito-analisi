@@ -188,7 +188,7 @@ $$
 Per il teorema sul lavoro della forza elastica, il lavoro $\dfrac{1}{2} k x_A^2 - \dfrac{1}{2} k x_B^2$ dipende solo dalle deformazioni iniziale e finale, quindi la forza elastica è conservativa. In particolare, se la molla torna alla deformazione di partenza, il lavoro totale è nullo anche se nel frattempo la molla si è allungata e accorciata più volte. Anche la forza di gravitazione universale è conservativa, e si rimanda all'argomento sulla gravitazione.
 :::
 
-:::attenzione
+:::attenzione{#attrito-non-conservativo}
 L'attrito dinamico *non* è una forza conservativa. Una cassa di massa $m = 2{,}0\,\mathrm{kg}$ viene trascinata su un pavimento orizzontale, con $\mu_d = 0{,}30$, per $d = 5{,}0\,\mathrm{m}$ in un verso e poi per $5{,}0\,\mathrm{m}$ nel verso opposto, fino al punto di partenza. L'attrito ha modulo $\mu_d\,mg$ ed è sempre opposto allo spostamento, quindi compie lavoro negativo in entrambi i tratti:
 $$
 L_{\text{att}} = -2\,\mu_d\, m g\, d = -2 \cdot 0{,}30 \cdot 2{,}0 \cdot 9{,}81 \cdot 5{,}0\,\mathrm{J} \approx -59\,\mathrm{J} .

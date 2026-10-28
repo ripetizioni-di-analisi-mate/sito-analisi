@@ -240,7 +240,7 @@ formula che segue dal teorema del coseno e per la cui dimostrazione si rimanda a
 :::osservazione{#componente-lungo-una-direzione titolo="Componente lungo una direzione"}
 Se $\hat{u}$ è un versore e $\theta$ è l'angolo tra $\vec{A}$ e $\hat{u}$, il numero $\vec{A} \cdot \hat{u} = A\cos\theta$ è la **componente** di $\vec{A}$ lungo la direzione e il verso di $\hat{u}$; in particolare $A_x = \vec{A} \cdot \hat{\imath}$. Gli assi su cui scomporre un vettore si possono scegliere liberamente, purché perpendicolari, e la scelta adatta al problema semplifica i calcoli. Su un piano inclinato di un angolo $\alpha$ conviene un asse parallelo al piano e uno perpendicolare; il peso di modulo $mg$ ha allora componente $mg\sin\alpha$ parallela al piano, diretta verso il basso, e componente $mg\cos\alpha$ perpendicolare al piano. L'uso di questa scomposizione nella dinamica è trattato nell'argomento sulle leggi di Newton.
 
-::grafico{curve="t,0.57735*t,0,6.5" vettori="3,2.5,3,0.1,P;3,2.5,1.961,1.9,P∥;3,2.5,4.039,0.7,P⊥" segmenti="0,0,6.5,0;1.961,1.9,3,0.1;4.039,0.7,3,0.1" punti="3,2.5,pieno" etichette="1.1,0.2,α" xmin=-0.5 xmax=6.8 ymin=-0.6 ymax=4.2 uguale=1 titolo="Sul piano inclinato di $\alpha = 30^\circ$ il peso $\vec{P}$ si scompone in $P_{\parallel} = mg\sin\alpha$ lungo il piano e $P_{\perp} = mg\cos\alpha$ perpendicolare al piano"}
+::grafico{curve="t,0.57735*t,0,6.5" vettori="3,2.5,3,0.1,P;3,2.5,1.961,1.9;3,2.5,4.039,0.7,P⊥" segmenti="0,0,6.5,0;1.961,1.9,3,0.1;4.039,0.7,3,0.1" etichette="1.1,0.2,α;1.55,2.2,P∥" xmin=-0.5 xmax=6.8 ymin=-0.6 ymax=4.2 uguale=1 titolo="Sul piano inclinato di $\alpha = 30^\circ$ il peso $\vec{P}$ si scompone in $P_{\parallel} = mg\sin\alpha$ lungo il piano e $P_{\perp} = mg\cos\alpha$ perpendicolare al piano"}
 
 :::
 
