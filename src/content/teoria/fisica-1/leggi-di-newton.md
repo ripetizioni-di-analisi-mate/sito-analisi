@@ -193,7 +193,7 @@ a = g \sin\alpha ,
 $$
 con l'accelerazione diretta lungo il piano verso il basso. L'accelerazione non dipende dalla massa e varia fra $0$ (piano orizzontale) e $g$ (piano verticale, caduta libera). Su un piano liscio inclinato di $30^\circ$ ogni corpo scende con $a = 9{,}81 \cdot \dfrac{1}{2}\,\mathrm{m/s^2} = 4{,}91\,\mathrm{m/s^2}$.
 
-::grafico{f="x>=0&&x<=6?3.4641-0.57735*x:NaN" vettori="2,2.309,2,0.309,P;2,2.309,2.866,3.809,N" segmenti="2,2.309,2.866,1.809;2,2.309,1.134,0.809;2,0.309,2.866,1.809;2,0.309,1.134,0.809" etichette="3.1,1.15,mg sin α;0.1,0.4,mg cos α;5.05,0.15,α" xmin=-0.6 xmax=6.6 ymin=-0.6 ymax=4.4 uguale=1 titolo="Il peso si scompone in $mg\sin\alpha$ lungo il piano e $mg\cos\alpha$ perpendicolare al piano, che la reazione normale equilibra"}
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 0,3.464;1.949,2.339 2.555,1.989 2.905,2.595 2.299,2.945" vettori="2.427,2.467,2.427,0.467,P;2.427,2.467,3.293,3.967,N" segmenti="2.427,2.467,3.293,1.967;2.427,2.467,1.561,0.967;2.427,0.467,3.293,1.967;2.427,0.467,1.561,0.967" riferimento="4.1,3.3,-30,1.1,x,y" etichette="3.45,1.75,mg sin α;0.3,1.0,mg cos α;5.0,0.12,α" xmin=-0.4 xmax=6.4 ymin=-0.4 ymax=4.4 titolo="Con l'asse $x$ lungo il piano e l'asse $y$ perpendicolare, il peso si scompone in $mg\sin\alpha$ lungo il piano e $mg\cos\alpha$ perpendicolare al piano, che la reazione normale equilibra"}
 
 :::dimostrazione
 Si sceglie l'asse $x$ lungo il piano, con verso positivo verso il basso, e l'asse $y$ perpendicolare al piano, con verso uscente. L'angolo tra il peso e la direzione perpendicolare al piano è uguale a $\alpha$, perché i due angoli hanno i lati rispettivamente perpendicolari; perciò le componenti del peso sono $P_x = mg\sin\alpha$ e $P_y = -mg\cos\alpha$. La reazione normale ha solo la componente $N_y = N$. Il corpo resta sul piano, quindi $a_y = 0$, e il secondo principio per componenti dà
@@ -316,7 +316,7 @@ v = \sqrt{g\,r \tan\alpha} .
 $$
 È la velocità di progetto della curva; a velocità diverse l'attrito fornisce la differenza. Con $r = 100\,\mathrm{m}$ e una velocità di progetto di $20\,\mathrm{m/s}$ serve $\tan\alpha = \dfrac{v^2}{g r} = 0{,}408$, cioè $\alpha = 22^\circ$.
 
-::grafico{f="x>=-2.4&&x<=2?0.57735*x:NaN" vettori="0,0,0,-2,P;0,0,-1.155,2,N;0,0,-1.155,0,R" segmenti="-1.155,2,-1.155,0" etichette="-3.1,-0.45,verso il centro;1.2,0.25,α" xmin=-3.4 xmax=2.4 ymin=-2.6 ymax=2.6 uguale=1 titolo="Sulla curva sopraelevata la risultante di $\vec{P}$ e $\vec{N}$ è orizzontale e diretta verso il centro"}
+::grafico{assi=0 uguale=1 poligoni="-2.6,-1.501 2,1.155 2,-2.4 -2.6,-2.4" vettori="0,0,0,-2,P;0,0,-1.155,2,N;0,0,-1.155,0,R" segmenti="-1.155,2,-1.155,0;0,0,1.6,0" punti="0,0,pieno" etichette="-3.3,-0.45,verso il centro;1.05,0.18,α" xmin=-3.4 xmax=2.4 ymin=-2.6 ymax=2.6 titolo="Sulla curva sopraelevata la risultante $\vec{R}$ di $\vec{P}$ e $\vec{N}$ è orizzontale e diretta verso il centro"}
 
 :::dimostrazione
 Le sole forze sono il peso e la reazione normale, che è perpendicolare alla carreggiata e quindi forma l'angolo $\alpha$ con la verticale. L'accelerazione è centripeta e orizzontale, quindi lungo la verticale la risultante è nulla e lungo l'orizzontale vale $m\dfrac{v^2}{r}$:
@@ -402,7 +402,7 @@ T = \frac{(1 + \mu_d)\,m_1 m_2}{m_1 + m_2}\,g .
 $$
 Partendo da fermo, il sistema si mette in moto se e solo se il peso appeso supera l'attrito statico massimo, cioè $m_2 > \mu_s m_1$. Con $m_1 = 4{,}0\,\mathrm{kg}$, $m_2 = 1{,}0\,\mathrm{kg}$ e $\mu_d = 0{,}10$ si ha $a = \dfrac{1{,}0 - 0{,}40}{5{,}0} \cdot 9{,}81\,\mathrm{m/s^2} = 1{,}18\,\mathrm{m/s^2}$ e $T = 8{,}63\,\mathrm{N}$.
 
-::grafico{f="x>=0.4&&x<=5?3:NaN" curve="5.3+0.3*cos(t),2.7+0.3*sin(t),0,6.29" segmenti="2.5,3,5.3,3;5.6,2.7,5.6,1.3" punti="2.5,3,pieno;5.6,1.3,pieno,m₂" etichette="2.3,3.55,m₁" vettori="2.5,3,3.6,3,T;2.5,3,2,3,f;5.6,1.3,5.6,2.27,T;5.6,1.3,5.6,0.2,P₂" xmin=-0.4 xmax=6.6 ymin=-0.4 ymax=4 uguale=1 titolo="Lungo il filo sul corpo appoggiato agiscono la tensione e l'attrito, sul corpo appeso la tensione e il peso"}
+::grafico{assi=0 uguale=1 poligoni="-1.2,3.7 5,3.7 5,4.2 -1.2,4.2" curve="5.3+0.3*cos(t),3.9+0.3*sin(t),0,6.29" linee="2.2,4.2 5.3,4.2;5.6,3.9 5.6,2.3;5,3.9 5.3,3.9" punti="2.2,4.2,pieno;5.6,2.3,pieno" etichette="1.0,4.55,m₁;4.75,2.2,m₂" vettori="2.2,4.2,3.063,4.2,T;2.2,4.2,1.808,4.2,f;2.2,4.2,2.2,8.124,N₁;2.2,4.2,2.2,0.276,P₁;5.6,2.3,5.6,3.163,T;5.6,2.3,5.6,1.319,P₂" xmin=-1.6 xmax=7.4 ymin=0 ymax=8.6 titolo="Forze sui due corpi con $m_1 = 4{,}0\,\mathrm{kg}$, $m_2 = 1{,}0\,\mathrm{kg}$ e $\mu_d = 0{,}10$, in scala: sul corpo appoggiato $\vec{N}_1$ equilibra $\vec{P}_1$, lungo il filo agiscono la tensione e l'attrito"}
 
 :::dimostrazione
 Lungo la verticale il corpo appoggiato ha accelerazione nulla, quindi $N_1 = m_1 g$ e l'attrito dinamico vale $\mu_d m_1 g$, diretto in verso opposto al moto. Si orienta il moto nel verso in cui $m_2$ scende; il secondo principio lungo il filo per i due corpi dà
