@@ -65,7 +65,7 @@ $$
 $$
 dove $\hat{u}_r$ è il versore che va da $M$ verso il punto considerato. Il campo è diretto verso la massa che lo genera e il suo modulo si riduce a un quarto quando la distanza raddoppia. Per il **principio di sovrapposizione** il campo di più masse è la somma vettoriale dei campi di ciascuna, $\vec{g} = \vec{g}_1 + \dots + \vec{g}_n$.
 
-::grafico{curve="0.4*cos(t),0.4*sin(t),0,6.29" vettori="1.478,0.612,0.554,0.230;0.612,1.478,0.230,0.554;-0.612,1.478,-0.230,0.554;-1.478,0.612,-0.554,0.230;-1.478,-0.612,-0.554,-0.230;-0.612,-1.478,-0.230,-0.554;0.612,-1.478,0.230,-0.554;1.478,-0.612,0.554,-0.230;2.956,1.225,2.725,1.129;1.225,2.956,1.129,2.725;-1.225,2.956,-1.129,2.725;-2.956,1.225,-2.725,1.129;-2.956,-1.225,-2.725,-1.129;-1.225,-2.956,-1.129,-2.725;1.225,-2.956,1.129,-2.725;2.956,-1.225,2.725,-1.129" etichette="0.15,-0.75,M" xmin=-3.6 xmax=3.6 ymin=-3.6 ymax=3.6 uguale=1 titolo="Il campo di una massa $M$ punta verso $M$; a distanza doppia il modulo è $\dfrac{1}{4}$, come mostra la lunghezza delle frecce"}
+::grafico{curve="0.4*cos(t),0.4*sin(t),0,6.29" vettori="1.478,0.612,0.554,0.230;0.612,1.478,0.230,0.554;-0.612,1.478,-0.230,0.554;-1.478,0.612,-0.554,0.230;-1.478,-0.612,-0.554,-0.230;-0.612,-1.478,-0.230,-0.554;0.612,-1.478,0.230,-0.554;1.478,-0.612,0.554,-0.230;2.956,1.225,2.725,1.129;1.225,2.956,1.129,2.725;-1.225,2.956,-1.129,2.725;-2.956,1.225,-2.725,1.129;-2.956,-1.225,-2.725,-1.129;-1.225,-2.956,-1.129,-2.725;1.225,-2.956,1.129,-2.725;2.956,-1.225,2.725,-1.129" etichette="0.35,0.4,M" xmin=-3.6 xmax=3.6 ymin=-3.6 ymax=3.6 uguale=1 titolo="Il campo di una massa $M$ punta verso $M$; a distanza doppia il modulo è $\dfrac{1}{4}$, come mostra la lunghezza delle frecce"}
 
 :::
 
@@ -82,7 +82,7 @@ dove si è estratta la radice di due quantità positive. Si ottiene $x = \dfrac{
 ## Energia potenziale gravitazionale
 
 :::richiamo{titolo="Forza conservativa ed energia potenziale"}
-Una forza è conservativa se il suo lavoro tra due punti $A$ e $B$ dipende solo da $A$ e da $B$. In tal caso esiste una funzione $U$, l'energia potenziale, tale che $W_{A \to B} = U(A) - U(B)$, definita a meno di una costante (argomento sul lavoro e l'energia).
+Una forza è conservativa se il suo lavoro tra due punti $A$ e $B$ dipende solo da $A$ e da $B$. In tal caso esiste una funzione $U$, l'energia potenziale, tale che il lavoro sia $L_{A \to B} = U(A) - U(B)$, definita a meno di una costante (argomento sul lavoro e l'energia).
 :::
 
 :::richiamo{titolo="Integrale di una potenza"}
@@ -94,14 +94,14 @@ Sia $M$ una massa puntiforme posta nell'origine e sia $m$ un punto materiale a d
 $$
 U(r) = -\,\frac{G M m}{r} .
 $$
-L'energia potenziale è negativa a ogni distanza finita e cresce verso $0$ all'aumentare di $r$: per allontanare $m$ occorre fornire energia. La formula vale anche quando $M$ è una sfera a simmetria sferica e $r$ è la distanza dal suo centro, come si vede con il teorema del guscio sferico. Per esempio, per portare un corpo di $1\,\mathrm{kg}$ dalla superficie terrestre a distanza infinita occorre il lavoro $\dfrac{G M_T m}{R_T} = 6{,}25 \cdot 10^7\,\mathrm{J}$.
+L'energia potenziale è negativa a ogni distanza finita e cresce verso $0$ all'aumentare di $r$: per allontanare $m$ occorre fornire energia. La formula vale anche quando $M$ è una sfera a simmetria sferica, per i punti esterni alla sfera, con $r$ distanza dal suo centro, come si vede con il teorema del guscio sferico. Per esempio, per portare un corpo di $1\,\mathrm{kg}$ dalla superficie terrestre a distanza infinita occorre il lavoro $\dfrac{G M_T m}{R_T} = 6{,}25 \cdot 10^7\,\mathrm{J}$.
 
 :::dimostrazione
 Si calcola il lavoro della forza lungo un cammino qualunque da un punto $A$ a distanza $r_A$ a un punto $B$ a distanza $r_B$. Uno spostamento infinitesimo $d\vec{s}$ si scompone in una parte lungo $\hat{u}_r$, di lunghezza $dr$, e in una parte perpendicolare a $\hat{u}_r$. La forza $\vec{F} = -\dfrac{GMm}{r^2}\,\hat{u}_r$ è radiale, quindi la parte perpendicolare non dà contributo e $\vec{F} \cdot d\vec{s} = -\dfrac{GMm}{r^2}\,dr$. Perciò
 $$
-W_{A \to B} = \int_{r_A}^{r_B} \left( -\frac{GMm}{r^2} \right) dr = G M m \left( \frac{1}{r_B} - \frac{1}{r_A} \right) .
+L_{A \to B} = \int_{r_A}^{r_B} \left( -\frac{GMm}{r^2} \right) dr = G M m \left( \frac{1}{r_B} - \frac{1}{r_A} \right) .
 $$
-Il lavoro dipende solo da $r_A$ e $r_B$, quindi la forza è **conservativa**. Il risultato si scrive $W_{A \to B} = U(r_A) - U(r_B)$ con $U(r) = -\dfrac{GMm}{r} + c$, e la scelta $U(\infty) = 0$ impone $c = 0$.
+Il lavoro dipende solo da $r_A$ e $r_B$, quindi la forza è **conservativa**. Il risultato si scrive $L_{A \to B} = U(r_A) - U(r_B)$ con $U(r) = -\dfrac{GMm}{r} + c$, e la scelta $U(\infty) = 0$ impone $c = 0$.
 :::
 ::::
 
@@ -183,7 +183,7 @@ g(r) =
 $$
 All'esterno la sfera si comporta come una massa puntiforme posta nel centro; all'interno il campo cresce linearmente con $r$ ed è nullo nel centro. Il risultato esterno vale per ogni sfera la cui densità dipende solo dalla distanza dal centro, quindi si applica con buona approssimazione alla Terra e ai pianeti. Per esempio, nel modello omogeneo a metà strada tra la superficie e il centro della Terra il campo vale $\dfrac{g_0}{2} = 4{,}9\,\mathrm{m/s^2}$.
 
-::grafico{f="min(x,1/x^2)" asintoti="x=1" punti="1,1,pieno" etichette="1.1,1.15,r = R" xmin=0 xmax=4 ymin=0 ymax=1.3 nomi="r,g" titolo="Modulo del campo di una sfera omogenea con $R = 1$ e $\dfrac{GM}{R^2} = 1$: cresce linearmente all'interno e decresce come $\dfrac{1}{r^2}$ all'esterno"}
+::grafico{f="min(x,1/x^2)" segmenti="1,0,1,1" punti="1,1,pieno" etichette="1.1,1.15,r = R" xmin=0 xmax=4 ymin=0 ymax=1.3 nomi="r,g" titolo="Modulo del campo di una sfera omogenea con $R = 1$ e $\dfrac{GM}{R^2} = 1$: cresce linearmente all'interno e decresce come $\dfrac{1}{r^2}$ all'esterno"}
 
 :::dimostrazione
 Si suddivide la sfera in gusci concentrici sottili e si applica a ciascuno il **teorema del guscio sferico**. Se $r \geq R$, il punto è esterno a tutti i gusci, e ciascuno attrae come una massa puntiforme posta nel centro; sommando, la sfera attrae come la massa $M$ posta nel centro. Se $r < R$, i gusci di raggio maggiore di $r$ danno campo nullo, mentre quelli di raggio minore di $r$ formano una sfera di raggio $r$. Poiché la densità è uniforme, la massa di questa sfera è proporzionale al volume, cioè $M(r) = M\,\dfrac{r^3}{R^3}$. Quindi
@@ -260,7 +260,7 @@ Il periodo è il tempo per percorrere la circonferenza, $T = \dfrac{2\pi r}{v} =
 :::osservazione{#satellite-geostazionario titolo="Satellite geostazionario"}
 Un satellite **geostazionario** percorre un'orbita circolare nel piano equatoriale, nello stesso verso della rotazione terrestre, con periodo uguale al periodo di rotazione della Terra, il giorno sidereo $T = 86\,164\,\mathrm{s}$; per questo resta sempre sopra lo stesso punto dell'equatore. Dalla formula del periodo
 $$
-r = \sqrt[3]{\frac{G M_T T^2}{4\pi^2}} = 4{,}22 \cdot 10^7\,\mathrm{m} ,
+r = \sqrt[3]{\frac{G M_T T^2}{4\pi^2}} = 4{,}21 \cdot 10^7\,\mathrm{m} ,
 $$
 cioè circa $36\,000\,\mathrm{km}$ di quota. Le antenne dirette verso questi satelliti restano fisse, ed è il motivo per cui sono usati per le telecomunicazioni.
 :::
@@ -333,7 +333,7 @@ Il moto dei pianeti attorno al Sole soddisfa tre leggi.
 - Seconda legge: il segmento che congiunge il Sole al pianeta descrive aree uguali in tempi uguali.
 - Terza legge: il quadrato del periodo di rivoluzione è proporzionale al cubo del semiasse maggiore $a$ dell'orbita, $\dfrac{T^2}{a^3} = k$, con la stessa costante $k$ per tutti i pianeti.
 
-Sono leggi sperimentali, ricavate da Keplero dalle osservazioni di Tycho Brahe e pubblicate tra il $1609$ e il $1619$. Newton le dedusse dalla legge di gravitazione e dai principi della dinamica; la seconda e la terza si ricavano nei teoremi che seguono, la terza nel caso di orbite circolari. Le stesse leggi valgono per le lune attorno a un pianeta e per i satelliti artificiali, con il pianeta al posto del Sole e una costante $k$ diversa.
+Sono leggi sperimentali, ricavate da Keplero dalle osservazioni di Tycho Brahe e pubblicate tra il $1609$ e il $1619$. Newton le dedusse dalla legge di gravitazione e dai principi della dinamica; la seconda si ricava dalla conservazione del momento angolare, la terza, nel caso di orbite circolari, dalla formula del periodo in orbita circolare. Le stesse leggi valgono per le lune attorno a un pianeta e per i satelliti artificiali, con il pianeta al posto del Sole e una costante $k$ diversa.
 
 ::grafico{curve="4*cos(t),3*sin(t),0,6.29" area="0.926*(x-2.646);-0.926*(x-2.646);2.646;3.757|3*sqrt(1-(x/4)^2);-3*sqrt(1-(x/4)^2);3.757;4|0.03346*(2.646-x);-0.03346*(2.646-x);-3.989;2.646|3*sqrt(1-(x/4)^2);-3*sqrt(1-(x/4)^2);-4;-3.989" punti="2.646,0,pieno,S;-2.646,0,vuoto" etichette="3.6,1.6,perielio;-5,1.0,afelio" xmin=-5 xmax=5 ymin=-3.6 ymax=3.6 uguale=1 titolo="Le due regioni colorate hanno la stessa area e sono descritte nello stesso tempo: vicino al perielio il pianeta è più veloce che vicino all'afelio"}
 

@@ -513,6 +513,9 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .grafico .vettore.v1, .grafico .punta.v1 { stroke: var(--c-attenzione); fill: var(--c-attenzione); }
 .grafico .vettore.v2, .grafico .punta.v2 { stroke: var(--inchiostro-2); fill: var(--inchiostro-2); }
 .grafico .punta { stroke: none !important; }
+.grafico .linea { fill: none; stroke: var(--inchiostro); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.grafico .poligono { fill: color-mix(in srgb, var(--accento) 16%, transparent); stroke: color-mix(in srgb, var(--accento) 45%, transparent); stroke-width: 1; }
+.grafico .riferimento line { stroke: var(--inchiostro-2); stroke-width: 1.3; }
 .grafico .etichetta, .grafico .etichetta-vettore { font-family: var(--testo); font-style: italic; font-size: 17px; fill: var(--inchiostro); }
 /* diagrammi di Venn */
 .venn > svg { max-width: 30rem; margin: 0 auto; }

@@ -299,7 +299,7 @@ Perciò $\vec{\tau} = 1{,}9\,\hat{k}\,\mathrm{N\cdot m}$. Il segno positivo indi
 ## Derivata di un vettore
 
 :::richiamo{titolo="Derivata"}
-La derivata di una funzione $f$ nell'istante $t$ è il limite del rapporto incrementale, $\dfrac{df}{dt} = \displaystyle\lim_{\Delta t \to 0} \frac{f(t + \Delta t) - f(t)}{\Delta t}$, quando esiste finito. Per le regole di derivazione si rimanda all'argomento sulle derivate di Analisi 1.
+La derivata di una funzione $f$ nell'istante $t$ è il limite del rapporto incrementale, $\dfrac{df}{dt} = \displaystyle\lim_{\Delta t \to 0} \frac{f(t + \Delta t) - f(t)}{\Delta t}$, quando esiste finito. Per le regole di derivazione si rimanda all'argomento sul calcolo differenziale di Analisi 1.
 :::
 
 :::definizione{#derivata-di-un-vettore titolo="Derivata di un vettore"}

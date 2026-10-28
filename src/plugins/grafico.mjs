@@ -14,6 +14,10 @@ import katex from 'katex';
 //   asintoti="x=0;y=1"            rette tratteggiate verticali o orizzontali
 //   uguale=1                      stessa scala sui due assi (circonferenze rotonde, angoli veri)
 //   nomi="Re,Im"                  nomi degli assi al posto di x, y
+//   linee="0,0 4,0 4,3;…"         spezzate a tratto pieno (contorni di recipienti, piani, pareti): punti "x,y" separati da spazi
+//   poligoni="0,0 4,0 4,2 0,2;…"  regioni chiuse colorate (un liquido, un corpo), punti come in linee
+//   assi=0                        nessun asse cartesiano: per schemi fisici (piano inclinato, recipienti, corpi e forze)
+//   riferimento="x0,y0,30,1.5,x′,y′"  sistema di assi orientati in (x0,y0), ruotato di 30° e lungo 1,5 unità, con i nomi
 //   titolo="…"                    didascalia
 
 const FUNZ = ['sin', 'cos', 'tan', 'exp', 'log', 'sqrt', 'abs', 'atan', 'asin', 'acos', 'sinh', 'cosh', 'tanh', 'floor', 'ceil', 'sign', 'cbrt', 'PI', 'E'];
@@ -144,19 +148,36 @@ export function grafico(a) {
     return `<text class="etichetta" x="${sx(+x).toFixed(1)}" y="${sy(+y).toFixed(1)}">${esc(t.join(',').trim())}</text>`;
   }).join('');
 
+  // Spezzate e poligoni: "x,y x,y …", più elementi separati da ";"
+  const coppie = (s) => s.trim().split(/\s+/).map((p) => p.split(',').map(Number)).filter((p) => p.length === 2 && p.every(Number.isFinite));
+  const percorso = (pts) => pts.map(([x, y], i) => `${i ? 'L' : 'M'}${sx(x).toFixed(1)} ${sy(y).toFixed(1)}`).join(' ');
+  const pol = lista(a.poligoni).map((s) => `<path class="poligono" d="${percorso(coppie(s))} Z"/>`).join('');
+  const lin = lista(a.linee).map((s) => `<path class="linea" d="${percorso(coppie(s))}"/>`).join('');
+  // Sistema di riferimento ruotato (per esempio lungo un piano inclinato)
+  const rif = a.riferimento ? (() => {
+    const [x0, y0, ang, lung, n1 = 'x′', n2 = 'y′'] = String(a.riferimento).split(',').map((t) => t.trim());
+    const t = (Number(ang) * Math.PI) / 180, L = Number(lung || 1.5), X = Number(x0), Y = Number(y0);
+    const x1 = X + L * Math.cos(t), y1 = Y + L * Math.sin(t), x2 = X - L * Math.sin(t), y2 = Y + L * Math.cos(t);
+    return `<g class="riferimento"><line x1="${sx(X).toFixed(1)}" y1="${sy(Y).toFixed(1)}" x2="${sx(x1).toFixed(1)}" y2="${sy(y1).toFixed(1)}" marker-end="url(#${id}-freccia)"/>` +
+      `<line x1="${sx(X).toFixed(1)}" y1="${sy(Y).toFixed(1)}" x2="${sx(x2).toFixed(1)}" y2="${sy(y2).toFixed(1)}" marker-end="url(#${id}-freccia)"/>` +
+      `<text class="nome-asse" x="${(sx(x1) + 6).toFixed(1)}" y="${(sy(y1) + 16).toFixed(1)}">${esc(n1)}</text>` +
+      `<text class="nome-asse" x="${(sx(x2) - 6).toFixed(1)}" y="${(sy(y2) - 8).toFixed(1)}" text-anchor="end">${esc(n2)}</text></g>`;
+  })() : '';
+  const senzaAssi = String(a.assi) === '0';
+
   const punta = (k) => `<marker id="${id}-punta${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta v${k}" d="M0 0 L10 5 L0 10 z"/></marker>`;
   const descr = a.titolo || (a.f ? `Grafico di y = ${a.f}` : 'Figura nel piano cartesiano');
 
   return `<figure class="grafico"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs><marker id="${id}-freccia" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>${punta(0)}${punta(1)}${punta(2)}</defs>
-${aree}<g class="assi">
+${aree}${pol}${senzaAssi ? '' : `<g class="assi">
 <line x1="${m.l - 12}" y1="${oy}" x2="${W - m.r + 12}" y2="${oy}" marker-end="url(#${id}-freccia)"/>
 <line x1="${ox}" y1="${H - m.b + 12}" x2="${ox}" y2="${m.t - 12}" marker-end="url(#${id}-freccia)"/>
 <text class="nome-asse" x="${W - m.r + 14}" y="${oy + 18}">${esc(nx)}</text>
 <text class="nome-asse" x="${ox + 10}" y="${m.t - 10}">${esc(ny)}</text>
 <g class="tacche">${tx}${ty}</g>
 <text x="${ox - 8}" y="${oy + 17}" text-anchor="end">O</text>
-</g>
-${asint}${segm}${curve}${vett}${pt}${etich}
+</g>`}
+${lin}${rif}${asint}${segm}${curve}${vett}${pt}${etich}
 </svg>${a.titolo ? `<figcaption>${didascalia(a.titolo)}</figcaption>` : ''}</figure>`;
 }
