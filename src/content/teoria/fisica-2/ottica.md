@@ -234,7 +234,7 @@ e $m = \dfrac{20}{60} = \dfrac{1}{3}$. L'immagine è virtuale, dalla stessa part
 :::
 
 :::osservazione{#sistemi-di-due-lenti titolo="Sistemi di due lenti"}
-In un sistema di due lenti sottili sullo stesso asse, a distanza $D$, l'immagine data dalla prima lente fa da oggetto per la seconda, a distanza $p_2 = D - q_1$; se $p_2 < 0$, l'oggetto per la seconda lente è virtuale. L'ingrandimento complessivo è il prodotto $m = m_1 m_2$. Per due lenti a contatto si ha $p_2 = -q_1$, e sommando le due equazioni si ottiene che i poteri diottrici si **sommano**.
+In un sistema di due lenti sottili sullo stesso asse, a distanza $D$, l'immagine data dalla prima lente fa da oggetto per la seconda, a distanza $p_2 = D - q_1$; se $p_2 < 0$, l'oggetto per la seconda lente è virtuale. L'ingrandimento complessivo è il prodotto $m = m_1 m_2$. Per due lenti a contatto si ha $p_2 = -q_1$, e sommando le equazioni delle due lenti si ottiene che i poteri diottrici si **sommano**.
 :::
 
 ## Interferenza ed esperimento di Young

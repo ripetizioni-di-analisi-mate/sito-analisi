@@ -137,7 +137,7 @@ v(t) = v_0\,e^{-\frac{t}{\tau}} , \qquad \tau = \frac{m R}{B^2 \ell^2} .
 $$
 La sbarretta si ferma solo asintoticamente, dopo aver percorso lo spazio $v_0 \tau$. Con $m = 0{,}10\,\mathrm{kg}$, $R = 0{,}50\,\mathrm{\Omega}$, $B = 0{,}50\,\mathrm{T}$, $\ell = 0{,}40\,\mathrm{m}$ e $v_0 = 2{,}0\,\mathrm{m/s}$ si ha $\tau = 1{,}25\,\mathrm{s}$, e lo spazio percorso è $2{,}5\,\mathrm{m}$.
 
-::grafico{f="exp(-x)" segmenti="0,1,1,0" punti="0,1,pieno;1,0.368,pieno" xmin=-0.3 xmax=4.6 ymin=-0.2 ymax=1.3 nomi="t,v" legenda="v(t) = v_0\,e^{-\frac{t}{\tau}}" titolo="Velocità della sbarretta, in unità di $v_0$, con il tempo in unità di $\tau$: la tangente nell'origine incontra l'asse dei tempi in $t = \tau$, dove $v = \dfrac{v_0}{e} \approx 0{,}37\,v_0$"}
+::grafico{f="exp(-x)+0*sqrt(x)" segmenti="0,1,1,0" punti="0,1,pieno;1,0.368,pieno" xmin=-0.3 xmax=4.6 ymin=-0.2 ymax=1.3 nomi="t,v" legenda="v(t) = v_0\,e^{-\frac{t}{\tau}}" titolo="Velocità della sbarretta, in unità di $v_0$, con il tempo in unità di $\tau$: la tangente nell'origine incontra l'asse dei tempi in $t = \tau$, dove $v = \dfrac{v_0}{e} \approx 0{,}37\,v_0$"}
 
 :::dimostrazione
 Per il teorema sulla f.e.m. di una sbarretta in moto, nel circuito agisce la f.e.m. $B \ell v$, quindi circola la corrente $I = \dfrac{B \ell v}{R}$. Sulla sbarretta percorsa da corrente agisce la forza $I\,\vec{\ell} \times \vec{B}$, di modulo $I \ell B = \dfrac{B^2 \ell^2 v}{R}$; per la legge di Lenz la forza si oppone al moto, perché la corrente indotta si oppone all'aumento dell'area del circuito. Il peso e la reazione dei binari sono perpendicolari al moto, perciò il **secondo principio della dinamica** lungo i binari dà
@@ -294,7 +294,7 @@ i(t) = \frac{\mathcal{E}}{R} \left( 1 - e^{-\frac{t}{\tau}} \right) , \qquad \ta
 $$
 La grandezza $\tau$ è la **costante di tempo** del circuito. All'istante della chiusura la corrente è nulla e la sua derivata vale $\dfrac{\mathcal{E}}{L}$, perché tutta la f.e.m. del generatore è bilanciata dalla f.e.m. autoindotta; per $t \to +\infty$ la corrente tende a $\dfrac{\mathcal{E}}{R}$, come in un circuito senza induttore. Con $\mathcal{E} = 6{,}0\,\mathrm{V}$, $R = 3{,}0\,\mathrm{\Omega}$ e $L = 0{,}12\,\mathrm{H}$ si ha $\tau = 40\,\mathrm{ms}$, la corrente di regime è $2{,}0\,\mathrm{A}$ e dopo un tempo $\tau$ la corrente vale $2{,}0 \cdot (1 - e^{-1})\,\mathrm{A} \approx 1{,}3\,\mathrm{A}$.
 
-::grafico{f="1-exp(-x);exp(-x)" asintoti="y=1" segmenti="1,0,1,0.632;0,0.632,1,0.632" punti="1,0.632,pieno;1,0.368,pieno" xmin=-0.3 xmax=5.2 ymin=-0.2 ymax=1.35 nomi="t,i" legenda="\text{chiusura: } 1 - e^{-\frac{t}{\tau}};\text{apertura: } e^{-\frac{t}{\tau}}" titolo="Corrente nel circuito RL, in unità del valore di regime, con il tempo in unità di $\tau$: dopo un tempo $\tau$ la corrente ha raggiunto il $63\,\%$ del valore finale alla chiusura e si è ridotta al $37\,\%$ all'apertura"}
+::grafico{f="1-exp(-x)+0*sqrt(x);exp(-x)+0*sqrt(x)" asintoti="y=1" segmenti="1,0,1,0.632;0,0.632,1,0.632" punti="1,0.632,pieno;1,0.368,pieno" xmin=-0.3 xmax=5.2 ymin=-0.2 ymax=1.35 nomi="t,i" legenda="\text{chiusura: } 1 - e^{-\frac{t}{\tau}};\text{apertura: } e^{-\frac{t}{\tau}}" titolo="Corrente nel circuito RL, in unità del valore di regime, con il tempo in unità di $\tau$: dopo un tempo $\tau$ la corrente ha raggiunto il $63\,\%$ del valore finale alla chiusura e si è ridotta al $37\,\%$ all'apertura"}
 
 :::dimostrazione
 Per la legge delle maglie con un induttore
