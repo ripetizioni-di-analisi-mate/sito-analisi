@@ -128,7 +128,7 @@ The values of $f$ at *all* the candidates are computed and compared: the largest
 :::
 
 :::osservazione{#studio-della-frontiera titolo="Study of the boundary"}
-The restriction of $f$ to the boundary is a function of one variable, to be studied with the methods of Calculus 1. The two techniques are substitution and parametrization.
+The restriction of $f$ to the boundary is a function of one variable, to be studied with the methods of Mathematical Analysis 1. The two techniques are substitution and parametrization.
 
 - **Substitution**: on the pieces where the boundary is a graph, one variable is obtained from the equation of the boundary and substituted. On the segment $y = 2$, $x \in [0, 3]$ one studies $g(x) = f(x, 2)$ on $[0, 3]$; on the circle $x^2 + y^2 = 1$ one can substitute $y^2 = 1 - x^2$ with $x \in [-1, 1]$, when $f$ depends on $y$ only through $y^2$.
 - **Parametrization**: the boundary is described by a parameter and the composite function is studied. For the circle $x^2 + y^2 = r^2$ one sets $x = r\cos t$, $y = r\sin t$ with $t \in [0, 2\pi]$ and studies $g(t) = f(r\cos t, r\sin t)$.
@@ -139,7 +139,7 @@ If the boundary consists of several pieces, such as the sides of a rectangle or 
 :::esempio{titolo="Absolute extrema on a square"}
 $f(x, y) = xy$ on the square $K = [0, 1] \times [0, 1]$. The function is continuous and $K$ is compact, therefore by **Weierstrass's theorem** the maximum and minimum exist. The only critical point is the origin, which is *not* interior to $K$, therefore the extrema are on the boundary. On the sides $x = 0$ and $y = 0$ we have $f = 0$; on the side $x = 1$ the restriction is $g(y) = y$, increasing on $[0, 1]$, with values from $0$ to $1$; on the side $y = 1$ the restriction is $g(x) = x$, with the same values. The comparison gives the **absolute maximum** $1$ at $(1, 1)$ and the **absolute minimum** $0$, attained at all points of the two sides on the axes.
 
-::grafico{curve="(t+abs(t))/2,(abs(t)-t)/2,-1,1" area="1;0;0;1" punti="1,1,pieno,massimo 1" etichette="0.3,-0.27,minimum 0" xmin=-0.4 xmax=1.6 ymin=-0.4 ymax=1.5 uguale=1 titolo="The square $K = [0, 1] \times [0, 1]$: $f(x, y) = xy$ has maximum $1$ at the vertex $(1, 1)$ and minimum $0$ on the two sides lying on the axes (in color)"}
+::grafico{curve="(t+abs(t))/2,(abs(t)-t)/2,-1,1" area="1;0;0;1" punti="1,1,pieno,maximum 1" etichette="0.3,-0.27,minimum 0" xmin=-0.4 xmax=1.6 ymin=-0.4 ymax=1.5 uguale=1 titolo="The square $K = [0, 1] \times [0, 1]$: $f(x, y) = xy$ has maximum $1$ at the vertex $(1, 1)$ and minimum $0$ on the two sides lying on the axes (in color)"}
 
 :::
 
@@ -202,7 +202,7 @@ From the first two equations $\lambda \neq 0$ and $x = y = \dfrac{1}{2\lambda}$;
 :::
 
 :::attenzione
-The hypothesis $\nabla g \neq (0, 0)$ can*not* be omitted. On the curve $g(x, y) = y^3 - x^2 = 0$ the function $f(x, y) = y$ has a **constrained minimum** at the origin, because on the constraint $y = x^{2/3} \geq 0$; the Lagrange system requires $(0, 1) = \lambda\,(-2x, 3y^2)$, which at the origin becomes $(0, 1) = (0, 0)$ and has no solution. The point escapes the system because $\nabla g(0, 0) = (0, 0)$: the points of the constraint where the gradient of $g$ vanishes must be **added by hand** to the candidates.
+The hypothesis $\nabla g \neq (0, 0)$ *cannot* be omitted. On the curve $g(x, y) = y^3 - x^2 = 0$ the function $f(x, y) = y$ has a **constrained minimum** at the origin, because on the constraint $y = x^{2/3} \geq 0$; the Lagrange system requires $(0, 1) = \lambda\,(-2x, 3y^2)$, which at the origin becomes $(0, 1) = (0, 0)$ and has no solution. The point escapes the system because $\nabla g(0, 0) = (0, 0)$: the points of the constraint where the gradient of $g$ vanishes must be **added by hand** to the candidates.
 
 ::grafico{f="cbrt(x*x)" punti="0,0,pieno" xmin=-2 xmax=2 ymin=-0.6 ymax=2 titolo="The constraint $y^3 - x^2 = 0$, that is $y = \sqrt[3]{x^2}$: the function $f(x, y) = y$ has a constrained minimum at the origin, where $\nabla g = (0, 0)$ and the curve has a cusp"}
 

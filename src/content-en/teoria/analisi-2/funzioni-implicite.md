@@ -122,7 +122,7 @@ If $F$ is differentiable and $t \mapsto (x(t), y(t))$ is differentiable, then $h
 :::
 
 :::esempio{titolo="Practical method: differentiating the identity"}
-In exercises it is convenient to **differentiate the identity** $F(x, \varphi(x)) = 0$ **twice** instead of applying the formula. For the circle $x^2 + y^2 = 1$, with $y = \varphi(x)$, the first differentiation gives $2x + 2y\,y' = 0$, from which $y' = -\dfrac{x}{y}$. Differentiating again we obtain $2 + 2(y')^2 + 2y\,y'' = 0$, hence
+In exercises it is convenient to **differentiate twice the identity** $F(x, \varphi(x)) = 0$ instead of applying the formula. For the circle $x^2 + y^2 = 1$, with $y = \varphi(x)$, the first differentiation gives $2x + 2y\,y' = 0$, from which $y' = -\dfrac{x}{y}$. Differentiating again we obtain $2 + 2(y')^2 + 2y\,y'' = 0$, hence
 $$
 y'' = -\,\frac{1 + (y')^2}{y}
 = -\,\frac{1 + \dfrac{x^2}{y^2}}{y}
