@@ -331,7 +331,7 @@ Per $k = 1$ si ritrova $A$, e questo conferma il calcolo.
 Quando $A$ dipende da un parametro reale $k$, la diagonalizzabilità si discute seguendo il **criterio di diagonalizzabilità** e distinguendo i casi.
 
 - Si calcola $p_A(\lambda)$ cercando di fattorizzarlo con $k$ trattato come costante; spesso uno sviluppo di Laplace lungo una riga con molti zeri isola subito un fattore.
-- Si individuano i valori di $k$ per cui alcune radici non sono reali, e per essi la matrice non è diagonalizzabile, e quelli per cui due autovalori coincidono.
+- Si individuano i valori di $k$ per cui alcune radici non sono reali, per i quali la matrice non è diagonalizzabile, e quelli per cui due autovalori coincidono.
 - Per i valori di $k$ con autovalori reali e distinti la matrice è diagonalizzabile.
 - Per ciascun valore di $k$ con un autovalore multiplo si sostituisce $k$ nella matrice e si calcola $m_g$ con il rango.
 

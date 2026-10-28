@@ -91,7 +91,7 @@ La serie armonica
 $$
 \sum_{n=1}^{\infty} \frac{1}{n}
 $$
-**diverge** a $+\infty$, *anche se* il termine generale tende a $0$. È il termine di confronto per molte serie divergenti ed è il controesempio che mostra la non sufficienza della condizione necessaria.
+**diverge** a $+\infty$, *anche se* il termine generale tende a $0$. È il termine di confronto per molte serie divergenti ed è il controesempio che mostra che un termine generale infinitesimo non basta per la convergenza.
 
 :::dimostrazione
 Si raggruppano i termini in blocchi: per ogni $k \geq 1$, il blocco dei termini di indice da $2^{k-1} + 1$ a $2^k$ contiene $2^{k-1}$ termini, ciascuno maggiore o uguale a $\dfrac{1}{2^k}$, quindi
@@ -178,7 +178,7 @@ Se $0 \leq a_n \leq b_n$ definitivamente: la convergenza di $\sum b_n$ implica q
 :::
 
 :::esempio{titolo="Limiti notevoli nel confronto asintotico"}
-$\displaystyle\sum_{n=1}^{\infty} \sin \frac{1}{n}$ **diverge**: poiché $\dfrac{1}{n} \to 0$, per il **limite notevole del seno** $\sin \dfrac{1}{n} \sim \dfrac{1}{n}$, e la serie armonica diverge. $\displaystyle\sum_{n=1}^{\infty} \left( 1 - \cos \frac{1}{n} \right)$ **converge**: $1 - \cos \dfrac{1}{n} \sim \dfrac{1}{2n^2}$ e $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ converge.
+$\displaystyle\sum_{n=1}^{\infty} \sin \frac{1}{n}$ **diverge**. Poiché $\dfrac{1}{n} \to 0$, per il **limite notevole del seno** $\sin \dfrac{1}{n} \sim \dfrac{1}{n}$, e la serie armonica diverge. $\displaystyle\sum_{n=1}^{\infty} \left( 1 - \cos \frac{1}{n} \right)$ **converge**, perché $1 - \cos \dfrac{1}{n} \sim \dfrac{1}{2n^2}$ e $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ converge.
 :::
 
 :::teorema{#criterio-del-rapporto titolo="Criterio del rapporto"}
@@ -215,7 +215,7 @@ Il criterio collega le serie agli **integrali impropri**, per i quali si rimanda
 ## Serie a segno variabile
 
 :::teorema{#convergenza-assoluta titolo="Convergenza assoluta"}
-La serie $\sum a_n$ **converge assolutamente** se converge la serie dei moduli $\sum |a_n|$. La convergenza assoluta *implica* la convergenza, e vale
+La serie $\sum a_n$ **converge assolutamente** se converge la serie dei moduli $\sum |a_n|$. La convergenza assoluta *implica* la convergenza, e vale la disuguaglianza
 $$
 \left| \sum_{n=1}^{\infty} a_n \right| \leq \sum_{n=1}^{\infty} |a_n| .
 $$

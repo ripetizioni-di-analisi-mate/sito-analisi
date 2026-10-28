@@ -175,7 +175,7 @@ $$
 $$
 dove $I_{\text{conc}}$ è la **corrente concatenata** con $\gamma$, cioè la somma algebrica delle correnti che attraversano una superficie che ha $\gamma$ come bordo. La legge si ricava dalla legge di Biot-Savart per correnti stazionarie; la dimostrazione generale richiede il calcolo vettoriale e si omette, mentre nel caso di un filo rettilineo infinito la legge si controlla con il calcolo diretto della circuitazione.
 
-La legge di Ampère ha due usi. Il primo è qualitativo: la circuitazione di $\vec{B}$ lungo una curva che abbraccia una corrente è diversa da zero, quindi il campo magnetico **non è conservativo** e non ammette un potenziale come il campo elettrostatico. Il secondo è il calcolo del campo nelle distribuzioni con simmetria elevata: se si trova una curva lungo la quale $\vec{B}$ è tangente e di modulo costante, la circuitazione è $B$ per la lunghezza della curva, e la legge dà direttamente $B$. Per esempio, lungo la circonferenza di raggio $d$ centrata su un filo infinito il campo è tangente e di modulo costante, quindi $B \cdot 2\pi d = \mu_0 I$, e si ritrova $B = \dfrac{\mu_0 I}{2\pi d}$.
+La circuitazione di $\vec{B}$ lungo una curva che abbraccia una corrente è diversa da zero, quindi il campo magnetico **non è conservativo** e non ammette un potenziale come il campo elettrostatico. Nelle distribuzioni con simmetria elevata la legge dà il campo: se lungo una curva $\vec{B}$ è tangente e di modulo costante, la circuitazione è $B$ per la lunghezza della curva.
 :::
 
 :::osservazione{#corrente-concatenata titolo="Segno delle correnti concatenate"}
@@ -346,15 +346,13 @@ Si consideri un solenoide lungo riempito di un materiale omogeneo. Il campo inte
 $$
 B = \mu_r\, \mu_0\, n I , \qquad \mu_r = 1 + \chi_m .
 $$
-La costante $\mu_r$ è la **permeabilità magnetica relativa** del materiale, e ha per il campo magnetico un ruolo analogo a quello della costante dielettrica relativa $\varepsilon_r$, con una differenza: nei materiali con $\mu_r > 1$ il campo aumenta, mentre un dielettrico riduce il campo elettrico. Per esempio, in un solenoide vuoto con $500$ spire per metro e $I = 0{,}40\,\mathrm{A}$ il campo vale $2{,}5 \cdot 10^{-4}\,\mathrm{T}$; un nucleo di ferro che in queste condizioni ha $\mu_r \approx 2000$ lo porta a circa $0{,}50\,\mathrm{T}$.
+La costante $\mu_r$ è la **permeabilità magnetica relativa** del materiale, analoga alla costante dielettrica relativa $\varepsilon_r$. Per esempio, in un solenoide vuoto con $500$ spire per metro e $I = 0{,}40\,\mathrm{A}$ il campo vale $2{,}5 \cdot 10^{-4}\,\mathrm{T}$; un nucleo di ferro che in queste condizioni ha $\mu_r \approx 2000$ lo porta a circa $0{,}50\,\mathrm{T}$.
 :::
 
 :::osservazione{#classi-materiali-magnetici titolo="Diamagneti, paramagneti e ferromagneti"}
-I materiali si dividono in tre classi secondo il comportamento in un campo esterno.
-
-- Nei **diamagneti**, come il rame, l'acqua e il bismuto, la suscettività è negativa e molto piccola in valore assoluto, dell'ordine di $10^{-5}$: la magnetizzazione è opposta al campo applicato e il materiale è debolmente respinto dalle zone di campo intenso.
-- Nei **paramagneti**, come l'alluminio e l'ossigeno, la suscettività è positiva e piccola: i momenti magnetici atomici si orientano parzialmente nel verso del campo, contrastati dall'agitazione termica, e il materiale è debolmente attratto.
-- Nei **ferromagneti**, come il ferro, il nichel e il cobalto, i momenti atomici sono allineati in regioni estese, i domini magnetici, e la permeabilità relativa raggiunge valori da centinaia a decine di migliaia. La relazione tra $M$ e $nI$ *non* è lineare e dipende dalla storia del materiale (isteresi), e una magnetizzazione può restare anche quando la corrente si annulla: così funzionano i magneti permanenti.
+- Nei **diamagneti**, come il rame, l'acqua e il bismuto, la suscettività è negativa e molto piccola in valore assoluto, quindi la magnetizzazione è opposta al campo applicato e il materiale è debolmente respinto dalle zone di campo intenso.
+- Nei **paramagneti**, come l'alluminio e l'ossigeno, la suscettività è positiva e piccola, perché i momenti magnetici atomici si orientano solo in parte nel verso del campo, contrastati dall'agitazione termica.
+- Nei **ferromagneti**, come il ferro, il nichel e il cobalto, i momenti atomici sono allineati in regioni estese, i domini magnetici, e la permeabilità relativa raggiunge valori da centinaia a decine di migliaia. La relazione tra $M$ e $nI$ *non* è lineare e dipende dalla storia del materiale (isteresi), e una magnetizzazione può restare anche a corrente nulla, come nei magneti permanenti.
 
 Al di sopra di una temperatura caratteristica, la **temperatura di Curie**, un ferromagnete diventa paramagnete; per il ferro vale circa $770\,^\circ\mathrm{C}$. Nei diamagneti e nei paramagneti $\mu_r$ è molto vicina a $1$, e nei calcoli si usa di solito $\mu_0$ come nel vuoto.
 :::
