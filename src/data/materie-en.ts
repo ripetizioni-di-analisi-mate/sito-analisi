@@ -68,5 +68,24 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'coniche-e-quadriche': { titolo: 'Conics and quadrics', breve: 'Conics and quadrics' },
     },
   },
+  'fisica-1': {
+    titolo: 'Physics 1',
+    breve: 'Physics 1',
+    descrizione: 'Kinematics, dynamics of particles and rigid bodies, work and energy, collisions, oscillations, gravitation, fluids and thermodynamics.',
+    argomenti: {
+      'grandezze-e-vettori': { titolo: 'Physical quantities, units and vectors', breve: 'Quantities and vectors' },
+      'cinematica-1d': { titolo: 'Kinematics in one dimension', breve: '1D kinematics' },
+      'moto-nel-piano': { titolo: 'Motion in a plane: projectiles and circular motion', breve: 'Motion in a plane' },
+      'leggi-di-newton': { titolo: 'Newton’s laws and forces', breve: 'Newton’s laws' },
+      'lavoro-ed-energia': { titolo: 'Work and energy', breve: 'Work and energy' },
+      'oscillazioni': { titolo: 'Oscillations and harmonic motion', breve: 'Oscillations' },
+      'quantita-di-moto': { titolo: 'Systems of particles, momentum and collisions', breve: 'Momentum and collisions' },
+      'corpo-rigido': { titolo: 'Rigid body dynamics', breve: 'Rigid body' },
+      'gravitazione': { titolo: 'Gravitation', breve: 'Gravitation' },
+      'fluidi': { titolo: 'Fluid mechanics', breve: 'Fluids' },
+      'primo-principio': { titolo: 'Temperature, heat and the first law of thermodynamics', breve: 'First law' },
+      'secondo-principio': { titolo: 'Second law, heat engines and entropy', breve: 'Second law' },
+    },
+  },
 };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };

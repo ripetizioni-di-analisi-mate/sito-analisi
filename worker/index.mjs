@@ -375,6 +375,7 @@ export default {
             'analisi-1': env.PADDLE_PREZZO_ANALISI_1 || null,
             'analisi-2': env.PADDLE_PREZZO_ANALISI_2 || null,
             'algebra-lineare': env.PADDLE_PREZZO_ALGEBRA_LINEARE || null,
+            'fisica-1': env.PADDLE_PREZZO_FISICA_1 || null,
           },
         } : null,
       });

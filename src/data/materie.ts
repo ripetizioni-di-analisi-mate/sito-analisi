@@ -100,6 +100,29 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'coniche-e-quadriche', titolo: 'Coniche e quadriche', breve: 'Coniche e quadriche' },
     ],
   },
+  {
+    slug: 'fisica-1',
+    titolo: 'Fisica 1',
+    breve: 'Fisica 1',
+    descrizione: 'Cinematica, dinamica del punto e del corpo rigido, lavoro ed energia, urti, oscillazioni, gravitazione, fluidi e termodinamica.',
+    colore: '#b0543a',
+    gruppo: 'Università',
+    attiva: false, // diventa true quando gli argomenti sono scritti e verificati
+    argomenti: [
+      { slug: 'grandezze-e-vettori', titolo: 'Grandezze fisiche, unità di misura e vettori', breve: 'Grandezze e vettori' },
+      { slug: 'cinematica-1d', titolo: 'Cinematica in una dimensione', breve: 'Cinematica 1D' },
+      { slug: 'moto-nel-piano', titolo: 'Moto nel piano: proiettile e moto circolare', breve: 'Moto nel piano' },
+      { slug: 'leggi-di-newton', titolo: 'Leggi di Newton e forze', breve: 'Leggi di Newton' },
+      { slug: 'lavoro-ed-energia', titolo: 'Lavoro ed energia', breve: 'Lavoro ed energia' },
+      { slug: 'oscillazioni', titolo: 'Oscillazioni e moto armonico', breve: 'Oscillazioni' },
+      { slug: 'quantita-di-moto', titolo: 'Sistemi di punti, quantità di moto e urti', breve: 'Quantità di moto e urti' },
+      { slug: 'corpo-rigido', titolo: 'Dinamica del corpo rigido', breve: 'Corpo rigido' },
+      { slug: 'gravitazione', titolo: 'Gravitazione', breve: 'Gravitazione' },
+      { slug: 'fluidi', titolo: 'Meccanica dei fluidi', breve: 'Fluidi' },
+      { slug: 'primo-principio', titolo: 'Temperatura, calore e primo principio della termodinamica', breve: 'Primo principio' },
+      { slug: 'secondo-principio', titolo: 'Secondo principio, macchine termiche ed entropia', breve: 'Secondo principio' },
+    ],
+  },
 ];
 
 export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));
