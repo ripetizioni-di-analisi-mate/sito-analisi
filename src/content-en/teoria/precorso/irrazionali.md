@@ -6,7 +6,7 @@ sommario: The domain conditions of roots and the systems that solve equations an
 ## Domain conditions
 
 :::definizione{#condizioni-di-esistenza titolo="Domain conditions for roots of even index"}
-The expression $\sqrt{A}$, like every root of even index, is meaningful only if $A \geq 0$, and its value is by definition the nonnegative number whose square is $A$; so $\sqrt{A} \geq 0$ at every point where the root is defined. For example, $\sqrt{x - 2}$ is defined for $x \geq 2$, and $\sqrt{9} = 3$, not $\pm 3$. In the solving systems of this chapter the condition $A \geq 0$ appears explicitly or is a consequence of the other conditions, and in either case it must be checked.
+The expression $\sqrt{A}$, like every root of even index, is meaningful *only if* $A \geq 0$, and its value is by definition the **nonnegative** number whose square is $A$; so $\sqrt{A} \geq 0$ at every point where the root is defined. For example, $\sqrt{x - 2}$ is defined for $x \geq 2$, and $\sqrt{9} = 3$, not $\pm 3$. In the solving systems of this chapter the condition $A \geq 0$ appears explicitly or is a consequence of the other conditions, and in either case it must be checked.
 :::
 
 ## The equation √A = B
@@ -19,7 +19,7 @@ B \geq 0 \\
 A = B^2
 \end{cases}
 $$
-The left-hand side is not negative, so the equation requires $B \geq 0$; with both sides nonnegative, squaring preserves the equality in both directions. The domain condition $A \geq 0$ need not be added, because from $A = B^2$ it follows that $A \geq 0$.
+The left-hand side is *not* negative, so the equation requires $B \geq 0$; with both sides nonnegative, squaring preserves the equality in both directions. The domain condition $A \geq 0$ need not be added, because from $A = B^2$ it follows that $A \geq 0$.
 :::
 
 :::esempio
@@ -30,11 +30,11 @@ x + 1 \geq 0 \\
 x + 3 = (x + 1)^2
 \end{cases}
 $$
-The second equation is $x^2 + x - 2 = 0$, with roots $x = 1$ and $x = -2$. Since $-2 + 1 = -1 < 0$, the value $x = -2$ does not satisfy the first condition and is discarded; the solution is $x = 1$, and indeed $\sqrt{4} = 2 = 1 + 1$.
+The second equation is $x^2 + x - 2 = 0$, with roots $x = 1$ and $x = -2$. Since $-2 + 1 = -1 < 0$, the value $x = -2$ does not satisfy the first condition and is **discarded**; the solution is $x = 1$, and indeed $\sqrt{4} = 2 = 1 + 1$.
 :::
 
 :::attenzione
-Squaring both sides without the condition $B \geq 0$ introduces extraneous solutions. From $\sqrt{x} = x - 2$, squaring gives $x = x^2 - 4x + 4$, that is, $x^2 - 5x + 4 = 0$, with roots $x = 1$ and $x = 4$. For $x = 1$ the left-hand side equals $\sqrt{1} = 1$ and the right-hand side equals $1 - 2 = -1$, so $x = 1$ does not solve the original equation; the only solution is $x = 4$. Squaring cancels signs, therefore the equality between the squares does not guarantee the equality between the two sides.
+Squaring both sides without the condition $B \geq 0$ introduces **extraneous solutions**. From $\sqrt{x} = x - 2$, squaring gives $x = x^2 - 4x + 4$, that is, $x^2 - 5x + 4 = 0$, with roots $x = 1$ and $x = 4$. For $x = 1$ the left-hand side equals $\sqrt{1} = 1$ and the right-hand side equals $1 - 2 = -1$, so $x = 1$ does not solve the original equation; the **only solution** is $x = 4$. Squaring cancels signs, therefore the equality between the squares does *not* guarantee the equality between the two sides.
 :::
 
 ## The equation with two roots
@@ -58,7 +58,7 @@ x + 4 \geq 0 \\
 3x - 2 = x + 4
 \end{cases}
 $$
-The equation gives $x = 3$, which satisfies the condition since $3 + 4 = 7 \geq 0$; the solution is $x = 3$, and the two radicands both equal $7$.
+The equation gives $x = 3$, which **satisfies the condition** since $3 + 4 = 7 \geq 0$; the solution is $x = 3$, and the two radicands both equal $7$.
 :::
 
 ## The inequality √A < B
@@ -72,7 +72,7 @@ B > 0 \\
 A < B^2
 \end{cases}
 $$
-The condition $A \geq 0$ is the domain condition of the root. Since $\sqrt{A} \geq 0$, the inequality requires $B > 0$; with both sides nonnegative, squaring preserves the direction and gives $A < B^2$. For $\sqrt{A} \leq B$ the system is the same with $B \geq 0$ and $A \leq B^2$.
+The condition $A \geq 0$ is the **domain condition** of the root. Since $\sqrt{A} \geq 0$, the inequality requires $B > 0$; with both sides nonnegative, squaring **preserves the direction** and gives $A < B^2$. For $\sqrt{A} \leq B$ the system is the same with $B \geq 0$ and $A \leq B^2$.
 :::
 
 :::esempio
@@ -89,7 +89,7 @@ x \geq -2 \\
 x < 7
 \end{cases}
 $$
-The condition $3 > 0$ is true for every $x$, so the solution is $-2 \leq x < 7$.
+The condition $3 > 0$ is true for *every* $x$, so the solution is $-2 \leq x < 7$.
 :::
 
 ## The inequality √A > B
@@ -107,7 +107,7 @@ B \geq 0 \\
 A > B^2
 \end{cases}
 $$
-Where $B < 0$ it is enough for the root to exist, because a nonnegative number exceeds every negative number. Where $B \geq 0$ the two sides are nonnegative, so squaring preserves the direction; the condition $A \geq 0$ need not be added in the second system, because it follows from $A > B^2 \geq 0$. For $\sqrt{A} \geq B$ one writes $A \geq B^2$ in the second system.
+Where $B < 0$ it is enough for the root to **exist**, because a nonnegative number exceeds *every* negative number. Where $B \geq 0$ the two sides are nonnegative, so squaring preserves the direction; the condition $A \geq 0$ need not be added in the second system, because it follows from $A > B^2 \geq 0$. For $\sqrt{A} \geq B$ one writes $A \geq B^2$ in the second system.
 :::
 
 :::esempio
@@ -123,13 +123,13 @@ x \geq 0 \\
 2x + 3 > x^2
 \end{cases}
 $$
-The first system gives $-\dfrac{3}{2} \leq x < 0$. In the second, the inequality $x^2 - 2x - 3 < 0$ is equivalent to $-1 < x < 3$, so with $x \geq 0$ the values $0 \leq x < 3$ remain. The union of the two systems gives $-\dfrac{3}{2} \leq x < 3$.
+The first system gives $-\dfrac{3}{2} \leq x < 0$. In the second, the inequality $x^2 - 2x - 3 < 0$ is equivalent to $-1 < x < 3$, so with $x \geq 0$ the values $0 \leq x < 3$ remain. The **union** of the two systems gives $-\dfrac{3}{2} \leq x < 3$.
 :::
 
 ## Roots of odd index
 
 :::teorema{#indice-dispari titolo="Roots of odd index"}
-The cube root, like every root of odd index, is defined for every real number and can take negative values: $\sqrt[3]{-8} = -2$. Cubing always preserves order, because the function $y = x^3$ is increasing on all of $\mathbb{R}$, so
+The cube root, like every root of odd index, is defined for *every* real number and can take negative values: $\sqrt[3]{-8} = -2$. Cubing **always preserves order**, because the function $y = x^3$ is increasing on all of $\mathbb{R}$, so
 $$
 \sqrt[3]{A} = B \iff A = B^3 , \qquad\qquad \sqrt[3]{A} < B \iff A < B^3 ,
 $$
@@ -137,5 +137,5 @@ with no domain conditions and no cases on the sign of the two sides.
 :::
 
 :::esempio
-$\sqrt[3]{x - 3} = -2$ is equivalent to $x - 3 = -8$, so $x = -5$; the check gives $\sqrt[3]{-8} = -2$. The analogous equation with the square root, $\sqrt{x - 3} = -2$, has no solutions, because a root of even index is never negative.
+$\sqrt[3]{x - 3} = -2$ is equivalent to $x - 3 = -8$, so $x = -5$; the check gives $\sqrt[3]{-8} = -2$. The analogous equation with the square root, $\sqrt{x - 3} = -2$, has **no solutions**, because a root of even index is *never* negative.
 :::
