@@ -332,7 +332,7 @@ All'istante iniziale la corrente vale $\dfrac{\mathcal{E}}{R}$, come se il conde
 
 ::grafico{assi=0 uguale=1 linee="0,0 0,1.41;0,1.59 0,3;-0.36,1.59 0.36,1.59;-0.19,1.41 0.19,1.41;0,3 0.8,3 1.32,3.32;1.4,3 2.2,3;2.2,3 3.3,3 3.383,3.17 3.55,2.83 3.717,3.17 3.883,2.83 4.05,3.17 4.217,2.83 4.3,3 5.4,3;5.4,3 5.6,3;5.6,3 5.6,1.6;5.6,1.4 5.6,0;5.28,1.4 5.92,1.4;5.28,1.6 5.92,1.6;5.6,0 0,0" vettori="5.95,2.7,5.95,2" punti="0.8,3,vuoto;1.4,3,vuoto" etichette="0.45,1.69,+;0.45,1.09,−;-0.65,1.43,ℰ;1,3.55,T;3.58,3.38,R;5,1.43,C;6.05,1.62,+q;6.05,1.12,−q;6.09,2.28,i" xmin=-1.4 xmax=7.0 ymin=-0.6 ymax=3.8 titolo="Circuito RC: alla chiusura dell'interruttore $T$ il generatore carica il condensatore attraverso il resistore"}
 
-::grafico{f="12*(1-exp(-x));12*exp(-x)" asintoti="y=12" punti="1,7.585,pieno" segmenti="1,0,1,7.585" xmin=-0.4 xmax=5.6 ymin=-0.8 ymax=14 nomi="t,V" legenda="\Delta V_C = \mathcal{E}\,\big( 1 - e^{-\frac{t}{\tau}} \big);\Delta V_R = \mathcal{E}\, e^{-\frac{t}{\tau}}" titolo="Carica con $\mathcal{E} = 12\,\mathrm{V}$ e $\tau = 1{,}0\,\mathrm{s}$, tempo in secondi e tensioni in volt: la tensione sul condensatore sale verso $\mathcal{E}$, quella sul resistore, proporzionale alla corrente, scende a zero; per $t = \tau$ il condensatore è al $63\,\%$"}
+::grafico{f="12*(1-exp(-x));12*exp(-x)" asintoti="y=12" punti="1,7.585,pieno" segmenti="1,0,1,7.585" xmin=-0.4 xmax=5.6 ymin=-0.8 ymax=13.4 nomi="t,V" legenda="\Delta V_C = \mathcal{E}\,\big( 1 - e^{-\frac{t}{\tau}} \big);\Delta V_R = \mathcal{E}\, e^{-\frac{t}{\tau}}" titolo="Carica con $\mathcal{E} = 12\,\mathrm{V}$ e $\tau = 1{,}0\,\mathrm{s}$, tempo in secondi e tensioni in volt: la tensione sul condensatore sale verso $\mathcal{E}$, quella sul resistore, proporzionale alla corrente, scende a zero; per $t = \tau$ il condensatore è al $63\,\%$"}
 
 :::dimostrazione
 Nell'istante $t$ il condensatore ha carica $q$ sull'armatura collegata al resistore, e la corrente che scorre nel circuito porta carica su quell'armatura, quindi $i = \dfrac{dq}{dt}$. Percorrendo la maglia, la **legge delle maglie** dà
@@ -360,7 +360,7 @@ i(t) = \frac{\Delta V_0}{R}\, e^{-\frac{t}{\tau}} ,
 $$
 dove $i$ è la corrente che esce dall'armatura positiva. La carica e la corrente si dimezzano ogni $\tau \ln 2 \approx 0{,}69\,\tau$; un condensatore con $\tau = 2{,}0\,\mathrm{s}$ che parte da $12\,\mathrm{V}$ è a $6{,}0\,\mathrm{V}$ dopo circa $1{,}4\,\mathrm{s}$ e a $3{,}0\,\mathrm{V}$ dopo circa $2{,}8\,\mathrm{s}$.
 
-::grafico{f="12*exp(-x/2)" punti="1.386,6,pieno;2.773,3,pieno" segmenti="1.386,0,1.386,6;2.773,0,2.773,3" xmin=-0.5 xmax=10.5 ymin=-0.8 ymax=14 nomi="t,V" legenda="\Delta V_C = \Delta V_0\, e^{-\frac{t}{\tau}}" titolo="Scarica con $\Delta V_0 = 12\,\mathrm{V}$ e $\tau = 2{,}0\,\mathrm{s}$: la tensione si dimezza ogni $\tau \ln 2 \approx 1{,}4\,\mathrm{s}$"}
+::grafico{f="12*exp(-x/2)" punti="1.386,6,pieno;2.773,3,pieno" segmenti="1.386,0,1.386,6;2.773,0,2.773,3" xmin=-0.5 xmax=10.5 ymin=-0.8 ymax=13.4 nomi="t,V" legenda="\Delta V_C = \Delta V_0\, e^{-\frac{t}{\tau}}" titolo="Scarica con $\Delta V_0 = 12\,\mathrm{V}$ e $\tau = 2{,}0\,\mathrm{s}$: la tensione si dimezza ogni $\tau \ln 2 \approx 1{,}4\,\mathrm{s}$"}
 
 :::dimostrazione
 La corrente che esce dall'armatura positiva ne diminuisce la carica, quindi $i = -\dfrac{dq}{dt}$. La maglia contiene solo il condensatore e il resistore, perciò la **legge delle maglie** dà

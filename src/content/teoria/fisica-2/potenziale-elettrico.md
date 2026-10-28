@@ -292,7 +292,7 @@ $$
 :::definizione{#superfici-equipotenziali titolo="Superfici equipotenziali"}
 Una **superficie equipotenziale** è l'insieme dei punti in cui il potenziale ha un valore assegnato $V_0$, cioè la superficie di equazione $V(x, y, z) = V_0$. Per una carica puntiforme le superfici equipotenziali sono sfere concentriche alla carica, per un campo uniforme sono piani perpendicolari al campo. Il lavoro del campo su una carica che si sposta tra due punti della stessa superficie equipotenziale è nullo, perché $W = -q\,\Delta V$ e $\Delta V = 0$.
 
-::grafico{assi=0 uguale=1 curve="cos(t),sin(t),0,6.29;1.5*cos(t),1.5*sin(t),0,6.29;3*cos(t),3*sin(t),0,6.29" vettori="0.3,0,3.7,0;0,0.3,0,3.7;-0.3,0,-3.7,0;0,-0.3,0,-3.7;0.21,0.21,2.62,2.62,E;-0.21,0.21,-2.62,2.62;-0.21,-0.21,-2.62,-2.62;0.21,-0.21,2.62,-2.62" punti="0,0,pieno,+Q" etichette="1.08,-0.4,V₁;1.55,-0.58,V₂;2.98,-1.1,V₃" xmin=-4 xmax=4 ymin=-4 ymax=4 legenda=0 titolo="Superfici equipotenziali di una carica positiva con salti di potenziale uguali, $V_1 = 3V_3$ e $V_2 = 2V_3$: le sfere si diradano dove il campo è più debole, e le linee di campo le attraversano perpendicolarmente"}
+::grafico{assi=0 uguale=1 curve="cos(t),sin(t),0,6.29;1.5*cos(t),1.5*sin(t),0,6.29;3*cos(t),3*sin(t),0,6.29" vettori="0.3,0,3.7,0;0,0.3,0,3.7;-0.3,0,-3.7,0;0,-0.3,0,-3.7;0.21,0.21,2.62,2.62,E;-0.21,0.21,-2.62,2.62;-0.21,-0.21,-2.62,-2.62;0.21,-0.21,2.62,-2.62" punti="0,0,pieno,+Q" etichette="0.68,-1.02,V₁;0.62,-1.66,V₂;2.98,-1.1,V₃" xmin=-4 xmax=4 ymin=-4 ymax=4 legenda=0 titolo="Superfici equipotenziali di una carica positiva con salti di potenziale uguali, $V_1 = 3V_3$ e $V_2 = 2V_3$: le sfere si diradano dove il campo è più debole, e le linee di campo le attraversano perpendicolarmente"}
 
 :::
 

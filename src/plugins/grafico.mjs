@@ -21,6 +21,7 @@ import { inLatex } from './espressione.mjs';
 //   riferimento="x0,y0,30,1.5,x′,y′"  sistema di assi orientati in (x0,y0), ruotato di 30° e lungo 1,5 unità, con i nomi
 //   legenda="y = x^2;y = 2x-1"    voci della legenda in LaTeX, nell'ordine delle curve (prima f, poi curve);
 //                                 senza legenda, le funzioni di f compaiono da sole come "y = …"; legenda=0 la toglie
+//   unicolore=1                   tutti i vettori nello stesso colore (linee di campo, campi uniformi)
 //   titolo="…"                    didascalia
 
 const FUNZ = ['sin', 'cos', 'tan', 'exp', 'log', 'sqrt', 'abs', 'atan', 'asin', 'acos', 'sinh', 'cosh', 'tanh', 'floor', 'ceil', 'sign', 'cbrt', 'PI', 'E'];
@@ -139,7 +140,8 @@ export function grafico(a) {
     const p = s.split(',').map((x) => x.trim());
     const [x0, y0, x1, y1] = p.slice(0, 4).map(Number);
     const et = p[4] ? `<text class="etichetta-vettore" x="${(sx((x0 + x1) / 2) + 8).toFixed(1)}" y="${(sy((y0 + y1) / 2) - 8).toFixed(1)}">${esc(p[4])}</text>` : '';
-    return `<line class="vettore v${i % 3}" x1="${sx(x0).toFixed(1)}" y1="${sy(y0).toFixed(1)}" x2="${sx(x1).toFixed(1)}" y2="${sy(y1).toFixed(1)}" marker-end="url(#${id}-punta${i % 3})"/>${et}`;
+    const k = String(a.unicolore) === '1' ? 0 : i % 3;
+    return `<line class="vettore v${k}" x1="${sx(x0).toFixed(1)}" y1="${sy(y0).toFixed(1)}" x2="${sx(x1).toFixed(1)}" y2="${sy(y1).toFixed(1)}" marker-end="url(#${id}-punta${k})"/>${et}`;
   }).join('');
   const pt = lista(a.punti).map((s) => {
     const [x, y, tipo, et] = s.split(',').map((t) => t.trim());

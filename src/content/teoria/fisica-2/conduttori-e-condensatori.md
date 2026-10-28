@@ -92,7 +92,7 @@ Si considerino due sfere conduttrici di raggi $R_1$ e $R_2$, a una distanza molt
 $$
 \frac{\sigma_1}{\sigma_2} = \frac{R_2}{R_1} .
 $$
-Per il teorema di Coulomb anche i campi sulle superfici stanno nello stesso rapporto. Il risultato si estende in modo qualitativo a un conduttore di forma qualsiasi: la densità di carica e il campo sono più intensi dove il raggio di curvatura della superficie è minore, cioè vicino alle punte e agli spigoli. Se il campo vicino a una punta supera la rigidità dielettrica dell'aria, l'aria diventa conduttrice e la punta si scarica; su questo principio funziona il parafulmine. Con $R_1 = 1\,\mathrm{cm}$ e $R_2 = 10\,\mathrm{cm}$ si ha $\sigma_1 = 10\,\sigma_2$.
+Per il teorema di Coulomb anche i campi sulle superfici stanno nello stesso rapporto. Il risultato si estende in modo qualitativo a un conduttore di forma qualsiasi, sul quale la densità di carica e il campo sono più intensi dove il raggio di curvatura della superficie è minore, cioè vicino alle punte e agli spigoli. Se il campo vicino a una punta supera la rigidità dielettrica dell'aria, l'aria diventa conduttrice e la punta si scarica; su questo principio funziona il parafulmine. Con $R_1 = 1\,\mathrm{cm}$ e $R_2 = 10\,\mathrm{cm}$ si ha $\sigma_1 = 10\,\sigma_2$.
 
 ::grafico{assi=0 uguale=1 poligoni="0.662,1.346 0.551,1.395 0.436,1.435 0.318,1.466 0.198,1.487 0.077,1.498 -0.045,1.499 -0.166,1.491 -0.286,1.472 -0.405,1.444 -0.520,1.407 -0.632,1.360 -0.741,1.304 -0.844,1.240 -0.942,1.168 -1.033,1.088 -1.118,1.000 -1.195,0.906 -1.265,0.807 -1.326,0.702 -1.378,0.592 -1.422,0.478 -1.456,0.361 -1.480,0.242 -1.495,0.122 -1.500,0.000 -1.495,-0.122 -1.480,-0.242 -1.456,-0.361 -1.422,-0.478 -1.378,-0.592 -1.326,-0.702 -1.265,-0.807 -1.195,-0.906 -1.118,-1.000 -1.033,-1.088 -0.942,-1.168 -0.844,-1.240 -0.741,-1.304 -0.632,-1.360 -0.520,-1.407 -0.405,-1.444 -0.286,-1.472 -0.166,-1.491 -0.045,-1.499 0.077,-1.498 0.198,-1.487 0.318,-1.466 0.436,-1.435 0.551,-1.395 0.662,-1.346 3.4,0" vettori="0.0,1.6,0.0,2.25;900,900,900.1,900;900,900,900.1,900;-1.131,1.131,-1.591,1.591;900,900,900.1,900;900,900,900.1,900;-1.6,0.0,-2.25,0.0;900,900,900.1,900;900,900,900.1,900;-1.131,-1.131,-1.591,-1.591;900,900,900.1,900;900,900,900.1,900;-0.0,-1.6,-0.0,-2.25;900,900,900.1,900;900,900,900.1,900;2.075,0.763,2.472,1.57;900,900,900.1,900;900,900,900.1,900;2.075,-0.763,2.472,-1.57;900,900,900.1,900;900,900,900.1,900;3.5,0,5.2,0,E" etichette="-0.64,1.50,+;-1.65,0.49,+;-1.65,-0.65,+;-0.64,-1.66,+;2.17,0.68,+;2.17,-0.84,+;2.72,0.41,+;2.72,-0.57,+;3.13,0.21,+;3.13,-0.37,+;3.41,0.14,+" xmin=-2.6 xmax=5.6 ymin=-2.5 ymax=2.5 titolo="Su un conduttore appuntito la densità di carica e il campo sono più intensi dove il raggio di curvatura è minore, cioè vicino alla punta"}
 
@@ -130,7 +130,7 @@ La carica $Q$ è distribuita uniformemente sulla superficie, quindi per la legge
 ::::
 
 :::definizione{#condensatore titolo="Condensatore"}
-Un **condensatore** è un sistema di due conduttori, detti **armature**, in induzione completa: tutte le linee di campo che partono da un'armatura terminano sull'altra. In queste condizioni le armature portano cariche opposte $+Q$ e $-Q$, e la capacità del condensatore è
+Un **condensatore** è un sistema di due conduttori, detti **armature**, in induzione completa, cioè disposti in modo che tutte le linee di campo che partono da un'armatura terminino sull'altra. In queste condizioni le armature portano cariche opposte $+Q$ e $-Q$, e la capacità del condensatore è
 $$
 C = \frac{Q}{\Delta V} ,
 $$
@@ -199,7 +199,7 @@ $$
 La capacità è proporzionale alla lunghezza, e la **capacità per unità di lunghezza** $\dfrac{C}{\ell}$ dipende solo dal rapporto $\dfrac{b}{a}$. Il modello descrive il cavo coassiale; con $b = 2a$ si ottiene $\dfrac{C}{\ell} = \dfrac{2\pi \cdot 8{,}85 \cdot 10^{-12}}{\ln 2}\,\mathrm{F/m} \approx 80\,\mathrm{pF/m}$.
 
 :::dimostrazione
-Si assegnano le cariche $+Q$ al cilindro interno e $-Q$ al guscio, con densità lineare $\lambda = \dfrac{Q}{\ell}$. Per $a < r < b$ si applica la **legge di Gauss** a un cilindro coassiale di raggio $r$ e lunghezza $h$: per simmetria il campo è radiale e il flusso attraversa solo la superficie laterale, quindi $E \cdot 2\pi r h = \dfrac{\lambda h}{\varepsilon_0}$ ed $E(r) = \dfrac{\lambda}{2\pi\varepsilon_0 r}$. Integrando lungo un raggio,
+Si assegnano le cariche $+Q$ al cilindro interno e $-Q$ al guscio, con densità lineare $\lambda = \dfrac{Q}{\ell}$. Per $a < r < b$ si applica la **legge di Gauss** a un cilindro coassiale di raggio $r$ e lunghezza $h$. Per simmetria il campo è radiale e il flusso attraversa solo la superficie laterale, quindi $E \cdot 2\pi r h = \dfrac{\lambda h}{\varepsilon_0}$ ed $E(r) = \dfrac{\lambda}{2\pi\varepsilon_0 r}$. Integrando lungo un raggio,
 $$
 \Delta V = \int_a^b \frac{\lambda}{2\pi\varepsilon_0 r}\,dr = \frac{\lambda}{2\pi\varepsilon_0} \ln\frac{b}{a} = \frac{Q}{2\pi\varepsilon_0\,\ell} \ln\frac{b}{a} ,
 $$
@@ -335,7 +335,7 @@ La densità $\sigma_p$ è minore di $\sigma$, quindi il campo si riduce senza an
 ::grafico{assi=0 uguale=1 poligoni="1,0 5,0 5,3 1,3" linee="1,0 1,3;5,0 5,3" vettori="1.85,0.3,4.15,0.3;900,900,900.1,900;900,900,900.1,900;1.85,1.5,4.15,1.5,E;900,900,900.1,900;900,900,900.1,900;1.85,2.7,4.15,2.7" etichette="1.08,0.22,+;1.08,0.82,+;1.08,1.42,+;1.08,2.02,+;1.08,2.62,+;4.75,0.22,−;4.75,0.82,−;4.75,1.42,−;4.75,2.02,−;4.75,2.62,−;1.43,0.52,−;1.43,1.12,−;1.43,1.72,−;1.43,2.32,−;4.41,0.52,+;4.41,1.12,+;4.41,1.72,+;4.41,2.32,+;0.7,3.3,σ;1.25,3.3,−σₚ;4.25,3.3,+σₚ;4.85,3.3,−σ" xmin=-0.5 xmax=6.5 ymin=-0.3 ymax=3.7 titolo="Dielettrico polarizzato: le cariche di polarizzazione $\mp\sigma_p$ sulle facce affacciate alle armature riducono il campo a $E = \dfrac{E_0}{\varepsilon_r}$"}
 
 :::dimostrazione
-A parità di carica $Q$, per la legge del condensatore con dielettrico la differenza di potenziale è $\Delta V = \dfrac{Q}{\varepsilon_r C_0} = \dfrac{\Delta V_0}{\varepsilon_r}$. Il campo è uniforme, quindi $E = \dfrac{\Delta V}{d} = \dfrac{E_0}{\varepsilon_r}$. Si applica poi la **legge di Gauss** a un cilindretto con una base dentro l'armatura positiva e l'altra nel dielettrico: la carica racchiusa per unità di area è quella libera dell'armatura, $\sigma$, più quella di polarizzazione della faccia del dielettrico, $-\sigma_p$, perciò
+A parità di carica $Q$, per la legge del condensatore con dielettrico la differenza di potenziale è $\Delta V = \dfrac{Q}{\varepsilon_r C_0} = \dfrac{\Delta V_0}{\varepsilon_r}$. Il campo è uniforme, quindi $E = \dfrac{\Delta V}{d} = \dfrac{E_0}{\varepsilon_r}$. Si applica poi la **legge di Gauss** a un cilindretto con una base dentro l'armatura positiva e l'altra nel dielettrico. La carica racchiusa per unità di area è quella libera dell'armatura, $\sigma$, più quella di polarizzazione della faccia del dielettrico, $-\sigma_p$, perciò
 $$
 E = \frac{\sigma - \sigma_p}{\varepsilon_0}
 \quad\Longrightarrow\quad
