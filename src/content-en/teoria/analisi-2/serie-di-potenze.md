@@ -203,7 +203,7 @@ $f$ is **analytic** at $x_0$ (or **expandable in a Taylor series** at $x_0$) if 
 :::attenzione
 Being of class $C^{\infty}$ *is not enough* to be analytic. The function $f(x) = e^{-1/x^2}$ for $x \neq 0$, extended with $f(0) = 0$, is $C^{\infty}$ on $\mathbb{R}$ and all its derivatives at $0$ are zero, so its Maclaurin series is the identically zero series, which converges for every $x$ with sum $0$. The sum coincides with $f$ only at $x = 0$, therefore $f$ **is not analytic** at $0$.
 
-::grafico{f="exp(-1/(x*x))" xmin=-2.5 xmax=2.5 ymin=-0.2 ymax=1.1 punti="0,0,pieno" titolo="$y = e^{-1/x^2}$ extended with $0$ at the origin: all the derivatives at $0$ are zero"}
+::grafico{f="exp(-1/(x*x))" legenda="y = e^{-1/x^2}" xmin=-2.5 xmax=2.5 ymin=-0.2 ymax=1.1 punti="0,0,pieno" titolo="$y = e^{-1/x^2}$ extended with $0$ at the origin: all the derivatives at $0$ are zero"}
 :::
 
 :::teorema{#criterio-di-sviluppabilita titolo="Expandability criterion"}

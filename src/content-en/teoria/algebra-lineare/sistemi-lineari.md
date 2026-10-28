@@ -79,7 +79,7 @@ An equation $a x + b y = c$ with $(a, b) \neq (0, 0)$ represents a line in the p
 
 ::grafico{f="3-x;x-1" punti="2,1,pieno" etichette="0.9,3.0,x + y = 3;3.3,1.7,x − y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x - y = 1$ is determined: the two lines meet only at the point $(2, 1)$"}
 
-::grafico{f="3-x;1-x" etichette="2.1,1.5,x + y = 3;-1.4,-1.2,x + y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x + y = 1$ is inconsistent: the two lines are parallel and distinct"}
+::grafico{f="3-x;1-x" etichette="2.1,1.5,x + y = 3;-1.4,0.55,x + y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x + y = 1$ is inconsistent: the two lines are parallel and distinct"}
 
 In three unknowns each equation represents a plane in space, and three planes can have in common a point, a line, a plane, or no point at all; for the study of their relative positions, see the topic on lines and planes in space.
 :::

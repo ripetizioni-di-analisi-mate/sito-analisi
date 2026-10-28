@@ -203,7 +203,7 @@ $f$ è **analitica** in $x_0$ (o **sviluppabile in serie di Taylor** in $x_0$) s
 :::attenzione
 Essere di classe $C^{\infty}$ *non basta* per essere analitica. La funzione $f(x) = e^{-1/x^2}$ per $x \neq 0$, prolungata con $f(0) = 0$, è $C^{\infty}$ su $\mathbb{R}$ e tutte le sue derivate in $0$ sono nulle, quindi la sua serie di MacLaurin è la serie identicamente nulla, che converge per ogni $x$ con somma $0$. La somma coincide con $f$ solo in $x = 0$, perciò $f$ **non è analitica** in $0$.
 
-::grafico{f="exp(-1/(x*x))" xmin=-2.5 xmax=2.5 ymin=-0.2 ymax=1.1 punti="0,0,pieno" titolo="$y = e^{-1/x^2}$ prolungata con $0$ nell'origine: tutte le derivate in $0$ sono nulle"}
+::grafico{f="exp(-1/(x*x))" legenda="y = e^{-1/x^2}" xmin=-2.5 xmax=2.5 ymin=-0.2 ymax=1.1 punti="0,0,pieno" titolo="$y = e^{-1/x^2}$ prolungata con $0$ nell'origine: tutte le derivate in $0$ sono nulle"}
 :::
 
 :::teorema{#criterio-di-sviluppabilita titolo="Criterio di sviluppabilità"}

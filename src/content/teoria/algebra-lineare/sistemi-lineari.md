@@ -79,7 +79,7 @@ Un'equazione $a x + b y = c$ con $(a, b) \neq (0, 0)$ rappresenta una retta del 
 
 ::grafico{f="3-x;x-1" punti="2,1,pieno" etichette="0.9,3.0,x + y = 3;3.3,1.7,x − y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="Il sistema formato da $x + y = 3$ e $x - y = 1$ è determinato: le due rette si incontrano nel solo punto $(2, 1)$"}
 
-::grafico{f="3-x;1-x" etichette="2.1,1.5,x + y = 3;-1.4,-1.2,x + y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="Il sistema formato da $x + y = 3$ e $x + y = 1$ è incompatibile: le due rette sono parallele e distinte"}
+::grafico{f="3-x;1-x" etichette="2.1,1.5,x + y = 3;-1.4,0.55,x + y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="Il sistema formato da $x + y = 3$ e $x + y = 1$ è incompatibile: le due rette sono parallele e distinte"}
 
 In tre incognite ogni equazione rappresenta un piano dello spazio, e tre piani possono avere in comune un punto, una retta, un piano oppure nessun punto; per lo studio delle posizioni reciproche si rimanda all'argomento su rette e piani nello spazio.
 :::
