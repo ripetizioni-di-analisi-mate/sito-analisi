@@ -176,7 +176,7 @@ Per l'invarianza $-I_1\beta^2 = I_3 \neq 0$, quindi $\beta \neq 0$ e $\beta^2 = 
 $$
 2p = \frac{2|\beta|}{|I_1|} ,
 \qquad
-p = \frac{\sqrt{-I_3 / I_1}}{|I_1|} = \sqrt{-\frac{I_3}{I_1^3}} .
+p = \frac{1}{|I_1|} \sqrt{-\frac{I_3}{I_1}} = \sqrt{-\frac{I_3}{I_1^3}} .
 $$
 :::
 ::::

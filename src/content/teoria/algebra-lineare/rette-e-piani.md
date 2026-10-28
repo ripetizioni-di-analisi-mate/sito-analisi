@@ -339,7 +339,7 @@ $$
 $$
 con uguaglianza solo per $P = H$ e $Q = K$. La distanza tra $r$ e $s$ è quindi $d(r, s) = \|\overrightarrow{HK}\|$. Per trovare $H$ e $K$ si scrivono come punti generici delle due rette e si impone che $\overrightarrow{HK}$ sia ortogonale a $\vec{v}$ e a $\vec{w}$.
 
-::grafico{f="0.5*x;-x" punti="0,0,pieno" etichette="0.2,-0.5,H e K;2.2,1.45,r;-2.2,2.6,s" xmin=-2.6 xmax=2.8 ymin=-2.6 ymax=3 uguale=1 titolo="Le rette sghembe $r : y = \dfrac{x}{2},\ z = 0$ e $s : y = -x,\ z = 2$ viste dall'alto: le proiezioni sul piano $z = 0$ si incontrano nell'origine, dove si proietta la perpendicolare comune, il segmento dell'asse $z$ da $H = (0, 0, 0)$ a $K = (0, 0, 2)$"}
+::grafico{f="0.5*x;-x" punti="0,0,pieno" etichette="0.25,0.4,H e K;2.2,1.45,r;-2.2,2.6,s" xmin=-2.6 xmax=2.8 ymin=-2.6 ymax=3 uguale=1 titolo="Le rette sghembe $r : y = \dfrac{x}{2},\ z = 0$ e $s : y = -x,\ z = 2$ viste dall'alto: le proiezioni sul piano $z = 0$ si incontrano nell'origine, dove si proietta la perpendicolare comune, il segmento dell'asse $z$ da $H = (0, 0, 0)$ a $K = (0, 0, 2)$"}
 
 :::dimostrazione
 Siano $H = A + t\,\vec{v}$ e $K = B + u\,\vec{w}$, così che $\overrightarrow{HK} = \overrightarrow{AB} + u\,\vec{w} - t\,\vec{v}$. Le condizioni $\overrightarrow{HK} \cdot \vec{v} = 0$ e $\overrightarrow{HK} \cdot \vec{w} = 0$ formano il sistema lineare nelle incognite $t$ e $u$

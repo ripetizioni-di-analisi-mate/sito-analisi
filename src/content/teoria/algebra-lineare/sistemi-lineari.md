@@ -21,8 +21,8 @@ con coefficienti $a_{ij} \in \mathbb{R}$ e termini noti $b_i \in \mathbb{R}$. Un
 :::definizione{#sistema-compatibile titolo="Sistema compatibile e incompatibile"}
 Un sistema lineare si dice
 
-- **compatibile** se ammette *almeno una* soluzione, **incompatibile** se non ne ammette;
-- **determinato** se è compatibile con una sola soluzione, **indeterminato** se è compatibile con più di una soluzione.
+- **compatibile** se ammette *almeno una* soluzione, incompatibile se non ne ammette;
+- **determinato** se è compatibile con una sola soluzione, indeterminato se è compatibile con più di una soluzione.
 
 Il sistema formato da $x + y = 1$ e $x + y = 3$ è incompatibile, perché la stessa quantità $x + y$ non può valere $1$ e $3$. Un sistema indeterminato ha sempre infinite soluzioni, come segue dal teorema di Rouché-Capelli; di conseguenza un sistema lineare con esattamente due soluzioni non esiste.
 :::
@@ -154,7 +154,7 @@ L'ultima equazione $-z = -3$ dà $z = 3$; la seconda, $y - z = -1$, dà $y = 2$;
 ## Il rango di una matrice
 
 :::definizione{#minore titolo="Minore di una matrice"}
-Sia $A \in M_{m,n}(\mathbb{R})$ e sia $p \leq \min(m, n)$. Scegliendo $p$ righe e $p$ colonne di $A$ e conservando gli elementi che stanno nelle loro intersezioni, nell'ordine in cui compaiono, si ottiene una sottomatrice quadrata di ordine $p$. Il suo determinante si chiama **minore di ordine $p$** di $A$. Gli elementi di $A$ sono i minori di ordine $1$; per il calcolo dei determinanti si rimanda all'argomento sul determinante e la matrice inversa.
+Sia $A \in M_{m,n}(\mathbb{R})$ e sia $p \leq \min(m, n)$. Scegliendo $p$ righe e $p$ colonne di $A$ e conservando gli elementi che stanno nelle loro intersezioni, nell'ordine in cui compaiono, si ottiene una sottomatrice quadrata di ordine $p$. Il suo determinante si chiama **minore** di ordine $p$ di $A$. Gli elementi di $A$ sono i minori di ordine $1$; per il calcolo dei determinanti si rimanda all'argomento sul determinante e la matrice inversa.
 :::
 
 :::definizione{#rango titolo="Rango"}
