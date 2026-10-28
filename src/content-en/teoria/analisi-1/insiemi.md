@@ -79,7 +79,7 @@ The **Cartesian product** of $A$ and $B$ is the set of ordered pairs
 $$
 A \times B = \{(a, b) : a \in A,\ b \in B\} .
 $$
-In pairs the order *matters*, so in general $A \times B \neq B \times A$: for $A = \{1, 2\}$ and $B = \{0\}$ we have $A \times B = \{(1, 0), (2, 0)\}$ and $B \times A = \{(0, 1), (0, 2)\}$. The set $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is the **Cartesian plane**: the graphs of functions are subsets of it, therefore the Cartesian product is the setting of the whole chapter on functions.
+In pairs the order *matters*, so in general $A \times B \neq B \times A$: for $A = \{1, 2\}$ and $B = \{0\}$ we have $A \times B = \{(1, 0), (2, 0)\}$ and $B \times A = \{(0, 1), (0, 2)\}$. The set $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is the **Cartesian plane**: the graphs of functions are subsets of it, therefore the Cartesian product is the setting in which functions are studied.
 :::
 
 ## The number sets
@@ -230,7 +230,7 @@ For every real number $x \geq -1$ and every $n \in \mathbb{N}$:
 $$
 (1 + x)^n \geq 1 + nx .
 $$
-The inequality bounds a power *from below* by an expression of first degree in $n$, which is much simpler to control. With $x = 1$ it gives $2^n \geq 1 + n$ for every $n$. It is used in the study of the geometric sequence and in the construction of the number $e$; see the chapter on sequences.
+The inequality bounds a power *from below* by an expression of first degree in $n$, which is much simpler to control. With $x = 1$ it gives $2^n \geq 1 + n$ for every $n$. It is used in the study of the geometric sequence and in the construction of the number $e$; see the review of sequences in the chapter on series.
 
 :::dimostrazione
 We proceed by **induction** on $n$, with $x \geq -1$ fixed. Base case ($n = 0$): $(1 + x)^0 = 1$ and $1 + 0 \cdot x = 1$, so the inequality holds with equality. Step: assume $(1 + x)^n \geq 1 + nx$. Since $x \geq -1$, the factor $1 + x$ is **nonnegative**, so multiplying both sides of the inductive hypothesis by $1 + x$ does *not* change the direction of the inequality:

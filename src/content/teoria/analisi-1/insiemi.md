@@ -79,7 +79,7 @@ Il **prodotto cartesiano** di $A$ e $B$ è l'insieme delle coppie ordinate
 $$
 A \times B = \{(a, b) : a \in A,\ b \in B\} .
 $$
-Nelle coppie l'ordine *conta*, quindi in generale $A \times B \neq B \times A$: per $A = \{1, 2\}$ e $B = \{0\}$ si ha $A \times B = \{(1, 0), (2, 0)\}$ e $B \times A = \{(0, 1), (0, 2)\}$. L'insieme $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ è il **piano cartesiano**: i grafici delle funzioni sono suoi sottoinsiemi, perciò il prodotto cartesiano è l'ambiente di tutto il capitolo sulle funzioni.
+Nelle coppie l'ordine *conta*, quindi in generale $A \times B \neq B \times A$: per $A = \{1, 2\}$ e $B = \{0\}$ si ha $A \times B = \{(1, 0), (2, 0)\}$ e $B \times A = \{(0, 1), (0, 2)\}$. L'insieme $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ è il **piano cartesiano**: i grafici delle funzioni sono suoi sottoinsiemi, perciò il prodotto cartesiano è l'ambiente in cui si studiano le funzioni.
 :::
 
 ## Gli insiemi numerici
@@ -230,7 +230,7 @@ Per ogni numero reale $x \geq -1$ e ogni $n \in \mathbb{N}$:
 $$
 (1 + x)^n \geq 1 + nx .
 $$
-La disuguaglianza stima *dal basso* una potenza con un'espressione di primo grado in $n$, molto più semplice da controllare. Con $x = 1$ dà $2^n \geq 1 + n$ per ogni $n$. Si usa nello studio della successione geometrica e nella costruzione del numero $e$; si rimanda al capitolo sulle successioni.
+La disuguaglianza stima *dal basso* una potenza con un'espressione di primo grado in $n$, molto più semplice da controllare. Con $x = 1$ dà $2^n \geq 1 + n$ per ogni $n$. Si usa nello studio della successione geometrica e nella costruzione del numero $e$; si rimanda al richiamo sulle successioni nel capitolo sulle serie.
 
 :::dimostrazione
 Si procede per **induzione** su $n$, con $x \geq -1$ fissato. Base ($n = 0$): $(1 + x)^0 = 1$ e $1 + 0 \cdot x = 1$, quindi la disuguaglianza è verificata come uguaglianza. Passo: sia $(1 + x)^n \geq 1 + nx$. Poiché $x \geq -1$, il fattore $1 + x$ è **non negativo**, quindi moltiplicando i due membri dell'ipotesi induttiva per $1 + x$ il verso *non* cambia:

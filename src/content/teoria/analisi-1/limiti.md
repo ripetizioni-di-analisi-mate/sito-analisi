@@ -343,7 +343,7 @@ $\dfrac{\sin x}{x}$ in $0$: **eliminabile**, il limite vale $1$. La funzione seg
 
 ## Teoremi sulle funzioni continue
 
-Valgono per $f$ continua su un intervallo chiuso e limitato $[a, b]$; senza una delle due ipotesi le conclusioni *non* valgono, come mostrano gli esempi.
+Valgono per $f$ continua su un intervallo chiuso e limitato $[a, b]$; senza una delle due ipotesi le conclusioni *possono* non valere, come mostrano gli esempi.
 
 ::::teorema{#teorema-degli-zeri titolo="Teorema degli zeri"}
 Se $f$ è continua in $[a, b]$ e $f(a)\, f(b) < 0$, esiste $c \in (a, b)$ con $f(c) = 0$. Garantisce una soluzione di $f(x) = 0$ *senza* risolvere l'equazione: localizza le radici di equazioni non risolubili per via algebrica, come $x = \cos x$, e conta gli zeri nello studio di funzione.
@@ -354,7 +354,7 @@ $$
 ::grafico{f="x^3+x-1" xmin=-0.5 xmax=1.5 ymin=-2 ymax=2 punti="0,-1,pieno;1,1,pieno;0.6823,0,pieno,c" titolo="$f(x) = x^3 + x - 1$ è continua, $f(0) = -1 < 0$ e $f(1) = 1 > 0$: il grafico attraversa l'asse $x$ in un punto $c \in (0, 1)$"}
 
 :::dimostrazione
-Sia $f(a) < 0 < f(b)$ (il caso opposto è analogo) e $E = \{ x \in [a, b] : f(x) < 0 \}$. $E$ contiene $a$ ed è limitato da $b$, quindi esiste $c = \sup E \in [a, b]$. Se fosse $f(c) < 0$, per la **permanenza del segno** $f < 0$ in un intorno di $c$; poiché $f(b) > 0$ si ha $c < b$, e l'intorno conterrebbe punti di $E$ maggiori di $c$, contro la definizione di **estremo superiore**. Se fosse $f(c) > 0$, $f > 0$ in un intorno $(c - \delta, c + \delta)$; poiché $f(a) < 0$ si ha $c > a$, nessun punto di $(c - \delta, c]$ sta in $E$, quindi $c - \delta$ sarebbe un maggiorante di $E$ minore di $c$, assurdo. Perciò $f(c) = 0$, e $c \neq a, b$ perché $f(a), f(b) \neq 0$.
+Sia $f(a) < 0 < f(b)$ (il caso opposto è analogo) e $E = \{ x \in [a, b] : f(x) < 0 \}$. $E$ contiene $a$ ed è limitato da $b$, quindi esiste $c = \sup E \in [a, b]$. Se fosse $f(c) < 0$, per la **permanenza del segno** $f < 0$ in un intorno di $c$; poiché $f(b) > 0$ si ha $c < b$, e l'intorno conterrebbe punti di $E$ maggiori di $c$, contro la definizione di **estremo superiore**. Se fosse $f(c) > 0$, $f > 0$ in un intorno $(c - \delta, c + \delta)$; poiché $f(a) < 0$ si ha $c > a$, nessun punto di $(c - \delta, c]$ sta in $E$ e, poiché $c = \sup E$, nessun punto maggiore di $c$ vi appartiene, quindi $c - \delta$ sarebbe un maggiorante di $E$ minore di $c$, assurdo. Perciò $f(c) = 0$, e $c \neq a, b$ perché $f(a), f(b) \neq 0$.
 :::
 ::::
 
@@ -370,14 +370,14 @@ Senza continuità il teorema **non si applica**: $f(x) = -1$ per $x \in [0, 1)$ 
 :::
 
 :::teorema{#teorema-di-weierstrass titolo="Teorema di Weierstrass"}
-Se $f$ è continua in $[a, b]$, ammette **massimo e minimo**: esistono $x_m, x_M \in [a, b]$ con $f(x_m) \leq f(x) \leq f(x_M)$ per ogni $x \in [a, b]$. Garantisce che il problema di massimo e minimo su un intervallo chiuso e limitato ha soluzione; con il calcolo differenziale si stabilisce dove cercarla. La dimostrazione usa il teorema di Bolzano-Weierstrass sulle successioni e si rimanda all'appendice.
+Se $f$ è continua in $[a, b]$, ammette **massimo e minimo**: esistono $x_m, x_M \in [a, b]$ con $f(x_m) \leq f(x) \leq f(x_M)$ per ogni $x \in [a, b]$. Garantisce che il problema di massimo e minimo su un intervallo chiuso e limitato ha soluzione; con il calcolo differenziale si stabilisce dove cercarla. La dimostrazione, che usa il teorema di Bolzano-Weierstrass sulle successioni, non è riportata.
 
 - $f(x) = x$ su $(0, 1)$: continua, senza massimo né minimo, perché l'intervallo *non* è chiuso.
 - $f(x) = \dfrac{1}{x}$ su $(0, 1]$: continua, senza massimo, perché l'intervallo non è chiuso in $0$ e la funzione è illimitata.
 :::
 
 ::::teorema{#valori-intermedi titolo="Teorema dei valori intermedi"}
-Se $f$ è continua in $[a, b]$ con minimo $m$ e massimo $M$, per ogni $y \in [m, M]$ esiste $x \in [a, b]$ con $f(x) = y$: l'**immagine** di $[a, b]$ è l'intervallo $[m, M]$. Una funzione continua su un intervallo assume *tutti* i valori compresi tra due valori assunti; così si determina l'immagine di una funzione e si contano le soluzioni di $f(x) = k$. Senza continuità non vale; per esempio $\dfrac{1}{x}$ sull'insieme $[-1, 1] \setminus \{0\}$ assume i valori $-1$ e $1$ ma non assume il valore $0$.
+Se $f$ è continua in $[a, b]$ con minimo $m$ e massimo $M$, per ogni $y \in [m, M]$ esiste $x \in [a, b]$ con $f(x) = y$: l'**immagine** di $[a, b]$ è l'intervallo $[m, M]$. Una funzione continua su un intervallo assume *tutti* i valori compresi tra due valori assunti; così si determina l'immagine di una funzione e si contano le soluzioni di $f(x) = k$. Senza continuità non vale: la funzione uguale a $-1$ in $[0, 1)$ e a $1$ in $[1, 2]$ assume i valori $-1$ e $1$ ma non il valore $0$. Non vale neppure se il dominio non è un intervallo: $\dfrac{1}{x}$ è continua sull'insieme $[-1, 1] \setminus \{0\}$, assume i valori $-1$ e $1$ e non assume il valore $0$.
 
 :::dimostrazione
 Per $y = m$ o $y = M$ la tesi è il **teorema di Weierstrass**. Per $m < y < M$ si pone $g(x) = f(x) - y$, continua, con $g(x_m) = m - y < 0$ e $g(x_M) = M - y > 0$; per il **teorema degli zeri** sull'intervallo di estremi $x_m$ e $x_M$ esiste $x$ con $g(x) = 0$, cioè $f(x) = y$.

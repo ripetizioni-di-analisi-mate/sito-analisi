@@ -343,7 +343,7 @@ $\dfrac{\sin x}{x}$ at $0$: **removable**, the limit equals $1$. The sign functi
 
 ## Theorems on continuous functions
 
-They hold for $f$ continuous on a closed and bounded interval $[a, b]$; without either of the two hypotheses the conclusions do *not* hold, as the examples show.
+They hold for $f$ continuous on a closed and bounded interval $[a, b]$; without either of the two hypotheses the conclusions *may* fail, as the examples show.
 
 ::::teorema{#teorema-degli-zeri titolo="Intermediate zero theorem"}
 If $f$ is continuous on $[a, b]$ and $f(a)\, f(b) < 0$, there exists $c \in (a, b)$ with $f(c) = 0$. It guarantees a solution of $f(x) = 0$ *without* solving the equation: it locates the roots of equations that cannot be solved algebraically, such as $x = \cos x$, and counts the zeros in curve sketching.
@@ -354,7 +354,7 @@ $$
 ::grafico{f="x^3+x-1" xmin=-0.5 xmax=1.5 ymin=-2 ymax=2 punti="0,-1,pieno;1,1,pieno;0.6823,0,pieno,c" titolo="$f(x) = x^3 + x - 1$ is continuous, $f(0) = -1 < 0$ and $f(1) = 1 > 0$: the graph crosses the $x$-axis at a point $c \in (0, 1)$"}
 
 :::dimostrazione
-Let $f(a) < 0 < f(b)$ (the opposite case is analogous) and $E = \{ x \in [a, b] : f(x) < 0 \}$. $E$ contains $a$ and is bounded by $b$, therefore $c = \sup E \in [a, b]$ exists. If $f(c) < 0$, then by **sign preservation** $f < 0$ in a neighborhood of $c$; since $f(b) > 0$ we have $c < b$, and the neighborhood would contain points of $E$ greater than $c$, contradicting the definition of **supremum**. If $f(c) > 0$, then $f > 0$ in a neighborhood $(c - \delta, c + \delta)$; since $f(a) < 0$ we have $c > a$, no point of $(c - \delta, c]$ lies in $E$, so $c - \delta$ would be an upper bound of $E$ smaller than $c$, a contradiction. Hence $f(c) = 0$, and $c \neq a, b$ since $f(a), f(b) \neq 0$.
+Let $f(a) < 0 < f(b)$ (the opposite case is analogous) and $E = \{ x \in [a, b] : f(x) < 0 \}$. $E$ contains $a$ and is bounded by $b$, therefore $c = \sup E \in [a, b]$ exists. If $f(c) < 0$, then by **sign preservation** $f < 0$ in a neighborhood of $c$; since $f(b) > 0$ we have $c < b$, and the neighborhood would contain points of $E$ greater than $c$, contradicting the definition of **supremum**. If $f(c) > 0$, then $f > 0$ in a neighborhood $(c - \delta, c + \delta)$; since $f(a) < 0$ we have $c > a$, no point of $(c - \delta, c]$ lies in $E$ and, since $c = \sup E$, no point greater than $c$ belongs to it, so $c - \delta$ would be an upper bound of $E$ smaller than $c$, a contradiction. Hence $f(c) = 0$, and $c \neq a, b$ since $f(a), f(b) \neq 0$.
 :::
 ::::
 
@@ -370,14 +370,14 @@ Without continuity the theorem **does not apply**: $f(x) = -1$ for $x \in [0, 1)
 :::
 
 :::teorema{#teorema-di-weierstrass titolo="Weierstrass theorem"}
-If $f$ is continuous on $[a, b]$, it attains a **maximum and a minimum**: there exist $x_m, x_M \in [a, b]$ with $f(x_m) \leq f(x) \leq f(x_M)$ for every $x \in [a, b]$. It guarantees that the maximum and minimum problem on a closed and bounded interval has a solution; differential calculus establishes where to look for it. The proof uses the Bolzano-Weierstrass theorem on sequences and is deferred to the appendix.
+If $f$ is continuous on $[a, b]$, it attains a **maximum and a minimum**: there exist $x_m, x_M \in [a, b]$ with $f(x_m) \leq f(x) \leq f(x_M)$ for every $x \in [a, b]$. It guarantees that the maximum and minimum problem on a closed and bounded interval has a solution; differential calculus establishes where to look for it. The proof, which uses the Bolzano-Weierstrass theorem on sequences, is not included.
 
 - $f(x) = x$ on $(0, 1)$: continuous, with neither maximum nor minimum, since the interval is *not* closed.
 - $f(x) = \dfrac{1}{x}$ on $(0, 1]$: continuous, with no maximum, since the interval is not closed at $0$ and the function is unbounded.
 :::
 
 ::::teorema{#valori-intermedi titolo="Intermediate value theorem"}
-If $f$ is continuous on $[a, b]$ with minimum $m$ and maximum $M$, for every $y \in [m, M]$ there exists $x \in [a, b]$ with $f(x) = y$: the **image** of $[a, b]$ is the interval $[m, M]$. A continuous function on an interval takes *all* the values between two values it takes; this is how the image of a function is determined and how the solutions of $f(x) = k$ are counted. Without continuity it does not hold; for example $\dfrac{1}{x}$ on the set $[-1, 1] \setminus \{0\}$ takes the values $-1$ and $1$ but does not take the value $0$.
+If $f$ is continuous on $[a, b]$ with minimum $m$ and maximum $M$, for every $y \in [m, M]$ there exists $x \in [a, b]$ with $f(x) = y$: the **image** of $[a, b]$ is the interval $[m, M]$. A continuous function on an interval takes *all* the values between two values it takes; this is how the image of a function is determined and how the solutions of $f(x) = k$ are counted. Without continuity it does not hold: the function equal to $-1$ on $[0, 1)$ and to $1$ on $[1, 2]$ takes the values $-1$ and $1$ but not the value $0$. It does not hold either if the domain is not an interval: $\dfrac{1}{x}$ is continuous on the set $[-1, 1] \setminus \{0\}$, takes the values $-1$ and $1$ and does not take the value $0$.
 
 :::dimostrazione
 For $y = m$ or $y = M$ the conclusion is the **Weierstrass theorem**. For $m < y < M$ let $g(x) = f(x) - y$, which is continuous, with $g(x_m) = m - y < 0$ and $g(x_M) = M - y > 0$; by the **intermediate zero theorem** on the interval with endpoints $x_m$ and $x_M$ there exists $x$ with $g(x) = 0$, that is, $f(x) = y$.
