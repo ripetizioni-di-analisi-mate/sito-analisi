@@ -264,11 +264,11 @@ a_{11}x + a_{12}y + a_{13} = 0 \\[4pt]
 a_{12}x + a_{22}y + a_{23} = 0
 \end{cases}
 $$
-cioè di $A_0 c = -b$. Infatti, traslando l'origine in $(x_0, y_0)$, la formula della matrice dopo una rototraslazione con $R = I_2$ mostra che i termini lineari si annullano; l'equazione contiene allora solo termini di grado $2$ e $0$, ed è invariata dalla simmetria $(X, Y) \mapsto (-X, -Y)$. Per questo ellissi e iperboli si chiamano **coniche a centro**, mentre la parabola ($I_2 = 0$) non ha centro.
+cioè di $A_0 c = -b$. Infatti, traslando l'origine in $(x_0, y_0)$, la formula della matrice dopo una rototraslazione con $R$ uguale alla matrice identità mostra che i termini lineari si annullano; l'equazione contiene allora solo termini di grado $2$ e $0$, ed è invariata dalla simmetria $(X, Y) \mapsto (-X, -Y)$. Per questo ellissi e iperboli si chiamano **coniche a centro**, mentre la parabola ($I_2 = 0$) non ha centro.
 :::
 
 :::osservazione{#assi-di-simmetria titolo="Assi di simmetria"}
-Gli assi di un'ellisse che non è una circonferenza, o di un'iperbole, sono le rette per il centro parallele agli autovettori di $A_0$. Nella forma canonica sono gli assi $X$ e $Y$, e la rototraslazione li riporta nel piano originale. Se $(l, m)$ è un autovettore, l'asse ha equazione $m(x - x_0) - l(y - y_0) = 0$. L'asse relativo all'autovalore di valore assoluto *minore* contiene i vertici più lontani dal centro: nell'ellisse è l'asse maggiore.
+Gli assi di un'ellisse che non è una circonferenza, o di un'iperbole, sono le rette per il centro parallele agli autovettori di $A_0$. Nella forma canonica sono gli assi $X$ e $Y$, e la rototraslazione li riporta nel piano originale. Se $(l, m)$ è un autovettore, l'asse ha equazione $m(x - x_0) - l(y - y_0) = 0$. Nella forma canonica $\lambda_1 X^2 + \lambda_2 Y^2 = -\dfrac{I_3}{I_2}$ il quadrato del semiasse sull'asse relativo a $\lambda_i$ vale $-\dfrac{I_3}{I_2 \lambda_i}$, quindi nell'ellisse l'asse relativo all'autovalore di valore assoluto *minore* è l'asse maggiore. Nell'iperbole l'asse trasverso, che contiene i vertici, è quello relativo all'autovalore con lo stesso segno di $-\dfrac{I_3}{I_2}$.
 :::
 
 :::osservazione{#asintoti-iperbole titolo="Asintoti di un'iperbole"}
@@ -280,7 +280,7 @@ cioè le direzioni su cui si annulla la parte di secondo grado. Equivalentemente
 :::
 
 :::esempio{titolo="Un'iperbole equilatera"}
-La conica $xy - 1 = 0$ ha $a_{12} = \dfrac{1}{2}$ e tutti gli altri coefficienti nulli tranne $a_{33} = -1$, quindi $I_3 = \dfrac{1}{4}$, $I_2 = -\dfrac{1}{4}$, $I_1 = 0$, quindi è un'**iperbole equilatera**. Il centro è l'origine. Gli autovalori di $A_0$ sono $\pm \dfrac{1}{2}$, con autovettori $(1, 1)$ e $(-1, 1)$, quindi gli assi sono le bisettrici $y = x$ e $y = -x$. Poiché $\dfrac{I_3}{I_2} = -1$, la forma canonica è
+La conica $xy - 1 = 0$ ha $a_{12} = \dfrac{1}{2}$ e tutti gli altri coefficienti nulli tranne $a_{33} = -1$, quindi $I_3 = \dfrac{1}{4}$, $I_2 = -\dfrac{1}{4}$, $I_1 = 0$, perciò è un'**iperbole equilatera**. Il centro è l'origine. Gli autovalori di $A_0$ sono $\pm \dfrac{1}{2}$, con autovettori $(1, 1)$ e $(-1, 1)$, quindi gli assi sono le bisettrici $y = x$ e $y = -x$. Poiché $\dfrac{I_3}{I_2} = -1$, la forma canonica è
 $$
 \frac{1}{2}X^2 - \frac{1}{2}Y^2 = 1 ,
 \qquad
@@ -428,7 +428,7 @@ C'è inoltre l'ellissoide immaginario $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} + \df
 Le quadriche degeneri con $\operatorname{rk} A = 3$ sono coni e cilindri.
 
 - **Cono**, se $\det A_0 \neq 0$: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} - \dfrac{Z^2}{c^2} = 0$, con vertice nel centro. Se gli autovalori di $A_0$ sono concordi, l'equazione $\lambda_1 X^2 + \lambda_2 Y^2 + \lambda_3 Z^2 = 0$ ha come unico punto reale il vertice.
-- **Cilindro**, se $\det A_0 = 0$: l'equazione canonica non contiene $Z$ ed è quella di una conica del piano $XY$, quindi il cilindro è **ellittico** $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} = 1$, **iperbolico** $\dfrac{X^2}{a^2} - \dfrac{Y^2}{b^2} = 1$ o **parabolico** $Y^2 = 2pX$.
+- **Cilindro**, se $\det A_0 = 0$: l'equazione canonica non contiene $Z$ ed è quella di una conica del piano $XY$, quindi il cilindro è **ellittico** $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} = 1$, **iperbolico** $\dfrac{X^2}{a^2} - \dfrac{Y^2}{b^2} = 1$ o **parabolico** $Y^2 = 2pX$, oppure è il cilindro immaginario $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} = -1$, privo di punti reali.
 
 Se $\operatorname{rk} A \leq 2$, la quadrica è una coppia di piani, reali o complessi, distinti o coincidenti.
 :::

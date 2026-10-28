@@ -1,0 +1,140 @@
+---
+// Pagina biografica: lo stesso testo del sito ripetizioni-di-analisi-matematica.it.
+import Base from '../layouts/Base.astro';
+import { SITO, INSTAGRAM, assoluto } from '../lib/seo';
+import { type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const WHATSAPP = 'https://wa.me/393885680393';
+
+const TESTI = {
+  it: {
+    titolo: 'Chi sono',
+    descrizione: 'Carmine Tornincasa, insegnante privato di Analisi matematica e content creator: oltre 1500 studenti seguiti in tutta Italia, più di 10 anni di esperienza.',
+    sottotitolo: 'Insegnante privato e content creator del canale',
+    punti: [
+      ['📈', 'Migliaia di studenti', ' supportati nel raggiungimento dei propri obiettivi'],
+      ['🏆', 'Risultati eccellenti', ' e miglioramenti concreti fin dalle prime lezioni'],
+      ['🎓', 'Oltre 10 anni di esperienza', ' nell’insegnamento universitario e scolastico'],
+      ['🧠', 'Metodo collaudato e personalizzato', ', costruito su misura per ogni studente'],
+    ],
+    studenti: 'I miei studenti',
+    dove: 'Dove ho insegnato solo nel 2025?',
+    oltre: ['Oltre 1500 studenti', ' seguiti in tutta Italia'],
+    copertura: ['Copertura capillare: ', '78 province', ' raggiunte'],
+    mappa: 'Mappa dell’Italia con le province di provenienza degli studenti: i cerchi più grandi sono su Roma, Milano e Napoli',
+    dati: 'Alcuni dati significativi:',
+    citta: [['400+', 'studenti da Roma'], ['250+', 'da Milano'], ['120+', 'da Napoli'], ['90+', 'da Palermo'], ['80+', 'da Torino']],
+    universita: 'Non importa da quale università provieni: probabilmente abbiamo già aiutato un tuo collega',
+    missione: 'La mia missione educativa',
+    paragrafi: [
+      'So cosa significa sentirsi inadeguati nello studio. Ho trasformato questa difficoltà in una forza, mettendo la mia esperienza al servizio degli altri.',
+      'Dopo migliaia di ore di lezione con studenti diversi, ho sviluppato competenze tecniche e didattiche che mi permettono di adattarmi a ciascuno, aiutandoli a superare blocchi e difficoltà.',
+      'Voglio che ogni studente si senta capace, accompagnandolo nel miglioramento dei voti e dell’autostima. Attraverso Instagram e altri canali, cerco di diffondere contenuti utili e accessibili, costruendo una rete di apprendimento affidabile.',
+      'Grazie a collaboratori fidati, posso offrire supporto anche in materie che non insegno direttamente, mantenendo sempre qualità e attenzione.',
+    ],
+    prenota: 'Prenota la tua lezione',
+    ruolo: 'Insegnante privato di Analisi matematica',
+  },
+  en: {
+    titolo: 'About me',
+    descrizione: 'Carmine Tornincasa, private Calculus tutor and content creator: over 1500 students taught across Italy, more than 10 years of experience.',
+    sottotitolo: 'Private tutor and content creator of the channel',
+    punti: [
+      ['📈', 'Thousands of students', ' helped to reach their goals'],
+      ['🏆', 'Excellent results', ' and concrete improvement from the very first lessons'],
+      ['🎓', 'Over 10 years of experience', ' teaching at university and school level'],
+      ['🧠', 'A proven, personalised method', ', tailored to each student'],
+    ],
+    studenti: 'My students',
+    dove: 'Where did I teach in 2025 alone?',
+    oltre: ['Over 1500 students', ' taught all over Italy'],
+    copertura: ['Wide coverage: ', '78 provinces', ' reached'],
+    mappa: 'Map of Italy with the provinces my students come from: the largest circles are on Rome, Milan and Naples',
+    dati: 'Some significant figures:',
+    citta: [['400+', 'students from Rome'], ['250+', 'from Milan'], ['120+', 'from Naples'], ['90+', 'from Palermo'], ['80+', 'from Turin']],
+    universita: 'Whatever university you come from, we have probably already helped one of your classmates',
+    missione: 'My teaching mission',
+    paragrafi: [
+      'I know what it means to feel inadequate when studying. I turned that difficulty into a strength, putting my experience at the service of others.',
+      'After thousands of hours of lessons with very different students, I developed the technical and teaching skills that let me adapt to each of them and help them overcome blocks and difficulties.',
+      'I want every student to feel capable, and I accompany them as their grades and self-confidence improve. Through Instagram and other channels I share useful, accessible content, building a reliable learning network.',
+      'Thanks to trusted collaborators, I can also offer support in subjects I do not teach directly, always with the same quality and care.',
+    ],
+    prenota: 'Book your lesson',
+    ruolo: 'Private Calculus tutor',
+  },
+}[lingua];
+
+const persona = {
+  '@type': 'Person',
+  '@id': `${SITO}/#carmine`,
+  name: 'Carmine Tornincasa',
+  jobTitle: TESTI.ruolo,
+  image: `${SITO}/chi-sono/carmine.webp`,
+  url: assoluto(Astro.url.pathname),
+  sameAs: [INSTAGRAM, 'https://ripetizioni-di-analisi-matematica.it/'],
+  worksFor: { '@id': `${SITO}/#organizzazione` },
+};
+---
+<Base
+  titolo={TESTI.titolo}
+  descrizione={TESTI.descrizione}
+  percorso={[{ titolo: TESTI.titolo }]}
+  lingua={lingua}
+  seo={{ tipo: 'profile', schema: [{ '@type': 'AboutPage', name: TESTI.titolo, url: assoluto(Astro.url.pathname), mainEntity: persona }, persona] }}
+>
+  <section class="bio-testa">
+    <img class="bio-foto" src="/chi-sono/carmine.webp" srcset="/chi-sono/carmine-320.webp 320w, /chi-sono/carmine.webp 640w" sizes="(max-width: 40rem) 11rem, 14rem" width="640" height="640" alt="Carmine Tornincasa" />
+    <div>
+      <h1>Carmine Tornincasa</h1>
+      <p class="bio-ruolo">{TESTI.sottotitolo} <a href={INSTAGRAM} target="_blank" rel="noopener">ripetizioni_di_analisi_mate</a></p>
+    </div>
+  </section>
+
+  <ul class="bio-punti">
+    {TESTI.punti.map(([icona, forte, resto]) => <li><span aria-hidden="true">{icona}</span> <span><strong>{forte}</strong>{resto}</span></li>)}
+  </ul>
+
+  <h2>{TESTI.studenti}</h2>
+  <div class="bio-studenti">
+    <div>
+      <p class="bio-dove"><span aria-hidden="true">📍</span> {TESTI.dove}</p>
+      <p><strong>{TESTI.oltre[0]}</strong>{TESTI.oltre[1]}<br />{TESTI.copertura[0]}<strong>{TESTI.copertura[1]}</strong>{TESTI.copertura[2]}</p>
+      <p class="bio-dati-titolo"><span aria-hidden="true">🎯</span> {TESTI.dati}</p>
+      <ul class="bio-citta">
+        {TESTI.citta.map(([n, s]) => <li><strong>{n}</strong> {s}</li>)}
+      </ul>
+    </div>
+    <img class="bio-mappa" src="/chi-sono/mappa-studenti.webp" width="640" height="702" loading="lazy" alt={TESTI.mappa} />
+  </div>
+  <p class="bio-universita"><span aria-hidden="true">🌐</span> {TESTI.universita}</p>
+
+  <h2>{TESTI.missione}</h2>
+  {TESTI.paragrafi.map((p) => <p>{p}</p>)}
+
+  <p class="bio-prenota"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a></p>
+</Base>
+
+<style>
+  .bio-testa { display: flex; align-items: center; gap: 1.5rem; margin: 0.5rem 0 1.25rem; }
+  .bio-testa h1 { margin: 0 0 0.35rem; }
+  .bio-foto { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 4px var(--carta-2); }
+  .bio-ruolo { margin: 0; font-family: var(--ui); color: var(--inchiostro-2); }
+  .bio-punti { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.6rem; }
+  .bio-punti li { display: flex; gap: 0.6rem; align-items: baseline; }
+  .bio-punti strong, .bio-citta strong { color: var(--accento); font-weight: 600; }
+  .bio-studenti { display: grid; grid-template-columns: 1fr 15rem; gap: 1.5rem; align-items: start; }
+  .bio-dove, .bio-dati-titolo { font-family: var(--ui); font-weight: 600; margin-bottom: 0.4rem; }
+  .bio-citta { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; }
+  .bio-mappa { width: 100%; height: auto; border-radius: var(--raggio); border: 1px solid var(--riga); }
+  .bio-universita { margin-top: 1.25rem; }
+  .bio-prenota { margin-top: 2rem; text-align: center; }
+  .bio-prenota .bio-bottone { display: inline-block; padding: 0.7rem 1.4rem; border-radius: 999px; background: var(--accento); color: #fff; text-decoration: none; font-family: var(--ui); font-weight: 600; }
+  @media (max-width: 40rem) {
+    .bio-testa { flex-direction: column; text-align: center; }
+    .bio-foto { width: 11rem; height: 11rem; }
+    .bio-studenti { grid-template-columns: 1fr; }
+    .bio-mappa { max-width: 20rem; margin: 0 auto; }
+  }
+</style>

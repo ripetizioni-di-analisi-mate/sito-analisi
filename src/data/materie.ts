@@ -86,7 +86,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: 'Vettori, matrici e sistemi lineari, spazi vettoriali e applicazioni lineari, autovalori e diagonalizzazione, rette, piani, coniche e quadriche.',
     colore: '#6b5ca5',
     gruppo: 'Università',
-    attiva: false, // diventa true quando i 10 argomenti sono scritti e verificati
+    attiva: true,
     argomenti: [
       { slug: 'vettori', titolo: 'Vettori nel piano e nello spazio', breve: 'Vettori' },
       { slug: 'matrici', titolo: 'Matrici e operazioni tra matrici', breve: 'Matrici' },

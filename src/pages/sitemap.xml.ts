@@ -13,6 +13,7 @@ export async function GET() {
   const due = (p: string, priorita: number, conEn = true) => pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita });
 
   due('/', 1.0);
+  due('/chi-sono', 0.5);
   for (const p of ['/prezzi', '/contatti', '/privacy']) due(p, 0.3);
   for (const m of MATERIE.filter((x) => x.attiva)) {
     due(`/${m.slug}`, 0.9);

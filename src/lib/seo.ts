@@ -14,7 +14,7 @@ export const ORGANIZZAZIONE = {
   name: 'Ripetizioni di Analisi',
   url: `${SITO}/`,
   logo: `${SITO}/logo-512.png`,
-  founder: { '@type': 'Person', name: 'Carmine Tornincasa' },
+  founder: { '@type': 'Person', '@id': `${SITO}/#carmine`, name: 'Carmine Tornincasa', url: `${SITO}/chi-sono` },
   sameAs: [INSTAGRAM],
 };
 
