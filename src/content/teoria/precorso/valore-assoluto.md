@@ -16,7 +16,7 @@ x & \text{se } x \geq 0 \\
 $$
 Il risultato *non* è mai negativo: quando $x < 0$, il numero $-x$ è positivo. Per esempio $|7| = 7$ e $|-7| = -(-7) = 7$. Ogni regola risolutiva di questo capitolo discende da questa **definizione per casi**.
 
-::grafico{f="abs(x)" xmin=-5 xmax=5 ymin=-1 ymax=5 titolo="y = |x|: per x ≥ 0 coincide con y = x, per x < 0 con y = −x"}
+::grafico{f="abs(x)" xmin=-5 xmax=5 ymin=-1 ymax=5 titolo="$y = |x|$ coincide con $y = x$ per $x \geq 0$ e con $y = -x$ per $x < 0$"}
 :::
 
 :::definizione{#modulo-come-distanza titolo="Il valore assoluto come distanza"}
@@ -30,7 +30,7 @@ Per ogni $a, b \in \mathbb{R}$ valgono
 $$
 |ab| = |a|\,|b|, \qquad |a|^2 = a^2, \qquad |a + b| \leq |a| + |b| .
 $$
-La prima si verifica esaminando i quattro casi sui segni di $a$ e $b$ e serve a scomporre un modulo, per esempio $|{-3x}| = 3\,|x|$. La seconda vale perché $a$ e $|a|$ differiscono al più per il segno, che il quadrato cancella; poiché i moduli non sono negativi, confrontare due moduli equivale a **confrontare i loro quadrati**, e su questa osservazione si fonda la risoluzione di $|A| > |B|$ per elevamento al quadrato. La terza è la **disuguaglianza triangolare** e viene usata nelle maggiorazioni, per esempio nel capitolo sui limiti: per $a = 5$ e $b = -3$ si ha $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, e l'uguaglianza vale quando $a$ e $b$ hanno lo stesso segno.
+La prima si verifica esaminando i quattro casi sui segni di $a$ e $b$ e serve a scomporre un modulo, per esempio $|{-3x}| = 3\,|x|$. La seconda vale perché $a$ e $|a|$ differiscono al più per il segno, che il quadrato cancella; poiché i moduli non sono negativi, confrontare due moduli equivale a **confrontare i loro quadrati**, e su questa osservazione si fonda la risoluzione di $|A| > |B|$ per elevamento al quadrato. La terza è la **disuguaglianza triangolare** e viene usata nelle maggiorazioni, per esempio nel capitolo sui limiti: per $a = 5$ e $b = -3$ si ha $|5 + (-3)| = 2 \leq 8 = |5| + |-3|$, e l'uguaglianza vale se e solo se $ab \geq 0$.
 :::
 
 :::attenzione
@@ -43,9 +43,9 @@ Il modulo non si toglie riscrivendo $|A| = A$: l'uguaglianza vale *solo* dove $A
 ## L'equazione |A| = k
 
 :::teorema{#equazioni-con-modulo titolo="Equazione della forma |A| = k"}
-$A$ è un'espressione nella variabile $x$ e $k$ una costante. I *soli* numeri con valore assoluto $k > 0$ sono $k$ e $-k$, quindi i casi sono tre.
+$A$ è un'espressione nella variabile $x$ e $k$ una costante. I casi da distinguere dipendono dal segno di $k$.
 
-- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$.
+- $k > 0$: $\ |A| = k \iff A = k \ \vee \ A = -k$, perché i *soli* numeri con valore assoluto $k$ sono $k$ e $-k$.
 - $k = 0$: $\ |A| = 0 \iff A = 0$, perché il solo numero con valore assoluto nullo è $0$.
 - $k < 0$: **nessuna soluzione**, perché $|A| \geq 0$ per ogni $x$.
 :::

@@ -1,6 +1,6 @@
 ---
 titolo: Insiemi, induzione e funzioni elementari
-sommario: Il linguaggio degli insiemi e gli insiemi numerici da N a R, il principio di induzione e il binomio di Newton, poi le funzioni elementari con i loro grafici — il bagaglio di partenza per tutta l'analisi.
+sommario: Il linguaggio degli insiemi e gli insiemi numerici da N a R, il principio di induzione e il binomio di Newton, poi le funzioni elementari con i loro grafici, il bagaglio di partenza per tutta l'analisi.
 ---
 
 ## Il linguaggio degli insiemi
@@ -27,7 +27,7 @@ $A = \{x \in \mathbb{R} : x^2 < 4\}$. Si ha $1 \in A$ perché $1^2 = 1 < 4$, e $
 :::
 
 :::attenzione
-I simboli $\in$ e $\subseteq$ hanno significati **diversi**: $\in$ lega un elemento a un insieme, $\subseteq$ lega due insiemi. Per $A = \{1, 2\}$ le scritture corrette sono $1 \in A$ e $\{1\} \subseteq A$; le scritture $1 \subseteq A$ e $\{1\} \in A$ sono **false**, perché $\{1\}$ non è uno dei due elementi di $A$ e $1$ non è un insieme.
+I simboli $\in$ e $\subseteq$ hanno significati **diversi**: $\in$ lega un elemento a un insieme, $\subseteq$ lega due insiemi. Per $A = \{1, 2\}$ le scritture corrette sono $1 \in A$ e $\{1\} \subseteq A$; le scritture $1 \subseteq A$ e $\{1\} \in A$ sono **false**, perché $1$ non è un insieme e $\{1\}$ non è uno dei due elementi di $A$.
 :::
 
 ## Operazioni tra insiemi
@@ -181,7 +181,7 @@ Ogni sottoinsieme di $\mathbb{R}$ non vuoto e limitato superiormente ammette **e
 :::
 
 :::osservazione
-In $\mathbb{Q}$ la completezza **non vale**. Sia $A = \{x \in \mathbb{Q} : x \geq 0,\ x^2 < 2\}$: è non vuoto, perché $1 \in A$, ed è limitato superiormente, perché da $x \geq 2$ segue $x^2 \geq 4 > 2$, quindi $2$ è un maggiorante. In $\mathbb{R}$ il suo estremo superiore è $\sqrt{2}$, che non è razionale. Tra i soli numeri razionali, invece, $A$ non ha estremo superiore. Ogni maggiorante razionale $L$ soddisfa $L > \sqrt{2}$: se fosse $L < \sqrt{2}$, per la **densità** di $\mathbb{Q}$ esisterebbe un razionale $q$ con $L < q < \sqrt{2}$, che apparterrebbe ad $A$ (è positivo, perché $L \geq 1$, e il suo quadrato è minore di $2$) e supererebbe $L$; l'uguaglianza $L = \sqrt{2}$ è esclusa perché $\sqrt{2} \notin \mathbb{Q}$. Di nuovo per densità esiste allora un razionale $q'$ con $\sqrt{2} < q' < L$, e $q'$ è un maggiorante di $A$ più piccolo di $L$, poiché ogni $x \in A$ soddisfa $x < \sqrt{2} < q'$. Quindi nessun maggiorante razionale è il minimo dei maggioranti razionali e, dentro $\mathbb{Q}$, l'insieme $A$ **non ha estremo superiore**.
+In $\mathbb{Q}$ la completezza **non vale**. Sia $A = \{x \in \mathbb{Q} : x \geq 0,\ x^2 < 2\}$: è non vuoto, perché $1 \in A$, ed è limitato superiormente, perché da $x \geq 2$ segue $x^2 \geq 4 > 2$, quindi $2$ è un maggiorante. In $\mathbb{R}$ il suo estremo superiore è $\sqrt{2}$, che non è razionale. Tra i soli numeri razionali, invece, $A$ non ha estremo superiore. Ogni maggiorante razionale $L$ soddisfa $L > \sqrt{2}$: se fosse $L < \sqrt{2}$, per la **densità** di $\mathbb{Q}$ esisterebbe un razionale $q$ con $L < q < \sqrt{2}$, che apparterrebbe ad $A$ (è positivo, perché $q > L \geq 1$, dato che $L$ è un maggiorante e $1 \in A$, e il suo quadrato è minore di $2$) e supererebbe $L$; l'uguaglianza $L = \sqrt{2}$ è esclusa perché $\sqrt{2} \notin \mathbb{Q}$. Di nuovo per densità esiste allora un razionale $q'$ con $\sqrt{2} < q' < L$, e $q'$ è un maggiorante di $A$ più piccolo di $L$, poiché ogni $x \in A$ soddisfa $x < \sqrt{2} < q'$. Quindi nessun maggiorante razionale è il minimo dei maggioranti razionali e, dentro $\mathbb{Q}$, l'insieme $A$ **non ha estremo superiore**.
 :::
 
 ## Il principio di induzione
@@ -233,7 +233,7 @@ $$
 La disuguaglianza stima *dal basso* una potenza con un'espressione di primo grado in $n$, molto più semplice da controllare. Con $x = 1$ dà $2^n \geq 1 + n$ per ogni $n$. Si usa nello studio della successione geometrica e nella costruzione del numero $e$; si rimanda al capitolo sulle successioni.
 
 :::dimostrazione
-Si procede per **induzione** su $n$, con $x \geq -1$ fissato. Base ($n = 0$): $(1 + x)^0 = 1$ e $1 + 0 \cdot x = 1$, quindi la disuguaglianza vale con l'uguale. Passo: sia $(1 + x)^n \geq 1 + nx$. Poiché $x \geq -1$, il fattore $1 + x$ è **non negativo**, quindi moltiplicando i due membri dell'ipotesi induttiva per $1 + x$ il verso *non* cambia:
+Si procede per **induzione** su $n$, con $x \geq -1$ fissato. Base ($n = 0$): $(1 + x)^0 = 1$ e $1 + 0 \cdot x = 1$, quindi la disuguaglianza è verificata come uguaglianza. Passo: sia $(1 + x)^n \geq 1 + nx$. Poiché $x \geq -1$, il fattore $1 + x$ è **non negativo**, quindi moltiplicando i due membri dell'ipotesi induttiva per $1 + x$ il verso *non* cambia:
 $$
 (1 + x)^{n+1}
 = (1 + x)^n (1 + x)
@@ -275,7 +275,7 @@ $$
 \binom{n}{k} = \binom{n}{n-k}, \qquad
 \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1} \quad (k \leq n - 1).
 $$
-Le prime due proprietà seguono dalla definizione, poiché scambiare $k$ con $n - k$ lascia invariato il denominatore $k!\,(n-k)!$. La terza è la **formula di Stifel** e si verifica riducendo le due frazioni allo stesso denominatore $(k+1)!\,(n-k)!$. La formula di Stifel genera il **triangolo di Tartaglia**, nel quale ogni coefficiente è la somma dei due coefficienti sopra di esso, e interviene nel passo induttivo della dimostrazione del binomio di Newton. Per esempio $\dbinom{4}{1} + \dbinom{4}{2} = 4 + 6 = 10 = \dbinom{5}{2}$.
+Le prime due proprietà seguono dalla definizione; in particolare la seconda vale perché scambiare $k$ con $n - k$ lascia invariato il denominatore $k!\,(n-k)!$. La terza è la **formula di Stifel** e si verifica riducendo le due frazioni allo stesso denominatore $(k+1)!\,(n-k)!$. La formula di Stifel genera il **triangolo di Tartaglia**, nel quale ogni coefficiente è la somma dei due coefficienti sopra di esso, e interviene nel passo induttivo della dimostrazione del binomio di Newton. Per esempio $\dbinom{4}{1} + \dbinom{4}{2} = 4 + 6 = 10 = \dbinom{5}{2}$.
 :::
 
 ## Il binomio di Newton
@@ -333,7 +333,7 @@ $f : A \to B$ è
 - **suriettiva** se l'immagine coincide con il codominio, cioè se ogni $y \in B$ è della forma $f(x)$ per qualche $x \in A$;
 - **biiettiva** se è iniettiva e suriettiva, cioè se ogni $y \in B$ proviene da uno e un solo $x \in A$.
 
-Sul grafico l'iniettività si legge con le **rette orizzontali**: $f$ è iniettiva se ogni retta $y = c$ interseca il grafico *al più* in un punto. $f(x) = x^2$ su $\mathbb{R}$ assume lo stesso valore in $1$ e in $-1$, quindi su $\mathbb{R}$ la retta $y = 1$ interseca il grafico in due punti; la restrizione a $[0, +\infty)$ è iniettiva. L'iniettività decide se una funzione è **invertibile**, come precisato nel blocco seguente.
+Sul grafico l'iniettività si legge con le **rette orizzontali**: $f$ è iniettiva se ogni retta $y = c$ interseca il grafico *al più* in un punto. $f(x) = x^2$ su $\mathbb{R}$ assume lo stesso valore in $1$ e in $-1$, quindi su $\mathbb{R}$ la retta $y = 1$ interseca il grafico in due punti; la restrizione a $[0, +\infty)$ è iniettiva. L'iniettività è la condizione che permette di definire la **funzione inversa**.
 
 ::grafico{f="x^2;1" xmin=-3 xmax=3 ymin=-1 ymax=6 punti="-1,1,pieno;1,1,pieno" titolo="La retta $y = 1$ (tratteggiata) interseca la parabola $y = x^2$ nei due punti di ascissa $-1$ e $1$: su $\mathbb{R}$ la funzione $x^2$ non è iniettiva"}
 
@@ -383,11 +383,11 @@ Sono pari $x^2$, $x^4$, $|x|$, $\cos x$; sono dispari $x$, $x^3$, $\sin x$, $\ta
 :::
 
 :::definizione{#periodica titolo="Funzione periodica"}
-$f$ è **periodica** di periodo $T > 0$ se $f(x + T) = f(x)$ per ogni $x$ del dominio con $x + T$ nel dominio. Il più piccolo periodo positivo, quando esiste, è il **periodo minimo**. $\sin x$ e $\cos x$ hanno periodo minimo $2\pi$; $\tan x$ ha periodo minimo $\pi$. Il grafico si ripete per traslazione orizzontale di $T$, quindi lo studio di una funzione periodica si svolge su un *solo* intervallo di ampiezza $T$. Per lo stesso motivo le equazioni trigonometriche hanno **infinite soluzioni**, elencate con un intero $k$.
+$f$ è **periodica** di periodo $T > 0$ se, per ogni $x$ del dominio, anche $x + T$ appartiene al dominio e $f(x + T) = f(x)$. Il più piccolo periodo positivo, quando esiste, è il **periodo minimo**. $\sin x$ e $\cos x$ hanno periodo minimo $2\pi$; $\tan x$ ha periodo minimo $\pi$. Il grafico si ripete per traslazione orizzontale di $T$, quindi lo studio di una funzione periodica si svolge su un *solo* intervallo di ampiezza $T$. Per lo stesso motivo le equazioni trigonometriche hanno **infinite soluzioni**, elencate con un intero $k$.
 :::
 
 :::definizione{#monotona titolo="Funzione monotona"}
-$f$ è **crescente** su un insieme $I$ del dominio se da $x_1 < x_2$ segue $f(x_1) \leq f(x_2)$, **strettamente crescente** se segue $f(x_1) < f(x_2)$; decrescente e strettamente decrescente si definiscono con le disuguaglianze opposte. Una funzione strettamente monotona è **iniettiva**, perché punti distinti hanno immagini distinte, quindi è invertibile sulla sua immagine; l'inversa è strettamente monotona nello stesso verso. Applicare una funzione strettamente crescente ai due membri di una disuguaglianza *conserva* il verso; applicare una funzione strettamente decrescente lo *rovescia*. Su questa proprietà si fondano le disequazioni esponenziali e logaritmiche di questo capitolo.
+$f$ è **crescente** su un insieme $I$ del dominio se da $x_1 < x_2$ segue $f(x_1) \leq f(x_2)$, **strettamente crescente** se segue $f(x_1) < f(x_2)$; decrescente e strettamente decrescente si definiscono con le disuguaglianze opposte. Una funzione strettamente monotona è **iniettiva**, perché da $x_1 < x_2$ segue, a seconda del verso di monotonia, $f(x_1) < f(x_2)$ oppure $f(x_1) > f(x_2)$, e in entrambi i casi $f(x_1) \neq f(x_2)$; quindi è invertibile sulla sua immagine; l'inversa è strettamente monotona nello stesso verso. Applicare una funzione strettamente crescente ai due membri di una disuguaglianza *conserva* il verso; applicare una funzione strettamente decrescente lo *rovescia*. Su questa proprietà si fondano le disequazioni esponenziali e logaritmiche di questo capitolo.
 :::
 
 :::definizione{#limitata titolo="Funzione limitata"}
@@ -572,7 +572,7 @@ Quando una funzione è assegnata con una sola espressione analitica, il **domini
 - l'argomento di $\arcsin$ e di $\arccos$ appartiene a $[-1, 1]$;
 - in $f(x)^{g(x)}$ la base $f(x)$ è maggiore di $0$.
 
-Le condizioni devono valere *tutte* nello stesso punto, perciò si raccolgono in un **sistema** e il dominio è l'insieme delle sue soluzioni. Il dominio naturale è il **primo passo** di ogni studio di funzione e di ogni calcolo di limite.
+Le condizioni devono essere soddisfatte *tutte* nello stesso punto, perciò si raccolgono in un **sistema** e il dominio è l'insieme delle sue soluzioni. Il dominio naturale è il **primo passo** di ogni studio di funzione e di ogni calcolo di limite.
 :::
 
 :::esempio{titolo="Dominio con logaritmo e radice"}
@@ -608,7 +608,16 @@ f(x) > g(x) \\[4pt]
 g(x) > 0
 \end{cases}
 $$
-dove la condizione $f(x) > 0$ segue dalle altre due; per $0 < a < 1$ il verso del confronto tra gli argomenti si **rovescia**. Questi criteri riducono ogni disequazione esponenziale o logaritmica elementare a una disequazione algebrica.
+dove la condizione $f(x) > 0$ segue dalle altre due. Per $0 < a < 1$ il verso del confronto tra gli argomenti si **rovescia** e la condizione di esistenza da imporre diventa quella su $f$:
+$$
+\log_a f(x) > \log_a g(x)
+\iff
+\begin{cases}
+f(x) < g(x) \\[4pt]
+f(x) > 0
+\end{cases}
+$$
+e in questo caso $g(x) > 0$ segue dalle altre due. Questi criteri riducono ogni disequazione esponenziale o logaritmica elementare a una disequazione algebrica.
 :::
 
 :::esempio
