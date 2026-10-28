@@ -1,5 +1,6 @@
 ---
-// Bollino accanto al nome di una materia: "Sbloccata" se l'account la possiede, altrimenti lucchetto e prezzo.
+// Bollino accanto al nome di una materia: "Sbloccata" se l'account la possiede, altrimenti l'invito all'anteprima gratuita
+// (nella versione compatta, quella dell'indice, solo la spunta: niente segni per le materie non sbloccate).
 // Quale dei due si vede lo decide il CSS generato in Base.astro, a partire da data-materie sull'elemento html.
 import { T, type Lingua } from '../i18n';
 interface Props { prezzo?: number; compatto?: boolean; lingua?: Lingua }
@@ -8,6 +9,6 @@ const { prezzo, compatto = false, lingua = 'it' } = Astro.props;
 {prezzo && (
   <span class:list={['stato', { compatto }]}>
     <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>{!compatto && T(lingua).sbloccata}</span>
-    <span class="stato-bloccata"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>{!compatto && `${prezzo} €`}</span>
+    {!compatto && <span class="stato-bloccata"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{T(lingua).anteprimaBollino} →</span>}
   </span>
 )}

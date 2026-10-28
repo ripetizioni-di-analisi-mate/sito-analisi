@@ -3,7 +3,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   precorso: {
     titolo: 'Precalculus',
     breve: 'Precalculus',
-    descrizione: 'The mathematics you need before Analysis 1: logic, polynomials, equations and inequalities of every kind, analytic geometry.',
+    descrizione: 'The mathematics you need before Mathematical Analysis 1: logic, polynomials, equations and inequalities of every kind, analytic geometry.',
     argomenti: {
       logica: { titolo: 'Elementary logic', breve: 'Logic' },
       'potenze-e-radici': { titolo: 'Powers and roots', breve: 'Powers and roots' },
@@ -18,7 +18,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'analisi-1': {
-    titolo: 'Mathematical Analysis 1',
+    titolo: 'Mathematical Analysis 1 (Module A)',
     breve: 'Analysis 1',
     descrizione: 'Limits, derivatives, integrals, series and differential equations: the theory and the exercises for the exam.',
     argomenti: {
@@ -34,7 +34,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'analisi-2': {
-    titolo: 'Mathematical Analysis 2',
+    titolo: 'Mathematical Analysis 2 (Module B)',
     breve: 'Analysis 2',
     descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions.',
     argomenti: {

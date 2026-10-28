@@ -25,9 +25,12 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
         <div class="testo"><strong>{t.accessoAttivo}</strong><span>{t.accessoAttivoTesto(m.titolo)}</span></div>
       </div>
       <div class="stato-bloccata">
-        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="9" y="18" width="22" height="16" rx="3.5"/><path d="M14 18v-4.5a6 6 0 0 1 12 0V18"/></svg>
+        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20S10 9 20 9s16 11 16 11-6 11-16 11S4 20 4 20Z"/><circle cx="20" cy="20" r="5"/></svg>
         <div class="testo"><strong>{t.anteprima}</strong><span>{t.anteprimaTesto}</span></div>
-        <a class="bottone-sblocca" href={link(lingua, `/${m.slug}/sblocca`)}>{t.sblocca} · {m.prezzo} €</a>
+        <div class="azioni-anteprima">
+          <a class="bottone-sblocca" href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}>{t.iniziaAnteprima} →</a>
+          <a class="link-sblocca" href={link(lingua, `/${m.slug}/sblocca`)}>{t.sbloccaTutto} · {m.prezzo} €</a>
+        </div>
       </div>
     </div>
   )}

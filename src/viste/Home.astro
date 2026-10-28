@@ -15,6 +15,7 @@ const MATERIE = materieL(lingua);
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
     <button type="submit">{t.cerca}</button>
   </form>
+  <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   {gruppiL(lingua).map((g) => (
     <section class="gruppo">
       <h2 class="nome-gruppo">{g}</h2>

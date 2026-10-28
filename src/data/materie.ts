@@ -20,7 +20,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'precorso',
     titolo: 'Precorso',
     breve: 'Precorso',
-    descrizione: 'La matematica che serve prima di Analisi 1: logica, polinomi, equazioni e disequazioni di ogni tipo, geometria analitica.',
+    descrizione: 'La matematica che serve prima di Analisi matematica 1: logica, polinomi, equazioni e disequazioni di ogni tipo, geometria analitica.',
     colore: '#a8762b',
     gruppo: 'Università',
     attiva: true,
@@ -39,7 +39,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'analisi-1',
-    titolo: 'Analisi 1',
+    titolo: 'Analisi matematica 1 (Modulo A)',
     breve: 'Analisi 1',
     descrizione: 'Limiti, derivate, integrali, serie ed equazioni differenziali: la teoria e gli esercizi per l\'esame.',
     colore: '#2f6f68',
@@ -59,7 +59,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'analisi-2',
-    titolo: 'Analisi 2',
+    titolo: 'Analisi matematica 2 (Modulo B)',
     breve: 'Analisi 2',
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
     colore: '#3b5f8f',

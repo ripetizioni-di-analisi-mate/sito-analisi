@@ -70,8 +70,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       </a>
       {m && (
         <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
-          {m.prezzo && <svg class="lucchetto chiuso" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>}
-          {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 5.9-.8"/></svg>}
+          {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
           <span>{m.breve}</span>
           {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
         </a>
