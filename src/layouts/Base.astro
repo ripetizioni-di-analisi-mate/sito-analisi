@@ -51,7 +51,7 @@ const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
         <span>Indice</span>
       </button>
       <a class="marchio" href={url('/')}>
-        <img class="logo" src={url('/logo.svg')} alt="" width="28" height="28" />
+        {/* Logo: quando arriva quello definitivo, mettere qui <img class="logo" src={url('/logo.svg')} alt="" width="28" height="28" /> */}
         <span>{NOME_SITO}</span>
       </a>
       {m && <a class="materia-corrente" href={url(`/${m.slug}`)}>{m.breve}</a>}

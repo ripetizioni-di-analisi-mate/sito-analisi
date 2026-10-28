@@ -14,13 +14,21 @@ import { url } from '../lib/url';
   {gruppi().map((g) => (
     <section class="gruppo">
       <h2 class="nome-gruppo">{g}</h2>
-      <ul class="elenco-materie">
+      <ul class="griglia-materie">
         {MATERIE.filter((m) => m.gruppo === g).map((m) => (
-          <li style={`--accento: ${m.colore}`}>
+          <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`}>
             {m.attiva ? (
-              <a href={url(`/${m.slug}`)}><span class="tacca"></span><span class="nome">{m.titolo}</span><span class="freccia" aria-hidden="true"></span></a>
+              <a href={url(`/${m.slug}`)}>
+                <h3>{m.titolo}</h3>
+                <p>{m.descrizione}</p>
+                <span class="conteggio">{m.argomenti.length} argomenti</span>
+              </a>
             ) : (
-              <span class="in-preparazione"><span class="tacca"></span><span class="nome">{m.titolo}</span><small>in preparazione</small></span>
+              <div>
+                <h3>{m.titolo}</h3>
+                <p>{m.descrizione}</p>
+                <span class="conteggio">in preparazione</span>
+              </div>
             )}
           </li>
         ))}
