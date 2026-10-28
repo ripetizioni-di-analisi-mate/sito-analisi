@@ -1,0 +1,18 @@
+# Giro 1, Analisi 1: integrali
+
+Riletti: teoria `src/content/teoria/analisi-1/integrali.md`, schede svolte 1-8, tracce 1-14. Tutti i risultati delle schede e delle tracce sono stati ricalcolati con sympy (derivata della primitiva proposta, integrali definiti, limiti): sono corretti.
+
+## Modifiche fatte
+
+- **Figure**, `teoria/analisi-1/integrali.md`, ultimo esempio della sezione "Aree tra curve" (area tra $y = x^2$ e $y = x$). C'era il grafico della sola differenza $y = x - x^2$, senza area colorata, mentre il testo parla della regione tra retta e parabola. Adesso il grafico mostra la retta, la parabola tratteggiata, i punti di intersezione e la regione colorata, con didascalia "area $\frac{1}{6}$". Stessa modifica nel file inglese.
+- **Didattica**, `teoria/analisi-1/integrali.md`, blocco `#funzioni-integrabili`. C'era "La dimostrazione per le funzioni continue usa l'uniforme continuità e si omette": l'uniforme continuità non è definita in nessuna pagina del sito. Adesso "Le dimostrazioni si omettono".
+- **Matematica**, `teoria/analisi-1/integrali.md`, blocco `#teorema-fondamentale`. L'enunciato diceva "$F$ è derivabile su $[a, b]$" senza precisare cosa significhi negli estremi. Aggiunto "dove negli estremi $a$ e $b$ si intendono la derivata destra e la derivata sinistra". Stessa precisazione nel file inglese.
+- **Didattica**, `svolti/analisi-1/integrali/5.md`, esercizio 1. Il fattore $\frac{1}{2}$ davanti all'integrale in $t$ compariva senza passaggio. Adesso il testo dice "$dt = 2x\, dx$, cioè $x\, dx = \frac{1}{2}\, dt$".
+
+## Modifiche da fare
+
+- **Schede svolte, tipologia mancante: integrali di funzioni trigonometriche.** Lo studente non trova nessun esercizio su $\int \sin^2 x\, dx$, $\int \sin^3 x\, dx$, $\int \sin x \cos^2 x\, dx$ o sulle sostituzioni $t = \tan x$ e $t = \tan \frac{x}{2}$, che negli scritti compaiono spesso. Proposta: una scheda 9 "Integrali di funzioni trigonometriche" con tre esercizi (potenza pari con le formule di bisezione, potenza dispari con la sostituzione $t = \cos x$, razionale in $\sin x$ e $\cos x$ con $t = \tan \frac{x}{2}$), e le formule parametriche richiamate nella teoria accanto alle sostituzioni tipiche.
+- **Schede svolte, tipologia mancante: studio di una funzione integrale.** Esercizi del tipo "studiare $F(x) = \int_0^x \frac{e^{-t}}{1+t^2}\, dt$: dominio, segno, monotonia, concavità, limiti" sono frequenti all'esame e il sito ne ha solo la parte "derivata" (scheda 7). Proposta: una scheda dedicata con due esercizi, il secondo con integranda che cambia segno, e il grafico qualitativo finale.
+- **Scheda 4, fratti semplici misti.** Manca il caso in cui il denominatore ha insieme una radice reale e un fattore di secondo grado irriducibile, per esempio $\int \frac{1}{x(x^2+1)}\, dx$, che è il caso in cui gli studenti sbagliano più spesso l'impostazione $\frac{A}{x} + \frac{Bx + C}{x^2+1}$. Proposta: un esercizio 4 nella scheda 4 e, nella teoria, un esempio che mostri la decomposizione con il numeratore $Bx + C$.
+- **Integrazione per parti negli integrali definiti.** La teoria enuncia la formula con $\bigl[ f g \bigr]_a^b$ ma nessuna scheda e nessuna traccia la usa (la scheda 5 è tutta sulla sostituzione). Proposta: una traccia come $\int_0^1 x e^{-x}\, dx$ oppure $\int_1^e \ln x\, dx$, con soluzione numerica.
+- **Teoria, blocco `#funzioni-razionali`.** Nell'elenco puntato si mescolano i passi del procedimento (divisione, fattorizzazione) e i casi della decomposizione (radici semplici, multiple, complesse): lo studente fatica a capire cosa va fatto sempre e cosa dipende dal denominatore. Proposta: due elenchi distinti, "procedimento" e "addendi della decomposizione".
