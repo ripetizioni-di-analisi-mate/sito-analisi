@@ -76,7 +76,7 @@ Therefore the convergence is **uniform** on $[0, +\infty)$.
 :::attenzione
 The same sequence can converge uniformly on one set and not on another. $f_n(x) = x^n$ converges pointwise to $0$ on $[0, 1)$, but $\sup_{x \in [0,1)} x^n = 1$ for every $n$, so the convergence **is not uniform** on $[0, 1)$. On $[0, a]$ with $0 < a < 1$ we get $M_n = a^n \to 0$, so the convergence is **uniform** on *every* interval $[0, a]$. The set one works on is part of the answer.
 
-::grafico{f="x^8" xmin=0 xmax=1.2 ymin=-0.1 ymax=1.2 punti="0.8,0.1678,pieno;1,1,vuoto" segmenti="0.8,0,0.8,0.1678;0,0.1678,0.8,0.1678" etichette="0.78,-0.08,a" titolo="$y = x^8$ with $a = \dfrac{4}{5}$: on $[0, a]$ the maximum is $a^8 \approx 0{,}17$, while on $[0, 1)$ the values approach $1$ as $x \to 1^-$"}
+::grafico{f="x^8" xmin=0 xmax=1.2 ymin=-0.1 ymax=1.2 punti="0.8,0.1678,pieno;1,1,vuoto" segmenti="0.8,0,0.8,0.1678;0,0.1678,0.8,0.1678" etichette="0.78,-0.08,a" titolo="$y = x^8$ with $a = \dfrac{4}{5}$: on $[0, a]$ the maximum is $a^8 \approx 0.17$, while on $[0, 1)$ the values approach $1$ as $x \to 1^-$"}
 :::
 
 :::osservazione

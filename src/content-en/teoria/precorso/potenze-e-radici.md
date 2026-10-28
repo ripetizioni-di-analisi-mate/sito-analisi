@@ -100,7 +100,7 @@ The base of powers with rational exponent is **positive**. With a negative base 
 :::
 
 :::definizione{#esponente-reale titolo="Power with real exponent"}
-For $a > 0$ and $x$ real, the power $a^x$ is defined by approximating $x$ with rational exponents: $2^{\sqrt{2}}$ is the number approached by $2^{1{,}4}$, $2^{1{,}41}$, $2^{1{,}414}$ and so on. *All* the properties of powers remain valid, and the result is **always positive**: $a^x > 0$ for every real $x$. The exponential function, treated in the chapter on elementary functions, is built on this definition.
+For $a > 0$ and $x$ real, the power $a^x$ is defined by approximating $x$ with rational exponents: $2^{\sqrt{2}}$ is the number approached by $2^{1.4}$, $2^{1.41}$, $2^{1.414}$ and so on. *All* the properties of powers remain valid, and the result is **always positive**: $a^x > 0$ for every real $x$. The exponential function, treated in the chapter on elementary functions, is built on this definition.
 :::
 
 ## Rationalization

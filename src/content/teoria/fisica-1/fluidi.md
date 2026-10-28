@@ -270,7 +270,7 @@ Per l'**equazione di continuità** $v_2 = \dfrac{A_1}{A_2}\, v_1$. Il condotto �
 $$
 p_1 - p_2 = \frac{1}{2}\rho\,(v_2^2 - v_1^2) = \frac{1}{2}\rho\, v_1^2 \left( \frac{A_1^2}{A_2^2} - 1 \right) .
 $$
-Poiché $A_1 > A_2$, il fattore tra parentesi è positivo, quindi $p_1 > p_2$ e si può risolvere rispetto a $v_1$, ottenendo la formula dell'enunciato.
+Poiché $A_1 > A_2$, il fattore $\dfrac{A_1^2}{A_2^2} - 1$ è positivo, quindi $p_1 > p_2$ e si può risolvere rispetto a $v_1$, ottenendo la formula dell'enunciato.
 :::
 ::::
 

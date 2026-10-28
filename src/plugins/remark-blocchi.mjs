@@ -60,7 +60,7 @@ export default function remarkBlocchi() {
     visit(tree, (node) => {
       if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn')) {
         node.type = 'html';
-        node.value = node.name === 'grafico' ? grafico(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico({ ...(node.attributes || {}), inglese: E === EN }) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;

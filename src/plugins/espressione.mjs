@@ -45,12 +45,13 @@ function analizza(src) {
 const togli = (n) => (n && n.op === '()' ? togli(n.a) : n);
 const semplice = (n) => { n = togli(n); return n.num !== undefined || n.v || n.f; };
 // I decimali che sono frazioni semplici (0.5, 1.5, 0.25…) vanno in colonna, come nel resto del sito.
+let separatore = '{,}';
 const numero = (s) => {
   if (s.includes('.')) for (const q of [2, 3, 4, 5]) {
     const p = Number(s) * q;
     if (Math.abs(p - Math.round(p)) < 1e-9) return `\\dfrac{${Math.round(p)}}{${q}}`;
   }
-  return s.replace('.', '{,}');
+  return s.replace('.', separatore);
 };
 const iniziaConNumero = (n) => { n = togli(n); return n.num !== undefined || n.op === 'neg' || ((n.op === '^' || n.op === '*') && iniziaConNumero(n.a)); };
 
@@ -103,7 +104,8 @@ function semplifica(n) {
   return n;
 }
 
-export function inLatex(src, variabile = 'x') {
+export function inLatex(src, variabile = 'x', inglese = false) {
+  separatore = inglese ? '.' : '{,}';
   // numeri approssimati (più di due decimali) renderebbero la legenda illeggibile: lì basta la didascalia
   if (/\d\.\d{3,}/.test(String(src))) return null;
   const n = analizza(src);

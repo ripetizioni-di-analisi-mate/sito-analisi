@@ -314,7 +314,7 @@ A function $f : A \to B$ is a rule that assigns to each element $x \in A$ *one a
 $$
 f(A) = \{ y \in B : y = f(x) \ \text{for some}\ x \in A \} \subseteq B .
 $$
-The **graph** of $f$ is the set of points $(x, f(x))$ of the plane, as $x$ varies in $A$. Since each $x$ corresponds to a single value, every vertical line $x = c$ with $c \in A$ meets the graph in *exactly* one point. In this course $A$ and $B$ are subsets of $\mathbb{R}$; limits, derivatives and integrals are defined for functions of this type, therefore domain, range and graph are the starting point of every following chapter.
+The **graph** of $f$ is the set of points $(x, f(x))$ of the plane, as $x \in A$ varies. Since each $x$ corresponds to a single value, every vertical line $x = c$ with $c \in A$ meets the graph in *exactly* one point. In this course $A$ and $B$ are subsets of $\mathbb{R}$; limits, derivatives and integrals are defined for functions of this type, therefore domain, range and graph are the starting point of every following chapter.
 :::
 
 :::esempio{titolo="Domain and range of x²"}
@@ -462,7 +462,7 @@ For $a > 0$, $a \neq 1$, the **exponential function** $f(x) = a^x$ has domain $\
 $$
 a^{x+y} = a^x\, a^y, \qquad a^{x-y} = \frac{a^x}{a^y}, \qquad (a^x)^y = a^{x y}, \qquad a^0 = 1 .
 $$
-For $a > 1$ the function is **strictly increasing**; for $0 < a < 1$ it is **strictly decreasing**. Since $a^x = \left(\dfrac{1}{a}\right)^{-x}$, the graphs for reciprocal bases are symmetric with respect to the $y$-axis. The base most used in analysis is the number $e = 2{,}71828\ldots$; the behavior at the ends of the domain and the standard limits involving $e$ are found in the chapter on limits.
+For $a > 1$ the function is **strictly increasing**; for $0 < a < 1$ it is **strictly decreasing**. Since $a^x = \left(\dfrac{1}{a}\right)^{-x}$, the graphs for reciprocal bases are symmetric with respect to the $y$-axis. The base most used in analysis is the number $e = 2.71828\ldots$; the behavior at the ends of the domain and the standard limits involving $e$ are found in the chapter on limits.
 
 ::grafico{f="exp(x)" xmin=-3 xmax=3 ymin=-1 ymax=8 asintoti="y=0" titolo="$y = e^x$: range $(0, +\infty)$, strictly increasing"}
 

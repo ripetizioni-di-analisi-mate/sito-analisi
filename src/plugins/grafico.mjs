@@ -179,7 +179,7 @@ export function grafico(a) {
                 const [vx, vy] = (a.nomi ? lista(a.nomi, ',') : ['x', 'y']).map((v) => v.trim());
         // la voce automatica solo per i grafici y = f(x): in fisica il nome dell'asse non è sempre quello della curva
         if (vy !== 'y' || !/^[A-Za-zα-ωΑ-Ω]$/.test(vx)) return null;
-        const l = inLatex(lista(a.f)[k], vx);
+        const l = inLatex(lista(a.f)[k], vx, a.inglese);
         return l ? `${vy} = ${l}` : null;
       })() : null);
       if (tex) voci.push(`<span class="voce-legenda"><svg class="campione" viewBox="0 0 26 8" aria-hidden="true"><line class="curva c${k % 3}" x1="2" y1="4" x2="24" y2="4"/></svg>${katex.renderToString(tex, { throwOnError: false })}</span>`);
