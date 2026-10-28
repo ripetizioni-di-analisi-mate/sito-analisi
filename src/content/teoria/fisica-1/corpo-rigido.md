@@ -360,7 +360,7 @@ Sia un corpo di massa $M$ e raggio $R$, con momento d'inerzia $I_C$ rispetto all
 $$
 K = \frac{1}{2}\left( M + \frac{I_C}{R^2} \right) v_C^2 .
 $$
-Per un cilindro pieno $K = \dfrac{3}{4} M v_C^2$, per una sfera piena $K = \dfrac{7}{10} M v_C^2$, per un anello $K = M v_C^2$. 
+Per un cilindro pieno $K = \dfrac{3}{4} M v_C^2$, per una sfera piena $K = \dfrac{7}{10} M v_C^2$, per un anello $K = M v_C^2$, quindi a parità di massa e di velocità ha più energia il corpo con la massa più lontana dall'asse.
 
 :::dimostrazione
 Per l'**energia cinetica di un corpo rigido** $K = \dfrac{1}{2} M v_C^2 + \dfrac{1}{2} I_C\,\omega^2$, e nel rotolamento puro $\omega = \dfrac{v_C}{R}$; sostituendo si ottiene la tesi. Lo stesso risultato segue considerando il moto come rotazione attorno al punto di contatto $P$, con momento d'inerzia $I_P = I_C + M R^2$ per il **teorema di Steiner**:
