@@ -76,7 +76,7 @@ A tube about one meter long, closed at one end and filled with mercury, is turne
 :::
 
 :::richiamo{titolo="Definite integral"}
-If a quantity is distributed along an interval $[a, b]$ with contribution $f(y)\,dy$ on each piece of length $dy$, the total is $\displaystyle\int_a^b f(y)\,dy$. For the calculation we refer to the topic on definite integrals in Analysis 1.
+If a quantity is distributed along an interval $[a, b]$ with contribution $f(y)\,dy$ on each piece of length $dy$, the total is $\displaystyle\int_a^b f(y)\,dy$. For the calculation we refer to the topic on definite integrals in Mathematical Analysis 1.
 :::
 
 ::::teorema{#forza-su-una-parete titolo="Force on a vertical wall"}

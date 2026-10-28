@@ -52,7 +52,7 @@ For example a $3.0\,\mathrm{kg}$ crate on a smooth floor, pushed by a horizontal
 :::
 
 :::richiamo{titolo="Derivative and integral in motion"}
-Acceleration is the derivative of velocity and velocity is the derivative of position: $\vec{a} = \dfrac{d\vec{v}}{dt}$, $\vec{v} = \dfrac{d\vec{r}}{dt}$. Therefore the second law is a differential equation for the equation of motion. If the force is constant, integrating twice with respect to time one obtains uniformly accelerated motion, $x(t) = x_0 + v_0 t + \dfrac{1}{2} a t^2$. For derivatives and integrals see the Analysis 1 topics on derivatives and on integrals, and for uniformly accelerated motion see the topic on kinematics in one dimension.
+Acceleration is the derivative of velocity and velocity is the derivative of position: $\vec{a} = \dfrac{d\vec{v}}{dt}$, $\vec{v} = \dfrac{d\vec{r}}{dt}$. Therefore the second law is a differential equation for the equation of motion. If the force is constant, integrating twice with respect to time one obtains uniformly accelerated motion, $x(t) = x_0 + v_0 t + \dfrac{1}{2} a t^2$. For derivatives and integrals see the Mathematical Analysis 1 topics on derivatives and on integrals, and for uniformly accelerated motion see the topic on kinematics in one dimension.
 :::
 
 :::definizione{#peso titolo="Weight"}

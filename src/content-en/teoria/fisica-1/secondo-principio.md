@@ -276,7 +276,7 @@ Since $\rho$ is reversible, by the definition of entropy $\displaystyle\int_{\rh
 ## Entropy of the ideal gas
 
 :::richiamo{titolo="Integral of the reciprocal"}
-For $0 < a < b$, $\displaystyle\int_a^b \frac{dx}{x} = \ln b - \ln a = \ln\frac{b}{a}$ holds. See the topic on integrals in Analysis 1.
+For $0 < a < b$, $\displaystyle\int_a^b \frac{dx}{x} = \ln b - \ln a = \ln\frac{b}{a}$ holds. See the topic on integrals in Mathematical Analysis 1.
 :::
 
 ::::teorema{#entropia-del-gas-perfetto titolo="Change in entropy of the ideal gas"}

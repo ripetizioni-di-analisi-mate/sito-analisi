@@ -33,7 +33,7 @@ As $\Delta t$ tends to zero the chord $\Delta\vec{r}$ tends to the direction of 
 :::
 
 :::richiamo{titolo="Derivative of a vector"}
-If $\vec{r}(t) = x(t)\,\hat{\imath} + y(t)\,\hat{\jmath}$, with fixed unit vectors $\hat{\imath}$ and $\hat{\jmath}$ and differentiable components, then $\dfrac{d\vec{r}}{dt} = \dfrac{dx}{dt}\,\hat{\imath} + \dfrac{dy}{dt}\,\hat{\jmath}$, that is, one differentiates component by component. For the differentiation rules see the topic on derivatives in Analysis 1, and for the derivative of a vector see the topic on physical quantities and vectors.
+If $\vec{r}(t) = x(t)\,\hat{\imath} + y(t)\,\hat{\jmath}$, with fixed unit vectors $\hat{\imath}$ and $\hat{\jmath}$ and differentiable components, then $\dfrac{d\vec{r}}{dt} = \dfrac{dx}{dt}\,\hat{\imath} + \dfrac{dy}{dt}\,\hat{\jmath}$, that is, one differentiates component by component. For the differentiation rules see the topic on derivatives in Mathematical Analysis 1, and for the derivative of a vector see the topic on physical quantities and vectors.
 :::
 
 :::definizione{#accelerazione titolo="Acceleration"}
@@ -71,7 +71,7 @@ The same computation holds for the $y$ component, and recombining the components
 ::::
 
 :::richiamo{titolo="Fundamental theorem of calculus"}
-If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of it, that is, $F' = f$, then $\displaystyle\int_a^b f(t)\,dt = F(b) - F(a)$. See the topic on integrals in Analysis 1.
+If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of it, that is, $F' = f$, then $\displaystyle\int_a^b f(t)\,dt = F(b) - F(a)$. See the topic on integrals in Mathematical Analysis 1.
 :::
 
 :::osservazione{#forma-della-traiettoria titolo="Shape of the trajectory"}
@@ -261,7 +261,7 @@ Therefore $\vec{a}$ points opposite to $\vec{r}$, that is, toward the center, an
 ::::
 
 :::richiamo{titolo="Derivatives of composite sine and cosine"}
-By the chain rule, $\dfrac{d}{dt}\cos(\omega t + \theta_0) = -\omega\sin(\omega t + \theta_0)$ and $\dfrac{d}{dt}\sin(\omega t + \theta_0) = \omega\cos(\omega t + \theta_0)$. See the topic on derivatives in Analysis 1.
+By the chain rule, $\dfrac{d}{dt}\cos(\omega t + \theta_0) = -\omega\sin(\omega t + \theta_0)$ and $\dfrac{d}{dt}\sin(\omega t + \theta_0) = \omega\cos(\omega t + \theta_0)$. See the topic on derivatives in Mathematical Analysis 1.
 :::
 
 ## Nonuniform circular motion

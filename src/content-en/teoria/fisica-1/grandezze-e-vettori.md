@@ -299,7 +299,7 @@ Therefore $\vec{\tau} = 1.9\,\hat{k}\,\mathrm{N\cdot m}$. The positive sign indi
 ## Derivative of a vector
 
 :::richiamo{titolo="Derivative"}
-The derivative of a function $f$ at the instant $t$ is the limit of the difference quotient, $\dfrac{df}{dt} = \displaystyle\lim_{\Delta t \to 0} \frac{f(t + \Delta t) - f(t)}{\Delta t}$, when it exists and is finite. For the differentiation rules we refer to the topic on differential calculus in Analysis 1.
+The derivative of a function $f$ at the instant $t$ is the limit of the difference quotient, $\dfrac{df}{dt} = \displaystyle\lim_{\Delta t \to 0} \frac{f(t + \Delta t) - f(t)}{\Delta t}$, when it exists and is finite. For the differentiation rules we refer to the topic on differential calculus in Mathematical Analysis 1.
 :::
 
 :::definizione{#derivata-di-un-vettore titolo="Derivative of a vector"}

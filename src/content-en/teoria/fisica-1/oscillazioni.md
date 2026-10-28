@@ -67,7 +67,7 @@ The equation $y'' + a\,y' + b\,y = 0$, with $a, b \in \mathbb{R}$, has character
 - double real root $r$: $y = (C_1 + C_2 t)\,e^{r t}$;
 - complex roots $\lambda \pm i\mu$: $y = e^{\lambda t}\bigl(C_1\cos(\mu t) + C_2\sin(\mu t)\bigr)$.
 
-Given $y(t_0)$ and $y'(t_0)$, the initial value problem has one and only one solution. See the topic on differential equations in Analysis 1.
+Given $y(t_0)$ and $y'(t_0)$, the initial value problem has one and only one solution. See the topic on differential equations in Mathematical Analysis 1.
 :::
 
 ::::teorema{#equazione-del-moto-armonico titolo="Equation of harmonic motion"}
@@ -187,7 +187,7 @@ $$
 The theorem extends the mass-spring oscillator to every position of stable equilibrium, and the number $U''(x_e)$ plays the role of the spring constant. For a mass of $2.0\,\mathrm{kg}$ with potential energy $U(x) = x^4 - 2x^2$ ($x$ in meters, $U$ in joules) the minima are at $x_e = \pm 1\,\mathrm{m}$, where $U''(x_e) = 12 - 4 = 8\,\mathrm{N/m}$, so $\omega = 2.0\,\mathrm{rad/s}$.
 
 :::dimostrazione
-Since $x_e$ is an interior minimum point, $U'(x_e) = 0$; hence the force $F(x) = -U'(x)$ is zero at $x_e$, which is an equilibrium position. The first-order Taylor formula for the function $U'$ about $x_e$ (see the topic on derivatives in Analysis 1) gives
+Since $x_e$ is an interior minimum point, $U'(x_e) = 0$; hence the force $F(x) = -U'(x)$ is zero at $x_e$, which is an equilibrium position. The first-order Taylor formula for the function $U'$ about $x_e$ (see the topic on derivatives in Mathematical Analysis 1) gives
 $$
 \begin{aligned}
 F(x) &= -U'(x_e) - U''(x_e)\,(x - x_e) + o(x - x_e) \\[6pt]
@@ -348,7 +348,7 @@ x(t) = A(\Omega)\cos(\Omega t - \delta),
 \qquad
 A(\Omega) = \frac{F_0}{m\sqrt{(\omega_0^2 - \Omega^2)^2 + 4\gamma^2\Omega^2}},
 $$
-where the phase lag $\delta \in (0, \pi)$ satisfies $\tan\delta = \dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$. The body oscillates at the angular frequency of the driving force, with an amplitude that depends on $\Omega$ and lagging behind the force. The transient is the solution of the homogeneous equation, which tends to zero exponentially (like $e^{-\gamma t}$ in the case of weak damping); for this reason the **steady state** does not depend on the initial conditions. The particular solution is found with the method of undetermined coefficients, in the form $a\cos(\Omega t) + c\sin(\Omega t)$ (see the topic on differential equations in Analysis 1). As $\Omega \to 0$ the amplitude tends to $\dfrac{F_0}{m\omega_0^2} = \dfrac{F_0}{k}$, the static extension produced by the force $F_0$, and as $\Omega \to +\infty$ it tends to $0$. If the damping is negligible we set $\gamma = 0$, and for $\Omega \neq \omega_0$ the particular solution has amplitude $\dfrac{F_0}{m\,|\omega_0^2 - \Omega^2|}$.
+where the phase lag $\delta \in (0, \pi)$ satisfies $\tan\delta = \dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$. The body oscillates at the angular frequency of the driving force, with an amplitude that depends on $\Omega$ and lagging behind the force. The transient is the solution of the homogeneous equation, which tends to zero exponentially (like $e^{-\gamma t}$ in the case of weak damping); for this reason the **steady state** does not depend on the initial conditions. The particular solution is found with the method of undetermined coefficients, in the form $a\cos(\Omega t) + c\sin(\Omega t)$ (see the topic on differential equations in Mathematical Analysis 1). As $\Omega \to 0$ the amplitude tends to $\dfrac{F_0}{m\omega_0^2} = \dfrac{F_0}{k}$, the static extension produced by the force $F_0$, and as $\Omega \to +\infty$ it tends to $0$. If the damping is negligible we set $\gamma = 0$, and for $\Omega \neq \omega_0$ the particular solution has amplitude $\dfrac{F_0}{m\,|\omega_0^2 - \Omega^2|}$.
 :::
 
 ::::teorema{#risonanza titolo="Resonance"}

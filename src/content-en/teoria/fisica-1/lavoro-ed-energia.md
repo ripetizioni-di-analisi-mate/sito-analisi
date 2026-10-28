@@ -45,7 +45,7 @@ The equality follows from the distributive property of the dot product over addi
 ## Work of a variable force
 
 :::richiamo{titolo="Definite integral"}
-For a function $f$ continuous on $[a, b]$, the integral $\displaystyle\int_a^b f(x)\,dx$ is the limit of the sums $\sum_i f(x_i)\,\Delta x_i$ as the maximum width of the subintervals tends to zero, and it measures the signed area between the graph of $f$ and the $x$-axis. See the topic on integrals in Analysis 1.
+For a function $f$ continuous on $[a, b]$, the integral $\displaystyle\int_a^b f(x)\,dx$ is the limit of the sums $\sum_i f(x_i)\,\Delta x_i$ as the maximum width of the subintervals tends to zero, and it measures the signed area between the graph of $f$ and the $x$-axis. See the topic on integrals in Mathematical Analysis 1.
 :::
 
 :::definizione{#lavoro-forza-variabile titolo="Work of a variable force"}
@@ -64,7 +64,7 @@ If the particle travels along a curved path $\gamma$ from $A$ to $B$ and the for
 $$
 L = \int_\gamma \vec{F} \cdot d\vec{r} ,
 $$
-where $d\vec{r}$ is the infinitesimal displacement along the path. The definition repeats the previous reasoning, adding the contributions $\vec{F} \cdot \Delta\vec{r}$ of the small pieces into which the curve is divided. It is a line integral, for which see the topic on curves and line integrals in Analysis 2. In problems of particle mechanics the path is often straight or the force is conservative, and the computation reduces to an integral in one variable or to a difference of potential energies.
+where $d\vec{r}$ is the infinitesimal displacement along the path. The definition repeats the previous reasoning, adding the contributions $\vec{F} \cdot \Delta\vec{r}$ of the small pieces into which the curve is divided. It is a line integral, for which see the topic on curves and line integrals in Mathematical Analysis 2. In problems of particle mechanics the path is often straight or the force is conservative, and the computation reduces to an integral in one variable or to a difference of potential energies.
 :::
 
 ::::teorema{#lavoro-forza-elastica titolo="Work of the elastic force"}
@@ -231,7 +231,7 @@ Consider a point particle moving along the $x$-axis, subject to a conservative f
 $$
 F_x(x) = -\frac{dU}{dx} .
 $$
-The formula makes it possible to obtain the force from the potential energy, and it shows that the force points toward the positions where the potential energy decreases. For $U = mgy$ we obtain $F_y = -mg$, that is, the weight, and for $U = \dfrac{1}{2} k x^2$ we obtain $F_x = -kx$, that is, Hooke's law. In space the relation becomes $\vec{F} = -\nabla U$; for conservative fields see the topic on vector fields in Analysis 2.
+The formula makes it possible to obtain the force from the potential energy, and it shows that the force points toward the positions where the potential energy decreases. For $U = mgy$ we obtain $F_y = -mg$, that is, the weight, and for $U = \dfrac{1}{2} k x^2$ we obtain $F_x = -kx$, that is, Hooke's law. In space the relation becomes $\vec{F} = -\nabla U$; for conservative fields see the topic on vector fields in Mathematical Analysis 2.
 
 :::dimostrazione
 Let $x_0$ be the reference position. By the definition of potential energy and by the definition of the work of a variable force,
@@ -243,7 +243,7 @@ Since $F_x$ is continuous, by the **fundamental theorem of calculus** the integr
 ::::
 
 :::richiamo{titolo="Fundamental theorem of calculus"}
-If $f$ is continuous on an interval $I$ and $x_0 \in I$, the function $G(x) = \displaystyle\int_{x_0}^{x} f(s)\,ds$ is differentiable at every point of $I$ and $G'(x) = f(x)$. See the topic on integrals in Analysis 1.
+If $f$ is continuous on an interval $I$ and $x_0 \in I$, the function $G(x) = \displaystyle\int_{x_0}^{x} f(s)\,ds$ is differentiable at every point of $I$ and $G'(x) = f(x)$. See the topic on integrals in Mathematical Analysis 1.
 :::
 
 ## Conservation of mechanical energy

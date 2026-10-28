@@ -48,7 +48,7 @@ A function $f$ is differentiable at $t_0$ if the limit of the difference quotien
 $$
 f'(t_0) = \lim_{h \to 0} \frac{f(t_0 + h) - f(t_0)}{h}
 $$
-exists and is finite; it is the slope of the tangent line to the graph at the point $(t_0, f(t_0))$. For the differentiation rules we refer to the topic on differential calculus in Analysis 1.
+exists and is finite; it is the slope of the tangent line to the graph at the point $(t_0, f(t_0))$. For the differentiation rules we refer to the topic on differential calculus in Mathematical Analysis 1.
 :::
 
 :::definizione{#velocita-istantanea titolo="Instantaneous velocity"}
@@ -209,7 +209,7 @@ The graphs $x(t)$, $v(t)$ and $a(t)$ of the same motion are related by derivativ
 :::
 
 :::richiamo{titolo="Fundamental theorem of calculus"}
-If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of $f$, then $\displaystyle\int_a^b f(t)\,dt = F(b) - F(a)$. For a positive function the integral is the area of the region between the graph and the horizontal axis; for the computation of integrals we refer to the topic on integral calculus in Analysis 1.
+If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of $f$, then $\displaystyle\int_a^b f(t)\,dt = F(b) - F(a)$. For a positive function the integral is the area of the region between the graph and the horizontal axis; for the computation of integrals we refer to the topic on integral calculus in Mathematical Analysis 1.
 :::
 
 ::::teorema{#area-sotto-il-grafico-della-velocita titolo="Displacement as the area under the velocity graph"}
@@ -264,7 +264,7 @@ Two points with the same acceleration can start from different positions with di
 ## Velocity-dependent acceleration
 
 :::richiamo{titolo="Separable differential equations"}
-If $f$ is continuous and $f(v_0) \neq 0$, the solution of the equation $\dfrac{dv}{dt} = f(v)$ with $v(t_0) = v_0$ satisfies, as long as $f(v)$ does not vanish, the equality $\displaystyle\int_{v_0}^{v} \frac{du}{f(u)} = t - t_0$. For the theory we refer to the topic on differential equations in Analysis 1.
+If $f$ is continuous and $f(v_0) \neq 0$, the solution of the equation $\dfrac{dv}{dt} = f(v)$ with $v(t_0) = v_0$ satisfies, as long as $f(v)$ does not vanish, the equality $\displaystyle\int_{v_0}^{v} \frac{du}{f(u)} = t - t_0$. For the theory we refer to the topic on differential equations in Mathematical Analysis 1.
 :::
 
 ::::teorema{#accelerazione-proporzionale-alla-velocita titolo="Motion with acceleration proportional to velocity"}

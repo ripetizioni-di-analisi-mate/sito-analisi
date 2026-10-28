@@ -86,7 +86,7 @@ A force is conservative if its work between two points $A$ and $B$ depends only 
 :::
 
 :::richiamo{titolo="Integral of a power"}
-For $0 < a < b$ we have $\displaystyle\int_a^b \frac{dx}{x^2} = \frac{1}{a} - \frac{1}{b}$, because $-\dfrac{1}{x}$ is an antiderivative of $\dfrac{1}{x^2}$ (see the topic on integrals in Analysis 1).
+For $0 < a < b$ we have $\displaystyle\int_a^b \frac{dx}{x^2} = \frac{1}{a} - \frac{1}{b}$, because $-\dfrac{1}{x}$ is an antiderivative of $\dfrac{1}{x^2}$ (see the topic on integrals in Mathematical Analysis 1).
 :::
 
 ::::teorema{#energia-potenziale-gravitazionale titolo="Gravitational potential energy"}
@@ -126,7 +126,7 @@ The radial component of the force is obtained by differentiating the potential e
 $$
 F_r = -\,\frac{dU}{dr} = -\,\frac{d}{dr}\left( -\frac{GMm}{r} \right) = -\,\frac{GMm}{r^2} .
 $$
-The negative sign indicates that the force is directed toward decreasing $r$, that is, toward $M$. In the same way the field is obtained from the potential with $g_r = -\dfrac{dV}{dr}$; for the derivative we refer to the topic on derivatives in Analysis 1. The relation makes it possible to go from the potential, which is a scalar, to the force.
+The negative sign indicates that the force is directed toward decreasing $r$, that is, toward $M$. In the same way the field is obtained from the potential with $g_r = -\dfrac{dV}{dr}$; for the derivative we refer to the topic on derivatives in Mathematical Analysis 1. The relation makes it possible to go from the potential, which is a scalar, to the force.
 :::
 
 :::osservazione{#energia-potenziale-vicino-alla-superficie titolo="Potential energy near the surface"}
@@ -204,7 +204,7 @@ With $M_T = 5.97 \cdot 10^{24}\,\mathrm{kg}$ and $R_T = 6.37 \cdot 10^6\,\mathrm
 :::
 
 :::richiamo{titolo="First-order approximation"}
-For small $|x|$ we have $(1 + x)^{\alpha} \approx 1 + \alpha x$, which is the first-order Taylor formula of the function $(1 + x)^{\alpha}$ at $x = 0$ (see the topic on derivatives in Analysis 1).
+For small $|x|$ we have $(1 + x)^{\alpha} \approx 1 + \alpha x$, which is the first-order Taylor formula of the function $(1 + x)^{\alpha}$ at $x = 0$ (see the topic on derivatives in Mathematical Analysis 1).
 :::
 
 ::::teorema{#variazione-di-g-con-la-quota titolo="Variation of g with altitude"}

@@ -26,7 +26,7 @@ The **distance** between two points $P$ and $Q$ is $d(P, Q) = \lVert P - Q \rVer
 $$
 d(P, Q) = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2} .
 $$
-For $n = 1$ the norm coincides with the **absolute value**, so the norm extends to $\mathbb{R}^n$ the tool with which closeness is measured in Analysis 1: every condition of the form $|x - x_0| < \delta$ becomes $\lVert P - P_0 \rVert < \delta$.
+For $n = 1$ the norm coincides with the **absolute value**, so the norm extends to $\mathbb{R}^n$ the tool with which closeness is measured in Mathematical Analysis 1: every condition of the form $|x - x_0| < \delta$ becomes $\lVert P - P_0 \rVert < \delta$.
 :::
 
 :::definizione{#intorno-circolare titolo="Circular neighborhood"}
@@ -34,7 +34,7 @@ For $P_0 \in \mathbb{R}^n$ and $r > 0$, the **neighborhood** of $P_0$ of radius 
 $$
 B(P_0, r) = \{ P \in \mathbb{R}^n : \lVert P - P_0 \rVert < r \} .
 $$
-In $\mathbb{R}^2$ it is the **open disk** with center $P_0$ and radius $r$, *without* its boundary circle; in $\mathbb{R}^3$ it is the **open ball**. The circular neighborhood replaces the interval $(x_0 - r, x_0 + r)$ of Analysis 1 and appears in all the definitions that follow: interior points, open sets, limits and continuity.
+In $\mathbb{R}^2$ it is the **open disk** with center $P_0$ and radius $r$, *without* its boundary circle; in $\mathbb{R}^3$ it is the **open ball**. The circular neighborhood replaces the interval $(x_0 - r, x_0 + r)$ of Mathematical Analysis 1 and appears in all the definitions that follow: interior points, open sets, limits and continuity.
 
 ::grafico{f="NaN" curve="1+1.5*cos(t),1+1.5*sin(t),0,6.29" area="1+sqrt(abs(2.25-(x-1)^2));1-sqrt(abs(2.25-(x-1)^2));-0.5;2.5" segmenti="1,1,2.0607,2.0607" punti="1,1,pieno,P₀" etichette="1.3,1.68,r" xmin=-1.5 xmax=3.5 ymin=-1 ymax=3 uguale=1 titolo="The open disk $B(P_0, r)$: the points at distance less than $r$ from $P_0$, without the boundary circle (dashed)"}
 
@@ -95,7 +95,7 @@ is in general a **surface** in space. For $f(x, y) = x^2 + y^2$ the graph is a p
 :::
 
 :::definizione{#dominio-naturale titolo="Natural domain"}
-The **natural domain** of $f(x, y)$ is the set of points of the plane at which the expression defining $f$ makes sense. The conditions are the same as in Analysis 1:
+The **natural domain** of $f(x, y)$ is the set of points of the plane at which the expression defining $f$ makes sense. The conditions are the same as in Mathematical Analysis 1:
 
 - denominators different from zero;
 - arguments of even-index roots greater than or equal to zero;
@@ -148,7 +148,7 @@ if for every $\varepsilon > 0$ there exists $\delta > 0$ such that, for every $(
 $$
 0 < \lVert (x, y) - (x_0, y_0) \rVert < \delta \implies |f(x, y) - L| < \varepsilon .
 $$
-The limit is $+\infty$ if for every $M > 0$ there exists $\delta > 0$ such that $f(x, y) > M$ at the same points. The structure is that of Analysis 1 with the **norm** in place of the absolute value; for this reason the uniqueness of the limit, the limits of sum, product and quotient and the comparison theorem hold with the same statements and the same proofs, and we refer to the chapter on limits in Analysis 1.
+The limit is $+\infty$ if for every $M > 0$ there exists $\delta > 0$ such that $f(x, y) > M$ at the same points. The structure is that of Mathematical Analysis 1 with the **norm** in place of the absolute value; for this reason the uniqueness of the limit, the limits of sum, product and quotient and the comparison theorem hold with the same statements and the same proofs, and we refer to the chapter on limits in Mathematical Analysis 1.
 :::
 
 :::osservazione
@@ -191,7 +191,7 @@ $$
 \qquad \text{with} \qquad
 \lim_{(x, y) \to P_0} g(x, y) = 0 ,
 $$
-then $f(x, y) \to L$ as $(x, y) \to P_0$. The proof is identical to the one in one variable, and we refer to the chapter on limits in Analysis 1. It is the tool with which one proves that a limit *exists*: one bounds $|f - L|$ from above by a simpler function that tends to $0$.
+then $f(x, y) \to L$ as $(x, y) \to P_0$. The proof is identical to the one in one variable, and we refer to the chapter on limits in Mathematical Analysis 1. It is the tool with which one proves that a limit *exists*: one bounds $|f - L|$ from above by a simpler function that tends to $0$.
 :::
 
 :::proposizione{#maggiorazioni-utili titolo="Useful upper bounds"}
@@ -310,7 +310,7 @@ If $K \subset \mathbb{R}^n$ is compact, that is, closed and bounded, and $f : K 
 $$
 f(P_m) \leq f(P) \leq f(P_M) \qquad \text{for every } P \in K .
 $$
-The statement extends the Weierstrass theorem of Analysis 1, with the **compact set** $K$ in place of the interval $[a, b]$. It guarantees that problems of absolute maximum and minimum on a compact set have a solution; the points at which to look for it are determined with partial derivatives and Lagrange multipliers, and we refer to the chapter on maxima and minima. The proof uses sequences in $\mathbb{R}^n$ and is omitted.
+The statement extends the Weierstrass theorem of Mathematical Analysis 1, with the **compact set** $K$ in place of the interval $[a, b]$. It guarantees that problems of absolute maximum and minimum on a compact set have a solution; the points at which to look for it are determined with partial derivatives and Lagrange multipliers, and we refer to the chapter on maxima and minima. The proof uses sequences in $\mathbb{R}^n$ and is omitted.
 :::
 
 :::esempio{titolo="Checking the hypotheses"}

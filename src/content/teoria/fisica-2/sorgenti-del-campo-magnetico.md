@@ -20,7 +20,7 @@ dove $\vec{r}$ è il vettore che va dal tratto al punto $P$, $r$ è il suo modul
 $$
 \vec{B}(P) = \frac{\mu_0 I}{4\pi} \oint \frac{d\vec{l} \times \hat{r}}{r^2} .
 $$
-La costante $\mu_0 = 4\pi \cdot 10^{-7}\,\mathrm{T\cdot m/A}$ è la **permeabilità magnetica del vuoto**. La legge di Biot-Savart è una legge sperimentale, ricavata nel 1820 dalle misure del campo prodotto da fili di varie forme, e ha per il campo magnetico lo stesso ruolo che la legge di Coulomb ha per il campo elettrico: dalla distribuzione delle correnti dà il campo in ogni punto.
+La costante $\mu_0 = 4\pi \cdot 10^{-7}\,\mathrm{T\cdot m/A}$ è la **permeabilità magnetica del vuoto**. La legge di Biot-Savart è una legge sperimentale, ricavata nel 1820 dalle misure del campo prodotto da fili di varie forme, e dà il campo magnetico delle correnti come la legge di Coulomb dà il campo elettrico delle cariche.
 
 Il modulo del contributo è $dB = \dfrac{\mu_0}{4\pi}\,\dfrac{I\,dl\,\sin\varphi}{r^2}$, con $\varphi$ angolo tra $d\vec{l}$ e $\vec{r}$, ed è nullo nei punti allineati con il tratto. Per esempio, un tratto lungo $1{,}0\,\mathrm{mm}$ di un filo percorso da $10\,\mathrm{A}$ produce, in un punto a $5{,}0\,\mathrm{cm}$ in direzione perpendicolare al filo, il contributo $dB = 10^{-7} \cdot \dfrac{10 \cdot 1{,}0 \cdot 10^{-3}}{(5{,}0 \cdot 10^{-2})^2}\,\mathrm{T} = 4{,}0 \cdot 10^{-7}\,\mathrm{T}$.
 
@@ -78,7 +78,7 @@ Si applica il teorema sul campo di un tratto rettilineo. Per il filo infinito $s
 $$
 B = \frac{\mu_0 I}{4\pi d}\,\bigl(1 - (-1)\bigr) = \frac{\mu_0 I}{2\pi d} .
 $$
-Per il filo semi-infinito che termina in $H$ si ha $s_1 = 0$ e $s_2 \to +\infty$, oppure $s_1 \to -\infty$ e $s_2 = 0$; in entrambi i casi la differenza dei seni vale $1$ e $B = \dfrac{\mu_0 I}{4\pi d}$. Il campo è perpendicolare al piano che contiene il filo e il punto, quindi è tangente alla circonferenza di raggio $d$ centrata sul filo che passa per il punto.
+Per il filo semi-infinito che termina in $H$ si ha $s_1 = 0$ e $s_2 \to +\infty$, oppure $s_1 \to -\infty$ e $s_2 = 0$; in entrambi i casi la differenza dei seni vale $1$ e $B = \dfrac{\mu_0 I}{4\pi d}$.
 :::
 ::::
 
@@ -152,7 +152,7 @@ Si mette il filo $1$ lungo l'asse $z$, con la corrente $I_1$ verso $+\hat{k}$, e
 $$
 \vec{F}_2 = I_2\,\ell\,\hat{k} \times B_1\,\hat{\jmath} = -\frac{\mu_0 I_1 I_2\,\ell}{2\pi d}\,\hat{\imath} .
 $$
-La forza è rivolta verso il filo $1$, cioè attrattiva. Se $I_2$ è discorde, $\vec{\ell}$ cambia verso e con esso la forza, che diventa repulsiva. Lo stesso calcolo, con i ruoli dei fili scambiati, dà la forza sul filo $1$, opposta a $\vec{F}_2$.
+La forza è rivolta verso il filo $1$, cioè attrattiva. Se $I_2$ è discorde, $\vec{\ell}$ cambia verso e con esso la forza, che diventa repulsiva.
 :::
 ::::
 
@@ -315,7 +315,7 @@ $$
 $$
 È una legge sperimentale, uno dei postulati dell'elettromagnetismo: esprime il fatto che non sono mai state osservate cariche magnetiche isolate, i cosiddetti monopoli magnetici.
 
-La legge ha due conseguenze utili. Le linee del campo magnetico non hanno né inizio né fine: sono linee chiuse oppure si estendono all'infinito, come si osserva nei campi del filo, della spira e del solenoide. Inoltre, per il teorema della divergenza, la legge equivale alla forma locale $\nabla \cdot \vec{B} = 0$, da confrontare con la legge di Gauss per il campo elettrico, il cui flusso uscente è proporzionale alla carica racchiusa; si rimanda all'argomento sul flusso del campo elettrico e la legge di Gauss.
+Ne segue che le linee del campo magnetico non hanno né inizio né fine, come nei campi del filo, della spira e del solenoide. Inoltre, per il teorema della divergenza, la legge equivale alla forma locale $\nabla \cdot \vec{B} = 0$, mentre per il campo elettrico la divergenza è proporzionale alla densità di carica.
 :::
 
 :::osservazione{#flusso-concatenato titolo="Flusso concatenato con una linea chiusa"}

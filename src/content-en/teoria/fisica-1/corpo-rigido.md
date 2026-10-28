@@ -111,7 +111,7 @@ where $R_i$ is the distance from the axis of the particle of mass $m_i$; for a b
 :::
 
 :::richiamo{titolo="Definite integral"}
-For a continuous function $f$ on $[a, b]$, the integral $\displaystyle\int_a^b f(x)\,dx$ is the limit of the sums $\sum_k f(x_k)\,\Delta x_k$ as the width of the intervals $\Delta x_k$ tends to zero, and if $F$ is an antiderivative of $f$, then $\displaystyle\int_a^b f(x)\,dx = F(b) - F(a)$. We refer to the topic on integrals in Analysis 1.
+For a continuous function $f$ on $[a, b]$, the integral $\displaystyle\int_a^b f(x)\,dx$ is the limit of the sums $\sum_k f(x_k)\,\Delta x_k$ as the width of the intervals $\Delta x_k$ tends to zero, and if $F$ is an antiderivative of $f$, then $\displaystyle\int_a^b f(x)\,dx = F(b) - F(a)$. We refer to the topic on integrals in Mathematical Analysis 1.
 :::
 
 ::::teorema{#momenti-di-inerzia-notevoli titolo="Moments of inertia of uniform bodies"}

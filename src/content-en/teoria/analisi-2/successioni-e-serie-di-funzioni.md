@@ -14,7 +14,7 @@ The sequence $(f_n)$ **converges pointwise** to $f$ on $A$ if for every $x \in A
 $$
 \lim_{n \to +\infty} f_n(x) = f(x) \qquad \text{for every } x \in A .
 $$
-In the $\varepsilon$ definition: for every $x \in A$ and every $\varepsilon > 0$ there exists $N$ such that $|f_n(x) - f(x)| < \varepsilon$ for every $n \geq N$; the index $N$ depends on $\varepsilon$ and *also* on the point $x$. Pointwise convergence is studied with the methods for limits of sequences from Analysis 1, one point at a time, and it determines the candidate limit $f$: every other notion of convergence in the chapter compares $f_n$ with this function.
+In the $\varepsilon$ definition: for every $x \in A$ and every $\varepsilon > 0$ there exists $N$ such that $|f_n(x) - f(x)| < \varepsilon$ for every $n \geq N$; the index $N$ depends on $\varepsilon$ and *also* on the point $x$. Pointwise convergence is studied with the methods for limits of sequences from Mathematical Analysis 1, one point at a time, and it determines the candidate limit $f$: every other notion of convergence in the chapter compares $f_n$ with this function.
 :::
 
 :::esempio{titolo="The sequence xⁿ on [0, 1]"}
@@ -56,7 +56,7 @@ $(f_n)$ converges uniformly to $f$ on $A$ *if and only if*
 $$
 M_n = \sup_{x \in A} \, |f_n(x) - f(x)| \xrightarrow[n \to +\infty]{} 0 .
 $$
-The equivalence follows from the definition, since $|f_n(x) - f(x)| < \varepsilon$ for every $x \in A$ is equivalent to $M_n \leq \varepsilon$. The criterion turns the study of uniform convergence into an Analysis 1 problem: for each $n$ one looks for the maximum of $|f_n - f|$ on $A$, usually by studying the derivative, and then computes the limit of the numerical sequence $M_n$.
+The equivalence follows from the definition, since $|f_n(x) - f(x)| < \varepsilon$ for every $x \in A$ is equivalent to $M_n \leq \varepsilon$. The criterion turns the study of uniform convergence into an Mathematical Analysis 1 problem: for each $n$ one looks for the maximum of $|f_n - f|$ on $A$, usually by studying the derivative, and then computes the limit of the numerical sequence $M_n$.
 :::
 
 :::esempio{titolo="Sup criterion via the derivative"}
@@ -169,7 +169,7 @@ Given a sequence of functions $f_n : A \to \mathbb{R}$, the **series of function
 $$
 s_N(x) = \sum_{n=1}^{N} f_n(x) .
 $$
-The series **converges pointwise** at $x \in A$ if the numerical series $\displaystyle\sum_{n=1}^{\infty} f_n(x)$ converges; the sum is the function $f(x) = \displaystyle\lim_{N \to +\infty} s_N(x)$, defined on the set of convergence. For each fixed $x$ one applies the tests for numerical series (comparison, ratio, root, Leibniz), for which we refer to the chapter on series in Analysis 1.
+The series **converges pointwise** at $x \in A$ if the numerical series $\displaystyle\sum_{n=1}^{\infty} f_n(x)$ converges; the sum is the function $f(x) = \displaystyle\lim_{N \to +\infty} s_N(x)$, defined on the set of convergence. For each fixed $x$ one applies the tests for numerical series (comparison, ratio, root, Leibniz), for which we refer to the chapter on series in Mathematical Analysis 1.
 :::
 
 :::definizione{#convergenza-uniforme-serie titolo="Uniform convergence of a series"}

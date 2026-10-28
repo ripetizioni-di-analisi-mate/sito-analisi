@@ -71,7 +71,7 @@ As for the exponential function, injectivity justifies passing from the logarith
 :::esempio{titolo="The two basic graphs"}
 For $a = 2$ the function increases; for $a = \dfrac{1}{2}$ it decreases.
 
-::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log₂ x: base greater than 1, increasing function"}
+::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_2 x$: base greater than $1$, increasing function"}
 
 ::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_{\frac{1}{2}} x$: base between $0$ and $1$, decreasing function"}
 :::
@@ -198,7 +198,7 @@ The base $2$ is greater than $1$, so the direction is **preserved** when passing
 
 :::esempio{titolo="Base between 0 and 1"}
 $$
-\log_{1/3} (x + 1) > \log_{1/3} (5 - x) \iff
+\log_{\frac{1}{3}} (x + 1) > \log_{\frac{1}{3}} (5 - x) \iff
 \begin{cases}
 x + 1 < 5 - x \\
 x + 1 > 0
@@ -218,6 +218,14 @@ The inequality $\log_a A > k$ is reduced to a **comparison between logarithms** 
 
 - if $a > 1$, it is equivalent to $A > a^{k}$, and the domain condition $A > 0$ follows from $A > a^{k} > 0$;
 - if $0 < a < 1$, it is equivalent to the system
+$$
+\begin{cases}
+A < a^{k} \\
+A > 0
+\end{cases}
+$$
+
+For the inequality $\log_a A < k$ the two cases are swapped: if $0 < a < 1$ it is equivalent to $A > a^{k}$, and the domain condition follows from $A > a^{k} > 0$; if $a > 1$ it is equivalent to the system
 $$
 \begin{cases}
 A < a^{k} \\

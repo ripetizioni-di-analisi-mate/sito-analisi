@@ -17,7 +17,7 @@ a^{\log_a x} = x \quad (x > 0),
 $$
 con cui si passa dalla forma esponenziale alla forma logaritmica e viceversa; su queste identità si fondano le equazioni dei tipi $\log_a A = k$ e $a^{A} = k$.
 
-::grafico{f="2^x;x;log(x)/log(2)" uguale=1 xmin=-4 xmax=6 ymin=-4 ymax=6 punti="1,2,pieno;2,1,pieno" etichette="0.2,4.6,y = 2ˣ;4.2,1.4,y = log₂ x" titolo="$y = 2^{x}$ e $y = \log_2 x$, in rosso, sono simmetrici rispetto alla retta $y = x$: al punto $(1, 2)$ del primo corrisponde il punto $(2, 1)$ del secondo"}
+::grafico{f="2^x;x;log(x)/log(2)" uguale=1 xmin=-4 xmax=6 ymin=-4 ymax=6 punti="1,2,pieno;2,1,pieno" etichette="0.2,4.6,y = 2ˣ;4.2,1.4,y = log₂ x" titolo="I grafici di $y = 2^{x}$ e di $y = \log_2 x$, in rosso, sono simmetrici rispetto alla retta $y = x$: al punto $(1, 2)$ del primo corrisponde il punto $(2, 1)$ del secondo"}
 :::
 
 :::esempio
@@ -73,7 +73,7 @@ Come per la funzione esponenziale, l'iniettività giustifica il passaggio dai lo
 :::esempio{titolo="I due grafici di base"}
 Per $a = 2$ la funzione cresce; per $a = \dfrac{1}{2}$ decresce.
 
-::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log₂ x: base maggiore di 1, funzione crescente"}
+::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_2 x$: base maggiore di $1$, funzione crescente"}
 
 ::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_{\frac{1}{2}} x$: base tra $0$ e $1$, funzione decrescente"}
 :::
@@ -204,7 +204,7 @@ La base $2$ è maggiore di $1$, quindi il verso **si mantiene** nel passaggio ag
 
 :::esempio{titolo="Base tra 0 e 1"}
 $$
-\log_{1/3} (x + 1) > \log_{1/3} (5 - x) \iff
+\log_{\frac{1}{3}} (x + 1) > \log_{\frac{1}{3}} (5 - x) \iff
 \begin{cases}
 x + 1 < 5 - x \\
 x + 1 > 0
@@ -218,7 +218,7 @@ x > -1
 $$
 La base $\dfrac{1}{3}$ è compresa tra $0$ e $1$, quindi il verso **si rovescia** nel passaggio agli argomenti.
 
-::grafico{f="log(x+1)/log(1/3);log(5-x)/log(1/3)" xmin=-2 xmax=6 ymin=-3 ymax=3 area="log(x+1)/log(1/3);log(5-x)/log(1/3);-0.99;2" punti="2,-1,vuoto" titolo="Con base $\dfrac{1}{3}$ i grafici scendono: $y = \log_{1/3} (x + 1)$ sta sopra $y = \log_{1/3} (5 - x)$, tratteggiato, per $-1 < x < 2$"}
+::grafico{f="log(x+1)/log(1/3);log(5-x)/log(1/3)" xmin=-2 xmax=6 ymin=-3 ymax=3 area="log(x+1)/log(1/3);log(5-x)/log(1/3);-0.99;2" punti="2,-1,vuoto" legenda="y = \log_{\frac{1}{3}} (x + 1);y = \log_{\frac{1}{3}} (5 - x)" titolo="Con base $\dfrac{1}{3}$ i grafici scendono: $y = \log_{\frac{1}{3}} (x + 1)$ sta sopra $y = \log_{\frac{1}{3}} (5 - x)$, tratteggiato, per $-1 < x < 2$"}
 :::
 
 :::teorema{#disequazioni-logaritmo-numero titolo="Disequazione con un numero al secondo membro"}
@@ -226,6 +226,14 @@ La disequazione $\log_a A > k$ si riconduce al **confronto tra logaritmi** scriv
 
 - se $a > 1$, equivale ad $A > a^{k}$, e la condizione di esistenza $A > 0$ segue da $A > a^{k} > 0$;
 - se $0 < a < 1$, equivale al sistema
+$$
+\begin{cases}
+A < a^{k} \\
+A > 0
+\end{cases}
+$$
+
+Per la disequazione $\log_a A < k$ i due casi si scambiano: se $0 < a < 1$ equivale ad $A > a^{k}$, e la condizione di esistenza segue da $A > a^{k} > 0$; se $a > 1$ equivale al sistema
 $$
 \begin{cases}
 A < a^{k} \\

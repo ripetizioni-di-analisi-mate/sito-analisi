@@ -177,7 +177,7 @@ The work is positive in an expansion, where $dV > 0$, negative in a compression 
 :::
 
 :::richiamo{titolo="Definite integral"}
-If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of it, then $\displaystyle\int_a^b f(x)\,dx = F(b) - F(a)$, and for $f \geq 0$ the integral is the area under the graph. In particular, for $a, b > 0$, $\displaystyle\int_a^b \frac{dx}{x} = \ln\frac{b}{a}$. See the topic on integrals in Analysis 1.
+If $f$ is continuous on $[a, b]$ and $F$ is an antiderivative of it, then $\displaystyle\int_a^b f(x)\,dx = F(b) - F(a)$, and for $f \geq 0$ the integral is the area under the graph. In particular, for $a, b > 0$, $\displaystyle\int_a^b \frac{dx}{x} = \ln\frac{b}{a}$. See the topic on integrals in Mathematical Analysis 1.
 :::
 
 :::osservazione{#lavoro-come-area titolo="Work as an area in the (V, p) plane"}

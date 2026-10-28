@@ -10,7 +10,7 @@ A **power series** centered at $x_0 \in \mathbb{R}$ is a series of the form
 $$
 \sum_{n=0}^{\infty} a_n (x - x_0)^n = a_0 + a_1 (x - x_0) + a_2 (x - x_0)^2 + \cdots
 $$
-where the numbers $a_n$ are the **coefficients** and $x_0$ is the **center**; by convention $(x - x_0)^0 = 1$ also at $x = x_0$. For each fixed value of $x$ the series is a numerical series, so the study of a power series is the study of the set of points $x$ at which that numerical series converges. At $x = x_0$ all the terms with $n \geq 1$ are zero, therefore *every* power series converges *at least* at its own center, with sum $a_0$. The convergence tests for numerical series are in the chapter on series in Analysis 1.
+where the numbers $a_n$ are the **coefficients** and $x_0$ is the **center**; by convention $(x - x_0)^0 = 1$ also at $x = x_0$. For each fixed value of $x$ the series is a numerical series, so the study of a power series is the study of the set of points $x$ at which that numerical series converges. At $x = x_0$ all the terms with $n \geq 1$ are zero, therefore *every* power series converges *at least* at its own center, with sum $a_0$. The convergence tests for numerical series are in the chapter on series in Mathematical Analysis 1.
 :::
 
 :::esempio{titolo="The geometric series as a power series"}
@@ -217,7 +217,7 @@ given that $\dfrac{c^{\,n}}{n!} \to 0$ for every fixed $c$. The derivatives of $
 :::
 
 :::richiamo{titolo="Taylor's formula with Lagrange remainder"}
-If $f$ is of class $C^{n+1}$ on an interval containing $x_0$ and $x$, there exists $c$ between $x_0$ and $x$ such that $f(x) - T_n(x) = \dfrac{f^{(n+1)}(c)}{(n+1)!} (x - x_0)^{n+1}$. (Chapter on derivatives in Analysis 1.)
+If $f$ is of class $C^{n+1}$ on an interval containing $x_0$ and $x$, there exists $c$ between $x_0$ and $x$ such that $f(x) - T_n(x) = \dfrac{f^{(n+1)}(c)}{(n+1)!} (x - x_0)^{n+1}$. (Chapter on derivatives in Mathematical Analysis 1.)
 :::
 
 ## Standard Maclaurin expansions
