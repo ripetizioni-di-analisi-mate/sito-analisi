@@ -327,7 +327,7 @@ $$
 $$
 Le velocità $\vec{v}_1'$ e $\vec{v}_2'$ sono quindi i cateti di un triangolo rettangolo con ipotenusa $\vec{v}_1$. Se il primo corpo devia di un angolo $\theta$, si ha $v_1' = v_1 \cos\theta$ e $v_2' = v_1 \sin\theta$, e il secondo corpo parte a un angolo $\dfrac{\pi}{2} - \theta$ dall'altra parte della direzione iniziale. Le palle da biliardo dopo un colpo di striscio si separano con buona approssimazione ad angolo retto.
 
-::grafico{vettori="0,0,4,0,v₁;0,0,1,1.732,v₁';0,0,3,-1.732,v₂'" segmenti="1,1.732,4,0" xmin=-0.6 xmax=4.8 ymin=-2.2 ymax=2.4 uguale=1 titolo="Con $v_1 = 4\,\mathrm{m/s}$ e deviazione $\theta = 60°$ si ha $v_1' = 2\,\mathrm{m/s}$ e $v_2' = 2\sqrt{3}\,\mathrm{m/s}$ a $30°$ dall'altra parte; il segmento tratteggiato è $\vec{v}_2'$ applicato nella punta di $\vec{v}_1'$, e $\vec{v}_1' + \vec{v}_2' = \vec{v}_1$"}
+::grafico{vettori="0,0,4,0,v₁;0,0,1,1.732,v₁';0,0,3,-1.732,v₂'" segmenti="1,1.732,4,0" xmin=-0.6 xmax=4.8 ymin=-2.2 ymax=2.4 uguale=1 titolo="Con $v_1 = 4\,\mathrm{m/s}$ e deviazione $\theta = 60^\circ$ si ha $v_1' = 2\,\mathrm{m/s}$ e $v_2' = 2\sqrt{3}\,\mathrm{m/s}$ a $30^\circ$ dall'altra parte; il segmento tratteggiato è $\vec{v}_2'$ applicato nella punta di $\vec{v}_1'$, e $\vec{v}_1' + \vec{v}_2' = \vec{v}_1$"}
 
 :::dimostrazione
 Le masse sono uguali, quindi dividendo per $m$ la conservazione della quantità di moto e quella dell'energia cinetica si ottiene

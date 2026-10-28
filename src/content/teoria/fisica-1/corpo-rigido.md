@@ -12,13 +12,13 @@ Il moto è di **traslazione** se ogni segmento che congiunge due punti del corpo
 :::
 
 :::definizione{#grandezze-angolari titolo="Posizione, velocità e accelerazione angolare"}
-Si consideri un corpo rigido che ruota attorno a un asse fisso, scelto come asse $z$. La configurazione del corpo è individuata da un solo numero, la **posizione angolare** $\theta$, cioè l'angolo in radianti che una semiretta solidale con il corpo e perpendicolare all'asse forma con una semiretta fissa. La velocità angolare e l'accelerazione angolare sono
+Si consideri un corpo rigido che ruota attorno a un asse fisso, scelto come asse $z$. La configurazione del corpo è individuata dalla **posizione angolare** $\theta$, l'angolo in radianti che una semiretta solidale con il corpo e perpendicolare all'asse forma con una semiretta fissa. La velocità angolare e l'accelerazione angolare sono
 $$
 \omega = \frac{d\theta}{dt} ,
 \qquad
 \alpha = \frac{d\omega}{dt} = \frac{d^2\theta}{dt^2} ,
 $$
-e si misurano in $\mathrm{rad/s}$ e in $\mathrm{rad/s^2}$. Sono le stesse per *tutti* i punti del corpo, e per questo la rotazione si descrive con un'unica legge oraria $\theta(t)$. Si pone $\omega > 0$ quando il corpo, visto dalla parte positiva dell'asse $z$, ruota in verso antiorario; il **vettore velocità angolare** $\vec{\omega} = \omega\,\hat{k}$ è diretto lungo l'asse, con il verso dato dalla regola della mano destra.
+e si misurano in $\mathrm{rad/s}$ e in $\mathrm{rad/s^2}$. Sono le stesse per *tutti* i punti del corpo, quindi la rotazione si descrive con un'unica legge oraria $\theta(t)$. Si pone $\omega > 0$ per la rotazione antioraria vista dalla parte positiva dell'asse $z$, e il **vettore velocità angolare** è $\vec{\omega} = \omega\,\hat{k}$.
 
 Quando $\alpha$ è costante valgono le leggi del moto rettilineo uniformemente accelerato, per le quali si rimanda all'argomento sulla cinematica in una dimensione, con $\theta$ al posto di $x$:
 $$
@@ -40,7 +40,7 @@ a_t = \alpha r ,
 \qquad
 a_c = \omega^2 r = \frac{v^2}{r} ,
 $$
-dove $a_t$ è l'accelerazione tangenziale e $a_c$ l'accelerazione centripeta, diretta verso l'asse. Le formule seguono da quelle del moto circolare, per le quali si rimanda all'argomento sul moto nel piano: l'arco percorso da $P$ è $s = r\theta$, e derivando rispetto al tempo si ottengono $v$ e $a_t$. In forma vettoriale, con l'origine sull'asse, $\vec{v} = \vec{\omega} \times \vec{r}$. Perciò in un corpo che ruota la velocità cresce linearmente con la distanza dall'asse; un disco di raggio $0{,}20\,\mathrm{m}$ che ruota a $30\,\mathrm{rad/s}$ ha sul bordo $v = 6{,}0\,\mathrm{m/s}$ e $a_c = 180\,\mathrm{m/s^2}$.
+dove $a_t$ è l'accelerazione tangenziale e $a_c$ l'accelerazione centripeta, diretta verso l'asse. Le formule seguono da quelle del moto circolare, trattate nell'argomento sul moto nel piano, perché l'arco percorso da $P$ è $s = r\theta$. In forma vettoriale, con l'origine sull'asse, $\vec{v} = \vec{\omega} \times \vec{r}$. Perciò in un corpo che ruota la velocità cresce linearmente con la distanza dall'asse; un disco di raggio $0{,}20\,\mathrm{m}$ che ruota a $30\,\mathrm{rad/s}$ ha sul bordo $v = 6{,}0\,\mathrm{m/s}$ e $a_c = 180\,\mathrm{m/s^2}$.
 :::
 
 ## Momento di una forza e momento angolare
@@ -69,7 +69,7 @@ Il **momento angolare** rispetto al polo $O$ di un punto materiale di massa $m$,
 $$
 \vec{L}_O = \vec{r} \times m\vec{v} = \vec{r} \times \vec{p} ,
 $$
-e si misura in $\mathrm{kg\cdot m^2/s}$; il momento angolare di un sistema di punti è la somma dei momenti angolari dei singoli punti. Ha nelle rotazioni il ruolo che la quantità di moto ha nelle traslazioni, e la sua variazione è legata al momento delle forze esterne dalla seconda equazione cardinale. Per un punto in moto circolare uniforme di raggio $r$, rispetto al centro, $\vec{r}$ è perpendicolare a $\vec{v}$, quindi $L_O = m v r = m r^2 \omega$ e $\vec{L}_O$ è diretto lungo l'asse della circonferenza.
+e si misura in $\mathrm{kg\cdot m^2/s}$; il momento angolare di un sistema di punti è la somma dei momenti angolari dei singoli punti. Ha nelle rotazioni il ruolo che la quantità di moto ha nelle traslazioni. Per un punto in moto circolare uniforme di raggio $r$, rispetto al centro, $\vec{r}$ è perpendicolare a $\vec{v}$, quindi $L_O = m v r = m r^2 \omega$ e $\vec{L}_O$ è diretto lungo l'asse della circonferenza.
 :::
 
 ::::teorema{#momento-angolare-asse-fisso titolo="Momento angolare di un corpo rigido in rotazione"}
@@ -107,7 +107,7 @@ Il **momento d'inerzia** di un sistema di punti materiali rispetto a un asse è
 $$
 I = \sum_i m_i R_i^2 ,
 $$
-dove $R_i$ è la distanza dall'asse del punto di massa $m_i$; per un corpo con massa distribuita in modo continuo la somma diventa l'integrale $I = \displaystyle\int R^2\,dm$ esteso a tutto il corpo. Si misura in $\mathrm{kg\cdot m^2}$. Nelle rotazioni ha il ruolo che la massa ha nelle traslazioni: compare nel momento angolare $L_z = I\omega$, nell'equazione del moto $M_z = I\alpha$ e nell'energia cinetica $\dfrac{1}{2} I\omega^2$. Dipende dall'asse e cresce quanto più la massa è lontana dall'asse. È **additivo**: il momento d'inerzia di un corpo composto è la somma di quelli delle parti rispetto allo stesso asse.
+dove $R_i$ è la distanza dall'asse del punto di massa $m_i$; per un corpo con massa distribuita in modo continuo la somma diventa l'integrale $I = \displaystyle\int R^2\,dm$ esteso a tutto il corpo. Si misura in $\mathrm{kg\cdot m^2}$. Nelle rotazioni ha il ruolo che la massa ha nelle traslazioni, perché compare nel momento angolare $L_z = I\omega$, nell'equazione del moto $M_z = I\alpha$ e nell'energia cinetica $\dfrac{1}{2} I\omega^2$. Dipende dall'asse e cresce quanto più la massa è lontana dall'asse. È **additivo**: il momento d'inerzia di un corpo composto è la somma di quelli delle parti rispetto allo stesso asse.
 :::
 
 :::richiamo{titolo="Integrale definito"}
@@ -122,7 +122,7 @@ Per i corpi omogenei di massa $M$ seguenti valgono i momenti d'inerzia indicati.
 - Disco o cilindro pieno di raggio $R$, asse di simmetria: $I = \dfrac{1}{2} M R^2$.
 - Sfera piena di raggio $R$, asse per il centro: $I = \dfrac{2}{5} M R^2$.
 
-Con questi valori e con l'additività si calcola il momento d'inerzia di corpi composti. Un disco di $2{,}0\,\mathrm{kg}$ e raggio $0{,}10\,\mathrm{m}$ ha $I = \dfrac{1}{2} \cdot 2{,}0 \cdot 0{,}10^2 = 0{,}010\,\mathrm{kg\cdot m^2}$, mentre un anello con la stessa massa e lo stesso raggio ha momento d'inerzia doppio, perché tutta la sua massa sta alla distanza massima dall'asse.
+Un disco di $2{,}0\,\mathrm{kg}$ e raggio $0{,}10\,\mathrm{m}$ ha $I = \dfrac{1}{2} \cdot 2{,}0 \cdot 0{,}10^2 = 0{,}010\,\mathrm{kg\cdot m^2}$, mentre un anello con la stessa massa e lo stesso raggio ha momento d'inerzia doppio, perché tutta la sua massa sta alla distanza massima dall'asse.
 
 :::dimostrazione
 Per l'asta si pone l'asse $x$ lungo l'asta, con l'origine nel centro. Il tratto di lunghezza $dx$ ha massa $dm = \dfrac{M}{L}\,dx$ e dista $|x|$ dall'asse, quindi
@@ -192,7 +192,7 @@ Sia un corpo rigido vincolato a ruotare attorno a un asse fisso $z$ privo di att
 $$
 M_z = I\alpha ,
 $$
-dove $M_z$ è il momento assiale delle forze esterne diverse dalle reazioni dell'asse. È l'analogo per le rotazioni del secondo principio $F = ma$: noto il momento delle forze, l'equazione dà l'accelerazione angolare, e integrando si ottiene la legge oraria $\theta(t)$. Per una mola con $I = 0{,}20\,\mathrm{kg\cdot m^2}$ un momento di $1{,}0\,\mathrm{N\cdot m}$ produce $\alpha = 5{,}0\,\mathrm{rad/s^2}$.
+dove $M_z$ è il momento assiale delle forze esterne diverse dalle reazioni dell'asse. È l'analogo per le rotazioni del secondo principio $F = ma$, e dà l'accelerazione angolare a partire dal momento delle forze. Per una mola con $I = 0{,}20\,\mathrm{kg\cdot m^2}$ un momento di $1{,}0\,\mathrm{N\cdot m}$ produce $\alpha = 5{,}0\,\mathrm{rad/s^2}$.
 
 :::dimostrazione
 Si prende un polo $O$ sull'asse e si proietta la **seconda equazione cardinale** sul versore $\hat{k}$, che è costante; si ottiene $\dfrac{dL_z}{dt} = M_z^{(e)}$. Per il momento angolare di un corpo rigido in rotazione $L_z = I\omega$, e $I$ è costante perché le distanze dei punti dall'asse non cambiano, quindi $\dfrac{dL_z}{dt} = I\,\dfrac{d\omega}{dt} = I\alpha$. Un asse privo di attrito esercita forze applicate in punti dell'asse; per queste $\vec{r} = z\,\hat{k}$, e $\hat{k} \cdot (z\,\hat{k} \times \vec{F}) = 0$ perché $\hat{k} \times \vec{F}$ è ortogonale a $\hat{k}$. Perciò le reazioni dell'asse hanno momento assiale nullo, e $M_z^{(e)}$ si riduce al momento delle altre forze.
@@ -214,7 +214,7 @@ a = \frac{m g}{m + \dfrac{1}{2} M} = \frac{0{,}50 \cdot 9{,}81}{0{,}50 + 1{,}5}\
 \qquad
 T = \frac{1}{2} M a = 3{,}68\,\mathrm{N} .
 $$
-Il blocco scende con accelerazione minore di $g$ e la tensione è minore del peso $m g = 4{,}91\,\mathrm{N}$, perché la differenza tra peso e tensione accelera il blocco e la tensione accelera la rotazione del disco.
+La tensione è minore del peso $m g = 4{,}91\,\mathrm{N}$, quindi il blocco scende con accelerazione minore di $g$.
 
 ::grafico{area="sqrt(1-x^2);-sqrt(1-x^2);-1;1|-2.3;-3.1;0.65;1.35" curve="cos(t),sin(t),0,6.29" segmenti="1,0,1,-2.3" vettori="1,0,1,-0.9,T;1,-2.3,1,-1.4,T;1,-2.7,1,-4,mg" xmin=-1.6 xmax=4.4 ymin=-4.3 ymax=1.5 uguale=1 titolo="Il filo esercita la tensione $\vec{T}$ verso il basso sul bordo del disco e verso l'alto sul blocco"}
 
@@ -277,7 +277,7 @@ Sia un corpo rigido di massa $M$ il cui centro di massa $C$ ha velocità $v_C$, 
 $$
 K = \frac{1}{2} M v_C^2 + \frac{1}{2} I_C\,\omega^2 .
 $$
-L'energia cinetica si divide in una parte di traslazione e una parte di rotazione. La formula si applica ai corpi che rotolano e ai corpi che cadono ruotando, nei quali nessun punto resta fermo.
+L'energia cinetica si divide in una parte di traslazione e una parte di rotazione; la formula si applica anche quando nessun punto del corpo resta fermo, come nel rotolamento.
 
 :::dimostrazione
 Nel riferimento che trasla con il centro di massa l'asse per $C$ è fisso e il corpo ruota attorno a esso con velocità angolare $\omega$. Per l'energia cinetica di rotazione, l'energia cinetica del moto relativo al centro di massa è quindi $K' = \dfrac{1}{2} I_C\,\omega^2$, e il **teorema di König** dà la tesi.
@@ -289,7 +289,7 @@ In un campo di gravità uniforme, con l'asse $z$ verticale verso l'alto, l'energ
 $$
 U = M g z_C ,
 $$
-dove $z_C$ è la quota del centro di massa. Nel calcolo dell'energia potenziale il corpo si tratta quindi come un punto materiale posto nel centro di massa. Un'asta di $2{,}0\,\mathrm{kg}$ lunga $1{,}0\,\mathrm{m}$, incernierata a un estremo e portata da orizzontale a verticale sopra la cerniera, alza il centro di massa di $0{,}50\,\mathrm{m}$ e aumenta la sua energia potenziale di $2{,}0 \cdot 9{,}81 \cdot 0{,}50\,\mathrm{J} = 9{,}81\,\mathrm{J}$.
+dove $z_C$ è la quota del centro di massa. Nel calcolo dell'energia potenziale il corpo si tratta quindi come un punto materiale posto nel centro di massa. Un'asta di $2{,}0\,\mathrm{kg}$ che alza il centro di massa di $0{,}50\,\mathrm{m}$ aumenta la sua energia potenziale di $2{,}0 \cdot 9{,}81 \cdot 0{,}50\,\mathrm{J} = 9{,}81\,\mathrm{J}$.
 
 :::dimostrazione
 Sommando le energie potenziali dei singoli punti si ottiene $U = \sum_i m_i g z_i = g\sum_i m_i z_i = M g z_C$, perché per definizione di centro di massa $\sum_i m_i z_i = M z_C$.
@@ -297,7 +297,7 @@ Sommando le energie potenziali dei singoli punti si ottiene $U = \sum_i m_i g z_
 ::::
 
 :::osservazione{#conservazione-energia-corpo-rigido titolo="Conservazione dell'energia meccanica"}
-Se le forze che compiono lavoro sono conservative e i vincoli sono ideali, l'energia meccanica $K + U$ di un corpo rigido si conserva. Un asse fisso privo di attrito e il contatto di rotolamento puro sono vincoli ideali, perché le loro reazioni sono applicate in punti fermi e quindi non compiono lavoro. Con le espressioni di $K$ e di $U$ del corpo rigido, la conservazione dell'energia dà la velocità angolare in funzione della posizione senza passare per le accelerazioni.
+Se le forze che compiono lavoro sono conservative e i vincoli sono ideali, l'energia meccanica $K + U$ di un corpo rigido si conserva. Un asse fisso privo di attrito e il contatto di rotolamento puro sono vincoli ideali, perché le loro reazioni sono applicate in punti fermi e quindi non compiono lavoro. La conservazione dell'energia dà allora la velocità angolare in funzione della posizione, senza calcolare le accelerazioni.
 :::
 
 :::esempio{titolo="Asta che cade ruotando attorno a un estremo"}
@@ -307,17 +307,17 @@ M g\,\frac{L}{2} = \frac{1}{2} \cdot \frac{1}{3} M L^2\,\omega^2
 \quad\Longrightarrow\quad
 \omega = \sqrt{\frac{3g}{L}} = 4{,}95\,\mathrm{rad/s} .
 $$
-L'estremo libero ha velocità $v = \omega L = \sqrt{3gL} = 5{,}94\,\mathrm{m/s}$, maggiore della velocità $\sqrt{2gL} = 4{,}85\,\mathrm{m/s}$ di un sasso che cade liberamente dalla stessa altezza. I due risultati sono compatibili con la conservazione dell'energia, perché nell'asta le forze interne trasferiscono energia dai punti vicini alla cerniera all'estremo libero.
+L'estremo libero ha velocità $v = \omega L = \sqrt{3gL} = 5{,}94\,\mathrm{m/s}$, maggiore della velocità $\sqrt{2gL} = 4{,}85\,\mathrm{m/s}$ di un sasso che cade liberamente dalla stessa altezza.
 :::
 
 ## Conservazione del momento angolare
 
 ::::teorema{#conservazione-momento-angolare titolo="Conservazione del momento angolare"}
-Se il momento risultante delle forze esterne rispetto a un polo fisso $O$ è nullo, il momento angolare $\vec{L}_O$ del sistema è costante. Se è nulla soltanto la componente del momento lungo un asse fisso $z$, si conserva la componente $L_z$; in particolare, per un sistema che ruota attorno all'asse e cambia il proprio momento d'inerzia, avvicinando o allontanando delle masse dall'asse, risulta
+Se il momento risultante delle forze esterne rispetto a un polo fisso $O$ è nullo, il momento angolare $\vec{L}_O$ del sistema è costante. Se è nulla soltanto la componente del momento lungo un asse fisso $z$, si conserva $L_z$; per un sistema che ruota attorno all'asse e cambia il proprio momento d'inerzia, spostando delle masse, risulta
 $$
 I_1\,\omega_1 = I_2\,\omega_2 .
 $$
-La legge si applica quando le forze esterne hanno momento nullo rispetto all'asse, come il peso quando è parallelo all'asse o le reazioni di un asse privo di attrito. Un sistema che riduce il proprio momento d'inerzia ruota più velocemente.
+Hanno momento assiale nullo, per esempio, il peso quando è parallelo all'asse e le reazioni di un asse privo di attrito. Un sistema che riduce il proprio momento d'inerzia ruota più velocemente.
 
 :::dimostrazione
 Per la **seconda equazione cardinale** $\dfrac{d\vec{L}_O}{dt} = \vec{M}_O^{(e)}$. Se $\vec{M}_O^{(e)} = \vec{0}$ in ogni istante, la derivata di $\vec{L}_O$ è nulla, e quindi $\vec{L}_O$ è costante. Se è nulla soltanto $M_z^{(e)}$, proiettando sul versore costante $\hat{k}$ si ottiene $\dfrac{dL_z}{dt} = 0$, perciò $L_z$ è costante. Per un sistema che in ogni istante ruota rigidamente attorno all'asse vale $L_z = I\omega$, come per il momento angolare di un corpo rigido in rotazione, e da $L_z$ costante segue $I_1\omega_1 = I_2\omega_2$.
@@ -325,15 +325,15 @@ Per la **seconda equazione cardinale** $\dfrac{d\vec{L}_O}{dt} = \vec{M}_O^{(e)}
 ::::
 
 :::esempio{titolo="Pattinatrice che chiude le braccia"}
-Una pattinatrice ruota su sé stessa con $\omega_1 = 2{,}0\,\mathrm{rad/s}$ e momento d'inerzia $I_1 = 3{,}0\,\mathrm{kg\cdot m^2}$ rispetto all'asse verticale; chiudendo le braccia porta il momento d'inerzia a $I_2 = 1{,}2\,\mathrm{kg\cdot m^2}$. L'attrito dei pattini sul ghiaccio è trascurabile, e il peso e la reazione del ghiaccio sono paralleli all'asse, quindi il momento delle forze esterne lungo l'asse è nullo e $L_z$ si conserva:
+Una pattinatrice ruota su sé stessa con $\omega_1 = 2{,}0\,\mathrm{rad/s}$ e momento d'inerzia $I_1 = 3{,}0\,\mathrm{kg\cdot m^2}$ rispetto all'asse verticale; chiudendo le braccia porta il momento d'inerzia a $I_2 = 1{,}2\,\mathrm{kg\cdot m^2}$. L'attrito dei pattini è trascurabile, e il peso e la reazione del ghiaccio sono paralleli all'asse, quindi il loro momento assiale è nullo e $L_z$ si conserva:
 $$
 \omega_2 = \frac{I_1}{I_2}\,\omega_1 = \frac{3{,}0}{1{,}2} \cdot 2{,}0\,\mathrm{rad/s} = 5{,}0\,\mathrm{rad/s} .
 $$
-L'energia cinetica passa da $\dfrac{1}{2} I_1\omega_1^2 = 6{,}0\,\mathrm{J}$ a $\dfrac{1}{2} I_2\omega_2^2 = 15\,\mathrm{J}$. L'aumento di $9{,}0\,\mathrm{J}$ è il lavoro dei muscoli delle braccia, che sono forze interne: il loro momento totale è nullo, quindi lasciano invariato $L_z$, mentre il loro lavoro cambia l'energia cinetica.
+L'energia cinetica passa da $\dfrac{1}{2} I_1\omega_1^2 = 6{,}0\,\mathrm{J}$ a $\dfrac{1}{2} I_2\omega_2^2 = 15\,\mathrm{J}$. L'aumento di $9{,}0\,\mathrm{J}$ è il lavoro dei muscoli delle braccia, che esercitano forze interne; il loro momento totale è nullo, quindi lasciano invariato $L_z$, mentre il loro lavoro cambia l'energia cinetica.
 :::
 
 :::osservazione{#urti-con-asse-fisso titolo="Urti con un corpo vincolato a un asse"}
-Quando un proiettile urta un corpo rigido incernierato, durante l'urto l'asse esercita una reazione impulsiva, cioè una forza molto intensa per un tempo molto breve, che in generale cambia la quantità di moto del sistema proiettile più corpo. La quantità di moto quindi *non* si conserva. Il momento della reazione rispetto a un polo sull'asse è invece nullo, perché la reazione è applicata sull'asse, e il peso ha momento finito, che nel breve tempo dell'urto produce una variazione trascurabile del momento angolare. Perciò si conserva il momento angolare rispetto all'asse. Per un proiettile di massa $m$ e velocità $v_0$ perpendicolare all'asse, la cui retta d'azione dista $d$ dall'asse, che resta conficcato in un corpo fermo con momento d'inerzia $I_O$,
+Quando un proiettile urta un corpo rigido incernierato, l'asse esercita una reazione impulsiva, cioè una forza molto intensa per un tempo molto breve, che cambia la quantità di moto del sistema; la quantità di moto quindi *non* si conserva. La reazione però è applicata sull'asse e ha momento assiale nullo, mentre il peso ha momento finito e nel breve tempo dell'urto produce una variazione trascurabile. Perciò si conserva il momento angolare rispetto all'asse. Per un proiettile di massa $m$ e velocità $v_0$ perpendicolare all'asse, con retta d'azione a distanza $d$ dall'asse, che si conficca in un corpo fermo di momento d'inerzia $I_O$,
 $$
 m v_0 d = \left( I_O + m d^2 \right) \omega .
 $$
@@ -343,7 +343,7 @@ L'urto è anelastico, quindi l'energia cinetica non si conserva durante l'urto; 
 ## Rotolamento puro
 
 :::definizione{#rotolamento-puro titolo="Rotolamento puro"}
-Un corpo a sezione circolare di raggio $R$, come una ruota, un cilindro o una sfera, che si muove su una superficie ferma è in **rotolamento puro**, o rotola senza strisciare, se il punto del corpo a contatto con la superficie ha velocità nulla in ogni istante. La velocità di un punto del corpo è la somma della velocità $\vec{v}_C$ del centro e della velocità $\vec{\omega} \times \vec{r}\,'$ dovuta alla rotazione attorno al centro, dove $\vec{r}\,'$ è la posizione del punto rispetto a $C$. Nel punto di contatto le due velocità sono parallele al piano e hanno versi opposti, quindi la condizione di rotolamento puro equivale a
+Un corpo a sezione circolare di raggio $R$ (ruota, cilindro, sfera) che si muove su una superficie ferma è in **rotolamento puro**, o rotola senza strisciare, se il punto del corpo a contatto con la superficie ha velocità nulla in ogni istante. La velocità di un punto è la somma della velocità $\vec{v}_C$ del centro e della velocità $\vec{\omega} \times \vec{r}\,'$ della rotazione attorno al centro; nel punto di contatto le due velocità hanno versi opposti, quindi la condizione equivale a
 $$
 v_C = \omega R ,
 \qquad
@@ -360,7 +360,7 @@ Sia un corpo di massa $M$ e raggio $R$, con momento d'inerzia $I_C$ rispetto all
 $$
 K = \frac{1}{2}\left( M + \frac{I_C}{R^2} \right) v_C^2 .
 $$
-Per un cilindro pieno $K = \dfrac{3}{4} M v_C^2$, per una sfera piena $K = \dfrac{7}{10} M v_C^2$, per un anello $K = M v_C^2$. A parità di massa e di velocità, il corpo con la massa più lontana dall'asse ha più energia cinetica, perché ne ha di più nella rotazione.
+Per un cilindro pieno $K = \dfrac{3}{4} M v_C^2$, per una sfera piena $K = \dfrac{7}{10} M v_C^2$, per un anello $K = M v_C^2$. A parità di massa e di velocità ha più energia il corpo con la massa più lontana dall'asse.
 
 :::dimostrazione
 Per l'**energia cinetica di un corpo rigido** $K = \dfrac{1}{2} M v_C^2 + \dfrac{1}{2} I_C\,\omega^2$, e nel rotolamento puro $\omega = \dfrac{v_C}{R}$; sostituendo si ottiene la tesi. Lo stesso risultato segue considerando il moto come rotazione attorno al punto di contatto $P$, con momento d'inerzia $I_P = I_C + M R^2$ per il **teorema di Steiner**:
@@ -377,7 +377,7 @@ a_C = \frac{g\sin\theta}{1 + k} ,
 \qquad
 f = \frac{k}{1 + k}\,M g\sin\theta ,
 $$
-e il rotolamento puro è possibile solo se il coefficiente d'attrito statico soddisfa $\mu_s \geq \dfrac{k}{1 + k}\tan\theta$. Il coefficiente $k$ vale $\dfrac{2}{5}$ per la sfera piena, $\dfrac{1}{2}$ per il cilindro pieno e $1$ per l'anello, quindi le accelerazioni sono $\dfrac{5}{7} g\sin\theta$, $\dfrac{2}{3} g\sin\theta$ e $\dfrac{1}{2} g\sin\theta$. Sono tutte minori dell'accelerazione $g\sin\theta$ di un blocco che scivola senza attrito e non dipendono né dalla massa né dal raggio; in una gara lungo lo stesso piano la sfera arriva prima del cilindro e il cilindro prima dell'anello.
+e il rotolamento puro è possibile solo se il coefficiente d'attrito statico soddisfa $\mu_s \geq \dfrac{k}{1 + k}\tan\theta$. Il coefficiente $k$ vale $\dfrac{2}{5}$ per la sfera piena, $\dfrac{1}{2}$ per il cilindro pieno e $1$ per l'anello, quindi le accelerazioni sono $\dfrac{5}{7} g\sin\theta$, $\dfrac{2}{3} g\sin\theta$ e $\dfrac{1}{2} g\sin\theta$. Sono minori dell'accelerazione $g\sin\theta$ di un blocco che scivola senza attrito e non dipendono dalla massa né dal raggio, perciò lungo lo stesso piano la sfera arriva prima del cilindro e il cilindro prima dell'anello.
 
 ::grafico{area="3-0.57735*x;0;0;5.196" curve="2.5+cos(t),2.711+sin(t),0,6.29" vettori="2.5,2.711,2.5,1.111,Mg;2,1.845,2.4,2.538,N;2,1.845,1.48,2.145,f" punti="2.5,2.711,pieno" etichette="4.25,0.12,θ;2.6,2.85,C" xmin=-0.5 xmax=5.8 ymin=-0.5 ymax=4 uguale=1 titolo="Sul corpo che rotola agiscono il peso in $C$, la reazione normale $\vec{N}$ e l'attrito statico $\vec{f}$ nel punto di contatto"}
 
@@ -401,7 +401,7 @@ M g h = \frac{1}{2}\left( M + \frac{I_C}{R^2} \right) v_C^2
 \quad\Longrightarrow\quad
 v_C = \sqrt{\frac{2 g h}{1 + k}} .
 $$
-L'attrito è comunque necessario, perché il suo momento rispetto al centro fa aumentare la velocità angolare. Su un piano liscio il momento delle forze rispetto al centro sarebbe nullo, quindi un corpo partito da fermo scenderebbe scivolando senza ruotare, con tutta l'energia nella traslazione e $v_C = \sqrt{2 g h}$.
+L'attrito è comunque necessario, perché il suo momento rispetto al centro fa aumentare la velocità angolare; su un piano liscio un corpo partito da fermo scivolerebbe senza ruotare, con $v_C = \sqrt{2 g h}$.
 :::
 
 ## Equilibrio statico del corpo rigido
@@ -414,7 +414,7 @@ $$
 \vec{M}_O^{(e)} = \vec{0}
 \end{cases}
 $$
-Quando le forze stanno tutte in un piano $xy$ il sistema si riduce a tre equazioni scalari, $R_x = 0$, $R_y = 0$ e $M_z = 0$, che permettono di determinare al più tre incognite, per esempio le reazioni dei vincoli. La prima condizione è quella del punto materiale, la seconda esclude che il corpo cominci a ruotare. Due forze opposte applicate su rette d'azione distinte, per esempio, hanno risultante nulla ma formano una **coppia** di momento non nullo, e il corpo comincia a ruotare.
+Con forze tutte in un piano $xy$ il sistema si riduce a tre equazioni scalari, $R_x = 0$, $R_y = 0$ e $M_z = 0$, che determinano al più tre incognite, per esempio le reazioni dei vincoli. La seconda condizione esclude che il corpo cominci a ruotare; per esempio due forze opposte su rette d'azione distinte hanno risultante nulla, ma formano una **coppia** di momento non nullo.
 
 :::dimostrazione
 Se il corpo resta fermo, la quantità di moto e il momento angolare sono nulli in ogni istante, e lo sono anche le loro derivate; per le due equazioni cardinali $\vec{R}^{(e)} = M\vec{a}_C = \vec{0}$ e $\vec{M}_O^{(e)} = \dfrac{d\vec{L}_O}{dt} = \vec{0}$. Viceversa, siano soddisfatte le due condizioni. Per la prima equazione cardinale il centro di massa, inizialmente fermo, resta fermo. Il momento rispetto al centro di massa è $\vec{M}_C^{(e)} = \vec{M}_O^{(e)} + \overrightarrow{CO} \times \vec{R}^{(e)} = \vec{0}$, quindi per la seconda equazione cardinale rispetto al centro di massa il momento angolare, inizialmente nullo, resta nullo. Per un corpo rigido il momento angolare rispetto al centro di massa è nullo solo se il corpo non ruota, perciò il corpo resta in quiete.
@@ -426,7 +426,7 @@ Se la risultante delle forze è nulla, il momento risultante è lo stesso rispet
 $$
 \vec{M}_{O'} = \sum_i \big( \overrightarrow{O'O} + \overrightarrow{OP_i} \big) \times \vec{F}_i = \overrightarrow{O'O} \times \vec{R} + \vec{M}_O ,
 $$
-e il primo addendo è nullo quando $\vec{R} = \vec{0}$. Negli esercizi di statica il polo si sceglie quindi nel punto in cui è applicata una forza incognita: il momento di quella forza è nullo, e l'equazione dei momenti contiene un'incognita in meno.
+e il primo addendo è nullo quando $\vec{R} = \vec{0}$. Negli esercizi di statica il polo si sceglie quindi dove è applicata una forza incognita, perché il momento di quella forza è nullo e l'equazione dei momenti contiene un'incognita in meno.
 :::
 
 :::definizione{#leva titolo="Leva"}
@@ -434,7 +434,7 @@ Una **leva** è un corpo rigido, di solito un'asta, libero di ruotare attorno a 
 $$
 F_2\,b_2 = F_1\,b_1 ,
 $$
-mentre la reazione del fulcro equilibra la risultante di $\vec{F}_1$ e $\vec{F}_2$. La leva riduce la forza necessaria quando $b_2 > b_1$, perché allora $F_2 < F_1$. Per sollevare un masso che preme con $600\,\mathrm{N}$ su un palanchino, con braccio resistente di $0{,}30\,\mathrm{m}$ e braccio motore di $0{,}90\,\mathrm{m}$, basta una forza di $200\,\mathrm{N}$.
+mentre la reazione del fulcro equilibra la risultante. Se $b_2 > b_1$, allora $F_2 < F_1$. Per sollevare un masso che preme con $600\,\mathrm{N}$ su un palanchino, con braccio resistente di $0{,}30\,\mathrm{m}$ e braccio motore di $0{,}90\,\mathrm{m}$, basta una forza di $200\,\mathrm{N}$.
 
 ::grafico{area="1.7;1.5;-1.2;3.2|1.5-3*abs(x);0;-0.5;0.5" vettori="-1,3.4,-1,1.72,F₁;3,2.28,3,1.72,F₂" segmenti="-1,1.5,-1,1.1;3,1.5,3,1.1;-1,1.1,0,1.1;0,1.1,3,1.1" etichette="-0.65,0.75,b₁;1.4,0.75,b₂" xmin=-1.8 xmax=3.8 ymin=-0.4 ymax=3.6 uguale=1 titolo="Leva con il fulcro tra le due forze: con $b_2 = 3 b_1$ la forza motrice è un terzo della forza resistente"}
 
@@ -449,7 +449,7 @@ N - m g = 0 \\[4pt]
 m g\,\dfrac{\ell}{2}\cos\theta - N_p\,\ell\sin\theta = 0
 \end{cases}
 $$
-quindi $N = m g$ e $f = N_p = \dfrac{m g}{2\tan\theta}$. La scala resta ferma se $f \leq \mu_s N$, cioè se $\tan\theta \geq \dfrac{1}{2\mu_s}$: più l'angolo $\theta$ è piccolo, più attrito serve. Per $\theta = 60^\circ$ occorre $\mu_s \geq 0{,}29$.
+quindi $N = m g$ e $f = N_p = \dfrac{m g}{2\tan\theta}$. La scala resta ferma se $f \leq \mu_s N$, cioè se $\tan\theta \geq \dfrac{1}{2\mu_s}$, quindi più l'angolo $\theta$ è piccolo, più attrito serve. Per $\theta = 60^\circ$ occorre $\mu_s \geq 0{,}29$.
 
 ::grafico{area="4.33-1.7321*x+0.1;4.33-1.7321*x-0.1;0;2.5" vettori="1.25,2.165,1.25,0.165,mg;2.5,0,2.5,2,N;2.5,0,1.923,0,f;0,4.33,0.577,4.33,Nₚ" punti="2.5,0,pieno,A;1.25,2.165,pieno" etichette="1.95,0.15,θ" xmin=-0.6 xmax=5.2 ymin=-0.6 ymax=5 uguale=1 titolo="Forze sulla scala appoggiata a una parete liscia: il peso nel punto medio, $\vec{N}$ e $\vec{f}$ nel piede $A$, $\vec{N}_p$ orizzontale in cima"}
 

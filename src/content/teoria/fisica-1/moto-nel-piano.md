@@ -190,7 +190,7 @@ Se il punto di arrivo è a una quota $y_f$ diversa da quella di lancio $y_0$, le
 $$
 y_0 + v_0\sin\theta\; t - \frac{1}{2}\,g\,t^2 = y_f ,
 $$
-e sostituendo la soluzione in $x(t)$ si ottiene la distanza orizzontale. Se il punto di arrivo è più in basso del punto di lancio, il prodotto delle soluzioni è negativo, quindi l'equazione ha una sola soluzione positiva, che è quella cercata. Se il punto di arrivo è più in alto ed è raggiungibile, le soluzioni positive sono due: la prima corrisponde al passaggio durante la salita, la seconda al passaggio durante la discesa. Quando è nota la distanza orizzontale di un bersaglio, l'equazione della **traiettoria parabolica** dà direttamente la quota a cui passa il proiettile.
+e sostituendo la soluzione in $x(t)$ si ottiene la distanza orizzontale. Se il punto di arrivo è più in basso del punto di lancio, il prodotto delle soluzioni è negativo, quindi l'equazione ha una sola soluzione positiva, che è quella cercata. Se il punto di arrivo è più in alto ed è raggiungibile, le soluzioni positive sono due, e la prima corrisponde al passaggio durante la salita, la seconda al passaggio durante la discesa. Quando è nota la distanza orizzontale di un bersaglio, l'equazione della **traiettoria parabolica** dà direttamente la quota a cui passa il proiettile.
 :::
 
 ::::teorema{#velocita-e-quota titolo="Velocità in funzione della quota"}
