@@ -105,7 +105,7 @@ For example, $x^4 - 5x^2 + 4 = 0$ becomes $t^2 - 5t + 4 = 0$, with solutions $t 
 ## First-degree inequalities
 
 :::definizione{#disequazioni-primo-grado titolo="First-degree inequality"}
-An inequality of the type $ax + b > 0$ (or with $\geq$, $<$, $\leq$) is solved by isolating $x$ with two rules: adding the same quantity to both sides preserves the direction; multiplying both sides by a positive quantity preserves the direction, by a negative quantity **reverses** it. The solutions form a **half-line**. From $5 - 2x > 1$ it follows that $-2x > -4$, and dividing by $-2$, with the direction reversed, $x < 2$.
+An inequality of the type $ax + b > 0$ (or with $\geq$, $<$, $\leq$), with $a \neq 0$, is solved by isolating $x$ with two rules: adding the same quantity to both sides preserves the direction; multiplying both sides by a positive quantity preserves the direction, by a negative quantity **reverses** it. The solutions form a **half-line**. From $5 - 2x > 1$ it follows that $-2x > -4$, and dividing by $-2$, with the direction reversed, $x < 2$.
 :::
 
 ## Second-degree inequalities

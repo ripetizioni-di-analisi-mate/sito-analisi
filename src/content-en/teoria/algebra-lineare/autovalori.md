@@ -27,7 +27,7 @@ A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}, \qquad v = \begin{pmatrix} 1 \
 $$
 Since $Av = (5, 5) = 5v$, the vector $v$ is an **eigenvector** of $A$ associated with the eigenvalue $5$. On the other hand, $Aw = (4, 2)$ is *not* a multiple of $w$, because the second component of $w$ is zero and that of $Aw$ is not, therefore $w$ is not an eigenvector.
 
-::grafico{vettori="0,0,5,5,Av;0,0,1,1,v;0,0,1,0,w;0,0,4,2,Aw" segmenti="-0.6,-0.6,5.8,5.8" xmin=-0.8 xmax=6 ymin=-0.8 ymax=6 uguale=1 titolo="$Av = 5v$ stays on the line of $v$ (dashed): the direction of $v$ is invariant; $Aw = (4, 2)$ leaves the line of $w$, the $x$-axis"}
+::grafico{vettori="0,0,5,5;0,0,1,1;0,0,1,0,w;0,0,4,2" etichette="1.9,2.6,Av;0.3,0.6,v;2.6,0.8,Aw" segmenti="-0.6,-0.6,5.8,5.8" xmin=-0.8 xmax=6 ymin=-0.8 ymax=6 uguale=1 titolo="$Av = 5v$ stays on the line of $v$ (dashed): the direction of $v$ is invariant; $Aw = (4, 2)$ leaves the line of $w$, the $x$-axis"}
 
 :::
 
@@ -113,7 +113,7 @@ Let $f : V \to V$ be an endomorphism of a space of dimension $n$, let $\mathcal{
 :::esempio{titolo="The reflection across the bisector"}
 The endomorphism $f(x, y) = (y, x)$ of $\mathbb{R}^2$ has matrix $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ with respect to the standard basis and $p_A(\lambda) = \lambda^2 - 1$, therefore the eigenvalues are $1$ and $-1$. One has $f(1, 1) = (1, 1)$ and $f(1, -1) = (-1, 1) = -(1, -1)$, so the vectors of the bisector $y = x$ stay fixed and those of the line $y = -x$ reverse direction. In agreement with the geometry, $f$ is the **reflection** across the line $y = x$.
 
-::grafico{vettori="0,0,1.5,1.5,u = f(u);0,0,1.5,-1.5,w;0,0,-1.5,1.5,f(w)" segmenti="-2.4,-2.4,2.4,2.4;-2.4,2.4,2.4,-2.4" xmin=-2.5 xmax=2.5 ymin=-2.2 ymax=2.2 uguale=1 titolo="The reflection across $y = x$: the vectors of the bisector stay fixed (eigenvalue $1$), those of the line $y = -x$ reverse direction (eigenvalue $-1$)"}
+::grafico{vettori="0,0,1.5,1.5;0,0,1.5,-1.5,w;0,0,-1.5,1.5,f(w)" etichette="0.55,0.35,u = f(u)" segmenti="-2.4,-2.4,2.4,2.4;-2.4,2.4,2.4,-2.4" xmin=-2.5 xmax=2.5 ymin=-2.2 ymax=2.2 uguale=1 titolo="The reflection across $y = x$: the vectors of the bisector stay fixed (eigenvalue $1$), those of the line $y = -x$ reverse direction (eigenvalue $-1$)"}
 
 :::
 

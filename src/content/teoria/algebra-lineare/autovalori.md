@@ -27,7 +27,7 @@ A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}, \qquad v = \begin{pmatrix} 1 \
 $$
 Poiché $Av = (5, 5) = 5v$, il vettore $v$ è un **autovettore** di $A$ relativo all'autovalore $5$. Invece $Aw = (4, 2)$ *non* è multiplo di $w$, perché la seconda componente di $w$ è nulla e quella di $Aw$ no, quindi $w$ non è un autovettore.
 
-::grafico{vettori="0,0,5,5,Av;0,0,1,1,v;0,0,1,0,w;0,0,4,2,Aw" segmenti="-0.6,-0.6,5.8,5.8" xmin=-0.8 xmax=6 ymin=-0.8 ymax=6 uguale=1 titolo="$Av = 5v$ resta sulla retta di $v$ (tratteggiata): la direzione di $v$ è invariante; $Aw = (4, 2)$ esce dalla retta di $w$, l'asse $x$"}
+::grafico{vettori="0,0,5,5;0,0,1,1;0,0,1,0,w;0,0,4,2" etichette="1.9,2.6,Av;0.3,0.6,v;2.6,0.8,Aw" segmenti="-0.6,-0.6,5.8,5.8" xmin=-0.8 xmax=6 ymin=-0.8 ymax=6 uguale=1 titolo="$Av = 5v$ resta sulla retta di $v$ (tratteggiata): la direzione di $v$ è invariante; $Aw = (4, 2)$ esce dalla retta di $w$, l'asse $x$"}
 
 :::
 
@@ -113,7 +113,7 @@ Sia $f : V \to V$ un endomorfismo di uno spazio di dimensione $n$, sia $\mathcal
 :::esempio{titolo="La simmetria rispetto alla bisettrice"}
 L'endomorfismo $f(x, y) = (y, x)$ di $\mathbb{R}^2$ ha matrice $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ rispetto alla base canonica e $p_A(\lambda) = \lambda^2 - 1$, quindi gli autovalori sono $1$ e $-1$. Si ha $f(1, 1) = (1, 1)$ e $f(1, -1) = (-1, 1) = -(1, -1)$, perciò i vettori della bisettrice $y = x$ restano fermi e quelli della retta $y = -x$ cambiano verso. In accordo con la geometria, $f$ è la **simmetria** rispetto alla retta $y = x$.
 
-::grafico{vettori="0,0,1.5,1.5,u = f(u);0,0,1.5,-1.5,w;0,0,-1.5,1.5,f(w)" segmenti="-2.4,-2.4,2.4,2.4;-2.4,2.4,2.4,-2.4" xmin=-2.5 xmax=2.5 ymin=-2.2 ymax=2.2 uguale=1 titolo="La simmetria rispetto a $y = x$: i vettori della bisettrice restano fermi (autovalore $1$), quelli della retta $y = -x$ cambiano verso (autovalore $-1$)"}
+::grafico{vettori="0,0,1.5,1.5;0,0,1.5,-1.5,w;0,0,-1.5,1.5,f(w)" etichette="0.55,0.35,u = f(u)" segmenti="-2.4,-2.4,2.4,2.4;-2.4,2.4,2.4,-2.4" xmin=-2.5 xmax=2.5 ymin=-2.2 ymax=2.2 uguale=1 titolo="La simmetria rispetto a $y = x$: i vettori della bisettrice restano fermi (autovalore $1$), quelli della retta $y = -x$ cambiano verso (autovalore $-1$)"}
 
 :::
 

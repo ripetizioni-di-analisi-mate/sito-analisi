@@ -30,7 +30,8 @@ The notion is **local**: the same equation can define different functions near d
 :::esempio{titolo="The circle is not a graph, but it is one locally"}
 For $F(x, y) = x^2 + y^2 - 1$ the zero set is the unit circle, which is **not the graph** of any function $y = \varphi(x)$: each $x \in (-1, 1)$ corresponds to *two* points of the curve. Near the point $\left( \dfrac{3}{5}, \dfrac{4}{5} \right)$ the curve coincides with the graph of $\varphi(x) = \sqrt{1 - x^2}$; near $\left( \dfrac{3}{5}, -\dfrac{4}{5} \right)$ with the graph of $-\sqrt{1 - x^2}$. Near $(1, 0)$ **no function** of $x$ describes the curve, because every neighborhood of $(1, 0)$ contains, for one and the same value $x < 1$, two points of the circle.
 
-::grafico{f="sqrt(1-x*x)" xmin=-1.6 xmax=1.6 ymin=-0.3 ymax=1.4 punti="0.6,0.8" titolo="The upper branch of the circle: near $\left(\dfrac{3}{5}, \dfrac{4}{5}\right)$ the curve is the graph of $y = \sqrt{1 - x^2}$"}
+::grafico{f="sqrt(1-x*x)" xmin=-1.6 xmax=1.6 ymin=-0.3 ymax=1.4 uguale=1 punti="0.6,0.8,pieno" titolo="The upper branch of the circle: near $\left(\dfrac{3}{5}, \dfrac{4}{5}\right)$ the curve is the graph of $y = \sqrt{1 - x^2}$"}
+
 :::
 
 :::osservazione

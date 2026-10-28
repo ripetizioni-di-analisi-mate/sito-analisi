@@ -70,7 +70,7 @@ e il trinomio si scompone come
 $$
 ax^2 + bx + c = a\,(x - x_1)(x - x_2) .
 $$
-Le due uguaglianze seguono dalla **formula risolutiva**, sommando e moltiplicando le espressioni delle radici. Con esse si trovano a mente le radici intere e si scompongono i trinomi: per $x^2 - 7x + 12$ due numeri con somma $7$ e prodotto $12$ sono $3$ e $4$, quindi le radici sono $3$ e $4$ e il trinomio è $(x - 3)(x - 4)$.
+Le due uguaglianze seguono dalla **formula risolutiva**, sommando e moltiplicando le espressioni delle radici; la scomposizione si verifica sviluppando $a\,(x - x_1)(x - x_2) = ax^2 - a\,(x_1 + x_2)\,x + a\,x_1 x_2$ e sostituendo la somma e il prodotto. Con esse si trovano a mente le radici intere e si scompongono i trinomi: per $x^2 - 7x + 12$ due numeri con somma $7$ e prodotto $12$ sono $3$ e $4$, quindi le radici sono $3$ e $4$ e il trinomio è $(x - 3)(x - 4)$.
 :::
 
 ## Equazioni di grado superiore
@@ -114,7 +114,7 @@ Per esempio $x^4 - 5x^2 + 4 = 0$ diventa $t^2 - 5t + 4 = 0$, con soluzioni $t = 
 ## Disequazioni di primo grado
 
 :::definizione{#disequazioni-primo-grado titolo="Disequazione di primo grado"}
-Una disequazione del tipo $ax + b > 0$ (o con $\geq$, $<$, $\leq$) si risolve isolando $x$ con due regole: sommare ai due membri la stessa quantità conserva il verso; moltiplicare i due membri per una quantità positiva conserva il verso, per una quantità *negativa* **lo inverte**. Le soluzioni formano una **semiretta**. Da $5 - 2x > 1$ segue $-2x > -4$, e dividendo per $-2$, con il verso invertito, $x < 2$.
+Una disequazione del tipo $ax + b > 0$ (o con $\geq$, $<$, $\leq$), con $a \neq 0$, si risolve isolando $x$ con due regole: sommare ai due membri la stessa quantità conserva il verso; moltiplicare i due membri per una quantità positiva conserva il verso, per una quantità *negativa* **lo inverte**. Le soluzioni formano una **semiretta**. Da $5 - 2x > 1$ segue $-2x > -4$, e dividendo per $-2$, con il verso invertito, $x < 2$.
 :::
 
 ## Disequazioni di secondo grado
@@ -128,7 +128,7 @@ Sia $y = ax^2 + bx + c$ con $a > 0$ e $\Delta = b^2 - 4ac$. Il grafico è una pa
 
 Per $a < 0$ i segni sono gli **opposti**; in alternativa si moltiplicano i due membri per $-1$ invertendo il verso, così da ricondursi al caso $a > 0$.
 
-::grafico{f="x*x-2*x-3" xmin=-4 xmax=6 ymin=-5 ymax=7 titolo="y = x² − 2x − 3: la parabola sta sopra l'asse x per x < −1 e per x > 3, sotto tra le radici"}
+::grafico{f="x*x-2*x-3" xmin=-4 xmax=6 ymin=-5 ymax=7 punti="-1,0,pieno;3,0,pieno" titolo="$y = x^2 - 2x - 3$: la parabola sta sopra l'asse $x$ per $x < -1$ e per $x > 3$, sotto tra le radici"}
 :::
 
 :::esempio
