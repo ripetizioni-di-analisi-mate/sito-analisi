@@ -6,15 +6,15 @@ sommario: Che cosa significa che una funzione tende a un valore, come si calcola
 ## Intorni e punti di accumulazione
 
 :::definizione{#intorno titolo="Intorno di un punto"}
-Per $x_0 \in \mathbb{R}$ e $r > 0$, l'intorno di $x_0$ di raggio $r$ è l'intervallo aperto
+Per $x_0 \in \mathbb{R}$ e $r > 0$, l'**intorno** di $x_0$ di raggio $r$ è l'intervallo aperto
 $$
 I(x_0, r) = (x_0 - r,\; x_0 + r) = \{ x \in \mathbb{R} : |x - x_0| < r \}.
 $$
-Un intorno di $+\infty$ è una semiretta $(a, +\infty)$; un intorno di $-\infty$ è una semiretta $(-\infty, a)$. Le scritture $|x - x_0| < r$ e $x \in (x_0 - r, x_0 + r)$ dicono la stessa cosa, e nelle definizioni di limite compaiono entrambe.
+Un intorno di $+\infty$ è una semiretta $(a, +\infty)$; un intorno di $-\infty$ è una semiretta $(-\infty, a)$. Le scritture $|x - x_0| < r$ e $x \in (x_0 - r, x_0 + r)$ dicono *la stessa cosa*, e nelle definizioni di limite compaiono entrambe.
 :::
 
 :::definizione{#punto-di-accumulazione titolo="Punto di accumulazione"}
-$x_0 \in \mathbb{R}$ è di accumulazione per $A \subseteq \mathbb{R}$ se ogni intorno di $x_0$ contiene almeno un punto di $A$ diverso da $x_0$. Il punto può appartenere ad $A$ oppure no. Il limite per $x \to x_0$ ha senso solo in un punto di accumulazione del dominio.
+$x_0 \in \mathbb{R}$ è **di accumulazione** per $A \subseteq \mathbb{R}$ se *ogni* intorno di $x_0$ contiene *almeno un* punto di $A$ diverso da $x_0$. Il punto può appartenere ad $A$ oppure no. Il limite per $x \to x_0$ ha senso *solo* in un punto di accumulazione del dominio.
 
 - $A = (0, 1)$: di accumulazione sono tutti i punti di $[0, 1]$, compresi $0$ e $1$ che non stanno in $A$.
 - $A = \{1, 2, 3\}$: nessun punto di accumulazione.
@@ -28,7 +28,7 @@ $f : A \to \mathbb{R}$, $x_0$ di accumulazione per $A$. Si scrive $\displaystyle
 $$
 0 < |x - x_0| < \delta \implies |f(x) - L| < \varepsilon .
 $$
-Fissata una distanza $\varepsilon$ da $L$, piccola a piacere, esiste un intorno di $x_0$ in cui tutti i valori $f(x)$ distano da $L$ meno di $\varepsilon$; il raggio $\delta$ dipende da $\varepsilon$. La condizione $0 < |x - x_0|$ esclude $x_0$, quindi il valore $f(x_0)$, anche quando esiste, non ha alcun ruolo.
+Fissata una distanza $\varepsilon$ da $L$, piccola a piacere, esiste un intorno di $x_0$ in cui *tutti* i valori $f(x)$ distano da $L$ meno di $\varepsilon$; il raggio $\delta$ **dipende da** $\varepsilon$. La condizione $0 < |x - x_0|$ esclude $x_0$, quindi il valore $f(x_0)$, anche quando esiste, **non ha alcun ruolo** nel limite.
 :::
 
 :::esempio{titolo="Verifica con la definizione"}
@@ -36,7 +36,7 @@ $\displaystyle\lim_{x \to 2} (3x - 1) = 5$. Fissato $\varepsilon > 0$, poiché $
 :::
 
 :::esempio{titolo="Il limite non dipende dal valore nel punto"}
-$f(x) = \dfrac{\sin x}{x}$ è definita per $x \neq 0$ e $0$ è di accumulazione per il dominio. Per $x \to 0$ si ha $f(x) \to 1$ (limite notevole del seno), anche se $f(0)$ non esiste: il grafico ha un punto vuoto in $(0, 1)$.
+$f(x) = \dfrac{\sin x}{x}$ è definita per $x \neq 0$ e $0$ è di accumulazione per il dominio. Per $x \to 0$ si ha $f(x) \to 1$ (**limite notevole del seno**), anche se $f(0)$ *non esiste*: il grafico ha un punto vuoto in $(0, 1)$.
 
 ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.5 ymax=1.3 punti="0,1,vuoto" titolo="y = sin x / x; il punto (0, 1) non appartiene al grafico"}
 :::
@@ -56,7 +56,7 @@ $f(x) = \dfrac{1}{x^2}$. Per $x \to 0$: fissato $M > 0$, $\dfrac{1}{x^2} > M$ pe
 :::
 
 :::definizione{#limite-destro-sinistro titolo="Limite destro e limite sinistro"}
-Il limite destro $\displaystyle\lim_{x \to x_0^+} f(x)$ è il limite della restrizione di $f$ ai punti $x > x_0$; il limite sinistro $\displaystyle\lim_{x \to x_0^-} f(x)$ ai punti $x < x_0$. Se $x_0$ è di accumulazione da entrambi i lati, il limite esiste se e solo se i due limiti laterali esistono e coincidono. Servono quando la funzione ha espressioni diverse a destra e a sinistra, oppure quando un denominatore cambia segno nel punto.
+Il **limite destro** $\displaystyle\lim_{x \to x_0^+} f(x)$ è il limite della restrizione di $f$ ai punti $x > x_0$; il **limite sinistro** $\displaystyle\lim_{x \to x_0^-} f(x)$ ai punti $x < x_0$. Se $x_0$ è di accumulazione da entrambi i lati, il limite esiste *se e solo se* i due limiti laterali esistono e **coincidono**. Servono quando la funzione ha espressioni diverse a destra e a sinistra, oppure quando un denominatore cambia segno nel punto.
 :::
 
 :::esempio
