@@ -376,14 +376,13 @@ export default {
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
     }
-    // Segni sulla pagina: utente collegato, materie sbloccate (spunte), filigrana.
+    // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       risposta = new HTMLRewriter().on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
           e.setAttribute('class', classi);
           e.setAttribute('data-materie', io.materie.join(' '));
-          if (sbloccataQui) e.setAttribute('data-utente', io.email);
         },
       }).transform(risposta);
     }

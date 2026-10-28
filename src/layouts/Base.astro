@@ -200,8 +200,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     }
 
     // Protezione dei contenuti di studio: niente menu contestuale, copia, trascinamento,
-    // stampa da tastiera. Sulle pagine sbloccate, filigrana con l'email di chi le sta leggendo
-    // e contenuto velato quando la finestra perde il fuoco (strumenti di cattura su computer).
+    // stampa da tastiera. Sulle pagine sbloccate, contenuto velato quando la finestra perde il fuoco (strumenti di cattura su computer).
     const radice = document.documentElement;
     if (radice.classList.contains('contenuto')) {
       const blocca = (e: Event) => e.preventDefault();
@@ -216,15 +215,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         addEventListener('blur', () => radice.classList.add('velato'));
         addEventListener('focus', () => radice.classList.remove('velato'));
         document.addEventListener('visibilitychange', () => radice.classList.toggle('velato', document.hidden));
-        const chi = radice.dataset.utente;
-        if (chi) {
-          const testo = `${chi} · ripetizionidianalisi.com`;
-          const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='360' height='220'><text x='0' y='120' transform='rotate(-24 180 110)' fill='rgba(34,48,47,0.07)' font-family='sans-serif' font-size='15'>${testo.replace(/[<&>']/g, '')}</text></svg>`;
-          const f = document.createElement('div');
-          f.className = 'filigrana';
-          f.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
-          document.body.appendChild(f);
-        }
       }
     }
   </script>

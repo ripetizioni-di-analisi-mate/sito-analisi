@@ -424,7 +424,6 @@ html.contenuto main { -webkit-user-select: none; user-select: none; -webkit-touc
 html.contenuto main input, html.contenuto main textarea { -webkit-user-select: text; user-select: text; }
 html.contenuto img, html.contenuto svg { -webkit-user-drag: none; }
 html.velato main { filter: blur(14px); transition: filter 0.05s; }
-.filigrana { position: fixed; inset: 0; pointer-events: none; z-index: 4; background-repeat: repeat; }
 @media print { html.contenuto body { display: none !important; } }
 
 /* ---------- accesso e area personale ---------- */
