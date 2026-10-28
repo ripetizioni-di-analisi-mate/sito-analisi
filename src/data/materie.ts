@@ -130,7 +130,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: 'Elettrostatica, condensatori, circuiti, campo magnetico, induzione, corrente alternata, equazioni di Maxwell, onde elettromagnetiche e ottica.',
     colore: '#8b4a7a',
     gruppo: 'Università',
-    attiva: false, // diventa true quando gli argomenti sono scritti e verificati
+    attiva: true,
     argomenti: [
       { slug: 'carica-e-coulomb', titolo: 'Carica elettrica e legge di Coulomb', breve: 'Legge di Coulomb' },
       { slug: 'campo-elettrico', titolo: 'Campo elettrico', breve: 'Campo elettrico' },

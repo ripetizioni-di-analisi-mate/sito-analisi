@@ -18,7 +18,7 @@ La distanza è il **teorema di Pitagora** applicato al triangolo rettangolo di c
 :::esempio
 $A(1, 2)$ e $B(4, 6)$: la distanza è $\overline{AB} = \sqrt{3^2 + 4^2} = \sqrt{25} = 5$ e il punto medio è $M\left(\dfrac{5}{2}, 4\right)$.
 
-::grafico{f="4/3*x+2/3+0*sqrt(x-1)+0*sqrt(4-x)" uguale=1 xmin=-1.5 xmax=7 ymin=-1 ymax=7 punti="1,2,pieno,A;4,6,pieno,B;2.5,4,pieno,M" segmenti="1,2,4,2;4,2,4,6" etichette="2.4,1.5,3;4.2,3.9,4;1.4,4,5" titolo="Distanza tra $A(1, 2)$ e $B(4, 6)$: i cateti misurano $3$ e $4$, l'ipotenusa $AB$ misura $5$; $M$ è il punto medio"}
+::grafico{f="4/3*x+2/3+0*sqrt(x-1)+0*sqrt(4-x)" uguale=1 xmin=-1.5 xmax=7 ymin=-1 ymax=7 punti="1,2,pieno,A;4,6,pieno,B;2.5,4,pieno,M" legenda=0 segmenti="1,2,4,2;4,2,4,6" etichette="2.4,1.5,3;4.2,3.9,4;1.4,4,5" titolo="Distanza tra $A(1, 2)$ e $B(4, 6)$: i cateti misurano $3$ e $4$, l'ipotenusa $AB$ misura $5$; $M$ è il punto medio"}
 :::
 
 ## La retta
@@ -50,7 +50,7 @@ Due rette non verticali di coefficienti $m_1$ e $m_2$ sono **parallele** se e so
 :::esempio
 La retta per $P(1, 3)$ perpendicolare a $y = 2x - 5$ ha coefficiente angolare $m = -\dfrac{1}{2}$, quindi è $y - 3 = -\dfrac{1}{2}(x - 1)$, cioè $y = -\dfrac{1}{2}x + \dfrac{7}{2}$.
 
-::grafico{f="2*x-5;-0.5*x+3.5" uguale=1 xmin=-2.5 xmax=6 ymin=-4 ymax=4 punti="1,3,pieno,P" titolo="La retta per $P(1, 3)$ perpendicolare a $y = 2x - 5$, tratteggiata"}
+::grafico{f="2*x-5;-0.5*x+3.5" uguale=1 xmin=-2.5 xmax=6 ymin=-4 ymax=4 punti="1,3,pieno,P" titolo="La retta tratteggiata passa per $P(1, 3)$ ed è perpendicolare a $y = 2x - 5$"}
 :::
 
 :::teorema{#distanza-punto-retta titolo="Distanza di un punto da una retta"}
@@ -88,7 +88,7 @@ Le intersezioni con l'asse $x$ sono le soluzioni di $ax^2 + bx + c = 0$: due pun
 :::esempio
 $y = x^2 - 2x - 3$: il vertice è $V(1, -4)$, la concavità è verso l'alto poiché $a = 1 > 0$, le intersezioni con l'asse $x$ sono $(-1, 0)$ e $(3, 0)$, quella con l'asse $y$ è $(0, -3)$.
 
-::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4" titolo="y = x² − 2x − 3 con il vertice V(1, −4)"}
+::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4,pieno,V" titolo="$y = x^2 - 2x - 3$ con il vertice $V(1, -4)$"}
 :::
 
 ## La circonferenza
@@ -188,7 +188,7 @@ rappresenta una conica con assi paralleli agli assi cartesiani. Il tipo si legge
 - $A$ e $C$ hanno lo stesso segno ma valori diversi: ellisse;
 - $A$ e $C$ hanno segni opposti: iperbole.
 
-Il completamento dei quadrati può anche portare a un **caso degenere**, come un solo punto o nessun punto per una somma di quadrati uguale a zero o a un numero negativo; il **tipo definitivo** si conferma dopo la riduzione.
+Il completamento dei quadrati può anche portare a un **caso degenere**, come un solo punto o nessun punto per una somma di quadrati uguale a zero o a un numero negativo, oppure una coppia di rette per una differenza di quadrati uguale a zero; il **tipo definitivo** si conferma dopo la riduzione.
 :::
 
 :::teorema{#ridurre-e-disegnare titolo="Procedimento per ridurre e disegnare"}

@@ -50,7 +50,7 @@ Il test di monotonia vale su un *intervallo*, *non* su un'unione di intervalli. 
 ## Massimi e minimi relativi
 
 :::definizione{#massimi-minimi-relativi titolo="Massimo e minimo relativo"}
-$f : A \to \mathbb{R}$. Un punto $x_0 \in A$ è di **massimo relativo** (o massimo locale) se esiste un intorno $U$ di $x_0$ tale che $f(x) \leq f(x_0)$ per ogni $x \in U \cap A$; è di **minimo relativo** se nelle stesse condizioni $f(x) \geq f(x_0)$. Il valore $f(x_0)$ si chiama massimo (o minimo) relativo, il punto $x_0$ punto di massimo (o di minimo). La ricerca di questi punti si fonda sul teorema di Fermat, dimostrato nel capitolo sulle derivate.
+Sia $f : A \to \mathbb{R}$. Un punto $x_0 \in A$ è di **massimo relativo** (o massimo locale) se esiste un intorno $U$ di $x_0$ tale che $f(x) \leq f(x_0)$ per ogni $x \in U \cap A$; è di **minimo relativo** se nelle stesse condizioni $f(x) \geq f(x_0)$. Il valore $f(x_0)$ si chiama massimo (o minimo) relativo, il punto $x_0$ punto di massimo (o di minimo). La ricerca di questi punti si fonda sul teorema di Fermat, dimostrato nel capitolo sulle derivate.
 :::
 
 :::richiamo{titolo="Teorema di Fermat"}

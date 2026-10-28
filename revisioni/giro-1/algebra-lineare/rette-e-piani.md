@@ -1,0 +1,17 @@
+# Giro 1, Algebra lineare: rette e piani
+
+Riletti: teoria `src/content/teoria/algebra-lineare/rette-e-piani.md`, schede svolte 1-7, tracce 1-13. Tutti i risultati sono stati ricalcolati con sympy (prodotti vettoriali e misti, punti di intersezione, angoli, distanze, proiezioni e simmetrici, fasci di piani, perpendicolari comuni): sono corretti. Le ancore del campo `teoria` esistono tutte. Le 8 figure sono state ridisegnate: numeri coerenti con il testo e con le didascalie (sezioni con $y = 0$ e assi $x$, $z$ dichiarati), ma in quattro figure della teoria alcune etichette erano tagliate da frecce o rette.
+
+## Modifiche fatte
+
+- **Lingua**, `teoria/algebra-lineare/rette-e-piani.md`, dimostrazione del criterio `#criterio-complanarita-rette`. C'era "Viceversa, supponiamo il prodotto misto nullo", unica prima persona plurale in un testo tutto impersonale. Adesso "Viceversa, si supponga nullo il prodotto misto".
+- **Figure**, stesso file, definizione `#piano-per-un-punto`. C'erano l'etichetta $P_0P$ sull'asse $x$, attraversata dalla freccia, e $P_0$ sovrapposta alla partenza del vettore $\vec{n}$. Adesso $P_0P$ sta sopra la freccia e $P_0$ sotto il punto, dalla parte libera del piano. Stessa modifica nel file inglese.
+- **Figure**, stesso file, definizione `#angolo-retta-piano`. C'era l'etichetta $v$ tagliata dalla freccia rossa. Adesso sta sopra la freccia. Stessa modifica nel file inglese.
+- **Figure**, stesso file, teorema `#distanza-punto-piano`. C'era $P_0$ sovrapposta alla freccia $\vec{n}$. Adesso sta sotto il punto, a sinistra del segmento $P_0P_1$. Stessa modifica nel file inglese.
+- **Figure**, stesso file, teorema `#distanza-punto-retta`. C'erano $AP$ a cavallo dell'asse $y$ e $A$ sopra la freccia rossa. Adesso $AP$ sta sopra la freccia, a sinistra dell'asse, e $A$ a sinistra del punto. Stessa modifica nel file inglese.
+
+## Modifiche da fare
+
+- **Schede svolte, rette soggette a condizioni di incidenza.** Mancano due tipologie molto frequenti: la retta per un punto $P$ incidente e perpendicolare a una retta $r$ (si interseca $r$ con il piano per $P$ ortogonale a $r$ e si congiunge $P$ con il piede) e la retta per $P$ incidente due rette sghembe (intersezione dei piani per $P$ che contengono ciascuna retta). Lo studente conosce tutti gli strumenti ma non li vede mai combinati così. Proposta: una scheda 8 "Rette per un punto con condizioni di incidenza" con questi due esercizi e un terzo con la retta incidente due rette e parallela a una direzione assegnata.
+- **Schede svolte, simmetrico di una retta rispetto a un piano.** La scheda 6 tratta il simmetrico di un punto e la proiezione di una retta, ma non il simmetrico di una retta (o di un piano) rispetto a un piano, che all'esame segue spesso la proiezione. Proposta: un esercizio 4 nella scheda 6, con il metodo dei due punti (il punto di intersezione con il piano resta fisso, un secondo punto si riflette con $P' = 2H - P$).
+- **Teoria, osservazione `#proiezione-retta-piano`.** Il metodo del fascio è solo citato ("si determina con il fascio di piani di asse $r$"); l'esempio completo arriva tre sezioni dopo (`#piani-per-una-retta`, ultimo esempio). Leggendo in ordine, lo studente incontra un metodo prima che sia definito il fascio. Proposta: spostare l'osservazione dopo la sezione "Fasci di piani", oppure sostituire nell'osservazione il rimando al fascio con il metodo dei due punti proiettati, che usa solo strumenti già visti, lasciando il metodo del fascio all'esempio finale.

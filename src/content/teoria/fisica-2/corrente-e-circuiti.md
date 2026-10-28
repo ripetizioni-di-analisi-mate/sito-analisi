@@ -328,7 +328,7 @@ i(t) = \frac{\mathcal{E}}{R}\, e^{-\frac{t}{\tau}} ,
 \qquad
 \tau = R C .
 $$
-All'istante iniziale la corrente vale $\dfrac{\mathcal{E}}{R}$, come se il condensatore fosse un filo; col passare del tempo la corrente tende a zero e la tensione sul condensatore tende a $\mathcal{E}$. Con $R = 10\,\mathrm{k\Omega}$, $C = 100\,\mathrm{\mu F}$ e $\mathcal{E} = 12\,\mathrm{V}$ si ha $\tau = 1{,}0\,\mathrm{s}$, corrente iniziale $1{,}2\,\mathrm{mA}$ e carica finale $1{,}2\,\mathrm{mC}$.
+All'istante iniziale la corrente vale $\dfrac{\mathcal{E}}{R}$, come se il condensatore fosse un filo; col passare del tempo la corrente tende a zero e la tensione sul condensatore tende a $\mathcal{E}$. Con $R = 10\,\mathrm{k\Omega}$, $C = 100\,\mu\mathrm{F}$ e $\mathcal{E} = 12\,\mathrm{V}$ si ha $\tau = 1{,}0\,\mathrm{s}$, corrente iniziale $1{,}2\,\mathrm{mA}$ e carica finale $1{,}2\,\mathrm{mC}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 0,1.41;0,1.59 0,3;-0.36,1.59 0.36,1.59;-0.19,1.41 0.19,1.41;0,3 0.8,3 1.32,3.32;1.4,3 2.2,3;2.2,3 3.3,3 3.383,3.17 3.55,2.83 3.717,3.17 3.883,2.83 4.05,3.17 4.217,2.83 4.3,3 5.4,3;5.4,3 5.6,3;5.6,3 5.6,1.6;5.6,1.4 5.6,0;5.28,1.4 5.92,1.4;5.28,1.6 5.92,1.6;5.6,0 0,0" vettori="5.95,2.7,5.95,2" punti="0.8,3,vuoto;1.4,3,vuoto" etichette="0.45,1.69,+;0.45,1.09,−;-0.65,1.43,ℰ;1,3.55,T;3.58,3.38,R;5,1.43,C;6.05,1.62,+q;6.05,1.12,−q;6.09,2.28,i" xmin=-1.4 xmax=7.0 ymin=-0.6 ymax=3.8 titolo="Circuito RC: alla chiusura dell'interruttore $T$ il generatore carica il condensatore attraverso il resistore"}
 
@@ -374,7 +374,7 @@ Per il richiamo sulle equazioni lineari del primo ordine, con $b = 0$, si ha $q(
 ::::
 
 ::::teorema{#bilancio-energetico-rc titolo="Bilancio energetico nella carica"}
-Nella carica completa di un condensatore attraverso un resistore, con le ipotesi del teorema sulla carica, il generatore eroga l'energia $C\mathcal{E}^2$; metà si trova immagazzinata nel condensatore, $\dfrac{1}{2} C\mathcal{E}^2$, e l'altra metà è dissipata nel resistore per effetto Joule, qualunque sia il valore di $R$. Con $C = 100\,\mathrm{\mu F}$ e $\mathcal{E} = 12\,\mathrm{V}$ il generatore eroga $14{,}4\,\mathrm{mJ}$, e il condensatore ne immagazzina $7{,}2\,\mathrm{mJ}$.
+Nella carica completa di un condensatore attraverso un resistore, con le ipotesi del teorema sulla carica, il generatore eroga l'energia $C\mathcal{E}^2$; metà si trova immagazzinata nel condensatore, $\dfrac{1}{2} C\mathcal{E}^2$, e l'altra metà è dissipata nel resistore per effetto Joule, qualunque sia il valore di $R$. Con $C = 100\,\mu\mathrm{F}$ e $\mathcal{E} = 12\,\mathrm{V}$ il generatore eroga $14{,}4\,\mathrm{mJ}$, e il condensatore ne immagazzina $7{,}2\,\mathrm{mJ}$.
 
 :::dimostrazione
 Il generatore porta la carica $dq = i\,dt$ attraverso la forza elettromotrice $\mathcal{E}$, e nella carica completa la carica totale è $C\mathcal{E}$; quindi l'energia erogata è
@@ -390,5 +390,5 @@ Per il richiamo sull'energia del condensatore, la carica finale $C\mathcal{E}$ c
 ::::
 
 :::osservazione{#condensatore-a-regime titolo="Condensatore in un circuito a regime"}
-Quando sono trascorse molte costanti di tempo, la carica del condensatore non cambia più e nel suo ramo la corrente è nulla: a regime il condensatore si comporta come un circuito aperto, e la sua tensione si trova risolvendo il resto del circuito. All'istante in cui si chiude l'interruttore, invece, un condensatore scarico ha tensione nulla e si comporta come un filo. Per esempio, un generatore con $\mathcal{E} = 12\,\mathrm{V}$ alimenta $R_1 = 2{,}0\,\mathrm{k\Omega}$ in serie con $R_2 = 6{,}0\,\mathrm{k\Omega}$, e un condensatore da $50\,\mathrm{\mu F}$ è collegato in parallelo a $R_2$. A regime la corrente attraversa solo i due resistori, $I = \dfrac{12}{8{,}0 \cdot 10^3}\,\mathrm{A} = 1{,}5\,\mathrm{mA}$, quindi il condensatore ha la tensione $R_2 I = 9{,}0\,\mathrm{V}$ e la carica $450\,\mathrm{\mu C}$.
+Quando sono trascorse molte costanti di tempo, la carica del condensatore non cambia più e nel suo ramo la corrente è nulla: a regime il condensatore si comporta come un circuito aperto, e la sua tensione si trova risolvendo il resto del circuito. All'istante in cui si chiude l'interruttore, invece, un condensatore scarico ha tensione nulla e si comporta come un filo. Per esempio, un generatore con $\mathcal{E} = 12\,\mathrm{V}$ alimenta $R_1 = 2{,}0\,\mathrm{k\Omega}$ in serie con $R_2 = 6{,}0\,\mathrm{k\Omega}$, e un condensatore da $50\,\mu\mathrm{F}$ è collegato in parallelo a $R_2$. A regime la corrente attraversa solo i due resistori, $I = \dfrac{12}{8{,}0 \cdot 10^3}\,\mathrm{A} = 1{,}5\,\mathrm{mA}$, quindi il condensatore ha la tensione $R_2 I = 9{,}0\,\mathrm{V}$ e la carica $450\,\mu\mathrm{C}$.
 :::

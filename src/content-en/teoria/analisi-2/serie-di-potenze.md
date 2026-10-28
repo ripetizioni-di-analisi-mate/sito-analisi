@@ -246,7 +246,7 @@ $$
 \sqrt{1 + x}
 = 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \cdots
 $$
-The coefficients are $\dbinom{1/2}{1} = \dfrac{1}{2}$, $\dbinom{1/2}{2} = \dfrac{\frac{1}{2} \left( \frac{1}{2} - 1 \right)}{2} = -\dfrac{1}{8}$, and so on. The first terms of the **binomial series** provide the approximations of roots used in limits and integrals.
+The coefficients are $\dbinom{\frac{1}{2}}{1} = \dfrac{1}{2}$, $\dbinom{\frac{1}{2}}{2} = \dfrac{\frac{1}{2} \left( \frac{1}{2} - 1 \right)}{2} = -\dfrac{1}{8}$, and so on. The first terms of the **binomial series** provide the approximations of roots used in limits and integrals.
 :::
 
 ## New expansions from known ones

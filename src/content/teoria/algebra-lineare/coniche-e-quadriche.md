@@ -215,7 +215,7 @@ $$
 $$
 porta la conica in $4X^2 + 9Y^2 = 36$, cioè nell'**ellisse** $\dfrac{X^2}{9} + \dfrac{Y^2}{4} = 1$, con semiasse maggiore $3$ lungo la retta $x - 2y + 3 = 0$ e semiasse minore $2$ lungo la retta $2x + y - 4 = 0$.
 
-::grafico{curve="1+(6*cos(t)-2*sin(t))/sqrt(5),2+(3*cos(t)+4*sin(t))/sqrt(5),0,6.29" segmenti="-2.13,0.43,4.13,3.57;0.105,3.79,1.895,0.21" vettori="1,2,2.79,2.89,u₁;1,2,0.11,3.79,u₂" punti="1,2,pieno" xmin=-2.5 xmax=4.5 ymin=-1 ymax=5 uguale=1 titolo="L'ellisse $5x^2 - 4xy + 8y^2 - 2x - 28y - 7 = 0$: centro $(1, 2)$, assi di simmetria (tratteggiati) nelle direzioni degli autovettori $u_1 = \dfrac{(2, 1)}{\sqrt{5}}$ e $u_2 = \dfrac{(-1, 2)}{\sqrt{5}}$"}
+::grafico{curve="1+(6*cos(t)-2*sin(t))/sqrt(5),2+(3*cos(t)+4*sin(t))/sqrt(5),0,6.29" segmenti="-2.13,0.43,4.13,3.57;0.105,3.79,1.895,0.21" vettori="1,2,1.894,2.447;1,2,0.553,2.894" etichette="1.55,1.95,u₁;0.3,2.45,u₂" punti="1,2,pieno" xmin=-2.5 xmax=4.5 ymin=-1 ymax=5 uguale=1 titolo="L'ellisse $5x^2 - 4xy + 8y^2 - 2x - 28y - 7 = 0$: centro $(1, 2)$, assi di simmetria (tratteggiati) nelle direzioni degli autovettori $u_1 = \dfrac{(2, 1)}{\sqrt{5}}$ e $u_2 = \dfrac{(-1, 2)}{\sqrt{5}}$"}
 
 :::
 
@@ -251,7 +251,7 @@ Due casi particolari si leggono direttamente dai coefficienti.
 - Un'ellisse è una **circonferenza** se e solo se $\lambda_1 = \lambda_2$, cioè se $A_0$ è multiplo dell'identità: $a_{11} = a_{22}$ e $a_{12} = 0$.
 - Un'iperbole è **equilatera** (asintoti perpendicolari, $a = b$) se e solo se $\lambda_1 = -\lambda_2$, cioè se $I_1 = a_{11} + a_{22} = 0$.
 
-Per esempio $3x^2 - 8xy - 3y^2 + 2x + 14y - 13 = 0$ ha $I_2 = -25 < 0$ e $I_1 = 0$, quindi, se non è degenere, è un'iperbole equilatera.
+Per esempio $3x^2 - 8xy - 3y^2 + 2x + 14y - 13 = 0$ ha $I_3 = 125 \neq 0$, $I_2 = -25 < 0$ e $I_1 = 0$, quindi è un'iperbole equilatera.
 :::
 
 ## Centro, assi e asintoti
@@ -410,7 +410,7 @@ La dimostrazione ripete quella delle coniche con la matrice di rototraslazione d
 :::definizione{#quadriche-non-degeneri titolo="Quadriche non degeneri"}
 Le quadriche non degeneri, in forma canonica con $a, b, c > 0$, sono le seguenti.
 
-- **Ellissoide**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} + \dfrac{Z^2}{c^2} = 1$; le sezioni con piani paralleli ai piani coordinati sono ellissi. Se due semiassi sono uguali è un ellissoide di rotazione, se lo sono tutti e tre è una sfera.
+- **Ellissoide**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} + \dfrac{Z^2}{c^2} = 1$; le sezioni con piani paralleli ai piani coordinati sono ellissi, oppure un solo punto o l'insieme vuoto per i piani più lontani dal centro. Se due semiassi sono uguali è un ellissoide di rotazione, se lo sono tutti e tre è una sfera.
 - **Iperboloide a una falda**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} - \dfrac{Z^2}{c^2} = 1$; le sezioni con $Z = \text{costante}$ sono ellissi, quelle con $X = 0$ o $Y = 0$ sono iperboli. È una superficie connessa.
 - **Iperboloide a due falde**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} - \dfrac{Z^2}{c^2} = -1$; non ha punti con $|Z| < c$, quindi è formato da due parti separate.
 - **Paraboloide ellittico**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} = 2Z$; le sezioni con $Z = \text{costante} > 0$ sono ellissi.

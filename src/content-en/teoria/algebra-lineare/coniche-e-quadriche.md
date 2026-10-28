@@ -215,7 +215,7 @@ $$
 $$
 brings the conic to $4X^2 + 9Y^2 = 36$, that is, to the **ellipse** $\dfrac{X^2}{9} + \dfrac{Y^2}{4} = 1$, with semi-major axis $3$ along the line $x - 2y + 3 = 0$ and semi-minor axis $2$ along the line $2x + y - 4 = 0$.
 
-::grafico{curve="1+(6*cos(t)-2*sin(t))/sqrt(5),2+(3*cos(t)+4*sin(t))/sqrt(5),0,6.29" segmenti="-2.13,0.43,4.13,3.57;0.105,3.79,1.895,0.21" vettori="1,2,2.79,2.89,u₁;1,2,0.11,3.79,u₂" punti="1,2,pieno" xmin=-2.5 xmax=4.5 ymin=-1 ymax=5 uguale=1 titolo="The ellipse $5x^2 - 4xy + 8y^2 - 2x - 28y - 7 = 0$: center $(1, 2)$, axes of symmetry (dashed) in the directions of the eigenvectors $u_1 = \dfrac{(2, 1)}{\sqrt{5}}$ and $u_2 = \dfrac{(-1, 2)}{\sqrt{5}}$"}
+::grafico{curve="1+(6*cos(t)-2*sin(t))/sqrt(5),2+(3*cos(t)+4*sin(t))/sqrt(5),0,6.29" segmenti="-2.13,0.43,4.13,3.57;0.105,3.79,1.895,0.21" vettori="1,2,1.894,2.447;1,2,0.553,2.894" etichette="1.55,1.95,u₁;0.3,2.45,u₂" punti="1,2,pieno" xmin=-2.5 xmax=4.5 ymin=-1 ymax=5 uguale=1 titolo="The ellipse $5x^2 - 4xy + 8y^2 - 2x - 28y - 7 = 0$: center $(1, 2)$, axes of symmetry (dashed) in the directions of the eigenvectors $u_1 = \dfrac{(2, 1)}{\sqrt{5}}$ and $u_2 = \dfrac{(-1, 2)}{\sqrt{5}}$"}
 
 :::
 
@@ -251,7 +251,7 @@ Two special cases can be read directly off the coefficients.
 - An ellipse is a **circle** if and only if $\lambda_1 = \lambda_2$, that is, if $A_0$ is a multiple of the identity: $a_{11} = a_{22}$ and $a_{12} = 0$.
 - A hyperbola is **rectangular** (perpendicular asymptotes, $a = b$) if and only if $\lambda_1 = -\lambda_2$, that is, if $I_1 = a_{11} + a_{22} = 0$.
 
-For example $3x^2 - 8xy - 3y^2 + 2x + 14y - 13 = 0$ has $I_2 = -25 < 0$ and $I_1 = 0$, so, if it is not degenerate, it is a rectangular hyperbola.
+For example $3x^2 - 8xy - 3y^2 + 2x + 14y - 13 = 0$ has $I_3 = 125 \neq 0$, $I_2 = -25 < 0$ and $I_1 = 0$, so it is a rectangular hyperbola.
 :::
 
 ## Center, axes and asymptotes
@@ -410,7 +410,7 @@ The proof repeats the one for conics with the rigid-motion matrix of order $4$: 
 :::definizione{#quadriche-non-degeneri titolo="Non-degenerate quadrics"}
 The non-degenerate quadrics, in canonical form with $a, b, c > 0$, are the following.
 
-- **Ellipsoid**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} + \dfrac{Z^2}{c^2} = 1$; the sections by planes parallel to the coordinate planes are ellipses. If two semi-axes are equal it is an ellipsoid of revolution, if all three are equal it is a sphere.
+- **Ellipsoid**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} + \dfrac{Z^2}{c^2} = 1$; the sections by planes parallel to the coordinate planes are ellipses, or a single point or the empty set for the planes farther from the center. If two semi-axes are equal it is an ellipsoid of revolution, if all three are equal it is a sphere.
 - **Hyperboloid of one sheet**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} - \dfrac{Z^2}{c^2} = 1$; the sections with $Z = \text{constant}$ are ellipses, those with $X = 0$ or $Y = 0$ are hyperbolas. It is a connected surface.
 - **Hyperboloid of two sheets**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} - \dfrac{Z^2}{c^2} = -1$; it has no points with $|Z| < c$, so it consists of two separate parts.
 - **Elliptic paraboloid**: $\dfrac{X^2}{a^2} + \dfrac{Y^2}{b^2} = 2Z$; the sections with $Z = \text{constant} > 0$ are ellipses.

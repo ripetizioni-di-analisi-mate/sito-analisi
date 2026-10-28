@@ -82,7 +82,7 @@ The intersections with the $x$-axis are the solutions of $ax^2 + bx + c = 0$: tw
 :::esempio
 $y = x^2 - 2x - 3$: the vertex is $V(1, -4)$, the parabola **opens upward** since $a = 1 > 0$, the intersections with the $x$-axis are $(-1, 0)$ and $(3, 0)$, the one with the $y$-axis is $(0, -3)$.
 
-::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4" titolo="y = x² − 2x − 3 with vertex V(1, −4)"}
+::grafico{f="x^2-2*x-3" xmin=-3 xmax=5 ymin=-5 ymax=6 punti="1,-4,pieno,V" titolo="$y = x^2 - 2x - 3$ with vertex $V(1, -4)$"}
 :::
 
 ## The circle
@@ -176,7 +176,7 @@ represents a **conic** with axes parallel to the coordinate axes. The type is re
 - $A$ and $C$ have the same sign but different values: ellipse;
 - $A$ and $C$ have opposite signs: hyperbola.
 
-Completing the squares can also lead to a **degenerate case**, such as a single point or no point for a sum of squares equal to zero or to a negative number; the final type is confirmed after the reduction.
+Completing the squares can also lead to a **degenerate case**, such as a single point or no point for a sum of squares equal to zero or to a negative number, or a pair of lines for a difference of squares equal to zero; the final type is confirmed after the reduction.
 :::
 
 :::teorema{#ridurre-e-disegnare titolo="Procedure for reducing and drawing"}

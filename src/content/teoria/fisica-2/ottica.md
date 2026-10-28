@@ -323,7 +323,7 @@ Gli zeri di $\sin\beta$ con $\beta \neq 0$ sono i minimi già trovati. Il primo 
 ## Reticolo di diffrazione
 
 :::definizione{#reticolo-di-diffrazione titolo="Reticolo di diffrazione"}
-Un **reticolo di diffrazione** è un insieme di $N$ fenditure parallele uguali ed equidistanti, in numero molto grande. La distanza $d$ tra i centri di due fenditure adiacenti è il **passo** del reticolo, e si ricava dal numero di righe per unità di lunghezza: un reticolo con $600$ righe al millimetro ha $d = \dfrac{1}{600}\,\mathrm{mm} \approx 1{,}67\,\mathrm{\mu m}$.
+Un **reticolo di diffrazione** è un insieme di $N$ fenditure parallele uguali ed equidistanti, in numero molto grande. La distanza $d$ tra i centri di due fenditure adiacenti è il **passo** del reticolo, e si ricava dal numero di righe per unità di lunghezza: un reticolo con $600$ righe al millimetro ha $d = \dfrac{1}{600}\,\mathrm{mm} \approx 1{,}67\,\mu\mathrm{m}$.
 :::
 
 ::::teorema{#massimi-del-reticolo titolo="Massimi principali del reticolo"}

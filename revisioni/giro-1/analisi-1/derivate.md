@@ -1,0 +1,17 @@
+# Calcolo differenziale e Taylor: primo giro
+
+## Modifiche fatte
+
+1. **Editoriale**, `svolti/analisi-1/derivate/4.md`, esercizio 1. C'era una frase con tono prescrittivo e costruzione negativa: "la presenza del valore assoluto nella traccia non impedisce la derivabilità, che va verificata e *non* esclusa in partenza". Adesso la frase espone il fatto: "Il valore assoluto rende necessario lo studio del punto di raccordo, e in questo caso la verifica dà una funzione derivabile in ogni punto." Corretto anche in inglese.
+2. **Figure**, `svolti/analisi-1/derivate/5.md`, esercizio 1. La legenda mostrava solo due curve su tre, perché la tangente era scritta con un decimale ($4x - 3{,}0792$) che la legenda automatica non converte. Adesso la legenda è esplicita, con la tangente in forma esatta $y = 4x - \dfrac{16\sqrt{3}}{9}$, ricalcolata con sympy. Ho ridisegnato e controllato la figura. Corretto anche in inglese.
+
+Ho ricontrollato la teoria (enunciati, ipotesi, dimostrazioni di Fermat, Rolle, Lagrange e delle conseguenze, sviluppi di McLaurin) senza trovare errori. Ho ricalcolato con sympy le derivate, le tangenti, i limiti con de l'Hôpital e con Taylor, gli sviluppi composti e le stime del resto di Lagrange delle 8 schede e delle 14 tracce: sono corretti. Ho ridisegnato e controllato le 18 figure.
+
+## Modifiche da fare
+
+1. **Gerarchia degli infiniti promessa ma non dimostrata.** Il blocco `#de-l-hopital` dice "Con questo teorema si dimostra la gerarchia degli infiniti", ma l'esempio sotto tratta solo $\dfrac{x}{e^x}$. Il capitolo sui limiti rimanda qui per la dimostrazione. Si può aggiungere un esempio con i due casi generali: $\dfrac{x^\alpha}{a^x} \to 0$, applicando il teorema $k$ volte con $k \geq \alpha$, e $\dfrac{(\ln x)^\beta}{x^\alpha} \to 0$, con la sostituzione $x = e^t$.
+2. **Due nomi per lo stesso concetto.** Qui il blocco si chiama "Massimo e minimo locale" (`#estremi-locali`), mentre nello studio di funzione si chiama "Massimo e minimo relativo" (`#massimi-minimi-relativi`), e le schede di questo argomento dicono "massimo locale". In questo giro ho aggiunto "(o massimo locale)" nella definizione dello studio di funzione. Resta da scegliere un solo termine per tutto il sito. In alternativa, si può scrivere esplicitamente in `#estremi-locali` che si dicono anche relativi.
+3. **Manca una tipologia frequente all'esame: derivata della funzione inversa.** La teoria ha il teorema `#derivata-dell-inversa`, ma nessuna scheda e nessuna traccia lo usa. Si può aggiungere una scheda con esercizi come: "Verificare che $f(x) = x^3 + x + 1$ è invertibile e calcolare $(f^{-1})'(3)$", e "Calcolare $(f^{-1})'(1)$ per $f(x) = x + e^x$". Oppure si possono aggiungere due tracce in `dafare`.
+4. **Manca la tipologia delle disuguaglianze dimostrate con la monotonia.** All'esame si chiede spesso di dimostrare disuguaglianze come $\ln(1 + x) \leq x$ per $x > -1$, oppure $e^x \geq 1 + x + \dfrac{x^2}{2}$ per $x \geq 0$, studiando una funzione ausiliaria. La scheda 5 ha solo la stima con Lagrange. Si può aggiungere un esercizio di questo tipo alla scheda 5 o una scheda dedicata.
+5. **Richiami dopo il teorema.** Come in tutto il sito, i blocchi `richiamo` ("Derivabile implica continua", "Teorema di Weierstrass", "Teorema di Rolle", "Teorema di Lagrange") stanno dopo la dimostrazione che li usa. La proposta è spostarli prima della dimostrazione: è la stessa decisione descritta in `numeri-complessi.md`.
+

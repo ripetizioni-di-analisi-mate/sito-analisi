@@ -24,7 +24,7 @@ $x_0 \in \mathbb{R}$ è **di accumulazione** per $A \subseteq \mathbb{R}$ se *og
 ## Definizione di limite
 
 :::definizione{#limite-finito titolo="Limite finito in un punto"}
-$f : A \to \mathbb{R}$, $x_0$ di accumulazione per $A$. Si scrive $\displaystyle\lim_{x \to x_0} f(x) = L$, con $L \in \mathbb{R}$, se per ogni $\varepsilon > 0$ esiste $\delta > 0$ tale che, per ogni $x \in A$,
+Siano $f : A \to \mathbb{R}$ e $x_0$ un punto di accumulazione per $A$. Si scrive $\displaystyle\lim_{x \to x_0} f(x) = L$, con $L \in \mathbb{R}$, se per ogni $\varepsilon > 0$ esiste $\delta > 0$ tale che, per ogni $x \in A$,
 $$
 0 < |x - x_0| < \delta \implies |f(x) - L| < \varepsilon .
 $$
@@ -312,7 +312,7 @@ quindi $y = x$ è **asintoto obliquo** da entrambe le parti; $x = 0$ è **asinto
 ## Funzioni continue
 
 :::definizione{#funzione-continua titolo="Funzione continua"}
-$f : A \to \mathbb{R}$, $x_0 \in A$ di accumulazione per $A$. $f$ è **continua** in $x_0$ se
+Siano $f : A \to \mathbb{R}$ e $x_0 \in A$ un punto di accumulazione per $A$. La funzione $f$ è **continua** in $x_0$ se
 $$
 \lim_{x \to x_0} f(x) = f(x_0) ,
 $$
@@ -324,7 +324,7 @@ Polinomi, funzioni razionali, potenze, esponenziali, logaritmi, funzioni trigono
 :::
 
 :::definizione{#discontinuita titolo="Punti di discontinuità"}
-$x_0$ di accumulazione per il dominio di $f$. Se $x_0$ non appartiene al dominio, oppure vi appartiene e $f$ non è continua in $x_0$, il punto è una discontinuità
+Sia $x_0$ un punto di accumulazione per il dominio di $f$. Se $x_0$ non appartiene al dominio, oppure vi appartiene e $f$ non è continua in $x_0$, il punto è una discontinuità
 
 - **eliminabile**, se il limite esiste finito ed è diverso da $f(x_0)$, oppure $f(x_0)$ non è definito; si toglie assegnando in $x_0$ il valore del limite;
 - **di salto** (prima specie), se i limiti laterali esistono finiti e sono diversi;

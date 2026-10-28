@@ -107,7 +107,7 @@ Il potenziale dipende solo dalle cariche sorgenti e dalla posizione di $P$, e si
 $$
 W_{A \to B} = -q\, \Delta V = q\,(V_A - V_B) .
 $$
-Una carica positiva lasciata libera si muove verso potenziali minori e una carica negativa verso potenziali maggiori; in entrambi i casi la sua energia potenziale diminuisce. Per esempio, una carica di $3{,}0\,\mathrm{\mu C}$ che passa da un punto a $120\,\mathrm{V}$ a un punto a $20\,\mathrm{V}$ riceve dal campo il lavoro $3{,}0 \cdot 10^{-6} \cdot 100\,\mathrm{J} = 3{,}0 \cdot 10^{-4}\,\mathrm{J}$.
+Una carica positiva lasciata libera si muove verso potenziali minori e una carica negativa verso potenziali maggiori; in entrambi i casi la sua energia potenziale diminuisce. Per esempio, una carica di $3{,}0\,\mu\mathrm{C}$ che passa da un punto a $120\,\mathrm{V}$ a un punto a $20\,\mathrm{V}$ riceve dal campo il lavoro $3{,}0 \cdot 10^{-6} \cdot 100\,\mathrm{J} = 3{,}0 \cdot 10^{-4}\,\mathrm{J}$.
 :::
 
 ::::teorema{#differenza-di-potenziale-e-campo titolo="Differenza di potenziale e campo"}
@@ -345,7 +345,7 @@ L'energia potenziale elettrostatica di un sistema di cariche puntiformi $q_1, \d
 $$
 U = \sum_{i < j} \frac{k\, q_i q_j}{r_{ij}} .
 $$
-Il numero $U$ è il lavoro esterno necessario per formare il sistema portando le cariche una alla volta dall'infinito, con velocità trascurabile; $-U$ è il lavoro esterno per separarle di nuovo fino a distanze infinite. Per esempio, per le cariche $+q$, $+q$, $-q$ ai vertici di un triangolo equilatero di lato $a$ le coppie sono tre e $U = \dfrac{kq^2}{a}(1 - 1 - 1) = -\dfrac{kq^2}{a}$; con $q = 1{,}0\,\mathrm{\mu C}$ e $a = 3{,}0\,\mathrm{cm}$ si ottiene $U \approx -0{,}30\,\mathrm{J}$.
+Il numero $U$ è il lavoro esterno necessario per formare il sistema portando le cariche una alla volta dall'infinito, con velocità trascurabile; $-U$ è il lavoro esterno per separarle di nuovo fino a distanze infinite. Per esempio, per le cariche $+q$, $+q$, $-q$ ai vertici di un triangolo equilatero di lato $a$ le coppie sono tre e $U = \dfrac{kq^2}{a}(1 - 1 - 1) = -\dfrac{kq^2}{a}$; con $q = 1{,}0\,\mu\mathrm{C}$ e $a = 3{,}0\,\mathrm{cm}$ si ottiene $U \approx -0{,}30\,\mathrm{J}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 4,0 2,3.464 0,0" punti="0,0,pieno,q₁;4,0,pieno,q₂;2,3.464,pieno,q₃" etichette="1.9,-0.4,r₁₂;0.55,1.85,r₁₃;3.05,1.85,r₂₃" xmin=-0.8 xmax=4.8 ymin=-0.8 ymax=4 titolo="Tre cariche e le tre distanze $r_{12}$, $r_{13}$, $r_{23}$: l'energia del sistema ha un termine per ciascuna coppia"}
 
