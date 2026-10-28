@@ -87,5 +87,24 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'secondo-principio': { titolo: 'Second law, heat engines and entropy', breve: 'Second law' },
     },
   },
+  'fisica-2': {
+    titolo: 'Physics 2',
+    breve: 'Physics 2',
+    descrizione: 'Electrostatics, capacitors, circuits, magnetic field, induction, alternating current, Maxwell’s equations, electromagnetic waves and optics.',
+    argomenti: {
+      'carica-e-coulomb': { titolo: 'Electric charge and Coulomb’s law', breve: 'Coulomb’s law' },
+      'campo-elettrico': { titolo: 'Electric field', breve: 'Electric field' },
+      'legge-di-gauss': { titolo: 'Electric flux and Gauss’s law', breve: 'Gauss’s law' },
+      'potenziale-elettrico': { titolo: 'Electric potential and electrostatic energy', breve: 'Electric potential' },
+      'conduttori-e-condensatori': { titolo: 'Conductors, capacitors and dielectrics', breve: 'Capacitors' },
+      'corrente-e-circuiti': { titolo: 'Electric current and DC circuits', breve: 'DC circuits' },
+      'campo-magnetico': { titolo: 'Magnetic field and Lorentz force', breve: 'Magnetic field' },
+      'sorgenti-del-campo-magnetico': { titolo: 'Sources of the magnetic field', breve: 'Biot-Savart and Ampère' },
+      'induzione-elettromagnetica': { titolo: 'Electromagnetic induction', breve: 'Induction' },
+      'circuiti-in-corrente-alternata': { titolo: 'Electrical oscillations and AC circuits', breve: 'AC circuits' },
+      'equazioni-di-maxwell-e-onde': { titolo: 'Maxwell’s equations and electromagnetic waves', breve: 'Maxwell and waves' },
+      'ottica': { titolo: 'Geometric and wave optics', breve: 'Optics' },
+    },
+  },
 };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };

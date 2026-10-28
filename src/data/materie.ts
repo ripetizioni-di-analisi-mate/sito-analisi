@@ -123,6 +123,29 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'secondo-principio', titolo: 'Secondo principio, macchine termiche ed entropia', breve: 'Secondo principio' },
     ],
   },
+  {
+    slug: 'fisica-2',
+    titolo: 'Fisica 2',
+    breve: 'Fisica 2',
+    descrizione: 'Elettrostatica, condensatori, circuiti, campo magnetico, induzione, corrente alternata, equazioni di Maxwell, onde elettromagnetiche e ottica.',
+    colore: '#8b4a7a',
+    gruppo: 'Università',
+    attiva: false, // diventa true quando gli argomenti sono scritti e verificati
+    argomenti: [
+      { slug: 'carica-e-coulomb', titolo: 'Carica elettrica e legge di Coulomb', breve: 'Legge di Coulomb' },
+      { slug: 'campo-elettrico', titolo: 'Campo elettrico', breve: 'Campo elettrico' },
+      { slug: 'legge-di-gauss', titolo: 'Flusso del campo elettrico e legge di Gauss', breve: 'Legge di Gauss' },
+      { slug: 'potenziale-elettrico', titolo: 'Potenziale elettrico ed energia elettrostatica', breve: 'Potenziale elettrico' },
+      { slug: 'conduttori-e-condensatori', titolo: 'Conduttori, condensatori e dielettrici', breve: 'Condensatori' },
+      { slug: 'corrente-e-circuiti', titolo: 'Corrente elettrica e circuiti in corrente continua', breve: 'Circuiti' },
+      { slug: 'campo-magnetico', titolo: 'Campo magnetico e forza di Lorentz', breve: 'Campo magnetico' },
+      { slug: 'sorgenti-del-campo-magnetico', titolo: 'Sorgenti del campo magnetico', breve: 'Biot-Savart e Ampère' },
+      { slug: 'induzione-elettromagnetica', titolo: 'Induzione elettromagnetica', breve: 'Induzione' },
+      { slug: 'circuiti-in-corrente-alternata', titolo: 'Oscillazioni elettriche e circuiti in corrente alternata', breve: 'Corrente alternata' },
+      { slug: 'equazioni-di-maxwell-e-onde', titolo: 'Equazioni di Maxwell e onde elettromagnetiche', breve: 'Maxwell e onde' },
+      { slug: 'ottica', titolo: 'Ottica geometrica e ondulatoria', breve: 'Ottica' },
+    ],
+  },
 ];
 
 export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));

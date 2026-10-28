@@ -16,6 +16,7 @@ const SIMBOLI: Record<string, string> = {
   'analisi-2': '\\iint',
   'algebra-lineare': '\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}',
   'fisica-1': '\\omega',
+  'fisica-2': '\\vec{E}',
 };
 const simbolo = (slug: string, titolo: string) => (SIMBOLI[slug] ? katex.renderToString(SIMBOLI[slug], { throwOnError: false }) : titolo[0]);
 ---
