@@ -53,6 +53,9 @@ $9x^2 - 16 = (3x - 4)(3x + 4)$. With two successive applications, $x^4 - 1 = (x^
 
 :::attenzione
 The sum of two squares $x^2 + k^2$, with $k \neq 0$, *cannot* be factored into first-degree factors with real coefficients. For example $x^2 + 4 \geq 4 > 0$ for every $x$, so $x^2 + 4$ has **no real roots** and no factor of the form $x - c$ divides it.
+
+::grafico{f="x^2+4;4" xmin=-3 xmax=3 ymin=-1 ymax=10 punti="0,4,pieno" titolo="$y = x^2 + 4$ never goes below the line $y = 4$ (dashed), which it touches at the point $(0, 4)$, so it does not meet the $x$-axis: $x^2 + 4$ has no real roots"}
+
 :::
 
 :::teorema{#somma-e-differenza-di-cubi titolo="Sum and difference of cubes"}
@@ -104,6 +107,8 @@ The dividend is written with the degrees in decreasing order, and missing degree
 ::::teorema{#teorema-del-resto titolo="Remainder theorem"}
 The remainder of the division of $P(x)$ by $x - c$ is $P(c)$. The remainder is therefore obtained with a **single evaluation** of the polynomial, without carrying out the division. The remainder of $x^3 - 2x + 1$ divided by $x - 2$ is $P(2) = 8 - 4 + 1 = 5$.
 
+::grafico{f="x^3-2*x+1" xmin=-2.5 xmax=2.6 ymin=-4 ymax=8 punti="2,5,pieno,P(2) = 5" segmenti="2,0,2,5" titolo="$y = x^3 - 2x + 1$: the remainder of the division by $x - 2$ is the ordinate $P(2) = 5$ of the point of the graph with abscissa $2$"}
+
 :::dimostrazione
 By the **theorem on division with remainder** there exist $Q(x)$ and $R(x)$ such that $P(x) = (x - c)\,Q(x) + R(x)$, with $R(x) = 0$ or $\deg R < \deg(x - c) = 1$. In both cases $R(x)$ is a **constant** $R$. Evaluating the equality at $x = c$ gives
 $$
@@ -115,6 +120,26 @@ therefore the remainder equals $P(c)$.
 
 :::teorema{#teorema-di-ruffini titolo="Ruffini's theorem"}
 The binomial $x - c$ divides $P(x)$ *if and only if* $P(c) = 0$, that is, if and only if $c$ is a root of $P$. The statement follows from the **remainder theorem**, since the division is exact if and only if the remainder $P(c)$ is zero. The theorem connects roots to factorization: *every* root found produces a **first-degree factor**. For $P(x) = x^2 - 5x + 6$ we have $P(2) = 4 - 10 + 6 = 0$, so $x - 2$ divides $P$; indeed $P(x) = (x - 2)(x - 3)$.
+
+::grafico{f="x^2-5*x+6" xmin=-0.5 xmax=5 ymin=-1 ymax=6 punti="2,0,pieno;3,0,pieno" titolo="The roots $2$ and $3$ of $P(x) = x^2 - 5x + 6$ are the abscissas of the points where the graph meets the $x$-axis"}
+
+:::
+
+:::definizione{#molteplicita-di-una-radice titolo="Multiplicity of a root"}
+Let $c$ be a root of the polynomial $P$ and let $m \geq 1$ be an integer. The root $c$ has **multiplicity** $m$ if
+$$
+P(x) = (x - c)^m\, Q(x) \qquad \text{with } Q(c) \neq 0 ,
+$$
+that is, if $(x - c)^m$ divides $P$ and $(x - c)^{m + 1}$ does not. A root of multiplicity $1$ is called **simple**, of multiplicity $2$ **double**, of multiplicity $3$ triple. The multiplicity is found by dividing by $x - c$ until the quotient no longer has $c$ as a root: the number of exact divisions is $m$.
+
+The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is the **sign permanence theorem**, found in the chapter on limits of Calculus 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
+:::
+
+:::esempio
+$P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. The root $2$ is **double**, since $P(x) = (x - 2)^2\, Q(x)$ with $Q(x) = x + 1$ and $Q(2) = 3 \neq 0$; the root $-1$ is **simple**, since $P(x) = (x + 1)\,(x - 2)^2$ and $(-1 - 2)^2 = 9 \neq 0$. Near $2$ the polynomial has the sign of $3\,(x - 2)^2$, positive on both sides, while near $-1$ it has the sign of $9\,(x + 1)$, which changes at $-1$.
+
+::grafico{f="x^3-3*x^2+4" xmin=-1.8 xmax=3.3 ymin=-4 ymax=7 punti="-1,0,pieno;2,0,pieno" titolo="$y = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$ crosses the $x$-axis at the simple root $-1$ and touches it without crossing at the double root $2$"}
+
 :::
 
 ## Ruffini's rule
@@ -142,6 +167,9 @@ $$
 x^3 - 2x^2 - 5x + 6 = (x - 1)(x^2 - x - 6) = (x - 1)(x - 3)(x + 2) ,
 $$
 where the last equality is checked by expanding the product $(x - 3)(x + 2) = x^2 - x - 6$.
+
+::grafico{f="x^3-2*x^2-5*x+6" xmin=-2.6 xmax=3.6 ymin=-6 ymax=10 punti="-2,0,pieno;1,0,pieno;3,0,pieno" titolo="$y = x^3 - 2x^2 - 5x + 6$ meets the $x$-axis at the three roots $-2$, $1$, $3$, one for each first-degree factor"}
+
 :::
 
 ## Rational roots
@@ -152,6 +180,9 @@ Let $P(x) = a_n x^n + \dots + a_0$ have integer coefficients, with $a_0 \neq 0$.
 
 :::esempio
 $P(x) = 2x^3 + x^2 - 5x + 2$. The divisors of the constant term $2$ are $\pm 1, \pm 2$; the positive divisors of the leading coefficient $2$ are $1, 2$. The candidates are therefore $\pm 1$, $\pm 2$, $\pm\dfrac{1}{2}$. Since $P(1) = 2 + 1 - 5 + 2 = 0$, the number $1$ is a root and $x - 1$ divides $P$. *Not every* candidate is a root: $P(-1) = -2 + 1 + 5 + 2 = 6 \neq 0$.
+
+::grafico{f="2*x^3+x^2-5*x+2" xmin=-2.6 xmax=1.8 ymin=-3 ymax=8 punti="1,0,pieno;-1,6,pieno,P(−1) = 6" etichette="1.15,-0.9,P(1) = 0" segmenti="-1,0,-1,6" titolo="$y = 2x^3 + x^2 - 5x + 2$: the candidate $1$ is a root, the candidate $-1$ is not, since $P(-1) = 6$; the graph also meets the $x$-axis at the candidates $-2$ and $\dfrac{1}{2}$"}
+
 :::
 
 ## Factorization strategy
@@ -188,7 +219,7 @@ The factorization of a polynomial proceeds in the following order, and after eac
 2. Recognizing special products: square and cube of a binomial, difference of squares, sum and difference of cubes.
 3. For trinomials of the form $x^2 + sx + p$, the special trinomial.
 4. With four or more terms, factoring by grouping.
-5. Finding rational roots and Ruffini's rule: every root $c$ found produces the factor $x - c$ and lowers the degree of the quotient by one.
+5. Finding rational roots and Ruffini's rule: every root $c$ found produces the factor $x - c$ and lowers the degree of the quotient by one. The step also applies to second-degree trinomials $ax^2 + bx + c$ with $a \neq 1$ and rational roots, which are not special trinomials.
 
 The factorization **ends** when *every* factor has degree $1$ or is a second-degree factor with no real roots; how to recognize the latter with the discriminant is found in the chapter on polynomial equations and inequalities.
 :::
@@ -198,4 +229,7 @@ $$
 2x^4 + 2x^3 - 12x^2 = 2x^2\,(x^2 + x - 6) = 2x^2\,(x + 3)(x - 2)
 $$
 The first step is **factoring out the common factor** $2x^2$. The factor $x^2 + x - 6$ is a **special trinomial**, since $3 + (-2) = 1$ and $3 \cdot (-2) = -6$, so it factors as $(x + 3)(x - 2)$. The non-constant factors, namely $x$ (which appears twice), $x + 3$ and $x - 2$, all have degree $1$, therefore the factorization is **complete**.
+
+::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: at the simple roots $-3$ and $2$ the graph crosses the $x$-axis; at the root $0$, double because of the factor $x^2$, it touches the axis without crossing it"}
+
 :::
