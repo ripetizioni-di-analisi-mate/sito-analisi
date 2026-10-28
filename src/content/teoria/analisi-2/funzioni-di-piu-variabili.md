@@ -77,7 +77,7 @@ Un insieme che non è aperto *non* è necessariamente chiuso: la corona $\{ (x, 
 :::
 
 :::definizione{#limitati-e-compatti titolo="Insieme limitato e insieme compatto"}
-$A \subseteq \mathbb{R}^2$ è **limitato** se è contenuto in un disco centrato nell'origine, cioè se esiste $R > 0$ con $\lVert P \rVert \leq R$ per ogni $P \in A$. Un insieme chiuso e limitato si dice **compatto**. Il disco chiuso $x^2 + y^2 \leq 4$ è compatto; il semipiano $y \geq 0$ è chiuso ma non limitato, quindi non è compatto. I compatti sono gli insiemi su cui si applica il **teorema di Weierstrass**, enunciato alla fine del capitolo, e su di essi si impostano i problemi di massimo e minimo assoluto.
+$A \subseteq \mathbb{R}^2$ è **limitato** se è contenuto in un disco centrato nell'origine, cioè se esiste $R > 0$ con $\lVert P \rVert \leq R$ per ogni $P \in A$. Un insieme chiuso e limitato si dice **compatto**. Il disco chiuso $x^2 + y^2 \leq 4$ è compatto; il semipiano $y \geq 0$ è chiuso ma non limitato, quindi non è compatto. I compatti sono gli insiemi su cui si applica il **teorema di Weierstrass** in più variabili, e su di essi si impostano i problemi di massimo e minimo assoluto.
 :::
 
 :::definizione{#insiemi-connessi titolo="Insieme connesso"}
@@ -91,7 +91,7 @@ Una **funzione di due variabili** è una legge $f : A \subseteq \mathbb{R}^2 \to
 $$
 G_f = \{ (x, y, f(x, y)) : (x, y) \in A \} \subset \mathbb{R}^3
 $$
-è in generale una **superficie** dello spazio. Per $f(x, y) = x^2 + y^2$ il grafico è un paraboloide; per $f(x, y) = 2 - x + y$ è un piano. Con $n \geq 3$ variabili la definizione è identica, ma il grafico vive in $\mathbb{R}^{n+1}$ e non si disegna; per visualizzare la funzione si usano gli insiemi di livello, introdotti nel paragrafo seguente.
+è in generale una **superficie** dello spazio. Per $f(x, y) = x^2 + y^2$ il grafico è un paraboloide; per $f(x, y) = 2 - x + y$ è un piano. Con $n \geq 3$ variabili la definizione è identica, ma il grafico vive in $\mathbb{R}^{n+1}$ e non si disegna; per visualizzare la funzione si usano gli insiemi di livello, definiti nel paragrafo sulle curve e superfici di livello.
 :::
 
 :::definizione{#dominio-naturale titolo="Dominio naturale"}
@@ -152,7 +152,7 @@ Il limite è $+\infty$ se per ogni $M > 0$ esiste $\delta > 0$ tale che $f(x, y)
 :::
 
 :::osservazione
-In una variabile ci si avvicina a $x_0$ da due soli lati, e il limite esiste quando i due limiti laterali coincidono. Nel piano ci si avvicina a $P_0$ lungo *infinite* rette e infinite curve: la definizione chiede che $f(x, y)$ sia vicina a $L$ in *tutti* i punti di un disco bucato attorno a $P_0$, qualunque sia la strada con cui li si raggiunge. L'esistenza del limite è perciò una **condizione più restrittiva**, e la verifica richiede le tecniche dei due paragrafi seguenti.
+In una variabile ci si avvicina a $x_0$ da due soli lati, e il limite esiste quando i due limiti laterali coincidono. Nel piano ci si avvicina a $P_0$ lungo *infinite* rette e infinite curve: la definizione chiede che $f(x, y)$ sia vicina a $L$ in *tutti* i punti di un disco bucato attorno a $P_0$, qualunque sia la strada con cui li si raggiunge. L'esistenza del limite è perciò una **condizione più restrittiva**, e la verifica richiede due strumenti distinti: il teorema delle restrizioni per dimostrare che un limite non esiste, il confronto e le coordinate polari per dimostrare che esiste.
 :::
 
 ::::teorema{#teorema-delle-restrizioni titolo="Teorema delle restrizioni"}
@@ -176,7 +176,7 @@ Le restrizioni dimostrano la *non esistenza* di un limite, *non* la sua esistenz
 $$
 f(x, mx) = \frac{m x^3}{x^4 + m^2 x^2} = \frac{m x}{x^2 + m^2} \to 0 ,
 $$
-e anche l'asse $y$ dà $0$; lungo la parabola $y = x^2$ si ha però $f(x, x^2) = \dfrac{x^4}{2x^4} = \dfrac{1}{2}$. Il limite **non esiste**, benché tutte le rette producano lo stesso valore. Per provare che un limite esiste serve una **maggiorazione**, come nel paragrafo seguente.
+e anche l'asse $y$ dà $0$; lungo la parabola $y = x^2$ si ha però $f(x, x^2) = \dfrac{x^4}{2x^4} = \dfrac{1}{2}$. Il limite **non esiste**, benché tutte le rette producano lo stesso valore. Per provare che un limite esiste serve una **maggiorazione**, con il teorema del confronto o con le coordinate polari.
 
 ::grafico{f="x^2" segmenti="-1.5,-1.5,2,2;-2,2,1.5,-1.5;-0.75,-1.5,1.25,2.5;-1.25,2.5,0.75,-1.5" punti="0,0,vuoto" xmin=-2.2 xmax=2.2 ymin=-1.5 ymax=2.5 uguale=1 titolo="Le rette $y = mx$ (tratteggiate) e la parabola $y = x^2$ verso l'origine: lungo le rette $f$ tende a $0$, lungo la parabola vale costantemente $\dfrac{1}{2}$"}
 
@@ -284,7 +284,7 @@ f(x, y) =
 0 & (x, y) = (0, 0)
 \end{cases}
 $$
-Fuori dall'origine $f$ è un quoziente di polinomi con denominatore non nullo, quindi è **continua**. Nell'origine la continuità equivale alla condizione $\displaystyle\lim_{(x,y) \to (0,0)} f(x, y) = f(0, 0) = 0$, da verificare con le tecniche del paragrafo precedente.
+Fuori dall'origine $f$ è un quoziente di polinomi con denominatore non nullo, quindi è **continua**. Nell'origine la continuità equivale alla condizione $\displaystyle\lim_{(x,y) \to (0,0)} f(x, y) = f(0, 0) = 0$. Poiché $\dfrac{x^2}{x^2 + y^2} \leq 1$, risulta $|f(x, y)| = \dfrac{x^2}{x^2 + y^2}\, |x| \leq |x|$, e $|x| \to 0$; per il **confronto** il limite vale $0$, quindi $f$ è continua anche nell'origine.
 :::
 
 :::definizione{#prolungamento-continuita titolo="Prolungamento per continuità"}

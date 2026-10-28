@@ -77,7 +77,7 @@ A set that is not open is *not* necessarily closed: the annulus $\{ (x, y) : 1 \
 :::
 
 :::definizione{#limitati-e-compatti titolo="Bounded set and compact set"}
-$A \subseteq \mathbb{R}^2$ is **bounded** if it is contained in a disk centered at the origin, that is, if there exists $R > 0$ with $\lVert P \rVert \leq R$ for every $P \in A$. A closed and bounded set is called **compact**. The closed disk $x^2 + y^2 \leq 4$ is compact; the half-plane $y \geq 0$ is closed but not bounded, so it is not compact. Compact sets are the sets on which the **Weierstrass theorem** applies, stated at the end of the chapter, and problems of absolute maximum and minimum are set up on them.
+$A \subseteq \mathbb{R}^2$ is **bounded** if it is contained in a disk centered at the origin, that is, if there exists $R > 0$ with $\lVert P \rVert \leq R$ for every $P \in A$. A closed and bounded set is called **compact**. The closed disk $x^2 + y^2 \leq 4$ is compact; the half-plane $y \geq 0$ is closed but not bounded, so it is not compact. Compact sets are the sets on which the **Weierstrass theorem** in several variables applies, and problems of absolute maximum and minimum are set up on them.
 :::
 
 :::definizione{#insiemi-connessi titolo="Connected set"}
@@ -91,7 +91,7 @@ A **function of two variables** is a rule $f : A \subseteq \mathbb{R}^2 \to \mat
 $$
 G_f = \{ (x, y, f(x, y)) : (x, y) \in A \} \subset \mathbb{R}^3
 $$
-is in general a **surface** in space. For $f(x, y) = x^2 + y^2$ the graph is a paraboloid; for $f(x, y) = 2 - x + y$ it is a plane. With $n \geq 3$ variables the definition is identical, but the graph lives in $\mathbb{R}^{n+1}$ and cannot be drawn; to visualize the function one uses level sets, introduced in the next section.
+is in general a **surface** in space. For $f(x, y) = x^2 + y^2$ the graph is a paraboloid; for $f(x, y) = 2 - x + y$ it is a plane. With $n \geq 3$ variables the definition is identical, but the graph lives in $\mathbb{R}^{n+1}$ and cannot be drawn; to visualize the function one uses level sets, defined in the section on level curves and level surfaces.
 :::
 
 :::definizione{#dominio-naturale titolo="Natural domain"}
@@ -152,7 +152,7 @@ The limit is $+\infty$ if for every $M > 0$ there exists $\delta > 0$ such that 
 :::
 
 :::osservazione
-In one variable one approaches $x_0$ from only two sides, and the limit exists when the two one-sided limits coincide. In the plane one approaches $P_0$ along *infinitely many* lines and infinitely many curves: the definition requires $f(x, y)$ to be close to $L$ at *all* points of a punctured disk around $P_0$, whatever the path by which they are reached. The existence of the limit is therefore a **more restrictive condition**, and checking it requires the techniques of the next two sections.
+In one variable one approaches $x_0$ from only two sides, and the limit exists when the two one-sided limits coincide. In the plane one approaches $P_0$ along *infinitely many* lines and infinitely many curves: the definition requires $f(x, y)$ to be close to $L$ at *all* points of a punctured disk around $P_0$, whatever the path by which they are reached. The existence of the limit is therefore a **more restrictive condition**, and checking it requires two distinct tools: the restriction theorem to prove that a limit does not exist, the squeeze theorem and polar coordinates to prove that it exists.
 :::
 
 ::::teorema{#teorema-delle-restrizioni titolo="Restriction theorem"}
@@ -176,7 +176,7 @@ Restrictions prove the *non-existence* of a limit, *not* its existence. For $f(x
 $$
 f(x, mx) = \frac{m x^3}{x^4 + m^2 x^2} = \frac{m x}{x^2 + m^2} \to 0 ,
 $$
-and the $y$-axis also gives $0$; along the parabola $y = x^2$, however, $f(x, x^2) = \dfrac{x^4}{2x^4} = \dfrac{1}{2}$. The limit **does not exist**, even though all lines produce the same value. To prove that a limit exists one needs an **upper bound**, as in the next section.
+and the $y$-axis also gives $0$; along the parabola $y = x^2$, however, $f(x, x^2) = \dfrac{x^4}{2x^4} = \dfrac{1}{2}$. The limit **does not exist**, even though all lines produce the same value. To prove that a limit exists one needs an **upper bound**, with the squeeze theorem or with polar coordinates.
 
 ::grafico{f="x^2" segmenti="-1.5,-1.5,2,2;-2,2,1.5,-1.5;-0.75,-1.5,1.25,2.5;-1.25,2.5,0.75,-1.5" punti="0,0,vuoto" xmin=-2.2 xmax=2.2 ymin=-1.5 ymax=2.5 uguale=1 titolo="The lines $y = mx$ (dashed) and the parabola $y = x^2$ toward the origin: along the lines $f$ tends to $0$, along the parabola it is constantly $\dfrac{1}{2}$"}
 
@@ -284,7 +284,7 @@ f(x, y) =
 0 & (x, y) = (0, 0)
 \end{cases}
 $$
-Away from the origin $f$ is a quotient of polynomials with nonzero denominator, so it is **continuous**. At the origin continuity is equivalent to the condition $\displaystyle\lim_{(x,y) \to (0,0)} f(x, y) = f(0, 0) = 0$, to be checked with the techniques of the previous section.
+Away from the origin $f$ is a quotient of polynomials with nonzero denominator, so it is **continuous**. At the origin continuity is equivalent to the condition $\displaystyle\lim_{(x,y) \to (0,0)} f(x, y) = f(0, 0) = 0$. Since $\dfrac{x^2}{x^2 + y^2} \leq 1$, we have $|f(x, y)| = \dfrac{x^2}{x^2 + y^2}\, |x| \leq |x|$, and $|x| \to 0$; by the **squeeze theorem** the limit is $0$, so $f$ is continuous at the origin as well.
 :::
 
 :::definizione{#prolungamento-continuita titolo="Continuous extension"}
