@@ -18,7 +18,7 @@ const svolti = await Promise.all(perArgomento(await getCollection('svolti'), mat
 const dafare = await Promise.all(perArgomento(await getCollection('dafare'), materia!, argomento!).map(async (v) => ({ v, Content: (await render(v)).Content })));
 ---
 <Base titolo={`${arg.titolo} · Stampa`} materia={materia} argomento={argomento} sezione="stampa">
-  <div class="stampa">
+  <div class="stampa testo-studio">
     <p class="sopratitolo">{m.titolo}</p>
     <h1>{arg.titolo}</h1>
     <p class="sommario">{voce?.data.sommario}</p>

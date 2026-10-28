@@ -34,5 +34,5 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   {voce.data.teoria.length > 0 && (
     <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
   )}
-  <Content />
+  <div class="testo-studio"><Content /></div>
 </Base>

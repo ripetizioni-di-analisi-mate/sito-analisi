@@ -485,3 +485,7 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 }
 .bottone-indice, .bottone-cerca, .bottone-account, .bottone-lingua { height: 2.4rem; box-sizing: border-box; }
 .elenco-dispositivi { font-family: var(--ui); padding-left: 1.2rem; margin: 0.4rem 0 0.8rem; }
+
+/* grassetto nei testi di studio: semigrassetto nel colore della materia, distinto dai titoli */
+.testo-studio strong { font-weight: 600; color: var(--accento); }
+@media print { .testo-studio strong { color: inherit; } }

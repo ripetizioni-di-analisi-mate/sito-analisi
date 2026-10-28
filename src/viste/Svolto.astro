@@ -39,5 +39,5 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   {salti.length > 1 && (
     <p class="salta-esercizi">{t.vaiA}: {salti.map((s: { slug: string; text: string }) => <a href={`#${s.slug}`}>{s.text}</a>)}</p>
   )}
-  <Content />
+  <div class="testo-studio"><Content /></div>
 </Base>

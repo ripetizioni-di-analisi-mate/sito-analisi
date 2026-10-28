@@ -27,7 +27,7 @@ const base = `/${materia}/${argomento}`;
   {resi.map(({ v, Content }) => (
     <section class="traccia" id={`esercizio-${numero(v.id)}`}>
       <h2><a href={link(lingua, `${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
-      <Content />
+      <div class="testo-studio"><Content /></div>
     </section>
   ))}
 </Base>

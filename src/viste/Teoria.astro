@@ -51,7 +51,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
       </ol>
     </details>
   )}
-  {Contenuto ? <Contenuto /> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
+  {Contenuto ? <div class="testo-studio"><Contenuto /></div> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
   <script is:inline define:vars={{ usi, basi, parole }}>
     for (const [id, u] of Object.entries(usi)) {
       const b = document.getElementById(id);
