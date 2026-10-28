@@ -14,7 +14,7 @@ dove i numeri $a_n$ sono i **coefficienti** e $x_0$ è il **centro**; per conven
 :::
 
 :::esempio{titolo="La serie geometrica come serie di potenze"}
-La serie $\displaystyle\sum_{n=0}^{\infty} x^n$ è una serie di potenze centrata in $0$ con tutti i coefficienti uguali a $1$. Per $|x| < 1$ è una serie geometrica convergente con somma $\dfrac{1}{1 - x}$; per $|x| \geq 1$ il termine generale $x^n$ non tende a $0$, quindi la serie **non converge**. L'insieme di convergenza è l'intervallo $(-1, 1)$, simmetrico rispetto al centro. Il teorema seguente mostra che questa forma dell'insieme di convergenza è generale.
+La serie $\displaystyle\sum_{n=0}^{\infty} x^n$ è una serie di potenze centrata in $0$ con tutti i coefficienti uguali a $1$. Per $|x| < 1$ è una serie geometrica convergente con somma $\dfrac{1}{1 - x}$; per $|x| \geq 1$ il termine generale $x^n$ non tende a $0$, quindi la serie **non converge**. L'insieme di convergenza è l'intervallo $(-1, 1)$, simmetrico rispetto al centro. Il **teorema del raggio di convergenza** mostra che questa forma dell'insieme di convergenza è generale.
 
 ::grafico{f="1/(1-x);1+x+x^2;(1-x^7)/(1-x)" xmin=-1.6 xmax=1.6 ymin=-3 ymax=8 asintoti="x=1" segmenti="-1,-3,-1,8" titolo="$y = \dfrac{1}{1 - x}$ con le somme parziali $1 + x + x^2$ (tratteggiata) e $1 + x + \dots + x^6$ (rossa): dentro $(-1, 1)$ si avvicinano alla somma, fuori se ne allontanano"}
 :::
@@ -107,7 +107,7 @@ La serie di funzioni $\sum f_n$ converge totalmente sull'insieme $I$ se la serie
 :::
 
 ::::teorema{#convergenza-totale-compatti titolo="Convergenza totale sui compatti interni"}
-Sia $R > 0$ il raggio di convergenza della serie $\sum a_n (x - x_0)^n$. Per *ogni* $r$ con $0 < r < R$ la serie **converge totalmente** sull'intervallo $[x_0 - r,\; x_0 + r]$. Da questo teorema seguono le proprietà della somma enunciate sotto: continuità, derivabilità e integrabilità termine a termine.
+Sia $R > 0$ il raggio di convergenza della serie $\sum a_n (x - x_0)^n$. Per *ogni* $r$ con $0 < r < R$ la serie **converge totalmente** sull'intervallo $[x_0 - r,\; x_0 + r]$. Da questo teorema seguono le proprietà della somma: continuità, derivabilità e integrabilità termine a termine.
 
 :::dimostrazione
 Per $x \in [x_0 - r, x_0 + r]$ si ha $|a_n (x - x_0)^n| \leq |a_n| \, r^n$, e il valore $|a_n| \, r^n$ è raggiunto in $x = x_0 + r$, quindi
@@ -123,7 +123,7 @@ Sia $R > 0$. La funzione somma
 $$
 f(x) = \sum_{n=0}^{\infty} a_n (x - x_0)^n
 $$
-è **continua** sull'intervallo aperto $(x_0 - R,\; x_0 + R)$. Ogni punto dell'intervallo aperto appartiene a un compatto $[x_0 - r, x_0 + r]$ con $r < R$; su quel compatto la convergenza è **totale**, quindi **uniforme**, e la somma di una serie uniformemente convergente di funzioni continue è continua, per il teorema richiamato sotto.
+è **continua** sull'intervallo aperto $(x_0 - R,\; x_0 + R)$. Ogni punto dell'intervallo aperto appartiene a un compatto $[x_0 - r, x_0 + r]$ con $r < R$; su quel compatto la convergenza è **totale**, quindi **uniforme**, e la somma di una serie uniformemente convergente di funzioni continue è continua, per il teorema di continuità della somma del capitolo sulle successioni e serie di funzioni.
 :::
 
 :::richiamo{titolo="Continuità della somma di una serie uniformemente convergente"}
@@ -153,7 +153,7 @@ Con le stesse ipotesi, per ogni $x \in (x_0 - R, x_0 + R)$ vale
 $$
 \int_{x_0}^{x} f(t) \, dt = \sum_{n=0}^{\infty} \frac{a_n}{n+1} (x - x_0)^{n+1} ,
 $$
-e la serie integrata ha lo *stesso* raggio $R$. Lo scambio tra integrale e serie è lecito perché sul compatto di estremi $x_0$ e $x$ la convergenza è **totale**, quindi **uniforme**; il teorema di integrazione per le serie di funzioni è nel capitolo corrispondente. Derivazione e integrazione termine a termine producono sviluppi nuovi a partire da sviluppi noti, come mostrano gli esempi della sezione sugli sviluppi.
+e la serie integrata ha lo *stesso* raggio $R$. Lo scambio tra integrale e serie è lecito perché sul compatto di estremi $x_0$ e $x$ la convergenza è **totale**, quindi **uniforme**; il teorema di integrazione per le serie di funzioni è nel capitolo corrispondente. Derivazione e integrazione termine a termine producono sviluppi nuovi a partire da sviluppi noti, come gli sviluppi di $\ln(1 + x)$ e di $\arctan x$.
 :::
 
 :::esempio{titolo="Derivata della serie geometrica"}
@@ -173,7 +173,7 @@ Sia $f$ di classe $C^{\infty}$ in un intorno di $x_0$. La **serie di Taylor** di
 $$
 \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n ,
 $$
-le cui somme parziali sono i polinomi di Taylor di $f$ in $x_0$. Per $x_0 = 0$ la serie si chiama **serie di MacLaurin**. La serie è definita per ogni funzione $C^{\infty}$; se e dove la sua somma coincida con $f$ è la questione trattata nei blocchi seguenti.
+le cui somme parziali sono i polinomi di Taylor di $f$ in $x_0$. Per $x_0 = 0$ la serie si chiama **serie di MacLaurin**. La serie è definita per ogni funzione $C^{\infty}$; se e dove la sua somma coincida con $f$ va verificato caso per caso, per esempio con il criterio di sviluppabilità.
 :::
 
 ::::teorema{#unicita-dello-sviluppo titolo="Unicità dello sviluppo in serie di potenze"}
@@ -197,7 +197,7 @@ Se $f$ è somma di una serie di potenze con raggio $R > 0$, allora $f$ è **deri
 :::
 
 :::definizione{#funzione-analitica titolo="Funzione analitica"}
-$f$ è **analitica** in $x_0$ (o **sviluppabile in serie di Taylor** in $x_0$) se esiste un intorno di $x_0$ in cui $f$ coincide con la somma della sua serie di Taylor centrata in $x_0$; è analitica su un aperto se lo è in ogni suo punto. Le funzioni elementari (esponenziali, logaritmi, potenze, funzioni trigonometriche e loro inverse) sono analitiche in ogni punto interno al dominio, quindi per queste funzioni gli sviluppi della sezione seguente rappresentano davvero la funzione nelle regioni indicate.
+$f$ è **analitica** in $x_0$ (o **sviluppabile in serie di Taylor** in $x_0$) se esiste un intorno di $x_0$ in cui $f$ coincide con la somma della sua serie di Taylor centrata in $x_0$; è analitica su un aperto se lo è in ogni suo punto. Le funzioni elementari (esponenziali, logaritmi, potenze, funzioni trigonometriche e loro inverse) sono analitiche in ogni punto interno al dominio, quindi per queste funzioni gli sviluppi notevoli rappresentano davvero la funzione nelle regioni indicate.
 :::
 
 :::attenzione
@@ -211,7 +211,7 @@ Sia $f$ di classe $C^{\infty}$ sull'intervallo $I$ centrato in $x_0$ e sia $T_n$
 $$
 |R_n(x)| \leq \frac{M L^{n+1} |x - x_0|^{n+1}}{(n+1)!} \xrightarrow[n \to \infty]{} 0 ,
 $$
-dato che $\dfrac{c^{\,n}}{n!} \to 0$ per ogni $c$ fissato. Le derivate di $\sin x$ e $\cos x$ sono limitate da $1$ su tutto $\mathbb{R}$, e quelle di $e^x$ sono limitate da $e^K$ su ogni intervallo $[-K, K]$, quindi la condizione è soddisfatta e i tre sviluppi della sezione seguente valgono su tutto $\mathbb{R}$.
+dato che $\dfrac{c^{\,n}}{n!} \to 0$ per ogni $c$ fissato. Le derivate di $\sin x$ e $\cos x$ sono limitate da $1$ su tutto $\mathbb{R}$, e quelle di $e^x$ sono limitate da $e^K$ su ogni intervallo $[-K, K]$, quindi la condizione è soddisfatta e gli sviluppi notevoli di $e^x$, $\sin x$ e $\cos x$ valgono su tutto $\mathbb{R}$.
 
 ::grafico{f="sin(x);x-x^3/6;x-x^3/6+x^5/120-x^7/5040+x^9/362880" xmin=-7 xmax=7 ymin=-2.5 ymax=2.5 titolo="$y = \sin x$ con i polinomi di Taylor $T_3$ (tratteggiato) e $T_9$ (rosso) centrati in $0$: al crescere del grado l'approssimazione è buona su intervalli sempre più ampi"}
 :::
@@ -233,7 +233,7 @@ e^x &= \sum_{n=0}^{\infty} \frac{x^n}{n!} && x \in \mathbb{R} \\[8pt]
 (1 + x)^{\alpha} &= \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n && -1 < x < 1
 \end{aligned}
 $$
-I primi tre valgono su tutto $\mathbb{R}$ per il **criterio di sviluppabilità**. Il quarto è la somma della serie geometrica. Il quinto si ottiene integrando termine a termine la serie geometrica di ragione $-x$, come mostrato nella sezione seguente, e vale *anche* in $x = 1$ per il **teorema di Abel**, perché in quel punto la serie converge per il criterio di Leibniz; in particolare $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$. Nel sesto, detto **serie binomiale**, $\alpha \in \mathbb{R}$ e
+I primi tre valgono su tutto $\mathbb{R}$ per il **criterio di sviluppabilità**. Il quarto è la somma della serie geometrica. Il quinto si ottiene integrando termine a termine la serie geometrica di ragione $-x$ e vale *anche* in $x = 1$ per il **teorema di Abel**, perché in quel punto la serie converge per il criterio di Leibniz; in particolare $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$. Nel sesto, detto **serie binomiale**, $\alpha \in \mathbb{R}$ e
 $$
 \binom{\alpha}{n} = \frac{\alpha (\alpha - 1) \cdots (\alpha - n + 1)}{n!} , \qquad \binom{\alpha}{0} = 1 ;
 $$
