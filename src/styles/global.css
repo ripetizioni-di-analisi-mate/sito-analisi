@@ -226,7 +226,7 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 
 /* ---------- grafici ---------- */
 .grafico { margin: 1.5rem 0; }
-.grafico svg { width: 100%; height: auto; display: block; font-family: var(--ui); font-size: 15px; }
+.grafico > svg { width: 100%; height: auto; display: block; font-family: var(--ui); font-size: 15px; }
 .grafico .assi line { stroke: var(--inchiostro); stroke-width: 1.4; }
 .grafico .assi text { fill: var(--inchiostro-2); }
 .grafico .nome-asse { font-style: italic; font-size: 17px; fill: var(--inchiostro) !important; font-family: var(--testo); }
@@ -502,7 +502,7 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .grafico .punta { stroke: none !important; }
 .grafico .etichetta, .grafico .etichetta-vettore { font-family: var(--testo); font-style: italic; font-size: 17px; fill: var(--inchiostro); }
 /* diagrammi di Venn */
-.venn svg { max-width: 30rem; margin: 0 auto; }
+.venn > svg { max-width: 30rem; margin: 0 auto; }
 .venn .zona { fill: color-mix(in srgb, var(--accento) 32%, transparent); }
 .venn .contorno { fill: none; stroke: var(--inchiostro); stroke-width: 2; }
 .venn .universo { fill: none; stroke: var(--inchiostro-2); stroke-width: 1.5; }
