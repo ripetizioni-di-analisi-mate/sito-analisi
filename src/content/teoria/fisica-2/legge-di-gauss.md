@@ -295,7 +295,7 @@ E_x(x) =
 $$
 All'esterno la lastra genera lo stesso campo di un piano con densità superficiale $\sigma = \rho d$, uguale alla carica per unità di area della lastra; all'interno il campo varia linearmente ed è nullo sul piano medio. Per $\rho = 1{,}0 \cdot 10^{-5}\,\mathrm{C/m^3}$ e $d = 1{,}0\,\mathrm{cm}$ il campo esterno vale circa $5{,}6 \cdot 10^3\,\mathrm{N/C}$.
 
-::grafico{f="x<-1 ? -1 : (x>1 ? 1 : x)" xmin=-3.2 xmax=3.2 ymin=-1.5 ymax=1.5 nomi="x,Eₓ" segmenti="-1,-1.5,-1,1.5;1,-1.5,1,1.5" etichette="1.08,-0.3,d/2;-1.75,0.3,−d/2" legenda="E_x(x)" titolo="Componente $E_x$ del campo di una lastra uniformemente carica di spessore $d$, in unità di $\dfrac{\rho d}{2 \varepsilon_0}$; il campo è lineare all'interno, costante all'esterno"}
+::grafico{f="x<-1 ? -1 : (x>1 ? 1 : x)" xmin=-3.2 xmax=3.2 ymin=-1.5 ymax=1.5 nomi="x,Eₓ" segmenti="-1,-1.5,-1,1.5;1,-1.5,1,1.5" etichette="1.08,-0.3,½d;-1.6,0.3,−½d" legenda="E_x(x)" titolo="Componente $E_x$ del campo di una lastra uniformemente carica di spessore $d$, in unità di $\dfrac{\rho d}{2 \varepsilon_0}$; il campo è lineare all'interno, costante all'esterno"}
 
 :::dimostrazione
 La simmetria è quella del piano infinito, e la distribuzione resta la stessa anche per la riflessione rispetto al piano medio; quindi il campo è parallelo all'asse $x$, dipende solo da $x$ e soddisfa $E_x(-x) = -E_x(x)$. Si sceglie come superficie gaussiana un cilindro con l'asse parallelo all'asse $x$ e con le basi di area $A$ nelle posizioni $-x$ e $x$, con $x > 0$. Il flusso attraverso la superficie laterale è nullo, e su ciascuna base il flusso uscente è $E_x(x)\,A$, quindi il flusso totale è $2E_x(x)\,A$. Se $x \leq \dfrac{d}{2}$, il cilindro racchiude la carica $\rho \cdot 2xA$, perciò

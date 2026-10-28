@@ -127,9 +127,9 @@ $$
 :::osservazione{#spira-dipolo-magnetico titolo="La spira come dipolo magnetico"}
 A grande distanza dalla spira, cioè per $z \gg R$, si ha $(R^2 + z^2)^{\frac{3}{2}} \approx z^3$, e il campo sull'asse diventa
 $$
-B \approx \frac{\mu_0 I R^2}{2 z^3} = \frac{\mu_0\,m}{2\pi z^3} ,
+B \approx \frac{\mu_0 I R^2}{2 z^3} = \frac{\mu_0\,\mu}{2\pi z^3} ,
 $$
-dove $m = I\pi R^2$ è il modulo del **momento magnetico** $\vec{m} = I A\,\hat{n}$ della spira, introdotto nell'argomento sul campo magnetico e la forza di Lorentz. L'espressione ha la stessa forma del campo elettrico sull'asse di un dipolo, $E = \dfrac{p}{2\pi\varepsilon_0 z^3}$; per questo una piccola spira si dice **dipolo magnetico**, e le sue linee di campo lontane hanno la stessa forma di quelle di un dipolo elettrico e di un piccolo magnete.
+dove $\mu = I\pi R^2$ è il modulo del **momento magnetico** $\vec{\mu} = I A\,\hat{n}$ della spira, introdotto nell'argomento sul campo magnetico e la forza di Lorentz. L'espressione ha la stessa forma del campo elettrico sull'asse di un dipolo, $E = \dfrac{p}{2\pi\varepsilon_0 z^3}$; per questo una piccola spira si dice **dipolo magnetico**, e le sue linee di campo lontane hanno la stessa forma di quelle di un dipolo elettrico e di un piccolo magnete.
 :::
 
 ## Forza tra fili paralleli e definizione dell'ampere

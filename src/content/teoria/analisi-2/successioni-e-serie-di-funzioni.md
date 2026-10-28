@@ -34,7 +34,7 @@ Al crescere di $n$ il grafico si abbassa verso l'asse $x$ su tutto l'intervallo 
 :::
 
 :::attenzione
-Il limite puntuale di funzioni continue può non essere continuo. Ogni $f_n(x) = x^n$ è continua su $[0, 1]$, ma il limite puntuale vale $0$ su $[0, 1)$ e $1$ nel punto $1$, quindi è discontinuo. La convergenza puntuale **non conserva la continuità**; per conservarla serve la nozione più forte introdotta sotto.
+Il limite puntuale di funzioni continue può non essere continuo. Ogni $f_n(x) = x^n$ è continua su $[0, 1]$, ma il limite puntuale vale $0$ su $[0, 1)$ e $1$ nel punto $1$, quindi è discontinuo. La convergenza puntuale **non conserva la continuità**; per conservarla serve una nozione più forte, la convergenza uniforme.
 
 ::grafico{f="0*sqrt(1-x);x^2;x^12" xmin=0 xmax=1.2 ymin=-0.15 ymax=1.2 punti="1,0,vuoto;1,1,pieno" etichette="0.62,0.5,y = x²;0.86,0.12,y = x¹²" titolo="$y = x^2$ e $y = x^{12}$ con il limite puntuale (in colore): vale $0$ su $[0, 1)$, sull'asse $x$, e $1$ nel punto $x = 1$"}
 :::
@@ -46,7 +46,7 @@ La successione $(f_n)$ **converge uniformemente** a $f$ su $A$ se per ogni $\var
 $$
 |f_n(x) - f(x)| < \varepsilon \qquad \text{per ogni } n \geq N \text{ e per ogni } x \in A .
 $$
-La differenza rispetto alla convergenza puntuale sta nell'ordine delle richieste: lo *stesso* indice $N$ funziona per *tutti* i punti $x \in A$ contemporaneamente. Dal punto di vista geometrico, per $n \geq N$ il grafico di $f_n$ è contenuto nel tubo di raggio $\varepsilon$ attorno al grafico di $f$, cioè nella striscia compresa tra $f - \varepsilon$ e $f + \varepsilon$. La convergenza uniforme implica quella puntuale; i controesempi sotto mostrano che il viceversa non vale.
+La differenza rispetto alla convergenza puntuale sta nell'ordine delle richieste: lo *stesso* indice $N$ funziona per *tutti* i punti $x \in A$ contemporaneamente. Dal punto di vista geometrico, per $n \geq N$ il grafico di $f_n$ è contenuto nel tubo di raggio $\varepsilon$ attorno al grafico di $f$, cioè nella striscia compresa tra $f - \varepsilon$ e $f + \varepsilon$. La convergenza uniforme implica quella puntuale; il viceversa non vale, come mostra la successione $x^n$ su $[0, 1)$.
 
 ::grafico{f="sin(x)+0.2*sin(5*x);sin(x)" area="sin(x)+0.3;sin(x)-0.3;0;6.6" xmin=0 xmax=6.6 ymin=-1.6 ymax=1.6 titolo="Striscia tra $f - \varepsilon$ e $f + \varepsilon$ con $f(x) = \sin x$ (tratteggiata) ed $\varepsilon = \dfrac{3}{10}$: il grafico di $f_5(x) = \sin x + \dfrac{\sin(5x)}{5}$ è tutto dentro la striscia, perché $|f_5(x) - f(x)| \leq \dfrac{1}{5}$ per ogni $x$"}
 :::
@@ -56,7 +56,7 @@ $(f_n)$ converge uniformemente a $f$ su $A$ *se e solo se*
 $$
 M_n = \sup_{x \in A} \, |f_n(x) - f(x)| \xrightarrow[n \to +\infty]{} 0 .
 $$
-L'equivalenza segue dalla definizione, poiché $|f_n(x) - f(x)| < \varepsilon$ per ogni $x \in A$ equivale a $M_n \leq \varepsilon$. Il criterio trasforma lo studio della convergenza uniforme in un problema di Analisi 1: per ogni $n$ si cerca il massimo di $|f_n - f|$ su $A$, di solito con lo studio della derivata, e poi si calcola il limite della successione numerica $M_n$.
+L'equivalenza segue dalla definizione, poiché la condizione $|f_n(x) - f(x)| < \varepsilon$ per ogni $x \in A$ implica $M_n \leq \varepsilon$ e, viceversa, la condizione $M_n < \varepsilon$ implica $|f_n(x) - f(x)| < \varepsilon$ per ogni $x \in A$. Il criterio trasforma lo studio della convergenza uniforme in un problema di Analisi 1: per ogni $n$ si cerca il massimo di $|f_n - f|$ su $A$, di solito con lo studio della derivata, e poi si calcola il limite della successione numerica $M_n$.
 :::
 
 :::esempio{titolo="Criterio del sup con lo studio della derivata"}

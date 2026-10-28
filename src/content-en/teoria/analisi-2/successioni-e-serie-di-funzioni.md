@@ -56,7 +56,7 @@ $(f_n)$ converges uniformly to $f$ on $A$ *if and only if*
 $$
 M_n = \sup_{x \in A} \, |f_n(x) - f(x)| \xrightarrow[n \to +\infty]{} 0 .
 $$
-The equivalence follows from the definition, since $|f_n(x) - f(x)| < \varepsilon$ for every $x \in A$ is equivalent to $M_n \leq \varepsilon$. The criterion turns the study of uniform convergence into an Mathematical Analysis 1 problem: for each $n$ one looks for the maximum of $|f_n - f|$ on $A$, usually by studying the derivative, and then computes the limit of the numerical sequence $M_n$.
+The equivalence follows from the definition, since the condition $|f_n(x) - f(x)| < \varepsilon$ for every $x \in A$ implies $M_n \leq \varepsilon$ and, conversely, the condition $M_n < \varepsilon$ implies $|f_n(x) - f(x)| < \varepsilon$ for every $x \in A$. The criterion turns the study of uniform convergence into a Mathematical Analysis 1 problem: for each $n$ one looks for the maximum of $|f_n - f|$ on $A$, usually by studying the derivative, and then computes the limit of the numerical sequence $M_n$.
 :::
 
 :::esempio{titolo="Sup criterion via the derivative"}

@@ -297,7 +297,7 @@ $$
 La forza è uguale alla densità di energia per l'area, e corrisponde al campo $\dfrac{\sigma}{2\varepsilon_0}$ prodotto da un'armatura sola, che agisce sulla carica $Q$ dell'altra; infatti il campo totale $\dfrac{\sigma}{\varepsilon_0}$ comprende anche il contributo dell'armatura su cui la forza agisce, e un'armatura non esercita forza su sé stessa. Con $A = 0{,}010\,\mathrm{m^2}$ e $Q = 0{,}10\,\mu\mathrm{C}$ si ottiene $F = \dfrac{(1{,}0 \cdot 10^{-7})^2}{2 \cdot 8{,}85 \cdot 10^{-12} \cdot 0{,}010}\,\mathrm{N} \approx 0{,}056\,\mathrm{N}$.
 
 :::dimostrazione
-Si consideri il condensatore isolato, quindi con $Q$ costante, e si allontani lentamente un'armatura di $dx$ con una forza esterna che equilibra l'attrazione. L'energia con le armature a distanza $x$ è $U(x) = \dfrac{Q^2}{2C} = \dfrac{Q^2\,x}{2\varepsilon_0 A}$. Il lavoro della forza esterna, $F\,dx$, è uguale all'aumento di energia $dU$, perché nessun'altra forza compie lavoro; perciò
+Si consideri il condensatore isolato, quindi con $Q$ costante, e si allontani lentamente un'armatura di $dx$ con una forza esterna che equilibra l'attrazione. L'energia con le armature a distanza $x$ è $U(x) = \dfrac{Q^2}{2C} = \dfrac{Q^2\,x}{2\varepsilon_0 A}$. Il lavoro della forza esterna, $F\,dx$, è uguale all'aumento di energia $dU$, perché il condensatore è isolato e nessun generatore compie lavoro; perciò
 $$
 F = \frac{dU}{dx} = \frac{Q^2}{2\varepsilon_0 A} ,
 $$
