@@ -70,7 +70,7 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
 @media (max-width: 30rem) { .marchio { font-size: 0.95rem; } .bottone-cerca span, .bottone-indice span, .bottone-account span { display: none !important; } .bottone-cerca, .bottone-indice, .bottone-account { padding: 0.4rem 0.5rem; } .testata-interna { gap: 0.5rem; } }
 @media (max-width: 24rem) { .marchio > span { display: none; } }
 .marchio { display: inline-flex; align-items: center; gap: 0.5rem; }
-.marchio .logo { width: 28px; height: 28px; flex: none; border-radius: 7px; }
+.marchio .logo { width: 32px; height: 32px; flex: none; }
 .marchio span { overflow: hidden; text-overflow: ellipsis; }
 .materia-corrente { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; color: var(--accento); text-decoration: none; padding: 0.2rem 0.55rem; border: 1px solid color-mix(in srgb, var(--accento) 40%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accento) 8%, transparent); white-space: nowrap; }
 .testata::after { content: ''; display: block; height: 3px; background: var(--accento); }
