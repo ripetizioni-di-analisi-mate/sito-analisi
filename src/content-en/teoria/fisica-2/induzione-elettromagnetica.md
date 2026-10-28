@@ -8,7 +8,7 @@ sommario: How a change in the magnetic flux linked with a circuit generates an e
 Throughout this topic the circuits are in vacuum (or in air), and the currents vary slowly enough that the laws of direct-current circuits can be applied at every instant (quasi-static regime).
 
 :::richiamo{titolo="Flux of a vector field"}
-The flux of a field $\vec{F}$ through an oriented surface $S$ with unit normal $\hat{n}$ is $\displaystyle\iint_S \vec{F} \cdot \hat{n}\,dS$. If the field is uniform and the surface is flat with area $A$, the flux equals $F A\cos\theta$, where $\theta$ is the angle between $\vec{F}$ and $\hat{n}$. See the Analisi 2 topic on surfaces, fluxes, and the theorems of Gauss and Stokes.
+The flux of a field $\vec{F}$ through an oriented surface $S$ with unit normal $\hat{n}$ is $\displaystyle\iint_S \vec{F} \cdot \hat{n}\,dS$. If the field is uniform and the surface is flat with area $A$, the flux equals $F A\cos\theta$, where $\theta$ is the angle between $\vec{F}$ and $\hat{n}$. See the Mathematical Analysis 2 topic on surfaces, fluxes, and the theorems of Gauss and Stokes.
 :::
 
 :::definizione{#flusso-concatenato titolo="Magnetic flux linkage"}
@@ -123,7 +123,7 @@ The equation $y' + a\,y = b$, with $a \neq 0$ and $b$ constants, with the initia
 $$
 y(t) = \frac{b}{a} + \left( y_0 - \frac{b}{a} \right) e^{-a t} .
 $$
-If $a > 0$, the solution tends to the value $\dfrac{b}{a}$ as $t \to +\infty$. See the Analisi 1 topic on differential equations.
+If $a > 0$, the solution tends to the value $\dfrac{b}{a}$ as $t \to +\infty$. See the Mathematical Analysis 1 topic on differential equations.
 :::
 
 ::::teorema{#sbarretta-su-binari titolo="Rod launched on rails"}
@@ -186,7 +186,7 @@ By Lenz's law the magnetic forces on the current-carrying coil oppose the rotati
 ## Induced electric field
 
 :::richiamo{titolo="Circulation and Stokes' theorem"}
-The circulation of a field $\vec{F}$ along a closed curve $\gamma$ is the line integral $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{\ell}$. By Stokes' theorem, if $S$ is a surface with boundary $\gamma$ and consistent orientation, $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{\ell} = \iint_S (\nabla \times \vec{F}) \cdot \hat{n}\,dS$. See the Analisi 2 topics on curves and line integrals and on surfaces, fluxes, and the theorems of Gauss and Stokes.
+The circulation of a field $\vec{F}$ along a closed curve $\gamma$ is the line integral $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{\ell}$. By Stokes' theorem, if $S$ is a surface with boundary $\gamma$ and consistent orientation, $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{\ell} = \iint_S (\nabla \times \vec{F}) \cdot \hat{n}\,dS$. See the Mathematical Analysis 2 topics on curves and line integrals and on surfaces, fluxes, and the theorems of Gauss and Stokes.
 :::
 
 :::teorema{#faraday-forma-integrale titolo="Faraday's law in integral form"}

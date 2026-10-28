@@ -97,7 +97,7 @@ By **Snell's law** $\sin\theta_2 = \dfrac{n_1}{n_2}\sin\theta_1$, with $\dfrac{n
 ::::
 
 :::richiamo{titolo="Small-angle approximation"}
-For $\theta$ in radians, from the Taylor expansions $\sin\theta = \theta + o(\theta^2)$, $\tan\theta = \theta + o(\theta^2)$ and $\cos\theta = 1 + o(\theta)$ there follow, for small $\theta$, the approximations $\sin\theta \approx \tan\theta \approx \theta$ and $\cos\theta \approx 1$. See the Analisi 1 topic on differential calculus and Taylor.
+For $\theta$ in radians, from the Taylor expansions $\sin\theta = \theta + o(\theta^2)$, $\tan\theta = \theta + o(\theta^2)$ and $\cos\theta = 1 + o(\theta)$ there follow, for small $\theta$, the approximations $\sin\theta \approx \tan\theta \approx \theta$ and $\cos\theta \approx 1$. See the Mathematical Analysis 1 topic on differential calculus and Taylor.
 :::
 
 ::::teorema{#profondita-apparente titolo="Apparent depth"}

@@ -80,7 +80,7 @@ If $r \le R$, the flux is $\Phi_E = E\,\pi r^2$, hence $2\pi r\, B = \mu_0 \vare
 ## Maxwell's equations
 
 :::richiamo{titolo="Flux and circulation"}
-The flux of a vector field $\vec{F}$ through an oriented surface $S$ with unit normal $\hat{n}$ is the surface integral $\displaystyle\iint_S \vec{F} \cdot \hat{n}\, dA$; for a closed surface one writes $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA$, with $\hat{n}$ pointing outward. The circulation of $\vec{F}$ along an oriented closed curve $\gamma$ is the line integral $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l}$. See the Analisi 2 topics on curves and line integrals and on surfaces, fluxes and the theorems of Gauss and Stokes.
+The flux of a vector field $\vec{F}$ through an oriented surface $S$ with unit normal $\hat{n}$ is the surface integral $\displaystyle\iint_S \vec{F} \cdot \hat{n}\, dA$; for a closed surface one writes $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA$, with $\hat{n}$ pointing outward. The circulation of $\vec{F}$ along an oriented closed curve $\gamma$ is the line integral $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l}$. See the Mathematical Analysis 2 topics on curves and line integrals and on surfaces, fluxes and the theorems of Gauss and Stokes.
 :::
 
 :::teorema{#equazioni-di-maxwell titolo="Maxwell's equations in integral form"}
@@ -123,7 +123,7 @@ A varying magnetic field generates an electric field, and a varying electric fie
 ## Local form of Maxwell's equations
 
 :::richiamo{titolo="Divergence theorem and Stokes' theorem"}
-Let $\vec{F}$ be a vector field of class $C^1$. For a region $V$ bounded by a closed surface $S$ with outward normal, $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA = \iiint_V \nabla \cdot \vec{F}\, dV$, and for an oriented surface $\Sigma$ with boundary $\gamma$ oriented by the right-hand rule, $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l} = \iint_\Sigma \left( \nabla \times \vec{F} \right) \cdot \hat{n}\, dA$. See the Analisi 2 topic on surfaces, fluxes and the theorems of Gauss and Stokes.
+Let $\vec{F}$ be a vector field of class $C^1$. For a region $V$ bounded by a closed surface $S$ with outward normal, $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA = \iiint_V \nabla \cdot \vec{F}\, dV$, and for an oriented surface $\Sigma$ with boundary $\gamma$ oriented by the right-hand rule, $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l} = \iint_\Sigma \left( \nabla \times \vec{F} \right) \cdot \hat{n}\, dA$. See the Mathematical Analysis 2 topic on surfaces, fluxes and the theorems of Gauss and Stokes.
 :::
 
 ::::teorema{#forma-locale-maxwell titolo="Maxwell's equations in local form"}
@@ -172,7 +172,7 @@ in which the electric field points along $y$ and the magnetic field along $z$. F
 :::
 
 :::richiamo{titolo="Schwarz's theorem"}
-If a function $f(x,t)$ has continuous mixed second partial derivatives, then $\dfrac{\partial^2 f}{\partial x\, \partial t} = \dfrac{\partial^2 f}{\partial t\, \partial x}$. See the Analisi 2 topic on differential calculus in several variables.
+If a function $f(x,t)$ has continuous mixed second partial derivatives, then $\dfrac{\partial^2 f}{\partial x\, \partial t} = \dfrac{\partial^2 f}{\partial t\, \partial x}$. See the Mathematical Analysis 2 topic on differential calculus in several variables.
 :::
 
 ::::teorema{#equazione-delle-onde titolo="Wave equation"}

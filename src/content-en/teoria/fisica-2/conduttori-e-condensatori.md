@@ -24,7 +24,7 @@ Suppose that at an interior point $P$ the field is $\vec{E} \neq \vec{0}$. A fre
 ::::
 
 :::richiamo{titolo="Gauss's law"}
-The flux of the electric field through a closed surface $S$ equals the charge $Q_{\text{int}}$ enclosed by $S$ divided by $\varepsilon_0$: $\Phi_E = \displaystyle\oint_S \vec{E} \cdot \hat{n}\,dA = \dfrac{Q_{\text{int}}}{\varepsilon_0}$. See the topic on Gauss's law and, for surface integrals, the topic on surfaces and fluxes in Analysis 2.
+The flux of the electric field through a closed surface $S$ equals the charge $Q_{\text{int}}$ enclosed by $S$ divided by $\varepsilon_0$: $\Phi_E = \displaystyle\oint_S \vec{E} \cdot \hat{n}\,dA = \dfrac{Q_{\text{int}}}{\varepsilon_0}$. See the topic on Gauss's law and, for surface integrals, the topic on surfaces and fluxes in Mathematical Analysis 2.
 :::
 
 ::::teorema{#carica-sulla-superficie titolo="Charge on the surface of a conductor"}
@@ -40,7 +40,7 @@ Let $P$ be a point inside the material and let $S$ be a closed surface that encl
 ::::
 
 :::richiamo{titolo="Potential difference and electric field"}
-The electrostatic field is conservative, and for two points $A$ and $B$ we have $V_A - V_B = \displaystyle\int_A^B \vec{E} \cdot d\vec{\ell}$ along *any* path from $A$ to $B$. See the topic on the electric potential and, for line integrals, the topic on curves and line integrals in Analysis 2.
+The electrostatic field is conservative, and for two points $A$ and $B$ we have $V_A - V_B = \displaystyle\int_A^B \vec{E} \cdot d\vec{\ell}$ along *any* path from $A$ to $B$. See the topic on the electric potential and, for line integrals, the topic on curves and line integrals in Mathematical Analysis 2.
 :::
 
 ::::teorema{#conduttore-equipotenziale titolo="Equipotential conductor"}

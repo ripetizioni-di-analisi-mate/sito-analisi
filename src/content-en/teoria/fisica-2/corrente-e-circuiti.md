@@ -18,7 +18,7 @@ From the definition it follows that the charge crossing the section between the 
 :::
 
 :::richiamo{titolo="Flux of a vector field"}
-The flux of a vector field $\vec{J}$ through a surface $S$ oriented by the normal $\hat{n}$ is the surface integral $\displaystyle\iint_S \vec{J} \cdot \hat{n}\,dA$. See the topic on surfaces, fluxes and the theorems of Gauss and Stokes in Analysis 2.
+The flux of a vector field $\vec{J}$ through a surface $S$ oriented by the normal $\hat{n}$ is the surface integral $\displaystyle\iint_S \vec{J} \cdot \hat{n}\,dA$. See the topic on surfaces, fluxes and the theorems of Gauss and Stokes in Mathematical Analysis 2.
 :::
 
 :::definizione{#densita-di-corrente titolo="Current density"}
@@ -157,7 +157,7 @@ The two expressions follow from the absorbed power $P = \Delta V\, I$ by substit
 ## Sources and electromotive force
 
 :::richiamo{titolo="Circulation of the electrostatic field"}
-The electrostatic field is conservative: along every closed curve $\gamma$ we have $\displaystyle\oint_\gamma \vec{E} \cdot d\vec{\ell} = 0$, and the potential difference between two points does not depend on the path. See the topic on the electric potential and electrostatic energy, and for line integrals the topic on curves and line integrals in Analysis 2.
+The electrostatic field is conservative: along every closed curve $\gamma$ we have $\displaystyle\oint_\gamma \vec{E} \cdot d\vec{\ell} = 0$, and the potential difference between two points does not depend on the path. See the topic on the electric potential and electrostatic energy, and for line integrals the topic on curves and line integrals in Mathematical Analysis 2.
 :::
 
 :::definizione{#forza-elettromotrice titolo="Electromotive force"}
@@ -316,7 +316,7 @@ A capacitor of capacitance $C$ with charge $q$ on the plates has the voltage $\D
 :::
 
 :::richiamo{titolo="First-order linear differential equations"}
-The equation $y'(t) + a\,y(t) = b$, with $a \neq 0$ and $b$ constants, has general solution $y(t) = \dfrac{b}{a} + K e^{-a t}$, with $K \in \mathbb{R}$ fixed by the initial condition. See the topic on differential equations in Analysis 1.
+The equation $y'(t) + a\,y(t) = b$, with $a \neq 0$ and $b$ constants, has general solution $y(t) = \dfrac{b}{a} + K e^{-a t}$, with $K \in \mathbb{R}$ fixed by the initial condition. See the topic on differential equations in Mathematical Analysis 1.
 :::
 
 ::::teorema{#carica-condensatore titolo="Charging a capacitor"}

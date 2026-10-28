@@ -132,7 +132,7 @@ P(x) = (x - c)^m\, Q(x) \qquad \text{with } Q(c) \neq 0 ,
 $$
 that is, if $(x - c)^m$ divides $P$ and $(x - c)^{m + 1}$ does not. A root of multiplicity $1$ is called **simple**, of multiplicity $2$ **double**, of multiplicity $3$ triple. The multiplicity is found by dividing by $x - c$ until the quotient no longer has $c$ as a root: the number of exact divisions is $m$.
 
-The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is the **sign-preservation theorem**, found in the chapter on limits of Analysis 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
+The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is the **sign-preservation theorem**, found in the chapter on limits of Mathematical Analysis 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
 :::
 
 :::esempio

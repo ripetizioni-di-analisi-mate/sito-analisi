@@ -12,7 +12,7 @@ A capacitor of capacitance $C$ with charge $q$ on its positive plate has the vol
 :::
 
 :::richiamo{titolo="Equation of harmonic motion"}
-The second-order linear differential equation $\ddot{x} + \omega^2 x = 0$, with $\omega > 0$, has general solution $x(t) = A\cos(\omega t + \varphi)$, with $A$ and $\varphi$ constants fixed by the initial conditions. See the Analisi 1 topic on differential equations and the Fisica 1 topic on oscillations and harmonic motion.
+The second-order linear differential equation $\ddot{x} + \omega^2 x = 0$, with $\omega > 0$, has general solution $x(t) = A\cos(\omega t + \varphi)$, with $A$ and $\varphi$ constants fixed by the initial conditions. See the Mathematical Analysis 1 topic on differential equations and the Physics 1 topic on oscillations and harmonic motion.
 :::
 
 ::::teorema{#circuito-lc titolo="Oscillations of the LC circuit"}
@@ -73,13 +73,13 @@ The equation $L\ddot{q} + \dfrac{q}{C} = 0$ has the same form as the equation $m
 | potential energy $\dfrac{1}{2} k x^2$ | electric energy $\dfrac{q^2}{2C}$ |
 | damping coefficient $b$ | resistance $R$ |
 
-For example, the angular frequency $\sqrt{\dfrac{k}{m}}$ of the oscillator becomes $\sqrt{\dfrac{1}{LC}}$. Inductance plays the role of inertia, because it opposes changes in the current as mass opposes changes in velocity. See the Fisica 1 topic on oscillations and harmonic motion.
+For example, the angular frequency $\sqrt{\dfrac{k}{m}}$ of the oscillator becomes $\sqrt{\dfrac{1}{LC}}$. Inductance plays the role of inertia, because it opposes changes in the current as mass opposes changes in velocity. See the Physics 1 topic on oscillations and harmonic motion.
 :::
 
 ## Series RLC circuit and damped oscillations
 
 :::richiamo{titolo="Second-order linear equations with constant coefficients"}
-The equation $\ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = 0$, with $\gamma > 0$ and $\omega_0 > 0$, has characteristic equation $\lambda^2 + 2\gamma\lambda + \omega_0^2 = 0$, with roots $\lambda = -\gamma \pm \sqrt{\gamma^2 - \omega_0^2}$. If $\gamma < \omega_0$ the roots are complex conjugates, with real part $-\gamma$ and imaginary part $\pm\omega_s$, where $\omega_s = \sqrt{\omega_0^2 - \gamma^2}$, and the general solution is $A\,e^{-\gamma t}\cos(\omega_s t + \varphi)$; if $\gamma > \omega_0$ it is a combination of two real exponentials; if $\gamma = \omega_0$ it is $(c_1 + c_2 t)\,e^{-\gamma t}$. See the Analisi 1 topic on differential equations.
+The equation $\ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = 0$, with $\gamma > 0$ and $\omega_0 > 0$, has characteristic equation $\lambda^2 + 2\gamma\lambda + \omega_0^2 = 0$, with roots $\lambda = -\gamma \pm \sqrt{\gamma^2 - \omega_0^2}$. If $\gamma < \omega_0$ the roots are complex conjugates, with real part $-\gamma$ and imaginary part $\pm\omega_s$, where $\omega_s = \sqrt{\omega_0^2 - \gamma^2}$, and the general solution is $A\,e^{-\gamma t}\cos(\omega_s t + \varphi)$; if $\gamma > \omega_0$ it is a combination of two real exponentials; if $\gamma = \omega_0$ it is $(c_1 + c_2 t)\,e^{-\gamma t}$. See the Mathematical Analysis 1 topic on differential equations.
 :::
 
 ::::teorema{#circuito-rlc-libero titolo="Damped oscillations of the RLC circuit"}
@@ -218,7 +218,7 @@ The phasor makes operations on sinusoidal quantities with the same angular frequ
 :::
 
 :::richiamo{titolo="Exponential form of complex numbers"}
-For every real $\theta$ Euler's formula $e^{j\theta} = \cos\theta + j\sin\theta$ holds, and every nonzero complex number can be written as $z = |z|\,e^{j\theta}$. The product of two complex numbers has as modulus the product of the moduli and as argument the sum of the arguments; in particular, multiplying by $j = e^{j\frac{\pi}{2}}$ rotates a number by $\dfrac{\pi}{2}$ counterclockwise in the complex plane. In electrical engineering the imaginary unit is denoted by $j$, because the letter $i$ denotes the current. See the Analisi 1 topic on complex numbers.
+For every real $\theta$ Euler's formula $e^{j\theta} = \cos\theta + j\sin\theta$ holds, and every nonzero complex number can be written as $z = |z|\,e^{j\theta}$. The product of two complex numbers has as modulus the product of the moduli and as argument the sum of the arguments; in particular, multiplying by $j = e^{j\frac{\pi}{2}}$ rotates a number by $\dfrac{\pi}{2}$ counterclockwise in the complex plane. In electrical engineering the imaginary unit is denoted by $j$, because the letter $i$ denotes the current. See the Mathematical Analysis 1 topic on complex numbers.
 :::
 
 :::definizione{#impedenza-complessa titolo="Complex impedance"}
