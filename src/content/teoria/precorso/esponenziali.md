@@ -19,9 +19,9 @@ Su iniettività e monotonia si fondano tutti i metodi risolutivi di questo capit
 :::esempio{titolo="I due grafici di base"}
 Per $a = 2$ la funzione cresce; per $a = \dfrac{1}{2}$ decresce, poiché $\left(\dfrac{1}{2}\right)^{x} = 2^{-x}$.
 
-::grafico{f="2^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="y = 2^x: base maggiore di 1, funzione crescente"}
+::grafico{f="2^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="$y = 2^x$: base maggiore di $1$, funzione crescente"}
 
-::grafico{f="0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="y = (1/2)^x: base tra 0 e 1, funzione decrescente"}
+::grafico{f="0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="$y = \left(\dfrac{1}{2}\right)^x$: base tra $0$ e $1$, funzione decrescente"}
 :::
 
 ## Le regole delle potenze

@@ -75,7 +75,7 @@ Per $a = 2$ la funzione cresce; per $a = \dfrac{1}{2}$ decresce.
 
 ::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log₂ x: base maggiore di 1, funzione crescente"}
 
-::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log in base 1/2 di x: base tra 0 e 1, funzione decrescente"}
+::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_{\frac{1}{2}} x$: base tra $0$ e $1$, funzione decrescente"}
 :::
 
 ## Condizioni di esistenza

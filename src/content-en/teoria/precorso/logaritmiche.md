@@ -73,7 +73,7 @@ For $a = 2$ the function increases; for $a = \dfrac{1}{2}$ it decreases.
 
 ::grafico{f="log(x)/log(2)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log₂ x: base greater than 1, increasing function"}
 
-::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="y = log to base 1/2 of x: base between 0 and 1, decreasing function"}
+::grafico{f="log(x)/log(0.5)" xmin=-1 xmax=8 ymin=-4 ymax=4 asintoti="x=0" titolo="$y = \log_{\frac{1}{2}} x$: base between $0$ and $1$, decreasing function"}
 :::
 
 ## Domain conditions

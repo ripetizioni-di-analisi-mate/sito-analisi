@@ -30,7 +30,7 @@ La nozione è **locale**: la stessa equazione può definire funzioni diverse vic
 :::esempio{titolo="La circonferenza non è un grafico, ma lo è localmente"}
 Per $F(x, y) = x^2 + y^2 - 1$ l'insieme degli zeri è la circonferenza unitaria, che **non è il grafico** di alcuna funzione $y = \varphi(x)$: a ogni $x \in (-1, 1)$ corrispondono *due* punti della curva. Vicino al punto $\left( \dfrac{3}{5}, \dfrac{4}{5} \right)$ la curva coincide con il grafico di $\varphi(x) = \sqrt{1 - x^2}$; vicino a $\left( \dfrac{3}{5}, -\dfrac{4}{5} \right)$ con il grafico di $-\sqrt{1 - x^2}$. Vicino a $(1, 0)$ **nessuna funzione** di $x$ descrive la curva, perché ogni intorno di $(1, 0)$ contiene, per uno stesso valore $x < 1$, due punti della circonferenza.
 
-::grafico{f="sqrt(1-x*x)" xmin=-1.6 xmax=1.6 ymin=-0.3 ymax=1.4 punti="0.6,0.8" titolo="Il ramo superiore della circonferenza: vicino a (3/5, 4/5) la curva è il grafico di y = √(1 − x²)"}
+::grafico{f="sqrt(1-x*x)" xmin=-1.6 xmax=1.6 ymin=-0.3 ymax=1.4 punti="0.6,0.8" titolo="Il ramo superiore della circonferenza: vicino a $\left(\dfrac{3}{5}, \dfrac{4}{5}\right)$ la curva è il grafico di $y = \sqrt{1 - x^2}$"}
 :::
 
 :::osservazione

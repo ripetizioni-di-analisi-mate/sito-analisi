@@ -19,9 +19,9 @@ For $a > 0$, $a \neq 1$, the **exponential function** with base $a$ assigns to *
 :::esempio{titolo="The two basic graphs"}
 For $a = 2$ the function increases; for $a = \dfrac{1}{2}$ it decreases, since $\left(\dfrac{1}{2}\right)^{x} = 2^{-x}$.
 
-::grafico{f="2^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="y = 2^x: base greater than 1, increasing function"}
+::grafico{f="2^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="$y = 2^x$: base greater than $1$, increasing function"}
 
-::grafico{f="0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="y = (1/2)^x: base between 0 and 1, decreasing function"}
+::grafico{f="0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 asintoti="y=0" titolo="$y = \left(\dfrac{1}{2}\right)^x$: base between $0$ and $1$, decreasing function"}
 :::
 
 ## The rules of powers
