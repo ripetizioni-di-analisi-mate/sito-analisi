@@ -38,7 +38,7 @@ La seconda equazione è $x^2 + x - 2 = 0$, con radici $x = 1$ e $x = -2$. Poich�
 :::attenzione
 Elevare al quadrato entrambi i membri senza la condizione $B \geq 0$ introduce **soluzioni estranee**. Da $\sqrt{x} = x - 2$, elevando al quadrato, si ottiene $x = x^2 - 4x + 4$, cioè $x^2 - 5x + 4 = 0$, con radici $x = 1$ e $x = 4$. Per $x = 1$ il primo membro vale $\sqrt{1} = 1$ e il secondo vale $1 - 2 = -1$, quindi $x = 1$ non risolve l'equazione di partenza; la sola soluzione è $x = 4$. Il quadrato cancella i segni, perciò l'uguaglianza tra i quadrati *non* garantisce l'uguaglianza tra i membri.
 
-::grafico{f="sqrt(x);x-2;-sqrt(x)" xmin=-1 xmax=7 ymin=-3 ymax=4 punti="4,2,pieno;1,-1,vuoto" etichette="5.3,3,y = √x;4.6,-2.7,y = −√x" titolo="La retta $y = x - 2$ incontra $y = \sqrt{x}$ solo in $x = 4$; in $x = 1$ incontra $y = -\sqrt{x}$, in rosso"}
+::grafico{f="sqrt(x);x-2;-sqrt(x)" xmin=-1 xmax=7 ymin=-3 ymax=4 punti="4,2,pieno;1,-1,vuoto" etichette="5.9,2.9,y = √x;4.6,-2.7,y = −√x" titolo="La retta $y = x - 2$ incontra $y = \sqrt{x}$ solo in $x = 4$; in $x = 1$ incontra $y = -\sqrt{x}$, in rosso"}
 :::
 
 ## L'equazione con due radici
@@ -147,5 +147,5 @@ senza condizioni di esistenza e senza casi sul segno dei membri.
 :::esempio
 $\sqrt[3]{x - 3} = -2$ equivale a $x - 3 = -8$, quindi $x = -5$; il controllo dà $\sqrt[3]{-8} = -2$. L'equazione analoga con la radice quadrata, $\sqrt{x - 3} = -2$, **non ha soluzioni**, perché una radice di indice pari non è *mai* negativa.
 
-::grafico{f="cbrt(x-3);-2;sqrt(x-3)" xmin=-7 xmax=9 ymin=-3 ymax=3 punti="-5,-2,pieno" etichette="5.5,2.3,y = √(x − 3);5.5,0.6,y = ∛(x − 3)" titolo="$y = \sqrt[3]{x - 3}$ vale $-2$ in $x = -5$; $y = \sqrt{x - 3}$, in rosso, resta sopra l'asse $x$"}
+::grafico{f="cbrt(x-3);-2;sqrt(x-3)" xmin=-7 xmax=9 ymin=-3 ymax=3 punti="-5,-2,pieno" etichette="5.5,2.3,y = √(x − 3);5.5,0.6,y = ∛(x − 3)" titolo="$y = \sqrt[3]{x - 3}$ vale $-2$ in $x = -5$; $y = \sqrt{x - 3}$, in rosso, non scende mai sotto l'asse $x$"}
 :::

@@ -23,9 +23,9 @@ Per questa periodicità un'equazione goniometrica che ha una soluzione ne ha **i
 $$
 \tan x = \frac{\sin x}{\cos x}, \qquad \text{per } \cos x \neq 0, \ \text{cioè } x \neq \frac{\pi}{2} + n\pi, \ n \in \mathbb{Z} .
 $$
-La tangente è **periodica** di periodo $\pi$: aggiungendo $\pi$ all'angolo, seno e coseno cambiano entrambi di segno, quindi il loro rapporto **non cambia**. Sulla circonferenza goniometrica $\tan x$ è l'ordinata del punto in cui la retta per l'origine e per $P$ interseca la retta verticale di equazione $x = 1$.
+La tangente è **periodica** di periodo $\pi$: aggiungendo $\pi$ all'angolo, seno e coseno cambiano entrambi di segno, quindi il loro rapporto **non cambia**. Sulla circonferenza goniometrica $\tan x$ è l'ordinata del punto in cui la retta per l'origine e per $P$ interseca la retta tangente alla circonferenza nel punto $(1, 0)$.
 
-::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.6 ymin=-1.3 ymax=1.4 segmenti="1,-1.3,1,1.4;0,0,1,1" vettori="1,0,1,1,tan x" punti="0.7071,0.7071,pieno,P;1,1,pieno,T" titolo="$\tan x$ è l'ordinata del punto $T$ in cui la retta $OP$ incontra la retta $x = 1$; qui $x = \dfrac{\pi}{4}$ e $\tan x = 1$"}
+::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.6 ymin=-1.3 ymax=1.4 segmenti="1,-1.3,1,1.4;0,0,1,1" vettori="1,0,1,1,tan x" punti="0.7071,0.7071,pieno,P;1,1,pieno,T" titolo="$\tan x$ è l'ordinata del punto $T$ in cui la retta $OP$ incontra la retta tangente alla circonferenza in $(1, 0)$; qui $x = \dfrac{\pi}{4}$ e $\tan x = 1$"}
 :::
 
 :::definizione{#valori-notevoli titolo="Valori notevoli"}
@@ -97,9 +97,9 @@ $$
 :::osservazione
 Il grafico del seno è la **sinusoide**: in un periodo parte da $0$, sale fino a $1$ in $\dfrac{\pi}{2}$, torna a $0$ in $\pi$, scende fino a $-1$ in $\dfrac{3\pi}{2}$ e risale a $0$ in $2\pi$. Il grafico del coseno ha la stessa forma, traslato di $\dfrac{\pi}{2}$ verso sinistra, poiché $\cos x = \sin\left(x + \dfrac{\pi}{2}\right)$.
 
-::grafico{f="sin(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="y = sin x su due periodi"}
+::grafico{f="sin(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \sin x$ su due periodi"}
 
-::grafico{f="cos(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="y = cos x su due periodi"}
+::grafico{f="cos(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \cos x$ su due periodi"}
 
 Dal grafico si leggono le soluzioni delle equazioni elementari: per $|k| < 1$ la retta orizzontale $y = k$ interseca la sinusoide in **due punti** per ogni periodo, quindi le soluzioni formano **due famiglie**.
 :::
@@ -177,7 +177,7 @@ Un'equazione della forma
 $$
 a\sin^2 x + b\sin x \cos x + c\cos^2 x = 0
 $$
-si dice **omogenea di secondo grado** in seno e coseno. Se $a \neq 0$, i punti con $\cos x = 0$ *non* sono soluzioni: per essi $\sin^2 x = 1$ e il primo membro vale $a \neq 0$. Si può quindi dividere per $\cos^2 x$, e si ottiene l'equazione di secondo grado
+si dice **omogenea di secondo grado** in seno e coseno. Se $a \neq 0$, i punti con $\cos x = 0$ *non* sono soluzioni, perché per essi $\sin^2 x = 1$ e il primo membro vale $a \neq 0$. Si può quindi dividere per $\cos^2 x$, e si ottiene l'equazione di secondo grado
 $$
 a\tan^2 x + b\tan x + c = 0 ,
 $$
@@ -206,7 +206,7 @@ x + \frac{\pi}{3} = \frac{\pi}{6} + 2n\pi \quad \text{oppure} \quad x + \frac{\p
 $$
 da cui $x = -\dfrac{\pi}{6} + 2n\pi$ oppure $x = \dfrac{\pi}{2} + 2n\pi$.
 
-::grafico{f="sin(x)+sqrt(3)*cos(x);1" xmin=-3.5 xmax=6.5 ymin=-2.5 ymax=2.5 punti="-0.5236,1,pieno,−π/6;1.5708,1,pieno,π/2;5.7596,1,pieno,11π/6" titolo="$y = \sin x + \sqrt{3}\cos x = 2\sin\left(x + \dfrac{\pi}{3}\right)$ oscilla tra $-2$ e $2$ e incontra la retta $y = 1$ in $-\dfrac{\pi}{6}$ e $\dfrac{\pi}{2}$, a meno di $2\pi$"}
+::grafico{f="sin(x)+sqrt(3)*cos(x);1" xmin=-3.5 xmax=6.5 ymin=-2.5 ymax=2.5 punti="-0.5236,1,pieno;1.5708,1,pieno,π/2;5.7596,1,pieno,11π/6" etichette="-1.75,1.3,−π/6" titolo="$y = \sin x + \sqrt{3}\cos x = 2\sin\left(x + \dfrac{\pi}{3}\right)$ oscilla tra $-2$ e $2$ e incontra la retta $y = 1$ in $-\dfrac{\pi}{6}$ e $\dfrac{\pi}{2}$, a meno di $2\pi$"}
 :::
 
 :::attenzione
@@ -223,7 +223,7 @@ La disequazione $\sin x > k$ con $|k| < 1$ si legge sulla circonferenza goniomet
 3. l'arco i cui punti hanno ordinata maggiore di $k$ dà l'intervallo delle soluzioni;
 4. la soluzione generale si ottiene aggiungendo $2n\pi$ agli estremi dell'intervallo.
 
-Per $\cos x > k$ il procedimento è lo stesso con l'ascissa al posto dell'ordinata. Se $k \geq 1$ la disequazione $\sin x > k$ **non ha soluzioni**, perché il seno non supera $1$; se $k < -1$ *ogni* $x \in \mathbb{R}$ è soluzione.
+Per $\cos x > k$ il procedimento è lo stesso con l'ascissa al posto dell'ordinata. Se $k \geq 1$ la disequazione $\sin x > k$ **non ha soluzioni**, perché il seno non supera $1$; se $k = -1$ sono soluzioni tutti gli $x$ tranne $x = \dfrac{3\pi}{2} + 2n\pi$, dove il seno vale $-1$; se $k < -1$ *ogni* $x \in \mathbb{R}$ è soluzione.
 :::
 
 :::esempio

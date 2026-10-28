@@ -21,7 +21,7 @@ Because of this periodicity, a trigonometric equation that has one solution has 
 $$
 \tan x = \frac{\sin x}{\cos x}, \qquad \text{for } \cos x \neq 0, \ \text{that is } x \neq \frac{\pi}{2} + n\pi, \ n \in \mathbb{Z} .
 $$
-The **tangent** is periodic with period $\pi$: adding $\pi$ to the angle changes the sign of *both* sine and cosine, therefore their ratio does **not change**. On the unit circle, $\tan x$ is the ordinate of the point where the line through the origin and $P$ intersects the vertical line of equation $x = 1$.
+The **tangent** is periodic with period $\pi$: adding $\pi$ to the angle changes the sign of *both* sine and cosine, therefore their ratio does **not change**. On the unit circle, $\tan x$ is the ordinate of the point where the line through the origin and $P$ intersects the line tangent to the circle at the point $(1, 0)$.
 :::
 
 :::definizione{#valori-notevoli titolo="Special values"}
@@ -91,9 +91,9 @@ $$
 :::osservazione
 The graph of the sine is the **sine wave**: over one period it starts at $0$, rises to $1$ at $\dfrac{\pi}{2}$, returns to $0$ at $\pi$, falls to $-1$ at $\dfrac{3\pi}{2}$ and rises back to $0$ at $2\pi$. The graph of the cosine has the **same shape**, shifted $\dfrac{\pi}{2}$ to the left, since $\cos x = \sin\left(x + \dfrac{\pi}{2}\right)$.
 
-::grafico{f="sin(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="y = sin x over two periods"}
+::grafico{f="sin(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \sin x$ over two periods"}
 
-::grafico{f="cos(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="y = cos x over two periods"}
+::grafico{f="cos(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \cos x$ over two periods"}
 
 The solutions of the elementary equations can be read from the graph: for $|k| < 1$ the horizontal line $y = k$ intersects the sine wave at two points in each period, therefore the solutions form **two families**.
 :::
@@ -169,7 +169,7 @@ An equation of the form
 $$
 a\sin^2 x + b\sin x \cos x + c\cos^2 x = 0
 $$
-is called **homogeneous of second degree** in sine and cosine. If $a \neq 0$, the points with $\cos x = 0$ are *not* solutions: for them $\sin^2 x = 1$ and the left-hand side equals $a \neq 0$. One can therefore **divide by** $\cos^2 x$, obtaining the quadratic equation
+is called **homogeneous of second degree** in sine and cosine. If $a \neq 0$, the points with $\cos x = 0$ are *not* solutions, because for them $\sin^2 x = 1$ and the left-hand side equals $a \neq 0$. One can therefore **divide by** $\cos^2 x$, obtaining the quadratic equation
 $$
 a\tan^2 x + b\tan x + c = 0 ,
 $$
@@ -213,7 +213,7 @@ The inequality $\sin x > k$ with $|k| < 1$ is read on the **unit circle**: the s
 3. the arc whose points have ordinate greater than $k$ gives the interval of solutions;
 4. the general solution is obtained by adding $2n\pi$ to the endpoints of the interval.
 
-For $\cos x > k$ the procedure is the same, with the abscissa in place of the ordinate. If $k \geq 1$ the inequality $\sin x > k$ has **no solutions**, because the sine does not exceed $1$; if $k < -1$ *every* $x \in \mathbb{R}$ is a solution.
+For $\cos x > k$ the procedure is the same, with the abscissa in place of the ordinate. If $k \geq 1$ the inequality $\sin x > k$ has **no solutions**, because the sine does not exceed $1$; if $k = -1$ all $x$ are solutions except $x = \dfrac{3\pi}{2} + 2n\pi$, where the sine equals $-1$; if $k < -1$ *every* $x \in \mathbb{R}$ is a solution.
 :::
 
 :::esempio

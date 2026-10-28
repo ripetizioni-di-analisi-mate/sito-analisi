@@ -12,7 +12,7 @@ $$
 $$
 Il vettore $\vec{n}$ si chiama **vettore normale** al piano. Un piano è quindi individuato da un punto e da una direzione ortogonale; poiché la condizione $\vec{n} \cdot \overrightarrow{P_0 P} = 0$ non cambia se si moltiplica $\vec{n}$ per un numero non nullo, il vettore normale è definito a meno di un fattore. Per il prodotto scalare e l'ortogonalità si rimanda all'argomento sui vettori.
 
-::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1,P₀P;1,1,0.5,2.5,P₀Q" punti="1,1,pieno,P₀;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$, di vettore normale $\vec{n} = (1, 0, 1)$: il vettore $\overrightarrow{P_0 P}$ con $P \in \pi$ è ortogonale a $\vec{n}$, mentre per il punto $Q$ fuori dal piano $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
+::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1;1,1,0.5,2.5,P₀Q" punti="1,1,pieno,P₀;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π;2.2,0.2,P₀P" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$, di vettore normale $\vec{n} = (1, 0, 1)$: il vettore $\overrightarrow{P_0 P}$ con $P \in \pi$ è ortogonale a $\vec{n}$, mentre per il punto $Q$ fuori dal piano $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
 
 :::
 
@@ -154,7 +154,7 @@ $$
 cioè se e solo se è nullo il determinante della matrice che ha per righe le componenti di $\overrightarrow{AB}$, $\vec{v}$ e $\vec{w}$. Il criterio stabilisce con un determinante di ordine $3$ se due rette sono sghembe, senza cercare i punti comuni.
 
 :::dimostrazione
-Se $\vec{v}$ e $\vec{w}$ sono paralleli, il prodotto vettoriale $\vec{v} \times \vec{w}$ è nullo e quindi il prodotto misto è nullo; d'altra parte due rette parallele sono complanari, perciò in questo caso l'equivalenza vale. Siano allora $\vec{v}$ e $\vec{w}$ non paralleli. Se le rette stanno in un piano $\pi$, i vettori $\overrightarrow{AB}$, $\vec{v}$, $\vec{w}$ sono paralleli a $\pi$, quindi sono complanari e il loro prodotto misto è nullo per il **criterio di complanarità** dei vettori. Viceversa, supponiamo il prodotto misto nullo e sia $\pi$ il piano per $A$ con vettore normale $\vec{n} = \vec{v} \times \vec{w}$, che è non nullo. Il piano contiene $r$, poiché $A \in \pi$ e $\vec{n} \cdot \vec{v} = 0$. Il piano contiene anche $B$, poiché $\vec{n} \cdot \overrightarrow{AB} = 0$, e poiché $\vec{n} \cdot \vec{w} = 0$ contiene tutta la retta $s$ per il teorema sulla posizione reciproca di una retta e un piano. Quindi le rette sono complanari.
+Se $\vec{v}$ e $\vec{w}$ sono paralleli, il prodotto vettoriale $\vec{v} \times \vec{w}$ è nullo e quindi il prodotto misto è nullo; d'altra parte due rette parallele sono complanari, perciò in questo caso l'equivalenza vale. Siano allora $\vec{v}$ e $\vec{w}$ non paralleli. Se le rette stanno in un piano $\pi$, i vettori $\overrightarrow{AB}$, $\vec{v}$, $\vec{w}$ sono paralleli a $\pi$, quindi sono complanari e il loro prodotto misto è nullo per il **criterio di complanarità** dei vettori. Viceversa, si supponga nullo il prodotto misto e sia $\pi$ il piano per $A$ con vettore normale $\vec{n} = \vec{v} \times \vec{w}$, che è non nullo. Il piano contiene $r$, poiché $A \in \pi$ e $\vec{n} \cdot \vec{v} = 0$. Il piano contiene anche $B$, poiché $\vec{n} \cdot \overrightarrow{AB} = 0$, e poiché $\vec{n} \cdot \vec{w} = 0$ contiene tutta la retta $s$ per il teorema sulla posizione reciproca di una retta e un piano. Quindi le rette sono complanari.
 :::
 ::::
 
@@ -193,7 +193,7 @@ $$
 $$
 Nella formula compare il *seno*, perché il prodotto scalare misura l'angolo con la normale. Per $\vec{v} = (1, 0, 1)$ e il piano $x + y = 2$, con $\vec{n} = (1, 1, 0)$, si ha $\sin\theta = \dfrac{1}{2}$, quindi $\theta = \dfrac{\pi}{6}$.
 
-::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2,v" etichette="1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : z = 0$ e della retta $r$ per l'origine con $\vec{v} = (2, 0, 1)$: $r$ forma con $\pi$ l'angolo $\theta$ e con $\vec{n} = (0, 0, 1)$ l'angolo $\dfrac{\pi}{2} - \theta$"}
+::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2" etichette="1.0,0.85,v;1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : z = 0$ e della retta $r$ per l'origine con $\vec{v} = (2, 0, 1)$: $r$ forma con $\pi$ l'angolo $\theta$ e con $\vec{n} = (0, 0, 1)$ l'angolo $\dfrac{\pi}{2} - \theta$"}
 
 :::
 
@@ -227,7 +227,7 @@ d(P_1, \pi) = \frac{|a x_1 + b y_1 + c z_1 + d|}{\sqrt{a^2 + b^2 + c^2}} ,
 $$
 e il minimo è raggiunto nel piede $H$ della perpendicolare a $\pi$ condotta da $P_1$. La formula è l'analoga di quella della distanza di un punto da una retta nel piano: al numeratore si sostituiscono le coordinate del punto nel primo membro dell'equazione, al denominatore c'è la norma del vettore normale. Per $P_1 = (2, 1, -1)$ e $\pi : x + 2y + 2z - 6 = 0$ si ottiene $d = \dfrac{|2 + 2 - 2 - 6|}{3} = \dfrac{4}{3}$.
 
-::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno,P₀;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$ e del punto $P_1 = (3, 0, 3)$: la distanza $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ è il valore assoluto della componente di $\overrightarrow{P_0 P_1}$ lungo $\vec{n} = (1, 0, 1)$"}
+::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π;2.45,-1.45,P₀" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Sezione con il piano $y = 0$ del piano $\pi : x + z = 2$ e del punto $P_1 = (3, 0, 3)$: la distanza $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ è il valore assoluto della componente di $\overrightarrow{P_0 P_1}$ lungo $\vec{n} = (1, 0, 1)$"}
 
 :::dimostrazione
 Sia $\vec{n} = (a, b, c)$ e sia $H$ il punto in cui la retta per $P_1$ con vettore direttore $\vec{n}$ incontra $\pi$; tale punto esiste ed è unico per il teorema sulla posizione reciproca di una retta e un piano, poiché $\vec{n} \cdot \vec{n} \neq 0$. Per ogni $Q \in \pi$ il vettore $\overrightarrow{HQ}$ è ortogonale a $\vec{n}$, mentre $\overrightarrow{H P_1}$ è parallelo a $\vec{n}$, quindi per il **teorema di Pitagora**
@@ -249,7 +249,7 @@ d(P, r) = \frac{\|\overrightarrow{AP} \times \vec{v}\|}{\|\vec{v}\|} .
 $$
 In alternativa si trova il piede $H$ della perpendicolare, intersecando $r$ con il piano per $P$ ortogonale a $r$, e si calcola $\|\overrightarrow{HP}\|$; questo secondo metodo dà anche la proiezione di $P$ su $r$. Per $A = (1, 0, 0)$, $\vec{v} = (1, 2, 2)$ e $P = (2, 2, -1)$ si ha $\overrightarrow{AP} \times \vec{v} = (1, 2, -1) \times (1, 2, 2) = (6, -3, 0)$, di norma $3\sqrt{5}$, e poiché $\|\vec{v}\| = 3$ la distanza è $\sqrt{5}$.
 
-::grafico{f="1+0*x" area="((x+2)/2+1+3-abs((x+2)/2+1-3))/2;(x/2+2+abs(x/2))/2;-2;4" vettori="-2,1,0,1,v;-2,1,2,3,AP" segmenti="2,3,2,1" punti="-2,1,pieno,A;2,1,pieno,H;2,3,pieno,P" etichette="4.3,0.55,r" xmin=-2.8 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="Nel piano $z = 0$, la retta $r$ per $A = (-2, 1, 0)$ con $\vec{v} = (2, 0, 0)$ e il punto $P = (2, 3, 0)$: il parallelogramma costruito su $\vec{v}$ e $\overrightarrow{AP}$ ha base $\|\vec{v}\| = 2$ e altezza $d(P, r) = \|\overrightarrow{HP}\| = 2$"}
+::grafico{f="1+0*x" area="((x+2)/2+1+3-abs((x+2)/2+1-3))/2;(x/2+2+abs(x/2))/2;-2;4" vettori="-2,1,0,1,v;-2,1,2,3" segmenti="2,3,2,1" punti="-2,1,pieno;2,1,pieno,H;2,3,pieno,P" etichette="4.3,0.55,r;-0.6,2.2,AP;-2.6,1.2,A" xmin=-2.8 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="Nel piano $z = 0$, la retta $r$ per $A = (-2, 1, 0)$ con $\vec{v} = (2, 0, 0)$ e il punto $P = (2, 3, 0)$: il parallelogramma costruito su $\vec{v}$ e $\overrightarrow{AP}$ ha base $\|\vec{v}\| = 2$ e altezza $d(P, r) = \|\overrightarrow{HP}\| = 2$"}
 
 :::dimostrazione
 Si applicano i vettori $\vec{v}$ e $\overrightarrow{AP}$ nel punto $A$. Il parallelogramma che essi determinano ha area $\|\overrightarrow{AP} \times \vec{v}\|$, per il significato geometrico del prodotto vettoriale. La stessa area è il prodotto della base per l'altezza: la base è il lato $\vec{v}$, di lunghezza $\|\vec{v}\|$, che giace su $r$, e l'altezza relativa a questa base è la distanza di $P$ dalla retta $r$. Dividendo l'area per $\|\vec{v}\|$ si ottiene la formula.

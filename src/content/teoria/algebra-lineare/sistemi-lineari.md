@@ -205,7 +205,7 @@ Sia $M$ un minore di ordine $p$ di $A$, ottenuto dalle righe $i_1, \dots, i_p$ e
 :::
 
 :::teorema{#teorema-degli-orlati titolo="Teorema degli orlati (di Kronecker)"}
-Sia $A \in M_{m,n}(\mathbb{R})$ e sia $M$ un minore non nullo di ordine $r$ di $A$. Se tutti gli orlati di $M$ sono nulli, allora $\operatorname{rk} A = r$. Il teorema riduce il numero di determinanti da calcolare: al posto di tutti i minori di ordine $r + 1$ bastano i $(m - r)(n - r)$ orlati di un minore non nullo già trovato. Il procedimento parte da un elemento non nullo e sale di ordine; se un orlato è diverso da zero, il rango è almeno $r + 1$ e si ripete il controllo sugli orlati del nuovo minore. La dimostrazione usa la dipendenza lineare tra le righe e si rimanda all'argomento sugli spazi vettoriali.
+Sia $A \in M_{m,n}(\mathbb{R})$ e sia $M$ un minore non nullo di ordine $r$ di $A$. Se tutti gli orlati di $M$ sono nulli, allora $\operatorname{rk} A = r$. Il teorema riduce il numero di determinanti da calcolare: al posto di tutti i minori di ordine $r + 1$ bastano i $(m - r)(n - r)$ orlati di un minore non nullo già trovato. Il procedimento parte da un elemento non nullo e sale di ordine; se un orlato è diverso da zero, il rango è almeno $r + 1$ e si ripete il controllo sugli orlati del nuovo minore. La dimostrazione usa la dipendenza lineare tra le righe e si omette.
 :::
 
 :::esempio{titolo="Rango di una matrice 3 × 4"}

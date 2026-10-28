@@ -12,7 +12,7 @@ $$
 $$
 The vector $\vec{n}$ is called a **normal vector** to the plane. A plane is therefore determined by a point and an orthogonal direction; since the condition $\vec{n} \cdot \overrightarrow{P_0 P} = 0$ does not change when $\vec{n}$ is multiplied by a nonzero number, the normal vector is defined up to a factor. For the dot product and orthogonality, see the topic on vectors.
 
-::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1,P₀P;1,1,0.5,2.5,P₀Q" punti="1,1,pieno,P₀;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : x + z = 2$, with normal vector $\vec{n} = (1, 0, 1)$: the vector $\overrightarrow{P_0 P}$ with $P \in \pi$ is orthogonal to $\vec{n}$, while for the point $Q$ off the plane $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
+::grafico{f="2-x" vettori="1,1,2,2,n;1,1,3,-1;1,1,0.5,2.5,P₀Q" punti="1,1,pieno,P₀;3,-1,pieno,P;0.5,2.5,pieno,Q" etichette="3.45,-0.95,π;2.2,0.2,P₀P" xmin=-1 xmax=4 ymin=-2 ymax=3.2 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : x + z = 2$, with normal vector $\vec{n} = (1, 0, 1)$: the vector $\overrightarrow{P_0 P}$ with $P \in \pi$ is orthogonal to $\vec{n}$, while for the point $Q$ off the plane $\vec{n} \cdot \overrightarrow{P_0 Q} \neq 0$"}
 
 :::
 
@@ -193,7 +193,7 @@ $$
 $$
 The formula contains the *sine*, because the dot product measures the angle with the normal. For $\vec{v} = (1, 0, 1)$ and the plane $x + y = 2$, with $\vec{n} = (1, 1, 0)$, we have $\sin\theta = \dfrac{1}{2}$, hence $\theta = \dfrac{\pi}{6}$.
 
-::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2,v" etichette="1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : z = 0$ and of the line $r$ through the origin with $\vec{v} = (2, 0, 1)$: $r$ forms the angle $\theta$ with $\pi$ and the angle $\dfrac{\pi}{2} - \theta$ with $\vec{n} = (0, 0, 1)$"}
+::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2" etichette="1.0,0.85,v;1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : z = 0$ and of the line $r$ through the origin with $\vec{v} = (2, 0, 1)$: $r$ forms the angle $\theta$ with $\pi$ and the angle $\dfrac{\pi}{2} - \theta$ with $\vec{n} = (0, 0, 1)$"}
 
 :::
 
@@ -227,7 +227,7 @@ d(P_1, \pi) = \frac{|a x_1 + b y_1 + c z_1 + d|}{\sqrt{a^2 + b^2 + c^2}} ,
 $$
 and the minimum is attained at the foot $H$ of the perpendicular to $\pi$ drawn from $P_1$. The formula is the analogue of the one for the distance from a point to a line in the plane: in the numerator the coordinates of the point are substituted into the left-hand side of the equation, in the denominator there is the norm of the normal vector. For $P_1 = (2, 1, -1)$ and $\pi : x + 2y + 2z - 6 = 0$ we obtain $d = \dfrac{|2 + 2 - 2 - 6|}{3} = \dfrac{4}{3}$.
 
-::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno,P₀;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : x + z = 2$ and of the point $P_1 = (3, 0, 3)$: the distance $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ is the absolute value of the component of $\overrightarrow{P_0 P_1}$ along $\vec{n} = (1, 0, 1)$"}
+::grafico{f="2-x" vettori="3,-1,4,0,n;3,-1,3,3,P₀P₁" segmenti="3,3,1,1" punti="3,-1,pieno;1,1,pieno,H;3,3,pieno,P₁" etichette="-0.6,2.2,π;2.45,-1.45,P₀" xmin=-1 xmax=4.6 ymin=-1.8 ymax=3.6 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : x + z = 2$ and of the point $P_1 = (3, 0, 3)$: the distance $\|\overrightarrow{H P_1}\| = 2\sqrt{2}$ is the absolute value of the component of $\overrightarrow{P_0 P_1}$ along $\vec{n} = (1, 0, 1)$"}
 
 :::dimostrazione
 Let $\vec{n} = (a, b, c)$ and let $H$ be the point where the line through $P_1$ with direction vector $\vec{n}$ meets $\pi$; this point exists and is unique by the theorem on the relative position of a line and a plane, since $\vec{n} \cdot \vec{n} \neq 0$. For every $Q \in \pi$ the vector $\overrightarrow{HQ}$ is orthogonal to $\vec{n}$, while $\overrightarrow{H P_1}$ is parallel to $\vec{n}$, hence by the **Pythagorean theorem**
@@ -249,7 +249,7 @@ d(P, r) = \frac{\|\overrightarrow{AP} \times \vec{v}\|}{\|\vec{v}\|} .
 $$
 Alternatively, one finds the foot $H$ of the perpendicular, by intersecting $r$ with the plane through $P$ orthogonal to $r$, and computes $\|\overrightarrow{HP}\|$; this second method also gives the projection of $P$ onto $r$. For $A = (1, 0, 0)$, $\vec{v} = (1, 2, 2)$ and $P = (2, 2, -1)$ we have $\overrightarrow{AP} \times \vec{v} = (1, 2, -1) \times (1, 2, 2) = (6, -3, 0)$, with norm $3\sqrt{5}$, and since $\|\vec{v}\| = 3$ the distance is $\sqrt{5}$.
 
-::grafico{f="1+0*x" area="((x+2)/2+1+3-abs((x+2)/2+1-3))/2;(x/2+2+abs(x/2))/2;-2;4" vettori="-2,1,0,1,v;-2,1,2,3,AP" segmenti="2,3,2,1" punti="-2,1,pieno,A;2,1,pieno,H;2,3,pieno,P" etichette="4.3,0.55,r" xmin=-2.8 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="In the plane $z = 0$, the line $r$ through $A = (-2, 1, 0)$ with $\vec{v} = (2, 0, 0)$ and the point $P = (2, 3, 0)$: the parallelogram spanned by $\vec{v}$ and $\overrightarrow{AP}$ has base $\|\vec{v}\| = 2$ and height $d(P, r) = \|\overrightarrow{HP}\| = 2$"}
+::grafico{f="1+0*x" area="((x+2)/2+1+3-abs((x+2)/2+1-3))/2;(x/2+2+abs(x/2))/2;-2;4" vettori="-2,1,0,1,v;-2,1,2,3" segmenti="2,3,2,1" punti="-2,1,pieno;2,1,pieno,H;2,3,pieno,P" etichette="4.3,0.55,r;-0.6,2.2,AP;-2.6,1.2,A" xmin=-2.8 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="In the plane $z = 0$, the line $r$ through $A = (-2, 1, 0)$ with $\vec{v} = (2, 0, 0)$ and the point $P = (2, 3, 0)$: the parallelogram spanned by $\vec{v}$ and $\overrightarrow{AP}$ has base $\|\vec{v}\| = 2$ and height $d(P, r) = \|\overrightarrow{HP}\| = 2$"}
 
 :::dimostrazione
 Apply the vectors $\vec{v}$ and $\overrightarrow{AP}$ at the point $A$. The parallelogram they determine has area $\|\overrightarrow{AP} \times \vec{v}\|$, by the geometric meaning of the cross product. The same area is the product of base and height: the base is the side $\vec{v}$, of length $\|\vec{v}\|$, which lies on $r$, and the height relative to this base is the distance from $P$ to the line $r$. Dividing the area by $\|\vec{v}\|$ gives the formula.

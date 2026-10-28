@@ -205,7 +205,7 @@ Let $M$ be a minor of order $p$ of $A$, obtained from rows $i_1, \dots, i_p$ and
 :::
 
 :::teorema{#teorema-degli-orlati titolo="Bordered minors theorem (Kronecker)"}
-Let $A \in M_{m,n}(\mathbb{R})$ and let $M$ be a nonzero minor of order $r$ of $A$. If all the bordered minors of $M$ are zero, then $\operatorname{rk} A = r$. The theorem reduces the number of determinants to compute: instead of all the minors of order $r + 1$, the $(m - r)(n - r)$ bordered minors of a nonzero minor already found are enough. The procedure starts from a nonzero entry and goes up in order; if a bordered minor is nonzero, the rank is at least $r + 1$ and the check is repeated on the bordered minors of the new minor. The proof uses linear dependence among the rows, and for it see the topic on vector spaces.
+Let $A \in M_{m,n}(\mathbb{R})$ and let $M$ be a nonzero minor of order $r$ of $A$. If all the bordered minors of $M$ are zero, then $\operatorname{rk} A = r$. The theorem reduces the number of determinants to compute: instead of all the minors of order $r + 1$, the $(m - r)(n - r)$ bordered minors of a nonzero minor already found are enough. The procedure starts from a nonzero entry and goes up in order; if a bordered minor is nonzero, the rank is at least $r + 1$ and the check is repeated on the bordered minors of the new minor. The proof uses linear dependence among the rows and is omitted.
 :::
 
 :::esempio{titolo="Rank of a 3 × 4 matrix"}

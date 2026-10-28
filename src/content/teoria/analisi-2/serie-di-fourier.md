@@ -178,7 +178,7 @@ Nei punti in cui $f$ è continua i due limiti laterali coincidono con $f(x)$, qu
 ::grafico{f="sign(sin(x));4/pi*(sin(x)+sin(3*x)/3);4/pi*(sin(x)+sin(3*x)/3+sin(5*x)/5+sin(7*x)/7+sin(9*x)/9+sin(11*x)/11+sin(13*x)/13+sin(15*x)/15)" xmin=-7 xmax=7.3 ymin=-1.6 ymax=1.6 punti="-3.1416,0,pieno;0,0,pieno;3.1416,0,pieno" titolo="Onda quadra ($-1$ su $(-\pi, 0)$, $1$ su $(0, \pi)$) con le somme parziali fino a $\sin(3x)$ (tratteggiata) e fino a $\sin(15x)$ (rossa): nei salti ogni somma parziale vale $0$, la media dei limiti laterali"}
 :::
 
-:::esempio{titolo="Somma della serie di Σ 1/n²"}
+:::esempio{titolo="Somma della serie Σ 1/n²"}
 Il prolungamento $2\pi$-periodico di $x^2$ da $[-\pi, \pi]$ è continuo *anche* nei punti $\pm\pi$, perché i valori agli estremi coincidono: $(-\pi)^2 = \pi^2$. La funzione è regolare a tratti, quindi il **teorema di convergenza puntuale** si applica e in $x = \pi$ la serie converge a $f(\pi) = \pi^2$. Poiché $\cos(n\pi) = (-1)^n$, l'uguaglianza diventa
 $$
 \pi^2 = \frac{\pi^2}{3} + \sum_{n=1}^{\infty} \frac{4\,(-1)^{n}}{n^2} \, (-1)^n
@@ -223,7 +223,7 @@ $$
 L'integrale del quadrato della funzione, che in fisica rappresenta l'energia del segnale, uguaglia la **somma dei quadrati dei coefficienti**: l'energia si distribuisce sulle armoniche. La dimostrazione usa la completezza del sistema trigonometrico e si rimanda ai testi di riferimento. Nell'uso pratico l'uguaglianza fornisce somme di serie numeriche con i *quadrati* dei coefficienti, dove la convergenza puntuale fornisce le somme con i coefficienti alla prima potenza.
 :::
 
-:::esempio{titolo="Somma della serie di Σ 1/n⁴"}
+:::esempio{titolo="Somma della serie Σ 1/n⁴"}
 Per il prolungamento periodico di $f(x) = x^2$ su $[-\pi, \pi]$ i coefficienti sono $a_0 = \dfrac{2\pi^2}{3}$, $a_n = \dfrac{4(-1)^n}{n^2}$, $b_n = 0$. Il membro sinistro dell'**uguaglianza di Parseval** vale
 $$
 \frac{1}{\pi} \int_{-\pi}^{\pi} x^4\, dx = \frac{1}{\pi} \cdot \frac{2\pi^5}{5} = \frac{2\pi^4}{5} ,
