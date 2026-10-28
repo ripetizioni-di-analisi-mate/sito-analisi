@@ -270,5 +270,5 @@ $$
 f(x) = \frac{2}{3} + \sum_{n=1}^{\infty} \frac{4\,(-1)^{n+1}}{n^2 \pi^2} \cos(n\pi x) .
 $$
 
-::grafico{f="1-(x-2*floor((x+1)/2))*(x-2*floor((x+1)/2));2/3+4/(pi*pi)*cos(pi*x)" xmin=-4.3 xmax=4.3 ymin=-0.4 ymax=1.4 titolo="Prolungamento $2$-periodico di $1 - x^2$ e la somma parziale $s_1 = \dfrac{2}{3} + \dfrac{4}{\pi^2}\cos(\pi x)$ (tratteggiata), già vicina alla funzione su tutto $\mathbb{R}$"}
+::grafico{f="1-(x-2*floor((x+1)/2))*(x-2*floor((x+1)/2));2/3+4/(pi*pi)*cos(pi*x)" legenda="y = f(x);y = s_1(x)" xmin=-4.3 xmax=4.3 ymin=-0.4 ymax=1.4 titolo="Prolungamento $2$-periodico di $1 - x^2$ e la somma parziale $s_1 = \dfrac{2}{3} + \dfrac{4}{\pi^2}\cos(\pi x)$ (tratteggiata), già vicina alla funzione su tutto $\mathbb{R}$"}
 :::

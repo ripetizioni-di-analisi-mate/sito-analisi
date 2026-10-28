@@ -304,7 +304,7 @@ Sia $(e_1, \dots, e_n)$ una base di $V$. Poiché $k < n$, per le conseguenze del
 In $\mathbb{R}^n$, o in coordinate, estrazione e completamento si eseguono con la riduzione a scala.
 
 - **Estrazione**: si scrivono i generatori come *colonne* di una matrice $A$ e si riduce $A$ a scala. Le colonne di $A$ che corrispondono alle colonne dei pivot formano una base di $\langle v_1, \dots, v_k \rangle$, e $\dim \langle v_1, \dots, v_k \rangle = \operatorname{rk} A$. Il metodo è corretto perché le operazioni elementari sulle righe non cambiano le soluzioni di $A x = 0$, cioè le relazioni lineari tra le colonne.
-- **Completamento**: si scrivono i vettori indipendenti come *righe* e si riduce a scala, poi si aggiungono i vettori canonici $e_j$ corrispondenti alle colonne prive di pivot. Le operazioni sulle righe non cambiano il sottospazio generato dalle righe, e le righe a scala insieme ai vettori aggiunti hanno un pivot in ogni colonna, quindi formano $n$ vettori indipendenti.
+- **Completamento**: si scrivono i vettori indipendenti come *righe* e si riduce a scala, poi si aggiungono i vettori canonici $e_j$ corrispondenti alle colonne prive di pivot. Le operazioni sulle righe non cambiano il sottospazio generato dalle righe, e le righe a scala insieme ai vettori aggiunti hanno un pivot in ogni colonna, quindi formano $n$ vettori indipendenti e generano $\mathbb{R}^n$. Poiché le righe a scala generano lo stesso sottospazio dei vettori di partenza, anche i vettori di partenza insieme ai vettori aggiunti generano $\mathbb{R}^n$, e per le conseguenze della dimensione ne formano una base.
 :::
 
 :::esempio{titolo="Estrazione con la riduzione a scala"}
