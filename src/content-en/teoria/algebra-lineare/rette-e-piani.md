@@ -59,7 +59,7 @@ Passing to Cartesian form requires a normal vector, which is $\vec{n} = \vec{u} 
 ## The line: parametric and Cartesian equations
 
 :::definizione{#equazioni-parametriche-retta titolo="Parametric equations of the line"}
-Let $P_0 = (x_0, y_0, z_0)$ be a point and $\vec{v} = (v_1, v_2, v_3)$ a nonzero vector. The line through $P_0$ parallel to $\vec{v}$ is the set of points $P = P_0 + t\,\vec{v}$ as $t$ ranges over $\mathbb{R}$, that is, of the points whose coordinates satisfy
+Let $P_0 = (x_0, y_0, z_0)$ be a point and $\vec{v} = (v_1, v_2, v_3)$ a nonzero vector. The line through $P_0$ parallel to $\vec{v}$ is the set of points $P = P_0 + t\,\vec{v}$ for $t \in \mathbb{R}$, that is, of the points whose coordinates satisfy
 $$
 \begin{cases}
 x = x_0 + v_1\, t \\[4pt]
@@ -304,7 +304,7 @@ Let $r$ be a line not perpendicular to the plane $\pi$. The orthogonal projectio
 ## Pencils of planes
 
 :::definizione{#fascio-di-piani titolo="Pencil of planes"}
-The **proper pencil** with axis $r$ is the set of all planes containing the line $r$. The **improper pencil** is the set of planes parallel to a given plane $ax + by + cz + d = 0$, that is, of the planes $ax + by + cz + k = 0$ as $k$ ranges over $\mathbb{R}$. Pencils are used to write the plane that contains a given line and satisfies one more condition, such as passing through a point or being parallel to a line.
+The **proper pencil** with axis $r$ is the set of all planes containing the line $r$. The **improper pencil** is the set of planes parallel to a given plane $ax + by + cz + d = 0$, that is, of the planes $ax + by + cz + k = 0$ for $k \in \mathbb{R}$. Pencils are used to write the plane that contains a given line and satisfies one more condition, such as passing through a point or being parallel to a line.
 
 ::grafico{f="0.5*x;-x;3*x" punti="0,0,pieno" xmin=-2.5 xmax=2.5 ymin=-2.5 ymax=2.5 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of three planes of the pencil whose axis is the $y$-axis: each plane of the pencil appears as a line through the origin, the point where the section meets the axis"}
 

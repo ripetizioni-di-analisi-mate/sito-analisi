@@ -270,7 +270,7 @@ Let $\dim V = n$. Then:
 The last two properties reduce the checks: to verify that $n$ vectors of a space of dimension $n$ form a basis it is sufficient to check *only one* of the two conditions, usually independence by means of the determinant.
 
 :::dimostrazione
-The first two properties follow from the **Steinitz lemma** applied to a basis of $V$, which consists of $n$ independent vectors that span $V$. Let $v_1, \dots, v_n$ be independent: if they did not span $V$, there would exist $v \notin \langle v_1, \dots, v_n \rangle$ and, by the theorem on adding a vector, $v_1, \dots, v_n, v$ would be $n + 1$ independent vectors, contrary to the first property. Now let $v_1, \dots, v_n$ be generators: if they were dependent, one of them would be a combination of the others and, removing it, $V$ would be spanned by $n - 1$ vectors, contrary to the second property.
+The first two properties follow from the **Steinitz lemma** applied to a basis of $V$, which consists of $n$ vectors that are independent and generators. Let $v_1, \dots, v_n$ be independent: if they did not span $V$, there would exist $v \notin \langle v_1, \dots, v_n \rangle$ and, by the theorem on adding a vector, $v_1, \dots, v_n, v$ would be $n + 1$ independent vectors, contrary to the first property. Now let $v_1, \dots, v_n$ be generators: if they were dependent, one of them would be a combination of the others and, removing it, $V$ would be spanned by $n - 1$ vectors, contrary to the second property.
 :::
 ::::
 
