@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import { url } from '../lib/url';
+const aPagamento = MATERIE.filter((m) => m.attiva && m.prezzo);
+const libere = MATERIE.filter((m) => m.attiva && !m.prezzo);
+---
+<Base titolo="Prezzi" percorso={[{ titolo: 'Prezzi' }]} descrizione="Prezzi dell'accesso completo alle materie di Ripetizioni di Analisi.">
+  <p class="sopratitolo">Prezzi</p>
+  <h1>Prezzi</h1>
+  <p class="sommario">Un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. L'accesso resta tuo, su tutti i tuoi dispositivi.</p>
+
+  <ul class="griglia-materie">
+    {aPagamento.map((m) => (
+      <li style={`--accento: ${m.colore}`}>
+        <a href={url(`/${m.slug}/sblocca`)}>
+          <h3>{m.titolo} — {m.prezzo} €</h3>
+          <p>{m.descrizione}</p>
+          <span class="conteggio">{m.argomenti.length} argomenti · acquisto unico</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>Che cosa comprende l'accesso completo</h2>
+  <ul class="cosa-include">
+    <li>La teoria completa di ogni argomento della materia, con definizioni, teoremi e dimostrazioni</li>
+    <li>Tutte le schede di esercizi svolti, con ogni passaggio spiegato</li>
+    <li>Le soluzioni di tutti gli esercizi da fare</li>
+    <li>Il PDF scaricabile di ogni argomento</li>
+  </ul>
+
+  <h2>Che cosa è gratuito</h2>
+  <p>{libere.map((m) => m.titolo).join(', ')} è interamente gratuito. Nelle materie a pagamento sono liberi l'inizio di ogni teoria, le prime tre schede di esercizi svolti di ogni argomento e i testi di tutti gli esercizi da fare.</p>
+
+  <h2>Pagamento e rimborsi</h2>
+  <p>I pagamenti sono gestiti da Paddle, che agisce come rivenditore autorizzato ed emette la ricevuta con l'IVA dovuta. Puoi chiedere il rimborso entro 14 giorni dall'acquisto: le condizioni sono nella pagina <a href={url('/termini')}>Termini e rimborsi</a>.</p>
+</Base>
