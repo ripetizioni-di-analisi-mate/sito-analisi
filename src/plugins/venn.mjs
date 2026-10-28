@@ -8,7 +8,8 @@ import katex from 'katex';
 //             Esempi: unione "a,ab,b"; intersezione "ab"; differenza A \ B "a"; differenza simmetrica "a,b";
 //             complementare di A "b,u"; con tre insiemi A ∩ (B ∪ C) "ab,ac,abc".
 //   nomi      nomi degli insiemi (predefinito "A,B,C")
-//   universo  1 per disegnare l'insieme universo U (automatico se è colorata la zona u)
+//   universo  1 per disegnare l'insieme universo (automatico se è colorata la zona u)
+//   ambiente  nome dell'insieme universo (predefinito U; per esempio E)
 //   elementi  elementi scritti nelle zone: "a:1,2;ab:3;b:4,5;u:6"
 //   titolo    didascalia
 
@@ -76,7 +77,7 @@ export function venn(attr) {
   const contorni = lettere.map((k) => cerchio(k, ' class="contorno"')).join('');
   const etichette = lettere.map((k, i) => `<text class="nome-insieme" x="${S.nomi[k][0]}" y="${S.nomi[k][1]}" text-anchor="middle">${esc(nomi[i] ?? k.toUpperCase())}</text>`).join('');
   const universo = conU
-    ? `<rect class="universo" x="${ux}" y="${uy}" width="${uw}" height="${uh}" rx="10"/><text class="nome-insieme" x="${ux + 16}" y="${uy + 30}">U</text>`
+    ? `<rect class="universo" x="${ux}" y="${uy}" width="${uw}" height="${uh}" rx="10"/><text class="nome-insieme" x="${ux + 16}" y="${uy + 30}">${esc(attr.ambiente || 'U')}</text>`
     : '';
   const elementi = String(attr.elementi || '').split(';').map((x) => x.trim()).filter(Boolean).map((s) => {
     const [z, el] = s.split(':');
