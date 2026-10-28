@@ -25,7 +25,7 @@ detta **risultante**. È un principio sperimentale, e afferma che le forze si co
 :::definizione{#sistema-inerziale titolo="Sistema di riferimento inerziale"}
 Un punto materiale si dice **isolato** se la risultante delle forze che agiscono su di esso è nulla. Un sistema di riferimento si dice **inerziale** se in esso ogni punto materiale isolato ha velocità costante, cioè resta in quiete oppure si muove di moto rettilineo uniforme.
 
-Un sistema che trasla con velocità costante rispetto a un sistema inerziale è anch'esso inerziale, perché per le trasformazioni di Galileo le accelerazioni nei due sistemi coincidono. Un sistema solidale con il suolo è inerziale con buona approssimazione, poiché l'accelerazione dovuta alla rotazione terrestre è al massimo $0{,}034\,\mathrm{m/s^2}$, lo $0{,}3\%$ di $g$.
+Un sistema che trasla con velocità costante rispetto a un sistema inerziale è anch'esso inerziale, perché per le trasformazioni di Galileo le accelerazioni nei due sistemi coincidono. Un sistema solidale con il suolo è inerziale con buona approssimazione, poiché l'accelerazione dovuta alla rotazione terrestre è al massimo $0{,}034\,\mathrm{m/s^2}$, circa lo $0{,}35\%$ di $g$.
 :::
 
 :::teorema{#primo-principio titolo="Primo principio della dinamica"}
@@ -99,7 +99,7 @@ Il **diagramma di corpo libero** è il disegno di un solo corpo, rappresentato c
 
 Un carrello di $2{,}0\,\mathrm{kg}$ su un pavimento orizzontale liscio è spinto con una forza di $10\,\mathrm{N}$ inclinata di $30^\circ$ verso il basso. Lungo la verticale l'accelerazione è nulla, quindi $N - mg - F \sin 30^\circ = 0$ e $N = 19{,}6\,\mathrm{N} + 5{,}0\,\mathrm{N} = 24{,}6\,\mathrm{N}$; lungo l'orizzontale $F \cos 30^\circ = m a$, da cui $a = 4{,}33\,\mathrm{m/s^2}$.
 
-::grafico{vettori="0,0,0,-1.96,P;-0.866,0.5,0,0,F;0,0,0,2.46,N" xmin=-3 xmax=3 ymin=-2.4 ymax=2.9 uguale=1 titolo="Diagramma di corpo libero del carrello: $N = mg + F \sin 30^\circ$, quindi la reazione normale supera il peso"}
+::grafico{assi=0 uguale=1 punti="0,0,pieno" vettori="0,0,0,-1.962,P;-0.866,0.5,0,0,F;0,0,0,2.462,N" segmenti="-1.4,0.808,-0.866,0.5;-1.5,0,0,0" etichette="-1.25,0.13,30°" riferimento="1.6,-1.6,0,0.9,x,y" xmin=-2.6 xmax=2.8 ymin=-2.3 ymax=2.8 titolo="Diagramma di corpo libero del carrello, con le frecce in scala: $N = mg + F \sin 30^\circ$, quindi la reazione normale supera il peso"}
 
 :::
 
@@ -150,7 +150,7 @@ T = \frac{mg}{2 \sin 30^\circ} = mg = 39{,}2\,\mathrm{N} .
 $$
 Quanto più i fili sono vicini all'orizzontale, tanto più piccolo è il seno dell'angolo che formano con l'orizzontale e tanto più grande è la tensione.
 
-::grafico{vettori="0,0,-3.4,1.96,T;0,0,3.4,1.96,T;0,0,0,-3.92,P" segmenti="-3.4,1.96,-4,2.31;3.4,1.96,4,2.31" etichette="-1.6,0.25,30°;1.1,0.25,30°" xmin=-4.4 xmax=4.4 ymin=-4.6 ymax=2.9 uguale=1 titolo="Le due tensioni hanno componenti verticali $T \sin 30^\circ$ che insieme equilibrano il peso"}
+::grafico{assi=0 uguale=1 linee="-4.83,2.5 4.83,2.5;0,0 -4.33,2.5;0,0 4.33,2.5" punti="0,0,pieno" vettori="0,0,-3.398,1.962,T;0,0,3.398,1.962,T;0,0,0,-3.924,P" segmenti="-1.8,0,1.8,0" etichette="-1.6,0.25,30°;1.1,0.25,30°" riferimento="3.2,-3.4,0,0.9,x,y" xmin=-5.0 xmax=5.0 ymin=-4.3 ymax=2.9 titolo="Le due tensioni hanno componenti verticali $T \sin 30^\circ$ che insieme equilibrano il peso"}
 
 :::
 
@@ -337,7 +337,7 @@ v \geq \sqrt{g\,r} .
 $$
 Nel punto più basso la reazione della guida è $N = m g + m\dfrac{v^2}{r}$, maggiore del peso. Lo stesso risultato vale per un corpo che ruota in un piano verticale legato a un filo, con la tensione al posto della reazione normale. In un giro della morte di raggio $4{,}0\,\mathrm{m}$ la velocità nel punto più alto deve essere almeno $\sqrt{9{,}81 \cdot 4{,}0}\,\mathrm{m/s} = 6{,}26\,\mathrm{m/s}$. Il legame tra le velocità in basso e in alto si ricava nell'argomento sul lavoro e l'energia.
 
-::grafico{curve="2*cos(t),2*sin(t),0,6.29" vettori="-0.3,2,-0.3,1,P;0.3,2,0.3,1.2,N;-0.3,-2,-0.3,-3,P;0.3,-2,0.3,-0.2,N" punti="0,0,pieno,C" xmin=-3.2 xmax=3.2 ymin=-3.3 ymax=2.6 uguale=1 titolo="Nel punto più alto $\vec{P}$ e $\vec{N}$ puntano entrambe verso il centro $C$; nel punto più basso $\vec{N}$ supera il peso"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" vettori="-0.3,2,-0.3,1,P;0.3,2,0.3,1.2,N;-0.3,-2,-0.3,-3,P;0.3,-2,0.3,-0.2,N" punti="0,0,pieno,C;0,2,pieno;0,-2,pieno" xmin=-3.2 xmax=3.2 ymin=-3.3 ymax=2.6 titolo="Nel punto più alto $\vec{P}$ e $\vec{N}$ puntano entrambe verso il centro $C$; nel punto più basso $\vec{N}$ supera il peso"}
 
 :::dimostrazione
 Nel punto più alto il peso e la reazione della guida sono entrambi diretti verso il basso, cioè verso il centro. La loro somma fornisce la forza centripeta:
@@ -402,7 +402,7 @@ T = \frac{(1 + \mu_d)\,m_1 m_2}{m_1 + m_2}\,g .
 $$
 Partendo da fermo, il sistema si mette in moto se e solo se il peso appeso supera l'attrito statico massimo, cioè $m_2 > \mu_s m_1$. Con $m_1 = 4{,}0\,\mathrm{kg}$, $m_2 = 1{,}0\,\mathrm{kg}$ e $\mu_d = 0{,}10$ si ha $a = \dfrac{1{,}0 - 0{,}40}{5{,}0} \cdot 9{,}81\,\mathrm{m/s^2} = 1{,}18\,\mathrm{m/s^2}$ e $T = 8{,}63\,\mathrm{N}$.
 
-::grafico{assi=0 uguale=1 poligoni="-1.2,3.7 5,3.7 5,4.2 -1.2,4.2" curve="5.3+0.3*cos(t),3.9+0.3*sin(t),0,6.29" linee="2.2,4.2 5.3,4.2;5.6,3.9 5.6,2.3;5,3.9 5.3,3.9" punti="2.2,4.2,pieno;5.6,2.3,pieno" etichette="1.0,4.55,m₁;4.75,2.2,m₂" vettori="2.2,4.2,3.063,4.2,T;2.2,4.2,1.808,4.2,f;2.2,4.2,2.2,8.124,N₁;2.2,4.2,2.2,0.276,P₁;5.6,2.3,5.6,3.163,T;5.6,2.3,5.6,1.319,P₂" xmin=-1.6 xmax=7.4 ymin=0 ymax=8.6 titolo="Forze sui due corpi con $m_1 = 4{,}0\,\mathrm{kg}$, $m_2 = 1{,}0\,\mathrm{kg}$ e $\mu_d = 0{,}10$, in scala: sul corpo appoggiato $\vec{N}_1$ equilibra $\vec{P}_1$, lungo il filo agiscono la tensione e l'attrito"}
+::grafico{assi=0 uguale=1 poligoni="-1.2,3.1 4.8,3.1 4.8,3.6 -1.2,3.6;1.25,3.6 1.95,3.6 1.95,4.3 1.25,4.3;5.1,1.6 5.7,1.6 5.7,2.2 5.1,2.2" curve="5.1+0.3*cos(t),3.65+0.3*sin(t),0,6.29" linee="1.95,3.95 5.1,3.95;5.4,3.65 5.4,2.2;4.8,3.65 5.1,3.65" punti="5.1,3.65,pieno" vettori="1.95,3.95,2.641,3.95,T;1.6,3.6,1.286,3.6,f;1.6,3.95,1.6,7.089,N₁;1.6,3.95,1.6,0.811,P₁;5.4,2.2,5.4,2.891,T;5.4,1.6,5.4,0.815,P₂" etichette="0.75,4.45,m₁;4.65,1.85,m₂" xmin=-1.4 xmax=6.6 ymin=0.5 ymax=7.6 titolo="Forze sui due corpi con $m_1 = 4{,}0\,\mathrm{kg}$, $m_2 = 1{,}0\,\mathrm{kg}$ e $\mu_d = 0{,}10$, in scala: sul corpo appoggiato $\vec{N}_1$ equilibra $\vec{P}_1$, lungo il filo agiscono la tensione e l'attrito"}
 
 :::dimostrazione
 Lungo la verticale il corpo appoggiato ha accelerazione nulla, quindi $N_1 = m_1 g$ e l'attrito dinamico vale $\mu_d m_1 g$, diretto in verso opposto al moto. Si orienta il moto nel verso in cui $m_2$ scende; il secondo principio lungo il filo per i due corpi dà
@@ -427,7 +427,7 @@ $$
 $$
 La **forza apparente** $\vec{F}_{\text{app}}$ non è esercitata da alcun corpo e quindi non ha una reazione secondo il terzo principio. La relazione segue dalle trasformazioni di Galileo, $\vec{a} = \vec{a}' + \vec{A}$, sostituite nel secondo principio $\vec{R} = m\,\vec{a}$.
 
-Un pendolo appeso al soffitto di un vagone che accelera con $A = 2{,}0\,\mathrm{m/s^2}$ resta in quiete rispetto al vagone inclinato all'indietro. Nel vagone la tensione equilibra il peso e la forza apparente $mA$, quindi il filo forma con la verticale l'angolo $\theta$ con $\tan\theta = \dfrac{A}{g} = 0{,}20$, cioè $\theta = 11{,}3^\circ$.
+Un pendolo appeso al soffitto di un vagone che accelera con $A = 2{,}0\,\mathrm{m/s^2}$ resta in quiete rispetto al vagone inclinato all'indietro. Nel vagone la tensione equilibra il peso e la forza apparente $mA$, quindi il filo forma con la verticale l'angolo $\theta$ con $\tan\theta = \dfrac{A}{g} = 0{,}204$, cioè $\theta = 11{,}5^\circ$.
 :::
 
 ::::teorema{#peso-apparente titolo="Peso apparente in ascensore"}
@@ -444,7 +444,7 @@ La lettura della bilancia è il **peso apparente**. I casi possibili sono i segu
 Una persona di $60\,\mathrm{kg}$ in un ascensore che accelera verso l'alto con $a = 1{,}5\,\mathrm{m/s^2}$ legge $N = 60 \cdot 11{,}31\,\mathrm{N} = 679\,\mathrm{N}$; una bilancia tarata in chilogrammi indicherebbe $69\,\mathrm{kg}$.
 
 :::dimostrazione
-Nel sistema inerziale del palazzo le forze sulla persona sono il peso e la reazione $N$ della bilancia, che per il terzo principio è uguale in modulo alla forza con cui la persona preme sulla bilancia, cioè alla lettura. Il secondo principio lungo la verticale dà $N - m g = m a$, da cui la tesi. Nel sistema dell'ascensore la persona è in quiete, e l'equilibrio tra $\vec{N}$, il peso e la forza apparente $-m\,a$ porta alla stessa equazione $N - mg - ma = 0$.
+Nel sistema inerziale del palazzo le forze sulla persona sono il peso e la reazione $N$ della bilancia, che per il terzo principio è uguale in modulo alla forza con cui la persona preme sulla bilancia, cioè alla lettura. Il secondo principio lungo la verticale dà $N - m g = m a$, da cui la tesi. Nel sistema dell'ascensore la persona è in quiete, e l'equilibrio tra $\vec{N}$, il peso e la forza apparente, di componente verticale $-m\,a$, porta alla stessa equazione $N - mg - ma = 0$.
 :::
 ::::
 

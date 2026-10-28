@@ -72,7 +72,7 @@ export function grafico(a) {
   // Dimensioni: larghezza fissa; con uguale=1 l'altezza segue il rapporto tra gli intervalli.
   const W = 640, m = { l: 40, r: 40, t: 32, b: 40 };
   let H = 400;
-  if (a.uguale) H = Math.round(Math.min(620, Math.max(260, ((W - m.l - m.r) * (ymax - ymin)) / (xmax - xmin) + m.t + m.b)));
+  if (a.uguale) H = Math.round(Math.min(1100, Math.max(200, ((W - m.l - m.r) * (ymax - ymin)) / (xmax - xmin) + m.t + m.b)));
   const sx = (x) => m.l + ((x - xmin) / (xmax - xmin)) * (W - m.l - m.r);
   const sy = (y) => H - m.b - ((y - ymin) / (ymax - ymin)) * (H - m.t - m.b);
   const dentro = (x, y) => y >= ymin && y <= ymax && x >= xmin - 1e-9 && x <= xmax + 1e-9;
