@@ -42,7 +42,7 @@ Per ogni $u, v \in \mathbb{R}^n$ vale
 $$
 |\langle u, v \rangle| \leq \|u\|\, \|v\| ,
 $$
-e l'uguaglianza vale *se e solo se* $u$ e $v$ sono linearmente dipendenti. La disuguaglianza garantisce che il quoziente $\dfrac{\langle u, v \rangle}{\|u\|\, \|v\|}$ sta in $[-1, 1]$, e su questo fatto si basa la definizione di angolo in $\mathbb{R}^n$.
+e l'uguaglianza vale *se e solo se* $u$ e $v$ sono linearmente dipendenti. La disuguaglianza garantisce che, per $u$ e $v$ non nulli, il quoziente $\dfrac{\langle u, v \rangle}{\|u\|\, \|v\|}$ sta in $[-1, 1]$, e su questo fatto si basa la definizione di angolo in $\mathbb{R}^n$.
 
 :::dimostrazione
 Se $v = 0$ entrambi i membri sono nulli e i vettori sono dipendenti. Sia $v \neq 0$. Per ogni $t \in \mathbb{R}$ la definita positività e la bilinearità danno
@@ -219,7 +219,7 @@ e la base ortonormale di $\langle v_1, v_2 \rangle$ è formata da $\dfrac{1}{\sq
 :::
 
 :::osservazione{#gram-schmidt-nei-calcoli titolo="Gram-Schmidt nei calcoli"}
-Le proiezioni non cambiano se un vettore $u_i$ viene sostituito da un suo multiplo non nullo, perché il coefficiente $\dfrac{\langle v, u_i \rangle}{\langle u_i, u_i \rangle}\, u_i$ resta lo stesso. Perciò, a ogni passo, si può moltiplicare $u_i$ per un numero che elimina i denominatori: nell'esempio in $\mathbb{R}^3$ si usa $u_2 = (1, -1, 2)$ al posto di $\left( \dfrac{1}{2}, -\dfrac{1}{2}, 1 \right)$. La normalizzazione si esegue alla fine, una volta per tutte. Se durante il procedimento si ottiene $u_j = 0$, il vettore $v_j$ è combinazione lineare dei precedenti, e il procedimento applicato a vettori dipendenti segnala così la dipendenza.
+Le proiezioni non cambiano se un vettore $u_i$ viene sostituito da un suo multiplo non nullo, perché il vettore $\dfrac{\langle v, u_i \rangle}{\langle u_i, u_i \rangle}\, u_i$ resta lo stesso. Perciò, a ogni passo, si può moltiplicare $u_i$ per un numero che elimina i denominatori: nell'esempio in $\mathbb{R}^3$ si usa $u_2 = (1, -1, 2)$ al posto di $\left( \dfrac{1}{2}, -\dfrac{1}{2}, 1 \right)$. La normalizzazione si esegue alla fine, una volta per tutte. Se durante il procedimento si ottiene $u_j = 0$, il vettore $v_j$ è combinazione lineare dei precedenti, e il procedimento applicato a vettori dipendenti segnala così la dipendenza.
 :::
 
 ## Complemento ortogonale
@@ -370,7 +370,7 @@ e $m_a(\lambda_i) = m_g(\lambda_i)$ per ogni $i$. Quando gli autovalori distinti
 :::
 
 :::osservazione{#interpretazione-geometrica-spettrale titolo="Interpretazione geometrica"}
-Una matrice simmetrica agisce su $\mathbb{R}^n$ come una dilatazione di fattore $\lambda_i$ lungo ciascuna delle direzioni, a due a due ortogonali, della base di autovettori. In $\mathbb{R}^2$ la circonferenza unitaria viene trasformata in un'ellisse che ha gli assi lungo gli autovettori e i semiassi uguali ai valori assoluti degli autovalori. Per $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ gli autovalori sono $4$, con autovettore $(1, 1)$, e $2$, con autovettore $(1, -1)$.
+Una matrice simmetrica agisce su $\mathbb{R}^n$ come una dilatazione di fattore $\lambda_i$ lungo ciascuna delle direzioni, a due a due ortogonali, della base di autovettori. In $\mathbb{R}^2$, se $A$ è invertibile, cioè se nessun autovalore è nullo, la circonferenza unitaria viene trasformata in un'ellisse che ha gli assi lungo gli autovettori e i semiassi uguali ai valori assoluti degli autovalori. Per $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ gli autovalori sono $4$, con autovettore $(1, 1)$, e $2$, con autovettore $(1, -1)$.
 
 ::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="La matrice $A$ con righe $(3, 1)$ e $(1, 3)$ trasforma la circonferenza unitaria in un'ellisse con semiassi $4$ e $2$ lungo gli autovettori ortogonali $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ e $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
 
