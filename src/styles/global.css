@@ -421,7 +421,10 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .indice-materie { display: grid; gap: 0.45rem; }
 .indice-materie .voce-materia { display: flex; align-items: center; gap: 0.75rem; padding: 0.55rem 0.6rem; border-radius: 10px; border: 1px solid transparent; text-decoration: none; color: var(--inchiostro); transition: background 0.15s, border-color 0.15s; }
 .indice-materie a.voce-materia:hover, .indice-materie a.voce-materia:focus-visible { background: color-mix(in srgb, var(--colore-materia) 9%, var(--carta)); border-color: color-mix(in srgb, var(--colore-materia) 30%, transparent); }
-.materia-simbolo { flex: none; width: 2.5rem; height: 2.5rem; border-radius: 10px; display: grid; place-items: center; font-family: var(--titoli); font-style: italic; font-weight: 600; font-size: 1.3rem; color: #fff; background: var(--colore-materia); box-shadow: 0 2px 0 color-mix(in srgb, var(--colore-materia) 55%, #000); }
+.materia-simbolo { flex: none; width: 2.5rem; height: 2.5rem; border-radius: 10px; display: grid; place-items: center; font-family: var(--titoli); font-style: italic; font-weight: 600; font-size: 1.3rem; color: #fff; overflow: hidden; background: var(--colore-materia); box-shadow: 0 2px 0 color-mix(in srgb, var(--colore-materia) 55%, #000); }
+.materia-simbolo .katex { font-size: 1.05rem; color: inherit; }
+.materia-simbolo.piccolo .katex { font-size: 0.62rem; }
+.indice-materie [data-materia^="analisi"] .materia-simbolo .katex { font-size: 1.35rem; }
 .materia-testo { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.25; }
 .materia-nome { font-family: var(--titoli); font-weight: 700; font-size: 1.02rem; color: var(--colore-materia); }
 .materia-testo small { font-family: var(--ui); font-size: 0.78rem; color: var(--inchiostro-2); margin-top: 0.15rem; }
