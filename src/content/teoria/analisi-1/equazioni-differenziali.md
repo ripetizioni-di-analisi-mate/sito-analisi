@@ -190,7 +190,7 @@ Un'**equazione lineare del secondo ordine a coefficienti costanti** ha la forma
 $$
 y'' + a\, y' + b\, y = f(x)
 $$
-con $a, b \in \mathbb{R}$ e $f$ continua su un intervallo $I$. Se $f \equiv 0$ l'equazione si dice **omogenea**; l'equazione con $f \equiv 0$ è l'omogenea associata. Queste equazioni descrivono i sistemi oscillanti della fisica, come la molla con attrito e il circuito elettrico, nei quali $f$ rappresenta la forzante esterna.
+con $a, b \in \mathbb{R}$ e $f$ continua su un intervallo $I$. Se $f \equiv 0$ l'equazione si dice **omogenea**; l'equazione $y'' + a\, y' + b\, y = 0$ è l'omogenea associata. Queste equazioni descrivono i sistemi oscillanti della fisica, come la molla con attrito e il circuito elettrico, nei quali $f$ rappresenta la forzante esterna.
 :::
 
 ::::teorema{#equazione-caratteristica titolo="Equazione caratteristica"}
@@ -224,7 +224,7 @@ dove $y_p$ è una qualunque soluzione particolare della completa. Quindi la riso
 :::
 
 :::esempio
-$y'' - y = 0$: l'equazione caratteristica $r^2 - 1 = 0$ ha radici $\pm 1$, quindi $y = C_1 e^{x} + C_2 e^{-x}$. $y'' + 4y = 0$: l'equazione caratteristica $r^2 + 4 = 0$ ha radici $\pm 2i$, quindi $y = C_1 \cos(2x) + C_2 \sin(2x)$.
+$y'' - y = 0$: l'equazione caratteristica $r^2 - 1 = 0$ ha radici $\pm 1$, quindi $y = C_1 e^{x} + C_2 e^{-x}$. $y'' + 4y = 0$: l'equazione caratteristica $r^2 + 4 = 0$ ha radici $\pm 2i$, quindi $y = C_1 \cos(2x) + C_2 \sin(2x)$. $y'' + 2y' + 5y = 0$: l'equazione caratteristica $r^2 + 2r + 5 = 0$ ha radici $-1 \pm 2i$, quindi $y = e^{-x} \bigl( C_1 \cos(2x) + C_2 \sin(2x) \bigr)$.
 
 ::grafico{f="exp(-x)*cos(2*x);exp(-x);-exp(-x)" xmin=-0.5 xmax=5 ymin=-1.2 ymax=1.2 titolo="Per $y'' + 2y' + 5y = 0$ le radici sono $-1 \pm 2i$: la soluzione $y = e^{-x}\cos(2x)$ oscilla tra $y = e^{-x}$ (tratteggiata) e $y = -e^{-x}$ (in rosso), con ampiezza che tende a $0$"}
 
@@ -252,7 +252,7 @@ $$
 y = C_1 \cos x + C_2 \sin x + \frac{x \sin x}{2} .
 $$
 
-::grafico{f="x*sin(x)/2" xmin=-25 xmax=25 ymin=-13 ymax=13 titolo="$y = \dfrac{x \sin x}{2}$: l'ampiezza delle oscillazioni cresce nel tempo (risonanza)"}
+::grafico{f="x*sin(x)/2" xmin=-25 xmax=25 ymin=-13 ymax=13 titolo="$y = \dfrac{x \sin x}{2}$: l'ampiezza delle oscillazioni cresce al crescere di $|x|$ (risonanza)"}
 
 :::
 
@@ -276,7 +276,7 @@ $$
 \begin{cases}
 y'' + a\, y' + b\, y = f(x) \\[4pt]
 y(x_0) = y_0 \\[4pt]
-y'(x_0) = y_1
+y'(x_0) = v_0
 \end{cases}
 $$
 con $f$ continua su $I$ e $x_0 \in I$, ha **una e una sola soluzione**, definita su *tutto* $I$. Le condizioni iniziali sono due perché l'integrale generale contiene **due costanti**: assegnano nello stesso punto il valore della funzione e quello della sua derivata, cioè posizione e velocità nei modelli meccanici. Operativamente si scrive l'integrale generale, se ne calcola la derivata, si impongono le due condizioni e si risolve il sistema lineare nelle costanti $C_1$ e $C_2$.

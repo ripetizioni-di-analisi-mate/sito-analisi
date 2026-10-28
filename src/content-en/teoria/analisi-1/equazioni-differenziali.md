@@ -224,7 +224,7 @@ where $y_p$ is any particular solution of the complete equation. Hence the solut
 :::
 
 :::esempio
-$y'' - y = 0$: the characteristic equation $r^2 - 1 = 0$ has roots $\pm 1$, so $y = C_1 e^{x} + C_2 e^{-x}$. $y'' + 4y = 0$: the characteristic equation $r^2 + 4 = 0$ has roots $\pm 2i$, so $y = C_1 \cos(2x) + C_2 \sin(2x)$.
+$y'' - y = 0$: the characteristic equation $r^2 - 1 = 0$ has roots $\pm 1$, so $y = C_1 e^{x} + C_2 e^{-x}$. $y'' + 4y = 0$: the characteristic equation $r^2 + 4 = 0$ has roots $\pm 2i$, so $y = C_1 \cos(2x) + C_2 \sin(2x)$. $y'' + 2y' + 5y = 0$: the characteristic equation $r^2 + 2r + 5 = 0$ has roots $-1 \pm 2i$, so $y = e^{-x} \bigl( C_1 \cos(2x) + C_2 \sin(2x) \bigr)$.
 
 ::grafico{f="exp(-x)*cos(2*x);exp(-x);-exp(-x)" xmin=-0.5 xmax=5 ymin=-1.2 ymax=1.2 titolo="For $y'' + 2y' + 5y = 0$ the roots are $-1 \pm 2i$: the solution $y = e^{-x}\cos(2x)$ oscillates between $y = e^{-x}$ (dashed) and $y = -e^{-x}$ (in red), with amplitude tending to $0$"}
 
@@ -276,7 +276,7 @@ $$
 \begin{cases}
 y'' + a\, y' + b\, y = f(x) \\[4pt]
 y(x_0) = y_0 \\[4pt]
-y'(x_0) = y_1
+y'(x_0) = v_0
 \end{cases}
 $$
 with $f$ continuous on $I$ and $x_0 \in I$, has **one and only one solution**, defined on *all* of $I$. There are two initial conditions because the general solution contains **two constants**: they assign, at the same point, the value of the function and that of its derivative, that is, position and velocity in mechanical models. In practice one writes the general solution, computes its derivative, imposes the two conditions, and solves the linear system in the constants $C_1$ and $C_2$.
