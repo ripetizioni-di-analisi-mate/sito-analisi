@@ -31,6 +31,8 @@ Il modello da seguire è `src/content/teoria/analisi-1/limiti.md` con i relativi
 
 ## Chiarezza e percorso (lo studente deve capire leggendo)
 
+Le correzioni di chiarezza sono puntuali: una o due frasi nel punto in cui si inciampa, scritte come le direbbe un docente a lezione, mai paragrafi aggiunti. Esempio approvato da Carmine: "Sia $P_0$ un punto con $x^2 + y^2 < 1$. La sua distanza dall'origine è $\|P_0\| < 1$, quindi la sua distanza dalla circonferenza è $1 - \|P_0\|$. Il disco di centro $P_0$ e raggio $r = 1 - \|P_0\|$ è perciò contenuto in $A$, e $P_0$ è interno." (prima: "è interno, perché il disco $B(P_0, r)$ con $r = 1 - \|P_0\|$ è contenuto in $A$"). Una prima revisione estesa di Limiti è stata scartata perché le frasi aggiunte erano poco naturali e appesantivano il testo.
+
 Il lettore è uno studente al primo anno che incontra l'argomento per la prima volta. Il rigore resta intero (definizioni e teoremi con tutte le ipotesi); cambia il modo di arrivarci. Niente banalità: si spiega ciò che serve per capire, non l'ovvio.
 
 **Dentro l'argomento**
