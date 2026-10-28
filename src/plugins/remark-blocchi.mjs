@@ -5,6 +5,7 @@
 //   :::dimostrazione   (apribile)
 //   :::esempio  :::osservazione  :::attenzione
 //   :::richiamo{titolo="Teorema di ..."}   solo ipotesi e tesi
+//   :::percorso   apertura dell'argomento: da dove si arriva e a cosa servirà (titolo facoltativo)
 //   :::soluzione   (apribile, "Mostra soluzione")
 //   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}   (tutti gli attributi in grafico.mjs)
 //   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
@@ -23,6 +24,7 @@ const ETICHETTE = {
   attenzione: 'Attenzione',
   richiamo: 'Richiamo',
   soluzione: 'Soluzione',
+  percorso: 'Il percorso',
 };
 
 const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione' };
@@ -31,6 +33,7 @@ const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione'
 const EN = {
   definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition', dimostrazione: 'Proof',
   esempio: 'Example', osservazione: 'Remark', attenzione: 'Warning', richiamo: 'Recall', soluzione: 'Solution',
+  percorso: 'Where this fits',
   mostra: 'Show solution', nascondi: 'Hide solution',
 };
 const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };

@@ -11,7 +11,7 @@ Il modello da seguire è `src/content/teoria/analisi-1/limiti.md` con i relativi
 
 ## Stile della teoria (serie "Manuali")
 
-- Tutto il contenuto sta dentro i blocchi. Tra un blocco e l'altro non c'è prosa; al massimo una riga sotto un titolo di sezione `##`.
+- Tutto il contenuto sta dentro i blocchi. Tra un blocco e l'altro non c'è prosa; al massimo una o due righe sotto un titolo di sezione `##`, che fanno da ponte con la sezione precedente.
 - Blocchi disponibili (direttive remark):
   - `:::definizione{#ancora titolo="Nome del concetto"}`
   - `:::teorema{#ancora titolo="Nome del teorema"}` (anche per proposizioni e criteri)
@@ -20,6 +20,7 @@ Il modello da seguire è `src/content/teoria/analisi-1/limiti.md` con i relativi
   - `:::osservazione`
   - `:::attenzione` (le rare negazioni: un avviso con un controesempio concreto)
   - `:::richiamo{titolo="Nome del teorema"}` (solo ipotesi e tesi di un teorema visto prima, quando una dimostrazione lo usa)
+  - `:::percorso` (apertura dell'argomento, subito dopo il frontmatter: vedi "Chiarezza e percorso")
   - `::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.5 ymax=1.3 punti="0,1,vuoto" asintoti="x=0;y=1" titolo="…"}` (direttiva a riga singola; f in sintassi JS/Math: sin, cos, exp, log, sqrt, abs, ^ per le potenze)
 - L'etichetta del blocco è il nome del concetto, non "Definizione"/"Teorema": il tipo lo dà il colore.
 - Ogni blocco è compatto: enunciato con ipotesi esplicite, poi una o due righe su a cosa serve e come si usa, con un piccolo esempio nel blocco stesso o in un blocco esempio subito sotto. I casi vanno in elenco puntato; le condizioni da soddisfare insieme in sistema (`\begin{cases}`), mai elencate a parole.
@@ -27,6 +28,25 @@ Il modello da seguire è `src/content/teoria/analisi-1/limiti.md` con i relativi
 - Dimostrazioni dove servono (teoremi centrali dell'esame); per le altre, una riga che dice da dove segue o dove si rimanda.
 - Rimandi espliciti ad altri argomenti ("si rimanda al capitolo sulle derivate") sì; riferimenti alla struttura della pagina ("più avanti in questa pagina", "vedi sopra") no.
 - Sezioni `##` per orientarsi: da 6 a 10 per argomento.
+
+## Chiarezza e percorso (lo studente deve capire leggendo)
+
+Il lettore è uno studente al primo anno che incontra l'argomento per la prima volta. Il rigore resta intero (definizioni e teoremi con tutte le ipotesi); cambia il modo di arrivarci. Niente banalità: si spiega ciò che serve per capire, non l'ovvio.
+
+**Dentro l'argomento**
+- Prima l'idea, poi la formula. Prima di una definizione o di un conto, una o due frasi dicono a parole che cosa si sta cercando di esprimere e perché; poi arriva la scrittura formale.
+- Ogni simbolo nuovo viene detto a parole la prima volta che compare: $\|P_0\|$ è "la distanza di $P_0$ dall'origine", $\delta$ è "quanto ci si può allontanare da $x_0$". Una formula che compare all'improvviso ("con $r = 1 - \|P_0\|$") va motivata: da dove viene quel valore e perché funziona.
+- Dopo una definizione formale, la sua lettura in parole semplici ("in altre parole: …"), quando la definizione non è già trasparente.
+- Una figura quando il ragionamento è geometrico (intorni, distanze, aree, grafici): la figura mostra le grandezze che il testo nomina.
+- Un passaggio per frase. Se un passaggio richiede un conto, il conto si scrive. Niente salti che uno studente non saprebbe colmare da solo.
+- Esempi scelti per far vedere l'idea, prima quelli semplici; il caso patologico o il controesempio viene dopo.
+- Le dimostrazioni dicono all'inizio, in una frase, qual è l'idea ("si costruisce un intorno che…"), poi la eseguono.
+
+**Tra gli argomenti**
+- Ogni argomento si apre con un blocco `:::percorso` di 3-6 righe: da quale argomento precedente si parte (che cosa si usa), che cosa si fa qui, a che cosa servirà dopo (gli argomenti successivi che lo useranno, nominati). Il collegamento deve essere vero e concreto: si scrive solo ciò che la mappa della materia (`revisioni/percorso/<materia>.md`) giustifica.
+- Dentro l'argomento, la riga sotto un titolo `##` può fare da ponte con la sezione precedente ("Le definizioni di limite sono scomode per calcolare: i teoremi che seguono permettono di farlo senza tornare a $\varepsilon$ e $\delta$"), quando il passaggio da una sezione all'altra non è ovvio.
+- Quando un risultato tornerà utile in un argomento successivo, una frase lo dice nel blocco stesso ("questo limite servirà per calcolare la derivata di $\sin x$"). Senza forzare: solo dove il legame c'è.
+- Quando si usa un risultato di un argomento precedente, lo si nomina e, se serve, si mette un `:::richiamo`.
 
 ## Esercizi svolti (schede per tipologia)
 
