@@ -1,3 +1,4 @@
+import katex from 'katex';
 // Diagrammi di Venn generati a tempo di build (SVG).
 //
 // ::venn{tipo="due" zone="ab" titolo="A ∩ B"}
@@ -13,6 +14,12 @@
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 let contatore = 0;
+// Didascalia: testo semplice con formule $…$ rese da KaTeX (frazioni in colonna, radici, esponenti).
+const didascalia = (t) => String(t).split(/(\$[^$]+\$)/g).map((p) => (/^\$[^$]+\$$/.test(p)
+  ? katex.renderToString(p.slice(1, -1), { throwOnError: false, output: 'html' })
+  : esc(p))).join('');
+const testoSemplice = (t) => String(t).replace(/\$([^$]+)\$/g, '$1')
+  .replace(/\\d?frac\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}/g, '($1)/($2)').replace(/\\sqrt/g, '√').replace(/[\\{}]/g, '');
 
 const SCHEMI = {
   due: {
@@ -78,8 +85,8 @@ export function venn(attr) {
   }).join('');
 
   const descr = attr.titolo || 'Diagramma di Venn';
-  return `<figure class="grafico venn"><svg viewBox="0 0 ${S.W} ${S.H}" role="img" aria-label="${esc(descr)}">
+  return `<figure class="grafico venn"><svg viewBox="0 0 ${S.W} ${S.H}" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs>${clip}${maschere}</defs>
 ${universo}${colori}${contorni}${etichette}${elementi}
-</svg>${attr.titolo ? `<figcaption>${esc(attr.titolo)}</figcaption>` : ''}</figure>`;
+</svg>${attr.titolo ? `<figcaption>${didascalia(attr.titolo)}</figcaption>` : ''}</figure>`;
 }

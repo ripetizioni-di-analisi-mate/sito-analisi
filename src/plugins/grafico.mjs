@@ -1,3 +1,4 @@
+import katex from 'katex';
 // Genera a tempo di build un grafico SVG nel piano cartesiano.
 // Assi sempre orientati: frecce ed etichette x, y; tacche con valori interi.
 // Le discontinuità (salti grandi tra punti consecutivi) interrompono la curva.
@@ -31,6 +32,12 @@ function compila(src, v = 'x') {
 const lista = (s, sep = ';') => String(s || '').split(sep).map((x) => x.trim()).filter(Boolean);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 let contatore = 0;
+// Didascalia: testo semplice con formule $…$ rese da KaTeX (frazioni in colonna, radici, esponenti).
+const didascalia = (t) => String(t).split(/(\$[^$]+\$)/g).map((p) => (/^\$[^$]+\$$/.test(p)
+  ? katex.renderToString(p.slice(1, -1), { throwOnError: false, output: 'html' })
+  : esc(p))).join('');
+const testoSemplice = (t) => String(t).replace(/\$([^$]+)\$/g, '$1')
+  .replace(/\\d?frac\{((?:[^{}]|\{[^{}]*\})*)\}\{((?:[^{}]|\{[^{}]*\})*)\}/g, '($1)/($2)').replace(/\\sqrt/g, '√').replace(/[\\{}]/g, '');
 
 export function grafico(a) {
   const id = `g${++contatore}`;
@@ -140,7 +147,7 @@ export function grafico(a) {
   const punta = (k) => `<marker id="${id}-punta${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="punta v${k}" d="M0 0 L10 5 L0 10 z"/></marker>`;
   const descr = a.titolo || (a.f ? `Grafico di y = ${a.f}` : 'Figura nel piano cartesiano');
 
-  return `<figure class="grafico"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(descr)}">
+  return `<figure class="grafico"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(testoSemplice(descr))}">
 <defs><marker id="${id}-freccia" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker>${punta(0)}${punta(1)}${punta(2)}</defs>
 ${aree}<g class="assi">
 <line x1="${m.l - 12}" y1="${oy}" x2="${W - m.r + 12}" y2="${oy}" marker-end="url(#${id}-freccia)"/>
@@ -151,5 +158,5 @@ ${aree}<g class="assi">
 <text x="${ox - 8}" y="${oy + 17}" text-anchor="end">O</text>
 </g>
 ${asint}${segm}${curve}${vett}${pt}${etich}
-</svg>${a.titolo ? `<figcaption>${esc(a.titolo)}</figcaption>` : ''}</figure>`;
+</svg>${a.titolo ? `<figcaption>${didascalia(a.titolo)}</figcaption>` : ''}</figure>`;
 }
