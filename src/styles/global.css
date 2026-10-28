@@ -423,7 +423,7 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .indice-materie a.voce-materia:hover, .indice-materie a.voce-materia:focus-visible { background: color-mix(in srgb, var(--colore-materia) 9%, var(--carta)); }
 .materia-punto { flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--colore-materia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--colore-materia) 18%, transparent); }
 .materia-testo { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.25; }
-.materia-nome { font-family: var(--ui); font-weight: 600; font-size: 0.98rem; color: var(--inchiostro); }
+.materia-nome { font-family: var(--titoli); font-weight: 700; font-size: 1.02rem; color: var(--inchiostro); }
 .materia-prossima { margin-left: auto; font-family: var(--ui); font-size: 0.74rem; color: var(--inchiostro-2); white-space: nowrap; }
 .indice-materie .stato { margin-left: auto; }
 .indice-materie .in-preparazione .materia-punto { background: none; border: 1.5px solid var(--riga); box-shadow: none; }
