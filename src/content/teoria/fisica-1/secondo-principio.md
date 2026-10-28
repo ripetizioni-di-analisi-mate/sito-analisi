@@ -102,7 +102,7 @@ Il **ciclo di Carnot** è un ciclo reversibile che scambia calore con due soli s
 
 Gli scambi di calore avvengono solo lungo le isoterme, alla stessa temperatura del serbatoio con cui il fluido è in contatto, e per questo il ciclo è reversibile. Percorso in verso opposto, $A \to D \to C \to B \to A$, il ciclo di Carnot è un frigorifero.
 
-::grafico{curve="t<1?(1+(1.5)*(t-0)):(t<2?(2.5+(2.5)*(t-1)):(t<3?(5+(-3)*(t-2)):((2+(-1)*(t-3))))),t<1?8/(1+(1.5)*(t-0)):(t<2?14.74/(2.5+(2.5)*(t-1))^1.6667:(t<3?5.04/(5+(-3)*(t-2)):(8/(2+(-1)*(t-3))^1.6667))),0,4" vettori="1.6,5,1.9,4.21;3.5,1.83,4,1.46;3.8,1.33,3.2,1.57;1.6,3.65,1.4,4.57" punti="1,8,pieno,A;2.5,3.2,pieno,B;5,1.01,pieno,C;2,2.52,pieno,D" etichette="1.95,5.3,T₁;3.3,2.1,T₂" xmin=-0.3 xmax=6 ymin=-0.5 ymax=9 nomi="V,p" titolo="Ciclo di Carnot di un gas perfetto monoatomico nel piano $(V, p)$, in unità arbitrarie: isoterme $AB$ e $CD$, adiabatiche $BC$ e $DA$, più ripide delle isoterme"}
+::grafico{curve="t<1?(1+(1.5)*(t-0)):(t<2?(2.5+(2.5)*(t-1)):(t<3?(5+(-3)*(t-2)):((2+(-1)*(t-3))))),t<1?8/(1+(1.5)*(t-0)):(t<2?14.74/(2.5+(2.5)*(t-1))^1.6667:(t<3?5.04/(5+(-3)*(t-2)):(8/(2+(-1)*(t-3))^1.6667))),0,4" vettori="1.6,5,1.9,4.21;3.5,1.83,4,1.46;3.8,1.33,3.2,1.57;1.6,3.65,1.4,4.57" punti="1,8,pieno,A;2.5,3.2,pieno,B;5,1.01,pieno,C;2,2.52,pieno,D" etichette="1.95,5.3,T₁;3.4,1.05,T₂" xmin=-0.3 xmax=6 ymin=-0.5 ymax=9 nomi="V,p" titolo="Ciclo di Carnot di un gas perfetto monoatomico nel piano $(V, p)$, in unità arbitrarie: isoterme $AB$ e $CD$, adiabatiche $BC$ e $DA$, più ripide delle isoterme"}
 
 :::
 
