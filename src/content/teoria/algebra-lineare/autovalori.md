@@ -62,7 +62,7 @@ Se $A$ è triangolare, in particolare diagonale, anche $A - \lambda I_n$ è tria
 $$
 p_A(\lambda) = (a_{11} - \lambda)(a_{22} - \lambda) \cdots (a_{nn} - \lambda) .
 $$
-Gli autovalori di una **matrice triangolare** sono quindi i suoi elementi diagonali, ciascuno contato tante volte quante compare. Per $\begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ l'unico autovalore è $2$, con $p_A(\lambda) = (2 - \lambda)^2$. Quando la matrice non è triangolare ma ha una riga o una colonna con un solo elemento non nullo fuori dalla diagonale, conviene calcolare $\det(A - \lambda I_n)$ con lo **sviluppo di Laplace** lungo quella riga o colonna, poiché il polinomio si ottiene già in parte fattorizzato.
+Gli autovalori di una **matrice triangolare** sono quindi i suoi elementi diagonali, ciascuno contato tante volte quante compare. Per $\begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ l'unico autovalore è $2$, con $p_A(\lambda) = (2 - \lambda)^2$. Quando la matrice non è triangolare ma ha una riga o una colonna in cui tutti gli elementi fuori dalla diagonale sono nulli, conviene calcolare $\det(A - \lambda I_n)$ con lo **sviluppo di Laplace** lungo quella riga o colonna, poiché il polinomio si ottiene già in parte fattorizzato.
 :::
 
 :::teorema{#traccia-e-determinante titolo="Traccia, determinante e autovalori"}

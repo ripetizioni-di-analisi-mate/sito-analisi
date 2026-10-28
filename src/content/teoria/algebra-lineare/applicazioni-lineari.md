@@ -81,7 +81,7 @@ $$
 :::
 
 :::osservazione{#valori-su-vettori-dipendenti titolo="Valori assegnati su vettori dipendenti"}
-Se i valori sono assegnati su vettori $u_1, \dots, u_k$ *linearmente dipendenti*, ogni relazione tra i vettori deve valere anche tra i valori: per esempio, da $u_3 = u_1 + u_2$ segue che una $f$ lineare soddisfa $f(u_3) = f(u_1) + f(u_2)$. Se tutte le relazioni sono rispettate, $f$ esiste, ed è unica *solo se* $u_1, \dots, u_k$ generano $V$; se una relazione non è rispettata, $f$ **non esiste**. Non esiste, per esempio, un'applicazione lineare $f : \mathbb{R}^2 \to \mathbb{R}^2$ con $f(1, 0) = (1, 1)$, $f(0, 1) = (2, 0)$ e $f(1, 1) = (3, 2)$, poiché da $(1, 1) = (1, 0) + (0, 1)$ seguirebbe $f(1, 1) = (3, 1)$.
+Se i valori sono assegnati su vettori $u_1, \dots, u_k$ *linearmente dipendenti*, ogni relazione tra i vettori deve valere anche tra i valori: per esempio, da $u_3 = u_1 + u_2$ segue che una $f$ lineare soddisfa $f(u_3) = f(u_1) + f(u_2)$. Se tutte le relazioni sono rispettate, $f$ esiste, ed è unica *se e solo se* $u_1, \dots, u_k$ generano $V$; se una relazione non è rispettata, $f$ **non esiste**. Non esiste, per esempio, un'applicazione lineare $f : \mathbb{R}^2 \to \mathbb{R}^2$ con $f(1, 0) = (1, 1)$, $f(0, 1) = (2, 0)$ e $f(1, 1) = (3, 2)$, poiché da $(1, 1) = (1, 0) + (0, 1)$ seguirebbe $f(1, 1) = (3, 1)$.
 :::
 
 ## La matrice associata

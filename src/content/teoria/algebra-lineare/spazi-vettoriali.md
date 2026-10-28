@@ -279,7 +279,7 @@ Se $v_1, \dots, v_k$ sono linearmente indipendenti e $v \notin \langle v_1, \dot
 :::
 
 :::teorema{#dimensione-di-un-sottospazio titolo="Dimensione di un sottospazio"}
-Sia $\dim V = n$ e sia $W$ un sottospazio di $V$. Allora $\dim W \leq n$, e $\dim W = n$ se e solo se $W = V$. Infatti una base di $W$ è un insieme indipendente di $V$, quindi ha al più $n$ elementi; se ne ha $n$, per le conseguenze della dimensione è una base di $V$, perciò $W = V$. Il teorema serve a dimostrare uguaglianze tra sottospazi: se $U \subseteq W$ e $\dim U = \dim W$, allora $U = W$.
+Sia $\dim V = n$ e sia $W$ un sottospazio di $V$. Allora $\dim W \leq n$, e $\dim W = n$ se e solo se $W = V$. Infatti, per il lemma di Steinitz, ogni insieme di vettori indipendenti di $W$ ha al più $n$ elementi. Se $W \neq \{0\}$, si sceglie un insieme indipendente $w_1, \dots, w_m$ di $W$ con $m$ massimo; ogni $w \in W$ appartiene a $\langle w_1, \dots, w_m \rangle$, poiché altrimenti, per il teorema sull'aggiunta di un vettore, $w_1, \dots, w_m, w$ sarebbero $m + 1$ vettori indipendenti di $W$. Quindi $(w_1, \dots, w_m)$ è una base di $W$ e $\dim W = m \leq n$. Se $m = n$, per le conseguenze della dimensione $w_1, \dots, w_n$ formano una base di $V$, perciò $W = V$. Il teorema serve a dimostrare uguaglianze tra sottospazi: se $U \subseteq W$ e $\dim U = \dim W$, allora $U = W$.
 :::
 
 ## Estrazione e completamento di basi
