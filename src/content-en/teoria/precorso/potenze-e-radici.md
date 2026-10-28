@@ -64,16 +64,16 @@ $$
 :::
 
 :::teorema{#proprieta-delle-radici titolo="Properties of roots"}
-For $a, b \geq 0$ (with $b > 0$ in quotients) and indices $m, n \geq 2$:
+For $a, b \geq 0$ (with $b > 0$ in quotients), indices $m, n \geq 2$ and natural exponent $k \geq 1$:
 $$
 \sqrt[n]{ab} = \sqrt[n]{a} \, \sqrt[n]{b}, \qquad
 \sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}, \qquad
 \sqrt[m]{\sqrt[n]{a}} = \sqrt[mn]{a}, \qquad
-\sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^{m} .
+\sqrt[n]{a^k} = \left(\sqrt[n]{a}\right)^{k} .
 $$
 Moreover the **invariance property** holds: for every natural $p \geq 1$,
 $$
-\sqrt[n]{a^m} = \sqrt[np]{a^{mp}} .
+\sqrt[n]{a^k} = \sqrt[np]{a^{kp}} .
 $$
 With the first property factors are taken out of the radical sign, for example $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; with the invariance property two roots are brought to the same index, an operation on which the comparison of roots is based.
 :::

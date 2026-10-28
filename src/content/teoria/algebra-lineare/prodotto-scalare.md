@@ -76,7 +76,7 @@ $$
 $$
 La definizione ha senso per ogni $n$ grazie alla disuguaglianza di Cauchy-Schwarz, e in $\mathbb{R}^2$ e $\mathbb{R}^3$ restituisce l'angolo geometrico. Il segno del prodotto scalare dà il tipo di angolo: $\theta$ è acuto se $\langle u, v \rangle > 0$, retto se $\langle u, v \rangle = 0$, ottuso se $\langle u, v \rangle < 0$. Per $u = (3, 1)$ e $v = (1, 2)$ risulta $\langle u, v \rangle = 5$, $\|u\| = \sqrt{10}$, $\|v\| = \sqrt{5}$, quindi $\cos\theta = \dfrac{5}{\sqrt{50}} = \dfrac{1}{\sqrt{2}}$ e $\theta = \dfrac{\pi}{4}$.
 
-::grafico{vettori="0,0,3,1,u;0,0,1,2,v" curve="0.9*cos(t),0.9*sin(t),0.3218,1.1071" etichette="1.05,0.75,θ" xmin=-0.6 xmax=3.6 ymin=-0.6 ymax=2.6 uguale=1 titolo="I vettori $u = (3, 1)$ e $v = (1, 2)$ formano l'angolo $\theta = \dfrac{\pi}{4}$, poiché $\cos\theta = \dfrac{1}{\sqrt{2}}$"}
+::grafico{vettori="0,0,3,1;0,0,1,2" curve="0.9*cos(t),0.9*sin(t),0.3218,1.1071" etichette="1.05,0.75,θ;1.6,0.25,u;0.2,1.1,v" xmin=-0.6 xmax=3.6 ymin=-0.6 ymax=2.6 uguale=1 titolo="I vettori $u = (3, 1)$ e $v = (1, 2)$ formano l'angolo $\theta = \dfrac{\pi}{4}$, poiché $\cos\theta = \dfrac{1}{\sqrt{2}}$"}
 
 :::
 
@@ -145,7 +145,7 @@ $$
 $$
 È l'unico multiplo di $u$ tale che la differenza $v - \operatorname{pr}_u(v)$ sia ortogonale a $u$: infatti $\langle v - t u, u \rangle = \langle v, u \rangle - t \langle u, u \rangle$ si annulla soltanto per $t = \dfrac{\langle v, u \rangle}{\langle u, u \rangle}$. Così $v$ si scrive come somma di un vettore parallelo a $u$ e di uno ortogonale a $u$. Per $u = (2, 1)$ e $v = (3, 4)$ si ha $\langle v, u \rangle = 10$ e $\langle u, u \rangle = 5$, quindi $\operatorname{pr}_u(v) = 2u = (4, 2)$ e $v - \operatorname{pr}_u(v) = (-1, 2)$, che è ortogonale a $u$.
 
-::grafico{vettori="0,0,2,1,u;0,0,3,4,v;0,0,4,2,p;4,2,3,4,v − p" segmenti="-1,-0.5,5,2.5" xmin=-1 xmax=5 ymin=-0.8 ymax=4.5 uguale=1 titolo="La proiezione $p = \operatorname{pr}_u(v) = (4, 2)$ di $v = (3, 4)$ sulla retta generata da $u = (2, 1)$ (tratteggiata): la differenza $v - p = (-1, 2)$ è ortogonale alla retta"}
+::grafico{vettori="0,0,2,1;0,0,3,4;0,0,4,2;4,2,3,4,v − p" etichette="1.2,0.1,u;1.1,2.2,v;3,1,p" segmenti="-1,-0.5,5,2.5" xmin=-1 xmax=5 ymin=-0.8 ymax=4.5 uguale=1 titolo="La proiezione $p = \operatorname{pr}_u(v) = (4, 2)$ di $v = (3, 4)$ sulla retta generata da $u = (2, 1)$ (tratteggiata): la differenza $v - p = (-1, 2)$ è ortogonale alla retta"}
 
 :::
 
@@ -307,7 +307,7 @@ S_\theta =
 $$
 La matrice $R_\theta$ ha determinante $1$ ed è la **rotazione** di angolo $\theta$ attorno all'origine; la matrice $S_\theta$ ha determinante $-1$ ed è la **simmetria** rispetto alla retta per l'origine che forma l'angolo $\dfrac{\theta}{2}$ con l'asse $x$. Le colonne di $R_\theta$ sono le immagini dei vettori $e_1$ e $e_2$ della base canonica, e restano due versori ortogonali.
 
-::grafico{curve="cos(t),sin(t),0,6.29" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,0.866,0.5,Re₁;0,0,-0.5,0.866,Re₂" xmin=-1.4 xmax=1.5 ymin=-1.3 ymax=1.4 uguale=1 titolo="La rotazione $R_\theta$ con $\theta = \dfrac{\pi}{6}$ porta la base canonica nella base ortonormale formata dalle colonne $\left( \dfrac{\sqrt{3}}{2}, \dfrac{1}{2} \right)$ e $\left( -\dfrac{1}{2}, \dfrac{\sqrt{3}}{2} \right)$"}
+::grafico{curve="cos(t),sin(t),0,6.29" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,0.866,0.5;0,0,-0.5,0.866,Re₂" etichette="0.9,0.55,Re₁" xmin=-1.4 xmax=1.5 ymin=-1.3 ymax=1.4 uguale=1 titolo="La rotazione $R_\theta$ con $\theta = \dfrac{\pi}{6}$ porta la base canonica nella base ortonormale formata dalle colonne $\left( \dfrac{\sqrt{3}}{2}, \dfrac{1}{2} \right)$ e $\left( -\dfrac{1}{2}, \dfrac{\sqrt{3}}{2} \right)$"}
 
 :::
 
@@ -372,7 +372,7 @@ e $m_a(\lambda_i) = m_g(\lambda_i)$ per ogni $i$. Quando gli autovalori distinti
 :::osservazione{#interpretazione-geometrica-spettrale titolo="Interpretazione geometrica"}
 Una matrice simmetrica agisce su $\mathbb{R}^n$ come una dilatazione di fattore $\lambda_i$ lungo ciascuna delle direzioni, a due a due ortogonali, della base di autovettori. In $\mathbb{R}^2$, se $A$ è invertibile, cioè se nessun autovalore è nullo, la circonferenza unitaria viene trasformata in un'ellisse che ha gli assi lungo gli autovettori e i semiassi uguali ai valori assoluti degli autovalori. Per $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ gli autovalori sono $4$, con autovettore $(1, 1)$, e $2$, con autovettore $(1, -1)$.
 
-::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="La matrice $A$ con righe $(3, 1)$ e $(1, 3)$ trasforma la circonferenza unitaria in un'ellisse con semiassi $4$ e $2$ lungo gli autovettori ortogonali $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ e $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
+::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414" etichette="0.15,-1.55,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="La matrice $A$ con righe $(3, 1)$ e $(1, 3)$ trasforma la circonferenza unitaria in un'ellisse con semiassi $4$ e $2$ lungo gli autovettori ortogonali $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ e $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
 
 :::
 

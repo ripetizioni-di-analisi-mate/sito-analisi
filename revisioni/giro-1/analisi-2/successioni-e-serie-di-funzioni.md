@@ -1,0 +1,24 @@
+# Successioni e serie di funzioni: primo giro
+
+Riletti la teoria, le 7 schede svolte e le 14 tracce; risultati, massimi e integrali ricalcolati con sympy (nessun risultato finale errato).
+
+## Modifiche fatte
+
+- `teoria/analisi-2/successioni-e-serie-di-funzioni.md`, blocco *Criterio del sup*: diceva che "$|f_n(x) - f(x)| < \varepsilon$ per ogni $x \in A$ equivale a $M_n \leq \varepsilon$", falso nel verso $M_n \leq \varepsilon \Rightarrow$ disuguaglianza stretta; ora le due implicazioni sono scritte separatamente ($< \varepsilon$ per ogni $x$ implica $M_n \leq \varepsilon$; $M_n < \varepsilon$ implica $< \varepsilon$ per ogni $x$). Corretto anche nel file inglese, dove c'era inoltre il refuso "an Mathematical Analysis 1 problem". Matematica.
+- `dafare/analisi-2/successioni-e-serie-di-funzioni/5.md` (e versione inglese), soluzione: affermava $M_n = f_n(\delta)$ su $[\delta, +\infty)$ per ogni $n$, ma $f_n(x) = \dfrac{nx}{1 + n^2x^2}$ è decrescente su $[\delta, +\infty)$ solo quando $\dfrac{1}{n} \leq \delta$; aggiunta la condizione $n > \dfrac{1}{\delta}$ con la motivazione. Matematica.
+- Teoria, blocco *Convergenza puntuale* (attenzione su $x^n$): "la nozione più forte introdotta sotto" sostituito con "una nozione più forte, la convergenza uniforme". Editoriale (riferimento alla struttura della pagina).
+- Teoria, blocco *Convergenza uniforme*: "i controesempi sotto mostrano che il viceversa non vale" sostituito con "il viceversa non vale, come mostra la successione $x^n$ su $[0, 1)$". Editoriale.
+- Teoria, prime due figure (esempio $x^n$ su $[0, 1]$), in italiano e in inglese: le didascalie erano in testo semplice ("y = x³", "(1, 1)") a differenza di tutte le altre; ora le formule sono in LaTeX. Figure.
+- Teoria, figura dell'esempio *Convergenza totale su ℝ*, in italiano e in inglese: la legenda automatica mostrava la formula chiusa della somma $\dfrac{\frac{1}{2}\cos x - \frac{1}{4}}{\frac{5}{4} - \cos x}$, mai introdotta nel testo; ora la legenda è $y = f(x)$, $y = s_1(x)$, $y = s_2(x)$, coerente con la didascalia. Figure.
+- `svolti/.../2.md`, esercizio 3, ultima frase: "i grafici sviluppano un picco … che la convergenza puntuale *non* vede" (personificazione); ora spiega che il punto di massimo $\dfrac{1}{\sqrt{2n}}$ tende a $0$, quindi in ogni punto fissato il limite è nullo mentre il massimo diverge. Lingua.
+- `svolti/.../4.md`, esercizio 2: "come somma uniforme di funzioni continue" sostituito con "come somma di una serie uniformemente convergente di funzioni continue". Lingua.
+- `svolti/.../5.md`, esercizio 3: "$(1 - x^2)^n$ tende a $0$ geometricamente e vince sul fattore $n$" (verbo figurato e passaggio non giustificato) sostituito con "$n(1 - x^2)^n$ tende a $0$, poiché $nq^n \to 0$ per ogni $q \in [0, 1)$". Lingua.
+
+## Modifiche da fare
+
+- Teoria, *Teorema di derivazione per successioni*: nessuna scheda svolta lo usa (solo la traccia 7, che ne mostra il fallimento). Lo studente vede l'enunciato e il controesempio ma mai un'applicazione positiva. Proposta: un esercizio in una nuova scheda o nella scheda 7, per esempio $f_n(x) = \sqrt{x^2 + \frac{1}{n}}$ su $[1, 2]$ o $f_n(x) = \dfrac{\ln(1 + n x^2)}{n}$, con verifica della convergenza uniforme delle derivate.
+- Schede 4 e 6: in tutti gli esercizi l'insieme di convergenza puntuale è assegnato (tutto $\mathbb{R}$ o una semiretta). All'esame la prima richiesta è spesso "determinare l'insieme di convergenza puntuale", con casi da discutere (per esempio $\sum \dfrac{x^n}{1 + x^{2n}}$, $\sum \dfrac{1}{n^{x}}$, $\sum n^x e^{-n}$). Proposta: un esercizio di questo tipo in testa alla scheda 6.
+- Convergenza uniforme senza convergenza totale (criterio di Leibniz con stima del resto): compare nella teoria e nella traccia 13, ma nessuna scheda svolta mostra il ragionamento completo. Proposta: aggiungerlo come esercizio 3 della scheda 7 oppure in una scheda dedicata.
+- Traccia 13 e blocco *attenzione* sulla convergenza totale: la traccia ($\sum \frac{(-1)^n}{2n + x^2}$) ricalca quasi parola per parola l'esempio della teoria ($\sum \frac{(-1)^n}{n + x^2}$). Proposta: cambiare la traccia con una serie in cui la monotonia del termine in $n$ vada verificata, per esempio $\sum \dfrac{(-1)^n x^2}{n x^2 + 1}$ su $\mathbb{R}$ o $\sum \dfrac{(-1)^n}{n + \sqrt{|x|}}$.
+- Tracce 4 e 12: usano la stessa funzione $x^2 e^{-nx}$ (successione e serie). Proposta: cambiare la funzione in una delle due, per esempio $x^3 e^{-nx}$ nella traccia 12, così lo studente rifà lo studio del massimo.
+- Teoria, sezione *Successioni di funzioni e convergenza puntuale*: le due figure separate di $x^3$ e $x^{15}$ precedono un blocco attenzione che ripete la stessa idea con $x^2$ e $x^{12}$. Proposta: unire le due figure dell'esempio in una sola con più valori di $n$, oppure togliere quella dell'attenzione, per non far scorrere tre grafici quasi uguali sul telefono.

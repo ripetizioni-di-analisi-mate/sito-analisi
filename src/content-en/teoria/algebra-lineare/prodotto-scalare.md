@@ -76,7 +76,7 @@ $$
 $$
 The definition makes sense for every $n$ thanks to the Cauchy-Schwarz inequality, and in $\mathbb{R}^2$ and $\mathbb{R}^3$ it gives back the geometric angle. The sign of the scalar product gives the type of angle: $\theta$ is acute if $\langle u, v \rangle > 0$, right if $\langle u, v \rangle = 0$, obtuse if $\langle u, v \rangle < 0$. For $u = (3, 1)$ and $v = (1, 2)$ one gets $\langle u, v \rangle = 5$, $\|u\| = \sqrt{10}$, $\|v\| = \sqrt{5}$, therefore $\cos\theta = \dfrac{5}{\sqrt{50}} = \dfrac{1}{\sqrt{2}}$ and $\theta = \dfrac{\pi}{4}$.
 
-::grafico{vettori="0,0,3,1,u;0,0,1,2,v" curve="0.9*cos(t),0.9*sin(t),0.3218,1.1071" etichette="1.05,0.75,θ" xmin=-0.6 xmax=3.6 ymin=-0.6 ymax=2.6 uguale=1 titolo="The vectors $u = (3, 1)$ and $v = (1, 2)$ form the angle $\theta = \dfrac{\pi}{4}$, since $\cos\theta = \dfrac{1}{\sqrt{2}}$"}
+::grafico{vettori="0,0,3,1;0,0,1,2" curve="0.9*cos(t),0.9*sin(t),0.3218,1.1071" etichette="1.05,0.75,θ;1.6,0.25,u;0.2,1.1,v" xmin=-0.6 xmax=3.6 ymin=-0.6 ymax=2.6 uguale=1 titolo="The vectors $u = (3, 1)$ and $v = (1, 2)$ form the angle $\theta = \dfrac{\pi}{4}$, since $\cos\theta = \dfrac{1}{\sqrt{2}}$"}
 
 :::
 
@@ -145,7 +145,7 @@ $$
 $$
 It is the unique multiple of $u$ such that the difference $v - \operatorname{pr}_u(v)$ is orthogonal to $u$: indeed $\langle v - t u, u \rangle = \langle v, u \rangle - t \langle u, u \rangle$ vanishes only for $t = \dfrac{\langle v, u \rangle}{\langle u, u \rangle}$. Thus $v$ is written as the sum of a vector parallel to $u$ and one orthogonal to $u$. For $u = (2, 1)$ and $v = (3, 4)$ one has $\langle v, u \rangle = 10$ and $\langle u, u \rangle = 5$, therefore $\operatorname{pr}_u(v) = 2u = (4, 2)$ and $v - \operatorname{pr}_u(v) = (-1, 2)$, which is orthogonal to $u$.
 
-::grafico{vettori="0,0,2,1,u;0,0,3,4,v;0,0,4,2,p;4,2,3,4,v − p" segmenti="-1,-0.5,5,2.5" xmin=-1 xmax=5 ymin=-0.8 ymax=4.5 uguale=1 titolo="The projection $p = \operatorname{pr}_u(v) = (4, 2)$ of $v = (3, 4)$ onto the line spanned by $u = (2, 1)$ (dashed): the difference $v - p = (-1, 2)$ is orthogonal to the line"}
+::grafico{vettori="0,0,2,1;0,0,3,4;0,0,4,2;4,2,3,4,v − p" etichette="1.2,0.1,u;1.1,2.2,v;3,1,p" segmenti="-1,-0.5,5,2.5" xmin=-1 xmax=5 ymin=-0.8 ymax=4.5 uguale=1 titolo="The projection $p = \operatorname{pr}_u(v) = (4, 2)$ of $v = (3, 4)$ onto the line spanned by $u = (2, 1)$ (dashed): the difference $v - p = (-1, 2)$ is orthogonal to the line"}
 
 :::
 
@@ -307,7 +307,7 @@ S_\theta =
 $$
 The matrix $R_\theta$ has determinant $1$ and is the **rotation** by the angle $\theta$ about the origin; the matrix $S_\theta$ has determinant $-1$ and is the **reflection** across the line through the origin that forms the angle $\dfrac{\theta}{2}$ with the $x$-axis. The columns of $R_\theta$ are the images of the vectors $e_1$ and $e_2$ of the standard basis, and they remain two orthogonal unit vectors.
 
-::grafico{curve="cos(t),sin(t),0,6.29" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,0.866,0.5,Re₁;0,0,-0.5,0.866,Re₂" xmin=-1.4 xmax=1.5 ymin=-1.3 ymax=1.4 uguale=1 titolo="The rotation $R_\theta$ with $\theta = \dfrac{\pi}{6}$ takes the standard basis to the orthonormal basis formed by the columns $\left( \dfrac{\sqrt{3}}{2}, \dfrac{1}{2} \right)$ and $\left( -\dfrac{1}{2}, \dfrac{\sqrt{3}}{2} \right)$"}
+::grafico{curve="cos(t),sin(t),0,6.29" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,0.866,0.5;0,0,-0.5,0.866,Re₂" etichette="0.9,0.55,Re₁" xmin=-1.4 xmax=1.5 ymin=-1.3 ymax=1.4 uguale=1 titolo="The rotation $R_\theta$ with $\theta = \dfrac{\pi}{6}$ takes the standard basis to the orthonormal basis formed by the columns $\left( \dfrac{\sqrt{3}}{2}, \dfrac{1}{2} \right)$ and $\left( -\dfrac{1}{2}, \dfrac{\sqrt{3}}{2} \right)$"}
 
 :::
 
@@ -372,7 +372,7 @@ and $m_a(\lambda_i) = m_g(\lambda_i)$ for every $i$. When there are two distinct
 :::osservazione{#interpretazione-geometrica-spettrale titolo="Geometric interpretation"}
 A symmetric matrix acts on $\mathbb{R}^n$ as a dilation by the factor $\lambda_i$ along each of the pairwise orthogonal directions of the basis of eigenvectors. In $\mathbb{R}^2$, if $A$ is invertible, that is, if no eigenvalue is zero, the unit circle is transformed into an ellipse whose axes lie along the eigenvectors and whose semi-axes are equal to the absolute values of the eigenvalues. For $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ the eigenvalues are $4$, with eigenvector $(1, 1)$, and $2$, with eigenvector $(1, -1)$.
 
-::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="The matrix $A$ with rows $(3, 1)$ and $(1, 3)$ transforms the unit circle into an ellipse with semi-axes $4$ and $2$ along the orthogonal eigenvectors $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ and $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
+::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414" etichette="0.15,-1.55,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="The matrix $A$ with rows $(3, 1)$ and $(1, 3)$ transforms the unit circle into an ellipse with semi-axes $4$ and $2$ along the orthogonal eigenvectors $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ and $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
 
 :::
 

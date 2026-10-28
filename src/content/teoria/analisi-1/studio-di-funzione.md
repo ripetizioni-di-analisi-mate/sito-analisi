@@ -50,7 +50,7 @@ Il test di monotonia vale su un *intervallo*, *non* su un'unione di intervalli. 
 ## Massimi e minimi relativi
 
 :::definizione{#massimi-minimi-relativi titolo="Massimo e minimo relativo"}
-$f : A \to \mathbb{R}$. Un punto $x_0 \in A$ è di **massimo relativo** se esiste un intorno $U$ di $x_0$ tale che $f(x) \leq f(x_0)$ per ogni $x \in U \cap A$; è di **minimo relativo** se nelle stesse condizioni $f(x) \geq f(x_0)$. Il valore $f(x_0)$ si chiama massimo (o minimo) relativo, il punto $x_0$ punto di massimo (o di minimo). La ricerca di questi punti si fonda sul teorema di Fermat, dimostrato nel capitolo sulle derivate.
+$f : A \to \mathbb{R}$. Un punto $x_0 \in A$ è di **massimo relativo** (o massimo locale) se esiste un intorno $U$ di $x_0$ tale che $f(x) \leq f(x_0)$ per ogni $x \in U \cap A$; è di **minimo relativo** se nelle stesse condizioni $f(x) \geq f(x_0)$. Il valore $f(x_0)$ si chiama massimo (o minimo) relativo, il punto $x_0$ punto di massimo (o di minimo). La ricerca di questi punti si fonda sul teorema di Fermat, dimostrato nel capitolo sulle derivate.
 :::
 
 :::richiamo{titolo="Teorema di Fermat"}
@@ -86,7 +86,7 @@ Il criterio è comodo quando lo studio del segno di $f'$ è laborioso e il valor
 :::
 
 :::teorema{#criterio-derivate-successive titolo="Criterio delle derivate successive"}
-Sia $f$ derivabile $n$ volte in $x_0$ con
+Sia $f$ derivabile $n$ volte in $x_0$, con $n \geq 2$ e
 $$
 f'(x_0) = f''(x_0) = \dots = f^{(n-1)}(x_0) = 0, \qquad f^{(n)}(x_0) \neq 0 .
 $$
@@ -144,7 +144,7 @@ cioè se ogni segmento che congiunge due punti del grafico non scende sotto il g
 :::
 
 :::teorema{#convessita-derivata-seconda titolo="Convessità e derivata seconda"}
-Sia $f$ derivabile due volte su un intervallo $I$. $f$ è **convessa** su $I$ *se e solo se* $f''(x) \geq 0$ per ogni $x \in I$; se $f''(x) > 0$ nei punti interni, $f$ è strettamente convessa. Analogamente $f$ è **concava** su $I$ se e solo se $f''(x) \leq 0$. La convessità equivale alla crescenza di $f'$, quindi il risultato segue dal test di monotonia applicato a $f'$; la dimostrazione si rimanda al capitolo sulle derivate. Nello studio di funzione la concavità si ricava dalla disequazione $f''(x) > 0$, riportata nella tabella dei segni.
+Sia $f$ derivabile due volte su un intervallo $I$. $f$ è **convessa** su $I$ *se e solo se* $f''(x) \geq 0$ per ogni $x \in I$; se $f''(x) > 0$ nei punti interni, $f$ è strettamente convessa. Analogamente $f$ è **concava** su $I$ se e solo se $f''(x) \leq 0$. La convessità equivale alla crescenza di $f'$, quindi il risultato segue dal test di monotonia applicato a $f'$, e l'equivalenza tra convessità e crescenza di $f'$ si assume senza dimostrazione. Nello studio di funzione la concavità si ricava dalla disequazione $f''(x) > 0$, riportata nella tabella dei segni.
 :::
 
 :::teorema{#convessita-e-tangente titolo="Posizione rispetto alla tangente"}
@@ -185,7 +185,7 @@ L'annullarsi della derivata seconda è una condizione *necessaria* ma *non suffi
 La **tabella dei segni** raccoglie su righe parallele il segno di $f'$ e quello di $f''$, con una colonna per ogni intervallo delimitato dai punti notevoli: zeri delle derivate, punti di non derivabilità, punti esclusi dal dominio. Dalla riga di $f'$ si legge la monotonia, per il test di monotonia; dalla riga di $f''$ la concavità, per la caratterizzazione della convessità. La riga finale combina le due informazioni nella forma del grafico su ciascun intervallo.
 :::
 
-:::esempio{titolo="Tabella dei segni per y = x^3 - 3x"}
+:::esempio{titolo="Tabella dei segni per y = x³ − 3x"}
 $f(x) = x^3 - 3x$, $f'(x) = 3x^2 - 3$, $f''(x) = 6x$. La derivata prima si annulla in $\pm 1$ ed è positiva per $|x| > 1$; la derivata seconda si annulla in $0$ ed è positiva per $x > 0$.
 $$
 \begin{array}{c|ccccccc}
@@ -202,7 +202,7 @@ La tabella dà il **massimo relativo** in $-1$ con $f(-1) = 2$, il **minimo rela
 Il **grafico qualitativo** è un disegno che riporta correttamente le proprietà ricavate dallo studio, senza pretesa di *precisione metrica*. Deve mostrare il dominio con gli eventuali punti esclusi, gli zeri e il segno, gli asintoti con il verso di avvicinamento, i punti di massimo, di minimo e di flesso con le loro coordinate, la monotonia e la concavità su ogni intervallo. Un grafico coerente con la tabella dei segni conclude lo studio e permette di rispondere a domande ulteriori, come il numero di soluzioni dell'equazione $f(x) = k$ al variare di $k \in \mathbb{R}$.
 :::
 
-:::esempio{titolo="Grafico di y = x^3 - 3x"}
+:::esempio{titolo="Grafico di y = x³ − 3x"}
 La funzione è **dispari**, si annulla in $0$ e in $\pm\sqrt{3}$, tende a $\pm\infty$ per $x \to \pm\infty$ **senza asintoti** perché $\dfrac{f(x)}{x} = x^2 - 3 \to +\infty$, ha massimo relativo $2$ in $-1$, minimo relativo $-2$ in $1$ e flesso nell'origine.
 
 ::grafico{f="x^3-3*x" xmin=-3 xmax=3 ymin=-4.5 ymax=4.5 titolo="$y = x^3 - 3x$: massimo in $(-1, 2)$, minimo in $(1, -2)$, flesso in $(0, 0)$"}

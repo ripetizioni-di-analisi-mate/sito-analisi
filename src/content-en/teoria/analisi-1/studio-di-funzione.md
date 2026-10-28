@@ -50,7 +50,7 @@ The monotonicity test holds on an *interval*, *not* on a union of intervals. For
 ## Relative maxima and minima
 
 :::definizione{#massimi-minimi-relativi titolo="Relative maximum and minimum"}
-$f : A \to \mathbb{R}$. A point $x_0 \in A$ is a **relative maximum** point if there exists a neighborhood $U$ of $x_0$ such that $f(x) \leq f(x_0)$ for every $x \in U \cap A$; it is a **relative minimum** point if under the same conditions $f(x) \geq f(x_0)$. The value $f(x_0)$ is called a relative maximum (or minimum), the point $x_0$ a maximum (or minimum) point. The search for these points rests on Fermat's theorem, proved in the chapter on derivatives.
+$f : A \to \mathbb{R}$. A point $x_0 \in A$ is a **relative maximum** (or local maximum) point if there exists a neighborhood $U$ of $x_0$ such that $f(x) \leq f(x_0)$ for every $x \in U \cap A$; it is a **relative minimum** point if under the same conditions $f(x) \geq f(x_0)$. The value $f(x_0)$ is called a relative maximum (or minimum), the point $x_0$ a maximum (or minimum) point. The search for these points rests on Fermat's theorem, proved in the chapter on derivatives.
 :::
 
 :::richiamo{titolo="Fermat's theorem"}
@@ -86,7 +86,7 @@ The test is convenient when studying the sign of $f'$ is laborious and the value
 :::
 
 :::teorema{#criterio-derivate-successive titolo="Higher-order derivative test"}
-Let $f$ be $n$ times differentiable at $x_0$ with
+Let $f$ be $n$ times differentiable at $x_0$, with $n \geq 2$ and
 $$
 f'(x_0) = f''(x_0) = \dots = f^{(n-1)}(x_0) = 0, \qquad f^{(n)}(x_0) \neq 0 .
 $$
@@ -144,7 +144,7 @@ that is, if every segment joining two points of the graph does not go below the 
 :::
 
 :::teorema{#convessita-derivata-seconda titolo="Convexity and second derivative"}
-Let $f$ be twice differentiable on an interval $I$. $f$ is **convex** on $I$ *if and only if* $f''(x) \geq 0$ for every $x \in I$; if $f''(x) > 0$ at the interior points, $f$ is strictly convex. Similarly $f$ is **concave** on $I$ if and only if $f''(x) \leq 0$. Convexity is equivalent to $f'$ being increasing, therefore the result follows from the monotonicity test applied to $f'$; the proof is deferred to the chapter on derivatives. In curve sketching the concavity is obtained from the inequality $f''(x) > 0$, recorded in the sign chart.
+Let $f$ be twice differentiable on an interval $I$. $f$ is **convex** on $I$ *if and only if* $f''(x) \geq 0$ for every $x \in I$; if $f''(x) > 0$ at the interior points, $f$ is strictly convex. Similarly $f$ is **concave** on $I$ if and only if $f''(x) \leq 0$. Convexity is equivalent to $f'$ being increasing, therefore the result follows from the monotonicity test applied to $f'$, and the equivalence between convexity and increasing $f'$ is assumed without proof. In curve sketching the concavity is obtained from the inequality $f''(x) > 0$, recorded in the sign chart.
 :::
 
 :::teorema{#convessita-e-tangente titolo="Position with respect to the tangent"}
@@ -185,7 +185,7 @@ The vanishing of the second derivative is a *necessary* but *not sufficient* con
 The **sign chart** collects on parallel rows the sign of $f'$ and that of $f''$, with one column for each interval bounded by the notable points: zeros of the derivatives, points of non-differentiability, points excluded from the domain. From the row of $f'$ one reads the monotonicity, by the monotonicity test; from the row of $f''$ the concavity, by the characterization of convexity. The final row combines the two pieces of information into the shape of the graph on each interval.
 :::
 
-:::esempio{titolo="Sign chart for y = x^3 - 3x"}
+:::esempio{titolo="Sign chart for y = x³ − 3x"}
 $f(x) = x^3 - 3x$, $f'(x) = 3x^2 - 3$, $f''(x) = 6x$. The first derivative vanishes at $\pm 1$ and is positive for $|x| > 1$; the second derivative vanishes at $0$ and is positive for $x > 0$.
 $$
 \begin{array}{c|ccccccc}
@@ -202,7 +202,7 @@ The chart gives the **relative maximum** at $-1$ with $f(-1) = 2$, the **relativ
 The **qualitative graph** is a drawing that correctly shows the properties obtained from the study, without claiming *metric precision*. It must show the domain with any excluded points, the zeros and the sign, the asymptotes with the direction of approach, the maximum, minimum and inflection points with their coordinates, the monotonicity and the concavity on each interval. A graph consistent with the sign chart concludes the study and makes it possible to answer further questions, such as the number of solutions of the equation $f(x) = k$ as $k \in \mathbb{R}$ varies.
 :::
 
-:::esempio{titolo="Graph of y = x^3 - 3x"}
+:::esempio{titolo="Graph of y = x³ − 3x"}
 The function is **odd**, vanishes at $0$ and at $\pm\sqrt{3}$, tends to $\pm\infty$ as $x \to \pm\infty$ **without asymptotes** because $\dfrac{f(x)}{x} = x^2 - 3 \to +\infty$, has relative maximum $2$ at $-1$, relative minimum $-2$ at $1$ and an inflection point at the origin.
 
 ::grafico{f="x^3-3*x" xmin=-3 xmax=3 ymin=-4.5 ymax=4.5 titolo="$y = x^3 - 3x$: maximum at $(-1, 2)$, minimum at $(1, -2)$, inflection point at $(0, 0)$"}

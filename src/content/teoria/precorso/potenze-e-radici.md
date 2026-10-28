@@ -20,7 +20,7 @@ Queste posizioni sono le *uniche* che conservano le proprietà delle potenze: da
 :::osservazione
 Con base negativa il segno della potenza dipende dalla **parità dell'esponente**: $(-2)^4 = 16$ e $(-2)^3 = -8$. La scrittura $-2^4$ indica l'opposto di $2^4$, cioè $-16$, perché l'elevamento a potenza *precede* il cambio di segno.
 
-::grafico{f="x^2;x^3" xmin=-2.6 xmax=2.6 ymin=-9 ymax=9 punti="-2,4,pieno,(−2)² = 4;-2,-8,pieno,(−2)³ = −8" etichette="1,7,y = x³;-2.5,7.5,y = x²" titolo="Con base negativa $x^2$ è positiva e $x^3$ è negativa: il grafico di $y = x^2$ è simmetrico rispetto all'asse $y$, quello di $y = x^3$ rispetto all'origine"}
+::grafico{f="x^2;x^3" xmin=-2.6 xmax=2.6 ymin=-9 ymax=9 punti="-2,4,pieno;-2,-8,pieno" etichette="1,7,y = x³;-2.5,7.5,y = x²;-1.85,5,(−2)² = 4;-1.75,-8.3,(−2)³ = −8" titolo="Con base negativa $x^2$ è positiva e $x^3$ è negativa: il grafico di $y = x^2$ è simmetrico rispetto all'asse $y$, quello di $y = x^3$ rispetto all'origine"}
 
 :::
 
@@ -52,9 +52,9 @@ Per $n$ naturale con $n \geq 2$:
 
 Con indice pari la radice è per definizione **maggiore o uguale a zero**: l'equazione $x^2 = 49$ ha le due soluzioni $x = \pm 7$, mentre il simbolo $\sqrt{49}$ indica *soltanto* $7$. La condizione "radicando maggiore o uguale a zero per indice pari" è la **condizione di esistenza** che apre ogni esercizio con radici.
 
-::grafico{f="sqrt(x)" xmin=-1 xmax=9 ymin=-1 ymax=4 titolo="y = √x: la radice quadrata è definita per x ≥ 0 e ha valori maggiori o uguali a zero"}
+::grafico{f="sqrt(x)" xmin=-1 xmax=9 ymin=-1 ymax=4 titolo="$y = \sqrt{x}$: la radice quadrata è definita per $x \geq 0$ e ha valori maggiori o uguali a zero"}
 
-::grafico{f="sqrt(x)^4;x;sqrt(x)" xmin=-1 xmax=5 ymin=-1 ymax=5 uguale=1 punti="2,4,pieno,P;4,2,pieno,P′" segmenti="2,4,4,2" etichette="0.3,4.5,y = x²;4.1,1.4,y = √x;4.2,4.6,y = x" titolo="Per $x \geq 0$ i grafici di $y = x^2$ e $y = \sqrt{x}$ sono simmetrici rispetto alla bisettrice $y = x$: il punto $P(2, 4)$ del primo corrisponde al punto $P'(4, 2)$ del secondo"}
+::grafico{f="sqrt(x)^4;x;sqrt(x)" xmin=-1 xmax=5 ymin=-1 ymax=5 uguale=1 legenda="y = x^2 \ (x \geq 0);y = x;y = \sqrt{x}" punti="2,4,pieno,P;4,2,pieno,P′" segmenti="2,4,4,2" etichette="0.3,4.5,y = x²;4.1,1.4,y = √x;4.2,4.6,y = x" titolo="Per $x \geq 0$ i grafici di $y = x^2$ e $y = \sqrt{x}$ sono simmetrici rispetto alla bisettrice $y = x$: il punto $P(2, 4)$ del primo corrisponde al punto $P'(4, 2)$ del secondo"}
 
 :::
 
@@ -73,16 +73,16 @@ $$
 :::
 
 :::teorema{#proprieta-delle-radici titolo="Proprietà delle radici"}
-Per $a, b \geq 0$ (con $b > 0$ nei quozienti) e indici $m, n \geq 2$:
+Per $a, b \geq 0$ (con $b > 0$ nei quozienti), indici $m, n \geq 2$ ed esponente naturale $k \geq 1$:
 $$
 \sqrt[n]{ab} = \sqrt[n]{a} \, \sqrt[n]{b}, \qquad
 \sqrt[n]{\frac{a}{b}} = \frac{\sqrt[n]{a}}{\sqrt[n]{b}}, \qquad
 \sqrt[m]{\sqrt[n]{a}} = \sqrt[mn]{a}, \qquad
-\sqrt[n]{a^m} = \left(\sqrt[n]{a}\right)^{m} .
+\sqrt[n]{a^k} = \left(\sqrt[n]{a}\right)^{k} .
 $$
 Vale inoltre la **proprietà invariantiva**: per ogni naturale $p \geq 1$,
 $$
-\sqrt[n]{a^m} = \sqrt[np]{a^{mp}} .
+\sqrt[n]{a^k} = \sqrt[np]{a^{kp}} .
 $$
 Con la prima proprietà si **estraggono i fattori** dal segno di radice, per esempio $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt{2}$; con la proprietà invariantiva si portano due radici allo stesso indice, operazione su cui si fonda il confronto tra radici.
 :::

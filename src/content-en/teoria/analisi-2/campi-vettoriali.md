@@ -85,7 +85,7 @@ By the **fundamental theorem of integral calculus**, therefore,
 $$
 \int_{\gamma} F \cdot dr = \int_a^b g'(t) \, dt = g(b) - g(a) = U(Q) - U(P) .
 $$
-If the curve is piecewise regular, the argument is applied to each piece and the results are added; the terms at the junction points cancel in pairs.
+If the curve is piecewise regular, the argument is applied to each piece and the results are added; the values of $U$ at the junction points appear once with a plus sign and once with a minus sign, so they cancel in pairs.
 :::
 ::::
 
@@ -111,7 +111,7 @@ The theorem provides the criterion by which one proves that a field is not conse
 :::dimostrazione
 Condition 1 implies condition 2 by the theorem on the work of a conservative field, since the work equals $U(Q) - U(P)$ whatever the curve from $P$ to $Q$.
 
-Conditions 2 and 3 are **equivalent**. If the work depends only on the endpoints and $\gamma$ is closed with initial and final point $P$, the constant curve at $P$ has the same endpoints and zero work, hence the circulation along $\gamma$ is zero; more directly, splitting $\gamma$ into two arcs $\gamma_1$ and $\gamma_2$ from $P$ to $Q$, the works along $\gamma_1$ and along $\gamma_2$ coincide, therefore the work along $\gamma_1$ followed by $\gamma_2$ reversed, that is, along $\gamma$, is zero. Conversely, if every circulation is zero and $\gamma_1$, $\gamma_2$ are two curves from $P$ to $Q$, the curve obtained by traversing $\gamma_1$ and then $\gamma_2$ in the opposite direction is closed, hence its work is zero, and the works along $\gamma_1$ and $\gamma_2$ coincide.
+Conditions 2 and 3 are **equivalent**. If the work depends only on the endpoints and $\gamma$ is closed with initial and final point $P$, one fixes a point $Q$ of the trace different from $P$ and splits $\gamma$ into two arcs, $\gamma_1$ from $P$ to $Q$ and a second arc from $Q$ to $P$, whose opposite $\gamma_2$ goes from $P$ to $Q$; the works along $\gamma_1$ and along $\gamma_2$ coincide, therefore the work along $\gamma_1$ followed by $\gamma_2$ reversed, that is, along $\gamma$, is zero. Conversely, if every circulation is zero and $\gamma_1$, $\gamma_2$ are two curves from $P$ to $Q$, the curve obtained by traversing $\gamma_1$ and then $\gamma_2$ in the opposite direction is closed, hence its work is zero, and the works along $\gamma_1$ and $\gamma_2$ coincide.
 
 Condition 2 implies condition 1. Fixing $P_0 \in A$, for every $x \in A$ one defines $U(x)$ as the work of $F$ along any piecewise regular curve in $A$ from $P_0$ to $x$; such a curve exists because a connected open subset of $\mathbb{R}^n$ is polygonally connected, and the value does not depend on the curve by the hypothesis. One verifies that $U_x = F_1$ at the point $(x, y)$: for small $h$ the horizontal segment from $(x, y)$ to $(x + h, y)$ is contained in $A$, and choosing as path to $(x + h, y)$ a path to $(x, y)$ followed by the segment one obtains
 $$
@@ -306,7 +306,7 @@ $$
 = - \oint_{\partial D} y \, dx
 = \frac{1}{2} \oint_{\partial D} ( x \, dy - y \, dx ) .
 $$
-The formulas are useful when the boundary is known in parametric form and a Cartesian description of the domain is inconvenient, as for the ellipse or for closed curves given by $x = x(t)$, $y = y(t)$. The third formula is often the most convenient, since in its integrand the mixed terms cancel.
+The formulas are useful when the boundary is known in parametric form and a Cartesian description of the domain is inconvenient, as for the ellipse or for closed curves given by $x = x(t)$, $y = y(t)$. The third formula is often the most convenient for boundaries parametrized with sine and cosine, since its integrand contains the sum $\cos^2 t + \sin^2 t = 1$, as for the ellipse.
 
 :::dimostrazione
 One applies **Green's theorem** to three fields. For $F = (0, x)$ the integrand of the double integral is $\dfrac{\partial F_2}{\partial x} - \dfrac{\partial F_1}{\partial y} = 1$, hence the circulation of $x \, dy$ is the double integral of the constant $1$, that is, the area. For $F = (-y, 0)$ the integrand is again $1$, hence $-\oint y \, dx$ is also the area. The third formula is the **arithmetic mean** of the first two.

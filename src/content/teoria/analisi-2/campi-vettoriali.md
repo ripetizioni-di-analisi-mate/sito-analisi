@@ -85,7 +85,7 @@ Per il **teorema fondamentale del calcolo integrale**, quindi,
 $$
 \int_{\gamma} F \cdot dr = \int_a^b g'(t) \, dt = g(b) - g(a) = U(Q) - U(P) .
 $$
-Se la curva è regolare a tratti, si applica il ragionamento su ciascun tratto e si sommano i risultati; le somme ai punti di raccordo si semplificano a coppie.
+Se la curva è regolare a tratti, si applica il ragionamento su ciascun tratto e si sommano i risultati; i valori di $U$ nei punti di raccordo compaiono una volta con il segno più e una volta con il segno meno, quindi si semplificano a coppie.
 :::
 ::::
 
@@ -111,7 +111,7 @@ Il teorema fornisce il criterio con cui si dimostra che un campo non è conserva
 :::dimostrazione
 La condizione 1 implica la condizione 2 per il teorema sul lavoro di un campo conservativo, poiché il lavoro vale $U(Q) - U(P)$ qualunque sia la curva da $P$ a $Q$.
 
-Le condizioni 2 e 3 sono **equivalenti**. Se il lavoro dipende solo dagli estremi e $\gamma$ è chiusa con punto iniziale e finale $P$, la curva costante in $P$ ha gli stessi estremi e lavoro nullo, quindi la circuitazione lungo $\gamma$ è nulla; in modo più diretto, spezzata $\gamma$ in due archi $\gamma_1$ e $\gamma_2$ da $P$ a $Q$, i lavori lungo $\gamma_1$ e lungo $\gamma_2$ coincidono, perciò il lavoro lungo $\gamma_1$ seguito da $\gamma_2$ invertita, cioè lungo $\gamma$, è nullo. Viceversa, se ogni circuitazione è nulla e $\gamma_1$, $\gamma_2$ sono due curve da $P$ a $Q$, la curva ottenuta percorrendo $\gamma_1$ e poi $\gamma_2$ in verso opposto è chiusa, quindi il suo lavoro è nullo, e i lavori lungo $\gamma_1$ e $\gamma_2$ coincidono.
+Le condizioni 2 e 3 sono **equivalenti**. Se il lavoro dipende solo dagli estremi e $\gamma$ è chiusa con punto iniziale e finale $P$, si fissa un punto $Q$ del sostegno diverso da $P$ e si spezza $\gamma$ in due archi, $\gamma_1$ da $P$ a $Q$ e un secondo arco da $Q$ a $P$, il cui opposto $\gamma_2$ va da $P$ a $Q$; i lavori lungo $\gamma_1$ e lungo $\gamma_2$ coincidono, perciò il lavoro lungo $\gamma_1$ seguito da $\gamma_2$ invertita, cioè lungo $\gamma$, è nullo. Viceversa, se ogni circuitazione è nulla e $\gamma_1$, $\gamma_2$ sono due curve da $P$ a $Q$, la curva ottenuta percorrendo $\gamma_1$ e poi $\gamma_2$ in verso opposto è chiusa, quindi il suo lavoro è nullo, e i lavori lungo $\gamma_1$ e $\gamma_2$ coincidono.
 
 La condizione 2 implica la condizione 1. Fissato $P_0 \in A$, per ogni $x \in A$ si definisce $U(x)$ come il lavoro di $F$ lungo una qualunque curva regolare a tratti in $A$ da $P_0$ a $x$; una tale curva esiste perché un aperto connesso di $\mathbb{R}^n$ è connesso per spezzate, e il valore non dipende dalla curva per l'ipotesi. Si verifica che $U_x = F_1$ nel punto $(x, y)$: per $h$ piccolo il segmento orizzontale da $(x, y)$ a $(x + h, y)$ è contenuto in $A$, e scegliendo come cammino per $(x + h, y)$ un cammino per $(x, y)$ seguito dal segmento si ottiene
 $$
@@ -218,7 +218,7 @@ e si costruisce in due passi. Dalla prima equazione, integrando $F_1$ rispetto a
 $$
 U(x, y) = \int F_1(x, y) \, dx + c(y),
 $$
-dove la costante di integrazione $c(y)$ è una **funzione della sola** $y$, poiché la derivata parziale rispetto a $x$ di una funzione di $y$ è nulla. Derivando questa espressione rispetto a $y$ e imponendo la seconda equazione si ricava $c'(y)$, e con una integrazione in $y$ si ottiene $c(y)$ a meno di una costante. Se il campo è conservativo, $c'(y)$ risulta una funzione della sola $y$; se nella espressione di $c'(y)$ resta la variabile $x$, il campo **non è conservativo**. Nello spazio il procedimento ha tre passi, con una funzione $c(y, z)$ al primo passo e una funzione $c(z)$ al secondo.
+dove la costante di integrazione $c(y)$ è una **funzione della sola** $y$, poiché la derivata parziale rispetto a $x$ di una funzione di $y$ è nulla. Derivando questa espressione rispetto a $y$ e imponendo la seconda equazione si ricava $c'(y)$, e con una integrazione in $y$ si ottiene $c(y)$ a meno di una costante. Se il campo è conservativo, $c'(y)$ risulta una funzione della sola $y$; se nell'espressione di $c'(y)$ resta la variabile $x$, il campo **non è conservativo**. Nello spazio il procedimento ha tre passi, con una funzione $c(y, z)$ al primo passo e una funzione $c(z)$ al secondo.
 :::
 
 :::esempio{titolo="Costruzione di un potenziale"}
@@ -306,7 +306,7 @@ $$
 = - \oint_{\partial D} y \, dx
 = \frac{1}{2} \oint_{\partial D} ( x \, dy - y \, dx ) .
 $$
-Le formule servono quando il bordo è noto in forma parametrica e una descrizione cartesiana del dominio è scomoda, come per l'ellisse o per le curve chiuse assegnate con $x = x(t)$, $y = y(t)$. La terza formula è spesso la più comoda, poiché nel suo integrando i termini misti si semplificano.
+Le formule servono quando il bordo è noto in forma parametrica e una descrizione cartesiana del dominio è scomoda, come per l'ellisse o per le curve chiuse assegnate con $x = x(t)$, $y = y(t)$. La terza formula è spesso la più comoda per i bordi parametrizzati con seno e coseno, poiché nel suo integrando compare la somma $\cos^2 t + \sin^2 t = 1$, come per l'ellisse.
 
 :::dimostrazione
 Si applica il **teorema di Green** a tre campi. Per $F = (0, x)$ l'integrando dell'integrale doppio è $\dfrac{\partial F_2}{\partial x} - \dfrac{\partial F_1}{\partial y} = 1$, quindi la circuitazione di $x \, dy$ è l'integrale doppio della costante $1$, cioè l'area. Per $F = (-y, 0)$ l'integrando è ancora $1$, quindi anche $-\oint y \, dx$ è l'area. La terza formula è la **media aritmetica** delle prime due.
