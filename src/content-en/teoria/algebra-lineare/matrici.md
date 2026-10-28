@@ -323,7 +323,7 @@ $$
 0 & 0
 \end{pmatrix} .
 $$
-In the first product the left factor sends every vector $(t, -t)$ to the zero vector, and the columns of the right factor are of this type, as the figure shows. An invertible square matrix is never a zero divisor, by the sufficient conditions for non-invertibility.
+In the first product the left factor sends every vector $(t, -t)$ to the zero vector, and the columns of the right factor are of this type, as the figure shows.
 
 ::grafico{f="-x;x" vettori="0,0,1,-1,c₁;0,0,-1,1,c₂" etichette="1.25,-1.75,y = −x;1.3,1.75,y = x" xmin=-2.2 xmax=2.2 ymin=-2.2 ymax=2.2 uguale=1 titolo="The columns $c_1 = (1, -1)$ and $c_2 = (-1, 1)$ of the right factor lie on the line $y = -x$, which the left factor sends to the zero vector; the image of every vector under the left factor lies on the line $y = x$ (dashed)"}
 

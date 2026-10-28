@@ -64,7 +64,7 @@ f(x, y) =
 0 & (x, y) = (0, 0)
 \end{cases}
 $$
-è nulla sugli assi, quindi $f_x(0,0) = f_y(0,0) = 0$ ed entrambe le derivate parziali esistono. Lungo la retta $y = x$ si ha $f(t, t) = \dfrac{t^2}{2t^2} = \dfrac{1}{2}$ per ogni $t \neq 0$, mentre lungo l'asse $x$ la funzione è nulla, quindi il limite di $f$ in $(0,0)$ non esiste e $f$ **non è continua** nell'origine. Per il teorema precedente $f$ **non è differenziabile** in $(0,0)$.
+è nulla sugli assi, quindi $f_x(0,0) = f_y(0,0) = 0$ ed entrambe le derivate parziali esistono. Lungo la retta $y = x$ si ha $f(t, t) = \dfrac{t^2}{2t^2} = \dfrac{1}{2}$ per ogni $t \neq 0$, mentre lungo l'asse $x$ la funzione è nulla, quindi il limite di $f$ in $(0,0)$ non esiste e $f$ **non è continua** nell'origine. Poiché la differenziabilità implica la continuità, $f$ **non è differenziabile** in $(0,0)$.
 
 ::grafico{f="x;-x" punti="0,0,pieno" etichette="1.5,0.15,f = 0;0.1,1.9,f = 0" xmin=-2.2 xmax=2.2 ymin=-2 ymax=2.2 uguale=1 titolo="$f(x, y) = \dfrac{xy}{x^2 + y^2}$ vale $0$ sugli assi, $\dfrac{1}{2}$ sulla retta $y = x$ (in colore) e $-\dfrac{1}{2}$ sulla retta $y = -x$ (tratteggiata), quindi non ha limite nell'origine"}
 
@@ -85,12 +85,12 @@ $f(x, y) = x^2 + y^2$ in $(1, 1)$. Si ha $f(1,1) = 2$, $f_x = 2x$ e $f_y = 2y$, 
 $$
 z = 2 + 2(x - 1) + 2(y - 1) = 2x + 2y - 2 .
 $$
-Le derivate parziali sono continue su tutto $\mathbb{R}^2$, perciò la differenziabilità in $(1,1)$ segue dal **teorema del differenziale totale**, enunciato nella sezione seguente.
+Le derivate parziali sono continue su tutto $\mathbb{R}^2$, perciò la differenziabilità in $(1,1)$ segue dal **teorema del differenziale totale**.
 :::
 
 ## Il teorema del differenziale totale
 
-La verifica della differenziabilità con la definizione richiede un limite in due variabili; il teorema seguente fornisce una condizione *sufficiente* molto più rapida.
+La verifica della differenziabilità con la definizione richiede un limite in due variabili; il teorema del differenziale totale fornisce una condizione *sufficiente* molto più rapida.
 
 ::::teorema{#teorema-del-differenziale-totale titolo="Teorema del differenziale totale"}
 Se le derivate parziali di $f$ esistono in un intorno di $(x_0, y_0)$ e sono **continue** in $(x_0, y_0)$, allora $f$ è **differenziabile** in $(x_0, y_0)$. In particolare una funzione di classe $C^1(A)$, cioè con derivate parziali continue in tutto l'aperto $A$, è differenziabile in ogni punto di $A$. Con questo teorema la differenziabilità delle funzioni assegnate da una formula si riconosce dal calcolo delle derivate parziali: per $f(x, y) = e^{xy} + x^2$ si ha $f_x = y\,e^{xy} + 2x$ e $f_y = x\,e^{xy}$, continue su $\mathbb{R}^2$ perché composte di funzioni continue, quindi $f$ è differenziabile in ogni punto. La verifica con la definizione resta necessaria nei punti in cui le derivate parziali non sono continue, tipicamente i **punti di raccordo** delle funzioni definite a tratti.
@@ -172,7 +172,7 @@ $$
 $$
 con uguaglianza *se e solo se* $\mathbf{v}$ è parallelo al gradiente. Quindi la derivata direzionale è **massima** lungo il versore $\mathbf{v} = \dfrac{\nabla f(x_0, y_0)}{|\nabla f(x_0, y_0)|}$, dove vale $|\nabla f(x_0, y_0)|$, ed è minima lungo il versore opposto, dove vale $-|\nabla f(x_0, y_0)|$. Nelle direzioni ortogonali al gradiente la derivata direzionale è nulla; queste direzioni sono tangenti alla curva di livello di $f$ passante per il punto, perciò il gradiente è **ortogonale alle curve di livello**. Il risultato risponde alla domanda tipica degli esercizi: in quale direzione $f$ cresce più rapidamente e con quale tasso.
 
-::grafico{f="2/x;4/x" segmenti="0.25,3.5,2,0" vettori="1,2,3,3,∇f" punti="1,2,pieno" etichette="3,0.85,xy = 2;3.3,1.42,xy = 4" xmin=-0.5 xmax=4.5 ymin=-0.5 ymax=4.3 uguale=1 titolo="Curve di livello di $f(x, y) = xy$: in $(1, 2)$ il gradiente $\nabla f = (2, 1)$ è ortogonale alla tangente alla curva $xy = 2$ e punta verso i livelli più alti (tratteggiata la curva $xy = 4$)"}
+::grafico{f="2/x;4/x" segmenti="0.25,3.5,2,0" vettori="1,2,3,3" punti="1,2,pieno" etichette="3.05,3.25,∇f;3,0.85,xy = 2;3.3,1.42,xy = 4" xmin=-0.5 xmax=4.5 ymin=-0.5 ymax=4.3 uguale=1 titolo="Curve di livello di $f(x, y) = xy$: in $(1, 2)$ il gradiente $\nabla f = (2, 1)$ è ortogonale alla tangente alla curva $xy = 2$ e punta verso i livelli più alti (tratteggiata la curva $xy = 4$)"}
 
 :::
 

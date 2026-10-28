@@ -14,7 +14,7 @@ with $a_n \neq 0$. The numbers $a_n, \dots, a_0$ are the coefficients, $a_n$ is 
 :::
 
 :::teorema{#principio-di-identita titolo="Identity principle for polynomials"}
-Two polynomials are equal *if and only if* they have the same degree and the same coefficients, term by term. The principle makes it possible to determine unknown coefficients by equating the coefficients of terms of the same degree, and it is used to check divisions and factorizations. From the equality $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ it follows that $b = -4$ and $c = 3$.
+Two polynomials take the same value for every real $x$ *if and only if* they have the same degree and the same coefficients, term by term. The principle makes it possible to determine unknown coefficients by equating the coefficients of terms of the same degree, and it is used to check divisions and factorizations. From the equality $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ it follows that $b = -4$ and $c = 3$.
 :::
 
 :::osservazione
@@ -52,7 +52,7 @@ $9x^2 - 16 = (3x - 4)(3x + 4)$. With two successive applications, $x^4 - 1 = (x^
 :::
 
 :::attenzione
-The sum of two squares $A^2 + B^2$ *cannot* be factored into first-degree factors with real coefficients. For example $x^2 + 4 \geq 4 > 0$ for every $x$, so $x^2 + 4$ has **no real roots** and no factor of the form $x - c$ divides it.
+The sum of two squares $x^2 + k^2$, with $k \neq 0$, *cannot* be factored into first-degree factors with real coefficients. For example $x^2 + 4 \geq 4 > 0$ for every $x$, so $x^2 + 4$ has **no real roots** and no factor of the form $x - c$ divides it.
 :::
 
 :::teorema{#somma-e-differenza-di-cubi titolo="Sum and difference of cubes"}
@@ -197,5 +197,5 @@ The factorization **ends** when *every* factor has degree $1$ or is a second-deg
 $$
 2x^4 + 2x^3 - 12x^2 = 2x^2\,(x^2 + x - 6) = 2x^2\,(x + 3)(x - 2)
 $$
-The first step is **factoring out the common factor** $2x^2$. The factor $x^2 + x - 6$ is a **special trinomial**, since $3 + (-2) = 1$ and $3 \cdot (-2) = -6$, so it factors as $(x + 3)(x - 2)$. All the factors have degree at most $1$, therefore the factorization is **complete**.
+The first step is **factoring out the common factor** $2x^2$. The factor $x^2 + x - 6$ is a **special trinomial**, since $3 + (-2) = 1$ and $3 \cdot (-2) = -6$, so it factors as $(x + 3)(x - 2)$. The non-constant factors, namely $x$ (which appears twice), $x + 3$ and $x - 2$, all have degree $1$, therefore the factorization is **complete**.
 :::

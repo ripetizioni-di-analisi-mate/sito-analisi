@@ -114,7 +114,7 @@ Along lines the sign can be constant *even* at a saddle point. For $f(x, y) = (y
 ## Absolute extrema on compact sets
 
 :::teorema{#weierstrass-in-piu-variabili titolo="Weierstrass's theorem"}
-Let $K \subset \mathbb{R}^2$ be a compact set, that is, closed and bounded, and let $f$ be continuous on $K$. Then $f$ attains an **absolute maximum and minimum** on $K$. The theorem guarantees that the problem has a solution *before* the computations even begin: on a rectangle, a disk or a triangle (boundary included) the absolute extrema of a continuous function always exist. The proof is analogous to the one in one variable; we refer to the chapter on functions of several variables.
+Let $K \subset \mathbb{R}^2$ be a compact set, that is, closed and bounded, and let $f$ be continuous on $K$. Then $f$ attains an **absolute maximum and minimum** on $K$. The theorem guarantees that the problem has a solution *before* the computations even begin: on a rectangle, a disk or a triangle (boundary included) the absolute extrema of a continuous function always exist. The theorem is stated in $\mathbb{R}^n$ in the chapter on functions of several variables; the proof uses sequences in $\mathbb{R}^n$ and is omitted.
 :::
 
 :::osservazione{#metodo-del-compatto titolo="The method for absolute extrema on a compact set"}
@@ -245,5 +245,6 @@ A(x) = x\,(10 - x) = 10x - x^2 .
 $$
 Since $A'(x) = 10 - 2x$ vanishes only at $x = 5$, with $A$ increasing before and decreasing after, the **absolute maximum** on $(0, 10)$ is $A(5) = 25$, attained by the **square** of side $5$. At the ends of the domain the area tends to $0$, in agreement with the fact that the maximum is interior.
 
-::grafico{f="x*(10-x)" xmin=0 xmax=10 ymin=0 ymax=30 punti="5,25" titolo="A(x) = x(10 − x): the maximum is at the vertex, at x = 5"}
+::grafico{f="x*(10-x)" xmin=0 xmax=10 ymin=0 ymax=30 punti="5,25,pieno" nomi="x,A" legenda="A(x) = x(10 - x)" titolo="The area $A(x) = x(10 - x)$ of the rectangles with perimeter $20$: the maximum is at the vertex, at $x = 5$"}
+
 :::

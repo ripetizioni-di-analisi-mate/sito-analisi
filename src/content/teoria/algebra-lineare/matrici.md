@@ -323,7 +323,7 @@ $$
 0 & 0
 \end{pmatrix} .
 $$
-Nel primo prodotto il fattore di sinistra manda nel vettore nullo ogni vettore $(t, -t)$, e le colonne del fattore di destra sono di questo tipo, come mostra la figura. Una matrice quadrata invertibile non è mai un divisore dello zero, per le condizioni sufficienti di non invertibilità.
+Nel primo prodotto il fattore di sinistra manda nel vettore nullo ogni vettore $(t, -t)$, e le colonne del fattore di destra sono di questo tipo, come mostra la figura.
 
 ::grafico{f="-x;x" vettori="0,0,1,-1,c₁;0,0,-1,1,c₂" etichette="1.25,-1.75,y = −x;1.3,1.75,y = x" xmin=-2.2 xmax=2.2 ymin=-2.2 ymax=2.2 uguale=1 titolo="Le colonne $c_1 = (1, -1)$ e $c_2 = (-1, 1)$ del fattore di destra stanno sulla retta $y = -x$, che il fattore di sinistra manda nel vettore nullo; l'immagine di ogni vettore tramite il fattore di sinistra sta sulla retta $y = x$ (tratteggiata)"}
 

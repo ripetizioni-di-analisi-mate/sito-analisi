@@ -49,7 +49,7 @@ U = \frac{q^2}{2C} + \frac{1}{2} L i^2 = \frac{Q_0^2}{2C} .
 $$
 L'energia passa dal campo elettrico del condensatore al campo magnetico dell'induttore e viceversa, due volte per periodo. Quando il condensatore è scarico tutta l'energia è nell'induttore, e la corrente è massima in modulo; uguagliando le due espressioni dell'energia si ottiene $\dfrac{Q_0^2}{2C} = \dfrac{1}{2} L I_0^2$, cioè $I_0 = \dfrac{Q_0}{\sqrt{LC}} = \omega_0 Q_0$. Nel circuito con $L = 10\,\mathrm{mH}$ e $C = 1{,}0\,\mu\mathrm{F}$, se il condensatore è caricato a $10\,\mathrm{V}$, si ha $Q_0 = 10\,\mu\mathrm{C}$, $U = 50\,\mu\mathrm{J}$ e $I_0 = 0{,}10\,\mathrm{A}$.
 
-::grafico{f="cos(x);-sin(x)" xmin=-0.5 xmax=13 ymin=-1.5 ymax=1.6 nomi="t,​" legenda="q(t);i(t)" titolo="Carica $q(t) = Q_0 \cos(\omega_0 t)$ e corrente $i(t) = -\omega_0 Q_0 \sin(\omega_0 t)$, misurate in unità di $Q_0$ e di $\omega_0 Q_0$, con il tempo in unità di $\dfrac{1}{\omega_0}$: la corrente è massima in modulo quando il condensatore è scarico"}
+::grafico{f="cos(x);-sin(x)" xmin=-0.5 xmax=13 ymin=-1.5 ymax=1.6 nomi="t," legenda="q(t);i(t)" titolo="Carica $q(t) = Q_0 \cos(\omega_0 t)$ e corrente $i(t) = -\omega_0 Q_0 \sin(\omega_0 t)$, misurate in unità di $Q_0$ e di $\omega_0 Q_0$, con il tempo in unità di $\dfrac{1}{\omega_0}$: la corrente è massima in modulo quando il condensatore è scarico"}
 
 :::dimostrazione
 Derivando $U$ rispetto al tempo e usando $i = \dfrac{dq}{dt}$ si ottiene
@@ -173,7 +173,7 @@ X_C = \frac{1}{\omega C} .
 $$
 La corrente è **in anticipo** di $\dfrac{\pi}{2}$ sulla tensione, cioè raggiunge il massimo un quarto di periodo prima, e le ampiezze sono legate da $V_0 = X_C I_0$. La grandezza $X_C$ si chiama **reattanza capacitiva** e si misura in ohm; nel rapporto tra le ampiezze ha il ruolo della resistenza, ma il condensatore non dissipa energia. Un condensatore da $10\,\mu\mathrm{F}$ alla frequenza di $50\,\mathrm{Hz}$ ha $X_C = \dfrac{1}{314 \cdot 10^{-5}}\,\Omega \approx 318\,\Omega$, e sotto la tensione di rete è percorso dalla corrente efficace $\dfrac{230}{318}\,\mathrm{A} \approx 0{,}72\,\mathrm{A}$.
 
-::grafico{f="1.5*sin(x);cos(x)" segmenti="6.283,0,6.283,1;7.854,0,7.854,1.5" xmin=-0.5 xmax=13 ymin=-1.9 ymax=2.1 nomi="t,​" legenda="v(t);i(t)" titolo="Tensione e corrente ai capi di un condensatore: la corrente raggiunge il massimo un quarto di periodo prima della tensione, cioè è in anticipo di $\dfrac{\pi}{2}$"}
+::grafico{f="1.5*sin(x);cos(x)" segmenti="6.283,0,6.283,1;7.854,0,7.854,1.5" xmin=-0.5 xmax=13 ymin=-1.9 ymax=2.1 nomi="t," legenda="v(t);i(t)" titolo="Tensione e corrente ai capi di un condensatore: la corrente raggiunge il massimo un quarto di periodo prima della tensione, cioè è in anticipo di $\dfrac{\pi}{2}$"}
 
 :::dimostrazione
 In ogni istante la carica del condensatore è $q = Cv = CV_0\sin(\omega t)$, quindi

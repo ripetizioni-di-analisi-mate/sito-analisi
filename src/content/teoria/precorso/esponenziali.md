@@ -8,7 +8,7 @@ sommario: La funzione a^x con le sue proprietà, e i metodi per risolvere equazi
 :::definizione{#funzione-esponenziale titolo="Funzione esponenziale"}
 Per $a > 0$, $a \neq 1$, la **funzione esponenziale** di base $a$ associa a *ogni* $x \in \mathbb{R}$ il numero $a^{x}$. Proprietà:
 
-- $a^{x} > 0$ per ogni $x \in \mathbb{R}$: il grafico sta sopra l'asse $x$ e la retta $y = 0$ è asintoto orizzontale;
+- $a^{x} > 0$ per ogni $x \in \mathbb{R}$, quindi il grafico sta sopra l'asse $x$; la retta $y = 0$ è asintoto orizzontale;
 - $a^{0} = 1$, quindi il grafico passa per il punto $(0, 1)$ qualunque sia la base;
 - la funzione è **iniettiva**: esponenti diversi danno potenze diverse;
 - per $a > 1$ la funzione è strettamente **crescente**; per $0 < a < 1$ è strettamente **decrescente**.
@@ -56,7 +56,7 @@ Il numero $16$ è stato riscritto come potenza di $2$, quindi l'uguaglianza dell
 
 ## Equazioni risolte con il logaritmo
 
-:::teorema{#esponenziale-uguale-k titolo="Equazione con basi diverse"}
+:::teorema{#esponenziale-uguale-k titolo="Equazione esponenziale con secondo membro costante"}
 Per $a > 0$, $a \neq 1$ e $k > 0$:
 $$
 a^{A} = k \iff A = \log_a k .
@@ -99,9 +99,9 @@ Per $a > 0$, $a \neq 1$:
 - se $a > 1$, allora $a^{A} > a^{B} \iff A > B$: il verso **si mantiene**, perché la funzione esponenziale di base $a$ è strettamente crescente;
 - se $0 < a < 1$, allora $a^{A} > a^{B} \iff A < B$: il verso **si rovescia**, perché la funzione è strettamente decrescente.
 
-Le stesse regole valgono con i simboli $\geq$, $<$, $\leq$. Una disequazione del tipo $a^{A} > k$ con $k > 0$ si riconduce a questa forma scrivendo $k$ come potenza di $a$, eventualmente con il logaritmo: $k = a^{\log_a k}$.
+Le stesse regole valgono con i simboli $\geq$, $<$, $\leq$. Una disequazione del tipo $a^{A} > k$ con $k > 0$ si riconduce a questa forma scrivendo $k$ come potenza di $a$, eventualmente con il logaritmo: $k = a^{\log_a k}$. Se invece $k \leq 0$, poiché $a^{A} > 0$, la disequazione $a^{A} > k$ è soddisfatta da *ogni* $x$ per cui $A$ è definita e la disequazione $a^{A} < k$ **non ha soluzioni**.
 
-::grafico{f="2^x;0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 punti="0,1,pieno" etichette="2.2,2.6,y = 2ˣ;-2.9,2.6,y = (1/2)ˣ" titolo="$y = 2^{x}$ cresce e $y = \left(\dfrac{1}{2}\right)^{x}$, tratteggiata, decresce; i due grafici passano per $(0, 1)$"}
+::grafico{f="2^x;0.5^x" xmin=-3 xmax=3 ymin=-0.5 ymax=8 punti="0,1,pieno" titolo="$y = 2^{x}$ cresce e $y = \left(\dfrac{1}{2}\right)^{x}$, tratteggiata, decresce; i due grafici passano per $(0, 1)$"}
 :::
 
 :::esempio{titolo="Base maggiore di 1"}
@@ -132,5 +132,5 @@ $$
 $$
 Con $t = 2^{x}$, $t > 0$, la disequazione $t^{2} - 3t + 2 > 0$ è soddisfatta per $t < 1$ oppure $t > 2$; l'intersezione con $t > 0$ dà $0 < t < 1$ oppure $t > 2$. Da $0 < 2^{x} < 1 = 2^{0}$ segue $x < 0$, poiché la base $2$ è maggiore di $1$; da $2^{x} > 2$ segue $x > 1$. Le soluzioni sono $x < 0$ oppure $x > 1$.
 
-::grafico{f="4^x-3*2^x+2" xmin=-4 xmax=2 ymin=-1 ymax=4 asintoti="y=2" punti="0,0,vuoto;1,0,vuoto" titolo="$y = 4^{x} - 3 \cdot 2^{x} + 2$ è positiva per $x < 0$ e per $x > 1$"}
+::grafico{f="4^x-3*2^x+2" xmin=-4 xmax=2 ymin=-1 ymax=4 asintoti="y=2" punti="0,0,vuoto;1,0,vuoto" titolo="$y = 4^{x} - 3 \cdot 2^{x} + 2$ è positiva per $x < 0$ e per $x > 1$; la retta $y = 2$, in rosso, è il suo asintoto orizzontale"}
 :::

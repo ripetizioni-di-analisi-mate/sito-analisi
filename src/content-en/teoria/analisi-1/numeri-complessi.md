@@ -17,7 +17,7 @@ The set of complex numbers is denoted by $\mathbb{C}$. Setting $i = (0, 1)$, the
 $$
 z = (a, b) = a + i b, \qquad i^2 = -1 ,
 $$
-called the **algebraic form**. In computations the algebraic form is always used: one operates as with polynomials in $i$, replacing $i^2$ with $-1$ *every time* it appears.
+called the **algebraic form**. In algebraic form one computes as with polynomials in $i$, replacing $i^2$ with $-1$ *every time* it appears.
 :::
 
 :::definizione{#parte-reale-immaginaria titolo="Real part and imaginary part"}
@@ -44,7 +44,7 @@ z \cdot w = (ac - bd) + i(ad + bc), \\[6pt]
 \frac{z}{w} = z \cdot \frac{1}{w} \quad (w \neq 0).
 \end{gathered}
 $$
-The product is obtained by expanding $(a + ib)(c + id)$ with the distributive property and substituting $i^2 = -1$. For the reciprocal and the quotient, numerator and denominator are multiplied by the **conjugate of the denominator**, so that the denominator becomes the real number $c^2 + d^2$. With these operations $\mathbb{C}$ is a **field**: the same algebraic rules as in $\mathbb{R}$ hold.
+The product is obtained by expanding $(a + ib)(c + id)$ with the distributive property and substituting $i^2 = -1$. For the reciprocal and the quotient, numerator and denominator are multiplied by $c - id$, called the **conjugate** of the denominator $c + id$, so that the denominator becomes the real number $(c + id)(c - id) = c^2 + d^2$. With these operations $\mathbb{C}$ is a **field**: the same algebraic rules as in $\mathbb{R}$ hold.
 :::
 
 :::esempio{titolo="Quotient in algebraic form"}
@@ -166,7 +166,7 @@ For every $\rho > 0$, $\theta \in \mathbb{R}$ and $n \in \mathbb{N}$, $n \geq 1$
 $$
 \bigl( \rho (\cos\theta + i \sin\theta) \bigr)^n = \rho^n \bigl( \cos(n\theta) + i \sin(n\theta) \bigr).
 $$
-It reduces the computation of a power to the **multiplication of the argument** by $n$: to compute $z^{10}$ ten products are not needed, the trigonometric form of $z$ is enough. It is the tool for high powers and the starting point for $n$-th roots.
+It reduces the computation of a power to the **multiplication of the argument** by $n$: computing $z^{10}$ requires only the trigonometric form of $z$, instead of nine successive products. It is the tool for high powers and the starting point for $n$-th roots.
 
 ::grafico{xmin=-4.6 xmax=1.8 ymin=-0.8 ymax=2.8 uguale=1 nomi="Re,Im" vettori="0,0,1,1,z;0,0,0,2,z²;0,0,-2,2,z³;0,0,-4,0,z⁴" titolo="Powers of $z = 1 + i$: $z^2 = 2i$, $z^3 = -2 + 2i$, $z^4 = -4$; at each step the modulus is multiplied by $\sqrt{2}$ and the argument increases by $\dfrac{\pi}{4}$"}
 
@@ -247,7 +247,7 @@ The equation $a z^2 + b z + c = 0$ with $a, b, c \in \mathbb{R}$, $a \neq 0$ and
 $$
 z = \frac{-b \pm i \sqrt{-\Delta}}{2a} .
 $$
-The formula follows from **completing the square**: from $\left( z + \dfrac{b}{2a} \right)^2 = \dfrac{\Delta}{4a^2} < 0$ and from the fact that the complex numbers whose square equals the negative real $t$ are $\pm i\sqrt{-t}$. In $\mathbb{C}$ every quadratic equation therefore has **two solutions**, counted with their multiplicity.
+The formula follows from **completing the square**: from $\left( z + \dfrac{b}{2a} \right)^2 = \dfrac{\Delta}{4a^2} < 0$ and from the fact that the complex numbers whose square equals the negative real $t$ are $\pm i\sqrt{-t}$. In $\mathbb{C}$ every quadratic equation with real coefficients therefore has **two solutions**, counted with their multiplicity.
 :::
 
 :::esempio

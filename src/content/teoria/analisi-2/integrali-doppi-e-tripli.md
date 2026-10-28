@@ -239,7 +239,7 @@ Se $\Phi : D' \to D$ è $C^1$, iniettiva, con Jacobiano $J \neq 0$ all'interno d
 ## Integrali tripli
 
 :::definizione{#integrale-triplo titolo="Integrale triplo"}
-L'**integrale triplo** $\displaystyle\iiint_E f(x, y, z)\, dx\, dy\, dz$ di una funzione limitata su una regione $E \subseteq \mathbb{R}^3$ si definisce con le somme di Riemann su suddivisioni in parallelepipedi, come l'integrale doppio, e ogni funzione continua su una regione chiusa e limitata delimitata da superfici regolari è integrabile. Valgono la linearità, l'additività sul dominio, la monotonia e il teorema del cambiamento di variabili, con il Jacobiano dato dal determinante della matrice $3 \times 3$ delle derivate parziali. Per $f = 1$ l'integrale è il **volume** di $E$; con $f$ uguale a una densità l'integrale è la **massa** del solido, come si vede nel paragrafo sulle applicazioni.
+L'**integrale triplo** $\displaystyle\iiint_E f(x, y, z)\, dx\, dy\, dz$ di una funzione limitata su una regione $E \subseteq \mathbb{R}^3$ si definisce con le somme di Riemann su suddivisioni in parallelepipedi, come l'integrale doppio, e ogni funzione continua su una regione chiusa e limitata delimitata da superfici regolari è integrabile. Valgono la linearità, l'additività sul dominio, la monotonia e il teorema del cambiamento di variabili, con il Jacobiano dato dal determinante della matrice $3 \times 3$ delle derivate parziali. Per $f = 1$ l'integrale è il **volume** di $E$; con $f$ uguale a una densità l'integrale è la **massa** del solido.
 :::
 
 :::teorema{#integrazione-per-fili titolo="Integrazione per fili"}

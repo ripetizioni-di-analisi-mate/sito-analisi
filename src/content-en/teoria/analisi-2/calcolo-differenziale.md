@@ -64,7 +64,7 @@ f(x, y) =
 0 & (x, y) = (0, 0)
 \end{cases}
 $$
-is zero on the axes, so $f_x(0,0) = f_y(0,0) = 0$ and both partial derivatives exist. Along the line $y = x$ we have $f(t, t) = \dfrac{t^2}{2t^2} = \dfrac{1}{2}$ for every $t \neq 0$, while along the $x$-axis the function is zero, so the limit of $f$ at $(0,0)$ does not exist and $f$ **is not continuous** at the origin. By the previous theorem, $f$ **is not differentiable** at $(0,0)$.
+is zero on the axes, so $f_x(0,0) = f_y(0,0) = 0$ and both partial derivatives exist. Along the line $y = x$ we have $f(t, t) = \dfrac{t^2}{2t^2} = \dfrac{1}{2}$ for every $t \neq 0$, while along the $x$-axis the function is zero, so the limit of $f$ at $(0,0)$ does not exist and $f$ **is not continuous** at the origin. Since differentiability implies continuity, $f$ **is not differentiable** at $(0,0)$.
 
 ::grafico{f="x;-x" punti="0,0,pieno" etichette="1.5,0.15,f = 0;0.1,1.9,f = 0" xmin=-2.2 xmax=2.2 ymin=-2 ymax=2.2 uguale=1 titolo="$f(x, y) = \dfrac{xy}{x^2 + y^2}$ equals $0$ on the axes, $\dfrac{1}{2}$ on the line $y = x$ (in color) and $-\dfrac{1}{2}$ on the line $y = -x$ (dashed), so it has no limit at the origin"}
 
@@ -85,12 +85,12 @@ $f(x, y) = x^2 + y^2$ at $(1, 1)$. We have $f(1,1) = 2$, $f_x = 2x$ and $f_y = 2
 $$
 z = 2 + 2(x - 1) + 2(y - 1) = 2x + 2y - 2 .
 $$
-The partial derivatives are continuous on all of $\mathbb{R}^2$, therefore differentiability at $(1,1)$ follows from the **total differential theorem**, stated in the next section.
+The partial derivatives are continuous on all of $\mathbb{R}^2$, therefore differentiability at $(1,1)$ follows from the **total differential theorem**.
 :::
 
 ## The total differential theorem
 
-Checking differentiability with the definition requires a limit in two variables; the following theorem provides a much quicker *sufficient* condition.
+Checking differentiability with the definition requires a limit in two variables; the total differential theorem provides a much quicker *sufficient* condition.
 
 ::::teorema{#teorema-del-differenziale-totale titolo="Total differential theorem"}
 If the partial derivatives of $f$ exist in a neighborhood of $(x_0, y_0)$ and are **continuous** at $(x_0, y_0)$, then $f$ is **differentiable** at $(x_0, y_0)$. In particular, a function of class $C^1(A)$, that is, with continuous partial derivatives on the whole open set $A$, is differentiable at every point of $A$. With this theorem, the differentiability of functions given by a formula is recognized from the computation of the partial derivatives: for $f(x, y) = e^{xy} + x^2$ we have $f_x = y\,e^{xy} + 2x$ and $f_y = x\,e^{xy}$, continuous on $\mathbb{R}^2$ because they are compositions of continuous functions, so $f$ is differentiable at every point. Checking with the definition remains necessary at the points where the partial derivatives are not continuous, typically the **junction points** of piecewise-defined functions.
@@ -172,7 +172,7 @@ $$
 $$
 with equality *if and only if* $\mathbf{v}$ is parallel to the gradient. Hence the directional derivative is **maximal** along the unit vector $\mathbf{v} = \dfrac{\nabla f(x_0, y_0)}{|\nabla f(x_0, y_0)|}$, where it equals $|\nabla f(x_0, y_0)|$, and it is minimal along the opposite unit vector, where it equals $-|\nabla f(x_0, y_0)|$. In the directions orthogonal to the gradient the directional derivative is zero; these directions are tangent to the level curve of $f$ through the point, therefore the gradient is **orthogonal to the level curves**. The result answers the typical question of the exercises: in which direction $f$ increases most rapidly and at what rate.
 
-::grafico{f="2/x;4/x" segmenti="0.25,3.5,2,0" vettori="1,2,3,3,∇f" punti="1,2,pieno" etichette="3,0.85,xy = 2;3.3,1.42,xy = 4" xmin=-0.5 xmax=4.5 ymin=-0.5 ymax=4.3 uguale=1 titolo="Level curves of $f(x, y) = xy$: at $(1, 2)$ the gradient $\nabla f = (2, 1)$ is orthogonal to the tangent to the curve $xy = 2$ and points toward higher levels (the curve $xy = 4$ is dashed)"}
+::grafico{f="2/x;4/x" segmenti="0.25,3.5,2,0" vettori="1,2,3,3" punti="1,2,pieno" etichette="3.05,3.25,∇f;3,0.85,xy = 2;3.3,1.42,xy = 4" xmin=-0.5 xmax=4.5 ymin=-0.5 ymax=4.3 uguale=1 titolo="Level curves of $f(x, y) = xy$: at $(1, 2)$ the gradient $\nabla f = (2, 1)$ is orthogonal to the tangent to the curve $xy = 2$ and points toward higher levels (the curve $xy = 4$ is dashed)"}
 
 :::
 

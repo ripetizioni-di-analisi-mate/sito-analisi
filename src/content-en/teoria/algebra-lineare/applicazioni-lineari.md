@@ -26,7 +26,7 @@ Let $f : V \to W$ be linear. Then $f(0_V) = 0_W$ and $f(-v) = -f(v)$ for every $
 - Transposition $M_n(\mathbb{R}) \to M_n(\mathbb{R})$, $A \mapsto A^T$, and the trace $M_n(\mathbb{R}) \to \mathbb{R}$, $A \mapsto \operatorname{tr} A$, are linear.
 - The rotation by a right angle about the origin, $R(x, y) = (-y, x)$, is linear. Rotating the parallelogram built on $u$ and $v$ gives the parallelogram built on $R(u)$ and $R(v)$, so the diagonal $u + v$ goes to the diagonal $R(u) + R(v)$.
 
-::grafico{vettori="0,0,2,1,u;0,0,1,2,v;0,0,3,3,u + v;0,0,-1,2,R(u);0,0,-2,1,R(v);0,0,-3,3,R(u + v)" segmenti="2,1,3,3;1,2,3,3;-1,2,-3,3;-2,1,-3,3" xmin=-3.8 xmax=3.8 ymin=-0.6 ymax=3.7 uguale=1 titolo="The rotation $R(x, y) = (-y, x)$ sends the parallelogram built on $u = (2, 1)$ and $v = (1, 2)$ to the one built on $R(u)$ and $R(v)$, therefore $R(u + v) = R(u) + R(v)$"}
+::grafico{vettori="0,0,2,1;0,0,1,2,v;0,0,3,3;0,0,-1,2;0,0,-2,1;0,0,-3,3" segmenti="2,1,3,3;1,2,3,3;-1,2,-3,3;-2,1,-3,3" etichette="1.3,0.3,u;2.95,3.25,u + v;-0.8,2.15,R(u);-1.8,0.35,R(v);-3.55,3.25,R(u + v)" xmin=-3.8 xmax=3.8 ymin=-0.6 ymax=3.7 uguale=1 titolo="The rotation $R(x, y) = (-y, x)$ sends the parallelogram built on $u = (2, 1)$ and $v = (1, 2)$ to the one built on $R(u)$ and $R(v)$, therefore $R(u + v) = R(u) + R(v)$"}
 
 :::
 
@@ -128,7 +128,7 @@ A =
 $$
 sends $e_1$ to $(2, 1)$ and $e_2$ to $(1, 2)$. Every point of the square $[0, 1] \times [0, 1]$ can be written $a e_1 + b e_2$ with $a, b \in [0, 1]$, and its image is $a\,(2, 1) + b\,(1, 2)$, so the square goes to the **parallelogram** built on the columns of $A$, with opposite sides that remain parallel.
 
-::grafico{area="(5*x+3-abs(3*x-3))/4;(5*x/2-3+abs(3-3*x/2))/2;0;3" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,2,1,f(e₁);0,0,1,2,f(e₂)" segmenti="1,0,1,1;0,1,1,1" xmin=-0.5 xmax=3.6 ymin=-0.5 ymax=3.4 uguale=1 titolo="The square $[0, 1] \times [0, 1]$ (dashed) and its image under $A$: the colored parallelogram built on $f(e_1) = (2, 1)$ and $f(e_2) = (1, 2)$"}
+::grafico{area="(5*x+3-abs(3*x-3))/4;(5*x/2-3+abs(3-3*x/2))/2;0;3" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,2,1;0,0,1,2" segmenti="1,0,1,1;0,1,1,1" etichette="2.05,0.72,f(e₁);0.45,2.1,f(e₂)" xmin=-0.5 xmax=3.6 ymin=-0.5 ymax=3.4 uguale=1 titolo="The square $[0, 1] \times [0, 1]$ (dashed) and its image under $A$: the colored parallelogram built on $f(e_1) = (2, 1)$ and $f(e_2) = (1, 2)$"}
 
 :::
 
@@ -424,7 +424,7 @@ P^{-1} A P =
 $$
 The result can be read on the vectors of the new basis, since $f(1, 1) = (2, 2) = 2\,(1, 1)$ and $f(2, 1) = (6, 3) = 3\,(2, 1)$. With respect to $\mathcal{B}'$ the matrix is **diagonal**, and the search for bases of this kind is the subject of the topic on eigenvalues and diagonalization.
 
-::grafico{vettori="0,0,6,3,f(b₂);0,0,2,2,f(b₁);0,0,2,1,b₂;0,0,1,1,b₁" segmenti="0,0,3.4,3.4;0,0,6.6,3.3" xmin=-0.5 xmax=6.9 ymin=-0.5 ymax=3.7 uguale=1 titolo="The vectors $b_1 = (1, 1)$ and $b_2 = (2, 1)$ and their images $f(b_1) = 2\,b_1$ and $f(b_2) = 3\,b_2$: each one stays on its own line through the origin"}
+::grafico{vettori="0,0,6,3;0,0,2,2;0,0,2,1;0,0,1,1" etichette="3.3,1.05,f(b₂);0.75,1.55,f(b₁);1.25,0.22,b₂;0.3,0.65,b₁" segmenti="0,0,3.4,3.4;0,0,6.6,3.3" xmin=-0.5 xmax=6.9 ymin=-0.5 ymax=3.7 uguale=1 titolo="The vectors $b_1 = (1, 1)$ and $b_2 = (2, 1)$ and their images $f(b_1) = 2\,b_1$ and $f(b_2) = 3\,b_2$: each one stays on its own line through the origin"}
 
 :::
 

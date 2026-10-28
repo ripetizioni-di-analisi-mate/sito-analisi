@@ -17,7 +17,7 @@ L'insieme dei numeri complessi si indica con $\mathbb{C}$. Posto $i = (0, 1)$, d
 $$
 z = (a, b) = a + i b, \qquad i^2 = -1 ,
 $$
-detta **forma algebrica**. Nei calcoli si usa sempre la forma algebrica: si opera come con i polinomi in $i$, sostituendo $i^2$ con $-1$ *ogni volta* che compare.
+detta **forma algebrica**. In forma algebrica si calcola come con i polinomi in $i$, sostituendo $i^2$ con $-1$ *ogni volta* che compare.
 :::
 
 :::definizione{#parte-reale-immaginaria titolo="Parte reale e parte immaginaria"}
@@ -44,7 +44,7 @@ z \cdot w = (ac - bd) + i(ad + bc), \\[6pt]
 \frac{z}{w} = z \cdot \frac{1}{w} \quad (w \neq 0).
 \end{gathered}
 $$
-Il prodotto si ottiene svolgendo $(a + ib)(c + id)$ con la proprietà distributiva e sostituendo $i^2 = -1$. Per il reciproco e il quoziente si moltiplicano numeratore e denominatore per il **coniugato del denominatore**, così il denominatore diventa il numero reale $c^2 + d^2$. Con queste operazioni $\mathbb{C}$ è un **campo**: valgono le stesse regole algebriche di $\mathbb{R}$.
+Il prodotto si ottiene svolgendo $(a + ib)(c + id)$ con la proprietà distributiva e sostituendo $i^2 = -1$. Per il reciproco e il quoziente si moltiplicano numeratore e denominatore per $c - id$, detto **coniugato** del denominatore $c + id$, così il denominatore diventa il numero reale $(c + id)(c - id) = c^2 + d^2$. Con queste operazioni $\mathbb{C}$ è un **campo**: valgono le stesse regole algebriche di $\mathbb{R}$.
 :::
 
 :::esempio{titolo="Quoziente in forma algebrica"}
@@ -166,7 +166,7 @@ Per ogni $\rho > 0$, $\theta \in \mathbb{R}$ e $n \in \mathbb{N}$, $n \geq 1$:
 $$
 \bigl( \rho (\cos\theta + i \sin\theta) \bigr)^n = \rho^n \bigl( \cos(n\theta) + i \sin(n\theta) \bigr).
 $$
-Riduce il calcolo di una potenza alla **moltiplicazione dell'argomento** per $n$: per calcolare $z^{10}$ non servono dieci prodotti, basta la forma trigonometrica di $z$. È lo strumento per le potenze alte e il punto di partenza per le radici $n$-esime.
+Riduce il calcolo di una potenza alla **moltiplicazione dell'argomento** per $n$: il calcolo di $z^{10}$ richiede la sola forma trigonometrica di $z$, al posto di nove prodotti successivi. È lo strumento per le potenze alte e il punto di partenza per le radici $n$-esime.
 
 ::grafico{xmin=-4.6 xmax=1.8 ymin=-0.8 ymax=2.8 uguale=1 nomi="Re,Im" vettori="0,0,1,1,z;0,0,0,2,z²;0,0,-2,2,z³;0,0,-4,0,z⁴" titolo="Potenze di $z = 1 + i$: $z^2 = 2i$, $z^3 = -2 + 2i$, $z^4 = -4$; a ogni passo il modulo si moltiplica per $\sqrt{2}$ e l'argomento aumenta di $\dfrac{\pi}{4}$"}
 
@@ -247,7 +247,7 @@ L'equazione $a z^2 + b z + c = 0$ con $a, b, c \in \mathbb{R}$, $a \neq 0$ e dis
 $$
 z = \frac{-b \pm i \sqrt{-\Delta}}{2a} .
 $$
-La formula segue dal **completamento del quadrato**: da $\left( z + \dfrac{b}{2a} \right)^2 = \dfrac{\Delta}{4a^2} < 0$ e dal fatto che i numeri complessi con quadrato uguale al reale negativo $t$ sono $\pm i\sqrt{-t}$. In $\mathbb{C}$ ogni equazione di secondo grado ha quindi **due soluzioni**, contate con la loro molteplicità.
+La formula segue dal **completamento del quadrato**: da $\left( z + \dfrac{b}{2a} \right)^2 = \dfrac{\Delta}{4a^2} < 0$ e dal fatto che i numeri complessi con quadrato uguale al reale negativo $t$ sono $\pm i\sqrt{-t}$. In $\mathbb{C}$ ogni equazione di secondo grado a coefficienti reali ha quindi **due soluzioni**, contate con la loro molteplicità.
 :::
 
 :::esempio

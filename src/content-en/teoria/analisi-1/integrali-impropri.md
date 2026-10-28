@@ -69,7 +69,7 @@ The first piece has critical point $0$, where the integrand is unbounded; the se
 :::
 
 :::attenzione
-The **fundamental theorem of calculus** applies when the integrand is integrable on the *whole* interval. For $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$ the direct computation with the antiderivative $-\dfrac{1}{x}$ would give $-2$, a negative value for a positive function; the critical point $x = 0$ is interior, and each of the two integrals over $[-1, 0)$ and over $(0, 1]$ **diverges**.
+The **fundamental theorem of calculus** applies when the integrand is continuous on the *whole* closed interval. For $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$ the direct computation with the antiderivative $-\dfrac{1}{x}$ would give $-2$, a negative value for a positive function; the critical point $x = 0$ is interior, and each of the two integrals over $[-1, 0)$ and over $(0, 1]$ **diverges**.
 
 ::grafico{f="1/x^2" area="1/x^2;0;-1;-0.001|1/x^2;0;0.001;1" asintoti="x=0" xmin=-2 xmax=2 ymin=-0.5 ymax=8 titolo="$y = \dfrac{1}{x^2}$ is positive on $[-1, 0)$ and on $(0, 1]$ and unbounded near $0$: each of the two shaded regions has infinite area"}
 
@@ -105,12 +105,12 @@ as $t \to 0^{+}$ the power $t^{1 - \alpha}$ tends to $0$ if $\alpha < 1$, with c
 :::
 ::::
 
-:::esempio{titolo="The areas under y = 1/x and under y = 1/x²"}
+:::esempio{titolo="A finite area and an infinite area"}
 The area under $y = \dfrac{1}{x^{2}}$ over $[1, +\infty)$ is **finite** and equals $1$, while the area under $y = \dfrac{1}{x}$ is **infinite**, even though both functions tend to $0$. The behavior of the integral measures the *rate* at which the integrand tends to $0$.
 
-::grafico{f="1/x" xmin=1 xmax=10 ymin=0 ymax=1.1 asintoti="y=0" titolo="$y = \dfrac{1}{x}$ on $[1, +\infty)$: the integral diverges"}
+::grafico{f="1/x" area="1/x;0;1;10" punti="1,1,pieno" xmin=-0.5 xmax=10 ymin=-0.15 ymax=1.25 titolo="$y = \dfrac{1}{x}$ on $[1, +\infty)$: the integral diverges"}
 
-::grafico{f="1/x^2" xmin=1 xmax=10 ymin=0 ymax=1.1 asintoti="y=0" titolo="$y = \dfrac{1}{x^2}$ on $[1, +\infty)$: the integral converges and equals $1$"}
+::grafico{f="1/x^2" area="1/x^2;0;1;10" punti="1,1,pieno" xmin=-0.5 xmax=10 ymin=-0.15 ymax=1.25 titolo="$y = \dfrac{1}{x^2}$ on $[1, +\infty)$: the integral converges and equals $1$"}
 
 :::
 

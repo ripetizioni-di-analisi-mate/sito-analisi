@@ -26,7 +26,7 @@ Sia $f : V \to W$ lineare. Allora $f(0_V) = 0_W$ e $f(-v) = -f(v)$ per ogni $v \
 - La trasposizione $M_n(\mathbb{R}) \to M_n(\mathbb{R})$, $A \mapsto A^T$, e la traccia $M_n(\mathbb{R}) \to \mathbb{R}$, $A \mapsto \operatorname{tr} A$, sono lineari.
 - La rotazione di un angolo retto attorno all'origine, $R(x, y) = (-y, x)$, è lineare. Ruotando il parallelogramma costruito su $u$ e $v$ si ottiene il parallelogramma costruito su $R(u)$ e $R(v)$, quindi la diagonale $u + v$ va nella diagonale $R(u) + R(v)$.
 
-::grafico{vettori="0,0,2,1,u;0,0,1,2,v;0,0,3,3,u + v;0,0,-1,2,R(u);0,0,-2,1,R(v);0,0,-3,3,R(u + v)" segmenti="2,1,3,3;1,2,3,3;-1,2,-3,3;-2,1,-3,3" xmin=-3.8 xmax=3.8 ymin=-0.6 ymax=3.7 uguale=1 titolo="La rotazione $R(x, y) = (-y, x)$ manda il parallelogramma costruito su $u = (2, 1)$ e $v = (1, 2)$ in quello costruito su $R(u)$ e $R(v)$, perciò $R(u + v) = R(u) + R(v)$"}
+::grafico{vettori="0,0,2,1;0,0,1,2,v;0,0,3,3;0,0,-1,2;0,0,-2,1;0,0,-3,3" segmenti="2,1,3,3;1,2,3,3;-1,2,-3,3;-2,1,-3,3" etichette="1.3,0.3,u;2.95,3.25,u + v;-0.8,2.15,R(u);-1.8,0.35,R(v);-3.55,3.25,R(u + v)" xmin=-3.8 xmax=3.8 ymin=-0.6 ymax=3.7 uguale=1 titolo="La rotazione $R(x, y) = (-y, x)$ manda il parallelogramma costruito su $u = (2, 1)$ e $v = (1, 2)$ in quello costruito su $R(u)$ e $R(v)$, perciò $R(u + v) = R(u) + R(v)$"}
 
 :::
 
@@ -128,7 +128,7 @@ A =
 $$
 manda $e_1$ in $(2, 1)$ ed $e_2$ in $(1, 2)$. Ogni punto del quadrato $[0, 1] \times [0, 1]$ si scrive $a e_1 + b e_2$ con $a, b \in [0, 1]$, e la sua immagine è $a\,(2, 1) + b\,(1, 2)$, quindi il quadrato va nel **parallelogramma** costruito sulle colonne di $A$, con i lati opposti che restano paralleli.
 
-::grafico{area="(5*x+3-abs(3*x-3))/4;(5*x/2-3+abs(3-3*x/2))/2;0;3" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,2,1,f(e₁);0,0,1,2,f(e₂)" segmenti="1,0,1,1;0,1,1,1" xmin=-0.5 xmax=3.6 ymin=-0.5 ymax=3.4 uguale=1 titolo="Il quadrato $[0, 1] \times [0, 1]$ (tratteggiato) e la sua immagine tramite $A$: il parallelogramma colorato costruito su $f(e_1) = (2, 1)$ e $f(e_2) = (1, 2)$"}
+::grafico{area="(5*x+3-abs(3*x-3))/4;(5*x/2-3+abs(3-3*x/2))/2;0;3" vettori="0,0,1,0,e₁;0,0,0,1,e₂;0,0,2,1;0,0,1,2" segmenti="1,0,1,1;0,1,1,1" etichette="2.05,0.72,f(e₁);0.45,2.1,f(e₂)" xmin=-0.5 xmax=3.6 ymin=-0.5 ymax=3.4 uguale=1 titolo="Il quadrato $[0, 1] \times [0, 1]$ (tratteggiato) e la sua immagine tramite $A$: il parallelogramma colorato costruito su $f(e_1) = (2, 1)$ e $f(e_2) = (1, 2)$"}
 
 :::
 
@@ -424,7 +424,7 @@ P^{-1} A P =
 $$
 Il risultato si legge sui vettori della base nuova, poiché $f(1, 1) = (2, 2) = 2\,(1, 1)$ e $f(2, 1) = (6, 3) = 3\,(2, 1)$. Rispetto a $\mathcal{B}'$ la matrice è **diagonale**, e la ricerca di basi di questo tipo è l'oggetto dell'argomento su autovalori e diagonalizzazione.
 
-::grafico{vettori="0,0,6,3,f(b₂);0,0,2,2,f(b₁);0,0,2,1,b₂;0,0,1,1,b₁" segmenti="0,0,3.4,3.4;0,0,6.6,3.3" xmin=-0.5 xmax=6.9 ymin=-0.5 ymax=3.7 uguale=1 titolo="I vettori $b_1 = (1, 1)$ e $b_2 = (2, 1)$ e le loro immagini $f(b_1) = 2\,b_1$ e $f(b_2) = 3\,b_2$: ciascuno resta sulla propria retta per l'origine"}
+::grafico{vettori="0,0,6,3;0,0,2,2;0,0,2,1;0,0,1,1" etichette="3.3,1.05,f(b₂);0.75,1.55,f(b₁);1.25,0.22,b₂;0.3,0.65,b₁" segmenti="0,0,3.4,3.4;0,0,6.6,3.3" xmin=-0.5 xmax=6.9 ymin=-0.5 ymax=3.7 uguale=1 titolo="I vettori $b_1 = (1, 1)$ e $b_2 = (2, 1)$ e le loro immagini $f(b_1) = 2\,b_1$ e $f(b_2) = 3\,b_2$: ciascuno resta sulla propria retta per l'origine"}
 
 :::
 

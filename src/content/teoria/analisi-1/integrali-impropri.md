@@ -69,7 +69,7 @@ Il primo pezzo ha punto critico $0$, dove l'integranda è illimitata; il secondo
 :::
 
 :::attenzione
-La **formula fondamentale del calcolo integrale** si applica quando l'integranda è integrabile su *tutto* l'intervallo. Per $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$ il calcolo diretto con la primitiva $-\dfrac{1}{x}$ darebbe $-2$, un valore negativo per una funzione positiva; il punto critico $x = 0$ è interno, e ciascuno dei due integrali su $[-1, 0)$ e su $(0, 1]$ **diverge**.
+La **formula fondamentale del calcolo integrale** si applica quando l'integranda è continua su *tutto* l'intervallo chiuso. Per $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$ il calcolo diretto con la primitiva $-\dfrac{1}{x}$ darebbe $-2$, un valore negativo per una funzione positiva; il punto critico $x = 0$ è interno, e ciascuno dei due integrali su $[-1, 0)$ e su $(0, 1]$ **diverge**.
 
 ::grafico{f="1/x^2" area="1/x^2;0;-1;-0.001|1/x^2;0;0.001;1" asintoti="x=0" xmin=-2 xmax=2 ymin=-0.5 ymax=8 titolo="$y = \dfrac{1}{x^2}$ è positiva su $[-1, 0)$ e su $(0, 1]$ e illimitata vicino a $0$: ciascuna delle due regioni colorate ha area infinita"}
 
@@ -105,12 +105,12 @@ per $t \to 0^{+}$ la potenza $t^{1 - \alpha}$ tende a $0$ se $\alpha < 1$, con c
 :::
 ::::
 
-:::esempio{titolo="Le aree sottese da y = 1/x e da y = 1/x²"}
+:::esempio{titolo="Un'area finita e un'area infinita"}
 L'area sottesa da $y = \dfrac{1}{x^{2}}$ su $[1, +\infty)$ è **finita** e vale $1$, mentre l'area sottesa da $y = \dfrac{1}{x}$ è **infinita**, anche se le due funzioni tendono entrambe a $0$. Il carattere dell'integrale misura la *velocità* con cui l'integranda tende a $0$.
 
-::grafico{f="1/x" xmin=1 xmax=10 ymin=0 ymax=1.1 asintoti="y=0" titolo="$y = \dfrac{1}{x}$ su $[1, +\infty)$: l'integrale diverge"}
+::grafico{f="1/x" area="1/x;0;1;10" punti="1,1,pieno" xmin=-0.5 xmax=10 ymin=-0.15 ymax=1.25 titolo="$y = \dfrac{1}{x}$ su $[1, +\infty)$: l'integrale diverge"}
 
-::grafico{f="1/x^2" xmin=1 xmax=10 ymin=0 ymax=1.1 asintoti="y=0" titolo="$y = \dfrac{1}{x^2}$ su $[1, +\infty)$: l'integrale converge e vale $1$"}
+::grafico{f="1/x^2" area="1/x^2;0;1;10" punti="1,1,pieno" xmin=-0.5 xmax=10 ymin=-0.15 ymax=1.25 titolo="$y = \dfrac{1}{x^2}$ su $[1, +\infty)$: l'integrale converge e vale $1$"}
 
 :::
 
@@ -228,7 +228,7 @@ Per $x \to +\infty$ si ha $\dfrac{1}{x^{2}} \to 0$, e $\ln(1 + t) \sim t$ per $t
 ## Convergenza assoluta
 
 :::teorema{#convergenza-assoluta titolo="La convergenza assoluta implica la convergenza"}
-L'integrale di $f$ **converge assolutamente** se converge l'integrale di $|f|$. Se $\displaystyle\int_a^{+\infty} |f(x)|\,dx$ converge, allora $\displaystyle\int_a^{+\infty} f(x)\,dx$ converge e vale
+L'integrale di $f$ **converge assolutamente** se converge l'integrale di $|f|$. Se $\displaystyle\int_a^{+\infty} |f(x)|\,dx$ converge, allora $\displaystyle\int_a^{+\infty} f(x)\,dx$ converge e vale la disuguaglianza
 $$
 \left| \int_a^{+\infty} f(x)\,dx \right| \leq \int_a^{+\infty} |f(x)|\,dx .
 $$

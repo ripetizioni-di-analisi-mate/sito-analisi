@@ -222,7 +222,7 @@ Il periodo *non* dipende dalla massa e, nel limite delle piccole oscillazioni, n
 :::dimostrazione
 Sul punto agiscono il peso $m\vec{g}$ e la tensione del filo $\vec{T}$. La tensione è diretta lungo il filo, quindi è perpendicolare alla traiettoria e non ha componente tangente. La componente del peso lungo la tangente, nel verso in cui $\theta$ cresce, è $-mg\sin\theta$. L'accelerazione tangenziale di un moto lungo una circonferenza di raggio $\ell$ è $\ddot{s} = \ell\ddot{\theta}$, perciò il secondo principio lungo la tangente dà
 $$
-mL\ddot{\theta} = -mg\sin\theta,
+m\ell\ddot{\theta} = -mg\sin\theta,
 \qquad\text{cioè}\qquad
 \ddot{\theta} = -\frac{g}{\ell}\sin\theta .
 $$

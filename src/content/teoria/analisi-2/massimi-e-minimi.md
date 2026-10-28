@@ -114,7 +114,7 @@ Lungo le rette il segno può essere costante *anche* in un punto di sella. Per $
 ## Estremi assoluti su insiemi compatti
 
 :::teorema{#weierstrass-in-piu-variabili titolo="Teorema di Weierstrass"}
-Sia $K \subset \mathbb{R}^2$ un insieme compatto, cioè chiuso e limitato, e sia $f$ continua su $K$. Allora $f$ ammette **massimo e minimo assoluti** su $K$. Il teorema garantisce che il problema ha soluzione *prima* ancora di iniziare i calcoli: su un rettangolo, un cerchio o un triangolo (con il bordo) gli estremi assoluti di una funzione continua esistono sempre. La dimostrazione è analoga a quella in una variabile e si rimanda al capitolo sulle funzioni di più variabili.
+Sia $K \subset \mathbb{R}^2$ un insieme compatto, cioè chiuso e limitato, e sia $f$ continua su $K$. Allora $f$ ammette **massimo e minimo assoluti** su $K$. Il teorema garantisce che il problema ha soluzione *prima* ancora di iniziare i calcoli: su un rettangolo, un cerchio o un triangolo (con il bordo) gli estremi assoluti di una funzione continua esistono sempre. Il teorema è enunciato in $\mathbb{R}^n$ nel capitolo sulle funzioni di più variabili; la dimostrazione usa le successioni in $\mathbb{R}^n$ e si omette.
 :::
 
 :::osservazione{#metodo-del-compatto titolo="Il metodo per gli estremi assoluti su un compatto"}
@@ -245,5 +245,6 @@ A(x) = x\,(10 - x) = 10x - x^2 .
 $$
 Poiché $A'(x) = 10 - 2x$ si annulla solo in $x = 5$, con $A$ crescente prima e decrescente dopo, il **massimo assoluto** su $(0, 10)$ è $A(5) = 25$, raggiunto dal **quadrato** di lato $5$. Agli estremi del dominio l'area tende a $0$, in accordo con il fatto che il massimo è interno.
 
-::grafico{f="x*(10-x)" xmin=0 xmax=10 ymin=0 ymax=30 punti="5,25" titolo="A(x) = x(10 − x): il massimo è nel vertice, per x = 5"}
+::grafico{f="x*(10-x)" xmin=0 xmax=10 ymin=0 ymax=30 punti="5,25,pieno" nomi="x,A" legenda="A(x) = x(10 - x)" titolo="L'area $A(x) = x(10 - x)$ dei rettangoli di perimetro $20$: il massimo è nel vertice, per $x = 5$"}
+
 :::

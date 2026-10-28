@@ -290,7 +290,7 @@ Siano $\vec{u}$ e $\vec{v}$ vettori non nulli dello spazio e sia $\theta \in [0,
 - $\|\vec{u} \times \vec{v}\| = \|\vec{u}\|\,\|\vec{v}\|\sin\theta$;
 - se $\vec{u} \times \vec{v} \neq \vec{0}$, il verso di $\vec{u} \times \vec{v}$ è dato dalla regola della mano destra: con il pollice lungo $\vec{u}$ e l'indice lungo $\vec{v}$, il medio indica $\vec{u} \times \vec{v}$.
 
-La prima proprietà fornisce un vettore ortogonale a due vettori dati con un solo calcolo. Se $\vec{u}$ e $\vec{v}$ non sono paralleli, i vettori ortogonali a entrambi sono *tutti e soli* i multipli di $\vec{u} \times \vec{v}$, poiché sono ortogonali al piano individuato da $\vec{u}$ e $\vec{v}$ e hanno quindi la direzione della retta perpendicolare a quel piano. La seconda proprietà è la base delle formule per le aree. La regola del verso si ricava dal caso $\vec{i} \times \vec{j} = \vec{k}$ e la sua giustificazione si omette.
+La prima proprietà fornisce un vettore ortogonale a due vettori dati con un solo calcolo. Se $\vec{u}$ e $\vec{v}$ non sono paralleli, i vettori ortogonali a entrambi sono *tutti e soli* i multipli di $\vec{u} \times \vec{v}$, poiché sono ortogonali al piano individuato da $\vec{u}$ e $\vec{v}$ e hanno quindi la direzione della retta perpendicolare a quel piano. La seconda proprietà è la base delle formule per le aree. La regola del verso è coerente con il caso $\vec{i} \times \vec{j} = \vec{k}$, e la sua giustificazione generale si omette.
 
 :::dimostrazione
 Per la prima proprietà si calcola

@@ -14,7 +14,7 @@ con $a_n \neq 0$. I numeri $a_n, \dots, a_0$ sono i coefficienti, $a_n$ è il **
 :::
 
 :::teorema{#principio-di-identita titolo="Principio di identità dei polinomi"}
-Due polinomi sono uguali *se e solo se* hanno lo **stesso grado** e gli **stessi coefficienti**, termine per termine. Il principio permette di determinare coefficienti incogniti uguagliando i coefficienti dei termini dello stesso grado, e con esso si verificano divisioni e scomposizioni. Dall'uguaglianza $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ segue $b = -4$ e $c = 3$.
+Due polinomi assumono lo stesso valore per ogni $x$ reale *se e solo se* hanno lo **stesso grado** e gli **stessi coefficienti**, termine per termine. Il principio permette di determinare coefficienti incogniti uguagliando i coefficienti dei termini dello stesso grado, e con esso si verificano divisioni e scomposizioni. Dall'uguaglianza $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ segue $b = -4$ e $c = 3$.
 :::
 
 :::osservazione
@@ -52,9 +52,9 @@ $9x^2 - 16 = (3x - 4)(3x + 4)$. Con due applicazioni successive, $x^4 - 1 = (x^2
 :::
 
 :::attenzione
-La somma di due quadrati $A^2 + B^2$ *non* si scompone in fattori di primo grado con coefficienti reali. Per esempio $x^2 + 4 \geq 4 > 0$ per ogni $x$, quindi $x^2 + 4$ **non ha radici reali** e nessun fattore della forma $x - c$ lo divide.
+La somma di due quadrati $x^2 + k^2$, con $k \neq 0$, *non* si scompone in fattori di primo grado con coefficienti reali. Per esempio $x^2 + 4 \geq 4 > 0$ per ogni $x$, quindi $x^2 + 4$ **non ha radici reali** e nessun fattore della forma $x - c$ lo divide.
 
-::grafico{f="x^2+4;4" xmin=-3 xmax=3 ymin=-1 ymax=10 punti="0,4,pieno" titolo="$y = x^2 + 4$ sta sopra la retta $y = 4$ (tratteggiata) e non incontra mai l'asse $x$: $x^2 + 4$ non ha radici reali"}
+::grafico{f="x^2+4;4" xmin=-3 xmax=3 ymin=-1 ymax=10 punti="0,4,pieno" titolo="$y = x^2 + 4$ non scende mai sotto la retta $y = 4$ (tratteggiata), che tocca nel punto $(0, 4)$, quindi non incontra l'asse $x$: $x^2 + 4$ non ha radici reali"}
 
 :::
 
@@ -164,7 +164,7 @@ Sia $P(x) = a_n x^n + \dots + a_0$ a coefficienti interi, con $a_0 \neq 0$. Se l
 :::esempio
 $P(x) = 2x^3 + x^2 - 5x + 2$. I divisori del termine noto $2$ sono $\pm 1, \pm 2$; i divisori positivi del coefficiente direttore $2$ sono $1, 2$. I candidati sono quindi $\pm 1$, $\pm 2$, $\pm\dfrac{1}{2}$. Poiché $P(1) = 2 + 1 - 5 + 2 = 0$, il numero $1$ è una **radice** e $x - 1$ divide $P$. *Non* ogni candidato è una radice: $P(-1) = -2 + 1 + 5 + 2 = 6 \neq 0$.
 
-::grafico{f="2*x^3+x^2-5*x+2" xmin=-2.6 xmax=1.8 ymin=-3 ymax=8 punti="1,0,pieno,P(1) = 0;-1,6,pieno,P(−1) = 6" segmenti="-1,0,-1,6" titolo="$y = 2x^3 + x^2 - 5x + 2$: il candidato $1$ è una radice, il candidato $-1$ no, poiché $P(-1) = 6$; il grafico incontra l'asse $x$ anche nei candidati $-2$ e $\dfrac{1}{2}$"}
+::grafico{f="2*x^3+x^2-5*x+2" xmin=-2.6 xmax=1.8 ymin=-3 ymax=8 punti="1,0,pieno;-1,6,pieno,P(−1) = 6" etichette="1.15,-0.9,P(1) = 0" segmenti="-1,0,-1,6" titolo="$y = 2x^3 + x^2 - 5x + 2$: il candidato $1$ è una radice, il candidato $-1$ no, poiché $P(-1) = 6$; il grafico incontra l'asse $x$ anche nei candidati $-2$ e $\dfrac{1}{2}$"}
 
 :::
 
@@ -211,8 +211,8 @@ La scomposizione **termina** quando ogni fattore ha grado $1$ oppure è un fatto
 $$
 2x^4 + 2x^3 - 12x^2 = 2x^2\,(x^2 + x - 6) = 2x^2\,(x + 3)(x - 2)
 $$
-Il primo passaggio è il **raccoglimento totale** di $2x^2$. Il fattore $x^2 + x - 6$ è un **trinomio speciale**, poiché $3 + (-2) = 1$ e $3 \cdot (-2) = -6$, quindi si scompone in $(x + 3)(x - 2)$. Tutti i fattori hanno grado al più $1$, perciò la scomposizione è **completa**.
+Il primo passaggio è il **raccoglimento totale** di $2x^2$. Il fattore $x^2 + x - 6$ è un **trinomio speciale**, poiché $3 + (-2) = 1$ e $3 \cdot (-2) = -6$, quindi si scompone in $(x + 3)(x - 2)$. I fattori non costanti, cioè $x$ (che compare due volte), $x + 3$ e $x - 2$, hanno tutti grado $1$, perciò la scomposizione è **completa**.
 
-::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: nelle radici semplici $-3$ e $2$ il grafico attraversa l'asse $x$, nella radice doppia $0$ lo tocca senza attraversarlo"}
+::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: nelle radici $-3$ e $2$ il grafico attraversa l'asse $x$; nella radice $0$, che compare due volte per il fattore $x^2$, lo tocca senza attraversarlo"}
 
 :::

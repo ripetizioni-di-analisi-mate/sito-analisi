@@ -222,7 +222,7 @@ The period does *not* depend on the mass and, in the limit of small oscillations
 :::dimostrazione
 The forces acting on the particle are the weight $m\vec{g}$ and the tension of the string $\vec{T}$. The tension is directed along the string, so it is perpendicular to the path and has no tangential component. The component of the weight along the tangent, in the direction in which $\theta$ increases, is $-mg\sin\theta$. The tangential acceleration of a motion along a circle of radius $\ell$ is $\ddot{s} = \ell\ddot{\theta}$, therefore Newton's second law along the tangent gives
 $$
-mL\ddot{\theta} = -mg\sin\theta,
+m\ell\ddot{\theta} = -mg\sin\theta,
 \qquad\text{that is}\qquad
 \ddot{\theta} = -\frac{g}{\ell}\sin\theta .
 $$

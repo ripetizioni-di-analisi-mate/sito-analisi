@@ -8,7 +8,7 @@ sommario: The function a^x and its properties, and the methods for solving equat
 :::definizione{#funzione-esponenziale titolo="Exponential function"}
 For $a > 0$, $a \neq 1$, the **exponential function** with base $a$ assigns to *every* $x \in \mathbb{R}$ the number $a^{x}$. Properties:
 
-- $a^{x} > 0$ for every $x \in \mathbb{R}$: the graph lies above the $x$-axis and the line $y = 0$ is a horizontal asymptote;
+- $a^{x} > 0$ for every $x \in \mathbb{R}$, so the graph lies above the $x$-axis; the line $y = 0$ is a horizontal asymptote;
 - $a^{0} = 1$, so the graph passes through the point $(0, 1)$ whatever the base;
 - the function is injective: different exponents give different powers;
 - for $a > 1$ the function is strictly increasing; for $0 < a < 1$ it is strictly decreasing.
@@ -56,7 +56,7 @@ The number $16$ has been rewritten as a power of $2$, so the equality of the pow
 
 ## Equations solved with the logarithm
 
-:::teorema{#esponenziale-uguale-k titolo="Equation with different bases"}
+:::teorema{#esponenziale-uguale-k titolo="Exponential equation with a constant right-hand side"}
 For $a > 0$, $a \neq 1$ and $k > 0$:
 $$
 a^{A} = k \iff A = \log_a k .
@@ -97,7 +97,7 @@ For $a > 0$, $a \neq 1$:
 - if $a > 1$, then $a^{A} > a^{B} \iff A > B$: the direction of the inequality is **preserved**, because the exponential function with base $a$ is strictly increasing;
 - if $0 < a < 1$, then $a^{A} > a^{B} \iff A < B$: the direction of the inequality is **reversed**, because the function is strictly decreasing.
 
-The same rules hold with the symbols $\geq$, $<$, $\leq$. An inequality of the type $a^{A} > k$ with $k > 0$ is brought back to this form by writing $k$ as a power of $a$, possibly with the logarithm: $k = a^{\log_a k}$.
+The same rules hold with the symbols $\geq$, $<$, $\leq$. An inequality of the type $a^{A} > k$ with $k > 0$ is brought back to this form by writing $k$ as a power of $a$, possibly with the logarithm: $k = a^{\log_a k}$. If instead $k \leq 0$, since $a^{A} > 0$, the inequality $a^{A} > k$ is satisfied by *every* $x$ for which $A$ is defined and the inequality $a^{A} < k$ **has no solutions**.
 :::
 
 :::esempio{titolo="Base greater than 1"}
