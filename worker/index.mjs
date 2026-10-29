@@ -7,6 +7,7 @@
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
+import { rispondiAssistente } from './assistente.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const SCHEDE_LIBERE = 3;          // le prime N schede svolte di ogni argomento restano aperte
@@ -98,6 +99,7 @@ export class Archivio {
         falliti INTEGER DEFAULT 0, bloccato_fino INTEGER DEFAULT 0, creato TEXT, ultimo_accesso TEXT);
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
       CREATE TABLE IF NOT EXISTS dispositivi (email TEXT, id TEXT, nome TEXT, creato TEXT, ultimo_uso INTEGER, PRIMARY KEY (email, id));
+      CREATE TABLE IF NOT EXISTS assistente (giorno TEXT, email TEXT, n INTEGER, PRIMARY KEY (giorno, email));
     `);
     // colonne aggiunte dopo: il nome dello studente
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
@@ -182,6 +184,20 @@ export class Archivio {
         }
         return Response.json({ ok: true, account: Boolean(this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) });
 
+      case '/assistente-conta': { // messaggi all'assistente: limite per studente e per tutto il sito
+        const mio = this.riga('SELECT n FROM assistente WHERE giorno = ? AND email = ?', c.giorno, c.email)?.n || 0;
+        if (mio >= c.maxStudente) return Response.json({ ok: false, motivo: 'studente' });
+        const tutti = this.riga('SELECT SUM(n) AS n FROM assistente WHERE giorno = ?', c.giorno)?.n || 0;
+        if (tutti >= c.maxGiorno) return Response.json({ ok: false, motivo: 'sito' });
+        this.sql.exec(`INSERT INTO assistente (giorno, email, n) VALUES (?, ?, 1)
+                       ON CONFLICT(giorno, email) DO UPDATE SET n = n + 1`, c.giorno, c.email);
+        if (Math.random() < 0.01) this.sql.exec("DELETE FROM assistente WHERE giorno < date('now', '-200 days')");
+        return Response.json({ ok: true, n: mio + 1 });
+      }
+      case '/assistente-rimborso':
+        this.sql.exec('UPDATE assistente SET n = MAX(n - 1, 0) WHERE giorno = ? AND email = ?', c.giorno, c.email);
+        return Response.json({ ok: true });
+
       case '/revoca':
         this.sql.exec('DELETE FROM abilitazioni WHERE email = ? AND materia = ?', c.email, c.materia);
         return Response.json({ ok: true });
@@ -214,6 +230,8 @@ export class Archivio {
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
           dispositivi: this.righe('SELECT email, nome, creato, ultimo_uso FROM dispositivi ORDER BY ultimo_uso DESC LIMIT 2000'),
+          assistente: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS studenti FROM assistente
+                                  WHERE giorno >= date('now', '-89 days') GROUP BY giorno ORDER BY giorno`),
         });
       }
     }
@@ -397,6 +415,12 @@ export default {
       return new Response(null, { status: 302, headers: h });
     }
 
+    // ===== assistente di studio =====
+    if (p === '/api/assistente' && POST) {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      return rispondiAssistente(req, env, io, aDO, A_PAGAMENTO, PREZZI);
+    }
+
     // ===== webhook Paddle =====
     if (p === '/api/paddle/webhook' && POST) {
       const corpo = await req.text();
@@ -430,6 +454,7 @@ export default {
             'fisica-1': env.PADDLE_PREZZO_FISICA_1 || null,
             'fisica-2': env.PADDLE_PREZZO_FISICA_2 || null,
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
+            'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
           },
         } : null,
       });
