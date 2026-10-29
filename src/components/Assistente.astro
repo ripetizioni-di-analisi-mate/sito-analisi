@@ -7,21 +7,21 @@ interface Props { materia: string; argomento: string; sezione?: string; lingua: 
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
 const s = en ? {
-  apri: 'Ask Carmine', nome: 'Carmine', bottone: 'Ask Carmine', sotto: 'Virtual assistant (AI) · questions about this page', chiudi: 'Close',
+  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
   suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
-  bloccata: 'Carmine answers questions about the pages of the subjects you have unlocked.',
+  bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
-  nuova: 'New conversation', avviso: 'Carmine is an AI and can make mistakes: check the steps.',
+  nuova: 'New conversation', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
-  apri: 'Chiedi a Carmine', nome: 'Carmine', bottone: 'Chiedi a Carmine', sotto: 'Assistente virtuale (IA) · domande su questa pagina', chiudi: 'Chiudi',
+  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
   suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
-  bloccata: 'Carmine risponde alle domande sulle pagine delle materie che hai sbloccato.',
+  bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
-  nuova: 'Nuova conversazione', avviso: 'Carmine è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
+  nuova: 'Nuova conversazione', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
 <button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
