@@ -25,8 +25,8 @@ const MATERIE = materieL(lingua);
   </form>
   <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   {gruppiL(lingua).map((g) => (
-    <section class="gruppo">
-      <h2 class="nome-gruppo">{g}</h2>
+    <details class="gruppo" open={MATERIE.some((m) => m.gruppo === g && m.attiva)}>
+      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
       <ul class="griglia-materie">
         {MATERIE.filter((m) => m.gruppo === g).map((m) => (
           <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
@@ -46,6 +46,6 @@ const MATERIE = materieL(lingua);
           </li>
         ))}
       </ul>
-    </section>
+    </details>
   ))}
 </Base>
