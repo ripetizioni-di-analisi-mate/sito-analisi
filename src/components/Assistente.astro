@@ -7,26 +7,26 @@ interface Props { materia: string; argomento: string; sezione?: string; lingua: 
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
 const s = en ? {
-  apri: 'Ask the assistant', nome: 'Assistant', sotto: 'Questions about this page', chiudi: 'Close',
+  apri: 'Ask Carmine', nome: 'Carmine', bottone: 'Ask Carmine', sotto: 'Virtual assistant (AI) · questions about this page', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
   suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
-  bloccata: 'The assistant answers questions about the pages of the subjects you have unlocked.',
+  bloccata: 'Carmine answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
-  nuova: 'New conversation', avviso: 'The assistant can make mistakes: check the steps.',
+  nuova: 'New conversation', avviso: 'Carmine is an AI and can make mistakes: check the steps.',
 } : {
-  apri: 'Chiedi all’assistente', nome: 'Assistente', sotto: 'Domande su questa pagina', chiudi: 'Chiudi',
+  apri: 'Chiedi a Carmine', nome: 'Carmine', bottone: 'Chiedi a Carmine', sotto: 'Assistente virtuale (IA) · domande su questa pagina', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
   suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
-  bloccata: 'L’assistente risponde alle domande sulle pagine delle materie che hai sbloccato.',
+  bloccata: 'Carmine risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
-  nuova: 'Nuova conversazione', avviso: 'L’assistente può sbagliare: controlla i passaggi.',
+  nuova: 'Nuova conversazione', avviso: 'Carmine è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
 <button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z"/><path d="M9.2 8.2a2.8 2.8 0 1 1 3.9 2.6c-.7.3-1.1.9-1.1 1.6"/><path d="M12 14.6h.01"/></svg>
-  <span>{s.nome}</span>
+  <span>{s.bottone}</span>
 </button>
 
 <section class="assistente" hidden aria-label={s.nome}

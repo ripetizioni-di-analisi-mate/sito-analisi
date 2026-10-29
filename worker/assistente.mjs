@@ -11,7 +11,7 @@ const MAX_GIORNO = 200;    // messaggi al giorno per tutto il sito
 
 const TIPI = { teoria: 'teoria', 'esercizi-svolti': 'esercizi svolti', esercizi: 'esercizi da fare' };
 
-const ISTRUZIONI = `Sei l'assistente di studio del sito Ripetizioni di Analisi del prof. Carmine Tornincasa (ripetizionidianalisi.com).
+const ISTRUZIONI = `Ti chiami Carmine e sei l'assistente virtuale di studio del sito Ripetizioni di Analisi del prof. Carmine Tornincasa (ripetizionidianalisi.com). Porti il suo nome, ma sei un'intelligenza artificiale: se lo studente te lo chiede, dillo chiaramente e non presentarti mai come il professore in persona. Per lezioni private o domande personali, lo studente può scrivere al professore su WhatsApp dal pulsante verde del sito.
 Aiuti studenti universitari e di scuola superiore che stanno studiando una pagina del sito: teoria, esercizi svolti o esercizi da fare.
 
 Ambito
@@ -62,11 +62,11 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento) {
   const msg = (it, eng) => (en ? eng : it);
 
   if (!env.AI) return json({ errore: msg('L’assistente non è ancora attivo.', 'The assistant is not active yet.') }, 503);
-  if (!io) return json({ errore: msg('Accedi al tuo account per usare l’assistente.', 'Log in to use the assistant.'), codice: 'accesso' }, 401);
+  if (!io) return json({ errore: msg('Accedi al tuo account per scrivere a Carmine.', 'Log in to use the assistant.'), codice: 'accesso' }, 401);
   const materia = MATERIE.find((m) => m.slug === b.materia);
   if (!materia) return json({ errore: 'Materia non valida.' }, 400);
   if (env.VENDITA !== '0' && aPagamento.includes(materia.slug) && !io.materie.includes(materia.slug))
-    return json({ errore: msg('L’assistente è disponibile nelle materie sbloccate.', 'The assistant is available in unlocked subjects.'), codice: 'sblocca' }, 403);
+    return json({ errore: msg('Carmine risponde nelle materie sbloccate.', 'The assistant is available in unlocked subjects.'), codice: 'sblocca' }, 403);
 
   const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-12)
     .map((m) => ({ role: m.ruolo === 'assistente' ? 'assistant' : 'user', content: taglia(m.testo, 2500).trim() }))
@@ -80,8 +80,8 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento) {
   if (!conto.ok) {
     return json({
       errore: conto.motivo === 'studente'
-        ? msg(`Hai usato i ${maxStudente} messaggi di oggi. Domani l’assistente sarà di nuovo disponibile.`, `You have used today's ${maxStudente} messages. The assistant will be available again tomorrow.`)
-        : msg('L’assistente ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.'),
+        ? msg(`Hai usato i ${maxStudente} messaggi di oggi. Domani Carmine sarà di nuovo disponibile.`, `You have used today's ${maxStudente} messages. The assistant will be available again tomorrow.`)
+        : msg('Carmine ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.'),
       codice: 'limite', rimasti: 0,
     }, 429);
   }
@@ -115,8 +115,8 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento) {
     const quota = /4006|allocation|neurons|limit/i.test(String(ultimoErrore?.message || ''));
     return json({
       errore: quota
-        ? msg('L’assistente ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
-        : msg('L’assistente non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.'),
+        ? msg('Carmine ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
+        : msg('Carmine non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.'),
     }, 502);
   }
   // Alcuni modelli scrivono il ragionamento tra tag: si tiene solo la risposta.
