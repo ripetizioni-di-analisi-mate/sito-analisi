@@ -156,8 +156,20 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-superiori-5': {
     titolo: 'Mathematics, 5th year',
     breve: 'Maths 5th year',
-    descrizione: 'The mathematics syllabus of the 5th year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'The mathematics of the final year of the Italian scientific high school (liceo scientifico), up to the written maths exam: limits, derivatives, curve sketching, integrals, differential equations, geometry in space and probability.',
+    argomenti: {
+      funzioni: { titolo: 'Functions and their properties', breve: 'Functions' },
+      limiti: { titolo: 'Limits', breve: 'Limits' },
+      'continuita-e-asintoti': { titolo: 'Continuity and asymptotes', breve: 'Continuity' },
+      derivate: { titolo: 'Derivatives', breve: 'Derivatives' },
+      'teoremi-calcolo-differenziale': { titolo: 'Theorems of differential calculus', breve: 'Differential calculus theorems' },
+      'studio-di-funzione': { titolo: 'Maxima, minima, inflection points and curve sketching', breve: 'Curve sketching' },
+      'integrali-indefiniti': { titolo: 'Indefinite integrals', breve: 'Indefinite integrals' },
+      'integrali-definiti': { titolo: 'Definite integrals, areas and volumes', breve: 'Definite integrals' },
+      'equazioni-differenziali': { titolo: 'Differential equations', breve: 'Differential equations' },
+      'geometria-spazio': { titolo: 'Analytic geometry in space', breve: 'Geometry in space' },
+      'probabilita-e-distribuzioni': { titolo: 'Probability and distributions', breve: 'Probability' },
+    },
   },
   'fisica-superiori-1': {
     titolo: 'Physics, 1st year',
