@@ -1,0 +1,299 @@
+---
+// Assistente di studio: pulsante fisso in basso a destra e finestra di chat.
+// Sa quale parte della pagina lo studente sta leggendo e la manda al Worker (/api/assistente)
+// insieme alla domanda. Funziona solo nelle materie sbloccate (classe "sbloccato" su <html>, scritta dal Worker).
+import { link, type Lingua } from '../i18n';
+interface Props { materia: string; argomento: string; sezione?: string; lingua: Lingua }
+const { materia, argomento, sezione, lingua } = Astro.props;
+const en = lingua === 'en';
+const s = en ? {
+  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
+  parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
+  scrivi: 'Write your question…', invia: 'Send',
+  suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
+  bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
+  sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
+  nuova: 'New conversation', avviso: 'Pi is an AI and can make mistakes: check the steps.',
+} : {
+  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
+  parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
+  scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
+  suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
+  bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
+  sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
+  nuova: 'Nuova conversazione', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
+};
+---
+<button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z"/><path d="M9.2 8.2a2.8 2.8 0 1 1 3.9 2.6c-.7.3-1.1.9-1.1 1.6"/><path d="M12 14.6h.01"/></svg>
+  <span>{s.bottone}</span>
+</button>
+
+<section class="assistente" hidden aria-label={s.nome}
+  data-materia={materia} data-argomento={argomento} data-sezione={sezione ?? ''} data-lingua={lingua}
+  data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti })}>
+  <header class="assistente-testa">
+    <div>
+      <strong>{s.nome}</strong>
+      <small>{s.sotto}</small>
+    </div>
+    <button type="button" class="assistente-nuova" data-nuova title={s.nuova} aria-label={s.nuova}>
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v12M4 10h12"/></svg>
+    </button>
+    <button type="button" class="assistente-chiudi" data-chiudi-assistente aria-label={s.chiudi}>×</button>
+  </header>
+
+  <div class="assistente-bloccato">
+    <p>{s.bloccata}</p>
+    <p class="assistente-azioni">
+      <a class="se-ospite" href={link(lingua, '/accedi')}>{s.accedi}</a>
+      <a href={link(lingua, `/${materia}/sblocca`)}>{s.sblocca}</a>
+    </p>
+  </div>
+
+  <div class="assistente-attivo">
+    <div class="assistente-parte" hidden>
+      <span>{s.parte}</span> <strong data-parte-titolo></strong>
+      <small>{s.cambia}</small>
+    </div>
+    <div class="assistente-messaggi" aria-live="polite">
+      <div class="assistente-suggerimenti">
+        {s.suggerimenti.map((x) => <button type="button" data-suggerimento>{x}</button>)}
+      </div>
+    </div>
+    <form class="assistente-modulo">
+      <textarea rows="2" maxlength="2000" placeholder={s.scrivi} aria-label={s.scrivi}></textarea>
+      <button type="submit" aria-label={s.invia}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg>
+      </button>
+    </form>
+    <p class="assistente-piede"><span data-rimasti></span> {s.avviso}</p>
+  </div>
+</section>
+
+<script>
+  type Messaggio = { ruolo: 'studente' | 'assistente'; testo: string };
+  const pannello = document.querySelector<HTMLElement>('.assistente');
+  const apri = document.querySelector<HTMLButtonElement>('[data-apri-assistente]');
+  if (pannello && apri) {
+    const testi = JSON.parse(pannello.dataset.testi || '{}');
+    const radice = document.documentElement;
+    const lista = pannello.querySelector<HTMLElement>('.assistente-messaggi')!;
+    const suggerimenti = pannello.querySelector<HTMLElement>('.assistente-suggerimenti')!;
+    const modulo = pannello.querySelector<HTMLFormElement>('.assistente-modulo')!;
+    const campo = modulo.querySelector('textarea')!;
+    const boxParte = pannello.querySelector<HTMLElement>('.assistente-parte')!;
+    const titoloParte = pannello.querySelector<HTMLElement>('[data-parte-titolo]')!;
+    const rimasti = pannello.querySelector<HTMLElement>('[data-rimasti]')!;
+    const studio = document.querySelector<HTMLElement>('.testo-studio');
+    let conversazione: Messaggio[] = [];
+    let parte: HTMLElement | null = null;
+    let inCorso = false;
+
+    // ---- parti della pagina ----
+    // Teoria: i riquadri (definizioni, teoremi, esempi…). Esercizi svolti: un esercizio per titolo.
+    // Esercizio da fare: tutta la pagina.
+    type Parte = { el: HTMLElement; titolo: string; nodi: Element[] };
+    function parti(): Parte[] {
+      if (!studio) return [];
+      const figli = [...studio.children] as HTMLElement[];
+      const esercizi = figli.filter((x) => x.tagName === 'H2' && /^esercizio-/.test(x.id));
+      if (esercizi.length) {
+        return esercizi.map((h) => {
+          const nodi: Element[] = [h];
+          let n = h.nextElementSibling;
+          while (n && n.tagName !== 'H2') { nodi.push(n); n = n.nextElementSibling; }
+          return { el: h, titolo: h.textContent?.trim() || '', nodi };
+        });
+      }
+      const blocchi = figli.filter((x) => x.classList.contains('blocco'));
+      if (blocchi.length) return blocchi.map((b) => ({ el: b, titolo: titoloBlocco(b), nodi: [b] }));
+      return [{ el: studio, titolo: document.querySelector('main h1')?.textContent?.trim() || '', nodi: [studio] }];
+    }
+    function titoloBlocco(b: HTMLElement) {
+      const t = b.querySelector(':scope > .blocco-etichetta, :scope > summary');
+      return (t?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 120);
+    }
+    // Testo con le formule riscritte in LaTeX e senza i disegni dei grafici.
+    function testo(nodi: Element[]) {
+      return nodi.map((n) => {
+        const c = n.cloneNode(true) as HTMLElement;
+        c.querySelectorAll<HTMLElement>('[data-tex]').forEach((k) => {
+          const tex = k.dataset.tex || '';
+          const display = k.classList.contains('katex-display');
+          k.replaceWith(document.createTextNode(display ? `\n$$${tex}$$\n` : `$${tex}$`));
+        });
+        c.querySelectorAll('svg, script, style, button').forEach((x) => x.remove());
+        c.querySelectorAll('li').forEach((li) => li.prepend(document.createTextNode('\n- ')));
+        c.querySelectorAll('p, h2, h3, div, details, summary').forEach((x) => x.append(document.createTextNode('\n')));
+        return c.textContent || '';
+      }).join('\n').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n\n').trim();
+    }
+    function paragrafoDi(el: HTMLElement) {
+      // Il paragrafo (titolo ##) che contiene la parte, solo nella teoria.
+      if (!studio || pannello!.dataset.sezione !== 'teoria') return null;
+      let h: Element | null = el;
+      while (h && h.tagName !== 'H2') h = h.previousElementSibling;
+      if (!h) return null;
+      const nodi: Element[] = [h];
+      let n = h.nextElementSibling;
+      while (n && n.tagName !== 'H2') { nodi.push(n); n = n.nextElementSibling; }
+      return { titolo: h.textContent?.trim() || '', testo: testo(nodi) };
+    }
+    function scegli(p: Parte | undefined) {
+      document.querySelectorAll('.parte-scelta').forEach((x) => x.classList.remove('parte-scelta'));
+      parte = p ? p.el : null;
+      if (!p) { boxParte.hidden = true; return; }
+      p.nodi.forEach((x) => x.classList.add('parte-scelta'));
+      titoloParte.textContent = p.titolo;
+      boxParte.hidden = !p.titolo;
+    }
+    function parteInVista() {
+      const ps = parti();
+      const centro = innerHeight * 0.4;
+      let migliore: Parte | undefined; let dist = Infinity;
+      for (const p of ps) {
+        const r1 = p.nodi[0].getBoundingClientRect();
+        const r2 = p.nodi[p.nodi.length - 1].getBoundingClientRect();
+        const d = centro < r1.top ? r1.top - centro : centro > r2.bottom ? centro - r2.bottom : 0;
+        if (d < dist) { dist = d; migliore = p; }
+      }
+      return migliore;
+    }
+    // Con la finestra aperta, toccare un riquadro lo sceglie come parte della domanda.
+    studio?.addEventListener('click', (e) => {
+      if (pannello.hidden) return;
+      const ps = parti();
+      const t = e.target as Node;
+      const p = ps.find((x) => x.nodi.some((n) => n.contains(t)));
+      if (p) scegli(p);
+    });
+
+    // ---- testo delle risposte: grassetto, corsivo, elenchi e formule ----
+    let katex: typeof import('katex').default | null = null;
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+    function formattato(src: string) {
+      const formule: string[] = [];
+      const metti = (tex: string, display: boolean) => {
+        let html = esc(tex);
+        try { if (katex) html = katex.renderToString(tex, { displayMode: display, throwOnError: false, strict: false }); } catch { /* resta il testo */ }
+        formule.push(html);
+        return `\u0000${formule.length - 1}\u0000`;
+      };
+      let s = src
+        .replace(/\$\$([\s\S]+?)\$\$/g, (_, t) => `\n${metti(t, true)}\n`)
+        .replace(/\\\[([\s\S]+?)\\\]/g, (_, t) => `\n${metti(t, true)}\n`)
+        .replace(/\\\(([\s\S]+?)\\\)/g, (_, t) => metti(t, false))
+        .replace(/\$([^$\n]+?)\$/g, (_, t) => metti(t, false));
+      s = esc(s);
+      const inline = (x: string) => x
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+      const blocchi = s.split(/\n{2,}/);
+      const html = blocchi.map((b) => {
+        const righe = b.split('\n').filter((r) => r.trim());
+        if (!righe.length) return '';
+        if (righe.every((r) => /^\s*[-*•]\s+/.test(r))) return `<ul>${righe.map((r) => `<li>${inline(r.replace(/^\s*[-*•]\s+/, ''))}</li>`).join('')}</ul>`;
+        if (righe.every((r) => /^\s*\d+[.)]\s+/.test(r))) return `<ol>${righe.map((r) => `<li>${inline(r.replace(/^\s*\d+[.)]\s+/, ''))}</li>`).join('')}</ol>`;
+        return righe.map((r) => {
+          const t = r.replace(/^#{1,6}\s+/, '');
+          if (/^\u0000\d+\u0000$/.test(t.trim())) return t.trim();
+          return `<p>${inline(t)}</p>`;
+        }).join('');
+      }).join('');
+      return html.replace(/\u0000(\d+)\u0000/g, (_, i) => formule[Number(i)]);
+    }
+
+    function aggiungi(m: Messaggio | { ruolo: 'errore' | 'attesa'; testo: string }) {
+      suggerimenti.hidden = true;
+      const d = document.createElement('div');
+      d.className = `assistente-msg msg-${m.ruolo}`;
+      if (m.ruolo === 'assistente') d.innerHTML = formattato(m.testo);
+      else d.textContent = m.testo;
+      lista.append(d);
+      lista.scrollTop = lista.scrollHeight;
+      return d;
+    }
+
+    async function invia(domanda: string) {
+      domanda = domanda.trim();
+      if (!domanda || inCorso) return;
+      inCorso = true;
+      campo.value = '';
+      conversazione.push({ ruolo: 'studente', testo: domanda });
+      aggiungi({ ruolo: 'studente', testo: domanda });
+      const attesa = aggiungi({ ruolo: 'attesa', testo: testi.attendi });
+      if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
+      const ps = parti();
+      const p = ps.find((x) => x.el === parte);
+      try {
+        const r = await fetch('/api/assistente', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            materia: pannello!.dataset.materia, argomento: pannello!.dataset.argomento,
+            tipo: pannello!.dataset.sezione, lingua: pannello!.dataset.lingua,
+            titoloPagina: document.querySelector('main h1')?.textContent?.trim() || '',
+            parte: p ? { titolo: p.titolo, testo: testo(p.nodi) } : null,
+            paragrafo: p ? paragrafoDi(p.el) : null,
+            messaggi: conversazione,
+          }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!katex) { try { katex = (await import('katex')).default; } catch { /* formule come testo */ } }
+        attesa.remove();
+        if (d.risposta) {
+          conversazione.push({ ruolo: 'assistente', testo: d.risposta });
+          aggiungi({ ruolo: 'assistente', testo: d.risposta });
+        } else {
+          conversazione.pop();
+          aggiungi({ ruolo: 'errore', testo: d.errore || 'Errore.' });
+        }
+        if (typeof d.rimasti === 'number') rimasti.textContent = `${d.rimasti} ${testi.rimasti}.`;
+      } catch {
+        attesa.remove();
+        conversazione.pop();
+        aggiungi({ ruolo: 'errore', testo: pannello!.dataset.lingua === 'en' ? 'Connection error. Please try again.' : 'Errore di connessione. Riprova.' });
+      }
+      inCorso = false;
+    }
+
+    function apriPannello() {
+      pannello!.hidden = false;
+      radice.classList.add('assistente-aperto');
+      apri!.setAttribute('aria-expanded', 'true');
+      if (radice.classList.contains('sbloccato')) {
+        const p = parteInVista();
+        scegli(p);
+        // Su telefono la finestra copre la metà bassa: la parte scelta sale in cima allo schermo.
+        if (p && !matchMedia('(min-width: 40rem)').matches) p.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
+        if (matchMedia('(min-width: 40rem)').matches) campo.focus();
+      }
+    }
+    function chiudiPannello() {
+      pannello!.hidden = true;
+      radice.classList.remove('assistente-aperto');
+      apri!.setAttribute('aria-expanded', 'false');
+      scegli(undefined);
+    }
+    apri.addEventListener('click', () => (pannello.hidden ? apriPannello() : chiudiPannello()));
+    pannello.querySelector('[data-chiudi-assistente]')?.addEventListener('click', chiudiPannello);
+    pannello.querySelector('[data-nuova]')?.addEventListener('click', () => {
+      conversazione = [];
+      lista.querySelectorAll('.assistente-msg').forEach((x) => x.remove());
+      suggerimenti.hidden = false;
+      scegli(parteInVista());
+    });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pannello.hidden) chiudiPannello(); });
+    suggerimenti.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('[data-suggerimento]');
+      if (b) invia(b.textContent || '');
+    });
+    modulo.addEventListener('submit', (e) => { e.preventDefault(); invia(campo.value); });
+    campo.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); invia(campo.value); }
+    });
+  }
+</script>

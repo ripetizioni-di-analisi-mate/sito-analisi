@@ -7,6 +7,8 @@
   "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": true, "not_found_handling": "404-page" },
   "durable_objects": { "bindings": [{ "name": "ARCHIVIO", "class_name": "Archivio" }] },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Archivio"] }],
+  // Intelligenza artificiale di Cloudflare per l'assistente di studio (worker/assistente.mjs)
+  "ai": { "binding": "AI" },
   "vars": {
     // "0" = sito tutto aperto; qualsiasi altro valore = oscuramento attivo
     "VENDITA": "1",
