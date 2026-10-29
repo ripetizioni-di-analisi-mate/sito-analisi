@@ -92,7 +92,7 @@ export const TESTI = {
     // pagina della materia
     argomentiEsame: "Gli argomenti dell'esame",
     accessoAttivo: 'Accesso completo attivo',
-    accessoAttivoTesto: (m: string) => `Teoria, tutte le schede svolte, soluzioni e PDF di ${m} sono sbloccati nel tuo account.`,
+    accessoAttivoTesto: (m: string) => `Teoria, tutte le schede svolte e soluzioni di ${m} sono sbloccate nel tuo account.`,
     anteprima: 'Anteprima gratuita',
     anteprimaTesto: "Di ogni argomento puoi leggere gratis l'inizio della teoria e le prime 3 schede di esercizi svolti, senza account.",
     iniziaAnteprima: "Inizia dall'anteprima", anteprimaBollino: 'Anteprima gratuita', sbloccaTutto: 'Sblocca tutto',
@@ -112,7 +112,7 @@ export const TESTI = {
     teoriaUsata: 'Teoria usata', vaiA: 'Vai a', indiceArgomenti: 'Indice degli argomenti',
     // sblocca
     sbloccaTitolo: (m: string) => `Sblocca ${m}`,
-    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, schede di esercizi svolti, soluzioni e PDF.`,
+    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, schede di esercizi svolti e soluzioni.`,
     sbloccaSommario: 'Un acquisto unico, senza abbonamento: la materia resta sbloccata nel tuo account, su tutti i tuoi dispositivi.',
     includeTeoria: (n: number) => `La <strong>teoria completa</strong> di tutti gli ${n} argomenti, con definizioni, teoremi e dimostrazioni`,
     includeSvolti: (n: number) => `Tutte le <strong>${n} schede di esercizi svolti</strong> per tipologia, con ogni passaggio spiegato`,
@@ -160,7 +160,6 @@ export const TESTI = {
       'La teoria completa di ogni argomento della materia, con definizioni, teoremi e dimostrazioni',
       'Tutte le schede di esercizi svolti, con ogni passaggio spiegato',
       'Le soluzioni di tutti gli esercizi da fare',
-      'Il PDF scaricabile di ogni argomento',
     ],
   },
   en: {
@@ -177,7 +176,7 @@ export const TESTI = {
     cercaSegnaposto: 'Search for a topic, a theorem, a type of exercise…', cercaNelSito: 'Search the site',
     argomentiEsame: 'The exam topics',
     accessoAttivo: 'Full access active',
-    accessoAttivoTesto: (m: string) => `Theory, all worked examples, solutions and PDFs of ${m} are unlocked in your account.`,
+    accessoAttivoTesto: (m: string) => `Theory, all worked examples and solutions of ${m} are unlocked in your account.`,
     anteprima: 'Free preview',
     anteprimaTesto: 'For each topic you can read the beginning of the theory and the first 3 sheets of worked examples for free, no account needed.',
     iniziaAnteprima: 'Start with the preview', anteprimaBollino: 'Free preview', sbloccaTutto: 'Unlock everything',
@@ -195,7 +194,7 @@ export const TESTI = {
     scheda: 'Sheet', esercizio: 'Exercise', esercizioDaFare: 'Exercise', tutteLeSchede: 'All sheets', tuttiDaFare: 'All exercises',
     teoriaUsata: 'Theory used', vaiA: 'Go to', indiceArgomenti: 'List of topics',
     sbloccaTitolo: (m: string) => `Unlock ${m}`,
-    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, worked examples, solutions and PDFs.`,
+    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, worked examples and solutions.`,
     sbloccaSommario: 'A one-time purchase, no subscription: the subject stays unlocked in your account, on all your devices.',
     includeTeoria: (n: number) => `The <strong>complete theory</strong> of all ${n} topics, with definitions, theorems and proofs`,
     includeSvolti: (n: number) => `All <strong>${n} sheets of worked examples</strong> by type, with every step explained`,
@@ -238,7 +237,6 @@ export const TESTI = {
       'The complete theory of every topic of the subject, with definitions, theorems and proofs',
       'All sheets of worked examples, with every step explained',
       'The solutions of all exercises',
-      'The downloadable PDF of each topic',
     ],
   },
 };
