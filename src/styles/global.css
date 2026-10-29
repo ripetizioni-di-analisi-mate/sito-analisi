@@ -576,10 +576,12 @@ html.collegato .bottone-account .iniziale { display: inline-grid; place-items: c
 .con-lente input { flex: 1; width: 100%; padding-left: 2.6rem !important; box-sizing: border-box; }
 
 /* ---------- assistente di studio ---------- */
+/* Pi resta sempre verde, qualunque sia il colore della materia */
+.pi-lancio, .assistente { --accento: #2f6f68; }
 .pi-lancio { position: relative; display: flex; justify-content: flex-end; }
 .bottone-assistente { --pi: var(--accento); display: flex; align-items: center; gap: 0.6rem; height: 3.5rem; max-width: 3.5rem; padding: 0; border: 2px solid transparent; border-radius: 999px; background: var(--pi); color: var(--inchiostro); font-family: var(--ui); cursor: pointer; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: max-width 0.35s ease, background 0.25s ease, border-color 0.25s ease, padding 0.35s ease; }
 .pi-avatar { position: relative; flex: none; width: calc(3.5rem - 4px); height: calc(3.5rem - 4px); border-radius: 50%; background: var(--pi); color: white; display: grid; place-items: center; font-family: var(--testo); font-weight: 700; font-size: 1.75rem; line-height: 1; transition: width 0.35s ease, height 0.35s ease, font-size 0.35s ease; }
-.pi-online { position: absolute; right: 1px; bottom: 2px; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #3fbf6a; border: 2px solid white; }
+.pi-online { position: absolute; left: 4px; bottom: 4px; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #3fbf6a; border: 2px solid white; }
 .pi-barra { white-space: nowrap; font-size: 1rem; color: color-mix(in srgb, var(--inchiostro) 60%, transparent); opacity: 0; transition: opacity 0.2s ease; }
 .pi-invia { flex: none; width: 2.3rem; height: 2.3rem; margin-right: 0.3rem; border-radius: 50%; background: var(--pi); color: white; display: grid; place-items: center; opacity: 0; transition: opacity 0.2s ease; }
 .pi-invia svg { width: 1rem; height: 1rem; }
