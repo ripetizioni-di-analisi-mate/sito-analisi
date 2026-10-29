@@ -39,7 +39,7 @@ Note per una nuova chat di Claude che riprende il lavoro con Carmine (aggiornate
 I brief contengono il percorso `/home/claude/sito-analisi1`: sostituirlo con quello del clone usato.
 
 ## Materie online (tutte attive, con versione inglese)
-Precorso 19 €, Analisi matematica 1 29 €, Analisi matematica 2 29 €, Algebra lineare e geometria analitica 29 €, Fisica 1 32 €, Fisica 2 36 €, Matematica generale 59 €, Matematica 5° anno 29 € (senza inglese; prezzi nuovi in attesa sul ramo `prezzi-nuovi`). Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
+Prezzi dal 29/10 pomeriggio (sito e Paddle allineati): Precorso 29 €, Analisi matematica 1 49 €, Analisi matematica 2 55 €, Algebra lineare e geometria analitica 39 €, Fisica 1 49 €, Fisica 2 55 €, Matematica generale 59 €, Matematica 5° anno 29 € (senza inglese). Il ramo `prezzi-nuovi` è superato: i prezzi sono su `main`. Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
 
 ## Pagamenti (Paddle, account approvato il 28/10/2026)
 - Prodotti e prezzi creati per tutte e sei le materie; codici `pri_…` in `wrangler.jsonc` (vars), token del checkout `PADDLE_CLIENT_TOKEN` (pubblico) idem.
@@ -71,7 +71,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 ## Matematica generale (29/10/2026)
 - Online dal 29/10, 10 argomenti con inglese, prezzo mostrato 59 €. Brief: `istruzioni-agenti/brief-matematica-generale.md` e `brief-verifica-matematica-generale.md`.
 - Richieste di Carmine: niente `:::percorso` né prosa tra i blocchi; parte economica presente ma non invadente (esempi matematici nelle definizioni, economia in 1-2 sezioni finali, 2-3 schede su 8, ~4 tracce su 14).
-- **Da fare**: prodotto e prezzo Paddle (59 €) e codice `pri_…` in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_GENERALE`; finché manca, la pagina Sblocca dice che i pagamenti sono in arrivo.
+- Prodotto e prezzo Paddle (59 €, quantità massima 1) creati il 29/10; codice in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_GENERALE`.
 - Ramo `prezzi-nuovi` (non ancora su main): Precorso 29, Analisi 1 e Fisica 1 49, Analisi 2 e Fisica 2 55, Algebra 39, Matematica generale 59, Matematica 5° anno 29. Va pubblicato solo dopo aver cambiato i prezzi in Paddle. Niente prezzi barrati (Omnibus).
 - In stampa/PDF il riquadro colorato resta solo su teoremi e dimostrazioni, come a schermo.
 
@@ -91,7 +91,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 
 ## Matematica 5° anno (online dal 29/10/2026, 29 €)
 - Liceo scientifico, tono più semplice (approvato da Carmine sul capitolo Derivate). 11 argomenti scritti e verificati. Brief: `istruzioni-agenti/brief-matematica-superiori-5.md` e `brief-verifica-matematica-superiori-5.md`.
-- **Da fare**: prodotto Paddle 29 € e `PADDLE_PREZZO_MATEMATICA_SUPERIORI_5` in wrangler.jsonc (già letto da `/api/config`); traduzione inglese. Prezzo già anche nel ramo `prezzi-nuovi`.
+- Prodotto e prezzo Paddle (29 €, quantità massima 1) creati il 29/10; codice in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_SUPERIORI_5`. **Da fare**: traduzione inglese.
 - Build locale: con 4170 pagine il container a volte uccide il processo (exit 137); `NODE_OPTIONS=--max-old-space-size=5500 npx astro build` passa.
 
 ## Guida concorsi
