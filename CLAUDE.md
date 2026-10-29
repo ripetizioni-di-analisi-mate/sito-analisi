@@ -87,7 +87,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Solo materie sbloccate; 20 messaggi al giorno per studente, 200 per il sito (variabili `ASSISTENTE_MAX_STUDENTE`, `ASSISTENTE_MAX_GIORNO`, `ASSISTENTE_MODELLO`). Conteggio nella tabella `assistente` del Durable Object.
 - Modello gratuito Workers AI (`@cf/openai/gpt-oss-120b`, riserva `@cf/google/gemma-4-26b-a4b-it`), binding `"ai"` in wrangler.jsonc. Quota gratuita Cloudflare: 10.000 neuroni al giorno per tutto l'account.
 - Le formule della pagina conservano il LaTeX in `data-tex` (plugin `src/plugins/rehype-katex-tex.mjs`, al posto di rehype-katex).
-- Nome dell'assistente da decidere con Carmine. Pubblicare solo con il suo ok, poi provare una domanda vera sul sito.
+- Nome scelto da Carmine: "Carmine" (pulsante "Chiedi a Carmine", sottotitolo "Assistente virtuale (IA)"; nelle istruzioni dichiara di essere un'IA, non il professore). Pubblicare solo con il suo ok, poi provare una domanda vera sul sito.
 
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
