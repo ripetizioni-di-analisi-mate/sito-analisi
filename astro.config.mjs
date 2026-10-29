@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import rehypeKatex from './src/plugins/rehype-katex-tex.mjs';
 import remarkDirective from 'remark-directive';
 import remarkBlocchi from './src/plugins/remark-blocchi.mjs';
 import fs from 'node:fs';
