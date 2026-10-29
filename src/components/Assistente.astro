@@ -1,35 +1,44 @@
 ---
 // Assistente di studio: pulsante fisso in basso a destra e finestra di chat.
 // Sa quale parte della pagina lo studente sta leggendo e la manda al Worker (/api/assistente)
-// insieme alla domanda. Funziona solo nelle materie sbloccate (classe "sbloccato" su <html>, scritta dal Worker).
-import { link, type Lingua } from '../i18n';
+// insieme alla domanda. Compare su tutte le pagine; risponde anche su materie, acquisto e accesso.
+import { type Lingua } from '../i18n';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua: Lingua }
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
 const s = en ? {
-  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI) · maths, subjects, prices', chiudi: 'Close',
+  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
   suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
-  generali: ['How much does a subject cost?', 'How does payment work and what do I get?', 'Which subject should I start from?'],
+  generali: ['Which subject should I start from?', 'How does the site work?', 'Can you explain a maths topic to me?'],
+  barra: 'Ask Pi: limits, exercises, doubts…', benvenuto: ['Hi, I am ', 'Pi', '! I can explain any step of the theory and of the exercises. Write to me whenever you like.'], chiudiFumetto: 'Close message',
   bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
   nuova: 'New conversation', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
-  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA) · matematica, materie, prezzi', chiudi: 'Chiudi',
+  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
   suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
-  generali: ['Quanto costa una materia?', 'Come si paga e che cosa ottengo?', 'Da quale materia conviene partire?'],
+  generali: ['Da quale materia conviene partire?', 'Come funziona il sito?', 'Mi spieghi un argomento di matematica?'],
+  barra: 'Chiedi a Pi: limiti, esercizi, dubbi…', benvenuto: ['Ciao, sono ', 'Pi', '! Ti spiego qualsiasi passaggio della teoria e degli esercizi. Scrivimi quando vuoi.'], chiudiFumetto: 'Chiudi il messaggio',
   bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
   nuova: 'Nuova conversazione', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
-<button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4A2.5 2.5 0 0 1 4 13.5z"/><path d="M9.2 8.2a2.8 2.8 0 1 1 3.9 2.6c-.7.3-1.1.9-1.1 1.6"/><path d="M12 14.6h.01"/></svg>
-  <span>{s.bottone}</span>
-</button>
+<div class="pi-lancio">
+  <div class="pi-fumetto" hidden>
+    <p>{s.benvenuto[0]}<strong>{s.benvenuto[1]}</strong>{s.benvenuto[2]}</p>
+    <button type="button" class="pi-fumetto-chiudi" aria-label={s.chiudiFumetto}>×</button>
+  </div>
+  <button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
+    <span class="pi-avatar" aria-hidden="true">π<span class="pi-online"></span></span>
+    <span class="pi-barra">{s.barra}</span>
+    <span class="pi-invia" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg></span>
+  </button>
+</div>
 
 <section class="assistente" hidden aria-label={s.nome}
   data-materia={materia ?? ''} data-argomento={argomento ?? ''} data-sezione={sezione ?? ''} data-lingua={lingua}
@@ -198,7 +207,8 @@ const s = en ? {
           return `<p>${inline(t)}</p>`;
         }).join('');
       }).join('');
-      return html.replace(/\u0000(\d+)\u0000/g, (_, i) => formule[Number(i)]);
+      // Gli asterischi rimasti (grassetti spezzati, elenchi irregolari) non si mostrano.
+      return html.replace(/\*+/g, '').replace(/\u0000(\d+)\u0000/g, (_, i) => formule[Number(i)]);
     }
 
     function aggiungi(m: Messaggio | { ruolo: 'errore' | 'attesa'; testo: string }) {
@@ -276,7 +286,24 @@ const s = en ? {
       apri!.setAttribute('aria-expanded', 'false');
       scegli(undefined);
     }
-    apri.addEventListener('click', () => (pannello.hidden ? apriPannello() : chiudiPannello()));
+    apri.addEventListener('click', () => { nascondiFumetto(); pannello.hidden ? apriPannello() : chiudiPannello(); });
+
+    // Fumetto di benvenuto: solo alla prima visita, sparisce da solo dopo qualche secondo.
+    const fumetto = document.querySelector<HTMLElement>('.pi-fumetto');
+    function nascondiFumetto() {
+      if (!fumetto || fumetto.hidden) return;
+      fumetto.classList.add('sparisce');
+      setTimeout(() => { fumetto.hidden = true; }, 400);
+      try { localStorage.setItem('pi-benvenuto', 'visto'); } catch {}
+    }
+    let visto = false;
+    try { visto = localStorage.getItem('pi-benvenuto') === 'visto'; } catch {}
+    if (fumetto && !visto) {
+      setTimeout(() => { if (pannello.hidden) fumetto.hidden = false; }, 1500);
+      setTimeout(nascondiFumetto, 11000);
+      fumetto.querySelector('.pi-fumetto-chiudi')?.addEventListener('click', nascondiFumetto);
+      fumetto.addEventListener('click', (e) => { if (!(e.target as HTMLElement).closest('.pi-fumetto-chiudi')) { nascondiFumetto(); apriPannello(); } });
+    }
     pannello.querySelector('[data-chiudi-assistente]')?.addEventListener('click', chiudiPannello);
     pannello.querySelector('[data-nuova]')?.addEventListener('click', () => {
       conversazione = [];

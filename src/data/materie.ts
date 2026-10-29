@@ -230,7 +230,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "Il programma di matematica del quinto anno del liceo scientifico, verso la seconda prova di maturità: limiti, derivate, studio di funzione, integrali, equazioni differenziali, geometria nello spazio e probabilità.",
     colore: '#8b4a7a',
     gruppo: 'Superiori',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'funzioni', titolo: 'Funzioni e loro proprietà', breve: 'Funzioni' },
       { slug: 'limiti', titolo: 'Limiti', breve: 'Limiti' },
