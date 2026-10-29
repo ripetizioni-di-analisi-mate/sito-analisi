@@ -146,6 +146,27 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'ottica', titolo: 'Ottica geometrica e ondulatoria', breve: 'Ottica' },
     ],
   },
+  {
+    slug: 'matematica-generale',
+    titolo: 'Matematica generale',
+    breve: 'Matematica generale',
+    descrizione: "La matematica dei corsi di Economia: funzioni e modelli economici, limiti, derivate ed elasticità, ottimizzazione, integrali, matematica finanziaria, matrici e sistemi, funzioni di due variabili.",
+    colore: '#5b7a2e',
+    gruppo: 'Università',
+    attiva: false,
+    argomenti: [
+      { slug: 'funzioni', titolo: 'Funzioni reali e modelli economici', breve: 'Funzioni' },
+      { slug: 'successioni-e-serie', titolo: 'Successioni, progressioni e serie', breve: 'Successioni e serie' },
+      { slug: 'limiti-e-continuita', titolo: 'Limiti e continuità', breve: 'Limiti' },
+      { slug: 'derivate', titolo: 'Derivate, funzioni marginali ed elasticità', breve: 'Derivate' },
+      { slug: 'studio-di-funzione', titolo: 'Studio di funzione e ottimizzazione', breve: 'Studio di funzione' },
+      { slug: 'integrali', titolo: 'Calcolo integrale e applicazioni economiche', breve: 'Integrali' },
+      { slug: 'matematica-finanziaria', titolo: 'Capitalizzazione, rendite e ammortamenti', breve: 'Matematica finanziaria' },
+      { slug: 'matrici-e-sistemi', titolo: 'Matrici, determinanti e sistemi lineari', breve: 'Matrici e sistemi' },
+      { slug: 'funzioni-di-due-variabili', titolo: 'Funzioni di due variabili', breve: 'Due variabili' },
+      { slug: 'ottimizzazione', titolo: 'Massimi e minimi liberi e vincolati', breve: 'Ottimizzazione' },
+    ],
+  },
 ];
 
 export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));

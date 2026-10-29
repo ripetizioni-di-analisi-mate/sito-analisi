@@ -106,5 +106,22 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'ottica': { titolo: 'Geometric and wave optics', breve: 'Optics' },
     },
   },
+  'matematica-generale': {
+    titolo: 'Mathematics for Economics',
+    breve: 'Maths for Economics',
+    descrizione: 'The mathematics of Economics degrees: functions and economic models, limits, derivatives and elasticity, optimization, integrals, financial mathematics, matrices and systems, functions of two variables.',
+    argomenti: {
+      funzioni: { titolo: 'Real functions and economic models', breve: 'Functions' },
+      'successioni-e-serie': { titolo: 'Sequences, progressions and series', breve: 'Sequences and series' },
+      'limiti-e-continuita': { titolo: 'Limits and continuity', breve: 'Limits' },
+      derivate: { titolo: 'Derivatives, marginal functions and elasticity', breve: 'Derivatives' },
+      'studio-di-funzione': { titolo: 'Curve sketching and optimization', breve: 'Curve sketching' },
+      integrali: { titolo: 'Integral calculus and economic applications', breve: 'Integrals' },
+      'matematica-finanziaria': { titolo: 'Compounding, annuities and amortization', breve: 'Financial mathematics' },
+      'matrici-e-sistemi': { titolo: 'Matrices, determinants and linear systems', breve: 'Matrices and systems' },
+      'funzioni-di-due-variabili': { titolo: 'Functions of two variables', breve: 'Two variables' },
+      ottimizzazione: { titolo: 'Unconstrained and constrained extrema', breve: 'Optimization' },
+    },
+  },
 };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };
