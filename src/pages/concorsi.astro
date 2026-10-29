@@ -1,0 +1,97 @@
+---
+// Guida gratuita: quali argomenti di matematica e logica compaiono nei concorsi e dove si studiano sul sito.
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+
+const materie = ['matematica-concorsi', 'logica-concorsi'].map((s) => MATERIE.find((m) => m.slug === s)!).filter(Boolean);
+
+const tipi = [
+  {
+    nome: 'Pubblica amministrazione ed enti locali',
+    esempi: 'comuni, regioni, ministeri, agenzie, aziende sanitarie',
+    testo: 'Le prove preselettive contengono spesso una parte di quesiti logico-matematici, accanto alle materie giuridiche e, in molti bandi recenti, ai quesiti situazionali. I quesiti numerici riguardano soprattutto percentuali, proporzioni e problemi con dati concreti; quelli di logica riguardano deduzioni, negazioni, condizioni necessarie e sufficienti e insiemi.',
+    argomenti: ['Rapporti, proporzioni e percentuali', 'Problemi con le grandezze', 'Connettivi e negazioni', 'Condizioni necessarie e sufficienti', 'Problemi di deduzione'],
+  },
+  {
+    nome: 'Forze armate e forze di polizia',
+    esempi: 'Esercito, Marina, Aeronautica, Carabinieri, Polizia di Stato, Guardia di Finanza',
+    testo: 'Le prove scritte comprendono di solito domande di cultura generale con una parte di matematica di base e test di ragionamento logico, numerico e verbale. Compaiono spesso serie di numeri da completare, problemi con le frazioni e le percentuali, equazioni di primo grado e semplici domande di geometria.',
+    argomenti: ['Numeri e calcolo', 'Equazioni e problemi', 'Successioni numeriche', 'Geometria', 'Ragionamento numerico'],
+  },
+  {
+    nome: 'Test di ammissione all’università',
+    esempi: 'test TOLC e prove di accesso ai corsi a numero programmato',
+    testo: 'Molte prove di accesso contengono una sezione di matematica di base e una di logica. La matematica riguarda algebra, equazioni, percentuali, geometria e probabilità; la logica riguarda deduzioni, sillogismi e problemi da risolvere con un ragionamento ordinato.',
+    argomenti: ['Equazioni e problemi', 'Calcolo combinatorio', 'Probabilità', 'Geometria', 'Sillogismi'],
+  },
+  {
+    nome: 'Selezioni di banche e grandi aziende',
+    esempi: 'test numerici e logici delle prove di selezione',
+    testo: 'I test numerici chiedono di leggere tabelle e grafici e di calcolare percentuali, variazioni e medie in poco tempo; i test logici chiedono di completare serie e di trarre conclusioni da alcune premesse.',
+    argomenti: ['Medie, tabelle e grafici', 'Rapporti, proporzioni e percentuali', 'Successioni numeriche', 'Ragionamento numerico'],
+  },
+];
+
+const quesiti = [
+  ['Ragionamento numerico', 'calcoli rapidi, percentuali, proporzioni e problemi con dati concreti, spesso a tempo.'],
+  ['Logica deduttiva', 'da alcune premesse si deduce quale conclusione è vera, falsa o non deducibile.'],
+  ['Logica verbale', 'negazione di una frase, frasi equivalenti, condizioni necessarie e sufficienti.'],
+  ['Serie', 'successioni di numeri o di lettere da completare riconoscendo la regola.'],
+  ['Lettura di dati', 'tabelle e grafici da cui ricavare medie, percentuali e variazioni.'],
+];
+---
+<Base lingua="it" titolo="Che cosa studiare per il tuo concorso" percorso={[{ titolo: 'Concorsi' }]}
+  descrizione="Quali argomenti di matematica e di logica compaiono nei concorsi pubblici, nei test delle forze dell'ordine e nei test di ammissione, e dove si studiano."
+  seo={{ soloQuestaLingua: true }}>
+  <div class="guida-concorsi">
+    <p class="sopratitolo">Concorsi · guida gratuita</p>
+    <h1>Che cosa studiare per il tuo concorso</h1>
+    <p class="sommario">Molti concorsi contengono quesiti di matematica e di logica a risposta multipla, anche quando il lavoro non ha nulla a che fare con la matematica. Questa pagina elenca gli argomenti che compaiono più spesso, tipo di concorso per tipo di concorso, e indica in quale materia del sito si studiano.</p>
+
+    <p class="avviso-guida">Le indicazioni sono generali. Le materie, il numero di quesiti e il tempo a disposizione sono scritti nel bando di ciascun concorso, che è l'unico riferimento valido.</p>
+
+    <h2>I tipi di quesiti</h2>
+    <ul class="elenco-quesiti">
+      {quesiti.map(([n, t]) => <li><strong>{n}</strong>: {t}</li>)}
+    </ul>
+
+    <h2>Gli argomenti, concorso per concorso</h2>
+    {tipi.map((t) => (
+      <section class="tipo-concorso">
+        <h3>{t.nome}</h3>
+        <p class="esempi">{t.esempi}</p>
+        <p>{t.testo}</p>
+        <p class="argomenti-chiave"><span>Argomenti più frequenti</span> {t.argomenti.join(' · ')}</p>
+      </section>
+    ))}
+
+    <h2>Dove si studiano sul sito</h2>
+    <p>Gli argomenti sono raccolti in due materie, scritte per chi non studia matematica da tempo: ogni capitolo parte dalle basi, spiega i metodi rapidi per le prove a tempo e propone quesiti a risposta multipla con la soluzione commentata.</p>
+    <div class="materie-concorsi">
+      {materie.map((m) => (
+        <div class="scheda-concorsi" style={`--accento: ${m.colore}`}>
+          <h3>{m.titolo}</h3>
+          <ol>{m.argomenti.map((a) => <li>{a.titolo}</li>)}</ol>
+          <p class="stato-concorsi">{m.attiva ? <a href={`/${m.slug}`}>Apri la materia</a> : 'In preparazione'}</p>
+        </div>
+      ))}
+    </div>
+    <p>Per sapere quando le materie saranno pronte, o per una preparazione su misura con lezioni private, si può scrivere a Carmine dal pulsante WhatsApp in basso a destra.</p>
+  </div>
+</Base>
+
+<style>
+  .guida-concorsi { max-width: 46rem; }
+  .avviso-guida { font-family: var(--ui); font-size: 0.92rem; padding: 0.7rem 0.9rem; border-left: 3px solid var(--accento); background: var(--carta-2); border-radius: 0 var(--raggio) var(--raggio) 0; }
+  .elenco-quesiti li { margin-bottom: 0.35rem; }
+  .tipo-concorso { margin: 1.4rem 0; padding-bottom: 1.2rem; border-bottom: 1px solid var(--riga); }
+  .tipo-concorso h3 { margin: 0 0 0.15rem; }
+  .tipo-concorso .esempi { margin: 0 0 0.5rem; font-family: var(--ui); font-size: 0.88rem; color: color-mix(in srgb, var(--inchiostro) 65%, transparent); }
+  .argomenti-chiave { font-family: var(--ui); font-size: 0.92rem; }
+  .argomenti-chiave span { display: block; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; color: var(--accento); }
+  .materie-concorsi { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; margin: 1rem 0 1.4rem; }
+  .scheda-concorsi { border: 1px solid var(--riga); border-top: 3px solid var(--accento); border-radius: var(--raggio); padding: 0.9rem 1rem; background: white; }
+  .scheda-concorsi h3 { margin: 0 0 0.5rem; color: var(--accento); }
+  .scheda-concorsi ol { margin: 0 0 0.6rem; padding-left: 1.3rem; font-size: 0.95rem; }
+  .stato-concorsi { margin: 0; font-family: var(--ui); font-size: 0.85rem; font-weight: 600; color: color-mix(in srgb, var(--inchiostro) 60%, transparent); }
+</style>
