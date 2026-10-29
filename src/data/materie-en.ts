@@ -123,5 +123,77 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       ottimizzazione: { titolo: 'Unconstrained and constrained extrema', breve: 'Optimization' },
     },
   },
+  'statistica': {
+    titolo: 'Statistics',
+    breve: 'Statistics',
+    descrizione: 'Descriptive statistics, probability, random variables and distributions, estimation, confidence intervals, hypothesis testing and regression.',
+    argomenti: {},
+  },
+  'matematica-superiori-1': {
+    titolo: 'Mathematics, 1st year',
+    breve: 'Maths 1st year',
+    descrizione: 'The mathematics syllabus of the 1st year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'matematica-superiori-2': {
+    titolo: 'Mathematics, 2nd year',
+    breve: 'Maths 2nd year',
+    descrizione: 'The mathematics syllabus of the 2nd year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'matematica-superiori-3': {
+    titolo: 'Mathematics, 3rd year',
+    breve: 'Maths 3rd year',
+    descrizione: 'The mathematics syllabus of the 3rd year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'matematica-superiori-4': {
+    titolo: 'Mathematics, 4th year',
+    breve: 'Maths 4th year',
+    descrizione: 'The mathematics syllabus of the 4th year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'matematica-superiori-5': {
+    titolo: 'Mathematics, 5th year',
+    breve: 'Maths 5th year',
+    descrizione: 'The mathematics syllabus of the 5th year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'fisica-superiori-1': {
+    titolo: 'Physics, 1st year',
+    breve: 'Physics 1st year',
+    descrizione: 'The physics syllabus of the 1st year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'fisica-superiori-2': {
+    titolo: 'Physics, 2nd year',
+    breve: 'Physics 2nd year',
+    descrizione: 'The physics syllabus of the 2nd year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'fisica-superiori-3': {
+    titolo: 'Physics, 3rd year',
+    breve: 'Physics 3rd year',
+    descrizione: 'The physics syllabus of the 3rd year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'fisica-superiori-4': {
+    titolo: 'Physics, 4th year',
+    breve: 'Physics 4th year',
+    descrizione: 'The physics syllabus of the 4th year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'fisica-superiori-5': {
+    titolo: 'Physics, 5th year',
+    breve: 'Physics 5th year',
+    descrizione: 'The physics syllabus of the 5th year of Italian high school, with theory and worked exercises.',
+    argomenti: {},
+  },
+  'matematica-concorsi': {
+    titolo: 'Mathematics for public exams',
+    breve: 'Maths for exams',
+    descrizione: 'The mathematics of Italian public competitive exams and admission tests: arithmetic, percentages, proportions, algebra, geometry, logic and probability, with worked exercises.',
+    argomenti: {},
+  },
 };
-export const GRUPPI_EN: Record<string, string> = { 'Università': 'University' };
+export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams' };

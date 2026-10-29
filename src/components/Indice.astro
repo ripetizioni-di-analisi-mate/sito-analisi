@@ -34,8 +34,8 @@ const SEZIONI = sezioniL(lingua);
   ) : (
     <>
       {gruppiL(lingua).map((g) => (
-        <>
-          <p class="indice-materia"><span>{g}</span></p>
+        <details class="indice-gruppo" open={MATERIE.some((x) => x.gruppo === g && x.attiva)}>
+          <summary class="indice-materia"><span>{g}</span></summary>
           <ol class="indice-materie">
             {MATERIE.filter((x) => x.gruppo === g).map((x) => {
               const dentro = (
@@ -55,7 +55,7 @@ const SEZIONI = sezioniL(lingua);
               );
             })}
           </ol>
-        </>
+        </details>
       ))}
     </>
   )}
