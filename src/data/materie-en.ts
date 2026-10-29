@@ -192,8 +192,31 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-concorsi': {
     titolo: 'Mathematics for public exams',
     breve: 'Maths for exams',
-    descrizione: 'The mathematics of Italian public competitive exams and admission tests: arithmetic, percentages, proportions, algebra, geometry, logic and probability, with worked exercises.',
-    argomenti: {},
+    descrizione: 'The mathematics of Italian public competitive exams, armed forces and admission tests, explained from scratch: arithmetic, proportions and percentages, problems, equations, statistics, probability and geometry, with multiple-choice quizzes.',
+    argomenti: {
+      'numeri-e-calcolo': { titolo: 'Numbers, fractions and arithmetic', breve: 'Numbers' },
+      'proporzioni-e-percentuali': { titolo: 'Ratios, proportions and percentages', breve: 'Percentages' },
+      'problemi-con-le-grandezze': { titolo: 'Units of measurement, speed, work and mixtures', breve: 'Quantities' },
+      'equazioni-e-problemi': { titolo: 'Equations and word problems', breve: 'Equations' },
+      'successioni-numeriche': { titolo: 'Number sequences and series', breve: 'Sequences' },
+      'statistica-e-grafici': { titolo: 'Averages, tables and charts', breve: 'Averages and charts' },
+      'calcolo-combinatorio': { titolo: 'Combinatorics', breve: 'Combinatorics' },
+      probabilita: { titolo: 'Probability', breve: 'Probability' },
+      geometria: { titolo: 'Plane and solid geometry', breve: 'Geometry' },
+    },
+  },
+  'logica-concorsi': {
+    titolo: 'Logic for public exams',
+    breve: 'Logic for exams',
+    descrizione: 'The logic of Italian public competitive exams and aptitude tests: sets and Venn diagrams, negations and implications, necessary and sufficient conditions, syllogisms, numerical reasoning and deduction problems.',
+    argomenti: {
+      'insiemi-e-venn': { titolo: 'Sets and Venn diagrams', breve: 'Sets and Venn' },
+      'connettivi-e-negazioni': { titolo: 'Connectives, negations and implications', breve: 'Negations' },
+      'condizioni-necessarie-e-sufficienti': { titolo: 'Necessary and sufficient conditions', breve: 'Conditions' },
+      sillogismi: { titolo: 'Syllogisms and quantifiers', breve: 'Syllogisms' },
+      'ragionamento-numerico': { titolo: 'Numerical reasoning: clocks, calendars, orderings', breve: 'Numerical reasoning' },
+      'problemi-di-deduzione': { titolo: 'Deduction problems and tables', breve: 'Deduction' },
+    },
   },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
