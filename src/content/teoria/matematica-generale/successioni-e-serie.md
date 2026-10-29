@@ -3,13 +3,7 @@ titolo: Successioni, progressioni e serie
 sommario: Come si descrivono le grandezze che cambiano a scadenze regolari con le successioni, come si calcolano termini e somme delle progressioni aritmetiche e geometriche, che cosa significa che una successione ha limite, e quando una somma di infiniti termini dà un numero finito.
 ---
 
-:::percorso
-Si parte dalle funzioni, dalle potenze e dall'esponenziale dell'argomento sulle funzioni reali e i modelli economici. Qui si studiano le grandezze che cambiano a passi, anno dopo anno o rata dopo rata: le successioni, le progressioni aritmetiche e geometriche con le loro somme, il limite di una successione e la serie geometrica. Le progressioni sono la capitalizzazione semplice e composta della matematica finanziaria, la somma geometrica dà il valore delle rendite e la serie geometrica quello delle rendite perpetue; il limite di una successione introduce il limite di funzione dell'argomento sui limiti e la continuità.
-:::
-
 ## Successioni
-
-Una successione è un elenco ordinato e infinito di numeri, come i capitali di un conto anno dopo anno.
 
 :::definizione{#successione titolo="Successione"}
 Una **successione** di numeri reali è una funzione $a : \mathbb{N} \to \mathbb{R}$ che associa a ogni naturale $n$ il numero $a_n$, detto **termine** di posto $n$. Si scrive $(a_n)$ oppure $a_1, a_2, a_3, \dots$; l'indice può partire da $0$ o da $1$ secondo il problema. Una successione si assegna in due modi:
@@ -94,8 +88,6 @@ Nella differenza $S_n - q\,S_n$ restano solo il primo termine della prima riga e
 
 ## Limite di una successione
 
-Per i termini di posto molto grande interessa sapere se la successione si stabilizza vicino a un valore.
-
 :::definizione{#limite-successione titolo="Limite di una successione"}
 La successione $(a_n)$ **converge** al numero $L$, e si scrive $\displaystyle\lim_{n \to +\infty} a_n = L$, se per ogni $\varepsilon > 0$ esiste un indice $N$ tale che
 $$
@@ -145,8 +137,6 @@ Per $q > 1$ si scrive $q = 1 + h$ con $h > 0$. Per la disuguaglianza di Bernoull
 ::::
 
 ## Serie numeriche
-
-Una serie è la somma di infiniti termini, definita come limite delle somme dei primi $n$.
 
 :::definizione{#serie titolo="Serie numerica"}
 Data una successione $(a_k)$, la **serie** $\displaystyle\sum_{k=1}^{\infty} a_k$ è il limite, se esiste, della successione delle **somme parziali**

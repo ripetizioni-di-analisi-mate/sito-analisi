@@ -336,7 +336,9 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
   main { padding: 0; }
   .pagina { max-width: none; }
   body { font-size: 11pt; background: white; }
-  .blocco { background: color-mix(in srgb, var(--c) 6%, white); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* in stampa come a schermo: riquadro colorato solo per teoremi e blocchi apribili */
+  .blocco-teorema, .blocco-proposizione, details.blocco { background: color-mix(in srgb, var(--c) 6%, white); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .blocco details.blocco { background: transparent; }
   details.blocco > summary::before { display: none; }
   a { color: inherit; text-decoration: none; }
 }

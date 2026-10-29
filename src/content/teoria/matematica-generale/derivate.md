@@ -3,13 +3,7 @@ titolo: Derivate, funzioni marginali ed elasticità
 sommario: Che cos'è la derivata e come si calcola con le regole di derivazione, che cosa misurano il costo, il ricavo e il profitto marginali e l'elasticità della domanda, e che cosa dicono i teoremi di Fermat, Rolle e Lagrange e la regola di de l'Hôpital.
 ---
 
-:::percorso
-Si usano i limiti, in particolare i limiti notevoli e la continuità dell'argomento sui limiti, e la pendenza della retta e le funzioni composte dell'argomento sulle funzioni reali e i modelli economici. Qui la pendenza della retta diventa la derivata, cioè il tasso di variazione istantaneo di una grandezza; si ricavano le regole di derivazione e le prime applicazioni economiche, le funzioni marginali e l'elasticità; i teoremi di Fermat, Rolle e Lagrange collegano la derivata alla crescita della funzione. Nello studio di funzione il segno della derivata prima darà la monotonia e quello della derivata seconda la concavità, e la condizione ricavo marginale uguale a costo marginale darà la quantità di profitto massimo; con più variabili la derivata diventerà la derivata parziale.
-:::
-
 ## Rapporto incrementale e derivata
-
-La pendenza di una retta è costante; per una funzione qualsiasi si misura la pendenza vicino a un punto, su intervalli sempre più piccoli.
 
 :::definizione{#derivata titolo="Derivata in un punto"}
 Sia $f$ definita in un intervallo aperto che contiene $x_0$. Il **rapporto incrementale** di $f$ tra $x_0$ e $x_0 + h$, con $h \neq 0$, è
@@ -129,8 +123,6 @@ quindi il costo medio cresce dove il costo marginale supera il costo medio, e de
 :::
 
 ## Elasticità
-
-Il costo marginale misura variazioni assolute, che dipendono dalle unità di misura; l'elasticità confronta variazioni percentuali.
 
 :::definizione{#elasticita titolo="Elasticità"}
 Sia $f$ derivabile con $f(x) \neq 0$. L'**elasticità** di $f$ nel punto $x$ è

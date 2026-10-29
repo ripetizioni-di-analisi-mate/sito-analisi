@@ -3,13 +3,7 @@ titolo: Limiti e continuità
 sommario: Che cosa significa che una funzione si avvicina a un valore, come si calcolano i limiti e si risolvono le forme indeterminate, come si trovano gli asintoti, che cos'è una funzione continua e che cosa garantiscono i teoremi degli zeri e di Weierstrass.
 ---
 
-:::percorso
-Si usano le funzioni elementari con i loro grafici, dall'argomento sulle funzioni reali e i modelli economici, e il limite di una successione, dall'argomento sulle successioni e le serie. Qui si estende il limite alle funzioni, vicino a un punto e per valori molto grandi della variabile, si imparano a risolvere le forme indeterminate, si trovano gli asintoti e si definisce la continuità. La derivata sarà il limite del rapporto incrementale; asintoti e limiti agli estremi del dominio sono un passo dello studio di funzione; il teorema di Weierstrass garantisce l'esistenza del profitto massimo su un intervallo chiuso, e il limite che definisce $e$ dà la capitalizzazione continua della matematica finanziaria.
-:::
-
 ## Limite finito in un punto
-
-Il limite descrive i valori di $f(x)$ quando $x$ si avvicina a un punto $x_0$, senza guardare che cosa succede in $x_0$.
 
 :::definizione{#limite-finito titolo="Limite finito in un punto"}
 Sia $f$ definita in un intervallo aperto che contiene $x_0$, escluso al più il punto $x_0$. Si scrive
