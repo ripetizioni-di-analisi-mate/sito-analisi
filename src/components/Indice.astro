@@ -1,5 +1,5 @@
 ---
-import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua } from '../i18n';
+import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
@@ -36,25 +36,34 @@ const SEZIONI = sezioniL(lingua);
       {gruppiL(lingua).map((g) => (
         <details class="indice-gruppo" open={MATERIE.some((x) => x.gruppo === g && x.attiva)}>
           <summary class="indice-materia"><span>{g}</span></summary>
-          <ol class="indice-materie">
-            {MATERIE.filter((x) => x.gruppo === g).map((x) => {
-              const dentro = (
-                <>
-                  <span class="materia-punto" aria-hidden="true" />
-                  <span class="materia-testo">
-                    <span class="materia-nome">{x.titolo}</span>
-                    
-                  </span>
-                  {x.attiva ? <Stato prezzo={x.prezzo} compatto lingua={lingua} /> : <small class="materia-prossima">{t.inPreparazione}</small>}
-                </>
-              );
-              return (
-                <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                  {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
-                </li>
-              );
-            })}
-          </ol>
+          {(() => {
+            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
+              <ol class="indice-materie">
+                {voci.map(({ m: x, nome }) => {
+                  const dentro = (
+                    <>
+                      <span class="materia-punto" aria-hidden="true" />
+                      <span class="materia-testo">
+                        <span class="materia-nome">{nome}</span>
+                      </span>
+                      {x.attiva ? <Stato prezzo={x.prezzo} compatto lingua={lingua} /> : <small class="materia-prossima">{t.inPreparazione}</small>}
+                    </>
+                  );
+                  return (
+                    <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
+                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                    </li>
+                  );
+                })}
+              </ol>
+            );
+            return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
+              <details class="indice-sottogruppo" open={b.materie.some((v) => v.m.attiva)}>
+                <summary>{b.sotto}</summary>
+                {lista(b.materie)}
+              </details>
+            ) : lista(b.materie));
+          })()}
         </details>
       ))}
     </>
