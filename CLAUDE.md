@@ -39,7 +39,7 @@ Note per una nuova chat di Claude che riprende il lavoro con Carmine (aggiornate
 I brief contengono il percorso `/home/claude/sito-analisi1`: sostituirlo con quello del clone usato.
 
 ## Materie online (tutte attive, con versione inglese)
-Precorso 19 €, Analisi matematica 1 29 €, Analisi matematica 2 29 €, Algebra lineare e geometria analitica 29 €, Fisica 1 32 €, Fisica 2 36 €, Matematica generale 59 € (prezzi nuovi in attesa sul ramo `prezzi-nuovi`). Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
+Precorso 19 €, Analisi matematica 1 29 €, Analisi matematica 2 29 €, Algebra lineare e geometria analitica 29 €, Fisica 1 32 €, Fisica 2 36 €, Matematica generale 59 €, Matematica 5° anno 29 € (senza inglese; prezzi nuovi in attesa sul ramo `prezzi-nuovi`). Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
 
 ## Pagamenti (Paddle, account approvato il 28/10/2026)
 - Prodotti e prezzi creati per tutte e sei le materie; codici `pri_…` in `wrangler.jsonc` (vars), token del checkout `PADDLE_CLIENT_TOKEN` (pubblico) idem.
@@ -72,7 +72,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Online dal 29/10, 10 argomenti con inglese, prezzo mostrato 59 €. Brief: `istruzioni-agenti/brief-matematica-generale.md` e `brief-verifica-matematica-generale.md`.
 - Richieste di Carmine: niente `:::percorso` né prosa tra i blocchi; parte economica presente ma non invadente (esempi matematici nelle definizioni, economia in 1-2 sezioni finali, 2-3 schede su 8, ~4 tracce su 14).
 - **Da fare**: prodotto e prezzo Paddle (59 €) e codice `pri_…` in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_GENERALE`; finché manca, la pagina Sblocca dice che i pagamenti sono in arrivo.
-- Ramo `prezzi-nuovi` (non ancora su main): Precorso 29, Analisi 1 e Fisica 1 49, Analisi 2 e Fisica 2 55, Algebra 39, Matematica generale 59. Va pubblicato solo dopo aver cambiato i prezzi in Paddle. Niente prezzi barrati (Omnibus).
+- Ramo `prezzi-nuovi` (non ancora su main): Precorso 29, Analisi 1 e Fisica 1 49, Analisi 2 e Fisica 2 55, Algebra 39, Matematica generale 59, Matematica 5° anno 29. Va pubblicato solo dopo aver cambiato i prezzi in Paddle. Niente prezzi barrati (Omnibus).
 - In stampa/PDF il riquadro colorato resta solo su teoremi e dimostrazioni, come a schermo.
 
 ## Materie in preparazione e macro aree
@@ -82,12 +82,20 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Due materie in preparazione (`attiva: false`): Matematica per concorsi (9 argomenti) e Logica per concorsi (6). Previsto anche una pagina gratuita "Che cosa studiare per il tuo concorso".
 - Scritto il primo capitolo di prova `matematica-concorsi/proporzioni-e-percentuali` (teoria, 8 schede a quiz con opzioni A-E e "La risposta corretta è la …", 14 quesiti con "Risposta X"). In attesa del giudizio di Carmine prima di scrivere il resto.
 
-## Assistente di studio "Pi" (ramo `assistente`, NON ancora su main)
-- Pulsante fisso "Assistente" sulle pagine delle materie a pagamento; la finestra sa quale riquadro/esercizio lo studente sta leggendo (si cambia toccando un altro riquadro) e lo manda a `/api/assistente` (`worker/assistente.mjs`).
-- Solo materie sbloccate; 20 messaggi al giorno per studente, 200 per il sito (variabili `ASSISTENTE_MAX_STUDENTE`, `ASSISTENTE_MAX_GIORNO`, `ASSISTENTE_MODELLO`). Conteggio nella tabella `assistente` del Durable Object.
-- Modello gratuito Workers AI (`@cf/openai/gpt-oss-120b`, riserva `@cf/google/gemma-4-26b-a4b-it`), binding `"ai"` in wrangler.jsonc. Quota gratuita Cloudflare: 10.000 neuroni al giorno per tutto l'account.
-- Le formule della pagina conservano il LaTeX in `data-tex` (plugin `src/plugins/rehype-katex-tex.mjs`, al posto di rehype-katex).
-- Nome scelto da Carmine: **Pi** (pulsante "Chiedi a Pi", sottotitolo "L’assistente virtuale di Carmine (IA)"; nelle istruzioni dichiara di essere un'IA). Scartati "Carmine" (gli errori porterebbero il suo nome) e altri. Pubblicare solo con il suo ok, poi provare una domanda vera sul sito.
+## Assistente "Pi" (online dal 29/10/2026)
+- Su tutte le pagine (tranne stampa). Pulsante: cerchio con π e pallino verde; alla prima visita un fumetto di benvenuto che sparisce dopo ~10 s (localStorage `pi-benvenuto`); al passaggio del mouse il cerchio si allunga in una barra "Chiedi a Pi: limiti, esercizi, dubbi…". Scelte di Carmine: niente prezzi nei suggerimenti e nel fumetto (Pi ne parla solo se glielo chiedono), niente asterischi nelle risposte.
+- Codice: `src/components/Assistente.astro`, `worker/assistente.mjs` (`/api/assistente`). Sulle pagine di studio manda il riquadro/esercizio in vista (si cambia toccando un altro riquadro) e il paragrafo; sulle altre pagine l'inizio del testo. Le informazioni su materie, prezzi, acquisto (Paddle, una tantum, 2 dispositivi, anteprima gratuita) sono costruite dai dati del sito; per rimborsi e casi non previsti rimanda a WhatsApp.
+- Limiti al giorno: ospiti 5 (impronta di indirizzo e browser), con account 20, sito 200 (`ASSISTENTE_MAX_OSPITE`, `ASSISTENTE_MAX_STUDENTE`, `ASSISTENTE_MAX_GIORNO`). Conteggio nella tabella `assistente` del Durable Object; uso giornaliero nei dati della dashboard (`assistente`), non ancora mostrato in pagina.
+- Modello gratuito Workers AI (`@cf/openai/gpt-oss-120b`, riserva `@cf/google/gemma-4-26b-a4b-it`, `ASSISTENTE_MODELLO`), binding `"ai"`. Quota gratuita Cloudflare 10.000 neuroni/giorno per l'account. Formule della pagina con LaTeX in `data-tex` (plugin `src/plugins/rehype-katex-tex.mjs`).
+- Privacy: aggiunto un paragrafo su Pi (da far verificare). Da qui il sito non è raggiungibile (proxy): la prova dal vivo l'ha fatta/la fa Carmine.
+
+## Matematica 5° anno (online dal 29/10/2026, 29 €)
+- Liceo scientifico, tono più semplice (approvato da Carmine sul capitolo Derivate). 11 argomenti scritti e verificati. Brief: `istruzioni-agenti/brief-matematica-superiori-5.md` e `brief-verifica-matematica-superiori-5.md`.
+- **Da fare**: prodotto Paddle 29 € e `PADDLE_PREZZO_MATEMATICA_SUPERIORI_5` in wrangler.jsonc (già letto da `/api/config`); traduzione inglese. Prezzo già anche nel ramo `prezzi-nuovi`.
+- Build locale: con 4170 pagine il container a volte uccide il processo (exit 137); `NODE_OPTIONS=--max-old-space-size=5500 npx astro build` passa.
+
+## Guida concorsi
+- Pagina gratuita `/concorsi` ("Che cosa studiare per il tuo concorso", `src/pages/concorsi.astro`), scheda nel gruppo Concorsi in home e voce nell'indice.
 
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
