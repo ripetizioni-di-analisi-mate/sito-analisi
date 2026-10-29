@@ -589,14 +589,8 @@ html.assistente-aperto .bottone-assistente { display: none; }
 .assistente-testa button { width: 2rem; height: 2rem; border: 0; background: none; border-radius: 8px; color: var(--inchiostro); font-size: 1.5rem; line-height: 1; cursor: pointer; display: grid; place-items: center; }
 .assistente-testa button:hover { background: var(--carta-2); }
 .assistente-testa button svg { width: 1.1rem; height: 1.1rem; }
-.assistente-bloccato { padding: 1.2rem 1rem; font-size: 0.95rem; line-height: 1.5; }
-.assistente-azioni { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-.assistente-azioni a { padding: 0.45rem 0.9rem; border-radius: 999px; border: 1px solid var(--accento); text-decoration: none; font-weight: 600; }
-.assistente-azioni a:last-child { background: var(--accento); color: white; }
-html.collegato .assistente-azioni .se-ospite { display: none; }
-.assistente-attivo { display: none; flex: 1; min-height: 0; flex-direction: column; }
-html.sbloccato .assistente-attivo { display: flex; }
-html.sbloccato .assistente-bloccato { display: none; }
+.assistente-attivo { display: flex; flex: 1; min-height: 0; flex-direction: column; }
+.assistente.con-studio .sugg-generale, .assistente:not(.con-studio) .sugg-studio { display: none; }
 .assistente-parte { margin: 0.6rem 0.8rem 0; padding: 0.5rem 0.7rem; border-radius: 10px; background: color-mix(in srgb, var(--accento) 7%, white); font-size: 0.85rem; line-height: 1.35; }
 .assistente-parte strong { color: var(--accento); }
 .assistente-parte small { display: block; margin-top: 0.15rem; color: color-mix(in srgb, var(--inchiostro) 60%, transparent); font-size: 0.75rem; }

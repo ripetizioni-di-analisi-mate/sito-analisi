@@ -25,7 +25,7 @@ Per $f(x) = x^2$ e $x_0 = 1$, con $h$ qualsiasi diverso da $0$, si ha
 $$
 \frac{(1 + h)^2 - 1}{h} = \frac{1 + 2h + h^2 - 1}{h} = \frac{h\,(2 + h)}{h} = 2 + h .
 $$
-Con $h = 2$ il rapporto vale $4$, con $h = 1$ vale $3$, con $h = 0{,}1$ vale $2{,}1$ e con $h = 0{,}01$ vale $2{,}01$. Quando $h$ si avvicina a $0$ il rapporto incrementale si avvicina quindi a $2$. Questo numero è la derivata di $x^2$ in $1$, definita nel blocco che segue.
+Con $h = 2$ il rapporto vale $4$, con $h = 1$ vale $3$, con $h = 0{,}1$ vale $2{,}1$ e con $h = 0{,}01$ vale $2{,}01$. Quando $h$ si avvicina a $0$ il rapporto incrementale si avvicina quindi a $2$. Questo numero si chiama derivata di $x^2$ in $1$.
 :::
 
 :::definizione{#derivata titolo="Derivata in un punto"}
@@ -33,7 +33,7 @@ Un punto $x_0$ di un intervallo $I$ si dice **interno** a $I$ se esiste un intor
 $$
 f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h} .
 $$
-Si usano anche i simboli $y'(x_0)$ e $\dfrac{df}{dx}(x_0)$. La derivata misura la rapidità con cui varia $f$ vicino a $x_0$. Dall'esempio precedente, per $f(x) = x^2$ si ha $f'(1) = \displaystyle\lim_{h \to 0} (2 + h) = 2$.
+Si usano anche i simboli $y'(x_0)$ e $\dfrac{df}{dx}(x_0)$. La derivata misura la rapidità con cui varia $f$ vicino a $x_0$. Per $f(x) = x^2$ il rapporto incrementale in $1$ è $2 + h$, quindi $f'(1) = \displaystyle\lim_{h \to 0} (2 + h) = 2$.
 :::
 
 :::esempio{titolo="Derivata di una funzione cubica con la definizione"}
@@ -141,7 +141,7 @@ Nei punti indicati valgono le formule
 | $\arccos x$ | $-\dfrac{1}{\sqrt{1 - x^2}}$ | $-1 < x < 1$ |
 | $\arctan x$ | $\dfrac{1}{1 + x^2}$ | $x \in \mathbb{R}$ |
 
-La tabella permette di derivare le funzioni elementari senza calcolare limiti. Per esempio $\left( x^5 \right)' = 5x^4$ e $\left( \sqrt[3]{x} \right)' = \left( x^{\frac{1}{3}} \right)' = \dfrac{1}{3}\,x^{-\frac{2}{3}} = \dfrac{1}{3\sqrt[3]{x^2}}$ per $x > 0$. Le formule della costante, delle potenze, di seno, coseno, esponenziale e logaritmo si dimostrano con la definizione nei teoremi che seguono; quelle della tangente e delle funzioni inverse goniometriche si ricavano con le regole di derivazione.
+La tabella permette di derivare le funzioni elementari senza calcolare limiti. Per esempio $\left( x^5 \right)' = 5x^4$ e $\left( \sqrt[3]{x} \right)' = \left( x^{\frac{1}{3}} \right)' = \dfrac{1}{3}\,x^{-\frac{2}{3}} = \dfrac{1}{3\sqrt[3]{x^2}}$ per $x > 0$. Le formule della costante, delle potenze con esponente naturale, di seno, coseno, esponenziale e logaritmo naturale si dimostrano con la definizione di derivata; le altre si ricavano con le regole di derivazione.
 :::
 
 ::::teorema{#derivate-costante-potenze titolo="Derivate della costante e delle potenze"}

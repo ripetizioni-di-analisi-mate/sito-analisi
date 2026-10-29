@@ -418,7 +418,7 @@ export default {
     // ===== assistente di studio =====
     if (p === '/api/assistente' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);
-      return rispondiAssistente(req, env, io, aDO, A_PAGAMENTO);
+      return rispondiAssistente(req, env, io, aDO, A_PAGAMENTO, PREZZI);
     }
 
     // ===== webhook Paddle =====

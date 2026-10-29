@@ -3,22 +3,24 @@
 // Sa quale parte della pagina lo studente sta leggendo e la manda al Worker (/api/assistente)
 // insieme alla domanda. Funziona solo nelle materie sbloccate (classe "sbloccato" su <html>, scritta dal Worker).
 import { link, type Lingua } from '../i18n';
-interface Props { materia: string; argomento: string; sezione?: string; lingua: Lingua }
+interface Props { materia?: string; argomento?: string; sezione?: string; lingua: Lingua }
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
 const s = en ? {
-  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
+  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI) · maths, subjects, prices', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
   suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
+  generali: ['How much does a subject cost?', 'How does payment work and what do I get?', 'Which subject should I start from?'],
   bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
   nuova: 'New conversation', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
-  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
+  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA) · matematica, materie, prezzi', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
   suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
+  generali: ['Quanto costa una materia?', 'Come si paga e che cosa ottengo?', 'Da quale materia conviene partire?'],
   bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
   nuova: 'Nuova conversazione', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
@@ -30,7 +32,7 @@ const s = en ? {
 </button>
 
 <section class="assistente" hidden aria-label={s.nome}
-  data-materia={materia} data-argomento={argomento} data-sezione={sezione ?? ''} data-lingua={lingua}
+  data-materia={materia ?? ''} data-argomento={argomento ?? ''} data-sezione={sezione ?? ''} data-lingua={lingua}
   data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti })}>
   <header class="assistente-testa">
     <div>
@@ -43,14 +45,6 @@ const s = en ? {
     <button type="button" class="assistente-chiudi" data-chiudi-assistente aria-label={s.chiudi}>×</button>
   </header>
 
-  <div class="assistente-bloccato">
-    <p>{s.bloccata}</p>
-    <p class="assistente-azioni">
-      <a class="se-ospite" href={link(lingua, '/accedi')}>{s.accedi}</a>
-      <a href={link(lingua, `/${materia}/sblocca`)}>{s.sblocca}</a>
-    </p>
-  </div>
-
   <div class="assistente-attivo">
     <div class="assistente-parte" hidden>
       <span>{s.parte}</span> <strong data-parte-titolo></strong>
@@ -58,7 +52,8 @@ const s = en ? {
     </div>
     <div class="assistente-messaggi" aria-live="polite">
       <div class="assistente-suggerimenti">
-        {s.suggerimenti.map((x) => <button type="button" data-suggerimento>{x}</button>)}
+        {s.suggerimenti.map((x) => <button type="button" data-suggerimento class="sugg-studio">{x}</button>)}
+        {s.generali.map((x) => <button type="button" data-suggerimento class="sugg-generale">{x}</button>)}
       </div>
     </div>
     <form class="assistente-modulo">
@@ -89,6 +84,7 @@ const s = en ? {
     let conversazione: Messaggio[] = [];
     let parte: HTMLElement | null = null;
     let inCorso = false;
+    pannello.classList.toggle('con-studio', Boolean(studio));
 
     // ---- parti della pagina ----
     // Teoria: i riquadri (definizioni, teoremi, esempi…). Esercizi svolti: un esercizio per titolo.
@@ -227,6 +223,8 @@ const s = en ? {
       if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
       const ps = parti();
       const p = ps.find((x) => x.el === parte);
+      // Pagine senza testo di studio (home, prezzi, guida…): si manda l'inizio del testo della pagina.
+      const pagina = !studio ? { titolo: document.querySelector('main h1')?.textContent?.trim() || document.title, testo: (document.querySelector('main')?.innerText || '').replace(/\s+\n/g, '\n').slice(0, 3000) } : null;
       try {
         const r = await fetch('/api/assistente', {
           method: 'POST',
@@ -235,7 +233,7 @@ const s = en ? {
             materia: pannello!.dataset.materia, argomento: pannello!.dataset.argomento,
             tipo: pannello!.dataset.sezione, lingua: pannello!.dataset.lingua,
             titoloPagina: document.querySelector('main h1')?.textContent?.trim() || '',
-            parte: p ? { titolo: p.titolo, testo: testo(p.nodi) } : null,
+            parte: p ? { titolo: p.titolo, testo: testo(p.nodi) } : pagina,
             paragrafo: p ? paragrafoDi(p.el) : null,
             messaggi: conversazione,
           }),
@@ -263,14 +261,14 @@ const s = en ? {
       pannello!.hidden = false;
       radice.classList.add('assistente-aperto');
       apri!.setAttribute('aria-expanded', 'true');
-      if (radice.classList.contains('sbloccato')) {
+      if (studio) {
         const p = parteInVista();
         scegli(p);
         // Su telefono la finestra copre la metà bassa: la parte scelta sale in cima allo schermo.
         if (p && !matchMedia('(min-width: 40rem)').matches) p.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
-        if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
-        if (matchMedia('(min-width: 40rem)').matches) campo.focus();
       }
+      if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
+      if (matchMedia('(min-width: 40rem)').matches) campo.focus();
     }
     function chiudiPannello() {
       pannello!.hidden = true;
