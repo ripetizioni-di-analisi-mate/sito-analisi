@@ -3,7 +3,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
-import { materieL, gruppiL, link, T, type Lingua } from '../i18n';
+import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -27,25 +27,35 @@ const MATERIE = materieL(lingua);
   {gruppiL(lingua).map((g) => (
     <details class="gruppo" open={MATERIE.some((m) => m.gruppo === g && m.attiva)}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
-      <ul class="griglia-materie">
-        {MATERIE.filter((m) => m.gruppo === g).map((m) => (
-          <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
-            {m.attiva ? (
-              <a href={link(lingua, `/${m.slug}`)}>
-                <h3>{m.titolo}</h3>
-                <p>{m.descrizione}</p>
-                <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>
-              </a>
-            ) : (
-              <div>
-                <h3>{m.titolo}</h3>
-                <p>{m.descrizione}</p>
-                <span class="conteggio">{t.inPreparazione}</span>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+      {(() => {
+        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
+          <ul class="griglia-materie">
+            {voci.map(({ m, nome }) => (
+              <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
+                {m.attiva ? (
+                  <a href={link(lingua, `/${m.slug}`)}>
+                    <h3>{nome}</h3>
+                    <p>{m.descrizione}</p>
+                    <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>
+                  </a>
+                ) : (
+                  <div>
+                    <h3>{nome}</h3>
+                    <p>{m.descrizione}</p>
+                    <span class="conteggio">{t.inPreparazione}</span>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        );
+        return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
+          <details class="sottogruppo" open={b.materie.some((v) => v.m.attiva)}>
+            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
+            {griglia(b.materie)}
+          </details>
+        ) : griglia(b.materie));
+      })()}
     </details>
   ))}
 </Base>

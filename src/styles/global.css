@@ -296,6 +296,14 @@ details.gruppo[open] > summary.nome-gruppo::before, details.indice-gruppo[open] 
 .conta-gruppo { font-weight: 400; letter-spacing: 0; color: var(--inchiostro-2); margin-left: auto; }
 details.indice-gruppo > summary.indice-materia { justify-content: flex-start; cursor: pointer; list-style: none; user-select: none; }
 details.indice-gruppo { margin-bottom: 0.5rem; }
+details.sottogruppo { margin: 0.9rem 0 0 0.2rem; }
+details.sottogruppo > summary.nome-sottogruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.95rem; font-weight: 600; color: var(--inchiostro); padding: 0.35rem 0; }
+details.sottogruppo > summary.nome-sottogruppo h3 { font: inherit; margin: 0; }
+details.indice-sottogruppo { margin: 0.1rem 0 0.4rem 0.6rem; }
+details.indice-sottogruppo > summary { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.9rem; font-weight: 600; color: var(--inchiostro); padding: 0.3rem 0.5rem; }
+details.sottogruppo > summary::-webkit-details-marker, details.indice-sottogruppo > summary::-webkit-details-marker { display: none; }
+details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: 0.4rem; height: 0.4rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
+details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > summary::before { transform: rotate(45deg); }
 .griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
 @media (min-width: 44rem) { .griglia-materie { grid-template-columns: 1fr 1fr; } }
 .griglia-materie li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); }

@@ -10,6 +10,7 @@ export interface Materia {
   descrizione: string;
   colore: string;      // accento della materia (titoli, indice, striscia in testata)
   gruppo: string;      // percorso di studi: la home e l'indice raggruppano per questo
+  sottogruppo?: string; // dentro il gruppo, materie raccolte in una voce apribile (per esempio Matematica dal 1° al 5° anno)
   prezzo?: number;     // in euro, da prezzi.json: presente = materia a pagamento
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
@@ -179,6 +180,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'matematica-superiori-1',
+    sottogruppo: 'Matematica',
     titolo: 'Matematica 1° anno',
     breve: 'Matematica 1° anno',
     descrizione: "Il programma di matematica del 1° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -189,6 +191,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'matematica-superiori-2',
+    sottogruppo: 'Matematica',
     titolo: 'Matematica 2° anno',
     breve: 'Matematica 2° anno',
     descrizione: "Il programma di matematica del 2° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -199,6 +202,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'matematica-superiori-3',
+    sottogruppo: 'Matematica',
     titolo: 'Matematica 3° anno',
     breve: 'Matematica 3° anno',
     descrizione: "Il programma di matematica del 3° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -209,6 +213,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'matematica-superiori-4',
+    sottogruppo: 'Matematica',
     titolo: 'Matematica 4° anno',
     breve: 'Matematica 4° anno',
     descrizione: "Il programma di matematica del 4° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -219,6 +224,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'matematica-superiori-5',
+    sottogruppo: 'Matematica',
     titolo: 'Matematica 5° anno',
     breve: 'Matematica 5° anno',
     descrizione: "Il programma di matematica del 5° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -229,6 +235,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'fisica-superiori-1',
+    sottogruppo: 'Fisica',
     titolo: 'Fisica 1° anno',
     breve: 'Fisica 1° anno',
     descrizione: "Il programma di fisica del 1° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -239,6 +246,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'fisica-superiori-2',
+    sottogruppo: 'Fisica',
     titolo: 'Fisica 2° anno',
     breve: 'Fisica 2° anno',
     descrizione: "Il programma di fisica del 2° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -249,6 +257,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'fisica-superiori-3',
+    sottogruppo: 'Fisica',
     titolo: 'Fisica 3° anno',
     breve: 'Fisica 3° anno',
     descrizione: "Il programma di fisica del 3° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -259,6 +268,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'fisica-superiori-4',
+    sottogruppo: 'Fisica',
     titolo: 'Fisica 4° anno',
     breve: 'Fisica 4° anno',
     descrizione: "Il programma di fisica del 4° anno delle scuole superiori, con teoria ed esercizi svolti.",
@@ -269,6 +279,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
   {
     slug: 'fisica-superiori-5',
+    sottogruppo: 'Fisica',
     titolo: 'Fisica 5° anno',
     breve: 'Fisica 5° anno',
     descrizione: "Il programma di fisica del 5° anno delle scuole superiori, con teoria ed esercizi svolti.",

@@ -196,4 +196,5 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     argomenti: {},
   },
 };
+export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams' };

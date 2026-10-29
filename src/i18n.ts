@@ -3,7 +3,7 @@
 // le collezioni di contenuti tradotti e le pagine sotto src/pages/<lingua>/.
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
-import { MATERIE_EN, GRUPPI_EN } from './data/materie-en';
+import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
 import { url } from './lib/url';
 
 export type Lingua = 'it' | 'en';
@@ -32,7 +32,7 @@ export function materieL(l: Lingua): Materia[] {
     if (!e) return m;
     return {
       ...m,
-      titolo: e.titolo, breve: e.breve, descrizione: e.descrizione, gruppo: GRUPPI_EN[m.gruppo] ?? m.gruppo,
+      titolo: e.titolo, breve: e.breve, descrizione: e.descrizione, gruppo: GRUPPI_EN[m.gruppo] ?? m.gruppo, sottogruppo: m.sottogruppo ? (SOTTOGRUPPI_EN[m.sottogruppo] ?? m.sottogruppo) : undefined,
       argomenti: m.argomenti.map((a) => ({ ...a, ...(e.argomenti[a.slug] ?? {}) })),
     };
   });
@@ -40,6 +40,17 @@ export function materieL(l: Lingua): Materia[] {
 export const materiaL = (l: Lingua, slug: string): Materia => materieL(l).find((m) => m.slug === slug)!;
 export const argomentoL = (l: Lingua, m: string, a: string): Argomento => materiaL(l, m).argomenti.find((x) => x.slug === a)!;
 export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.gruppo))];
+// Materie di un gruppo divise in blocchi: prima quelle senza sottogruppo, poi un blocco per sottogruppo.
+// Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
+export function blocchiGruppo(materie: Materia[], g: string) {
+  const delGruppo = materie.filter((m) => m.gruppo === g);
+  const sotto = [...new Set(delGruppo.map((m) => m.sottogruppo).filter(Boolean))] as string[];
+  const etichetta = (m: Materia) => (m.sottogruppo && m.titolo.startsWith(m.sottogruppo) ? m.titolo.slice(m.sottogruppo.length).replace(/^[,\s]+/, '') : m.titolo);
+  return [
+    { sotto: null as string | null, materie: delGruppo.filter((m) => !m.sottogruppo).map((m) => ({ m, nome: m.titolo })) },
+    ...sotto.map((x) => ({ sotto: x as string | null, materie: delGruppo.filter((m) => m.sottogruppo === x).map((m) => ({ m, nome: etichetta(m) })) })),
+  ].filter((b) => b.materie.length);
+}
 export function sezioniL(l: Lingua) {
   const nomi = TESTI[l].sezioni;
   return SEZIONI.map((s) => ({ slug: s.slug, titolo: nomi[s.slug] }));
