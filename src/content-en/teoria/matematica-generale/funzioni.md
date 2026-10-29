@@ -12,7 +12,7 @@ A **set** is a collection of objects, called elements; $x \in A$ means that $x$ 
 - the **intersection** $A \cap B$ consists of the elements that are both in $A$ and in $B$;
 - the **difference** $A \setminus B$ consists of the elements of $A$ that are not in $B$.
 
-The number sets used in the course are $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$, that is, the natural numbers, the integers, the rationals and the reals. The solutions of a system of inequalities form the *intersection* of the solutions of the individual inequalities, because they must satisfy all of them at the same time. For the complete theory of sets, see the topic on sets in Calculus 1.
+The number sets used in the course are $\mathbb{N} \subseteq \mathbb{Z} \subseteq \mathbb{Q} \subseteq \mathbb{R}$, that is, the natural numbers, the integers, the rationals and the reals. The solutions of a system of inequalities form the *intersection* of the solutions of the individual inequalities, because they must satisfy all of them at the same time. For the complete theory of sets, see the topic on sets in Mathematical Analysis 1.
 :::
 
 :::definizione{#intervalli titolo="Intervals"}
@@ -268,7 +268,7 @@ With the constant price $p = 20$ and the cost $C(q) = 200 + 12q$, the profit is 
 :::
 
 :::definizione{#punto-di-pareggio titolo="Break-even point"}
-The **break-even point** (*break-even point*) is the quantity $q_0$ at which revenue exactly covers cost:
+The **break-even point** is the quantity $q_0$ at which revenue exactly covers cost:
 $$
 R(q_0) = C(q_0), \qquad \text{that is} \qquad \pi(q_0) = 0 .
 $$
