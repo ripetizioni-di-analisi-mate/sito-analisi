@@ -34,10 +34,11 @@ const s = en ? {
     <button type="button" class="pi-fumetto-chiudi" aria-label={s.chiudiFumetto}>×</button>
   </div>
   <button class="bottone-assistente" type="button" data-apri-assistente aria-label={s.apri}>
-    <span class="pi-avatar" aria-hidden="true">π<span class="pi-online"></span></span>
+    <span class="pi-avatar" aria-hidden="true">π</span>
     <span class="pi-barra">{s.barra}</span>
     <span class="pi-invia" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg></span>
   </button>
+  <span class="pi-online" aria-hidden="true"></span>
 </div>
 
 <section class="assistente" hidden aria-label={s.nome}

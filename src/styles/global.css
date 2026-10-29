@@ -581,14 +581,14 @@ html.collegato .bottone-account .iniziale { display: inline-grid; place-items: c
 .pi-lancio { position: relative; display: flex; justify-content: flex-end; }
 .bottone-assistente { --pi: var(--accento); display: flex; align-items: center; gap: 0.6rem; height: 3.5rem; max-width: 3.5rem; padding: 0; border: 2px solid transparent; border-radius: 999px; background: var(--pi); color: var(--inchiostro); font-family: var(--ui); cursor: pointer; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: max-width 0.35s ease, background 0.25s ease, border-color 0.25s ease, padding 0.35s ease; }
 .pi-avatar { position: relative; flex: none; width: calc(3.5rem - 4px); height: calc(3.5rem - 4px); border-radius: 50%; background: var(--pi); color: white; display: grid; place-items: center; font-family: var(--testo); font-weight: 700; font-size: 1.75rem; line-height: 1; transition: width 0.35s ease, height 0.35s ease, font-size 0.35s ease; }
-.pi-online { position: absolute; left: 4px; bottom: 4px; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #3fbf6a; border: 2px solid white; }
+.pi-online { position: absolute; right: -1px; bottom: 0; z-index: 1; pointer-events: none; width: 0.9rem; height: 0.9rem; transition: opacity 0.15s ease; border-radius: 50%; background: #3fbf6a; border: 2px solid white; }
 .pi-barra { white-space: nowrap; font-size: 1rem; color: color-mix(in srgb, var(--inchiostro) 60%, transparent); opacity: 0; transition: opacity 0.2s ease; }
 .pi-invia { flex: none; width: 2.3rem; height: 2.3rem; margin-right: 0.3rem; border-radius: 50%; background: var(--pi); color: white; display: grid; place-items: center; opacity: 0; transition: opacity 0.2s ease; }
 .pi-invia svg { width: 1rem; height: 1rem; }
 @media (hover: hover) {
   .bottone-assistente:hover, .bottone-assistente:focus-visible { max-width: 24rem; background: white; border-color: var(--pi); padding-left: 0.3rem; }
   .bottone-assistente:hover .pi-avatar, .bottone-assistente:focus-visible .pi-avatar { width: 2.4rem; height: 2.4rem; font-size: 1.3rem; }
-  .bottone-assistente:hover .pi-online, .bottone-assistente:focus-visible .pi-online { display: none; }
+  .pi-lancio:hover .pi-online, .bottone-assistente:focus-visible ~ .pi-online { opacity: 0; }
   .bottone-assistente:hover .pi-barra, .bottone-assistente:hover .pi-invia, .bottone-assistente:focus-visible .pi-barra, .bottone-assistente:focus-visible .pi-invia { opacity: 1; transition-delay: 0.12s; }
 }
 .pi-fumetto { position: absolute; right: 0; bottom: calc(100% + 0.7rem); width: min(17rem, calc(100vw - 2rem)); padding: 0.75rem 2rem 0.75rem 0.9rem; background: white; border: 1px solid var(--riga); border-radius: 14px 14px 4px 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.12); font-family: var(--ui); font-size: 0.95rem; line-height: 1.4; color: var(--inchiostro); cursor: pointer; animation: pi-entra 0.4s ease; }
