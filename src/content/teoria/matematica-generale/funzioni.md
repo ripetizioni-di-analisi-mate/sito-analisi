@@ -32,7 +32,7 @@ Siano $A \subseteq \mathbb{R}$ e $B \subseteq \mathbb{R}$. Una **funzione** $f :
 $$
 f(A) = \{f(x) : x \in A\},
 $$
-è l'**immagine** della funzione, ed è contenuto in $B$. Una funzione di domanda $q(p) = 100 - 4p$, definita per $0 \leq p \leq 25$, associa a ogni prezzo $p$ la quantità $q$ che i consumatori acquistano a quel prezzo; il dominio è $[0, 25]$, perché per $p > 25$ la quantità sarebbe negativa, e l'immagine è $[0, 100]$.
+è l'**immagine** della funzione, ed è contenuto in $B$. Per esempio $f(x) = x^2$, definita su $\mathbb{R}$, ha per immagine $[0, +\infty)$, perché un quadrato non è mai negativo e ogni numero $y \geq 0$ è il quadrato di $\sqrt{y}$.
 :::
 
 :::definizione{#grafico titolo="Grafico di una funzione"}
@@ -46,10 +46,6 @@ Poiché a ogni $x$ corrisponde un solo valore, ogni retta verticale $x = x_0$ in
 
 :::
 
-:::osservazione{#variabili-economiche titolo="Variabili e unità nei modelli economici"}
-Nei modelli economici le variabili hanno un significato e un'unità: $q$ è una quantità (pezzi, tonnellate), $p$ un prezzo in euro per unità, $C$, $R$ e $\pi$ sono costi, ricavi e profitti in euro. Il dominio di un modello è dato dal significato delle variabili, oltre che dalla formula: una formula come $q = 100 - 4p$ ha senso per ogni $p$ reale, ma come funzione di domanda si usa solo dove prezzo e quantità sono non negativi. In economia il prezzo si riporta di solito sull'asse verticale e la quantità su quello orizzontale, anche quando il prezzo è la variabile indipendente; il grafico della domanda è allora quello della funzione inversa $p = 25 - \dfrac{q}{4}$.
-:::
-
 ## Monotonia, inversa e composta
 
 :::definizione{#monotonia titolo="Funzioni crescenti e decrescenti"}
@@ -57,7 +53,7 @@ Sia $f$ definita su un intervallo $I$. La funzione è **crescente** su $I$ se pe
 $$
 x_1 < x_2 \implies f(x_1) < f(x_2),
 $$
-ed è **decrescente** se $x_1 < x_2$ implica $f(x_1) > f(x_2)$. Con le disuguaglianze larghe, $f(x_1) \leq f(x_2)$ e $f(x_1) \geq f(x_2)$, si parla di funzione **non decrescente** e **non crescente**. Una funzione di domanda è di norma decrescente, perché al crescere del prezzo la quantità acquistata diminuisce; una funzione di offerta è di norma crescente.
+ed è **decrescente** se $x_1 < x_2$ implica $f(x_1) > f(x_2)$. Con le disuguaglianze larghe, $f(x_1) \leq f(x_2)$ e $f(x_1) \geq f(x_2)$, si parla di funzione **non decrescente** e **non crescente**. Per esempio $x^3$ è crescente su $\mathbb{R}$, mentre $\dfrac{1}{x}$ è decrescente su $(0, +\infty)$, perché per $0 < x_1 < x_2$ si ha $\dfrac{1}{x_1} > \dfrac{1}{x_2}$.
 :::
 
 :::definizione{#iniettiva titolo="Funzione iniettiva"}
@@ -76,12 +72,12 @@ $$
 Per trovarla si risolve l'equazione $y = f(x)$ rispetto a $x$. Applicando $f$ e poi $f^{-1}$ si ritorna al valore di partenza, perciò $f^{-1}(f(x)) = x$ per ogni $x \in A$ e $f(f^{-1}(y)) = y$ per ogni $y \in f(A)$. Il grafico di $f^{-1}$, con la variabile di nuovo sull'asse orizzontale, è il simmetrico del grafico di $f$ rispetto alla retta $y = x$, perché il punto $(x, y)$ sta sul grafico di $f$ esattamente quando $(y, x)$ sta sul grafico di $f^{-1}$.
 :::
 
-:::esempio{titolo="Domanda e domanda inversa"}
-La domanda $q = 100 - 4p$, per $0 \leq p \leq 25$, è decrescente e quindi iniettiva. Risolvendo rispetto a $p$ si ottiene $4p = 100 - q$, cioè
+:::esempio{titolo="Inversa di una funzione lineare"}
+La funzione $f(x) = 2x + 3$ è crescente su $\mathbb{R}$, quindi è iniettiva, e la sua immagine è $\mathbb{R}$. Risolvendo $y = 2x + 3$ rispetto a $x$ si ottiene
 $$
-p = 25 - \frac{q}{4}, \qquad 0 \leq q \leq 100 .
+f^{-1}(y) = \frac{y - 3}{2}, \qquad y \in \mathbb{R} .
 $$
-Questa funzione è la **domanda inversa**, e dà il prezzo al quale si vende la quantità $q$. Per esempio, per vendere $60$ unità il prezzo deve essere $25 - 15 = 10$ euro. Dominio e immagine si scambiano, infatti il dominio della domanda inversa, $[0, 100]$, è l'immagine della domanda.
+Come controllo, $f(1) = 5$ e $f^{-1}(5) = \dfrac{5 - 3}{2} = 1$. Lo stesso procedimento, applicato alla funzione di domanda $q = 100 - 4p$, dà la domanda inversa $p = 25 - \dfrac{q}{4}$, cioè il prezzo al quale si vende la quantità $q$.
 :::
 
 :::definizione{#funzione-composta titolo="Funzione composta"}
@@ -89,7 +85,7 @@ Siano $f : A \to \mathbb{R}$ e $g : B \to \mathbb{R}$, e sia $x \in A$ tale che 
 $$
 (g \circ f)(x) = g(f(x)) .
 $$
-Il suo dominio è formato dagli $x \in A$ per cui $f(x)$ sta nel dominio di $g$. L'ordine della composizione conta. Per esempio, con $f(x) = x + 1$ e $g(x) = x^2$ si ha $g(f(x)) = (x + 1)^2$ e $f(g(x)) = x^2 + 1$, che sono funzioni diverse. Nei modelli economici la composizione collega grandezze in catena: se la produzione dipende dalle ore di lavoro, $q = h(L)$, e il costo dipende dalla produzione, $C = C(q)$, allora il costo in funzione delle ore è $C(h(L))$.
+Il suo dominio è formato dagli $x \in A$ per cui $f(x)$ sta nel dominio di $g$. L'ordine della composizione conta. Per esempio, con $f(x) = x + 1$ e $g(x) = x^2$ si ha $g(f(x)) = (x + 1)^2$ e $f(g(x)) = x^2 + 1$, che sono funzioni diverse.
 :::
 
 ## Funzioni lineari
@@ -103,9 +99,9 @@ e il suo grafico è una retta. Il numero $k = f(0)$ è l'**intercetta**, cioè l
 $$
 \frac{f(x_2) - f(x_1)}{x_2 - x_1} = \frac{m x_2 - m x_1}{x_2 - x_1} = m ,
 $$
-quindi $m$ è la variazione di $f$ per ogni aumento di un'unità della variabile, la stessa ovunque. Se $m > 0$ la funzione è crescente, se $m < 0$ è decrescente, se $m = 0$ è costante. In un costo lineare $C(q) = 200 + 12q$ l'intercetta $200$ è il **costo fisso** e la pendenza $12$ è il costo di ogni unità in più.
+quindi $m$ è la variazione di $f$ per ogni aumento di un'unità della variabile, la stessa ovunque. Se $m > 0$ la funzione è crescente, se $m < 0$ è decrescente, se $m = 0$ è costante. Nei modelli economici un costo lineare $C(q) = 200 + 12q$ ha come intercetta il costo fisso, $200$, e come pendenza il costo di ogni unità in più, $12$.
 
-::grafico{f="200+12*x+0*sqrt(x)" punti="0,200,pieno;10,320,pieno;20,440,pieno" segmenti="10,320,20,320;20,320,20,440" etichette="13,280,Δq = 10;21,370,ΔC = 120" xmin=-5 xmax=45 ymin=-100 ymax=900 nomi="q,C" legenda="C = 200 + 12q" titolo="Il costo $C(q) = 200 + 12q$: l'intercetta $200$ è il costo fisso, e ogni aumento della quantità di $10$ unità fa crescere il costo di $120$ euro, perciò la pendenza è $12$"}
+::grafico{f="0.5*x+1" punti="0,1,pieno;2,2,pieno;6,4,pieno" segmenti="2,2,6,2;6,2,6,4" etichette="3.4,1.6,Δx = 4;6.2,3,Δy = 2" xmin=-2 xmax=8 ymin=-1 ymax=6 legenda="y = \dfrac{1}{2}\,x + 1" titolo="Per $f(x) = \dfrac{1}{2}\,x + 1$ l'intercetta è $1$, e a un aumento $\Delta x = 4$ corrisponde $\Delta y = 2$, quindi la pendenza è $\dfrac{2}{4} = \dfrac{1}{2}$"}
 
 :::
 
@@ -116,13 +112,12 @@ f(x) = y_1 + m\,(x - x_1),
 \qquad
 m = \frac{y_2 - y_1}{x_2 - x_1} .
 $$
-La pendenza è fissata dai due punti, perché deve essere uguale al rapporto tra la variazione di $y$ e la variazione di $x$; scelta $m$, la retta per $(x_1, y_1)$ con quella pendenza è una sola. Si verifica sostituendo che $f(x_1) = y_1$ e che $f(x_2) = y_1 + (y_2 - y_1) = y_2$. Se un'impresa produce $100$ unità con un costo di $1400$ euro e $150$ unità con un costo di $2000$ euro, e il costo è lineare, allora
+La pendenza è fissata dai due punti, perché deve essere uguale al rapporto tra la variazione di $y$ e la variazione di $x$; scelta $m$, la retta per $(x_1, y_1)$ con quella pendenza è una sola. Si verifica sostituendo che $f(x_1) = y_1$ e che $f(x_2) = y_1 + (y_2 - y_1) = y_2$. Per esempio, la retta per $(1, 3)$ e $(4, 9)$ ha
 $$
-m = \frac{2000 - 1400}{150 - 100} = 12,
+m = \frac{9 - 3}{4 - 1} = 2,
 \qquad
-C(q) = 1400 + 12\,(q - 100) = 200 + 12q ,
+f(x) = 3 + 2\,(x - 1) = 2x + 1 .
 $$
-cioè il costo fisso è $200$ euro e ogni unità costa $12$ euro.
 :::
 
 ## Funzioni quadratiche
@@ -148,7 +143,7 @@ a x^2 + b x + c
 $$
 Il quadrato $\left( x + \dfrac{b}{2a} \right)^2$ è non negativo e si annulla *solo* per $x = -\dfrac{b}{2a}$; perciò per $a > 0$ il valore $c - \dfrac{b^2}{4a}$ è il più piccolo che $f$ assume, e per $a < 0$ è il più grande. Le funzioni quadratiche descrivono ricavi e profitti quando il prezzo dipende linearmente dalla quantità, e il vertice dà la quantità che li rende massimi.
 
-::grafico{f="40*x-2*x^2-100+0*sqrt(x*(18-x))" punti="10,100,pieno;2.929,0,pieno;17.071,0,pieno" segmenti="10,0,10,100" xmin=-2 xmax=18 ymin=-125 ymax=125 nomi="q,π" titolo="Il profitto $\pi(q) = -2q^2 + 40q - 100$ ha il vertice in $(10, 100)$: la quantità $q = 10$ dà il profitto massimo, $100$ euro"}
+::grafico{f="-x^2+4*x+1" punti="2,5,pieno;-0.236,0,pieno;4.236,0,pieno" segmenti="2,0,2,5" xmin=-2 xmax=6 ymin=-4 ymax=6 titolo="La parabola $f(x) = -x^2 + 4x + 1$ ha $a < 0$, quindi il vertice $(2, 5)$ è il punto di massimo; gli zeri sono $2 \pm \sqrt{5}$"}
 
 :::
 
@@ -159,7 +154,7 @@ Gli zeri di $f(x) = a x^2 + b x + c$ sono le soluzioni dell'equazione $a x^2 + b
 - Se $\Delta = 0$ c'è un solo zero, il vertice, e altrove $f$ ha il segno di $a$.
 - Se $\Delta < 0$ non ci sono zeri e $f$ ha ovunque il segno di $a$.
 
-Per il profitto $\pi(q) = -2q^2 + 40q - 100$ si ha $\Delta = 1600 - 800 = 800 > 0$, e gli zeri sono $q = 10 \pm \sqrt{50}$, cioè circa $2{,}93$ e $17{,}07$. Poiché $a = -2 < 0$, il profitto è positivo *solo* per le quantità comprese tra i due zeri.
+Per $f(x) = x^2 - 2x - 3$ si ha $\Delta = 4 + 12 = 16 > 0$, e gli zeri sono $-1$ e $3$. Poiché $a = 1 > 0$, la funzione è positiva per $x < -1$ e per $x > 3$, negativa per $-1 < x < 3$.
 :::
 
 ## Potenze, esponenziali e logaritmi
@@ -210,7 +205,7 @@ Quando una funzione è data solo con la sua formula, il suo **dominio naturale**
 - gli argomenti delle radici di indice pari sono maggiori o uguali a zero;
 - gli argomenti dei logaritmi sono strettamente positivi.
 
-Quando le condizioni sono più di una, devono valere tutte insieme, e il dominio è l'intersezione delle loro soluzioni. Le radici di indice dispari, gli esponenziali e i polinomi non pongono condizioni. Nei modelli economici al dominio naturale si aggiungono le condizioni che vengono dal significato delle variabili, come $q \geq 0$.
+Quando le condizioni sono più di una, devono valere tutte insieme, e il dominio è l'intersezione delle loro soluzioni. Le radici di indice dispari, gli esponenziali e i polinomi non pongono condizioni.
 :::
 
 :::esempio{titolo="Dominio con radice e logaritmo"}
@@ -232,7 +227,7 @@ Quindi il dominio è l'intervallo $[1, 5)$. L'estremo $1$ appartiene al dominio,
 ## Domanda, offerta ed equilibrio di mercato
 
 :::definizione{#domanda-offerta titolo="Funzioni di domanda e di offerta"}
-La **funzione di domanda** $q_d(p)$ dà la quantità di un bene che i consumatori acquistano al prezzo $p$; la **funzione di offerta** $q_s(p)$ dà la quantità che i produttori mettono in vendita allo stesso prezzo. Di norma la domanda è decrescente e l'offerta è crescente. Il prezzo minimo al di sopra del quale i produttori offrono il bene è quello in cui $q_s(p) = 0$; il prezzo massimo che i consumatori sono disposti a pagare è quello in cui $q_d(p) = 0$.
+La **funzione di domanda** $q_d(p)$ dà la quantità di un bene che i consumatori acquistano al prezzo $p$; la **funzione di offerta** $q_s(p)$ dà la quantità che i produttori mettono in vendita allo stesso prezzo. Di norma la domanda è decrescente e l'offerta è crescente, e tutte le grandezze sono non negative. In economia il prezzo si riporta di solito sull'asse verticale e la quantità su quello orizzontale; il grafico della domanda è allora quello della domanda inversa, che dà il prezzo in funzione della quantità. Il prezzo minimo al di sopra del quale i produttori offrono il bene è quello in cui $q_s(p) = 0$; il prezzo massimo che i consumatori sono disposti a pagare è quello in cui $q_d(p) = 0$.
 :::
 
 :::definizione{#equilibrio-di-mercato titolo="Equilibrio di mercato"}
