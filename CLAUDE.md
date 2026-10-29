@@ -48,6 +48,9 @@ Precorso 19 €, Analisi matematica 1 29 €, Analisi matematica 2 29 €, Algeb
 ## Preferenze editoriali principali (dettagli in GUIDA-CONTENUTI.md)
 Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi, poiché, perciò), i due punti non sostituiscono un connettivo; niente frasi di riempimento o "da IA"; niente tono prescrittivo; graffa solo per condizioni da soddisfare insieme; niente "la parentesi"; assi dei grafici orientati; dopo ogni definizione/teorema, a cosa serve; esercizi svolti con il calcolo sopra e la spiegazione sotto, a tutta pagina.
 
+## Lavori in corso in altre chat
+- Dal 29/10 un'altra chat sta aggiungendo la materia **Matematica generale** (per Economia): commit "Matematica generale: …" su `main`. Prima di lavorare, `git pull` per non sovrascrivere il suo lavoro.
+
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
 - Scelta delle proposte del primo giro dello studente puntiglioso.
