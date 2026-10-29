@@ -15,10 +15,16 @@ $$
 0 < |x - x_0| < \delta \implies |f(x) - L| < \varepsilon .
 $$
 In altre parole, $f(x)$ è vicino a $L$ quanto si vuole, entro la tolleranza $\varepsilon$, purché $x$ sia abbastanza vicino a $x_0$, entro la distanza $\delta$. La condizione $0 < |x - x_0|$ esclude il punto $x_0$, quindi il valore $f(x_0)$, se esiste, non conta. Per $\displaystyle\lim_{x \to 1} (2x + 3) = 5$, fissato $\varepsilon$, si ha $|(2x + 3) - 5| = 2\,|x - 1|$, che è minore di $\varepsilon$ quando $|x - 1| < \dfrac{\varepsilon}{2}$; basta quindi $\delta = \dfrac{\varepsilon}{2}$.
+
+::grafico{f="2*x+3" area="6;4;0.5;1.5" segmenti="-1,4,3,4;-1,6,3,6;0.5,0,0.5,4;1.5,0,1.5,6" punti="1,5,pieno" xmin=-1 xmax=3 ymin=-1 ymax=9 legenda="y = 2x + 3" titolo="Con $\varepsilon = 1$ e $\delta = \dfrac{1}{2}$, per $0 < |x - 1| < \dfrac{1}{2}$ il valore $2x + 3$ sta nella striscia $4 < y < 6$"}
+
 :::
 
 :::definizione{#limite-destro-sinistro titolo="Limite destro e limite sinistro"}
-Se nella definizione di limite si considerano solo gli $x > x_0$ si ottiene il **limite destro**, $\displaystyle\lim_{x \to x_0^+} f(x)$; con i soli $x < x_0$ si ottiene il **limite sinistro**, $\displaystyle\lim_{x \to x_0^-} f(x)$. Il limite esiste *se e solo se* esistono il limite destro e il limite sinistro e sono uguali. Servono per le funzioni definite a tratti e nei punti dove una formula cambia comportamento: per la funzione che vale $5$ per $0 < x \leq 2$ e $8$ per $x > 2$, il limite sinistro in $2$ è $5$ e il limite destro è $8$, quindi il limite in $2$ non esiste.
+Se nella definizione di limite si considerano solo gli $x > x_0$ si ottiene il **limite destro**, $\displaystyle\lim_{x \to x_0^+} f(x)$; con i soli $x < x_0$ si ottiene il **limite sinistro**, $\displaystyle\lim_{x \to x_0^-} f(x)$. Il limite esiste *se e solo se* esistono il limite destro e il limite sinistro e sono uguali. Servono per le funzioni definite a tratti, nei punti in cui si passa da una formula all'altra. Per la funzione che vale $5$ per $0 < x \leq 2$ e $8$ per $x > 2$, il limite sinistro in $2$ è $5$ e il limite destro è $8$, quindi il limite in $2$ non esiste.
+
+::grafico{linee="0,5 2,5;2,8 5,8" punti="0,5,vuoto;2,5,pieno;2,8,vuoto" segmenti="2,0,2,5" xmin=-1 xmax=5 ymin=-1 ymax=9 titolo="La funzione vale $5$ per $0 < x \leq 2$ e $8$ per $x > 2$, quindi in $x = 2$ il limite sinistro è $5$ e il limite destro è $8$"}
+
 :::
 
 ## Limiti infiniti e limiti all'infinito
@@ -26,11 +32,14 @@ Se nella definizione di limite si considerano solo gli $x > x_0$ si ottiene il *
 :::definizione{#limiti-infiniti titolo="Limiti infiniti e all'infinito"}
 Le altre situazioni si descrivono allo stesso modo, sostituendo agli intorni di un numero le semirette.
 
-- $\displaystyle\lim_{x \to x_0} f(x) = +\infty$ se per ogni $M$ esiste $\delta > 0$ tale che $f(x) > M$ per $0 < |x - x_0| < \delta$: vicino a $x_0$ la funzione supera qualunque soglia. Allo stesso modo si definisce il limite $-\infty$.
-- $\displaystyle\lim_{x \to +\infty} f(x) = L$ se per ogni $\varepsilon > 0$ esiste $N$ tale che $|f(x) - L| < \varepsilon$ per $x > N$: per valori grandi della variabile la funzione si stabilizza vicino a $L$. Allo stesso modo si definisce il limite per $x \to -\infty$.
+- $\displaystyle\lim_{x \to x_0} f(x) = +\infty$ se per ogni $M$ esiste $\delta > 0$ tale che $f(x) > M$ per $0 < |x - x_0| < \delta$, cioè se vicino a $x_0$ i valori di $f$ superano qualunque soglia. Allo stesso modo si definisce il limite $-\infty$.
+- $\displaystyle\lim_{x \to +\infty} f(x) = L$ se per ogni $\varepsilon > 0$ esiste $N$ tale che $|f(x) - L| < \varepsilon$ per $x > N$, cioè se per valori grandi della variabile i valori di $f$ restano vicini a $L$. Allo stesso modo si definisce il limite per $x \to -\infty$.
 - $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$ se per ogni $M$ esiste $N$ tale che $f(x) > M$ per $x > N$.
 
-Per esempio $\dfrac{1}{x} \to 0$ per $x \to +\infty$, $\dfrac{1}{x^2} \to +\infty$ per $x \to 0$, mentre $\dfrac{1}{x}$ tende a $+\infty$ per $x \to 0^+$ e a $-\infty$ per $x \to 0^-$. Nei modelli economici il limite per $x \to +\infty$ descrive il comportamento per grandi quantità: il costo medio $\dfrac{200}{q} + 12$ tende a $12$ per $q \to +\infty$.
+Per esempio $\dfrac{1}{x} \to 0$ per $x \to +\infty$, $\dfrac{1}{x^2} \to +\infty$ per $x \to 0$, mentre $\dfrac{1}{x}$ tende a $+\infty$ per $x \to 0^+$ e a $-\infty$ per $x \to 0^-$. Nei modelli economici il limite per $x \to +\infty$ descrive che cosa accade per grandi quantità; per esempio il costo medio $\dfrac{200}{q} + 12$ tende a $12$ per $q \to +\infty$.
+
+::grafico{f="1/x" xmin=-5 xmax=5 ymin=-5 ymax=5 legenda="y = \dfrac{1}{x}" titolo="$\dfrac{1}{x}$ tende a $0$ per $x \to \pm\infty$, quindi l'asse $x$ è un asintoto orizzontale; tende a $+\infty$ per $x \to 0^+$ e a $-\infty$ per $x \to 0^-$"}
+
 :::
 
 ## Regole di calcolo e forme indeterminate
@@ -48,15 +57,15 @@ Le regole si estendono ai limiti infiniti con le convenzioni $+\infty + \infty =
 $$
 +\infty - \infty, \qquad 0 \cdot \infty, \qquad \frac{0}{0}, \qquad \frac{\infty}{\infty}, \qquad 1^{\infty}, \qquad 0^{0}, \qquad \infty^{0},
 $$
-per le quali il risultato dipende dalle funzioni e va trovato trasformando l'espressione. Le funzioni elementari (polinomi, radici, esponenziali, logaritmi, funzioni goniometriche) nei punti interni al loro dominio hanno per limite il loro valore, quindi in quei punti il limite si calcola per **sostituzione**: $\displaystyle\lim_{x \to 2} (x^2 + 1) = 5$.
+per le quali il risultato dipende dalle funzioni e va trovato trasformando l'espressione. Le funzioni elementari (polinomi, radici, esponenziali, logaritmi, funzioni goniometriche) nei punti interni al loro dominio hanno per limite il loro valore, quindi in quei punti il limite si calcola per **sostituzione**, come in $\displaystyle\lim_{x \to 2} (x^2 + 1) = 5$.
 :::
 
 :::osservazione{#tecniche-forme-indeterminate titolo="Tecniche per le forme indeterminate"}
 Le forme più frequenti si risolvono con tre tecniche.
 
-- **Scomposizione** per $\dfrac{0}{0}$ con quozienti di polinomi: numeratore e denominatore si annullano in $x_0$, quindi entrambi contengono il fattore $x - x_0$, che si semplifica. Per esempio $\dfrac{x^2 - 9}{x - 3} = \dfrac{(x - 3)(x + 3)}{x - 3} = x + 3$ per $x \neq 3$, e il limite per $x \to 3$ è $6$.
-- **Raccoglimento** della potenza più alta per $\dfrac{\infty}{\infty}$ con $x \to \pm\infty$: $\dfrac{2x^2 + 1}{x^2 - 3x} = \dfrac{2 + \dfrac{1}{x^2}}{1 - \dfrac{3}{x}} \to 2$. Come per le successioni, il limite di un quoziente di polinomi all'infinito dipende dal confronto dei gradi.
-- **Razionalizzazione** per $+\infty - \infty$ con radici: si moltiplica e si divide per la somma, così il numeratore diventa una differenza di quadrati. Per esempio
+- **Scomposizione** per $\dfrac{0}{0}$ con quozienti di polinomi. Numeratore e denominatore si annullano in $x_0$, quindi entrambi contengono il fattore $x - x_0$, che si semplifica. Per esempio $\dfrac{x^2 - 9}{x - 3} = \dfrac{(x - 3)(x + 3)}{x - 3} = x + 3$ per $x \neq 3$, e il limite per $x \to 3$ è $6$.
+- **Raccoglimento** della potenza più alta per $\dfrac{\infty}{\infty}$ con $x \to \pm\infty$, come in $\dfrac{2x^2 + 1}{x^2 - 3x} = \dfrac{2 + \dfrac{1}{x^2}}{1 - \dfrac{3}{x}} \to 2$. Come per le successioni, il limite di un quoziente di polinomi all'infinito dipende dal confronto dei gradi.
+- **Razionalizzazione** per $+\infty - \infty$ con radici. Si moltiplica e si divide per la somma, così il numeratore diventa una differenza di quadrati. Per esempio
 $$
 \sqrt{x^2 + x} - x = \frac{x}{\sqrt{x^2 + x} + x} = \frac{1}{\sqrt{1 + \dfrac{1}{x}} + 1} \to \frac{1}{2} \quad (x \to +\infty) .
 $$
@@ -75,7 +84,7 @@ $$
 \qquad
 \lim_{x \to 0} \frac{\sin x}{x} = 1 .
 $$
-Il primo estende alle funzioni il limite che definisce $e$ nell'argomento sulle successioni e le serie, e si assume; il secondo segue dal primo ponendo $x = \dfrac{1}{t}$, e il terzo dal secondo ponendo $y = e^{x} - 1$. Si usano riconducendo l'espressione a uno di essi con una sostituzione: per esempio, con $t = \dfrac{x}{r}$,
+Il primo estende alle funzioni il limite che definisce $e$ nell'argomento sulle successioni e le serie, e si assume; il secondo segue dal primo ponendo $x = \dfrac{1}{t}$, e il terzo dal secondo ponendo $y = e^{x} - 1$; per il quarto si rimanda all'argomento sui limiti di Analisi 1. Si usano riconducendo l'espressione a uno di essi con una sostituzione; per esempio, per $r > 0$ e con $t = \dfrac{x}{r}$,
 $$
 \lim_{x \to +\infty} \left( 1 + \frac{r}{x} \right)^{x} = \lim_{t \to +\infty} \left[ \left( 1 + \frac{1}{t} \right)^{t} \right]^{r} = e^{r} ,
 $$
@@ -89,7 +98,10 @@ $$
 \qquad
 \lim_{x \to +\infty} \frac{x^{\alpha}}{a^{x}} = 0 .
 $$
-In altre parole, ogni esponenziale di base maggiore di $1$ cresce più in fretta di ogni potenza, e ogni potenza più in fretta di ogni potenza del logaritmo. In un quoziente o in una somma di infiniti si raccoglie il termine che cresce più in fretta: $\dfrac{x^3 + 2^{x}}{3 \cdot 2^{x}} = \dfrac{\dfrac{x^3}{2^{x}} + 1}{3} \to \dfrac{1}{3}$. Per questo una grandezza che cresce in modo esponenziale, come un capitale a interesse composto, finisce per superare qualunque grandezza che cresce come una potenza.
+In altre parole, ogni esponenziale di base maggiore di $1$ cresce più in fretta di ogni potenza, e ogni potenza più in fretta di ogni potenza del logaritmo. In un quoziente o in una somma di infiniti si raccoglie il termine che cresce più in fretta, come in $\dfrac{x^3 + 2^{x}}{3 \cdot 2^{x}} = \dfrac{\dfrac{x^3}{2^{x}} + 1}{3} \to \dfrac{1}{3}$.
+
+::grafico{f="x^3;exp(x)" punti="1.857,6.406,pieno;4.536,93.35,pieno" segmenti="4.536,0,4.536,93.35" xmin=-1 xmax=6 ymin=-20 ymax=180 legenda="y = x^3;y = e^{x}" titolo="I grafici di $x^3$ e di $e^{x}$ si incontrano in $x \approx 1{,}86$ e in $x \approx 4{,}54$; per $x > 4{,}54$ circa $e^{x}$ è maggiore di $x^3$, e $\dfrac{x^3}{e^{x}} \to 0$"}
+
 :::
 
 ## Asintoti
@@ -107,11 +119,11 @@ m = \lim_{x \to +\infty} \frac{f(x)}{x},
 \qquad
 q = \lim_{x \to +\infty} \big( f(x) - m x \big) ,
 $$
-e l'asintoto esiste se entrambi i limiti sono finiti e $m \neq 0$. Le formule seguono dalla definizione: se $f(x) - m x - q \to 0$, dividendo per $x$ si ottiene $\dfrac{f(x)}{x} - m \to 0$.
+e l'asintoto esiste se entrambi i limiti sono finiti e $m \neq 0$. Le formule seguono dalla definizione, perché se $f(x) - m x - q \to 0$, dividendo per $x$ si ottiene $\dfrac{f(x)}{x} - m \to 0$.
 :::
 
 :::esempio{titolo="Asintoti di una funzione razionale"}
-La funzione $f(x) = \dfrac{x^2 + 1}{x - 1}$ è definita per $x \neq 1$. Nel punto escluso il numeratore vale $2$ e il denominatore tende a $0$, positivo da destra e negativo da sinistra, quindi $f(x) \to +\infty$ per $x \to 1^+$ e $f(x) \to -\infty$ per $x \to 1^-$: la retta $x = 1$ è un asintoto verticale. Per $x \to \pm\infty$ la funzione diverge, perché il numeratore ha grado maggiore, quindi non ci sono asintoti orizzontali. Per l'asintoto obliquo
+La funzione $f(x) = \dfrac{x^2 + 1}{x - 1}$ è definita per $x \neq 1$. Nel punto escluso il numeratore vale $2$ e il denominatore tende a $0$, positivo da destra e negativo da sinistra, quindi $f(x) \to +\infty$ per $x \to 1^+$ e $f(x) \to -\infty$ per $x \to 1^-$, perciò la retta $x = 1$ è un asintoto verticale. Per $x \to \pm\infty$ la funzione diverge, perché il numeratore ha grado maggiore, quindi non ci sono asintoti orizzontali. Per l'asintoto obliquo
 $$
 m = \lim_{x \to \pm\infty} \frac{x^2 + 1}{x\,(x - 1)} = 1,
 \qquad
@@ -136,13 +148,13 @@ cioè se il limite esiste, è finito e coincide con il valore della funzione. La
 :::definizione{#discontinuita titolo="Punti di discontinuità"}
 Se $f$ non è continua in $x_0$, il punto è di **discontinuità**, e si distinguono tre casi.
 
-- **Eliminabile**: il limite esiste finito ma è diverso da $f(x_0)$, oppure $f$ non è definita in $x_0$. Ridefinendo $f(x_0)$ come il limite la funzione diventa continua. Per esempio $\dfrac{x^2 - 1}{x - 1}$ non è definita in $1$, ma il suo limite è $2$.
+- **Eliminabile**: il limite esiste finito e $f$ in $x_0$ ha un valore diverso dal limite oppure non è definita. Ridefinendo $f(x_0)$ come il limite la funzione diventa continua. Per esempio $\dfrac{x^2 - 1}{x - 1}$ non è definita in $1$, ma il suo limite è $2$.
 - **Di salto**: i limiti destro e sinistro esistono finiti e sono diversi; la loro differenza è l'ampiezza del salto.
 - **Di seconda specie**: almeno uno dei limiti destro e sinistro è infinito o non esiste, come per $\dfrac{1}{x}$ in $0$.
 
-Le discontinuità di salto sono frequenti nei modelli economici con tariffe a scaglioni: una spedizione che costa $5$ euro fino a $2$ kg e $8$ euro oltre ha in $x = 2$ un salto di ampiezza $3$ euro.
+La funzione che vale $5$ per $0 < x \leq 2$ e $8$ per $x > 2$ ha in $x = 2$ una discontinuità di salto di ampiezza $8 - 5 = 3$.
 
-::grafico{linee="0,5 2,5;2,8 5,8" punti="0,5,vuoto;2,5,pieno;2,8,vuoto" segmenti="2,0,2,5" xmin=-0.5 xmax=5 ymin=-2 ymax=10 nomi="kg,€" titolo="La tariffa vale $5$ euro fino a $2$ kg compresi e $8$ euro oltre: in $x = 2$ c'è una discontinuità di salto di ampiezza $3$"}
+::grafico{f="x+1" punti="1,2,vuoto" segmenti="1,0,1,2" xmin=-2 xmax=4 ymin=-1 ymax=5 legenda="y = \dfrac{x^2 - 1}{x - 1}" titolo="Il grafico di $\dfrac{x^2 - 1}{x - 1}$ è la retta $y = x + 1$ privata del punto $(1, 2)$, perciò la discontinuità in $x = 1$ è eliminabile"}
 
 :::
 
@@ -151,16 +163,16 @@ Le discontinuità di salto sono frequenti nei modelli economici con tariffe a sc
 :::teorema{#teorema-degli-zeri titolo="Teorema degli zeri"}
 Sia $f$ continua sull'intervallo chiuso $[a, b]$, con $f(a)$ e $f(b)$ di segno opposto. Allora esiste almeno un punto $c \in (a, b)$ tale che $f(c) = 0$.
 
-Il grafico parte da un lato dell'asse $x$ e arriva dall'altro senza interruzioni, quindi deve attraversarlo. Il teorema garantisce che un'equazione ha una soluzione anche quando non si sa risolverla, e suggerisce come approssimarla con il **metodo di bisezione**: si calcola $f$ nel punto medio dell'intervallo, si tiene la metà ai cui estremi $f$ ha segno opposto, e si ripete. Per $f(x) = x^3 + x - 1$ si ha $f(0) = -1$ e $f(1) = 1$, quindi c'è uno zero in $(0, 1)$; poiché $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ e $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, lo zero sta in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$, e vale circa $0{,}682$. Lo stesso procedimento si usa per calcolare il tasso interno di rendimento di un investimento, trattato nell'argomento sulla matematica finanziaria. Il teorema si dimostra con la completezza dei numeri reali, per la quale si rimanda all'argomento sugli insiemi di Analisi 1.
+Il grafico è una curva senza interruzioni che unisce un punto da una parte dell'asse $x$ a un punto dall'altra parte, quindi incontra l'asse. Il teorema garantisce che un'equazione ha una soluzione anche quando non si sa risolverla, e su di esso si basa il **metodo di bisezione** per approssimarla. Si calcola $f$ nel punto medio dell'intervallo, si tiene la metà ai cui estremi $f$ ha segno opposto, e si ripete. Per $f(x) = x^3 + x - 1$ si ha $f(0) = -1$ e $f(1) = 1$, quindi c'è uno zero in $(0, 1)$; poiché $f\left( \dfrac{1}{2} \right) = -\dfrac{3}{8}$ e $f\left( \dfrac{3}{4} \right) = \dfrac{11}{64}$, lo zero sta in $\left( \dfrac{1}{2}, \dfrac{3}{4} \right)$, e vale circa $0{,}682$. Il teorema si dimostra con la completezza dei numeri reali, per la quale si rimanda all'argomento sugli insiemi di Analisi 1.
 
-::grafico{f="x^3+x-1" punti="0,-1,pieno;1,1,pieno;0.5,-0.375,pieno;0.75,0.1719,pieno;0.6823,0,vuoto" segmenti="0.5,0,0.5,-0.375;0.75,0,0.75,0.1719" xmin=-0.5 xmax=1.5 ymin=-1.5 ymax=2 titolo="$f(x) = x^3 + x - 1$ cambia segno tra $0$ e $1$, e poi tra $\dfrac{1}{2}$ e $\dfrac{3}{4}$: lo zero è circa $0{,}682$"}
+::grafico{f="x^3+x-1" punti="0,-1,pieno;1,1,pieno;0.5,-0.375,pieno;0.75,0.1719,pieno;0.6823,0,vuoto" segmenti="0.5,0,0.5,-0.375;0.75,0,0.75,0.1719" xmin=-0.5 xmax=1.5 ymin=-1.5 ymax=2 titolo="$f(x) = x^3 + x - 1$ cambia segno tra $0$ e $1$, e poi tra $\dfrac{1}{2}$ e $\dfrac{3}{4}$; lo zero è circa $0{,}682$"}
 
 :::
 
 :::teorema{#valori-intermedi titolo="Teorema dei valori intermedi"}
 Sia $f$ continua sull'intervallo $[a, b]$. Allora $f$ assume tutti i valori compresi tra $f(a)$ e $f(b)$.
 
-Segue dal teorema degli zeri: se $y_0$ sta tra $f(a)$ e $f(b)$, la funzione $f(x) - y_0$ è continua e ha segni opposti agli estremi, quindi si annulla in un punto $c$, dove $f(c) = y_0$. Per esempio, se un'impresa con produzione $0$ ha profitto $-100$ euro e con produzione $10$ ha profitto $100$ euro, e il profitto varia con continuità, esiste una quantità intermedia con profitto esattamente $0$, cioè un punto di pareggio.
+Segue dal teorema degli zeri, perché se $y_0$ sta tra $f(a)$ e $f(b)$, la funzione $f(x) - y_0$ è continua e ha segni opposti agli estremi, quindi si annulla in un punto $c$, dove $f(c) = y_0$. Per esempio $f(x) = x^2$ è continua su $[1, 3]$, con $f(1) = 1$ e $f(3) = 9$, quindi assume il valore $5$ in un punto di $(1, 3)$, che è $\sqrt{5}$.
 :::
 
 :::teorema{#weierstrass titolo="Teorema di Weierstrass"}
@@ -168,5 +180,8 @@ Sia $f$ continua sull'intervallo chiuso e limitato $[a, b]$. Allora $f$ ha massi
 $$
 f(x_1) \leq f(x) \leq f(x_2) \qquad \text{per ogni } x \in [a, b] .
 $$
-Le ipotesi sono tutte necessarie. Su un intervallo aperto il massimo può mancare: $f(x) = x$ su $(0, 1)$ si avvicina a $1$ senza raggiungerlo. Senza continuità può mancare anche su un intervallo chiuso. Il teorema garantisce che un profitto continuo, su un intervallo di produzione $[0, K]$ limitato dalla capacità $K$, ha un valore massimo; dove si trova lo dicono le derivate, nell'argomento sullo studio di funzione e l'ottimizzazione. Anche questo teorema si dimostra con la completezza dei numeri reali.
+Nessuna delle ipotesi si può togliere. Su un intervallo aperto il massimo può non esistere; per esempio $f(x) = x$ su $(0, 1)$ assume valori vicini a $1$ quanto si vuole, ma mai il valore $1$. Senza la continuità il massimo può non esistere anche su un intervallo chiuso, come per la funzione che vale $x$ per $0 \leq x < 1$ e $0$ in $x = 1$. Il teorema garantisce che il massimo e il minimo esistono, e il modo di trovarli con le derivate è trattato nell'argomento sullo studio di funzione e l'ottimizzazione. Anche questo teorema si dimostra con la completezza dei numeri reali.
+
+::grafico{f="x+0*sqrt(x*(1-x))" punti="0,0,vuoto;1,1,vuoto" segmenti="0,1,1,1;1,0,1,1" xmin=-1 xmax=2 ymin=-1 ymax=2 legenda="y = x" titolo="Su $(0, 1)$ la funzione $f(x) = x$ assume valori vicini a $1$ quanto si vuole, ma non il valore $1$, quindi non ha massimo; non ha nemmeno minimo"}
+
 :::

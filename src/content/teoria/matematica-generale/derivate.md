@@ -31,7 +31,9 @@ Quando $h$ tende a $0$ il secondo punto della secante si avvicina al primo, e la
 ::::teorema{#derivabile-continua titolo="Derivabilità e continuità"}
 Se $f$ è derivabile in $x_0$, allora $f$ è continua in $x_0$.
 
-Il viceversa è falso: $f(x) = |x|$ è continua in $0$, ma il rapporto incrementale $\dfrac{|h|}{h}$ vale $1$ per $h > 0$ e $-1$ per $h < 0$, quindi non ha limite e la funzione non è derivabile in $0$. Nel grafico il punto $(0, 0)$ è un **punto angoloso**, in cui le pendenze da destra e da sinistra sono diverse.
+Il viceversa è falso. Per esempio $f(x) = |x|$ è continua in $0$, ma il rapporto incrementale $\dfrac{|h|}{h}$ vale $1$ per $h > 0$ e $-1$ per $h < 0$, quindi non ha limite e la funzione non è derivabile in $0$. Nel grafico il punto $(0, 0)$ è un **punto angoloso**, in cui le pendenze da destra e da sinistra sono diverse.
+
+::grafico{f="abs(x)" punti="0,0,pieno" xmin=-3 xmax=3 ymin=-1 ymax=3 uguale=1 titolo="Il grafico di $|x|$ ha pendenza $-1$ a sinistra di $0$ e pendenza $1$ a destra, quindi in $(0, 0)$ ha un punto angoloso e la funzione non è derivabile in $0$"}
 
 :::dimostrazione
 Si scrive la differenza $f(x_0 + h) - f(x_0)$ come prodotto del rapporto incrementale per $h$:
@@ -65,7 +67,7 @@ e per il logaritmo, con $x > 0$,
 $$
 \frac{\ln(x + h) - \ln x}{h} = \frac{1}{x} \cdot \frac{\ln\left( 1 + \dfrac{h}{x} \right)}{\dfrac{h}{x}} \to \frac{1}{x} .
 $$
-La formula delle potenze comprende le radici e i reciproci: $\left( \sqrt{x} \right)' = \left( x^{\frac{1}{2}} \right)' = \dfrac{1}{2\sqrt{x}}$ e $\left( \dfrac{1}{x} \right)' = \left( x^{-1} \right)' = -\dfrac{1}{x^2}$. La funzione $\sqrt{x}$ non è derivabile in $0$, dove la formula perde significato.
+La formula delle potenze comprende le radici e i reciproci: $\left( \sqrt{x} \right)' = \left( x^{\frac{1}{2}} \right)' = \dfrac{1}{2\sqrt{x}}$ e $\left( \dfrac{1}{x} \right)' = \left( x^{-1} \right)' = -\dfrac{1}{x^2}$. La funzione $\sqrt{x}$ non è derivabile in $0$, dove $\dfrac{1}{2\sqrt{x}}$ non è definita.
 :::
 
 ## Regole di derivazione
@@ -78,7 +80,7 @@ Siano $f$ e $g$ derivabili in $x$ e $k$ un numero reale. Allora
 - **regola del quoziente**: $\left( \dfrac{f}{g} \right)' = \dfrac{f' g - f g'}{g^2}$, dove $g(x) \neq 0$;
 - **regola della funzione composta**: se $f$ è derivabile in $g(x)$, allora $\big( f(g(x)) \big)' = f'(g(x)) \cdot g'(x)$.
 
-La regola della composta dice che si deriva la funzione esterna, calcolata nella funzione interna, e si moltiplica per la derivata della funzione interna. Per esempio
+Per la regola della composta si deriva la funzione esterna, calcolata nella funzione interna, e si moltiplica per la derivata della funzione interna. Per esempio
 $$
 \left( x^2 e^{x} \right)' = 2x\,e^{x} + x^2 e^{x},
 \qquad
@@ -111,11 +113,13 @@ Siano $C(q)$, $R(q)$ e $\pi(q) = R(q) - C(q)$ il costo, il ricavo e il profitto 
 $$
 C(q + \Delta q) - C(q) \approx C'(q)\,\Delta q ;
 $$
-con $\Delta q = 1$ il costo marginale è circa il costo di produrre un'unità in più. Per $C(q) = 1000 + 20q + 0{,}01\,q^2$ si ha $C'(q) = 20 + 0{,}02\,q$, quindi $C'(100) = 22$ euro, mentre il costo effettivo della centunesima unità è $C(101) - C(100) = 22{,}01$ euro. Con la domanda inversa $p = 100 - 0{,}5\,q$ il ricavo è $R(q) = 100q - 0{,}5\,q^2$ e il ricavo marginale è $R'(q) = 100 - q$: a $q = 60$ un'unità in più porta circa $40$ euro, meno del prezzo $70$, perché per venderla si deve abbassare il prezzo di tutte le unità.
+con $\Delta q = 1$ il costo marginale è circa il costo di produrre un'unità in più. Per $C(q) = 1000 + 20q + 0{,}01\,q^2$ si ha $C'(q) = 20 + 0{,}02\,q$, quindi $C'(100) = 22$ euro, mentre il costo effettivo della centunesima unità è $C(101) - C(100) = 22{,}01$ euro. Con la domanda inversa $p = 100 - 0{,}5\,q$ il ricavo è $R(q) = 100q - 0{,}5\,q^2$ e il ricavo marginale è $R'(q) = 100 - q$, quindi a $q = 60$ un'unità in più porta circa $40$ euro, meno del prezzo $70$, perché per venderla si deve abbassare il prezzo di tutte le unità.
+
+::grafico{f="1000+20*x+0.01*x^2+0*sqrt(x);22*x+900+0*sqrt(x)" punti="100,3100,pieno" segmenti="100,0,100,3100" xmin=-40 xmax=360 ymin=-1000 ymax=9000 nomi="q,C" legenda="C(q) = 1000 + 20q + 0{,}01\,q^2;y = 22q + 900" titolo="Il costo marginale $C'(100) = 22$ è la pendenza della tangente al grafico del costo nel punto $(100, 3100)$"}
 :::
 
 :::osservazione{#marginale-e-medio titolo="Costo marginale e costo medio"}
-Il costo medio $\bar{C}(q) = \dfrac{C(q)}{q}$ e il costo marginale sono grandezze diverse: il primo è il costo per unità di tutta la produzione, il secondo il costo dell'unità aggiuntiva. Per la regola del quoziente
+Il costo medio $\bar{C}(q) = \dfrac{C(q)}{q}$ e il costo marginale sono grandezze diverse. Il primo è il costo per unità di tutta la produzione, il secondo il costo dell'unità aggiuntiva. Per la regola del quoziente
 $$
 \bar{C}'(q) = \frac{C'(q)\,q - C(q)}{q^2} = \frac{1}{q} \left( C'(q) - \bar{C}(q) \right) ,
 $$
@@ -129,17 +133,17 @@ Sia $f$ derivabile con $f(x) \neq 0$. L'**elasticità** di $f$ nel punto $x$ è
 $$
 \varepsilon_f(x) = \frac{x}{f(x)}\,f'(x) .
 $$
-Per una variazione piccola $\Delta x$ della variabile, $\dfrac{\Delta f}{f} \approx \varepsilon_f(x)\,\dfrac{\Delta x}{x}$, perché $\Delta f \approx f'(x)\,\Delta x$: l'elasticità è circa la variazione percentuale di $f$ provocata da una variazione dell'$1\%$ della variabile, ed è un numero puro, che non dipende dalle unità di misura. Per una funzione di domanda $q(p)$ l'**elasticità della domanda** rispetto al prezzo, $\varepsilon(p) = \dfrac{p}{q(p)}\,q'(p)$, è di norma negativa, e si dice che la domanda è
+Per una variazione piccola $\Delta x$ della variabile, $\dfrac{\Delta f}{f} \approx \varepsilon_f(x)\,\dfrac{\Delta x}{x}$, perché $\Delta f \approx f'(x)\,\Delta x$; quindi l'elasticità è circa la variazione percentuale di $f$ provocata da una variazione dell'$1\%$ della variabile, ed è un numero puro, che non dipende dalle unità di misura. Per una funzione di domanda $q(p)$ l'**elasticità della domanda** rispetto al prezzo, $\varepsilon(p) = \dfrac{p}{q(p)}\,q'(p)$, è di norma negativa, e si dice che la domanda è
 
-- **rigida** (anelastica) se $|\varepsilon| < 1$: la quantità varia in percentuale meno del prezzo;
-- **elastica** se $|\varepsilon| > 1$: la quantità varia in percentuale più del prezzo;
+- **rigida** (anelastica) se $|\varepsilon| < 1$, cioè la quantità varia in percentuale meno del prezzo;
+- **elastica** se $|\varepsilon| > 1$, cioè la quantità varia in percentuale più del prezzo;
 - **a elasticità unitaria** se $|\varepsilon| = 1$.
 
 Per la domanda $q(p) = 200 - 4p$ si ha $\varepsilon(p) = \dfrac{-4p}{200 - 4p}$: al prezzo $20$ vale $-\dfrac{2}{3}$ e la domanda è rigida, al prezzo $30$ vale $-\dfrac{3}{2}$ e la domanda è elastica, al prezzo $25$ l'elasticità è unitaria.
 :::
 
 ::::teorema{#elasticita-e-ricavo titolo="Elasticità e ricavo"}
-Sia $q(p)$ una domanda derivabile e $R(p) = p\,q(p)$ il ricavo in funzione del prezzo. Allora
+Sia $q(p)$ una domanda derivabile, con $q(p) > 0$, e sia $R(p) = p\,q(p)$ il ricavo in funzione del prezzo. Allora
 $$
 R'(p) = q(p)\,\big( 1 + \varepsilon(p) \big) .
 $$
@@ -161,7 +165,9 @@ Sia $f$ definita in un intervallo $I$ e sia $x_0$ un punto interno a $I$ in cui 
 $$
 f'(x_0) = 0 .
 $$
-I punti in cui la derivata si annulla si chiamano **punti stazionari**: nei punti interni i massimi e i minimi di una funzione derivabile vanno cercati tra di essi. La condizione è *necessaria* ma *non sufficiente*: $f(x) = x^3$ ha $f'(0) = 0$, ma in $0$ non ha né massimo né minimo.
+I punti in cui la derivata si annulla si chiamano **punti stazionari**; per il teorema, i massimi e i minimi locali interni di una funzione derivabile vanno cercati tra di essi. La condizione è *necessaria* ma *non sufficiente*; per esempio $f(x) = x^3$ ha $f'(0) = 0$, ma in $0$ non ha né massimo né minimo.
+
+::grafico{f="x^3" punti="0,0,pieno" xmin=-2 xmax=2 ymin=-4 ymax=4 titolo="La funzione $x^3$ ha tangente orizzontale in $0$, perché $f'(0) = 0$, ma è crescente, quindi $0$ non è un punto di massimo né di minimo"}
 
 :::dimostrazione
 Si suppone che $x_0$ sia un punto di massimo locale; il caso del minimo è analogo. Per $h$ piccolo si ha $f(x_0 + h) - f(x_0) \leq 0$. Per $h > 0$ il rapporto incrementale è quindi $\leq 0$, e il suo limite destro, che è $f'(x_0)$, è $\leq 0$. Per $h < 0$ il rapporto incrementale è $\geq 0$, perché numeratore e denominatore sono entrambi non positivi, e il suo limite sinistro, ancora $f'(x_0)$, è $\geq 0$. Le due disuguaglianze insieme danno $f'(x_0) = 0$.
@@ -174,7 +180,11 @@ Sia $f$ continua su $[a, b]$ e derivabile in $(a, b)$.
 - **Teorema di Lagrange**: esiste $c \in (a, b)$ tale che $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 - **Teorema di Rolle**: se inoltre $f(a) = f(b)$, esiste $c \in (a, b)$ tale che $f'(c) = 0$.
 
-Il teorema di Lagrange dice che in almeno un punto la pendenza della tangente è uguale alla pendenza media sull'intervallo, cioè a quella della secante per gli estremi; il teorema di Rolle è il caso in cui la secante è orizzontale. Rolle segue da Weierstrass e Fermat: la funzione ha massimo e minimo su $[a, b]$, e se non sono entrambi agli estremi uno dei due è in un punto interno, dove la derivata si annulla; se sono entrambi agli estremi, la funzione è costante. Per $f(x) = x^3$ su $[0, 2]$ la pendenza media è $\dfrac{8 - 0}{2} = 4$, e $3c^2 = 4$ dà $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
+Il teorema di Lagrange dice che in almeno un punto la pendenza della tangente è uguale alla pendenza media sull'intervallo, cioè a quella della secante per gli estremi; il teorema di Rolle è il caso in cui la secante è orizzontale. Rolle segue da Weierstrass e Fermat. Per il teorema di Weierstrass la funzione ha massimo e minimo su $[a, b]$, e se non sono entrambi agli estremi uno dei due è in un punto interno, dove la derivata si annulla; se sono entrambi agli estremi, poiché $f(a) = f(b)$ il massimo e il minimo coincidono, quindi la funzione è costante e la sua derivata è nulla in ogni punto interno. Il teorema di Lagrange si ottiene applicando quello di Rolle alla differenza tra $f$ e la retta secante per gli estremi. Per $f(x) = x^3$ su $[0, 2]$ la pendenza media è $\dfrac{8 - 0}{2} = 4$, e $3c^2 = 4$ dà $c = \dfrac{2}{\sqrt{3}} \approx 1{,}15$.
+
+::grafico{f="x^3;4*x-3.0792" segmenti="0,0,2,8" punti="0,0,pieno;2,8,pieno;1.1547,1.5396,pieno" xmin=-1 xmax=3 ymin=-2 ymax=10 legenda="y = x^3;y = 4x - \dfrac{16}{3\sqrt{3}}" titolo="Per $x^3$ su $[0, 2]$ la secante tratteggiata per $(0, 0)$ e $(2, 8)$ ha pendenza $4$; la tangente in $c = \dfrac{2}{\sqrt{3}}$ ha la stessa pendenza ed è parallela alla secante"}
+
+::grafico{f="x*(x-3)^2" segmenti="-0.5,4,2.5,4" punti="0,0,pieno;3,0,pieno;1,4,pieno" xmin=-1 xmax=4 ymin=-1 ymax=6 titolo="La funzione $x\,(x - 3)^2$ vale $0$ in $0$ e in $3$; per il teorema di Rolle ha un punto interno con tangente orizzontale, $c = 1$, dove vale $4$"}
 :::
 
 :::teorema{#monotonia-e-derivata titolo="Segno della derivata e monotonia"}
@@ -184,7 +194,9 @@ Sia $f$ derivabile in un intervallo $I$.
 - Se $f'(x) < 0$ per ogni $x \in I$, allora $f$ è decrescente su $I$.
 - Se $f'(x) = 0$ per ogni $x \in I$, allora $f$ è costante su $I$.
 
-Per due punti $x_1 < x_2$ di $I$, il teorema di Lagrange applicato a $[x_1, x_2]$ dà un punto $c$ con $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1)$; il segno della differenza è quindi il segno di $f'(c)$. È il criterio con cui nello studio di funzione si trovano gli intervalli di crescita e decrescita. L'ipotesi che $I$ sia un intervallo serve: $\dfrac{1}{x}$ ha derivata negativa sul suo dominio, ma non è decrescente su tutto il dominio, perché $\dfrac{1}{-1} < \dfrac{1}{1}$.
+Per due punti $x_1 < x_2$ di $I$, il teorema di Lagrange applicato a $[x_1, x_2]$ dà un punto $c$ con $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1)$; il segno della differenza è quindi il segno di $f'(c)$. È il criterio con cui nello studio di funzione si trovano gli intervalli di crescita e decrescita. L'ipotesi che $I$ sia un intervallo non si può omettere. Per esempio $\dfrac{1}{x}$ ha derivata negativa sul suo dominio, ma non è decrescente su tutto il dominio, perché $\dfrac{1}{-1} < \dfrac{1}{1}$.
+
+::grafico{f="x^3-3*x;3*x^2-3" punti="-1,2,pieno;1,-2,pieno" segmenti="-1,0,-1,2;1,0,1,-2" xmin=-3 xmax=3 ymin=-4 ymax=6 legenda="y = x^3 - 3x;y = 3x^2 - 3" titolo="La derivata $3x^2 - 3$ è positiva per $x < -1$ e per $x > 1$, dove $x^3 - 3x$ cresce, ed è negativa in $(-1, 1)$, dove $x^3 - 3x$ decresce"}
 :::
 
 ## Regola di de l'Hôpital
@@ -194,7 +206,7 @@ Siano $f$ e $g$ derivabili vicino a $x_0$, escluso al più $x_0$, con $g'(x) \ne
 $$
 \lim_{x \to x_0} \frac{f(x)}{g(x)} = \lim_{x \to x_0} \frac{f'(x)}{g'(x)} .
 $$
-La regola vale anche per $x_0 = \pm\infty$ e per i limiti destro e sinistro. Si deriva il numeratore e il denominatore *separatamente*, non il quoziente. Si può applicare più volte, controllando ogni volta che la forma sia ancora indeterminata:
+La regola vale anche per $x_0 = \pm\infty$ e per i limiti destro e sinistro. Si derivano il numeratore e il denominatore *separatamente*, non il quoziente. Si può applicare più volte, controllando ogni volta che la forma sia ancora indeterminata:
 $$
 \lim_{x \to 0} \frac{e^{x} - 1 - x}{x^2} = \lim_{x \to 0} \frac{e^{x} - 1}{2x} = \lim_{x \to 0} \frac{e^{x}}{2} = \frac{1}{2},
 \qquad
@@ -210,5 +222,7 @@ Sia $f$ derivabile in $x_0$. Per $h$ piccolo
 $$
 f(x_0 + h) \approx f(x_0) + f'(x_0)\,h ,
 $$
-e l'errore commesso, diviso per $h$, tende a $0$ quando $h \to 0$. L'approssimazione sostituisce la funzione con la sua retta tangente vicino a $x_0$. Il termine $f'(x_0)\,h$ si chiama **differenziale** di $f$ in $x_0$. Per esempio $\sqrt{4{,}1} \approx \sqrt{4} + \dfrac{1}{2\sqrt{4}} \cdot 0{,}1 = 2{,}025$, contro il valore $2{,}0248\ldots$; per il costo $C(q) = 1000 + 20q + 0{,}01\,q^2$ si ha $C(102) \approx C(100) + C'(100) \cdot 2 = 3100 + 44 = 3144$ euro, contro il valore esatto $3144{,}04$. L'errore è il termine che l'approssimazione trascura: per $C$ vale $0{,}01 \cdot 2^2 = 0{,}04$.
+e l'errore commesso, diviso per $h$, tende a $0$ quando $h \to 0$. Vicino a $x_0$ si sostituisce così la funzione con la sua retta tangente. Il termine $f'(x_0)\,h$ si chiama **differenziale** di $f$ in $x_0$. Per esempio $\sqrt{4{,}1} \approx \sqrt{4} + \dfrac{1}{2\sqrt{4}} \cdot 0{,}1 = 2{,}025$, contro il valore $2{,}0248\ldots$. Per un costo $C(q)$ la stessa formula dà $C(q + \Delta q) \approx C(q) + C'(q)\,\Delta q$, che è la stima con il costo marginale.
+
+::grafico{f="sqrt(x);x/4+1" punti="4,2,pieno" xmin=-1 xmax=9 ymin=-1 ymax=4 legenda="y = \sqrt{x};y = \dfrac{x}{4} + 1" titolo="Vicino a $x_0 = 4$ il grafico di $\sqrt{x}$ e la tangente $y = \dfrac{x}{4} + 1$ sono quasi sovrapposti, perciò $\sqrt{4{,}1} \approx \dfrac{4{,}1}{4} + 1 = 2{,}025$"}
 :::
