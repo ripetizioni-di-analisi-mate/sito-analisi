@@ -18,6 +18,26 @@ Note per una nuova chat di Claude che riprende il lavoro con Carmine (aggiornate
 - Regole editoriali complete: **`GUIDA-CONTENUTI.md`** (leggerla prima di toccare un contenuto).
 - Prima di ogni commit di contenuti controllare il frontmatter YAML (elementi di lista con `{ } : [` vanno fra virgolette).
 
+## Stile di scrittura (vale per ogni testo del sito)
+- Norma completa: **`GUIDA-CONTENUTI.md`**; regole di voce: skill **"scrittura-umana-carmine"** (caricarla prima di scrivere).
+- Tono: docente universitario italiano che scrive un manuale o spiega a lezione. Frasi complete, lessico tecnico canonico (ipotesi *soddisfatta*, teorema che *si applica*), nessuna personificazione o metafora, nessuna frase a effetto o "da IA" (Immagina…, In sintesi, Ricorda, fondamentale/cruciale, "non è X ma Y", domande retoriche, lineette —).
+- Deduzioni complete: premessa, connettivo (quindi, poiché, perciò, allora), conclusione. I due punti non sostituiscono un connettivo. Una frase, un passaggio.
+- Esposizione di fatti, non consigli; niente tono prescrittivo. Negazioni rare, in un blocco `:::attenzione` con un controesempio.
+- Teoria in stile "Manuali": tutto dentro blocchi etichettati (`:::definizione`, `::::teorema` con `:::dimostrazione`, `:::esempio`, `:::osservazione`, `:::attenzione`, `:::richiamo` con sole ipotesi e tesi), niente prosa tra i blocchi. Riquadro colorato solo per teoremi e dimostrazioni. Dopo ogni definizione o teorema: a cosa serve, con un piccolo esempio.
+- Grassetto: termine definito, nome del teorema applicato, conclusione; massimo 2-3 per blocco. Corsivo: parola su cui cade l'accento logico (*necessaria*, *ogni*, *solo se*).
+- Formule: frazioni sempre in colonna (anche negli esponenti, `^{\frac{3}{2}}`); virgola decimale `{,}`; sistemi con graffa solo per condizioni da soddisfare insieme; mai "la parentesi".
+- Figure `::grafico` con assi orientati, numeri coerenti con il testo, legenda delle curve.
+
+## Scrivere una materia nuova (metodo usato per Algebra lineare, Fisica 1 e 2)
+1. Concordare con Carmine elenco e ordine degli argomenti (di solito 9-12); aggiungere la materia in `src/data/materie.ts` (colore, gruppo, argomenti, `attiva: false` finché è in scrittura), in `src/data/materie-en.ts`, in `prezzi.json` (prezzo deciso da lui) e nei nomi di `worker/admin.mjs`.
+2. Scrivere un brief per gli agenti partendo da **`istruzioni-agenti/brief-fisica.md`** (modello più completo: file da produrre, blocchi, struttura degli esercizi, notazioni comuni a tutta la materia). Per ogni argomento: teoria (6-10 sezioni `##`), 7-10 schede svolte per tipologia (2-4 esercizi ciascuna, `gratis: true` solo 1-3), 13-14 tracce con soluzione finale.
+3. Un agente per argomento in parallelo (massimo 20 agenti alla volta). Poi un agente di **verifica** per argomento (`istruzioni-agenti/brief-verifica-fisica.md`): risolve tutto da zero con sympy, controlla ipotesi, notazioni, ancore, frontmatter, figure.
+4. Figure: `node strumenti/anteprima_figure.mjs <png> <file…>` dalla radice del repository, poi guardare il PNG (regole in `istruzioni-agenti/brief-figure.md`).
+5. Controllo frontmatter: `python3 strumenti/yamlcheck.py <file…>`; build completa; poi `attiva: true` e pubblicazione.
+6. Inglese: `istruzioni-agenti/brief-traduzione.md` (un agente per argomento, file in `src/content-en/`).
+7. Paddle: creare prodotto e prezzo (una tantum, EUR, quantità massima 1) e aggiungere il codice `pri_…` in `wrangler.jsonc` come `PADDLE_PREZZO_<MATERIA>`; aggiungere la materia anche in `worker/index.mjs` (elenco prezzi in `/api/config`).
+I brief contengono il percorso `/home/claude/sito-analisi1`: sostituirlo con quello del clone usato.
+
 ## Materie online (tutte attive, con versione inglese)
 Precorso 19 €, Analisi matematica 1 29 €, Analisi matematica 2 29 €, Algebra lineare e geometria analitica 29 €, Fisica 1 32 €, Fisica 2 36 €. Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
 
