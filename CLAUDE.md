@@ -78,6 +78,17 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 ## Materie in preparazione e macro aree
 - Gruppi (macro aree apribili in home e indice): Università (con Statistica in preparazione), Superiori (Matematica e Fisica dal 1° al 5° anno), Concorsi (Matematica per concorsi). Tutte con `attiva: false` e `argomenti: []` finché non si concorda il programma.
 
+## Concorsi (29/10/2026)
+- Due materie in preparazione (`attiva: false`): Matematica per concorsi (9 argomenti) e Logica per concorsi (6). Previsto anche una pagina gratuita "Che cosa studiare per il tuo concorso".
+- Scritto il primo capitolo di prova `matematica-concorsi/proporzioni-e-percentuali` (teoria, 8 schede a quiz con opzioni A-E e "La risposta corretta è la …", 14 quesiti con "Risposta X"). In attesa del giudizio di Carmine prima di scrivere il resto.
+
+## Assistente di studio (ramo `assistente`, NON ancora su main)
+- Pulsante fisso "Assistente" sulle pagine delle materie a pagamento; la finestra sa quale riquadro/esercizio lo studente sta leggendo (si cambia toccando un altro riquadro) e lo manda a `/api/assistente` (`worker/assistente.mjs`).
+- Solo materie sbloccate; 20 messaggi al giorno per studente, 200 per il sito (variabili `ASSISTENTE_MAX_STUDENTE`, `ASSISTENTE_MAX_GIORNO`, `ASSISTENTE_MODELLO`). Conteggio nella tabella `assistente` del Durable Object.
+- Modello gratuito Workers AI (`@cf/openai/gpt-oss-120b`, riserva `@cf/google/gemma-4-26b-a4b-it`), binding `"ai"` in wrangler.jsonc. Quota gratuita Cloudflare: 10.000 neuroni al giorno per tutto l'account.
+- Le formule della pagina conservano il LaTeX in `data-tex` (plugin `src/plugins/rehype-katex-tex.mjs`, al posto di rehype-katex).
+- Nome dell'assistente da decidere con Carmine. Pubblicare solo con il suo ok, poi provare una domanda vera sul sito.
+
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
 - Scelta delle proposte del primo giro dello studente puntiglioso.
