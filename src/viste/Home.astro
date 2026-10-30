@@ -3,8 +3,6 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
-import SchedaVideocorso from '../components/SchedaVideocorso.astro';
-import { VIDEOCORSI } from '../data/videocorsi';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -26,18 +24,6 @@ const MATERIE = materieL(lingua);
     <button type="submit">{t.cerca}</button>
   </form>
   <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
-  {lingua === 'it' && (
-    <section class="vetrina-video" aria-labelledby="titolo-videocorsi">
-      <div class="vetrina-testa">
-        <h2 id="titolo-videocorsi">Videocorsi completi</h2>
-        <a href="/videocorsi">Tutti i videocorsi →</a>
-      </div>
-      <p class="vetrina-sotto">Le lezioni registrate dei corsi di Carmine, con video e PDF di ogni lezione. <strong>Con ogni videocorso le materie collegate del sito si sbloccano in automatico.</strong></p>
-      <ul class="vetrina-griglia">
-        {VIDEOCORSI.map((v) => <li><SchedaVideocorso v={v} compatta /></li>)}
-      </ul>
-    </section>
-  )}
   {gruppiL(lingua).map((g, i) => (
     <details class="gruppo" open={i === 0}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
@@ -84,14 +70,3 @@ const MATERIE = materieL(lingua);
     </details>
   ))}
 </Base>
-
-<style>
-  .vetrina-video { margin: 1.6rem 0 2rem; padding: 1.2rem 1.2rem 1.3rem; border-radius: 14px; background: linear-gradient(180deg, color-mix(in srgb, var(--accento) 7%, white), white); border: 1px solid color-mix(in srgb, var(--accento) 20%, var(--riga)); }
-  .vetrina-testa { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
-  .vetrina-testa h2 { margin: 0; }
-  .vetrina-testa a { font-family: var(--ui); font-weight: 600; font-size: 0.95rem; color: var(--accento); text-decoration: none; }
-  .vetrina-sotto { margin: 0.35rem 0 1rem; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro-2); }
-  .vetrina-sotto strong { color: #2e7d4f; }
-  .vetrina-griglia { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.8rem; }
-  @media (min-width: 44rem) { .vetrina-griglia { grid-template-columns: 1fr 1fr; } .vetrina-griglia li:first-child { grid-column: 1 / -1; } }
-</style>
