@@ -1,0 +1,22 @@
+# Verifica di argomenti di "Logica per concorsi"
+
+Repository: /home/claude/sito-analisi1. Non usare git, non lanciare la build. Modifica solo i file del tuo argomento (materia `logica-concorsi`):
+- teoria: `src/content/teoria/logica-concorsi/<slug>.md`
+- quiz svolti: `src/content/svolti/logica-concorsi/<slug>/*.md`
+- quiz da fare: `src/content/dafare/logica-concorsi/<slug>/*.md` (risposta nel blocco `:::soluzione`)
+
+Questi file sono stati scritti da un altro autore e saranno venduti a candidati dei concorsi pubblici: una risposta sbagliata, una lettera sbagliata, due opzioni entrambe corrette o un quesito che ammette due letture sono gli errori più gravi possibili. Controlla in modo indipendente, senza fidarti dei ragionamenti scritti. Leggi prima `GUIDA-CONTENUTI.md`, `istruzioni-agenti/brief-logica-concorsi.md` (le regole con cui sono stati scritti) e la skill di voce indicata lì.
+
+## Cosa fare
+1. Per OGNI quiz svolto e OGNI traccia: risolvi il problema da zero con Python (script in `/tmp/verifica-lc/<slug>/`, non nel repository), con i metodi indicati nel brief: tavole di verità con `itertools.product`; enumerazione dei modelli per i sillogismi (la conclusione deve valere in *ogni* modello delle premesse e ogni opzione sbagliata deve avere un controesempio); equazioni sulle zone per i diagrammi di Venn; enumerazione completa delle assegnazioni per deduzioni e veri/bugiardi (soluzione **unica**); `datetime` per i calendari; calcolo diretto per gli orologi. Controlla che la risposta corretta compaia **una sola volta** tra le cinque opzioni, che la lettera indicata (in "La risposta corretta è la **X**." o in "Risposta X:") sia quella giusta, che il testo dopo "Risposta X:" coincida con l'opzione X, e che nessuna opzione sbagliata sia equivalente alla risposta detta con altre parole.
+2. Testo dei quesiti: deve contenere tutte le ipotesi necessarie ("o" inclusiva o esclusiva, chi dice sempre il vero o mente sempre, anno bisestile o no, "alcuni" nel senso di "almeno uno"). Un quesito ambiguo, che ammette due letture con risposte diverse, va riscritto.
+3. Teoria: regole enunciate con le ipotesi complete, tavole di verità esatte, esempi che tornano, terminologia standard dei manuali italiani (implicazione inversa, contraria, contronominale; proposizioni contraddittorie, contrarie, subcontrarie; modus ponens e modus tollens).
+4. Stile: niente blocco `:::percorso`, niente prosa tra i blocchi; due punti mai al posto di un connettivo; nessuna personificazione o frase a effetto; frazioni in colonna; grassetto e corsivo come da guida (mai attorno a formule); mai "la parentesi". Correggi in modo puntuale, una frase alla volta, senza allungare il testo. Il tono deve essere quello del capitolo modello `src/content/teoria/matematica-concorsi/proporzioni-e-percentuali.md`.
+5. Lettere corrette: conta le lettere corrette negli svolti e nelle tracce. Se una lettera compare meno di 3 o più di 7 volte sui quiz svolti, oppure meno di 2 o più di 4 volte sulle tracce, riordina le opzioni di qualche quiz finché la distribuzione rientra, aggiornando **ogni** riferimento alle lettere (la frase finale, "Risposta X:", e i rimandi alle opzioni sbagliate nelle spiegazioni, come "L'opzione B, cioè …").
+6. Formato: ogni ancora citata nei campi `teoria:` esiste come `#id` nel file di teoria; blocchi `:::`/`::::` bilanciati; tabelle Markdown ben formate (stesso numero di colonne in ogni riga); schede 1–2 `gratis: true`, le altre senza; cinque opzioni A–E per ogni quiz; `python3 strumenti/yamlcheck.py <file…>` con 0 errori.
+7. Figure: per i `::venn` controlla che le zone colorate e gli elementi scritti corrispondano al testo; per i `::grafico` lancia `node strumenti/anteprima_figure.mjs /tmp/verifica-lc/<slug>/figure.png <file…>` dalla radice del repository e guarda il PNG. Correggi quelle sbagliate.
+8. Controlla che il file di teoria sia integro (nessun pezzo duplicato o testo di un altro argomento finito dentro per errore) e che i richiami per nome agli altri argomenti della materia siano coerenti con i titoli in `src/data/materie.ts`.
+9. Correggi direttamente ogni errore con modifiche minime. Se un quiz è irrimediabilmente sbagliato, cambia i dati e rifallo tutto, ricontrollandolo con Python.
+
+## Rapporto (breve, in italiano)
+Numero di quiz svolti e tracce verificati, distribuzione finale delle lettere, elenco degli errori trovati e corretti (file, cosa era sbagliato, correzione), frasi corrette, eventuali dubbi.
