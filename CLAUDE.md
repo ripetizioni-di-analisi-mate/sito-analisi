@@ -98,7 +98,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 
 ## Videocorsi (dal 30/10/2026)
 - Videocorsi preregistrati di Carmine (prima sul vecchio sito ripetizioni-di-analisi-matematica.it, Hostinger): dati in `src/data/videocorsi.ts` (Analisi 1 e 2 51 lezioni 499 €, Analisi 1 35 lez. 360 €, Analisi 2 16 lez. 192 €, Matematica generale 38 lez. 456 €, Algebra 8 lez. 96 €; lezioni da circa 50 min, video e PDF su Google Drive).
-- Pagine `/videocorsi` e `/videocorsi/<slug>` (solo italiano), vetrina in home, voce in cima all'indice, sezione nei prezzi, rimando nelle pagine Sblocca, informazioni a Pi.
+- Pagine `/videocorsi` e `/videocorsi/<slug>` (solo italiano), voce in cima all'indice (vetrina in home tolta su richiesta di Carmine), sezione nei prezzi, rimando nelle pagine Sblocca, informazioni a Pi.
 - Acquisto: Paddle con `customData.videocorso`; codici `PADDLE_PREZZO_VIDEO_<SLUG>` in `wrangler.jsonc`. Il webhook registra l'abilitazione `video-<slug>` e sblocca le materie in `sblocca` (Analisi 1 → analisi-1 + precorso; Analisi 1 e 2 → analisi-1, analisi-2, precorso; Algebra → algebra-lineare). La dashboard può attivare anche i videocorsi (sblocca le materie collegate).
 - Link delle cartelle Drive: variabile `VIDEOCORSI_DRIVE` (JSON slug → link) in `wrangler.jsonc`, restituiti da `/api/videocorsi` solo a chi ha comprato; l'account mostra "I tuoi videocorsi". Lo studente chiede l'accesso su Drive e Carmine approva a mano (in futuro: condivisione automatica con l'API di Drive).
 - Prezzi barrati: non mostrati (Omnibus), solo il risparmio reale del pacchetto (552 € separati). Klarna non disponibile su Paddle (metodi: carte, PayPal, Apple Pay, Google Pay e altri locali).
