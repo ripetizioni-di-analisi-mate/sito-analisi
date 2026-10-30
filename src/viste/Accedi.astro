@@ -31,13 +31,17 @@ const pref = prefisso(lingua);
           <span class="domanda-corso">Quale corso?</span>
           <label class="spunta"><input type="checkbox" name="corso" value="Analisi 1" /> Analisi 1</label>
           <label class="spunta"><input type="checkbox" name="corso" value="Analisi 2" /> Analisi 2</label>
+          <label class="spunta"><input type="checkbox" name="corso" value="Algebra lineare e geometria" /> Algebra lineare e geometria</label>
+          <label class="spunta"><input type="checkbox" name="corso" value="Matematica generale" /> Matematica generale</label>
           <label><span>Anno, numero del corso o altre informazioni <small>(facoltativo)</small></span><input type="text" name="corsonote" maxlength="80" placeholder="Per esempio: corso di marzo 2026" /></label>
         </div>
-        <label class="spunta"><input type="checkbox" name="preregistrato" id="preregistrato" /><span>Ho acquistato un corso preregistrato di Analisi 1 o Analisi 2</span></label>
+        <label class="spunta"><input type="checkbox" name="preregistrato" id="preregistrato" /><span>Ho acquistato un corso preregistrato</span></label>
         <div class="dettagli-corso" id="dettagli-preregistrato" hidden>
           <span class="domanda-corso">Quale corso preregistrato?</span>
           <label class="spunta"><input type="checkbox" name="corsopre" value="Analisi 1" /> Analisi 1</label>
           <label class="spunta"><input type="checkbox" name="corsopre" value="Analisi 2" /> Analisi 2</label>
+          <label class="spunta"><input type="checkbox" name="corsopre" value="Algebra lineare e geometria" /> Algebra lineare e geometria</label>
+          <label class="spunta"><input type="checkbox" name="corsopre" value="Matematica generale" /> Matematica generale</label>
         </div>
         <p class="nota-corso" id="nota-corso" hidden>Carmine controlla l'iscrizione e ti attiva gratis le materie collegate al corso.</p>
       </fieldset>
