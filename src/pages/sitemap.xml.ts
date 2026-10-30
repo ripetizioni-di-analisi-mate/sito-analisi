@@ -15,6 +15,7 @@ export async function GET() {
   due('/', 1.0);
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
+  due('/ripetizioni-analisi', 0.8, false);
   for (const p of ['/prezzi', '/contatti', '/privacy']) due(p, 0.3);
   for (const m of MATERIE.filter((x) => x.attiva)) {
     due(`/${m.slug}`, 0.9);

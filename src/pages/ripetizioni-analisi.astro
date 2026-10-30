@@ -1,0 +1,72 @@
+---
+// Pagina di servizio: lezioni individuali, corsi di gruppo e videocorsi con Carmine (ricerche "ripetizioni di analisi").
+// Testo approvato da Carmine il 30/10/2026. Nessun prezzo per lezione.
+import Base from '../layouts/Base.astro';
+import { SITO, assoluto } from '../lib/seo';
+
+const WHATSAPP = 'https://wa.me/393885680393';
+
+const domande: [string, string][] = [
+  ['Le lezioni sono online?', 'Sì, tutte le lezioni si svolgono online.'],
+  ['Posso seguire il corso di gruppo se ho lacune di base?', 'Sì, il corso è pensato anche per chi parte con delle lacune. Per i prerequisiti c’è anche il Precorso sul sito.'],
+  ['Devo seguire tutto il corso?', 'No, non c’è alcun vincolo: si può seguire anche solo una parte delle lezioni.'],
+  ['Come si paga il corso di gruppo?', 'Il pagamento avviene ogni cinque o sei lezioni svolte.'],
+  ['Come si prenota?', 'Si scrive su WhatsApp indicando la materia, l’università e la data dell’esame.'],
+];
+
+const schema = [
+  {
+    '@type': 'Service',
+    '@id': `${SITO}/ripetizioni-analisi#servizio`,
+    name: 'Ripetizioni di Analisi 1 e Analisi 2 online',
+    serviceType: 'Lezioni private e corsi di gruppo di Analisi matematica',
+    description: 'Lezioni individuali e corsi di gruppo online di Analisi matematica 1, Analisi matematica 2 e Matematica generale con Carmine Tornincasa.',
+    url: assoluto('/ripetizioni-analisi'),
+    provider: { '@id': `${SITO}/#carmine` },
+    areaServed: { '@type': 'Country', name: 'Italia' },
+    availableChannel: { '@type': 'ServiceChannel', serviceUrl: WHATSAPP },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: domande.map(([d, r]) => ({ '@type': 'Question', name: d, acceptedAnswer: { '@type': 'Answer', text: r } })),
+  },
+];
+---
+<Base lingua="it" titolo="Ripetizioni di Analisi 1 e Analisi 2 online" percorso={[{ titolo: 'Ripetizioni online' }]}
+  descrizione="Lezioni individuali e corsi di gruppo online di Analisi matematica 1, Analisi matematica 2 e Matematica generale con Carmine Tornincasa, con il programma costruito sulle prove d'esame del tuo corso."
+  seo={{ titolo: 'Ripetizioni di Analisi 1 e Analisi 2 online: lezioni individuali e corsi di gruppo | Ripetizioni di Analisi', soloQuestaLingua: true, schema }}>
+  <div class="ripetizioni">
+    <h1>Ripetizioni di Analisi 1 e Analisi 2 online</h1>
+    <p class="sommario">Sono Carmine Tornincasa e insegno Analisi matematica a studenti universitari da oltre 10 anni. Le lezioni si svolgono online, perciò seguo studenti di tutta Italia: finora oltre 1500, da 78 province.</p>
+
+    <h2>Lezioni individuali</h2>
+    <p>La lezione è costruita sulla preparazione dello studente e sul programma del suo corso. Di solito si parte dalle prove d’esame del docente e si lavora sugli argomenti che servono per quell’esame.</p>
+
+    <h2>Corsi di gruppo</h2>
+    <p>I corsi coprono Analisi matematica 1, Analisi matematica 2 e Matematica generale. Il programma si organizza sulle prove d’esame inviate dagli iscritti, con due o tre incontri settimanali da un’ora. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20. Le lezioni sono registrate, quindi una lezione persa si recupera con la registrazione. Per iscriversi servono nome, cognome e numero di telefono, che si usa per il gruppo WhatsApp del corso.</p>
+
+    <h2>Videocorsi</h2>
+    <p>Per chi studia con i propri tempi ci sono i <a href="/videocorsi">videocorsi preregistrati</a>: ogni lezione ha il video e il PDF.</p>
+
+    <h2>Teoria ed esercizi sul sito</h2>
+    <p>Per ogni materia il sito raccoglie la teoria con le dimostrazioni, gli esercizi svolti passo dopo passo e gli esercizi con soluzione. Le prime schede di ogni argomento sono libere: <a href="/analisi-1">Analisi matematica 1</a>, <a href="/analisi-2">Analisi matematica 2</a>, <a href="/precorso">Precorso</a>.</p>
+
+    <h2>Domande frequenti</h2>
+    <dl class="domande">
+      {domande.map(([d, r]) => (<><dt>{d}</dt><dd>{r}</dd></>))}
+    </dl>
+
+    <p class="azione"><a class="bottone-whatsapp" href={WHATSAPP} rel="noopener">Scrivimi su WhatsApp</a></p>
+    <p class="altro">Chi sono, i risultati degli studenti e le università da cui provengono: <a href="/chi-sono">pagina Chi sono</a>.</p>
+  </div>
+</Base>
+
+<style>
+  .ripetizioni { max-width: 46rem; }
+  .domande dt { font-weight: 700; margin-top: 0.9rem; }
+  .domande dd { margin: 0.2rem 0 0; }
+  .azione { margin: 1.8rem 0 1rem; }
+  .bottone-whatsapp { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.2rem; border-radius: var(--raggio); background: var(--accento); color: white; text-decoration: none; }
+  .bottone-whatsapp:hover { filter: brightness(1.08); }
+  .altro { font-family: var(--ui); font-size: 0.92rem; }
+</style>

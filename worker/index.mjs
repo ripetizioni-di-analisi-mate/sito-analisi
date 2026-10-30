@@ -566,6 +566,12 @@ export default {
       risposta = new Response(risposta.body, risposta);
       risposta.headers.set('x-robots-tag', 'noindex');
     }
+    // File di testo (llms.txt, robots.txt, sitemap.xml): senza charset i browser e alcuni robot leggono male le lettere accentate.
+    const tipoFile = risposta.headers.get('content-type') || '';
+    if (/^(text\/plain|application\/xml|text\/xml)/.test(tipoFile) && !/charset/i.test(tipoFile)) {
+      risposta = new Response(risposta.body, risposta);
+      risposta.headers.set('content-type', `${tipoFile}; charset=utf-8`);
+    }
     const html = (risposta.headers.get('content-type') || '').includes('text/html');
 
     // Pagine: mai copie riusate, né dal browser né da cache intermedie.
