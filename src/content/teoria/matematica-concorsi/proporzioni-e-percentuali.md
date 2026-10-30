@@ -44,7 +44,7 @@ La proporzione dice che $\dfrac{a}{b} = \dfrac{c}{d}$. Moltiplicando i due membr
 ::::
 
 :::teorema{#proprieta-del-comporre titolo="Proprietà del comporre"}
-Se $a : b = c : d$, allora
+Se $a : b = c : d$, con $a$ e $c$ diversi da zero, allora
 $$
 (a + b) : a = (c + d) : c
 \qquad\text{e}\qquad
@@ -99,7 +99,7 @@ $$
 \qquad
 \frac{1}{6} = \frac{1}{6},
 $$
-quindi la ripartizione è in parti direttamente proporzionali a $3$, $2$ e $1$. Poiché $\dfrac{600}{6} = 100$, le parti sono $300$, $200$ e $100$ euro: la parte maggiore va a chi corrisponde il numero minore.
+quindi la ripartizione è in parti direttamente proporzionali a $3$, $2$ e $1$. Poiché $\dfrac{600}{6} = 100$, le parti sono $300$, $200$ e $100$ euro, e la parte maggiore va a chi corrisponde il numero minore.
 :::
 
 ## Percentuali
@@ -162,7 +162,7 @@ Il calcolo inverso, detto **scorporo**, parte dal prezzo con IVA e trova l'impon
 ## Variazioni percentuali
 
 :::definizione{#variazione-percentuale titolo="Variazione percentuale"}
-Quando una grandezza passa dal valore $V_1$ al valore $V_2$, la sua **variazione percentuale** è
+Quando una grandezza passa dal valore $V_1 > 0$ al valore $V_2$, la sua **variazione percentuale** è
 $$
 \frac{V_2 - V_1}{V_1} \cdot 100 .
 $$
