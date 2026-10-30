@@ -165,9 +165,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
       <a href={link(lingua, '/privacy')}>{t.privacy}</a>
+      <a href={link(lingua, '/termini')}>{t.termini}</a>
       <a href={versoAltra} hreflang={altra} lang={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
     </nav>
-    <span class="pie-copyright">© Carmine Tornincasa</span>
+    <span class="pie-copyright">{t.copyright}</span>
   </footer>
 
   <div class="bottoni-fissi">

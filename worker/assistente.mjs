@@ -88,6 +88,7 @@ function infoSito(aPagamento, prezzi, env = {}) {
 - Anteprima gratuita, senza account: una parte della teoria di ogni argomento, le prime ${SCHEDE_LIBERE} schede di esercizi svolti e una parte degli esercizi da fare.
 - Acquisto: si apre la pagina "Sblocca" della materia (https://ripetizionidianalisi.com/<materia>/sblocca), si crea un account gratuito con email e password e si paga. È un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. Il pagamento è gestito da Paddle, che fa da rivenditore ufficiale e invia la ricevuta; si paga con carta e con gli altri metodi mostrati nella finestra di pagamento. Dopo il pagamento la materia si sblocca subito nell'account.
 - Un account si può usare al massimo su ${MAX_DISPOSITIVI} dispositivi.
+- L'account e il materiale sono per uso personale di studio: i contenuti sono protetti dal diritto d'autore ed è vietato condividerli o diffonderli (gruppi, Drive, social, PDF, foto dello schermo) senza l'autorizzazione scritta di Carmine. Termini d'uso: https://ripetizionidianalisi.com/termini.
 - Elenco dei prezzi: https://ripetizionidianalisi.com/prezzi. Guida gratuita per i concorsi: https://ripetizionidianalisi.com/concorsi.
 - Per lezioni private, problemi con l'account o con un pagamento, rimborsi e tutto ciò che non è scritto qui: scrivere a Carmine su WhatsApp dal pulsante verde in basso a destra o dalla pagina Contatti (https://ripetizionidianalisi.com/contatti).
 Materie disponibili:

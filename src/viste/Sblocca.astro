@@ -24,6 +24,7 @@ const localePaddle = lingua;
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
     <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>
+    <p class="nota-termini" set:html={t.notaTermini} />
   </div>
 
   <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle }}>
