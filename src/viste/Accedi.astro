@@ -37,6 +37,9 @@ const pref = prefisso(lingua);
     )}
     <p class="esito-modulo" id="esito" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia">{t.accedi}</button>
+    <p class="nota-privacy" id="nota-privacy" hidden>{lingua === 'it'
+      ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
+      : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
   <p class="nota-accesso" id="nota-password">{t.passwordDimenticata} <a href={link(lingua, '/contatti')}>{t.contatti}</a> {t.eTeNeImposto}</p>
 
@@ -66,6 +69,7 @@ const pref = prefisso(lingua);
         conferma.hidden = s !== 'registrati';
         campoNome.hidden = s !== 'registrati';
         if (campoCorso) campoCorso.hidden = s !== 'registrati';
+        document.getElementById('nota-privacy').hidden = s !== 'registrati';
         invia.textContent = s === 'registrati' ? js.creaAccount : js.accedi;
         modulo.password.autocomplete = s === 'registrati' ? 'new-password' : 'current-password';
         esito.textContent = ''; esito.className = 'esito-modulo';

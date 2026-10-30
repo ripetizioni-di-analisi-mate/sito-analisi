@@ -482,6 +482,8 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .modulo label small { font-weight: 400; color: var(--inchiostro-2); }
 .modulo .domanda-corso { font-weight: 600; font-size: 0.95rem; }
 .modulo .nota-corso { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+.modulo .nota-privacy { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+.modulo .nota-privacy[hidden] { display: none; }
 .bottone-primario { font: inherit; font-family: var(--ui); font-weight: 600; background: var(--accento); color: white; border: 0; border-radius: 999px; padding: 0.7rem 1.6rem; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
 .bottone-primario:hover { filter: brightness(1.08); }
 .bottone-secondario { font: inherit; font-family: var(--ui); background: none; color: var(--inchiostro); border: 1px solid var(--riga); border-radius: 999px; padding: 0.55rem 1.2rem; cursor: pointer; }

@@ -1,24 +1,38 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base titolo="Privacy" percorso={[{ titolo: 'Privacy' }]} descrizione="How the Ripetizioni di Analisi website processes personal data." lingua="en" seo={{ soloQuestaLingua: false }}>
-  <p class="sopratitolo">Notice</p>
-  <h1>Privacy</h1>
-  <p class="sommario">Which data this website processes, why, and what your rights are. In short: the minimum needed to run accounts, no profiling. This is a translation; the Italian version prevails.</p>
+<Base titolo="Privacy policy" percorso={[{ titolo: 'Privacy policy' }]} descrizione="How the Ripetizioni di Analisi website processes personal data: which data it collects, what they are used for and what your rights are." lingua="en" seo={{ soloQuestaLingua: false }}>
+  <p class="sopratitolo">Privacy</p>
+  <h1>Privacy policy</h1>
+  <p class="sommario">Which data the website collects, what they are used for and what your rights are. Last updated: 30 October 2026. This is a translation; the Italian version prevails.</p>
+
+  <h2>In short</h2>
+  <ul>
+    <li>The website collects only the data needed to run accounts, purchases and support.</li>
+    <li>Your data are <strong>not sold or passed on to third parties</strong>, and are not used for advertising, newsletters or profiling.</li>
+    <li>The only external services are the essential technical providers: <strong>Cloudflare</strong>, which hosts the website and the data, and <strong>Paddle</strong>, which handles payments. Each processes the data only to provide its own service.</li>
+    <li>Your password is stored in hashed form and cannot be read by anyone, not even by the controller.</li>
+    <li>You can ask at any time to see, correct or delete your data.</li>
+  </ul>
 
   <h2>Data controller</h2>
-  <p>Carmine Tornincasa — contact: <a href="mailto:carminetornincasa98@gmail.com">carminetornincasa98@gmail.com</a>.</p>
+  <p>Carmine Tornincasa, who can be contacted at <a href="mailto:carminetornincasa98@gmail.com">carminetornincasa98@gmail.com</a>.</p>
 
   <h2>Which data are processed</h2>
-  <p><strong>Browsing.</strong> The site counts page visits in aggregate form (day and section visited), without tracking cookies, without profiling and without recording IP addresses or the identity of visitors.</p>
-  <p><strong>Purchases.</strong> Payments are handled by Paddle, acting as merchant of record: payment data (card, billing address) are collected and processed by Paddle according to its <a href="https://www.paddle.com/legal/privacy" rel="noopener">privacy policy</a>. This site receives from Paddle only the confirmation of the purchase with the account email, the subject and the amount, in order to unlock the subject and keep the sales record.</p>
-  <p><strong>Account.</strong> For those who create an account, the site stores the email address, the password in hashed form (not readable, not even by the controller), the unlocked subjects, the registration date and the date of the last login. These data are used to run the account and to provide support.</p>
+  <p><strong>Account.</strong> For those who create an account, the website stores the name, the email address, the password in hashed form, the unlocked subjects, the registration date and the date of the last login. It also stores the browser and system type of the connected devices (at most two), the channel of the first visit (for example Instagram or Google) and, if you state it when signing up, the course you attended or are attending with Carmine. These data are used to run the account, to limit use to two devices, to unlock free subjects for course students and to provide support.</p>
+  <p><strong>Purchases.</strong> Payments are handled by Paddle, acting as merchant of record. Payment data, such as the card and billing address, are collected and processed by Paddle according to its <a href="https://www.paddle.com/legal/privacy" rel="noopener">privacy policy</a> and do not pass through the website. The website receives from Paddle only the confirmation of the purchase with the account email, the subject and the amount, which are used to unlock the subject and to keep the sales record.</p>
+  <p><strong>Browsing.</strong> The website counts page visits in aggregate form (day and section visited). To count the distinct visitors of each day it computes a non-reversible fingerprint from the date, the network address and the browser type; the fingerprint does not identify the person, and the network address is not stored. Fingerprints are deleted after 200 days.</p>
+  <p><strong>Pi assistant.</strong> Those who use the assistant send their question, the text of the part of the page they are reading and, optionally, a photo of an exercise. This content is processed by Cloudflare's artificial intelligence service (Workers AI) only to generate the answer. The website does not keep conversations or photos: it only keeps the number of messages sent each day, to apply the daily limit. For those who use Pi without an account, the count uses a non-reversible fingerprint of the network address and the browser. The conversation is saved for 24 hours only in your browser and never reaches the website.</p>
+  <p><strong>Contacts.</strong> If you write to Carmine on WhatsApp or by email, the message is used only to reply to you.</p>
+
+  <h2>Where data are stored and how they are protected</h2>
+  <p>Account and purchase data are stored on the servers of Cloudflare, which hosts the website. Communications with the website are encrypted (HTTPS), the password is stored only in hashed form, and only the controller can access student data, with a private password.</p>
 
   <h2>Cookies</h2>
-  <p>The site uses only technical cookies: <code>sessione</code> keeps you logged in to your account on the device. There are no profiling or third-party cookies for browsing. Some reading preferences (for example whether the contents panel is open or closed) are stored only on the device and never leave the browser. During a purchase, Paddle may set the technical cookies needed for the payment.</p>
+  <p>The website uses only technical cookies: <code>sessione</code> keeps you logged in, <code>dispositivo</code> recognises the device connected to the account, <code>fonte</code> remembers the channel of the first visit for 90 days. There are no profiling cookies and no third-party cookies for browsing. Some reading preferences, such as whether the contents panel is open or closed, are stored only on the device and never leave the browser. During a purchase, Paddle may set the technical cookies needed for the payment.</p>
 
   <h2>Legal basis and retention</h2>
-  <p>The processing of purchase and access data is based on the performance of a contract (Art. 6(1)(b) GDPR); aggregate statistics are based on the legitimate interest in running the site. Access data are kept for as long as the service is active, so that access can be restored to those who purchased it.</p>
+  <p>The processing of account, purchase and support data is based on the performance of a contract (Art. 6(1)(b) GDPR); aggregate statistics are based on the legitimate interest in running the website. Account data are kept for as long as the service is active, so that access can be restored to those who purchased a subject, or until you ask for their deletion.</p>
 
   <h2>Your rights</h2>
   <p>You can at any time request access to, rectification or erasure of your data by writing to the controller's address. You also have the right to lodge a complaint with the Italian Data Protection Authority (Garante per la protezione dei dati personali).</p>

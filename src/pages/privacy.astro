@@ -1,27 +1,39 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base lingua="it" titolo="Privacy" percorso={[{ titolo: 'Privacy' }]} descrizione="Informativa sul trattamento dei dati personali del sito Ripetizioni di Analisi.">
-  <p class="sopratitolo">Informativa</p>
-  <h1>Privacy</h1>
-  <p class="sommario">Quali dati tratta questo sito, perché, e quali diritti hai. In breve: il minimo indispensabile per far funzionare gli accessi, nessuna profilazione.</p>
+<Base lingua="it" titolo="Informativa sulla privacy" percorso={[{ titolo: 'Informativa sulla privacy' }]} descrizione="Informativa sul trattamento dei dati personali del sito Ripetizioni di Analisi: quali dati raccoglie, a che cosa servono e quali diritti hai.">
+  <p class="sopratitolo">Privacy</p>
+  <h1>Informativa sulla privacy</h1>
+  <p class="sommario">Quali dati raccoglie il sito, a che cosa servono e quali diritti hai. Ultimo aggiornamento: 30 ottobre 2026.</p>
+
+  <h2>In breve</h2>
+  <ul>
+    <li>Il sito raccoglie solo i dati che servono a far funzionare l'account, gli acquisti e l'assistenza.</li>
+    <li>I tuoi dati <strong>non vengono venduti né ceduti a terzi</strong>, e non sono usati per pubblicità, newsletter o profilazione.</li>
+    <li>Gli unici servizi esterni sono i fornitori tecnici indispensabili: <strong>Cloudflare</strong>, che ospita il sito e i dati, e <strong>Paddle</strong>, che gestisce i pagamenti. Ciascuno tratta i dati solo per fornire il proprio servizio.</li>
+    <li>La password è salvata in forma cifrata e non è leggibile da nessuno, nemmeno dal titolare.</li>
+    <li>Puoi chiedere in ogni momento di vedere, correggere o cancellare i tuoi dati.</li>
+  </ul>
 
   <h2>Titolare del trattamento</h2>
-  <p>Carmine Tornincasa — contatto: <a href="mailto:carminetornincasa98@gmail.com">carminetornincasa98@gmail.com</a>.</p>
+  <p>Carmine Tornincasa, contattabile all'indirizzo <a href="mailto:carminetornincasa98@gmail.com">carminetornincasa98@gmail.com</a>.</p>
 
   <h2>Quali dati vengono trattati</h2>
-  <p><strong>Navigazione.</strong> Il sito conta le visite alle pagine in forma aggregata (giorno e sezione visitata), senza cookie di tracciamento, senza profilazione e senza registrare indirizzi IP o identità dei visitatori.</p>
-  <p><strong>Acquisti.</strong> I pagamenti sono gestiti da Paddle, che agisce come rivenditore autorizzato (merchant of record): i dati di pagamento (carta, indirizzo di fatturazione) sono raccolti e trattati da Paddle secondo la sua <a href="https://www.paddle.com/legal/privacy" rel="noopener">informativa privacy</a>. Questo sito riceve da Paddle soltanto la conferma dell'acquisto con l'email dell'account, la materia e l'importo, per sbloccare la materia e tenere il registro delle vendite.</p>
-  <p><strong>Account.</strong> Per chi crea un account, il sito conserva l'indirizzo email, la password in forma cifrata (non leggibile, nemmeno dal titolare), le materie sbloccate, la data di iscrizione e quella dell'ultimo accesso. Questi dati servono a far funzionare l'account e a fornire assistenza.</p>
+  <p><strong>Account.</strong> Per chi crea un account il sito conserva il nome, l'indirizzo email, la password in forma cifrata, le materie sbloccate, la data di iscrizione e quella dell'ultimo accesso. Conserva inoltre il tipo di browser e di sistema dei dispositivi collegati (al massimo due), il canale da cui è arrivata la prima visita (per esempio Instagram o Google) e, se lo indichi durante l'iscrizione, il corso che hai seguito o stai seguendo con Carmine. Questi dati servono a far funzionare l'account, a limitare l'uso a due dispositivi, ad attivare le materie gratuite per chi ha seguito un corso e a fornire assistenza.</p>
+  <p><strong>Acquisti.</strong> I pagamenti sono gestiti da Paddle, che agisce come rivenditore (merchant of record). I dati di pagamento, come la carta e l'indirizzo di fatturazione, sono raccolti e trattati da Paddle secondo la sua <a href="https://www.paddle.com/legal/privacy" rel="noopener">informativa sulla privacy</a> e non passano dal sito. Il sito riceve da Paddle soltanto la conferma dell'acquisto con l'email dell'account, la materia e l'importo, che servono a sbloccare la materia e a tenere il registro delle vendite.</p>
+  <p><strong>Navigazione.</strong> Il sito conta le visite alle pagine in forma aggregata (giorno e sezione visitata). Per contare i visitatori diversi di ogni giorno calcola un'impronta non reversibile a partire dalla data, dall'indirizzo di rete e dal tipo di browser; l'impronta non permette di risalire alla persona, e l'indirizzo di rete non viene salvato. Le impronte sono cancellate dopo 200 giorni.</p>
+  <p><strong>Assistente Pi.</strong> Chi usa l'assistente invia la propria domanda, il testo della parte di pagina che sta leggendo ed eventualmente la foto di un esercizio. Questi contenuti sono elaborati dal servizio di intelligenza artificiale di Cloudflare (Workers AI) solo per generare la risposta. Il sito non conserva le conversazioni né le foto: conserva soltanto il numero di messaggi inviati ogni giorno, per applicare il limite giornaliero. Per chi usa Pi senza account il conteggio usa un'impronta non reversibile dell'indirizzo di rete e del browser. La conversazione resta salvata per 24 ore solo nel tuo browser, e non arriva al sito.</p>
+  <p><strong>Contatti.</strong> Se scrivi a Carmine su WhatsApp o per email, il messaggio è usato solo per risponderti.</p>
 
-  <p><strong>Assistente Pi.</strong> Chi usa l'assistente di studio nelle materie sbloccate invia la propria domanda insieme al testo della parte di pagina che sta leggendo. Questi testi sono elaborati dal servizio di intelligenza artificiale di Cloudflare (Workers AI) solo per generare la risposta; il sito non conserva le conversazioni, ma soltanto il numero di messaggi inviati ogni giorno da ciascun account, per applicare il limite giornaliero.</p>
+  <h2>Dove sono conservati e come sono protetti</h2>
+  <p>I dati dell'account e degli acquisti sono conservati sui server di Cloudflare, che ospita il sito. Le comunicazioni con il sito sono cifrate (HTTPS), la password è salvata solo in forma cifrata e ai dati degli studenti accede soltanto il titolare, con una password riservata.</p>
 
   <h2>Cookie</h2>
-  <p>Il sito usa solo cookie tecnici: <code>sessione</code> mantiene l'accesso all'account sul dispositivo. Non esistono cookie di profilazione né di terze parti per la navigazione. Alcune preferenze di lettura (per esempio l'indice aperto o chiuso) sono salvate solo sul dispositivo e non lasciano mai il browser. Durante un acquisto, Paddle può impostare i cookie tecnici necessari al pagamento.</p>
+  <p>Il sito usa solo cookie tecnici: <code>sessione</code> mantiene l'accesso all'account, <code>dispositivo</code> riconosce il dispositivo collegato all'account, <code>fonte</code> ricorda per 90 giorni il canale della prima visita. Non esistono cookie di profilazione né cookie di terze parti per la navigazione. Alcune preferenze di lettura, come l'indice aperto o chiuso, sono salvate solo sul dispositivo e non lasciano il browser. Durante un acquisto Paddle può impostare i cookie tecnici necessari al pagamento.</p>
 
   <h2>Base giuridica e conservazione</h2>
-  <p>Il trattamento dei dati di acquisto e accesso si fonda sull'esecuzione del contratto (art. 6.1.b GDPR); le statistiche aggregate sul legittimo interesse a far funzionare il sito. I dati degli accessi sono conservati finché il servizio resta attivo, per poter ripristinare l'accesso a chi lo ha acquistato.</p>
+  <p>Il trattamento dei dati dell'account, degli acquisti e dell'assistenza si fonda sull'esecuzione del contratto (art. 6.1.b GDPR); le statistiche aggregate sul legittimo interesse a far funzionare il sito. I dati dell'account sono conservati finché il servizio resta attivo, per poter ripristinare l'accesso a chi ha acquistato una materia, oppure fino a quando ne chiedi la cancellazione.</p>
 
   <h2>I tuoi diritti</h2>
-  <p>Puoi chiedere in ogni momento l'accesso, la rettifica o la cancellazione dei tuoi dati, scrivendo all'indirizzo del titolare. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
+  <p>Puoi chiedere in ogni momento l'accesso, la rettifica o la cancellazione dei tuoi dati scrivendo all'indirizzo del titolare. Hai inoltre il diritto di proporre reclamo al Garante per la protezione dei dati personali.</p>
 </Base>
