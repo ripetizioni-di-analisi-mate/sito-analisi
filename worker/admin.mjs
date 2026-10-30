@@ -168,6 +168,9 @@ td.destra,th.destra{text-align:right}
 .chip.manuale{background:color-mix(in srgb,var(--avviso) 16%,transparent);color:var(--avviso)}
 .chip.attesa{background:color-mix(in srgb,var(--giu) 12%,transparent);color:var(--giu)}
 .chip.fonte-instagram{background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af);color:#fff}
+.chip.corso{background:color-mix(in srgb,#7a5fb0 16%,transparent);color:#7a5fb0}
+.corso-dichiarato{border:1px solid color-mix(in srgb,#7a5fb0 35%,transparent);background:color-mix(in srgb,#7a5fb0 7%,transparent);border-radius:12px;padding:.75rem .9rem}
+.corso-dichiarato p{margin:.2rem 0 0}
 .puntini{display:flex;gap:.25rem;flex-wrap:wrap}
 .puntini .punto{width:.75rem;height:.75rem;box-shadow:0 0 0 2px var(--pannello)}
 .vuoto{padding:2rem 1.2rem;text-align:center;color:var(--ink-3)}
@@ -508,7 +511,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
   function attivita(lim) {
     const ev = [];
-    D.utenti.forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(u.fonte) + '</span>' : ''), email: u.email }));
+    D.utenti.forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(u.fonte) + '</span>' : '') + (u.corso ? ' <span class="chip corso">corso: ' + esc(u.corso) + '</span>' : ''), email: u.email }));
     D.acquisti.forEach((a) => ev.push({ t: a.creato, tipo: 'pagamento', s: '€', txt: '<b>' + esc(a.email) + '</b> ha comprato ' + esc(breveMateria(a.materia)) + ' · ' + eur.format(a.importo), email: a.email }));
     D.abilitazioni.filter((a) => a.origine === 'manuale').forEach((a) => ev.push({ t: a.creato, tipo: 'manuale', s: '✓', txt: 'Attivata ' + esc(breveMateria(a.materia)) + ' a <b>' + esc(a.email) + '</b>', email: a.email }));
     ev.sort((a, b) => String(b.t).localeCompare(String(a.t)));
@@ -517,9 +520,9 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
 
   function studenti() {
-    const conta = (t) => S.studenti.filter((s) => t === 'tutti' || s.tipo === t).length;
+    const conta = (t) => S.studenti.filter((s) => passaFiltro(s, t)).length;
     const fonti = [...new Set(S.studenti.map((s) => s.fonte).filter(Boolean))].sort();
-    const filtri = [['tutti', 'Tutti'], ['pagante', 'Paganti'], ['manuale', 'Attivati a mano'], ['gratis', 'Solo gratis'], ['attesa', 'Da registrare']];
+    const filtri = [['tutti', 'Tutti'], ['pagante', 'Paganti'], ['manuale', 'Attivati a mano'], ['gratis', 'Solo gratis'], ['attesa', 'Da registrare'], ['corso', 'Dai miei corsi']];
     $('#vista').innerHTML = '<section class="card"><div class="strumenti-tab">' +
       '<label class="cerca"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cerca" placeholder="Cerca per nome o email" value="' + esc(stato.cerca) + '" aria-label="Cerca studenti"><kbd>/</kbd></label>' +
       '<select class="scelta" id="sel-fonte" aria-label="Provenienza"><option value="">Tutte le provenienze</option>' + fonti.map((f) => '<option' + (f === stato.fonte ? ' selected' : '') + '>' + esc(f) + '</option>').join('') + '</select>' +
@@ -535,10 +538,11 @@ function cliente(MATERIE, A_PAGAMENTO) {
     $$('th[data-ordina]').forEach((th) => th.addEventListener('click', () => { const k = th.dataset.ordina; stato.verso = stato.ordina === k ? -stato.verso : (k === 'nome' || k === 'fonte' ? 1 : -1); stato.ordina = k; studenti(); }));
     $('#csv').addEventListener('click', esportaCSV);
   }
+  function passaFiltro(s, t) { return t === 'tutti' || (t === 'corso' ? !!s.corso : s.tipo === t); }
   function filtrati() {
     const q = stato.cerca.trim().toLowerCase();
     const val = { nome: (s) => (s.nome || s.email).toLowerCase(), fonte: (s) => (s.fonte || '~').toLowerCase(), creato: (s) => s.creato || '', ultimo: (s) => s.ultimo_accesso || '', spesa: (s) => s.spesa };
-    return S.studenti.filter((s) => (stato.filtro === 'tutti' || s.tipo === stato.filtro) && (!stato.fonte || s.fonte === stato.fonte) && (!q || (s.email + ' ' + (s.nome || '')).toLowerCase().includes(q)))
+    return S.studenti.filter((s) => passaFiltro(s, stato.filtro) && (!stato.fonte || s.fonte === stato.fonte) && (!q || (s.email + ' ' + (s.nome || '')).toLowerCase().includes(q)))
       .sort((a, b) => { const x = val[stato.ordina](a), y = val[stato.ordina](b); return (x > y ? 1 : x < y ? -1 : 0) * stato.verso; });
   }
   function chipStato(s) { return { pagante: '<span class="chip pagante">Pagante</span>', manuale: '<span class="chip manuale">Attivato a mano</span>', gratis: '<span class="chip">Solo gratis</span>', attesa: '<span class="chip attesa">Da registrare</span>' }[s.tipo]; }
@@ -550,11 +554,11 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<td class="solo-largo">' + (s.fonte ? '<span class="chip' + (s.fonte === 'Instagram' ? ' fonte-instagram' : '') + '">' + esc(s.fonte) + '</span>' : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.creato)) + '">' + (s.registrato ? fa(s.creato) : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.ultimo_accesso)) + '">' + fa(s.ultimo_accesso) + '</td>' +
-      '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + '</div></td>' +
+      '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + (s.corso ? '<span class="chip corso" title="Corso seguito: ' + esc(s.corso) + '">Corso: ' + esc(s.corso.length > 24 ? s.corso.slice(0, 23) + '…' : s.corso) + '</span>' : '') + '</div></td>' +
       '<td class="destra cifra solo-largo">' + (s.spesa ? eur.format(s.spesa) : '<span class="nota">—</span>') + '</td></tr>').join('');
   }
   function esportaCSV() {
-    const righe = [['email', 'nome', 'provenienza', 'iscritto', 'ultimo_accesso', 'materie', 'stato', 'speso_eur']].concat(filtrati().map((s) => [s.email, s.nome || '', s.fonte || '', s.creato || '', s.ultimo_accesso || '', s.abil.map((a) => a.materia).join(' '), s.tipo, s.spesa.toFixed(2)]));
+    const righe = [['email', 'nome', 'provenienza', 'corso_seguito', 'iscritto', 'ultimo_accesso', 'materie', 'stato', 'speso_eur']].concat(filtrati().map((s) => [s.email, s.nome || '', s.fonte || '', s.corso || '', s.creato || '', s.ultimo_accesso || '', s.abil.map((a) => a.materia).join(' '), s.tipo, s.spesa.toFixed(2)]));
     const csv = righe.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' })); a.download = 'studenti-' + oggiISO() + '.csv'; a.click();
     avviso('CSV scaricato: ' + (righe.length - 1) + ' righe');
@@ -568,7 +572,8 @@ function cliente(MATERIE, A_PAGAMENTO) {
     const daAttivare = A_PAGAMENTO.filter((m) => !sbloccate.has(m));
     c.innerHTML = '<header><span class="avatar" style="background:' + coloreDa(s.email) + '">' + esc(iniziali(s)) + '</span><div><h2>' + esc(s.nome || s.email.split('@')[0]) + '</h2><p>' + esc(s.email) + '</p><div style="margin-top:.35rem">' + chipStato(s) + '</div></div><button class="chiudi" type="button" aria-label="Chiudi">×</button></header>' +
       '<div class="dentro">' +
-      '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultimo accesso</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
+      (s.corso ? '<section class="corso-dichiarato"><h3>Ha seguito un tuo corso</h3><p><b>' + esc(s.corso) + '</b></p><p class="nota">Lo ha indicato all\u2019iscrizione. Se è corretto, attiva qui sotto le materie da sbloccare gratis.</p></section>' : '') +
+      '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultimo accesso</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
       '<section><h3>Materie sbloccate</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">Nessuna materia sbloccata.</p>') + '</section>' +
       (daAttivare.length ? '<section><h3>Attiva altre materie</h3><div class="scelte">' + daAttivare.map((m) => '<label class="scelta-m" style="--c:' + M[m].colore + '"><input type="checkbox" value="' + m + '"><i class="punto"></i>' + esc(breveMateria(m)) + '</label>').join('') + '</div><div class="azioni" style="margin-top:.7rem"><button type="button" class="bottone primario" id="c-attiva">Attiva le materie scelte</button></div></section>' : '') +
       '<section><h3>Dispositivi (al massimo 2)</h3>' + (s.dispositivi.length ? '<div class="elenco-m">' + s.dispositivi.map((d) => '<div class="riga-m">' + esc(d.nome) + '<span class="nota" style="margin-left:auto">usato ' + fa(d.ultimo_uso) + '</span></div>').join('') + '</div><div class="azioni" style="margin-top:.6rem"><button type="button" class="bottone pericolo" id="c-scollega">Scollega tutti</button></div>' : '<p class="nota" style="margin:0">Nessun dispositivo collegato.</p>') + '</section>' +

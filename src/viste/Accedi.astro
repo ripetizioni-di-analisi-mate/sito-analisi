@@ -23,6 +23,18 @@ const pref = prefisso(lingua);
     <label>Email<input type="email" name="email" autocomplete="email" required /></label>
     <label>Password<span class="campo-password"><input type="password" name="password" autocomplete="current-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     <label id="campo-conferma" hidden>{t.ripetiPassword}<span class="campo-password"><input type="password" name="conferma" autocomplete="new-password" minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+    {lingua === 'it' && (
+      <fieldset class="campo-corso" id="campo-corso" hidden>
+        <label class="spunta"><input type="checkbox" name="excorso" id="excorso" /><span>Ho già seguito un tuo corso di Analisi <small>(facoltativo)</small></span></label>
+        <div class="dettagli-corso" id="dettagli-corso" hidden>
+          <span class="domanda-corso">Quale corso?</span>
+          <label class="spunta"><input type="checkbox" name="corso" value="Analisi 1" /> Analisi 1</label>
+          <label class="spunta"><input type="checkbox" name="corso" value="Analisi 2" /> Analisi 2</label>
+          <label><span>Anno, numero del corso o altre informazioni <small>(facoltativo)</small></span><input type="text" name="corsonote" maxlength="80" placeholder="Per esempio: corso di marzo 2026" /></label>
+          <p class="nota-corso">Controllo l'iscrizione e ti attivo gratis le materie collegate al corso.</p>
+        </div>
+      </fieldset>
+    )}
     <p class="esito-modulo" id="esito" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia">{t.accedi}</button>
   </form>
@@ -35,6 +47,15 @@ const pref = prefisso(lingua);
       const invia = document.getElementById('invia');
       const conferma = document.getElementById('campo-conferma');
       const campoNome = document.getElementById('campo-nome');
+      const campoCorso = document.getElementById('campo-corso');
+      const excorso = document.getElementById('excorso');
+      if (excorso) excorso.addEventListener('change', () => { document.getElementById('dettagli-corso').hidden = !excorso.checked; });
+      const corsoSeguito = () => {
+        if (!excorso || !excorso.checked) return '';
+        const scelti = [...modulo.querySelectorAll('input[name="corso"]:checked')].map((x) => x.value);
+        const note = modulo.corsonote.value.trim();
+        return [scelti.join(', '), note].filter(Boolean).join(' · ') || 'Sì, corso non indicato';
+      };
       const dopo = new URLSearchParams(location.search).get('dopo');
       const destinazione = dopo && dopo.startsWith('/') && !dopo.startsWith('//') ? dopo : `${pref}/account`;
       let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : 'accedi';
@@ -44,6 +65,7 @@ const pref = prefisso(lingua);
         document.querySelectorAll('[data-scheda]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.scheda === s)));
         conferma.hidden = s !== 'registrati';
         campoNome.hidden = s !== 'registrati';
+        if (campoCorso) campoCorso.hidden = s !== 'registrati';
         invia.textContent = s === 'registrati' ? js.creaAccount : js.accedi;
         modulo.password.autocomplete = s === 'registrati' ? 'new-password' : 'current-password';
         esito.textContent = ''; esito.className = 'esito-modulo';
@@ -60,11 +82,12 @@ const pref = prefisso(lingua);
         if (password.length < 8) return errore(js.passwordCorta);
         if (scheda === 'registrati' && password !== modulo.conferma.value) return errore(js.passwordDiverse);
         if (scheda === 'registrati' && !modulo.nome.value.trim()) return errore(js.nomeMancante);
+        if (scheda === 'registrati' && excorso && excorso.checked && !modulo.querySelector('input[name="corso"]:checked') && !modulo.corsonote.value.trim()) return errore('Indica quale corso hai seguito, oppure togli la spunta.');
         invia.disabled = true; esito.textContent = '…'; esito.className = 'esito-modulo';
         try {
           const r = await fetch(scheda === 'registrati' ? '/api/registrati' : '/api/accedi', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua: pref ? 'en' : 'it' }),
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }

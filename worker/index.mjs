@@ -105,6 +105,8 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
     // e la provenienza della prima visita (Instagram, Google, …)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
+    // il corso di gruppo già seguito con Carmine, dichiarato all'iscrizione (facoltativo)
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN corso TEXT'); } catch { /* già presente */ }
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
@@ -135,8 +137,8 @@ export class Archivio {
 
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
-        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null);
+        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?)',
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null);
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
@@ -233,7 +235,7 @@ export class Archivio {
                               GROUP BY COALESCE(u.fonte, 'Non registrata') ORDER BY iscritti DESC`),
           acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
-          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
+          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
@@ -351,14 +353,15 @@ export default {
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua, nome } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome, corso: corsoDato } = await req.json().catch(() => ({}));
       const email = normalizza(e);
+      const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
       if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
       if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte });
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
