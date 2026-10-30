@@ -1,17 +1,49 @@
 ---
-// Pagina biografica: lo stesso testo del sito ripetizioni-di-analisi-matematica.it.
+// Pagina biografica: tutta la home del sito ripetizioni-di-analisi-matematica.it
+// (presentazione, studenti, missione, risultati, servizi, università).
 import Base from '../layouts/Base.astro';
 import { SITO, INSTAGRAM, assoluto } from '../lib/seo';
 import { type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const WHATSAPP = 'https://wa.me/393885680393';
+const THREADS = 'https://www.threads.com/@ripetizioni_di_analisi_mate';
+const IN_EVIDENZA = 'https://www.instagram.com/stories/highlights/18377269690180577/';
+const PAYPAL = 'https://paypal.me/ripetizionidianalisi';
+const VIDEOCORSI = '/videocorsi';
+
+const UNIVERSITA: [string, string, number, number][] = [
+  ['tor-vergata', 'Università di Roma Tor Vergata', 222, 252],
+  ['bergamo', 'Università degli Studi di Bergamo', 254, 102],
+  ['pisa', 'Università di Pisa', 290, 253],
+  ['politecnico-milano', 'Politecnico di Milano', 320, 115],
+  ['federico-ii', 'Università degli Studi di Napoli Federico II', 320, 172],
+  ['vanvitelli', 'Università degli Studi della Campania Luigi Vanvitelli', 262, 95],
+  ['sapienza', 'Sapienza Università di Roma', 320, 93],
+  ['calabria', 'Università della Calabria', 320, 112],
+  ['firenze-economia', 'Università degli Studi di Firenze, Scuola di Economia e Management', 320, 172],
+  ['uninettuno', 'Università Telematica Internazionale Uninettuno', 320, 67],
+  ['foggia', 'Università di Foggia', 320, 224],
+  ['roma-tre', 'Università degli Studi Roma Tre', 320, 163],
+  ['bocconi', 'Università Bocconi', 320, 105],
+  ['firenze-scienze-politiche', 'Università degli Studi di Firenze, Scuola di Scienze Politiche Cesare Alfieri', 320, 70],
+  ['cattolica', 'Università Cattolica del Sacro Cuore', 320, 132],
+  ['torino', 'Università degli Studi di Torino', 320, 155],
+];
 
 const TESTI = {
   it: {
     titolo: 'Chi sono',
     descrizione: 'Carmine Tornincasa, insegnante privato di Analisi matematica e content creator: oltre 1500 studenti seguiti in tutta Italia, più di 10 anni di esperienza.',
+    motto: 'Anni di esperienza al Tuo servizio',
+    schede: [
+      { titolo: 'Corsi live', href: WHATSAPP, righe: ['Lezioni di Analisi matematica 1, 2 e matematica generale.', 'Sessioni individuali o di gruppo.'] },
+      { titolo: 'Corsi on demand', href: VIDEOCORSI, righe: ['Videolezioni preregistrate per venire incontro alle agende meno flessibili'] },
+    ],
+    info: ['Clicca ', 'qui', ' per maggiori info.'],
+    acquista: 'Acquista i corsi',
     sottotitolo: 'Insegnante privato e content creator del canale',
+    seguimi: 'Seguimi su',
     punti: [
       ['📈', 'Migliaia di studenti', ' supportati nel raggiungimento dei propri obiettivi'],
       ['🏆', 'Risultati eccellenti', ' e miglioramenti concreti fin dalle prime lezioni'],
@@ -33,13 +65,37 @@ const TESTI = {
       'Voglio che ogni studente si senta capace, accompagnandolo nel miglioramento dei voti e dell’autostima. Attraverso Instagram e altri canali, cerco di diffondere contenuti utili e accessibili, costruendo una rete di apprendimento affidabile.',
       'Grazie a collaboratori fidati, posso offrire supporto anche in materie che non insegno direttamente, mantenendo sempre qualità e attenzione.',
     ],
+    sostieni: 'Sostieni il progetto',
+    risultati: 'I vostri risultati',
+    risultato: 'Messaggio di uno studente dopo l’esame, dalle storie in evidenza su Instagram',
+    altri: 'e molti altri ancora',
+    servizi: 'Quali servizi offro?',
+    righeServizi: [
+      ['Lezioni individuali', ['Hai la mia piena disponibilità e le lezioni sono calibrate su misura in base alla tua preparazione.']],
+      ['Corso live', [
+        'I corsi prevedono un’organizzazione personalizzata in base alle prove d’esame inviate, con almeno tre incontri settimanali da un’ora.',
+        'Le lezioni sono registrate, così da poterle recuperare in caso di assenza. Per iscriversi servono nome, cognome e numero di telefono.',
+      ]],
+      ['Corso on demand', ['Corso totalmente preregistrato. Verrà proposta una delle migliori esperienze dei tanti corsi live svolti nel tempo. Per ogni lezione sarà previsto: Video + PDF relativo']],
+    ] as [string, string[]][],
+    durata: 'Durata prevista:',
+    lezioni: ['circa 30 lezioni per Analisi 1', 'circa 20 lezioni per Analisi 2'],
+    supportate: 'Alcune delle Università supportate',
     prenota: 'Prenota la tua lezione',
     ruolo: 'Insegnante privato di Analisi matematica',
   },
   en: {
     titolo: 'About me',
     descrizione: 'Carmine Tornincasa, private Calculus tutor and content creator: over 1500 students taught across Italy, more than 10 years of experience.',
+    motto: 'Years of experience at your service',
+    schede: [
+      { titolo: 'Live courses', href: WHATSAPP, righe: ['Lessons in Calculus 1, Calculus 2 and general mathematics.', 'One-to-one or group sessions.'] },
+      { titolo: 'On-demand courses', href: VIDEOCORSI, righe: ['Pre-recorded video lessons for students with less flexible schedules'] },
+    ],
+    info: ['Click ', 'here', ' for more information.'],
+    acquista: 'Buy the courses',
     sottotitolo: 'Private tutor and content creator of the channel',
+    seguimi: 'Follow me on',
     punti: [
       ['📈', 'Thousands of students', ' helped to reach their goals'],
       ['🏆', 'Excellent results', ' and concrete improvement from the very first lessons'],
@@ -61,10 +117,28 @@ const TESTI = {
       'I want every student to feel capable, and I accompany them as their grades and self-confidence improve. Through Instagram and other channels I share useful, accessible content, building a reliable learning network.',
       'Thanks to trusted collaborators, I can also offer support in subjects I do not teach directly, always with the same quality and care.',
     ],
+    sostieni: 'Support the project',
+    risultati: 'Your results',
+    risultato: 'Message from a student after the exam, from the Instagram story highlights',
+    altri: 'and many more',
+    servizi: 'What services do I offer?',
+    righeServizi: [
+      ['One-to-one lessons', ['You have my full availability, and the lessons are tailored to your preparation.']],
+      ['Live course', [
+        'The courses are organised around the past exam papers you send, with at least three one-hour meetings per week.',
+        'Lessons are recorded, so you can catch up if you miss one. To enrol you only need your name, surname and phone number.',
+      ]],
+      ['On-demand course', ['A fully pre-recorded course, taken from the best of the many live courses held over the years. Each lesson comes with a video and its PDF.']],
+    ] as [string, string[]][],
+    durata: 'Expected length:',
+    lezioni: ['about 30 lessons for Calculus 1', 'about 20 lessons for Calculus 2'],
+    supportate: 'Some of the universities we support',
     prenota: 'Book your lesson',
     ruolo: 'Private Calculus tutor',
   },
 }[lingua];
+
+const RISULTATI = Array.from({ length: 14 }, (_, i) => `/chi-sono/risultati/${String(i + 1).padStart(2, '0')}.webp`);
 
 const persona = {
   '@type': 'Person',
@@ -73,7 +147,7 @@ const persona = {
   jobTitle: TESTI.ruolo,
   image: `${SITO}/chi-sono/carmine.webp`,
   url: assoluto(Astro.url.pathname),
-  sameAs: [INSTAGRAM, 'https://ripetizioni-di-analisi-matematica.it/'],
+  sameAs: [INSTAGRAM, THREADS, 'https://ripetizioni-di-analisi-matematica.it/'],
   worksFor: { '@id': `${SITO}/#organizzazione` },
 };
 ---
@@ -84,11 +158,34 @@ const persona = {
   lingua={lingua}
   seo={{ tipo: 'profile', schema: [{ '@type': 'AboutPage', name: TESTI.titolo, url: assoluto(Astro.url.pathname), mainEntity: persona }, persona] }}
 >
+  <section class="bio-apertura">
+    <p class="bio-motto">{TESTI.motto}</p>
+    <div class="bio-schede">
+      {TESTI.schede.map((s) => (
+        <div class="bio-scheda">
+          <a class="bio-scheda-titolo" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noopener' : undefined}>{s.titolo}</a>
+          {s.righe.map((r) => <span>{r}</span>)}
+          <span>{TESTI.info[0]}<a href="#servizi">{TESTI.info[1]}</a>{TESTI.info[2]}</span>
+        </div>
+      ))}
+    </div>
+    <div class="bio-bottoni">
+      <a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a>
+      <a class="bio-bottone" href={VIDEOCORSI}>{TESTI.acquista}</a>
+    </div>
+  </section>
+
   <section class="bio-testa">
     <img class="bio-foto" src="/chi-sono/carmine.webp" srcset="/chi-sono/carmine-320.webp 320w, /chi-sono/carmine.webp 640w" sizes="(max-width: 40rem) 11rem, 14rem" width="640" height="640" alt="Carmine Tornincasa" />
     <div>
       <h1>Carmine Tornincasa</h1>
       <p class="bio-ruolo">{TESTI.sottotitolo} <a href={INSTAGRAM} target="_blank" rel="noopener">ripetizioni_di_analisi_mate</a></p>
+      <p class="bio-social">
+        <span>{TESTI.seguimi}</span>
+        <a href={INSTAGRAM} target="_blank" rel="noopener">Instagram</a>
+        <a href={THREADS} target="_blank" rel="noopener">Threads</a>
+        <a href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>
+      </p>
     </div>
   </section>
 
@@ -109,18 +206,59 @@ const persona = {
     <img class="bio-mappa" src="/chi-sono/mappa-studenti.webp" width="640" height="702" loading="lazy" alt={TESTI.mappa} />
   </div>
   <p class="bio-universita"><span aria-hidden="true">🌐</span> {TESTI.universita}</p>
+  <p class="bio-centro"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a></p>
 
   <h2>{TESTI.missione}</h2>
   {TESTI.paragrafi.map((p) => <p>{p}</p>)}
+  <p class="bio-centro"><a class="bio-bottone" href={PAYPAL} target="_blank" rel="noopener">{TESTI.sostieni}</a></p>
 
-  <p class="bio-prenota"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a></p>
+  <h2 class="bio-centrato">{TESTI.risultati}</h2>
+  <div class="bio-risultati">
+    {RISULTATI.map((src) => (
+      <a href={IN_EVIDENZA} target="_blank" rel="noopener"><img src={src} width="640" height="640" loading="lazy" alt={TESTI.risultato} /></a>
+    ))}
+  </div>
+  <p class="bio-centro bio-altri"><a href={IN_EVIDENZA} target="_blank" rel="noopener">… {TESTI.altri}</a></p>
+
+  <h2 id="servizi">{TESTI.servizi}</h2>
+  <div class="bio-servizi">
+    {TESTI.righeServizi.map(([nome, testi], i) => (
+      <div class="bio-servizio">
+        <strong>{nome}</strong>
+        <div>
+          {testi.map((t) => <p>{t}</p>)}
+          {i === 1 && (
+            <>
+              <p class="bio-durata">{TESTI.durata}</p>
+              <ul>{TESTI.lezioni.map((l) => <li>{l}</li>)}</ul>
+            </>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <h2 class="bio-centrato">{TESTI.supportate}</h2>
+  <div class="bio-loghi">
+    {UNIVERSITA.map(([file, nome, w, h]) => <img src={`/chi-sono/universita/${file}.webp`} width={w} height={h} loading="lazy" alt={nome} title={nome} />)}
+  </div>
 </Base>
 
 <style>
+  .bio-apertura { margin: 0.5rem 0 2rem; text-align: center; }
+  .bio-motto { font-family: var(--titoli); font-size: 1.9rem; font-weight: 600; line-height: 1.2; margin: 0 0 1.25rem; color: var(--inchiostro); }
+  .bio-schede { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .bio-scheda { display: flex; flex-direction: column; gap: 0.15rem; padding: 1rem 1.1rem; border-radius: var(--raggio); background: var(--carta-2); border: 1px solid var(--riga); font-family: var(--ui); }
+  .bio-scheda-titolo { font-size: 1.2rem; font-weight: 600; color: var(--accento); text-decoration: none; margin-bottom: 0.35rem; }
+  .bio-bottoni { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+  .bio-bottone { display: inline-block; padding: 0.7rem 1.4rem; border-radius: 999px; background: var(--accento); color: #fff; text-decoration: none; font-family: var(--ui); font-weight: 600; }
+  .bio-bottone:hover { filter: brightness(1.1); }
   .bio-testa { display: flex; align-items: center; gap: 1.5rem; margin: 0.5rem 0 1.25rem; }
   .bio-testa h1 { margin: 0 0 0.35rem; }
   .bio-foto { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 4px var(--carta-2); }
   .bio-ruolo { margin: 0; font-family: var(--ui); color: var(--inchiostro-2); }
+  .bio-social { margin: 0.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro-2); }
+  .bio-social a { color: var(--accento); font-weight: 600; }
   .bio-punti { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.6rem; }
   .bio-punti li { display: flex; gap: 0.6rem; align-items: baseline; }
   .bio-punti strong, .bio-citta strong { color: var(--accento); font-weight: 600; }
@@ -129,12 +267,30 @@ const persona = {
   .bio-citta { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; }
   .bio-mappa { width: 100%; height: auto; border-radius: var(--raggio); border: 1px solid var(--riga); }
   .bio-universita { margin-top: 1.25rem; }
-  .bio-prenota { margin-top: 2rem; text-align: center; }
-  .bio-prenota .bio-bottone { display: inline-block; padding: 0.7rem 1.4rem; border-radius: 999px; background: var(--accento); color: #fff; text-decoration: none; font-family: var(--ui); font-weight: 600; }
+  .bio-centro { margin-top: 1.5rem; text-align: center; }
+  .bio-centrato { text-align: center; }
+  .bio-risultati { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 0.4rem; }
+  .bio-risultati a { display: block; border-radius: 4px; overflow: hidden; border: 1px solid var(--riga); }
+  .bio-risultati img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; transition: transform 0.2s; }
+  .bio-risultati a:hover img { transform: scale(1.04); }
+  .bio-altri { margin-top: 0.75rem; font-family: var(--ui); }
+  .bio-servizi { display: grid; gap: 0.6rem; font-family: var(--ui); }
+  .bio-servizio { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: 0.8rem 1rem; border-radius: var(--raggio); background: var(--carta-2); border: 1px solid var(--riga); }
+  .bio-servizio p { margin: 0 0 0.5rem; }
+  .bio-servizio p:last-child, .bio-servizio ul { margin-bottom: 0; }
+  .bio-durata { margin-bottom: 0.2rem !important; }
+  .bio-loghi { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem 2rem; padding: 1.75rem 1.5rem; border-radius: var(--raggio); background: #0d2a47; }
+  .bio-loghi img { height: 4.2rem; width: auto; max-width: 9.5rem; object-fit: contain; }
   @media (max-width: 40rem) {
+    .bio-motto { font-size: 1.5rem; }
+    .bio-schede { grid-template-columns: 1fr; }
     .bio-testa { flex-direction: column; text-align: center; }
+    .bio-social { justify-content: center; }
     .bio-foto { width: 11rem; height: 11rem; }
     .bio-studenti { grid-template-columns: 1fr; }
     .bio-mappa { max-width: 20rem; margin: 0 auto; }
+    .bio-servizio { grid-template-columns: 1fr; gap: 0.4rem; }
+    .bio-loghi { gap: 1.1rem 1.4rem; padding: 1.25rem 1rem; }
+    .bio-loghi img { height: 3.2rem; max-width: 7.5rem; }
   }
 </style>
