@@ -32,7 +32,7 @@
     "PADDLE_PREZZO_VIDEO_MATEMATICA_GENERALE": "pri_01m66tx5d8ezk8cxc3t3tym894",
     "PADDLE_PREZZO_VIDEO_ALGEBRA": "pri_01m66v2m485p0fq8c0e9pxawzf",
     // Cartelle Google Drive dei videocorsi (slug -> link), mostrate solo a chi ha comprato
-    "VIDEOCORSI_DRIVE": "{}"
+    "VIDEOCORSI_DRIVE": "{\"analisi-1-e-2\":\"https://drive.google.com/file/d/1FZ_p3ea5lfbWjqWqbj_f3YSmKfr2DMtv/view?usp=sharing\",\"analisi-1\":\"https://drive.google.com/file/d/1zEI1kv1-ZFT10Sr6cO9MOrkfqmmy_VS8/view?usp=sharing\",\"analisi-2\":\"https://drive.google.com/file/d/1Hi4yt7tHiXqNIXEyk2N6XXjETtOlEJ5g/view?usp=sharing\",\"matematica-generale\":\"https://drive.google.com/file/d/1Ebdtar_9iNruPz56hp0yRj7A4QcqKnAB/view?usp=sharing\",\"algebra\":\"https://drive.google.com/file/d/1eW-wCpFg-lpgfOCI5ftrKDk-BqokBNmM/view?usp=sharing\"}"
     // Segreti, solo nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets), mai in questo file:
     // "ADMIN_PASSWORD" (dashboard), "CHIAVE_ACCESSO" (firma di sessioni e link: cambiarla scollega tutti),
     // "PADDLE_WEBHOOK_SECRET". Per le email automatiche: "RESEND_API_KEY" (segreto) e "MITTENTE".
