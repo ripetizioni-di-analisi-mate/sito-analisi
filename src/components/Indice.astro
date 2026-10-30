@@ -33,8 +33,8 @@ const SEZIONI = sezioniL(lingua);
     </>
   ) : (
     <>
-      {gruppiL(lingua).map((g) => (
-        <details class="indice-gruppo" open={MATERIE.some((x) => x.gruppo === g && x.attiva)}>
+      {gruppiL(lingua).map((g, i) => (
+        <details class="indice-gruppo" open={i === 0}>
           <summary class="indice-materia"><span>{g}</span></summary>
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">

@@ -24,8 +24,8 @@ const MATERIE = materieL(lingua);
     <button type="submit">{t.cerca}</button>
   </form>
   <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
-  {gruppiL(lingua).map((g) => (
-    <details class="gruppo" open={MATERIE.some((m) => m.gruppo === g && m.attiva) || (lingua === 'it' && g === 'Concorsi')}>
+  {gruppiL(lingua).map((g, i) => (
+    <details class="gruppo" open={i === 0}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
