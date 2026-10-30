@@ -466,6 +466,7 @@ export default {
             'fisica-2': env.PADDLE_PREZZO_FISICA_2 || null,
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
+            'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
           },
         } : null,
       });

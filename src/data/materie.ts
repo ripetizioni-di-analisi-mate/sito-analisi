@@ -307,7 +307,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "La matematica dei concorsi pubblici, delle Forze armate e dei test di ammissione, spiegata da zero: calcolo, proporzioni e percentuali, problemi, equazioni, statistica, probabilità e geometria, con quiz a risposta multipla.",
     colore: '#5b6b7a',
     gruppo: 'Concorsi',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'numeri-e-calcolo', titolo: 'Numeri, frazioni e calcolo', breve: 'Numeri e calcolo' },
       { slug: 'proporzioni-e-percentuali', titolo: 'Rapporti, proporzioni e percentuali', breve: 'Proporzioni e percentuali' },

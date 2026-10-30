@@ -22,7 +22,8 @@
     "PADDLE_PREZZO_FISICA_1": "pri_01m61jnkz4dx9drvpk02cc801d",
     "PADDLE_PREZZO_FISICA_2": "pri_01m61jpx5sxsb03hw6yqyh1mc2",
     "PADDLE_PREZZO_MATEMATICA_GENERALE": "pri_01m644j57901k5gxbwwbpe485v",
-    "PADDLE_PREZZO_MATEMATICA_SUPERIORI_5": "pri_01m644kjg8zmzfewdmmwvad9hg"
+    "PADDLE_PREZZO_MATEMATICA_SUPERIORI_5": "pri_01m644kjg8zmzfewdmmwvad9hg",
+    "PADDLE_PREZZO_MATEMATICA_CONCORSI": "pri_01m66bzzp37j6gp6sn0cx54vdr"
     // Segreti, solo nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets), mai in questo file:
     // "ADMIN_PASSWORD" (dashboard), "CHIAVE_ACCESSO" (firma di sessioni e link: cambiarla scollega tutti),
     // "PADDLE_WEBHOOK_SECRET". Per le email automatiche: "RESEND_API_KEY" (segreto) e "MITTENTE".
