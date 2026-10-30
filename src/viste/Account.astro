@@ -16,6 +16,10 @@ const sblocca = t.sblocca;
   <p class="sommario" id="chi">{t.caricamento}</p>
 
   <section id="pannello" hidden>
+    <div id="videocorsi" hidden>
+      <h2>I tuoi videocorsi</h2>
+      <ul class="videocorsi-account" id="elenco-videocorsi"></ul>
+    </div>
     <h2>{t.leTueMaterie}</h2>
     <ul class="materie-account" id="materie"></ul>
 
@@ -78,6 +82,22 @@ const sblocca = t.sblocca;
         ld.appendChild(li);
       }
       document.getElementById('pannello').hidden = false;
+
+      if (io.materie.some((m) => m.startsWith('video-'))) {
+        const rv = await fetch('/api/videocorsi').catch(() => null);
+        const dv = rv && rv.ok ? await rv.json() : null;
+        const ev = document.getElementById('elenco-videocorsi');
+        for (const v of (dv && dv.videocorsi) || []) {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${v.titolo}</strong><span class="nota-video">${v.lezioni} lezioni con video e PDF</span>` + (v.drive
+            ? `<a class="bottone-primario" href="${v.drive}" target="_blank" rel="noopener">Apri la cartella dei video</a>
+               <span class="nota-video">Su Google Drive chiedi l'accesso con l'email <strong>${io.email}</strong>: Carmine lo conferma appena possibile.</span>`
+            : `<span class="nota-video">Il link alla cartella dei video sta per comparire qui. Se ti serve subito, scrivi a Carmine su <a href="https://wa.me/393885680393" target="_blank" rel="noopener">WhatsApp</a>.</span>`);
+          ev.appendChild(li);
+        }
+        if (ev.children.length) document.getElementById('videocorsi').hidden = false;
+        if (location.hash === '#videocorsi') document.getElementById('videocorsi').scrollIntoView();
+      }
 
       document.getElementById('esci').addEventListener('click', async () => {
         await fetch('/api/esci', { method: 'POST' }).catch(() => {});

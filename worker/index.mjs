@@ -7,9 +7,14 @@
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
+import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+// Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
+const VIDEO = Object.fromEntries(VIDEOCORSI.map((v) => [chiaveVideo(v.slug), v]));
+const conMaterieDeiVideo = (chiavi) => [...new Set(chiavi.flatMap((k) => (VIDEO[k] ? [k, ...VIDEO[k].sblocca] : [k])))];
+const linkDrive = (env) => { try { return JSON.parse(env.VIDEOCORSI_DRIVE || '{}'); } catch { return {}; } };
 const SCHEDE_LIBERE = 3;          // le prime N schede svolte di ogni argomento restano aperte
 const ITERAZIONI_PBKDF2 = 10000;  // costo dell'hash: entro i 10 ms di CPU del piano gratuito Workers; da alzare col piano a pagamento
 const DURATA_SESSIONE = 60 * 60 * 24 * 180; // 180 giorni
@@ -390,6 +395,13 @@ export default {
       if (!io) return json({ errore: 'non collegato' }, 401);
       return json(io);
     }
+    if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
+      const io = await utenteCollegato(env, req);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      const drive = linkDrive(env);
+      return json({ email: io.email, videocorsi: VIDEOCORSI.filter((v) => io.materie.includes(chiaveVideo(v.slug)))
+        .map((v) => ({ slug: v.slug, titolo: v.titolo, lezioni: v.lezioni, sblocca: v.sblocca, drive: drive[v.slug] || null })) });
+    }
     if (p === '/api/nome' && POST) {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'Accedi di nuovo.' }, 401);
@@ -442,10 +454,14 @@ export default {
         const d = ev.data;
         const email = normalizza(d.custom_data?.email || d.customer?.email || '');
         const materia = d.custom_data?.materia || '';
+        const video = d.custom_data?.videocorso ? chiaveVideo(d.custom_data.videocorso) : '';
         const importo = Number(d.details?.totals?.total || 0) / 100;
         if (email && A_PAGAMENTO.includes(materia)) {
           await aDO(env, '/registra-acquisto', { email, materia, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
+        } else if (email && VIDEO[video]) {
+          await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
+          await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });
         }
       }
       return json({ ok: true });
@@ -468,12 +484,13 @@ export default {
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
           },
+          videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
         } : null,
       });
     }
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO, MATERIE), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(Object.keys(VIDEO)), MATERIE.concat(VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -493,9 +510,9 @@ export default {
       if (p === '/admin/api/abilita' && POST) {
         const { email: e, materie } = await req.json();
         const email = normalizza(e);
-        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m));
+        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m) || VIDEO[m]);
         if (!emailValida(email) || !valide.length) return json({ errore: 'Email o materie non valide.' }, 400);
-        return json(await aDO(env, '/abilita', { email, materie: valide, origine: 'manuale' }));
+        return json(await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo(valide), origine: 'manuale' }));
       }
       if (p === '/admin/api/revoca' && POST) {
         const { email, materia } = await req.json();

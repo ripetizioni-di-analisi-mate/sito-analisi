@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { VIDEOCORSI } from '../data/videocorsi';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -11,6 +12,7 @@ const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const localePaddle = lingua;
+const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(materia)) : [];
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
   <p class="sopratitolo">{m.titolo}</p>
@@ -21,6 +23,9 @@ const localePaddle = lingua;
     <li set:html={t.includeSvolti(svolti)} />
     <li set:html={t.includeSoluzioni(dafare)} />
   </ul>
+  {video.length > 0 && (
+    <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
+  )}
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
     <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>

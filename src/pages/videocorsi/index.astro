@@ -1,0 +1,64 @@
+---
+// Elenco dei videocorsi preregistrati (solo in italiano).
+import Base from '../../layouts/Base.astro';
+import SchedaVideocorso from '../../components/SchedaVideocorso.astro';
+import { VIDEOCORSI, MINUTI_LEZIONE } from '../../data/videocorsi';
+import { SITO } from '../../lib/seo';
+
+const schema = [{
+  '@type': 'ItemList',
+  name: 'Videocorsi di Carmine Tornincasa',
+  itemListElement: VIDEOCORSI.map((v, i) => ({
+    '@type': 'ListItem', position: i + 1, url: `${SITO}/videocorsi/${v.slug}`, name: v.titolo,
+  })),
+}];
+---
+<Base titolo="Videocorsi" percorso={[{ titolo: 'Videocorsi' }]} descrizione="Videocorsi completi di Analisi 1, Analisi 2, Matematica generale e Algebra, con video e PDF di ogni lezione. L'acquisto sblocca in automatico le materie collegate del sito." lingua="it" seo={{ soloQuestaLingua: true, schema }}>
+  <p class="sopratitolo">Videocorsi</p>
+  <h1>I videocorsi di Carmine</h1>
+  <p class="sommario">Le lezioni complete dei corsi, registrate e divise per argomento, da seguire con i tuoi tempi. Ogni lezione dura circa {MINUTI_LEZIONE} minuti e ha il suo PDF.</p>
+
+  <div class="vantaggio-video">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>
+    <p><strong>Con ogni videocorso le materie collegate del sito si sbloccano in automatico</strong> nel tuo account: teoria completa, esercizi svolti passo per passo ed esercizi con la soluzione, senza costi aggiuntivi.</p>
+  </div>
+
+  <ul class="elenco-video">
+    {VIDEOCORSI.map((v) => <li><SchedaVideocorso v={v} /></li>)}
+  </ul>
+
+  <h2>Come funziona</h2>
+  <ol class="passi-video">
+    <li><strong>Scegli il videocorso</strong> e crea un account gratuito, oppure accedi se ce l'hai già.</li>
+    <li><strong>Paghi una volta sola</strong> con carta o con gli altri metodi mostrati da Paddle, che gestisce il pagamento e ti manda la ricevuta.</li>
+    <li><strong>Nel tuo account trovi subito</strong> il link alla cartella del videocorso e le materie del sito già sbloccate.</li>
+    <li><strong>Apri la cartella e chiedi l'accesso</strong> con la stessa email dell'account: Carmine lo conferma appena possibile.</li>
+  </ol>
+
+  <div class="prova-video">
+    <p><strong>Vuoi provare prima di comprare?</strong> Puoi chiedere la prima lezione come prova gratuita, oppure verificare che il corso copra il programma del tuo esame.</p>
+    <a class="bottone-secondario" href="https://wa.me/393885680393?text=Ciao%20Carmine%2C%20vorrei%20informazioni%20sui%20videocorsi" target="_blank" rel="noopener">Scrivi a Carmine su WhatsApp</a>
+  </div>
+
+  <h2>Corsi di gruppo dal vivo</h2>
+  <ul class="griglia-materie">
+    <li class="in-preparazione" style="--accento: #8a6d3b">
+      <div>
+        <h3>Corsi di gruppo dal vivo</h3>
+        <p>Lezioni online in piccoli gruppi, con le registrazioni di ogni incontro. La pagina per le iscrizioni è in preparazione: nel frattempo puoi scrivere a Carmine su WhatsApp.</p>
+        <span class="conteggio">In preparazione</span>
+      </div>
+    </li>
+  </ul>
+</Base>
+
+<style>
+  .vantaggio-video { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.9rem 1rem; border-radius: 10px; background: color-mix(in srgb, #2e7d4f 9%, white); border: 1px solid color-mix(in srgb, #2e7d4f 30%, white); margin: 1.2rem 0 1.4rem; font-family: var(--ui); }
+  .vantaggio-video svg { flex: none; width: 1.5rem; height: 1.5rem; color: #2e7d4f; margin-top: 0.1rem; }
+  .vantaggio-video p { margin: 0; font-size: 0.98rem; line-height: 1.5; }
+  .elenco-video { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.9rem; }
+  .passi-video { font-family: var(--ui); padding-left: 1.3rem; }
+  .passi-video li { margin: 0.45rem 0; }
+  .prova-video { margin: 1.5rem 0; padding: 1rem 1.1rem; border: 1px dashed var(--riga); border-radius: 10px; font-family: var(--ui); }
+  .prova-video p { margin: 0 0 0.7rem; }
+</style>

@@ -665,3 +665,14 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 @media print { .assistente, .pi-lancio { display: none !important; } }
 .bottoni-fissi > .torna-su { margin-right: 0.375rem; }
 .bottoni-fissi > .bottone-whatsapp { margin-right: 0.2rem; }
+
+/* ---------- videocorsi nell'indice ---------- */
+.indice-videocorsi { display: flex; align-items: center; gap: 0.65rem; margin: 0.2rem 0 1rem; padding: 0.6rem 0.75rem; border-radius: 10px; background: color-mix(in srgb, var(--accento) 9%, white); border: 1px solid color-mix(in srgb, var(--accento) 25%, var(--riga)); text-decoration: none; color: var(--inchiostro); font-family: var(--ui); }
+.indice-videocorsi:hover { background: color-mix(in srgb, var(--accento) 14%, white); }
+.indice-videocorsi-icona { flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: var(--accento); color: white; font-size: 0.75rem; padding-left: 0.12rem; }
+.indice-videocorsi strong { display: block; font-size: 0.98rem; color: var(--accento); }
+.indice-videocorsi small { display: block; font-size: 0.78rem; color: var(--inchiostro-2); }
+.videocorsi-account { list-style: none; padding: 0; margin: 0.8rem 0 1.8rem; display: grid; gap: 0.8rem; font-family: var(--ui); }
+.videocorsi-account li { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; padding: 0.9rem 1rem; border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); background: white; }
+.videocorsi-account .nota-video { font-size: 0.88rem; color: var(--inchiostro-2); }
+.anche-nel-video { font-family: var(--ui); font-size: 0.93rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: var(--carta-2); }

@@ -33,6 +33,12 @@ const SEZIONI = sezioniL(lingua);
     </>
   ) : (
     <>
+      {lingua === 'it' && (
+        <a class="indice-videocorsi" href="/videocorsi">
+          <span class="indice-videocorsi-icona" aria-hidden="true">▶</span>
+          <span><strong>Videocorsi</strong><small>Lezioni registrate, video e PDF</small></span>
+        </a>
+      )}
       {gruppiL(lingua).map((g, i) => (
         <details class="indice-gruppo" open={i === 0}>
           <summary class="indice-materia"><span>{g}</span></summary>

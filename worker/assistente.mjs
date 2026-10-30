@@ -6,6 +6,7 @@
 // Variabili facoltative (wrangler.jsonc → vars): ASSISTENTE_MODELLO, ASSISTENTE_MODELLO_FOTO,
 // ASSISTENTE_MAX_STUDENTE, ASSISTENTE_MAX_OSPITE, ASSISTENTE_MAX_GIORNO, ASSISTENTE_TOKEN_STUDENTE/OSPITE/GIORNO.
 import { MATERIE } from '../src/data/materie.ts';
+import { VIDEOCORSI } from '../src/data/videocorsi.ts';
 
 // Testo: Gemma 4 (veloce ed economico), riserva gpt-oss-120b (più lento perché ragiona prima di rispondere).
 const MODELLI = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
@@ -75,7 +76,7 @@ function testoRisposta(r) {
 }
 
 // Le informazioni complete sul sito si mandano solo quando servono: così le domande di studio costano meno token.
-const DOMANDA_SUL_SITO = /prezz|cost|acquist|compr|pag[ao]|paddle|account|accesso|accedere|registr|materi|sblocc|rimbors|lezion|euro|€|dispositiv|whatsapp|contatt|sito|abbonament|gratis|gratuit|anteprima|price|buy|pay|refund|subject|login|free/i;
+const DOMANDA_SUL_SITO = /video|lezion|drive|prezz|cost|acquist|compr|pag[ao]|paddle|account|accesso|accedere|registr|materi|sblocc|rimbors|lezion|euro|€|dispositiv|whatsapp|contatt|sito|abbonament|gratis|gratuit|anteprima|price|buy|pay|refund|subject|login|free/i;
 
 // Informazioni sul sito per le domande su materie, prezzi, pagamenti e accesso (costruite dai dati del sito).
 function infoSito(aPagamento, prezzi, env = {}) {
@@ -93,6 +94,9 @@ function infoSito(aPagamento, prezzi, env = {}) {
 - Per lezioni private, problemi con l'account o con un pagamento, rimborsi e tutto ciò che non è scritto qui: scrivere a Carmine su WhatsApp dal pulsante verde in basso a destra o dalla pagina Contatti (https://ripetizionidianalisi.com/contatti).
 Materie disponibili:
 ${attive.map(riga).join('\n')}
+Videocorsi (lezioni registrate di Carmine, video e PDF di ogni lezione da circa 50 minuti, su Google Drive; acquisto unico con Paddle dalla pagina del corso; dopo il pagamento il link alla cartella compare nell'account e l'accesso va chiesto su Drive con la stessa email; l'acquisto sblocca in automatico le materie collegate del sito; elenco: https://ripetizionidianalisi.com/videocorsi):
+${VIDEOCORSI.map((v) => `- ${v.titolo}: ${v.lezioni} lezioni, ${v.prezzo} euro; sblocca sul sito ${v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')}. Pagina: https://ripetizionidianalisi.com/videocorsi/${v.slug}`).join('\n')}
+I corsi di gruppo dal vivo sono in preparazione: per informazioni scrivere a Carmine su WhatsApp.
 Materie in preparazione (non ancora acquistabili): ${prossime.map((m) => m.titolo).join(', ')}.`;
 }
 

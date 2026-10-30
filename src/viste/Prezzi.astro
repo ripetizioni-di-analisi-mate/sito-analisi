@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { materieL, link, T, type Lingua } from '../i18n';
+import SchedaVideocorso from '../components/SchedaVideocorso.astro';
+import { VIDEOCORSI } from '../data/videocorsi';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -23,8 +25,22 @@ const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
     ))}
   </ul>
 
+  {lingua === 'it' && (
+    <>
+      <h2>Videocorsi</h2>
+      <p>Le lezioni registrate dei corsi di Carmine, con video e PDF. Ogni videocorso sblocca in automatico le materie collegate del sito.</p>
+      <ul class="elenco-video-prezzi">
+        {VIDEOCORSI.map((v) => <li><SchedaVideocorso v={v} compatta /></li>)}
+      </ul>
+    </>
+  )}
+
   <h2>{t.cosaComprende}</h2>
   <ul class="cosa-include">
     {t.comprende.map((x) => <li>{x}</li>)}
   </ul>
 </Base>
+
+<style>
+  .elenco-video-prezzi { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.8rem; }
+</style>

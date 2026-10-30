@@ -96,6 +96,14 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Prodotto e prezzo Paddle (29 €, quantità massima 1) creati il 29/10; codice in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_SUPERIORI_5`. **Da fare**: traduzione inglese.
 - Build locale: con 4170 pagine il container a volte uccide il processo (exit 137); `NODE_OPTIONS=--max-old-space-size=5500 npx astro build` passa.
 
+## Videocorsi (dal 30/10/2026)
+- Videocorsi preregistrati di Carmine (prima sul vecchio sito ripetizioni-di-analisi-matematica.it, Hostinger): dati in `src/data/videocorsi.ts` (Analisi 1 e 2 51 lezioni 499 €, Analisi 1 35 lez. 360 €, Analisi 2 16 lez. 192 €, Matematica generale 38 lez. 456 €, Algebra 8 lez. 96 €; lezioni da circa 50 min, video e PDF su Google Drive).
+- Pagine `/videocorsi` e `/videocorsi/<slug>` (solo italiano), vetrina in home, voce in cima all'indice, sezione nei prezzi, rimando nelle pagine Sblocca, informazioni a Pi.
+- Acquisto: Paddle con `customData.videocorso`; codici `PADDLE_PREZZO_VIDEO_<SLUG>` in `wrangler.jsonc`. Il webhook registra l'abilitazione `video-<slug>` e sblocca le materie in `sblocca` (Analisi 1 → analisi-1 + precorso; Analisi 1 e 2 → analisi-1, analisi-2, precorso; Algebra → algebra-lineare). La dashboard può attivare anche i videocorsi (sblocca le materie collegate).
+- Link delle cartelle Drive: variabile `VIDEOCORSI_DRIVE` (JSON slug → link) in `wrangler.jsonc`, restituiti da `/api/videocorsi` solo a chi ha comprato; l'account mostra "I tuoi videocorsi". Lo studente chiede l'accesso su Drive e Carmine approva a mano (in futuro: condivisione automatica con l'API di Drive).
+- Prezzi barrati: non mostrati (Omnibus), solo il risparmio reale del pacchetto (552 € separati). Klarna non disponibile su Paddle (metodi: carte, PayPal, Apple Pay, Google Pay e altri locali).
+- Corsi di gruppo dal vivo: scheda "in preparazione" nella pagina videocorsi; prezzo per lezione da non mostrare (prima si parla con Carmine). Proposto codice di sblocco per i corsi di gruppo, in attesa di risposta.
+
 ## Guida concorsi
 - Pagina gratuita `/concorsi` ("Che cosa studiare per il tuo concorso", `src/pages/concorsi.astro`), scheda nel gruppo Concorsi in home e voce nell'indice.
 
