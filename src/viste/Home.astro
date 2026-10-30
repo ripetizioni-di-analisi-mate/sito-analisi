@@ -37,8 +37,9 @@ const icona = {
   <a class="presentazione-home" href={link(lingua, '/chi-sono')}>
     <img src="/chi-sono/carmine-320.webp" width="320" height="320" alt="Carmine Tornincasa" />
     <span>
-      <strong>{lingua === 'it' ? 'Scritto da Carmine Tornincasa' : 'Written by Carmine Tornincasa'}</strong>
-      <span>{lingua === 'it' ? 'Oltre mille studenti seguiti, più di diecimila ore di lezione' : 'More than a thousand students, over ten thousand hours of teaching'}</span>
+      <strong>{lingua === 'it' ? 'Ing. Carmine Tornincasa' : 'Carmine Tornincasa, civil engineer'}</strong>
+      <span>{lingua === 'it' ? 'Laureato in Ingegneria civile con 110 e lode all’Università degli Studi della Campania «Luigi Vanvitelli»' : 'Graduated in Civil Engineering with full marks and honours (110 cum laude) from the University of Campania Luigi Vanvitelli'}</span>
+      <span>{lingua === 'it' ? 'Oltre mille studenti seguiti e più di diecimila ore di lezione' : 'More than a thousand students and over ten thousand hours of teaching'}</span>
     </span>
   </a>
   <form class="cerca-home" action={link(lingua, '/cerca')} role="search">
