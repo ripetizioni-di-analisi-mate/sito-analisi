@@ -31,6 +31,7 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
+  author: { '@id': `${SITO}/#carmine` },
   isAccessibleForFree: !materiaL(lingua, materia).prezzo,
 } }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi, href: lista }, { titolo: `${t.esercizio} ${n}` }]}
