@@ -6,7 +6,7 @@
 // Variabili facoltative (wrangler.jsonc → vars): ASSISTENTE_MODELLO, ASSISTENTE_MODELLO_FOTO,
 // ASSISTENTE_MAX_STUDENTE, ASSISTENTE_MAX_OSPITE, ASSISTENTE_MAX_GIORNO, ASSISTENTE_TOKEN_STUDENTE/OSPITE/GIORNO.
 import { MATERIE } from '../src/data/materie.ts';
-import { VIDEOCORSI } from '../src/data/videocorsi.ts';
+import { VIDEOCORSI, valoreMateriale } from '../src/data/videocorsi.ts';
 
 // Testo: Gemma 4 (veloce ed economico), riserva gpt-oss-120b (più lento perché ragiona prima di rispondere).
 const MODELLI = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
@@ -95,7 +95,7 @@ function infoSito(aPagamento, prezzi, env = {}) {
 Materie disponibili:
 ${attive.map(riga).join('\n')}
 Videocorsi (lezioni registrate di Carmine, video e PDF di ogni lezione da circa 50 minuti, su Google Drive; acquisto unico con Paddle dalla pagina del corso; dopo il pagamento il link alla cartella compare nell'account e l'accesso va chiesto su Drive con la stessa email; l'acquisto sblocca in automatico le materie collegate del sito; elenco: https://ripetizionidianalisi.com/videocorsi):
-${VIDEOCORSI.map((v) => `- ${v.titolo}: ${v.lezioni} lezioni, ${v.prezzo} euro; sblocca sul sito ${v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')}. Pagina: https://ripetizionidianalisi.com/videocorsi/${v.slug}`).join('\n')}
+${VIDEOCORSI.map((v) => `- ${v.titolo}: ${v.lezioni} lezioni, ${v.prezzo} euro; sblocca sul sito ${v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')} (materiale didattico del valore di ${valoreMateriale(v)} euro, incluso e quindi risparmiato). Pagina: https://ripetizionidianalisi.com/videocorsi/${v.slug}`).join('\n')}
 I corsi di gruppo dal vivo sono in preparazione: per informazioni scrivere a Carmine su WhatsApp.
 Materie in preparazione (non ancora acquistabili): ${prossime.map((m) => m.titolo).join(', ')}.`;
 }

@@ -61,7 +61,7 @@ const MATERIE = materieL(lingua);
           </ul>
         );
         return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
-          <details class="sottogruppo" open={b.materie.some((v) => v.m.attiva)}>
+          <details class="sottogruppo">
             <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
             {griglia(b.materie)}
           </details>

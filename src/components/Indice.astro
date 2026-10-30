@@ -75,7 +75,7 @@ const SEZIONI = sezioniL(lingua);
               </ol>
             );
             return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
-              <details class="indice-sottogruppo" open={b.materie.some((v) => v.m.attiva)}>
+              <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
                 {lista(b.materie)}
               </details>

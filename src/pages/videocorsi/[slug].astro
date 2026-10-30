@@ -2,7 +2,7 @@
 // Pagina di un videocorso, con l'acquisto tramite Paddle (solo in italiano).
 import Base from '../../layouts/Base.astro';
 import { MATERIE } from '../../data/materie';
-import { VIDEOCORSI, MINUTI_LEZIONE, chiaveVideo, oreTotali, prezzoSeparato, type Videocorso } from '../../data/videocorsi';
+import { VIDEOCORSI, MINUTI_LEZIONE, chiaveVideo, oreTotali, prezzoSeparato, valoreMateriale, type Videocorso } from '../../data/videocorsi';
 import { SITO } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -12,6 +12,7 @@ interface Props { v: Videocorso }
 const { v } = Astro.props;
 const sblocca = v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)!).filter(Boolean);
 const separato = prezzoSeparato(v);
+const materiale = valoreMateriale(v);
 const chiave = chiaveVideo(v.slug);
 const altri = VIDEOCORSI.filter((x) => x.slug !== v.slug);
 const schema = [{
@@ -37,12 +38,12 @@ const titolo = v.titolo;
 
   <div class="sblocco-video" style={`--accento: ${v.colore}`}>
     <h2>Sblocca in automatico sul sito</h2>
-    <p>Con l'acquisto del videocorso trovi già sbloccate nel tuo account queste materie, senza costi aggiuntivi:</p>
+    <p>Con l'acquisto del videocorso trovi già sbloccate nel tuo account queste materie, senza costi aggiuntivi. <strong class="risparmio-materiale">Risparmi {materiale} € di materiale didattico.</strong></p>
     <ul>
       {sblocca.map((m) => (
         <li style={`--c: ${m.colore}`}>
           <a href={`/${m.slug}`}><span class="punto-materia"></span><strong>{m.titolo}</strong></a>
-          <span>{m.argomenti.length} argomenti di teoria, esercizi svolti ed esercizi con la soluzione</span>
+          <span>{m.argomenti.length} argomenti di teoria, esercizi svolti ed esercizi con la soluzione · {m.prezzo} € se acquistata da sola, inclusa nel videocorso</span>
         </li>
       ))}
     </ul>
@@ -51,6 +52,7 @@ const titolo = v.titolo;
   <div class="riquadro-acquisto" style={`--accento: ${v.colore}`}>
     <p class="prezzo"><strong>{v.prezzo} €</strong> <span>una volta sola</span></p>
     {separato > v.prezzo && <p class="risparmio-video">Risparmi {separato - v.prezzo} € rispetto ai corsi comprati separatamente ({separato} €)</p>}
+    {materiale > 0 && <p class="risparmio-video">Incluso il materiale didattico del sito: risparmi {materiale} €</p>}
     <div id="azione"><p class="esito-modulo">Un momento…</p></div>
     <p class="nota-termini">Con l'acquisto accetti i <a href="/termini">termini d'uso</a>: l'accesso ai video e alle materie è personale e il materiale non può essere condiviso né diffuso.</p>
   </div>

@@ -1,11 +1,12 @@
 ---
 // Scheda di un videocorso: usata in home, nella pagina dei videocorsi e nei prezzi.
 import { MATERIE } from '../data/materie';
-import { oreTotali, prezzoSeparato, type Videocorso } from '../data/videocorsi';
+import { oreTotali, prezzoSeparato, valoreMateriale, type Videocorso } from '../data/videocorsi';
 interface Props { v: Videocorso; compatta?: boolean }
 const { v, compatta = false } = Astro.props;
 const sblocca = v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)).filter(Boolean);
 const separato = prezzoSeparato(v);
+const materiale = valoreMateriale(v);
 ---
 <a class:list={['scheda-video', { compatta }]} href={`/videocorsi/${v.slug}`} style={`--accento: ${v.colore}`}>
   <span class="video-icona" aria-hidden="true">
@@ -20,6 +21,7 @@ const separato = prezzoSeparato(v);
       <span class="video-sblocca-etichetta">Sblocca subito sul sito</span>
       {sblocca.map((m) => <span class="video-chip" style={`--c: ${m!.colore}`}>{m!.breve}</span>)}
     </span>
+    {materiale > 0 && <span class="video-materiale">Risparmi {materiale} € di materiale didattico</span>}
     <span class="video-piede">
       <span class="video-prezzo">{v.prezzo} €</span>
       {separato > v.prezzo && <span class="video-risparmio">invece di {separato} € comprando i corsi separati</span>}
@@ -40,6 +42,7 @@ const separato = prezzoSeparato(v);
   .video-sommario { font-size: 0.95rem; color: var(--inchiostro-2); line-height: 1.45; }
   .video-sblocca { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; font-family: var(--ui); margin-top: 0.1rem; }
   .video-sblocca-etichetta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); margin-right: 0.15rem; }
+  .video-materiale { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; color: #2e7d4f; }
   .video-chip { font-size: 0.78rem; font-weight: 600; padding: 0.08rem 0.5rem; border-radius: 99px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, white); }
   .video-piede { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.6rem; margin-top: auto; padding-top: 0.35rem; font-family: var(--ui); }
   .video-prezzo { font-size: 1.35rem; font-weight: 700; color: var(--inchiostro); }

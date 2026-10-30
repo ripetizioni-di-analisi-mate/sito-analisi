@@ -3,6 +3,8 @@
 // Il codice del prezzo Paddle è nella variabile PADDLE_PREZZO_VIDEO_<SLUG> (wrangler.jsonc); il link della
 // cartella Drive in VIDEOCORSI_DRIVE (oggetto JSON slug → link), mostrato solo nell'account di chi ha comprato.
 
+import PREZZI from './prezzi.json';
+
 export interface Videocorso {
   slug: string;
   titolo: string;
@@ -77,3 +79,6 @@ export const variabilePrezzoVideo = (slug: string) => `PADDLE_PREZZO_VIDEO_${slu
 export const oreTotali = (v: Videocorso) => Math.round((v.lezioni * MINUTI_LEZIONE) / 60);
 export const prezzoSeparato = (v: Videocorso) =>
   (v.pacchettoDi || []).reduce((s, x) => s + (VIDEOCORSI.find((c) => c.slug === x)?.prezzo || 0), 0);
+/** Valore delle materie del sito sbloccate dal videocorso (prezzi attuali delle materie): è il risparmio sul materiale didattico. */
+export const valoreMateriale = (v: Videocorso) =>
+  v.sblocca.reduce((s, x) => s + ((PREZZI as Record<string, number>)[x] || 0), 0);

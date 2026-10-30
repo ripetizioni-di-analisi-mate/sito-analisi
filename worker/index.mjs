@@ -483,6 +483,7 @@ export default {
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
+            'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
           },
           videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
         } : null,
