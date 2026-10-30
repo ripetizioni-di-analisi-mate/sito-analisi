@@ -511,7 +511,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
   function attivita(lim) {
     const ev = [];
-    D.utenti.forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(u.fonte) + '</span>' : '') + (u.corso ? ' <span class="chip corso">corso: ' + esc(u.corso) + '</span>' : ''), email: u.email }));
+    D.utenti.forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(u.fonte) + '</span>' : '') + (u.corso ? ' <span class="chip corso">' + esc(u.corso) + '</span>' : ''), email: u.email }));
     D.acquisti.forEach((a) => ev.push({ t: a.creato, tipo: 'pagamento', s: '€', txt: '<b>' + esc(a.email) + '</b> ha comprato ' + esc(breveMateria(a.materia)) + ' · ' + eur.format(a.importo), email: a.email }));
     D.abilitazioni.filter((a) => a.origine === 'manuale').forEach((a) => ev.push({ t: a.creato, tipo: 'manuale', s: '✓', txt: 'Attivata ' + esc(breveMateria(a.materia)) + ' a <b>' + esc(a.email) + '</b>', email: a.email }));
     ev.sort((a, b) => String(b.t).localeCompare(String(a.t)));
@@ -554,7 +554,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<td class="solo-largo">' + (s.fonte ? '<span class="chip' + (s.fonte === 'Instagram' ? ' fonte-instagram' : '') + '">' + esc(s.fonte) + '</span>' : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.creato)) + '">' + (s.registrato ? fa(s.creato) : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.ultimo_accesso)) + '">' + fa(s.ultimo_accesso) + '</td>' +
-      '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + (s.corso ? '<span class="chip corso" title="Corso seguito: ' + esc(s.corso) + '">Corso: ' + esc(s.corso.length > 24 ? s.corso.slice(0, 23) + '…' : s.corso) + '</span>' : '') + '</div></td>' +
+      '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + (s.corso ? '<span class="chip corso" title="Corso seguito: ' + esc(s.corso) + '">' + esc(s.corso.length > 34 ? s.corso.slice(0, 33) + '…' : s.corso) + '</span>' : '') + '</div></td>' +
       '<td class="destra cifra solo-largo">' + (s.spesa ? eur.format(s.spesa) : '<span class="nota">—</span>') + '</td></tr>').join('');
   }
   function esportaCSV() {
@@ -572,7 +572,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
     const daAttivare = A_PAGAMENTO.filter((m) => !sbloccate.has(m));
     c.innerHTML = '<header><span class="avatar" style="background:' + coloreDa(s.email) + '">' + esc(iniziali(s)) + '</span><div><h2>' + esc(s.nome || s.email.split('@')[0]) + '</h2><p>' + esc(s.email) + '</p><div style="margin-top:.35rem">' + chipStato(s) + '</div></div><button class="chiudi" type="button" aria-label="Chiudi">×</button></header>' +
       '<div class="dentro">' +
-      (s.corso ? '<section class="corso-dichiarato"><h3>Segue o ha seguito un tuo corso</h3><p><b>' + esc(s.corso) + '</b></p><p class="nota">Lo ha indicato all\u2019iscrizione. Se è corretto, attiva qui sotto le materie da sbloccare gratis.</p></section>' : '') +
+      (s.corso ? '<section class="corso-dichiarato"><h3>È già un tuo studente</h3><p><b>' + esc(s.corso) + '</b></p><p class="nota">Lo ha indicato all\u2019iscrizione. Se è corretto, attiva qui sotto le materie da sbloccare gratis.</p></section>' : '') +
       '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultimo accesso</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
       '<section><h3>Materie sbloccate</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">Nessuna materia sbloccata.</p>') + '</section>' +
       (daAttivare.length ? '<section><h3>Attiva altre materie</h3><div class="scelte">' + daAttivare.map((m) => '<label class="scelta-m" style="--c:' + M[m].colore + '"><input type="checkbox" value="' + m + '"><i class="punto"></i>' + esc(breveMateria(m)) + '</label>').join('') + '</div><div class="azioni" style="margin-top:.7rem"><button type="button" class="bottone primario" id="c-attiva">Attiva le materie scelte</button></div></section>' : '') +

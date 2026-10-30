@@ -481,6 +481,8 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .modulo label.spunta input { width: 1.05rem; height: 1.05rem; padding: 0; margin: 0; accent-color: var(--accento); flex: none; }
 .modulo label small { font-weight: 400; color: var(--inchiostro-2); }
 .modulo .domanda-corso { font-weight: 600; font-size: 0.95rem; }
+.modulo .campo-corso legend { font-weight: 600; font-size: 0.95rem; padding: 0 0.3rem; }
+.modulo .nota-corso[hidden] { display: none; }
 .modulo .nota-corso { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
 .modulo .nota-privacy { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
 .modulo .nota-privacy[hidden] { display: none; }
