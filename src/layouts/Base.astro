@@ -244,7 +244,16 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     const radice = document.documentElement;
     if (radice.classList.contains('contenuto')) {
       // La finestra dell'assistente resta libera: lì si scrive, si seleziona e si copia.
-      const libero = (e: Event) => Boolean((e.target as Element | null)?.closest?.('.assistente'));
+      // Si guarda anche la selezione: il bersaglio di copia e scorciatoie è spesso la pagina intera o un nodo di testo.
+      const inPi = (n: Node | null | undefined) => {
+        const el = n && (n.nodeType === 1 ? (n as Element) : n.parentElement);
+        return Boolean(el?.closest?.('.assistente'));
+      };
+      const libero = (e: Event) => {
+        if (inPi(e.target as Node)) return true;
+        const sel = getSelection();
+        return Boolean(sel && sel.rangeCount && !sel.isCollapsed && inPi(sel.anchorNode) && inPi(sel.focusNode));
+      };
       const blocca = (e: Event) => { if (!libero(e)) e.preventDefault(); };
       ['contextmenu', 'copy', 'cut', 'dragstart', 'selectstart'].forEach((t) => document.addEventListener(t, blocca));
       addEventListener('keydown', (e) => {

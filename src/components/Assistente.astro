@@ -10,22 +10,18 @@ const s = en ? {
   apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
-  suggerimenti: ["I don't understand this part, can you explain it?", 'Can you give me an example?', 'Why does this step hold?'],
-  generali: ['Which subject should I start from?', 'How does the site work?', 'Can you explain a maths topic to me?'],
   barra: 'Ask Pi: limits, exercises, doubts…', benvenuto: ['Hi, I am ', 'Pi', '! I can explain any step of the theory and of the exercises. Write to me whenever you like.'], chiudiFumetto: 'Close message',
   bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
-  nuova: 'New conversation', avviso: 'Pi is an AI and can make mistakes: check the steps.',
+  ciao: 'Hi, I am Pi. Ask me about any step of the theory or of the exercises.', nuova: 'New conversation', copia: 'Copy', copiato: 'Copied', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
   apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
-  suggerimenti: ['Non ho capito questa parte, me la spieghi?', 'Mi fai un esempio?', 'Perché vale questo passaggio?'],
-  generali: ['Da quale materia conviene partire?', 'Come funziona il sito?', 'Mi spieghi un argomento di matematica?'],
   barra: 'Chiedi a Pi: limiti, esercizi, dubbi…', benvenuto: ['Ciao, sono ', 'Pi', '! Ti spiego qualsiasi passaggio della teoria e degli esercizi. Scrivimi quando vuoi.'], chiudiFumetto: 'Chiudi il messaggio',
   bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
-  nuova: 'Nuova conversazione', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
+  ciao: 'Ciao, sono Pi. Chiedimi qualsiasi passaggio della teoria o degli esercizi.', nuova: 'Nuova conversazione', copia: 'Copia', copiato: 'Copiato', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
 <div class="pi-lancio">
@@ -43,7 +39,7 @@ const s = en ? {
 
 <section class="assistente" hidden aria-label={s.nome}
   data-materia={materia ?? ''} data-argomento={argomento ?? ''} data-sezione={sezione ?? ''} data-lingua={lingua}
-  data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti })}>
+  data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti, copia: s.copia, copiato: s.copiato })}>
   <header class="assistente-testa">
     <div>
       <strong>{s.nome}</strong>
@@ -61,10 +57,7 @@ const s = en ? {
       <small>{s.cambia}</small>
     </div>
     <div class="assistente-messaggi" aria-live="polite">
-      <div class="assistente-suggerimenti">
-        {s.suggerimenti.map((x) => <button type="button" data-suggerimento class="sugg-studio">{x}</button>)}
-        {s.generali.map((x) => <button type="button" data-suggerimento class="sugg-generale">{x}</button>)}
-      </div>
+      <p class="assistente-ciao">{s.ciao}</p>
     </div>
     <form class="assistente-modulo">
       <textarea rows="2" maxlength="2000" placeholder={s.scrivi} aria-label={s.scrivi}></textarea>
@@ -84,7 +77,6 @@ const s = en ? {
     const testi = JSON.parse(pannello.dataset.testi || '{}');
     const radice = document.documentElement;
     const lista = pannello.querySelector<HTMLElement>('.assistente-messaggi')!;
-    const suggerimenti = pannello.querySelector<HTMLElement>('.assistente-suggerimenti')!;
     const modulo = pannello.querySelector<HTMLFormElement>('.assistente-modulo')!;
     const campo = modulo.querySelector('textarea')!;
     const boxParte = pannello.querySelector<HTMLElement>('.assistente-parte')!;
@@ -209,18 +201,46 @@ const s = en ? {
         }).join('');
       }).join('');
       // Gli asterischi rimasti (grassetti spezzati, elenchi irregolari) non si mostrano.
-      return html.replace(/\*+/g, '').replace(/\u0000(\d+)\u0000/g, (_, i) => formule[Number(i)]);
+      return html.replace(/\*+/g, '')
+        // Indirizzi del sito cliccabili.
+        .replace(/(https:\/\/ripetizionidianalisi\.com[^\s<)]*[^\s<).,;:])/g, '<a href="$1">$1</a>')
+        .replace(/\u0000(\d+)\u0000/g, (_, i) => formule[Number(i)]);
+    }
+
+    // La conversazione resta salvata nel browser: cambiando pagina continua (per 24 ore).
+    const CHIAVE = 'pi-conversazione';
+    function salva() {
+      try { localStorage.setItem(CHIAVE, JSON.stringify({ t: Date.now(), m: conversazione.slice(-30) })); } catch {}
+    }
+    function carica(): Messaggio[] {
+      try {
+        const d = JSON.parse(localStorage.getItem(CHIAVE) || 'null');
+        if (d && Array.isArray(d.m) && Date.now() - d.t < 24 * 3600 * 1000) return d.m;
+      } catch {}
+      return [];
     }
 
     function aggiungi(m: Messaggio | { ruolo: 'errore' | 'attesa'; testo: string }) {
-      suggerimenti.hidden = true;
       const d = document.createElement('div');
       d.className = `assistente-msg msg-${m.ruolo}`;
-      if (m.ruolo === 'assistente') d.innerHTML = formattato(m.testo);
+      if (m.ruolo === 'assistente') mostraRisposta(d, m.testo, true);
       else d.textContent = m.testo;
       lista.append(d);
       lista.scrollTop = lista.scrollHeight;
       return d;
+    }
+    function mostraRisposta(d: HTMLElement, t: string, finita: boolean) {
+      d.innerHTML = formattato(t);
+      if (!finita) return;
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'assistente-copia'; b.textContent = testi.copia;
+      b.addEventListener('click', () => {
+        navigator.clipboard?.writeText(t).then(() => {
+          b.textContent = testi.copiato;
+          setTimeout(() => { b.textContent = testi.copia; }, 1500);
+        }).catch(() => {});
+      });
+      d.append(b);
     }
 
     async function invia(domanda: string) {
@@ -236,6 +256,12 @@ const s = en ? {
       const p = ps.find((x) => x.el === parte);
       // Pagine senza testo di studio (home, prezzi, guida…): si manda l'inizio del testo della pagina.
       const pagina = !studio ? { titolo: document.querySelector('main h1')?.textContent?.trim() || document.title, testo: (document.querySelector('main')?.innerText || '').replace(/\s+\n/g, '\n').slice(0, 3000) } : null;
+      const errore = (t: string) => {
+        attesa.remove();
+        conversazione.pop();
+        salva();
+        aggiungi({ ruolo: 'errore', testo: t });
+      };
       try {
         const r = await fetch('/api/assistente', {
           method: 'POST',
@@ -249,34 +275,64 @@ const s = en ? {
             messaggi: conversazione,
           }),
         });
-        const d = await r.json().catch(() => ({}));
         if (!katex) { try { katex = (await import('katex')).default; } catch { /* formule come testo */ } }
-        attesa.remove();
-        if (d.risposta) {
-          conversazione.push({ ruolo: 'assistente', testo: d.risposta });
-          aggiungi({ ruolo: 'assistente', testo: d.risposta });
+        const tipo = r.headers.get('content-type') || '';
+        if (r.ok && tipo.startsWith('text/plain') && r.body) {
+          // Risposta in streaming: il testo compare man mano che arriva.
+          const lettore = r.body.getReader();
+          const dec = new TextDecoder();
+          let risposta = '';
+          let box: HTMLElement | null = null;
+          let ultimo = 0;
+          for (;;) {
+            const { done, value } = await lettore.read();
+            if (done) break;
+            risposta += dec.decode(value, { stream: true });
+            if (!risposta.trim()) continue;
+            if (!box) { attesa.remove(); box = document.createElement('div'); box.className = 'assistente-msg msg-assistente'; lista.append(box); }
+            const ora = Date.now();
+            if (ora - ultimo > 120) {
+              ultimo = ora;
+              const giu = lista.scrollHeight - lista.scrollTop - lista.clientHeight < 60;
+              mostraRisposta(box, risposta, false);
+              if (giu) lista.scrollTop = lista.scrollHeight;
+            }
+          }
+          risposta = risposta.trim();
+          if (!risposta) { errore(pannello!.dataset.lingua === 'en' ? 'The assistant did not answer. Please try again.' : 'Pi non ha risposto. Riprova.'); }
+          else {
+            mostraRisposta(box!, risposta, true);
+            conversazione.push({ ruolo: 'assistente', testo: risposta });
+            salva();
+          }
+          const n = r.headers.get('x-rimasti');
+          if (n !== null) rimasti.textContent = `${n} ${testi.rimasti}.`;
         } else {
-          conversazione.pop();
-          aggiungi({ ruolo: 'errore', testo: d.errore || 'Errore.' });
+          const d = await r.json().catch(() => ({}));
+          if (d.risposta) {
+            attesa.remove();
+            conversazione.push({ ruolo: 'assistente', testo: d.risposta });
+            salva();
+            aggiungi({ ruolo: 'assistente', testo: d.risposta });
+          } else errore(d.errore || 'Errore.');
+          if (typeof d.rimasti === 'number') rimasti.textContent = `${d.rimasti} ${testi.rimasti}.`;
         }
-        if (typeof d.rimasti === 'number') rimasti.textContent = `${d.rimasti} ${testi.rimasti}.`;
       } catch {
-        attesa.remove();
-        conversazione.pop();
-        aggiungi({ ruolo: 'errore', testo: pannello!.dataset.lingua === 'en' ? 'Connection error. Please try again.' : 'Errore di connessione. Riprova.' });
+        errore(pannello!.dataset.lingua === 'en' ? 'Connection error. Please try again.' : 'Errore di connessione. Riprova.');
       }
       inCorso = false;
     }
 
-    function apriPannello() {
+    function apriPannello(scorri = true) {
       pannello!.hidden = false;
       radice.classList.add('assistente-aperto');
+      try { sessionStorage.setItem('pi-aperto', '1'); } catch {}
       apri!.setAttribute('aria-expanded', 'true');
       if (studio) {
         const p = parteInVista();
         scegli(p);
         // Su telefono la finestra copre la metà bassa: la parte scelta sale in cima allo schermo.
-        if (p && !matchMedia('(min-width: 40rem)').matches) p.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        if (scorri && p && !matchMedia('(min-width: 40rem)').matches) p.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
       }
       if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
       if (matchMedia('(min-width: 40rem)').matches) campo.focus();
@@ -284,6 +340,7 @@ const s = en ? {
     function chiudiPannello() {
       pannello!.hidden = true;
       radice.classList.remove('assistente-aperto');
+      try { sessionStorage.removeItem('pi-aperto'); } catch {}
       apri!.setAttribute('aria-expanded', 'false');
       scegli(undefined);
     }
@@ -308,15 +365,22 @@ const s = en ? {
     pannello.querySelector('[data-chiudi-assistente]')?.addEventListener('click', chiudiPannello);
     pannello.querySelector('[data-nuova]')?.addEventListener('click', () => {
       conversazione = [];
+      salva();
       lista.querySelectorAll('.assistente-msg').forEach((x) => x.remove());
-      suggerimenti.hidden = false;
       scegli(parteInVista());
     });
     addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pannello.hidden) chiudiPannello(); });
-    suggerimenti.addEventListener('click', (e) => {
-      const b = (e.target as HTMLElement).closest('[data-suggerimento]');
-      if (b) invia(b.textContent || '');
-    });
+    // Conversazione salvata: si ridisegna, e se la finestra era aperta nella pagina precedente resta aperta.
+    conversazione = carica();
+    if (conversazione.length) {
+      import('katex').then((k) => { katex = k.default; }).catch(() => {}).finally(() => {
+        conversazione.forEach((m) => aggiungi(m));
+      });
+    }
+    let eraAperto = false;
+    try { eraAperto = sessionStorage.getItem('pi-aperto') === '1'; } catch {}
+    // Solo su schermi larghi: su telefono la finestra coprirebbe metà della pagina nuova.
+    if (eraAperto && matchMedia('(min-width: 40rem)').matches) { nascondiFumetto(); apriPannello(false); }
     modulo.addEventListener('submit', (e) => { e.preventDefault(); invia(campo.value); });
     campo.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); invia(campo.value); }

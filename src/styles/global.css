@@ -610,15 +610,10 @@ html.assistente-aperto .pi-lancio { display: none; }
 .assistente-testa button:hover { background: var(--carta-2); }
 .assistente-testa button svg { width: 1.1rem; height: 1.1rem; }
 .assistente-attivo { display: flex; flex: 1; min-height: 0; flex-direction: column; }
-.assistente.con-studio .sugg-generale, .assistente:not(.con-studio) .sugg-studio { display: none; }
 .assistente-parte { margin: 0.6rem 0.8rem 0; padding: 0.5rem 0.7rem; border-radius: 10px; background: color-mix(in srgb, var(--accento) 7%, white); font-size: 0.85rem; line-height: 1.35; }
 .assistente-parte strong { color: var(--accento); }
 .assistente-parte small { display: block; margin-top: 0.15rem; color: color-mix(in srgb, var(--inchiostro) 60%, transparent); font-size: 0.75rem; }
 .assistente-messaggi { flex: 1; min-height: 0; overflow-y: auto; padding: 0.8rem; display: flex; flex-direction: column; gap: 0.7rem; }
-.assistente-suggerimenti { display: flex; flex-direction: column; gap: 0.45rem; margin-top: auto; }
-.assistente-suggerimenti[hidden] { display: none; }
-.assistente-suggerimenti button { text-align: left; padding: 0.55rem 0.75rem; border-radius: 10px; border: 1px solid var(--riga); background: white; color: var(--inchiostro); font: inherit; font-size: 0.9rem; cursor: pointer; }
-.assistente-suggerimenti button:hover { border-color: var(--accento); color: var(--accento); }
 .assistente-msg { font-size: 0.93rem; line-height: 1.55; overflow-wrap: anywhere; }
 .msg-studente { align-self: flex-end; max-width: 85%; padding: 0.5rem 0.8rem; border-radius: 12px 12px 4px 12px; background: var(--carta-2); white-space: pre-wrap; }
 .msg-assistente { font-family: var(--testo); font-size: 0.98rem; }
@@ -626,6 +621,12 @@ html.assistente-aperto .pi-lancio { display: none; }
 .msg-assistente ul, .msg-assistente ol { margin: 0 0 0.55rem; padding-left: 1.3rem; }
 .msg-assistente .katex-display { margin: 0.5rem 0; }
 .msg-attesa { color: color-mix(in srgb, var(--inchiostro) 60%, transparent); font-style: italic; }
+.assistente, .assistente * { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
+.assistente-ciao { margin: auto 0 0; color: color-mix(in srgb, var(--inchiostro) 65%, transparent); font-size: 0.92rem; }
+.assistente-msg ~ .assistente-ciao, .assistente-ciao:has(~ .assistente-msg) { display: none; }
+.msg-assistente a { color: var(--accento); }
+.assistente-copia { display: block; margin: 0.15rem 0 0; padding: 0.2rem 0.55rem; border: 1px solid var(--riga); border-radius: 8px; background: white; color: color-mix(in srgb, var(--inchiostro) 70%, transparent); font: 0.78rem var(--ui); cursor: pointer; }
+.assistente-copia:hover { border-color: var(--accento); color: var(--accento); }
 .msg-errore { color: #9b2c2c; background: #fbeeee; padding: 0.5rem 0.75rem; border-radius: 10px; }
 .assistente-modulo { display: flex; align-items: flex-end; gap: 0.45rem; padding: 0.6rem 0.7rem 0.3rem; border-top: 1px solid var(--riga); }
 .assistente-modulo textarea { flex: 1; resize: none; max-height: 8rem; padding: 0.55rem 0.7rem; border: 1px solid var(--riga); border-radius: 10px; font: inherit; font-size: 0.95rem; line-height: 1.4; color: var(--inchiostro); background: white; }

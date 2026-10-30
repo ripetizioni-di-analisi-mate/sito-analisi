@@ -105,6 +105,9 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
     // e la provenienza della prima visita (Instagram, Google, …)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
+    // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
+    try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -185,15 +188,20 @@ export class Archivio {
         return Response.json({ ok: true, account: Boolean(this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) });
 
       case '/assistente-conta': { // messaggi all'assistente: limite per studente e per tutto il sito
-        const mio = this.riga('SELECT n FROM assistente WHERE giorno = ? AND email = ?', c.giorno, c.email)?.n || 0;
-        if (mio >= c.maxStudente) return Response.json({ ok: false, motivo: 'studente' });
-        const tutti = this.riga('SELECT SUM(n) AS n FROM assistente WHERE giorno = ?', c.giorno)?.n || 0;
-        if (tutti >= c.maxGiorno) return Response.json({ ok: false, motivo: 'sito' });
+        const r1 = this.riga('SELECT n, COALESCE(tin, 0) + COALESCE(tout, 0) AS t FROM assistente WHERE giorno = ? AND email = ?', c.giorno, c.email);
+        const mio = r1?.n || 0;
+        if (mio >= c.maxStudente || (c.maxToken && (r1?.t || 0) >= c.maxToken)) return Response.json({ ok: false, motivo: 'studente' });
+        const r2 = this.riga('SELECT SUM(n) AS n, SUM(COALESCE(tin, 0) + COALESCE(tout, 0)) AS t FROM assistente WHERE giorno = ?', c.giorno);
+        if ((r2?.n || 0) >= c.maxGiorno || (c.maxTokenGiorno && (r2?.t || 0) >= c.maxTokenGiorno)) return Response.json({ ok: false, motivo: 'sito' });
         this.sql.exec(`INSERT INTO assistente (giorno, email, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, email) DO UPDATE SET n = n + 1`, c.giorno, c.email);
         if (Math.random() < 0.01) this.sql.exec("DELETE FROM assistente WHERE giorno < date('now', '-200 days')");
         return Response.json({ ok: true, n: mio + 1 });
       }
+      case '/assistente-token':
+        this.sql.exec('UPDATE assistente SET tin = COALESCE(tin, 0) + ?, tout = COALESCE(tout, 0) + ? WHERE giorno = ? AND email = ?',
+          Math.max(0, Number(c.tin) || 0), Math.max(0, Number(c.tout) || 0), c.giorno, c.email);
+        return Response.json({ ok: true });
       case '/assistente-rimborso':
         this.sql.exec('UPDATE assistente SET n = MAX(n - 1, 0) WHERE giorno = ? AND email = ?', c.giorno, c.email);
         return Response.json({ ok: true });
@@ -230,7 +238,7 @@ export class Archivio {
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
           dispositivi: this.righe('SELECT email, nome, creato, ultimo_uso FROM dispositivi ORDER BY ultimo_uso DESC LIMIT 2000'),
-          assistente: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS studenti FROM assistente
+          assistente: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS studenti, SUM(COALESCE(tin, 0)) AS token_entrata, SUM(COALESCE(tout, 0)) AS token_uscita FROM assistente
                                   WHERE giorno >= date('now', '-89 days') GROUP BY giorno ORDER BY giorno`),
         });
       }
