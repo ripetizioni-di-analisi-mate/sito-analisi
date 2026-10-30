@@ -1,29 +1,28 @@
 // Assistente di studio: risponde alle domande degli studenti sulla pagina che stanno leggendo.
-// Modello principale: Claude (API di Anthropic), se su Cloudflare c'è il segreto ANTHROPIC_API_KEY.
+// Usa l'intelligenza artificiale di Cloudflare (Workers AI, binding "AI" in wrangler.jsonc).
 // La risposta arriva a pezzi (streaming), così lo studente la vede scrivere subito.
-// Senza chiave, o se Claude non risponde, si usa l'intelligenza artificiale gratuita di Cloudflare
-// (Workers AI, binding "AI" in wrangler.jsonc).
-// Limiti: uno per studente e uno per l'intero sito.
-// Variabili facoltative (wrangler.jsonc → vars): ASSISTENTE_CLAUDE (modello Claude), ASSISTENTE_MODELLO,
-// ASSISTENTE_MAX_STUDENTE, ASSISTENTE_MAX_OSPITE, ASSISTENTE_MAX_GIORNO.
+// Le domande con una foto (esercizio fotografato) vanno a un modello che legge le immagini.
+// Limiti: per studente e per l'intero sito, in messaggi e in token.
+// Variabili facoltative (wrangler.jsonc → vars): ASSISTENTE_MODELLO, ASSISTENTE_MODELLO_FOTO,
+// ASSISTENTE_MAX_STUDENTE, ASSISTENTE_MAX_OSPITE, ASSISTENTE_MAX_GIORNO, ASSISTENTE_TOKEN_STUDENTE/OSPITE/GIORNO.
 import { MATERIE } from '../src/data/materie.ts';
 
-// Claude Haiku 5.5: il modello Claude più economico (0,10 $ per milione di token in entrata, 0,50 $ in uscita),
-// con ragionamento adattivo, utile in matematica. Riserva: Haiku 4.5.
-const CLAUDE = ['claude-haiku-5-5', 'claude-haiku-4-5'];
-const MODELLI = ['@cf/openai/gpt-oss-120b', '@cf/google/gemma-4-26b-a4b-it'];
+// Testo: Gemma 4 (veloce ed economico), riserva gpt-oss-120b (più lento perché ragiona prima di rispondere).
+const MODELLI = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
+// Foto: modelli che leggono le immagini.
+const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const MAX_STUDENTE = 20;   // messaggi al giorno per studente con account
 const MAX_OSPITE = 5;      // messaggi al giorno senza account
 const SCHEDE_LIBERE = 3;   // come in index.mjs
 const MAX_DISPOSITIVI = 2; // come in index.mjs
 const MAX_GIORNO = 2000;   // messaggi al giorno per tutto il sito
 // Tetti di token al giorno (entrata + uscita), oltre al numero di messaggi.
-// Una domanda costa in media circa 6000 token in entrata (istruzioni, pagina, conversazione)
-// e 1500 in uscita (ragionamento compreso): circa 0,0014 $ con Haiku 5.5.
-const MAX_TOKEN_STUDENTE = 150000;  // circa 20 domande al giorno
-const MAX_TOKEN_OSPITE = 40000;     // circa 5 domande
-const MAX_TOKEN_GIORNO = 20000000;  // tutto il sito: al massimo circa 3 $ al giorno
-const MAX_USCITA = 4000;            // lunghezza massima di una risposta, ragionamento compreso, in token
+// Una domanda costa circa 3000-5000 token in entrata (istruzioni, pagina, conversazione) e 600 in uscita.
+const MAX_TOKEN_STUDENTE = 120000;  // circa 20 domande al giorno
+const MAX_TOKEN_OSPITE = 30000;     // circa 5 domande
+const MAX_TOKEN_GIORNO = 20000000;  // tutto il sito
+const MAX_USCITA = 1200;            // lunghezza massima di una risposta, in token
+const MAX_FOTO = 1500000;           // dimensione massima della foto (caratteri del data URL, circa 1 MB)
 
 const TIPI = { teoria: 'teoria', 'esercizi-svolti': 'esercizi svolti', esercizi: 'esercizi da fare' };
 
@@ -75,6 +74,9 @@ function testoRisposta(r) {
   return '';
 }
 
+// Le informazioni complete sul sito si mandano solo quando servono: così le domande di studio costano meno token.
+const DOMANDA_SUL_SITO = /prezz|cost|acquist|compr|pag[ao]|paddle|account|accesso|accedere|registr|materi|sblocc|rimbors|lezion|euro|€|dispositiv|whatsapp|contatt|sito|abbonament|gratis|gratuit|anteprima|price|buy|pay|refund|subject|login|free/i;
+
 // Informazioni sul sito per le domande su materie, prezzi, pagamenti e accesso (costruite dai dati del sito).
 function infoSito(aPagamento, prezzi, env = {}) {
   const attive = MATERIE.filter((m) => m.attiva);
@@ -100,13 +102,15 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const en = lingua(b) === 'en';
   const msg = (it, eng) => (en ? eng : it);
 
-  if (!env.AI && !env.ANTHROPIC_API_KEY) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.') }, 503);
+  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.') }, 503);
   const materia = MATERIE.find((m) => m.slug === b.materia) || null;
 
-  const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-16)
-    .map((m) => ({ role: m.ruolo === 'assistente' ? 'assistant' : 'user', content: taglia(m.testo, 2500).trim() }))
+  const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-10)
+    .map((m) => ({ role: m.ruolo === 'assistente' ? 'assistant' : 'user', content: taglia(m.testo, 2000).trim() }))
     .filter((m) => m.content);
   if (!messaggi.length || messaggi[messaggi.length - 1].role !== 'user') return json({ errore: 'Messaggio vuoto.' }, 400);
+  const foto = typeof b.immagine === 'string' && /^data:image\/(jpeg|png|webp);base64,/.test(b.immagine) && b.immagine.length <= MAX_FOTO ? b.immagine : null;
+  if (b.immagine && !foto) return json({ errore: msg('La foto non è valida o è troppo grande.', 'The photo is not valid or is too large.') }, 400);
 
   // Chi scrive: lo studente con l'account, oppure un ospite riconosciuto da un'impronta non reversibile (indirizzo e browser).
   let chi = io?.email;
@@ -125,122 +129,127 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
       errore: conto.motivo === 'sito'
         ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
         : io
-          ? msg(`Hai usato i ${maxStudente} messaggi di oggi. Domani Pi sarà di nuovo disponibile.`, `You have used today's ${maxStudente} messages. The assistant will be available again tomorrow.`)
-          : msg(`Hai usato i ${maxStudente} messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, `You have used today's ${maxStudente} guest messages. Log in or create a free account to get more.`),
+          ? msg('Hai raggiunto il limite di messaggi di oggi. Domani Pi sarà di nuovo disponibile.', "You have reached today's message limit. The assistant will be available again tomorrow.")
+          : msg(`Hai usato i messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, 'You have used today’s guest messages. Log in or create a free account to get more.'),
       codice: io ? 'limite' : 'ospite', rimasti: 0,
     }, 429);
   }
 
   const argomento = materia?.argomenti.find((a) => a.slug === b.argomento);
+  const ultima = messaggi[messaggi.length - 1].content;
+  const sulSito = !TIPI[b.tipo] || DOMANDA_SUL_SITO.test(ultima);
   const contesto = [
     materia ? `Materia: ${materia.titolo}` : '',
     argomento ? `Argomento: ${argomento.titolo}` : '',
     `Pagina: ${TIPI[b.tipo] || 'pagina generale del sito'}${b.titoloPagina ? ` · ${taglia(b.titoloPagina, 200)}` : ''}`,
     io ? `Lo studente ha un account${io.materie.length ? `; materie sbloccate: ${io.materie.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')}` : ', ma non ha ancora sbloccato materie'}.` : 'Lo studente non ha fatto l’accesso.',
-    b.parte?.testo ? `\nParte della pagina indicata dallo studente${b.parte.titolo ? ` (${taglia(b.parte.titolo, 200)})` : ''}:\n"""\n${taglia(b.parte.testo, 6000)}\n"""` : '',
+    foto ? 'Lo studente ha allegato una foto (di solito un esercizio): leggila con attenzione, trascrivi in LaTeX la parte che serve e poi rispondi.' : '',
+    b.parte?.testo ? `\nParte della pagina indicata dallo studente${b.parte.titolo ? ` (${taglia(b.parte.titolo, 200)})` : ''}:\n"""\n${taglia(b.parte.testo, 5000)}\n"""` : '',
     b.paragrafo?.testo && b.paragrafo.testo !== b.parte?.testo
-      ? `\nParagrafo completo in cui si trova${b.paragrafo.titolo ? ` (${taglia(b.paragrafo.titolo, 200)})` : ''}:\n"""\n${taglia(b.paragrafo.testo, 9000)}\n"""` : '',
+      ? `\nParagrafo in cui si trova${b.paragrafo.titolo ? ` (${taglia(b.paragrafo.titolo, 200)})` : ''}:\n"""\n${taglia(b.paragrafo.testo, 4000)}\n"""` : '',
   ].filter(Boolean).join('\n');
-
-  const richiesta = [
-    { role: 'system', content: `${ISTRUZIONI}\n\n${infoSito(aPagamento, prezzi, env)}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}` },
-    ...messaggi,
-  ];
+  const sito = sulSito
+    ? infoSito(aPagamento, prezzi, env)
+    : 'Per domande su materie, prezzi, acquisto o accesso: pagina https://ripetizionidianalisi.com/prezzi, oppure Carmine su WhatsApp dal pulsante verde.';
+  const sistema = `${ISTRUZIONI}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
   const rimasti = Math.max(0, maxStudente - conto.n);
   const rimborsa = () => aDO(env, '/assistente-rimborso', { giorno, email: chi }).catch(() => {});
+  // Token stimati dai caratteri (circa 4 caratteri per token), più un forfait per la foto.
+  const tin = Math.round((sistema.length + messaggi.reduce((t, m) => t + m.content.length, 0)) / 4) + (foto ? 1500 : 0);
+  const conta = (tout) => aDO(env, '/assistente-token', { giorno, email: chi, tin, tout }).catch(() => {});
 
-  // 1. Claude, con la risposta in streaming (si prova il modello principale, poi la riserva).
-  if (env.ANTHROPIC_API_KEY) {
-    const conta = (tin, tout) => aDO(env, '/assistente-token', { giorno, email: chi, tin, tout }).catch(() => {});
-    const claude = env.ASSISTENTE_CLAUDE ? [env.ASSISTENTE_CLAUDE, ...CLAUDE.filter((m) => m !== env.ASSISTENTE_CLAUDE)] : CLAUDE;
-    for (const modello of claude) {
-      try {
-        const r = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json', 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
-          body: JSON.stringify({
-            model: modello,
-            max_tokens: MAX_USCITA,
-            stream: true,
-            system: [
-              // Istruzioni e informazioni sul sito sono uguali per tutti: si tengono in cache (costano meno).
-              { type: 'text', text: `${ISTRUZIONI}\n\n${infoSito(aPagamento, prezzi, env)}`, cache_control: { type: 'ephemeral' } },
-              { type: 'text', text: `Contesto della pagina che lo studente sta leggendo.\n${contesto}` },
-            ],
-            messages: unisci(messaggi),
-          }),
-        });
-        if (r.ok && r.body) return flussoClaude(r.body, rimasti, conta);
-        console.log('Claude', modello, r.status, (await r.text().catch(() => '')).slice(0, 300));
-      } catch (e) { console.log('Claude', modello, String(e)); }
+  // Richieste da provare in ordine: per le foto i modelli che leggono le immagini (in due formati), altrimenti quelli di testo.
+  const tentativi = [];
+  if (foto) {
+    const fotoModelli = env.ASSISTENTE_MODELLO_FOTO ? [env.ASSISTENTE_MODELLO_FOTO, ...MODELLI_FOTO.filter((m) => m !== env.ASSISTENTE_MODELLO_FOTO)] : MODELLI_FOTO;
+    const conFoto = [...messaggi.slice(0, -1), { role: 'user', content: [{ type: 'text', text: ultima }, { type: 'image_url', image_url: { url: foto } }] }];
+    for (const m of fotoModelli) {
+      tentativi.push([m, { messages: [{ role: 'system', content: sistema }, ...conFoto] }]);
+      tentativi.push([m, { messages: [{ role: 'system', content: sistema }, ...messaggi], image: foto }]);
     }
+  } else {
+    const testoModelli = env.ASSISTENTE_MODELLO ? [env.ASSISTENTE_MODELLO, ...MODELLI.filter((m) => m !== env.ASSISTENTE_MODELLO)] : MODELLI;
+    for (const m of testoModelli) tentativi.push([m, { messages: [{ role: 'system', content: sistema }, ...messaggi] }]);
   }
 
-  // 2. Riserva gratuita: Workers AI, risposta tutta insieme.
-  const modelli = env.ASSISTENTE_MODELLO ? [env.ASSISTENTE_MODELLO, ...MODELLI.filter((m) => m !== env.ASSISTENTE_MODELLO)] : MODELLI;
-  let testo = '';
   let ultimoErrore = null;
-  if (env.AI) {
-    for (const modello of modelli) {
-      try {
-        const r = await env.AI.run(modello, { messages: richiesta, max_tokens: 3000, temperature: 0.3 });
-        testo = testoRisposta(r).trim();
-        if (testo) break;
-      } catch (e) { ultimoErrore = e; }
-    }
+  for (const [modello, input] of tentativi) {
+    try {
+      const r = await env.AI.run(modello, { ...input, max_tokens: MAX_USCITA, temperature: 0.3, stream: true });
+      if (r instanceof ReadableStream) return flussoAI(r, rimasti, conta);
+      // Alcuni modelli ignorano lo streaming e rispondono tutto insieme.
+      const t = pulisci(testoRisposta(r));
+      if (t) { await conta(Math.round(t.length / 4)); return json({ risposta: t, rimasti }); }
+    } catch (e) { ultimoErrore = e; console.log('Pi', modello, String(e?.message || e).slice(0, 200)); }
   }
-  if (!testo) {
-    await rimborsa();
-    const quota = /4006|allocation|neurons|limit/i.test(String(ultimoErrore?.message || ''));
-    return json({
-      errore: quota
-        ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
+  await rimborsa();
+  const quota = /4006|allocation|neurons|limit/i.test(String(ultimoErrore?.message || ''));
+  return json({
+    errore: quota
+      ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
+      : foto
+        ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.')
         : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.'),
-    }, 502);
-  }
-  // Alcuni modelli scrivono il ragionamento tra tag: si tiene solo la risposta.
-  testo = testo.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-  return json({ risposta: testo, rimasti });
+  }, 502);
 }
 
-// Claude vuole messaggi alternati che iniziano dallo studente: si uniscono quelli consecutivi dello stesso ruolo.
-function unisci(messaggi) {
-  const out = [];
-  for (const m of messaggi) {
-    if (out.length && out[out.length - 1].role === m.role) out[out.length - 1].content += `\n\n${m.content}`;
-    else out.push({ ...m });
-  }
-  while (out.length && out[0].role !== 'user') out.shift();
-  return out;
+// Alcuni modelli scrivono il ragionamento tra tag: si tiene solo la risposta.
+const pulisci = (t) => String(t || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+
+// Testo contenuto in un evento dello streaming, qualunque sia il formato del modello.
+function pezzoDi(ev) {
+  if (typeof ev.response === 'string') return ev.response;
+  const d = ev.choices?.[0]?.delta;
+  if (d && typeof d.content === 'string') return d.content;
+  if (ev.type === 'response.output_text.delta' && typeof ev.delta === 'string') return ev.delta;
+  return '';
 }
 
-// Trasforma lo streaming di Claude (eventi SSE) in testo semplice che arriva a pezzi al browser.
-function flussoClaude(body, rimasti, conta) {
+// Trasforma lo streaming di Workers AI (eventi SSE) in testo semplice che arriva a pezzi al browser.
+// Il ragionamento tra <think> e </think> non si mostra.
+function flussoAI(body, rimasti, conta) {
   const dec = new TextDecoder();
   const enc = new TextEncoder();
   let resto = '';
-  let tin = 0;
-  let tout = 0;
+  let caratteri = 0;
+  let pensa = false;
+  let coda = '';
+  const emetti = (ctl, t) => {
+    coda += t;
+    let out = '';
+    for (;;) {
+      if (pensa) {
+        const k = coda.indexOf('</think>');
+        if (k < 0) { coda = coda.slice(-8); break; }
+        coda = coda.slice(k + 8); pensa = false;
+      } else {
+        const k = coda.indexOf('<think>');
+        if (k >= 0) { out += coda.slice(0, k); coda = coda.slice(k + 7); pensa = true; continue; }
+        // si trattiene la fine solo se potrebbe essere l'inizio di <think>
+        const p = coda.lastIndexOf('<');
+        if (p >= 0 && '<think>'.startsWith(coda.slice(p))) { out += coda.slice(0, p); coda = coda.slice(p); } else { out += coda; coda = ''; }
+        break;
+      }
+    }
+    if (out) { caratteri += out.length; ctl.enqueue(enc.encode(out)); }
+  };
   const flusso = body.pipeThrough(new TransformStream({
     transform(pezzo, ctl) {
       resto += dec.decode(pezzo, { stream: true });
       const righe = resto.split('\n');
       resto = righe.pop();
       for (const riga of righe) {
-        if (!riga.startsWith('data:')) continue;
-        try {
-          const ev = JSON.parse(riga.slice(5));
-          if (ev.type === 'content_block_delta' && ev.delta?.type === 'text_delta') ctl.enqueue(enc.encode(ev.delta.text));
-          if (ev.type === 'message_start') {
-            const u = ev.message?.usage || {};
-            tin = (u.input_tokens || 0) + (u.cache_read_input_tokens || 0) + (u.cache_creation_input_tokens || 0);
-          }
-          if (ev.type === 'message_delta' && ev.usage?.output_tokens) tout = ev.usage.output_tokens;
-          if (ev.type === 'error') ctl.enqueue(enc.encode('\n\n[Pi si è interrotto: riprova.]'));
-        } catch { /* riga incompleta */ }
+        const r = riga.trim();
+        if (!r.startsWith('data:')) continue;
+        const dati = r.slice(5).trim();
+        if (!dati || dati === '[DONE]') continue;
+        try { const t = pezzoDi(JSON.parse(dati)); if (t) emetti(ctl, t); } catch { /* riga incompleta */ }
       }
     },
-    async flush() { await conta(tin, tout); },
+    async flush(ctl) {
+      if (!pensa && coda) { caratteri += coda.length; ctl.enqueue(enc.encode(coda)); }
+      await conta(Math.round(caratteri / 4));
+    },
   }));
   return new Response(flusso, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-rimasti': String(rimasti), 'x-accel-buffering': 'no' } });
 }

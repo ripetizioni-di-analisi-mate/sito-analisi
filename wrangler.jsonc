@@ -26,6 +26,5 @@
     // Segreti, solo nel pannello Cloudflare (Worker -> Settings -> Variables and Secrets), mai in questo file:
     // "ADMIN_PASSWORD" (dashboard), "CHIAVE_ACCESSO" (firma di sessioni e link: cambiarla scollega tutti),
     // "PADDLE_WEBHOOK_SECRET". Per le email automatiche: "RESEND_API_KEY" (segreto) e "MITTENTE".
-    // Assistente Pi: "ANTHROPIC_API_KEY" (chiave dell'API di Claude). Senza, Pi usa i modelli gratuiti di Cloudflare.
   }
 }

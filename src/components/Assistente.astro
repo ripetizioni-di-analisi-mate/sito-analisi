@@ -13,7 +13,7 @@ const s = en ? {
   barra: 'Ask Pi: limits, exercises, doubts…', benvenuto: ['Hi, I am ', 'Pi', '! I can explain any step of the theory and of the exercises. Write to me whenever you like.'], chiudiFumetto: 'Close message',
   bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
-  ciao: 'Hi, I am Pi. Ask me about any step of the theory or of the exercises.', nuova: 'New conversation', copia: 'Copy', copiato: 'Copied', avviso: 'Pi is an AI and can make mistakes: check the steps.',
+  ciao: 'Hi, I am Pi. Ask me about any step of the theory or of the exercises.', foto: 'Attach a photo of the exercise', togli: 'Remove the photo', fotoAllegata: 'Photo attached', fotoDomanda: 'Explain the exercise in the photo.', fotoErrore: 'The photo could not be read: try another one.', nuova: 'New conversation', copia: 'Copy', copiato: 'Copied', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
   apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
@@ -21,7 +21,7 @@ const s = en ? {
   barra: 'Chiedi a Pi: limiti, esercizi, dubbi…', benvenuto: ['Ciao, sono ', 'Pi', '! Ti spiego qualsiasi passaggio della teoria e degli esercizi. Scrivimi quando vuoi.'], chiudiFumetto: 'Chiudi il messaggio',
   bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
-  ciao: 'Ciao, sono Pi. Chiedimi qualsiasi passaggio della teoria o degli esercizi.', nuova: 'Nuova conversazione', copia: 'Copia', copiato: 'Copiato', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
+  ciao: 'Ciao, sono Pi. Chiedimi qualsiasi passaggio della teoria o degli esercizi.', foto: 'Allega una foto dell’esercizio', togli: 'Togli la foto', fotoAllegata: 'Foto allegata', fotoDomanda: 'Spiegami l’esercizio nella foto.', fotoErrore: 'Non riesco a leggere la foto: prova con un’altra.', nuova: 'Nuova conversazione', copia: 'Copia', copiato: 'Copiato', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
 <div class="pi-lancio">
@@ -39,7 +39,7 @@ const s = en ? {
 
 <section class="assistente" hidden aria-label={s.nome}
   data-materia={materia ?? ''} data-argomento={argomento ?? ''} data-sezione={sezione ?? ''} data-lingua={lingua}
-  data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti, copia: s.copia, copiato: s.copiato })}>
+  data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti, copia: s.copia, copiato: s.copiato, fotoAllegata: s.fotoAllegata, fotoDomanda: s.fotoDomanda, fotoErrore: s.fotoErrore })}>
   <header class="assistente-testa">
     <div>
       <strong>{s.nome}</strong>
@@ -59,7 +59,15 @@ const s = en ? {
     <div class="assistente-messaggi" aria-live="polite">
       <p class="assistente-ciao">{s.ciao}</p>
     </div>
+    <div class="assistente-anteprima" hidden>
+      <img alt="" />
+      <button type="button" data-togli-foto aria-label={s.togli} title={s.togli}>×</button>
+    </div>
     <form class="assistente-modulo">
+      <label class="assistente-foto" title={s.foto} aria-label={s.foto}>
+        <input type="file" accept="image/*" hidden />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+      </label>
       <textarea rows="2" maxlength="2000" placeholder={s.scrivi} aria-label={s.scrivi}></textarea>
       <button type="submit" aria-label={s.invia}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg>
@@ -70,7 +78,7 @@ const s = en ? {
 </section>
 
 <script>
-  type Messaggio = { ruolo: 'studente' | 'assistente'; testo: string };
+  type Messaggio = { ruolo: 'studente' | 'assistente'; testo: string; foto?: boolean };
   const pannello = document.querySelector<HTMLElement>('.assistente');
   const apri = document.querySelector<HTMLButtonElement>('[data-apri-assistente]');
   if (pannello && apri) {
@@ -82,6 +90,9 @@ const s = en ? {
     const boxParte = pannello.querySelector<HTMLElement>('.assistente-parte')!;
     const titoloParte = pannello.querySelector<HTMLElement>('[data-parte-titolo]')!;
     const rimasti = pannello.querySelector<HTMLElement>('[data-rimasti]')!;
+    const fileFoto = modulo.querySelector<HTMLInputElement>('input[type=file]')!;
+    const anteprima = pannello.querySelector<HTMLElement>('.assistente-anteprima')!;
+    let immagine: string | null = null;
     const studio = document.querySelector<HTMLElement>('.testo-studio');
     let conversazione: Messaggio[] = [];
     let parte: HTMLElement | null = null;
@@ -225,6 +236,12 @@ const s = en ? {
       d.className = `assistente-msg msg-${m.ruolo}`;
       if (m.ruolo === 'assistente') mostraRisposta(d, m.testo, true);
       else d.textContent = m.testo;
+      if ('foto' in m && m.foto) {
+        const f = document.createElement('small');
+        f.className = 'msg-foto';
+        f.textContent = testi.fotoAllegata;
+        d.append(f);
+      }
       lista.append(d);
       lista.scrollTop = lista.scrollHeight;
       return d;
@@ -245,11 +262,20 @@ const s = en ? {
 
     async function invia(domanda: string) {
       domanda = domanda.trim();
+      const foto = immagine;
+      if (!domanda && foto) domanda = testi.fotoDomanda;
       if (!domanda || inCorso) return;
       inCorso = true;
       campo.value = '';
-      conversazione.push({ ruolo: 'studente', testo: domanda });
-      aggiungi({ ruolo: 'studente', testo: domanda });
+      togliFoto();
+      const mio: Messaggio = foto ? { ruolo: 'studente', testo: domanda, foto: true } : { ruolo: 'studente', testo: domanda };
+      conversazione.push(mio);
+      const bolla = aggiungi(mio);
+      if (foto) {
+        const img = document.createElement('img');
+        img.src = foto; img.alt = ''; img.className = 'msg-immagine';
+        bolla.prepend(img);
+      }
       const attesa = aggiungi({ ruolo: 'attesa', testo: testi.attendi });
       if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
       const ps = parti();
@@ -272,7 +298,8 @@ const s = en ? {
             titoloPagina: document.querySelector('main h1')?.textContent?.trim() || '',
             parte: p ? { titolo: p.titolo, testo: testo(p.nodi) } : pagina,
             paragrafo: p ? paragrafoDi(p.el) : null,
-            messaggi: conversazione,
+            messaggi: conversazione.map((m) => ({ ruolo: m.ruolo, testo: m.testo })),
+            immagine: foto,
           }),
         });
         if (!katex) { try { katex = (await import('katex')).default; } catch { /* formule come testo */ } }
@@ -322,6 +349,47 @@ const s = en ? {
       }
       inCorso = false;
     }
+
+    // ---- foto dell'esercizio: si rimpicciolisce nel browser (lato lungo 1280 px, JPEG) prima di mandarla ----
+    function togliFoto() {
+      immagine = null;
+      anteprima.hidden = true;
+      fileFoto.value = '';
+    }
+    function rimpicciolisci(file: File): Promise<string> {
+      return new Promise((ok, ko) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          const lato = 1280;
+          const k = Math.min(1, lato / Math.max(img.naturalWidth, img.naturalHeight));
+          const c = document.createElement('canvas');
+          c.width = Math.round(img.naturalWidth * k);
+          c.height = Math.round(img.naturalHeight * k);
+          const g = c.getContext('2d')!;
+          g.fillStyle = 'white'; g.fillRect(0, 0, c.width, c.height);
+          g.drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          ok(c.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); ko(new Error('foto')); };
+        img.src = url;
+      });
+    }
+    fileFoto.addEventListener('change', async () => {
+      const f = fileFoto.files?.[0];
+      if (!f) return;
+      try {
+        immagine = await rimpicciolisci(f);
+        anteprima.querySelector('img')!.src = immagine;
+        anteprima.hidden = false;
+        campo.focus();
+      } catch {
+        togliFoto();
+        aggiungi({ ruolo: 'errore', testo: testi.fotoErrore });
+      }
+    });
+    anteprima.querySelector('[data-togli-foto]')?.addEventListener('click', togliFoto);
 
     function apriPannello(scorri = true) {
       pannello!.hidden = false;
