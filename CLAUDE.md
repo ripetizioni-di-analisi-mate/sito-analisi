@@ -80,7 +80,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 
 ## Concorsi (29/10/2026)
 - Due materie in preparazione (`attiva: false`): Matematica per concorsi (9 argomenti) e Logica per concorsi (6). Previsto anche una pagina gratuita "Che cosa studiare per il tuo concorso".
-- Matematica per concorsi: **tutti i 9 capitoli scritti e verificati il 30/10** (teoria, 8 schede da 3 quiz A-E, 14 quiz da fare; lettere corrette distribuite). Brief: `istruzioni-agenti/brief-matematica-concorsi.md` e `brief-verifica-matematica-concorsi.md`. Build con la materia attiva provata in locale: nessun errore. Resta `attiva: false` finché Carmine non sceglie il prezzo; poi prezzo in `prezzi.json`, prodotto Paddle, `PADDLE_PREZZO_MATEMATICA_CONCORSI` in `wrangler.jsonc` e `worker/index.mjs`. Inglese non ancora fatto.
+- Matematica per concorsi: **tutti i 9 capitoli scritti e verificati il 30/10** (teoria, 8 schede da 3 quiz A-E, 14 quiz da fare; lettere corrette distribuite). Brief: `istruzioni-agenti/brief-matematica-concorsi.md` e `brief-verifica-matematica-concorsi.md`. Build con la materia attiva provata in locale: nessun errore. **Online dal 30/10 a 59 €** (prodotto Paddle creato, quantità massima 1, `PADDLE_PREZZO_MATEMATICA_CONCORSI` in `wrangler.jsonc` e `worker/index.mjs`). Inglese non ancora fatto.
 - Iscrizione (30/10): riquadro facoltativo "Ho seguito o sto seguendo un corso con Carmine" (Analisi 1, Analisi 2, note libere), salvato nella colonna `corso` di `utenti`; in dashboard filtro "Dai miei corsi", etichetta viola e riquadro nella scheda dello studente. Lo sblocco gratuito lo fa Carmine a mano.
 
 ## Assistente "Pi" (online dal 29/10/2026)
