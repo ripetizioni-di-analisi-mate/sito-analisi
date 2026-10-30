@@ -76,11 +76,13 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - In stampa/PDF il riquadro colorato resta solo su teoremi e dimostrazioni, come a schermo.
 
 ## Materie in preparazione e macro aree
+- In home e indice, aprendo Superiori si vedono solo le voci Matematica e Fisica, chiuse (richiesta di Carmine del 30/10).
 - Gruppi (macro aree apribili in home e indice): Università (con Statistica in preparazione), Superiori (Matematica e Fisica dal 1° al 5° anno), Concorsi (Matematica per concorsi). Tutte con `attiva: false` e `argomenti: []` finché non si concorda il programma.
 
 ## Concorsi (29/10/2026)
 - Due materie in preparazione (`attiva: false`): Matematica per concorsi (9 argomenti) e Logica per concorsi (6). Previsto anche una pagina gratuita "Che cosa studiare per il tuo concorso".
-- Matematica per concorsi: **tutti i 9 capitoli scritti e verificati il 30/10** (teoria, 8 schede da 3 quiz A-E, 14 quiz da fare; lettere corrette distribuite). Brief: `istruzioni-agenti/brief-matematica-concorsi.md` e `brief-verifica-matematica-concorsi.md`. Build con la materia attiva provata in locale: nessun errore. **Online dal 30/10 a 59 €** (prodotto Paddle creato, quantità massima 1, `PADDLE_PREZZO_MATEMATICA_CONCORSI` in `wrangler.jsonc` e `worker/index.mjs`). Inglese non ancora fatto.
+- Matematica per concorsi: **tutti i 9 capitoli scritti e verificati il 30/10** (teoria, 8 schede da 3 quiz A-E, 14 quiz da fare; lettere corrette distribuite). Brief: `istruzioni-agenti/brief-matematica-concorsi.md` e `brief-verifica-matematica-concorsi.md`. Build con la materia attiva provata in locale: nessun errore. **Online dal 30/10 a 59 €** (prodotto Paddle creato, quantità massima 1, `PADDLE_PREZZO_MATEMATICA_CONCORSI` in `wrangler.jsonc` e `worker/index.mjs`). Inglese non ancora fatto. **Prezzo portato a 29 € il 30/10 sera** (stesso prezzo Paddle modificato).
+- Logica per concorsi: **online dal 30/10 a 29 €**, 6 argomenti scritti e verificati (stesso formato di Matematica per concorsi). Brief: `istruzioni-agenti/brief-logica-concorsi.md` e `brief-verifica-logica-concorsi.md`. Prodotto Paddle creato (29 €, quantità massima 1), `PADDLE_PREZZO_LOGICA_CONCORSI` in `wrangler.jsonc` e `worker/index.mjs`. Inglese non ancora fatto.
 - Iscrizione (30/10): riquadro facoltativo "Sei già uno studente di Carmine?" con due voci: corso dal vivo (Analisi 1, Analisi 2, Algebra lineare e geometria, Matematica generale, note libere) e corso preregistrato acquistato (stesse quattro materie); testo salvato come "Corso dal vivo: …; Preregistrato: …", salvato nella colonna `corso` di `utenti`; in dashboard filtro "Dai miei corsi", etichetta viola e riquadro nella scheda dello studente. Lo sblocco gratuito lo fa Carmine a mano.
 
 ## Assistente "Pi" (online dal 29/10/2026)
@@ -101,6 +103,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Pagine `/videocorsi` e `/videocorsi/<slug>` (solo italiano), voce in cima all'indice (vetrina in home tolta su richiesta di Carmine), sezione nei prezzi, rimando nelle pagine Sblocca, informazioni a Pi.
 - Acquisto: Paddle con `customData.videocorso`; codici `PADDLE_PREZZO_VIDEO_<SLUG>` in `wrangler.jsonc`. Il webhook registra l'abilitazione `video-<slug>` e sblocca le materie in `sblocca` (Analisi 1 → analisi-1 + precorso; Analisi 1 e 2 → analisi-1, analisi-2, precorso; Algebra → algebra-lineare). La dashboard può attivare anche i videocorsi (sblocca le materie collegate).
 - Link delle cartelle Drive: variabile `VIDEOCORSI_DRIVE` (JSON slug → link) in `wrangler.jsonc`, restituiti da `/api/videocorsi` solo a chi ha comprato; l'account mostra "I tuoi videocorsi". Lo studente chiede l'accesso su Drive e Carmine approva a mano (in futuro: condivisione automatica con l'API di Drive).
+- Risparmio sul materiale (30/10, approvato da Carmine): su schede e pagine dei videocorsi "Risparmi X € di materiale didattico" = somma dei prezzi delle materie sbloccate (`valoreMateriale` in `videocorsi.ts`; Analisi 1 = 78 € perché include il Precorso).
 - Prezzi barrati: non mostrati (Omnibus), solo il risparmio reale del pacchetto (552 € separati). Klarna non disponibile su Paddle (metodi: carte, PayPal, Apple Pay, Google Pay e altri locali).
 - Corsi di gruppo dal vivo: scheda "in preparazione" nella pagina videocorsi; prezzo per lezione da non mostrare (prima si parla con Carmine). Proposto codice di sblocco per i corsi di gruppo, in attesa di risposta.
 
