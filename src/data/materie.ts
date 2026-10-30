@@ -327,7 +327,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "La logica dei concorsi pubblici e dei test attitudinali: insiemi e diagrammi di Venn, negazioni e implicazioni, condizioni necessarie e sufficienti, sillogismi, ragionamento numerico e problemi di deduzione.",
     colore: '#6d5a8a',
     gruppo: 'Concorsi',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'insiemi-e-venn', titolo: 'Insiemi e diagrammi di Venn', breve: 'Insiemi e Venn' },
       { slug: 'connettivi-e-negazioni', titolo: 'Connettivi, negazioni e implicazioni', breve: 'Connettivi e negazioni' },
