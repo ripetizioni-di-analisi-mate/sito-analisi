@@ -34,6 +34,13 @@ const icona = {
   <p class="sopratitolo">{t.homeSopra}</p>
   <h1>{t.homeTitolo}</h1>
   <p class="sommario">{t.homeSommario}</p>
+  <a class="presentazione-home" href={link(lingua, '/chi-sono')}>
+    <img src="/chi-sono/carmine-320.webp" width="320" height="320" alt="Carmine Tornincasa" />
+    <span>
+      <strong>{lingua === 'it' ? 'Scritto da Carmine Tornincasa' : 'Written by Carmine Tornincasa'}</strong>
+      <span>{lingua === 'it' ? 'Oltre mille studenti seguiti, più di diecimila ore di lezione' : 'More than a thousand students, over ten thousand hours of teaching'}</span>
+    </span>
+  </a>
   <form class="cerca-home" action={link(lingua, '/cerca')} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
