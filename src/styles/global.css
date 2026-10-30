@@ -8,6 +8,7 @@
   --inchiostro-2: #5a6664;
   --riga: #ddd6c8;
   --accento: #2f6f68;        /* verde dei titoli */
+  --video: #2f6f68;          /* videocorsi: resta verde anche dentro le schede colorate delle materie */
 
   --c-definizione: #2f6f68;
   --c-teorema: #3b5f8f;
@@ -667,12 +668,27 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 .bottoni-fissi > .bottone-whatsapp { margin-right: 0.2rem; }
 
 /* ---------- videocorsi nell'indice ---------- */
-.indice-videocorsi { display: flex; align-items: center; gap: 0.65rem; margin: 0.2rem 0 1rem; padding: 0.6rem 0.75rem; border-radius: 10px; background: color-mix(in srgb, var(--accento) 9%, white); border: 1px solid color-mix(in srgb, var(--accento) 25%, var(--riga)); text-decoration: none; color: var(--inchiostro); font-family: var(--ui); }
-.indice-videocorsi:hover { background: color-mix(in srgb, var(--accento) 14%, white); }
-.indice-videocorsi-icona { flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: var(--accento); color: white; font-size: 0.75rem; padding-left: 0.12rem; }
-.indice-videocorsi strong { display: block; font-size: 0.98rem; color: var(--accento); }
-.indice-videocorsi small { display: block; font-size: 0.78rem; color: var(--inchiostro-2); }
 .videocorsi-account { list-style: none; padding: 0; margin: 0.8rem 0 1.8rem; display: grid; gap: 0.8rem; font-family: var(--ui); }
 .videocorsi-account li { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; padding: 0.9rem 1rem; border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); background: white; }
 .videocorsi-account .nota-video { font-size: 0.88rem; color: var(--inchiostro-2); }
 .anche-nel-video { font-family: var(--ui); font-size: 0.93rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: var(--carta-2); }
+
+/* Home: legenda dei due tipi di materiale, solo descrittiva */
+.legenda-home { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.15rem; font-family: var(--ui); font-size: 0.95rem; line-height: 1.5; color: var(--inchiostro-2); }
+.legenda-home li { display: flex; gap: 0.5rem; align-items: flex-start; }
+.legenda-home svg { width: 1.05rem; height: 1.05rem; flex: none; margin-top: 0.2rem; color: var(--inchiostro-2); }
+.legenda-home b { font-weight: 600; color: var(--inchiostro); }
+/* Home: schede con i pulsanti "Videocorsi" e "Teoria ed esercizi"; "Sbloccata" solo su ciò che è nell'account */
+.griglia-materie li.con-pulsanti { display: flex; flex-direction: column; }
+.griglia-materie li.con-pulsanti a.scheda-materia { height: auto; flex: 1; padding-bottom: 0.25rem; }
+.griglia-materie .pulsanti-scheda { flex-wrap: wrap; gap: 0.4rem; padding: 0 1rem 0.9rem; }
+.griglia-materie a.pulsante-scheda { display: inline-flex; align-items: center; gap: 0.3rem; height: auto; padding: 0.1rem 0.6rem 0.1rem 0.36rem; border: 1px solid transparent; border-radius: 999px; font-family: var(--ui); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; white-space: nowrap; transition: background 0.15s; }
+.pulsante-scheda svg { width: 1rem; height: 1rem; flex: none; }
+.griglia-materie a.pulsante-teoria { color: var(--accento); background: color-mix(in srgb, var(--accento) 11%, transparent); }
+.griglia-materie a.pulsante-teoria:hover { background: color-mix(in srgb, var(--accento) 18%, transparent); }
+.griglia-materie a.pulsante-video { color: var(--video); background: color-mix(in srgb, var(--video) 9%, white); border-color: color-mix(in srgb, var(--video) 25%, var(--riga)); }
+.griglia-materie a.pulsante-video:hover { background: color-mix(in srgb, var(--video) 15%, white); }
+.pulsante-scheda .ok { display: none; align-items: center; gap: 0.2rem; margin-left: 0.15rem; padding-left: 0.4rem; border-left: 1px solid color-mix(in srgb, var(--verde) 40%, transparent); color: var(--verde); }
+.pulsante-scheda .ok svg { width: 0.9rem; height: 0.9rem; }
+/* Indice: sezione Videocorsi, con lo stesso aspetto delle materie */
+.video-punto { flex: none; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--video); color: #fff; font-size: 0.42rem; display: grid; place-items: center; padding-left: 0.08rem; box-sizing: border-box; }

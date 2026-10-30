@@ -1,12 +1,15 @@
 ---
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
+import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
+// Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
+const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
 <nav class="indice" aria-label="Indice">
   {m ? (
@@ -33,12 +36,6 @@ const SEZIONI = sezioniL(lingua);
     </>
   ) : (
     <>
-      {lingua === 'it' && (
-        <a class="indice-videocorsi" href="/videocorsi">
-          <span class="indice-videocorsi-icona" aria-hidden="true">▶</span>
-          <span><strong>Videocorsi</strong><small>Lezioni registrate, video e PDF</small></span>
-        </a>
-      )}
       {gruppiL(lingua).map((g, i) => (
         <details class="indice-gruppo" open={i === 0}>
           <summary class="indice-materia"><span>{g}</span></summary>
@@ -83,6 +80,23 @@ const SEZIONI = sezioniL(lingua);
           })()}
         </details>
       ))}
+      {lingua === 'it' && (
+        <details class="indice-gruppo" open>
+          <summary class="indice-materia"><span>Videocorsi</span></summary>
+          <style is:inline set:html={regoleVideo}></style>
+          <ol class="indice-materie indice-video">
+            {VIDEOCORSI.map((v) => (
+              <li data-video={v.slug} style="--colore-materia: var(--video)">
+                <a class="voce-materia" href={`/videocorsi/${v.slug}`}>
+                  <span class="video-punto" aria-hidden="true">▶</span>
+                  <span class="materia-testo"><span class="materia-nome">{v.titolo.replace(/^Videocorso di /, '')}</span></span>
+                  <span class="stato compatto"><span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
     </>
   )}
   <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>

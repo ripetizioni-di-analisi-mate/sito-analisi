@@ -3,11 +3,28 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
+import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const MATERIE = materieL(lingua);
+// Videocorso proprio di ogni materia (in italiano): quello che sblocca per prima la materia; il pacchetto di più corsi non ha una scheda sua.
+const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === slug) : undefined;
+// "Sbloccata" compare solo su ciò che è nell'account: la teoria ed esercizi se la materia è sbloccata, il videocorso se è stato acquistato
+// (da solo o dentro un pacchetto). Il Worker scrive su <html> data-materie con le materie e le chiavi video-<slug>.
+const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.attiva).map((m) => {
+  const v = videoDi(m.slug);
+  const teoria = `html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .pulsante-teoria .ok{display:inline-flex}`;
+  const video = v ? [v.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(v.slug)).map((p) => p.slug)]
+    .map((s) => `html[data-materie~="${chiaveVideo(s)}"] [data-materia="${m.slug}"] .pulsante-video .ok{display:inline-flex}`).join('') : '';
+  return teoria + video;
+}).join('') : '';
+const icona = {
+  teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
+  video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',
+  ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+};
 ---
 <Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home, schema: [{
   '@type': 'WebSite', '@id': `${SITO}/#sito`, name: t.nomeSito, url: assoluto(link(lingua, '/')), inLanguage: lingua,
@@ -23,7 +40,15 @@ const MATERIE = materieL(lingua);
     </div>
     <button type="submit">{t.cerca}</button>
   </form>
-  <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
+  {lingua === 'it' ? (
+    <ul class="legenda-home">
+      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: teoria, teoremi con dimostrazione, esercizi svolti passo dopo passo ed esercizi con soluzione.</span></li>
+      <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: le lezioni complete dei corsi, registrate, con il PDF di ogni lezione.</span></li>
+    </ul>
+  ) : (
+    <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
+  )}
+  {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppiL(lingua).map((g, i) => (
     <details class="gruppo" open={i === 0}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
@@ -42,8 +67,28 @@ const MATERIE = materieL(lingua);
         const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
           <ul class="griglia-materie">
             {voci.map(({ m, nome }) => (
-              <li class:list={{ 'in-preparazione': !m.attiva }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
-                {m.attiva ? (
+              <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
+                {m.attiva && lingua === 'it' ? (() => {
+                  const v = videoDi(m.slug);
+                  return (
+                    <>
+                      <a class="scheda-materia" href={link(lingua, `/${m.slug}`)}>
+                        <h3>{nome}</h3>
+                        <p>{m.descrizione}</p>
+                      </a>
+                      <span class="piede-scheda pulsanti-scheda">
+                        {v && (
+                          <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}>
+                            <Fragment set:html={icona.video} />Videocorsi<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span>
+                          </a>
+                        )}
+                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, `/${m.slug}`)}>
+                          <Fragment set:html={icona.teoria} />Teoria ed esercizi{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
+                        </a>
+                      </span>
+                    </>
+                  );
+                })() : m.attiva ? (
                   <a href={link(lingua, `/${m.slug}`)}>
                     <h3>{nome}</h3>
                     <p>{m.descrizione}</p>
