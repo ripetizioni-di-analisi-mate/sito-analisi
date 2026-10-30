@@ -25,7 +25,7 @@ called the **net force**, would produce. It is an experimental principle, and it
 :::definizione{#sistema-inerziale titolo="Inertial reference frame"}
 A point particle is called **isolated** if the net force acting on it is zero. A reference frame is called **inertial** if in it every isolated point particle has constant velocity, that is, it remains at rest or moves in uniform straight-line motion.
 
-A frame that translates with constant velocity relative to an inertial frame is also inertial, because by the Galilean transformations the accelerations in the two frames coincide. A frame attached to the ground is inertial to a good approximation, since the acceleration due to the Earth's rotation is at most $0.034\,\mathrm{m/s^2}$, about $0.35\%$ of $g$.
+A frame that translates with constant velocity relative to an inertial frame is also inertial, because by the Galilean transformations the accelerations in the two frames coincide. A frame attached to the ground is inertial to a good approximation, since the acceleration due to the Earth's rotation is at most $0.034\,\mathrm{m/s^2}$, about $0.34\%$ of $g$.
 :::
 
 :::teorema{#primo-principio titolo="Newton's first law"}

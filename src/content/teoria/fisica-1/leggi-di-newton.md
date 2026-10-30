@@ -25,7 +25,7 @@ detta **risultante**. È un principio sperimentale, e afferma che le forze si co
 :::definizione{#sistema-inerziale titolo="Sistema di riferimento inerziale"}
 Un punto materiale si dice **isolato** se la risultante delle forze che agiscono su di esso è nulla. Un sistema di riferimento si dice **inerziale** se in esso ogni punto materiale isolato ha velocità costante, cioè resta in quiete oppure si muove di moto rettilineo uniforme.
 
-Un sistema che trasla con velocità costante rispetto a un sistema inerziale è anch'esso inerziale, perché per le trasformazioni di Galileo le accelerazioni nei due sistemi coincidono. Un sistema solidale con il suolo è inerziale con buona approssimazione, poiché l'accelerazione dovuta alla rotazione terrestre è al massimo $0{,}034\,\mathrm{m/s^2}$, circa lo $0{,}35\%$ di $g$.
+Un sistema che trasla con velocità costante rispetto a un sistema inerziale è anch'esso inerziale, perché per le trasformazioni di Galileo le accelerazioni nei due sistemi coincidono. Un sistema solidale con il suolo è inerziale con buona approssimazione, poiché l'accelerazione dovuta alla rotazione terrestre è al massimo $0{,}034\,\mathrm{m/s^2}$, circa lo $0{,}34\%$ di $g$.
 :::
 
 :::teorema{#primo-principio titolo="Primo principio della dinamica"}

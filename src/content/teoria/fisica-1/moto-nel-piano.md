@@ -26,7 +26,7 @@ La **velocità** all'istante $t$ è il limite della velocità media per $\Delta 
 $$
 \vec{v}(t) = \lim_{\Delta t \to 0} \frac{\Delta\vec{r}}{\Delta t} = \frac{d\vec{r}}{dt} = \frac{dx}{dt}\,\hat{\imath} + \frac{dy}{dt}\,\hat{\jmath} .
 $$
-Quando $\Delta t$ tende a zero la corda $\Delta\vec{r}$ tende alla direzione della retta tangente, quindi la velocità è **tangente alla traiettoria** nel punto occupato e ha il verso del moto. Il modulo $v = |\vec{v}| = \sqrt{v_x^2 + v_y^2}$ è la velocità scalare, cioè la derivata rispetto al tempo della lunghezza dell'arco percorso. Per $\vec{r}(t) = 2t\,\hat{\imath} + t^2\,\hat{\jmath}$ si ha $\vec{v}(t) = 2\,\hat{\imath} + 2t\,\hat{\jmath}$, e all'istante $t = 1\,\mathrm{s}$ la velocità ha modulo $\sqrt{8}\,\mathrm{m/s} \approx 2{,}83\,\mathrm{m/s}$.
+Quando $\Delta t$ tende a zero la direzione della corda $\Delta\vec{r}$ tende a quella della retta tangente, quindi la velocità è **tangente alla traiettoria** nel punto occupato e ha il verso del moto. Il modulo $v = |\vec{v}| = \sqrt{v_x^2 + v_y^2}$ è la velocità scalare, cioè la derivata rispetto al tempo della lunghezza dell'arco percorso. Per $\vec{r}(t) = 2t\,\hat{\imath} + t^2\,\hat{\jmath}$ si ha $\vec{v}(t) = 2\,\hat{\imath} + 2t\,\hat{\jmath}$, e all'istante $t = 1\,\mathrm{s}$ la velocità ha modulo $\sqrt{8}\,\mathrm{m/s} \approx 2{,}83\,\mathrm{m/s}$.
 
 ::grafico{f="x^2/4" vettori="0,0,2,1,r(t);0,0,4,4,r(t+Δt);2,1,4,4,Δr;2,1,3.2,2.2,v" punti="2,1,pieno;4,4,pieno" xmin=-0.6 xmax=5 ymin=-0.6 ymax=5 uguale=1 titolo="Sulla traiettoria $y = \dfrac{x^2}{4}$ lo spostamento $\Delta\vec{r}$ è la corda tra le posizioni agli istanti $t = 1\,\mathrm{s}$ e $t = 2\,\mathrm{s}$; la velocità $\vec{v}$ in $(2, 1)$ è tangente alla traiettoria"}
 
