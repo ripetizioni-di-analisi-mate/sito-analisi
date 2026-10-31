@@ -23,7 +23,7 @@ L'elenco continua senza fine, perché si può sempre moltiplicare per un numero 
 :::
 
 :::esempio{#divisori-di-un-numero titolo="I divisori di 12"}
-I divisori di un numero sono invece in numero finito, perché nessun divisore supera il numero stesso. Per trovare i divisori di $12$ si cercano le coppie di numeri che moltiplicati danno $12$:
+I divisori di un numero diverso da $0$ sono invece in numero finito, perché nessun divisore supera il numero stesso. Per trovare i divisori di $12$ si cercano le coppie di numeri che moltiplicati danno $12$:
 $$
 12 = 1 \cdot 12, \qquad 12 = 2 \cdot 6, \qquad 12 = 3 \cdot 4 .
 $$
@@ -124,7 +124,7 @@ $$
 :::teorema{#riconoscere-un-primo titolo="Come si riconosce un numero primo"}
 Per stabilire se un numero $n$ è primo si divide $n$ per i numeri primi $2$, $3$, $5$, $7$, $11$, … in ordine. Ci si ferma quando si arriva a un numero primo che, moltiplicato per sé stesso, supera $n$, e quel numero non si prova. Se nessuna delle divisioni eseguite ha resto $0$, il numero $n$ è primo.
 
-La prova si ferma lì per questo motivo. Se $n$ è composto, si scrive come prodotto di due fattori, $n = a \cdot b$ con $a$ minore o uguale a $b$. Allora $a \cdot a$ non supera $a \cdot b = n$, quindi $a$ e i suoi fattori primi si trovano *tra* i numeri provati, e una delle divisioni ha resto $0$. Per esempio, per $89$ si provano $2$, $3$, $5$ e $7$, dato che $11 \cdot 11 = 121$ supera $89$. Nessuna di queste divisioni ha resto $0$, quindi $89$ è **primo**. Per $91$ la prova con $7$ dà $91 = 7 \cdot 13$, perciò $91$ è composto.
+La prova si ferma lì per questo motivo. Se $n$ è composto, si scrive come prodotto di due fattori maggiori di $1$, $n = a \cdot b$ con $a$ minore o uguale a $b$. Allora $a \cdot a$ non supera $a \cdot b = n$. Un fattore primo $p$ di $a$ non supera $a$, quindi neanche $p \cdot p$ supera $n$, e perciò $p$ si trova *tra* i numeri provati. Poiché $p$ divide $a$ e $a$ divide $n$, la divisione di $n$ per $p$ ha resto $0$. Per esempio, per $89$ si provano $2$, $3$, $5$ e $7$, dato che $11 \cdot 11 = 121$ supera $89$. Nessuna di queste divisioni ha resto $0$, quindi $89$ è **primo**. Per $91$ la prova con $7$ dà $91 = 7 \cdot 13$, perciò $91$ è composto.
 :::
 
 ## Scomposizione in fattori primi
