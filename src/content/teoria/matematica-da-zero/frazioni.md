@@ -196,7 +196,7 @@ $$
 ## Moltiplicazione, divisione e potenze
 
 ::::teorema{#moltiplicazione-frazioni titolo="Moltiplicazione di frazioni"}
-Il prodotto di due frazioni è la frazione che ha per numeratore il prodotto dei numeratori e per denominatore il prodotto dei denominatori:
+Per $b \neq 0$ e $d \neq 0$, il prodotto di due frazioni è la frazione che ha per numeratore il prodotto dei numeratori e per denominatore il prodotto dei denominatori:
 $$
 \frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d} .
 $$
@@ -244,7 +244,7 @@ Nel primo passaggio si è usata la proprietà associativa della moltiplicazione;
 ::::
 
 :::definizione{#potenza-di-una-frazione titolo="Potenza di una frazione"}
-Per un numero naturale $n \geq 1$, la potenza $\left( \dfrac{a}{b} \right)^n$ è il prodotto di $n$ fattori uguali a $\dfrac{a}{b}$, come per i numeri naturali. Con la regola della moltiplicazione si moltiplicano fra loro $n$ numeratori uguali ad $a$ e $n$ denominatori uguali a $b$, perciò
+Per $b \neq 0$ e per un numero naturale $n \geq 1$, la potenza $\left( \dfrac{a}{b} \right)^n$ è il prodotto di $n$ fattori uguali a $\dfrac{a}{b}$, come per i numeri naturali. Con la regola della moltiplicazione si moltiplicano fra loro $n$ numeratori uguali ad $a$ e $n$ denominatori uguali a $b$, perciò
 $$
 \left( \frac{a}{b} \right)^n = \frac{a^n}{b^n} .
 $$
