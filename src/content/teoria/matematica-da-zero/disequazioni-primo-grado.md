@@ -6,7 +6,7 @@ sommario: Che cosa sono le disuguaglianze e le disequazioni, come si scrivono le
 ## Disuguaglianze e loro proprietà
 
 :::definizione{#disuguaglianza titolo="Disuguaglianza"}
-Una **disuguaglianza** è una scrittura che confronta due numeri diversi e dice quale dei due è il più piccolo. Si usano quattro simboli:
+Una **disuguaglianza** è una scrittura che confronta due numeri e dice quale dei due è il più piccolo. Si usano quattro simboli:
 
 - $a < b$ si legge "$a$ è minore di $b$";
 - $a > b$ si legge "$a$ è maggiore di $b$";
@@ -36,7 +36,7 @@ Siano $a$ e $b$ due numeri con $a < b$, e sia $c$ un numero qualsiasi.
 - Se $c$ è *positivo*, moltiplicando o dividendo entrambi i numeri per $c$ il verso resta lo stesso: $a \cdot c < b \cdot c$. Per esempio da $2 < 5$, moltiplicando per $3$, si ottiene $6 < 15$.
 - Se $c$ è *negativo*, moltiplicando o dividendo entrambi i numeri per $c$ il verso **si inverte**: $a \cdot c > b \cdot c$. Per esempio da $2 < 5$, moltiplicando per $-3$, si ottiene $-6 > -15$.
 
-Le stesse proprietà valgono per i simboli $>$, $\leq$ e $\geq$. Invertire il verso vuol dire scambiare $<$ con $>$ e $\leq$ con $\geq$. Queste proprietà sono la base di tutti i calcoli con le disequazioni.
+Le stesse proprietà valgono per i simboli $>$, $\leq$ e $\geq$. Invertire il verso vuol dire scambiare $<$ con $>$ e $\leq$ con $\geq$. Su queste proprietà si basano tutti i calcoli con le disequazioni.
 
 :::dimostrazione
 L'idea è guardare la differenza tra il numero più grande e il più piccolo. Poiché $a < b$, la differenza $b - a$ è positiva.
@@ -238,7 +238,7 @@ Lo stesso accade quando una delle disequazioni è mai verificata. Se invece una 
 ## Segno di un prodotto e disequazioni fratte
 
 :::teorema{#segno-primo-grado titolo="Segno di un'espressione di primo grado"}
-Un'espressione come $2x - 6$ cambia segno in un solo punto, quello in cui vale zero. Per sapere dove è positiva basta risolvere la disequazione $2x - 6 > 0$, che dà $x > 3$. Quindi $2x - 6$ è:
+Un'espressione come $2x - 6$ cambia segno in un solo punto, quello in cui vale zero. I numeri per cui è positiva sono le soluzioni della disequazione $2x - 6 > 0$, cioè $x > 3$. Quindi $2x - 6$ è:
 
 - positiva per $x > 3$, per esempio con $x = 4$ vale $2$;
 - uguale a zero per $x = 3$;
@@ -327,7 +327,7 @@ Trasportando si ottiene $3x - 4{,}5\,x < -10$, cioè $-1{,}5\,x < -10$. Dividend
 $$
 x > \frac{20}{3} .
 $$
-Il numero $\dfrac{20}{3}$ è compreso tra $6$ e $7$, perché $6 \cdot 3 = 18$ e $7 \cdot 3 = 21$. Il numero di lavaggi è intero, quindi la tessera costa meno **a partire da $7$ lavaggi**. Per controllo, con $7$ lavaggi si spendono $31{,}50$ euro senza tessera e $31$ euro con la tessera; con $6$ lavaggi si spendono $27$ euro senza tessera e $28$ euro con la tessera.
+Il numero $\dfrac{20}{3}$ è compreso tra $6$ e $7$, perché $6 \cdot 3 = 18$ e $7 \cdot 3 = 21$. Il numero di lavaggi è intero, quindi la tessera **costa meno** a partire da $7$ lavaggi. Per controllo, con $7$ lavaggi si spendono $31{,}50$ euro senza tessera e $31$ euro con la tessera; con $6$ lavaggi si spendono $27$ euro senza tessera e $28$ euro con la tessera.
 :::
 
 :::esempio{titolo="Un problema con due condizioni"}
