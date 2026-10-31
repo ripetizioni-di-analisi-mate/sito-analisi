@@ -34,7 +34,7 @@ Un polinomio che non si può scrivere come prodotto di polinomi di grado più ba
 Ogni polinomio di primo grado vale zero per un numero. Per esempio $x - 2$ vale zero per $x = 2$, e $2x + 1$ vale zero per $x = -\dfrac{1}{2}$, perché $2 \cdot \left(-\dfrac{1}{2}\right) + 1 = 0$. Un prodotto che contiene il fattore $x - 2$ vale quindi zero per $x = 2$. Il polinomio $x^2 + 4$ invece non vale mai zero, perché $x^2$ è maggiore o uguale a $0$ e perciò $x^2 + 4 \geq 4$. Quindi $x^2 + 4$ non ha fattori di primo grado ed è irriducibile.
 :::
 
-## Raccoglimento totale
+## Raccoglimento totale e parziale
 
 :::richiamo{titolo="Proprietà distributiva"}
 Per tutti i numeri $a$, $b$, $c$ vale
@@ -67,7 +67,7 @@ Allo stesso modo $10x^2 y - 15xy^2 = 5xy\,(2x - 3y)$, perché $\operatorname{MCD
 :::
 
 :::attenzione
-Quando un termine coincide con il fattore comune, dentro l'espressione tra parentesi al suo posto resta $1$, perché il termine diviso per se stesso dà $1$. Per esempio $5x^2 + 5x = 5x\,(x + 1)$. La scrittura $5x \cdot x$ è sbagliata. Con $x = 1$ il polinomio vale $5 + 5 = 10$, mentre $5x \cdot x$ vale $5$.
+Quando un termine coincide con il fattore comune, nel secondo fattore al suo posto resta $1$, perché il termine diviso per se stesso dà $1$. Per esempio $5x^2 + 5x = 5x\,(x + 1)$. La scrittura $5x \cdot x$ è sbagliata. Con $x = 1$ il polinomio vale $5 + 5 = 10$, mentre $5x \cdot x$ vale $5$.
 :::
 
 :::osservazione
@@ -77,8 +77,6 @@ $$
 $$
 Si può raccogliere anche un numero negativo. Per esempio $-2x - 6 = -2\,(x + 3)$, perché $-2 \cdot x = -2x$ e $-2 \cdot 3 = -6$.
 :::
-
-## Raccoglimento parziale
 
 :::teorema{#raccoglimento-parziale titolo="Raccoglimento parziale"}
 Quando i termini non hanno un fattore comune a tutti, si possono dividere in gruppi e fare un raccoglimento totale in ciascun gruppo. Se i gruppi danno lo stesso polinomio, questo si raccoglie a sua volta. Il metodo si chiama **raccoglimento parziale**. Per esempio
@@ -393,9 +391,7 @@ x \neq 0
 $$
 e il quoziente vale
 $$
-\begin{aligned}
-\frac{x}{x + 3} \cdot \frac{(x + 3)(x - 3)}{x^2} &= \frac{x - 3}{x} .
-\end{aligned}
+\frac{x}{x + 3} \cdot \frac{(x + 3)(x - 3)}{x^2} = \frac{x - 3}{x} .
 $$
 Con $x = 1$ il quoziente di partenza è $\dfrac{1}{4} : \left(-\dfrac{1}{8}\right) = \dfrac{1}{4} \cdot (-8) = -2$, e il risultato è $\dfrac{1 - 3}{1} = -2$.
 :::
