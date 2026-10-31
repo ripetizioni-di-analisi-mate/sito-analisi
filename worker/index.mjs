@@ -683,8 +683,8 @@ export default {
         },
       }).on('.bottone-livello .numero-livello', {
         element(e) { e.setInnerContent(String(livelloDa(io.exp || 0).livello)); },
-      }).on('.bottone-livello .anello-avanzamento', {
-        element(e) { e.setAttribute('stroke-dashoffset', (75.4 * (1 - livelloDa(io.exp || 0).perc / 100)).toFixed(1)); },
+      }).on('.bottone-livello .mini-barra > span', {
+        element(e) { e.setAttribute('style', `width:${livelloDa(io.exp || 0).perc}%`); },
       }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
