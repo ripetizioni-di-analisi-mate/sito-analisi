@@ -9,6 +9,7 @@ import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
+import { eseguiBanco, paginaProve } from './pi-prove.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI } from '../src/data/livelli.ts';
 
@@ -107,6 +108,9 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
       CREATE TABLE IF NOT EXISTS dispositivi (email TEXT, id TEXT, nome TEXT, creato TEXT, ultimo_uso INTEGER, PRIMARY KEY (email, id));
       CREATE TABLE IF NOT EXISTS assistente (giorno TEXT, email TEXT, n INTEGER, PRIMARY KEY (giorno, email));
+      -- ciclo di miglioramento di Pi: contatori anonimi (risposte, riserve, errori, limiti) e risposte del banco di prova
+      CREATE TABLE IF NOT EXISTS pi_eventi (giorno TEXT, evento TEXT, n INTEGER, PRIMARY KEY (giorno, evento));
+      CREATE TABLE IF NOT EXISTS pi_prove (giorno TEXT, id TEXT, area TEXT, domanda TEXT, risposta TEXT, modello TEXT, ms INTEGER, stato INTEGER, PRIMARY KEY (giorno, id));
     `);
     // colonne aggiunte dopo: il nome dello studente
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
@@ -222,6 +226,29 @@ export class Archivio {
       case '/assistente-rimborso':
         this.sql.exec('UPDATE assistente SET n = MAX(n - 1, 0) WHERE giorno = ? AND email = ?', c.giorno, c.email);
         return Response.json({ ok: true });
+
+      case '/pi-evento':
+        this.sql.exec(`INSERT INTO pi_eventi (giorno, evento, n) VALUES (?, ?, 1)
+                       ON CONFLICT(giorno, evento) DO UPDATE SET n = n + 1`, c.giorno, String(c.evento).slice(0, 60));
+        return Response.json({ ok: true });
+      case '/pi-prove-salva':
+        for (const r of c.righe || []) {
+          this.sql.exec('INSERT OR REPLACE INTO pi_prove (giorno, id, area, domanda, risposta, modello, ms, stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            c.giorno, r.id, r.area, r.domanda, r.risposta, r.modello, r.ms, r.stato);
+        }
+        this.sql.exec("DELETE FROM pi_prove WHERE giorno < date('now', '-60 days')");
+        return Response.json({ ok: true });
+      case '/pi-prove-leggi': {
+        const giorni = this.righe('SELECT DISTINCT giorno FROM pi_prove ORDER BY giorno DESC LIMIT 30').map((r) => r.giorno);
+        const g = c.giorno || giorni[0] || null;
+        return Response.json({
+          giorno: g, giorni,
+          prove: g ? this.righe('SELECT id, area, domanda, risposta, modello, ms, stato FROM pi_prove WHERE giorno = ? ORDER BY id', g) : [],
+          eventi: this.righe("SELECT giorno, evento, n FROM pi_eventi WHERE giorno >= date('now', '-14 days') ORDER BY giorno DESC, evento"),
+          uso: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS persone, SUM(COALESCE(tin, 0)) AS tin, SUM(COALESCE(tout, 0)) AS tout
+                           FROM assistente WHERE giorno >= date('now', '-14 days') GROUP BY giorno ORDER BY giorno DESC`),
+        });
+      }
 
       case '/revoca':
         this.sql.exec('DELETE FROM abilitazioni WHERE email = ? AND materia = ?', c.email, c.materia);
@@ -383,6 +410,10 @@ async function verificaPaddle(req, corpo, segreto) {
 
 // ---------- worker ----------
 export default {
+  // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
+  async scheduled(evento, env, ctx) {
+    ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
+  },
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
@@ -528,6 +559,9 @@ export default {
       const io = await utenteCollegato(env, req).catch(() => null);
       return rispondiAssistente(req, env, io, aDO, A_PAGAMENTO, PREZZI);
     }
+
+    // Banco di prova di Pi (ciclo di miglioramento): risposte alle domande di prova e contatori anonimi.
+    if ((p === '/pi/prove' || p.startsWith('/pi/prove/')) && req.method === 'GET') return paginaProve(url, env, aDO);
 
     // ===== webhook Paddle =====
     if (p === '/api/paddle/webhook' && POST) {

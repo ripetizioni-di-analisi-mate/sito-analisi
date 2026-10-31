@@ -89,6 +89,7 @@ function infoSito(aPagamento, prezzi, env = {}) {
 - Anteprima gratuita, senza account: una parte della teoria di ogni argomento, le prime ${SCHEDE_LIBERE} schede di esercizi svolti e una parte degli esercizi da fare.
 - Acquisto: si apre la pagina "Sblocca" della materia (https://ripetizionidianalisi.com/<materia>/sblocca), si crea un account gratuito con email e password e si paga. È un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. Il pagamento è gestito da Paddle, che fa da rivenditore ufficiale e invia la ricevuta; si paga con carta e con gli altri metodi mostrati nella finestra di pagamento. Dopo il pagamento la materia si sblocca subito nell'account.
 - Un account si può usare al massimo su ${MAX_DISPOSITIVI} dispositivi.
+- Chi ha seguito o sta seguendo un corso di Carmine (dal vivo o di gruppo), oppure ha comprato un suo videocorso preregistrato, non paga le materie collegate del sito: all'iscrizione lo indica nel riquadro facoltativo "Sei già uno studente di Carmine?" e Carmine gli attiva le materie gratis a mano, il prima possibile. Chi si è già iscritto senza indicarlo scrive a Carmine su WhatsApp.
 - L'account e il materiale sono per uso personale di studio: i contenuti sono protetti dal diritto d'autore ed è vietato condividerli o diffonderli (gruppi, Drive, social, PDF, foto dello schermo) senza l'autorizzazione scritta di Carmine. Termini d'uso: https://ripetizionidianalisi.com/termini.
 - Elenco dei prezzi: https://ripetizionidianalisi.com/prezzi. Guida gratuita per i concorsi: https://ripetizionidianalisi.com/concorsi.
 - Per lezioni private, problemi con l'account o con un pagamento, rimborsi e tutto ciò che non è scritto qui: scrivere a Carmine su WhatsApp dal pulsante verde in basso a destra o dalla pagina Contatti (https://ripetizionidianalisi.com/contatti).
@@ -128,8 +129,11 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const maxToken = io ? (Number(env.ASSISTENTE_TOKEN_STUDENTE) || MAX_TOKEN_STUDENTE) : (Number(env.ASSISTENTE_TOKEN_OSPITE) || MAX_TOKEN_OSPITE);
   const maxTokenGiorno = Number(env.ASSISTENTE_TOKEN_GIORNO) || MAX_TOKEN_GIORNO;
   const giorno = new Date().toISOString().slice(0, 10);
+  // Contatori anonimi per il ciclo di miglioramento (solo il tipo di evento e il giorno, nessun testo).
+  const evento = (e) => aDO(env, '/pi-evento', { giorno, evento: e }).catch(() => {});
   const conto = await aDO(env, '/assistente-conta', { giorno, email: chi, maxStudente, maxGiorno, maxToken, maxTokenGiorno });
   if (!conto.ok) {
+    await evento(`limite-${conto.motivo === 'sito' ? 'sito' : io ? 'studente' : 'ospite'}`);
     return json({
       errore: conto.motivo === 'sito'
         ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
@@ -178,17 +182,23 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   }
 
   let ultimoErrore = null;
-  for (const [modello, input] of tentativi) {
+  const corto = (m) => m.split('/').pop();
+  for (const [i, [modello, input]] of tentativi.entries()) {
     try {
       const r = await env.AI.run(modello, { ...input, max_tokens: MAX_USCITA, temperature: 0.3, stream: true });
-      if (r instanceof ReadableStream) return flussoAI(r, rimasti, conta);
+      const segna = () => evento(`${foto ? 'foto' : 'testo'}-${i ? 'riserva' : 'primo'}:${corto(modello)}`);
+      if (r instanceof ReadableStream) { await segna(); return flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota')); }
       // Alcuni modelli ignorano lo streaming e rispondono tutto insieme.
       const t = pulisci(testoRisposta(r));
-      if (t) { await conta(Math.round(t.length / 4)); return json({ risposta: t, rimasti }); }
+      if (t) {
+        await segna(); await conta(Math.round(t.length / 4));
+        const risp = json({ risposta: t, rimasti }); risp.headers.set('x-modello', modello); return risp;
+      }
     } catch (e) { ultimoErrore = e; console.log('Pi', modello, String(e?.message || e).slice(0, 200)); }
   }
   await rimborsa();
   const quota = /4006|allocation|neurons|limit/i.test(String(ultimoErrore?.message || ''));
+  await evento(quota ? 'errore-quota' : foto ? 'errore-foto' : 'errore-modello');
   return json({
     errore: quota
       ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
@@ -212,7 +222,7 @@ function pezzoDi(ev) {
 
 // Trasforma lo streaming di Workers AI (eventi SSE) in testo semplice che arriva a pezzi al browser.
 // Il ragionamento tra <think> e </think> non si mostra.
-function flussoAI(body, rimasti, conta) {
+function flussoAI(body, rimasti, conta, modello = '', vuota = () => {}) {
   const dec = new TextDecoder();
   const enc = new TextEncoder();
   let resto = '';
@@ -254,7 +264,8 @@ function flussoAI(body, rimasti, conta) {
     async flush(ctl) {
       if (!pensa && coda) { caratteri += coda.length; ctl.enqueue(enc.encode(coda)); }
       await conta(Math.round(caratteri / 4));
+      if (!caratteri) await vuota();
     },
   }));
-  return new Response(flusso, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-rimasti': String(rimasti), 'x-accel-buffering': 'no' } });
+  return new Response(flusso, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-rimasti': String(rimasti), 'x-modello': modello, 'x-accel-buffering': 'no' } });
 }

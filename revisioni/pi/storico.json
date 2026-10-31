@@ -1,0 +1,25 @@
+{
+  "giorni": [
+    {
+      "giorno": "2026-10-31",
+      "punteggio": null,
+      "aree": {},
+      "casi": 0,
+      "errori": 0,
+      "areaDelGiorno": "banco",
+      "problemi": [
+        "Nessun modo di misurare la qualità delle risposte di Pi giorno per giorno",
+        "Non si sa quante risposte falliscono o passano al modello di riserva",
+        "Pi non sa che gli ex studenti di Carmine hanno le materie gratis"
+      ],
+      "interventi": [
+        { "titolo": "Banco di prova", "area": "banco", "cosa": "24 domande di prova (calcoli, teoria, pagina, sito, fuori tema, inglese) poste a Pi ogni mattina alle 6:30", "perStudente": "ogni giorno si vede dove Pi sbaglia e si corregge lì", "verifica": "pagina /pi/prove da domani", "commit": "", "esito": "in attesa" },
+        { "titolo": "Contatori anonimi", "area": "affidabilità", "cosa": "conteggio per giorno di risposte, riserve, errori, risposte vuote e limiti raggiunti, senza testi", "perStudente": "gli errori di Pi emergono anche quando nessuno li segnala", "verifica": "contatori su /pi/prove", "commit": "", "esito": "in attesa" },
+        { "titolo": "Ex studenti", "area": "sito", "cosa": "Pi sa che chi ha seguito un corso o comprato un videocorso riceve le materie gratis e come chiederle", "perStudente": "risposta giusta invece del rimando generico a WhatsApp", "verifica": "caso fisso sito-corso-gruppo", "commit": "", "esito": "in attesa" }
+      ],
+      "esitiIeri": [],
+      "annullati": [],
+      "proposte": []
+    }
+  ]
+}
