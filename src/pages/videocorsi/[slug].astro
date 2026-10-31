@@ -14,7 +14,7 @@ const sblocca = v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)!).filter(
 const separato = prezzoSeparato(v);
 const materiale = valoreMateriale(v);
 const una = sblocca.length === 1;
-const MASCHILI = ['precorso']; // nomi di materia maschili: «Precorso da solo»
+const nomiMaterie = sblocca.map((m) => m.breve).join(', ').replace(/, ([^,]*)$/, ' e $1');
 const chiave = chiaveVideo(v.slug);
 const altri = VIDEOCORSI.filter((x) => x.slug !== v.slug);
 const schema = [{
@@ -39,27 +39,14 @@ const titolo = v.titolo;
   </div>
 
   <div class="sblocco-video" style={`--accento: ${v.colore}`}>
-    <h2>{una ? 'Compresa nel videocorso' : 'Comprese nel videocorso'}</h2>
-    <p>{una
-      ? <>Comprando il videocorso trovi <strong>{sblocca[0].titolo}</strong> già attiva nel tuo account, con teoria, esercizi svolti ed esercizi con la soluzione. Da sola costa {materiale} €; con il videocorso non la paghi.</>
-      : <>Comprando il videocorso trovi già attive nel tuo account queste {sblocca.length} materie, con teoria, esercizi svolti ed esercizi con la soluzione. Da sole costano {materiale} € in tutto; con il videocorso non le paghi.</>}</p>
-    {!una && (
-      <ul>
-        {sblocca.map((m) => (
-          <li style={`--c: ${m.colore}`}>
-            <a href={`/${m.slug}`}><span class="punto-materia"></span><strong>{m.titolo}</strong></a>
-            <span>{m.argomenti.length} argomenti · {MASCHILI.includes(m.slug) ? 'da solo' : 'da sola'} {m.prezzo} €</span>
-          </li>
-        ))}
-      </ul>
-    )}
-    {una && <p class="vedi-materia"><a href={`/${sblocca[0].slug}`}>Guarda gratis l'anteprima di {sblocca[0].titolo} ({sblocca[0].argomenti.length} argomenti)</a></p>}
+    <p class="omaggio">Insieme alle videolezioni ricevi <strong>in omaggio</strong> il materiale scritto del sito{una ? '' : ` per ${nomiMaterie}`}: teoria, esercizi svolti ed esercizi con la soluzione, <strong>del valore di {materiale}&nbsp;€</strong>.</p>
+    {una && <p class="vedi-materia"><a href={`/${sblocca[0].slug}`}>Guarda gratis un'anteprima del materiale scritto</a></p>}
   </div>
 
   <div class="riquadro-acquisto" style={`--accento: ${v.colore}`}>
     <p class="prezzo"><strong>{v.prezzo} €</strong> <span>una volta sola</span></p>
     {separato > v.prezzo && <p class="risparmio-video">Risparmi {separato - v.prezzo} € rispetto ai corsi comprati separatamente ({separato} €)</p>}
-    {materiale > 0 && <p class="risparmio-video">Incluso il materiale didattico del sito: risparmi {materiale} €</p>}
+    {materiale > 0 && <p class="risparmio-video">Con il materiale scritto del sito in omaggio</p>}
     <div id="azione"><p class="esito-modulo">Un momento…</p></div>
     <p class="nota-termini">Con l'acquisto accetti i <a href="/termini">termini d'uso</a>: l'accesso ai video e alle materie è personale e il materiale non può essere condiviso né diffuso.</p>
   </div>
@@ -159,6 +146,7 @@ const titolo = v.titolo;
   .sblocco-video ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; font-family: var(--ui); }
   .sblocco-video li { display: flex; flex-direction: column; }
   .sblocco-video li a { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--c); text-decoration: none; }
+  .sblocco-video .omaggio { font-size: 1.05rem; line-height: 1.5; }
   .sblocco-video .vedi-materia { margin: 0; }
   .sblocco-video .vedi-materia a { color: #2e7d4f; }
   .sblocco-video li span { font-size: 0.85rem; color: var(--inchiostro-2); padding-left: 1.2rem; }
