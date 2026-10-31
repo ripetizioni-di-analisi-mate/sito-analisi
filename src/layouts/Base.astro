@@ -286,7 +286,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       // Fuori da un argomento, il tasto porta all'argomento dell'obiettivo della settimana.
       const cont = pl.querySelector<HTMLAnchorElement>('.pl-continua')!;
       const conLink = (d.obiettivi || []).find((o: any) => o.link && !o.completato);
-      if (!cont.dataset.qui && conLink) cont.href = (inglese ? '/en' : '') + conLink.link;
+      const ultima = (d.sessioni || []).find((x: any) => x.materia && x.argomento);
+      const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
+      if (!cont.dataset.qui && dove) cont.href = (inglese ? '/en' : '') + dove;
       pl.querySelector<HTMLElement>('.pl-settimana')!.hidden = !(d.obiettivi || []).length;
     }
     if (bl?.dataset.stato) {
