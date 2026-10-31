@@ -346,7 +346,11 @@ async function utenteCollegato(env, req) {
 
 // Nome mostrato in testata: quello scelto dallo studente, altrimenti la parte dell'email prima della @.
 const pulisciNome = (n) => String(n || '').replace(/[<>"\u0000-\u001f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40);
-const nomeVisibile = (io) => (io.nome || io.email.split('@')[0]).trim();
+// Solo il nome (la prima parola), con l'iniziale maiuscola; senza nome si legge «Account».
+const nomeVisibile = (io) => {
+  const n = String(io.nome || '').trim().split(/\s+/)[0] || '';
+  return n ? n[0].toUpperCase() + n.slice(1) : 'Account';
+};
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
 // ---------- domande a tempo ----------
@@ -709,9 +713,9 @@ export default {
       risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
       }).on('.bottone-account .iniziale', {
-        element(e) { e.setInnerContent([...nome][0]?.toUpperCase() || '·'); },
+        element(e) { e.setInnerContent([...(io.nome || io.email)][0]?.toUpperCase() || '·'); },
       }).on('.bottone-account', {
-        element(e) { e.setAttribute('aria-label', `Account di ${nome}`); },
+        element(e) { e.setAttribute('aria-label', io.nome ? `Account di ${nome}` : 'Il tuo account'); },
       }).on('.bottone-livello', {
         element(e) {
           const st = livelloDa(io.exp || 0);

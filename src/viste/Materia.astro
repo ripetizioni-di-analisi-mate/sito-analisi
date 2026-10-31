@@ -14,6 +14,8 @@ const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
 const riassunti = Object.fromEntries((await vociL(lingua, 'teoria')).map((v) => [v.id, v.data.sommario]));
 const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
+// Domande a tempo (solo in italiano): quante per argomento.
+const domande = lingua === 'it' ? await getCollection('domande') : [];
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 ---
 <Base titolo={t.argomentiEsame} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
@@ -54,6 +56,7 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
           {pronto ? (
             <nav aria-label={a.titolo}>
               {SEZIONI.map((s) => <a href={link(lingua, `/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
+              {conta(domande, a.slug) > 0 && <a href={`/${materia}/${a.slug}/domande`}>Domande a tempo ({conta(domande, a.slug)})</a>}
             </nav>
           ) : (
             <span class="conteggio">{t.inPreparazione}</span>
