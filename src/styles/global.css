@@ -831,3 +831,12 @@ html.collegato .livello-testata { display: block; }
 .fasce strong { font-family: var(--ui); }
 .fasce span { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
 @media print { .livello-testata, .avviso-premio { display: none !important; } }
+/* Riquadro alla fine dell'anteprima gratuita: teoria e schede svolte bloccate (scripts/vetrine.mjs) */
+.velo-blocco.fine-anteprima { text-align: left; padding: 1.2rem 1.1rem; }
+.fine-anteprima .velo-sopra { margin: 0 0 0.3rem; font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 700; color: var(--accento); }
+.fine-anteprima .velo-titolo { margin: 0 0 0.6rem; font-family: var(--titoli); font-weight: 700; font-size: 1.2rem; line-height: 1.3; color: var(--inchiostro); }
+.velo-elenco { margin: 0 0 1rem; padding-left: 1.6rem; color: var(--inchiostro-2); }
+.velo-elenco li { margin: 0.2rem 0; }
+.fine-anteprima .bottone-sblocca { display: block; text-align: center; margin: 0 0 0.9rem; }
+.fine-anteprima .velo-gratis { margin: 0; font-size: 0.93rem; text-align: center; }
+.fine-anteprima .velo-gratis a { color: var(--accento); }
