@@ -142,7 +142,8 @@ function progressoObiettivo(ar, email, o, sett, l = 'it') {
       break;
   }
   testo = testoObiettivo(o, l);
-  return { codice: `obiettivo-${da}-${o.n}`, testo, fatto: Math.min(fatto, def.n), totale: def.n, punti: def.punti, completato: fatto >= def.n };
+  const link = o.codice === 'corrette-arg' && o.materia && o.argomento ? `/${o.materia}/${o.argomento}/domande` : null;
+  return { codice: `obiettivo-${da}-${o.n}`, testo, fatto: Math.min(fatto, def.n), totale: def.n, punti: def.punti, completato: fatto >= def.n, link, unita: o.codice === 'ore' ? 'min' : '' };
 }
 
 // Dopo ogni attività: obiettivi raggiunti, traguardi, livelli. Restituisce i premi nuovi.
@@ -272,13 +273,24 @@ export function percorso(ar, c) {
   const stato = statoDi(ar, email, l);
   // Traguardi ancora da raggiungere: i tre fissi, le materie con domande, il prossimo livello tondo.
   const presi = new Set(premi.map((p) => p.codice));
+  // Avanzamento di ogni traguardo (fatto su totale): serve al pannello per mostrare il più vicino.
+  const corretteTot = ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND corretta = 1', email).c;
+  const minutiTot = ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ?', email).c;
+  const avanzamento = { 'prima-corretta': [corretteTot, 1], 'corrette-100': [corretteTot, 100], 'studio-10h': [minutiTot, 600] };
   const daFare = [
-    ...TRAGUARDI_FISSI.filter((t) => !presi.has(t.codice)).map((t) => ({ nome: nomePremio(ar, email, t.codice, l), punti: t.punti })),
-    ...Object.keys(c.catalogo || {}).filter((m) => !presi.has(`materia-${m}`))
-      .map((m) => ({ nome: nomePremio(ar, email, `materia-${m}`, l), punti: PUNTI_MATERIA_COMPLETA })),
+    ...TRAGUARDI_FISSI.filter((t) => !presi.has(t.codice)).map((t) => {
+      const [fatto, totale] = avanzamento[t.codice] || [0, 1];
+      return { nome: nomePremio(ar, email, t.codice, l), punti: t.punti, fatto: Math.min(fatto, totale), totale, unita: t.codice === 'studio-10h' ? 'min' : '' };
+    }),
+    ...Object.entries(c.catalogo || {}).filter(([m, args]) => args.length && !presi.has(`materia-${m}`)).map(([m, args]) => {
+      const provati = ar.riga(`SELECT COUNT(DISTINCT argomento) AS c FROM risposte WHERE email = ? AND valida = 1 AND materia = ? AND argomento IN (${args.map(() => '?').join(',')})`, email, m, ...args).c;
+      return { nome: nomePremio(ar, email, `materia-${m}`, l), punti: PUNTI_MATERIA_COMPLETA, fatto: provati, totale: args.length, unita: '' };
+    }),
   ];
   const prossimoTondo = Math.min(100, Math.floor(stato.livello / 10) * 10 + 10);
-  if (!presi.has(`livello-${prossimoTondo}`)) daFare.push({ nome: nomePremio(ar, email, `livello-${prossimoTondo}`, l), punti: puntiTraguardoLivello(prossimoTondo) });
+  if (!presi.has(`livello-${prossimoTondo}`)) daFare.push({ nome: nomePremio(ar, email, `livello-${prossimoTondo}`, l), punti: puntiTraguardoLivello(prossimoTondo), fatto: stato.livello, totale: prossimoTondo, unita: '' });
+  // Il traguardo più vicino (in proporzione), tra quelli già cominciati se ce ne sono.
+  const prossimo = [...daFare].sort((x, y) => (y.fatto / y.totale) - (x.fatto / x.totale))[0] || null;
   return {
     stato,
     settimana: {
@@ -289,6 +301,7 @@ export function percorso(ar, c) {
     obiettivi: righe.map((o) => progressoObiettivo(ar, email, o, sett, l)),
     traguardi: premi.map((p) => ({ nome: p.nome, punti: p.punti, quando: p.quando })),
     daFare,
+    prossimo,
     sessioni: ar.righe('SELECT inizio, minuti, risposte, corrette, punti, materia, argomento FROM sessioni WHERE email = ? ORDER BY ultimo DESC LIMIT 5', email)
       .map((s) => ({ ...s, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null })),
   };

@@ -733,14 +733,33 @@ html.collegato .bottone-livello:hover { background: color-mix(in srgb, var(--ver
 .elenco-domande { columns: 2 14rem; }
 .anello-fondo { fill: none; stroke: color-mix(in srgb, var(--verde) 18%, transparent); stroke-width: 3; }
 .anello-avanzamento { fill: none; stroke: var(--verde); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
-.pannello-livello { position: absolute; right: 0; top: calc(100% + 0.5rem); width: 17.5rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; box-shadow: 0 10px 30px rgb(34 48 47 / 12%); padding: 0.9rem 1rem; z-index: 30; font-size: 0.92rem; }
-.pannello-livello p { margin: 0.4rem 0; }
+.pannello-livello { position: absolute; right: 0; top: calc(100% + 0.5rem); width: 20rem; max-width: calc(100vw - 1.5rem); box-sizing: border-box; background: #fff; border: 1px solid var(--riga); border-radius: 14px; box-shadow: 0 10px 30px rgb(34 48 47 / 12%); padding: 1rem 1.1rem 0.9rem; z-index: 30; font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.55rem; }
+.pannello-livello[hidden] { display: none; }
+.pannello-livello p { margin: 0; }
 .pl-testa { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
-.pl-testa strong { font-family: var(--titoli); font-size: 1.15rem; }
-.pl-testa span, .pl-numeri { color: var(--inchiostro-2); }
-.pl-numeri { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.85rem; }
-.pl-link { display: flex; flex-direction: column; gap: 0.3rem; border-top: 1px solid var(--riga); padding-top: 0.6rem; }
-.pl-link a:first-child { font-weight: 600; text-decoration: none; }
+.pl-testa strong { font-weight: 700; }
+.pl-exp, .pl-mancano { color: var(--inchiostro-2); font-size: 0.82rem; white-space: nowrap; }
+.pannello-livello .barra-exp { height: 6px; }
+.pl-settimana { display: flex; flex-direction: column; gap: 0.65rem; border-top: 1px solid var(--riga); padding-top: 0.75rem; margin-top: 0.1rem; }
+.pl-settimana[hidden] { display: none; }
+.pl-titoletto { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); }
+.pl-obiettivi { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.pl-obiettivi li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.3rem 0.6rem; }
+.pl-ob-punti { font-size: 0.8rem; font-weight: 600; color: #8a5f1f; white-space: nowrap; }
+.pl-ob-barra { display: block; height: 5px; border-radius: 999px; background: #efe7d6; overflow: hidden; }
+.pl-ob-barra > span { display: block; height: 100%; border-radius: 999px; background: #a8762b; }
+.pl-ob-conto { font-size: 0.8rem; color: var(--inchiostro-2); white-space: nowrap; }
+.pl-obiettivi li.fatto .pl-ob-barra > span { background: var(--verde); }
+.pl-obiettivi li.fatto .pl-ob-punti { color: var(--verde); }
+.pl-traguardo { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; background: #f6f3ec; border-radius: 10px; padding: 0.55rem 0.75rem; }
+.pl-traguardo[hidden] { display: none; }
+.pl-traguardo > span { display: flex; flex-direction: column; gap: 0.1rem; }
+.pl-traguardo-etichetta { font-size: 0.75rem; color: var(--inchiostro-2); }
+.pl-traguardo strong { font-size: 0.86rem; }
+.pl-traguardo em { font-style: normal; font-size: 0.8rem; font-weight: 600; color: #8a5f1f; white-space: nowrap; }
+.pl-continua { display: flex; align-items: center; justify-content: center; min-height: 2.75rem; margin-top: 0.2rem; border-radius: 999px; background: var(--verde); color: #fff !important; font-weight: 600; text-decoration: none; text-align: center; padding: 0 1rem; }
+.pl-continua:hover { filter: brightness(1.08); }
+.pl-link { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.3rem 1.1rem; font-size: 0.86rem; }
 .barra-exp { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--verde) 14%, transparent); overflow: hidden; }
 .barra-exp > span { display: block; height: 100%; border-radius: 999px; background: var(--verde); transition: width 0.6s ease; }
 .barra-exp.grande { height: 10px; }

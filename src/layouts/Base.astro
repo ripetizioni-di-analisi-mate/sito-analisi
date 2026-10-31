@@ -142,14 +142,19 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
               </span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
-              <p class="pl-testa"><strong class="pl-livello"></strong><span class="pl-fascia"></span></p>
+              <div class="pl-testa"><strong class="pl-livello"></strong><span class="pl-exp"></span></div>
               <div class="barra-exp"><span class="pl-barra"></span></div>
-              <p class="pl-numeri"><span class="pl-exp"></span><span class="pl-mancano"></span></p>
+              <p class="pl-mancano"></p>
+              <div class="pl-settimana" hidden>
+                <p class="pl-titoletto">{en ? 'This week\'s goals' : 'Obiettivi della settimana'}</p>
+                <ul class="pl-obiettivi"></ul>
+                <p class="pl-traguardo" hidden><span><span class="pl-traguardo-etichetta">{en ? 'Next milestone' : 'Prossimo traguardo'}</span><strong></strong></span><em></em></p>
+              </div>
+              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti') + (domandeQui ? '' : '#domande')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               <p class="pl-link">
-                <a class="pl-domande" href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti') + (domandeQui ? '' : '#domande')}>{en ? 'Timed questions →' : 'Domande a tempo →'}</a>
                 <a href={link(lingua, '/account') + '#percorso'}>{en ? 'Your progress' : 'Il tuo percorso'}</a>
-                <a href={link(lingua, '/account')}>{en ? 'Your account' : 'Il tuo account'}</a>
-                <a href={link(lingua, '/livelli-e-punti')}>{en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a>
+                <a href={link(lingua, '/account')}>{en ? 'Account' : 'Account'}</a>
+                <a href={link(lingua, '/livelli-e-punti')}>{en ? 'How it works' : 'Come funziona'}</a>
               </p>
             </div>
           </>
@@ -257,11 +262,34 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
       (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
       bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}`);
-      pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello}`;
-      pl.querySelector('.pl-fascia')!.textContent = st.fascia;
+      pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello} · ${st.fascia}`;
       (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;
       pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} ${XP}` : `${num(st.exp)} / ${num(st.prossimo)} ${XP}`;
-      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? (inglese ? 'Maximum level' : 'Livello massimo') : `${num(st.mancano)} ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
+      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? (inglese ? 'Maximum level' : 'Livello massimo') : `${num(st.mancano)} ${XP} ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
+    }
+    // Obiettivi della settimana e prossimo traguardo: si chiedono al server quando il pannello si apre.
+    const escH = (x: string) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as Record<string, string>)[c]);
+    let percorsoChiesto = 0;
+    async function caricaPercorso() {
+      if (!pl || Date.now() - percorsoChiesto < 30000) return;
+      percorsoChiesto = Date.now();
+      const r = await fetch(`/api/percorso?l=${inglese ? 'en' : 'it'}`).catch(() => null);
+      if (!r || !r.ok) return;
+      const d = await r.json();
+      if (d.stato) mostraLivello(d.stato);
+      const quantita = (f: number, t: number, u: string) => u === 'min' ? `${num(f)}/${num(t)} min` : `${num(f)}/${num(t)}`;
+      pl.querySelector('.pl-obiettivi')!.innerHTML = (d.obiettivi || []).map((o: any) => `<li class="${o.completato ? 'fatto' : ''}"><span class="pl-ob-testo">${escH(o.testo)}</span><span class="pl-ob-punti">${o.completato ? '✓ ' : ''}+${o.punti} ${XP}</span><span class="pl-ob-barra"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span><span class="pl-ob-conto">${quantita(o.fatto, o.totale, o.unita)}</span></li>`).join('');
+      const tr = pl.querySelector<HTMLElement>('.pl-traguardo')!;
+      if (d.prossimo) {
+        tr.querySelector('strong')!.textContent = `${d.prossimo.nome} · ${quantita(d.prossimo.fatto, d.prossimo.totale, d.prossimo.unita)}`;
+        tr.querySelector('em')!.textContent = `+${d.prossimo.punti} ${XP}`;
+        tr.hidden = false;
+      }
+      // Fuori da un argomento, il tasto porta all'argomento dell'obiettivo della settimana.
+      const cont = pl.querySelector<HTMLAnchorElement>('.pl-continua')!;
+      const conLink = (d.obiettivi || []).find((o: any) => o.link && !o.completato);
+      if (!cont.dataset.qui && conLink) cont.href = (inglese ? '/en' : '') + conLink.link;
+      pl.querySelector<HTMLElement>('.pl-settimana')!.hidden = !(d.obiettivi || []).length;
     }
     if (bl?.dataset.stato) {
       try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
@@ -270,6 +298,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       const apri = pl!.hidden;
       pl!.hidden = !apri;
       bl.setAttribute('aria-expanded', String(apri));
+      if (apri) caricaPercorso();
     });
     document.addEventListener('click', (e) => {
       if (pl && !pl.hidden && !(e.target as HTMLElement).closest('.account-testata')) { pl.hidden = true; bl?.setAttribute('aria-expanded', 'false'); }
