@@ -4,6 +4,7 @@ import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
 import Presentazione from '../components/Presentazione.astro';
+import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -21,6 +22,10 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
     .map((s) => `html[data-materie~="${chiaveVideo(s)}"] [data-materia="${m.slug}"] .pulsante-video .ok{display:inline-flex}`).join('') : '';
   return teoria + video;
 }).join('') : '';
+// Conteggi veri di ogni materia, letti dai file dei contenuti (non scritti a mano).
+const [svolti, dafare] = [await getCollection('svolti'), await getCollection('dafare')];
+const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
+const conti = (m: (typeof MATERIE)[number]) => `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
 const icona = {
   teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
   video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',
@@ -47,6 +52,7 @@ const icona = {
       <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: teoria, teoremi con dimostrazione, esercizi svolti passo dopo passo ed esercizi con soluzione.</span></li>
       <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: le lezioni complete dei corsi, registrate, con il PDF di ogni lezione.</span></li>
     </ul>
+    <p class="gratis-home"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span>Di ogni argomento si leggono gratis l'inizio della teoria e le prime tre schede svolte, senza account.</span></p>
   ) : (
     <p class="nota-anteprima"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
@@ -66,9 +72,10 @@ const icona = {
         </ul>
       )}
       {(() => {
-        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
+        // Nelle aree senza sottogruppi (Università) le materie in preparazione stanno in una riga di testo.
+        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = false) => (
           <ul class="griglia-materie">
-            {voci.map(({ m, nome }) => (
+            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
               <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
                 {m.attiva && lingua === 'it' ? (() => {
                   const v = videoDi(m.slug);
@@ -77,6 +84,7 @@ const icona = {
                       <a class="scheda-materia" href={link(lingua, `/${m.slug}`)}>
                         <h3>{nome}</h3>
                         <p>{m.descrizione}</p>
+                        <span class="conti-materia">{conti(m)}</span>
                       </a>
                       <span class="piede-scheda pulsanti-scheda">
                         {v && (
@@ -105,6 +113,9 @@ const icona = {
                 )}
               </li>
             ))}
+            {riga && voci.some(({ m }) => !m.attiva) && (
+              <li class="riga-preparazione">In preparazione: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>
+            )}
           </ul>
         );
         return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
@@ -112,8 +123,15 @@ const icona = {
             <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
             {griglia(b.materie)}
           </details>
-        ) : griglia(b.materie));
+        ) : griglia(b.materie, lingua === 'it'));
       })()}
+      {lingua === 'it' && i === 0 && (
+        <a class="riga-videocorsi" href="/videocorsi">
+          <span class="play"><Fragment set:html={icona.video} /></span>
+          <span><b>Videocorsi di Carmine</b><span>Le lezioni registrate dei corsi, con il PDF di ogni lezione. Ogni videocorso comprende le materie collegate del sito.</span></span>
+          <span class="freccia" aria-hidden="true">→</span>
+        </a>
+      )}
     </details>
   ))}
 </Base>
