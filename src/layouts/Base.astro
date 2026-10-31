@@ -135,11 +135,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         {(
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
-              <span class="iniziale" aria-hidden="true"></span>
-              <span class="righe-livello">
-                <span class="nome-utente">{t.account}</span>
-                <span class="etichetta-livello">{en ? 'Level' : 'Livello'} <span class="numero-livello">1</span><span class="mini-barra" aria-hidden="true"><span></span></span></span>
-              </span>
+              <span class="etichetta-livello">{en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
+              <span class="mini-barra" aria-hidden="true"><span></span></span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
               <div class="pl-testa"><strong class="pl-livello"></strong><span class="pl-exp"></span></div>
@@ -261,7 +258,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       if (!bl || !pl) return;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
       (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
-      bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}`);
+      bl.querySelector('.exp-livello')!.textContent = num(st.exp);
+      bl.setAttribute('aria-label', `${inglese ? 'Level' : 'Livello'} ${st.livello}, ${st.fascia}, ${num(st.exp)} ${XP}`);
       pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello} · ${st.fascia}`;
       (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;
       pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} ${XP}` : `${num(st.exp)} / ${num(st.prossimo)} ${XP}`;
