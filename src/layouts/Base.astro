@@ -135,8 +135,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         {(
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
-              <span class="etichetta-livello">{en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span></span>
-              <span class="mini-barra" aria-hidden="true"><span></span></span>
+              <span class="iniziale" aria-hidden="true"></span>
+              <span class="righe-livello">
+                <span class="nome-utente">{t.account}</span>
+                <span class="etichetta-livello">{en ? 'Level' : 'Livello'} <span class="numero-livello">1</span><span class="mini-barra" aria-hidden="true"><span></span></span></span>
+              </span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
               <p class="pl-testa"><strong class="pl-livello"></strong><span class="pl-fascia"></span></p>
@@ -253,7 +256,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       if (!bl || !pl) return;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
       (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
-      bl.setAttribute('aria-label', `${inglese ? 'Level' : 'Livello'} ${st.livello}, ${st.fascia}`);
+      bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}`);
       pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello}`;
       pl.querySelector('.pl-fascia')!.textContent = st.fascia;
       (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;

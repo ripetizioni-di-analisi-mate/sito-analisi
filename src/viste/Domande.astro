@@ -15,11 +15,13 @@ const T = en ? {
   termina: 'End the session', sommario: `${totale} multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.`,
   ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic',
+  navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
 } : {
   titolo: 'Domande a tempo', descr: `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
   termina: 'Termina la sessione', sommario: `${totale} domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
   ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento',
+  navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
 };
 // Testi usati dallo script nel browser.
 const JS = en ? {
@@ -29,6 +31,7 @@ const JS = en ? {
   presto: ', but given in less than 10 seconds: no points', tardi: ', but after the time limit: no points', nonArrivata: 'The answer did not arrive. Reload the page.',
   spiegazione: 'Explanation', conclusa: 'Study session completed', minuto: '1 minute of active study', minuti: '§ minutes of active study', sessioneConclusa: 'Session completed',
   unaCorretta: '1 correct answer', piuCorrette: '§ correct answers', su: 'out of', righeCorrette: 'Correct answers', righeStudio: 'Active study', totale: 'Total',
+  numero: 'Question § of', scaduto2: 'Time is up: you can still answer, without points, or move to another question.',
   livello: 'Level', massimo: 'Maximum level', alLivello: 'to level', obiettivi: 'Weekly goals', completato: 'Completed', tornaEsercizi: 'Back to the exercises', percorso: 'Your progress',
 } : {
   caricamento: T.caricamento, errore: 'Le domande non si sono caricate. Ricarica la pagina.', bonus: 'Bonus velocità ancora per § secondi',
@@ -37,6 +40,7 @@ const JS = en ? {
   presto: ', ma data in meno di 10 secondi: nessun punto', tardi: ', ma oltre il tempo: nessun punto', nonArrivata: 'La risposta non è arrivata. Ricarica la pagina.',
   spiegazione: 'Spiegazione', conclusa: 'Sessione di studio conclusa', minuto: '1 minuto di studio attivo', minuti: '§ minuti di studio attivo', sessioneConclusa: 'Sessione conclusa',
   unaCorretta: '1 risposta corretta', piuCorrette: '§ risposte corrette', su: 'su', righeCorrette: 'Risposte corrette', righeStudio: 'Studio attivo', totale: 'Totale',
+  numero: 'Domanda § di', scaduto2: 'Tempo scaduto: puoi ancora rispondere, senza punti, oppure passare a un\'altra domanda.',
   livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', percorso: 'Il tuo percorso',
 };
 ---
@@ -61,7 +65,14 @@ const JS = en ? {
       <p class="azioni"><a class="bottone-secondario" href={`${pref}/accedi?dopo=${pref}${base}/domande`}>{T.accedi}</a></p>
     </div>
 
+    <nav class="navigazione-domande" aria-label={T.navigazione} hidden>
+      <button type="button" class="bottone-secondario precedente">{T.precedente}</button>
+      <ol class="numeri-domande"></ol>
+      <button type="button" class="bottone-secondario successiva">{T.successiva}</button>
+    </nav>
+
     <section class="scheda-domanda" aria-live="polite">
+      <p class="numero-domanda"></p>
       <div class="tempo" hidden>
         <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="12" r="8" /><path d="M11 8v4l2.5 2M9 2h4" /></svg>
         <div class="barra-tempo"><span></span></div>
@@ -93,96 +104,159 @@ const JS = en ? {
   const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), svolti = $('.link-svolti');
   const tempo = $('.tempo'), barra = $('.barra-tempo span'), secondiEl = $('.secondi'), notaTempo = $('.nota-tempo');
   const termina = $<HTMLButtonElement>('.termina'), scheda = $('.scheda-domanda'), riepilogo = $('.riepilogo-sessione');
+  const nav = $('.navigazione-domande'), numeri = $('.numeri-domande'), numeroEl = $('.numero-domanda');
+  const prec = $<HTMLButtonElement>('.precedente'), succ = $<HTMLButtonElement>('.successiva');
   const LETTERE = ['A', 'B', 'C', 'D'];
-  const chiaveViste = `domande-viste-${materia}-${argomento}`;
-  let viste: string[] = [];
-  try { viste = JSON.parse(localStorage.getItem(chiaveViste) || '[]'); } catch {}
-  let corrente: { token: string; id: string; secondi: number; collegato: boolean } | null = null;
-  let scelta = 0, inizio = 0, timer = 0, chiusa = false;
   const post = (url: string, dati: unknown) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
   const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
   const num = (x: number) => x.toLocaleString(lingua === 'en' ? 'en-US' : 'it-IT');
   const adatta = () => dispatchEvent(new Event('resize')); // le formule in display si adattano alla larghezza
 
+  // Stato della pagina: l'ordine delle domande e, per ognuna, la domanda caricata, la scelta e l'esito.
+  interface Domanda { token: string; id: string; numero: number; testo: string; scelte: string[]; secondi: number; collegato: boolean }
+  interface Esito { giusta: boolean; corretta: number; spiegazione: string; punti: number; veloce?: boolean; motivo?: string; scelta: number; scaduto: boolean }
+  let ordine: string[] = [];
+  let pos = 0;
+  const domande = new Map<string, Domanda>();
+  const esiti = new Map<string, Esito>();
+  let corrente: Domanda | null = null;
+  let scelta = 0, inizio = 0, timer = 0;
+
   function aggiornaTempo() {
+    if (!corrente) return;
     const passati = Math.floor((Date.now() - inizio) / 1000);
-    const resto = Math.max(0, (corrente?.secondi || 120) - passati);
+    const resto = Math.max(0, corrente.secondi - passati);
     secondiEl.textContent = mmss(resto);
-    barra.style.width = `${(resto / (corrente?.secondi || 120)) * 100}%`;
+    barra.style.width = `${(resto / corrente.secondi) * 100}%`;
     const bonus = 60 - passati;
-    notaTempo.hidden = !corrente?.collegato || bonus <= 0;
+    if (resto === 0) { notaTempo.hidden = false; notaTempo.textContent = L.scaduto2; clearInterval(timer); return; }
+    notaTempo.hidden = !corrente.collegato || bonus <= 0;
     notaTempo.textContent = bonus > 0 ? f('bonus', bonus) : '';
-    if (resto === 0 && !chiusa) invia(true);
   }
 
-  async function carica() {
-    chiusa = false; scelta = 0;
-    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; svolti.hidden = true;
-    conferma.hidden = false; conferma.disabled = true;
+  function disegnaNumeri() {
+    numeri.innerHTML = '';
+    ordine.forEach((id, i) => {
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = String(i + 1);
+      const e = esiti.get(id);
+      b.className = ['numero', e ? (e.giusta ? 'numero-giusto' : 'numero-sbagliato') : '', i === pos ? 'numero-attivo' : ''].join(' ').trim();
+      if (i === pos) b.setAttribute('aria-current', 'step');
+      b.addEventListener('click', () => vai(i));
+      li.appendChild(b);
+      numeri.appendChild(li);
+    });
+    prec.disabled = pos <= 0;
+    succ.disabled = pos >= ordine.length - 1;
+    numeroEl.textContent = ordine.length ? `${f('numero', pos + 1)} ${ordine.length}` : '';
+  }
+
+  function mostraScelte(d: Domanda, e?: Esito) {
     scelte.innerHTML = '';
-    testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
-    const r = await post('/api/domande/prossima', { materia, argomento, viste, lingua }).catch(() => null);
-    const d = r && r.ok ? await r.json() : null;
-    if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; conferma.hidden = true; return; }
-    corrente = d;
-    (radice.querySelector('.nota-ospite') as HTMLElement).hidden = d.collegato;
-    termina.hidden = !d.collegato;
-    viste = [...viste.filter((x) => x !== d.id), d.id].slice(-200);
-    try { localStorage.setItem(chiaveViste, JSON.stringify(viste)); } catch {}
-    testo.innerHTML = d.testo;
-    d.scelte.forEach((html: string, i: number) => {
+    d.scelte.forEach((html, i) => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'scelta'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
       b.innerHTML = `<span class="lettera">${LETTERE[i]}</span><span class="valore">${html}</span>`;
-      b.addEventListener('click', () => {
-        if (chiusa) return;
-        scelta = i + 1;
-        scelte.querySelectorAll('.scelta').forEach((x, j) => { x.classList.toggle('scelta-attiva', j === i); x.setAttribute('aria-checked', String(j === i)); });
-        conferma.disabled = false;
-      });
+      if (e) {
+        b.classList.add('scelta-chiusa');
+        if (i + 1 === e.corretta) b.classList.add('scelta-giusta');
+        else if (i + 1 === e.scelta) b.classList.add('scelta-sbagliata');
+      } else {
+        b.addEventListener('click', () => {
+          scelta = i + 1;
+          scelte.querySelectorAll('.scelta').forEach((x, j) => { x.classList.toggle('scelta-attiva', j === i); x.setAttribute('aria-checked', String(j === i)); });
+          conferma.disabled = false;
+        });
+      }
       scelte.appendChild(b);
     });
+  }
+
+  function mostraEsito(e: Esito) {
+    let frase = e.giusta ? L.giusta : f(e.scaduto ? 'scaduto' : 'corretta', LETTERE[e.corretta - 1]);
+    if (e.punti > 0) frase += ` · +${e.punti} ${lingua === 'en' ? 'XP' : 'EXP'}` + (e.veloce ? L.veloce : '') + (e.motivo === 'ripetuta' ? L.ripetuta : '');
+    else if (e.giusta && e.motivo === 'troppo-presto') frase += L.presto;
+    else if (e.giusta && e.motivo === 'tempo-scaduto') frase += L.tardi;
+    esito.textContent = `${frase}.`;
+    esito.className = `esito ${e.giusta ? 'esito-giusto' : 'esito-sbagliato'}`;
+    esito.hidden = false;
+    spieg.innerHTML = `<h2>${L.spiegazione}</h2>${e.spiegazione}`;
+    spieg.hidden = false;
+    conferma.hidden = true;
+    prossima.hidden = pos >= ordine.length - 1;
+    svolti.hidden = false;
+  }
+
+  // Apre la domanda in posizione i. Una domanda non ancora risolta si ricarica con un tempo nuovo di due minuti.
+  async function vai(i: number) {
+    clearInterval(timer);
+    pos = Math.max(0, Math.min(i, Math.max(ordine.length - 1, 0)));
+    scelta = 0;
+    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; svolti.hidden = true; notaTempo.hidden = true;
+    conferma.hidden = true; conferma.disabled = true; tempo.hidden = true;
+    const id = ordine[pos];
+    const e = id ? esiti.get(id) : undefined;
+    if (e) {
+      corrente = domande.get(id)!;
+      testo.innerHTML = corrente.testo;
+      mostraScelte(corrente, e);
+      mostraEsito(e);
+      disegnaNumeri();
+      adatta();
+      return;
+    }
+    scelte.innerHTML = '';
+    testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
+    const r = await post('/api/domande/prossima', { materia, argomento, id, lingua }).catch(() => null);
+    const d = r && r.ok ? await r.json() : null;
+    if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; return; }
+    if (!ordine.length) { ordine = d.ordine; pos = Math.max(0, ordine.indexOf(d.id)); nav.hidden = false; }
+    corrente = d;
+    domande.set(d.id, d);
+    (radice.querySelector('.nota-ospite') as HTMLElement).hidden = d.collegato;
+    termina.hidden = !d.collegato;
+    testo.innerHTML = d.testo;
+    mostraScelte(d);
+    conferma.hidden = false;
+    disegnaNumeri();
     adatta();
     inizio = Date.now();
     tempo.hidden = false;
-    clearInterval(timer);
     aggiornaTempo();
     timer = window.setInterval(aggiornaTempo, 1000);
   }
 
-  async function invia(scaduto = false) {
-    if (chiusa || !corrente) return;
-    chiusa = true;
+  async function invia() {
+    if (!corrente || !scelta || esiti.has(corrente.id)) return;
     clearInterval(timer);
     conferma.hidden = true; notaTempo.hidden = true;
-    const r = await post('/api/domande/rispondi', { token: corrente.token, scelta: scaduto ? 0 : scelta }).catch(() => null);
+    const d0 = corrente;
+    const scaduto = Date.now() - inizio > d0.secondi * 1000;
+    const r = await post('/api/domande/rispondi', { token: d0.token, scelta }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     if (!d) { esito.hidden = false; esito.textContent = L.nonArrivata; return; }
-    scelte.querySelectorAll<HTMLElement>('.scelta').forEach((b, j) => {
-      b.classList.add('scelta-chiusa');
-      if (j + 1 === d.corretta) b.classList.add('scelta-giusta');
-      else if (j + 1 === scelta) b.classList.add('scelta-sbagliata');
-    });
-    let frase = d.giusta ? L.giusta : f(scaduto ? 'scaduto' : 'corretta', LETTERE[d.corretta - 1]);
-    if (d.punti > 0) frase += ` · +${d.punti} EXP` + (d.veloce ? L.veloce : '') + (d.motivo === 'ripetuta' ? L.ripetuta : '');
-    else if (d.giusta && d.motivo === 'troppo-presto') frase += L.presto;
-    else if (d.giusta && d.motivo === 'tempo-scaduto') frase += L.tardi;
-    esito.textContent = `${frase}.`;
-    esito.className = `esito ${d.giusta ? 'esito-giusto' : 'esito-sbagliato'}`;
-    esito.hidden = false;
-    spieg.innerHTML = `<h2>${L.spiegazione}</h2>${d.spiegazione}`;
-    spieg.hidden = false;
-    prossima.hidden = false; svolti.hidden = false;
+    const e: Esito = { ...d, scelta, scaduto };
+    esiti.set(d0.id, e);
+    if (corrente?.id !== d0.id) return;
+    mostraScelte(d0, e);
+    mostraEsito(e);
+    disegnaNumeri();
     adatta();
     if (d.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
     if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
   }
 
   conferma.addEventListener('click', () => invia());
-  prossima.addEventListener('click', () => { carica(); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  const sposta = (i: number) => { vai(i); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  prossima.addEventListener('click', () => sposta(pos + 1));
+  succ.addEventListener('click', () => sposta(pos + 1));
+  prec.addEventListener('click', () => sposta(pos - 1));
 
   termina.addEventListener('click', async () => {
     clearInterval(timer);
+    nav.hidden = true;
     const r = await post('/api/sessione/riepilogo', { chiudi: true, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     scheda.hidden = true; termina.hidden = true;
@@ -199,15 +273,15 @@ const JS = en ? {
       <p class="sopratitolo">${L.conclusa} · ${s?.titolo || titolo}</p>
       <h2>${s ? (s.minuti === 1 ? L.minuto : f('minuti', s.minuti)) : L.sessioneConclusa}</h2>
       ${s ? `<p>${s.corrette === 1 ? L.unaCorretta : f('piuCorrette', s.corrette)} ${L.su} ${s.risposte}</p>` : ''}
-      ${righe.length ? `<dl class="conti-exp">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>+${v}</dd></div>`).join('')}<div class="totale"><dt>${L.totale}</dt><dd>+${s.punti} EXP</dd></div></dl>` : ''}
+      ${righe.length ? `<dl class="conti-exp">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>+${v}</dd></div>`).join('')}<div class="totale"><dt>${L.totale}</dt><dd>+${s.punti} ${lingua === 'en' ? 'XP' : 'EXP'}</dd></div></dl>` : ''}
       ${st ? `<p class="riep-livello"><strong>${L.livello} ${st.livello} · ${st.fascia}</strong></p>
         <div class="barra-exp grande"><span style="width:${st.perc}%"></span></div>
-        <p class="riep-numeri"><span>${num(st.exp)} EXP</span><span>${st.prossimo === null ? L.massimo : `${num(st.mancano)} ${L.alLivello} ${st.livello + 1}`}</span></p>` : ''}
+        <p class="riep-numeri"><span>${num(st.exp)} ${lingua === 'en' ? 'XP' : 'EXP'}</span><span>${st.prossimo === null ? L.massimo : `${num(st.mancano)} ${L.alLivello} ${st.livello + 1}`}</span></p>` : ''}
       ${obiettivi ? `<h3>${L.obiettivi}</h3><ul class="obiettivi">${obiettivi}</ul>` : ''}
       <p class="azioni-riepilogo"><a class="bottone-primario" href="${pref}/${materia}/${argomento}/esercizi">${L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
     riepilogo.hidden = false;
     riepilogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  carica();
+  vai(0);
 </script>
