@@ -133,3 +133,10 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Scelta delle proposte del primo giro dello studente puntiglioso.
 - Correzioni di chiarezza puntuali man mano che Carmine segnala i passaggi.
 - Già rimandati: email automatiche (Resend), pagina termini da rifare, eventuale importazione in Bing Webmaster (solo con il suo ok).
+
+## Livelli, EXP e domande a tempo (31/10/2026)
+- Regole in `src/data/livelli.ts` (100 livelli, costo 60+10(n−1), fasce ogni 10 livelli: Matricola … Mito; in inglese XP e Freshman … Myth). Logica nel Durable Object: `worker/livelli.mjs` (tabelle `exp`, `studio`, `risposte`, `sessioni`, `premi`, `obiettivi`). EXP solo per studio vero: minuti attivi (max 180/giorno), risposta corretta 10 (+5 entro 60 s), 0 sotto i 10 s, metà se già indovinata nei 7 giorni; obiettivi settimanali 50-80; traguardi fissi; ricompense solo in EXP.
+- Domande a tempo: 4 risposte, 2 minuti, spiegazione dopo la conferma; si va avanti e indietro (numeri in alto, Precedente/Successiva), senza obbligo di rispondere; allo scadere si risponde senza punti. Aperte anche agli ospiti (senza punti). File `src/content/domande/<materia>/<argomento>/<n>.md` (frontmatter `corretta: 1..4`) e `src/content-en/domande/…`; vista `src/viste/Domande.astro`, dati generati in `/dati-domande/` (bloccati al pubblico dal Worker). Brief: `istruzioni-agenti/brief-domande.md`, `brief-verifica-domande.md`, `brief-traduzione-domande.md`.
+- Fatte (IT+EN): Analisi 1, Precorso, Analisi 2. Prossime nell'ordine: Algebra lineare, Fisica 1, Fisica 2, Matematica generale, Matematica 5° anno, concorsi.
+- Testata (versione C scelta da Carmine): un solo bottone con iniziale, nome (o nome ricavato dall'email, `worker/nomi.mjs`) e sotto «Livello N» con barra sottile; apre il pannello del livello. Link «Domande a tempo (N)» nella pagina della materia e nell'indice.
+- Le build Cloudflare dei rami (non `main`) risultano «failure» su GitHub: sono anteprime, non contano. Per `main` guardare la build di produzione (a volte fallisce per un errore di rete nel caricamento: basta un nuovo push).
