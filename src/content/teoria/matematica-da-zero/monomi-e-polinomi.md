@@ -23,7 +23,7 @@ Tra un numero e una lettera, e tra due lettere, il segno di moltiplicazione di s
 :::
 
 :::esempio{titolo="Valore con un numero negativo"}
-Si calcola il valore di $3x^2 - x$ per $x = -2$. Il numero negativo si scrive fra parentesi tonde, così il segno meno resta dentro la potenza:
+Si calcola il valore di $3x^2 - x$ per $x = -2$. Al posto di $x$ si scrive $(-2)$, così il segno meno resta dentro la potenza:
 $$
 \begin{aligned}
 3 \cdot (-2)^2 - (-2) &= 3 \cdot 4 + 2 \\[6pt]
@@ -34,7 +34,7 @@ La potenza si calcola prima della moltiplicazione, come nell'ordine delle operaz
 :::
 
 :::attenzione
-Per $x = -2$ il valore di $x^2$ è $(-2)^2 = 4$. Scrivendo il numero senza parentesi si ottiene invece $-2^2$, che vale $-4$, perché la potenza si calcola prima del segno meno.
+Per $x = -2$ il valore di $x^2$ è $(-2)^2 = 4$. La scrittura $-2^2$ indica invece un altro numero, che vale $-4$, perché la potenza si calcola prima del segno meno.
 :::
 
 :::osservazione{#lettere-al-denominatore titolo="Lettere al denominatore"}
@@ -182,7 +182,7 @@ In un polinomio ordinato il grado si legge nel primo termine e il termine noto �
 ## Somma e prodotto di polinomi
 
 :::teorema{#somma-di-polinomi titolo="Somma e differenza di polinomi"}
-Per sommare due polinomi si scrivono tutti i loro termini uno dopo l'altro e si riducono i termini simili. Per sottrarre un polinomio si cambia il segno di *ogni* suo termine e poi si somma. In altre parole, un segno più davanti a un'espressione fra parentesi lascia i segni dei termini come sono, e un segno meno li cambia tutti. Con $A = 3x^2 - 2x + 1$ e $B = x^2 + 5x - 4$ si ha
+Per sommare due polinomi si scrivono tutti i loro termini uno dopo l'altro e si riducono i termini simili. Per sottrarre un polinomio si cambia il segno di *ogni* suo termine e poi si somma. In altre parole, un segno più davanti a un polinomio lascia i segni dei suoi termini come sono, e un segno meno li cambia tutti. Con $A = 3x^2 - 2x + 1$ e $B = x^2 + 5x - 4$ si ha
 $$
 \begin{aligned}
 A + B &= 3x^2 - 2x + 1 + x^2 + 5x - 4 \\[6pt]
@@ -386,7 +386,8 @@ Dividere per $3x$ equivale a moltiplicare per $\dfrac{1}{3x}$, quindi la regola 
 Per $a \neq 0$ e $b \neq 0$ si divide $8a^3b^2 - 12a^2b^3 + 4a^2b^2$ per $4a^2b$.
 $$
 \begin{aligned}
-\frac{8a^3b^2 - 12a^2b^3 + 4a^2b^2}{4a^2b} &= \frac{8a^3b^2}{4a^2b} - \frac{12a^2b^3}{4a^2b} + \frac{4a^2b^2}{4a^2b} \\[6pt]
+&\frac{8a^3b^2 - 12a^2b^3 + 4a^2b^2}{4a^2b} \\[6pt]
+&= \frac{8a^3b^2}{4a^2b} - \frac{12a^2b^3}{4a^2b} + \frac{4a^2b^2}{4a^2b} \\[6pt]
 &= 2ab - 3b^2 + b .
 \end{aligned}
 $$
