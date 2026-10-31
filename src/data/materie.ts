@@ -345,7 +345,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "Gratuita. Per chi vuole imparare o ripassare la matematica dalle basi, senza un esame da preparare: numeri, frazioni, percentuali, potenze, calcolo letterale, equazioni, piano cartesiano e geometria.",
     colore: '#b06a7c',
     gruppo: 'Da zero',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'numeri-naturali', titolo: 'Numeri naturali e ordine delle operazioni', breve: 'Numeri naturali' },
       { slug: 'divisibilita', titolo: 'Multipli, divisori, numeri primi, MCD e mcm', breve: 'Divisibilità' },
