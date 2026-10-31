@@ -130,7 +130,7 @@ La prova si ferma lì per questo motivo. Se $n$ è composto, si scrive come prod
 ## Scomposizione in fattori primi
 
 :::teorema{#scomposizione-in-fattori-primi titolo="Scomposizione in fattori primi"}
-Ogni numero naturale maggiore di $1$ si scrive come prodotto di numeri primi, e questo prodotto è unico, a meno dell'ordine dei fattori. I fattori uguali si raccolgono in una potenza: per esempio $2 \cdot 2 \cdot 2 = 2^3$.
+Ogni numero naturale maggiore di $1$ si scrive come prodotto di numeri primi, e questo prodotto è unico, a meno dell'ordine dei fattori. I fattori uguali si raccolgono in una potenza, per esempio $2 \cdot 2 \cdot 2 = 2^3$.
 
 Scomporre un numero in fattori primi significa scriverlo in questa forma. Per esempio $60 = 2 \cdot 2 \cdot 3 \cdot 5 = 2^2 \cdot 3 \cdot 5$. Se si parte da $60 = 6 \cdot 10$ oppure da $60 = 4 \cdot 15$ si ottengono sempre gli stessi fattori, perché $6 \cdot 10 = 2 \cdot 3 \cdot 2 \cdot 5$ e $4 \cdot 15 = 2 \cdot 2 \cdot 3 \cdot 5$. La scomposizione serve per calcolare il massimo comune divisore e il minimo comune multiplo, e per semplificare le frazioni, come si vede nell'argomento sulle frazioni.
 :::
@@ -148,7 +148,7 @@ $$
 1 &
 \end{array}
 $$
-I fattori primi sono i numeri della colonna di destra, quindi $360 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 5 = 2^3 \cdot 3^2 \cdot 5$. Per scegliere il divisore a ogni riga si usano i criteri di divisibilità: $360$ termina con $0$, quindi è pari; $45$ è dispari e ha somma delle cifre $9$, quindi è divisibile per $3$.
+I fattori primi sono i numeri della colonna di destra, quindi $360 = 2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 5 = 2^3 \cdot 3^2 \cdot 5$. Per scegliere il divisore a ogni riga si usano i criteri di divisibilità. Il numero $360$ termina con $0$, quindi è pari. Il numero $45$ è dispari e ha somma delle cifre $9$, quindi è divisibile per $3$.
 :::
 
 :::esempio{titolo="Scomposizione di 1 386"}
@@ -224,7 +224,7 @@ Per due numeri naturali $a$ e $b$ diversi da $0$ vale
 $$
 \operatorname{MCD}(a, b) \cdot \operatorname{mcm}(a, b) = a \cdot b .
 $$
-Per $60$ e $84$ si ha $12 \cdot 420 = 5\,040$ e anche $60 \cdot 84 = 5\,040$. La regola vale perché ogni fattore primo compare nel MCD con l'esponente minore e nel mcm con l'esponente maggiore, quindi nel prodotto compare con la somma dei due esponenti, come nel prodotto $a \cdot b$. Il fattore $5$, per esempio, compare in $60$ e non in $84$; nel MCD non c'è e nel mcm compare una volta, come in $60 \cdot 84$. La regola permette di controllare i calcoli, oppure di trovare il mcm dal MCD: $\operatorname{mcm}(12, 18) = \dfrac{12 \cdot 18}{6} = 36$.
+Per $60$ e $84$ si ha $12 \cdot 420 = 5\,040$ e anche $60 \cdot 84 = 5\,040$. La regola vale perché ogni fattore primo compare nel MCD con l'esponente minore e nel mcm con l'esponente maggiore, quindi nel prodotto compare con la somma dei due esponenti, come nel prodotto $a \cdot b$. Il fattore $5$, per esempio, compare in $60$ e non in $84$; nel MCD non c'è e nel mcm compare una volta, come in $60 \cdot 84$. La regola permette di controllare i calcoli, oppure di trovare il mcm dal MCD. Per esempio $\operatorname{MCD}(12, 18) = 6$, quindi $\operatorname{mcm}(12, 18) = \dfrac{12 \cdot 18}{6} = 36$.
 :::
 
 :::attenzione
