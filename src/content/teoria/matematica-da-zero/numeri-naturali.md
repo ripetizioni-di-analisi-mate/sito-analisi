@@ -64,7 +64,7 @@ Lo zero dentro un numero indica che in quella posizione non ci sono unità, deci
 :::
 
 :::osservazione{#confronto-numeri titolo="Confronto tra numeri scritti con le cifre"}
-Il sistema posizionale permette di confrontare due numeri senza contare. Tra due numeri con un diverso numero di cifre è maggiore quello che ha più cifre, perché per esempio ogni numero di quattro cifre vale almeno $1\,000$, mentre ogni numero di tre cifre vale al più $999$. Se le cifre sono tante quante, si confrontano le cifre partendo da sinistra, e decide la prima cifra diversa. Per esempio $3\,482 > 3\,429$, perché le migliaia e le centinaia sono uguali e nelle decine $8$ è maggiore di $2$.
+Il sistema posizionale permette di confrontare due numeri senza contare. Tra due numeri con un diverso numero di cifre è maggiore quello che ha più cifre, perché per esempio ogni numero di quattro cifre vale almeno $1\,000$, mentre ogni numero di tre cifre vale al più $999$. Se i due numeri hanno lo stesso numero di cifre, si confrontano le cifre partendo da sinistra, e il maggiore è quello che ha la cifra maggiore nella prima posizione in cui le cifre sono diverse. Per esempio $3\,482 > 3\,429$, perché le migliaia e le centinaia sono uguali e nelle decine $8$ è maggiore di $2$.
 :::
 
 ## Addizione e sottrazione
@@ -147,7 +147,7 @@ Un gruppo di $58$ persone deve salire su alcuni pulmini da $8$ posti. Si esegue 
 $$
 58 = 8 \cdot 7 + 2 .
 $$
-Sette pulmini si riempiono e restano $2$ persone. Per portare anche queste due persone serve un altro pulmino, perciò i pulmini necessari sono $8$. La domanda del problema dice se il risultato è il quoziente oppure il quoziente aumentato di $1$.
+Sette pulmini si riempiono e restano $2$ persone. Per portare anche queste due persone serve un altro pulmino, perciò i pulmini necessari sono $8$. Perciò, a seconda della domanda, la risposta a un problema di questo tipo è il quoziente oppure il quoziente aumentato di $1$.
 :::
 
 ## Proprietà delle operazioni
@@ -213,15 +213,15 @@ a + 0 = a ,
 \qquad
 a \cdot 1 = a .
 $$
-Aggiungere zero oggetti non cambia la quantità, e prendere un solo gruppo di $a$ oggetti dà $a$ oggetti. Per esempio $45 + 0 = 45$ e $45 \cdot 1 = 45$. Valgono anche $a - 0 = a$ e $a : 1 = a$, come in $45 - 0 = 45$ e $45 : 1 = 45$.
+Aggiungere zero oggetti non cambia la quantità, e $a$ gruppi da un oggetto contengono $a$ oggetti. Per esempio $45 + 0 = 45$ e $45 \cdot 1 = 45$. Valgono anche $a - 0 = a$ e $a : 1 = a$, come in $45 - 0 = 45$ e $45 : 1 = 45$.
 :::
 
 :::teorema{#zero-moltiplicazione-divisione titolo="Lo zero nella moltiplicazione e nella divisione"}
 - Per ogni numero naturale $a$ vale $a \cdot 0 = 0$, perché $a$ gruppi da zero oggetti non contengono alcun oggetto. Per esempio $8 \cdot 0 = 0$.
 - Per ogni numero naturale $a \neq 0$ vale $0 : a = 0$, perché $0 \cdot a = 0$. Se $0$ caramelle si dividono tra $5$ bambini, ognuno riceve $0$ caramelle.
-- La divisione $a : 0$ non si può eseguire. Se $a \neq 0$, nessun numero moltiplicato per $0$ dà $a$, perché ogni numero moltiplicato per $0$ dà $0$; per esempio $5 : 0$ non ha risultato. Se $a = 0$, ogni numero moltiplicato per $0$ dà $0$, quindi il quoziente $0 : 0$ non è un numero determinato.
+- La divisione $a : 0$ non si può eseguire, cioè la divisione per zero non ha significato. Se $a \neq 0$, nessun numero moltiplicato per $0$ dà $a$, perché ogni numero moltiplicato per $0$ dà $0$; per esempio $5 : 0$ non ha risultato. Se $a = 0$, ogni numero moltiplicato per $0$ dà $0$, quindi il quoziente $0 : 0$ non è un numero determinato.
 
-Dalla prima regola segue la **legge di annullamento del prodotto**. Un prodotto vale $0$ se uno dei fattori è $0$, e un prodotto di fattori tutti diversi da $0$ è diverso da $0$. Per esempio $37 \cdot 0 \cdot 12 = 0$, senza bisogno di altri calcoli. Questa legge si usa nell'argomento sulle equazioni.
+Dalla prima regola segue che un prodotto vale $0$ se uno dei fattori è $0$; per esempio $37 \cdot 0 \cdot 12 = 0$, senza bisogno di altri calcoli. Inoltre un prodotto di fattori tutti diversi da $0$ è diverso da $0$, come $3 \cdot 5 = 15$. Le due regole insieme formano la **legge di annullamento del prodotto**, che si usa nell'argomento sulla scomposizione in fattori per trovare le condizioni di esistenza.
 :::
 
 ## Potenze
@@ -239,7 +239,7 @@ $$
 \qquad
 3^4 = 3 \cdot 3 \cdot 3 \cdot 3 = 81 .
 $$
-La potenza $2^3$ si legge "due alla terza". Una potenza con esponente $2$ si chiama anche *quadrato* e una potenza con esponente $3$ si chiama *cubo*, perché $a^2$ conta i quadretti di un quadrato con $a$ quadretti per lato e $a^3$ conta i cubetti di un cubo con $a$ cubetti per spigolo.
+La potenza $2^3$ si legge "due alla terza". Una potenza con esponente $2$ si chiama anche *quadrato* e una potenza con esponente $3$ si chiama *cubo*, perché $a^2$ è il numero di quadretti di un quadrato con $a$ quadretti per lato e $a^3$ è il numero di cubetti di un cubo con $a$ cubetti per spigolo.
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,3 0,3;5,0 9,0 9,4 5,4" linee="0,0 3,0 3,3 0,3 0,0;1,0 1,3;2,0 2,3;0,1 3,1;0,2 3,2;5,0 9,0 9,4 5,4 5,0;6,0 6,4;7,0 7,4;8,0 8,4;5,1 9,1;5,2 9,2;5,3 9,3" etichette="0.6,-0.7,3² = 9;6.1,-0.7,4² = 16" xmin=-0.5 xmax=9.5 ymin=-1.3 ymax=4.4 titolo="Un quadrato con $3$ quadretti per lato ne contiene $3^2 = 9$, uno con $4$ quadretti per lato ne contiene $4^2 = 16$"}
 
@@ -296,7 +296,7 @@ Le **parentesi** indicano le operazioni da eseguire per prime. Si usano tre tipi
 3. si calcolano le espressioni contenute nelle parentesi graffe;
 4. si calcola l'espressione rimasta.
 
-Dentro ogni parentesi si segue l'ordine delle operazioni. Quando un'espressione tra parentesi si riduce a un solo numero, le parentesi si tolgono. Per esempio $(3 + 5) \cdot 2 = 8 \cdot 2 = 16$, mentre senza parentesi $3 + 5 \cdot 2 = 13$; le parentesi cambiano quindi il valore dell'espressione.
+In ciascuna di queste espressioni si segue l'ordine delle operazioni. Quando l'espressione racchiusa da una coppia di parentesi si riduce a un solo numero, le parentesi si tolgono. Per esempio $(3 + 5) \cdot 2 = 8 \cdot 2 = 16$, mentre senza parentesi $3 + 5 \cdot 2 = 13$, quindi le due espressioni hanno valori diversi.
 :::
 
 :::esempio{titolo="Un'espressione con tonde, quadre e graffe"}
@@ -304,7 +304,7 @@ Si calcola
 $$
 \{ 30 - [ 2 \cdot (7 - 3) + 6 ] : 7 \} \cdot 2 .
 $$
-Si parte dall'espressione tonda $7 - 3 = 4$. Nell'espressione quadra si esegue prima la moltiplicazione $2 \cdot 4 = 8$ e poi l'addizione $8 + 6 = 14$. Nell'espressione graffa si esegue prima la divisione $14 : 7 = 2$ e poi la sottrazione $30 - 2 = 28$. Infine si moltiplica per $2$:
+Si parte dall'espressione racchiusa dalle tonde, $7 - 3 = 4$. Nell'espressione $2 \cdot 4 + 6$, racchiusa dalle quadre, si esegue prima la moltiplicazione $2 \cdot 4 = 8$ e poi l'addizione $8 + 6 = 14$. Nell'espressione $30 - 14 : 7$, racchiusa dalle graffe, si esegue prima la divisione $14 : 7 = 2$ e poi la sottrazione $30 - 2 = 28$. Infine si moltiplica per $2$:
 $$
 \begin{aligned}
 \{ 30 - [ 2 \cdot (7 - 3) + 6 ] : 7 \} \cdot 2
@@ -317,13 +317,13 @@ $$
 :::
 
 :::esempio{titolo="Un'espressione che descrive una spesa"}
-Al supermercato si comprano $3$ quaderni da $2$ euro e $2$ penne da $1$ euro, e si paga con una banconota da $20$ euro. La spesa è $3 \cdot 2 + 2 \cdot 1$ euro, e il resto è la differenza tra $20$ euro e la spesa. Poiché la spesa va sottratta tutta insieme, la si scrive tra parentesi:
+Al supermercato si comprano $3$ quaderni da $2$ euro e $2$ penne da $1$ euro, e si paga con una banconota da $20$ euro. La spesa è $3 \cdot 2 + 2 \cdot 1$ euro, e il resto è la differenza tra $20$ euro e la spesa. Poiché la spesa va sottratta tutta insieme, l'espressione $3 \cdot 2 + 2 \cdot 1$ si scrive dentro parentesi tonde:
 $$
 20 - (3 \cdot 2 + 2 \cdot 1) = 20 - (6 + 2) = 20 - 8 = 12 .
 $$
-Il resto è quindi di $12$ euro. Senza parentesi l'espressione $20 - 3 \cdot 2 + 2 \cdot 1$ vale $20 - 6 + 2 = 16$, perché le penne verrebbero sommate al resto invece di essere sottratte.
+Il resto è quindi di $12$ euro. Senza parentesi l'espressione $20 - 3 \cdot 2 + 2 \cdot 1$ vale $20 - 6 + 2 = 16$, perché il costo delle penne verrebbe aggiunto invece di essere sottratto.
 :::
 
 :::osservazione{#proprieta-ed-espressioni titolo="Le proprietà nel calcolo delle espressioni"}
-Le proprietà delle operazioni permettono a volte di calcolare un'espressione con meno fatica, e il risultato è lo stesso che si ottiene con l'ordine delle operazioni. Per esempio, nell'espressione $4 \cdot (25 + 3)$ si può calcolare prima l'espressione tonda, $4 \cdot 28 = 112$, oppure si può applicare la proprietà distributiva, $4 \cdot 25 + 4 \cdot 3 = 100 + 12 = 112$. Nell'espressione $36 + 58 + 64$ la proprietà commutativa e la proprietà associativa permettono di sommare per primi $36$ e $64$, che danno $100$, e poi $100 + 58 = 158$.
+Le proprietà delle operazioni permettono a volte di calcolare un'espressione con meno fatica, e il risultato è lo stesso che si ottiene con l'ordine delle operazioni. Per esempio, nell'espressione $4 \cdot (25 + 3)$ si può calcolare prima $25 + 3 = 28$ e poi $4 \cdot 28 = 112$, oppure si può applicare la proprietà distributiva, $4 \cdot 25 + 4 \cdot 3 = 100 + 12 = 112$. Nell'espressione $36 + 58 + 64$ la proprietà commutativa e la proprietà associativa permettono di sommare per primi $36$ e $64$, che danno $100$, e poi $100 + 58 = 158$.
 :::
