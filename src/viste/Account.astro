@@ -16,9 +16,9 @@ const sblocca = t.sblocca;
   <p class="sommario" id="chi">{t.caricamento}</p>
 
   <section id="pannello" hidden>
-    {lingua === 'it' && (
+    {(
       <div id="percorso" class="percorso-account" hidden>
-        <h2>Il tuo percorso</h2>
+        <h2>{lingua === 'en' ? 'Your progress' : 'Il tuo percorso'}</h2>
         <div class="scheda-livello">
           <svg class="anello-grande" viewBox="0 0 96 96" role="img" aria-label="Livello"><circle cx="48" cy="48" r="40" class="anello-fondo" /><circle cx="48" cy="48" r="40" class="anello-avanzamento" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)" /><text x="48" y="44" text-anchor="middle" class="anello-sopra">LIVELLO</text><text x="48" y="67" text-anchor="middle" class="anello-numero">1</text></svg>
           <div class="dati-livello">
@@ -27,19 +27,19 @@ const sblocca = t.sblocca;
             <p class="numeri-livello"><span class="exp-totale"></span><span class="exp-mancano"></span></p>
           </div>
         </div>
-        <h3>Questa settimana</h3>
+        <h3>{lingua === 'en' ? 'This week' : 'Questa settimana'}</h3>
         <div class="settimana-account">
-          <div><span>Studio attivo</span><strong class="sett-minuti"></strong></div>
-          <div><span>Risposte corrette</span><strong class="sett-corrette"></strong></div>
-          <div><span>Giorni di studio</span><span class="giorni-settimana"></span></div>
+          <div><span>{lingua === 'en' ? 'Active study' : 'Studio attivo'}</span><strong class="sett-minuti"></strong></div>
+          <div><span>{lingua === 'en' ? 'Correct answers' : 'Risposte corrette'}</span><strong class="sett-corrette"></strong></div>
+          <div><span>{lingua === 'en' ? 'Study days' : 'Giorni di studio'}</span><span class="giorni-settimana"></span></div>
         </div>
-        <h3>Obiettivi della settimana <small>Nuovi obiettivi lunedì</small></h3>
+        <h3>{lingua === 'en' ? 'Weekly goals' : 'Obiettivi della settimana'} <small>{lingua === 'en' ? 'New goals on Monday' : 'Nuovi obiettivi lunedì'}</small></h3>
         <ul class="obiettivi"></ul>
-        <h3>Traguardi</h3>
+        <h3>{lingua === 'en' ? 'Milestones' : 'Traguardi'}</h3>
         <ul class="traguardi"></ul>
-        <h3>Ultime sessioni di studio</h3>
+        <h3>{lingua === 'en' ? 'Recent study sessions' : 'Ultime sessioni di studio'}</h3>
         <ul class="sessioni-account"></ul>
-        <p><a href="/livelli-e-punti">Come funzionano livelli e punti</a></p>
+        <p><a href={`${pref}/livelli-e-punti`}>{lingua === 'en' ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a></p>
       </div>
     )}
     <div id="videocorsi" hidden>
@@ -75,39 +75,41 @@ const sblocca = t.sblocca;
     </div>
   </section>
 
-  {lingua === 'it' && (
-    <script is:inline>
+  {(
+    <script is:inline define:vars={{ lingua }}>
       (async () => {
-        const r = await fetch('/api/percorso').catch(() => null);
+        const en = lingua === 'en';
+        const XP = en ? 'XP' : 'EXP';
+        const r = await fetch(`/api/percorso?l=${lingua}`).catch(() => null);
         if (!r || !r.ok) return;
         const d = await r.json();
         const box = document.getElementById('percorso');
         const q = (s) => box.querySelector(s);
-        const num = (x) => x.toLocaleString('it-IT');
+        const num = (x) => x.toLocaleString(en ? 'en-US' : 'it-IT');
         const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
         const st = d.stato;
         q('.anello-avanzamento').setAttribute('stroke-dashoffset', (251.3 * (1 - st.perc / 100)).toFixed(1));
         q('.anello-numero').textContent = st.livello;
-        q('.anello-grande').setAttribute('aria-label', `Livello ${st.livello}, ${st.perc} per cento verso il livello successivo`);
+        q('.anello-grande').setAttribute('aria-label', en ? `Level ${st.livello}, ${st.perc} percent toward the next level` : `Livello ${st.livello}, ${st.perc} per cento verso il livello successivo`);
         q('.fascia-livello strong').textContent = st.fascia;
         q('.fascia-livello span').textContent = st.frase;
         q('.dati-livello .barra-exp span').style.width = `${st.perc}%`;
-        q('.exp-totale').textContent = `${num(st.exp)} EXP in totale`;
-        q('.exp-mancano').textContent = st.prossimo === null ? 'Livello massimo' : `${num(st.mancano)} EXP al livello ${st.livello + 1}`;
+        q('.exp-totale').textContent = en ? `${num(st.exp)} XP in total` : `${num(st.exp)} EXP in totale`;
+        q('.exp-mancano').textContent = st.prossimo === null ? (en ? 'Maximum level' : 'Livello massimo') : `${num(st.mancano)} ${XP} ${en ? 'to level' : 'al livello'} ${st.livello + 1}`;
         const ore = Math.floor(d.settimana.minuti / 60), min = d.settimana.minuti % 60;
         q('.sett-minuti').textContent = ore ? `${ore} h ${min} min` : `${min} min`;
         q('.sett-corrette').textContent = d.settimana.corrette;
-        const iniziali = ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
+        const iniziali = en ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
         q('.giorni-settimana').innerHTML = d.settimana.giorni.map((g, i) => `<span class="giorno${g.attivo ? ' attivo' : ''}${g.oggi ? ' oggi' : ''}" title="${g.giorno}"><i></i>${iniziali[i]}</span>`).join('');
-        q('.obiettivi').innerHTML = d.obiettivi.map((o) => `<li class="${o.completato ? 'completato' : ''}"><span>${esc(o.testo)}</span><span>${o.completato ? `Completato · +${o.punti} EXP` : `${o.fatto} / ${o.totale} · ${o.punti} EXP`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
+        q('.obiettivi').innerHTML = d.obiettivi.map((o) => `<li class="${o.completato ? 'completato' : ''}"><span>${esc(o.testo)}</span><span>${o.completato ? `${en ? 'Completed' : 'Completato'} · +${o.punti} ${XP}` : `${o.fatto} / ${o.totale} · ${o.punti} ${XP}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
         q('.traguardi').innerHTML = [
-          ...d.traguardi.map((t) => `<li class="preso"><strong>${esc(t.nome)}</strong><span>+${t.punti} EXP</span></li>`),
-          ...d.daFare.map((t) => `<li><strong>${esc(t.nome)}</strong><span>+${t.punti} EXP</span></li>`),
+          ...d.traguardi.map((t) => `<li class="preso"><strong>${esc(t.nome)}</strong><span>+${t.punti} ${XP}</span></li>`),
+          ...d.daFare.map((t) => `<li><strong>${esc(t.nome)}</strong><span>+${t.punti} ${XP}</span></li>`),
         ].join('');
-        const data = (ms) => new Date(ms).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+        const data = (ms) => new Date(ms).toLocaleDateString(en ? 'en-US' : 'it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
         q('.sessioni-account').innerHTML = d.sessioni.length
-          ? d.sessioni.map((s) => `<li><span>${esc(s.titolo || 'Studio')} · ${data(s.inizio)}</span><span>${s.minuti} min · ${s.corrette} / ${s.risposte} · +${s.punti}</span></li>`).join('')
-          : '<li><span>Nessuna sessione ancora. Il tempo di studio conta sulle pagine di teoria ed esercizi.</span></li>';
+          ? d.sessioni.map((s) => `<li><span>${esc(s.titolo || (en ? 'Study' : 'Studio'))} · ${data(s.inizio)}</span><span>${s.minuti} min · ${s.corrette} / ${s.risposte} · +${s.punti}</span></li>`).join('')
+          : `<li><span>${en ? 'No sessions yet. Study time counts on theory and exercise pages.' : 'Nessuna sessione ancora. Il tempo di studio conta sulle pagine di teoria ed esercizi.'}</span></li>`;
         box.hidden = false;
         if (location.hash === '#percorso') setTimeout(() => box.scrollIntoView(), 50);
       })();

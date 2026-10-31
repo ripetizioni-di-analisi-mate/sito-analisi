@@ -4,10 +4,41 @@ import {
   livelloDa, PUNTI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI,
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
+import { MATERIE_EN } from '../src/data/materie-en.ts';
 
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
-const titoloArgomento = (materia, argomento) =>
-  MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
+// I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
+const titoloArgomento = (materia, argomento, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
+  || MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
+const titoloMateria = (materia, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materia;
+function testoObiettivo(o, l = 'it') {
+  const n = OBIETTIVI[o.codice]?.n;
+  const en = l === 'en';
+  switch (o.codice) {
+    case 'corrette-arg': return en ? `${n} correct answers on ${titoloArgomento(o.materia, o.argomento, l)}` : `${n} risposte corrette su ${titoloArgomento(o.materia, o.argomento, l)}`;
+    case 'corrette-tot': return en ? `${n} correct answers` : `${n} risposte corrette`;
+    case 'giorni': return en ? `Study on ${n} different days` : `Studia in ${n} giorni diversi`;
+    case 'ore': return en ? '3 hours of active study' : '3 ore di studio attivo';
+    case 'argomenti': return en ? `Questions on ${n} different topics` : `Domande su ${n} argomenti diversi`;
+    case 'veloci': return en ? `${n} correct answers within the first minute` : `${n} risposte corrette nel primo minuto`;
+    default: return o.codice;
+  }
+}
+// Nome di un traguardo o di un obiettivo premiato, dal suo codice.
+function nomePremio(ar, email, codice, l = 'it') {
+  const fisso = TRAGUARDI_FISSI.find((t) => t.codice === codice);
+  if (fisso) return l === 'en' ? fisso.nomeEn : fisso.nome;
+  let m = codice.match(/^materia-(.+)$/);
+  if (m) return l === 'en' ? `All topics of ${titoloMateria(m[1], l)} tried` : `Tutti gli argomenti di ${titoloMateria(m[1], l)} provati`;
+  m = codice.match(/^livello-(\d+)$/);
+  if (m) return l === 'en' ? `Level ${m[1]}` : `Livello ${m[1]}`;
+  m = codice.match(/^obiettivo-(\d{4}-\d{2}-\d{2})-(\d+)$/);
+  if (m) {
+    const o = ar.riga('SELECT * FROM obiettivi WHERE email = ? AND settimana = ? AND n = ?', email, m[1], Number(m[2]));
+    return o ? `${l === 'en' ? 'Goal' : 'Obiettivo'}: ${testoObiettivo(o, l)}` : codice;
+  }
+  return codice;
+}
 
 // Date nel fuso di Roma: il giorno di studio e la settimana (da lunedì) sono quelli dello studente italiano.
 const fmt = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -50,8 +81,9 @@ function premia(ar, email, codice, nome, punti, nuovi) {
   if (ar.riga('SELECT codice FROM premi WHERE email = ? AND codice = ?', email, codice)) return;
   ar.sql.exec('INSERT INTO premi (email, codice, nome, punti, quando) VALUES (?, ?, ?, ?, ?)', email, codice, nome, punti, Date.now());
   aggiungi(ar, email, punti, 'premio', codice);
-  nuovi.push({ codice, nome, punti });
+  nuovi.push({ codice, punti });
 }
+const conNomi = (ar, email, premi, l) => premi.map((p) => ({ ...p, nome: nomePremio(ar, email, p.codice, l) }));
 
 // Sessione aperta (ultima attività da meno di 15 minuti), altrimenti una nuova.
 function sessioneCorrente(ar, email, materia, argomento) {
@@ -84,31 +116,32 @@ function obiettiviSettimana(ar, email) {
   righe = ar.righe('SELECT * FROM obiettivi WHERE email = ? AND settimana = ? ORDER BY n', email, chiave);
   return { sett, righe };
 }
-function progressoObiettivo(ar, email, o, sett) {
+function progressoObiettivo(ar, email, o, sett, l = 'it') {
   const da = sett[0], a = sett[6];
   const def = OBIETTIVI[o.codice];
   let fatto = 0, testo = '';
   switch (o.codice) {
     case 'corrette-arg':
       fatto = ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND corretta = 1 AND materia = ? AND argomento = ?', email, da, a, o.materia, o.argomento).c;
-      testo = `${def.n} risposte corrette su ${titoloArgomento(o.materia, o.argomento)}`; break;
+      break;
     case 'corrette-tot':
       fatto = ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND corretta = 1', email, da, a).c;
-      testo = `${def.n} risposte corrette`; break;
+      break;
     case 'giorni':
       fatto = ar.riga(`SELECT COUNT(*) AS c FROM (SELECT giorno FROM studio WHERE email = ? AND giorno BETWEEN ? AND ? AND minuti > 0
         UNION SELECT giorno FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND valida = 1)`, email, da, a, email, da, a).c;
-      testo = `Studia in ${def.n} giorni diversi`; break;
+      break;
     case 'ore':
       fatto = ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ? AND giorno BETWEEN ? AND ?', email, da, a).c;
-      testo = '3 ore di studio attivo'; break;
+      break;
     case 'argomenti':
       fatto = ar.riga('SELECT COUNT(DISTINCT materia || \'/\' || argomento) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND valida = 1', email, da, a).c;
-      testo = `Domande su ${def.n} argomenti diversi`; break;
+      break;
     case 'veloci':
       fatto = ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND corretta = 1 AND veloce = 1', email, da, a).c;
-      testo = `${def.n} risposte corrette nel primo minuto`; break;
+      break;
   }
+  testo = testoObiettivo(o, l);
   return { codice: `obiettivo-${da}-${o.n}`, testo, fatto: Math.min(fatto, def.n), totale: def.n, punti: def.punti, completato: fatto >= def.n };
 }
 
@@ -118,7 +151,7 @@ function controllaPremi(ar, email, catalogo) {
   const { sett, righe } = obiettiviSettimana(ar, email);
   for (const o of righe) {
     const p = progressoObiettivo(ar, email, o, sett);
-    if (p.completato) premia(ar, email, p.codice, `Obiettivo: ${p.testo}`, p.punti, nuovi);
+    if (p.completato) premia(ar, email, p.codice, p.testo, p.punti, nuovi);
   }
   const corrette = ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND corretta = 1', email).c;
   const minuti = ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ?', email).c;
@@ -130,8 +163,7 @@ function controllaPremi(ar, email, catalogo) {
     if (!argomenti.length) continue;
     const provati = ar.riga(`SELECT COUNT(DISTINCT argomento) AS c FROM risposte WHERE email = ? AND valida = 1 AND materia = ? AND argomento IN (${argomenti.map(() => '?').join(',')})`, email, materia, ...argomenti).c;
     if (provati >= argomenti.length) {
-      const titolo = MATERIE.find((m) => m.slug === materia)?.titolo || materia;
-      premia(ar, email, `materia-${materia}`, `Tutti gli argomenti di ${titolo} provati`, PUNTI_MATERIA_COMPLETA, nuovi);
+      premia(ar, email, `materia-${materia}`, `Tutti gli argomenti di ${titoloMateria(materia)} provati`, PUNTI_MATERIA_COMPLETA, nuovi);
     }
   }
   // Traguardi di livello (10, 20, …): i loro punti possono far salire ancora, quindi si ripete.
@@ -144,8 +176,8 @@ function controllaPremi(ar, email, catalogo) {
   return nuovi;
 }
 
-export function statoDi(ar, email) {
-  return livelloDa(expDi(ar, email));
+export function statoDi(ar, email, l = 'it') {
+  return livelloDa(expDi(ar, email), l);
 }
 
 // Un minuto di studio attivo (il browser lo manda al massimo una volta al minuto).
@@ -170,14 +202,14 @@ export function battito(ar, c) {
     }
   }
   const nuovi = contato ? controllaPremi(ar, email, c.catalogo) : [];
-  return { contato, nuovi, stato: statoDi(ar, email) };
+  return { contato, nuovi: conNomi(ar, email, nuovi, c.lingua), stato: statoDi(ar, email, c.lingua) };
 }
 
 // Risposta a una domanda a tempo: i punti li decide l'archivio, non il browser.
 export function risposta(ar, c) {
   const { email } = c;
   const gia = ar.riga('SELECT punti, veloce FROM risposte WHERE token = ?', c.token);
-  if (gia) return { punti: gia.punti, veloce: Boolean(gia.veloce), motivo: 'gia-risposta', nuovi: [], stato: statoDi(ar, email) };
+  if (gia) return { punti: gia.punti, veloce: Boolean(gia.veloce), motivo: 'gia-risposta', nuovi: [], stato: statoDi(ar, email, c.lingua) };
   const ora = Date.now();
   const s = c.secondi;
   let punti = 0, motivo = null;
@@ -201,49 +233,52 @@ export function risposta(ar, c) {
   ar.sql.exec('UPDATE sessioni SET risposte = risposte + 1, corrette = corrette + ?, veloci = veloci + ?, punti = punti + ?, ultimo = ?, materia = ?, argomento = ? WHERE id = ?',
     giusta ? 1 : 0, valeVeloce ? 1 : 0, punti, ora, c.materia, c.argomento, sid);
   const nuovi = controllaPremi(ar, email, c.catalogo);
-  return { punti, veloce: valeVeloce, motivo, nuovi, stato: statoDi(ar, email) };
+  return { punti, veloce: valeVeloce, motivo, nuovi: conNomi(ar, email, nuovi, c.lingua), stato: statoDi(ar, email, c.lingua) };
 }
 
 // Riepilogo della sessione in corso; con chiudi = true la sessione si chiude.
 export function riepilogo(ar, c) {
   const { email } = c;
   const s = ar.riga('SELECT * FROM sessioni WHERE email = ? ORDER BY ultimo DESC LIMIT 1', email);
-  if (!s) return { sessione: null, stato: statoDi(ar, email) };
+  const l = c.lingua;
+  if (!s) return { sessione: null, stato: statoDi(ar, email, l) };
   if (c.chiudi) ar.sql.exec('UPDATE sessioni SET chiusa = 1 WHERE id = ?', s.id);
-  const premi = ar.righe('SELECT nome, punti FROM premi WHERE email = ? AND quando BETWEEN ? AND ?', email, s.inizio, Date.now());
+  const premi = conNomi(ar, email, ar.righe('SELECT codice, punti FROM premi WHERE email = ? AND quando BETWEEN ? AND ?', email, s.inizio, Date.now()), l);
   const { sett, righe } = obiettiviSettimana(ar, email);
-  const obiettivi = righe.map((o) => progressoObiettivo(ar, email, o, sett));
+  const obiettivi = righe.map((o) => progressoObiettivo(ar, email, o, sett, l));
   return {
     sessione: {
       inizio: s.inizio, minuti: s.minuti, risposte: s.risposte, corrette: s.corrette, veloci: s.veloci,
-      materia: s.materia, argomento: s.argomento, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento) : null,
+      materia: s.materia, argomento: s.argomento, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null,
       puntiCorrette: s.punti - s.minuti * PUNTI.studioMinuto,
       puntiStudio: s.minuti * PUNTI.studioMinuto,
       premi, punti: s.punti + premi.reduce((x, p) => x + p.punti, 0),
     },
-    obiettivi, stato: statoDi(ar, email),
+    obiettivi, stato: statoDi(ar, email, l),
   };
 }
 
 // Pagina "Il tuo percorso" nell'account.
 export function percorso(ar, c) {
   const { email } = c;
+  const l = c.lingua;
+  const en = l === 'en';
   const { sett, righe } = obiettiviSettimana(ar, email);
   const da = sett[0], a = sett[6];
   const oggi = giornoRoma();
   const giorniAttivi = new Set(ar.righe(`SELECT giorno FROM studio WHERE email = ? AND giorno BETWEEN ? AND ? AND minuti > 0
     UNION SELECT giorno FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND valida = 1`, email, da, a, email, da, a).map((r) => r.giorno));
-  const premi = ar.righe('SELECT codice, nome, punti, quando FROM premi WHERE email = ? AND codice NOT LIKE \'obiettivo-%\' ORDER BY quando', email);
-  const stato = statoDi(ar, email);
+  const premi = conNomi(ar, email, ar.righe('SELECT codice, punti, quando FROM premi WHERE email = ? AND codice NOT LIKE \'obiettivo-%\' ORDER BY quando', email), l);
+  const stato = statoDi(ar, email, l);
   // Traguardi ancora da raggiungere: i tre fissi, le materie con domande, il prossimo livello tondo.
   const presi = new Set(premi.map((p) => p.codice));
   const daFare = [
-    ...TRAGUARDI_FISSI.filter((t) => !presi.has(t.codice)).map((t) => ({ nome: t.nome, punti: t.punti })),
+    ...TRAGUARDI_FISSI.filter((t) => !presi.has(t.codice)).map((t) => ({ nome: nomePremio(ar, email, t.codice, l), punti: t.punti })),
     ...Object.keys(c.catalogo || {}).filter((m) => !presi.has(`materia-${m}`))
-      .map((m) => ({ nome: `Tutti gli argomenti di ${MATERIE.find((x) => x.slug === m)?.titolo || m} provati`, punti: PUNTI_MATERIA_COMPLETA })),
+      .map((m) => ({ nome: nomePremio(ar, email, `materia-${m}`, l), punti: PUNTI_MATERIA_COMPLETA })),
   ];
   const prossimoTondo = Math.min(100, Math.floor(stato.livello / 10) * 10 + 10);
-  if (!presi.has(`livello-${prossimoTondo}`)) daFare.push({ nome: `Livello ${prossimoTondo}`, punti: puntiTraguardoLivello(prossimoTondo) });
+  if (!presi.has(`livello-${prossimoTondo}`)) daFare.push({ nome: nomePremio(ar, email, `livello-${prossimoTondo}`, l), punti: puntiTraguardoLivello(prossimoTondo) });
   return {
     stato,
     settimana: {
@@ -251,10 +286,10 @@ export function percorso(ar, c) {
       minuti: ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ? AND giorno BETWEEN ? AND ?', email, da, a).c,
       corrette: ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND corretta = 1', email, da, a).c,
     },
-    obiettivi: righe.map((o) => progressoObiettivo(ar, email, o, sett)),
+    obiettivi: righe.map((o) => progressoObiettivo(ar, email, o, sett, l)),
     traguardi: premi.map((p) => ({ nome: p.nome, punti: p.punti, quando: p.quando })),
     daFare,
     sessioni: ar.righe('SELECT inizio, minuti, risposte, corrette, punti, materia, argomento FROM sessioni WHERE email = ? ORDER BY ultimo DESC LIMIT 5', email)
-      .map((s) => ({ ...s, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento) : null })),
+      .map((s) => ({ ...s, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null })),
   };
 }

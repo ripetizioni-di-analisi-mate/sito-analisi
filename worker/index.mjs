@@ -357,14 +357,16 @@ const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringi
 // I dati (testo, risposte, posizione della corretta, spiegazione) sono file statici generati alla build
 // in /dati-domande/, letti solo qui dentro: dal browser quell'indirizzo non è raggiungibile.
 const cacheDomande = {};
-async function domandeDi(env, materia) {
+const linguaDi = (x) => (x === 'en' ? 'en' : 'it');
+async function domandeDi(env, materia, lingua = 'it') {
   if (!/^[a-z0-9-]+$/.test(materia || '')) return null;
-  if (!cacheDomande[materia]) {
-    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${materia}.json`));
-    if (!r.ok) return null;
-    cacheDomande[materia] = await r.json();
+  const chiave = `${lingua}/${materia}`;
+  if (!cacheDomande[chiave]) {
+    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${lingua === 'en' ? 'en/' : ''}${materia}.json`));
+    if (!r.ok) return lingua === 'en' ? domandeDi(env, materia, 'it') : null;
+    cacheDomande[chiave] = await r.json();
   }
-  return cacheDomande[materia];
+  return cacheDomande[chiave];
 }
 let cacheCatalogo = null; // { materia: [argomenti con domande] }
 async function catalogoDomande(env) {
@@ -469,30 +471,31 @@ export default {
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      const { materia, argomento } = await req.json().catch(() => ({}));
+      const { materia, argomento, lingua } = await req.json().catch(() => ({}));
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
-      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
-      const { materia, argomento, viste } = await req.json().catch(() => ({}));
-      const dati = await domandeDi(env, materia);
+      const { materia, argomento, viste, lingua } = await req.json().catch(() => ({}));
+      const l = linguaDi(lingua);
+      const dati = await domandeDi(env, materia, l);
       const elenco = dati?.argomenti?.[argomento];
-      if (!elenco?.length) return json({ errore: 'Nessuna domanda per questo argomento.' }, 404);
+      if (!elenco?.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       const giaViste = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
       let scelta = elenco.filter((q) => !giaViste.has(q.id));
       if (!scelta.length) scelta = elenco.filter((q) => q.id !== [...giaViste].pop());
       const q = scelta[Math.floor(Math.random() * scelta.length)];
       const io = await utenteCollegato(env, req).catch(() => null);
-      const token = await firmaToken(env, { q: q.id, m: materia, t: Date.now(), e: io?.email || null });
+      const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
       return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
     }
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
-      const dati = tok ? await domandeDi(env, tok.m) : null;
+      const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
-      if (!q) return json({ errore: 'Domanda scaduta: ricarica la pagina.' }, 400);
+      if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
@@ -500,20 +503,20 @@ export default {
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
-        corretta: giusta, secondi, catalogo: await catalogoDomande(env),
+        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoDomande(env),
       });
       return json({ ...base, ...r });
     }
     if (p === '/api/sessione/riepilogo' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      const { chiudi } = await req.json().catch(() => ({}));
-      return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi) }));
+      const { chiudi, lingua } = await req.json().catch(() => ({}));
+      return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi), lingua: linguaDi(lingua) }));
     }
     if (p === '/api/percorso') {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json(await aDO(env, '/liv-percorso', { email: io.email, catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaDi(url.searchParams.get('l')), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
       const io = await utenteCollegato(env, req);
@@ -710,22 +713,23 @@ export default {
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       const nome = nomeVisibile(io);
+      const en = /^\/en(\/|$)/.test(url.pathname);
+      const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
       risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
       }).on('.bottone-account .iniziale', {
         element(e) { e.setInnerContent([...(io.nome || io.email)][0]?.toUpperCase() || '·'); },
       }).on('.bottone-account', {
-        element(e) { e.setAttribute('aria-label', io.nome ? `Account di ${nome}` : 'Il tuo account'); },
+        element(e) { e.setAttribute('aria-label', en ? (io.nome ? `${nome}'s account` : 'Your account') : (io.nome ? `Account di ${nome}` : 'Il tuo account')); },
       }).on('.bottone-livello', {
         element(e) {
-          const st = livelloDa(io.exp || 0);
-          e.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
+          e.setAttribute('aria-label', en ? `Level ${st.livello}, ${st.fascia}: open your progress` : `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
           e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
         },
       }).on('.bottone-livello .numero-livello', {
-        element(e) { e.setInnerContent(String(livelloDa(io.exp || 0).livello)); },
+        element(e) { e.setInnerContent(String(st.livello)); },
       }).on('.bottone-livello .mini-barra > span', {
-        element(e) { e.setAttribute('style', `width:${livelloDa(io.exp || 0).perc}%`); },
+        element(e) { e.setAttribute('style', `width:${st.perc}%`); },
       }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();

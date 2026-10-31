@@ -1,0 +1,87 @@
+---
+// Regole di livelli e punti esperienza, scritte a partire da src/data/livelli.ts (italiano e inglese).
+import Base from '../layouts/Base.astro';
+import { catalogoDomande } from '../lib/domande';
+import { materiaL, link, type Lingua } from '../i18n';
+import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA } from '../data/livelli';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const XP = en ? 'XP' : 'EXP';
+const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT');
+const puntiObiettivi = Object.values(OBIETTIVI).map((o) => o.punti);
+const [prima, cento, ore] = TRAGUARDI_FISSI;
+const catalogo = Object.entries(await catalogoDomande(lingua)).map(([m, args]) => {
+  const mat = materiaL(lingua, m);
+  return { titolo: mat.titolo, argomenti: mat.argomenti.filter((a) => args.includes(a.slug)).map((a) => ({ titolo: a.titolo, href: link(lingua, `/${m}/${a.slug}/domande`) })) };
+});
+const titolo = en ? 'Levels and points' : 'Livelli e punti';
+---
+<Base titolo={titolo} percorso={[{ titolo }]} lingua={lingua}
+  descrizione={en ? 'How you earn experience points (XP) studying on the site, the 100 levels, weekly goals and milestones.' : 'Come si guadagnano i punti esperienza (EXP) studiando sul sito, i 100 livelli, gli obiettivi della settimana e i traguardi.'}>
+  <article class="pagina-livelli">
+    <h1>{titolo}</h1>
+    {en ? (
+      <p class="sommario">With an account you earn experience points (XP) while you study on the site: reading the theory and the exercises and answering the timed questions. Points raise your level and stay saved in your account. A wrong answer is worth zero points.</p>
+    ) : (
+      <p class="sommario">Chi ha un account accumula punti esperienza (EXP) mentre studia sul sito: leggendo la teoria e gli esercizi e rispondendo alle domande a tempo. I punti fanno salire di livello e restano salvati nell’account. Una risposta sbagliata vale zero punti.</p>
+    )}
+
+    <h2>{en ? 'How you earn points' : 'Come si guadagnano i punti'}</h2>
+    <dl class="tabella-punti">
+      <div><dt>{en ? 'Correct answer to a timed question' : 'Risposta corretta a una domanda a tempo'}</dt><dd>{PUNTI.corretta} {XP}</dd></div>
+      <div><dt>{en ? 'Correct answer given within the first minute' : 'Risposta corretta data nel primo minuto'}</dt><dd>+{PUNTI.veloce} {XP}</dd></div>
+      <div><dt>{en ? `Every minute of active study, up to ${PUNTI.studioMaxGiorno} minutes a day` : `Ogni minuto di studio attivo, fino a ${PUNTI.studioMaxGiorno} minuti al giorno`}</dt><dd>{PUNTI.studioMinuto} {XP}</dd></div>
+      <div><dt>{en ? 'Weekly goal completed' : 'Obiettivo della settimana completato'}</dt><dd>{Math.min(...puntiObiettivi)}–{Math.max(...puntiObiettivi)} {XP}</dd></div>
+    </dl>
+    <p>{en ? 'Each question has two minutes. As soon as you confirm the answer, the full explanation appears with the points earned. When you end the session, the summary shows the active study time, the correct answers and the points earned.' : 'Ogni domanda ha due minuti di tempo. Dopo la conferma della risposta compare subito la spiegazione completa, con i punti ottenuti. Quando si termina la sessione, il riepilogo mostra il tempo di studio attivo, le risposte corrette e i punti guadagnati.'}</p>
+
+    <h2 id="domande">{en ? 'Where to find the timed questions' : 'Dove si trovano le domande a tempo'}</h2>
+    <p>{en ? 'The timed questions are in the index of each topic, below the exercises. These are the topics that have them.' : 'Le domande a tempo sono nell’indice di ogni argomento, sotto gli esercizi da fare. Gli argomenti che le hanno sono questi.'}</p>
+    {catalogo.map((c) => (
+      <>
+        <h3>{c.titolo}</h3>
+        <ul class="elenco-domande">{c.argomenti.map((a) => <li><a href={a.href}>{a.titolo}</a></li>)}</ul>
+      </>
+    ))}
+
+    <h2>{en ? 'Points only for those who are studying' : 'Punti solo a chi sta studiando'}</h2>
+    {en ? (
+      <>
+        <p>Study time counts only while a theory, worked-example, exercise or timed-question page is open in the foreground and you are using it: scrolling the text, tapping the screen, opening a solution. After two minutes without activity the count stops, and it restarts with the next action. A page left open in another tab does not collect time.</p>
+        <p>An answer given in less than {PUNTI.secondiMinimi} seconds earns no points, because the question cannot be read in that time. A question already answered correctly in the previous {PUNTI.giorniDimezzati} days is worth half the points. Answers are checked by the site, not by the browser.</p>
+      </>
+    ) : (
+      <>
+        <p>Il tempo di studio conta soltanto quando una pagina di teoria, di esercizi svolti, di esercizi da fare o di domande a tempo è aperta in primo piano e lo studente la sta usando: scorre il testo, tocca lo schermo, apre una soluzione. Dopo due minuti senza attività il conteggio si ferma e riparte alla prima azione. Una pagina lasciata aperta in un’altra scheda non accumula tempo.</p>
+        <p>Una risposta data prima di {PUNTI.secondiMinimi} secondi non assegna punti, perché in quel tempo il testo della domanda non si riesce a leggere. Una domanda a cui si è già risposto correttamente nei {PUNTI.giorniDimezzati} giorni precedenti vale la metà dei punti. Le risposte vengono controllate dal sito, non dal browser.</p>
+      </>
+    )}
+
+    <h2>{en ? 'The levels' : 'I livelli'}</h2>
+    {en ? (
+      <p>There are 100 levels. Going from level <i>n</i> to level <i>n</i> + 1 takes 60 + 10 · (<i>n</i> − 1) XP: the first step takes 60 XP and each following level takes 10 more. The title changes every ten levels.</p>
+    ) : (
+      <p>I livelli sono 100. Per passare dal livello <i>n</i> al livello <i>n</i> + 1 servono 60 + 10 · (<i>n</i> − 1) EXP: il primo passaggio richiede 60 EXP e ogni livello successivo ne richiede 10 in più. Ogni dieci livelli cambia il titolo.</p>
+    )}
+    <ul class="fasce">
+      {FASCE.map((f) => (
+        <li><strong>{en ? f.nomeEn : f.nome}</strong><em>{en ? f.fraseEn : f.frase}</em><span>{en ? `levels ${f.da}–${f.a} · from ${num(sogliaLivello(f.da))} XP` : `livelli ${f.da}–${f.a} · da ${num(sogliaLivello(f.da))} EXP`}</span></li>
+      ))}
+    </ul>
+
+    <h2>{en ? 'Goals and milestones' : 'Obiettivi e traguardi'}</h2>
+    {en ? (
+      <>
+        <p>Every Monday your account receives three goals for the week, tied to the topics you are working on. A completed goal adds its points to your total.</p>
+        <p>Milestones stay in your account and also give points: the first correct answer {prima.punti} XP, one hundred correct answers {cento.punti} XP, ten hours of study {ore.punti} XP, every topic of a subject tried at least once {PUNTI_MATERIA_COMPLETA} XP. Every ten levels you reach a milestone worth 5 XP per level: 50 XP at level 10, 100 at level 20, up to 500 at level 100.</p>
+      </>
+    ) : (
+      <>
+        <p>Ogni lunedì l’account riceve tre obiettivi per la settimana, legati agli argomenti su cui lo studente lavora. Un obiettivo completato aggiunge i suoi punti al totale.</p>
+        <p>I traguardi restano nell’account e danno anch’essi punti: la prima risposta corretta {prima.punti} EXP, cento risposte corrette {cento.punti} EXP, dieci ore di studio {ore.punti} EXP, ogni argomento di una materia provato almeno una volta {PUNTI_MATERIA_COMPLETA} EXP. Ogni dieci livelli si ottiene un traguardo che vale 5 EXP per livello raggiunto: 50 EXP al livello 10, 100 al livello 20, fino a 500 al livello 100.</p>
+      </>
+    )}
+    <p class="ingresso-azioni"><a class="bottone-primario" href={link(lingua, '/account') + '#percorso'}>{en ? 'Your progress' : 'Il tuo percorso'}</a></p>
+  </article>
+</Base>

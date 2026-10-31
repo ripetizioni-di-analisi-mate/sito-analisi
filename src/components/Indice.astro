@@ -9,8 +9,8 @@ const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
-// Domande a tempo: voce in più sotto gli argomenti che ne hanno (solo in italiano).
-const conDomande = new Set(lingua === 'it' && m ? (await catalogoDomande())[m.slug] ?? [] : []);
+// Domande a tempo: voce in più sotto gli argomenti che ne hanno.
+const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
@@ -32,7 +32,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   <li><a href={link(lingua, `/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }}>{s.titolo}</a></li>
                 ))}
                 {conDomande.has(a.slug) && (
-                  <li><a href={`/${m.slug}/${a.slug}/domande`} class:list={{ attiva: corrente && sezione === 'domande' }}>Domande a tempo</a></li>
+                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/domande`)} class:list={{ attiva: corrente && sezione === 'domande' }}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</a></li>
                 )}
               </ol>
             </li>

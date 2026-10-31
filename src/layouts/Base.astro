@@ -39,7 +39,8 @@ const m = materia ? materiaL(lingua, materia) : undefined;
 const altra: Lingua = lingua === 'it' ? 'en' : 'it';
 const versoAltra = altraLingua(Astro.url.pathname, altra);
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
-const domandeQui = Boolean(lingua === 'it' && materia && argomento && ((await catalogoDomande())[materia] ?? []).includes(argomento));
+const domandeQui = Boolean(materia && argomento && ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento));
+const en = lingua === 'en';
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
@@ -131,10 +132,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           <span class="iniziale" aria-hidden="true"></span>
           <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
         </a>
-        {lingua === 'it' && (
+        {(
           <>
-            <button class="bottone-livello" type="button" aria-label="Livello" aria-expanded="false" aria-controls="pannello-livello">
-              <span class="etichetta-livello">Liv. <span class="numero-livello">1</span></span>
+            <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
+              <span class="etichetta-livello">{en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span></span>
               <span class="mini-barra" aria-hidden="true"><span></span></span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
@@ -142,10 +143,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
               <div class="barra-exp"><span class="pl-barra"></span></div>
               <p class="pl-numeri"><span class="pl-exp"></span><span class="pl-mancano"></span></p>
               <p class="pl-link">
-                <a class="pl-domande" href={domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti#domande'}>Domande a tempo →</a>
-                <a href="/account#percorso">Il tuo percorso</a>
-                <a href="/account">Il tuo account</a>
-                <a href="/livelli-e-punti">Come funzionano livelli e punti</a>
+                <a class="pl-domande" href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti') + (domandeQui ? '' : '#domande')}>{en ? 'Timed questions →' : 'Domande a tempo →'}</a>
+                <a href={link(lingua, '/account') + '#percorso'}>{en ? 'Your progress' : 'Il tuo percorso'}</a>
+                <a href={link(lingua, '/account')}>{en ? 'Your account' : 'Il tuo account'}</a>
+                <a href={link(lingua, '/livelli-e-punti')}>{en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a>
               </p>
             </div>
           </>
@@ -245,17 +246,19 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     interface Stato { livello: number; fascia: string; exp: number; base: number; prossimo: number | null; mancano: number; perc: number }
     const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
     const pl = document.getElementById('pannello-livello');
-    const num = (x: number) => x.toLocaleString('it-IT');
+    const inglese = document.documentElement.lang === 'en';
+    const num = (x: number) => x.toLocaleString(inglese ? 'en-US' : 'it-IT');
+    const XP = inglese ? 'XP' : 'EXP';
     function mostraLivello(st: Stato) {
       if (!bl || !pl) return;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
       (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
-      bl.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}`);
-      pl.querySelector('.pl-livello')!.textContent = `Livello ${st.livello}`;
+      bl.setAttribute('aria-label', `${inglese ? 'Level' : 'Livello'} ${st.livello}, ${st.fascia}`);
+      pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello}`;
       pl.querySelector('.pl-fascia')!.textContent = st.fascia;
       (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;
-      pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} EXP` : `${num(st.exp)} / ${num(st.prossimo)} EXP`;
-      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? 'Livello massimo' : `${num(st.mancano)} al livello ${st.livello + 1}`;
+      pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} ${XP}` : `${num(st.exp)} / ${num(st.prossimo)} ${XP}`;
+      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? (inglese ? 'Maximum level' : 'Livello massimo') : `${num(st.mancano)} ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
     }
     if (bl?.dataset.stato) {
       try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
@@ -275,7 +278,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     addEventListener('premi', (e) => {
       const premi = (e as CustomEvent).detail as { nome: string; punti: number }[];
       if (!avviso || !premi?.length) return;
-      avviso.textContent = premi.map((p) => `${p.nome}: +${p.punti} EXP`).join(' · ');
+      avviso.textContent = premi.map((p) => `${p.nome}: +${p.punti} ${XP}`).join(' · ');
       avviso.hidden = false;
       clearTimeout((avviso as any)._t);
       (avviso as any)._t = setTimeout(() => { avviso.hidden = true; }, 5000);
@@ -293,7 +296,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         if (document.visibilityState !== 'visible' || !document.hasFocus() || Date.now() - ultimaAzione > 120000) return;
         const r = await fetch('/api/studio', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ materia: rad0.dataset.studioMateria, argomento: rad0.dataset.studioArgomento }),
+          body: JSON.stringify({ materia: rad0.dataset.studioMateria, argomento: rad0.dataset.studioArgomento, lingua: inglese ? 'en' : 'it' }),
         }).catch(() => null);
         const d = r && r.ok ? await r.json().catch(() => null) : null;
         if (d?.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
