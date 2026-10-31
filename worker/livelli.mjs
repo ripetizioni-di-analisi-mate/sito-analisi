@@ -217,7 +217,7 @@ export function riepilogo(ar, c) {
     sessione: {
       inizio: s.inizio, minuti: s.minuti, risposte: s.risposte, corrette: s.corrette, veloci: s.veloci,
       materia: s.materia, argomento: s.argomento, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento) : null,
-      puntiCorrette: ar.riga('SELECT COALESCE(SUM(punti), 0) AS p FROM risposte WHERE email = ? AND quando BETWEEN ? AND ?', email, s.inizio, s.ultimo).p,
+      puntiCorrette: s.punti - s.minuti * PUNTI.studioMinuto,
       puntiStudio: s.minuti * PUNTI.studioMinuto,
       premi, punti: s.punti + premi.reduce((x, p) => x + p.punti, 0),
     },

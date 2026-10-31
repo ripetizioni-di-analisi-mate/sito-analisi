@@ -165,8 +165,8 @@ const base = `/${materia}/${argomento}`;
       `<li><span>${o.testo}</span><span>${o.completato ? 'Completato' : `${o.fatto} / ${o.totale}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
     riepilogo.innerHTML = `
       <p class="sopratitolo">Sessione di studio conclusa · ${s?.titolo || titolo}</p>
-      <h2>${s ? `${s.minuti} minuti di studio attivo` : 'Sessione conclusa'}</h2>
-      ${s ? `<p>${s.corrette} risposte corrette su ${s.risposte}</p>` : ''}
+      <h2>${s ? (s.minuti === 1 ? '1 minuto di studio attivo' : `${s.minuti} minuti di studio attivo`) : 'Sessione conclusa'}</h2>
+      ${s ? `<p>${s.corrette === 1 ? '1 risposta corretta' : `${s.corrette} risposte corrette`} su ${s.risposte}</p>` : ''}
       ${righe.length ? `<dl class="conti-exp">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>+${v}</dd></div>`).join('')}<div class="totale"><dt>Totale</dt><dd>+${s.punti} EXP</dd></div></dl>` : ''}
       ${st ? `<p class="riep-livello"><strong>Livello ${st.livello} · ${st.fascia}</strong></p>
         <div class="barra-exp grande"><span style="width:${st.perc}%"></span></div>
