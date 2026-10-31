@@ -837,6 +837,8 @@ html.collegato .livello-testata { display: block; }
 .fine-anteprima .velo-titolo { margin: 0 0 0.6rem; font-family: var(--titoli); font-weight: 700; font-size: 1.2rem; line-height: 1.3; color: var(--inchiostro); }
 .velo-elenco { margin: 0 0 1rem; padding-left: 1.6rem; color: var(--inchiostro-2); }
 .velo-elenco li { margin: 0.2rem 0; }
-.fine-anteprima .bottone-sblocca { display: block; text-align: center; margin: 0 0 0.9rem; }
+.fine-anteprima .bottone-sblocca { display: block; max-width: 24rem; text-align: center; margin: 0 auto 0.9rem; }
 .fine-anteprima .velo-gratis { margin: 0; font-size: 0.93rem; text-align: center; }
 .fine-anteprima .velo-gratis a { color: var(--accento); }
+.svolgimento-riservato { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); border-left: 3px solid var(--riga); padding: 0.3rem 0 0.3rem 0.8rem; margin: 0.6rem 0 1.6rem; }
+.velo-scheda::before { display: none; }

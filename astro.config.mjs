@@ -3,6 +3,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from './src/plugins/rehype-katex-tex.mjs';
 import remarkDirective from 'remark-directive';
 import remarkBlocchi from './src/plugins/remark-blocchi.mjs';
+import remarkTracce from './src/plugins/remark-tracce.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 
@@ -27,7 +28,7 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse' },
   markdown: {
-    remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi],
+    remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
     shikiConfig: { theme: 'github-light' },
   },

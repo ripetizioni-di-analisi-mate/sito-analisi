@@ -634,8 +634,11 @@ export default {
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       if (!sbloccataQui) {
-        if (info.tipo === 'pdf' || info.tipo === 'stampa' || (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE)) {
+        if (info.tipo === 'pdf' || info.tipo === 'stampa') {
           risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
+        } else if (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE) {
+          // scheda bloccata: vetrina con titolo e tracce, svolgimenti tolti (scripts/vetrine.mjs)
+          risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi-svolti/${info.n}`);
         } else if (info.tipo === 'teoria') {
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/teoria`);
         } else if (info.tipo === 'esercizi') {
