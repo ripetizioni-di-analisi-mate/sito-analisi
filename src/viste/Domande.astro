@@ -120,7 +120,7 @@ const JS = en ? {
   const domande = new Map<string, Domanda>();
   const esiti = new Map<string, Esito>();
   let corrente: Domanda | null = null;
-  let scelta = 0, inizio = 0, timer = 0;
+  let scelta = 0, inizio = 0, timer = 0, ultimaRichiesta = 0;
 
   function aggiornaTempo() {
     if (!corrente) return;
@@ -199,6 +199,7 @@ const JS = en ? {
     const id = ordine[pos];
     const e = id ? esiti.get(id) : undefined;
     if (e) {
+      ultimaRichiesta++;
       corrente = domande.get(id)!;
       testo.innerHTML = corrente.testo;
       mostraScelte(corrente, e);
@@ -209,10 +210,16 @@ const JS = en ? {
     }
     scelte.innerHTML = '';
     testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
+    const richiesta = ++ultimaRichiesta;
     const r = await post('/api/domande/prossima', { materia, argomento, id, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
+    // Con una rete lenta e più tocchi di fila conta solo l'ultima domanda chiesta.
+    if (richiesta !== ultimaRichiesta) return;
     if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; return; }
-    if (!ordine.length) { ordine = d.ordine; pos = Math.max(0, ordine.indexOf(d.id)); nav.hidden = false; }
+    if (!ordine.length) { ordine = d.ordine; nav.hidden = false; }
+    // Numero in alto e domanda mostrata restano allineati anche se il server ne restituisce un'altra.
+    if (ordine.indexOf(d.id) >= 0) pos = ordine.indexOf(d.id);
+    if (esiti.has(d.id)) { vai(pos); return; }
     corrente = d;
     domande.set(d.id, d);
     (radice.querySelector('.nota-ospite') as HTMLElement).hidden = d.collegato;
