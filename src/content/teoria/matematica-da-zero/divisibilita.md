@@ -67,7 +67,7 @@ Un numero naturale con almeno tre cifre è divisibile:
 - per $4$ se il numero formato dalle sue ultime due cifre è divisibile per $4$;
 - per $25$ se termina con $00$, $25$, $50$ oppure $75$.
 
-Il motivo è lo stesso del criterio precedente, con le centinaia al posto delle decine. Il numero $7\,316$ si scrive $73 \cdot 100 + 16$, e $100 = 4 \cdot 25$ è multiplo di $4$ e di $25$. Poiché $16 = 4 \cdot 4$, il numero $7\,316$ è **divisibile per $4$**. Invece $16$ non è multiplo di $25$, perciò $7\,316$ non è divisibile per $25$. Il numero $3\,450$ è divisibile per $25$, perché termina con $50$.
+Il motivo è lo stesso del criterio precedente, con le centinaia al posto delle decine. Il numero $7\,316$ si scrive $73 \cdot 100 + 16$, e $100 = 4 \cdot 25$ è multiplo di $4$ e di $25$. Poiché $16 = 4 \cdot 4$, il numero $7\,316$ è **divisibile** per $4$. Invece $16$ non è multiplo di $25$, perciò $7\,316$ non è divisibile per $25$. Il numero $3\,450$ è divisibile per $25$, perché termina con $50$.
 :::
 
 :::attenzione
@@ -77,7 +77,7 @@ Per il $4$ si guardano le ultime *due* cifre. Il numero $34$ termina con $4$, ma
 ::::teorema{#criteri-3-9 titolo="Divisibilità per 3 e per 9"}
 Un numero naturale è divisibile per $3$ se la somma delle sue cifre è divisibile per $3$, ed è divisibile per $9$ se la somma delle sue cifre è divisibile per $9$.
 
-Per esempio $5\,742$ ha somma delle cifre $5 + 7 + 4 + 2 = 18$. Poiché $18$ è multiplo di $9$, il numero $5\,742$ è **divisibile per $9$**, e quindi anche per $3$. Il numero $1\,204$ ha somma delle cifre $7$, che non è multiplo di $3$, perciò $1\,204$ non è divisibile per $3$.
+Per esempio $5\,742$ ha somma delle cifre $5 + 7 + 4 + 2 = 18$. Poiché $18$ è multiplo di $9$, il numero $5\,742$ è **divisibile** per $9$, e quindi anche per $3$. Il numero $1\,204$ ha somma delle cifre $7$, che non è multiplo di $3$, perciò $1\,204$ non è divisibile per $3$.
 
 :::dimostrazione
 L'idea è scrivere il numero separando le sue cifre. Per $5\,742$ si ha
@@ -95,7 +95,7 @@ I numeri $9$, $99$ e $999$ sono multipli di $9$, quindi il primo gruppo di adden
 :::teorema{#criterio-11 titolo="Divisibilità per 11"}
 Si numerano le cifre di un numero da destra, partendo dalle unità, che occupano il posto $1$. Il numero è divisibile per $11$ se la differenza tra la somma delle cifre di posto dispari e la somma delle cifre di posto pari (la maggiore meno la minore) è $0$ oppure un multiplo di $11$.
 
-Per esempio, in $8\,294$ le cifre di posto dispari sono $4$ e $2$, con somma $6$, e quelle di posto pari sono $9$ e $8$, con somma $17$. La differenza è $17 - 6 = 11$, quindi $8\,294$ è **divisibile per $11$**; infatti $8\,294 = 11 \cdot 754$. Nel numero $5\,203$ le due somme sono $3 + 2 = 5$ e $0 + 5 = 5$, con differenza $0$, perciò anche $5\,203$ è divisibile per $11$, e infatti $5\,203 = 11 \cdot 473$. La regola si giustifica come quella del $9$, usando il fatto che $10 = 11 - 1$, $100 = 99 + 1$ e $1000 = 1001 - 1$, dove $99$ e $1001 = 11 \cdot 91$ sono multipli di $11$.
+Per esempio, in $8\,294$ le cifre di posto dispari sono $4$ e $2$, con somma $6$, e quelle di posto pari sono $9$ e $8$, con somma $17$. La differenza è $17 - 6 = 11$, quindi $8\,294$ è **divisibile** per $11$; infatti $8\,294 = 11 \cdot 754$. Nel numero $5\,203$ le due somme sono $3 + 2 = 5$ e $0 + 5 = 5$, con differenza $0$, perciò anche $5\,203$ è divisibile per $11$, e infatti $5\,203 = 11 \cdot 473$. La regola si giustifica come quella del $9$, usando il fatto che $10 = 11 - 1$, $100 = 99 + 1$ e $1000 = 1001 - 1$, dove $99$ e $1001 = 11 \cdot 91$ sono multipli di $11$.
 :::
 
 ## Numeri primi e composti

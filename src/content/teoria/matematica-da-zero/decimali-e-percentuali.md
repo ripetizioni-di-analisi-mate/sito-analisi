@@ -14,7 +14,7 @@ $$
 \qquad
 0{,}001 = \frac{1}{1000} .
 $$
-In altre parole, ogni posto verso destra vale dieci volte meno del posto precedente, come accade per unità, decine e centinaia nei numeri naturali. Per esempio
+In altre parole, ogni posto verso destra vale un decimo del posto precedente, come accade per unità, decine e centinaia nei numeri naturali. Per esempio
 $$
 3{,}58 = 3 + \frac{5}{10} + \frac{8}{100} ,
 $$
@@ -54,7 +54,7 @@ $$
 Le virgole in colonna garantiscono che si sommino fra loro cifre dello stesso tipo, come si fa con le unità e le decine.
 :::
 
-:::richiamo{titolo="Prodotto di frazioni"}
+:::richiamo{titolo="Moltiplicazione di frazioni"}
 Se $b \neq 0$ e $d \neq 0$, allora $\dfrac{a}{b} \cdot \dfrac{c}{d} = \dfrac{a \cdot c}{b \cdot d}$.
 :::
 
@@ -112,7 +112,7 @@ Se si moltiplica un numero positivo per un decimale compreso fra $0$ e $1$, il r
 - Se la cifra successiva è $0$, $1$, $2$, $3$ o $4$, la cifra a cui ci si ferma resta uguale.
 - Se la cifra successiva è $5$, $6$, $7$, $8$ o $9$, la cifra a cui ci si ferma aumenta di $1$.
 
-In entrambi i casi le cifre successive si eliminano. Per esempio $2{,}64$ arrotondato ai decimi diventa $2{,}6$, perché la cifra dei centesimi è $4$, mentre $3{,}85$ diventa $3{,}9$, perché la cifra dei centesimi è $5$. Si arrotonda quando un risultato ha troppe cifre per l'uso che se ne fa; per esempio un prezzo di $12{,}347$ euro si arrotonda ai centesimi e diventa $12{,}35$ euro.
+In entrambi i casi le cifre successive si eliminano. Per esempio $2{,}64$ arrotondato ai decimi diventa $2{,}6$, perché la cifra dei centesimi è $4$, mentre $3{,}85$ diventa $3{,}9$, perché la cifra dei centesimi è $5$. Il numero $3{,}85$ sta a metà fra $3{,}8$ e $3{,}9$, e la regola lo arrotonda a $3{,}9$. Si arrotonda quando un risultato ha troppe cifre per l'uso che se ne fa; per esempio un prezzo di $12{,}347$ euro si arrotonda ai centesimi e diventa $12{,}35$ euro.
 
 ::grafico{assi=0 uguale=1 linee="-0.6,0 10.8,0;10.4,0.2 10.8,0 10.4,-0.2;0,-0.3 0,0.3;1,-0.15 1,0.15;2,-0.15 2,0.15;3,-0.15 3,0.15;4,-0.15 4,0.15;5,-0.25 5,0.25;6,-0.15 6,0.15;7,-0.15 7,0.15;8,-0.15 8,0.15;9,-0.15 9,0.15;10,-0.3 10,0.3" punti="4,0,pieno" segmenti="0,0.6,4,0.6;4,1.3,10,1.3" etichette="-0.7,-0.9,2,60;3.3,-0.9,2,64;9.3,-0.9,2,70;1.4,0.8,0,04;6.4,1.5,0,06" xmin=-1 xmax=11 ymin=-1.4 ymax=2 titolo="Il numero $2{,}64$ dista $0{,}04$ da $2{,}6$ e $0{,}06$ da $2{,}7$, quindi arrotondato ai decimi diventa $2{,}6$"}
 
@@ -142,9 +142,9 @@ dove la parte intera è $1$, l'antiperiodo è $1$ e il periodo è $6$. La distin
 :::
 
 :::teorema{#decimali-limitati-periodici titolo="Quando un decimale è limitato"}
-Sia data una frazione ridotta ai minimi termini. Se il denominatore ha come fattori primi soltanto $2$ e $5$, il numero decimale è limitato; altrimenti è periodico. Per esempio $\dfrac{7}{20}$ dà un decimale limitato, perché $20 = 2^2 \cdot 5$, e infatti $\dfrac{7}{20} = 0{,}35$. Invece $\dfrac{5}{12}$ dà un decimale periodico, perché $12 = 2^2 \cdot 3$ contiene il fattore $3$, e infatti $\dfrac{5}{12} = 0{,}41\overline{6}$.
+Sia data una frazione ridotta ai minimi termini. Se il denominatore non ha fattori primi diversi da $2$ e da $5$, il numero decimale è limitato; altrimenti è periodico. Per esempio $\dfrac{7}{20}$ dà un decimale limitato, perché $20 = 2^2 \cdot 5$, e infatti $\dfrac{7}{20} = 0{,}35$. Invece $\dfrac{5}{12}$ dà un decimale periodico, perché $12 = 2^2 \cdot 3$ contiene il fattore $3$, e infatti $\dfrac{5}{12} = 0{,}41\overline{6}$.
 
-La regola dipende dal fatto che $10 = 2 \cdot 5$. Quando il denominatore contiene solo i fattori $2$ e $5$, la frazione si può trasformare in una equivalente con denominatore $10$, $100$ o $1000$; per esempio $\dfrac{7}{20} = \dfrac{7 \cdot 5}{20 \cdot 5} = \dfrac{35}{100}$. Con un fattore $3$ al denominatore questo non è possibile, perché nessuno dei numeri $10$, $100$, $1000, \ldots$ è divisibile per $3$.
+La regola dipende dal fatto che $10 = 2 \cdot 5$. Quando il denominatore contiene solo i fattori $2$ e $5$, la frazione si può trasformare in una equivalente con denominatore $10$, $100$ o $1000$; per esempio $\dfrac{7}{20} = \dfrac{7 \cdot 5}{20 \cdot 5} = \dfrac{35}{100}$. Con un altro fattore primo al denominatore, come $3$, questo non è possibile, perché i numeri $10$, $100$, $1000, \ldots$ hanno come fattori primi soltanto $2$ e $5$.
 :::
 
 :::teorema{#frazione-decimale-limitato titolo="Frazione di un decimale limitato"}
@@ -361,7 +361,7 @@ Quando una grandezza passa da un valore iniziale $V_1$, diverso da $0$, a un val
 $$
 \frac{V_2 - V_1}{V_1} \cdot 100 .
 $$
-La differenza si divide per il valore *iniziale*. Il risultato è positivo per un aumento e negativo per una diminuzione. Per esempio una bolletta che passa da $40$ a $46$ euro aumenta del $\dfrac{6}{40} \cdot 100 = 15\%$; un prezzo che scende da $64$ a $48$ euro ha variazione $\dfrac{-16}{64} \cdot 100 = -25\%$, cioè diminuisce del $25\%$.
+La differenza si divide per il valore *iniziale*. Il risultato è positivo per un aumento e negativo per una diminuzione. Per esempio una bolletta che passa da $40$ a $46$ euro aumenta del $15\%$, perché $\dfrac{6}{40} \cdot 100 = 15$. Un prezzo che scende da $64$ a $48$ euro ha variazione $-25\%$, perché $\dfrac{-16}{64} \cdot 100 = -25$; quindi il prezzo diminuisce del $25\%$.
 :::
 
 :::teorema{#percentuali-successive titolo="Percentuali successive"}
