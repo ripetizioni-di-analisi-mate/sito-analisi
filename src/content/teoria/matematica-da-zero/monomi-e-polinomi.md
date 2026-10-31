@@ -210,7 +210,7 @@ $$
 &= 6x^3 - 3x^2 + 12x .
 \end{aligned}
 $$
-Ogni prodotto si calcola con la regola del prodotto di monomi. La proprietà distributiva si legge anche come una somma di aree: un rettangolo di lati $a$ e $b + c$ si divide in due rettangoli.
+Ogni prodotto si calcola con la regola del prodotto di monomi. La proprietà distributiva ha anche un significato geometrico, perché un rettangolo di lati $a$ e $b + c$ si divide in due rettangoli di lati $a$ e $b$ e di lati $a$ e $c$.
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 4,0 4,3 0,3" linee="0,0 6,0 6,3 0,3 0,0;4,0 4,3" etichette="1.7,1.35,ab;4.75,1.35,ac;1.9,-0.55,b;4.9,-0.55,c;-0.55,1.35,a" xmin=-1 xmax=7 ymin=-1 ymax=4 titolo="Il rettangolo di lati $a$ e $b + c$ è formato da due rettangoli di aree $ab$ e $ac$, quindi $a(b + c) = ab + ac$; con $a = 3$, $b = 4$ e $c = 2$ si ha $3 \cdot 6 = 12 + 6 = 18$"}
 

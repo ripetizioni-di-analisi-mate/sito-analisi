@@ -107,7 +107,7 @@ Se si moltiplica un numero positivo per un decimale compreso fra $0$ e $1$, il r
 ## Arrotondamento
 
 :::definizione{#arrotondamento titolo="Arrotondamento"}
-**Arrotondare** un numero ai decimi, ai centesimi o a un'altra cifra significa sostituirlo con il numero più vicino che si ferma a quella cifra. Si guarda la cifra successiva a quella a cui ci si ferma.
+**Arrotondare** un numero ai decimi, ai centesimi o a un'altra cifra significa sostituirlo con il numero più vicino che ha cifre soltanto fino a quella posizione. Si guarda la cifra successiva a quella a cui ci si ferma.
 
 - Se la cifra successiva è $0$, $1$, $2$, $3$ o $4$, la cifra a cui ci si ferma resta uguale.
 - Se la cifra successiva è $5$, $6$, $7$, $8$ o $9$, la cifra a cui ci si ferma aumenta di $1$.
@@ -172,13 +172,13 @@ $$
 Con la frazione generatrice si fanno i calcoli con i numeri periodici, che non si possono incolonnare perché hanno infinite cifre. Per esempio $0{,}\overline{3} + 0{,}\overline{6} = \dfrac{3}{9} + \dfrac{6}{9} = 1$.
 
 :::dimostrazione
-Sia $x = 0{,}\overline{45} = 0{,}4545\ldots$ Il periodo ha due cifre, quindi si moltiplica per $100$, che sposta la virgola di due posti:
+Sia $x = 0{,}\overline{45}$, cioè $x = 0{,}4545\ldots$. Il periodo ha due cifre, quindi si moltiplica per $100$, che sposta la virgola di due posti:
 $$
 100 \cdot x = 45{,}4545\ldots
 $$
 I due numeri $100 \cdot x$ e $x$ hanno la stessa parte decimale. Perciò, sottraendo $x$ da $100 \cdot x$, le cifre decimali si eliminano e resta $99 \cdot x = 45$, cioè $x = \dfrac{45}{99}$.
 
-Per $x = 1{,}2\overline{3} = 1{,}2333\ldots$ si sposta prima la virgola dopo l'antiperiodo e poi dopo il periodo:
+Per $x = 1{,}2\overline{3}$, cioè $x = 1{,}2333\ldots$, si sposta prima la virgola dopo l'antiperiodo e poi dopo il periodo:
 $$
 10 \cdot x = 12{,}333\ldots ,
 \qquad
@@ -195,13 +195,13 @@ Ogni frazione dà un decimale limitato o periodico, e ogni decimale limitato o p
 ## Rapporti e scale
 
 :::definizione{#rapporto titolo="Rapporto"}
-Il **rapporto** fra due numeri $a$ e $b$, con $b \neq 0$, è il quoziente $\dfrac{a}{b}$, che si scrive anche $a : b$. Il rapporto dice quante volte il primo numero contiene il secondo, oppure quale frazione del secondo è il primo. Per esempio in un gruppo di $12$ adulti e $8$ bambini il rapporto fra adulti e bambini è
+Il **rapporto** fra due numeri $a$ e $b$, con $b \neq 0$, è il quoziente $\dfrac{a}{b}$, che si scrive anche $a : b$. Il rapporto indica quante volte il primo numero contiene il secondo, oppure quale frazione del secondo è il primo. Per esempio in un gruppo di $12$ adulti e $8$ bambini il rapporto fra adulti e bambini è
 $$
 \frac{12}{8} = \frac{3}{2} ,
 $$
 cioè ci sono $3$ adulti ogni $2$ bambini. Il rapporto si può semplificare come una frazione.
 
-Se le due grandezze hanno la stessa unità di misura, prima si scrivono nella stessa unità. Il rapporto fra $30$ cm e $2$ m è $\dfrac{30}{200} = \dfrac{3}{20}$, perché $2$ m sono $200$ cm. Se le grandezze sono di tipo diverso, il rapporto è una nuova grandezza. Per esempio $150$ km percorsi in $2$ ore danno $\dfrac{150}{2} = 75$ km all'ora, cioè la velocità media.
+Se le due grandezze sono dello stesso tipo, come due lunghezze, prima si scrivono nella stessa unità di misura. Il rapporto fra $30$ cm e $2$ m è $\dfrac{30}{200} = \dfrac{3}{20}$, perché $2$ m sono $200$ cm. Se le grandezze sono di tipo diverso, il rapporto è una nuova grandezza. Per esempio $150$ km percorsi in $2$ ore danno $\dfrac{150}{2} = 75$ km all'ora, cioè la velocità media.
 :::
 
 :::definizione{#scala titolo="Scala di una carta"}
@@ -232,7 +232,7 @@ $$
 Nella proporzione $2 : 3 = 8 : 12$ si ha infatti $2 \cdot 12 = 24$ e $3 \cdot 8 = 24$. La proprietà permette di controllare se quattro numeri formano una proporzione. Per esempio $3 : 5 = 9 : 16$ *non* è una proporzione, perché $3 \cdot 16 = 48$ mentre $5 \cdot 9 = 45$.
 
 :::dimostrazione
-La proporzione dice che $\dfrac{a}{b} = \dfrac{c}{d}$. Si moltiplicano i due membri per $b \cdot d$. A sinistra il fattore $b$ si semplifica e resta $a \cdot d$; a destra il fattore $d$ si semplifica e resta $c \cdot b$. Quindi $a \cdot d = b \cdot c$. Con i numeri dell'esempio, moltiplicando $\dfrac{2}{3} = \dfrac{8}{12}$ per $3 \cdot 12 = 36$ si ottiene $2 \cdot 12 = 8 \cdot 3$, cioè $24 = 24$. Viceversa, se $a \cdot d = b \cdot c$, dividendo i due membri per $b \cdot d$ si ritrova $\dfrac{a}{b} = \dfrac{c}{d}$.
+La proporzione significa che $\dfrac{a}{b} = \dfrac{c}{d}$. Si moltiplicano i due membri per $b \cdot d$. A sinistra il fattore $b$ si semplifica e resta $a \cdot d$; a destra il fattore $d$ si semplifica e resta $c \cdot b$. Quindi $a \cdot d = b \cdot c$. Con i numeri dell'esempio, moltiplicando $\dfrac{2}{3} = \dfrac{8}{12}$ per $3 \cdot 12 = 36$ si ottiene $2 \cdot 12 = 8 \cdot 3$, cioè $24 = 24$. Viceversa, se $a \cdot d = b \cdot c$, dividendo i due membri per $b \cdot d$ si ritrova $\dfrac{a}{b} = \dfrac{c}{d}$.
 :::
 ::::
 
@@ -332,6 +332,10 @@ perché la parte sta al totale come $p$ sta a $100$. Conoscendo due dei tre nume
 
 ## Sconti, aumenti e percentuali successive
 
+:::richiamo{titolo="Proprietà distributiva"}
+Per tre numeri $a$, $b$, $c$ qualsiasi vale $a \cdot b + a \cdot c = a \cdot (b + c)$.
+:::
+
 :::teorema{#aumenti-e-sconti titolo="Aumenti e sconti percentuali"}
 Un aumento del $p\%$ moltiplica il valore $V$ per $1 + \dfrac{p}{100}$; uno sconto del $p\%$ lo moltiplica per $1 - \dfrac{p}{100}$:
 $$
@@ -341,7 +345,7 @@ V \cdot \left( 1 - \frac{p}{100} \right) .
 $$
 Il numero per cui si moltiplica si chiama **fattore moltiplicativo**. Per esempio un prezzo di $80$ euro aumentato del $15\%$ diventa $80 \cdot 1{,}15 = 92$ euro, e un prezzo di $45$ euro scontato del $20\%$ diventa $45 \cdot 0{,}8 = 36$ euro.
 
-La regola viene dalla proprietà distributiva. Aumentare $80$ del $15\%$ significa aggiungere a $80$ il $15\%$ di $80$, cioè calcolare $80 + 0{,}15 \cdot 80$. Per la proprietà distributiva questa somma è uguale a $80 \cdot (1 + 0{,}15) = 80 \cdot 1{,}15$. Per lo sconto il ragionamento è lo stesso, con la sottrazione al posto della somma.
+La regola viene dalla proprietà distributiva. Aumentare $80$ del $15\%$ significa aggiungere a $80$ il $15\%$ di $80$, cioè calcolare $80 + 0{,}15 \cdot 80$. Poiché $80 = 80 \cdot 1$, per la proprietà distributiva questa somma è uguale a $80 \cdot (1 + 0{,}15) = 80 \cdot 1{,}15$. Per lo sconto il ragionamento è lo stesso, con la sottrazione al posto della somma.
 :::
 
 :::esempio{titolo="Dal prezzo scontato al prezzo iniziale"}
