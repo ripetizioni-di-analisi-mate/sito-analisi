@@ -12,7 +12,7 @@ In parole semplici, ogni asse è una retta dei numeri come quella dell'argomento
 :::
 
 :::definizione{#coordinate titolo="Coordinate di un punto"}
-Sia $P$ un punto del piano. Da $P$ si scende, o si sale, in verticale fino all'asse $x$, e il numero che si legge su quell'asse si chiama **ascissa** di $P$. Da $P$ ci si sposta in orizzontale fino all'asse $y$, e il numero che si legge si chiama **ordinata** di $P$. Ascissa e ordinata sono le **coordinate** di $P$. Si scrivono fra parentesi tonde, prima l'ascissa e poi l'ordinata, separate da una virgola: $P(x_P, y_P)$.
+Sia $P$ un punto del piano. Da $P$ si scende, o si sale, in verticale fino all'asse $x$, e il numero che si legge su quell'asse si chiama **ascissa** di $P$. Da $P$ ci si sposta in orizzontale fino all'asse $y$, e il numero che si legge si chiama **ordinata** di $P$. Ascissa e ordinata sono le **coordinate** di $P$. Si scrivono dopo il nome del punto, prima l'ascissa e poi l'ordinata, separate da una virgola, come in $P(x_P, y_P)$.
 
 Il punto $A(3, 2)$ si raggiunge partendo da $O$ con $3$ unità verso destra e poi $2$ unità verso l'alto. Il punto $B(-2, 3)$ si raggiunge con $2$ unità verso sinistra e $3$ verso l'alto. L'ordine delle coordinate cambia il punto, perché $(3, 2)$ è $3$ a destra e $2$ in alto, mentre $(2, 3)$ è $2$ a destra e $3$ in alto. A ogni punto del piano corrisponde una sola coppia di coordinate, e a ogni coppia di numeri corrisponde un solo punto.
 :::
@@ -74,7 +74,7 @@ L'idea è costruire un triangolo rettangolo che ha il segmento $AB$ come ipotenu
 $$
 \overline{AB}^2 = \overline{AH}^2 + \overline{HB}^2 = (x_B - x_A)^2 + (y_B - y_A)^2 ,
 $$
-perché il quadrato del valore assoluto di un numero è uguale al quadrato del numero. Estraendo la radice quadrata si ottiene la formula. Nell'esempio il punto è $H(7, -2)$, i cateti misurano $6$ e $8$, e l'ipotenusa misura $10$.
+perché il quadrato del valore assoluto di un numero è uguale al quadrato del numero. Estraendo la radice quadrata si ottiene la formula. Se $A$ e $B$ hanno la stessa ordinata, il triangolo non si forma; in questo caso la seconda differenza è $0$ e la formula dà $\sqrt{(x_B - x_A)^2} = |x_B - x_A|$, cioè la lunghezza del segmento orizzontale. Lo stesso accade per due punti con la stessa ascissa. Nell'esempio il punto è $H(7, -2)$, i cateti misurano $6$ e $8$, e l'ipotenusa misura $10$.
 
 ::grafico{xmin=-1 xmax=9 ymin=-4 ymax=7 uguale=1 linee="1,-2 7,6" punti="1,-2,pieno,A;7,6,pieno,B;7,-2,pieno,H" segmenti="1,-2,7,-2;7,-2,7,6" etichette="3.8,-3,6;7.3,1.8,8;3.1,2.6,10" titolo="Il segmento $AB$ è l'ipotenusa del triangolo rettangolo $AHB$, con cateti $\overline{AH} = 7 - 1 = 6$ e $\overline{HB} = 6 - (-2) = 8$; perciò $\overline{AB} = \sqrt{36 + 64} = 10$"}
 
@@ -122,7 +122,7 @@ Le coordinate del punto medio possono essere frazioni anche quando gli estremi h
 :::definizione{#funzione titolo="Funzione"}
 Una **funzione** è una regola che associa a ogni numero $x$ di un certo insieme *uno e un solo* numero $y$. Il numero $x$ si chiama variabile indipendente, perché si sceglie; il numero $y$ si chiama variabile dipendente, perché si calcola a partire da $x$. Si scrive $y = f(x)$, che si legge "$y$ uguale a effe di $x$".
 
-In parole semplici, una funzione è un procedimento di calcolo. Si sceglie $x$, si eseguono le operazioni indicate e si ottiene un solo risultato. Per $f(x) = 2x + 1$ si ha $f(3) = 2 \cdot 3 + 1 = 7$ e $f(-2) = 2 \cdot (-2) + 1 = -3$. I valori si raccolgono in una tabella.
+In parole semplici, la regola di molte funzioni è un procedimento di calcolo. Si sceglie $x$, si eseguono le operazioni indicate e si ottiene un solo risultato. Per $f(x) = 2x + 1$ si ha $f(3) = 2 \cdot 3 + 1 = 7$ e $f(-2) = 2 \cdot (-2) + 1 = -3$. I valori si raccolgono in una tabella.
 
 | $x$ | $-2$ | $-1$ | $0$ | $1$ | $2$ |
 | --- | --- | --- | --- | --- | --- |
@@ -134,7 +134,7 @@ Molte situazioni quotidiane sono descritte da una funzione. Se le mele costano $
 :::definizione{#grafico-di-una-funzione titolo="Grafico di una funzione"}
 Il **grafico** di una funzione $f$ è l'insieme dei punti del piano cartesiano con coordinate $\big( x, f(x) \big)$, cioè dei punti la cui ordinata è il valore della funzione calcolato nella loro ascissa. Per disegnarlo in modo approssimato si compila una tabella, si segnano i punti e si uniscono con una linea.
 
-Per $f(x) = x^2$ la tabella dà i punti $(-2, 4)$, $(-1, 1)$, $(0, 0)$, $(1, 1)$ e $(2, 4)$, e la linea che li unisce è una curva che si chiama parabola. Un punto appartiene al grafico quando le sue coordinate soddisfano l'equazione $y = f(x)$. Il punto $(3, 9)$ appartiene al grafico di $x^2$, perché $3^2 = 9$; il punto $(2, 5)$ non vi appartiene, perché $2^2 = 4$ è diverso da $5$.
+Per $f(x) = x^2$ la tabella dà i punti $(-2, 4)$, $(-1, 1)$, $(0, 0)$, $(1, 1)$ e $(2, 4)$, e la linea che li unisce è una curva che si chiama parabola. Un punto appartiene al grafico quando le sue coordinate soddisfano l'equazione $y = f(x)$. Il punto $(3, 9)$ appartiene al grafico di $f$, perché $3^2 = 9$; il punto $(2, 5)$ non vi appartiene, perché $2^2 = 4$ è diverso da $5$.
 
 ::grafico{f="x^2" xmin=-3 xmax=3 ymin=-1 ymax=9 punti="-2,4,pieno;-1,1,pieno;0,0,pieno;1,1,pieno;2,4,pieno" legenda="y = x^2" titolo="I punti della tabella di $f(x) = x^2$ per $x = -2, -1, 0, 1, 2$ e la curva che li unisce, che è il grafico della funzione"}
 
@@ -163,7 +163,7 @@ Il coefficiente angolare indica come è inclinata la retta.
 - Se $m < 0$ la retta scende da sinistra a destra. Per $y = -x$, passando da $x = 1$ a $x = 2$ l'ordinata passa da $-1$ a $-2$.
 - Se $m = 0$ l'equazione è $y = 0$, che è l'asse $x$.
 
-Più grande è il valore assoluto di $m$, più ripida è la retta. Per $x = 1$ la retta $y = 3x$ arriva all'ordinata $3$, mentre la retta $y = \dfrac{1}{2}x$ arriva soltanto a $\dfrac{1}{2}$. La retta $y = x$ si chiama bisettrice del I e del III quadrante, perché divide a metà l'angolo retto tra i semiassi positivi; la retta $y = -x$ è la bisettrice del II e del IV quadrante.
+Più grande è il valore assoluto di $m$, più ripida è la retta. Per $x = 1$ la retta $y = 3x$ arriva all'ordinata $3$, mentre la retta $y = \dfrac{1}{2}x$ arriva soltanto a $\dfrac{1}{2}$. La retta $y = x$ si chiama bisettrice del I e del III quadrante, perché divide a metà l'angolo retto formato dalla parte positiva dell'asse $x$ e dalla parte positiva dell'asse $y$; la retta $y = -x$ è la bisettrice del II e del IV quadrante.
 
 ::grafico{f="2*x;-x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="1,2,pieno;2,4,pieno;1,-1,pieno;2,-2,pieno" legenda="y = 2x;y = -x" titolo="La retta $y = 2x$ ha $m = 2 > 0$ e sale; la retta $y = -x$ ha $m = -1 < 0$ e scende; entrambe passano per l'origine"}
 
@@ -176,7 +176,7 @@ Siano $m$ e $q$ due numeri fissati. I punti che soddisfano l'equazione
 $$
 y = mx + q
 $$
-formano una retta. Questa retta si ottiene dalla retta $y = mx$ aggiungendo $q$ a ogni ordinata, cioè spostando ogni suo punto di $q$ unità in verticale; perciò ha lo stesso coefficiente angolare $m$. Il numero $q$ si chiama **ordinata all'origine**, o intercetta. Per $x = 0$ si ha $y = q$, quindi $q$ è l'ordinata del punto $(0, q)$ in cui la retta taglia l'asse $y$. L'equazione $y = mx + q$ si chiama **forma esplicita** della retta, perché la $y$ è isolata in un membro.
+formano una retta. Questa retta si ottiene dalla retta $y = mx$ aggiungendo $q$ a ogni ordinata, cioè spostando ogni suo punto di $q$ unità in verticale; perciò ha la stessa inclinazione, e il numero $m$ si chiama ancora coefficiente angolare. Il numero $q$ si chiama **ordinata all'origine**, o intercetta. Per $x = 0$ si ha $y = q$, quindi $q$ è l'ordinata del punto $(0, q)$ in cui la retta taglia l'asse $y$. L'equazione $y = mx + q$ si chiama **forma esplicita** della retta, perché la $y$ è isolata in un membro.
 
 Per $y = 2x + 1$ si ha $m = 2$ e $q = 1$. La retta passa per $(0, 1)$, per $(1, 3)$ e per $(2, 5)$, e a ogni passo di $1$ verso destra sale di $2$.
 
@@ -252,7 +252,7 @@ $$
 La retta è $y - 4 = -2\,(x + 1)$, cioè $y = -2x - 2 + 4 = -2x + 2$. Il controllo con $B$ dà $-2 \cdot 3 + 2 = -4$, che è l'ordinata di $B$.
 
 :::dimostrazione
-I due punti stanno sulla retta $y = mx + q$, quindi $y_A = mx_A + q$ e $y_B = mx_B + q$. Sottraendo la prima uguaglianza dalla seconda, il numero $q$ si elimina e resta
+Poiché $x_A \neq x_B$, la retta non è verticale e ha un'equazione $y = mx + q$. I due punti stanno su questa retta, quindi $y_A = mx_A + q$ e $y_B = mx_B + q$. Sottraendo la prima uguaglianza dalla seconda, il numero $q$ si elimina e resta
 $$
 y_B - y_A = mx_B - mx_A = m\,(x_B - x_A) .
 $$
@@ -347,7 +347,7 @@ si moltiplica la seconda equazione per $3$ e si ottiene $15x - 3y = 9$. Ora $y$ 
 :::teorema{#sistemi-impossibili-indeterminati titolo="Sistemi determinati, impossibili e indeterminati"}
 Due rette del piano possono incontrarsi in un punto, essere parallele e distinte, oppure coincidere. Il sistema formato dalle loro equazioni ha di conseguenza una soluzione, nessuna soluzione oppure infinite soluzioni.
 
-- Il sistema è **determinato** quando le rette hanno coefficienti angolari diversi. In questo caso c'è una sola soluzione, cioè il punto di intersezione.
+- Il sistema è **determinato** quando le rette si incontrano in un solo punto, come accade per due rette con coefficienti angolari diversi. In questo caso c'è una sola soluzione, cioè il punto di intersezione.
 - Il sistema è **impossibile** quando le rette sono parallele e distinte. Nel sistema formato da $y = 2x + 1$ e $2x - y = 3$ la seconda equazione equivale a $y = 2x - 3$, quindi le due rette hanno lo stesso coefficiente angolare $2$ e sono parallele. Sostituendo $y = 2x + 1$ nella seconda equazione si ottiene $2x - 2x - 1 = 3$, cioè $-1 = 3$, che è falso.
 - Il sistema è **indeterminato** quando le rette coincidono. Nel sistema formato da $x + 2y = 4$ e $2x + 4y = 8$ la seconda equazione è la prima moltiplicata per $2$. Moltiplicando la prima per $2$ e sottraendo si ottiene $0 = 0$, che è vero per ogni coppia; ogni punto della retta $x + 2y = 4$, come $(0, 2)$ o $(4, 0)$, è una soluzione.
 :::

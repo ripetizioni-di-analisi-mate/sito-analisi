@@ -252,7 +252,7 @@ Per esempio $\left( \dfrac{2}{3} \right)^2 = \dfrac{2}{3} \cdot \dfrac{2}{3} = \
 :::
 
 :::attenzione
-Quando l'esponente riguarda tutta la frazione, la frazione si scrive fra parentesi tonde. Senza parentesi l'esponente riguarda soltanto il numero a cui è attaccato. Per esempio $\left( \dfrac{2}{3} \right)^2 = \dfrac{4}{9}$, mentre $\dfrac{2^2}{3} = \dfrac{4}{3}$.
+Quando l'esponente riguarda tutta la frazione, la frazione si scrive con le parentesi tonde. Senza le parentesi tonde l'esponente riguarda soltanto il numero su cui è scritto. Per esempio $\left( \dfrac{2}{3} \right)^2 = \dfrac{4}{9}$, mentre $\dfrac{2^2}{3} = \dfrac{4}{3}$.
 :::
 
 ## Frazione di una quantità
