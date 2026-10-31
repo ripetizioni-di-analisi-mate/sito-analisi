@@ -180,7 +180,7 @@ formano una retta. Questa retta si ottiene dalla retta $y = mx$ aggiungendo $q$ 
 
 Per $y = 2x + 1$ si ha $m = 2$ e $q = 1$. La retta passa per $(0, 1)$, per $(1, 3)$ e per $(2, 5)$, e a ogni passo di $1$ verso destra sale di $2$.
 
-::grafico{f="2*x+1" xmin=-3 xmax=3 ymin=-3 ymax=6 uguale=1 punti="0,1,pieno;1,3,pieno;2,5,pieno" segmenti="0,1,1,1;1,1,1,3;1,3,2,3;2,3,2,5" etichette="0.35,0.45,1;1.15,1.9,2;1.35,2.45,1;2.15,3.9,2" legenda="y = 2x + 1" titolo="La retta $y = 2x + 1$ taglia l'asse $y$ nel punto di ordinata $q = 1$; a ogni passo di $1$ verso destra sale di $m = 2$"}
+::grafico{f="2*x+1" xmin=-4 xmax=4 ymin=-3 ymax=6 uguale=1 punti="0,1,pieno;1,3,pieno;2,5,pieno" segmenti="0,1,1,1;1,1,1,3;1,3,2,3;2,3,2,5" etichette="0.35,0.45,1;1.15,1.9,2;1.35,2.45,1;2.15,3.9,2" legenda="y = 2x + 1" titolo="La retta $y = 2x + 1$ taglia l'asse $y$ nel punto di ordinata $q = 1$; a ogni passo di $1$ verso destra sale di $m = 2$"}
 
 :::
 
@@ -258,7 +258,7 @@ y_B - y_A = mx_B - mx_A = m\,(x_B - x_A) .
 $$
 Poiché $x_B - x_A \neq 0$, si può dividere per $x_B - x_A$, e si ottiene la formula di $m$. In parole, il coefficiente angolare è lo spostamento verticale diviso per lo spostamento orizzontale. Da $A(-1, 4)$ a $B(3, -4)$ ci si sposta di $4$ verso destra e di $8$ verso il basso, quindi $m = \dfrac{-8}{4} = -2$.
 
-::grafico{f="-2*x+2" xmin=-3 xmax=5 ymin=-6 ymax=6 uguale=1 punti="-1,4,pieno,A;3,-4,pieno,B" segmenti="-1,4,3,4;3,4,3,-4" etichette="0.8,4.4,4;3.2,0.2,8" legenda="y = -2x + 2" titolo="Da $A(-1, 4)$ a $B(3, -4)$ ci si sposta di $4$ verso destra e di $8$ verso il basso, quindi il coefficiente angolare è $m = \dfrac{-8}{4} = -2$"}
+::grafico{f="-2*x+2" xmin=-4 xmax=6 ymin=-5 ymax=6 uguale=1 punti="-1,4,pieno,A;3,-4,pieno,B" segmenti="-1,4,3,4;3,4,3,-4" etichette="0.8,4.4,4;3.2,0.2,8" legenda="y = -2x + 2" titolo="Da $A(-1, 4)$ a $B(3, -4)$ ci si sposta di $4$ verso destra e di $8$ verso il basso, quindi il coefficiente angolare è $m = \dfrac{-8}{4} = -2$"}
 
 :::
 ::::
@@ -270,7 +270,7 @@ Due rette $y = mx + q$ e $y = m'x + q'$ sono **parallele** quando hanno lo stess
 
 La seconda retta si ottiene dalla prima spostando ogni punto di $q' - q$ unità in verticale, e lo spostamento verticale non cambia l'inclinazione. Le rette $y = 2x + 1$ e $y = 2x - 3$ sono perciò parallele. La retta parallela a $y = 2x + 1$ che passa per $P(1, 5)$ ha coefficiente angolare $2$, quindi è $y - 5 = 2\,(x - 1)$, cioè $y = 2x + 3$.
 
-::grafico{f="2*x+1;2*x-3" xmin=-3 xmax=4 ymin=-5 ymax=6 uguale=1 punti="0,1,pieno;0,-3,pieno" legenda="y = 2x + 1;y = 2x - 3" titolo="Le rette $y = 2x + 1$ e $y = 2x - 3$ hanno lo stesso coefficiente angolare $2$ e sono parallele; la seconda si ottiene dalla prima scendendo di $4$ unità"}
+::grafico{f="2*x+1;2*x-3" xmin=-4 xmax=5 ymin=-5 ymax=6 uguale=1 punti="0,1,pieno;0,-3,pieno" legenda="y = 2x + 1;y = 2x - 3" titolo="Le rette $y = 2x + 1$ e $y = 2x - 3$ hanno lo stesso coefficiente angolare $2$ e sono parallele; la seconda si ottiene dalla prima scendendo di $4$ unità"}
 
 :::
 

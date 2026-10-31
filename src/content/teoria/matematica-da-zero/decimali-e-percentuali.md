@@ -83,7 +83,7 @@ $$
 \qquad
 \frac{47}{1000} = 0{,}047 .
 $$
-La regola segue dalla moltiplicazione dei decimali: $3{,}25 \cdot 100 = \dfrac{325}{100} \cdot 100 = 325$. Con questa regola si cambiano le unità di misura; per esempio $1{,}8$ metri sono $1{,}8 \cdot 100 = 180$ centimetri.
+La regola segue dalla moltiplicazione dei decimali, perché $3{,}25 \cdot 100 = \dfrac{325}{100} \cdot 100 = 325$. Con questa regola si cambiano le unità di misura; per esempio $1{,}8$ metri sono $1{,}8 \cdot 100 = 180$ centimetri.
 :::
 
 :::richiamo{titolo="Proprietà invariantiva"}
@@ -201,7 +201,7 @@ $$
 $$
 cioè ci sono $3$ adulti ogni $2$ bambini. Il rapporto si può semplificare come una frazione.
 
-Se le due grandezze hanno la stessa unità di misura, prima si scrivono nella stessa unità. Il rapporto fra $30$ cm e $2$ m è $\dfrac{30}{200} = \dfrac{3}{20}$, perché $2$ m sono $200$ cm. Se le grandezze sono di tipo diverso, il rapporto è una nuova grandezza: $150$ km percorsi in $2$ ore danno $\dfrac{150}{2} = 75$ km all'ora, cioè la velocità media.
+Se le due grandezze hanno la stessa unità di misura, prima si scrivono nella stessa unità. Il rapporto fra $30$ cm e $2$ m è $\dfrac{30}{200} = \dfrac{3}{20}$, perché $2$ m sono $200$ cm. Se le grandezze sono di tipo diverso, il rapporto è una nuova grandezza. Per esempio $150$ km percorsi in $2$ ore danno $\dfrac{150}{2} = 75$ km all'ora, cioè la velocità media.
 :::
 
 :::definizione{#scala titolo="Scala di una carta"}
@@ -263,7 +263,7 @@ Due grandezze $x$ e $y$ sono **direttamente proporzionali** se il loro rapporto 
 
 In ogni colonna il rapporto è $\dfrac{y}{x} = 2$. Nel piano cartesiano i punti della tabella stanno su una retta che passa per l'origine.
 
-::grafico{f="2*x+0*sqrt(x)" punti="1,2,pieno;2,4,pieno;3,6,pieno;4,8,pieno" segmenti="3,0,3,6;0,6,3,6" xmin=-1 xmax=6 ymin=-2 ymax=12 nomi="x,y" legenda="y = 2x" titolo="Il costo $y$ di $x$ quaderni a $2$ euro l'uno: i punti stanno su una retta che passa per l'origine, perché $\dfrac{y}{x} = 2$ in ogni punto"}
+::grafico{f="2*x+0*sqrt(x)" punti="1,2,pieno;2,4,pieno;3,6,pieno;4,8,pieno" segmenti="3,0,3,6;0,6,3,6" xmin=-1 xmax=6 ymin=-2 ymax=12 nomi="x,y" legenda="y = 2x" titolo="I punti che danno il costo $y$ di $x$ quaderni a $2$ euro l'uno stanno su una retta che passa per l'origine, perché $\dfrac{y}{x} = 2$ in ogni punto"}
 
 :::
 
@@ -280,7 +280,7 @@ Due grandezze $x$ e $y$ sono **inversamente proporzionali** se il loro prodotto 
 
 In ogni colonna il prodotto è $120$. I punti della tabella stanno su una curva chiamata ramo di **iperbole**, che si avvicina agli assi senza toccarli.
 
-::grafico{f="120/x+0*sqrt(x)" punti="30,4,pieno;40,3,pieno;60,2,pieno;120,1,pieno" xmin=-20 xmax=180 ymin=-1 ymax=8 nomi="x,y" legenda="y = \dfrac{120}{x}" titolo="Il tempo $y$ per percorrere $120$ km alla velocità $x$: i punti stanno su un ramo di iperbole, perché $x \cdot y = 120$ in ogni punto"}
+::grafico{f="120/x+0*sqrt(x)" punti="30,4,pieno;40,3,pieno;60,2,pieno;120,1,pieno" xmin=-20 xmax=180 ymin=-1 ymax=8 nomi="x,y" legenda="y = \dfrac{120}{x}" titolo="I punti che danno il tempo $y$ per percorrere $120$ km alla velocità $x$ stanno su un ramo di iperbole, perché $x \cdot y = 120$ in ogni punto"}
 
 :::
 
@@ -372,5 +372,5 @@ Il fattore complessivo è $0{,}8 \cdot 0{,}9 = 0{,}72$, quindi lo sconto comples
 :::
 
 :::attenzione
-Due percentuali successive non si sommano. Nell'esempio dei due sconti la somma $20\% + 10\% = 30\%$ darebbe un prezzo finale di $70$ euro, mentre il prezzo vero è $72$ euro, perché il $10\%$ è calcolato su $80$ euro e vale $8$ euro. Per lo stesso motivo un aumento e uno sconto della stessa percentuale non si compensano: $100$ euro aumentati del $10\%$ diventano $110$ euro, e scontati poi del $10\%$ diventano $110 \cdot 0{,}9 = 99$ euro.
+Due percentuali successive non si sommano. Nell'esempio dei due sconti la somma $20\% + 10\% = 30\%$ darebbe un prezzo finale di $70$ euro, mentre il prezzo vero è $72$ euro, perché il $10\%$ è calcolato su $80$ euro e vale $8$ euro. Per lo stesso motivo un aumento e uno sconto della stessa percentuale non si compensano. Per esempio $100$ euro aumentati del $10\%$ diventano $110$ euro, e scontati poi del $10\%$ diventano $110 \cdot 0{,}9 = 99$ euro.
 :::
