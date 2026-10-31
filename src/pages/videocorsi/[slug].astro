@@ -39,14 +39,16 @@ const titolo = v.titolo;
   </div>
 
   <div class="sblocco-video" style={`--accento: ${v.colore}`}>
-    <p class="omaggio">Insieme alle videolezioni ricevi <strong>in omaggio</strong> il materiale scritto del sito{una ? '' : ` per ${nomiMaterie}`}: teoria, esercizi svolti ed esercizi con la soluzione, <strong>del valore di {materiale}&nbsp;€</strong>.</p>
-    {una && <p class="vedi-materia"><a href={`/${sblocca[0].slug}`}>Guarda gratis un'anteprima del materiale scritto</a></p>}
+    <p class="omaggio">{una
+      ? <>Comprando il videocorso si attiva in automatico anche la sezione di teoria ed esercizi collegata, senza spendere nulla in più. Questa sezione, che da sola costa <strong>{materiale}&nbsp;€</strong>, è quindi <strong>in omaggio</strong>.</>
+      : <>Comprando il videocorso si attivano in automatico anche le sezioni di teoria ed esercizi collegate ({nomiMaterie}), senza spendere nulla in più. Queste sezioni, che da sole costano <strong>{materiale}&nbsp;€</strong>, sono quindi <strong>in omaggio</strong>.</>}</p>
+    {una && <p class="vedi-materia"><a href={`/${sblocca[0].slug}`}>Guarda gratis un'anteprima della sezione</a></p>}
   </div>
 
   <div class="riquadro-acquisto" style={`--accento: ${v.colore}`}>
     <p class="prezzo"><strong>{v.prezzo} €</strong> <span>una volta sola</span></p>
     {separato > v.prezzo && <p class="risparmio-video">Risparmi {separato - v.prezzo} € rispetto ai corsi comprati separatamente ({separato} €)</p>}
-    {materiale > 0 && <p class="risparmio-video">Con il materiale scritto del sito in omaggio</p>}
+    {materiale > 0 && <p class="risparmio-video">Con la teoria e gli esercizi del sito in omaggio</p>}
     <div id="azione"><p class="esito-modulo">Un momento…</p></div>
     <p class="nota-termini">Con l'acquisto accetti i <a href="/termini">termini d'uso</a>: l'accesso ai video e alle materie è personale e il materiale non può essere condiviso né diffuso.</p>
   </div>
