@@ -15,8 +15,8 @@ const nonTradotta = voci.some((v) => !v.tradotta);
 const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua);
 const base = `/${materia}/${argomento}`;
-// Domande a tempo (solo in italiano, per gli argomenti che ne hanno).
-const conDomande = lingua === 'it' && ((await catalogoDomande())[materia] ?? []).includes(argomento);
+// Domande a tempo, per gli argomenti che ne hanno.
+const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento);
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
@@ -39,9 +39,9 @@ const conDomande = lingua === 'it' && ((await catalogoDomande())[materia] ?? [])
   ))}
   {conDomande && (
     <section class="ingresso-domande">
-      <div class="ingresso-testa"><h2>Domande a tempo</h2><span>{arg.breve}</span></div>
-      <p>Domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.</p>
-      <p class="ingresso-azioni"><a class="bottone-primario" href={`${base}/domande`}>Inizia</a><span>Fino a 15 EXP per risposta corretta</span></p>
+      <div class="ingresso-testa"><h2>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</h2><span>{arg.breve}</span></div>
+      <p>{lingua === 'en' ? 'Multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.' : 'Domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.'}</p>
+      <p class="ingresso-azioni"><a class="bottone-primario" href={link(lingua, `${base}/domande`)}>{lingua === 'en' ? 'Start' : 'Inizia'}</a><span>{lingua === 'en' ? 'Up to 15 XP per correct answer' : 'Fino a 15 EXP per risposta corretta'}</span></p>
     </section>
   )}
 </Base>

@@ -56,7 +56,7 @@ const schema = [
       {domande.map(([d, r]) => (<><dt>{d}</dt><dd>{r}</dd></>))}
     </dl>
 
-    <p class="azione"><a class="bottone-whatsapp" href={WHATSAPP} rel="noopener">Scrivimi su WhatsApp</a></p>
+    <p class="azione"><a class="bottone-scrivimi" href={WHATSAPP} target="_blank" rel="noopener">Scrivimi su WhatsApp</a></p>
     <p class="altro">Chi sono, i risultati degli studenti e le università da cui provengono: <a href="/chi-sono">pagina Chi sono</a>.</p>
   </div>
 </Base>
@@ -66,7 +66,7 @@ const schema = [
   .domande dt { font-weight: 700; margin-top: 0.9rem; }
   .domande dd { margin: 0.2rem 0 0; }
   .azione { margin: 1.8rem 0 1rem; }
-  .bottone-whatsapp { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.2rem; border-radius: var(--raggio); background: var(--accento); color: white; text-decoration: none; }
-  .bottone-whatsapp:hover { filter: brightness(1.08); }
+  .bottone-scrivimi { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.2rem; border-radius: var(--raggio); background: var(--accento); color: white; text-decoration: none; }
+  .bottone-scrivimi:hover { filter: brightness(1.08); }
   .altro { font-family: var(--ui); font-size: 0.92rem; }
 </style>

@@ -717,15 +717,18 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 .video-punto { flex: none; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--video); color: #fff; font-size: 0.42rem; display: grid; place-items: center; padding-left: 0.08rem; box-sizing: border-box; }
 
 /* ---------- Livelli e punti esperienza ---------- */
-.livello-testata { position: relative; display: none; flex: none; }
-html.collegato .livello-testata { display: block; }
-.bottone-livello { display: inline-flex; align-items: center; gap: 0.4rem; height: 2.4rem; box-sizing: border-box; font: inherit; font-size: 0.95rem; font-weight: 600; color: var(--inchiostro); background: color-mix(in srgb, var(--verde) 8%, transparent); border: 1px solid color-mix(in srgb, var(--verde) 45%, transparent); border-radius: 999px; padding: 0.2rem 0.75rem 0.2rem 0.2rem; cursor: pointer; }
-.bottone-livello .anello { position: relative; width: 1.9rem; height: 1.9rem; display: inline-grid; place-items: center; }
-.bottone-livello .anello svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.account-testata { position: relative; display: flex; align-items: stretch; flex: none; }
+.bottone-livello { display: none; }
+html.collegato .account-testata { height: 2.4rem; box-sizing: border-box; border: 1px solid color-mix(in srgb, var(--verde) 45%, transparent); background: color-mix(in srgb, var(--verde) 8%, transparent); border-radius: 999px; }
+html.collegato .account-testata .bottone-account { border: 0; background: none; border-radius: 999px 0 0 999px; height: auto; }
+html.collegato .bottone-livello { display: inline-flex; flex-direction: column; justify-content: center; gap: 0.2rem; font: inherit; font-size: 0.8rem; font-weight: 600; color: var(--inchiostro); background: none; border: 0; border-left: 1px solid color-mix(in srgb, var(--verde) 45%, transparent); border-radius: 0 999px 999px 0; padding: 0 0.85rem 0 0.7rem; cursor: pointer; }
+.etichetta-livello { line-height: 1; white-space: nowrap; }
+.mini-barra { display: block; width: 2.6rem; height: 4px; border-radius: 2px; background: color-mix(in srgb, var(--verde) 18%, transparent); overflow: hidden; }
+.mini-barra > span { display: block; height: 100%; width: 0; border-radius: 2px; background: var(--verde); transition: width 0.6s ease; }
+@media (max-width: 30rem) { html.collegato .bottone-livello { padding: 0 0.6rem 0 0.5rem; } .mini-barra { width: 2rem; } }
+.elenco-domande { columns: 2 14rem; }
 .anello-fondo { fill: none; stroke: color-mix(in srgb, var(--verde) 18%, transparent); stroke-width: 3; }
 .anello-avanzamento { fill: none; stroke: var(--verde); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
-.numero-livello { position: relative; font-size: 0.72rem; font-weight: 700; }
-@media (max-width: 30rem) { .etichetta-livello { display: none; } .bottone-livello { padding: 0.2rem; } }
 .pannello-livello { position: absolute; right: 0; top: calc(100% + 0.5rem); width: 17.5rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; box-shadow: 0 10px 30px rgb(34 48 47 / 12%); padding: 0.9rem 1rem; z-index: 30; font-size: 0.92rem; }
 .pannello-livello p { margin: 0.4rem 0; }
 .pl-testa { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
@@ -830,4 +833,38 @@ html.collegato .livello-testata { display: block; }
 .fasce li { border: 1px solid var(--riga); border-radius: 8px; padding: 0.7rem 0.9rem; display: flex; flex-direction: column; gap: 0.1rem; }
 .fasce strong { font-family: var(--ui); }
 .fasce span { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
-@media print { .livello-testata, .avviso-premio { display: none !important; } }
+@media print { .bottone-livello, .pannello-livello, .avviso-premio { display: none !important; } }
+/* Riquadro alla fine dell'anteprima gratuita: teoria e schede svolte bloccate (scripts/vetrine.mjs) */
+.velo-blocco.fine-anteprima { text-align: left; padding: 1.2rem 1.1rem; }
+.fine-anteprima .velo-sopra { margin: 0 0 0.3rem; font-size: 0.78rem; letter-spacing: 0.07em; text-transform: uppercase; font-weight: 700; color: var(--accento); }
+.fine-anteprima .velo-titolo { margin: 0 0 0.6rem; font-family: var(--titoli); font-weight: 700; font-size: 1.2rem; line-height: 1.3; color: var(--inchiostro); }
+.velo-elenco { margin: 0 0 1rem; padding-left: 1.6rem; color: var(--inchiostro-2); }
+.velo-elenco li { margin: 0.2rem 0; }
+.fine-anteprima .bottone-sblocca { display: block; max-width: 24rem; text-align: center; margin: 0 auto 0.9rem; }
+.fine-anteprima .velo-gratis { margin: 0; font-size: 0.93rem; text-align: center; }
+.fine-anteprima .velo-gratis a { color: var(--accento); }
+.svolgimento-riservato { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); border-left: 3px solid var(--riga); padding: 0.3rem 0 0.3rem 0.8rem; margin: 0.6rem 0 1.6rem; }
+.velo-scheda::before { display: none; }
+/* Pagina Sblocca: iscrizione dentro il riquadro del prezzo */
+.gratis-ora { font-family: var(--ui); font-size: 0.92rem; color: var(--inchiostro-2); margin: 0.2rem 0 1rem; }
+.modulo.modulo-acquisto { margin: 0.4rem auto 0; max-width: 22rem; text-align: left; }
+.modulo.modulo-acquisto[hidden] { display: none; }
+.modulo-acquisto input:not([type="checkbox"]) { width: 100%; box-sizing: border-box; }
+.modulo-acquisto .campo-password input { width: 100%; }
+.modulo-acquisto .bottone-primario { width: 100%; }
+.modulo-acquisto .nota-accesso { text-align: center; margin: 0; }
+.modulo-acquisto .nota-privacy { margin: 0; font-size: 0.82rem; color: var(--inchiostro-2); text-align: center; }
+.modulo-acquisto .esito-modulo:empty { display: none; }
+.metodi-pagamento { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0.9rem 0 0; }
+/* Home: che cosa è gratis, conteggi delle materie, materie in preparazione, riga dei videocorsi */
+.gratis-home { display: flex; gap: 0.5rem; align-items: flex-start; font-family: var(--ui); font-size: 0.95rem; line-height: 1.5; color: var(--inchiostro-2); margin: 0.35rem 0 0; }
+.gratis-home svg { flex: none; width: 1.05rem; height: 1.05rem; margin-top: 0.2rem; color: var(--accento); }
+.conti-materia { display: block; font-family: var(--ui); font-size: 0.78rem; letter-spacing: 0.02em; color: var(--inchiostro-2); margin-top: 0.1rem; }
+.griglia-materie li.riga-preparazione { grid-column: 1 / -1; border: 0; background: none; box-shadow: none; font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); padding: 0 0.2rem; }
+.riga-videocorsi { display: flex; align-items: center; gap: 0.7rem; margin: 0 0 1.5rem; padding: 0.8rem 0.9rem; border-radius: var(--raggio); border: 1px solid color-mix(in srgb, var(--video) 25%, var(--riga)); background: color-mix(in srgb, var(--video) 6%, white); text-decoration: none; color: var(--inchiostro); font-family: var(--ui); }
+.riga-videocorsi .play { flex: none; width: 1.6rem; height: 1.6rem; }
+.riga-videocorsi .play svg { width: 1.6rem; height: 1.6rem; color: var(--video); display: block; }
+.riga-videocorsi b { display: block; color: var(--video); }
+.riga-videocorsi span span { display: block; font-size: 0.86rem; color: var(--inchiostro-2); line-height: 1.4; }
+.riga-videocorsi .freccia { margin-left: auto; color: var(--video); font-size: 1.2rem; }
+.riquadro-acquisto .mostra-password { font-size: inherit; background: none; color: var(--inchiostro-2); padding: 0.4rem; border-radius: 6px; }

@@ -9,6 +9,8 @@
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Archivio"] }],
   // Intelligenza artificiale di Cloudflare per l'assistente di studio (worker/assistente.mjs)
   "ai": { "binding": "AI" },
+  // Banco di prova di Pi ogni mattina alle 5:30 UTC (6:30 in inverno, 7:30 in estate), prima del ciclo di miglioramento delle 8:30
+  "triggers": { "crons": ["30 5 * * *"] },
   "vars": {
     // "0" = sito tutto aperto; qualsiasi altro valore = oscuramento attivo
     "VENDITA": "1",

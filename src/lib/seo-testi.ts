@@ -3,8 +3,8 @@
 import type { Lingua } from '../i18n';
 
 const IT = {
-  home: 'Analisi 1 e Analisi 2: teoria ed esercizi svolti | Ripetizioni di Analisi',
-  homeDescr: "Teoria, definizioni, teoremi con dimostrazione ed esercizi svolti passo dopo passo di Analisi matematica 1, Analisi matematica 2 e Precorso, per preparare l'esame all'università.",
+  home: 'Teoria ed esercizi svolti per le materie scientifiche | Ripetizioni di Analisi',
+  homeDescr: "Teoria, teoremi con dimostrazione ed esercizi svolti passo dopo passo di Precorso, Analisi 1 e 2, Algebra lineare, Fisica 1 e 2, Matematica generale, Matematica del 5° anno e materie per i concorsi.",
   materia: (m: string) => `${m}: teoria ed esercizi svolti per l'esame | Ripetizioni di Analisi`,
   materiaDescr: (m: string, d: string, n: number) => `${m}: ${n} argomenti con teoria, dimostrazioni, esercizi svolti passo dopo passo ed esercizi con soluzione. ${d}`,
   teoria: (a: string, m: string) => `${a}: teoria, definizioni e teoremi | ${m}`,

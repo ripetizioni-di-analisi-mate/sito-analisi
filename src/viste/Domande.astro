@@ -2,33 +2,63 @@
 // Domande a tempo di un argomento: una alla volta, due minuti ciascuna, spiegazione subito dopo la conferma.
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
-import { argomentoL, materiaL, link } from '../i18n';
-interface Props { materia: string; argomento: string; totale: number }
-const { materia, argomento, totale } = Astro.props;
-const arg = argomentoL('it', materia, argomento);
-const m = materiaL('it', materia);
+import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
+const { lingua, materia, argomento, totale } = Astro.props;
+const arg = argomentoL(lingua, materia, argomento);
+const m = materiaL(lingua, materia);
 const base = `/${materia}/${argomento}`;
+const pref = prefisso(lingua);
+const en = lingua === 'en';
+const T = en ? {
+  titolo: 'Timed questions', descr: `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
+  termina: 'End the session', sommario: `${totale} multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.`,
+  ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
+  caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic',
+} : {
+  titolo: 'Domande a tempo', descr: `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
+  termina: 'Termina la sessione', sommario: `${totale} domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
+  ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
+  caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento',
+};
+// Testi usati dallo script nel browser.
+const JS = en ? {
+  caricamento: T.caricamento, errore: 'The questions did not load. Reload the page.', bonus: 'Speed bonus for another § seconds',
+  giusta: 'Correct answer', scaduto: 'Time is up. The correct answer is §', corretta: 'The correct answer is §',
+  veloce: ' (with speed bonus)', ripetuta: ', half points because already answered correctly this week',
+  presto: ', but given in less than 10 seconds: no points', tardi: ', but after the time limit: no points', nonArrivata: 'The answer did not arrive. Reload the page.',
+  spiegazione: 'Explanation', conclusa: 'Study session completed', minuto: '1 minute of active study', minuti: '§ minutes of active study', sessioneConclusa: 'Session completed',
+  unaCorretta: '1 correct answer', piuCorrette: '§ correct answers', su: 'out of', righeCorrette: 'Correct answers', righeStudio: 'Active study', totale: 'Total',
+  livello: 'Level', massimo: 'Maximum level', alLivello: 'to level', obiettivi: 'Weekly goals', completato: 'Completed', tornaEsercizi: 'Back to the exercises', percorso: 'Your progress',
+} : {
+  caricamento: T.caricamento, errore: 'Le domande non si sono caricate. Ricarica la pagina.', bonus: 'Bonus velocità ancora per § secondi',
+  giusta: 'Risposta corretta', scaduto: 'Tempo scaduto. La risposta corretta è la §', corretta: 'La risposta corretta è la §',
+  veloce: ' (con bonus velocità)', ripetuta: ', metà punti perché già indovinata questa settimana',
+  presto: ', ma data in meno di 10 secondi: nessun punto', tardi: ', ma oltre il tempo: nessun punto', nonArrivata: 'La risposta non è arrivata. Ricarica la pagina.',
+  spiegazione: 'Spiegazione', conclusa: 'Sessione di studio conclusa', minuto: '1 minuto di studio attivo', minuti: '§ minuti di studio attivo', sessioneConclusa: 'Sessione conclusa',
+  unaCorretta: '1 risposta corretta', piuCorrette: '§ risposte corrette', su: 'su', righeCorrette: 'Risposte corrette', righeStudio: 'Studio attivo', totale: 'Totale',
+  livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', percorso: 'Il tuo percorso',
+};
 ---
 <Base
-  titolo={`${arg.titolo} · Domande a tempo`}
-  descrizione={`Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`}
-  seo={{ soloQuestaLingua: true }}
-  percorso={[{ titolo: arg.breve, href: link('it', `${base}/teoria`) }, { titolo: 'Domande a tempo' }]}
-  materia={materia} argomento={argomento} sezione="domande"
+  titolo={`${arg.titolo} · ${T.titolo}`}
+  descrizione={T.descr}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
+  materia={materia} argomento={argomento} sezione="domande" lingua={lingua}
 >
-  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo}>
+  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)}>
     <div class="domande-testa">
       <div>
-        <p class="sopratitolo">Domande a tempo</p>
+        <p class="sopratitolo">{T.titolo}</p>
         <h1>{arg.titolo}</h1>
       </div>
-      <button type="button" class="bottone-secondario termina" hidden>Termina la sessione</button>
+      <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
-    <p class="sommario">{totale} domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.</p>
+    <p class="sommario">{T.sommario}</p>
 
     <div class="nota-ospite" hidden>
-      <p>Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.</p>
-      <p class="azioni"><a class="bottone-secondario" href={`/accedi?dopo=${base}/domande`}>Crea un account o accedi</a></p>
+      <p>{T.ospite}</p>
+      <p class="azioni"><a class="bottone-secondario" href={`${pref}/accedi?dopo=${pref}${base}/domande`}>{T.accedi}</a></p>
     </div>
 
     <section class="scheda-domanda" aria-live="polite">
@@ -38,14 +68,14 @@ const base = `/${materia}/${argomento}`;
         <span class="secondi">2:00</span>
       </div>
       <p class="nota-tempo" hidden></p>
-      <div class="testo-domanda testo-studio"><p class="caricamento">Caricamento della domanda…</p></div>
-      <div class="scelte" role="radiogroup" aria-label="Risposte"></div>
+      <div class="testo-domanda testo-studio"><p class="caricamento">{T.caricamento}</p></div>
+      <div class="scelte" role="radiogroup" aria-label={T.risposte}></div>
       <p class="esito" hidden></p>
       <div class="spiegazione testo-studio" hidden></div>
       <div class="azioni-domanda">
-        <button type="button" class="bottone-primario conferma" disabled hidden>Conferma la risposta</button>
-        <button type="button" class="bottone-primario prossima" hidden>Domanda successiva</button>
-        <a class="link-svolti" href={link('it', `${base}/esercizi-svolti`)} hidden>Esercizi svolti di questo argomento</a>
+        <button type="button" class="bottone-primario conferma" disabled hidden>{T.conferma}</button>
+        <button type="button" class="bottone-primario prossima" hidden>{T.prossima}</button>
+        <a class="link-svolti" href={link(lingua, `${base}/esercizi-svolti`)} hidden>{T.svolti}</a>
       </div>
     </section>
 
@@ -55,7 +85,9 @@ const base = `/${materia}/${argomento}`;
 
 <script>
   const radice = document.querySelector<HTMLElement>('.domande')!;
-  const { materia, argomento, titolo } = radice.dataset as { materia: string; argomento: string; titolo: string };
+  const { materia, argomento, titolo, lingua, pref } = radice.dataset as { materia: string; argomento: string; titolo: string; lingua: string; pref: string };
+  const L = JSON.parse(radice.dataset.testi || '{}') as Record<string, string>;
+  const f = (k: string, x: string | number) => L[k].replace('§', String(x));
   const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
   const testo = $('.testo-domanda'), scelte = $('.scelte'), esito = $('.esito'), spieg = $('.spiegazione');
   const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), svolti = $('.link-svolti');
@@ -69,7 +101,7 @@ const base = `/${materia}/${argomento}`;
   let scelta = 0, inizio = 0, timer = 0, chiusa = false;
   const post = (url: string, dati: unknown) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
   const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-  const num = (x: number) => x.toLocaleString('it-IT');
+  const num = (x: number) => x.toLocaleString(lingua === 'en' ? 'en-US' : 'it-IT');
   const adatta = () => dispatchEvent(new Event('resize')); // le formule in display si adattano alla larghezza
 
   function aggiornaTempo() {
@@ -79,7 +111,7 @@ const base = `/${materia}/${argomento}`;
     barra.style.width = `${(resto / (corrente?.secondi || 120)) * 100}%`;
     const bonus = 60 - passati;
     notaTempo.hidden = !corrente?.collegato || bonus <= 0;
-    notaTempo.textContent = bonus > 0 ? `Bonus velocità ancora per ${bonus} secondi` : '';
+    notaTempo.textContent = bonus > 0 ? f('bonus', bonus) : '';
     if (resto === 0 && !chiusa) invia(true);
   }
 
@@ -88,10 +120,10 @@ const base = `/${materia}/${argomento}`;
     esito.hidden = true; spieg.hidden = true; prossima.hidden = true; svolti.hidden = true;
     conferma.hidden = false; conferma.disabled = true;
     scelte.innerHTML = '';
-    testo.innerHTML = '<p class="caricamento">Caricamento della domanda…</p>';
-    const r = await post('/api/domande/prossima', { materia, argomento, viste }).catch(() => null);
+    testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
+    const r = await post('/api/domande/prossima', { materia, argomento, viste, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
-    if (!d) { testo.innerHTML = '<p>Le domande non si sono caricate. Ricarica la pagina.</p>'; conferma.hidden = true; return; }
+    if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; conferma.hidden = true; return; }
     corrente = d;
     (radice.querySelector('.nota-ospite') as HTMLElement).hidden = d.collegato;
     termina.hidden = !d.collegato;
@@ -125,20 +157,20 @@ const base = `/${materia}/${argomento}`;
     conferma.hidden = true; notaTempo.hidden = true;
     const r = await post('/api/domande/rispondi', { token: corrente.token, scelta: scaduto ? 0 : scelta }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
-    if (!d) { esito.hidden = false; esito.textContent = 'La risposta non è arrivata. Ricarica la pagina.'; return; }
+    if (!d) { esito.hidden = false; esito.textContent = L.nonArrivata; return; }
     scelte.querySelectorAll<HTMLElement>('.scelta').forEach((b, j) => {
       b.classList.add('scelta-chiusa');
       if (j + 1 === d.corretta) b.classList.add('scelta-giusta');
       else if (j + 1 === scelta) b.classList.add('scelta-sbagliata');
     });
-    let frase = d.giusta ? 'Risposta corretta' : scaduto ? `Tempo scaduto. La risposta corretta è la ${LETTERE[d.corretta - 1]}` : `La risposta corretta è la ${LETTERE[d.corretta - 1]}`;
-    if (d.punti > 0) frase += ` · +${d.punti} EXP` + (d.veloce ? ' (con bonus velocità)' : '') + (d.motivo === 'ripetuta' ? ', metà punti perché già indovinata questa settimana' : '');
-    else if (d.giusta && d.motivo === 'troppo-presto') frase += ', ma data in meno di 10 secondi: nessun punto';
-    else if (d.giusta && d.motivo === 'tempo-scaduto') frase += ', ma oltre il tempo: nessun punto';
+    let frase = d.giusta ? L.giusta : f(scaduto ? 'scaduto' : 'corretta', LETTERE[d.corretta - 1]);
+    if (d.punti > 0) frase += ` · +${d.punti} EXP` + (d.veloce ? L.veloce : '') + (d.motivo === 'ripetuta' ? L.ripetuta : '');
+    else if (d.giusta && d.motivo === 'troppo-presto') frase += L.presto;
+    else if (d.giusta && d.motivo === 'tempo-scaduto') frase += L.tardi;
     esito.textContent = `${frase}.`;
     esito.className = `esito ${d.giusta ? 'esito-giusto' : 'esito-sbagliato'}`;
     esito.hidden = false;
-    spieg.innerHTML = `<h2>Spiegazione</h2>${d.spiegazione}`;
+    spieg.innerHTML = `<h2>${L.spiegazione}</h2>${d.spiegazione}`;
     spieg.hidden = false;
     prossima.hidden = false; svolti.hidden = false;
     adatta();
@@ -151,28 +183,28 @@ const base = `/${materia}/${argomento}`;
 
   termina.addEventListener('click', async () => {
     clearInterval(timer);
-    const r = await post('/api/sessione/riepilogo', { chiudi: true }).catch(() => null);
+    const r = await post('/api/sessione/riepilogo', { chiudi: true, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     scheda.hidden = true; termina.hidden = true;
     const s = d?.sessione;
     const st = d?.stato;
     const righe = s ? [
-      [`Risposte corrette (${s.corrette})`, s.puntiCorrette],
-      [`Studio attivo (${s.minuti} min)`, s.puntiStudio],
+      [`${L.righeCorrette} (${s.corrette})`, s.puntiCorrette],
+      [`${L.righeStudio} (${s.minuti} min)`, s.puntiStudio],
       ...s.premi.map((p: { nome: string; punti: number }) => [p.nome, p.punti]),
     ] : [];
     const obiettivi = (d?.obiettivi || []).map((o: { testo: string; fatto: number; totale: number; completato: boolean }) =>
-      `<li><span>${o.testo}</span><span>${o.completato ? 'Completato' : `${o.fatto} / ${o.totale}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
+      `<li><span>${o.testo}</span><span>${o.completato ? L.completato : `${o.fatto} / ${o.totale}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
     riepilogo.innerHTML = `
-      <p class="sopratitolo">Sessione di studio conclusa · ${s?.titolo || titolo}</p>
-      <h2>${s ? (s.minuti === 1 ? '1 minuto di studio attivo' : `${s.minuti} minuti di studio attivo`) : 'Sessione conclusa'}</h2>
-      ${s ? `<p>${s.corrette === 1 ? '1 risposta corretta' : `${s.corrette} risposte corrette`} su ${s.risposte}</p>` : ''}
-      ${righe.length ? `<dl class="conti-exp">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>+${v}</dd></div>`).join('')}<div class="totale"><dt>Totale</dt><dd>+${s.punti} EXP</dd></div></dl>` : ''}
-      ${st ? `<p class="riep-livello"><strong>Livello ${st.livello} · ${st.fascia}</strong></p>
+      <p class="sopratitolo">${L.conclusa} · ${s?.titolo || titolo}</p>
+      <h2>${s ? (s.minuti === 1 ? L.minuto : f('minuti', s.minuti)) : L.sessioneConclusa}</h2>
+      ${s ? `<p>${s.corrette === 1 ? L.unaCorretta : f('piuCorrette', s.corrette)} ${L.su} ${s.risposte}</p>` : ''}
+      ${righe.length ? `<dl class="conti-exp">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>+${v}</dd></div>`).join('')}<div class="totale"><dt>${L.totale}</dt><dd>+${s.punti} EXP</dd></div></dl>` : ''}
+      ${st ? `<p class="riep-livello"><strong>${L.livello} ${st.livello} · ${st.fascia}</strong></p>
         <div class="barra-exp grande"><span style="width:${st.perc}%"></span></div>
-        <p class="riep-numeri"><span>${num(st.exp)} EXP</span><span>${st.prossimo === null ? 'Livello massimo' : `${num(st.mancano)} al livello ${st.livello + 1}`}</span></p>` : ''}
-      ${obiettivi ? `<h3>Obiettivi della settimana</h3><ul class="obiettivi">${obiettivi}</ul>` : ''}
-      <p class="azioni-riepilogo"><a class="bottone-primario" href="/${materia}/${argomento}/esercizi">Torna agli esercizi</a> <a class="bottone-secondario" href="/account#percorso">Il tuo percorso</a></p>`;
+        <p class="riep-numeri"><span>${num(st.exp)} EXP</span><span>${st.prossimo === null ? L.massimo : `${num(st.mancano)} ${L.alLivello} ${st.livello + 1}`}</span></p>` : ''}
+      ${obiettivi ? `<h3>${L.obiettivi}</h3><ul class="obiettivi">${obiettivi}</ul>` : ''}
+      <p class="azioni-riepilogo"><a class="bottone-primario" href="${pref}/${materia}/${argomento}/esercizi">${L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
     riepilogo.hidden = false;
     riepilogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });

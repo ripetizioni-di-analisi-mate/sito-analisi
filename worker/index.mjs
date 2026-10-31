@@ -9,8 +9,10 @@ import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
+import { eseguiBanco, paginaProve } from './pi-prove.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI } from '../src/data/livelli.ts';
+import { nomeDallEmail } from './nomi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
@@ -107,6 +109,9 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS abilitazioni (email TEXT, materia TEXT, origine TEXT, creato TEXT, PRIMARY KEY (email, materia));
       CREATE TABLE IF NOT EXISTS dispositivi (email TEXT, id TEXT, nome TEXT, creato TEXT, ultimo_uso INTEGER, PRIMARY KEY (email, id));
       CREATE TABLE IF NOT EXISTS assistente (giorno TEXT, email TEXT, n INTEGER, PRIMARY KEY (giorno, email));
+      -- ciclo di miglioramento di Pi: contatori anonimi (risposte, riserve, errori, limiti) e risposte del banco di prova
+      CREATE TABLE IF NOT EXISTS pi_eventi (giorno TEXT, evento TEXT, n INTEGER, PRIMARY KEY (giorno, evento));
+      CREATE TABLE IF NOT EXISTS pi_prove (giorno TEXT, id TEXT, area TEXT, domanda TEXT, risposta TEXT, modello TEXT, ms INTEGER, stato INTEGER, PRIMARY KEY (giorno, id));
     `);
     // colonne aggiunte dopo: il nome dello studente
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
@@ -223,6 +228,29 @@ export class Archivio {
         this.sql.exec('UPDATE assistente SET n = MAX(n - 1, 0) WHERE giorno = ? AND email = ?', c.giorno, c.email);
         return Response.json({ ok: true });
 
+      case '/pi-evento':
+        this.sql.exec(`INSERT INTO pi_eventi (giorno, evento, n) VALUES (?, ?, 1)
+                       ON CONFLICT(giorno, evento) DO UPDATE SET n = n + 1`, c.giorno, String(c.evento).slice(0, 60));
+        return Response.json({ ok: true });
+      case '/pi-prove-salva':
+        for (const r of c.righe || []) {
+          this.sql.exec('INSERT OR REPLACE INTO pi_prove (giorno, id, area, domanda, risposta, modello, ms, stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            c.giorno, r.id, r.area, r.domanda, r.risposta, r.modello, r.ms, r.stato);
+        }
+        this.sql.exec("DELETE FROM pi_prove WHERE giorno < date('now', '-60 days')");
+        return Response.json({ ok: true });
+      case '/pi-prove-leggi': {
+        const giorni = this.righe('SELECT DISTINCT giorno FROM pi_prove ORDER BY giorno DESC LIMIT 30').map((r) => r.giorno);
+        const g = c.giorno || giorni[0] || null;
+        return Response.json({
+          giorno: g, giorni,
+          prove: g ? this.righe('SELECT id, area, domanda, risposta, modello, ms, stato FROM pi_prove WHERE giorno = ? ORDER BY id', g) : [],
+          eventi: this.righe("SELECT giorno, evento, n FROM pi_eventi WHERE giorno >= date('now', '-14 days') ORDER BY giorno DESC, evento"),
+          uso: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS persone, SUM(COALESCE(tin, 0)) AS tin, SUM(COALESCE(tout, 0)) AS tout
+                           FROM assistente WHERE giorno >= date('now', '-14 days') GROUP BY giorno ORDER BY giorno DESC`),
+        });
+      }
+
       case '/revoca':
         this.sql.exec('DELETE FROM abilitazioni WHERE email = ? AND materia = ?', c.email, c.materia);
         return Response.json({ ok: true });
@@ -319,21 +347,28 @@ async function utenteCollegato(env, req) {
 
 // Nome mostrato in testata: quello scelto dallo studente, altrimenti la parte dell'email prima della @.
 const pulisciNome = (n) => String(n || '').replace(/[<>"\u0000-\u001f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40);
-const nomeVisibile = (io) => (io.nome || io.email.split('@')[0]).trim();
+// Solo il nome (la prima parola), con l'iniziale maiuscola. Se lo studente non l'ha scritto
+// si ricava dall'email (worker/nomi.mjs); se nemmeno lì si trova, si legge «Account».
+const nomeVisibile = (io) => {
+  const n = String(io.nome || '').trim().split(/\s+/)[0] || '';
+  return n ? n[0].toUpperCase() + n.slice(1) : (nomeDallEmail(io.email) || 'Account');
+};
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
 // ---------- domande a tempo ----------
 // I dati (testo, risposte, posizione della corretta, spiegazione) sono file statici generati alla build
 // in /dati-domande/, letti solo qui dentro: dal browser quell'indirizzo non è raggiungibile.
 const cacheDomande = {};
-async function domandeDi(env, materia) {
+const linguaDi = (x) => (x === 'en' ? 'en' : 'it');
+async function domandeDi(env, materia, lingua = 'it') {
   if (!/^[a-z0-9-]+$/.test(materia || '')) return null;
-  if (!cacheDomande[materia]) {
-    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${materia}.json`));
-    if (!r.ok) return null;
-    cacheDomande[materia] = await r.json();
+  const chiave = `${lingua}/${materia}`;
+  if (!cacheDomande[chiave]) {
+    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${lingua === 'en' ? 'en/' : ''}${materia}.json`));
+    if (!r.ok) return lingua === 'en' ? domandeDi(env, materia, 'it') : null;
+    cacheDomande[chiave] = await r.json();
   }
-  return cacheDomande[materia];
+  return cacheDomande[chiave];
 }
 let cacheCatalogo = null; // { materia: [argomenti con domande] }
 async function catalogoDomande(env) {
@@ -383,6 +418,10 @@ async function verificaPaddle(req, corpo, segreto) {
 
 // ---------- worker ----------
 export default {
+  // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
+  async scheduled(evento, env, ctx) {
+    ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
+  },
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
@@ -434,30 +473,31 @@ export default {
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      const { materia, argomento } = await req.json().catch(() => ({}));
+      const { materia, argomento, lingua } = await req.json().catch(() => ({}));
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
-      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
-      const { materia, argomento, viste } = await req.json().catch(() => ({}));
-      const dati = await domandeDi(env, materia);
+      const { materia, argomento, viste, lingua } = await req.json().catch(() => ({}));
+      const l = linguaDi(lingua);
+      const dati = await domandeDi(env, materia, l);
       const elenco = dati?.argomenti?.[argomento];
-      if (!elenco?.length) return json({ errore: 'Nessuna domanda per questo argomento.' }, 404);
+      if (!elenco?.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       const giaViste = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
       let scelta = elenco.filter((q) => !giaViste.has(q.id));
       if (!scelta.length) scelta = elenco.filter((q) => q.id !== [...giaViste].pop());
       const q = scelta[Math.floor(Math.random() * scelta.length)];
       const io = await utenteCollegato(env, req).catch(() => null);
-      const token = await firmaToken(env, { q: q.id, m: materia, t: Date.now(), e: io?.email || null });
+      const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
       return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
     }
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
-      const dati = tok ? await domandeDi(env, tok.m) : null;
+      const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
-      if (!q) return json({ errore: 'Domanda scaduta: ricarica la pagina.' }, 400);
+      if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
@@ -465,20 +505,20 @@ export default {
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
-        corretta: giusta, secondi, catalogo: await catalogoDomande(env),
+        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoDomande(env),
       });
       return json({ ...base, ...r });
     }
     if (p === '/api/sessione/riepilogo' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      const { chiudi } = await req.json().catch(() => ({}));
-      return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi) }));
+      const { chiudi, lingua } = await req.json().catch(() => ({}));
+      return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi), lingua: linguaDi(lingua) }));
     }
     if (p === '/api/percorso') {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json(await aDO(env, '/liv-percorso', { email: io.email, catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaDi(url.searchParams.get('l')), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
       const io = await utenteCollegato(env, req);
@@ -528,6 +568,9 @@ export default {
       const io = await utenteCollegato(env, req).catch(() => null);
       return rispondiAssistente(req, env, io, aDO, A_PAGAMENTO, PREZZI);
     }
+
+    // Banco di prova di Pi (ciclo di miglioramento): risposte alle domande di prova e contatori anonimi.
+    if ((p === '/pi/prove' || p.startsWith('/pi/prove/')) && req.method === 'GET') return paginaProve(url, env, aDO);
 
     // ===== webhook Paddle =====
     if (p === '/api/paddle/webhook' && POST) {
@@ -634,8 +677,11 @@ export default {
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       if (!sbloccataQui) {
-        if (info.tipo === 'pdf' || info.tipo === 'stampa' || (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE)) {
+        if (info.tipo === 'pdf' || info.tipo === 'stampa') {
           risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
+        } else if (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE) {
+          // scheda bloccata: vetrina con titolo e tracce, svolgimenti tolti (scripts/vetrine.mjs)
+          risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi-svolti/${info.n}`);
         } else if (info.tipo === 'teoria') {
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/teoria`);
         } else if (info.tipo === 'esercizi') {
@@ -669,22 +715,23 @@ export default {
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       const nome = nomeVisibile(io);
+      const en = /^\/en(\/|$)/.test(url.pathname);
+      const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
       risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
       }).on('.bottone-account .iniziale', {
-        element(e) { e.setInnerContent([...nome][0]?.toUpperCase() || '·'); },
+        element(e) { e.setInnerContent([...(nome !== 'Account' ? nome : io.email)][0]?.toUpperCase() || '·'); },
       }).on('.bottone-account', {
-        element(e) { e.setAttribute('aria-label', `Account di ${nome}`); },
+        element(e) { const conNome = nome !== 'Account'; e.setAttribute('aria-label', en ? (conNome ? `${nome}'s account` : 'Your account') : (conNome ? `Account di ${nome}` : 'Il tuo account')); },
       }).on('.bottone-livello', {
         element(e) {
-          const st = livelloDa(io.exp || 0);
-          e.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
+          e.setAttribute('aria-label', en ? `Level ${st.livello}, ${st.fascia}: open your progress` : `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
           e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
         },
       }).on('.bottone-livello .numero-livello', {
-        element(e) { e.setInnerContent(String(livelloDa(io.exp || 0).livello)); },
-      }).on('.bottone-livello .anello-avanzamento', {
-        element(e) { e.setAttribute('stroke-dashoffset', (75.4 * (1 - livelloDa(io.exp || 0).perc / 100)).toFixed(1)); },
+        element(e) { e.setInnerContent(String(st.livello)); },
+      }).on('.bottone-livello .mini-barra > span', {
+        element(e) { e.setAttribute('style', `width:${st.perc}%`); },
       }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();

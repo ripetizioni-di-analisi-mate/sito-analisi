@@ -1,6 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
+import CampoCorso from '../components/CampoCorso.astro';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
@@ -13,6 +16,9 @@ const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const localePaddle = lingua;
 const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(materia)) : [];
+// Il PDF si nomina solo nelle materie che lo hanno (public/pdf/<materia>/).
+// (percorso dalla radice del progetto: dentro la build import.meta.url punta ai file compilati)
+const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
   <p class="sopratitolo">{m.titolo}</p>
@@ -22,13 +28,28 @@ const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(mate
     <li set:html={t.includeTeoria(m.argomenti.length)} />
     <li set:html={t.includeSvolti(svolti)} />
     <li set:html={t.includeSoluzioni(dafare)} />
+    {pdf && <li set:html={t.includePdf} />}
   </ul>
+  <p class="gratis-ora">{t.gratisOra}</p>
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
     <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>
+    <form class="modulo modulo-acquisto" id="modulo-acquisto" novalidate hidden>
+      <label>{t.nome}<input type="text" name="nome" autocomplete="given-name" maxlength="40" /></label>
+      <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+      <label>Password<span class="campo-password"><input type="password" name="password" autocomplete="new-password" required minlength="8" placeholder={t.almenoOtto} /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+      {lingua === 'it' && <CampoCorso />}
+      <p class="esito-modulo" id="esito-acquisto" role="status"></p>
+      <button class="bottone-primario" type="submit" id="invia-acquisto">{js.creaEPaga}</button>
+      <p class="nota-accesso">{js.haiAccount} <a id="link-accedi" href={`${pref}/accedi`}>{js.accedi}</a></p>
+      <p class="nota-privacy">{lingua === 'it'
+        ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
+        : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
+    </form>
+    <p class="metodi-pagamento">{t.metodiPagamento}</p>
     <p class="nota-termini" set:html={t.notaTermini} />
   </div>
 
@@ -36,57 +57,123 @@ const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(mate
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
+      const modulo = document.getElementById('modulo-acquisto');
       const qui = location.pathname;
       const [rIo, rConf] = await Promise.all([fetch('/api/io').catch(() => null), fetch('/api/config').catch(() => null)]);
-      const io = rIo && rIo.ok ? await rIo.json() : null;
+      let io = rIo && rIo.ok ? await rIo.json() : null;
       const conf = rConf && rConf.ok ? (await rConf.json()).paddle : null;
 
-      if (!io) {
-        azione.innerHTML = `<a class="bottone-primario" href="${pref}/accedi?nuovo=1&dopo=${encodeURIComponent(qui)}">${js.creaESblocca}</a>
-          <p class="nota-accesso">${js.haiAccount} <a href="${pref}/accedi?dopo=${encodeURIComponent(qui)}">${js.accedi}</a></p>`;
-        return;
-      }
-      if (io.materie.includes(materia)) {
-        azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
-        return;
-      }
-      if (!conf || !conf.prezzi[materia]) {
-        azione.innerHTML = `<p>${f(js.pagamentiInArrivo, io.email)}</p>`;
-        return;
-      }
-      azione.innerHTML = `<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
-        <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
-      const s = document.createElement('script');
-      s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
-      s.onload = () => {
-        if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
-        Paddle.Initialize({
-          token: conf.token,
-          eventCallback: (ev) => {
-            if (ev.name !== 'checkout.completed') return;
-            azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
-            let tentativi = 0;
-            const controlla = async () => {
-              const r = await fetch('/api/io').catch(() => null);
-              const d = r && r.ok ? await r.json() : null;
-              if (d && d.materie.includes(materia)) { location.href = `${pref}/${materia}`; return; }
-              if (++tentativi < 30) setTimeout(controlla, 2000);
-              else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
-            };
-            controlla();
-          },
-        });
-        document.getElementById('compra').addEventListener('click', () => {
-          Paddle.Checkout.open({
-            items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
-            customer: { email: io.email },
-            customData: { materia, email: io.email },
-            settings: { locale: localePaddle },
+      // Paddle si carica una volta sola, quando serve.
+      let paddlePronto = null;
+      const caricaPaddle = () => paddlePronto || (paddlePronto = new Promise((ok, no) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+        s.onload = () => {
+          if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
+          Paddle.Initialize({
+            token: conf.token,
+            eventCallback: (ev) => {
+              if (ev.name !== 'checkout.completed') return;
+              azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
+              let tentativi = 0;
+              const controlla = async () => {
+                const r = await fetch('/api/io').catch(() => null);
+                const d = r && r.ok ? await r.json() : null;
+                if (d && d.materie.includes(materia)) { location.href = `${pref}/${materia}`; return; }
+                if (++tentativi < 30) setTimeout(controlla, 2000);
+                else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
+              };
+              controlla();
+            },
           });
+          ok();
+        };
+        s.onerror = () => { paddlePronto = null; no(); };
+        document.head.appendChild(s);
+      }));
+      const paga = async () => {
+        try { await caricaPaddle(); } catch { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; return; }
+        Paddle.Checkout.open({
+          items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
+          customer: { email: io.email },
+          customData: { materia, email: io.email },
+          settings: { locale: localePaddle },
         });
       };
-      s.onerror = () => { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; };
-      document.head.appendChild(s);
+
+      // Stato per chi ha già un account: materia già sbloccata, pagamento non attivo, tasto di acquisto.
+      const mostraAccount = (premessa = '') => {
+        modulo.hidden = true;
+        azione.hidden = false;
+        if (io.materie.includes(materia)) {
+          azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
+          return false;
+        }
+        if (!conf || !conf.prezzi[materia]) {
+          azione.innerHTML = `${premessa}<p>${f(js.pagamentiInArrivo, io.email)}</p>`;
+          return false;
+        }
+        azione.innerHTML = `${premessa}<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
+          <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
+        document.getElementById('compra').addEventListener('click', paga);
+        caricaPaddle().catch(() => {});
+        return true;
+      };
+      if (io) { mostraAccount(); return; }
+
+      // Ospite: iscrizione dentro il riquadro del prezzo; dopo l'iscrizione si apre subito il pagamento.
+      azione.hidden = true;
+      modulo.hidden = false;
+      document.getElementById('link-accedi').href = `${pref}/accedi?dopo=${encodeURIComponent(qui)}`;
+      const esito = document.getElementById('esito-acquisto');
+      const invia = document.getElementById('invia-acquisto');
+      const excorso = document.getElementById('excorso');
+      const preregistrato = document.getElementById('preregistrato');
+      const exStudente = () => Boolean((excorso && excorso.checked) || (preregistrato && preregistrato.checked));
+      const aggiornaCorso = () => {
+        document.getElementById('dettagli-corso').hidden = !excorso.checked;
+        document.getElementById('dettagli-preregistrato').hidden = !preregistrato.checked;
+        document.getElementById('nota-corso').hidden = !exStudente();
+        invia.textContent = exStudente() ? js.creaAccount : js.creaEPaga;
+      };
+      if (excorso) { excorso.addEventListener('change', aggiornaCorso); preregistrato.addEventListener('change', aggiornaCorso); }
+      const scelti = (nome) => [...modulo.querySelectorAll(`input[name="${nome}"]:checked`)].map((x) => x.value).join(', ');
+      const corsoSeguito = () => {
+        if (!excorso) return '';
+        const parti = [];
+        if (excorso.checked) parti.push('Corso dal vivo: ' + [scelti('corso'), modulo.corsonote.value.trim()].filter(Boolean).join(' · '));
+        if (preregistrato.checked) parti.push('Preregistrato: ' + scelti('corsopre'));
+        return parti.join('; ');
+      };
+      if (conf && conf.prezzi[materia]) caricaPaddle().catch(() => {});
+
+      modulo.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = modulo.email.value.trim().toLowerCase();
+        const password = modulo.password.value;
+        const errore = (t) => { esito.textContent = t; esito.className = 'esito-modulo errore'; };
+        if (!modulo.nome.value.trim()) return errore(js.nomeMancante);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errore(js.emailNonValida);
+        if (password.length < 8) return errore(js.passwordCorta);
+        if (excorso && excorso.checked && !modulo.querySelector('input[name="corso"]:checked') && !modulo.corsonote.value.trim()) return errore('Indica quale corso, oppure togli la spunta.');
+        if (preregistrato && preregistrato.checked && !scelti('corsopre')) return errore('Indica quale corso preregistrato hai acquistato, oppure togli la spunta.');
+        invia.disabled = true; esito.textContent = '…'; esito.className = 'esito-modulo';
+        try {
+          const r = await fetch('/api/registrati', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: corsoSeguito(), lingua: pref ? 'en' : 'it' }),
+          });
+          const d = await r.json().catch(() => ({}));
+          if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }
+          const rNuovo = await fetch('/api/io').catch(() => null);
+          io = rNuovo && rNuovo.ok ? await rNuovo.json() : null;
+          if (!io) { location.reload(); return; }
+          if (exStudente()) { mostraAccount(`<p class="stato-ok">${js.accountCreatoEx}</p>`); return; }
+          if (mostraAccount(`<p class="esito-modulo">${js.aperturaPagamento}</p>`)) paga();
+        } catch {
+          invia.disabled = false; errore(js.connessione);
+        }
+      });
     })();
   </script>
 </Base>

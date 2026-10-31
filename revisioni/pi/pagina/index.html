@@ -1,0 +1,228 @@
+<meta charset="utf-8">
+<title>Miglioramenti di Pi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<style>
+/* Layout: colonna di lettura; in alto il diagramma del giorno (problemi → interventi → per lo studente → verifica), poi la ruota delle aree e l'andamento. Colori e caratteri del sito ripetizionidianalisi.com. */
+:root {
+  --carta: #faf8f2; --foglio: #ffffff; --inchiostro: #22302f; --tenue: #5d6b69; --riga: #e3ded2;
+  --verde: #2f6f68; --verde-chiaro: #e3efec; --sabbia: #f1ead9; --ocra: #a3741e; --ocra-chiaro: #f6ecd6;
+  --rosso: #a4473b; --rosso-chiaro: #f6e3df; --grigio-area: #ece8de;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --carta: #171d1c; --foglio: #1f2726; --inchiostro: #e8e4da; --tenue: #a3ada9; --riga: #33403e;
+  --verde: #7cc0b6; --verde-chiaro: #233a37; --sabbia: #2a2b24; --ocra: #d9ac5c; --ocra-chiaro: #33291a;
+  --rosso: #e08b7f; --rosso-chiaro: #3a2622; --grigio-area: #29312f; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --carta: #171d1c; --foglio: #1f2726; --inchiostro: #e8e4da; --tenue: #a3ada9; --riga: #33403e;
+  --verde: #7cc0b6; --verde-chiaro: #233a37; --sabbia: #2a2b24; --ocra: #d9ac5c; --ocra-chiaro: #33291a;
+  --rosso: #e08b7f; --rosso-chiaro: #3a2622; --grigio-area: #29312f; color-scheme: dark; }
+body { background: var(--carta); color: var(--inchiostro); font: 16px/1.5 var(--sans); }
+.pagina { max-width: 860px; margin: 0 auto; padding-block: 28px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 34px; }
+h1, h2 { font-family: var(--serif); font-weight: 600; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.7rem, 4.5vw, 2.3rem); line-height: 1.15; }
+h2 { font-size: 1.3rem; }
+.sopra { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+.testa { display: grid; gap: 10px; }
+.riga-testa { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; }
+.voto { display: flex; align-items: baseline; gap: 10px; font-variant-numeric: tabular-nums; }
+.voto strong { font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--verde); }
+.voto span { color: var(--tenue); font-size: .92rem; }
+.scelta { display: flex; gap: 8px; align-items: center; color: var(--tenue); font-size: .92rem; }
+select { font: inherit; color: var(--inchiostro); background: var(--foglio); border: 1px solid var(--riga); border-radius: 8px; padding: 6px 10px; }
+select:focus-visible { outline: 2px solid var(--verde); outline-offset: 2px; }
+.sotto { color: var(--tenue); margin: 0; max-width: 62ch; }
+section { display: grid; gap: 14px; }
+
+/* Diagramma del giorno */
+.problemi { background: var(--sabbia); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+.problemi ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.freccia-giu { justify-self: center; color: var(--tenue); font-size: 1.3rem; line-height: 1; }
+.flusso { display: grid; gap: 12px; }
+.passo { display: grid; grid-template-columns: minmax(0, 1.25fr) auto minmax(0, 1fr) auto minmax(0, .8fr); align-items: stretch; gap: 8px; }
+.nodo { background: var(--foglio); border: 1px solid var(--riga); border-radius: 10px; padding: 10px 12px; min-width: 0; display: grid; gap: 4px; align-content: start; }
+.nodo h3 { margin: 0; font-size: 1rem; }
+.nodo p { margin: 0; font-size: .92rem; color: var(--tenue); }
+.nodo.studente { background: var(--verde-chiaro); border-color: transparent; }
+.nodo.studente p { color: var(--inchiostro); }
+.unione { align-self: center; color: var(--tenue); }
+.etichetta { justify-self: start; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; color: var(--verde); }
+.pillola { justify-self: start; font-size: .8rem; font-weight: 600; border-radius: 999px; padding: 2px 10px; background: var(--grigio-area); color: var(--tenue); }
+.pillola.ok { background: var(--verde-chiaro); color: var(--verde); }
+.pillola.attesa { background: var(--ocra-chiaro); color: var(--ocra); }
+.pillola.no { background: var(--rosso-chiaro); color: var(--rosso); }
+.intestazioni { display: grid; grid-template-columns: minmax(0, 1.25fr) auto minmax(0, 1fr) auto minmax(0, .8fr); gap: 8px; font-size: .75rem; color: var(--tenue); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+.intestazioni span:nth-child(even) { visibility: hidden; }
+@media (max-width: 640px) {
+  .intestazioni { display: none; }
+  .passo { grid-template-columns: 1fr; }
+  .unione { justify-self: center; transform: rotate(90deg); }
+  .nodo::before { content: attr(data-titolo); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--tenue); font-weight: 600; }
+}
+.esiti { display: flex; flex-wrap: wrap; gap: 8px; }
+.esiti .pillola { font-weight: 500; }
+
+/* Ruota e andamento */
+.due { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: start; }
+.riquadro { background: var(--foglio); border: 1px solid var(--riga); border-radius: 12px; padding: 14px; display: grid; gap: 8px; min-width: 0; }
+.riquadro svg { width: 100%; height: auto; display: block; }
+.legenda { display: flex; flex-wrap: wrap; gap: 12px; font-size: .82rem; color: var(--tenue); }
+.legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.vuoto { color: var(--tenue); font-size: .92rem; margin: 0; }
+details { background: var(--foglio); border: 1px solid var(--riga); border-radius: 10px; padding: 10px 14px; }
+details summary { cursor: pointer; font-weight: 600; }
+details ul { margin: 8px 0 0; padding-left: 1.1em; display: grid; gap: 4px; color: var(--tenue); }
+.storico { display: grid; gap: 8px; }
+.cifre { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: no-preference) { .passo { animation: entra .35s ease both; } @keyframes entra { from { transform: translateY(4px); } to { transform: none; } } }
+</style>
+
+<main class="pagina">
+  <header class="testa">
+    <span class="sopra">Assistente del sito · ciclo di ogni mattina</span>
+    <div class="riga-testa">
+      <h1>Miglioramenti di Pi</h1>
+      <div class="voto" id="voto"></div>
+    </div>
+    <div class="riga-testa">
+      <p class="sotto" id="sottotitolo">Ogni mattina Pi risponde alle domande del banco di prova; il ciclo valuta le risposte, corregge un'area alla volta e misura il giorno dopo se la correzione ha funzionato.</p>
+      <label class="scelta" for="giorno">Giorno <select id="giorno"></select></label>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-diagramma">
+    <h2 id="t-diagramma">Il diagramma del giorno</h2>
+    <div class="problemi" id="problemi"></div>
+    <span class="freccia-giu" aria-hidden="true">↓</span>
+    <div class="intestazioni" aria-hidden="true"><span>Intervento</span><span>→</span><span>Per lo studente</span><span>→</span><span>Verifica</span></div>
+    <div class="flusso" id="flusso"></div>
+    <div id="blocco-esiti" hidden>
+      <h2 style="font-size:1.05rem;margin-bottom:8px">Esito delle modifiche precedenti</h2>
+      <div class="esiti" id="esiti"></div>
+    </div>
+  </section>
+
+  <section class="due">
+    <div class="riquadro">
+      <h2>Le aree del ciclo</h2>
+      <svg id="ruota" viewBox="0 0 320 320" role="img" aria-label="Ruota delle dodici aree di miglioramento"></svg>
+      <div class="legenda"><span><i style="background:var(--verde)"></i>punteggio alto</span><span><i style="background:var(--ocra)"></i>da migliorare</span><span><i style="background:var(--grigio-area);border:1px solid var(--riga)"></i>non ancora misurata</span></div>
+    </div>
+    <div class="riquadro">
+      <h2>Punteggio del banco di prova</h2>
+      <svg id="andamento" viewBox="0 0 360 220" role="img" aria-label="Andamento del punteggio giornaliero"></svg>
+      <p class="vuoto" id="andamento-vuoto" hidden>Il primo punteggio arriva con il banco di prova di domani mattina.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-storico">
+    <h2 id="t-storico">Tutti i giorni</h2>
+    <div class="storico" id="storico"></div>
+  </section>
+</main>
+
+<script>
+const AREE = ['correttezza', 'pagina', 'stile', 'formato', 'foto', 'sito', 'ambito', 'affidabilità', 'quota', 'finestra', 'lingua', 'banco'];
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const dataIt = (g) => new Date(g + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+const classeEsito = (e = '') => /miglior/i.test(e) ? 'ok' : /attesa/i.test(e) ? 'attesa' : /peggior|annull/i.test(e) ? 'no' : '';
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+let giorni = [];
+
+function mostraGiorno(g) {
+  const d = giorni.find((x) => x.giorno === g) || giorni[giorni.length - 1];
+  const i = giorni.indexOf(d);
+  const prima = i > 0 ? giorni[i - 1] : null;
+  $('voto').innerHTML = d.punteggio == null
+    ? `<span>${esc(dataIt(d.giorno))} · banco non ancora misurato</span>`
+    : `<strong>${d.punteggio}%</strong><span>${prima?.punteggio != null ? `${d.punteggio - prima.punteggio >= 0 ? '+' : ''}${d.punteggio - prima.punteggio} punti rispetto al giorno prima` : esc(dataIt(d.giorno))}<br>${d.casi} prove, ${d.errori} in errore</span>`;
+  $('problemi').innerHTML = `<span class="etichetta">Problemi trovati · area del giorno: ${esc(d.areaDelGiorno || '-')}</span>`
+    + (d.problemi?.length ? `<ul>${d.problemi.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>` : '<p class="vuoto">Nessun problema nuovo.</p>');
+  $('flusso').innerHTML = (d.interventi || []).map((x) => `
+    <div class="passo">
+      <div class="nodo" data-titolo="Intervento"><span class="etichetta">${esc(x.area)}</span><h3>${esc(x.titolo)}</h3><p>${esc(x.cosa)}</p></div>
+      <span class="unione" aria-hidden="true">→</span>
+      <div class="nodo studente" data-titolo="Per lo studente"><p>${esc(x.perStudente)}</p></div>
+      <span class="unione" aria-hidden="true">→</span>
+      <div class="nodo" data-titolo="Verifica"><p>${esc(x.verifica)}</p><span class="pillola ${classeEsito(x.esito)}">${esc(x.esito || 'in attesa')}</span></div>
+    </div>`).join('') || '<p class="vuoto">Nessun intervento in questo giorno.</p>';
+  const esiti = [...(d.esitiIeri || []).map((e) => [e.titolo, e.esito, e.dettaglio]), ...(d.annullati || []).map((a) => [a, 'annullato', ''])];
+  $('blocco-esiti').hidden = !esiti.length;
+  $('esiti').innerHTML = esiti.map(([t, e, det]) => `<span class="pillola ${classeEsito(e)}" title="${esc(det)}">${esc(t)}: ${esc(e)}${det ? ` · ${esc(det)}` : ''}</span>`).join('');
+  disegnaRuota(d);
+}
+
+function disegnaRuota(d) {
+  // Ultimo punteggio misurato per area e ultima volta in cui l'area è stata toccata, fino al giorno scelto.
+  const fino = giorni.slice(0, giorni.indexOf(d) + 1);
+  const punti = {}; const toccata = {};
+  for (const g of fino) {
+    for (const [a, v] of Object.entries(g.aree || {})) punti[a] = v;
+    for (const x of g.interventi || []) toccata[x.area] = g.giorno;
+  }
+  const cx = 160, cy = 160, r1 = 62, r2 = 128, n = AREE.length, giro = Math.PI * 2 / n;
+  const pt = (r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  let s = '';
+  AREE.forEach((area, k) => {
+    const a0 = -Math.PI / 2 + k * giro + 0.012, a1 = a0 + giro - 0.024;
+    const [x1, y1] = pt(r2, a0), [x2, y2] = pt(r2, a1), [x3, y3] = pt(r1, a1), [x4, y4] = pt(r1, a0);
+    const v = punti[area];
+    const colore = v == null ? css('--grigio-area') : v >= 75 ? css('--verde') : css('--ocra');
+    const opac = v == null ? 1 : 0.35 + 0.65 * Math.min(1, v / 100);
+    const oggi = d.areaDelGiorno === area;
+    s += `<path d="M${x1},${y1} A${r2},${r2} 0 0 1 ${x2},${y2} L${x3},${y3} A${r1},${r1} 0 0 0 ${x4},${y4} Z" fill="${colore}" fill-opacity="${opac}" stroke="${oggi ? css('--inchiostro') : css('--carta')}" stroke-width="${oggi ? 2.5 : 1.5}"><title>${area}: ${v == null ? 'non misurata' : v + '%'}${toccata[area] ? `, toccata il ${toccata[area]}` : ''}</title></path>`;
+    const [tx, ty] = pt((r1 + r2) / 2, a0 + giro / 2);
+    s += `<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" font-size="9.5" font-family="Source Sans 3, system-ui, sans-serif" font-weight="${oggi ? 700 : 500}" fill="${v != null && v >= 0 ? css('--carta') : css('--inchiostro')}">${area.length > 11 ? area.slice(0, 10) + '.' : area}</text>`;
+    if (v != null) s += `<text x="${pt((r1 + r2) / 2, a0 + giro / 2)[0]}" y="${pt((r1 + r2) / 2, a0 + giro / 2)[1] + 11}" text-anchor="middle" font-size="8.5" fill="${css('--carta')}" font-family="Source Sans 3, system-ui, sans-serif">${v}%</text>`;
+  });
+  s += `<circle cx="${cx}" cy="${cy}" r="${r1 - 8}" fill="${css('--foglio')}" stroke="${css('--riga')}"/>`;
+  s += `<text x="${cx}" y="${cy - 8}" text-anchor="middle" font-size="11" fill="${css('--tenue')}" font-family="Source Sans 3, system-ui, sans-serif">oggi</text>`;
+  s += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" font-size="14" font-weight="700" fill="${css('--inchiostro')}" font-family="Source Sans 3, system-ui, sans-serif">${esc(d.areaDelGiorno || '-')}</text>`;
+  $('ruota').innerHTML = s;
+}
+
+function disegnaAndamento() {
+  const pts = giorni.filter((g) => g.punteggio != null);
+  $('andamento-vuoto').hidden = pts.length > 0;
+  $('andamento').style.display = pts.length ? 'block' : 'none';
+  if (!pts.length) return;
+  const W = 360, H = 220, sx = 38, dx = 14, sy = 14, gy = 30;
+  const x = (i) => pts.length === 1 ? (sx + W - dx) / 2 : sx + i * (W - sx - dx) / (pts.length - 1);
+  const y = (v) => sy + (100 - v) * (H - sy - gy) / 100;
+  let s = '';
+  for (const v of [0, 25, 50, 75, 100]) s += `<line x1="${sx}" x2="${W - dx}" y1="${y(v)}" y2="${y(v)}" stroke="${css('--riga')}"/><text x="${sx - 6}" y="${y(v) + 4}" text-anchor="end" font-size="10" fill="${css('--tenue')}" font-family="Source Sans 3, system-ui, sans-serif">${v}%</text>`;
+  const linea = pts.map((g, i) => `${i ? 'L' : 'M'}${x(i)},${y(g.punteggio)}`).join(' ');
+  if (pts.length > 1) s += `<path d="${linea} L${x(pts.length - 1)},${y(0)} L${x(0)},${y(0)} Z" fill="${css('--verde')}" fill-opacity=".12"/><path d="${linea}" fill="none" stroke="${css('--verde')}" stroke-width="2.2"/>`;
+  const passo = Math.ceil(pts.length / 6);
+  pts.forEach((g, i) => {
+    s += `<circle cx="${x(i)}" cy="${y(g.punteggio)}" r="${i === pts.length - 1 ? 4.5 : 3}" fill="${css('--verde')}"><title>${g.giorno}: ${g.punteggio}%</title></circle>`;
+    if (i % passo === 0 || i === pts.length - 1) s += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle" font-size="10" fill="${css('--tenue')}" font-family="Source Sans 3, system-ui, sans-serif">${g.giorno.slice(8)}/${g.giorno.slice(5, 7)}</text>`;
+  });
+  const u = pts[pts.length - 1];
+  s += `<text x="${x(pts.length - 1)}" y="${y(u.punteggio) - 9}" text-anchor="${pts.length > 1 ? 'end' : 'middle'}" font-size="11" font-weight="700" fill="${css('--inchiostro')}" font-family="Source Sans 3, system-ui, sans-serif">${u.punteggio}%</text>`;
+  $('andamento').innerHTML = s;
+}
+
+function disegnaStorico() {
+  $('storico').innerHTML = [...giorni].reverse().map((g) => `
+    <details><summary>${esc(dataIt(g.giorno))} · <span class="cifre">${g.punteggio == null ? 'banco non misurato' : g.punteggio + '%'}</span> · ${(g.interventi || []).length} interventi · area ${esc(g.areaDelGiorno || '-')}</summary>
+      <ul>${(g.interventi || []).map((x) => `<li><strong>${esc(x.titolo)}</strong>: ${esc(x.cosa)} (${esc(x.esito || 'in attesa')})</li>`).join('')}${(g.proposte || []).map((p) => `<li>Proposta per Carmine: ${esc(p)}</li>`).join('')}</ul>
+    </details>`).join('');
+}
+
+fetch('storico.json', { cache: 'no-store' }).then((r) => r.json()).then((dati) => {
+  giorni = (dati.giorni || []).slice().sort((a, b) => a.giorno.localeCompare(b.giorno));
+  if (!giorni.length) throw new Error('vuoto');
+  $('giorno').innerHTML = [...giorni].reverse().map((g) => `<option value="${g.giorno}">${esc(dataIt(g.giorno))}</option>`).join('');
+  $('giorno').addEventListener('change', (e) => mostraGiorno(e.target.value));
+  mostraGiorno(giorni[giorni.length - 1].giorno);
+  disegnaAndamento(); disegnaStorico();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { mostraGiorno($('giorno').value); disegnaAndamento(); });
+}).catch(() => {
+  $('flusso').innerHTML = '<p class="vuoto">Lo storico dei miglioramenti non si è caricato. Ricarica la pagina tra poco.</p>';
+});
+</script>

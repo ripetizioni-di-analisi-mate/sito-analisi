@@ -2,6 +2,7 @@
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
@@ -24,7 +25,8 @@ const elenco = materiaL(lingua, materia).argomenti;
 const dopo = elenco[elenco.findIndex((a) => a.slug === argomento) + 1];
 const prossimo = dopo && { titolo: dopo.titolo, href: link(lingua, `/${materia}/${dopo.slug}/teoria`) };
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'teoria', `${materia}/${argomento}`)).tradotta;
-const pdf = existsSync(new URL(`../../public/pdf/${materia}/${argomento}.pdf`, import.meta.url));
+// Percorso dalla radice del progetto: dentro la build import.meta.url punta ai file compilati e il PDF non veniva trovato.
+const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia, `${argomento}.pdf`));
 const base = `/${materia}/${argomento}`;
 
 // ancora → esercizi che la usano, per i collegamenti dalla teoria agli esercizi
