@@ -12,7 +12,7 @@ Un'uguaglianza tra espressioni con le lettere che è vera per *ogni* valore dell
 :::
 
 :::definizione{#equazione titolo="Equazione"}
-Un'**equazione** è un'uguaglianza tra due espressioni che contengono un numero sconosciuto. Il numero sconosciuto si chiama **incognita** e si indica di solito con la lettera $x$. In parole semplici, un'equazione è un'uguaglianza in cui si cerca quale numero mettere al posto di $x$ perché l'uguaglianza sia vera.
+Un'**equazione** è un'uguaglianza tra due espressioni in cui compare un numero sconosciuto. Il numero sconosciuto si chiama **incognita** e si indica di solito con la lettera $x$. In parole semplici, un'equazione è un'uguaglianza in cui si cerca quale numero mettere al posto di $x$ perché l'uguaglianza sia vera.
 
 Nell'equazione $2x + 3 = 9$ il primo membro è $2x + 3$ e il secondo membro è $9$. Con $x = 1$ il primo membro vale $2 \cdot 1 + 3 = 5$, quindi l'uguaglianza $5 = 9$ è falsa. Con $x = 3$ il primo membro vale $2 \cdot 3 + 3 = 9$, quindi l'uguaglianza $9 = 9$ è vera.
 :::
@@ -162,11 +162,11 @@ Il quoziente di due numeri negativi è positivo, per la regola dei segni. La ver
 :::
 
 :::attenzione
-Il segno meno davanti a un'espressione tra parentesi cambia il segno di *ogni* termine all'interno. Nell'equazione $12 - (x - 3) = 2x$ si ha $-(x - 3) = -x + 3$, quindi $12 - x + 3 = 2x$, cioè $15 = 3x$ e $x = 5$. Chi scrive $12 - x - 3 = 2x$ trova $x = 3$, che non supera la verifica, perché $12 - (3 - 3) = 12$ mentre $2 \cdot 3 = 6$.
+Un segno meno davanti a un'espressione cambia il segno di *ogni* termine dell'espressione. Nell'equazione $12 - (x - 3) = 2x$ si ha $-(x - 3) = -x + 3$, quindi $12 - x + 3 = 2x$, cioè $15 = 3x$ e $x = 5$. Chi scrive $12 - x - 3 = 2x$ trova $x = 3$, che non supera la verifica, perché $12 - (3 - 3) = 12$ mentre $2 \cdot 3 = 6$.
 :::
 
 :::osservazione{#lettura-grafica titolo="Le soluzioni viste su un grafico"}
-Ogni membro di un'equazione di primo grado, come $5x - 4$ oppure $3x + 2$, si può disegnare come una retta, nel modo descritto nell'argomento sul piano cartesiano e retta. La soluzione è il valore di $x$ in cui le due rette si incontrano, perché in quel punto i due membri hanno lo stesso valore.
+Ogni membro di un'equazione di primo grado, come $5x - 4$ oppure $3x + 2$, si può disegnare come una retta, nel modo descritto nell'argomento sul piano cartesiano e la retta. La soluzione è il valore di $x$ in cui le due rette si incontrano, perché in quel punto i due membri hanno lo stesso valore.
 
 ::grafico{f="5*x-4;3*x+2" punti="3,11,pieno" segmenti="3,0,3,11" xmin=-1 xmax=6 ymin=-8 ymax=24 legenda="y = 5x - 4;y = 3x + 2" titolo="Le rette $y = 5x - 4$ e $y = 3x + 2$ si incontrano nel punto $(3, 11)$, quindi l'equazione $5x - 4 = 3x + 2$ ha soluzione $x = 3$"}
 
@@ -197,7 +197,7 @@ Si risolve
 $$
 \frac{x + 4}{3} - \frac{x - 1}{2} = 1 .
 $$
-Il minimo comune multiplo dei denominatori è $6$. Moltiplicando per $6$, il primo termine diventa $2\,(x + 4)$ e il secondo diventa $3\,(x - 1)$. Il numeratore $x - 1$ si scrive tra parentesi, perché il $3$ moltiplica entrambi i suoi termini. Il segno meno davanti alla frazione cambia poi il segno di entrambi i termini:
+Il minimo comune multiplo dei denominatori è $6$. Moltiplicando per $6$, il primo termine diventa $2\,(x + 4)$ e il secondo diventa $3\,(x - 1)$. Il $3$ moltiplica entrambi i termini del numeratore $x - 1$. Il segno meno davanti alla frazione cambia poi il segno di entrambi i termini:
 $$
 \begin{aligned}
 2\,(x + 4) - 3\,(x - 1) &= 6 \\[6pt]
@@ -430,7 +430,7 @@ Con lo stesso metodo si risolvono i problemi sugli sconti. Un paio di scarpe sco
 :::
 
 :::esempio{#problemi-percorsi titolo="Problemi sui percorsi"}
-Due paesi A e B distano $15$ km. Anna parte a piedi da A verso B a $4$ km/h e, nello stesso momento, Bruno parte in bicicletta da B verso A a $16$ km/h. Si cerca dopo quanto tempo si incontrano. Si indica con $x$ il tempo in ore. Per la formula $s = v \cdot t$, in $x$ ore Anna percorre $4x$ km e Bruno $16x$ km. Quando si incontrano, i due tratti percorsi insieme coprono tutta la distanza tra i paesi, quindi
+Due paesi A e B distano $15$ km. Anna parte a piedi da A verso B a $4$ km/h e, nello stesso momento, Bruno parte in bicicletta da B verso A a $16$ km/h. Si cerca dopo quanto tempo si incontrano. Si indica con $x$ il tempo in ore. Per la formula $s = v \cdot t$, in $x$ ore Anna percorre $4x$ km e Bruno $16x$ km. Quando si incontrano, la somma dei due tratti percorsi è uguale alla distanza tra i paesi, quindi
 $$
 \begin{aligned}
 4x + 16x &= 15 \\[6pt]
