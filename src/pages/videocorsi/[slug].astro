@@ -1,6 +1,7 @@
 ---
 // Pagina di un videocorso, con l'acquisto tramite Paddle (solo in italiano).
 import Base from '../../layouts/Base.astro';
+import Presentazione from '../../components/Presentazione.astro';
 import { MATERIE } from '../../data/materie';
 import { VIDEOCORSI, MINUTI_LEZIONE, chiaveVideo, oreTotali, prezzoSeparato, valoreMateriale, type Videocorso } from '../../data/videocorsi';
 import { SITO } from '../../lib/seo';
@@ -15,6 +16,9 @@ const separato = prezzoSeparato(v);
 const materiale = valoreMateriale(v);
 const una = sblocca.length === 1;
 const nomiMaterie = sblocca.map((m) => m.breve).join(', ').replace(/, ([^,]*)$/, ' e $1');
+const nomiOppure = sblocca.map((m) => m.breve).join(', ').replace(/, ([^,]*)$/, ' o $1');
+// Corsi del pacchetto, per il conto del risparmio reale (prezzi dei corsi venduti da soli).
+const pacchetto = (v.pacchettoDi || []).map((s) => VIDEOCORSI.find((c) => c.slug === s)!).filter(Boolean);
 const chiave = chiaveVideo(v.slug);
 const altri = VIDEOCORSI.filter((x) => x.slug !== v.slug);
 const schema = [{
@@ -30,6 +34,7 @@ const titolo = v.titolo;
     <p class="sopratitolo">Videocorso</p>
     <h1>{v.titolo}</h1>
     <p class="sommario">{v.sommario}</p>
+    <Presentazione lingua="it" titolo="Le lezioni sono dell’Ing. Carmine Tornincasa" />
     <ul class="fatti-video">
       <li><strong>{v.lezioni}</strong> lezioni</li>
       <li><strong>{MINUTI_LEZIONE} min</strong> circa ciascuna</li>
@@ -47,15 +52,21 @@ const titolo = v.titolo;
 
   <div class="riquadro-acquisto" style={`--accento: ${v.colore}`}>
     <p class="prezzo"><strong>{v.prezzo} €</strong> <span>una volta sola</span></p>
-    {separato > v.prezzo && <p class="risparmio-video">Risparmi {separato - v.prezzo} € rispetto ai corsi comprati separatamente ({separato} €)</p>}
+    {separato > v.prezzo && (
+      <table class="conto-pacchetto">
+        {pacchetto.map((c) => <tr><td>{c.titolo}, venduto da solo</td><td>{c.prezzo} €</td></tr>)}
+        <tr class="totale"><td>Comprandoli insieme si risparmiano</td><td>{separato - v.prezzo} €</td></tr>
+      </table>
+    )}
     {materiale > 0 && <p class="risparmio-video">Con la teoria e gli esercizi del sito in omaggio</p>}
     <div id="azione"><p class="esito-modulo">Un momento…</p></div>
+    {sblocca.length > 0 && <p class="credito">Hai già comprato {nomiOppure} sul sito? Scrivi a Carmine su <a href={`https://wa.me/393885680393?text=${encodeURIComponent(`Ciao Carmine, ho già comprato una materia del sito e vorrei lo sconto sul ${v.titolo}`)}`} target="_blank" rel="noopener">WhatsApp</a> per avere uno sconto sul videocorso pari al prezzo che hai già pagato.</p>}
     <p class="nota-termini">Con l'acquisto accetti i <a href="/termini">termini d'uso</a>: l'accesso ai video e alle materie è personale e il materiale non può essere condiviso né diffuso.</p>
   </div>
 
   <h2>Che cosa contiene</h2>
   <ul class="cosa-include">
-    <li><strong>{v.lezioni} lezioni chiare e progressive</strong>, spiegate in modo semplice ma rigoroso, della durata di circa {MINUTI_LEZIONE} minuti.</li>
+    <li><strong>{v.lezioni} lezioni</strong>, ciascuna di circa {MINUTI_LEZIONE} minuti, nell'ordine in cui si svolgono i corsi di Carmine.</li>
     <li><strong>Il PDF di ogni lezione</strong>, insieme al video.</li>
     <li><strong>Esercizi svolti e spiegati</strong>, con un metodo per affrontare lo scritto e l'orale.</li>
     <li><strong>Pensato per studenti universitari</strong> di ingegneria, economia, fisica, matematica e corsi affini, anche per chi parte da zero o ha avuto difficoltà con il corso.</li>
@@ -64,12 +75,12 @@ const titolo = v.titolo;
   <h2>Come ricevi i video</h2>
   <ol class="passi-video">
     <li>Dopo il pagamento, nel tuo account trovi il link alla cartella del videocorso su Google Drive.</li>
-    <li>Apri la cartella e chiedi l'accesso con la stessa email dell'account: Carmine lo conferma appena possibile.</li>
-    <li>Le materie collegate del sito sono già sbloccate dal momento del pagamento.</li>
+    <li>Apri la cartella e chiedi l'accesso con la stessa email dell'account: Carmine lo conferma il prima possibile.</li>
+    <li>Le materie collegate del sito sono già sbloccate dal momento del pagamento e restano nel tuo account senza scadenza.</li>
   </ol>
 
   <div class="prova-video">
-    <p><strong>Hai dubbi?</strong> Puoi chiedere la prima lezione come prova gratuita, oppure verificare che il corso copra il programma del tuo esame.</p>
+    <p><strong>Il programma cambia da un'università all'altra.</strong> Prima di comprare puoi scrivere a Carmine per verificare che il corso copra quello del tuo esame.</p>
     <a class="bottone-secondario" href={`https://wa.me/393885680393?text=${encodeURIComponent(`Ciao Carmine, vorrei informazioni sul ${v.titolo}`)}`} target="_blank" rel="noopener">Scrivi a Carmine su WhatsApp</a>
   </div>
 
@@ -154,6 +165,12 @@ const titolo = v.titolo;
   .sblocco-video li span { font-size: 0.85rem; color: var(--inchiostro-2); padding-left: 1.2rem; }
   .punto-materia { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--c); padding: 0 !important; }
   .risparmio-video { margin: -0.4rem 0 0.9rem; font-weight: 600; color: #2e7d4f; font-size: 0.95rem; }
+  .testa-video .presentazione-home { margin: 1.1rem 0 0.4rem; }
+  .conto-pacchetto { width: 100%; border-collapse: collapse; font-family: var(--ui); font-size: 0.9rem; margin: -0.2rem 0 0.8rem; text-align: left; }
+  .conto-pacchetto td { padding: 0.32rem 0; border-bottom: 1px dashed var(--riga); vertical-align: top; }
+  .conto-pacchetto td:last-child { text-align: right; white-space: nowrap; padding-left: 0.6rem; }
+  .conto-pacchetto tr.totale td { font-weight: 700; color: #2e7d4f; border-bottom: 0; }
+  .credito { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); background: var(--carta-2); border-radius: var(--raggio); padding: 0.55rem 0.7rem; margin: 0.9rem 0 0; text-align: left; }
   .passi-video { font-family: var(--ui); padding-left: 1.3rem; }
   .passi-video li { margin: 0.45rem 0; }
   .prova-video { margin: 1.5rem 0; padding: 1rem 1.1rem; border: 1px dashed var(--riga); border-radius: 10px; font-family: var(--ui); }

@@ -1,0 +1,24 @@
+---
+// Presentazione di Carmine (foto, laurea, numeri), usata in home e nelle pagine dei videocorsi.
+// Il titolo cambia a seconda della pagina; il resto è uguale ovunque.
+import { link, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; titolo?: string }
+const { lingua, titolo } = Astro.props;
+---
+<a class="presentazione-home" href={link(lingua, '/chi-sono')}>
+  <img src="/chi-sono/carmine.webp" srcset="/chi-sono/carmine-320.webp 320w, /chi-sono/carmine.webp 640w" sizes="9rem" width="320" height="320" alt="Carmine Tornincasa" />
+  <span class="presentazione-testo">
+    <strong>{titolo ?? (lingua === 'it' ? 'Ing. Carmine Tornincasa' : 'Carmine Tornincasa, civil engineer')}</strong>
+    <span class="presentazione-laurea">{lingua === 'it' ? 'Laureato in Ingegneria civile con 110 e lode all’Università degli Studi della Campania «Luigi Vanvitelli».' : 'Graduated in Civil Engineering with full marks and honours (110 cum laude) from the University of Campania Luigi Vanvitelli.'}</span>
+  </span>
+  <span class="presentazione-numeri">
+    <span class="presentazione-numero">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="12" cy="7.2" r="3.4"/><path d="M5.6 19.5c0-3.6 2.9-6.3 6.4-6.3s6.4 2.7 6.4 6.3z"/><circle cx="5" cy="9" r="2.4"/><circle cx="19" cy="9" r="2.4"/><path d="M0.6 18.4c0-2.7 1.8-4.7 4.4-4.7 1 0 1.9.3 2.6.8-1.5 1.2-2.5 2.9-2.7 3.9zM23.4 18.4c0-2.7-1.8-4.7-4.4-4.7-1 0-1.9.3-2.6.8 1.5 1.2 2.5 2.9 2.7 3.9z"/></svg>
+      <span><b>{lingua === 'it' ? '1.000+' : '1,000+'}</b><small>{lingua === 'it' ? 'Studenti seguiti' : 'Students taught'}</small></span>
+    </span>
+    <span class="presentazione-numero">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.6"/><path d="M12 6.8V12l3.4 2.6"/></svg>
+      <span><b>{lingua === 'it' ? '10.000+' : '10,000+'}</b><small>{lingua === 'it' ? 'Ore di lezione' : 'Hours of teaching'}</small></span>
+    </span>
+  </span>
+</a>
