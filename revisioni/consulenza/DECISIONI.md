@@ -31,3 +31,6 @@ Scelte salvate dalla pagina "Piano vendite del sito" (artifact Ki1nAGDQ6mxhgWqPk
 16. Piano a pagamento per Pi: no.
 17. Chiedere a Paddle il pagamento a rate: sì.
 18. Codice per i corsi di gruppo: no (timore di dichiarazioni false).
+
+## Controlli successivi
+- 31/10/2026: nessuna scelta nuova né cambiata nella pagina delle proposte (30 documenti, tutti del 30/10 sera). Le bozze versione 2 (chiavi v1-v6 e v1-nota … v6-nota) non hanno ancora una risposta. Nessun commento sulla pagina.

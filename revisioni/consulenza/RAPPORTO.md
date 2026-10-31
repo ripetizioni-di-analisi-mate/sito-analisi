@@ -31,6 +31,8 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 | 9 | La dashboard sa quanti visitano, quanti si iscrivono e quanti pagano, ma non sa dove si fermano gli altri: quante volte si apre Sblocca, quante si apre e si chiude Paddle, da quale carosello arrivano. | Pochi contatori in più: pagina Sblocca vista, pagamento aperto, chiuso senza pagare, completato; campagna Instagram (`utm_campaign`); videocorsi separati per corso. | piccolo-medio | indiretto ma alto: dice quali delle altre mosse funzionano | niente |
 | 10 | La pagina "Chi sono" usa emoji, frasi generiche ("Risultati eccellenti", "Metodo collaudato") e numeri diversi da quelli che usi altrove; i 15 messaggi degli studenti e i 16 loghi delle università sono nel repository ma non compaiono. | Pagina asciutta con la tua formazione, i numeri che confermi, come è fatto il materiale, i messaggi degli studenti con il loro consenso (bozza 5). | piccolo | medio: è la pagina che si apre quando si è indecisi | confermare i numeri, il consenso degli studenti |
 
+**Stato delle mosse al 31/10/2026.** Fatta: 2 (link Drive, commit 8b4d571). In parte: 5 (presentazione di Carmine in home, commit c8deb51 e 0ad0574; pulsante «Videocorso» al singolare, commit f6b3f0e). Approvate e non ancora realizzate: 3, 4, 6, 7, 8, 9, 10. Sospesa: 1 (lezione di prova da non mostrare per ora). **Pronta da realizzare: 3**, con il codice provato in locale (vedi 2.3, "Mossa 3: passi tecnici").
+
 ---
 
 ## 2. Le 12 aree
@@ -100,6 +102,22 @@ Per i pulsanti fissi: un solo pulsante (Pi), con WhatsApp dentro la finestra di 
 **Alternative per il blocco della teoria.**
 - **A. Riquadro informativo** (bozza 2): "Fine dell'anteprima gratuita", elenco numerato dei paragrafi che mancano con i titoli corretti, che cosa c'è ancora (schede, soluzioni, PDF solo dove esiste), prezzo, tasto "Accesso completo ad Analisi 1", link alle schede gratuite dello stesso argomento. Pro: lo studente vede esattamente che cosa compra. Contro: riquadro più alto. Impegno piccolo (i titoli veri si leggono dagli `<h2>` già presenti nella pagina). Rischio basso.
 - **B. Riquadro attuale corretto**: stessa frase, ma con i titoli veri, la frase sul PDF solo dove il PDF esiste e il prezzo nel tasto ("Accesso completo · 49 €"). Pro: minimo cambiamento. Contro: resta poco concreto. Impegno piccolo. Rischio nullo.
+
+**Mossa 3: passi tecnici (approfondimento del 31/10/2026, codice provato in locale).**
+Il riquadro alla fine della teoria gratuita è prodotto dopo la build da `scripts/vetrine.mjs`; nessuna pagina Astro va toccata. La modifica è già scritta e provata su tutte le 200 teorie (100 in italiano, 100 in inglese) con una build locale completa.
+- File pronti: `revisioni/consulenza/codice/mossa-3-vetrine.diff` (modifica a `scripts/vetrine.mjs`) e `revisioni/consulenza/codice/mossa-3-global.css` (8 righe da aggiungere in fondo a `src/styles/global.css`).
+- Che cosa fa lo script nuovo: legge i titoli dei paragrafi nascosti direttamente dagli `<h2>` della pagina (maiuscole e accenti corretti); conta le schede svolte e gli esercizi da fare dell'argomento dalle pagine generate; nomina il PDF solo se esiste `public/pdf/<materia>/<argomento>.pdf`; prende prezzo e nome breve della materia da `prezzi.json`, `materie.ts` e `materie-en.ts`, quindi un cambio di prezzo si riflette da solo.
+- Testo del riquadro (esempio reale, Analisi 1, Limiti e continuità):
+  - titolo: "La teoria di questo argomento continua con altri 7 paragrafi";
+  - elenco numerato da 3 a 9 con i titoli veri ("Primi teoremi sui limiti", …, "Teoremi sulle funzioni continue");
+  - "Nell’accesso completo si trovano anche le altre 7 schede svolte di questo argomento e le soluzioni dei 14 esercizi da fare, oltre al PDF dell’argomento." (la parte sul PDF compare solo in Precorso, Analisi 1 e Analisi 2);
+  - tasto "Sblocca Analisi 1 · 49 €" (tutte le dieci materie hanno nome e prezzo corretti, controllato);
+  - riga finale: "Le prime 3 schede svolte di questo argomento sono gratuite e si trovano negli esercizi svolti." con il link alla pagina delle schede.
+  - In inglese: "The theory of this topic continues with 7 more sections", "Unlock Physics 1 · €49" e frasi corrispondenti.
+- Passi: (1) `git apply revisioni/consulenza/codice/mossa-3-vetrine.diff`; (2) incollare il contenuto di `mossa-3-global.css` in fondo a `src/styles/global.css`; (3) `npm run build` (la build lancia già `node scripts/vetrine.mjs`) e controllare `dist/vetrine/analisi-1/limiti/teoria.html` e una materia senza PDF (per esempio `dist/vetrine/fisica-1/lavoro-ed-energia/teoria.html`); (4) commit e push; (5) dopo 5-10 minuti, aprire una teoria da ospite (finestra anonima) e scendere fino al riquadro.
+- Il Worker non cambia: continua a servire `/vetrine/...` a chi non ha la materia. Il tasto usa il colore della materia, come oggi (in Fisica 1 è color mattone).
+- Schermata prima/dopo al telefono: `revisioni/consulenza/codice/m3-prima-dopo.jpg` (anche nella pagina delle proposte).
+- Rischio: basso. Se una materia nuova non avesse il nome breve in `materie.ts`, il tasto mostrerebbe lo slug (per esempio "matematica-statistica"); succede solo se manca il campo `breve`.
 
 **Alternative per le schede bloccate.**
 - **A. Vetrina della scheda**: la pagina della scheda resta, con titolo, "Teoria usata", le tracce di tutti gli esercizi e, al posto degli svolgimenti, il riquadro di accesso. È lo stesso trattamento già usato per gli esercizi da fare. Pro: chi tocca la scheda vede gli esercizi che sta per comprare; Google trova 694 pagine con contenuto proprio (oggi trova la pagina Sblocca ripetuta). Contro: le tracce diventano visibili a tutti. Impegno medio (estensione di `scripts/vetrine.mjs` e una riga nel Worker). Rischio basso.

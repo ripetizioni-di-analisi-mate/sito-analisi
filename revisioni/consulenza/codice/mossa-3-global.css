@@ -1,0 +1,8 @@
+/* Riquadro alla fine della teoria gratuita (scripts/vetrine.mjs) */
+.velo-teoria { text-align: left; }
+.velo-teoria .velo-titolo { margin: 0 0 0.6rem; font-weight: 600; color: var(--inchiostro); }
+.velo-elenco { margin: 0 0 1rem; padding-left: 1.6rem; color: var(--inchiostro-2); }
+.velo-elenco li { margin: 0.2rem 0; }
+.velo-teoria .bottone-sblocca { display: table; margin: 0 auto 1rem; }
+.velo-teoria .velo-gratis { margin: 0; font-size: 0.92rem; }
+.velo-teoria .velo-gratis a { color: var(--accento); }
