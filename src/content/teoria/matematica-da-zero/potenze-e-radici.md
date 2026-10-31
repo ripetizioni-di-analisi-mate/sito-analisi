@@ -35,7 +35,7 @@ $$
 ## Proprietà delle potenze
 
 ::::teorema{#prodotto-stessa-base titolo="Prodotto di potenze con la stessa base"}
-Il prodotto di due potenze con la stessa base è una potenza che ha la stessa base e ha per esponente la *somma* degli esponenti. Per ogni numero $a$ e per ogni coppia di numeri naturali $m$ e $n$ vale
+Il prodotto di due potenze con la stessa base è una potenza che ha la stessa base e ha per esponente la *somma* degli esponenti. Per ogni numero $a$ e per ogni coppia di numeri naturali $m$ e $n$ diversi da zero vale
 $$
 a^m \cdot a^n = a^{m+n} .
 $$
@@ -46,12 +46,12 @@ L'idea è contare i fattori. La potenza $2^3$ contiene tre fattori uguali a $2$ 
 $$
 2^3 \cdot 2^4 = (2 \cdot 2 \cdot 2) \cdot (2 \cdot 2 \cdot 2 \cdot 2) = 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 \cdot 2 .
 $$
-Per la proprietà associativa della moltiplicazione le parentesi si possono togliere. Il prodotto contiene perciò $3 + 4 = 7$ fattori uguali a $2$, ed è uguale a $2^7$. Con base $a$ ed esponenti $m$ e $n$ il ragionamento è lo stesso, perché i fattori uguali ad $a$ sono in tutto $m + n$.
+Per la proprietà associativa della moltiplicazione i due prodotti si possono scrivere come un unico prodotto. Questo prodotto contiene perciò $3 + 4 = 7$ fattori uguali a $2$, ed è uguale a $2^7$. Con base $a$ ed esponenti $m$ e $n$ il ragionamento è lo stesso, perché i fattori uguali ad $a$ sono in tutto $m + n$.
 :::
 ::::
 
 ::::teorema{#quoziente-stessa-base titolo="Quoziente di potenze con la stessa base"}
-Il quoziente di due potenze con la stessa base è una potenza che ha la stessa base e ha per esponente la *differenza* degli esponenti. Per ogni numero $a \neq 0$ e per ogni coppia di numeri naturali $m > n$ vale
+Il quoziente di due potenze con la stessa base è una potenza che ha la stessa base e ha per esponente la *differenza* degli esponenti. Per ogni numero $a \neq 0$ e per ogni coppia di numeri naturali $m$ e $n$ diversi da zero, con $m > n$, vale
 $$
 \frac{a^m}{a^n} = a^{m-n} .
 $$
@@ -67,7 +67,7 @@ Al numeratore restano $5 - 2 = 3$ fattori, quindi il quoziente è $3^3$. Con bas
 ::::
 
 ::::teorema{#potenza-di-potenza titolo="Potenza di una potenza"}
-Una potenza elevata a un'altra potenza è una potenza che ha la stessa base e ha per esponente il *prodotto* degli esponenti. Per ogni numero $a$ e per ogni coppia di numeri naturali $m$ e $n$ vale
+Una potenza elevata a un'altra potenza è una potenza che ha la stessa base e ha per esponente il *prodotto* degli esponenti. Per ogni numero $a$ e per ogni coppia di numeri naturali $m$ e $n$ diversi da zero vale
 $$
 \left( a^m \right)^n = a^{m \cdot n} .
 $$
@@ -83,7 +83,7 @@ Gli esponenti uguali a $3$ che si sommano sono $2$, quindi la loro somma è $3 \
 ::::
 
 ::::teorema{#potenza-prodotto-quoziente titolo="Potenza di un prodotto e di un quoziente"}
-La potenza di un prodotto è il prodotto delle potenze dei fattori, e la potenza di un quoziente è il quoziente delle potenze. Per ogni numero naturale $n$ valgono
+La potenza di un prodotto è il prodotto delle potenze dei fattori, e la potenza di un quoziente è il quoziente delle potenze. Per ogni coppia di numeri $a$ e $b$ e per ogni numero naturale $n$ diverso da zero valgono
 $$
 (a \cdot b)^n = a^n \cdot b^n ,
 \qquad
@@ -267,7 +267,7 @@ Un numero naturale è un **quadrato perfetto** se è il quadrato di un numero na
 $$
 1 ,\ 4 ,\ 9 ,\ 16 ,\ 25 ,\ 36 ,\ 49 ,\ 64 ,\ 81 ,\ 100 ,\ 121 ,\ 144 ,\ 169 ,\ 196 ,\ 225 .
 $$
-Un numero è un quadrato perfetto se e *solo se* nella sua scomposizione in fattori primi ogni esponente è pari. Infatti, per la potenza di un prodotto e la potenza di una potenza, gli esponenti della scomposizione di $m^2$ sono il doppio di quelli della scomposizione di $m$; per esempio $\left( 2 \cdot 3^2 \right)^2 = 2^2 \cdot 3^4$. La radice quadrata si ottiene quindi dimezzando gli esponenti:
+Un numero è un quadrato perfetto se e *solo se* nella sua scomposizione in fattori primi ogni esponente è pari. Infatti, per la potenza di un prodotto e la potenza di una potenza, gli esponenti della scomposizione di $m^2$ sono il doppio di quelli della scomposizione di $m$; per esempio $\left( 2 \cdot 3^2 \right)^2 = 2^2 \cdot 3^4$. Viceversa, se ogni esponente è pari, dimezzando gli esponenti si ottiene un numero naturale che elevato al quadrato dà il numero di partenza, cioè la sua radice quadrata:
 $$
 324 = 2^2 \cdot 3^4 ,
 \qquad
@@ -399,7 +399,7 @@ Poiché $1{,}41^2 < 2 < 1{,}42^2$, si ha $1{,}41 < \sqrt{2} < 1{,}42$.
 :::
 
 ::::teorema{#radice-di-due-irrazionale titolo="Irrazionalità della radice quadrata di 2"}
-Il numero $\sqrt{2}$ non si può scrivere come una frazione $\dfrac{m}{n}$ con $m$ e $n$ numeri naturali. Le frazioni hanno decimali limitati o periodici, come si è visto nell'argomento sui numeri decimali; perciò le cifre decimali di $\sqrt{2} = 1{,}41421\ldots$ sono infinite e non si ripetono con un periodo.
+Il numero $\sqrt{2}$ non si può scrivere come una frazione $\dfrac{m}{n}$ con $m$ e $n$ numeri naturali. Ogni numero decimale limitato o periodico si può scrivere come frazione, come si è visto nell'argomento sui numeri decimali; perciò le cifre decimali di $\sqrt{2} = 1{,}41421\ldots$ sono infinite e non si ripetono con un periodo.
 
 :::dimostrazione
 L'idea è contare quante volte il fattore $2$ compare nella scomposizione in fattori primi. Si supponga che $\sqrt{2} = \dfrac{m}{n}$, con $m$ e $n$ naturali diversi da zero. Elevando al quadrato si ottiene $2 = \dfrac{m^2}{n^2}$, cioè
