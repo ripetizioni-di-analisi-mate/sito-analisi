@@ -39,7 +39,7 @@ If the constant forces $\vec{F}_1, \dots, \vec{F}_n$ act on the point particle, 
 $$
 L_{\text{tot}} = L_1 + \dots + L_n = \vec{R} \cdot \vec{s} .
 $$
-The equality follows from the distributive property of the dot product over addition. Therefore the total work can be computed in two equivalent ways, by adding the works of the individual forces or by computing the work of the net force; the first is more convenient when the contribution of each force is also required, and the total work is the quantity that appears in the work-energy theorem.
+The equality follows from the distributive property of the dot product over addition. Therefore the total work can be computed in two equivalent ways, by adding the works of the individual forces or by computing the work of the net force; the first is more convenient when the contribution of each force is also required. The total work is the quantity that appears in the work-energy theorem.
 :::
 
 ## Work of a variable force

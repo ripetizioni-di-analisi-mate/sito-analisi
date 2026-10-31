@@ -2,6 +2,14 @@
 
 Ogni esecuzione della revisione ciclica aggiunge qui in cima le proposte che non sono correzioni puntuali.
 
+## 2026-10-31: Fisica 1, Lavoro ed energia; Oscillazioni e moto armonico
+
+1. **Teoria Oscillazioni, teorema "Regime stazionario".** "lo sfasamento $\delta \in (0, \pi)$ soddisfa $\tan\delta = \dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$": per $\Omega > \omega_0$ la tangente è negativa e con la calcolatrice si ottiene un $\delta$ negativo, fuori dall'intervallo dichiarato; per $\Omega = \omega_0$ la formula non è definita. Proposta: aggiungere "per $\Omega = \omega_0$ si ha $\delta = \dfrac{\pi}{2}$; per $\Omega > \omega_0$ si ha $\delta = \pi + \arctan\dfrac{2\gamma\Omega}{\omega_0^2 - \Omega^2}$".
+2. **Teoria Lavoro ed energia, blocchi `:::richiamo`.** I richiami "Secondo principio della dinamica", "Teorema fondamentale del calcolo integrale" e "Teorema dell'energia cinetica" stanno *dopo* il teorema la cui dimostrazione li usa, quindi lo studente li trova quando ha già letto la dimostrazione. Proposta: spostare ciascun richiamo subito prima del teorema corrispondente, come già avviene per "Prodotto scalare" e "Integrale definito".
+3. **Teoria Oscillazioni, figura "Forze sul pendolo".** L'etichetta $mg\sin\theta$ è lontana dalla punta della sua freccia e vicina alla verticale tratteggiata per $O$, e si può attribuire alla verticale. Proposta: spostarla accanto alla punta della freccia tangente, sotto l'arco della traiettoria (coordinate circa $0{,}3;\ -4{,}05$).
+4. **Tracce Lavoro ed energia.** Sono 13 invece delle 14 della guida, e nessuna traccia verifica che una forza dipendente dalla posizione *non* sia conservativa calcolando il lavoro lungo due percorsi. Proposta: traccia 14 "Calcolare il lavoro della forza $\vec{F} = (y;\ 0)\,\mathrm{N}$ da $(0;0)$ a $(1;1)$ lungo la diagonale e lungo la spezzata che passa per $(1;0)$, e stabilire se la forza è conservativa" (risultati $\dfrac{1}{2}\,\mathrm{J}$ e $0$).
+5. **Tracce Oscillazioni.** Sono 13 invece di 14, e nessuna usa le molle in serie e in parallelo né il pendolo in un sistema accelerato, che la teoria tratta in due blocchi. Proposta: traccia 14 su un corpo collegato prima a due molle in parallelo e poi alle stesse in serie, con il rapporto dei periodi; in alternativa un pendolo in un ascensore che scende con accelerazione $a < g$.
+
 ## 2026-10-30: Fisica 1, Moto nel piano; Leggi di Newton e forze
 
 1. **Teoria Moto nel piano, dimostrazione delle "Leggi orarie con accelerazione costante".** "si ricava $t = \dfrac{v_x - v_{0x}}{a_x}$ dalla legge della velocità e lo si sostituisce nella legge della posizione; svolgendo i calcoli si ottiene $x - x_0 = \dfrac{v_x^2 - v_{0x}^2}{2a_x}$": il passaggio intermedio è proprio quello che lo studente non sa fare da solo. Proposta: scrivere la riga $x - x_0 = v_{0x}\,\dfrac{v_x - v_{0x}}{a_x} + \dfrac{1}{2}\,\dfrac{(v_x - v_{0x})^2}{a_x} = \dfrac{(v_x - v_{0x})(v_x + v_{0x})}{2a_x}$.

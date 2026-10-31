@@ -231,7 +231,7 @@ The mass cancels because it appears both in the weight and in the product of mas
 ::::
 
 :::osservazione{#approssimazione-piccoli-angoli titolo="Validity of the approximation"}
-The approximation $\sin\theta \approx \theta$ requires the angle in radians. At $10°$, that is, $0.1745\,\mathrm{rad}$, we have $\sin\theta = 0.1736$, with a relative difference of $0.5\%$; therefore the period formula is accurate for amplitudes up to about ten degrees. For larger amplitudes the motion remains periodic but is no longer harmonic, and the period increases with the amplitude $\theta_0$; the first correction term gives
+The approximation $\sin\theta \approx \theta$ requires the angle in radians. At $10^\circ$, that is, $0.1745\,\mathrm{rad}$, we have $\sin\theta = 0.1736$, with a relative difference of $0.5\%$; therefore the period formula is accurate for amplitudes up to about ten degrees. For larger amplitudes the motion remains periodic but is no longer harmonic, and the period increases with the amplitude $\theta_0$; the first correction term gives
 $$
 T_0 \approx 2\pi\sqrt{\frac{\ell}{g}}\left(1 + \frac{\theta_0^2}{16}\right) .
 $$

@@ -39,7 +39,7 @@ Se sul punto materiale agiscono le forze costanti $\vec{F}_1, \dots, \vec{F}_n$,
 $$
 L_{\text{tot}} = L_1 + \dots + L_n = \vec{R} \cdot \vec{s} .
 $$
-L'uguaglianza segue dalla proprietà distributiva del prodotto scalare rispetto alla somma. Il lavoro totale si calcola quindi in due modi equivalenti, sommando i lavori delle singole forze oppure calcolando il lavoro della risultante; il primo è più comodo quando si chiede anche il contributo di ciascuna forza, e il lavoro totale è la grandezza che compare nel teorema dell'energia cinetica.
+L'uguaglianza segue dalla proprietà distributiva del prodotto scalare rispetto alla somma. Il lavoro totale si calcola quindi in due modi equivalenti, sommando i lavori delle singole forze oppure calcolando il lavoro della risultante; il primo è più comodo quando si chiede anche il contributo di ciascuna forza. Il lavoro totale è la grandezza che compare nel teorema dell'energia cinetica.
 :::
 
 ## Lavoro di una forza variabile

@@ -231,7 +231,7 @@ La massa si semplifica perché compare sia nel peso sia nel prodotto massa per a
 ::::
 
 :::osservazione{#approssimazione-piccoli-angoli titolo="Validità dell'approssimazione"}
-L'approssimazione $\sin\theta \approx \theta$ richiede l'angolo in radianti. A $10°$, cioè $0{,}1745\,\mathrm{rad}$, si ha $\sin\theta = 0{,}1736$, con uno scarto relativo dello $0{,}5\%$; perciò la formula del periodo è accurata per ampiezze fino a una decina di gradi. Per ampiezze maggiori il moto resta periodico ma non è più armonico, e il periodo cresce con l'ampiezza $\theta_0$; il primo termine della correzione dà
+L'approssimazione $\sin\theta \approx \theta$ richiede l'angolo in radianti. A $10^\circ$, cioè $0{,}1745\,\mathrm{rad}$, si ha $\sin\theta = 0{,}1736$, con uno scarto relativo dello $0{,}5\%$; perciò la formula del periodo è accurata per ampiezze fino a una decina di gradi. Per ampiezze maggiori il moto resta periodico ma non è più armonico, e il periodo cresce con l'ampiezza $\theta_0$; il primo termine della correzione dà
 $$
 T_0 \approx 2\pi\sqrt{\frac{\ell}{g}}\left(1 + \frac{\theta_0^2}{16}\right) .
 $$
