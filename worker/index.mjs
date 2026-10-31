@@ -717,13 +717,15 @@ export default {
       const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
       risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
-      }).on('.bottone-account .iniziale', {
+      }).on('.bottone-livello .nome-utente', {
+        element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
+      }).on('.iniziale', {
         element(e) { e.setInnerContent([...(nome !== 'Account' ? nome : io.email)][0]?.toUpperCase() || '·'); },
       }).on('.bottone-account', {
         element(e) { const conNome = nome !== 'Account'; e.setAttribute('aria-label', en ? (conNome ? `${nome}'s account` : 'Your account') : (conNome ? `Account di ${nome}` : 'Il tuo account')); },
       }).on('.bottone-livello', {
         element(e) {
-          e.setAttribute('aria-label', en ? `Level ${st.livello}, ${st.fascia}: open your progress` : `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
+          e.setAttribute('aria-label', en ? `${nome}, level ${st.livello}, ${st.fascia}: open your progress` : `${nome}, livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
           e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
         },
       }).on('.bottone-livello .numero-livello', {
