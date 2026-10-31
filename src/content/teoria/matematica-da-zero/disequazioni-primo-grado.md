@@ -13,7 +13,7 @@ Una **disuguaglianza** è una scrittura che confronta due numeri e dice quale de
 - $a \leq b$ si legge "$a$ è minore o uguale a $b$", cioè $a < b$ oppure $a = b$;
 - $a \geq b$ si legge "$a$ è maggiore o uguale a $b$", cioè $a > b$ oppure $a = b$.
 
-La punta del simbolo è rivolta verso il numero più piccolo. Per esempio $3 < 7$ e $7 > 3$ dicono la stessa cosa. La scrittura $4 \leq 4$ è vera, perché $4 = 4$, mentre $4 < 4$ è falsa.
+La punta del simbolo è rivolta verso il numero più piccolo, e la direzione del simbolo si chiama **verso** della disuguaglianza. Per esempio $3 < 7$ e $7 > 3$ dicono la stessa cosa. La scrittura $4 \leq 4$ è vera, perché $4 = 4$, mentre $4 < 4$ è falsa.
 
 Il numero $a$ è minore di $b$ esattamente quando la differenza $b - a$ è un numero positivo. Per esempio $2 < 5$, perché $5 - 2 = 3$ è positivo, e $-5 < -2$, perché $-2 - (-5) = -2 + 5 = 3$ è positivo. Questa lettura con la differenza permette di giustificare le proprietà delle disuguaglianze.
 :::
@@ -141,7 +141,7 @@ oppure con $<$, $\geq$, $\leq$, dove $a$ e $b$ sono numeri e $a$ è diverso da z
 :::osservazione{#metodo-risoluzione titolo="Come si risolve"}
 Una disequazione intera di primo grado si risolve con questi passaggi, ciascuno dei quali dà una disequazione equivalente.
 
-1. Si svolgono i prodotti e si eliminano le parentesi.
+1. Si svolgono i prodotti, con la proprietà distributiva e i prodotti notevoli.
 2. Se ci sono frazioni con numeri al denominatore, si moltiplicano i due membri per il minimo comune multiplo dei denominatori. Questo numero è positivo, quindi il verso resta lo stesso.
 3. Si trasportano i termini con la $x$ al primo membro e i numeri al secondo, cambiando loro il segno.
 4. Si sommano i termini simili e si arriva a $a x > b$.
@@ -150,7 +150,7 @@ Una disequazione intera di primo grado si risolve con questi passaggi, ciascuno 
 Alla fine si scrivono le soluzioni con la disuguaglianza e con l'intervallo.
 :::
 
-:::esempio{titolo="Due disequazioni con le parentesi"}
+:::esempio{titolo="Due disequazioni con prodotti"}
 Si risolve $3(x - 1) > x + 5$. Svolgendo il prodotto si ottiene $3x - 3 > x + 5$. Trasportando $x$ al primo membro e $-3$ al secondo si ottiene $3x - x > 5 + 3$, cioè $2x > 8$. Il coefficiente $2$ è positivo, quindi dividendo per $2$ il verso resta lo stesso, e le soluzioni sono $x > 4$, cioè $(4, +\infty)$.
 
 Si risolve $5 - 3x \geq x - 7$. Trasportando si ottiene $-3x - x \geq -7 - 5$, cioè $-4x \geq -12$. Il coefficiente $-4$ è negativo, quindi dividendo per $-4$ il verso si inverte:
@@ -189,7 +189,7 @@ A volte i termini con la $x$ si cancellano e la disequazione diventa $0 \cdot x 
 - Se il confronto è vero, ogni numero è soluzione. La disequazione si dice **sempre verificata** e le sue soluzioni sono tutti i numeri reali, cioè l'insieme $\mathbb{R}$.
 - Se il confronto è falso, nessun numero è soluzione. La disequazione si dice **mai verificata** e l'insieme delle soluzioni è l'insieme vuoto, che si indica con $\emptyset$.
 
-Per esempio $0 \cdot x > -5$ è sempre verificata, perché $0 > -5$ è vera; $0 \cdot x < -5$ è mai verificata, perché $0 < -5$ è falsa. Questi casi corrispondono alle equazioni indeterminate e impossibili viste nell'argomento sulle equazioni di primo grado.
+Per esempio $0 \cdot x > -5$ è sempre verificata, perché $0 > -5$ è vera; $0 \cdot x < -5$ non è mai verificata, perché $0 < -5$ è falsa. Questi casi corrispondono alle equazioni indeterminate e impossibili viste nell'argomento sulle equazioni di primo grado.
 :::
 
 :::esempio{titolo="Tre casi a confronto"}
@@ -197,7 +197,7 @@ In $2(x + 3) > 2x + 1$ si svolge il prodotto e si ottiene $2x + 6 > 2x + 1$. Tra
 
 In $3x - 2(x - 1) \geq x + 2$ il primo membro diventa $3x - 2x + 2 = x + 2$, quindi la disequazione è $x + 2 \geq x + 2$, cioè $0 \cdot x \geq 0$. Il confronto $0 \geq 0$ è vero, quindi la disequazione è sempre verificata.
 
-Con il simbolo $>$ al posto di $\geq$, la disequazione $3x - 2(x - 1) > x + 2$ diventa $0 \cdot x > 0$. Il confronto $0 > 0$ è falso, quindi la disequazione è **mai verificata** e l'insieme delle soluzioni è $\emptyset$.
+Con il simbolo $>$ al posto di $\geq$, la disequazione $3x - 2(x - 1) > x + 2$ diventa $0 \cdot x > 0$. Il confronto $0 > 0$ è falso, quindi la disequazione **non è mai verificata** e l'insieme delle soluzioni è $\emptyset$.
 :::
 
 ## Sistemi di disequazioni
@@ -228,11 +228,11 @@ x > 4 \\
 x < 2
 \end{cases}
 $$
-la prima disequazione chiede i numeri a destra di $4$ e la seconda i numeri a sinistra di $2$. Nello schema le due linee non si sovrappongono in nessun tratto, quindi il sistema non ha soluzioni, e l'insieme delle soluzioni è $\emptyset$.
+le soluzioni della prima disequazione sono i numeri a destra di $4$ e quelle della seconda sono i numeri a sinistra di $2$. Nello schema le due linee non si sovrappongono in nessun tratto, quindi il sistema non ha soluzioni, e l'insieme delle soluzioni è $\emptyset$.
 
 ::grafico{assi=0 uguale=1 linee="-5.6,0 7.6,0;7.3,0.15 7.6,0 7.3,-0.15;4,0.5 7.6,0.5;-3,0.9 2,0.9;-2,-0.1 -2,0.1;-1,-0.1 -1,0.1;0,-0.1 0,0.1;1,-0.1 1,0.1;2,-0.1 2,0.1;3,-0.1 3,0.1;4,-0.1 4,0.1;5,-0.1 5,0.1;6,-0.1 6,0.1;7,-0.1 7,0.1" segmenti="4,0,4,0.5;2,0,2,0.9" punti="4,0.5,vuoto;2,0.9,vuoto" etichette="-5.6,0.42,x > 4;-5.6,0.82,x < 2;-2.16,-0.5,−2;-1.16,-0.5,−1;-0.08,-0.5,0;0.92,-0.5,1;1.92,-0.5,2;2.92,-0.5,3;3.92,-0.5,4;4.92,-0.5,5;5.92,-0.5,6;6.92,-0.5,7" xmin=-6 xmax=8 ymin=-0.8 ymax=1.4 titolo="Le soluzioni di $x > 4$ e quelle di $x < 2$ non hanno numeri in comune, quindi il sistema non ha soluzioni"}
 
-Lo stesso accade quando una delle disequazioni è mai verificata. Se invece una disequazione è sempre verificata, ogni numero la soddisfa, quindi le soluzioni del sistema sono quelle delle altre disequazioni.
+Lo stesso accade quando una delle disequazioni non è mai verificata. Se invece una disequazione è sempre verificata, ogni numero la soddisfa, quindi le soluzioni del sistema sono quelle delle altre disequazioni.
 :::
 
 ## Segno di un prodotto e disequazioni fratte
@@ -244,7 +244,7 @@ Un'espressione come $2x - 6$ cambia segno in un solo punto, quello in cui vale z
 - uguale a zero per $x = 3$;
 - negativa per $x < 3$, per esempio con $x = 0$ vale $-6$.
 
-Allo stesso modo $4 - 2x > 0$ dà $-2x > -4$, cioè $x < 2$, quindi $4 - 2x$ è positiva per $x < 2$ e negativa per $x > 2$. Quando il coefficiente di $x$ è negativo, la parte positiva sta a sinistra dello zero.
+Allo stesso modo $4 - 2x > 0$ dà $-2x > -4$, cioè $x < 2$, quindi $4 - 2x$ è positiva per $x < 2$ e negativa per $x > 2$. Quando il coefficiente di $x$ è negativo, l'espressione è positiva a sinistra del numero in cui vale zero.
 :::
 
 :::teorema{#segno-prodotto titolo="Segno di un prodotto di due fattori"}
@@ -323,7 +323,7 @@ Si indica con $x$ il numero di lavaggi. Senza tessera si spendono $4{,}5\,x$ eur
 $$
 10 + 3x < 4{,}5\,x .
 $$
-Trasportando si ottiene $3x - 4{,}5\,x < -10$, cioè $-1{,}5\,x < -10$. Dividendo per $-1{,}5$ il verso si inverte, e poiché $\dfrac{10}{1{,}5} = \dfrac{100}{15} = \dfrac{20}{3}$ si ottiene
+Trasportando si ottiene $3x - 4{,}5\,x < -10$, cioè $-1{,}5\,x < -10$. Dividendo per $-1{,}5$ il verso si inverte, e il quoziente $\dfrac{-10}{-1{,}5}$ è positivo, perché i due numeri sono negativi. Poiché $\dfrac{10}{1{,}5} = \dfrac{100}{15} = \dfrac{20}{3}$ si ottiene
 $$
 x > \frac{20}{3} .
 $$
