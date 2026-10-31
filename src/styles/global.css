@@ -732,13 +732,17 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .exp-livello { font-variant-numeric: tabular-nums; }
 .barra-testata { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--rango-pallido, #e3eee7); }
 .barra-testata > span { display: block; height: 100%; width: 0; background: var(--rango-bordo, var(--verde)); transition: width 0.6s ease; }
-/* Al telefono: stemma, livello ed EXP (senza nome e titolo, per stare nella testata). */
+/* Al telefono: solo lo stemma e il numero del livello, in un pezzo stretto come gli altri bottoni. */
 @media (max-width: 30rem) {
-  html.collegato .bottone-livello { padding: 0 0.6rem 0 0; gap: 0.1rem; }
-  .stemma-testata { width: 2.7rem; }
-  .nome-utente, .fascia-con-punto { display: none; }
-  .fascia-testata { font-size: 0.72rem; color: var(--inchiostro); letter-spacing: 0.05em; }
+  html.collegato .bottone-livello { height: 2.4rem; padding: 0 0.5rem 0 0; gap: 0; border-radius: 10px; }
+  .stemma-testata { width: 2.2rem; height: 2.1rem; }
+  .righe-livello { gap: 0; }
+  .nome-utente, .fascia-con-punto, .exp-con-punto { display: none; }
+  .fascia-testata { display: flex; flex-direction: column; align-items: center; gap: 0.05rem; color: var(--inchiostro); letter-spacing: 0; }
+  .liv-etichetta { font-size: 0.55rem; letter-spacing: 0.08em; color: var(--rango-testo, var(--verde)); }
+  .fascia-testata .numero-livello { font-size: 1rem; font-weight: 800; line-height: 1; }
 }
+
 .elenco-domande { columns: 2 14rem; }
 .anello-fondo { fill: none; stroke: color-mix(in srgb, var(--verde) 18%, transparent); stroke-width: 3; }
 .anello-avanzamento { fill: none; stroke: var(--verde); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }

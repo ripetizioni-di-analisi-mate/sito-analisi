@@ -138,7 +138,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
               <span class="stemma-testata" aria-hidden="true"></span>
               <span class="righe-livello">
                 <span class="nome-utente">{t.account}</span>
-                <span class="fascia-testata"><span class="fascia-con-punto"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · </span>{en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
+                <span class="fascia-testata"><span class="fascia-con-punto"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · </span><span class="liv-etichetta">{en ? 'Lv.' : 'Liv.'}</span> <span class="numero-livello">1</span><span class="exp-con-punto"> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span></span>
               </span>
               <span class="barra-testata" aria-hidden="true"><span></span></span>
             </button>
