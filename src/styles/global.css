@@ -868,3 +868,15 @@ html.collegato .bottone-livello { display: inline-flex; flex-direction: column; 
 .riga-videocorsi span span { display: block; font-size: 0.86rem; color: var(--inchiostro-2); line-height: 1.4; }
 .riga-videocorsi .freccia { margin-left: auto; color: var(--video); font-size: 1.2rem; }
 .riquadro-acquisto .mostra-password { font-size: inherit; background: none; color: var(--inchiostro-2); padding: 0.4rem; border-radius: 6px; }
+
+/* domande a tempo: navigazione avanti e indietro */
+.navigazione-domande { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.4rem; font-family: var(--ui); }
+.navigazione-domande .bottone-secondario { flex: none; padding: 0.45rem 0.9rem; font-size: 0.9rem; }
+.navigazione-domande .bottone-secondario:disabled { opacity: 0.4; cursor: default; }
+.numeri-domande { flex: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; list-style: none; margin: 0; padding: 0; }
+.numeri-domande .numero { min-width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--riga); background: #fff; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--inchiostro-2); cursor: pointer; padding: 0 0.4rem; }
+.numeri-domande .numero-giusto { background: color-mix(in srgb, var(--verde) 14%, #fff); border-color: color-mix(in srgb, var(--verde) 50%, transparent); color: var(--verde); }
+.numeri-domande .numero-sbagliato { background: color-mix(in srgb, var(--c-esempio) 12%, #fff); border-color: color-mix(in srgb, var(--c-esempio) 50%, transparent); color: #8a5f1f; }
+.numeri-domande .numero-attivo { outline: 2px solid var(--accento); outline-offset: 1px; color: var(--inchiostro); }
+.numero-domanda { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0 0 0.6rem; }
+@media (max-width: 30rem) { .navigazione-domande { flex-wrap: wrap; } .numeri-domande { order: -1; flex-basis: 100%; } .navigazione-domande .bottone-secondario { flex: 1; } }

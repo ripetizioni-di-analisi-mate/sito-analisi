@@ -478,18 +478,16 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
-      const { materia, argomento, viste, lingua } = await req.json().catch(() => ({}));
+      const { materia, argomento, id, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const dati = await domandeDi(env, materia, l);
       const elenco = dati?.argomenti?.[argomento];
       if (!elenco?.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
-      const giaViste = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
-      let scelta = elenco.filter((q) => !giaViste.has(q.id));
-      if (!scelta.length) scelta = elenco.filter((q) => q.id !== [...giaViste].pop());
-      const q = scelta[Math.floor(Math.random() * scelta.length)];
+      // Le domande si percorrono in ordine, avanti e indietro: senza id si parte dalla prima.
+      const q = elenco.find((x) => x.id === id) || elenco[0];
       const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: elenco.map((x) => x.id), secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
     }
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
