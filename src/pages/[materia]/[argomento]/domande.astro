@@ -1,0 +1,15 @@
+---
+import Domande from '../../../viste/Domande.astro';
+import { catalogoDomande, domandePer } from '../../../lib/domande';
+export async function getStaticPaths() {
+  const cat = await catalogoDomande();
+  const out = [];
+  for (const [materia, argomenti] of Object.entries(cat)) {
+    const dati = await domandePer(materia);
+    for (const argomento of argomenti) out.push({ params: { materia, argomento }, props: { totale: dati[argomento]?.length ?? 0 } });
+  }
+  return out;
+}
+const { materia, argomento } = Astro.params;
+---
+<Domande materia={materia!} argomento={argomento!} totale={Astro.props.totale} />

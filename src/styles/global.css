@@ -715,3 +715,119 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 .pulsante-scheda .ok svg { width: 0.9rem; height: 0.9rem; }
 /* Indice: sezione Videocorsi, con lo stesso aspetto delle materie */
 .video-punto { flex: none; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--video); color: #fff; font-size: 0.42rem; display: grid; place-items: center; padding-left: 0.08rem; box-sizing: border-box; }
+
+/* ---------- Livelli e punti esperienza ---------- */
+.livello-testata { position: relative; display: none; flex: none; }
+html.collegato .livello-testata { display: block; }
+.bottone-livello { display: inline-flex; align-items: center; gap: 0.4rem; height: 2.4rem; box-sizing: border-box; font: inherit; font-size: 0.95rem; font-weight: 600; color: var(--inchiostro); background: color-mix(in srgb, var(--verde) 8%, transparent); border: 1px solid color-mix(in srgb, var(--verde) 45%, transparent); border-radius: 999px; padding: 0.2rem 0.75rem 0.2rem 0.2rem; cursor: pointer; }
+.bottone-livello .anello { position: relative; width: 1.9rem; height: 1.9rem; display: inline-grid; place-items: center; }
+.bottone-livello .anello svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.anello-fondo { fill: none; stroke: color-mix(in srgb, var(--verde) 18%, transparent); stroke-width: 3; }
+.anello-avanzamento { fill: none; stroke: var(--verde); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.numero-livello { position: relative; font-size: 0.72rem; font-weight: 700; }
+@media (max-width: 30rem) { .etichetta-livello { display: none; } .bottone-livello { padding: 0.2rem; } }
+.pannello-livello { position: absolute; right: 0; top: calc(100% + 0.5rem); width: 17.5rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; box-shadow: 0 10px 30px rgb(34 48 47 / 12%); padding: 0.9rem 1rem; z-index: 30; font-size: 0.92rem; }
+.pannello-livello p { margin: 0.4rem 0; }
+.pl-testa { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+.pl-testa strong { font-family: var(--titoli); font-size: 1.15rem; }
+.pl-testa span, .pl-numeri { color: var(--inchiostro-2); }
+.pl-numeri { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.85rem; }
+.pl-link { display: flex; flex-direction: column; gap: 0.3rem; border-top: 1px solid var(--riga); padding-top: 0.6rem; }
+.pl-link a:first-child { font-weight: 600; text-decoration: none; }
+.barra-exp { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--verde) 14%, transparent); overflow: hidden; }
+.barra-exp > span { display: block; height: 100%; border-radius: 999px; background: var(--verde); transition: width 0.6s ease; }
+.barra-exp.grande { height: 10px; }
+.avviso-premio { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 40; max-width: min(30rem, calc(100vw - 2rem)); background: var(--inchiostro); color: #fff; font-family: var(--ui); font-size: 0.95rem; padding: 0.7rem 1.1rem; border-radius: 10px; box-shadow: 0 8px 24px rgb(0 0 0 / 18%); }
+
+/* scheda in fondo agli esercizi */
+.ingresso-domande { margin-top: 2.5rem; border: 1px solid var(--riga); border-radius: 8px; background: #fff; padding: 1.3rem 1.5rem; }
+.ingresso-testa { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.ingresso-testa h2 { margin: 0; }
+.ingresso-testa span { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
+.ingresso-azioni { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
+
+/* pagina delle domande a tempo */
+.domande-testa { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.nota-ospite { border: 1px dashed var(--riga); background: var(--carta-2); border-radius: 8px; padding: 0.6rem 1.1rem; margin: 1rem 0; }
+.scheda-domanda { margin-top: 1.5rem; }
+.tempo { display: flex; align-items: center; gap: 0.7rem; font-family: var(--ui); }
+.tempo svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: var(--inchiostro-2); stroke-width: 2; stroke-linecap: round; flex: none; }
+.barra-tempo { flex: 1; height: 6px; border-radius: 3px; background: var(--riga); overflow: hidden; }
+.barra-tempo span { display: block; height: 100%; background: var(--c-esempio); border-radius: 3px; transition: width 1s linear; }
+.tempo .secondi { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 2.6rem; text-align: right; }
+.nota-tempo { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0.3rem 0 0 2rem; }
+.testo-domanda { margin-top: 1rem; }
+.scelte { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+.scelta { display: flex; align-items: center; gap: 0.9rem; min-height: 3.2rem; text-align: left; font: inherit; color: var(--inchiostro); background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.4rem 1rem; cursor: pointer; }
+.scelta .lettera { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--riga); display: inline-grid; place-items: center; font-family: var(--ui); font-size: 0.85rem; font-weight: 700; color: var(--inchiostro-2); }
+.scelta .valore { min-width: 0; overflow-x: auto; }
+.scelta-attiva { border: 2px solid var(--accento); padding: calc(0.4rem - 1px) calc(1rem - 1px); background: color-mix(in srgb, var(--accento) 7%, #fff); }
+.scelta-attiva .lettera { background: var(--accento); border-color: var(--accento); color: #fff; }
+.scelta-chiusa { cursor: default; color: var(--inchiostro-2); }
+.scelta-giusta { border: 2px solid var(--verde); padding: calc(0.4rem - 1px) calc(1rem - 1px); background: color-mix(in srgb, var(--verde) 9%, #fff); color: var(--inchiostro); }
+.scelta-giusta .lettera { background: var(--verde); border-color: var(--verde); color: #fff; }
+.scelta-sbagliata { border-color: color-mix(in srgb, var(--c-esempio) 60%, transparent); background: color-mix(in srgb, var(--c-esempio) 8%, #fff); }
+.esito { font-family: var(--ui); font-weight: 600; margin-top: 1rem; }
+.esito-giusto { color: var(--verde); }
+.esito-sbagliato { color: #8a5f1f; }
+.spiegazione { margin-top: 1rem; border-top: 2px solid var(--verde); background: #fff; border-radius: 0 0 10px 10px; padding: 0.4rem 1.2rem 1rem; }
+.spiegazione h2 { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--verde); margin-top: 0.8rem; }
+.azioni-domanda { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.4rem; font-family: var(--ui); }
+.riepilogo-sessione { margin-top: 1.5rem; font-family: var(--ui); }
+.riepilogo-sessione h2 { font-family: var(--titoli); margin-top: 0.2rem; }
+.conti-exp { background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.4rem 1.1rem; margin: 1rem 0; }
+.conti-exp div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; }
+.conti-exp dt, .conti-exp dd { margin: 0; }
+.conti-exp dd { font-weight: 600; }
+.conti-exp .totale { border-top: 1px solid var(--riga); font-weight: 700; }
+.conti-exp .totale dd { color: var(--verde); }
+.riep-numeri { display: flex; justify-content: space-between; color: var(--inchiostro-2); font-size: 0.9rem; }
+.azioni-riepilogo { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+.obiettivi { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-family: var(--ui); }
+.obiettivi li { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 1rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.75rem 1rem; }
+.obiettivi li > span:nth-child(2) { color: var(--inchiostro-2); white-space: nowrap; }
+.obiettivi li .barra-exp { grid-column: 1 / -1; height: 6px; }
+.obiettivi li:not(.completato) .barra-exp > span { background: var(--c-esempio); }
+.obiettivi li.completato > span:nth-child(2) { color: var(--verde); font-weight: 600; }
+
+/* account: il tuo percorso */
+.percorso-account { margin-bottom: 2.5rem; }
+.percorso-account h3 small { font-family: var(--ui); font-weight: 400; font-size: 0.85rem; color: var(--inchiostro-2); margin-left: 0.5rem; }
+.scheda-livello { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 1.2rem 1.4rem; font-family: var(--ui); }
+.anello-grande { width: 96px; height: 96px; flex: none; }
+.anello-grande .anello-fondo, .anello-grande .anello-avanzamento { stroke-width: 7; }
+.anello-sopra { font-family: var(--ui); font-size: 11px; fill: var(--inchiostro-2); }
+.anello-numero { font-family: var(--titoli); font-size: 28px; font-weight: 700; fill: var(--inchiostro); }
+.dati-livello { flex: 1 1 15rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.dati-livello p { margin: 0; }
+.fascia-livello strong { font-family: var(--titoli); font-size: 1.4rem; }
+.fascia-livello span { color: var(--inchiostro-2); font-style: italic; }
+.numeri-livello { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; color: var(--inchiostro-2); font-size: 0.92rem; }
+.settimana-account { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 0.7rem; font-family: var(--ui); }
+.settimana-account > div { border: 1px solid var(--riga); border-radius: 10px; padding: 0.8rem 1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.settimana-account > div > span:first-child { font-size: 0.88rem; color: var(--inchiostro-2); }
+.settimana-account strong { font-family: var(--titoli); font-size: 1.5rem; }
+.giorni-settimana { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.2rem; text-align: center; font-size: 0.72rem; color: var(--inchiostro-2); }
+.giorno { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.giorno i { width: 1rem; height: 1rem; border-radius: 50%; border: 1.5px solid var(--riga); box-sizing: border-box; }
+.giorno.attivo i { background: var(--verde); border-color: var(--verde); }
+.giorno.oggi:not(.attivo) i { border-color: var(--verde); }
+.traguardi { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: 0.6rem; font-family: var(--ui); font-size: 0.9rem; }
+.traguardi li { border: 1px dashed var(--riga); border-radius: 10px; padding: 0.8rem; display: flex; flex-direction: column; gap: 0.25rem; text-align: center; color: var(--inchiostro-2); }
+.traguardi li.preso { border: 1px solid color-mix(in srgb, var(--verde) 40%, transparent); background: color-mix(in srgb, var(--verde) 7%, #fff); color: var(--inchiostro); }
+.traguardi li.preso span { color: var(--verde); }
+.sessioni-account { list-style: none; padding: 0; font-family: var(--ui); border-top: 1px solid var(--riga); }
+.sessioni-account li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 0.6rem 0; border-bottom: 1px solid var(--riga); }
+.sessioni-account li span:last-child { color: var(--inchiostro-2); }
+
+/* pagina "Livelli e punti" */
+.tabella-punti { background: #fff; border: 1px solid var(--riga); border-radius: 8px; font-family: var(--ui); margin: 1rem 0; }
+.tabella-punti div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 1.1rem; border-bottom: 1px solid var(--riga); }
+.tabella-punti div:last-child { border-bottom: 0; }
+.tabella-punti dt, .tabella-punti dd { margin: 0; }
+.tabella-punti dd { font-weight: 700; white-space: nowrap; }
+.fasce { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.6rem; }
+.fasce li { border: 1px solid var(--riga); border-radius: 8px; padding: 0.7rem 0.9rem; display: flex; flex-direction: column; gap: 0.1rem; }
+.fasce strong { font-family: var(--ui); }
+.fasce span { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
+@media print { .livello-testata, .avviso-premio { display: none !important; } }

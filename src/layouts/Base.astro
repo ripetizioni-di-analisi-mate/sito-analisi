@@ -65,7 +65,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 }).join('');
 ---
 <!doctype html>
-<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }}>
+<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }} data-studio-materia={contenuto || sezione === 'domande' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -122,6 +122,23 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
         <span>{t.cerca}</span>
       </a>
+      {lingua === 'it' && (
+        <div class="livello-testata">
+          <button class="bottone-livello" type="button" aria-label="Livello" aria-expanded="false" aria-controls="pannello-livello">
+            <span class="anello" aria-hidden="true">
+              <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" class="anello-fondo" /><circle cx="15" cy="15" r="12" class="anello-avanzamento" stroke-dasharray="75.4" stroke-dashoffset="75.4" transform="rotate(-90 15 15)" /></svg>
+              <span class="numero-livello">1</span>
+            </span>
+            <span class="etichetta-livello">Livello</span>
+          </button>
+          <div class="pannello-livello" id="pannello-livello" hidden>
+            <p class="pl-testa"><strong class="pl-livello"></strong><span class="pl-fascia"></span></p>
+            <div class="barra-exp"><span class="pl-barra"></span></div>
+            <p class="pl-numeri"><span class="pl-exp"></span><span class="pl-mancano"></span></p>
+            <p class="pl-link"><a href="/account#percorso">Il tuo percorso →</a><a href="/livelli-e-punti">Come funzionano livelli e punti</a></p>
+          </div>
+        </div>
+      )}
       <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
         <span class="iniziale" aria-hidden="true"></span>
@@ -182,6 +199,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     </a>
   </div>
 
+  <div class="avviso-premio" role="status" aria-live="polite" hidden></div>
+
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
     <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
@@ -214,6 +233,66 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       campo.focus();
     });
     addEventListener('resize', adattaFormule);
+
+    // ---- Livello in testata: anello, pannello al tocco, aggiornamento dopo ogni minuto di studio o risposta ----
+    interface Stato { livello: number; fascia: string; exp: number; base: number; prossimo: number | null; mancano: number; perc: number }
+    const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
+    const pl = document.getElementById('pannello-livello');
+    const num = (x: number) => x.toLocaleString('it-IT');
+    function mostraLivello(st: Stato) {
+      if (!bl || !pl) return;
+      bl.querySelector('.numero-livello')!.textContent = String(st.livello);
+      bl.querySelector('.anello-avanzamento')!.setAttribute('stroke-dashoffset', (75.4 * (1 - st.perc / 100)).toFixed(1));
+      bl.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}`);
+      pl.querySelector('.pl-livello')!.textContent = `Livello ${st.livello}`;
+      pl.querySelector('.pl-fascia')!.textContent = st.fascia;
+      (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;
+      pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} EXP` : `${num(st.exp)} / ${num(st.prossimo)} EXP`;
+      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? 'Livello massimo' : `${num(st.mancano)} al livello ${st.livello + 1}`;
+    }
+    if (bl?.dataset.stato) {
+      try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
+    }
+    bl?.addEventListener('click', () => {
+      const apri = pl!.hidden;
+      pl!.hidden = !apri;
+      bl.setAttribute('aria-expanded', String(apri));
+    });
+    document.addEventListener('click', (e) => {
+      if (pl && !pl.hidden && !(e.target as HTMLElement).closest('.livello-testata')) { pl.hidden = true; bl?.setAttribute('aria-expanded', 'false'); }
+    });
+    // Le pagine (domande a tempo, account) annunciano un nuovo stato con l'evento "livello".
+    addEventListener('livello', (e) => mostraLivello((e as CustomEvent).detail));
+    // Traguardi e obiettivi raggiunti: un avviso breve in basso.
+    const avviso = document.querySelector<HTMLElement>('.avviso-premio');
+    addEventListener('premi', (e) => {
+      const premi = (e as CustomEvent).detail as { nome: string; punti: number }[];
+      if (!avviso || !premi?.length) return;
+      avviso.textContent = premi.map((p) => `${p.nome}: +${p.punti} EXP`).join(' · ');
+      avviso.hidden = false;
+      clearTimeout((avviso as any)._t);
+      (avviso as any)._t = setTimeout(() => { avviso.hidden = true; }, 5000);
+    });
+
+    // ---- Studio attivo: un segnale al minuto, solo con la pagina in primo piano e un'azione negli ultimi 2 minuti ----
+    const rad0 = document.documentElement;
+    if (rad0.classList.contains('collegato') && rad0.dataset.studioMateria) {
+      let ultimaAzione = Date.now();
+      let ultimoMovimento = 0;
+      const segna = () => { ultimaAzione = Date.now(); };
+      ['scroll', 'pointerdown', 'keydown', 'touchstart', 'wheel', 'toggle'].forEach((t) => addEventListener(t, segna, { passive: true, capture: true }));
+      addEventListener('pointermove', () => { const o = Date.now(); if (o - ultimoMovimento > 5000) { ultimoMovimento = o; segna(); } }, { passive: true });
+      setInterval(async () => {
+        if (document.visibilityState !== 'visible' || !document.hasFocus() || Date.now() - ultimaAzione > 120000) return;
+        const r = await fetch('/api/studio', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ materia: rad0.dataset.studioMateria, argomento: rad0.dataset.studioArgomento }),
+        }).catch(() => null);
+        const d = r && r.ok ? await r.json().catch(() => null) : null;
+        if (d?.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
+        if (d?.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
+      }, 60000);
+    }
 
     // Il tasto Indice: su schermi larghi apre e chiude la colonna laterale (scelta ricordata),
     // su telefono apre il cassetto.

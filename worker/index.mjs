@@ -9,6 +9,8 @@ import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
+import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
+import { livelloDa, PUNTI } from '../src/data/livelli.ts';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
@@ -115,6 +117,8 @@ export class Archivio {
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
+    creaTabelleLivelli(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -166,7 +170,7 @@ export class Archivio {
         if (!d) return Response.json(null);
         if (Date.now() - d.ultimo_uso > 3600 * 1000) this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
         const dispositivi = this.dispositiviDi(u.email).map((x) => ({ nome: x.nome, questo: x.id === c.dispositivo }));
-        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi });
+        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi, exp: statoDi(this, u.email).exp });
       }
       case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
         this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND ultimo_uso < ?', c.email, Date.now() - 60 * 86400 * 1000);
@@ -183,6 +187,12 @@ export class Archivio {
         if (c.id) this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id);
         else this.sql.exec('DELETE FROM dispositivi WHERE email = ?', c.email);
         return Response.json({ ok: true });
+
+      // livelli e punti esperienza
+      case '/liv-battito': return Response.json(battito(this, c));
+      case '/liv-risposta': return Response.json(risposta(this, c));
+      case '/liv-riepilogo': return Response.json(riepilogo(this, c));
+      case '/liv-percorso': return Response.json(percorso(this, c));
 
       case '/utente-nome':
         this.sql.exec('UPDATE utenti SET nome = ? WHERE email = ?', c.nome || null, c.email);
@@ -312,6 +322,29 @@ const pulisciNome = (n) => String(n || '').replace(/[<>"\u0000-\u001f]/g, '').re
 const nomeVisibile = (io) => (io.nome || io.email.split('@')[0]).trim();
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
 
+// ---------- domande a tempo ----------
+// I dati (testo, risposte, posizione della corretta, spiegazione) sono file statici generati alla build
+// in /dati-domande/, letti solo qui dentro: dal browser quell'indirizzo non è raggiungibile.
+const cacheDomande = {};
+async function domandeDi(env, materia) {
+  if (!/^[a-z0-9-]+$/.test(materia || '')) return null;
+  if (!cacheDomande[materia]) {
+    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${materia}.json`));
+    if (!r.ok) return null;
+    cacheDomande[materia] = await r.json();
+  }
+  return cacheDomande[materia];
+}
+let cacheCatalogo = null; // { materia: [argomenti con domande] }
+async function catalogoDomande(env) {
+  if (!cacheCatalogo) {
+    const r = await env.ASSETS.fetch(new Request('https://interno/dati-domande/indice.json'));
+    if (!r.ok) return {};
+    cacheCatalogo = await r.json();
+  }
+  return cacheCatalogo;
+}
+
 // ---------- percorsi protetti ----------
 // Le pagine inglesi stanno sotto /en: stessa protezione, vetrine in /vetrine/en.
 function analizza(pathname) {
@@ -393,7 +426,59 @@ export default {
     if (p === '/api/io') {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json(io);
+      return json({ ...io, livello: livelloDa(io.exp || 0) });
+    }
+
+    // ===== livelli e punti esperienza =====
+    if (p.startsWith('/dati-domande/')) return new Response('non trovato', { status: 404 });
+    if (p === '/api/studio' && POST) { // un minuto di studio attivo
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      const { materia, argomento } = await req.json().catch(() => ({}));
+      const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
+      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), catalogo: await catalogoDomande(env) }));
+    }
+    if (p === '/api/domande/prossima' && POST) {
+      const { materia, argomento, viste } = await req.json().catch(() => ({}));
+      const dati = await domandeDi(env, materia);
+      const elenco = dati?.argomenti?.[argomento];
+      if (!elenco?.length) return json({ errore: 'Nessuna domanda per questo argomento.' }, 404);
+      const giaViste = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
+      let scelta = elenco.filter((q) => !giaViste.has(q.id));
+      if (!scelta.length) scelta = elenco.filter((q) => q.id !== [...giaViste].pop());
+      const q = scelta[Math.floor(Math.random() * scelta.length)];
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const token = await firmaToken(env, { q: q.id, m: materia, t: Date.now(), e: io?.email || null });
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
+    }
+    if (p === '/api/domande/rispondi' && POST) {
+      const { token, scelta } = await req.json().catch(() => ({}));
+      const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
+      const dati = tok ? await domandeDi(env, tok.m) : null;
+      const [argomento] = String(tok?.q || '').split('/');
+      const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
+      if (!q) return json({ errore: 'Domanda scaduta: ricarica la pagina.' }, 400);
+      const giusta = Number(scelta) === q.corretta;
+      const secondi = Math.round((Date.now() - tok.t) / 1000);
+      const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
+      const r = await aDO(env, '/liv-risposta', {
+        email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
+        corretta: giusta, secondi, catalogo: await catalogoDomande(env),
+      });
+      return json({ ...base, ...r });
+    }
+    if (p === '/api/sessione/riepilogo' && POST) {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      const { chiudi } = await req.json().catch(() => ({}));
+      return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi) }));
+    }
+    if (p === '/api/percorso') {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      return json(await aDO(env, '/liv-percorso', { email: io.email, catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
       const io = await utenteCollegato(env, req);
@@ -590,6 +675,16 @@ export default {
         element(e) { e.setInnerContent([...nome][0]?.toUpperCase() || '·'); },
       }).on('.bottone-account', {
         element(e) { e.setAttribute('aria-label', `Account di ${nome}`); },
+      }).on('.bottone-livello', {
+        element(e) {
+          const st = livelloDa(io.exp || 0);
+          e.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}: apri il tuo percorso`);
+          e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
+        },
+      }).on('.bottone-livello .numero-livello', {
+        element(e) { e.setInnerContent(String(livelloDa(io.exp || 0).livello)); },
+      }).on('.bottone-livello .anello-avanzamento', {
+        element(e) { e.setAttribute('stroke-dashoffset', (75.4 * (1 - livelloDa(io.exp || 0).perc / 100)).toFixed(1)); },
       }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();
