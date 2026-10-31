@@ -10,6 +10,7 @@ const WHATSAPP = 'https://wa.me/393885680393';
 const THREADS = 'https://www.threads.com/@ripetizioni_di_analisi_mate';
 const IN_EVIDENZA = 'https://www.instagram.com/stories/highlights/18377269690180577/';
 
+// Ordine del vecchio sito ripetizioni-di-analisi-matematica.it.
 const UNIVERSITA: [string, string, number, number][] = [
   ['tor-vergata', 'Università di Roma Tor Vergata', 222, 252],
   ['bergamo', 'Università degli Studi di Bergamo', 254, 102],
@@ -17,44 +18,40 @@ const UNIVERSITA: [string, string, number, number][] = [
   ['politecnico-milano', 'Politecnico di Milano', 320, 115],
   ['federico-ii', 'Università degli Studi di Napoli Federico II', 320, 172],
   ['vanvitelli', 'Università degli Studi della Campania Luigi Vanvitelli', 262, 95],
-  ['sapienza', 'Sapienza Università di Roma', 320, 93],
+  ['bocconi', 'Università Bocconi', 320, 105],
   ['calabria', 'Università della Calabria', 320, 112],
   ['firenze-economia', 'Università degli Studi di Firenze, Scuola di Economia e Management', 320, 172],
   ['uninettuno', 'Università Telematica Internazionale Uninettuno', 320, 67],
-  ['foggia', 'Università di Foggia', 320, 224],
   ['roma-tre', 'Università degli Studi Roma Tre', 320, 163],
-  ['bocconi', 'Università Bocconi', 320, 105],
+  ['sapienza', 'Sapienza Università di Roma', 320, 93],
+  ['torino', 'Università degli Studi di Torino', 320, 155],
   ['firenze-scienze-politiche', 'Università degli Studi di Firenze, Scuola di Scienze Politiche Cesare Alfieri', 320, 70],
   ['cattolica', 'Università Cattolica del Sacro Cuore', 320, 132],
-  ['torino', 'Università degli Studi di Torino', 320, 155],
+  ['foggia', 'Università di Foggia', 320, 224],
 ];
 
 const TESTI = {
   it: {
     titolo: 'Chi sono',
-    descrizione: 'Carmine Tornincasa, insegnante privato di Analisi matematica e content creator: oltre 1500 studenti seguiti in tutta Italia, più di 10 anni di esperienza.',
+    descrizione: 'Carmine Tornincasa, insegnante privato di Analisi matematica e content creator: oltre mille studenti seguiti in tutta Italia e più di diecimila ore di lezione.',
     sottotitolo: 'Insegnante privato e content creator del canale',
     seguimi: 'Seguimi su',
+    // ogni punto: pezzi di testo, quelli con true in grassetto
     punti: [
-      ['📈', 'Migliaia di studenti', ' supportati nel raggiungimento dei propri obiettivi'],
-      ['🏆', 'Risultati eccellenti', ' e miglioramenti concreti fin dalle prime lezioni'],
-      ['🎓', 'Oltre 10 anni di esperienza', ' nell’insegnamento universitario e scolastico'],
-      ['🧠', 'Metodo collaudato e personalizzato', ', costruito su misura per ogni studente'],
-    ],
+      [['Laurea in Ingegneria civile', true], [' e master in matematica', false]],
+      [['Oltre mille studenti', true], [' seguiti e ', false], ['più di diecimila ore', true], [' di lezione', false]],
+      [['Insegno matematica ', false], ['da quando ero alle superiori', true]],
+      [['Lezioni individuali, ', false], ['corsi di gruppo', true], [' online e ', false], ['videocorsi', true]],
+    ] as [string, boolean][][],
     studenti: 'I miei studenti',
-    dove: 'Dove ho insegnato solo nel 2025?',
-    oltre: ['Oltre 1500 studenti', ' seguiti in tutta Italia'],
-    copertura: ['Copertura capillare: ', '78 province', ' raggiunte'],
+    dove: 'Da dove arrivano gli studenti del 2025',
+    province: ['Studenti da ', '78 province', ', soprattutto da Roma, Milano e Napoli.'],
     mappa: 'Mappa dell’Italia con le province di provenienza degli studenti: i cerchi più grandi sono su Roma, Milano e Napoli',
-    dati: 'Alcuni dati significativi:',
     citta: [['400+', 'studenti da Roma'], ['250+', 'da Milano'], ['120+', 'da Napoli'], ['90+', 'da Palermo'], ['80+', 'da Torino']],
-    universita: 'Non importa da quale università provieni: probabilmente abbiamo già aiutato un tuo collega',
     missione: 'La mia missione educativa',
     paragrafi: [
-      'So cosa significa sentirsi inadeguati nello studio. Ho trasformato questa difficoltà in una forza, mettendo la mia esperienza al servizio degli altri.',
-      'Dopo migliaia di ore di lezione con studenti diversi, ho sviluppato competenze tecniche e didattiche che mi permettono di adattarmi a ciascuno, aiutandoli a superare blocchi e difficoltà.',
+      'Dopo migliaia di ore di lezione con studenti diversi ho imparato a partire dal punto in cui ciascuno si blocca. Sul sito la teoria segue l’ordine delle mie lezioni, con le ipotesi scritte per intero, e gli esercizi svolti sono divisi per tipologia, con il calcolo sopra e la spiegazione sotto.',
       'Voglio che ogni studente si senta capace, accompagnandolo nel miglioramento dei voti e dell’autostima. Attraverso Instagram e altri canali, cerco di diffondere contenuti utili e accessibili, costruendo una rete di apprendimento affidabile.',
-      'Grazie a collaboratori fidati, posso offrire supporto anche in materie che non insegno direttamente, mantenendo sempre qualità e attenzione.',
     ],
     risultati: 'I vostri risultati',
     risultato: 'Messaggio di uno studente dopo l’esame, dalle storie in evidenza su Instagram',
@@ -66,39 +63,36 @@ const TESTI = {
         'I corsi prevedono un’organizzazione personalizzata in base alle prove d’esame inviate, con almeno tre incontri settimanali da un’ora.',
         'Le lezioni sono registrate, così da poterle recuperare in caso di assenza. Per iscriversi servono nome, cognome e numero di telefono.',
       ]],
-      ['Corso on demand', ['Corso totalmente preregistrato. Verrà proposta una delle migliori esperienze dei tanti corsi live svolti nel tempo. Per ogni lezione sarà previsto: Video + PDF relativo']],
+      ['Corso on demand', ['Le lezioni registrate di un corso completo, ciascuna con il video e il PDF.']],
     ] as [string, string[]][],
     durata: 'Durata prevista:',
     lezioni: ['circa 30 lezioni per Analisi 1', 'circa 20 lezioni per Analisi 2'],
     supportate: 'Alcune delle Università supportate',
     prenota: 'Prenota la tua lezione',
+    prova: 'Prova gratis il materiale del sito',
+    videocorsi: 'Vedi i videocorsi',
     ruolo: 'Insegnante privato di Analisi matematica',
   },
   en: {
     titolo: 'About me',
-    descrizione: 'Carmine Tornincasa, private Calculus tutor and content creator: over 1500 students taught across Italy, more than 10 years of experience.',
+    descrizione: 'Carmine Tornincasa, private Calculus tutor and content creator: over a thousand students taught across Italy and more than ten thousand hours of lessons.',
     sottotitolo: 'Private tutor and content creator of the channel',
     seguimi: 'Follow me on',
     punti: [
-      ['📈', 'Thousands of students', ' helped to reach their goals'],
-      ['🏆', 'Excellent results', ' and concrete improvement from the very first lessons'],
-      ['🎓', 'Over 10 years of experience', ' teaching at university and school level'],
-      ['🧠', 'A proven, personalised method', ', tailored to each student'],
-    ],
+      [['Degree in Civil Engineering', true], [' and a master’s in mathematics', false]],
+      [['Over a thousand students', true], [' taught and ', false], ['more than ten thousand hours', true], [' of lessons', false]],
+      [['I have taught mathematics ', false], ['since I was in high school', true]],
+      [['One-to-one lessons, online ', false], ['group courses', true], [' and ', false], ['video courses', true]],
+    ] as [string, boolean][][],
     studenti: 'My students',
-    dove: 'Where did I teach in 2025 alone?',
-    oltre: ['Over 1500 students', ' taught all over Italy'],
-    copertura: ['Wide coverage: ', '78 provinces', ' reached'],
+    dove: 'Where my 2025 students come from',
+    province: ['Students from ', '78 provinces', ', mostly from Rome, Milan and Naples.'],
     mappa: 'Map of Italy with the provinces my students come from: the largest circles are on Rome, Milan and Naples',
-    dati: 'Some significant figures:',
     citta: [['400+', 'students from Rome'], ['250+', 'from Milan'], ['120+', 'from Naples'], ['90+', 'from Palermo'], ['80+', 'from Turin']],
-    universita: 'Whatever university you come from, we have probably already helped one of your classmates',
     missione: 'My teaching mission',
     paragrafi: [
-      'I know what it means to feel inadequate when studying. I turned that difficulty into a strength, putting my experience at the service of others.',
-      'After thousands of hours of lessons with very different students, I developed the technical and teaching skills that let me adapt to each of them and help them overcome blocks and difficulties.',
+      'After thousands of hours of lessons with very different students, I have learned to start from the point where each of them gets stuck. On the website the theory follows the order of my lessons, with the hypotheses written in full, and the worked examples are grouped by type, with the computation first and the explanation below.',
       'I want every student to feel capable, and I accompany them as their grades and self-confidence improve. Through Instagram and other channels I share useful, accessible content, building a reliable learning network.',
-      'Thanks to trusted collaborators, I can also offer support in subjects I do not teach directly, always with the same quality and care.',
     ],
     risultati: 'Your results',
     risultato: 'Message from a student after the exam, from the Instagram story highlights',
@@ -110,12 +104,14 @@ const TESTI = {
         'The courses are organised around the past exam papers you send, with at least three one-hour meetings per week.',
         'Lessons are recorded, so you can catch up if you miss one. To enrol you only need your name, surname and phone number.',
       ]],
-      ['On-demand course', ['A fully pre-recorded course, taken from the best of the many live courses held over the years. Each lesson comes with a video and its PDF.']],
+      ['On-demand course', ['The recorded lessons of a complete course, each with its video and PDF.']],
     ] as [string, string[]][],
     durata: 'Expected length:',
     lezioni: ['about 30 lessons for Calculus 1', 'about 20 lessons for Calculus 2'],
     supportate: 'Some of the universities we support',
     prenota: 'Book your lesson',
+    prova: 'Try the website material for free',
+    videocorsi: 'See the video courses (in Italian)',
     ruolo: 'Private Calculus tutor',
   },
 }[lingua];
@@ -155,23 +151,21 @@ const persona = {
   </section>
 
   <ul class="bio-punti">
-    {TESTI.punti.map(([icona, forte, resto]) => <li><span aria-hidden="true">{icona}</span> <span><strong>{forte}</strong>{resto}</span></li>)}
+    {TESTI.punti.map((pezzi) => <li><span>{pezzi.map(([testo, forte]) => (forte ? <strong>{testo}</strong> : testo))}</span></li>)}
   </ul>
 
   <h2>{TESTI.studenti}</h2>
   <div class="bio-studenti">
     <div>
-      <p class="bio-dove"><span aria-hidden="true">📍</span> {TESTI.dove}</p>
-      <p><strong>{TESTI.oltre[0]}</strong>{TESTI.oltre[1]}<br />{TESTI.copertura[0]}<strong>{TESTI.copertura[1]}</strong>{TESTI.copertura[2]}</p>
-      <p class="bio-dati-titolo"><span aria-hidden="true">🎯</span> {TESTI.dati}</p>
+      <p class="bio-dove">{TESTI.dove}</p>
+      <p>{TESTI.province[0]}<strong>{TESTI.province[1]}</strong>{TESTI.province[2]}</p>
       <ul class="bio-citta">
         {TESTI.citta.map(([n, s]) => <li><strong>{n}</strong> {s}</li>)}
       </ul>
     </div>
     <img class="bio-mappa" src="/chi-sono/mappa-studenti.webp" width="640" height="702" loading="lazy" alt={TESTI.mappa} />
   </div>
-  <p class="bio-universita"><span aria-hidden="true">🌐</span> {TESTI.universita}</p>
-  <p class="bio-centro"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a></p>
+  <p class="bio-centro"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a><br /><a class="bio-secondario" href={lingua === 'it' ? '/' : '/en'}>{TESTI.prova}</a></p>
 
   <h2>{TESTI.missione}</h2>
   {TESTI.paragrafi.map((p) => <p>{p}</p>)}
@@ -191,6 +185,7 @@ const persona = {
         <strong>{nome}</strong>
         <div>
           {testi.map((t) => <p>{t}</p>)}
+          {i === 2 && <p><a href="/videocorsi">{TESTI.videocorsi}</a></p>}
           {i === 1 && (
             <>
               <p class="bio-durata">{TESTI.durata}</p>
@@ -203,7 +198,7 @@ const persona = {
   </div>
 
   <h2 class="bio-centrato">{TESTI.supportate}</h2>
-  <div class="bio-loghi">
+  <div class="bio-loghi chiari">
     {UNIVERSITA.map(([file, nome, w, h]) => <img src={`/chi-sono/universita/${file}.webp`} width={w} height={h} loading="lazy" alt={nome} title={nome} />)}
   </div>
 </Base>
@@ -218,14 +213,14 @@ const persona = {
   .bio-social { margin: 0.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro-2); }
   .bio-social a { color: var(--accento); font-weight: 600; }
   .bio-punti { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.6rem; }
-  .bio-punti li { display: flex; gap: 0.6rem; align-items: baseline; }
+  .bio-punti li { display: flex; gap: 0.6rem; align-items: baseline; padding-left: 0.9rem; border-left: 3px solid color-mix(in srgb, var(--accento) 40%, transparent); }
   .bio-punti strong, .bio-citta strong { color: var(--accento); font-weight: 600; }
   .bio-studenti { display: grid; grid-template-columns: 1fr 15rem; gap: 1.5rem; align-items: start; }
-  .bio-dove, .bio-dati-titolo { font-family: var(--ui); font-weight: 600; margin-bottom: 0.4rem; }
+  .bio-dove { font-family: var(--ui); font-weight: 600; margin-bottom: 0.4rem; }
   .bio-citta { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.25rem; }
   .bio-mappa { width: 100%; height: auto; border-radius: var(--raggio); border: 1px solid var(--riga); }
-  .bio-universita { margin-top: 1.25rem; }
   .bio-centro { margin-top: 1.5rem; text-align: center; }
+  .bio-secondario { display: inline-block; margin-top: 0.7rem; padding: 0.6rem 1.2rem; border-radius: 999px; border: 1px solid var(--riga); color: var(--accento); font-family: var(--ui); font-weight: 600; text-decoration: none; }
   .bio-centrato { text-align: center; }
   .bio-risultati { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr)); gap: 0.4rem; }
   .bio-risultati a { display: block; border-radius: 4px; overflow: hidden; border: 1px solid var(--riga); }
@@ -239,6 +234,9 @@ const persona = {
   .bio-durata { margin-bottom: 0.2rem !important; }
   .bio-loghi { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem 2rem; padding: 1.75rem 1.5rem; border-radius: var(--raggio); background: #0d2a47; }
   .bio-loghi img { height: 4.2rem; width: auto; max-width: 9.5rem; object-fit: contain; }
+  /* loghi bianchi resi scuri su fondo chiaro */
+  .bio-loghi.chiari { background: var(--carta-2); border: 1px solid var(--riga); }
+  .bio-loghi.chiari img { filter: brightness(0); opacity: 0.72; }
   @media (max-width: 40rem) {
     .bio-testa { flex-direction: column; text-align: center; }
     .bio-social { justify-content: center; }
