@@ -337,6 +337,30 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'problemi-di-deduzione', titolo: 'Problemi di deduzione e tabelle', breve: 'Problemi di deduzione' },
     ],
   },
+  {
+    // Materia gratuita (non è in prezzi.json): per chi vuole imparare o ripassare la matematica dalle basi, senza un esame da preparare.
+    slug: 'matematica-da-zero',
+    titolo: 'Matematica da zero',
+    breve: 'Matematica da zero',
+    descrizione: "Gratuita. Per chi vuole imparare o ripassare la matematica dalle basi, senza un esame da preparare: numeri, frazioni, percentuali, potenze, calcolo letterale, equazioni, piano cartesiano e geometria.",
+    colore: '#b06a7c',
+    gruppo: 'Da zero',
+    attiva: false,
+    argomenti: [
+      { slug: 'numeri-naturali', titolo: 'Numeri naturali e ordine delle operazioni', breve: 'Numeri naturali' },
+      { slug: 'divisibilita', titolo: 'Multipli, divisori, numeri primi, MCD e mcm', breve: 'Divisibilità' },
+      { slug: 'numeri-relativi', titolo: 'Numeri relativi e regola dei segni', breve: 'Numeri relativi' },
+      { slug: 'frazioni', titolo: 'Frazioni', breve: 'Frazioni' },
+      { slug: 'decimali-e-percentuali', titolo: 'Numeri decimali, proporzioni e percentuali', breve: 'Decimali e percentuali' },
+      { slug: 'potenze-e-radici', titolo: 'Potenze e radici', breve: 'Potenze e radici' },
+      { slug: 'monomi-e-polinomi', titolo: 'Monomi, polinomi e prodotti notevoli', breve: 'Monomi e polinomi' },
+      { slug: 'scomposizione', titolo: 'Scomposizione in fattori e frazioni algebriche', breve: 'Scomposizione' },
+      { slug: 'equazioni-primo-grado', titolo: 'Equazioni di primo grado e problemi', breve: 'Equazioni' },
+      { slug: 'disequazioni-primo-grado', titolo: 'Disequazioni di primo grado', breve: 'Disequazioni' },
+      { slug: 'piano-cartesiano-e-retta', titolo: 'Piano cartesiano e retta', breve: 'Piano cartesiano' },
+      { slug: 'geometria-di-base', titolo: 'Figure piane, perimetri, aree e teorema di Pitagora', breve: 'Geometria' },
+    ],
+  },
 ];
 
 export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));

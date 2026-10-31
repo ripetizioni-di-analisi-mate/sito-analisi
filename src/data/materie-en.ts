@@ -230,6 +230,25 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'problemi-di-deduzione': { titolo: 'Deduction problems and tables', breve: 'Deduction' },
     },
   },
+  'matematica-da-zero': {
+    titolo: 'Mathematics from scratch',
+    breve: 'Maths from scratch',
+    descrizione: 'Free. For anyone who wants to learn or review mathematics from the basics, with no exam to prepare: numbers, fractions, percentages, powers, algebra, equations, the Cartesian plane and geometry.',
+    argomenti: {
+      'numeri-naturali': { titolo: 'Natural numbers and order of operations', breve: 'Natural numbers' },
+      divisibilita: { titolo: 'Multiples, divisors, prime numbers, GCD and LCM', breve: 'Divisibility' },
+      'numeri-relativi': { titolo: 'Integers and the rule of signs', breve: 'Integers' },
+      frazioni: { titolo: 'Fractions', breve: 'Fractions' },
+      'decimali-e-percentuali': { titolo: 'Decimals, proportions and percentages', breve: 'Decimals and percentages' },
+      'potenze-e-radici': { titolo: 'Powers and roots', breve: 'Powers and roots' },
+      'monomi-e-polinomi': { titolo: 'Monomials, polynomials and special products', breve: 'Polynomials' },
+      scomposizione: { titolo: 'Factoring and algebraic fractions', breve: 'Factoring' },
+      'equazioni-primo-grado': { titolo: 'Linear equations and word problems', breve: 'Equations' },
+      'disequazioni-primo-grado': { titolo: 'Linear inequalities', breve: 'Inequalities' },
+      'piano-cartesiano-e-retta': { titolo: 'The Cartesian plane and the straight line', breve: 'Cartesian plane' },
+      'geometria-di-base': { titolo: 'Plane figures, perimeters, areas and Pythagoras’ theorem', breve: 'Geometry' },
+    },
+  },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
-export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams' };
+export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Da zero': 'From scratch' };

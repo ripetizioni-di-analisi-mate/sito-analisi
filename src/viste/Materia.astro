@@ -16,7 +16,7 @@ const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 ---
-<Base titolo={t.argomentiEsame} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
+<Base titolo={m.prezzo ? t.argomentiEsame : t.programma} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livello,
   provider: { '@id': `${SITO}/#organizzazione` },
@@ -24,7 +24,7 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
   hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'P30D' },
   ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
 }] }}>
-  <p class="sopratitolo">{t.argomentiEsame}</p>
+  <p class="sopratitolo">{m.prezzo ? t.argomentiEsame : t.programma}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {m.prezzo && (
@@ -39,6 +39,17 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
         <div class="azioni-anteprima">
           <a class="bottone-sblocca" href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}>{t.iniziaAnteprima} →</a>
           <a class="link-sblocca" href={link(lingua, `/${m.slug}/sblocca`)}>{t.sbloccaTutto} · {m.prezzo} €</a>
+        </div>
+      </div>
+    </div>
+  )}
+  {!m.prezzo && (
+    <div class="riquadro-stato">
+      <div class="stato-bloccata">
+        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11c-3.5-2.6-8.5-3.4-14-2.6v21c5.5-.8 10.5 0 14 2.6 3.5-2.6 8.5-3.4 14-2.6v-21c-5.5-.8-10.5 0-14 2.6z"/><path d="M20 11v21"/></svg>
+        <div class="testo"><strong>{t.tuttoGratis}</strong><span>{t.tuttoGratisTesto}</span></div>
+        <div class="azioni-anteprima">
+          <a class="bottone-sblocca" href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}>{t.iniziaPrimo} →</a>
         </div>
       </div>
     </div>
