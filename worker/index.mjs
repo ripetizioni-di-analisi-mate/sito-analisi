@@ -479,16 +479,23 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
-      const { materia, argomento, id, lingua } = await req.json().catch(() => ({}));
+      const { materia, argomento, id, viste, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const dati = await domandeDi(env, materia, l);
       const elenco = dati?.argomenti?.[argomento];
       if (!elenco?.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       // Le domande si percorrono in ordine, avanti e indietro: senza id si parte dalla prima.
-      const q = elenco.find((x) => x.id === id) || elenco[0];
+      // Una pagina aperta prima del 31/10 alle 14:48 manda le domande già viste ("viste") e non l'id:
+      // in quel caso si propone la prima non ancora vista, altrimenti tornerebbe sempre la prima domanda.
+      let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
+      if (!q) {
+        const gia = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
+        q = elenco.find((x) => !gia.has(x.id)) || elenco.find((x) => x.id !== [...gia].pop()) || elenco[0];
+      }
       const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: elenco.map((x) => x.id), secondi: PUNTI.secondiDomanda, collegato: Boolean(io) });
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: elenco.map((x) => x.id), totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
+        200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
