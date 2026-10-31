@@ -95,13 +95,13 @@ I triangoli si classificano in due modi.
 - Rispetto ai lati, un triangolo è **equilatero** se ha i tre lati uguali, **isoscele** se ha almeno due lati uguali, **scaleno** se ha i tre lati diversi.
 - Rispetto agli angoli, un triangolo è **acutangolo** se ha tre angoli acuti, **rettangolo** se ha un angolo retto, **ottusangolo** se ha un angolo ottuso.
 
-Per esempio un triangolo con angoli di $30^\circ$, $60^\circ$ e $90^\circ$ è rettangolo, e un triangolo con angoli di $20^\circ$, $40^\circ$ e $120^\circ$ è ottusangolo. Un triangolo ha al massimo un angolo retto o ottuso, perché due angoli di almeno $90^\circ$ avrebbero già somma di almeno $180^\circ$.
+Per esempio un triangolo con angoli di $30^\circ$, $60^\circ$ e $90^\circ$ è rettangolo, e un triangolo con angoli di $20^\circ$, $40^\circ$ e $120^\circ$ è ottusangolo. Un triangolo ha al massimo un angolo retto o ottuso, perché due angoli di almeno $90^\circ$ avrebbero già somma di almeno $180^\circ$, e per il terzo angolo resterebbero $0^\circ$ o meno.
 :::
 
 :::definizione{#triangoli-isosceli-rettangoli titolo="Lati e angoli dei triangoli isosceli e rettangoli"}
-In un triangolo isoscele il lato diverso dagli altri due si chiama **base**, e i due lati uguali si chiamano lati obliqui. I due angoli vicini alla base, detti angoli alla base, sono uguali. In un triangolo equilatero anche i tre angoli sono uguali, quindi ciascuno misura $\dfrac{180^\circ}{3} = 60^\circ$.
+In un triangolo isoscele il lato diverso dagli altri due si chiama **base**, e i due lati uguali si chiamano lati obliqui. I due angoli vicini alla base, detti angoli alla base, sono uguali. In un triangolo equilatero anche i tre angoli sono uguali, quindi ciascuno misura $\dfrac{180^\circ}{3} = 60^\circ$. Per esempio, in un triangolo isoscele con l'angolo opposto alla base di $40^\circ$, i due angoli alla base insieme misurano $180^\circ - 40^\circ = 140^\circ$, e ciascuno misura $\dfrac{140^\circ}{2} = 70^\circ$.
 
-In un triangolo rettangolo i due lati che formano l'angolo retto si chiamano **cateti**, e il lato opposto all'angolo retto si chiama **ipotenusa**. I due angoli acuti hanno somma $180^\circ - 90^\circ = 90^\circ$, quindi sono complementari. Per esempio, in un triangolo isoscele con l'angolo opposto alla base di $40^\circ$, i due angoli alla base insieme misurano $180^\circ - 40^\circ = 140^\circ$, e ciascuno misura $\dfrac{140^\circ}{2} = 70^\circ$.
+In un triangolo rettangolo i due lati che formano l'angolo retto si chiamano **cateti**, e il lato opposto all'angolo retto si chiama **ipotenusa**. I due angoli acuti hanno somma $180^\circ - 90^\circ = 90^\circ$, quindi sono complementari. Per esempio, se un angolo acuto misura $30^\circ$, l'altro misura $90^\circ - 30^\circ = 60^\circ$.
 :::
 
 :::definizione{#altezza-triangolo titolo="Altezza di un triangolo"}
@@ -166,7 +166,7 @@ Per esempio un parallelogramma con base $6$ cm e altezza $4$ cm ha area $6 \cdot
 :::dimostrazione
 Si taglia il parallelogramma lungo l'altezza che parte da un estremo del lato superiore, e si ottengono un triangolo rettangolo e un trapezio. Si sposta il triangolo dall'altra parte, contro il lato opposto. La figura che si ottiene è un rettangolo con la stessa base $b$ e la stessa altezza $h$. Il taglio e lo spostamento non cambiano la quantità di superficie, quindi il parallelogramma ha la stessa area del rettangolo, cioè $b \cdot h$.
 
-Per il triangolo si prende una sua copia, la si ruota di mezzo giro e la si accosta a uno dei due lati obliqui. Si ottiene un parallelogramma con base $b$ e altezza $h$, formato da due triangoli uguali. Il triangolo è quindi metà del parallelogramma, e perciò la sua area è $\dfrac{b \cdot h}{2}$.
+Per il triangolo si prende una sua copia, la si ruota di mezzo giro e la si accosta al triangolo lungo uno dei due lati diversi dalla base. Si ottiene un parallelogramma con base $b$ e altezza $h$, formato da due triangoli uguali. Il triangolo è quindi metà del parallelogramma, e perciò la sua area è $\dfrac{b \cdot h}{2}$.
 :::
 ::::
 
@@ -236,7 +236,7 @@ Una **terna pitagorica** è un gruppo di tre numeri naturali $a$, $b$, $c$ tali 
 $$
 (3, 4, 5) , \qquad (5, 12, 13) , \qquad (8, 15, 17) .
 $$
-Per esempio $(5, 12, 13)$ è una terna pitagorica, perché $5^2 + 12^2 = 25 + 144 = 169$ e $13^2 = 169$. Moltiplicando i tre numeri di una terna per uno stesso numero naturale si ottiene un'altra terna, perché tutti e tre i quadrati vengono moltiplicati per lo stesso numero. Per esempio, moltiplicando per $2$ la terna $(3, 4, 5)$ si ottiene $(6, 8, 10)$, e infatti $36 + 64 = 100$. Le terne permettono di riconoscere l'ipotenusa o un cateto senza calcolare la radice quadrata.
+Per esempio $(5, 12, 13)$ è una terna pitagorica, perché $5^2 + 12^2 = 25 + 144 = 169$ e $13^2 = 169$. Moltiplicando i tre numeri di una terna per uno stesso numero naturale diverso da zero si ottiene un'altra terna, perché tutti e tre i quadrati vengono moltiplicati per lo stesso numero. Per esempio, moltiplicando per $2$ la terna $(3, 4, 5)$ si ottiene $(6, 8, 10)$, e infatti $36 + 64 = 100$. Le terne permettono di riconoscere l'ipotenusa o un cateto senza calcolare la radice quadrata.
 :::
 
 :::osservazione{#diagonale-altezza titolo="Diagonale del rettangolo e altezza del triangolo isoscele"}
@@ -285,7 +285,7 @@ L'unità di misura delle lunghezze è il **metro**, che si indica con m. I suoi 
 $$
 1\ \text{km} = 1000\ \text{m} , \qquad 1\ \text{m} = 10\ \text{dm} = 100\ \text{cm} = 1000\ \text{mm} .
 $$
-Nella scala km, hm, dam, m, dm, cm, mm ogni unità è $10$ volte più grande della successiva. Per passare a un'unità più piccola si moltiplica per $10$ a ogni passo, e per passare a un'unità più grande si divide per $10$ a ogni passo. Per esempio $3{,}5\ \text{m} = 350\ \text{cm}$, perché dal metro al centimetro ci sono due passi e $3{,}5 \cdot 100 = 350$. Allo stesso modo $2400\ \text{m} = 2{,}4\ \text{km}$, perché dal metro al chilometro ci sono tre passi e $\dfrac{2400}{1000} = 2{,}4$. Nel calcolo di un perimetro o di un'area le lunghezze si esprimono tutte nella stessa unità.
+Nella scala km, hm (ettometro), dam (decametro), m, dm, cm, mm ogni unità è $10$ volte più grande della successiva. Per passare a un'unità più piccola si moltiplica per $10$ a ogni passo, e per passare a un'unità più grande si divide per $10$ a ogni passo. Per esempio $3{,}5\ \text{m} = 350\ \text{cm}$, perché dal metro al centimetro ci sono due passi e $3{,}5 \cdot 100 = 350$. Allo stesso modo $2400\ \text{m} = 2{,}4\ \text{km}$, perché dal metro al chilometro ci sono tre passi e $\dfrac{2400}{1000} = 2{,}4$. Nel calcolo di un perimetro o di un'area le lunghezze si esprimono tutte nella stessa unità.
 :::
 
 :::teorema{#unita-area titolo="Unità di misura delle aree"}
