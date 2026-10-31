@@ -79,7 +79,7 @@ const SEGNO_TRACCIA = '<span class="fine-traccia" hidden></span>';
 
 // Testi delle vetrine in ogni lingua del sito (l'italiano alla radice, le altre sotto /<lingua>).
 const LINGUE = [
-  { pref: '', sblocca: 'Sblocca ora', pdf: /<p class="collegamenti">PDF dell'argomento[\s\S]*?<\/p>/,
+  { pref: '', sblocca: 'Sblocca ora', pdf: /<p class="collegamenti">PDF dell(?:'|&#39;|&#x27;|’)argomento[\s\S]*?<\/p>/,
     breve: BREVE_IT, nomi: DATI_IT.titoli, argomenti: DATI_IT.argomenti, fine: 'Fine dell’anteprima gratuita',
     titolo: (n) => (n === 1 ? 'La teoria di questo argomento continua con un altro paragrafo' : `La teoria di questo argomento continua con altri ${n} paragrafi`),
     resto: (schede, esercizi, pdf) => `Nell’accesso completo si trovano anche ${schede === 1 ? 'l’altra scheda svolta' : `le altre ${schede} schede svolte`} di questo argomento e le soluzioni dei ${esercizi} esercizi da fare${pdf ? ', oltre al PDF dell’argomento' : ''}.`,

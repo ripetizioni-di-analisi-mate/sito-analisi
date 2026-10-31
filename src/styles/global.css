@@ -842,3 +842,15 @@ html.collegato .livello-testata { display: block; }
 .fine-anteprima .velo-gratis a { color: var(--accento); }
 .svolgimento-riservato { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); border-left: 3px solid var(--riga); padding: 0.3rem 0 0.3rem 0.8rem; margin: 0.6rem 0 1.6rem; }
 .velo-scheda::before { display: none; }
+/* Pagina Sblocca: iscrizione dentro il riquadro del prezzo */
+.gratis-ora { font-family: var(--ui); font-size: 0.92rem; color: var(--inchiostro-2); margin: 0.2rem 0 1rem; }
+.modulo.modulo-acquisto { margin: 0.4rem auto 0; max-width: 22rem; text-align: left; }
+.modulo.modulo-acquisto[hidden] { display: none; }
+.modulo-acquisto input:not([type="checkbox"]) { width: 100%; box-sizing: border-box; }
+.modulo-acquisto .campo-password input { width: 100%; }
+.modulo-acquisto .bottone-primario { width: 100%; }
+.modulo-acquisto .nota-accesso { text-align: center; margin: 0; }
+.modulo-acquisto .nota-privacy { margin: 0; font-size: 0.82rem; color: var(--inchiostro-2); text-align: center; }
+.modulo-acquisto .esito-modulo:empty { display: none; }
+.metodi-pagamento { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0.9rem 0 0; }
+.riquadro-acquisto .mostra-password { font-size: inherit; background: none; color: var(--inchiostro-2); padding: 0.4rem; border-radius: 6px; }
