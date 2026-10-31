@@ -86,7 +86,7 @@ ax + ay + 2x + 2y &= a\,(x + y) + 2\,(x + y) \\[6pt]
 &= (x + y)(a + 2) .
 \end{aligned}
 $$
-Nel primo gruppo si raccoglie $a$, nel secondo si raccoglie $2$, ed entrambi lasciano $x + y$. Con $a = 1$, $x = 3$ e $y = 4$ il polinomio vale $3 + 4 + 6 + 8 = 21$ e il prodotto vale $7 \cdot 3 = 21$.
+Nel primo gruppo si raccoglie $a$, nel secondo si raccoglie $2$, e in entrambi i gruppi resta $x + y$. Con $a = 1$, $x = 3$ e $y = 4$ il polinomio vale $3 + 4 + 6 + 8 = 21$ e il prodotto vale $7 \cdot 3 = 21$.
 :::
 
 :::esempio{titolo="Raccoglimento parziale con una sola lettera"}
@@ -125,11 +125,11 @@ $$
 :::
 
 :::teorema{#differenza-di-quadrati titolo="Differenza di quadrati"}
-Una differenza di due quadrati è uguale al prodotto della somma per la differenza delle basi:
+La **base** di un quadrato è il numero o il monomio che, elevato al quadrato, lo dà. Una differenza di due quadrati è uguale al prodotto della somma per la differenza delle basi:
 $$
 a^2 - b^2 = (a + b)(a - b) .
 $$
-La **base** di un quadrato è il numero o il monomio che, elevato al quadrato, lo dà. Per esempio la base di $9$ è $3$ e la base di $4x^2$ è $2x$. Perciò
+Per esempio la base di $9$ è $3$ e la base di $4x^2$ è $2x$. Perciò
 $$
 x^2 - 9 = (x + 3)(x - 3) ,
 \qquad
@@ -262,7 +262,7 @@ Nel secondo esempio $x^4 = (x^2)^2$ e $16 = 4^2$, quindi la differenza di quadra
 
 ## MCD e mcm di polinomi
 
-:::richiamo{titolo="MCD e mcm con la scomposizione in fattori primi"}
+:::richiamo{titolo="Calcolo di MCD e mcm con la scomposizione"}
 Scomposti due numeri in fattori primi, il $\operatorname{MCD}$ è il prodotto dei fattori comuni, ciascuno con l'esponente più piccolo, e il $\operatorname{mcm}$ è il prodotto dei fattori comuni e non comuni, ciascuno con l'esponente più grande.
 :::
 
