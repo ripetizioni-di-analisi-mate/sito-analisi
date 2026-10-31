@@ -298,6 +298,10 @@ export function percorso(ar, c) {
       minuti: ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ? AND giorno BETWEEN ? AND ?', email, da, a).c,
       corrette: ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno BETWEEN ? AND ? AND corretta = 1', email, da, a).c,
     },
+    oggi: {
+      minuti: ar.riga('SELECT COALESCE(SUM(minuti), 0) AS c FROM studio WHERE email = ? AND giorno = ?', email, oggi).c,
+      corrette: ar.riga('SELECT COUNT(*) AS c FROM risposte WHERE email = ? AND giorno = ? AND corretta = 1', email, oggi).c,
+    },
     obiettivi: righe.map((o) => progressoObiettivo(ar, email, o, sett, l)),
     traguardi: premi.map((p) => ({ nome: p.nome, punti: p.punti, quando: p.quando })),
     daFare,

@@ -135,17 +135,26 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         {(
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
-              <span class="etichetta-livello">{en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
-              <span class="mini-barra" aria-hidden="true"><span></span></span>
+              <span class="stemma" aria-hidden="true">
+                <svg viewBox="0 0 36 42"><path d="M18 2 L33 7 V20 C33 30 26 37 18 40 C10 37 3 30 3 20 V7 Z"/></svg>
+                <span class="numero-livello">1</span>
+              </span>
+              <span class="righe-livello">
+                <span class="nome-utente">{t.account}</span>
+                <span class="fascia-testata"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
+              </span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
-              <div class="pl-testa"><strong class="pl-livello"></strong><span class="pl-exp"></span></div>
-              <div class="barra-exp"><span class="pl-barra"></span></div>
+              <div class="pl-anello">
+                <svg viewBox="0 0 104 104" aria-hidden="true"><circle class="pl-anello-fondo" cx="52" cy="52" r="44"/><circle class="pl-anello-avanzamento" cx="52" cy="52" r="44" stroke-dasharray="276.5" stroke-dashoffset="276.5" transform="rotate(-90 52 52)"/></svg>
+                <span><small>{en ? 'LEVEL' : 'LIVELLO'}</small><strong class="pl-numero">1</strong></span>
+              </div>
+              <p class="pl-fascia"><strong></strong><span></span></p>
               <p class="pl-mancano"></p>
-              <div class="pl-settimana" hidden>
-                <p class="pl-titoletto">{en ? 'This week\'s goals' : 'Obiettivi della settimana'}</p>
-                <ul class="pl-obiettivi"></ul>
-                <p class="pl-traguardo" hidden><span><span class="pl-traguardo-etichetta">{en ? 'Next milestone' : 'Prossimo traguardo'}</span><strong></strong></span><em></em></p>
+              <div class="pl-oggi">
+                <p><strong class="pl-oggi-minuti">–</strong><span>{en ? 'minutes of study today' : 'minuti di studio oggi'}</span></p>
+                <p><strong class="pl-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
+                <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
               <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti') + (domandeQui ? '' : '#domande')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               <p class="pl-link">
@@ -248,7 +257,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     addEventListener('resize', adattaFormule);
 
     // ---- Livello in testata: anello, pannello al tocco, aggiornamento dopo ogni minuto di studio o risposta ----
-    interface Stato { livello: number; fascia: string; exp: number; base: number; prossimo: number | null; mancano: number; perc: number }
+    interface Stato { livello: number; fascia: string; frase?: string; exp: number; base: number; prossimo: number | null; mancano: number; perc: number }
     const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
     const pl = document.getElementById('pannello-livello');
     const inglese = document.documentElement.lang === 'en';
@@ -257,16 +266,18 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     function mostraLivello(st: Stato) {
       if (!bl || !pl) return;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
-      (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
+      bl.querySelector('.fascia-nome')!.textContent = st.fascia;
       bl.querySelector('.exp-livello')!.textContent = num(st.exp);
-      bl.setAttribute('aria-label', `${inglese ? 'Level' : 'Livello'} ${st.livello}, ${st.fascia}, ${num(st.exp)} ${XP}`);
-      pl.querySelector('.pl-livello')!.textContent = `${inglese ? 'Level' : 'Livello'} ${st.livello} · ${st.fascia}`;
-      (pl.querySelector('.pl-barra') as HTMLElement).style.width = `${st.perc}%`;
-      pl.querySelector('.pl-exp')!.textContent = st.prossimo === null ? `${num(st.exp)} ${XP}` : `${num(st.exp)} / ${num(st.prossimo)} ${XP}`;
-      pl.querySelector('.pl-mancano')!.textContent = st.prossimo === null ? (inglese ? 'Maximum level' : 'Livello massimo') : `${num(st.mancano)} ${XP} ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
+      bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}, ${num(st.exp)} ${XP}`);
+      pl.querySelector('.pl-numero')!.textContent = String(st.livello);
+      pl.querySelector('.pl-anello-avanzamento')!.setAttribute('stroke-dashoffset', (276.5 * (1 - st.perc / 100)).toFixed(1));
+      pl.querySelector('.pl-fascia strong')!.textContent = st.fascia;
+      if (st.frase) pl.querySelector('.pl-fascia span')!.textContent = st.frase;
+      pl.querySelector('.pl-mancano')!.innerHTML = st.prossimo === null
+        ? `${num(st.exp)} ${XP} · ${inglese ? 'maximum level' : 'livello massimo'}`
+        : `${num(st.exp)} ${XP} · ${inglese ? '' : 'mancano '}<strong>${num(st.mancano)} ${XP}</strong> ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
     }
-    // Obiettivi della settimana e prossimo traguardo: si chiedono al server quando il pannello si apre.
-    const escH = (x: string) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as Record<string, string>)[c]);
+    // Studio di oggi e della settimana: si chiede al server quando il pannello si apre.
     let percorsoChiesto = 0;
     async function caricaPercorso() {
       if (!pl || Date.now() - percorsoChiesto < 30000) return;
@@ -275,24 +286,18 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       if (!r || !r.ok) return;
       const d = await r.json();
       if (d.stato) mostraLivello(d.stato);
-      const quantita = (f: number, t: number, u: string) => u === 'min' ? `${num(f)}/${num(t)} min` : `${num(f)}/${num(t)}`;
-      pl.querySelector('.pl-obiettivi')!.innerHTML = (d.obiettivi || []).map((o: any) => `<li class="${o.completato ? 'fatto' : ''}"><span class="pl-ob-testo">${escH(o.testo)}</span><span class="pl-ob-punti">${o.completato ? '✓ ' : ''}+${o.punti} ${XP}</span><span class="pl-ob-barra"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span><span class="pl-ob-conto">${quantita(o.fatto, o.totale, o.unita)}</span></li>`).join('');
-      const tr = pl.querySelector<HTMLElement>('.pl-traguardo')!;
-      if (d.prossimo) {
-        tr.querySelector('strong')!.textContent = `${d.prossimo.nome} · ${quantita(d.prossimo.fatto, d.prossimo.totale, d.prossimo.unita)}`;
-        tr.querySelector('em')!.textContent = `+${d.prossimo.punti} ${XP}`;
-        tr.hidden = false;
-      }
-      // Fuori da un argomento, il tasto porta all'argomento dell'obiettivo della settimana.
+      pl.querySelector('.pl-oggi-minuti')!.textContent = num(d.oggi?.minuti ?? 0);
+      pl.querySelector('.pl-oggi-corrette')!.textContent = num(d.oggi?.corrette ?? 0);
+      pl.querySelector('.pl-oggi-giorni')!.textContent = String((d.settimana?.giorni || []).filter((g: any) => g.attivo).length);
+      // Fuori da un argomento, il tasto porta all'argomento dell'obiettivo della settimana o all'ultimo studiato.
       const cont = pl.querySelector<HTMLAnchorElement>('.pl-continua')!;
       const conLink = (d.obiettivi || []).find((o: any) => o.link && !o.completato);
       const ultima = (d.sessioni || []).find((x: any) => x.materia && x.argomento);
       const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
       if (!cont.dataset.qui && dove) cont.href = (inglese ? '/en' : '') + dove;
-      pl.querySelector<HTMLElement>('.pl-settimana')!.hidden = !(d.obiettivi || []).length;
     }
     if (bl?.dataset.stato) {
-      try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
+      try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, frase: d.r, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
     }
     bl?.addEventListener('click', () => {
       const apri = pl!.hidden;
