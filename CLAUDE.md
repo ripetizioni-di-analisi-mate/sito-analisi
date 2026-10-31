@@ -110,6 +110,11 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Prezzi barrati: non mostrati (Omnibus), solo il risparmio reale del pacchetto (552 € separati). Klarna non disponibile su Paddle (metodi: carte, PayPal, Apple Pay, Google Pay e altri locali).
 - Corsi di gruppo dal vivo: scheda "in preparazione" nella pagina videocorsi; prezzo per lezione da non mostrare (prima si parla con Carmine). Proposto codice di sblocco per i corsi di gruppo, in attesa di risposta.
 
+## Matematica da zero (online dal 31/10/2026, gratuita)
+- Macro area "Da zero" (ultima in home e indice), materia `matematica-da-zero`, per chi vuole imparare o ripassare la matematica dalle basi senza un esame da preparare. **Gratuita**: non è in `prezzi.json`, quindi il Worker non oscura nulla; tutte le schede hanno `gratis: true`.
+- 12 argomenti (numeri naturali, divisibilità, numeri relativi, frazioni, decimali e percentuali, potenze e radici, monomi e polinomi, scomposizione, equazioni, disequazioni, piano cartesiano e retta, geometria di base), 8 schede e 14 tracce ciascuno, scritti e verificati con sympy. Brief: `istruzioni-agenti/brief-matematica-da-zero.md` e `brief-verifica-matematica-da-zero.md`.
+- Pagina della materia: per le materie senza prezzo sopratitolo "Il programma" e riquadro "Tutto gratuito" (`src/viste/Materia.astro`, testi in `src/i18n.ts`). Nomi inglesi in `materie-en.ts` (contenuti solo in italiano). Rimando dalla guida `/concorsi`.
+
 ## Guida concorsi
 - Pagina gratuita `/concorsi` ("Che cosa studiare per il tuo concorso", `src/pages/concorsi.astro`), scheda nel gruppo Concorsi in home e voce nell'indice.
 
