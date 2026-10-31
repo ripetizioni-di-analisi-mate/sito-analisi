@@ -34,7 +34,11 @@ export async function domandePer(materia: string): Promise<Record<string, Domand
 }
 
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).
-export async function catalogoDomande(): Promise<Record<string, string[]>> {
+let catalogoMemo: Promise<Record<string, string[]>> | null = null;
+export function catalogoDomande(): Promise<Record<string, string[]>> {
+  return (catalogoMemo ??= calcolaCatalogo());
+}
+async function calcolaCatalogo(): Promise<Record<string, string[]>> {
   const c: Record<string, Set<string>> = {};
   for (const e of await getCollection('domande')) {
     const [m, a] = e.id.split('/');

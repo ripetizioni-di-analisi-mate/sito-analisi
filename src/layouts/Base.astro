@@ -11,6 +11,7 @@ import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole } from '../lib/seo';
+import { catalogoDomande } from '../lib/domande';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
 const WHATSAPP = 'https://wa.me/393885680393';
@@ -37,6 +38,8 @@ const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const altra: Lingua = lingua === 'it' ? 'en' : 'it';
 const versoAltra = altraLingua(Astro.url.pathname, altra);
+// Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
+const domandeQui = Boolean(lingua === 'it' && materia && argomento && ((await catalogoDomande())[materia] ?? []).includes(argomento));
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
@@ -122,28 +125,32 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
         <span>{t.cerca}</span>
       </a>
-      {lingua === 'it' && (
-        <div class="livello-testata">
-          <button class="bottone-livello" type="button" aria-label="Livello" aria-expanded="false" aria-controls="pannello-livello">
-            <span class="anello" aria-hidden="true">
-              <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" class="anello-fondo" /><circle cx="15" cy="15" r="12" class="anello-avanzamento" stroke-dasharray="75.4" stroke-dashoffset="75.4" transform="rotate(-90 15 15)" /></svg>
-              <span class="numero-livello">1</span>
-            </span>
-            <span class="etichetta-livello">Livello</span>
-          </button>
-          <div class="pannello-livello" id="pannello-livello" hidden>
-            <p class="pl-testa"><strong class="pl-livello"></strong><span class="pl-fascia"></span></p>
-            <div class="barra-exp"><span class="pl-barra"></span></div>
-            <p class="pl-numeri"><span class="pl-exp"></span><span class="pl-mancano"></span></p>
-            <p class="pl-link"><a href="/account#percorso">Il tuo percorso →</a><a href="/livelli-e-punti">Come funzionano livelli e punti</a></p>
-          </div>
-        </div>
-      )}
-      <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
-        <span class="iniziale" aria-hidden="true"></span>
-        <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
-      </a>
+      <div class="account-testata">
+        <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
+          <span class="iniziale" aria-hidden="true"></span>
+          <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
+        </a>
+        {lingua === 'it' && (
+          <>
+            <button class="bottone-livello" type="button" aria-label="Livello" aria-expanded="false" aria-controls="pannello-livello">
+              <span class="etichetta-livello">Liv. <span class="numero-livello">1</span></span>
+              <span class="mini-barra" aria-hidden="true"><span></span></span>
+            </button>
+            <div class="pannello-livello" id="pannello-livello" hidden>
+              <p class="pl-testa"><strong class="pl-livello"></strong><span class="pl-fascia"></span></p>
+              <div class="barra-exp"><span class="pl-barra"></span></div>
+              <p class="pl-numeri"><span class="pl-exp"></span><span class="pl-mancano"></span></p>
+              <p class="pl-link">
+                <a class="pl-domande" href={domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti#domande'}>Domande a tempo →</a>
+                <a href="/account#percorso">Il tuo percorso</a>
+                <a href="/account">Il tuo account</a>
+                <a href="/livelli-e-punti">Come funzionano livelli e punti</a>
+              </p>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   </header>
 
@@ -242,7 +249,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     function mostraLivello(st: Stato) {
       if (!bl || !pl) return;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
-      bl.querySelector('.anello-avanzamento')!.setAttribute('stroke-dashoffset', (75.4 * (1 - st.perc / 100)).toFixed(1));
+      (bl.querySelector('.mini-barra > span') as HTMLElement).style.width = `${st.perc}%`;
       bl.setAttribute('aria-label', `Livello ${st.livello}, ${st.fascia}`);
       pl.querySelector('.pl-livello')!.textContent = `Livello ${st.livello}`;
       pl.querySelector('.pl-fascia')!.textContent = st.fascia;
@@ -259,7 +266,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       bl.setAttribute('aria-expanded', String(apri));
     });
     document.addEventListener('click', (e) => {
-      if (pl && !pl.hidden && !(e.target as HTMLElement).closest('.livello-testata')) { pl.hidden = true; bl?.setAttribute('aria-expanded', 'false'); }
+      if (pl && !pl.hidden && !(e.target as HTMLElement).closest('.account-testata')) { pl.hidden = true; bl?.setAttribute('aria-expanded', 'false'); }
     });
     // Le pagine (domande a tempo, account) annunciano un nuovo stato con l'evento "livello".
     addEventListener('livello', (e) => mostraLivello((e as CustomEvent).detail));

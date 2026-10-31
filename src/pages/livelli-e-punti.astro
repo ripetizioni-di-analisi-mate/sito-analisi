@@ -1,10 +1,13 @@
 ---
 // Regole di livelli e punti esperienza, scritte a partire da src/data/livelli.ts.
 import Base from '../layouts/Base.astro';
+import { catalogoDomande } from '../lib/domande';
+import { materiaL } from '../i18n';
 import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA } from '../data/livelli';
 const num = (x: number) => x.toLocaleString('it-IT');
 const puntiObiettivi = Object.values(OBIETTIVI).map((o) => o.punti);
 const [prima, cento, ore] = TRAGUARDI_FISSI;
+const catalogo = Object.entries(await catalogoDomande()).map(([m, args]) => { const mat = materiaL('it', m); return { titolo: mat.titolo, argomenti: mat.argomenti.filter((a) => args.includes(a.slug)).map((a) => ({ titolo: a.titolo, href: `/${m}/${a.slug}/domande` })) }; });
 ---
 <Base titolo="Livelli e punti" percorso={[{ titolo: 'Livelli e punti' }]} descrizione="Come si guadagnano i punti esperienza (EXP) studiando sul sito, i 100 livelli, gli obiettivi della settimana e i traguardi." seo={{ soloQuestaLingua: true }}>
   <article class="pagina-livelli">
@@ -19,6 +22,15 @@ const [prima, cento, ore] = TRAGUARDI_FISSI;
       <div><dt>Obiettivo della settimana completato</dt><dd>{Math.min(...puntiObiettivi)}–{Math.max(...puntiObiettivi)} EXP</dd></div>
     </dl>
     <p>Ogni domanda ha due minuti di tempo. Dopo la conferma della risposta compare subito la spiegazione completa, con i punti ottenuti. Quando si termina la sessione, il riepilogo mostra il tempo di studio attivo, le risposte corrette e i punti guadagnati.</p>
+
+    <h2 id="domande">Dove si trovano le domande a tempo</h2>
+    <p>Le domande a tempo sono nell’indice di ogni argomento, sotto gli esercizi da fare. Gli argomenti che le hanno sono questi.</p>
+    {catalogo.map((c) => (
+      <>
+        <h3>{c.titolo}</h3>
+        <ul class="elenco-domande">{c.argomenti.map((a) => <li><a href={a.href}>{a.titolo}</a></li>)}</ul>
+      </>
+    ))}
 
     <h2>Punti solo a chi sta studiando</h2>
     <p>Il tempo di studio conta soltanto quando una pagina di teoria, di esercizi svolti, di esercizi da fare o di domande a tempo è aperta in primo piano e lo studente la sta usando: scorre il testo, tocca lo schermo, apre una soluzione. Dopo due minuti senza attività il conteggio si ferma e riparte alla prima azione. Una pagina lasciata aperta in un’altra scheda non accumula tempo.</p>
