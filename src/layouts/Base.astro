@@ -135,20 +135,15 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         {(
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
-              <span class="stemma" aria-hidden="true">
-                <svg viewBox="0 0 36 42"><path d="M18 2 L33 7 V20 C33 30 26 37 18 40 C10 37 3 30 3 20 V7 Z"/></svg>
-                <span class="numero-livello">1</span>
-              </span>
+              <span class="stemma-testata" aria-hidden="true"></span>
               <span class="righe-livello">
                 <span class="nome-utente">{t.account}</span>
-                <span class="fascia-testata"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
+                <span class="fascia-testata"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · {en ? 'Lv.' : 'Liv.'} <span class="numero-livello">1</span> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span>
               </span>
+              <span class="barra-testata" aria-hidden="true"><span></span></span>
             </button>
             <div class="pannello-livello" id="pannello-livello" hidden>
-              <div class="pl-anello">
-                <svg viewBox="0 0 104 104" aria-hidden="true"><circle class="pl-anello-fondo" cx="52" cy="52" r="44"/><circle class="pl-anello-avanzamento" cx="52" cy="52" r="44" stroke-dasharray="276.5" stroke-dashoffset="276.5" transform="rotate(-90 52 52)"/></svg>
-                <span><small>{en ? 'LEVEL' : 'LIVELLO'}</small><strong class="pl-numero">1</strong></span>
-              </div>
+              <div class="pl-stemma" aria-hidden="true"></div>
               <p class="pl-fascia"><strong></strong><span></span></p>
               <p class="pl-mancano"></p>
               <div class="pl-oggi">
@@ -229,6 +224,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </dialog>
 
   <script>
+    import { stemmaSVG, rangoDi, stileRango } from '../../worker/stemmi.mjs';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
     // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
     function adattaFormule() {
@@ -265,12 +261,18 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     const XP = inglese ? 'XP' : 'EXP';
     function mostraLivello(st: Stato) {
       if (!bl || !pl) return;
+      const r = rangoDi(st.livello);
+      bl.setAttribute('style', stileRango(r));
+      const box = bl.querySelector<HTMLElement>('.stemma-testata')!;
+      const svg = box.querySelector('svg');
+      if (svg && svg.getAttribute('data-rango') === String(r)) (svg.querySelector('.stemma-pieno') as SVGElement).style.transform = `scaleY(${st.perc / 100})`;
+      else box.innerHTML = stemmaSVG(r, { perc: st.perc, id: 't' });
+      (bl.querySelector('.barra-testata > span') as HTMLElement).style.width = `${st.perc}%`;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
       bl.querySelector('.fascia-nome')!.textContent = st.fascia;
       bl.querySelector('.exp-livello')!.textContent = num(st.exp);
       bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}, ${num(st.exp)} ${XP}`);
-      pl.querySelector('.pl-numero')!.textContent = String(st.livello);
-      pl.querySelector('.pl-anello-avanzamento')!.setAttribute('stroke-dashoffset', (276.5 * (1 - st.perc / 100)).toFixed(1));
+      pl.querySelector('.pl-stemma')!.innerHTML = stemmaSVG(r, { perc: st.perc, id: 'p', nastro: true, livello: st.livello, etichetta: inglese ? 'LV.' : 'LIV.' });
       pl.querySelector('.pl-fascia strong')!.textContent = st.fascia;
       if (st.frase) pl.querySelector('.pl-fascia span')!.textContent = st.frase;
       pl.querySelector('.pl-mancano')!.innerHTML = st.prossimo === null

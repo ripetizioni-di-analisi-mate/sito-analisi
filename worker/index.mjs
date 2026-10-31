@@ -4,6 +4,7 @@
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
+import { stemmaSVG, rangoDi, stileRango } from './stemmi.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
@@ -723,8 +724,13 @@ export default {
         element(e) { e.setInnerContent(st.exp.toLocaleString(en ? 'en-US' : 'it-IT')); },
       }).on('.bottone-livello .fascia-nome', {
         element(e) { e.setInnerContent(st.fascia); },
+      }).on('.bottone-livello .stemma-testata', {
+        element(e) { e.setInnerContent(stemmaSVG(rangoDi(st.livello), { perc: st.perc, id: 't' }), { html: true }); },
+      }).on('.bottone-livello .barra-testata > span', {
+        element(e) { e.setAttribute('style', `width:${st.perc}%`); },
       }).on('.bottone-livello', {
         element(e) {
+          e.setAttribute('style', stileRango(rangoDi(st.livello)));
           e.setAttribute('aria-label', en ? `${nome}, level ${st.livello}, ${st.fascia}, ${st.exp} XP: open your progress` : `${nome}, livello ${st.livello}, ${st.fascia}, ${st.exp} EXP: apri il tuo percorso`);
           e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, r: st.frase, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
         },

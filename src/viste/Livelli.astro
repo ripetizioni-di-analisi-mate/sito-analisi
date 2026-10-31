@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import { catalogoDomande } from '../lib/domande';
 import { materiaL, link, type Lingua } from '../i18n';
+import { stemmaSVG, RANGHI } from '../../worker/stemmi.mjs';
 import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA } from '../data/livelli';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -65,8 +66,8 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
       <p>I livelli sono 100. Per passare dal livello <i>n</i> al livello <i>n</i> + 1 servono 60 + 10 · (<i>n</i> − 1) EXP: il primo passaggio richiede 60 EXP e ogni livello successivo ne richiede 10 in più. Ogni dieci livelli cambia il titolo.</p>
     )}
     <ul class="fasce">
-      {FASCE.map((f) => (
-        <li><strong>{en ? f.nomeEn : f.nome}</strong><em>{en ? f.fraseEn : f.frase}</em><span>{en ? `levels ${f.da}–${f.a} · from ${num(sogliaLivello(f.da))} XP` : `livelli ${f.da}–${f.a} · da ${num(sogliaLivello(f.da))} EXP`}</span></li>
+      {FASCE.map((f, i) => (
+        <li><span class="fascia-stemma" set:html={stemmaSVG(i + 1, { perc: 100, id: `r${i}` })} /><strong>{en ? f.nomeEn : f.nome} · {en ? RANGHI[i].en : RANGHI[i].it}</strong><em>{en ? f.fraseEn : f.frase}</em><span>{en ? `levels ${f.da}–${f.a} · from ${num(sogliaLivello(f.da))} XP` : `livelli ${f.da}–${f.a} · da ${num(sogliaLivello(f.da))} EXP`}</span></li>
       ))}
     </ul>
 
