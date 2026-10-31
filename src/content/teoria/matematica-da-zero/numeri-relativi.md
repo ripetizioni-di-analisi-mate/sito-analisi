@@ -35,7 +35,7 @@ A partire dall'origine si segnano delle tacche, ciascuna a un'unità di distanza
 
 ::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="-4,0,pieno;-1,0,pieno;2,0,pieno" etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="Sulla retta orientata i numeri positivi stanno a destra dello zero e i negativi a sinistra; i punti segnati corrispondono a $-4$, $-1$ e $+2$"}
 
-Sulla retta orientata i numeri relativi diventano posizioni, e su questa rappresentazione si leggono il confronto, l'addizione e la sottrazione. Un termometro è una retta orientata disposta in verticale, con i numeri positivi verso l'alto.
+Sulla retta orientata ogni numero relativo corrisponde a un punto, e su questa rappresentazione si leggono il confronto, l'addizione e la sottrazione. Un termometro è una retta orientata disposta in verticale, con i numeri positivi verso l'alto.
 :::
 
 ## Valore assoluto e numeri opposti
@@ -61,7 +61,7 @@ Due numeri relativi si dicono **opposti** se hanno lo stesso valore assoluto e s
 
 ::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="-4,0,pieno;4,0,pieno" segmenti="-4,0.45,0,0.45;0,0.45,4,0.45" etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6;-2.45,0.62,4 unità;1.55,0.62,4 unità" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="I numeri $-4$ e $+4$ sono opposti, perché si trovano entrambi a $4$ unità dallo zero, da parti diverse"}
 
-L'opposto di un numero si indica scrivendo il segno $-$ davanti al numero tra parentesi. Perciò $-(+4)$ indica l'opposto di $+4$ e vale $-4$, mentre $-(-9)$ indica l'opposto di $-9$ e vale $+9$. I numeri opposti servono per la sottrazione, che con i numeri relativi diventa un'addizione con l'opposto.
+L'opposto di un numero si indica scrivendo il segno $-$ davanti al numero racchiuso in parentesi tonde. Per esempio $-(+4)$ indica l'opposto di $+4$ e vale $-4$, mentre $-(-9)$ indica l'opposto di $-9$ e vale $+9$. I numeri opposti servono per la sottrazione, che con i numeri relativi diventa un'addizione con l'opposto.
 :::
 
 ## Confronto tra numeri relativi
@@ -97,17 +97,17 @@ Tra due numeri negativi quello con il valore assoluto più grande è il *minore*
 Per sommare due numeri relativi diversi da zero si distinguono due casi.
 
 - Se i due numeri sono **concordi**, la somma ha lo stesso segno dei due numeri, e il suo valore assoluto è la somma dei valori assoluti. Per esempio $(+3) + (+4) = +7$ e $(-3) + (-4) = -7$.
-- Se i due numeri sono **discordi**, la somma ha il segno del numero con il valore assoluto maggiore, e il suo valore assoluto è la differenza tra il valore assoluto maggiore e quello minore. Per esempio $(+5) + (-8) = -3$, perché $8 - 5 = 3$ e il numero con il valore assoluto maggiore è $-8$.
+- Se i due numeri sono **discordi** e hanno valori assoluti diversi, la somma ha il segno del numero con il valore assoluto maggiore, e il suo valore assoluto è la differenza tra il valore assoluto maggiore e quello minore. Per esempio $(+5) + (-8) = -3$, perché $8 - 5 = 3$ e il numero con il valore assoluto maggiore è $-8$.
 
 Se un addendo è $0$, la somma è uguale all'altro addendo, come in $(-6) + 0 = -6$. La somma di due numeri opposti è $0$, come in $(+9) + (-9) = 0$.
 
 Sulla retta orientata, sommare un numero positivo vuol dire spostarsi verso destra, e sommare un numero negativo vuol dire spostarsi verso sinistra, di tante unità quante ne indica il valore assoluto. Per calcolare $(+5) + (-8)$ si parte da $+5$ e ci si sposta di $8$ unità verso sinistra. Con le prime $5$ unità si arriva a $0$, e con le altre $3$ si arriva a $-3$.
 
-::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="5,0,pieno;-3,0,pieno" vettori="5,0.45,-2.9,0.45" unicolore=1 etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6;-0.6,0.65,8 unità verso sinistra" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="Per calcolare $(+5) + (-8)$ si parte da $+5$ e ci si sposta di $8$ unità verso sinistra: si arriva a $-3$"}
+::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="5,0,pieno;-3,0,pieno" vettori="5,0.45,-2.9,0.45" unicolore=1 etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6;-0.6,0.65,8 unità verso sinistra" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="Per calcolare $(+5) + (-8)$ si parte da $+5$ e ci si sposta di $8$ unità verso sinistra, fino a $-3$"}
 :::
 
-:::osservazione{#parentesi-e-segni titolo="Numeri relativi tra parentesi"}
-Quando un numero relativo segue il segno di un'operazione, si scrive tra parentesi tonde, così che i due segni restino separati. Si scrive quindi $(+5) + (-8)$ e $3 \cdot (-2)$. Il primo numero di un'espressione si può scrivere anche senza parentesi, perciò $(+5) + (-8)$ si scrive pure $5 + (-8)$.
+:::osservazione{#parentesi-e-segni titolo="Numeri relativi e parentesi tonde"}
+Quando un numero relativo segue il segno di un'operazione, si racchiude in parentesi tonde, così che i due segni restino separati. Si scrive quindi $(+5) + (-8)$ e $3 \cdot (-2)$. Il primo numero di un'espressione si può scrivere anche senza parentesi, perciò $(+5) + (-8)$ si scrive pure $5 + (-8)$.
 :::
 
 :::esempio{titolo="La temperatura che scende"}
@@ -117,7 +117,7 @@ $$
 $$
 I due numeri sono concordi, perciò si sommano i valori assoluti, $3 + 4 = 7$, e si mantiene il segno $-$. Alle $8$ la temperatura è quindi $-7$ °C.
 
-::grafico{assi=0 uguale=1 linee="-8.7,0 4.9,0;4.55,0.16 4.9,0 4.55,-0.16;-8,-0.12 -8,0.12;-7,-0.12 -7,0.12;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12" punti="-3,0,pieno;-7,0,pieno" vettori="-3,0.45,-6.9,0.45" unicolore=1 etichette="-8.26,-0.6,−8;-7.26,-0.6,−7;-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;-6.3,0.65,4 unità verso sinistra" xmin=-9 xmax=5.2 ymin=-1 ymax=1.2 titolo="Per calcolare $(-3) + (-4)$ si parte da $-3$ e ci si sposta di $4$ unità verso sinistra: si arriva a $-7$"}
+::grafico{assi=0 uguale=1 linee="-8.7,0 4.9,0;4.55,0.16 4.9,0 4.55,-0.16;-8,-0.12 -8,0.12;-7,-0.12 -7,0.12;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12" punti="-3,0,pieno;-7,0,pieno" vettori="-3,0.45,-6.9,0.45" unicolore=1 etichette="-8.26,-0.6,−8;-7.26,-0.6,−7;-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;-6.3,0.65,4 unità verso sinistra" xmin=-9 xmax=5.2 ymin=-1 ymax=1.2 titolo="Per calcolare $(-3) + (-4)$ si parte da $-3$ e ci si sposta di $4$ unità verso sinistra, fino a $-7$"}
 :::
 
 :::teorema{#proprieta-addizione titolo="Proprietà dell'addizione"}
@@ -149,7 +149,7 @@ La regola si giustifica con un esempio. Come tra i numeri naturali, la differenz
 
 Sulla retta orientata si parte da $-5$ e si cerca lo spostamento che porta a $+3$. Ci si sposta di $5$ unità verso destra per arrivare a $0$, e di altre $3$ unità per arrivare a $+3$. Lo spostamento è quindi di $8$ unità verso destra, cioè $(-5) + (+8) = +3$, perciò la differenza $(+3) - (-5)$ vale $+8$.
 
-::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="-5,0,pieno;3,0,pieno" vettori="-5,0.45,2.9,0.45" unicolore=1 etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6;-2.2,0.65,8 gradi" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="Da $-5$ °C a $+3$ °C la temperatura sale di $(+3) - (-5) = 8$ gradi: $5$ gradi fino a $0$ e altri $3$ fino a $+3$"}
+::grafico{assi=0 uguale=1 linee="-6.7,0 6.9,0;6.55,0.16 6.9,0 6.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12" punti="-5,0,pieno;3,0,pieno" vettori="-5,0.45,2.9,0.45" unicolore=1 etichette="-6.26,-0.6,−6;-5.26,-0.6,−5;-4.26,-0.6,−4;-3.26,-0.6,−3;-2.26,-0.6,−2;-1.26,-0.6,−1;-0.1,-0.6,0;0.8,-0.6,+1;1.8,-0.6,+2;2.8,-0.6,+3;3.8,-0.6,+4;4.8,-0.6,+5;5.8,-0.6,+6;-2.8,0.65,8 unità verso destra" xmin=-7 xmax=7.2 ymin=-1 ymax=1.2 titolo="Da $-5$ a $+3$ lo spostamento è di $8$ unità verso destra, cioè $5$ unità fino a $0$ e altre $3$ fino a $+3$"}
 
 Lo stesso numero si ottiene sommando a $+3$ l'opposto di $-5$, perché $(+3) + (+5) = +8$.
 :::
@@ -174,19 +174,19 @@ $$
 \qquad
 -(-3) = +3 .
 $$
-In parole semplici, con il segno $+$ davanti alla parentesi il numero mantiene il suo segno, e con il segno $-$ davanti alla parentesi il numero cambia segno. Per esempio
+In parole semplici, con il segno $+$ davanti il numero mantiene il suo segno, e con il segno $-$ davanti il numero cambia segno. Per esempio
 $$
 7 - (-2) + (-5) - (+1) = 7 + 2 - 5 - 1 = 3 .
 $$
 La somma algebrica si calcola da sinistra a destra, oppure sommando tra loro i termini positivi e tra loro i termini negativi. Nell'esempio i termini positivi danno $7 + 2 = 9$, i termini negativi danno $-5 - 1 = -6$, e $9 - 6 = 3$.
 :::
 
-:::teorema{#meno-davanti-alla-parentesi titolo="Segno meno davanti a un'espressione tra parentesi"}
-Quando davanti a un'espressione tra parentesi c'è il segno $-$, si tolgono le parentesi cambiando il segno di *tutti* i termini dell'espressione. Quando davanti c'è il segno $+$, si tolgono le parentesi e ogni termine mantiene il suo segno. Per esempio
+:::teorema{#meno-davanti-alla-parentesi titolo="Segno meno davanti a una somma algebrica"}
+Quando davanti a una somma algebrica racchiusa in parentesi c'è il segno $-$, si tolgono le parentesi cambiando il segno di *tutti* i termini dell'espressione. Quando davanti c'è il segno $+$, si tolgono le parentesi e ogni termine mantiene il suo segno. Per esempio
 $$
 10 - (4 - 9) = 10 - 4 + 9 = 15 .
 $$
-Lo stesso risultato si ottiene calcolando prima l'espressione tra parentesi, $4 - 9 = -5$, e poi la differenza $10 - (-5) = 10 + 5 = 15$. La regola permette di togliere le parentesi da una somma algebrica senza calcolarne prima il contenuto.
+Lo stesso risultato si ottiene calcolando prima l'espressione $4 - 9 = -5$, e poi la differenza $10 - (-5) = 10 + 5 = 15$. La regola permette di togliere le parentesi da una somma algebrica senza calcolarne prima il contenuto.
 :::
 
 ## Moltiplicazione, divisione e regola dei segni
@@ -320,5 +320,5 @@ $$
 ={} & -1
 \end{aligned}
 $$
-Per prime si calcolano le potenze. La base $-2$ ha esponente dispari, quindi $(-2)^3 = -8$; la base $-3$ ha esponente pari, quindi $(-3)^2 = +9$, e il segno $-$ davanti a $(-3)^2$ dà $-9$. Nella parentesi quadra $-8 + 5 = -3$, perché i numeri sono discordi e $8 - 5 = 3$. Nella parentesi graffa il prodotto $(-3) \cdot (-4)$ ha fattori concordi e vale $+12$, e poi $12 - 9 = 3$. Infine il quoziente $(+3) : (-3)$ ha numeri discordi, perciò l'espressione vale $-1$.
+Prima si calcolano le potenze. La base $-2$ ha esponente dispari, quindi $(-2)^3 = -8$; la base $-3$ ha esponente pari, quindi $(-3)^2 = +9$, e il segno $-$ davanti a $(-3)^2$ dà $-9$. Poi $-8 + 5 = -3$, perché i numeri sono discordi e $8 - 5 = 3$. Il prodotto $(-3) \cdot (-4)$ ha fattori concordi e vale $+12$, e poi $12 - 9 = 3$. Infine il quoziente $(+3) : (-3)$ ha numeri discordi, perciò l'espressione vale $-1$.
 :::
