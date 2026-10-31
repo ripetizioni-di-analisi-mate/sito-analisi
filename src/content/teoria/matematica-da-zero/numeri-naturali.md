@@ -10,7 +10,7 @@ I numeri che si usano per contare gli oggetti si chiamano **numeri naturali**. I
 $$
 0, \ 1, \ 2, \ 3, \ 4, \ 5, \ \ldots
 $$
-I puntini indicano che l'elenco continua senza fine. La raccolta di tutti i numeri naturali si chiama **insieme dei numeri naturali** e si indica con il simbolo $\mathbb{N}$.
+I puntini indicano che l'elenco continua senza fine. La raccolta di tutti i numeri naturali si chiama insieme dei numeri naturali e si indica con il simbolo $\mathbb{N}$.
 
 Ogni numero naturale ha un **successivo**, che si ottiene aggiungendo $1$. Il successivo di $7$ è $8$ e il successivo di $99$ è $100$. Poiché si può sempre aggiungere $1$, non esiste un numero naturale più grande di tutti gli altri. Ogni numero naturale diverso da $0$ ha anche un **precedente**, che si ottiene togliendo $1$. Il precedente di $40$ è $39$, mentre lo zero non ha un precedente tra i numeri naturali.
 :::
@@ -39,7 +39,7 @@ Per scrivere i numeri si usano dieci simboli, detti **cifre**:
 $$
 0, \ 1, \ 2, \ 3, \ 4, \ 5, \ 6, \ 7, \ 8, \ 9 .
 $$
-Dieci unità formano una **decina**, dieci decine formano un **centinaio** e dieci centinaia formano un **migliaio**. In un numero scritto con più cifre, la cifra più a destra conta le unità, quella alla sua sinistra conta le decine, poi vengono le centinaia e le migliaia. Il valore di una cifra dipende quindi dal posto che occupa, e per questo il sistema si chiama **posizionale**. Si chiama **decimale** perché si raggruppa a dieci a dieci.
+Dieci unità formano una *decina*, dieci decine formano un *centinaio* e dieci centinaia formano un *migliaio*. In un numero scritto con più cifre, la cifra più a destra conta le unità, quella alla sua sinistra conta le decine, poi vengono le centinaia e le migliaia. Il valore di una cifra dipende quindi dal posto che occupa, e per questo il sistema si chiama **posizionale**. Si chiama **decimale** perché si raggruppa a dieci a dieci.
 
 Nel numero $234$ la cifra $2$ vale $2$ centinaia, la cifra $3$ vale $3$ decine e la cifra $4$ vale $4$ unità, perciò
 $$
@@ -56,7 +56,7 @@ Nel numero $4\,256$ ci sono $4$ migliaia, $2$ centinaia, $5$ decine e $6$ unità
 $$
 4\,256 = 4\,000 + 200 + 50 + 6 .
 $$
-I numeri con più di quattro cifre si scrivono separando le cifre a gruppi di tre da destra, con un piccolo spazio, come in $4\,256$ e in $1\,250\,000$. Lo spazio rende il numero più facile da leggere e non cambia il suo valore.
+I numeri con più di quattro cifre si scrivono separando le cifre a gruppi di tre da destra, con un piccolo spazio, come in $4\,256$ e in $1\,250\,000$. Lo spazio serve a leggere meglio il numero e non cambia il suo valore.
 :::
 
 :::attenzione
@@ -78,7 +78,7 @@ Sulla retta dei numeri sommare $4$ vuol dire fare $4$ passi verso destra. La som
 :::
 
 :::definizione{#sottrazione titolo="Sottrazione"}
-La **sottrazione** è l'operazione inversa dell'addizione. Dati due numeri $a$ e $b$, con $a \geq b$, la differenza $a - b$ è il numero che, sommato a $b$, dà $a$. Il primo numero si chiama **minuendo**, il secondo **sottraendo** e il risultato **differenza**:
+La sottrazione è l'operazione inversa dell'addizione. Dati due numeri $a$ e $b$, con $a \geq b$, la differenza $a - b$ è il numero che, sommato a $b$, dà $a$. Il primo numero si chiama **minuendo**, il secondo **sottraendo** e il risultato **differenza**:
 $$
 \underbrace{7}_{\text{minuendo}} - \underbrace{4}_{\text{sottraendo}} = \underbrace{3}_{\text{differenza}} ,
 \qquad
@@ -112,7 +112,7 @@ I numeri che si moltiplicano si chiamano **fattori** e il risultato si chiama **
 :::
 
 :::definizione{#divisione titolo="Divisione"}
-La **divisione** è l'operazione inversa della moltiplicazione. Dati due numeri $a$ e $b$, con $b \neq 0$, il quoziente $a : b$ è il numero che, moltiplicato per $b$, dà $a$. Il primo numero si chiama **dividendo**, il secondo **divisore** e il risultato **quoziente**:
+La divisione è l'operazione inversa della moltiplicazione. Dati due numeri $a$ e $b$, con $b \neq 0$, il quoziente $a : b$ è il numero che, moltiplicato per $b$, dà $a$. Il primo numero si chiama **dividendo**, il secondo **divisore** e il risultato **quoziente**:
 $$
 \underbrace{12}_{\text{dividendo}} : \underbrace{3}_{\text{divisore}} = \underbrace{4}_{\text{quoziente}} ,
 \qquad
@@ -159,7 +159,7 @@ a + b = b + a ,
 \qquad
 a \cdot b = b \cdot a .
 $$
-Per esempio $3 + 4 = 4 + 3 = 7$ e $3 \cdot 4 = 4 \cdot 3 = 12$. Per la moltiplicazione basta guardare il rettangolo di quadretti per righe oppure per colonne. Visto per righe è formato da $3$ file da $4$ quadretti, e visto per colonne è formato da $4$ colonne da $3$ quadretti, quindi $3 \cdot 4$ e $4 \cdot 3$ contano gli stessi quadretti. La proprietà permette di scegliere l'ordine più comodo. Il prodotto $2 \cdot 37$ si calcola come $37 \cdot 2$, cioè $37 + 37 = 74$.
+Per esempio $3 + 4 = 4 + 3 = 7$ e $3 \cdot 4 = 4 \cdot 3 = 12$. Per la moltiplicazione si guarda il rettangolo di quadretti per righe oppure per colonne. Visto per righe è formato da $3$ file da $4$ quadretti, e visto per colonne è formato da $4$ colonne da $3$ quadretti, quindi $3 \cdot 4$ e $4 \cdot 3$ contano gli stessi quadretti. La proprietà permette di scegliere l'ordine più comodo. Il prodotto $2 \cdot 37$ si calcola come $37 \cdot 2$, cioè $37 + 37 = 74$.
 :::
 
 :::attenzione
@@ -239,7 +239,7 @@ $$
 \qquad
 3^4 = 3 \cdot 3 \cdot 3 \cdot 3 = 81 .
 $$
-La potenza $2^3$ si legge "due alla terza". Una potenza con esponente $2$ si chiama anche **quadrato** e una potenza con esponente $3$ si chiama **cubo**, perché $a^2$ conta i quadretti di un quadrato con $a$ quadretti per lato e $a^3$ conta i cubetti di un cubo con $a$ cubetti per spigolo.
+La potenza $2^3$ si legge "due alla terza". Una potenza con esponente $2$ si chiama anche *quadrato* e una potenza con esponente $3$ si chiama *cubo*, perché $a^2$ conta i quadretti di un quadrato con $a$ quadretti per lato e $a^3$ conta i cubetti di un cubo con $a$ cubetti per spigolo.
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,3 0,3;5,0 9,0 9,4 5,4" linee="0,0 3,0 3,3 0,3 0,0;1,0 1,3;2,0 2,3;0,1 3,1;0,2 3,2;5,0 9,0 9,4 5,4 5,0;6,0 6,4;7,0 7,4;8,0 8,4;5,1 9,1;5,2 9,2;5,3 9,3" etichette="0.6,-0.7,3² = 9;6.1,-0.7,4² = 16" xmin=-0.5 xmax=9.5 ymin=-1.3 ymax=4.4 titolo="Un quadrato con $3$ quadretti per lato ne contiene $3^2 = 9$, uno con $4$ quadretti per lato ne contiene $4^2 = 16$"}
 
