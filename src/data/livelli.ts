@@ -42,6 +42,11 @@ export function livelloDa(exp: number, lingua: 'it' | 'en' = 'it'): StatoLivello
 }
 
 // Punti.
+// Domande a tempo: ogni sessione propone DOMANDE_SESSIONE domande scelte a caso tra quelle dell'argomento.
+// RIPASSO è l'ultimo capitolo di ogni materia (Prove d'esame): le sue domande si pescano da tutti gli argomenti.
+export const DOMANDE_SESSIONE = 15;
+export const RIPASSO = 'prove-d-esame';
+
 export const PUNTI = {
   corretta: 10,          // risposta corretta a una domanda a tempo
   veloce: 5,             // in più se data entro il primo minuto

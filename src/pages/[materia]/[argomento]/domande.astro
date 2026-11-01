@@ -1,11 +1,14 @@
 ---
 import Domande from '../../../viste/Domande.astro';
 import { catalogoDomande, domandePer } from '../../../lib/domande';
+import { RIPASSO } from '../../../data/livelli';
 export async function getStaticPaths() {
   const out = [];
   for (const [materia, argomenti] of Object.entries(await catalogoDomande('it'))) {
     const dati = await domandePer(materia, 'it');
     for (const argomento of argomenti) out.push({ params: { materia, argomento }, props: { totale: dati[argomento]?.length ?? 0 } });
+    // Ultimo capitolo, Prove d'esame: domande di ripasso su tutti gli argomenti.
+    out.push({ params: { materia, argomento: RIPASSO }, props: { totale: Object.values(dati).reduce((t, x) => t + x.length, 0) } });
   }
   return out;
 }

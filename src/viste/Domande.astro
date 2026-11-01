@@ -3,24 +3,33 @@
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
+import { DOMANDE_SESSIONE, RIPASSO } from '../data/livelli';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
 const { lingua, materia, argomento, totale } = Astro.props;
-const arg = argomentoL(lingua, materia, argomento);
+const en = lingua === 'en';
 const m = materiaL(lingua, materia);
+// Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
+const ripasso = argomento === RIPASSO;
+const arg = ripasso ? { slug: RIPASSO, titolo: en ? 'Exam practice' : 'Prove d\'esame', breve: en ? 'Exam practice' : 'Prove d\'esame' } : argomentoL(lingua, materia, argomento);
 const base = `/${materia}/${argomento}`;
 const pref = prefisso(lingua);
-const en = lingua === 'en';
+const n = Math.min(DOMANDE_SESSIONE, totale);
+// Nome breve di ogni argomento, per indicare nel ripasso da quale argomento viene la domanda.
+const brevi = Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve]));
+const comeScelte = en
+  ? (totale > n ? `${n} multiple-choice questions chosen at random among the ${totale} ${ripasso ? `of all the topics of ${m.titolo}` : 'of this topic'}` : `${totale} multiple-choice questions ${ripasso ? `on all the topics of ${m.titolo}` : 'on this topic'}, in random order`)
+  : (totale > n ? `${n} domande a risposta multipla scelte a caso tra le ${totale} ${ripasso ? `di tutti gli argomenti di ${m.titolo}` : 'di questo argomento'}` : `${totale} domande a risposta multipla ${ripasso ? `su tutti gli argomenti di ${m.titolo}` : 'su questo argomento'}, in ordine casuale`);
 const T = en ? {
-  titolo: 'Timed questions', descr: `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
-  termina: 'End the session', sommario: `${totale} multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.`,
+  titolo: ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
+  termina: 'End the session', sommario: `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
   ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
-  caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic',
+  caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
 } : {
-  titolo: 'Domande a tempo', descr: `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
-  termina: 'Termina la sessione', sommario: `${totale} domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
+  titolo: ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
+  termina: 'Termina la sessione', sommario: `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
   ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
-  caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento',
+  caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
 };
 // Testi usati dallo script nel browser.
@@ -32,7 +41,7 @@ const JS = en ? {
   spiegazione: 'Explanation', conclusa: 'Study session completed', minuto: '1 minute of active study', minuti: '§ minutes of active study', sessioneConclusa: 'Session completed',
   unaCorretta: '1 correct answer', piuCorrette: '§ correct answers', su: 'out of', righeCorrette: 'Correct answers', righeStudio: 'Active study', totale: 'Total',
   numero: 'Question § of', scaduto2: 'Time is up: you can still answer, without points, or move to another question.',
-  livello: 'Level', massimo: 'Maximum level', alLivello: 'to level', obiettivi: 'Weekly goals', completato: 'Completed', tornaEsercizi: 'Back to the exercises', percorso: 'Your progress',
+  livello: 'Level', massimo: 'Maximum level', alLivello: 'to level', obiettivi: 'Weekly goals', completato: 'Completed', tornaEsercizi: 'Back to the exercises', tornaMateria: 'Back to the topics', percorso: 'Your progress',
 } : {
   caricamento: T.caricamento, errore: 'Le domande non si sono caricate. Ricarica la pagina.', bonus: 'Bonus velocità ancora per § secondi',
   giusta: 'Risposta corretta', scaduto: 'Tempo scaduto. La risposta corretta è la §', corretta: 'La risposta corretta è la §',
@@ -41,16 +50,16 @@ const JS = en ? {
   spiegazione: 'Spiegazione', conclusa: 'Sessione di studio conclusa', minuto: '1 minuto di studio attivo', minuti: '§ minuti di studio attivo', sessioneConclusa: 'Sessione conclusa',
   unaCorretta: '1 risposta corretta', piuCorrette: '§ risposte corrette', su: 'su', righeCorrette: 'Risposte corrette', righeStudio: 'Studio attivo', totale: 'Totale',
   numero: 'Domanda § di', scaduto2: 'Tempo scaduto: puoi ancora rispondere, senza punti, oppure passare a un\'altra domanda.',
-  livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', percorso: 'Il tuo percorso',
+  livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', tornaMateria: 'Torna agli argomenti', percorso: 'Il tuo percorso',
 };
 ---
 <Base
   titolo={`${arg.titolo} · ${T.titolo}`}
   descrizione={T.descr}
-  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
+  percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua}
 >
-  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)}>
+  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
       <div>
         <p class="sopratitolo">{T.titolo}</p>
@@ -86,6 +95,7 @@ const JS = en ? {
       <div class="azioni-domanda">
         <button type="button" class="bottone-primario conferma" disabled hidden>{T.conferma}</button>
         <button type="button" class="bottone-primario prossima" hidden>{T.prossima}</button>
+        <button type="button" class="bottone-primario nuova-serie" hidden>{T.nuovaSerie}</button>
         <a class="link-svolti" href={link(lingua, `${base}/esercizi-svolti`)} hidden>{T.svolti}</a>
       </div>
     </section>
@@ -101,7 +111,15 @@ const JS = en ? {
   const f = (k: string, x: string | number) => L[k].replace('§', String(x));
   const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
   const testo = $('.testo-domanda'), scelte = $('.scelte'), esito = $('.esito'), spieg = $('.spiegazione');
-  const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), svolti = $('.link-svolti');
+  const conferma = $<HTMLButtonElement>('.conferma'), prossima = $<HTMLButtonElement>('.prossima'), svolti = $<HTMLAnchorElement>('.link-svolti');
+  const nuovaSerie = $<HTMLButtonElement>('.nuova-serie');
+  const ripasso = radice.dataset.ripasso === '1';
+  const brevi = JSON.parse(radice.dataset.brevi || '{}') as Record<string, string>;
+  const argDi = (id: string) => id.split('/')[0];
+  // Domande proposte nelle ultime sessioni: il server le ripropone solo dopo quelle mai viste.
+  const chiaveRecenti = `domande-recenti-${materia}-${argomento}`;
+  let recenti: string[] = [];
+  try { recenti = JSON.parse(localStorage.getItem(chiaveRecenti) || '[]'); } catch { /* niente memoria */ }
   const tempo = $('.tempo'), barra = $('.barra-tempo span'), secondiEl = $('.secondi'), notaTempo = $('.nota-tempo');
   const termina = $<HTMLButtonElement>('.termina'), scheda = $('.scheda-domanda'), riepilogo = $('.riepilogo-sessione');
   const nav = $('.navigazione-domande'), numeri = $('.numeri-domande'), numeroEl = $('.numero-domanda');
@@ -150,7 +168,8 @@ const JS = en ? {
     });
     prec.disabled = pos <= 0;
     succ.disabled = pos >= ordine.length - 1;
-    numeroEl.textContent = ordine.length ? `${f('numero', pos + 1)} ${ordine.length}` : '';
+    const daArg = ripasso && ordine[pos] && brevi[argDi(ordine[pos])] ? ` · ${brevi[argDi(ordine[pos])]}` : '';
+    numeroEl.textContent = ordine.length ? `${f('numero', pos + 1)} ${ordine.length}${daArg}` : '';
   }
 
   function mostraScelte(d: Domanda, e?: Esito) {
@@ -186,6 +205,8 @@ const JS = en ? {
     spieg.hidden = false;
     conferma.hidden = true;
     prossima.hidden = pos >= ordine.length - 1;
+    nuovaSerie.hidden = pos < ordine.length - 1;
+    if (ripasso && corrente) svolti.href = `${pref}/${materia}/${argDi(corrente.id)}/esercizi-svolti`;
     svolti.hidden = false;
   }
 
@@ -194,7 +215,7 @@ const JS = en ? {
     clearInterval(timer);
     pos = Math.max(0, Math.min(i, Math.max(ordine.length - 1, 0)));
     scelta = 0;
-    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; svolti.hidden = true; notaTempo.hidden = true;
+    esito.hidden = true; spieg.hidden = true; prossima.hidden = true; nuovaSerie.hidden = true; svolti.hidden = true; notaTempo.hidden = true;
     conferma.hidden = true; conferma.disabled = true; tempo.hidden = true;
     const id = ordine[pos];
     const e = id ? esiti.get(id) : undefined;
@@ -211,12 +232,16 @@ const JS = en ? {
     scelte.innerHTML = '';
     testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
     const richiesta = ++ultimaRichiesta;
-    const r = await post('/api/domande/prossima', { materia, argomento, id, lingua }).catch(() => null);
+    const r = await post('/api/domande/prossima', id ? { materia, argomento, id, lingua } : { materia, argomento, recenti, lingua }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     // Con una rete lenta e più tocchi di fila conta solo l'ultima domanda chiesta.
     if (richiesta !== ultimaRichiesta) return;
     if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; return; }
-    if (!ordine.length) { ordine = d.ordine; nav.hidden = false; }
+    if (!ordine.length) {
+      ordine = d.ordine; nav.hidden = false;
+      recenti = [...recenti.filter((x) => !ordine.includes(x)), ...ordine].slice(-300);
+      try { localStorage.setItem(chiaveRecenti, JSON.stringify(recenti)); } catch { /* niente memoria */ }
+    }
     // Numero in alto e domanda mostrata restano allineati anche se il server ne restituisce un'altra.
     if (ordine.indexOf(d.id) >= 0) pos = ordine.indexOf(d.id);
     if (esiti.has(d.id)) { vai(pos); return; }
@@ -258,6 +283,7 @@ const JS = en ? {
   conferma.addEventListener('click', () => invia());
   const sposta = (i: number) => { vai(i); scheda.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
   prossima.addEventListener('click', () => sposta(pos + 1));
+  nuovaSerie.addEventListener('click', () => location.reload());
   succ.addEventListener('click', () => sposta(pos + 1));
   prec.addEventListener('click', () => sposta(pos - 1));
 
@@ -285,7 +311,7 @@ const JS = en ? {
         <div class="barra-exp grande"><span style="width:${st.perc}%"></span></div>
         <p class="riep-numeri"><span>${num(st.exp)} ${lingua === 'en' ? 'XP' : 'EXP'}</span><span>${st.prossimo === null ? L.massimo : `${num(st.mancano)} ${L.alLivello} ${st.livello + 1}`}</span></p>` : ''}
       ${obiettivi ? `<h3>${L.obiettivi}</h3><ul class="obiettivi">${obiettivi}</ul>` : ''}
-      <p class="azioni-riepilogo"><a class="bottone-primario" href="${pref}/${materia}/${argomento}/esercizi">${L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
+      <p class="azioni-riepilogo"><a class="bottone-primario" href="${pref}/${materia}${ripasso ? '' : `/${argomento}/esercizi`}">${ripasso ? L.tornaMateria : L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
     riepilogo.hidden = false;
     riepilogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
