@@ -177,6 +177,21 @@ export async function inviaPromemoria(env, aDO, firmaToken, catalogo) {
   return { inviati: inviati.length };
 }
 
+// Dashboard → Strumenti: invia subito il promemoria a un indirizzo, senza registrarlo né contarlo nel calendario.
+export async function provaPromemoria(env, aDO, firmaToken, catalogo, email) {
+  if (!env.RESEND_API_KEY) return { errore: 'Manca la chiave RESEND_API_KEY su Cloudflare.' };
+  const c = await aDO(env, '/promemoria-candidati', { giorno: new Date().toISOString().slice(0, 10), solo: email });
+  const riga = c.righe?.[0] || { email, nome: null, exp: 310, lingua: 'it', materia: 'analisi-1', argomento: 'limiti', inviati: 0 };
+  const token = await firmaToken(env, { scopo: 'promemoria', r: email });
+  const linkNo = `${SITO}/promemoria/disattiva?t=${encodeURIComponent(token)}`;
+  const m = componiPromemoria(riga, catalogo, linkNo);
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
+    body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [email], subject: m.oggetto, html: m.html, text: m.testo }),
+  });
+  return r.ok ? { ok: true, oggetto: m.oggetto, account: Boolean(c.righe?.[0]) } : { errore: `Resend ha risposto ${r.status}: ${(await r.text()).slice(0, 200)}` };
+}
+
 export const PAGINA_DISATTIVATO = (ok, fatto) => `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Promemoria</title>
 <style>body{margin:0;background:#faf8f2;color:#22302f;font-family:Georgia,serif;display:grid;place-items:center;min-height:100vh;padding:16px;box-sizing:border-box}div{max-width:30rem;text-align:center;line-height:1.6}a{color:#2f6f68}button{font:600 15px Arial,sans-serif;background:#2f6f68;color:#fff;border:0;border-radius:999px;padding:12px 22px;cursor:pointer}</style></head>
 <body><div>${!ok

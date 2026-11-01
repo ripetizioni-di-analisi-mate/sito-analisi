@@ -16,7 +16,7 @@ import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
-import { inviaPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { inviaPromemoria, provaPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -181,7 +181,7 @@ export class Archivio {
             EXISTS (SELECT 1 FROM promemoria p WHERE p.email = u.email AND p.giorno = ?) AS oggi,
             (SELECT materia FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS materia,
             (SELECT argomento FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS argomento
-          FROM utenti u WHERE COALESCE(u.promemoria, 1) = 1 AND u.hash IS NOT NULL`, c.giorno);
+          FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}`, c.giorno, ...(c.solo ? [c.solo] : []));
         const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
         return Response.json({ righe, recuperiOggi: rec?.n || 0 });
       }
@@ -835,6 +835,11 @@ export default {
       if (p === '/admin/api/revoca' && POST) {
         const { email, materia } = await req.json();
         return json(await aDO(env, '/revoca', { email: normalizza(email), materia }));
+      }
+      if (p === '/admin/api/promemoria-prova' && POST) { // email di prova del promemoria, con i dati veri dell'account se esiste
+        const email = normalizza((await req.json().catch(() => ({}))).email);
+        if (!emailValida(email)) return json({ errore: 'Email non valida.' }, 400);
+        return json(await provaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})), email));
       }
       if (p === '/admin/api/reset' && POST) {
         const email = normalizza((await req.json()).email);

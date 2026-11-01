@@ -685,6 +685,10 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<p class="nota" style="margin:0">Per chi ha dimenticato la password. La vecchia smette di funzionare e i suoi dispositivi vengono scollegati.</p>' +
       '<div class="campo"><label for="r-email">Email dell’account</label><input id="r-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
       '<div class="azioni"><button class="bottone" type="submit">Genera password provvisoria</button></div><div id="esito-reset"></div></form></div></section>' +
+      '<section class="card"><header><h2>Promemoria per studiare</h2></header><div class="corpo"><form class="modulo" id="f-promemoria">' +
+      '<p class="nota" style="margin:0">Invia subito l’email di promemoria a un indirizzo, con i dati veri dell’account se esiste. Non conta nel calendario degli invii.</p>' +
+      '<div class="campo"><label for="p-email">Email</label><input id="p-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
+      '<div class="azioni"><button class="bottone" type="submit">Invia email di prova</button></div><div id="esito-promemoria"></div></form></div></section>' +
       '<section class="card"><header><h2>Collegamenti rapidi</h2></header><div class="corpo"><div class="azioni">' +
       '<a class="bottone" href="https://vendors.paddle.com/transactions-v2" target="_blank" rel="noopener">Paddle · transazioni</a>' +
       '<a class="bottone" href="https://vendors.paddle.com/payouts" target="_blank" rel="noopener">Paddle · pagamenti a te</a>' +
@@ -696,6 +700,11 @@ function cliente(MATERIE, A_PAGAMENTO) {
       const r = await api('abilita', { email, materie });
       $('#esito-attiva').innerHTML = '<div class="risultato">' + (r.errore ? esc(r.errore) : 'Fatto: ' + materie.map(breveMateria).join(', ') + ' per <b>' + esc(email) + '</b>. ' + (r.account ? 'Le vede già nel suo account.' : 'Le troverà appena si registra con questa email.')) + '</div>';
       if (!r.errore) { e.target.reset(); carica(true); }
+    });
+    $('#f-promemoria').addEventListener('submit', async (e) => {
+      e.preventDefault(); const email = $('#p-email').value.trim();
+      const r = await api('promemoria-prova', { email });
+      $('#esito-promemoria').innerHTML = '<div class="risultato">' + (r.errore ? esc(r.errore) : 'Inviata a <b>' + esc(email) + '</b> con oggetto «' + esc(r.oggetto) + '»' + (r.account ? '.' : ' (nessun account con questa email: dati di esempio).')) + '</div>';
     });
     $('#f-reset').addEventListener('submit', async (e) => {
       e.preventDefault(); const email = $('#r-email').value.trim();
