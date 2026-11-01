@@ -116,6 +116,12 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - 12 argomenti (numeri naturali, divisibilità, numeri relativi, frazioni, decimali e percentuali, potenze e radici, monomi e polinomi, scomposizione, equazioni, disequazioni, piano cartesiano e retta, geometria di base), 8 schede e 14 tracce ciascuno, scritti e verificati con sympy. Brief: `istruzioni-agenti/brief-matematica-da-zero.md` e `brief-verifica-matematica-da-zero.md`.
 - Pagina della materia: per le materie senza prezzo sopratitolo "Il programma" e riquadro "Tutto gratuito" (`src/viste/Materia.astro`, testi in `src/i18n.ts`). Nomi inglesi in `materie-en.ts` (contenuti solo in italiano). Rimando dalla guida `/concorsi`.
 
+## Macro aree nuove (01/11/2026, richiesta di Carmine)
+- «Da zero» rinominata **«Percorso per principianti»**: Matematica zero (la vecchia «Matematica da zero», stesso indirizzo `/matematica-da-zero`) e **Fisica zero** (`fisica-zero`, in preparazione).
+- Nuova macro area **«TOLC, OFA e test di ingresso»** (ultima), tutte in preparazione: TOLC-I, TOLC-E, TOLC-S, TOL del Politecnico di Milano, Recupero degli OFA di matematica, Fisica per il semestre filtro di Medicina. Programmi da concordare con Carmine.
+- In home, se un'area non ha materie pronte, le materie in preparazione restano schede (non una riga di testo).
+- Nell'indice la sezione Videocorsi è chiusa all'apertura, come le altre aree tranne Università.
+
 ## Guida concorsi
 - Pagina gratuita `/concorsi` ("Che cosa studiare per il tuo concorso", `src/pages/concorsi.astro`), scheda nel gruppo Concorsi in home e voce nell'indice.
 

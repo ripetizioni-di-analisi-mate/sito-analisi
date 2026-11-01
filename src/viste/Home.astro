@@ -72,7 +72,8 @@ const icona = {
         </ul>
       )}
       {(() => {
-        // Nelle aree senza sottogruppi (Università) le materie in preparazione stanno in una riga di testo.
+        // Nelle aree senza sottogruppi con almeno una materia pronta (Università, Percorso per principianti) le materie in preparazione stanno in una riga di testo;
+        // se nessuna è pronta (TOLC, OFA e test di ingresso) restano schede «in preparazione».
         const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = false) => (
           <ul class="griglia-materie">
             {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
@@ -123,7 +124,7 @@ const icona = {
             <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
             {griglia(b.materie)}
           </details>
-        ) : griglia(b.materie, lingua === 'it'));
+        ) : griglia(b.materie, lingua === 'it' && b.materie.some(({ m }) => m.attiva)));
       })()}
     </details>
   ))}
