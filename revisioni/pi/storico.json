@@ -13,13 +13,90 @@
         "Pi non sa che gli ex studenti di Carmine hanno le materie gratis"
       ],
       "interventi": [
-        { "titolo": "Banco di prova", "area": "banco", "cosa": "24 domande di prova (calcoli, teoria, pagina, sito, fuori tema, inglese) poste a Pi ogni mattina alle 6:30", "perStudente": "ogni giorno si vede dove Pi sbaglia e si corregge lì", "verifica": "pagina /pi/prove da domani", "commit": "80e54da", "esito": "in attesa" },
-        { "titolo": "Contatori anonimi", "area": "affidabilità", "cosa": "conteggio per giorno di risposte, riserve, errori, risposte vuote e limiti raggiunti, senza testi", "perStudente": "gli errori di Pi emergono anche quando nessuno li segnala", "verifica": "contatori su /pi/prove", "commit": "80e54da", "esito": "in attesa" },
-        { "titolo": "Ex studenti", "area": "sito", "cosa": "Pi sa che chi ha seguito un corso o comprato un videocorso riceve le materie gratis e come chiederle", "perStudente": "risposta giusta invece del rimando generico a WhatsApp", "verifica": "caso fisso sito-corso-gruppo", "commit": "80e54da", "esito": "in attesa" }
+        {
+          "titolo": "Banco di prova",
+          "area": "banco",
+          "cosa": "24 domande di prova (calcoli, teoria, pagina, sito, fuori tema, inglese) poste a Pi ogni mattina alle 6:30",
+          "perStudente": "ogni giorno si vede dove Pi sbaglia e si corregge lì",
+          "verifica": "pagina /pi/prove da domani",
+          "commit": "80e54da",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Contatori anonimi",
+          "area": "affidabilità",
+          "cosa": "conteggio per giorno di risposte, riserve, errori, risposte vuote e limiti raggiunti, senza testi",
+          "perStudente": "gli errori di Pi emergono anche quando nessuno li segnala",
+          "verifica": "contatori su /pi/prove",
+          "commit": "80e54da",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Ex studenti",
+          "area": "sito",
+          "cosa": "Pi sa che chi ha seguito un corso o comprato un videocorso riceve le materie gratis e come chiederle",
+          "perStudente": "risposta giusta invece del rimando generico a WhatsApp",
+          "verifica": "caso fisso sito-corso-gruppo",
+          "commit": "80e54da",
+          "esito": "in attesa"
+        }
       ],
       "esitiIeri": [],
       "annullati": [],
       "proposte": []
+    },
+    {
+      "giorno": "2026-11-01",
+      "punteggio": null,
+      "aree": {},
+      "casi": 0,
+      "errori": 0,
+      "areaDelGiorno": "affidabilità",
+      "problemi": [
+        "Il banco di oggi non si è potuto leggere: la pagina /pi/prove non è raggiungibile da questo ambiente (WebFetch senza permesso, curl bloccato)",
+        "Se il modello finiva lo streaming senza testo, lo studente riceveva una risposta vuota",
+        "Pi descriveva l'anteprima gratuita in modo vago («una parte della teoria»)"
+      ],
+      "interventi": [
+        {
+          "titolo": "Risposta vuota → riserva",
+          "area": "affidabilità",
+          "cosa": "Pi aspetta il primo pezzo di testo; se il modello principale chiude senza scrivere nulla, risponde il modello di riserva",
+          "perStudente": "niente più finestra vuota dopo una domanda",
+          "verifica": "contatore risposta-vuota e prova locale (caso con streaming vuoto)",
+          "commit": "1dae697",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Anteprima con i numeri",
+          "area": "sito",
+          "cosa": "nelle informazioni sul sito: i primi 2 paragrafi della teoria di ogni argomento sono gratuiti",
+          "perStudente": "risposta precisa su che cosa si vede gratis",
+          "verifica": "caso fisso sito-anteprima",
+          "commit": "1dae697",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Caso sito-anteprima",
+          "area": "banco",
+          "cosa": "nuova domanda fissa nel banco: che cosa si vede gratis di Analisi 2",
+          "perStudente": "si controlla ogni giorno che Pi non inventi prove gratuite o sconti",
+          "verifica": "banco di domani",
+          "commit": "1dae697",
+          "esito": "in attesa"
+        }
+      ],
+      "esitiIeri": [
+        {
+          "titolo": "Banco di prova, contatori, ex studenti",
+          "esito": "in attesa",
+          "dettaglio": "banco di oggi non leggibile da qui: esito rimandato a domani"
+        }
+      ],
+      "annullati": [],
+      "proposte": [
+        "Per far leggere il banco ogni mattina serve un permesso: aprire una volta in chat il link https://ripetizionidianalisi.com/pi/prove e approvare la lettura quando viene chiesta"
+      ]
     }
   ]
 }
