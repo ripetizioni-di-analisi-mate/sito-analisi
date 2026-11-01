@@ -344,7 +344,7 @@ Facendo il prodotto scalare della prima equazione con sé stessa si ha $v_1^2 = 
 ## Teorema di König
 
 :::definizione{#sistema-del-centro-di-massa titolo="Sistema del centro di massa"}
-Il **sistema del centro di massa** è il sistema di riferimento con origine nel centro di massa e assi paralleli a quelli di un sistema inerziale; si muove di moto traslatorio con velocità $\vec{v}_{cm}$. Per le trasformazioni di Galileo, alle quali si rimanda nell'argomento sul moto nel piano, la velocità del punto $P_i$ in questo sistema è
+Il **sistema del centro di massa** è il sistema di riferimento con origine nel centro di massa e assi paralleli a quelli di un sistema inerziale; si muove di moto traslatorio con velocità $\vec{v}_{cm}$. Per le trasformazioni di Galileo, per le quali si rimanda all'argomento sul moto nel piano, la velocità del punto $P_i$ in questo sistema è
 $$
 \vec{v}_i^{\,*} = \vec{v}_i - \vec{v}_{cm} .
 $$

@@ -56,7 +56,7 @@ $$
 \qquad
 \vec{r} = \overrightarrow{OP} .
 $$
-Its magnitude is $\tau_O = rF\sin\varphi = F b$, where $\varphi$ is the angle between $\vec{r}$ and $\vec{F}$ and $b = r\sin\varphi$ is the **lever arm**, that is the distance of $O$ from the line of action of the force; it is measured in $\mathrm{N\cdot m}$. For a given force the torque grows with the lever arm, and it is zero when the line of action passes through $O$. A wrench $0.25\,\mathrm{m}$ long pushed at its end with $40\,\mathrm{N}$ perpendicular to the handle produces a torque of $10\,\mathrm{N\cdot m}$; with the force at $30^\circ$ to the handle the torque is $5.0\,\mathrm{N\cdot m}$.
+Its magnitude is $\tau_O = rF\sin\varphi = F b$, where $\varphi$ is the angle between $\vec{r}$ and $\vec{F}$ and $b = r\sin\varphi$ is the **lever arm**, that is the distance of $O$ from the line of action of the force. The torque is measured in $\mathrm{N\cdot m}$. For a given force the torque grows with the lever arm, and it is zero when the line of action passes through $O$. A wrench $0.25\,\mathrm{m}$ long pushed at its end with $40\,\mathrm{N}$ perpendicular to the handle produces a torque of $10\,\mathrm{N\cdot m}$; with the force at $30^\circ$ to the handle the torque is $5.0\,\mathrm{N\cdot m}$.
 
 For a body rotating about a $z$ axis what matters is the **axial torque** $\tau_z = \hat{k} \cdot \vec{\tau}_O$, with $O$ on the axis; it does not depend on the position of $O$ on the axis, because moving the pole along the axis changes $\vec{r}$ by a vector parallel to $\hat{k}$. For a force in a plane perpendicular to the axis $\tau_z = \pm F b$, with the positive sign when the force tends to rotate the body counterclockwise.
 
@@ -317,7 +317,7 @@ If the resultant torque of the external forces about a fixed pole $O$ is zero, t
 $$
 I_1\,\omega_1 = I_2\,\omega_2 .
 $$
-Forces with zero axial torque are, for example, the weight when it is parallel to the axis and the reactions of a frictionless axis. Therefore a system that reduces its own moment of inertia rotates faster.
+Forces with zero axial torque are, for example, the weight when it is parallel to the axis and the reactions of a frictionless axis. From $I_1\,\omega_1 = I_2\,\omega_2$ it follows that a system that reduces its own moment of inertia rotates faster.
 
 :::dimostrazione
 By the **second cardinal equation** $\dfrac{d\vec{L}_O}{dt} = \vec{\tau}_O^{(e)}$. If $\vec{\tau}_O^{(e)} = \vec{0}$ at every instant, the derivative of $\vec{L}_O$ is zero, and therefore $\vec{L}_O$ is constant. If only $\tau_z^{(e)}$ is zero, projecting onto the constant unit vector $\hat{k}$ we obtain $\dfrac{dL_z}{dt} = 0$, therefore $L_z$ is constant. For a system that at every instant rotates rigidly about the axis, $L_z = I\omega$, as for the angular momentum of a rotating rigid body, and from $L_z$ constant it follows that $I_1\omega_1 = I_2\omega_2$.

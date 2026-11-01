@@ -56,7 +56,7 @@ $$
 \qquad
 \vec{r} = \overrightarrow{OP} .
 $$
-Il suo modulo è $\tau_O = rF\sin\varphi = F b$, dove $\varphi$ è l'angolo tra $\vec{r}$ e $\vec{F}$ e $b = r\sin\varphi$ è il **braccio**, cioè la distanza di $O$ dalla retta d'azione della forza; si misura in $\mathrm{N\cdot m}$. A parità di forza il momento cresce con il braccio, ed è nullo quando la retta d'azione passa per $O$. Una chiave lunga $0{,}25\,\mathrm{m}$ spinta all'estremità con $40\,\mathrm{N}$ perpendicolari al manico produce un momento di $10\,\mathrm{N\cdot m}$; con la forza a $30^\circ$ dal manico il momento è $5{,}0\,\mathrm{N\cdot m}$.
+Il suo modulo è $\tau_O = rF\sin\varphi = F b$, dove $\varphi$ è l'angolo tra $\vec{r}$ e $\vec{F}$ e $b = r\sin\varphi$ è il **braccio**, cioè la distanza di $O$ dalla retta d'azione della forza. Il momento si misura in $\mathrm{N\cdot m}$. A parità di forza il momento cresce con il braccio, ed è nullo quando la retta d'azione passa per $O$. Una chiave lunga $0{,}25\,\mathrm{m}$ spinta all'estremità con $40\,\mathrm{N}$ perpendicolari al manico produce un momento di $10\,\mathrm{N\cdot m}$; con la forza a $30^\circ$ dal manico il momento è $5{,}0\,\mathrm{N\cdot m}$.
 
 Per un corpo che ruota attorno a un asse $z$ conta il **momento assiale** $\tau_z = \hat{k} \cdot \vec{\tau}_O$, con $O$ sull'asse; non dipende dalla posizione di $O$ sull'asse, perché spostando il polo lungo l'asse $\vec{r}$ cambia di un vettore parallelo a $\hat{k}$. Per una forza in un piano perpendicolare all'asse $\tau_z = \pm F b$, con il segno positivo quando la forza tende a far ruotare il corpo in verso antiorario.
 
@@ -317,7 +317,7 @@ Se il momento risultante delle forze esterne rispetto a un polo fisso $O$ è nul
 $$
 I_1\,\omega_1 = I_2\,\omega_2 .
 $$
-Hanno momento assiale nullo, per esempio, il peso quando è parallelo all'asse e le reazioni di un asse privo di attrito. Perciò un sistema che riduce il proprio momento d'inerzia ruota più velocemente.
+Hanno momento assiale nullo, per esempio, il peso quando è parallelo all'asse e le reazioni di un asse privo di attrito. Dall'uguaglianza $I_1\,\omega_1 = I_2\,\omega_2$ segue che un sistema che riduce il proprio momento d'inerzia ruota più velocemente.
 
 :::dimostrazione
 Per la **seconda equazione cardinale** $\dfrac{d\vec{L}_O}{dt} = \vec{\tau}_O^{(e)}$. Se $\vec{\tau}_O^{(e)} = \vec{0}$ in ogni istante, la derivata di $\vec{L}_O$ è nulla, e quindi $\vec{L}_O$ è costante. Se è nulla soltanto $\tau_z^{(e)}$, proiettando sul versore costante $\hat{k}$ si ottiene $\dfrac{dL_z}{dt} = 0$, perciò $L_z$ è costante. Per un sistema che in ogni istante ruota rigidamente attorno all'asse vale $L_z = I\omega$, come per il momento angolare di un corpo rigido in rotazione, e da $L_z$ costante segue $I_1\omega_1 = I_2\omega_2$.
