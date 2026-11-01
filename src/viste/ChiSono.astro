@@ -34,6 +34,8 @@ const TESTI = {
   it: {
     titolo: 'Chi sono',
     descrizione: 'Carmine Tornincasa, insegnante privato di Analisi matematica e content creator: oltre mille studenti seguiti in tutta Italia e più di diecimila ore di lezione.',
+    nome: 'Ing. Carmine Tornincasa',
+    laurea: 'Laureato in Ingegneria civile con 110 e lode all’Università degli Studi della Campania «Luigi Vanvitelli».',
     sottotitolo: 'Insegnante privato e content creator del canale',
     seguimi: 'Seguimi su',
     // ogni punto: pezzi di testo, quelli con true in grassetto
@@ -76,6 +78,8 @@ const TESTI = {
   en: {
     titolo: 'About me',
     descrizione: 'Carmine Tornincasa, private Calculus tutor and content creator: over a thousand students taught across Italy and more than ten thousand hours of lessons.',
+    nome: 'Carmine Tornincasa',
+    laurea: 'Graduated in Civil Engineering with full marks and honours (110 cum laude) from the University of Campania Luigi Vanvitelli.',
     sottotitolo: 'Private tutor and content creator of the channel',
     seguimi: 'Follow me on',
     punti: [
@@ -139,7 +143,8 @@ const persona = {
   <section class="bio-testa">
     <img class="bio-foto" src="/chi-sono/carmine.webp" srcset="/chi-sono/carmine-320.webp 320w, /chi-sono/carmine.webp 640w" sizes="(max-width: 40rem) 11rem, 14rem" width="640" height="640" alt="Carmine Tornincasa" />
     <div>
-      <h1>Carmine Tornincasa</h1>
+      <h1>{TESTI.nome}</h1>
+      <p class="bio-laurea">{TESTI.laurea}</p>
       <p class="bio-ruolo">{TESTI.sottotitolo} <a href={INSTAGRAM} target="_blank" rel="noopener">ripetizioni_di_analisi_mate</a></p>
       <p class="bio-social">
         <span>{TESTI.seguimi}</span>
@@ -209,6 +214,7 @@ const persona = {
   .bio-testa { display: flex; align-items: center; gap: 1.5rem; margin: 0.5rem 0 1.25rem; }
   .bio-testa h1 { margin: 0 0 0.35rem; }
   .bio-foto { width: 14rem; height: 14rem; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 4px var(--carta-2); }
+  .bio-laurea { margin: 0 0 0.5rem; max-width: 32rem; font-family: var(--ui); color: var(--inchiostro-2); line-height: 1.45; }
   .bio-ruolo { margin: 0; font-family: var(--ui); color: var(--inchiostro-2); }
   .bio-social { margin: 0.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro-2); }
   .bio-social { align-items: center; }
@@ -241,6 +247,7 @@ const persona = {
   .bio-loghi.chiari img { filter: brightness(0); opacity: 0.72; }
   @media (max-width: 40rem) {
     .bio-testa { flex-direction: column; text-align: center; }
+    .bio-laurea { margin-left: auto; margin-right: auto; }
     .bio-social { justify-content: center; }
     .bio-foto { width: 11rem; height: 11rem; }
     .bio-studenti { grid-template-columns: 1fr; }
