@@ -85,7 +85,7 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
 /* Testata (modello A, 1/11): marchio da solo a sinistra; a destra livello o Accedi, uno spazio, il globo della lingua;
    il tasto ☰ compare solo su telefono e, su computer, quando l'indice laterale è nascosto. */
 .account-testata { margin-left: auto; }
-.bottone-lingua { margin-left: 1.25rem; min-width: 2.4rem; padding: 0 0.45rem !important; justify-content: center; border: 0 !important; border-radius: var(--raggio); color: var(--inchiostro-2); font-size: 0.8rem !important; font-weight: 700; letter-spacing: 0.06em; }
+.bottone-lingua { margin-left: 1.25rem; min-width: 2.4rem; padding: 0 0.45rem !important; justify-content: center; border: 0 !important; border-radius: var(--raggio); color: var(--inchiostro-2); font-size: 0.875rem !important; font-weight: 700; letter-spacing: 0.06em; }
 .bottone-lingua:hover { background: var(--carta-2); color: var(--inchiostro); }
 .bottone-indice { border: 0; margin-left: 0.15rem; }
 .bottone-indice:hover { background: var(--carta-2); }

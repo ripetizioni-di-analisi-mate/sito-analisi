@@ -1,22 +1,25 @@
 // Domande a tempo: dai file Markdown (src/content/domande, in inglese src/content-en/domande) ai dati che il
 // Worker usa per proporre le domande e correggere le risposte. Le pagine del sito non mostrano mai la risposta corretta.
 import { getCollection } from 'astro:content';
-import { createMarkdownProcessor } from '@astrojs/markdown-remark';
+import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
 import remarkMath from 'remark-math';
 import remarkDirective from 'remark-directive';
 import remarkBlocchi from '../plugins/remark-blocchi.mjs';
 import remarkTracce from '../plugins/remark-tracce.mjs';
 import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
 
-// Stessi plugin del sito (astro.config.mjs): le domande si rendono qui, una volta sola per materia e lingua.
-let processore: ReturnType<typeof createMarkdownProcessor> | undefined;
-async function rendi(md: string): Promise<string> {
+// Le domande non sono rese da Astro (vedi content.config.ts): le rende qui lo stesso processore Markdown
+// del sito, con gli stessi plugin, una volta sola per file.
+let processore: Promise<MarkdownRenderer> | undefined;
+const rese = new Map<string, Promise<string>>();
+function htmlDi(chiave: string, body: string): Promise<string> {
   processore ??= createMarkdownProcessor({
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
-    syntaxHighlight: false,
+    shikiConfig: { theme: 'github-light' },
   } as any);
-  return (await (await processore).render(md)).code;
+  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body)).then((r) => r.code));
+  return rese.get(chiave)!;
 }
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
@@ -25,20 +28,14 @@ type Lingua = 'it' | 'en';
 const senzaSoluzione = (html: string) => html.replace(/<details[^>]*blocco-soluzione[\s\S]*?<\/details>/g, '').trim();
 
 // In inglese: le domande tradotte; la traccia inglese se c'è, altrimenti quella italiana.
-const memoDomande = new Map<string, Promise<Record<string, Domanda[]>>>();
-export function domandePer(materia: string, lingua: Lingua = 'it'): Promise<Record<string, Domanda[]>> {
-  const k = `${lingua}/${materia}`;
-  if (!memoDomande.has(k)) memoDomande.set(k, calcolaDomande(materia, lingua));
-  return memoDomande.get(k)!;
-}
-async function calcolaDomande(materia: string, lingua: Lingua): Promise<Record<string, Domanda[]>> {
+export async function domandePer(materia: string, lingua: Lingua = 'it'): Promise<Record<string, Domanda[]>> {
   const tracce = new Map((await getCollection('dafare')).map((e) => [e.id, e]));
   const tracceEn = lingua === 'en' ? new Map((await getCollection('dafare_en')).map((e) => [e.id, e])) : new Map();
   const out: Record<string, Domanda[]> = {};
   for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
     const [m, argomento, n] = e.id.split('/');
     if (m !== materia) continue;
-    const html = await rendi(e.body ?? '');
+    const html = await htmlDi(`${lingua}/${e.id}`, e.body ?? '');
     const i = html.search(/<h2[\s>]/);
     if (i < 0) throw new Error(`Domanda ${lingua}/${e.id}: manca il titolo della spiegazione`);
     const prima = html.slice(0, i);
@@ -71,14 +68,4 @@ async function calcolaCatalogo(lingua: Lingua): Promise<Record<string, string[]>
     (c[m] ??= new Set()).add(a);
   }
   return Object.fromEntries(Object.entries(c).map(([m, s]) => [m, [...s]]));
-}
-
-// Quante domande ha ogni argomento di una materia (per le pagine: non serve rendere il testo).
-export async function contaDomande(materia: string, lingua: Lingua = 'it'): Promise<Record<string, number>> {
-  const c: Record<string, number> = {};
-  for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
-    const [m, a] = e.id.split('/');
-    if (m === materia) c[a] = (c[a] ?? 0) + 1;
-  }
-  return c;
 }
