@@ -125,6 +125,8 @@ export class Archivio {
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    // recupero della password: email inviate per giorno (per indirizzo e per tutto il sito), contro gli abusi
+    this.sql.exec('CREATE TABLE IF NOT EXISTS recuperi (giorno TEXT, chiave TEXT, n INTEGER, ultimo INTEGER, PRIMARY KEY (giorno, chiave))');
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
   }
@@ -164,6 +166,18 @@ export class Archivio {
           bloccato_fino = CASE WHEN falliti + 1 >= 8 THEN ? ELSE bloccato_fino END WHERE email = ?`, Date.now() + 15 * 60 * 1000, c.email);
         return Response.json({ ok: true });
 
+      case '/recupero-conta': { // al massimo 3 email al giorno per indirizzo, una ogni 2 minuti, e un tetto per tutto il sito
+        const ora = Date.now();
+        const e = this.riga('SELECT n, ultimo FROM recuperi WHERE giorno = ? AND chiave = ?', c.giorno, c.email);
+        const s = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
+        if (e && (e.n >= 3 || ora - e.ultimo < 120 * 1000)) return Response.json({ ok: false, motivo: 'indirizzo' });
+        if (s && s.n >= c.maxSito) return Response.json({ ok: false, motivo: 'sito' });
+        for (const k of [c.email, '*sito'])
+          this.sql.exec(`INSERT INTO recuperi (giorno, chiave, n, ultimo) VALUES (?, ?, 1, ?)
+                         ON CONFLICT(giorno, chiave) DO UPDATE SET n = n + 1, ultimo = ?`, c.giorno, k, ora, ora);
+        this.sql.exec("DELETE FROM recuperi WHERE giorno < date('now', '-7 days')");
+        return Response.json({ ok: true });
+      }
       case '/utente-password': {
         this.sql.exec('UPDATE utenti SET hash = ?, sale = ?, iterazioni = ?, versione = versione + 1, falliti = 0, bloccato_fino = 0 WHERE email = ?',
           c.hash, c.sale, c.iterazioni, c.email);
@@ -368,6 +382,64 @@ const nomeVisibile = (io) => {
   return n ? n[0].toUpperCase() + n.slice(1) : (nomeDallEmail(io.email) || 'Account');
 };
 const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringify(dati), { status: stato, headers: { 'content-type': 'application/json', ...intestazioni } });
+
+// ---------- email per il recupero della password (Resend) ----------
+const DURATA_RECUPERO = 60 * 60 * 1000; // il link vale un'ora
+const TESTI_RECUPERO = {
+  it: {
+    nonAttivo: 'Il recupero automatico non è ancora attivo. Scrivimi dalla pagina Contatti e ti imposto una nuova password.',
+    limiteIndirizzo: 'Ti ho già mandato un link da poco. Controlla la posta, anche nella cartella spam, oppure riprova tra qualche minuto.',
+    limiteSito: 'Oggi sono state inviate troppe email. Riprova domani, oppure scrivimi dalla pagina Contatti.',
+    invioFallito: 'Non sono riuscito a inviare l’email. Riprova tra qualche minuto, oppure scrivimi dalla pagina Contatti.',
+    linkScaduto: 'Questo link non è più valido: è scaduto oppure è già stato usato. Chiedine uno nuovo dalla pagina di accesso.',
+    oggetto: 'Nuova password per Ripetizioni di Analisi',
+    corpo: (link) => [
+      'Ciao,',
+      'hai chiesto di impostare una nuova password per il tuo account su ripetizionidianalisi.com.',
+      'Per sceglierla apri questo link, valido per un’ora:',
+      link,
+      'Se non sei stato tu, ignora questa email: la password attuale resta la stessa.',
+      'Carmine',
+    ],
+    bottone: 'Scegli la nuova password',
+  },
+  en: {
+    nonAttivo: 'Automatic recovery is not active yet. Message me from the Contact page and I will set a new password for you.',
+    limiteIndirizzo: 'I sent you a link a short while ago. Check your inbox, including the spam folder, or try again in a few minutes.',
+    limiteSito: 'Too many emails have been sent today. Try again tomorrow, or message me from the Contact page.',
+    invioFallito: 'I could not send the email. Try again in a few minutes, or message me from the Contact page.',
+    linkScaduto: 'This link is no longer valid: it has expired or has already been used. Request a new one from the login page.',
+    oggetto: 'New password for Ripetizioni di Analisi',
+    corpo: (link) => [
+      'Hello,',
+      'you asked to set a new password for your account on ripetizionidianalisi.com.',
+      'To choose it, open this link, valid for one hour:',
+      link,
+      'If it was not you, ignore this email: your current password stays the same.',
+      'Carmine',
+    ],
+    bottone: 'Choose the new password',
+  },
+};
+const escHtml = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function inviaEmailRecupero(env, destinatario, link, l) {
+  const T = TESTI_RECUPERO[l];
+  const [saluto, chiesto, apri, , nonTu, firma] = T.corpo(link);
+  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:520px">
+<p>${escHtml(saluto)}</p><p>${escHtml(chiesto)}</p><p>${escHtml(apri)}</p>
+<p style="margin:24px 0"><a href="${escHtml(link)}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${escHtml(T.bottone)}</a></p>
+<p style="font-size:13px;color:#5b6664;word-break:break-all">${escHtml(link)}</p>
+<p>${escHtml(nonTu)}</p><p>${escHtml(firma)}</p></div>`;
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>',
+      to: [destinatario], subject: T.oggetto, html, text: T.corpo(link).join('\n\n'),
+    }),
+  });
+  return r.ok;
+}
 
 // ---------- domande a tempo ----------
 // I dati (testo, risposte, posizione della corretta, spiegazione) sono file statici generati alla build
@@ -582,6 +654,42 @@ export default {
       const sale = nuovoSale();
       const r = await aDO(env, '/utente-password', { email: t.e, hash: await hashPassword(nuova, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
       return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d) });
+    }
+
+    // ===== password dimenticata: link via email (Resend), valido un'ora e una sola volta =====
+    if (p === '/api/password-dimenticata' && POST) {
+      const { email: e, lingua } = await req.json().catch(() => ({}));
+      const l = lingua === 'en' ? 'en' : 'it';
+      const email = normalizza(e);
+      if (!emailValida(email)) return json({ errore: l === 'en' ? 'Enter a valid email address.' : 'Scrivi un indirizzo email valido.' }, 400);
+      if (!env.RESEND_API_KEY) return json({ errore: TESTI_RECUPERO[l].nonAttivo, nonAttivo: true }, 503);
+      const conta = await aDO(env, '/recupero-conta', { giorno: new Date().toISOString().slice(0, 10), email, maxSito: Number(env.RECUPERO_MAX_GIORNO) || 90 });
+      if (!conta.ok) return json({ errore: TESTI_RECUPERO[l][conta.motivo === 'sito' ? 'limiteSito' : 'limiteIndirizzo'] }, 429);
+      const u = await aDO(env, '/utente', { email });
+      // Stessa risposta che l'account esista o no: dal modulo non si scopre chi è iscritto.
+      if (u?.hash) {
+        const token = await firmaToken(env, { scopo: 'recupero', r: email, v: u.versione, t: Date.now() });
+        const indirizzo = `${url.origin}${l === 'en' ? '/en' : ''}/reimposta-password#t=${token}`;
+        const inviata = await inviaEmailRecupero(env, email, indirizzo, l).catch(() => false);
+        if (!inviata) return json({ errore: TESTI_RECUPERO[l].invioFallito }, 502);
+      }
+      return json({ ok: true });
+    }
+    if (p === '/api/reimposta-password' && POST) {
+      const { token, password, lingua } = await req.json().catch(() => ({}));
+      const l = lingua === 'en' ? 'en' : 'it';
+      const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
+      const scaduto = () => json({ errore: TESTI_RECUPERO[l].linkScaduto, scaduto: true }, 400);
+      if (!tok || tok.scopo !== 'recupero' || typeof tok.r !== 'string' || Date.now() - tok.t > DURATA_RECUPERO) return scaduto();
+      if (typeof password !== 'string' || password.length < 8 || password.length > 200)
+        return json({ errore: l === 'en' ? 'The password must be at least 8 characters long.' : 'La password deve avere almeno 8 caratteri.' }, 400);
+      const u = await aDO(env, '/utente', { email: tok.r });
+      if (!u || u.versione !== tok.v) return scaduto(); // link già usato, oppure password cambiata nel frattempo
+      const sale = nuovoSale();
+      const r = await aDO(env, '/utente-password', { email: tok.r, hash: await hashPassword(password, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
+      // Come la password provvisoria della dashboard: si scollegano tutti i dispositivi e si entra da questo.
+      await aDO(env, '/dispositivo-rimuovi', { email: tok.r });
+      return entraDaDispositivo(env, req, tok.r, r.versione, l);
     }
 
     // ===== vecchi link personali: non danno più accesso, serve l'account =====

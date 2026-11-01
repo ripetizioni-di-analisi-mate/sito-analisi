@@ -31,7 +31,15 @@ const pref = prefisso(lingua);
       ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
       : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
-  <p class="nota-accesso" id="nota-password">{t.passwordDimenticata} <a href={link(lingua, '/contatti')}>{t.contatti}</a> {t.eTeNeImposto}</p>
+  <p class="nota-accesso" id="nota-password"><a href="#recupera" id="apri-recupero">{t.passwordDimenticata}</a></p>
+
+  <form class="modulo" id="modulo-recupero" novalidate hidden>
+    <p class="nota-accesso">{t.recuperoSpiegazione}</p>
+    <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+    <p class="esito-modulo" id="esito-recupero" role="status"></p>
+    <button class="bottone-primario" type="submit" id="invia-recupero">{t.inviaLink}</button>
+    <p class="nota-accesso"><a href="#" id="torna-accesso">{t.tornaAccesso}</a></p>
+  </form>
 
   <script is:inline define:vars={{ js, pref }}>
     (() => {
@@ -97,6 +105,39 @@ const pref = prefisso(lingua);
           location.href = destinazione;
         } catch {
           invia.disabled = false; errore(js.connessione);
+        }
+      });
+
+      // Password dimenticata: si chiede il link via email.
+      const recupero = document.getElementById('modulo-recupero');
+      const notaPassword = document.getElementById('nota-password');
+      const schede = document.querySelector('.schede-accesso');
+      const mostraRecupero = (si) => {
+        recupero.hidden = !si; modulo.hidden = si; schede.hidden = si; notaPassword.hidden = si;
+        if (si) { recupero.email.value = modulo.email.value.trim(); recupero.email.focus(); }
+      };
+      document.getElementById('apri-recupero').addEventListener('click', (e) => { e.preventDefault(); mostraRecupero(true); });
+      document.getElementById('torna-accesso').addEventListener('click', (e) => { e.preventDefault(); mostraRecupero(false); imposta('accedi'); });
+      if (location.hash === '#recupera') mostraRecupero(true);
+      recupero.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const er = document.getElementById('esito-recupero');
+        const bottone = document.getElementById('invia-recupero');
+        const email = recupero.email.value.trim().toLowerCase();
+        const errore = (t) => { er.textContent = t; er.className = 'esito-modulo errore'; };
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return errore(js.emailNonValida);
+        bottone.disabled = true; er.textContent = '…'; er.className = 'esito-modulo';
+        try {
+          const r = await fetch('/api/password-dimenticata', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email, lingua: pref ? 'en' : 'it' }),
+          });
+          const d = await r.json().catch(() => ({}));
+          bottone.disabled = false;
+          if (!r.ok) return errore(d.errore || js.erroreGenerico);
+          er.textContent = js.linkInviato.replace('{email}', email); er.className = 'esito-modulo';
+        } catch {
+          bottone.disabled = false; errore(js.connessione);
         }
       });
     })();

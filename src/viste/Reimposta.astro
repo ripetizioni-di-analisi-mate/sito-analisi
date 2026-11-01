@@ -1,0 +1,57 @@
+---
+// Pagina aperta dal link dell'email "password dimenticata": il token arriva dopo il # (#t=…),
+// così non passa dal server né dai registri; lo script lo manda a /api/reimposta-password.
+import Base from '../layouts/Base.astro';
+import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const t = T(lingua);
+const js = testiJs(lingua);
+const pref = prefisso(lingua);
+---
+<Base titolo={t.reimpostaTitolo} percorso={[{ titolo: t.accedi, href: link(lingua, '/accedi') }, { titolo: t.reimpostaTitolo }]} descrizione={t.reimpostaSommario} lingua={lingua} seo={{ noindex: true }}>
+  <h1>{t.reimpostaTitolo}</h1>
+  <p class="sommario">{t.reimpostaSommario}</p>
+
+  <form class="modulo" id="modulo-nuova" novalidate>
+    <label>{t.nuovaPassword}<span class="campo-password"><input type="password" name="password" autocomplete="new-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+    <p class="esito-modulo" id="esito" role="status"></p>
+    <button class="bottone-primario" type="submit" id="invia">{t.salvaPassword}</button>
+  </form>
+  <p class="nota-accesso" id="nuovo-link" hidden><a href={link(lingua, '/accedi') + '#recupera'}>{t.chiediNuovoLink}</a></p>
+
+  <script is:inline define:vars={{ js, pref }}>
+    (() => {
+      const m = location.hash.match(/t=([A-Za-z0-9_.-]+)/);
+      const token = m ? m[1] : '';
+      // Il token resta in memoria ma sparisce dalla barra degli indirizzi.
+      if (m) history.replaceState(null, '', location.pathname);
+      const modulo = document.getElementById('modulo-nuova');
+      const esito = document.getElementById('esito');
+      const invia = document.getElementById('invia');
+      const errore = (t, scaduto) => {
+        esito.textContent = t; esito.className = 'esito-modulo errore';
+        if (scaduto) { document.getElementById('nuovo-link').hidden = false; modulo.password.disabled = true; invia.hidden = true; }
+      };
+      if (!token) errore(pref ? 'This link is incomplete. Request a new one from the login page.' : 'Il link è incompleto. Chiedine uno nuovo dalla pagina di accesso.', true);
+      modulo.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = modulo.password.value;
+        if (password.length < 8) return errore(js.passwordCorta);
+        invia.disabled = true; esito.textContent = '…'; esito.className = 'esito-modulo';
+        try {
+          const r = await fetch('/api/reimposta-password', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ token, password, lingua: pref ? 'en' : 'it' }),
+          });
+          const d = await r.json().catch(() => ({}));
+          invia.disabled = false;
+          if (!r.ok) return errore(d.errore || js.erroreGenerico, d.scaduto);
+          location.href = `${pref}/account`;
+        } catch {
+          invia.disabled = false; errore(js.connessione);
+        }
+      });
+    })();
+  </script>
+</Base>
