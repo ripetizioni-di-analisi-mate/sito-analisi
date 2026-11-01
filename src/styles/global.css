@@ -832,7 +832,14 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .pl-oggi span { font-size: 0.74rem; line-height: 1.25; color: var(--inchiostro-2); }
 .pl-continua { align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 2.75rem; border-radius: 999px; background: var(--verde); color: #fff !important; font-weight: 600; text-decoration: none; padding: 0 1rem; }
 .pl-continua:hover { filter: brightness(1.08); }
-.pl-link { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.3rem 1.1rem; font-size: 0.86rem; }
+.pl-account { align-self: stretch; display: flex; align-items: center; justify-content: center; min-height: 2.6rem; margin-top: -0.3rem; border-radius: 999px; border: 1.5px solid var(--verde); color: var(--verde) !important; font-weight: 600; text-decoration: none; padding: 0 1rem; }
+.pl-account:hover { background: color-mix(in srgb, var(--verde) 7%, #fff); }
+/* Al telefono il riquadro si allinea alla testata, così non esce dal bordo sinistro dello schermo. */
+@media (max-width: 30rem) {
+  .testata-interna { position: relative; }
+  .account-testata { position: static; }
+  .pannello-livello { left: 0.75rem; right: 0.75rem; width: auto; max-width: none; top: calc(100% + 0.35rem); }
+}
 .barra-exp { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--verde) 14%, transparent); overflow: hidden; }
 .barra-exp > span { display: block; height: 100%; border-radius: 999px; background: var(--verde); transition: width 0.6s ease; }
 .barra-exp.grande { height: 10px; }

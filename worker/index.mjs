@@ -889,7 +889,7 @@ export default {
       }).on('.bottone-livello', {
         element(e) {
           e.setAttribute('style', stileRango(rangoDi(st.livello)));
-          e.setAttribute('aria-label', en ? `${nome}, level ${st.livello}, ${st.fascia}, ${st.exp} XP: open your progress` : `${nome}, livello ${st.livello}, ${st.fascia}, ${st.exp} EXP: apri il tuo percorso`);
+          e.setAttribute('aria-label', en ? `${nome}, level ${st.livello}, ${st.fascia}, ${st.exp} XP: open the level panel` : `${nome}, livello ${st.livello}, ${st.fascia}, ${st.exp} EXP: apri il riquadro del livello`);
           e.setAttribute('data-stato', JSON.stringify({ l: st.livello, f: st.fascia, r: st.frase, x: st.exp, b: st.base, p: st.prossimo, m: st.mancano, c: st.perc }));
         },
       }).on('.bottone-livello .numero-livello', {

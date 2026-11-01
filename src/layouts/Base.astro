@@ -146,11 +146,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
               <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
-              <p class="pl-link">
-                <a href={link(lingua, '/account') + '#percorso'}>{en ? 'Your progress' : 'Il tuo percorso'}</a>
-                <a href={link(lingua, '/account')}>{en ? 'Account' : 'Account'}</a>
-                <a href={link(lingua, '/livelli-e-punti')}>{en ? 'How it works' : 'Come funziona'}</a>
-              </p>
+              <a class="pl-account" href={link(lingua, '/account')}>{en ? 'Open your account' : 'Apri il tuo account'}</a>
             </div>
           </>
         )}
