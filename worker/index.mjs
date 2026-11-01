@@ -4,7 +4,7 @@
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
-import { stemmaSVG, rangoDi, stileRango } from './stemmi.mjs';
+import { stemmaSVG, rangoDi, stileRango, RANGHI } from './stemmi.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
@@ -279,9 +279,20 @@ export class Archivio {
                               GROUP BY COALESCE(u.fonte, 'Non registrata') ORDER BY iscritti DESC`),
           acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
-          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie
+          // livello e studio di ogni studente (EXP totali in utenti.exp; minuti e risposte dalle tabelle dei livelli)
+          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie,
+                              COALESCE(u.exp, 0) AS exp, COALESCE(st.minuti, 0) AS minuti, st.ultimo_studio,
+                              COALESCE(rs.risposte, 0) AS risposte, COALESCE(rs.corrette, 0) AS corrette
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
-                              GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`),
+                              LEFT JOIN (SELECT email, SUM(minuti) AS minuti, MAX(giorno) AS ultimo_studio FROM studio GROUP BY email) st ON st.email = u.email
+                              LEFT JOIN (SELECT email, COUNT(*) AS risposte, SUM(corretta) AS corrette FROM risposte GROUP BY email) rs ON rs.email = u.email
+                              GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`).map((u) => {
+            const l = livelloDa(u.exp);
+            return { ...u, livello: l.livello, fascia: l.fascia, perc: l.perc, mancano: l.mancano, rango: rangoDi(l.livello) };
+          }),
+          // uno stemma per rango (pieno), per la colonna Livello e la scheda dello studente
+          stemmi: Array.from({ length: 10 }, (_, i) => stemmaSVG(i + 1, { perc: 100, id: 'adm' })),
+          ranghi: RANGHI.map((r) => r.it),
           abilitazioni: this.righe('SELECT * FROM abilitazioni ORDER BY creato DESC LIMIT 1000'),
           dispositivi: this.righe('SELECT email, nome, creato, ultimo_uso FROM dispositivi ORDER BY ultimo_uso DESC LIMIT 2000'),
           assistente: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS studenti, SUM(COALESCE(tin, 0)) AS token_entrata, SUM(COALESCE(tout, 0)) AS token_uscita FROM assistente

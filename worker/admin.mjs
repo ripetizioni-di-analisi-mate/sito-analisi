@@ -161,6 +161,15 @@ td.destra,th.destra{text-align:right}
 .persona{display:flex;align-items:center;gap:.7rem;min-width:13rem}
 .avatar{width:2.1rem;height:2.1rem;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none;font-size:.88rem}
 .persona .chi{min-width:0}
+.liv{display:flex;align-items:center;gap:.45rem;white-space:nowrap}
+.liv svg{width:1.9rem;height:1.9rem;flex:none}
+.liv b{display:block;font-weight:600;line-height:1.2}
+.liv small{display:block;color:var(--ink-3);font-size:.78rem;line-height:1.2}
+.liv-grande{display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem}
+.liv-grande svg{width:3.6rem;height:3.6rem;flex:none}
+.liv-grande b{display:block;font-size:1.05rem}
+.barra-liv{height:6px;border-radius:99px;background:var(--riga-2);overflow:hidden;margin-top:.3rem;width:10rem}
+.barra-liv i{display:block;height:100%;background:var(--ink-2)}
 .persona b{display:block;font-weight:600;line-height:1.25}
 .persona .mail{display:block;color:var(--ink-3);font-size:.82rem;line-height:1.25;word-break:break-all}
 .chip{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;font-weight:600;padding:.12rem .55rem;border-radius:99px;background:var(--riga-2);color:var(--ink-2);white-space:nowrap;margin:.1rem .25rem .1rem 0}
@@ -529,7 +538,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<button class="bottone" id="csv" type="button">Esporta CSV</button></div>' +
       '<div class="strumenti-tab" style="padding-top:0"><div class="filtri">' + filtri.map(([k, t]) => '<button type="button" class="filtro" data-filtro="' + k + '" aria-pressed="' + (stato.filtro === k) + '">' + t + '<small>' + conta(k) + '</small></button>').join('') + '</div></div>' +
       '<div class="tabella"><table><thead><tr>' +
-      [['nome', 'Studente'], ['fonte', 'Arrivato da', 'solo-largo'], ['creato', 'Iscritto', 'solo-largo'], ['ultimo', 'Ultimo accesso', 'solo-largo'], ['', 'Materie'], ['spesa', 'Speso', 'destra solo-largo']].map(([k, t, c]) => '<th' + (k ? ' data-ordina="' + k + '"' : '') + (c ? ' class="' + c + '"' : '') + '>' + t + (k === stato.ordina ? '<span class="freccia">' + (stato.verso > 0 ? '↑' : '↓') + '</span>' : '') + '</th>').join('') +
+      [['nome', 'Studente'], ['livello', 'Livello'], ['fonte', 'Arrivato da', 'solo-largo'], ['creato', 'Iscritto', 'solo-largo'], ['ultimo', 'Ultimo accesso', 'solo-largo'], ['', 'Materie'], ['spesa', 'Speso', 'destra solo-largo']].map(([k, t, c]) => '<th' + (k ? ' data-ordina="' + k + '"' : '') + (c ? ' class="' + c + '"' : '') + '>' + t + (k === stato.ordina ? '<span class="freccia">' + (stato.verso > 0 ? '↑' : '↓') + '</span>' : '') + '</th>').join('') +
       '</tr></thead><tbody id="corpo-studenti"></tbody></table></div></section>';
     righeStudenti();
     $('#cerca').addEventListener('input', (e) => { stato.cerca = e.target.value; righeStudenti(); });
@@ -541,24 +550,32 @@ function cliente(MATERIE, A_PAGAMENTO) {
   function passaFiltro(s, t) { return t === 'tutti' || (t === 'corso' ? !!s.corso : s.tipo === t); }
   function filtrati() {
     const q = stato.cerca.trim().toLowerCase();
-    const val = { nome: (s) => (s.nome || s.email).toLowerCase(), fonte: (s) => (s.fonte || '~').toLowerCase(), creato: (s) => s.creato || '', ultimo: (s) => s.ultimo_accesso || '', spesa: (s) => s.spesa };
+    const val = { nome: (s) => (s.nome || s.email).toLowerCase(), fonte: (s) => (s.fonte || '~').toLowerCase(), creato: (s) => s.creato || '', ultimo: (s) => s.ultimo_accesso || '', spesa: (s) => s.spesa, livello: (s) => (s.registrato ? s.exp || 0 : -1) };
     return S.studenti.filter((s) => passaFiltro(s, stato.filtro) && (!stato.fonte || s.fonte === stato.fonte) && (!q || (s.email + ' ' + (s.nome || '')).toLowerCase().includes(q)))
       .sort((a, b) => { const x = val[stato.ordina](a), y = val[stato.ordina](b); return (x > y ? 1 : x < y ? -1 : 0) * stato.verso; });
   }
   function chipStato(s) { return { pagante: '<span class="chip pagante">Pagante</span>', manuale: '<span class="chip manuale">Attivato a mano</span>', gratis: '<span class="chip">Solo gratis</span>', attesa: '<span class="chip attesa">Da registrare</span>' }[s.tipo]; }
   function righeStudenti() {
     const r = filtrati(), corpo = $('#corpo-studenti');
-    if (!r.length) { corpo.innerHTML = '<tr><td colspan="6"><div class="vuoto"><b>Nessuno studente trovato</b>Cambia la ricerca o il filtro.</div></td></tr>'; return; }
+    if (!r.length) { corpo.innerHTML = '<tr><td colspan="7"><div class="vuoto"><b>Nessuno studente trovato</b>Cambia la ricerca o il filtro.</div></td></tr>'; return; }
     corpo.innerHTML = r.map((s) => '<tr class="cliccabile" data-email="' + esc(s.email) + '" tabindex="0">' +
       '<td><div class="persona"><span class="avatar" style="background:' + coloreDa(s.email) + '">' + esc(iniziali(s)) + '</span><span class="chi"><b>' + esc(s.nome || s.email.split('@')[0]) + '</b><span class="mail">' + esc(s.email) + '</span></span></div></td>' +
+      '<td>' + cellaLivello(s) + '</td>' +
       '<td class="solo-largo">' + (s.fonte ? '<span class="chip' + (s.fonte === 'Instagram' ? ' fonte-instagram' : '') + '">' + esc(s.fonte) + '</span>' : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.creato)) + '">' + (s.registrato ? fa(s.creato) : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.ultimo_accesso)) + '">' + fa(s.ultimo_accesso) + '</td>' +
       '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + (s.corso ? '<span class="chip corso" title="Corso seguito: ' + esc(s.corso) + '">' + esc(s.corso.length > 34 ? s.corso.slice(0, 33) + '…' : s.corso) + '</span>' : '') + '</div></td>' +
       '<td class="destra cifra solo-largo">' + (s.spesa ? eur.format(s.spesa) : '<span class="nota">—</span>') + '</td></tr>').join('');
   }
+  // Livello dello studente: stemma del rango, numero del livello, titolo ed EXP (dati calcolati dal Worker con le regole di src/data/livelli.ts).
+  function stemma(s) { return (D.stemmi || [])[(s.rango || 1) - 1] || ''; }
+  function cellaLivello(s) {
+    if (!s.registrato) return '<span class="nota">—</span>';
+    return '<div class="liv" title="' + esc((D.ranghi || [])[(s.rango || 1) - 1] || '') + ' · ' + (s.exp || 0) + ' EXP">' + stemma(s) + '<span><b>Liv. ' + (s.livello || 1) + '</b><small>' + esc(s.fascia || '') + ' · ' + nf.format(s.exp || 0) + ' EXP</small></span></div>';
+  }
+  function oreMinuti(m) { m = m || 0; return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; }
   function esportaCSV() {
-    const righe = [['email', 'nome', 'provenienza', 'corso_seguito', 'iscritto', 'ultimo_accesso', 'materie', 'stato', 'speso_eur']].concat(filtrati().map((s) => [s.email, s.nome || '', s.fonte || '', s.corso || '', s.creato || '', s.ultimo_accesso || '', s.abil.map((a) => a.materia).join(' '), s.tipo, s.spesa.toFixed(2)]));
+    const righe = [['email', 'nome', 'provenienza', 'corso_seguito', 'iscritto', 'ultimo_accesso', 'materie', 'stato', 'speso_eur', 'livello', 'titolo', 'exp', 'minuti_studio', 'risposte', 'corrette']].concat(filtrati().map((s) => [s.email, s.nome || '', s.fonte || '', s.corso || '', s.creato || '', s.ultimo_accesso || '', s.abil.map((a) => a.materia).join(' '), s.tipo, s.spesa.toFixed(2), s.registrato ? s.livello || 1 : '', s.fascia || '', s.exp || 0, s.minuti || 0, s.risposte || 0, s.corrette || 0]));
     const csv = righe.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' })); a.download = 'studenti-' + oggiISO() + '.csv'; a.click();
     avviso('CSV scaricato: ' + (righe.length - 1) + ' righe');
@@ -574,6 +591,8 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<div class="dentro">' +
       (s.corso ? '<section class="corso-dichiarato"><h3>È già un tuo studente</h3><p><b>' + esc(s.corso) + '</b></p><p class="nota">Lo ha indicato all\u2019iscrizione. Se è corretto, attiva qui sotto le materie da sbloccare gratis.</p></section>' : '') +
       '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultimo accesso</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
+      (s.registrato ? '<section><h3>Livello e studio</h3><div class="liv-grande">' + stemma(s) + '<div><b>Livello ' + (s.livello || 1) + ' · ' + esc(s.fascia || '') + '</b><span class="nota">Rango ' + esc((D.ranghi || [])[(s.rango || 1) - 1] || '') + ' · ' + nf.format(s.exp || 0) + ' EXP' + (s.mancano ? ' · ne mancano ' + nf.format(s.mancano) + ' al livello ' + ((s.livello || 1) + 1) : '') + '</span><div class="barra-liv"><i style="width:' + (s.perc || 0) + '%"></i></div></div></div>' +
+        '<dl class="dati"><dt>Tempo di studio</dt><dd>' + oreMinuti(s.minuti) + '</dd><dt>Domande a tempo</dt><dd>' + (s.risposte ? nf.format(s.risposte) + ' risposte, ' + nf.format(s.corrette || 0) + ' corrette (' + Math.round(100 * (s.corrette || 0) / s.risposte) + '%)' : 'nessuna') + '</dd><dt>Ultimo studio</dt><dd>' + (s.ultimo_studio ? esc(s.ultimo_studio.split('-').reverse().join('/')) : '—') + '</dd></dl></section>' : '') +
       '<section><h3>Materie sbloccate</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">Nessuna materia sbloccata.</p>') + '</section>' +
       (daAttivare.length ? '<section><h3>Attiva altre materie</h3><div class="scelte">' + daAttivare.map((m) => '<label class="scelta-m" style="--c:' + M[m].colore + '"><input type="checkbox" value="' + m + '"><i class="punto"></i>' + esc(breveMateria(m)) + '</label>').join('') + '</div><div class="azioni" style="margin-top:.7rem"><button type="button" class="bottone primario" id="c-attiva">Attiva le materie scelte</button></div></section>' : '') +
       '<section><h3>Dispositivi (al massimo 2)</h3>' + (s.dispositivi.length ? '<div class="elenco-m">' + s.dispositivi.map((d) => '<div class="riga-m">' + esc(d.nome) + '<span class="nota" style="margin-left:auto">usato ' + fa(d.ultimo_uso) + '</span></div>').join('') + '</div><div class="azioni" style="margin-top:.6rem"><button type="button" class="bottone pericolo" id="c-scollega">Scollega tutti</button></div>' : '<p class="nota" style="margin:0">Nessun dispositivo collegato.</p>') + '</section>' +
