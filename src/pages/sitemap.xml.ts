@@ -1,4 +1,5 @@
 // Mappa del sito per i motori di ricerca: tutte le pagine indicizzabili, con le versioni nelle due lingue.
+// Per chi non legge né l'italiano né l'inglese (x-default) si indica la versione inglese.
 import { getCollection } from 'astro:content';
 import { MATERIE } from '../data/materie';
 import { assoluto } from '../lib/seo';
@@ -34,7 +35,7 @@ export async function GET() {
   }
   const voce = (loc: string, alt: { it: string; en?: string }, priorita: number) =>
     `<url><loc>${assoluto(loc)}</loc><lastmod>${oggi}</lastmod><priority>${priorita.toFixed(1)}</priority>` +
-    (alt.en ? `<xhtml:link rel="alternate" hreflang="it" href="${assoluto(alt.it)}"/><xhtml:link rel="alternate" hreflang="en" href="${assoluto(alt.en)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${assoluto(alt.it)}"/>` : '') +
+    (alt.en ? `<xhtml:link rel="alternate" hreflang="it" href="${assoluto(alt.it)}"/><xhtml:link rel="alternate" hreflang="en" href="${assoluto(alt.en)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${assoluto(alt.en)}"/>` : '') +
     '</url>';
   const righe = pagine.flatMap((p) => [voce(p.it, p, p.priorita), ...(p.en ? [voce(p.en, p, p.priorita)] : [])]);
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${righe.join('\n')}\n</urlset>\n`;

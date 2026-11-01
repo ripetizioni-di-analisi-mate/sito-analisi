@@ -33,11 +33,7 @@ const icona = {
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
-<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home, schema: [{
-  '@type': 'WebSite', '@id': `${SITO}/#sito`, name: t.nomeSito, url: assoluto(link(lingua, '/')), inLanguage: lingua,
-  publisher: { '@id': `${SITO}/#organizzazione` },
-  potentialAction: { '@type': 'SearchAction', target: `${assoluto(link(lingua, '/cerca'))}?q={q}`, 'query-input': 'required name=q' },
-}] }}>
+<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home }}>
   {t.homeSopra && <p class="sopratitolo">{t.homeSopra}</p>}
   <h1>{t.homeTitolo}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}

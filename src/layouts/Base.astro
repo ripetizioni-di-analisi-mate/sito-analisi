@@ -10,7 +10,7 @@ import Assistente from '../components/Assistente.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
-import { SITO, assoluto, ORGANIZZAZIONE, briciole } from '../lib/seo';
+import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
@@ -58,7 +58,7 @@ const percorsoSchema = [
 ];
 const schema = {
   '@context': 'https://schema.org',
-  '@graph': [ORGANIZZAZIONE, ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
+  '@graph': [ORGANIZZAZIONE, sitoWeb(lingua), paginaWeb(canonico, titoloCompleto, descrizioneSeo, lingua), ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
 };
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
@@ -80,7 +80,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <link rel="canonical" href={canonico} />
   {bilingue && <link rel="alternate" hreflang="it" href={assoluto(versioneIt)} />}
   {bilingue && <link rel="alternate" hreflang="en" href={assoluto(versioneEn)} />}
-  {bilingue && <link rel="alternate" hreflang="x-default" href={assoluto(versioneIt)} />}
+  {bilingue && <link rel="alternate" hreflang="x-default" href={assoluto(versioneEn)} />}
   {noindex && <meta name="robots" content="noindex, follow" />}
   <meta property="og:type" content={seo.tipo ?? 'website'} />
   <meta property="og:site_name" content={NOME_SITO} />
@@ -91,6 +91,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content={lingua === 'it' ? 'it_IT' : 'en_US'} />
+  {bilingue && <meta property="og:locale:alternate" content={lingua === 'it' ? 'en_US' : 'it_IT'} />}
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="apple-touch-icon" href={url('/logo-180.png')} />
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
@@ -98,6 +99,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <meta name="theme-color" content="#faf8f2" />
   <script is:inline>
     try { if (localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
+    // Chi sceglie la lingua con il tasto IT/EN la ritrova in tutto il sito (il Worker legge il cookie «lingua»).
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[data-lingua]') : null;
+      if (a) document.cookie = 'lingua=' + a.getAttribute('data-lingua') + '; Path=/; Max-Age=31536000; SameSite=Lax; Secure';
+    });
   </script>
 </head>
 <body>
@@ -176,7 +182,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
             </ol>
           </nav>
         )}
-        {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra}>Italiano</a></p>}
+        {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra} data-lingua="it">Italiano</a></p>}
         <slot />
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
@@ -196,7 +202,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
       <a href={link(lingua, '/privacy')}>{t.privacy}</a>
       <a href={link(lingua, '/termini')}>{t.termini}</a>
-      <a href={versoAltra} hreflang={altra} lang={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
+      <a href={versoAltra} hreflang={altra} lang={altra} data-lingua={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
     </nav>
     <span class="pie-copyright">{t.copyright}</span>
   </footer>

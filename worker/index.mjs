@@ -4,6 +4,7 @@
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
+import { versoLaLinguaGiusta } from './lingua.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
@@ -440,6 +441,10 @@ export default {
     const p = url.pathname.replace(/\.html$/, '');
     const vendita = env.VENDITA !== '0';
     const POST = req.method === 'POST';
+
+    // ===== lingua del visitatore (worker/lingua.mjs) =====
+    const versoLingua = await versoLaLinguaGiusta(req, env, url);
+    if (versoLingua) return versoLingua;
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {

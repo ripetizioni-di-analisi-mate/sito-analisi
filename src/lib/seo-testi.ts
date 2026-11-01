@@ -18,20 +18,32 @@ const IT = {
   dafareDescr: (s: string, a: string, m: string) => `Esercizio di ${m} su ${a.toLowerCase()}: ${s}. Con la soluzione per verificare il risultato.`,
   livello: 'Università',
 };
+// Fuori dall'Italia «Analisi matematica» si cerca come «Calculus»: nei titoli inglesi per i motori
+// compare il nome usato all'estero, con il nome del corso fra parentesi nella pagina della materia.
+const NOMI_CERCATI: Record<string, string> = {
+  'Mathematical Analysis 1': 'Calculus 1', 'Analysis 1': 'Calculus 1',
+  'Mathematical Analysis 2': 'Multivariable Calculus', 'Analysis 2': 'Multivariable Calculus',
+  'Linear algebra and analytic geometry': 'Linear Algebra and Analytic Geometry',
+};
+function cercato(m: string, completo = false): string {
+  const n = NOMI_CERCATI[m];
+  if (!n) return m;
+  return completo && /Analysis/.test(m) ? `${n} (${m})` : n;
+}
 const EN: typeof IT = {
-  home: 'Calculus 1 and 2: theory and worked examples | Ripetizioni di Analisi',
-  homeDescr: 'Theory, definitions, theorems with proofs and step-by-step worked examples for Mathematical Analysis 1, Mathematical Analysis 2 and Precalculus, to prepare university exams.',
-  materia: (m) => `${m}: theory and worked examples for the exam | Ripetizioni di Analisi`,
-  materiaDescr: (m, d, n) => `${m}: ${n} topics with theory, proofs, step-by-step worked examples and exercises with solutions. ${d}`,
-  teoria: (a, m) => `${a}: theory, definitions and theorems | ${m}`,
-  svoltiLista: (a, m) => `${a}: step-by-step worked examples | ${m}`,
-  svoltiListaDescr: (a, m, n) => `${n} sheets of worked examples on ${a.toLowerCase()} (${m}), grouped by type: every step is written out and explained.`,
-  scheda: (s, m) => `${s}: worked examples | ${m}`,
-  schedaDescr: (s, a, m) => `${s}: step-by-step worked examples, with the computation and an explanation of every step. ${a}, ${m}.`,
-  dafareLista: (a, m) => `${a}: exercises with solutions | ${m}`,
-  dafareListaDescr: (a, m, n) => `${n} exercises on ${a.toLowerCase()} (${m}), with the solution to check your answer.`,
+  home: 'Calculus, linear algebra and physics: theory and worked examples | Ripetizioni di Analisi',
+  homeDescr: 'Theory, theorems with proofs and step-by-step worked examples for Calculus 1 and 2 (Mathematical Analysis), Precalculus, Linear Algebra, Physics 1 and 2 and Mathematics for Economics, for university exams.',
+  materia: (m) => `${cercato(m, true)}: theory and worked examples for the exam | Ripetizioni di Analisi`,
+  materiaDescr: (m, d, n) => `${cercato(m, true)}: ${n} topics with theory, proofs, step-by-step worked examples and exercises with solutions. ${d}`,
+  teoria: (a, m) => `${a}: theory, definitions and theorems | ${cercato(m)}`,
+  svoltiLista: (a, m) => `${a}: step-by-step worked examples | ${cercato(m)}`,
+  svoltiListaDescr: (a, m, n) => `${n} sheets of worked examples on ${a.toLowerCase()} (${cercato(m)}), grouped by type: every step is written out and explained.`,
+  scheda: (s, m) => `${s}: worked examples | ${cercato(m)}`,
+  schedaDescr: (s, a, m) => `${s}: step-by-step worked examples, with the computation and an explanation of every step. ${a}, ${cercato(m)}.`,
+  dafareLista: (a, m) => `${a}: exercises with solutions | ${cercato(m)}`,
+  dafareListaDescr: (a, m, n) => `${n} exercises on ${a.toLowerCase()} (${cercato(m)}), with the solution to check your answer.`,
   dafare: (s, a) => `${s}: exercise with solution | ${a}`,
-  dafareDescr: (s, a, m) => `${m} exercise on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
+  dafareDescr: (s, a, m) => `${cercato(m)} exercise on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
   livello: 'University',
 };
 export const SEO = (l: Lingua) => (l === 'en' ? EN : IT);
