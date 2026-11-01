@@ -87,7 +87,7 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
 .account-testata { margin-left: auto; }
 .bottone-lingua { margin-left: 1.25rem; width: 2.4rem; padding: 0 !important; justify-content: center; border: 0 !important; border-radius: 50%; color: var(--inchiostro-2); }
 .bottone-lingua:hover { background: var(--carta-2); color: var(--inchiostro); }
-.bottone-lingua svg { width: 1.2rem; height: 1.2rem; }
+.bottone-lingua svg { width: 1.3rem; height: 1.3rem; }
 .bottone-indice { border: 0; margin-left: 0.15rem; }
 .bottone-indice:hover { background: var(--carta-2); }
 .bottone-indice svg, .bottone-cerca svg, .bottone-account svg { width: 1.05rem; height: 1.05rem; }
@@ -123,11 +123,8 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 .indice a.attiva { color: var(--accento); border-left-color: var(--accento); font-weight: 600; }
 .indice li.corrente > button.argomento { background: var(--carta-2); color: var(--accento); }
 .indice ol ol:not(.aperta) { display: none; }
-/* In cima all'indice: la riga "Indice · Nascondi" e la casella di ricerca */
+/* In cima all'indice: la scritta «Indice» e la casella di ricerca */
 .indice-testa { display: flex; justify-content: space-between; align-items: center; margin: 0 0.5rem 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--riga); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inchiostro-2); }
-.nascondi-indice { display: inline-flex; align-items: center; gap: 0.3rem; font: inherit; font-size: 0.8rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--inchiostro-2); background: none; border: 0; border-radius: var(--raggio); padding: 0.25rem 0.45rem; cursor: pointer; }
-.nascondi-indice:hover { background: var(--carta-2); color: var(--inchiostro); }
-.nascondi-indice svg { width: 1rem; height: 1rem; }
 .indice-cerca { display: flex; align-items: center; gap: 0.45rem; margin: 0 0.5rem 1.1rem; padding: 0 0.75rem; height: 2.4rem; background: #fff; border: 1px solid var(--riga); border-radius: 999px; }
 .indice-cerca:focus-within { border-color: var(--accento); }
 .indice-cerca svg { width: 1rem; height: 1rem; flex: none; color: var(--inchiostro-2); }
