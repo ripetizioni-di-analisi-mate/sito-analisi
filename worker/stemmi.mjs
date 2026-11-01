@@ -99,8 +99,11 @@ export function stemmaSVG(r, o = {}) {
   }
   // Galloni del grado (I, II, III): uno, due o tre segni a V nella parte bassa dello stemma.
   const grado = o.grado ?? (o.livello ? gradoDi(o.livello) : 0);
-  const yg = r >= 5 ? 70 : 66, cg = r >= 7 ? ORO : sc;
-  for (let k = 0; k < grado; k++) davanti += `<path d="M51 ${yg + 5 * k} L60 ${yg + 5 * k + 4} L69 ${yg + 5 * k}" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/><path d="M51 ${yg + 5 * k} L60 ${yg + 5 * k + 4} L69 ${yg + 5 * k}" fill="none" stroke="${cg}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const yg = r >= 5 ? 69 : 62, cg = r >= 7 ? ORO : sc;
+  for (let k = 0; k < grado; k++) {
+    const y = yg + 6 * k, v = `M49 ${y} L60 ${y + 5.5} L71 ${y}`;
+    davanti += `<path d="${v}" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/><path d="${v}" fill="none" stroke="${cg}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+  }
   if (r >= 10) davanti += scintilla(20, 20, 6, '#ffffff') + scintilla(100, 72, 5, '#ffffff') + scintilla(98, 18, 4, '#9fe2ff') + scintilla(22, 74, 4, '#9fe2ff');
   let nastro = '';
   if (o.nastro && o.livello) {
