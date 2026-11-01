@@ -12,7 +12,7 @@ import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/video
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve } from './pi-prove.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
-import { livelloDa, PUNTI } from '../src/data/livelli.ts';
+import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
@@ -490,22 +490,36 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
-      const { materia, argomento, id, viste, lingua } = await req.json().catch(() => ({}));
+      const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const dati = await domandeDi(env, materia, l);
-      const elenco = dati?.argomenti?.[argomento];
-      if (!elenco?.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
-      // Le domande si percorrono in ordine, avanti e indietro: senza id si parte dalla prima.
-      // Una pagina aperta prima del 31/10 alle 14:48 manda le domande già viste ("viste") e non l'id:
-      // in quel caso si propone la prima non ancora vista, altrimenti tornerebbe sempre la prima domanda.
+      // Prove d'esame (ripasso): le domande di tutti gli argomenti della materia.
+      const ripasso = argomento === RIPASSO;
+      const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
+      const elenco = gruppi.flat();
+      if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
-      if (!q) {
-        const gia = new Set(Array.isArray(viste) ? viste.slice(-200) : []);
+      let ordine = null;
+      if (!q && Array.isArray(viste)) {
+        // Pagina aperta prima del 31/10 alle 14:48: manda le domande già viste e non l'id.
+        const gia = new Set(viste.slice(-200));
         q = elenco.find((x) => !gia.has(x.id)) || elenco.find((x) => x.id !== [...gia].pop()) || elenco[0];
+      }
+      if (!q) {
+        // Nuova sessione: DOMANDE_SESSIONE domande a caso, prima quelle non proposte di recente.
+        // Nel ripasso si pesca a turno dagli argomenti, così ogni sessione li tocca quasi tutti.
+        const viste2 = new Set(Array.isArray(recenti) ? recenti.filter((x) => typeof x === 'string').slice(-300) : []);
+        const mescola = (a) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+        const pila = (g) => [...mescola(g.filter((x) => !viste2.has(x.id))), ...mescola(g.filter((x) => viste2.has(x.id)))];
+        const pile = mescola(gruppi).map(pila);
+        ordine = [];
+        while (ordine.length < Math.min(DOMANDE_SESSIONE, elenco.length)) for (const pl of pile) if (pl.length && ordine.length < DOMANDE_SESSIONE) ordine.push(pl.shift().id);
+        if (ripasso) ordine = mescola(ordine);
+        q = elenco.find((x) => x.id === ordine[0]);
       }
       const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: elenco.map((x) => x.id), totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
         200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/domande/rispondi' && POST) {

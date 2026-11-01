@@ -1,14 +1,15 @@
 // Livelli, punti esperienza (EXP), sessioni di studio, obiettivi della settimana e traguardi.
 // Le regole (punti, soglie, fasce) stanno in src/data/livelli.ts; qui c'è solo l'archivio.
 import {
-  livelloDa, PUNTI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI,
+  livelloDa, PUNTI, RIPASSO, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI,
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
-const titoloArgomento = (materia, argomento, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
+const titoloArgomento = (materia, argomento, l = 'it') => (argomento === RIPASSO && (l === 'en' ? 'Exam practice' : 'Prove d\'esame'))
+  || (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
   || MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
 const titoloMateria = (materia, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materia;
 function testoObiettivo(o, l = 'it') {

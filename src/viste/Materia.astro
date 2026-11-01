@@ -21,6 +21,8 @@ const dafare = await getCollection('dafare');
 // Domande a tempo: quante per argomento.
 const domande = await getCollection(lingua === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
+const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
+import { RIPASSO } from '../data/livelli';
 ---
 <Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
@@ -79,5 +81,14 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
         </li>
       );
     })}
+    {domandeMateria > 0 && (
+      <li>
+        <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</a></h2>
+        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, chosen at random in every session.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, scelte a caso a ogni sessione.`}</p>
+        <nav aria-label={lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}>
+          <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
+        </nav>
+      </li>
+    )}
   </ol>
 </Base>

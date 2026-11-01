@@ -2,6 +2,8 @@
 
 Repository: /home/claude/sito-analisi. Non usare git, non lanciare la build. Scrivi solo nella cartella `src/content/domande/<materia>/<argomento>/` del tuo argomento.
 
+Ogni argomento deve avere **almeno 45 domande** (ogni sessione ne pesca 15 a caso). Dopo le domande sulle tracce, l'argomento si completa con `istruzioni-agenti/brief-domande-aggiuntive.md`.
+
 ## A che cosa servono
 Il sito ha una funzione "Domande a tempo": lo studente vede una domanda alla volta, ha due minuti, sceglie tra quattro risposte, conferma, e subito dopo legge la spiegazione. Le domande nascono dalle tracce degli esercizi da fare: `src/content/dafare/<materia>/<argomento>/<n>.md`. Per ogni traccia adatta scrivi un file `src/content/domande/<materia>/<argomento>/<n>.md` con **lo stesso numero n**.
 

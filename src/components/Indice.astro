@@ -3,6 +3,7 @@ import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGru
 import Stato from './Stato.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
+import { RIPASSO } from '../data/livelli';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
@@ -38,6 +39,14 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </li>
           );
         })}
+        {conDomande.size > 0 && (
+          <li class:list={{ corrente: argomento === RIPASSO }}>
+            <button type="button" class="argomento" aria-expanded={argomento === RIPASSO ? 'true' : 'false'} data-apri-argomento>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</button>
+            <ol class:list={{ aperta: argomento === RIPASSO }}>
+              <li><a href={link(lingua, `/${m.slug}/${RIPASSO}/domande`)} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
+            </ol>
+          </li>
+        )}
       </ol>
     </>
   ) : (
