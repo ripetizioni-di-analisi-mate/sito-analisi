@@ -12,7 +12,7 @@ Gli studenti vedono la risposta corretta e la spiegazione subito dopo la conferm
 3. **Doppioni**: nessuna domanda nuova uguale o quasi uguale a un'altra dell'argomento (anche tra le vecchie). Se ne trovi, riscrivine una su una sezione della teoria poco coperta e ricontrollala.
 4. **Inglese**: per ogni file italiano esiste il file inglese con lo stesso numero, la stessa `corretta`, le stesse quattro risposte nello stesso ordine, e la spiegazione traduce fedelmente quella italiana (correggi l'inglese se correggi l'italiano). Regole in `istruzioni-agenti/brief-traduzione-domande.md`.
 5. **Conteggi finali**: 45 file italiani e 45 inglesi; posizioni corrette 1-2-3-4 distribuite sulle 45 (differenza massima 3). Se devi riequilibrare, scambia l'ordine delle risposte in qualche domanda nuova e aggiorna `corretta` in entrambe le lingue.
-5. `python3 strumenti/yamlcheck.py <file…>` su tutti i file toccati, senza errori.
+6. `python3 strumenti/yamlcheck.py <file…>` su tutti i file toccati, senza errori.
 
 ## Rapporto (breve, in italiano)
 Numero di file verificati, errori trovati e corretti (file, che cosa era sbagliato, correzione), doppioni sostituiti, conteggio finale delle posizioni, eventuali dubbi non risolti.
