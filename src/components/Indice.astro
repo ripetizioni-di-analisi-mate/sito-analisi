@@ -16,6 +16,17 @@ const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : [
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
 <nav class="indice" aria-label="Indice">
+  <div class="indice-testa">
+    <span>{t.indice}</span>
+    <button type="button" class="nascondi-indice" data-nascondi-indice>
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M7.5 3.5v13M13 8l-2 2 2 2"/></svg>
+      <span>{lingua === 'en' ? 'Hide' : 'Nascondi'}</span>
+    </button>
+  </div>
+  <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+    <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
+  </form>
   {m ? (
     <>
       <p class="indice-materia">

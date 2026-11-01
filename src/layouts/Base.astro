@@ -103,10 +103,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 <body>
   <header class="testata">
     <div class="testata-interna">
-      <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
-        <span>{t.indice}</span>
-      </button>
       <a class="marchio" href={link(lingua, '/')}>
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
@@ -118,14 +114,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
         </a>
       )}
-      <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.3 2.2 12.7 0 15M10 2.5c-2.2 2.3-2.2 12.7 0 15"/></svg>
-        <span>{altra.toUpperCase()}</span>
-      </a>
-      <a class="bottone-cerca" href={link(lingua, '/cerca')} aria-label={t.cerca}>
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-        <span>{t.cerca}</span>
-      </a>
       <div class="account-testata">
         <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
@@ -161,6 +149,13 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           </>
         )}
       </div>
+      <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} title={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2.2 2.3 2.2 12.7 0 15M10 2.5c-2.2 2.3-2.2 12.7 0 15"/></svg>
+      </a>
+      <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+        <span>{t.indice}</span>
+      </button>
     </div>
   </header>
 
@@ -358,6 +353,12 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       } else d.showModal();
     });
     document.querySelector('[data-chiudi-indice]')?.addEventListener('click', () => d.close());
+    // "Nascondi" in cima all'indice laterale: chiude la colonna; il tasto ☰ in testata la riapre.
+    document.querySelectorAll('[data-nascondi-indice]').forEach((n) => n.addEventListener('click', () => {
+      document.documentElement.classList.add('indice-chiuso');
+      try { localStorage.setItem('indice', 'chiuso'); } catch {}
+      aggiorna();
+    }));
     d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
 
     // Torna su: compare dopo un po' di scorrimento, riporta in cima.
