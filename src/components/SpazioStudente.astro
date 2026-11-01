@@ -1,0 +1,53 @@
+---
+// Spazio personale in home (versione B scelta da Carmine il 01/11), visibile solo a chi ha fatto l'accesso (html.collegato).
+// Il Worker scrive nella pagina nome, stemma, rango, titolo, frase, EXP, barra e prossimo grado (nessuno sfarfallio);
+// il tasto «Continua» e «Riprendi» li completa /api/percorso. La testata non viene toccata.
+import { link, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const pref = en ? '/en' : '';
+---
+<section class="spazio-studente" aria-labelledby="ss-nome">
+  <div class="ss-eroe">
+    <div class="ss-stemma" aria-hidden="true"></div>
+    <div class="ss-dati">
+      <p class="ss-rango"></p>
+      <h2 class="ss-nome" id="ss-nome"></h2>
+      <p class="ss-titolo"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
+    </div>
+    <div class="ss-cammino">
+      <span class="ss-barra"><span></span></span>
+      <p class="ss-exp"><span class="ss-exp-tot"></span><span class="ss-mancano"></span></p>
+    </div>
+  </div>
+  <div class="ss-piede">
+    <div class="ss-azioni">
+      <a class="ss-riprendi" href="#" hidden><small>{en ? 'Back to' : 'Riprendi'}</small><span></span></a>
+      <a class="ss-continua" href={link(lingua, '/livelli-e-punti')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
+    </div>
+  </div>
+</section>
+<script is:inline define:vars={{ en, pref }}>
+  (async () => {
+    const box = document.querySelector('.spazio-studente');
+    if (!box || !document.documentElement.classList.contains('collegato')) return;
+    const q = (s) => box.querySelector(s);
+    const r = await fetch(`/api/percorso?l=${en ? 'en' : 'it'}`).catch(() => null);
+    if (!r || !r.ok) return;
+    const d = await r.json();
+    // Tasto principale: obiettivo della settimana con un collegamento, altrimenti le domande dell'ultimo argomento studiato.
+    const conLink = (d.obiettivi || []).find((o) => o.link && !o.completato);
+    const ultima = (d.sessioni || []).find((s) => s.materia && s.argomento);
+    const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
+    const c = q('.ss-continua');
+    if (dove) c.href = pref + dove;
+    else { c.href = '#materie-home'; c.querySelector('span').textContent = en ? 'Choose a topic and start' : 'Scegli un argomento e inizia'; }
+    if (ultima && ultima.titolo && ultima.argomento !== 'prove-d-esame') {
+      const a = q('.ss-riprendi');
+      a.href = `${pref}/${ultima.materia}/${ultima.argomento}/teoria`;
+      a.querySelector('span').textContent = ultima.titolo;
+      a.hidden = false;
+    }
+  })();
+</script>
