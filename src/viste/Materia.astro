@@ -4,11 +4,15 @@ import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
+import { materia as materiaIt } from '../data/materie';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const t = T(lingua);
 const m = materiaL(lingua, materia);
 const SEZIONI = sezioniL(lingua);
+// Sopratitolo per tipo di materia: l'esame per l'università, il programma per le superiori, il concorso per i concorsi.
+const gruppo = materiaIt(materia).gruppo;
+const sopra = !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
 // Riassunto di ogni argomento: la pagina è il programma del corso, non la copia dell'indice.
 const riassunti = Object.fromEntries((await vociL(lingua, 'teoria')).map((v) => [v.id, v.data.sommario]));
@@ -18,7 +22,7 @@ const dafare = await getCollection('dafare');
 const domande = await getCollection(lingua === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 ---
-<Base titolo={m.prezzo ? t.argomentiEsame : t.programma} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
+<Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livello,
   provider: { '@id': `${SITO}/#organizzazione` },
@@ -26,7 +30,7 @@ const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.s
   hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'P30D' },
   ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
 }] }}>
-  <p class="sopratitolo">{m.prezzo ? t.argomentiEsame : t.programma}</p>
+  <p class="sopratitolo">{sopra}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {m.prezzo && (
