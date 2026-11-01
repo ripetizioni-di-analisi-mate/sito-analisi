@@ -725,7 +725,12 @@ html.assistente-aperto .pi-lancio { display: none; }
 .msg-assistente .katex-display { margin: 0.5rem 0; }
 .msg-attesa { color: color-mix(in srgb, var(--inchiostro) 60%, transparent); font-style: italic; }
 .assistente, .assistente * { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
-.assistente-ciao { margin: auto 0 0; color: color-mix(in srgb, var(--inchiostro) 65%, transparent); font-size: 0.92rem; }
+.assistente-ciao { margin: 0 0 0.4rem; color: var(--inchiostro); font-size: 0.95rem; line-height: 1.55; }
+.assistente-ciao p { margin: 0 0 0.6rem; }
+.assistente-ciao p:last-child { margin-bottom: 0; }
+.assistente-ciao .assistente-ciao-titolo { font-weight: 700; font-size: 1.02rem; }
+.assistente-avatar { flex: none; width: 2.3rem; height: 2.3rem; margin-right: 0.3rem; border-radius: 50%; background: var(--accento); color: #fff; display: grid; place-items: center; font-family: var(--testo); font-weight: 700; font-size: 1.2rem; line-height: 1; }
+.assistente-online { flex: none; margin-right: 0.2rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: color-mix(in srgb, #3fbf6a 16%, transparent); color: #1f7a4d; font-size: 0.78rem; font-weight: 600; }
 .assistente-msg ~ .assistente-ciao, .assistente-ciao:has(~ .assistente-msg) { display: none; }
 .msg-assistente a { color: var(--accento); }
 .assistente-copia { display: block; margin: 0.15rem 0 0; padding: 0.2rem 0.55rem; border: 1px solid var(--riga); border-radius: 8px; background: white; color: color-mix(in srgb, var(--inchiostro) 70%, transparent); font: 0.78rem var(--ui); cursor: pointer; }

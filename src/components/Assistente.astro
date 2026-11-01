@@ -7,21 +7,21 @@ interface Props { materia?: string; argomento?: string; sezione?: string; lingua
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
 const s = en ? {
-  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Carmine’s virtual assistant (AI)', chiudi: 'Close',
+  apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Virtual assistant', online: 'Online', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
   barra: 'Ask Pi: limits, exercises, doubts…', benvenuto: ['Hi, I am ', 'Pi', '! I can explain any step of the theory and of the exercises. Write to me whenever you like.'], chiudiFumetto: 'Close message',
   bloccata: 'Pi answers questions about the pages of the subjects you have unlocked.',
   sblocca: 'Unlock the subject', accedi: 'Log in', attendi: 'Writing the answer…', rimasti: 'messages left today',
-  ciao: 'Hi, I am Pi. Ask me about any step of the theory or of the exercises.', foto: 'Attach a photo of the exercise', togli: 'Remove the photo', fotoAllegata: 'Photo attached', fotoDomanda: 'Explain the exercise in the photo.', fotoErrore: 'The photo could not be read: try another one.', nuova: 'New conversation', copia: 'Copy', copiato: 'Copied', avviso: 'Pi is an AI and can make mistakes: check the steps.',
+  ciao: ['Hi! I am Pi 👋', 'I am the virtual assistant of Ripetizioni di Analisi. I can help you find the subjects, find your way among the courses, clear up doubts about the topics you are studying and find the information you are looking for on the site.', 'How can I help you?'], foto: 'Attach a photo of the exercise', togli: 'Remove the photo', fotoAllegata: 'Photo attached', fotoDomanda: 'Explain the exercise in the photo.', fotoErrore: 'The photo could not be read: try another one.', nuova: 'New conversation', copia: 'Copy', copiato: 'Copied', avviso: 'Pi is an AI and can make mistakes: check the steps.',
 } : {
-  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'L’assistente virtuale di Carmine (IA)', chiudi: 'Chiudi',
+  apri: 'Chiedi a Pi', nome: 'Pi', bottone: 'Chiedi a Pi', sotto: 'Assistente virtuale', online: 'Online', chiudi: 'Chiudi',
   parte: 'Stai chiedendo di', cambia: 'Tocca un altro riquadro della pagina per cambiarlo.',
   scrivi: 'Scrivi la tua domanda…', invia: 'Invia',
   barra: 'Chiedi a Pi: limiti, esercizi, dubbi…', benvenuto: ['Ciao, sono ', 'Pi', '! Ti spiego qualsiasi passaggio della teoria e degli esercizi. Scrivimi quando vuoi.'], chiudiFumetto: 'Chiudi il messaggio',
   bloccata: 'Pi risponde alle domande sulle pagine delle materie che hai sbloccato.',
   sblocca: 'Sblocca la materia', accedi: 'Accedi', attendi: 'Sto scrivendo la risposta…', rimasti: 'messaggi rimasti oggi',
-  ciao: 'Ciao, sono Pi. Chiedimi qualsiasi passaggio della teoria o degli esercizi.', foto: 'Allega una foto dell’esercizio', togli: 'Togli la foto', fotoAllegata: 'Foto allegata', fotoDomanda: 'Spiegami l’esercizio nella foto.', fotoErrore: 'Non riesco a leggere la foto: prova con un’altra.', nuova: 'Nuova conversazione', copia: 'Copia', copiato: 'Copiato', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
+  ciao: ['Ciao! Sono Pi 👋', 'Sono l’assistente virtuale di Ripetizioni di Analisi. Posso aiutarti a trovare le materie, orientarti tra i corsi, chiarire dubbi sugli argomenti di studio e trovare le informazioni che cerchi sul sito.', 'In cosa posso esserti utile?'], foto: 'Allega una foto dell’esercizio', togli: 'Togli la foto', fotoAllegata: 'Foto allegata', fotoDomanda: 'Spiegami l’esercizio nella foto.', fotoErrore: 'Non riesco a leggere la foto: prova con un’altra.', nuova: 'Nuova conversazione', copia: 'Copia', copiato: 'Copiato', avviso: 'Pi è un’intelligenza artificiale e può sbagliare: controlla i passaggi.',
 };
 ---
 <div class="pi-lancio">
@@ -41,10 +41,12 @@ const s = en ? {
   data-materia={materia ?? ''} data-argomento={argomento ?? ''} data-sezione={sezione ?? ''} data-lingua={lingua}
   data-testi={JSON.stringify({ attendi: s.attendi, rimasti: s.rimasti, copia: s.copia, copiato: s.copiato, fotoAllegata: s.fotoAllegata, fotoDomanda: s.fotoDomanda, fotoErrore: s.fotoErrore })}>
   <header class="assistente-testa">
+    <span class="assistente-avatar" aria-hidden="true">π</span>
     <div>
       <strong>{s.nome}</strong>
       <small>{s.sotto}</small>
     </div>
+    <span class="assistente-online">{s.online}</span>
     <button type="button" class="assistente-nuova" data-nuova title={s.nuova} aria-label={s.nuova}>
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v12M4 10h12"/></svg>
     </button>
@@ -57,7 +59,11 @@ const s = en ? {
       <small>{s.cambia}</small>
     </div>
     <div class="assistente-messaggi" aria-live="polite">
-      <p class="assistente-ciao">{s.ciao}</p>
+      <div class="assistente-ciao">
+        <p class="assistente-ciao-titolo">{s.ciao[0]}</p>
+        <p>{s.ciao[1]}</p>
+        <p>{s.ciao[2]}</p>
+      </div>
     </div>
     <div class="assistente-anteprima" hidden>
       <img alt="" />
