@@ -4,7 +4,7 @@
 // email il 12° e il 15°, si saltano il 18° e il 21°; email il 24° e il 27°, si saltano tre turni; e così via.
 // Appena lo studente torna sul sito il conto riparte. In fondo a ogni email il link per non riceverle più.
 // Testo: «L'ultima volta stavi studiando …», poi una frase sulla costanza (testi a rotazione), lo stemma
-// del livello senza punti EXP e il tasto «Riprendi da dove eri».
+// del livello con gli EXP (quanti ne mancano al livello successivo), il tasto «Riprendi da dove eri», la firma «Il tuo Tutor Carmine».
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { livelloDa, RIPASSO } from '../src/data/livelli.ts';
@@ -46,6 +46,8 @@ const TESTI = {
     generico: [(n) => `Dieci minuti di studio, ${n}?`, () => "Chi studia un po' ogni giorno arriva all'esame con gli esercizi ancora chiari in mente. Ti propongo dieci minuti adesso: scegli un argomento e prova una serie di domande a tempo."],
     riprendi: 'Riprendi da dove eri', scegli: 'Scegli un argomento',
     livello: (l) => `Livello ${l}`,
+    exp: (x, m, p) => (p === null ? `${x} EXP · livello massimo` : `${x} EXP · mancano ${m} EXP al livello ${p}`),
+    firma: 'Il tuo Tutor Carmine',
     piede: 'Ricevi questa email perché hai un account su ripetizionidianalisi.com.', disattiva: 'Non ricevere più questi promemoria',
     prove: "Prove d'esame",
   },
@@ -66,6 +68,8 @@ const TESTI = {
     generico: [(n) => `Ten minutes of study, ${n}?`, () => 'Studying a little every day takes you to the exam with the exercises still clear in your mind. How about ten minutes now: choose a topic and try a set of timed questions.'],
     riprendi: 'Pick up where you left off', scegli: 'Choose a topic',
     livello: (l) => `Level ${l}`,
+    exp: (x, m, p) => (p === null ? `${x} XP · maximum level` : `${x} XP · ${m} XP to level ${p}`),
+    firma: 'Your Tutor Carmine',
     piede: 'You receive this email because you have an account on ripetizionidianalisi.com.', disattiva: 'Stop these reminders',
     prove: 'Exam practice',
   },
@@ -112,6 +116,7 @@ export function componiPromemoria(r, catalogo, linkNo) {
     tasto = T.scegli;
   }
   const st = livelloDa(r.exp || 0, l);
+  const num = (x) => x.toLocaleString(l === 'en' ? 'en-US' : 'it-IT');
   const perc = Math.max(4, st.perc);
   const stemma = `${SITO}/email/stemmi/${st.livello}.png`;
   const html = `<div style="background:#faf8f2;padding:24px 18px">
@@ -123,14 +128,14 @@ export function componiPromemoria(r, catalogo, linkNo) {
 <td style="padding:10px 6px 10px 12px;width:84px"><img src="${stemma}" width="78" height="67" alt="" style="display:block"></td>
 <td style="padding:10px 14px 10px 4px;font-family:Arial,sans-serif">
 <div style="font-size:15px;font-weight:bold;color:#22302f">${esc(T.livello(st.livello))} · ${esc(nomeRango(st.livello, l))} · ${esc(st.fascia)}</div>
-<div style="font-size:13px;color:#5b6664;margin-top:2px">${esc(st.frase || '')}</div>
+<div style="font-size:13px;color:#5b6664;margin-top:2px">${esc(T.exp(num(st.exp), num(st.mancano), st.prossimo === null ? null : st.livello + 1))}</div>
 <div style="height:6px;background:#ece7dc;border-radius:99px;margin-top:8px"><div style="height:6px;width:${perc}%;background:#2f6f68;border-radius:99px"></div></div>
 </td></tr></table>
 <a href="${link}" style="display:inline-block;background:#2f6f68;color:#ffffff;text-decoration:none;padding:13px 22px;border-radius:999px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold">${esc(tasto)}</a>
-<p style="margin:20px 0 0">Carmine</p>
+<p style="margin:20px 0 0">${esc(T.firma)}</p>
 <p style="font-family:Arial,sans-serif;font-size:12px;color:#7a8482;line-height:1.5;border-top:1px solid #e3e0d6;padding-top:14px;margin-top:22px">${esc(T.piede)} <a href="${linkNo}" style="color:#5b6664">${esc(T.disattiva)}</a></p>
 </div></div>`;
-  const testo = [T.saluto(nome), apertura.replace(/<\/?b>/g, ''), frase, `${tasto}: ${link}`, 'Carmine', `${T.piede} ${T.disattiva}: ${linkNo}`].join('\n\n');
+  const testo = [T.saluto(nome), apertura.replace(/<\/?b>/g, ''), frase, `${tasto}: ${link}`, T.firma, `${T.piede} ${T.disattiva}: ${linkNo}`].join('\n\n');
   return { oggetto, html, testo };
 }
 
