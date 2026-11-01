@@ -127,6 +127,8 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Chi sono: quattro fatti senza emoji, «oltre mille studenti seguiti e più di diecimila ore di lezione» (stessi numeri anche in Pi, `worker/assistente.mjs`), missione sul materiale del sito, messaggi degli studenti con i nomi sfocati (`public/chi-sono/risultati/04, 05, 14`), corso on demand → videocorsi, loghi scuri su fondo chiaro nell'ordine del vecchio sito, tasto «Prova gratis il materiale del sito».
 - Piè di pagina: «© 2026 Carmine Tornincasa · P. IVA 04779350612» (in inglese «VAT no.»), in `src/i18n.ts`.
 - Prove in locale: server finto esteso con iscrizione, accesso e vetrine delle schede (`/home/claude/consulenza-sito/_lavoro/server_finto2.py`).
+- 01/11 (area 7 scelta A): tasti di acquisto sempre nel verde del sito (`--azione` in `global.css`: riquadro di acquisto di Sblocca e videocorsi, elenco dell'account, fine dell'anteprima e vetrine); il colore della materia resta su striscia, prezzo e titoli. Quiz A-E senza pallino (classe `risposte-quiz` messa da `remark-tracce.mjs`). Sopratitolo della materia: «Gli argomenti del concorso» per i concorsi, «Il programma» per le superiori.
+- 01/11 (area 11 scelta A): Pi conosce le materie utili per corso di studi (Ingegneria, Economia, liceo, concorsi), come indicazione generale (`worker/assistente.mjs`, `infoSito`).
 
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
