@@ -10,8 +10,20 @@
 const figura = (n) => n?.type === 'html' && /^<figure/.test(n.value || '');
 const testo = (n) => (n.value && n.type === 'text' ? n.value : (n.children || []).map(testo).join(''));
 
+// Elenchi di risposte dei quiz ("A) …", "B) …"): classe risposte-quiz, così la lettera non ha anche il pallino.
+const rispostaQuiz = (li) => /^\s*[A-E]\)/.test(testo(li));
+function segnaRisposte(nodo) {
+  for (const n of nodo.children || []) {
+    if (n.type === 'list' && !n.ordered && n.children.length >= 2 && n.children.every(rispostaQuiz)) {
+      n.data = { ...(n.data || {}), hProperties: { ...(n.data?.hProperties || {}), className: ['risposte-quiz'] } };
+    }
+    if (n.children) segnaRisposte(n);
+  }
+}
+
 export default function remarkTracce() {
   return (tree, file) => {
+    segnaRisposte(tree);
     const percorso = String(file?.path || file?.history?.[0] || '');
     if (!/[\\/]svolti[\\/]/.test(percorso)) return;
     const figli = tree.children;

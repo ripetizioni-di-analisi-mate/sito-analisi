@@ -8,7 +8,8 @@
   --inchiostro-2: #5a6664;
   --riga: #ddd6c8;
   --accento: #2f6f68;        /* verde dei titoli */
-  --video: #2f6f68;          /* videocorsi: resta verde anche dentro le schede colorate delle materie */
+  --video: #2f6f68;
+  --azione: #2f6f68;         /* tasti di acquisto: sempre il verde del sito, anche nelle pagine colorate delle materie */          /* videocorsi: resta verde anche dentro le schede colorate delle materie */
 
   --c-definizione: #2f6f68;
   --c-teorema: #3b5f8f;
@@ -908,3 +909,8 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .numeri-domande .numero-attivo { outline: 2px solid var(--accento); outline-offset: 1px; color: var(--inchiostro); }
 .numero-domanda { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0 0 0.6rem; }
 @media (max-width: 30rem) { .navigazione-domande { flex-wrap: wrap; } .numeri-domande { order: -1; flex-basis: 100%; } .navigazione-domande .bottone-secondario { flex: 1; } }
+
+/* Tasti di acquisto in un solo colore (area 7, scelta A): il colore della materia resta nel pallino, nella striscia e nei titoli */
+.riquadro-acquisto .bottone-primario, .materie-account .bottone-primario, .velo-blocco .bottone-sblocca { background: var(--azione); }
+/* Risposte A-E dei quiz: la lettera basta, senza il pallino dell'elenco */
+ul.risposte-quiz { list-style: none; padding-left: 0.2rem; }
