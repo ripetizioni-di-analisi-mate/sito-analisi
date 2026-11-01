@@ -38,6 +38,7 @@ Perciò il limite vale $\dfrac{2 + 2}{2 - 1} = 4$.
 - Prima dell'elenco **non scrivere nulla** quando la domanda coincide con la traccia: il sito mostra il testo della traccia. Se la traccia chiede più cose o uno studio completo, scrivi prima dell'elenco **la domanda riformulata**, completa e autosufficiente (con la funzione o i dati scritti per intero), che chiede **un solo risultato** della traccia. Esempio per "Studiare la funzione $f(x) = x^2 e^{x}$…": "Per la funzione $f(x) = x^2 e^{x}$, quale punto è di massimo relativo?". Per una traccia che chiede di dimostrare, scegli una domanda sul risultato verificabile (per esempio l'intervallo in cui cade la radice), oppure salta la traccia.
 - Dopo l'elenco, il titolo `## Spiegazione` e da 3 a 6 frasi (più formule in display se servono): il ragionamento completo che porta alla risposta, come lo scriverebbe Carmine alla lavagna. Niente blocchi `:::`, niente immagini, niente riferimenti alla struttura ("vedi la soluzione", "come nell'esercizio 3").
 - Il file non ha altri campi nel frontmatter.
+- Nella spiegazione non si chiamano le risposte per posizione ("la prima", "la risposta B"): si nomina la risposta per esteso.
 
 ## Regole per le risposte
 - La risposta corretta coincide con il risultato della `:::soluzione` della traccia (o con la parte richiesta dalla domanda riformulata).
