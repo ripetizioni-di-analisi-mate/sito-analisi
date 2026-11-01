@@ -1,6 +1,26 @@
 // Domande a tempo: dai file Markdown (src/content/domande, in inglese src/content-en/domande) ai dati che il
 // Worker usa per proporre le domande e correggere le risposte. Le pagine del sito non mostrano mai la risposta corretta.
 import { getCollection } from 'astro:content';
+import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
+import remarkMath from 'remark-math';
+import remarkDirective from 'remark-directive';
+import remarkBlocchi from '../plugins/remark-blocchi.mjs';
+import remarkTracce from '../plugins/remark-tracce.mjs';
+import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
+
+// Le domande non sono rese da Astro (vedi content.config.ts): le rende qui lo stesso processore Markdown
+// del sito, con gli stessi plugin, una volta sola per file.
+let processore: Promise<MarkdownRenderer> | undefined;
+const rese = new Map<string, Promise<string>>();
+function htmlDi(chiave: string, body: string): Promise<string> {
+  processore ??= createMarkdownProcessor({
+    remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
+    rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
+    shikiConfig: { theme: 'github-light' },
+  } as any);
+  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body)).then((r) => r.code));
+  return rese.get(chiave)!;
+}
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
 type Lingua = 'it' | 'en';
@@ -15,7 +35,7 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
   for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
     const [m, argomento, n] = e.id.split('/');
     if (m !== materia) continue;
-    const html = e.rendered?.html ?? '';
+    const html = await htmlDi(`${lingua}/${e.id}`, e.body ?? '');
     const i = html.search(/<h2[\s>]/);
     if (i < 0) throw new Error(`Domanda ${lingua}/${e.id}: manca il titolo della spiegazione`);
     const prima = html.slice(0, i);

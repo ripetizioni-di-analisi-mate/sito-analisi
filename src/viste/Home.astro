@@ -125,13 +125,6 @@ const icona = {
           </details>
         ) : griglia(b.materie, lingua === 'it'));
       })()}
-      {lingua === 'it' && i === 0 && (
-        <a class="riga-videocorsi" href="/videocorsi">
-          <span class="play"><Fragment set:html={icona.video} /></span>
-          <span><b>Videocorsi di Carmine</b><span>Le lezioni registrate dei corsi, con il PDF di ogni lezione. Ogni videocorso comprende le materie collegate del sito.</span></span>
-          <span class="freccia" aria-hidden="true">→</span>
-        </a>
-      )}
     </details>
   ))}
 </Base>

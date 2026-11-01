@@ -36,17 +36,37 @@ const dafare = defineCollection({
   }),
 });
 
+// Le domande a tempo sono migliaia: la loro versione già resa in HTML (con le formule KaTeX) faceva superare
+// ad Astro la lunghezza massima di una stringa nel deposito dei contenuti (build fallita l'01/11).
+// Nel deposito resta solo il Markdown; l'HTML lo produce src/lib/domande.ts quando servono i dati.
+function senzaHtml(base: string) {
+  const g = glob({ pattern: ['*/*/*.md', ...escludi], base });
+  return {
+    name: 'glob-senza-html',
+    load: (ctx: any) => g.load({
+      ...ctx,
+      store: new Proxy(ctx.store, {
+        get(t, p) {
+          if (p === 'set') return (e: any) => t.set({ ...e, rendered: undefined, assetImports: undefined });
+          const v = Reflect.get(t, p);
+          return typeof v === 'function' ? v.bind(t) : v;
+        },
+      }),
+    }),
+  };
+}
+
 // Domande a tempo: src/content/domande/<materia>/<argomento>/<n>.md, una per traccia degli esercizi da fare
 // (stesso n). Corpo: eventuale domanda riformulata, elenco di 4 risposte, "## Spiegazione".
 const domande = defineCollection({
-  loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content/domande' }),
+  loader: senzaHtml('./src/content/domande'),
   schema: z.object({ corretta: z.number().int().min(1).max(4) }),
 });
 
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.
 const teoria_en = defineCollection({ loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content-en/teoria' }), schema: teoria.schema });
 const svolti_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/svolti' }), schema: svolti.schema });
-const domande_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/domande' }), schema: domande.schema });
+const domande_en = defineCollection({ loader: senzaHtml('./src/content-en/domande'), schema: domande.schema });
 const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }), schema: dafare.schema });
 
 export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en };
