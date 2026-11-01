@@ -598,6 +598,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<section><h3>Dispositivi (al massimo 2)</h3>' + (s.dispositivi.length ? '<div class="elenco-m">' + s.dispositivi.map((d) => '<div class="riga-m">' + esc(d.nome) + '<span class="nota" style="margin-left:auto">usato ' + fa(d.ultimo_uso) + '</span></div>').join('') + '</div><div class="azioni" style="margin-top:.6rem"><button type="button" class="bottone pericolo" id="c-scollega">Scollega tutti</button></div>' : '<p class="nota" style="margin:0">Nessun dispositivo collegato.</p>') + '</section>' +
       (s.acquisti.length ? '<section><h3>Pagamenti</h3><div class="elenco-m">' + s.acquisti.map((a) => '<div class="riga-m">' + esc(breveMateria(a.materia)) + '<span class="nota">' + dataOra(a.creato) + '</span><b style="margin-left:auto">' + eur.format(a.importo) + '</b></div>').join('') + '</div></section>' : '') +
       (s.registrato ? '<section><h3>Accesso</h3><div class="azioni"><button type="button" class="bottone" id="c-reset">Genera password provvisoria</button></div><div id="c-esito"></div></section>' : '') +
+      (s.registrato ? '<section><h3>Promemoria per studiare</h3><div class="azioni"><button type="button" class="bottone" id="c-promemoria">Invia il promemoria</button></div><div id="c-esito-p"></div></section>' : '') +
       '</div>';
     if (!ricarica) { const v = $('#velo'); v.hidden = false; requestAnimationFrame(() => { v.classList.add('aperto'); c.classList.add('aperto'); }); c.setAttribute('aria-hidden', 'false'); setTimeout(() => $('.chiudi', c).focus(), 60); }
     $('.chiudi', c).addEventListener('click', chiudiStudente);
@@ -613,6 +614,10 @@ function cliente(MATERIE, A_PAGAMENTO) {
     const sc = $('#c-scollega', c); if (sc) sc.addEventListener('click', async () => {
       if (!(await conferma('Scollegare tutti i dispositivi?', 'Lo studente dovrà accedere di nuovo con email e password.', 'Scollega'))) return;
       await api('scollega', { email: s.email }); avviso('Dispositivi scollegati'); carica(true);
+    });
+    const pm = $('#c-promemoria', c); if (pm) pm.addEventListener('click', async () => {
+      pm.disabled = true; const r = await api('promemoria-prova', { email: s.email }); pm.disabled = false;
+      $('#c-esito-p', c).innerHTML = '<div class="risultato" style="margin-top:.7rem">' + (r.errore ? esc(r.errore) : 'Inviato con oggetto «' + esc(r.oggetto) + '».') + '</div>';
     });
     const rs = $('#c-reset', c); if (rs) rs.addEventListener('click', async () => {
       if (!(await conferma('Generare una password provvisoria?', 'La password attuale smette di funzionare e i dispositivi vengono scollegati.', 'Genera'))) return;
@@ -685,10 +690,12 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<p class="nota" style="margin:0">Per chi ha dimenticato la password. La vecchia smette di funzionare e i suoi dispositivi vengono scollegati.</p>' +
       '<div class="campo"><label for="r-email">Email dell’account</label><input id="r-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
       '<div class="azioni"><button class="bottone" type="submit">Genera password provvisoria</button></div><div id="esito-reset"></div></form></div></section>' +
-      '<section class="card"><header><h2>Promemoria per studiare</h2></header><div class="corpo"><form class="modulo" id="f-promemoria">' +
-      '<p class="nota" style="margin:0">Invia subito l’email di promemoria a un indirizzo, con i dati veri dell’account se esiste. Non conta nel calendario degli invii.</p>' +
-      '<div class="campo"><label for="p-email">Email</label><input id="p-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
-      '<div class="azioni"><button class="bottone" type="submit">Invia email di prova</button></div><div id="esito-promemoria"></div></form></div></section>' +
+      '<section class="card"><header><h2>Promemoria per studiare</h2></header><div class="corpo">' +
+      '<p class="nota" style="margin:0 0 .8rem">Partono da soli ogni giorno alle 17:30 per chi non entra da 3, 6, 12, 15… giorni. <span id="p-stato"></span></p>' +
+      '<form class="modulo" id="f-promemoria"><div class="campo"><label for="p-email">Invia a uno studente</label><input id="p-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
+      '<div class="azioni"><button class="bottone" type="submit">Invia il promemoria</button></div><div id="esito-promemoria"></div></form>' +
+      '<div class="azioni" style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--riga)"><button type="button" class="bottone primario" id="p-tutti">Invia a tutti</button></div>' +
+      '<p class="nota" style="margin:.4rem 0 0">A ogni iscritto che non ha disattivato i promemoria, a prescindere dai giorni. Oltre il limite giornaliero gli altri partono dal giorno dopo alle 17:30.</p><div id="esito-tutti"></div></div></section>' +
       '<section class="card"><header><h2>Collegamenti rapidi</h2></header><div class="corpo"><div class="azioni">' +
       '<a class="bottone" href="https://vendors.paddle.com/transactions-v2" target="_blank" rel="noopener">Paddle · transazioni</a>' +
       '<a class="bottone" href="https://vendors.paddle.com/payouts" target="_blank" rel="noopener">Paddle · pagamenti a te</a>' +
@@ -701,10 +708,28 @@ function cliente(MATERIE, A_PAGAMENTO) {
       $('#esito-attiva').innerHTML = '<div class="risultato">' + (r.errore ? esc(r.errore) : 'Fatto: ' + materie.map(breveMateria).join(', ') + ' per <b>' + esc(email) + '</b>. ' + (r.account ? 'Le vede già nel suo account.' : 'Le troverà appena si registra con questa email.')) + '</div>';
       if (!r.errore) { e.target.reset(); carica(true); }
     });
+    const statoP = async () => {
+      const st = await api('promemoria-stato').catch(() => null); if (!st || !$('#p-stato')) return;
+      $('#p-stato').textContent = st.chiave
+        ? st.attivi + ' iscritti li ricevono · ' + st.inviatiOggi + ' inviati oggi' + (st.inCoda ? ' · ' + st.inCoda + ' in coda' : '') + ' · ancora ' + st.posto + ' possibili oggi.'
+        : 'Invio non attivo: manca la chiave di Resend.';
+      return st;
+    };
+    statoP();
     $('#f-promemoria').addEventListener('submit', async (e) => {
       e.preventDefault(); const email = $('#p-email').value.trim();
       const r = await api('promemoria-prova', { email });
-      $('#esito-promemoria').innerHTML = '<div class="risultato">' + (r.errore ? esc(r.errore) : 'Inviata a <b>' + esc(email) + '</b> con oggetto «' + esc(r.oggetto) + '»' + (r.account ? '.' : ' (nessun account con questa email: dati di esempio).')) + '</div>';
+      $('#esito-promemoria').innerHTML = '<div class="risultato">' + (r.errore ? esc(r.errore) : 'Inviato a <b>' + esc(email) + '</b> con oggetto «' + esc(r.oggetto) + '»' + (r.account ? '.' : ' (nessun account con questa email: dati di esempio).')) + '</div>';
+    });
+    $('#p-tutti').addEventListener('click', async () => {
+      const st = await statoP(); if (!st) return;
+      const oggiN = Math.min(st.posto, st.attivi);
+      if (!(await conferma('Inviare il promemoria a tutti?', st.attivi + ' iscritti lo riceveranno (chi lo ha già ricevuto oggi viene saltato). Oggi ne partono al massimo ' + oggiN + ', gli altri dal giorno dopo alle 17:30.', 'Invia a tutti'))) return;
+      $('#p-tutti').disabled = true;
+      const r = await api('promemoria-tutti', {});
+      $('#p-tutti').disabled = false;
+      $('#esito-tutti').innerHTML = '<div class="risultato" style="margin-top:.7rem">' + (r.errore ? esc(r.errore) : 'Inviati oggi: <b>' + r.inviati + '</b>' + (r.inCoda ? ' · in coda per i prossimi giorni: <b>' + r.inCoda + '</b>' : '') + (r.giaOggi ? ' · già ricevuto oggi: ' + r.giaOggi : '') + '.') + '</div>';
+      statoP();
     });
     $('#f-reset').addEventListener('submit', async (e) => {
       e.preventDefault(); const email = $('#r-email').value.trim();

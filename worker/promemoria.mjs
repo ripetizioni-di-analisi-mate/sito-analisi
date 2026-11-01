@@ -139,21 +139,13 @@ export function componiPromemoria(r, catalogo, linkNo) {
   return { oggetto, html, testo };
 }
 
-// Chiamata dal cron: sceglie gli studenti, compone e invia (Resend, in blocchi da 100), registra gli invii.
-export async function inviaPromemoria(env, aDO, firmaToken, catalogo) {
-  if (!env.RESEND_API_KEY || env.PROMEMORIA === '0') return { inviati: 0, motivo: 'non attivo' };
-  const oggi = new Date().toISOString().slice(0, 10);
-  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi });
-  // Il piano gratuito di Resend ne permette 100 al giorno, contando anche le email di recupero della password.
-  const posto = Math.max(0, Math.min(Number(env.PROMEMORIA_MAX_GIORNO) || 60, 95 - (c.recuperiOggi || 0)));
-  const ora = Date.now();
-  const scelti = (c.righe || []).filter((r) => {
-    if (r.oggi) return false;
-    const ultima = r.ultima || Date.parse(r.creato || '') || ora;
-    return giornoDiInvio(Math.floor((ora - ultima) / GIORNO));
-  }).slice(0, posto);
-  if (!scelti.length) return { inviati: 0 };
-  const email = await Promise.all(scelti.map(async (r) => {
+// Posto rimasto oggi: il piano gratuito di Resend permette 100 email al giorno, contando anche quelle di recupero
+// della password e quelle già partite oggi.
+const postoOggi = (env, c) => Math.max(0, Math.min(Number(env.PROMEMORIA_MAX_GIORNO) || 60, 95 - (c.recuperiOggi || 0) - (c.inviatiOggi || 0)));
+
+// Compone e invia (Resend, in blocchi da 100) le email per le righe date; registra gli invii e le toglie dalla coda.
+async function inviaRighe(env, aDO, firmaToken, catalogo, righe, oggi) {
+  const email = await Promise.all(righe.map(async (r) => {
     const token = await firmaToken(env, { scopo: 'promemoria', r: r.email });
     const linkNo = `${SITO}/promemoria/disattiva?t=${encodeURIComponent(token)}`;
     const m = componiPromemoria(r, catalogo, linkNo);
@@ -174,10 +166,51 @@ export async function inviaPromemoria(env, aDO, firmaToken, catalogo) {
     else console.log('promemoria', r.status, (await r.text()).slice(0, 300));
   }
   if (inviati.length) await aDO(env, '/promemoria-registra', { giorno: oggi, email: inviati });
-  return { inviati: inviati.length };
+  return inviati;
 }
 
-// Dashboard → Strumenti: invia subito il promemoria a un indirizzo, senza registrarlo né contarlo nel calendario.
+// Chiamata dal cron: prima chi è rimasto in coda dall'invio «a tutti», poi chi è nel giorno giusto del calendario.
+export async function inviaPromemoria(env, aDO, firmaToken, catalogo) {
+  if (!env.RESEND_API_KEY || env.PROMEMORIA === '0') return { inviati: 0, motivo: 'non attivo' };
+  const oggi = new Date().toISOString().slice(0, 10);
+  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi });
+  const ora = Date.now();
+  const righe = (c.righe || []).filter((r) => !r.oggi);
+  const inCoda = righe.filter((r) => r.coda);
+  const daCalendario = righe.filter((r) => {
+    if (r.coda) return false;
+    const ultima = r.ultima || Date.parse(r.creato || '') || ora;
+    return giornoDiInvio(Math.floor((ora - ultima) / GIORNO));
+  });
+  const scelti = [...inCoda, ...daCalendario].slice(0, postoOggi(env, c));
+  if (!scelti.length) return { inviati: 0 };
+  const inviati = await inviaRighe(env, aDO, firmaToken, catalogo, scelti, oggi);
+  return { inviati: inviati.length, codaRimasta: inCoda.length - inviati.filter((e) => inCoda.some((r) => r.email === e)).length };
+}
+
+// Dashboard → «Invia a tutti»: a ogni iscritto che accetta i promemoria, a prescindere dal calendario.
+// Oggi parte quanto permette il limite giornaliero; gli altri restano in coda e partono dal giorno dopo alle 17:30.
+export async function inviaATutti(env, aDO, firmaToken, catalogo) {
+  if (!env.RESEND_API_KEY) return { errore: 'Manca la chiave RESEND_API_KEY su Cloudflare.' };
+  const oggi = new Date().toISOString().slice(0, 10);
+  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi });
+  const righe = (c.righe || []).filter((r) => !r.oggi);
+  const posto = postoOggi(env, c);
+  const inviati = await inviaRighe(env, aDO, firmaToken, catalogo, righe.slice(0, posto), oggi);
+  const resto = righe.slice(posto).map((r) => r.email);
+  if (resto.length) await aDO(env, '/promemoria-coda', { email: resto });
+  return { ok: true, inviati: inviati.length, inCoda: resto.length, giaOggi: (c.righe || []).length - righe.length };
+}
+
+// Numeri per la dashboard.
+export async function statoPromemoria(env, aDO) {
+  const oggi = new Date().toISOString().slice(0, 10);
+  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi });
+  const righe = c.righe || [];
+  return { attivi: righe.length, inCoda: righe.filter((r) => r.coda).length, inviatiOggi: c.inviatiOggi || 0, posto: postoOggi(env, c), chiave: Boolean(env.RESEND_API_KEY) };
+}
+
+// Dashboard (Strumenti o scheda dello studente): invia subito il promemoria a un indirizzo.
 export async function provaPromemoria(env, aDO, firmaToken, catalogo, email) {
   if (!env.RESEND_API_KEY) return { errore: 'Manca la chiave RESEND_API_KEY su Cloudflare.' };
   const c = await aDO(env, '/promemoria-candidati', { giorno: new Date().toISOString().slice(0, 10), solo: email });
@@ -189,7 +222,10 @@ export async function provaPromemoria(env, aDO, firmaToken, catalogo, email) {
     method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
     body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [email], subject: m.oggetto, html: m.html, text: m.testo }),
   });
-  return r.ok ? { ok: true, oggetto: m.oggetto, account: Boolean(c.righe?.[0]) } : { errore: `Resend ha risposto ${r.status}: ${(await r.text()).slice(0, 200)}` };
+  if (!r.ok) return { errore: `Resend ha risposto ${r.status}: ${(await r.text()).slice(0, 200)}` };
+  // Per uno studente iscritto l'invio a mano conta come quello automatico: niente doppione nello stesso giorno.
+  if (c.righe?.[0]) await aDO(env, '/promemoria-registra', { giorno: new Date().toISOString().slice(0, 10), email: [email] });
+  return { ok: true, oggetto: m.oggetto, account: Boolean(c.righe?.[0]) };
 }
 
 export const PAGINA_DISATTIVATO = (ok, fatto) => `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="robots" content="noindex"><title>Promemoria</title>

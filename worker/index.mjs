@@ -16,7 +16,7 @@ import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
-import { inviaPromemoria, provaPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -132,6 +132,7 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN promemoria INTEGER DEFAULT 1'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN lingua TEXT'); } catch { /* già presente */ }
     this.sql.exec('CREATE TABLE IF NOT EXISTS promemoria (email TEXT, giorno TEXT, PRIMARY KEY (email, giorno))');
+    this.sql.exec('CREATE TABLE IF NOT EXISTS promemoria_coda (email TEXT PRIMARY KEY, creato INTEGER)');
     // recupero della password: email inviate per giorno (per indirizzo e per tutto il sito), contro gli abusi
     this.sql.exec('CREATE TABLE IF NOT EXISTS recuperi (giorno TEXT, chiave TEXT, n INTEGER, ultimo INTEGER, PRIMARY KEY (giorno, chiave))');
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
@@ -179,17 +180,26 @@ export class Archivio {
                 COALESCE((SELECT MAX(ultimo) FROM sessioni s WHERE s.email = u.email), 0)) AS ultima,
             (SELECT COUNT(*) FROM promemoria p WHERE p.email = u.email) AS inviati,
             EXISTS (SELECT 1 FROM promemoria p WHERE p.email = u.email AND p.giorno = ?) AS oggi,
+            EXISTS (SELECT 1 FROM promemoria_coda q WHERE q.email = u.email) AS coda,
             (SELECT materia FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS materia,
             (SELECT argomento FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS argomento
           FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}`, c.giorno, ...(c.solo ? [c.solo] : []));
         const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
-        return Response.json({ righe, recuperiOggi: rec?.n || 0 });
+        const inv = this.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', c.giorno);
+        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0 });
       }
       case '/promemoria-registra':
-        for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', e, c.giorno);
+        for (const e of c.email || []) {
+          this.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', e, c.giorno);
+          this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', e);
+        }
+        return Response.json({ ok: true });
+      case '/promemoria-coda':
+        for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria_coda (email, creato) VALUES (?, ?)', e, Date.now());
         return Response.json({ ok: true });
       case '/promemoria-no':
         this.sql.exec('UPDATE utenti SET promemoria = 0 WHERE email = ?', c.email);
+        this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', c.email);
         return Response.json({ ok: true });
 
       case '/recupero-conta': { // al massimo 3 email al giorno per indirizzo, una ogni 2 minuti, e un tetto per tutto il sito
@@ -841,6 +851,10 @@ export default {
         if (!emailValida(email)) return json({ errore: 'Email non valida.' }, 400);
         return json(await provaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})), email));
       }
+      if (p === '/admin/api/promemoria-tutti' && POST) {
+        return json(await inviaATutti(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({}))));
+      }
+      if (p === '/admin/api/promemoria-stato') return json(await statoPromemoria(env, aDO));
       if (p === '/admin/api/reset' && POST) {
         const email = normalizza((await req.json()).email);
         const alfabeto = 'abcdefghjkmnpqrstuvwxyz23456789';
