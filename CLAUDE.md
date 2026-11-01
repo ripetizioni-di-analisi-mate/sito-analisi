@@ -64,6 +64,7 @@ Prezzi dal 29/10 pomeriggio (sito e Paddle allineati): Precorso 29 €, Analisi 
 3. Prima di dire che qualcosa è online, aspettare che il build di Cloudflare sia finito (5-10 minuti) e controllare la pagina vera.
 4. Non dare per scontato che Carmine capisca termini tecnici o inglesi: spiegare cosa deve premere e dove.
 5. Nelle risposte a lui: brevi, concrete, senza riepiloghi dei passaggi fatti.
+6. **Cambiamenti visibili della grafica o delle pagine principali (home, testata, account): prima le alternative (A, B, C con schermate), poi si pubblica solo quella che sceglie.** Il 01/11 lo spazio personale in home è stato pubblicato senza chiedere ed è stato tolto; il codice delle tre versioni è nel ramo `spazio-studente` (A = riquadro completo; B e C erano varianti di prova fatte con il CSS).
 
 ## Preferenze editoriali principali (dettagli in GUIDA-CONTENUTI.md)
 Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi, poiché, perciò), i due punti non sostituiscono un connettivo; niente frasi di riempimento o "da IA"; niente tono prescrittivo; graffa solo per condizioni da soddisfare insieme; niente "la parentesi"; assi dei grafici orientati; dopo ogni definizione/teorema, a cosa serve; esercizi svolti con il calcolo sopra e la spiegazione sotto, a tutta pagina.
