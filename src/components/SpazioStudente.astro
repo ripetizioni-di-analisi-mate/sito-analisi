@@ -1,0 +1,86 @@
+---
+// Spazio personale in home, visibile solo a chi ha fatto l'accesso (html.collegato).
+// Nome, stemma, titolo, EXP e barra li scrive il Worker nella pagina (nessuno sfarfallio);
+// studio di oggi, obiettivi, ultima sessione e materie arrivano da /api/percorso e da data-materie.
+import { link, type Lingua } from '../i18n';
+interface Materia { slug: string; titolo: string; colore: string }
+interface Props { lingua: Lingua; materie: Materia[] }
+const { lingua, materie } = Astro.props;
+const en = lingua === 'en';
+const pref = en ? '/en' : '';
+---
+<section class="spazio-studente" aria-labelledby="ss-titolo">
+  <div class="ss-testa">
+    <div class="ss-stemma" aria-hidden="true"></div>
+    <div class="ss-dati">
+      <h2 id="ss-titolo">{en ? 'Hi, ' : 'Ciao, '}<span class="ss-nome"></span></h2>
+      <p class="ss-rango"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
+      <span class="barra-exp grande ss-barra"><span></span></span>
+      <p class="ss-mancano"></p>
+    </div>
+  </div>
+  <div class="ss-numeri">
+    <p><strong class="ss-oggi-minuti">–</strong><span>{en ? 'minutes of study today' : 'minuti di studio oggi'}</span></p>
+    <p><strong class="ss-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
+    <p><span class="giorni-settimana ss-giorni"></span><span>{en ? 'this week' : 'questa settimana'}</span></p>
+  </div>
+  <div class="ss-azioni">
+    <a class="ss-continua" href={link(lingua, '/livelli-e-punti')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+    <a class="ss-riprendi" href="#" hidden>{en ? 'Back to: ' : 'Riprendi: '}<span></span></a>
+  </div>
+  <div class="ss-colonne">
+    <div class="ss-obiettivi" hidden>
+      <h3>{en ? 'Weekly goals' : 'Obiettivi della settimana'}</h3>
+      <ul class="obiettivi"></ul>
+    </div>
+    <div class="ss-materie" hidden>
+      <h3>{en ? 'Your subjects' : 'Le tue materie'}</h3>
+      <ul></ul>
+    </div>
+  </div>
+  <p class="ss-link">
+    <a href={`${pref}/account#percorso`}>{en ? 'Your full progress' : 'Il tuo percorso completo'}</a>
+    <a href={`${pref}/livelli-e-punti`}>{en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a>
+  </p>
+</section>
+<script is:inline define:vars={{ en, pref, materie }}>
+  (async () => {
+    const rad = document.documentElement;
+    const box = document.querySelector('.spazio-studente');
+    if (!box || !rad.classList.contains('collegato')) return;
+    const q = (s) => box.querySelector(s);
+    const num = (x) => Number(x || 0).toLocaleString(en ? 'en-US' : 'it-IT');
+    const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    // Materie sbloccate: le scrive il Worker in data-materie (insieme alle chiavi video-<slug>).
+    const mie = (rad.dataset.materie || '').split(' ').filter(Boolean);
+    const voci = materie.filter((m) => mie.includes(m.slug)).map((m) => `<li style="--accento:${m.colore}"><a href="${pref}/${m.slug}"><span class="tacca"></span>${esc(m.titolo)}</a></li>`);
+    if (!en && mie.some((s) => s.startsWith('video-'))) voci.push('<li class="ss-video"><a href="/account#videocorsi"><span class="tacca"></span>I tuoi videocorsi</a></li>');
+    if (voci.length) { q('.ss-materie ul').innerHTML = voci.join(''); q('.ss-materie').hidden = false; }
+
+    const r = await fetch(`/api/percorso?l=${en ? 'en' : 'it'}`).catch(() => null);
+    if (!r || !r.ok) return;
+    const d = await r.json();
+    q('.ss-oggi-minuti').textContent = num(d.oggi?.minuti);
+    q('.ss-oggi-corrette').textContent = num(d.oggi?.corrette);
+    const iniziali = en ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
+    q('.ss-giorni').innerHTML = (d.settimana?.giorni || []).map((g, i) => `<span class="giorno${g.attivo ? ' attivo' : ''}${g.oggi ? ' oggi' : ''}" title="${g.giorno}"><i></i>${iniziali[i]}</span>`).join('');
+    // Tasto principale: obiettivo della settimana con un collegamento, altrimenti le domande dell'ultimo argomento studiato.
+    const conLink = (d.obiettivi || []).find((o) => o.link && !o.completato);
+    const ultima = (d.sessioni || []).find((s) => s.materia && s.argomento);
+    const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
+    if (dove) q('.ss-continua').href = pref + dove;
+    else q('.ss-continua').hidden = true;
+    if (ultima && ultima.titolo && ultima.argomento !== 'prove-d-esame') {
+      const a = q('.ss-riprendi');
+      a.href = `${pref}/${ultima.materia}/${ultima.argomento}/teoria`;
+      a.querySelector('span').textContent = ultima.titolo;
+      a.hidden = false;
+    }
+    const ob = (d.obiettivi || []).slice(0, 3);
+    if (ob.length) {
+      const XP = en ? 'XP' : 'EXP';
+      q('.ss-obiettivi ul').innerHTML = ob.map((o) => `<li class="${o.completato ? 'completato' : ''}"><span>${esc(o.testo)}</span><span>${o.completato ? `${en ? 'Completed' : 'Completato'} · +${o.punti} ${XP}` : `${o.fatto} / ${o.totale} · ${o.punti} ${XP}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
+      q('.ss-obiettivi').hidden = false;
+    }
+  })();
+</script>
