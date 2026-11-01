@@ -19,7 +19,6 @@ const pref = en ? '/en' : '';
     <div class="ss-cammino">
       <span class="ss-barra"><span></span></span>
       <p class="ss-exp"><span class="ss-exp-tot"></span><span class="ss-mancano"></span></p>
-      <p class="ss-prossimo" hidden><span class="ss-prossimo-stemma" aria-hidden="true"></span><span class="ss-prossimo-testo"></span></p>
     </div>
   </div>
   <div class="ss-piede">
@@ -28,7 +27,6 @@ const pref = en ? '/en' : '';
       <a class="ss-continua" href={link(lingua, '/livelli-e-punti')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
     </div>
   </div>
-  <a class="ss-percorso" href={`${pref}/account#percorso`}>{en ? 'Your progress' : 'Il tuo percorso'}</a>
 </section>
 <script is:inline define:vars={{ en, pref }}>
   (async () => {

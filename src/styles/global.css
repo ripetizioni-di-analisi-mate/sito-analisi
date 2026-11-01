@@ -299,7 +299,7 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .torna-su[hidden] { display: none; }
 
 /* ---------- home: materie ---------- */
-/* Home per chi ha fatto l'accesso (versione B): lo studente al centro, con il suo stemma, il suo nome e il cammino verso il prossimo grado.
+/* Home per chi ha fatto l'accesso (versione B): lo studente al centro, con il suo stemma, il suo nome e la barra degli EXP.
    Riquadro bianco e compatto, senza ombre; i colori del rango (--rango-*, scritti dal Worker) solo su testi, bordo e barra. La testata non cambia. */
 .spazio-studente { display: none; }
 html.collegato .solo-ospiti { display: none; }
@@ -321,11 +321,6 @@ html.collegato .spazio-studente {
 .ss-barra > span { display: block; height: 100%; width: var(--perc, 0%); min-width: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--rango-chiaro, #9cc), var(--rango-medio, var(--verde))); animation: ss-riempi 1s 0.15s cubic-bezier(.2,.8,.2,1) both; }
 .ss-exp { margin: 0.3rem 0 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.1rem 1rem; font-size: 0.8rem; color: var(--inchiostro-2); }
 .ss-exp strong { color: var(--inchiostro); }
-.ss-prossimo { margin: 0.4rem 0 0; display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; color: var(--inchiostro-2); }
-.ss-prossimo[hidden] { display: none; }
-.ss-prossimo strong { color: var(--inchiostro); }
-.ss-prossimo-stemma { flex: none; width: 1.5rem; height: 1.35rem; }
-.ss-prossimo-stemma svg { width: 100%; height: 100%; overflow: visible; }
 .ss-piede { padding-top: 0.75rem; border-top: 1px solid var(--riga); }
 .ss-azioni { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.2rem; }
 .ss-azioni .ss-continua { margin-left: auto; flex: none; }
@@ -339,7 +334,6 @@ html.collegato .spazio-studente {
 .ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .ss-riprendi span { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
 .ss-riprendi:hover span { text-decoration-color: currentColor; }
-.ss-percorso { position: absolute; top: 0.8rem; right: 1rem; font-size: 0.76rem; color: var(--inchiostro-2); }
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } }
@@ -354,7 +348,6 @@ html.collegato .spazio-studente {
   .ss-piede { padding-top: 0.65rem; }
   .ss-azioni { flex-direction: column-reverse; align-items: stretch; }
   .ss-azioni .ss-continua { margin-left: 0; }
-  .ss-percorso { top: 0.7rem; right: 0.8rem; }
 }
 .presentazione-home { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "foto testo" "foto numeri"; align-items: center; column-gap: 1.6rem; row-gap: 0.9rem; margin: 1.5rem 0 0.6rem; font-family: var(--ui); text-decoration: none; color: var(--inchiostro); }
 .presentazione-home img { grid-area: foto; width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px var(--carta), 0 0 0 6px var(--riga); }
