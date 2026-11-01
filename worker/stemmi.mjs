@@ -13,7 +13,7 @@ export const RANGHI = [
   { it: 'Rubino', en: 'Ruby', chiaro: '#ffd0d5', medio: '#d1263e', scuro: '#5e0915', pallido: '#f6dcdf', corpo: 's3' },
   { it: 'Ametista', en: 'Amethyst', chiaro: '#eedaff', medio: '#8b45d1', scuro: '#381160', pallido: '#ebe0f5', corpo: 's3' },
   { it: 'Ossidiana', en: 'Obsidian', chiaro: '#8c9a97', medio: '#2f3b39', scuro: '#0b0f0e', pallido: '#d9dcd9', corpo: 's3' },
-  { it: 'Diamante', en: 'Diamond', chiaro: '#ffffff', medio: '#9fe2ff', scuro: '#2a7fae', pallido: '#e3f5fc', corpo: 'diamante' },
+  { it: 'Diamante', en: 'Diamond', chiaro: '#d6f4ff', medio: '#3fb6ea', scuro: '#155f92', pallido: '#e3f5fc', corpo: 'diamante' },
 ];
 const ORO = '#e2b240';
 const CORPI = {
@@ -112,8 +112,14 @@ export function stemmaSVG(r, o = {}) {
     const bordo = r >= 6 ? ` stroke="${ORO}" stroke-width="0.8"` : '';
     nastro = `<path d="M30 ${y} H90 L85 ${y + 7} L90 ${y + 14} H30 L35 ${y + 7} Z" fill="${fondo}"${bordo}/><path d="M38 ${y - 2} H82 V${y + 12} H38 Z" fill="${fondo}" stroke="#fff" stroke-width="1"/><text x="60" y="${y + 9.5}" text-anchor="middle" font-family="Source Sans 3, system-ui, sans-serif" font-size="10" font-weight="800" fill="${testo}">${o.etichetta || 'LIV.'} ${o.livello}</text>`;
   }
+  // Il colore che sale con gli EXP è più denso nei ranghi alti (bronzo tenue, diamante pieno).
+  const densita = (0.42 + 0.06 * (r - 1)).toFixed(2);
+  const meta = (0.55 - 0.035 * (r - 1)).toFixed(2);
+  // A ogni grado (I, II, III) lo stemma si illumina un poco di più: alone dietro e riflesso in alto.
+  const alone = grado ? `<path d="${d}" fill="${md}" opacity="${[0, 0.2, 0.32, 0.45][grado]}" filter="url(#f${id})" transform="translate(60 54) scale(1.1) translate(-60 -54)"/>` : '';
+  const riflesso = grado ? `<rect x="0" y="0" width="120" height="108" fill="url(#l${id})"/>` : '';
   const pieno = `<rect class="stemma-pieno" x="0" y="${y0}" width="120" height="${y1 - y0}" fill="url(#g${id})" style="transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(${(perc / 100).toFixed(3)}); transition: transform 0.6s ease"/>`;
-  return `<svg class="${o.classe || 'stemma-svg'}" viewBox="0 0 120 108" data-rango="${r}-${grado}" aria-hidden="true" focusable="false"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${cl}"/><stop offset="0.55" stop-color="${md}"/><stop offset="1" stop-color="${sc}"/></linearGradient><clipPath id="c${id}"><path d="${d}"/></clipPath></defs>${dietro}<path d="${d}" fill="${pal}"/><g clip-path="url(#c${id})">${pieno}</g><path d="${d}" fill="none" stroke="${trim}" stroke-width="2.6"/>${davanti}${nastro}</svg>`;
+  return `<svg class="${o.classe || 'stemma-svg'}" viewBox="0 0 120 108" data-rango="${r}-${grado}" aria-hidden="true" focusable="false"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${cl}" stop-opacity="${densita}"/><stop offset="${meta}" stop-color="${md}" stop-opacity="${densita}"/><stop offset="1" stop-color="${sc}" stop-opacity="${densita}"/></linearGradient><linearGradient id="l${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="${[0, 0.12, 0.22, 0.32][grado] || 0}"/><stop offset="0.6" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="f${id}" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter><clipPath id="c${id}"><path d="${d}"/></clipPath></defs>${alone}${dietro}<path d="${d}" fill="${pal}"/><g clip-path="url(#c${id})">${pieno}${riflesso}</g><path d="${d}" fill="none" stroke="${trim}" stroke-width="2.6"/>${davanti}${nastro}</svg>`;
 }
 
 // Colori della testata per il rango: bordo e barra, testo del titolo, fondo della barra.
