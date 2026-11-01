@@ -38,7 +38,7 @@ const icona = {
   publisher: { '@id': `${SITO}/#organizzazione` },
   potentialAction: { '@type': 'SearchAction', target: `${assoluto(link(lingua, '/cerca'))}?q={q}`, 'query-input': 'required name=q' },
 }] }}>
-  <p class="sopratitolo">{t.homeSopra}</p>
+  {t.homeSopra && <p class="sopratitolo">{t.homeSopra}</p>}
   <h1>{t.homeTitolo}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
