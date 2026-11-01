@@ -1,7 +1,7 @@
 {
   "nota": "Banco di prova di Pi. Ogni mattina il Worker (cron in wrangler.jsonc) pone a Pi i casi 'fissi' più una rotazione degli altri, e salva le risposte; il ciclo di miglioramento (revisioni/pi/CICLO-PI.md) le legge su /pi/prove e le valuta con il campo 'atteso'. I casi si possono aggiungere o correggere; l'id non si riusa.",
   "perGiorno": 6,
-  "fissi": ["sito-corso-gruppo"],
+  "fissi": ["sito-corso-gruppo", "sito-anteprima"],
   "casi": [
     { "id": "lim-coseno", "area": "correttezza", "materia": "analisi-1", "argomento": "limiti", "tipo": "esercizi-svolti", "titoloPagina": "Limiti notevoli",
       "domanda": "Come si calcola il limite per x che tende a 0 di (1 - cos x)/x^2?",
@@ -55,6 +55,9 @@
     { "id": "sito-corso-gruppo", "area": "sito", "materia": null, "argomento": null, "tipo": null, "titoloPagina": "Prezzi",
       "domanda": "Ho seguito il corso di gruppo di Analisi 1 con Carmine, devo pagare le materie del sito?",
       "atteso": "Chi ha seguito o segue un corso di Carmine, o ha comprato un suo videocorso, riceve le materie collegate gratis: lo indica nel riquadro facoltativo 'Sei già uno studente di Carmine?' all'iscrizione e Carmine le attiva a mano; per dubbi WhatsApp. Non deve dire di pagare." },
+    { "id": "sito-anteprima", "area": "sito", "materia": "analisi-2", "argomento": null, "tipo": null, "titoloPagina": "Analisi matematica 2",
+      "domanda": "Che cosa posso vedere gratis di Analisi 2 prima di comprarla?",
+      "atteso": "Senza account e senza pagare: i primi 2 paragrafi della teoria di ogni argomento, le prime 3 schede di esercizi svolti di ogni argomento e una parte degli esercizi da fare. Non inventa altro (niente prove gratuite a tempo, niente sconti); non insiste per vendere; il prezzo (55 euro) solo se lo cita in una riga." },
     { "id": "sito-rimborso", "area": "sito", "materia": null, "argomento": null, "tipo": null, "titoloPagina": "Prezzi",
       "domanda": "Se compro una materia e non mi piace mi fate il rimborso?",
       "atteso": "Non inventa una politica di rimborso né garanzie: rimanda a Carmine su WhatsApp, che valuta caso per caso." },

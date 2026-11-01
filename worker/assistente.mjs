@@ -86,7 +86,7 @@ function infoSito(aPagamento, prezzi, env = {}) {
   return `Informazioni sul sito ripetizionidianalisi.com (usale per le domande su materie, prezzi, pagamenti e accesso; non inventare nulla che non sia scritto qui):
 - Il sito è del prof. Carmine Tornincasa, insegnante privato di Analisi matematica, ingegnere civile, con oltre mille studenti seguiti e più di diecimila ore di lezione (pagina "Chi sono": https://ripetizionidianalisi.com/chi-sono).
 - Ogni materia contiene teoria completa con definizioni, teoremi e dimostrazioni, schede di esercizi svolti con ogni passaggio spiegato ed esercizi da fare con la soluzione.
-- Anteprima gratuita, senza account: una parte della teoria di ogni argomento, le prime ${SCHEDE_LIBERE} schede di esercizi svolti e una parte degli esercizi da fare.
+- Anteprima gratuita, senza account: i primi 2 paragrafi della teoria di ogni argomento, le prime ${SCHEDE_LIBERE} schede di esercizi svolti e una parte degli esercizi da fare.
 - Acquisto: si apre la pagina "Sblocca" della materia (https://ripetizionidianalisi.com/<materia>/sblocca), si crea un account gratuito con email e password e si paga. È un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. Il pagamento è gestito da Paddle, che fa da rivenditore ufficiale e invia la ricevuta; si paga con carta e con gli altri metodi mostrati nella finestra di pagamento. Dopo il pagamento la materia si sblocca subito nell'account.
 - Un account si può usare al massimo su ${MAX_DISPOSITIVI} dispositivi.
 - Chi ha seguito o sta seguendo un corso di Carmine (dal vivo o di gruppo), oppure ha comprato un suo videocorso preregistrato, non paga le materie collegate del sito: all'iscrizione lo indica nel riquadro facoltativo "Sei già uno studente di Carmine?" e Carmine gli attiva le materie gratis a mano, il prima possibile. Chi si è già iscritto senza indicarlo scrive a Carmine su WhatsApp.
@@ -187,7 +187,12 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
     try {
       const r = await env.AI.run(modello, { ...input, max_tokens: MAX_USCITA, temperature: 0.3, stream: true });
       const segna = () => evento(`${foto ? 'foto' : 'testo'}-${i ? 'riserva' : 'primo'}:${corto(modello)}`);
-      if (r instanceof ReadableStream) { await segna(); return flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota')); }
+      if (r instanceof ReadableStream) {
+        // Si aspetta il primo pezzo di testo visibile: se lo streaming finisce vuoto si passa al modello successivo.
+        const risp = await conPrimoPezzo(flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota')));
+        if (risp) { await segna(); return risp; }
+        continue;
+      }
       // Alcuni modelli ignorano lo streaming e rispondono tutto insieme.
       const t = pulisci(testoRisposta(r));
       if (t) {
@@ -206,6 +211,19 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
         ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.')
         : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.'),
   }, 502);
+}
+
+// Legge il primo pezzo della risposta in streaming; null se lo streaming finisce senza testo.
+async function conPrimoPezzo(resp) {
+  const lettore = resp.body.getReader();
+  const primo = await lettore.read();
+  if (primo.done) return null;
+  const corpo = new ReadableStream({
+    start(c) { c.enqueue(primo.value); },
+    async pull(c) { const { done, value } = await lettore.read(); if (done) c.close(); else c.enqueue(value); },
+    cancel(m) { return lettore.cancel(m); },
+  });
+  return new Response(corpo, { headers: resp.headers });
 }
 
 // Alcuni modelli scrivono il ragionamento tra tag: si tiene solo la risposta.
