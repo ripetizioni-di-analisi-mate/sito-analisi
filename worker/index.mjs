@@ -11,6 +11,7 @@ import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve } from './pi-prove.mjs';
+import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
@@ -748,7 +749,19 @@ export default {
       const nome = nomeVisibile(io);
       const en = /^\/en(\/|$)/.test(url.pathname);
       const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
-      risposta = new HTMLRewriter().on('.bottone-account .se-collegato', {
+      const riscrivi = new HTMLRewriter();
+      // Spazio personale in home (worker/spazio.mjs).
+      for (const [sel, v] of Object.entries(spazioHome(st, nome, en))) {
+        riscrivi.on(sel, {
+          element(e) {
+            if (v.stile) e.setAttribute('style', v.stile);
+            if (v.mostra) e.removeAttribute('hidden');
+            if (v.html !== undefined) e.setInnerContent(v.html, { html: true });
+            else if (v.testo !== undefined) e.setInnerContent(v.testo);
+          },
+        });
+      }
+      risposta = riscrivi.on('.bottone-account .se-collegato', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
       }).on('.bottone-livello .nome-utente', {
         element(e) { e.setInnerContent(nome.length > 18 ? `${nome.slice(0, 17)}…` : nome); },
