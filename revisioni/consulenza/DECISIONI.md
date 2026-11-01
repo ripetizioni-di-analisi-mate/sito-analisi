@@ -34,3 +34,9 @@ Scelte salvate dalla pagina "Piano vendite del sito" (artifact Ki1nAGDQ6mxhgWqPk
 
 ## Controlli successivi
 - 31/10/2026: nessuna scelta nuova né cambiata nella pagina delle proposte (30 documenti, tutti del 30/10 sera). Le bozze versione 2 (chiavi v1-v6 e v1-nota … v6-nota) non hanno ancora una risposta. Nessun commento sulla pagina.
+
+## Bozze versione 2 e aree (scelte del 31/10/2026 mattina, riportate qui il 01/11)
+- Bozze v2: 1 Home sì con ritocchi (nota: «gli esercizi svolti per tutte le discipline STEM, non solo matematica»); 2 Fine teoria sì; 3 Videocorso sì; 4 Sblocca sì tranne la parte sui 2 dispositivi; 5 Chi sono sì con ritocchi (senza scrivere che i nomi sono coperti); 6 Scheda bloccata sì. Tutte realizzate il 31/10 pomeriggio.
+- Mossa 1 (lezione di prova): «dopo». Mossa 3: «pubblichiamola».
+- Aree, alternativa scelta: 2.1 A (il docente in apertura), 2.6 B (fiducia nelle pagine di vendita), 2.7 A (un solo colore per i tasti di acquisto), 2.8 B, 2.9 B (pacchetti per corso di laurea), 2.10 B (inviti alla materia successiva), 2.11 A (Pi con informazioni complete), 2.12 A (contatori aggregati). Aree 2.2-2.5 senza scelta (coperte dalle bozze).
+- 01/11/2026: nessuna scelta nuova o cambiata dal 31/10 mattina; nessun commento sulla pagina.

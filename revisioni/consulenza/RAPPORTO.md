@@ -31,7 +31,9 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 | 9 | La dashboard sa quanti visitano, quanti si iscrivono e quanti pagano, ma non sa dove si fermano gli altri: quante volte si apre Sblocca, quante si apre e si chiude Paddle, da quale carosello arrivano. | Pochi contatori in più: pagina Sblocca vista, pagamento aperto, chiuso senza pagare, completato; campagna Instagram (`utm_campaign`); videocorsi separati per corso. | piccolo-medio | indiretto ma alto: dice quali delle altre mosse funzionano | niente |
 | 10 | La pagina "Chi sono" usa emoji, frasi generiche ("Risultati eccellenti", "Metodo collaudato") e numeri diversi da quelli che usi altrove; i 15 messaggi degli studenti e i 16 loghi delle università sono nel repository ma non compaiono. | Pagina asciutta con la tua formazione, i numeri che confermi, come è fatto il materiale, i messaggi degli studenti con il loro consenso (bozza 5). | piccolo | medio: è la pagina che si apre quando si è indecisi | confermare i numeri, il consenso degli studenti |
 
-**Stato delle mosse al 31/10/2026.** Fatta: 2 (link Drive, commit 8b4d571). In parte: 5 (presentazione di Carmine in home, commit c8deb51 e 0ad0574; pulsante «Videocorso» al singolare, commit f6b3f0e). Approvate e non ancora realizzate: 3, 4, 6, 7, 8, 9, 10. Sospesa: 1 (lezione di prova da non mostrare per ora). **Pronta da realizzare: 3**, con il codice provato in locale (vedi 2.3, "Mossa 3: passi tecnici").
+**Stato delle mosse al 01/11/2026.** Fatte: 2 (link Drive, 8b4d571), 3 (fine della teoria gratuita, 7d8300e), 4 (vetrine delle schede bloccate, 63fd681), 5 (home, 904ff8e), 6 (Sblocca con iscrizione nel riquadro, 932da86), 10 (Chi sono, fd546fb). In parte: 7 (sconto per chi ha già una materia chiesto su WhatsApp, 66141f5; i pacchetti fra materie e i codici richiedono Paddle). Approvate e ferme per un account esterno: 8 (email, serve Resend). Approvata e pronta da realizzare: 9 (contatori, vedi 2.12). Rimandata: 1 (lezione di prova).
+
+**Aree realizzate il 01/11/2026.** 2.7 A: tasti di acquisto tutti nel verde del sito (6aea71f), quiz A-E senza pallino doppio (6aea71f), sopratitolo per tipo di materia (b4f2b91). 2.11 A: Pi conosce le materie utili per corso di studi (684918e); lo sblocco per gli ex studenti, i numeri dell'anteprima e i numeri di Carmine erano già stati aggiunti (fd546fb, 1dae697). Restano della 2.7: formule nel testo che vanno a capo a metà, `og.png` con tutte le materie.
 
 ---
 
@@ -290,6 +292,16 @@ Sulle garanzie, senza scrivere una politica di rimborso: "Prima di comprare puoi
 - **A. Contatori aggregati**: una tabella "eventi" nell'archivio (giorno, evento, materia, numero), senza dati personali, mostrata in dashboard come sequenza per materia: pagina vista → Sblocca vista → tasto → Paddle aperto → pagato. Pro: compatibile con l'informativa attuale. Impegno piccolo-medio. Rischio nullo.
 - **B. Strumento esterno di statistiche rispettoso della privacy** (per esempio Cloudflare Web Analytics, già nel tuo fornitore). Pro: nessun codice da scrivere per le pagine. Contro: non vede i passaggi dentro Paddle. Impegno piccolo. Rischio basso.
 
+
+**Approfondimento del 01/11/2026 (scelta A di Carmine): come realizzarla senza toccare il codice dei pagamenti.**
+Tutti i conteggi sono numeri per giorno e per materia, senza email né dati personali, nella stessa tabella del Durable Object `Archivio`.
+1. *Pagina Sblocca e pagina di ogni videocorso contate a parte.* In `worker/index.mjs` (blocco «Conteggio visite», circa riga 760) la sezione di `/analisi-1/sblocca` oggi finisce in `analisi-1` insieme alla pagina della materia. Si aggiunge: se l'indirizzo finisce con `/sblocca`, la sezione diventa `analisi-1/sblocca`; per `/videocorsi/<slug>` la sezione diventa `videocorsi/<slug>`. Nessuna tabella nuova.
+2. *Fine dell'anteprima raggiunta.* Nel `Base.astro`, uno script di poche righe guarda se il riquadro `.fine-anteprima` entra nello schermo (una volta per pagina) e manda `navigator.sendBeacon('/api/evento', '{"e":"fine-anteprima","m":"analisi-1"}')`. Nel Worker una rotta `/api/evento` accetta solo un elenco chiuso di eventi e di materie e scrive in una tabella `eventi (giorno, evento, materia, n)`.
+3. *Tasto di acquisto premuto.* Lo stesso script ascolta i tocchi su `#invia-acquisto` («Crea l'account e paga») e `#compra` («Sblocca ora») e manda l'evento `tasto`. Il codice di Paddle in `Sblocca.astro` non si tocca.
+4. *Campagna Instagram.* `fonteIngresso` legge anche `utm_campaign` (solo lettere, numeri e trattini, al massimo 40 caratteri) e conta l'evento `campagna:<nome>`; i link dei caroselli diventano per esempio `https://ripetizionidianalisi.com/analisi-1/limiti/esercizi-svolti/1?utm_source=ig&utm_campaign=limiti-notevoli`.
+5. *Dashboard.* Nella scheda Traffico una tabella «Percorso d'acquisto» con una riga per materia: pagine viste → fine dell'anteprima → pagina Sblocca → tasto premuto → pagamenti (questi ultimi esistono già). Sotto, le campagne con il numero di ingressi.
+Resta fuori, perché tocca il codice dei pagamenti: sapere quante volte la finestra di Paddle si apre e si chiude senza pagare (eventi `checkout.loaded` e `checkout.closed`). Nel frattempo una parte di questo dato si vede nella dashboard di Paddle, sezione Transactions, dove compaiono anche i pagamenti non completati.
+Impegno: piccolo-medio. Rischio: nullo per i pagamenti; l'informativa sulla privacy resta valida, perché si salvano solo conteggi.
 ---
 
 ## 3. Percorsi simulati e punti di attrito
