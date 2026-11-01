@@ -4,7 +4,7 @@
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
-import { stemmaSVG, rangoDi, stileRango, RANGHI } from './stemmi.mjs';
+import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
@@ -755,9 +755,9 @@ export default {
       }).on('.bottone-livello .exp-livello', {
         element(e) { e.setInnerContent(st.exp.toLocaleString(en ? 'en-US' : 'it-IT')); },
       }).on('.bottone-livello .fascia-nome', {
-        element(e) { e.setInnerContent(st.fascia); },
+        element(e) { e.setInnerContent(nomeRango(st.livello, en ? 'en' : 'it')); },
       }).on('.bottone-livello .stemma-testata', {
-        element(e) { e.setInnerContent(stemmaSVG(rangoDi(st.livello), { perc: st.perc, id: 't' }), { html: true }); },
+        element(e) { e.setInnerContent(stemmaSVG(rangoDi(st.livello), { perc: st.perc, id: 't', grado: gradoDi(st.livello) }), { html: true }); },
       }).on('.bottone-livello .barra-testata > span', {
         element(e) { e.setAttribute('style', `width:${st.perc}%`); },
       }).on('.bottone-livello', {

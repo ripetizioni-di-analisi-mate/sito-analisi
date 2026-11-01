@@ -1,9 +1,8 @@
 ---
 // Regole di livelli e punti esperienza, scritte a partire da src/data/livelli.ts (italiano e inglese).
 import Base from '../layouts/Base.astro';
-import { catalogoDomande } from '../lib/domande';
-import { materiaL, link, type Lingua } from '../i18n';
-import { stemmaSVG, RANGHI } from '../../worker/stemmi.mjs';
+import { link, type Lingua } from '../i18n';
+import { stemmaSVG, RANGHI, ROMANI } from '../../worker/stemmi.mjs';
 import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA } from '../data/livelli';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -12,10 +11,6 @@ const XP = en ? 'XP' : 'EXP';
 const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT');
 const puntiObiettivi = Object.values(OBIETTIVI).map((o) => o.punti);
 const [prima, cento, ore] = TRAGUARDI_FISSI;
-const catalogo = Object.entries(await catalogoDomande(lingua)).map(([m, args]) => {
-  const mat = materiaL(lingua, m);
-  return { titolo: mat.titolo, argomenti: mat.argomenti.filter((a) => args.includes(a.slug)).map((a) => ({ titolo: a.titolo, href: link(lingua, `/${m}/${a.slug}/domande`) })) };
-});
 const titolo = en ? 'Levels and points' : 'Livelli e punti';
 ---
 <Base titolo={titolo} percorso={[{ titolo }]} lingua={lingua}
@@ -37,15 +32,6 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
     </dl>
     <p>{en ? 'Each question has two minutes. As soon as you confirm the answer, the full explanation appears with the points earned. When you end the session, the summary shows the active study time, the correct answers and the points earned.' : 'Ogni domanda ha due minuti di tempo. Dopo la conferma della risposta compare subito la spiegazione completa, con i punti ottenuti. Quando si termina la sessione, il riepilogo mostra il tempo di studio attivo, le risposte corrette e i punti guadagnati.'}</p>
 
-    <h2 id="domande">{en ? 'Where to find the timed questions' : 'Dove si trovano le domande a tempo'}</h2>
-    <p>{en ? 'The timed questions are in the index of each topic, below the exercises. These are the topics that have them.' : 'Le domande a tempo sono nell’indice di ogni argomento, sotto gli esercizi da fare. Gli argomenti che le hanno sono questi.'}</p>
-    {catalogo.map((c) => (
-      <>
-        <h3>{c.titolo}</h3>
-        <ul class="elenco-domande">{c.argomenti.map((a) => <li><a href={a.href}>{a.titolo}</a></li>)}</ul>
-      </>
-    ))}
-
     <h2>{en ? 'Points only for those who are studying' : 'Punti solo a chi sta studiando'}</h2>
     {en ? (
       <>
@@ -61,13 +47,26 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
 
     <h2>{en ? 'The levels' : 'I livelli'}</h2>
     {en ? (
-      <p>There are 100 levels. Going from level <i>n</i> to level <i>n</i> + 1 takes 60 + 10 · (<i>n</i> − 1) XP: the first step takes 60 XP and each following level takes 10 more. The title changes every ten levels.</p>
+      <p>There are 100 levels. Going from level <i>n</i> to level <i>n</i> + 1 takes 60 + 10 · (<i>n</i> − 1) XP: the first step takes 60 XP and each following level takes 10 more. The title changes every ten levels and the crest moves to a more precious material, from bronze to diamond. Each title has three grades, I, II and III, one every three levels: at each grade the crest gets one more chevron.</p>
     ) : (
-      <p>I livelli sono 100. Per passare dal livello <i>n</i> al livello <i>n</i> + 1 servono 60 + 10 · (<i>n</i> − 1) EXP: il primo passaggio richiede 60 EXP e ogni livello successivo ne richiede 10 in più. Ogni dieci livelli cambia il titolo.</p>
+      <p>I livelli sono 100. Per passare dal livello <i>n</i> al livello <i>n</i> + 1 servono 60 + 10 · (<i>n</i> − 1) EXP: il primo passaggio richiede 60 EXP e ogni livello successivo ne richiede 10 in più. Ogni dieci livelli cambia il titolo e lo stemma passa a un materiale più prezioso, dal bronzo al diamante. Ogni titolo ha tre gradi, I, II e III, uno ogni tre livelli: a ogni grado lo stemma riceve un gallone in più.</p>
     )}
     <ul class="fasce">
-      {FASCE.map((f, i) => (
-        <li><span class="fascia-stemma" set:html={stemmaSVG(i + 1, { perc: 100, id: `r${i}` })} /><strong>{en ? f.nomeEn : f.nome} · {en ? RANGHI[i].en : RANGHI[i].it}</strong><em>{en ? f.fraseEn : f.frase}</em><span>{en ? `levels ${f.da}–${f.a} · from ${num(sogliaLivello(f.da))} XP` : `livelli ${f.da}–${f.a} · da ${num(sogliaLivello(f.da))} EXP`}</span></li>
+      {FASCE.map((f, i) => {
+        const gradi = [[f.da, f.da + 2], [f.da + 3, f.da + 5], [f.da + 6, f.a]];
+        return (
+          <li>
+            <strong>{en ? f.nomeEn : f.nome} · {en ? RANGHI[i].en : RANGHI[i].it}</strong>
+            <em>{en ? f.fraseEn : f.frase}</em>
+            <span>{en ? `from ${num(sogliaLivello(f.da))} XP` : `da ${num(sogliaLivello(f.da))} EXP`}</span>
+            <span class="gradi-fascia">
+              {gradi.map(([da, a], g) => (
+                <span class="grado-fascia"><span class="fascia-stemma" set:html={stemmaSVG(i + 1, { perc: 100, id: `r${i}g${g}`, grado: g + 1 })} /><b>{ROMANI[g]}</b><small>{en ? `levels ${da}–${a}` : `livelli ${da}–${a}`}</small></span>
+              ))}
+            </span>
+          </li>
+        );
+      })}
       ))}
     </ul>
 

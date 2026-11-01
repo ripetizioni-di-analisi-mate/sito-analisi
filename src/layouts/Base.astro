@@ -126,7 +126,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
               <span class="stemma-testata" aria-hidden="true"></span>
               <span class="righe-livello">
                 <span class="nome-utente">{t.account}</span>
-                <span class="fascia-testata"><span class="fascia-con-punto"><span class="fascia-nome">{en ? 'Freshman' : 'Matricola'}</span> · </span><span class="liv-etichetta">{en ? 'Lv.' : 'Liv.'}</span> <span class="numero-livello">1</span><span class="exp-con-punto"> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span></span>
+                <span class="fascia-testata"><span class="fascia-con-punto"><span class="fascia-nome">{en ? 'Bronze I' : 'Bronzo I'}</span> · </span><span class="liv-etichetta">{en ? 'Lv.' : 'Liv.'}</span> <span class="numero-livello">1</span><span class="exp-con-punto"> · <span class="exp-livello">0</span> {en ? 'XP' : 'EXP'}</span></span>
               </span>
               <span class="barra-testata" aria-hidden="true"><span></span></span>
             </button>
@@ -139,7 +139,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
-              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/livelli-e-punti') + (domandeQui ? '' : '#domande')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               <p class="pl-link">
                 <a href={link(lingua, '/account') + '#percorso'}>{en ? 'Your progress' : 'Il tuo percorso'}</a>
                 <a href={link(lingua, '/account')}>{en ? 'Account' : 'Account'}</a>
@@ -219,7 +219,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </dialog>
 
   <script>
-    import { stemmaSVG, rangoDi, stileRango } from '../../worker/stemmi.mjs';
+    import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
     // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
     function adattaFormule() {
@@ -260,15 +260,16 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       bl.setAttribute('style', stileRango(r));
       const box = bl.querySelector<HTMLElement>('.stemma-testata')!;
       const svg = box.querySelector('svg');
-      if (svg && svg.getAttribute('data-rango') === String(r)) (svg.querySelector('.stemma-pieno') as SVGElement).style.transform = `scaleY(${st.perc / 100})`;
-      else box.innerHTML = stemmaSVG(r, { perc: st.perc, id: 't' });
+      const g = gradoDi(st.livello), rango = nomeRango(st.livello, inglese ? 'en' : 'it');
+      if (svg && svg.getAttribute('data-rango') === `${r}-${g}`) (svg.querySelector('.stemma-pieno') as SVGElement).style.transform = `scaleY(${st.perc / 100})`;
+      else box.innerHTML = stemmaSVG(r, { perc: st.perc, id: 't', grado: g });
       (bl.querySelector('.barra-testata > span') as HTMLElement).style.width = `${st.perc}%`;
       bl.querySelector('.numero-livello')!.textContent = String(st.livello);
-      bl.querySelector('.fascia-nome')!.textContent = st.fascia;
+      bl.querySelector('.fascia-nome')!.textContent = rango;
       bl.querySelector('.exp-livello')!.textContent = num(st.exp);
-      bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${st.fascia}, ${num(st.exp)} ${XP}`);
+      bl.setAttribute('aria-label', `${bl.querySelector('.nome-utente')?.textContent || ''}, ${inglese ? 'level' : 'livello'} ${st.livello}, ${rango}, ${num(st.exp)} ${XP}`);
       pl.querySelector('.pl-stemma')!.innerHTML = stemmaSVG(r, { perc: st.perc, id: 'p', nastro: true, livello: st.livello, etichetta: inglese ? 'LV.' : 'LIV.' });
-      pl.querySelector('.pl-fascia strong')!.textContent = st.fascia;
+      pl.querySelector('.pl-fascia strong')!.textContent = `${rango} · ${st.fascia}`;
       if (st.frase) pl.querySelector('.pl-fascia span')!.textContent = st.frase;
       pl.querySelector('.pl-mancano')!.innerHTML = st.prossimo === null
         ? `${num(st.exp)} ${XP} · ${inglese ? 'maximum level' : 'livello massimo'}`

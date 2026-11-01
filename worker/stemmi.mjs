@@ -26,6 +26,10 @@ const CORPI = {
 // Rango (1-10) dal livello: 1-9 → 1, 10-19 → 2, …, 90-100 → 10.
 export const rangoDi = (livello) => Math.min(10, Math.floor(livello / 10) + 1);
 export const coloriRango = (r) => RANGHI[r - 1];
+// Gradi I, II, III dentro ogni titolo: uno ogni tre livelli (1-3, 4-6, 7-9; 10-12, 13-15, 16-19; …).
+export const gradoDi = (livello) => { const da = livello < 10 ? 1 : Math.min(90, Math.floor(livello / 10) * 10); return Math.min(3, Math.floor((livello - da) / 3) + 1); };
+export const ROMANI = ['I', 'II', 'III'];
+export const nomeRango = (livello, lingua = 'it') => `${RANGHI[rangoDi(livello) - 1][lingua === 'en' ? 'en' : 'it']} ${ROMANI[gradoDi(livello) - 1]}`;
 
 const f1 = (x) => (Math.round(x * 10) / 10).toString();
 function raggi(c, n, r1, r2, cy) {
@@ -93,6 +97,10 @@ export function stemmaSVG(r, o = {}) {
   } else if (r >= 3) {
     davanti += `<polygon points="${stella(5, 8, 3.5, 60, corpo === 's1' ? 14 : 9)}" fill="${ORO}" stroke="#7a5410" stroke-width="0.9"/>`;
   }
+  // Galloni del grado (I, II, III): uno, due o tre segni a V nella parte bassa dello stemma.
+  const grado = o.grado ?? (o.livello ? gradoDi(o.livello) : 0);
+  const yg = r >= 5 ? 70 : 66, cg = r >= 7 ? ORO : sc;
+  for (let k = 0; k < grado; k++) davanti += `<path d="M51 ${yg + 5 * k} L60 ${yg + 5 * k + 4} L69 ${yg + 5 * k}" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/><path d="M51 ${yg + 5 * k} L60 ${yg + 5 * k + 4} L69 ${yg + 5 * k}" fill="none" stroke="${cg}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>`;
   if (r >= 10) davanti += scintilla(20, 20, 6, '#ffffff') + scintilla(100, 72, 5, '#ffffff') + scintilla(98, 18, 4, '#9fe2ff') + scintilla(22, 74, 4, '#9fe2ff');
   let nastro = '';
   if (o.nastro && o.livello) {
@@ -102,7 +110,7 @@ export function stemmaSVG(r, o = {}) {
     nastro = `<path d="M30 ${y} H90 L85 ${y + 7} L90 ${y + 14} H30 L35 ${y + 7} Z" fill="${fondo}"${bordo}/><path d="M38 ${y - 2} H82 V${y + 12} H38 Z" fill="${fondo}" stroke="#fff" stroke-width="1"/><text x="60" y="${y + 9.5}" text-anchor="middle" font-family="Source Sans 3, system-ui, sans-serif" font-size="10" font-weight="800" fill="${testo}">${o.etichetta || 'LIV.'} ${o.livello}</text>`;
   }
   const pieno = `<rect class="stemma-pieno" x="0" y="${y0}" width="120" height="${y1 - y0}" fill="url(#g${id})" style="transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(${(perc / 100).toFixed(3)}); transition: transform 0.6s ease"/>`;
-  return `<svg class="${o.classe || 'stemma-svg'}" viewBox="0 0 120 108" data-rango="${r}" aria-hidden="true" focusable="false"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${cl}"/><stop offset="0.55" stop-color="${md}"/><stop offset="1" stop-color="${sc}"/></linearGradient><clipPath id="c${id}"><path d="${d}"/></clipPath></defs>${dietro}<path d="${d}" fill="${pal}"/><g clip-path="url(#c${id})">${pieno}</g><path d="${d}" fill="none" stroke="${trim}" stroke-width="2.6"/>${davanti}${nastro}</svg>`;
+  return `<svg class="${o.classe || 'stemma-svg'}" viewBox="0 0 120 108" data-rango="${r}-${grado}" aria-hidden="true" focusable="false"><defs><linearGradient id="g${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${cl}"/><stop offset="0.55" stop-color="${md}"/><stop offset="1" stop-color="${sc}"/></linearGradient><clipPath id="c${id}"><path d="${d}"/></clipPath></defs>${dietro}<path d="${d}" fill="${pal}"/><g clip-path="url(#c${id})">${pieno}</g><path d="${d}" fill="none" stroke="${trim}" stroke-width="2.6"/>${davanti}${nastro}</svg>`;
 }
 
 // Colori della testata per il rango: bordo e barra, testo del titolo, fondo della barra.
