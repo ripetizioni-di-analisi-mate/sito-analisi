@@ -304,14 +304,14 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 html.collegato .spazio-studente { display: flex; flex-direction: column; gap: 1.1rem; margin: 1.4rem 0 1.2rem; padding: 1.4rem 1.5rem 1.2rem; background: #fff; border: 1px solid var(--riga); border-radius: 14px; font-family: var(--ui); }
 html.collegato .solo-ospiti { display: none; }
 .ss-testa { display: flex; align-items: center; gap: 1.4rem; }
-.ss-stemma { flex: none; width: 8rem; height: 7.2rem; }
+.ss-stemma { flex: none; width: 9rem; height: 8.1rem; }
 .ss-stemma svg { width: 100%; height: 100%; overflow: visible; }
 .ss-dati { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.45rem; }
 .spazio-studente h2 { margin: 0; font-family: var(--titoli); font-size: 1.5rem; line-height: 1.2; }
 .ss-rango { margin: 0; display: flex; flex-wrap: wrap; gap: 0.15rem 0.6rem; align-items: baseline; }
 .ss-fascia { color: var(--rango-testo, var(--inchiostro)); font-size: 1.05rem; }
 .ss-frase { color: var(--inchiostro-2); font-size: 0.92rem; }
-.ss-barra > span { background: var(--rango-bordo, var(--verde)); }
+.spazio-studente .ss-barra > span { background: var(--rango-bordo, var(--verde)); }
 .ss-mancano { margin: 0; font-size: 0.88rem; color: var(--inchiostro-2); }
 .ss-mancano strong { color: var(--inchiostro); }
 .ss-numeri { display: grid; grid-template-columns: 1fr 1fr 1.6fr; gap: 0.6rem; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); padding: 0.85rem 0; }
@@ -340,7 +340,7 @@ html.collegato .solo-ospiti { display: none; }
 @media (max-width: 640px) {
   html.collegato .spazio-studente { padding: 1.1rem 1rem 1rem; gap: 0.95rem; }
   .ss-testa { gap: 0.9rem; }
-  .ss-stemma { width: 5.6rem; height: 5rem; }
+  .ss-stemma { width: 6.6rem; height: 5.9rem; }
   .spazio-studente h2 { font-size: 1.25rem; }
   .ss-numeri { grid-template-columns: 1fr 1fr; }
   .ss-numeri p:last-child { grid-column: 1 / -1; }
