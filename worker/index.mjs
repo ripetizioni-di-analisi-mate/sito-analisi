@@ -16,8 +16,10 @@ import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
+import { inviaPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+const CRON_PROMEMORIA = '30 16 * * *';
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
 const VIDEO = Object.fromEntries(VIDEOCORSI.map((v) => [chiaveVideo(v.slug), v]));
 const conMaterieDeiVideo = (chiavi) => [...new Set(chiavi.flatMap((k) => (VIDEO[k] ? [k, ...VIDEO[k].sblocca] : [k])))];
@@ -125,6 +127,11 @@ export class Archivio {
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    // promemoria per tornare a studiare (worker/promemoria.mjs): ultima attività, consenso, lingua, registro degli invii
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN attivo INTEGER'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN promemoria INTEGER DEFAULT 1'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN lingua TEXT'); } catch { /* già presente */ }
+    this.sql.exec('CREATE TABLE IF NOT EXISTS promemoria (email TEXT, giorno TEXT, PRIMARY KEY (email, giorno))');
     // recupero della password: email inviate per giorno (per indirizzo e per tutto il sito), contro gli abusi
     this.sql.exec('CREATE TABLE IF NOT EXISTS recuperi (giorno TEXT, chiave TEXT, n INTEGER, ultimo INTEGER, PRIMARY KEY (giorno, chiave))');
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
@@ -156,14 +163,33 @@ export class Archivio {
 
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
-        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null);
+        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)',
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), c.lingua === 'en' ? 'en' : 'it');
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
-        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ? WHERE email = ?', ora, c.email);
+        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ?, attivo = ?, lingua = ? WHERE email = ?', ora, Date.now(), c.lingua === 'en' ? 'en' : 'it', c.email);
         else this.sql.exec(`UPDATE utenti SET falliti = falliti + 1,
           bloccato_fino = CASE WHEN falliti + 1 >= 8 THEN ? ELSE bloccato_fino END WHERE email = ?`, Date.now() + 15 * 60 * 1000, c.email);
+        return Response.json({ ok: true });
+
+      case '/promemoria-candidati': { // studenti che accettano i promemoria, con ultima attività e ultimo argomento
+        const righe = this.righe(`SELECT u.email, u.nome, u.creato, COALESCE(u.exp, 0) AS exp, u.lingua,
+            MAX(COALESCE(u.attivo, 0), COALESCE((SELECT MAX(ultimo_uso) FROM dispositivi d WHERE d.email = u.email), 0),
+                COALESCE((SELECT MAX(ultimo) FROM sessioni s WHERE s.email = u.email), 0)) AS ultima,
+            (SELECT COUNT(*) FROM promemoria p WHERE p.email = u.email) AS inviati,
+            EXISTS (SELECT 1 FROM promemoria p WHERE p.email = u.email AND p.giorno = ?) AS oggi,
+            (SELECT materia FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS materia,
+            (SELECT argomento FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS argomento
+          FROM utenti u WHERE COALESCE(u.promemoria, 1) = 1 AND u.hash IS NOT NULL`, c.giorno);
+        const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
+        return Response.json({ righe, recuperiOggi: rec?.n || 0 });
+      }
+      case '/promemoria-registra':
+        for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', e, c.giorno);
+        return Response.json({ ok: true });
+      case '/promemoria-no':
+        this.sql.exec('UPDATE utenti SET promemoria = 0 WHERE email = ?', c.email);
         return Response.json({ ok: true });
 
       case '/recupero-conta': { // al massimo 3 email al giorno per indirizzo, una ogni 2 minuti, e un tetto per tutto il sito
@@ -190,7 +216,10 @@ export class Archivio {
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
         const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
         if (!d) return Response.json(null);
-        if (Date.now() - d.ultimo_uso > 3600 * 1000) this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
+        if (Date.now() - d.ultimo_uso > 3600 * 1000) {
+          this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
+          this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
+        }
         const dispositivi = this.dispositiviDi(u.email).map((x) => ({ nome: x.nome, questo: x.id === c.dispositivo }));
         return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi, exp: statoDi(this, u.email).exp });
       }
@@ -505,7 +534,13 @@ async function verificaPaddle(req, corpo, segreto) {
 // ---------- worker ----------
 export default {
   // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
+  // Alle 16:30 UTC (17:30 in Italia d'inverno) i promemoria per tornare a studiare (worker/promemoria.mjs).
   async scheduled(evento, env, ctx) {
+    if (evento.cron === CRON_PROMEMORIA) {
+      ctx.waitUntil(inviaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})))
+        .then((r) => console.log('promemoria', JSON.stringify(r))).catch((e) => console.log('promemoria', String(e?.message || e))));
+      return;
+    }
     ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
   },
   async fetch(req, env, ctx) {
@@ -528,7 +563,7 @@ export default {
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso });
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso, lingua });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
@@ -540,7 +575,7 @@ export default {
       if (!u || typeof password !== 'string') return sbagliato();
       if (u.bloccato_fino > Date.now()) return json({ errore: 'Troppi tentativi. Riprova tra un quarto d’ora.' }, 429);
       const ok = confrontoCostante(await hashPassword(password, u.sale, u.iterazioni), u.hash);
-      ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok }));
+      ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok, lingua }));
       if (!ok) return sbagliato();
       return entraDaDispositivo(env, req, email, u.versione, lingua);
     }
@@ -654,6 +689,15 @@ export default {
       const sale = nuovoSale();
       const r = await aDO(env, '/utente-password', { email: t.e, hash: await hashPassword(nuova, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
       return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d) });
+    }
+
+    // ===== promemoria: link «Non ricevere più questi promemoria» (anche one-click dei programmi di posta) =====
+    if (p === '/promemoria/disattiva') {
+      // Con GET solo la pagina di conferma: i programmi che aprono i link per controllarli non disattivano nulla.
+      const tok = await leggiToken(env, url.searchParams.get('t') || '');
+      const ok = tok?.scopo === 'promemoria' && typeof tok.r === 'string';
+      if (ok && POST) await aDO(env, '/promemoria-no', { email: tok.r });
+      return new Response(PAGINA_DISATTIVATO(ok, POST), { status: ok ? 200 : 400, headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex', 'cache-control': 'no-store' } });
     }
 
     // ===== password dimenticata: link via email (Resend), valido un'ora e una sola volta =====
