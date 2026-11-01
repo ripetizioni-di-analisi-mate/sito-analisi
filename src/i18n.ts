@@ -20,8 +20,10 @@ export function link(l: Lingua, path: string): string {
 }
 // La stessa pagina nell'altra lingua.
 export function altraLingua(pathname: string, verso: Lingua): string {
-  const senza = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
-  return link(verso, senza.replace(/\.html$/, '').replace(/\/index$/, '') || '/');
+  // Prima si toglie «.html»: la home inglese, nella build, ha percorso «/en.html».
+  const pulito = pathname.replace(/\.html$/, '').replace(/\/index$/, '');
+  const senza = pulito.replace(/^\/en(?=\/|$)/, '');
+  return link(verso, senza || '/');
 }
 
 // ---------- materie nella lingua data ----------
