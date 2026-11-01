@@ -103,7 +103,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
         </details>
       ))}
       {lingua === 'it' && (
-        <details class="indice-gruppo" open>
+        <details class="indice-gruppo">
           <summary class="indice-materia"><span>Videocorsi</span></summary>
           <style is:inline set:html={regoleVideo}></style>
           <ol class="indice-materie indice-video">

@@ -768,26 +768,6 @@ export default {
         },
       }).on('.bottone-livello .numero-livello', {
         element(e) { e.setInnerContent(String(st.livello)); },
-      // Spazio personale in home: nome, stemma con il nastro del livello, titolo, EXP.
-      }).on('.spazio-studente', {
-        element(e) { e.setAttribute('style', stileRango(rangoDi(st.livello))); },
-      }).on('.spazio-studente .ss-nome', {
-        element(e) { e.setInnerContent(nome); },
-      }).on('.spazio-studente .ss-stemma', {
-        element(e) { e.setInnerContent(stemmaSVG(rangoDi(st.livello), { perc: st.perc, id: 'h', nastro: true, livello: st.livello, etichetta: en ? 'LV.' : 'LIV.' }), { html: true }); },
-      }).on('.spazio-studente .ss-fascia', {
-        element(e) { e.setInnerContent(`${nomeRango(st.livello, en ? 'en' : 'it')} · ${st.fascia}`); },
-      }).on('.spazio-studente .ss-frase', {
-        element(e) { if (st.frase) e.setInnerContent(st.frase); },
-      }).on('.spazio-studente .ss-barra > span', {
-        element(e) { e.setAttribute('style', `width:${st.perc}%`); },
-      }).on('.spazio-studente .ss-mancano', {
-        element(e) {
-          const n = (x) => x.toLocaleString(en ? 'en-US' : 'it-IT'), XP = en ? 'XP' : 'EXP';
-          e.setInnerContent(st.prossimo === null
-            ? `${n(st.exp)} ${XP} · ${en ? 'maximum level' : 'livello massimo'}`
-            : `${n(st.exp)} ${XP} · ${en ? '' : 'mancano '}<strong>${n(st.mancano)} ${XP}</strong> ${en ? 'to level' : 'al livello'} ${st.livello + 1}`, { html: true });
-        },
       }).on('html', {
         element(e) {
           const classi = [(e.getAttribute('class') || ''), io ? 'collegato' : '', sbloccataQui ? 'sbloccato' : ''].join(' ').trim();

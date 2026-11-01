@@ -231,8 +231,8 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'matematica-da-zero': {
-    titolo: 'Mathematics from scratch',
-    breve: 'Maths from scratch',
+    titolo: 'Mathematics zero',
+    breve: 'Maths zero',
     descrizione: 'Free. For anyone who wants to learn or review mathematics from the basics, with no exam to prepare: numbers, fractions, percentages, powers, algebra, equations, the Cartesian plane and geometry.',
     argomenti: {
       'numeri-naturali': { titolo: 'Natural numbers and order of operations', breve: 'Natural numbers' },
@@ -249,6 +249,13 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'geometria-di-base': { titolo: 'Plane figures, perimeters, areas and Pythagoras’ theorem', breve: 'Geometry' },
     },
   },
+  'fisica-zero': { titolo: 'Physics zero', breve: 'Physics zero', descrizione: 'For anyone who wants to learn physics from the basics, with no exam to prepare: quantities and units, motion, forces, energy.', argomenti: {} },
+  'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'The mathematics, logic and science of the TOLC-I, the CISIA test for Engineering degree programmes.', argomenti: {} },
+  'tolc-e': { titolo: 'TOLC-E (Economics)', breve: 'TOLC-E', descrizione: 'The mathematics, logic and reading comprehension of the TOLC-E, the CISIA test for Economics degree programmes.', argomenti: {} },
+  'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
+  'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
+  'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
+  'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
-export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Da zero': 'From scratch' };
+export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };
