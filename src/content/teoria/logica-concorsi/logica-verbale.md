@@ -187,7 +187,7 @@ I quesiti di logica verbale si risolvono con poche operazioni, quasi tutte da fa
 
 - **Analogie**: si scrive la frase ponte della coppia completa e la si ripete con ogni opzione. Si scartano le opzioni con un tipo di relazione diverso e quelle con il verso invertito. Con due parole mancanti si controlla ogni coppia proposta per intero, perché spesso la prima parola va bene e la seconda no.
 - **Termine estraneo**: si cerca un criterio che valga per quattro elementi e non per il quinto, e lo si controlla su tutti e cinque.
-- **Connettivi**: si decide il rapporto tra le due parti (conseguenza, causa, spiegazione, contrasto, concessione) prima di leggere le opzioni. Un congiuntivo dopo lo spazio vuoto indica *benché* o *sebbene*.
+- **Connettivi**: si decide il rapporto tra le due parti (conseguenza, causa, spiegazione, contrasto, concessione) prima di leggere le opzioni. Quando il rapporto è di concessione, un congiuntivo dopo lo spazio vuoto indica *benché* o *sebbene*.
 - **Brani**: per ogni affermazione si cerca la frase del brano che la conferma o la smentisce. Se nessuna frase lo fa, l'affermazione è non deducibile. Le parole di quantità, frequenza e certezza si confrontano una per una con il testo.
 - **Assunzioni**: si applica la prova della negazione a ogni opzione, e si scartano le opzioni che ripetono una premessa e quelle troppo forti.
 - **Rafforzare e indebolire**: si scrive il legame che l'argomento sottintende, di solito "se $A$, allora $B$" oppure "$A$ è la causa di $B$". Un'altra causa possibile o un controesempio indebolisce l'argomento, mentre un'affermazione che esclude le altre cause o rende $A$ sufficiente per $B$ lo rafforza.
