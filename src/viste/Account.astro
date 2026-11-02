@@ -121,7 +121,13 @@ const sblocca = t.sblocca;
     (async () => {
       const r = await fetch('/api/io').catch(() => null);
       if (!r || r.status === 401) { location.href = `${pref}/accedi?dopo=${pref}/account`; return; }
-      const io = await r.json();
+      const io = r.ok ? await r.json().catch(() => null) : null;
+      if (!io || !io.email) {
+        document.getElementById('chi').textContent = pref === '/en'
+          ? 'Your account cannot be loaded right now. Please try again in a few minutes.'
+          : 'In questo momento il tuo account non si carica. Riprova tra qualche minuto.';
+        return;
+      }
       document.getElementById('chi').textContent = js.collegatoCome.replace('§', io.nome ? `${io.nome} (${io.email})` : io.email);
       const lista = document.getElementById('materie');
       for (const m of aPagamento) {

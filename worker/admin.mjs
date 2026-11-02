@@ -803,11 +803,12 @@ function cliente(MATERIE, A_PAGAMENTO) {
   });
   $('#modulo-login').addEventListener('submit', async (e) => {
     e.preventDefault(); const r = await fetch('/admin/api/login', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ pw: $('#pw').value }) });
-    if (r.ok) { $('#login-errore').textContent = ''; carica(); } else $('#login-errore').textContent = 'Password sbagliata.';
+    if (r.ok) { $('#login-errore').textContent = ''; await carica(); if ($('#app').hidden) $('#login-errore').textContent = 'Password corretta, ma in questo momento i dati non si caricano. Riprova tra qualche minuto.'; } else $('#login-errore').textContent = 'Password sbagliata.';
   });
   $('#esci').addEventListener('click', () => { document.cookie = 'admin=; Max-Age=0; Path=/admin'; fetch('/admin/api/esci', { method: 'POST' }).finally(() => location.reload()); });
-  // Dati ricaricati ogni 20 secondi con la pagina in vista, e subito quando si torna sulla pagina.
-  setInterval(() => { if (document.visibilityState === 'visible' && !stato.aperto) carica(true); }, 20000);
+  // Dati ricaricati ogni 3 minuti con la pagina in vista (l'archivio li ricalcola al più ogni 3 minuti:
+  // più spesso si superava il limite di righe lette del piano gratuito di Cloudflare).
+  setInterval(() => { if (document.visibilityState === 'visible' && !stato.aperto) carica(true); }, 180000);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && D && !stato.aperto) carica(true); });
   setInterval(segnaAggiornato, 30000);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && aggiornato && Date.now() - aggiornato > 60000) carica(true); });

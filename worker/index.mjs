@@ -106,6 +106,8 @@ const emailValida = (e) => typeof e === 'string' && e.length <= 200 && /^[^\s@]+
 const normalizza = (e) => String(e || '').trim().toLowerCase();
 
 // ---------- archivio (Durable Object con SQLite) ----------
+const DATI_VALIDI = 3 * 60 * 1000;
+const MODIFICHE_DASHBOARD = new Set(['/abilita', '/revoca', '/dispositivo-rimuovi', '/utente-password', '/segnalazione-letta', '/registra-acquisto', '/utente-crea']);
 export class Archivio {
   constructor(state) {
     this.sql = state.storage.sql;
@@ -162,8 +164,24 @@ export class Archivio {
   dispositiviDi(email) { return this.righe('SELECT id, nome, creato, ultimo_uso FROM dispositivi WHERE email = ? ORDER BY ultimo_uso DESC', email); }
   materieDi(email) { return this.righe('SELECT materia FROM abilitazioni WHERE email = ?', email).map((r) => r.materia); }
 
+  // Dati della dashboard: si ricalcolano al più ogni DATI_VALIDI ms. Il calcolo legge tutte le tabelle
+  // (studio, risposte, visitatori…) e con la dashboard aperta ogni 20 secondi superava il limite giornaliero
+  // di righe lette del piano gratuito (5 milioni): il 02/11/2026 account e dashboard si sono fermati.
+  // Le azioni fatte dalla dashboard (abilita, revoca, …) svuotano la copia, così si vedono subito.
   async fetch(req) {
     const { pathname } = new URL(req.url);
+    if (pathname !== '/dati') {
+      if (MODIFICHE_DASHBOARD.has(pathname)) this.copiaDati = null;
+      return this.rispondi(req, pathname);
+    }
+    if (this.copiaDati && Date.now() - this.copiaDati.t < DATI_VALIDI) return new Response(this.copiaDati.corpo, { headers: { 'content-type': 'application/json' } });
+    const r = await this.rispondi(req, pathname);
+    const corpo = await r.text();
+    if (r.ok) this.copiaDati = { t: Date.now(), corpo };
+    return new Response(corpo, { status: r.status, headers: { 'content-type': 'application/json' } });
+  }
+
+  async rispondi(req, pathname) {
     // pagine nuove o cambiate segnalate ai motori (worker/indexnow.mjs): il corpo è la mappa del sito
     if (pathname === '/indexnow') return Response.json(await eseguiIndexNow(this.sql, await req.text()));
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
