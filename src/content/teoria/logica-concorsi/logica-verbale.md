@@ -75,7 +75,7 @@ Un **connettivo testuale** è una parola o un'espressione che lega due parti di 
 | conseguenza | un fatto che segue da quanto detto prima | quindi, perciò, dunque, di conseguenza |
 | causa | il motivo di un fatto | perché, poiché, dato che, siccome |
 | spiegazione | una conferma o un chiarimento di quanto detto prima | infatti, cioè |
-| contrasto | un fatto opposto a quanto ci si aspetta dopo la prima parte | ma, però, tuttavia |
+| contrasto | un fatto opposto a quanto detto o atteso nella prima parte | ma, però, tuttavia, invece |
 | concessione | un fatto che farebbe aspettare il contrario della frase principale | benché, sebbene, anche se |
 
 Le frasi «Il treno era in ritardo, quindi Paolo ha perso la coincidenza» e «Paolo ha perso la coincidenza perché il treno era in ritardo» descrivono lo stesso fatto. Nella prima *quindi* introduce l'effetto, nella seconda *perché* introduce la causa.
@@ -101,7 +101,7 @@ Nei quesiti con una parola mancante si cerca la parola coerente con il resto del
 
 Nella frase «Benché il bando fosse ___, molti candidati hanno sbagliato a compilare la domanda» la parte introdotta da *benché* deve far aspettare il contrario della frase principale. Poiché la frase principale dice che molti candidati hanno sbagliato, la parola mancante deve far aspettare pochi errori, quindi è *chiaro*. La parola *confuso* rende la frase incoerente, perché un bando confuso è un motivo degli errori, e un motivo si introduce con *poiché*.
 
-Anche la forma del verbo dà un'indicazione. *Benché* e *sebbene* reggono il congiuntivo, come in "benché fosse", mentre *poiché* e *anche se* reggono l'indicativo, come in "poiché era". Quando le parole mancanti sono due, un'opzione è corretta solo se entrambe le parole rendono la frase coerente.
+Anche il modo del verbo è un indizio. *Benché* e *sebbene* reggono il congiuntivo, come in "benché fosse", mentre *poiché* e *anche se* reggono l'indicativo, come in "poiché era". Quando le parole mancanti sono due, un'opzione è corretta solo se entrambe le parole rendono la frase coerente.
 :::
 
 ## Brani e affermazioni
@@ -113,7 +113,7 @@ In questi quesiti si legge un brano breve e si giudica un'affermazione *in base 
 - **falsa** se contraddice almeno un'informazione del brano;
 - **non deducibile** se il brano non permette di stabilire né che è vera né che è falsa.
 
-Brano: «Il centro di raccolta di Borgonuovo accetta soltanto carta, vetro, plastica e piccoli elettrodomestici. È aperto soltanto il mercoledì e il sabato, dalle 8:00 alle 13:00. I mobili e gli elettrodomestici grandi, come frigoriferi e lavatrici, si ritirano a domicilio su prenotazione.» L'affermazione «Il centro è chiuso il venerdì» è vera, perché il centro è aperto soltanto il mercoledì e il sabato. L'affermazione «Una lavatrice si può portare al centro il sabato mattina» è falsa, perché la lavatrice è un elettrodomestico grande e il centro accetta soltanto quelli piccoli. L'affermazione «Il centro riceve più plastica che vetro» è non deducibile, perché il brano non dà le quantità.
+Si consideri il brano «Il centro di raccolta di Borgonuovo accetta soltanto carta, vetro, plastica e piccoli elettrodomestici. È aperto soltanto il mercoledì e il sabato, dalle 8:00 alle 13:00. I mobili e gli elettrodomestici grandi, come frigoriferi e lavatrici, si ritirano a domicilio su prenotazione.» L'affermazione «Il centro è chiuso il venerdì» è vera, perché il centro è aperto soltanto il mercoledì e il sabato. L'affermazione «Una lavatrice si può portare al centro il sabato mattina» è falsa, perché la lavatrice è un elettrodomestico grande e il centro accetta soltanto quelli piccoli. L'affermazione «Il centro riceve più plastica che vetro» è non deducibile, perché il brano non dà le quantità.
 :::
 
 :::attenzione{#conoscenze-personali titolo="Ciò che il lettore sa non conta"}
@@ -136,7 +136,7 @@ Se il brano dice «Alcuni dipendenti dell'ufficio vengono al lavoro in biciclett
 :::definizione{#premesse-e-conclusione titolo="Premesse e conclusione"}
 Un **argomento** è un testo in cui alcune affermazioni, le **premesse**, sono presentate come ragioni a sostegno di un'altra affermazione, la **conclusione**. La conclusione è ciò che l'autore vuole far accettare, e le premesse sono i motivi che porta. La conclusione è spesso introdotta da *quindi*, *perciò*, *ne segue che*, mentre le premesse sono introdotte da *poiché*, *dato che*, *infatti*.
 
-La conclusione può stare all'inizio, in mezzo o alla fine del testo. Nell'argomento «La palestra dovrebbe restare aperta fino alle 22:00. Infatti molti iscritti finiscono di lavorare alle 19:00, e alle 20:00 le sale sono ancora piene» la conclusione è la prima frase, perché le altre due sono introdotte da *infatti* e spiegano perché la palestra dovrebbe restare aperta. Un controllo rapido consiste nel mettere *quindi* davanti a ciascuna frase. Il testo resta coerente quando *quindi* precede la conclusione.
+La conclusione può stare all'inizio, in mezzo o alla fine del testo. Nell'argomento «La palestra dovrebbe restare aperta fino alle 22:00. Infatti molti iscritti finiscono di lavorare alle 19:00, e alle 20:00 le sale sono ancora piene» la conclusione è la prima frase, perché le altre due sono introdotte da *infatti* e spiegano perché la palestra dovrebbe restare aperta. Un controllo rapido consiste nel mettere *quindi* davanti a ciascuna frase. Il testo resta coerente quando *quindi* precede la conclusione. In un argomento più lungo una frase sostenuta da alcune premesse può essere a sua volta premessa di un'altra frase, e allora la **conclusione principale** è la frase che non sostiene nessun'altra frase del testo.
 :::
 
 :::definizione{#assunzione-implicita titolo="Assunzione implicita"}
@@ -160,7 +160,7 @@ Un'opzione che dice più del necessario *non* è un'assunzione dell'argomento, a
 :::definizione{#rafforzare-indebolire titolo="Rafforzare e indebolire"}
 Un'affermazione **rafforza** un argomento se, aggiunta alle premesse, rende la conclusione più sostenibile, e lo **indebolisce** se la rende meno sostenibile. Nel quesito l'affermazione si suppone vera, anche se il brano non la contiene.
 
-Argomento: «Da quando il bar della stazione ha messo i tavoli all'aperto, gli incassi di giugno sono aumentati rispetto a quelli di maggio. Quindi i tavoli all'aperto hanno fatto aumentare gli incassi.»
+Si consideri l'argomento «Da quando il bar della stazione ha messo i tavoli all'aperto, gli incassi di giugno sono aumentati rispetto a quelli di maggio. Quindi i tavoli all'aperto hanno fatto aumentare gli incassi.»
 
 - «A giugno in città sono arrivati molti più turisti che a maggio» indebolisce l'argomento, perché offre un'altra causa possibile dell'aumento.
 - «Nei giorni di pioggia di giugno, con i tavoli all'aperto inutilizzabili, gli incassi sono stati simili a quelli di maggio» rafforza l'argomento, perché lega l'aumento proprio ai giorni in cui i tavoli erano usati.
