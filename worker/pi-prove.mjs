@@ -44,9 +44,11 @@ export async function eseguiBanco(env, aDO, aPagamento, prezzi, giorno = oggi())
         risposta = j.risposta || `ERRORE: ${j.errore || testo}`;
       } else risposta = testo;
     } catch (e) { risposta = `ERRORE: ${String(e?.message || e).slice(0, 300)}`; }
-    righe.push({ id: c.id + suffisso, area: c.area, domanda: c.domanda, risposta: risposta.slice(0, 8000), modello, ms: Date.now() - inizio, stato });
+    const riga = { id: c.id + suffisso, area: c.area, domanda: c.domanda, risposta: risposta.slice(0, 8000), modello, ms: Date.now() - inizio, stato };
+    righe.push(riga);
+    // Si salva caso per caso: se il cron viene interrotto, le risposte già ottenute restano.
+    await aDO(env, '/pi-prove-salva', { giorno, righe: [riga] }).catch(() => {});
   }
-  await aDO(env, '/pi-prove-salva', { giorno, righe });
   return righe;
 }
 

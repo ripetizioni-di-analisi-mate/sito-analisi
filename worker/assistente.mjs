@@ -188,11 +188,19 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const corto = (m) => m.split('/').pop();
   for (const [i, [modello, input]] of tentativi.entries()) {
     try {
-      const r = await env.AI.run(modello, { ...input, max_tokens: MAX_USCITA, temperature: 0.3, stream: true });
+      // Gemma 4 può «ragionare» in silenzio prima di scrivere e consumare così quasi tutti i token della risposta:
+      // il ragionamento si spegne; se il modello non accetta il parametro si riprova senza.
+      const param = { ...input, max_tokens: MAX_USCITA, temperature: 0.3, stream: true };
+      const senzaRagionamento = /gemma/.test(modello) ? { ...param, chat_template_kwargs: { enable_thinking: false } } : param;
+      const r = await env.AI.run(modello, senzaRagionamento).catch((e) => {
+        if (senzaRagionamento === param) throw e;
+        console.log('Pi', modello, 'senza chat_template_kwargs', String(e?.message || e).slice(0, 200));
+        return env.AI.run(modello, param);
+      });
       const segna = () => evento(`${foto ? 'foto' : 'testo'}-${i ? 'riserva' : 'primo'}:${corto(modello)}`);
       if (r instanceof ReadableStream) {
         // Si aspetta il primo pezzo di testo visibile: se lo streaming finisce vuoto si passa al modello successivo.
-        const risp = await conPrimoPezzo(flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota')));
+        const risp = await conPrimoPezzo(flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota'), () => evento(`ragionamento-nascosto:${corto(modello)}`)));
         if (risp) { await segna(); return risp; }
         continue;
       }
@@ -233,6 +241,12 @@ async function conPrimoPezzo(resp) {
 const pulisci = (t) => String(t || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
 
 // Testo contenuto in un evento dello streaming, qualunque sia il formato del modello.
+// Lunghezza del ragionamento nascosto contenuto in un evento (non si mostra; serve solo a contarlo).
+const ragionamentoDi = (ev) => {
+  const d = ev.choices?.[0]?.delta || {};
+  return String(d.reasoning_content || d.reasoning || '').length;
+};
+
 function pezzoDi(ev) {
   if (typeof ev.response === 'string') return ev.response;
   const d = ev.choices?.[0]?.delta;
@@ -243,11 +257,12 @@ function pezzoDi(ev) {
 
 // Trasforma lo streaming di Workers AI (eventi SSE) in testo semplice che arriva a pezzi al browser.
 // Il ragionamento tra <think> e </think> non si mostra.
-function flussoAI(body, rimasti, conta, modello = '', vuota = () => {}) {
+function flussoAI(body, rimasti, conta, modello = '', vuota = () => {}, ragionato = () => {}) {
   const dec = new TextDecoder();
   const enc = new TextEncoder();
   let resto = '';
   let caratteri = 0;
+  let ragiona = 0;
   let pensa = false;
   let coda = '';
   const emetti = (ctl, t) => {
@@ -279,13 +294,14 @@ function flussoAI(body, rimasti, conta, modello = '', vuota = () => {}) {
         if (!r.startsWith('data:')) continue;
         const dati = r.slice(5).trim();
         if (!dati || dati === '[DONE]') continue;
-        try { const t = pezzoDi(JSON.parse(dati)); if (t) emetti(ctl, t); } catch { /* riga incompleta */ }
+        try { const ev = JSON.parse(dati); ragiona += ragionamentoDi(ev); const t = pezzoDi(ev); if (t) emetti(ctl, t); } catch { /* riga incompleta */ }
       }
     },
     async flush(ctl) {
       if (!pensa && coda) { caratteri += coda.length; ctl.enqueue(enc.encode(coda)); }
       await conta(Math.round(caratteri / 4));
       if (!caratteri) await vuota();
+      if (ragiona > 0) await ragionato();
     },
   }));
   return new Response(flusso, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-rimasti': String(rimasti), 'x-modello': modello, 'x-accel-buffering': 'no' } });
