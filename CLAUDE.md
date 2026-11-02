@@ -217,5 +217,5 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 
 ## Lezioni in vista su tutto il sito (02/11/2026, scelta A + C di Carmine)
 - Carmine trovava nascoste le pagine delle lezioni (solo link in fondo). Scelta fra tre alternative con schermate: **A + C, voci scritte per esteso**.
-- `src/components/LezioniCarmine.astro`: «Lezioni con Carmine» in cima all'indice laterale (Lezione individuale · Scegli giorno e ora; Corso di gruppo · Iscrizioni aperte) e due tasti «Lezione individuale» e «Corso di gruppo» nella testata da 72rem in su; sotto i 72rem gli stessi due tasti stanno in una riga sotto la testata (non fissa). Solo in italiano. Tasto pieno sulla pagina corrente.
+- `src/components/LezioniCarmine.astro`: «Lezioni con Carmine» in cima all'indice laterale (Lezione individuale e Corso di gruppo per esteso su una riga, sotto «Scegli giorno e ora» / «Iscrizioni aperte») e nella testata, **a sinistra subito dopo il nome del sito**, il tasto «Lezioni» con l'icona del calendario che apre il menu con le due voci (al telefono solo l'icona). Solo in italiano. La versione con due tasti separati e la riga sotto la testata è stata tolta (Carmine voleva il menu «Lezioni» della versione C).
 - Scartata la B (riquadri in home); il prototipo delle tre versioni è nel ramo `lezioni-in-vista`.
