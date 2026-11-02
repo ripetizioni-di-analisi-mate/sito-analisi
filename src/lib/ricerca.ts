@@ -54,6 +54,7 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     }
     voci.push({ t: 'Lezione individuale con Carmine', s: 'Scegli giorno e ora · Google Meet', m: 'Lezioni con Carmine', h: '/prenota', p: `lezioni individuali private ripetizioni prenota prenotazione online meet calendario ${MATERIE_LEZIONI.map((m) => m.titolo).join(' ')}`, c: 'corsi' });
     voci.push({ t: 'Che cosa studiare per il tuo concorso', s: 'Guida gratuita', m: 'Concorsi', h: '/concorsi', p: 'concorsi pubblici guida programma matematica logica test', c: 'corsi' });
+    voci.push({ t: 'Simulazione della prova a quiz per i concorsi', s: 'Matematica e logica · Punteggio e soglia', m: 'Concorsi', h: '/concorsi/simulazione', p: 'simulazione prova concorso quiz test risposta multipla punteggio penalità soglia timer matematica logica', c: 'esercizi' });
   }
 
   // Argomenti
@@ -88,7 +89,8 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
       voci.push({ t: `${x.domande} · ${a.titolo}`, s: `${x.domande} · ${a.breve}`, m: m.breve, h: link(l, `/${m.slug}/${a.slug}/domande`), p: x.paroleDomande, c: 'esercizi' });
     }
     voci.push({ t: `${x.ripasso} · ${m.titolo}`, s: x.proveEsame, m: m.breve, h: link(l, `/${m.slug}/${RIPASSO}/domande`), p: `${x.paroleDomande} ripasso`, c: 'esercizi' });
-    voci.push({ t: `${x.simulazione} · ${m.titolo}`, s: x.proveEsame, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: x.paroleSimulazione, c: 'esercizi' });
+    const quiz = l === 'it' && m.gruppo === 'Concorsi';
+    voci.push({ t: `${quiz ? 'Simulazione della prova' : x.simulazione} · ${m.titolo}`, s: x.proveEsame, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: quiz ? 'simulazione prova concorso quiz test risposta multipla punteggio timer' : x.paroleSimulazione, c: 'esercizi' });
   }
 
   // Videocorsi (pagine solo in italiano)
