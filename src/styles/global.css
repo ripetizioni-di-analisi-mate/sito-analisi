@@ -428,6 +428,13 @@ details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > 
 .risultati a { display: block; text-decoration: none; color: var(--inchiostro); padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
 .risultati small { display: block; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.8rem; }
 .risultati mark { background: color-mix(in srgb, var(--c-esempio) 25%, transparent); color: inherit; padding: 0 0.1em; }
+.risultati-gruppi { list-style: none; padding: 0; margin: 1rem 0; }
+.risultati-gruppo { margin: 0 0 1.4rem; }
+.risultati-gruppo h2 { font-family: var(--ui); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); margin: 0 0 0.5rem; }
+.risultati-gruppo h2 span { font-weight: 400; margin-left: 0.3rem; }
+.risultati-gruppo .risultati { margin: 0; }
+.risultati-altri { margin-top: 0.5rem; font: inherit; font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); background: none; border: 1px solid var(--riga); border-radius: 999px; padding: 0.3rem 0.9rem; cursor: pointer; }
+.risultati-altri:hover { color: var(--inchiostro); border-color: var(--inchiostro-2); }
 
 /* ---------- pagina font ---------- */
 .scelta-font { display: grid; gap: 0.75rem; margin: 1.25rem 0; font-family: var(--ui); }

@@ -161,7 +161,7 @@ export const TESTI = {
     tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare al massimo su 2 dispositivi. Uscendo dall'account su un dispositivo, il posto si libera.",
     cambiaPassword: 'Cambia password', passwordAttuale: 'Password attuale', nuovaPassword: 'Nuova password', aggiornaPassword: 'Aggiorna la password', esci: "Esci dall'account",
     // cerca
-    ricerca: 'Ricerca', cercaSommario: 'Argomenti, definizioni, teoremi ed esercizi di tutte le materie. La ricerca avviene nel browser, senza inviare nulla.',
+    ricerca: 'Ricerca', cercaSommario: 'Materie e corsi, argomenti, definizioni, teoremi, esercizi e videocorsi. La ricerca avviene nel browser, senza inviare nulla.',
     cercaEsempio: 'Per esempio: permanenza del segno, forma indeterminata',
     argomento: 'Argomento',
     // contatti
@@ -253,7 +253,7 @@ export const TESTI = {
     mostraPassword: 'Show password', impostazioni: 'Account settings',
     tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 2 devices. Logging out on a device frees its place.',
     cambiaPassword: 'Change password', passwordAttuale: 'Current password', nuovaPassword: 'New password', aggiornaPassword: 'Update password', esci: 'Log out',
-    ricerca: 'Search', cercaSommario: 'Topics, definitions, theorems and exercises of all subjects. The search runs in your browser and sends nothing.',
+    ricerca: 'Search', cercaSommario: 'Subjects and courses, topics, definitions, theorems and exercises. The search runs in your browser and sends nothing.',
     cercaEsempio: 'For example: sign permanence, indeterminate form',
     argomento: 'Topic',
     contattiDescrizione: 'Contacts for information about the material, help with purchases and error reports.',

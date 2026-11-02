@@ -7,6 +7,10 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const js = testiJs(lingua);
+// Ordine e titoli dei gruppi di risultati; max = risultati mostrati prima di «Mostra altri».
+const GRUPPI = lingua === 'en'
+  ? [{ c: 'corsi', titolo: 'Subjects and courses', max: 5 }, { c: 'argomenti', titolo: 'Topics', max: 8 }, { c: 'esercizi', titolo: 'Exercises', max: 8 }, { c: 'videocorsi', titolo: 'Video courses', max: 5 }]
+  : [{ c: 'corsi', titolo: 'Materie e corsi', max: 5 }, { c: 'argomenti', titolo: 'Argomenti', max: 8 }, { c: 'esercizi', titolo: 'Esercizi', max: 8 }, { c: 'videocorsi', titolo: 'Videocorsi', max: 5 }];
 ---
 <Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua} seo={{ noindex: true }}>
   <p class="sopratitolo">{t.ricerca}</p>
@@ -16,7 +20,7 @@ const js = testiJs(lingua);
   <input class="campo-cerca" id="cerca" type="search" placeholder={t.cercaEsempio} autocomplete="off" autofocus data-testi={JSON.stringify(js)} />
   </div>
   <p id="esito" class="nota-segnaposto" hidden></p>
-  <ul class="risultati" id="risultati"></ul>
+  <ul class="risultati-gruppi" id="risultati" data-gruppi={JSON.stringify(GRUPPI)} data-altri={lingua === 'en' ? 'Show § more' : 'Mostra altri §'}></ul>
 
   <script>
     const campo = document.getElementById('cerca') as HTMLInputElement;
@@ -25,12 +29,17 @@ const js = testiJs(lingua);
     const js = JSON.parse(campo.dataset.testi || '{}');
     // La ricerca dalla home arriva come ?q=…: il campo parte già compilato.
     if (!campo.value) campo.value = new URLSearchParams(location.search).get('q') ?? '';
-    let voci: { t: string; s: string; m: string; h: string; p: string }[] = [];
+    type Voce = { t: string; s: string; m: string; h: string; p: string; c: string };
+    let voci: Voce[] = [];
+    const gruppi: { c: string; titolo: string; max: number }[] = JSON.parse(lista.dataset.gruppi || '[]');
+    const altri: string = lista.dataset.altri || '';
 
     const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    // Radice di una parola: senza l'ultima vocale nelle parole lunghe (corso e corsi, limite e limiti).
+    const radice = (w: string) => (w.length >= 5 ? w.replace(/[aeiou]$/, '') : w);
     const evid = (t: string, q: string[]) => {
       let out = t;
-      for (const w of q) out = out.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig'), '<mark>$1</mark>');
+      for (const w of q) out = out.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\p{L}]*)`, 'igu'), '<mark>$1</mark>');
       return out;
     };
 
@@ -40,25 +49,48 @@ const js = testiJs(lingua);
       voci = await r.json();
       cerca();
     }
+    function voceLi(v: Voce, q: string[]) {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${v.h}">${evid(v.t, q)}<small>${v.m} · ${v.s}</small></a>`;
+      return li;
+    }
     function cerca() {
-      const q = norm(campo.value).split(/\s+/).filter((w) => w.length > 1);
+      const q = norm(campo.value).split(/\s+/).filter((w) => w.length > 1 || /\d/.test(w)).map(radice);
       lista.innerHTML = '';
       if (q.length === 0) { esito.hidden = true; return; }
       const trovate = voci
         .map((v) => {
+          const titolo = norm(v.t);
           const testo = norm(`${v.t} ${v.s} ${v.m} ${v.p}`);
-          const punti = q.reduce((acc, w) => acc + (norm(v.t).includes(w) ? 3 : testo.includes(w) ? 1 : 0), 0);
+          const punti = q.reduce((acc, w) => acc + (titolo.includes(w) ? 3 : testo.includes(w) ? 1 : 0), 0) + (q.every((w) => titolo.includes(w)) ? 2 : 0);
           return { v, punti, tutte: q.every((w) => testo.includes(w)) };
         })
         .filter((x) => x.tutte)
-        .sort((a, b) => b.punti - a.punti)
-        .slice(0, 40);
+        .sort((a, b) => b.punti - a.punti);
       esito.hidden = false;
       esito.textContent = trovate.length === 0 ? js.nessunRisultato : trovate.length === 1 ? js.unRisultato : js.risultati.replace('§', String(trovate.length));
-      for (const { v } of trovate) {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="${v.h}">${evid(v.t, q)}<small>${v.m} · ${v.s}</small></a>`;
-        lista.appendChild(li);
+      for (const g of gruppi) {
+        const del = trovate.filter((x) => x.v.c === g.c);
+        if (del.length === 0) continue;
+        const sezione = document.createElement('li');
+        sezione.className = 'risultati-gruppo';
+        sezione.innerHTML = `<h2>${g.titolo} <span>${del.length}</span></h2>`;
+        const ul = document.createElement('ul');
+        ul.className = 'risultati';
+        for (const { v } of del.slice(0, g.max)) ul.appendChild(voceLi(v, q));
+        sezione.appendChild(ul);
+        if (del.length > g.max) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'risultati-altri';
+          b.textContent = altri.replace('§', String(del.length - g.max));
+          b.addEventListener('click', () => {
+            for (const { v } of del.slice(g.max)) ul.appendChild(voceLi(v, q));
+            b.remove();
+          });
+          sezione.appendChild(b);
+        }
+        lista.appendChild(sezione);
       }
     }
     campo.addEventListener('input', cerca);
