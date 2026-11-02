@@ -141,7 +141,7 @@ main {
 .pagina { max-width: var(--larghezza); margin: 0 auto; }
 
 @media (min-width: 60rem) {
-  .corpo { grid-template-columns: 17rem minmax(0, 1fr); }
+  .corpo { grid-template-columns: 18rem minmax(0, 1fr); }
   .indice { display: block; }
   main { padding-inline: 2.5rem; }
   /* Indice retraibile: con la classe sul root la colonna si chiude e il contenuto si allarga. */
