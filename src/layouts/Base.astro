@@ -241,6 +241,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     adattaFormule();
     document.fonts?.ready.then(adattaFormule);
 
+    // Figure con cursore della teoria: il codice che le ridisegna si scarica solo nelle pagine che ne hanno.
+    if (document.querySelector('[data-cursore]')) import('../scripts/cursori.ts');
+
     // Occhietto accanto alle password: mostra o nasconde quello che si è scritto.
     document.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-mostra-password]');

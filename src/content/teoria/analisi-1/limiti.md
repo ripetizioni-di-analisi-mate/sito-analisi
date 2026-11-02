@@ -34,7 +34,7 @@ Fissata una distanza $\varepsilon$ da $L$, piccola a piacere, esiste un intorno 
 :::esempio{titolo="Verifica con la definizione"}
 $\displaystyle\lim_{x \to 2} (3x - 1) = 5$. Fissato $\varepsilon > 0$, poiché $|(3x - 1) - 5| = 3|x - 2|$, basta $\delta = \dfrac{\varepsilon}{3}$: se $|x - 2| < \dfrac{\varepsilon}{3}$ allora $3|x - 2| < \varepsilon$.
 
-::grafico{f="3*x-1" xmin=-1 xmax=4 ymin=-2 ymax=9 area="6.5;3.5;1.5;2.5" punti="2,5,pieno" segmenti="0,6.5,1.5,6.5;0,3.5,1.5,3.5;1.5,0,1.5,3.5;2.5,0,2.5,6.5" etichette="0.1,7,L + ε;0.1,2.8,L − ε" titolo="Con $\varepsilon = \dfrac{3}{2}$ e $\delta = \dfrac{\varepsilon}{3} = \dfrac{1}{2}$: per $|x - 2| < \delta$ il grafico di $y = 3x - 1$ resta nella striscia $|y - 5| < \varepsilon$ (riquadro colorato)"}
+::cursore{tipo="epsilon-delta" titolo="Per $|x - 2| < \delta$, con $\delta = \dfrac{\varepsilon}{3}$, il grafico di $y = 3x - 1$ resta nella striscia $|y - 5| < \varepsilon$ (riquadro colorato)"}
 
 :::
 

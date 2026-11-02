@@ -192,7 +192,7 @@ $$
 $$
 e il valore comune si chiama **integrale definito** di $f$ su $[a, b]$, indicato con $\displaystyle\int_a^b f(x)\, dx$. Per $f \geq 0$ l'integrale è l'area della regione compresa tra il grafico e l'asse $x$; in generale è un'*area con segno*, perché i tratti in cui $f < 0$ danno contributo negativo.
 
-::grafico{f="x^2;(ceil(2*x)/2)^2+0*sqrt(x*(2-x))" area="(floor(2*x)/2)^2;0;0;1.999" segmenti="0.5,0,0.5,1;1,0,1,2.25;1.5,0,1.5,4;2,0,2,4" xmin=-0.4 xmax=2.6 ymin=-0.4 ymax=4.6 titolo="$y = x^2$ su $[0, 2]$ con la partizione in quattro parti uguali: i rettangoli colorati danno la somma inferiore $s(P) = \dfrac{7}{4}$, quelli delimitati dalla linea tratteggiata la somma superiore $S(P) = \dfrac{15}{4}$; l'integrale vale $\dfrac{8}{3}$"}
+::cursore{tipo="riemann" titolo="$y = x^2$ su $[0, 2]$ con la partizione in $n$ parti uguali: i rettangoli colorati danno la somma inferiore $s(P)$, quelli delimitati dalla linea tratteggiata la somma superiore $S(P)$; al crescere di $n$ le due somme si avvicinano all'integrale $\dfrac{8}{3}$"}
 
 :::
 

@@ -67,7 +67,7 @@ $$
 $$
 The ratio is $q = \dfrac{1}{2}$, with $|q| < 1$, and the first term is $\dfrac{1}{2}$, therefore the **sum** is the first term divided by $1 - q$.
 
-::grafico{punti="1,0.5000,pieno;2,0.7500,pieno;3,0.8750,pieno;4,0.9375,pieno;5,0.9688,pieno;6,0.9844,pieno;7,0.9922,pieno;8,0.9961,pieno" asintoti="y=1" nomi="N,s" xmin=-0.5 xmax=9 ymin=-0.15 ymax=1.25 titolo="The partial sums $s_N$ of $\sum \dfrac{1}{2^n}$ for $N = 1, \dots, 8$ increase and approach the sum $1$ (dashed line)"}
+::cursore{tipo="somme-parziali" titolo="The partial sums $s_1, \dots, s_N$ of $\sum \dfrac{1}{2^n}$ increase and approach the sum $1$ (dashed line)"}
 
 :::
 

@@ -47,7 +47,7 @@ y = f(x_0) + f'(x_0)\,(x - x_0) .
 $$
 Per $h \to 0$ il punto $(x_0 + h, f(x_0 + h))$ si avvicina a $(x_0, f(x_0))$ e la retta secante per i due punti tende alla tangente; poiché la pendenza della secante è il rapporto incrementale, la pendenza della tangente è $f'(x_0)$. Questo è il **significato geometrico** della derivata.
 
-::grafico{f="x^2;3*x-2;2*x-1" xmin=-1 xmax=2.6 ymin=-2 ymax=5 punti="1,1,pieno;2,4,pieno;1.5,2.25,pieno" segmenti="-0.2,-2,2.6,5" titolo="Le secanti per $(1, 1)$ con $h = 1$ e con $h = \dfrac{1}{2}$ (tratteggiate) hanno pendenze $3$ e $\dfrac{5}{2}$; per $h \to 0$ tendono alla tangente $y = 2x - 1$ (rossa), di pendenza $f'(1) = 2$"}
+::cursore{tipo="secante" titolo="Per $f(x) = x^2$ la secante per $(1, 1)$ e $(1 + h, (1 + h)^2)$, in rosso, ha pendenza uguale al rapporto incrementale $2 + h$; per $h \to 0$ tende alla tangente $y = 2x - 1$ (tratteggiata), di pendenza $f'(1) = 2$"}
 
 ::grafico{f="x*x;2*x-1" xmin=-2.5 xmax=2.5 ymin=-1 ymax=5 punti="1,1" titolo="$y = x^2$: nel punto $(1, 1)$ la retta tangente (tratteggiata) è $y = 2x - 1$, perché $f'(1) = 2$"}
 
@@ -317,7 +317,7 @@ f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}\,(x - x_0)^k + o\bigl((x - x_0)^n\
 $$
 Il polinomio $T_n(x) = \displaystyle\sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}\,(x - x_0)^k$ è il **polinomio di Taylor** di ordine $n$ di $f$ centrato in $x_0$; per $x_0 = 0$ si parla di formula e di polinomio di **McLaurin**. Il resto $o\bigl((x - x_0)^n\bigr)$ dice che l'errore tende a $0$ più rapidamente di $(x - x_0)^n$, quindi il polinomio approssima $f$ vicino a $x_0$ a meno di un errore trascurabile rispetto all'ultima potenza scritta. Per $n = 1$ la formula diventa $f(x) = f(x_0) + f'(x_0)(x - x_0) + o(x - x_0)$, l'approssimazione con la **retta tangente**. Questa forma del resto serve nel calcolo dei limiti; la dimostrazione applica più volte il teorema di de l'Hôpital al rapporto tra $f(x) - T_n(x)$ e $(x - x_0)^n$ e si omette.
 
-::grafico{f="exp(x);1+x;1+x+x^2/2" xmin=-3 xmax=2.5 ymin=-2 ymax=7 punti="0,1,pieno" titolo="$y = e^x$ con i polinomi di McLaurin $T_1(x) = 1 + x$ (tratteggiato) e $T_2(x) = 1 + x + \dfrac{x^2}{2}$ (rosso): vicino a $0$ l'approssimazione migliora al crescere dell'ordine"}
+::cursore{tipo="taylor" funzione="exp" titolo="$y = e^x$ con il polinomio di McLaurin $T_n(x) = 1 + x + \dfrac{x^2}{2} + \dots + \dfrac{x^n}{n!}$ (tratteggiato): vicino a $0$ l'approssimazione migliora al crescere dell'ordine $n$"}
 
 :::
 

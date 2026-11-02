@@ -34,7 +34,7 @@ Given a distance $\varepsilon$ from $L$, as small as desired, there exists a nei
 :::esempio{titolo="Verification using the definition"}
 $\displaystyle\lim_{x \to 2} (3x - 1) = 5$. Given $\varepsilon > 0$, since $|(3x - 1) - 5| = 3|x - 2|$, it suffices to take $\delta = \dfrac{\varepsilon}{3}$: if $|x - 2| < \dfrac{\varepsilon}{3}$ then $3|x - 2| < \varepsilon$.
 
-::grafico{f="3*x-1" xmin=-1 xmax=4 ymin=-2 ymax=9 area="6.5;3.5;1.5;2.5" punti="2,5,pieno" segmenti="0,6.5,1.5,6.5;0,3.5,1.5,3.5;1.5,0,1.5,3.5;2.5,0,2.5,6.5" etichette="0.1,7,L + ε;0.1,2.8,L − ε" titolo="With $\varepsilon = \dfrac{3}{2}$ and $\delta = \dfrac{\varepsilon}{3} = \dfrac{1}{2}$: for $|x - 2| < \delta$ the graph of $y = 3x - 1$ stays within the strip $|y - 5| < \varepsilon$ (shaded box)"}
+::cursore{tipo="epsilon-delta" titolo="For $|x - 2| < \delta$, with $\delta = \dfrac{\varepsilon}{3}$, the graph of $y = 3x - 1$ stays within the strip $|y - 5| < \varepsilon$ (shaded box)"}
 
 :::
 
