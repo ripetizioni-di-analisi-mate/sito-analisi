@@ -226,7 +226,7 @@ export class Archivio {
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
         const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
         if (!d) return Response.json(null);
-        if (Date.now() - d.ultimo_uso > 3600 * 1000) {
+        if (Date.now() - d.ultimo_uso > 5 * 60 * 1000) { // ultima attività: si registra al più ogni 5 minuti
           this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
           this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
         }
@@ -335,7 +335,12 @@ export class Archivio {
           acquisti: this.righe('SELECT * FROM acquisti ORDER BY id DESC LIMIT 500'),
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
           // livello e studio di ogni studente (EXP totali in utenti.exp; minuti e risposte dalle tabelle dei livelli)
+          // attivita = ultima volta che lo studente ha usato il sito con l'account (pagine, studio, domande), in millisecondi
           utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie,
+                              MAX(COALESCE(u.attivo, 0), COALESCE((SELECT MAX(ultimo_uso) FROM dispositivi d WHERE d.email = u.email), 0),
+                                  COALESCE((SELECT MAX(ultimo) FROM sessioni s WHERE s.email = u.email), 0),
+                                  COALESCE((SELECT MAX(ultimo) FROM studio x WHERE x.email = u.email), 0),
+                                  COALESCE((SELECT MAX(quando) FROM risposte r WHERE r.email = u.email), 0)) AS attivita,
                               COALESCE(u.exp, 0) AS exp, COALESCE(st.minuti, 0) AS minuti, st.ultimo_studio,
                               COALESCE(rs.risposte, 0) AS risposte, COALESCE(rs.corrette, 0) AS corrette
                               FROM utenti u LEFT JOIN abilitazioni a ON a.email = u.email
