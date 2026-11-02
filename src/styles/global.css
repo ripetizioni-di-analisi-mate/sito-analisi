@@ -428,6 +428,13 @@ details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > 
 .risultati a { display: block; text-decoration: none; color: var(--inchiostro); padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
 .risultati small { display: block; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.8rem; }
 .risultati mark { background: color-mix(in srgb, var(--c-esempio) 25%, transparent); color: inherit; padding: 0 0.1em; }
+.risultati-gruppi { list-style: none; padding: 0; margin: 1rem 0; }
+.risultati-gruppo { margin: 0 0 1.4rem; }
+.risultati-gruppo h2 { font-family: var(--ui); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); margin: 0 0 0.5rem; }
+.risultati-gruppo h2 span { font-weight: 400; margin-left: 0.3rem; }
+.risultati-gruppo .risultati { margin: 0; }
+.risultati-altri { margin-top: 0.5rem; font: inherit; font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); background: none; border: 1px solid var(--riga); border-radius: 999px; padding: 0.3rem 0.9rem; cursor: pointer; }
+.risultati-altri:hover { color: var(--inchiostro); border-color: var(--inchiostro-2); }
 
 /* ---------- pagina font ---------- */
 .scelta-font { display: grid; gap: 0.75rem; margin: 1.25rem 0; font-family: var(--ui); }
@@ -1048,7 +1055,7 @@ ul.risposte-quiz { list-style: none; padding-left: 0.2rem; }
 @media print { .chiedi-pi { display: none; } }
 
 /* «Segnala un errore» in fondo alle pagine di studio */
-.segnala-errore { margin: 2rem 0 0.5rem; }
+.segnala-errore { margin: 1.75rem 0 0; }
 .segnala-errore button { display: inline-flex; align-items: center; gap: 0.4rem; font: 0.88rem/1.3 var(--ui); color: var(--inchiostro-2); background: none; border: 0; padding: 0.2rem 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--riga); text-underline-offset: 3px; }
 .segnala-errore button:hover { color: var(--inchiostro); text-decoration-color: currentColor; }
 .segnala-errore svg { width: 1rem; height: 1rem; }
@@ -1158,13 +1165,30 @@ html.collegato .solo-collegati { display: revert; }
 @media (max-width: 40rem) { .sim-barra { flex-wrap: wrap; } .sim-date { order: 3; width: 100%; } }
 
 /* Pagina della materia, con l'account: data dell'esame e progressi per argomento */
-.esame-materia { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.2rem; padding: 0.6rem 0.85rem; border: 1px solid var(--riga); border-radius: 10px; background: #fff; font-family: var(--ui); font-size: 0.93rem; }
+.esame-materia { margin: 0 0 1.4rem; padding: 0.95rem 1.1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 5%, transparent); font-family: var(--ui); display: flex; align-items: center; gap: 0.6rem 1rem; flex-wrap: wrap; }
+html.collegato .esame-materia.solo-collegati { display: flex; }
 .esame-materia[hidden], .esame-materia [hidden] { display: none !important; }
-.esame-testo { font-weight: 600; }
-.esame-testo:empty { display: none; }
-.esame-campo { display: inline-flex; align-items: center; gap: 0.5rem; }
-.esame-campo input { font: 0.93rem var(--ui); padding: 0.3rem 0.5rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
-.esame-salva, .esame-modifica { margin-left: 0.2rem; font: 600 0.88rem var(--ui); color: var(--accento); background: none; border: 1px solid color-mix(in srgb, var(--accento) 35%, transparent); border-radius: 999px; padding: 0.3rem 0.85rem; cursor: pointer; }
+.esame-corpo { flex: 1; min-width: 13rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.esame-titolo { font-size: 1.05rem; color: var(--accento); }
+.esame-testo { color: var(--inchiostro-2); font-size: 0.92rem; }
+.esame-modulo { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.55rem; }
+.esame-modulo select { font: 0.95rem var(--ui); color: var(--inchiostro); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235a6664' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.65rem center / 0.65rem; border: 1px solid var(--riga); border-radius: 8px; padding: 0.42rem 1.9rem 0.42rem 0.7rem; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.esame-modulo select:focus-visible { outline: 2px solid color-mix(in srgb, var(--accento) 45%, transparent); outline-offset: 1px; }
+.esame-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; }
+.esame-salva { font: 600 0.92rem var(--ui); color: #fff; background: var(--accento); border: 0; border-radius: 999px; padding: 0.48rem 1.15rem; cursor: pointer; }
+.esame-salva:disabled { opacity: 0.6; }
+.esame-annulla, .esame-togli { font: 0.88rem var(--ui); color: var(--inchiostro-2); background: none; border: 0; padding: 0.3rem 0.2rem; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.esame-errore { flex-basis: 100%; color: var(--c-attenzione); font-size: 0.88rem; }
+.esame-apri, .esame-modifica { font: 600 0.9rem var(--ui); color: var(--accento); background: none; border: 1px solid color-mix(in srgb, var(--accento) 35%, transparent); border-radius: 999px; padding: 0.42rem 1rem; cursor: pointer; white-space: nowrap; }
+.esame-apri:hover, .esame-modifica:hover { background: color-mix(in srgb, var(--accento) 7%, transparent); }
+.esame-icona { width: 2.4rem; height: 2.4rem; color: var(--accento); flex: none; align-self: flex-start; }
+.esame-icona svg { width: 100%; height: 100%; display: block; }
+@media (max-width: 30rem) {
+  .esame-modulo { display: grid; grid-template-columns: 1fr 1.7fr 1.25fr; gap: 0.45rem; }
+  .esame-modulo select { width: 100%; padding-left: 0.55rem; padding-right: 1.5rem; background-position: right 0.5rem center; }
+  .esame-azioni, .esame-errore { grid-column: 1 / -1; }
+  .esame-materia .esame-apri, .esame-materia .esame-modifica { margin-left: 3.4rem; }
+}
 .griglia-argomenti .progresso-argomento { grid-column: 2; }
 .progresso-argomento { display: grid; gap: 0.3rem; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); }
 .progresso-argomento[hidden] { display: none; }

@@ -1,0 +1,76 @@
+---
+// Accessi alle lezioni con Carmine: lezione individuale (/prenota) e corso di gruppo (/corsi-di-gruppo).
+// Scelta di Carmine del 02/11/2026 (A + C):
+//  - dove = 'indice': in cima all'indice laterale, su ogni pagina, voci scritte per esteso;
+//  - dove = 'testata': tasto «Lezioni» con l'icona del calendario subito dopo il nome del sito (a sinistra),
+//    che apre il menu con le due voci.
+// Solo in italiano.
+interface Props { dove: 'indice' | 'testata' }
+const { dove } = Astro.props;
+const icone = {
+  individuale: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2.5v3M13 2.5v3M7 11.5h2M11 11.5h2M7 14.2h2"/></svg>',
+  gruppo: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.6"/><circle cx="13.6" cy="7.6" r="2.1"/><path d="M2.5 16.5c.6-2.6 2.3-4 4.5-4s3.9 1.4 4.5 4M12 12.6c.5-.2 1-.3 1.6-.3 1.9 0 3.3 1.2 3.9 3.6"/></svg>',
+};
+const voci = [
+  { href: '/prenota', icona: icone.individuale, titolo: 'Lezione individuale', sotto: 'Scegli giorno e ora' },
+  { href: '/corsi-di-gruppo', icona: icone.gruppo, titolo: 'Corso di gruppo', sotto: 'Iscrizioni aperte' },
+];
+const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+---
+{dove === 'indice' && (
+  <div class="lezioni-indice">
+    <p class="indice-materia"><span>Lezioni con Carmine</span></p>
+    <ol class="indice-materie">
+      {voci.map((v) => (
+        <li style="--colore-materia: var(--accento)">
+          <a class="voce-materia" href={v.href} aria-current={qui.startsWith(v.href) ? 'page' : undefined}>
+            <span class="lezioni-icona" set:html={v.icona} />
+            <span class="materia-testo"><span class="materia-nome">{v.titolo}</span><small class="lezioni-sotto">{v.sotto}</small></span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+{dove === 'testata' && (
+  <details class="lezioni-testata">
+    <summary aria-label="Lezioni con Carmine"><span class="lezioni-icona" set:html={icone.individuale} /><span class="lt-testo">Lezioni</span></summary>
+    <div class="lt-menu">
+      {voci.map((v) => (
+        <a href={v.href} aria-current={qui.startsWith(v.href) ? 'page' : undefined}><span class="lezioni-icona" set:html={v.icona} /><span><strong>{v.titolo}</strong><small>{v.sotto}</small></span></a>
+      ))}
+    </div>
+  </details>
+)}
+
+<style is:global>
+  .lezioni-icona { display: inline-grid; place-items: center; flex: none; width: 1.15rem; height: 1.15rem; color: var(--accento); }
+  .lezioni-icona svg { width: 100%; height: 100%; }
+  .lezioni-indice { margin: 0 0 0.9rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--riga); }
+  .lezioni-indice .indice-materia { justify-content: flex-start; }
+  .lezioni-indice .materia-nome { white-space: nowrap; }
+  .lezioni-indice .lezioni-sotto { font-family: var(--ui); font-size: 0.74rem; color: var(--accento); }
+  .lezioni-indice a[aria-current='page'] { background: color-mix(in srgb, var(--accento) 9%, var(--carta)); }
+
+  .lezioni-testata { position: relative; flex: none; }
+  .lezioni-testata > summary { list-style: none; display: inline-flex; align-items: center; gap: 0.4rem; height: 2.4rem; box-sizing: border-box; padding: 0.4rem 0.75rem; border: 1px solid var(--accento); border-radius: var(--raggio); color: var(--accento); background: white; font-family: var(--ui); font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; }
+  .lezioni-testata > summary::-webkit-details-marker { display: none; }
+  .lezioni-testata[open] > summary { background: color-mix(in srgb, var(--accento) 8%, white); }
+  .lezioni-testata .lt-menu { position: absolute; left: 0; top: calc(100% + 0.4rem); z-index: 40; min-width: 15rem; background: white; border: 1px solid var(--riga); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.08); padding: 0.35rem; display: grid; }
+  .lezioni-testata .lt-menu a { display: flex; gap: 0.6rem; align-items: center; padding: 0.55rem 0.6rem; border-radius: 6px; color: var(--inchiostro); text-decoration: none; font-family: var(--ui); }
+  .lezioni-testata .lt-menu a:hover, .lezioni-testata .lt-menu a[aria-current='page'] { background: var(--carta-2); }
+  .lezioni-testata .lt-menu strong { display: block; font-size: 0.95rem; }
+  .lezioni-testata .lt-menu small { display: block; color: var(--inchiostro-2); font-size: 0.8rem; }
+  @media (max-width: 30rem) { .lezioni-testata .lt-testo { display: none; } .lezioni-testata > summary { padding: 0.4rem 0.5rem; } }
+  @media print { .lezioni-testata { display: none !important; } }
+</style>
+
+<script>
+  // Il menu si chiude toccando fuori o con Esc.
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll<HTMLDetailsElement>('details.lezioni-testata[open]').forEach((d) => { if (!d.contains(e.target as Node)) d.open = false; });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.querySelectorAll<HTMLDetailsElement>('details.lezioni-testata[open]').forEach((d) => (d.open = false));
+  });
+</script>

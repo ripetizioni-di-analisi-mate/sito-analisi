@@ -149,7 +149,7 @@ export const TESTI = {
     },
     // accedi / account
     accediDescrizione: 'Accedi al tuo account o creane uno nuovo.',
-    accediSommario: "Con l'account acquisti le materie e le ritrovi sbloccate su ogni dispositivo in cui accedi.",
+    accediSommario: "Accedi al tuo account per ritrovare le materie acquistate, continuare a studiare e tenere traccia dei tuoi progressi.",
     creaUnAccount: 'Crea un account', ripetiPassword: 'Ripeti la password', nome: 'Nome', tuoNome: 'Il tuo nome', salva: 'Salva',
     passwordDimenticata: 'Hai dimenticato la password?', eTeNeImposto: 'e te ne imposto una nuova.',
     recuperoSpiegazione: "Scrivi l'email con cui ti sei iscritto: ti mando un link per scegliere una nuova password.",
@@ -161,7 +161,7 @@ export const TESTI = {
     tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare al massimo su 2 dispositivi. Uscendo dall'account su un dispositivo, il posto si libera.",
     cambiaPassword: 'Cambia password', passwordAttuale: 'Password attuale', nuovaPassword: 'Nuova password', aggiornaPassword: 'Aggiorna la password', esci: "Esci dall'account",
     // cerca
-    ricerca: 'Ricerca', cercaSommario: 'Argomenti, definizioni, teoremi ed esercizi di tutte le materie. La ricerca avviene nel browser, senza inviare nulla.',
+    ricerca: 'Ricerca', cercaSommario: 'Materie e corsi, argomenti, definizioni, teoremi, esercizi e videocorsi. La ricerca avviene nel browser, senza inviare nulla.',
     cercaEsempio: 'Per esempio: permanenza del segno, forma indeterminata',
     argomento: 'Argomento',
     // contatti
@@ -242,7 +242,7 @@ export const TESTI = {
       nessunRisultato: 'No results.', unRisultato: '1 result', risultati: '§ results',
     },
     accediDescrizione: 'Log in to your account or create a new one.',
-    accediSommario: 'With an account you buy subjects and find them unlocked on every device where you log in.',
+    accediSommario: 'Log in to your account to find the subjects you bought, keep studying and track your progress.',
     creaUnAccount: 'Create an account', ripetiPassword: 'Repeat the password', nome: 'Name', tuoNome: 'Your name', salva: 'Save',
     passwordDimenticata: 'Forgot your password?', eTeNeImposto: 'page and I will set a new one for you.',
     recuperoSpiegazione: 'Enter the email you signed up with: I will send you a link to choose a new password.',
@@ -253,7 +253,7 @@ export const TESTI = {
     mostraPassword: 'Show password', impostazioni: 'Account settings',
     tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 2 devices. Logging out on a device frees its place.',
     cambiaPassword: 'Change password', passwordAttuale: 'Current password', nuovaPassword: 'New password', aggiornaPassword: 'Update password', esci: 'Log out',
-    ricerca: 'Search', cercaSommario: 'Topics, definitions, theorems and exercises of all subjects. The search runs in your browser and sends nothing.',
+    ricerca: 'Search', cercaSommario: 'Subjects and courses, topics, definitions, theorems and exercises. The search runs in your browser and sends nothing.',
     cercaEsempio: 'For example: sign permanence, indeterminate form',
     argomento: 'Topic',
     contattiDescrizione: 'Contacts for information about the material, help with purchases and error reports.',
