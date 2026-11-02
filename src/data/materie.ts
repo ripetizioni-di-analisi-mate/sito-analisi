@@ -434,7 +434,10 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
   },
 ];
 
-export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug] }));
+// Prove in locale: con SOLO_MATERIE="analisi-1,precorso" le altre materie risultano in preparazione (build più rapida).
+// Nel Worker e nella build di Cloudflare la variabile non c'è e non cambia nulla.
+const SOLO = (typeof process !== 'undefined' && process.env?.SOLO_MATERIE || '').split(',').map((s) => s.trim()).filter(Boolean);
+export const MATERIE: Materia[] = ELENCO.map((m) => ({ ...m, prezzo: (PREZZI as Record<string, number>)[m.slug], ...(SOLO.length && !SOLO.includes(m.slug) ? { attiva: false } : {}) }));
 
 export const SEZIONI = [
   { slug: 'teoria', titolo: 'Teoria' },
