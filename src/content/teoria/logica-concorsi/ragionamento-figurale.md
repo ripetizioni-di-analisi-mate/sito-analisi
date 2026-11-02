@@ -118,7 +118,7 @@ Unione e differenza simmetrica danno lo stesso risultato solo quando le prime du
 ## Figura estranea
 
 :::definizione{#figura-estranea titolo="Figura estranea"}
-Nei quesiti di **figura estranea** si mostrano cinque figure: quattro seguono una regola comune e una no, e la risposta è quella che non la segue. La regola si cerca confrontando le figure una caratteristica alla volta, come nelle serie.
+Nei quesiti di **figura estranea** si mostrano cinque figure, di cui quattro seguono una regola comune e una no, e la risposta è quella che non la segue. La regola si cerca confrontando le figure una caratteristica alla volta, come nelle serie.
 
 ::figura{tipo="opzioni" celle="triangolo | quadrato grigio | pentagono | esagono pieno | stella" titolo="Quattro figure sono poligoni, mentre la stella ha il contorno che rientra verso il centro"}
 
@@ -152,7 +152,7 @@ Il motivo si vede seguendo il contorno della lettera. Percorrendo la F dal piede
 :::
 
 :::osservazione{#riconoscere-lo-specchio titolo="Come si riconosce un'immagine allo specchio"}
-Per decidere se una figura è ruotata oppure allo specchio si sceglie una parte di riferimento, come l'asta della F o la gamba della R, e la si riporta con il pensiero nella posizione originale ruotando la figura. Se dopo la rotazione anche il resto della figura coincide con l'originale, la figura è ruotata; se il resto si trova dalla parte opposta, la figura è allo specchio. Nella figura D dell'esempio l'asta è orizzontale: ruotandola di $90°$ in senso antiorario l'asta torna verticale, ma i tratti risultano a sinistra, quindi la figura D è un'immagine allo specchio.
+Per decidere se una figura è ruotata oppure allo specchio si sceglie una parte di riferimento, come l'asta della F o la gamba della R, e la si riporta con il pensiero nella posizione originale ruotando la figura. Se dopo la rotazione anche il resto della figura coincide con l'originale, la figura è ruotata; se il resto si trova dalla parte opposta, la figura è allo specchio. Nella figura D dell'esempio l'asta è orizzontale. Ruotando la figura di $90°$ in senso antiorario l'asta torna verticale e i tratti risultano a sinistra, quindi la figura D è un'immagine allo specchio.
 :::
 
 :::attenzione{#figure-simmetriche titolo="Figure con un asse di simmetria"}
@@ -172,8 +172,8 @@ Nei quesiti le facce portano simboli che restano uguali ruotando di $90°$, come
 :::teorema{#facce-opposte titolo="Facce opposte"}
 In uno sviluppo che si chiude in un cubo valgono due regole.
 
-- Tre facce consecutive in linea retta: la prima e la terza sono **opposte**, perché la faccia centrale si piega fra le due come il fondo di una scatola fra due pareti.
-- Quattro facce a forma di Z, cioè due facce in linea e altre due in linea che proseguono dopo un gradino: la prima e l'ultima sono opposte.
+- Se tre facce sono consecutive in linea retta, la prima e la terza sono **opposte**, perché la faccia centrale si piega fra le due come il fondo di una scatola fra due pareti.
+- Se quattro facce formano una Z, cioè due facce in linea e altre due in linea che proseguono dopo un gradino, la prima e l'ultima sono opposte.
 
 Nello sviluppo a croce latina la fila orizzontale contiene il cerchio, la croce piena, l'anello e il quadrato grigio. Il cerchio e l'anello sono la prima e la terza faccia di una fila di tre, quindi sono opposti; per lo stesso motivo sono opposti la croce piena e il quadrato grigio. Nella colonna verticale il punto, la croce piena e la croce obliqua sono in linea, perciò il punto e la croce obliqua sono opposti. Due facce opposte non compaiono mai insieme in un disegno del cubo, e questo basta a scartare molte opzioni.
 :::
@@ -218,7 +218,7 @@ quindi questo è il numero di triangoli. Con tre segmenti interni la base è div
 
 ::figura{tipo="linee" segmenti="0,10,10,10;0,10,5,0;10,10,5,0;5,0,2.5,10;5,0,5,10;5,0,7.5,10" titolo="Tre segmenti dal vertice dividono la base in $4$ parti, e i triangoli sono $10$"}
 
-Il conteggio si controlla anche per numero di parti: i triangoli formati da una sola parte sono $4$, quelli formati da due parti vicine sono $3$, da tre parti sono $2$, e c'è il triangolo intero, per un totale di $4 + 3 + 2 + 1 = 10$.
+Il conteggio si controlla anche per numero di parti. I triangoli formati da una sola parte sono $4$, quelli formati da due parti vicine sono $3$, da tre parti sono $2$, e c'è il triangolo intero, per un totale di $4 + 3 + 2 + 1 = 10$.
 :::
 
 :::teorema{#contare-quadrati titolo="Quadrati in una griglia"}

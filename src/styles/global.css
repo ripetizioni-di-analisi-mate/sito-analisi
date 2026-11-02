@@ -1170,3 +1170,7 @@ html.collegato .solo-collegati { display: revert; }
 .progresso-argomento[hidden] { display: none; }
 .progresso-barra { display: block; height: 4px; border-radius: 4px; background: var(--carta-2); overflow: hidden; }
 .progresso-barra i { display: block; height: 100%; width: 0; background: var(--accento); border-radius: 4px; transition: width 0.4s; }
+/* figure come risposte delle domande a tempo e della simulazione */
+.scelta .figura-logica { margin: 0.2rem 0; }
+.scelta .figura-logica > svg { max-width: 9rem !important; }
+.scelta .figura-cella > svg { width: 4.5rem; }
