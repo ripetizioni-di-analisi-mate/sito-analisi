@@ -102,15 +102,26 @@
       "giorno": "2026-11-02",
       "punteggio": null,
       "aree": {},
-      "casi": 0,
-      "errori": 0,
-      "areaDelGiorno": "correttezza",
+      "casi": 7,
+      "errori": 2,
+      "areaDelGiorno": "affidabilità",
       "problemi": [
-        "Il banco di oggi non si è potuto leggere: la richiesta di permesso per aprire /pi/prove è scaduta senza risposta (secondo giorno)",
+        "Banco del 1/11 letto dopo il permesso di Carmine: 2 risposte su 7 vuote dopo 32 secondi (lim-e2, serie-telescopica), le altre di 2-3 righe",
+        "Studenti veri: circa 54 token di risposta in media (1/11: 162 token per 3 messaggi)",
+        "Il banco di stamattina (2/11) non è stato salvato: si salvava tutto solo alla fine",
         "Nelle risposte di calcolo manca un controllo del risultato e una frase finale che lo enunci chiaramente",
         "Il banco non aveva casi di calcolo dove i modelli piccoli sbagliano spesso (sviluppi di Taylor, fratti semplici)"
       ],
       "interventi": [
+        {
+          "titolo": "Risposte complete",
+          "area": "affidabilità",
+          "cosa": "il modello Gemma non consuma più i token in un ragionamento nascosto prima di scrivere (se il parametro non è accettato si riprova senza); contatore anonimo ragionamento-nascosto",
+          "perStudente": "niente più risposte vuote dopo 30 secondi o troncate a due righe",
+          "verifica": "caratteri delle risposte nel banco di domani (oggi 0-561) e token in uscita degli studenti",
+          "commit": "e3383c3",
+          "esito": "in attesa"
+        },
         {
           "titolo": "Verifica del risultato",
           "area": "correttezza",
@@ -128,6 +139,15 @@
           "verifica": "banco di domani",
           "commit": "4dc6af8",
           "esito": "in attesa"
+        },
+        {
+          "titolo": "Banco salvato caso per caso",
+          "area": "banco",
+          "cosa": "ogni risposta di prova si salva appena arriva",
+          "perStudente": "le prove del mattino non vanno più perse",
+          "verifica": "banco di domani presente su /pi/prove",
+          "commit": "e3383c3",
+          "esito": "in attesa"
         }
       ],
       "esitiIeri": [
@@ -138,9 +158,7 @@
         }
       ],
       "annullati": [],
-      "proposte": [
-        "Per far leggere il banco ogni mattina: scrivere in questa chat il link https://ripetizionidianalisi.com/pi/prove e approvare la lettura quando viene chiesta"
-      ]
+      "proposte": []
     }
   ]
 }
