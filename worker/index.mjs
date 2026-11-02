@@ -12,6 +12,7 @@ import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
+import { variabilePrezzo } from '../src/data/abbinamenti.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
 import { spazioHome } from './spazio.mjs';
@@ -1033,9 +1034,21 @@ export default {
         const materia = d.custom_data?.materia || '';
         const video = d.custom_data?.videocorso ? chiaveVideo(d.custom_data.videocorso) : '';
         const importo = Number(d.details?.totals?.total || 0) / 100;
-        if (email && A_PAGAMENTO.includes(materia)) {
-          await aDO(env, '/registra-acquisto', { email, materia, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
-          await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
+        // Materie pagate: si leggono dai prezzi della transazione (normale o abbinato, cioè con lo sconto
+        // del corso aggiunto); se nessun prezzo è riconosciuto vale la materia scritta nei dati del checkout.
+        const daPrezzo = {};
+        for (const m of A_PAGAMENTO) for (const ab of [false, true]) { const id = env[variabilePrezzo(m, ab)]; if (id) daPrezzo[id] = m; }
+        const pagate = [];
+        for (const r of d.details?.line_items || []) {
+          const m = daPrezzo[r.price_id];
+          if (m && !pagate.some((x) => x.materia === m)) pagate.push({ materia: m, importo: Number(r.totals?.total || 0) / 100 });
+        }
+        if (!pagate.length && A_PAGAMENTO.includes(materia)) pagate.push({ materia, importo });
+        if (email && pagate.length) {
+          // La transazione è unica nell'archivio: dalla seconda materia in poi si aggiunge il nome della materia.
+          for (const [i, x] of pagate.entries())
+            await aDO(env, '/registra-acquisto', { email, materia: x.materia, importo: x.importo, valuta: d.currency_code || 'EUR', transazione: i ? `${d.id}:${x.materia}` : d.id });
+          await aDO(env, '/abilita', { email, materie: pagate.map((x) => x.materia), origine: 'paddle' });
         } else if (email && VIDEO[video]) {
           await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });
@@ -1062,6 +1075,8 @@ export default {
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
             'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
           },
+          // prezzi con il 10% in meno per il corso aggiunto a un altro (src/data/abbinamenti.ts)
+          abbinati: Object.fromEntries(A_PAGAMENTO.map((m) => [m, env[variabilePrezzo(m, true)] || null])),
           videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
         } : null,
       });

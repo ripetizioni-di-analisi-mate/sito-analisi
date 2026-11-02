@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import { VIDEOCORSI } from '../data/videocorsi';
+import { ABBINAMENTI, SCONTO_ABBINATO, prezzoAbbinato } from '../data/abbinamenti';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -19,6 +20,16 @@ const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(mate
 // Il PDF si nomina solo nelle materie che lo hanno (public/pdf/<materia>/).
 // (percorso dalla radice del progetto: dentro la build import.meta.url punta ai file compilati)
 const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
+// Corsi da aggiungere con il 10% in meno (src/data/abbinamenti.ts). Il browser mostra solo quelli
+// con il prezzo abbinato impostato in Paddle e non ancora nell'account.
+const euro = (x: number) => x.toLocaleString(lingua === 'it' ? 'it-IT' : 'en-GB', { minimumFractionDigits: Number.isInteger(x) ? 0 : 2, maximumFractionDigits: 2 });
+const abbinabili = (ABBINAMENTI[materia] || [])
+  .map((s) => materiaL(lingua, s))
+  .filter((x) => x && x.attiva && x.prezzo)
+  .map((x) => ({ slug: x.slug, titolo: x.titolo, descrizione: x.descrizione, prezzo: x.prezzo!, abbinato: prezzoAbbinato(x.prezzo!) }));
+const testiAbbinati = lingua === 'it'
+  ? { titolo: `Aggiungi un altro corso con il ${SCONTO_ABBINATO}% in meno`, aggiungi: 'Aggiungi', aggiunto: 'Aggiunto', totale: 'Totale', dopoTitolo: 'Vuoi aggiungere anche un altro corso?', dopoNota: `Se lo aggiungi adesso costa il ${SCONTO_ABBINATO}% in meno.`, aggiungiOra: 'Aggiungi e paga', sbloccata: 'Pagamento ricevuto: § è sbloccata nel tuo account ✓' }
+  : { titolo: `Add another subject at ${SCONTO_ABBINATO}% off`, aggiungi: 'Add', aggiunto: 'Added', totale: 'Total', dopoTitolo: 'Would you like to add another subject?', dopoNota: `If you add it now it is ${SCONTO_ABBINATO}% off.`, aggiungiOra: 'Add and pay', sbloccata: 'Payment received: § is unlocked in your account ✓' };
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
   <p class="sopratitolo">{m.titolo}</p>
@@ -36,6 +47,24 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
   )}
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
+    {abbinabili.length > 0 && (
+      <div class="aggiungi-corsi" id="aggiungi-corsi" hidden>
+        <p class="ac-titolo">{testiAbbinati.titolo}</p>
+        <ul>
+          {abbinabili.map((x) => (
+            <li class="ac-corso" data-materia={x.slug} data-prezzo={x.abbinato} hidden>
+              <span class="ac-pallino" style={`background:${materiaL(lingua, x.slug).colore}`} aria-hidden="true" />
+              <span class="ac-testo">
+                <a class="ac-nome" href={link(lingua, `/${x.slug}/sblocca`)}>{x.titolo}</a>
+                <span class="ac-prezzo"><strong>{euro(x.abbinato)} €</strong> {lingua === 'it' ? `insieme a ${m.titolo} (da solo ${x.prezzo}\u00a0€)` : `with ${m.titolo} (${x.prezzo}\u00a0€ on its own)`}</span>
+              </span>
+              <button type="button" class="ac-tasto" aria-pressed="false" data-testo={testiAbbinati.aggiungi} data-testo-attivo={testiAbbinati.aggiunto}>{testiAbbinati.aggiungi}</button>
+            </li>
+          ))}
+        </ul>
+        <p class="ac-totale" id="ac-totale" hidden></p>
+      </div>
+    )}
     <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>
     <form class="modulo modulo-acquisto" id="modulo-acquisto" novalidate hidden>
       <label>{t.nome}<input type="text" name="nome" autocomplete="given-name" maxlength="40" /></label>
@@ -53,7 +82,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
     <p class="nota-termini" set:html={t.notaTermini} />
   </div>
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, prezzoMateria: m.prezzo, js, pref, localePaddle, abbinabili, testiAbbinati }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -74,12 +103,32 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
             token: conf.token,
             eventCallback: (ev) => {
               if (ev.name !== 'checkout.completed') return;
+              if (attesaAbbinato) {
+                const s = attesaAbbinato;
+                azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
+                let n = 0;
+                const vedi = async () => {
+                  const r = await fetch('/api/io').catch(() => null);
+                  const d = r && r.ok ? await r.json() : null;
+                  if (d && d.materie.includes(s)) { location.href = `${pref}/${s}`; return; }
+                  if (++n < 30) setTimeout(vedi, 2000); else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
+                };
+                vedi();
+                return;
+              }
               azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
               let tentativi = 0;
               const controlla = async () => {
                 const r = await fetch('/api/io').catch(() => null);
                 const d = r && r.ok ? await r.json() : null;
-                if (d && d.materie.includes(materia)) { location.href = `${pref}/${materia}`; return; }
+                if (d && d.materie.includes(materia)) {
+                  // Dopo il pagamento: se non è stato aggiunto nulla, il primo corso abbinabile con lo sconto.
+                  const offerta = aggiunti.length ? null : abbinabili.find((x) => conf.abbinati && conf.abbinati[x.slug] && !d.materie.includes(x.slug));
+                  if (!offerta) { location.href = `${pref}/${materia}`; return; }
+                  io = d;
+                  mostraDopo(offerta);
+                  return;
+                }
                 if (++tentativi < 30) setTimeout(controlla, 2000);
                 else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
               };
@@ -91,14 +140,69 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
         s.onerror = () => { paddlePronto = null; no(); };
         document.head.appendChild(s);
       }));
-      const paga = async () => {
+      // Corsi aggiunti al pagamento (prezzo abbinato, 10% in meno).
+      let aggiunti = [];
+      const euro = (x) => x.toLocaleString(pref ? 'en-GB' : 'it-IT', { minimumFractionDigits: Number.isInteger(x) ? 0 : 2, maximumFractionDigits: 2 });
+      const riquadroAgg = document.getElementById('aggiungi-corsi');
+      const totaleAgg = document.getElementById('ac-totale');
+      const aggiornaTotale = () => {
+        if (!totaleAgg) return;
+        const tot = prezzoMateria + aggiunti.reduce((a, s) => a + abbinabili.find((x) => x.slug === s).abbinato, 0);
+        totaleAgg.hidden = !aggiunti.length;
+        totaleAgg.innerHTML = `${testiAbbinati.totale}: <strong>${euro(Math.round(tot * 100) / 100)} €</strong>`;
+      };
+      const mostraAbbinati = () => {
+        if (!riquadroAgg || !conf || !conf.abbinati) return;
+        let visibili = 0;
+        riquadroAgg.querySelectorAll('.ac-corso').forEach((li) => {
+          const s = li.dataset.materia;
+          const ok = Boolean(conf.abbinati[s]) && !(io && io.materie.includes(s));
+          li.hidden = !ok;
+          if (!ok) aggiunti = aggiunti.filter((x) => x !== s);
+          if (ok) visibili++;
+        });
+        riquadroAgg.hidden = !visibili;
+        aggiornaTotale();
+      };
+      if (riquadroAgg) riquadroAgg.addEventListener('click', (e) => {
+        const b = e.target.closest('.ac-tasto');
+        if (!b) return;
+        const s = b.closest('.ac-corso').dataset.materia;
+        const attivo = !aggiunti.includes(s);
+        aggiunti = attivo ? [...aggiunti, s] : aggiunti.filter((x) => x !== s);
+        b.setAttribute('aria-pressed', String(attivo));
+        b.textContent = attivo ? b.dataset.testoAttivo : b.dataset.testo;
+        b.closest('.ac-corso').classList.toggle('scelto', attivo);
+        aggiornaTotale();
+      });
+
+      const paga = async (soloAbbinato) => {
         try { await caricaPaddle(); } catch { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; return; }
+        const items = soloAbbinato
+          ? [{ priceId: conf.abbinati[soloAbbinato], quantity: 1 }]
+          : [{ priceId: conf.prezzi[materia], quantity: 1 }, ...aggiunti.map((s) => ({ priceId: conf.abbinati[s], quantity: 1 }))];
         Paddle.Checkout.open({
-          items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
+          items,
           customer: { email: io.email },
-          customData: { materia, email: io.email },
+          customData: { materia: soloAbbinato || materia, materie: soloAbbinato ? [soloAbbinato] : [materia, ...aggiunti], email: io.email },
           settings: { locale: localePaddle },
         });
+      };
+
+      // Dopo il pagamento: materia sbloccata, tasto per gli argomenti e il corso suggerito con lo sconto.
+      let attesaAbbinato = null;
+      const mostraDopo = (x) => {
+        if (riquadroAgg) riquadroAgg.hidden = true;
+        azione.innerHTML = `<p class="stato-ok">${f(testiAbbinati.sbloccata, titolo)}</p>
+          <a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>
+          <div class="offerta-dopo">
+            <p class="ac-titolo">${testiAbbinati.dopoTitolo}</p>
+            <p class="od-corso"><strong>${x.titolo}</strong><br><span>${x.descrizione}</span></p>
+            <p class="od-prezzo"><strong>${euro(x.abbinato)} €</strong> <span>(${pref ? `${x.prezzo}&nbsp;€ on its own` : `da solo ${x.prezzo}&nbsp;€`})</span></p>
+            <p class="od-nota">${testiAbbinati.dopoNota}</p>
+            <button type="button" class="bottone-secondario" id="compra-abbinato">${testiAbbinati.aggiungiOra}</button>
+          </div>`;
+        document.getElementById('compra-abbinato').addEventListener('click', () => { attesaAbbinato = x.slug; paga(x.slug); });
       };
 
       // Stato per chi ha già un account: materia già sbloccata, pagamento non attivo, tasto di acquisto.
@@ -106,6 +210,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
         modulo.hidden = true;
         azione.hidden = false;
         if (io.materie.includes(materia)) {
+          if (riquadroAgg) riquadroAgg.hidden = true;
           azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
           return false;
         }
@@ -115,7 +220,8 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
         }
         azione.innerHTML = `${premessa}<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
           <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
-        document.getElementById('compra').addEventListener('click', paga);
+        mostraAbbinati();
+        document.getElementById('compra').addEventListener('click', () => paga());
         caricaPaddle().catch(() => {});
         return true;
       };
@@ -145,7 +251,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
         if (preregistrato.checked) parti.push('Preregistrato: ' + scelti('corsopre'));
         return parti.join('; ');
       };
-      if (conf && conf.prezzi[materia]) caricaPaddle().catch(() => {});
+      if (conf && conf.prezzi[materia]) { mostraAbbinati(); caricaPaddle().catch(() => {}); }
 
       modulo.addEventListener('submit', async (e) => {
         e.preventDefault();

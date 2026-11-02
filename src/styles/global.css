@@ -1198,3 +1198,26 @@ html.collegato .esame-materia.solo-collegati { display: flex; }
 .scelta .figura-logica { margin: 0.2rem 0; }
 .scelta .figura-logica > svg { max-width: 9rem !important; }
 .scelta .figura-cella > svg { width: 4.5rem; }
+
+/* Pagina Sblocca: corsi da aggiungere con il 10% in meno, e offerta dopo il pagamento */
+.aggiungi-corsi { text-align: left; margin: 0 0 1.1rem; padding: 0.9rem 0 0.2rem; border-top: 1px solid var(--riga); }
+.aggiungi-corsi[hidden], .ac-corso[hidden] { display: none; }
+.ac-titolo { margin: 0 0 0.55rem; font-weight: 600; font-size: 0.95rem; color: var(--inchiostro); }
+.aggiungi-corsi ul { list-style: none; margin: 0; padding: 0; }
+.ac-corso { display: flex; align-items: center; gap: 0.7rem; padding: 0.6rem 0; border-bottom: 1px solid var(--riga); }
+.ac-corso:last-child { border-bottom: 0; }
+.ac-pallino { flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; }
+.ac-testo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.ac-nome { font-weight: 600; color: var(--inchiostro); text-decoration: none; }
+.ac-nome:hover { text-decoration: underline; }
+.ac-prezzo { font-size: 0.86rem; color: var(--inchiostro-2); }
+.ac-prezzo strong { color: var(--inchiostro); }
+.riquadro-acquisto .ac-tasto { flex: none; font-size: 0.9rem; padding: 0.4rem 1rem; background: none; color: var(--azione); border: 1.5px solid var(--azione); }
+.riquadro-acquisto .ac-tasto[aria-pressed="true"] { background: color-mix(in srgb, var(--azione) 12%, #fff); }
+.riquadro-acquisto .ac-tasto[aria-pressed="true"]::before { content: '✓ '; }
+.ac-totale { margin: 0.5rem 0 0; text-align: right; font-size: 0.95rem; }
+.offerta-dopo { text-align: left; margin: 1.3rem 0 0; padding: 0.9rem 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
+.offerta-dopo p { margin: 0 0 0.45rem; }
+.od-corso span, .od-prezzo span, .od-nota { font-size: 0.88rem; color: var(--inchiostro-2); }
+.offerta-dopo .bottone-secondario { font-size: 0.95rem; font-weight: 600; color: var(--azione); background: none; border: 1.5px solid var(--azione); padding: 0.5rem 1.3rem; }
+@media (max-width: 30rem) { .ac-corso { flex-wrap: wrap; } .ac-testo { flex-basis: calc(100% - 1.4rem); } .riquadro-acquisto .ac-tasto { margin-left: 1.4rem; } }
