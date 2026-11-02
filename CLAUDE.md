@@ -136,6 +136,9 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Prove in locale: server finto esteso con iscrizione, accesso e vetrine delle schede (`/home/claude/consulenza-sito/_lavoro/server_finto2.py`).
 - 01/11 (area 7 scelta A): tasti di acquisto sempre nel verde del sito (`--azione` in `global.css`: riquadro di acquisto di Sblocca e videocorsi, elenco dell'account, fine dell'anteprima e vetrine); il colore della materia resta su striscia, prezzo e titoli. Quiz A-E senza pallino (classe `risposte-quiz` messa da `remark-tracce.mjs`). Sopratitolo della materia: «Gli argomenti del concorso» per i concorsi, «Il programma» per le superiori.
 - 01/11 (area 11 scelta A): Pi conosce le materie utili per corso di studi (Ingegneria, Economia, liceo, concorsi), come indicazione generale (`worker/assistente.mjs`, `infoSito`).
+- 02/11 (mossa 9, area 12 scelta A): in dashboard → Traffico la tabella «Percorso d'acquisto» per materia (pagine viste, fine dell'anteprima arrivata sullo schermo, pagina Sblocca, tasto di acquisto premuto, pagati) e «Campagne dei link» (`?utm_source=ig&utm_campaign=nome-del-post`). Solo conteggi: tabella `eventi (giorno, evento, materia, n)` nel Durable Object, rotta `/api/evento` (solo `fine-anteprima` e `tasto`, materie di `prezzi.json` o `video-<slug>`), script in fondo a `Base.astro`; le pagine Sblocca e dei videocorsi sono sezioni a parte (`analisi-1/sblocca`, `videocorsi/<slug>`). Il codice di Paddle non è toccato.
+- 02/11 (area 7): formule nel testo su una sola riga quando ci stanno (script in `Base.astro` che mette `.katex.intera`); quelle più larghe della riga possono ancora andare a capo.
+- 02/11 (area 6 B): metodi di pagamento anche sotto il tasto della pagina del videocorso.
 
 ## In sospeso
 - Acquisto di prova + rimborso (vedi Pagamenti).
