@@ -246,6 +246,8 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 
 /* ---------- formule ---------- */
 .katex { font-size: 1.08em; }
+/* formule nel testo: non vanno a capo a metà se stanno nella riga (classe messa da Base.astro) */
+.katex.intera { white-space: nowrap; }
 .katex-display { margin: 1rem 0; overflow-x: auto; overflow-y: hidden; padding: 0.2rem 0; }
 .katex-display .katex-html { text-align: center; }
 
