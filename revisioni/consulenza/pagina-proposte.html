@@ -1,0 +1,280 @@
+<title>Piano vendite del sito</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: una colonna di lettura come il sito, schede di scelta sotto ogni proposta, colori presi dal sito (carta, inchiostro, verde). */
+:root{
+  --carta:#faf8f2; --foglio:#ffffff; --inchiostro:#22302f; --grigio:#5d6a68; --riga:#e3ded2;
+  --verde:#2f6f68; --verde-chiaro:#e4efec; --sabbia:#f3e7c9; --sabbia-testo:#7a5a16; --rosso:#9b3b2e; --rosso-chiaro:#f6e3df;
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --carta:#161c1b; --foglio:#1e2625; --inchiostro:#e8e4da; --grigio:#a3ada9; --riga:#33403e;
+  --verde:#7cbfb5; --verde-chiaro:#1f3330; --sabbia:#3a3122; --sabbia-testo:#e3c98a; --rosso:#e59a8c; --rosso-chiaro:#3a2420; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --carta:#161c1b; --foglio:#1e2625; --inchiostro:#e8e4da; --grigio:#a3ada9; --riga:#33403e;
+  --verde:#7cbfb5; --verde-chiaro:#1f3330; --sabbia:#3a3122; --sabbia-testo:#e3c98a; --rosso:#e59a8c; --rosso-chiaro:#3a2420; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--carta);color:var(--inchiostro);font-family:var(--serif);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.pagina{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2rem;font-weight:700}
+h2{font-size:1.45rem;font-weight:700}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+.sopra{font-family:var(--sans);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--verde)}
+.intro{display:flex;flex-direction:column;gap:12px}
+.intro .nota{font-family:var(--sans);font-size:.95rem;color:var(--grigio)}
+section{display:flex;flex-direction:column;gap:16px}
+.urgente{background:var(--verde-chiaro);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.urgente .sopra{color:var(--verde)}
+.conto{font-family:var(--sans);font-size:.95rem;color:var(--grigio)}
+.conto b{color:var(--inchiostro)}
+.mossa{background:var(--foglio);border:1px solid var(--riga);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.mossa .testa{display:flex;gap:12px;align-items:baseline}
+.mossa .num{font-family:var(--sans);font-weight:700;color:var(--verde);font-variant-numeric:tabular-nums;min-width:1.4em}
+.mossa .corpo{display:flex;flex-direction:column;gap:8px;min-width:0}
+.problema{color:var(--grigio);font-size:.98rem}
+.etichette{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--sans);font-size:.8rem}
+.etichette span{background:var(--carta);border:1px solid var(--riga);border-radius:99px;padding:2px 10px}
+.etichette .fatto{background:var(--verde);border-color:var(--verde);color:var(--carta);font-weight:600}
+.etichette .serve{background:var(--sabbia);border-color:transparent;color:var(--sabbia-testo)}
+.scelte{display:flex;flex-wrap:wrap;gap:8px;font-family:var(--sans)}
+.scelte button{font:inherit;font-size:.92rem;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--riga);background:var(--carta);color:var(--inchiostro);cursor:pointer}
+.scelte button:hover{border-color:var(--verde)}
+.scelte button[aria-pressed="true"]{background:var(--verde);border-color:var(--verde);color:var(--carta)}
+button:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+textarea{width:100%;font-family:var(--sans);font-size:.95rem;padding:8px 10px;border-radius:8px;border:1px solid var(--riga);background:var(--carta);color:var(--inchiostro);resize:vertical;min-height:2.6em}
+.salvato{font-family:var(--sans);font-size:.8rem;color:var(--verde);min-height:1.2em}
+figure{margin:0;display:flex;flex-direction:column;gap:8px}
+figure img{width:100%;height:auto;border-radius:8px;border:1px solid var(--riga);display:block}
+figcaption{font-family:var(--sans);font-size:.92rem;color:var(--grigio)}
+details{background:var(--foglio);border:1px solid var(--riga);border-radius:10px}
+details>summary{cursor:pointer;padding:14px 18px;font-family:var(--serif);font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details>summary::-webkit-details-marker{display:none}
+details>summary .stato{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--verde);white-space:nowrap}
+details .dentro{padding:0 18px 18px;display:flex;flex-direction:column;gap:14px}
+.visto{font-size:.98rem;display:flex;flex-direction:column;gap:6px;padding-left:1.1em;margin:0}
+.alt{display:flex;flex-direction:column;gap:10px}
+.alt .opzione{border-left:3px solid var(--riga);padding-left:12px;display:flex;flex-direction:column;gap:2px}
+.alt .opzione b{font-family:var(--sans)}
+.alt .opzione small{font-family:var(--sans);font-size:.85rem;color:var(--grigio)}
+.tabella{overflow-x:auto;border:1px solid var(--riga);border-radius:10px;background:var(--foglio)}
+table{border-collapse:collapse;font-family:var(--sans);font-size:.88rem;min-width:620px;width:100%}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--riga);vertical-align:top}
+th{font-weight:700;color:var(--grigio);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+tr:last-child td{border-bottom:none}
+.domanda{display:flex;flex-direction:column;gap:6px;padding-block:12px;border-bottom:1px solid var(--riga)}
+.domanda:last-child{border-bottom:none}
+.domanda p{font-size:.98rem}
+.domande{background:var(--foglio);border:1px solid var(--riga);border-radius:10px;padding:4px 18px}
+.avviso-offline{font-family:var(--sans);font-size:.88rem;color:var(--sabbia-testo);background:var(--sabbia);border-radius:8px;padding:8px 12px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<main class="pagina">
+  <header class="intro">
+    <p class="sopra">ripetizionidianalisi.com · aggiornata il 2 novembre 2026</p>
+    <h1>Proposte per vendere di più</h1>
+    <p>Il consulente ha studiato tutto il sito: 86 pagine fotografate al telefono e al computer, il percorso d'acquisto, i prezzi, i videocorsi, Pi e dieci siti concorrenti. Qui trovi le proposte, ordinate per effetto sulle vendite.</p>
+    <p class="nota">Tocca una scelta sotto ogni proposta: resta salvata e la leggo io ogni mattina. Le cose che approvi le realizzo e le segno qui come fatte.</p>
+    <p class="conto" id="conto"></p>
+    <p class="avviso-offline" id="offline" hidden>Le scelte non si possono salvare in questa vista. Puoi leggere tutto e dirmele in chat.</p>
+  </header>
+
+  <section class="urgente novita">
+    <p class="sopra">Novità di oggi · 2 novembre</p>
+    <h2>Che cosa è cambiato</h2>
+    <ul class="visto">
+      <li>Dashboard, scheda Traffico: la nuova tabella «Percorso d'acquisto» mostra, materia per materia, quante volte si arriva alla fine dell'anteprima, si apre la pagina Sblocca, si preme il tasto e si paga (mossa 9 e area 12). I numeri partono da oggi.</li>
+      <li>Sotto la stessa tabella, «Campagne dei link»: se nel link di un carosello aggiungi <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b>, vedi quante persone arrivano da quel post.</li>
+      <li>Al telefono le formule dentro il testo non vanno più a capo a metà (per esempio dopo un segno meno), quando stanno in una riga (area 7).</li>
+      <li>Pagina del videocorso: sotto il tasto di acquisto ora ci sono anche i metodi di pagamento, come nella pagina Sblocca (area 6).</li>
+      <li>Area 4 approfondita: proposte per la pagina Prezzi con i testi esatti.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="sopra">Già sul sito</p>
+    <h2>Le proposte realizzate</h2>
+    <ul class="visto">
+      <li><b>31 ottobre</b>: fine della teoria gratuita con i paragrafi veri e il prezzo nel tasto; schede bloccate con titolo e tracce visibili; pagina del videocorso con la tua presentazione; pagina Sblocca con l'iscrizione nel riquadro del prezzo; home con il titolo sulle materie scientifiche e i conteggi veri; «Chi sono» con quattro fatti, messaggi e loghi; partita IVA nel piè di pagina.</li>
+      <li><b>1° novembre</b>: tasti di acquisto in un solo verde; quiz senza pallino doppio; sopratitolo per tipo di materia; Pi con le materie per corso di studi.</li>
+      <li><b>2 novembre</b>: percorso d'acquisto e campagne dei link nella dashboard; formule nel testo che non si spezzano al telefono; metodi di pagamento nella pagina del videocorso.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="sopra">Le 10 mosse</p>
+    <h2>Le mosse con più effetto sulle vendite</h2>
+    <div id="mosse" style="display:flex;flex-direction:column;gap:14px"></div>
+  </section>
+
+  <section>
+    <p class="sopra">Bozze prima e dopo · versione 2</p>
+    <h2>Come cambierebbero le pagine al telefono</h2>
+    <p class="conto">A sinistra il sito di oggi, con la home nuova; a destra la bozza. Le parti nuove sono riquadrate da un tratteggio color sabbia.</p>
+    <div id="bozze" style="display:flex;flex-direction:column;gap:32px"></div>
+  </section>
+
+  <section>
+    <p class="sopra">Le 12 aree</p>
+    <h2>Le alternative, area per area</h2>
+    <p class="conto">Ogni area ha due o tre strade. Aprila, leggi che cosa è stato osservato e scegli quella che preferisci.</p>
+    <div id="aree" style="display:flex;flex-direction:column;gap:10px"></div>
+  </section>
+
+  <section>
+    <p class="sopra">Concorrenti</p>
+    <h2>Che cosa fanno gli altri</h2>
+    <div class="tabella"><table>
+      <thead><tr><th>Sito</th><th>Prezzo</th><th>Gratis</th><th>Come costruisce fiducia</th></tr></thead>
+      <tbody>
+        <tr><td>YouMath</td><td>Nessun prezzo visibile</td><td>Tutto il materiale consultato</td><td>Quantità di esercizi, nessun autore in evidenza</td></tr>
+        <tr><td>Skuola.net</td><td>Abbonamento da 3,99 € al mese</td><td>Parte degli appunti</td><td>Voti agli appunti</td></tr>
+        <tr><td>EduRocket (Analisi 1)</td><td>44,97 € all'anno, sconti a scadenza, PayPal in 3 rate</td><td>Una lezione aperta, prova di 48 ore</td><td>Elenco dei video, recensioni Trustpilot</td></tr>
+        <tr><td>ADC Math (Analisi 1)</td><td>140 €, accesso a vita</td><td>Nessuna anteprima</td><td>120 lezioni, 32 ore, recesso di 30 giorni</td></tr>
+        <tr><td>Superprof</td><td>In media 18 € l'ora</td><td>Prima lezione offerta da molti docenti</td><td>Foto, stelle, recensioni</td></tr>
+        <tr><td>Concorsando</td><td>39,99 € al mese</td><td>Non indicato</td><td>Numero di candidati</td></tr>
+        <tr><td>UniD (logica per concorsi)</td><td>Prezzo di listino barrato, conto alla rovescia</td><td>Nessuna prova</td><td>Rate fino a 36</td></tr>
+      </tbody>
+    </table></div>
+    <p>Chi vende videocorsi di Analisi mostra almeno una lezione e l'elenco dei video, senza chiedere di scrivere per la prova. Molti usano sconti a scadenza e prezzi barrati, che tu hai scelto di non usare: il prezzo chiaro, pagato una volta sola, è un punto di fiducia da dire in pagina. Nessuno di loro mette insieme un docente riconoscibile, materiale in stile manuale con esercizi per tipologia, un assistente sulla pagina e videocorsi che comprendono il materiale scritto.</p>
+  </section>
+
+  <section>
+    <p class="sopra">Domande per te</p>
+    <h2>Le decisioni che spettano a te</h2>
+    <p class="conto">Puoi rispondere qui sotto; le risposte restano salvate.</p>
+    <div class="domande" id="domande"></div>
+  </section>
+</main>
+
+<script>
+const MOSSE=[
+ {t:"Una lezione di prova visibile nella pagina del videocorso",p:"La pagina del videocorso da 499 € non fa vedere nessuna lezione, nessun programma e nessun volto: la prova si chiede su WhatsApp.",s:"Una lezione (anche 10 minuti) visibile a tutti, l'elenco delle 51 lezioni, la tua foto accanto al prezzo. Bozza 3.",i:"medio",e:"alto",serve:"il video di prova e l'elenco delle lezioni"},
+ {fatto:"Fatto il 30 ottobre",t:"I link Drive dei videocorsi",p:"Dopo il pagamento l'account mostra «il link sta per comparire», perché i link non sono stati inseriti.",s:"Inserire i 5 link e scrivere entro quanto tempo confermi l'accesso su Drive.",i:"piccolo",e:"alto",serve:"i 5 link e un tempo di conferma"},
+ {fatto:"Fatto il 31 ottobre",t:"Il riquadro alla fine della teoria gratuita",p:"Non dice il prezzo, scrive i titoli in minuscolo e senza accenti («teorema di lagrange») e promette il PDF anche nelle sei materie che non lo hanno.",s:"Elenco vero dei paragrafi che mancano, prezzo, collegamento alle schede gratuite. Bozza 2.",i:"piccolo",e:"alto",serve:"approvare il testo"},
+ {fatto:"Fatto il 31 ottobre",t:"Una vetrina per le schede svolte bloccate",p:"Dalla quarta scheda in poi si finisce sulla pagina di pagamento senza spiegazione, e Google trova la pagina di pagamento al posto di 694 schede.",s:"Ogni scheda bloccata mostra titolo e tracce; lo svolgimento resta riservato, come già accade per gli esercizi da fare.",i:"medio",e:"alto",serve:"approvare l'idea"},
+ {fatto:"Fatto il 31 ottobre",t:"Una home che dice chi c'è dietro",p:"Al telefono la home apre con «Scegli la materia», non nomina il docente e mette in fila molte materie in preparazione. Il fumetto di Pi copre Analisi 1.",s:"Titolo che dice che cosa si trova, tua foto e numeri veri, elenco compatto delle materie, fumetto di Pi più in basso. Bozza 1.",i:"piccolo",e:"medio-alto",serve:"approvare titolo e numeri"},
+ {fatto:"Fatto il 31 ottobre, senza la parte sui dispositivi",t:"Un acquisto più corto",p:"Per pagare 49 € servono più pagine e un modulo con cinque campi. Chi apre il sito da Instagram e poi da Safari occupa già i due dispositivi ammessi.",s:"Iscrizione dentro la pagina di acquisto, niente «ripeti la password», limite dei due dispositivi spiegato prima di pagare, avviso per chi è nel browser di Instagram. Bozza 4.",i:"medio",e:"alto",serve:"decidere se il nome resta obbligatorio"},
+ {fatto:"In parte: sconto chiesto su WhatsApp",t:"Pacchetti con il risparmio reale",p:"Non esistono pacchetti fra le materie, e chi ha comprato una materia la paga di nuovo se poi compra il videocorso.",s:"Pacchetto «Analisi completa» (Analisi 1, Analisi 2, Precorso: 133 € separati); credito della materia già pagata sul videocorso; passaggio da Analisi 1 al videocorso completo pagando la differenza.",i:"piccolo",e:"medio-alto",serve:"scegliere i prezzi"},
+ {fatto:"In attesa: serve attivare Resend",t:"Tre email di servizio",p:"Il sito non manda email: niente benvenuto, niente primi passi dopo l'acquisto, niente richiesta di un parere.",s:"Benvenuto all'iscrizione, conferma d'acquisto con i primi passi, una richiesta di parere dopo la sessione.",i:"medio",e:"medio",serve:"attivare Resend"},
+ {fatto:"Fatto il 2 novembre",t:"Sapere dove si fermano gli studenti",p:"La dashboard conta visite, iscritti e paganti, ma non sa quante volte si apre la pagina di acquisto o si chiude Paddle senza pagare, né da quale post arriva lo studente.",s:"Pochi contatori in più, senza dati personali, e il nome del post nei link di Instagram.",i:"piccolo-medio",e:"alto (indiretto)",serve:"niente"},
+ {fatto:"Fatto il 31 ottobre",t:"Una pagina «Chi sono» più asciutta",p:"Emoji, frasi generiche, numeri diversi da quelli usati altrove; 15 messaggi degli studenti e 16 loghi delle università sono già nel sito ma non compaiono.",s:"Formazione, numeri confermati, come è fatto il materiale, messaggi degli studenti con il loro consenso. Bozza 5.",i:"piccolo",e:"medio",serve:"confermare i numeri e chiedere il consenso"}
+];
+const BOZZE=[
+ {pub:"Pubblicata il 31 ottobre",k:"v1",f:"img/v2-1-home.jpg",t:"Home",c:"Titolo «Teoria ed esercizi svolti per l'esame di matematica», una riga su che cosa è gratis, i conteggi veri in ogni scheda, Statistica in una riga, la riga «Videocorsi di Carmine» per arrivare anche al pacchetto Analisi 1 e 2, la partita IVA in fondo. Legenda, pulsanti e presentazione restano come li hai fatti."},
+ {pub:"Pubblicata il 31 ottobre",k:"v2",f:"img/v2-2-blocco-teoria.jpg",t:"Fine della teoria gratuita",c:"I 7 paragrafi che mancano con i titoli veri, che cosa c'è ancora (il PDF solo dove esiste), il tasto «Sblocca Analisi 1 · 49 €» e il link alle 3 schede gratuite."},
+ {pub:"Pubblicata il 31 ottobre",k:"v3",f:"img/v2-3-videocorso.jpg",t:"Videocorso di Analisi 1 e 2",c:"La tua presentazione sotto il titolo, nessuna lezione di prova, il risparmio reale del pacchetto separato dal valore delle materie comprese, la riga sul credito per chi ha già comprato una materia, accesso su Drive «il prima possibile» e materie senza scadenza."},
+ {pub:"Pubblicata il 31 ottobre",k:"v4",f:"img/v2-4-sblocca.jpg",t:"Pagina di acquisto di una materia",c:"Più vicina a quella di oggi: nome, email e password dentro il riquadro del prezzo con il tasto «Crea l'account e paga», metodi di pagamento, i 2 dispositivi spiegati con un esempio, «senza scadenza»."},
+ {pub:"Pubblicata il 31 ottobre",k:"v5",f:"img/v2-5-chi-sono.jpg",t:"Chi sono",c:"Più vicina a quella di oggi: quattro fatti al posto delle emoji, i numeri scelti da te, i 14 messaggi degli studenti con i nomi coperti, i loghi delle università in versione scura nell'ordine del vecchio sito (da controllare), un secondo tasto per provare il materiale gratis."},
+ {pub:"Pubblicata il 31 ottobre",k:"v6",f:"img/v2-6-scheda-bloccata.jpg",t:"Scheda svolta bloccata (nuova)",c:"La vetrina che hai approvato: chi tocca la scheda 5 vede titolo, teoria usata e le tracce dei 3 esercizi; lo svolgimento resta riservato. Anche Google trova una pagina con contenuto proprio."}
+];
+const AREE=[
+ {fatto:"Fatto il 31 ottobre: presentazione in home",t:"Il messaggio dei primi cinque secondi",v:["Il titolo della home è «Scegli la materia»: non si capisce chi scrive il materiale né perché preferirlo a un sito gratuito.","Il tuo nome compare solo nel piè di pagina e in «Chi sono».","I numeri su di te cambiano da pagina a pagina: «oltre mille studenti» in un punto, «oltre 1500 studenti» in «Chi sono» e in Pi."],a:[["A","Il docente in apertura","Tua foto piccola e «Scritto da Carmine Tornincasa», con i numeri confermati. Si ritrova la persona di Instagram."],["B","Il metodo in apertura","Un estratto vero di una scheda gratuita con il calcolo sopra e la spiegazione sotto. Mostra subito la qualità."],["C","Due aperture","La A per chi arriva da Instagram, la B per chi arriva da Google. Due versioni da mantenere."]]},
+ {t:"Home e navigazione al telefono",v:["Nella prima schermata si vede una sola materia intera.","Le materie «in preparazione» occupano più spazio di quelle in vendita.","I videocorsi al telefono si trovano solo dal menu ☰ o da «Prezzi» in fondo.","Pi e WhatsApp coprono il margine destro del testo."],a:[["A","Home compatta","Tre pulsanti per le macro aree, materie in lista con i conteggi, quelle in preparazione in una riga. Bozza 1."],["B","Home di oggi con ritocchi","Materie in preparazione in fondo, fumetto di Pi spostato, «EN» nel piè di pagina."],["C","Una riga per i videocorsi","Una sola riga discreta «Videocorsi di Carmine» sotto le materie, oltre alla A o alla B."]]},
+ {t:"Che cosa è gratis e che cosa no",v:["La pagina della materia spiega bene l'anteprima.","Il riquadro a fine teoria ha i titoli rovinati, nessun prezzo e promette il PDF anche dove non c'è (esiste solo per Precorso, Analisi 1 e Analisi 2).","Le schede dalla quarta in poi portano alla pagina di pagamento senza spiegazione.","Nel Precorso sono gratuite 30 schede su 50."],a:[["A","Riquadro informativo e vetrine","Elenco vero dei paragrafi mancanti con il prezzo; ogni scheda bloccata mostra titolo e tracce."],["B","Correzioni minime","Titoli corretti, PDF citato solo dove esiste, prezzo nel tasto; per le schede, una riga di avviso nella pagina di acquisto."]]},
+ {piano2:["Titoli delle schede: «Precorso — 29 €» diventa «Precorso · 29 €», senza la lineetta lunga. È un piccolo ritocco di testo: lo faccio al prossimo giro se non mi dici di no.","A. Sotto il sommario un riquadro di tre righe: «Gratis, senza account: i primi due paragrafi della teoria di ogni argomento e le prime schede di esercizi svolti.» · «Gratis per intero: Matematica zero, il percorso dalle basi.» · «Si paga una volta sola: carta, PayPal, Apple Pay, Google Pay o gli altri metodi della finestra di pagamento.» Poi i videocorsi, poi le materie.","B. Le materie divise con i titoletti Università, Superiori, Concorsi, come in home, così chi fa il quinto anno trova subito la sua materia. Si può unire alla A.","C. Più avanti, quando esisteranno i pacchetti: una riga per corso di studi («Primo anno di Ingegneria: Precorso, Analisi 1, Algebra lineare, Fisica 1»)."],k2:"a4p",t:"Prezzi e videocorsi",v:["Nella pagina prezzi i videocorsi iniziano dopo quattro schermate al telefono.","Nel videocorso due righe verdi («risparmi 53 €» e «risparmi 133 €») possono far pensare a 186 € di sconto: la seconda è il valore delle materie comprese, non un risparmio.","Non si sa se le 16 lezioni di Analisi 2 coprono tutti gli argomenti della materia del sito."],a:[["A","Pagina con prova vera","Video di una lezione, programma, tua foto, conto trasparente. Bozza 3."],["B","Prima lezione in automatico","Dopo l'iscrizione gratuita, nell'account compare una lezione di prova. Raccoglie iscritti da ricontattare."],["C","Prova su WhatsApp come oggi","Con un messaggio già scritto più preciso. Dipende dai tuoi tempi di risposta."]]},
+ {t:"Il percorso d'acquisto",v:["Pagina di acquisto, poi pagina account con cinque campi, poi ritorno, poi tasto, poi Paddle.","La pagina dell'account non ricorda che cosa si sta comprando.","Il limite di due dispositivi è spiegato solo dopo, nelle impostazioni o nell'errore al terzo dispositivo.","I metodi di pagamento non sono elencati prima di pagare."],a:[["A","Iscrizione dentro la pagina di acquisto","Nome, email, password e via al pagamento. Bozza 4."],["B","Prima si paga, poi l'account","Il percorso più corto, ma va gestito chi paga e non completa l'account."],["C","Pagina account che ricorda il contesto","In alto «Stai acquistando Analisi matematica 1 · 49 €». Intervento minimo."]]},
+ {fatto:"In parte: presentazione nei videocorsi, metodi di pagamento in Sblocca (31/10) e nei videocorsi (2/11), partita IVA",t:"Fiducia",v:["«Chi sono» ha sette emoji, frasi generiche e una domanda retorica; il tasto finale porta a WhatsApp invece che ai prodotti.","15 messaggi degli studenti e 16 loghi delle università sono nel sito ma non usati.","La partita IVA, presente sul vecchio sito, qui manca."],a:[["A","«Chi sono» asciutta","Bozza 5, con i messaggi degli studenti solo con il loro consenso."],["B","Fiducia accanto ai prezzi","Una riga con la tua foto vicino a ogni tasto di acquisto, i metodi di pagamento, la partita IVA nel piè di pagina."],["C","Loghi delle università","Una fascia «Studenti da queste università». Va verificato se i loghi si possono usare."]]},
+ {fatto:"Fatto il 1° e il 2 novembre: tasti verdi, quiz senza pallino, sopratitoli, formule nel testo",t:"Grafica",v:["La base è coerente e delicata, con i caratteri e la carta del sito.","Nell'account ci sono nove tasti pieni di nove colori diversi.","Le formule dentro il testo al telefono vanno a capo a metà.","Nei quiz per concorsi compaiono insieme il pallino e la lettera («• A)»)."],a:[["A","Un solo colore per i tasti","Tasti di acquisto sempre nel verde del sito; il colore della materia resta nel pallino."],["B","Il blu del logo come secondo colore","Per i titoli delle pagine commerciali, per legare sito, logo e caroselli."]]},
+ {t:"Da Instagram e da Google",v:["Il link in bio porta sempre in home, non all'argomento del post.","Il sito non registra da quale post arriva lo studente.","Cercando «teorema di Rolle esercizi svolti», Google può mostrare solo una scheda di Matematica 5° anno: la teoria di Analisi 1 su Rolle è oltre i paragrafi liberi."],a:[["A","Pagina breve per il link in bio","Tua foto, tre ingressi, i caroselli recenti con il collegamento all'argomento."],["B","Un link preciso per ogni carosello","Lo studente atterra sull'argomento del post e la dashboard dice quale post vende."],["C","Compiti d'esame svolti anche sul sito","Gli stessi compiti dei caroselli che funzionano meglio, una pagina per compito."]]},
+ {t:"Pacchetti e offerte",v:["Ogni materia si compra da sola.","Chi compra il videocorso di Analisi 1 e poi quello di Analisi 2 paga 552 € invece di 499 €.","Fra la materia a 49 € e il videocorso a 360 € c'è un salto ampio."],a:[["A","Pacchetto «Analisi completa»","Analisi 1, Analisi 2 e Precorso (133 € separati) a un prezzo che decidi tu."],["B","Pacchetti per corso di laurea","Per esempio «Primo anno di Ingegneria» o «Economia»."],["C","Credito e completamento","La materia già pagata si scala dal videocorso; chi ha Analisi 1 completa con Analisi 2 pagando la differenza."]]},
+ {t:"Dopo l'acquisto",v:["Dopo il pagamento c'è solo la ricevuta di Paddle.","L'account non suggerisce la materia successiva (Analisi 2 dopo Analisi 1)."],a:[["A","Tre email di servizio","Benvenuto, primi passi, richiesta di un parere."],["B","Inviti alla materia successiva via email","Richiede di aggiornare l'informativa sulla privacy."],["C","Senza email","Un riquadro nell'account con la materia successiva."]]},
+ {fatto:"Fatto il 1° novembre: materie per corso di studi",t:"Pi",v:["Rispetta le tue scelte: non propone prezzi e non insiste.","Non sa dello sblocco gratuito per chi ha seguito i tuoi corsi.","Nei giorni di molto traffico la quota gratuita può esaurirsi e Pi smette di rispondere a tutti."],a:[["A","Informazioni complete e coerenti","Sblocco per gli ex studenti, numeri dell'anteprima, materie adatte a ogni corso di laurea."],["B","Pi nella pagina di acquisto","Un collegamento discreto per chiedere che cosa comprende la materia."],["C","Piano a pagamento nei periodi d'esame","5 $ al mese più il consumo, per non lasciare Pi muto."]]},
+ {fatto:"Fatto il 2 novembre: tabella in dashboard → Traffico",piano:["Pagina Sblocca e pagina di ogni videocorso contate a parte, non più insieme alla pagina della materia.","Quante volte uno studente arriva al riquadro di fine anteprima.","Quante volte si tocca «Crea l'account e paga» o «Sblocca ora».","Da quale carosello arriva lo studente: ogni link di Instagram con il nome del post (per esempio utm_campaign=limiti-notevoli).","In dashboard, materia per materia: pagine viste → fine anteprima → pagina Sblocca → tasto → pagamenti."],t:"Misurare",v:["La dashboard sa quanti visitano, si iscrivono e pagano.","Non sa quante volte si apre la pagina di acquisto, si preme il tasto o si chiude Paddle senza pagare.","Tutti i videocorsi finiscono in un'unica voce."],a:[["A","Contatori nel sito","Una tabella senza dati personali, mostrata in dashboard materia per materia."],["B","Statistiche di Cloudflare","Nessun codice da scrivere, ma non vede i passaggi dentro Paddle."]]}
+];
+const DOMANDE=[
+ "Quali numeri usiamo ovunque: «oltre mille studenti, più di diecimila ore di lezione» oppure «oltre 1500 studenti, 78 province, oltre 10 anni»?",
+ "Quale lezione (o quali 10 minuti) del videocorso possiamo mostrare a tutti? Hai l'elenco delle 51 lezioni con i titoli?",
+ "Entro quanto tempo puoi promettere di confermare l'accesso su Drive?",
+ "Possiamo scrivere che le materie restano nell'account senza scadenza? E le cartelle Drive?",
+ "Accetti una sola riga discreta «Videocorsi di Carmine» in home?",
+ "Va bene rendere visibili a tutti le tracce delle schede svolte dalla quarta in poi, con lo svolgimento riservato?",
+ "Ti interessa il pacchetto «Analisi completa»? A quale prezzo? E i pacchetti per corso di laurea?",
+ "Vuoi che la materia già pagata venga scalata dal prezzo del videocorso? E il passaggio da Analisi 1 al videocorso completo pagando la differenza (139 €)?",
+ "Le 16 lezioni del videocorso di Analisi 2 coprono tutti gli 11 argomenti della materia del sito?",
+ "Attiviamo le tre email di servizio? Vuoi anche gli inviti alla materia successiva?",
+ "Puoi chiedere il consenso agli studenti dei 15 messaggi? Li mostriamo con il nome coperto?",
+ "Vuoi mostrare i loghi delle università?",
+ "Prepariamo i PDF anche per le altre sei materie, oppure togliamo la promessa del PDF dove non c'è?",
+ "Nel Precorso restano gratuite 3 schede su 5 per argomento, oppure 2?",
+ "Vuoi indicare la partita IVA nel piè di pagina?",
+ "Accetti il piano a pagamento di Cloudflare per Pi nei periodi d'esame?",
+ "Chiediamo a Paddle se si può pagare il videocorso a rate?",
+ "Vuoi un codice personale che sblocca subito le materie a chi ha seguito un tuo corso, al posto dello sblocco a mano?",
+ "Posso aggiungere al codice di Paddle due righe che contano soltanto quante volte la finestra di pagamento si apre e quante si chiude senza pagare? Il pagamento non cambia."
+];
+
+const stato={}; let db=null; const timer={};
+const el=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e};
+
+function bottoni(chiave,opzioni){
+  const box=el("div","scelte"); box.dataset.chiave=chiave;
+  opzioni.forEach(([v,lab])=>{const b=el("button",null,lab);b.type="button";b.dataset.v=v;b.setAttribute("aria-pressed","false");
+    b.addEventListener("click",()=>scegli(chiave,stato[chiave]?.valore===v?null:v));box.append(b)});
+  return box;
+}
+function render(){
+  const m=document.getElementById("mosse");
+  MOSSE.forEach((x,i)=>{const c=el("article","mossa");const t=el("div","testa");t.append(el("span","num",String(i+1)));
+    const corpo=el("div","corpo");corpo.append(el("h3",null,x.t),el("p","problema",x.p),el("p",null,x.s));
+    const et=el("div","etichette");if(x.fatto)et.append(el("span","fatto",x.fatto));et.append(el("span",null,"Impegno "+x.i),el("span",null,"Effetto "+x.e),el("span","serve","Serve da te: "+x.serve));
+    corpo.append(et,bottoni("m"+(i+1),[["si","Sì, facciamola"],["dopo","Più avanti"],["no","No"]]));
+    t.append(corpo);c.append(t);m.append(c)});
+  const bz=document.getElementById("bozze");
+  BOZZE.forEach((x,i)=>{const f=el("figure");const img=el("img");img.src=x.f;img.alt="Bozza "+(i+1)+", "+x.t+": prima e dopo al telefono";img.loading="lazy";
+    const ta=el("textarea");ta.id=x.k+"-nota";ta.rows=2;ta.placeholder="Che cosa cambieresti? (facoltativo)";const ok=el("span","salvato");ok.id="ok-"+ta.id;
+    ta.addEventListener("input",()=>{clearTimeout(timer[ta.id]);ok.textContent="";timer[ta.id]=setTimeout(()=>salvaTesto(ta.id,ta.value),900)});
+    f.append(el("h3",null,"Bozza "+(i+1)+". "+x.t),...(x.pub?[(()=>{const e=el("div","etichette");e.append(el("span","fatto",x.pub));return e})()]:[]),img,el("figcaption",null,x.c),bottoni(x.k,[["si","Pubblichiamola"],["ritocchi","Sì, con ritocchi"],["no","No"]]),ta,ok);bz.append(f)});
+  const ar=document.getElementById("aree");
+  AREE.forEach((x,i)=>{const d=el("details");const s=el("summary");s.append(el("span",null,(i+1)+". "+x.t),el("span","stato"));s.lastChild.id="st-a"+(i+1);d.append(s);
+    const dentro=el("div","dentro");dentro.append(el("p","sopra","Osservato"));const ul=el("ul","visto");x.v.forEach(v=>ul.append(el("li",null,v)));dentro.append(ul);
+    dentro.append(el("p","sopra","Alternative"));const alt=el("div","alt");
+    x.a.forEach(([l,t,dsc])=>{const o=el("div","opzione");const b=el("b",null,l+". "+t);o.append(b,el("small",null,dsc));alt.append(o)});
+    if(x.fatto){const e=el("div","etichette");e.append(el("span","fatto",x.fatto));dentro.prepend(e)}
+    if(x.piano){dentro.append(el("p","sopra","Approfondimento del 1° novembre: come la farei"));const pl=el("ol","visto");x.piano.forEach(v=>pl.append(el("li",null,v)));dentro.append(pl,el("p","conto","Tutti numeri per giorno, senza email né dati personali. Il codice di Paddle non si tocca: per contare anche le finestre di pagamento chiuse senza pagare serve il tuo sì (domanda 19)."))}
+    if(x.piano2){dentro.append(el("p","sopra","Approfondimento del 2 novembre: la pagina Prezzi"));const pl=el("ul","visto");x.piano2.forEach(v=>pl.append(el("li",null,v)));dentro.append(pl,el("p","conto","Scegli qui per la pagina Prezzi; i pulsanti più sotto restano per la pagina del videocorso."),bottoni(x.k2,[["A","Scelgo A"],["B","Scelgo B"],["AB","A e B insieme"],["nessuna","Lascia com'è"]]))}
+    dentro.append(alt,bottoni("a"+(i+1),x.a.map(([l])=>[l,"Scelgo "+l]).concat([["nessuna","Nessuna"]])));d.append(dentro);ar.append(d)});
+  const dm=document.getElementById("domande");
+  DOMANDE.forEach((q,i)=>{const w=el("div","domanda");w.append(el("p",null,(i+1)+". "+q));const ta=el("textarea");ta.id="q"+(i+1);ta.rows=2;ta.placeholder="La tua risposta";
+    const ok=el("span","salvato");ok.id="ok-q"+(i+1);
+    ta.addEventListener("input",()=>{clearTimeout(timer[ta.id]);ok.textContent="";timer[ta.id]=setTimeout(()=>salvaTesto(ta.id,ta.value),900)});
+    w.append(ta,ok);dm.append(w)});
+}
+function aggiorna(){
+  document.querySelectorAll(".scelte").forEach(box=>{const v=stato[box.dataset.chiave]?.valore;box.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===v)))});
+  AREE.forEach((_,i)=>{const v=stato["a"+(i+1)]?.valore;const s=document.getElementById("st-a"+(i+1));if(s)s.textContent=v?(v==="nessuna"?"Nessuna":"Scelta "+v):""});
+  BOZZE.forEach(b=>{const id=b.k+"-nota";const ta=document.getElementById(id);const t=stato[id]?.testo;if(ta&&document.activeElement!==ta&&typeof t==="string")ta.value=t});
+  {const ta=document.getElementById("m3-nota");const t=stato["m3-nota"]?.testo;if(ta&&document.activeElement!==ta&&typeof t==="string")ta.value=t}
+  DOMANDE.forEach((_,i)=>{const id="q"+(i+1);const ta=document.getElementById(id);const t=stato[id]?.testo;if(ta&&document.activeElement!==ta&&typeof t==="string")ta.value=t});
+  const fatte=MOSSE.filter((_,i)=>stato["m"+(i+1)]?.valore).length,aree=AREE.filter((_,i)=>stato["a"+(i+1)]?.valore).length,risp=DOMANDE.filter((_,i)=>(stato["q"+(i+1)]?.testo||"").trim()).length;
+  document.getElementById("conto").innerHTML="";const c=document.getElementById("conto");
+  [["Mosse decise",fatte,10],["Aree scelte",aree,12],["Risposte",risp,DOMANDE.length]].forEach(([l,n,t],k)=>{if(k)c.append(" · ");const b=el("b",null,n+" su "+t);c.append(l+": ",b)});
+}
+async function scegli(chiave,valore){
+  stato[chiave]={...(stato[chiave]||{}),valore};aggiorna();
+  if(!db)return;
+  try{await db.collection("scelte").doc(chiave).set({valore:valore,quando:new Date().toISOString()})}catch(e){mostraOffline()}
+}
+async function salvaTesto(id,testo){
+  stato[id]={...(stato[id]||{}),testo};aggiorna();
+  if(!db)return;
+  try{await db.collection("scelte").doc(id).set({testo:testo,quando:new Date().toISOString()});const ok=document.getElementById("ok-"+id);if(ok)ok.textContent="Salvato"}catch(e){mostraOffline()}
+}
+function mostraOffline(){document.getElementById("offline").hidden=false}
+render();
+(()=>{const ta=document.getElementById("m3-nota");if(ta)ta.addEventListener("input",()=>{clearTimeout(timer[ta.id]);document.getElementById("ok-m3-nota").textContent="";timer[ta.id]=setTimeout(()=>salvaTesto(ta.id,ta.value),900)});})();
+(()=>{const vecchio=document.querySelector('[data-chiave="m3-pubblica"]');if(vecchio)vecchio.replaceWith(bottoni("m3-pubblica",[["si","Sì, pubblichiamolo"],["ritocchi","Prima voglio cambiare qualcosa"],["no","No"]]));})();
+aggiorna();
+(async()=>{
+  const c=window.claude;if(!c||!c.use){mostraOffline();return}
+  try{db=await c.use("db")}catch(e){db=null}
+  if(!db){mostraOffline();return}
+  const t=setTimeout(()=>{},10000);
+  db.collection("scelte").onSnapshot(snap=>{clearTimeout(t);snap.docs.forEach(d=>{stato[d.id]={...d.data()}});aggiorna()},()=>{clearTimeout(t);mostraOffline()});
+})();
+</script>

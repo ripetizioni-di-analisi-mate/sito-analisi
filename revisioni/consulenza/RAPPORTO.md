@@ -33,6 +33,8 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 
 **Stato delle mosse al 01/11/2026.** Fatte: 2 (link Drive, 8b4d571), 3 (fine della teoria gratuita, 7d8300e), 4 (vetrine delle schede bloccate, 63fd681), 5 (home, 904ff8e), 6 (Sblocca con iscrizione nel riquadro, 932da86), 10 (Chi sono, fd546fb). In parte: 7 (sconto per chi ha già una materia chiesto su WhatsApp, 66141f5; i pacchetti fra materie e i codici richiedono Paddle). Approvate e ferme per un account esterno: 8 (email, serve Resend). Approvata e pronta da realizzare: 9 (contatori, vedi 2.12). Rimandata: 1 (lezione di prova).
 
+**Realizzate il 02/11/2026.** Mossa 9 e area 2.12 A: percorso d'acquisto e campagne dei link nella dashboard (80ddf2e7). Area 2.7: formule nel testo che non si spezzano (392167ee). Area 2.6 B: metodi di pagamento anche nella pagina del videocorso (36c10d8f). Restano: 2.6 B la riga con la foto accanto al prezzo della pagina Sblocca; 2.7 `og.png`; 2.8 B link dei caroselli con `utm_campaign` (ora la dashboard li conta: basta usarli); 2.9 B pacchetti (serve Paddle); 2.10 B inviti alla materia successiva (serve l'informativa aggiornata da un professionista).
+
 **Aree realizzate il 01/11/2026.** 2.7 A: tasti di acquisto tutti nel verde del sito (6aea71f), quiz A-E senza pallino doppio (6aea71f), sopratitolo per tipo di materia (b4f2b91). 2.11 A: Pi conosce le materie utili per corso di studi (684918e); lo sblocco per gli ex studenti, i numeri dell'anteprima e i numeri di Carmine erano già stati aggiunti (fd546fb, 1dae697). Restano della 2.7: formule nel testo che vanno a capo a metà, `og.png` con tutte le materie.
 
 ---
@@ -152,6 +154,19 @@ Il riquadro alla fine della teoria gratuita è prodotto dopo la build da `script
 **Alternative per la pagina prezzi.**
 - **A. Prima i videocorsi, poi le materie, poi i pacchetti** (se approvi la mossa 7), con una tabella breve di ciò che è gratis e una sezione di domande (pagamento, ricevuta, dispositivi, durata). Impegno piccolo. Rischio basso.
 - **B. Prezzi per percorso di studi**: "Ingegneria, primo anno", "Economia", "Superiori", "Concorsi", ciascuno con le materie e i videocorsi adatti. Pro: lo studente trova subito che cosa gli serve. Contro: va mantenuta quando aggiungi materie. Impegno medio. Rischio basso.
+
+**Approfondimento del 02/11/2026: la pagina `/prezzi`, con i testi esatti.**
+Osservato oggi nel codice (`src/viste/Prezzi.astro`, testi in `src/i18n.ts`):
+- i titoli delle schede sono «Precorso — 29 €», con la lineetta lunga che la guida dei testi esclude (riga 20);
+- l'ordine è: nove materie, poi i videocorsi, poi «Che cosa comprende l'accesso completo»; al telefono i videocorsi arrivano dopo quattro schermate;
+- la pagina non dice che cosa si legge gratis, non nomina Matematica zero (gratuita) e non elenca i metodi di pagamento, che ora sono scritti nella pagina Sblocca e nelle pagine dei videocorsi;
+- il sommario dice «su un massimo di 2 dispositivi»: per la tua scelta sulla pagina di acquisto la frase può restare qui, dove si confrontano i prezzi, oppure andare via; la lascio come è.
+
+Proposte, ciascuna con il testo esatto:
+- **Ritocco subito (piccolo, rientra nei ritocchi di testo):** riga 20, «{m.titolo} — {m.prezzo} €» diventa «{m.titolo} · {m.prezzo} €». Lo faccio al prossimo giro se non mi dici di no.
+- **A. Ordine e riquadro del gratis.** Subito sotto il sommario un riquadro di tre righe: «Gratis, senza account: i primi due paragrafi della teoria di ogni argomento e le prime schede di esercizi svolti.» / «Gratis per intero: Matematica zero, il percorso dalle basi.» / «Si paga una volta sola: carta, PayPal, Apple Pay, Google Pay o gli altri metodi della finestra di pagamento.» Poi i videocorsi (con il titolo «Videocorsi con le lezioni di Carmine»), poi le materie, poi «Che cosa comprende l'accesso completo». File: `src/viste/Prezzi.astro`, testi nuovi in `src/i18n.ts` (versione inglese senza videocorsi). Impegno piccolo. Rischio basso: chi cerca solo una materia scorre un po' di più.
+- **B. Materie divise per area, come in home.** Titoletti «Università», «Superiori», «Concorsi» sopra le schede delle materie (usa il campo `gruppo` di `src/data/materie.ts`), così uno studente di quinta superiore trova subito i suoi 29 €. Si può combinare con A. Impegno piccolo. Rischio nullo.
+- **C. Una riga per corso di studi sotto i titoletti** (da fare solo dopo i pacchetti della 2.9): «Primo anno di Ingegneria: Precorso, Analisi 1, Algebra lineare, Fisica 1.» Senza prezzo complessivo finché i pacchetti non esistono su Paddle.
 
 ### 2.5 Percorso d'acquisto
 

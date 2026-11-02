@@ -40,3 +40,4 @@ Scelte salvate dalla pagina "Piano vendite del sito" (artifact Ki1nAGDQ6mxhgWqPk
 - Mossa 1 (lezione di prova): «dopo». Mossa 3: «pubblichiamola».
 - Aree, alternativa scelta: 2.1 A (il docente in apertura), 2.6 B (fiducia nelle pagine di vendita), 2.7 A (un solo colore per i tasti di acquisto), 2.8 B, 2.9 B (pacchetti per corso di laurea), 2.10 B (inviti alla materia successiva), 2.11 A (Pi con informazioni complete), 2.12 A (contatori aggregati). Aree 2.2-2.5 senza scelta (coperte dalle bozze).
 - 01/11/2026: nessuna scelta nuova o cambiata dal 31/10 mattina; nessun commento sulla pagina.
+- 02/11/2026: nessuna scelta nuova o cambiata (49 documenti, gli ultimi del 31/10 mattina); nessun commento sulla pagina.
