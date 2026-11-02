@@ -1121,7 +1121,7 @@ html.collegato .solo-collegati { display: revert; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
 
 /* Pagina della materia, con l'account: data dell'esame e progressi per argomento */
-.esame-materia { margin: 0 0 1.4rem; font-family: var(--ui); display: flex; align-items: center; gap: 0.6rem 1rem; flex-wrap: wrap; }
+.esame-materia { margin: 0 0 1.4rem; padding: 0.95rem 1.1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 5%, transparent); font-family: var(--ui); display: flex; align-items: center; gap: 0.6rem 1rem; flex-wrap: wrap; }
 html.collegato .esame-materia.solo-collegati { display: flex; }
 .esame-materia[hidden], .esame-materia [hidden] { display: none !important; }
 .esame-corpo { flex: 1; min-width: 13rem; display: flex; flex-direction: column; gap: 0.15rem; }
@@ -1137,42 +1137,13 @@ html.collegato .esame-materia.solo-collegati { display: flex; }
 .esame-errore { flex-basis: 100%; color: var(--c-attenzione); font-size: 0.88rem; }
 .esame-apri, .esame-modifica { font: 600 0.9rem var(--ui); color: var(--accento); background: none; border: 1px solid color-mix(in srgb, var(--accento) 35%, transparent); border-radius: 999px; padding: 0.42rem 1rem; cursor: pointer; white-space: nowrap; }
 .esame-apri:hover, .esame-modifica:hover { background: color-mix(in srgb, var(--accento) 7%, transparent); }
-.esame-foglio { display: none; }
-/* A: riquadro come quello dell'anteprima, con l'icona del calendario */
-.esame-materia.v-a { padding: 0.95rem 1.1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 5%, transparent); }
-.v-a .esame-foglio { display: block; width: 2.4rem; height: 2.4rem; color: var(--accento); flex: none; align-self: flex-start; }
-.v-a .esame-foglio span { display: none; }
-.v-a .esame-icona { width: 100%; height: 100%; }
-/* B: una riga sola, senza riquadro */
-.esame-materia.v-b { padding: 0.7rem 0; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); gap: 0.4rem 0.8rem; }
-.v-b .esame-foglio { display: block; width: 1.5rem; height: 1.5rem; color: var(--accento); flex: none; align-self: flex-start; margin-top: 0.1rem; }
-.v-b .esame-foglio span { display: none; }
-.v-b .esame-icona { width: 100%; height: 100%; }
-.v-b .esame-corpo { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.6rem; }
-.v-b .esame-titolo { font-size: 0.98rem; }
-.v-b .esame-modulo { flex-basis: 100%; }
-.v-b .esame-apri, .v-b .esame-modifica { border: 0; padding: 0.2rem 0; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
-.v-b .esame-apri:hover, .v-b .esame-modifica:hover { background: none; }
-/* C: foglio del calendario con il giorno dell'esame */
-.esame-materia.v-c { padding: 0.95rem 1.1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: #fff; gap: 0.6rem 1.1rem; }
-.v-c .esame-foglio { display: flex; flex-direction: column; align-items: center; width: 4.2rem; flex: none; align-self: flex-start; border: 1px solid color-mix(in srgb, var(--accento) 30%, var(--riga)); border-radius: 8px; overflow: hidden; background: #fff; }
-.v-c .esame-mese { display: block; width: 100%; text-align: center; background: var(--accento); color: #fff; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.22rem 0; }
-.v-c .esame-giorno { display: block; font: 600 1.9rem/1 var(--titoli); color: var(--inchiostro); padding: 0.4rem 0 0.45rem; }
-.v-c .esame-icona { width: 2.2rem; height: 2.2rem; margin: 0.9rem 0; color: var(--accento); }
-.v-c.con-data .esame-icona { display: none; }
-.v-c:not(.con-data) .esame-mese, .v-c:not(.con-data) .esame-giorno { display: none; }
-.v-c:not(.con-data) .esame-foglio { border-style: dashed; }
-.v-c.con-data .esame-titolo { font: 600 1.35rem/1.25 var(--titoli); color: var(--inchiostro); }
+.esame-icona { width: 2.4rem; height: 2.4rem; color: var(--accento); flex: none; align-self: flex-start; }
+.esame-icona svg { width: 100%; height: 100%; display: block; }
 @media (max-width: 30rem) {
   .esame-modulo { display: grid; grid-template-columns: 1fr 1.7fr 1.25fr; gap: 0.45rem; }
   .esame-modulo select { width: 100%; padding-left: 0.55rem; padding-right: 1.5rem; background-position: right 0.5rem center; }
   .esame-azioni, .esame-errore { grid-column: 1 / -1; }
   .esame-materia .esame-apri, .esame-materia .esame-modifica { margin-left: 3.4rem; }
-  .v-b .esame-apri, .v-b .esame-modifica { margin-left: 2.3rem; }
-  .v-c .esame-foglio { width: 3.5rem; }
-  .v-c .esame-giorno { font-size: 1.6rem; }
-  .v-c .esame-mese { font-size: 0.62rem; letter-spacing: 0.04em; }
-  .v-c .esame-apri, .v-c .esame-modifica { margin-left: 4.6rem; }
 }
 .griglia-argomenti .progresso-argomento { grid-column: 2; }
 .progresso-argomento { display: grid; gap: 0.3rem; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); }

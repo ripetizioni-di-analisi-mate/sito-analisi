@@ -67,9 +67,8 @@ const en = lingua === 'en';
     </div>
   )}
   <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>
-    <div class="esame-foglio" aria-hidden="true">
-      <span class="esame-mese"></span><span class="esame-giorno"></span>
-      <svg class="esame-icona" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg>
+    <div class="esame-icona" aria-hidden="true">
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg>
     </div>
     <div class="esame-corpo">
       <strong class="esame-titolo">{en ? 'Exam date' : 'Data dell\'esame'}</strong>
@@ -162,8 +161,6 @@ const en = lingua === 'en';
       const d = new Date(data + 'T12:00:00');
       const giorni = Math.round((d - Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00')) / 86400000);
       const quando = d.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      $('.esame-mese').textContent = d.toLocaleDateString(lingua, { month: 'short' }).replace('.', '') + ' ' + d.getFullYear();
-      $('.esame-giorno').textContent = d.getDate();
       titolo.textContent = giorni > 1 ? (en ? `${giorni} days to the exam` : `Mancano ${giorni} giorni all'esame`)
         : giorni === 1 ? (en ? 'Exam tomorrow' : 'L\'esame è domani')
         : giorni === 0 ? (en ? 'Exam today' : 'L\'esame è oggi')
@@ -179,7 +176,9 @@ const en = lingua === 'en';
     salva.addEventListener('click', () => {
       const g = Number(selG.value), m = Number(selM.value), a = Number(selA.value);
       const d = new Date(a, m - 1, g);
-      if (d.getDate() !== g) { errore.hidden = false; return; }
+      const ieri = new Date(); ieri.setHours(0, 0, 0, 0);
+      if (d.getDate() !== g) { errore.textContent = en ? 'This date does not exist.' : 'Questa data non esiste.'; errore.hidden = false; return; }
+      if (d < ieri) { errore.textContent = en ? 'This date has already passed.' : 'Questa data è già passata.'; errore.hidden = false; return; }
       invia(`${a}-${String(m).padStart(2, '0')}-${String(g).padStart(2, '0')}`);
     });
     togli.addEventListener('click', () => invia(null));
