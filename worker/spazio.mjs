@@ -10,6 +10,7 @@ export function spazioHome(st, nome, en) {
   const c = RANGHI[r - 1];
   const fuori = {
     '.spazio-studente': { stile: `${stileRango(r)}; --rango-chiaro: ${c.chiaro}; --rango-medio: ${c.medio}; --rango-scuro: ${c.scuro}` },
+    '.esame-home': { stile: `${stileRango(r)}; --rango-chiaro: ${c.chiaro}; --rango-medio: ${c.medio}; --rango-scuro: ${c.scuro}` }, // conto alla rovescia accanto al titolo
     '.spazio-studente .ss-stemma': { html: stemmaSVG(r, { perc: st.perc, id: 'h', nastro: true, livello: st.livello, etichetta: en ? 'LV.' : 'LIV.' }) },
     '.spazio-studente .ss-rango': { testo: nomeRango(st.livello, l) }, // solo rango e grado: il livello è già sul nastro dello stemma (richiesta di Carmine, 02/11)
     '.spazio-studente .ss-nome': { testo: nome },

@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
 import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
+import EsameHome from '../components/EsameHome.astro';
 import GratisHome from '../components/GratisHome.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
@@ -35,8 +36,14 @@ const icona = {
 };
 ---
 <Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home }}>
-  {t.homeSopra && <p class="sopratitolo">{t.homeSopra}</p>}
-  <h1>{t.homeTitolo}</h1>
+  {/* Accanto al titolo, solo con l'account e una data d'esame inserita: il conto alla rovescia all'esame più vicino. */}
+  <div class="testa-home">
+    <div class="testa-home-titolo">
+      {t.homeSopra && <p class="sopratitolo">{t.homeSopra}</p>}
+      <h1>{t.homeTitolo}</h1>
+    </div>
+    <EsameHome lingua={lingua} versione="a" />
+  </div>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
   <div class="solo-ospiti">

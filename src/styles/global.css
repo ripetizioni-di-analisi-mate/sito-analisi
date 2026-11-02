@@ -339,6 +339,43 @@ html.collegato .spazio-studente {
 .ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .ss-argomento { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
 .ss-riprendi:hover .ss-argomento { text-decoration-color: currentColor; }
+/* Conto alla rovescia all'esame accanto al titolo della home (src/components/EsameHome.astro): solo con l'account e una data inserita.
+   Colori del rango scritti dal Worker (worker/spazio.mjs), come nello spazio personale. */
+.testa-home { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.8rem 1rem; }
+.esame-home, .esame-home[hidden] { display: none; }
+html.collegato .esame-home:not([hidden]) { display: flex; }
+.esame-home { align-items: center; gap: 0.75rem; max-width: 15.5rem; font-family: var(--ui); color: var(--inchiostro); text-decoration: none; animation: ss-compare 0.4s ease-out both; }
+.esame-home .eh-corpo { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.esame-home .eh-data { font-size: 0.82rem; color: var(--inchiostro-2); }
+.esame-home .eh-data::first-letter { text-transform: uppercase; }
+/* A: riquadro bianco come lo spazio personale, icona del calendario nei colori del rango */
+.eh-a { padding: 0.7rem 0.95rem 0.7rem 0.75rem; background: #fff; border: 1px solid color-mix(in srgb, var(--rango-bordo, var(--riga)) 40%, var(--riga)); border-radius: 14px; }
+.eh-a:hover { border-color: color-mix(in srgb, var(--rango-bordo, var(--riga)) 70%, var(--riga)); }
+.eh-a .eh-icona { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 10px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
+.eh-a .eh-icona svg { width: 1.45rem; height: 1.45rem; }
+.eh-a .eh-giorni { font-family: var(--titoli); font-size: 1.2rem; font-weight: 700; color: var(--rango-testo, var(--inchiostro)); white-space: nowrap; }
+.eh-a .eh-materia { margin-top: 0.1rem; font-size: 0.82rem; color: var(--inchiostro-2); }
+/* B: foglio di calendario con mese e giorno dell'esame, testo accanto senza riquadro */
+.eh-b { gap: 0.85rem; }
+.eh-b .eh-foglio { flex: none; display: flex; flex-direction: column; width: 3.6rem; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid color-mix(in srgb, var(--rango-bordo, var(--riga)) 45%, var(--riga)); text-align: center; }
+.eh-b .eh-mese { padding: 0.18rem 0 0.14rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: var(--rango-medio, var(--accento)); }
+.eh-b .eh-num { padding: 0.1rem 0 0.25rem; font-family: var(--titoli); font-size: 1.75rem; font-weight: 700; line-height: 1.1; color: var(--inchiostro); }
+.eh-b small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
+.eh-b .eh-materia { font-family: var(--titoli); font-size: 1.05rem; color: var(--inchiostro); }
+.eh-b .eh-giorni { font-size: 0.9rem; font-weight: 600; color: var(--rango-testo, var(--accento)); }
+.eh-b:hover .eh-materia { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+/* C: solo testo, numero grande nei colori del rango e linea sottile a sinistra */
+.eh-c { gap: 0.7rem; padding-left: 1rem; border-left: 2px solid color-mix(in srgb, var(--rango-bordo, var(--riga)) 55%, var(--riga)); }
+.eh-c .eh-n { font-family: var(--titoli); font-size: 3rem; font-weight: 700; line-height: 1; color: var(--rango-testo, var(--accento)); }
+.eh-c .eh-n[hidden] { display: none; }
+.eh-c .eh-giorni { font-size: 0.95rem; font-weight: 600; }
+.eh-c .eh-materia { font-size: 0.9rem; color: var(--inchiostro); }
+.eh-c:hover .eh-materia { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) {
+  .testa-home { grid-template-columns: 1fr; }
+  .esame-home { max-width: none; }
+  .eh-c .eh-n { font-size: 2.4rem; }
+}
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } }

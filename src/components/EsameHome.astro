@@ -1,0 +1,41 @@
+---
+// Conto alla rovescia all'esame in home, nello spazio a destra del titolo (richiesta di Carmine del 03/11).
+// Compare solo a chi ha fatto l'accesso e ha inserito almeno una data d'esame (pagina della materia); mostra l'esame più vicino.
+// I colori del rango li scrive il Worker (worker/spazio.mjs); materia, giorni e data li completa lo script di SpazioStudente.astro (/api/percorso).
+// Prototipo con tre versioni (A riquadro, B foglio di calendario, C solo testo): resta quella scelta da Carmine.
+import type { Lingua } from '../i18n';
+interface Props { lingua: Lingua; versione?: 'a' | 'b' | 'c' }
+const { lingua, versione = 'a' } = Astro.props;
+const en = lingua === 'en';
+---
+<a class={`esame-home eh-${versione}`} href="#" hidden data-versione={versione}>
+  {versione === 'a' && (
+    <>
+      <span class="eh-icona" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg></span>
+      <span class="eh-corpo">
+        <strong class="eh-giorni"></strong>
+        <span class="eh-materia"></span>
+      </span>
+    </>
+  )}
+  {versione === 'b' && (
+    <>
+      <span class="eh-foglio" aria-hidden="true"><span class="eh-mese"></span><span class="eh-num"></span></span>
+      <span class="eh-corpo">
+        <small>{en ? 'Exam' : 'Esame'}</small>
+        <strong class="eh-materia"></strong>
+        <span class="eh-giorni"></span>
+      </span>
+    </>
+  )}
+  {versione === 'c' && (
+    <>
+      <span class="eh-n"></span>
+      <span class="eh-corpo">
+        <strong class="eh-giorni"></strong>
+        <span class="eh-materia"></span>
+        <span class="eh-data"></span>
+      </span>
+    </>
+  )}
+</a>
