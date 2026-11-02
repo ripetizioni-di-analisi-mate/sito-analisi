@@ -44,10 +44,10 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
       <fieldset>
         <legend>Punteggio</legend>
         <div class="sim-scelte">
-          <label>Risposta corretta <input type="number" name="corretta" value="1" step="0.05" inputmode="decimal" /></label>
-          <label>Risposta errata <input type="number" name="errata" value="0" step="0.05" inputmode="decimal" /></label>
-          <label>Risposta non data <input type="number" name="nondata" value="0" step="0.05" inputmode="decimal" /></label>
-          <label>Punteggio minimo <input type="number" name="soglia" step="0.5" inputmode="decimal" placeholder="facoltativo" /></label>
+          <label>Risposta corretta <input type="text" name="corretta" value="1" inputmode="decimal" /></label>
+          <label>Risposta errata <input type="text" name="errata" value="0" /></label>
+          <label>Risposta non data <input type="text" name="nondata" value="0" /></label>
+          <label>Punteggio minimo <input type="text" name="soglia" inputmode="decimal" placeholder="facoltativo" /></label>
         </div>
         <p class="sim-nota-punti">Alcuni bandi assegnano un punteggio negativo alle risposte errate, per esempio −0,25 punti: i valori di ogni prova si leggono nel bando. Il punteggio minimo, se indicato, è quello richiesto per superare la prova.</p>
       </fieldset>
@@ -108,7 +108,9 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
 
   let token = '', domande: Domanda[] = [], ordini: number[][] = [], risposte: (number | null)[] = [];
   let fine = 0, inizio = 0, timer = 0, consegnato = false;
-  let pesi = { corretta: 1, errata: 0, nondata: 0 }, soglia: number | null = null;
+  let pesi = { corretta: 1, errata: 0, nondata: 0 }, soglia: number | null = null, piuMaterie = false;
+  const etichetta = (m: string, a: string) => (piuMaterie ? `${nomeMat(m)} · ${nomeArg(m, a)}` : nomeArg(m, a));
+  const minutiTesto = (n: number) => `${n} ${n === 1 ? 'minuto' : 'minuti'}`;
 
   const aggiornaDate = () => { dateEl.textContent = `Risposte date: ${risposte.filter((r) => r !== null).length} su ${domande.length}`; };
 
@@ -118,7 +120,7 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     err.hidden = true;
     const scelte = [...form.querySelectorAll<HTMLInputElement>('input[name=materia]:checked')].map((x) => x.value);
     if (!scelte.length) { err.textContent = 'Scegli almeno una materia.'; err.hidden = false; return; }
-    const val = (n: string) => { const v = (form.elements.namedItem(n) as HTMLInputElement).value.replace(',', '.'); return v === '' ? null : Number(v); };
+    const val = (n: string) => { const v = (form.elements.namedItem(n) as HTMLInputElement).value.trim().replace(',', '.').replace('−', '-'); return v === '' || Number.isNaN(Number(v)) ? null : Number(v); };
     pesi = { corretta: val('corretta') ?? 1, errata: val('errata') ?? 0, nondata: val('nondata') ?? 0 };
     soglia = val('soglia');
     const numero = Number((form.elements.namedItem('numero') as HTMLSelectElement).value);
@@ -136,12 +138,13 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     }
     scrivi(RECENTI, [...leggi<string[]>(RECENTI, []).filter((x) => !domande.some((q) => q.id === x)), ...domande.map((q) => q.id)].slice(-600));
     ordini = domande.map((q) => mescola(q.scelte.map((_, i) => i)));
+    piuMaterie = new Set(domande.map((q) => q.materia)).size > 1;
     risposte = domande.map(() => null);
     elenco.innerHTML = '';
     domande.forEach((q, i) => {
       const li = document.createElement('li');
       li.className = 'sim-esercizio sim-quesito';
-      li.innerHTML = `<p class="sim-testa"><strong>Quesito ${i + 1}</strong> <span>${nomeMat(q.materia)} · ${nomeArg(q.materia, q.argomento)}</span></p><div class="testo-domanda">${q.testo}</div><div class="scelte" role="radiogroup"></div>`;
+      li.innerHTML = `<p class="sim-testa"><strong>Quesito ${i + 1}</strong> <span>${etichetta(q.materia, q.argomento)}</span></p><div class="testo-domanda">${q.testo}</div><div class="scelte" role="radiogroup"></div>`;
       const box = li.querySelector<HTMLElement>('.scelte')!;
       ordini[i].forEach((orig, k) => {
         const b = document.createElement('button');
@@ -182,6 +185,7 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     consegnato = true;
     clearInterval(timer);
     consegnaB.hidden = true;
+    dateEl.hidden = true;
     const minuti = Math.max(1, Math.round((Math.min(Date.now(), fine) - inizio) / 60000));
     radice.querySelector<HTMLElement>('.sim-tempo')!.innerHTML = `<small>Tempo impiegato</small> <strong>${minuti} min</strong>`;
     if (scaduto) { const p = document.createElement('p'); p.className = 'sim-scaduto'; p.textContent = 'Tempo scaduto: la prova è stata consegnata.'; compito.prepend(p); }
@@ -221,10 +225,10 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     const massimo = Math.round(domande.length * pesi.corretta * 100) / 100;
     const superata = soglia === null || Number.isNaN(soglia) ? undefined : punti >= soglia;
     radice.querySelector('.sim-voto')!.innerHTML = `Punteggio: <strong>${num(punti)}</strong> su ${num(massimo)}${superata === undefined ? '' : superata ? ' · <span class="sim-superata">prova superata</span>' : ' · <span class="sim-non-superata">prova non superata</span>'}`;
-    radice.querySelector('.sim-nota')!.textContent = `${giuste} risposte corrette, ${errate} errate e ${vuote} non date su ${domande.length} quesiti, in ${minuti} minuti.`;
+    radice.querySelector('.sim-nota')!.textContent = `${giuste} risposte corrette, ${errate} errate e ${vuote} non date su ${domande.length} quesiti, in ${minutiTesto(minuti)}.`;
     radice.querySelector('.sim-tabella tbody')!.innerHTML = [...perArg.values()]
       .sort((x, y) => x.g / x.n - y.g / y.n)
-      .map((v) => `<tr><td>${nomeArg(v.m, v.a)} <small>${nomeMat(v.m)}</small></td><td>${v.g} su ${v.n}</td><td><a href="/${v.m}/${v.a}/domande">Domande a tempo</a></td></tr>`).join('');
+      .map((v) => `<tr><td>${nomeArg(v.m, v.a)}${piuMaterie ? ` <small>${nomeMat(v.m)}</small>` : ''}</td><td>${v.g} su ${v.n}</td><td><a href="/${v.m}/${v.a}/domande">Esercitati</a></td></tr>`).join('');
     esitoEl.hidden = false;
     compito.insertBefore(esitoEl, elenco);
     storico = [...storico, { quando: inizio, punti, massimo, n: domande.length, giuste, errate, vuote, minuti, superata }].slice(-20);

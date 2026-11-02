@@ -1139,7 +1139,7 @@ html.collegato .solo-collegati { display: revert; }
 .sim-nota { color: var(--inchiostro-2); margin: 0 0 0.6rem; }
 .sim-scaduto { font-family: var(--ui); font-weight: 600; color: #a3412f; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
-.sim-scelte input[type="number"] { width: 7rem; font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+.sim-scelte input[type="text"] { width: 7rem; font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
 .sim-nota-punti { margin: 0.6rem 0 0; font-size: 0.86rem; color: var(--inchiostro-2); }
 .sim-errore { margin: 0; color: #a3412f; font-weight: 600; }
 .sim-errore[hidden] { display: none; }
