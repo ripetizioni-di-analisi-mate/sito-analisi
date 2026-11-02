@@ -102,7 +102,7 @@ Materie disponibili:
 ${attive.map(riga).join('\n')}
 Videocorsi (lezioni registrate di Carmine, video e PDF di ogni lezione da circa 50 minuti, su Google Drive; acquisto unico con Paddle dalla pagina del corso; dopo il pagamento il link alla cartella compare nell'account e l'accesso va chiesto su Drive con la stessa email; l'acquisto sblocca in automatico le materie collegate del sito; elenco: https://ripetizionidianalisi.com/videocorsi):
 ${VIDEOCORSI.map((v) => `- ${v.titolo}: ${v.lezioni} lezioni, ${v.prezzo} euro; sblocca sul sito ${v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')} (materiale didattico del valore di ${valoreMateriale(v)} euro, incluso e quindi risparmiato). Pagina: https://ripetizionidianalisi.com/videocorsi/${v.slug}`).join('\n')}
-I corsi di gruppo dal vivo sono in preparazione: per informazioni scrivere a Carmine su WhatsApp.
+Corsi di gruppo dal vivo (Analisi matematica 1, Analisi matematica 2, Matematica generale): lezioni online, 2 o 3 incontri a settimana da un'ora, tutte registrate; il programma segue le tracce d'esame degli iscritti; pagamento ogni 5 o 6 lezioni svolte, nessun obbligo di seguire tutto. Ci si iscrive dalla pagina https://ripetizionidianalisi.com/corsi-di-gruppo e si aspetta che il gruppo si formi (Carmine scrive su WhatsApp con il calendario); nel frattempo, dalla pagina personale il cui link arriva per email, si inviano le tracce d'esame e la data dell'esame. Il prezzo per lezione non è indicato: per saperlo scrivere a Carmine su WhatsApp.
 Materie in preparazione (non ancora acquistabili): ${prossime.map((m) => m.titolo).join(', ')}.`;
 }
 

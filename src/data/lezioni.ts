@@ -8,7 +8,8 @@ export const LEZIONI = {
   giorni: [1, 2, 3, 4, 5, 6], // lunedì … sabato (0 = domenica)
   ore: [10, 11, 12, 15, 16],  // inizio delle lezioni (ora italiana); 8-10, 13-15 e dalle 17 sono già occupate
   preavvisoOre: 24,           // si prenota almeno 24 ore prima
-  rimborsoOre: 16,            // spostamento o disdetta con rimborso fino a 16 ore prima dell'inizio
+  rimborsoOre: 24,            // spostamento o disdetta con rimborso fino a 24 ore prima dell'inizio (16 fino al 02/11)
+  avvisoMinuti: 2,            // email con il link di Google Meet e promemoria nel calendario, 2 minuti prima
   settimane: 4,               // quante settimane in avanti si vedono
   attesaPagamentoMin: 30,     // l'orario resta bloccato mentre si paga (Stripe chiede almeno 30 minuti)
   fusoOrario: 'Europe/Rome',

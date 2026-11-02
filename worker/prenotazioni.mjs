@@ -3,7 +3,8 @@
 //  - il calendario Google di Carmine (collegato una volta dalla pagina /admin/lezioni) toglie gli orari già occupati
 //    e riceve un evento con il link di Google Meet e l'invito allo studente;
 //  - pagamento di 40 € con Stripe (account di Carmine); mentre si paga l'orario resta bloccato;
-//  - spostamento o disdetta con rimborso fino a 16 ore prima, dal link nell'email di conferma.
+//  - spostamento o disdetta con rimborso fino a 24 ore prima, dal link nell'email di conferma;
+//  - 2 minuti prima della lezione lo studente riceve l'email con il link di Google Meet (cron al minuto 58).
 // Segreti su Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET (GOOGLE_CLIENT_ID è in wrangler.jsonc).
 import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';
 
@@ -22,6 +23,8 @@ export function creaTabellePrenotazioni(sql) {
     CREATE INDEX IF NOT EXISTS lezioni_inizio ON lezioni (inizio);
     CREATE TABLE IF NOT EXISTS impostazioni (chiave TEXT PRIMARY KEY, valore TEXT);
   `);
+  // momento in cui è partita l'email con il link di Meet, 2 minuti prima della lezione
+  try { sql.exec('ALTER TABLE lezioni ADD COLUMN avvisata INTEGER'); } catch { /* già presente */ }
 }
 
 // Orari occupati da lezioni pagate o in attesa di pagamento (escluso, se indicato, l'id dato).
@@ -73,9 +76,14 @@ export function archivioPrenotazioni(o, pathname, c) {
       const r = leggi(c.id);
       if (!r || r.stato !== 'pagata') return { ok: false, motivo: 'stato' };
       if (occupateDB(o, c.inizio, c.fine, c.id).length) return { ok: false, motivo: 'occupato' };
-      o.sql.exec('UPDATE lezioni SET inizio = ?, fine = ?, spostamenti = spostamenti + 1, aggiornato = ? WHERE id = ?', c.inizio, c.fine, ora, c.id);
+      o.sql.exec('UPDATE lezioni SET inizio = ?, fine = ?, spostamenti = spostamenti + 1, avvisata = NULL, aggiornato = ? WHERE id = ?', c.inizio, c.fine, ora, c.id);
       return { ok: true, lezione: leggi(c.id), prima: r };
     }
+    case '/pren-da-avvisare': // lezioni pagate che iniziano nell'intervallo e non hanno ancora ricevuto il link
+      return { lezioni: o.righe("SELECT * FROM lezioni WHERE stato = 'pagata' AND avvisata IS NULL AND inizio > ? AND inizio <= ? ORDER BY inizio", c.da, c.a) };
+    case '/pren-avvisata':
+      o.sql.exec('UPDATE lezioni SET avvisata = ? WHERE id = ?', Date.now(), c.id);
+      return { ok: true };
     case '/pren-elenco': // per la pagina /admin/lezioni: lezioni dagli ultimi 30 giorni in poi
       return { lezioni: o.righe(`SELECT * FROM lezioni WHERE inizio > ? AND stato IN ('pagata', 'disdetta', 'in-attesa')
                                   ORDER BY inizio`, Date.now() - 30 * 24 * ORA_MS) };
@@ -194,7 +202,7 @@ async function creaEvento(env, aDO, l, linkGestione) {
     end: { dateTime: isoRoma(l.fine), timeZone: LEZIONI.fusoOrario },
     attendees: [{ email: l.email, displayName: l.nome }],
     conferenceData: { createRequest: { requestId: l.id, conferenceSolutionKey: { type: 'hangoutsMeet' } } },
-    reminders: { useDefault: true },
+    reminders: { useDefault: false, overrides: [{ method: 'popup', minutes: LEZIONI.avvisoMinuti }] },
   };
   let ev = await google(env, aDO, 'POST', `/calendars/${calendario(env)}/events?conferenceDataVersion=1&sendUpdates=all`, corpo);
   if (!ev.hangoutLink && ev.id) { // il link di Meet a volte arriva un attimo dopo
@@ -250,6 +258,25 @@ ${tasto ? `<p style="margin:24px 0"><a href="${esc(tasto[1])}" style="background
 }
 const rigaMeet = (l) => (l.meet ? `Link della lezione su Google Meet: ${l.meet}` : 'Il link di Google Meet arriva con l’invito di Google Calendar a questo indirizzo.');
 const rigaRegole = () => `La lezione si può spostare o disdire con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima dell’inizio. Dopo quel momento non è previsto il rimborso.`;
+
+// ---------- link di Meet 2 minuti prima della lezione ----------
+// Cron di Cloudflare al minuto 58 di ogni ora (le lezioni iniziano sempre all'ora esatta):
+// a chi ha una lezione pagata che inizia nei prossimi minuti arriva l'email con il link di Google Meet.
+export async function avvisiLezioni(env, aDO, firmaToken, adesso = Date.now()) {
+  const { lezioni } = await aDO(env, '/pren-da-avvisare', { da: adesso, a: adesso + (LEZIONI.avvisoMinuti + 3) * 60000 });
+  let inviate = 0;
+  for (const l of lezioni) {
+    const p = partiRoma(l.inizio);
+    const ok = await inviaEmail(env, l.email, `La lezione inizia alle ${due(p.h)}:${due(p.min)}: ecco il link`, [
+      `Ciao ${l.nome.split(' ')[0]},`,
+      `la lezione di ${titoloMateria(l.materia)} inizia alle ${due(p.h)}:${due(p.min)}.`,
+      l.meet ? `Si entra su Google Meet da questo link: ${l.meet}` : 'Il link di Google Meet è nell’invito di Google Calendar che hai ricevuto alla prenotazione.',
+    ], l.meet ? ['Entra nella lezione', l.meet] : null);
+    await aDO(env, '/pren-avvisata', { id: l.id });
+    if (ok) inviate++;
+  }
+  return { lezioni: lezioni.length, inviate };
+}
 
 // ---------- percorsi del Worker ----------
 // h = { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza }
