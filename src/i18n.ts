@@ -149,7 +149,7 @@ export const TESTI = {
     },
     // accedi / account
     accediDescrizione: 'Accedi al tuo account o creane uno nuovo.',
-    accediSommario: "Con l'account acquisti le materie e le ritrovi sbloccate su ogni dispositivo in cui accedi.",
+    accediSommario: "Accedi al tuo account per ritrovare le materie acquistate, continuare a studiare e tenere traccia dei tuoi progressi.",
     creaUnAccount: 'Crea un account', ripetiPassword: 'Ripeti la password', nome: 'Nome', tuoNome: 'Il tuo nome', salva: 'Salva',
     passwordDimenticata: 'Hai dimenticato la password?', eTeNeImposto: 'e te ne imposto una nuova.',
     recuperoSpiegazione: "Scrivi l'email con cui ti sei iscritto: ti mando un link per scegliere una nuova password.",
@@ -242,7 +242,7 @@ export const TESTI = {
       nessunRisultato: 'No results.', unRisultato: '1 result', risultati: '§ results',
     },
     accediDescrizione: 'Log in to your account or create a new one.',
-    accediSommario: 'With an account you buy subjects and find them unlocked on every device where you log in.',
+    accediSommario: 'Log in to your account to find the subjects you bought, keep studying and track your progress.',
     creaUnAccount: 'Create an account', ripetiPassword: 'Repeat the password', nome: 'Name', tuoNome: 'Your name', salva: 'Save',
     passwordDimenticata: 'Forgot your password?', eTeNeImposto: 'page and I will set a new one for you.',
     recuperoSpiegazione: 'Enter the email you signed up with: I will send you a link to choose a new password.',
