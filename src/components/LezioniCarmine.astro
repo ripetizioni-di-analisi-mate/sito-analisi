@@ -1,0 +1,69 @@
+---
+// Accessi alle lezioni con Carmine: lezione individuale (/prenota) e corso di gruppo (/corsi-di-gruppo).
+// Scelta di Carmine del 02/11/2026 (A + C, voci scritte per esteso):
+//  - dove = 'indice': in cima all'indice laterale, su ogni pagina;
+//  - dove = 'testata': due tasti nella testata (schermi larghi, da 72rem);
+//  - dove = 'striscia': gli stessi due tasti in una riga sotto la testata (telefono, tablet, schermi più stretti).
+// Solo in italiano.
+interface Props { dove: 'indice' | 'testata' | 'striscia' }
+const { dove } = Astro.props;
+const icone = {
+  individuale: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2.5v3M13 2.5v3M7 11.5h2M11 11.5h2M7 14.2h2"/></svg>',
+  gruppo: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="2.6"/><circle cx="13.6" cy="7.6" r="2.1"/><path d="M2.5 16.5c.6-2.6 2.3-4 4.5-4s3.9 1.4 4.5 4M12 12.6c.5-.2 1-.3 1.6-.3 1.9 0 3.3 1.2 3.9 3.6"/></svg>',
+};
+const voci = [
+  { href: '/prenota', icona: icone.individuale, titolo: 'Lezione individuale', sotto: 'Scegli giorno e ora' },
+  { href: '/corsi-di-gruppo', icona: icone.gruppo, titolo: 'Corso di gruppo', sotto: 'Iscrizioni aperte' },
+];
+const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+---
+{dove === 'indice' && (
+  <div class="lezioni-indice">
+    <p class="indice-materia"><span>Lezioni con Carmine</span></p>
+    <ol class="indice-materie">
+      {voci.map((v) => (
+        <li style="--colore-materia: var(--accento)">
+          <a class="voce-materia" href={v.href} aria-current={qui.startsWith(v.href) ? 'page' : undefined}>
+            <span class="lezioni-icona" set:html={v.icona} />
+            <span class="materia-testo"><span class="materia-nome">{v.titolo}</span></span>
+            <small class="materia-prossima">{v.sotto}</small>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+{(dove === 'testata' || dove === 'striscia') && (
+  <nav class:list={['lezioni-tasti', dove === 'testata' ? 'lezioni-testata' : 'lezioni-striscia']} aria-label="Lezioni con Carmine">
+    {voci.map((v) => (
+      <a href={v.href} aria-current={qui.startsWith(v.href) ? 'page' : undefined}><span class="lezioni-icona" set:html={v.icona} /><span>{v.titolo}</span></a>
+    ))}
+  </nav>
+)}
+
+<style is:global>
+  .lezioni-icona { display: inline-grid; place-items: center; flex: none; width: 1.15rem; height: 1.15rem; color: var(--accento); }
+  .lezioni-icona svg { width: 100%; height: 100%; }
+  .lezioni-indice { margin: 0 0 0.9rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--riga); }
+  .lezioni-indice .indice-materia { justify-content: flex-start; }
+  .lezioni-indice .materia-prossima { color: var(--accento); }
+  .lezioni-indice a[aria-current='page'] { background: color-mix(in srgb, var(--accento) 9%, var(--carta)); }
+
+  .lezioni-tasti { display: flex; gap: 0.5rem; font-family: var(--ui); }
+  .lezioni-tasti a { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; height: 2.4rem; box-sizing: border-box; padding: 0 0.85rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: white; color: var(--accento); font-weight: 600; font-size: 0.9rem; text-decoration: none; white-space: nowrap; }
+  .lezioni-tasti a:hover, .lezioni-tasti a[aria-current='page'] { background: var(--accento); color: white; }
+  .lezioni-tasti a:hover .lezioni-icona, .lezioni-tasti a[aria-current='page'] .lezioni-icona { color: white; }
+
+  /* Nella testata solo quando c'è spazio; altrimenti la riga sotto la testata. */
+  .lezioni-testata { display: none; margin-left: auto; flex: none; }
+  .lezioni-striscia { padding: 0.55rem max(16px, env(safe-area-inset-right, 0px)) 0.55rem max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid var(--riga); background: color-mix(in srgb, var(--carta) 92%, white); }
+  .lezioni-striscia a { flex: 1 1 0; min-width: 0; }
+  .lezioni-striscia a span:last-child { overflow: hidden; text-overflow: ellipsis; }
+  @media (min-width: 72rem) {
+    .lezioni-testata { display: flex; }
+    .lezioni-testata + .account-testata { margin-left: 0; }
+    .lezioni-striscia { display: none; }
+  }
+  @media (max-width: 22rem) { .lezioni-striscia a { padding: 0 0.5rem; font-size: 0.85rem; gap: 0.35rem; } }
+  @media print { .lezioni-tasti { display: none !important; } }
+</style>

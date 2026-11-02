@@ -214,3 +214,8 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Codice `worker/gruppi.mjs`: tabelle `gruppi_iscritti`, `gruppi_file`, `gruppi_parti` (file a pezzi da 1 MB nel Durable Object, rotte binarie `/gruppi-file-salva` e `/gruppi-file-apri` gestite prima del JSON). Limite di 6 iscrizioni al giorno per connessione.
 - Per Carmine: `/admin/gruppi` (voce «Gruppi» nella dashboard), iscritti per corso ordinati per data d'esame, tracce da aprire, telefoni per il gruppo WhatsApp, CSV (`/admin/gruppi.csv`).
 - Collegamenti: `/ripetizioni-analisi` (testo e domanda frequente), scheda «Corsi di gruppo dal vivo» in `/videocorsi` (prima «in preparazione»), Pi, privacy (IT, EN), sitemap, robots.
+
+## Lezioni in vista su tutto il sito (02/11/2026, scelta A + C di Carmine)
+- Carmine trovava nascoste le pagine delle lezioni (solo link in fondo). Scelta fra tre alternative con schermate: **A + C, voci scritte per esteso**.
+- `src/components/LezioniCarmine.astro`: «Lezioni con Carmine» in cima all'indice laterale (Lezione individuale · Scegli giorno e ora; Corso di gruppo · Iscrizioni aperte) e due tasti «Lezione individuale» e «Corso di gruppo» nella testata da 72rem in su; sotto i 72rem gli stessi due tasti stanno in una riga sotto la testata (non fissa). Solo in italiano. Tasto pieno sulla pagina corrente.
+- Scartata la B (riquadri in home); il prototipo delle tre versioni è nel ramo `lezioni-in-vista`.
