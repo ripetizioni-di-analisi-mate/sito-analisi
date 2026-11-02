@@ -23,6 +23,10 @@ const domande = await getCollection(lingua === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { risultatoDi } from '../lib/risposte';
+// Progressi (con l'account): esercizi da fare con la verifica della risposta, per argomento.
+const verificabili = (a: string) => dafare.filter((v) => v.id.startsWith(`${materia}/${a}/`) && risultatoDi(v)).length;
+const en = lingua === 'en';
 ---
 <Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
@@ -62,6 +66,12 @@ import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
       </div>
     </div>
   )}
+  <div class="esame-materia solo-collegati" data-materia={materia} hidden>
+    <span class="esame-testo"></span>
+    <label class="esame-campo"><span>{en ? 'Exam date' : 'Data dell\'esame'}</span> <input type="date" /></label>
+    <button type="button" class="esame-salva">{en ? 'Save' : 'Salva'}</button>
+    <button type="button" class="esame-modifica" hidden>{en ? 'Change' : 'Modifica'}</button>
+  </div>
   <ol class="griglia-argomenti">
     {m.argomenti.map((a) => {
       const pronto = teorie.has(`${materia}/${a.slug}`);
@@ -75,6 +85,10 @@ import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
               {SEZIONI.map((s) => <a href={link(lingua, `/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
               {conta(domande, a.slug) > 0 && <a href={link(lingua, `/${materia}/${a.slug}/domande`)}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'} ({conta(domande, a.slug)})</a>}
             </nav>
+            <div class="progresso-argomento" data-argomento={a.slug} data-schede={ns} data-verificabili={verificabili(a.slug)} data-domande={conta(domande, a.slug)} hidden>
+              <span class="progresso-barra" aria-hidden="true"><i></i></span>
+              <span class="progresso-testo"></span>
+            </div>
           ) : (
             <span class="conteggio">{t.inPreparazione}</span>
           )}
@@ -94,6 +108,55 @@ import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
     )}
   </ol>
 </Base>
+
+<script is:inline define:vars={{ en }}>
+  // Con l'account: progressi di ogni argomento (teoria aperta, schede viste, esercizi verificati, domande indovinate) e data dell'esame.
+  (() => {
+    if (!document.documentElement.classList.contains('collegato')) return;
+    const box = document.querySelector('.esame-materia');
+    if (!box) return;
+    const materia = box.dataset.materia;
+    const campo = box.querySelector('input'), testo = box.querySelector('.esame-testo');
+    const salva = box.querySelector('.esame-salva'), modifica = box.querySelector('.esame-modifica'), etichetta = box.querySelector('.esame-campo');
+    const mostraEsame = (data) => {
+      box.hidden = false;
+      const modo = Boolean(data);
+      etichetta.hidden = modo; salva.hidden = modo; modifica.hidden = !modo;
+      if (!data) { testo.textContent = ''; return; }
+      const giorni = Math.round((Date.parse(data + 'T12:00:00') - Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00')) / 86400000);
+      const quando = new Date(data + 'T12:00:00').toLocaleDateString(en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+      testo.textContent = giorni > 1 ? (en ? `Exam on ${quando}: ${giorni} days to go.` : `Esame il ${quando}: mancano ${giorni} giorni.`)
+        : giorni === 1 ? (en ? `Exam tomorrow, ${quando}.` : `Esame domani, ${quando}.`)
+        : giorni === 0 ? (en ? 'Exam today.' : 'Esame oggi.')
+        : (en ? `Exam on ${quando}.` : `Esame del ${quando}.`);
+      campo.value = data;
+    };
+    salva.addEventListener('click', async () => {
+      salva.disabled = true;
+      const r = await fetch('/api/esame', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, data: campo.value || null }) }).catch(() => null);
+      salva.disabled = false;
+      if (r && r.ok) mostraEsame(campo.value || null);
+    });
+    modifica.addEventListener('click', () => { etichetta.hidden = false; salva.hidden = false; modifica.hidden = true; campo.focus(); });
+    fetch(`/api/progressi?materia=${encodeURIComponent(materia)}`).then((r) => (r.ok ? r.json() : null)).then((d) => {
+      if (!d) return;
+      mostraEsame(d.esame);
+      for (const el of document.querySelectorAll('.progresso-argomento')) {
+        const p = d.argomenti[el.dataset.argomento] || { teoria: false, schede: 0, esercizi: 0, domande: 0 };
+        const tot = { schede: Number(el.dataset.schede), esercizi: Number(el.dataset.verificabili), domande: Number(el.dataset.domande) };
+        const parti = [en ? (p.teoria ? 'Theory read' : 'Theory to read') : (p.teoria ? 'Teoria letta' : 'Teoria da leggere')];
+        const quote = [p.teoria ? 1 : 0];
+        if (tot.schede) { parti.push(en ? `worked sheets ${Math.min(p.schede, tot.schede)} of ${tot.schede}` : `schede svolte ${Math.min(p.schede, tot.schede)} su ${tot.schede}`); quote.push(Math.min(1, p.schede / tot.schede)); }
+        if (tot.esercizi) { parti.push(en ? `exercises checked ${Math.min(p.esercizi, tot.esercizi)} of ${tot.esercizi}` : `esercizi verificati ${Math.min(p.esercizi, tot.esercizi)} su ${tot.esercizi}`); quote.push(Math.min(1, p.esercizi / tot.esercizi)); }
+        if (tot.domande) { parti.push(en ? `questions answered correctly ${Math.min(p.domande, tot.domande)} of ${tot.domande}` : `domande indovinate ${Math.min(p.domande, tot.domande)} su ${tot.domande}`); quote.push(Math.min(1, p.domande / tot.domande)); }
+        const media = quote.reduce((a, b) => a + b, 0) / quote.length;
+        el.querySelector('.progresso-testo').textContent = parti.join(' · ');
+        el.querySelector('.progresso-barra i').style.width = `${Math.round(media * 100)}%`;
+        el.hidden = false;
+      }
+    }).catch(() => {});
+  })();
+</script>
 
 <script is:inline>
   // Con l'account: quante domande ci sono da ripassare oggi in questa materia.

@@ -1099,3 +1099,17 @@ html.collegato .solo-collegati { display: revert; }
 .sim-nota { color: var(--inchiostro-2); margin: 0 0 0.6rem; }
 .sim-scaduto { font-family: var(--ui); font-weight: 600; color: #a3412f; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
+
+/* Pagina della materia, con l'account: data dell'esame e progressi per argomento */
+.esame-materia { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.2rem; padding: 0.6rem 0.85rem; border: 1px solid var(--riga); border-radius: 10px; background: #fff; font-family: var(--ui); font-size: 0.93rem; }
+.esame-materia[hidden], .esame-materia [hidden] { display: none !important; }
+.esame-testo { font-weight: 600; }
+.esame-testo:empty { display: none; }
+.esame-campo { display: inline-flex; align-items: center; gap: 0.5rem; }
+.esame-campo input { font: 0.93rem var(--ui); padding: 0.3rem 0.5rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+.esame-salva, .esame-modifica { margin-left: 0.2rem; font: 600 0.88rem var(--ui); color: var(--accento); background: none; border: 1px solid color-mix(in srgb, var(--accento) 35%, transparent); border-radius: 999px; padding: 0.3rem 0.85rem; cursor: pointer; }
+.griglia-argomenti .progresso-argomento { grid-column: 2; }
+.progresso-argomento { display: grid; gap: 0.3rem; margin-top: 0.6rem; font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); }
+.progresso-argomento[hidden] { display: none; }
+.progresso-barra { display: block; height: 4px; border-radius: 4px; background: var(--carta-2); overflow: hidden; }
+.progresso-barra i { display: block; height: 100%; width: 0; background: var(--accento); border-radius: 4px; transition: width 0.4s; }

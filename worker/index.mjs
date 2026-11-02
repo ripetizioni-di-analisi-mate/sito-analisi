@@ -19,7 +19,7 @@ import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } f
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
-import { esercizioRisolto, ripassoOggi } from './livelli.mjs';
+import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
 import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
@@ -274,6 +274,9 @@ export class Archivio {
       case '/liv-percorso': return Response.json(percorso(this, c));
       case '/liv-esercizio': return Response.json(esercizioRisolto(this, c));
       case '/liv-ripasso': return Response.json(ripassoOggi(this, c));
+      case '/liv-vista': return Response.json(registraVista(this, c));
+      case '/liv-progressi': return Response.json(progressi(this, c));
+      case '/liv-esame': return Response.json(salvaEsame(this, c));
       case '/verifiche-conta': { // tentativi di verifica: al massimo 300 al giorno per persona
         const k = '*verifica:' + c.chi;
         const n = this.riga('SELECT n FROM recuperi WHERE giorno = ? AND chiave = ?', c.giorno, k)?.n || 0;
@@ -822,6 +825,21 @@ export default {
       const { chiudi, lingua } = await req.json().catch(() => ({}));
       return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi), lingua: linguaDi(lingua) }));
     }
+    if (p === '/api/progressi') { // progressi per argomento di una materia e data dell'esame
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      const materia = url.searchParams.get('materia') || '';
+      if (!MATERIE.some((m) => m.slug === materia)) return json({ errore: 'materia' }, 400);
+      return json(await aDO(env, '/liv-progressi', { email: io.email, materia }), 200, { 'cache-control': 'no-store' });
+    }
+    if (p === '/api/esame' && POST) { // data dell'esame di una materia (vuota = tolta)
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      const { materia, data } = await req.json().catch(() => ({}));
+      if (!MATERIE.some((m) => m.slug === materia)) return json({ errore: 'materia' }, 400);
+      const valida = typeof data === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data) && !Number.isNaN(Date.parse(data));
+      return json(await aDO(env, '/liv-esame', { email: io.email, materia, data: valida ? data : null }));
+    }
     if (p === '/api/ripasso') { // domande da ripassare oggi, per materia (solo conteggi)
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
@@ -1100,6 +1118,11 @@ export default {
       risposta.headers.set('cache-control', 'private, no-store');
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
+    }
+    // Progressi per argomento: teoria e schede svolte aperte per intero da chi ha l'account.
+    if (html && io && info && req.method === 'GET' && risposta.status < 400 && (info.tipo === 'teoria' || (info.tipo === 'esercizi-svolti' && info.n))) {
+      const intera = !protetta || sbloccataQui || (info.tipo === 'esercizi-svolti' && info.n <= SCHEDE_LIBERE);
+      if (intera) ctx.waitUntil(aDO(env, '/liv-vista', { email: io.email, materia: info.materia, argomento: info.argomento, tipo: info.tipo, n: info.n || 0 }).catch(() => {}));
     }
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {

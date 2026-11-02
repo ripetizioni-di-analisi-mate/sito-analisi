@@ -83,6 +83,9 @@ export function creaTabelleLivelli(sql) {
   sql.exec('CREATE TABLE IF NOT EXISTS esercizi (email TEXT, id TEXT, materia TEXT, argomento TEXT, quando INTEGER, PRIMARY KEY (email, id))');
   // ripasso dilazionato delle domande sbagliate: casella 0, 1, 2 (intervalli 1, 3, 7 giorni) e giorno in cui la domanda torna
   sql.exec('CREATE TABLE IF NOT EXISTS ripasso (email TEXT, domanda TEXT, materia TEXT, casella INTEGER, scadenza TEXT, PRIMARY KEY (email, domanda))');
+  // progressi per argomento: pagine di studio aperte per intero (teoria, schede svolte) e data dell'esame di ogni materia
+  sql.exec('CREATE TABLE IF NOT EXISTS viste (email TEXT, materia TEXT, argomento TEXT, tipo TEXT, n INTEGER, quando INTEGER, PRIMARY KEY (email, materia, argomento, tipo, n))');
+  sql.exec('CREATE TABLE IF NOT EXISTS esami (email TEXT, materia TEXT, data TEXT, PRIMARY KEY (email, materia))');
 }
 
 // ---------- operazioni sull'archivio (ar = istanza di Archivio, con righe/riga/sql) ----------
@@ -117,8 +120,15 @@ function obiettiviSettimana(ar, email) {
   const chiave = sett[0];
   let righe = ar.righe('SELECT * FROM obiettivi WHERE email = ? AND settimana = ? ORDER BY n', email, chiave);
   if (righe.length) return { sett, righe };
-  // Primo obiettivo: l'argomento su cui lo studente ha risposto di più nelle due settimane precedenti.
-  const prima = ar.riga(`SELECT materia, argomento, COUNT(*) AS c FROM risposte WHERE email = ? AND giorno >= ? AND giorno < ?
+  // Primo obiettivo: con un esame nei prossimi 60 giorni, l'argomento di quella materia con meno risposte corrette
+  // (tra quelli con domande a tempo); altrimenti l'argomento su cui lo studente ha risposto di più nelle due settimane precedenti.
+  const esame = ar.riga('SELECT materia FROM esami WHERE email = ? AND data >= ? AND data <= ? ORDER BY data LIMIT 1', email, chiave, spostaGiorno(chiave, 60));
+  const daEsame = esame && (ultimoCatalogo[esame.materia] || []).length
+    ? ultimoCatalogo[esame.materia].map((a) => ({ materia: esame.materia, argomento: a,
+      c: ar.riga('SELECT COUNT(DISTINCT domanda) AS k FROM risposte WHERE email = ? AND materia = ? AND argomento = ? AND corretta = 1', email, esame.materia, a).k }))
+      .sort((x, y) => x.c - y.c)[0]
+    : null;
+  const prima = daEsame || ar.riga(`SELECT materia, argomento, COUNT(*) AS c FROM risposte WHERE email = ? AND giorno >= ? AND giorno < ?
     GROUP BY materia, argomento ORDER BY c DESC LIMIT 1`, email, spostaGiorno(chiave, -14), chiave);
   const scelte = [
     prima ? ['corrette-arg', prima.materia, prima.argomento] : ['corrette-tot', null, null],
@@ -162,8 +172,11 @@ function progressoObiettivo(ar, email, o, sett, l = 'it') {
   return { codice: `obiettivo-${da}-${o.n}`, testo, fatto: Math.min(fatto, def.n), totale: def.n, punti: def.punti, completato: fatto >= def.n, link, unita: o.codice === 'ore' ? 'min' : '' };
 }
 
+// Ultimo catalogo delle domande a tempo ricevuto dal Worker (serve agli obiettivi calibrati sull'esame).
+let ultimoCatalogo = {};
 // Dopo ogni attività: obiettivi raggiunti, traguardi, livelli. Restituisce i premi nuovi.
 function controllaPremi(ar, email, catalogo) {
+  if (catalogo && Object.keys(catalogo).length) ultimoCatalogo = catalogo;
   const nuovi = [];
   const { sett, righe } = obiettiviSettimana(ar, email);
   for (const o of righe) {
@@ -283,6 +296,31 @@ export function ripassoOggi(ar, c) {
   };
 }
 
+// ---------- progressi per argomento e data dell'esame ----------
+export function registraVista(ar, c) {
+  ar.sql.exec(`INSERT INTO viste (email, materia, argomento, tipo, n, quando) VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(email, materia, argomento, tipo, n) DO UPDATE SET quando = excluded.quando`, c.email, c.materia, c.argomento, c.tipo, c.n || 0, Date.now());
+  return { ok: true };
+}
+export function progressi(ar, c) {
+  const { email, materia } = c;
+  const out = {};
+  const voce = (a) => (out[a] ??= { teoria: false, schede: 0, esercizi: 0, domande: 0 });
+  for (const r of ar.righe('SELECT argomento, tipo, COUNT(*) AS k FROM viste WHERE email = ? AND materia = ? GROUP BY argomento, tipo', email, materia)) {
+    if (r.tipo === 'teoria') voce(r.argomento).teoria = true;
+    else if (r.tipo === 'esercizi-svolti') voce(r.argomento).schede = r.k;
+  }
+  for (const r of ar.righe('SELECT argomento, COUNT(*) AS k FROM esercizi WHERE email = ? AND materia = ? GROUP BY argomento', email, materia)) voce(r.argomento).esercizi = r.k;
+  for (const r of ar.righe('SELECT argomento, COUNT(DISTINCT domanda) AS k FROM risposte WHERE email = ? AND materia = ? AND corretta = 1 GROUP BY argomento', email, materia)) voce(r.argomento).domande = r.k;
+  const e = ar.riga('SELECT data FROM esami WHERE email = ? AND materia = ?', email, materia);
+  return { argomenti: out, esame: e?.data || null };
+}
+export function salvaEsame(ar, c) {
+  if (c.data) ar.sql.exec(`INSERT INTO esami (email, materia, data) VALUES (?, ?, ?) ON CONFLICT(email, materia) DO UPDATE SET data = excluded.data`, c.email, c.materia, c.data);
+  else ar.sql.exec('DELETE FROM esami WHERE email = ? AND materia = ?', c.email, c.materia);
+  return { ok: true };
+}
+
 // Esercizio da fare risolto (risposta verificata dal Worker): EXP la prima volta, poi nulla.
 export function esercizioRisolto(ar, c) {
   const { email } = c;
@@ -321,6 +359,7 @@ export function riepilogo(ar, c) {
 // Pagina "Il tuo percorso" nell'account.
 export function percorso(ar, c) {
   const { email } = c;
+  if (c.catalogo && Object.keys(c.catalogo).length) ultimoCatalogo = c.catalogo;
   const l = c.lingua;
   const en = l === 'en';
   const { sett, righe } = obiettiviSettimana(ar, email);
