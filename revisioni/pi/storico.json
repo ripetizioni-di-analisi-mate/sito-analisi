@@ -97,6 +97,50 @@
       "proposte": [
         "Per far leggere il banco ogni mattina serve un permesso: aprire una volta in chat il link https://ripetizionidianalisi.com/pi/prove e approvare la lettura quando viene chiesta"
       ]
+    },
+    {
+      "giorno": "2026-11-02",
+      "punteggio": null,
+      "aree": {},
+      "casi": 0,
+      "errori": 0,
+      "areaDelGiorno": "correttezza",
+      "problemi": [
+        "Il banco di oggi non si è potuto leggere: la richiesta di permesso per aprire /pi/prove è scaduta senza risposta (secondo giorno)",
+        "Nelle risposte di calcolo manca un controllo del risultato e una frase finale che lo enunci chiaramente",
+        "Il banco non aveva casi di calcolo dove i modelli piccoli sbagliano spesso (sviluppi di Taylor, fratti semplici)"
+      ],
+      "interventi": [
+        {
+          "titolo": "Verifica del risultato",
+          "area": "correttezza",
+          "cosa": "una regola nelle istruzioni: controllare il risultato per un'altra via (derivata della primitiva, sostituzione, valore numerico) e chiudere con una frase che lo enuncia",
+          "perStudente": "meno risultati sbagliati e risultato finale facile da trovare",
+          "verifica": "casi fissi lim-taylor-seno e i casi di calcolo a rotazione",
+          "commit": "4dc6af8",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Casi di calcolo più difficili",
+          "area": "banco",
+          "cosa": "due domande nuove: limite di (x - sin x)/x^3 (fisso) e integrale di 1/(x^2 - 1)",
+          "perStudente": "si misura Pi proprio sugli esercizi dove sbaglia più facilmente",
+          "verifica": "banco di domani",
+          "commit": "4dc6af8",
+          "esito": "in attesa"
+        }
+      ],
+      "esitiIeri": [
+        {
+          "titolo": "Risposta vuota → riserva, anteprima con i numeri, caso sito-anteprima",
+          "esito": "in attesa",
+          "dettaglio": "banco non leggibile da qui: esito rimandato; prova locale della riserva ancora corretta"
+        }
+      ],
+      "annullati": [],
+      "proposte": [
+        "Per far leggere il banco ogni mattina: scrivere in questa chat il link https://ripetizionidianalisi.com/pi/prove e approvare la lettura quando viene chiesta"
+      ]
     }
   ]
 }
