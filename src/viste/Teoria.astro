@@ -1,6 +1,6 @@
 ---
 import { SEO } from '../lib/seo-testi';
-import { SITO, assoluto } from '../lib/seo';
+import { SITO, assoluto, accesso } from '../lib/seo';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { getCollection, render } from 'astro:content';
@@ -16,6 +16,18 @@ const { voce, tradotta } = await voceL(lingua, 'teoria', `${materia}/${argomento
 const resa = voce ? await render(voce) : null;
 const Contenuto = resa?.Content ?? null;
 const sezioni = resa?.headings.filter((h: { depth: number }) => h.depth === 2) ?? [];
+// Teoremi e criteri con un nome proprio (Teorema di Binet, Criterio di Leibniz…): sono le parole che gli studenti
+// cercano, quindi compaiono nella descrizione per i motori di ricerca, prima del sommario.
+const NOME = /^(Teorema|Criterio|Formula|Lemma|Regola|Principio|Disuguaglianza|Legge|Theorem|Test|Rule|Principle|Inequality|Law)\b/i;
+const PROPRIO = /\s(di|del|della|dei|degli|delle|de|d')\s*[A-Z]|[A-Z][a-z]+'s\b|\s[A-Z][a-zé]+(\s|$)/;
+const tuttiNomi = [...new Set([...(voce?.body ?? '').matchAll(/^:{3,4}teorema\{[^}]*titolo="([^"]+)"/gm)].map((x) => x[1]).filter((x) => NOME.test(x) && !x.includes('$')))];
+const nominati = [...tuttiNomi.filter((x) => PROPRIO.test(x.slice(1))), ...tuttiNomi.filter((x) => !PROPRIO.test(x.slice(1)))];
+const descrizioneSeo = (() => {
+  const somm = voce?.data.sommario ?? '';
+  if (!nominati.length) return somm;
+  const testa = `${lingua === 'en' ? 'Theorems' : 'Teoremi'}: ${nominati.slice(0, 4).join(', ')}.`;
+  return `${testa} ${somm}`.trim();
+})();
 const svolti = perArgomento(await getCollection('svolti'), materia, argomento);
 const dafare = perArgomento(await getCollection('dafare'), materia, argomento);
 const titoliSvolti = Object.fromEntries((await Promise.all(svolti.map((e) => voceL(lingua, 'svolti', e.id)))).map(({ voce: v }) => [v.id, v.data.titolo]));
@@ -38,15 +50,15 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
-  descrizione={voce?.data.sommario}
+  descrizione={descrizioneSeo}
   seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, schema: [{ ...{
-  '@type': 'LearningResource', name: arg.titolo, description: voce?.data.sommario, learningResourceType: 'Lesson', inLanguage: lingua,
+  '@type': 'LearningResource', name: arg.titolo, description: descrizioneSeo, learningResourceType: 'Lesson', inLanguage: lingua,
   educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
-  isAccessibleForFree: !materiaL(lingua, materia).prezzo,
-}, teaches: sezioni.map((x: { text: string }) => x.text) }] }}
+  ...accesso(!materiaL(lingua, materia).prezzo),
+}, teaches: sezioni.map((x: { text: string }) => x.text), ...(nominati.length ? { about: nominati.map((x) => ({ '@type': 'Thing', name: x })) } : {}) }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria }]}
   materia={materia} argomento={argomento} sezione="teoria"
   precedente={precedente} successivo={successivo}   lingua={lingua} nonTradotta={!tradotta}

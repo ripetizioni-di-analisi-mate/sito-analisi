@@ -5,6 +5,8 @@
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
+import { motoreVerificato, paginaPerMotore } from './motori.mjs';
+import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
@@ -147,6 +149,8 @@ export class Archivio {
 
   async fetch(req) {
     const { pathname } = new URL(req.url);
+    // pagine nuove o cambiate segnalate ai motori (worker/indexnow.mjs): il corpo è la mappa del sito
+    if (pathname === '/indexnow') return Response.json(await eseguiIndexNow(this.sql, await req.text()));
     const c = req.method === 'POST' ? await req.json() : {};
     const ora = new Date().toISOString();
     switch (pathname) {
@@ -582,18 +586,33 @@ export default {
   // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
   // Alle 16:30 UTC (17:30 in Italia d'inverno) i promemoria per tornare a studiare (worker/promemoria.mjs).
   async scheduled(evento, env, ctx) {
+    // A ogni cron (mattina e pomeriggio): pagine nuove o cambiate segnalate ai motori con IndexNow.
+    ctx.waitUntil((async () => {
+      const mappa = await env.ASSETS.fetch(new Request('https://ripetizionidianalisi.com/sitemap.xml'));
+      const r = await archivio(env).fetch('https://archivio/indexnow', { method: 'POST', headers: { 'content-type': 'application/xml' }, body: mappa.body });
+      console.log('indexnow', await r.text());
+    })().catch((e) => console.log('indexnow', String(e?.message || e))));
     if (evento.cron === CRON_PROMEMORIA) {
       ctx.waitUntil(inviaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})))
         .then((r) => console.log('promemoria', JSON.stringify(r))).catch((e) => console.log('promemoria', String(e?.message || e))));
       return;
     }
     ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
+
   },
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
     const vendita = env.VENDITA !== '0';
     const POST = req.method === 'POST';
+
+    // ===== un solo indirizzo per ogni pagina =====
+    // Google aveva in elenco anche le versioni http:// e www. delle pagine: ora portano tutte, con un
+    // reindirizzamento permanente, all'indirizzo https://ripetizionidianalisi.com (stesso percorso e parametri).
+    if (url.hostname === 'www.ripetizionidianalisi.com' || (url.protocol === 'http:' && url.hostname === 'ripetizionidianalisi.com')) {
+      const verso = new URL(url); verso.protocol = 'https:'; verso.hostname = 'ripetizionidianalisi.com'; verso.port = '';
+      return Response.redirect(verso.toString(), req.method === 'GET' || req.method === 'HEAD' ? 301 : 308);
+    }
 
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
@@ -936,7 +955,15 @@ export default {
     let sbloccataQui = Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
-      if (!sbloccataQui) {
+      // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
+      const ridotta = info.tipo === 'teoria' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n > SCHEDE_LIBERE);
+      const motore = !sbloccataQui && ridotta && req.method === 'GET'
+        ? await motoreVerificato(req).catch(() => null) : null;
+      if (motore) {
+        risposta = paginaPerMotore(await env.ASSETS.fetch(senzaCondizioni(req)), info.tipo, info.n);
+        risposta = new Response(risposta.body, risposta);
+        if (motore === 'bing') risposta.headers.set('x-robots-tag', 'nocache');
+      } else if (!sbloccataQui) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa') {
           risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
         } else if (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE) {
@@ -952,6 +979,11 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
+    // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.
+    if (url.hostname.endsWith('.workers.dev')) {
+      risposta = new Response(risposta.body, risposta);
+      risposta.headers.set('x-robots-tag', 'noindex');
+    }
     // Copie interne delle anteprime: mai negli indici dei motori di ricerca (la pagina vera è quella canonica).
     if (url.pathname.startsWith('/vetrine/')) {
       risposta = new Response(risposta.body, risposta);

@@ -31,13 +31,14 @@ interface Props {
   nonTradotta?: boolean; // pagina inglese non ancora tradotta: si mostra l'italiano con un avviso
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
-  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean };
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean };
 }
 const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, seo = {} } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const altra: Lingua = lingua === 'it' ? 'en' : 'it';
-const versoAltra = altraLingua(Astro.url.pathname, altra);
+// Pagine che esistono solo in italiano (videocorsi, concorsi…): il tasto EN porta alla home inglese, non a una pagina inesistente.
+const versoAltra = seo.senzaInglese ? link(altra, '/') : altraLingua(Astro.url.pathname, altra);
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeQui = Boolean(materia && argomento && ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento));
 const en = lingua === 'en';
@@ -50,7 +51,9 @@ const versioneEn = versioneIt === '/' ? '/en' : `/en${versioneIt}`;
 const canonico = assoluto(nonTradotta ? versioneIt : qui);
 const bilingue = !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa';
 const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
-const descrizioneSeo = descrizione ?? t.homeDescrizione;
+// Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
+const taglia = (x: string, n = 160) => (x.length <= n ? x : `${x.slice(0, x.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '')}…`);
+const descrizioneSeo = taglia(descrizione ?? t.homeDescrizione);
 const percorsoSchema = [
   { nome: t.materie, url: assoluto(link(lingua, '/')) },
   ...(m ? [{ nome: m.titolo, url: assoluto(link(lingua, `/${m.slug}`)) }] : []),

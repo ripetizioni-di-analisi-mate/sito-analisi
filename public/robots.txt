@@ -13,6 +13,11 @@ User-agent: PerplexityBot
 User-agent: Perplexity-User
 User-agent: Google-Extended
 User-agent: Applebot-Extended
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: DuckAssistBot
+User-agent: YandexBot
+User-agent: MistralAI-User
 Allow: /
 Disallow: /admin
 Disallow: /api/
@@ -22,5 +27,11 @@ Disallow: /en/account
 Disallow: /en/accedi
 Disallow: /vetrine/
 Disallow: /*/stampa
+Disallow: /dati-domande/
+Disallow: /reimposta-password
+Disallow: /en/reimposta-password
+Disallow: /promemoria/
+Disallow: /cerca?
+Disallow: /en/cerca?
 
 Sitemap: https://ripetizionidianalisi.com/sitemap.xml

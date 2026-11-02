@@ -58,6 +58,7 @@ const JS = en ? {
   descrizione={T.descr}
   percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua}
+  seo={{ noindex: true }}
 >
   <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
@@ -96,7 +97,7 @@ const JS = en ? {
         <button type="button" class="bottone-primario conferma" disabled hidden>{T.conferma}</button>
         <button type="button" class="bottone-primario prossima" hidden>{T.prossima}</button>
         <button type="button" class="bottone-primario nuova-serie" hidden>{T.nuovaSerie}</button>
-        <a class="link-svolti" href={link(lingua, `${base}/esercizi-svolti`)} hidden>{T.svolti}</a>
+        <a class="link-svolti" href={link(lingua, ripasso ? `/${materia}` : `${base}/esercizi-svolti`)} hidden>{T.svolti}</a>
       </div>
     </section>
 

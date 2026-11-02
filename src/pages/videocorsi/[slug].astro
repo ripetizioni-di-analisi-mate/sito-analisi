@@ -29,7 +29,7 @@ const schema = [{
 }];
 const titolo = v.titolo;
 ---
-<Base titolo={v.titolo} percorso={[{ titolo: 'Videocorsi', href: '/videocorsi' }, { titolo: v.breve }]} descrizione={`${v.titolo}: ${v.lezioni} lezioni con video e PDF. L'acquisto sblocca in automatico sul sito ${sblocca.map((m) => m.breve).join(', ')}.`} lingua="it" seo={{ soloQuestaLingua: true, schema }}>
+<Base titolo={v.titolo} percorso={[{ titolo: 'Videocorsi', href: '/videocorsi' }, { titolo: v.breve }]} descrizione={`${v.titolo}: ${v.lezioni} lezioni con video e PDF. L'acquisto sblocca in automatico sul sito ${sblocca.map((m) => m.breve).join(', ')}.`} lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true, schema }}>
   <div class="testa-video" style={`--accento: ${v.colore}`}>
     <p class="sopratitolo">Videocorso</p>
     <h1>{v.titolo}</h1>

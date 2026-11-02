@@ -18,7 +18,9 @@ export const AUTORE = {
   description: 'Laurea in Ingegneria civile e master in matematica; ha seguito oltre mille studenti in più di diecimila ore di lezione.',
   knowsAbout: ['Analisi matematica 1', 'Analisi matematica 2', 'Algebra lineare e geometria analitica', 'Fisica', 'Matematica generale', 'Calculus', 'Linear algebra', 'Physics'],
   knowsLanguage: ['it', 'en'],
-  sameAs: [INSTAGRAM],
+  image: `${SITO}/chi-sono/carmine.webp`,
+  // stessi profili della pagina Chi sono: aiutano i motori a riconoscere che è la stessa persona
+  sameAs: [INSTAGRAM, 'https://www.threads.com/@ripetizioni_di_analisi_mate', 'https://ripetizioni-di-analisi-matematica.it/'],
 };
 
 export const ORGANIZZAZIONE = {
@@ -68,4 +70,13 @@ export function paginaWeb(url: string, titolo: string, descrizione: string, ling
     inLanguage: lingua,
     isPartOf: { '@id': `${SITO}/#sito` },
   };
+}
+
+// Contenuti a pagamento: la parte riservata è racchiusa dal Worker in un blocco .contenuto-riservato quando la pagina
+// è letta da Googlebot o Bingbot verificati (worker/motori.mjs). Con questi dati Google sa che è contenuto
+// in abbonamento e non lo scambia per una pagina che mostra ai motori una cosa diversa dalle persone.
+export function accesso(libero: boolean) {
+  return libero
+    ? { isAccessibleForFree: true }
+    : { isAccessibleForFree: false, hasPart: { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.contenuto-riservato' } };
 }
