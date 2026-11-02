@@ -33,6 +33,10 @@
     "PADDLE_PREZZO_VIDEO_ANALISI_2": "pri_01m66v0zp2197dvp3pm0n057ce",
     "PADDLE_PREZZO_VIDEO_MATEMATICA_GENERALE": "pri_01m66tx5d8ezk8cxc3t3tym894",
     "PADDLE_PREZZO_VIDEO_ALGEBRA": "pri_01m66v2m485p0fq8c0e9pxawzf",
+    // Lezioni individuali (worker/prenotazioni.mjs): codice cliente OAuth di Google (pubblico) e calendario usato.
+    // Segreti nel pannello Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET.
+    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_CALENDARIO": "primary",
     // Cartelle Google Drive dei videocorsi (slug -> link), mostrate solo a chi ha comprato
     // Mittente delle email (recupero della password); la chiave RESEND_API_KEY è un segreto nel pannello Cloudflare
     "MITTENTE": "Ripetizioni di Analisi <account@ripetizionidianalisi.com>",

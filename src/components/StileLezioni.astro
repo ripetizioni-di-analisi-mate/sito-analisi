@@ -1,0 +1,64 @@
+---
+// Stile comune delle pagine di prenotazione delle lezioni (/prenota, /prenota/confermata, /prenota/gestisci).
+---
+<style is:global>
+  .prenota { max-width: 44rem; font-family: var(--ui); }
+  .prenota h1 { margin-bottom: 0.3rem; }
+  .prenota .passo { margin: 2rem 0 0; }
+  .prenota .passo > h2 { display: flex; align-items: center; gap: 0.6rem; font-size: 1.2rem; margin: 0 0 0.4rem; }
+  .prenota .passo > h2 span { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accento); color: white; font-family: var(--ui); font-size: 0.9rem; flex: none; }
+  .prenota .nota-passo { margin: 0 0 0.9rem; color: var(--inchiostro-2); font-size: 0.95rem; }
+
+  .prenota .materie-lezione { display: flex; flex-wrap: wrap; gap: 0.5rem; border: 0; padding: 0; margin: 0.6rem 0 0; }
+  .prenota .materie-lezione label { position: relative; cursor: pointer; }
+  .prenota .materie-lezione input { position: absolute; opacity: 0; pointer-events: none; }
+  .prenota .materie-lezione span { display: inline-block; padding: 0.45rem 0.9rem; border: 1px solid var(--riga); border-radius: 999px; background: white; font-size: 0.95rem; }
+  .prenota .materie-lezione input:checked + span { background: var(--accento); border-color: var(--accento); color: white; font-weight: 600; }
+  .prenota .materie-lezione input:focus-visible + span { outline: 2px solid var(--accento); outline-offset: 2px; }
+
+  .calendario-lezioni { border: 1px solid var(--riga); border-radius: var(--raggio); background: white; }
+  .cal-testa { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--riga); background: var(--carta-2); border-radius: var(--raggio) var(--raggio) 0 0; }
+  .cal-settimana { font-weight: 600; }
+  .cal-freccia { font: inherit; font-size: 1.4rem; line-height: 1; width: 2.3rem; height: 2.3rem; border-radius: 50%; border: 1px solid var(--riga); background: white; color: var(--inchiostro); cursor: pointer; }
+  .cal-freccia:disabled { opacity: 0.35; cursor: default; }
+  .cal-giorno { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--riga); }
+  .cal-giorno:last-child { border-bottom: 0; }
+  .cal-data { color: var(--inchiostro-2); }
+  .cal-data b { color: var(--inchiostro); margin-right: 0.15rem; }
+  .cal-ore { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .cal-ora { font: inherit; font-size: 0.95rem; font-variant-numeric: tabular-nums; padding: 0.35rem 0.75rem; border: 1px solid var(--accento); border-radius: 999px; background: white; color: var(--accento); cursor: pointer; }
+  .cal-ora:hover { background: #eef5f3; }
+  .cal-ora[aria-pressed='true'] { background: var(--accento); color: white; font-weight: 600; }
+  .cal-nessuno { color: var(--inchiostro-2); font-size: 0.9rem; opacity: 0.75; }
+  .cal-vuoto, .cal-carico { margin: 0; padding: 1rem; color: var(--inchiostro-2); }
+
+  .prenota .modulo { max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prenota .modulo .largo { grid-column: 1 / -1; }
+  .prenota .modulo label > span small { margin-left: 0.3rem; }
+  .prenota .modulo label { align-content: start; }
+  .prenota .modulo textarea { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); min-height: 4.5rem; resize: vertical; }
+  .prenota .modulo textarea:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
+  .prenota .riepilogo { margin: 0 0 0.6rem; font-size: 1rem; }
+  .prenota .riepilogo b { color: var(--inchiostro); }
+  .prenota .riquadro-acquisto .spunta { display: flex; gap: 0.55rem; align-items: flex-start; text-align: left; font-size: 0.9rem; margin: 0.9rem auto 1rem; max-width: 32rem; cursor: pointer; }
+  .prenota .riquadro-acquisto .spunta input { width: 1.05rem; height: 1.05rem; margin: 0.15rem 0 0; accent-color: var(--accento); flex: none; }
+  .prenota .riquadro-acquisto button:disabled { opacity: 0.55; cursor: wait; }
+  .prenota .esito-modulo { margin-top: 0.7rem; }
+  .prenota .avviso-lezione { border: 1px solid var(--riga); border-left: 4px solid var(--accento); background: white; border-radius: var(--raggio); padding: 0.8rem 1rem; margin: 1.2rem 0 0; }
+  .prenota .avviso-lezione.errore { border-left-color: var(--c-attenzione); }
+  .prenota .condizioni { margin-top: 2.5rem; }
+  .prenota .condizioni h2 { font-size: 1.15rem; }
+  .prenota .condizioni li { margin: 0.35rem 0; }
+  .prenota .scheda-lezione { border: 1px solid var(--riga); border-radius: var(--raggio); background: white; padding: 1rem 1.2rem; margin: 1.2rem 0; }
+  .prenota .scheda-lezione dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0.35rem 1rem; margin: 0; }
+  .prenota .scheda-lezione dt { color: var(--inchiostro-2); }
+  .prenota .scheda-lezione dd { margin: 0; font-weight: 600; }
+  .prenota .tasti { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+  .prenota .bottone-secondario { font: inherit; font-weight: 600; background: white; color: var(--inchiostro); border: 1px solid var(--riga); border-radius: 999px; padding: 0.65rem 1.4rem; cursor: pointer; text-decoration: none; display: inline-block; }
+  .prenota .bottone-secondario.rosso { color: var(--c-attenzione); border-color: #e7c4bd; }
+
+  @media (max-width: 560px) {
+    .prenota .modulo { grid-template-columns: minmax(0, 1fr); }
+    .cal-giorno { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
+  }
+</style>

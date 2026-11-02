@@ -21,6 +21,7 @@ import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
 import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
 import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni } from './prenotazioni.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -146,6 +147,8 @@ export class Archivio {
       punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
+    // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
+    creaTabellePrenotazioni(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -157,6 +160,7 @@ export class Archivio {
     // pagine nuove o cambiate segnalate ai motori (worker/indexnow.mjs): il corpo è la mappa del sito
     if (pathname === '/indexnow') return Response.json(await eseguiIndexNow(this.sql, await req.text()));
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
@@ -659,6 +663,12 @@ export default {
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
     if (versoLingua) return versoLingua;
+
+    // ===== lezioni individuali: prenotazione, pagamento con Stripe, Google Calendar (worker/prenotazioni.mjs) =====
+    if (p.startsWith('/api/prenota/') || p === '/api/stripe/webhook' || p === '/admin/lezioni' || p.startsWith('/admin/google/')) {
+      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza });
+      if (r) return r;
+    }
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {
