@@ -1,0 +1,124 @@
+---
+// Corsi di gruppo dal vivo: come funzionano e iscrizione (worker/gruppi.mjs). Il prezzo per lezione non si mostra.
+import Base from '../../layouts/Base.astro';
+import StileLezioni from '../../components/StileLezioni.astro';
+import { MATERIE_GRUPPI, FILE_GRUPPI } from '../../data/gruppi';
+
+const WHATSAPP = 'https://wa.me/393885680393';
+---
+<Base lingua="it" titolo="Corsi di gruppo" percorso={[{ titolo: 'Ripetizioni online', href: '/ripetizioni-analisi' }, { titolo: 'Corsi di gruppo' }]}
+  descrizione="Corsi di gruppo online di Analisi matematica 1, Analisi matematica 2 e Matematica generale con Carmine Tornincasa: lezioni registrate, programma costruito sulle tracce d'esame degli iscritti."
+  seo={{ titolo: 'Corsi di gruppo online di Analisi 1, Analisi 2 e Matematica generale | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true }}>
+  <StileLezioni />
+  <div class="prenota gruppi">
+    <p class="sopratitolo">Lezioni dal vivo online</p>
+    <h1>Corsi di gruppo</h1>
+    <p class="sommario">Corsi online in gruppo di {MATERIE_GRUPPI.map((m) => m.titolo).join(', ').replace(/, ([^,]*)$/, ' e $1')}. Il programma si costruisce sulle tracce d’esame inviate dagli iscritti.</p>
+
+    <h2>Come funzionano</h2>
+    <ul class="punti">
+      <li>Le lezioni si svolgono online, con due o tre incontri a settimana da un’ora. Gli orari si decidono quando il gruppo è formato, in base agli impegni degli iscritti.</li>
+      <li>Ogni lezione viene registrata, quindi una lezione persa si recupera con la registrazione.</li>
+      <li>Il programma segue le tracce d’esame dei docenti degli iscritti. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20.</li>
+      <li>Il corso è pensato anche per chi parte con delle lacune. Per i prerequisiti c’è il <a href="/precorso">Precorso</a> sul sito.</li>
+      <li>Si può seguire anche solo una parte delle lezioni. Il pagamento avviene ogni cinque o sei lezioni svolte.</li>
+      <li>Gli iscritti hanno un gruppo WhatsApp del corso, per le comunicazioni e per esercitarsi insieme tra una lezione e l’altra.</li>
+    </ul>
+
+    <h2>Come partecipare</h2>
+    <ol class="passi-gruppo">
+      <li><strong>Ci si iscrive</strong> con il modulo qui sotto. Il numero di telefono serve per il gruppo WhatsApp del corso.</li>
+      <li><strong>Si aspetta che il gruppo si formi.</strong> Quando gli iscritti sono abbastanza, scrivo a ciascuno su WhatsApp con il calendario delle lezioni.</li>
+      <li><strong>Nel frattempo si inviano le tracce d’esame</strong> del proprio docente e la data dell’esame, dalla pagina personale del corso. Il link a questa pagina arriva per email dopo l’iscrizione.</li>
+    </ol>
+
+    <form id="modulo-gruppo" class="passo" novalidate>
+      <h2 id="iscrizione">Iscrizione</h2>
+      <fieldset class="materie-lezione">
+        <legend class="nota-passo">Corso</legend>
+        {MATERIE_GRUPPI.map((m) => (<label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>))}
+      </fieldset>
+      <div class="modulo">
+        <label>Nome<input name="nome" autocomplete="given-name" required maxlength="60" /></label>
+        <label>Cognome<input name="cognome" autocomplete="family-name" required maxlength="60" /></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
+        <label>Telefono (WhatsApp)<input name="telefono" type="tel" autocomplete="tel" required maxlength="20" placeholder="+39 …" /></label>
+        <label><span>Università <small>facoltativo</small></span><input name="universita" maxlength="120" /></label>
+        <label><span>Corso di laurea <small>facoltativo</small></span><input name="corso_laurea" maxlength="120" /></label>
+        <label><span>Docente <small>facoltativo</small></span><input name="docente" maxlength="80" /></label>
+        <label><span>Data dell’esame <small>se è già fissata</small></span><input name="data_esame" type="date" /></label>
+        <label class="largo"><span>Note <small>facoltativo</small></span><textarea name="note" maxlength="800" placeholder="Per esempio: argomenti più difficili, appelli a cui vuoi presentarti"></textarea></label>
+        <label class="largo"><span>Tracce d’esame <small>facoltativo, PDF o foto, fino a {FILE_GRUPPI.maxFile} file</small></span><input name="tracce" type="file" multiple accept="application/pdf,image/*" /></label>
+      </div>
+      <p class="nota-termini">I dati servono a organizzare il corso e a formare il gruppo WhatsApp; i dettagli sono nell’<a href="/privacy">informativa sulla privacy</a>.</p>
+      <div class="tasti"><button type="submit" class="bottone-primario" id="invia">Iscriviti</button></div>
+      <p class="esito-modulo" id="esito" role="status"></p>
+    </form>
+    <div id="fatto" class="avviso-lezione" hidden></div>
+
+    <p class="nota-termini">Per domande sui corsi si scrive su <a href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>. Per una lezione individuale in un giorno e un’ora a scelta c’è la pagina <a href="/prenota">Prenota una lezione</a>.</p>
+  </div>
+</Base>
+
+<style is:global>
+  .gruppi h2 { font-size: 1.25rem; margin: 2rem 0 0.6rem; }
+  .gruppi .punti li, .gruppi .passi-gruppo li { margin: 0.45rem 0; }
+  .gruppi #fatto p { margin: 0.4rem 0; }
+  .gruppi #fatto .tasti { margin-bottom: 0.2rem; }
+</style>
+
+<script>
+  import { inviaTraccia } from '../../lib/tracce';
+  const modulo = document.getElementById('modulo-gruppo') as HTMLFormElement;
+  const esito = document.getElementById('esito')!;
+  const invia = document.getElementById('invia') as HTMLButtonElement;
+  const fatto = document.getElementById('fatto')!;
+  const errore = (m: string) => { esito.classList.add('errore'); esito.textContent = m; };
+
+  fetch('/api/io').then((r) => (r.ok ? r.json() : null)).then((io) => {
+    if (!io) return;
+    const [n, ...c] = String(io.nome || '').trim().split(/\s+/);
+    const set = (k: string, v: string) => { const el = modulo.elements.namedItem(k) as HTMLInputElement; if (el && !el.value && v) el.value = v; };
+    set('nome', n || ''); set('cognome', c.join(' ')); set('email', io.email || '');
+  }).catch(() => {});
+
+  modulo.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = new FormData(modulo);
+    const v = (k: string) => String(f.get(k) || '').trim();
+    if (!v('materia')) return errore('Scegli il corso.');
+    if (v('nome').length < 2 || v('cognome').length < 2) return errore('Scrivi nome e cognome.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))) return errore('Scrivi un indirizzo email valido.');
+    if (!/^[+0-9 ]{6,20}$/.test(v('telefono'))) return errore('Scrivi un numero di telefono valido.');
+    const file = (modulo.elements.namedItem('tracce') as HTMLInputElement).files;
+    esito.classList.remove('errore'); esito.textContent = 'Invio dell’iscrizione…';
+    invia.disabled = true;
+    try {
+      const corpo: Record<string, string> = {};
+      for (const k of ['materia', 'nome', 'cognome', 'email', 'telefono', 'universita', 'corso_laurea', 'docente', 'data_esame', 'note']) corpo[k] = v(k);
+      const r = await fetch('/api/gruppi/iscriviti', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(corpo) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) { invia.disabled = false; return errore(d.errore || 'Qualcosa non ha funzionato. Riprova tra poco.'); }
+      if (d.gia) {
+        modulo.hidden = true; fatto.hidden = false;
+        fatto.innerHTML = '<p><strong>Risulti già iscritto a questo corso.</strong> Ti ho mandato per email il link alla tua pagina del corso, da cui puoi aggiungere le tracce e la data dell’esame.</p>';
+        return;
+      }
+      const problemi: string[] = [];
+      let n = 0;
+      for (const x of Array.from(file || [])) {
+        esito.textContent = `Invio delle tracce: ${++n} di ${file!.length}…`;
+        try { await inviaTraccia(d.t, x); } catch (err: any) { problemi.push(err.message); }
+      }
+      modulo.hidden = true; fatto.hidden = false;
+      fatto.innerHTML = `<p><strong>Iscrizione registrata.</strong> Quando il gruppo è formato ti scrivo su WhatsApp con il calendario delle lezioni.</p>
+        <p>Dalla tua pagina del corso puoi aggiungere altre tracce d’esame e aggiornare la data dell’esame. Il link è anche nell’email che hai ricevuto.</p>
+        ${problemi.length ? `<p class="esito-modulo errore">${problemi.join(' ')}</p>` : ''}
+        <div class="tasti"><a class="bottone-primario" href="${d.link.replace(location.origin, '')}">Apri la tua pagina del corso</a></div>`;
+      fatto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch {
+      invia.disabled = false;
+      errore('Connessione assente. Riprova tra poco.');
+    }
+  });
+</script>
