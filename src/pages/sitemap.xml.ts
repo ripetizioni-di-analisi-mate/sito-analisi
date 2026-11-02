@@ -28,6 +28,7 @@ export async function GET() {
   due('/', 1.0);
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
+  due('/concorsi/simulazione', 0.5, false);
   due('/ripetizioni-analisi', 0.8, false);
   due('/prenota', 0.7, false);
   due('/corsi-di-gruppo', 0.7, false);

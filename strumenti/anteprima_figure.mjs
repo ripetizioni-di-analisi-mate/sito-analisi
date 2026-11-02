@@ -1,5 +1,5 @@
 // Uso (dalla radice del repository): node <questo file> <uscita.png> <file.md> [<file.md> ...]
-// Disegna tutte le figure ::grafico e ::venn dei file indicati in un'unica immagine PNG, con il nome
+// Disegna tutte le figure ::grafico, ::venn e ::figura dei file indicati in un'unica immagine PNG, con il nome
 // del file sopra ogni figura, e segnala gli errori. Aprire il PNG con il tool Read per controllarle.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -7,16 +7,17 @@ import { pathToFileURL } from 'node:url';
 const radice = process.cwd();
 const { grafico } = await import(pathToFileURL(path.join(radice, 'src/plugins/grafico.mjs')));
 const { venn } = await import(pathToFileURL(path.join(radice, 'src/plugins/venn.mjs')));
+const { figura } = await import(pathToFileURL(path.join(radice, 'src/plugins/figura.mjs')));
 const [uscita, ...files] = process.argv.slice(2);
 const attr = (s) => { const o = {}; for (const m of s.matchAll(/(\w+)=(?:"([^"]*)"|([^\s}]+))/g)) o[m[1]] = m[2] ?? m[3]; return o; };
 let html = '', n = 0, errori = 0;
 for (const f of files) {
   const t = fs.readFileSync(f, 'utf8');
-  for (const m of t.matchAll(/^::(grafico|venn)\{(.*)\}\s*$/gm)) {
+  for (const m of t.matchAll(/^(?:\s*-\s+(?:[A-E]\)\s*)?)?::(grafico|venn|figura)\{(.*)\}\s*$/gm)) {
     n++;
     try {
       const a = attr(m[2]);
-      const svg = m[1] === 'grafico' ? grafico(a) : venn(a);
+      const svg = m[1] === 'grafico' ? grafico(a) : m[1] === 'figura' ? figura(a) : venn(a);
       if (m[1] === 'grafico' && (a.f || a.curve) && !/class="curva[^"]*" d="M/.test(svg)) { errori++; console.log(`ATTENZIONE ${f}: curva vuota (fuori dal riquadro o espressione non valida): ${m[0]}`); }
       html += `<div class="cella"><p>${path.basename(path.dirname(f))}/${path.basename(f)}</p>${svg}</div>`;
     } catch (e) { errori++; console.log(`ERRORE ${f}: ${e.message}: ${m[0]}`); }

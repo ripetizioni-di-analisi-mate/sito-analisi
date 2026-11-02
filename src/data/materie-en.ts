@@ -220,7 +220,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'logica-concorsi': {
     titolo: 'Logic for public exams',
     breve: 'Logic for exams',
-    descrizione: 'The logic of Italian public competitive exams and aptitude tests: sets and Venn diagrams, negations and implications, necessary and sufficient conditions, syllogisms, numerical reasoning and deduction problems.',
+    descrizione: 'The logic of Italian public competitive exams and aptitude tests: sets and Venn diagrams, negations and implications, necessary and sufficient conditions, syllogisms, numerical reasoning, deduction problems, verbal reasoning and abstract reasoning.',
     argomenti: {
       'insiemi-e-venn': { titolo: 'Sets and Venn diagrams', breve: 'Sets and Venn' },
       'connettivi-e-negazioni': { titolo: 'Connectives, negations and implications', breve: 'Negations' },
@@ -228,6 +228,8 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       sillogismi: { titolo: 'Syllogisms and quantifiers', breve: 'Syllogisms' },
       'ragionamento-numerico': { titolo: 'Numerical reasoning: clocks, calendars, orderings', breve: 'Numerical reasoning' },
       'problemi-di-deduzione': { titolo: 'Deduction problems and tables', breve: 'Deduction' },
+      'logica-verbale': { titolo: 'Verbal reasoning and reading comprehension', breve: 'Verbal reasoning' },
+      'ragionamento-figurale': { titolo: 'Abstract and spatial reasoning', breve: 'Abstract reasoning' },
     },
   },
   'matematica-da-zero': {

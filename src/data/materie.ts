@@ -324,7 +324,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'logica-concorsi',
     titolo: 'Logica per concorsi',
     breve: 'Logica per concorsi',
-    descrizione: "La logica dei concorsi pubblici e dei test attitudinali: insiemi e diagrammi di Venn, negazioni e implicazioni, condizioni necessarie e sufficienti, sillogismi, ragionamento numerico e problemi di deduzione.",
+    descrizione: "La logica dei concorsi pubblici e dei test attitudinali: insiemi e diagrammi di Venn, negazioni e implicazioni, condizioni necessarie e sufficienti, sillogismi, ragionamento numerico, problemi di deduzione, logica verbale e ragionamento figurale.",
     colore: '#6d5a8a',
     gruppo: 'Concorsi',
     attiva: true,
@@ -335,6 +335,8 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'sillogismi', titolo: 'Sillogismi e quantificatori', breve: 'Sillogismi' },
       { slug: 'ragionamento-numerico', titolo: 'Ragionamento numerico: orologi, calendari, ordinamenti', breve: 'Ragionamento numerico' },
       { slug: 'problemi-di-deduzione', titolo: 'Problemi di deduzione e tabelle', breve: 'Problemi di deduzione' },
+      { slug: 'logica-verbale', titolo: 'Logica verbale e comprensione dei testi', breve: 'Logica verbale' },
+      { slug: 'ragionamento-figurale', titolo: 'Ragionamento figurale e spaziale', breve: 'Ragionamento figurale' },
     ],
   },
   {

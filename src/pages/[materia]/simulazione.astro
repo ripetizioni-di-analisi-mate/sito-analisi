@@ -1,9 +1,14 @@
 ---
 import Simulazione from '../../viste/Simulazione.astro';
+import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
 import { catalogoDomande } from '../../lib/domande';
+import { MATERIE } from '../../data/materie';
 // Le materie che hanno il capitolo «Prove d'esame» (domande a tempo) hanno anche la simulazione d'esame.
+// Per le materie dei concorsi la simulazione è una prova a quiz corretta in automatico.
 export async function getStaticPaths() {
   return Object.keys(await catalogoDomande('it')).map((materia) => ({ params: { materia } }));
 }
+const materia = Astro.params.materia!;
+const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
 ---
-<Simulazione lingua="it" materia={Astro.params.materia!} />
+{concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}

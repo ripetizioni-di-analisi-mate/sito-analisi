@@ -846,6 +846,52 @@ export default {
       });
       return json({ ...base, ...r });
     }
+    if (p === '/api/simulazione-quiz' && POST) {
+      // Simulazione della prova preselettiva (materie dei concorsi): domande di più materie e argomenti,
+      // pescate a turno. Il browser riceve testi e risposte; la posizione delle corrette arriva solo alla consegna.
+      const { materie, numero, recenti } = await req.json().catch(() => ({}));
+      const scelte = (Array.isArray(materie) ? materie : []).filter((s) => MATERIE.some((m) => m.slug === s && m.gruppo === 'Concorsi'));
+      const n = Math.max(5, Math.min(100, Math.round(Number(numero) || 30)));
+      if (!scelte.length) return json({ errore: 'Scegli almeno una materia.' }, 400);
+      const viste = new Set(Array.isArray(recenti) ? recenti.filter((x) => typeof x === 'string').slice(-600) : []);
+      const mescola = (a) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+      const perMateria = [];
+      for (const m of scelte) {
+        const dati = await domandeDi(env, m, 'it');
+        const gruppi = Object.values(dati?.argomenti || {}).filter((x) => x?.length)
+          .map((g) => g.map((q) => ({ ...q, materia: m })))
+          .map((g) => [...mescola(g.filter((q) => !viste.has(`${m}/${q.id}`))), ...mescola(g.filter((q) => viste.has(`${m}/${q.id}`)))]);
+        if (gruppi.length) perMateria.push(mescola(gruppi));
+      }
+      const disponibili = perMateria.flat(2).length;
+      if (!disponibili) return json({ errore: 'Le domande di queste materie non sono ancora disponibili.' }, 404);
+      // Quote per materia proporzionali al numero di argomenti; dentro ogni materia gli argomenti si alternano.
+      const argTot = perMateria.reduce((t, g) => t + g.length, 0);
+      const quote = perMateria.map((g) => Math.round((n * g.length) / argTot));
+      quote[quote.length - 1] = n - quote.slice(0, -1).reduce((t, x) => t + x, 0);
+      const elenco = [];
+      perMateria.forEach((pile, i) => {
+        const presi = [];
+        while (presi.length < quote[i] && pile.some((pl) => pl.length)) for (const pl of pile) if (pl.length && presi.length < quote[i]) presi.push(pl.shift());
+        elenco.push(...mescola(presi));
+      });
+      const domande = elenco.map((q) => ({ id: `${q.materia}/${q.id}`, materia: q.materia, argomento: q.id.split('/')[0], testo: q.testo, scelte: q.scelte }));
+      const token = await firmaToken(env, { sim: 1, ids: domande.map((d) => d.id), t: Date.now() });
+      return json({ token, domande }, 200, { 'cache-control': 'no-store' });
+    }
+    if (p === '/api/simulazione-quiz/correggi' && POST) {
+      const { token } = await req.json().catch(() => ({}));
+      const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
+      if (!tok?.sim || !Array.isArray(tok.ids)) return json({ errore: 'Simulazione non valida: ricarica la pagina.' }, 400);
+      const esiti = [];
+      for (const id of tok.ids) {
+        const [m, argomento] = String(id).split('/');
+        const dati = await domandeDi(env, m, 'it');
+        const q = dati?.argomenti?.[argomento]?.find((x) => `${m}/${x.id}` === id);
+        esiti.push(q ? { id, corretta: q.corretta, spiegazione: q.spiegazione } : { id, corretta: 0, spiegazione: '' });
+      }
+      return json({ esiti }, 200, { 'cache-control': 'no-store' });
+    }
     if (p === '/api/sessione/riepilogo' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);

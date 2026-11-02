@@ -98,10 +98,10 @@ const en = lingua === 'en';
     {domandeMateria > 0 && (
       <li>
         <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</a></h2>
-        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
+        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
         <nav aria-label={lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}>
           <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
-          <a href={link(lingua, `/${materia}/simulazione`)}>{lingua === 'en' ? 'Exam simulation' : 'Simulazione d\'esame'}</a>
+          <a href={link(lingua, `/${materia}/simulazione`)}>{lingua === 'en' ? 'Exam simulation' : m.gruppo === 'Concorsi' ? 'Simulazione della prova' : 'Simulazione d\'esame'}</a>
           <a class="solo-collegati" href={link(lingua, `/${materia}/${RIPASSO_OGGI}/domande`)}>{lingua === 'en' ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
         </nav>
       </li>

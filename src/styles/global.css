@@ -679,6 +679,26 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .venn .universo { fill: none; stroke: var(--inchiostro-2); stroke-width: 1.5; }
 .venn .nome-insieme { font-family: var(--testo); font-style: italic; font-size: 26px; fill: var(--inchiostro); }
 .venn .elementi { font-family: var(--testo); font-size: 19px; fill: var(--inchiostro); }
+/* figure del ragionamento figurale (src/plugins/figura.mjs) */
+.figura-logica > svg { color: var(--inchiostro); }
+.figura-logica .bordo { fill: var(--carta); stroke: var(--riga); stroke-width: 1.5; }
+.figura-logica .bordo-domanda { stroke: var(--accento); stroke-dasharray: 5 4; fill: color-mix(in srgb, var(--accento) 6%, var(--carta)); }
+.figura-logica .domanda { font-family: var(--ui); font-size: 46px; font-weight: 700; fill: var(--accento); }
+.figura-logica .etichetta { font-family: var(--ui); font-size: 19px; font-weight: 700; fill: var(--inchiostro); }
+.figura-logica g[class^="f-"] > * { stroke: currentColor; stroke-width: 2.2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.figura-logica .f-vuoto > * { fill: var(--carta); }
+.figura-logica .f-pieno > * { fill: currentColor; }
+.figura-logica .f-grigio > * { fill: color-mix(in srgb, currentColor 35%, var(--carta)); }
+.figura-logica .f-contorno > * { fill: none; }
+.figura-logica .fondo-righe { fill: var(--carta); }
+.figura-logica .tratteggio { fill: none; stroke: currentColor; stroke-width: 1.3; }
+.figura-logica g.f-linea > *, .figura-logica .tratto { stroke: currentColor; stroke-width: 3; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.figura-logica g.f-lettera > * { fill: currentColor; stroke: none; font-family: var(--ui); font-weight: 700; }
+.figura-logica .faccia { fill: var(--carta); stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+.figura-logica .faccia-alto { fill: color-mix(in srgb, var(--accento) 7%, var(--carta)); }
+.figura-logica .faccia-destra { fill: color-mix(in srgb, currentColor 6%, var(--carta)); }
+.figura-cella { margin: 0.2rem 0; display: inline-block; vertical-align: middle; }
+.figura-cella > svg { width: 4.5rem; }
 
 /* studente collegato: cerchietto con l'iniziale e nome nel pulsante dell'account */
 .bottone-account .iniziale { display: none; }
@@ -1119,6 +1139,23 @@ html.collegato .solo-collegati { display: revert; }
 .sim-nota { color: var(--inchiostro-2); margin: 0 0 0.6rem; }
 .sim-scaduto { font-family: var(--ui); font-weight: 600; color: #a3412f; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
+.sim-scelte input[type="number"] { width: 7rem; font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+.sim-nota-punti { margin: 0.6rem 0 0; font-size: 0.86rem; color: var(--inchiostro-2); }
+.sim-errore { margin: 0; color: #a3412f; font-weight: 600; }
+.sim-errore[hidden] { display: none; }
+.sim-date { font-size: 0.88rem; color: var(--inchiostro-2); }
+.sim-quesito .testo-domanda { margin-top: 0.4rem; }
+.sim-quesito .scelte { margin-top: 0.7rem; }
+.sim-esito-quesito { font-style: normal; font-weight: 700; font-size: 0.85rem; margin-left: auto; }
+.sim-giusto .sim-esito-quesito { color: var(--verde); }
+.sim-errato .sim-esito-quesito { color: #a3412f; }
+.sim-vuoto .sim-esito-quesito { color: var(--inchiostro-2); }
+.sim-tabella { width: 100%; border-collapse: collapse; margin: 0.4rem 0 1rem; font-size: 0.92rem; }
+.sim-tabella th, .sim-tabella td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--riga); }
+.sim-tabella small { color: var(--inchiostro-2); margin-left: 0.3rem; }
+.sim-superata { color: var(--verde); font-weight: 700; }
+.sim-non-superata { color: #a3412f; font-weight: 700; }
+@media (max-width: 40rem) { .sim-barra { flex-wrap: wrap; } .sim-date { order: 3; width: 100%; } }
 
 /* Pagina della materia, con l'account: data dell'esame e progressi per argomento */
 .esame-materia { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin: 0 0 1.2rem; padding: 0.6rem 0.85rem; border: 1px solid var(--riga); border-radius: 10px; background: #fff; font-family: var(--ui); font-size: 0.93rem; }

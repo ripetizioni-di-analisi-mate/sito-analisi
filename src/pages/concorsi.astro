@@ -10,34 +10,36 @@ const tipi = [
     nome: 'Pubblica amministrazione ed enti locali',
     esempi: 'comuni, regioni, ministeri, agenzie, aziende sanitarie',
     testo: 'Le prove preselettive contengono spesso una parte di quesiti logico-matematici, accanto alle materie giuridiche e, in molti bandi recenti, ai quesiti situazionali. I quesiti numerici riguardano soprattutto percentuali, proporzioni e problemi con dati concreti; quelli di logica riguardano deduzioni, negazioni, condizioni necessarie e sufficienti e insiemi.',
-    argomenti: ['Rapporti, proporzioni e percentuali', 'Problemi con le grandezze', 'Connettivi e negazioni', 'Condizioni necessarie e sufficienti', 'Problemi di deduzione'],
+    argomenti: ['Rapporti, proporzioni e percentuali', 'Problemi con le grandezze', 'Connettivi e negazioni', 'Condizioni necessarie e sufficienti', 'Problemi di deduzione', 'Logica verbale'],
   },
   {
     nome: 'Forze armate e forze di polizia',
     esempi: 'Esercito, Marina, Aeronautica, Carabinieri, Polizia di Stato, Guardia di Finanza',
-    testo: 'Le prove scritte comprendono di solito domande di cultura generale con una parte di matematica di base e test di ragionamento logico, numerico e verbale. Compaiono spesso serie di numeri da completare, problemi con le frazioni e le percentuali, equazioni di primo grado e semplici domande di geometria.',
-    argomenti: ['Numeri e calcolo', 'Equazioni e problemi', 'Successioni numeriche', 'Geometria', 'Ragionamento numerico'],
+    testo: 'Le prove scritte comprendono di solito domande di cultura generale con una parte di matematica di base e test di ragionamento logico, numerico e verbale; i test attitudinali possono comprendere anche quesiti di ragionamento figurale, con serie e matrici di figure e sviluppi del cubo. Compaiono spesso serie di numeri da completare, problemi con le frazioni e le percentuali, equazioni di primo grado e semplici domande di geometria.',
+    argomenti: ['Numeri e calcolo', 'Equazioni e problemi', 'Successioni numeriche', 'Geometria', 'Ragionamento numerico', 'Ragionamento figurale'],
   },
   {
     nome: 'Test di ammissione all’università',
     esempi: 'test TOLC e prove di accesso ai corsi a numero programmato',
-    testo: 'Molte prove di accesso contengono una sezione di matematica di base e una di logica. La matematica riguarda algebra, equazioni, percentuali, geometria e probabilità; la logica riguarda deduzioni, sillogismi e problemi da risolvere con un ragionamento ordinato.',
-    argomenti: ['Equazioni e problemi', 'Calcolo combinatorio', 'Probabilità', 'Geometria', 'Sillogismi'],
+    testo: 'Molte prove di accesso contengono una sezione di matematica di base e una di logica. La matematica riguarda algebra, equazioni, percentuali, geometria e probabilità; la logica riguarda deduzioni, sillogismi, comprensione di brevi testi e problemi da risolvere con un ragionamento ordinato.',
+    nota: true,
+    argomenti: ['Equazioni e problemi', 'Calcolo combinatorio', 'Probabilità', 'Geometria', 'Sillogismi', 'Logica verbale'],
   },
   {
     nome: 'Selezioni di banche e grandi aziende',
     esempi: 'test numerici e logici delle prove di selezione',
     testo: 'I test numerici chiedono di leggere tabelle e grafici e di calcolare percentuali, variazioni e medie in poco tempo; i test logici chiedono di completare serie e di trarre conclusioni da alcune premesse.',
-    argomenti: ['Medie, tabelle e grafici', 'Rapporti, proporzioni e percentuali', 'Successioni numeriche', 'Ragionamento numerico'],
+    argomenti: ['Medie, tabelle e grafici', 'Rapporti, proporzioni e percentuali', 'Successioni numeriche', 'Ragionamento numerico', 'Logica verbale'],
   },
 ];
 
 const quesiti = [
   ['Ragionamento numerico', 'calcoli rapidi, percentuali, proporzioni e problemi con dati concreti, spesso a tempo.'],
   ['Logica deduttiva', 'da alcune premesse si deduce quale conclusione è vera, falsa o non deducibile.'],
-  ['Logica verbale', 'negazione di una frase, frasi equivalenti, condizioni necessarie e sufficienti.'],
+  ['Logica verbale', 'negazione di una frase, frasi equivalenti, condizioni necessarie e sufficienti, analogie tra parole, completamento di frasi, brani da cui stabilire se un\'affermazione è vera, falsa o non deducibile.'],
   ['Serie', 'successioni di numeri o di lettere da completare riconoscendo la regola.'],
   ['Lettura di dati', 'tabelle e grafici da cui ricavare medie, percentuali e variazioni.'],
+  ['Ragionamento figurale', 'serie e matrici di figure da completare, figure ruotate o allo specchio, sviluppi del cubo.'],
 ];
 ---
 <Base lingua="it" titolo="Che cosa studiare per il tuo concorso" percorso={[{ titolo: 'Concorsi' }]}
@@ -61,6 +63,7 @@ const quesiti = [
         <h3>{t.nome}</h3>
         <p class="esempi">{t.esempi}</p>
         <p>{t.testo}</p>
+        {t.nota && <p>Per i TOLC dei corsi scientifici (per esempio TOLC-I e TOLC-S) servono anche esponenziali e logaritmi, goniometria e geometria analitica: questi argomenti sono spiegati nel <a href="/precorso">Precorso</a>.</p>}
         <p class="argomenti-chiave"><span>Argomenti più frequenti</span> {t.argomenti.join(' · ')}</p>
       </section>
     ))}
@@ -76,7 +79,10 @@ const quesiti = [
         </div>
       ))}
     </div>
-    <p>Chi ha bisogno di riprendere le basi (frazioni, percentuali, potenze, equazioni) può partire dalla materia gratuita <a href="/matematica-da-zero">Matematica zero</a>, nel Percorso per principianti, che le spiega passo per passo. Per una preparazione su misura con lezioni private si può scrivere a Carmine dal pulsante WhatsApp in basso a destra.</p>
+    <h2>La simulazione della prova</h2>
+    <p>La <a href="/concorsi/simulazione">simulazione della prova a quiz</a> propone domande di matematica e di logica prese da tutti gli argomenti, con il tempo che scorre, e alla consegna dà il punteggio, le risposte corrette con la spiegazione e il risultato per argomento. Numero di quesiti, durata e punti per le risposte corrette, errate e non date si impostano come nel bando.</p>
+
+    <p>Chi ha bisogno di riprendere le basi (frazioni, percentuali, potenze, equazioni) può partire dalla materia gratuita <a href="/matematica-da-zero">Matematica zero</a>, nel Percorso per principianti, che le spiega passo per passo. Per una preparazione su misura le lezioni individuali di Matematica per concorsi si prenotano dalla pagina <a href="/prenota">Prenota una lezione</a>.</p>
   </div>
 </Base>
 
