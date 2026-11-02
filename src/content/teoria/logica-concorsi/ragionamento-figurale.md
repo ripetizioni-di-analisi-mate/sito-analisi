@@ -120,13 +120,13 @@ Unione e differenza simmetrica danno lo stesso risultato solo quando le prime du
 :::definizione{#figura-estranea titolo="Figura estranea"}
 Nei quesiti di **figura estranea** si mostrano cinque figure, di cui quattro seguono una regola comune e una no, e la risposta è quella che non la segue. La regola si cerca confrontando le figure una caratteristica alla volta, come nelle serie.
 
-::figura{tipo="opzioni" celle="triangolo | quadrato grigio | pentagono | esagono pieno | stella" titolo="Quattro figure sono poligoni, mentre la stella ha il contorno che rientra verso il centro"}
+::figura{tipo="opzioni" celle="triangolo | quadrato grigio | pentagono | esagono pieno | stella" titolo="Quattro figure sono poligoni convessi, mentre la stella ha il contorno che rientra verso il centro"}
 
 Nelle cinque figure il riempimento e il numero di lati cambiano senza un ordine. Il triangolo, il quadrato, il pentagono e l'esagono hanno tutti gli angoli rivolti verso l'esterno; la stella ha invece cinque angoli rivolti verso l'interno. Quindi la figura estranea è la E.
 :::
 
 :::osservazione{#relazioni-interne titolo="Regole sulle relazioni tra le parti"}
-Spesso la regola comune non riguarda una caratteristica da sola, ma un legame tra due parti della cella. I legami più frequenti sono tre.
+Spesso la regola comune è un legame tra due parti della cella. I legami più frequenti sono tre.
 
 - Un numero uguale a un altro, per esempio il numero di punti uguale al numero di lati del poligono.
 - Una direzione, per esempio la freccia che punta verso il punto.
