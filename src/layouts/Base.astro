@@ -197,13 +197,13 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         )}
         {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra} data-lingua="it">Italiano</a></p>}
         <slot />
-        {(contenuto || sezione === 'domande') && <SegnalaErrore lingua={lingua} />}
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
             {successivo && <a class="successivo" href={successivo.href}><small>{successivo.etichetta ?? t.successivo}</small><span>{successivo.titolo}{successivo.sotto ? <em> · {successivo.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
             {precedente && <a class="precedente" href={precedente.href}>← {precedente.titolo}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</a>}
           </nav>
         )}
+        {(contenuto || sezione === 'domande') && <SegnalaErrore lingua={lingua} />}
       </div>
     </main>
   </div>
