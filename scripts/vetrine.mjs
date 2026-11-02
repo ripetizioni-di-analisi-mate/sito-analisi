@@ -131,7 +131,9 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       // restano visibili solo i primi due paragrafi: un assaggio, non mezza dispensa
       const tenute = Math.min(2, posizioni.length - 1);
       const taglio = posizioni[tenute].index;
-      let coda = t.indexOf('<nav class="passi"', taglio);
+      // dopo il riquadro di fine anteprima restano «Segnala un errore» (se c'è) e i passi verso le altre pagine
+      let coda = t.indexOf('<p class="segnala-errore"', taglio);
+      if (coda === -1) coda = t.indexOf('<nav class="passi"', taglio);
       if (coda === -1) coda = t.indexOf('<script', taglio);
       const nascoste = posizioni.length - tenute;
       const voci = posizioni.slice(tenute).map((m2) => `<li>${titoloH2(t, m2.index)}</li>`).join('');

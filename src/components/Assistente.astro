@@ -102,6 +102,8 @@ const s = en ? {
     const studio = document.querySelector<HTMLElement>('.testo-studio');
     let conversazione: Messaggio[] = [];
     let parte: HTMLElement | null = null;
+    // Parte scelta con un tasto «Chiedi a Pi» accanto a un esercizio: vale finché lo studente non tocca un altro riquadro.
+    let forzata: { el: HTMLElement; titolo: string; nodi: Element[] } | null = null;
     let inCorso = false;
     pannello.classList.toggle('con-studio', Boolean(studio));
 
@@ -155,7 +157,8 @@ const s = en ? {
       while (n && n.tagName !== 'H2') { nodi.push(n); n = n.nextElementSibling; }
       return { titolo: h.textContent?.trim() || '', testo: testo(nodi) };
     }
-    function scegli(p: Parte | undefined) {
+    function scegli(p: Parte | undefined, daTasto = false) {
+      if (!daTasto) forzata = null;
       document.querySelectorAll('.parte-scelta').forEach((x) => x.classList.remove('parte-scelta'));
       parte = p ? p.el : null;
       if (!p) { boxParte.hidden = true; return; }
@@ -266,7 +269,7 @@ const s = en ? {
       d.append(b);
     }
 
-    async function invia(domanda: string) {
+    async function invia(domanda: string, modo?: string) {
       domanda = domanda.trim();
       const foto = immagine;
       if (!domanda && foto) domanda = testi.fotoDomanda;
@@ -285,7 +288,7 @@ const s = en ? {
       const attesa = aggiungi({ ruolo: 'attesa', testo: testi.attendi });
       if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
       const ps = parti();
-      const p = ps.find((x) => x.el === parte);
+      const p = forzata && forzata.el === parte ? forzata : ps.find((x) => x.el === parte);
       // Pagine senza testo di studio (home, prezzi, guida…): si manda l'inizio del testo della pagina.
       const pagina = !studio ? { titolo: document.querySelector('main h1')?.textContent?.trim() || document.title, testo: (document.querySelector('main')?.innerText || '').replace(/\s+\n/g, '\n').slice(0, 3000) } : null;
       const errore = (t: string) => {
@@ -306,6 +309,8 @@ const s = en ? {
             paragrafo: p ? paragrafoDi(p.el) : null,
             messaggi: conversazione.map((m) => ({ ruolo: m.ruolo, testo: m.testo })),
             immagine: foto,
+            modo: modo || undefined,
+            pagina: location.pathname,
           }),
         });
         if (!katex) { try { katex = (await import('katex')).default; } catch { /* formule come testo */ } }
@@ -397,12 +402,12 @@ const s = en ? {
     });
     anteprima.querySelector('[data-togli-foto]')?.addEventListener('click', togliFoto);
 
-    function apriPannello(scorri = true) {
+    function apriPannello(scorri = true, scegliParte = true) {
       pannello!.hidden = false;
       radice.classList.add('assistente-aperto');
       try { sessionStorage.setItem('pi-aperto', '1'); } catch {}
       apri!.setAttribute('aria-expanded', 'true');
-      if (studio) {
+      if (studio && scegliParte) {
         const p = parteInVista();
         scegli(p);
         // Su telefono la finestra copre la metà bassa: la parte scelta sale in cima allo schermo.
@@ -456,6 +461,50 @@ const s = en ? {
     // Solo su schermi larghi: su telefono la finestra coprirebbe metà della pagina nuova.
     if (eraAperto && matchMedia('(min-width: 40rem)').matches) { nascondiFumetto(); apriPannello(false); }
     modulo.addEventListener('submit', (e) => { e.preventDefault(); invia(campo.value); });
+
+    // ---- «Chiedi a Pi» accanto agli esercizi ----
+    // Esercizi da fare: «Chiedi un indizio a Pi» manda subito la richiesta di un indizio (Pi indica il metodo, senza svolgere).
+    // Esercizi svolti: «Chiedi a Pi su questo esercizio» apre la finestra con l'esercizio scelto e lascia scrivere la domanda.
+    const sez = pannello.dataset.sezione;
+    const inglese = pannello.dataset.lingua === 'en';
+    function tastoPi(testoTasto: string, prendi: () => { el: HTMLElement; titolo: string; nodi: Element[] }, domanda?: string) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chiedi-pi';
+      b.innerHTML = `<span aria-hidden="true">π</span>${testoTasto}`;
+      b.addEventListener('click', () => {
+        nascondiFumetto();
+        const f = prendi();
+        forzata = f;
+        scegli(f, true);
+        apriPannello(false, false);
+        if (domanda) invia(domanda, 'indizio');
+        else campo.focus();
+      });
+      return b;
+    }
+    const nodiTraccia = (contenitore: Element) => [...contenitore.children].filter((x) => !x.matches('details.blocco-soluzione, .chiedi-pi, .verifica'));
+    if (sez === 'esercizi') {
+      const tracce = [...document.querySelectorAll<HTMLElement>('section.traccia')];
+      const singola = !tracce.length ? studio : null;
+      const domanda = inglese ? 'Give me a hint to start this exercise.' : 'Dammi un indizio per iniziare questo esercizio.';
+      const testoTasto = inglese ? 'Ask Pi for a hint' : 'Chiedi un indizio a Pi';
+      for (const t of tracce) {
+        const corpo = t.querySelector<HTMLElement>('.testo-studio');
+        if (!corpo) continue;
+        t.append(tastoPi(testoTasto, () => ({ el: corpo, titolo: t.querySelector('h2')?.textContent?.replace(/\s+/g, ' ').trim() || '', nodi: nodiTraccia(corpo) }), domanda));
+      }
+      if (singola) singola.after(tastoPi(testoTasto, () => ({ el: singola, titolo: document.querySelector('main h1')?.textContent?.trim() || '', nodi: nodiTraccia(singola) }), domanda));
+    } else if (sez === 'esercizi-svolti' && studio) {
+      const titoli = [...studio.children].filter((x) => x.tagName === 'H2' && /^esercizio-/.test(x.id)) as HTMLElement[];
+      for (const h of titoli) {
+        const nodi: Element[] = [h];
+        let n = h.nextElementSibling;
+        while (n && n.tagName !== 'H2') { nodi.push(n); n = n.nextElementSibling; }
+        const b = tastoPi(inglese ? 'Ask Pi about this exercise' : 'Chiedi a Pi su questo esercizio', () => ({ el: h, titolo: h.textContent?.trim() || '', nodi }));
+        (nodi[nodi.length - 1] as HTMLElement).after(b);
+      }
+    }
     campo.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); invia(campo.value); }
     });

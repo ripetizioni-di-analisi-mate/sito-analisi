@@ -148,6 +148,9 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   }
 
   const argomento = materia?.argomenti.find((a) => a.slug === b.argomento);
+  // Esercizi di una materia a pagamento che lo studente non ha sbloccato: Pi guida sul metodo senza consegnare lo svolgimento.
+  const riservato = Boolean(materia && aPagamento.includes(materia.slug) && !io?.materie?.includes(materia.slug)
+    && (b.tipo === 'esercizi' || (b.tipo === 'esercizi-svolti' && Number(String(b.pagina || '').match(/esercizi-svolti\/(\d+)/)?.[1] || 0) > 3)));
   const ultima = messaggi[messaggi.length - 1].content;
   const sulSito = !TIPI[b.tipo] || DOMANDA_SUL_SITO.test(ultima);
   const contesto = [
@@ -157,6 +160,8 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
     io ? `Lo studente ha un account${io.materie.length ? `; materie sbloccate: ${io.materie.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')}` : ', ma non ha ancora sbloccato materie'}.` : 'Lo studente non ha fatto l’accesso.',
     foto ? 'Lo studente ha allegato una foto (di solito un esercizio): leggila con attenzione, trascrivi in LaTeX la parte che serve e poi rispondi.' : '',
     b.parte?.testo ? `\nParte della pagina indicata dallo studente${b.parte.titolo ? ` (${taglia(b.parte.titolo, 200)})` : ''}:\n"""\n${taglia(b.parte.testo, 5000)}\n"""` : '',
+    b.modo === 'indizio' ? '\nLo studente ha premuto il tasto «Chiedi un indizio a Pi» su questo esercizio: scrivi soltanto un indizio sul metodo o sul primo passo, in due o tre frasi, senza svolgere i calcoli e senza scrivere il risultato. In fondo chiedi in una riga se vuole il passo successivo.' : '',
+    riservato ? '\nLa soluzione di questo esercizio è riservata a chi ha sbloccato la materia, e lo studente non l\'ha sbloccata: dai indicazioni sul metodo e sui singoli passaggi, uno alla volta se lo studente li chiede, ma non scrivere lo svolgimento completo né il risultato finale. Se lo studente chiede la soluzione completa, rispondi che si trova nell\'accesso completo alla materia e offri il passo successivo.' : '',
     b.paragrafo?.testo && b.paragrafo.testo !== b.parte?.testo
       ? `\nParagrafo in cui si trova${b.paragrafo.titolo ? ` (${taglia(b.paragrafo.titolo, 200)})` : ''}:\n"""\n${taglia(b.paragrafo.testo, 4000)}\n"""` : '',
   ].filter(Boolean).join('\n');

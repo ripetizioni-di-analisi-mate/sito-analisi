@@ -697,7 +697,8 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
 
   function strumenti() {
-    $('#vista').innerHTML = '<div class="due pari">' +
+    $('#vista').innerHTML = '<section class="card" style="margin-bottom:1rem"><header><h2>Segnalazioni di errori</h2><span class="nota" id="s-conta"></span></header><div class="corpo" id="s-elenco"><p class="nota" style="margin:0">Caricamento…</p></div></section>' +
+      '<div class="due pari">' +
       '<section class="card"><header><h2>Attiva materie a mano</h2></header><div class="corpo"><form class="modulo" id="f-attiva">' +
       '<p class="nota" style="margin:0">Per chi ha pagato in altro modo. Se lo studente non ha ancora un account, trova le materie appena si registra con questa email.</p>' +
       '<div class="campo"><label for="a-email">Email dello studente</label><input id="a-email" type="email" required placeholder="nome@esempio.it" list="email-note"></div>' +
@@ -719,6 +720,24 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<a class="bottone" href="https://vendors.paddle.com/payouts" target="_blank" rel="noopener">Paddle · pagamenti a te</a>' +
       '<a class="bottone" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>' +
       '<a class="bottone" href="/" target="_blank" rel="noopener">Il sito</a></div></div></section></div>';
+    // Segnalazioni dal tasto «Segnala un errore» delle pagine di studio: prima quelle da leggere.
+    const segnalazioni = async () => {
+      const d = await api('segnalazioni').catch(() => null); if (!d || !$('#s-elenco')) return;
+      const da = d.righe.filter((x) => !x.letta).length;
+      $('#s-conta').textContent = d.righe.length ? da + ' da leggere · ' + d.righe.length + ' in tutto' : '';
+      $('#s-elenco').innerHTML = d.righe.length ? '<div class="elenco-m">' + d.righe.slice(0, 60).map((x) =>
+        '<div class="riga-m segnalazione' + (x.letta ? ' letta' : '') + '" style="display:block;opacity:' + (x.letta ? '.55' : '1') + '">' +
+        '<div style="display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap"><a href="' + esc(x.pagina) + '" target="_blank" rel="noopener"><b>' + esc(x.titolo || x.pagina) + '</b></a>' +
+        (x.punto ? '<span class="nota">' + esc(x.punto) + '</span>' : '') + '<span class="nota" style="margin-left:auto">' + dataOra(new Date(x.quando).toISOString()) + '</span></div>' +
+        '<p style="margin:.35rem 0;white-space:pre-wrap">' + esc(x.testo) + '</p>' +
+        '<div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap"><span class="nota">' + (x.email ? esc(x.email) : 'senza email') + '</span>' +
+        '<button type="button" class="bottone" style="margin-left:auto" data-letta="' + x.id + '" data-v="' + (x.letta ? 0 : 1) + '">' + (x.letta ? 'Rimetti da leggere' : 'Fatto') + '</button></div></div>').join('') + '</div>'
+        : '<p class="nota" style="margin:0">Nessuna segnalazione. Il tasto «Segnala un errore» è in fondo a teoria, schede ed esercizi.</p>';
+      $$('#s-elenco [data-letta]').forEach((b) => b.addEventListener('click', async () => {
+        b.disabled = true; await api('segnalazione-letta', { id: Number(b.dataset.letta), letta: b.dataset.v === '1' }); segnalazioni();
+      }));
+    };
+    segnalazioni();
     $('#f-attiva').addEventListener('submit', async (e) => {
       e.preventDefault(); const email = $('#a-email').value.trim(); const materie = $$('#f-attiva .scelta-m input:checked').map((i) => i.value);
       if (!materie.length) { avviso('Scegli almeno una materia'); return; }

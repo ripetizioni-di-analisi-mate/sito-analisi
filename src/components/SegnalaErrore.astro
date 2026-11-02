@@ -1,0 +1,88 @@
+---
+// «Segnala un errore»: in fondo alle pagine di studio, un modulo breve che arriva a Carmine nella dashboard
+// (Strumenti → Segnalazioni). Si manda l'indirizzo della pagina e il titolo del paragrafo o dell'esercizio
+// che lo studente sta leggendo, così la segnalazione si ritrova subito.
+import { type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const en = Astro.props.lingua === 'en';
+const s = en ? {
+  apri: 'Report a mistake on this page', titolo: 'Report a mistake', chiudi: 'Close',
+  dove: 'Where', etichetta: 'What is wrong?', segnaposto: 'For example: in exercise 2 the second line should be 3x, not 2x.',
+  email: 'Your email (optional, for a reply)', invia: 'Send', grazie: 'Thank you: the report has reached Carmine.', breve: 'Write at least a few words.', rete: 'Network error: please try again.',
+} : {
+  apri: 'Segnala un errore in questa pagina', titolo: 'Segnala un errore', chiudi: 'Chiudi',
+  dove: 'Dove', etichetta: 'Che cosa non torna?', segnaposto: 'Per esempio: nell’esercizio 2 la seconda riga ha 2x al posto di 3x.',
+  email: 'La tua email (facoltativa, per avere una risposta)', invia: 'Invia', grazie: 'Grazie: la segnalazione è arrivata a Carmine.', breve: 'Scrivi almeno qualche parola.', rete: 'Errore di rete: riprova.',
+};
+---
+<p class="segnala-errore">
+  <button type="button" data-apri-segnala>
+    <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17.5V3.5M4.5 3.8c3.2-1.7 5.6 1.7 9.8 0v7c-4.2 1.7-6.6-1.7-9.8 0"/></svg>
+    {s.apri}
+  </button>
+</p>
+<dialog class="segnala-finestra zona-libera" aria-labelledby="segnala-titolo">
+  <form method="dialog" class="segnala-modulo">
+    <div class="segnala-testa"><strong id="segnala-titolo">{s.titolo}</strong><button type="button" data-chiudi-segnala aria-label={s.chiudi}>×</button></div>
+    <p class="segnala-dove"><span>{s.dove}:</span> <em data-segnala-dove></em></p>
+    <label for="segnala-testo">{s.etichetta}</label>
+    <textarea id="segnala-testo" rows="4" maxlength="2000" placeholder={s.segnaposto} required></textarea>
+    <label for="segnala-email" class="solo-ospiti-segnala">{s.email}</label>
+    <input id="segnala-email" class="solo-ospiti-segnala" type="email" maxlength="200" autocomplete="email" />
+    <p class="segnala-esito" role="status" aria-live="polite"></p>
+    <div class="segnala-azioni"><button type="submit" class="bottone-primario">{s.invia}</button></div>
+  </form>
+</dialog>
+
+<script is:inline define:vars={{ grazie: s.grazie, breve: s.breve, rete: s.rete }}>
+  (() => {
+    const d = document.querySelector('.segnala-finestra');
+    const apri = document.querySelector('[data-apri-segnala]');
+    if (!d || !apri) return;
+    const campo = d.querySelector('#segnala-testo');
+    const email = d.querySelector('#segnala-email');
+    const esito = d.querySelector('.segnala-esito');
+    const dove = d.querySelector('[data-segnala-dove]');
+    // Il titolo (h2) più vicino sopra il centro dello schermo: il paragrafo o l'esercizio che lo studente sta leggendo.
+    const puntoInVista = () => {
+      let migliore = null;
+      for (const h of document.querySelectorAll('main h2')) {
+        if (h.closest('.segnala-finestra, .ingresso-domande')) continue;
+        if (h.getBoundingClientRect().top < innerHeight * 0.5) migliore = h; else break;
+      }
+      return (migliore?.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+    };
+    let punto = '';
+    apri.addEventListener('click', () => {
+      punto = puntoInVista();
+      const h1 = (document.querySelector('main h1')?.textContent || '').trim();
+      dove.textContent = punto ? `${h1} · ${punto}` : h1;
+      esito.textContent = '';
+      d.querySelector('button[type=submit]').disabled = false;
+      d.showModal();
+      campo.focus();
+    });
+    d.querySelector('[data-chiudi-segnala]').addEventListener('click', () => d.close());
+    d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+    d.querySelector('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const testo = campo.value.trim();
+      if (testo.length < 5) { esito.textContent = breve; return; }
+      const b = d.querySelector('button[type=submit]');
+      b.disabled = true;
+      const r = await fetch('/api/segnala', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ pagina: location.pathname, titolo: (document.querySelector('main h1')?.textContent || '').trim(), punto, testo, email: email.value.trim() }),
+      }).catch(() => null);
+      const dati = r ? await r.json().catch(() => ({})) : {};
+      if (r && r.ok) {
+        esito.textContent = grazie;
+        campo.value = '';
+        setTimeout(() => d.close(), 1800);
+      } else {
+        esito.textContent = dati.errore || rete;
+        b.disabled = false;
+      }
+    });
+  })();
+</script>

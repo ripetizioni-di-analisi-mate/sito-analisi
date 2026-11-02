@@ -7,6 +7,7 @@ import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import Assistente from '../components/Assistente.astro';
+import SegnalaErrore from '../components/SegnalaErrore.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
@@ -183,6 +184,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         )}
         {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra} data-lingua="it">Italiano</a></p>}
         <slot />
+        {(contenuto || sezione === 'domande') && <SegnalaErrore lingua={lingua} />}
         {(precedente || successivo) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
             {successivo && <a class="successivo" href={successivo.href}><small>{successivo.etichetta ?? t.successivo}</small><span>{successivo.titolo}{successivo.sotto ? <em> · {successivo.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
@@ -378,7 +380,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       // Si guarda anche la selezione: il bersaglio di copia e scorciatoie è spesso la pagina intera o un nodo di testo.
       const inPi = (n: Node | null | undefined) => {
         const el = n && (n.nodeType === 1 ? (n as Element) : n.parentElement);
-        return Boolean(el?.closest?.('.assistente'));
+        return Boolean(el?.closest?.('.assistente, .zona-libera'));
       };
       const libero = (e: Event) => {
         if (inPi(e.target as Node)) return true;

@@ -139,6 +139,9 @@ export class Archivio {
     this.sql.exec('CREATE TABLE IF NOT EXISTS eventi (giorno TEXT, evento TEXT, materia TEXT, n INTEGER, PRIMARY KEY (giorno, evento, materia))');
     // recupero della password: email inviate per giorno (per indirizzo e per tutto il sito), contro gli abusi
     this.sql.exec('CREATE TABLE IF NOT EXISTS recuperi (giorno TEXT, chiave TEXT, n INTEGER, ultimo INTEGER, PRIMARY KEY (giorno, chiave))');
+    // segnalazioni di errori dalle pagine di studio (tasto «Segnala un errore»), lette da Carmine nella dashboard
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS segnalazioni (id INTEGER PRIMARY KEY AUTOINCREMENT, quando INTEGER, pagina TEXT, titolo TEXT,
+      punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
   }
@@ -267,6 +270,22 @@ export class Archivio {
       case '/liv-risposta': return Response.json(risposta(this, c));
       case '/liv-riepilogo': return Response.json(riepilogo(this, c));
       case '/liv-percorso': return Response.json(percorso(this, c));
+
+      case '/segnala': { // al massimo 10 segnalazioni al giorno per persona e 300 per tutto il sito
+        const conta = (k) => this.riga('SELECT n FROM recuperi WHERE giorno = ? AND chiave = ?', c.giorno, k)?.n || 0;
+        if (conta('*segnala:' + c.chi) >= 10 || conta('*segnala') >= 300) return Response.json({ ok: false });
+        for (const k of ['*segnala:' + c.chi, '*segnala'])
+          this.sql.exec(`INSERT INTO recuperi (giorno, chiave, n, ultimo) VALUES (?, ?, 1, ?)
+                         ON CONFLICT(giorno, chiave) DO UPDATE SET n = n + 1, ultimo = ?`, c.giorno, k, Date.now(), Date.now());
+        this.sql.exec('INSERT INTO segnalazioni (quando, pagina, titolo, punto, testo, email) VALUES (?, ?, ?, ?, ?, ?)',
+          Date.now(), c.pagina, c.titolo, c.punto, c.testo, c.email);
+        return Response.json({ ok: true });
+      }
+      case '/segnalazioni':
+        return Response.json({ righe: this.righe('SELECT * FROM segnalazioni ORDER BY letta, id DESC LIMIT 300') });
+      case '/segnalazione-letta':
+        this.sql.exec('UPDATE segnalazioni SET letta = ? WHERE id = ?', c.letta ? 1 : 0, Number(c.id));
+        return Response.json({ ok: true });
 
       case '/utente-nome':
         this.sql.exec('UPDATE utenti SET nome = ? WHERE email = ?', c.nome || null, c.email);
@@ -669,6 +688,23 @@ export default {
       return new Response(null, { status: 204 });
     }
 
+    // ===== segnalazioni di errori dalle pagine di studio =====
+    if (p === '/api/segnala' && POST) {
+      const b = await req.json().catch(() => ({}));
+      const pulisci = (x, n) => (typeof x === 'string' ? x.replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim().slice(0, n) : '');
+      const testo = pulisci(b.testo, 2000), pagina = pulisci(b.pagina, 300);
+      const en = /^\/en(\/|$)/.test(pagina);
+      if (testo.length < 5 || !pagina.startsWith('/')) return json({ errore: en ? 'Write at least a few words.' : 'Scrivi almeno qualche parola.' }, 400);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const emailData = normalizza(pulisci(b.email, 200));
+      const email = io?.email || (emailValida(emailData) ? emailData : null);
+      const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
+      const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
+      const r = await aDO(env, '/segnala', { giorno: new Date().toISOString().slice(0, 10), chi, pagina, titolo: pulisci(b.titolo, 200), punto: pulisci(b.punto, 200), testo, email });
+      if (!r.ok) return json({ errore: en ? 'Too many reports today: please write to Carmine on WhatsApp.' : 'Troppe segnalazioni oggi: scrivi a Carmine su WhatsApp.' }, 429);
+      return json({ ok: true });
+    }
+
     // ===== livelli e punti esperienza =====
     if (p.startsWith('/dati-domande/')) return new Response('non trovato', { status: 404 });
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
@@ -926,6 +962,11 @@ export default {
         return json(await inviaATutti(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({}))));
       }
       if (p === '/admin/api/promemoria-stato') return json(await statoPromemoria(env, aDO));
+      if (p === '/admin/api/segnalazioni') return json(await aDO(env, '/segnalazioni', {}));
+      if (p === '/admin/api/segnalazione-letta' && POST) {
+        const { id, letta } = await req.json().catch(() => ({}));
+        return json(await aDO(env, '/segnalazione-letta', { id, letta }));
+      }
       if (p === '/admin/api/reset' && POST) {
         const email = normalizza((await req.json()).email);
         const alfabeto = 'abcdefghjkmnpqrstuvwxyz23456789';

@@ -7,8 +7,29 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
+const en = lingua === 'en';
+const WA = 'https://wa.me/393885680393';
+// Domande frequenti: solo regole già in vigore sul sito (anteprima, dispositivi, pagamento, corsi di gruppo).
+const domande: { d: string; r: string }[] = en ? [
+  { d: 'What can I see for free before buying?', r: 'For each topic you can read the beginning of the theory, the first 3 sheets of worked examples and the statements of the exercises, and you can answer the timed questions. No account is needed. <a href="/en/matematica-da-zero">Maths from zero</a> is entirely free.' },
+  { d: 'Does the access expire?', r: 'The purchase is a one-off payment, so the subject stays unlocked in your account with no expiry date, with no subscription and no renewals.' },
+  { d: 'What does “at most 2 devices” mean?', r: 'The account can be used on two devices, for example your phone and your computer. Logging out on one device frees its place, and a device unused for 60 days is freed automatically.' },
+  { d: 'How can I pay?', r: 'By card, PayPal, Apple Pay, Google Pay or the other methods shown in the payment window. Payment is handled by Paddle, which sends the receipt by email.' },
+  { d: 'I attend one of Carmine’s group courses: do I have to buy the material?', r: 'When you create your account, tick “Are you already one of Carmine’s students?” and state your course. Carmine checks the registration and unlocks for free the subjects linked to your course.' },
+  { d: 'Does a video course also unlock the subjects on the site?', r: 'Yes. Buying a video course automatically unlocks the related subjects. Whoever has already bought one of those subjects can write to Carmine on <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> to get a discount equal to the price already paid.' },
+  { d: 'Who do I contact if I have a problem with a payment?', r: 'You can write to Carmine on <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> or from the <a href="/en/contatti">Contacts and support</a> page.' },
+] : [
+  { d: 'Che cosa si vede gratis prima di acquistare?', r: 'Di ogni argomento si leggono l\'inizio della teoria, le prime 3 schede di esercizi svolti e le tracce degli esercizi da fare, e si risponde alle domande a tempo, senza account. <a href="/matematica-da-zero">Matematica zero</a> è interamente gratuita.' },
+  { d: 'L\'accesso ha una scadenza?', r: 'L\'acquisto è unico, quindi la materia resta sbloccata nell\'account senza scadenza, senza abbonamento e senza rinnovi.' },
+  { d: 'Che cosa significa «al massimo 2 dispositivi»?', r: 'L\'account si usa su due dispositivi, per esempio il telefono e il computer. Uscendo dall\'account su un dispositivo il posto si libera; un dispositivo inutilizzato per 60 giorni si libera da solo.' },
+  { d: 'Come si paga?', r: 'Si paga con carta, PayPal, Apple Pay, Google Pay o con gli altri metodi mostrati nella finestra di pagamento. Il pagamento è gestito da Paddle, che invia la ricevuta per email.' },
+  { d: 'Frequento un corso di gruppo di Carmine: devo acquistare il materiale?', r: 'Alla creazione dell\'account si spunta «Sei già uno studente di Carmine?» e si indica il corso. Carmine controlla l\'iscrizione e sblocca gratis le materie collegate al corso.' },
+  { d: 'Un videocorso sblocca anche le materie del sito?', r: 'Sì. L\'acquisto di un videocorso sblocca in automatico le materie collegate. Chi ha già acquistato una di quelle materie può scrivere a Carmine su <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> per avere uno sconto sul videocorso pari al prezzo già pagato.' },
+  { d: 'A chi si scrive per un problema con un pagamento?', r: 'A Carmine, su <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> oppure dalla pagina <a href="/contatti">Contatti e assistenza</a>.' },
+];
+const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type': 'Question', name: x.d, acceptedAnswer: { '@type': 'Answer', text: x.r.replace(/<[^>]+>/g, '') } })) };
 ---
-<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua}>
+<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua} seo={{ schema: [schemaFaq] }}>
   <p class="sopratitolo">{t.prezzi}</p>
   <h1>{t.prezzi}</h1>
   <p class="sommario">{t.prezziSommario}</p>
@@ -39,8 +60,25 @@ const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
   <ul class="cosa-include">
     {t.comprende.map((x) => <li>{x}</li>)}
   </ul>
+
+  <h2 id="domande-frequenti">{en ? 'Frequently asked questions' : 'Domande frequenti'}</h2>
+  <div class="domande-frequenti">
+    {domande.map((x) => (
+      <details>
+        <summary>{x.d}</summary>
+        <p set:html={x.r} />
+      </details>
+    ))}
+  </div>
 </Base>
 
 <style>
+  .domande-frequenti { margin: 0.8rem 0 1.5rem; border-top: 1px solid var(--riga); }
+  .domande-frequenti details { border-bottom: 1px solid var(--riga); }
+  .domande-frequenti summary { cursor: pointer; padding: 0.85rem 2rem 0.85rem 0; font-weight: 600; list-style: none; position: relative; }
+  .domande-frequenti summary::-webkit-details-marker { display: none; }
+  .domande-frequenti summary::after { content: '+'; position: absolute; right: 0.3rem; top: 0.7rem; font-size: 1.25rem; font-weight: 400; color: var(--azione); }
+  .domande-frequenti details[open] summary::after { content: '−'; }
+  .domande-frequenti p { margin: 0 0 0.95rem; }
   .elenco-video-prezzi { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.8rem; }
 </style>
