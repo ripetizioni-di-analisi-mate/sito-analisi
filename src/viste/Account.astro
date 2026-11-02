@@ -22,7 +22,7 @@ const sblocca = t.sblocca;
       <div id="percorso" class="percorso-account" hidden>
         <h2>{lingua === 'en' ? 'Your progress' : 'Il tuo percorso'}</h2>
         <div class="scheda-livello">
-          <svg class="anello-grande" viewBox="0 0 96 96" role="img" aria-label="Livello"><circle cx="48" cy="48" r="40" class="anello-fondo" /><circle cx="48" cy="48" r="40" class="anello-avanzamento" stroke-dasharray="251.3" stroke-dashoffset="251.3" transform="rotate(-90 48 48)" /><text x="48" y="44" text-anchor="middle" class="anello-sopra">{lingua === 'en' ? 'LEVEL' : 'LIVELLO'}</text><text x="48" y="67" text-anchor="middle" class="anello-numero">1</text></svg>
+          <div class="stemma-account" role="img" aria-label={lingua === 'en' ? 'Level' : 'Livello'}></div>
           <div class="dati-livello">
             <p class="fascia-livello"><strong></strong> <span></span></p>
             <div class="barra-exp grande"><span></span></div>
@@ -90,10 +90,11 @@ const sblocca = t.sblocca;
         const num = (x) => x.toLocaleString(en ? 'en-US' : 'it-IT');
         const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
         const st = d.stato;
-        q('.anello-avanzamento').setAttribute('stroke-dashoffset', (251.3 * (1 - st.perc / 100)).toFixed(1));
-        q('.anello-numero').textContent = st.livello;
-        q('.anello-grande').setAttribute('aria-label', en ? `Level ${st.livello}, ${st.perc} percent toward the next level` : `Livello ${st.livello}, ${st.perc} per cento verso il livello successivo`);
+        q('.stemma-account').setAttribute('aria-label', en ? `Level ${st.livello}, ${st.perc} percent toward the next level` : `Livello ${st.livello}, ${st.perc} per cento verso il livello successivo`);
         q('.fascia-livello strong').textContent = st.fascia;
+        // stemma del rango (lo disegna lo script qui sotto, lo stesso della testata)
+        window.__statoAccount = st;
+        document.dispatchEvent(new CustomEvent('stato-account', { detail: st }));
         q('.fascia-livello span').textContent = st.frase;
         q('.dati-livello .barra-exp span').style.width = `${st.perc}%`;
         q('.exp-totale').textContent = en ? `${num(st.exp)} XP in total` : `${num(st.exp)} EXP in totale`;
@@ -190,5 +191,24 @@ const sblocca = t.sblocca;
         if (r.ok) cambio.reset();
       });
     })();
+  </script>
+  <script>
+    // Stemma del rango nella scheda «Il tuo percorso», come nella testata e nel pannello del livello (worker/stemmi.mjs).
+    import { stemmaSVG, rangoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
+    interface Stato { livello: number; perc: number; fascia: string }
+    const en = document.documentElement.lang === 'en';
+    const disegna = (st: Stato) => {
+      const box = document.querySelector<HTMLElement>('#percorso .stemma-account');
+      if (!box) return;
+      const r = rangoDi(st.livello);
+      box.innerHTML = stemmaSVG(r, { perc: st.perc, id: 'a', nastro: true, livello: st.livello, etichetta: en ? 'LV.' : 'LIV.' });
+      const scheda = box.closest<HTMLElement>('.scheda-livello');
+      if (scheda) scheda.setAttribute('style', stileRango(r));
+      const nome = document.querySelector('#percorso .fascia-livello strong');
+      if (nome) nome.textContent = `${nomeRango(st.livello, en ? 'en' : 'it')} · ${st.fascia}`;
+    };
+    const gia = (window as any).__statoAccount as Stato | undefined;
+    if (gia) disegna(gia);
+    document.addEventListener('stato-account', (e) => disegna((e as CustomEvent<Stato>).detail));
   </script>
 </Base>

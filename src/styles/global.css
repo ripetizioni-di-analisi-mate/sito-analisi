@@ -956,10 +956,10 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .percorso-account { margin-bottom: 2.5rem; }
 .percorso-account h3 small { font-family: var(--ui); font-weight: 400; font-size: 0.85rem; color: var(--inchiostro-2); margin-left: 0.5rem; }
 .scheda-livello { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 1.2rem 1.4rem; font-family: var(--ui); }
-.anello-grande { width: 96px; height: 96px; flex: none; }
-.anello-grande .anello-fondo, .anello-grande .anello-avanzamento { stroke-width: 7; }
-.anello-sopra { font-family: var(--ui); font-size: 11px; fill: var(--inchiostro-2); }
-.anello-numero { font-family: var(--titoli); font-size: 28px; font-weight: 700; fill: var(--inchiostro); }
+.stemma-account { width: 6.4rem; height: 5.75rem; flex: none; }
+.stemma-account svg { width: 100%; height: 100%; overflow: visible; }
+.scheda-livello .fascia-livello strong { color: var(--rango-testo, var(--inchiostro)); }
+.scheda-livello .barra-exp > span { background: var(--rango-bordo, var(--accento)); }
 .dati-livello { flex: 1 1 15rem; display: flex; flex-direction: column; gap: 0.5rem; }
 .dati-livello p { margin: 0; }
 .fascia-livello strong { font-family: var(--titoli); font-size: 1.4rem; }
