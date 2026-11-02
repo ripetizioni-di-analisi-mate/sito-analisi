@@ -331,11 +331,14 @@ html.collegato .spazio-studente {
 .ss-continua svg { width: 1rem; height: 1rem; transition: transform 0.15s ease; }
 .ss-continua:hover { filter: brightness(1.08); }
 .ss-continua:hover svg { transform: translateX(3px); }
-.ss-riprendi { display: flex; flex-direction: column; line-height: 1.25; text-decoration: none; color: var(--inchiostro); font-size: 0.92rem; }
+.ss-riprendi { display: flex; align-items: center; gap: 0.65rem; line-height: 1.25; text-decoration: none; color: var(--inchiostro); font-size: 0.92rem; }
 .ss-riprendi[hidden] { display: none; }
+.ss-libro { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 10px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
+.ss-libro svg { width: 1.15rem; height: 1.15rem; }
+.ss-rip-testo { display: flex; flex-direction: column; min-width: 0; }
 .ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
-.ss-riprendi span { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
-.ss-riprendi:hover span { text-decoration-color: currentColor; }
+.ss-argomento { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
+.ss-riprendi:hover .ss-argomento { text-decoration-color: currentColor; }
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } }

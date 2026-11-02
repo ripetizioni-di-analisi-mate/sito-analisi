@@ -11,7 +11,7 @@ export function spazioHome(st, nome, en) {
   const fuori = {
     '.spazio-studente': { stile: `${stileRango(r)}; --rango-chiaro: ${c.chiaro}; --rango-medio: ${c.medio}; --rango-scuro: ${c.scuro}` },
     '.spazio-studente .ss-stemma': { html: stemmaSVG(r, { perc: st.perc, id: 'h', nastro: true, livello: st.livello, etichetta: en ? 'LV.' : 'LIV.' }) },
-    '.spazio-studente .ss-rango': { testo: `${nomeRango(st.livello, l)} · ${en ? 'Level' : 'Livello'} ${st.livello}` },
+    '.spazio-studente .ss-rango': { testo: nomeRango(st.livello, l) }, // solo rango e grado: il livello è già sul nastro dello stemma (richiesta di Carmine, 02/11)
     '.spazio-studente .ss-nome': { testo: nome },
     '.spazio-studente .ss-fascia': { testo: st.fascia },
     '.spazio-studente .ss-frase': { testo: st.frase || '' },
