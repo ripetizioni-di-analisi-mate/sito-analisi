@@ -133,6 +133,8 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN lingua TEXT'); } catch { /* già presente */ }
     this.sql.exec('CREATE TABLE IF NOT EXISTS promemoria (email TEXT, giorno TEXT, PRIMARY KEY (email, giorno))');
     this.sql.exec('CREATE TABLE IF NOT EXISTS promemoria_coda (email TEXT PRIMARY KEY, creato INTEGER)');
+    // percorso d'acquisto: soli conteggi per giorno, evento e materia (nessun dato personale)
+    this.sql.exec('CREATE TABLE IF NOT EXISTS eventi (giorno TEXT, evento TEXT, materia TEXT, n INTEGER, PRIMARY KEY (giorno, evento, materia))');
     // recupero della password: email inviate per giorno (per indirizzo e per tutto il sito), contro gli abusi
     this.sql.exec('CREATE TABLE IF NOT EXISTS recuperi (giorno TEXT, chiave TEXT, n INTEGER, ultimo INTEGER, PRIMARY KEY (giorno, chiave))');
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
@@ -153,10 +155,17 @@ export class Archivio {
                        ON CONFLICT(giorno, sezione) DO UPDATE SET n = n + 1`, c.giorno, c.sezione);
         if (c.fonte) this.sql.exec(`INSERT INTO ingressi (giorno, fonte, n) VALUES (?, ?, 1)
                        ON CONFLICT(giorno, fonte) DO UPDATE SET n = n + 1`, c.giorno, c.fonte);
+        if (c.campagna) this.sql.exec(`INSERT INTO eventi (giorno, evento, materia, n) VALUES (?, 'campagna', ?, 1)
+                       ON CONFLICT(giorno, evento, materia) DO UPDATE SET n = n + 1`, c.giorno, c.campagna);
         if (c.h) {
           this.sql.exec('INSERT OR IGNORE INTO visitatori (giorno, h, mobile) VALUES (?, ?, ?)', c.giorno, c.h, c.mobile ? 1 : 0);
           if (Math.random() < 0.01) this.sql.exec("DELETE FROM visitatori WHERE giorno < date('now', '-200 days')");
         }
+        return Response.json({ ok: true });
+
+      case '/evento':
+        this.sql.exec(`INSERT INTO eventi (giorno, evento, materia, n) VALUES (?, ?, ?, 1)
+                       ON CONFLICT(giorno, evento, materia) DO UPDATE SET n = n + 1`, c.giorno, c.evento, c.materia);
         return Response.json({ ok: true });
 
       case '/utente': // dati per il login
@@ -321,12 +330,34 @@ export class Archivio {
       case '/dati': {
         const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-${giorni - 1} days')
                                                GROUP BY sezione ORDER BY n DESC LIMIT 15`);
+        // percorso d'acquisto per materia: pagine della materia, fine dell'anteprima, pagina Sblocca, tasto, pagamenti
+        const percorsoAcquisto = (giorni) => {
+          const da = `date('now', '-${giorni - 1} days')`;
+          const pagine = this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= ${da} GROUP BY sezione`);
+          const ev = this.righe(`SELECT evento, materia, SUM(n) AS n FROM eventi WHERE giorno >= ${da} AND evento != 'campagna' GROUP BY evento, materia`);
+          const pag = this.righe(`SELECT materia, COUNT(*) AS n FROM acquisti WHERE substr(creato, 1, 10) >= ${da} GROUP BY materia`);
+          const r = {};
+          const voce = (m) => (r[m] ??= { materia: m, pagine: 0, fine: 0, sblocca: 0, tasto: 0, pagati: 0 });
+          for (const x of pagine) {
+            const [m, a] = x.sezione.split('/');
+            if (a === 'sblocca') voce(m).sblocca += x.n;
+            else if (m === 'videocorsi' && a) voce('video-' + a).pagine += x.n;
+            else voce(m).pagine += x.n;
+          }
+          for (const x of ev) { const v = voce(x.materia); if (x.evento === 'fine-anteprima') v.fine += x.n; if (x.evento === 'tasto') v.tasto += x.n; }
+          for (const x of pag) voce(x.materia).pagati += x.n;
+          return Object.values(r).filter((v) => v.fine || v.sblocca || v.tasto || v.pagati);
+        };
+        const campagne = (giorni) => this.righe(`SELECT materia AS campagna, SUM(n) AS n FROM eventi WHERE evento = 'campagna'
+                                                 AND giorno >= date('now', '-${giorni - 1} days') GROUP BY materia ORDER BY n DESC LIMIT 30`);
         return Response.json({
           visite: this.righe(`SELECT giorno, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           visitatori: this.righe(`SELECT giorno, COUNT(*) AS n, SUM(mobile) AS mobile FROM visitatori
                                   WHERE giorno >= date('now', '-179 days') GROUP BY giorno ORDER BY giorno`),
           inizioVisitatori: this.riga('SELECT MIN(giorno) AS g FROM visitatori')?.g || null,
           sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
+          percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
+          campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
           ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`),
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
@@ -606,6 +637,17 @@ export default {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'non collegato' }, 401);
       return json({ ...io, livello: livelloDa(io.exp || 0) });
+    }
+
+    // ===== percorso d'acquisto: conteggi anonimi (fine dell'anteprima, tasto di acquisto premuto) =====
+    if (p === '/api/evento' && POST) {
+      const ua = req.headers.get('user-agent') || '';
+      const { e, m } = await req.json().catch(() => ({}));
+      const materiaValida = typeof m === 'string' && (Object.hasOwn(PREZZI, m) || VIDEOCORSI.some((v) => 'video-' + v.slug === m));
+      if (ua && !ROBOT.test(ua) && (e === 'fine-anteprima' || e === 'tasto') && materiaValida) {
+        ctx.waitUntil(aDO(env, '/evento', { giorno: new Date().toISOString().slice(0, 10), evento: e, materia: m }).catch(() => {}));
+      }
+      return new Response(null, { status: 204 });
     }
 
     // ===== livelli e punti esperienza =====
@@ -976,14 +1018,21 @@ export default {
     const ua = req.headers.get('user-agent') || '';
     if (req.method === 'GET' && html && ua && !ROBOT.test(ua) && risposta.status < 400) {
       const giorno = new Date().toISOString().slice(0, 10);
+      // La pagina Sblocca di ogni materia e la pagina di ogni videocorso si contano a parte (percorso d'acquisto in dashboard).
+      const senzaEn = p.replace(/^\/en(?=\/)/, '');
+      const sbl = senzaEn.match(/^\/([^/]+)\/sblocca\/?$/), vid = senzaEn.match(/^\/videocorsi\/([^/]+)\/?$/);
       const sezione = info ? (info.argomento ? `${info.materia}/${info.argomento}` : info.materia)
+        : sbl ? `${sbl[1]}/sblocca` : vid ? `videocorsi/${vid[1]}`
         : (url.pathname.split('/')[1]?.replace(/\.html$/, '') || 'home');
       const fonte = url.pathname.startsWith('/vetrine/') ? null : fonteIngresso(req, url);
+      // Campagna del link (per esempio ?utm_campaign=limiti-notevoli nei caroselli): solo lettere, numeri e trattini.
+      const campagnaGrezza = (url.searchParams.get('utm_campaign') || '').toLowerCase();
+      const campagna = fonte && /^[a-z0-9-]{1,40}$/.test(campagnaGrezza) ? campagnaGrezza : null;
       // Visitatore unico del giorno: impronta non reversibile di giorno, indirizzo e browser (nessun dato personale salvato).
       const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${giorno}|${req.headers.get('cf-connecting-ip') || ''}|${ua}`));
       const h = [...new Uint8Array(impronta).slice(0, 8)].map((b) => b.toString(16).padStart(2, '0')).join('');
       const mobile = /Mobi|Android|iPhone|iPad/i.test(ua);
-      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, h, mobile }).catch(() => {}));
+      ctx.waitUntil(aDO(env, '/visita', { giorno, sezione, fonte, campagna, h, mobile }).catch(() => {}));
       // La prima provenienza resta in un cookie per 90 giorni: serve a sapere da dove arriva chi poi si iscrive.
       if (fonte && !leggiCookie(req, 'fonte')) {
         try { risposta.headers.append('set-cookie', `fonte=${encodeURIComponent(fonte)}; Path=/; Max-Age=7776000; HttpOnly; Secure; SameSite=Lax`); } catch { /* intestazioni bloccate */ }

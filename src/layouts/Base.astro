@@ -397,5 +397,34 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       }
     }
   </script>
+  <script is:inline>
+    // Formule nel testo: restano su una sola riga quando ci stanno (al telefono non si spezzano più a metà, per esempio dopo un segno meno).
+    (() => {
+      const sistema = () => {
+        const f = [...document.querySelectorAll('.katex')].filter((k) => !k.closest('.katex-display'));
+        f.forEach((k) => k.classList.add('intera'));
+        const troppo = f.filter((k) => { const c = k.parentElement && k.parentElement.closest('p, li, td, th, div, span.risposta, label'); return c && k.getBoundingClientRect().width > c.clientWidth - 4; });
+        troppo.forEach((k) => k.classList.remove('intera'));
+      };
+      sistema();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sistema);
+      let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(sistema, 200); });
+    })();
+  </script>
+  <script is:inline>
+    // Percorso d'acquisto: solo conteggi anonimi (fine dell'anteprima vista, tasto di acquisto premuto), mostrati nella dashboard.
+    (() => {
+      const pezzi = location.pathname.replace(/^\/en(?=\/)/, '').split('/');
+      const materia = pezzi[1] === 'videocorsi' ? (pezzi[2] ? 'video-' + pezzi[2].replace(/\.html$/, '') : '') : pezzi[1];
+      if (!materia || !navigator.sendBeacon) return;
+      const manda = (e) => { try { navigator.sendBeacon('/api/evento', new Blob([JSON.stringify({ e, m: materia })], { type: 'application/json' })); } catch (_) {} };
+      const fine = document.querySelector('.fine-anteprima');
+      if (fine && 'IntersectionObserver' in window) {
+        const oss = new IntersectionObserver((voci) => { if (voci.some((v) => v.isIntersecting)) { manda('fine-anteprima'); oss.disconnect(); } });
+        oss.observe(fine);
+      }
+      document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('#invia-acquisto, #compra')) manda('tasto'); }, true);
+    })();
+  </script>
 </body>
 </html>

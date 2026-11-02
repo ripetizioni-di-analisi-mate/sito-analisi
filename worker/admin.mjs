@@ -337,6 +337,8 @@ function cliente(MATERIE, A_PAGAMENTO) {
   function nomeSezione(s) {
     if (s === 'home') return 'Home'; if (s === 'en') return 'Home inglese';
     const [m, a] = s.split('/');
+    if (M[m] && a === 'sblocca') return 'Pagina Sblocca · ' + breveMateria(m);
+    if (m === 'videocorsi' && a) return breveMateria('video-' + a) + ' (pagina)';
     if (M[m]) return a ? (M[m].argomenti[a] || a) + ' · ' + breveMateria(m) : nomeMateria(m) + ' (indice)';
     const voci = { 'chi-sono': 'Chi sono', prezzi: 'Prezzi', accedi: 'Accedi', account: 'Account', contatti: 'Contatti', cerca: 'Cerca', privacy: 'Privacy', termini: 'Termini' };
     return voci[s] || s;
@@ -675,8 +677,23 @@ function cliente(MATERIE, A_PAGAMENTO) {
         '<tr><td colspan="5"><div class="vuoto">Nessun ingresso registrato in questo periodo</div></td></tr>') +
       '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Instagram comprende bio, storie e DM aperti nell’app. “Diretto o app”: indirizzi scritti a mano, preferiti e link da WhatsApp, Telegram o email, che non dicono la provenienza.</p></section>' +
       '<section class="card"><header><h2>Pagine più viste</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
-      barre(sez.map((r) => { const m = r.sezione.split('/')[0]; return { nome: nomeSezione(r.sezione), valore: r.n, colore: (M[m] || {}).colore || '#7a8a87' }; }), { quota: false, vuoto: 'Nessuna visita nel periodo' }) + '</div></section></div>';
+      barre(sez.map((r) => { const m = r.sezione.split('/')[0]; return { nome: nomeSezione(r.sezione), valore: r.n, colore: (M[m] || {}).colore || '#7a8a87' }; }), { quota: false, vuoto: 'Nessuna visita nel periodo' }) + '</div></section></div>' +
+      percorsoAcquisto();
     grafico($('#g-visite'), g, [{ nome: 'Pagine viste', valori: pv, colore: 'var(--c2)', area: false }, { nome: 'Visitatori unici', valori: v, colore: 'var(--c1)' }, { nome: 'Ingressi dall’esterno', valori: ing, colore: 'var(--c6)', area: false, tratteggio: true }], { id: 'vis', titolo: 'Visite' });
+  }
+
+  // Percorso d'acquisto per materia (conteggi anonimi dal 02/11/2026) e campagne dei link (utm_campaign).
+  function percorsoAcquisto() {
+    const righe = ((D.percorsoAcquisto && D.percorsoAcquisto[giorni]) || []).slice().sort((a, b) => (b.pagine + b.sblocca) - (a.pagine + a.sblocca));
+    const camp = (D.campagne && D.campagne[giorni]) || [];
+    const quota = (x, base) => (base ? ' <span class="nota">' + Math.round((x / base) * 100) + '%</span>' : '');
+    return '<section class="card" style="margin-top:1rem"><header><h2>Percorso d’acquisto</h2><span class="nota">' + giorni + ' giorni · dal 2 novembre</span></header><div class="tabella"><table><thead><tr><th>Materia</th><th class="destra" title="Pagine della materia viste (teoria, schede, esercizi)">Pagine</th><th class="destra" title="Volte in cui il riquadro di fine anteprima è arrivato sullo schermo">Fine anteprima</th><th class="destra" title="Pagina Sblocca della materia vista">Sblocca</th><th class="destra" title="Tasti «Crea l’account e paga», «Sblocca ora», «Acquista il videocorso» premuti">Tasto</th><th class="destra">Pagati</th></tr></thead><tbody>' +
+      (righe.length ? righe.map((r) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + ((M[r.materia] || {}).colore || '#7a8a87') + '"></i>' + esc(breveMateria(r.materia)) + '</span></td><td class="destra">' + nf.format(r.pagine) + '</td><td class="destra">' + nf.format(r.fine) + '</td><td class="destra">' + nf.format(r.sblocca) + '</td><td class="destra">' + nf.format(r.tasto) + quota(r.tasto, r.sblocca) + '</td><td class="destra"><b>' + nf.format(r.pagati) + '</b>' + quota(r.pagati, r.tasto) + '</td></tr>').join('') :
+        '<tr><td colspan="6"><div class="vuoto">Ancora nessun dato: i conteggi partono dal 2 novembre</div></td></tr>') +
+      '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Si contano solo i numeri, senza sapere chi. La percentuale accanto a «Tasto» è sul numero di pagine Sblocca viste; quella accanto a «Pagati» sul numero di tasti premuti. Per i videocorsi «Pagine» è la pagina del videocorso.</p></section>' +
+      '<section class="card" style="margin-top:1rem"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
+      barre(camp.map((r) => ({ nome: r.campagna, valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
+      '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini).</p></div></section>';
   }
 
   function strumenti() {
