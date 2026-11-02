@@ -786,7 +786,9 @@ function cliente(MATERIE, A_PAGAMENTO) {
     if (r.ok) { $('#login-errore').textContent = ''; carica(); } else $('#login-errore').textContent = 'Password sbagliata.';
   });
   $('#esci').addEventListener('click', () => { document.cookie = 'admin=; Max-Age=0; Path=/admin'; fetch('/admin/api/esci', { method: 'POST' }).finally(() => location.reload()); });
-  setInterval(() => { if (document.visibilityState === 'visible' && !stato.aperto) carica(true); }, 60000);
+  // Dati ricaricati ogni 20 secondi con la pagina in vista, e subito quando si torna sulla pagina.
+  setInterval(() => { if (document.visibilityState === 'visible' && !stato.aperto) carica(true); }, 20000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && D && !stato.aperto) carica(true); });
   setInterval(segnaAggiornato, 30000);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && aggiornato && Date.now() - aggiornato > 60000) carica(true); });
   daHash();

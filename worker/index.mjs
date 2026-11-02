@@ -235,7 +235,7 @@ export class Archivio {
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
         const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
         if (!d) return Response.json(null);
-        if (Date.now() - d.ultimo_uso > 5 * 60 * 1000) { // ultima attività: si registra al più ogni 5 minuti
+        if (Date.now() - d.ultimo_uso > 60 * 1000) { // ultima attività: si registra al più una volta al minuto
           this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
           this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
         }
@@ -881,7 +881,11 @@ export default {
       const sess = ma ? await leggiToken(env, ma) : null;
       if (!sess?.admin) return new Response('accesso negato', { status: 401 });
 
-      if (p === '/admin/api/dati') return json(await aDO(env, '/dati'));
+      if (p === '/admin/api/dati') {
+        // Chi tiene aperta la dashboard con il proprio account collegato risulta attivo anche come studente.
+        ctx.waitUntil(utenteCollegato(env, req).catch(() => null));
+        return json(await aDO(env, '/dati'));
+      }
       if (p === '/admin/api/abilita' && POST) {
         const { email: e, materie } = await req.json();
         const email = normalizza(e);
