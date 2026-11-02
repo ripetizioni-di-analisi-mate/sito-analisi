@@ -94,7 +94,7 @@ Sia $M$ una massa puntiforme posta nell'origine e sia $m$ un punto materiale a d
 $$
 U(r) = -\,\frac{G M m}{r} .
 $$
-L'energia potenziale è negativa a ogni distanza finita e cresce verso $0$ all'aumentare di $r$: per allontanare $m$ occorre fornire energia. La formula vale anche quando $M$ è una sfera a simmetria sferica, per i punti esterni alla sfera, con $r$ distanza dal suo centro, come si vede con il teorema del guscio sferico. Per esempio, per portare un corpo di $1\,\mathrm{kg}$ dalla superficie terrestre a distanza infinita occorre il lavoro $\dfrac{G M_T m}{R_T} = 6{,}25 \cdot 10^7\,\mathrm{J}$.
+L'energia potenziale è negativa a ogni distanza finita e cresce verso $0$ all'aumentare di $r$, quindi per allontanare $m$ occorre fornire energia. La formula vale anche quando $M$ è una sfera a simmetria sferica, per i punti esterni alla sfera, con $r$ distanza dal suo centro, come si vede con il teorema del guscio sferico. Per esempio, per portare un corpo di $1\,\mathrm{kg}$ dalla superficie terrestre a distanza infinita occorre il lavoro $\dfrac{G M_T m}{R_T} = 6{,}25 \cdot 10^7\,\mathrm{J}$.
 
 :::dimostrazione
 Si calcola il lavoro della forza lungo un cammino qualunque da un punto $A$ a distanza $r_A$ a un punto $B$ a distanza $r_B$. Uno spostamento infinitesimo $d\vec{s}$ si scompone in una parte lungo $\hat{u}_r$, di lunghezza $dr$, e in una parte perpendicolare a $\hat{u}_r$. La forza $\vec{F} = -\dfrac{GMm}{r^2}\,\hat{u}_r$ è radiale, quindi la parte perpendicolare non dà contributo e $\vec{F} \cdot d\vec{s} = -\dfrac{GMm}{r^2}\,dr$. Perciò
@@ -134,9 +134,9 @@ Per un corpo che sale dalla superficie terrestre, a distanza $R_T$ dal centro, f
 $$
 \Delta U = G M_T m \left( \frac{1}{R_T} - \frac{1}{R_T + h} \right) = \frac{G M_T m\,h}{R_T (R_T + h)} .
 $$
-Se $h$ è piccola rispetto a $R_T$, il denominatore è circa $R_T^2$, e poiché $\dfrac{G M_T}{R_T^2} = g_0$ si ottiene $\Delta U \approx m g_0 h$, l'energia potenziale del peso usata vicino al suolo. L'approssimazione sovrastima $\Delta U$ del fattore $1 + \dfrac{h}{R_T}$: l'errore è dello $0{,}016\%$ per $h = 1\,\mathrm{km}$ e del $16\%$ per $h = 1000\,\mathrm{km}$.
+Se $h$ è piccola rispetto a $R_T$, il denominatore è circa $R_T^2$, e poiché $\dfrac{G M_T}{R_T^2} = g_0$ si ottiene $\Delta U \approx m g_0 h$, l'energia potenziale del peso usata vicino al suolo. L'approssimazione sovrastima $\Delta U$ del fattore $1 + \dfrac{h}{R_T}$, quindi l'errore è dello $0{,}016\%$ per $h = 1\,\mathrm{km}$ e del $16\%$ per $h = 1000\,\mathrm{km}$.
 
-::grafico{f="x>=1 ? -1/x : NaN;x-2" punti="1,-1,pieno" xmin=0 xmax=6 ymin=-1.3 ymax=1.2 nomi="r,U" etichette="4.2,-0.5,U = −GMm/r;0.15,0.6,retta tangente" titolo="$U(r)$ per $r \geq R$, con $R = 1$ e $\dfrac{GMm}{R} = 1$; la retta tangente in $r = R$ ha pendenza $mg_0$ e corrisponde a $U \approx mg_0 h$"}
+::grafico{f="x>=1 ? -1/x : NaN;x-2" punti="1,-1,pieno" xmin=0 xmax=6 ymin=-1.3 ymax=1.2 nomi="r,U" etichette="4.2,-0.5,U = −GMm/r;2.75,0.45,retta tangente" titolo="$U(r)$ per $r \geq R$, con $R = 1$ e $\dfrac{GMm}{R} = 1$; la retta tangente in $r = R$ ha pendenza $mg_0$ e corrisponde a $U \approx mg_0 h$"}
 
 :::
 
@@ -274,7 +274,7 @@ Nelle ipotesi della **velocità e periodo in orbita circolare**, il satellite ha
 $$
 K = \frac{GMm}{2r}, \qquad U = -\,\frac{GMm}{r}, \qquad E = K + U = -\,\frac{GMm}{2r} .
 $$
-Vale quindi $E = -K$ e $U = 2E$. L'energia meccanica è negativa e aumenta, avvicinandosi a $0$, all'aumentare di $r$: per portare un satellite su un'orbita più alta occorre fornire il lavoro $E_2 - E_1 > 0$, anche se nella nuova orbita la sua energia cinetica è *minore*. Un satellite di $1000\,\mathrm{kg}$ in orbita circolare a distanza $2R_T$ dal centro della Terra ha $E = -\dfrac{G M_T \cdot 1000}{4R_T} = -1{,}56 \cdot 10^{10}\,\mathrm{J}$.
+Vale quindi $E = -K$ e $U = 2E$. L'energia meccanica è negativa e aumenta, avvicinandosi a $0$, all'aumentare di $r$, quindi per portare un satellite su un'orbita più alta occorre fornire il lavoro $E_2 - E_1 > 0$, anche se nella nuova orbita la sua energia cinetica è *minore*. Un satellite di $1000\,\mathrm{kg}$ in orbita circolare a distanza $2R_T$ dal centro della Terra ha $E = -\dfrac{G M_T \cdot 1000}{4R_T} = -1{,}56 \cdot 10^{10}\,\mathrm{J}$.
 
 :::dimostrazione
 Dalla velocità orbitale $v^2 = \dfrac{GM}{r}$ segue $K = \dfrac{1}{2} m v^2 = \dfrac{GMm}{2r}$. L'energia potenziale è quella dell'**energia potenziale gravitazionale**, $U = -\dfrac{GMm}{r}$. Sommando si ha $E = \dfrac{GMm}{2r} - \dfrac{GMm}{r} = -\dfrac{GMm}{2r}$, che è l'opposto di $K$.

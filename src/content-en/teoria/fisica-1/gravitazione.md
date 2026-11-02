@@ -136,7 +136,7 @@ $$
 $$
 If $h$ is small compared with $R_T$, the denominator is about $R_T^2$, and since $\dfrac{G M_T}{R_T^2} = g_0$ we obtain $\Delta U \approx m g_0 h$, the potential energy of the weight used near the ground. The approximation overestimates $\Delta U$ by the factor $1 + \dfrac{h}{R_T}$: the error is $0.016\%$ for $h = 1\,\mathrm{km}$ and $16\%$ for $h = 1000\,\mathrm{km}$.
 
-::grafico{f="x>=1 ? -1/x : NaN;x-2" punti="1,-1,pieno" xmin=0 xmax=6 ymin=-1.3 ymax=1.2 nomi="r,U" etichette="4.2,-0.5,U = −GMm/r;0.15,0.6,tangent line" titolo="$U(r)$ for $r \geq R$, with $R = 1$ and $\dfrac{GMm}{R} = 1$; the tangent line at $r = R$ has slope $mg_0$ and corresponds to $U \approx mg_0 h$"}
+::grafico{f="x>=1 ? -1/x : NaN;x-2" punti="1,-1,pieno" xmin=0 xmax=6 ymin=-1.3 ymax=1.2 nomi="r,U" etichette="4.2,-0.5,U = −GMm/r;2.75,0.45,tangent line" titolo="$U(r)$ for $r \geq R$, with $R = 1$ and $\dfrac{GMm}{R} = 1$; the tangent line at $r = R$ has slope $mg_0$ and corresponds to $U \approx mg_0 h$"}
 
 :::
 
