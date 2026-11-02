@@ -166,7 +166,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       apri.hidden = Boolean(data); modifica.hidden = !data;
       if (!data) { titolo.textContent = en ? 'Exam date' : 'Data dell\'esame'; testo.textContent = testoVuoto; return; }
       const d = new Date(data + 'T12:00:00');
-      const giorni = Math.round((d - Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00')) / 86400000);
+      const giorni = Math.round((d - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
       const quando = d.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       titolo.textContent = giorni > 1 ? (en ? `${giorni} days to the exam` : `Mancano ${giorni} giorni all'esame`)
         : giorni === 1 ? (en ? 'Exam tomorrow' : 'L\'esame è domani')

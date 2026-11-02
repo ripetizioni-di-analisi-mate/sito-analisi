@@ -339,34 +339,20 @@ html.collegato .spazio-studente {
 .ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .ss-argomento { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
 .ss-riprendi:hover .ss-argomento { text-decoration-color: currentColor; }
-/* Esame più vicino nello spazio personale, in alto a destra (solo con una data inserita). Tre versioni di prova: A etichetta, B pastiglia, C testo. */
+/* Esame più vicino nello spazio personale, in alto a destra (solo con una data inserita; versione A scelta da Carmine il 03/11):
+   quadratino con il calendario come «Riprendi», etichetta piccola e giorni mancanti. */
 html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr auto; grid-template-areas: "stemma dati esame" "stemma cammino cammino"; }
 .ss-esame { grid-area: esame; align-self: start; justify-self: end; display: flex; align-items: center; gap: 0.5rem; max-width: 14rem; text-decoration: none; color: var(--inchiostro); line-height: 1.25; }
 .ss-esame[hidden] { display: none; }
+.ss-es-icona { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
+.ss-es-icona svg { width: 1rem; height: 1rem; }
 .ss-es-testo { display: flex; flex-direction: column; min-width: 0; }
-.ss-es-icona { flex: none; display: grid; place-items: center; color: var(--rango-testo, var(--inchiostro-2)); }
-.ss-es-icona svg { width: 100%; height: 100%; }
-.ss-es-su:empty { display: none; }
-/* A: come «Riprendi», quadratino con il calendario, etichetta piccola e giorni */
-.ss-esame[data-versione="a"] .ss-es-icona { width: 2rem; height: 2rem; border-radius: 9px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); }
-.ss-esame[data-versione="a"] .ss-es-icona svg { width: 1rem; height: 1rem; }
-.ss-esame[data-versione="a"] .ss-es-su { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); }
-.ss-esame[data-versione="a"] .ss-es-giu { font-size: 0.88rem; font-weight: 600; }
-/* B: pastiglia nei colori chiari del rango, una riga */
-.ss-esame[data-versione="b"] { padding: 0.28rem 0.7rem 0.28rem 0.55rem; border-radius: 999px; background: color-mix(in srgb, var(--rango-pallido, #eee) 70%, white); color: var(--rango-testo, var(--inchiostro)); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
-.ss-esame[data-versione="b"] .ss-es-icona { width: 0.95rem; height: 0.95rem; }
-/* C: solo testo grigio, allineato a destra */
-.ss-esame[data-versione="c"] { text-align: right; }
-.ss-esame[data-versione="c"] .ss-es-icona { display: none; }
-.ss-esame[data-versione="c"] .ss-es-testo { align-items: flex-end; }
-.ss-esame[data-versione="c"] .ss-es-su { font-size: 0.8rem; color: var(--inchiostro-2); }
-.ss-esame[data-versione="c"] .ss-es-giu { font-size: 0.86rem; font-weight: 600; color: var(--rango-testo, var(--inchiostro)); }
+.ss-es-su { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); }
+.ss-es-giu { font-size: 0.88rem; font-weight: 600; }
 .ss-esame:hover .ss-es-giu { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
 @media (max-width: 640px) {
   html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr; grid-template-areas: "stemma dati" "stemma esame" "cammino cammino"; }
   .ss-esame { justify-self: start; max-width: none; margin: 0.35rem 0 0.3rem; }
-  .ss-esame[data-versione="c"] { text-align: left; }
-  .ss-esame[data-versione="c"] .ss-es-testo { align-items: flex-start; }
 }
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }

@@ -16,8 +16,8 @@ const pref = en ? '/en' : '';
       <h2 class="ss-nome" id="ss-nome"></h2>
       <p class="ss-titolo"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
     </div>
-    {/* Conto alla rovescia all'esame più vicino (richiesta di Carmine del 03/11): solo se lo studente ha inserito una data. */}
-    <a class="ss-esame" data-versione="a" href="#" hidden>
+    {/* Esame più vicino (richiesta di Carmine del 03/11, versione A fra tre): solo se lo studente ha inserito una data. */}
+    <a class="ss-esame" href="#" hidden>
       <span class="ss-es-icona" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg></span>
       <span class="ss-es-testo"><small class="ss-es-su"></small><span class="ss-es-giu"></span></span>
     </a>
@@ -53,16 +53,12 @@ const pref = en ? '/en' : '';
     const es = q('.ss-esame');
     if (esame && es) {
       const giorno = new Date(esame.data + 'T12:00:00');
-      const n = Math.round((giorno - Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00')) / 86400000);
+      const n = Math.round((giorno - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
       if (n >= 0) {
         const lingua = en ? 'en' : 'it';
-        const data = giorno.toLocaleDateString(lingua, { day: 'numeric', month: 'long' });
         const quando = n > 1 ? (en ? `in ${n} days` : `tra ${n} giorni`) : n === 1 ? (en ? 'tomorrow' : 'domani') : (en ? 'today' : 'oggi');
-        const v = es.dataset.versione;
-        const su = es.querySelector('.ss-es-su'), giu = es.querySelector('.ss-es-giu');
-        if (v === 'a') { su.textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`; giu.textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`); }
-        else if (v === 'b') { su.textContent = ''; giu.textContent = en ? `Exam ${quando}` : `Esame ${quando}`; }
-        else { su.textContent = esame.titolo; giu.textContent = (en ? `Exam ${quando}` : `Esame ${quando}`) + ` · ${data}`; }
+        es.querySelector('.ss-es-su').textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`;
+        es.querySelector('.ss-es-giu').textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`);
         es.title = `${esame.titolo} · ${giorno.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`;
         es.href = `${pref}/${esame.materia}`;
         es.hidden = false;
