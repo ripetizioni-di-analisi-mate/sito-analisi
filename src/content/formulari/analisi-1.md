@@ -715,7 +715,7 @@ a^{x} & a^{x} \ln a & \arcsin x & \dfrac{1}{\sqrt{1 - x^2}} \\[10pt]
 \sin x & \cos x & \arctan x & \dfrac{1}{1 + x^2}
 \end{array}
 $$
-Ogni formula vale nei punti interni al dominio della funzione, con $a > 0$ e, per $\arcsin$ e $\arccos$, con $-1 < x < 1$. La formula per $x^{\alpha}$ vale per $x > 0$ e ogni $\alpha \in \mathbb{R}$, su tutto $\mathbb{R}$ per $\alpha \in \mathbb{N}$ e per $x \neq 0$ con $\alpha$ intero negativo. La derivata di una costante è $0$.
+Ogni formula vale nei punti interni al dominio della funzione, con $a > 0$ e, per $\arcsin$ e $\arccos$, con $-1 < x < 1$. La formula per $x^{\alpha}$ vale per $x > 0$ e ogni $\alpha \in \mathbb{R}$, su tutto $\mathbb{R}$ per $\alpha$ intero positivo e per $x \neq 0$ con $\alpha$ intero negativo. La derivata di una costante è $0$.
 :::
 
 :::formula{#altre-derivate titolo="Altre derivate di uso frequente"}
@@ -941,7 +941,7 @@ f(t) = T_n(t) + o(t^n), \quad g(x) \to 0 \implies f(g(x)) = T_n(g(x)) + o\bigl( 
 e^{x} = e^{x_0} \sum_{k=0}^{n} \frac{(x - x_0)^k}{k!} + o\bigl( (x - x_0)^n \bigr) \quad (x \to x_0)
 \end{gathered}
 $$
-Nella prima riga $t \to 0$ e $x \to x_0$; se inoltre $g(x) \sim c\,x^{k}$ per $x \to 0$, con $c \neq 0$, il resto $o\bigl( g(x)^n \bigr)$ è $o(x^{kn})$. Gli sviluppi centrati in $x_0 \neq 0$ si ottengono da quelli di McLaurin con la sostituzione $t = x - x_0$.
+Nella prima riga $t \to 0$ e $x \to x_0$; se inoltre $x_0 = 0$ e $g(x) \sim c\,x^{k}$ per $x \to 0$, con $c \neq 0$, il resto $o\bigl( g(x)^n \bigr)$ è $o(x^{kn})$. Gli sviluppi centrati in $x_0 \neq 0$ si ottengono da quelli di McLaurin con la sostituzione $t = x - x_0$.
 :::
 
 ## Studio di funzione
@@ -1267,7 +1267,7 @@ $$
 \int_{-\infty}^{+\infty} f(x)\, dx = \int_{-\infty}^{c} f(x)\, dx + \int_{c}^{+\infty} f(x)\, dx
 \end{gathered}
 $$
-La prima vale per $f$ integrabile su ogni $[a, t]$; la seconda per $f$ illimitata vicino ad $a$ e integrabile su ogni $[t, b]$ con $a < t < b$. L'integrale converge se il limite esiste finito, diverge se è infinito, è indeterminato se il limite non esiste. Con più punti critici l'integrale si spezza in integrali con un solo punto critico e converge se convergono *tutti*; il carattere non dipende da $c$.
+La prima vale per $f$ integrabile su ogni $[a, t]$; la seconda per $f$ illimitata vicino ad $a$ e integrabile su ogni $[t, b]$ con $a < t < b$. L'integrale converge se il limite esiste finito, diverge se è infinito, è indeterminato se il limite non esiste. Un estremo infinito, oppure un punto vicino al quale $f$ è illimitata, si chiama **punto critico** dell'integrale. Con più punti critici l'integrale si spezza in integrali con un solo punto critico e converge se convergono *tutti*; il carattere non dipende da $c$.
 :::
 
 :::formula{#integrali-campione titolo="Integrali campione delle potenze"}
@@ -1345,7 +1345,7 @@ Il terzo integrale converge e non converge assolutamente. In $0$ la funzione $\d
 :::
 
 :::attenzione
-La formula fondamentale del calcolo integrale richiede l'integranda continua su tutto l'intervallo chiuso. Per $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$ la primitiva $-\dfrac{1}{x}$ darebbe $-2$, un valore negativo per una funzione positiva; il punto $0$ è un punto critico interno e l'integrale diverge.
+La formula fondamentale del calcolo integrale si applica a una funzione continua su tutto l'intervallo chiuso di integrazione. La funzione $\dfrac{1}{x^2}$ non è definita in $0$, e $-\dfrac{1}{x}$ è una sua primitiva soltanto sugli intervalli che non contengono $0$. Perciò la formula non si applica a $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$, e il calcolo $\left[ -\dfrac{1}{x} \right]_{-1}^{1} = -2$ darebbe un valore negativo per una funzione positiva. Il punto $0$ è un punto critico interno all'intervallo, quindi l'integrale si spezza negli integrali su $[-1, 0)$ e su $(0, 1]$; poiché entrambi divergono a $+\infty$, anche l'integrale di partenza diverge.
 :::
 
 ## Serie numeriche e serie di potenze
@@ -1393,7 +1393,7 @@ $$
 a_n \sim b_n \implies \sum a_n \ \text{e} \ \sum b_n \ \text{hanno lo stesso carattere}
 \end{gathered}
 $$
-Valgono per serie a termini definitivamente non negativi, con $b_n > 0$ nella seconda riga. Più in generale, se $\dfrac{a_n}{b_n} \to \ell \in (0, +\infty)$ le due serie hanno lo stesso carattere; se $\ell = 0$ la convergenza di $\sum b_n$ implica quella di $\sum a_n$; se $\ell = +\infty$ la divergenza di $\sum b_n$ implica quella di $\sum a_n$.
+Valgono per serie a termini definitivamente non negativi, con $b_n > 0$ nella terza riga. Più in generale, se $\dfrac{a_n}{b_n} \to \ell \in (0, +\infty)$ le due serie hanno lo stesso carattere; se $\ell = 0$ la convergenza di $\sum b_n$ implica quella di $\sum a_n$; se $\ell = +\infty$ la divergenza di $\sum b_n$ implica quella di $\sum a_n$.
 :::
 
 :::formula{#criteri-del-rapporto-e-della-radice titolo="Criteri del rapporto e della radice"}

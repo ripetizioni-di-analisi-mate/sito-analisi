@@ -252,12 +252,7 @@ Vale per $n$ naturale. I coefficienti sono le righe del triangolo di Tartaglia, 
 
 :::formula{#trinomio-speciale titolo="Trinomio speciale"}
 $$
-x^2 + sx + p = (x + a)(x + b)
-\qquad \text{con} \quad
-\begin{cases}
-a + b = s \\
-a \cdot b = p
-\end{cases}
+x^2 + (a + b)\,x + a b = (x + a)(x + b)
 $$
 Si applica quando i due numeri $a$ e $b$ si trovano a mente. Per esempio $x^2 - x - 12 = (x + 3)(x - 4)$, poiché $3 + (-4) = -1$ e $3 \cdot (-4) = -12$.
 :::
