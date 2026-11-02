@@ -69,9 +69,10 @@ const FORME = {
 };
 const RIEMPIMENTI = ['vuoto', 'pieno', 'grigio', 'righe'];
 const DIMENSIONI = { piccolo: 12, medio: 24, grande: 38 };
-const POSTI = { c: [50, 50], n: [50, 21], s: [50, 79], e: [79, 50], o: [21, 50], ne: [79, 21], no: [21, 21], se: [79, 79], so: [21, 79] };
+const POSTI = { c: [50, 50], n: [50, 21], s: [50, 79], e: [79, 50], o: [21, 50], ne: [79, 21], no: [21, 21], se: [79, 79], so: [21, 79], o3: [19, 50], e3: [81, 50] };
+// o3, e3: posti più larghi per tre copie in riga, così le figure non si toccano.
 const COPIE = {
-  1: ['c'], 2: ['o', 'e'], 3: ['o', 'c', 'e'], 4: ['no', 'ne', 'so', 'se'], 5: ['no', 'ne', 'c', 'so', 'se'],
+  1: ['c'], 2: ['o', 'e'], 3: ['o3', 'c', 'e3'], 4: ['no', 'ne', 'so', 'se'], 5: ['no', 'ne', 'c', 'so', 'se'],
   6: ['no', 'o', 'so', 'ne', 'e', 'se'], 7: ['no', 'o', 'so', 'c', 'ne', 'e', 'se'],
   8: ['no', 'n', 'ne', 'o', 'e', 'so', 's', 'se'], 9: ['no', 'n', 'ne', 'o', 'c', 'e', 'so', 's', 'se'],
 };
@@ -95,7 +96,9 @@ function figuraSingola(spec, id) {
   if (!forma) throw new Error(`figura: manca la forma in "${spec}"`);
   if (!riemp) riemp = forma === 'punto' || forma === 'lettera' ? 'pieno' : 'vuoto';
   const posti = copie ? COPIE[copie] : [posto];
-  const misura = dim ?? (copie > 1 || posto !== 'c' ? DIMENSIONI.piccolo : DIMENSIONI.medio);
+  // Tre copie in riga: un po' più piccole del solito, così restano staccate tra loro e dal bordo.
+  let misura = dim ?? (copie > 1 || posto !== 'c' ? DIMENSIONI.piccolo : DIMENSIONI.medio);
+  if (copie === 3 && misura === DIMENSIONI.piccolo) misura = 11;
   const corpo = forma === 'lettera'
     ? `<text class="lettera" x="0" y="0" text-anchor="middle" dominant-baseline="central" font-size="1.9">${esc(lettera)}</text>`
     : FORME[forma]();
