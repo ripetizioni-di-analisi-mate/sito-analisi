@@ -53,10 +53,16 @@ export const PUNTI = {
   secondiVeloce: 60,
   secondiDomanda: 120,   // tempo per ogni domanda
   giorniDimezzati: 7,    // domanda già indovinata nei 7 giorni prima: metà punti
-  studioMinuto: 1,       // ogni minuto di studio attivo
-  studioMaxGiorno: 180,  // minuti di studio che contano in un giorno
   inattivoSecondi: 120,  // dopo 2 minuti senza attività il conteggio si ferma
 };
+
+// Studio attivo di fila (scelta di Carmine del 02/11/2026), senza tetto giornaliero:
+// 1 EXP al minuto nei primi 20 minuti, poi 1 EXP al minuto in più ogni 10 minuti fino a 5 EXP al minuto
+// (blocchi da 10 minuti: 10, 10, 20, 30, 40, poi 50). Dopo 45 minuti senza studio la serie riparte da capo.
+// Ogni ora di studio di fila vale un premio.
+export const STUDIO = { primiMinuti: 20, ogniMinuti: 10, maxMinuto: 5, pausaMinuti: 45, premioOra: 50 };
+export const puntiMinuto = (m: number) => (m <= STUDIO.primiMinuti ? 1
+  : Math.min(STUDIO.maxMinuto, 2 + Math.floor((m - STUDIO.primiMinuti - 1) / STUDIO.ogniMinuti)));
 
 // Traguardi: restano nell'account e danno EXP una sola volta.
 export const TRAGUARDI_FISSI = [

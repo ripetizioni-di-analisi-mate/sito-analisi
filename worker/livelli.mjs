@@ -1,7 +1,7 @@
 // Livelli, punti esperienza (EXP), sessioni di studio, obiettivi della settimana e traguardi.
 // Le regole (punti, soglie, fasce) stanno in src/data/livelli.ts; qui c'è solo l'archivio.
 import {
-  livelloDa, PUNTI, RIPASSO, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI,
+  livelloDa, PUNTI, RIPASSO, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI, STUDIO, puntiMinuto,
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
@@ -31,6 +31,12 @@ function nomePremio(ar, email, codice, l = 'it') {
   if (fisso) return l === 'en' ? fisso.nomeEn : fisso.nome;
   let m = codice.match(/^materia-(.+)$/);
   if (m) return l === 'en' ? `All topics of ${titoloMateria(m[1], l)} tried` : `Tutti gli argomenti di ${titoloMateria(m[1], l)} provati`;
+  m = codice.match(/^ora-\d+-(\d+)$/);
+  if (m) {
+    const n = Number(m[1]);
+    if (l === 'en') return n === 1 ? 'One hour of study in a row' : `${n} hours of study in a row`;
+    return n === 1 ? "Un'ora di studio di fila" : `${n} ore di studio di fila`;
+  }
   m = codice.match(/^livello-(\d+)$/);
   if (m) return l === 'en' ? `Level ${m[1]}` : `Livello ${m[1]}`;
   m = codice.match(/^obiettivo-(\d{4}-\d{2}-\d{2})-(\d+)$/);
@@ -68,6 +74,10 @@ export function creaTabelleLivelli(sql) {
   try { sql.exec('ALTER TABLE utenti ADD COLUMN exp INTEGER DEFAULT 0'); } catch { /* già presente */ }
   // valida = risposta data dentro il tempo: solo queste contano per obiettivi e traguardi
   try { sql.exec('ALTER TABLE risposte ADD COLUMN valida INTEGER DEFAULT 1'); } catch { /* già presente */ }
+  // studio di fila: minuti della serie in corso (riparte dopo STUDIO.pausaMinuti senza studio)
+  sql.exec('CREATE TABLE IF NOT EXISTS serie (email TEXT PRIMARY KEY, inizio INTEGER, minuti INTEGER DEFAULT 0, ultimo INTEGER DEFAULT 0)');
+  // EXP dello studio nella sessione (prima erano un punto al minuto e si ricavavano dai minuti)
+  try { sql.exec('ALTER TABLE sessioni ADD COLUMN punti_studio INTEGER'); } catch { /* già presente */ }
 }
 
 // ---------- operazioni sull'archivio (ar = istanza di Archivio, con righe/riga/sql) ----------
@@ -189,21 +199,25 @@ export function battito(ar, c) {
   const giorno = giornoRoma(ora);
   const r = ar.riga('SELECT minuti, ultimo FROM studio WHERE email = ? AND giorno = ?', email, giorno);
   let contato = false;
+  const oraPremi = [];
   if (!r || ora - r.ultimo >= 50 * 1000) {
-    const minuti = r?.minuti || 0;
-    if (minuti < PUNTI.studioMaxGiorno) {
-      ar.sql.exec(`INSERT INTO studio (email, giorno, minuti, ultimo) VALUES (?, ?, 1, ?)
-        ON CONFLICT(email, giorno) DO UPDATE SET minuti = minuti + 1, ultimo = excluded.ultimo`, email, giorno, ora);
-      aggiungi(ar, email, PUNTI.studioMinuto, 'studio');
-      const s = sessioneCorrente(ar, email, c.materia, c.argomento);
-      ar.sql.exec('UPDATE sessioni SET minuti = minuti + 1, punti = punti + ?, ultimo = ?, materia = COALESCE(?, materia), argomento = COALESCE(?, argomento) WHERE id = ?',
-        PUNTI.studioMinuto, ora, c.materia || null, c.argomento || null, s);
-      contato = true;
-    } else {
-      ar.sql.exec('UPDATE studio SET ultimo = ? WHERE email = ? AND giorno = ?', ora, email, giorno);
-    }
+    ar.sql.exec(`INSERT INTO studio (email, giorno, minuti, ultimo) VALUES (?, ?, 1, ?)
+      ON CONFLICT(email, giorno) DO UPDATE SET minuti = minuti + 1, ultimo = excluded.ultimo`, email, giorno, ora);
+    // Serie di studio di fila: riparte da capo dopo STUDIO.pausaMinuti senza minuti contati.
+    let sr = ar.riga('SELECT inizio, minuti, ultimo FROM serie WHERE email = ?', email);
+    if (!sr || ora - sr.ultimo > STUDIO.pausaMinuti * 60000) sr = { inizio: ora, minuti: 0 };
+    const m = sr.minuti + 1;
+    ar.sql.exec(`INSERT INTO serie (email, inizio, minuti, ultimo) VALUES (?, ?, ?, ?)
+      ON CONFLICT(email) DO UPDATE SET inizio = excluded.inizio, minuti = excluded.minuti, ultimo = excluded.ultimo`, email, sr.inizio, m, ora);
+    const punti = puntiMinuto(m);
+    aggiungi(ar, email, punti, 'studio');
+    const s = sessioneCorrente(ar, email, c.materia, c.argomento);
+    ar.sql.exec('UPDATE sessioni SET minuti = minuti + 1, punti = punti + ?, punti_studio = COALESCE(punti_studio, 0) + ?, ultimo = ?, materia = COALESCE(?, materia), argomento = COALESCE(?, argomento) WHERE id = ?',
+      punti, punti, ora, c.materia || null, c.argomento || null, s);
+    contato = true;
+    if (m % 60 === 0) premia(ar, email, `ora-${sr.inizio}-${m / 60}`, '', STUDIO.premioOra, oraPremi);
   }
-  const nuovi = contato ? controllaPremi(ar, email, c.catalogo) : [];
+  const nuovi = contato ? [...oraPremi, ...controllaPremi(ar, email, c.catalogo)] : [];
   return { contato, nuovi: conNomi(ar, email, nuovi, c.lingua), stato: statoDi(ar, email, c.lingua) };
 }
 
@@ -251,8 +265,8 @@ export function riepilogo(ar, c) {
     sessione: {
       inizio: s.inizio, minuti: s.minuti, risposte: s.risposte, corrette: s.corrette, veloci: s.veloci,
       materia: s.materia, argomento: s.argomento, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null,
-      puntiCorrette: s.punti - s.minuti * PUNTI.studioMinuto,
-      puntiStudio: s.minuti * PUNTI.studioMinuto,
+      puntiCorrette: s.punti - (s.punti_studio ?? s.minuti),
+      puntiStudio: s.punti_studio ?? s.minuti,
       premi, punti: s.punti + premi.reduce((x, p) => x + p.punti, 0),
     },
     obiettivi, stato: statoDi(ar, email, l),

@@ -3,13 +3,16 @@
 import Base from '../layouts/Base.astro';
 import { link, type Lingua } from '../i18n';
 import { stemmaSVG, RANGHI, ROMANI } from '../../worker/stemmi.mjs';
-import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA } from '../data/livelli';
+import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, STUDIO, puntiMinuto } from '../data/livelli';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
 const XP = en ? 'XP' : 'EXP';
 const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT');
 const puntiObiettivi = Object.values(OBIETTIVI).map((o) => o.punti);
+// EXP dei blocchi di 10 minuti nella prima ora di studio di fila (10, 10, 20, 30, 40, 50)
+const blocchi = Array.from({ length: 6 }, (_, b) => Array.from({ length: 10 }, (_, k) => puntiMinuto(b * 10 + k + 1)).reduce((x, y) => x + y, 0));
+const primaOra = blocchi.reduce((x, y) => x + y, 0);
 const [prima, cento, ore] = TRAGUARDI_FISSI;
 const titolo = en ? 'Levels and points' : 'Livelli e punti';
 ---
@@ -27,9 +30,14 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
     <dl class="tabella-punti">
       <div><dt>{en ? 'Correct answer to a timed question' : 'Risposta corretta a una domanda a tempo'}</dt><dd>{PUNTI.corretta} {XP}</dd></div>
       <div><dt>{en ? 'Correct answer given within the first minute' : 'Risposta corretta data nel primo minuto'}</dt><dd>+{PUNTI.veloce} {XP}</dd></div>
-      <div><dt>{en ? `Every minute of active study, up to ${PUNTI.studioMaxGiorno} minutes a day` : `Ogni minuto di studio attivo, fino a ${PUNTI.studioMaxGiorno} minuti al giorno`}</dt><dd>{PUNTI.studioMinuto} {XP}</dd></div>
+      <div><dt>{en ? `Each of the first ${STUDIO.primiMinuti} minutes of active study in a row` : `Ogni minuto dei primi ${STUDIO.primiMinuti} di studio attivo di fila`}</dt><dd>1 {XP}</dd></div>
+      <div><dt>{en ? `Each minute after that: one more point every ${STUDIO.ogniMinuti} minutes` : `Ogni minuto successivo: un punto in più ogni ${STUDIO.ogniMinuti} minuti`}</dt><dd>{en ? `up to ${STUDIO.maxMinuto}` : `fino a ${STUDIO.maxMinuto}`} {XP}</dd></div>
+      <div><dt>{en ? 'Every hour of study in a row' : 'Ogni ora di studio di fila'}</dt><dd>+{STUDIO.premioOra} {XP}</dd></div>
       <div><dt>{en ? 'Weekly goal completed' : 'Obiettivo della settimana completato'}</dt><dd>{Math.min(...puntiObiettivi)}–{Math.max(...puntiObiettivi)} {XP}</dd></div>
     </dl>
+    <p>{en
+      ? `Study in a row is worth more and more: in an hour the blocks of ten minutes are worth ${blocchi.join(', ')} XP, that is ${primaOra} XP, plus the ${STUDIO.premioOra} XP reward for the hour. From then on every ten minutes are worth ${10 * STUDIO.maxMinuto} XP. After ${STUDIO.pausaMinuti} minutes without study the count starts again from 1 XP per minute. There is no daily limit.`
+      : `Lo studio di fila vale sempre di più: in un'ora i blocchi da dieci minuti valgono ${blocchi.join(', ')} EXP, cioè ${primaOra} EXP, più il premio di ${STUDIO.premioOra} EXP per l'ora. Da lì in avanti ogni dieci minuti valgono ${10 * STUDIO.maxMinuto} EXP. Dopo ${STUDIO.pausaMinuti} minuti senza studio il conteggio riparte da 1 EXP al minuto. Non c'è un limite giornaliero.`}</p>
     <p>{en ? 'Each question has two minutes. As soon as you confirm the answer, the full explanation appears with the points earned. When you end the session, the summary shows the active study time, the correct answers and the points earned.' : 'Ogni domanda ha due minuti di tempo. Dopo la conferma della risposta compare subito la spiegazione completa, con i punti ottenuti. Quando si termina la sessione, il riepilogo mostra il tempo di studio attivo, le risposte corrette e i punti guadagnati.'}</p>
 
     <h2>{en ? 'Points only for those who are studying' : 'Punti solo a chi sta studiando'}</h2>
