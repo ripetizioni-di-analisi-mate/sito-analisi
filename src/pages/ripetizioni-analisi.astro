@@ -11,7 +11,8 @@ const domande: [string, string][] = [
   ['Posso seguire il corso di gruppo se ho lacune di base?', 'Sì, il corso è pensato anche per chi parte con delle lacune. Per i prerequisiti c’è anche il Precorso sul sito.'],
   ['Devo seguire tutto il corso?', 'No, non c’è alcun vincolo: si può seguire anche solo una parte delle lezioni.'],
   ['Come si paga il corso di gruppo?', 'Il pagamento avviene ogni cinque o sei lezioni svolte.'],
-  ['Come si prenota?', 'Si scrive su WhatsApp indicando la materia, l’università e la data dell’esame.'],
+  ['Come si prenota una lezione individuale?', 'Si prenota dalla pagina Prenota una lezione, scegliendo materia, giorno e ora; il pagamento avviene online al momento della prenotazione.'],
+  ['Come ci si iscrive a un corso di gruppo?', 'Ci si iscrive dalla pagina Corsi di gruppo e si aspetta che il gruppo si formi; nel frattempo si possono inviare le tracce d’esame e la data dell’esame.'],
 ];
 
 const schema = [
@@ -41,9 +42,10 @@ const schema = [
 
     <h2>Lezioni individuali</h2>
     <p>La lezione è costruita sulla preparazione dello studente e sul programma del suo corso. Di solito si parte dalle prove d’esame del docente e si lavora sugli argomenti che servono per quell’esame.</p>
+    <p>Giorno e ora si scelgono tra gli orari liberi nella pagina <a href="/prenota">Prenota una lezione</a>.</p>
 
     <h2>Corsi di gruppo</h2>
-    <p>I corsi coprono Analisi matematica 1, Analisi matematica 2 e Matematica generale. Il programma si organizza sulle prove d’esame inviate dagli iscritti, con due o tre incontri settimanali da un’ora. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20. Le lezioni sono registrate, quindi una lezione persa si recupera con la registrazione. Per iscriversi servono nome, cognome e numero di telefono, che si usa per il gruppo WhatsApp del corso.</p>
+    <p>I corsi coprono Analisi matematica 1, Analisi matematica 2 e Matematica generale. Il programma si organizza sulle prove d’esame inviate dagli iscritti, con due o tre incontri settimanali da un’ora. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20. Le lezioni sono registrate, quindi una lezione persa si recupera con la registrazione. Ci si iscrive dalla pagina <a href="/corsi-di-gruppo">Corsi di gruppo</a> e si aspetta che il gruppo si formi; il numero di telefono serve per il gruppo WhatsApp del corso.</p>
 
     <h2>Videocorsi</h2>
     <p>Per chi studia con i propri tempi ci sono i <a href="/videocorsi">videocorsi preregistrati</a>: ogni lezione ha il video e il PDF.</p>
@@ -56,7 +58,7 @@ const schema = [
       {domande.map(([d, r]) => (<><dt>{d}</dt><dd>{r}</dd></>))}
     </dl>
 
-    <p class="azione"><a class="bottone-scrivimi" href={WHATSAPP} target="_blank" rel="noopener">Scrivimi su WhatsApp</a></p>
+    <p class="azione"><a class="bottone-scrivimi" href="/prenota">Prenota una lezione</a> <a class="bottone-scrivimi secondario" href={WHATSAPP} target="_blank" rel="noopener">Scrivimi su WhatsApp</a></p>
     <p class="altro">Chi sono, i risultati degli studenti e le università da cui provengono: <a href="/chi-sono">pagina Chi sono</a>.</p>
   </div>
 </Base>
@@ -68,5 +70,8 @@ const schema = [
   .azione { margin: 1.8rem 0 1rem; }
   .bottone-scrivimi { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.2rem; border-radius: var(--raggio); background: var(--accento); color: white; text-decoration: none; }
   .bottone-scrivimi:hover { filter: brightness(1.08); }
+  .bottone-scrivimi.secondario { background: white; color: var(--accento); border: 1px solid var(--accento); margin-left: 0.4rem; }
+  .azione { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .azione .secondario { margin-left: 0; }
   .altro { font-family: var(--ui); font-size: 0.92rem; }
 </style>

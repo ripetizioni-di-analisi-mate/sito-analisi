@@ -1,0 +1,91 @@
+---
+// Gestione di una lezione prenotata dal link dell'email di conferma: spostamento o disdetta con rimborso.
+import Base from '../../layouts/Base.astro';
+import StileLezioni from '../../components/StileLezioni.astro';
+import { LEZIONI } from '../../data/lezioni';
+---
+<Base lingua="it" titolo="La tua lezione" percorso={[{ titolo: 'Prenota una lezione', href: '/prenota' }, { titolo: 'La tua lezione' }]}
+  seo={{ noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
+  <StileLezioni />
+  <div class="prenota" data-ore={LEZIONI.rimborsoOre} data-prezzo={LEZIONI.prezzo}>
+    <p class="sopratitolo">Lezione individuale online</p>
+    <h1>La tua lezione</h1>
+    <div id="scheda"><p class="sommario">Caricamento della prenotazione…</p></div>
+    <div id="azioni"></div>
+    <section id="spostamento" class="passo" hidden>
+      <h2>Nuovo giorno e ora</h2>
+      <p class="nota-passo">Gli orari mostrati sono quelli ancora liberi, almeno {LEZIONI.preavvisoOre} ore da adesso.</p>
+      <div id="calendario" class="calendario-lezioni"><p class="cal-carico">Caricamento degli orari liberi…</p></div>
+      <div class="tasti"><button type="button" class="bottone-primario" id="conferma-sposta" disabled>Sposta la lezione</button><button type="button" class="bottone-secondario" id="annulla-sposta">Annulla</button></div>
+    </section>
+    <p class="esito-modulo" id="esito" role="status"></p>
+  </div>
+</Base>
+
+<script>
+  import { calendario, descriviOrario, type Orario } from '../../lib/calendario-lezioni';
+
+  const radiceP = document.querySelector<HTMLElement>('.prenota')!;
+  const ORE = Number(radiceP.dataset.ore);
+  const PREZZO = Number(radiceP.dataset.prezzo);
+  const t = new URLSearchParams(location.hash.slice(1)).get('t') || '';
+  const scheda = document.getElementById('scheda')!;
+  const azioni = document.getElementById('azioni')!;
+  const spostamento = document.getElementById('spostamento')!;
+  const conferma = document.getElementById('conferma-sposta') as HTMLButtonElement;
+  const esito = document.getElementById('esito')!;
+  const esc = (x: string) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const chiama = async (percorso: string, extra = {}) => {
+    const r = await fetch(percorso, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t, ...extra }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.errore || 'Qualcosa non ha funzionato. Riprova tra poco.');
+    return d;
+  };
+  const errore = (m: string) => { esito.classList.add('errore'); esito.textContent = m; };
+  const ok = (m: string) => { esito.classList.remove('errore'); esito.textContent = m; };
+  let nuovo: Orario | null = null;
+
+  function mostra(d: any) {
+    const stati: Record<string, string> = { pagata: 'Confermata', disdetta: 'Disdetta e rimborsata' };
+    scheda.innerHTML = `<div class="scheda-lezione"><dl><dt>Materia</dt><dd>${esc(d.materia)}</dd><dt>Quando</dt><dd>${esc(d.quando)}</dd>
+      <dt>Stato</dt><dd>${esc(stati[d.stato] || d.stato)}</dd>
+      ${d.stato === 'pagata' ? `<dt>Dove</dt><dd>${d.meet ? `<a href="${esc(d.meet)}" target="_blank" rel="noopener">Google Meet</a>` : 'Google Meet, link nell’invito'}</dd>` : ''}</dl></div>`;
+    spostamento.hidden = true;
+    if (d.stato !== 'pagata') { azioni.innerHTML = '<div class="tasti"><a class="bottone-primario" href="/prenota">Prenota un’altra lezione</a></div>'; return; }
+    if (!d.rimborsabile) {
+      azioni.innerHTML = `<p>Mancano meno di ${ORE} ore alla lezione, perciò dal sito non si può più spostare né disdire. Per qualsiasi necessità scrivimi su <a href="https://wa.me/393885680393" target="_blank" rel="noopener">WhatsApp</a>.</p>`;
+      return;
+    }
+    azioni.innerHTML = `<p>La lezione si può spostare o disdire con rimborso completo fino a ${ORE} ore prima dell’inizio.</p>
+      <div class="tasti"><button type="button" class="bottone-primario" id="sposta">Sposta la lezione</button><button type="button" class="bottone-secondario rosso" id="disdici">Disdici e chiedi il rimborso</button></div>`;
+    document.getElementById('sposta')!.addEventListener('click', apriSpostamento);
+    document.getElementById('disdici')!.addEventListener('click', async () => {
+      if (!confirm(`Disdire la lezione di ${d.quando}? I ${PREZZO} € tornano sulla carta usata per il pagamento.`)) return;
+      ok('Disdetta in corso…');
+      try { mostra(await chiama('/api/prenota/disdici')); ok('Lezione disdetta. Il rimborso compare sull’estratto conto di solito entro 5-10 giorni lavorativi.'); }
+      catch (e: any) { errore(e.message); }
+    });
+  }
+
+  async function apriSpostamento() {
+    spostamento.hidden = false;
+    nuovo = null; conferma.disabled = true;
+    spostamento.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const radice = document.getElementById('calendario')!;
+    try {
+      const d = await chiama('/api/prenota/orari-spostamento');
+      calendario(radice, d.orari, (o) => { nuovo = o; conferma.disabled = false; conferma.textContent = `Sposta a ${descriviOrario(o)}`; });
+    } catch (e: any) { radice.innerHTML = `<p class="cal-vuoto">${esc(e.message)}</p>`; }
+  }
+  conferma.addEventListener('click', async () => {
+    if (!nuovo) return;
+    conferma.disabled = true;
+    ok('Spostamento in corso…');
+    try { mostra(await chiama('/api/prenota/sposta', { inizio: nuovo.inizio })); ok('Lezione spostata. Google Calendar aggiorna l’invito con il nuovo orario.'); }
+    catch (e: any) { errore(e.message); conferma.disabled = false; }
+  });
+  document.getElementById('annulla-sposta')!.addEventListener('click', () => { spostamento.hidden = true; });
+
+  if (!t) scheda.innerHTML = '<p class="sommario">Il link non è completo. Apri di nuovo il link dall’email di conferma.</p>';
+  else chiama('/api/prenota/dettaglio').then(mostra).catch((e) => { scheda.innerHTML = `<p class="sommario">${esc(e.message)} Apri di nuovo il link dall’email di conferma.</p>`; });
+</script>

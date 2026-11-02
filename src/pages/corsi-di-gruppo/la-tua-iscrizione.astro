@@ -1,0 +1,110 @@
+---
+// Pagina personale dell'iscritto a un corso di gruppo: data d'esame, dettagli e tracce (link nell'email di iscrizione).
+import Base from '../../layouts/Base.astro';
+import StileLezioni from '../../components/StileLezioni.astro';
+import { FILE_GRUPPI } from '../../data/gruppi';
+---
+<Base lingua="it" titolo="La tua iscrizione" percorso={[{ titolo: 'Corsi di gruppo', href: '/corsi-di-gruppo' }, { titolo: 'La tua iscrizione' }]}
+  seo={{ noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
+  <StileLezioni />
+  <div class="prenota gruppi" data-max={FILE_GRUPPI.maxFile}>
+    <p class="sopratitolo">Corsi di gruppo</p>
+    <h1 id="titolo">La tua iscrizione</h1>
+    <p class="sommario" id="sommario">Caricamento dell’iscrizione…</p>
+
+    <div id="contenuto" hidden>
+      <section class="passo">
+        <h2>Tracce d’esame</h2>
+        <p class="nota-passo">Le tracce degli appelli del tuo docente servono a costruire il programma del corso. Si possono inviare PDF e foto, fino a {FILE_GRUPPI.maxFile} file.</p>
+        <ul class="elenco-tracce" id="tracce"></ul>
+        <label class="bottone-secondario carica"><input type="file" id="nuove" multiple accept="application/pdf,image/*" hidden />Aggiungi tracce</label>
+        <p class="esito-modulo" id="esito-tracce" role="status"></p>
+      </section>
+
+      <form id="dettagli" class="passo" novalidate>
+        <h2>Esame e dettagli</h2>
+        <div class="modulo">
+          <label><span>Data dell’esame <small>se è già fissata</small></span><input name="data_esame" type="date" /></label>
+          <label><span>Docente</span><input name="docente" maxlength="80" /></label>
+          <label><span>Università</span><input name="universita" maxlength="120" /></label>
+          <label><span>Corso di laurea</span><input name="corso_laurea" maxlength="120" /></label>
+          <label class="largo"><span>Note</span><textarea name="note" maxlength="800" placeholder="Per esempio: argomenti più difficili, appelli a cui vuoi presentarti"></textarea></label>
+        </div>
+        <div class="tasti"><button type="submit" class="bottone-primario">Salva</button></div>
+        <p class="esito-modulo" id="esito-dettagli" role="status"></p>
+      </form>
+      <p class="nota-termini">Quando il gruppo è formato ti scrivo su WhatsApp con il calendario delle lezioni. Per qualsiasi domanda: <a href="https://wa.me/393885680393" target="_blank" rel="noopener">WhatsApp</a>.</p>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+  .gruppi h2 { font-size: 1.25rem; margin: 0 0 0.4rem; }
+  .elenco-tracce { list-style: none; padding: 0; margin: 0 0 0.9rem; display: grid; gap: 0.4rem; }
+  .elenco-tracce li { display: flex; align-items: center; gap: 0.6rem; justify-content: space-between; background: white; border: 1px solid var(--riga); border-radius: var(--raggio); padding: 0.5rem 0.8rem; }
+  .elenco-tracce li span { overflow-wrap: anywhere; }
+  .elenco-tracce li small { color: var(--inchiostro-2); margin-left: 0.4rem; }
+  .elenco-tracce button { font: inherit; font-size: 0.85rem; background: none; border: 0; color: var(--c-attenzione); cursor: pointer; flex: none; }
+  .elenco-tracce .vuoto { background: none; border: 0; padding: 0; color: var(--inchiostro-2); }
+  .gruppi .carica { display: inline-block; }
+</style>
+
+<script>
+  import { inviaTraccia } from '../../lib/tracce';
+  const t = new URLSearchParams(location.hash.slice(1)).get('t') || '';
+  const $ = (id: string) => document.getElementById(id)!;
+  const form = $('dettagli') as HTMLFormElement;
+  const esc = (x: string) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const kb = (n: number) => (n > 1048576 ? `${(n / 1048576).toFixed(1).replace('.', ',')} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
+  const post = async (url: string, corpo: object) => {
+    const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t, ...corpo }) });
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(d.errore || 'Qualcosa non ha funzionato. Riprova tra poco.');
+    return d;
+  };
+
+  function mostra(d: any) {
+    const i = d.iscritto;
+    $('titolo').textContent = `Corso di ${i.materia}`;
+    $('sommario').textContent = `Iscrizione di ${i.nome} ${i.cognome} (${i.email}).`;
+    for (const k of ['data_esame', 'docente', 'universita', 'corso_laurea', 'note']) (form.elements.namedItem(k) as HTMLInputElement).value = i[k] || '';
+    const ul = $('tracce');
+    ul.innerHTML = d.file.length
+      ? d.file.map((f: any) => `<li><span>${esc(f.nome)}<small>${kb(f.dimensione)}</small></span><button type="button" data-id="${esc(f.id)}">Togli</button></li>`).join('')
+      : '<li class="vuoto">Nessuna traccia inviata finora.</li>';
+    ul.querySelectorAll<HTMLButtonElement>('button[data-id]').forEach((b) => b.addEventListener('click', async () => {
+      b.disabled = true;
+      try { mostra(await post('/api/gruppi/file-elimina', { file: b.dataset.id })); } catch (e: any) { $('esito-tracce').textContent = e.message; b.disabled = false; }
+    }));
+    $('contenuto').hidden = false;
+  }
+
+  ($('nuove') as HTMLInputElement).addEventListener('change', async (e) => {
+    const input = e.target as HTMLInputElement;
+    const esito = $('esito-tracce');
+    const file = Array.from(input.files || []);
+    const problemi: string[] = [];
+    let ultimo: any = null;
+    esito.classList.remove('errore');
+    for (let k = 0; k < file.length; k++) {
+      esito.textContent = `Invio ${k + 1} di ${file.length}…`;
+      try { ultimo = await inviaTraccia(t, file[k]); } catch (err: any) { problemi.push(err.message); }
+    }
+    if (ultimo) mostra(ultimo);
+    esito.classList.toggle('errore', problemi.length > 0);
+    esito.textContent = problemi.length ? problemi.join(' ') : 'Tracce inviate.';
+    input.value = '';
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const esito = $('esito-dettagli');
+    const f = new FormData(form);
+    const corpo = Object.fromEntries(['data_esame', 'docente', 'universita', 'corso_laurea', 'note'].map((k) => [k, String(f.get(k) || '')]));
+    try { mostra(await post('/api/gruppi/aggiorna', corpo)); esito.classList.remove('errore'); esito.textContent = 'Salvato.'; }
+    catch (err: any) { esito.classList.add('errore'); esito.textContent = err.message; }
+  });
+
+  if (!t) $('sommario').textContent = 'Il link non è completo. Apri di nuovo il link dall’email di iscrizione.';
+  else post('/api/gruppi/io', {}).then(mostra).catch((e) => { $('sommario').textContent = `${e.message} Apri di nuovo il link dall’email di iscrizione.`; });
+</script>

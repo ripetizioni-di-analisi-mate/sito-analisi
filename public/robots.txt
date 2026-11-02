@@ -31,6 +31,9 @@ Disallow: /dati-domande/
 Disallow: /reimposta-password
 Disallow: /en/reimposta-password
 Disallow: /promemoria/
+Disallow: /prenota/confermata
+Disallow: /prenota/gestisci
+Disallow: /corsi-di-gruppo/la-tua-iscrizione
 Disallow: /cerca?
 Disallow: /en/cerca?
 

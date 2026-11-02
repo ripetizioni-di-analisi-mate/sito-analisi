@@ -21,9 +21,12 @@ import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
 import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
 import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
+import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
+const CRON_LEZIONI = '58 * * * *'; // link di Meet 2 minuti prima delle lezioni (worker/prenotazioni.mjs)
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
 const VIDEO = Object.fromEntries(VIDEOCORSI.map((v) => [chiaveVideo(v.slug), v]));
 const conMaterieDeiVideo = (chiavi) => [...new Set(chiavi.flatMap((k) => (VIDEO[k] ? [k, ...VIDEO[k].sblocca] : [k])))];
@@ -146,6 +149,10 @@ export class Archivio {
       punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
+    // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
+    creaTabellePrenotazioni(this.sql);
+    // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
+    creaTabelleGruppi(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -156,7 +163,10 @@ export class Archivio {
     const { pathname } = new URL(req.url);
     // pagine nuove o cambiate segnalate ai motori (worker/indexnow.mjs): il corpo è la mappa del sito
     if (pathname === '/indexnow') return Response.json(await eseguiIndexNow(this.sql, await req.text()));
+    if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
@@ -628,6 +638,11 @@ export default {
   // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
   // Alle 16:30 UTC (17:30 in Italia d'inverno) i promemoria per tornare a studiare (worker/promemoria.mjs).
   async scheduled(evento, env, ctx) {
+    if (evento.cron === CRON_LEZIONI) {
+      ctx.waitUntil(avvisiLezioni(env, aDO, firmaToken).then((r) => { if (r.lezioni) console.log('avvisi lezioni', JSON.stringify(r)); })
+        .catch((e) => console.log('avvisi lezioni', String(e?.message || e))));
+      return;
+    }
     // A ogni cron (mattina e pomeriggio): pagine nuove o cambiate segnalate ai motori con IndexNow.
     ctx.waitUntil((async () => {
       const mappa = await env.ASSETS.fetch(new Request('https://ripetizionidianalisi.com/sitemap.xml'));
@@ -659,6 +674,18 @@ export default {
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
     if (versoLingua) return versoLingua;
+
+    // ===== lezioni individuali: prenotazione, pagamento con Stripe, Google Calendar (worker/prenotazioni.mjs) =====
+    if (p.startsWith('/api/prenota/') || p === '/api/stripe/webhook' || p === '/admin/lezioni' || p.startsWith('/admin/google/')) {
+      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza });
+      if (r) return r;
+    }
+
+    // ===== corsi di gruppo: iscrizioni, tracce d'esame, elenco per Carmine (worker/gruppi.mjs) =====
+    if (p.startsWith('/api/gruppi/') || p === '/admin/gruppi' || p === '/admin/gruppi.csv' || p.startsWith('/admin/gruppi/')) {
+      const r = await gestisciGruppi(req, env, ctx, p, { aDO, archivio, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza });
+      if (r) return r;
+    }
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {

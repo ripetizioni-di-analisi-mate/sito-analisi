@@ -1,0 +1,171 @@
+---
+// Prenotazione delle lezioni individuali con calendario e pagamento (worker/prenotazioni.mjs).
+import Base from '../../layouts/Base.astro';
+import StileLezioni from '../../components/StileLezioni.astro';
+import { LEZIONI, MATERIE_LEZIONI } from '../../data/lezioni';
+
+const WHATSAPP = 'https://wa.me/393885680393';
+const giorniTesto = 'dal lunedì al sabato';
+---
+<Base lingua="it" titolo="Prenota una lezione" percorso={[{ titolo: 'Ripetizioni online', href: '/ripetizioni-analisi' }, { titolo: 'Prenota una lezione' }]}
+  descrizione={`Prenota una lezione individuale online con Carmine Tornincasa: ${MATERIE_LEZIONI.map((m) => m.titolo).join(', ')}. Un'ora su Google Meet, ${LEZIONI.prezzo} €.`}
+  seo={{ titolo: 'Prenota una lezione individuale online | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true }}>
+  <StileLezioni />
+  <div class="prenota">
+    <p class="sopratitolo">Lezione individuale online</p>
+    <h1>Prenota una lezione</h1>
+    <p class="sommario">La lezione dura un’ora e si svolge su Google Meet. Costa {LEZIONI.prezzo} € e si paga con carta al momento della prenotazione.</p>
+    <div id="avviso" class="avviso-lezione" role="status" hidden></div>
+
+    <form id="modulo-prenota" novalidate>
+      <section class="passo">
+        <h2><span>1</span>Materia</h2>
+        <fieldset class="materie-lezione">
+          <legend class="nota-passo">La lezione si costruisce sul programma del tuo corso e sulle prove d’esame del docente.</legend>
+          {MATERIE_LEZIONI.map((m) => (
+            <label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>
+          ))}
+        </fieldset>
+      </section>
+
+      <section class="passo">
+        <h2><span>2</span>Giorno e ora</h2>
+        <p class="nota-passo">Si prenota {giorniTesto}, almeno {LEZIONI.preavvisoOre} ore prima. Gli orari mostrati sono quelli ancora liberi.</p>
+        <div id="calendario" class="calendario-lezioni"><p class="cal-carico">Caricamento degli orari liberi…</p></div>
+      </section>
+
+      <section class="passo">
+        <h2><span>3</span>I tuoi dati</h2>
+        <div class="modulo">
+          <label>Nome e cognome<input name="nome" autocomplete="name" required maxlength="80" /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
+          <label>Telefono (WhatsApp)<input name="telefono" type="tel" autocomplete="tel" required maxlength="20" placeholder="+39 …" /></label>
+          <label><span>Università e corso di laurea <small>facoltativo</small></span><input name="universita" maxlength="120" /></label>
+          <label class="largo"><span>Argomenti su cui lavorare <small>facoltativo</small></span><textarea name="note" maxlength="500" placeholder="Per esempio: integrali impropri e serie, esame il 20 gennaio"></textarea></label>
+          <label class="largo"><span>Codice fiscale <small>facoltativo, per la fattura intestata a te</small></span><input name="cf" maxlength="16" autocomplete="off" style="text-transform: uppercase" /></label>
+        </div>
+      </section>
+
+      <div class="riquadro-acquisto">
+        <p class="riepilogo" id="riepilogo">Scegli la materia e l’orario.</p>
+        <p class="prezzo"><strong>{LEZIONI.prezzo} €</strong> <span>una lezione da un’ora</span></p>
+        <label class="spunta"><input type="checkbox" name="condizioni" /><span>Accetto le <a href="#condizioni">condizioni di prenotazione</a> e chiedo che la lezione si svolga nella data scelta, anche prima della fine dei 14 giorni previsti per il recesso.</span></label>
+        <button type="submit" id="paga">Paga e prenota</button>
+        <p class="esito-modulo" id="esito" role="status"></p>
+        <p class="metodi-pagamento nota-termini">Pagamento sicuro con Stripe: carte di credito e di debito, Apple Pay e Google Pay.</p>
+      </div>
+    </form>
+
+    <section class="condizioni" id="condizioni">
+      <h2>Condizioni di prenotazione</h2>
+      <ul>
+        <li>Dopo il pagamento arrivano l’email di conferma e l’invito di Google Calendar con il link di Google Meet. Due minuti prima dell’inizio arriva un’altra email con il link per entrare nella lezione.</li>
+        <li>La lezione si può spostare o disdire fino a {LEZIONI.rimborsoOre} ore prima dell’inizio, dal link nell’email di conferma. La disdetta entro quel termine dà il rimborso completo sulla carta usata per il pagamento.</li>
+        <li>Quando mancano meno di {LEZIONI.rimborsoOre} ore all’inizio, la lezione non si può più spostare dal sito e il rimborso non è previsto.</li>
+        <li>Per richieste diverse o per un orario che non compare nel calendario si scrive su <a href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>.</li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+<script>
+  import { calendario, descriviOrario, type Orario } from '../../lib/calendario-lezioni';
+
+  const modulo = document.getElementById('modulo-prenota') as HTMLFormElement;
+  const avviso = document.getElementById('avviso')!;
+  const esito = document.getElementById('esito')!;
+  const riepilogo = document.getElementById('riepilogo')!;
+  const paga = document.getElementById('paga') as HTMLButtonElement;
+  const radice = document.getElementById('calendario')!;
+  let materie: { slug: string; titolo: string }[] = [];
+  let scelto: Orario | null = null;
+
+  const mostraAvviso = (testo: string, errore = false) => {
+    avviso.textContent = testo;
+    avviso.classList.toggle('errore', errore);
+    avviso.hidden = false;
+  };
+  const aggiornaRiepilogo = () => {
+    const m = materie.find((x) => x.slug === (modulo.elements.namedItem('materia') as RadioNodeList).value);
+    if (m && scelto) riepilogo.innerHTML = `Lezione di <b>${m.titolo}</b><br>${descriviOrario(scelto)}`;
+    else if (scelto) riepilogo.innerHTML = `${descriviOrario(scelto)}<br>Scegli la materia.`;
+    else if (m) riepilogo.innerHTML = `Lezione di <b>${m.titolo}</b><br>Scegli giorno e ora.`;
+    else riepilogo.textContent = 'Scegli la materia e l’orario.';
+  };
+  modulo.addEventListener('change', aggiornaRiepilogo);
+
+  // Pagamento annullato su Stripe: l'orario torna subito libero.
+  const qs = new URLSearchParams(location.search);
+  const annullata = qs.get('annullata');
+  const liberata = annullata
+    ? fetch('/api/prenota/libera', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: annullata }) })
+        .then(() => { mostraAvviso('Il pagamento è stato annullato e l’orario è tornato libero. Puoi sceglierne uno nuovo.'); history.replaceState(null, '', location.pathname); })
+        .catch(() => {})
+    : Promise.resolve();
+
+  async function carica() {
+    await liberata;
+    scelto = null;
+    aggiornaRiepilogo();
+    try {
+      const r = await fetch('/api/prenota/disponibilita', { cache: 'no-store' });
+      const d = await r.json();
+      materie = d.materie || [];
+      if (!d.attivo) {
+        radice.innerHTML = `<p class="cal-vuoto">${d.errore || 'Le prenotazioni online non sono ancora attive.'} Per fissare una lezione si scrive su <a href="https://wa.me/393885680393">WhatsApp</a>.</p>`;
+        paga.disabled = true;
+        return;
+      }
+      paga.disabled = false;
+      calendario(radice, d.orari as Orario[], (o) => { scelto = o; aggiornaRiepilogo(); });
+    } catch {
+      radice.innerHTML = '<p class="cal-vuoto">Gli orari non si sono caricati. Ricarica la pagina tra poco.</p>';
+    }
+  }
+  carica();
+
+  // Chi ha l'account sul sito trova nome ed email già scritti.
+  fetch('/api/io').then((r) => (r.ok ? r.json() : null)).then((io) => {
+    if (!io) return;
+    const nome = modulo.elements.namedItem('nome') as HTMLInputElement;
+    const email = modulo.elements.namedItem('email') as HTMLInputElement;
+    if (!nome.value && io.nome) nome.value = io.nome;
+    if (!email.value && io.email) email.value = io.email;
+  }).catch(() => {});
+
+  modulo.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    esito.classList.add('errore');
+    const f = new FormData(modulo);
+    const materia = String(f.get('materia') || '');
+    if (!materia) { esito.textContent = 'Scegli la materia.'; return; }
+    if (!scelto) { esito.textContent = 'Scegli il giorno e l’ora.'; return; }
+    if (String(f.get('nome') || '').trim().length < 2) { esito.textContent = 'Scrivi nome e cognome.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(f.get('email') || '').trim())) { esito.textContent = 'Scrivi un indirizzo email valido.'; return; }
+    if (!/^[+0-9 ]{6,20}$/.test(String(f.get('telefono') || '').trim())) { esito.textContent = 'Scrivi un numero di telefono valido.'; return; }
+    if (!f.get('condizioni')) { esito.textContent = 'Per prenotare servono le condizioni accettate.'; return; }
+    esito.classList.remove('errore');
+    esito.textContent = 'Apertura del pagamento…';
+    paga.disabled = true;
+    try {
+      const r = await fetch('/api/prenota/inizia', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          materia, inizio: scelto.inizio, condizioni: true,
+          nome: f.get('nome'), email: f.get('email'), telefono: f.get('telefono'),
+          universita: f.get('universita'), note: f.get('note'), cf: f.get('cf'),
+        }),
+      });
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && d.url) { location.href = d.url; return; }
+      esito.classList.add('errore');
+      esito.textContent = d.errore || 'Qualcosa non ha funzionato. Riprova tra poco.';
+      paga.disabled = false;
+      if (d.occupato) carica();
+    } catch {
+      esito.classList.add('errore');
+      esito.textContent = 'Connessione assente. Riprova tra poco.';
+      paga.disabled = false;
+    }
+  });
+</script>

@@ -29,6 +29,8 @@ export async function GET() {
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/ripetizioni-analisi', 0.8, false);
+  due('/prenota', 0.7, false);
+  due('/corsi-di-gruppo', 0.7, false);
   due('/videocorsi', 0.7, false);
   for (const v of VIDEOCORSI) due(`/videocorsi/${v.slug}`, 0.6, false);
   for (const p of ['/prezzi', '/contatti']) due(p, 0.3);
