@@ -1,7 +1,7 @@
 {
   "nota": "Banco di prova di Pi. Ogni mattina il Worker (cron in wrangler.jsonc) pone a Pi i casi 'fissi' più una rotazione degli altri, e salva le risposte; il ciclo di miglioramento (revisioni/pi/CICLO-PI.md) le legge su /pi/prove e le valuta con il campo 'atteso'. I casi si possono aggiungere o correggere; l'id non si riusa.",
   "perGiorno": 6,
-  "fissi": ["sito-corso-gruppo", "sito-anteprima"],
+  "fissi": ["lim-taylor-seno", "sito-anteprima"],
   "casi": [
     { "id": "lim-coseno", "area": "correttezza", "materia": "analisi-1", "argomento": "limiti", "tipo": "esercizi-svolti", "titoloPagina": "Limiti notevoli",
       "domanda": "Come si calcola il limite per x che tende a 0 di (1 - cos x)/x^2?",
@@ -80,6 +80,12 @@
       "atteso": "Dà l'indicazione del metodo (sostituzione t = x^2, dt = 2x dx, o integrale immediato della forma f'(x)e^{f(x)}) senza svolgere tutto il calcolo né dare il risultato (e-1)/2, perché lo studente non ha chiesto la soluzione." },
     { "id": "stile-continuita", "area": "stile", "materia": "analisi-1", "argomento": "limiti", "tipo": "teoria", "titoloPagina": "Continuità",
       "domanda": "La funzione sin(x)/x è continua in 0?",
-      "atteso": "Non è definita in 0, quindi non ha senso parlare di continuità in 0; si può prolungare per continuità ponendo f(0)=1. Stile: frasi complete, connettivi, nessuna frase di riempimento, nessun asterisco, nessuna domanda retorica." }
+      "atteso": "Non è definita in 0, quindi non ha senso parlare di continuità in 0; si può prolungare per continuità ponendo f(0)=1. Stile: frasi complete, connettivi, nessuna frase di riempimento, nessun asterisco, nessuna domanda retorica." },
+    { "id": "lim-taylor-seno", "area": "correttezza", "materia": "analisi-1", "argomento": "limiti", "tipo": "esercizi-svolti", "titoloPagina": "Limiti e sviluppi di Taylor",
+      "domanda": "Quanto vale il limite per x che tende a 0 di (x - sin x)/x^3?",
+      "atteso": "Risultato 1/6 (\\dfrac{1}{6}). Con lo sviluppo sin x = x - x^3/6 + o(x^3) il numeratore vale x^3/6 + o(x^3); in alternativa de l'Hôpital applicato tre volte. Errori tipici: 0 oppure -1/6." },
+    { "id": "int-razionale", "area": "correttezza", "materia": "analisi-1", "argomento": "integrali", "tipo": "esercizi-svolti", "titoloPagina": "Integrali di funzioni razionali",
+      "domanda": "Come si calcola l'integrale di 1/(x^2 - 1)?",
+      "atteso": "Fratti semplici: 1/(x^2-1) = (1/2)/(x-1) - (1/2)/(x+1); risultato (1/2) ln|x-1| - (1/2) ln|x+1| + c = (1/2) ln|(x-1)/(x+1)| + c, con i valori assoluti e frazioni con \\dfrac." }
   ]
 }
