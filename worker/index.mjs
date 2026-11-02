@@ -11,7 +11,7 @@ import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
-import { eseguiBanco, paginaProve } from './pi-prove.mjs';
+import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
 import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
@@ -816,6 +816,7 @@ export default {
     }
 
     // Banco di prova di Pi (ciclo di miglioramento): risposte alle domande di prova e contatori anonimi.
+    if (p === '/pi/prove/subito' && req.method === 'GET') return provaSubito(url, env, aDO, A_PAGAMENTO, PREZZI);
     if ((p === '/pi/prove' || p.startsWith('/pi/prove/')) && req.method === 'GET') return paginaProve(url, env, aDO);
 
     // ===== webhook Paddle =====

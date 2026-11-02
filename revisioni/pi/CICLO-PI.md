@@ -12,7 +12,7 @@ Istruzioni per l'attività programmata che ogni mattina migliora Pi e alle 8:30 
 - Solo modelli gratuiti di Workers AI. Niente piano a pagamento di Cloudflare, niente Claude o altri servizi a pagamento.
 - Pi non parla di prezzi o acquisti di sua iniziativa; nel fumetto e nei suggerimenti niente prezzi.
 - Niente asterischi visibili nelle risposte; niente domande suggerite.
-- Ambito: solo matematica, fisica e informazioni sul sito; niente programmazione o lavori lunghi.
+- Ambito (cambiato da Carmine il 02/11/2026): tutte le materie scientifiche (matematica di ogni livello, fisica, statistica e probabilità, logica, chimica di base, test di ingresso e concorsi) e informazioni sul sito; Pi si presenta come assistente per le materie scientifiche, senza nominare solo Analisi. Niente programmazione, materie non scientifiche o lavori lunghi.
 - Pi dice di essere un'intelligenza artificiale e non si presenta come Carmine.
 - Non inventa prezzi, sconti, rimborsi o funzioni del sito. Rimborsi: li valuta Carmine caso per caso (WhatsApp).
 - Chi ha seguito un corso di Carmine o comprato un suo videocorso riceve le materie collegate gratis: lo indica nel riquadro facoltativo «Sei già uno studente di Carmine?» all'iscrizione e Carmine le attiva a mano.
@@ -26,6 +26,8 @@ Istruzioni per l'attività programmata che ogni mattina migliora Pi e alle 8:30 
 - **Banco di prova** (`worker/pi-banco.json`, `worker/pi-prove.mjs`): ogni mattina alle 5:30 UTC il cron di Cloudflare pone a Pi i casi `fissi` più `perGiorno` casi a rotazione e salva le risposte. Se c'è `modelloCandidato`, gli stessi casi vanno anche a quel modello (id con `~candidato`).
   - Riassunto: https://ripetizionidianalisi.com/pi/prove (eventuale `?giorno=AAAA-MM-GG`).
   - Risposta completa di un caso: https://ripetizionidianalisi.com/pi/prove/<id>?giorno=AAAA-MM-GG (mostra domanda, «atteso» e risposta).
+  - Tutte le risposte per intero in una sola pagina: https://ripetizionidianalisi.com/pi/prove?completo (con `&giorno=…`).
+  - Prova immediata dopo una modifica (aspettare la pubblicazione, 5-10 minuti): https://ripetizionidianalisi.com/pi/prove/subito?casi=id1,id2,id3 (massimo 3 casi, 4 volte al giorno; le risposte si salvano nel giorno corrente).
   - Da questo ambiente il sito non si raggiunge con curl: si legge con WebFetch (chiedendo di riportare il testo alla lettera). Se WebFetch non riesce, dillo nel rapporto e lavora con le prove locali.
   - Quota: banco al massimo 8 chiamate al giorno in tutto (con il candidato, `perGiorno` al massimo 3).
 - **Contatori anonimi** (sulla stessa pagina): `testo-primo:<modello>`, `testo-riserva:<modello>`, `foto-…`, `errore-quota`, `errore-modello`, `errore-foto`, `risposta-vuota`, `limite-ospite`, `limite-studente`, `limite-sito`; più l'uso giornaliero (messaggi, persone, token).
