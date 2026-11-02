@@ -37,7 +37,7 @@ const JS = en ? {
   caricamento: T.caricamento, errore: 'The questions did not load. Reload the page.', bonus: 'Speed bonus for another § seconds',
   giusta: 'Correct answer', scaduto: 'Time is up. The correct answer is §', corretta: 'The correct answer is §',
   veloce: ' (with speed bonus)', ripetuta: ', half points because already answered correctly this week',
-  presto: ', but given in less than 10 seconds: no points', tardi: ', but after the time limit: no points', nonArrivata: 'The answer did not arrive. Reload the page.',
+  tardi: ', but after the time limit: no points', nonArrivata: 'The answer did not arrive. Reload the page.',
   spiegazione: 'Explanation', conclusa: 'Study session completed', minuto: '1 minute of active study', minuti: '§ minutes of active study', sessioneConclusa: 'Session completed',
   unaCorretta: '1 correct answer', piuCorrette: '§ correct answers', su: 'out of', righeCorrette: 'Correct answers', righeStudio: 'Active study', totale: 'Total',
   numero: 'Question § of', scaduto2: 'Time is up: you can still answer, without points, or move to another question.',
@@ -46,7 +46,7 @@ const JS = en ? {
   caricamento: T.caricamento, errore: 'Le domande non si sono caricate. Ricarica la pagina.', bonus: 'Bonus velocità ancora per § secondi',
   giusta: 'Risposta corretta', scaduto: 'Tempo scaduto. La risposta corretta è la §', corretta: 'La risposta corretta è la §',
   veloce: ' (con bonus velocità)', ripetuta: ', metà punti perché già indovinata questa settimana',
-  presto: ', ma data in meno di 10 secondi: nessun punto', tardi: ', ma oltre il tempo: nessun punto', nonArrivata: 'La risposta non è arrivata. Ricarica la pagina.',
+  tardi: ', ma oltre il tempo: nessun punto', nonArrivata: 'La risposta non è arrivata. Ricarica la pagina.',
   spiegazione: 'Spiegazione', conclusa: 'Sessione di studio conclusa', minuto: '1 minuto di studio attivo', minuti: '§ minuti di studio attivo', sessioneConclusa: 'Sessione conclusa',
   unaCorretta: '1 risposta corretta', piuCorrette: '§ risposte corrette', su: 'su', righeCorrette: 'Risposte corrette', righeStudio: 'Studio attivo', totale: 'Totale',
   numero: 'Domanda § di', scaduto2: 'Tempo scaduto: puoi ancora rispondere, senza punti, oppure passare a un\'altra domanda.',
@@ -196,7 +196,6 @@ const JS = en ? {
   function mostraEsito(e: Esito) {
     let frase = e.giusta ? L.giusta : f(e.scaduto ? 'scaduto' : 'corretta', LETTERE[e.corretta - 1]);
     if (e.punti > 0) frase += ` · +${e.punti} ${lingua === 'en' ? 'XP' : 'EXP'}` + (e.veloce ? L.veloce : '') + (e.motivo === 'ripetuta' ? L.ripetuta : '');
-    else if (e.giusta && e.motivo === 'troppo-presto') frase += L.presto;
     else if (e.giusta && e.motivo === 'tempo-scaduto') frase += L.tardi;
     esito.textContent = `${frase}.`;
     esito.className = `esito ${e.giusta ? 'esito-giusto' : 'esito-sbagliato'}`;

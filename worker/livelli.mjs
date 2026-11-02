@@ -66,7 +66,7 @@ export function creaTabelleLivelli(sql) {
     CREATE TABLE IF NOT EXISTS obiettivi (email TEXT, settimana TEXT, n INTEGER, codice TEXT, materia TEXT, argomento TEXT, PRIMARY KEY (email, settimana, n));
   `);
   try { sql.exec('ALTER TABLE utenti ADD COLUMN exp INTEGER DEFAULT 0'); } catch { /* già presente */ }
-  // valida = risposta data dopo almeno 10 secondi e dentro il tempo: solo queste contano per obiettivi e traguardi
+  // valida = risposta data dentro il tempo: solo queste contano per obiettivi e traguardi
   try { sql.exec('ALTER TABLE risposte ADD COLUMN valida INTEGER DEFAULT 1'); } catch { /* già presente */ }
 }
 
@@ -217,7 +217,6 @@ export function risposta(ar, c) {
   let punti = 0, motivo = null;
   const veloce = c.corretta && s <= PUNTI.secondiVeloce;
   if (!c.corretta) motivo = 'sbagliata';
-  else if (s < PUNTI.secondiMinimi) motivo = 'troppo-presto';
   else if (s > PUNTI.secondiDomanda + 5) motivo = 'tempo-scaduto';
   else {
     punti = PUNTI.corretta + (veloce ? PUNTI.veloce : 0);
@@ -226,7 +225,7 @@ export function risposta(ar, c) {
     if (recente) { punti = Math.floor(punti / 2); motivo = 'ripetuta'; }
   }
   const valeVeloce = Boolean(veloce && punti > 0);
-  const valida = s >= PUNTI.secondiMinimi && s <= PUNTI.secondiDomanda + 5;
+  const valida = s <= PUNTI.secondiDomanda + 5;
   const giusta = Boolean(c.corretta && valida);
   ar.sql.exec('INSERT INTO risposte (email, domanda, materia, argomento, giorno, quando, corretta, veloce, punti, token, valida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     email, c.domanda, c.materia, c.argomento, giornoRoma(ora), ora, giusta ? 1 : 0, valeVeloce ? 1 : 0, punti, c.token, valida ? 1 : 0);

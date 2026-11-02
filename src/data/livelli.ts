@@ -52,7 +52,6 @@ export const PUNTI = {
   veloce: 5,             // in più se data entro il primo minuto
   secondiVeloce: 60,
   secondiDomanda: 120,   // tempo per ogni domanda
-  secondiMinimi: 10,     // prima di 10 secondi la risposta non vale punti
   giorniDimezzati: 7,    // domanda già indovinata nei 7 giorni prima: metà punti
   studioMinuto: 1,       // ogni minuto di studio attivo
   studioMaxGiorno: 180,  // minuti di studio che contano in un giorno
