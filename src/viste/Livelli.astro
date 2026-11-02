@@ -30,6 +30,7 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
     <dl class="tabella-punti">
       <div><dt>{en ? 'Correct answer to a timed question' : 'Risposta corretta a una domanda a tempo'}</dt><dd>{PUNTI.corretta} {XP}</dd></div>
       <div><dt>{en ? 'Correct answer given within the first minute' : 'Risposta corretta data nel primo minuto'}</dt><dd>+{PUNTI.veloce} {XP}</dd></div>
+      <div><dt>{en ? 'Exercise to do solved, with the answer checked by the site (once per exercise)' : 'Esercizio da fare risolto, con la risposta verificata dal sito (una volta per esercizio)'}</dt><dd>{PUNTI.esercizio} {XP}</dd></div>
       <div><dt>{en ? `Each of the first ${STUDIO.primiMinuti} minutes of active study in a row` : `Ogni minuto dei primi ${STUDIO.primiMinuti} di studio attivo di fila`}</dt><dd>1 {XP}</dd></div>
       <div><dt>{en ? `Each minute after that: one more point every ${STUDIO.ogniMinuti} minutes` : `Ogni minuto successivo: un punto in più ogni ${STUDIO.ogniMinuti} minuti`}</dt><dd>{en ? `up to ${STUDIO.maxMinuto}` : `fino a ${STUDIO.maxMinuto}`} {XP}</dd></div>
       <div><dt>{en ? 'Every hour of study in a row' : 'Ogni ora di studio di fila'}</dt><dd>+{STUDIO.premioOra} {XP}</dd></div>

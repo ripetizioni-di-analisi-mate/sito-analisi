@@ -16,8 +16,10 @@ import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
 import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
-import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO } from '../src/data/livelli.ts';
+import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
+import { confronta } from './valuta.mjs';
+import { esercizioRisolto, ripassoOggi } from './livelli.mjs';
 import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
@@ -270,6 +272,16 @@ export class Archivio {
       case '/liv-risposta': return Response.json(risposta(this, c));
       case '/liv-riepilogo': return Response.json(riepilogo(this, c));
       case '/liv-percorso': return Response.json(percorso(this, c));
+      case '/liv-esercizio': return Response.json(esercizioRisolto(this, c));
+      case '/liv-ripasso': return Response.json(ripassoOggi(this, c));
+      case '/verifiche-conta': { // tentativi di verifica: al massimo 300 al giorno per persona
+        const k = '*verifica:' + c.chi;
+        const n = this.riga('SELECT n FROM recuperi WHERE giorno = ? AND chiave = ?', c.giorno, k)?.n || 0;
+        if (n >= 300) return Response.json({ ok: false });
+        this.sql.exec(`INSERT INTO recuperi (giorno, chiave, n, ultimo) VALUES (?, ?, 1, ?)
+                       ON CONFLICT(giorno, chiave) DO UPDATE SET n = n + 1, ultimo = ?`, c.giorno, k, Date.now(), Date.now());
+        return Response.json({ ok: true });
+      }
 
       case '/segnala': { // al massimo 10 segnalazioni al giorno per persona e 300 per tutto il sito
         const conta = (k) => this.riga('SELECT n FROM recuperi WHERE giorno = ? AND chiave = ?', c.giorno, k)?.n || 0;
@@ -554,6 +566,14 @@ async function domandeDi(env, materia, lingua = 'it') {
   }
   return cacheDomande[chiave];
 }
+const cacheRisposte = {};
+async function risposteDi(env, materia) {
+  if (!(materia in cacheRisposte)) {
+    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-risposte/${materia}.json`));
+    cacheRisposte[materia] = r.ok ? await r.json() : null;
+  }
+  return cacheRisposte[materia];
+}
 let cacheCatalogo = null; // { materia: [argomenti con domande] }
 async function catalogoDomande(env) {
   if (!cacheCatalogo) {
@@ -706,7 +726,27 @@ export default {
     }
 
     // ===== livelli e punti esperienza =====
-    if (p.startsWith('/dati-domande/')) return new Response('non trovato', { status: 404 });
+    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/')) return new Response('non trovato', { status: 404 });
+    // Verifica della risposta di un esercizio da fare: il risultato resta nel Worker, al browser arriva solo l'esito.
+    if (p === '/api/verifica' && POST) {
+      const { id, risposta, lingua } = await req.json().catch(() => ({}));
+      const en = lingua === 'en';
+      const [materia, argomento, n] = String(id || '').split('/');
+      if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || typeof risposta !== 'string' || risposta.length > 200)
+        return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
+      const risultati = await risposteDi(env, materia);
+      const giusta = risultati?.[`${argomento}/${n}`];
+      if (!giusta) return json({ errore: en ? 'This exercise has no automatic check.' : 'Questo esercizio non ha la verifica automatica.' }, 404);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
+      const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
+      const giorno = new Date().toISOString().slice(0, 10);
+      if (!(await aDO(env, '/verifiche-conta', { giorno, chi })).ok) return json({ errore: en ? 'Too many attempts today.' : 'Troppi tentativi oggi.' }, 429);
+      const esito = confronta(risposta, giusta);
+      if (esito !== 'giusta' || !io) return json({ esito }, 200, { 'cache-control': 'no-store' });
+      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) });
+      return json({ esito, ...r }, 200, { 'cache-control': 'no-store' });
+    }
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
@@ -718,8 +758,9 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const dati = await domandeDi(env, materia, l);
-      // Prove d'esame (ripasso): le domande di tutti gli argomenti della materia.
-      const ripasso = argomento === RIPASSO;
+      // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
+      const personale = argomento === RIPASSO_OGGI;
+      const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
@@ -729,6 +770,16 @@ export default {
         // Pagina aperta prima del 31/10 alle 14:48: manda le domande già viste e non l'id.
         const gia = new Set(viste.slice(-200));
         q = elenco.find((x) => !gia.has(x.id)) || elenco.find((x) => x.id !== [...gia].pop()) || elenco[0];
+      }
+      if (!q && personale) {
+        // Ripasso di oggi: le domande sbagliate arrivate alla loro data (worker/livelli.mjs, ripasso dilazionato).
+        const io0 = await utenteCollegato(env, req).catch(() => null);
+        if (!io0) return json({ errore: l === 'en' ? 'Today’s review is linked to your account: log in or create a free account. The questions you get wrong come back here after one day.' : 'Il ripasso di oggi è legato all’account: accedi o crea un account gratuito. Le domande sbagliate tornano qui dopo un giorno.' }, 401);
+        const { domande: dovute } = await aDO(env, '/liv-ripasso', { email: io0.email, materia });
+        const ids = new Set(elenco.map((x) => x.id));
+        ordine = dovute.map((d) => d.slice(materia.length + 1)).filter((x) => ids.has(x)).slice(0, DOMANDE_SESSIONE);
+        if (!ordine.length) return json({ errore: l === 'en' ? 'No questions to review today in this subject. The questions you get wrong in the timed questions come back here after one day, then after 3 and 7 days.' : 'Oggi non ci sono domande da ripassare in questa materia. Le domande sbagliate nelle domande a tempo tornano qui dopo un giorno, poi dopo 3 e 7 giorni.', vuoto: true }, 404);
+        q = elenco.find((x) => x.id === ordine[0]);
       }
       if (!q) {
         // Nuova sessione: DOMANDE_SESSIONE domande a caso, prima quelle non proposte di recente.
@@ -770,6 +821,11 @@ export default {
       if (!io) return json({ errore: 'non collegato' }, 401);
       const { chiudi, lingua } = await req.json().catch(() => ({}));
       return json(await aDO(env, '/liv-riepilogo', { email: io.email, chiudi: Boolean(chiudi), lingua: linguaDi(lingua) }));
+    }
+    if (p === '/api/ripasso') { // domande da ripassare oggi, per materia (solo conteggi)
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'non collegato' }, 401);
+      return json(await aDO(env, '/liv-ripasso', { email: io.email }), 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/percorso') {
       const io = await utenteCollegato(env, req).catch(() => null);

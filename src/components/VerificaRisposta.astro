@@ -1,0 +1,77 @@
+---
+// Verifica della risposta sotto una traccia degli esercizi da fare (solo se il risultato è un numero o una funzione di x).
+// Il browser legge e mostra in formula ciò che lo studente scrive; il confronto con la soluzione lo fa il Worker (/api/verifica).
+import { type Lingua } from '../i18n';
+interface Props { id: string; tipo: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua }
+const { id, tipo, primitiva = false, lingua } = Astro.props;
+const en = lingua === 'en';
+const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
+const esempio = tipo === 'numero'
+  ? (en ? 'e.g. 3/2, e^6, sqrt(2), pi/4, -inf' : 'per esempio 3/2, e^6, sqrt(2), pi/4, -inf')
+  : (en ? 'e.g. x^2/2 + ln|x|, 3x^2, e^x sin x' : 'per esempio x^2/2 + ln|x|, 3x^2, e^x sin x');
+---
+<form class="verifica zona-libera" data-id={id} novalidate>
+  <label for={campo}>{en ? 'Your answer' : 'La tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : ' (la costante c si può tralasciare)'}</small>}</label>
+  <div class="verifica-riga">
+    <input id={campo} type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
+    <button type="submit">{en ? 'Check' : 'Verifica'}</button>
+  </div>
+  <p class="verifica-lettura" aria-live="polite"></p>
+  <p class="verifica-esito" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  import katex from 'katex';
+  import { leggi, latex } from '../../worker/valuta.mjs';
+  const inglese = document.documentElement.lang === 'en';
+  const T = inglese ? {
+    leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
+    giusta: 'Correct answer.', sbagliata: 'Incorrect answer.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
+    rete: 'Network error: please try again.', exp: 'XP',
+  } : {
+    leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
+    giusta: 'Risposta corretta.', sbagliata: 'Risposta non corretta.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
+    rete: 'Errore di rete: riprova.', exp: 'EXP',
+  };
+  for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
+    if (f.dataset.pronto) continue;
+    f.dataset.pronto = '1';
+    const campo = f.querySelector('input')!;
+    const lettura = f.querySelector<HTMLElement>('.verifica-lettura')!;
+    const esito = f.querySelector<HTMLElement>('.verifica-esito')!;
+    const bottone = f.querySelector('button')!;
+    const mostraLettura = () => {
+      const v = campo.value.trim();
+      esito.textContent = ''; f.dataset.esito = '';
+      if (!v) { lettura.textContent = ''; return; }
+      const n = leggi(v);
+      if (!n) { lettura.textContent = ''; return; }
+      try { lettura.innerHTML = `<span>${T.leggo}</span>${katex.renderToString(latex(n), { throwOnError: false, strict: false, output: 'html' })}`; } catch { lettura.textContent = ''; }
+    };
+    campo.addEventListener('input', mostraLettura);
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const risposta = campo.value.trim();
+      if (!risposta) { campo.focus(); return; }
+      if (!leggi(risposta)) { esito.textContent = T.illeggibile; f.dataset.esito = 'illeggibile'; return; }
+      bottone.disabled = true;
+      const r = await fetch('/api/verifica', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: f.dataset.id, risposta, lingua: inglese ? 'en' : 'it' }),
+      }).catch(() => null);
+      bottone.disabled = false;
+      const d = r ? await r.json().catch(() => null) : null;
+      if (!r || !d) { esito.textContent = T.rete; return; }
+      if (d.errore) { esito.textContent = d.errore; return; }
+      f.dataset.esito = d.esito;
+      esito.textContent = (T as Record<string, string>)[d.esito] || T.sbagliata;
+      if (d.esito === 'giusta' && d.punti) {
+        const b = document.createElement('strong');
+        b.textContent = ` +${d.punti} ${T.exp}`;
+        esito.append(b);
+      }
+      if (d.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
+      if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
+    });
+  }
+</script>

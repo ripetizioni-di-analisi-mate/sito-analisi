@@ -1,0 +1,8 @@
+---
+import Simulazione from '../../../viste/Simulazione.astro';
+import { catalogoDomande } from '../../../lib/domande';
+export async function getStaticPaths() {
+  return Object.keys(await catalogoDomande('en')).map((materia) => ({ params: { materia } }));
+}
+---
+<Simulazione lingua="en" materia={Astro.params.materia!} />

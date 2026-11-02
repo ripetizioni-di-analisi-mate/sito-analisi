@@ -1,0 +1,9 @@
+---
+import Simulazione from '../../viste/Simulazione.astro';
+import { catalogoDomande } from '../../lib/domande';
+// Le materie che hanno il capitolo «Prove d'esame» (domande a tempo) hanno anche la simulazione d'esame.
+export async function getStaticPaths() {
+  return Object.keys(await catalogoDomande('it')).map((materia) => ({ params: { materia } }));
+}
+---
+<Simulazione lingua="it" materia={Astro.params.materia!} />

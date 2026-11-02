@@ -1,7 +1,7 @@
 ---
 import Domande from '../../../viste/Domande.astro';
 import { catalogoDomande, domandePer } from '../../../lib/domande';
-import { RIPASSO } from '../../../data/livelli';
+import { RIPASSO, RIPASSO_OGGI } from '../../../data/livelli';
 export async function getStaticPaths() {
   const out = [];
   for (const [materia, argomenti] of Object.entries(await catalogoDomande('it'))) {
@@ -9,6 +9,8 @@ export async function getStaticPaths() {
     for (const argomento of argomenti) out.push({ params: { materia, argomento }, props: { totale: dati[argomento]?.length ?? 0 } });
     // Ultimo capitolo, Prove d'esame: domande di ripasso su tutti gli argomenti.
     out.push({ params: { materia, argomento: RIPASSO }, props: { totale: Object.values(dati).reduce((t, x) => t + x.length, 0) } });
+    // Ripasso di oggi (con l'account): le domande sbagliate che tornano dopo 1, 3 e 7 giorni.
+    out.push({ params: { materia, argomento: RIPASSO_OGGI }, props: { totale: 0 } });
   }
   return out;
 }

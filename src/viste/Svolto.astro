@@ -50,5 +50,75 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   {salti.length > 1 && (
     <p class="salta-esercizi">{t.vaiA}: {salti.map((s: { slug: string; text: string }) => <a href={`#${s.slug}`}>{s.text}</a>)}</p>
   )}
+  <div class="modalita-passi" hidden>
+    <label><input type="checkbox" data-passi /> <span>{lingua === 'en' ? 'One step at a time' : 'Un passaggio alla volta'}</span></label>
+    <small>{lingua === 'en' ? 'After the statement, the solution appears one step at a time.' : 'Dopo la traccia, lo svolgimento compare un passaggio alla volta.'}</small>
+  </div>
   <div class="testo-studio"><Content /></div>
 </Base>
+
+<script is:inline define:vars={{ testi: lingua === 'en'
+  ? { prossimo: 'Show the next step', tutto: 'show everything', di: 'of' }
+  : { prossimo: 'Mostra il passaggio successivo', tutto: 'mostra tutto', di: 'di' } }}>
+  // Modalità «un passaggio alla volta»: dopo la traccia (segno .fine-traccia) i passaggi dello svolgimento
+  // e la spiegazione si scoprono uno alla volta. La scelta resta nel browser. Senza JavaScript la scheda è quella di sempre.
+  (() => {
+    const studio = document.querySelector('.testo-studio');
+    const riquadro = document.querySelector('.modalita-passi');
+    const scelta = riquadro && riquadro.querySelector('[data-passi]');
+    if (!studio || !scelta) return;
+    // Esercizi: per ogni titolo, i passaggi dopo il segno di fine traccia (i tasti di Pi restano sempre visibili).
+    const esercizi = [];
+    for (const h of studio.querySelectorAll(':scope > h2')) {
+      const passi = [];
+      let dopo = false;
+      for (let n = h.nextElementSibling; n && n.tagName !== 'H2'; n = n.nextElementSibling) {
+        if (n.classList.contains('fine-traccia')) { dopo = true; continue; }
+        if (dopo && !n.matches('.chiedi-pi, .svolgimento-riservato, .passi-comandi')) passi.push(n);
+      }
+      if (passi.length >= 2) esercizi.push({ h, passi });
+    }
+    if (!esercizi.length) return;
+    riquadro.hidden = false;
+    const accendi = (si) => {
+      document.querySelectorAll('.passi-comandi').forEach((x) => x.remove());
+      for (const e of esercizi) {
+        e.passi.forEach((x) => x.classList.toggle('passo-nascosto', si));
+        if (!si) continue;
+        let visti = 0;
+        const comandi = document.createElement('div');
+        comandi.className = 'passi-comandi';
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'passo-avanti';
+        const conto = document.createElement('span');
+        const tutto = document.createElement('button');
+        tutto.type = 'button'; tutto.className = 'passo-tutto'; tutto.textContent = testi.tutto;
+        const aggiorna = () => {
+          b.textContent = testi.prossimo;
+          conto.textContent = `${visti} ${testi.di} ${e.passi.length}`;
+          if (visti >= e.passi.length) comandi.remove();
+          else e.passi[visti].before(comandi);
+        };
+        b.addEventListener('click', () => {
+          const p = e.passi[visti++];
+          p.classList.remove('passo-nascosto');
+          p.classList.add('passo-appena');
+          setTimeout(() => p.classList.remove('passo-appena'), 900);
+          aggiorna();
+          if (comandi.isConnected) comandi.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        });
+        tutto.addEventListener('click', () => { e.passi.forEach((x) => x.classList.remove('passo-nascosto')); visti = e.passi.length; aggiorna(); });
+        comandi.append(b, conto, tutto);
+        aggiorna();
+      }
+    };
+    let salvata = false;
+    try { salvata = localStorage.getItem('passi') === '1'; } catch (_) {}
+    scelta.checked = salvata;
+    if (salvata) accendi(true);
+    scelta.addEventListener('change', () => {
+      try { localStorage.setItem('passi', scelta.checked ? '1' : '0'); } catch (_) {}
+      accendi(scelta.checked);
+    });
+  })();
+</script>

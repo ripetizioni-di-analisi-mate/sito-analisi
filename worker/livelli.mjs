@@ -1,7 +1,7 @@
 // Livelli, punti esperienza (EXP), sessioni di studio, obiettivi della settimana e traguardi.
 // Le regole (punti, soglie, fasce) stanno in src/data/livelli.ts; qui c'è solo l'archivio.
 import {
-  livelloDa, PUNTI, RIPASSO, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI, STUDIO, puntiMinuto,
+  livelloDa, PUNTI, RIPASSO, RIPASSO_OGGI, INTERVALLI_RIPASSO, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, puntiTraguardoLivello, OBIETTIVI, STUDIO, puntiMinuto,
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
@@ -9,6 +9,7 @@ import { MATERIE_EN } from '../src/data/materie-en.ts';
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
 const titoloArgomento = (materia, argomento, l = 'it') => (argomento === RIPASSO && (l === 'en' ? 'Exam practice' : 'Prove d\'esame'))
+  || (argomento === RIPASSO_OGGI && (l === 'en' ? 'Today\'s review' : 'Ripasso di oggi'))
   || (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
   || MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
 const titoloMateria = (materia, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materia;
@@ -78,6 +79,10 @@ export function creaTabelleLivelli(sql) {
   sql.exec('CREATE TABLE IF NOT EXISTS serie (email TEXT PRIMARY KEY, inizio INTEGER, minuti INTEGER DEFAULT 0, ultimo INTEGER DEFAULT 0)');
   // EXP dello studio nella sessione (prima erano un punto al minuto e si ricavavano dai minuti)
   try { sql.exec('ALTER TABLE sessioni ADD COLUMN punti_studio INTEGER'); } catch { /* già presente */ }
+  // esercizi da fare risolti con la verifica della risposta (una riga per esercizio: i punti si danno una volta sola)
+  sql.exec('CREATE TABLE IF NOT EXISTS esercizi (email TEXT, id TEXT, materia TEXT, argomento TEXT, quando INTEGER, PRIMARY KEY (email, id))');
+  // ripasso dilazionato delle domande sbagliate: casella 0, 1, 2 (intervalli 1, 3, 7 giorni) e giorno in cui la domanda torna
+  sql.exec('CREATE TABLE IF NOT EXISTS ripasso (email TEXT, domanda TEXT, materia TEXT, casella INTEGER, scadenza TEXT, PRIMARY KEY (email, domanda))');
 }
 
 // ---------- operazioni sull'archivio (ar = istanza di Archivio, con righe/riga/sql) ----------
@@ -244,11 +249,51 @@ export function risposta(ar, c) {
   ar.sql.exec('INSERT INTO risposte (email, domanda, materia, argomento, giorno, quando, corretta, veloce, punti, token, valida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     email, c.domanda, c.materia, c.argomento, giornoRoma(ora), ora, giusta ? 1 : 0, valeVeloce ? 1 : 0, punti, c.token, valida ? 1 : 0);
   aggiungi(ar, email, punti, 'domanda', c.domanda);
+  aggiornaRipasso(ar, email, c.domanda, c.materia, giusta);
   const sid = sessioneCorrente(ar, email, c.materia, c.argomento);
   ar.sql.exec('UPDATE sessioni SET risposte = risposte + 1, corrette = corrette + ?, veloci = veloci + ?, punti = punti + ?, ultimo = ?, materia = ?, argomento = ? WHERE id = ?',
     giusta ? 1 : 0, valeVeloce ? 1 : 0, punti, ora, c.materia, c.argomento, sid);
   const nuovi = controllaPremi(ar, email, c.catalogo);
   return { punti, veloce: valeVeloce, motivo, nuovi: conNomi(ar, email, nuovi, c.lingua), stato: statoDi(ar, email, c.lingua) };
+}
+
+// ---------- ripasso dilazionato ----------
+// Risposta sbagliata (o fuori tempo): la domanda entra nel ripasso e torna domani.
+// Risposta corretta a una domanda del ripasso arrivata alla sua data: passa all'intervallo successivo; dopo l'ultimo esce.
+function aggiornaRipasso(ar, email, domanda, materia, giusta) {
+  const oggi = giornoRoma();
+  const r = ar.riga('SELECT casella, scadenza FROM ripasso WHERE email = ? AND domanda = ?', email, domanda);
+  if (!giusta) {
+    ar.sql.exec(`INSERT INTO ripasso (email, domanda, materia, casella, scadenza) VALUES (?, ?, ?, 0, ?)
+      ON CONFLICT(email, domanda) DO UPDATE SET casella = 0, scadenza = excluded.scadenza`, email, domanda, materia, spostaGiorno(oggi, INTERVALLI_RIPASSO[0]));
+    return;
+  }
+  if (!r || r.scadenza > oggi) return;
+  const casella = r.casella + 1;
+  if (casella >= INTERVALLI_RIPASSO.length) ar.sql.exec('DELETE FROM ripasso WHERE email = ? AND domanda = ?', email, domanda);
+  else ar.sql.exec('UPDATE ripasso SET casella = ?, scadenza = ? WHERE email = ? AND domanda = ?', casella, spostaGiorno(oggi, INTERVALLI_RIPASSO[casella]), email, domanda);
+}
+// Domande da ripassare oggi: per una materia (elenco degli id) oppure il conteggio per ogni materia.
+export function ripassoOggi(ar, c) {
+  const oggi = giornoRoma();
+  if (c.materia) return { domande: ar.righe('SELECT domanda FROM ripasso WHERE email = ? AND materia = ? AND scadenza <= ? ORDER BY scadenza, casella', c.email, c.materia, oggi).map((r) => r.domanda) };
+  return {
+    oggi: ar.righe('SELECT materia, COUNT(*) AS n FROM ripasso WHERE email = ? AND scadenza <= ? GROUP BY materia', c.email, oggi),
+    prossimi: ar.righe('SELECT materia, COUNT(*) AS n, MIN(scadenza) AS da FROM ripasso WHERE email = ? AND scadenza > ? GROUP BY materia', c.email, oggi),
+  };
+}
+
+// Esercizio da fare risolto (risposta verificata dal Worker): EXP la prima volta, poi nulla.
+export function esercizioRisolto(ar, c) {
+  const { email } = c;
+  if (ar.riga('SELECT id FROM esercizi WHERE email = ? AND id = ?', email, c.id)) return { punti: 0, motivo: 'gia-risolto', nuovi: [], stato: statoDi(ar, email, c.lingua) };
+  const ora = Date.now();
+  ar.sql.exec('INSERT INTO esercizi (email, id, materia, argomento, quando) VALUES (?, ?, ?, ?, ?)', email, c.id, c.materia, c.argomento, ora);
+  aggiungi(ar, email, PUNTI.esercizio, 'esercizio', c.id);
+  const sid = sessioneCorrente(ar, email, c.materia, c.argomento);
+  ar.sql.exec('UPDATE sessioni SET punti = punti + ?, ultimo = ? WHERE id = ?', PUNTI.esercizio, ora, sid);
+  const nuovi = controllaPremi(ar, email, c.catalogo);
+  return { punti: PUNTI.esercizio, nuovi: conNomi(ar, email, nuovi, c.lingua), stato: statoDi(ar, email, c.lingua) };
 }
 
 // Riepilogo della sessione in corso; con chiudi = true la sessione si chiude.

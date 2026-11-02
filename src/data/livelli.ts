@@ -46,9 +46,14 @@ export function livelloDa(exp: number, lingua: 'it' | 'en' = 'it'): StatoLivello
 // RIPASSO è l'ultimo capitolo di ogni materia (Prove d'esame): le sue domande si pescano da tutti gli argomenti.
 export const DOMANDE_SESSIONE = 15;
 export const RIPASSO = 'prove-d-esame';
+// Ripasso dilazionato (con l'account): una domanda sbagliata torna dopo 1 giorno; ogni risposta corretta data
+// il giorno previsto la sposta più avanti (3 e poi 7 giorni); dopo tre risposte corrette esce dal ripasso.
+export const RIPASSO_OGGI = 'ripasso-di-oggi';
+export const INTERVALLI_RIPASSO = [1, 3, 7];
 
 export const PUNTI = {
   corretta: 10,          // risposta corretta a una domanda a tempo
+  esercizio: 15,         // esercizio da fare risolto, con la risposta verificata (una volta sola per esercizio)
   veloce: 5,             // in più se data entro il primo minuto
   secondiVeloce: 60,
   secondiDomanda: 120,   // tempo per ogni domanda

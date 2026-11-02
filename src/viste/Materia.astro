@@ -22,7 +22,7 @@ const dafare = await getCollection('dafare');
 const domande = await getCollection(lingua === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
-import { RIPASSO } from '../data/livelli';
+import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 ---
 <Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: SEO(lingua).materia(m.titolo), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
@@ -84,11 +84,25 @@ import { RIPASSO } from '../data/livelli';
     {domandeMateria > 0 && (
       <li>
         <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</a></h2>
-        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, chosen at random in every session.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, scelte a caso a ogni sessione.`}</p>
+        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
         <nav aria-label={lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}>
           <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
+          <a href={link(lingua, `/${materia}/simulazione`)}>{lingua === 'en' ? 'Exam simulation' : 'Simulazione d\'esame'}</a>
+          <a class="solo-collegati" href={link(lingua, `/${materia}/${RIPASSO_OGGI}/domande`)}>{lingua === 'en' ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
         </nav>
       </li>
     )}
   </ol>
 </Base>
+
+<script is:inline>
+  // Con l'account: quante domande ci sono da ripassare oggi in questa materia.
+  (() => {
+    const el = document.querySelector('.conta-ripasso');
+    if (!el || !document.documentElement.classList.contains('collegato')) return;
+    fetch('/api/ripasso').then((r) => (r.ok ? r.json() : null)).then((d) => {
+      const n = d && (d.oggi || []).find((x) => x.materia === el.dataset.materia)?.n;
+      if (n) el.textContent = ` (${n})`;
+    }).catch(() => {});
+  })();
+</script>

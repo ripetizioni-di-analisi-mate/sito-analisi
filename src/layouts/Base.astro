@@ -73,7 +73,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 }).join('');
 ---
 <!doctype html>
-<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }} data-studio-materia={contenuto || sezione === 'domande' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
+<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }} data-studio-materia={contenuto || sezione === 'domande' || sezione === 'simulazione' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

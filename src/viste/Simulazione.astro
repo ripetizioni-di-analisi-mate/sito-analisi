@@ -1,0 +1,214 @@
+---
+// Simulazione d'esame: un compito a tempo composto da tracce degli esercizi da fare di argomenti diversi.
+// Le tracce si leggono dalle pagine «Esercizi da fare» della materia (il Worker toglie le soluzioni a chi non ha sbloccato
+// la materia), quindi la pagina non contiene nulla di riservato. Alla consegna compaiono le soluzioni, per chi le ha,
+// e lo studente valuta ogni esercizio: il punteggio è in trentesimi.
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { materiaL, link, prefisso, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; materia: string }
+const { lingua, materia } = Astro.props;
+const en = lingua === 'en';
+const m = materiaL(lingua, materia);
+const dafare = await getCollection('dafare');
+const argomenti = m.argomenti
+  .map((a) => ({ slug: a.slug, titolo: a.titolo, breve: a.breve, n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length }))
+  .filter((a) => a.n > 0);
+const T = en ? {
+  titolo: 'Exam simulation', sopra: 'Exam practice',
+  sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
+  quanti: 'Exercises', durata: 'Time', minuti: 'minutes', argomenti: 'Topics', tutti: 'all', nessuno: 'none', inizia: 'Start the simulation',
+  consegna: 'Hand in', rimasto: 'Time left', scaduto: 'Time is up: the paper has been handed in.', punti: 'points',
+  esercizio: 'Exercise', valuta: 'How did it go?', giusto: 'Correct', parziale: 'Partly correct', sbagliato: 'Wrong',
+  risultato: 'Score', tempo: 'Time used', nuova: 'New simulation', soluzione: 'Solution', riservata: 'The solution is in the full access to the subject.', sblocca: 'Unlock',
+  caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Hand in the paper now?',
+} : {
+  titolo: 'Simulazione d\'esame', sopra: 'Prove d\'esame',
+  sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,
+  quanti: 'Esercizi', durata: 'Durata', minuti: 'minuti', argomenti: 'Argomenti', tutti: 'tutti', nessuno: 'nessuno', inizia: 'Inizia la simulazione',
+  consegna: 'Consegna', rimasto: 'Tempo rimasto', scaduto: 'Tempo scaduto: il compito è stato consegnato.', punti: 'punti',
+  esercizio: 'Esercizio', valuta: 'Com\'è andato?', giusto: 'Corretto', parziale: 'Parziale', sbagliato: 'Sbagliato',
+  risultato: 'Punteggio', tempo: 'Tempo impiegato', nuova: 'Nuova simulazione', soluzione: 'Soluzione', riservata: 'La soluzione è nell\'accesso completo alla materia.', sblocca: 'Sblocca',
+  caricamento: 'Preparazione del compito…', errore: 'Gli esercizi non si sono caricati. Ricarica la pagina.', storico: 'Simulazioni precedenti', vota: 'Valuta ogni esercizio per vedere il punteggio.', conferma: 'Consegnare il compito adesso?',
+};
+const pref = prefisso(lingua);
+---
+<Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
+  materia={materia} sezione="simulazione" lingua={lingua} seo={{ noindex: true }}>
+  <div class="simulazione" data-materia={materia} data-pref={pref} data-prezzo={m.prezzo ? '1' : ''} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
+    <p class="sopratitolo">{T.sopra}</p>
+    <h1>{T.titolo}</h1>
+    <p class="sommario">{T.sommario}</p>
+
+    <form class="sim-impostazioni">
+      <div class="sim-scelte">
+        <label>{T.quanti}
+          <select name="quanti">{[3, 4, 5, 6].filter((x) => x <= Math.max(3, argomenti.length)).map((x) => <option value={x} selected={x === Math.min(5, argomenti.length)}>{x}</option>)}</select>
+        </label>
+        <label>{T.durata}
+          <select name="durata">{[60, 90, 120, 150, 180].map((x) => <option value={x} selected={x === 120}>{x} {T.minuti}</option>)}</select>
+        </label>
+      </div>
+      <fieldset>
+        <legend>{T.argomenti} <button type="button" data-tutti>{T.tutti}</button> · <button type="button" data-nessuno>{T.nessuno}</button></legend>
+        <div class="sim-argomenti">
+          {argomenti.map((a) => <label><input type="checkbox" name="arg" value={a.slug} checked /> {a.titolo}</label>)}
+        </div>
+      </fieldset>
+      <button type="submit" class="bottone-primario">{T.inizia}</button>
+    </form>
+
+    <div class="sim-storico" hidden><h2>{T.storico}</h2><ol></ol></div>
+
+    <div class="sim-compito" hidden>
+      <div class="sim-barra">
+        <span class="sim-tempo"><small>{T.rimasto}</small> <strong>–</strong></span>
+        <button type="button" class="bottone-primario sim-consegna">{T.consegna}</button>
+      </div>
+      <ol class="sim-esercizi"></ol>
+      <div class="sim-esito" hidden>
+        <p class="sim-voto"></p>
+        <p class="sim-nota"></p>
+        <p><a class="bottone-secondario" href={link(lingua, `/${materia}/simulazione`)}>{T.nuova}</a></p>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const radice = document.querySelector<HTMLElement>('.simulazione')!;
+  const T = JSON.parse(radice.dataset.testi!);
+  const argomenti: { slug: string; titolo: string; breve: string; n: number }[] = JSON.parse(radice.dataset.argomenti!);
+  const { materia, pref } = radice.dataset as { materia: string; pref: string };
+  const en = document.documentElement.lang === 'en';
+  const form = radice.querySelector<HTMLFormElement>('.sim-impostazioni')!;
+  const compito = radice.querySelector<HTMLElement>('.sim-compito')!;
+  const elenco = radice.querySelector<HTMLOListElement>('.sim-esercizi')!;
+  const tempoEl = radice.querySelector<HTMLElement>('.sim-tempo strong')!;
+  const consegnaB = radice.querySelector<HTMLButtonElement>('.sim-consegna')!;
+  const esitoEl = radice.querySelector<HTMLElement>('.sim-esito')!;
+  const CHIAVE = `simulazioni-${materia}`;
+  const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT', { maximumFractionDigits: 1 });
+  const mescola = <X,>(a: X[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+
+  // Simulazioni già fatte (solo in questo browser).
+  type Voce = { quando: number; voto: number; minuti: number; n: number };
+  let storico: Voce[] = [];
+  try { storico = JSON.parse(localStorage.getItem(CHIAVE) || '[]'); } catch { /* niente memoria */ }
+  if (storico.length) {
+    const box = radice.querySelector<HTMLElement>('.sim-storico')!;
+    box.hidden = false;
+    box.querySelector('ol')!.innerHTML = storico.slice(-5).reverse().map((v) =>
+      `<li>${new Date(v.quando).toLocaleDateString(en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'short' })} · <strong>${num(v.voto)}/30</strong> · ${v.n} ${en ? 'exercises' : 'esercizi'} · ${v.minuti} min</li>`).join('');
+  }
+
+  form.querySelector('[data-tutti]')!.addEventListener('click', () => form.querySelectorAll<HTMLInputElement>('input[name=arg]').forEach((x) => { x.checked = true; }));
+  form.querySelector('[data-nessuno]')!.addEventListener('click', () => form.querySelectorAll<HTMLInputElement>('input[name=arg]').forEach((x) => { x.checked = false; }));
+
+  // Una traccia a caso dalla pagina «Esercizi da fare» di un argomento.
+  const cache = new Map<string, Element[]>();
+  async function tracce(arg: string) {
+    if (!cache.has(arg)) {
+      const r = await fetch(`${pref}/${materia}/${arg}/esercizi`);
+      if (!r.ok) throw new Error('rete');
+      const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
+      cache.set(arg, [...doc.querySelectorAll('section.traccia')]);
+    }
+    return cache.get(arg)!;
+  }
+
+  let fine = 0, inizio = 0, timer = 0, consegnato = false, punti = 0;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const scelti = [...form.querySelectorAll<HTMLInputElement>('input[name=arg]:checked')].map((x) => x.value);
+    if (!scelti.length) return;
+    const quanti = Number((form.elements.namedItem('quanti') as HTMLSelectElement).value);
+    const minuti = Number((form.elements.namedItem('durata') as HTMLSelectElement).value);
+    // Argomenti diversi finché ce ne sono, nell'ordine del programma.
+    let pesca = mescola(scelti);
+    while (pesca.length < quanti) pesca = pesca.concat(mescola(scelti));
+    pesca = pesca.slice(0, quanti).sort((a, b) => argomenti.findIndex((x) => x.slug === a) - argomenti.findIndex((x) => x.slug === b));
+    form.querySelector<HTMLButtonElement>('button[type=submit]')!.disabled = true;
+    elenco.innerHTML = `<li class="sim-caricamento">${T.caricamento}</li>`;
+    compito.hidden = false;
+    punti = 30 / quanti;
+    try {
+      const usate = new Set<string>();
+      const scelte = [];
+      for (const arg of pesca) {
+        const tutte = (await tracce(arg)).filter((s) => !usate.has(`${arg}#${s.id}`));
+        const s = tutte[Math.floor(Math.random() * tutte.length)];
+        usate.add(`${arg}#${s.id}`);
+        scelte.push({ arg, s });
+      }
+      elenco.innerHTML = '';
+      scelte.forEach(({ arg, s }, i) => {
+        const li = document.createElement('li');
+        li.className = 'sim-esercizio';
+        const a = argomenti.find((x) => x.slug === arg)!;
+        const corpo = s.querySelector('.testo-studio')!.cloneNode(true) as HTMLElement;
+        const soluzione = [...corpo.querySelectorAll('details.blocco-soluzione, .soluzione-riservata')];
+        soluzione.forEach((x) => x.remove());
+        const titolo = s.querySelector('h2')?.textContent?.replace(/^\s*\d+\.\s*/, '').trim() || '';
+        li.innerHTML = `<p class="sim-testa"><strong>${T.esercizio} ${i + 1}</strong> <span>${a.breve} · ${num(punti)} ${T.punti}</span></p><h2></h2>`;
+        li.querySelector('h2')!.textContent = titolo;
+        li.append(corpo);
+        const sol = document.createElement('div');
+        sol.className = 'sim-soluzione'; sol.hidden = true;
+        if (soluzione.length && soluzione[0].matches('details')) {
+          const d = soluzione[0] as HTMLDetailsElement;
+          d.open = false; sol.append(d);
+        } else {
+          sol.innerHTML = `<p class="soluzione-riservata">${T.riservata} <a href="${pref}/${materia}/sblocca">${T.sblocca}</a></p>`;
+        }
+        const voto = document.createElement('div');
+        voto.className = 'sim-voto-esercizio'; voto.hidden = true;
+        voto.innerHTML = `<span>${T.valuta}</span>` + [['1', T.giusto], ['0.5', T.parziale], ['0', T.sbagliato]]
+          .map(([v, t]) => `<label><input type="radio" name="v${i}" value="${v}"> ${t}</label>`).join('');
+        li.append(sol, voto);
+        elenco.append(li);
+      });
+    } catch {
+      elenco.innerHTML = `<li>${T.errore}</li>`;
+      return;
+    }
+    form.hidden = true;
+    radice.querySelector<HTMLElement>('.sim-storico')!.hidden = true;
+    inizio = Date.now();
+    fine = inizio + minuti * 60000;
+    const passa = () => {
+      const r = Math.max(0, fine - Date.now());
+      const h = Math.floor(r / 3600000), mm = Math.floor((r % 3600000) / 60000), ss = Math.floor((r % 60000) / 1000);
+      tempoEl.textContent = `${h ? `${h}:` : ''}${String(mm).padStart(h ? 2 : 1, '0')}:${String(ss).padStart(2, '0')}`;
+      compito.classList.toggle('sim-ultimi', r < 5 * 60000);
+      if (!r) consegna(true);
+    };
+    passa();
+    timer = window.setInterval(passa, 1000);
+    compito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function consegna(scaduto = false) {
+    if (consegnato) return;
+    consegnato = true;
+    clearInterval(timer);
+    consegnaB.hidden = true;
+    const minuti = Math.max(1, Math.round((Math.min(Date.now(), fine) - inizio) / 60000));
+    radice.querySelector<HTMLElement>('.sim-tempo')!.innerHTML = `<small>${T.tempo}</small> <strong>${minuti} min</strong>`;
+    if (scaduto) { const p = document.createElement('p'); p.className = 'sim-scaduto'; p.textContent = T.scaduto; compito.prepend(p); }
+    elenco.querySelectorAll<HTMLElement>('.sim-soluzione, .sim-voto-esercizio').forEach((x) => { x.hidden = false; });
+    esitoEl.hidden = false;
+    const aggiorna = () => {
+      const voti = [...elenco.querySelectorAll<HTMLElement>('.sim-esercizio')].map((li) => li.querySelector<HTMLInputElement>('input:checked'));
+      if (voti.some((v) => !v)) { radice.querySelector('.sim-voto')!.textContent = ''; radice.querySelector('.sim-nota')!.textContent = T.vota; return; }
+      const voto = Math.round(voti.reduce((t, v) => t + Number(v!.value) * punti, 0) * 2) / 2;
+      radice.querySelector('.sim-voto')!.innerHTML = `${T.risultato}: <strong>${num(voto)}/30</strong>`;
+      radice.querySelector('.sim-nota')!.textContent = '';
+      storico = [...storico.filter((v) => v.quando !== inizio), { quando: inizio, voto, minuti, n: voti.length }].slice(-20);
+      try { localStorage.setItem(CHIAVE, JSON.stringify(storico)); } catch { /* niente memoria */ }
+    };
+    elenco.addEventListener('change', aggiorna);
+    aggiorna();
+  }
+  consegnaB.addEventListener('click', () => { if (confirm(T.conferma)) consegna(); });
+</script>

@@ -3,14 +3,17 @@
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
-import { DOMANDE_SESSIONE, RIPASSO } from '../data/livelli';
+import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
 const { lingua, materia, argomento, totale } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
-const ripasso = argomento === RIPASSO;
-const arg = ripasso ? { slug: RIPASSO, titolo: en ? 'Exam practice' : 'Prove d\'esame', breve: en ? 'Exam practice' : 'Prove d\'esame' } : argomentoL(lingua, materia, argomento);
+// Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
+const personale = argomento === RIPASSO_OGGI;
+const ripasso = argomento === RIPASSO || personale;
+const arg = personale ? { slug: RIPASSO_OGGI, titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi', breve: en ? 'Today’s review' : 'Ripasso di oggi' }
+  : ripasso ? { slug: RIPASSO, titolo: en ? 'Exam practice' : 'Prove d\'esame', breve: en ? 'Exam practice' : 'Prove d\'esame' } : argomentoL(lingua, materia, argomento);
 const base = `/${materia}/${argomento}`;
 const pref = prefisso(lingua);
 const n = Math.min(DOMANDE_SESSIONE, totale);
@@ -20,14 +23,14 @@ const comeScelte = en
   ? (totale > n ? `${n} multiple-choice questions chosen at random among the ${totale} ${ripasso ? `of all the topics of ${m.titolo}` : 'of this topic'}` : `${totale} multiple-choice questions ${ripasso ? `on all the topics of ${m.titolo}` : 'on this topic'}, in random order`)
   : (totale > n ? `${n} domande a risposta multipla scelte a caso tra le ${totale} ${ripasso ? `di tutti gli argomenti di ${m.titolo}` : 'di questo argomento'}` : `${totale} domande a risposta multipla ${ripasso ? `su tutti gli argomenti di ${m.titolo}` : 'su questo argomento'}, in ordine casuale`);
 const T = en ? {
-  titolo: ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
-  termina: 'End the session', sommario: `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
+  titolo: personale ? 'Spaced review' : ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
+  termina: 'End the session', sommario: personale ? `The questions of ${m.titolo} you got wrong come back here one day later; each correct answer given on the scheduled day moves the question further on, to 3 and then 7 days, and after three correct answers it leaves the review.` : `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
   ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
 } : {
-  titolo: ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
-  termina: 'Termina la sessione', sommario: `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
+  titolo: personale ? 'Ripasso dilazionato' : ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
+  termina: 'Termina la sessione', sommario: personale ? `Le domande di ${m.titolo} a cui hai risposto in modo sbagliato tornano qui il giorno dopo; ogni risposta corretta data nel giorno previsto sposta la domanda più avanti, a 3 e poi a 7 giorni, e dopo tre risposte corrette la domanda esce dal ripasso.` : `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
   ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
@@ -233,10 +236,18 @@ const JS = en ? {
     testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
     const richiesta = ++ultimaRichiesta;
     const r = await post('/api/domande/prossima', id ? { materia, argomento, id, lingua } : { materia, argomento, recenti, lingua }).catch(() => null);
-    const d = r && r.ok ? await r.json() : null;
+    const d0 = r ? await r.json().catch(() => null) : null;
+    const d = r && r.ok ? d0 : null;
     // Con una rete lenta e più tocchi di fila conta solo l'ultima domanda chiesta.
     if (richiesta !== ultimaRichiesta) return;
-    if (!d) { testo.innerHTML = `<p>${L.errore}</p>`; return; }
+    if (!d) {
+      // Il Worker spiega il motivo (per esempio: ripasso di oggi senza account, oppure nessuna domanda da ripassare).
+      const p = document.createElement('p');
+      p.textContent = d0?.errore || L.errore;
+      testo.replaceChildren(p);
+      if (r?.status === 401) (radice.querySelector('.nota-ospite') as HTMLElement).hidden = false;
+      return;
+    }
     if (!ordine.length) {
       ordine = d.ordine; nav.hidden = false;
       recenti = [...recenti.filter((x) => !ordine.includes(x)), ...ordine].slice(-300);

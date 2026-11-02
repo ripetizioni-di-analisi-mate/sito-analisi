@@ -1026,3 +1026,76 @@ html.collegato .solo-ospiti-segnala { display: none; }
 .segnala-azioni { display: flex; justify-content: flex-end; }
 .segnala-azioni .bottone-primario { padding: 0.55rem 1.4rem; }
 @media print { .segnala-errore, .segnala-finestra { display: none !important; } }
+
+/* Esercizi svolti: modalità «un passaggio alla volta» */
+.modalita-passi { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; margin: 0.6rem 0 1.4rem; padding: 0.55rem 0.8rem; border: 1px solid var(--riga); border-radius: 10px; background: color-mix(in srgb, var(--accento) 4%, #fff); font-family: var(--ui); }
+.modalita-passi[hidden] { display: none; }
+.modalita-passi label { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; cursor: pointer; }
+.modalita-passi input { appearance: none; width: 2.3rem; height: 1.3rem; border-radius: 999px; background: var(--riga); position: relative; cursor: pointer; transition: background 0.2s; margin: 0; }
+.modalita-passi input::after { content: ''; position: absolute; top: 2px; left: 2px; width: calc(1.3rem - 4px); height: calc(1.3rem - 4px); border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 20%); transition: transform 0.2s; }
+.modalita-passi input:checked { background: var(--accento); }
+.modalita-passi input:checked::after { transform: translateX(1rem); }
+.modalita-passi input:focus-visible { outline: 2px solid var(--accento); outline-offset: 2px; }
+.modalita-passi small { color: var(--inchiostro-2); font-size: 0.85rem; }
+.testo-studio .passo-nascosto { display: none !important; }
+.testo-studio .passo-appena { animation: passo-compare 0.7s ease; }
+@keyframes passo-compare { from { background: color-mix(in srgb, var(--accento) 12%, transparent); } to { background: transparent; } }
+.passi-comandi { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 0.9rem; margin: 0.8rem 0 1rem; font-family: var(--ui); }
+.passo-avanti { font: 600 0.92rem/1.2 var(--ui); color: #fff; background: var(--accento); border: 0; border-radius: 999px; padding: 0.55rem 1.1rem; cursor: pointer; }
+.passi-comandi span { font-size: 0.85rem; color: var(--inchiostro-2); }
+.passo-tutto { font: 0.85rem var(--ui); color: var(--inchiostro-2); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+@media print { .modalita-passi, .passi-comandi { display: none !important; } .testo-studio .passo-nascosto { display: block !important; } }
+
+/* Esercizi da fare: verifica della risposta */
+.verifica { margin: 0.7rem 0 0.4rem; padding: 0.7rem 0.85rem 0.6rem; border: 1px solid var(--riga); border-radius: 10px; background: #fff; font-family: var(--ui); }
+.verifica label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; }
+.verifica label small { font-weight: 400; color: var(--inchiostro-2); }
+.verifica-riga { display: flex; gap: 0.5rem; }
+.verifica-riga input { flex: 1; min-width: 0; font: 0.98rem/1.3 ui-monospace, 'SFMono-Regular', Menlo, monospace; padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+.verifica-riga input:focus { outline: 2px solid color-mix(in srgb, var(--accento) 40%, transparent); border-color: var(--accento); background: #fff; }
+.verifica-riga button { font: 600 0.92rem var(--ui); color: #fff; background: var(--accento); border: 0; border-radius: 8px; padding: 0 1rem; cursor: pointer; }
+.verifica-riga button:disabled { opacity: 0.6; }
+.verifica-lettura { margin: 0.45rem 0 0; min-height: 0; font-size: 0.9rem; color: var(--inchiostro-2); }
+.verifica-lettura:empty, .verifica-esito:empty { display: none; }
+.verifica-lettura > span:first-child { margin-right: 0.4rem; }
+.verifica-esito { margin: 0.4rem 0 0; font-size: 0.93rem; font-weight: 600; }
+.verifica[data-esito="giusta"] { border-color: color-mix(in srgb, #2f7d4f 55%, transparent); background: color-mix(in srgb, #2f7d4f 6%, #fff); }
+.verifica[data-esito="giusta"] .verifica-esito { color: #2f7d4f; }
+.verifica[data-esito="sbagliata"] .verifica-esito { color: #a3412f; }
+.verifica[data-esito="vicina"] .verifica-esito, .verifica[data-esito="illeggibile"] .verifica-esito { color: #8a6420; font-weight: 400; }
+@media print { .verifica { display: none; } }
+.solo-collegati { display: none; }
+html.collegato .solo-collegati { display: revert; }
+
+/* Simulazione d'esame */
+.sim-impostazioni { display: grid; gap: 1rem; margin: 1.2rem 0 1.6rem; padding: 1rem 1.1rem; border: 1px solid var(--riga); border-radius: 12px; background: #fff; font-family: var(--ui); }
+.sim-scelte { display: flex; flex-wrap: wrap; gap: 1rem 1.6rem; }
+.sim-scelte label { display: grid; gap: 0.3rem; font-weight: 600; font-size: 0.9rem; }
+.sim-scelte select { font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+.sim-impostazioni fieldset { border: 0; padding: 0; margin: 0; }
+.sim-impostazioni legend { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.sim-impostazioni legend button { font: 0.85rem var(--ui); color: var(--accento); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.sim-argomenti { display: grid; gap: 0.35rem 1rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); font-size: 0.93rem; }
+.sim-argomenti label { display: flex; gap: 0.45rem; align-items: baseline; }
+.sim-impostazioni .bottone-primario { justify-self: start; }
+.sim-storico ol { padding-left: 1.2rem; font-family: var(--ui); }
+.sim-barra { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.6rem 0.9rem; margin: 0 0 1rem; background: color-mix(in srgb, var(--carta) 92%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--riga); border-radius: 10px; font-family: var(--ui); }
+.sim-tempo small { color: var(--inchiostro-2); margin-right: 0.3rem; }
+.sim-tempo strong { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.sim-ultimi .sim-tempo strong { color: #a3412f; }
+.sim-barra .bottone-primario { padding: 0.5rem 1.3rem; }
+.sim-esercizi { list-style: none; padding: 0; margin: 0; }
+.sim-esercizio { padding: 0.6rem 0 1.2rem; border-bottom: 1px solid var(--riga); margin-bottom: 1rem; }
+.sim-testa { display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem; align-items: baseline; margin: 0; font-family: var(--ui); }
+.sim-testa strong { color: var(--accento); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.85rem; }
+.sim-testa span { color: var(--inchiostro-2); font-size: 0.88rem; }
+.sim-esercizio h2 { margin-top: 0.3rem; }
+.sim-voto-esercizio { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; align-items: center; margin-top: 0.8rem; padding: 0.55rem 0.8rem; border-radius: 10px; background: color-mix(in srgb, var(--accento) 5%, #fff); border: 1px solid var(--riga); font-family: var(--ui); font-size: 0.93rem; }
+.sim-voto-esercizio span { font-weight: 600; }
+.sim-voto-esercizio label { display: inline-flex; gap: 0.35rem; align-items: center; cursor: pointer; }
+.sim-esito { margin-top: 1.2rem; padding: 1rem 1.1rem; border: 1px solid var(--riga); border-radius: 12px; background: #fff; font-family: var(--ui); }
+.sim-voto { font-size: 1.15rem; margin: 0 0 0.3rem; }
+.sim-voto strong { font-size: 1.5rem; color: var(--accento); }
+.sim-nota { color: var(--inchiostro-2); margin: 0 0 0.6rem; }
+.sim-scaduto { font-family: var(--ui); font-weight: 600; color: #a3412f; }
+.sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
