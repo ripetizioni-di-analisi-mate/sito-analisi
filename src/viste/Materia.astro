@@ -75,11 +75,11 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   )}
   <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>
     <div class="esame-icona" aria-hidden="true">
-      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg>
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg>
     </div>
     <div class="esame-corpo">
       <strong class="esame-titolo">{en ? 'Exam date' : 'Data dell\'esame'}</strong>
-      <span class="esame-testo">{en ? 'With the date you see how many days are left, and the weekly goal goes to your least practised topic.' : 'Con la data vedi quanti giorni mancano, e l\'obiettivo della settimana va sull\'argomento meno allenato.'}</span>
+      <span class="esame-testo" hidden></span>
       <div class="esame-modulo" hidden>
         <select class="esame-g" aria-label={en ? 'Day' : 'Giorno'}></select>
         <select class="esame-m" aria-label={en ? 'Month' : 'Mese'}></select>
@@ -90,8 +90,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
         <span class="esame-errore" hidden>{en ? 'This date does not exist.' : 'Questa data non esiste.'}</span>
       </div>
     </div>
-    <button type="button" class="esame-apri">{en ? 'Add the date' : 'Aggiungi la data'}</button>
-    <button type="button" class="esame-modifica" hidden>{en ? 'Change date' : 'Cambia data'}</button>
+    <button type="button" class="esame-apri">{en ? 'Add' : 'Aggiungi'}</button>
+    <button type="button" class="esame-modifica" hidden>{en ? 'Change' : 'Cambia'}</button>
   </div>
   <ol class="griglia-argomenti">
     {m.argomenti.map((a) => {
@@ -142,7 +142,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     const selG = $('.esame-g'), selM = $('.esame-m'), selA = $('.esame-a'), errore = $('.esame-errore');
     const apri = $('.esame-apri'), modifica = $('.esame-modifica'), annulla = $('.esame-annulla'), togli = $('.esame-togli'), salva = $('.esame-salva');
     const lingua = en ? 'en-GB' : 'it-IT';
-    const testoVuoto = testo.textContent;
     const oggi = new Date();
     const opzione = (sel, v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.append(o); };
     for (let g = 1; g <= 31; g++) opzione(selG, g, g);
@@ -157,14 +156,14 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     };
     const apriModulo = () => {
       modulo.hidden = false; apri.hidden = true; modifica.hidden = true; errore.hidden = true;
-      annulla.hidden = !attuale; togli.hidden = !attuale; metti(attuale); selG.focus();
+      annulla.hidden = false; togli.hidden = !attuale; metti(attuale); selG.focus();
     };
     const mostraEsame = (data) => {
       attuale = data || null;
       box.hidden = false; modulo.hidden = true; errore.hidden = true;
       box.classList.toggle('con-data', Boolean(data));
       apri.hidden = Boolean(data); modifica.hidden = !data;
-      if (!data) { titolo.textContent = en ? 'Exam date' : 'Data dell\'esame'; testo.textContent = testoVuoto; return; }
+      if (!data) { titolo.textContent = en ? 'Exam date' : 'Data dell\'esame'; testo.textContent = ''; testo.hidden = true; return; }
       const d = new Date(data + 'T12:00:00');
       const giorni = Math.round((d - Date.parse(new Date().toISOString().slice(0, 10) + 'T12:00:00')) / 86400000);
       const quando = d.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -172,7 +171,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
         : giorni === 1 ? (en ? 'Exam tomorrow' : 'L\'esame è domani')
         : giorni === 0 ? (en ? 'Exam today' : 'L\'esame è oggi')
         : (en ? 'Exam date passed' : 'La data dell\'esame è passata');
-      testo.textContent = (en ? 'Exam of ' : 'Esame di ') + box.dataset.titolo + ', ' + quando + '.';
+      testo.textContent = quando; testo.hidden = false;
     };
     const invia = async (data) => {
       salva.disabled = togli.disabled = true;
