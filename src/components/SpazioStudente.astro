@@ -16,6 +16,11 @@ const pref = en ? '/en' : '';
       <h2 class="ss-nome" id="ss-nome"></h2>
       <p class="ss-titolo"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
     </div>
+    {/* Esame più vicino (richiesta di Carmine del 03/11, versione A fra tre): solo se lo studente ha inserito una data. */}
+    <a class="ss-esame" href="#" hidden>
+      <span class="ss-es-icona" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg></span>
+      <span class="ss-es-testo"><small class="ss-es-su"></small><span class="ss-es-giu"></span></span>
+    </a>
     <div class="ss-cammino">
       <span class="ss-barra"><span></span></span>
       <p class="ss-exp"><span class="ss-exp-tot"></span><span class="ss-mancano"></span></p>
@@ -43,6 +48,23 @@ const pref = en ? '/en' : '';
     const c = q('.ss-continua');
     if (dove) c.href = pref + dove;
     else { c.href = '#materie-home'; c.querySelector('span').textContent = en ? 'Choose a topic and start' : 'Scegli un argomento e inizia'; }
+    // Esame più vicino con la data inserita (/api/percorso → esami).
+    const esame = (d.esami || [])[0];
+    const es = q('.ss-esame');
+    if (esame && es) {
+      const giorno = new Date(esame.data + 'T12:00:00');
+      const n = Math.round((giorno - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
+      if (n >= 0) {
+        const lingua = en ? 'en' : 'it';
+        const quando = n > 1 ? (en ? `in ${n} days` : `tra ${n} giorni`) : n === 1 ? (en ? 'tomorrow' : 'domani') : (en ? 'today' : 'oggi');
+        es.querySelector('.ss-es-su').textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`;
+        es.querySelector('.ss-es-giu').textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`);
+        es.title = `${esame.titolo} · ${giorno.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`;
+        es.href = `${pref}/${esame.materia}`;
+        es.hidden = false;
+        box.classList.add('con-esame');
+      }
+    }
     if (ultima && ultima.titolo && ultima.argomento !== 'prove-d-esame') {
       const a = q('.ss-riprendi');
       a.href = `${pref}/${ultima.materia}/${ultima.argomento}/teoria`;

@@ -339,6 +339,21 @@ html.collegato .spazio-studente {
 .ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .ss-argomento { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
 .ss-riprendi:hover .ss-argomento { text-decoration-color: currentColor; }
+/* Esame più vicino nello spazio personale, in alto a destra (solo con una data inserita; versione A scelta da Carmine il 03/11):
+   quadratino con il calendario come «Riprendi», etichetta piccola e giorni mancanti. */
+html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr auto; grid-template-areas: "stemma dati esame" "stemma cammino cammino"; }
+.ss-esame { grid-area: esame; align-self: start; justify-self: end; display: flex; align-items: center; gap: 0.5rem; max-width: 14rem; text-decoration: none; color: var(--inchiostro); line-height: 1.25; }
+.ss-esame[hidden] { display: none; }
+.ss-es-icona { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
+.ss-es-icona svg { width: 1rem; height: 1rem; }
+.ss-es-testo { display: flex; flex-direction: column; min-width: 0; }
+.ss-es-su { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); }
+.ss-es-giu { font-size: 0.88rem; font-weight: 600; }
+.ss-esame:hover .ss-es-giu { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
+@media (max-width: 640px) {
+  html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr; grid-template-areas: "stemma dati" "stemma esame" "cammino cammino"; }
+  .ss-esame { justify-self: start; max-width: none; margin: 0.35rem 0 0.3rem; }
+}
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }
 @media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } }

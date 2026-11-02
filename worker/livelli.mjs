@@ -404,6 +404,9 @@ export function percorso(ar, c) {
     traguardi: premi.map((p) => ({ nome: p.nome, punti: p.punti, quando: p.quando })),
     daFare,
     prossimo,
+    // Esami con la data inserita, dal più vicino (in home il primo accanto al titolo).
+    esami: ar.righe('SELECT materia, data FROM esami WHERE email = ? AND data >= ? ORDER BY data LIMIT 3', email, oggi)
+      .map((e) => ({ ...e, titolo: titoloMateria(e.materia, l) })),
     sessioni: ar.righe('SELECT inizio, minuti, risposte, corrette, punti, materia, argomento FROM sessioni WHERE email = ? ORDER BY ultimo DESC LIMIT 5', email)
       .map((s) => ({ ...s, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null })),
   };
