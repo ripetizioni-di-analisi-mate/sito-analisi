@@ -192,7 +192,7 @@ $$
 $$
 and the common value is called the **definite integral** of $f$ on $[a, b]$, denoted by $\displaystyle\int_a^b f(x)\, dx$. For $f \geq 0$ the integral is the area of the region between the graph and the $x$-axis; in general it is a *signed area*, because the stretches where $f < 0$ give a negative contribution.
 
-::grafico{f="x^2;(ceil(2*x)/2)^2+0*sqrt(x*(2-x))" area="(floor(2*x)/2)^2;0;0;1.999" segmenti="0.5,0,0.5,1;1,0,1,2.25;1.5,0,1.5,4;2,0,2,4" xmin=-0.4 xmax=2.6 ymin=-0.4 ymax=4.6 titolo="$y = x^2$ on $[0, 2]$ with the partition into four equal parts: the colored rectangles give the lower sum $s(P) = \dfrac{7}{4}$, those bounded by the dashed line the upper sum $S(P) = \dfrac{15}{4}$; the integral equals $\dfrac{8}{3}$"}
+::cursore{tipo="riemann" titolo="$y = x^2$ on $[0, 2]$ with the partition into $n$ equal parts: the colored rectangles give the lower sum $s(P)$, those bounded by the dashed line the upper sum $S(P)$; as $n$ increases both sums approach the integral $\dfrac{8}{3}$"}
 
 :::
 

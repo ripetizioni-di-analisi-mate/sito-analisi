@@ -47,7 +47,7 @@ y = f(x_0) + f'(x_0)\,(x - x_0) .
 $$
 As $h \to 0$ the point $(x_0 + h, f(x_0 + h))$ approaches $(x_0, f(x_0))$ and the secant line through the two points tends to the tangent; since the slope of the secant is the difference quotient, the slope of the tangent is $f'(x_0)$. This is the **geometric meaning** of the derivative.
 
-::grafico{f="x^2;3*x-2;2*x-1" xmin=-1 xmax=2.6 ymin=-2 ymax=5 punti="1,1,pieno;2,4,pieno;1.5,2.25,pieno" segmenti="-0.2,-2,2.6,5" titolo="The secants through $(1, 1)$ with $h = 1$ and with $h = \dfrac{1}{2}$ (dashed) have slopes $3$ and $\dfrac{5}{2}$; as $h \to 0$ they tend to the tangent $y = 2x - 1$ (red), with slope $f'(1) = 2$"}
+::cursore{tipo="secante" titolo="For $f(x) = x^2$ the secant through $(1, 1)$ and $(1 + h, (1 + h)^2)$, in red, has slope equal to the difference quotient $2 + h$; as $h \to 0$ it tends to the tangent $y = 2x - 1$ (dashed), with slope $f'(1) = 2$"}
 
 ::grafico{f="x*x;2*x-1" xmin=-2.5 xmax=2.5 ymin=-1 ymax=5 punti="1,1" titolo="$y = x^2$: at the point $(1, 1)$ the tangent line (dashed) is $y = 2x - 1$, since $f'(1) = 2$"}
 
@@ -317,7 +317,7 @@ f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}\,(x - x_0)^k + o\bigl((x - x_0)^n\
 $$
 The polynomial $T_n(x) = \displaystyle\sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}\,(x - x_0)^k$ is the **Taylor polynomial** of order $n$ of $f$ centered at $x_0$; for $x_0 = 0$ one speaks of the **Maclaurin** formula and polynomial. The remainder $o\bigl((x - x_0)^n\bigr)$ says that the error tends to $0$ faster than $(x - x_0)^n$, therefore the polynomial approximates $f$ near $x_0$ up to an error that is negligible with respect to the last power written. For $n = 1$ the formula becomes $f(x) = f(x_0) + f'(x_0)(x - x_0) + o(x - x_0)$, the approximation by the **tangent line**. This form of the remainder is used in computing limits; the proof applies L'Hôpital's rule repeatedly to the ratio of $f(x) - T_n(x)$ to $(x - x_0)^n$ and is omitted.
 
-::grafico{f="exp(x);1+x;1+x+x^2/2" xmin=-3 xmax=2.5 ymin=-2 ymax=7 punti="0,1,pieno" titolo="$y = e^x$ with the Maclaurin polynomials $T_1(x) = 1 + x$ (dashed) and $T_2(x) = 1 + x + \dfrac{x^2}{2}$ (red): near $0$ the approximation improves as the order increases"}
+::cursore{tipo="taylor" funzione="exp" titolo="$y = e^x$ with the Maclaurin polynomial $T_n(x) = 1 + x + \dfrac{x^2}{2} + \dots + \dfrac{x^n}{n!}$ (dashed): near $0$ the approximation improves as the order $n$ increases"}
 
 :::
 

@@ -67,7 +67,7 @@ $$
 $$
 La ragione è $q = \dfrac{1}{2}$, con $|q| < 1$, e il primo termine è $\dfrac{1}{2}$, quindi la **somma** è il primo termine diviso $1 - q$.
 
-::grafico{punti="1,0.5000,pieno;2,0.7500,pieno;3,0.8750,pieno;4,0.9375,pieno;5,0.9688,pieno;6,0.9844,pieno;7,0.9922,pieno;8,0.9961,pieno" asintoti="y=1" nomi="N,s" xmin=-0.5 xmax=9 ymin=-0.15 ymax=1.25 titolo="Le somme parziali $s_N$ di $\sum \dfrac{1}{2^n}$ per $N = 1, \dots, 8$ crescono e si avvicinano alla somma $1$ (retta tratteggiata)"}
+::cursore{tipo="somme-parziali" titolo="Le somme parziali $s_1, \dots, s_N$ di $\sum \dfrac{1}{2^n}$ crescono e si avvicinano alla somma $1$ (retta tratteggiata)"}
 
 :::
 

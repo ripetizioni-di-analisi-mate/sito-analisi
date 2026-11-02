@@ -9,10 +9,16 @@
 //   :::soluzione   (apribile, "Mostra soluzione")
 //   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}   (tutti gli attributi in grafico.mjs)
 //   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
+//   ::cursore{tipo="epsilon-delta" titolo="…"}   grafico con un cursore che ne cambia un parametro (cursore.mjs):
+//       tipi epsilon-delta (ε nella definizione di limite), secante (h nel rapporto incrementale),
+//       riemann (n nelle somme di Riemann), taylor (grado di McLaurin), somme-parziali (N di una serie);
+//       gli altri attributi cambiano i parametri predefiniti (elenco in cursori-tipi.mjs).
+//       A tempo di build la figura è statica e completa; lo script src/scripts/cursori.ts la rende manipolabile.
 import { visit } from 'unist-util-visit';
 import { h } from 'hastscript';
 import { grafico } from './grafico.mjs';
 import { venn } from './venn.mjs';
+import { cursore } from './cursore.mjs';
 
 const ETICHETTE = {
   definizione: 'Definizione',
@@ -61,9 +67,10 @@ export default function remarkBlocchi() {
     }
     chiudi();
     visit(tree, (node) => {
-      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn')) {
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore')) {
         node.type = 'html';
-        node.value = node.name === 'grafico' ? grafico({ ...(node.attributes || {}), inglese: E === EN }) : venn(node.attributes || {});
+        const attr = { ...(node.attributes || {}), inglese: E === EN };
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'cursore' ? cursore(attr) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;
