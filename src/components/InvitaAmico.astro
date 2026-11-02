@@ -1,0 +1,53 @@
+---
+// «Invita un amico» nella pagina Account (versione B scelta da Carmine il 02/11/2026): striscia compatta
+// sotto il titolo con «Copia il link» e WhatsApp, e i numeri degli inviti. Dati da /api/invito (worker/inviti.mjs);
+// se la funzione è spenta (manca PADDLE_API_KEY) la striscia resta nascosta.
+import { SCONTO_INVITO } from '../data/inviti';
+interface Props { lingua: 'it' | 'en' }
+const en = Astro.props.lingua === 'en';
+const s = en ? {
+  breve: `Invite a friend: ${SCONTO_INVITO}% off for both of you`,
+  copia: 'Copy link', copiato: 'Copied', come: 'How it works',
+  messaggio: `I study on Ripetizioni di Analisi: with this link you get ${SCONTO_INVITO}% off your first subject.`,
+} : {
+  breve: `Invita un amico: ${SCONTO_INVITO}% di sconto a lui e a te`,
+  copia: 'Copia il link', copiato: 'Copiato', come: 'Come funziona',
+  messaggio: `Studio su Ripetizioni di Analisi: con questo link hai il ${SCONTO_INVITO}% di sconto sulla prima materia.`,
+};
+const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>';
+---
+<section class="invita-amico invita-b" id="invita-amico" hidden>
+  <span class="invita-icona" set:html={regalo} />
+  <div class="invita-corpo">
+    <p class="invita-breve"><strong>{s.breve}</strong> <a href="/invito">{s.come}</a></p>
+    <p class="invita-numeri" data-invita-numeri hidden></p>
+  </div>
+  <div class="invita-tasti">
+    <button type="button" class="bottone-primario" data-invita-copia>{s.copia}</button>
+    <a class="bottone-secondario" data-invita-wa target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</section>
+
+<script is:inline define:vars={{ s, en }}>
+  (async () => {
+    const box = document.getElementById('invita-amico');
+    if (!box) return;
+    const r = await fetch('/api/invito').catch(() => null);
+    const d = r && r.ok ? await r.json() : null;
+    if (!d || !d.attivo || !d.link) return;
+    const numeri = [];
+    if (d.iscritti) numeri.push(en ? `${d.iscritti} ${d.iscritti === 1 ? 'friend' : 'friends'} signed up` : `${d.iscritti} ${d.iscritti === 1 ? 'amico iscritto' : 'amici iscritti'}`);
+    if (d.hannoComprato) numeri.push(en ? `${d.hannoComprato} bought` : `${d.hannoComprato} ${d.hannoComprato === 1 ? 'ha comprato' : 'hanno comprato'}`);
+    if (d.premiDisponibili) numeri.push(en ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'discount' : 'discounts'} to use` : `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'sconto' : 'sconti'} del ${d.percentuale}% da usare`);
+    const n = box.querySelector('[data-invita-numeri]');
+    n.textContent = numeri.join(' · '); n.hidden = !numeri.length;
+    box.querySelector('[data-invita-wa]').href = `https://wa.me/?text=${encodeURIComponent(`${s.messaggio} ${d.link}`)}`;
+    const b = box.querySelector('[data-invita-copia]');
+    b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(d.link); }
+      catch { const t = document.createElement('textarea'); t.value = d.link; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+      b.textContent = s.copiato; setTimeout(() => { b.textContent = s.copia; }, 1800);
+    });
+    box.hidden = false;
+  })();
+</script>

@@ -474,6 +474,8 @@ details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > 
 .riquadro-acquisto .prezzo { margin: 0 0 0.8rem; font-size: 1.15rem; }
 .riquadro-acquisto .prezzo strong { font-size: 2rem; color: var(--accento); }
 .riquadro-acquisto .prezzo span { color: var(--inchiostro-2); }
+.riquadro-acquisto .nota-invito { margin: -0.3rem 0 0.9rem; padding: 0.5rem 0.7rem; border-radius: 8px; background: color-mix(in srgb, var(--azione, var(--accento)) 9%, #fff); color: var(--inchiostro); font: 0.9rem/1.45 var(--ui); }
+.riquadro-acquisto .nota-invito[hidden] { display: none; }
 .riquadro-acquisto button { font: inherit; font-weight: 600; font-size: 1.05rem; background: var(--accento); color: white; border: none; border-radius: 999px; padding: 0.7rem 2rem; cursor: pointer; }
 .riquadro-acquisto button:hover { filter: brightness(1.08); }
 #acquisto-alternativo { margin: 0; color: var(--inchiostro-2); }
@@ -1198,3 +1200,53 @@ html.collegato .esame-materia.solo-collegati { display: flex; }
 .scelta .figura-logica { margin: 0.2rem 0; }
 .scelta .figura-logica > svg { max-width: 9rem !important; }
 .scelta .figura-cella > svg { width: 4.5rem; }
+
+/* Invita un amico: pagina /invito (src/pages/invito.astro) */
+.invito-arrivo { margin: 1.2rem 0 1.6rem; padding: 0.9rem 1.1rem; border: 1px solid color-mix(in srgb, var(--azione, var(--accento)) 45%, transparent); border-radius: var(--raggio); background: color-mix(in srgb, var(--azione, var(--accento)) 7%, #fff); font-family: var(--ui); }
+.invito-arrivo[hidden] { display: none; }
+.invito-arrivo p { margin: 0.3rem 0; }
+.invito-arrivo-titolo { font-weight: 700; color: var(--azione, var(--accento)); }
+.invito-passi li, .invito-condizioni li { margin: 0.45rem 0; }
+.invito-materie { list-style: none; padding: 0; margin: 0.8rem 0 1.2rem; font-family: var(--ui); }
+.invito-materie li { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: 0.55rem 0; border-bottom: 1px solid var(--riga); }
+.invito-materie span { color: var(--inchiostro-2); white-space: nowrap; }
+.invito-cta { margin: 1rem 0 2rem; }
+.invito-cta .bottone-primario { background: var(--azione); }
+
+/* Formulari gratuiti (src/pages/formulari): schede compatte, due colonne su schermi larghi */
+.scarica-formulario { margin: 1.2rem 0 1.4rem; padding: 1rem 1.1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: #fff; font-family: var(--ui); }
+.scarica-formulario .scarica-testo { margin: 0 0 0.8rem; color: var(--inchiostro-2); font-size: 0.95rem; }
+.scarica-formulario .bottone-primario { background: var(--azione); }
+html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
+.scarica-formulario .nota-accesso { margin: 0.6rem 0 0; font-size: 0.88rem; }
+.indice-formulario ol { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0 0 1.6rem; font-family: var(--ui); font-size: 0.86rem; }
+.indice-formulario a { display: inline-block; padding: 0.25rem 0.65rem; border: 1px solid var(--riga); border-radius: 999px; color: var(--inchiostro); text-decoration: none; background: #fff; }
+.indice-formulario a:hover { border-color: var(--accento); color: var(--accento); }
+.testo-formulario > h2 { scroll-margin-top: 4.5rem; }
+.testo-formulario .blocco-formula { margin: 0.7rem 0; padding: 0.7rem 0.95rem 0.6rem; border: 1px solid var(--riga); border-left: 3px solid var(--accento); border-radius: 8px; background: #fff; break-inside: avoid; }
+.testo-formulario .blocco-formula .blocco-etichetta { margin: 0 0 0.25rem; font: 600 0.82rem/1.3 var(--ui); color: var(--accento); letter-spacing: 0.01em; }
+.testo-formulario .blocco-formula p { margin: 0.35rem 0; font-size: 0.95rem; }
+.testo-formulario .blocco-formula .katex-display { margin: 0.45rem 0; overflow-x: auto; overflow-y: hidden; }
+.formulario-fine { margin-top: 2.2rem; padding-top: 1rem; border-top: 1px solid var(--riga); font-family: var(--ui); font-size: 0.92rem; color: var(--inchiostro-2); }
+@media print { .stampa.testo-formulario .blocco-formula { border-left-width: 2px; } }
+
+/* Invita un amico nella pagina Account (src/components/InvitaAmico.astro) */
+.invita-amico[hidden] { display: none !important; }
+.invita-amico { font-family: var(--ui); }
+.invita-amico .invita-numeri { margin: 0.4rem 0 0; font-size: 0.88rem; color: var(--inchiostro-2); }
+.invita-amico .invita-numeri[hidden] { display: none; }
+.invita-amico .bottone-primario { background: var(--azione); }
+.invita-amico .invita-icona svg { width: 1.3rem; height: 1.3rem; color: var(--azione); }
+/* striscia compatta in cima (versione B scelta da Carmine) */
+.invita-b { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin: 0 0 1.6rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: color-mix(in srgb, var(--azione) 8%, #fff); border: 1px solid color-mix(in srgb, var(--azione) 30%, transparent); }
+.invita-b .invita-corpo { flex: 1 1 14rem; }
+.invita-b .invita-breve { margin: 0; font-size: 0.95rem; }
+.invita-b .invita-breve a { font-size: 0.85rem; margin-left: 0.3rem; }
+.invita-b .invita-tasti { display: flex; gap: 0.45rem; }
+.invita-b .invita-tasti > * { padding: 0.45rem 0.95rem; font-size: 0.9rem; }
+.invita-amico a.bottone-secondario, .invita-amico a.bottone-primario { text-decoration: none; display: inline-block; }
+
+/* Materiale gratuito in home (src/components/GratisHome.astro, versione C) */
+.gratis-c { display: flex; align-items: center; gap: 0.5rem; margin: 0.35rem 0 1.4rem; font: 0.9rem/1.4 var(--ui); color: var(--inchiostro-2); }
+.gratis-c svg { width: 1.1rem; height: 1.1rem; flex: none; color: var(--azione); }
+.gratis-c b { color: var(--inchiostro); }

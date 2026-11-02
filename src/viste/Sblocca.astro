@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import { VIDEOCORSI } from '../data/videocorsi';
+import { SCONTO_INVITO } from '../data/inviti';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -19,6 +20,16 @@ const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(mate
 // Il PDF si nomina solo nelle materie che lo hanno (public/pdf/<materia>/).
 // (percorso dalla radice del progetto: dentro la build import.meta.url punta ai file compilati)
 const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
+// «Invita un amico»: righe sullo sconto, mostrate dallo script solo a chi ne ha diritto.
+const invito = lingua === 'en' ? {
+  ospite: `You were invited by a friend: your first subject is ${SCONTO_INVITO}% off. The discount is applied at checkout, once your account is created.`,
+  amico: `You were invited by a friend: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
+  premio: `A friend you invited unlocked a subject: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
+} : {
+  ospite: `Sei arrivato con l'invito di un amico: sul primo acquisto di una materia hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento dopo la creazione dell'account.`,
+  amico: `Sei arrivato con l'invito di un amico: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
+  premio: `Una persona che hai invitato ha sbloccato una materia: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
+};
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
   <p class="sopratitolo">{m.titolo}</p>
@@ -36,6 +47,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
   )}
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
+    <p class="nota-invito" id="nota-invito" hidden></p>
     <div id="azione"><p class="esito-modulo">{t.unMomento}</p></div>
     <form class="modulo modulo-acquisto" id="modulo-acquisto" novalidate hidden>
       <label>{t.nome}<input type="text" name="nome" autocomplete="given-name" maxlength="40" /></label>
@@ -53,7 +65,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
     <p class="nota-termini" set:html={t.notaTermini} />
   </div>
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle, invito }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -91,9 +103,23 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
         s.onerror = () => { paddlePronto = null; no(); };
         document.head.appendChild(s);
       }));
+      // «Invita un amico»: riga sullo sconto (cookie dell'invito per gli ospiti, stato dell'account per gli iscritti).
+      const notaInvito = document.getElementById('nota-invito');
+      const mostraInvito = (testo) => { notaInvito.textContent = testo; notaInvito.hidden = !testo; };
+      const aggiornaInvito = async () => {
+        if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : ''); return; }
+        if (io.materie.includes(materia)) { mostraInvito(''); return; }
+        const r = await fetch('/api/invito').catch(() => null);
+        const d = r && r.ok ? await r.json() : null;
+        mostraInvito(d && d.attivo ? (d.scontoAmico ? invito.amico : d.premiDisponibili > 0 ? invito.premio : '') : '');
+      };
+      aggiornaInvito().catch(() => {});
       const paga = async () => {
         try { await caricaPaddle(); } catch { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; return; }
+        // sconto dell'invito (se c'è): un codice personale di Paddle, valido una volta sola
+        const sconto = await fetch(`/api/sconto?materia=${encodeURIComponent(materia)}`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
         Paddle.Checkout.open({
+          ...(sconto.id ? { discountId: sconto.id } : {}),
           items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
           customer: { email: io.email },
           customData: { materia, email: io.email },
@@ -168,6 +194,7 @@ const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
           const rNuovo = await fetch('/api/io').catch(() => null);
           io = rNuovo && rNuovo.ok ? await rNuovo.json() : null;
           if (!io) { location.reload(); return; }
+          aggiornaInvito().catch(() => {});
           if (exStudente()) { mostraAccount(`<p class="stato-ok">${js.accountCreatoEx}</p>`); return; }
           if (mostraAccount(`<p class="esito-modulo">${js.aperturaPagamento}</p>`)) paga();
         } catch {

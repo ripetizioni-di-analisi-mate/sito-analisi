@@ -2,6 +2,7 @@
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
+import InvitaAmico from '../components/InvitaAmico.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -16,6 +17,7 @@ const sblocca = t.sblocca;
   <p class="sommario" id="chi">{t.caricamento}</p>
 
   <section id="pannello" hidden>
+    <InvitaAmico lingua={lingua} />
     {(
       <div id="percorso" class="percorso-account" hidden>
         <h2>{lingua === 'en' ? 'Your progress' : 'Il tuo percorso'}</h2>

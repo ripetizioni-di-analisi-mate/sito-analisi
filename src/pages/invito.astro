@@ -1,0 +1,51 @@
+---
+// «Invita un amico»: pagina d'arrivo del link /invito/<CODICE> (il Worker mette il cookie e porta qui)
+// e regole dello sconto del 15% a entrambi (src/data/inviti.ts, worker/inviti.mjs).
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import PREZZI from '../data/prezzi.json';
+import { SCONTO_INVITO, GIORNI_COOKIE_INVITO } from '../data/inviti';
+
+const materie = Object.entries(PREZZI as Record<string, number>)
+  .map(([slug, prezzo]) => ({ m: MATERIE.find((x) => x.slug === slug && x.attiva), prezzo }))
+  .filter((x) => x.m)
+  .map(({ m, prezzo }) => ({ slug: m!.slug, titolo: m!.titolo, prezzo, scontato: Math.round(prezzo * (100 - SCONTO_INVITO)) / 100 }));
+const euro = (x: number) => (Number.isInteger(x) ? String(x) : x.toFixed(2).replace('.', ','));
+---
+<Base titolo={`Invita un amico: ${SCONTO_INVITO}% di sconto a entrambi`} descrizione={`Con il link personale del tuo account, chi si iscrive ha il ${SCONTO_INVITO}% di sconto sul primo acquisto di una materia e tu ricevi il ${SCONTO_INVITO}% sul prossimo.`} seo={{ noindex: true, soloQuestaLingua: true }} lingua="it">
+  <p class="sopratitolo">Invita un amico</p>
+  <h1>{SCONTO_INVITO}% di sconto a chi inviti e a te</h1>
+
+  <div class="invito-arrivo" id="invito-arrivo" hidden>
+    <p class="invito-arrivo-titolo">Sei arrivato con l'invito di un amico</p>
+    <p>Sul primo acquisto di una materia del sito hai il {SCONTO_INVITO}% di sconto. Lo sconto si applica da solo al pagamento, dopo la creazione dell'account.</p>
+  </div>
+
+  <h2>Come funziona</h2>
+  <ol class="invito-passi">
+    <li>Ogni studente con un account ha un link personale, nella pagina <a href="/account">Account</a>.</li>
+    <li>Chi apre il link e crea un account nuovo entro {GIORNI_COOKIE_INVITO} giorni ha il <strong>{SCONTO_INVITO}% di sconto</strong> sul primo acquisto di una materia.</li>
+    <li>Quando l'amico sblocca una materia, chi lo ha invitato riceve uno sconto del {SCONTO_INVITO}% sul prossimo acquisto di una materia, con un'email di avviso. Gli sconti sono uno per ogni amico che compra e si applicano da soli al pagamento.</li>
+  </ol>
+
+  <h2>Le materie e il prezzo con lo sconto</h2>
+  <ul class="invito-materie">
+    {materie.map((x) => (
+      <li><a href={`/${x.slug}`}>{x.titolo}</a><span>{x.prezzo} € · con l'invito {euro(x.scontato)} €</span></li>
+    ))}
+  </ul>
+  <p class="invito-cta"><a class="bottone-primario" href="/">Scegli la materia</a></p>
+
+  <h2>Condizioni</h2>
+  <ul class="invito-condizioni">
+    <li>Lo sconto vale sulle materie del sito (teoria ed esercizi). Videocorsi, corsi di gruppo e lezioni individuali sono esclusi.</li>
+    <li>Lo sconto di chi è invitato vale una volta sola, sul primo acquisto di una materia, con un account creato dopo aver aperto il link.</li>
+    <li>Ogni acquisto ammette un solo sconto: gli sconti dell'invito non si sommano tra loro.</li>
+    <li>Un invito a sé stessi, con un secondo indirizzo email, non dà diritto al premio.</li>
+    <li>Gli sconti non si convertono in denaro. Per qualsiasi problema si scrive a Carmine dalla pagina <a href="/contatti">Contatti e assistenza</a>.</li>
+  </ul>
+
+  <script is:inline>
+    if (/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie)) document.getElementById('invito-arrivo').hidden = false;
+  </script>
+</Base>

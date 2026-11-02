@@ -33,6 +33,7 @@ const ETICHETTE = {
   richiamo: 'Richiamo',
   soluzione: 'Soluzione',
   percorso: 'Il percorso',
+  formula: 'Formula', // formulari: l'etichetta è il titolo della formula
 };
 
 const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione' };
@@ -41,7 +42,7 @@ const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione'
 const EN = {
   definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition', dimostrazione: 'Proof',
   esempio: 'Example', osservazione: 'Remark', attenzione: 'Warning', richiamo: 'Recall', soluzione: 'Solution',
-  percorso: 'Where this fits',
+  percorso: 'Where this fits', formula: 'Formula',
   mostra: 'Show solution', nascondi: 'Hide solution',
 };
 const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };

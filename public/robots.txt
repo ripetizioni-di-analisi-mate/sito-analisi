@@ -34,6 +34,7 @@ Disallow: /promemoria/
 Disallow: /prenota/confermata
 Disallow: /prenota/gestisci
 Disallow: /corsi-di-gruppo/la-tua-iscrizione
+Disallow: /invito/
 Disallow: /cerca?
 Disallow: /en/cerca?
 

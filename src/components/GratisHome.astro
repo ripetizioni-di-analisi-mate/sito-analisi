@@ -1,0 +1,14 @@
+---
+// Materiale gratuito in vista nella home (richiesta di Carmine del 02/11/2026, versione C scelta fra tre):
+// una riga «Gratis» sotto la legenda con Matematica zero, formulari e guida ai concorsi.
+// Le versioni A (tre schede) e B (area «Gratis» prima di Università) sono state scartate.
+const voci = [
+  { href: '/matematica-da-zero', titolo: 'Matematica zero' },
+  { href: '/formulari', titolo: 'Formulari' },
+  { href: '/concorsi', titolo: 'Guida ai concorsi' },
+];
+---
+<p class="gratis-c">
+  <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>
+  <span><b>Gratis</b>: {voci.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.titolo}</a></>)}</span>
+</p>

@@ -1,0 +1,63 @@
+---
+// Formulario gratuito di una materia: pagina libera (indicizzata) e PDF scaricabile con un account gratuito.
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { materia as trovaMateria } from '../../data/materie';
+import { FORMULARI, pdfFormulario } from '../../data/formulari';
+import { SITO, assoluto } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const voci = await getCollection('formulari');
+  return voci.filter((v) => (FORMULARI as readonly string[]).includes(v.id)).map((v) => ({ params: { materia: v.id }, props: { voce: v } }));
+}
+const { voce } = Astro.props;
+const slug = voce.id;
+const m = trovaMateria(slug);
+const { Content, headings } = await render(voce);
+const sezioni = headings.filter((h) => h.depth === 2);
+const pdf = pdfFormulario(slug);
+const indirizzo = `/formulari/${slug}`;
+const altri = FORMULARI.filter((x) => x !== slug).map((x) => ({ slug: x, titolo: trovaMateria(x).titolo }));
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'LearningResource',
+  name: voce.data.titolo,
+  description: voce.data.descrizione,
+  inLanguage: 'it',
+  isAccessibleForFree: true,
+  learningResourceType: 'Formulario',
+  educationalLevel: 'Università',
+  about: m.titolo,
+  url: assoluto(indirizzo),
+  author: { '@type': 'Person', name: 'Carmine Tornincasa', url: assoluto('/chi-sono') },
+  publisher: { '@type': 'Organization', name: 'Ripetizioni di Analisi', url: SITO },
+  encoding: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: assoluto(pdf) },
+}];
+---
+<Base titolo={voce.data.titolo} descrizione={voce.data.descrizione} lingua="it" percorso={[{ titolo: 'Formulari', href: '/formulari' }, { titolo: m.titolo }]} seo={{ titolo: `${voce.data.titolo} (PDF gratuito)`, schema, soloQuestaLingua: true }}>
+  <div class="formulario" style={`--accento: ${m.colore}`}>
+    <p class="sopratitolo">Formulario gratuito</p>
+    <h1>{voce.data.titolo}</h1>
+    <p class="sommario">{voce.data.sommario}</p>
+
+    <div class="scarica-formulario" id="scarica">
+      <p class="scarica-testo">Il formulario si legge qui per intero. Il PDF, pronto da stampare, si scarica con un account gratuito.</p>
+      <a class="bottone-primario scarica-pdf solo-collegati" href={pdf} download>Scarica il PDF</a>
+      <a class="bottone-primario scarica-pdf solo-ospiti" href={`/accedi?nuovo=1&dopo=${encodeURIComponent(indirizzo + '#scarica')}`}>Crea un account gratuito e scarica il PDF</a>
+      <p class="nota-accesso solo-ospiti">Hai già un account? <a href={`/accedi?dopo=${encodeURIComponent(indirizzo + '#scarica')}`}>Accedi</a></p>
+    </div>
+
+    <nav class="indice-formulario" aria-label="Sezioni del formulario">
+      <ol>{sezioni.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+    </nav>
+
+    <div class="testo-studio testo-formulario">
+      <Content />
+    </div>
+
+    <aside class="formulario-fine">
+      <p>La teoria completa, con le dimostrazioni e gli esercizi svolti passo dopo passo, è nella materia <a href={`/${slug}`}>{m.titolo}</a>.</p>
+      <p>Altri formulari: {altri.map((a, i) => <>{i > 0 && ' · '}<a href={`/formulari/${a.slug}`}>{a.titolo}</a></>)}.</p>
+    </aside>
+  </div>
+</Base>

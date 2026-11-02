@@ -23,6 +23,7 @@ import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } f
 import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
+import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -153,6 +154,8 @@ export class Archivio {
     creaTabellePrenotazioni(this.sql);
     // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
     creaTabelleGruppi(this.sql);
+    // «Invita un amico»: codici personali, invitati e sconti del 15% (worker/inviti.mjs)
+    creaTabelleInviti(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -167,6 +170,7 @@ export class Archivio {
     const c = req.method === 'POST' ? await req.json() : {};
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
@@ -687,6 +691,12 @@ export default {
       if (r) return r;
     }
 
+    // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
+    if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
+      const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
+      if (r) return r;
+    }
+
     // ===== account =====
     if (p === '/api/registrati' && POST) {
       const { email: e, password, lingua, nome, corso: corsoDato } = await req.json().catch(() => ({}));
@@ -699,6 +709,9 @@ export default {
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
       const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso, lingua });
       if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
+      // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
+      const invito = leggiCookie(req, 'invito');
+      if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
@@ -1036,6 +1049,8 @@ export default {
         if (email && A_PAGAMENTO.includes(materia)) {
           await aDO(env, '/registra-acquisto', { email, materia, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
+          // invita un amico: sconto usato e premio per chi ha invitato (worker/inviti.mjs)
+          ctx.waitUntil(dopoAcquistoMateria(env, aDO, url.origin, { email, transazione: d.id, sconto: d.discount_id }).catch((e) => console.log('inviti: webhook', String(e))));
         } else if (email && VIDEO[video]) {
           await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });
@@ -1129,6 +1144,19 @@ export default {
         return json(await aDO(env, '/dispositivo-rimuovi', { email }));
       }
       return new Response('non trovato', { status: 404 });
+    }
+
+    // ===== formulari gratuiti: il PDF si scarica con un account, anche gratuito (src/pages/formulari) =====
+    const pdfFormulario = url.pathname.match(/^\/pdf\/formulari\/([a-z0-9-]+)\.pdf$/);
+    if (pdfFormulario) {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return new Response(null, { status: 302, headers: { location: `/formulari/${pdfFormulario[1]}#scarica`, 'cache-control': 'no-store' } });
+      const r = await env.ASSETS.fetch(senzaCondizioni(req));
+      const out = new Response(r.body, r);
+      out.headers.set('cache-control', 'private, no-store');
+      out.headers.set('x-robots-tag', 'noindex');
+      out.headers.set('content-disposition', `attachment; filename="Formulario-${pdfFormulario[1]}.pdf"`);
+      return out;
     }
 
     // ===== contenuti: oscuramento e consegna =====

@@ -29,6 +29,11 @@ export async function GET() {
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/concorsi/simulazione', 0.5, false);
+  // formulari gratuiti (solo italiano)
+  const formulari = await getCollection('formulari');
+  const dForm = formulari.map((v) => dataDi('content/formulari', v.id));
+  due('/formulari', 0.7, false, piuRecente(...dForm));
+  formulari.forEach((v, k) => due(`/formulari/${v.id}`, 0.8, false, dForm[k]));
   due('/ripetizioni-analisi', 0.8, false);
   due('/prenota', 0.7, false);
   due('/corsi-di-gruppo', 0.7, false);

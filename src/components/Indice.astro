@@ -5,6 +5,7 @@ import LezioniCarmine from './LezioniCarmine.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { FORMULARI } from '../data/formulari';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
@@ -120,6 +121,25 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                 </a>
               </li>
             ))}
+          </ol>
+        </details>
+      )}
+      {lingua === 'it' && FORMULARI.length > 0 && (
+        <details class="indice-gruppo">
+          <summary class="indice-materia"><span>Formulari</span></summary>
+          <ol class="indice-materie">
+            {FORMULARI.map((f) => {
+              const x = MATERIE.find((m) => m.slug === f);
+              return x && (
+                <li style={`--colore-materia: ${x.colore}`}>
+                  <a class="voce-materia" href={`/formulari/${f}`}>
+                    <span class="materia-punto" aria-hidden="true" />
+                    <span class="materia-testo"><span class="materia-nome">{x.titolo}</span></span>
+                    <small class="materia-prossima">gratis</small>
+                  </a>
+                </li>
+              );
+            })}
           </ol>
         </details>
       )}

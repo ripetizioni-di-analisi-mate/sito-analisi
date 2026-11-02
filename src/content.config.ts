@@ -69,4 +69,14 @@ const svolti_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...esc
 const domande_en = defineCollection({ loader: senzaHtml('./src/content-en/domande'), schema: domande.schema });
 const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }), schema: dafare.schema });
 
-export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en };
+// Formulari gratuiti: src/content/formulari/<materia>.md (pagina /formulari/<materia>, PDF con account gratuito).
+const formulari = defineCollection({
+  loader: glob({ pattern: ['*.md'], base: './src/content/formulari' }),
+  schema: z.object({
+    titolo: z.string(),
+    sommario: z.string(),
+    descrizione: z.string().max(170),
+  }),
+});
+
+export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, formulari };

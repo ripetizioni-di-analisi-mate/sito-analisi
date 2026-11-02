@@ -1,0 +1,24 @@
+---
+// Versione di stampa del formulario, da cui scripts/pdf-formulari.mjs genera il PDF (public/pdf/formulari/<materia>.pdf).
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { materia as trovaMateria } from '../../../data/materie';
+import { FORMULARI } from '../../../data/formulari';
+
+export async function getStaticPaths() {
+  const voci = await getCollection('formulari');
+  return voci.filter((v) => (FORMULARI as readonly string[]).includes(v.id)).map((v) => ({ params: { materia: v.id }, props: { voce: v } }));
+}
+const { voce } = Astro.props;
+const m = trovaMateria(voce.id);
+const { Content } = await render(voce);
+---
+<Base titolo={`${voce.data.titolo} · Stampa`} sezione="stampa" lingua="it" seo={{ soloQuestaLingua: true }}>
+  <div class="stampa testo-studio testo-formulario formulario" style={`--accento: ${m.colore}`}>
+    <p class="sopratitolo">Formulario gratuito · ripetizionidianalisi.com</p>
+    <h1>{voce.data.titolo}</h1>
+    <p class="sommario">{voce.data.sommario}</p>
+    <p class="nota-pdf">© 2026 Carmine Tornincasa. Copia per uso personale di studio: è vietata la diffusione, anche parziale, senza autorizzazione scritta. Teoria ed esercizi svolti su ripetizionidianalisi.com/{voce.id}.</p>
+    <Content />
+  </div>
+</Base>
