@@ -49,7 +49,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {m.prezzo && (
     <div class="riquadro-stato" data-materia={m.slug}>
       <div class="stato-sbloccata">
-        <svg class="icona" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 3.8L16 6"/></svg>
+        <svg class="icona" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div class="testo"><strong title={t.accessoAttivoTesto(m.titolo)}>{t.accessoAttivo}</strong>{video && <a class="rimando-videocorso" href={`/videocorsi/${video.slug}`}>Se ti serve anche il videocorso →</a>}</div>
       </div>
       <div class="stato-bloccata">
