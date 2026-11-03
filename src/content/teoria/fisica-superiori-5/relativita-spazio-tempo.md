@@ -42,7 +42,7 @@ Le leggi della meccanica hanno la stessa forma in tutti i sistemi di riferimento
 ## Velocità della luce e postulati di Einstein
 
 :::osservazione{#michelson-morley titolo="Esperimento di Michelson e Morley"}
-Nell'Ottocento si pensava che la luce, come il suono, si propagasse in un mezzo, detto etere, e che la velocità $c$ prevista dalle equazioni di Maxwell fosse la velocità della luce rispetto all'etere. La Terra si muove attorno al Sole a circa $3 \cdot 10^{4}\,\mathrm{m/s}$, quindi per la composizione galileiana la luce avrebbe dovuto avere velocità diverse nelle diverse direzioni rispetto alla Terra.
+Nell'Ottocento si pensava che la luce si propagasse in un mezzo, detto etere, e che $c$ fosse la sua velocità rispetto all'etere. La Terra si muove attorno al Sole a circa $3 \cdot 10^{4}\,\mathrm{m/s}$, quindi per la composizione galileiana la luce avrebbe dovuto avere velocità diverse nelle diverse direzioni rispetto alla Terra.
 
 Nel 1887 Michelson e Morley confrontarono i tempi impiegati dalla luce a percorrere due bracci perpendicolari di uguale lunghezza, con un interferometro. Una differenza tra i due tempi avrebbe spostato le frange di interferenza quando l'apparato veniva ruotato. Lo spostamento previsto non fu osservato, entro la precisione dello strumento, e il risultato fu confermato da esperimenti successivi sempre più precisi. Se ne conclude che la velocità della luce è la stessa in tutte le direzioni per un osservatore sulla Terra, contro la previsione della composizione galileiana.
 :::
@@ -59,7 +59,7 @@ Si tratta di postulati, che non si dimostrano; le loro conseguenze sono conferma
 ## Relatività della simultaneità
 
 :::definizione{#eventi-simultanei titolo="Eventi simultanei e orologi sincronizzati"}
-Due eventi che accadono in punti diversi di un sistema inerziale sono **simultanei** in quel sistema se gli orologi fermi nei due punti segnano lo stesso istante. Gli orologi devono essere **sincronizzati**, e per sincronizzarli si usa la luce, che per il secondo postulato ha velocità $c$ in ogni direzione. Una lampada posta nel punto medio tra due orologi emette un lampo, e i due orologi vengono avviati quando il lampo li raggiunge; e il lampo li raggiunge nello stesso istante perché percorre la stessa distanza con la stessa velocità. Per esempio, due orologi distanti $600\,\mathrm{m}$ ricevono il lampo emesso dal punto medio dopo $\dfrac{300}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 1{,}00\,\mu\mathrm{s}$, entrambi.
+Due eventi che accadono in punti diversi di un sistema inerziale sono **simultanei** in quel sistema se gli orologi fermi nei due punti segnano lo stesso istante. Gli orologi devono essere **sincronizzati**, e per sincronizzarli si usa la luce, che per il secondo postulato ha velocità $c$ in ogni direzione. Una lampada posta nel punto medio tra due orologi emette un lampo, e ciascun orologio viene avviato quando il lampo lo raggiunge. Il lampo raggiunge i due orologi nello stesso istante, perché percorre la stessa distanza con la stessa velocità. Per esempio, due orologi distanti $600\,\mathrm{m}$ ricevono il lampo emesso dal punto medio dopo $\dfrac{300}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 1{,}00\,\mu\mathrm{s}$, entrambi.
 :::
 
 :::esempio{#treno-di-einstein titolo="Il vagone di Einstein"}
@@ -144,14 +144,6 @@ Per il principio di relatività ogni orologio fermo in $S'$, di qualunque tipo, 
 :::
 ::::
 
-:::esempio{titolo="Un orologio a luce in moto"}
-Un orologio a luce ha gli specchi a distanza $d = 0{,}90\,\mathrm{m}$. Nel suo sistema di quiete un'andata e ritorno dura $\Delta t_0 = \dfrac{2 \cdot 0{,}90}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 6{,}0 \cdot 10^{-9}\,\mathrm{s}$. Se l'orologio si muove con $v = 0{,}60\,c$, per cui $\gamma = 1{,}25$, la stessa andata e ritorno dura in $S$
-$$
-\Delta t = 1{,}25 \cdot 6{,}0 \cdot 10^{-9}\,\mathrm{s} = 7{,}5 \cdot 10^{-9}\,\mathrm{s} .
-$$
-Come controllo, in $S$ ciascun lato obliquo è lungo $\dfrac{c\,\Delta t}{2} = 1{,}125\,\mathrm{m}$ e il mezzo spostamento dell'orologio è $\dfrac{v\,\Delta t}{2} = 0{,}675\,\mathrm{m}$; infatti $0{,}675^2 + 0{,}90^2 = 1{,}265625 = 1{,}125^2$.
-:::
-
 :::attenzione
 La dilatazione dei tempi è reciproca. Anche un orologio fermo in $S$ va più piano per l'osservatore di $S'$, perché per lui è l'orologio di $S$ a muoversi con velocità $v$. In ogni caso il tempo proprio è quello misurato nel sistema in cui i due eventi avvengono nello stesso punto. Per l'ora segnata dall'orologio dell'astronave il tempo proprio è $60\,\mathrm{min}$, misurato a bordo, e $100\,\mathrm{min}$ è l'intervallo misurato sulla Terra.
 :::
@@ -159,7 +151,7 @@ La dilatazione dei tempi è reciproca. Anche un orologio fermo in $S$ va più pi
 ## Contrazione delle lunghezze
 
 :::definizione{#lunghezza-propria titolo="Lunghezza propria"}
-La **lunghezza propria** $L_0$ di un oggetto è la sua lunghezza misurata nel sistema inerziale in cui l'oggetto è fermo. In un sistema in cui l'oggetto si muove, la lunghezza si misura segnando le posizioni dei due estremi *nello stesso istante* di quel sistema. Per la relatività della simultaneità questa misura dà un risultato diverso da $L_0$. Per esempio, un'astronave lunga $L_0 = 100\,\mathrm{m}$, misurata dall'equipaggio, ha una lunghezza minore per gli osservatori terrestri rispetto ai quali si muove, come afferma il teorema sulla contrazione delle lunghezze.
+La **lunghezza propria** $L_0$ di un oggetto è la sua lunghezza misurata nel sistema inerziale in cui l'oggetto è fermo. In un sistema in cui l'oggetto si muove, la lunghezza si misura segnando le posizioni dei due estremi *nello stesso istante* di quel sistema. Per la relatività della simultaneità questa misura dà un risultato diverso da $L_0$. Per esempio, un'astronave lunga $L_0 = 100\,\mathrm{m}$, misurata dall'equipaggio, è lunga soltanto $60\,\mathrm{m}$ per gli osservatori terrestri, se si muove rispetto a essi con $v = 0{,}80\,c$, come afferma il teorema sulla contrazione delle lunghezze.
 :::
 
 ::::teorema{#contrazione-lunghezze titolo="Contrazione delle lunghezze"}
@@ -191,7 +183,7 @@ cioè $L = \dfrac{L_0}{\gamma}$.
 :::esempio{#muoni titolo="I muoni dei raggi cosmici"}
 I **muoni** sono particelle instabili prodotte negli strati alti dell'atmosfera dagli urti dei raggi cosmici con le molecole dell'aria. Un muone fermo decade con **vita media** $\tau = 2{,}2\,\mu\mathrm{s}$, nel senso che, per una legge sperimentale, di un gruppo di muoni fermi dopo il tempo $t$ sopravvive la frazione $e^{-\frac{t}{\tau}}$. Si considerano muoni prodotti a $h = 6{,}0\,\mathrm{km}$ di quota, che scendono verticalmente con $v = 0{,}995\,c$, per cui $\gamma \approx 10{,}0$.
 
-- Nel sistema della Terra il viaggio dura $\Delta t = \dfrac{h}{v} = \dfrac{6000}{0{,}995 \cdot 3{,}00 \cdot 10^{8}}\,\mathrm{s} \approx 20\,\mu\mathrm{s}$, circa $9$ vite medie. Senza la dilatazione dei tempi arriverebbe al suolo la frazione $e^{-9{,}1} \approx 1 \cdot 10^{-4}$ dei muoni, uno ogni diecimila.
+- Nel sistema della Terra il viaggio dura $\Delta t = \dfrac{h}{v} = \dfrac{6000}{0{,}995 \cdot 3{,}00 \cdot 10^{8}}\,\mathrm{s} \approx 20\,\mu\mathrm{s}$, circa $9$ vite medie. Senza la dilatazione dei tempi arriverebbe al suolo la frazione $e^{-9{,}1} \approx 1 \cdot 10^{-4}$ dei muoni, circa uno ogni diecimila.
 - Per la **dilatazione dei tempi** il viaggio dura per i muoni il tempo proprio $\Delta t_0 = \dfrac{\Delta t}{\gamma} \approx 2{,}0\,\mu\mathrm{s}$, meno di una vita media, quindi arriva al suolo la frazione $e^{-\frac{2{,}0}{2{,}2}} \approx 0{,}40$.
 - Nel sistema dei muoni la Terra viene loro incontro con velocità $v$, e lo spessore di atmosfera da attraversare è contratto a $\dfrac{h}{\gamma} \approx 600\,\mathrm{m}$, che si percorre in $\dfrac{600\,\mathrm{m}}{v} \approx 2{,}0\,\mu\mathrm{s}$. La **contrazione delle lunghezze** dà quindi lo stesso risultato.
 
@@ -270,7 +262,7 @@ $$
 $$
 si chiama **intervallo** tra i due eventi, e ha lo stesso valore in tutti i sistemi inerziali, cioè $(c\, \Delta t')^2 - (\Delta x')^2 = (c\, \Delta t)^2 - (\Delta x)^2$. L'uguaglianza si verifica sostituendo le trasformazioni di Lorentz per le differenze di coordinate. Se le distanze hanno componenti anche lungo $y$ e $z$, si sottraggono anche $(\Delta y)^2$ e $(\Delta z)^2$.
 
-Gli intervalli di tempo e le distanze cambiano da un sistema all'altro, mentre l'intervallo è lo stesso per tutti gli osservatori, e permette di confrontare le misure senza scrivere le trasformazioni. Per esempio, due eventi con $\Delta x = 1200\,\mathrm{m}$ e $\Delta t = 5{,}0\,\mu\mathrm{s}$, cioè $c\, \Delta t = 1500\,\mathrm{m}$, hanno $(\Delta s)^2 = 1500^2 - 1200^2\,\mathrm{m^2} = 8{,}1 \cdot 10^{5}\,\mathrm{m^2}$. In un sistema $S'$ con $v = 0{,}60\,c$ le trasformazioni danno $\Delta x' = 375\,\mathrm{m}$ e $c\, \Delta t' = 975\,\mathrm{m}$, e infatti $975^2 - 375^2 = 8{,}1 \cdot 10^{5}$.
+Gli intervalli di tempo e le distanze cambiano da un sistema all'altro, mentre l'intervallo è lo stesso per tutti gli osservatori, e permette di confrontare le misure senza scrivere le trasformazioni. Per esempio, due eventi con $\Delta x = 1200\,\mathrm{m}$ e $\Delta t = 5{,}0\,\mu\mathrm{s}$, cioè $c\, \Delta t = 1500\,\mathrm{m}$, hanno $(\Delta s)^2 = \left( 1500^2 - 1200^2 \right) \mathrm{m^2} = 8{,}1 \cdot 10^{5}\,\mathrm{m^2}$. In un sistema $S'$ con $v = 0{,}60\,c$ le trasformazioni danno $\Delta x' = 375\,\mathrm{m}$ e $c\, \Delta t' = 975\,\mathrm{m}$, e infatti $975^2 - 375^2 = 8{,}1 \cdot 10^{5}$.
 :::
 
 :::definizione{#tipi-di-intervallo titolo="Intervalli di tipo tempo, spazio e luce"}
@@ -321,7 +313,7 @@ Al ritorno il gemello viaggiatore è perciò più giovane di $4{,}0$ anni. Il **
 :::
 
 :::osservazione{#gemelli-spiegazione titolo="Spiegazione con il cambio di sistema di riferimento"}
-La situazione dei due gemelli non è simmetrica. Il gemello terrestre resta per tutto il tempo nello stesso sistema inerziale. Il gemello viaggiatore usa due sistemi inerziali diversi, quello dell'andata e quello del ritorno, e al giro di boa cambia sistema, subendo un'accelerazione che può avvertire. La dilatazione dei tempi vale per un orologio che si muove rispetto a un unico sistema inerziale, quindi il calcolo corretto è quello fatto nel sistema della Terra.
+La situazione dei due gemelli non è simmetrica. Il gemello terrestre resta per tutto il tempo nello stesso sistema inerziale. Il gemello viaggiatore usa due sistemi inerziali diversi, quello dell'andata e quello del ritorno, e al giro di boa cambia sistema, subendo un'accelerazione che può avvertire. La formula della dilatazione dei tempi si applica alle misure fatte in un sistema inerziale, quindi il calcolo corretto è quello fatto nel sistema della Terra, che è inerziale per tutto il viaggio.
 
 Il diagramma di Minkowski del sistema della Terra, con $x$ in anni luce e $ct$ in anni, mostra che cosa accade. Le rette tratteggiate uniscono il giro di boa agli eventi sulla Terra che il viaggiatore considera simultanei a esso. Nel sistema dell'andata la retta ha pendenza $\beta$ e incontra l'asse $ct$ in $ct = 5{,}0 - 0{,}80 \cdot 4{,}0 = 1{,}8$ anni; nel sistema del ritorno ha pendenza $-\beta$ e lo incontra in $5{,}0 + 3{,}2 = 8{,}2$ anni. Ciascuna tratta dura per il viaggiatore $3{,}0$ anni; durante una tratta egli considera rallentato l'orologio terrestre, e calcola che segni $\dfrac{3{,}0\ \text{anni}}{\gamma} = 1{,}8$ anni; al cambio di sistema, invece, gli eventi terrestri simultanei al giro di boa passano da $1{,}8$ a $8{,}2$ anni. Sommando $1{,}8 + 6{,}4 + 1{,}8 = 10$ anni anche il viaggiatore ritrova il tempo misurato sulla Terra.
 
