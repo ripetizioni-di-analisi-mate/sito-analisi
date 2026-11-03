@@ -72,7 +72,7 @@ La f.e.m. è negativa mentre la corrente cresce e positiva mentre la corrente di
 :::
 
 :::attenzione
-La f.e.m. autoindotta dipende dalla rapidità con cui varia la corrente, e *non* dal valore della corrente. Nella bobina con $L = 20\,\mathrm{mH}$ dell'esempio, all'istante iniziale la corrente è nulla e la f.e.m. vale $-12\,\mathrm{V}$, mentre tra $5{,}0\,\mathrm{ms}$ e $10\,\mathrm{ms}$ la corrente vale $3{,}0\,\mathrm{A}$ e la f.e.m. è nulla.
+La f.e.m. autoindotta dipende dalla rapidità con cui varia la corrente, e *non* dal valore della corrente. Nella bobina con $L = 20\,\mathrm{mH}$ dell'esempio, subito dopo l'istante iniziale la corrente è quasi nulla e la f.e.m. vale $-12\,\mathrm{V}$, mentre tra $5{,}0\,\mathrm{ms}$ e $10\,\mathrm{ms}$ la corrente vale $3{,}0\,\mathrm{A}$ e la f.e.m. è nulla.
 :::
 
 ## Induttanza di un solenoide
@@ -91,7 +91,7 @@ $$
 L = \frac{4\pi \cdot 10^{-7} \cdot 500^2 \cdot 3{,}14 \cdot 10^{-4}}{0{,}25}\,\mathrm{H} = 3{,}95 \cdot 10^{-4}\,\mathrm{H} \approx 0{,}39\,\mathrm{mH} .
 $$
 
-::grafico{assi=0 linee="0,1.2 6,1.2;0,-1.2 6,-1.2" vettori="0.6,0.5,2.2,0.5,B;0.6,-0.5,2.2,-0.5;3.4,0.5,5.0,0.5;3.4,-0.5,5.0,-0.5" etichette="0.25,1.2,⊙;0.75,1.2,⊙;1.25,1.2,⊙;1.75,1.2,⊙;2.25,1.2,⊙;2.75,1.2,⊙;3.25,1.2,⊙;3.75,1.2,⊙;4.25,1.2,⊙;4.75,1.2,⊙;5.25,1.2,⊙;5.75,1.2,⊙;0.25,-1.2,⊗;0.75,-1.2,⊗;1.25,-1.2,⊗;1.75,-1.2,⊗;2.25,-1.2,⊗;2.75,-1.2,⊗;3.25,-1.2,⊗;3.75,-1.2,⊗;4.25,-1.2,⊗;4.75,-1.2,⊗;5.25,-1.2,⊗;5.75,-1.2,⊗;6.5,0,ℓ" segmenti="6.2,1.2,6.2,-1.2" unicolore=1 xmin=-0.5 xmax=7 ymin=-1.9 ymax=1.9 uguale=1 titolo="Sezione di un solenoide: la corrente esce dal foglio nelle spire in alto ($\odot$) ed entra nel foglio in quelle in basso ($\otimes$); all'interno il campo $\vec{B}$ è uniforme e parallelo all'asse, e attraversa tutte le $N$ spire"}
+::grafico{assi=0 linee="0,1.2 6,1.2;0,-1.2 6,-1.2" vettori="0.6,0.5,2.2,0.5,B;0.6,-0.5,2.2,-0.5;3.4,0.5,5.0,0.5;3.4,-0.5,5.0,-0.5" etichette="0.25,1.2,⊙;0.75,1.2,⊙;1.25,1.2,⊙;1.75,1.2,⊙;2.25,1.2,⊙;2.75,1.2,⊙;3.25,1.2,⊙;3.75,1.2,⊙;4.25,1.2,⊙;4.75,1.2,⊙;5.25,1.2,⊙;5.75,1.2,⊙;0.25,-1.2,⊗;0.75,-1.2,⊗;1.25,-1.2,⊗;1.75,-1.2,⊗;2.25,-1.2,⊗;2.75,-1.2,⊗;3.25,-1.2,⊗;3.75,-1.2,⊗;4.25,-1.2,⊗;4.75,-1.2,⊗;5.25,-1.2,⊗;5.75,-1.2,⊗;3,-2.05,ℓ" segmenti="0,-1.75,6,-1.75;0,-1.6,0,-1.9;6,-1.6,6,-1.9" unicolore=1 xmin=-0.5 xmax=6.5 ymin=-2.4 ymax=1.9 uguale=1 titolo="Sezione di un solenoide: la corrente esce dal foglio nelle spire in alto ($\odot$) ed entra nel foglio in quelle in basso ($\otimes$); all'interno il campo $\vec{B}$ è uniforme e parallelo all'asse, e attraversa tutte le $N$ spire"}
 
 :::dimostrazione
 L'idea è calcolare il flusso autoconcatenato e dividerlo per la corrente. Sia $i$ la corrente nel solenoide. Per il campo di un solenoide, all'interno il campo è uniforme e vale $B = \mu_0\,\dfrac{N}{\ell}\,i$. Il campo è perpendicolare al piano di ogni spira, quindi il flusso attraverso una spira è il prodotto $B S$. Le spire sono $N$, perciò il flusso concatenato con tutto il solenoide è $N$ volte il flusso attraverso una spira:
@@ -286,7 +286,7 @@ L'energia di un induttore si trova quindi nel campo magnetico generato dalla cor
 $$
 u_B = \frac{0{,}50^2}{2 \cdot 4\pi \cdot 10^{-7}}\,\mathrm{J/m^3} = 9{,}9 \cdot 10^4\,\mathrm{J/m^3} ,
 $$
-e un centimetro cubo, cioè $1{,}0 \cdot 10^{-6}\,\mathrm{m^3}$, di questo campo contiene $9{,}9 \cdot 10^{-2}\,\mathrm{J}$.
+e in un centimetro cubo, cioè $1{,}0 \cdot 10^{-6}\,\mathrm{m^3}$, è immagazzinata l'energia $9{,}9 \cdot 10^{-2}\,\mathrm{J}$.
 
 :::dimostrazione
 Si consideri un solenoide di lunghezza $\ell$ con $N$ spire di area $S$, percorso dalla corrente $I$. Per i teoremi sull'**induttanza di un solenoide** e sull'**energia immagazzinata in un induttore**

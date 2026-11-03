@@ -82,7 +82,7 @@ Tutte le esperienze di Faraday rientrano in uno di questi casi. La legge che seg
 $$
 \mathcal{E}_m = -\frac{\Delta\Phi_B}{\Delta t} .
 $$
-La f.e.m. dipende dalla *rapidità* con cui varia il flusso, e non dal valore del flusso. Il significato del segno meno è dato dalla legge di Lenz. La legge serve a calcolare la f.e.m. in ogni situazione in cui si conosce il flusso. Per esempio, una bobina di $100$ spire di area $40\,\mathrm{cm^2}$ è perpendicolare a un campo che cresce da $0{,}10\,\mathrm{T}$ a $0{,}50\,\mathrm{T}$ in $0{,}20\,\mathrm{s}$. Il flusso concatenato varia di
+La f.e.m. dipende soltanto dalla *rapidità* con cui varia il flusso, quindi un flusso grande e costante dà una f.e.m. nulla. Il significato del segno meno è dato dalla legge di Lenz. La legge serve a calcolare la f.e.m. in ogni situazione in cui si conosce il flusso. Per esempio, una bobina di $100$ spire di area $40\,\mathrm{cm^2}$ è perpendicolare a un campo che cresce da $0{,}10\,\mathrm{T}$ a $0{,}50\,\mathrm{T}$ in $0{,}20\,\mathrm{s}$. Il flusso concatenato varia di
 $$
 \Delta\Phi_B = 100 \cdot 40 \cdot 10^{-4} \cdot (0{,}50 - 0{,}10)\,\mathrm{Wb} = 0{,}16\,\mathrm{Wb} ,
 $$
