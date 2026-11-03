@@ -17,7 +17,10 @@ const base = `/${materia}/${argomento}`;
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
   descrizione={SEO(lingua).svoltiListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
+  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), schema: [{
+    '@type': 'ItemList', name: `${arg.titolo} · ${t.sezioni['esercizi-svolti']}`, numberOfItems: voci.length,
+    itemListElement: voci.map(({ voce: e }, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.titolo, url: assoluto(link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)) })),
+  }], soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'] }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"
   precedente={precedente} successivo={successivo}
@@ -30,7 +33,7 @@ const base = `/${materia}/${argomento}`;
   {voci.length > 0 && (
     <ul class="elenco-esercizi">
       {voci.map(({ voce: e }) => (
-        <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}</span></a></li>
+        <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}{e.data.parole?.length > 0 && <span class="parole">{e.data.parole.join(' · ')}</span>}</span></a></li>
       ))}
     </ul>
   )}

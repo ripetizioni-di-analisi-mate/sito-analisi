@@ -1,0 +1,11 @@
+---
+// Index of definitions and theorems (English): only for subjects whose theory is translated.
+import Teoremi from '../../../viste/Teoremi.astro';
+import { getCollection } from 'astro:content';
+import { MATERIE } from '../../../data/materie';
+export async function getStaticPaths() {
+  const teoria = new Set((await getCollection('teoria_en')).map((v) => v.id.split('/')[0]));
+  return MATERIE.filter((m) => m.attiva && teoria.has(m.slug)).map((m) => ({ params: { materia: m.slug } }));
+}
+---
+<Teoremi lingua="en" materia={Astro.params.materia!} />

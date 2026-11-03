@@ -67,6 +67,8 @@ export async function GET() {
       mIt = piuRecente(mIt, t.it, lsIt, ldIt); mEn = piuRecente(mEn, t.en, lsEn, ldEn);
     }
     pagine[materia].dIt = mIt; pagine[materia].dEn = mEn;
+    // indice analitico: teoremi e definizioni della materia (in inglese se la teoria è tradotta)
+    if (teoria.some((v) => v.id.startsWith(`${m.slug}/`))) due(`/${m.slug}/teoremi`, 0.7, teoriaEn.some((v) => v.id.startsWith(`${m.slug}/`)), mIt, mEn);
     tuttoIt = piuRecente(tuttoIt, mIt); tuttoEn = piuRecente(tuttoEn, mEn);
   }
   pagine[casa].dIt = tuttoIt; pagine[casa].dEn = tuttoEn;

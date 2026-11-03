@@ -288,6 +288,22 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .sommario-pagina a { color: var(--inchiostro); text-decoration: none; }
 .sommario-pagina a:hover { color: var(--accento); text-decoration: underline; }
 
+/* ---------- indice analitico (teoremi e definizioni di una materia) ---------- */
+.indice-analitico-salti { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; margin: 1.1rem 0 0.5rem; font-family: var(--ui); font-size: 0.85rem; }
+.indice-analitico-salti a { color: var(--inchiostro-2); text-decoration: none; }
+.indice-analitico-salti a:hover { color: var(--accento); text-decoration: underline; }
+.indice-analitico { margin-top: 1.6rem; scroll-margin-top: 5rem; }
+.indice-analitico h2 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.indice-analitico h2 a { color: var(--inchiostro); text-decoration: none; }
+.indice-analitico h2 a:hover { color: var(--accento); }
+.indice-analitico ul { list-style: none; padding: 0; margin: 0; columns: 2 20rem; column-gap: 2rem; }
+.indice-analitico li { break-inside: avoid; padding: 0.22rem 0; line-height: 1.35; display: grid; grid-template-columns: 5.6rem 1fr; align-items: baseline; }
+.indice-analitico li a { color: var(--inchiostro); text-decoration: none; }
+.indice-analitico li a:hover { color: var(--accento); text-decoration: underline; }
+.indice-analitico .tipo { font-family: var(--ui); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); }
+.indice-analitico .tipo.teorema, .indice-analitico .tipo.proposizione { color: var(--accento); }
+.elenco-esercizi .parole { display: block; font-family: var(--ui); font-size: 0.8rem; color: var(--inchiostro-2); margin-top: 0.15rem; }
+
 /* ---------- salto rapido fra gli esercizi di una scheda ---------- */
 .salta-esercizi { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: baseline; }
 .salta-esercizi a { text-decoration: none; color: var(--accento); border: 1px solid var(--riga); border-radius: 999px; padding: 0.15rem 0.7rem; }

@@ -1,0 +1,63 @@
+---
+// Indice analitico di una materia: tutte le definizioni e i teoremi della teoria, argomento per argomento,
+// ciascuno con il collegamento al suo riquadro. Serve a chi cerca un teorema per nome (anche da Google).
+import Base from '../layouts/Base.astro';
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto } from '../lib/seo';
+import { materiaL, argomentoL, link, type Lingua } from '../i18n';
+import { indiceAnalitico } from '../lib/indice-analitico';
+interface Props { lingua: Lingua; materia: string }
+const { lingua, materia } = Astro.props;
+const en = lingua === 'en';
+const m = materiaL(lingua, materia);
+const indice = await indiceAnalitico(lingua, materia, m.argomenti.map((a) => a.slug));
+const tutte = indice.flatMap((a) => a.voci);
+const nDef = tutte.filter((v) => v.tipo === 'definizione').length;
+const nTeo = tutte.length - nDef;
+// Nella descrizione per Google i teoremi con un nome proprio (Teorema di …, Criterio di …) vengono prima.
+const nominato = (t: string) => /^(Teorema|Criterio|Lemma|Formula|Regola|Theorem|Test|Rule)\b.*\b(di|del|della|dei|degli|of)\s+[A-ZÀ-Ü]/.test(t) || /'s (theorem|test|rule|formula|criterion)/i.test(t);
+const teorema = (t: string) => /^Teorema di|theorem$/i.test(t);
+const primi = [...tutte.filter((v) => v.tipo !== 'definizione' && nominato(v.titolo) && teorema(v.titolo)), ...tutte.filter((v) => v.tipo !== 'definizione' && nominato(v.titolo)), ...tutte.filter((v) => v.tipo !== 'definizione')].map((v) => v.titolo).filter((x, i, a) => a.indexOf(x) === i);
+const haAltra = (await indiceAnalitico(en ? 'it' : 'en', materia, m.argomenti.map((a) => a.slug))).length > 0;
+const ETICHETTA = en
+  ? { definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition' }
+  : { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' };
+const href = (a: string, ancora?: string) => link(lingua, `/${materia}/${a}/teoria`) + (ancora ? `#${ancora}` : '');
+const sommario = en
+  ? `The ${nDef} definitions and ${nTeo} theorems of the theory of ${m.titolo}, in the order of the topics. Each entry links to its box in the theory page.`
+  : `Le ${nDef} definizioni e i ${nTeo} teoremi della teoria di ${m.titolo}, nell'ordine degli argomenti. Ogni voce porta al suo riquadro nella pagina di teoria.`;
+// Elenco per i motori di ricerca: gli argomenti con le loro voci, come indice del corso.
+const schema = [{
+  '@type': 'ItemList',
+  name: en ? `Definitions and theorems of ${m.titolo}` : `Teoremi e definizioni di ${m.titolo}`,
+  numberOfItems: tutte.length,
+  itemListElement: indice.flatMap((a) => a.voci).slice(0, 400).map((v, i) => ({ '@type': 'ListItem', position: i + 1, name: v.titolo,
+    url: assoluto(href(indice.find((x) => x.voci.includes(v))!.argomento, v.ancora)) })),
+  isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso` },
+  author: { '@id': `${SITO}/#carmine` },
+}];
+---
+<Base
+  titolo={en ? `Definitions and theorems · ${m.titolo}` : `Teoremi e definizioni · ${m.titolo}`}
+  descrizione={SEO(lingua).teoremiDescr(m.titolo, nDef, nTeo, primi)}
+  seo={{ titolo: SEO(lingua).teoremi(m.titolo, m.breve), schema, soloQuestaLingua: !haAltra }}
+  percorso={[{ titolo: en ? 'Definitions and theorems' : 'Teoremi e definizioni' }]}
+  materia={materia} lingua={lingua}
+>
+  <p class="sopratitolo">{en ? 'Index' : 'Indice analitico'}</p>
+  <h1>{en ? `Definitions and theorems of ${m.titolo}` : `Teoremi e definizioni di ${m.titolo}`}</h1>
+  <p class="sommario">{sommario}</p>
+  <nav class="indice-analitico-salti" aria-label={en ? 'Topics' : 'Argomenti'}>
+    {indice.map((a) => <a href={`#${a.argomento}`}>{argomentoL(lingua, materia, a.argomento).breve}</a>)}
+  </nav>
+  {indice.map((a) => (
+    <section class="indice-analitico" id={a.argomento}>
+      <h2><a href={href(a.argomento)}>{argomentoL(lingua, materia, a.argomento).titolo}</a></h2>
+      <ul>
+        {a.voci.map((v) => (
+          <li><span class:list={['tipo', v.tipo]}>{ETICHETTA[v.tipo]}</span> <a href={href(a.argomento, v.ancora)}>{v.titolo}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

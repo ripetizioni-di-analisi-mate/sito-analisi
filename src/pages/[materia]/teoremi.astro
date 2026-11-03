@@ -1,0 +1,11 @@
+---
+// Indice analitico della materia: teoremi e definizioni con il collegamento al riquadro della teoria.
+import Teoremi from '../../viste/Teoremi.astro';
+import { getCollection } from 'astro:content';
+import { MATERIE } from '../../data/materie';
+export async function getStaticPaths() {
+  const teoria = new Set((await getCollection('teoria')).map((v) => v.id.split('/')[0]));
+  return MATERIE.filter((m) => m.attiva && teoria.has(m.slug)).map((m) => ({ params: { materia: m.slug } }));
+}
+---
+<Teoremi lingua="it" materia={Astro.params.materia!} />

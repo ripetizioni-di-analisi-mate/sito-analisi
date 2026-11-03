@@ -6,23 +6,39 @@ import type { Lingua } from '../i18n';
 // alla più breve (le parole cercate restano sempre in testa); se nessuna ci sta, l'ultima.
 const LIMITE = 65;
 const scegli = (...varianti: string[]) => varianti.find((v) => v.length <= LIMITE) ?? varianti[varianti.length - 1];
+// Frase seguita da un elenco di nomi: si aggiungono nomi finché la descrizione resta entro i 155 caratteri.
+const conNomi = (inizio: string, nomi: string[]) => {
+  let s = inizio;
+  let k = 0;
+  for (const n of nomi) { const t = `${s}${k ? ', ' : ': '}${n}`; if (t.length > 153) continue; s = t; k++; }
+  return `${s}.`;
+};
 
+// Nomi degli argomenti come li cercano gli studenti, quando il titolo del capitolo è diverso
+// («derivate esercizi svolti», «integrali esercizi svolti»): usati solo nei titoli per i motori.
+const ARGOMENTI_CERCATI: Record<string, string> = {
+  'Calcolo differenziale e Taylor': 'Derivate e formula di Taylor',
+  'Calcolo integrale': 'Integrali',
+};
+const arg = (a: string) => ARGOMENTI_CERCATI[a] ?? a;
 const IT = {
-  home: 'Teoria ed esercizi svolti per le materie scientifiche | Ripetizioni di Analisi',
-  homeDescr: "Teoria, teoremi con dimostrazione ed esercizi svolti passo dopo passo di Precorso, Analisi 1 e 2, Algebra lineare, Fisica 1 e 2, Matematica generale, Matematica del 5° anno e materie per i concorsi.",
+  home: 'Matematica e fisica: teoria ed esercizi svolti | Ripetizioni di Analisi',
+  homeDescr: "Matematica e fisica per università, superiori e concorsi: teoria, teoremi con dimostrazione ed esercizi svolti passo dopo passo di Analisi 1 e 2, Algebra lineare, Fisica 1 e 2, Matematica generale e Precorso.",
   materia: (m: string) => scegli(`${m}: teoria ed esercizi svolti per l'esame | Ripetizioni di Analisi`, `${m}: teoria ed esercizi svolti per l'esame`, `${m}: teoria ed esercizi svolti`),
   materiaDescr: (m: string, d: string, n: number) => `${m}: ${n} argomenti con teoria, dimostrazioni, esercizi svolti passo dopo passo ed esercizi con soluzione. ${d}`,
-  teoria: (a: string, m: string) => scegli(`${a}: teoria, definizioni e teoremi | ${m}`, `${a}: teoria e teoremi | ${m}`, `${a}: teoria e teoremi`),
-  svoltiLista: (a: string, m: string) => scegli(`${a}: esercizi svolti passo dopo passo | ${m}`, `${a}: esercizi svolti | ${m}`, `${a}: esercizi svolti`),
+  teoria: (a: string, m: string) => scegli(`${arg(a)}: teoria, definizioni e teoremi | ${m}`, `${arg(a)}: teoria e teoremi | ${m}`, `${arg(a)}: teoria e teoremi`),
+  svoltiLista: (a: string, m: string) => scegli(`${arg(a)}: esercizi svolti passo dopo passo | ${m}`, `${arg(a)}: esercizi svolti | ${m}`, `${arg(a)}: esercizi svolti`),
   svoltiListaDescr: (a: string, m: string, n: number) => `${n} schede di esercizi svolti su ${a.toLowerCase()} (${m}), divise per tipologia: ogni passaggio è scritto e spiegato a parole.`,
   scheda: (s: string, m: string) => scegli(`${s}: esercizi svolti | ${m}`, `${s}: esercizi svolti`),
   schedaDescr: (s: string, a: string, m: string) => `${s}: esercizi svolti passo dopo passo, con il calcolo e la spiegazione di ogni passaggio. ${a}, ${m}.`,
-  dafareLista: (a: string, m: string) => scegli(`${a}: esercizi con soluzioni | ${m}`, `${a}: esercizi con soluzioni`),
+  dafareLista: (a: string, m: string) => scegli(`${arg(a)}: esercizi con soluzioni | ${m}`, `${arg(a)}: esercizi con soluzioni`),
   dafareListaDescr: (a: string, m: string, n: number) => `${n} esercizi da svolgere su ${a.toLowerCase()} (${m}), con la soluzione da controllare.`,
   // il nome breve della materia distingue esercizi con lo stesso titolo in materie diverse
   dafare: (s: string, m: string) => scegli(`${s}: esercizio con soluzione | ${m}`, `${s}: esercizio | ${m}`, `${s}: esercizio con soluzione`),
   dafareDescr: (s: string, a: string, m: string) => `Esercizio di ${m} su ${a.toLowerCase()}: ${s}. Con la soluzione per verificare il risultato.`,
   livello: 'Università',
+  teoremi: (m: string, b: string) => scegli(`Teoremi e definizioni di ${m}: l'elenco completo | Ripetizioni di Analisi`, `Teoremi e definizioni di ${m}: l'elenco completo`, `Teoremi e definizioni di ${b}`),
+  teoremiDescr: (m: string, nd: number, nt: number, primi: string[]) => conNomi(`${nt} teoremi e ${nd} definizioni di ${m} con il collegamento alla teoria`, primi),
 };
 // Fuori dall'Italia «Analisi matematica» si cerca come «Calculus»: nei titoli inglesi per i motori
 // compare il nome usato all'estero, con il nome del corso fra parentesi nella pagina della materia.
@@ -51,5 +67,7 @@ const EN: typeof IT = {
   dafare: (s, m) => scegli(`${s}: exercise with solution | ${cercato(m)}`, `${s}: exercise | ${cercato(m)}`, `${s}: exercise with solution`),
   dafareDescr: (s, a, m) => `${cercato(m)} exercise on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
   livello: 'University',
+  teoremi: (m, b) => scegli(`${cercato(m)}: all definitions and theorems | Ripetizioni di Analisi`, `${cercato(m)}: all definitions and theorems`, `${cercato(b)}: definitions and theorems`),
+  teoremiDescr: (m, nd, nt, primi) => conNomi(`${nt} theorems and ${nd} definitions of ${cercato(m)}, linked to the theory`, primi),
 };
 export const SEO = (l: Lingua) => (l === 'en' ? EN : IT);

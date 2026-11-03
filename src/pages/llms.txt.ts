@@ -12,6 +12,7 @@ export async function GET() {
   t += `Ogni argomento ha tre sezioni: teoria (definizioni, teoremi con ipotesi esplicite e dimostrazioni, esempi), esercizi svolti passo dopo passo divisi per tipologia (il calcolo e sotto la spiegazione a parole di ogni passaggio), esercizi da fare con la soluzione. Senza account sono liberi i primi paragrafi della teoria, le prime tre schede di esercizi svolti di ogni argomento e le tracce degli esercizi; il resto si sblocca con l'acquisto della materia (pagamento una tantum). Oltre ai materiali scritti ci sono videocorsi preregistrati, corsi di gruppo dal vivo e lezioni individuali online con Carmine.\n\n`;
   for (const m of attive) {
     t += `## ${m.titolo}\n\n${m.descrizione}\n\n- [${m.titolo}: indice degli argomenti](${assoluto(`/${m.slug}`)})\n`;
+    if ([...teoria.keys()].some((id) => id.startsWith(`${m.slug}/`))) t += `- [${m.titolo}: tutti i teoremi e le definizioni, con il collegamento all'enunciato](${assoluto(`/${m.slug}/teoremi`)})\n`;
     for (const a of m.argomenti) {
       const id = `${m.slug}/${a.slug}`;
       if (!teoria.has(id)) continue;

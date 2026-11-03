@@ -9,7 +9,7 @@ const voci = (await getCollection('formulari'))
   .filter((v) => (FORMULARI as readonly string[]).includes(v.id))
   .sort((a, b) => FORMULARI.indexOf(a.id as any) - FORMULARI.indexOf(b.id as any));
 ---
-<Base titolo="Formulari gratuiti di Analisi matematica" descrizione="Formulari gratuiti di Precorso, Analisi matematica 1 e Analisi matematica 2, con le condizioni di validità di ogni formula: si leggono online e si scaricano in PDF." lingua="it" percorso={[{ titolo: 'Formulari' }]} seo={{ soloQuestaLingua: true }}>
+<Base titolo="Formulari gratuiti di Analisi matematica" descrizione="Formulari gratuiti di Precorso, Analisi matematica 1 e Analisi matematica 2, con le condizioni di validità di ogni formula: si leggono online e si scaricano in PDF." lingua="it" percorso={[{ titolo: 'Formulari' }]} seo={{ soloQuestaLingua: true, senzaInglese: true }}>
   <p class="sopratitolo">Gratis</p>
   <h1>Formulari</h1>
   <p class="sommario">Le formule di ogni materia con le loro condizioni di validità, nell'ordine degli argomenti dell'esame. Si leggono qui per intero; il PDF si scarica con un account gratuito.</p>
