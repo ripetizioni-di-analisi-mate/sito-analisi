@@ -176,7 +176,7 @@ Il verso di rotazione si trova applicando la regola della mano destra in un punt
 - in un campo **entrante** ($\otimes$) una carica positiva gira in verso antiorario e una carica negativa in verso orario;
 - in un campo **uscente** ($\odot$) una carica positiva gira in verso orario e una carica negativa in verso antiorario.
 
-Nella figura del moto circolare la carica positiva, nel punto più basso, si muove verso sinistra. Con il pollice lungo $\vec{v}$ e l'indice verso chi guarda, lungo $\vec{B}$, il medio punta verso il centro, quindi la carica gira in verso orario. Un elettrone nella stessa posizione e con la stessa velocità subirebbe una forza verso il basso, e girerebbe in verso antiorario.
+Nella figura del moto circolare la carica positiva, nel punto più basso, si muove verso sinistra. Con il pollice della mano destra lungo $\vec{v}$ e le altre dita verso chi guarda, lungo $\vec{B}$, il palmo è rivolto verso il centro, quindi la carica gira in verso orario. Un elettrone nella stessa posizione e con la stessa velocità subirebbe una forza verso il basso, e girerebbe in verso antiorario.
 :::
 
 :::esempio{#raggio-ed-energia titolo="Raggio di una particella accelerata"}
