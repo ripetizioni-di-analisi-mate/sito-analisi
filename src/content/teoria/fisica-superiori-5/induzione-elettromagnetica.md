@@ -193,7 +193,7 @@ perché la somma delle variazioni del flusso nei singoli intervalli è la variaz
 ## Forza elettromotrice cinetica
 
 :::richiamo{titolo="Forza di Lorentz"}
-Su una carica $q$ che si muove con velocità $\vec{v}$ in un campo magnetico $\vec{B}$ agisce la forza $\vec{F} = q\,\vec{v} \times \vec{B}$, di modulo $q v B \sin\alpha$, dove $\alpha$ è l'angolo tra $\vec{v}$ e $\vec{B}$. Su un filo rettilineo di lunghezza $\ell$ percorso dalla corrente $I$ agisce la forza $\vec{F} = I\,\vec{\ell} \times \vec{B}$. Si rimanda all'argomento sul campo magnetico e la forza di Lorentz.
+Su una carica $q$ che si muove con velocità $\vec{v}$ in un campo magnetico $\vec{B}$ agisce la forza $\vec{F} = q\,\vec{v} \times \vec{B}$, di modulo $|q|\,v B \sin\alpha$, dove $\alpha$ è l'angolo tra $\vec{v}$ e $\vec{B}$. Su un filo rettilineo di lunghezza $\ell$ percorso dalla corrente $I$ agisce la forza $\vec{F} = I\,\vec{\ell} \times \vec{B}$. Si rimanda all'argomento sul campo magnetico e la forza di Lorentz.
 :::
 
 ::::teorema{#fem-cinetica titolo="F.e.m. di una sbarretta in moto"}
