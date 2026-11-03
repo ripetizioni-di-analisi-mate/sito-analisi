@@ -159,6 +159,59 @@
       ],
       "annullati": [],
       "proposte": []
+    },
+    {
+      "giorno": "2026-11-03",
+      "punteggio": null,
+      "aree": {},
+      "casi": 0,
+      "errori": 0,
+      "areaDelGiorno": "quota",
+      "problemi": [
+        "Il banco di oggi non si è potuto leggere: la richiesta di permesso per /pi/prove è scaduta senza risposta (attività senza nessuno collegato)",
+        "Le informazioni complete sul sito (circa 2.500 token) partivano anche per domande di studio con parole come «costante», «compreso», «comprendere», «materiale», «contatto», «esito», «free fall»: in 13 frasi di studio di prova su 17",
+        "Il banco non registrava quanti token costa ogni domanda"
+      ],
+      "interventi": [
+        {
+          "titolo": "Informazioni sul sito solo quando servono",
+          "area": "quota",
+          "cosa": "il riconoscimento delle domande sul sito guarda parole intere («costa», «compro», «pagamento», «account», …) invece di pezzi di parola",
+          "perStudente": "una domanda di studio costa circa 1.150 token invece di 3.600: con la stessa quota gratuita Pi risponde a più studenti",
+          "verifica": "caso fisso quota-costante (token in entrata sotto 1.500, nessun prezzo); casi sito-* ancora con le informazioni",
+          "commit": "4f09d45",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Token per domanda nel banco",
+          "area": "banco",
+          "cosa": "ogni prova del mattino salva i token in entrata stimati, visibili su /pi/prove",
+          "perStudente": "si misura ogni giorno quanto costa una risposta e si taglia dove serve",
+          "verifica": "colonna «token in entrata» su /pi/prove da domani",
+          "commit": "4f09d45",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Caso quota-costante",
+          "area": "banco",
+          "cosa": "domanda nuova e fissa sulla costante di integrazione, piena di parole che prima facevano scattare le informazioni sul sito",
+          "perStudente": "si controlla che Pi spieghi la matematica senza parlare del sito",
+          "verifica": "banco di domani",
+          "commit": "4f09d45",
+          "esito": "in attesa"
+        }
+      ],
+      "esitiIeri": [
+        {
+          "titolo": "Risposte complete, verifica del risultato, casi di calcolo più difficili, banco salvato caso per caso",
+          "esito": "in attesa",
+          "dettaglio": "banco non leggibile da qui: esito rimandato; prova locale ancora corretta (streaming, riserva, pagina /pi/prove)"
+        }
+      ],
+      "annullati": [],
+      "proposte": [
+        "Per leggere il banco ogni mattina serve che il permesso di lettura di ripetizionidianalisi.com/pi/prove sia dato in modo permanente («consenti sempre»): stamattina la richiesta è scaduta senza risposta"
+      ]
     }
   ]
 }
