@@ -1,38 +1,51 @@
 ---
-// Elenco gratuito delle domande a tempo di tutte le materie (03/11/2026, richiesta di Carmine: quiz e domande nella riga «Gratis» della home).
-// Solo italiano. Per ogni materia: gli argomenti con il numero di domande, le domande di ripasso e la simulazione.
-import { getCollection } from 'astro:content';
+// Domande a tempo di tutte le materie (gratis). 03/11/2026: versione A scelta da Carmine fra tre (B elenco a fisarmonica, C tasti delle materie):
+// una scheda per materia con «Ripasso su tutto» e la simulazione; gli argomenti si aprono con «Scegli un argomento». Solo italiano.
 import Base from '../layouts/Base.astro';
-import { MATERIE } from '../data/materie';
 import { RIPASSO } from '../data/livelli';
-
-const domande = await getCollection('domande');
-const conta = (prefisso: string) => domande.filter((v) => v.id.startsWith(prefisso)).length;
-const materie = MATERIE.filter((m) => m.attiva && conta(`${m.slug}/`) > 0);
-const gruppi = [...new Set(materie.map((m) => m.gruppo))];
-const totale = materie.reduce((s, m) => s + conta(`${m.slug}/`), 0);
+import { elencoDomande } from '../lib/domande-elenco';
+const { materie, gruppi, totale } = await elencoDomande();
 ---
 <Base titolo="Domande a tempo: quiz gratuiti per materia e argomento" descrizione={`Quiz a risposta multipla gratuiti su ${materie.length} materie: quattro risposte, due minuti per domanda e la spiegazione dopo ogni risposta. Anche senza account.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]} seo={{ soloQuestaLingua: true }}>
   <p class="sopratitolo">Gratis</p>
   <h1>Domande a tempo</h1>
-  <p class="sommario">{totale} domande a risposta multipla, divise per materia e per argomento. Ogni domanda ha quattro risposte e due minuti di tempo; dopo la conferma compare la spiegazione. Si usano anche senza account; con l'account le risposte corrette danno punti EXP.</p>
+  <p class="sommario">{totale} domande a risposta multipla: quattro risposte, due minuti per domanda e la spiegazione dopo la conferma. Si usano anche senza account.</p>
   {gruppi.map((g) => (
     <>
-      <h2 class="gruppo-domande">{g}</h2>
-      <ol class="griglia-argomenti griglia-domande">
+      <p class="dta-gruppo">{g}</p>
+      <ul class="dta-griglia">
         {materie.filter((m) => m.gruppo === g).map((m) => (
           <li style={`--accento: ${m.colore}`}>
-            <h3><a href={`/${m.slug}/${RIPASSO}/domande`}>{m.titolo}</a></h3>
-            <nav aria-label={m.titolo}>
-              {m.argomenti.filter((a) => conta(`${m.slug}/${a.slug}/`) > 0).map((a) => (
-                <a href={`/${m.slug}/${a.slug}/domande`}>{a.titolo} ({conta(`${m.slug}/${a.slug}/`)})</a>
-              ))}
-              <a class="ripasso-domande" href={`/${m.slug}/${RIPASSO}/domande`}>Domande di ripasso su tutti gli argomenti</a>
-              <a class="ripasso-domande" href={`/${m.slug}/simulazione`}>{g === 'Concorsi' ? 'Simulazione della prova a quiz' : 'Simulazione d\'esame'}</a>
-            </nav>
+            <h3>{m.titolo}</h3>
+            <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
+            <div class="dta-tasti">
+              <a class="dta-primario" href={`/${m.slug}/${RIPASSO}/domande`}>Ripasso su tutto</a>
+              <a class="dta-secondario" href={`/${m.slug}/simulazione`}>{m.concorsi ? 'Simulazione a quiz' : 'Simulazione d\'esame'}</a>
+            </div>
+            <details>
+              <summary>Scegli un argomento</summary>
+              <ol>
+                {m.argomenti.map((a) => <li><a href={`/${m.slug}/${a.slug}/domande`}>{a.titolo}</a></li>)}
+              </ol>
+            </details>
           </li>
         ))}
-      </ol>
+      </ul>
     </>
   ))}
 </Base>
+<style>
+  .dta-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
+  .dta-griglia { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); align-items: start; }
+  .dta-griglia > li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); padding: 0.9rem 1rem; background: #fff; }
+  .dta-griglia h3 { margin: 0; font-size: 1.2rem; color: var(--accento); }
+  .dta-conti { margin: 0.2rem 0 0.7rem; font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
+  .dta-tasti { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dta-tasti a { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; text-decoration: none; border-radius: 999px; padding: 0.3rem 0.8rem; }
+  .dta-primario { background: var(--accento); color: #fff; }
+  .dta-secondario { color: var(--accento); background: color-mix(in srgb, var(--accento) 11%, transparent); }
+  details { margin-top: 0.7rem; border-top: 1px solid var(--riga); padding-top: 0.5rem; font-family: var(--ui); font-size: 0.9rem; }
+  summary { cursor: pointer; color: var(--inchiostro-2); }
+  details ol { margin: 0.4rem 0 0; padding-left: 1.3rem; display: grid; gap: 0.2rem; }
+  details a { color: var(--inchiostro); }
+</style>
