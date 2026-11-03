@@ -92,7 +92,7 @@ dove $h$ è una nuova costante, oggi detta **costante di Planck**:
 $$
 h = 6{,}63 \cdot 10^{-34}\,\mathrm{J\cdot s} .
 $$
-È un postulato. L'energia di un oscillatore non varia quindi con continuità, ma a salti, e la quantità minima $hf$ che può essere emessa o assorbita si chiama **quanto di energia**. Con questa ipotesi Planck ricavò una formula che coincide con le curve sperimentali a ogni temperatura. Per un oscillatore con frequenza $f = 5{,}00 \cdot 10^{14}\,\mathrm{Hz}$, che corrisponde alla luce visibile, il quanto è
+È un postulato. L'energia di un oscillatore varia quindi a salti, e la quantità minima $hf$ che può essere emessa o assorbita si chiama **quanto di energia**. Con questa ipotesi Planck ricavò una formula che coincide con le curve sperimentali a ogni temperatura. Per un oscillatore con frequenza $f = 5{,}00 \cdot 10^{14}\,\mathrm{Hz}$, che corrisponde alla luce visibile, il quanto è
 $$
 hf = 6{,}63 \cdot 10^{-34} \cdot 5{,}00 \cdot 10^{14}\,\mathrm{J} \approx 3{,}3 \cdot 10^{-19}\,\mathrm{J} .
 $$
@@ -116,7 +116,7 @@ Un pendolo che oscilla con frequenza $f = 1{,}0\,\mathrm{Hz}$ e ha energia $E = 
 $$
 n = \frac{E}{hf} = \frac{0{,}050}{6{,}63 \cdot 10^{-34}} \approx 7{,}5 \cdot 10^{31} .
 $$
-Un salto di un quanto cambia l'energia di una parte su $10^{31}$, quantità che nessuna misura può rivelare. Per questo nei corpi macroscopici l'energia appare continua, e i quanti diventano visibili solo per oscillatori atomici, con frequenze di $10^{14}$ o $10^{15}\,\mathrm{Hz}$.
+Un salto di un quanto cambia l'energia di circa una parte su $10^{32}$, quantità che nessuna misura può rivelare. Per questo nei corpi macroscopici l'energia appare continua, e i quanti diventano visibili solo per oscillatori atomici, con frequenze di $10^{14}$ o $10^{15}\,\mathrm{Hz}$.
 :::
 
 ## Effetto fotoelettrico: i fatti sperimentali
@@ -144,8 +144,8 @@ Gli esperimenti con la fotocella, ripetuti con metalli diversi e con luce di fre
 
 - Per ogni metallo esiste una **frequenza di soglia** $f_0$. Con luce di frequenza minore di $f_0$ non viene emesso alcun elettrone, per quanto la luce sia intensa; con frequenza maggiore di $f_0$ l'emissione avviene anche con luce debolissima.
 - L'energia cinetica massima dei fotoelettroni, misurata dal potenziale di arresto, cresce linearmente con la frequenza e *non* dipende dall'intensità della luce.
-- L'intensità della luce cambia solo il numero di elettroni emessi al secondo: la corrente di saturazione è proporzionale all'intensità.
-- L'emissione è immediata: gli elettroni escono entro $10^{-9}\,\mathrm{s}$ dall'arrivo della luce, anche se la luce è molto debole.
+- L'intensità della luce cambia solo il numero di elettroni emessi al secondo, e la corrente di saturazione è proporzionale all'intensità.
+- L'emissione è immediata. Gli elettroni escono entro $10^{-9}\,\mathrm{s}$ dall'arrivo della luce, anche se la luce è molto debole.
 
 ::grafico{f="max(0,4*(1-exp(-(x+1.2)/0.5)));max(0,2*(1-exp(-(x+1.2)/0.5)))" punti="-1.2,0,pieno,−V₀" xmin=-2 xmax=4 ymin=-0.5 ymax=5 nomi="V,I" legenda="\text{luce più intensa};\text{luce meno intensa}" titolo="Corrente $I$ in funzione della tensione $V$ tra anodo e catodo, con luce della stessa frequenza e due intensità: la corrente di saturazione è proporzionale all'intensità, il potenziale di arresto $V_0$ è lo stesso"}
 
@@ -168,7 +168,7 @@ Nel 1905 Einstein suppose che la luce di frequenza $f$ sia formata da pacchetti 
 $$
 E = h f = \frac{h c}{\lambda} .
 $$
-È un postulato, che estende l'ipotesi di Planck: l'energia della radiazione è quantizzata anche quando la radiazione si propaga, e un fotone viene assorbito o emesso tutto insieme. In un fascio di luce l'intensità è proporzionale al numero di fotoni che attraversano l'unità di superficie in un secondo. Un fotone di luce verde con $\lambda = 500\,\mathrm{nm}$ ha energia
+È un postulato, che estende l'ipotesi di Planck alla radiazione stessa. Anche quando la radiazione si propaga la sua energia è quantizzata, e un fotone viene assorbito o emesso tutto insieme. In un fascio di luce l'intensità è proporzionale al numero di fotoni che attraversano l'unità di superficie in un secondo. Un fotone di luce verde con $\lambda = 500\,\mathrm{nm}$ ha energia
 $$
 E = \frac{6{,}63 \cdot 10^{-34} \cdot 3{,}00 \cdot 10^{8}}{5{,}00 \cdot 10^{-7}}\,\mathrm{J} \approx 3{,}98 \cdot 10^{-19}\,\mathrm{J} \approx 2{,}49\,\mathrm{eV} ,
 $$
@@ -192,7 +192,7 @@ Quando un fotone di frequenza $f$ viene assorbito da un elettrone di un metallo 
 $$
 K_{\max} = h f - W_0 .
 $$
-L'equazione segue dall'ipotesi dei fotoni e dalla conservazione dell'energia. L'elettrone riceve tutta l'energia $hf$ del fotone e ne spende almeno $W_0$ per uscire dal metallo, quindi gli resta al più l'energia cinetica $hf - W_0$, che è il valore raggiunto dagli elettroni meno legati. Su una lastra di sodio ($W_0 = 2{,}30\,\mathrm{eV}$) illuminata con luce di $400\,\mathrm{nm}$, i fotoni hanno energia $\dfrac{1240}{400}\,\mathrm{eV} = 3{,}10\,\mathrm{eV}$, perciò $K_{\max} = 3{,}10\,\mathrm{eV} - 2{,}30\,\mathrm{eV} = 0{,}80\,\mathrm{eV}$ e il potenziale di arresto è $V_0 = 0{,}80\,\mathrm{V}$.
+L'equazione segue dall'ipotesi dei fotoni e dalla conservazione dell'energia. L'elettrone riceve tutta l'energia $hf$ del fotone e ne spende almeno $W_0$ per uscire dal metallo, quindi gli resta al più l'energia cinetica $hf - W_0$, che è il valore raggiunto dagli elettroni meno legati. Su una lastra di sodio ($W_0 = 2{,}30\,\mathrm{eV}$) illuminata con luce di $400\,\mathrm{nm}$, i fotoni hanno energia $\dfrac{hc}{\lambda} \approx 3{,}11\,\mathrm{eV}$, perciò $K_{\max} \approx 3{,}11\,\mathrm{eV} - 2{,}30\,\mathrm{eV} = 0{,}81\,\mathrm{eV}$ e il potenziale di arresto è $V_0 \approx 0{,}81\,\mathrm{V}$.
 :::
 
 :::definizione{#frequenza-di-soglia titolo="Frequenza e lunghezza d'onda di soglia"}
@@ -217,7 +217,7 @@ quindi la luce azzurra e violetta estrae elettroni dal sodio, la luce gialla e r
 :::
 
 :::attenzione{#intensita-ed-energia}
-L'intensità della luce e l'energia dei fotoni sono grandezze diverse. Raddoppiare l'intensità non raddoppia l'energia cinetica dei fotoelettroni. Per esempio, sul sodio, luce di $400\,\mathrm{nm}$ dà $K_{\max} = 0{,}80\,\mathrm{eV}$ qualunque sia la sua intensità; con intensità doppia raddoppia solo la corrente di saturazione. Per aumentare $K_{\max}$ occorre aumentare la frequenza.
+L'intensità della luce e l'energia dei fotoni sono grandezze diverse. Raddoppiare l'intensità non raddoppia l'energia cinetica dei fotoelettroni. Per esempio, sul sodio, luce di $400\,\mathrm{nm}$ dà $K_{\max} \approx 0{,}81\,\mathrm{eV}$ qualunque sia la sua intensità; con intensità doppia raddoppia solo la corrente di saturazione. Per aumentare $K_{\max}$ occorre aumentare la frequenza.
 :::
 
 ## Potenziale di arresto e misura della costante di Planck
@@ -259,11 +259,11 @@ Un fotone di lunghezza d'onda $\lambda$ ha una quantità di moto di modulo
 $$
 p = \frac{h}{\lambda} = \frac{h f}{c} ,
 $$
-diretta nel verso di propagazione della luce. Il fotone si muove alla velocità $c$, e una particella con massa non nulla non può raggiungerla; il fotone ha perciò massa nulla. La quantità di moto di un fotone di luce visibile è molto piccola: a $500\,\mathrm{nm}$ si ha
+diretta nel verso di propagazione della luce. Il fotone si muove alla velocità $c$, e una particella con massa non nulla non può raggiungerla; il fotone ha perciò massa nulla. La quantità di moto di un fotone di luce visibile è molto piccola. Per esempio, a $500\,\mathrm{nm}$ si ha
 $$
 p = \frac{6{,}63 \cdot 10^{-34}}{5{,}00 \cdot 10^{-7}}\,\mathrm{kg\cdot m/s} \approx 1{,}33 \cdot 10^{-27}\,\mathrm{kg\cdot m/s} .
 $$
-Da questa quantità di moto nasce la pressione di radiazione, per la quale si rimanda all'argomento sulle equazioni di Maxwell e onde elettromagnetiche: una superficie che assorbe $N$ fotoni al secondo riceve la forza media $N p$.
+Da questa quantità di moto nasce la pressione di radiazione, per la quale si rimanda all'argomento sulle equazioni di Maxwell e onde elettromagnetiche. Una superficie che assorbe $N$ fotoni al secondo riceve la forza media $N p$.
 
 :::dimostrazione
 Il fotone ha massa nulla, quindi per la relazione tra energia e quantità di moto $E = pc$. L'energia del fotone è $E = hf$, perciò
@@ -289,7 +289,7 @@ Un fotone di lunghezza d'onda $\lambda$ urta un elettrone libero e fermo e viene
 $$
 \Delta\lambda = \lambda' - \lambda = \frac{h}{m_e c}\,(1 - \cos\theta) .
 $$
-La variazione di lunghezza d'onda dipende solo dall'angolo di diffusione: è nulla per $\theta = 0^\circ$, vale $\dfrac{h}{m_e c}$ per $\theta = 90^\circ$ e raggiunge il massimo $\dfrac{2h}{m_e c}$ per $\theta = 180^\circ$, quando il fotone torna indietro. Il fotone diffuso ha lunghezza d'onda maggiore, quindi energia minore; l'energia persa dal fotone diventa energia cinetica dell'elettrone.
+La variazione di lunghezza d'onda dipende solo dall'angolo di diffusione. È nulla per $\theta = 0^\circ$, vale $\dfrac{h}{m_e c}$ per $\theta = 90^\circ$ e raggiunge il massimo $\dfrac{2h}{m_e c}$ per $\theta = 180^\circ$, quando il fotone torna indietro. Il fotone diffuso ha lunghezza d'onda maggiore, quindi energia minore; l'energia persa dal fotone diventa energia cinetica dell'elettrone.
 
 ::grafico{assi=0 uguale=1 vettori="-3,0,-0.12,0,λ;0,0,1.92,1.61,λ′;0,0,1.64,-1.15,e⁻" segmenti="0,0,2.8,0" curve="0.8*cos(t),0.8*sin(t),0,0.698;0.6*cos(t),0.6*sin(t),-0.611,0" punti="0,0,pieno" etichette="1.0,0.35,θ;0.85,-0.25,φ" xmin=-3.3 xmax=3 ymin=-1.6 ymax=2 legenda=0 titolo="Effetto Compton: il fotone di lunghezza d'onda $\lambda$ urta l'elettrone fermo, il fotone diffuso con l'angolo $\theta$ ha lunghezza d'onda $\lambda'$, e l'elettrone parte con l'angolo $\varphi$ dall'altra parte della direzione iniziale"}
 
@@ -349,7 +349,7 @@ $$
 :::osservazione{#compton-e-luce-visibile titolo="Perché si usano i raggi X"}
 La variazione $\Delta\lambda$ non dipende da $\lambda$ ed è al massimo $2\lambda_C \approx 4{,}85\,\mathrm{pm}$. Per la luce visibile, con $\lambda = 500\,\mathrm{nm}$, la variazione relativa è al più $\dfrac{4{,}85 \cdot 10^{-12}}{5{,}00 \cdot 10^{-7}} \approx 9{,}7 \cdot 10^{-6}$, troppo piccola per essere misurata con gli spettrometri dell'epoca. Per raggi X di qualche decina di picometri la variazione relativa è di qualche percento e si misura bene. L'energia dei fotoni X, di decine di keV, è inoltre molto maggiore dell'energia che lega gli elettroni esterni agli atomi della grafite, quindi questi elettroni si possono considerare liberi e fermi.
 
-La radiazione diffusa con la lunghezza d'onda iniziale $\lambda$ è dovuta agli elettroni legati più strettamente: il fotone urta in pratica l'intero atomo, e al posto di $m_e$ compare la massa dell'atomo, migliaia di volte più grande, che rende $\Delta\lambda$ trascurabile.
+La radiazione diffusa con la lunghezza d'onda iniziale $\lambda$ è dovuta agli elettroni legati più strettamente: il fotone urta in pratica l'intero atomo, e al posto di $m_e$ compare la massa dell'atomo, circa $2 \cdot 10^{4}$ volte più grande, che rende $\Delta\lambda$ trascurabile.
 :::
 
 ## Dualismo onda-corpuscolo
@@ -357,7 +357,7 @@ La radiazione diffusa con la lunghezza d'onda iniziale $\lambda$ è dovuta agli 
 :::osservazione{#dualismo-onda-corpuscolo titolo="Dualismo onda-corpuscolo della luce"}
 L'interferenza e la diffrazione della luce si spiegano con le onde elettromagnetiche e non con le particelle. L'effetto fotoelettrico e l'effetto Compton si spiegano invece con i fotoni, che hanno energia $hf$ e quantità di moto $\dfrac{h}{\lambda}$ e scambiano queste grandezze con gli elettroni come particelle in un urto. La luce ha quindi un comportamento ondulatorio e un comportamento corpuscolare, e quale dei due si osserva dipende dall'esperimento. Questo fatto si chiama **dualismo onda-corpuscolo**.
 
-Le due descrizioni sono legate dalle relazioni $E = hf$ e $p = \dfrac{h}{\lambda}$, che a sinistra contengono grandezze di una particella e a destra grandezze di un'onda. La costante di Planck fissa la scala alla quale il comportamento corpuscolare diventa visibile: un fascio di luce di $1{,}0\,\mathrm{mW}$ contiene circa $10^{15}$ fotoni al secondo, e per questo nella vita quotidiana la luce appare come un'onda continua.
+Le due descrizioni sono legate dalle relazioni $E = hf$ e $p = \dfrac{h}{\lambda}$, che a sinistra contengono grandezze di una particella e a destra grandezze di un'onda. La costante di Planck fissa la scala alla quale il comportamento corpuscolare diventa visibile. Per esempio, un fascio di luce di $1{,}0\,\mathrm{mW}$ contiene circa $10^{15}$ fotoni al secondo, e per questo nella vita quotidiana la luce appare come un'onda continua.
 :::
 
 :::esempio{#interferenza-fotoni titolo="Interferenza con pochi fotoni"}
