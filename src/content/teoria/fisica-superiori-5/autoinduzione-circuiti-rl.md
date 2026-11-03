@@ -330,7 +330,7 @@ Se $i_1$ varia, per la legge di Faraday-Neumann-Lenz nel secondo circuito si gen
 $$
 \mathcal{E}_2 = -M\,\frac{di_1}{dt} .
 $$
-Questo fenomeno si chiama **mutua induzione**. La mutua induttanza si misura in henry e dipende dalla forma dei due circuiti e dalla loro posizione. Vale inoltre la proprietà di *reciprocità*, che si ammette senza dimostrazione: se nel secondo circuito circola la corrente $i_2$, il flusso concatenato con il primo è $M\,i_2$, con la stessa costante $M$. Per esempio, se $M = 2{,}0\,\mathrm{mH}$ e la corrente nel primo circuito cresce in modo uniforme di $50\,\mathrm{A}$ al secondo, nel secondo circuito si genera una f.e.m. di modulo $2{,}0 \cdot 10^{-3} \cdot 50\,\mathrm{V} = 0{,}10\,\mathrm{V}$.
+Questo fenomeno si chiama **mutua induzione**. La mutua induttanza si misura in henry e dipende dalla forma dei due circuiti e dalla loro posizione. Vale inoltre la proprietà di *reciprocità*, che si ammette senza dimostrazione. Secondo questa proprietà, se nel secondo circuito circola la corrente $i_2$, il flusso concatenato con il primo è $M\,i_2$, con la stessa costante $M$. Per esempio, se $M = 2{,}0\,\mathrm{mH}$ e la corrente nel primo circuito cresce in modo uniforme di $50\,\mathrm{A}$ al secondo, nel secondo circuito si genera una f.e.m. di modulo $2{,}0 \cdot 10^{-3} \cdot 50\,\mathrm{V} = 0{,}10\,\mathrm{V}$.
 :::
 
 ::::teorema{#mutua-induttanza-solenoidi titolo="Mutua induttanza di due solenoidi coassiali"}

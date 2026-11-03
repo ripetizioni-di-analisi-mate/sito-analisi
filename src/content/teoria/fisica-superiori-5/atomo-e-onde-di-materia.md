@@ -276,7 +276,7 @@ $$
 $$
 in accordo con il valore misurato. Gli elettroni producono quindi una figura di diffrazione, come le onde, e questa fu la conferma sperimentale dell'ipotesi di de Broglie. Sulla diffrazione degli elettroni si basa il microscopio elettronico, che distingue dettagli molto più piccoli di quelli visibili con la luce perché usa lunghezze d'onda molto più corte.
 
-::grafico{assi=0 uguale=1 linee="-1,0 7,0" vettori="2,4,2,0.15;4,4,4,0.15;2,0,4.45,2.06;4,0,6.45,2.06" segmenti="2,0.15,2,3.2;4,0,3.17,0.985" punti="0,0,pieno;2,0,pieno;4,0,pieno;6,0,pieno" etichette="2.2,2.7,θ;2.9,-0.45,d;2.55,0.12,d sin θ;1.2,3.5,e⁻" xmin=-1.5 xmax=7.5 ymin=-1.2 ymax=4.4 titolo="Elettroni incidenti perpendicolarmente su una fila di atomi a distanza $d$: le onde diffuse da due atomi vicini all'angolo $\theta$ hanno differenza di cammino $d \sin\theta$"}
+::grafico{assi=0 uguale=1 unicolore=1 linee="-1,0 7,0" vettori="2,4,2,0.15;4,4,4,0.15;2,0,4.45,2.06;4,0,6.45,2.06" segmenti="2,0.15,2,3.2;4,0,3.17,0.985" punti="0,0,pieno;2,0,pieno;4,0,pieno;6,0,pieno" etichette="2.2,2.7,θ;2.9,-0.45,d;2.55,0.12,d sin θ;1.2,3.5,e⁻" xmin=-1.5 xmax=7.5 ymin=-1.2 ymax=4.4 titolo="Elettroni incidenti perpendicolarmente su una fila di atomi a distanza $d$: le onde diffuse da due atomi vicini all'angolo $\theta$ hanno differenza di cammino $d \sin\theta$"}
 
 :::
 
