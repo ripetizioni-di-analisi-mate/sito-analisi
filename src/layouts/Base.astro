@@ -14,7 +14,7 @@ import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
-import { anteprima, altGenerale } from '../lib/anteprime.mjs';
+import { anteprima, altGenerale, ogGenerale } from '../lib/anteprime.mjs';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
 const WHATSAPP = 'https://wa.me/393885680393';
@@ -67,9 +67,9 @@ const schema = {
   '@graph': [ORGANIZZAZIONE, sitoWeb(lingua), paginaWeb(canonico, titoloCompleto, descrizioneSeo, lingua), ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
 };
 // Immagine di anteprima dei link (WhatsApp, Instagram, Telegram…): una per materia e una per argomento e sezione,
-// disegnate dopo la build da scripts/immagini-og.mjs; le altre pagine usano /og.png.
+// disegnate dopo la build da scripts/immagini-og.mjs; le altre pagine usano /og.png (in inglese /og-en.png, scripts/og-generale.mjs).
 const og = anteprima({ lingua, materia: m, argomento, sezione, titoloArgomento: m && argomento ? m.argomenti.find((a) => a.slug === argomento)?.titolo : undefined });
-const immagineOg = `${SITO}${og ? og.percorso : '/og.png'}`;
+const immagineOg = `${SITO}${og ? og.percorso : ogGenerale(lingua)}`;
 const altOg = og ? og.alt : altGenerale(lingua);
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';

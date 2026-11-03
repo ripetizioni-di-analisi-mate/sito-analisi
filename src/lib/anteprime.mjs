@@ -12,9 +12,16 @@ const SEZIONI = {
   en: { teoria: 'Theory', 'esercizi-svolti': 'Worked examples', esercizi: 'Exercises', domande: 'Timed questions' },
 };
 const TESTI = {
-  it: { ripasso: "Prove d'esame", domandeRipasso: 'Domande di ripasso', materia: 'Teoria ed esercizi svolti', generale: 'Ripetizioni di Analisi: teoria ed esercizi svolti di Analisi 1, Analisi 2 e Precorso' },
-  en: { ripasso: 'Exam practice', domandeRipasso: 'Review questions', materia: 'Theory and worked examples', generale: 'Ripetizioni di Analisi: theory and worked examples of Analysis 1, Analysis 2 and Precalculus' },
+  it: { ripasso: "Prove d'esame", domandeRipasso: 'Domande di ripasso', materia: 'Teoria ed esercizi svolti', generale: 'Ripetizioni di Analisi: teoria ed esercizi svolti per le materie scientifiche (università, superiori, concorsi)' },
+  en: { ripasso: 'Exam practice', domandeRipasso: 'Review questions', materia: 'Theory and worked examples', generale: 'Ripetizioni di Analisi: theory and worked examples for Calculus, Linear Algebra and Physics' },
 };
+
+// Testi dell'immagine generale (public/og.png e public/og-en.png, disegnate da scripts/og-generale.mjs).
+export const OG_GENERALE = {
+  it: { titolo: 'Teoria ed esercizi svolti per le materie scientifiche', sotto: 'Università · Superiori · Concorsi' },
+  en: { titolo: 'Theory and worked examples for science subjects', sotto: 'Calculus · Linear Algebra · Physics' },
+};
+export const ogGenerale = (lingua) => (lingua === 'en' ? '/og-en.png' : '/og.png');
 
 // Testo alternativo dell'immagine generale (/og.png).
 export const altGenerale = (lingua) => TESTI[lingua === 'en' ? 'en' : 'it'].generale;
