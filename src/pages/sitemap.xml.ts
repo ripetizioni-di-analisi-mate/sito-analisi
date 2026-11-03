@@ -28,6 +28,7 @@ export async function GET() {
   due('/', 1.0);
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
+  due('/domande-a-tempo', 0.6, false);
   due('/concorsi/simulazione', 0.5, false);
   // formulari gratuiti (solo italiano)
   const formulari = await getCollection('formulari');

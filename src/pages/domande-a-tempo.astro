@@ -1,0 +1,38 @@
+---
+// Elenco gratuito delle domande a tempo di tutte le materie (03/11/2026, richiesta di Carmine: quiz e domande nella riga «Gratis» della home).
+// Solo italiano. Per ogni materia: gli argomenti con il numero di domande, le domande di ripasso e la simulazione.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import { RIPASSO } from '../data/livelli';
+
+const domande = await getCollection('domande');
+const conta = (prefisso: string) => domande.filter((v) => v.id.startsWith(prefisso)).length;
+const materie = MATERIE.filter((m) => m.attiva && conta(`${m.slug}/`) > 0);
+const gruppi = [...new Set(materie.map((m) => m.gruppo))];
+const totale = materie.reduce((s, m) => s + conta(`${m.slug}/`), 0);
+---
+<Base titolo="Domande a tempo: quiz gratuiti per materia e argomento" descrizione={`Quiz a risposta multipla gratuiti su ${materie.length} materie: quattro risposte, due minuti per domanda e la spiegazione dopo ogni risposta. Anche senza account.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]} seo={{ soloQuestaLingua: true }}>
+  <p class="sopratitolo">Gratis</p>
+  <h1>Domande a tempo</h1>
+  <p class="sommario">{totale} domande a risposta multipla, divise per materia e per argomento. Ogni domanda ha quattro risposte e due minuti di tempo; dopo la conferma compare la spiegazione. Si usano anche senza account; con l'account le risposte corrette danno punti EXP.</p>
+  {gruppi.map((g) => (
+    <>
+      <h2 class="gruppo-domande">{g}</h2>
+      <ol class="griglia-argomenti griglia-domande">
+        {materie.filter((m) => m.gruppo === g).map((m) => (
+          <li style={`--accento: ${m.colore}`}>
+            <h3><a href={`/${m.slug}/${RIPASSO}/domande`}>{m.titolo}</a></h3>
+            <nav aria-label={m.titolo}>
+              {m.argomenti.filter((a) => conta(`${m.slug}/${a.slug}/`) > 0).map((a) => (
+                <a href={`/${m.slug}/${a.slug}/domande`}>{a.titolo} ({conta(`${m.slug}/${a.slug}/`)})</a>
+              ))}
+              <a class="ripasso-domande" href={`/${m.slug}/${RIPASSO}/domande`}>Domande di ripasso su tutti gli argomenti</a>
+              <a class="ripasso-domande" href={`/${m.slug}/simulazione`}>{g === 'Concorsi' ? 'Simulazione della prova a quiz' : 'Simulazione d\'esame'}</a>
+            </nav>
+          </li>
+        ))}
+      </ol>
+    </>
+  ))}
+</Base>

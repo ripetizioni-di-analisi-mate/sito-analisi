@@ -1279,3 +1279,12 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .gratis-c { display: flex; align-items: center; gap: 0.5rem; margin: 0.35rem 0 1.4rem; font: 0.9rem/1.4 var(--ui); color: var(--inchiostro-2); }
 .gratis-c svg { width: 1.1rem; height: 1.1rem; flex: none; color: var(--azione); }
 .gratis-c b { color: var(--inchiostro); }
+.gratis-c span { min-width: 0; }
+.gruppo-domande { margin: 2rem 0 0; font-size: 1.25rem; }
+.griglia-domande { margin-top: 0.75rem; }
+.griglia-domande li { grid-template-columns: 1fr; border-left: 3px solid var(--accento); }
+.griglia-domande li::before { content: none; }
+.griglia-domande h3 { margin: 0 0 0.2rem; font-size: 1.1rem; }
+.griglia-domande h3 a { text-decoration: none; color: var(--inchiostro); }
+.griglia-domande nav { grid-column: 1; }
+.griglia-domande .ripasso-domande { font-weight: 600; }
