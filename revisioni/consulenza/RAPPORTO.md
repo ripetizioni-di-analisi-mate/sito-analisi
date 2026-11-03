@@ -35,6 +35,8 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 
 **Realizzate il 02/11/2026.** Mossa 9 e area 2.12 A: percorso d'acquisto e campagne dei link nella dashboard (80ddf2e7). Area 2.7: formule nel testo che non si spezzano (392167ee). Area 2.6 B: metodi di pagamento anche nella pagina del videocorso (36c10d8f). Restano: 2.6 B la riga con la foto accanto al prezzo della pagina Sblocca; 2.7 `og.png`; 2.8 B link dei caroselli con `utm_campaign` (ora la dashboard li conta: basta usarli); 2.9 B pacchetti (serve Paddle); 2.10 B inviti alla materia successiva (serve l'informativa aggiornata da un professionista).
 
+**Realizzate il 03/11/2026.** Area 2.6 B: riga con la foto di Carmine sopra il riquadro del prezzo nella pagina Sblocca (e20ece4). Aree 2.1 e 2.7: immagine di anteprima generale dei link con tutte le materie, `og.png` e `og-en.png` (961b7bf). Area 2.4: punto al posto della lineetta nei titoli di `/prezzi` (2ba3ab8). Realizzate da Carmine o da altre sessioni dal 02/11 e collegate al rapporto: 2.8 Google B (dati strutturati per i contenuti a pagamento, 7ed0fe1), 2.8 passaparola B («Invita un amico», 82c68b4), 2.7 immagini di anteprima per materia (34b8545), 2.4 domande frequenti in `/prezzi` (e61b667), 2.10 C in parte (rimando al videocorso nella pagina della materia, 07c8e4b). Superata: 2.5 «Pagina Accedi che ricorda il contesto» per l'acquisto (l'iscrizione ora è dentro Sblocca).
+
 **Aree realizzate il 01/11/2026.** 2.7 A: tasti di acquisto tutti nel verde del sito (6aea71f), quiz A-E senza pallino doppio (6aea71f), sopratitolo per tipo di materia (b4f2b91). 2.11 A: Pi conosce le materie utili per corso di studi (684918e); lo sblocco per gli ex studenti, i numeri dell'anteprima e i numeri di Carmine erano già stati aggiunti (fd546fb, 1dae697). Restano della 2.7: formule nel testo che vanno a capo a metà, `og.png` con tutte le materie.
 
 ---
@@ -191,6 +193,22 @@ Per il videocorso i passi sono gli stessi, più: account con "I tuoi videocorsi"
 Per i dispositivi: una frase prima del pagamento ("La materia si usa su due dispositivi, per esempio il telefono e il computer"); un avviso nel browser di Instagram ("Per usare il sito sempre dallo stesso browser, apri il link con Safari o Chrome dal menu ⋯"); in alternativa, il Worker potrebbe contare telefono con Instagram e telefono con Safari come un solo dispositivo quando hanno lo stesso sistema e lo stesso modello (impegno medio, rischio di aprire una scappatoia alla condivisione).
 
 Dopo l'acquisto: un riquadro "Benvenuto in Analisi matematica 1" nella pagina della materia, con tre collegamenti (primo argomento, PDF dove c'è, Pi) e la ricevuta di Paddle ricordata.
+
+**Approfondimento del 03/11/2026: dopo il pagamento.**
+Osservato oggi nel codice:
+- l'iscrizione e il pagamento sono già nella pagina Sblocca (932da86): restano un tasto e la finestra di Paddle;
+- a pagamento concluso `src/viste/Sblocca.astro` porta alla pagina della materia, dove chi ha l'accesso vede solo la riga «✓ Accesso completo attivo» (resa minimale il 03/11 su richiesta di Carmine). Nessuna indicazione su da dove cominciare, sul PDF o sulla ricevuta;
+- al telefono il separatore «·» prima di «Se ti serve anche il videocorso →» va a capo da solo, all'inizio della seconda riga (piccolo ritocco di stile, da fare al prossimo giro se non serve altro).
+
+Proposte, con il testo esatto (bozza al telefono: `codice/2-5-benvenuto-prima-dopo.jpg`):
+- **A. Riquadro di benvenuto, una volta sola per materia.** Sotto la riga dell'accesso attivo, solo la prima volta che lo studente apre la pagina della materia dopo lo sblocco (si ricorda nel browser con `benvenuto-<materia>`; il tasto «Chiudi» lo toglie):
+  titolo «Analisi matematica 1 è nel tuo account»;
+  «Si può cominciare dalla teoria del primo argomento, <link al primo argomento>. Il PDF di ogni argomento si scarica dalla pagina della sua teoria.» (la seconda frase solo per Precorso, Analisi 1 e Analisi 2);
+  «La ricevuta del pagamento arriva da Paddle all'email dell'account.»;
+  tasto «Apri la teoria» e link «Chiudi».
+  File: `src/viste/Materia.astro` (markup con classe `solo-collegati` e script di poche righe), stili in `global.css`. Il codice di Paddle in `Sblocca.astro` non si tocca. Contro: dopo la pubblicazione lo vedono una volta anche gli studenti che hanno comprato prima. Impegno piccolo. Rischio nullo.
+- **B. Come A, ma solo nei due giorni dopo l'acquisto.** Il Worker conosce la data di attivazione della materia: `/api/io` restituirebbe anche le materie attivate da meno di 48 ore e il riquadro compare solo per quelle. Pro: niente riquadro per chi ha comprato settimane fa. Contro: una piccola modifica al Worker (fuori dal codice dei pagamenti). Impegno piccolo. Rischio nullo.
+- **C. Nessun riquadro, una riga sola.** Accanto ad «Accesso completo attivo» un link «Comincia dal primo argomento →» per i primi due giorni. Pro: rispetta al massimo la scelta minimale del 03/11. Contro: niente PDF né ricevuta. Impegno piccolo.
 
 ### 2.6 Fiducia
 
