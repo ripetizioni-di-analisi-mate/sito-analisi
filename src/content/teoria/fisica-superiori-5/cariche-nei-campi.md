@@ -51,7 +51,7 @@ Si usano anche i multipli $1\,\mathrm{keV} = 10^3\,\mathrm{eV}$ e $1\,\mathrm{Me
 :::
 
 :::osservazione{#peso-trascurabile titolo="Peso trascurabile e velocità piccole rispetto a c"}
-In tutto l'argomento il peso delle particelle si trascura. Per un elettrone in un campo di $6{,}0 \cdot 10^3\,\mathrm{V/m}$ la forza elettrica vale $e E = 1{,}60 \cdot 10^{-19} \cdot 6{,}0 \cdot 10^3\,\mathrm{N} = 9{,}6 \cdot 10^{-16}\,\mathrm{N}$, mentre il peso vale $m_e\,g = 9{,}11 \cdot 10^{-31} \cdot 9{,}8\,\mathrm{N} \approx 8{,}9 \cdot 10^{-30}\,\mathrm{N}$, circa $10^{14}$ volte meno. Si suppone anche che le velocità siano piccole rispetto a $c = 3{,}00 \cdot 10^8\,\mathrm{m/s}$, così che valgano le leggi della meccanica classica. Quando $v$ supera qualche decimo di $c$ servono le formule della relatività, per le quali si rimanda all'argomento sulla dinamica relativistica.
+In tutto l'argomento il peso delle particelle si trascura. Per un elettrone in un campo di $6{,}0 \cdot 10^3\,\mathrm{V/m}$ la forza elettrica vale $e E = 1{,}60 \cdot 10^{-19} \cdot 6{,}0 \cdot 10^3\,\mathrm{N} = 9{,}6 \cdot 10^{-16}\,\mathrm{N}$, mentre il peso vale $m_e\,g = 9{,}11 \cdot 10^{-31} \cdot 9{,}8\,\mathrm{N} \approx 8{,}9 \cdot 10^{-30}\,\mathrm{N}$, circa $10^{14}$ volte meno. Si suppone anche che le velocità siano piccole rispetto a $c = 3{,}00 \cdot 10^8\,\mathrm{m/s}$, così che valgano le leggi della meccanica classica. Quando $v$ supera qualche decimo di $c$ servono le formule della relatività, per le quali si rimanda all'argomento sulla relatività ristretta: dinamica ed energia.
 :::
 
 ## Deflessione in un campo elettrico
@@ -102,7 +102,7 @@ Fuori dalle armature il campo è nullo, quindi la particella prosegue di moto re
 $$
 Y = y_L + D \tan\theta .
 $$
-Nell'esempio dell'elettrone, con $D = 20\,\mathrm{cm}$, si ha $Y \approx 3{,}3\,\mathrm{mm} + 0{,}20 \cdot 0{,}13\,\mathrm{m} \approx 2{,}9\,\mathrm{cm}$. Lo spostamento sullo schermo è proporzionale a $E$, quindi alla tensione tra le armature. Su questo principio funzionavano gli oscilloscopi a raggi catodici, nei quali il punto luminoso sullo schermo seguiva la tensione da misurare.
+Nell'esempio dell'elettrone, con $D = 20\,\mathrm{cm}$, si ha $Y \approx 3{,}3 \cdot 10^{-3}\,\mathrm{m} + 0{,}20 \cdot 0{,}132\,\mathrm{m} \approx 3{,}0 \cdot 10^{-2}\,\mathrm{m}$. Lo spostamento sullo schermo è proporzionale a $E$, quindi alla tensione tra le armature. Su questo principio funzionavano gli oscilloscopi a raggi catodici, nei quali il punto luminoso sullo schermo seguiva la tensione da misurare.
 :::
 
 ## Moto in un campo magnetico uniforme
@@ -274,7 +274,7 @@ Nella figura del selettore, per un protone che si muove verso destra con il camp
 :::osservazione{#esperimento-thomson titolo="L'esperimento di Thomson"}
 Nel 1897 J. J. Thomson studiò i **raggi catodici**, i fasci che escono dal catodo di un tubo di vetro in cui è stato fatto il vuoto quando tra catodo e anodo c'è una differenza di potenziale elevata. Il fascio, accelerato dall'anodo, passava tra due armature e in una regione di campo magnetico perpendicolare al campo elettrico, e colpiva uno schermo fluorescente.
 
-Thomson misurò con questo apparato il rapporto tra la carica e la massa delle particelle del fascio. Trovò lo stesso valore con catodi di metalli diversi e con gas diversi nel tubo, e un valore circa mille volte maggiore del rapporto tra carica e massa dello ione idrogeno. Ne concluse che i raggi catodici sono formati da particelle con carica negativa, molto più leggere degli atomi e presenti in tutti gli atomi: gli **elettroni**.
+Thomson misurò con questo apparato il rapporto tra la carica e la massa delle particelle del fascio. Trovò lo stesso valore con catodi di metalli diversi e con gas diversi nel tubo, e un valore circa mille volte maggiore del rapporto tra carica e massa dello ione idrogeno. Ne concluse che i raggi catodici sono formati da particelle con carica negativa, molto più leggere degli atomi e presenti in tutti gli atomi. Queste particelle sono gli **elettroni**.
 :::
 
 ::::teorema{#misura-e-su-m titolo="Misura del rapporto e/m dell'elettrone"}
