@@ -10,8 +10,6 @@ Si divide una superficie in parti piccole di area $\Delta S$ e si associa a cias
 
 - se il campo è uniforme e perpendicolare a una superficie piana di area $S$, il flusso è $B S$;
 - se il campo è tangente a una circonferenza di raggio $r$ e ha lo stesso modulo in ogni suo punto, la circuitazione è $2\pi r\,B$.
-
-In tutto l'argomento le correnti si indicano con la lettera minuscola $i$, perché la lettera $I$ indica l'intensità di un'onda.
 :::
 
 :::richiamo{titolo="Legge di Faraday-Neumann-Lenz"}
@@ -29,7 +27,7 @@ Per ogni linea chiusa orientata $\gamma$, ferma, vale
 $$
 \Gamma(\vec{E}) = -\frac{d\Phi(\vec{B})}{dt} ,
 $$
-dove $\Phi(\vec{B})$ è il flusso magnetico attraverso una superficie che ha $\gamma$ come bordo, con il verso di $\Delta\vec{S}$ dato dalla regola della mano destra rispetto al verso di percorrenza di $\gamma$. È una legge sperimentale: Maxwell la estese dalla spira conduttrice a una linea chiusa qualsiasi.
+dove $\Phi(\vec{B})$ è il flusso magnetico attraverso una superficie che ha $\gamma$ come bordo, con il verso di $\Delta\vec{S}$ dato dalla regola della mano destra rispetto al verso di percorrenza di $\gamma$. È una legge sperimentale, che Maxwell estese dalla spira conduttrice a una linea chiusa qualsiasi.
 
 La legge permette di calcolare il campo elettrico indotto quando la situazione è simmetrica. Se un campo magnetico uniforme, perpendicolare a un cerchio di raggio $r = 10\,\mathrm{cm}$, cresce con rapidità $0{,}20\,\mathrm{T/s}$, la circuitazione del campo indotto lungo la circonferenza ha modulo
 $$
@@ -73,7 +71,7 @@ La **corrente di spostamento** attraverso una superficie è
 $$
 i_s = \varepsilon_0 \frac{d\Phi(\vec{E})}{dt} ,
 $$
-dove $\Phi(\vec{E})$ è il flusso del campo elettrico attraverso la superficie. Si misura in ampere, perché $\varepsilon_0 \Phi(\vec{E})$ si misura in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$, e quindi la sua derivata rispetto al tempo si misura in $\mathrm{C/s} = \mathrm{A}$. A differenza della corrente di conduzione, la corrente di spostamento *non* corrisponde a un moto di cariche: è dovuta soltanto al campo elettrico che varia. Se il campo uniforme tra due armature di area $S = 0{,}025\,\mathrm{m^2}$ cresce con rapidità $\dfrac{dE}{dt} = 2{,}0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, il flusso è $E S$ e la corrente di spostamento è
+dove $\Phi(\vec{E})$ è il flusso del campo elettrico attraverso la superficie. Si misura in ampere, perché $\varepsilon_0 \Phi(\vec{E})$ si misura in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$, e quindi la sua derivata rispetto al tempo si misura in $\mathrm{C/s} = \mathrm{A}$. A differenza della corrente di conduzione, la corrente di spostamento *non* corrisponde a un moto di cariche, perché è dovuta soltanto al campo elettrico che varia. Se il campo uniforme tra due armature di area $S = 0{,}025\,\mathrm{m^2}$ cresce con rapidità $\dfrac{dE}{dt} = 2{,}0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, il flusso è $E S$ e la corrente di spostamento è
 $$
 i_s = \varepsilon_0 S \frac{dE}{dt} = 8{,}85 \cdot 10^{-12} \cdot 0{,}025 \cdot 2{,}0 \cdot 10^{12}\,\mathrm{A} \approx 0{,}44\,\mathrm{A} .
 $$
@@ -129,7 +127,7 @@ Insieme alla forza di Lorentz $\vec{F} = q\vec{E} + q\,\vec{v} \times \vec{B}$, 
 :::
 
 :::osservazione{#significato-equazioni-maxwell titolo="Significato delle quattro equazioni"}
-- Il teorema di Gauss per il campo elettrico afferma che le cariche elettriche sono le sorgenti del campo elettrico: le linee di $\vec{E}$ partono dalle cariche positive e arrivano alle cariche negative.
+- Il teorema di Gauss per il campo elettrico afferma che le cariche elettriche sono le sorgenti del campo elettrico, quindi le linee di $\vec{E}$ partono dalle cariche positive e arrivano alle cariche negative.
 - Il teorema di Gauss per il campo magnetico afferma che il flusso di $\vec{B}$ attraverso una superficie chiusa è sempre nullo, quindi non esistono poli magnetici isolati e le linee di $\vec{B}$ sono chiuse.
 - La legge di Faraday-Neumann afferma che un campo magnetico variabile genera un campo elettrico, con linee chiuse e circuitazione diversa da zero.
 - La legge di Ampère-Maxwell afferma che il campo magnetico è generato dalle correnti e dai campi elettrici variabili.
@@ -278,7 +276,7 @@ L'**intensità** $I$ di un'onda è l'energia media che in un secondo attraversa 
 $$
 I = \frac{P}{S} ,
 $$
-e si misura in $\mathrm{W/m^2}$. Un puntatore laser che emette $1{,}0\,\mathrm{mW}$ su una sezione di $1{,}0\,\mathrm{mm^2}$ produce l'intensità $I = \dfrac{1{,}0 \cdot 10^{-3}\,\mathrm{W}}{1{,}0 \cdot 10^{-6}\,\mathrm{m^2}} = 1{,}0 \cdot 10^{3}\,\mathrm{W/m^2}$.
+e si misura in $\mathrm{W/m^2}$. Poiché la lettera $I$ indica l'intensità, in tutto l'argomento le correnti si indicano con la lettera minuscola $i$. Un puntatore laser che emette $1{,}0\,\mathrm{mW}$ su una sezione di $1{,}0\,\mathrm{mm^2}$ produce l'intensità $I = \dfrac{1{,}0 \cdot 10^{-3}\,\mathrm{W}}{1{,}0 \cdot 10^{-6}\,\mathrm{m^2}} = 1{,}0 \cdot 10^{3}\,\mathrm{W/m^2}$.
 :::
 
 ::::teorema{#intensita-campo-efficace titolo="Intensità e campo elettrico"}
@@ -350,7 +348,7 @@ Un'onda elettromagnetica è **polarizzata linearmente** se il suo campo elettric
 :::
 
 :::definizione{#filtro-polarizzatore titolo="Filtro polarizzatore"}
-Un **filtro polarizzatore** è una lamina che ha una direzione privilegiata, detta asse di trasmissione: lascia passare la componente del campo elettrico parallela all'asse e assorbe la componente perpendicolare. All'uscita la luce è polarizzata lungo l'asse del filtro. Se sul filtro arriva luce non polarizzata di intensità $I_0$, l'intensità trasmessa è
+Un **filtro polarizzatore** è una lamina che ha una direzione privilegiata, detta asse di trasmissione. Il filtro lascia passare la componente del campo elettrico parallela all'asse e assorbe la componente perpendicolare. All'uscita la luce è polarizzata lungo l'asse del filtro. Se sul filtro arriva luce non polarizzata di intensità $I_0$, l'intensità trasmessa è
 $$
 I = \frac{I_0}{2} ,
 $$
@@ -362,7 +360,7 @@ Un'onda polarizzata linearmente, di intensità $I_0$, incide su un filtro polari
 $$
 I = I_0 \cos^2\theta .
 $$
-La legge permette di regolare l'intensità della luce ruotando il filtro: con $\theta = 0^\circ$ passa tutta la luce, con $\theta = 90^\circ$ la luce è completamente bloccata. La luce di $400\,\mathrm{W/m^2}$ uscita dal filtro della definizione precedente attraversa un secondo filtro ruotato di $30^\circ$ con intensità $I = 400 \cdot \cos^2 30^\circ\,\mathrm{W/m^2} = 400 \cdot \dfrac{3}{4}\,\mathrm{W/m^2} = 300\,\mathrm{W/m^2}$.
+La legge permette di regolare l'intensità della luce ruotando il filtro. Con $\theta = 0^\circ$ passa tutta la luce, mentre con $\theta = 90^\circ$ la luce è completamente bloccata. La luce di $400\,\mathrm{W/m^2}$ uscita dal filtro della definizione precedente attraversa un secondo filtro ruotato di $30^\circ$ con intensità $I = 400 \cdot \cos^2 30^\circ\,\mathrm{W/m^2} = 400 \cdot \dfrac{3}{4}\,\mathrm{W/m^2} = 300\,\mathrm{W/m^2}$.
 
 ::grafico{curve="t,cos(t*pi/180)^2,0,180" punti="0,1,pieno;90,0,pieno;180,1,pieno" xmin=0 xmax=200 ymin=0 ymax=1.2 nomi="θ,I" legenda=0 titolo="Intensità trasmessa da un polarizzatore, in unità di $I_0$, in funzione dell'angolo $\theta$ in gradi: è massima per $\theta = 0^\circ$ e $\theta = 180^\circ$ e nulla per $\theta = 90^\circ$"}
 

@@ -16,9 +16,9 @@ $$
 \qquad
 p = \gamma\, m\, v = \frac{m v}{\sqrt{1 - \dfrac{v^2}{c^2}}} .
 $$
-Per velocità piccole rispetto a $c$ si ha $\gamma \approx 1$ e si ritrova la quantità di moto classica $m v$; per velocità vicine a $c$ la quantità di moto relativistica è molto maggiore di $m v$. Per esempio un elettrone con $v = 0{,}80\,c = 2{,}40 \cdot 10^{8}\,\mathrm{m/s}$ ha $\gamma \approx 1{,}67$, quindi
+Per velocità piccole rispetto a $c$ si ha $\gamma \approx 1$ e si ritrova la quantità di moto classica $m v$; per velocità vicine a $c$ la quantità di moto relativistica è molto maggiore di $m v$. Per esempio un elettrone con $v = 0{,}80\,c = 2{,}40 \cdot 10^{8}\,\mathrm{m/s}$ ha $\gamma = \dfrac{5}{3} \approx 1{,}67$, quindi
 $$
-p = 1{,}67 \cdot 9{,}11 \cdot 10^{-31} \cdot 2{,}40 \cdot 10^{8}\,\mathrm{kg\cdot m/s} \approx 3{,}64 \cdot 10^{-22}\,\mathrm{kg\cdot m/s} ,
+p = \frac{5}{3} \cdot 9{,}11 \cdot 10^{-31} \cdot 2{,}40 \cdot 10^{8}\,\mathrm{kg\cdot m/s} \approx 3{,}64 \cdot 10^{-22}\,\mathrm{kg\cdot m/s} ,
 $$
 mentre $m v \approx 2{,}19 \cdot 10^{-22}\,\mathrm{kg\cdot m/s}$.
 
@@ -134,7 +134,7 @@ E = 1{,}25 \cdot 938\,\mathrm{MeV} \approx 1{,}17 \cdot 10^{3}\,\mathrm{MeV} ,
 \qquad
 K = 0{,}25 \cdot 938\,\mathrm{MeV} \approx 235\,\mathrm{MeV} ,
 $$
-e la quantità di moto è $p = \gamma\, m\, v = \gamma \beta\, m c = 1{,}25 \cdot 0{,}60 \cdot 938\,\mathrm{MeV}/c \approx 704\,\mathrm{MeV}/c$. Gli stessi valori in joule sono quelli della definizione di energia totale, divisi per $1{,}60 \cdot 10^{-13}\,\mathrm{J/MeV}$.
+e la quantità di moto è $p = \gamma\, m\, v = \gamma \beta\, m c = 1{,}25 \cdot 0{,}60 \cdot 938\,\mathrm{MeV}/c \approx 704\,\mathrm{MeV}/c$. I valori in joule calcolati nella definizione di energia totale, divisi per $1{,}60 \cdot 10^{-13}\,\mathrm{J/MeV}$, danno circa gli stessi valori in $\mathrm{MeV}$.
 :::
 
 ## Energia e quantità di moto
@@ -326,11 +326,11 @@ L'**energia di legame per nucleone** è il rapporto $\dfrac{B}{A}$ tra l'energia
 :::
 
 :::esempio{#fissione-fusione titolo="Energia liberata nella fissione e nella fusione"}
-Nella fissione $\,^{235}\mathrm{U} + n \to {}^{141}\mathrm{Ba} + {}^{92}\mathrm{Kr} + 3n$ la massa degli atomi e dei neutroni prima della reazione è $236{,}052595\,\mathrm{u}$, e dopo è $235{,}866562\,\mathrm{u}$. La massa diminuisce di $0{,}186033\,\mathrm{u}$, quindi l'energia liberata è
+Nella fissione $\,^{235}\mathrm{U} + n \to {}^{141}\mathrm{Ba} + {}^{92}\mathrm{Kr} + 3n$ le masse degli atomi sono $m(^{235}\mathrm{U}) = 235{,}043930\,\mathrm{u}$, $m(^{141}\mathrm{Ba}) = 140{,}914411\,\mathrm{u}$ e $m(^{92}\mathrm{Kr}) = 91{,}926156\,\mathrm{u}$. La massa degli atomi e dei neutroni prima della reazione è $236{,}052595\,\mathrm{u}$, e dopo è $235{,}866562\,\mathrm{u}$. La massa diminuisce di $0{,}186033\,\mathrm{u}$, quindi l'energia liberata è
 $$
 Q = 0{,}186033 \cdot 931{,}5\,\mathrm{MeV} \approx 173\,\mathrm{MeV} ,
 $$
-circa $0{,}73\,\mathrm{MeV}$ per ciascuno dei $236$ nucleoni iniziali. Nella fusione $\,^{2}\mathrm{H} + {}^{3}\mathrm{H} \to {}^{4}\mathrm{He} + n$ la massa diminuisce di $0{,}018883\,\mathrm{u}$ e si liberano $17{,}6\,\mathrm{MeV}$, circa $3{,}5\,\mathrm{MeV}$ per nucleone. L'energia liberata compare come energia cinetica dei prodotti. Una singola fissione libera un'energia maggiore, mentre la fusione libera più energia per unità di massa del combustibile.
+circa $0{,}73\,\mathrm{MeV}$ per ciascuno dei $236$ nucleoni iniziali. Nella fusione $\,^{2}\mathrm{H} + {}^{3}\mathrm{H} \to {}^{4}\mathrm{He} + n$, con le masse atomiche $m(^{2}\mathrm{H}) = 2{,}014102\,\mathrm{u}$, $m(^{3}\mathrm{H}) = 3{,}016049\,\mathrm{u}$ e $m(^{4}\mathrm{He}) = 4{,}002603\,\mathrm{u}$, la massa diminuisce di $0{,}018883\,\mathrm{u}$ e si liberano $17{,}6\,\mathrm{MeV}$, circa $3{,}5\,\mathrm{MeV}$ per nucleone. L'energia liberata compare come energia cinetica dei prodotti. Una singola fissione libera un'energia maggiore, mentre la fusione libera più energia per unità di massa del combustibile.
 :::
 
 ## Cenno alla relatività generale
