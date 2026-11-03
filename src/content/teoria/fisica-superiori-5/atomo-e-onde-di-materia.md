@@ -33,9 +33,9 @@ che è la riga rossa $\mathrm{H}_\alpha$.
 :::osservazione{#serie-spettrali titolo="Serie spettrali dell'idrogeno"}
 Le righe con lo stesso valore di $n_f$ formano una **serie**.
 
-- Con $n_f = 1$ si ha la serie di Lyman, nell'ultravioletto: la prima riga, con $n_i = 2$, ha $\lambda = 121{,}5\,\mathrm{nm}$.
+- Con $n_f = 1$ si ha la serie di Lyman, nell'ultravioletto, e la prima riga, con $n_i = 2$, ha $\lambda = 121{,}5\,\mathrm{nm}$.
 - Con $n_f = 2$ si ha la serie di Balmer, nel visibile e nel vicino ultravioletto.
-- Con $n_f = 3$ si ha la serie di Paschen, nell'infrarosso: la prima riga, con $n_i = 4$, ha $\lambda = 1875\,\mathrm{nm}$.
+- Con $n_f = 3$ si ha la serie di Paschen, nell'infrarosso, e la prima riga, con $n_i = 4$, ha $\lambda = 1875\,\mathrm{nm}$.
 
 Quando $n_i$ cresce, il termine $\dfrac{1}{n_i^2}$ tende a $0$, quindi le righe di una serie si avvicinano a una lunghezza d'onda limite $\lambda_\infty = \dfrac{n_f^2}{R_H}$. Per la serie di Balmer il limite è $\lambda_\infty = \dfrac{4}{1{,}097 \cdot 10^{7}}\,\mathrm{m} = 364{,}6\,\mathrm{nm}$.
 :::
@@ -151,7 +151,7 @@ Da qui segue $K = -E$ e $U = 2E$. Sostituendo il raggio $r_n = \dfrac{\varepsilo
 $$
 E_n = -\frac{e^2}{8\pi\varepsilon_0} \cdot \frac{\pi m_e e^2}{\varepsilon_0 h^2 n^2} = -\frac{m_e e^4}{8 \varepsilon_0^2 h^2 n^2} .
 $$
-Con i valori delle costanti si ha $\dfrac{m_e e^4}{8 \varepsilon_0^2 h^2} \approx 2{,}17 \cdot 10^{-18}\,\mathrm{J}$, cioè circa $13{,}5\,\mathrm{eV}$. Il valore misurato è $13{,}6\,\mathrm{eV}$, e la piccola differenza dipende dall'arrotondamento delle costanti a tre cifre.
+Con i valori delle costanti si ha $\dfrac{m_e e^4}{8 \varepsilon_0^2 h^2} \approx 2{,}17 \cdot 10^{-18}\,\mathrm{J}$, cioè circa $13{,}5\,\mathrm{eV}$. Con le costanti scritte con più cifre il calcolo dà $13{,}6\,\mathrm{eV}$, che è anche il valore misurato. La piccola differenza dipende quindi solo dall'arrotondamento delle costanti a tre cifre, e nei calcoli si usa $13{,}6\,\mathrm{eV}$.
 :::
 ::::
 
@@ -170,7 +170,7 @@ $$
 $$
 in accordo entro lo $0{,}3\%$ con la riga $\mathrm{H}_\alpha$ misurata, di $656{,}3\,\mathrm{nm}$.
 
-::grafico{assi=0 linee="1,-13.6 9,-13.6;1,-3.4 9,-3.4;1,-1.51 9,-1.51;1,-0.85 9,-0.85;1,-0.544 9,-0.544;1,0 9,0" vettori="2,-3.4,2,-13.6;3,-1.51,3,-13.6;4,-0.85,4,-13.6;6,-1.51,6,-3.4;7,-0.85,7,-3.4;8,-0.544,8,-3.4" etichette="4.4,-8.5,Lyman;6.1,-4.6,Balmer;9.2,-13.8,n = 1   −13,6 eV;9.2,-3.6,n = 2   −3,40 eV;9.2,-1.75,n = 3   −1,51 eV;9.2,-0.95,n = 4;9.2,0.25,E = 0" xmin=0 xmax=12.5 ymin=-14.5 ymax=1 titolo="Livelli di energia dell'atomo di idrogeno: le transizioni verso $n = 1$ danno la serie di Lyman, quelle verso $n = 2$ la serie di Balmer"}
+::grafico{assi=0 linee="1,-13.6 9,-13.6;1,-3.4 9,-3.4;1,-1.51 9,-1.51;1,-0.85 9,-0.85;1,-0.544 9,-0.544;1,0 9,0" unicolore=1 vettori="2,-3.4,2,-13.6;3,-1.51,3,-13.6;4,-0.85,4,-13.6;6,-1.51,6,-3.4;7,-0.85,7,-3.4;8,-0.544,8,-3.4" etichette="4.4,-8.5,Lyman;6.1,-4.6,Balmer;9.2,-13.8,n = 1   −13,6 eV;9.2,-3.6,n = 2   −3,40 eV;9.2,-1.75,n = 3   −1,51 eV;9.2,-0.95,n = 4;9.2,0.25,E = 0" xmin=0 xmax=12.5 ymin=-14.5 ymax=1 titolo="Livelli di energia dell'atomo di idrogeno: le transizioni verso $n = 1$ danno la serie di Lyman, quelle verso $n = 2$ la serie di Balmer"}
 
 :::
 
@@ -187,7 +187,7 @@ Il modello di Bohr dà la formula di Rydberg, con la costante
 $$
 R_H = \frac{m_e e^4}{8 \varepsilon_0^2 h^3 c} .
 $$
-Con i valori arrotondati delle costanti si ottiene $R_H \approx 1{,}09 \cdot 10^{7}\,\mathrm{m^{-1}}$, in accordo con il valore misurato $1{,}097 \cdot 10^{7}\,\mathrm{m^{-1}}$. Questo accordo, ottenuto partendo solo da $m_e$, $e$, $\varepsilon_0$, $h$ e $c$, fu la principale conferma del modello. Il modello dà anche il significato dei numeri $n_i$ e $n_f$, che sono i numeri quantici del livello di partenza e del livello di arrivo.
+Con i valori arrotondati delle costanti si ottiene $R_H \approx 1{,}09 \cdot 10^{7}\,\mathrm{m^{-1}}$, in accordo con il valore misurato $1{,}097 \cdot 10^{7}\,\mathrm{m^{-1}}$; come per i livelli di energia, la differenza dipende dall'arrotondamento delle costanti, e nei calcoli si usa il valore misurato. Questo accordo, ottenuto partendo solo da $m_e$, $e$, $\varepsilon_0$, $h$ e $c$, fu la principale conferma del modello. Il modello dà anche il significato dei numeri $n_i$ e $n_f$, che sono i numeri quantici del livello di partenza e del livello di arrivo.
 
 :::dimostrazione
 In una transizione da $n_i$ a $n_f < n_i$ il fotone emesso ha energia $\dfrac{h c}{\lambda} = E_{n_i} - E_{n_f}$. Con l'espressione dei livelli di energia si ha

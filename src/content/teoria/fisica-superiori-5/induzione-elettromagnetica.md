@@ -134,6 +134,8 @@ La legge di Lenz dà il significato del segno meno nella legge di Faraday-Neuman
 3. con la regola della mano destra si trova il verso della corrente che produce quel campo.
 
 Per esempio, una spira giace nel piano del foglio in un campo uscente ($\odot$) che aumenta. Il flusso uscente aumenta, quindi il campo indotto all'interno della spira è entrante ($\otimes$). Con il pollice della mano destra rivolto verso il foglio le dita piegate girano in verso orario, perciò la corrente indotta circola in verso **orario**.
+
+Il segno della f.e.m. si legge rispetto alla normale $\hat{n}$ scelta per calcolare il flusso. Una f.e.m. positiva fa circolare la corrente nel verso che, per la regola della mano destra, genera un campo concorde con $\hat{n}$; una f.e.m. negativa la fa circolare nel verso opposto. Nell'esempio, con $\hat{n}$ uscente, il flusso cresce, quindi la f.e.m. è negativa e la corrente genera un campo entrante.
 :::
 
 :::esempio{#magnete-anello titolo="Un magnete che si avvicina a un anello"}
