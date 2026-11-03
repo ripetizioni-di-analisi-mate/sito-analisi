@@ -1178,6 +1178,18 @@ html.collegato .solo-collegati { display: revert; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
 .sim-scelte input[type="text"] { width: 7rem; font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
 .sim-nota-punti { margin: 0.6rem 0 0; font-size: 0.86rem; color: var(--inchiostro-2); }
+.sim-spiega-punti { margin: 0 0 0.7rem; font-size: 0.92rem; color: var(--inchiostro-2); }
+.sim-modelli { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.9rem; }
+.sim-modelli button { font: 600 0.85rem var(--ui); border: 1px solid var(--riga); background: #fff; color: var(--inchiostro); border-radius: 999px; padding: 0.3rem 0.85rem; cursor: pointer; }
+.sim-modelli button[aria-pressed="true"] { background: var(--accento); border-color: var(--accento); color: #fff; }
+.sim-campo-punti { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 400; color: var(--inchiostro-2); }
+.sim-pesi input[type="text"] { width: 5rem; }
+.sim-esempio { margin: 0.9rem 0 1rem; padding: 0.6rem 0.8rem; border-radius: 8px; background: color-mix(in srgb, var(--accento) 6%, #fff); border: 1px solid var(--riga); font-size: 0.9rem; line-height: 1.5; }
+.sim-conto { border-collapse: collapse; margin: 0.2rem 0 1rem; font-family: var(--ui); font-size: 0.92rem; }
+.sim-conto td { padding: 0.25rem 1.2rem 0.25rem 0; border-bottom: 1px solid var(--riga); }
+.sim-conto td:last-child { text-align: right; padding-right: 0; font-variant-numeric: tabular-nums; }
+.sim-conto td:nth-child(2) { color: var(--inchiostro-2); font-variant-numeric: tabular-nums; }
+.sim-conto-totale td { font-weight: 700; border-bottom: 0; }
 .sim-errore { margin: 0; color: #a3412f; font-weight: 600; }
 .sim-errore[hidden] { display: none; }
 .sim-date { font-size: 0.88rem; color: var(--inchiostro-2); }
