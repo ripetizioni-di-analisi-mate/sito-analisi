@@ -10,7 +10,7 @@ Per una velocità $v$ con $0 \leq v < c$ si pongono $\beta = \dfrac{v}{c}$ e $\g
 :::
 
 :::definizione{#quantita-di-moto-relativistica titolo="Quantità di moto relativistica"}
-In tutto l'argomento $m$ indica la **massa** di una particella misurata quando la particella è ferma, detta anche massa a riposo: è una proprietà della particella e ha lo stesso valore in ogni sistema di riferimento. Una particella di massa $m$ che si muove con velocità $\vec{v}$ ha **quantità di moto relativistica**
+In tutto l'argomento $m$ indica la **massa** di una particella misurata quando la particella è ferma, detta anche massa a riposo. La massa è una proprietà della particella e ha lo stesso valore in ogni sistema di riferimento. Una particella di massa $m$ che si muove con velocità $\vec{v}$ ha **quantità di moto relativistica**
 $$
 \vec{p} = \gamma\, m\, \vec{v} ,
 \qquad
@@ -35,7 +35,7 @@ In alcuni libri il prodotto $\gamma m$ si chiama "massa relativistica", e si dic
 :::
 
 :::osservazione{#secondo-principio-relativistico titolo="Secondo principio della dinamica in relatività"}
-Il secondo principio della dinamica resta valido se si scrive con la quantità di moto relativistica: la forza media che agisce su una particella nell'intervallo $\Delta t$ è
+Il secondo principio della dinamica resta valido se si scrive con la quantità di moto relativistica. In questa forma la forza media che agisce su una particella nell'intervallo $\Delta t$ è
 $$
 \vec{F} = \frac{\Delta \vec{p}}{\Delta t} .
 $$
@@ -124,7 +124,7 @@ $$
 \qquad
 1\,\mathrm{MeV}/c = \frac{1{,}60 \cdot 10^{-13}}{3{,}00 \cdot 10^{8}}\,\mathrm{kg\cdot m/s} \approx 5{,}33 \cdot 10^{-22}\,\mathrm{kg\cdot m/s} .
 $$
-Con queste unità le formule si usano senza convertire in joule: una particella di massa $938\,\mathrm{MeV}/c^2$ ha energia a riposo $938\,\mathrm{MeV}$. Con i valori più precisi delle costanti, l'elettrone ha $m_e c^2 = 0{,}511\,\mathrm{MeV}$ e il protone $m_p c^2 = 938\,\mathrm{MeV}$; con i valori arrotondati $m_e = 9{,}11 \cdot 10^{-31}\,\mathrm{kg}$ e $c = 3{,}00 \cdot 10^{8}\,\mathrm{m/s}$ si ottiene $0{,}512\,\mathrm{MeV}$.
+Con queste unità le formule si usano senza convertire in joule. Per esempio una particella di massa $938\,\mathrm{MeV}/c^2$ ha energia a riposo $938\,\mathrm{MeV}$. Con i valori più precisi delle costanti, l'elettrone ha $m_e c^2 = 0{,}511\,\mathrm{MeV}$ e il protone $m_p c^2 = 938\,\mathrm{MeV}$; con i valori arrotondati $m_e = 9{,}11 \cdot 10^{-31}\,\mathrm{kg}$ e $c = 3{,}00 \cdot 10^{8}\,\mathrm{m/s}$ si ottiene $0{,}512\,\mathrm{MeV}$.
 :::
 
 :::esempio{titolo="Energia di un protone in MeV"}
@@ -305,7 +305,7 @@ Il **difetto di massa** di un nucleo con $Z$ protoni, $N$ neutroni e massa $m_{\
 $$
 \Delta m = Z\, m_p + N\, m_n - m_{\text{nucleo}} .
 $$
-Un nucleo ha sempre massa minore della somma delle masse dei suoi nucleoni separati, quindi $\Delta m > 0$. L'**energia di legame** è $B = \Delta m\, c^2$: è l'energia che si deve fornire al nucleo per separarlo in tutti i suoi nucleoni, e anche l'energia liberata quando il nucleo si forma dai nucleoni. Il nucleo di elio-4, con $2$ protoni, $2$ neutroni e massa $4{,}001506\,\mathrm{u}$, ha
+Un nucleo ha sempre massa minore della somma delle masse dei suoi nucleoni separati, quindi $\Delta m > 0$. L'**energia di legame** $B = \Delta m\, c^2$ è l'energia che si deve fornire al nucleo per separarlo in tutti i suoi nucleoni, e anche l'energia liberata quando il nucleo si forma dai nucleoni. Il nucleo di elio-4, con $2$ protoni, $2$ neutroni e massa $4{,}001506\,\mathrm{u}$, ha
 $$
 \begin{aligned}
 \Delta m &= (2 \cdot 1{,}007276 + 2 \cdot 1{,}008665 - 4{,}001506)\,\mathrm{u} = 0{,}030376\,\mathrm{u} , \\[6pt]
