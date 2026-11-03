@@ -70,7 +70,7 @@ Un **solenoide** è un filo avvolto a elica su un cilindro, con spire fitte e af
 $$
 B = \mu_0\,\frac{N}{\ell}\,I = \mu_0\, n I ,
 $$
-dove $n = \dfrac{N}{\ell}$ è il numero di spire per unità di lunghezza. La formula si ricava con il teorema di Ampère, che si enuncia nel seguito dell'argomento. Il verso del campo interno si trova come per la spira, e il solenoide ha un polo nord e un polo sud alle due estremità, come una calamita a barra.
+dove $n = \dfrac{N}{\ell}$ è il numero di spire per unità di lunghezza. La formula si ricava con il teorema di Ampère. Il verso del campo interno si trova come per la spira, e il solenoide ha un polo nord e un polo sud alle due estremità, come una calamita a barra.
 
 Il solenoide serve a produrre in laboratorio un campo magnetico uniforme di valore noto. Per esempio, $400$ spire avvolte su $20\,\mathrm{cm}$ danno $n = 2{,}0 \cdot 10^{3}$ spire al metro; con $I = 2{,}5\,\mathrm{A}$ il campo interno è $B = 4\pi \cdot 10^{-7} \cdot 2{,}0 \cdot 10^{3} \cdot 2{,}5\,\mathrm{T} \approx 6{,}3 \cdot 10^{-3}\,\mathrm{T}$.
 :::
@@ -183,11 +183,11 @@ $$
 $$
 Il teorema si ricava in generale dalla legge di Biot-Savart con strumenti che si studiano all'università; nel caso di un filo rettilineo la verifica è un calcolo diretto.
 
-Il teorema permette di calcolare la circuitazione senza conoscere il campo punto per punto. Per la linea della figura precedente si ottiene
+Il teorema permette di calcolare la circuitazione senza conoscere il campo punto per punto. Per una linea che concatena le correnti $I_1 = 3{,}0\,\mathrm{A}$ uscente e $I_2 = 5{,}0\,\mathrm{A}$ entrante si ottiene
 $$
 \Gamma_\gamma(\vec{B}) = 4\pi \cdot 10^{-7} \cdot (3{,}0 - 5{,}0)\,\mathrm{T\cdot m} \approx -2{,}5 \cdot 10^{-6}\,\mathrm{T\cdot m} ,
 $$
-e la corrente $I_3$ non compare, anche se il suo campo nei punti di $\gamma$ è diverso da zero. Nelle situazioni con molta simmetria il teorema permette anche di calcolare il campo, come si vede nelle applicazioni che seguono.
+e la corrente $I_3$ non compare, anche se il suo campo nei punti di $\gamma$ è diverso da zero. Nelle situazioni con molta simmetria il teorema permette anche di calcolare il campo, come nel solenoide, nel filo spesso e nel toroide.
 :::
 
 ::::teorema{#verifica-ampere-filo titolo="Circuitazione attorno a un filo rettilineo"}
@@ -215,7 +215,7 @@ Il raggio $r$ si semplifica, perciò la circuitazione non dipende dalla circonfe
 ::::
 
 :::osservazione{#campo-non-conservativo titolo="Il campo magnetico non è conservativo"}
-Il campo elettrostatico ha circuitazione nulla lungo ogni linea chiusa, e per questo è conservativo e ammette un potenziale. Il campo magnetico ha invece circuitazione diversa da zero lungo le linee che concatenano una corrente, come mostra la verifica per il filo rettilineo. Il campo magnetico perciò **non è conservativo**, e per esso non si definisce un'energia potenziale come per il campo elettrostatico. Lungo una linea che non concatena correnti, per esempio il quadrato nel campo uniforme dell'esempio sulla circuitazione, la circuitazione è nulla.
+Il campo elettrostatico ha circuitazione nulla lungo ogni linea chiusa, e per questo è conservativo e ammette un potenziale. Il campo magnetico ha invece circuitazione diversa da zero lungo le linee che concatenano una corrente, come mostra la verifica per il filo rettilineo. Il campo magnetico perciò **non è conservativo**, e per esso non si definisce un'energia potenziale come per il campo elettrostatico. Lungo una linea che non concatena correnti, per esempio un quadrato con due lati paralleli a un campo uniforme, la circuitazione è nulla.
 :::
 
 ## Applicazioni del teorema di Ampère
