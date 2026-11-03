@@ -1,7 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
 import { VIDEOCORSI } from '../data/videocorsi';
@@ -17,9 +15,6 @@ const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const localePaddle = lingua;
 const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(materia)) : [];
-// Il PDF si nomina solo nelle materie che lo hanno (public/pdf/<materia>/).
-// (percorso dalla radice del progetto: dentro la build import.meta.url punta ai file compilati)
-const pdf = existsSync(join(process.cwd(), 'public', 'pdf', materia));
 // «Invita un amico»: righe sullo sconto, mostrate dallo script solo a chi ne ha diritto.
 const invito = lingua === 'en' ? {
   ospite: `You were invited by a friend: your first subject is ${SCONTO_INVITO}% off. The discount is applied at checkout, once your account is created.`,
@@ -39,7 +34,6 @@ const invito = lingua === 'en' ? {
     <li set:html={t.includeTeoria(m.argomenti.length)} />
     <li set:html={t.includeSvolti(svolti)} />
     <li set:html={t.includeSoluzioni(dafare)} />
-    {pdf && <li set:html={t.includePdf} />}
   </ul>
   <p class="gratis-ora">{t.gratisOra}</p>
   {video.length > 0 && (

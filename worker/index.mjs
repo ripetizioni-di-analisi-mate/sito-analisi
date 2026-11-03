@@ -1180,6 +1180,11 @@ export default {
 
     // ===== contenuti: oscuramento e consegna =====
     const info = analizza(url.pathname);
+    // I PDF degli argomenti e le pagine di stampa sono stati tolti (03/11/2026, richiesta di Carmine):
+    // i vecchi indirizzi portano alla teoria dell'argomento. Restano solo i PDF dei formulari (sopra).
+    if (info && (info.tipo === 'pdf' || info.tipo === 'stampa')) {
+      return new Response(null, { status: 301, headers: { location: `${info.pref}/${info.materia}/${info.argomento}/teoria`, 'cache-control': 'no-store' } });
+    }
     const protetta = vendita && info && A_PAGAMENTO.includes(info.materia);
     // La sessione si verifica solo per le pagine e i PDF, non per font, stili e immagini.
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);

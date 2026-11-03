@@ -1,12 +1,11 @@
 // Genera, dopo la build, le versioni "vetrina" delle pagine a pagamento:
 //  - teoria: visibili i primi due paragrafi, poi un riquadro con i titoli dei paragrafi che mancano,
-//    che cosa c'è ancora (il PDF solo nelle materie che lo hanno), prezzo e schede gratuite;
+//    che cosa c'è ancora, prezzo e schede gratuite;
 //  - esercizi da fare: traccia visibile, soluzione sostituita dall'invito.
 //  - schede svolte oltre la terza: titolo, teoria usata e tracce visibili, al posto di ogni
 //    svolgimento una riga che rimanda all'accesso completo, in fondo il riquadro di accesso
 //    (la fine della traccia è segnata da src/plugins/remark-tracce.mjs).
-// Il Worker serve queste varianti a chi non ha l'accesso. I PDF e le pagine di stampa
-// non hanno variante: il Worker manda alla pagina Sblocca.
+// Il Worker serve queste varianti a chi non ha l'accesso.
 // Le materie a pagamento sono quelle elencate in src/data/prezzi.json.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -14,7 +13,6 @@ import { join } from 'node:path';
 const A_PAGAMENTO = Object.keys(JSON.parse(readFileSync(new URL('../src/data/prezzi.json', import.meta.url), 'utf8')));
 const DIST = new URL('../dist', import.meta.url).pathname;
 const PREZZI = JSON.parse(readFileSync(new URL('../src/data/prezzi.json', import.meta.url), 'utf8'));
-const PDF = new URL('../public/pdf', import.meta.url).pathname;
 // Nomi brevi delle materie ("Analisi 1"), letti dai file dei dati senza importare TypeScript.
 function nomiBrevi(file, re) {
   const testo = readFileSync(new URL(file, import.meta.url), 'utf8');
@@ -79,10 +77,10 @@ const SEGNO_TRACCIA = '<span class="fine-traccia" hidden></span>';
 
 // Testi delle vetrine in ogni lingua del sito (l'italiano alla radice, le altre sotto /<lingua>).
 const LINGUE = [
-  { pref: '', sblocca: 'Sblocca ora', pdf: /<p class="collegamenti">PDF dell(?:'|&#39;|&#x27;|’)argomento[\s\S]*?<\/p>/,
+  { pref: '', sblocca: 'Sblocca ora',
     breve: BREVE_IT, nomi: DATI_IT.titoli, argomenti: DATI_IT.argomenti, fine: 'Fine dell’anteprima gratuita',
     titolo: (n) => (n === 1 ? 'La teoria di questo argomento continua con un altro paragrafo' : `La teoria di questo argomento continua con altri ${n} paragrafi`),
-    resto: (schede, esercizi, pdf) => `Nell’accesso completo si trovano anche ${schede === 1 ? 'l’altra scheda svolta' : `le altre ${schede} schede svolte`} di questo argomento e le soluzioni dei ${esercizi} esercizi da fare${pdf ? ', oltre al PDF dell’argomento' : ''}.`,
+    resto: (schede, esercizi) => `Nell’accesso completo si trovano anche ${schede === 1 ? 'l’altra scheda svolta' : `le altre ${schede} schede svolte`} di questo argomento e le soluzioni dei ${esercizi} esercizi da fare.`,
     tasto: (nome, prezzo) => `Sblocca ${nome} · ${prezzo} €`,
     gratis: (url) => `Le prime ${SCHEDE_LIBERE} schede svolte di questo argomento sono gratuite e si trovano negli <a href="${url}">esercizi svolti</a>.`,
     riservata: 'Soluzione riservata a chi ha sbloccato la materia.', soluzione: 'La soluzione completa di questo esercizio è nella versione sbloccata.',
@@ -91,10 +89,10 @@ const LINGUE = [
     schedaTitolo: (titolo) => `Le tracce sono libere, gli svolgimenti sono riservati a chi ha sbloccato ${titolo}`,
     schedaResto: (schede, argomenti, esercizi) => `Le prime ${SCHEDE_LIBERE} schede di ogni argomento sono gratuite. Con l’accesso completo ci sono tutte le ${schede} schede svolte, la teoria completa ${argomenti === 1 ? 'dell’argomento' : `dei ${argomenti} argomenti`} e le soluzioni dei ${esercizi} esercizi da fare.`,
     schedeGratis: (arg) => `Le schede gratuite di ${arg} →` },
-  { pref: '/en', sblocca: 'Unlock now', pdf: /<p class="collegamenti">Topic PDF[\s\S]*?<\/p>/,
+  { pref: '/en', sblocca: 'Unlock now',
     breve: BREVE_EN, nomi: DATI_EN.titoli, argomenti: DATI_EN.argomenti, fine: 'End of the free preview',
     titolo: (n) => (n === 1 ? 'The theory of this topic continues with one more section' : `The theory of this topic continues with ${n} more sections`),
-    resto: (schede, esercizi, pdf) => `Full access also includes the other ${schede} worked example${schede === 1 ? '' : 's'} of this topic and the solutions of the ${esercizi} practice exercises${pdf ? ', plus the topic PDF' : ''}.`,
+    resto: (schede, esercizi) => `Full access also includes the other ${schede} worked example${schede === 1 ? '' : 's'} of this topic and the solutions of the ${esercizi} practice exercises.`,
     tasto: (nome, prezzo) => `Unlock ${nome} · €${prezzo}`,
     gratis: (url) => `The first ${SCHEDE_LIBERE} worked examples of this topic are free and are in the <a href="${url}">worked examples</a>.`,
     riservata: 'Solution available to those who have unlocked the subject.', soluzione: 'The full solution of this exercise is in the unlocked version.',
@@ -139,11 +137,10 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       const voci = posizioni.slice(tenute).map((m2) => `<li>${titoloH2(t, m2.index)}</li>`).join('');
       const schede = Math.max(0, contaPagine(join(cartella, 'esercizi-svolti')) - SCHEDE_LIBERE);
       const daFare = contaPagine(join(cartella, 'esercizi'));
-      const pdf = existsSync(join(PDF, materia, `${argomento}.pdf`));
       const nome = L.breve[materia] || materia;
       const invito = `<div class="velo-blocco fine-anteprima"><p class="velo-sopra">${L.fine}</p><p class="velo-titolo">${L.titolo(nascoste)}</p>`
         + `<ol class="velo-elenco" start="${tenute + 1}">${voci}</ol>`
-        + `<p>${L.resto(schede, daFare, pdf)}</p>`
+        + `<p>${L.resto(schede, daFare)}</p>`
         + `<a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.tasto(nome, PREZZI[materia])}</a>`
         + (schede > 0 || contaPagine(join(cartella, 'esercizi-svolti')) > 0 ? `<p class="velo-gratis">${L.gratis(`${L.pref}/${materia}/${argomento}/esercizi-svolti`)}</p>` : '')
         + `</div>`;
@@ -151,8 +148,6 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       // nel riquadro "In questa pagina" restano solo i paragrafi visibili
       const visibili = new Set(posizioni.slice(0, tenute).map((m2) => m2[1]));
       vetrina = vetrina.replace(/<li><a href="#([^"]+)">(.*?)<\/a><\/li>/g, (tutto, slug) => (visibili.has(slug) ? tutto : ''));
-      // niente scaricamento del PDF dalla vetrina
-      vetrina = vetrina.replace(L.pdf, '');
       writeFileSync(join(dest, 'teoria.html'), vetrina);
       teorie++;
     }
