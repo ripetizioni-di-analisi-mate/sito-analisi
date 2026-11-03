@@ -1305,26 +1305,3 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .griglia-domande nav { grid-column: 1; }
 .griglia-domande .ripasso-domande { font-weight: 600; }
 
-/* ===== Sfide tra studenti: lega e duelli nel pannello del livello (versione A2 scelta da Carmine il 03/11/2026) ===== */
-/* Parte alta del pannello in orizzontale (stemma piccolo a sinistra), così il pannello resta basso anche con lega e duelli. */
-.pannello-livello { display: grid; grid-template-columns: auto 1fr; column-gap: 0.85rem; row-gap: 0.65rem; padding: 1rem 1rem 0.9rem; text-align: left; align-items: center; }
-.pannello-livello[hidden] { display: none; }
-.pannello-livello .pl-stemma { grid-row: 1 / span 2; width: 5.2rem; height: 4.7rem; }
-.pannello-livello .pl-fascia { align-self: end; }
-.pannello-livello .pl-fascia strong { font-size: 1.02rem; }
-.pannello-livello .pl-fascia span { font-size: 0.86rem; }
-.pannello-livello .pl-mancano { align-self: start; font-size: 0.82rem; }
-.pannello-livello > :not(.pl-stemma):not(.pl-fascia):not(.pl-mancano) { grid-column: 1 / -1; }
-.pannello-livello .pl-oggi { padding: 0.55rem 0; text-align: center; }
-.pannello-livello .pl-oggi strong { font-size: 1.1rem; }
-.pannello-livello .pl-continua { min-height: 2.5rem; }
-.pannello-livello .pl-account { min-height: 2.3rem; margin-top: -0.2rem; }
-/* Due pillole sulla stessa riga: lega della settimana e duelli */
-.pl-sfide { align-self: stretch; display: grid; grid-template-columns: 1.25fr 1fr; gap: 0.4rem; margin-top: -0.3rem; }
-.pl-sfide a { display: flex; align-items: center; justify-content: center; gap: 0.4rem; min-height: 2.3rem; padding: 0 0.6rem; border: 1px solid var(--riga); border-radius: 999px; color: var(--inchiostro) !important; text-decoration: none; font-size: 0.85rem; font-weight: 600; white-space: nowrap; min-width: 0; }
-.pl-sfide a:hover { border-color: var(--verde); }
-.pl-sfide a > span:last-child { overflow: hidden; text-overflow: ellipsis; }
-.pl-sf-medaglia { flex: none; width: 1.35rem; height: 1.35rem; }
-.pl-sf-medaglia svg { width: 100%; height: 100%; display: block; }
-.pl-sf-icona { flex: none; display: grid; place-items: center; width: 1.35rem; height: 1.35rem; color: var(--verde); }
-.pl-sf-icona svg { width: 1.1rem; height: 1.1rem; }

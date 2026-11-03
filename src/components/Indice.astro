@@ -2,6 +2,7 @@
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 import LezioniCarmine from './LezioniCarmine.astro';
+import SfideIndice from './SfideIndice.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
@@ -26,6 +27,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>
   {lingua === 'it' && <LezioniCarmine dove="indice" />}
+  {lingua === 'it' && <SfideIndice />}
   {m ? (
     <>
       <p class="indice-materia">

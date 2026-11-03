@@ -162,13 +162,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
               <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
-              {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
-              {!en && (
-                <div class="pl-sfide">
-                  <a href="/lega"><span class="pl-sf-medaglia" aria-hidden="true"></span><span class="pl-sf-lega">Lega della settimana</span></a>
-                  <a href="/duelli"><span class="pl-sf-icona" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="14" cy="7" r="2.4"/><path d="M2 16c.5-2.4 2-3.7 4-3.7s3.5 1.3 4 3.7M10 16c.5-2.4 2-3.7 4-3.7s3.5 1.3 4 3.7"/></svg></span><span>Duelli</span></a>
-                </div>
-              )}
               <a class="pl-account" href={link(lingua, '/account')}>{en ? 'Open your account' : 'Apri il tuo account'}</a>
             </div>
           </>
@@ -247,7 +240,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 
   <script>
     import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
-    import { medagliaLega } from '../scripts/medaglia-lega';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
     // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
     function adattaFormule() {
@@ -324,12 +316,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       const ultima = (d.sessioni || []).find((x: any) => x.materia && x.argomento);
       const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
       if (!cont.dataset.qui && dove) cont.href = (inglese ? '/en' : '') + dove;
-      // Lega della settimana: nome, posizione e numero di studenti del gruppo
-      const lg = d.lega, sf = pl.querySelector<HTMLElement>('.pl-sfide');
-      if (lg && sf) {
-        sf.querySelector('.pl-sf-lega')!.textContent = lg.posizione ? `Lega ${lg.nome} · ${lg.posizione}°` : `Lega ${lg.nome}`;
-        sf.querySelector('.pl-sf-medaglia')!.innerHTML = medagliaLega(lg.lega, lg.nome, 'mp');
-      }
     }
     if (bl?.dataset.stato) {
       try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, frase: d.r, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
