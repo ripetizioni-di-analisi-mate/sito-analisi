@@ -36,7 +36,7 @@ $$
 :::
 
 :::attenzione{#campo-indotto-non-conservativo}
-Il campo elettrostatico prodotto da cariche ferme ha circuitazione nulla lungo ogni linea chiusa, e per questo è conservativo e ammette il potenziale elettrico. Il campo elettrico indotto ha invece circuitazione diversa da zero, quindi *non* è conservativo, e per esso il potenziale non è definito. Nel caso precedente un elettrone che percorre una volta la circonferenza riceve dal campo indotto il lavoro $e\,|\Gamma(\vec{E})| = 1{,}60 \cdot 10^{-19}\,\mathrm{C} \cdot 6{,}3 \cdot 10^{-3}\,\mathrm{V} \approx 1{,}0 \cdot 10^{-21}\,\mathrm{J}$, e a ogni giro successivo riceve di nuovo lo stesso lavoro, pur tornando nel punto di partenza.
+Il campo elettrostatico prodotto da cariche ferme ha circuitazione nulla lungo ogni linea chiusa, e per questo è conservativo e ammette il potenziale elettrico. Il campo elettrico indotto ha invece circuitazione diversa da zero, quindi *non* è conservativo, e per esso il potenziale non è definito. Con $r = 10\,\mathrm{cm}$ e $0{,}20\,\mathrm{T/s}$ un elettrone che percorre una volta la circonferenza riceve dal campo indotto il lavoro $e\,|\Gamma(\vec{E})| = 1{,}60 \cdot 10^{-19}\,\mathrm{C} \cdot 6{,}3 \cdot 10^{-3}\,\mathrm{V} \approx 1{,}0 \cdot 10^{-21}\,\mathrm{J}$, e a ogni giro successivo riceve di nuovo lo stesso lavoro, pur tornando nel punto di partenza.
 :::
 
 :::esempio{#campo-indotto-solenoide titolo="Campo elettrico indotto da un solenoide"}
@@ -94,11 +94,11 @@ $$
 $$
 dove $i_{\text{conc}}$ è la corrente di conduzione che attraversa la superficie e $\Phi(\vec{E})$ è il flusso del campo elettrico attraverso la stessa superficie. È un postulato di Maxwell, confermato dalla scoperta sperimentale delle onde elettromagnetiche.
 
-La legge afferma che il campo magnetico è generato dalle correnti e anche dai campi elettrici che variano nel tempo. Con correnti costanti il flusso $\Phi(\vec{E})$ non varia e si ritrova il teorema di Ampère. Nel condensatore dell'esempio precedente, con $i = 0{,}50\,\mathrm{A}$, la circuitazione lungo $\gamma$ vale $\mu_0 i = 4\pi \cdot 10^{-7} \cdot 0{,}50\,\mathrm{T\cdot m} \approx 6{,}3 \cdot 10^{-7}\,\mathrm{T\cdot m}$ sia con la superficie $S_1$, attraversata dalla corrente di conduzione, sia con la superficie $S_2$, attraversata dalla corrente di spostamento.
+La legge afferma che il campo magnetico è generato dalle correnti e anche dai campi elettrici che variano nel tempo. Con correnti costanti il flusso $\Phi(\vec{E})$ non varia e si ritrova il teorema di Ampère. In un condensatore che si carica con $i = 0{,}50\,\mathrm{A}$ la circuitazione lungo $\gamma$ vale $\mu_0 i = 4\pi \cdot 10^{-7} \cdot 0{,}50\,\mathrm{T\cdot m} \approx 6{,}3 \cdot 10^{-7}\,\mathrm{T\cdot m}$ sia con la superficie $S_1$, attraversata dalla corrente di conduzione, sia con la superficie $S_2$, attraversata dalla corrente di spostamento.
 :::
 
 :::esempio{#campo-magnetico-condensatore titolo="Campo magnetico tra le armature di un condensatore"}
-Un condensatore piano con armature circolari di raggio $R$ si carica con la corrente $i$. Tra le armature il campo elettrico è uniforme, e la rapidità con cui cresce si ricava dall'esempio precedente con $S = \pi R^2$, cioè $\dfrac{dE}{dt} = \dfrac{i}{\varepsilon_0 \pi R^2}$. Per simmetria le linee di $\vec{B}$ sono circonferenze coassiali con le armature. Si applica la legge di Ampère-Maxwell a una circonferenza di raggio $r$ parallela alle armature e compresa tra esse; il cerchio che essa delimita non è attraversato da correnti di conduzione.
+Un condensatore piano con armature circolari di raggio $R$ si carica con la corrente $i$. Tra le armature il campo elettrico è uniforme, e la rapidità con cui cresce si ricava come nel condensatore piano dell'esempio sulla corrente di spostamento, con $S = \pi R^2$, cioè $\dfrac{dE}{dt} = \dfrac{i}{\varepsilon_0 \pi R^2}$. Per simmetria le linee di $\vec{B}$ sono circonferenze coassiali con le armature. Si applica la legge di Ampère-Maxwell a una circonferenza di raggio $r$ parallela alle armature e compresa tra esse; il cerchio che essa delimita non è attraversato da correnti di conduzione.
 
 - Se $r \leq R$, il flusso è $\Phi(\vec{E}) = E\,\pi r^2$, quindi $2\pi r\,B = \mu_0 \varepsilon_0\,\pi r^2 \dfrac{i}{\varepsilon_0 \pi R^2}$ e $B = \dfrac{\mu_0\, i\, r}{2\pi R^2}$.
 - Se $r \geq R$, il campo elettrico fuori dalle armature è nullo, quindi $\Phi(\vec{E}) = E\,\pi R^2$ e $B = \dfrac{\mu_0\, i}{2\pi r}$, come per un filo rettilineo.
@@ -123,7 +123,7 @@ $$
 $$
 dove $Q$ è la carica contenuta nella superficie chiusa; nelle ultime due equazioni i flussi sono calcolati attraverso una superficie che ha la linea come bordo. Sono postulati, e riuniscono il teorema di Gauss per il campo elettrico, il teorema di Gauss per il campo magnetico, la legge di Faraday-Neumann e la legge di Ampère-Maxwell.
 
-Insieme alla forza di Lorentz $\vec{F} = q\vec{E} + q\,\vec{v} \times \vec{B}$, che descrive l'azione dei campi sulle cariche, le equazioni di Maxwell descrivono tutti i fenomeni elettrici e magnetici della fisica classica. Per esempio, per la prima equazione una carica di $2{,}0\,\mathrm{nC}$ racchiusa in una superficie chiusa produce attraverso di essa il flusso $\Phi(\vec{E}) = \dfrac{2{,}0 \cdot 10^{-9}}{8{,}85 \cdot 10^{-12}}\,\mathrm{V\cdot m} \approx 226\,\mathrm{V\cdot m}$, qualunque sia la forma della superficie.
+Insieme alla forza di Lorentz $\vec{F} = q\vec{E} + q\,\vec{v} \times \vec{B}$, che descrive l'azione dei campi sulle cariche, le equazioni di Maxwell descrivono tutti i fenomeni elettrici e magnetici della fisica classica. Per esempio, per la prima equazione una carica di $2{,}0\,\mathrm{nC}$ racchiusa in una superficie chiusa produce attraverso di essa il flusso $\Phi(\vec{E}) = \dfrac{2{,}0 \cdot 10^{-9}}{8{,}85 \cdot 10^{-12}}\,\mathrm{V\cdot m} \approx 2{,}3 \cdot 10^{2}\,\mathrm{V\cdot m}$, qualunque sia la forma della superficie.
 :::
 
 :::osservazione{#significato-equazioni-maxwell titolo="Significato delle quattro equazioni"}
@@ -284,7 +284,7 @@ L'intensità di un'onda elettromagnetica sinusoidale nel vuoto è
 $$
 I = c\,\bar{u} = c\,\varepsilon_0 E_{\text{eff}}^2 = \frac{1}{2}\, c\,\varepsilon_0 E_0^2 .
 $$
-L'intensità è proporzionale al quadrato del campo, quindi raddoppiando l'ampiezza l'intensità diventa quattro volte più grande. Nota l'intensità, si ricava il campo efficace $E_{\text{eff}} = \sqrt{\dfrac{I}{c\,\varepsilon_0}}$. Per il laser della definizione precedente
+L'intensità è proporzionale al quadrato del campo, quindi raddoppiando l'ampiezza l'intensità diventa quattro volte più grande. Nota l'intensità, si ricava il campo efficace $E_{\text{eff}} = \sqrt{\dfrac{I}{c\,\varepsilon_0}}$. Per il puntatore laser di intensità $1{,}0 \cdot 10^{3}\,\mathrm{W/m^2}$
 $$
 E_{\text{eff}} = \sqrt{\frac{1{,}0 \cdot 10^{3}}{3{,}00 \cdot 10^{8} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{V/m} \approx 6{,}1 \cdot 10^{2}\,\mathrm{V/m} .
 $$
@@ -360,7 +360,7 @@ Un'onda polarizzata linearmente, di intensità $I_0$, incide su un filtro polari
 $$
 I = I_0 \cos^2\theta .
 $$
-La legge permette di regolare l'intensità della luce ruotando il filtro. Con $\theta = 0^\circ$ passa tutta la luce, mentre con $\theta = 90^\circ$ la luce è completamente bloccata. La luce di $400\,\mathrm{W/m^2}$ uscita dal filtro della definizione precedente attraversa un secondo filtro ruotato di $30^\circ$ con intensità $I = 400 \cdot \cos^2 30^\circ\,\mathrm{W/m^2} = 400 \cdot \dfrac{3}{4}\,\mathrm{W/m^2} = 300\,\mathrm{W/m^2}$.
+La legge permette di regolare l'intensità della luce ruotando il filtro. Con $\theta = 0^\circ$ passa tutta la luce, mentre con $\theta = 90^\circ$ la luce è completamente bloccata. La luce di $400\,\mathrm{W/m^2}$ uscita da un primo filtro attraversa un secondo filtro ruotato di $30^\circ$ con intensità $I = 400 \cdot \cos^2 30^\circ\,\mathrm{W/m^2} = 400 \cdot \dfrac{3}{4}\,\mathrm{W/m^2} = 300\,\mathrm{W/m^2}$.
 
 ::grafico{curve="t,cos(t*pi/180)^2,0,180" punti="0,1,pieno;90,0,pieno;180,1,pieno" xmin=0 xmax=200 ymin=0 ymax=1.2 nomi="θ,I" legenda=0 titolo="Intensità trasmessa da un polarizzatore, in unità di $I_0$, in funzione dell'angolo $\theta$ in gradi: è massima per $\theta = 0^\circ$ e $\theta = 180^\circ$ e nulla per $\theta = 90^\circ$"}
 
