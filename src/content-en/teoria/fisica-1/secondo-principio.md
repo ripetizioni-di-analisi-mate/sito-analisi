@@ -227,7 +227,7 @@ $$
 $$
 computed along a reversible process from $A$ to $B$ has the same value for *every* reversible process connecting the two states.
 
-The theorem says that, over reversible processes, $\dfrac{\delta Q}{T}$ behaves like the differential of a function of state, while $\delta Q$ alone depends on the path. In a reversible process the temperature of the system equals that of the reservoir with which it exchanges heat, therefore $T$ is also the temperature of the system.
+The theorem says that, over reversible processes, $\dfrac{\delta Q}{T}$ is the differential of a function of state, while $\delta Q$ alone depends on the path. In a reversible process the temperature of the system equals that of the reservoir with which it exchanges heat, therefore $T$ is also the temperature of the system.
 
 :::dimostrazione
 Let $\gamma_1$ and $\gamma_2$ be two reversible processes from $A$ to $B$. Traversing $\gamma_1$ from $A$ to $B$ and then $\gamma_2$ in the opposite direction from $B$ to $A$ gives a reversible cycle. In the reverse process every heat exchanged changes sign, therefore the **Clausius inequality** with the equality sign gives

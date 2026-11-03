@@ -227,7 +227,7 @@ $$
 $$
 calcolato lungo una trasformazione reversibile da $A$ a $B$ ha lo stesso valore per *ogni* trasformazione reversibile che collega i due stati.
 
-Il teorema dice che, sulle trasformazioni reversibili, $\dfrac{\delta Q}{T}$ si comporta come il differenziale di una funzione dello stato, mentre $\delta Q$ da solo dipende dal cammino. In una trasformazione reversibile la temperatura del sistema è uguale a quella del serbatoio con cui scambia calore, quindi $T$ è anche la temperatura del sistema.
+Il teorema dice che, sulle trasformazioni reversibili, $\dfrac{\delta Q}{T}$ è il differenziale di una funzione dello stato, mentre $\delta Q$ da solo dipende dal cammino. In una trasformazione reversibile la temperatura del sistema è uguale a quella del serbatoio con cui scambia calore, quindi $T$ è anche la temperatura del sistema.
 
 :::dimostrazione
 Siano $\gamma_1$ e $\gamma_2$ due trasformazioni reversibili da $A$ a $B$. Percorrendo $\gamma_1$ da $A$ a $B$ e poi $\gamma_2$ in verso opposto da $B$ ad $A$ si ottiene un ciclo reversibile. Nella trasformazione inversa ogni calore scambiato cambia segno, quindi la **disuguaglianza di Clausius** con il segno di uguaglianza dà
@@ -330,7 +330,7 @@ Valgono le formule seguenti, dove $Q$ è il calore assorbito.
 
 - Un serbatoio a temperatura $T$ che assorbe il calore $Q$ ha $\Delta S = \dfrac{Q}{T}$.
 - Un corpo di massa $m$ e calore specifico $c$ costante, scaldato o raffreddato da $T_A$ a $T_B$, ha $\Delta S = m c \ln\dfrac{T_B}{T_A}$.
-- Una massa $m$ che cambia stato alla temperatura $T$ con calore latente $\lambda$ ha $\Delta S = \pm\dfrac{m \lambda}{T}$, con il segno positivo per fusione ed vaporizzazione.
+- Una massa $m$ che cambia stato alla temperatura $T$ con calore latente $\lambda$ ha $\Delta S = \pm\dfrac{m \lambda}{T}$, con il segno positivo per fusione e vaporizzazione.
 
 Il serbatoio scambia calore a temperatura costante, e lo scambio si può pensare reversibile per il serbatoio, quindi $\Delta S = \dfrac{Q}{T}$ anche quando il corpo con cui è in contatto ha un'altra temperatura. Per il corpo si considera un riscaldamento con una successione di serbatoi a temperature via via crescenti, in modo che ogni scambio sia reversibile; allora $\delta Q = m c\, dT$ e $\Delta S = \displaystyle\int_{T_A}^{T_B} \frac{m c\, dT}{T}$. Nel cambiamento di stato la temperatura resta costante, quindi si divide il calore $m\lambda$ per $T$. Per esempio $1{,}0\,\mathrm{kg}$ d'acqua scaldato da $293\,\mathrm{K}$ a $353\,\mathrm{K}$, con $c = 4186\,\mathrm{J/(kg\cdot K)}$, ha $\Delta S = 4186 \ln\dfrac{353}{293} \approx 780\,\mathrm{J/K}$, e $1{,}0\,\mathrm{kg}$ di ghiaccio che fonde a $273\,\mathrm{K}$, con $\lambda_f = 3{,}33 \cdot 10^5\,\mathrm{J/kg}$, ha $\Delta S \approx 1{,}22 \cdot 10^3\,\mathrm{J/K}$.
 :::
