@@ -39,7 +39,7 @@ Note per una nuova chat di Claude che riprende il lavoro con Carmine (aggiornate
 I brief contengono il percorso `/home/claude/sito-analisi1`: sostituirlo con quello del clone usato.
 
 ## Materie online (tutte attive, con versione inglese)
-Prezzi dal 29/10 pomeriggio (sito e Paddle allineati): Precorso 29 €, Analisi matematica 1 49 €, Analisi matematica 2 55 €, Algebra lineare e geometria analitica 39 €, Fisica 1 49 €, Fisica 2 55 €, Matematica generale 59 €, Matematica 5° anno 29 € (senza inglese). Il ramo `prezzi-nuovi` è superato: i prezzi sono su `main`. Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
+Prezzi dal 29/10 pomeriggio (sito e Paddle allineati): Precorso 29 €, Analisi matematica 1 49 €, Analisi matematica 2 55 €, Algebra lineare e geometria analitica 39 €, Fisica 1 49 €, Fisica 2 55 €, Matematica generale 59 €, Matematica 5° anno 29 € e Fisica 5° anno 29 € (senza inglese). Il ramo `prezzi-nuovi` è superato: i prezzi sono su `main`. Pagina "Chi sono" (bio dal suo altro sito ripetizioni-di-analisi-matematica.it).
 
 ## Pagamenti (Paddle, account approvato il 28/10/2026)
 - Prodotti e prezzi creati per tutte e sei le materie; codici `pri_…` in `wrangler.jsonc` (vars), token del checkout `PADDLE_CLIENT_TOKEN` (pubblico) idem.
@@ -100,6 +100,11 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Liceo scientifico, tono più semplice (approvato da Carmine sul capitolo Derivate). 11 argomenti scritti e verificati. Brief: `istruzioni-agenti/brief-matematica-superiori-5.md` e `brief-verifica-matematica-superiori-5.md`.
 - Prodotto e prezzo Paddle (29 €, quantità massima 1) creati il 29/10; codice in `wrangler.jsonc` come `PADDLE_PREZZO_MATEMATICA_SUPERIORI_5`. **Da fare**: traduzione inglese.
 - Build locale: con 4170 pagine il container a volte uccide il processo (exit 137); `NODE_OPTIONS=--max-old-space-size=5500 npx astro build` passa.
+
+## Fisica 5° anno (online dal 03/11/2026, 29 €)
+- Liceo scientifico, stesso tono di Matematica 5° anno. 11 argomenti scelti da Carmine (campo magnetico e forza di Lorentz, sorgenti del campo e Ampère, cariche nei campi, induzione, autoinduzione e RL, corrente alternata, Maxwell e onde, relatività spazio e tempo, relatività dinamica ed energia, corpo nero/fotoelettrico/Compton, Bohr/de Broglie/indeterminazione), 8 schede e 14 tracce ciascuno, scritti e verificati con sympy. Brief: `istruzioni-agenti/brief-fisica-superiori-5.md` e `brief-verifica-fisica-superiori-5.md`.
+- Scelte di Carmine (03/11): esclusa dalle lezioni prenotabili come Fisica 1 e 2 (`ESCLUSE_DALLE_LEZIONI`); rete elettrica a 50 Hz e 230 V; regola della mano destra sempre con pollice, altre dita e palmo. Momento torcente $\vec{M}$ (perché $\tau$ è la costante di tempo), lavoro $W$.
+- Prodotto e prezzo Paddle (29 €, una tantum, quantità massima 1) creati il 03/11; codice in `wrangler.jsonc` come `PADDLE_PREZZO_FISICA_SUPERIORI_5`. **Da fare**: traduzione inglese, domande a tempo.
 
 ## Videocorsi (dal 30/10/2026)
 - Videocorsi preregistrati di Carmine (prima sul vecchio sito ripetizioni-di-analisi-matematica.it, Hostinger): dati in `src/data/videocorsi.ts` (Analisi 1 e 2 51 lezioni 499 €, Analisi 1 35 lez. 360 €, Analisi 2 16 lez. 192 €, Matematica generale 38 lez. 456 €, Algebra 8 lez. 96 €; lezioni da circa 50 min, video e PDF su Google Drive).

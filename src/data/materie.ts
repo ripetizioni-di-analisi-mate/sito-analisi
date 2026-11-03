@@ -297,7 +297,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "Il programma di fisica del quinto anno del liceo scientifico, verso l'esame di maturità: campo magnetico, induzione elettromagnetica, corrente alternata, equazioni di Maxwell e onde elettromagnetiche, relatività ristretta e fisica quantistica.",
     colore: '#5d5d8f',
     gruppo: 'Superiori',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'campo-magnetico', titolo: 'Campo magnetico e forza di Lorentz', breve: 'Campo magnetico' },
       { slug: 'sorgenti-campo-magnetico', titolo: 'Sorgenti del campo magnetico e teorema di Ampère', breve: 'Sorgenti del campo magnetico' },
