@@ -38,7 +38,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
     {aPagamento.map((m) => (
       <li style={`--accento: ${m.colore}`}>
         <a href={link(lingua, `/${m.slug}/sblocca`)}>
-          <h3>{m.titolo} — {m.prezzo} €</h3>
+          <h3>{m.titolo} · {m.prezzo} €</h3>
           <p>{m.descrizione}</p>
           <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>
         </a>
