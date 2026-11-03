@@ -12,7 +12,7 @@ I poli di un magnete non si separano. Se si spezza una calamita a metà, ciascun
 :::
 
 :::definizione{#linee-di-campo titolo="Campo magnetico e linee di campo"}
-Lo spazio attorno a un magnete in cui un altro magnete subisce forze si dice sede di un **campo magnetico**. Il campo magnetico in un punto è un vettore $\vec{B}$, la cui direzione e il cui verso sono quelli in cui si dispone un piccolo **ago magnetico**, dal polo sud al polo nord dell'ago. Il modulo di $\vec{B}$ si definisce con la forza su un filo percorso da corrente, come si vede nella definizione operativa del campo magnetico.
+Lo spazio attorno a un magnete in cui un altro magnete subisce forze si dice sede di un **campo magnetico**. Il campo magnetico in un punto è un vettore $\vec{B}$, la cui direzione e il cui verso sono quelli in cui si dispone un piccolo ago magnetico, dal polo sud al polo nord dell'ago. Il modulo di $\vec{B}$ si definisce con la forza su un filo percorso da corrente, come si vede nella definizione operativa del campo magnetico.
 
 Le **linee di campo** sono le linee orientate tangenti in ogni punto a $\vec{B}$ e con lo stesso verso. Si visualizzano con la limatura di ferro, perché ogni granello si comporta come un piccolo ago magnetico e si allinea con il campo. Dove le linee sono più fitte il campo è più intenso. Fuori da una calamita le linee escono dal polo nord ed entrano nel polo sud; dentro la calamita proseguono dal polo sud al polo nord. Le linee del campo magnetico sono quindi **linee chiuse**, e questa proprietà corrisponde al fatto che i poli non si separano.
 
