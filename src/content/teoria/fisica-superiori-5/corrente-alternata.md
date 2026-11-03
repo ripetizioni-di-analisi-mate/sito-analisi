@@ -44,7 +44,7 @@ $$
 ::::
 
 :::osservazione{#flusso-e-fem titolo="Flusso massimo e f.e.m. nulla"}
-Il flusso è massimo quando il piano delle spire è perpendicolare a $\vec{B}$, cioè per $\omega t = 0$, e in quell'istante la f.e.m. è nulla. La f.e.m. è massima in modulo quando il piano delle spire è parallelo a $\vec{B}$, cioè quando il flusso è nullo e varia con la rapidità massima. La f.e.m. è infatti legata alla rapidità con cui varia il flusso.
+Il flusso è massimo quando il piano delle spire è perpendicolare a $\vec{B}$, cioè per $\omega t = 0$, e in quell'istante la f.e.m. è nulla. La f.e.m. è massima in modulo quando il piano delle spire è parallelo a $\vec{B}$, cioè quando il flusso è nullo e varia con la rapidità massima.
 
 ::grafico{f="cos(0.314*x);sin(0.314*x)" xmin=0 xmax=42 ymin=-1.5 ymax=1.6 nomi="t," legenda="\dfrac{\Phi_B}{NBS};\dfrac{\mathcal{E}}{\mathcal{E}_0}" titolo="Flusso concatenato e f.e.m. di un alternatore a $50\,\mathrm{Hz}$, divisi per i valori massimi, con $t$ in millisecondi: il periodo è $20\,\mathrm{ms}$ e la f.e.m. si annulla dove il flusso è massimo in modulo"}
 
@@ -245,7 +245,7 @@ Un circuito con $L = 0{,}050\,\mathrm{H}$ e $C = 20\,\mu\mathrm{F}$ è alimentat
 $$
 \omega_0 = \frac{1}{\sqrt{0{,}050 \cdot 20 \cdot 10^{-6}}}\,\mathrm{rad/s} = \frac{1}{\sqrt{1{,}0 \cdot 10^{-6}}}\,\mathrm{rad/s} = 1{,}0 \cdot 10^3\,\mathrm{rad/s} ,
 $$
-cioè $f_0 \approx 159\,\mathrm{Hz}$. Con $R = 10\,\Omega$ la corrente efficace alla risonanza è $\dfrac{20}{10}\,\mathrm{A} = 2{,}0\,\mathrm{A}$; con $R = 20\,\Omega$ è $1{,}0\,\mathrm{A}$. Lontano dalla risonanza la reattanza $|X_L - X_C|$ è molto maggiore di $R$, e le due correnti sono quasi uguali.
+cioè $f_0 \approx 159\,\mathrm{Hz}$. Con $R = 10\,\Omega$ la corrente efficace alla risonanza è $\dfrac{20}{10}\,\mathrm{A} = 2{,}0\,\mathrm{A}$; con $R = 20\,\Omega$ è $1{,}0\,\mathrm{A}$. Lontano dalla risonanza la reattanza $|X_L - X_C|$ è molto maggiore di $R$, quindi le due correnti sono quasi uguali.
 
 ::grafico{f="20/sqrt(100+(50*x-50/x)^2)+0*sqrt(x);20/sqrt(400+(50*x-50/x)^2)+0*sqrt(x)" asintoti="x=1" xmin=0 xmax=3.2 ymin=-0.5 ymax=2.6 nomi="ω,I" legenda="R = 10\,\Omega;R = 20\,\Omega" titolo="Corrente efficace in ampere in funzione della pulsazione, con $\omega$ in $10^3\,\mathrm{rad/s}$, per $L = 0{,}050\,\mathrm{H}$, $C = 20\,\mu\mathrm{F}$ e $V_{\text{eff}} = 20\,\mathrm{V}$: il massimo è in $\omega_0 = 1{,}0 \cdot 10^3\,\mathrm{rad/s}$, e con la resistenza minore il picco è più alto e più stretto"}
 
@@ -331,7 +331,7 @@ Si verifica per sostituzione che $q(t) = Q_0 \cos(\omega_0 t)$ è una soluzione.
 $$
 L\,q'' + \frac{q}{C} = \left( -L\,\omega_0^2 + \frac{1}{C} \right) Q_0 \cos(\omega_0 t) = \left( -\frac{L}{LC} + \frac{1}{C} \right) Q_0 \cos(\omega_0 t) = 0 .
 $$
-Inoltre $q(0) = Q_0$ e $i(0) = q'(0) = 0$, quindi la soluzione soddisfa le condizioni iniziali, perché all'istante iniziale il condensatore ha carica $Q_0$ e la corrente è nulla. Per il teorema di esistenza e unicità visto nell'argomento sulle equazioni differenziali di Matematica 5° anno, questa è l'unica soluzione. La corrente è la derivata $q'(t)$.
+All'istante iniziale il condensatore ha carica $Q_0$ e la corrente è nulla, quindi le condizioni iniziali sono $q(0) = Q_0$ e $q'(0) = 0$, e la funzione trovata le soddisfa. Per il teorema di esistenza e unicità visto nell'argomento sulle equazioni differenziali di Matematica 5° anno, questa è l'unica soluzione. La corrente è la derivata $q'(t)$.
 :::
 ::::
 

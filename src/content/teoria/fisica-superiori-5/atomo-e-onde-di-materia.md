@@ -47,7 +47,7 @@ Dopo la scoperta dell'elettrone, Thomson propose che l'atomo fosse una sfera di 
 :::
 
 :::osservazione{#esperimento-di-rutherford titolo="Esperimento di Rutherford"}
-Nell'esperimento di Geiger, Marsden e Rutherford un fascio di particelle $\alpha$, che sono nuclei di elio con carica $+2e$ ed energia cinetica di alcuni $\mathrm{MeV}$, colpisce una lamina d'oro molto sottile. Uno schermo fluorescente registra in quale direzione escono le particelle. Si misura che quasi tutte le particelle attraversano la lamina senza deviare, ma alcune vengono deviate di angoli grandi e circa una su ventimila torna indietro.
+Nell'esperimento di Geiger, Marsden e Rutherford un fascio di particelle $\alpha$, che sono nuclei di elio con carica $+2e$ ed energia cinetica di alcuni $\mathrm{MeV}$, colpisce una lamina d'oro molto sottile. Uno schermo fluorescente registra in quale direzione escono le particelle. Si misura che quasi tutte le particelle attraversano la lamina senza deviare, ma alcune vengono deviate di angoli grandi e una frazione piccolissima torna indietro.
 
 Il modello di Thomson non spiega le deviazioni grandi, perché in esso il campo elettrico è troppo debole. Rutherford ne concluse che la carica positiva e quasi tutta la massa dell'atomo sono concentrate in una regione piccolissima al centro, il **nucleo**, e che gli elettroni si trovano attorno al nucleo, in uno spazio quasi vuoto. Una particella $\alpha$ che passa vicino al nucleo subisce una forte repulsione elettrica e viene deviata lungo un ramo di iperbole.
 
@@ -66,7 +66,7 @@ K = \frac{1}{4\pi\varepsilon_0} \frac{2e \cdot Ze}{d}
 \qquad \Longrightarrow \qquad
 d = \frac{1}{4\pi\varepsilon_0} \frac{2 Z e^2}{K} = 8{,}99 \cdot 10^{9} \cdot \frac{2 \cdot 79 \cdot \left( 1{,}60 \cdot 10^{-19} \right)^2}{5{,}0 \cdot 1{,}60 \cdot 10^{-13}}\,\mathrm{m} \approx 4{,}5 \cdot 10^{-14}\,\mathrm{m} ,
 $$
-dove $1\,\mathrm{MeV} = 1{,}60 \cdot 10^{-13}\,\mathrm{J}$. La particella si avvicina fino a $4{,}5 \cdot 10^{-14}\,\mathrm{m}$ senza toccare il nucleo, perciò il raggio del nucleo d'oro è minore di questa distanza, circa diecimila volte più piccolo del raggio dell'atomo.
+dove $1\,\mathrm{MeV} = 1{,}60 \cdot 10^{-13}\,\mathrm{J}$. La particella si avvicina fino a $4{,}5 \cdot 10^{-14}\,\mathrm{m}$ senza toccare il nucleo, perciò il raggio del nucleo d'oro è minore di questa distanza, che è già circa duemila volte più piccola del raggio dell'atomo.
 :::
 
 :::osservazione{#instabilita-modello-planetario titolo="Instabilità del modello planetario"}
@@ -79,15 +79,8 @@ Nel modello di Rutherford gli elettroni ruotano attorno al nucleo, attratti dall
 Nel 1913 Bohr descrisse l'atomo di idrogeno, formato da un protone e da un elettrone, con tre postulati.
 
 1. L'elettrone si muove attorno al nucleo su orbite circolari, sotto l'azione della forza di Coulomb. Esistono solo alcune orbite permesse, dette **stati stazionari**: su di esse l'elettrone *non* emette radiazione e la sua energia resta costante.
-2. Le orbite permesse sono quelle in cui il prodotto della massa per la velocità e per il raggio è un multiplo intero di $\dfrac{h}{2\pi}$:
-$$
-m_e v r = n \frac{h}{2\pi} , \qquad n = 1, 2, 3, \ldots
-$$
-Il numero naturale $n$ si chiama **numero quantico principale**.
-3. L'atomo emette o assorbe radiazione solo quando l'elettrone passa da un'orbita permessa a un'altra. Se l'elettrone passa da un livello di energia $E_i$ a un livello più basso $E_f$, viene emesso un fotone di frequenza $f$ tale che
-$$
-h f = E_i - E_f .
-$$
+2. Le orbite permesse sono quelle in cui il prodotto della massa per la velocità e per il raggio è un multiplo intero di $\dfrac{h}{2\pi}$, cioè $m_e v r = n \dfrac{h}{2\pi}$ con $n = 1, 2, 3, \ldots$ Il numero naturale $n$ si chiama **numero quantico principale**.
+3. L'atomo emette o assorbe radiazione solo quando l'elettrone passa da un'orbita permessa a un'altra. Se l'elettrone passa da un livello di energia $E_i$ a un livello più basso $E_f$, viene emesso un fotone di frequenza $f$ tale che $h f = E_i - E_f$.
 
 Sono postulati, scelti da Bohr per spiegare la stabilità degli atomi e gli spettri a righe; le loro conseguenze si confrontano con le misure. Il secondo postulato fissa i raggi e le energie delle orbite, il terzo collega le energie alle frequenze delle righe. Per esempio un elettrone che scende tra due livelli che differiscono di $1{,}89\,\mathrm{eV}$ emette un fotone di frequenza $f = \dfrac{1{,}89 \cdot 1{,}60 \cdot 10^{-19}}{6{,}63 \cdot 10^{-34}}\,\mathrm{Hz} \approx 4{,}56 \cdot 10^{14}\,\mathrm{Hz}$.
 :::
@@ -143,7 +136,7 @@ Nel modello di Bohr l'energia totale dell'elettrone sull'orbita con numero quant
 $$
 E_n = -\frac{m_e e^4}{8 \varepsilon_0^2 h^2} \cdot \frac{1}{n^2} = -\frac{13{,}6\,\mathrm{eV}}{n^2} .
 $$
-L'energia può assumere solo questi valori, detti **livelli di energia**: si dice che l'energia è **quantizzata**. Il livello più basso, $E_1 = -13{,}6\,\mathrm{eV}$, si chiama **stato fondamentale**; gli altri si chiamano stati eccitati. L'energia è negativa perché l'elettrone è legato al protone, e lo zero corrisponde all'elettrone fermo a distanza infinita. Per esempio $E_2 = -\dfrac{13{,}6}{4}\,\mathrm{eV} = -3{,}40\,\mathrm{eV}$ e $E_3 = -\dfrac{13{,}6}{9}\,\mathrm{eV} \approx -1{,}51\,\mathrm{eV}$. Nella dimostrazione si ricava anche che l'energia cinetica e l'energia potenziale sono $K_n = -E_n$ e $U_n = 2 E_n$; nello stato fondamentale $K_1 = 13{,}6\,\mathrm{eV}$ e $U_1 = -27{,}2\,\mathrm{eV}$.
+L'energia può assumere solo questi valori, detti **livelli di energia**, e per questo si dice che l'energia è **quantizzata**. Il livello più basso, $E_1 = -13{,}6\,\mathrm{eV}$, si chiama **stato fondamentale**; gli altri si chiamano stati eccitati. L'energia è negativa perché l'elettrone è legato al protone, e lo zero corrisponde all'elettrone fermo a distanza infinita. Per esempio $E_2 = -\dfrac{13{,}6}{4}\,\mathrm{eV} = -3{,}40\,\mathrm{eV}$ e $E_3 = -\dfrac{13{,}6}{9}\,\mathrm{eV} \approx -1{,}51\,\mathrm{eV}$. Nella dimostrazione si ricava anche che l'energia cinetica e l'energia potenziale sono $K_n = -E_n$ e $U_n = 2 E_n$; nello stato fondamentale $K_1 = 13{,}6\,\mathrm{eV}$ e $U_1 = -27{,}2\,\mathrm{eV}$.
 
 :::dimostrazione
 L'energia totale è la somma dell'energia cinetica dell'elettrone e dell'energia potenziale elettrica del sistema protone-elettrone, che ha cariche $+e$ e $-e$:
@@ -273,7 +266,7 @@ $$
 :::
 
 :::osservazione{#esperimento-davisson-germer titolo="Esperimento di Davisson e Germer"}
-Nel 1927 Davisson e Germer inviarono un fascio di elettroni, accelerati con una tensione di $54\,\mathrm{V}$, perpendicolarmente sulla superficie di un cristallo di nichel, e misurarono il numero di elettroni diffusi nelle varie direzioni. Si misura un massimo netto di elettroni diffusi a un angolo $\theta = 50^\circ$ rispetto alla direzione di incidenza. Gli atomi della superficie formano file con distanza $d = 0{,}215\,\mathrm{nm}$ e si comportano come un reticolo di diffrazione. Il primo massimo corrisponde quindi a
+Nel 1927 Davisson e Germer inviarono un fascio di elettroni, accelerati con una tensione di $54\,\mathrm{V}$, perpendicolarmente sulla superficie di un cristallo di nichel, e misurarono il numero di elettroni diffusi nelle varie direzioni. Si misura un massimo netto di elettroni diffusi a un angolo $\theta = 50^\circ$ rispetto alla normale alla superficie. Gli atomi della superficie formano file con distanza $d = 0{,}215\,\mathrm{nm}$ e si comportano come un reticolo di diffrazione. Il primo massimo corrisponde quindi a
 $$
 \lambda = d \sin\theta = 0{,}215 \cdot \sin 50^\circ\,\mathrm{nm} \approx 0{,}165\,\mathrm{nm} .
 $$
@@ -294,7 +287,7 @@ Non è possibile misurare contemporaneamente con precisione arbitraria la posizi
 $$
 \Delta x \cdot \Delta p_x \geq \frac{h}{4\pi} .
 $$
-È il **principio di indeterminazione di Heisenberg** (1927), un principio della meccanica quantistica confermato da tutti gli esperimenti. L'incertezza non dipende dalla qualità degli strumenti, ma è una proprietà della natura legata al carattere ondulatorio delle particelle. Più si restringe $\Delta x$, più deve crescere $\Delta p_x$. Il principio non limita la precisione di una sola delle due grandezze, ma il prodotto delle due incertezze.
+È il **principio di indeterminazione di Heisenberg** (1927), un principio della meccanica quantistica confermato da tutti gli esperimenti. L'incertezza è una proprietà della natura, legata al carattere ondulatorio delle particelle, e resta anche con strumenti ideali. Il limite riguarda il prodotto delle due incertezze, quindi più si restringe $\Delta x$, più deve crescere $\Delta p_x$.
 
 Un elettrone in un atomo si trova in una regione di dimensioni circa $\Delta x = 1{,}0 \cdot 10^{-10}\,\mathrm{m}$. Allora
 $$
@@ -302,7 +295,7 @@ $$
 \qquad
 \Delta v_x = \frac{\Delta p_x}{m_e} \geq 5{,}8 \cdot 10^{5}\,\mathrm{m/s} .
 $$
-L'incertezza sulla velocità è circa un quarto della velocità $v_1 \approx 2{,}2 \cdot 10^{6}\,\mathrm{m/s}$ dell'orbita di Bohr. Perciò non ha senso descrivere l'elettrone nell'atomo come un punto che percorre una traiettoria precisa, e il modello delle orbite di Bohr va sostituito da una descrizione probabilistica.
+L'incertezza sulla velocità è circa un quarto della velocità $v_1 \approx 2{,}2 \cdot 10^{6}\,\mathrm{m/s}$ dell'orbita di Bohr. Perciò l'elettrone nell'atomo non percorre una traiettoria precisa, e nella meccanica quantistica le orbite di Bohr sono sostituite da una descrizione probabilistica.
 :::
 
 :::esempio{titolo="Il principio di indeterminazione per un corpo macroscopico"}
@@ -330,11 +323,11 @@ molto piccola rispetto alle differenze tra i livelli, che sono di alcuni $\mathr
 ## Funzione d'onda e interpretazione probabilistica
 
 :::definizione{#funzione-d-onda titolo="Funzione d'onda"}
-Nella meccanica quantistica lo stato di una particella che si muove lungo una retta è descritto da una funzione $\psi(x)$, detta **funzione d'onda**. Il suo quadrato dà la probabilità di trovare la particella: la probabilità che una misura di posizione trovi la particella in un piccolo intervallo di ampiezza $\Delta x$ attorno al punto $x$ è
+Nella meccanica quantistica lo stato di una particella che si muove lungo una retta è descritto da una funzione $\psi(x)$, detta **funzione d'onda**. Il quadrato del suo valore assoluto è legato alla probabilità di trovare la particella. La probabilità che una misura di posizione trovi la particella in un piccolo intervallo di ampiezza $\Delta x$ attorno al punto $x$ è
 $$
 P = |\psi(x)|^2 \, \Delta x .
 $$
-Questa è l'**interpretazione probabilistica** proposta da Born nel 1926. La particella si trova con certezza da qualche parte, perciò la somma delle probabilità su tutto l'asse è uguale a $1$. Nei punti in cui $\psi = 0$ la particella non si trova mai, nei punti in cui $|\psi|^2$ è massimo la si trova più spesso. La meccanica quantistica non dice dove si troverà la singola particella, ma prevede con quale frequenza si ottengono i vari risultati ripetendo la misura molte volte. Per esempio, se in un intervallo di ampiezza $\Delta x = 0{,}010\,\mathrm{nm}$ attorno a un punto si ha $|\psi|^2 = 2{,}0\,\mathrm{nm^{-1}}$, la probabilità di trovare lì la particella è $2{,}0 \cdot 0{,}010 = 0{,}020$, cioè il $2\%$.
+Questa è l'**interpretazione probabilistica** proposta da Born nel 1926. La particella si trova con certezza da qualche parte, perciò la somma delle probabilità su tutto l'asse è uguale a $1$. Nei punti in cui $\psi = 0$ la particella non si trova mai, nei punti in cui $|\psi|^2$ è massimo la si trova più spesso. La meccanica quantistica prevede con quale frequenza si ottengono i vari risultati ripetendo la misura molte volte, mentre il risultato della singola misura è casuale. Per esempio, se in un intervallo di ampiezza $\Delta x = 0{,}010\,\mathrm{nm}$ attorno a un punto si ha $|\psi|^2 = 2{,}0\,\mathrm{nm^{-1}}$, la probabilità di trovare lì la particella è $2{,}0 \cdot 0{,}010 = 0{,}020$, cioè il $2\%$.
 :::
 
 :::osservazione{#doppia-fenditura-elettroni titolo="Elettroni attraverso una doppia fenditura"}
@@ -385,7 +378,7 @@ Nel livello $n = 2$ la probabilità di trovare la particella è proporzionale a 
 :::
 
 :::osservazione{#effetto-tunnel titolo="Effetto tunnel"}
-Si consideri una particella che incontra una barriera, cioè una regione in cui l'energia potenziale $U$ è maggiore della sua energia totale $E$. Per la meccanica classica la particella non può entrare nella barriera, perché la sua energia cinetica $E - U$ sarebbe negativa, e viene sempre respinta. Per la meccanica quantistica la funzione d'onda dentro la barriera non è nulla, ma decresce in modo esponenziale; se la barriera è abbastanza sottile, la funzione d'onda dall'altra parte è ancora diversa da zero. Perciò esiste una probabilità, piccola ma non nulla, che la particella attraversi la barriera. Questo fenomeno si chiama **effetto tunnel**.
+Si consideri una particella che incontra una barriera, cioè una regione in cui l'energia potenziale $U$ è maggiore della sua energia totale $E$. Per la meccanica classica la particella non può entrare nella barriera, perché la sua energia cinetica $E - U$ sarebbe negativa, e viene sempre respinta. Per la meccanica quantistica la funzione d'onda dentro la barriera è diversa da zero e decresce in modo esponenziale; se la barriera è abbastanza sottile, la funzione d'onda dall'altra parte è ancora diversa da zero. Perciò esiste una probabilità, piccola ma non nulla, che la particella attraversi la barriera. Questo fenomeno si chiama **effetto tunnel**.
 
 La probabilità di attraversamento diminuisce molto in fretta quando crescono lo spessore della barriera, la differenza $U - E$ e la massa della particella, quindi l'effetto tunnel è rilevante solo per particelle microscopiche e barriere di spessore atomico. Su di esso si basano il decadimento $\alpha$ dei nuclei, in cui la particella $\alpha$ esce dal nucleo pur avendo un'energia minore della barriera elettrica, e il microscopio a effetto tunnel, che misura la corrente di elettroni che attraversano il piccolo spazio vuoto tra una punta e una superficie.
 
