@@ -843,6 +843,11 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 .videocorsi-account li { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; padding: 0.9rem 1rem; border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); background: white; }
 .videocorsi-account .nota-video { font-size: 0.88rem; color: var(--inchiostro-2); }
 .anche-nel-video { font-family: var(--ui); font-size: 0.93rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: var(--carta-2); }
+/* Sblocca: riga con la foto di Carmine sopra il riquadro del prezzo (area 2.6 B della consulenza) */
+.autore-acquisto { display: flex; align-items: center; gap: 0.8rem; margin: 1.2rem 0 0; font-family: var(--ui); font-size: 0.93rem; line-height: 1.4; color: var(--inchiostro-2); text-decoration: none; }
+.autore-acquisto img { width: 2.8rem; height: 2.8rem; flex: none; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--carta), 0 0 0 3px var(--riga); }
+.autore-acquisto b { color: var(--inchiostro); font-weight: 600; }
+.autore-acquisto:hover b { color: var(--accento); }
 
 /* Home: legenda dei due tipi di materiale, solo descrittiva */
 .legenda-home { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; gap: 0.15rem; font-family: var(--ui); font-size: 0.95rem; line-height: 1.5; color: var(--inchiostro-2); }

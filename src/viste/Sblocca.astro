@@ -45,6 +45,12 @@ const invito = lingua === 'en' ? {
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
+  <a class="autore-acquisto" href={link(lingua, '/chi-sono')}>
+    <img src="/chi-sono/carmine-320.webp" width="320" height="320" alt="" />
+    <span>{lingua === 'it'
+      ? <>Il materiale è dell'<b>Ing. Carmine Tornincasa</b>, che ha seguito oltre mille studenti in più di diecimila ore di lezione.</>
+      : <>The material is by <b>Carmine Tornincasa</b>, a civil engineer who has taught more than a thousand students over more than ten thousand hours.</>}</span>
+  </a>
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
     <p class="nota-invito" id="nota-invito" hidden></p>
