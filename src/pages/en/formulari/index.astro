@@ -1,0 +1,30 @@
+---
+// English list of the free formula sheets (Italian version: src/pages/formulari/index.astro).
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { materiaL } from '../../../i18n';
+import { FORMULARI } from '../../../data/formulari';
+
+const voci = (await getCollection('formulari_en'))
+  .filter((v) => (FORMULARI as readonly string[]).includes(v.id))
+  .sort((a, b) => FORMULARI.indexOf(a.id as any) - FORMULARI.indexOf(b.id as any));
+---
+<Base titolo="Free calculus formula sheets (PDF)" descrizione="Free formula sheets for Precalculus, Calculus 1 and Multivariable Calculus, each formula with the conditions under which it holds: read online or download as PDF." lingua="en" percorso={[{ titolo: 'Formula sheets' }]} seo={{ titolo: 'Free calculus formula sheets (PDF): Precalculus, Calculus 1 and 2' }}>
+  <p class="sopratitolo">Free</p>
+  <h1>Formula sheets</h1>
+  <p class="sommario">The formulas of each subject with the conditions under which they hold, in the order of the exam topics. Read them here in full; the PDF can be downloaded with a free account.</p>
+  <ul class="griglia-materie">
+    {voci.map((v) => {
+      const m = materiaL('en', v.id);
+      return (
+        <li style={`--accento: ${m.colore}`}>
+          <a href={`/en/formulari/${v.id}`}>
+            <h3>{v.data.titolo}</h3>
+            <p>{v.data.sommario}</p>
+            <span class="conteggio">Free · PDF with an account</span>
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</Base>

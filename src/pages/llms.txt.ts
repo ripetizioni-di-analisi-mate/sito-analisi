@@ -28,6 +28,12 @@ export async function GET() {
     for (const v of formulari) t += `- [${v.data.titolo}](${assoluto(`/formulari/${v.id}`)}): ${v.data.sommario}\n`;
     t += '\n';
   }
-  t += `## Altre pagine\n\n- [Chi sono: Carmine Tornincasa, autore dei contenuti](${assoluto('/chi-sono')})\n- [Ripetizioni di Analisi 1 e Analisi 2 online: lezioni individuali e corsi di gruppo con Carmine](${assoluto('/ripetizioni-analisi')})\n- [Videocorsi di Analisi 1, Analisi 2, Algebra lineare e Matematica generale](${assoluto('/videocorsi')})\n- [Domande a tempo: quiz gratuiti per materia e argomento](${assoluto('/domande-a-tempo')})\n- [Che cosa studiare per un concorso pubblico (guida gratuita)](${assoluto('/concorsi')})\n- [Prezzi](${assoluto('/prezzi')})\n- [Contatti e assistenza](${assoluto('/contatti')})\n- [Versione inglese](${assoluto('/en')})\n`;
+  const formulariEn = await getCollection('formulari_en');
+  if (formulariEn.length) {
+    t += `## Free formula sheets (English)\n\nThe formulas of each subject with the conditions under which they hold; read online, PDF with a free account.\n\n`;
+    for (const v of formulariEn) t += `- [${v.data.titolo}](${assoluto(`/en/formulari/${v.id}`)}): ${v.data.sommario}\n`;
+    t += '\n';
+  }
+  t += `## Altre pagine\n\n- [Chi sono: Carmine Tornincasa, autore dei contenuti](${assoluto('/chi-sono')})\n- [Ripetizioni di Analisi 1 e Analisi 2 online: lezioni individuali e corsi di gruppo con Carmine](${assoluto('/ripetizioni-analisi')})\n- [Videocorsi di Analisi 1, Analisi 2, Algebra lineare e Matematica generale](${assoluto('/videocorsi')})\n- [Domande a tempo: quiz gratuiti per materia e argomento](${assoluto('/domande-a-tempo')})\n- [Timed questions: free quizzes in English](${assoluto('/en/domande-a-tempo')})\n- [Glossario italiano-inglese di matematica e fisica](${assoluto('/glossario')})\n- [Math exams in Italy: Italian course names explained, how exams work, Italian–English glossary (for international students)](${assoluto('/en/glossario')})\n- [Che cosa studiare per un concorso pubblico (guida gratuita)](${assoluto('/concorsi')})\n- [Prezzi](${assoluto('/prezzi')})\n- [Contatti e assistenza](${assoluto('/contatti')})\n- [Versione inglese](${assoluto('/en')})\n`;
   return new Response(t, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }

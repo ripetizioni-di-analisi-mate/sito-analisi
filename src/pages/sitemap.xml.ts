@@ -28,13 +28,17 @@ export async function GET() {
   due('/', 1.0);
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
-  due('/domande-a-tempo', 0.6, false);
+  due('/domande-a-tempo', 0.6);
   due('/concorsi/simulazione', 0.5, false);
-  // formulari gratuiti (solo italiano)
+  // glossario italiano-inglese e guida in inglese agli esami italiani (03/11/2026)
+  due('/glossario', 0.6);
+  // formulari gratuiti, in italiano e in inglese (quelli tradotti)
   const formulari = await getCollection('formulari');
+  const formulariEn = new Set((await getCollection('formulari_en')).map((v) => v.id));
   const dForm = formulari.map((v) => dataDi('content/formulari', v.id));
-  due('/formulari', 0.7, false, piuRecente(...dForm));
-  formulari.forEach((v, k) => due(`/formulari/${v.id}`, 0.8, false, dForm[k]));
+  const dFormEn = formulari.map((v) => dataDi('content-en/formulari', v.id));
+  due('/formulari', 0.7, formulariEn.size > 0, piuRecente(...dForm), piuRecente(...dFormEn));
+  formulari.forEach((v, k) => due(`/formulari/${v.id}`, 0.8, formulariEn.has(v.id), dForm[k], dFormEn[k]));
   due('/ripetizioni-analisi', 0.8, false);
   due('/prenota', 0.7, false);
   due('/corsi-di-gruppo', 0.7, false);

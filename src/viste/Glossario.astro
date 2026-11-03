@@ -1,0 +1,135 @@
+---
+// Glossario italiano-inglese dei termini di matematica e fisica del sito (03/11/2026, SEO internazionale).
+// In italiano: /glossario, per chi studia su testi inglesi o parte in Erasmus. In inglese: /en/glossario, pensata per gli studenti
+// internazionali nelle università italiane: nomi dei corsi italiani e loro equivalente, come funzionano gli esami, poi il glossario.
+// Dati in src/data/glossario.ts (sezioni con voci it/en e, dove serve, una nota in inglese).
+import Base from '../layouts/Base.astro';
+import { GLOSSARIO } from '../data/glossario';
+import { materieL, link, type Lingua } from '../i18n';
+import { assoluto } from '../lib/seo';
+
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const totale = GLOSSARIO.reduce((s, x) => s + x.voci.length, 0);
+const corsi = GLOSSARIO.find((x) => x.sezione === 'Nomi dei corsi');
+const sezioni = GLOSSARIO.filter((x) => x !== corsi);
+const sl = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const materie = materieL(lingua).filter((m) => m.attiva && m.gruppo === (en ? 'University' : 'Università'));
+
+const titolo = en ? 'Math exams in Italy: course names explained and Italian–English glossary' : 'Glossario italiano-inglese di matematica e fisica';
+const descrizione = en
+  ? `What Analisi 1, Analisi 2, Geometria and Fisica 1 are, how exams and grades work at Italian universities, and a glossary of ${totale} Italian–English math and physics terms.`
+  : `${totale} termini di matematica e fisica con la traduzione inglese usata nei libri di testo: Precorso, Analisi 1 e 2, Algebra lineare, Fisica, nomi dei corsi ed esami universitari.`;
+const indirizzo = link(lingua, '/glossario');
+const schema = [{
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  name: en ? 'Italian–English glossary of mathematics and physics' : 'Glossario italiano-inglese di matematica e fisica',
+  description: descrizione,
+  inLanguage: ['it', 'en'],
+  url: assoluto(indirizzo),
+  hasDefinedTerm: GLOSSARIO.flatMap((x) => x.voci).slice(0, 300).map((v) => ({ '@type': 'DefinedTerm', name: en ? v.en : v.it, alternateName: en ? v.it : v.en, ...(v.nota ? { description: v.nota } : {}) })),
+}];
+---
+<Base titolo={titolo} descrizione={descrizione} lingua={lingua} percorso={[{ titolo: en ? 'Math exams in Italy and glossary' : 'Glossario italiano-inglese' }]} seo={{ titolo: en ? 'Math exams in Italy: course names and Italian–English glossary' : 'Glossario italiano-inglese di matematica e fisica', schema }}>
+  <div class="glossario">
+    <p class="sopratitolo">{en ? 'Free guide' : 'Gratis'}</p>
+    <h1>{en ? 'Math exams in Italy' : 'Glossario italiano-inglese'}</h1>
+    {en ? (
+      <>
+        <p class="sommario">For international and Erasmus students taking a mathematics or physics exam at an Italian university: what the course names mean, how exams and grades work, and a glossary of the Italian terms used in lectures, textbooks and exam papers, with their English equivalents.</p>
+
+        <h2 id="course-names">Italian course names and their international equivalents</h2>
+        <p>The first-year and second-year mathematics courses of Italian engineering, science and economics degrees have names that do not translate literally. The table gives the usual international equivalent and what each course covers in Italy. The study material of this site is written for these courses and is available in English.</p>
+        <table class="tabella-glossario tabella-corsi">
+          <thead><tr><th>Italian course</th><th>Usual equivalent</th><th>What it covers in Italy</th></tr></thead>
+          <tbody>
+            {corsi?.voci.map((v) => <tr><td lang="it">{v.it}</td><td>{v.en}</td><td>{v.nota}</td></tr>)}
+          </tbody>
+        </table>
+        <p class="nota-materie">Study material in English on this site: {materie.map((m, i) => <>{i > 0 && ' · '}<a href={link('en', `/${m.slug}`)}>{m.titolo}</a></>)}.</p>
+
+        <h2 id="how-exams-work">How a mathematics exam works at an Italian university</h2>
+        <p>Each course ends with an exam (<i lang="it">esame</i>) that is held several times a year, in the exam sessions (<i lang="it">sessioni d’esame</i>): typically January–February, June–July and September, often with one extra date in spring or autumn. Every date on which the exam is held is an <i lang="it">appello</i>; a student can register for any appello of a session and, after a failure, try again at a later one.</p>
+        <p>A mathematics exam usually has a written part (<i lang="it">prova scritta</i>) with exercises and, in many courses, an oral part (<i lang="it">prova orale</i>) on definitions, theorems and proofs. Some courses replace the single written exam with two partial tests during the semester (<i lang="it">esoneri</i> or <i lang="it">prove intercorso</i>); a student who passes both skips the written exam.</p>
+        <p>Grades are given out of thirty (<i lang="it">in trentesimi</i>): 18 is the minimum passing grade and 30 the maximum; <i lang="it">30 e lode</i> is 30 with honors. A student who passes can refuse the grade (<i lang="it">rifiutare il voto</i>) and take the exam again at a later appello. Each course is worth a number of credits (<i lang="it">CFU</i>, crediti formativi universitari), equivalent one to one to ECTS credits; the final degree mark is a weighted average of the exam grades, converted to a scale of 110.</p>
+        <p>Some exams can be taken only after passing others (<i lang="it">propedeuticità</i>): Analisi matematica 2 usually requires Analisi matematica 1, and Fisica 1 often requires it as well. The syllabus of each course is published by the professor (<i lang="it">programma del corso</i>) and the exams of previous years (<i lang="it">tracce d’esame</i> or <i lang="it">compiti</i>) are the usual preparation material: the topics of this site follow those syllabi.</p>
+
+        <h2 id="glossary">Italian–English glossary</h2>
+        <p>{totale} terms grouped by subject. The English term is the one used in standard textbooks; the note points out the differences in notation (for instance the Italian <i lang="it">sen</i> and <i lang="it">tg</i> for the sine and tangent).</p>
+      </>
+    ) : (
+      <>
+        <p class="sommario">I termini di matematica e fisica dei corsi universitari con la traduzione usata nei libri di testo in inglese, per chi studia su un manuale in inglese, segue un corso in lingua inglese o parte per un periodo all’estero. Le sezioni seguono le materie del sito.</p>
+        <h2 id="nomi-dei-corsi">I nomi dei corsi</h2>
+        <p>I corsi del primo biennio hanno all’estero nomi diversi da quelli italiani; la tabella riporta il nome usato nei programmi in inglese e, in inglese, che cosa comprende il corso in Italia.</p>
+        <table class="tabella-glossario tabella-corsi">
+          <thead><tr><th>Corso in Italia</th><th>Nome in inglese</th><th>Che cosa comprende</th></tr></thead>
+          <tbody>
+            {corsi?.voci.map((v) => <tr><td>{v.it}</td><td lang="en">{v.en}</td><td lang="en">{v.nota}</td></tr>)}
+          </tbody>
+        </table>
+        <p class="nota-materie">Le materie del sito in inglese: {materie.map((m, i) => <>{i > 0 && ' · '}<a href={link('en', `/${m.slug}`)}>{m.titolo}</a></>)} (<a href="/en/glossario">guida in inglese agli esami italiani</a>).</p>
+        <h2 id="glossario">Il glossario</h2>
+        <p>{totale} termini divisi per materia. Il termine inglese è quello dei libri di testo; la nota segnala le differenze di notazione (per esempio <i>sen</i> e <i>tg</i>, che in inglese sono <i>sin</i> e <i>tan</i>).</p>
+      </>
+    )}
+
+    <p class="filtro-glossario">
+      <input type="search" id="filtro-glossario" placeholder={en ? 'Filter the terms…' : 'Filtra i termini…'} aria-label={en ? 'Filter the terms' : 'Filtra i termini'} autocomplete="off" />
+    </p>
+    <nav class="indice-glossario" aria-label={en ? 'Sections' : 'Sezioni'}>
+      {sezioni.map((s) => <a href={`#${sl(en ? s.sezioneEn : s.sezione)}`}>{en ? s.sezioneEn : s.sezione}</a>)}
+    </nav>
+    {sezioni.map((s) => (
+      <section class="sezione-glossario" id={sl(en ? s.sezioneEn : s.sezione)}>
+        <h2>{en ? s.sezioneEn : s.sezione}</h2>
+        <table class="tabella-glossario">
+          <thead><tr><th>{en ? 'Italian' : 'Italiano'}</th><th>{en ? 'English' : 'Inglese'}</th>{(en || s.voci.some((v) => v.nota)) && <th>{en ? 'Note' : 'Nota'}</th>}</tr></thead>
+          <tbody>
+            {s.voci.map((v) => <tr><td lang="it">{v.it}</td><td lang="en">{v.en}</td>{(en || s.voci.some((x) => x.nota)) && <td lang="en">{v.nota ?? ''}</td>}</tr>)}
+          </tbody>
+        </table>
+      </section>
+    ))}
+    <p class="nessuna-voce" hidden>{en ? 'No term matches.' : 'Nessun termine corrisponde.'}</p>
+  </div>
+</Base>
+<style>
+  .glossario .tabella-glossario { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin: 0.6rem 0 1.2rem; }
+  .glossario .tabella-glossario th { text-align: left; font-family: var(--ui); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); border-bottom: 1px solid var(--riga); padding: 0.4rem 0.5rem; }
+  .glossario .tabella-glossario td { vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--riga); }
+  .glossario .tabella-glossario td:first-child { font-weight: 600; width: 32%; }
+  .glossario .tabella-corsi td:first-child { width: 24%; }
+  .glossario .tabella-glossario td:last-child:not(:nth-child(2)) { color: var(--inchiostro-2); font-size: 0.9rem; }
+  .glossario .nota-materie { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
+  .glossario .filtro-glossario input { width: 100%; max-width: 28rem; font: inherit; padding: 0.5rem 0.8rem; border: 1px solid var(--riga); border-radius: 999px; background: #fff; }
+  .glossario .indice-glossario { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0 1rem; font-family: var(--ui); font-size: 0.85rem; }
+  .glossario .indice-glossario a { text-decoration: none; color: var(--accento); background: color-mix(in srgb, var(--accento) 10%, transparent); border-radius: 999px; padding: 0.25rem 0.7rem; }
+  .glossario .sezione-glossario h2 { margin-top: 1.6rem; }
+  .glossario .sezione-glossario[hidden], .glossario tr[hidden] { display: none; }
+  @media (max-width: 40rem) { .glossario .tabella-glossario { font-size: 0.88rem; } .glossario .tabella-glossario td, .glossario .tabella-glossario th { padding: 0.35rem 0.3rem; } }
+</style>
+<script>
+  // Filtro dei termini: nasconde le righe che non contengono il testo scritto e le sezioni rimaste vuote.
+  const campo = document.getElementById('filtro-glossario') as HTMLInputElement | null;
+  const sezioni = [...document.querySelectorAll<HTMLElement>('.sezione-glossario')];
+  const vuoto = document.querySelector<HTMLElement>('.nessuna-voce');
+  const norma = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  campo?.addEventListener('input', () => {
+    const q = norma(campo.value.trim());
+    let visibili = 0;
+    for (const s of sezioni) {
+      let n = 0;
+      for (const r of s.querySelectorAll<HTMLElement>('tbody tr')) {
+        const ok = !q || norma(r.textContent ?? '').includes(q);
+        r.hidden = !ok;
+        if (ok) n++;
+      }
+      s.hidden = n === 0;
+      visibili += n;
+    }
+    if (vuoto) vuoto.hidden = visibili > 0;
+  });
+</script>

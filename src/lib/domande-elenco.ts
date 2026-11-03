@@ -1,10 +1,11 @@
-// Dati della pagina /domande-a-tempo: materie attive con domande, argomenti con il numero di domande.
+// Dati della pagina /domande-a-tempo (e /en/domande-a-tempo): materie attive con domande, argomenti con il numero di domande.
+// In inglese contano solo le domande tradotte (src/content-en/domande), con i nomi inglesi di materie e argomenti.
 import { getCollection } from 'astro:content';
-import { MATERIE } from '../data/materie';
-export async function elencoDomande() {
-  const domande = await getCollection('domande');
+import { materieL, type Lingua } from '../i18n';
+export async function elencoDomande(lingua: Lingua = 'it') {
+  const domande = await getCollection(lingua === 'en' ? 'domande_en' : 'domande');
   const conta = (p: string) => domande.filter((v) => v.id.startsWith(p)).length;
-  const materie = MATERIE.filter((m) => m.attiva && conta(`${m.slug}/`) > 0).map((m) => ({
+  const materie = materieL(lingua).filter((m) => m.attiva && conta(`${m.slug}/`) > 0).map((m) => ({
     slug: m.slug, titolo: m.titolo, gruppo: m.gruppo, colore: m.colore, concorsi: m.gruppo === 'Concorsi',
     totale: conta(`${m.slug}/`),
     argomenti: m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, n: conta(`${m.slug}/${a.slug}/`) })).filter((a) => a.n > 0),

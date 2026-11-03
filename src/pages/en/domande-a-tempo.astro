@@ -1,0 +1,50 @@
+---
+// Timed questions of all subjects with English questions (free). Same layout as the Italian page src/pages/domande-a-tempo.astro.
+import Base from '../../layouts/Base.astro';
+import { RIPASSO } from '../../data/livelli';
+import { elencoDomande } from '../../lib/domande-elenco';
+const { materie, gruppi, totale } = await elencoDomande('en');
+---
+<Base titolo="Timed questions: free calculus, linear algebra and physics quizzes" descrizione={`Free multiple-choice quizzes on ${materie.length} subjects: four answers, two minutes per question and an explanation after every answer. No account needed.`} lingua="en" percorso={[{ titolo: 'Timed questions' }]} seo={{ titolo: 'Free calculus and physics quizzes with explanations' }}>
+  <p class="sopratitolo">Free</p>
+  <h1>Timed questions</h1>
+  <p class="sommario">{totale} multiple-choice questions: four answers, two minutes per question and the explanation after you confirm. No account needed.</p>
+  {gruppi.map((g) => (
+    <>
+      <p class="dta-gruppo">{g}</p>
+      <ul class="dta-griglia">
+        {materie.filter((m) => m.gruppo === g).map((m) => (
+          <li style={`--accento: ${m.colore}`}>
+            <h3>{m.titolo}</h3>
+            <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
+            <div class="dta-tasti">
+              <a class="dta-primario" href={`/en/${m.slug}/${RIPASSO}/domande`}>Review on everything</a>
+              <a class="dta-secondario" href={`/en/${m.slug}/simulazione`}>Exam simulation</a>
+            </div>
+            <details>
+              <summary>Choose a topic</summary>
+              <ol>
+                {m.argomenti.map((a) => <li><a href={`/en/${m.slug}/${a.slug}/domande`}>{a.titolo}</a></li>)}
+              </ol>
+            </details>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))}
+</Base>
+<style>
+  .dta-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
+  .dta-griglia { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); align-items: start; }
+  .dta-griglia > li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); padding: 0.9rem 1rem; background: #fff; }
+  .dta-griglia h3 { margin: 0; font-size: 1.2rem; color: var(--accento); }
+  .dta-conti { margin: 0.2rem 0 0.7rem; font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
+  .dta-tasti { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .dta-tasti a { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; text-decoration: none; border-radius: 999px; padding: 0.3rem 0.8rem; }
+  .dta-primario { background: var(--accento); color: #fff; }
+  .dta-secondario { color: var(--accento); background: color-mix(in srgb, var(--accento) 11%, transparent); }
+  details { margin-top: 0.7rem; border-top: 1px solid var(--riga); padding-top: 0.5rem; font-family: var(--ui); font-size: 0.9rem; }
+  summary { cursor: pointer; color: var(--inchiostro-2); }
+  details ol { margin: 0.4rem 0 0; padding-left: 1.3rem; display: grid; gap: 0.2rem; }
+  details a { color: var(--inchiostro); }
+</style>

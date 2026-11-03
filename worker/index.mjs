@@ -1190,15 +1190,16 @@ export default {
     }
 
     // ===== formulari gratuiti: il PDF si scarica con un account, anche gratuito (src/pages/formulari) =====
-    const pdfFormulario = url.pathname.match(/^\/pdf\/formulari\/([a-z0-9-]+)\.pdf$/);
+    // anche in inglese: /pdf/formulari/en/<materia>.pdf, con la pagina /en/formulari/<materia>
+    const pdfFormulario = url.pathname.match(/^\/pdf\/formulari\/(en\/)?([a-z0-9-]+)\.pdf$/);
     if (pdfFormulario) {
       const io = await utenteCollegato(env, req).catch(() => null);
-      if (!io) return new Response(null, { status: 302, headers: { location: `/formulari/${pdfFormulario[1]}#scarica`, 'cache-control': 'no-store' } });
+      if (!io) return new Response(null, { status: 302, headers: { location: `${pdfFormulario[1] ? '/en' : ''}/formulari/${pdfFormulario[2]}#scarica`, 'cache-control': 'no-store' } });
       const r = await env.ASSETS.fetch(senzaCondizioni(req));
       const out = new Response(r.body, r);
       out.headers.set('cache-control', 'private, no-store');
       out.headers.set('x-robots-tag', 'noindex');
-      out.headers.set('content-disposition', `attachment; filename="Formulario-${pdfFormulario[1]}.pdf"`);
+      out.headers.set('content-disposition', `attachment; filename="${pdfFormulario[1] ? 'Formula-sheet' : 'Formulario'}-${pdfFormulario[2]}.pdf"`);
       return out;
     }
 

@@ -1,0 +1,24 @@
+---
+// Print version of the English formula sheet, from which scripts/pdf-formulari.mjs generates public/pdf/formulari/en/<materia>.pdf.
+import { getCollection, render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import { materiaL } from '../../../../i18n';
+import { FORMULARI } from '../../../../data/formulari';
+
+export async function getStaticPaths() {
+  const voci = await getCollection('formulari_en');
+  return voci.filter((v) => (FORMULARI as readonly string[]).includes(v.id)).map((v) => ({ params: { materia: v.id }, props: { voce: v } }));
+}
+const { voce } = Astro.props;
+const m = materiaL('en', voce.id);
+const { Content } = await render(voce);
+---
+<Base titolo={`${voce.data.titolo} · Print`} sezione="stampa" lingua="en" seo={{ soloQuestaLingua: true }}>
+  <div class="stampa testo-studio testo-formulario formulario" style={`--accento: ${m.colore}`}>
+    <p class="sopratitolo">Free formula sheet · ripetizionidianalisi.com</p>
+    <h1>{voce.data.titolo}</h1>
+    <p class="sommario">{voce.data.sommario}</p>
+    <p class="nota-pdf">© 2026 Carmine Tornincasa. Copy for personal study only: reproduction or distribution, even in part, without written permission is forbidden. Theory and worked examples at ripetizionidianalisi.com/en/{voce.id}.</p>
+    <Content />
+  </div>
+</Base>

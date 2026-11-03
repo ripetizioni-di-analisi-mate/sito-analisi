@@ -3,15 +3,23 @@
 // una riga «Gratis» sotto la legenda con Matematica zero, formulari e guida ai concorsi.
 // Le versioni A (tre schede) e B (area «Gratis» prima di Università) sono state scartate.
 // 03/11: in testa le domande a tempo e la simulazione a quiz dei concorsi, gratuite anche senza account (richiesta di Carmine).
-const voci = [
+// 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
+import type { Lingua } from '../i18n';
+const { lingua = 'it' } = Astro.props as { lingua?: Lingua };
+const voci = lingua === 'en' ? [
+  { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
+  { href: '/en/formulari', titolo: 'Formula sheets' },
+  { href: '/en/glossario', titolo: 'Math exams in Italy and Italian–English glossary' },
+] : [
   { href: '/domande-a-tempo', titolo: 'Domande a tempo' },
   { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz' },
   { href: '/matematica-da-zero', titolo: 'Matematica zero' },
   { href: '/formulari', titolo: 'Formulari' },
+  { href: '/glossario', titolo: 'Glossario italiano-inglese' },
   { href: '/concorsi', titolo: 'Guida ai concorsi' },
 ];
 ---
 <p class="gratis-c">
   <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>
-  <span><b>Gratis</b>: {voci.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.titolo}</a></>)}</span>
+  <span><b>{lingua === 'en' ? 'Free' : 'Gratis'}</b>: {voci.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.titolo}</a></>)}</span>
 </p>

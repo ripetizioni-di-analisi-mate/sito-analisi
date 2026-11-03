@@ -21,6 +21,16 @@ const ARGOMENTI_CERCATI: Record<string, string> = {
   'Calcolo integrale': 'Integrali',
 };
 const arg = (a: string) => ARGOMENTI_CERCATI[a] ?? a;
+// Lo stesso per i titoli inglesi: i nomi dei capitoli come si cercano all'estero («derivatives», «infinite series»).
+const ARGOMENTI_CERCATI_EN: Record<string, string> = {
+  'Differential calculus and Taylor': 'Derivatives and Taylor polynomials',
+  'Integral calculus': 'Integrals',
+  'Numerical series': 'Infinite series',
+  'Graphing functions': 'Curve sketching',
+  'Free and constrained maxima and minima': 'Maxima, minima and Lagrange multipliers',
+  'Differential calculus in several variables': 'Partial derivatives and differentiability',
+};
+const argEn = (a: string) => ARGOMENTI_CERCATI_EN[a] ?? a;
 const IT = {
   home: 'Matematica e fisica: teoria ed esercizi svolti | Ripetizioni di Analisi',
   homeDescr: "Matematica e fisica per università, superiori e concorsi: teoria, teoremi con dimostrazione ed esercizi svolti passo dopo passo di Analisi 1 e 2, Algebra lineare, Fisica 1 e 2, Matematica generale e Precorso.",
@@ -53,21 +63,23 @@ function cercato(m: string, completo = false): string {
   return completo && /Analysis/.test(m) ? `${n} (${m})` : n;
 }
 const EN: typeof IT = {
-  home: 'Calculus, linear algebra and physics: theory and worked examples | Ripetizioni di Analisi',
-  homeDescr: 'Theory, theorems with proofs and step-by-step worked examples for Calculus 1 and 2 (Mathematical Analysis), Precalculus, Linear Algebra, Physics 1 and 2 and Mathematics for Economics, for university exams.',
-  materia: (m) => scegli(`${cercato(m, true)}: theory and worked examples for the exam | Ripetizioni di Analisi`, `${cercato(m, true)}: theory and worked examples for the exam`, `${cercato(m, true)}: theory and worked examples`, `${cercato(m)}: theory and worked examples`),
-  materiaDescr: (m, d, n) => `${cercato(m, true)}: ${n} topics with theory, proofs, step-by-step worked examples and exercises with solutions. ${d}`,
-  teoria: (a, m) => scegli(`${a}: theory, definitions and theorems | ${cercato(m)}`, `${a}: theory and theorems | ${cercato(m)}`, `${a}: theory and theorems`),
-  svoltiLista: (a, m) => scegli(`${a}: step-by-step worked examples | ${cercato(m)}`, `${a}: worked examples | ${cercato(m)}`, `${a}: worked examples`),
-  svoltiListaDescr: (a, m, n) => `${n} sheets of worked examples on ${a.toLowerCase()} (${cercato(m)}), grouped by type: every step is written out and explained.`,
-  scheda: (s, m) => scegli(`${s}: worked examples | ${cercato(m)}`, `${s}: worked examples`),
-  schedaDescr: (s, a, m) => `${s}: step-by-step worked examples, with the computation and an explanation of every step. ${a}, ${cercato(m)}.`,
-  dafareLista: (a, m) => scegli(`${a}: exercises with solutions | ${cercato(m)}`, `${a}: exercises with solutions`),
-  dafareListaDescr: (a, m, n) => `${n} exercises on ${a.toLowerCase()} (${cercato(m)}), with the solution to check your answer.`,
-  dafare: (s, m) => scegli(`${s}: exercise with solution | ${cercato(m)}`, `${s}: exercise | ${cercato(m)}`, `${s}: exercise with solution`),
-  dafareDescr: (s, a, m) => `${cercato(m)} exercise on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
+  // All'estero si cerca «calculus», «solved problems» (USA) o «worked examples» (Regno Unito) e «proofs»: i titoli usano
+  // questi termini, le descrizioni li affiancano, e dicono che le pagine sono in inglese per gli studenti in Italia e all'estero.
+  home: 'Calculus, Linear Algebra and Physics: theory and solved problems',
+  homeDescr: 'Theory, theorems with proofs and step-by-step solved problems for university exams: Calculus 1 and 2 (Mathematical Analysis 1 and 2), Precalculus, Linear Algebra, Physics 1 and 2, Mathematics for Economics. Free previews, in English.',
+  materia: (m) => scegli(`${cercato(m, true)}: theory, proofs and solved problems for the exam | Ripetizioni di Analisi`, `${cercato(m, true)}: theory, proofs and solved problems for the exam`, `${cercato(m, true)}: theory, proofs and solved problems`, `${cercato(m)}: theory, proofs and solved problems`),
+  materiaDescr: (m, d, n) => `${cercato(m, true)}: ${n} topics with theory, proofs of the theorems, step-by-step worked examples and practice problems with solutions. ${d}`,
+  teoria: (a, m) => scegli(`${argEn(a)}: definitions, theorems and proofs | ${cercato(m)}`, `${argEn(a)}: theory and proofs | ${cercato(m)}`, `${argEn(a)}: theory and proofs`),
+  svoltiLista: (a, m) => scegli(`${argEn(a)}: solved problems step by step | ${cercato(m)}`, `${argEn(a)}: solved problems | ${cercato(m)}`, `${argEn(a)}: solved problems`),
+  svoltiListaDescr: (a, m, n) => `${n} sheets of worked examples on ${a.toLowerCase()} (${cercato(m)}), grouped by type of problem: every step is written out and explained in words.`,
+  scheda: (s, m) => scegli(`${s}: solved problems step by step | ${cercato(m)}`, `${s}: solved problems | ${cercato(m)}`, `${s}: solved problems`),
+  schedaDescr: (s, a, m) => `${s}: worked examples solved step by step, with the computation and an explanation of every step. ${a}, ${cercato(m)}.`,
+  dafareLista: (a, m) => scegli(`${argEn(a)}: practice problems with solutions | ${cercato(m)}`, `${argEn(a)}: practice problems with solutions`, `${argEn(a)}: practice problems`),
+  dafareListaDescr: (a, m, n) => `${n} practice problems on ${a.toLowerCase()} (${cercato(m)}), each with the solution to check your answer.`,
+  dafare: (s, m) => scegli(`${s}: practice problem with solution | ${cercato(m)}`, `${s}: practice problem | ${cercato(m)}`, `${s}: practice problem with solution`),
+  dafareDescr: (s, a, m) => `${cercato(m)} practice problem on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
   livello: 'University',
-  teoremi: (m, b) => scegli(`${cercato(m)}: all definitions and theorems | Ripetizioni di Analisi`, `${cercato(m)}: all definitions and theorems`, `${cercato(b)}: definitions and theorems`),
-  teoremiDescr: (m, nd, nt, primi) => conNomi(`${nt} theorems and ${nd} definitions of ${cercato(m)}, linked to the theory`, primi),
+  teoremi: (m, b) => scegli(`${cercato(m)}: all definitions and theorems with proofs | Ripetizioni di Analisi`, `${cercato(m)}: all definitions and theorems with proofs`, `${cercato(m)}: all definitions and theorems`, `${cercato(b)}: definitions and theorems`),
+  teoremiDescr: (m, nd, nt, primi) => conNomi(`${nt} theorems and ${nd} definitions of ${cercato(m)}, each linked to its statement and proof`, primi),
 };
 export const SEO = (l: Lingua) => (l === 'en' ? EN : IT);

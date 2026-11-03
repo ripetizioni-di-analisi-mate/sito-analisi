@@ -78,5 +78,7 @@ const formulari = defineCollection({
     descrizione: z.string().max(170),
   }),
 });
+// Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
+const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
 
-export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, formulari };
+export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, formulari, formulari_en };
