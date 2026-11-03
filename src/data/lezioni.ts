@@ -16,7 +16,7 @@ export const LEZIONI = {
 };
 
 // Materie escluse dalle lezioni individuali (scelta di Carmine).
-export const ESCLUSE_DALLE_LEZIONI = ['fisica-1', 'fisica-2', 'statistica', 'logica-concorsi'];
+export const ESCLUSE_DALLE_LEZIONI = ['fisica-1', 'fisica-2', 'fisica-superiori-5', 'statistica', 'logica-concorsi'];
 
 // Tutte le materie pubblicate sul sito, tranne quelle escluse.
 export const MATERIE_LEZIONI = MATERIE

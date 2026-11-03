@@ -198,8 +198,20 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-5': {
     titolo: 'Physics, 5th year',
     breve: 'Physics 5th year',
-    descrizione: 'The physics syllabus of the 5th year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'The physics of the final year of the Italian scientific high school (liceo scientifico): magnetic field, electromagnetic induction, alternating current, Maxwell equations and electromagnetic waves, special relativity and quantum physics.',
+    argomenti: {
+      'campo-magnetico': { titolo: 'Magnetic field and Lorentz force', breve: 'Magnetic field' },
+      'sorgenti-campo-magnetico': { titolo: 'Sources of the magnetic field and Ampère law', breve: 'Sources of the field' },
+      'cariche-nei-campi': { titolo: 'Charges moving in electric and magnetic fields', breve: 'Charges in fields' },
+      'induzione-elettromagnetica': { titolo: 'Electromagnetic induction', breve: 'Induction' },
+      'autoinduzione-circuiti-rl': { titolo: 'Self-inductance, RL circuits and magnetic energy', breve: 'Self-inductance and RL' },
+      'corrente-alternata': { titolo: 'Alternating current and transformer', breve: 'Alternating current' },
+      'maxwell-onde-elettromagnetiche': { titolo: 'Maxwell equations and electromagnetic waves', breve: 'Maxwell and EM waves' },
+      'relativita-spazio-tempo': { titolo: 'Special relativity: space and time', breve: 'Relativity: space and time' },
+      'relativita-dinamica-energia': { titolo: 'Special relativity: dynamics and energy', breve: 'Relativity: dynamics' },
+      'crisi-fisica-classica': { titolo: 'Blackbody, photoelectric effect and Compton effect', breve: 'Blackbody and photons' },
+      'atomo-e-onde-di-materia': { titolo: 'Bohr atom, matter waves and uncertainty principle', breve: 'Bohr, de Broglie, uncertainty' },
+    },
   },
   'matematica-concorsi': {
     titolo: 'Mathematics for public exams',
