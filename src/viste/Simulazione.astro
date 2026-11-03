@@ -22,6 +22,7 @@ const T = en ? {
   esercizio: 'Exercise', valuta: 'How did it go?', giusto: 'Correct', parziale: 'Partly correct', sbagliato: 'Wrong',
   risultato: 'Score', tempo: 'Time used', nuova: 'New simulation', soluzione: 'Solution', riservata: 'The solution is in the full access to the subject.', sblocca: 'Unlock',
   caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Hand in the paper now?',
+  confronto: 'Your score is higher than § of the simulations of this subject marked on the site (# simulations).',
 } : {
   titolo: 'Simulazione d\'esame', sopra: 'Prove d\'esame',
   sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,
@@ -30,6 +31,7 @@ const T = en ? {
   esercizio: 'Esercizio', valuta: 'Com\'è andato?', giusto: 'Corretto', parziale: 'Parziale', sbagliato: 'Sbagliato',
   risultato: 'Punteggio', tempo: 'Tempo impiegato', nuova: 'Nuova simulazione', soluzione: 'Soluzione', riservata: 'La soluzione è nell\'accesso completo alla materia.', sblocca: 'Sblocca',
   caricamento: 'Preparazione del compito…', errore: 'Gli esercizi non si sono caricati. Ricarica la pagina.', storico: 'Simulazioni precedenti', vota: 'Valuta ogni esercizio per vedere il punteggio.', conferma: 'Consegnare il compito adesso?',
+  confronto: 'Il tuo punteggio è più alto del § delle simulazioni di questa materia valutate sul sito (# simulazioni).',
 };
 const pref = prefisso(lingua);
 ---
@@ -69,6 +71,7 @@ const pref = prefisso(lingua);
       <div class="sim-esito" hidden>
         <p class="sim-voto"></p>
         <p class="sim-nota"></p>
+        <p class="sim-confronto" hidden></p>
         <p><a class="bottone-secondario" href={link(lingua, `/${materia}/simulazione`)}>{T.nuova}</a></p>
       </div>
     </div>
@@ -206,6 +209,20 @@ const pref = prefisso(lingua);
       radice.querySelector('.sim-nota')!.textContent = '';
       storico = [...storico.filter((v) => v.quando !== inizio), { quando: inizio, voto, minuti, n: voti.length }].slice(-20);
       try { localStorage.setItem(CHIAVE, JSON.stringify(storico)); } catch { /* niente memoria */ }
+      confronta(voto, voti.length);
+    };
+    // Confronto con le simulazioni della stessa materia valutate da altri (si aggiorna se si cambia una valutazione).
+    let attesa = 0;
+    const confronta = (voto: number, n: number) => {
+      clearTimeout(attesa);
+      attesa = window.setTimeout(async () => {
+        const r = await fetch('/api/simulazione/esito', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, inizio, voto, n }) }).catch(() => null);
+        const d = r && r.ok ? await r.json().catch(() => null) : null;
+        const c = radice.querySelector<HTMLElement>('.sim-confronto')!;
+        if (d?.percentile === undefined) { c.hidden = true; return; }
+        c.innerHTML = T.confronto.replace('§', `<strong>${d.percentile}%</strong>`).replace('#', d.confronto.toLocaleString(en ? 'en-US' : 'it-IT'));
+        c.hidden = false;
+      }, 600);
     };
     elenco.addEventListener('change', aggiorna);
     aggiorna();

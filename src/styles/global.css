@@ -926,6 +926,9 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .barra-exp > span { display: block; height: 100%; border-radius: 999px; background: var(--verde); transition: width 0.6s ease; }
 .barra-exp.grande { height: 10px; }
 .avviso-premio { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 40; max-width: min(30rem, calc(100vw - 2rem)); background: var(--inchiostro); color: #fff; font-family: var(--ui); font-size: 0.95rem; padding: 0.7rem 1.1rem; border-radius: 10px; box-shadow: 0 8px 24px rgb(0 0 0 / 18%); }
+.avviso-duello { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); z-index: 41; width: min(30rem, calc(100vw - 2rem)); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; background: #fff; color: var(--inchiostro); font-family: var(--ui); font-size: 0.95rem; padding: 0.8rem 1rem; border-radius: 12px; border: 1px solid var(--riga); box-shadow: 0 10px 28px rgb(0 0 0 / 14%); }
+.avviso-duello span { flex: 1 1 100%; }
+.avviso-duello .bottone-primario, .avviso-duello .bottone-secondario { padding: 0.35rem 0.9rem; font-size: 0.9rem; }
 
 /* scheda in fondo agli esercizi */
 .ingresso-domande { margin-top: 2.5rem; border: 1px solid var(--riga); border-radius: 8px; background: #fff; padding: 1.3rem 1.5rem; }
@@ -1174,6 +1177,7 @@ html.collegato .solo-collegati { display: revert; }
 .sim-voto { font-size: 1.15rem; margin: 0 0 0.3rem; }
 .sim-voto strong { font-size: 1.5rem; color: var(--accento); }
 .sim-nota { color: var(--inchiostro-2); margin: 0 0 0.6rem; }
+.sim-confronto { font-family: var(--ui); margin: 0 0 0.9rem; padding: 0.55rem 0.8rem; border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 7%, var(--carta)); }
 .sim-scaduto { font-family: var(--ui); font-weight: 600; color: #a3412f; }
 .sim-esito[hidden], .sim-soluzione[hidden], .sim-voto-esercizio[hidden] { display: none; }
 .sim-scelte input[type="text"] { width: 7rem; font: 0.95rem var(--ui); padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
@@ -1292,3 +1296,35 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .gratis-c svg { width: 1.1rem; height: 1.1rem; flex: none; color: var(--azione); }
 .gratis-c b { color: var(--inchiostro); }
 .gratis-c span { min-width: 0; }
+.gruppo-domande { margin: 2rem 0 0; font-size: 1.25rem; }
+.griglia-domande { margin-top: 0.75rem; }
+.griglia-domande li { grid-template-columns: 1fr; border-left: 3px solid var(--accento); }
+.griglia-domande li::before { content: none; }
+.griglia-domande h3 { margin: 0 0 0.2rem; font-size: 1.1rem; }
+.griglia-domande h3 a { text-decoration: none; color: var(--inchiostro); }
+.griglia-domande nav { grid-column: 1; }
+.griglia-domande .ripasso-domande { font-weight: 600; }
+
+/* ===== Sfide tra studenti: lega e duelli nel pannello del livello (versione A2 scelta da Carmine il 03/11/2026) ===== */
+/* Parte alta del pannello in orizzontale (stemma piccolo a sinistra), così il pannello resta basso anche con lega e duelli. */
+.pannello-livello { display: grid; grid-template-columns: auto 1fr; column-gap: 0.85rem; row-gap: 0.65rem; padding: 1rem 1rem 0.9rem; text-align: left; align-items: center; }
+.pannello-livello[hidden] { display: none; }
+.pannello-livello .pl-stemma { grid-row: 1 / span 2; width: 5.2rem; height: 4.7rem; }
+.pannello-livello .pl-fascia { align-self: end; }
+.pannello-livello .pl-fascia strong { font-size: 1.02rem; }
+.pannello-livello .pl-fascia span { font-size: 0.86rem; }
+.pannello-livello .pl-mancano { align-self: start; font-size: 0.82rem; }
+.pannello-livello > :not(.pl-stemma):not(.pl-fascia):not(.pl-mancano) { grid-column: 1 / -1; }
+.pannello-livello .pl-oggi { padding: 0.55rem 0; text-align: center; }
+.pannello-livello .pl-oggi strong { font-size: 1.1rem; }
+.pannello-livello .pl-continua { min-height: 2.5rem; }
+.pannello-livello .pl-account { min-height: 2.3rem; margin-top: -0.2rem; }
+/* Due pillole sulla stessa riga: lega della settimana e duelli */
+.pl-sfide { align-self: stretch; display: grid; grid-template-columns: 1.25fr 1fr; gap: 0.4rem; margin-top: -0.3rem; }
+.pl-sfide a { display: flex; align-items: center; justify-content: center; gap: 0.4rem; min-height: 2.3rem; padding: 0 0.6rem; border: 1px solid var(--riga); border-radius: 999px; color: var(--inchiostro) !important; text-decoration: none; font-size: 0.85rem; font-weight: 600; white-space: nowrap; min-width: 0; }
+.pl-sfide a:hover { border-color: var(--verde); }
+.pl-sfide a > span:last-child { overflow: hidden; text-overflow: ellipsis; }
+.pl-sf-medaglia { flex: none; width: 1.35rem; height: 1.35rem; }
+.pl-sf-medaglia svg { width: 100%; height: 100%; display: block; }
+.pl-sf-icona { flex: none; display: grid; place-items: center; width: 1.35rem; height: 1.35rem; color: var(--verde); }
+.pl-sf-icona svg { width: 1.1rem; height: 1.1rem; }

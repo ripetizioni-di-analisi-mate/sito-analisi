@@ -1,0 +1,402 @@
+---
+// Duelli: due studenti rispondono alle stesse domande a tempo di una materia. Si sfida un amico con un link,
+// uno studente online dall'elenco, oppure si cerca un avversario a caso sulla stessa materia.
+// Le domande e le risposte corrette restano nel Worker (worker/sfide.mjs): la pagina riceve una domanda alla volta.
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import { catalogoDomande } from '../lib/domande';
+import { DUELLO } from '../data/sfide';
+const catalogo = await catalogoDomande('it');
+const materie = MATERIE.filter((m) => m.attiva && catalogo[m.slug]?.length)
+  .map((m) => ({ slug: m.slug, titolo: m.titolo, argomenti: m.argomenti.filter((a) => catalogo[m.slug].includes(a.slug)).map((a) => ({ slug: a.slug, titolo: a.titolo })) }));
+const titolo = 'Duelli';
+const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
+---
+<Base titolo={titolo} descrizione={`Sfida un altro studente sulle domande a tempo: ${DUELLO.domande} domande uguali per entrambi, vince chi risponde correttamente a più domande.`}
+  percorso={[{ titolo }]} lingua="it" seo={{ noindex: true }}>
+  <div class="duelli" data-materie={JSON.stringify(materie)} data-domande={DUELLO.domande} data-secondi={DUELLO.secondi}>
+    <p class="sopratitolo">Sfide tra studenti</p>
+    <h1>Duelli</h1>
+    <p class="sommario">Due studenti rispondono alle stesse {DUELLO.domande} domande a tempo di una materia, con due minuti per ciascuna. Vince chi risponde correttamente a più domande; a parità di risposte corrette vince chi ha impiegato meno tempo.</p>
+
+    <div class="du-ospite" hidden>
+      <p>I duelli si collegano all'account, perché il risultato e gli EXP restano salvati.</p>
+      <p><a class="bottone-primario du-crea-account" href="/accedi?nuovo=1&dopo=/duelli">Crea un account gratuito</a> <a class="bottone-secondario du-accedi" href="/accedi?dopo=/duelli">Accedi</a></p>
+    </div>
+
+    <!-- ===== sala d'attesa ===== -->
+    <div class="du-sala" hidden>
+      <div class="du-inviti" hidden></div>
+
+      <section class="du-scelta">
+        <div class="du-campi">
+          <label>Materia
+            <select name="materia">{materie.map((m) => <option value={m.slug}>{m.titolo}</option>)}</select>
+          </label>
+          <label>Argomento
+            <select name="argomento"><option value="">Tutti gli argomenti</option></select>
+          </label>
+        </div>
+        <div class="du-azioni">
+          <button type="button" class="bottone-primario du-cerca">Cerca un avversario</button>
+          <button type="button" class="bottone-secondario du-link">Sfida un amico con un link</button>
+        </div>
+        <p class="du-ricerca" hidden><span class="du-punto"></span> <span class="du-ricerca-testo">Ricerca di un avversario sulla stessa materia…</span> <button type="button" class="du-annulla">Annulla</button></p>
+        <div class="du-link-pronto" hidden>
+          <p>Manda questo link a chi vuoi sfidare. Puoi giocare subito la tua parte; il risultato compare quando anche l'altro studente ha risposto. Il link resta valido {DUELLO.oreLink} ore.</p>
+          <p class="du-link-riga"><input type="text" readonly /> <button type="button" class="bottone-secondario du-copia">Copia</button> <a class="bottone-secondario du-whatsapp" target="_blank" rel="noopener">WhatsApp</a></p>
+          <p><a class="bottone-primario du-gioca-link">Gioca la tua parte</a></p>
+        </div>
+        <p class="du-errore" hidden></p>
+      </section>
+
+      <section class="du-online">
+        <h2>Studenti online</h2>
+        <p class="du-online-vuoto">In questo momento non ci sono altri studenti online. L'elenco si aggiorna da solo.</p>
+        <ul></ul>
+      </section>
+
+      <section class="du-miei" hidden>
+        <h2>I tuoi duelli</h2>
+        <ul></ul>
+      </section>
+
+      <p class="du-nota">Ogni risposta corretta vale gli EXP delle domande a tempo. Chi vince riceve {DUELLO.vittoria} EXP in più, in caso di parità {DUELLO.pareggio} EXP a testa, per i primi {DUELLO.premiAlGiorno} duelli di ogni giorno. Il nome mostrato agli altri si sceglie nella pagina <a href="/lega">Lega della settimana</a>.</p>
+    </div>
+
+    <!-- ===== partita ===== -->
+    <div class="du-partita" hidden>
+      <div class="du-tabellone">
+        <div class="du-giocatore du-io"><span class="du-nome"></span><span class="du-barra"><span></span></span><span class="du-conto"></span></div>
+        <div class="du-giocatore du-lui"><span class="du-nome"></span><span class="du-barra"><span></span></span><span class="du-conto"></span></div>
+      </div>
+      <p class="du-titolo-partita"></p>
+
+      <div class="du-messaggio" hidden></div>
+
+      <section class="scheda-domanda du-domanda" hidden aria-live="polite">
+        <p class="numero-domanda"></p>
+        <div class="tempo">
+          <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="12" r="8" /><path d="M11 8v4l2.5 2M9 2h4" /></svg>
+          <div class="barra-tempo"><span></span></div>
+          <span class="secondi">2:00</span>
+        </div>
+        <div class="testo-domanda testo-studio"></div>
+        <div class="scelte" role="radiogroup" aria-label="Risposte"></div>
+        <p class="esito" hidden></p>
+        <div class="azioni-domanda">
+          <button type="button" class="bottone-primario conferma" disabled>Conferma la risposta</button>
+          <button type="button" class="bottone-primario prossima" hidden>Domanda successiva</button>
+        </div>
+      </section>
+
+      <section class="du-risultato" hidden>
+        <p class="du-verdetto"></p>
+        <p class="du-dettaglio"></p>
+        <p><a class="bottone-primario" href="/duelli">Nuovo duello</a></p>
+        <h2>Le tue risposte</h2>
+        <ol class="du-riepilogo"></ol>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style is:global>
+  .duelli .du-scelta { margin: 1.6rem 0 2rem; padding: 1.1rem 1.2rem; border: 1px solid var(--riga); border-radius: 10px; background: #fff; font-family: var(--ui); }
+  .du-campi { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .du-campi label { display: grid; gap: 0.25rem; min-width: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .du-campi select { width: 100%; min-width: 0; font: inherit; font-size: 1rem; padding: 0.45rem 0.5rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: #fff; color: var(--inchiostro); }
+  .du-azioni { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+  .du-ricerca { margin: 1rem 0 0; display: flex; align-items: center; gap: 0.5rem; }
+  .du-punto { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--accento); animation: du-pulsa 1.2s ease-in-out infinite; }
+  @keyframes du-pulsa { 50% { opacity: 0.25; } }
+  .du-annulla { font: inherit; background: none; border: 0; color: var(--accento); text-decoration: underline; cursor: pointer; }
+  .du-link-pronto { margin-top: 1rem; }
+  .du-link-riga { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .du-link-riga input { flex: 1 1 14rem; min-width: 0; font: inherit; padding: 0.45rem 0.6rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: var(--carta); }
+  .du-errore { color: #a3533f; margin: 0.8rem 0 0; }
+  .du-inviti { margin: 1.4rem 0 0; display: grid; gap: 0.5rem; font-family: var(--ui); }
+  .du-invito { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; padding: 0.7rem 0.9rem; border-radius: 10px; border: 1px solid color-mix(in srgb, var(--accento) 45%, transparent); background: color-mix(in srgb, var(--accento) 7%, #fff); }
+  .du-invito span { flex: 1 1 12rem; }
+  .du-online ul, .du-miei ul { list-style: none; padding: 0; margin: 0; font-family: var(--ui); }
+  .du-online li, .du-miei li { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0; border-bottom: 1px solid color-mix(in srgb, var(--riga) 60%, transparent); }
+  .du-online .mini { width: 1.35rem; height: 1.6rem; flex: none; }
+  .du-online .mini svg { width: 100%; height: 100%; display: block; }
+  .du-online .chi { flex: 1; min-width: 0; }
+  .du-online .chi small, .du-miei small { display: block; color: var(--inchiostro-2); font-size: 0.82rem; }
+  .du-online .pronto { color: var(--accento); }
+  .du-online-vuoto { font-family: var(--ui); color: var(--inchiostro-2); }
+  .du-online button, .du-miei a.bottone-secondario { padding: 0.3rem 0.8rem; font-size: 0.9rem; }
+  .du-miei .esito-duello { margin-left: auto; font-weight: 600; white-space: nowrap; }
+  .du-miei .vinto { color: #2f6f68; } .du-miei .perso { color: #a3533f; } .du-miei .pari { color: var(--inchiostro-2); }
+  .du-nota { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); margin-top: 2rem; }
+  .du-tabellone { display: grid; gap: 0.45rem; margin: 1.4rem 0 0.4rem; font-family: var(--ui); }
+  .du-giocatore { display: grid; grid-template-columns: 7.5rem 1fr 3.4rem; align-items: center; gap: 0.6rem; font-size: 0.92rem; }
+  .du-giocatore .du-nome { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .du-giocatore .du-barra { height: 8px; border-radius: 4px; background: var(--carta-2); overflow: hidden; }
+  .du-giocatore .du-barra > span { display: block; height: 100%; width: 0; background: var(--accento); transition: width 0.4s; }
+  .du-lui .du-barra > span { background: #7d6aa8; }
+  .du-giocatore .du-conto { text-align: right; font-variant-numeric: tabular-nums; color: var(--inchiostro-2); }
+  .du-titolo-partita { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0 0 1rem; }
+  .du-messaggio { font-family: var(--ui); padding: 0.9rem 1rem; border-radius: 10px; background: var(--carta-2); margin: 1rem 0; }
+  .du-messaggio .du-azioni { margin-top: 0.8rem; }
+  .du-verdetto { font-size: 1.6rem; font-family: var(--titoli); margin: 1.2rem 0 0.2rem; }
+  .du-dettaglio { font-family: var(--ui); color: var(--inchiostro-2); }
+  .du-riepilogo { padding-left: 1.2rem; }
+  .du-riepilogo > li { margin: 0 0 1rem; }
+  .du-riepilogo details summary { cursor: pointer; font-family: var(--ui); }
+  .du-riepilogo .giusta { color: #2f6f68; } .du-riepilogo .sbagliata { color: #a3533f; }
+  @media (max-width: 34rem) { .du-campi { grid-template-columns: 1fr; } .du-giocatore { grid-template-columns: 5.5rem 1fr 3rem; } }
+</style>
+
+<script>
+  import { stemmaSVG, rangoDi, gradoDi } from '../../worker/stemmi.mjs';
+  type Materia = { slug: string; titolo: string; argomenti: { slug: string; titolo: string }[] };
+  const radice = document.querySelector<HTMLElement>('.duelli')!;
+  const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
+  const materie: Materia[] = JSON.parse(radice.dataset.materie || '[]');
+  const SECONDI = Number(radice.dataset.secondi);
+  const LETTERE = ['A', 'B', 'C', 'D', 'E'];
+  const esc = (x: string) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const mini = (liv: number, id: string) => stemmaSVG(rangoDi(liv), { perc: 100, id, grado: gradoDi(liv) });
+  const post = async (url: string, dati: object) => {
+    const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
+    const d = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, d };
+  };
+  const codice = new URLSearchParams(location.search).get('d')?.toUpperCase() || '';
+  const ospite = () => {
+    const dopo = encodeURIComponent(location.pathname + location.search);
+    $<HTMLAnchorElement>('.du-crea-account').href = `/accedi?nuovo=1&dopo=${dopo}`;
+    $<HTMLAnchorElement>('.du-accedi').href = `/accedi?dopo=${dopo}`;
+    $('.du-ospite').hidden = false;
+  };
+
+  // ================= sala d'attesa =================
+  const selM = radice.querySelector<HTMLSelectElement>('select[name=materia]')!;
+  const selA = radice.querySelector<HTMLSelectElement>('select[name=argomento]')!;
+  try { const s = localStorage.getItem('duelli-materia'); if (s && materie.some((m) => m.slug === s)) selM.value = s; } catch { /* niente memoria */ }
+  const riempiArgomenti = () => {
+    const m = materie.find((x) => x.slug === selM.value);
+    selA.innerHTML = '<option value="">Tutti gli argomenti</option>' + (m?.argomenti || []).map((a) => `<option value="${a.slug}">${esc(a.titolo)}</option>`).join('');
+  };
+  riempiArgomenti();
+  selM.addEventListener('change', () => { riempiArgomenti(); fermaRicerca(); try { localStorage.setItem('duelli-materia', selM.value); } catch { /* niente */ } });
+  selA.addEventListener('change', fermaRicerca);
+
+  let cerca = false, timerSala = 0;
+  const errore = (t: string) => { const e = $('.du-errore'); e.textContent = t; e.hidden = !t; };
+  function fermaRicerca() { cerca = false; $('.du-ricerca').hidden = true; $<HTMLButtonElement>('.du-cerca').disabled = false; }
+  $('.du-cerca').addEventListener('click', () => { cerca = true; errore(''); $('.du-ricerca').hidden = false; $<HTMLButtonElement>('.du-cerca').disabled = true; aggiornaSala(); });
+  $('.du-annulla').addEventListener('click', () => { fermaRicerca(); aggiornaSala(); });
+
+  async function creaDuello(modo: 'link' | 'invito', pid?: string) {
+    errore('');
+    const r = await post('/api/duelli/crea', { materia: selM.value, argomento: selA.value || null, modo, pid }).catch(() => null);
+    if (!r?.ok) { errore(r?.d?.errore || 'Il duello non è stato creato. Riprova.'); return null; }
+    return r.d.codice as string;
+  }
+  $('.du-link').addEventListener('click', async () => {
+    const c = await creaDuello('link');
+    if (!c) return;
+    const url = `${location.origin}/duelli?d=${c}`;
+    const box = $('.du-link-pronto');
+    box.querySelector('input')!.value = url;
+    $<HTMLAnchorElement>('.du-whatsapp').href = `https://wa.me/?text=${encodeURIComponent(`Ti sfido a un duello su ${selM.selectedOptions[0].text}: ${url}`)}`;
+    $<HTMLAnchorElement>('.du-gioca-link').href = `/duelli?d=${c}`;
+    box.hidden = false;
+  });
+  $('.du-copia').addEventListener('click', async () => {
+    const i = $('.du-link-pronto').querySelector('input')!;
+    try { await navigator.clipboard.writeText(i.value); $('.du-copia').textContent = 'Copiato'; } catch { i.select(); }
+  });
+
+  function disegnaSala(d: any) {
+    if (d.abbinato) { location.href = `/duelli?d=${d.abbinato}`; return; }
+    if (cerca) $('.du-ricerca-testo').textContent = d.inCoda ? 'Avversario trovato, preparazione del duello…' : 'Ricerca di un avversario sulla stessa materia…';
+    const inv = $('.du-inviti');
+    inv.innerHTML = (d.inviti || []).map((x: any) => `<div class="du-invito"><span><strong>${esc(x.da)}</strong> ti sfida a un duello su ${esc(x.argomento || x.materia)}.</span>`
+      + `<a class="bottone-primario" href="/duelli?d=${x.codice}&accetta=1">Accetta</a> <button type="button" class="bottone-secondario" data-rifiuta="${x.codice}">Rifiuta</button></div>`).join('');
+    inv.hidden = !(d.inviti || []).length;
+    const ul = $('.du-online ul');
+    ul.innerHTML = (d.online || []).map((s: any, i: number) => `<li><span class="mini">${mini(s.livello, `o${i}`)}</span><span class="chi">${esc(s.nome)} · Liv. ${s.livello}`
+      + `<small class="${s.dove === 'duelli' ? 'pronto' : ''}">${s.dove === 'duelli' ? 'Nella pagina dei duelli' : `Sta studiando${s.materia ? ` ${esc(s.materia)}` : ''}`}</small></span>`
+      + `<button type="button" class="bottone-secondario" data-sfida="${s.pid}">Sfida</button></li>`).join('');
+    $('.du-online-vuoto').hidden = Boolean((d.online || []).length);
+    const miei = $('.du-miei');
+    miei.querySelector('ul')!.innerHTML = (d.miei || []).map((x: any) => {
+      const contro = x.avversario ? `contro ${esc(x.avversario)}` : 'link non ancora aperto';
+      const destra = x.esito ? `<span class="esito-duello ${x.esito}">${x.esito === 'vinto' ? 'Vinto' : x.esito === 'perso' ? 'Perso' : 'Pari'} ${x.mie}–${x.sue}</span>`
+        : x.daGiocare ? `<a class="bottone-secondario esito-duello" href="/duelli?d=${x.codice}">Gioca</a>`
+        : `<span class="esito-duello pari">${x.stato === 'scaduto' ? 'Scaduto' : x.stato === 'invito' ? 'Invito inviato' : 'In attesa'}</span>`;
+      return `<li><span><a href="/duelli?d=${x.codice}">${esc(x.materia)}</a> <small>${contro} · ${new Date(x.creato).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })}</small></span>${destra}</li>`;
+    }).join('');
+    miei.hidden = !(d.miei || []).length;
+  }
+  radice.addEventListener('click', async (e) => {
+    const t = e.target as HTMLElement;
+    const pid = t.closest<HTMLElement>('[data-sfida]')?.dataset.sfida;
+    if (pid) {
+      const b = t.closest<HTMLButtonElement>('button')!;
+      b.disabled = true;
+      const c = await creaDuello('invito', pid);
+      if (c) location.href = `/duelli?d=${c}`; else b.disabled = false;
+    }
+    const rif = t.closest<HTMLElement>('[data-rifiuta]')?.dataset.rifiuta;
+    if (rif) { await post('/api/duelli/partita', { codice: rif, accetta: false }); aggiornaSala(); }
+  });
+
+  async function aggiornaSala() {
+    clearTimeout(timerSala);
+    if (document.visibilityState === 'visible') {
+      const r = await post('/api/duelli/lobby', { materia: selM.value, argomento: selA.value || null, cerca }).catch(() => null);
+      if (r?.status === 401) { $('.du-sala').hidden = true; ospite(); return; }
+      if (r?.ok) { $('.du-sala').hidden = false; disegnaSala(r.d); }
+    }
+    timerSala = window.setTimeout(aggiornaSala, 4000);
+  }
+  addEventListener('pagehide', () => { if (!codice) navigator.sendBeacon?.('/api/duelli/esci', new Blob(['{}'], { type: 'application/json' })); });
+
+  // ================= partita =================
+  const dom = $('.du-domanda'), testo = dom.querySelector<HTMLElement>('.testo-domanda')!, scelte = dom.querySelector<HTMLElement>('.scelte')!;
+  const conferma = dom.querySelector<HTMLButtonElement>('.conferma')!, prossima = dom.querySelector<HTMLButtonElement>('.prossima')!, esito = dom.querySelector<HTMLElement>('.esito')!;
+  const barraT = dom.querySelector<HTMLElement>('.barra-tempo span')!, secondiEl = dom.querySelector<HTMLElement>('.secondi')!;
+  let stato: any = null, turnoN = -1, ordine: number[] = [], scelta: number | null = null, timerT = 0, timerP = 0, inviando = false;
+
+  const tabellone = (s: any) => {
+    const k = s.totale;
+    const riga = (sel: string, nome: string, date: number, giuste: number | null) => {
+      const el = $(sel);
+      el.querySelector('.du-nome')!.textContent = nome;
+      (el.querySelector('.du-barra > span') as HTMLElement).style.width = `${(100 * date) / k}%`;
+      el.querySelector('.du-conto')!.textContent = giuste === null ? `${date}/${k}` : `${giuste} ✓`;
+    };
+    riga('.du-io', `${s.io.nome} (tu)`, s.io.date, s.stato === 'finito' ? s.io.giuste : null);
+    if (s.avversario) riga('.du-lui', s.avversario.nome, s.avversario.date, s.stato === 'finito' ? s.avversario.giuste : null);
+    else riga('.du-lui', 'In attesa', 0, null);
+    $('.du-titolo-partita').textContent = `${s.titoloMateria}${s.argomento ? ` · ${s.argomento}` : ''} · ${k} domande`;
+  };
+  const messaggio = (html: string) => { const m = $('.du-messaggio'); m.innerHTML = html; m.hidden = !html; };
+
+  async function aggiornaPartita(opz: { unisci?: boolean; servi?: boolean; accetta?: boolean } = {}) {
+    clearTimeout(timerP);
+    const r = await post('/api/duelli/partita', { codice, ...opz }).catch(() => null);
+    if (r?.status === 401) { ospite(); return; }
+    if (!r?.ok) { $('.du-partita').hidden = false; messaggio(esc(r?.d?.errore || 'Il duello non si è caricato. Ricarica la pagina.')); return; }
+    stato = r.d;
+    $('.du-partita').hidden = false;
+    if (!stato.partecipa) {
+      messaggio(stato.stato === 'scaduto' ? 'Questo duello è scaduto.' : 'Questo duello è già tra altri due studenti. <a href="/duelli">Lancia un tuo duello</a>.');
+      $('.du-tabellone').hidden = true; return;
+    }
+    tabellone(stato);
+    if (stato.stato === 'invito') {
+      if (stato.sonoSfidante) messaggio(`Invito inviato a <strong>${esc(stato.avversario?.nome || '')}</strong>. Il duello comincia quando accetta; l'invito vale ${10} minuti.`);
+      else messaggio(`<strong>${esc(stato.sfidante)}</strong> ti sfida a un duello su ${esc(stato.argomento || stato.titoloMateria)}.<p class="du-azioni"><button type="button" class="bottone-primario" data-accetta>Accetta</button> <button type="button" class="bottone-secondario" data-no>Rifiuta</button></p>`);
+      timerP = window.setTimeout(() => aggiornaPartita(), 3000);
+      return;
+    }
+    if (stato.stato === 'rifiutato' || stato.stato === 'scaduto') {
+      messaggio(stato.stato === 'rifiutato' ? 'Lo studente ha rifiutato il duello. <a href="/duelli">Torna ai duelli</a>.' : 'Il duello è scaduto. <a href="/duelli">Torna ai duelli</a>.');
+      dom.hidden = true; return;
+    }
+    if (stato.turno) {
+      messaggio('');
+      if (!stato.turno.servita) { aggiornaPartita({ servi: true }); return; }
+      if (stato.turno.n !== turnoN) mostraDomanda(stato.turno);
+      return;
+    }
+    dom.hidden = true;
+    if (stato.stato === 'finito') { risultato(stato); return; }
+    // ho finito io: si aspetta l'altro
+    const lui = stato.avversario;
+    messaggio(stato.stato === 'aperto'
+      ? `Hai risposto a tutte le domande: ${stato.io.giuste} corrette su ${stato.totale}. Il risultato compare quando lo studente che hai sfidato apre il link e gioca la sua parte.<p class="du-link-riga"><input type="text" readonly value="${location.origin}/duelli?d=${stato.codice}" /></p>`
+      : `Hai risposto a tutte le domande: ${stato.io.giuste} corrette su ${stato.totale}. ${esc(lui?.nome || '')} ha risposto a ${lui?.date ?? 0} domande su ${stato.totale}.`);
+    timerP = window.setTimeout(() => aggiornaPartita(), stato.modo === 'online' || stato.modo === 'invito' ? 3000 : 15000);
+  }
+
+  function mostraDomanda(t: any) {
+    turnoN = t.n; scelta = null; inviando = false;
+    dom.hidden = false;
+    dom.querySelector('.numero-domanda')!.textContent = `Domanda ${t.n + 1} di ${stato.totale} · ${t.argomento}`;
+    testo.innerHTML = t.testo;
+    ordine = t.scelte.map((_: string, i: number) => i).sort(() => Math.random() - 0.5);
+    scelte.innerHTML = '';
+    ordine.forEach((orig, k) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'scelta'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
+      b.innerHTML = `<span class="lettera">${LETTERE[k]}</span><span class="valore">${t.scelte[orig]}</span>`;
+      b.addEventListener('click', () => {
+        if (b.classList.contains('scelta-chiusa')) return;
+        scelta = orig;
+        scelte.querySelectorAll('.scelta').forEach((x, j) => { const on = ordine[j] === scelta; x.classList.toggle('scelta-attiva', on); x.setAttribute('aria-checked', String(on)); });
+        conferma.disabled = false;
+      });
+      scelte.append(b);
+    });
+    esito.hidden = true; conferma.hidden = false; conferma.disabled = true; prossima.hidden = true;
+    // tempo: dal momento in cui il server ha servito la domanda (anche dopo un ricaricamento)
+    const scarto = Date.now() - t.ora;
+    const fine = t.servita + SECONDI * 1000 + scarto;
+    clearInterval(timerT);
+    const passa = () => {
+      const r = Math.max(0, fine - Date.now());
+      barraT.style.width = `${(100 * r) / (SECONDI * 1000)}%`;
+      secondiEl.textContent = `${Math.floor(r / 60000)}:${String(Math.floor((r % 60000) / 1000)).padStart(2, '0')}`;
+      if (!r) { clearInterval(timerT); invia(true); }
+    };
+    passa(); timerT = window.setInterval(passa, 250);
+    dom.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  async function invia(scaduto = false) {
+    if (inviando) return;
+    inviando = true; clearInterval(timerT);
+    conferma.hidden = true;
+    const r = await post('/api/duelli/rispondi', { codice, n: turnoN, scelta: scaduto ? null : scelta }).catch(() => null);
+    scelte.querySelectorAll<HTMLElement>('.scelta').forEach((b, j) => {
+      b.classList.add('scelta-chiusa');
+      if (r?.ok && ordine[j] === r.d.corretta) b.classList.add('scelta-giusta');
+      else if (ordine[j] === scelta) b.classList.add('scelta-sbagliata');
+    });
+    if (r?.ok) {
+      const lettera = LETTERE[ordine.indexOf(r.d.corretta)];
+      esito.textContent = r.d.giusta ? `Risposta corretta${r.d.punti ? ` · +${r.d.punti} EXP` : ''}` : scaduto ? `Tempo scaduto. La risposta corretta è la ${lettera}.` : `La risposta corretta è la ${lettera}.`;
+      esito.className = `esito ${r.d.giusta ? 'esito-giusto' : 'esito-sbagliato'}`;
+      if (r.d.stato) dispatchEvent(new CustomEvent('livello', { detail: r.d.stato }));
+      if (r.d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: r.d.nuovi }));
+    } else esito.textContent = 'La risposta non è arrivata. Ricarica la pagina.';
+    esito.hidden = false;
+    prossima.textContent = turnoN + 1 >= stato.totale ? 'Vedi il risultato' : 'Domanda successiva';
+    prossima.hidden = false;
+    stato.io.date = turnoN + 1; tabellone(stato);
+  }
+  conferma.addEventListener('click', () => invia());
+  prossima.addEventListener('click', () => { prossima.hidden = true; aggiornaPartita({ servi: true }); });
+  $('.du-messaggio').addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t.closest('[data-accetta]')) aggiornaPartita({ accetta: true });
+    if (t.closest('[data-no]')) aggiornaPartita({ accetta: false });
+  });
+
+  function risultato(s: any) {
+    messaggio('');
+    const box = $('.du-risultato');
+    const io = s.io.giuste, lui = s.avversario?.giuste ?? 0;
+    box.querySelector('.du-verdetto')!.textContent = s.esito === 'vinto' ? `Hai vinto ${io} a ${lui}` : s.esito === 'perso' ? `Ha vinto ${s.avversario?.nome || ''} ${lui} a ${io}` : `Pareggio ${io} a ${lui}`;
+    const sec = (ms: number) => `${Math.floor(ms / 60000)} min ${Math.round((ms % 60000) / 1000)} s`;
+    box.querySelector('.du-dettaglio')!.textContent = `Risposte corrette su ${s.totale}: tu ${s.io.giuste}, ${s.avversario?.nome || ''} ${s.avversario?.giuste ?? 0}. Tempo totale: tu ${sec(s.io.ms)}, ${s.avversario?.nome || ''} ${sec(s.avversario?.ms || 0)}.`;
+    box.querySelector('.du-riepilogo')!.innerHTML = (s.riepilogo || []).map((x: any) => `<li><details><summary><span class="${x.giusta ? 'giusta' : 'sbagliata'}">${x.giusta ? 'Corretta' : x.scelta < 0 ? 'Senza risposta' : 'Sbagliata'}</span> · ${esc(x.argomento || '')}</summary>`
+      + `<div class="testo-studio">${x.testo}<ol type="A">${x.scelte.map((c: string, i: number) => `<li${i === x.corretta ? ' class="giusta"' : ''}>${c}</li>`).join('')}</ol>`
+      + `<div class="spiegazione"><h3>Spiegazione</h3>${x.spiegazione}</div></div></details></li>`).join('');
+    box.hidden = false;
+  }
+
+  if (codice) {
+    $('.du-partita').hidden = false;
+    const accetta = new URLSearchParams(location.search).get('accetta') === '1';
+    aggiornaPartita(accetta ? { accetta: true, unisci: true } : { unisci: true });
+  } else aggiornaSala();
+  document.addEventListener('visibilitychange', () => { if (!codice && document.visibilityState === 'visible') aggiornaSala(); });
+</script>

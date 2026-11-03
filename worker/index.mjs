@@ -24,6 +24,7 @@ import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
+import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -159,6 +160,8 @@ export class Archivio {
     creaTabelleGruppi(this.sql);
     // «Invita un amico»: codici personali, invitati e sconti del 15% (worker/inviti.mjs)
     creaTabelleInviti(this.sql);
+    // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
+    creaTabelleSfide(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -190,6 +193,7 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/sfi-')) { const r = archivioSfide(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
@@ -301,7 +305,8 @@ export class Archivio {
         return Response.json({ ok: true });
 
       // livelli e punti esperienza
-      case '/liv-battito': return Response.json(battito(this, c));
+      // con il minuto di studio arrivano anche gli inviti ai duelli ricevuti mentre si studia
+      case '/liv-battito': return Response.json({ ...battito(this, c), inviti: archivioSfide(this, '/sfi-inviti', c).inviti });
       case '/liv-risposta': return Response.json(risposta(this, c));
       case '/liv-riepilogo': return Response.json(riepilogo(this, c));
       case '/liv-percorso': return Response.json(percorso(this, c));
@@ -716,6 +721,12 @@ export default {
       if (r) return r;
     }
 
+    // ===== sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs) =====
+    if (p === '/api/lega' || p === '/api/lega/nome' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
+      const r = await gestisciSfide(req, env, ctx, p, { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi });
+      if (r) return r;
+    }
+
     // ===== account =====
     if (p === '/api/registrati' && POST) {
       const { email: e, password, lingua, nome, corso: corsoDato } = await req.json().catch(() => ({}));
@@ -912,7 +923,7 @@ export default {
       return json({ token, domande }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/simulazione-quiz/correggi' && POST) {
-      const { token } = await req.json().catch(() => ({}));
+      const { token, risposte } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       if (!tok?.sim || !Array.isArray(tok.ids)) return json({ errore: 'Simulazione non valida: ricarica la pagina.' }, 400);
       const esiti = [];
@@ -922,7 +933,19 @@ export default {
         const q = dati?.argomenti?.[argomento]?.find((x) => `${m}/${x.id}` === id);
         esiti.push(q ? { id, corretta: q.corretta, spiegazione: q.spiegazione } : { id, corretta: 0, spiegazione: '' });
       }
-      return json({ esiti }, 200, { 'cache-control': 'no-store' });
+      // Confronto con chi ha svolto una simulazione con le stesse materie: la quota di risposte corrette
+      // si calcola qui, dalle risposte date (indici delle scelte originali, null = non data).
+      let confronto = null;
+      if (Array.isArray(risposte) && risposte.length === esiti.length) {
+        const giuste = esiti.filter((e, i) => Number.isInteger(risposte[i]) && risposte[i] === e.corretta - 1).length;
+        const materieSim = [...new Set(tok.ids.map((x) => String(x).split('/')[0]))].sort().join('+');
+        const firma = token.split('.')[1] || token;
+        const io = await utenteCollegato(env, req).catch(() => null);
+        const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
+        const chi = await sha(`c|${io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('')}`);
+        confronto = await aDO(env, '/sfi-percentile', { tipo: 'quiz', chiave: materieSim, id: `q|${firma.slice(0, 40)}`, valore: Math.round((1000 * giuste) / esiti.length) / 10, chi }).catch(() => null);
+      }
+      return json({ esiti, confronto }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/sessione/riepilogo' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);

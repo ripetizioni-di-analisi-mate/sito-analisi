@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import { link, type Lingua } from '../i18n';
 import { stemmaSVG, RANGHI, ROMANI } from '../../worker/stemmi.mjs';
+import { DUELLO } from '../data/sfide';
 import { FASCE, sogliaLivello, PUNTI, OBIETTIVI, TRAGUARDI_FISSI, PUNTI_MATERIA_COMPLETA, STUDIO, puntiMinuto } from '../data/livelli';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -34,6 +35,7 @@ const titolo = en ? 'Levels and points' : 'Livelli e punti';
       <div><dt>{en ? `Each of the first ${STUDIO.primiMinuti} minutes of active study in a row` : `Ogni minuto dei primi ${STUDIO.primiMinuti} di studio attivo di fila`}</dt><dd>1 {XP}</dd></div>
       <div><dt>{en ? `Each minute after that: one more point every ${STUDIO.ogniMinuti} minutes` : `Ogni minuto successivo: un punto in più ogni ${STUDIO.ogniMinuti} minuti`}</dt><dd>{en ? `up to ${STUDIO.maxMinuto}` : `fino a ${STUDIO.maxMinuto}`} {XP}</dd></div>
       <div><dt>{en ? 'Every hour of study in a row' : 'Ogni ora di studio di fila'}</dt><dd>+{STUDIO.premioOra} {XP}</dd></div>
+      <div><dt>{en ? `Duel won (first ${DUELLO.premiAlGiorno} duels of the day; ${DUELLO.pareggio} XP each for a draw)` : <>Duello vinto (primi {DUELLO.premiAlGiorno} duelli del giorno; {DUELLO.pareggio} EXP a testa in caso di parità)</>}</dt><dd>+{DUELLO.vittoria} {XP}</dd></div>
       <div><dt>{en ? 'Weekly goal completed' : 'Obiettivo della settimana completato'}</dt><dd>{Math.min(...puntiObiettivi)}–{Math.max(...puntiObiettivi)} {XP}</dd></div>
     </dl>
     <p>{en

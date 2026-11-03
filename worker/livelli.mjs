@@ -5,6 +5,7 @@ import {
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
+import { entraInLega, riassuntoLega } from './sfide.mjs';
 
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
@@ -91,10 +92,12 @@ export function creaTabelleLivelli(sql) {
 // ---------- operazioni sull'archivio (ar = istanza di Archivio, con righe/riga/sql) ----------
 const expDi = (ar, email) => ar.riga('SELECT COALESCE(exp, 0) AS exp FROM utenti WHERE email = ?', email)?.exp || 0;
 
-function aggiungi(ar, email, punti, tipo, nota = null) {
+export function aggiungi(ar, email, punti, tipo, nota = null) {
   if (!punti) return;
   ar.sql.exec('INSERT INTO exp (email, quando, tipo, punti, nota) VALUES (?, ?, ?, ?, ?)', email, Date.now(), tipo, punti, nota);
   ar.sql.exec('UPDATE utenti SET exp = COALESCE(exp, 0) + ? WHERE email = ?', punti, email);
+  // I primi EXP della settimana fanno entrare lo studente in un gruppo della sua lega (worker/sfide.mjs).
+  entraInLega(ar, email);
 }
 function premia(ar, email, codice, nome, punti, nuovi) {
   if (ar.riga('SELECT codice FROM premi WHERE email = ? AND codice = ?', email, codice)) return;
@@ -407,6 +410,7 @@ export function percorso(ar, c) {
     // Esami con la data inserita, dal più vicino (in home il primo accanto al titolo).
     esami: ar.righe('SELECT materia, data FROM esami WHERE email = ? AND data >= ? ORDER BY data LIMIT 3', email, oggi)
       .map((e) => ({ ...e, titolo: titoloMateria(e.materia, l) })),
+    lega: riassuntoLega(ar, email, l),
     sessioni: ar.righe('SELECT inizio, minuti, risposte, corrette, punti, materia, argomento FROM sessioni WHERE email = ? ORDER BY ultimo DESC LIMIT 5', email)
       .map((s) => ({ ...s, titolo: s.argomento ? titoloArgomento(s.materia, s.argomento, l) : null })),
   };

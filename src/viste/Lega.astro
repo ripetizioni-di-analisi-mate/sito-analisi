@@ -1,0 +1,161 @@
+---
+// Lega della settimana: classifica del gruppo dello studente (fino a 30 studenti della stessa lega),
+// con l'EXP guadagnato da lunedì. Dati da /api/lega (worker/sfide.mjs). Solo italiano.
+import Base from '../layouts/Base.astro';
+import { LEGHE, LEGA_GRUPPO, quoteLega } from '../data/sfide';
+const titolo = 'Lega della settimana';
+const q = quoteLega(LEGA_GRUPPO, 4);
+---
+<Base titolo={titolo} descrizione="La classifica settimanale degli studenti: dieci leghe, gruppi di trenta, i primi salgono e gli ultimi scendono." percorso={[{ titolo }]}
+  lingua="it" seo={{ noindex: true }}>
+  <div class="lega" data-leghe={JSON.stringify(LEGHE)}>
+    <p class="sopratitolo">{titolo}</p>
+    <div class="lega-testa">
+      <div class="lega-medaglia" aria-hidden="true"></div>
+      <div>
+        <h1 class="lega-nome">Classifica</h1>
+        <p class="lega-tempo"></p>
+      </div>
+    </div>
+    <ol class="lega-scala" aria-label="Le dieci leghe">{LEGHE.map((n, i) => <li data-i={i}><span>{n}</span></li>)}</ol>
+
+    <p class="lega-esito" hidden></p>
+
+    <div class="lega-ospite" hidden>
+      <p>La lega si collega all'account: con un account gratuito si entra in un gruppo appena si guadagnano i primi EXP della settimana.</p>
+      <p><a class="bottone-primario" href="/accedi?nuovo=1&dopo=/lega">Crea un account gratuito</a> <a class="bottone-secondario" href="/accedi?dopo=/lega">Accedi</a></p>
+    </div>
+
+    <p class="lega-attesa" hidden>Il gruppo di questa settimana si forma con i primi EXP: basta una risposta corretta a una domanda a tempo o qualche minuto di studio. <a href="/domande-a-tempo">Domande a tempo</a></p>
+
+    <div class="lega-classifica" hidden>
+      <table>
+        <thead><tr><th>#</th><th>Studente</th><th class="num">EXP della settimana</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <section class="lega-regole">
+      <h2>Come funziona</h2>
+      <p>Le leghe sono dieci, da {LEGHE[0]} a {LEGHE[LEGHE.length - 1]}. Ogni settimana, da lunedì a domenica, chi guadagna i primi EXP entra in un gruppo di al massimo {LEGA_GRUPPO} studenti della propria lega. In classifica conta soltanto l'EXP guadagnato nella settimana, con le stesse regole di <a href="/livelli-e-punti">Livelli e punti</a>: lo studio attivo, le domande a tempo, gli esercizi verificati e i duelli.</p>
+      <p>Domenica a mezzanotte la classifica si chiude. In un gruppo completo di {LEGA_GRUPPO} studenti i primi {q.sale} salgono nella lega successiva e gli ultimi {q.scende} scendono in quella precedente; nei gruppi più piccoli le quote sono proporzionali e sotto i 10 studenti nessuno scende. A parità di EXP è davanti chi è entrato prima nel gruppo.</p>
+    </section>
+
+    <section class="lega-nome-pubblico" hidden>
+      <h2>Il tuo nome nelle classifiche</h2>
+      <form>
+        <label>Nome mostrato agli altri studenti <input type="text" name="soprannome" maxlength="24" placeholder="" autocomplete="nickname" /></label>
+        <label class="spunta"><input type="checkbox" name="pubblico" /> Mostra il mio nome nelle classifiche e nell'elenco degli studenti online dei duelli</label>
+        <p class="nota">Senza la spunta il tuo nome compare come «Studente» e non sei nell'elenco degli studenti online; puoi comunque giocare i duelli con un link.</p>
+        <button type="submit" class="bottone-secondario">Salva</button> <span class="salvato" hidden>Salvato.</span>
+      </form>
+    </section>
+  </div>
+</Base>
+
+<style is:global>
+  .lega-testa { display: flex; align-items: center; gap: 1rem; margin: 0.4rem 0 0.8rem; }
+  .lega-testa h1 { margin: 0; }
+  .lega-tempo { margin: 0.15rem 0 0; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.92rem; }
+  .lega-medaglia { flex: none; width: 3.6rem; height: 3.6rem; }
+  .lega-medaglia:empty { display: none; }
+  .lega-medaglia svg, .lega-scala svg { display: block; width: 100%; height: 100%; }
+  .lega-scala { list-style: none; padding: 0; margin: 0 0 1.4rem; display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; font-family: var(--ui); }
+  .lega-scala li { height: 6px; border-radius: 3px; background: var(--riga); position: relative; }
+  .lega-scala li span { position: absolute; left: 0; top: 10px; font-size: 0.72rem; white-space: nowrap; color: var(--inchiostro-2); display: none; }
+  .lega-scala li.passata { background: color-mix(in srgb, var(--accento) 45%, var(--riga)); }
+  .lega-scala li.attuale { background: var(--accento); }
+  .lega-scala li.attuale span { display: block; color: var(--accento); font-weight: 600; }
+  .lega-scala li:first-child span { display: block; }
+  .lega-scala li:last-child span { display: block; left: auto; right: 0; }
+  .lega-scala.vicino-fine li:last-child:not(.attuale) span, .lega-scala.vicino-inizio li:first-child:not(.attuale) span { display: none; }
+  .lega-esito { font-family: var(--ui); margin: 1.6rem 0 1rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: var(--carta-2); }
+  .lega-esito.sale { background: color-mix(in srgb, #2f6f68 10%, var(--carta)); }
+  .lega-ospite, .lega-attesa { font-family: var(--ui); margin-top: 1.6rem; }
+  .lega-classifica { margin-top: 1.6rem; }
+  .lega-classifica table { width: 100%; border-collapse: collapse; font-family: var(--ui); font-size: 0.95rem; }
+  .lega-classifica th { text-align: left; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); font-weight: 600; padding: 0 0.5rem 0.4rem; border-bottom: 1px solid var(--riga); }
+  .lega-classifica td { padding: 0.45rem 0.5rem; border-bottom: 1px solid color-mix(in srgb, var(--riga) 60%, transparent); vertical-align: middle; }
+  .lega-classifica .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .lega-classifica td.pos { width: 2.2rem; color: var(--inchiostro-2); font-variant-numeric: tabular-nums; }
+  .lega-classifica .chi { display: flex; align-items: center; gap: 0.55rem; }
+  .lega-classifica .chi .mini { width: 1.35rem; height: 1.6rem; flex: none; }
+  .lega-classifica .chi .mini svg { width: 100%; height: 100%; display: block; }
+  .lega-classifica .chi small { color: var(--inchiostro-2); }
+  .lega-classifica tr.io td { background: color-mix(in srgb, var(--accento) 8%, transparent); font-weight: 600; }
+  .lega-classifica tr.sale td.pos { color: #2f6f68; font-weight: 700; }
+  .lega-classifica tr.scende td.pos { color: #a3533f; font-weight: 700; }
+  .lega-classifica tr.confine td { padding: 0.35rem 0.5rem; border-bottom: 0; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+  .lega-classifica tr.confine.sale td { color: #2f6f68; border-top: 1px dashed color-mix(in srgb, #2f6f68 50%, transparent); }
+  .lega-classifica tr.confine.scende td { color: #a3533f; border-top: 1px dashed color-mix(in srgb, #a3533f 50%, transparent); }
+  .lega-regole { margin-top: 2.4rem; }
+  .lega-nome-pubblico form { font-family: var(--ui); display: grid; gap: 0.6rem; max-width: 30rem; }
+  .lega-nome-pubblico input[type=text] { display: block; width: 100%; margin-top: 0.25rem; padding: 0.45rem 0.6rem; border: 1px solid var(--riga); border-radius: var(--raggio); font: inherit; background: white; }
+  .lega-nome-pubblico .spunta { display: flex; gap: 0.5rem; align-items: flex-start; }
+  .lega-nome-pubblico .nota { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .lega-nome-pubblico button { justify-self: start; }
+  .lega-nome-pubblico .salvato { color: var(--accento); }
+</style>
+
+<script>
+  import { stemmaSVG, rangoDi, gradoDi } from '../../worker/stemmi.mjs';
+  import { medagliaLega } from '../scripts/medaglia-lega';
+  const radice = document.querySelector<HTMLElement>('.lega')!;
+  const $ = <T extends HTMLElement>(s: string) => radice.querySelector<T>(s)!;
+  const num = (x: number) => x.toLocaleString('it-IT');
+  const esc = (x: string) => x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+
+  function mancano(fine: number) {
+    const r = Math.max(0, fine - Date.now());
+    const g = Math.floor(r / 86400000), h = Math.floor((r % 86400000) / 3600000), m = Math.floor((r % 3600000) / 60000);
+    if (g > 0) return `${g} ${g === 1 ? 'giorno' : 'giorni'} e ${h} ${h === 1 ? 'ora' : 'ore'}`;
+    if (h > 0) return `${h} ${h === 1 ? 'ora' : 'ore'} e ${m} minuti`;
+    return `${m} minuti`;
+  }
+
+  async function carica() {
+    const r = await fetch('/api/lega').catch(() => null);
+    if (!r || r.status === 401) { $('.lega-ospite').hidden = false; $('.lega-nome').textContent = 'Lega della settimana'; return; }
+    const d = await r.json();
+    $('.lega-nome').textContent = `Lega ${d.nomeLega}`;
+    $('.lega-medaglia').innerHTML = medagliaLega(d.lega, d.leghe[d.lega]);
+    $('.lega-tempo').textContent = `La classifica si chiude domenica a mezzanotte: mancano ${mancano(d.fine)}.`;
+    radice.querySelectorAll<HTMLElement>('.lega-scala li').forEach((li, i) => { li.classList.toggle('attuale', i === d.lega); li.classList.toggle('passata', i < d.lega); });
+    $('.lega-scala').classList.toggle('vicino-fine', d.lega >= d.leghe.length - 2);
+    $('.lega-scala').classList.toggle('vicino-inizio', d.lega <= 1);
+    if (d.esito) {
+      const e = d.esito, el = $('.lega-esito');
+      const dove = e.a > e.da ? `e sei salito nella lega ${e.nomeA}` : e.a < e.da ? `e sei sceso nella lega ${e.nomeA}` : `e sei rimasto nella lega ${e.nomeA}`;
+      el.textContent = `La settimana scorsa sei arrivato ${e.posizione}° su ${e.membri} nella lega ${e.nomeDa} ${dove}.`;
+      el.classList.toggle('sale', e.a > e.da);
+      el.hidden = false;
+    }
+    if (d.attesa) $('.lega-attesa').hidden = false;
+    else {
+      const righe: string[] = [];
+      const n = d.gruppo.length;
+      d.gruppo.forEach((m: any, i: number) => {
+        if (d.sale && i === 0) righe.push(`<tr class="confine sale"><td colspan="3">Salgono nella lega ${esc(d.leghe[d.lega + 1] || '')}</td></tr>`);
+        if (d.scende && i === n - d.scende) righe.push(`<tr class="confine scende"><td colspan="3">Scendono nella lega ${esc(d.leghe[d.lega - 1] || '')}</td></tr>`);
+        const rg = rangoDi(m.livello);
+        righe.push(`<tr class="${m.io ? 'io ' : ''}${m.zona}"><td class="pos">${m.pos}</td><td><span class="chi"><span class="mini">${stemmaSVG(rg, { perc: 100, id: `l${i}`, grado: gradoDi(m.livello) })}</span><span>${esc(m.nome)}${m.io ? ' <small>(tu)</small>' : ''} <small>· Liv. ${m.livello}</small></span></span></td><td class="num">${num(m.exp)}</td></tr>`);
+      });
+      $('.lega-classifica tbody').innerHTML = righe.join('');
+      $('.lega-classifica').hidden = false;
+    }
+    const sez = $('.lega-nome-pubblico');
+    const f = sez.querySelector('form')!;
+    (f.elements.namedItem('soprannome') as HTMLInputElement).value = d.soprannome;
+    (f.elements.namedItem('soprannome') as HTMLInputElement).placeholder = d.pubblico ? d.nome : 'Studente';
+    (f.elements.namedItem('pubblico') as HTMLInputElement).checked = d.pubblico;
+    sez.hidden = false;
+  }
+  radice.querySelector('.lega-nome-pubblico form')!.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target as HTMLFormElement;
+    const r = await fetch('/api/lega/nome', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+      soprannome: (f.elements.namedItem('soprannome') as HTMLInputElement).value, pubblico: (f.elements.namedItem('pubblico') as HTMLInputElement).checked }) }).catch(() => null);
+    if (r?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(); }
+  });
+  carica();
+</script>

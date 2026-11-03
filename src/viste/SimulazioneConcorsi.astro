@@ -78,6 +78,7 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
         <p class="sim-voto"></p>
         <p class="sim-nota"></p>
         <table class="sim-conto"><tbody></tbody></table>
+        <p class="sim-confronto" hidden></p>
         <table class="sim-tabella"><thead><tr><th>Argomento</th><th>Corrette</th><th></th></tr></thead><tbody></tbody></table>
         <p><a class="bottone-secondario sim-nuova" href="">Nuova simulazione</a></p>
       </div>
@@ -227,10 +228,11 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     radice.querySelector<HTMLElement>('.sim-tempo')!.innerHTML = `<small>Tempo impiegato</small> <strong>${minuti} min</strong>`;
     if (scaduto) { const p = document.createElement('p'); p.className = 'sim-scaduto'; p.textContent = 'Tempo scaduto: la prova è stata consegnata.'; compito.prepend(p); }
     let esiti: { id: string; corretta: number; spiegazione: string }[] = [];
+    let confronto: { percentile?: number; confronto: number } | null = null;
     for (let tentativo = 0; tentativo < 3 && !esiti.length; tentativo++) {
       try {
-        const r = await fetch('/api/simulazione-quiz/correggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token }) });
-        if (r.ok) esiti = (await r.json()).esiti;
+        const r = await fetch('/api/simulazione-quiz/correggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token, risposte }) });
+        if (r.ok) { const d = await r.json(); esiti = d.esiti; confronto = d.confronto; }
       } catch { /* riprova */ }
     }
     if (!esiti.length) { radice.querySelector('.sim-nota')!.textContent = 'La correzione non è arrivata: controlla la connessione e ricarica la pagina.'; esitoEl.hidden = false; return; }
@@ -266,6 +268,12 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     const riga = (nome: string, k: number, p: number) => `<tr><td>${nome}</td><td>${k} × ${fattore(p)}</td><td>${segno(Math.round(k * p * 100) / 100) || '0'} punti</td></tr>`;
     radice.querySelector('.sim-conto tbody')!.innerHTML = riga('Risposte corrette', giuste, pesi.corretta) + riga('Risposte errate', errate, pesi.errata) + riga('Risposte non date', vuote, pesi.nondata)
       + `<tr class="sim-conto-totale"><td>Punteggio</td><td></td><td>${num(punti)} punti su ${num(massimo)}${soglia === null || Number.isNaN(soglia) ? '' : ` (minimo ${num(soglia)})`}</td></tr>`;
+    // Confronto con le simulazioni svolte da altri con le stesse materie (quota di risposte corrette).
+    if (confronto?.percentile !== undefined) {
+      const c = radice.querySelector<HTMLElement>('.sim-confronto')!;
+      c.innerHTML = `Hai dato più risposte corrette del <strong>${confronto.percentile}%</strong> di chi ha svolto una simulazione con ${piuMaterie ? 'le stesse materie' : 'la stessa materia'} (${confronto.confronto.toLocaleString('it-IT')} simulazioni).`;
+      c.hidden = false;
+    }
     radice.querySelector('.sim-tabella tbody')!.innerHTML = [...perArg.values()]
       .sort((x, y) => x.g / x.n - y.g / y.n)
       .map((v) => `<tr><td>${nomeArg(v.m, v.a)}${piuMaterie ? ` <small>${nomeMat(v.m)}</small>` : ''}</td><td>${v.g} su ${v.n}</td><td><a href="/${v.m}/${v.a}/domande">Esercitati</a></td></tr>`).join('');

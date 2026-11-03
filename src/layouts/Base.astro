@@ -162,6 +162,13 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
               <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+              {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
+              {!en && (
+                <div class="pl-sfide">
+                  <a href="/lega"><span class="pl-sf-medaglia" aria-hidden="true"></span><span class="pl-sf-lega">Lega della settimana</span></a>
+                  <a href="/duelli"><span class="pl-sf-icona" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="7" r="2.4"/><circle cx="14" cy="7" r="2.4"/><path d="M2 16c.5-2.4 2-3.7 4-3.7s3.5 1.3 4 3.7M10 16c.5-2.4 2-3.7 4-3.7s3.5 1.3 4 3.7"/></svg></span><span>Duelli</span></a>
+                </div>
+              )}
               <a class="pl-account" href={link(lingua, '/account')}>{en ? 'Open your account' : 'Apri il tuo account'}</a>
             </div>
           </>
@@ -231,6 +238,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </div>
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>
+  <div class="avviso-duello" role="status" aria-live="polite" hidden></div>
 
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
@@ -239,6 +247,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 
   <script>
     import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
+    import { medagliaLega } from '../scripts/medaglia-lega';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
     // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
     function adattaFormule() {
@@ -295,7 +304,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       if (st.frase) pl.querySelector('.pl-fascia span')!.textContent = st.frase;
       pl.querySelector('.pl-mancano')!.innerHTML = st.prossimo === null
         ? `${num(st.exp)} ${XP} · ${inglese ? 'maximum level' : 'livello massimo'}`
-        : `${num(st.exp)} ${XP} · ${inglese ? '' : 'mancano '}<strong>${num(st.mancano)} ${XP}</strong> ${inglese ? 'to level' : 'al livello'} ${st.livello + 1}`;
+        : `${num(st.exp)} ${XP} · ${inglese ? '' : 'mancano '}<strong>${num(st.mancano)}&nbsp;${XP}</strong> ${inglese ? 'to&nbsp;level' : 'al&nbsp;livello'}&nbsp;${st.livello + 1}`;
     }
     // Studio di oggi e della settimana: si chiede al server quando il pannello si apre.
     let percorsoChiesto = 0;
@@ -315,6 +324,12 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       const ultima = (d.sessioni || []).find((x: any) => x.materia && x.argomento);
       const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
       if (!cont.dataset.qui && dove) cont.href = (inglese ? '/en' : '') + dove;
+      // Lega della settimana: nome, posizione e numero di studenti del gruppo
+      const lg = d.lega, sf = pl.querySelector<HTMLElement>('.pl-sfide');
+      if (lg && sf) {
+        sf.querySelector('.pl-sf-lega')!.textContent = lg.posizione ? `Lega ${lg.nome} · ${lg.posizione}°` : `Lega ${lg.nome}`;
+        sf.querySelector('.pl-sf-medaglia')!.innerHTML = medagliaLega(lg.lega, lg.nome, 'mp');
+      }
     }
     if (bl?.dataset.stato) {
       try { const d = JSON.parse(bl.dataset.stato); mostraLivello({ livello: d.l, fascia: d.f, frase: d.r, exp: d.x, base: d.b, prossimo: d.p, mancano: d.m, perc: d.c }); } catch {}
@@ -346,6 +361,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     if (rad0.classList.contains('collegato') && rad0.dataset.studioMateria) {
       let ultimaAzione = Date.now();
       let ultimoMovimento = 0;
+      const visti = new Set<string>();
       const segna = () => { ultimaAzione = Date.now(); };
       ['scroll', 'pointerdown', 'keydown', 'touchstart', 'wheel', 'toggle'].forEach((t) => addEventListener(t, segna, { passive: true, capture: true }));
       addEventListener('pointermove', () => { const o = Date.now(); if (o - ultimoMovimento > 5000) { ultimoMovimento = o; segna(); } }, { passive: true });
@@ -358,6 +374,17 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         const d = r && r.ok ? await r.json().catch(() => null) : null;
         if (d?.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
         if (d?.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
+        // Invito a un duello ricevuto mentre si studia (worker/sfide.mjs): un avviso in basso con Accetta e Più tardi.
+        const inv = (d?.inviti || []).find((x: any) => !visti.has(x.codice));
+        const box = document.querySelector<HTMLElement>('.avviso-duello');
+        if (inv && box && !inglese) {
+          visti.add(inv.codice);
+          const esc = (x: string) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+          box.innerHTML = `<span><strong>${esc(inv.da)}</strong> ti sfida a un duello su ${esc(inv.argomento || inv.materia)}.</span>`
+            + `<a class="bottone-primario" href="/duelli?d=${inv.codice}&accetta=1">Accetta</a><button type="button" class="bottone-secondario">Più tardi</button>`;
+          box.querySelector('button')!.addEventListener('click', () => { box.hidden = true; });
+          box.hidden = false;
+        }
       }, 60000);
     }
 
