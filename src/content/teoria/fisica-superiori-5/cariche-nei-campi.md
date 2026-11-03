@@ -6,7 +6,7 @@ sommario: Come si muove una particella carica in un campo elettrico uniforme e i
 ## Moto in un campo elettrico uniforme
 
 :::richiamo{titolo="Campo elettrico tra due armature"}
-Tra due armature piane e parallele, alla distanza $d$ e con differenza di potenziale $\Delta V$, il campo elettrico è uniforme, perpendicolare alle armature, diretto dall'armatura positiva a quella negativa, di modulo $E = \dfrac{\Delta V}{d}$. Una carica $q$ nel campo subisce la forza $\vec{F} = q\,\vec{E}$, e quando passa da un'armatura all'altra il campo compie su di essa il lavoro $W = q\,\Delta V$. Il lavoro si indica con $W$, perché la lettera $L$ indica l'induttanza.
+Tra due armature piane e parallele, alla distanza $d$ e con differenza di potenziale $\Delta V$, il campo elettrico è uniforme, perpendicolare alle armature, diretto dall'armatura positiva a quella negativa, di modulo $E = \dfrac{\Delta V}{d}$. Una carica $q$ nel campo subisce la forza $\vec{F} = q\,\vec{E}$, e quando passa da un'armatura all'altra il campo compie su di essa il lavoro $W = q\,\Delta V$. Il lavoro si indica con $W$.
 :::
 
 :::richiamo{titolo="Teorema dell'energia cinetica"}
@@ -176,7 +176,7 @@ Il verso di rotazione si trova applicando la regola della mano destra in un punt
 - in un campo **entrante** ($\otimes$) una carica positiva gira in verso antiorario e una carica negativa in verso orario;
 - in un campo **uscente** ($\odot$) una carica positiva gira in verso orario e una carica negativa in verso antiorario.
 
-Nella figura del moto circolare la carica positiva, nel punto più basso, si muove verso sinistra. Con il pollice verso sinistra, lungo $\vec{v}$, e l'indice verso chi guarda, lungo $\vec{B}$, il medio punta verso l'alto, cioè verso il centro, quindi la carica percorre la circonferenza in verso orario. Un elettrone nella stessa posizione e con la stessa velocità subirebbe una forza verso il basso, e girerebbe in verso antiorario.
+Nella figura del moto circolare la carica positiva, nel punto più basso, si muove verso sinistra. Con il pollice lungo $\vec{v}$ e l'indice verso chi guarda, lungo $\vec{B}$, il medio punta verso il centro, quindi la carica gira in verso orario. Un elettrone nella stessa posizione e con la stessa velocità subirebbe una forza verso il basso, e girerebbe in verso antiorario.
 :::
 
 :::esempio{#raggio-ed-energia titolo="Raggio di una particella accelerata"}
@@ -237,7 +237,7 @@ Le particelle cariche che arrivano dal Sole, soprattutto elettroni e protoni, en
 $$
 r = \frac{m_e v}{e B} = \frac{9{,}11 \cdot 10^{-31} \cdot 1{,}87 \cdot 10^7}{1{,}60 \cdot 10^{-19} \cdot 5{,}0 \cdot 10^{-5}}\,\mathrm{m} \approx 2{,}1\,\mathrm{m} ,
 $$
-molto piccolo rispetto alle dimensioni della Terra, perciò l'elettrone segue da vicino la linea di campo. Una parte delle particelle resta intrappolata in due regioni a forma di ciambella attorno alla Terra, le **fasce di Van Allen**, dove le particelle si muovono a elica lungo le linee di campo e vengono rimandate indietro vicino ai poli, dove il campo è più intenso. Lungo le linee di campo che scendono verso le regioni polari altre particelle raggiungono l'alta atmosfera, urtano gli atomi di ossigeno e di azoto e li eccitano; gli atomi emettono luce, e si osservano le **aurore polari**.
+molto piccolo rispetto alle dimensioni della Terra, perciò l'elettrone segue da vicino la linea di campo. Una parte delle particelle resta intrappolata nelle **fasce di Van Allen**, due regioni a forma di ciambella attorno alla Terra, e vi si muove a elica avanti e indietro tra le zone vicine ai poli, dove il campo è più intenso. Lungo le linee di campo che scendono verso le regioni polari altre particelle raggiungono l'alta atmosfera, urtano gli atomi di ossigeno e di azoto e li eccitano; gli atomi emettono luce, e si osservano le **aurore polari**.
 :::
 
 ## Selettore di velocità
@@ -247,7 +247,7 @@ In una regione ci sono un campo elettrico uniforme $\vec{E}$ e un campo magnetic
 $$
 v = \frac{E}{B} .
 $$
-Le particelle più veloci sono deviate nel verso della forza magnetica, quelle più lente nel verso della forza elettrica. Una fenditura all'uscita lascia passare solo le particelle con velocità $\dfrac{E}{B}$, qualunque siano la loro massa e la loro carica. Con armature distanti $1{,}5\,\mathrm{cm}$ e $\Delta V = 300\,\mathrm{V}$ il campo elettrico è $E = \dfrac{300}{0{,}015}\,\mathrm{V/m} = 2{,}0 \cdot 10^4\,\mathrm{V/m}$; con $B = 0{,}050\,\mathrm{T}$ passano le particelle con
+Una fenditura all'uscita lascia passare solo le particelle con velocità $\dfrac{E}{B}$, qualunque siano la loro massa e la loro carica. Con armature distanti $1{,}5\,\mathrm{cm}$ e $\Delta V = 300\,\mathrm{V}$ il campo elettrico è $E = \dfrac{300}{0{,}015}\,\mathrm{V/m} = 2{,}0 \cdot 10^4\,\mathrm{V/m}$; con $B = 0{,}050\,\mathrm{T}$ passano le particelle con
 $$
 v = \frac{2{,}0 \cdot 10^4}{0{,}050}\,\mathrm{m/s} = 4{,}0 \cdot 10^5\,\mathrm{m/s} .
 $$
@@ -266,23 +266,23 @@ La carica $|q|$ si semplifica, e la massa non compare, perciò la condizione è 
 ::::
 
 :::osservazione{#selettore-segno-carica titolo="Il selettore e il segno della carica"}
-Nella figura del selettore, per un protone che si muove verso destra con il campo entrante, la regola della mano destra dà una forza di Lorentz verso l'alto; il campo elettrico è diretto verso il basso, dall'armatura positiva a quella negativa, e quindi la forza elettrica è verso il basso. Per un elettrone con la stessa velocità entrambe le forze cambiano verso, e restano opposte. Perciò anche l'elettrone attraversa il selettore in linea retta se $v = \dfrac{E}{B}$, e il selettore funziona quindi per cariche di entrambi i segni.
+Nella figura del selettore, per un protone che si muove verso destra con il campo entrante, la regola della mano destra dà una forza di Lorentz verso l'alto; il campo elettrico è diretto verso il basso, dall'armatura positiva a quella negativa, e quindi la forza elettrica è verso il basso. Per un elettrone con la stessa velocità entrambe le forze cambiano verso e restano opposte, perciò anche l'elettrone attraversa il selettore in linea retta se $v = \dfrac{E}{B}$.
 :::
 
-## Esperimento di Thomson e rapporto e/m
+## Esperimento di Thomson e rapporto tra carica e massa
 
 :::osservazione{#esperimento-thomson titolo="L'esperimento di Thomson"}
 Nel 1897 J. J. Thomson studiò i **raggi catodici**, i fasci che escono dal catodo di un tubo di vetro in cui è stato fatto il vuoto quando tra catodo e anodo c'è una differenza di potenziale elevata. Il fascio, accelerato dall'anodo, passava tra due armature e in una regione di campo magnetico perpendicolare al campo elettrico, e colpiva uno schermo fluorescente.
 
-Thomson misurò con questo apparato il rapporto tra la carica e la massa delle particelle del fascio. Trovò lo stesso valore con catodi di metalli diversi e con gas diversi nel tubo, e un valore circa mille volte maggiore del rapporto tra carica e massa dello ione idrogeno. Ne concluse che i raggi catodici sono formati da particelle con carica negativa, molto più leggere degli atomi e presenti in tutti gli atomi. Queste particelle sono gli **elettroni**.
+Thomson misurò con questo apparato il rapporto tra la carica e la massa delle particelle del fascio. Trovò lo stesso valore con catodi di metalli diversi e con gas diversi nel tubo, e un valore più di mille volte maggiore del rapporto tra carica e massa dello ione idrogeno. Ne concluse che i raggi catodici sono formati da particelle con carica negativa, molto più leggere degli atomi e presenti in tutti gli atomi. Queste particelle sono gli **elettroni**.
 :::
 
-::::teorema{#misura-e-su-m titolo="Misura del rapporto e/m dell'elettrone"}
+::::teorema{#misura-e-su-m titolo="Misura del rapporto tra carica e massa dell'elettrone"}
 Un fascio di elettroni attraversa una regione lunga $L$ con campi incrociati $\vec{E}$ e $\vec{B}$. Si regolano i campi in modo che il fascio non sia deviato; poi si spegne il campo magnetico e si misura lo spostamento $y$ del fascio all'uscita dalla regione. Allora
 $$
 \frac{e}{m_e} = \frac{2\, y\, E}{B^2 L^2} .
 $$
-Con il selettore si misura la velocità degli elettroni, poi con il solo campo elettrico si misura la deflessione. Con $E = 1{,}0 \cdot 10^4\,\mathrm{V/m}$, $B = 5{,}0 \cdot 10^{-4}\,\mathrm{T}$, $L = 5{,}0\,\mathrm{cm}$ e $y = 5{,}5\,\mathrm{mm}$ si ottiene
+Con $E = 1{,}0 \cdot 10^4\,\mathrm{V/m}$, $B = 5{,}0 \cdot 10^{-4}\,\mathrm{T}$, $L = 5{,}0\,\mathrm{cm}$ e $y = 5{,}5\,\mathrm{mm}$ si ottiene
 $$
 \frac{e}{m_e} = \frac{2 \cdot 5{,}5 \cdot 10^{-3} \cdot 1{,}0 \cdot 10^4}{(5{,}0 \cdot 10^{-4})^2 \cdot (0{,}050)^2}\,\mathrm{C/kg} \approx 1{,}76 \cdot 10^{11}\,\mathrm{C/kg} ,
 $$
@@ -303,7 +303,7 @@ Si moltiplicano entrambi i membri per $\dfrac{2E}{B^2 L^2}$ e si ottiene la form
 :::
 ::::
 
-:::esempio{#e-su-m-con-il-raggio titolo="Rapporto e/m dal raggio della traiettoria"}
+:::esempio{#e-su-m-con-il-raggio titolo="Rapporto tra carica e massa dal raggio della traiettoria"}
 Si può anche spegnere il campo elettrico e lasciare acceso il solo campo magnetico. Gli elettroni, con velocità $v = \dfrac{E}{B}$, percorrono allora una circonferenza di raggio $r = \dfrac{m_e v}{e B}$, e sostituendo la velocità si ha
 $$
 r = \frac{m_e E}{e B^2}
@@ -341,7 +341,7 @@ $$
 ::::
 
 :::definizione{#isotopi titolo="Isotopi"}
-Gli **isotopi** di un elemento sono atomi con lo stesso numero di protoni nel nucleo e un numero diverso di neutroni. Hanno le stesse proprietà chimiche, perché hanno lo stesso numero di elettroni, e masse diverse. Il numero di protoni e neutroni si chiama numero di massa $A$, e la massa di un atomo è circa $A$ volte l'**unità di massa atomica**, $1\,\mathrm{u} = 1{,}66 \cdot 10^{-27}\,\mathrm{kg}$. Per esempio il neon in natura contiene soprattutto gli isotopi neon-20 e neon-22, con masse di circa $20\,\mathrm{u}$ e $22\,\mathrm{u}$. Le reazioni chimiche non distinguono gli isotopi, mentre lo spettrometro di massa li separa, perché dipende solo dalla massa e dalla carica.
+Gli **isotopi** di un elemento sono atomi con lo stesso numero di protoni nel nucleo e un numero diverso di neutroni. Hanno le stesse proprietà chimiche, perché hanno lo stesso numero di elettroni, e masse diverse. Il numero di protoni e neutroni si chiama numero di massa $A$, e la massa di un atomo è circa $A$ volte l'**unità di massa atomica**, $1\,\mathrm{u} = 1{,}66 \cdot 10^{-27}\,\mathrm{kg}$. Per esempio il neon in natura contiene soprattutto gli isotopi neon-20 e neon-22, con masse di circa $20\,\mathrm{u}$ e $22\,\mathrm{u}$. Lo spettrometro di massa separa gli isotopi, perché il raggio della traiettoria dipende dalla massa.
 :::
 
 :::esempio{#separazione-isotopi titolo="Separazione degli isotopi del neon"}
@@ -349,11 +349,11 @@ Ioni $^{20}\mathrm{Ne}^+$ e $^{22}\mathrm{Ne}^+$, di carica $e$, sono accelerati
 $$
 r_{20} = \frac{1}{0{,}20}\sqrt{\frac{2 \cdot 3{,}32 \cdot 10^{-26} \cdot 1{,}0 \cdot 10^3}{1{,}60 \cdot 10^{-19}}}\,\mathrm{m} \approx 10{,}19\,\mathrm{cm} ,
 $$
-e allo stesso modo $r_{22} \approx 10{,}68\,\mathrm{cm}$. I punti di impatto distano $2\,(r_{22} - r_{20}) \approx 9{,}9\,\mathrm{mm}$, una distanza che sulla lastra si misura senza difficoltà. Il raggio è proporzionale a $\sqrt{m}$, perciò il rapporto dei raggi è $\sqrt{\dfrac{22}{20}} \approx 1{,}05$.
+e allo stesso modo $r_{22} \approx 10{,}68\,\mathrm{cm}$. I punti di impatto distano $2\,(r_{22} - r_{20}) \approx 9{,}9\,\mathrm{mm}$. Il raggio è proporzionale a $\sqrt{m}$, perciò il rapporto dei raggi è $\sqrt{\dfrac{22}{20}} \approx 1{,}05$.
 :::
 
 :::osservazione{#spettrometro-con-selettore titolo="Spettrometro con selettore di velocità"}
-In molti spettrometri gli ioni attraversano prima un selettore di velocità, e solo quelli con $v = \dfrac{E}{B}$ entrano nella regione con un secondo campo magnetico $B'$. Il raggio $r = \dfrac{m v}{|q|\,B'}$ è allora *direttamente* proporzionale alla massa. Con $v = 2{,}0 \cdot 10^5\,\mathrm{m/s}$ e $B' = 0{,}40\,\mathrm{T}$ gli ioni $^{16}\mathrm{O}^+$ e $^{18}\mathrm{O}^+$ descrivono semicirconferenze di raggi $8{,}30\,\mathrm{cm}$ e $9{,}34\,\mathrm{cm}$, e i punti di impatto distano $2{,}1\,\mathrm{cm}$.
+Se gli ioni attraversano prima un selettore di velocità, entrano tutti con $v = \dfrac{E}{B}$ nel secondo campo magnetico $B'$, e il raggio $r = \dfrac{m v}{|q|\,B'}$ è *direttamente* proporzionale alla massa. Con $v = 2{,}0 \cdot 10^5\,\mathrm{m/s}$ e $B' = 0{,}40\,\mathrm{T}$ gli ioni $^{16}\mathrm{O}^+$ e $^{18}\mathrm{O}^+$ hanno raggi di $8{,}30\,\mathrm{cm}$ e $9{,}34\,\mathrm{cm}$, e i punti di impatto distano $2{,}1\,\mathrm{cm}$.
 :::
 
 ## Ciclotrone
@@ -377,7 +377,7 @@ v_{\max} = \frac{|q|\,B R}{m} ,
 \qquad
 K_{\max} = \frac{q^2 B^2 R^2}{2m} ,
 $$
-che non dipendono dalla tensione $\Delta V$. Se a ogni attraversamento della fessura lo ione guadagna $|q|\,\Delta V$, in un giro guadagna $2\,|q|\,\Delta V$, e il numero di giri necessari per raggiungere $K_{\max}$ è $\dfrac{K_{\max}}{2\,|q|\,\Delta V}$. Per protoni con $B = 1{,}0\,\mathrm{T}$ e $R = 0{,}30\,\mathrm{m}$ si ottiene
+che non dipendono dalla tensione $\Delta V$. In un giro lo ione guadagna $2\,|q|\,\Delta V$, quindi il numero di giri necessari per raggiungere $K_{\max}$ è $\dfrac{K_{\max}}{2\,|q|\,\Delta V}$. Per protoni con $B = 1{,}0\,\mathrm{T}$ e $R = 0{,}30\,\mathrm{m}$ si ottiene
 $$
 v_{\max} = \frac{1{,}60 \cdot 10^{-19} \cdot 1{,}0 \cdot 0{,}30}{1{,}67 \cdot 10^{-27}}\,\mathrm{m/s} \approx 2{,}9 \cdot 10^7\,\mathrm{m/s} ,
 \qquad
@@ -395,7 +395,7 @@ In un giro lo ione attraversa la fessura due volte, e per la particella accelera
 ::::
 
 :::osservazione{#limite-ciclotrone titolo="Limite relativistico del ciclotrone"}
-Nell'esempio la velocità finale del protone è circa $0{,}096\,c$, quindi la meccanica classica è adeguata. A energie maggiori la velocità non è più piccola rispetto a $c$, il periodo del moto aumenta con l'energia secondo le leggi della relatività, e lo ione non arriva più alla fessura in fase con la tensione. Per questo un ciclotrone accelera i protoni fino a qualche decina di megaelettronvolt; energie maggiori si ottengono variando la frequenza o il campo durante l'accelerazione. I ciclotroni si usano negli ospedali per produrre isotopi radioattivi e per la terapia dei tumori con fasci di protoni.
+Nell'esempio il protone esce con $v \approx 0{,}096\,c$, quindi la meccanica classica si applica. A energie maggiori il periodo del moto aumenta con l'energia, come prevede la relatività, e lo ione arriva alla fessura fuori fase con la tensione. Per questo un ciclotrone porta i protoni al massimo a qualche decina di megaelettronvolt. I ciclotroni si usano negli ospedali per produrre isotopi radioattivi e per la terapia dei tumori con fasci di protoni.
 :::
 
 ## Effetto Hall
