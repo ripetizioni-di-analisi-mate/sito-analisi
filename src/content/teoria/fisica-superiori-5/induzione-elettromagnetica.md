@@ -72,7 +72,7 @@ Nella formula $\Phi_B = N B S \cos\theta$ compaiono tre grandezze che possono ca
 - Varia l'area $S$ del circuito: un lato del circuito si sposta, come la sbarretta che scorre su due binari.
 - Varia l'angolo $\theta$: la spira ruota nel campo, come nell'alternatore studiato nell'argomento sulla corrente alternata.
 
-Tutte le esperienze di Faraday rientrano in uno di questi casi. La legge che segue le descrive con un'unica formula.
+Tutte le esperienze di Faraday rientrano in uno di questi casi, e la legge di Faraday-Neumann li descrive con un'unica formula.
 :::
 
 ## Legge di Faraday-Neumann
@@ -164,11 +164,10 @@ La relazione segue dalla prima legge di Ohm e dalla legge di Faraday-Neumann-Len
 :::
 
 ::::teorema{#carica-indotta titolo="Carica che attraversa il circuito"}
-Sia $R$ la resistenza complessiva di un circuito, e sia $\Delta\Phi_B$ la variazione del suo flusso concatenato in un certo intervallo di tempo. Allora la carica che attraversa una sezione del circuito in quell'intervallo ha modulo
+Sia $R$ la resistenza complessiva di un circuito, e sia $\Delta\Phi_B$ la variazione del suo flusso concatenato in un intervallo di tempo in cui il flusso varia sempre nello stesso senso, cioè solo crescendo o solo diminuendo. Allora la carica che attraversa una sezione del circuito in quell'intervallo ha modulo
 $$
-q = \frac{|\Delta\Phi_B|}{R} ,
+q = \frac{|\Delta\Phi_B|}{R} .
 $$
-se il flusso varia sempre nello stesso senso, cioè solo crescendo o solo diminuendo.
 
 La carica dipende soltanto dalla variazione del flusso e non dal tempo impiegato. Una variazione lenta produce una corrente debole per un tempo lungo, una variazione rapida una corrente intensa per un tempo breve, e il prodotto è lo stesso. Per esempio, una spira circolare di raggio $4{,}0\,\mathrm{cm}$ e resistenza $0{,}050\,\mathrm{\Omega}$ è perpendicolare a un campo di $0{,}30\,\mathrm{T}$ e viene estratta dal campo. Il flusso passa da $0{,}30 \cdot \pi \cdot 0{,}040^2\,\mathrm{Wb} \approx 1{,}51 \cdot 10^{-3}\,\mathrm{Wb}$ a zero, quindi
 $$
@@ -237,7 +236,7 @@ e la potenza della forza esterna che mantiene costante la velocità è uguale al
 $$
 P_{\text{mecc}} = F v = R I^2 = P_{\text{diss}} .
 $$
-Il bilancio dice che il lavoro di chi trascina la sbarretta si trasforma tutto in energia elettrica, e poi in calore nel resistore per effetto Joule. Con i dati dell'esempio della f.e.m. cinetica, $B = 0{,}60\,\mathrm{T}$, $\ell = 0{,}25\,\mathrm{m}$, $v = 4{,}0\,\mathrm{m/s}$ e $R = 1{,}5\,\mathrm{\Omega}$, la corrente è $I = 0{,}40\,\mathrm{A}$ e
+Il lavoro di chi trascina la sbarretta si trasforma tutto in energia elettrica, e poi in calore nel resistore per effetto Joule. Con i dati dell'esempio della f.e.m. cinetica, $B = 0{,}60\,\mathrm{T}$, $\ell = 0{,}25\,\mathrm{m}$, $v = 4{,}0\,\mathrm{m/s}$ e $R = 1{,}5\,\mathrm{\Omega}$, la corrente è $I = 0{,}40\,\mathrm{A}$ e
 $$
 F = I \ell B = 0{,}40 \cdot 0{,}25 \cdot 0{,}60\,\mathrm{N} = 0{,}060\,\mathrm{N} ,
 \qquad
@@ -298,7 +297,7 @@ quindi la corrente è circa $5{,}7\,\mathrm{A}$ e la potenza dissipata è circa 
 :::osservazione{#applicazioni-foucault titolo="Freni magnetici e piani a induzione"}
 Le correnti di Foucault hanno due effetti, la forza frenante e il calore, e ciascuno ha un'applicazione.
 
-- Nei **freni magnetici** di treni, camion e attrazioni dei luna park, un disco o una lamina di metallo collegata alle ruote passa tra i poli di un elettromagnete. Le correnti di Foucault nel metallo, per la legge di Lenz, producono una forza che si oppone al moto. La forza è proporzionale alla velocità, quindi il freno è efficace alle alte velocità e non consuma pastiglie.
+- Nei **freni magnetici** di treni, camion e attrazioni dei luna park, un disco o una lamina di metallo collegata alle ruote passa tra i poli di un elettromagnete. Le correnti di Foucault nel metallo, per la legge di Lenz, producono una forza che si oppone al moto. La forza è proporzionale alla velocità, quindi il freno è efficace alle alte velocità. Il metallo non tocca l'elettromagnete, perciò il freno non consuma pastiglie.
 - Nei **piani a induzione** una bobina sotto la piastra è percorsa da una corrente alternata e produce un campo magnetico che varia molte migliaia di volte al secondo. Il campo attraversa il fondo metallico della pentola, dove le correnti di Foucault dissipano energia per effetto Joule. Si scalda quindi la pentola, mentre la piastra resta quasi fredda.
 
 Negli apparecchi in cui le correnti di Foucault sono uno spreco di energia, come i nuclei dei trasformatori, il ferro si divide in lamierini sottili isolati tra loro, così i percorsi chiusi sono piccoli e le correnti deboli.
@@ -336,5 +335,5 @@ Il campo elettrico indotto *non* è conservativo, a differenza del campo elettro
 $$
 \Gamma(\vec{E}) = \pi \cdot 0{,}050^2 \cdot 0{,}20\,\mathrm{V} \approx 1{,}6 \cdot 10^{-3}\,\mathrm{V} .
 $$
-Un elettrone che compie un giro completo riceve quindi il lavoro $e\,\Gamma(\vec{E}) \approx 2{,}5 \cdot 10^{-22}\,\mathrm{J}$, e a ogni giro ne riceve altrettanto, anche se torna nello stesso punto. Per questo campo il potenziale elettrico non si può definire. Il campo elettrico indotto è una delle basi delle equazioni di Maxwell, per le quali si rimanda all'argomento sulle equazioni di Maxwell e le onde elettromagnetiche.
+Un elettrone che compie un giro completo riceve quindi il lavoro $e\,\Gamma(\vec{E}) \approx 2{,}5 \cdot 10^{-22}\,\mathrm{J}$, e a ogni giro ne riceve altrettanto, anche se torna nello stesso punto. Per questo campo il potenziale elettrico non si può definire. Il campo elettrico indotto compare nelle equazioni di Maxwell, per le quali si rimanda all'argomento sulle equazioni di Maxwell e le onde elettromagnetiche.
 :::
