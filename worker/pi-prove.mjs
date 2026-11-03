@@ -33,18 +33,20 @@ export async function eseguiBanco(env, aDO, aPagamento, prezzi, giorno = oggi(),
       parte: c.parte || null, lingua: c.lingua || 'it',
     };
     const inizio = Date.now();
-    let risposta = '', modello = '', stato = 0;
+    let risposta = '', modello = '', stato = 0, tin = 0;
     try {
       const r = await rispondiAssistente(new Request('https://banco/api/assistente', { method: 'POST', body: JSON.stringify(corpo) }), envGiro, null, finto, aPagamento, prezzi);
       stato = r.status;
       modello = r.headers.get('x-modello') || '';
+      // Token stimati delle istruzioni e della domanda: servono a misurare il consumo della quota gratuita.
+      tin = Number(r.headers.get('x-token-entrata')) || 0;
       const testo = await r.text();
       if ((r.headers.get('content-type') || '').includes('json')) {
         const j = JSON.parse(testo);
         risposta = j.risposta || `ERRORE: ${j.errore || testo}`;
       } else risposta = testo;
     } catch (e) { risposta = `ERRORE: ${String(e?.message || e).slice(0, 300)}`; }
-    const riga = { id: c.id + suffisso, area: c.area, domanda: c.domanda, risposta: risposta.slice(0, 8000), modello, ms: Date.now() - inizio, stato };
+    const riga = { id: c.id + suffisso, area: c.area, domanda: c.domanda, risposta: risposta.slice(0, 8000), modello, ms: Date.now() - inizio, stato, tin };
     righe.push(riga);
     // Si salva caso per caso: se il cron viene interrotto, le risposte già ottenute restano.
     await aDO(env, '/pi-prove-salva', { giorno, righe: [riga] }).catch(() => {});
@@ -88,7 +90,7 @@ export async function paginaProve(url, env, aDO) {
   } else {
     corpo = `<h1>Banco di prova di Pi · ${esc(d.giorno || 'nessuna prova ancora')}</h1>
 <p>Giorni con prove: ${esc((d.giorni || []).join(', '))}</p>
-<h2>Prove</h2><pre>${(d.prove || []).map((r) => `${r.id} | ${r.area} | stato ${r.stato} | ${r.modello || '-'} | ${r.ms} ms | ${r.risposta.length} caratteri | /pi/prove/${r.id}?giorno=${d.giorno}`).join('\n') || 'nessuna'}</pre>
+<h2>Prove</h2><pre>${(d.prove || []).map((r) => `${r.id} | ${r.area} | stato ${r.stato} | ${r.modello || '-'} | ${r.ms} ms | ${r.risposta.length} caratteri | ${r.tin ? `${r.tin} token in entrata` : 'token -'} | /pi/prove/${r.id}?giorno=${d.giorno}`).join('\n') || 'nessuna'}</pre>
 ${url.searchParams.has('completo') ? risposteComplete(d.prove) : ''}
 <h2>Eventi degli ultimi 14 giorni (numeri anonimi)</h2><pre>${(d.eventi || []).map((e) => `${e.giorno} | ${e.evento} | ${e.n}`).join('\n') || 'nessuno'}</pre>
 <h2>Uso giornaliero</h2><pre>${(d.uso || []).map((u) => `${u.giorno} | messaggi ${u.messaggi} | persone ${u.persone} | token entrata ${u.tin} | token uscita ${u.tout}`).join('\n') || 'nessuno'}</pre>`;

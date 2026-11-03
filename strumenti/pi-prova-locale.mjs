@@ -15,7 +15,7 @@ const db = {};
 const aDO = async (_e, p, d) => { if (p === '/pi-prove-salva') db.s = d; if (p === '/pi-prove-leggi') return { giorno: db.s.giorno, giorni: [db.s.giorno], prove: db.s.righe, eventi: [], uso: [] }; return { ok: true, n: 0 }; };
 console.log('Casi del giorno:', casiDelGiorno(giorno).map((c) => c.id).join(', '));
 const r = await eseguiBanco(env, aDO, ['analisi-1'], { 'analisi-1': 49 }, giorno);
-for (const x of r) console.log(`${x.id} | stato ${x.stato} | ${x.modello} | ${JSON.stringify(x.risposta.slice(0, 80))}`);
+for (const x of r) console.log(`${x.id} | stato ${x.stato} | ${x.modello} | ${x.tin} token in entrata | ${JSON.stringify(x.risposta.slice(0, 80))}`);
 console.log(`Lunghezza delle istruzioni di sistema: min ${Math.min(...sistemi.map((s) => s.length))}, max ${Math.max(...sistemi.map((s) => s.length))} caratteri (circa /4 token).`);
 const pag = await paginaProve(new URL('https://x/pi/prove'), env, aDO);
 console.log((await pag.text()).includes('Banco di prova') ? 'Pagina /pi/prove: ok' : 'Pagina /pi/prove: ERRORE');

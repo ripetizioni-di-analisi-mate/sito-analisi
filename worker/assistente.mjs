@@ -78,7 +78,8 @@ function testoRisposta(r) {
 }
 
 // Le informazioni complete sul sito si mandano solo quando servono: così le domande di studio costano meno token.
-const DOMANDA_SUL_SITO = /video|lezion|drive|prezz|cost|acquist|compr|pag[ao]|paddle|account|accesso|accedere|registr|materi|sblocc|rimbors|lezion|euro|€|dispositiv|whatsapp|contatt|sito|abbonament|gratis|gratuit|anteprima|price|buy|pay|refund|subject|login|free/i;
+// Parole intere o inizi di parola: «costante», «compreso», «materiale», «contatto», «log in base 2», «free fall» non contano come domande sul sito.
+const DOMANDA_SUL_SITO = /\bvideo|\blezion|\bdrive\b|\bprezz|\bcost(a|ano|ava|erà)(?![a-z])|\bacquist|\bcompr(a|o|i|are|ato|ata|ati|ando|erò|ano)(?![a-z])|\bpag(a|o|are|ato|ata|ati|amento|amenti|ano|hi)\b|paddle|stripe|\baccount|\baccesso\b|\bacced|\bregistr|\bmateri[ae]\b|sblocc|rimbors|\beuro\b|€|\bdispositiv|whatsapp|\bcontatt(are|arti|arlo|arla|i)\b|\bsito\b|abbonament|\bgratis|\bgratuit|anteprima|\bpassword|\bformulari?\b|\biscri|\bprenot|\bcorsi\b|\bcorso di (gruppo|laurea)|\bprice|\bdoes .*\bcost\b|\bbuy|\bpay|\brefund|\bsubjects?\b|\blogin\b|\blog in (to|with)\b|\bfree\b(?! (fall|of|body|end|space|electrons?|charges?|variables?|parameters?))/i;
 
 // Informazioni sul sito per le domande su materie, prezzi, pagamenti e accesso (costruite dai dati del sito).
 function infoSito(aPagamento, prezzi, env = {}) {
@@ -210,14 +211,14 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
       if (r instanceof ReadableStream) {
         // Si aspetta il primo pezzo di testo visibile: se lo streaming finisce vuoto si passa al modello successivo.
         const risp = await conPrimoPezzo(flussoAI(r, rimasti, conta, modello, () => evento('risposta-vuota'), () => evento(`ragionamento-nascosto:${corto(modello)}`)));
-        if (risp) { await segna(); return risp; }
+        if (risp) { await segna(); risp.headers.set('x-token-entrata', String(tin)); return risp; }
         continue;
       }
       // Alcuni modelli ignorano lo streaming e rispondono tutto insieme.
       const t = pulisci(testoRisposta(r));
       if (t) {
         await segna(); await conta(Math.round(t.length / 4));
-        const risp = json({ risposta: t, rimasti }); risp.headers.set('x-modello', modello); return risp;
+        const risp = json({ risposta: t, rimasti }); risp.headers.set('x-modello', modello); risp.headers.set('x-token-entrata', String(tin)); return risp;
       }
     } catch (e) { ultimoErrore = e; console.log('Pi', modello, String(e?.message || e).slice(0, 200)); }
   }

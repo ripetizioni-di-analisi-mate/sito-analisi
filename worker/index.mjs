@@ -137,6 +137,7 @@ export class Archivio {
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE pi_prove ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     // promemoria per tornare a studiare (worker/promemoria.mjs): ultima attività, consenso, lingua, registro degli invii
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN attivo INTEGER'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN promemoria INTEGER DEFAULT 1'); } catch { /* già presente */ }
@@ -369,8 +370,8 @@ export class Archivio {
         return Response.json({ ok: true });
       case '/pi-prove-salva':
         for (const r of c.righe || []) {
-          this.sql.exec('INSERT OR REPLACE INTO pi_prove (giorno, id, area, domanda, risposta, modello, ms, stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            c.giorno, r.id, r.area, r.domanda, r.risposta, r.modello, r.ms, r.stato);
+          this.sql.exec('INSERT OR REPLACE INTO pi_prove (giorno, id, area, domanda, risposta, modello, ms, stato, tin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            c.giorno, r.id, r.area, r.domanda, r.risposta, r.modello, r.ms, r.stato, Number(r.tin) || 0);
         }
         this.sql.exec("DELETE FROM pi_prove WHERE giorno < date('now', '-60 days')");
         return Response.json({ ok: true });
@@ -379,7 +380,7 @@ export class Archivio {
         const g = c.giorno || giorni[0] || null;
         return Response.json({
           giorno: g, giorni,
-          prove: g ? this.righe('SELECT id, area, domanda, risposta, modello, ms, stato FROM pi_prove WHERE giorno = ? ORDER BY id', g) : [],
+          prove: g ? this.righe('SELECT id, area, domanda, risposta, modello, ms, stato, tin FROM pi_prove WHERE giorno = ? ORDER BY id', g) : [],
           eventi: this.righe("SELECT giorno, evento, n FROM pi_eventi WHERE giorno >= date('now', '-14 days') ORDER BY giorno DESC, evento"),
           uso: this.righe(`SELECT giorno, SUM(n) AS messaggi, COUNT(*) AS persone, SUM(COALESCE(tin, 0)) AS tin, SUM(COALESCE(tout, 0)) AS tout
                            FROM assistente WHERE giorno >= date('now', '-14 days') GROUP BY giorno ORDER BY giorno DESC`),
