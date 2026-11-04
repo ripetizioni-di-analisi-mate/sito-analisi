@@ -3,9 +3,9 @@
 //     immagini dal browser) vanno al modello che legge le immagini, che ne trascrive gli esercizi in testo.
 //  2. /api/compatibilita/confronta: il testo dell'esame va al modello di testo insieme al catalogo della materia
 //     (argomenti, schede svolte, voci della teoria, file /dati-compatibilita/<materia>.json generato alla build);
-//     il modello divide l'esame in richieste e le abbina al catalogo; qui si controllano i codici e si calcolano
-//     le percentuali: compatibilità (quanto dell'esame trova riscontro nel materiale) e, con l'account,
-//     successo (quota di domande a tempo indovinate negli argomenti dell'esame).
+//     il modello divide l'esame in richieste e le abbina al catalogo, una riga per richiesta; le righe arrivano al
+//     browser in streaming, appena scritte; alla fine si calcolano le percentuali: compatibilità (quanto dell'esame
+//     trova riscontro nel materiale) e, con l'account, successo (quota di domande a tempo indovinate negli argomenti).
 //  3. Ogni confronto riuscito si salva in forma anonima (solo materia, università facoltativa, esito e sintesi
 //     delle richieste, senza dati della persona): Carmine lo vede in /admin/esami con le richieste non coperte.
 // Vale solo per gli esami universitari (src/data/compatibilita.ts).
@@ -126,8 +126,16 @@ async function catalogo(env, materia) {
   return cacheCataloghi[materia];
 }
 
+// Il testo chiede di scrivere definizioni, enunciati o dimostrazioni? Solo allora le voci della teoria vanno al modello:
+// sono circa due terzi del catalogo, e senza di esse il confronto di un compito di soli esercizi è molto più rapido.
+const CHIEDE_TEORIA = /\b(enunci\w*|dimostr\w*|defini(sci|sca|re|zione|zioni)|teorem\w*|lemma|corollari\w*|propriet[àa] (della|del|dei|delle)|criteri\w* di)\b/i;
+
 // Catalogo in forma compatta per il modello, con codici brevi (A = argomento, S = scheda svolta, T = voce di teoria).
-function codifica(cat) {
+// I codici sono gli stessi con e senza teoria, perché il contatore delle voci T avanza comunque.
+const cacheCodifiche = {};
+function codifica(cat, conTeoria) {
+  const chiave = `${cat.materia}|${conTeoria ? 1 : 0}`;
+  if (cacheCodifiche[chiave]) return cacheCodifiche[chiave];
   const codici = { A: {}, S: {}, T: {} };
   let s = 0, t = 0;
   const righe = [];
@@ -138,15 +146,15 @@ function codifica(cat) {
     for (const sc of a.schede) {
       const cs = `S${++s}`;
       codici.S[cs] = { argomento: a.slug, ...sc };
-      righe.push(`  ${cs} scheda svolta: ${sc.titolo}${sc.parole.length ? ` (${sc.parole.join(', ')})` : ''}`);
+      righe.push(`${cs} ${sc.titolo}${sc.parole.length ? ` (${sc.parole.join(', ')})` : ''}`);
     }
     for (const v of a.teoria) {
       const ct = `T${++t}`;
       codici.T[ct] = { argomento: a.slug, ...v };
-      righe.push(`  ${ct} ${v.tipo}: ${v.titolo}`);
+      if (conTeoria) righe.push(`${ct} ${v.titolo}`);
     }
   });
-  return { testo: righe.join('\n'), codici };
+  return (cacheCodifiche[chiave] = { testo: righe.join('\n'), codici });
 }
 
 // ---------- modelli ----------
@@ -164,14 +172,26 @@ function testoDi(r) {
 }
 const senzaRagionamento = (t) => String(t || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
 
-async function prova(env, modello, input) {
+// Memoria dell'istanza del Worker, per non ripetere a ogni richiesta i tentativi che falliscono:
+//  - modelli che hanno dato errore da poco (si provano per ultimi per 5 minuti);
+//  - modelli che rifiutano il parametro che spegne il ragionamento;
+//  - formato dell'immagine accettato da ciascun modello che legge le foto.
+const guasti = {};
+const senzaOpzioni = new Set();
+const formatoFoto = {};
+const PAUSA_GUASTO = 5 * 60 * 1000;
+const inOrdine = (modelli) => [...modelli].sort((a, b) => (Date.now() - (guasti[a] || 0) < PAUSA_GUASTO) - (Date.now() - (guasti[b] || 0) < PAUSA_GUASTO));
+
+async function esegui(env, modello, input) {
   const base = { ...input, temperature: 0.1 };
-  const conOpzioni = /gemma/.test(modello) ? { ...base, chat_template_kwargs: { enable_thinking: false } } : base;
-  const r = await env.AI.run(modello, conOpzioni).catch((e) => {
-    if (conOpzioni === base) throw e;
-    return env.AI.run(modello, base);
-  });
-  return senzaRagionamento(testoDi(r));
+  if (!/gemma/.test(modello) || senzaOpzioni.has(modello)) return env.AI.run(modello, base);
+  try {
+    return await env.AI.run(modello, { ...base, chat_template_kwargs: { enable_thinking: false } });
+  } catch (e) {
+    const r = await env.AI.run(modello, base);
+    senzaOpzioni.add(modello); // il parametro era il problema: le prossime volte non si manda
+    return r;
+  }
 }
 
 const ISTRUZIONI_LETTURA = (titolo) => `Questa immagine è una pagina di un compito d'esame universitario di ${titolo}.
@@ -183,60 +203,70 @@ Rispondi soltanto con la trascrizione, senza commenti.`;
 
 async function leggiPagina(env, titolo, immagine) {
   const testo = ISTRUZIONI_LETTURA(titolo);
+  const formati = [
+    { messages: [{ role: 'user', content: [{ type: 'text', text: testo }, { type: 'image_url', image_url: { url: immagine } }] }], max_tokens: 1800 },
+    { messages: [{ role: 'user', content: testo }], image: immagine, max_tokens: 1800 },
+  ];
   let ultimo = null;
-  for (const m of MODELLI_FOTO) {
-    for (const input of [
-      { messages: [{ role: 'user', content: [{ type: 'text', text: testo }, { type: 'image_url', image_url: { url: immagine } }] }], max_tokens: 1800 },
-      { messages: [{ role: 'user', content: testo }], image: immagine, max_tokens: 1800 },
-    ]) {
+  for (const m of inOrdine(MODELLI_FOTO)) {
+    // Prima il formato che questo modello ha già accettato.
+    const ordine = formatoFoto[m] === 1 ? [1, 0] : [0, 1];
+    for (const k of ordine) {
       try {
-        const t = await prova(env, m, input);
-        if (t) return t;
+        const t = senzaRagionamento(testoDi(await esegui(env, m, formati[k])));
+        if (t) { formatoFoto[m] = k; delete guasti[m]; return t; }
       } catch (e) { ultimo = e; console.log('compatibilita lettura', m, String(e?.message || e).slice(0, 200)); }
     }
+    guasti[m] = Date.now();
   }
   throw ultimo || new Error('nessuna trascrizione');
 }
 
-const ISTRUZIONI_CONFRONTO = (titolo) => `Sei un docente universitario di ${titolo}. Ricevi il testo di un esame e il catalogo del materiale di un sito di teoria ed esercizi svolti.
-Dividi l'esame in richieste e abbina ogni richiesta al catalogo.
+// Il modello risponde con una riga per richiesta e sette campi separati da «|», invece che con un oggetto JSON:
+// scrive circa un terzo dei token (la parte più lenta del confronto) e le righe si possono mostrare man mano che arrivano.
+// Il livello non lo scrive il modello: si ricava dal codice (S o T = stesso procedimento, solo A = argomento).
+const ISTRUZIONI_CONFRONTO = (titolo, catalogoTesto, conTeoria) => `Sei un docente universitario di ${titolo}. L'utente ti manda il testo di un esame. Dividi l'esame in richieste e abbina ogni richiesta al catalogo del materiale di un sito di teoria ed esercizi svolti.
+
+Catalogo (A = argomento, S = esercizio svolto, con le parole chiave tra parentesi${conTeoria ? ', T = definizione o teorema della teoria' : ''})
+${catalogoTesto}
 
 Regole
 - Una richiesta è un singolo compito da svolgere. Se un esercizio ha più punti (a, b, c…), ogni punto è una richiesta separata con lo stesso numero di esercizio.
-- tipo: "esercizio" per calcoli e problemi; "teoria" per definizioni, enunciati e dimostrazioni da scrivere.
-- Esercizio: se una scheda svolta del catalogo insegna lo stesso procedimento che serve per risolverlo, scheda = il suo codice S e livello = "stesso". Se nessuna scheda ha lo stesso procedimento ma l'argomento è nel catalogo, scheda = null e livello = "argomento". Se l'argomento non è nel catalogo, livello = "nessuno".
-- Teoria: se la definizione o il teorema richiesto è una voce del catalogo, teoria = il suo codice T e livello = "stesso". Se la voce manca ma l'argomento c'è, livello = "argomento". Altrimenti livello = "nessuno".
-- argomento = il codice A dell'argomento della richiesta; null se livello = "nessuno".
-- Valuta con rigore: "stesso" solo quando la scheda o la voce serve davvero a quella richiesta, non per una somiglianza di parole.
-- punti = punteggio dell'esercizio, se il testo lo indica; altrimenti null.
-- testo = la richiesta riscritta in breve (al massimo 25 parole), con le formule in LaTeX tra $…$.
-- universitario = false se il testo è un test a risposta multipla di un concorso, una verifica di scuola superiore, oppure non contiene esercizi di matematica o di fisica; altrimenti true.
+- Scrivi una riga per richiesta, nell'ordine dell'esame, con 7 campi separati da |:
+numero dell'esercizio | lettera del punto, oppure - | E per calcoli e problemi, T per definizioni, enunciati e dimostrazioni da scrivere | codice A dell'argomento, oppure - | codice | punteggio dell'esercizio, oppure - | richiesta in breve
+- codice: per una richiesta E, il codice S dell'esercizio svolto che insegna lo stesso procedimento che serve per risolverla${conTeoria ? '; per una richiesta T, il codice T della definizione o del teorema richiesto' : ''}; - se nel catalogo non c'è.
+- Valuta con rigore: un codice ${conTeoria ? 'S o T' : 'S'} solo quando serve davvero a quella richiesta, non per una somiglianza di parole. Se l'argomento non è nel catalogo, argomento e codice sono -.
+- Punteggio: quello indicato nel testo per l'esercizio; - se il testo non lo indica.
+- Richiesta in breve: al massimo 15 parole, con le formule in LaTeX tra $…$.
+- Se il testo è un test a risposta multipla di un concorso, una verifica di scuola superiore, oppure non contiene esercizi di matematica o di fisica, scrivi soltanto NON_UNIVERSITARIO.
+- Scrivi soltanto le righe, senza intestazione e senza commenti.
 
-Rispondi soltanto con un oggetto JSON di questa forma, senza altro testo:
-{"universitario": true, "richieste": [{"esercizio": "1", "parte": "a", "testo": "…", "tipo": "esercizio", "argomento": "A3", "scheda": "S12", "teoria": null, "livello": "stesso", "punti": 8}]}`;
+Esempio di risposta
+1|a|E|A3|S12|8|Calcolare $\\lim_{x \\to 0} \\frac{\\sin x - x}{x^3}$
+1|b|E|A3|-|8|Studiare la derivabilità di $f$ in $x = 0$
+2|-|${conTeoria ? 'T|A5|T14' : 'E|A5|S30'}|6|${conTeoria ? 'Enunciare e dimostrare il teorema di Rolle' : 'Calcolare $\\int_0^1 x e^x \\, dx$'}`;
 
-const SCHEMA = {
-  type: 'object',
-  properties: {
-    universitario: { type: 'boolean' },
-    richieste: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          esercizio: { type: 'string' }, parte: { type: ['string', 'null'] }, testo: { type: 'string' },
-          tipo: { type: 'string', enum: ['esercizio', 'teoria'] }, argomento: { type: ['string', 'null'] },
-          scheda: { type: ['string', 'null'] }, teoria: { type: ['string', 'null'] },
-          livello: { type: 'string', enum: ['stesso', 'argomento', 'nessuno'] }, punti: { type: ['number', 'null'] },
-        },
-        required: ['esercizio', 'testo', 'tipo', 'livello'],
-      },
-    },
-  },
-  required: ['universitario', 'richieste'],
-};
+// Una riga della risposta del modello → richiesta grezza (stessa forma che legge valutaRichieste); null se la riga non è una richiesta.
+export function leggiRiga(riga) {
+  const s = String(riga || '').replace(/^[\s*>`•]+/, '').trim();
+  const campi = s.split('|');
+  if (campi.length < 7) return null;
+  const [es, parte, tipo, arg, cod, punti] = campi.slice(0, 6).map((x) => x.trim().replace(/^[*_`]+|[*_`]+$/g, ''));
+  const testo = campi.slice(6).join('|').trim();
+  const esercizio = es.replace(/^(es(ercizio)?\.?\s*)/i, '').replace(/[).:]+$/, '');
+  if (!testo || !/^(\d[\w.]*|[IVX]+|[A-Z]\d*)$/i.test(esercizio) || /^esercizio$/i.test(es)) return null;
+  const teoria = /^t/i.test(tipo);
+  const codice = /^[ST]\d+$/i.test(cod) ? cod.toUpperCase() : null;
+  const argomento = /^A\d+$/i.test(arg) ? arg.toUpperCase() : null;
+  const p = Number(String(punti).replace(',', '.').replace(/\s*(punti|pt\.?|p\.?)$/i, ''));
+  return {
+    esercizio, parte: parte && parte !== '-' ? parte.replace(/[).]+$/, '') : null, testo, tipo: teoria ? 'teoria' : 'esercizio',
+    argomento, scheda: codice?.startsWith('S') ? codice : null, teoria: codice?.startsWith('T') ? codice : null,
+    livello: codice ? 'stesso' : argomento ? 'argomento' : 'nessuno', punti: Number.isFinite(p) && p > 0 ? p : null,
+  };
+}
 
-// Primo oggetto JSON contenuto nel testo del modello (anche dentro ```json … ```).
+// Primo oggetto JSON contenuto nel testo del modello (anche dentro ```json … ```): riserva, se un modello risponde in JSON.
 export function estraiJson(t) {
   const s = String(t || '');
   const i = s.indexOf('{'), j = s.lastIndexOf('}');
@@ -244,52 +274,115 @@ export function estraiJson(t) {
   try { return JSON.parse(s.slice(i, j + 1)); } catch { return null; }
 }
 
-async function abbina(env, titolo, catalogoTesto, esame) {
+// Testo di un evento dello streaming di Workers AI, qualunque sia il formato del modello.
+function pezzoDi(ev) {
+  if (typeof ev.response === 'string') return ev.response;
+  const d = ev.choices?.[0]?.delta;
+  if (d && typeof d.content === 'string') return d.content;
+  if (ev.type === 'response.output_text.delta' && typeof ev.delta === 'string') return ev.delta;
+  return '';
+}
+
+// Testo del modello a pezzi, in streaming (o tutto insieme, se il modello ignora lo streaming).
+async function* testoModello(env, modello, input) {
+  const r = await esegui(env, modello, { ...input, stream: true });
+  if (!(r instanceof ReadableStream)) { yield testoDi(r); return; }
+  const lettore = r.pipeThrough(new TextDecoderStream()).getReader();
+  let resto = '';
+  try {
+    for (;;) {
+      const { done, value } = await lettore.read();
+      if (done) break;
+      resto += value;
+      const righe = resto.split('\n');
+      resto = righe.pop();
+      for (const riga of righe) {
+        const d = riga.trim();
+        if (!d.startsWith('data:')) continue;
+        const dati = d.slice(5).trim();
+        if (!dati || dati === '[DONE]') continue;
+        try { const t = pezzoDi(JSON.parse(dati)); if (t) yield t; } catch { /* evento incompleto */ }
+      }
+    }
+  } finally { lettore.releaseLock(); }
+}
+
+// Richieste grezze man mano che il modello le scrive; { nonUniversitario: true } se il testo non è un esame universitario.
+async function* richiesteModello(env, modello, input) {
+  let resto = '', tutto = '', pensa = false, n = 0;
+  const dallaRiga = function* (riga) {
+    let r = riga;
+    if (pensa) { const k = r.indexOf('</think>'); if (k < 0) return; r = r.slice(k + 8); pensa = false; }
+    const k = r.indexOf('<think>');
+    if (k >= 0) { pensa = !r.includes('</think>', k); r = r.slice(0, k); }
+    if (/NON_UNIVERSITARIO/.test(r) && !n) { yield { nonUniversitario: true }; return; }
+    const q = leggiRiga(r);
+    if (q && n < MAX_RICHIESTE) { n++; yield q; }
+  };
+  for await (const pezzo of testoModello(env, modello, input)) {
+    tutto += pezzo;
+    resto += pezzo;
+    const righe = resto.split('\n');
+    resto = righe.pop();
+    for (const riga of righe) yield* dallaRiga(riga);
+    if (n >= MAX_RICHIESTE) return;
+  }
+  yield* dallaRiga(resto);
+  // Riserva: il modello ha risposto con il vecchio oggetto JSON.
+  if (!n) {
+    const d = estraiJson(senzaRagionamento(tutto));
+    if (d?.universitario === false) yield { nonUniversitario: true };
+    else if (Array.isArray(d?.richieste)) for (const r of d.richieste.slice(0, MAX_RICHIESTE)) yield r;
+  }
+}
+
+// Avvia il confronto: prova i modelli finché uno scrive la prima richiesta, poi restituisce il resto in streaming.
+async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame) {
   const messages = [
-    { role: 'system', content: ISTRUZIONI_CONFRONTO(titolo) },
-    { role: 'user', content: `Catalogo del materiale\n${catalogoTesto}\n\nTesto dell'esame\n${esame}` },
+    { role: 'system', content: ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, conTeoria) },
+    { role: 'user', content: `Testo dell'esame\n${esame}` },
   ];
   let ultimo = null;
-  for (const m of MODELLI_TESTO) {
-    for (const input of [
-      { messages, max_tokens: 3000, response_format: { type: 'json_schema', json_schema: SCHEMA } },
-      { messages, max_tokens: 3000 },
-    ]) {
-      try {
-        const d = estraiJson(await prova(env, m, input));
-        if (d && Array.isArray(d.richieste)) return d;
-      } catch (e) { ultimo = e; console.log('compatibilita confronto', m, String(e?.message || e).slice(0, 200)); }
-    }
+  for (const m of inOrdine(MODELLI_TESTO)) {
+    try {
+      const it = richiesteModello(env, m, { messages, max_tokens: 1600 });
+      const primo = await it.next();
+      if (!primo.done) { delete guasti[m]; return { primo: primo.value, it }; }
+    } catch (e) { ultimo = e; console.log('compatibilita confronto', m, String(e?.message || e).slice(0, 200)); }
+    guasti[m] = Date.now();
   }
   throw ultimo || new Error('nessun confronto');
 }
 
 // ---------- calcolo delle percentuali ----------
-// Controlla i codici restituiti dal modello, rende coerenti livello, scheda e argomento, assegna i pesi
-// (punteggio dell'esercizio diviso tra i suoi punti, se il testo indica i punteggi di tutti gli esercizi) e calcola la compatibilità.
-export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}) {
+// Una richiesta grezza del modello → riga del risultato: controlla i codici e rende coerenti livello, scheda e argomento.
+function rigaRisultato(materia, cat, codici, r, domandePer) {
   const pulito = (x, n) => String(x ?? '').replace(/[\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n);
-  const richieste = grezze.slice(0, MAX_RICHIESTE).map((r) => {
-    const tipo = r.tipo === 'teoria' ? 'teoria' : 'esercizio';
-    let livello = ['stesso', 'argomento', 'nessuno'].includes(r.livello) ? r.livello : 'nessuno';
-    const scheda = tipo === 'esercizio' ? codici.S[r.scheda] || null : null;
-    const voce = tipo === 'teoria' ? codici.T[r.teoria] || null : null;
-    let arg = codici.A[r.argomento] || null;
-    const legato = scheda || voce;
-    if (legato) arg = cat.argomenti.find((a) => a.slug === legato.argomento) || arg;
-    if (livello === 'stesso' && !legato) livello = arg ? 'argomento' : 'nessuno';
-    if (livello === 'argomento' && !arg) livello = 'nessuno';
-    if (livello === 'nessuno') arg = null;
-    const punti = typeof r.punti === 'number' && r.punti > 0 && r.punti <= 100 ? r.punti : null;
-    return {
-      esercizio: pulito(r.esercizio, 8) || '?', parte: pulito(r.parte, 4) || null, testo: pulito(r.testo, 400), tipo, livello, punti,
-      argomento: arg ? { slug: arg.slug, titolo: arg.titolo } : null,
-      scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= SCHEDE_LIBERE, link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
-      voce: livello === 'stesso' && voce ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null,
-      teoriaLink: arg ? `/${materia}/${arg.slug}/teoria` : null,
-      domandeLink: arg && domandePer[arg.slug] ? `/${materia}/${arg.slug}/domande` : null,
-    };
-  }).filter((r) => r.testo);
+  const tipo = r.tipo === 'teoria' ? 'teoria' : 'esercizio';
+  let livello = ['stesso', 'argomento', 'nessuno'].includes(r.livello) ? r.livello : 'nessuno';
+  const scheda = tipo === 'esercizio' ? codici.S[r.scheda] || null : null;
+  const voce = tipo === 'teoria' ? codici.T[r.teoria] || null : null;
+  let arg = codici.A[r.argomento] || null;
+  const legato = scheda || voce;
+  if (legato) arg = cat.argomenti.find((a) => a.slug === legato.argomento) || arg;
+  if (livello === 'stesso' && !legato) livello = arg ? 'argomento' : 'nessuno';
+  if (livello === 'argomento' && !arg) livello = 'nessuno';
+  if (livello === 'nessuno') arg = null;
+  const punti = typeof r.punti === 'number' && r.punti > 0 && r.punti <= 100 ? r.punti : null;
+  return {
+    esercizio: pulito(r.esercizio, 8) || '?', parte: pulito(r.parte, 4) || null, testo: pulito(r.testo, 400), tipo, livello, punti,
+    argomento: arg ? { slug: arg.slug, titolo: arg.titolo } : null,
+    scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= SCHEDE_LIBERE, link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
+    voce: livello === 'stesso' && voce ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null,
+    teoriaLink: arg ? `/${materia}/${arg.slug}/teoria` : null,
+    domandeLink: arg && domandePer[arg.slug] ? `/${materia}/${arg.slug}/domande` : null,
+  };
+}
+
+// Assegna i pesi (punteggio dell'esercizio diviso tra i suoi punti, se il testo indica i punteggi di tutti gli esercizi)
+// e calcola la compatibilità.
+export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}) {
+  const richieste = grezze.slice(0, MAX_RICHIESTE).map((r) => rigaRisultato(materia, cat, codici, r, domandePer)).filter((r) => r.testo);
 
   // Pesi: con i punteggi di tutti gli esercizi, ogni punto (a, b, c…) vale il punteggio diviso per i punti dell'esercizio.
   const perEsercizio = {};
@@ -394,39 +487,67 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const testo = typeof b.testo === 'string' ? b.testo.replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim() : '';
   if (testo.length < 20) return json({ errore: 'Il testo dell’esame è troppo breve: scrivi o incolla gli esercizi.' }, 400);
   if (testo.length > MAX_CARATTERI_TESTO) return json({ errore: `Il testo è troppo lungo: al massimo ${MAX_CARATTERI_TESTO} caratteri, cioè un compito d’esame.` }, 400);
-  const cat = await catalogo(env, materia);
-  if (!cat) return json({ errore: 'Il confronto per questa materia non è ancora disponibile.' }, 503);
-  const c = await conta('confronta');
+  const [cat, c] = await Promise.all([catalogo(env, materia), conta('confronta')]);
+  if (!cat) { if (c.ok) await rimborsa('confronta'); return json({ errore: 'Il confronto per questa materia non è ancora disponibile.' }, 503); }
   if (!c.ok) return limite(c);
-  const { testo: catalogoTesto, codici } = codifica(cat);
-  let grezzo;
+  const conTeoria = CHIEDE_TEORIA.test(testo);
+  const { testo: catalogoTesto, codici } = codifica(cat, conTeoria);
+  // Dati del successo e delle domande a tempo: si leggono mentre il modello lavora.
+  const successoP = io ? aDO(env, '/comp-successo', { email: io.email, materia }).then((x) => x.argomenti).catch(() => null) : Promise.resolve(null);
+  const domandePerP = h.catalogoDomande(env).then((tutte) => {
+    const domande = tutte?.[materia] || [];
+    return Object.fromEntries((Array.isArray(domande) ? domande : Object.keys(domande)).map((a) => [typeof a === 'string' ? a : a.slug, true]));
+  }).catch(() => ({}));
+
+  let avvio;
   try {
-    grezzo = await abbina(env, m.titolo, catalogoTesto, testo);
+    avvio = await avviaConfronto(env, m.titolo, catalogoTesto, conTeoria, testo);
   } catch (e) {
     await rimborsa('confronta');
     const quota = /4006|allocation|neurons|limit/i.test(String(e?.message || ''));
     return json({ errore: quota ? 'Oggi il controllo degli esami ha raggiunto il limite del sito. Riprova domani.' : 'Il confronto non è riuscito. Riprova tra qualche istante.' }, 502);
   }
-  if (grezzo.universitario === false) {
+  if (avvio.primo.nonUniversitario) {
     await rimborsa('confronta');
     return json({ errore: 'Il testo non sembra un esame universitario. Il controllo della compatibilità vale per gli esami universitari; per concorsi e test a quiz ci sono le simulazioni a quiz.', nonUniversitario: true }, 422);
   }
-  const successoArg = io ? (await aDO(env, '/comp-successo', { email: io.email, materia })).argomenti : null;
-  const domande = (await h.catalogoDomande(env))?.[materia] || [];
-  const domandePer = Object.fromEntries((Array.isArray(domande) ? domande : Object.keys(domande)).map((a) => [typeof a === 'string' ? a : a.slug, true]));
-  const esito = valutaRichieste(materia, cat, codici, grezzo.richieste, successoArg, domandePer);
-  if (!esito.richieste.length) {
-    await rimborsa('confronta');
-    return json({ errore: 'Nel testo non ho riconosciuto esercizi. Controlla il testo e riprova.' }, 422);
-  }
+  const domandePer = await domandePerP;
   const universita = typeof b.universita === 'string' ? b.universita.replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80) : '';
   const id = typeof b.id === 'string' && /^[0-9a-f-]{36}$/.test(b.id) ? b.id : crypto.randomUUID();
-  ctx.waitUntil(aDO(env, '/comp-compito-esito', {
-    id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
-    esito: JSON.stringify(esito.richieste.map((r) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null }))),
-  }).catch(() => {}));
-  return json({ materia, titolo: m.titolo, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti }, 200, { 'cache-control': 'no-store' });
+
+  // Risposta in streaming, una riga JSON per evento: {"r": riga} per ogni richiesta appena il modello la scrive,
+  // poi {"fine": esito} con le percentuali calcolate su tutte le richieste.
+  const enc = new TextEncoder();
+  const corpo = new ReadableStream({
+    async start(ctl) {
+      const manda = (o) => ctl.enqueue(enc.encode(`${JSON.stringify(o)}\n`));
+      const grezze = [];
+      const aggiungi = (q) => {
+        if (q.nonUniversitario) return;
+        const riga = rigaRisultato(materia, cat, codici, q, domandePer);
+        if (!riga.testo) return;
+        grezze.push(q);
+        manda({ r: riga });
+      };
+      aggiungi(avvio.primo);
+      try { for await (const q of avvio.it) aggiungi(q); } catch (e) { console.log('compatibilita streaming', String(e?.message || e).slice(0, 200)); }
+      const esito = valutaRichieste(materia, cat, codici, grezze, await successoP, domandePer);
+      if (!esito.richieste.length) {
+        await rimborsa('confronta');
+        manda({ errore: 'Nel testo non ho riconosciuto esercizi. Controlla il testo e riprova.' });
+      } else {
+        manda({ fine: { materia, titolo: m.titolo, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti } });
+        ctx.waitUntil(aDO(env, '/comp-compito-esito', {
+          id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
+          esito: JSON.stringify(esito.richieste.map((r) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null }))),
+        }).catch(() => {}));
+      }
+      ctl.close();
+    },
+  });
+  return new Response(corpo, { headers: { 'content-type': 'application/x-ndjson; charset=utf-8', 'cache-control': 'no-store', 'x-accel-buffering': 'no' } });
 }
+
 
 // ---------- pagina /admin/esami ----------
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (x) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[x]));

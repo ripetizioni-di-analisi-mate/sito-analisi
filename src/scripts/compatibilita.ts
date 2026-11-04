@@ -1,6 +1,8 @@
 // «Compatibilità con il tuo esame» nel browser (componente CompatibilitaEsame.astro).
 // Le foto si riducono qui (lato lungo 1600 px, JPEG); le pagine dei PDF si disegnano con pdf.js (caricato da jsDelivr
 // solo quando serve) e partono come immagini, così il modello vede anche le formule. Poi il testo letto va al confronto.
+// Per non far aspettare: foto e PDF si preparano appena scelti (mentre lo studente sceglie la materia), e il risultato
+// del confronto arriva in streaming, una richiesta alla volta, con le percentuali alla fine.
 import katex from 'katex';
 
 const MAX_LATO = 1600;
@@ -112,6 +114,16 @@ export function avviaCompatibilita() {
   const area = form.querySelector<HTMLTextAreaElement>('textarea[name=testo]')!;
   const zona = form.querySelector<HTMLElement>('.compat-carica')!;
   let files: File[] = [];
+  // Pagine già pronte per ogni file, preparate appena il file viene scelto.
+  const pronte = new Map<File, Promise<string[]>>();
+  const prepara = (f: File) => {
+    if (!pronte.has(f)) {
+      const p = f.type === 'application/pdf' ? daPdf(f, MAX_PAGINE) : daFoto(f).then((x) => [x]);
+      p.catch(() => {}); // l'errore si mostra al momento dell'invio
+      pronte.set(f, p);
+    }
+    return pronte.get(f)!;
+  };
 
   // Materia dall'indirizzo (?materia=analisi-1): ci si arriva dalla pagina Sblocca.
   const dallaPagina = new URLSearchParams(location.search).get('materia');
@@ -127,7 +139,7 @@ export function avviaCompatibilita() {
   const aggiungi = (nuovi: FileList | File[]) => {
     for (const f of Array.from(nuovi)) {
       if (!(f.type.startsWith('image/') || f.type === 'application/pdf')) { stato.textContent = `«${f.name}» non è una foto né un PDF.`; continue; }
-      if (files.length < MAX_PAGINE) files.push(f);
+      if (files.length < MAX_PAGINE) { files.push(f); prepara(f); }
     }
     mostraFile();
   };
@@ -148,13 +160,49 @@ export function avviaCompatibilita() {
   };
   const occupato = (si: boolean) => { invia.disabled = si; };
 
+  // Il confronto risponde in streaming (una riga JSON per evento): {"r": richiesta} appena il modello la scrive,
+  // poi {"fine": esito} con le percentuali. Le richieste si mostrano subito, il riquadro completo alla fine.
   const confronta = async (materia: string, testo: string) => {
     stato.textContent = 'Confronto con il materiale…';
-    const esito: Esito & { id?: string } = await chiama('/api/compatibilita/confronta', { materia, testo, id: idCompito || undefined });
-    if (esito.id) idCompito = esito.id;
+    const r = await fetch('/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo, id: idCompito || undefined }) });
+    if (!r.ok || !/ndjson/.test(r.headers.get('content-type') || '')) {
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.');
+      if (d.id) idCompito = d.id;
+      stato.textContent = '';
+      mostra(d as Esito, testo);
+      esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    const arrivate: Richiesta[] = [];
+    let esito: (Esito & { id?: string }) | null = null;
+    const evento = (riga: string) => {
+      if (!riga.trim()) return;
+      const d = JSON.parse(riga);
+      if (d.errore) throw new Error(d.errore);
+      if (d.fine) { esito = d.fine; return; }
+      if (d.r) {
+        arrivate.push(d.r);
+        inCorso(materia, arrivate);
+        if (arrivate.length === 1) esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+    const lettore = r.body!.pipeThrough(new TextDecoderStream()).getReader();
+    let resto = '';
+    for (;;) {
+      const { done, value } = await lettore.read();
+      if (done) break;
+      resto += value;
+      const righe = resto.split('\n');
+      resto = righe.pop()!;
+      righe.forEach(evento);
+    }
+    evento(resto);
+    const finale = esito as (Esito & { id?: string }) | null;
+    if (!finale) throw new Error('Il confronto si è interrotto. Riprova tra qualche istante.');
+    if (finale.id) idCompito = finale.id;
     stato.textContent = '';
-    mostra(esito, testo);
-    esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    mostra(finale, testo);
   };
 
   form.addEventListener('submit', async (e) => {
@@ -168,12 +216,7 @@ export function avviaCompatibilita() {
       if (!testo) {
         if (!files.length) throw new Error('Carica il compito o incolla il testo.');
         stato.textContent = 'Lettura del compito…';
-        const pagine: string[] = [];
-        for (const f of files) {
-          if (pagine.length >= MAX_PAGINE) break;
-          if (f.type === 'application/pdf') pagine.push(...(await daPdf(f, MAX_PAGINE - pagine.length)));
-          else pagine.push(await daFoto(f));
-        }
+        const pagine = (await Promise.all(files.map(prepara))).flat().slice(0, MAX_PAGINE);
         const letto = await chiama('/api/compatibilita/leggi', { materia, pagine });
         testo = letto.testo; idCompito = letto.id || '';
       }
@@ -186,6 +229,23 @@ export function avviaCompatibilita() {
   // ---------- risultato ----------
   const possiede = (m: string) => (document.documentElement.dataset.materie || '').split(/\s+/).includes(m);
   const ETICHETTE = { stesso: 'Coperto', argomento: 'In parte', nessuno: 'Non coperto' };
+  const rigaHtml = (materia: string, r: Richiesta) => {
+    const link: string[] = [];
+    if (r.scheda) link.push(`<a href="${esc(r.scheda.link)}">${conFormule(r.scheda.titolo)}</a>${r.scheda.libera && !possiede(materia) ? ' (gratuita)' : ''}`);
+    else if (r.voce) link.push(`<a href="${esc(r.voce.link)}">${conFormule(r.voce.titolo)}</a>`);
+    else if (r.argomento && r.teoriaLink) link.push(`<a href="${esc(r.teoriaLink)}">${esc(r.argomento.titolo)}</a>`);
+    if (r.domandeLink) link.push(`<a href="${esc(r.domandeLink)}">Domande a tempo</a>${r.successo ? ` ${r.successo.corrette}/${r.successo.risposte}` : ''}`);
+    return `<li><span class="compat-n">${esc(r.esercizio)}${r.parte ? esc(r.parte) : ''}</span><div class="compat-r">
+        <div class="testo-richiesta">${conFormule(r.testo)}</div>
+        <p class="compat-link"><span class="compat-et ${r.livello}">${ETICHETTE[r.livello]}</span>${link.join(' · ')}</p></div></li>`;
+  };
+  // Mentre il confronto è in corso: le richieste già abbinate, senza percentuali.
+  function inCorso(materia: string, richieste: Richiesta[]) {
+    esitoBox.innerHTML = `
+      <div class="compat-sintesi"><p class="compat-righe-sintesi">Confronto in corso · ${richieste.length} ${richieste.length === 1 ? 'richiesta abbinata' : 'richieste abbinate'}</p></div>
+      <ol class="compat-richieste">${richieste.map((r) => rigaHtml(materia, r)).join('')}</ol>`;
+    esitoBox.hidden = false;
+  }
   function mostra(e: Esito, testo: string) {
     const tot = Math.max(e.richieste.length, 1);
     const quota = (k: 'stesso' | 'argomento') => (100 * e.conteggi[k]) / tot;
@@ -200,16 +260,7 @@ export function avviaCompatibilita() {
           <p class="cc-titolo">Il materiale di ${esc(e.titolo)} copre ${articolo(e.compatibilita)}${e.compatibilita}% del tuo compito.</p>
           <a class="bottone-primario" href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></div>`
       : daComprare ? `<p class="compat-acquisto"><a href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></p>` : '';
-    const voci = e.richieste.map((r) => {
-      const link: string[] = [];
-      if (r.scheda) link.push(`<a href="${esc(r.scheda.link)}">${conFormule(r.scheda.titolo)}</a>${r.scheda.libera && !possiede(e.materia) ? ' (gratuita)' : ''}`);
-      else if (r.voce) link.push(`<a href="${esc(r.voce.link)}">${conFormule(r.voce.titolo)}</a>`);
-      else if (r.argomento && r.teoriaLink) link.push(`<a href="${esc(r.teoriaLink)}">${esc(r.argomento.titolo)}</a>`);
-      if (r.domandeLink) link.push(`<a href="${esc(r.domandeLink)}">Domande a tempo</a>${r.successo ? ` ${r.successo.corrette}/${r.successo.risposte}` : ''}`);
-      return `<li><span class="compat-n">${esc(r.esercizio)}${r.parte ? esc(r.parte) : ''}</span><div class="compat-r">
-        <div class="testo-richiesta">${conFormule(r.testo)}</div>
-        <p class="compat-link"><span class="compat-et ${r.livello}">${ETICHETTE[r.livello]}</span>${link.join(' · ')}</p></div></li>`;
-    }).join('');
+    const voci = e.richieste.map((r) => rigaHtml(e.materia, r)).join('');
     esitoBox.innerHTML = `
       <div class="compat-sintesi">
         <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di compatibilità con ${esc(e.titolo)}</span></p>
