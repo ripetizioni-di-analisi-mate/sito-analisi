@@ -1,128 +1,90 @@
 ---
 // «Compatibilità con il tuo esame»: caricamento del testo dell'esame (foto, PDF o testo), confronto con il
-// materiale della materia e risultato richiesta per richiesta. Si usa nella pagina /compatibilita (materia da
-// scegliere) e nella pagina Sblocca delle materie universitarie (materia fissata). Worker: worker/compatibilita.mjs.
+// materiale della materia e risultato richiesta per richiesta. Pagina /compatibilita; dalla pagina Sblocca delle
+// materie universitarie si arriva con ?materia=<slug>. Worker: worker/compatibilita.mjs.
 import { materia as datiMateria } from '../data/materie';
 import { MATERIE_COMPATIBILITA, MAX_PAGINE } from '../data/compatibilita';
-interface Props { materia?: string; titolo?: string }
-const { materia, titolo } = Astro.props;
 const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
-const fissa = materia && MATERIE_COMPATIBILITA.includes(materia) ? datiMateria(materia) : null;
 ---
-<div class="compat" id="compat" data-fissa={fissa?.slug || ''} data-max-pagine={MAX_PAGINE} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
-  {titolo && <h2 class="compat-titolo">{titolo}</h2>}
+<div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
   <form class="compat-modulo" id="compat-modulo" novalidate>
-    {!fissa && (
-      <fieldset class="compat-scelta">
-        <legend>Materia dell’esame</legend>
-        <div class="compat-pillole">
-          {elenco.map((m) => (<label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>))}
-        </div>
-      </fieldset>
-    )}
-    <fieldset class="compat-scelta">
-      <legend>Testo dell’esame</legend>
-      <div class="compat-pillole">
-        <label><input type="radio" name="modo" value="file" checked /><span>Foto o PDF</span></label>
-        <label><input type="radio" name="modo" value="testo" /><span>Testo scritto</span></label>
-      </div>
-    </fieldset>
-    <div class="compat-campo" data-modo="file">
-      <label class="compat-carica">
-        <input type="file" name="file" accept="image/*,application/pdf" multiple />
-        <span class="compat-carica-testo"><b>Scegli le foto o il PDF</b> del testo del compito, fino a {MAX_PAGINE} pagine</span>
-      </label>
-      <ul class="compat-file" id="compat-file"></ul>
+    <div class="compat-pillole" role="radiogroup" aria-label="Materia dell’esame">
+      {elenco.map((m) => (<label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>))}
     </div>
-    <div class="compat-campo" data-modo="testo" hidden>
-      <textarea name="testo" rows="8" maxlength="8000" placeholder="Incolla qui gli esercizi del compito, anche con le formule scritte come nel PDF."></textarea>
+    <label class="compat-carica">
+      <input type="file" name="file" accept="image/*,application/pdf" multiple />
+      <span><b>Carica le foto o il PDF</b> del compito, fino a {MAX_PAGINE} pagine</span>
+    </label>
+    <ul class="compat-file" id="compat-file"></ul>
+    <details class="compat-incolla">
+      <summary>oppure incolla il testo</summary>
+      <textarea name="testo" rows="6" maxlength="8000"></textarea>
+    </details>
+    <div class="compat-tasti">
+      <button type="submit" class="bottone-primario" id="compat-invia">Controlla la compatibilità</button>
+      <span class="esito-modulo compat-stato" id="compat-stato" role="status"></span>
     </div>
-    <label class="compat-universita"><span>Università <small>facoltativo</small></span><input name="universita" maxlength="80" autocomplete="off" /></label>
-    <div class="compat-tasti"><button type="submit" class="bottone-primario" id="compat-invia">Controlla la compatibilità</button></div>
-    <p class="esito-modulo compat-stato" id="compat-stato" role="status"></p>
-    <p class="compat-nota">Il testo degli esercizi si conserva in forma anonima, senza nome né account, per migliorare il materiale del sito (<a href="/privacy">informativa</a>).</p>
+    <p class="compat-nota">Gratuito, anche senza account. Il testo degli esercizi si conserva in forma anonima per migliorare il materiale (<a href="/privacy">informativa</a>).</p>
   </form>
-
   <section class="compat-esito" id="compat-esito" hidden aria-live="polite"></section>
 </div>
 
 <style is:global>
   .compat { font-family: var(--ui); }
-  .compat-titolo { font-size: 1.25rem; margin: 0 0 0.6rem; }
-  .compat-modulo { display: grid; gap: 1rem; }
-  .compat-scelta { border: 0; padding: 0; margin: 0; }
-  .compat-scelta legend { font-weight: 600; margin-bottom: 0.45rem; padding: 0; }
-  .compat-pillole { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .compat-modulo { display: grid; gap: 0.75rem; }
+  .compat-pillole { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .compat-pillole label { position: relative; cursor: pointer; }
   .compat-pillole input { position: absolute; opacity: 0; pointer-events: none; }
-  .compat-pillole span { display: inline-block; padding: 0.42rem 0.9rem; border: 1px solid var(--riga); border-radius: 999px; background: white; font-size: 0.95rem; }
+  .compat-pillole span { display: inline-block; padding: 0.35rem 0.8rem; border: 1px solid var(--riga); border-radius: 999px; background: white; font-size: 0.9rem; }
   .compat-pillole input:checked + span { background: var(--accento); border-color: var(--accento); color: white; font-weight: 600; }
   .compat-pillole input:focus-visible + span { outline: 2px solid var(--accento); outline-offset: 2px; }
-  .compat-carica { display: block; border: 1.5px dashed var(--riga); border-radius: var(--raggio); background: white; padding: 1.1rem 1rem; text-align: center; cursor: pointer; color: var(--inchiostro-2); }
-  .compat-carica:hover, .compat-carica.sopra { border-color: var(--accento); background: #f6faf8; }
+  .compat-carica { display: block; position: relative; border: 1.5px dashed var(--riga); border-radius: var(--raggio); background: white; padding: 0.9rem 1rem; text-align: center; cursor: pointer; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .compat-carica:hover, .compat-carica.sopra { border-color: var(--accento); }
   .compat-carica input { position: absolute; width: 1px; height: 1px; opacity: 0; }
   .compat-carica b { color: var(--accento); }
-  .compat-file { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .compat-file li { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.88rem; background: var(--carta-2); border-radius: 999px; padding: 0.2rem 0.4rem 0.2rem 0.75rem; }
-  .compat-file button { font: inherit; border: 0; background: none; color: var(--inchiostro-2); cursor: pointer; width: 1.4rem; height: 1.4rem; border-radius: 50%; line-height: 1; }
-  .compat-file button:hover { background: white; }
-  .compat textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 0.65rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); resize: vertical; }
-  .compat textarea:focus, .compat-universita input:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
-  .compat-universita { display: grid; gap: 0.3rem; max-width: 22rem; font-weight: 600; }
-  .compat-universita small { font-weight: 400; color: var(--inchiostro-2); margin-left: 0.3rem; }
-  .compat-universita input { font: inherit; font-weight: 400; padding: 0.55rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; }
-  .compat-tasti { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .compat-file { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .compat-file:empty { display: none; }
+  .compat-file li { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; background: var(--carta-2); border-radius: 999px; padding: 0.15rem 0.35rem 0.15rem 0.7rem; }
+  .compat-file button { font: inherit; border: 0; background: none; color: var(--inchiostro-2); cursor: pointer; width: 1.3rem; height: 1.3rem; border-radius: 50%; line-height: 1; }
+  .compat-incolla summary { cursor: pointer; font-size: 0.9rem; color: var(--accento); width: max-content; }
+  .compat textarea { width: 100%; box-sizing: border-box; margin-top: 0.4rem; font: inherit; font-size: 0.92rem; padding: 0.6rem 0.75rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); resize: vertical; }
+  .compat textarea:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
+  .compat-tasti { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
   .compat-tasti button:disabled { opacity: 0.6; cursor: wait; }
-  .compat-stato { margin: 0; }
-  .compat-stato:empty { display: none; }
-  .compat-nota { margin: 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .compat-stato { margin: 0; min-height: 0; }
+  .compat-nota { margin: 0; font-size: 0.82rem; color: var(--inchiostro-2); }
 
-  .compat-esito { margin-top: 1.6rem; }
-  .compat-sintesi { border: 1px solid var(--riga); border-radius: var(--raggio); background: white; padding: 1.1rem 1.2rem 1rem; }
-  .compat-numeri { display: flex; flex-wrap: wrap; gap: 0.6rem 2.2rem; align-items: flex-end; }
-  .compat-numero { display: grid; gap: 0.1rem; }
-  .compat-numero strong { font-family: var(--titoli); font-size: 2.6rem; line-height: 1; font-weight: 600; color: var(--accento); font-variant-numeric: tabular-nums; }
-  .compat-numero.secondario strong { font-size: 2rem; color: #3b5f8f; }
-  .compat-numero span { font-size: 0.92rem; color: var(--inchiostro-2); }
-  .compat-barra { height: 6px; border-radius: 999px; background: var(--carta-2); margin: 0.9rem 0 0.6rem; overflow: hidden; display: flex; }
+  .compat-esito { margin-top: 1.4rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; }
+  .compat-sintesi { padding: 0.9rem 1rem 0.8rem; border-bottom: 1px solid var(--riga); }
+  .compat-titolo-esito { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.6rem; }
+  .compat-titolo-esito strong { font-family: var(--titoli); font-size: 2rem; line-height: 1; color: var(--accento); font-variant-numeric: tabular-nums; }
+  .compat-titolo-esito span { color: var(--inchiostro-2); font-size: 0.95rem; }
+  .compat-barra { height: 5px; border-radius: 999px; background: var(--carta-2); margin: 0.65rem 0 0.5rem; overflow: hidden; display: flex; }
   .compat-barra i { display: block; height: 100%; }
   .compat-barra .b-stesso { background: var(--accento); }
   .compat-barra .b-argomento { background: #d8b27a; }
-  .compat-conteggi { margin: 0; font-size: 0.92rem; color: var(--inchiostro-2); display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; }
-  .compat-conteggi .pallino { display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; margin-right: 0.35rem; vertical-align: 0.05rem; }
-  .compat-pesi { margin: 0.45rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
-  .compat-successo { margin: 0.8rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--carta-2); font-size: 0.92rem; color: var(--inchiostro-2); }
-  .compat-acquisto { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin: 1rem 0 0; }
-  .compat-acquisto .bottone-primario { background: var(--azione); border-color: var(--azione); text-decoration: none; }
+  .compat-righe-sintesi { margin: 0; font-size: 0.88rem; color: var(--inchiostro-2); }
+  .compat-righe-sintesi + .compat-righe-sintesi { margin-top: 0.25rem; }
+  .compat-righe-sintesi b { color: var(--inchiostro); }
+  .compat-acquisto { margin: 0.6rem 0 0; font-size: 0.92rem; }
+  .compat-acquisto a { color: var(--azione); font-weight: 600; }
 
-  .compat-richieste { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: 0.6rem; }
-  .compat-richieste li { border: 1px solid var(--riga); border-radius: var(--raggio); background: white; padding: 0.75rem 1rem; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0.2rem 0.8rem; }
-  .compat-n { font-weight: 700; color: var(--inchiostro-2); font-variant-numeric: tabular-nums; padding-top: 0.05rem; }
-  .compat-r { display: grid; gap: 0.35rem; min-width: 0; }
-  .compat-r .testo-richiesta { font-family: var(--testo); font-size: 1.02rem; line-height: 1.45; overflow-x: auto; }
-  .compat-et { justify-self: start; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; border-radius: 999px; padding: 0.12rem 0.6rem; }
+  .compat-richieste { list-style: none; margin: 0; padding: 0; }
+  .compat-richieste li { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: 0 0.5rem; padding: 0.6rem 1rem; border-bottom: 1px solid var(--carta-2); }
+  .compat-n { font-weight: 700; color: var(--inchiostro-2); font-variant-numeric: tabular-nums; }
+  .compat-r { min-width: 0; }
+  .compat-r .testo-richiesta { font-family: var(--testo); line-height: 1.4; overflow-x: auto; }
+  .compat-link { margin: 0.2rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .compat-link a { color: var(--accento); }
+  .compat-et { font-size: 0.75rem; font-weight: 700; border-radius: 999px; padding: 0.05rem 0.5rem; margin-right: 0.35rem; }
   .compat-et.stesso { background: #e3efe9; color: #2f6f68; }
   .compat-et.argomento { background: #f6ecd9; color: #8a5f1f; }
   .compat-et.nessuno { background: #eee8dc; color: #5a6664; }
-  .compat-link { margin: 0; font-size: 0.9rem; color: var(--inchiostro-2); }
-  .compat-link a { color: var(--accento); }
-  .compat-link .gratuita { font-size: 0.78rem; font-weight: 600; color: var(--accento); border: 1px solid #cfe2db; border-radius: 999px; padding: 0 0.45rem; margin-left: 0.3rem; white-space: nowrap; }
-  .compat-dettagli { margin: 1.2rem 0 0; font-size: 0.92rem; }
-  .compat-dettagli summary { cursor: pointer; font-weight: 600; color: var(--inchiostro); }
-  .compat-dettagli p { color: var(--inchiostro-2); margin: 0.5rem 0; }
-  .compat-dettagli textarea { margin-top: 0.5rem; font-size: 0.92rem; }
-  .compat-dettagli .bottone-secondario { font: inherit; font-weight: 600; background: white; color: var(--inchiostro); border: 1px solid var(--riga); border-radius: 999px; padding: 0.55rem 1.2rem; cursor: pointer; margin-top: 0.5rem; }
-  .compat-recenti { margin: 2rem 0 0; }
-  .compat-recenti h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
-  .compat-recenti ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
-  .compat-recenti button { font: inherit; width: 100%; text-align: left; display: flex; justify-content: space-between; gap: 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; padding: 0.55rem 0.9rem; cursor: pointer; color: var(--inchiostro); }
-  .compat-recenti button:hover { border-color: var(--accento); }
-  .compat-recenti b { color: var(--accento); font-variant-numeric: tabular-nums; }
-  .compat-recenti small { color: var(--inchiostro-2); }
-  @media (max-width: 560px) {
-    .compat-numero strong { font-size: 2.2rem; }
-    .compat-richieste li { grid-template-columns: 2rem minmax(0, 1fr); padding: 0.7rem 0.8rem; gap: 0.2rem 0.5rem; }
-  }
+  .compat-dettagli { padding: 0.55rem 1rem; font-size: 0.88rem; }
+  .compat-dettagli + .compat-dettagli { border-top: 1px solid var(--carta-2); }
+  .compat-dettagli summary { cursor: pointer; color: var(--inchiostro-2); }
+  .compat-dettagli p { color: var(--inchiostro-2); margin: 0.4rem 0; }
+  .compat-dettagli .bottone-secondario { font: inherit; font-weight: 600; background: white; color: var(--inchiostro); border: 1px solid var(--riga); border-radius: 999px; padding: 0.45rem 1rem; cursor: pointer; margin-top: 0.4rem; }
 </style>
 
 <script>

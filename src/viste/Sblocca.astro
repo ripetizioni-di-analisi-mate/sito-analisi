@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
-import CompatibilitaEsame from '../components/CompatibilitaEsame.astro';
 import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { SCONTO_INVITO } from '../data/inviti';
@@ -16,10 +15,9 @@ const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 const localePaddle = lingua;
-// «Compatibilità con il tuo esame» prima dell'acquisto: solo materie universitarie, solo in italiano.
-// Tre versioni da mostrare a Carmine (VERSIONE_COMPAT = A, B o C alla build); finché non sceglie, nessuna è pubblicata.
+// «Compatibilità con il tuo esame» prima dell'acquisto: link sotto il tasto, solo materie universitarie e in italiano.
 const conCompat = lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia);
-const VERSIONE_COMPAT = (typeof process !== 'undefined' && process.env?.VERSIONE_COMPAT) || '';
+const compat = conCompat ? `/compatibilita?materia=${materia}` : '';
 const video = lingua === 'it' ? VIDEOCORSI.filter((v) => v.sblocca.includes(materia)) : [];
 // «Invita un amico»: righe sullo sconto, mostrate dallo script solo a chi ne ha diritto.
 const invito = lingua === 'en' ? {
@@ -42,9 +40,6 @@ const invito = lingua === 'en' ? {
     <li set:html={t.includeSoluzioni(dafare)} />
   </ul>
   <p class="gratis-ora">{t.gratisOra}</p>
-  {conCompat && VERSIONE_COMPAT === 'B' && (
-    <p class="compat-riga">Prima dell’acquisto si può controllare quanto il materiale copre il proprio esame: <a href={`/compatibilita?materia=${materia}`}>Compatibilità con il tuo esame →</a></p>
-  )}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
@@ -54,12 +49,6 @@ const invito = lingua === 'en' ? {
       ? <>Il materiale è dell'<b>Ing. Carmine Tornincasa</b>, che ha seguito oltre mille studenti in più di diecimila ore di lezione.</>
       : <>The material is by <b>Carmine Tornincasa</b>, a civil engineer who has taught more than a thousand students over more than ten thousand hours.</>}</span>
   </a>
-  {conCompat && VERSIONE_COMPAT === 'A' && (
-    <details class="compat-sblocca">
-      <summary><span class="compat-sblocca-testo"><b>Il materiale copre il tuo esame?</b> Carica il testo del compito e vedi la percentuale di compatibilità, esercizio per esercizio.</span><span class="compat-sblocca-tasto">Controlla il tuo esame</span></summary>
-      <div class="compat-sblocca-corpo"><CompatibilitaEsame materia={materia} /></div>
-    </details>
-  )}
   <div class="riquadro-acquisto">
     <p class="prezzo"><strong>{m.prezzo} €</strong> <span>{t.unaVoltaSola}</span></p>
     <p class="nota-invito" id="nota-invito" hidden></p>
@@ -71,6 +60,7 @@ const invito = lingua === 'en' ? {
       {lingua === 'it' && <CampoCorso />}
       <p class="esito-modulo" id="esito-acquisto" role="status"></p>
       <button class="bottone-primario" type="submit" id="invia-acquisto">{js.creaEPaga}</button>
+      {compat && <p class="nota-compat"><a href={compat}>Vuoi controllare la compatibilità prima dell’acquisto?</a></p>}
       <p class="nota-accesso">{js.haiAccount} <a id="link-accedi" href={`${pref}/accedi`}>{js.accedi}</a></p>
       <p class="nota-privacy">{lingua === 'it'
         ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
@@ -79,11 +69,8 @@ const invito = lingua === 'en' ? {
     <p class="metodi-pagamento">{t.metodiPagamento}</p>
     <p class="nota-termini" set:html={t.notaTermini} />
   </div>
-  {conCompat && VERSIONE_COMPAT === 'C' && (
-    <section class="compat-sotto"><CompatibilitaEsame materia={materia} titolo="Il materiale copre il tuo esame?" /></section>
-  )}
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle, invito }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle, invito, compat }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -158,6 +145,7 @@ const invito = lingua === 'en' ? {
           return false;
         }
         azione.innerHTML = `${premessa}<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
+          ${compat ? `<p class="nota-compat"><a href="${compat}">Vuoi controllare la compatibilità prima dell’acquisto?</a></p>` : ''}
           <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
         document.getElementById('compra').addEventListener('click', paga);
         caricaPaddle().catch(() => {});
@@ -224,15 +212,6 @@ const invito = lingua === 'en' ? {
 </Base>
 
 <style is:global>
-  .compat-riga { font-family: var(--ui); font-size: 0.95rem; margin: 0.6rem 0 0; }
-  .compat-sblocca { border: 1px solid var(--riga); border-radius: var(--raggio); background: white; margin: 1.4rem 0 0; font-family: var(--ui); }
-  .compat-sblocca > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem 1rem; flex-wrap: wrap; padding: 0.85rem 1rem; cursor: pointer; }
-  .compat-sblocca > summary::-webkit-details-marker { display: none; }
-  .compat-sblocca-testo { flex: 1 1 18rem; font-size: 0.95rem; color: var(--inchiostro-2); }
-  .compat-sblocca-testo b { color: var(--inchiostro); }
-  .compat-sblocca-tasto { font-weight: 600; color: var(--accento); border: 1px solid var(--accento); border-radius: 999px; padding: 0.4rem 1rem; white-space: nowrap; }
-  .compat-sblocca[open] .compat-sblocca-tasto { display: none; }
-  .compat-sblocca-corpo { padding: 0 1rem 1rem; }
-  .compat-sotto { margin: 2.2rem 0 0; padding-top: 1.6rem; border-top: 1px solid var(--riga); }
+  .nota-compat { font-family: var(--ui); font-size: 0.9rem; margin: 0.6rem 0 0; text-align: center; }
 </style>
 
