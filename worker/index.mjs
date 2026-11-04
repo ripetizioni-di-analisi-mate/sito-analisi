@@ -1214,6 +1214,11 @@ export default {
       return out;
     }
 
+    // Glossario tolto dal sito (04/11/2026, richiesta di Carmine): i vecchi indirizzi portano alla home.
+    if (/^\/(en\/)?glossario\/?$/.test(url.pathname)) {
+      return new Response(null, { status: 301, headers: { location: url.pathname.startsWith('/en/') ? '/en/' : '/', 'cache-control': 'no-store' } });
+    }
+
     // ===== contenuti: oscuramento e consegna =====
     const info = analizza(url.pathname);
     // I PDF degli argomenti e le pagine di stampa sono stati tolti (03/11/2026, richiesta di Carmine):

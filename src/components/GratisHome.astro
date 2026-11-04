@@ -4,18 +4,17 @@
 // Le versioni A (tre schede) e B (area «Gratis» prima di Università) sono state scartate.
 // 03/11: in testa le domande a tempo e la simulazione a quiz dei concorsi, gratuite anche senza account (richiesta di Carmine).
 // 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
+// 04/11: tolto il glossario (richiesta di Carmine).
 import type { Lingua } from '../i18n';
 const { lingua = 'it' } = Astro.props as { lingua?: Lingua };
 const voci = lingua === 'en' ? [
   { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
   { href: '/en/formulari', titolo: 'Formula sheets' },
-  { href: '/en/glossario', titolo: 'Math exams in Italy and Italian–English glossary' },
 ] : [
   { href: '/domande-a-tempo', titolo: 'Domande a tempo' },
   { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz' },
   { href: '/matematica-da-zero', titolo: 'Matematica zero' },
   { href: '/formulari', titolo: 'Formulari' },
-  { href: '/glossario', titolo: 'Glossario italiano-inglese' },
   { href: '/concorsi', titolo: 'Guida ai concorsi' },
 ];
 ---

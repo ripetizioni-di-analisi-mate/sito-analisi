@@ -30,8 +30,6 @@ export async function GET() {
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
   due('/concorsi/simulazione', 0.5, false);
-  // glossario italiano-inglese e guida in inglese agli esami italiani (03/11/2026)
-  due('/glossario', 0.6);
   // formulari gratuiti, in italiano e in inglese (quelli tradotti)
   const formulari = await getCollection('formulari');
   const formulariEn = new Set((await getCollection('formulari_en')).map((v) => v.id));
