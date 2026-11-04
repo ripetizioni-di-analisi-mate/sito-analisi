@@ -25,7 +25,7 @@ import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, av
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
-import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita } from './compatibilita.mjs';
+import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -192,6 +192,7 @@ export class Archivio {
     // pagine nuove o cambiate segnalate ai motori (worker/indexnow.mjs): il corpo è la mappa del sito
     if (pathname === '/indexnow') return Response.json(await eseguiIndexNow(this.sql, await req.text()));
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
+    if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
@@ -733,7 +734,7 @@ export default {
 
     // ===== compatibilità con il tuo esame: lettura del compito, confronto con il materiale (worker/compatibilita.mjs) =====
     if (p.startsWith('/api/compatibilita/') || p === '/admin/esami' || p.startsWith('/dati-compatibilita/')) {
-      const r = await gestisciCompatibilita(req, env, ctx, p, { aDO, json, utenteCollegato, catalogoDomande, leggiCookie, leggiToken });
+      const r = await gestisciCompatibilita(req, env, ctx, p, { aDO, archivio, json, utenteCollegato, catalogoDomande, leggiCookie, leggiToken });
       if (r) return r;
     }
 

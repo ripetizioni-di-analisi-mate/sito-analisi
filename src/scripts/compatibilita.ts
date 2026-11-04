@@ -67,6 +67,34 @@ async function daPdf(f: File, quante: number): Promise<string[]> {
   return pagine;
 }
 
+// Coriandoli leggeri dentro il riquadro «Acquisto consigliato»: una sola volta, circa due secondi.
+function coriandoli(tela: HTMLCanvasElement) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const r = tela.getBoundingClientRect(), k = devicePixelRatio || 1;
+  tela.width = r.width * k; tela.height = r.height * k;
+  const g = tela.getContext('2d')!; g.scale(k, k);
+  const colori = ['#2f6f68', '#8fc1b5', '#d8b27a', '#3b5f8f', '#c9dfd8'];
+  const pezzi = Array.from({ length: 70 }, () => ({
+    x: r.width / 2 + (Math.random() - 0.5) * 60, y: r.height * 0.35, vx: (Math.random() - 0.5) * 7, vy: -Math.random() * 5 - 2,
+    a: Math.random() * 6, va: (Math.random() - 0.5) * 0.3, l: 4 + Math.random() * 4, c: colori[Math.floor(Math.random() * colori.length)],
+  }));
+  const inizio = performance.now();
+  const passo = (t: number) => {
+    const dt = t - inizio;
+    g.clearRect(0, 0, r.width, r.height);
+    g.globalAlpha = Math.max(0, 1 - dt / 2200);
+    for (const p of pezzi) {
+      p.vy += 0.16; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+      g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.fillStyle = p.c; g.fillRect(-p.l / 2, -p.l / 4, p.l, p.l / 2); g.restore();
+    }
+    if (dt < 2200) requestAnimationFrame(passo); else g.clearRect(0, 0, r.width, r.height);
+  };
+  requestAnimationFrame(passo);
+}
+
+// Articolo davanti a una percentuale: l'1%, l'8%, l'11%, l'80%… (si legge con una vocale), il 90%, il 100%.
+const articolo = (n: number) => (n === 1 || n === 11 || n === 18 || /^8/.test(String(n)) ? 'l’' : 'il ');
+
 // ---------- pagina ----------
 export function avviaCompatibilita() {
   const box = document.getElementById('compat');
@@ -74,6 +102,8 @@ export function avviaCompatibilita() {
   if (!box || !form) return;
   const prezzi: Record<string, number> = JSON.parse(box.dataset.prezzi || '{}');
   const MAX_PAGINE = Number(box.dataset.maxPagine) || 4;
+  const SOGLIA = Number(box.dataset.soglia) || 80;
+  let idCompito = ''; // compito archiviato dalla lettura delle foto: il confronto aggiorna lo stesso
   const stato = document.getElementById('compat-stato')!;
   const esitoBox = document.getElementById('compat-esito')!;
   const invia = document.getElementById('compat-invia') as HTMLButtonElement;
@@ -120,7 +150,8 @@ export function avviaCompatibilita() {
 
   const confronta = async (materia: string, testo: string) => {
     stato.textContent = 'Confronto con il materiale…';
-    const esito: Esito = await chiama('/api/compatibilita/confronta', { materia, testo });
+    const esito: Esito & { id?: string } = await chiama('/api/compatibilita/confronta', { materia, testo, id: idCompito || undefined });
+    if (esito.id) idCompito = esito.id;
     stato.textContent = '';
     mostra(esito, testo);
     esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -133,6 +164,7 @@ export function avviaCompatibilita() {
     occupato(true);
     try {
       let testo = area.value.trim();
+      idCompito = '';
       if (!testo) {
         if (!files.length) throw new Error('Carica il compito o incolla il testo.');
         stato.textContent = 'Lettura del compito…';
@@ -142,7 +174,8 @@ export function avviaCompatibilita() {
           if (f.type === 'application/pdf') pagine.push(...(await daPdf(f, MAX_PAGINE - pagine.length)));
           else pagine.push(await daFoto(f));
         }
-        testo = (await chiama('/api/compatibilita/leggi', { materia, pagine })).testo;
+        const letto = await chiama('/api/compatibilita/leggi', { materia, pagine });
+        testo = letto.testo; idCompito = letto.id || '';
       }
       await confronta(materia, testo);
     } catch (err) {
@@ -159,8 +192,14 @@ export function avviaCompatibilita() {
     const successo = e.collegato && e.successo?.percentuale != null
       ? `<p class="compat-righe-sintesi">Successo nelle domande a tempo sugli stessi argomenti: <b>${e.successo.percentuale}%</b></p>`
       : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del compito.</p>` : '';
-    const acquisto = !possiede(e.materia) && prezzi[e.materia]
-      ? `<p class="compat-acquisto"><a href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></p>` : '';
+    const daComprare = !possiede(e.materia) && prezzi[e.materia];
+    const consigliato = daComprare && e.compatibilita >= SOGLIA;
+    const acquisto = consigliato
+      ? `<div class="compat-consigliato"><canvas aria-hidden="true"></canvas>
+          <p class="cc-etichetta"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Acquisto consigliato</p>
+          <p class="cc-titolo">Il materiale di ${esc(e.titolo)} copre ${articolo(e.compatibilita)}${e.compatibilita}% del tuo compito.</p>
+          <a class="bottone-primario" href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></div>`
+      : daComprare ? `<p class="compat-acquisto"><a href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></p>` : '';
     const voci = e.richieste.map((r) => {
       const link: string[] = [];
       if (r.scheda) link.push(`<a href="${esc(r.scheda.link)}">${conFormule(r.scheda.titolo)}</a>${r.scheda.libera && !possiede(e.materia) ? ' (gratuita)' : ''}`);
@@ -189,6 +228,8 @@ export function avviaCompatibilita() {
         <button type="button" class="bottone-secondario" id="compat-ricalcola">Ricalcola</button>
       </details>`;
     esitoBox.hidden = false;
+    const tela = esitoBox.querySelector<HTMLCanvasElement>('.compat-consigliato canvas');
+    if (tela) coriandoli(tela);
     const letto = document.getElementById('compat-letto') as HTMLTextAreaElement;
     letto.value = testo;
     document.getElementById('compat-ricalcola')!.addEventListener('click', async (ev) => {

@@ -21,6 +21,8 @@ export const LIMITI = {
   leggiOspite: 3, leggiAccount: 8, leggiSito: 300,
   confrontaOspite: 4, confrontaAccount: 12, confrontaSito: 400,
 };
+// Da questa compatibilità in su, a chi non ha la materia il risultato mostra «Acquisto consigliato» (richiesta di Carmine del 04/11).
+export const SOGLIA_CONSIGLIATO = 80;
 export const MAX_PAGINE = 4;             // foto o pagine di PDF per esame
 export const MAX_CARATTERI_TESTO = 8000; // testo dell'esame da confrontare
 // Il successo (domande a tempo indovinate negli argomenti dell'esame) compare da questo numero di risposte in su.

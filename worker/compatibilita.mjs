@@ -17,7 +17,9 @@ const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b
 const MAX_IMMAGINE = 1500000;  // caratteri del data URL di una pagina (circa 1 MB)
 const MAX_RICHIESTE = 40;
 const SCHEDE_LIBERE = 3;       // come in index.mjs: le prime tre schede svolte di ogni argomento sono gratuite
-const ARCHIVIO_MAX = 3000;     // confronti anonimi conservati per /admin/esami
+const ARCHIVIO_MAX = 3000;     // confronti anonimi conservati per /admin/esami (tabella vecchia, solo lettura)
+const PAGINE_MAX = 1500;       // compiti di cui si conservano anche le immagini; dei più vecchi resta il testo
+const PARTE = 1024 * 1024;     // le immagini si salvano a pezzi da 1 MB (limite di un valore SQLite: 2 MB)
 
 // ---------- archivio ----------
 export function creaTabelleCompatibilita(sql) {
@@ -25,6 +27,11 @@ export function creaTabelleCompatibilita(sql) {
     CREATE TABLE IF NOT EXISTS comp_conta (giorno TEXT, chi TEXT, tipo TEXT, n INTEGER, PRIMARY KEY (giorno, chi, tipo));
     CREATE TABLE IF NOT EXISTS esami_controllati (id INTEGER PRIMARY KEY AUTOINCREMENT, quando INTEGER, materia TEXT, universita TEXT,
       compatibilita INTEGER, richieste INTEGER, esito TEXT);
+    -- archivio dei compiti inviati (richiesta di Carmine del 04/11): testo letto, testo confrontato, esito e pagine (foto o PDF già in immagini)
+    CREATE TABLE IF NOT EXISTS compiti (id TEXT PRIMARY KEY, quando INTEGER, aggiornato INTEGER, materia TEXT, universita TEXT, letto TEXT,
+      testo TEXT, compatibilita INTEGER, richieste INTEGER, esito TEXT, pagine INTEGER DEFAULT 0);
+    CREATE INDEX IF NOT EXISTS compiti_quando ON compiti (quando);
+    CREATE TABLE IF NOT EXISTS compiti_pagine (compito TEXT, n INTEGER, parte INTEGER, tipo TEXT, dati BLOB, PRIMARY KEY (compito, n, parte));
   `);
 }
 
@@ -56,10 +63,57 @@ export function archivioCompatibilita(o, pathname, c) {
       const righe = o.righe('SELECT argomento, COUNT(*) AS n, SUM(corretta) AS c FROM risposte WHERE email = ? AND materia = ? GROUP BY argomento', c.email, c.materia);
       return { argomenti: Object.fromEntries(righe.map((r) => [r.argomento, { n: r.n, c: r.c || 0 }])) };
     }
+    case '/comp-compito-nuovo': {
+      // Compito letto da foto o PDF: testo trascritto e immagini delle pagine.
+      const ora = Date.now();
+      o.sql.exec('INSERT OR IGNORE INTO compiti (id, quando, aggiornato, materia, letto, pagine) VALUES (?, ?, ?, ?, ?, ?)', c.id, ora, ora, c.materia, c.letto, c.pagine.length);
+      c.pagine.forEach((d, n) => {
+        const [testa, b64] = d.split(',');
+        const tipo = /^data:(image\/[a-z]+);base64$/.exec(testa)?.[1] || 'image/jpeg';
+        const byte = Uint8Array.from(atob(b64), (x) => x.charCodeAt(0));
+        for (let i = 0, k = 0; i < byte.length; i += PARTE, k++) {
+          o.sql.exec('INSERT OR REPLACE INTO compiti_pagine (compito, n, parte, tipo, dati) VALUES (?, ?, ?, ?, ?)', c.id, n, k, tipo, byte.slice(i, i + PARTE));
+        }
+      });
+      // Si tengono le immagini degli ultimi PAGINE_MAX compiti.
+      const soglia = o.riga('SELECT quando FROM compiti WHERE pagine > 0 ORDER BY quando DESC LIMIT 1 OFFSET ?', PAGINE_MAX);
+      if (soglia) {
+        o.sql.exec('DELETE FROM compiti_pagine WHERE compito IN (SELECT id FROM compiti WHERE pagine > 0 AND quando <= ?)', soglia.quando);
+        o.sql.exec('UPDATE compiti SET pagine = 0 WHERE pagine > 0 AND quando <= ?', soglia.quando);
+      }
+      return { ok: true };
+    }
+    case '/comp-compito-esito': {
+      const ora = Date.now();
+      const r = o.riga('SELECT materia FROM compiti WHERE id = ?', c.id);
+      if (r && r.materia === c.materia) {
+        o.sql.exec('UPDATE compiti SET aggiornato = ?, universita = COALESCE(NULLIF(?, \'\'), universita), testo = ?, compatibilita = ?, richieste = ?, esito = ? WHERE id = ?',
+          ora, c.universita || '', c.testo, c.compatibilita, c.richieste, c.esito, c.id);
+      } else {
+        o.sql.exec('INSERT OR REPLACE INTO compiti (id, quando, aggiornato, materia, universita, testo, compatibilita, richieste, esito, pagine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)',
+          c.id, ora, ora, c.materia, c.universita || null, c.testo, c.compatibilita, c.richieste, c.esito);
+      }
+      return { ok: true };
+    }
     case '/comp-elenco':
-      return { esami: o.righe('SELECT id, quando, materia, universita, compatibilita, richieste, esito FROM esami_controllati ORDER BY id DESC LIMIT 400') };
+      return {
+        compiti: o.righe('SELECT id, quando, materia, universita, letto, testo, compatibilita, richieste, esito, pagine FROM compiti ORDER BY quando DESC LIMIT 500'),
+        esami: o.righe('SELECT id, quando, materia, universita, compatibilita, richieste, esito FROM esami_controllati ORDER BY id DESC LIMIT 200'),
+      };
   }
   return null;
+}
+
+// Immagine di una pagina di un compito, per /admin/esami (rotta binaria del Durable Object).
+export function paginaCompito(o, req) {
+  const u = new URL(req.url);
+  const parti = o.righe('SELECT tipo, dati FROM compiti_pagine WHERE compito = ? AND n = ? ORDER BY parte', u.searchParams.get('id') || '', Number(u.searchParams.get('n')) || 0);
+  if (!parti.length) return new Response('non trovato', { status: 404 });
+  const tot = parti.reduce((t, x) => t + x.dati.byteLength, 0);
+  const tutto = new Uint8Array(tot);
+  let i = 0;
+  for (const x of parti) { tutto.set(new Uint8Array(x.dati), i); i += x.dati.byteLength; }
+  return new Response(tutto, { headers: { 'content-type': parti[0].tipo || 'image/jpeg' } });
 }
 
 // ---------- catalogo della materia ----------
@@ -273,12 +327,18 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
 
   if (p.startsWith('/dati-compatibilita/')) return new Response('non trovato', { status: 404 });
 
-  if (p === '/admin/esami') {
+  if (p === '/admin/esami' || p.startsWith('/admin/esami/pagina/')) {
     const ma = h.leggiCookie(req, 'admin');
     const sess = ma ? await h.leggiToken(env, ma) : null;
     if (!sess?.admin) return Response.redirect(`${new URL(req.url).origin}/admin`, 302);
-    const { esami } = await aDO(env, '/comp-elenco', {});
-    return paginaAdminEsami(esami);
+    const m = p.match(/^\/admin\/esami\/pagina\/([0-9a-f-]{36})\/(\d)$/);
+    if (m) {
+      const r = await h.archivio(env).fetch(`https://archivio/comp-pagina?id=${m[1]}&n=${m[2]}`);
+      return new Response(r.body, { status: r.status, headers: { 'content-type': r.headers.get('content-type') || 'image/jpeg', 'cache-control': 'private, no-store', 'x-robots-tag': 'noindex' } });
+    }
+    if (p !== '/admin/esami') return new Response('non trovato', { status: 404 });
+    const { compiti, esami } = await aDO(env, '/comp-elenco', {});
+    return paginaAdminEsami(compiti, esami);
   }
 
   if (!POST || (p !== '/api/compatibilita/leggi' && p !== '/api/compatibilita/confronta')) return null;
@@ -318,7 +378,10 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('leggi');
         return json({ errore: 'Nelle immagini non ho trovato esercizi di matematica o di fisica. Controlla che la foto mostri il testo dell’esame.' }, 422);
       }
-      return json({ testo: utili.join('\n\n').slice(0, MAX_CARATTERI_TESTO) }, 200, { 'cache-control': 'no-store' });
+      const letto = utili.join('\n\n').slice(0, MAX_CARATTERI_TESTO);
+      const id = crypto.randomUUID();
+      ctx.waitUntil(aDO(env, '/comp-compito-nuovo', { id, materia, letto, pagine }).catch((e) => console.log('compatibilita archivio', String(e?.message || e).slice(0, 200))));
+      return json({ testo: letto, id }, 200, { 'cache-control': 'no-store' });
     } catch (e) {
       await rimborsa('leggi');
       const quota = /4006|allocation|neurons|limit/i.test(String(e?.message || ''));
@@ -357,46 +420,56 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
     return json({ errore: 'Nel testo non ho riconosciuto esercizi. Controlla il testo e riprova.' }, 422);
   }
   const universita = typeof b.universita === 'string' ? b.universita.replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80) : '';
-  ctx.waitUntil(aDO(env, '/comp-salva', {
-    materia, universita, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
+  const id = typeof b.id === 'string' && /^[0-9a-f-]{36}$/.test(b.id) ? b.id : crypto.randomUUID();
+  ctx.waitUntil(aDO(env, '/comp-compito-esito', {
+    id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
     esito: JSON.stringify(esito.richieste.map((r) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null }))),
   }).catch(() => {}));
-  return json({ materia, titolo: m.titolo, ...esito, collegato: Boolean(io), rimasti: c.rimasti }, 200, { 'cache-control': 'no-store' });
+  return json({ materia, titolo: m.titolo, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti }, 200, { 'cache-control': 'no-store' });
 }
 
 // ---------- pagina /admin/esami ----------
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (x) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[x]));
 const ETICHETTE = { stesso: 'Coperto', argomento: 'In parte', nessuno: 'Non coperto' };
-function paginaAdminEsami(esami) {
+function paginaAdminEsami(compiti, vecchi) {
+  const leggi = (x) => { try { return JSON.parse(x || '[]'); } catch { return []; } };
+  const data = (t) => new Date(t).toLocaleString('it-IT', { timeZone: 'Europe/Rome', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  // I confronti fatti prima dell'archivio dei compiti (tabella vecchia, solo sintesi) si mostrano in fondo a ogni materia.
+  const tutti = [...compiti, ...vecchi.map((e) => ({ ...e, vecchio: true }))];
   const perMateria = MATERIE_COMPATIBILITA.map((slug) => {
     const titolo = MATERIE.find((m) => m.slug === slug)?.titolo || slug;
-    const del = esami.filter((e) => e.materia === slug);
+    const del = tutti.filter((e) => e.materia === slug);
     if (!del.length) return '';
-    const media = Math.round(del.reduce((t, e) => t + e.compatibilita, 0) / del.length);
+    const valutati = del.filter((e) => e.compatibilita != null);
+    const media = valutati.length ? Math.round(valutati.reduce((t, e) => t + e.compatibilita, 0) / valutati.length) : null;
     // Richieste non coperte o coperte in parte: sono le schede che mancano al sito.
-    const scoperte = del.flatMap((e) => { try { return JSON.parse(e.esito); } catch { return []; } }).filter((r) => r.l !== 'stesso');
-    const righe = del.slice(0, 60).map((e) => {
-      let rr = [];
-      try { rr = JSON.parse(e.esito); } catch { /* vuoto */ }
-      return `<tr><td class="piccolo">${esc(new Date(e.quando).toLocaleDateString('it-IT', { timeZone: 'Europe/Rome' }))}</td><td>${esc(e.universita || '')}</td>
-<td><strong>${e.compatibilita}%</strong></td><td><details><summary>${e.richieste} richieste</summary><ol>${rr.map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> ${esc(r.e)}${r.p ? esc(r.p) : ''}. ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)}${r.s ? `, scheda ${r.s}` : ''})</span>` : ''}</li>`).join('')}</ol></details></td></tr>`;
+    const scoperte = del.flatMap((e) => leggi(e.esito)).filter((r) => r.l !== 'stesso');
+    const righe = del.slice(0, 120).map((e) => {
+      const rr = leggi(e.esito);
+      const pagine = Array.from({ length: e.pagine || 0 }, (_, n) => `<a href="/admin/esami/pagina/${esc(e.id)}/${n}" target="_blank">pagina ${n + 1}</a>`).join(' · ');
+      const testo = e.testo || e.letto;
+      return `<tr><td class="piccolo">${esc(data(e.quando))}</td><td>${esc(e.universita || '')}</td>
+<td>${e.compatibilita != null ? `<strong>${e.compatibilita}%</strong>` : '<span class="piccolo">non confrontato</span>'}</td>
+<td>${rr.length ? `<details><summary>${rr.length} richieste</summary><ol>${rr.map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> ${esc(r.e)}${r.p ? esc(r.p) : ''}. ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)}${r.s ? `, scheda ${r.s}` : ''})</span>` : ''}</li>`).join('')}</ol></details>` : ''}
+${testo ? `<details><summary>Testo del compito</summary><pre>${esc(testo)}</pre></details>` : ''}${pagine ? `<p class="piccolo">${pagine}</p>` : ''}</td></tr>`;
     }).join('');
-    return `<section><h2>${esc(titolo)} <span class="conta">${del.length} ${del.length === 1 ? 'esame' : 'esami'} · media ${media}%</span></h2>
-${scoperte.length ? `<details class="piccolo" open><summary>Richieste senza una scheda dello stesso tipo (${scoperte.length})</summary><ul>${scoperte.slice(0, 80).map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l]}</span> ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)})</span>` : ''}</li>`).join('')}</ul></details>` : ''}
-<div class="tab"><table><thead><tr><th>Giorno</th><th>Università</th><th>Compatibilità</th><th>Richieste</th></tr></thead><tbody>${righe}</tbody></table></div></section>`;
+    return `<section><h2>${esc(titolo)} <span class="conta">${del.length} ${del.length === 1 ? 'compito' : 'compiti'}${media != null ? ` · media ${media}%` : ''}</span></h2>
+${scoperte.length ? `<details class="piccolo"><summary>Richieste senza una scheda dello stesso tipo (${scoperte.length})</summary><ul>${scoperte.slice(0, 120).map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l]}</span> ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)})</span>` : ''}</li>`).join('')}</ul></details>` : ''}
+<div class="tab"><table><thead><tr><th>Inviato il</th><th>Università</th><th>Compatibilità</th><th>Compito</th></tr></thead><tbody>${righe}</tbody></table></div></section>`;
   }).join('');
   return new Response(`<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>Esami controllati</title><style>
+<meta name="robots" content="noindex"><title>Compiti inviati</title><style>
 body{font-family:'Source Sans 3',system-ui,sans-serif;background:#faf8f2;color:#22302f;margin:0;padding:24px 16px;line-height:1.45}
 main{max-width:1150px;margin:0 auto}h1,h2{font-family:Georgia,serif;font-weight:600}h1{margin:0 0 4px}h2{margin:32px 0 10px;font-size:1.3rem}a{color:#2f6f68}
 .conta{font-family:'Source Sans 3',system-ui,sans-serif;font-size:.85rem;font-weight:600;color:#2f6f68;background:#e3efe9;border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:middle}
 table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #ddd6c8;font-size:15px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee8dc;vertical-align:top}
-th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#5a6664}.piccolo{font-size:13px;color:#5a6664}.tab{overflow-x:auto}details{margin:8px 0}
+th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#5a6664}.piccolo{font-size:13px;color:#5a6664}.tab{overflow-x:auto}details{margin:4px 0}
+pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;background:#faf8f2;border:1px solid #eee8dc;padding:8px;border-radius:6px;max-height:320px;overflow:auto}
 ol,ul{margin:6px 0;padding-left:20px}li{margin:3px 0}.et{font-size:12px;font-weight:600;border-radius:999px;padding:1px 8px;white-space:nowrap}
 .et.stesso{background:#e3efe9;color:#2f6f68}.et.argomento{background:#f6ecd9;color:#8a5f1f}.et.nessuno{background:#eee8dc;color:#5a6664}</style></head><body><main>
 <p class="piccolo"><a href="/admin">← Dashboard</a></p>
-<h1>Esami controllati</h1>
-<p class="piccolo">Confronti fatti dagli studenti nella pagina <a href="/compatibilita" target="_blank">Compatibilità con il tuo esame</a>, in forma anonima (nessun dato della persona). Le richieste «In parte» e «Non coperto» indicano le schede svolte che mancano al sito.</p>
-${perMateria || '<p class="piccolo">Nessun esame controllato per ora.</p>'}
+<h1>Compiti inviati</h1>
+<p class="piccolo">Tutti i compiti caricati nella pagina <a href="/compatibilita" target="_blank">Compatibilità con il tuo esame</a>, senza nome né email di chi li ha inviati: testo, esito del confronto e pagine (si conservano le immagini degli ultimi ${PAGINE_MAX} compiti). Le richieste «In parte» e «Non coperto» indicano le schede svolte che mancano al sito.</p>
+${perMateria || '<p class="piccolo">Nessun compito per ora.</p>'}
 </main></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
 }

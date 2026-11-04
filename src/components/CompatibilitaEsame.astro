@@ -3,10 +3,10 @@
 // materiale della materia e risultato richiesta per richiesta. Pagina /compatibilita; dalla pagina Sblocca delle
 // materie universitarie si arriva con ?materia=<slug>. Worker: worker/compatibilita.mjs.
 import { materia as datiMateria } from '../data/materie';
-import { MATERIE_COMPATIBILITA, MAX_PAGINE } from '../data/compatibilita';
+import { MATERIE_COMPATIBILITA, MAX_PAGINE, SOGLIA_CONSIGLIATO } from '../data/compatibilita';
 const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
 ---
-<div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
+<div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-soglia={SOGLIA_CONSIGLIATO} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
   <form class="compat-modulo" id="compat-modulo" novalidate>
     <div class="compat-pillole" role="radiogroup" aria-label="Materia dell’esame">
       {elenco.map((m) => (<label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>))}
@@ -24,7 +24,7 @@ const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
       <button type="submit" class="bottone-primario" id="compat-invia">Controlla la compatibilità</button>
       <span class="esito-modulo compat-stato" id="compat-stato" role="status"></span>
     </div>
-    <p class="compat-nota">Gratuito, anche senza account. Il testo degli esercizi si conserva in forma anonima per migliorare il materiale (<a href="/privacy">informativa</a>).</p>
+    <p class="compat-nota">Gratuito, anche senza account. Il compito si conserva senza dati personali per migliorare il materiale: copri nome e matricola prima della foto (<a href="/privacy">informativa</a>).</p>
   </form>
   <section class="compat-esito" id="compat-esito" hidden aria-live="polite"></section>
 </div>
@@ -67,6 +67,15 @@ const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
   .compat-righe-sintesi + .compat-righe-sintesi { margin-top: 0.25rem; }
   .compat-righe-sintesi b { color: var(--inchiostro); }
   .compat-acquisto { margin: 0.6rem 0 0; font-size: 0.92rem; }
+  .compat-consigliato { position: relative; overflow: hidden; margin: 0.9rem 0 0.1rem; padding: 1rem 1rem 1.05rem; border-radius: var(--raggio); text-align: center;
+    background: linear-gradient(180deg, #eaf4ef 0%, #f6faf7 100%); border: 1px solid #cfe2db; animation: cc-entra 0.5s ease-out; }
+  .compat-consigliato canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .cc-etichetta { position: relative; display: inline-flex; align-items: center; gap: 0.35rem; margin: 0 0 0.35rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--azione); }
+  .cc-etichetta svg { width: 1rem; height: 1rem; }
+  .cc-titolo { position: relative; margin: 0 0 0.8rem; font-family: var(--titoli); font-size: 1.2rem; line-height: 1.3; color: var(--inchiostro); }
+  .compat-consigliato .bottone-primario { position: relative; background: var(--azione); }
+  @keyframes cc-entra { from { transform: scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .compat-consigliato { animation: none; } }
   .compat-acquisto a { color: var(--azione); font-weight: 600; }
 
   .compat-richieste { list-style: none; margin: 0; padding: 0; }
