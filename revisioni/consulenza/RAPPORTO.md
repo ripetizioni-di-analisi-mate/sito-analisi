@@ -37,6 +37,8 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 
 **Realizzate il 03/11/2026.** Area 2.6 B: riga con la foto di Carmine sopra il riquadro del prezzo nella pagina Sblocca (e20ece4). Aree 2.1 e 2.7: immagine di anteprima generale dei link con tutte le materie, `og.png` e `og-en.png` (961b7bf). Area 2.4: punto al posto della lineetta nei titoli di `/prezzi` (2ba3ab8). Realizzate da Carmine o da altre sessioni dal 02/11 e collegate al rapporto: 2.8 Google B (dati strutturati per i contenuti a pagamento, 7ed0fe1), 2.8 passaparola B («Invita un amico», 82c68b4), 2.7 immagini di anteprima per materia (34b8545), 2.4 domande frequenti in `/prezzi` (e61b667), 2.10 C in parte (rimando al videocorso nella pagina della materia, 07c8e4b). Superata: 2.5 «Pagina Accedi che ricorda il contesto» per l'acquisto (l'iscrizione ora è dentro Sblocca).
 
+**Realizzate il 04/11/2026.** Area 2.6 B: riga con la foto di Carmine anche in `/prenota` e `/corsi-di-gruppo`, sotto il sommario (e6a6055). Novità di Carmine o di altre sessioni dal 03/11 collegate al rapporto: leghe e duelli (2.10, fidelizzazione), formulari e domande a tempo in inglese, glossario e guida «Math exams in Italy» (2.8 Google), indice dei teoremi (2.8), PDF degli argomenti tolti (domanda 13: la promessa del PDF non c'è più in nessuna pagina di vendita, controllato). Superato: il ritocco del «·» davanti a «Se ti serve anche il videocorso →» (la riga è stata rifatta il 03/11 senza separatore). Ferma: mossa 8 (email di benvenuto), perché Resend ora è attivo ma l'informativa elenca solo le email di recupero e i promemoria e va aggiornata da un professionista prima di mandare email nuove.
+
 **Aree realizzate il 01/11/2026.** 2.7 A: tasti di acquisto tutti nel verde del sito (6aea71f), quiz A-E senza pallino doppio (6aea71f), sopratitolo per tipo di materia (b4f2b91). 2.11 A: Pi conosce le materie utili per corso di studi (684918e); lo sblocco per gli ex studenti, i numeri dell'anteprima e i numeri di Carmine erano già stati aggiunti (fd546fb, 1dae697). Restano della 2.7: formule nel testo che vanno a capo a metà, `og.png` con tutte le materie.
 
 ---
@@ -60,6 +62,18 @@ In ordine di priorità. Impegno: piccolo (meno di un giorno di lavoro), medio (a
 - **C. Due aperture diverse.** La A per chi arriva da Instagram (riconosciuto dal Worker, che già distingue la provenienza) e la B per gli altri. Pro: ognuno vede la cosa più convincente per lui. Contro: due versioni da mantenere. Impegno medio. Rischio basso.
 
 In ogni caso: un'unica serie di numeri su di te, uguale in home, "Chi sono", Pi e pagine dei videocorsi; `og.png`, `llms.txt` e titolo della home aggiornati con tutte le materie.
+
+**Approfondimento del 04/11/2026: il messaggio dopo le novità di questi giorni.**
+Osservato oggi:
+- i numeri su Carmine sono ora uguali ovunque (home, Chi sono, Sblocca, Pi, `llms.txt`, `/ripetizioni-analisi`, e da oggi `/prenota` e `/corsi-di-gruppo`). Questo punto è chiuso;
+- la home italiana dice che cosa si trova («Teoria ed esercizi svolti per le materie scientifiche») e chi lo scrive (presentazione con foto). L'immagine dei link (`og.png`) dice la stessa cosa;
+- la **home inglese** è rimasta alla versione di prima: sopratitolo «Theory and exercises», titolo «Choose a subject» (`src/i18n.ts`, riga 188). Dal 01/11 chi ha il browser in un'altra lingua arriva lì in automatico, e il titolo per Google (`Calculus, Linear Algebra and Physics: theory and solved problems`) e l'immagine `og-en.png` («Theory and worked examples for science subjects») dicono già un'altra cosa;
+- il sito ora offre anche lezioni individuali, corsi di gruppo, formulari, domande a tempo, leghe e duelli. In home gli ospiti vedono le lezioni con Carmine solo nel tasto «Lezioni» della testata; le cose gratuite sono nella riga «Gratis». La frase principale resta giusta: il sito è prima di tutto materiale scritto, e tutto il resto passa da Carmine.
+
+Proposte, con il testo esatto (bozza al telefono: `codice/2-1-home-en-prima-dopo.jpg`):
+- **A. Home inglese allineata.** In `src/i18n.ts`, riga 188: `homeSopra: 'Calculus · Linear Algebra · Physics'`, `homeTitolo: 'Theory and worked examples for science subjects'`. Il sommario resta. Pro: chi arriva dall'estero legge subito di che cosa parla il sito, con le stesse parole di Google e dell'anteprima del link. Contro: nessuno; la home italiana non cambia. Impegno piccolo. Rischio nullo.
+- **B. Come A, più la riga sulle lezioni per gli ospiti (solo italiano).** Sotto la presentazione di Carmine, una riga piccola: «Con Carmine anche lezioni individuali online e corsi di gruppo →» che porta a `/ripetizioni-analisi`. File `src/viste/Home.astro`, dentro il blocco `solo-ospiti`. Pro: chi arriva da Instagram vede che può anche fare lezione con te. Contro: una riga in più in apertura, e il tasto «Lezioni» in testata c'è già. Impegno piccolo. Rischio basso.
+- **C. Lasciare la home inglese com'è.** Il titolo per Google e l'anteprima dei link sono già aggiornati; resta la differenza fra ciò che si cerca e ciò che si legge aprendo la pagina.
 
 ### 2.2 Home e prima impressione al telefono; navigazione fra macro aree
 
