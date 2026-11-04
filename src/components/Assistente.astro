@@ -193,6 +193,8 @@ const s = en ? {
     function formattato(src: string) {
       const formule: string[] = [];
       const metti = (tex: string, display: boolean) => {
+        // Nelle pagine italiane i decimali scritti con il punto (9.81) diventano con la virgola (9{,}81), come nel resto del sito.
+        if (pannello!.dataset.lingua !== 'en') tex = tex.replace(/(\d)\.(?=\d)/g, '$1{,}');
         let html = esc(tex);
         try { if (katex) html = katex.renderToString(tex, { displayMode: display, throwOnError: false, strict: false }); } catch { /* resta il testo */ }
         formule.push(html);
@@ -208,17 +210,22 @@ const s = en ? {
         .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
         .replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
         .replace(/`([^`]+)`/g, '<code>$1</code>');
-      const blocchi = s.split(/\n{2,}/);
-      const html = blocchi.map((b) => {
-        const righe = b.split('\n').filter((r) => r.trim());
-        if (!righe.length) return '';
-        if (righe.every((r) => /^\s*[-*•]\s+/.test(r))) return `<ul>${righe.map((r) => `<li>${inline(r.replace(/^\s*[-*•]\s+/, ''))}</li>`).join('')}</ul>`;
-        if (righe.every((r) => /^\s*\d+[.)]\s+/.test(r))) return `<ol>${righe.map((r) => `<li>${inline(r.replace(/^\s*\d+[.)]\s+/, ''))}</li>`).join('')}</ol>`;
-        return righe.map((r) => {
-          const t = r.replace(/^#{1,6}\s+/, '');
-          if (/^\u0000\d+\u0000$/.test(t.trim())) return t.trim();
-          return `<p>${inline(t)}</p>`;
-        }).join('');
+      // Elenchi anche quando seguono una frase senza riga vuota («I passaggi sono:\n1. …\n2. …»):
+      // le righe consecutive dello stesso tipo formano un elenco; un elenco numerato interrotto da una formula riprende dal suo numero.
+      const PUNTO = /^\s*[-*•]\s+/;
+      const NUMERO = /^\s*(\d+)[.)]\s+/;
+      const html = s.split('\n').filter((r) => r.trim()).reduce((acc: { tipo: string; righe: string[]; da?: string }[], r) => {
+        const tipo = PUNTO.test(r) ? 'ul' : NUMERO.test(r) ? 'ol' : 'p';
+        const ultimo = acc[acc.length - 1];
+        if (tipo !== 'p' && ultimo?.tipo === tipo) ultimo.righe.push(r);
+        else acc.push({ tipo, righe: [r], da: tipo === 'ol' ? r.match(NUMERO)![1] : undefined });
+        return acc;
+      }, []).map((g) => {
+        if (g.tipo === 'ul') return `<ul>${g.righe.map((r) => `<li>${inline(r.replace(PUNTO, ''))}</li>`).join('')}</ul>`;
+        if (g.tipo === 'ol') return `<ol${g.da && g.da !== '1' ? ` start="${g.da}"` : ''}>${g.righe.map((r) => `<li>${inline(r.replace(NUMERO, ''))}</li>`).join('')}</ol>`;
+        const t = g.righe[0].replace(/^#{1,6}\s+/, '');
+        if (/^\u0000\d+\u0000$/.test(t.trim())) return t.trim();
+        return `<p>${inline(t)}</p>`;
       }).join('');
       // Gli asterischi rimasti (grassetti spezzati, elenchi irregolari) non si mostrano.
       return html.replace(/\*+/g, '')

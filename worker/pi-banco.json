@@ -1,7 +1,7 @@
 {
   "nota": "Banco di prova di Pi. Ogni mattina il Worker (cron in wrangler.jsonc) pone a Pi i casi 'fissi' più una rotazione degli altri, e salva le risposte; il ciclo di miglioramento (revisioni/pi/CICLO-PI.md) le legge su /pi/prove e le valuta con il campo 'atteso'. I casi si possono aggiungere o correggere; l'id non si riusa.",
   "perGiorno": 6,
-  "fissi": ["lim-taylor-seno", "quota-costante"],
+  "fissi": ["formato-pendolo", "quota-costante"],
   "casi": [
     { "id": "lim-coseno", "area": "correttezza", "materia": "analisi-1", "argomento": "limiti", "tipo": "esercizi-svolti", "titoloPagina": "Limiti notevoli",
       "domanda": "Come si calcola il limite per x che tende a 0 di (1 - cos x)/x^2?",
@@ -92,6 +92,9 @@
       "atteso": "Fratti semplici: 1/(x^2-1) = (1/2)/(x-1) - (1/2)/(x+1); risultato (1/2) ln|x-1| - (1/2) ln|x+1| + c = (1/2) ln|(x-1)/(x+1)| + c, con i valori assoluti e frazioni con \\dfrac." },
     { "id": "quota-costante", "area": "quota", "materia": "analisi-1", "argomento": "integrali", "tipo": "teoria", "titoloPagina": "Integrali indefiniti",
       "domanda": "Non capisco perché nella primitiva si aggiunge sempre la costante c. Se la derivata è compresa, a cosa serve?",
-      "atteso": "La derivata di una costante è zero, quindi se F è una primitiva anche F + c lo è; su un intervallo tutte le primitive differiscono per una costante (conseguenza del teorema di Lagrange: derivata nulla su un intervallo implica funzione costante). Esempio: x^2 e x^2 + 5 hanno entrambe derivata 2x. Nessun prezzo né informazione sul sito; token in entrata sotto 1500 (le informazioni sul sito non devono essere incluse)." }
+      "atteso": "La derivata di una costante è zero, quindi se F è una primitiva anche F + c lo è; su un intervallo tutte le primitive differiscono per una costante (conseguenza del teorema di Lagrange: derivata nulla su un intervallo implica funzione costante). Esempio: x^2 e x^2 + 5 hanno entrambe derivata 2x. Nessun prezzo né informazione sul sito; token in entrata sotto 1500 (le informazioni sul sito non devono essere incluse)." },
+    { "id": "formato-pendolo", "area": "formato", "materia": "fisica-1", "argomento": "oscillazioni", "tipo": "teoria", "titoloPagina": "Pendolo semplice",
+      "domanda": "Un pendolo semplice è lungo 0,5 m. Mi scrivi i passaggi per trovare il periodo delle piccole oscillazioni? Usa g = 9,81 m/s^2.",
+      "atteso": "T = 2π √(L/g) = 2π √(0,5/9,81) ≈ 1,42 s. Formato: formule tra $…$, frazione con \\dfrac sotto la radice, virgola decimale ({,}) e non il punto, unità di misura; se usa un elenco numerato, i numeri sono in ordine; niente asterischi isolati, titoli o tabelle." }
   ]
 }
