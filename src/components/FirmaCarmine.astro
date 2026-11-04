@@ -1,0 +1,9 @@
+---
+// Firma piccola di Carmine con il collegamento a «Chi sono» (apertura della home per gli ospiti).
+interface Props { href: string }
+const { href } = Astro.props;
+---
+<a class="io-firma" href={href}>
+  <img src="/chi-sono/carmine-320.webp" width="64" height="64" alt="" />
+  <span>Ing. Carmine Tornincasa</span><span class="io-chi">Chi sono</span>
+</a>

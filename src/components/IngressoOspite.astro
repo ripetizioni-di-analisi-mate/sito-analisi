@@ -1,0 +1,102 @@
+---
+// Apertura della home per chi non ha fatto l'accesso (richiesta di Carmine del 04/11/2026):
+// meno spazio alla presentazione, invito a creare l'account gratuito, «Chi sono» come collegamento.
+// Tre versioni da scegliere: A (riquadro d'invito), B (firma sotto il titolo e riga d'invito), C (tre passi per cominciare).
+import { link, type Lingua } from '../i18n';
+import FirmaCarmine from './FirmaCarmine.astro';
+interface Props { lingua: Lingua; variante?: 'a' | 'b' | 'c'; sommario: string }
+const { lingua, variante = 'a', sommario } = Astro.props;
+const iscriviti = link(lingua, '/accedi') + '?nuovo=1&dopo=/';
+const accedi = link(lingua, '/accedi') + '?dopo=/';
+const chiSono = link(lingua, '/chi-sono');
+const ico = {
+  exp: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 7.8l5-.7z"/></svg>',
+  tempo: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="11" r="6.5"/><path d="M10 7.5V11l2.4 1.6M8 2.5h4"/></svg>',
+  sfida: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8v4a4 4 0 0 1-8 0zM6 5H3.5a2.5 2.5 0 0 0 2.6 3M14 5h2.5a2.5 2.5 0 0 1-2.6 3M10 11v3M7 17h6M8 14h4v3H8z"/></svg>',
+  freccia: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>',
+};
+---
+{variante === 'a' && (
+  <div class="io io-a">
+    <p class="sommario">{sommario}</p>
+    <section class="io-invito" aria-label="Account gratuito">
+      <p class="io-titolo">Con un account gratuito lo studio resta salvato</p>
+      <ul class="io-vantaggi">
+        <li><Fragment set:html={ico.exp} />Punti EXP e livelli</li>
+        <li><Fragment set:html={ico.tempo} />Domande a tempo e ripasso del giorno</li>
+        <li><Fragment set:html={ico.sfida} />Lega settimanale e duelli</li>
+      </ul>
+      <p class="io-azioni"><a class="bottone-primario" href={iscriviti}>Iscriviti gratis</a><a class="io-accedi" href={accedi}>Ho già un account</a></p>
+    </section>
+    <FirmaCarmine href={chiSono} />
+  </div>
+)}
+{variante === 'b' && (
+  <div class="io io-b">
+    <FirmaCarmine href={chiSono} />
+    <p class="sommario">{sommario}</p>
+    <section class="io-riga" aria-label="Account gratuito">
+      <p>Con un account gratuito salvi i progressi, guadagni punti EXP e sfidi gli altri studenti nella lega settimanale.</p>
+      <span class="io-azioni"><a class="bottone-primario" href={iscriviti}>Iscriviti gratis</a><a class="io-accedi" href={accedi}>Accedi</a></span>
+    </section>
+  </div>
+)}
+{variante === 'c' && (
+  <div class="io io-c">
+    <p class="sommario">{sommario}</p>
+    <ol class="io-passi">
+      <li><a href="#materie-home"><b>1</b><span><strong>Scegli la materia</strong><small>L'inizio della teoria e le prime schede svolte si leggono senza account.</small></span></a></li>
+      <li><a href={link(lingua, '/domande-a-tempo')}><b>2</b><span><strong>Mettiti alla prova</strong><small>Domande a tempo su ogni argomento, con la spiegazione della risposta.</small></span></a></li>
+      <li class="io-passo-account"><a href={iscriviti}><b>3</b><span><strong>Iscriviti gratis</strong><small>Punti EXP, livelli, ripasso del giorno, lega e duelli restano nel tuo account.</small></span></a></li>
+    </ol>
+    <p class="io-piede">Hai già un account? <a href={accedi}>Accedi</a> <FirmaCarmine href={chiSono} /></p>
+  </div>
+)}
+
+<style is:global>
+  .io { font-family: var(--ui); }
+  .io .sommario { font-family: var(--testo); }
+  .io-firma { display: inline-flex; align-items: center; gap: 0.55rem; text-decoration: none; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .io-firma img { width: 2rem; height: 2rem; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--carta), 0 0 0 3px var(--riga); }
+  .io-firma span:first-of-type { color: var(--inchiostro); font-weight: 600; }
+  .io-chi { color: var(--accento); }
+  .io-chi::before { content: '·'; margin-right: 0.5rem; color: var(--riga); }
+  .io-firma:hover .io-chi { text-decoration: underline; }
+  .io-accedi { color: var(--inchiostro-2); font-size: 0.95rem; }
+  .io-accedi:hover { color: var(--accento); }
+  .io-azioni { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.2rem; margin: 0; }
+  .io-azioni .bottone-primario { padding: 0.55rem 1.4rem; background: var(--azione); }
+
+  /* A: riquadro d'invito */
+  .io-invito { margin: 1.2rem 0 0.9rem; padding: 1rem 1.2rem 1.1rem; border: 1px solid color-mix(in srgb, var(--accento) 28%, transparent); border-radius: 10px; background: color-mix(in srgb, var(--accento) 5%, var(--carta)); }
+  .io-titolo { margin: 0 0 0.6rem; font-family: var(--titoli); font-size: 1.15rem; font-weight: 700; color: var(--inchiostro); }
+  .io-vantaggi { list-style: none; margin: 0 0 0.9rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .io-vantaggi li { display: flex; align-items: center; gap: 0.4rem; }
+  .io-vantaggi svg { width: 1.1rem; height: 1.1rem; color: var(--accento); flex: none; }
+
+  /* B: firma sotto il titolo e riga d'invito */
+  .io-b .io-firma { margin: 0.1rem 0 0; }
+  .io-riga { display: flex; align-items: center; gap: 1rem 1.5rem; margin: 1rem 0 0.6rem; padding: 0.75rem 1rem; border-left: 3px solid var(--accento); border-radius: 0 var(--raggio) var(--raggio) 0; background: color-mix(in srgb, var(--accento) 6%, var(--carta)); }
+  .io-riga p { margin: 0; flex: 1; color: var(--inchiostro); font-size: 0.97rem; line-height: 1.45; }
+  .io-riga .io-azioni { flex: none; }
+
+  /* C: tre passi */
+  .io-passi { list-style: none; margin: 1.1rem 0 0.7rem; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+  .io-passi a { display: flex; gap: 0.7rem; height: 100%; box-sizing: border-box; padding: 0.8rem 0.9rem; border: 1px solid var(--riga); border-radius: 10px; background: color-mix(in srgb, var(--carta) 60%, white); text-decoration: none; color: var(--inchiostro); }
+  .io-passi a:hover { border-color: var(--accento); }
+  .io-passi b { flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; display: grid; place-items: center; font-size: 0.9rem; color: var(--accento); border: 1.5px solid var(--accento); }
+  .io-passi strong { display: block; font-size: 1rem; margin-bottom: 0.15rem; }
+  .io-passi small { display: block; color: var(--inchiostro-2); font-size: 0.86rem; line-height: 1.4; }
+  .io-passo-account a { border-color: color-mix(in srgb, var(--accento) 45%, transparent); background: color-mix(in srgb, var(--accento) 7%, var(--carta)); }
+  .io-passo-account b { background: var(--accento); color: white; }
+  .io-passo-account strong { color: var(--accento); }
+  .io-piede { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.4rem; margin: 0; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .io-piede > a { color: var(--accento); }
+  .io-piede .io-firma { margin-left: auto; }
+
+  @media (max-width: 40rem) {
+    .io-riga { flex-direction: column; align-items: flex-start; }
+    .io-passi { grid-template-columns: 1fr; }
+    .io-piede .io-firma { margin-left: 0; flex-basis: 100%; }
+  }
+</style>
