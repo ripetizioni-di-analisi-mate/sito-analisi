@@ -2,8 +2,6 @@
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 import LezioniCarmine from './LezioniCarmine.astro';
-// Prove per Carmine (04/11): dove mettere l'accesso a «Compatibilità con il tuo esame» (PROVA_COMPAT = A, B alla build).
-const PROVA_COMPAT = (typeof process !== 'undefined' && process.env?.PROVA_COMPAT) || '';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
@@ -28,7 +26,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>
   {lingua === 'it' && <LezioniCarmine dove="indice" />}
-  {lingua === 'it' && PROVA_COMPAT.includes('B') && (
+  {/* «Compatibilità con il tuo esame» (versione B scelta da Carmine il 04/11) */}
+  {lingua === 'it' && (
     <div class="lezioni-indice">
       <p class="indice-materia"><span>Il tuo esame</span></p>
       <ol class="indice-materie">

@@ -1,6 +1,5 @@
 ---
 import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
-const PROVA_COMPAT = (typeof process !== 'undefined' && process.env?.PROVA_COMPAT) || '';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
@@ -65,7 +64,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
         <div class="azioni-anteprima">
           <a class="bottone-sblocca" href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}>{t.iniziaAnteprima} →</a>
           <a class="link-sblocca" href={link(lingua, `/${m.slug}/sblocca`)}>{t.sbloccaTutto} · {m.prezzo} €</a>
-          {PROVA_COMPAT.includes('A') && lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) && <a class="link-sblocca" href={`/compatibilita?materia=${materia}`}>Il materiale copre il tuo esame? Controllalo</a>}
+          {/* «Compatibilità con il tuo esame» (versione A scelta da Carmine il 04/11) */}
+          {lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) && <a class="link-sblocca" href={`/compatibilita?materia=${materia}`}>Il materiale copre il tuo esame? Controllalo</a>}
         </div>
       </div>
     </div>
