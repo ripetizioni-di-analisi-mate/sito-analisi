@@ -60,14 +60,9 @@ const invito = lingua === 'en' ? {
       {lingua === 'it' && <CampoCorso />}
       <p class="esito-modulo" id="esito-acquisto" role="status"></p>
       <button class="bottone-primario" type="submit" id="invia-acquisto">{js.creaEPaga}</button>
-      {compat && <p class="nota-compat"><a href={compat}>Vuoi controllare la compatibilità prima dell’acquisto?</a></p>}
+      {compat && <a class="tasto-compat" href={compat}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/></svg><span>Controlla la compatibilità con il tuo esame</span></a>}
       <p class="nota-accesso">{js.haiAccount} <a id="link-accedi" href={`${pref}/accedi`}>{js.accedi}</a></p>
-      <p class="nota-privacy">{lingua === 'it'
-        ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
-        : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
     </form>
-    <p class="metodi-pagamento">{t.metodiPagamento}</p>
-    <p class="nota-termini" set:html={t.notaTermini} />
   </div>
 
   <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle, invito, compat }}>
@@ -145,7 +140,7 @@ const invito = lingua === 'en' ? {
           return false;
         }
         azione.innerHTML = `${premessa}<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
-          ${compat ? `<p class="nota-compat"><a href="${compat}">Vuoi controllare la compatibilità prima dell’acquisto?</a></p>` : ''}
+          ${compat ? `<a class="tasto-compat" href="${compat}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/></svg><span>Controlla la compatibilità con il tuo esame</span></a>` : ''}
           <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
         document.getElementById('compra').addEventListener('click', paga);
         caricaPaddle().catch(() => {});
@@ -212,6 +207,11 @@ const invito = lingua === 'en' ? {
 </Base>
 
 <style is:global>
-  .nota-compat { font-family: var(--ui); font-size: 0.9rem; margin: 0.6rem 0 0; text-align: center; }
+  .tasto-compat { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; box-sizing: border-box; margin: 0.6rem 0 0;
+    font-family: var(--ui); font-weight: 600; font-size: 0.95rem; color: var(--azione); background: white; border: 1px solid var(--azione);
+    border-radius: 999px; padding: 0.6rem 1.2rem; text-decoration: none; transition: background 0.15s; }
+  .tasto-compat:hover { background: #eef5f3; }
+  .tasto-compat svg { width: 1.15rem; height: 1.15rem; flex: none; }
+  #azione .tasto-compat { max-width: 22rem; margin: 0.6rem auto 0; }
 </style>
 
