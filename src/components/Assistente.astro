@@ -479,7 +479,10 @@ const s = en ? {
       b.type = 'button';
       b.className = 'chiedi-pi';
       b.innerHTML = `<span aria-hidden="true">π</span>${testoTasto}`;
-      b.addEventListener('click', () => {
+      b.addEventListener('click', (e) => {
+        // Dentro la riga «Mostra soluzione» il tasto non deve aprire la soluzione.
+        e.preventDefault();
+        e.stopPropagation();
         nascondiFumetto();
         const f = prendi();
         forzata = f;
@@ -496,12 +499,21 @@ const s = en ? {
       const singola = !tracce.length ? studio : null;
       const domanda = inglese ? 'Give me a hint to start this exercise.' : 'Dammi un indizio per iniziare questo esercizio.';
       const testoTasto = inglese ? 'Ask Pi for a hint' : 'Chiedi un indizio a Pi';
+      // Il tasto sta a destra nella riga «Mostra soluzione» (versione C scelta da Carmine il 04/11); senza soluzione, sotto l'esercizio.
+      const metti = (corpo: HTMLElement, b: HTMLButtonElement, altrimenti: () => void) => {
+        const sommario = corpo.querySelector<HTMLElement>(':scope > details.blocco-soluzione > summary');
+        if (sommario) sommario.append(b); else altrimenti();
+      };
       for (const t of tracce) {
         const corpo = t.querySelector<HTMLElement>('.testo-studio');
         if (!corpo) continue;
-        t.append(tastoPi(testoTasto, () => ({ el: corpo, titolo: t.querySelector('h2')?.textContent?.replace(/\s+/g, ' ').trim() || '', nodi: nodiTraccia(corpo) }), domanda));
+        const b = tastoPi(testoTasto, () => ({ el: corpo, titolo: t.querySelector('h2')?.textContent?.replace(/\s+/g, ' ').trim() || '', nodi: nodiTraccia(corpo) }), domanda);
+        metti(corpo, b, () => t.append(b));
       }
-      if (singola) singola.after(tastoPi(testoTasto, () => ({ el: singola, titolo: document.querySelector('main h1')?.textContent?.trim() || '', nodi: nodiTraccia(singola) }), domanda));
+      if (singola) {
+        const b = tastoPi(testoTasto, () => ({ el: singola, titolo: document.querySelector('main h1')?.textContent?.trim() || '', nodi: nodiTraccia(singola) }), domanda);
+        metti(singola, b, () => singola.after(b));
+      }
     } else if (sez === 'esercizi-svolti' && studio) {
       const titoli = [...studio.children].filter((x) => x.tagName === 'H2' && /^esercizio-/.test(x.id)) as HTMLElement[];
       for (const h of titoli) {

@@ -1101,6 +1101,11 @@ ul.risposte-quiz { list-style: none; padding-left: 0.2rem; }
 .chiedi-pi { display: inline-flex; align-items: center; gap: 0.45rem; margin: 0.4rem 0 0.9rem; padding: 0.3rem 0.75rem 0.3rem 0.35rem; font: 600 0.86rem/1.2 var(--ui); color: var(--accento); background: color-mix(in srgb, var(--accento) 6%, #fff); border: 1px solid color-mix(in srgb, var(--accento) 30%, transparent); border-radius: 999px; cursor: pointer; }
 .chiedi-pi:hover { background: color-mix(in srgb, var(--accento) 11%, #fff); }
 .chiedi-pi span { display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: var(--accento); color: #fff; font: 700 0.9rem/1 var(--testo); }
+/* Esercizi da fare: «Chiedi un indizio a Pi» a destra nella riga «Mostra soluzione», solo testo (versione C, 04/11) */
+details.blocco-soluzione > summary .chiedi-pi { margin: 0 0 0 auto; padding: 0; font: 600 0.84rem/1.2 var(--ui); color: var(--accento); background: none; border: 0; opacity: 0.85; flex-shrink: 0; text-transform: none; letter-spacing: 0; }
+details.blocco-soluzione > summary .chiedi-pi:hover { opacity: 1; background: none; }
+details.blocco-soluzione > summary .chiedi-pi span { width: auto; height: auto; background: none; color: var(--accento); font: 700 0.95rem/1 var(--testo); }
+@media (max-width: 30rem) { details.blocco-soluzione > summary .chiedi-pi { font-size: 0.78rem; } }
 @media print { .chiedi-pi { display: none; } }
 
 /* «Segnala un errore» in fondo alle pagine di studio */
