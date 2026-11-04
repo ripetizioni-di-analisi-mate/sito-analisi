@@ -4,7 +4,7 @@
 // Tre versioni da scegliere: A (riquadro d'invito), B (firma sotto il titolo e riga d'invito), C (tre passi per cominciare).
 import { link, type Lingua } from '../i18n';
 import FirmaCarmine from './FirmaCarmine.astro';
-interface Props { lingua: Lingua; variante?: 'a' | 'b' | 'c'; sommario: string }
+interface Props { lingua: Lingua; variante?: 'a' | 'b' | 'c' | '1' | '2' | '3'; sommario: string }
 const { lingua, variante = 'a', sommario } = Astro.props;
 const iscriviti = link(lingua, '/accedi') + '?nuovo=1&dopo=/';
 const accedi = link(lingua, '/accedi') + '?dopo=/';
@@ -53,6 +53,35 @@ const ico = {
   </div>
 )}
 
+{variante === '1' && (
+  <div class="io io-1">
+    <FirmaCarmine href={chiSono} />
+    <section class="io-riga io-riga-piccola" aria-label="Account gratuito">
+      <p>Con un account gratuito salvi i progressi, guadagni punti EXP e sfidi gli altri studenti.</p>
+      <span class="io-azioni"><a class="bottone-primario" href={iscriviti}>Iscriviti gratis</a><a class="io-accedi" href={accedi}>Accedi</a></span>
+    </section>
+  </div>
+)}
+{variante === '2' && (
+  <div class="io io-2">
+    <p class="io-linea"><a class="io-iscriviti" href={iscriviti}>Iscriviti gratis</a><span>per salvare progressi, punti EXP e ripasso del giorno</span><span class="io-sep">·</span><a class="io-accedi" href={accedi}>Accedi</a><FirmaCarmine href={chiSono} /></p>
+  </div>
+)}
+{variante === '3' && (
+  <div class="io io-3">
+    <p class="io-breve">Teoria, esercizi svolti, esercizi con soluzione e domande a tempo.</p>
+    <FirmaCarmine href={chiSono} />
+    <section class="io-invito io-invito-piccolo" aria-label="Account gratuito">
+      <ul class="io-vantaggi">
+        <li><Fragment set:html={ico.exp} />Punti EXP e livelli</li>
+        <li><Fragment set:html={ico.tempo} />Ripasso del giorno</li>
+        <li><Fragment set:html={ico.sfida} />Lega e duelli</li>
+      </ul>
+      <p class="io-azioni"><a class="bottone-primario" href={iscriviti}>Iscriviti gratis</a><a class="io-accedi" href={accedi}>Accedi</a></p>
+    </section>
+  </div>
+)}
+
 <style is:global>
   .io { font-family: var(--ui); }
   .io .sommario { font-family: var(--testo); }
@@ -93,6 +122,29 @@ const ico = {
   .io-piede { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.4rem; margin: 0; color: var(--inchiostro-2); font-size: 0.95rem; }
   .io-piede > a { color: var(--accento); }
   .io-piede .io-firma { margin-left: auto; }
+
+  /* Titolo della home più piccolo (versioni 1, 2, 3) */
+  .titolo-home-1 { font-size: 1.5rem; }
+  .titolo-home-2 { font-size: 1.35rem; }
+  .titolo-home-3 { font-size: 1.5rem; }
+  .io-1 .io-firma, .io-3 .io-firma { margin-top: 0.45rem; font-size: 0.9rem; }
+  .io-riga-piccola { margin-top: 0.9rem; padding: 0.55rem 0.9rem; }
+  .io-riga-piccola p { font-size: 0.9rem; color: var(--inchiostro-2); }
+  .io-riga-piccola .bottone-primario, .io-invito-piccolo .bottone-primario { padding: 0.4rem 1.1rem; font-size: 0.9rem; }
+  .io-linea { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.45rem; margin: 0.1rem 0 0.3rem; font-size: 0.9rem; color: var(--inchiostro-2); }
+  .io-iscriviti { font-weight: 600; color: var(--accento); }
+  .io-sep { color: var(--riga); }
+  .io-linea .io-firma { margin-left: auto; font-size: 0.88rem; }
+  .io-linea .io-firma img { width: 1.6rem; height: 1.6rem; }
+  .io-breve { margin: 0.3rem 0 0; color: var(--inchiostro-2); font-size: 0.95rem; }
+  .io-invito-piccolo { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem 1.2rem; margin-top: 0.9rem; padding: 0.6rem 0.9rem; }
+  .io-invito-piccolo .io-vantaggi { margin: 0; flex: 1; font-size: 0.9rem; gap: 0.3rem 1.1rem; }
+  @media (max-width: 40rem) {
+    .io-linea { display: block; line-height: 1.6; }
+    .io-linea > * { margin-right: 0.3rem; }
+    .io-linea .io-firma { display: flex; margin: 0.5rem 0 0; }
+    .io-invito-piccolo .io-vantaggi { flex-basis: 100%; }
+  }
 
   @media (max-width: 40rem) {
     .io-riga { flex-direction: column; align-items: flex-start; }
