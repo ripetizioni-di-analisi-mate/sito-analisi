@@ -212,6 +212,60 @@
       "proposte": [
         "Per leggere il banco ogni mattina serve che il permesso di lettura di ripetizionidianalisi.com/pi/prove sia dato in modo permanente («consenti sempre»): stamattina la richiesta è scaduta senza risposta"
       ]
+    },
+    {
+      "giorno": "2026-11-04",
+      "punteggio": null,
+      "aree": {},
+      "casi": 0,
+      "errori": 0,
+      "areaDelGiorno": "formato",
+      "problemi": [
+        "Il banco di oggi non si è potuto leggere: la richiesta di permesso per /pi/prove è scaduta senza risposta, come ieri",
+        "Nella finestra un elenco scritto subito dopo una frase, senza riga vuota, appariva come righe di testo con «1.» o «-» davanti e gli asterischi degli elenchi sparivano lasciando le righe senza punto",
+        "Un elenco numerato interrotto da una formula in evidenza ripartiva da 1",
+        "I decimali scritti dal modello con il punto (9.81) restavano con il punto, diversamente dal resto del sito"
+      ],
+      "interventi": [
+        {
+          "titolo": "Elenchi sempre riconosciuti",
+          "area": "formato",
+          "cosa": "nella finestra le righe consecutive che iniziano con un punto o un numero diventano un elenco anche se seguono una frase; dopo una formula la numerazione riprende dal numero giusto",
+          "perStudente": "passaggi numerati e puntati ordinati, invece di righe con trattini o asterischi spariti",
+          "verifica": "schermata della finestra con una risposta finta (fatta oggi: corretta)",
+          "commit": "e216b83",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Virgola decimale nelle formule",
+          "area": "formato",
+          "cosa": "nelle pagine italiane, dentro le formule, 9.81 diventa 9,81",
+          "perStudente": "numeri scritti come nel resto del sito e come a lezione",
+          "verifica": "schermata della finestra; caso formato-pendolo",
+          "commit": "e216b83",
+          "esito": "in attesa"
+        },
+        {
+          "titolo": "Caso formato-pendolo",
+          "area": "banco",
+          "cosa": "domanda fissa nuova sul periodo del pendolo (0,5 m, risultato circa 1,42 s) per misurare elenchi, \\dfrac, virgola decimale e unità; lim-taylor-seno torna nella rotazione",
+          "perStudente": "si controlla ogni giorno la forma delle risposte con numeri decimali",
+          "verifica": "banco di domani",
+          "commit": "e216b83",
+          "esito": "in attesa"
+        }
+      ],
+      "esitiIeri": [
+        {
+          "titolo": "Informazioni sul sito solo quando servono, token per domanda nel banco, caso quota-costante",
+          "esito": "in attesa",
+          "dettaglio": "banco non leggibile da qui: esito rimandato; prova locale corretta (circa 1.140 token in entrata per le domande di studio)"
+        }
+      ],
+      "annullati": [],
+      "proposte": [
+        "Per leggere il banco ogni mattina serve il permesso permanente per ripetizionidianalisi.com: basta scrivere in questa chat il link https://ripetizionidianalisi.com/pi/prove e scegliere «consenti sempre» quando viene chiesto"
+      ]
     }
   ]
 }
