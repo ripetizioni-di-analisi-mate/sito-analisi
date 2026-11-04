@@ -484,7 +484,7 @@ async function apriSessione(env, email, versione, dispositivo) {
 }
 
 // ---------- dispositivi: al massimo MAX_DISPOSITIVI per account ----------
-const MAX_DISPOSITIVI = 2;
+const MAX_DISPOSITIVI = 3;
 // Il cookie "dispositivo" resta anche dopo l'uscita: rientrando dallo stesso browser si riusa lo stesso posto.
 const cookieDispositivo = (id) => `dispositivo=${id}; Path=/; Max-Age=34560000; HttpOnly; Secure; SameSite=Lax`;
 function idDispositivo(req) {
@@ -499,7 +499,7 @@ function nomeDispositivo(req) {
 }
 const MSG = {
   limite: {
-    it: (l) => `Questo account è già in uso su ${MAX_DISPOSITIVI} dispositivi (${l}). Esci da uno dei due, oppure scrivimi dalla pagina Contatti per scollegarli.`,
+    it: (l) => `Questo account è già in uso su ${MAX_DISPOSITIVI} dispositivi (${l}). Esci da uno di questi, oppure scrivimi dalla pagina Contatti per scollegarli.`,
     en: (l) => `This account is already in use on ${MAX_DISPOSITIVI} devices (${l}). Log out on one of them, or message me from the Contact page to disconnect them.`,
   },
 };

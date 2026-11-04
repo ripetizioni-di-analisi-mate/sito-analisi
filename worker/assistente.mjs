@@ -16,7 +16,7 @@ const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/
 const MAX_STUDENTE = 20;   // messaggi al giorno per studente con account
 const MAX_OSPITE = 5;      // messaggi al giorno senza account
 const SCHEDE_LIBERE = 3;   // come in index.mjs
-const MAX_DISPOSITIVI = 2; // come in index.mjs
+const MAX_DISPOSITIVI = 3; // come in index.mjs
 const MAX_GIORNO = 2000;   // messaggi al giorno per tutto il sito
 // Tetti di token al giorno (entrata + uscita), oltre al numero di messaggi.
 // Una domanda costa circa 3000-5000 token in entrata (istruzioni, pagina, conversazione) e 600 in uscita.

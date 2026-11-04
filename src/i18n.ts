@@ -117,7 +117,7 @@ export const TESTI = {
     // sblocca
     sbloccaTitolo: (m: string) => `Sblocca ${m}`,
     sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, schede di esercizi svolti e soluzioni.`,
-    sbloccaSommario: 'Un acquisto unico, senza abbonamento: la materia resta sbloccata nel tuo account, su un massimo di 2 dispositivi, senza scadenza.',
+    sbloccaSommario: 'Un acquisto unico, senza abbonamento: la materia resta sbloccata nel tuo account, su un massimo di 3 dispositivi, senza scadenza.',
     includeTeoria: (n: number) => `La <strong>teoria completa</strong> di tutti ${/^(8|11|18|80|8\d|800)$/.test(String(n)) ? 'gli' : 'i'} ${n} argomenti, con definizioni, teoremi e dimostrazioni`,
     includeSvolti: (n: number) => `Tutte le <strong>${n} schede di esercizi svolti</strong> per tipologia, con ogni passaggio spiegato`,
     includeSoluzioni: (n: number) => `Le <strong>soluzioni</strong> dei ${n} esercizi da fare`,
@@ -156,7 +156,7 @@ export const TESTI = {
     salvaPassword: 'Salva e accedi', chiediNuovoLink: 'Chiedi un nuovo link',
     accountDescrizione: 'Le tue materie e i dati del tuo account.', caricamento: 'Caricamento…', leTueMaterie: 'Le tue materie',
     mostraPassword: 'Mostra la password', impostazioni: 'Impostazioni account',
-    tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare al massimo su 2 dispositivi. Uscendo dall'account su un dispositivo, il posto si libera.",
+    tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare al massimo su 3 dispositivi. Uscendo dall'account su un dispositivo, il posto si libera.",
     cambiaPassword: 'Cambia password', passwordAttuale: 'Password attuale', nuovaPassword: 'Nuova password', aggiornaPassword: 'Aggiorna la password', esci: "Esci dall'account",
     // cerca
     ricerca: 'Ricerca', cercaSommario: 'Materie e corsi, argomenti, definizioni, teoremi, esercizi e videocorsi. La ricerca avviene nel browser, senza inviare nulla.',
@@ -167,7 +167,7 @@ export const TESTI = {
     contattiTesto: 'Per informazioni sul materiale didattico, assistenza sugli acquisti o segnalazioni di eventuali errori, puoi contattare:',
     // prezzi
     prezziDescrizione: "Prezzi dell'accesso completo alle materie di Ripetizioni di Analisi.",
-    prezziSommario: "Un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. L'accesso resta tuo, su un massimo di 2 dispositivi.",
+    prezziSommario: "Un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. L'accesso resta tuo, su un massimo di 3 dispositivi.",
     acquistoUnico: 'acquisto unico', cosaComprende: "Che cosa comprende l'accesso completo",
     comprende: [
       'La teoria completa di ogni argomento della materia, con definizioni, teoremi e dimostrazioni',
@@ -210,7 +210,7 @@ export const TESTI = {
     teoriaUsata: 'Theory used', vaiA: 'Go to', indiceArgomenti: 'List of topics',
     sbloccaTitolo: (m: string) => `Unlock ${m}`,
     sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, worked examples and solutions.`,
-    sbloccaSommario: 'A one-time purchase, no subscription: the subject stays unlocked in your account, on up to 2 devices, with no expiry.',
+    sbloccaSommario: 'A one-time purchase, no subscription: the subject stays unlocked in your account, on up to 3 devices, with no expiry.',
     includeTeoria: (n: number) => `The <strong>complete theory</strong> of all ${n} topics, with definitions, theorems and proofs`,
     includeSvolti: (n: number) => `All <strong>${n} sheets of worked examples</strong> by type, with every step explained`,
     includeSoluzioni: (n: number) => `The <strong>solutions</strong> of the ${n} exercises`,
@@ -247,7 +247,7 @@ export const TESTI = {
     salvaPassword: 'Save and log in', chiediNuovoLink: 'Request a new link',
     accountDescrizione: 'Your subjects and account details.', caricamento: 'Loading…', leTueMaterie: 'Your subjects',
     mostraPassword: 'Show password', impostazioni: 'Account settings',
-    tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 2 devices. Logging out on a device frees its place.',
+    tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 3 devices. Logging out on a device frees its place.',
     cambiaPassword: 'Change password', passwordAttuale: 'Current password', nuovaPassword: 'New password', aggiornaPassword: 'Update password', esci: 'Log out',
     ricerca: 'Search', cercaSommario: 'Subjects and courses, topics, definitions, theorems and exercises. The search runs in your browser and sends nothing.',
     cercaEsempio: 'For example: sign permanence, indeterminate form',
@@ -255,7 +255,7 @@ export const TESTI = {
     contattiDescrizione: 'Contacts for information about the material, help with purchases and error reports.',
     contattiTesto: 'For information about the study material, help with purchases or to report errors, you can contact:',
     prezziDescrizione: 'Prices of full access to the subjects of Ripetizioni di Analisi.',
-    prezziSommario: 'One purchase per subject, with no subscription and no renewals. Access stays yours, on up to 2 devices.',
+    prezziSommario: 'One purchase per subject, with no subscription and no renewals. Access stays yours, on up to 3 devices.',
     acquistoUnico: 'one-time purchase', cosaComprende: 'What full access includes',
     comprende: [
       'The complete theory of every topic of the subject, with definitions, theorems and proofs',
