@@ -10,6 +10,7 @@ const ICONE = {
   aggiorna: '<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/>',
   esci: '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l4-4-4-4M14 12H4"/>',
   lezioni: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M9 14h2M13 14h2M9 17h2"/>',
+  esami: '<path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/>',
   sito: '<path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/>',
 };
 const icona = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONE[n]}</svg>`;
@@ -269,7 +270,7 @@ td.destra,th.destra{text-align:right}
 <div class="app" id="app" hidden>
   <aside class="lato">
     <div class="marchio"><i>∫</i><span>Ripetizioni di Analisi<small>Dashboard</small></span></div>
-    <nav>${nav}<a href="/admin/lezioni">${icona('lezioni')}<span>Lezioni</span></a><a href="/admin/gruppi">${icona('studenti')}<span>Gruppi</span></a></nav>
+    <nav>${nav}<a href="/admin/lezioni">${icona('lezioni')}<span>Lezioni</span></a><a href="/admin/gruppi">${icona('studenti')}<span>Gruppi</span></a><a href="/admin/esami">${icona('esami')}<span>Esami</span></a></nav>
     <div class="fondo-lato">
       <button type="button" onclick="window.open('/','_blank')">${icona('sito')}<span>Apri il sito</span></button>
       <button type="button" id="esci">${icona('esci')}<span>Esci</span></button>

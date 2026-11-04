@@ -422,6 +422,7 @@ details.gruppo[open] > summary.nome-gruppo::before, details.indice-gruppo[open] 
 .conta-gruppo { font-weight: 400; letter-spacing: 0; color: var(--inchiostro-2); margin-left: auto; }
 details.indice-gruppo > summary.indice-materia { justify-content: flex-start; cursor: pointer; list-style: none; user-select: none; }
 details.indice-gruppo { margin-bottom: 0.5rem; }
+.indice-materia.indice-compat { justify-content: flex-start; padding-left: 0.95rem; margin-top: 0.25rem; }
 details.sottogruppo { margin: 0.9rem 0 0 0.2rem; }
 details.sottogruppo > summary.nome-sottogruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.95rem; font-weight: 600; color: var(--inchiostro); padding: 0.35rem 0; }
 details.sottogruppo > summary.nome-sottogruppo h3 { font: inherit; margin: 0; }

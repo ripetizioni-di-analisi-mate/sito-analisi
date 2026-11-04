@@ -1,0 +1,38 @@
+---
+// «Compatibilità con il tuo esame»: lo studente carica il testo del suo compito d'esame universitario e il sito lo
+// confronta con il materiale della materia (componente CompatibilitaEsame.astro, Worker worker/compatibilita.mjs).
+// Solo esami universitari: niente concorsi, test di ingresso e scuole superiori. Solo in italiano.
+import Base from '../layouts/Base.astro';
+import CompatibilitaEsame from '../components/CompatibilitaEsame.astro';
+import { materia as datiMateria } from '../data/materie';
+import { MATERIE_COMPATIBILITA, LIMITI } from '../data/compatibilita';
+const nomi = MATERIE_COMPATIBILITA.map((s) => datiMateria(s).titolo);
+const elenco = nomi.join(', ').replace(/, ([^,]*)$/, ' e $1');
+---
+<Base lingua="it" titolo="Compatibilità con il tuo esame" percorso={[{ titolo: 'Compatibilità con il tuo esame' }]}
+  descrizione={`Carica il testo del tuo compito d'esame di ${elenco}: il sito lo confronta con la teoria e gli esercizi svolti e calcola la percentuale di compatibilità, esercizio per esercizio.`}
+  seo={{ titolo: 'Compatibilità con il tuo esame universitario di Analisi, Algebra e Fisica | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true }}>
+  <div class="pagina-compat">
+    <p class="sopratitolo">Esami universitari</p>
+    <h1>Compatibilità con il tuo esame</h1>
+    <p class="sommario">Si carica il testo di un compito d’esame e il sito lo confronta con la teoria e gli esercizi svolti della materia. Il risultato è la percentuale di compatibilità, con ogni richiesta del compito collegata alla scheda svolta dello stesso tipo.</p>
+
+    <CompatibilitaEsame />
+
+    <h2>Come funziona</h2>
+    <ul class="punti-compat">
+      <li>Il testo si carica come foto, come PDF oppure scritto. Le pagine vengono lette in automatico e il compito viene diviso in richieste: un esercizio con i punti a, b e c dà tre richieste.</li>
+      <li>Una richiesta è <b>coperta</b> se tra gli esercizi svolti c’è una scheda con lo stesso procedimento, oppure, per una domanda di teoria, se la definizione o il teorema è nella teoria del sito. È coperta <b>in parte</b> se l’argomento è nel programma ma senza una scheda dello stesso tipo, <b>non coperta</b> se l’argomento non è trattato.</li>
+      <li>La compatibilità pesa ogni esercizio con il suo punteggio, se il testo lo indica. Con l’account compare anche il <b>successo</b>, cioè la quota di domande a tempo indovinate negli argomenti del compito.</li>
+      <li>Il controllo è gratuito e si può fare prima dell’acquisto. Senza account si controllano fino a {LIMITI.leggiOspite} compiti al giorno da foto o PDF, con l’account fino a {LIMITI.leggiAccount}.</li>
+      <li>Vale per gli esami universitari di {elenco}. Per i concorsi pubblici c’è la <a href="/concorsi/simulazione">simulazione della prova a quiz</a>.</li>
+    </ul>
+  </div>
+</Base>
+
+<style is:global>
+  .pagina-compat { max-width: 44rem; }
+  .pagina-compat > h2 { font-size: 1.2rem; margin: 2.4rem 0 0.5rem; }
+  .punti-compat { font-family: var(--ui); padding-left: 1.2rem; }
+  .punti-compat li { margin: 0.4rem 0; }
+</style>

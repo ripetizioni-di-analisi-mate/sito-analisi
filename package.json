@@ -23,6 +23,7 @@
     "astro": "^7.4.2",
     "hastscript": "^9.0.1",
     "katex": "^0.16.47",
+    "pdfjs-dist": "^6.5.438",
     "rehype-katex": "^7.0.1",
     "remark-directive": "^4.0.0",
     "remark-math": "^6.0.0",

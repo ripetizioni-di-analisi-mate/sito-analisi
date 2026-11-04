@@ -25,6 +25,7 @@ import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, av
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
+import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita } from './compatibilita.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -162,6 +163,8 @@ export class Archivio {
     creaTabelleInviti(this.sql);
     // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
     creaTabelleSfide(this.sql);
+    // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
+    creaTabelleCompatibilita(this.sql);
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -194,6 +197,7 @@ export class Archivio {
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/sfi-')) { const r = archivioSfide(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/comp-')) { const r = archivioCompatibilita(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
     switch (pathname) {
       case '/visita':
@@ -724,6 +728,12 @@ export default {
     // ===== sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs) =====
     if (p === '/api/lega' || p === '/api/lega/nome' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
       const r = await gestisciSfide(req, env, ctx, p, { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi });
+      if (r) return r;
+    }
+
+    // ===== compatibilità con il tuo esame: lettura del compito, confronto con il materiale (worker/compatibilita.mjs) =====
+    if (p.startsWith('/api/compatibilita/') || p === '/admin/esami' || p.startsWith('/dati-compatibilita/')) {
+      const r = await gestisciCompatibilita(req, env, ctx, p, { aDO, json, utenteCollegato, catalogoDomande, leggiCookie, leggiToken });
       if (r) return r;
     }
 

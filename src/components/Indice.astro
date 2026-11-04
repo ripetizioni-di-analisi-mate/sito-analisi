@@ -143,6 +143,9 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           </ol>
         </details>
       )}
+      {lingua === 'it' && (
+        <p class="indice-materia indice-compat"><a href="/compatibilita">Compatibilità con il tuo esame</a></p>
+      )}
     </>
   )}
   <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>
