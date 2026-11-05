@@ -2,7 +2,7 @@
 // Accessi alle lezioni con Carmine: lezione individuale (/prenota) e corso di gruppo (/corsi-di-gruppo).
 // Scelta di Carmine del 02/11/2026 (A + C):
 //  - dove = 'indice': in cima all'indice laterale, su ogni pagina, voci scritte per esteso;
-//  - dove = 'testata': tasto «Lezioni» con l'icona del calendario subito dopo il nome del sito (a sinistra),
+//  - dove = 'testata': tasto «Lezioni» subito dopo il nome del sito (a sinistra),
 //    che apre il menu con le due voci.
 // Solo in italiano.
 interface Props { dove: 'indice' | 'testata' }
@@ -34,7 +34,7 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
 )}
 {dove === 'testata' && (
   <details class="lezioni-testata">
-    <summary aria-label="Lezioni con Carmine"><span class="lezioni-icona" set:html={icone.individuale} /><span class="lt-testo">Lezioni</span></summary>
+    <summary aria-label="Lezioni con Carmine"><span class="lt-testo">Lezioni</span></summary>
     <div class="lt-menu">
       {voci.map((v) => (
         <a href={v.href} aria-current={qui.startsWith(v.href) ? 'page' : undefined}><span class="lezioni-icona" set:html={v.icona} /><span><strong>{v.titolo}</strong><small>{v.sotto}</small></span></a>
@@ -61,7 +61,7 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
   .lezioni-testata .lt-menu a:hover, .lezioni-testata .lt-menu a[aria-current='page'] { background: var(--carta-2); }
   .lezioni-testata .lt-menu strong { display: block; font-size: 0.95rem; }
   .lezioni-testata .lt-menu small { display: block; color: var(--inchiostro-2); font-size: 0.8rem; }
-  @media (max-width: 30rem) { .lezioni-testata .lt-testo { display: none; } .lezioni-testata > summary { padding: 0.4rem 0.5rem; } }
+  @media (max-width: 30rem) { .lezioni-testata > summary { padding: 0.4rem 0.5rem; } }
   @media print { .lezioni-testata { display: none !important; } }
 </style>
 
