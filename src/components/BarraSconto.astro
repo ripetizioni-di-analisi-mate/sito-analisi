@@ -1,7 +1,7 @@
 ---
 // Barra in basso «10% di sconto sulla tua prima materia» (richiesta di Carmine del 05/11/2026; regole in
 // src/data/benvenuto.ts, Worker in worker/benvenuto.mjs). Solo registrazione e sconto: nessuna newsletter.
-// Compare appena si entra, solo a chi non ha fatto l'accesso. Al computer i campi (nome, email, password) sono già
+// Compare dopo un po' di navigazione, una volta per sessione, solo a chi non ha fatto l'accesso. Al computer i campi sono già
 // nella barra; al telefono la barra è compatta e il tasto «Crea l'account» apre i campi.
 // L'account si crea con /api/registrati (`benvenuto: true`); lo sconto si applica da solo nella pagina Sblocca.
 // Prova: ?barra=1 mostra la barra anche se chiusa o con l'accesso fatto.
@@ -12,17 +12,17 @@ const { lingua } = Astro.props;
 const en = lingua === 'en';
 const p = SCONTO_BENVENUTO;
 const s = en ? {
-  titolo: `${p}% off your first subject`,
-  sotto: 'Create a free account: the discount is applied automatically to your first purchase.',
-  nome: 'Name', email: 'Email', password: 'Password (at least 8 characters)', crea: 'Create account', chiudi: 'Close',
+  titolo: 'Give your studies a head start.', benvenuto: 'A welcome gift for you', offerta: 'on your first subject',
+  sotto: 'Create your free account. Your discount is applied automatically to your first purchase.', apri: 'Unlock my discount',
+  nome: 'Name', email: 'Email', password: 'Password (at least 8 characters)', crea: 'Create free account', chiudi: 'Close',
   nota: 'Your data are used only to run your account.', privacy: 'Privacy policy', gia: 'Already have an account?', accedi: 'Log in',
   nomeNo: 'Enter your name.', emailNo: 'Enter a valid email.', passwordNo: 'The password must be at least 8 characters long.',
   esiste: 'An account with this email already exists.', rete: 'Network error: please try again.',
   fatto: 'Account created.', fattoSotto: `The ${p}% discount is applied automatically to your first purchase of a subject.`, scegli: 'Choose a subject',
 } : {
-  titolo: `${p}% di sconto sulla tua prima materia`,
-  sotto: 'Crea un account gratuito: lo sconto si applica da solo al primo acquisto.',
-  nome: 'Nome', email: 'Email', password: 'Password (almeno 8 caratteri)', crea: 'Crea l’account', chiudi: 'Chiudi',
+  titolo: 'Dai slancio al tuo studio.', benvenuto: 'Un benvenuto per te', offerta: 'sulla prima materia',
+  sotto: 'Crea l’account gratuito. Il tuo sconto si applica da solo al primo acquisto.', apri: 'Attiva il mio sconto',
+  nome: 'Nome', email: 'Email', password: 'Password (almeno 8 caratteri)', crea: 'Crea l’account gratuito', chiudi: 'Chiudi',
   nota: 'I tuoi dati servono solo a far funzionare l’account.', privacy: 'Informativa sulla privacy', gia: 'Hai già un account?', accedi: 'Accedi',
   nomeNo: 'Scrivi il tuo nome.', emailNo: 'Scrivi un’email valida.', passwordNo: 'La password deve avere almeno 8 caratteri.',
   esiste: 'Esiste già un account con questa email.', rete: 'Errore di rete: riprova.',
@@ -36,11 +36,17 @@ const accedi = link(lingua, '/accedi');
   </button>
   <div class="bs-dentro">
     <div class="bs-testo">
-      <p class="bs-titolo"><span class="bs-pillola">−{p}%</span>{s.titolo}</p>
-      <p class="bs-sotto">{s.sotto}</p>
-      <button type="button" class="bs-tasto bs-apri" data-bs-apri>{s.crea}</button>
+      <div class="bs-messaggio">
+        <div class="bs-offerta"><span class="bs-pillola">−{p}%</span><span class="bs-offerta-nota">{s.offerta}</span></div>
+        <div>
+          <p class="bs-benvenuto">{s.benvenuto}</p>
+          <p class="bs-titolo">{s.titolo}</p>
+          <p class="bs-sotto">{s.sotto}</p>
+        </div>
+      </div>
+      <button type="button" class="bs-tasto bs-apri" aria-expanded="false" aria-controls="bs-modulo" data-bs-apri>{s.apri}<span aria-hidden="true"> →</span></button>
     </div>
-    <form class="bs-modulo" novalidate>
+    <form id="bs-modulo" class="bs-modulo" novalidate>
       <div class="bs-campi">
         <label class="bs-nascosto" for="bs-nome">{s.nome}</label>
         <input id="bs-nome" name="nome" type="text" autocomplete="given-name" maxlength="60" placeholder={s.nome} />
@@ -69,17 +75,23 @@ const accedi = link(lingua, '/accedi');
     const prova = new URLSearchParams(location.search).has('barra');
     const leggi = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
     const scrivi = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage non disponibile */ } };
+    const leggiSessione = (k) => { try { return sessionStorage.getItem(k); } catch { return null; } };
+    const scriviSessione = (k, v) => { try { sessionStorage.setItem(k, v); } catch { /* storage non disponibile */ } };
+    const chiusaDiRecente = () => {
+      const chiusa = Number(leggi('barra-sconto-chiusa') || 0);
+      return chiusa && Date.now() - chiusa < giorni * 86400000;
+    };
     if (!prova) {
       if (rad.classList.contains('collegato')) return;
       if (new RegExp(escluse).test(location.pathname)) return;
-      const chiusa = Number(leggi('barra-sconto-chiusa') || 0);
-      if (chiusa && Date.now() - chiusa < giorni * 86400000) return;
+      if (chiusaDiRecente() || leggiSessione('barra-sconto-mostrata')) return;
     }
 
     // La barra sta sopra i tasti fissi (Pi, WhatsApp, torna su): la sua altezza li sposta in alto.
     const misura = () => rad.style.setProperty('--altezza-bs', `${Math.ceil(box.getBoundingClientRect().height)}px`);
     const ro = 'ResizeObserver' in window ? new ResizeObserver(misura) : null;
     const mostra = () => {
+      if (!prova) scriviSessione('barra-sconto-mostrata', '1');
       box.hidden = false;
       rad.classList.add('con-barra-sconto');
       misura(); ro?.observe(box);
@@ -91,11 +103,45 @@ const accedi = link(lingua, '/accedi');
       ro?.disconnect();
       setTimeout(() => { box.hidden = true; }, 350);
     };
-    setTimeout(mostra, prova ? 0 : ritardo * 1000);
+    // Il tempo conta solo con la pagina visibile e prosegue passando da una pagina all'altra.
+    // Nessun invito mentre si sta scrivendo in un altro campo o si ha un dialogo aperto.
+    const attesa = ritardo * 1000;
+    let trascorsi = Math.min(attesa, Math.max(0, Number(leggiSessione('barra-sconto-attesa-ms')) || 0));
+    let inizio = null;
+    let timer;
+    const conta = () => {
+      if (inizio !== null) trascorsi = Math.min(attesa, trascorsi + performance.now() - inizio);
+      inizio = null;
+      scriviSessione('barra-sconto-attesa-ms', String(trascorsi));
+    };
+    const sospendi = () => { clearTimeout(timer); conta(); };
+    const avvia = () => {
+      if (document.hidden || !box.hidden) return;
+      clearTimeout(timer);
+      if (inizio === null) inizio = performance.now();
+      timer = setTimeout(tenta, Math.max(0, attesa - trascorsi));
+    };
+    const tenta = () => {
+      conta();
+      if (document.hidden) return;
+      if (rad.classList.contains('collegato') || chiusaDiRecente() || leggiSessione('barra-sconto-mostrata')) return;
+      if (document.activeElement?.matches('input, textarea, select, [contenteditable="true"]') || document.querySelector('dialog[open]')) {
+        timer = setTimeout(tenta, 1000);
+        return;
+      }
+      mostra();
+    };
+    if (prova) setTimeout(mostra, 0);
+    else {
+      document.addEventListener('visibilitychange', () => document.hidden ? sospendi() : avvia());
+      window.addEventListener('pagehide', sospendi);
+      window.addEventListener('pageshow', avvia);
+      avvia();
+    }
 
     box.querySelector('[data-bs-chiudi]').addEventListener('click', () => { scrivi('barra-sconto-chiusa', String(Date.now())); nascondi(); });
     // al telefono: il tasto apre i campi
-    box.querySelector('[data-bs-apri]').addEventListener('click', () => { box.classList.add('con-campi'); misura(); box.querySelector('#bs-nome').focus(); });
+    box.querySelector('[data-bs-apri]').addEventListener('click', (e) => { box.classList.add('con-campi'); e.currentTarget.setAttribute('aria-expanded', 'true'); misura(); box.querySelector('#bs-nome').focus(); });
 
     const modulo = box.querySelector('.bs-modulo');
     const esito = box.querySelector('.bs-esito');
