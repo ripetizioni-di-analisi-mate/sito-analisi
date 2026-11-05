@@ -1,0 +1,21 @@
+---
+interface Props { lingua?: 'it' | 'en' }
+const { lingua = 'it' } = Astro.props;
+---
+<p class="nota-superiori">
+  {lingua === 'en' ? (
+    <>A course for students from all high school tracks, with particular attention to the <strong>Italian scientific high school (liceo scientifico)</strong> and schools with a strong focus on mathematics. Clear explanations and guided exercises take you through each topic step by step, even if you want to start again from the basics.</>
+  ) : (
+    <>Un percorso per tutti gli studenti delle superiori, con particolare attenzione al <strong>liceo scientifico</strong> e agli istituti in cui la matematica ha un ruolo centrale. Spiegazioni chiare ed esercizi guidati ti accompagnano passo dopo passo, anche se vuoi ripartire dalle basi.</>
+  )}
+</p>
+
+<style>
+  .nota-superiori {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--inchiostro-2);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+  .nota-superiori strong { color: var(--inchiostro); }
+</style>
