@@ -427,7 +427,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
     const m = p.match(/^\/admin\/esami\/pagina\/([0-9a-f-]{36})\/(\d)$/);
     if (m) {
       const r = await h.archivio(env).fetch(`https://archivio/comp-pagina?id=${m[1]}&n=${m[2]}`);
-      return new Response(r.body, { status: r.status, headers: { 'content-type': r.headers.get('content-type') || 'image/jpeg', 'cache-control': 'private, no-store', 'x-robots-tag': 'noindex' } });
+      return new Response(r.body, { status: r.status, headers: { 'content-type': r.headers.get('content-type') || 'image/jpeg', 'cache-control': r.ok ? 'private, max-age=604800' : 'no-store', 'x-robots-tag': 'noindex' } });
     }
     if (p !== '/admin/esami') return new Response('non trovato', { status: 404 });
     const { compiti, esami } = await aDO(env, '/comp-elenco', {});
@@ -550,47 +550,112 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
 
 
 // ---------- pagina /admin/esami ----------
+// Versione A scelta da Carmine il 05/11: una riga per compito con le miniature delle pagine, filtro per materia,
+// richieste senza scheda in una sola riga chiusa in cima; la riga si apre con richieste e testo; le pagine si
+// guardano grandi nel visore (frecce, Esc per chiudere).
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (x) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[x]));
 const ETICHETTE = { stesso: 'Coperto', argomento: 'In parte', nessuno: 'Non coperto' };
 function paginaAdminEsami(compiti, vecchi) {
   const leggi = (x) => { try { return JSON.parse(x || '[]'); } catch { return []; } };
-  const data = (t) => new Date(t).toLocaleString('it-IT', { timeZone: 'Europe/Rome', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-  // I confronti fatti prima dell'archivio dei compiti (tabella vecchia, solo sintesi) si mostrano in fondo a ogni materia.
-  const tutti = [...compiti, ...vecchi.map((e) => ({ ...e, vecchio: true }))];
-  const perMateria = MATERIE_COMPATIBILITA.map((slug) => {
-    const titolo = MATERIE.find((m) => m.slug === slug)?.titolo || slug;
-    const del = tutti.filter((e) => e.materia === slug);
-    if (!del.length) return '';
-    const valutati = del.filter((e) => e.compatibilita != null);
-    const media = valutati.length ? Math.round(valutati.reduce((t, e) => t + e.compatibilita, 0) / valutati.length) : null;
-    // Richieste non coperte o coperte in parte: sono le schede che mancano al sito.
-    const scoperte = del.flatMap((e) => leggi(e.esito)).filter((r) => r.l !== 'stesso');
-    const righe = del.slice(0, 120).map((e) => {
-      const rr = leggi(e.esito);
-      const pagine = Array.from({ length: e.pagine || 0 }, (_, n) => `<a href="/admin/esami/pagina/${esc(e.id)}/${n}" target="_blank">pagina ${n + 1}</a>`).join(' · ');
-      const testo = e.testo || e.letto;
-      return `<tr><td class="piccolo">${esc(data(e.quando))}</td><td>${esc(e.universita || '')}</td>
-<td>${e.compatibilita != null ? `<strong>${e.compatibilita}%</strong>` : '<span class="piccolo">non confrontato</span>'}</td>
-<td>${rr.length ? `<details><summary>${rr.length} richieste</summary><ol>${rr.map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> ${esc(r.e)}${r.p ? esc(r.p) : ''}. ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)}${r.s ? `, scheda ${r.s}` : ''})</span>` : ''}</li>`).join('')}</ol></details>` : ''}
-${testo ? `<details><summary>Testo del compito</summary><pre>${esc(testo)}</pre></details>` : ''}${pagine ? `<p class="piccolo">${pagine}</p>` : ''}</td></tr>`;
-    }).join('');
-    return `<section><h2>${esc(titolo)} <span class="conta">${del.length} ${del.length === 1 ? 'compito' : 'compiti'}${media != null ? ` · media ${media}%` : ''}</span></h2>
-${scoperte.length ? `<details class="piccolo"><summary>Richieste senza una scheda dello stesso tipo (${scoperte.length})</summary><ul>${scoperte.slice(0, 120).map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l]}</span> ${esc(r.t)}${r.a ? ` <span class="piccolo">(${esc(r.a)})</span>` : ''}</li>`).join('')}</ul></details>` : ''}
-<div class="tab"><table><thead><tr><th>Inviato il</th><th>Università</th><th>Compatibilità</th><th>Compito</th></tr></thead><tbody>${righe}</tbody></table></div></section>`;
+  const data = (t) => new Date(t).toLocaleString('it-IT', { timeZone: 'Europe/Rome', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  const titoloDi = (slug) => MATERIE.find((m) => m.slug === slug)?.titolo || slug;
+  // I confronti fatti prima dell'archivio dei compiti (tabella vecchia, solo sintesi) restano in fondo all'elenco.
+  const tutti = [...compiti, ...vecchi.map((e) => ({ ...e, id: `v${e.id}`, vecchio: true }))];
+  const materie = MATERIE_COMPATIBILITA.filter((s) => tutti.some((e) => e.materia === s));
+
+  const filtri = `<div class="filtri" role="group" aria-label="Materia"><button type="button" class="chip attivo" data-filtro="">Tutte <b>${tutti.length}</b></button>${materie.map((s) => {
+    const del = tutti.filter((e) => e.materia === s);
+    const val = del.filter((e) => e.compatibilita != null);
+    const media = val.length ? Math.round(val.reduce((t, e) => t + e.compatibilita, 0) / val.length) : null;
+    return `<button type="button" class="chip" data-filtro="${esc(s)}" title="${media != null ? `Compatibilità media ${media}%` : ''}">${esc(titoloDi(s))} <b>${del.length}</b></button>`;
+  }).join('')}</div>`;
+
+  // Richieste non coperte o coperte in parte: sono le schede che mancano al sito.
+  const scoperte = tutti.flatMap((e) => leggi(e.esito).filter((r) => r.l !== 'stesso').map((r) => ({ ...r, materia: e.materia })));
+  const blocco = scoperte.length ? `<details class="scoperte"><summary>Richieste senza una scheda dello stesso tipo <span class="n">${scoperte.length}</span></summary><ul>${scoperte.slice(0, 400).map((r) => `<li data-materia="${esc(r.materia)}"><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> ${esc(r.t)} <span class="piccolo">${esc(titoloDi(r.materia))}${r.a ? ` · ${esc(r.a)}` : ''}</span></li>`).join('')}</ul></details>` : '';
+
+  const righe = tutti.map((e) => {
+    const rr = leggi(e.esito);
+    const n = e.pagine || 0;
+    const img = (k, cl) => `<img class="${cl}" src="/admin/esami/pagina/${esc(e.id)}/${k}" alt="Pagina ${k + 1}" loading="lazy" decoding="async" data-compito="${esc(e.id)}" data-n="${k}" data-tot="${n}">`;
+    const mini = n ? Array.from({ length: n }, (_, k) => img(k, 'mini')).join('') : `<span class="piccolo">${e.vecchio ? 'solo esito' : 'testo incollato'}</span>`;
+    const testo = e.testo || e.letto;
+    const voto = e.compatibilita != null ? `<span class="pc ${e.compatibilita >= 80 ? 'alta' : e.compatibilita >= 50 ? 'media' : 'bassa'}">${e.compatibilita}%</span>` : '<span class="pc nulla">—</span>';
+    return `<details class="compito" data-materia="${esc(e.materia)}"><summary>
+<span class="quando">${esc(data(e.quando))}</span><span class="materia">${esc(titoloDi(e.materia))}</span><span class="uni">${esc(e.universita || '')}</span>${voto}<span class="pagine">${mini}</span><span class="freccia" aria-hidden="true"></span></summary>
+<div class="dentro">${n ? `<div class="grandi">${Array.from({ length: n }, (_, k) => img(k, 'grande')).join('')}</div>` : ''}
+${rr.length ? `<ol class="richieste">${rr.map((r) => `<li><span class="et ${esc(r.l)}">${ETICHETTE[r.l] || ''}</span> <b>${esc(r.e)}${r.p ? esc(r.p) : ''}.</b> ${esc(r.t)}${r.a ? ` <span class="piccolo">${esc(r.a)}${r.s ? ` · scheda ${r.s}` : ''}</span>` : ''}</li>`).join('')}</ol>` : '<p class="piccolo">Non ancora confrontato.</p>'}
+${testo ? `<details class="testo"><summary>Testo del compito</summary><pre>${esc(testo)}</pre></details>` : ''}</div></details>`;
   }).join('');
+
   return new Response(`<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex"><title>Compiti inviati</title><style>
-body{font-family:'Source Sans 3',system-ui,sans-serif;background:#faf8f2;color:#22302f;margin:0;padding:24px 16px;line-height:1.45}
-main{max-width:1150px;margin:0 auto}h1,h2{font-family:Georgia,serif;font-weight:600}h1{margin:0 0 4px}h2{margin:32px 0 10px;font-size:1.3rem}a{color:#2f6f68}
-.conta{font-family:'Source Sans 3',system-ui,sans-serif;font-size:.85rem;font-weight:600;color:#2f6f68;background:#e3efe9;border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:middle}
-table{border-collapse:collapse;width:100%;background:#fff;border:1px solid #ddd6c8;font-size:15px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eee8dc;vertical-align:top}
-th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#5a6664}.piccolo{font-size:13px;color:#5a6664}.tab{overflow-x:auto}details{margin:4px 0}
-pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;background:#faf8f2;border:1px solid #eee8dc;padding:8px;border-radius:6px;max-height:320px;overflow:auto}
-ol,ul{margin:6px 0;padding-left:20px}li{margin:3px 0}.et{font-size:12px;font-weight:600;border-radius:999px;padding:1px 8px;white-space:nowrap}
-.et.stesso{background:#e3efe9;color:#2f6f68}.et.argomento{background:#f6ecd9;color:#8a5f1f}.et.nessuno{background:#eee8dc;color:#5a6664}</style></head><body><main>
+:root{--fondo:#faf8f2;--testo:#22302f;--tenue:#5a6664;--filo:#e6e0d3;--acc:#2f6f68;--acc-chiaro:#e3efe9}
+*{box-sizing:border-box}body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--fondo);color:var(--testo);margin:0;padding:24px 16px;line-height:1.45}
+main{max-width:1000px;margin:0 auto}h1{font-family:Georgia,serif;font-weight:600;margin:0 0 4px}a{color:var(--acc)}.piccolo{font-size:13px;color:var(--tenue)}
+.filtri{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 12px}
+.chip{font:inherit;font-size:14px;border:1px solid var(--filo);background:#fff;color:var(--tenue);border-radius:999px;padding:4px 12px;cursor:pointer}
+.chip b{font-weight:600;color:var(--testo);margin-left:2px}.chip.attivo{border-color:var(--acc);color:var(--acc);background:var(--acc-chiaro)}.chip.attivo b{color:var(--acc)}
+.scoperte{background:#fff;border:1px solid var(--filo);border-radius:10px;padding:8px 14px;margin-bottom:14px;font-size:14px}
+.scoperte summary{cursor:pointer;color:var(--tenue)}.scoperte .n{font-weight:600;color:var(--testo)}.scoperte ul{margin:8px 0 4px;padding-left:18px;max-height:340px;overflow:auto}
+.elenco{background:#fff;border:1px solid var(--filo);border-radius:10px;overflow:hidden}
+.compito{border-top:1px solid var(--filo)}.compito:first-child{border-top:0}.compito[hidden]{display:none}
+.compito>summary{list-style:none;display:flex;align-items:center;gap:14px;padding:9px 14px;cursor:pointer;font-size:15px}
+.compito>summary::-webkit-details-marker{display:none}.compito>summary:hover{background:#fcfbf7}
+.quando{width:112px;flex:none;font-size:13px;color:var(--tenue)}.materia{width:230px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.uni{flex:1;min-width:0;color:var(--tenue);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc{width:48px;flex:none;text-align:right;font-weight:600}.pc.alta{color:var(--acc)}.pc.media{color:#8a5f1f}.pc.bassa{color:#9a3b2e}.pc.nulla{color:var(--tenue);font-weight:400}
+.pagine{display:flex;gap:5px;align-items:center;width:112px;flex:none;justify-content:flex-end}
+.mini{width:32px;height:42px;object-fit:cover;object-position:top;border:1px solid var(--filo);border-radius:3px;background:#f1ede4;cursor:zoom-in}
+.mini:hover{border-color:var(--acc)}
+.freccia{width:8px;height:8px;border-right:1.5px solid var(--tenue);border-bottom:1.5px solid var(--tenue);transform:rotate(45deg);margin:0 2px 4px 4px;flex:none}
+.compito[open]>summary .freccia{transform:rotate(-135deg);margin-bottom:-2px}
+.dentro{padding:4px 14px 16px;font-size:14px}
+.grandi{display:flex;gap:10px;overflow-x:auto;padding:4px 0 10px}.grande{height:240px;border:1px solid var(--filo);border-radius:4px;cursor:zoom-in;background:#f1ede4}
+.richieste{margin:4px 0;padding-left:20px}.richieste li{margin:4px 0}
+.et{font-size:12px;font-weight:600;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.et.stesso{background:var(--acc-chiaro);color:var(--acc)}.et.argomento{background:#f6ecd9;color:#8a5f1f}.et.nessuno{background:#eee8dc;color:var(--tenue)}
+.testo summary{cursor:pointer;color:var(--tenue);font-size:13px;margin-top:6px}
+pre{white-space:pre-wrap;font:13px/1.45 ui-monospace,Menlo,monospace;background:var(--fondo);border:1px solid var(--filo);padding:8px;border-radius:6px;max-height:320px;overflow:auto}
+.visore{position:fixed;inset:0;background:rgba(20,26,25,.88);display:flex;align-items:center;justify-content:center;z-index:10}.visore[hidden]{display:none}
+.visore img{max-width:92vw;max-height:88vh;background:#fff;border-radius:4px}
+.visore button{position:absolute;font:inherit;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:44px;height:44px;font-size:22px;cursor:pointer}
+.visore button:hover{background:rgba(255,255,255,.25)}.v-chiudi{top:16px;right:16px}.v-prec{left:16px}.v-succ{right:16px}
+.v-conta{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#fff;font-size:14px}
+@media (max-width:640px){.compito>summary{flex-wrap:wrap;gap:4px 10px}.quando{width:auto}.materia{width:auto;font-weight:600}.materia{white-space:normal}.uni{flex-basis:100%;order:5}.pc{margin-left:auto}.pagine{order:6;width:auto;flex-basis:100%;justify-content:flex-start}.freccia{display:none}.grande{height:180px}}
+</style></head><body><main>
 <p class="piccolo"><a href="/admin">← Dashboard</a></p>
 <h1>Compiti inviati</h1>
-<p class="piccolo">Tutti i compiti caricati nella pagina <a href="/compatibilita" target="_blank">Compatibilità con il tuo esame</a>, senza nome né email di chi li ha inviati: testo, esito del confronto e pagine (si conservano le immagini degli ultimi ${PAGINE_MAX} compiti). Le richieste «In parte» e «Non coperto» indicano le schede svolte che mancano al sito.</p>
-${perMateria || '<p class="piccolo">Nessun compito per ora.</p>'}
-</main></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+<p class="piccolo">Compiti caricati in <a href="/compatibilita" target="_blank">Compatibilità con il tuo esame</a>, senza nome né email. Tocca una miniatura per vedere la pagina grande, la riga per le richieste e il testo.</p>
+${tutti.length ? `${filtri}${blocco}<div class="elenco">${righe}</div>` : '<p class="piccolo">Nessun compito per ora.</p>'}
+</main>
+<div class="visore" hidden><img alt=""><button type="button" class="v-chiudi" aria-label="Chiudi">×</button><button type="button" class="v-prec" aria-label="Pagina precedente">‹</button><button type="button" class="v-succ" aria-label="Pagina successiva">›</button><div class="v-conta"></div></div>
+<script>
+(() => {
+  const chip = document.querySelectorAll('.chip');
+  chip.forEach((c) => c.addEventListener('click', () => {
+    chip.forEach((x) => x.classList.toggle('attivo', x === c));
+    const m = c.dataset.filtro;
+    document.querySelectorAll('[data-materia]').forEach((el) => { el.hidden = Boolean(m) && el.dataset.materia !== m; });
+  }));
+  const v = document.querySelector('.visore'), vi = v.querySelector('img'), vc = v.querySelector('.v-conta');
+  let id = '', n = 0, tot = 0;
+  const mostra = () => { vi.src = '/admin/esami/pagina/' + id + '/' + n; vc.textContent = 'Pagina ' + (n + 1) + ' di ' + tot; v.querySelector('.v-prec').hidden = n === 0; v.querySelector('.v-succ').hidden = n >= tot - 1; };
+  const apri = (img) => { id = img.dataset.compito; n = +img.dataset.n; tot = +img.dataset.tot; mostra(); v.hidden = false; };
+  const chiudi = () => { v.hidden = true; vi.removeAttribute('src'); };
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('img.mini, img.grande');
+    if (img) { e.preventDefault(); e.stopPropagation(); apri(img); }
+  }, true);
+  v.addEventListener('click', (e) => { if (e.target === v) chiudi(); });
+  v.querySelector('.v-chiudi').onclick = chiudi;
+  v.querySelector('.v-prec').onclick = () => { if (n > 0) { n--; mostra(); } };
+  v.querySelector('.v-succ').onclick = () => { if (n < tot - 1) { n++; mostra(); } };
+  document.addEventListener('keydown', (e) => {
+    if (v.hidden) return;
+    if (e.key === 'Escape') chiudi();
+    if (e.key === 'ArrowLeft' && n > 0) { n--; mostra(); }
+    if (e.key === 'ArrowRight' && n < tot - 1) { n++; mostra(); }
+  });
+})();
+</script></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
 }
