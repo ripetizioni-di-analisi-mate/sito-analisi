@@ -36,7 +36,7 @@ const escape=(s)=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').repla
 
 function preview(source, personal=false, variant='a'){
   const doc=parse(source);const root=byTag(doc,'html');const head=byTag(doc,'head');const body=byTag(doc,'body');
-  const banner=parseFragment(`<aside class="qa-banner"><strong>Anteprima su materie campione · ${personal?'dati dimostrativi':'visitatore'}</strong><nav><a href="/">Home</a><a href="/personale-a">A · Percorso guidato</a><a href="/personale-b">B · Compatto</a><a href="/personale-c">C · Materie in primo piano</a><a href="/mobile">Telefono</a></nav></aside>`).childNodes[0];
+  const banner=parseFragment(`<aside class="qa-banner"><strong>Anteprima grafica · ${personal?'dati dimostrativi':'navigazione campione'}</strong><nav><a href="/">Home</a><a href="/personale-a">A · Percorso guidato</a><a href="/personale-b">B · Compatto</a><a href="/personale-c">C · Materie in primo piano</a><a href="/mobile">Telefono</a></nav></aside>`).childNodes[0];
   body.childNodes.unshift(banner);banner.parentNode=body;
   if(personal){
     setAttr(root,'class',(attr(root,'class')||'')+' collegato');setAttr(root,'data-materie',io.materie.join(' '));setAttr(root,'data-qa-variante',variant);
@@ -61,7 +61,7 @@ function save(name,source){
 }
 // Solo pagine pubbliche selezionate e anteprime con le soluzioni già rimosse.
 for(const n of ['risorse','chi-sono','logo.svg','logo-180.png','og.png'])if(fs.existsSync(path.join(dist,n)))fs.cpSync(path.join(dist,n),path.join(out,n),{recursive:true});
-for(const name of ['index.html','cerca.html','indice-ricerca.json','analisi-1.html','account.html','accedi.html','en.html','en/cerca.html','en/indice-ricerca.json']){
+for(const name of ['index.html','cerca.html','indice-ricerca.json','analisi-1.html','precorso.html','fisica-zero.html','account.html','accedi.html','en.html','en/cerca.html','en/indice-ricerca.json']){
   const s=fs.readFileSync(path.join(dist,name),'utf8');save(name,name.endsWith('.html')?preview(s):s);
 }
 for(const section of ['teoria','esercizi-svolti','esercizi']){

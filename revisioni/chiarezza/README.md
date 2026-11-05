@@ -40,4 +40,14 @@ La build per materie campione è prevista nelle note del repository per i limiti
 
 Risultato della verifica del 5 novembre: 31 controlli dei moduli e 11 controlli sulle pagine superati; 1.532 pagine compilate nella build campione. Verificati in browser il suggerimento «limti → limiti», la pertinenza dei risultati, i filtri, le tre disposizioni personali, l’apertura dei premi, l’indice durante Concentrazione e il percorso compatto a 390 px. La revisione indipendente del diff non ha rilevato blocchi.
 
-Non sono stati eseguiti accessi o acquisti reali con questa versione. I profili dimostrativi non verificano l’intero flusso autenticato; la build completa e la prova con un account effettivo restano controlli da completare prima della pubblicazione.
+La compilazione completa è poi riuscita con il limite di heap ridotto: **6.842 pagine generate**, seguite da vetrine, versioni bilingui e immagini social. Gli 11 controlli sulle pagine sono passati anche su questa versione completa. Comandi della verifica:
+
+```sh
+NODE_OPTIONS=--max-old-space-size=2800 npx astro build
+node scripts/vetrine.mjs
+node scripts/lingue.mjs
+node scripts/immagini-og.mjs
+node strumenti/verifica-chiarezza.mjs
+```
+
+Non sono stati eseguiti accessi o acquisti reali con questa versione. I profili dimostrativi non verificano l’intero flusso autenticato; la prova con un account effettivo resta da completare prima della pubblicazione. L’anteprima grafica contiene una selezione di percorsi di navigazione, non una copia funzionale dell’intero sito.
