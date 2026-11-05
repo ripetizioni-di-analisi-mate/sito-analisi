@@ -24,7 +24,7 @@ import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
-import { creaTabelleNewsletter, archivioNewsletter, gestisciNewsletter, scontoNewsletter } from './newsletter.mjs';
+import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 
@@ -162,8 +162,8 @@ export class Archivio {
     creaTabelleGruppi(this.sql);
     // «Invita un amico»: codici personali, invitati e sconti del 15% (worker/inviti.mjs)
     creaTabelleInviti(this.sql);
-    // newsletter: iscritti dalla barra in basso e codici di sconto del 10% (worker/newsletter.mjs)
-    creaTabelleNewsletter(this.sql);
+    // sconto di benvenuto: account creati dalla barra in basso, 10% sulla prima materia (worker/benvenuto.mjs)
+    creaTabelleBenvenuto(this.sql);
     // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
     creaTabelleSfide(this.sql);
     // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
@@ -200,7 +200,7 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
-    if (pathname.startsWith('/nl-')) { const r = archivioNewsletter(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/bv-')) { const r = archivioBenvenuto(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/sfi-')) { const r = archivioSfide(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/comp-')) { const r = archivioCompatibilita(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
@@ -727,21 +727,21 @@ export default {
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
     if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
       const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
-      // senza sconto dell'invito, il codice della newsletter (se c'è e non è stato usato)
+      // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
       if (r && p === '/api/sconto' && !(await r.clone().json().catch(() => ({}))).id) {
         const io = await utenteCollegato(env, req).catch(() => null);
         const materia = url.searchParams.get('materia') || '';
-        if (io && !io.materie.includes(materia)) {
-          const s = await scontoNewsletter(req, env, { aDO, leggiCookie, leggiToken }, io).catch(() => null);
+        if (io && PREZZI[materia] && !io.materie.includes(materia)) {
+          const s = await scontoBenvenuto(env, aDO, io).catch((e) => { console.log('benvenuto: sconto non creato', String(e)); return null; });
           if (s) return json(s);
         }
       }
       if (r) return r;
     }
 
-    // ===== newsletter: barra in basso, codice di sconto del 10%, cancellazione, elenco per Carmine (worker/newsletter.mjs) =====
-    if (p === '/api/newsletter' || p === '/api/newsletter/sconto' || p === '/newsletter/disattiva' || p === '/admin/newsletter' || p === '/admin/newsletter.csv') {
-      const r = await gestisciNewsletter(req, env, ctx, p, { aDO, json, leggiCookie, leggiToken, firmaToken, emailValida, normalizza, utenteCollegato });
+    // ===== sconto di benvenuto: riga nella pagina Sblocca, elenco per Carmine (worker/benvenuto.mjs) =====
+    if (p === '/api/benvenuto' || p === '/admin/benvenuto' || p === '/admin/benvenuto.csv') {
+      const r = await gestisciBenvenuto(req, env, ctx, p, { aDO, json, leggiCookie, leggiToken, utenteCollegato });
       if (r) return r;
     }
 
@@ -759,7 +759,7 @@ export default {
 
     // ===== account =====
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua, nome, corso: corsoDato } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
       if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
@@ -772,6 +772,8 @@ export default {
       // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
       const invito = leggiCookie(req, 'invito');
       if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
+      // account creato dalla barra in basso: 10% sul primo acquisto di una materia (worker/benvenuto.mjs)
+      if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
@@ -1123,8 +1125,8 @@ export default {
           await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
           // invita un amico: sconto usato e premio per chi ha invitato (worker/inviti.mjs)
           ctx.waitUntil(dopoAcquistoMateria(env, aDO, url.origin, { email, transazione: d.id, sconto: d.discount_id }).catch((e) => console.log('inviti: webhook', String(e))));
-          // newsletter: codice del 10% segnato come usato
-          if (d.discount_id) ctx.waitUntil(aDO(env, '/nl-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
+          // sconto di benvenuto: codice del 10% segnato come usato
+          if (d.discount_id) ctx.waitUntil(aDO(env, '/bv-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
         } else if (email && VIDEO[video]) {
           await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });

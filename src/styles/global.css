@@ -1350,56 +1350,52 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .pl-sf-icona { flex: none; display: grid; place-items: center; width: 1.35rem; height: 1.35rem; color: var(--verde); }
 .pl-sf-icona svg { width: 1.1rem; height: 1.1rem; }
 
-/* ---------- newsletter: barra in basso (05/11/2026, src/components/Newsletter.astro) ----------
-   Versione A (scelta da Carmine fra A striscia e B riquadro; la B è nel ramo «newsletter»): striscia a tutta larghezza.
-   Mentre è aperta, i tasti fissi (Pi, WhatsApp, torna su) salgono della sua altezza (--altezza-nl). */
-.newsletter { position: fixed; z-index: 6; font-family: var(--ui); color: var(--inchiostro); background: white;
-  transition: transform .35s ease, opacity .35s ease; opacity: 0; }
-.newsletter[hidden] { display: none; }
-.newsletter[data-versione].aperta { opacity: 1; transform: none; }
-.newsletter p { margin: 0; }
-.nl-nascosto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.nl-titolo { display: flex; align-items: center; gap: .55rem; font-family: var(--titoli); font-weight: 600; font-size: 1.12rem; line-height: 1.25; }
-.nl-pillola { flex: none; font-family: var(--ui); font-size: .82rem; font-weight: 700; letter-spacing: .02em; color: var(--azione);
-  background: color-mix(in srgb, var(--azione) 11%, white); border-radius: 999px; padding: .15rem .55rem; }
-.nl-sotto { font-size: .9rem; line-height: 1.4; color: var(--inchiostro-2); margin-top: .3rem !important; }
-.nl-riga { display: flex; gap: .5rem; }
-.nl-riga input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: .62rem .8rem; border: 1px solid var(--riga); border-radius: 8px; background: white; color: var(--inchiostro); }
-.nl-riga input:focus { outline: 2px solid color-mix(in srgb, var(--azione) 40%, transparent); outline-offset: 0; border-color: var(--azione); }
-.nl-tasto { flex: none; font: inherit; font-weight: 600; font-size: 1rem; color: white; background: var(--azione); border: 0; border-radius: 8px; padding: .62rem 1.1rem; cursor: pointer; }
-.nl-tasto:hover { filter: brightness(1.08); }
-.nl-tasto:disabled { opacity: .6; cursor: wait; }
-.nl-consenso { display: flex; align-items: flex-start; gap: .45rem; margin-top: .5rem; font-size: .8rem; line-height: 1.35; color: var(--inchiostro-2); cursor: pointer; }
-.nl-consenso input { margin: .12rem 0 0; accent-color: var(--azione); flex: none; }
-.nl-consenso a { color: var(--accento); }
-.nl-esito { font-size: .85rem; color: var(--c-attenzione); margin-top: .35rem !important; }
-.nl-esito:empty { display: none; }
-.nl-chiudi { position: absolute; top: .45rem; right: .45rem; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; background: transparent; color: var(--inchiostro-2); border-radius: 50%; cursor: pointer; }
-.nl-chiudi:hover { background: var(--carta-2); color: var(--inchiostro); }
-.nl-chiudi svg { width: 1rem; height: 1rem; }
-.nl-spunta { width: 1.3rem; height: 1.3rem; color: var(--azione); flex: none; }
-.nl-codice { margin-top: .55rem; }
-.nl-codice-etichetta { display: block; font-size: .8rem; color: var(--inchiostro-2); }
-.nl-codice-riga { display: inline-flex; align-items: center; gap: .5rem; margin-top: .2rem; }
-.nl-codice code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 1.05rem; font-weight: 600; letter-spacing: .08em; color: var(--azione);
-  background: color-mix(in srgb, var(--azione) 8%, white); border: 1px dashed color-mix(in srgb, var(--azione) 45%, white); border-radius: 6px; padding: .3rem .6rem; }
-.nl-copia { font: inherit; font-size: .85rem; font-weight: 600; color: var(--azione); background: white; border: 1px solid color-mix(in srgb, var(--azione) 45%, white); border-radius: 999px; padding: .28rem .75rem; cursor: pointer; }
-
-.newsletter[data-versione="a"] { left: 0; right: 0; bottom: 0; transform: translateY(100%);
+/* ---------- barra in basso «10% di sconto sulla tua prima materia» (05/11/2026, src/components/BarraSconto.astro) ----------
+   Striscia a tutta larghezza (versione A scelta da Carmine). Al computer i campi sono già nella barra; al telefono
+   la barra è compatta e «Crea l'account» apre i campi (.con-campi). I tasti fissi salgono della sua altezza. */
+.barra-sconto { position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; font-family: var(--ui); color: var(--inchiostro);
   background: color-mix(in srgb, var(--carta) 55%, white); border-top: 3px solid var(--azione); box-shadow: 0 -6px 24px rgba(34,48,47,.08);
-  padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom)); }
-.newsletter[data-versione="a"] .nl-dentro { max-width: 64rem; margin: 0 auto; padding-right: 2rem; display: grid; grid-template-columns: 1fr minmax(18rem, 25rem); gap: .6rem 2rem; align-items: center; }
-.newsletter[data-versione="a"] .nl-grazie { grid-column: 1 / -1; }
+  padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom)); transform: translateY(100%); opacity: 0; transition: transform .35s ease, opacity .35s ease; }
+.barra-sconto[hidden] { display: none; }
+.barra-sconto.aperta { opacity: 1; transform: none; }
+.barra-sconto p { margin: 0; }
+.bs-nascosto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.bs-dentro { max-width: 66rem; margin: 0 auto; padding-right: 2rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(22rem, 34rem); gap: .6rem 2rem; align-items: center; }
+.bs-fatto { grid-column: 1 / -1; display: flex; align-items: center; gap: .4rem 1.2rem; flex-wrap: wrap; }
+.bs-titolo { display: flex; align-items: center; gap: .55rem; font-family: var(--titoli); font-weight: 600; font-size: 1.12rem; line-height: 1.25; }
+.bs-pillola { flex: none; font-family: var(--ui); font-size: .82rem; font-weight: 700; letter-spacing: .02em; color: var(--azione);
+  background: color-mix(in srgb, var(--azione) 11%, white); border-radius: 999px; padding: .15rem .55rem; }
+.bs-sotto { font-size: .9rem; line-height: 1.4; color: var(--inchiostro-2); margin-top: .3rem !important; }
+.bs-fatto .bs-sotto { margin-top: 0 !important; }
+.bs-campi { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
+.bs-campi input { min-width: 0; font: inherit; font-size: 1rem; padding: .55rem .75rem; border: 1px solid var(--riga); border-radius: 8px; background: white; color: var(--inchiostro); }
+.bs-campi input:focus { outline: 2px solid color-mix(in srgb, var(--azione) 40%, transparent); outline-offset: 0; border-color: var(--azione); }
+.bs-tasto { font: inherit; font-weight: 600; font-size: 1rem; color: white; background: var(--azione); border: 0; border-radius: 8px; padding: .55rem 1.1rem; cursor: pointer; text-decoration: none; text-align: center; white-space: nowrap; }
+.bs-tasto:hover { filter: brightness(1.08); color: white; }
+.bs-tasto:disabled { opacity: .6; cursor: wait; }
+.bs-apri { display: none; }
+.bs-nota { font-size: .78rem; line-height: 1.35; color: var(--inchiostro-2); margin-top: .4rem !important; }
+.bs-nota a, .bs-esito a { color: var(--accento); }
+.bs-esito { font-size: .85rem; color: var(--c-attenzione); margin-top: .3rem !important; }
+.bs-esito:empty { display: none; }
+.bs-chiudi { position: absolute; top: .45rem; right: .45rem; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; background: transparent; color: var(--inchiostro-2); border-radius: 50%; cursor: pointer; }
+.bs-chiudi:hover { background: var(--carta-2); color: var(--inchiostro); }
+.bs-chiudi svg { width: 1rem; height: 1rem; }
+.bs-spunta { width: 1.3rem; height: 1.3rem; color: var(--azione); flex: none; }
 @media (max-width: 760px) {
-  .newsletter[data-versione="a"] { padding-top: .75rem; }
-  .newsletter[data-versione="a"] .nl-dentro { grid-template-columns: 1fr; padding-right: 0; }
-  .newsletter[data-versione="a"] .nl-titolo { padding-right: 1.8rem; font-size: 1.04rem; }
-  .newsletter[data-versione="a"] .nl-sotto { font-size: .85rem; }
+  .barra-sconto { padding-top: .75rem; }
+  .bs-dentro { grid-template-columns: 1fr; padding-right: 0; }
+  .bs-titolo { padding-right: 1.8rem; font-size: 1.04rem; }
+  .bs-sotto { font-size: .85rem; }
+  .bs-apri { display: block; width: 100%; margin-top: .65rem; }
+  .bs-modulo { display: none; }
+  .barra-sconto.con-campi .bs-modulo { display: block; }
+  .barra-sconto.con-campi .bs-apri, .barra-sconto.con-campi .bs-testo .bs-sotto { display: none; }
+  .bs-campi { grid-template-columns: 1fr; }
+  .bs-scegli { width: 100%; }
 }
-
-/* tasti fissi sopra la barra */
-html.con-newsletter .bottoni-fissi { bottom: calc(var(--altezza-nl, 0px) + 1rem); transition: bottom .35s ease; }
-@media (prefers-reduced-motion: reduce) { .newsletter, html.con-newsletter .bottoni-fissi { transition: none; } }
+html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1rem); transition: bottom .35s ease; }
 /* al telefono, con la barra aperta, il fumetto di benvenuto di Pi aspetta la visita successiva */
-@media (max-width: 640px) { html.con-newsletter .pi-fumetto { display: none !important; } }
-@media print { .newsletter { display: none !important; } }
+@media (max-width: 640px) { html.con-barra-sconto .pi-fumetto { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .barra-sconto, html.con-barra-sconto .bottoni-fissi { transition: none; } }
+@media print { .barra-sconto { display: none !important; } }

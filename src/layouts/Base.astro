@@ -9,7 +9,7 @@ import Indice from '../components/Indice.astro';
 import LezioniCarmine from '../components/LezioniCarmine.astro';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
-import Newsletter from '../components/Newsletter.astro';
+import BarraSconto from '../components/BarraSconto.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
@@ -238,7 +238,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     </a>
   </div>
 
-  {sezione !== 'stampa' && <Newsletter lingua={lingua} />}
+  {sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>
   <div class="avviso-duello" role="status" aria-live="polite" hidden></div>

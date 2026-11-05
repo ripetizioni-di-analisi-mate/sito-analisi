@@ -1,0 +1,130 @@
+---
+// Barra in basso «10% di sconto sulla tua prima materia» (richiesta di Carmine del 05/11/2026; regole in
+// src/data/benvenuto.ts, Worker in worker/benvenuto.mjs). Solo registrazione e sconto: nessuna newsletter.
+// Compare appena si entra, solo a chi non ha fatto l'accesso. Al computer i campi (nome, email, password) sono già
+// nella barra; al telefono la barra è compatta e il tasto «Crea l'account» apre i campi.
+// L'account si crea con /api/registrati (`benvenuto: true`); lo sconto si applica da solo nella pagina Sblocca.
+// Prova: ?barra=1 mostra la barra anche se chiusa o con l'accesso fatto.
+import { link, type Lingua } from '../i18n';
+import { SCONTO_BENVENUTO, GIORNI_RIPROPOSTA, RITARDO_SECONDI, PAGINE_SENZA_BARRA } from '../data/benvenuto';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const p = SCONTO_BENVENUTO;
+const s = en ? {
+  titolo: `${p}% off your first subject`,
+  sotto: 'Create a free account: the discount is applied automatically to your first purchase.',
+  nome: 'Name', email: 'Email', password: 'Password (at least 8 characters)', crea: 'Create account', chiudi: 'Close',
+  nota: 'Your data are used only to run your account.', privacy: 'Privacy policy', gia: 'Already have an account?', accedi: 'Log in',
+  nomeNo: 'Enter your name.', emailNo: 'Enter a valid email.', passwordNo: 'The password must be at least 8 characters long.',
+  esiste: 'An account with this email already exists.', rete: 'Network error: please try again.',
+  fatto: 'Account created.', fattoSotto: `The ${p}% discount is applied automatically to your first purchase of a subject.`, scegli: 'Choose a subject',
+} : {
+  titolo: `${p}% di sconto sulla tua prima materia`,
+  sotto: 'Crea un account gratuito: lo sconto si applica da solo al primo acquisto.',
+  nome: 'Nome', email: 'Email', password: 'Password (almeno 8 caratteri)', crea: 'Crea l’account', chiudi: 'Chiudi',
+  nota: 'I tuoi dati servono solo a far funzionare l’account.', privacy: 'Informativa sulla privacy', gia: 'Hai già un account?', accedi: 'Accedi',
+  nomeNo: 'Scrivi il tuo nome.', emailNo: 'Scrivi un’email valida.', passwordNo: 'La password deve avere almeno 8 caratteri.',
+  esiste: 'Esiste già un account con questa email.', rete: 'Errore di rete: riprova.',
+  fatto: 'Account creato.', fattoSotto: `Il ${p}% di sconto si applica da solo al primo acquisto di una materia.`, scegli: 'Scegli la materia',
+};
+const accedi = link(lingua, '/accedi');
+---
+<aside class="barra-sconto" aria-label={s.titolo} hidden>
+  <button type="button" class="bs-chiudi" aria-label={s.chiudi} data-bs-chiudi>
+    <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l10 10M15 5 5 15"/></svg>
+  </button>
+  <div class="bs-dentro">
+    <div class="bs-testo">
+      <p class="bs-titolo"><span class="bs-pillola">−{p}%</span>{s.titolo}</p>
+      <p class="bs-sotto">{s.sotto}</p>
+      <button type="button" class="bs-tasto bs-apri" data-bs-apri>{s.crea}</button>
+    </div>
+    <form class="bs-modulo" novalidate>
+      <div class="bs-campi">
+        <label class="bs-nascosto" for="bs-nome">{s.nome}</label>
+        <input id="bs-nome" name="nome" type="text" autocomplete="given-name" maxlength="60" placeholder={s.nome} />
+        <label class="bs-nascosto" for="bs-email">{s.email}</label>
+        <input id="bs-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder={s.email} />
+        <label class="bs-nascosto" for="bs-password">{s.password}</label>
+        <input id="bs-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="200" placeholder={s.password} />
+        <button type="submit" class="bs-tasto">{s.crea}</button>
+      </div>
+      <p class="bs-nota">{s.nota} <a href={link(lingua, '/privacy')} target="_blank" rel="noopener">{s.privacy}</a> · {s.gia} <a href={accedi}>{s.accedi}</a></p>
+      <p class="bs-esito" role="status" aria-live="polite"></p>
+    </form>
+    <div class="bs-fatto" hidden>
+      <p class="bs-titolo"><svg class="bs-spunta" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="m6.5 10.2 2.3 2.3 4.7-4.9"/></svg>{s.fatto}</p>
+      <p class="bs-sotto">{s.fattoSotto}</p>
+      <a class="bs-tasto bs-scegli" href={link(lingua, '/prezzi')}>{s.scegli}</a>
+    </div>
+  </div>
+</aside>
+
+<script is:inline define:vars={{ t: s, lingua, accedi, giorni: GIORNI_RIPROPOSTA, ritardo: RITARDO_SECONDI, escluse: PAGINE_SENZA_BARRA.source }}>
+  (() => {
+    const box = document.querySelector('.barra-sconto');
+    if (!box) return;
+    const rad = document.documentElement;
+    const prova = new URLSearchParams(location.search).has('barra');
+    const leggi = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+    const scrivi = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage non disponibile */ } };
+    if (!prova) {
+      if (rad.classList.contains('collegato')) return;
+      if (new RegExp(escluse).test(location.pathname)) return;
+      const chiusa = Number(leggi('barra-sconto-chiusa') || 0);
+      if (chiusa && Date.now() - chiusa < giorni * 86400000) return;
+    }
+
+    // La barra sta sopra i tasti fissi (Pi, WhatsApp, torna su): la sua altezza li sposta in alto.
+    const misura = () => rad.style.setProperty('--altezza-bs', `${Math.ceil(box.getBoundingClientRect().height)}px`);
+    const ro = 'ResizeObserver' in window ? new ResizeObserver(misura) : null;
+    const mostra = () => {
+      box.hidden = false;
+      rad.classList.add('con-barra-sconto');
+      misura(); ro?.observe(box);
+      requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('aperta')));
+    };
+    const nascondi = () => {
+      box.classList.remove('aperta');
+      rad.classList.remove('con-barra-sconto');
+      ro?.disconnect();
+      setTimeout(() => { box.hidden = true; }, 350);
+    };
+    setTimeout(mostra, prova ? 0 : ritardo * 1000);
+
+    box.querySelector('[data-bs-chiudi]').addEventListener('click', () => { scrivi('barra-sconto-chiusa', String(Date.now())); nascondi(); });
+    // al telefono: il tasto apre i campi
+    box.querySelector('[data-bs-apri]').addEventListener('click', () => { box.classList.add('con-campi'); misura(); box.querySelector('#bs-nome').focus(); });
+
+    const modulo = box.querySelector('.bs-modulo');
+    const esito = box.querySelector('.bs-esito');
+    const invia = modulo.querySelector('button[type="submit"]');
+    modulo.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      esito.textContent = '';
+      const nome = modulo.nome.value.trim();
+      const email = modulo.email.value.trim();
+      const password = modulo.password.value;
+      if (!nome) { esito.textContent = t.nomeNo; modulo.nome.focus(); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { esito.textContent = t.emailNo; modulo.email.focus(); return; }
+      if (password.length < 8) { esito.textContent = t.passwordNo; modulo.password.focus(); return; }
+      invia.disabled = true;
+      try {
+        const r = await fetch('/api/registrati', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ nome, email, password, lingua, benvenuto: true, pagina: location.pathname }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (r.status === 409) { esito.innerHTML = ''; esito.append(`${t.esiste} `); const a = document.createElement('a'); a.href = accedi; a.textContent = t.accedi; esito.append(a); return; }
+        if (!r.ok) { esito.textContent = d.errore || t.rete; return; }
+        scrivi('barra-sconto-chiusa', String(Date.now() + 3650 * 86400000));
+        modulo.hidden = true;
+        box.querySelector('.bs-testo').hidden = true;
+        box.querySelector('.bs-fatto').hidden = false;
+        box.classList.add('fatta');
+        misura();
+      } catch { esito.textContent = t.rete; } finally { invia.disabled = false; }
+    });
+  })();
+</script>

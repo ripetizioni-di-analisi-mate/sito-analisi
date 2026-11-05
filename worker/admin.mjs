@@ -271,7 +271,7 @@ td.destra,th.destra{text-align:right}
 <div class="app" id="app" hidden>
   <aside class="lato">
     <div class="marchio"><i>∫</i><span>Ripetizioni di Analisi<small>Dashboard</small></span></div>
-    <nav>${nav}<a href="/admin/lezioni">${icona('lezioni')}<span>Lezioni</span></a><a href="/admin/gruppi">${icona('studenti')}<span>Gruppi</span></a><a href="/admin/esami">${icona('esami')}<span>Compiti</span></a><a href="/admin/newsletter">${icona('newsletter')}<span>Newsletter</span></a></nav>
+    <nav>${nav}<a href="/admin/lezioni">${icona('lezioni')}<span>Lezioni</span></a><a href="/admin/gruppi">${icona('studenti')}<span>Gruppi</span></a><a href="/admin/esami">${icona('esami')}<span>Compiti</span></a><a href="/admin/benvenuto">${icona('newsletter')}<span>Benvenuto</span></a></nav>
     <div class="fondo-lato">
       <button type="button" onclick="window.open('/','_blank')">${icona('sito')}<span>Apri il sito</span></button>
       <button type="button" id="esci">${icona('esci')}<span>Esci</span></button>

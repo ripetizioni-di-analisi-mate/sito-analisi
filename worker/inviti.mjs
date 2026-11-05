@@ -112,7 +112,7 @@ async function paddle(env, metodo, percorso, corpo) {
   return d.data;
 }
 // Codice di sconto personale: 15% (o la percentuale data), un solo uso, valido solo sui prezzi delle materie.
-// Usato anche dalla newsletter (worker/newsletter.mjs) con il 10%.
+// Usato anche dallo sconto di benvenuto (worker/benvenuto.mjs) con il 10%.
 export async function creaSconto(env, { prefisso, descrizione, scade, percentuale = SCONTO_INVITO }) {
   const prezzi = prezziMaterie(env);
   if (!prezzi.length) throw new Error('prezzi delle materie mancanti');

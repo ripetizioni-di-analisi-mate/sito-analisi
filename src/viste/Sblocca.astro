@@ -5,7 +5,7 @@ import CampoCorso from '../components/CampoCorso.astro';
 import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { SCONTO_INVITO } from '../data/inviti';
-import { SCONTO_NEWSLETTER } from '../data/newsletter';
+import { SCONTO_BENVENUTO } from '../data/benvenuto';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
@@ -25,12 +25,12 @@ const invito = lingua === 'en' ? {
   ospite: `You were invited by a friend: your first subject is ${SCONTO_INVITO}% off. The discount is applied at checkout, once your account is created.`,
   amico: `You were invited by a friend: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
   premio: `A friend you invited unlocked a subject: this purchase is ${SCONTO_INVITO}% off. The discount is applied at checkout.`,
-  newsletter: `Newsletter discount: this purchase is ${SCONTO_NEWSLETTER}% off. The discount is applied at checkout.`,
+  benvenuto: `Welcome discount: this purchase is ${SCONTO_BENVENUTO}% off. The discount is applied at checkout.`,
 } : {
   ospite: `Sei arrivato con l'invito di un amico: sul primo acquisto di una materia hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento dopo la creazione dell'account.`,
   amico: `Sei arrivato con l'invito di un amico: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
   premio: `Una persona che hai invitato ha sbloccato una materia: su questo acquisto hai il ${SCONTO_INVITO}% di sconto, applicato al pagamento.`,
-  newsletter: `Sconto della newsletter: su questo acquisto hai il ${SCONTO_NEWSLETTER}% di sconto, applicato al pagamento.`,
+  benvenuto: `Sconto di benvenuto: su questo acquisto hai il ${SCONTO_BENVENUTO}% di sconto, applicato al pagamento.`,
 };
 ---
 <Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
@@ -110,19 +110,19 @@ const invito = lingua === 'en' ? {
       // «Invita un amico»: riga sullo sconto (cookie dell'invito per gli ospiti, stato dell'account per gli iscritti).
       const notaInvito = document.getElementById('nota-invito');
       const mostraInvito = (testo) => { notaInvito.textContent = testo; notaInvito.hidden = !testo; };
-      // senza sconto dell'invito, l'eventuale codice della newsletter (cookie «nl» o email dell'account)
-      const notaNewsletter = async () => {
-        const r = await fetch('/api/newsletter/sconto').catch(() => null);
+      // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
+      const notaBenvenuto = async () => {
+        const r = await fetch('/api/benvenuto').catch(() => null);
         const d = r && r.ok ? await r.json() : {};
-        return d.percentuale ? invito.newsletter : '';
+        return d.percentuale ? invito.benvenuto : '';
       };
       const aggiornaInvito = async () => {
-        if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : await notaNewsletter()); return; }
+        if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : ''); return; }
         if (io.materie.includes(materia)) { mostraInvito(''); return; }
         const r = await fetch('/api/invito').catch(() => null);
         const d = r && r.ok ? await r.json() : null;
         const testo = d && d.attivo ? (d.scontoAmico ? invito.amico : d.premiDisponibili > 0 ? invito.premio : '') : '';
-        mostraInvito(testo || await notaNewsletter());
+        mostraInvito(testo || await notaBenvenuto());
       };
       aggiornaInvito().catch(() => {});
       const paga = async () => {
