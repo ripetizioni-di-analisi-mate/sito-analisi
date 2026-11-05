@@ -6,8 +6,8 @@ import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { FORMULARI } from '../data/formulari';
-interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
-const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
+interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
+const { materia, argomento, sezione, lingua = 'it', ricercaPrincipale = false } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
@@ -21,30 +21,15 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   <div class="indice-testa">
     <span>{t.indice}</span>
   </div>
-  <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+  {ricercaPrincipale ? <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">↗</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
-  </form>
-  {lingua === 'it' && <LezioniCarmine dove="indice" />}
-  {/* «Compatibilità con il tuo esame» (versione B scelta da Carmine il 04/11) */}
-  {lingua === 'it' && (
-    <div class="lezioni-indice">
-      <p class="indice-materia"><span>Il tuo esame</span></p>
-      <ol class="indice-materie">
-        <li style="--colore-materia: var(--accento)">
-          <a class="voce-materia" href="/compatibilita">
-            <span class="lezioni-icona" set:html={'<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h5.5l3.5 3.5v11.5H6A1.5 1.5 0 0 1 4.5 16V4A1.5 1.5 0 0 1 6 2.5Z"/><path d="M11.5 2.5V6H15"/><path d="m7.6 11.6 1.8 1.8 3.4-3.4"/></svg>'} />
-            <span class="materia-testo"><span class="materia-nome">Il sito copre il tuo esame?</span><small class="lezioni-sotto">Carica il compito e scoprilo</small></span>
-          </a>
-        </li>
-      </ol>
-    </div>
-  )}
+  </form>}
   {m ? (
     <>
       <p class="indice-materia">
         <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a>
-        <a class="cambia-materia" href={link(lingua, '/')}>{t.altreMaterie}</a>
+        <a class="cambia-materia" href={link(lingua, '/')}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       </p>
       <ol>
         {m.argomenti.map((a) => {
@@ -54,7 +39,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
               <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento>{a.titolo}</button>
               <ol class:list={{ aperta: corrente }}>
                 {SEZIONI.map((s) => (
-                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }}>{s.titolo}</a></li>
+                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }} aria-current={corrente && s.slug === sezione ? 'page' : undefined}>{s.titolo}</a></li>
                 ))}
                 {conDomande.has(a.slug) && (
                   <li><a href={link(lingua, `/${m.slug}/${a.slug}/domande`)} class:list={{ attiva: corrente && sezione === 'domande' }}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</a></li>
@@ -159,6 +144,24 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       )}
     </>
   )}
+  {lingua === 'it' && <details class="indice-servizi">
+    <summary>Lezioni e assistenza</summary>
+  {lingua === 'it' && <LezioniCarmine dove="indice" />}
+  {/* «Compatibilità con il tuo esame» (versione B scelta da Carmine il 04/11) */}
+  {lingua === 'it' && (
+    <div class="lezioni-indice">
+      <p class="indice-materia"><span>Il tuo esame</span></p>
+      <ol class="indice-materie">
+        <li style="--colore-materia: var(--accento)">
+          <a class="voce-materia" href="/compatibilita">
+            <span class="lezioni-icona" set:html={'<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h5.5l3.5 3.5v11.5H6A1.5 1.5 0 0 1 4.5 16V4A1.5 1.5 0 0 1 6 2.5Z"/><path d="M11.5 2.5V6H15"/><path d="m7.6 11.6 1.8 1.8 3.4-3.4"/></svg>'} />
+            <span class="materia-testo"><span class="materia-nome">Il sito copre il tuo esame?</span><small class="lezioni-sotto">Carica il compito e scoprilo</small></span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  )}
+  </details>}
   <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>
 </nav>
 <script>
@@ -171,3 +174,12 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     });
   });
 </script>
+
+<style>
+  .indice-cerca-link{display:flex;justify-content:space-between;padding:.5rem;margin:0 .5rem .9rem;font:400 .9rem var(--ui);color:var(--inchiostro-2);text-decoration:none;border-bottom:1px solid var(--riga)}
+  .indice-cerca-link:hover{text-decoration:underline}
+  .indice-servizi{border-top:1px solid var(--riga);margin:1.2rem .4rem 0;padding-top:.75rem}
+  .indice-servizi>summary{cursor:pointer;color:var(--inchiostro-2);font:600 .9rem var(--ui);padding:.4rem 0}
+  .indice-servizi :global(.lezioni-indice){margin-top:.9rem}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
+</style>

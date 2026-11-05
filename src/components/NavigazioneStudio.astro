@@ -1,0 +1,61 @@
+---
+import { materiaL, link, T, type Lingua } from '../i18n';
+import { disponibilitaStudio } from '../lib/nav';
+import { sezioniStudio } from '../lib/percorso-studio.mjs';
+interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
+const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
+const en = lingua === 'en';
+const m = materia ? materiaL(lingua, materia) : undefined;
+const i = m?.argomenti.findIndex((a) => a.slug === argomento) ?? -1;
+const visibile = Boolean(m && i >= 0 && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
+const disponibili = visibile ? await disponibilitaStudio(materia!, argomento!, lingua) : null;
+const sezioni = disponibili ? sezioniStudio(disponibili) : [];
+const nomi = { ...T(lingua).sezioni, domande: en ? 'Timed questions' : 'Domande a tempo' };
+const dopo = visibile ? m?.argomenti[i + 1] : undefined;
+---
+{visibile && ['desktop', 'mobile'].map((modo) => {
+  // Una vista per breakpoint: il percorso completo resta disponibile anche
+  // senza JavaScript; al cambio di larghezza interviene soltanto il CSS.
+  const Contenitore = modo === 'mobile' ? 'details' : 'div';
+  return <Contenitore class={`studio-percorso-${modo}`}>
+  {modo === 'mobile' && <summary>{en ? 'Study path' : 'Percorso'}<span> · {nomi[sezione!]}</span></summary>}
+  <nav class="studio-sezioni" aria-label={en ? 'Sections of this topic' : 'Sezioni di questo argomento'}>
+    <ol>
+      {sezioni.map((s, n) => (
+        <li>
+          <a href={link(lingua, `/${materia}/${argomento}/${s}`)} aria-current={s === sezione ? 'step' : undefined}>
+            <span class="studio-numero" aria-hidden="true">{n + 1}</span>{nomi[s]}
+          </a>
+        </li>
+      ))}
+    </ol>
+    {dopo && <a class="studio-salta" href={link(lingua, `/${materia}/${dopo.slug}/teoria`)}>{en ? 'Next topic' : 'Argomento successivo'}<span aria-hidden="true"> →</span><span class="studio-salta-titolo"> · {dopo.breve}</span></a>}
+  </nav>
+  </Contenitore>;
+})}
+<style>
+  .studio-percorso-mobile { display: none; }
+  .studio-sezioni { margin: 0 0 1.5rem; padding: .65rem 0; border-block: 1px solid var(--riga); font-family: var(--ui); font-size: .85rem; }
+  .studio-sezioni ol { display: flex; flex-wrap: wrap; gap: .25rem .5rem; list-style: none; margin: 0; padding: 0; }
+  .studio-sezioni li { margin: 0; }
+  .studio-sezioni li a { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.25rem; padding: .25rem .4rem; border-radius: var(--raggio); color: var(--inchiostro-2); text-decoration: none; }
+  .studio-sezioni li a:hover { background: var(--carta-2); color: var(--inchiostro); }
+  .studio-sezioni a[aria-current] { background: color-mix(in srgb, var(--accento) 9%, var(--carta)); color: var(--accento); font-weight: 700; }
+  .studio-numero { display: grid; place-items: center; width: 1.2rem; height: 1.2rem; flex: none; font-size: .72rem; border: 1px solid var(--riga); border-radius: 50%; }
+  a[aria-current] .studio-numero { border-color: currentColor; }
+  .studio-salta { display: inline-block; margin: .4rem .4rem 0; color: var(--inchiostro-2); font-size: .78rem; text-decoration: none; }
+  .studio-salta:hover { text-decoration: underline; }
+  @media (max-width: 40rem) {
+    .studio-percorso-desktop { display: none; }
+    .studio-percorso-mobile { display: block; margin: 0 0 1rem; border-block: 1px solid var(--riga); font-family: var(--ui); }
+    .studio-percorso-mobile > summary { display: flex; align-items: center; flex-wrap: wrap; min-height: 2.75rem; padding: .55rem .35rem; font-size: .86rem; font-weight: 600; color: var(--inchiostro); cursor: pointer; list-style: none; }
+    .studio-percorso-mobile > summary::-webkit-details-marker { display: none; }
+    .studio-percorso-mobile > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); margin-right: .55rem; border-right: var(--apertura-tratto) solid currentColor; border-bottom: var(--apertura-tratto) solid currentColor; opacity: var(--apertura-opacita); transform: rotate(-45deg); flex: none; }
+    .studio-percorso-mobile[open] > summary::before { transform: rotate(45deg); }
+    .studio-percorso-mobile > summary span { margin-left: .25rem; color: var(--inchiostro-2); font-weight: 400; }
+    .studio-percorso-mobile .studio-sezioni { margin: 0; padding: .15rem 0 .7rem; border: 0; }
+    .studio-sezioni ol { display: grid; grid-template-columns: 1fr 1fr; gap: .2rem; }
+    .studio-sezioni li a { width: 100%; }
+  }
+  @media print { .studio-percorso-desktop, .studio-percorso-mobile { display: none; } }
+</style>

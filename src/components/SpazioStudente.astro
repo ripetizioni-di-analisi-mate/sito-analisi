@@ -1,19 +1,27 @@
 ---
-// Spazio personale in home (versione B scelta da Carmine il 01/11), visibile solo a chi ha fatto l'accesso (html.collegato).
+// Spazio personale in home, basato sulla versione B del 01/11 e ampliato per Missione Chiarezza.
+// Visibile solo a chi ha fatto l'accesso (html.collegato).
 // Il Worker scrive nella pagina nome, stemma, rango, titolo, frase, EXP, barra e prossimo grado (nessuno sfarfallio);
 // il tasto «Continua» e «Riprendi» li completa /api/percorso. La testata non viene toccata.
-import { link, type Lingua } from '../i18n';
+import { link, materieL, type Lingua } from '../i18n';
+import { catalogoDomande } from '../lib/domande';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
 const pref = en ? '/en' : '';
+const domande = await catalogoDomande(lingua);
+const catalogo = materieL(lingua).filter((m) => m.attiva).map((m) => ({
+  slug: m.slug, titolo: m.titolo,
+  argomenti: m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo })),
+  domande: domande[m.slug] ?? [],
+}));
 ---
-<section class="spazio-studente" aria-labelledby="ss-nome">
+<section class="spazio-studente" aria-labelledby="ss-nome" data-lingua={lingua}>
   <div class="ss-eroe">
     <div class="ss-stemma" aria-hidden="true"></div>
     <div class="ss-dati">
       <p class="ss-rango"></p>
-      <h2 class="ss-nome" id="ss-nome"></h2>
+      <h2 class="ss-nome" id="ss-nome">{en ? 'Your progress' : 'Il tuo percorso'}</h2>
       <p class="ss-titolo"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
     </div>
     {/* Esame più vicino (richiesta di Carmine del 03/11, versione A fra tre): solo se lo studente ha inserito una data. */}
@@ -29,28 +37,91 @@ const pref = en ? '/en' : '';
   <div class="ss-piede">
     <div class="ss-azioni">
       <a class="ss-riprendi" href="#" hidden><span class="ss-libro" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M10 5.2C8.4 4 6.2 3.6 3 3.8v11.4c3.2-.2 5.4.2 7 1.4 1.6-1.2 3.8-1.6 7-1.4V3.8c-3.2-.2-5.4.2-7 1.4Z"/><path d="M10 5.2v11.4"/></svg></span><span class="ss-rip-testo"><small>{en ? 'Back to' : 'Riprendi'}</small><span class="ss-argomento"></span></span></a>
-      <a class="ss-continua" href={link(lingua, '/livelli-e-punti')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
+      <a class="ss-continua" href="#materie-home"><span>{en ? 'Choose a subject' : 'Scegli una materia'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
     </div>
   </div>
+  <p class="ss-stato" role="status" aria-live="polite" hidden><span>{en ? 'Loading your study activities…' : 'Caricamento delle tue attività di studio…'}</span> <button type="button" class="ss-riprova" hidden>{en ? 'Try again' : 'Riprova'}</button></p>
+  <noscript><p class="ss-dettaglio">{en ? 'Enable JavaScript to load your activities. Your materials are available below.' : 'Attiva JavaScript per caricare le attività. I tuoi materiali sono disponibili qui sotto.'}</p></noscript>
+  <div class="ss-personale" hidden>
+    <dl class="ss-oggi" aria-label={en ? 'Your study activity' : 'La tua attività di studio'}>
+      <div><dt>{en ? 'Study today' : 'Studio di oggi'}</dt><dd class="ss-minuti"></dd></div>
+      <div><dt>{en ? 'Correct answers today' : 'Risposte corrette oggi'}</dt><dd class="ss-corrette"></dd></div>
+      <div><dt>{en ? 'Study days this week' : 'Giorni di studio questa settimana'}</dt><dd class="ss-giorni"></dd></div>
+    </dl>
+    <div class="ss-attivita">
+      <section class="ss-obiettivo" aria-labelledby="ss-obiettivo-titolo">
+        <p class="ss-meta">{en ? 'This week' : 'Questa settimana'}</p>
+        <h3 id="ss-obiettivo-titolo">{en ? 'Your next goal' : 'Il prossimo obiettivo'}</h3>
+        <p class="ss-obiettivo-testo"></p>
+        <progress class="ss-obiettivo-barra" value="0" max="1" aria-label={en ? 'Goal progress' : 'Avanzamento dell’obiettivo'} hidden></progress>
+        <p class="ss-obiettivo-conto ss-dettaglio"></p>
+      </section>
+      <section class="ss-ripasso" aria-labelledby="ss-ripasso-titolo">
+        <p class="ss-meta">{en ? 'Review' : 'Ripasso'}</p>
+        <h3 id="ss-ripasso-titolo">{en ? 'Today’s review' : 'Da ripassare oggi'}</h3>
+        <p class="ss-ripasso-testo"></p>
+        <ul class="ss-ripasso-link"></ul>
+      </section>
+    </div>
+    <details class="ss-traguardi">
+      <summary>{en ? 'Milestones and rewards' : 'Traguardi e premi'}<span class="ss-premi-conto"></span></summary>
+      <div class="ss-prossimo" hidden>
+        <p class="ss-meta">{en ? 'Next milestone' : 'Prossimo traguardo'}</p>
+        <p class="ss-prossimo-nome"></p>
+        <progress class="ss-prossimo-barra" value="0" max="1" aria-label={en ? 'Milestone progress' : 'Avanzamento del traguardo'}></progress>
+        <p class="ss-prossimo-conto ss-dettaglio"></p>
+      </div>
+      <p class="ss-premi-nota ss-dettaglio"></p>
+      <ul class="ss-premi"></ul>
+      <a class="ss-link" href={link(lingua, '/livelli-e-punti')}>{en ? 'How levels and points work' : 'Come funzionano livelli e punti'} →</a>
+    </details>
+    <nav class="ss-sfide" aria-label={en ? 'Practice and challenges' : 'Allenamento e sfide'}>
+      <a class="ss-link" href={link(lingua, '/account')}>{en ? 'All your progress' : 'Tutti i tuoi progressi'} →</a>
+      {!en && <><a class="ss-link" href="/lega">Lega della settimana →</a><a class="ss-link" href="/duelli">Duelli →</a></>}
+    </nav>
+  </div>
+  <script type="application/json" class="ss-catalogo" is:inline set:html={JSON.stringify(catalogo).replace(/</g, '\\u003c')}></script>
 </section>
-<script is:inline define:vars={{ en, pref }}>
+<script>
+  import { scelteSpazio, ripassiDisponibili } from '../lib/spazio-studente.mjs';
   (async () => {
-    const box = document.querySelector('.spazio-studente');
+    const box = document.querySelector<HTMLElement>('.spazio-studente');
     if (!box || !document.documentElement.classList.contains('collegato')) return;
-    const q = (s) => box.querySelector(s);
-    const r = await fetch(`/api/percorso?l=${en ? 'en' : 'it'}`).catch(() => null);
-    if (!r || !r.ok) return;
-    const d = await r.json();
+    const en = box.dataset.lingua === 'en';
+    const pref = en ? '/en' : '';
+    const XP = en ? 'XP' : 'EXP';
+    const q = <T extends HTMLElement = HTMLElement>(s: string) => box.querySelector<T>(s)!;
+    const catalogo = JSON.parse(q('.ss-catalogo').textContent || '[]');
+    const num = (n: unknown) => Math.max(0, Number(n) || 0).toLocaleString(en ? 'en-US' : 'it-IT');
+    const richiesta = async (url: string) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
+      try {
+        const r = await fetch(url, { cache: 'no-store', credentials: 'same-origin', signal: controller.signal });
+        return r.ok ? await r.json() : null;
+      } catch { return null; }
+      finally { clearTimeout(timer); }
+    };
+    const carica = async () => {
+      box.setAttribute('aria-busy', 'true');
+      q('.ss-stato').hidden = false;
+      q('.ss-stato span').textContent = en ? 'Loading your study activities…' : 'Caricamento delle tue attività di studio…';
+      q<HTMLButtonElement>('.ss-riprova').hidden = true;
+      const [d, ripasso] = await Promise.all([richiesta(`/api/percorso?l=${en ? 'en' : 'it'}`), richiesta('/api/ripasso')]);
+      if (!d || !d.stato) {
+        box.setAttribute('aria-busy', 'false');
+        q('.ss-stato span').textContent = en ? 'Your activities could not be loaded. Your materials remain available below.' : 'Le attività non sono state caricate. I tuoi materiali restano disponibili qui sotto.';
+        q<HTMLButtonElement>('.ss-riprova').hidden = false;
+        return;
+      }
+      const scelte = scelteSpazio(d, catalogo, pref);
     // Tasto principale: obiettivo della settimana con un collegamento, altrimenti le domande dell'ultimo argomento studiato.
-    const conLink = (d.obiettivi || []).find((o) => o.link && !o.completato);
-    const ultima = (d.sessioni || []).find((s) => s.materia && s.argomento);
-    const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
-    const c = q('.ss-continua');
-    if (dove) c.href = pref + dove;
-    else { c.href = '#materie-home'; c.querySelector('span').textContent = en ? 'Choose a topic and start' : 'Scegli un argomento e inizia'; }
+      const c = q<HTMLAnchorElement>('.ss-continua');
+      c.href = scelte.quiz || '#materie-home';
+      c.querySelector('span')!.textContent = scelte.quiz ? (en ? 'Practise with questions' : 'Allenati con le domande') : (en ? 'Choose a subject' : 'Scegli una materia');
     // Esame più vicino con la data inserita (/api/percorso → esami).
     const esame = (d.esami || [])[0];
-    const es = q('.ss-esame');
+    const es = q<HTMLAnchorElement>('.ss-esame');
     if (esame && es) {
       const giorno = new Date(esame.data + 'T12:00:00');
       const n = Math.round((giorno - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
@@ -65,11 +136,97 @@ const pref = en ? '/en' : '';
         box.classList.add('con-esame');
       }
     }
-    if (ultima && ultima.titolo && ultima.argomento !== 'prove-d-esame') {
-      const a = q('.ss-riprendi');
-      a.href = `${pref}/${ultima.materia}/${ultima.argomento}/teoria`;
-      a.querySelector('.ss-argomento').textContent = ultima.titolo;
-      a.hidden = false;
-    }
+      const a = q<HTMLAnchorElement>('.ss-riprendi');
+      a.hidden = !scelte.riprendi;
+      if (scelte.riprendi) {
+        a.href = scelte.riprendi.href;
+        q('.ss-argomento').textContent = scelte.riprendi.titolo;
+        a.title = scelte.riprendi.materia;
+      }
+      q('.ss-minuti').textContent = typeof d.oggi?.minuti === 'number' ? `${num(d.oggi.minuti)} min` : '–';
+      q('.ss-corrette').textContent = typeof d.oggi?.corrette === 'number' ? num(d.oggi.corrette) : '–';
+      q('.ss-giorni').textContent = Array.isArray(d.settimana?.giorni) ? num(d.settimana.giorni.filter((g: { attivo: boolean }) => g.attivo).length) : '–';
+      const ob = scelte.obiettivo;
+      q('.ss-obiettivo-testo').textContent = ob?.testo || (scelte.tuttiCompletati ? (en ? 'You have completed this week’s goals.' : 'Hai completato gli obiettivi della settimana.') : (en ? 'Choose a subject below to begin your study session.' : 'Scegli una materia qui sotto per iniziare la sessione di studio.'));
+      const barra = q<HTMLProgressElement>('.ss-obiettivo-barra');
+      barra.hidden = !ob;
+      q('.ss-obiettivo-conto').textContent = '';
+      if (ob) {
+        barra.max = Math.max(1, Number(ob.totale) || 1);
+        barra.value = Math.min(barra.max, Math.max(0, Number(ob.fatto) || 0));
+        q('.ss-obiettivo-conto').textContent = `${num(ob.fatto)} / ${num(ob.totale)}${ob.unita ? ` ${ob.unita}` : ''} · ${en ? 'Reward' : 'Premio'}: ${num(ob.punti)} ${XP}`;
+      }
+      const daRipassare = ripassiDisponibili(ripasso, catalogo, pref);
+      const totaleRipasso = daRipassare.reduce((n: number, r: { n: number }) => n + r.n, 0);
+      q('.ss-ripasso-testo').textContent = !ripasso ? (en ? 'Review is temporarily unavailable.' : 'Il ripasso è momentaneamente non disponibile.') : totaleRipasso ? (en ? `${num(totaleRipasso)} questions are ready for review.` : `${num(totaleRipasso)} domande sono pronte per il ripasso.`) : (en ? 'No questions are due today. You can continue with your chosen topic.' : 'Oggi non ci sono domande in scadenza. Puoi continuare con l’argomento scelto.');
+      q('.ss-ripasso-link').replaceChildren(...daRipassare.map((r: { titolo: string; n: number; href: string }) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = r.href; a.textContent = `${r.titolo} · ${num(r.n)} →`; li.append(a); return li;
+      }));
+      const traguardi = Array.isArray(d.traguardi) ? d.traguardi : [];
+      q('.ss-premi-conto').textContent = en ? `${num(traguardi.length)} earned` : `${num(traguardi.length)} ${traguardi.length === 1 ? 'ottenuto' : 'ottenuti'}`;
+      q('.ss-premi-nota').textContent = traguardi.length ? (en ? 'Your most recent rewards' : 'Gli ultimi premi ottenuti') : (en ? 'The milestones you reach will appear here.' : 'Qui compariranno i traguardi che raggiungerai.');
+      q('.ss-premi').replaceChildren(...traguardi.slice(-3).reverse().map((p: { nome: string; punti: number }) => {
+        const li = document.createElement('li');
+        const nome = document.createElement('strong'); nome.textContent = p.nome;
+        const punti = document.createElement('span'); punti.textContent = `+${num(p.punti)} ${XP}`;
+        li.append(nome, punti); return li;
+      }));
+      const prossimo = d.prossimo;
+      q('.ss-prossimo').hidden = !prossimo;
+      if (prossimo) {
+        q('.ss-prossimo-nome').textContent = prossimo.nome;
+        const b = q<HTMLProgressElement>('.ss-prossimo-barra');
+        b.max = Math.max(1, Number(prossimo.totale) || 1); b.value = Math.min(b.max, Math.max(0, Number(prossimo.fatto) || 0));
+        q('.ss-prossimo-conto').textContent = `${num(prossimo.fatto)} / ${num(prossimo.totale)}${prossimo.unita ? ` ${prossimo.unita}` : ''} · ${en ? 'Reward' : 'Premio'}: ${num(prossimo.punti)} ${XP}`;
+      }
+      q('.ss-stato').hidden = true;
+      q('.ss-personale').hidden = false;
+      box.setAttribute('aria-busy', 'false');
+    };
+    q<HTMLButtonElement>('.ss-riprova').addEventListener('click', carica);
+    await carica();
   })();
 </script>
+<style>
+  .spazio-studente .ss-etichetta { margin: 0; color: var(--inchiostro-2); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
+  .ss-stato { margin: .2rem 0 0; font-size: .86rem; color: var(--inchiostro-2); }
+  .ss-stato[hidden], .ss-personale[hidden], .ss-riprova[hidden], .ss-prossimo[hidden], progress[hidden] { display: none; }
+  .ss-riprova { padding: 0; border: 0; background: transparent; color: var(--verde); font: inherit; text-decoration: underline; cursor: pointer; }
+  .ss-personale { display: grid; gap: 1rem; min-width: 0; }
+  .ss-oggi { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .8rem; margin: 0; padding: 1rem 0; border-top: 1px solid var(--riga); border-bottom: 1px solid var(--riga); }
+  .ss-oggi div { min-width: 0; }
+  .ss-oggi dt { font-size: .77rem; color: var(--inchiostro-2); line-height: 1.3; }
+  .ss-oggi dd { margin: .25rem 0 0; font-size: 1.4rem; line-height: 1.2; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--inchiostro); }
+  .ss-attivita { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  .ss-attivita section { min-width: 0; }
+  .ss-meta { margin: 0 0 .25rem; font-size: .7rem; font-weight: 700; color: var(--inchiostro-2); text-transform: uppercase; letter-spacing: .06em; }
+  .spazio-studente h3 { margin: 0 0 .4rem; font-family: var(--ui); font-size: 1rem; line-height: 1.35; color: var(--inchiostro); }
+  .ss-obiettivo-testo, .ss-ripasso-testo, .ss-prossimo-nome { margin: 0 0 .6rem; font-size: .9rem; line-height: 1.45; }
+  .ss-dettaglio { margin: .35rem 0; font-size: .78rem; color: var(--inchiostro-2); line-height: 1.4; }
+  progress { display: block; width: 100%; height: .45rem; border: 0; border-radius: 1rem; overflow: hidden; accent-color: var(--verde); background: var(--riga); }
+  progress::-webkit-progress-bar { background: var(--riga); border-radius: 1rem; }
+  progress::-webkit-progress-value { background: var(--verde); border-radius: 1rem; }
+  progress::-moz-progress-bar { background: var(--verde); border-radius: 1rem; }
+  .ss-ripasso-link, .ss-premi { list-style: none; margin: .45rem 0 0; padding: 0; display: grid; gap: .4rem; }
+  .ss-ripasso-link a, .ss-link { color: var(--verde); font-size: .84rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb,currentColor 35%,transparent); }
+  .ss-traguardi { border-top: 1px solid var(--riga); padding-top: .8rem; }
+  .ss-traguardi summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .7rem; cursor: pointer; font-weight: 600; font-size: .9rem; }
+  .ss-traguardi summary::before { content: '+'; color: var(--verde); }
+  .ss-traguardi[open] summary::before { content: '−'; }
+  .ss-premi-conto { margin-left: auto; color: var(--inchiostro-2); font-size: .75rem; font-weight: 400; }
+  .ss-prossimo { margin-top: .8rem; }
+  .ss-premi { margin-bottom: .7rem; }
+  .ss-premi li { display: flex; gap: .5rem; justify-content: space-between; padding: .4rem .6rem; background: var(--carta, #faf8f2); border-radius: .35rem; font-size: .8rem; }
+  .ss-premi li strong { font-weight: 600; }
+  .ss-premi li span { flex: none; color: var(--verde); }
+  .ss-sfide { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; padding-top: .7rem; border-top: 1px solid var(--riga); }
+  @media (max-width: 560px) {
+    .ss-attivita { grid-template-columns: 1fr; gap: 1rem; }
+    .ss-attivita .ss-ripasso { padding-top: .9rem; border-top: 1px solid var(--riga); }
+    .ss-oggi { gap: .65rem; }
+    .ss-oggi dd { font-size: 1.2rem; }
+    .ss-oggi dt { font-size: .7rem; }
+  }
+</style>

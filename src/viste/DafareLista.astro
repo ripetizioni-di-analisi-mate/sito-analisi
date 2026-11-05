@@ -4,7 +4,7 @@ import { SITO, assoluto } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
-import { vicini, perArgomento, numero } from '../lib/nav';
+import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
 import { catalogoDomande } from '../lib/domande';
 import { risultatoDi } from '../lib/risposte';
 import VerificaRisposta from '../components/VerificaRisposta.astro';
@@ -18,7 +18,7 @@ const voci = await Promise.all(italiane.map((e) => voceL(lingua, 'dafare', e.id)
 const risultati = Object.fromEntries(italiane.map((e) => [e.id, risultatoDi(e)]));
 const nonTradotta = voci.some((v) => !v.tradotta);
 const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
-const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua);
+const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
 // Domande a tempo, per gli argomenti che ne hanno.
 const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento);

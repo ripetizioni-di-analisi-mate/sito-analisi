@@ -4,14 +4,14 @@ import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
-import { vicini, perArgomento, numero } from '../lib/nav';
+import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
 const arg = argomentoL(lingua, materia, argomento);
 const voci = await Promise.all(perArgomento(await getCollection('svolti'), materia, argomento).map((e) => voceL(lingua, 'svolti', e.id)));
 const nonTradotta = voci.some((v) => !v.tradotta);
-const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua);
+const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
 ---
 <Base

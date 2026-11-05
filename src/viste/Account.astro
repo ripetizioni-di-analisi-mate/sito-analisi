@@ -3,7 +3,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import InvitaAmico from '../components/InvitaAmico.astro';
-import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
+import { materieL, testiJs, T, prefisso, link, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -17,7 +17,7 @@ const sblocca = t.sblocca;
   <p class="sommario" id="chi">{t.caricamento}</p>
 
   <section id="pannello" hidden>
-    <InvitaAmico lingua={lingua} />
+    <p><a class="bottone-primario" href={link(lingua, '/')} >{lingua === 'en' ? 'Open your study space' : 'Apri il tuo spazio di studio'} <span aria-hidden="true">→</span></a></p>
     {(
       <div id="percorso" class="percorso-account" hidden>
         <h2>{lingua === 'en' ? 'Your progress' : 'Il tuo percorso'}</h2>
@@ -51,6 +51,7 @@ const sblocca = t.sblocca;
     <h2>{t.leTueMaterie}</h2>
     <ul class="materie-account" id="materie"></ul>
 
+    <InvitaAmico lingua={lingua} />
     <div class="azioni-account">
       <details class="impostazioni-account">
         <summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>{t.impostazioni}</summary>
