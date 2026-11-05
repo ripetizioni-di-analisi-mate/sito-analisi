@@ -159,6 +159,16 @@ const invito = lingua === 'en' ? {
       };
       if (io) { mostraAccount(); return; }
 
+      // Un prezzo non configurato non deve invitare l'ospite a creare un account per pagare.
+      if (!conf || !conf.prezzi[materia]) {
+        modulo.hidden = true;
+        azione.hidden = false;
+        azione.innerHTML = `<p>${localePaddle === 'en'
+          ? 'Purchasing this subject is not available yet. You can explore the free preview and practise with the timed questions.'
+          : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${pref}/${materia}">${localePaddle === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;
+        return;
+      }
+
       // Ospite: iscrizione dentro il riquadro del prezzo; dopo l'iscrizione si apre subito il pagamento.
       azione.hidden = true;
       modulo.hidden = false;

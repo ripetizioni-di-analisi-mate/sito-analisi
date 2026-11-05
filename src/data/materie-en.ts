@@ -205,8 +205,21 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-4': {
     titolo: 'Physics, 4th year',
     breve: 'Physics 4th year',
-    descrizione: 'The physics syllabus of the 4th year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'Physics for the fourth year of the Italian scientific high school: thermodynamics, waves, sound, optics, electrostatics, capacitors and direct-current circuits. Theory, worked problems and timed questions.',
+    argomenti: {
+      'temperatura-calore-gas': { titolo: 'Temperature, heat and ideal gases', breve: 'Temperature, heat and ideal gases' },
+      'primo-principio-termodinamica': { titolo: 'First law of thermodynamics', breve: 'First law of thermodynamics' },
+      'secondo-principio-entropia': { titolo: 'Second law, heat engines and entropy', breve: 'Second law, heat engines and entropy' },
+      'oscillazioni-onde': { titolo: 'Oscillations and mechanical waves', breve: 'Oscillations and mechanical waves' },
+      'suono': { titolo: 'Sound, resonance and Doppler effect', breve: 'Sound, resonance and Doppler effect' },
+      'ottica-geometrica': { titolo: 'Reflection, refraction, mirrors and lenses', breve: 'Reflection, refraction, mirrors and lenses' },
+      'interferenza-diffrazione': { titolo: 'Interference and diffraction of light', breve: 'Interference and diffraction of light' },
+      'carica-campo-elettrico': { titolo: 'Electric charge, Coulomb law and electric field', breve: 'Electric charge, Coulomb law and electric field' },
+      'flusso-teorema-gauss': { titolo: 'Electric flux and Gauss law', breve: 'Electric flux and Gauss law' },
+      'potenziale-condensatori': { titolo: 'Electric potential and capacitors', breve: 'Electric potential and capacitors' },
+      'corrente-leggi-ohm': { titolo: 'Current, Ohm laws and Joule heating', breve: 'Current, Ohm laws and Joule heating' },
+      'circuiti-elettrici': { titolo: 'Electric circuits and Kirchhoff laws', breve: 'Electric circuits and Kirchhoff laws' },
+    },
   },
   'fisica-superiori-5': {
     titolo: 'Physics, 5th year',
