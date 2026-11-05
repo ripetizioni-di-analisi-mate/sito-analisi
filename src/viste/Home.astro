@@ -6,6 +6,7 @@ import Stato from '../components/Stato.astro';
 import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
 import GratisHome from '../components/GratisHome.astro';
+import PacchettiHome from '../components/PacchettiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
@@ -52,14 +53,15 @@ const icona = {
   </form>
   {lingua === 'it' ? (
     <ul class="legenda-home">
-      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: teoria, teoremi con dimostrazione, esercizi svolti passo dopo passo ed esercizi con soluzione.</span></li>
-      <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: le lezioni complete dei corsi, registrate, con il PDF di ogni lezione.</span></li>
+      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
+      <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: lezioni di Carmine, con video e PDF.</span></li>
     </ul>
-    <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span>Di ogni argomento si leggono gratis l'inizio della teoria e le prime tre schede svolte, senza account.</span></p>
+    <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span><b>Prova gratis</b>: anteprime di teoria ed esercizi, senza account.</span></p>
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
   <GratisHome lingua={lingua} />
+  {lingua === 'it' && <PacchettiHome />}
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppiL(lingua).map((g, i) => (
     <details class="gruppo" open={i === 0} id={i === 0 ? 'materie-home' : undefined}>
