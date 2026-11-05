@@ -111,15 +111,16 @@ async function paddle(env, metodo, percorso, corpo) {
   if (!r.ok) throw new Error(`Paddle ${r.status} ${d?.error?.code || ''} ${d?.error?.detail || ''}`.trim());
   return d.data;
 }
-// Codice di sconto personale: 15%, un solo uso, valido solo sui prezzi delle materie.
-async function creaSconto(env, { prefisso, descrizione, scade }) {
+// Codice di sconto personale: 15% (o la percentuale data), un solo uso, valido solo sui prezzi delle materie.
+// Usato anche dalla newsletter (worker/newsletter.mjs) con il 10%.
+export async function creaSconto(env, { prefisso, descrizione, scade, percentuale = SCONTO_INVITO }) {
   const prezzi = prezziMaterie(env);
   if (!prezzi.length) throw new Error('prezzi delle materie mancanti');
   const codice = prefisso + casuale(8);
   const d = await paddle(env, 'POST', '/discounts', {
     description: descrizione.slice(0, 500),
     type: 'percentage',
-    amount: String(SCONTO_INVITO),
+    amount: String(percentuale),
     enabled_for_checkout: true,
     code: codice,
     usage_limit: 1,

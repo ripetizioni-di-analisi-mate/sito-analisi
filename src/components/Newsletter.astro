@@ -1,0 +1,147 @@
+---
+// Newsletter (richiesta di Carmine del 05/11/2026; regole in src/data/newsletter.ts, Worker in worker/newsletter.mjs).
+// Barra in basso che compare appena si entra, solo a chi non ha fatto l'accesso: email, consenso, «Iscriviti».
+// Dopo l'iscrizione la barra mostra il codice personale del 10% con il tasto «Copia».
+// Due versioni grafiche (data-versione): «a» striscia a tutta larghezza, «b» riquadro compatto in basso a sinistra.
+// Prova: ?nl=a oppure ?nl=b mostra la barra anche se chiusa o già iscritti, nella versione scelta.
+import { link, type Lingua } from '../i18n';
+import { SCONTO_NEWSLETTER, GIORNI_RIPROPOSTA, RITARDO_SECONDI, PAGINE_SENZA_BARRA } from '../data/newsletter';
+interface Props { lingua: Lingua; versione?: 'a' | 'b' }
+const { lingua, versione = 'a' } = Astro.props;
+const en = lingua === 'en';
+const p = SCONTO_NEWSLETTER;
+const s = en ? {
+  titolo: `${p}% off your first subject`,
+  sotto: 'Subscribe to the newsletter: you get the code right away, then news about the site and the opening of group courses.',
+  email: 'Your email', iscriviti: 'Subscribe', chiudi: 'Close',
+  consensoA: 'I have read the ', consensoLink: 'privacy policy', consensoB: ' and agree to receive the newsletter.',
+  emailNo: 'Enter a valid email.', consensoNo: 'Tick the box to subscribe.', rete: 'Network error: please try again.', limite: 'Too many attempts today: please try again tomorrow.',
+  fatto: 'Subscribed.', codice: `Your ${p}% code`, copia: 'Copy', copiato: 'Copied',
+  nota: 'It is applied automatically at checkout for a subject, and it is also in the welcome email.',
+  senzaCodice: 'You will receive news about the site and the opening of group courses.',
+  gia: 'This email is already subscribed. The code is in the welcome email.',
+} : {
+  titolo: `Sconto del ${p}% sulla tua prima materia`,
+  sotto: 'Iscriviti alla newsletter: ricevi subito il codice, poi le novità del sito e le aperture dei corsi di gruppo.',
+  email: 'La tua email', iscriviti: 'Iscriviti', chiudi: 'Chiudi',
+  consensoA: 'Ho letto l’', consensoLink: 'informativa sulla privacy', consensoB: ' e acconsento a ricevere la newsletter.',
+  emailNo: 'Scrivi un’email valida.', consensoNo: 'Spunta la casella per iscriverti.', rete: 'Errore di rete: riprova.', limite: 'Troppi tentativi oggi: riprova domani.',
+  fatto: 'Iscrizione fatta.', codice: `Il tuo codice del ${p}%`, copia: 'Copia', copiato: 'Copiato',
+  nota: 'Si applica da solo al pagamento di una materia ed è anche nell’email di benvenuto.',
+  senzaCodice: 'Riceverai le novità del sito e le aperture dei corsi di gruppo.',
+  gia: 'Questa email è già iscritta. Il codice è nell’email di benvenuto.',
+};
+---
+<aside class="newsletter" data-versione={versione} aria-label="Newsletter" hidden>
+  <button type="button" class="nl-chiudi" aria-label={s.chiudi} data-nl-chiudi>
+    <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l10 10M15 5 5 15"/></svg>
+  </button>
+  <div class="nl-dentro">
+    <div class="nl-testo">
+      <p class="nl-titolo"><span class="nl-pillola">−{p}%</span>{s.titolo}</p>
+      <p class="nl-sotto">{s.sotto}</p>
+    </div>
+    <form class="nl-modulo" novalidate>
+      <div class="nl-riga">
+        <label class="nl-nascosto" for="nl-email">{s.email}</label>
+        <input id="nl-email" type="email" inputmode="email" autocomplete="email" maxlength="200" placeholder={s.email} required />
+        <button type="submit" class="nl-tasto">{s.iscriviti}</button>
+      </div>
+      <label class="nl-consenso">
+        <input type="checkbox" id="nl-consenso" />
+        <span>{s.consensoA}<a href={link(lingua, '/privacy')} target="_blank" rel="noopener">{s.consensoLink}</a>{s.consensoB}</span>
+      </label>
+      <p class="nl-esito" role="status" aria-live="polite"></p>
+    </form>
+    <div class="nl-grazie" hidden>
+      <p class="nl-titolo"><svg class="nl-spunta" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="m6.5 10.2 2.3 2.3 4.7-4.9"/></svg>{s.fatto}</p>
+      <div class="nl-codice" hidden>
+        <span class="nl-codice-etichetta">{s.codice}</span>
+        <span class="nl-codice-riga"><code data-nl-codice></code><button type="button" class="nl-copia" data-nl-copia>{s.copia}</button></span>
+        <p class="nl-sotto">{s.nota}</p>
+      </div>
+      <p class="nl-sotto" data-nl-senza hidden>{s.senzaCodice}</p>
+      <p class="nl-sotto" data-nl-gia hidden>{s.gia}</p>
+    </div>
+  </div>
+</aside>
+
+<script is:inline define:vars={{ t: s, lingua, giorni: GIORNI_RIPROPOSTA, ritardo: RITARDO_SECONDI, escluse: PAGINE_SENZA_BARRA.source }}>
+  (() => {
+    const box = document.querySelector('.newsletter');
+    if (!box) return;
+    const rad = document.documentElement;
+    const prova = new URLSearchParams(location.search).get('nl');
+    const leggi = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
+    const scrivi = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage non disponibile */ } };
+    if (prova === 'a' || prova === 'b') box.dataset.versione = prova;
+    else {
+      if (rad.classList.contains('collegato')) return;
+      if (new RegExp(escluse).test(location.pathname)) return;
+      if (leggi('newsletter') === 'iscritto') return;
+      const chiusa = Number(leggi('newsletter-chiusa') || 0);
+      if (chiusa && Date.now() - chiusa < giorni * 86400000) return;
+    }
+
+    // La barra sta sopra i tasti fissi (Pi, WhatsApp, torna su): la sua altezza li sposta in alto.
+    const misura = () => rad.style.setProperty('--altezza-nl', `${Math.ceil(box.getBoundingClientRect().height)}px`);
+    const ro = 'ResizeObserver' in window ? new ResizeObserver(misura) : null;
+    const mostra = () => {
+      box.hidden = false;
+      rad.classList.add('con-newsletter', `con-newsletter-${box.dataset.versione}`);
+      misura(); ro?.observe(box);
+      requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('aperta')));
+    };
+    const nascondi = () => {
+      box.classList.remove('aperta');
+      rad.classList.remove('con-newsletter', 'con-newsletter-a', 'con-newsletter-b');
+      ro?.disconnect();
+      setTimeout(() => { box.hidden = true; }, 350);
+    };
+    setTimeout(mostra, prova ? 0 : ritardo * 1000);
+
+    box.querySelector('[data-nl-chiudi]').addEventListener('click', () => {
+      if (leggi('newsletter') !== 'iscritto') scrivi('newsletter-chiusa', String(Date.now()));
+      nascondi();
+    });
+
+    const modulo = box.querySelector('.nl-modulo');
+    const esito = box.querySelector('.nl-esito');
+    const email = box.querySelector('#nl-email');
+    const consenso = box.querySelector('#nl-consenso');
+    const tasto = box.querySelector('.nl-tasto');
+    modulo.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      esito.textContent = '';
+      const valore = email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valore)) { esito.textContent = t.emailNo; email.focus(); return; }
+      if (!consenso.checked) { esito.textContent = t.consensoNo; return; }
+      tasto.disabled = true;
+      try {
+        const r = await fetch('/api/newsletter', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email: valore, consenso: true, lingua, pagina: location.pathname }),
+        });
+        const d = await r.json().catch(() => ({}));
+        if (r.status === 429) { esito.textContent = t.limite; return; }
+        if (!r.ok || !d.ok) { esito.textContent = d.errore === 'email' ? t.emailNo : t.rete; return; }
+        scrivi('newsletter', 'iscritto');
+        modulo.hidden = true;
+        box.querySelector('.nl-testo').hidden = true;
+        box.querySelector('.nl-grazie').hidden = false;
+        if (d.codice) {
+          box.querySelector('[data-nl-codice]').textContent = d.codice;
+          box.querySelector('.nl-codice').hidden = false;
+        } else if (d.gia) box.querySelector('[data-nl-gia]').hidden = false;
+        else box.querySelector('[data-nl-senza]').hidden = false;
+        misura();
+      } catch { esito.textContent = t.rete; } finally { tasto.disabled = false; }
+    });
+
+    const copia = box.querySelector('[data-nl-copia]');
+    copia.addEventListener('click', async () => {
+      const c = box.querySelector('[data-nl-codice]').textContent;
+      try { await navigator.clipboard.writeText(c); copia.textContent = t.copiato; } catch { /* copia non permessa */ }
+    });
+  })();
+</script>
