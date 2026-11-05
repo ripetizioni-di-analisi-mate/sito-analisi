@@ -18,7 +18,8 @@ export interface Videocorso {
   pacchettoDi?: string[];
 }
 
-export const MINUTI_LEZIONE = 50;
+// Ogni videolezione dura un'ora; le ore totali coincidono con il numero di lezioni.
+export const MINUTI_LEZIONE = 60;
 
 export const VIDEOCORSI: Videocorso[] = [
   {
