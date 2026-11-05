@@ -4,6 +4,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 interface Props { lingua: Lingua; materia: string }
@@ -28,6 +29,9 @@ import { risultatoDi } from '../lib/risposte';
 // Progressi (con l'account): esercizi da fare con la verifica della risposta, per argomento.
 const verificabili = (a: string) => dafare.filter((v) => v.id.startsWith(`${materia}/${a}/`) && risultatoDi(v)).length;
 const en = lingua === 'en';
+const semestreFiltro = materia === 'fisica-semestre-filtro';
+const nomeRipasso = semestreFiltro ? (en ? 'Practice and review' : 'Allenamento e ripasso') : (en ? 'Exam practice' : 'Prove d\'esame');
+const nomeCompito = semestreFiltro ? (en ? 'Exercise practice' : 'Allenamento con esercizi') : (en ? 'Exam simulation' : m.gruppo === 'Concorsi' ? 'Simulazione della prova' : 'Simulazione d\'esame');
 // Indice analitico (teoremi e definizioni) della materia.
 import { indiceAnalitico } from '../lib/indice-analitico';
 const indice = await indiceAnalitico(lingua, materia, m.argomenti.map((a) => a.slug));
@@ -52,6 +56,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class="sopratitolo">{sopra}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
+  {semestreFiltro && <NotaSemestreFiltro lingua={lingua} />}
   {m.prezzo && (
     <div class="riquadro-stato" data-materia={m.slug}>
       <div class="stato-sbloccata">
@@ -126,11 +131,11 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     })}
     {domandeMateria > 0 && (
       <li>
-        <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</a></h2>
-        <p class="riassunto">{lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
-        <nav aria-label={lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}>
+        <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{nomeRipasso}</a></h2>
+        <p class="riassunto">{semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly. These independent exercises do not reproduce the official exam format.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate. Queste esercitazioni indipendenti non riproducono il formato della prova ufficiale.') : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
+        <nav aria-label={nomeRipasso}>
           <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
-          <a href={link(lingua, `/${materia}/simulazione`)}>{lingua === 'en' ? 'Exam simulation' : m.gruppo === 'Concorsi' ? 'Simulazione della prova' : 'Simulazione d\'esame'}</a>
+          <a href={link(lingua, `/${materia}/simulazione`)}>{nomeCompito}</a>
           <a class="solo-collegati" href={link(lingua, `/${materia}/${RIPASSO_OGGI}/domande`)}>{lingua === 'en' ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
         </nav>
       </li>

@@ -2,18 +2,24 @@
 // Domande a tempo di un argomento: una alla volta, due minuti ciascuna, spiegazione subito dopo la conferma.
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
+import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
 const { lingua, materia, argomento, totale } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
+const semestreFiltro = materia === 'fisica-semestre-filtro';
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
 // Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
 const personale = argomento === RIPASSO_OGGI;
 const ripasso = argomento === RIPASSO || personale;
 const arg = personale ? { slug: RIPASSO_OGGI, titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi', breve: en ? 'Today’s review' : 'Ripasso di oggi' }
   : ripasso ? { slug: RIPASSO, titolo: en ? 'Exam practice' : 'Prove d\'esame', breve: en ? 'Exam practice' : 'Prove d\'esame' } : argomentoL(lingua, materia, argomento);
+if (semestreFiltro && ripasso && !personale) {
+  arg.titolo = en ? 'Review of all units' : 'Ripasso su tutte le unità';
+  arg.breve = en ? 'Review' : 'Ripasso';
+}
 const base = `/${materia}/${argomento}`;
 const pref = prefisso(lingua);
 const n = Math.min(DOMANDE_SESSIONE, totale);
@@ -72,6 +78,7 @@ const JS = en ? {
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
     <p class="sommario">{T.sommario}</p>
+    {semestreFiltro && <NotaSemestreFiltro lingua={lingua} contesto="quiz" />}
 
     <div class="nota-ospite" hidden>
       <p>{T.ospite}</p>

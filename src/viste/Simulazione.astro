@@ -4,12 +4,14 @@
 // la materia), quindi la pagina non contiene nulla di riservato. Alla consegna compaiono le soluzioni, per chi le ha,
 // e lo studente valuta ogni esercizio: il punteggio è in trentesimi.
 import Base from '../layouts/Base.astro';
+import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { getCollection } from 'astro:content';
 import { materiaL, link, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
+const semestreFiltro = materia === 'fisica-semestre-filtro';
 const dafare = await getCollection('dafare');
 const argomenti = m.argomenti
   .map((a) => ({ slug: a.slug, titolo: a.titolo, breve: a.breve, n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length }))
@@ -33,6 +35,13 @@ const T = en ? {
   caricamento: 'Preparazione del compito…', errore: 'Gli esercizi non si sono caricati. Ricarica la pagina.', storico: 'Simulazioni precedenti', vota: 'Valuta ogni esercizio per vedere il punteggio.', conferma: 'Consegnare il compito adesso?',
   confronto: 'Il tuo punteggio è più alto del § delle simulazioni di questa materia valutate sul sito (# simulazioni).',
 };
+if (semestreFiltro) {
+  T.titolo = en ? 'Exercise practice' : 'Allenamento con esercizi';
+  T.sopra = en ? 'Practice and review' : 'Allenamento e ripasso';
+  T.sommario = en ? `A timed practice paper with exercises from different units of ${m.titolo}. At the end the available solutions appear and you mark each exercise as correct, partly correct or wrong. The self-assessed score is for practice only.` : `Un compito di allenamento a tempo con esercizi di unità diverse di ${m.titolo}. Alla consegna compaiono le soluzioni disponibili e ogni esercizio si valuta come corretto, parziale o sbagliato. Il punteggio di autovalutazione serve per il ripasso.`;
+  T.inizia = en ? 'Start practice' : 'Inizia l’allenamento';
+  T.nuova = en ? 'New practice paper' : 'Nuovo allenamento';
+}
 const pref = prefisso(lingua);
 ---
 <Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
@@ -41,6 +50,7 @@ const pref = prefisso(lingua);
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
+    {semestreFiltro && <NotaSemestreFiltro lingua={lingua} contesto="compito" />}
 
     <form class="sim-impostazioni">
       <div class="sim-scelte">
