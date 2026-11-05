@@ -6,13 +6,14 @@ import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { FORMULARI } from '../data/formulari';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
-const semestreFiltro = m?.slug === 'fisica-semestre-filtro';
+const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
 const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
@@ -66,10 +67,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
         })}
         {conDomande.size > 0 && (
           <li class:list={{ corrente: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
-            <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{semestreFiltro ? (lingua === 'en' ? 'Practice and review' : 'Allenamento e ripasso') : (lingua === 'en' ? 'Exam practice' : 'Prove d\'esame')}</button>
+            <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
             <ol class:list={{ aperta: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
               <li><a href={link(lingua, `/${m.slug}/${RIPASSO}/domande`)} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
-              <li><a href={link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{semestreFiltro ? (lingua === 'en' ? 'Exercise practice' : 'Allenamento con esercizi') : (lingua === 'en' ? 'Exam simulation' : m.gruppo === 'Concorsi' ? 'Simulazione della prova' : 'Simulazione d\'esame')}</a></li>
+              <li><a href={link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>
               <li class="solo-collegati"><a href={link(lingua, `/${m.slug}/${RIPASSO_OGGI}/domande`)} class:list={{ attiva: argomento === RIPASSO_OGGI }}>{lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi'}</a></li>
             </ol>
           </li>

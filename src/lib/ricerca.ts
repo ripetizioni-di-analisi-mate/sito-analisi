@@ -5,6 +5,7 @@ import { RIPASSO } from '../data/livelli';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { MATERIE_GRUPPI } from '../data/gruppi';
 import { MATERIE_LEZIONI } from '../data/lezioni';
+import { nomiAllenamento } from './allenamento.mjs';
 
 // Indice della ricerca, generato a tempo di build e letto dal browser nella pagina Cerca.
 // Ogni voce ha una categoria `c`, usata per raggruppare i risultati:
@@ -23,14 +24,12 @@ const TIPI: Record<Lingua, Record<string, string>> = {
 const TESTI = {
   it: {
     materia: 'Materia', teoriaEsercizi: 'Teoria ed esercizi svolti', domande: 'Domande a tempo', ripasso: 'Domande di ripasso',
-    proveEsame: "Prove d'esame", simulazione: "Simulazione d'esame",
     paroleMateria: 'materia corso programma teoria esercizi',
     paroleDomande: 'domande quiz a tempo risposta multipla allenamento',
     paroleSimulazione: 'simulazione esame compito scritto prova timer tracce',
   },
   en: {
     materia: 'Subject', teoriaEsercizi: 'Theory and worked examples', domande: 'Timed questions', ripasso: 'Review questions',
-    proveEsame: 'Exam practice', simulazione: 'Exam simulation',
     paroleMateria: 'subject course syllabus theory exercises',
     paroleDomande: 'questions quiz timed multiple choice practice',
     paroleSimulazione: 'simulation exam test written practice timer',
@@ -90,9 +89,11 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     for (const a of m.argomenti.filter((a) => con.includes(a.slug))) {
       voci.push({ t: `${x.domande} · ${a.titolo}`, s: `${x.domande} · ${a.breve}`, m: m.breve, h: link(l, `/${m.slug}/${a.slug}/domande`), p: x.paroleDomande, c: 'esercizi' });
     }
-    voci.push({ t: `${x.ripasso} · ${m.titolo}`, s: x.proveEsame, m: m.breve, h: link(l, `/${m.slug}/${RIPASSO}/domande`), p: `${x.paroleDomande} ripasso`, c: 'esercizi' });
+    const nomiProve = nomiAllenamento(m, l);
+    voci.push({ t: `${x.ripasso} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/${RIPASSO}/domande`), p: `${x.paroleDomande} ripasso`, c: 'esercizi' });
     const quiz = l === 'it' && m.gruppo === 'Concorsi';
-    voci.push({ t: `${quiz ? 'Simulazione della prova' : x.simulazione} · ${m.titolo}`, s: x.proveEsame, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: quiz ? 'simulazione prova concorso quiz test risposta multipla punteggio timer' : x.paroleSimulazione, c: 'esercizi' });
+    const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
+    voci.push({ t: `${nomiProve.simulazione} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: quiz ? 'simulazione prova concorso quiz test risposta multipla punteggio timer' : superiori ? (l === 'en' ? 'class test simulation timed written practice' : 'simulazioni verifiche in classe compito scritto prova timer tracce') : x.paroleSimulazione, c: 'esercizi' });
   }
 
   // Videocorsi (pagine solo in italiano)

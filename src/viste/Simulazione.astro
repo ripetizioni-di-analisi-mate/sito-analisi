@@ -7,17 +7,20 @@ import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { getCollection } from 'astro:content';
 import { materiaL, link, prefisso, type Lingua } from '../i18n';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
 const semestreFiltro = materia === 'fisica-semestre-filtro';
+const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
+const nomiProve = nomiAllenamento(m, lingua);
 const dafare = await getCollection('dafare');
 const argomenti = m.argomenti
   .map((a) => ({ slug: a.slug, titolo: a.titolo, breve: a.breve, n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length }))
   .filter((a) => a.n > 0);
 const T = en ? {
-  titolo: 'Exam simulation', sopra: 'Exam practice',
+  titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
   sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
   quanti: 'Exercises', durata: 'Time', minuti: 'minutes', argomenti: 'Topics', tutti: 'all', nessuno: 'none', inizia: 'Start the simulation',
   consegna: 'Hand in', rimasto: 'Time left', scaduto: 'Time is up: the paper has been handed in.', punti: 'points',
@@ -26,7 +29,7 @@ const T = en ? {
   caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Hand in the paper now?',
   confronto: 'Your score is higher than § of the simulations of this subject marked on the site (# simulations).',
 } : {
-  titolo: 'Simulazione d\'esame', sopra: 'Prove d\'esame',
+  titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
   sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,
   quanti: 'Esercizi', durata: 'Durata', minuti: 'minuti', argomenti: 'Argomenti', tutti: 'tutti', nessuno: 'nessuno', inizia: 'Inizia la simulazione',
   consegna: 'Consegna', rimasto: 'Tempo rimasto', scaduto: 'Tempo scaduto: il compito è stato consegnato.', punti: 'punti',
@@ -35,6 +38,12 @@ const T = en ? {
   caricamento: 'Preparazione del compito…', errore: 'Gli esercizi non si sono caricati. Ricarica la pagina.', storico: 'Simulazioni precedenti', vota: 'Valuta ogni esercizio per vedere il punteggio.', conferma: 'Consegnare il compito adesso?',
   confronto: 'Il tuo punteggio è più alto del § delle simulazioni di questa materia valutate sul sito (# simulazioni).',
 };
+if (superiori) {
+  T.sommario = en ? `A timed class test with exercises from different topics of ${m.titolo}, chosen at random among the practice exercises. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.` : `Una verifica in classe a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è su 30.`;
+  T.inizia = en ? 'Start the class test' : 'Inizia la verifica';
+  T.nuova = en ? 'New class test simulation' : 'Nuova simulazione di verifica';
+  T.storico = en ? 'Previous class test simulations' : 'Simulazioni di verifiche precedenti';
+}
 if (semestreFiltro) {
   T.titolo = en ? 'Exercise practice' : 'Allenamento con esercizi';
   T.sopra = en ? 'Practice and review' : 'Allenamento e ripasso';

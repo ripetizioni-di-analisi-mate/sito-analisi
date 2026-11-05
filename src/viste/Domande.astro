@@ -5,17 +5,19 @@ import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
 const { lingua, materia, argomento, totale } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
 const semestreFiltro = materia === 'fisica-semestre-filtro';
+const nomiProve = nomiAllenamento(m, lingua);
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
 // Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
 const personale = argomento === RIPASSO_OGGI;
 const ripasso = argomento === RIPASSO || personale;
 const arg = personale ? { slug: RIPASSO_OGGI, titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi', breve: en ? 'Today’s review' : 'Ripasso di oggi' }
-  : ripasso ? { slug: RIPASSO, titolo: en ? 'Exam practice' : 'Prove d\'esame', breve: en ? 'Exam practice' : 'Prove d\'esame' } : argomentoL(lingua, materia, argomento);
+  : ripasso ? { slug: RIPASSO, titolo: nomiProve.ripasso, breve: nomiProve.ripasso } : argomentoL(lingua, materia, argomento);
 if (semestreFiltro && ripasso && !personale) {
   arg.titolo = en ? 'Review of all units' : 'Ripasso su tutte le unità';
   arg.breve = en ? 'Review' : 'Ripasso';
