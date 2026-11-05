@@ -752,7 +752,7 @@ export default {
     }
 
     // ===== compatibilità con il tuo esame: lettura del compito, confronto con il materiale (worker/compatibilita.mjs) =====
-    if (p.startsWith('/api/compatibilita/') || p === '/admin/esami' || p.startsWith('/dati-compatibilita/')) {
+    if (p.startsWith('/api/compatibilita/') || p === '/admin/esami' || p.startsWith('/admin/esami/') || p.startsWith('/dati-compatibilita/')) {
       const r = await gestisciCompatibilita(req, env, ctx, p, { aDO, archivio, json, utenteCollegato, catalogoDomande, leggiCookie, leggiToken });
       if (r) return r;
     }
