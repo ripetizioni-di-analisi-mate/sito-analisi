@@ -1,0 +1,20 @@
+---
+interface Props { lingua?: 'it' | 'en'; contesto?: 'corso' | 'quiz' | 'compito' }
+const { lingua = 'it', contesto = 'corso' } = Astro.props;
+const en = lingua === 'en';
+const syllabus = 'https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf';
+const esame = 'https://www.mur.gov.it/it/atti-e-normativa/decreto-ministeriale-n-941-del-10-7-2026';
+---
+<aside class="blocco blocco-osservazione" aria-label={en ? 'About this study course' : 'Informazioni sul percorso'}>
+  {contesto === 'corso' ? (
+    <>
+      <p>{en ? 'Independent study material covering the seven units of the ' : 'Materiale didattico indipendente sulle sette unità del '}<a href={syllabus} target="_blank" rel="noopener">{en ? '2026/2027 MUR Physics syllabus' : 'syllabus MUR di Fisica 2026/2027'}</a>. {en ? 'The 6 CFU refer to the university teaching programme; this website does not award academic credits and is not affiliated with or approved by the MUR or universities.' : 'I 6 CFU si riferiscono all’insegnamento universitario: il sito non rilascia crediti formativi e non è affiliato o approvato dal MUR o dagli atenei.'}</p>
+      <p>{en ? 'This course covers Physics. Biology and Chemistry with introductory Biochemistry are separate subjects in the filter semester.' : 'Il percorso riguarda Fisica. Biologia e Chimica e propedeutica biochimica sono insegnamenti distinti del semestre filtro.'}</p>
+    </>
+  ) : (
+    <p>{contesto === 'quiz'
+      ? (en ? 'These practice quizzes use the same format as the other subjects on this website: four choices and two minutes per question.' : 'Questi quiz di allenamento hanno lo stesso formato delle altre materie del sito: quattro risposte e due minuti per domanda.')
+      : (en ? 'This is a timed exercise practice paper with self-assessment.' : 'Questo è un allenamento a tempo con esercizi e autovalutazione.')
+    } {' '}{en ? 'The official 2026/2027 exam has 31 questions in 50 minutes: 21 multiple-choice questions with five choices and 10 completion questions. The website practice is not a reproduction of that exam.' : 'La prova ufficiale 2026/2027 prevede 31 quesiti in 50 minuti: 21 a scelta multipla con cinque risposte e 10 a completamento. L’allenamento del sito non riproduce questa struttura.'} {' '}<a href={esame} target="_blank" rel="noopener">{en ? 'Official exam rules' : 'Modalità ufficiali dell’esame'}</a>.</p>
+  )}
+</aside>

@@ -451,11 +451,19 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'fisica-semestre-filtro',
     titolo: 'Fisica per il semestre filtro di Medicina',
     breve: 'Fisica semestre filtro',
-    descrizione: "La fisica dell'esame del semestre filtro per l'accesso a Medicina e chirurgia, Odontoiatria e Veterinaria.",
+    descrizione: "Fisica per il semestre filtro di Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.",
     colore: '#5d5d8f',
     gruppo: 'TOLC, OFA e test di ingresso',
-    attiva: false,
-    argomenti: [],
+    attiva: true,
+    argomenti: [
+      { slug: 'metodi-della-fisica', titolo: 'Metodi della fisica, grandezze e vettori', breve: 'Metodi e vettori' },
+      { slug: 'meccanica', titolo: 'Meccanica del punto e dei sistemi', breve: 'Meccanica' },
+      { slug: 'fluidi', titolo: 'Meccanica dei fluidi e modelli della circolazione', breve: 'Fluidi' },
+      { slug: 'onde-meccaniche', titolo: 'Onde meccaniche e acustica', breve: 'Onde e acustica' },
+      { slug: 'termodinamica', titolo: 'Temperatura, calore e termodinamica', breve: 'Termodinamica' },
+      { slug: 'elettricita-e-magnetismo', titolo: 'Elettricità, circuiti e magnetismo', breve: 'Elettricità e magnetismo' },
+      { slug: 'radiazioni-e-ottica', titolo: 'Radiazioni, radioattività e ottica', breve: 'Radiazioni e ottica' },
+    ],
   },
 ];
 
