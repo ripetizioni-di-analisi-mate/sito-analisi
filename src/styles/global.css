@@ -27,6 +27,9 @@
 
   --larghezza: 42rem;
   --raggio: 6px;
+  --apertura-lato: 0.32rem;
+  --apertura-tratto: 1px;
+  --apertura-opacita: 0.65;
   color-scheme: light;
 }
 
@@ -114,8 +117,8 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 .indice ol { list-style: none; padding: 0; margin: 0; }
 .indice > ol > li { margin: 0.15rem 0; }
 .indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; text-align: left; font: inherit; font-weight: 600; padding: 0.35rem 0.5rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
-.indice button.argomento::after { content: ''; width: 0.45em; height: 0.45em; border-right: 1.5px solid var(--inchiostro-2); border-bottom: 1.5px solid var(--inchiostro-2); transform: rotate(45deg); transition: transform 0.15s; flex: none; margin-right: 0.3rem; }
-.indice button.argomento[aria-expanded="true"]::after { transform: rotate(-135deg); }
+.indice button.argomento::after { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; margin-right: 0.3rem; }
+.indice button.argomento[aria-expanded="true"]::after { transform: rotate(45deg); }
 .indice button.argomento:hover { background: var(--carta-2); }
 .indice ol ol { padding-left: 0.5rem; margin-bottom: 0.4rem; }
 .indice ol ol a { display: block; padding: 0.22rem 0.5rem 0.22rem 1rem; color: var(--inchiostro-2); text-decoration: none; border-left: 2px solid transparent; }
@@ -230,10 +233,9 @@ main {
 .blocco-percorso p { margin: 0.35rem 0; }
 details.blocco > summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 0.4rem; }
 details.blocco > summary::-webkit-details-marker { display: none; }
-details.blocco > summary::before { content: ''; width: 0.5em; height: 0.5em; border-right: 2px solid var(--c); border-bottom: 2px solid var(--c); transform: rotate(-45deg); transition: transform 0.15s; }
+details.blocco > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; }
 details.blocco[open] > summary::before { transform: rotate(45deg); }
 details.blocco[open] > summary { margin-bottom: 0.5rem; }
-@media (prefers-reduced-motion: reduce) { details.blocco > summary::before { transition: none; } }
 
 .blocco-esercizi { font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); margin: 0.6rem 0 0 !important; }
 .blocco-esercizi a { margin-right: 0.15rem; }
@@ -279,10 +281,10 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 
 /* ---------- sommario interno della teoria ---------- */
 .sommario-pagina { margin: 1.25rem 0; border: 1px solid var(--riga); border-radius: var(--raggio); font-family: var(--ui); }
-.sommario-pagina summary { cursor: pointer; padding: 0.6rem 0.9rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accento); list-style: none; }
-.sommario-pagina summary::-webkit-details-marker { display: none; }
-.sommario-pagina summary::before { content: '›'; display: inline-block; margin-right: 0.5rem; transition: transform 0.15s; }
-.sommario-pagina[open] summary::before { transform: rotate(90deg); }
+.sommario-pagina > summary { cursor: pointer; padding: 0.6rem 0.9rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accento); list-style: none; }
+.sommario-pagina > summary::-webkit-details-marker { display: none; }
+.sommario-pagina > summary::before { content: ''; display: inline-block; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); margin-right: 0.5rem; vertical-align: 0.12em; transform: rotate(-45deg); transition: transform 0.15s; }
+.sommario-pagina[open] > summary::before { transform: rotate(45deg); }
 .sommario-pagina ol { margin: 0; padding: 0 0.9rem 0.75rem 2.1rem; }
 .sommario-pagina li { margin: 0.3rem 0; }
 .sommario-pagina a { color: var(--inchiostro); text-decoration: none; }
@@ -417,7 +419,7 @@ html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto
 details.gruppo > summary.nome-gruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; }
 details.gruppo > summary.nome-gruppo::-webkit-details-marker, details.indice-gruppo > summary::-webkit-details-marker { display: none; }
 details.gruppo > summary.nome-gruppo h2 { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; margin: 0; }
-details.gruppo > summary.nome-gruppo::before, details.indice-gruppo > summary::before { content: ''; width: 0.45rem; height: 0.45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
+details.gruppo > summary.nome-gruppo::before, details.indice-gruppo > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
 details.gruppo[open] > summary.nome-gruppo::before, details.indice-gruppo[open] > summary::before { transform: rotate(45deg); }
 .conta-gruppo { font-weight: 400; letter-spacing: 0; color: var(--inchiostro-2); margin-left: auto; }
 details.indice-gruppo > summary.indice-materia { justify-content: flex-start; cursor: pointer; list-style: none; user-select: none; }
@@ -428,8 +430,25 @@ details.sottogruppo > summary.nome-sottogruppo h3 { font: inherit; margin: 0; }
 details.indice-sottogruppo { margin: 0.1rem 0 0.4rem 0.6rem; }
 details.indice-sottogruppo > summary { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.9rem; font-weight: 600; color: var(--inchiostro); padding: 0.3rem 0.5rem; }
 details.sottogruppo > summary::-webkit-details-marker, details.indice-sottogruppo > summary::-webkit-details-marker { display: none; }
-details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: 0.4rem; height: 0.4rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
+details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
 details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > summary::before { transform: rotate(45deg); }
+
+/* Aperture secondarie: lo stesso indicatore dei capitoli, anche nei risultati caricati in pagina. */
+:is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary { list-style: none; }
+:is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::-webkit-details-marker { display: none; }
+:is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::before { content: ''; display: inline-block; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); margin-right: 0.5rem; vertical-align: 0.12em; transform: rotate(-45deg); transition: transform 0.15s; }
+:is(.dta-griglia details[open], .compat-incolla[open], .compat-dettagli[open], .du-riepilogo details[open]) > summary::before { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .indice button.argomento::after,
+  details.blocco > summary::before,
+  .sommario-pagina > summary::before,
+  details.gruppo > summary.nome-gruppo::before,
+  details.indice-gruppo > summary::before,
+  details.sottogruppo > summary::before,
+  details.indice-sottogruppo > summary::before,
+  :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::before { transition: none; }
+}
 .griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
 @media (min-width: 44rem) { .griglia-materie { grid-template-columns: 1fr 1fr; } }
 .griglia-materie li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); }
@@ -1240,7 +1259,7 @@ html.collegato .esame-materia.solo-collegati { display: flex; }
 .esame-materia.con-data .esame-titolo { color: var(--accento); }
 .esame-testo::before { content: "·"; margin-right: 0.45rem; color: var(--riga); }
 .esame-modulo { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.35rem; }
-.esame-modulo select { font: 0.92rem var(--ui); color: var(--inchiostro); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235a6664' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.6rem center / 0.6rem; border: 1px solid var(--riga); border-radius: 8px; padding: 0.35rem 1.7rem 0.35rem 0.6rem; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.esame-modulo select { font: 0.92rem var(--ui); color: var(--inchiostro); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235a6664' stroke-width='1' stroke-opacity='0.65' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 0.6rem center / 0.6rem; border: 1px solid var(--riga); border-radius: 8px; padding: 0.35rem 1.7rem 0.35rem 0.6rem; -webkit-appearance: none; appearance: none; cursor: pointer; }
 .esame-modulo select:focus-visible { outline: 2px solid color-mix(in srgb, var(--accento) 45%, transparent); outline-offset: 1px; }
 .esame-azioni { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; }
 .esame-salva { font: 600 0.88rem var(--ui); color: #fff; background: var(--accento); border: 0; border-radius: 999px; padding: 0.4rem 1rem; cursor: pointer; }
