@@ -150,8 +150,21 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-superiori-4': {
     titolo: 'Mathematics, 4th year',
     breve: 'Maths 4th year',
-    descrizione: 'The mathematics syllabus of the 4th year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'Fourth-year mathematics for the Italian scientific high school: trigonometry, exponentials and logarithms, complex numbers, sequences, combinatorics, probability and solid geometry. Theory, worked exercises and timed questions. Topic order may vary by class.',
+    argomenti: {
+      'funzioni-goniometriche': { titolo: 'Angles and trigonometric functions', breve: 'Trigonometric functions' },
+      'formule-goniometriche': { titolo: 'Trigonometric identities', breve: 'Trigonometric identities' },
+      'equazioni-goniometriche': { titolo: 'Trigonometric equations', breve: 'Trigonometric equations' },
+      'disequazioni-goniometriche': { titolo: 'Trigonometric inequalities', breve: 'Trigonometric inequalities' },
+      trigonometria: { titolo: 'Trigonometry and solving triangles', breve: 'Trigonometry' },
+      esponenziali: { titolo: 'Powers and exponential functions and equations', breve: 'Exponentials' },
+      logaritmi: { titolo: 'Logarithms, equations and inequalities', breve: 'Logarithms' },
+      'numeri-complessi': { titolo: 'Complex numbers', breve: 'Complex numbers' },
+      'successioni-e-progressioni': { titolo: 'Sequences and progressions', breve: 'Sequences and progressions' },
+      'calcolo-combinatorio': { titolo: 'Combinatorics', breve: 'Combinatorics' },
+      probabilita: { titolo: 'Probability and conditional probability', breve: 'Probability' },
+      'geometria-solida': { titolo: 'Euclidean solid geometry', breve: 'Solid geometry' },
+    },
   },
   'matematica-superiori-5': {
     titolo: 'Mathematics, 5th year',
