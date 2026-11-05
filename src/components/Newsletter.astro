@@ -2,11 +2,11 @@
 // Newsletter (richiesta di Carmine del 05/11/2026; regole in src/data/newsletter.ts, Worker in worker/newsletter.mjs).
 // Barra in basso che compare appena si entra, solo a chi non ha fatto l'accesso: email, consenso, «Iscriviti».
 // Dopo l'iscrizione la barra mostra il codice personale del 10% con il tasto «Copia».
-// Due versioni grafiche (data-versione): «a» striscia a tutta larghezza, «b» riquadro compatto in basso a sinistra.
-// Prova: ?nl=a oppure ?nl=b mostra la barra anche se chiusa o già iscritti, nella versione scelta.
+// Versione A scelta da Carmine il 05/11 (striscia a tutta larghezza; la B, riquadro compatto, è nel ramo «newsletter»).
+// Prova: ?nl=a mostra la barra anche se chiusa, già iscritti o con l'accesso fatto.
 import { link, type Lingua } from '../i18n';
 import { SCONTO_NEWSLETTER, GIORNI_RIPROPOSTA, RITARDO_SECONDI, PAGINE_SENZA_BARRA } from '../data/newsletter';
-interface Props { lingua: Lingua; versione?: 'a' | 'b' }
+interface Props { lingua: Lingua; versione?: 'a' }
 const { lingua, versione = 'a' } = Astro.props;
 const en = lingua === 'en';
 const p = SCONTO_NEWSLETTER;
@@ -74,7 +74,7 @@ const s = en ? {
     const prova = new URLSearchParams(location.search).get('nl');
     const leggi = (k) => { try { return localStorage.getItem(k); } catch { return null; } };
     const scrivi = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage non disponibile */ } };
-    if (prova === 'a' || prova === 'b') box.dataset.versione = prova;
+    if (prova === 'a') box.dataset.versione = prova;
     else {
       if (rad.classList.contains('collegato')) return;
       if (new RegExp(escluse).test(location.pathname)) return;
@@ -94,7 +94,7 @@ const s = en ? {
     };
     const nascondi = () => {
       box.classList.remove('aperta');
-      rad.classList.remove('con-newsletter', 'con-newsletter-a', 'con-newsletter-b');
+      rad.classList.remove('con-newsletter', `con-newsletter-${box.dataset.versione}`);
       ro?.disconnect();
       setTimeout(() => { box.hidden = true; }, 350);
     };

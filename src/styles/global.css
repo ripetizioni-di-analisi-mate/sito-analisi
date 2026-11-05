@@ -1351,7 +1351,7 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .pl-sf-icona svg { width: 1.1rem; height: 1.1rem; }
 
 /* ---------- newsletter: barra in basso (05/11/2026, src/components/Newsletter.astro) ----------
-   Versione A: striscia a tutta larghezza; versione B: riquadro compatto in basso a sinistra.
+   Versione A (scelta da Carmine fra A striscia e B riquadro; la B è nel ramo «newsletter»): striscia a tutta larghezza.
    Mentre è aperta, i tasti fissi (Pi, WhatsApp, torna su) salgono della sua altezza (--altezza-nl). */
 .newsletter { position: fixed; z-index: 6; font-family: var(--ui); color: var(--inchiostro); background: white;
   transition: transform .35s ease, opacity .35s ease; opacity: 0; }
@@ -1385,7 +1385,6 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
   background: color-mix(in srgb, var(--azione) 8%, white); border: 1px dashed color-mix(in srgb, var(--azione) 45%, white); border-radius: 6px; padding: .3rem .6rem; }
 .nl-copia { font: inherit; font-size: .85rem; font-weight: 600; color: var(--azione); background: white; border: 1px solid color-mix(in srgb, var(--azione) 45%, white); border-radius: 999px; padding: .28rem .75rem; cursor: pointer; }
 
-/* versione A: striscia a tutta larghezza */
 .newsletter[data-versione="a"] { left: 0; right: 0; bottom: 0; transform: translateY(100%);
   background: color-mix(in srgb, var(--carta) 55%, white); border-top: 3px solid var(--azione); box-shadow: 0 -6px 24px rgba(34,48,47,.08);
   padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom)); }
@@ -1398,20 +1397,8 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
   .newsletter[data-versione="a"] .nl-sotto { font-size: .85rem; }
 }
 
-/* versione B: riquadro compatto in basso a sinistra */
-.newsletter[data-versione="b"] { left: 1rem; bottom: 1rem; width: min(23rem, calc(100vw - 2rem)); transform: translateY(calc(100% + 1.5rem));
-  border: 1px solid var(--riga); border-radius: 14px; box-shadow: 0 10px 32px rgba(34,48,47,.14); padding: 1rem 1.05rem .95rem; }
-.newsletter[data-versione="b"] .nl-titolo { flex-direction: column; align-items: flex-start; gap: .4rem; padding-right: 1.6rem; }
-.newsletter[data-versione="b"] .nl-modulo { margin-top: .75rem; }
-.newsletter[data-versione="b"] .nl-grazie .nl-titolo { flex-direction: row; align-items: center; }
-@media (max-width: 640px) {
-  .newsletter[data-versione="b"] { left: .75rem; right: .75rem; bottom: .75rem; width: auto; }
-}
-
-/* tasti fissi sopra la barra; nella versione B al computer non serve (la barra è a sinistra) */
+/* tasti fissi sopra la barra */
 html.con-newsletter .bottoni-fissi { bottom: calc(var(--altezza-nl, 0px) + 1rem); transition: bottom .35s ease; }
-html.con-newsletter-b .bottoni-fissi { bottom: calc(var(--altezza-nl, 0px) + 1.5rem); }
-@media (min-width: 641px) { html.con-newsletter-b .bottoni-fissi { bottom: 1rem; } }
 @media (prefers-reduced-motion: reduce) { .newsletter, html.con-newsletter .bottoni-fissi { transition: none; } }
 /* al telefono, con la barra aperta, il fumetto di benvenuto di Pi aspetta la visita successiva */
 @media (max-width: 640px) { html.con-newsletter .pi-fumetto { display: none !important; } }
