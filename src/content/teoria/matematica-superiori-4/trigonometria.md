@@ -114,7 +114,7 @@ Le due espressioni indicano la stessa altezza, quindi si uguagliano. Il modello 
 :::esempio{#parametro titolo="Area al variare dell'angolo compreso"}
 Due lati di un triangolo misurano $6$ e $10$. Se $x\in(0,\pi)$ è l'angolo compreso, l'area è $S(x)=30\sin x$. Poiché $\sin x\leq1$, l'area massima è $30$ e si raggiunge per $x=\dfrac\pi2$.
 
-Per richiedere area $15$ si risolve $30\sin x=15$, ottenendo $x=\dfrac\pi6$ oppure $x=\dfrac{5\pi}{6}$. Le due soluzioni danno un triangolo acutangolo rispetto all'angolo scelto e uno ottusangolo, entrambi con gli stessi due lati e la stessa area. Gli estremi $0$ e $\pi$ sono esclusi perché darebbero figure degeneri.
+Per richiedere area $15$ si risolve $30\sin x=15$, ottenendo $x=\dfrac\pi6$ oppure $x=\dfrac{5\pi}{6}$. Le due soluzioni corrispondono rispettivamente a un angolo compreso acuto e a uno ottuso, con gli stessi due lati assegnati e la stessa area. Gli estremi $0$ e $\pi$ sono esclusi perché darebbero figure degeneri.
 
 ::grafico{f="30*sin(x)" punti="1.570796327,30,pieno" xmin=0 xmax=4 ymin=0 ymax=36 titolo="L'area $S(x)=30\sin x$ per $0<x<\pi$"}
 :::
