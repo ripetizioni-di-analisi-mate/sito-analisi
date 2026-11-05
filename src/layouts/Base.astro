@@ -6,7 +6,6 @@ import '@fontsource/source-sans-3/700.css';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
-import LezioniCarmine from '../components/LezioniCarmine.astro';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
@@ -129,7 +128,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
-      {lingua === 'it' && <LezioniCarmine dove="testata" />}
       {m && (
         <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
           {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
