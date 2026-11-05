@@ -25,6 +25,7 @@ import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, av
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
+import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 
@@ -164,6 +165,7 @@ export class Archivio {
     creaTabelleInviti(this.sql);
     // sconto di benvenuto: account creati dalla barra in basso, 10% sulla prima materia (worker/benvenuto.mjs)
     creaTabelleBenvenuto(this.sql);
+    creaTabellePacchetti(this.sql);
     // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
     creaTabelleSfide(this.sql);
     // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
@@ -201,6 +203,7 @@ export class Archivio {
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/bv-')) { const r = archivioBenvenuto(this, pathname, c); if (r) return Response.json(r); }
+    if (pathname.startsWith('/pac-')) return Response.json(archivioPacchetti(this, pathname, c));
     if (pathname.startsWith('/sfi-')) { const r = archivioSfide(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/comp-')) { const r = archivioCompatibilita(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
@@ -700,6 +703,8 @@ export default {
     const vendita = env.VENDITA !== '0';
     const POST = req.method === 'POST';
 
+    if (p === '/api/pacchetti/checkout') return gestisciPacchetti(req, env, { aDO, json, utenteCollegato, MATERIE, VIDEOCORSI });
+
     // ===== un solo indirizzo per ogni pagina =====
     // Google aveva in elenco anche le versioni http:// e www. delle pagine: ora portano tutte, con un
     // reindirizzamento permanente, all'indirizzo https://ripetizionidianalisi.com (stesso percorso e parametri).
@@ -1116,6 +1121,17 @@ export default {
       const ev = JSON.parse(corpo);
       if (ev.event_type === 'transaction.completed') {
         const d = ev.data;
+        // La selezione di un pacchetto proviene dall'ordine salvato prima del pagamento.
+        if (d.custom_data?.pacchetto || d.discount_id) {
+          const ordine = await aDO(env, '/pac-leggi', { id: typeof d.custom_data?.pacchetto === 'string' ? d.custom_data.pacchetto : null, sconto: d.discount_id || null });
+          if (ordine) {
+            const ok = await completaPacchetto(d, ordine, env, { aDO, conMaterieDeiVideo });
+            if (!ok) { console.error(JSON.stringify({ evento: 'pacchetto_pagamento_non_coerente', transazione: d.id })); return json({ errore: 'Ordine non coerente.' }, 400); }
+            if (ordine.tipo === 'materie') ctx.waitUntil(dopoAcquistoMateria(env, aDO, url.origin, { email: ordine.email, transazione: d.id, sconto: d.discount_id }).catch((e) => console.log('pacchetti: premio invito', String(e))));
+            return json({ ok: true });
+          }
+          if (d.custom_data?.pacchetto) return json({ errore: 'Ordine non trovato.' }, 400);
+        }
         const email = normalizza(d.custom_data?.email || d.customer?.email || '');
         const materia = d.custom_data?.materia || '';
         const video = d.custom_data?.videocorso ? chiaveVideo(d.custom_data.videocorso) : '';
