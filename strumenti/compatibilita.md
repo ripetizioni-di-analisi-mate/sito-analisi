@@ -4,6 +4,8 @@ Il catalogo viene generato dal materiale della materia alla compilazione del sit
 
 Il confronto considera lo stesso procedimento anche con coefficienti e formulazioni diversi. Una voce di teoria può coprire un calcolo quando spiega direttamente il metodo sufficiente; un prerequisito generico resta un riscontro parziale. Ogni riscontro completo restituisce un collegamento al materiale usato.
 
+Le domande teoriche hanno anche un controllo diretto dei nomi nel catalogo (`worker/riscontro-teoria.mjs`). Se il nome identifica univocamente una voce, questa corregge un codice omesso o confuso dal modello. Enunciato e dimostrazione presenti valgono quindi per intero anche quando il modello restituisce solo l'argomento. Le varianti degli articoli, degli accenti e della dicitura «calcolo integrale» vengono normalizzate; un nome ambiguo o una richiesta di più teoremi non vengono risolti scegliendo una voce arbitraria. I nomi esplicitamente presenti nel compito vengono inoltre richiamati vicino al testo inviato al modello.
+
 I pesi di copertura sono 1 per il procedimento o il contenuto richiesto, 0,5 per il solo argomento e 0 senza riscontro. Non sono applicate soglie minime alla percentuale. La soglia 80 dell'acquisto consigliato resta una condizione di visualizzazione del riquadro.
 
 Il formato del modello ha sei campi: `numeroPunto|tipo|argomento|codice|punti|testo`. Il punteggio `p3` indica tre punti per la singola richiesta; `8` indica otto punti per l'intero esercizio. Un totale si distribuisce sulle richieste senza punteggio specifico; punteggi assenti o incoerenti comportano pesi uguali per tutte le richieste. Restano leggibili anche il formato precedente a sette campi e i prefissi `P3` e `E8`.

@@ -1,7 +1,7 @@
 // Prove locali del calcolo e del protocollo: nessuna richiesta ai modelli o all'archivio di produzione.
 import assert from 'node:assert/strict';
 import { test, after } from 'node:test';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -16,6 +16,8 @@ const compila = async (file, nome) => {
 };
 const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
 const { dettagliScheda, dettagliTeoria } = await compila('src/lib/catalogo-compatibilita.ts', 'catalogo');
+const { MATERIE_COMPATIBILITA } = await compila('src/data/compatibilita.ts', 'materie');
+const { trovaVoceTeoria, riferimentiNominati } = await compila('worker/riscontro-teoria.mjs', 'riscontro');
 after(() => rmSync(temporanea, { recursive: true, force: true }));
 
 const cat = {
@@ -25,6 +27,8 @@ const cat = {
     teoria: [
       { ancora: 'per-parti', titolo: 'Integrazione per parti', tipo: 'teorema', contenuto: 'La formula per integrare un prodotto.', dimostrazione: true },
       { ancora: 'teorema', titolo: 'Teorema senza dimostrazione', tipo: 'teorema', contenuto: 'Enunciato.', dimostrazione: false },
+      { ancora: 'teorema-fondamentale', titolo: 'Teorema fondamentale del calcolo', tipo: 'teorema', contenuto: 'La funzione integrale ha derivata uguale alla funzione integranda.', dimostrazione: true },
+      { ancora: 'formula-fondamentale', titolo: 'Formula fondamentale del calcolo', tipo: 'teorema', contenuto: 'Valutazione di una primitiva agli estremi.', dimostrazione: false },
     ],
   }],
 };
@@ -121,6 +125,72 @@ test('cataloghi diversi della stessa materia non condividono una codifica obsole
   assert.doesNotMatch(codifica(cat, false).testo, /Titolo aggiornato/);
 });
 
+function catalogoTeoriaReale(materia) {
+  const cartella = join(radice, 'src/content/teoria', materia);
+  return { materia, titolo: materia, argomenti: readdirSync(cartella).filter((f) => f.endsWith('.md')).sort().map((file) => {
+    const corpo = readFileSync(join(cartella, file), 'utf8');
+    return { slug: file.replace(/\.md$/, ''), titolo: file, schede: [], teoria: [...corpo.matchAll(/^:{3,4}(definizione|teorema|proposizione)\{#([\w-]+)[^}]*?titolo="([^"]+)"/gm)]
+      .map((r) => ({ tipo: r[1], ancora: r[2], titolo: r[3], ...dettagliTeoria(corpo, r[2]) })) };
+  }) };
+}
+
+test('il teorema fondamentale viene recuperato anche senza codice o con la formula sbagliata', () => {
+  const reale = catalogoTeoriaReale('analisi-1'), codici = codifica(reale, true).codici;
+  const [formula] = Object.entries(codici.T).find(([, v]) => v.ancora === 'formula-fondamentale');
+  const richiesta = { esercizio: '1', tipo: 'teoria', testo: 'Enunciato e dimostrazione del teorema fondamentale del calcolo integrale', livello: 'argomento' };
+  for (const riferimento of [null, formula]) {
+    const e = valutaRichieste('analisi-1', reale, codici, [{ ...richiesta, teoria: riferimento }]);
+    assert.equal(e.compatibilita, 100);
+    assert.ok(e.richieste[0].voce.link.endsWith('#teorema-fondamentale'));
+  }
+  assert.match(riferimentiNominati(codici.T, richiesta.testo), /Teorema fondamentale del calcolo \[enunciato e dimostrazione presenti\]/);
+});
+
+test('le dimostrazioni presenti nei corsi restano coperte anche se il modello non le abbina', (t) => {
+  let verificati = 0;
+  for (const materia of MATERIE_COMPATIBILITA) {
+    const reale = catalogoTeoriaReale(materia), codici = codifica(reale, true).codici;
+    for (const a of reale.argomenti) {
+      const codiceA = Object.entries(codici.A).find(([, v]) => v.slug === a.slug)[0];
+      for (const v of a.teoria.filter((v) => v.dimostrazione)) {
+        if (a.teoria.filter((x) => x.titolo.toLowerCase() === v.titolo.toLowerCase()).length !== 1) continue;
+        const e = valutaRichieste(materia, reale, codici, [{ esercizio: '1', tipo: 'teoria', testo: `Enunciare e dimostrare ${v.titolo}`, argomento: codiceA, livello: 'argomento' }]);
+        assert.equal(e.compatibilita, 100, `${materia}/${a.slug} — ${v.titolo}`);
+        assert.ok(e.richieste[0].voce.link.endsWith(`#${v.ancora}`), `${materia}/${a.slug} — riferimento di ${v.titolo}`);
+        verificati++;
+      }
+    }
+  }
+  assert.ok(verificati >= 200, 'La prova deve comprendere il catalogo reale dei corsi universitari');
+  t.diagnostic(`${verificati} dimostrazioni verificate nelle ${MATERIE_COMPATIBILITA.length} materie abilitate`);
+});
+
+test('nomi distinti, nomi ambigui e richieste composite non vengono confusi', () => {
+  const voci = {
+    T1: { titolo: 'Teorema di Cauchy', argomento: 'derivate', dimostrazione: true },
+    T2: { titolo: 'Teorema fondamentale del calcolo', argomento: 'integrali', dimostrazione: true },
+    T3: { titolo: 'Formula fondamentale del calcolo', argomento: 'integrali', dimostrazione: false },
+  };
+  assert.equal(trovaVoceTeoria(voci, 'Enunciare e dimostrare il teorema di Cauchy-Schwarz'), null);
+  assert.equal(trovaVoceTeoria(voci, 'Enunciare il fondamentale del calcolo'), null);
+  assert.equal(trovaVoceTeoria(voci, 'Enunciare Cauchy e il teorema fondamentale del calcolo'), null);
+  assert.equal(trovaVoceTeoria(voci, 'Formula fondamentale del calcolo: enunciato e dimostrazione').codice, 'T3');
+});
+
+test('una richiesta di enunciato è teorica anche se il modello la classifica come esercizio', () => {
+  const reale = catalogoTeoriaReale('analisi-1'), codici = codifica(reale, true).codici;
+  const e = valutaRichieste('analisi-1', reale, codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Enunciare e dimostrare il teorema di Rolle', livello: 'argomento' }]);
+  assert.equal(e.compatibilita, 100);
+  assert.equal(e.richieste[0].tipo, 'teoria');
+});
+
+test('un calcolo che cita un enunciato conserva la scheda svolta pertinente', () => {
+  const e = valuta({ esercizio: '1', tipo: 'esercizio', argomento: 'A1', scheda: 'S1', testo: 'Usare l’enunciato della formula per parti per calcolare un integrale' });
+  assert.equal(e.compatibilita, 100);
+  assert.equal(e.richieste[0].tipo, 'esercizio');
+  assert.equal(e.richieste[0].scheda.n, 4);
+});
+
 const riga = '1|-|E|A1|S1|-|Integrare un prodotto per parti\n';
 async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
   const chiamate = [], attese = [];
@@ -146,6 +216,15 @@ test('un confronto completo restituisce fonti, percentuale e un solo salvataggio
   const { eventi, chiamate } = await confronto(`${riga}FINE_CONFRONTO|1`);
   assert.equal(eventi.at(-1).fine.compatibilita, 100);
   assert.equal(chiamate.filter((x) => x.percorso === '/comp-compito-esito').length, 1);
+});
+
+test('il risultato API corregge il riferimento confuso dal modello prima del salvataggio', async () => {
+  const { eventi, chiamate } = await confronto('1|T|A1|T4|6|Enunciare e dimostrare il teorema fondamentale del calcolo integrale\nFINE_CONFRONTO|1');
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+  assert.ok(eventi.at(-1).fine.richieste[0].voce.link.endsWith('#teorema-fondamentale'));
+  const salvato = chiamate.find((c) => c.percorso === '/comp-compito-esito');
+  assert.equal(salvato.dati.compatibilita, 100);
+  assert.equal(JSON.parse(salvato.dati.esito)[0].l, 'stesso');
 });
 
 test('un confronto troncato non pubblica percentuali e restituisce il controllo', async () => {
