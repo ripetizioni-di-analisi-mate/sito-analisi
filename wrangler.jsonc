@@ -36,7 +36,7 @@
     "PADDLE_PREZZO_VIDEO_ALGEBRA": "pri_01m66v2m485p0fq8c0e9pxawzf",
     // Lezioni individuali (worker/prenotazioni.mjs): codice cliente OAuth di Google (pubblico) e calendario usato.
     // Segreti nel pannello Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET.
-    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_CLIENT_ID": "488557946173-e8gdo04dfiae9b06pltp7b9gc85p53qe.apps.googleusercontent.com",
     "GOOGLE_CALENDARIO": "primary",
     // Cartelle Google Drive dei videocorsi (slug -> link), mostrate solo a chi ha comprato
     // Mittente delle email (recupero della password); la chiave RESEND_API_KEY è un segreto nel pannello Cloudflare
