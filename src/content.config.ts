@@ -63,6 +63,20 @@ const domande = defineCollection({
   schema: z.object({ corretta: z.number().int().min(1).max(4) }),
 });
 
+// Quesiti della prova (simulazione identica a una prova ufficiale, per ora solo Fisica per il semestre filtro):
+// src/content/quesiti/<materia>/<argomento>/<n>.md. Risposta multipla: 5 risposte e `corretta` (1-5).
+// Completamento: nessuna risposta da scegliere, `risposta` (numero con la virgola o termine) ed eventuali `accetta`.
+// Corpo: testo, eventuale elenco delle risposte, "## Spiegazione". Corretti dal Worker (/api/simulazione-prova).
+const quesiti = defineCollection({
+  loader: senzaHtml('./src/content/quesiti'),
+  schema: z.object({
+    tipo: z.enum(['multipla', 'completamento']),
+    corretta: z.number().int().min(1).max(5).optional(),
+    risposta: z.union([z.string(), z.number()]).transform(String).optional(),
+    accetta: z.array(z.union([z.string(), z.number()]).transform(String)).default([]),
+  }).refine((d) => (d.tipo === 'multipla' ? d.corretta !== undefined : d.risposta !== undefined), { message: 'manca corretta (multipla) o risposta (completamento)' }),
+});
+
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.
 const teoria_en = defineCollection({ loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content-en/teoria' }), schema: teoria.schema });
 const svolti_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/svolti' }), schema: svolti.schema });
@@ -81,4 +95,4 @@ const formulari = defineCollection({
 // Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
 const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
 
-export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, formulari, formulari_en };
+export const collections = { teoria, svolti, dafare, domande, quesiti, domande_en, teoria_en, svolti_en, dafare_en, formulari, formulari_en };

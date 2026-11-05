@@ -12,7 +12,7 @@ import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
 // del sito, con gli stessi plugin, una volta sola per file.
 let processore: Promise<MarkdownRenderer> | undefined;
 const rese = new Map<string, Promise<string>>();
-function htmlDi(chiave: string, body: string): Promise<string> {
+export function htmlDi(chiave: string, body: string): Promise<string> {
   processore ??= createMarkdownProcessor({
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],

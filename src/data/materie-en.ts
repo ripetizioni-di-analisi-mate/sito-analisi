@@ -269,7 +269,25 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
   'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
-  'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
+  'fisica-semestre-filtro': {
+    titolo: 'Physics for the Medicine filter semester',
+    breve: 'Filter semester physics',
+    descrizione: 'The physics exam of the Italian filter semester for Medicine and Surgery, Dentistry and Veterinary Medicine (2026/27 syllabus): mechanics, fluids and circulation, waves, thermodynamics, electromagnetism, radiation and optics, with multiple-choice and fill-in questions.',
+    argomenti: {
+      'grandezze-e-vettori': { titolo: 'Physical quantities, units, vectors and graphs', breve: 'Quantities and vectors' },
+      'cinematica': { titolo: 'Kinematics', breve: 'Kinematics' },
+      'dinamica': { titolo: 'Laws of motion and forces', breve: 'Dynamics' },
+      'lavoro-energia-quantita-di-moto': { titolo: 'Work, energy and momentum', breve: 'Work and energy' },
+      'corpo-rigido-e-leve': { titolo: 'Rigid body, equilibrium and levers in the human body', breve: 'Rigid body and levers' },
+      'fluidi-in-quiete': { titolo: 'Fluids at rest: Stevin, Pascal and Archimedes', breve: 'Fluids at rest' },
+      'fluidi-in-movimento': { titolo: 'Fluids in motion, viscosity, surface tension and circulation', breve: 'Fluids in motion' },
+      'onde-e-suono': { titolo: 'Mechanical waves and sound', breve: 'Waves and sound' },
+      'termodinamica': { titolo: 'Ideal gases, heat and the laws of thermodynamics', breve: 'Thermodynamics' },
+      'elettrostatica-e-condensatori': { titolo: 'Charge, electric field, potential and capacitors', breve: 'Electrostatics' },
+      'corrente-magnetismo-induzione': { titolo: 'Electric current, magnetic field and induction', breve: 'Current and magnetism' },
+      'radiazioni-e-ottica': { titolo: 'Radiation, radioactivity and geometric optics', breve: 'Radiation and optics' },
+    },
+  },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };

@@ -1,14 +1,21 @@
 ---
 import Simulazione from '../../viste/Simulazione.astro';
 import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
+import SimulazioneProva from '../../viste/SimulazioneProva.astro';
 import { catalogoDomande } from '../../lib/domande';
+import { catalogoQuesiti } from '../../lib/quesiti';
 import { MATERIE } from '../../data/materie';
+import { PROVE } from '../../data/prove';
 // Le materie che hanno il capitolo «Prove d'esame» (domande a tempo) hanno anche la simulazione d'esame.
 // Per le materie dei concorsi la simulazione è una prova a quiz corretta in automatico.
+// Le materie con una prova ufficiale (src/data/prove.ts) e i suoi quesiti hanno la simulazione di quella prova.
 export async function getStaticPaths() {
-  return Object.keys(await catalogoDomande('it')).map((materia) => ({ params: { materia } }));
+  const conProva = Object.keys(await catalogoQuesiti()).filter((m) => PROVE[m]);
+  const materie = new Set([...Object.keys(await catalogoDomande('it')), ...conProva]);
+  return [...materie].map((materia) => ({ params: { materia } }));
 }
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
+const prova = Boolean(PROVE[materia] && (await catalogoQuesiti())[materia]?.length);
 ---
-{concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
+{prova ? <SimulazioneProva materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}

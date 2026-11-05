@@ -26,6 +26,7 @@ import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi }
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
+import { gestisciProva } from './prova.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
@@ -724,6 +725,12 @@ export default {
       if (r) return r;
     }
 
+    // ===== simulazione di una prova ufficiale (Fisica del semestre filtro, worker/prova.mjs) =====
+    if (p.startsWith('/api/simulazione-prova')) {
+      const r = await gestisciProva(req, env, p, { firmaToken, leggiToken, json, aDO, utenteCollegato, sha });
+      if (r) return r;
+    }
+
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
     if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
       const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
@@ -831,7 +838,7 @@ export default {
     }
 
     // ===== livelli e punti esperienza =====
-    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/')) return new Response('non trovato', { status: 404 });
+    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/') || p.startsWith('/dati-quesiti/')) return new Response('non trovato', { status: 404 });
     // Verifica della risposta di un esercizio da fare: il risultato resta nel Worker, al browser arriva solo l'esito.
     if (p === '/api/verifica' && POST) {
       const { id, risposta, lingua } = await req.json().catch(() => ({}));
@@ -1151,6 +1158,7 @@ export default {
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'fisica-superiori-5': env.PADDLE_PREZZO_FISICA_SUPERIORI_5 || null,
+            'fisica-semestre-filtro': env.PADDLE_PREZZO_FISICA_SEMESTRE_FILTRO || null,
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
             'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
           },

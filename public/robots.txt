@@ -28,6 +28,7 @@ Disallow: /en/accedi
 Disallow: /vetrine/
 Disallow: /*/stampa
 Disallow: /dati-domande/
+Disallow: /dati-quesiti/
 Disallow: /dati-compatibilita/
 Disallow: /reimposta-password
 Disallow: /en/reimposta-password

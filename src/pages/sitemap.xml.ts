@@ -8,6 +8,8 @@ import { MATERIE } from '../data/materie';
 import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
+import { PROVE } from '../data/prove';
+import { catalogoQuesiti } from '../lib/quesiti';
 
 const DATA = DATE as Record<string, { data: string }>;
 const dataDi = (cartella: string, id: string) => DATA[`src/${cartella}/${id}.md`]?.data;
@@ -30,6 +32,8 @@ export async function GET() {
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
   due('/concorsi/simulazione', 0.5, false);
+  // simulazioni delle prove ufficiali (src/data/prove.ts), solo per le materie attive con i quesiti
+  for (const [m, a] of Object.entries(await catalogoQuesiti())) if (PROVE[m] && a.length) due(`/${m}/simulazione`, 0.7, false);
   // formulari gratuiti, in italiano e in inglese (quelli tradotti)
   const formulari = await getCollection('formulari');
   const formulariEn = new Set((await getCollection('formulari_en')).map((v) => v.id));

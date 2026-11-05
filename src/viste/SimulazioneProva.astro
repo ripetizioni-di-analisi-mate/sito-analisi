@@ -1,0 +1,293 @@
+---
+// Simulazione di una prova ufficiale con quesiti a risposta multipla e a completamento (per ora la prova di Fisica
+// del semestre filtro): regole in src/data/prove.ts, quesiti in src/content/quesiti, scelta e correzione nel Worker
+// (worker/prova.mjs). Prova completa con le regole del bando oppure allenamento su alcuni argomenti. Solo italiano.
+import Base from '../layouts/Base.astro';
+import { materia as materiaDi } from '../data/materie';
+import { PROVE } from '../data/prove';
+import { catalogoQuesiti } from '../lib/quesiti';
+interface Props { materia: string }
+const { materia } = Astro.props;
+const m = materiaDi(materia);
+const prova = PROVE[materia];
+const presenti = (await catalogoQuesiti())[materia] ?? [];
+const argomenti = m.argomenti.filter((a) => presenti.includes(a.slug)).map((a) => ({ slug: a.slug, breve: a.breve }));
+const totale = prova.multipla + prova.completamento;
+const num = (x: number) => x.toLocaleString('it-IT');
+const titolo = prova.titolo;
+const sommario = `${totale} quesiti in ${prova.minuti} minuti come nella prova ufficiale: ${prova.multipla} a risposta multipla e ${prova.completamento} a completamento, presi da tutto il programma e corretti in automatico alla consegna.`;
+const dati = { materia, argomenti, totale, minuti: prova.minuti, punti: prova.punti, soglia: prova.soglia, multipla: prova.multipla, completamento: prova.completamento };
+---
+<Base titolo={titolo} descrizione={sommario} percorso={[{ titolo: m.breve, href: `/${materia}` }, { titolo: 'Simulazione della prova' }]} materia={materia} sezione="simulazione"
+  lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
+  <div class="simulazione simulazione-prova" data-prova={JSON.stringify(dati)}>
+    <p class="sopratitolo">{m.titolo}</p>
+    <h1>{titolo}</h1>
+    <p class="sommario">{sommario}</p>
+
+    {argomenti.length === 0 ? <p>I quesiti della simulazione sono in preparazione.</p> : (
+    <form class="sim-impostazioni">
+      <fieldset class="sim-modo">
+        <legend>Tipo di simulazione</legend>
+        <label><input type="radio" name="modo" value="completa" checked /> <span><strong>Prova completa</strong> · {totale} quesiti, {prova.minuti} minuti, programma intero</span></label>
+        <label><input type="radio" name="modo" value="argomenti" /> <span><strong>Allenamento per argomenti</strong> · solo gli argomenti scelti</span></label>
+      </fieldset>
+      <div class="sim-per-argomenti" hidden>
+        <fieldset>
+          <legend>Argomenti <button type="button" class="sim-tutti">Seleziona tutti</button></legend>
+          <div class="sim-argomenti">
+            {argomenti.map((a) => <label><input type="checkbox" name="argomento" value={a.slug} /> {a.breve}</label>)}
+          </div>
+        </fieldset>
+        <div class="sim-scelte">
+          <label>Quesiti
+            <select name="numero">{[10, 15, 20, totale].map((x) => <option value={x} selected={x === 15}>{x}</option>)}</select>
+          </label>
+        </div>
+      </div>
+      <div class="sim-regole">
+        <p><strong>Punteggio della prova.</strong> Ogni risposta corretta vale {num(prova.punti.corretta)} punto, ogni risposta errata {num(prova.punti.errata)} punti, ogni risposta non data 0 punti. Il punteggio massimo è {totale}, che vale 30 e lode; la prova è superata da {prova.soglia} punti in su.</p>
+        <p><strong>Completamento.</strong> Si scrive la parola o il numero richiesto, con la virgola decimale e, se serve, la notazione scientifica (per esempio <span class="sim-esempio-risposta">3,2·10^-4</span> oppure <span class="sim-esempio-risposta">3,2e-4</span>). L'unità di misura è già indicata nel testo.</p>
+        <p>Come nella prova, la calcolatrice non si usa.</p>
+      </div>
+      <button type="submit" class="bottone-primario">Inizia la simulazione</button>
+      <p class="sim-errore" hidden></p>
+    </form>
+    )}
+
+    <div class="sim-storico" hidden><h2>Simulazioni precedenti</h2><ol></ol></div>
+
+    <div class="sim-compito" hidden>
+      <div class="sim-barra">
+        <span class="sim-tempo"><small>Tempo rimasto</small> <strong>–</strong></span>
+        <span class="sim-date"></span>
+        <button type="button" class="bottone-primario sim-consegna">Consegna</button>
+      </div>
+      <h2 class="sim-parte sim-parte-multipla">Quesiti a risposta multipla</h2>
+      <ol class="sim-esercizi sim-quesiti sim-multipla"></ol>
+      <h2 class="sim-parte sim-parte-completamento">Quesiti a completamento</h2>
+      <ol class="sim-esercizi sim-quesiti sim-completamento"></ol>
+      <div class="sim-esito" hidden>
+        <p class="sim-voto"></p>
+        <p class="sim-nota"></p>
+        <table class="sim-conto"><tbody></tbody></table>
+        <p class="sim-confronto" hidden></p>
+        <table class="sim-tabella"><thead><tr><th>Argomento</th><th>Corrette</th><th></th></tr></thead><tbody></tbody></table>
+        <p><a class="bottone-secondario sim-nuova" href="">Nuova simulazione</a></p>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const radice = document.querySelector<HTMLElement>('.simulazione-prova')!;
+  type Dati = { materia: string; argomenti: { slug: string; breve: string }[]; totale: number; minuti: number; punti: { corretta: number; errata: number; nondata: number }; soglia: number; multipla: number; completamento: number };
+  type Domanda = { id: string; argomento: string; tipo: 'multipla' | 'completamento'; testo: string; scelte?: string[] };
+  type Esito = { id: string; tipo: string; giusta: boolean | null; corretta?: number; risposta?: string; spiegazione: string };
+  const D: Dati = JSON.parse(radice.dataset.prova || '{}');
+  const form = radice.querySelector<HTMLFormElement>('.sim-impostazioni');
+  const compito = radice.querySelector<HTMLElement>('.sim-compito')!;
+  const elMultipla = radice.querySelector<HTMLOListElement>('.sim-multipla')!;
+  const elComp = radice.querySelector<HTMLOListElement>('.sim-completamento')!;
+  const tempoEl = radice.querySelector<HTMLElement>('.sim-tempo strong')!;
+  const dateEl = radice.querySelector<HTMLElement>('.sim-date')!;
+  const consegnaB = radice.querySelector<HTMLButtonElement>('.sim-consegna')!;
+  const esitoEl = radice.querySelector<HTMLElement>('.sim-esito')!;
+  const LETTERE = ['A', 'B', 'C', 'D', 'E'];
+  const CHIAVE = `simulazioni-prova-${D.materia}`, RECENTI = `simulazione-prova-recenti-${D.materia}`;
+  const num = (x: number) => x.toLocaleString('it-IT', { maximumFractionDigits: 2 });
+  const leggi = <X,>(k: string, d: X): X => { try { return JSON.parse(localStorage.getItem(k) || '') ?? d; } catch { return d; } };
+  const scrivi = (k: string, v: unknown) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* niente memoria */ } };
+  const mescola = <X,>(a: X[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  const nomeArg = (a: string) => D.argomenti.find((x) => x.slug === a)?.breve || a;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const segno = (x: number) => (x > 0 ? '+' : x < 0 ? '−' : '') + num(Math.abs(x));
+  const fattore = (x: number) => (x < 0 ? `(${segno(x)})` : num(x));
+  radice.querySelector<HTMLAnchorElement>('.sim-nuova')!.href = location.pathname;
+
+  // Voto in trentesimi della prova completa: il punteggio stesso, con 31 = 30 e lode.
+  const voto = (p: number) => (p >= D.totale ? '30 e lode' : num(Math.max(0, p)));
+
+  type Voce = { quando: number; punti: number; n: number; giuste: number; errate: number; vuote: number; minuti: number; completa: boolean };
+  let storico: Voce[] = leggi(CHIAVE, []);
+  if (storico.length && form) {
+    const box = radice.querySelector<HTMLElement>('.sim-storico')!;
+    box.hidden = false;
+    box.querySelector('ol')!.innerHTML = storico.slice(-5).reverse().map((v) =>
+      `<li>${new Date(v.quando).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })} · ${v.completa ? 'Prova completa' : 'Allenamento'} · <strong>${num(v.punti)} su ${v.n}</strong>${v.completa ? (v.punti >= D.soglia ? ' · superata' : ' · non superata') : ''} · ${v.giuste} corrette, ${v.errate} errate, ${v.vuote} non date · ${v.minuti} min</li>`).join('');
+  }
+
+  // Scelta del tipo di simulazione.
+  const perArg = radice.querySelector<HTMLElement>('.sim-per-argomenti');
+  form?.querySelectorAll<HTMLInputElement>('input[name=modo]').forEach((r) => r.addEventListener('change', () => { if (perArg) perArg.hidden = r.value !== 'argomenti' || !r.checked; }));
+  form?.querySelector('.sim-tutti')?.addEventListener('click', () => {
+    const caselle = [...form.querySelectorAll<HTMLInputElement>('input[name=argomento]')];
+    const tutte = caselle.every((c) => c.checked);
+    caselle.forEach((c) => { c.checked = !tutte; });
+  });
+
+  let token = '', domande: Domanda[] = [], ordini: number[][] = [], risposte: (number | string | null)[] = [];
+  let fine = 0, inizio = 0, timer = 0, consegnato = false, completa = true;
+  const date = () => risposte.filter((r) => r !== null && r !== '').length;
+  const aggiornaDate = () => { dateEl.textContent = `Risposte date: ${date()} su ${domande.length}`; };
+
+  function quesito(q: Domanda, i: number, numero: number) {
+    const li = document.createElement('li');
+    li.className = 'sim-esercizio sim-quesito';
+    li.innerHTML = `<p class="sim-testa"><strong>Quesito ${numero}</strong> <span>${esc(nomeArg(q.argomento))}</span></p><div class="testo-domanda">${q.testo}</div>`;
+    if (q.tipo === 'multipla') {
+      const box = document.createElement('div');
+      box.className = 'scelte'; box.setAttribute('role', 'radiogroup');
+      ordini[i].forEach((orig, k) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'scelta'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
+        b.innerHTML = `<span class="lettera">${LETTERE[k]}</span><span class="valore">${q.scelte![orig]}</span>`;
+        b.addEventListener('click', () => {
+          if (consegnato) return;
+          // Un secondo tocco sulla risposta scelta la toglie: il quesito resta senza risposta.
+          risposte[i] = risposte[i] === orig ? null : orig;
+          box.querySelectorAll('.scelta').forEach((x, j) => { const on = ordini[i][j] === risposte[i]; x.classList.toggle('scelta-attiva', on); x.setAttribute('aria-checked', String(on)); });
+          li.classList.toggle('sim-risposto', risposte[i] !== null);
+          aggiornaDate();
+        });
+        box.append(b);
+      });
+      li.append(box);
+    } else {
+      const campo = document.createElement('label');
+      campo.className = 'sim-completa';
+      campo.innerHTML = '<span>Risposta</span><input type="text" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" />';
+      const input = campo.querySelector('input')!;
+      input.setAttribute('aria-label', `Risposta al quesito ${numero}`);
+      input.addEventListener('input', () => {
+        risposte[i] = input.value.trim() || null;
+        li.classList.toggle('sim-risposto', risposte[i] !== null);
+        aggiornaDate();
+      });
+      li.append(campo);
+    }
+    return li;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const err = form.querySelector<HTMLElement>('.sim-errore')!;
+    err.hidden = true;
+    completa = (form.querySelector<HTMLInputElement>('input[name=modo]:checked')?.value ?? 'completa') === 'completa';
+    const scelti = [...form.querySelectorAll<HTMLInputElement>('input[name=argomento]:checked')].map((x) => x.value);
+    if (!completa && !scelti.length) { err.textContent = 'Scegli almeno un argomento.'; err.hidden = false; return; }
+    const numero = Number((form.elements.namedItem('numero') as HTMLSelectElement).value);
+    const bottone = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    bottone.disabled = true;
+    let minuti = D.minuti;
+    try {
+      const corpo = completa ? { materia: D.materia, recenti: leggi<string[]>(RECENTI, []) } : { materia: D.materia, argomenti: scelti, numero, recenti: leggi<string[]>(RECENTI, []) };
+      const r = await fetch('/api/simulazione-prova', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(corpo) });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.errore || 'rete');
+      token = d.token; domande = d.domande; minuti = d.minuti;
+    } catch (x) {
+      err.textContent = x instanceof Error && x.message !== 'rete' ? x.message : 'I quesiti non si sono caricati. Ricarica la pagina.';
+      err.hidden = false; bottone.disabled = false; return;
+    }
+    scrivi(RECENTI, [...leggi<string[]>(RECENTI, []).filter((x) => !domande.some((q) => q.id === x)), ...domande.map((q) => q.id)].slice(-800));
+    ordini = domande.map((q) => (q.scelte ? mescola(q.scelte.map((_, i) => i)) : []));
+    risposte = domande.map(() => null);
+    elMultipla.innerHTML = ''; elComp.innerHTML = '';
+    domande.forEach((q, i) => (q.tipo === 'multipla' ? elMultipla : elComp).append(quesito(q, i, i + 1)));
+    elComp.start = domande.filter((q) => q.tipo === 'multipla').length + 1;
+    radice.querySelector<HTMLElement>('.sim-parte-multipla')!.hidden = !elMultipla.children.length;
+    radice.querySelector<HTMLElement>('.sim-parte-completamento')!.hidden = !elComp.children.length;
+    form.hidden = true;
+    radice.querySelector<HTMLElement>('.sim-storico')!.hidden = true;
+    compito.hidden = false;
+    aggiornaDate();
+    inizio = Date.now();
+    fine = inizio + minuti * 60000;
+    const passa = () => {
+      const r = Math.max(0, fine - Date.now());
+      const mm = Math.floor(r / 60000), ss = Math.floor((r % 60000) / 1000);
+      tempoEl.textContent = `${mm}:${String(ss).padStart(2, '0')}`;
+      compito.classList.toggle('sim-ultimi', r < 5 * 60000);
+      if (!r) consegna(true);
+    };
+    passa();
+    timer = window.setInterval(passa, 1000);
+    compito.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  async function consegna(scaduto = false) {
+    if (consegnato) return;
+    consegnato = true;
+    clearInterval(timer);
+    consegnaB.hidden = true;
+    dateEl.hidden = true;
+    compito.querySelectorAll<HTMLInputElement>('.sim-completa input').forEach((x) => { x.readOnly = true; });
+    const minuti = Math.max(1, Math.round((Math.min(Date.now(), fine) - inizio) / 60000));
+    radice.querySelector<HTMLElement>('.sim-tempo')!.innerHTML = `<small>Tempo impiegato</small> <strong>${minuti} min</strong>`;
+    if (scaduto) { const p = document.createElement('p'); p.className = 'sim-scaduto'; p.textContent = 'Tempo scaduto: la prova è stata consegnata.'; compito.prepend(p); }
+    let d: { esiti: Esito[]; giuste: number; errate: number; vuote: number; punti: number; confronto: { percentile?: number; confronto: number } | null } | null = null;
+    for (let tentativo = 0; tentativo < 3 && !d; tentativo++) {
+      try {
+        const r = await fetch('/api/simulazione-prova/correggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token, risposte }) });
+        if (r.ok) d = await r.json();
+      } catch { /* riprova */ }
+    }
+    if (!d) { radice.querySelector('.sim-nota')!.textContent = 'La correzione non è arrivata: controlla la connessione e ricarica la pagina.'; esitoEl.hidden = false; compito.insertBefore(esitoEl, compito.querySelector('.sim-parte')); return; }
+    const perArg = new Map<string, { g: number; n: number }>();
+    const elementi = [...elMultipla.children, ...elComp.children] as HTMLElement[];
+    domande.forEach((q, i) => {
+      const e = d!.esiti[i];
+      const li = elementi[i];
+      const v = perArg.get(q.argomento) ?? { g: 0, n: 0 };
+      v.n++; if (e.giusta) v.g++; perArg.set(q.argomento, v);
+      li.classList.add(e.giusta === null ? 'sim-vuoto' : e.giusta ? 'sim-giusto' : 'sim-errato');
+      if (q.tipo === 'multipla') {
+        const corr = (e.corretta ?? 0) - 1;
+        li.querySelectorAll<HTMLElement>('.scelta').forEach((b, j) => {
+          b.classList.add('scelta-chiusa');
+          if (ordini[i][j] === corr) b.classList.add('scelta-giusta');
+          else if (ordini[i][j] === risposte[i]) b.classList.add('scelta-sbagliata');
+        });
+      } else {
+        const atteso = document.createElement('p');
+        atteso.className = 'sim-attesa';
+        atteso.innerHTML = `Risposta attesa: <strong>${esc(e.risposta ?? '')}</strong>`;
+        li.querySelector('.sim-completa')!.after(atteso);
+      }
+      const esito = e.giusta === null ? 'Non data' : e.giusta ? 'Corretta' : 'Errata';
+      li.querySelector('.sim-testa')!.insertAdjacentHTML('beforeend', `<em class="sim-esito-quesito">${esito}</em>`);
+      const sp = document.createElement('div');
+      sp.className = 'spiegazione';
+      sp.innerHTML = `<h2>Spiegazione</h2>${e.spiegazione}`;
+      li.append(sp);
+    });
+    const { giuste, errate, vuote, punti } = d;
+    const n = domande.length;
+    const superata = punti >= D.soglia;
+    radice.querySelector('.sim-voto')!.innerHTML = completa
+      ? `Punteggio: <strong>${num(punti)}</strong> su ${D.totale} · voto ${voto(punti)} · ${superata ? '<span class="sim-superata">prova superata</span>' : `<span class="sim-non-superata">prova non superata</span> (servono ${D.soglia} punti)`}`
+      : `Punteggio: <strong>${num(punti)}</strong> su ${n}`;
+    radice.querySelector('.sim-nota')!.textContent = `${giuste} risposte corrette, ${errate} errate e ${vuote} non date su ${n} quesiti, in ${minuti} ${minuti === 1 ? 'minuto' : 'minuti'}.`;
+    const riga = (nome: string, k: number, p: number) => `<tr><td>${nome}</td><td>${k} × ${fattore(p)}</td><td>${segno(Math.round(k * p * 100) / 100) || '0'} punti</td></tr>`;
+    radice.querySelector('.sim-conto tbody')!.innerHTML = riga('Risposte corrette', giuste, D.punti.corretta) + riga('Risposte errate', errate, D.punti.errata) + riga('Risposte non date', vuote, D.punti.nondata)
+      + `<tr class="sim-conto-totale"><td>Punteggio</td><td></td><td>${num(punti)} punti su ${n}</td></tr>`;
+    if (d.confronto?.percentile !== undefined) {
+      const c = radice.querySelector<HTMLElement>('.sim-confronto')!;
+      c.innerHTML = `Hai ottenuto un punteggio più alto del <strong>${d.confronto.percentile}%</strong> di chi ha svolto la prova completa (${d.confronto.confronto.toLocaleString('it-IT')} simulazioni).`;
+      c.hidden = false;
+    }
+    radice.querySelector('.sim-tabella tbody')!.innerHTML = [...perArg.entries()]
+      .sort(([, x], [, y]) => x.g / x.n - y.g / y.n)
+      .map(([a, v]) => `<tr><td>${esc(nomeArg(a))}</td><td>${v.g} su ${v.n}</td><td><a href="/${D.materia}/${a}/teoria">Ripassa</a></td></tr>`).join('');
+    esitoEl.hidden = false;
+    compito.insertBefore(esitoEl, compito.querySelector('.sim-parte'));
+    storico = [...storico, { quando: inizio, punti, n, giuste, errate, vuote, minuti, completa }].slice(-20);
+    scrivi(CHIAVE, storico);
+    esitoEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  consegnaB.addEventListener('click', () => {
+    const mancano = domande.length - date();
+    if (confirm(mancano ? `Mancano ${mancano} risposte. Consegnare la prova adesso?` : 'Consegnare la prova adesso?')) consegna();
+  });
+</script>

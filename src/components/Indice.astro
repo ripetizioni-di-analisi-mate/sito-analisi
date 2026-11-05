@@ -14,6 +14,10 @@ const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
 const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
+// Simulazione di una prova ufficiale (src/data/prove.ts): voce sotto gli argomenti, solo in italiano.
+import { PROVE } from '../data/prove';
+import { catalogoQuesiti } from '../lib/quesiti';
+const conProva = Boolean(m && lingua === 'it' && PROVE[m.slug] && (await catalogoQuesiti())[m.slug]?.length);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
@@ -63,6 +67,11 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </li>
           );
         })}
+        {conProva && (
+          <li class:list={{ corrente: sezione === 'simulazione' }}>
+            <a class:list={['argomento', { attiva: sezione === 'simulazione' }]} href={`/${m!.slug}/simulazione`}>Simulazione della prova</a>
+          </li>
+        )}
         {conDomande.size > 0 && (
           <li class:list={{ corrente: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
             <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{lingua === 'en' ? 'Exam practice' : 'Prove d\'esame'}</button>

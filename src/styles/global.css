@@ -1399,3 +1399,22 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 @media (max-width: 640px) { html.con-barra-sconto .pi-fumetto { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .barra-sconto, html.con-barra-sconto .bottoni-fissi { transition: none; } }
 @media print { .barra-sconto { display: none !important; } }
+
+/* Simulazione di una prova ufficiale (src/viste/SimulazioneProva.astro): risposta multipla e completamento */
+.sim-modo { display: grid; gap: 0.45rem; }
+.sim-modo label { display: flex; gap: 0.55rem; align-items: baseline; font-size: 0.95rem; cursor: pointer; }
+.sim-per-argomenti { display: grid; gap: 0.9rem; }
+.sim-per-argomenti[hidden] { display: none; }
+.sim-regole { font-size: 0.9rem; color: var(--inchiostro-2); line-height: 1.5; }
+.sim-regole p { margin: 0 0 0.45rem; }
+.sim-regole strong { color: var(--inchiostro); }
+.sim-esempio-risposta { font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--inchiostro); }
+.sim-parte { font-family: var(--ui); font-size: 1rem; margin: 1.4rem 0 0.6rem; color: var(--inchiostro-2); text-transform: uppercase; letter-spacing: 0.04em; }
+.sim-parte[hidden] { display: none; }
+.sim-completa { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.7rem; font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
+.sim-completa input { width: min(16rem, 100%); font: 1rem var(--ui); letter-spacing: 0.02em; padding: 0.5rem 0.7rem; border: 1px solid var(--riga); border-radius: 8px; background: #fff; color: var(--inchiostro); }
+.sim-completa input:focus { outline: 2px solid var(--accento); outline-offset: 1px; }
+.sim-giusto .sim-completa input { border: 2px solid var(--verde); }
+.sim-errato .sim-completa input { border-color: color-mix(in srgb, var(--c-esempio) 60%, transparent); background: color-mix(in srgb, var(--c-esempio) 8%, #fff); }
+.sim-attesa { margin: 0.5rem 0 0; font-family: var(--ui); font-size: 0.92rem; }
+.sim-attesa strong { color: var(--verde); }

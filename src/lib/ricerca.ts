@@ -1,6 +1,8 @@
 import { materieL, materiaL, argomentoL, link, vociL, T, type Lingua } from '../i18n';
 import { numero } from './nav';
 import { catalogoDomande } from './domande';
+import { catalogoQuesiti } from './quesiti';
+import { PROVE } from '../data/prove';
 import { RIPASSO } from '../data/livelli';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { MATERIE_GRUPPI } from '../data/gruppi';
@@ -56,6 +58,10 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     voci.push({ t: 'Che cosa studiare per il tuo concorso', s: 'Guida gratuita', m: 'Concorsi', h: '/concorsi', p: 'concorsi pubblici guida programma matematica logica test', c: 'corsi' });
     voci.push({ t: 'Compatibilità con il tuo esame', s: 'Confronto gratuito del tuo compito con il materiale', m: 'Esami universitari', h: '/compatibilita', p: 'compatibilità esame compito traccia prova scritta appello percentuale copertura confronto programma università foto pdf', c: 'corsi' });
     voci.push({ t: 'Domande a tempo di tutte le materie', s: 'Quiz gratuiti per argomento', m: 'Domande a tempo', h: '/domande-a-tempo', p: 'domande a tempo quiz risposta multipla gratis allenamento esame', c: 'esercizi' });
+    for (const [ms, a] of Object.entries(await catalogoQuesiti())) {
+      if (!PROVE[ms] || !a.length) continue;
+      voci.push({ t: PROVE[ms].titolo, s: `${PROVE[ms].multipla + PROVE[ms].completamento} quesiti · ${PROVE[ms].minuti} minuti · Punteggio del bando`, m: materiaL(l, ms).breve, h: `/${ms}/simulazione`, p: 'simulazione prova esame semestre filtro medicina odontoiatria veterinaria fisica quiz risposta multipla completamento punteggio soglia timer', c: 'esercizi' });
+    }
     voci.push({ t: 'Simulazione della prova a quiz per i concorsi', s: 'Matematica e logica · Punteggio e soglia', m: 'Concorsi', h: '/concorsi/simulazione', p: 'simulazione prova concorso quiz test risposta multipla punteggio penalità soglia timer matematica logica', c: 'esercizi' });
   }
 
