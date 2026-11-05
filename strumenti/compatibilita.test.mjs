@@ -1,0 +1,211 @@
+// Prove locali del calcolo e del protocollo: nessuna richiesta ai modelli o all'archivio di produzione.
+import assert from 'node:assert/strict';
+import { test, after } from 'node:test';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { execFileSync } from 'node:child_process';
+
+const radice = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const temporanea = mkdtempSync(join(tmpdir(), 'compatibilita-prove-'));
+const compila = async (file, nome) => {
+  const destinazione = join(temporanea, `${nome}.mjs`);
+  execFileSync(process.execPath, [join(radice, 'node_modules/rolldown/bin/cli.mjs'), join(radice, file), '--file', destinazione, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: radice });
+  return import(pathToFileURL(destinazione).href);
+};
+const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
+const { dettagliScheda, dettagliTeoria } = await compila('src/lib/catalogo-compatibilita.ts', 'catalogo');
+after(() => rmSync(temporanea, { recursive: true, force: true }));
+
+const cat = {
+  materia: 'analisi-1', titolo: 'Analisi matematica 1', argomenti: [{
+    slug: 'integrali', titolo: 'Integrali',
+    schede: [{ n: 4, titolo: 'Integrali per parti', parole: ['integrazione per parti'], metodi: ['formula di integrazione per parti'], tracce: ['Calcolare $\\int x e^x dx$.'] }],
+    teoria: [
+      { ancora: 'per-parti', titolo: 'Integrazione per parti', tipo: 'teorema', contenuto: 'La formula per integrare un prodotto.', dimostrazione: true },
+      { ancora: 'teorema', titolo: 'Teorema senza dimostrazione', tipo: 'teorema', contenuto: 'Enunciato.', dimostrazione: false },
+    ],
+  }],
+};
+const { codici } = codifica(cat, false);
+const valuta = (...righe) => valutaRichieste('analisi-1', cat, codici, righe.map((r) => typeof r === 'string' ? leggiRiga(r) : r));
+
+test('la copertura dipende dal materiale: 0, 50 e 100 sono tutti possibili', () => {
+  assert.equal(valuta('1|-|E|-|-|-|Risolvere una PDE stocastica').compatibilita, 0);
+  assert.equal(valuta('1|-|E|A1|-|-|Studiare un integrale').compatibilita, 50);
+  assert.equal(valuta('1|-|E|A1|S1|-|Integrare un prodotto per parti').compatibilita, 100);
+});
+
+test('il metodo spiegato nella teoria può coprire un calcolo', () => {
+  const esito = valuta('1|-|E|A1|T1|-|Applicare la formula per parti');
+  assert.equal(esito.compatibilita, 100);
+  assert.equal(esito.richieste[0].voce.link, '/analisi-1/integrali/teoria#per-parti');
+  assert.match(codifica(cat, false).testo, /T1 Integrazione per parti/);
+});
+
+test('una dimostrazione non presente resta coperta solo in parte', () => {
+  assert.equal(valuta('1|-|T|A1|T2|-|Enunciare e dimostrare il teorema').compatibilita, 50);
+  assert.equal(valuta('1|-|T|A1|T1|-|Dimostrare la formula per parti').compatibilita, 100);
+});
+
+test('codici inesistenti e proprietà ereditate non sono fonti', () => {
+  assert.equal(valuta('1|-|E|A1|S999|-|Calcolare un integrale').compatibilita, 50);
+  assert.equal(valuta({ esercizio: '1', testo: 'Una richiesta', livello: 'stesso', argomento: 'toString', scheda: 'constructor' }).compatibilita, 0);
+});
+
+test('i punteggi dei singoli punti sono rispettati (8 punti coperti su 10)', () => {
+  const esito = valuta('1|a|E|-|-|P2|Richiesta estranea', '1|b|E|A1|S1|P8|Integrare per parti');
+  assert.equal(esito.compatibilita, 80);
+  assert.equal(esito.perPunti, true);
+  assert.deepEqual(esito.richieste.map((r) => r.peso), [2, 8]);
+  assert.equal(esito.quote.stesso + esito.quote.argomento, 80);
+});
+
+test('il totale di un esercizio non viene moltiplicato per il numero di punti', () => {
+  const esito = valuta('1|a|E|A1|S1|E6|Primo integrale', '1|b|E|A1|S1|E6|Secondo integrale', '2|-|E|-|-|E4|Richiesta estranea');
+  assert.equal(esito.compatibilita, 60);
+  assert.deepEqual(esito.richieste.map((r) => r.peso), [3, 3, 4]);
+});
+
+test('punteggi incompleti o incoerenti usano pesi uguali', () => {
+  assert.equal(valuta('1|a|E|A1|S1|P8|Integrare per parti', '1|b|E|-|-|-|Richiesta estranea').perPunti, false);
+  assert.equal(valuta('1|a|E|A1|S1|E8|Integrare per parti', '1|b|E|-|-|E4|Richiesta estranea').perPunti, false);
+});
+
+test('un totale e un punteggio specifico distribuiscono solo il residuo', () => {
+  const esito = valuta('1|a|E|A1|S1|P8|Integrare per parti', '1|b|E|-|-|E10|Richiesta estranea');
+  assert.equal(esito.compatibilita, 80);
+  assert.deepEqual(esito.richieste.map((r) => r.peso), [8, 2]);
+});
+
+test('duplicati e risposte vuote non alterano la copertura', () => {
+  const r = '1|-|E|A1|S1|-|Integrare per parti';
+  assert.equal(valuta(r, r).richieste.length, 1);
+  const vuoto = valutaRichieste('analisi-1', cat, codici, []);
+  assert.equal(vuoto.compatibilita, 0);
+  assert.equal(vuoto.perPunti, false);
+});
+
+test('i separatori nei valori assoluti restano nella formula', () => {
+  assert.equal(leggiRiga('1|a|E|A1|S1|P2,5|Calcolare $|x|$').testo, 'Calcolare $|x|$');
+  assert.equal(leggiRiga('1|a|E|A1|S1|P2,5|Calcolare $|x|$').punti, 2.5);
+});
+
+test('il formato compatto a sei campi conserva parte, tipo e punteggio', () => {
+  const r = leggiRiga('1a|E|A1|S1|p2,5|Calcolare $|x|$');
+  assert.equal(r.esercizio, '1');
+  assert.equal(r.parte, 'a');
+  assert.equal(r.punti, 2.5);
+  assert.equal(r.puntiTipo, 'parte');
+  assert.equal(r.testo, 'Calcolare $|x|$');
+  assert.equal(leggiRiga('2|T|A1|T1|6|Enunciare la formula').tipo, 'teoria');
+});
+
+test('gli estratti provengono dalle spiegazioni e dalle tracce effettive', () => {
+  const corpo = readFileSync(join(radice, 'src/content/svolti/analisi-1/limiti/4.md'), 'utf8').replace(/^---[\s\S]*?---/, '');
+  const dettagli = dettagliScheda(corpo);
+  assert.equal(dettagli.tracce.length, 3);
+  assert.ok(dettagli.tracce.some((t) => t.includes('\\lim')));
+  assert.ok(dettagli.metodi.includes('cambio di variabile'));
+  for (const metodo of dettagli.metodi) assert.ok(corpo.includes(`**${metodo}**`));
+  const teoria = readFileSync(join(radice, 'src/content/teoria/analisi-1/limiti.md'), 'utf8');
+  assert.equal(dettagliTeoria(teoria, 'unicita-del-limite').dimostrazione, true);
+  assert.equal(dettagliTeoria(teoria, 'intorno').dimostrazione, false);
+});
+
+test('cataloghi diversi della stessa materia non condividono una codifica obsoleta', () => {
+  const altro = structuredClone(cat);
+  altro.argomenti[0].schede[0].titolo = 'Titolo aggiornato';
+  assert.match(codifica(altro, false).testo, /Titolo aggiornato/);
+  assert.doesNotMatch(codifica(cat, false).testo, /Titolo aggiornato/);
+});
+
+const riga = '1|-|E|A1|S1|-|Integrare un prodotto per parti\n';
+async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
+  const chiamate = [], attese = [];
+  const env = {
+    ASSETS: { fetch: async () => assetOk ? Response.json(cat) : new Response('', { status: 503 }) },
+    AI: { run: async () => typeof risposta === 'function' ? risposta() : { response: risposta } },
+  };
+  const h = {
+    aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true, rimasti: 3 }; },
+    json: (dati, status = 200, headers) => Response.json(dati, { status, headers }),
+    utenteCollegato: async () => null,
+    catalogoDomande: async () => ({}),
+  };
+  const req = new Request('https://esempio.test/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo: 'Esercizio 1. Calcolare un integrale per parti.' }) });
+  const res = await gestisciCompatibilita(req, env, { waitUntil: (p) => attese.push(p) }, '/api/compatibilita/confronta', h);
+  const testo = await res.text();
+  await Promise.all(attese);
+  const eventi = testo.trim().split('\n').filter(Boolean).map((r) => JSON.parse(r));
+  return { res, eventi, chiamate };
+}
+
+test('un confronto completo restituisce fonti, percentuale e un solo salvataggio', async () => {
+  const { eventi, chiamate } = await confronto(`${riga}FINE_CONFRONTO|1`);
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+  assert.equal(chiamate.filter((x) => x.percorso === '/comp-compito-esito').length, 1);
+});
+
+test('un confronto troncato non pubblica percentuali e restituisce il controllo', async () => {
+  const { eventi, chiamate } = await confronto(riga);
+  assert.ok(eventi.some((x) => x.r));
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((x) => !x.fine));
+  assert.equal(chiamate.filter((x) => x.percorso === '/comp-compito-esito').length, 0);
+  assert.equal(chiamate.filter((x) => x.percorso === '/comp-rimborso').length, 1);
+});
+
+test('un numero finale incoerente non produce una percentuale', async () => {
+  const { eventi } = await confronto(`${riga}FINE_CONFRONTO|2`);
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((x) => !x.fine));
+});
+
+test('il confronto comprende tutte le quaranta richieste consentite', async () => {
+  const righe = Array.from({ length: 40 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
+  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|40`);
+  assert.equal(eventi.at(-1).fine.richieste.length, 40);
+});
+
+test('oltre quaranta richieste si segnala l’errore senza troncare il compito', async () => {
+  const righe = Array.from({ length: 41 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
+  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|41`);
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((x) => !x.fine));
+});
+
+test('l’ultimo evento SSE viene letto anche senza ritorno a capo', async () => {
+  const { eventi } = await confronto(() => new ReadableStream({ start(c) {
+    c.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ response: `${riga}FINE_CONFRONTO|1` })}`)); c.close();
+  } }));
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+});
+
+test('un modello può concludere con stop senza ripetere il segnale testuale', async () => {
+  const { eventi } = await confronto(() => ({ choices: [{ message: { content: '1|E|-|-|30|Risolvere un problema fuori programma' }, finish_reason: 'stop' }] }));
+  assert.equal(eventi.at(-1).fine.compatibilita, 0);
+});
+
+test('DONE conclude uno streaming valido anche senza segnale testuale', async () => {
+  const { eventi } = await confronto(() => new ReadableStream({ start(c) {
+    c.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ response: riga })}\n\ndata: [DONE]\n\n`)); c.close();
+  } }));
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+});
+
+test('il limite di token del modello non viene scambiato per un esame completo', async () => {
+  const { eventi } = await confronto(() => new ReadableStream({ start(c) {
+    c.enqueue(new TextEncoder().encode(`data: ${JSON.stringify({ response: `${riga}FINE_CONFRONTO|1\n` })}\n\ndata: ${JSON.stringify({ choices: [{ finish_reason: 'length' }] })}\n\n`)); c.close();
+  } }));
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((x) => !x.fine));
+});
+
+test('un catalogo temporaneamente indisponibile viene ritentato', async () => {
+  const primo = await confronto(`${riga}FINE_CONFRONTO|1`, 'analisi-2', false);
+  assert.equal(primo.res.status, 503);
+  const secondo = await confronto(`${riga}FINE_CONFRONTO|1`, 'analisi-2', true);
+  assert.equal(secondo.eventi.at(-1).fine.compatibilita, 100);
+});
