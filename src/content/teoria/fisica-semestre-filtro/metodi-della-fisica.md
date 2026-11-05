@@ -7,10 +7,8 @@ sommario: Unità e conversioni, ordini di grandezza, lettura di formule e grafic
 Si parte dal calcolo con le potenze e dalle equazioni di primo grado. Si impara a tradurre i dati in grandezze fisiche, a controllare le unità e a rappresentare spostamenti e forze. Questi strumenti saranno usati in meccanica, nei fluidi e nei campi elettrici e magnetici.
 :::
 
-:::osservazione{#programma titolo="Il programma del percorso"}
-Il percorso segue le sette unità del [syllabus MUR di Fisica per il 2026/2027](https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf): metodi, meccanica, fluidi, onde, termodinamica, elettricità e magnetismo, radiazioni. Si tratta di materiale didattico indipendente del sito, senza affiliazione o approvazione del MUR o degli atenei. I 6 CFU del syllabus riguardano l'insegnamento universitario; questo percorso non rilascia CFU. Gli esempi di ambito biologico impiegano modelli fisici con ipotesi dichiarate.
-
-I quiz del sito usano quattro alternative e due minuti per domanda, come nelle altre materie. Sono esercitazioni: la prova ufficiale 2026/2027 comprende invece 21 quesiti a scelta multipla con cinque alternative e 10 a completamento, in 50 minuti. Il percorso riguarda il solo insegnamento di Fisica; Biologia e Chimica e propedeutica biochimica sono materie distinte.
+:::osservazione{#programma titolo="Programma di riferimento"}
+Gli argomenti del corso prendono come riferimento il [programma di Fisica per il semestre filtro pubblicato dal MUR per il 2026/2027](https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf).
 :::
 
 ## Grandezze e Sistema Internazionale
