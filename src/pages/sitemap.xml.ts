@@ -4,6 +4,7 @@
 // scripts/date-pagine.mjs): un elenco e la pagina della materia prendono la data più recente dei loro contenuti.
 // Le pagine senza contenuti datati (prezzi, contatti…) non hanno data, come raccomandano Google e Bing.
 import { getCollection } from 'astro:content';
+import { percorsiL } from '../data/percorsi';
 import { MATERIE } from '../data/materie';
 import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
@@ -26,6 +27,8 @@ export async function GET() {
 
   const casa = pagine.length;
   due('/', 1.0);
+  const percorsiEn = new Set(percorsiL('en').map((p) => p.slug));
+  for (const { slug } of percorsiL('it')) due(`/percorsi/${slug}`, 0.8, percorsiEn.has(slug));
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);

@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import NotaSuperiori from '../components/NotaSuperiori.astro';
+import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
+import { blocchiGruppo, link, materieL, T, type Lingua } from '../i18n';
+
+interface Props {
+  lingua: Lingua;
+  area: { nome: string; slug: string; breve: string };
+}
+const { lingua, area } = Astro.props;
+const en = lingua === 'en';
+const t = T(lingua);
+const materie = materieL(lingua).filter((m) => m.gruppo === area.nome);
+const blocchi = blocchiGruppo(materie, area.nome);
+const attive = materie.filter((m) => m.attiva);
+const disponibili = en
+  ? `${attive.length} ${attive.length === 1 ? 'subject' : 'subjects'} available`
+  : `${attive.length} ${attive.length === 1 ? 'materia disponibile' : 'materie disponibili'}`;
+const descrizione = [area.breve, materie.map((m) => m.titolo).join(', ')].join(' · ');
+const video = en ? [] : VIDEOCORSI.filter((v) => !v.pacchettoDi && attive.some((m) => m.slug === v.sblocca[0]));
+const regoleVideo = video.flatMap((v) =>
+  [v, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(v.slug))].map((p) =>
+    `html[data-materie~="${chiaveVideo(p.slug)}"] [data-video="${v.slug}"] .video-sbloccato{display:inline}`
+  )
+).join('');
+---
+<Base titolo={area.breve} descrizione={descrizione} lingua={lingua} sezione="percorso" percorso={[{ titolo: area.breve }]}>
+  {regoleVideo && <style is:inline set:html={regoleVideo}></style>}
+  <header class="testa-area">
+    <h1>{area.breve}</h1>
+    <p>{attive.length ? disponibili : (en ? 'Courses in preparation' : 'Corsi in preparazione')}{attive.some((m) => m.prezzo) && ` · ${t.anteprimaBollino}`}</p>
+  </header>
+
+  <div class:list={['catalogo-area', { 'per-discipline': blocchi.length > 1 }]}>
+    {blocchi.map((blocco) => (
+      <div>
+        {blocco.sotto && <h2>{blocco.sotto}</h2>}
+        <ul class="elenco-area" aria-label={blocco.sotto ?? area.breve}>
+          {blocco.materie.map(({ m, nome }) => {
+            const v = video.find((corso) => corso.sblocca[0] === m.slug);
+            return (
+              <li data-materia={m.slug} class:list={{ futura: !m.attiva }} style={`--accento: ${m.colore}`}>
+                {m.attiva ? (
+                  <a class="voce-area" href={link(lingua, `/${m.slug}`)}>
+                    <span>
+                      <strong>{blocco.sotto && <span class="sr-only">{blocco.sotto} </span>}{nome}</strong>
+                      <span class="dettagli">{m.argomenti.length} {t.argomenti}
+                        {m.prezzo ? <span class="stato"><span class="stato-sbloccata">{t.sbloccata}</span></span> : <small>{en ? 'Free' : 'Gratuito'}</small>}
+                      </span>
+                    </span>
+                    <span aria-hidden="true" class="freccia">→</span>
+                  </a>
+                ) : (
+                  <div class="voce-area">
+                    <span><strong>{nome}</strong><span class="dettagli">{t.inPreparazione}</span></span>
+                  </div>
+                )}
+                {v && (
+                  <a class="video-area" href={link(lingua, `/videocorsi/${v.slug}`)} data-video={v.slug}>
+                    <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="8"/><path d="m8 6 6 4-6 4z" fill="currentColor" stroke="none"/></svg>
+                    <span>Videocorso<span class="sr-only"> di {v.breve}</span><small class="video-sbloccato"> · Sbloccato</small></span>
+                  </a>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  {!en && area.slug === 'concorsi' && <a class="guida" href={link(lingua, '/concorsi')}>Guida gratuita · Che cosa studiare per il tuo concorso <span aria-hidden="true">→</span></a>}
+  {area.slug === 'superiori' && <NotaSuperiori lingua={lingua} />}
+</Base>
+<style>
+  .testa-area { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; margin: 0 0 1rem; }
+  .testa-area p { margin: 0; color: var(--inchiostro-2); font: .9rem var(--ui); }
+  .catalogo-area h2 { margin: 0 0 .55rem; font-size: 1.2rem; }
+  .per-discipline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .elenco-area { list-style: none; margin: 0; padding: 0; border: 1px solid var(--riga); border-radius: var(--raggio); background: var(--carta); }
+  .elenco-area li { display: flex; align-items: stretch; margin: 0; }
+  .elenco-area li + li { border-top: 1px solid var(--riga); }
+  .voce-area { display: flex; flex: 1; align-items: center; gap: .5rem; justify-content: space-between; min-width: 0; padding: .7rem .9rem; color: var(--inchiostro); text-decoration: none; }
+  .voce-area strong { display: block; font: 600 1.1rem/1.25 var(--titoli); overflow-wrap: break-word; }
+  a.voce-area:hover, a.voce-area:focus-visible { background: color-mix(in srgb, var(--accento) 5%, var(--carta)); color: var(--inchiostro); }
+  a.voce-area:hover strong, a.voce-area:focus-visible strong { text-decoration: underline; text-underline-offset: 3px; }
+  .freccia { flex: none; color: var(--accento); }
+  .dettagli { display: flex; align-items: baseline; flex-wrap: wrap; gap: .15rem .55rem; margin-top: .2rem; color: var(--inchiostro-2); font: .8rem/1.4 var(--ui); }
+  .dettagli small { font: inherit; color: var(--verde); }
+  .futura strong { color: var(--inchiostro-2); font-weight: 400; }
+  .video-area { display: flex; align-items: center; gap: .3rem; padding: .55rem .8rem; font: 600 .85rem/1.25 var(--ui); }
+  .video-area svg { width: 1rem; height: 1rem; flex: none; }
+  .video-sbloccato { display: none; color: var(--verde); font: inherit; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .guida { display: inline-block; margin-top: 1rem; padding: .4rem 0; font: 600 .95rem var(--ui); }
+  @media (max-width: 34rem) {
+    .per-discipline { gap: .55rem; }
+    .voce-area { padding: .65rem; }
+    .per-discipline .freccia { display: none; }
+    .per-discipline .voce-area strong { font-size: 1rem; }
+    .video-area { padding: .5rem; }
+  }
+  @media (max-width: 21rem) {
+    .per-discipline { grid-template-columns: 1fr; }
+  }
+</style>

@@ -51,6 +51,7 @@ const domandeDisponibili = await catalogoDomande(lingua);
 const domandeQui = Boolean(materia && argomento && (domandeDisponibili[materia] ?? []).includes(argomento));
 const catalogoPercorso = creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua);
 const en = lingua === 'en';
+const titoloIndice = m ? t.indice : en ? 'Tools' : 'Strumenti';
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
@@ -77,8 +78,11 @@ const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
 // Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
 const taglia = (x: string, n = 160) => (x.length <= n ? x : `${x.slice(0, x.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '')}…`);
 const descrizioneSeo = taglia(descrizione ?? t.homeDescrizione);
+const radicePercorso = sezione === 'percorso'
+  ? { nome: en ? 'Study paths' : 'Percorsi', href: `${link(lingua, '/')}#scegli-percorso` }
+  : { nome: t.materie, href: link(lingua, '/') };
 const percorsoSchema = [
-  { nome: t.materie, url: assoluto(link(lingua, '/')) },
+  { nome: radicePercorso.nome, url: assoluto(radicePercorso.href) },
   ...(m ? [{ nome: m.titolo, url: assoluto(link(lingua, `/${m.slug}`)) }] : []),
   ...percorso.map((p, i) => ({ nome: p.titolo, url: p.href && i < percorso.length - 1 ? assoluto(p.href) : canonico })),
 ];
@@ -196,21 +200,21 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} title={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
         <span>{altra.toUpperCase()}</span>
       </a>
-      <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
+      <button class="bottone-indice" type="button" aria-label={titoloIndice} data-apri-indice>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
-        <span>{t.indice}</span>
+        <span>{titoloIndice}</span>
       </button>
     </div>
   </header>
 
   <div class="corpo">
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    <Indice titolo={titoloIndice} materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
     <main id="contenuto-principale">
       <div class="pagina">
         {(percorso.length > 0 || m) && (
           <nav class="percorso" aria-label="Percorso">
             <ol>
-              <li><a href={link(lingua, '/')}>{t.materie}</a></li>
+              <li><a href={radicePercorso.href}>{radicePercorso.nome}</a></li>
               {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
               {percorso.map((p, i) => (
                 <li aria-current={i === percorso.length - 1 ? 'page' : undefined}>
@@ -268,8 +272,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <div class="avviso-duello" role="status" aria-live="polite" hidden></div>
 
   <dialog class="cassetto" id="cassetto-indice">
-    <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    <div class="cassetto-testa"><strong>{titoloIndice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
+    <Indice titolo={titoloIndice} materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
   </dialog>
 
   <script>

@@ -1,0 +1,9 @@
+---
+import Percorso from '../../viste/Percorso.astro';
+import { percorsiL } from '../../data/percorsi';
+
+export function getStaticPaths() {
+  return percorsiL('it').map((area) => ({ params: { percorso: area.slug }, props: { area } }));
+}
+---
+<Percorso lingua="it" area={Astro.props.area} />
