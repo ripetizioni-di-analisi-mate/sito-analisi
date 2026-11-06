@@ -7,6 +7,7 @@ import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
 import GratisHome from '../components/GratisHome.astro';
 import PacchettiHome from '../components/PacchettiHome.astro';
+import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
@@ -67,9 +68,7 @@ const icona = {
   )}
   <GratisHome lingua={lingua} />
   {lingua === 'it' && <PacchettiHome />}
-  <nav class="percorsi-home" aria-label={lingua === 'en' ? 'Choose your course area' : 'Scegli il tuo percorso'}>
-    {gruppi.map((g) => <a href={`#${g.id}`} aria-controls={g.id}>{g.breve}</a>)}
-  </nav>
+  <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
     <details class="gruppo" open={i === 0} id={id}>
@@ -148,6 +147,10 @@ const icona = {
   function apriPercorso(hash: string) {
     const gruppo = document.getElementById(hash.slice(1));
     if (!(gruppo instanceof HTMLDetailsElement) || !gruppo.classList.contains('gruppo')) return;
+    document.querySelectorAll<HTMLAnchorElement>('.percorsi-home a').forEach((a) => {
+      if (a.hash === hash) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
+    });
     gruppo.open = true;
     gruppo.scrollIntoView({ block: 'start' });
     gruppo.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
