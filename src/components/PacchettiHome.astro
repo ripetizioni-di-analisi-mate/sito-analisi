@@ -1,41 +1,6 @@
----
-// Un solo richiamo dopo le risorse gratuite: prezzi e dettagli restano nella pagina Prezzi.
----
-<a class="pacchetti-home" href="/prezzi#pacchetti">
-  <span class="pacchetti-icona" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
-  </span>
-  <span class="pacchetti-testo">
-    <strong>Studia di più, spendi meno.</strong>
-    <span>Scopri pacchetti e sconti</span>
-  </span>
-  <span class="pacchetti-freccia" aria-hidden="true">→</span>
-</a>
-
+<p class="pacchetti-home"><a href="/pacchetti">Pacchetti e sconti <span aria-hidden="true">→</span></a></p>
 <style>
-  .pacchetti-home {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    margin: -0.55rem 0 1.5rem;
-    padding: 0.85rem 1rem;
-    border: 1px solid color-mix(in srgb, var(--azione) 25%, var(--riga));
-    border-radius: 10px;
-    background: color-mix(in srgb, var(--azione) 8%, var(--carta));
-    color: var(--inchiostro);
-    text-decoration: none;
-    font-family: var(--ui);
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .pacchetti-home:hover {
-    background: color-mix(in srgb, var(--azione) 13%, var(--carta));
-    border-color: var(--azione);
-  }
-  .pacchetti-icona { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--azione); color: var(--carta); }
-  .pacchetti-icona svg { width: 1.3rem; height: 1.3rem; }
-  .pacchetti-testo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.8rem; min-width: 0; }
-  .pacchetti-testo strong { font-size: 1rem; font-weight: 600; line-height: 1.4; }
-  .pacchetti-testo > span { font-size: 0.9rem; font-weight: 600; color: var(--azione); }
-  .pacchetti-freccia { margin-left: auto; flex: none; font-size: 1.3rem; color: var(--azione); }
-  @media (prefers-reduced-motion: reduce) { .pacchetti-home { transition: none; } }
+  .pacchetti-home { margin: -0.75rem 0 1.35rem; font: 0.9rem/1.4 var(--ui); }
+  .pacchetti-home a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0; color: var(--azione); font-weight: 600; text-decoration: none; }
+  .pacchetti-home a:hover { text-decoration: underline; text-underline-offset: 3px; }
 </style>
