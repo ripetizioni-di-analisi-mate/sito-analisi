@@ -43,7 +43,9 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
     const ul = [...prima.matchAll(/<ul>([\s\S]*?)<\/ul>/g)].pop();
     if (!ul) throw new Error(`Domanda ${lingua}/${e.id}: manca l'elenco delle risposte`);
     const scelte = [...ul[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((x) => x[1].trim());
-    if (scelte.length !== 4) throw new Error(`Domanda ${lingua}/${e.id}: le risposte devono essere 4, sono ${scelte.length}`);
+    const numeroScelte = m === 'tolc-i' ? 5 : 4;
+    if (scelte.length !== numeroScelte) throw new Error(`Domanda ${lingua}/${e.id}: attese ${numeroScelte} risposte, trovate ${scelte.length}`);
+    if (e.data.corretta > numeroScelte) throw new Error(`Domanda ${lingua}/${e.id}: risposta corretta fuori intervallo`);
     let testo = prima.slice(0, ul.index).trim();
     if (!testo) {
       const t = tracceEn.get(e.id) ?? tracce.get(e.id);
