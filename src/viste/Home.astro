@@ -49,12 +49,9 @@ const icona = {
     <h1>{t.homeTitolo}</h1>
     <p class="sommario">{lingua === 'it' ? 'Scegli la materia. Trovi teoria, esercizi spiegati passo dopo passo e prove per esercitarti in autonomia.' : 'Choose a subject. Find theory, step-by-step worked examples and exercises to practise on your own.'}</p>
   </div>
-  <section class="home-lezioni solo-ospiti" aria-labelledby="home-servizi">
-    <h2 id="home-servizi">{lingua === 'it' ? 'Studiare con Carmine' : 'Study with Carmine'}</h2>
-    <p>{lingua === 'it' ? 'Oltre ai materiali puoi seguire le lezioni registrate, prenotare una lezione individuale o partecipare a un corso di gruppo.' : 'Explore the materials or study with Carmine through recorded courses and live lessons.'}</p>
-    {lingua === 'it' && <nav aria-label="Lezioni con Carmine"><a href="/videocorsi">Videocorsi registrati <span aria-hidden="true">→</span></a><a href="/prenota">Lezione individuale <span aria-hidden="true">→</span></a><a href="/corsi-di-gruppo">Corso di gruppo <span aria-hidden="true">→</span></a></nav>}
+  <div class="solo-ospiti">
     <Presentazione lingua={lingua} />
-  </section>
+  </div>
   <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
@@ -162,8 +159,6 @@ const icona = {
   :global(.home-chiarezza .pulsante-scheda:hover){text-decoration:underline;background:none}
   .accesso-scheda{display:block;font:400 .76rem var(--ui);padding:0 1.1rem 1rem;color:var(--inchiostro-2)}
   .nota-accesso-scheda{display:none}
-  .home-lezioni{border-top:1px solid var(--riga);margin-bottom:1.4rem;padding-top:1.3rem}.home-lezioni h2{font-size:1.4rem;margin:0 0 .6rem}.home-lezioni>p{font-size:1rem;color:var(--inchiostro-2)}
-  .home-lezioni nav{display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;margin:1rem 0 1.4rem;font:600 .95rem var(--ui)}
   :global(html.collegato.home-chiarezza .risorse-home){margin-top:1rem;font-size:.9rem}
   @media(max-width:560px){.catalogo-testa{margin-top:1.5rem}.scheda-materia{padding:.9rem}.accesso-scheda{padding-left:.9rem}:global(.home-chiarezza .pulsanti-scheda){padding-left:.9rem}}
 </style>
