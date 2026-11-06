@@ -1,29 +1,29 @@
 ---
-import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
-import Stato from './Stato.astro';
+import { materiaL, sezioniL, link, T, type Lingua } from '../i18n';
+import { percorsiL } from '../data/percorsi';
 import LezioniCarmine from './LezioniCarmine.astro';
-import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
-import { FORMULARI } from '../data/formulari';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
-interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
-const { materia, argomento, sezione, lingua = 'it', ricercaPrincipale = false } = Astro.props;
+interface Props { titolo: string; materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
+const { titolo, materia, argomento, sezione, lingua = 'it', ricercaPrincipale = false } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
-const MATERIE = materieL(lingua);
+const en = lingua === 'en';
+const home = sezione === 'home';
+const gruppo = materia && materiaL('it', materia)?.gruppo;
+const area = gruppo && percorsiL('it').find((p) => p.nome === gruppo);
+const sceltaPercorso = `${link(lingua, '/')}#scegli-percorso`;
 const SEZIONI = sezioniL(lingua);
 const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
 const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
-// Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
-const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
-<nav class="indice" aria-label="Indice">
+<nav class="indice" aria-label={titolo}>
   <div class="indice-testa">
-    <span>{t.indice}</span>
+    <span>{titolo}</span>
   </div>
-  {ricercaPrincipale ? <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">→</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+  {ricercaPrincipale ? !home && <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">→</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>}
@@ -45,7 +45,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     <>
       <p class="indice-materia">
         <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a>
-        <a class="cambia-materia" href={link(lingua, '/')}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
+        <a class="cambia-materia" href={area ? link(lingua, `/percorsi/${area.slug}`) : sceltaPercorso}>{en ? 'Change subject' : 'Cambia materia'}</a>
       </p>
       <ol>
         {m.argomenti.map((a) => {
@@ -77,94 +77,17 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       </ol>
     </>
   ) : (
-    <>
-      {gruppiL(lingua).map((g, i) => (
-        <details class="indice-gruppo" open={i === 0}>
-          <summary class="indice-materia"><span>{g}</span></summary>
-          {lingua === 'it' && g === 'Concorsi' && (
-            <ol class="indice-materie">
-              <li style="--colore-materia: #6d5a8a">
-                <a class="voce-materia" href="/concorsi">
-                  <span class="materia-punto" aria-hidden="true" />
-                  <span class="materia-testo"><span class="materia-nome">Che cosa studiare</span></span>
-                  <small class="materia-prossima">guida gratuita</small>
-                </a>
-              </li>
-            </ol>
-          )}
-          {(() => {
-            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
-              <ol class="indice-materie">
-                {voci.map(({ m: x, nome }) => {
-                  const dentro = (
-                    <>
-                      <span class="materia-punto" aria-hidden="true" />
-                      <span class="materia-testo">
-                        <span class="materia-nome">{nome}</span>
-                      </span>
-                      {x.attiva ? <Stato prezzo={x.prezzo} compatto lingua={lingua} /> : <small class="materia-prossima">{t.inPreparazione}</small>}
-                    </>
-                  );
-                  return (
-                    <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
-                    </li>
-                  );
-                })}
-              </ol>
-            );
-            return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
-              <details class="indice-sottogruppo">
-                <summary>{b.sotto}</summary>
-                {lista(b.materie)}
-              </details>
-            ) : lista(b.materie));
-          })()}
-        </details>
-      ))}
-      {lingua === 'it' && (
-        <details class="indice-gruppo">
-          <summary class="indice-materia"><span>Videocorsi</span></summary>
-          <style is:inline set:html={regoleVideo}></style>
-          <ol class="indice-materie indice-video">
-            {VIDEOCORSI.map((v) => (
-              <li data-video={v.slug} style="--colore-materia: var(--video)">
-                <a class="voce-materia" href={`/videocorsi/${v.slug}`}>
-                  <span class="video-punto" aria-hidden="true">▶</span>
-                  <span class="materia-testo"><span class="materia-nome">{v.titolo.replace(/^Videocorso di /, '')}</span></span>
-                  <span class="stato compatto"><span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
-                </a>
-              </li>
-            ))}
-          </ol>
-        </details>
-      )}
-      {FORMULARI.length > 0 && (
-        <details class="indice-gruppo">
-          <summary class="indice-materia"><span>{lingua === 'en' ? 'Formula sheets' : 'Formulari'}</span></summary>
-          <ol class="indice-materie">
-            {FORMULARI.map((f) => {
-              const x = MATERIE.find((m) => m.slug === f);
-              return x && (
-                <li style={`--colore-materia: ${x.colore}`}>
-                  <a class="voce-materia" href={link(lingua, `/formulari/${f}`)}>
-                    <span class="materia-punto" aria-hidden="true" />
-                    <span class="materia-testo"><span class="materia-nome">{x.titolo}</span></span>
-                    <small class="materia-prossima">{lingua === 'en' ? 'free' : 'gratis'}</small>
-                  </a>
-                </li>
-              );
-            })}
-          </ol>
-        </details>
-      )}
-    </>
+    <ul class="indice-utilita">
+      {!home && sezione !== 'percorso' && <li><a href={sceltaPercorso}>{en ? 'Choose your path' : 'Scegli il tuo percorso'}</a></li>}
+      {!home && <li><a href={link(lingua, '/formulari')}>{en ? 'Formula sheets' : 'Formulari'}</a></li>}
+      {!en && <li class:list={{ 'solo-collegati': home }}><a href="/videocorsi">Videocorsi registrati</a></li>}
+      <li><a href={link(lingua, '/livelli-e-punti')}>{en ? 'Levels and points' : 'Livelli e punti'}</a></li>
+    </ul>
   )}
-  {lingua === 'it' && <details class="indice-servizi">
-    <summary>Lezioni e assistenza</summary>
+  {!en && <details class:list={['indice-servizi', { 'solo-collegati': home }]}>
+    <summary>Lezioni con Carmine</summary>
     <LezioniCarmine dove="indice" />
   </details>}
-  <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>
 </nav>
 <script>
   // Un tocco sul nome dell'argomento apre le sue tre sezioni, un secondo tocco le richiude.
@@ -180,6 +103,9 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 <style>
   .indice-cerca-link{display:flex;justify-content:space-between;padding:.5rem;margin:0 .5rem .9rem;font:400 .9rem var(--ui);color:var(--inchiostro-2);text-decoration:none;border-bottom:1px solid var(--riga)}
   .indice-cerca-link:hover{text-decoration:underline}
+  .indice-utilita{list-style:none;margin:0;padding:0 .4rem}
+  .indice-utilita a{display:block;padding:.5rem .15rem;color:var(--inchiostro);font:600 .94rem/1.4 var(--ui);text-decoration:none}
+  .indice-utilita a:hover{text-decoration:underline;color:var(--accento)}
   .indice-servizi{border-top:1px solid var(--riga);margin:1.2rem .4rem 0;padding-top:.75rem}
   .indice-servizi>summary{cursor:pointer;color:var(--inchiostro-2);font:600 .9rem var(--ui);padding:.4rem 0}
   .indice-servizi :global(.lezioni-indice){margin-top:.9rem}

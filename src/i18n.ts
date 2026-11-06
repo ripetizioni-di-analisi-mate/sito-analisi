@@ -41,7 +41,6 @@ export function materieL(l: Lingua): Materia[] {
 }
 export const materiaL = (l: Lingua, slug: string): Materia => materieL(l).find((m) => m.slug === slug)!;
 export const argomentoL = (l: Lingua, m: string, a: string): Argomento => materiaL(l, m).argomenti.find((x) => x.slug === a)!;
-export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.gruppo))];
 // Materie di un gruppo divise in blocchi: prima quelle senza sottogruppo, poi un blocco per sottogruppo.
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
