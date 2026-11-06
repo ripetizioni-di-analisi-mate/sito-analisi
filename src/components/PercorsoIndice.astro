@@ -39,10 +39,10 @@ const nome = tipo === 'basi' ? (inglese ? 'From scratch' : 'Da zero')
 <span class="testo-percorso"><strong>{nome}</strong><small>{descrizioni[tipo]}</small></span>
 <svg class="freccia-percorso" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 4 6 6-6 6"/></svg>
 <style>
-  .icona-percorso { width: 1.5rem; height: 1.5rem; flex: none; color: var(--verde); }
+  .icona-percorso { width: 1.25rem; height: 1.25rem; flex: none; color: var(--verde); }
   .testo-percorso { flex: 1; min-width: 0; }
   .testo-percorso strong { display: block; font-size: 0.9rem; font-weight: 600; line-height: 1.25; }
-  .testo-percorso small { display: block; margin-top: 0.2rem; font-size: 0.72rem; font-weight: 400; line-height: 1.35; color: var(--inchiostro-2); }
+  .testo-percorso small { display: block; margin-top: 0.1rem; font-size: 0.72rem; font-weight: 400; line-height: 1.35; color: var(--inchiostro-2); }
   .freccia-percorso { width: 0.8rem; height: 0.8rem; flex: none; color: var(--verde); transition: transform 150ms ease; }
   :global(details[open] > .indice-percorso) .freccia-percorso { transform: rotate(90deg); }
   @media (prefers-reduced-motion: reduce) { .freccia-percorso { transition: none; } }

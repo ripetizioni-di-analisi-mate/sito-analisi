@@ -51,20 +51,20 @@ const icone: Record<string, string> = {
   </nav>
 </section>
 <style>
-  .selettore-percorsi { margin: 1.65rem 0 0; }
+  .selettore-percorsi { margin: 1.1rem 0 0; }
   .sopra-percorsi { margin: 0 0 0.25rem; color: var(--verde); font: 600 0.7rem var(--ui); letter-spacing: 0.13em; }
-  h2 { margin: 0 0 1rem; color: var(--inchiostro); font: 600 1.4rem/1.25 var(--ui); }
-  .percorsi-home { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; margin: 0; font-family: var(--ui); }
-  .percorsi-home a { display: flex; align-items: center; gap: 0.65rem; min-width: 0; min-height: 5rem; padding: 0.85rem 0.75rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
+  h2 { margin: 0 0 0.7rem; color: var(--inchiostro); font: 600 1.4rem/1.25 var(--ui); }
+  .percorsi-home { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin: 0; font-family: var(--ui); }
+  .percorsi-home a { display: flex; align-items: center; gap: 0.55rem; min-width: 0; min-height: 3.55rem; padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
   .percorsi-home a:hover, .percorsi-home a:focus-visible, .percorsi-home a[aria-current="location"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); }
-  .icona-percorso { width: 1.55rem; height: 1.55rem; flex: none; color: var(--verde); }
+  .icona-percorso { width: 1.3rem; height: 1.3rem; flex: none; color: var(--verde); }
   .testo-percorso { flex: 1; min-width: 0; }
   .testo-percorso strong { display: block; font-size: 0.96rem; font-weight: 600; line-height: 1.25; }
-  .testo-percorso small { display: block; margin-top: 0.25rem; font-size: 0.76rem; font-weight: 400; line-height: 1.35; color: var(--inchiostro-2); }
+  .testo-percorso small { display: block; margin-top: 0.15rem; font-size: 0.76rem; font-weight: 400; line-height: 1.35; color: var(--inchiostro-2); }
   .freccia-percorso { width: 0.9rem; height: 0.9rem; flex: none; color: var(--verde); }
   @media (max-width: 36rem) {
     .percorsi-home { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
-    .percorsi-home a { gap: 0.5rem; padding: 0.8rem 0.65rem; }
+    .percorsi-home a { gap: 0.45rem; padding: 0.45rem 0.55rem; }
     .freccia-percorso { display: none; }
   }
   @media (max-width: 24rem) {
