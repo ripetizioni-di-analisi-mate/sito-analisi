@@ -159,8 +159,21 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'matematica-superiori-3': {
     titolo: 'Mathematics, 3rd year',
     breve: 'Maths 3rd year',
-    descrizione: 'The mathematics syllabus of the 3rd year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'Third-year mathematics for the Italian scientific high school: equations, functions, analytic geometry and conics, exponentials, logarithms and statistics. Theory, worked examples, practice problems and timed quizzes. Topic allocation between years may vary by class.',
+    argomenti: {
+      "equazioni-e-disequazioni": { titolo: "Equations, inequalities and systems", breve: "Equations and inequalities" },
+      "valore-assoluto-e-irrazionali": { titolo: "Absolute values and radical equations", breve: "Absolute values and radicals" },
+      "funzioni": { titolo: "Functions, domains and graph transformations", breve: "Functions" },
+      "piano-cartesiano-e-retta": { titolo: "Cartesian plane and straight lines", breve: "Plane and straight lines" },
+      "parabola": { titolo: "Parabolas and quadratic models", breve: "Parabolas" },
+      "circonferenza": { titolo: "Circles, lines and tangents", breve: "Circles" },
+      "ellisse": { titolo: "Ellipses", breve: "Ellipses" },
+      "iperbole": { titolo: "Hyperbolas and rational functions", breve: "Hyperbolas" },
+      "trasformazioni-e-coniche": { titolo: "Transformations and problems with conics", breve: "Transformations and conics" },
+      "esponenziali": { titolo: "Powers and exponential functions", breve: "Exponentials" },
+      "logaritmi": { titolo: "Logarithms, equations and inequalities", breve: "Logarithms" },
+      "statistica": { titolo: "Descriptive statistics and bivariate data", breve: "Statistics" },
+    },
   },
   'matematica-superiori-4': {
     titolo: 'Mathematics, 4th year',

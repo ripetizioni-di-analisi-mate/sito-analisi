@@ -1,0 +1,3782 @@
+[
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 1,
+    "risposta": "FiniteSet(Integer(10), Integer(13))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 2,
+    "risposta": "FiniteSet(Integer(-10), Integer(10))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 3,
+    "risposta": "Interval(Integer(10), Integer(13), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 4,
+    "risposta": "Union(Interval(-oo, Integer(10), true, true), Interval(Integer(13), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 5,
+    "risposta": "Union(Interval(-oo, Integer(10), true, false), Interval(Integer(13), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 6,
+    "risposta": "Interval(Integer(11), Integer(13), true, false)",
+    "posizione": 2,
+    "famiglia": "Sistemi di disequazioni"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 7,
+    "risposta": "Integer(100)",
+    "posizione": 3,
+    "famiglia": "Parametri e radici coincidenti"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 8,
+    "risposta": "Tuple(Integer(10), Integer(13))",
+    "posizione": 4,
+    "famiglia": "Problemi con lati e area"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 9,
+    "risposta": "FiniteSet(Integer(11), Integer(14))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 10,
+    "risposta": "FiniteSet(Integer(-11), Integer(11))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 11,
+    "risposta": "Interval(Integer(11), Integer(14), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 12,
+    "risposta": "Union(Interval(-oo, Integer(11), true, true), Interval(Integer(14), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 13,
+    "risposta": "Union(Interval(-oo, Integer(11), true, false), Interval(Integer(14), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 14,
+    "risposta": "Interval(Integer(12), Integer(14), true, false)",
+    "posizione": 2,
+    "famiglia": "Sistemi di disequazioni"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 15,
+    "risposta": "Integer(121)",
+    "posizione": 3,
+    "famiglia": "Parametri e radici coincidenti"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 16,
+    "risposta": "Tuple(Integer(11), Integer(14))",
+    "posizione": 4,
+    "famiglia": "Problemi con lati e area"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 17,
+    "risposta": "FiniteSet(Integer(12), Integer(15))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 18,
+    "risposta": "FiniteSet(Integer(-12), Integer(12))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 19,
+    "risposta": "Interval(Integer(12), Integer(15), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 20,
+    "risposta": "Union(Interval(-oo, Integer(12), true, true), Interval(Integer(15), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 21,
+    "risposta": "Union(Interval(-oo, Integer(12), true, false), Interval(Integer(15), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 22,
+    "risposta": "Interval(Integer(13), Integer(15), true, false)",
+    "posizione": 2,
+    "famiglia": "Sistemi di disequazioni"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 23,
+    "risposta": "Integer(144)",
+    "posizione": 3,
+    "famiglia": "Parametri e radici coincidenti"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 24,
+    "risposta": "Tuple(Integer(12), Integer(15))",
+    "posizione": 4,
+    "famiglia": "Problemi con lati e area"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 25,
+    "risposta": "FiniteSet(Integer(13), Integer(16))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 26,
+    "risposta": "FiniteSet(Integer(-13), Integer(13))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 27,
+    "risposta": "Interval(Integer(13), Integer(16), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 28,
+    "risposta": "Union(Interval(-oo, Integer(13), true, true), Interval(Integer(16), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 29,
+    "risposta": "Union(Interval(-oo, Integer(13), true, false), Interval(Integer(16), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 30,
+    "risposta": "Interval(Integer(14), Integer(16), true, false)",
+    "posizione": 2,
+    "famiglia": "Sistemi di disequazioni"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 31,
+    "risposta": "Integer(169)",
+    "posizione": 3,
+    "famiglia": "Parametri e radici coincidenti"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 32,
+    "risposta": "Tuple(Integer(13), Integer(16))",
+    "posizione": 4,
+    "famiglia": "Problemi con lati e area"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 33,
+    "risposta": "FiniteSet(Integer(14), Integer(17))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 34,
+    "risposta": "FiniteSet(Integer(-14), Integer(14))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 35,
+    "risposta": "Interval(Integer(14), Integer(17), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 36,
+    "risposta": "Union(Interval(-oo, Integer(14), true, true), Interval(Integer(17), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 37,
+    "risposta": "Union(Interval(-oo, Integer(14), true, false), Interval(Integer(17), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 38,
+    "risposta": "Interval(Integer(15), Integer(17), true, false)",
+    "posizione": 2,
+    "famiglia": "Sistemi di disequazioni"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 39,
+    "risposta": "Integer(196)",
+    "posizione": 3,
+    "famiglia": "Parametri e radici coincidenti"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 40,
+    "risposta": "Tuple(Integer(14), Integer(17))",
+    "posizione": 4,
+    "famiglia": "Problemi con lati e area"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 41,
+    "risposta": "FiniteSet(Integer(15), Integer(18))",
+    "posizione": 1,
+    "famiglia": "Equazioni quadratiche scomponibili"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 42,
+    "risposta": "FiniteSet(Integer(-15), Integer(15))",
+    "posizione": 2,
+    "famiglia": "Equazioni come differenza di quadrati"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 43,
+    "risposta": "Interval(Integer(15), Integer(18), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni quadratiche non strette"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 44,
+    "risposta": "Union(Interval(-oo, Integer(15), true, true), Interval(Integer(18), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Prodotti strettamente positivi"
+  },
+  {
+    "capitolo": "equazioni-e-disequazioni",
+    "numero": 45,
+    "risposta": "Union(Interval(-oo, Integer(15), true, false), Interval(Integer(18), oo, true, true))",
+    "posizione": 1,
+    "famiglia": "Disequazioni fratte"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 1,
+    "risposta": "FiniteSet(Integer(-2), Integer(22))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 2,
+    "risposta": "Interval(Integer(-2), Integer(22), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 3,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(22), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 4,
+    "risposta": "Interval(Integer(10), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 5,
+    "risposta": "FiniteSet(Integer(110))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 6,
+    "risposta": "FiniteSet(Integer(11))",
+    "posizione": 3,
+    "famiglia": "Equazioni irrazionali con controllo dei candidati"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 7,
+    "risposta": "Interval(Integer(10), Integer(154), false, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con radice e soglia positiva"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 8,
+    "risposta": "FiniteSet(Integer(9), Integer(14))",
+    "posizione": 1,
+    "famiglia": "Somme di valori assoluti"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 9,
+    "risposta": "FiniteSet(Integer(-2), Integer(24))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 10,
+    "risposta": "Interval(Integer(-2), Integer(24), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 11,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(24), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 12,
+    "risposta": "Interval(Integer(11), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 13,
+    "risposta": "FiniteSet(Integer(132))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 14,
+    "risposta": "FiniteSet(Integer(12))",
+    "posizione": 3,
+    "famiglia": "Equazioni irrazionali con controllo dei candidati"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 15,
+    "risposta": "Interval(Integer(11), Integer(180), false, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con radice e soglia positiva"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 16,
+    "risposta": "FiniteSet(Integer(10), Integer(15))",
+    "posizione": 1,
+    "famiglia": "Somme di valori assoluti"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 17,
+    "risposta": "FiniteSet(Integer(-2), Integer(26))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 18,
+    "risposta": "Interval(Integer(-2), Integer(26), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 19,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(26), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 20,
+    "risposta": "Interval(Integer(12), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 21,
+    "risposta": "FiniteSet(Integer(156))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 22,
+    "risposta": "FiniteSet(Integer(13))",
+    "posizione": 3,
+    "famiglia": "Equazioni irrazionali con controllo dei candidati"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 23,
+    "risposta": "Interval(Integer(12), Integer(208), false, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con radice e soglia positiva"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 24,
+    "risposta": "FiniteSet(Integer(11), Integer(16))",
+    "posizione": 1,
+    "famiglia": "Somme di valori assoluti"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 25,
+    "risposta": "FiniteSet(Integer(-2), Integer(28))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 26,
+    "risposta": "Interval(Integer(-2), Integer(28), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 27,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(28), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 28,
+    "risposta": "Interval(Integer(13), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 29,
+    "risposta": "FiniteSet(Integer(182))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 30,
+    "risposta": "FiniteSet(Integer(14))",
+    "posizione": 3,
+    "famiglia": "Equazioni irrazionali con controllo dei candidati"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 31,
+    "risposta": "Interval(Integer(13), Integer(238), false, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con radice e soglia positiva"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 32,
+    "risposta": "FiniteSet(Integer(12), Integer(17))",
+    "posizione": 1,
+    "famiglia": "Somme di valori assoluti"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 33,
+    "risposta": "FiniteSet(Integer(-2), Integer(30))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 34,
+    "risposta": "Interval(Integer(-2), Integer(30), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 35,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(30), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 36,
+    "risposta": "Interval(Integer(14), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 37,
+    "risposta": "FiniteSet(Integer(210))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 38,
+    "risposta": "FiniteSet(Integer(15))",
+    "posizione": 3,
+    "famiglia": "Equazioni irrazionali con controllo dei candidati"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 39,
+    "risposta": "Interval(Integer(14), Integer(270), false, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con radice e soglia positiva"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 40,
+    "risposta": "FiniteSet(Integer(13), Integer(18))",
+    "posizione": 1,
+    "famiglia": "Somme di valori assoluti"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 41,
+    "risposta": "FiniteSet(Integer(-2), Integer(32))",
+    "posizione": 2,
+    "famiglia": "Equazioni di distanza"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 42,
+    "risposta": "Interval(Integer(-2), Integer(32), false, false)",
+    "posizione": 3,
+    "famiglia": "Disequazioni con distanza limitata"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 43,
+    "risposta": "Union(Interval(-oo, Integer(-2), true, true), Interval(Integer(32), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Disequazioni con distanza esterna"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 44,
+    "risposta": "Interval(Integer(15), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Domini con radici al denominatore"
+  },
+  {
+    "capitolo": "valore-assoluto-e-irrazionali",
+    "numero": 45,
+    "risposta": "FiniteSet(Integer(240))",
+    "posizione": 2,
+    "famiglia": "Equazioni con radice isolata"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 1,
+    "risposta": "Integer(-86)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 2,
+    "risposta": "Union(Interval(Integer(10), Integer(13), false, true), Interval(Integer(13), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 3,
+    "risposta": "FiniteSet(Integer(10))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 4,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 5,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(40), Symbol('x', real=True)), Integer(101))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 6,
+    "risposta": "Add(Mul(Rational(1, 11), Symbol('x', real=True)), Rational(-10, 11))",
+    "posizione": 4,
+    "famiglia": "Inverse di funzioni affini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 7,
+    "risposta": "Tuple(Integer(10), Integer(-9))",
+    "posizione": 1,
+    "famiglia": "Vertici dopo una traslazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 8,
+    "risposta": "Interval(Integer(10), oo, false, true)",
+    "posizione": 2,
+    "famiglia": "Immagini di funzioni quadratiche"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 9,
+    "risposta": "Integer(-106)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 10,
+    "risposta": "Union(Interval(Integer(11), Integer(14), false, true), Interval(Integer(14), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 11,
+    "risposta": "FiniteSet(Integer(11))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 12,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 13,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(44), Symbol('x', real=True)), Integer(122))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 14,
+    "risposta": "Add(Mul(Rational(1, 12), Symbol('x', real=True)), Rational(-11, 12))",
+    "posizione": 4,
+    "famiglia": "Inverse di funzioni affini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 15,
+    "risposta": "Tuple(Integer(11), Integer(-10))",
+    "posizione": 1,
+    "famiglia": "Vertici dopo una traslazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 16,
+    "risposta": "Interval(Integer(11), oo, false, true)",
+    "posizione": 2,
+    "famiglia": "Immagini di funzioni quadratiche"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 17,
+    "risposta": "Integer(-128)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 18,
+    "risposta": "Union(Interval(Integer(12), Integer(15), false, true), Interval(Integer(15), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 19,
+    "risposta": "FiniteSet(Integer(12))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 20,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 21,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(48), Symbol('x', real=True)), Integer(145))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 22,
+    "risposta": "Add(Mul(Rational(1, 13), Symbol('x', real=True)), Rational(-12, 13))",
+    "posizione": 4,
+    "famiglia": "Inverse di funzioni affini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 23,
+    "risposta": "Tuple(Integer(12), Integer(-11))",
+    "posizione": 1,
+    "famiglia": "Vertici dopo una traslazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 24,
+    "risposta": "Interval(Integer(12), oo, false, true)",
+    "posizione": 2,
+    "famiglia": "Immagini di funzioni quadratiche"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 25,
+    "risposta": "Integer(-152)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 26,
+    "risposta": "Union(Interval(Integer(13), Integer(16), false, true), Interval(Integer(16), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 27,
+    "risposta": "FiniteSet(Integer(13))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 28,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 29,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(52), Symbol('x', real=True)), Integer(170))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 30,
+    "risposta": "Add(Mul(Rational(1, 14), Symbol('x', real=True)), Rational(-13, 14))",
+    "posizione": 4,
+    "famiglia": "Inverse di funzioni affini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 31,
+    "risposta": "Tuple(Integer(13), Integer(-12))",
+    "posizione": 1,
+    "famiglia": "Vertici dopo una traslazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 32,
+    "risposta": "Interval(Integer(13), oo, false, true)",
+    "posizione": 2,
+    "famiglia": "Immagini di funzioni quadratiche"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 33,
+    "risposta": "Integer(-178)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 34,
+    "risposta": "Union(Interval(Integer(14), Integer(17), false, true), Interval(Integer(17), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 35,
+    "risposta": "FiniteSet(Integer(14))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 36,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 37,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(56), Symbol('x', real=True)), Integer(197))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 38,
+    "risposta": "Add(Mul(Rational(1, 15), Symbol('x', real=True)), Rational(-14, 15))",
+    "posizione": 4,
+    "famiglia": "Inverse di funzioni affini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 39,
+    "risposta": "Tuple(Integer(14), Integer(-13))",
+    "posizione": 1,
+    "famiglia": "Vertici dopo una traslazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 40,
+    "risposta": "Interval(Integer(14), oo, false, true)",
+    "posizione": 2,
+    "famiglia": "Immagini di funzioni quadratiche"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 41,
+    "risposta": "Integer(-206)",
+    "posizione": 3,
+    "famiglia": "Calcolo di immagini"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 42,
+    "risposta": "Union(Interval(Integer(15), Integer(18), false, true), Interval(Integer(18), oo, true, true))",
+    "posizione": 4,
+    "famiglia": "Domini con radice e frazione"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 43,
+    "risposta": "FiniteSet(Integer(15))",
+    "posizione": 1,
+    "famiglia": "Zeri di funzioni razionali"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 44,
+    "risposta": "Integer(0)",
+    "posizione": 2,
+    "famiglia": "Verifiche di simmetria"
+  },
+  {
+    "capitolo": "funzioni",
+    "numero": 45,
+    "risposta": "Add(Mul(Integer(4), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(60), Symbol('x', real=True)), Integer(226))",
+    "posizione": 3,
+    "famiglia": "Composizioni di funzioni"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 1,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 2,
+    "risposta": "Tuple(Integer(12), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 3,
+    "risposta": "Add(Mul(Integer(11), Symbol('x', real=True)), Integer(-10))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 4,
+    "risposta": "Add(Mul(Integer(11), Symbol('x', real=True)), Integer(-12))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 5,
+    "risposta": "Rational(-1, 11)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 6,
+    "risposta": "Tuple(Integer(10), Integer(20))",
+    "posizione": 1,
+    "famiglia": "Intersezioni di rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 7,
+    "risposta": "Integer(10)",
+    "posizione": 2,
+    "famiglia": "Distanze di punti da rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 8,
+    "risposta": "Tuple(Integer(8), Integer(16))",
+    "posizione": 3,
+    "famiglia": "Ricostruzioni di estremi"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 9,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 10,
+    "risposta": "Tuple(Integer(13), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 11,
+    "risposta": "Add(Mul(Integer(12), Symbol('x', real=True)), Integer(-11))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 12,
+    "risposta": "Add(Mul(Integer(12), Symbol('x', real=True)), Integer(-13))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 13,
+    "risposta": "Rational(-1, 12)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 14,
+    "risposta": "Tuple(Integer(11), Integer(22))",
+    "posizione": 1,
+    "famiglia": "Intersezioni di rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 15,
+    "risposta": "Integer(11)",
+    "posizione": 2,
+    "famiglia": "Distanze di punti da rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 16,
+    "risposta": "Tuple(Integer(9), Integer(18))",
+    "posizione": 3,
+    "famiglia": "Ricostruzioni di estremi"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 17,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 18,
+    "risposta": "Tuple(Integer(14), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 19,
+    "risposta": "Add(Mul(Integer(13), Symbol('x', real=True)), Integer(-12))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 20,
+    "risposta": "Add(Mul(Integer(13), Symbol('x', real=True)), Integer(-14))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 21,
+    "risposta": "Rational(-1, 13)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 22,
+    "risposta": "Tuple(Integer(12), Integer(24))",
+    "posizione": 1,
+    "famiglia": "Intersezioni di rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 23,
+    "risposta": "Integer(12)",
+    "posizione": 2,
+    "famiglia": "Distanze di punti da rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 24,
+    "risposta": "Tuple(Integer(10), Integer(20))",
+    "posizione": 3,
+    "famiglia": "Ricostruzioni di estremi"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 25,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 26,
+    "risposta": "Tuple(Integer(15), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 27,
+    "risposta": "Add(Mul(Integer(14), Symbol('x', real=True)), Integer(-13))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 28,
+    "risposta": "Add(Mul(Integer(14), Symbol('x', real=True)), Integer(-15))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 29,
+    "risposta": "Rational(-1, 14)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 30,
+    "risposta": "Tuple(Integer(13), Integer(26))",
+    "posizione": 1,
+    "famiglia": "Intersezioni di rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 31,
+    "risposta": "Integer(13)",
+    "posizione": 2,
+    "famiglia": "Distanze di punti da rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 32,
+    "risposta": "Tuple(Integer(11), Integer(22))",
+    "posizione": 3,
+    "famiglia": "Ricostruzioni di estremi"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 33,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 34,
+    "risposta": "Tuple(Integer(16), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 35,
+    "risposta": "Add(Mul(Integer(15), Symbol('x', real=True)), Integer(-14))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 36,
+    "risposta": "Add(Mul(Integer(15), Symbol('x', real=True)), Integer(-16))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 37,
+    "risposta": "Rational(-1, 15)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 38,
+    "risposta": "Tuple(Integer(14), Integer(28))",
+    "posizione": 1,
+    "famiglia": "Intersezioni di rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 39,
+    "risposta": "Integer(14)",
+    "posizione": 2,
+    "famiglia": "Distanze di punti da rette"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 40,
+    "risposta": "Tuple(Integer(12), Integer(24))",
+    "posizione": 3,
+    "famiglia": "Ricostruzioni di estremi"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 41,
+    "risposta": "Integer(5)",
+    "posizione": 4,
+    "famiglia": "Distanze tra punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 42,
+    "risposta": "Tuple(Integer(17), Integer(1))",
+    "posizione": 1,
+    "famiglia": "Punti medi di segmenti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 43,
+    "risposta": "Add(Mul(Integer(16), Symbol('x', real=True)), Integer(-15))",
+    "posizione": 2,
+    "famiglia": "Rette per due punti"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 44,
+    "risposta": "Add(Mul(Integer(16), Symbol('x', real=True)), Integer(-17))",
+    "posizione": 3,
+    "famiglia": "Parallele per un punto"
+  },
+  {
+    "capitolo": "piano-cartesiano-e-retta",
+    "numero": 45,
+    "risposta": "Rational(-1, 16)",
+    "posizione": 4,
+    "famiglia": "Pendenze di rette perpendicolari"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 1,
+    "risposta": "Tuple(Integer(10), Integer(-9))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 2,
+    "risposta": "FiniteSet(Integer(8), Integer(12))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 3,
+    "risposta": "Add(Mul(Integer(11), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(220), Symbol('x', real=True)), Integer(1091))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 4,
+    "risposta": "Tuple(Integer(10), Rational(-395, 44))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 5,
+    "risposta": "FiniteSet(Tuple(Integer(-10), Integer(100)), Tuple(Integer(10), Integer(100)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 6,
+    "risposta": "Add(Mul(Integer(20), Symbol('x', real=True)), Integer(-100))",
+    "posizione": 2,
+    "famiglia": "Tangenti senza derivate"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 7,
+    "risposta": "Tuple(Integer(-10), Integer(11))",
+    "posizione": 3,
+    "famiglia": "Vertici di parabole orizzontali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 8,
+    "risposta": "Integer(144)",
+    "posizione": 4,
+    "famiglia": "Massimi di aree quadratiche"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 9,
+    "risposta": "Tuple(Integer(11), Integer(-10))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 10,
+    "risposta": "FiniteSet(Integer(9), Integer(13))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 11,
+    "risposta": "Add(Mul(Integer(12), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(264), Symbol('x', real=True)), Integer(1442))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 12,
+    "risposta": "Tuple(Integer(11), Rational(-479, 48))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 13,
+    "risposta": "FiniteSet(Tuple(Integer(-11), Integer(121)), Tuple(Integer(11), Integer(121)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 14,
+    "risposta": "Add(Mul(Integer(22), Symbol('x', real=True)), Integer(-121))",
+    "posizione": 2,
+    "famiglia": "Tangenti senza derivate"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 15,
+    "risposta": "Tuple(Integer(-11), Integer(12))",
+    "posizione": 3,
+    "famiglia": "Vertici di parabole orizzontali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 16,
+    "risposta": "Integer(169)",
+    "posizione": 4,
+    "famiglia": "Massimi di aree quadratiche"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 17,
+    "risposta": "Tuple(Integer(12), Integer(-11))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 18,
+    "risposta": "FiniteSet(Integer(10), Integer(14))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 19,
+    "risposta": "Add(Mul(Integer(13), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(312), Symbol('x', real=True)), Integer(1861))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 20,
+    "risposta": "Tuple(Integer(12), Rational(-571, 52))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 21,
+    "risposta": "FiniteSet(Tuple(Integer(-12), Integer(144)), Tuple(Integer(12), Integer(144)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 22,
+    "risposta": "Add(Mul(Integer(24), Symbol('x', real=True)), Integer(-144))",
+    "posizione": 2,
+    "famiglia": "Tangenti senza derivate"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 23,
+    "risposta": "Tuple(Integer(-12), Integer(13))",
+    "posizione": 3,
+    "famiglia": "Vertici di parabole orizzontali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 24,
+    "risposta": "Integer(196)",
+    "posizione": 4,
+    "famiglia": "Massimi di aree quadratiche"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 25,
+    "risposta": "Tuple(Integer(13), Integer(-12))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 26,
+    "risposta": "FiniteSet(Integer(11), Integer(15))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 27,
+    "risposta": "Add(Mul(Integer(14), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(364), Symbol('x', real=True)), Integer(2354))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 28,
+    "risposta": "Tuple(Integer(13), Rational(-671, 56))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 29,
+    "risposta": "FiniteSet(Tuple(Integer(-13), Integer(169)), Tuple(Integer(13), Integer(169)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 30,
+    "risposta": "Add(Mul(Integer(26), Symbol('x', real=True)), Integer(-169))",
+    "posizione": 2,
+    "famiglia": "Tangenti senza derivate"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 31,
+    "risposta": "Tuple(Integer(-13), Integer(14))",
+    "posizione": 3,
+    "famiglia": "Vertici di parabole orizzontali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 32,
+    "risposta": "Integer(225)",
+    "posizione": 4,
+    "famiglia": "Massimi di aree quadratiche"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 33,
+    "risposta": "Tuple(Integer(14), Integer(-13))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 34,
+    "risposta": "FiniteSet(Integer(12), Integer(16))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 35,
+    "risposta": "Add(Mul(Integer(15), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(420), Symbol('x', real=True)), Integer(2927))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 36,
+    "risposta": "Tuple(Integer(14), Rational(-779, 60))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 37,
+    "risposta": "FiniteSet(Tuple(Integer(-14), Integer(196)), Tuple(Integer(14), Integer(196)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 38,
+    "risposta": "Add(Mul(Integer(28), Symbol('x', real=True)), Integer(-196))",
+    "posizione": 2,
+    "famiglia": "Tangenti senza derivate"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 39,
+    "risposta": "Tuple(Integer(-14), Integer(15))",
+    "posizione": 3,
+    "famiglia": "Vertici di parabole orizzontali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 40,
+    "risposta": "Integer(256)",
+    "posizione": 4,
+    "famiglia": "Massimi di aree quadratiche"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 41,
+    "risposta": "Tuple(Integer(15), Integer(-14))",
+    "posizione": 1,
+    "famiglia": "Vertici dal completamento del quadrato"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 42,
+    "risposta": "FiniteSet(Integer(13), Integer(17))",
+    "posizione": 2,
+    "famiglia": "Zeri di parabole"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 43,
+    "risposta": "Add(Mul(Integer(16), Pow(Symbol('x', real=True), Integer(2))), Mul(Integer(-1), Integer(480), Symbol('x', real=True)), Integer(3586))",
+    "posizione": 3,
+    "famiglia": "Equazioni da vertice e punto"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 44,
+    "risposta": "Tuple(Integer(15), Rational(-895, 64))",
+    "posizione": 4,
+    "famiglia": "Fuochi di parabole verticali"
+  },
+  {
+    "capitolo": "parabola",
+    "numero": 45,
+    "risposta": "FiniteSet(Tuple(Integer(-15), Integer(225)), Tuple(Integer(15), Integer(225)))",
+    "posizione": 1,
+    "famiglia": "Intersezioni tra rette e parabole"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 1,
+    "risposta": "Tuple(Integer(10), Integer(-9))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 2,
+    "risposta": "Integer(12)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 3,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 4,
+    "risposta": "Integer(144)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 5,
+    "risposta": "FiniteSet(Integer(-40), Integer(40))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 6,
+    "risposta": "Tuple(Rational(3, 250), Rational(2, 125))",
+    "posizione": 3,
+    "famiglia": "Tangenti in punti della circonferenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 7,
+    "risposta": "Integer(80)",
+    "posizione": 4,
+    "famiglia": "Lunghezze di corde"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 8,
+    "risposta": "Integer(30)",
+    "posizione": 1,
+    "famiglia": "Assi radicali di circonferenze"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 9,
+    "risposta": "Tuple(Integer(11), Integer(-10))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 10,
+    "risposta": "Integer(13)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 11,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 12,
+    "risposta": "Integer(169)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 13,
+    "risposta": "FiniteSet(Integer(-44), Integer(44))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 14,
+    "risposta": "Tuple(Rational(3, 275), Rational(4, 275))",
+    "posizione": 3,
+    "famiglia": "Tangenti in punti della circonferenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 15,
+    "risposta": "Integer(88)",
+    "posizione": 4,
+    "famiglia": "Lunghezze di corde"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 16,
+    "risposta": "Integer(33)",
+    "posizione": 1,
+    "famiglia": "Assi radicali di circonferenze"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 17,
+    "risposta": "Tuple(Integer(12), Integer(-11))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 18,
+    "risposta": "Integer(14)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 19,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 20,
+    "risposta": "Integer(196)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 21,
+    "risposta": "FiniteSet(Integer(-48), Integer(48))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 22,
+    "risposta": "Tuple(Rational(1, 100), Rational(1, 75))",
+    "posizione": 3,
+    "famiglia": "Tangenti in punti della circonferenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 23,
+    "risposta": "Integer(96)",
+    "posizione": 4,
+    "famiglia": "Lunghezze di corde"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 24,
+    "risposta": "Integer(36)",
+    "posizione": 1,
+    "famiglia": "Assi radicali di circonferenze"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 25,
+    "risposta": "Tuple(Integer(13), Integer(-12))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 26,
+    "risposta": "Integer(15)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 27,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 28,
+    "risposta": "Integer(225)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 29,
+    "risposta": "FiniteSet(Integer(-52), Integer(52))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 30,
+    "risposta": "Tuple(Rational(3, 325), Rational(4, 325))",
+    "posizione": 3,
+    "famiglia": "Tangenti in punti della circonferenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 31,
+    "risposta": "Integer(104)",
+    "posizione": 4,
+    "famiglia": "Lunghezze di corde"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 32,
+    "risposta": "Integer(39)",
+    "posizione": 1,
+    "famiglia": "Assi radicali di circonferenze"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 33,
+    "risposta": "Tuple(Integer(14), Integer(-13))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 34,
+    "risposta": "Integer(16)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 35,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 36,
+    "risposta": "Integer(256)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 37,
+    "risposta": "FiniteSet(Integer(-56), Integer(56))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 38,
+    "risposta": "Tuple(Rational(3, 350), Rational(2, 175))",
+    "posizione": 3,
+    "famiglia": "Tangenti in punti della circonferenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 39,
+    "risposta": "Integer(112)",
+    "posizione": 4,
+    "famiglia": "Lunghezze di corde"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 40,
+    "risposta": "Integer(42)",
+    "posizione": 1,
+    "famiglia": "Assi radicali di circonferenze"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 41,
+    "risposta": "Tuple(Integer(15), Integer(-14))",
+    "posizione": 2,
+    "famiglia": "Centri dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 42,
+    "risposta": "Integer(17)",
+    "posizione": 3,
+    "famiglia": "Raggi dalla forma generale"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 43,
+    "risposta": "Integer(0)",
+    "posizione": 4,
+    "famiglia": "Controlli di appartenenza"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 44,
+    "risposta": "Integer(289)",
+    "posizione": 1,
+    "famiglia": "Raggi da diametri assegnati"
+  },
+  {
+    "capitolo": "circonferenza",
+    "numero": 45,
+    "risposta": "FiniteSet(Integer(-60), Integer(60))",
+    "posizione": 2,
+    "famiglia": "Intersezioni con rette orizzontali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 1,
+    "risposta": "Integer(100)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 2,
+    "risposta": "Integer(40)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 3,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 4,
+    "risposta": "FiniteSet(Integer(-24), Integer(24))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 5,
+    "risposta": "Tuple(Integer(-30), Integer(-8))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 6,
+    "risposta": "Integer(900)",
+    "posizione": 4,
+    "famiglia": "Equazioni da vertici e fuochi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 7,
+    "risposta": "Integer(50)",
+    "posizione": 1,
+    "famiglia": "Tangenti ai vertici principali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 8,
+    "risposta": "Integer(100)",
+    "posizione": 2,
+    "famiglia": "Somme delle distanze focali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 9,
+    "risposta": "Integer(110)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 10,
+    "risposta": "Integer(44)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 11,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 12,
+    "risposta": "FiniteSet(Rational(-132, 5), Rational(132, 5))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 13,
+    "risposta": "Tuple(Integer(-33), Integer(-9))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 14,
+    "risposta": "Integer(1089)",
+    "posizione": 4,
+    "famiglia": "Equazioni da vertici e fuochi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 15,
+    "risposta": "Integer(55)",
+    "posizione": 1,
+    "famiglia": "Tangenti ai vertici principali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 16,
+    "risposta": "Integer(110)",
+    "posizione": 2,
+    "famiglia": "Somme delle distanze focali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 17,
+    "risposta": "Integer(120)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 18,
+    "risposta": "Integer(48)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 19,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 20,
+    "risposta": "FiniteSet(Rational(-144, 5), Rational(144, 5))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 21,
+    "risposta": "Tuple(Integer(-36), Integer(-10))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 22,
+    "risposta": "Integer(1296)",
+    "posizione": 4,
+    "famiglia": "Equazioni da vertici e fuochi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 23,
+    "risposta": "Integer(60)",
+    "posizione": 1,
+    "famiglia": "Tangenti ai vertici principali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 24,
+    "risposta": "Integer(120)",
+    "posizione": 2,
+    "famiglia": "Somme delle distanze focali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 25,
+    "risposta": "Integer(130)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 26,
+    "risposta": "Integer(52)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 27,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 28,
+    "risposta": "FiniteSet(Rational(-156, 5), Rational(156, 5))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 29,
+    "risposta": "Tuple(Integer(-39), Integer(-11))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 30,
+    "risposta": "Integer(1521)",
+    "posizione": 4,
+    "famiglia": "Equazioni da vertici e fuochi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 31,
+    "risposta": "Integer(65)",
+    "posizione": 1,
+    "famiglia": "Tangenti ai vertici principali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 32,
+    "risposta": "Integer(130)",
+    "posizione": 2,
+    "famiglia": "Somme delle distanze focali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 33,
+    "risposta": "Integer(140)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 34,
+    "risposta": "Integer(56)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 35,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 36,
+    "risposta": "FiniteSet(Rational(-168, 5), Rational(168, 5))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 37,
+    "risposta": "Tuple(Integer(-42), Integer(-12))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 38,
+    "risposta": "Integer(1764)",
+    "posizione": 4,
+    "famiglia": "Equazioni da vertici e fuochi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 39,
+    "risposta": "Integer(70)",
+    "posizione": 1,
+    "famiglia": "Tangenti ai vertici principali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 40,
+    "risposta": "Integer(140)",
+    "posizione": 2,
+    "famiglia": "Somme delle distanze focali"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 41,
+    "risposta": "Integer(150)",
+    "posizione": 3,
+    "famiglia": "Lunghezze degli assi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 42,
+    "risposta": "Integer(60)",
+    "posizione": 4,
+    "famiglia": "Distanze dei fuochi dal centro"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 43,
+    "risposta": "Rational(4, 5)",
+    "posizione": 1,
+    "famiglia": "Eccentricità di ellissi"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 44,
+    "risposta": "FiniteSet(Integer(-36), Integer(36))",
+    "posizione": 2,
+    "famiglia": "Ordinate di punti dell’ellisse"
+  },
+  {
+    "capitolo": "ellisse",
+    "numero": 45,
+    "risposta": "Tuple(Integer(-45), Integer(-13))",
+    "posizione": 3,
+    "famiglia": "Fuochi di ellissi traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 1,
+    "risposta": "Tuple(Integer(30), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 2,
+    "risposta": "Integer(50)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 3,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 4,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 5,
+    "risposta": "FiniteSet(Rational(-160, 3), Rational(160, 3))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 6,
+    "risposta": "Integer(10)",
+    "posizione": 1,
+    "famiglia": "Punti dell’iperbole equilatera"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 7,
+    "risposta": "Tuple(Integer(10), Integer(-9))",
+    "posizione": 2,
+    "famiglia": "Centri di iperboli traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 8,
+    "risposta": "Tuple(Integer(10), Integer(12))",
+    "posizione": 3,
+    "famiglia": "Asintoti di funzioni omografiche"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 9,
+    "risposta": "Tuple(Integer(33), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 10,
+    "risposta": "Integer(55)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 11,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 12,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 13,
+    "risposta": "FiniteSet(Rational(-176, 3), Rational(176, 3))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 14,
+    "risposta": "Integer(11)",
+    "posizione": 1,
+    "famiglia": "Punti dell’iperbole equilatera"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 15,
+    "risposta": "Tuple(Integer(11), Integer(-10))",
+    "posizione": 2,
+    "famiglia": "Centri di iperboli traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 16,
+    "risposta": "Tuple(Integer(11), Integer(13))",
+    "posizione": 3,
+    "famiglia": "Asintoti di funzioni omografiche"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 17,
+    "risposta": "Tuple(Integer(36), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 18,
+    "risposta": "Integer(60)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 19,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 20,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 21,
+    "risposta": "FiniteSet(Integer(-64), Integer(64))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 22,
+    "risposta": "Integer(12)",
+    "posizione": 1,
+    "famiglia": "Punti dell’iperbole equilatera"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 23,
+    "risposta": "Tuple(Integer(12), Integer(-11))",
+    "posizione": 2,
+    "famiglia": "Centri di iperboli traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 24,
+    "risposta": "Tuple(Integer(12), Integer(14))",
+    "posizione": 3,
+    "famiglia": "Asintoti di funzioni omografiche"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 25,
+    "risposta": "Tuple(Integer(39), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 26,
+    "risposta": "Integer(65)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 27,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 28,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 29,
+    "risposta": "FiniteSet(Rational(-208, 3), Rational(208, 3))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 30,
+    "risposta": "Integer(13)",
+    "posizione": 1,
+    "famiglia": "Punti dell’iperbole equilatera"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 31,
+    "risposta": "Tuple(Integer(13), Integer(-12))",
+    "posizione": 2,
+    "famiglia": "Centri di iperboli traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 32,
+    "risposta": "Tuple(Integer(13), Integer(15))",
+    "posizione": 3,
+    "famiglia": "Asintoti di funzioni omografiche"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 33,
+    "risposta": "Tuple(Integer(42), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 34,
+    "risposta": "Integer(70)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 35,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 36,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 37,
+    "risposta": "FiniteSet(Rational(-224, 3), Rational(224, 3))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 38,
+    "risposta": "Integer(14)",
+    "posizione": 1,
+    "famiglia": "Punti dell’iperbole equilatera"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 39,
+    "risposta": "Tuple(Integer(14), Integer(-13))",
+    "posizione": 2,
+    "famiglia": "Centri di iperboli traslate"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 40,
+    "risposta": "Tuple(Integer(14), Integer(16))",
+    "posizione": 3,
+    "famiglia": "Asintoti di funzioni omografiche"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 41,
+    "risposta": "Tuple(Integer(45), Integer(0))",
+    "posizione": 4,
+    "famiglia": "Vertici di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 42,
+    "risposta": "Integer(75)",
+    "posizione": 1,
+    "famiglia": "Fuochi delle iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 43,
+    "risposta": "Rational(4, 3)",
+    "posizione": 2,
+    "famiglia": "Coefficienti angolari degli asintoti"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 44,
+    "risposta": "Rational(5, 3)",
+    "posizione": 3,
+    "famiglia": "Eccentricità di iperboli"
+  },
+  {
+    "capitolo": "iperbole",
+    "numero": 45,
+    "risposta": "FiniteSet(Integer(-80), Integer(80))",
+    "posizione": 4,
+    "famiglia": "Ordinate dei punti di un ramo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 1,
+    "risposta": "Tuple(Integer(12), Integer(-9))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 2,
+    "risposta": "Tuple(Integer(10), Integer(-21))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 3,
+    "risposta": "Tuple(Integer(-20), Integer(-24))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 4,
+    "risposta": "Tuple(Integer(10), Integer(-9))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 5,
+    "risposta": "Tuple(Integer(10), Integer(-10))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 6,
+    "risposta": "FiniteSet(Tuple(Integer(-10), Integer(100)), Tuple(Integer(10), Integer(100)))",
+    "posizione": 2,
+    "famiglia": "Intersezioni di due parabole"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 7,
+    "risposta": "Integer(-100)",
+    "posizione": 3,
+    "famiglia": "Parametri di tangenza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 8,
+    "risposta": "Integer(12)",
+    "posizione": 4,
+    "famiglia": "Luoghi di equidistanza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 9,
+    "risposta": "Tuple(Integer(13), Integer(-10))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 10,
+    "risposta": "Tuple(Integer(11), Integer(-23))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 11,
+    "risposta": "Tuple(Integer(-22), Integer(-26))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 12,
+    "risposta": "Tuple(Integer(11), Integer(-10))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 13,
+    "risposta": "Tuple(Integer(11), Integer(-11))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 14,
+    "risposta": "FiniteSet(Tuple(Integer(-11), Integer(121)), Tuple(Integer(11), Integer(121)))",
+    "posizione": 2,
+    "famiglia": "Intersezioni di due parabole"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 15,
+    "risposta": "Integer(-121)",
+    "posizione": 3,
+    "famiglia": "Parametri di tangenza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 16,
+    "risposta": "Integer(13)",
+    "posizione": 4,
+    "famiglia": "Luoghi di equidistanza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 17,
+    "risposta": "Tuple(Integer(14), Integer(-11))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 18,
+    "risposta": "Tuple(Integer(12), Integer(-25))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 19,
+    "risposta": "Tuple(Integer(-24), Integer(-28))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 20,
+    "risposta": "Tuple(Integer(12), Integer(-11))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 21,
+    "risposta": "Tuple(Integer(12), Integer(-12))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 22,
+    "risposta": "FiniteSet(Tuple(Integer(-12), Integer(144)), Tuple(Integer(12), Integer(144)))",
+    "posizione": 2,
+    "famiglia": "Intersezioni di due parabole"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 23,
+    "risposta": "Integer(-144)",
+    "posizione": 3,
+    "famiglia": "Parametri di tangenza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 24,
+    "risposta": "Integer(14)",
+    "posizione": 4,
+    "famiglia": "Luoghi di equidistanza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 25,
+    "risposta": "Tuple(Integer(15), Integer(-12))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 26,
+    "risposta": "Tuple(Integer(13), Integer(-27))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 27,
+    "risposta": "Tuple(Integer(-26), Integer(-30))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 28,
+    "risposta": "Tuple(Integer(13), Integer(-12))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 29,
+    "risposta": "Tuple(Integer(13), Integer(-13))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 30,
+    "risposta": "FiniteSet(Tuple(Integer(-13), Integer(169)), Tuple(Integer(13), Integer(169)))",
+    "posizione": 2,
+    "famiglia": "Intersezioni di due parabole"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 31,
+    "risposta": "Integer(-169)",
+    "posizione": 3,
+    "famiglia": "Parametri di tangenza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 32,
+    "risposta": "Integer(15)",
+    "posizione": 4,
+    "famiglia": "Luoghi di equidistanza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 33,
+    "risposta": "Tuple(Integer(16), Integer(-13))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 34,
+    "risposta": "Tuple(Integer(14), Integer(-29))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 35,
+    "risposta": "Tuple(Integer(-28), Integer(-32))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 36,
+    "risposta": "Tuple(Integer(14), Integer(-13))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 37,
+    "risposta": "Tuple(Integer(14), Integer(-14))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 38,
+    "risposta": "FiniteSet(Tuple(Integer(-14), Integer(196)), Tuple(Integer(14), Integer(196)))",
+    "posizione": 2,
+    "famiglia": "Intersezioni di due parabole"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 39,
+    "risposta": "Integer(-196)",
+    "posizione": 3,
+    "famiglia": "Parametri di tangenza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 40,
+    "risposta": "Integer(16)",
+    "posizione": 4,
+    "famiglia": "Luoghi di equidistanza"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 41,
+    "risposta": "Tuple(Integer(17), Integer(-14))",
+    "posizione": 1,
+    "famiglia": "Traslazioni di punti"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 42,
+    "risposta": "Tuple(Integer(15), Integer(-31))",
+    "posizione": 2,
+    "famiglia": "Simmetrie rispetto all’asse orizzontale"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 43,
+    "risposta": "Tuple(Integer(-30), Integer(-34))",
+    "posizione": 3,
+    "famiglia": "Omotetie di rapporto negativo"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 44,
+    "risposta": "Tuple(Integer(15), Integer(-14))",
+    "posizione": 4,
+    "famiglia": "Centri mediante completamento dei quadrati"
+  },
+  {
+    "capitolo": "trasformazioni-e-coniche",
+    "numero": 45,
+    "risposta": "Tuple(Integer(15), Integer(-15))",
+    "posizione": 1,
+    "famiglia": "Centri di circonferenze traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 1,
+    "risposta": "Integer(1331)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 2,
+    "risposta": "FiniteSet(Integer(10))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 3,
+    "risposta": "Interval(-oo, Integer(10), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 4,
+    "risposta": "Interval(-oo, Integer(10), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 5,
+    "risposta": "FiniteSet(Integer(0), Integer(11))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 6,
+    "risposta": "Integer(10)",
+    "posizione": 3,
+    "famiglia": "Asintoti di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 7,
+    "risposta": "Integer(880)",
+    "posizione": 4,
+    "famiglia": "Raddoppiamenti e modelli"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 8,
+    "risposta": "Interval(Integer(10), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Immagini di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 9,
+    "risposta": "Integer(1728)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 10,
+    "risposta": "FiniteSet(Integer(11))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 11,
+    "risposta": "Interval(-oo, Integer(11), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 12,
+    "risposta": "Interval(-oo, Integer(11), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 13,
+    "risposta": "FiniteSet(Integer(0), Integer(12))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 14,
+    "risposta": "Integer(11)",
+    "posizione": 3,
+    "famiglia": "Asintoti di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 15,
+    "risposta": "Integer(960)",
+    "posizione": 4,
+    "famiglia": "Raddoppiamenti e modelli"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 16,
+    "risposta": "Interval(Integer(11), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Immagini di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 17,
+    "risposta": "Integer(2197)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 18,
+    "risposta": "FiniteSet(Integer(12))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 19,
+    "risposta": "Interval(-oo, Integer(12), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 20,
+    "risposta": "Interval(-oo, Integer(12), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 21,
+    "risposta": "FiniteSet(Integer(0), Integer(13))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 22,
+    "risposta": "Integer(12)",
+    "posizione": 3,
+    "famiglia": "Asintoti di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 23,
+    "risposta": "Integer(1040)",
+    "posizione": 4,
+    "famiglia": "Raddoppiamenti e modelli"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 24,
+    "risposta": "Interval(Integer(12), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Immagini di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 25,
+    "risposta": "Integer(2744)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 26,
+    "risposta": "FiniteSet(Integer(13))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 27,
+    "risposta": "Interval(-oo, Integer(13), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 28,
+    "risposta": "Interval(-oo, Integer(13), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 29,
+    "risposta": "FiniteSet(Integer(0), Integer(14))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 30,
+    "risposta": "Integer(13)",
+    "posizione": 3,
+    "famiglia": "Asintoti di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 31,
+    "risposta": "Integer(1120)",
+    "posizione": 4,
+    "famiglia": "Raddoppiamenti e modelli"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 32,
+    "risposta": "Interval(Integer(13), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Immagini di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 33,
+    "risposta": "Integer(3375)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 34,
+    "risposta": "FiniteSet(Integer(14))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 35,
+    "risposta": "Interval(-oo, Integer(14), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 36,
+    "risposta": "Interval(-oo, Integer(14), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 37,
+    "risposta": "FiniteSet(Integer(0), Integer(15))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 38,
+    "risposta": "Integer(14)",
+    "posizione": 3,
+    "famiglia": "Asintoti di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 39,
+    "risposta": "Integer(1200)",
+    "posizione": 4,
+    "famiglia": "Raddoppiamenti e modelli"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 40,
+    "risposta": "Interval(Integer(14), oo, true, true)",
+    "posizione": 1,
+    "famiglia": "Immagini di esponenziali traslate"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 41,
+    "risposta": "Integer(4096)",
+    "posizione": 2,
+    "famiglia": "Potenze con esponenti razionali"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 42,
+    "risposta": "FiniteSet(Integer(15))",
+    "posizione": 3,
+    "famiglia": "Equazioni esponenziali con base comune"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 43,
+    "risposta": "Interval(-oo, Integer(15), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni esponenziali crescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 44,
+    "risposta": "Interval(-oo, Integer(15), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni esponenziali decrescenti"
+  },
+  {
+    "capitolo": "esponenziali",
+    "numero": 45,
+    "risposta": "FiniteSet(Integer(0), Integer(16))",
+    "posizione": 2,
+    "famiglia": "Equazioni quadratiche nell’esponenziale"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 1,
+    "risposta": "Integer(7)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 2,
+    "risposta": "Integer(12)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 3,
+    "risposta": "Rational(11, 2)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 4,
+    "risposta": "Interval(Integer(10), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 5,
+    "risposta": "FiniteSet(Integer(18))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 6,
+    "risposta": "Interval(Integer(10), Integer(18), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con logaritmi crescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 7,
+    "risposta": "Interval(Integer(10), Integer(18), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni con logaritmi decrescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 8,
+    "risposta": "Integer(2)",
+    "posizione": 2,
+    "famiglia": "Tempi in modelli esponenziali"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 9,
+    "risposta": "Integer(8)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 10,
+    "risposta": "Integer(13)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 11,
+    "risposta": "Integer(6)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 12,
+    "risposta": "Interval(Integer(11), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 13,
+    "risposta": "FiniteSet(Integer(27))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 14,
+    "risposta": "Interval(Integer(11), Integer(27), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con logaritmi crescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 15,
+    "risposta": "Interval(Integer(11), Integer(27), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni con logaritmi decrescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 16,
+    "risposta": "Integer(3)",
+    "posizione": 2,
+    "famiglia": "Tempi in modelli esponenziali"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 17,
+    "risposta": "Integer(9)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 18,
+    "risposta": "Integer(14)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 19,
+    "risposta": "Rational(13, 2)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 20,
+    "risposta": "Interval(Integer(12), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 21,
+    "risposta": "FiniteSet(Integer(14))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 22,
+    "risposta": "Interval(Integer(12), Integer(14), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con logaritmi crescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 23,
+    "risposta": "Interval(Integer(12), Integer(14), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni con logaritmi decrescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 24,
+    "risposta": "Integer(4)",
+    "posizione": 2,
+    "famiglia": "Tempi in modelli esponenziali"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 25,
+    "risposta": "Integer(10)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 26,
+    "risposta": "Integer(15)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 27,
+    "risposta": "Integer(7)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 28,
+    "risposta": "Interval(Integer(13), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 29,
+    "risposta": "FiniteSet(Integer(17))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 30,
+    "risposta": "Interval(Integer(13), Integer(17), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con logaritmi crescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 31,
+    "risposta": "Interval(Integer(13), Integer(17), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni con logaritmi decrescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 32,
+    "risposta": "Integer(5)",
+    "posizione": 2,
+    "famiglia": "Tempi in modelli esponenziali"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 33,
+    "risposta": "Integer(11)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 34,
+    "risposta": "Integer(16)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 35,
+    "risposta": "Rational(15, 2)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 36,
+    "risposta": "Interval(Integer(14), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 37,
+    "risposta": "FiniteSet(Integer(22))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 38,
+    "risposta": "Interval(Integer(14), Integer(22), true, false)",
+    "posizione": 4,
+    "famiglia": "Disequazioni con logaritmi crescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 39,
+    "risposta": "Interval(Integer(14), Integer(22), true, false)",
+    "posizione": 1,
+    "famiglia": "Disequazioni con logaritmi decrescenti"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 40,
+    "risposta": "Integer(6)",
+    "posizione": 2,
+    "famiglia": "Tempi in modelli esponenziali"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 41,
+    "risposta": "Integer(12)",
+    "posizione": 3,
+    "famiglia": "Logaritmi dalla definizione"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 42,
+    "risposta": "Integer(17)",
+    "posizione": 4,
+    "famiglia": "Differenze di logaritmi"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 43,
+    "risposta": "Integer(8)",
+    "posizione": 1,
+    "famiglia": "Cambi di base"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 44,
+    "risposta": "Interval(Integer(15), oo, true, true)",
+    "posizione": 2,
+    "famiglia": "Domini logaritmici"
+  },
+  {
+    "capitolo": "logaritmi",
+    "numero": 45,
+    "risposta": "FiniteSet(Integer(31))",
+    "posizione": 3,
+    "famiglia": "Equazioni logaritmiche elementari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 1,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 2,
+    "risposta": "Integer(13)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 3,
+    "risposta": "Integer(13)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 4,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 5,
+    "risposta": "Integer(484)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 6,
+    "risposta": "Rational(22, 3)",
+    "posizione": 1,
+    "famiglia": "Covarianze di coppie di dati"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 7,
+    "risposta": "Integer(11)",
+    "posizione": 2,
+    "famiglia": "Pendenze di rette di regressione"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 8,
+    "risposta": "Integer(11)",
+    "posizione": 3,
+    "famiglia": "Medie da tabelle di frequenza"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 9,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 10,
+    "risposta": "Integer(14)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 11,
+    "risposta": "Integer(14)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 12,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 13,
+    "risposta": "Integer(576)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 14,
+    "risposta": "Integer(8)",
+    "posizione": 1,
+    "famiglia": "Covarianze di coppie di dati"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 15,
+    "risposta": "Integer(12)",
+    "posizione": 2,
+    "famiglia": "Pendenze di rette di regressione"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 16,
+    "risposta": "Integer(12)",
+    "posizione": 3,
+    "famiglia": "Medie da tabelle di frequenza"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 17,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 18,
+    "risposta": "Integer(15)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 19,
+    "risposta": "Integer(15)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 20,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 21,
+    "risposta": "Integer(676)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 22,
+    "risposta": "Rational(26, 3)",
+    "posizione": 1,
+    "famiglia": "Covarianze di coppie di dati"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 23,
+    "risposta": "Integer(13)",
+    "posizione": 2,
+    "famiglia": "Pendenze di rette di regressione"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 24,
+    "risposta": "Integer(13)",
+    "posizione": 3,
+    "famiglia": "Medie da tabelle di frequenza"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 25,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 26,
+    "risposta": "Integer(16)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 27,
+    "risposta": "Integer(16)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 28,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 29,
+    "risposta": "Integer(784)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 30,
+    "risposta": "Rational(28, 3)",
+    "posizione": 1,
+    "famiglia": "Covarianze di coppie di dati"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 31,
+    "risposta": "Integer(14)",
+    "posizione": 2,
+    "famiglia": "Pendenze di rette di regressione"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 32,
+    "risposta": "Integer(14)",
+    "posizione": 3,
+    "famiglia": "Medie da tabelle di frequenza"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 33,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 34,
+    "risposta": "Integer(17)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 35,
+    "risposta": "Integer(17)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 36,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 37,
+    "risposta": "Integer(900)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 38,
+    "risposta": "Integer(10)",
+    "posizione": 1,
+    "famiglia": "Covarianze di coppie di dati"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 39,
+    "risposta": "Integer(15)",
+    "posizione": 2,
+    "famiglia": "Pendenze di rette di regressione"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 40,
+    "risposta": "Integer(15)",
+    "posizione": 3,
+    "famiglia": "Medie da tabelle di frequenza"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 41,
+    "risposta": "Rational(1, 4)",
+    "posizione": 4,
+    "famiglia": "Frequenze relative"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 42,
+    "risposta": "Integer(18)",
+    "posizione": 1,
+    "famiglia": "Medie di dati individuali"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 43,
+    "risposta": "Integer(18)",
+    "posizione": 2,
+    "famiglia": "Mediane con numerosità dispari"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 44,
+    "risposta": "Rational(8, 3)",
+    "posizione": 3,
+    "famiglia": "Varianze descrittive"
+  },
+  {
+    "capitolo": "statistica",
+    "numero": 45,
+    "risposta": "Integer(1024)",
+    "posizione": 4,
+    "famiglia": "Varianze dopo trasformazioni affini"
+  }
+]
