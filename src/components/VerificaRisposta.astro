@@ -26,11 +26,11 @@ const esempio = tipo === 'numero'
   const inglese = document.documentElement.lang === 'en';
   const T = inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
-    giusta: 'Correct answer.', sbagliata: 'Incorrect answer.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
+    giusta: 'Correct answer.', sbagliata: 'The result is different. You can try again or ask Pi for a hint below the exercise.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
     rete: 'Network error: please try again.', exp: 'XP',
   } : {
     leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
-    giusta: 'Risposta corretta.', sbagliata: 'Risposta non corretta.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
+    giusta: 'Risposta corretta.', sbagliata: 'Il risultato è diverso. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
     rete: 'Errore di rete: riprova.', exp: 'EXP',
   };
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {

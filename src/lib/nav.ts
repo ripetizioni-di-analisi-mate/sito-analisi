@@ -1,23 +1,49 @@
-import { materiaL, sezioniL, link, T, type Lingua } from '../i18n';
+import { getCollection } from 'astro:content';
+import { materiaL, link, T, type Lingua } from '../i18n';
+import { catalogoDomande } from './domande';
+import { destinazioniStudio } from './percorso-studio.mjs';
 
 export interface Passo { titolo: string; sotto?: string; href: string; etichetta?: string }
 
-// Navigazione a fine pagina: si va avanti di argomento in argomento lungo la teoria.
-// Gli esercizi di ogni argomento sono elencati in fondo alla sua teoria.
-//  - teoria: indietro alla teoria dell'argomento precedente (o all'indice), avanti alla teoria del successivo;
-//  - elenchi di esercizi: indietro alla teoria dello stesso argomento, avanti alla teoria del successivo.
-export function vicini(m: string, argomento: string, sezione: string, l: Lingua = 'it'): { precedente?: Passo; successivo?: Passo } {
+export interface DisponibilitaStudio { svolti: boolean; dafare: boolean; domande: boolean }
+let raccolteStudio: Promise<{ svolti: Set<string>; dafare: Set<string> }> | undefined;
+// Le collezioni italiane sono anche la riserva delle pagine non ancora tradotte.
+// Si legge una volta sola l'elenco dei contenuti disponibili durante la build.
+export async function disponibilitaStudio(m: string, argomento: string, l: Lingua = 'it'): Promise<DisponibilitaStudio> {
+  raccolteStudio ??= Promise.all([getCollection('svolti'), getCollection('dafare')]).then(([s, d]) => ({
+    svolti: new Set(s.map((v) => v.id.split('/').slice(0, 2).join('/'))),
+    dafare: new Set(d.map((v) => v.id.split('/').slice(0, 2).join('/'))),
+  }));
+  const [raccolte, domande] = await Promise.all([raccolteStudio, catalogoDomande(l)]);
+  return { svolti: raccolte.svolti.has(`${m}/${argomento}`), dafare: raccolte.dafare.has(`${m}/${argomento}`), domande: (domande[m] ?? []).includes(argomento) };
+}
+
+// La destinazione principale accompagna teoria, svolti, esercizi autonomi e
+// verifica sullo stesso argomento. Il prossimo argomento resta una scorciatoia.
+export function vicini(m: string, argomento: string, sezione: string, l: Lingua = 'it', disponibili: DisponibilitaStudio = { svolti: true, dafare: true, domande: false }): { precedente?: Passo; successivo?: Passo } {
   const t = T(l);
   const mat = materiaL(l, m);
-  const i = mat.argomenti.findIndex((a) => a.slug === argomento);
-  const teoria = sezioniL(l).find((s) => s.slug === 'teoria')!.titolo;
-  const verso = (k: number) => mat.argomenti[k] && { titolo: mat.argomenti[k].titolo, sotto: teoria, href: link(l, `/${m}/${mat.argomenti[k].slug}/teoria`) };
-  const successivo = verso(i + 1);
-  if (successivo) (successivo as Passo).etichetta = t.argomentoSuccessivo;
-  const precedente = sezione === 'teoria'
-    ? (verso(i - 1) || { titolo: t.indiceArgomenti, sotto: mat.breve, href: link(l, `/${m}`) })
-    : { titolo: teoria, sotto: mat.argomenti[i]?.breve, href: link(l, `/${m}/${argomento}/teoria`) };
-  return { precedente, successivo: successivo || undefined };
+  const d = destinazioniStudio(mat.argomenti.map((a) => a.slug), argomento, sezione, disponibili);
+  const nomi = { ...t.sezioni, domande: l === 'en' ? 'Timed questions' : 'Domande a tempo' };
+  const etichette: Record<string, string> = l === 'en'
+    ? { 'esercizi-svolti': 'Continue with worked examples', esercizi: 'Try on your own', domande: 'Check your understanding' }
+    : { 'esercizi-svolti': 'Continua con gli esempi', esercizi: 'Prova in autonomia', domande: 'Verifica con le domande' };
+  const passo = (v: { argomento: string; sezione: string } | null, avanti = false): Passo | undefined => {
+    if (!v) return undefined;
+    const a = mat.argomenti.find((a) => a.slug === v.argomento);
+    if (!a) return undefined;
+    const altro = v.argomento !== argomento;
+    return {
+      titolo: altro ? a.titolo : nomi[v.sezione],
+      sotto: altro ? nomi.teoria : a.breve,
+      href: link(l, `/${m}/${v.argomento}/${v.sezione}`),
+      ...(avanti ? { etichetta: altro ? t.argomentoSuccessivo : etichette[v.sezione] ?? t.successivo } : {}),
+    };
+  };
+  return {
+    precedente: passo(d.precedente) ?? { titolo: t.indiceArgomenti, sotto: mat.breve, href: link(l, `/${m}`) },
+    successivo: passo(d.successivo, true),
+  };
 }
 
 // Id delle voci: "<materia>/<argomento>/<n>" per gli esercizi, "<materia>/<argomento>" per la teoria.

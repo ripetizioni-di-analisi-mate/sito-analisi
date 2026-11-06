@@ -1,91 +1,203 @@
 ---
-import { SEO } from '../lib/seo-testi';
-import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
-import { testiJs, T, type Lingua } from '../i18n';
+import { materieL, T, type Lingua } from '../i18n';
+import { VIDEOCORSI } from '../data/videocorsi';
+import { MATERIE_GRUPPI } from '../data/gruppi';
+import { MATERIE_LEZIONI } from '../data/lezioni';
+import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
-const js = testiJs(lingua);
-// Ordine e titoli dei gruppi di risultati; max = risultati mostrati prima di «Mostra altri».
-const GRUPPI = lingua === 'en'
-  ? [{ c: 'corsi', titolo: 'Subjects and courses', max: 5 }, { c: 'argomenti', titolo: 'Topics', max: 8 }, { c: 'esercizi', titolo: 'Exercises', max: 8 }, { c: 'videocorsi', titolo: 'Video courses', max: 5 }]
-  : [{ c: 'corsi', titolo: 'Materie e corsi', max: 5 }, { c: 'argomenti', titolo: 'Argomenti', max: 8 }, { c: 'esercizi', titolo: 'Esercizi', max: 8 }, { c: 'videocorsi', titolo: 'Videocorsi', max: 5 }];
+const x = lingua === 'en' ? {
+  parola: 'Topic or keyword', materia: 'Subject', tutteMaterie: 'All subjects', tipo: 'Content', tuttiTipi: 'All content',
+  corsi: 'Subjects and courses', argomenti: 'Topics and theory', esercizi: 'Exercises and quizzes', videocorsi: 'Video courses',
+  filtri: 'Search filters', togliFiltri: 'Clear filters', inizio: 'Enter a topic or choose a subject to see the material available.',
+  sommario: 'Find a topic, theorem or exercise. Filter the results by subject and content.',
+  breve: 'Enter at least two letters or one number.', caricamento: 'Loading the search index…',
+  errore: 'The search could not be loaded. Check your connection and try again.', riprova: 'Try again',
+  nessuno: 'No results. Try a shorter keyword or change the filters.', uno: '1 result', risultati: '§ results',
+  suggerimento: 'Try searching for', altri: 'Show § more', senzaJs: 'Enable JavaScript in your browser to use search.',
+} : {
+  parola: 'Argomento o parola chiave', materia: 'Materia', tutteMaterie: 'Tutte le materie', tipo: 'Contenuto', tuttiTipi: 'Tutti i contenuti',
+  corsi: 'Materie e corsi', argomenti: 'Argomenti e teoria', esercizi: 'Esercizi e quiz', videocorsi: 'Videocorsi',
+  filtri: 'Filtri di ricerca', togliFiltri: 'Togli i filtri', inizio: 'Scrivi un argomento o scegli una materia per vedere il materiale disponibile.',
+  sommario: 'Trova un argomento, un teorema o un esercizio. Filtra i risultati per materia e contenuto.',
+  breve: 'Scrivi almeno due lettere o una cifra.', caricamento: 'Caricamento della ricerca…',
+  errore: 'La ricerca non è stata caricata. Controlla la connessione e riprova.', riprova: 'Riprova',
+  nessuno: 'Nessun risultato. Prova una parola più breve o modifica i filtri.', uno: '1 risultato', risultati: '§ risultati',
+  suggerimento: 'Prova con', altri: 'Mostra altri §', senzaJs: 'Per usare la ricerca occorre attivare JavaScript nel browser.',
+};
+const gruppi = [{ c: 'corsi', titolo: x.corsi, max: 5 }, { c: 'argomenti', titolo: x.argomenti, max: 8 },
+  { c: 'esercizi', titolo: x.esercizi, max: 8 }, ...(lingua === 'it' ? [{ c: 'videocorsi', titolo: x.videocorsi, max: 5 }] : [])];
+const materie = materieL(lingua).filter((m) => m.attiva);
+const video = Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, v.sblocca]));
+const concorsi = materie.filter((m) => m.gruppo === 'Concorsi').map((m) => m.slug);
+const collegamenti = lingua === 'it' ? {
+  ...Object.fromEntries(MATERIE_GRUPPI.map((g) => [`/corsi-di-gruppo\nCorso di gruppo di ${g.titolo}`, [g.slug]])),
+  '/prenota': MATERIE_LEZIONI.map((m) => m.slug),
+  '/compatibilita': MATERIE_COMPATIBILITA,
+  '/concorsi': concorsi,
+  '/concorsi/simulazione': concorsi,
+} : {};
 ---
-<Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua} seo={{ noindex: true }}>
+<Base titolo={t.cerca} percorso={[{ titolo: t.cerca }]} lingua={lingua} seo={{ noindex: true }} ricercaPrincipale>
   <p class="sopratitolo">{t.ricerca}</p>
   <h1>{t.cercaNelSito}</h1>
-  <p class="sommario">{t.cercaSommario}</p>
-  <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-  <input class="campo-cerca" id="cerca" type="search" placeholder={t.cercaEsempio} autocomplete="off" autofocus data-testi={JSON.stringify(js)} />
+  <p class="sommario" id="ricerca-aiuto">{x.sommario}</p>
+  <form class="ricerca-form" role="search" id="ricerca-principale" data-testi={JSON.stringify(x)} data-video={JSON.stringify(video)} data-collegamenti={JSON.stringify(collegamenti)}>
+    <label class="etichetta-cerca" for="cerca">{x.parola}</label>
+    <div class="ricerca-campo">
+      <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        <input class="campo-cerca" id="cerca" name="q" type="search" placeholder={t.cercaEsempio} autocomplete="off" maxlength="160" aria-describedby="ricerca-aiuto" aria-controls="risultati" autofocus />
+      </div>
+      <button class="ricerca-invia" type="submit">{t.cerca}</button>
+    </div>
+    <fieldset class="ricerca-filtri">
+      <legend class="solo-lettori">{x.filtri}</legend>
+      <label for="cerca-materia">{x.materia}
+        <select id="cerca-materia" name="materia" aria-controls="risultati">
+          <option value="">{x.tutteMaterie}</option>
+          {materie.map((m) => <option value={m.slug}>{m.breve}</option>)}
+        </select>
+      </label>
+      <label for="cerca-tipo">{x.tipo}
+        <select id="cerca-tipo" name="tipo" aria-controls="risultati">
+          <option value="">{x.tuttiTipi}</option>
+          {gruppi.map((g) => <option value={g.c}>{g.titolo}</option>)}
+        </select>
+      </label>
+      <button class="ricerca-reset" id="togli-filtri" type="button" hidden>{x.togliFiltri}</button>
+    </fieldset>
+  </form>
+  <div class="ricerca-risultati" id="ricerca-risultati" aria-busy="true">
+    <p id="esito" class="ricerca-esito" role="status" aria-live="polite" aria-atomic="true">{x.caricamento}</p>
+    <div id="ricerca-errore" class="ricerca-errore" role="alert" hidden>
+      <p>{x.errore}</p><button id="ricerca-riprova" type="button">{x.riprova}</button>
+    </div>
+    <p class="ricerca-suggerimento" id="ricerca-suggerimento" hidden></p>
+    <ul class="risultati-gruppi" id="risultati" data-gruppi={JSON.stringify(gruppi)}></ul>
   </div>
-  <p id="esito" class="nota-segnaposto" hidden></p>
-  <ul class="risultati-gruppi" id="risultati" data-gruppi={JSON.stringify(GRUPPI)} data-altri={lingua === 'en' ? 'Show § more' : 'Mostra altri §'}></ul>
+  <noscript><p class="nota-segnaposto">{x.senzaJs}</p></noscript>
 
   <script>
+    import katex from 'katex';
+    import { cercaVoci, preparaIndice, suggerisciQuery, vocabolario, paroleQuery, partiTitolo, partiEvidenziate } from '../lib/ricerca-client.mjs';
+
+    const form = document.getElementById('ricerca-principale') as HTMLFormElement;
     const campo = document.getElementById('cerca') as HTMLInputElement;
+    const materia = document.getElementById('cerca-materia') as HTMLSelectElement;
+    const tipo = document.getElementById('cerca-tipo') as HTMLSelectElement;
+    const reset = document.getElementById('togli-filtri') as HTMLButtonElement;
     const lista = document.getElementById('risultati') as HTMLUListElement;
+    const area = document.getElementById('ricerca-risultati') as HTMLDivElement;
     const esito = document.getElementById('esito') as HTMLParagraphElement;
-    const js = JSON.parse(campo.dataset.testi || '{}');
-    // La ricerca dalla home arriva come ?q=…: il campo parte già compilato.
-    if (!campo.value) campo.value = new URLSearchParams(location.search).get('q') ?? '';
-    type Voce = { t: string; s: string; m: string; h: string; p: string; c: string };
-    let voci: Voce[] = [];
+    const errore = document.getElementById('ricerca-errore') as HTMLDivElement;
+    const suggerimento = document.getElementById('ricerca-suggerimento') as HTMLParagraphElement;
+    const testi = JSON.parse(form.dataset.testi || '{}');
+    const video = JSON.parse(form.dataset.video || '{}');
+    const collegamenti = JSON.parse(form.dataset.collegamenti || '{}');
     const gruppi: { c: string; titolo: string; max: number }[] = JSON.parse(lista.dataset.gruppi || '[]');
-    const altri: string = lista.dataset.altri || '';
+    let indice: ReturnType<typeof preparaIndice> = [];
+    let dizionario = new Map<string, number>();
+    let stato: 'caricamento' | 'pronto' | 'errore' = 'caricamento';
+    let attesa: ReturnType<typeof setTimeout>;
 
-    const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    // Radice di una parola: senza l'ultima vocale nelle parole lunghe (corso e corsi, limite e limiti).
-    const radice = (w: string) => (w.length >= 5 ? w.replace(/[aeiou]$/, '') : w);
-    const evid = (t: string, q: string[]) => {
-      let out = t;
-      for (const w of q) out = out.replace(new RegExp(`(${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\p{L}]*)`, 'igu'), '<mark>$1</mark>');
-      return out;
-    };
-
-    async function carica() {
-      const indice = location.pathname.startsWith('/en/') || location.pathname === '/en' ? '/en/indice-ricerca.json' : '/indice-ricerca.json';
-      const r = await fetch(indice);
-      voci = await r.json();
-      cerca();
+    function leggiUrl() {
+      const parametri = new URLSearchParams(location.search);
+      campo.value = (parametri.get('q') || '').slice(0, campo.maxLength);
+      for (const [select, chiave] of [[materia, 'materia'], [tipo, 'tipo']] as const) {
+        const valore = parametri.get(chiave) || '';
+        select.value = [...select.options].some((o) => o.value === valore) ? valore : '';
+      }
     }
-    function voceLi(v: Voce, q: string[]) {
+    function aggiornaUrl() {
+      const url = new URL(location.href);
+      for (const [chiave, valore] of [['q', campo.value.trim()], ['materia', materia.value], ['tipo', tipo.value]]) {
+        if (valore) url.searchParams.set(chiave, valore); else url.searchParams.delete(chiave);
+      }
+      if (url.href !== location.href) history.replaceState(history.state, '', url);
+    }
+    function testoEvidenziato(elemento: HTMLElement, testo: string, query: string) {
+      for (const parte of partiEvidenziate(testo, query)) {
+        if (parte.evidenziata) {
+          const evidenza = document.createElement('mark');
+          evidenza.textContent = parte.testo;
+          elemento.appendChild(evidenza);
+        } else elemento.appendChild(document.createTextNode(parte.testo));
+      }
+    }
+    function voceLi(v: { t: string; s: string; m: string; h: string }, query: string) {
       const li = document.createElement('li');
-      li.innerHTML = `<a href="${v.h}">${evid(v.t, q)}<small>${v.m} · ${v.s}</small></a>`;
+      const a = document.createElement('a');
+      a.href = v.h;
+      const titolo = document.createElement('span');
+      titolo.className = 'titolo-risultato';
+      for (const parte of partiTitolo(v.t)) {
+        if (parte.tipo === 'testo') testoEvidenziato(titolo, parte.testo, query);
+        else {
+          const formula = document.createElement('span');
+          formula.className = 'formula-risultato';
+          // KaTeX genera i propri nodi; i titoli e le parole cercate non diventano HTML.
+          try { katex.render(parte.testo, formula, { throwOnError: false, trust: false, strict: 'ignore', maxExpand: 1000, maxSize: 12 }); }
+          catch { formula.textContent = parte.testo; }
+          titolo.appendChild(formula);
+        }
+      }
+      const contesto = document.createElement('small');
+      contesto.textContent = `${v.m} · ${v.s}`;
+      a.append(titolo, contesto);
+      li.appendChild(a);
       return li;
     }
     function cerca() {
-      const q = norm(campo.value).split(/\s+/).filter((w) => w.length > 1 || /\d/.test(w)).map(radice);
-      lista.innerHTML = '';
-      if (q.length === 0) { esito.hidden = true; return; }
-      const trovate = voci
-        .map((v) => {
-          const titolo = norm(v.t);
-          const testo = norm(`${v.t} ${v.s} ${v.m} ${v.p}`);
-          const punti = q.reduce((acc, w) => acc + (titolo.includes(w) ? 3 : testo.includes(w) ? 1 : 0), 0) + (q.every((w) => titolo.includes(w)) ? 2 : 0);
-          return { v, punti, tutte: q.every((w) => testo.includes(w)) };
-        })
-        .filter((x) => x.tutte)
-        .sort((a, b) => b.punti - a.punti);
-      esito.hidden = false;
-      esito.textContent = trovate.length === 0 ? js.nessunRisultato : trovate.length === 1 ? js.unRisultato : js.risultati.replace('§', String(trovate.length));
+      clearTimeout(attesa);
+      aggiornaUrl();
+      reset.hidden = !materia.value && !tipo.value;
+      lista.replaceChildren();
+      suggerimento.hidden = true;
+      suggerimento.replaceChildren();
+      if (stato !== 'pronto') return;
+      const query = campo.value.trim();
+      const filtri = { materia: materia.value, tipo: tipo.value };
+      if (!query && reset.hidden) { esito.textContent = testi.inizio; return; }
+      if (query && paroleQuery(query).length === 0) { esito.textContent = testi.breve; return; }
+      const trovate = cercaVoci(indice, query, filtri);
+      esito.textContent = trovate.length === 0 ? testi.nessuno : trovate.length === 1 ? testi.uno : testi.risultati.replace('§', String(trovate.length));
+      if (trovate.length === 0) {
+        const correzione = suggerisciQuery(indice, query, filtri, dizionario);
+        if (correzione) {
+          suggerimento.appendChild(document.createTextNode(`${testi.suggerimento} `));
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = `«${correzione}»`;
+          b.addEventListener('click', () => { campo.value = correzione; cerca(); campo.focus(); });
+          suggerimento.appendChild(b);
+          suggerimento.hidden = false;
+        }
+      }
       for (const g of gruppi) {
-        const del = trovate.filter((x) => x.v.c === g.c);
+        const del = trovate.filter((riga) => riga.voce.c === g.c);
         if (del.length === 0) continue;
         const sezione = document.createElement('li');
         sezione.className = 'risultati-gruppo';
-        sezione.innerHTML = `<h2>${g.titolo} <span>${del.length}</span></h2>`;
+        const h2 = document.createElement('h2');
+        h2.appendChild(document.createTextNode(g.titolo));
+        const totale = document.createElement('span');
+        totale.textContent = String(del.length);
+        h2.appendChild(totale);
         const ul = document.createElement('ul');
         ul.className = 'risultati';
-        for (const { v } of del.slice(0, g.max)) ul.appendChild(voceLi(v, q));
-        sezione.appendChild(ul);
+        for (const riga of del.slice(0, g.max)) ul.appendChild(voceLi(riga.voce, query));
+        sezione.append(h2, ul);
         if (del.length > g.max) {
           const b = document.createElement('button');
           b.type = 'button';
           b.className = 'risultati-altri';
-          b.textContent = altri.replace('§', String(del.length - g.max));
+          b.textContent = testi.altri.replace('§', String(del.length - g.max));
           b.addEventListener('click', () => {
-            for (const { v } of del.slice(g.max)) ul.appendChild(voceLi(v, q));
+            const primoNuovo = ul.childElementCount;
+            for (const riga of del.slice(g.max)) ul.appendChild(voceLi(riga.voce, query));
+            (ul.children[primoNuovo]?.querySelector('a') as HTMLAnchorElement)?.focus();
             b.remove();
           });
           sezione.appendChild(b);
@@ -93,7 +205,60 @@ const GRUPPI = lingua === 'en'
         lista.appendChild(sezione);
       }
     }
-    campo.addEventListener('input', cerca);
+    async function carica() {
+      stato = 'caricamento';
+      area.setAttribute('aria-busy', 'true');
+      errore.hidden = true;
+      esito.hidden = false;
+      esito.textContent = testi.caricamento;
+      const controller = new AbortController();
+      const limite = setTimeout(() => controller.abort(), 15000);
+      try {
+        const percorso = location.pathname.startsWith('/en/') || location.pathname === '/en' ? '/en/indice-ricerca.json' : '/indice-ricerca.json';
+        const risposta = await fetch(percorso, { signal: controller.signal });
+        if (!risposta.ok) throw new Error('Indice non disponibile');
+        indice = preparaIndice(await risposta.json(), video, collegamenti);
+        dizionario = vocabolario(indice);
+        stato = 'pronto';
+        cerca();
+      } catch {
+        stato = 'errore';
+        esito.hidden = true;
+        errore.hidden = false;
+      } finally {
+        clearTimeout(limite);
+        area.setAttribute('aria-busy', 'false');
+      }
+    }
+    form.addEventListener('submit', (evento) => { evento.preventDefault(); cerca(); });
+    campo.addEventListener('input', () => { clearTimeout(attesa); attesa = setTimeout(cerca, 140); });
+    materia.addEventListener('change', cerca);
+    tipo.addEventListener('change', cerca);
+    reset.addEventListener('click', () => { materia.value = ''; tipo.value = ''; cerca(); });
+    document.getElementById('ricerca-riprova')?.addEventListener('click', carica);
+    window.addEventListener('popstate', () => { leggiUrl(); cerca(); });
+    leggiUrl();
     carica();
   </script>
+  <style>
+    .ricerca-form { margin: 1.5rem 0 0; font-family: var(--ui); }
+    .etichetta-cerca { display: block; margin-bottom: .35rem; font-size: .9rem; font-weight: 600; }
+    .ricerca-campo { display: flex; gap: .5rem; }
+    .ricerca-invia { padding: .6rem 1.05rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: var(--accento); color: white; font: inherit; cursor: pointer; }
+    .ricerca-filtri { display: flex; align-items: end; gap: .75rem; flex-wrap: wrap; border: 0; padding: 0; margin: 1rem 0; }
+    .ricerca-filtri label { display: flex; flex: 1 1 12rem; flex-direction: column; gap: .25rem; color: var(--inchiostro-2); font-size: .85rem; }
+    .ricerca-filtri select { width: 100%; min-height: 2.65rem; padding: .5rem 1.9rem .5rem .65rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); font: inherit; font-size: .95rem; }
+    .ricerca-reset { padding: .6rem 0; background: none; border: 0; color: var(--accento); font: inherit; font-size: .85rem; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+    .ricerca-esito { margin: 1.25rem 0 .75rem; font-family: var(--ui); font-size: .9rem; color: var(--inchiostro-2); }
+    .ricerca-errore { padding: .8rem 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); font-family: var(--ui); }
+    .ricerca-errore p { margin-top: 0; }
+    .ricerca-errore button { border: 1px solid var(--accento); border-radius: var(--raggio); background: white; padding: .4rem .8rem; color: var(--accento); font: inherit; cursor: pointer; }
+    .ricerca-suggerimento { margin: .5rem 0 1rem; font-family: var(--ui); font-size: .95rem; }
+    .ricerca-suggerimento :global(button) { padding: .3rem .5rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--accento); font: inherit; cursor: pointer; }
+    .ricerca-risultati :global(.titolo-risultato) { display: block; overflow-wrap: anywhere; }
+    .ricerca-risultati :global(.formula-risultato) { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; padding: .1rem 0; }
+    .ricerca-risultati :global(.risultati a:hover) { border-color: var(--accento); background: white; }
+    .solo-lettori { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+    @media (max-width: 30rem) { .ricerca-filtri { gap: .65rem; } .ricerca-filtri label { flex-basis: 100%; } .ricerca-invia { padding-inline: .8rem; } }
+  </style>
 </Base>

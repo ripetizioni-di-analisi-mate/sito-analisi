@@ -5,7 +5,7 @@ import { getCollection, render } from 'astro:content';
 import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
-import { numero, perArgomento } from '../lib/nav';
+import { numero, perArgomento, vicini, disponibilitaStudio } from '../lib/nav';
 interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
@@ -24,6 +24,7 @@ const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomen
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi-svolti`);
 const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.scheda} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi-svolti/${numero(v.id)}`) };
+const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua)).successivo;
 ---
 <Base
   titolo={`${arg.breve} · ${t.sezioni['esercizi-svolti']} ${n}`}
@@ -39,7 +40,7 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'], href: lista }, { titolo: `${t.scheda} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"
   precedente={passo(fratelli[i - 1], tPrec) ?? { titolo: t.tutteLeSchede, sotto: arg.breve, href: lista }}
-  successivo={passo(fratelli[i + 1], tSucc) ?? { titolo: t.sezioni.esercizi, sotto: arg.breve, href: link(lingua, `${base}/esercizi`) }}
+  successivo={passo(fratelli[i + 1], tSucc) ?? fineSchede}
   lingua={lingua} nonTradotta={!tradotta}
 >
   <p class="sopratitolo">{t.sezioni['esercizi-svolti']} · {t.scheda} {n}</p>

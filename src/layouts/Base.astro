@@ -9,6 +9,8 @@ import Indice from '../components/Indice.astro';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
+import Concentrazione from '../components/Concentrazione.astro';
+import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
 import { materiaL, materieL, link, altraLingua, T, type Lingua } from '../i18n';
@@ -33,11 +35,12 @@ interface Props {
   prossimo?: { titolo: string; href: string };
   lingua?: Lingua;
   nonTradotta?: boolean; // pagina inglese non ancora tradotta: si mostra l'italiano con un avviso
+  ricercaPrincipale?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
   seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean };
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, seo = {} } = Astro.props;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const altra: Lingua = lingua === 'it' ? 'en' : 'it';
@@ -97,7 +100,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 }).join('');
 ---
 <!doctype html>
-<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto }} data-studio-materia={contenuto || sezione === 'domande' || sezione === 'simulazione' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
+<html lang={lingua} style={m ? `--accento: ${m.colore}` : undefined} class:list={{ contenuto, 'home-chiarezza': sezione === 'home' }} data-studio-materia={contenuto || sezione === 'domande' || sezione === 'simulazione' ? materia : undefined} data-studio-argomento={contenuto || sezione === 'domande' ? argomento : undefined}>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -201,8 +204,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </header>
 
   <div class="corpo">
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
-    <main>
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    <main id="contenuto-principale">
       <div class="pagina">
         {(percorso.length > 0 || m) && (
           <nav class="percorso" aria-label="Percorso">
@@ -218,15 +221,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           </nav>
         )}
         {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra} data-lingua="it">Italiano</a></p>}
-        {tappe.length > 0 && (
-          <nav class="tappe-studio" aria-label={en ? 'Study this topic' : 'Studia questo argomento'}>
-            <ol>{tappe.map((p, i) => (
-              <li><a href={p.href} aria-current={p.slug === sezione ? 'step' : undefined}>
-                <span aria-hidden="true">{i + 1}</span>{p.titolo}
-              </a></li>
-            ))}</ol>
-          </nav>
-        )}
+        {materia && argomento && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '') && <>
+          <Concentrazione lingua={lingua} />
+          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
+        </>}
         <slot />
         {(precedente || avanti) && (
           <nav class="passi" aria-label="Pagina precedente e successiva">
@@ -271,7 +269,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
   </dialog>
 
   <script>
@@ -423,17 +421,31 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     const d = document.getElementById('cassetto-indice') as HTMLDialogElement;
     const largo = matchMedia('(min-width: 60rem)');
     const bottone = document.querySelector<HTMLButtonElement>('[data-apri-indice]');
-    const aggiorna = () => bottone?.setAttribute('aria-pressed', String(largo.matches && !document.documentElement.classList.contains('indice-chiuso')));
-    aggiorna(); largo.addEventListener('change', aggiorna);
+    const usaCassetto = () => !largo.matches || document.documentElement.classList.contains('studio-concentrato');
+    const aggiorna = () => {
+      const aperto = usaCassetto() ? d.open : !document.documentElement.classList.contains('indice-chiuso');
+      bottone?.setAttribute('aria-pressed', String(aperto));
+      bottone?.setAttribute('aria-expanded', String(aperto));
+    };
+    aggiorna(); largo.addEventListener('change', aggiorna); addEventListener('resize', aggiorna);
     bottone?.addEventListener('click', () => {
-      if (largo.matches) {
+      if (!usaCassetto()) {
         const chiuso = document.documentElement.classList.toggle('indice-chiuso');
         try { localStorage.setItem('indice', chiuso ? 'chiuso' : 'aperto'); } catch {}
         aggiorna();
-      } else d.showModal();
+      } else { d.showModal(); aggiorna(); }
     });
+    d.addEventListener('close', aggiorna);
     document.querySelector('[data-chiudi-indice]')?.addEventListener('click', () => d.close());
     d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+    document.querySelectorAll<HTMLAnchorElement>('.indice-cerca-link').forEach((a) => a.addEventListener('click', (e) => {
+      const campo = document.querySelector<HTMLInputElement>('#ricerca-principale input[type="search"]');
+      if (!campo) return;
+      e.preventDefault();
+      if (d.open) d.close();
+      campo.scrollIntoView({ block: 'center' });
+      campo.focus({ preventScroll: true });
+    }));
 
     // Torna su: compare dopo un po' di scorrimento, riporta in cima.
     const su = document.querySelector<HTMLButtonElement>('.torna-su');

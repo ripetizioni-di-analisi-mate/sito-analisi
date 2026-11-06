@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import Stato from '../components/Stato.astro';
 import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
+import MaterialiStudente from '../components/MaterialiStudente.astro';
 import GratisHome from '../components/GratisHome.astro';
 import PacchettiHome from '../components/PacchettiHome.astro';
 import PercorsiHome from '../components/PercorsiHome.astro';
@@ -27,7 +28,7 @@ const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pa
 // (da solo o dentro un pacchetto). Il Worker scrive su <html> data-materie con le materie e le chiavi video-<slug>.
 const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.attiva).map((m) => {
   const v = videoDi(m.slug);
-  const teoria = `html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .pulsante-teoria .ok{display:inline-flex}`;
+  const teoria = `html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .pulsante-teoria .ok{display:inline-flex}html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .nota-anteprima-scheda{display:none}html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .nota-accesso-scheda{display:inline}`;
   const video = v ? [v.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(v.slug)).map((p) => p.slug)]
     .map((s) => `html[data-materie~="${chiaveVideo(s)}"] [data-materia="${m.slug}"] .pulsante-video .ok{display:inline-flex}`).join('') : '';
   return teoria + video;
@@ -42,16 +43,17 @@ const icona = {
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
-<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} seo={{ titolo: SEO(lingua).home }}>
-  {t.homeSopra && <p class="sopratitolo">{t.homeSopra}</p>}
-  <h1>{t.homeTitolo}</h1>
+<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} sezione="home" ricercaPrincipale seo={{ titolo: SEO(lingua).home }}>
+  <div class="home-intro solo-ospiti">
+    <p class="sopratitolo">{lingua === 'it' ? 'Università · Superiori · Concorsi' : 'University · Secondary school · Entrance tests'}</p>
+    <h1>{t.homeTitolo}</h1>
+    <p class="sommario">{lingua === 'it' ? 'Scegli la materia. Trovi teoria, esercizi spiegati passo dopo passo e prove per esercitarti in autonomia.' : 'Choose a subject. Find theory, step-by-step worked examples and exercises to practise on your own.'}</p>
+  </div>
+  <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
-  <div class="solo-ospiti">
-    <p class="sommario">{t.homeSommario}</p>
-    <Presentazione lingua={lingua} />
-  </div>
-  <form class="cerca-home" action={link(lingua, '/cerca')} role="search">
+  <MaterialiStudente lingua={lingua} />
+  <form class="cerca-home" id="ricerca-principale" action={link(lingua, '/cerca')} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
     </div>
@@ -66,13 +68,13 @@ const icona = {
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
-  <GratisHome lingua={lingua} />
+  <div class="risorse-home"><GratisHome lingua={lingua} /></div>
   {lingua === 'it' && <PacchettiHome />}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
     <details class="gruppo" open={i === 0} id={id}>
-      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
+      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
       {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
@@ -88,7 +90,7 @@ const icona = {
       {(() => {
         // Nelle aree senza sottogruppi con almeno una materia pronta (Università, Percorso per principianti) le materie in preparazione stanno in una riga di testo;
         // se nessuna è pronta (TOLC, OFA e test di ingresso) restano schede «in preparazione».
-        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = false) => (
+        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = true) => (
           <ul class="griglia-materie">
             {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
               <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
@@ -96,21 +98,18 @@ const icona = {
                   const v = videoDi(m.slug);
                   return (
                     <>
-                      <a class="scheda-materia" href={link(lingua, `/${m.slug}`)}>
+                      <div class="scheda-materia">
                         <h3>{nome}</h3>
                         <p>{m.descrizione}</p>
                         <span class="conti-materia">{conti(m)}</span>
-                      </a>
+                      </div>
                       <span class="piede-scheda pulsanti-scheda">
-                        {v && (
-                          <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}>
-                            <Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span>
-                          </a>
-                        )}
                         <a class="pulsante-scheda pulsante-teoria" href={link(lingua, `/${m.slug}`)}>
-                          <Fragment set:html={icona.teoria} />Teoria ed esercizi{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
+                          <Fragment set:html={icona.teoria} />Teoria ed esercizi<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
                         </a>
+                        {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
                       </span>
+                      <small class="accesso-scheda">{m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : 'Tutto gratuito'}</small>
                     </>
                   );
                 })() : m.attiva ? (
@@ -135,14 +134,39 @@ const icona = {
         );
         return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
           <details class="sottogruppo">
-            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
+            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.filter(({ m }) => m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
             {griglia(b.materie)}
           </details>
-        ) : griglia(b.materie, lingua === 'it' && b.materie.some(({ m }) => m.attiva)));
+        ) : griglia(b.materie));
       })()}
     </details>
   ))}
+  <section class="home-lezioni solo-ospiti" aria-labelledby="home-servizi">
+    <h2 id="home-servizi">{lingua === 'it' ? 'Studiare con Carmine' : 'Study with Carmine'}</h2>
+    <p>{lingua === 'it' ? 'Oltre ai materiali puoi seguire le lezioni registrate, prenotare una lezione individuale o partecipare a un corso di gruppo.' : 'Explore the materials or study with Carmine through recorded courses and live lessons.'}</p>
+    {lingua === 'it' && <nav aria-label="Lezioni con Carmine"><a href="/videocorsi">Videocorsi registrati <span aria-hidden="true">→</span></a><a href="/prenota">Lezione individuale <span aria-hidden="true">→</span></a><a href="/corsi-di-gruppo">Corso di gruppo <span aria-hidden="true">→</span></a></nav>}
+    <Presentazione lingua={lingua} />
+  </section>
 </Base>
+<style>
+  .home-intro{margin-bottom:1.4rem}.home-intro h1{max-width:24ch}.home-intro .sommario{margin-bottom:0}
+  .home-personale{margin-bottom:1.4rem}.catalogo-testa{scroll-margin-top:6rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;margin:2rem 0 .8rem;font-family:var(--ui)}
+  .catalogo-testa h2{margin:0;font-size:1.3rem}.catalogo-testa>span{color:var(--inchiostro-2);font-size:.88rem}
+  :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-left-width:3px;box-shadow:none;background:var(--carta)}
+  .scheda-materia{display:flex;flex-direction:column;gap:.55rem;padding:1rem 1.1rem .75rem;flex:1}
+  .scheda-materia h3{margin:0;color:var(--inchiostro);font-size:1.12rem;line-height:1.35}
+  .scheda-materia p{margin:0;font-size:.95rem;line-height:1.5;color:var(--inchiostro-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .conti-materia{font:400 .76rem/1.4 var(--ui);color:var(--inchiostro-2);margin-top:auto}
+  :global(.home-chiarezza .pulsanti-scheda){justify-content:flex-start;flex-wrap:wrap;padding:.2rem 1.1rem .3rem;gap:.6rem;border:0;background:none}
+  :global(.home-chiarezza .pulsante-scheda){font-size:.85rem;background:none;border:0;border-radius:0;padding:.25rem 0;color:var(--accento);gap:.35rem}
+  :global(.home-chiarezza .pulsante-scheda:hover){text-decoration:underline;background:none}
+  .accesso-scheda{display:block;font:400 .76rem var(--ui);padding:0 1.1rem 1rem;color:var(--inchiostro-2)}
+  .nota-accesso-scheda{display:none}
+  .home-lezioni{border-top:1px solid var(--riga);margin-top:2.5rem;padding-top:1.3rem}.home-lezioni h2{font-size:1.4rem;margin:0 0 .6rem}.home-lezioni>p{font-size:1rem;color:var(--inchiostro-2)}
+  .home-lezioni nav{display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;margin:1rem 0 1.4rem;font:600 .95rem var(--ui)}
+  :global(html.collegato.home-chiarezza .risorse-home){margin-top:1rem;font-size:.9rem}
+  @media(max-width:560px){.catalogo-testa{margin-top:1.5rem}.scheda-materia{padding:.9rem}.accesso-scheda{padding-left:.9rem}:global(.home-chiarezza .pulsanti-scheda){padding-left:.9rem}}
+</style>
 <script>
   function apriPercorso(hash: string) {
     const gruppo = document.getElementById(hash.slice(1));

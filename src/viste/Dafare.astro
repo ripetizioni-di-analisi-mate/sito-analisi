@@ -5,7 +5,7 @@ import { getCollection, render } from 'astro:content';
 import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
-import { numero, perArgomento } from '../lib/nav';
+import { numero, perArgomento, vicini, disponibilitaStudio } from '../lib/nav';
 import { risultatoDi } from '../lib/risposte';
 import VerificaRisposta from '../components/VerificaRisposta.astro';
 interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
@@ -25,6 +25,7 @@ const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomen
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi`);
 const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.esercizio} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi/${numero(v.id)}`) };
+const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua)).successivo;
 ---
 <Base
   titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
@@ -40,7 +41,7 @@ const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi, href: lista }, { titolo: `${t.esercizio} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi"
   precedente={passo(fratelli[i - 1], tPrec) ?? { titolo: t.tuttiDaFare, sotto: arg.breve, href: lista }}
-  successivo={passo(fratelli[i + 1], tSucc)}
+  successivo={passo(fratelli[i + 1], tSucc) ?? fineEsercizi}
   lingua={lingua} nonTradotta={!tradotta}
 >
   <p class="sopratitolo">{t.esercizioDaFare} {n}</p>
