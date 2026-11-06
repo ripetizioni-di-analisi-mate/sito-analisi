@@ -26,6 +26,22 @@ const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
     </div>
     <p class="compat-nota">Gratuito, anche senza account. Il compito si conserva senza dati personali per migliorare il materiale: copri nome e matricola prima della foto (<a href="/privacy">informativa</a>).</p>
   </form>
+  <div class="compat-attesa" id="compat-attesa" hidden>
+    <div class="compat-attesa-testa">
+      <span class="compat-spinner" aria-hidden="true"></span>
+      <div role="status" aria-live="polite" aria-atomic="true">
+        <strong>Verifica compatibilità in corso</strong>
+        <p id="compat-fase">Preparazione del compito…</p>
+      </div>
+    </div>
+    <div class="compat-loading" role="progressbar" aria-label="Verifica compatibilità in corso" aria-describedby="compat-fase"><span></span></div>
+    <ol class="compat-passaggi" aria-label="Fasi della verifica">
+      <li data-fase="lettura">Lettura del compito</li>
+      <li data-fase="confronto">Confronto con il materiale</li>
+      <li data-fase="risultato">Risultato</li>
+    </ol>
+    <p class="compat-attesa-nota" id="compat-attesa-nota">Può richiedere qualche istante. Attendi qui: il risultato apparirà automaticamente.</p>
+  </div>
   <section class="compat-esito" id="compat-esito" hidden aria-live="polite"></section>
 </div>
 
@@ -53,6 +69,29 @@ const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
   .compat-tasti button:disabled { opacity: 0.6; cursor: wait; }
   .compat-stato { margin: 0; min-height: 0; }
   .compat-nota { margin: 0; font-size: 0.82rem; color: var(--inchiostro-2); }
+
+  .compat-attesa[hidden] { display: none; }
+  .compat-attesa { margin-top: 1rem; padding: 1rem; border: 1px solid #bcd7d1; border-radius: var(--raggio); background: #f0f7f4; color: var(--inchiostro); }
+  .compat-attesa-testa { display: flex; align-items: center; gap: 0.75rem; }
+  .compat-attesa-testa strong { display: block; font-size: 1rem; line-height: 1.4; }
+  .compat-attesa-testa p { margin: 0.15rem 0 0; font-size: 0.9rem; line-height: 1.5; color: var(--inchiostro-2); }
+  .compat-spinner { flex: 0 0 auto; width: 1.3rem; height: 1.3rem; border: 3px solid #c7ded7; border-top-color: var(--accento); border-radius: 50%; animation: compat-gira 0.85s linear infinite; }
+  .compat-loading { height: 8px; margin: 0.9rem 0 0.75rem; overflow: hidden; border-radius: 999px; background: #d8e9e3; }
+  .compat-loading span { display: block; width: 40%; height: 100%; border-radius: inherit; background: var(--accento); animation: compat-scorri 1.6s ease-in-out infinite alternate; }
+  .compat-passaggi { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; list-style: none; padding: 0; margin: 0; counter-reset: compat-fasi; font-size: 0.78rem; line-height: 1.5; color: var(--inchiostro-2); }
+  .compat-passaggi li { display: flex; align-items: center; gap: 0.3rem; counter-increment: compat-fasi; }
+  .compat-passaggi li::before { content: counter(compat-fasi); display: inline-grid; place-items: center; width: 1.15rem; height: 1.15rem; border: 1px solid #bcd7d1; border-radius: 50%; font-size: 0.7rem; }
+  .compat-passaggi li[aria-current="step"] { color: var(--accento); font-weight: 700; }
+  .compat-passaggi li[aria-current="step"]::before, .compat-passaggi li.completato::before { background: var(--accento); border-color: var(--accento); color: white; }
+  .compat-passaggi li.completato::before { content: '✓'; }
+  .compat-attesa-nota { margin: 0.75rem 0 0; font-size: 0.8rem; line-height: 1.5; color: var(--inchiostro-2); }
+  .compat-tasti button[aria-busy="true"]:disabled { opacity: 1; }
+  @keyframes compat-gira { to { transform: rotate(360deg); } }
+  @keyframes compat-scorri { from { transform: translateX(-75%); } to { transform: translateX(225%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .compat-spinner, .compat-loading span { animation: none; }
+    .compat-loading span { width: 100%; background: repeating-linear-gradient(110deg, var(--accento) 0 12px, #82afa3 12px 24px); }
+  }
 
   .compat-esito { margin-top: 1.4rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; }
   .compat-sintesi { padding: 0.9rem 1rem 0.8rem; border-bottom: 1px solid var(--riga); }
