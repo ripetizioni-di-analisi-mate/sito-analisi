@@ -11,6 +11,7 @@ import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { nomeDallEmail } from './nomi.mjs';
 import { aggiungi, risposta, settimanaDi, giornoRoma } from './livelli.mjs';
+import { creaTabelleAvvisiLega } from './avvisi-lega.mjs';
 
 const ALFABETO = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const casuale = (n) => [...crypto.getRandomValues(new Uint8Array(n))].map((b) => ALFABETO[b % ALFABETO.length]).join('');
@@ -39,6 +40,7 @@ export function nomePubblico(u) {
 
 // ---------- tabelle ----------
 export function creaTabelleSfide(sql) {
+  creaTabelleAvvisiLega(sql);
   sql.exec(`
     CREATE TABLE IF NOT EXISTS leghe (email TEXT, settimana TEXT, lega INTEGER, gruppo INTEGER, entrato INTEGER, PRIMARY KEY (email, settimana));
     CREATE INDEX IF NOT EXISTS leghe_gruppo ON leghe (settimana, lega, gruppo);
@@ -61,13 +63,19 @@ export function creaTabelleSfide(sql) {
 // ================= leghe settimanali =================
 function classificaGruppo(ar, settimana, lega, gruppo) {
   const membri = ar.righe(`SELECT l.email, l.entrato, u.nome, u.soprannome, u.pubblico, COALESCE(u.exp, 0) AS tot
-    FROM leghe l JOIN utenti u ON u.email = l.email WHERE l.settimana = ? AND l.lega = ? AND l.gruppo = ?`, settimana, lega, gruppo);
+    FROM leghe l JOIN utenti u ON u.email = l.email WHERE l.settimana = ? AND l.lega = ? AND l.gruppo = ? ORDER BY l.entrato, l.email`, settimana, lega, gruppo);
   if (!membri.length) return [];
   const da = inizioGiorno(settimana), a = inizioGiorno(spostaGiorno(settimana, 7));
   const exp = new Map(ar.righe(`SELECT email, SUM(punti) AS p FROM exp WHERE quando >= ? AND quando < ? AND email IN (${membri.map(() => '?').join(',')}) GROUP BY email`,
     da, a, ...membri.map((m) => m.email)).map((r) => [r.email, r.p]));
   return membri.map((m) => ({ ...m, settimanali: exp.get(m.email) || 0 }))
     .sort((x, y) => y.settimanali - x.settimanali || x.entrato - y.entrato);
+}
+
+export function fotografiaLega(ar, email) {
+  const settimana = settimanaDi()[0];
+  const io = ar.riga('SELECT lega, gruppo FROM leghe WHERE email = ? AND settimana = ?', email, settimana);
+  return io ? { settimana, ...io, membri: classificaGruppo(ar, settimana, io.lega, io.gruppo) } : null;
 }
 
 // Prima attività della settimana: si chiude la settimana precedente dello studente (sale, resta o scende)
@@ -99,13 +107,13 @@ function statoLega(ar, c) {
   const nomi = l === 'en' ? LEGHE_EN : LEGHE;
   const sett = settimanaDi()[0];
   const fine = inizioGiorno(spostaGiorno(sett, 7));
-  const u = ar.riga('SELECT email, nome, soprannome, COALESCE(pubblico, 1) AS pubblico, COALESCE(lega, 0) AS lega FROM utenti WHERE email = ?', email);
+  const u = ar.riga('SELECT email, nome, soprannome, COALESCE(pubblico, 1) AS pubblico, COALESCE(lega, 0) AS lega, COALESCE(avvisi_lega, promemoria, 1) AS avvisi_lega FROM utenti WHERE email = ?', email);
   if (!u) return { errore: 'utente' };
   const io = ar.riga('SELECT * FROM leghe WHERE email = ? AND settimana = ?', email, sett);
   const esitoRiga = ar.riga('SELECT * FROM leghe_esiti WHERE email = ? AND settimana = ?', email, spostaGiorno(sett, -7));
   const esito = esitoRiga ? { posizione: esitoRiga.posizione, membri: esitoRiga.membri, da: esitoRiga.da, a: esitoRiga.a, nomeDa: nomi[esitoRiga.da], nomeA: nomi[esitoRiga.a] } : null;
   const base = {
-    leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, esito,
+    leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, avvisiLega: u.avvisi_lega !== 0, esito,
   };
   if (!io) return { ...base, lega: u.lega, nomeLega: nomi[u.lega], attesa: true };
   const cl = classificaGruppo(ar, sett, io.lega, io.gruppo);
@@ -368,6 +376,11 @@ export function archivioSfide(ar, pathname, c) {
       ar.sql.exec('UPDATE utenti SET soprannome = ?, pubblico = ? WHERE email = ?', s || null, c.pubblico ? 1 : 0, c.email);
       return { ok: true };
     }
+    case '/sfi-avvisi': {
+      ar.sql.exec('UPDATE utenti SET avvisi_lega = ? WHERE email = ?', c.attivi === true ? 1 : 0, c.email);
+      if (c.attivi !== true) ar.sql.exec("DELETE FROM leghe_avvisi WHERE email = ? AND stato IN ('attesa', 'invio')", c.email);
+      return { ok: true };
+    }
     case '/sfi-lobby': return lobby(ar, c);
     case '/sfi-esci': ar.sql.exec('UPDATE presenza SET cerca = 0, ultimo = 0 WHERE email = ?', c.email); return { ok: true };
     case '/sfi-crea': return creaDuello(ar, c);
@@ -426,6 +439,7 @@ export async function gestisciSfide(req, env, ctx, p, h) {
 
   if (p === '/api/lega') return json(await aDO(env, '/sfi-lega', { email: io.email, lingua: l }), 200, { 'cache-control': 'no-store' });
   if (p === '/api/lega/nome' && POST) return json(await aDO(env, '/sfi-nome', { email: io.email, soprannome: corpo.soprannome, pubblico: corpo.pubblico !== false }));
+  if (p === '/api/lega/avvisi' && POST) return json(await aDO(env, '/sfi-avvisi', { email: io.email, attivi: corpo.attivi === true }));
 
   const cat = await catalogoDomande(env);
   if (p === '/api/duelli/lobby' && POST) {

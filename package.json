@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:lega": "node --test strumenti/avvisi-lega.test.mjs",
     "test:pacchetti": "node --test strumenti/pacchetti.test.mjs",
     "test:compatibilita": "node --test strumenti/compatibilita.test.mjs",
     "dev": "astro dev",

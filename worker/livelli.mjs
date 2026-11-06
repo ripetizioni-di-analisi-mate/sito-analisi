@@ -5,7 +5,8 @@ import {
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
-import { entraInLega, riassuntoLega } from './sfide.mjs';
+import { entraInLega, riassuntoLega, fotografiaLega } from './sfide.mjs';
+import { accodaSorpassi } from './avvisi-lega.mjs';
 
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
@@ -94,10 +95,12 @@ const expDi = (ar, email) => ar.riga('SELECT COALESCE(exp, 0) AS exp FROM utenti
 
 export function aggiungi(ar, email, punti, tipo, nota = null) {
   if (!punti) return;
+  // La fotografia precede gli EXP, anche al primo ingresso della settimana.
+  entraInLega(ar, email);
+  const prima = fotografiaLega(ar, email);
   ar.sql.exec('INSERT INTO exp (email, quando, tipo, punti, nota) VALUES (?, ?, ?, ?, ?)', email, Date.now(), tipo, punti, nota);
   ar.sql.exec('UPDATE utenti SET exp = COALESCE(exp, 0) + ? WHERE email = ?', punti, email);
-  // I primi EXP della settimana fanno entrare lo studente in un gruppo della sua lega (worker/sfide.mjs).
-  entraInLega(ar, email);
+  if (punti > 0 && prima) accodaSorpassi(ar, email, prima, fotografiaLega(ar, email));
 }
 function premia(ar, email, codice, nome, punti, nuovi) {
   if (ar.riga('SELECT codice FROM premi WHERE email = ? AND codice = ?', email, codice)) return;

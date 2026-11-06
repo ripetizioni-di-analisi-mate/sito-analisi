@@ -42,12 +42,14 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     </section>
 
     <section class="lega-nome-pubblico" hidden>
-      <h2>Il tuo nome nelle classifiche</h2>
+      <h2>Le tue preferenze</h2>
       <form>
         <label>Nome mostrato agli altri studenti <input type="text" name="soprannome" maxlength="24" placeholder="" autocomplete="nickname" /></label>
         <label class="spunta"><input type="checkbox" name="pubblico" /> Mostra il mio nome nelle classifiche e nell'elenco degli studenti online dei duelli</label>
         <p class="nota">Senza la spunta il tuo nome compare come «Studente» e non sei nell'elenco degli studenti online; puoi comunque giocare i duelli con un link.</p>
+        <label class="spunta"><input type="checkbox" name="avvisiLega" /> Avvisami via email quando uno studente mi supera e scendo in classifica</label>
         <button type="submit" class="bottone-secondario">Salva</button> <span class="salvato" hidden>Salvato.</span>
+        <span class="errore-salvataggio" role="alert" hidden>Le preferenze non sono state salvate. Riprova.</span>
       </form>
     </section>
   </div>
@@ -148,14 +150,19 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     (f.elements.namedItem('soprannome') as HTMLInputElement).value = d.soprannome;
     (f.elements.namedItem('soprannome') as HTMLInputElement).placeholder = d.pubblico ? d.nome : 'Studente';
     (f.elements.namedItem('pubblico') as HTMLInputElement).checked = d.pubblico;
+    (f.elements.namedItem('avvisiLega') as HTMLInputElement).checked = d.avvisiLega;
     sez.hidden = false;
   }
   radice.querySelector('.lega-nome-pubblico form')!.addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.target as HTMLFormElement;
+    f.querySelector<HTMLElement>('.salvato')!.hidden = true;
+    f.querySelector<HTMLElement>('.errore-salvataggio')!.hidden = true;
     const r = await fetch('/api/lega/nome', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
       soprannome: (f.elements.namedItem('soprannome') as HTMLInputElement).value, pubblico: (f.elements.namedItem('pubblico') as HTMLInputElement).checked }) }).catch(() => null);
-    if (r?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(); }
+    const avvisi = await fetch('/api/lega/avvisi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ attivi: (f.elements.namedItem('avvisiLega') as HTMLInputElement).checked }) }).catch(() => null);
+    if (r?.ok && avvisi?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(); }
+    else f.querySelector<HTMLElement>('.errore-salvataggio')!.hidden = false;
   });
   carica();
 </script>

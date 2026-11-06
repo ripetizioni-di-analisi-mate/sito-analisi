@@ -27,6 +27,7 @@ import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, do
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
 import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
+import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from './avvisi-lega.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
@@ -113,7 +114,10 @@ const normalizza = (e) => String(e || '').trim().toLowerCase();
 const DATI_VALIDI = 3 * 60 * 1000;
 const MODIFICHE_DASHBOARD = new Set(['/abilita', '/revoca', '/dispositivo-rimuovi', '/utente-password', '/segnalazione-letta', '/registra-acquisto', '/utente-crea']);
 export class Archivio {
-  constructor(state) {
+  constructor(state, env) {
+    this.state = state;
+    this.env = env;
+    this.avvisiLegaDaProgrammare = true;
     this.sql = state.storage.sql;
     this.sql.exec(`
       CREATE TABLE IF NOT EXISTS accessi (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materie TEXT, origine TEXT, creato TEXT);
@@ -173,6 +177,10 @@ export class Archivio {
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
+  async alarm() {
+    try { await inviaAvvisoLega(this, this.env, firmaToken); }
+    finally { this.avvisiLegaDaProgrammare = true; await programmaAvvisiLega(this); }
+  }
   dispositiviDi(email) { return this.righe('SELECT id, nome, creato, ultimo_uso FROM dispositivi WHERE email = ? ORDER BY ultimo_uso DESC', email); }
   materieDi(email) { return this.righe('SELECT materia FROM abilitazioni WHERE email = ?', email).map((r) => r.materia); }
 
@@ -184,7 +192,8 @@ export class Archivio {
     const { pathname } = new URL(req.url);
     if (pathname !== '/dati') {
       if (MODIFICHE_DASHBOARD.has(pathname)) this.copiaDati = null;
-      return this.rispondi(req, pathname);
+      try { return await this.rispondi(req, pathname); }
+      finally { await programmaAvvisiLega(this); }
     }
     if (this.copiaDati && Date.now() - this.copiaDati.t < DATI_VALIDI) return new Response(this.copiaDati.corpo, { headers: { 'content-type': 'application/json' } });
     const r = await this.rispondi(req, pathname);
@@ -751,7 +760,7 @@ export default {
     }
 
     // ===== sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs) =====
-    if (p === '/api/lega' || p === '/api/lega/nome' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
+    if (p === '/api/lega' || p === '/api/lega/nome' || p === '/api/lega/avvisi' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
       const r = await gestisciSfide(req, env, ctx, p, { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi });
       if (r) return r;
     }
@@ -1040,6 +1049,13 @@ export default {
       const sale = nuovoSale();
       const r = await aDO(env, '/utente-password', { email: t.e, hash: await hashPassword(nuova, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
       return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d) });
+    }
+
+    if (p === '/lega/avvisi/disattiva') {
+      const tok = await leggiToken(env, url.searchParams.get('t') || '');
+      const ok = tok?.scopo === 'avvisi-lega' && typeof tok.r === 'string';
+      if (ok && POST) await aDO(env, '/sfi-avvisi', { email: tok.r, attivi: false });
+      return new Response(paginaAvvisiDisattivati(ok, ok && POST), { status: ok ? 200 : 400, headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex', 'cache-control': 'no-store' } });
     }
 
     // ===== promemoria: link «Non ricevere più questi promemoria» (anche one-click dei programmi di posta) =====
