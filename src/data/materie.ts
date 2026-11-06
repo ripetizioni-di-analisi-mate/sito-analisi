@@ -439,7 +439,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'matematica-semestre-filtro',
     titolo: 'Basi di matematica per il semestre filtro',
     breve: 'Basi di matematica',
-    descrizione: 'Modulo preparatorio gratuito per affrontare Fisica e Chimica: calcolo, proporzioni, potenze, unità di misura, formule, grafici, logaritmi, trigonometria e vettori, con esercizi svolti e domande a tempo.',
+    descrizione: 'Modulo preparatorio per affrontare Fisica e Chimica: calcolo, proporzioni, potenze, unità di misura, formule, grafici, logaritmi, trigonometria e vettori, con esercizi svolti e domande a tempo.',
     colore: '#2f6f68',
     gruppo: 'Semestre filtro',
     attiva: true,

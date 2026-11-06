@@ -8,14 +8,14 @@ const basi = materia === 'matematica-semestre-filtro';
 const corsi = MATERIE.filter(m => m.attiva && ['fisica-semestre-filtro', 'chimica-semestre-filtro'].includes(m.slug));
 ---
 <aside class="basi-semestre" aria-label={en ? 'Preparatory mathematics' : 'Matematica preparatoria'}>
-  <strong>{basi ? (en ? 'Free preparatory module' : 'Modulo preparatorio gratuito') : (en ? 'Before starting: mathematics' : 'Prima di iniziare: la matematica')}</strong>
+  <strong>{basi ? (en ? 'Preparatory module' : 'Modulo preparatorio') : (en ? 'Before starting: mathematics' : 'Prima di iniziare: la matematica')}</strong>
   {basi ? (
     <>
       <p>{en ? 'Mathematics supports your study of Physics and Chemistry. The three national filter-semester exams are Biology, Physics, and Chemistry with introductory biochemistry; this module develops the mathematical prerequisites.' : 'La matematica serve per affrontare gli esercizi di Fisica e Chimica. I tre esami nazionali del semestre filtro sono Biologia, Fisica e Chimica e propedeutica biochimica; questo modulo prepara alle conoscenze matematiche richieste.'}</p>
       <p class="rimandi"><a href="https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027" target="_blank" rel="noopener">{en ? 'MUR programmes 2026/2027' : 'Programmi MUR 2026/2027'}</a>{corsi.map(m => <a href={link(lingua, `/${m.slug}`)}>{m.slug.startsWith('fisica') ? (en ? 'Continue with Physics →' : 'Prosegui con Fisica →') : (en ? 'Continue with Chemistry →' : 'Prosegui con Chimica →')}</a>)}</p>
     </>
   ) : (
-    <p><a href={link(lingua, '/matematica-semestre-filtro')}>{en ? 'Mathematics foundations for the filter semester' : 'Basi di matematica per il semestre filtro'}</a>{en ? ': a free module with formulas, conversions, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed questions.' : ': modulo gratuito su formule, conversioni, grafici, logaritmi, trigonometria e vettori. Teoria, esercizi svolti e domande a tempo.'}</p>
+    <p><a href={link(lingua, '/matematica-semestre-filtro')}>{en ? 'Mathematics foundations for the filter semester' : 'Basi di matematica per il semestre filtro'}</a>{en ? ': formulas, conversions, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed questions.' : ': formule, conversioni, grafici, logaritmi, trigonometria e vettori. Teoria, esercizi svolti e domande a tempo.'}</p>
   )}
 </aside>
 

@@ -1165,6 +1165,7 @@ export default {
             'fisica-1': env.PADDLE_PREZZO_FISICA_1 || null,
             'fisica-2': env.PADDLE_PREZZO_FISICA_2 || null,
             'fisica-semestre-filtro': env.PADDLE_PREZZO_FISICA_SEMESTRE_FILTRO || null,
+            'matematica-semestre-filtro': env.PADDLE_PREZZO_MATEMATICA_SEMESTRE_FILTRO || null,
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'matematica-superiori-4': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_4 || null,

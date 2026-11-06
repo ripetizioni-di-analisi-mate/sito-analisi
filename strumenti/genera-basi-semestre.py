@@ -648,7 +648,7 @@ def genera():
         scrivi(f'src/content/teoria/{MATERIA}/{slug}.md',f'---\ntitolo: {json.dumps(titolo,ensure_ascii=False)}\nsommario: {json.dumps(sommario,ensure_ascii=False)}\n---\n'+TEORIE[i])
         for j in range(4):
             v=svolti[i][j*2:j*2+2]; ancore=list(dict.fromkeys(x['ancora'] for x in v))
-            testo=f'---\ntitolo: {json.dumps(titoli_schede[i][j],ensure_ascii=False)}\ngratis: true\nteoria: [{", ".join(ancore)}]\nparole: {json.dumps([breve,"semestre filtro","matematica preparatoria"],ensure_ascii=False)}\n---\n'
+            testo=f'---\ntitolo: {json.dumps(titoli_schede[i][j],ensure_ascii=False)}\ngratis: {str(j < 3).lower()}\nteoria: [{", ".join(ancore)}]\nparole: {json.dumps([breve,"semestre filtro","matematica preparatoria"],ensure_ascii=False)}\n---\n'
             for n,x in enumerate(v,1):
                 testo+=f'\n## Esercizio {n}\n\n{x["traccia"]}\n\n$$\n{x["passaggi"]}\n$$\n\n<div class="spiegazione">\n\n{x["spiegazione"]}\n\n</div>\n'
             scrivi(f'src/content/svolti/{MATERIA}/{slug}/{j+1}.md',testo)
