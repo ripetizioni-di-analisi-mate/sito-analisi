@@ -124,8 +124,12 @@ export function avviaCompatibilita() {
 
   const mostraFile = () => {
     elencoFile.innerHTML = files.map((f, i) => `<li>${esc(f.name)} <button type="button" data-togli="${i}" aria-label="Togli ${esc(f.name)}">×</button></li>`).join('');
+    zona.classList.toggle('con-file', files.length > 0);
+    document.getElementById('compat-carica-titolo')!.textContent = files.length ? `${files.length} ${files.length === 1 ? 'file pronto' : 'file pronti'}` : 'Carica il tuo compito';
+    document.getElementById('compat-carica-dettaglio')!.textContent = files.length ? 'Puoi aggiungere altre pagine o togliere i file qui sotto' : 'Trascina qui i file oppure scegli dal dispositivo';
   };
   const aggiungi = (nuovi: FileList | File[]) => {
+    if (inAttesa) return;
     for (const f of Array.from(nuovi)) {
       if (!(f.type.startsWith('image/') || f.type === 'application/pdf')) { stato.textContent = `«${f.name}» non è una foto né un PDF.`; continue; }
       if (files.length < MAX_PAGINE) { files.push(f); prepara(f); }
@@ -153,6 +157,7 @@ export function avviaCompatibilita() {
     invia.textContent = si ? 'Verifica in corso…' : 'Controlla la compatibilità';
     invia.setAttribute('aria-busy', String(si));
     form.setAttribute('aria-busy', String(si));
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement>('input, textarea, [data-togli]').forEach((el) => { el.disabled = si; });
     attesa.hidden = !si;
     clearTimeout(timerAttesa);
     if (si) {
