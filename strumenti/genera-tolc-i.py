@@ -503,28 +503,32 @@ Completa: «There ___ two books on the desk».|are|is|was|has|be|Two books è pl
 Completa: «We went home ___ the lesson».|after|during of|while to|until of|at to|After seguito dal nome the lesson esprime posteriorità: siamo andati a casa dopo la lezione. Le altre sequenze non sono grammaticali nel contesto.
 ''')
 
-for slug, (title, summary, body) in THEORY.items():
-    p=ROOT/'teoria'/'tolc-i'/f'{slug}.md'; p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(f'---\ntitolo: {json.dumps(title,ensure_ascii=False)}\nsommario: {json.dumps(summary,ensure_ascii=False)}\n---\n\n{body}\n')
-    questions=QUESTIONS[slug]
-    for i,(question, choices, explanation) in enumerate(questions,1):
-        # Posizioni distribuite senza cambiare il significato delle alternative.
-        rotation=(i-1)%5
-        options=choices[-rotation:]+choices[:-rotation] if rotation else choices
-        correct=rotation+1
-        listing='\n'.join('- '+c for c in options)
-        qpath=ROOT/'domande'/'tolc-i'/slug/f'{i}.md';qpath.parent.mkdir(parents=True,exist_ok=True)
-        qpath.write_text(f'---\ncorretta: {correct}\n---\n\n{question}\n\n{listing}\n\n## Spiegazione\n\n{explanation}\n')
-        p=ROOT/'dafare'/'tolc-i'/slug/f'{i}.md';p.parent.mkdir(parents=True,exist_ok=True)
-        p.write_text(f'---\ntitolo: "Quesito {i}"\nteoria: []\nparole: []\n---\n\n{question}\n\n{listing}\n\n:::soluzione\n\n**Risposta corretta: {"ABCDE"[correct-1]}.** {explanation}\n\n:::\n')
-    # Ogni scheda raggruppa più esempi; le prime tre sono in anteprima.
-    groups=6 if len(questions)==30 else 4
-    for g in range(groups):
-        start=(len(questions)*g)//groups; end=(len(questions)*(g+1))//groups
-        blocks=[]
-        for j,(question,choices,explanation) in enumerate(questions[start:end],1):
-            listing='\n'.join('- '+c for c in choices)
-            blocks.append(f'## Esercizio {j}\n\n{question}\n\n{listing}\n\n<div class="spiegazione">\n\n**Risposta: {choices[0]}.** {explanation}\n\n</div>')
-        p=ROOT/'svolti'/'tolc-i'/slug/f'{g+1}.md';p.parent.mkdir(parents=True,exist_ok=True)
-        p.write_text(f'---\ntitolo: {json.dumps(f"{title} · scheda {g+1}",ensure_ascii=False)}\ngratis: {str(g<3).lower()}\nteoria: []\nparole: []\n---\n\n'+ '\n\n'.join(blocks)+'\n')
-print(json.dumps({'capitoli':len(THEORY),'domande':sum(map(len,QUESTIONS.values())),'schede':sum(6 if len(q)==30 else 4 for q in QUESTIONS.values())},ensure_ascii=False))
+def scrivi_materiali(materia, teorie, domande):
+    for slug, (title, summary, body) in teorie.items():
+        p=ROOT/'teoria'/materia/f'{slug}.md'; p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(f'---\ntitolo: {json.dumps(title,ensure_ascii=False)}\nsommario: {json.dumps(summary,ensure_ascii=False)}\n---\n\n{body}\n')
+        questions=domande[slug]
+        for i,(question, choices, explanation) in enumerate(questions,1):
+            # Posizioni distribuite senza cambiare il significato delle alternative.
+            rotation=(i-1)%5
+            options=choices[-rotation:]+choices[:-rotation] if rotation else choices
+            correct=rotation+1
+            listing='\n'.join('- '+c for c in options)
+            qpath=ROOT/'domande'/materia/slug/f'{i}.md';qpath.parent.mkdir(parents=True,exist_ok=True)
+            qpath.write_text(f'---\ncorretta: {correct}\n---\n\n{question}\n\n{listing}\n\n## Spiegazione\n\n{explanation}\n')
+            p=ROOT/'dafare'/materia/slug/f'{i}.md';p.parent.mkdir(parents=True,exist_ok=True)
+            p.write_text(f'---\ntitolo: "Quesito {i}"\nteoria: []\nparole: []\n---\n\n{question}\n\n{listing}\n\n:::soluzione\n\n**Risposta corretta: {"ABCDE"[correct-1]}.** {explanation}\n\n:::\n')
+        # Ogni scheda raggruppa più esempi; le prime tre sono in anteprima.
+        groups=6 if len(questions)==30 else 4
+        for g in range(groups):
+            start=(len(questions)*g)//groups; end=(len(questions)*(g+1))//groups
+            blocks=[]
+            for j,(question,choices,explanation) in enumerate(questions[start:end],1):
+                listing='\n'.join('- '+c for c in choices)
+                blocks.append(f'## Esercizio {j}\n\n{question}\n\n{listing}\n\n<div class="spiegazione">\n\n**Risposta: {choices[0]}.** {explanation}\n\n</div>')
+            p=ROOT/'svolti'/materia/slug/f'{g+1}.md';p.parent.mkdir(parents=True,exist_ok=True)
+            p.write_text(f'---\ntitolo: {json.dumps(f"{title} · scheda {g+1}",ensure_ascii=False)}\ngratis: {str(g<3).lower()}\nteoria: []\nparole: []\n---\n\n'+ '\n\n'.join(blocks)+'\n')
+
+if __name__ == "__main__":
+    scrivi_materiali("tolc-i", THEORY, QUESTIONS)
+    print(json.dumps({'capitoli':len(THEORY),'domande':sum(map(len,QUESTIONS.values())),'schede':sum(6 if len(q)==30 else 4 for q in QUESTIONS.values())},ensure_ascii=False))

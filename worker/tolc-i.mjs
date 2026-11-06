@@ -1,26 +1,30 @@
-import { creaProvaTolc, correggiSezioneTolc } from '../src/data/tolc-i.mjs';
+import { TOLC, provaTolc } from '../src/data/tolc.mjs';
+import { correggiSezioneTolc } from '../src/data/tolc-i.mjs';
 
 export async function gestisciTolcI(req, env, path, h) {
+  const materia = path.split('/')[2];
+  const conf = Object.hasOwn(TOLC, materia) ? TOLC[materia] : null;
   const risposta = (d, stato = 200) => h.json(d, stato, { 'cache-control': 'no-store' });
+  if (!conf) return risposta({ errore: 'Percorso non trovato.' }, 404);
   if (req.method !== 'POST') return risposta({ errore: 'Metodo non consentito.' }, 405);
   const io = await h.utenteCollegato(env, req).catch(() => null);
-  if (env.VENDITA !== '0' && !io?.materie?.includes('tolc-i')) {
-    return risposta({ errore: 'La simulazione completa è inclusa nell’accesso TOLC-I. Puoi iniziare dai dieci quiz in anteprima.', sblocca: '/tolc-i/sblocca' }, 403);
+  if (env.VENDITA !== '0' && !io?.materie?.includes(materia)) {
+    return risposta({ errore: `La simulazione completa è inclusa nell’accesso ${conf.nome}. Puoi iniziare dai dieci quiz in anteprima.`, sblocca: `/${materia}/sblocca` }, 403);
   }
   const b = await req.json().catch(() => ({}));
-  const dati = await h.domandeDi(env, 'tolc-i', 'it');
+  const dati = await h.domandeDi(env, materia, 'it');
   if (!dati?.argomenti) return risposta({ errore: 'Le domande non sono disponibili. Riprova tra poco.' }, 503);
-  if (path === '/api/tolc-i/inizia') {
+  if (path === `/api/${materia}/inizia`) {
     let prova;
-    try { prova = creaProvaTolc(dati.argomenti, b.inglese !== false); }
+    try { prova = provaTolc(materia, dati.argomenti, b.inglese !== false); }
     catch { return risposta({ errore: 'La banca quesiti è in aggiornamento. Riprova tra poco.' }, 503); }
     const sezioni = prova.map((s) => ({ slug: s.slug, titolo: s.titolo, minuti: s.minuti, ids: s.domande.map((q) => q.id) }));
-    const token = await h.firmaToken(env, { tipo: 'tolc-i', e: io?.email || null, t: Date.now(), sezioni });
+    const token = await h.firmaToken(env, { tipo: materia, e: io?.email || null, t: Date.now(), sezioni });
     return risposta({ token, sezioni: prova.map((s) => ({ ...s, domande: s.domande.map((q) => ({ id: q.id, testo: q.testo, scelte: q.scelte })) })) });
   }
-  if (path === '/api/tolc-i/correggi') {
+  if (path === `/api/${materia}/correggi`) {
     const tok = typeof b.token === 'string' ? await h.leggiToken(env, b.token) : null;
-    if (tok?.tipo !== 'tolc-i' || tok.e !== (io?.email || null) || !Array.isArray(tok.sezioni) || Date.now() - tok.t > 6 * 3600000) {
+    if (tok?.tipo !== materia || tok.e !== (io?.email || null) || !Array.isArray(tok.sezioni) || Date.now() - tok.t > 6 * 3600000) {
       return risposta({ errore: 'La sessione non è più valida. Avvia una nuova simulazione.' }, 400);
     }
     if (!Array.isArray(b.risposte) || b.risposte.length !== tok.sezioni.length) return risposta({ errore: 'Risposte incomplete.' }, 400);
@@ -34,7 +38,7 @@ export async function gestisciTolcI(req, env, path, h) {
       }
       sezioni.push({ slug: s.slug, titolo: s.titolo, ...correggiSezioneTolc(domande, rs, s.slug === 'inglese'), esiti: domande.map((q) => ({ id: q.id, corretta: q.corretta, spiegazione: q.spiegazione })) });
     }
-    return risposta({ sezioni, punti: sezioni.filter((s) => s.slug !== 'inglese').reduce((n, s) => n + s.punti, 0), massimo: 50, inglese: sezioni.find((s) => s.slug === 'inglese')?.punti ?? null });
+    return risposta({ sezioni, punti: sezioni.filter((s) => s.slug !== 'inglese').reduce((n, s) => n + s.punti, 0), massimo: conf.quesiti, inglese: sezioni.find((s) => s.slug === 'inglese')?.punti ?? null });
   }
   return risposta({ errore: 'Percorso non trovato.' }, 404);
 }

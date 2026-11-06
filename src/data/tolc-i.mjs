@@ -18,8 +18,8 @@ export function mescolaTolc(lista, casuale = Math.random) {
 }
 
 // Gli argomenti si alternano: la sezione Scienze comprende fisica e chimica.
-export function creaProvaTolc(argomenti, inglese = true, casuale = Math.random) {
-  return TOLC_I_SEZIONI.filter((s) => inglese || s.slug !== 'inglese').map((s) => {
+export function creaProvaTolc(argomenti, inglese = true, casuale = Math.random, sezioni = TOLC_I_SEZIONI) {
+  return sezioni.filter((s) => inglese || s.slug !== 'inglese').map((s) => {
     const pile = s.argomenti.map((a) => mescolaTolc(argomenti[a] || [], casuale));
     const domande = [];
     while (domande.length < s.numero && pile.some((p) => p.length)) {
@@ -42,7 +42,6 @@ export function correggiSezioneTolc(domande, risposte, inglese = false) {
 }
 
 // Dieci quesiti distinti sempre uguali nell'anteprima, anche cambiando argomento.
-export function anteprimaTolc(argomenti) {
-  const quote = { 'aritmetica-e-algebra': 1, geometria: 1, 'funzioni-e-grafici': 1, 'trigonometria-e-statistica': 1, logica: 2, fisica: 1, chimica: 1, 'comprensione-verbale': 1, inglese: 1 };
+export function anteprimaTolc(argomenti, quote = { 'aritmetica-e-algebra': 1, geometria: 1, 'funzioni-e-grafici': 1, 'trigonometria-e-statistica': 1, logica: 2, fisica: 1, chimica: 1, 'comprensione-verbale': 1, inglese: 1 }) {
   return Object.fromEntries(Object.entries(quote).map(([a, n]) => [a, (argomenti[a] || []).slice(0, n)]));
 }

@@ -12,4 +12,4 @@ export async function getStaticPaths() {
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
 ---
-{materia === 'tolc-i' ? <SimulazioneTolcI /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
+{['tolc-i', 'tolc-s'].includes(materia) ? <SimulazioneTolcI materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}

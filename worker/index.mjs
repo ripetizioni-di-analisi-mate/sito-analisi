@@ -9,7 +9,7 @@ import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
 import { gestisciTolcI } from './tolc-i.mjs';
-import { anteprimaTolc } from '../src/data/tolc-i.mjs';
+import { TOLC, demoTolc } from '../src/data/tolc.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
@@ -879,15 +879,16 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       let dati = await domandeDi(env, materia, l);
-      if (materia === 'tolc-i' && vendita) {
+      if (Object.hasOwn(TOLC, materia) && vendita) {
         const accesso = await utenteCollegato(env, req).catch(() => null);
-        if (!accesso?.materie?.includes('tolc-i') && dati) dati = { ...dati, argomenti: anteprimaTolc(dati.argomenti) };
+        if (!accesso?.materie?.includes(materia) && dati) dati = { ...dati, argomenti: demoTolc(materia, dati.argomenti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
       const personale = argomento === RIPASSO_OGGI;
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
+      if (!elenco.length && Object.hasOwn(TOLC, materia) && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia].nome}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
       let ordine = null;
@@ -941,7 +942,7 @@ export default {
       });
       return json({ ...base, ...r });
     }
-    if (p.startsWith('/api/tolc-i/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
+    if (p.startsWith('/api/tolc-i/') || p.startsWith('/api/tolc-s/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
     if (p === '/api/simulazione-quiz' && POST) {
       // Simulazione della prova preselettiva (materie dei concorsi): domande di più materie e argomenti,
       // pescate a turno. Il browser riceve testi e risposte; la posizione delle corrette arriva solo alla consegna.
@@ -1202,6 +1203,7 @@ export default {
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
             'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
             'tolc-i': env.PADDLE_PREZZO_TOLC_I || null,
+            'tolc-s': env.PADDLE_PREZZO_TOLC_S || null,
           },
           videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
         } : null,
