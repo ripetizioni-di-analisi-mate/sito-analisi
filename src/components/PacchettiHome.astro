@@ -1,6 +1,20 @@
-<p class="pacchetti-home"><a href="/pacchetti">Pacchetti e sconti <span aria-hidden="true">→</span></a></p>
+<a class="pacchetti-home" href="/pacchetti">
+  <span class="pacchetti-icona" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
+  </span>
+  <span class="pacchetti-testo">
+    <strong>Studia di più, spendi meno.</strong>
+    <span>Scopri pacchetti e sconti</span>
+  </span>
+  <span class="pacchetti-freccia" aria-hidden="true">→</span>
+</a>
 <style>
-  .pacchetti-home { margin: -0.75rem 0 1.35rem; font: 0.9rem/1.4 var(--ui); }
-  .pacchetti-home a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0; color: var(--azione); font-weight: 600; text-decoration: none; }
-  .pacchetti-home a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .pacchetti-home { display: flex; align-items: center; gap: .65rem; margin: -.55rem 0 1.25rem; padding: .55rem .75rem; border: 1px solid color-mix(in srgb,var(--azione) 22%,var(--riga)); border-radius: 8px; background: color-mix(in srgb,var(--azione) 5%,var(--carta)); color: var(--inchiostro); text-decoration: none; font-family: var(--ui); }
+  .pacchetti-home:hover { border-color: var(--azione); background: color-mix(in srgb,var(--azione) 9%,var(--carta)); }
+  .pacchetti-icona { display: grid; place-items: center; flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--azione); color: var(--carta); }
+  .pacchetti-icona svg { width: 1rem; height: 1rem; }
+  .pacchetti-testo { display: flex; flex-wrap: wrap; align-items: baseline; gap: .05rem .65rem; min-width: 0; }
+  .pacchetti-testo strong { font-size: .95rem; font-weight: 600; line-height: 1.35; }
+  .pacchetti-testo > span { font-size: .85rem; font-weight: 600; line-height: 1.35; color: var(--azione); }
+  .pacchetti-freccia { flex: none; margin-left: auto; color: var(--azione); font-size: 1.1rem; line-height: 1; }
 </style>
