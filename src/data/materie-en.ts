@@ -222,8 +222,19 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-2': {
     titolo: 'Physics, 2nd year',
     breve: 'Physics 2nd year',
-    descrizione: 'The physics syllabus of the 2nd year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'Second-year high school physics: motion, forces, work and energy, temperature, heat and geometrical optics. Theory, worked problems and timed questions for class tests.',
+    argomenti: {
+      "moto-uniforme": { titolo: "Uniform rectilinear motion and graphs", breve: "Uniform motion" },
+      "moto-accelerato": { titolo: "Uniformly accelerated motion and free fall", breve: "Accelerated motion" },
+      "moti-nel-piano": { titolo: "Motion in a plane and uniform circular motion", breve: "Motion in a plane" },
+      "principi-dinamica": { titolo: "Newton laws and forces", breve: "Dynamics and forces" },
+      "lavoro-energia": { titolo: "Work, energy and power", breve: "Work and energy" },
+      "temperatura-dilatazione": { titolo: "Temperature and thermal expansion", breve: "Temperature and expansion" },
+      "calore": { titolo: "Heat, calorimetry and heat transfer", breve: "Heat and calorimetry" },
+      "cambiamenti-stato": { titolo: "Changes of state and latent heat", breve: "Changes of state" },
+      "luce-riflessione": { titolo: "Light, reflection and mirrors", breve: "Light and reflection" },
+      "rifrazione-lenti": { titolo: "Refraction, total internal reflection and thin lenses", breve: "Refraction and lenses" },
+    },
   },
   'fisica-superiori-3': {
     titolo: 'Physics, 3rd year',
