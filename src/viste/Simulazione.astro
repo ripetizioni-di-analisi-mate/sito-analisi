@@ -1,9 +1,10 @@
 ---
 // Simulazione d'esame: un compito a tempo composto da tracce degli esercizi da fare di argomenti diversi.
-// Le tracce si leggono dalle pagine «Esercizi da fare» della materia (il Worker toglie le soluzioni a chi non ha sbloccato
-// la materia), quindi la pagina non contiene nulla di riservato. Alla consegna compaiono le soluzioni, per chi le ha,
+// Il Worker concede le tracce con /api/simulazione, entro le dieci domande gratuite o con la materia sbloccata.
+// La pagina non contiene nulla di riservato. Alla consegna compaiono le soluzioni delle tracce concesse,
 // e lo studente valuta ogni esercizio: il punteggio è in trentesimi.
 import Base from '../layouts/Base.astro';
+import AccessoDomande from '../components/AccessoDomande.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { getCollection } from 'astro:content';
 import { materiaL, link, prefisso, type Lingua } from '../i18n';
@@ -23,7 +24,7 @@ const argomenti = m.argomenti
   .filter((a) => a.n > 0);
 const T = en ? {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
-  sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
+  sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions to the included exercises appear and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
   quanti: 'Exercises', durata: 'Time', minuti: 'minutes', argomenti: 'Topics', tutti: 'all', nessuno: 'none', inizia: 'Start the simulation',
   consegna: 'Hand in', rimasto: 'Time left', scaduto: 'Time is up: the paper has been handed in.', punti: 'points',
   esercizio: 'Exercise', valuta: 'How did it go?', giusto: 'Correct', parziale: 'Partly correct', sbagliato: 'Wrong',
@@ -32,7 +33,7 @@ const T = en ? {
   confronto: 'Your score is higher than § of the simulations of this subject marked on the site (# simulations).',
 } : {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
-  sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,
+  sommario: `Un compito a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni degli esercizi inclusi e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è in trentesimi.`,
   quanti: 'Esercizi', durata: 'Durata', minuti: 'minuti', argomenti: 'Argomenti', tutti: 'tutti', nessuno: 'nessuno', inizia: 'Inizia la simulazione',
   consegna: 'Consegna', rimasto: 'Tempo rimasto', scaduto: 'Tempo scaduto: il compito è stato consegnato.', punti: 'punti',
   esercizio: 'Esercizio', valuta: 'Com\'è andato?', giusto: 'Corretto', parziale: 'Parziale', sbagliato: 'Sbagliato',
@@ -41,7 +42,7 @@ const T = en ? {
   confronto: 'Il tuo punteggio è più alto del § delle simulazioni di questa materia valutate sul sito (# simulazioni).',
 };
 if (superiori) {
-  T.sommario = en ? `A timed class test with exercises from different topics of ${m.titolo}, chosen at random among the practice exercises. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.` : `Una verifica in classe a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni (per chi ha sbloccato la materia) e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è su 30.`;
+  T.sommario = en ? `A timed class test with exercises from different topics of ${m.titolo}, chosen at random among the practice exercises. At the end the solutions to the included exercises appear and you mark each exercise as correct, partly correct or wrong: the score is out of 30.` : `Una verifica in classe a tempo con esercizi di argomenti diversi di ${m.titolo}, scelti a caso tra gli esercizi da fare. Alla consegna compaiono le soluzioni degli esercizi inclusi e ogni esercizio si valuta come corretto, parziale o sbagliato: il punteggio è su 30.`;
   T.inizia = en ? 'Start the class test' : 'Inizia la verifica';
   T.nuova = en ? 'New class test simulation' : 'Nuova simulazione di verifica';
   T.storico = en ? 'Previous class test simulations' : 'Simulazioni di verifiche precedenti';
@@ -61,6 +62,8 @@ const pref = prefisso(lingua);
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
+    {m.prezzo && <AccessoDomande lingua={lingua} />}
+    <p class="sim-anteprima-parziale" role="status" hidden></p>
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p>{en ? 'A preparatory mathematics practice paper for Physics and Chemistry.' : 'Compito di matematica preparatoria per Fisica e Chimica.'}</p>}
 
@@ -101,6 +104,7 @@ const pref = prefisso(lingua);
 </Base>
 
 <script>
+  import { aggiornaAccessoDomande } from '../scripts/accesso-domande';
   const radice = document.querySelector<HTMLElement>('.simulazione')!;
   const T = JSON.parse(radice.dataset.testi!);
   const argomenti: { slug: string; titolo: string; breve: string; n: number }[] = JSON.parse(radice.dataset.argomenti!);
@@ -114,7 +118,6 @@ const pref = prefisso(lingua);
   const esitoEl = radice.querySelector<HTMLElement>('.sim-esito')!;
   const CHIAVE = `simulazioni-${materia}`;
   const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT', { maximumFractionDigits: 1 });
-  const mescola = <X,>(a: X[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 
   // Simulazioni già fatte (solo in questo browser).
   type Voce = { quando: number; voto: number; minuti: number; n: number };
@@ -130,18 +133,6 @@ const pref = prefisso(lingua);
   form.querySelector('[data-tutti]')!.addEventListener('click', () => form.querySelectorAll<HTMLInputElement>('input[name=arg]').forEach((x) => { x.checked = true; }));
   form.querySelector('[data-nessuno]')!.addEventListener('click', () => form.querySelectorAll<HTMLInputElement>('input[name=arg]').forEach((x) => { x.checked = false; }));
 
-  // Una traccia a caso dalla pagina «Esercizi da fare» di un argomento.
-  const cache = new Map<string, Element[]>();
-  async function tracce(arg: string) {
-    if (!cache.has(arg)) {
-      const r = await fetch(`${pref}/${materia}/${arg}/esercizi`);
-      if (!r.ok) throw new Error('rete');
-      const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
-      cache.set(arg, [...doc.querySelectorAll('section.traccia')]);
-    }
-    return cache.get(arg)!;
-  }
-
   let fine = 0, inizio = 0, timer = 0, consegnato = false, punti = 0;
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -149,32 +140,28 @@ const pref = prefisso(lingua);
     if (!scelti.length) return;
     const quanti = Number((form.elements.namedItem('quanti') as HTMLSelectElement).value);
     const minuti = Number((form.elements.namedItem('durata') as HTMLSelectElement).value);
-    // Argomenti diversi finché ce ne sono, nell'ordine del programma.
-    let pesca = mescola(scelti);
-    while (pesca.length < quanti) pesca = pesca.concat(mescola(scelti));
-    pesca = pesca.slice(0, quanti).sort((a, b) => argomenti.findIndex((x) => x.slug === a) - argomenti.findIndex((x) => x.slug === b));
     form.querySelector<HTMLButtonElement>('button[type=submit]')!.disabled = true;
     elenco.innerHTML = `<li class="sim-caricamento">${T.caricamento}</li>`;
     compito.hidden = false;
-    punti = 30 / quanti;
+    consegnaB.hidden = true;
     try {
-      const usate = new Set<string>();
-      const scelte = [];
-      for (const arg of pesca) {
-        const tutte = (await tracce(arg)).filter((s) => !usate.has(`${arg}#${s.id}`));
-        const s = tutte[Math.floor(Math.random() * tutte.length)];
-        usate.add(`${arg}#${s.id}`);
-        scelte.push({ arg, s });
-      }
+      const r = await fetch('/api/simulazione', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, argomenti: scelti, numero: quanti, lingua: en ? 'en' : 'it' }) });
+      const d = await r.json();
+      aggiornaAccessoDomande(radice, d);
+      if (!r.ok) throw new Error(d.errore || T.errore);
+      const scelte = d.tracce as { argomento: string; titolo: string; html: string }[];
+      punti = 30 / scelte.length;
+      const nota = radice.querySelector<HTMLElement>('.sim-anteprima-parziale')!;
+      nota.hidden = !d.parziale;
+      nota.textContent = en ? `The free practice paper contains ${scelte.length} exercises. Unlock the subject for a full simulation.` : `La prova gratuita contiene ${scelte.length} esercizi. Sblocca la materia per una simulazione completa.`;
       elenco.innerHTML = '';
-      scelte.forEach(({ arg, s }, i) => {
+      scelte.forEach(({ argomento: arg, titolo, html }, i) => {
         const li = document.createElement('li');
         li.className = 'sim-esercizio';
         const a = argomenti.find((x) => x.slug === arg)!;
-        const corpo = s.querySelector('.testo-studio')!.cloneNode(true) as HTMLElement;
+        const corpo = document.createElement('div'); corpo.className = 'testo-studio'; corpo.innerHTML = html;
         const soluzione = [...corpo.querySelectorAll('details.blocco-soluzione, .soluzione-riservata')];
         soluzione.forEach((x) => x.remove());
-        const titolo = s.querySelector('h2')?.textContent?.replace(/^\s*\d+\.\s*/, '').trim() || '';
         li.innerHTML = `<p class="sim-testa"><strong>${T.esercizio} ${i + 1}</strong> <span>${a.breve} · ${num(punti)} ${T.punti}</span></p><h2></h2>`;
         li.querySelector('h2')!.textContent = titolo;
         li.append(corpo);
@@ -193,11 +180,14 @@ const pref = prefisso(lingua);
         li.append(sol, voto);
         elenco.append(li);
       });
-    } catch {
-      elenco.innerHTML = `<li>${T.errore}</li>`;
+    } catch (x) {
+      const li = document.createElement('li'); li.textContent = x instanceof Error ? x.message : T.errore;
+      elenco.replaceChildren(li);
+      form.querySelector<HTMLButtonElement>('button[type=submit]')!.disabled = false;
       return;
     }
     form.hidden = true;
+    consegnaB.hidden = false;
     radice.querySelector<HTMLElement>('.sim-storico')!.hidden = true;
     inizio = Date.now();
     fine = inizio + minuti * 60000;

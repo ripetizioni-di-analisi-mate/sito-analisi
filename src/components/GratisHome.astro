@@ -2,17 +2,16 @@
 // Materiale gratuito in vista nella home (richiesta di Carmine del 02/11/2026, versione C scelta fra tre):
 // una riga «Gratis» sotto la legenda con Matematica zero, formulari e guida ai concorsi.
 // Le versioni A (tre schede) e B (area «Gratis» prima di Università) sono state scartate.
-// 03/11: in testa le domande a tempo e la simulazione a quiz dei concorsi, gratuite anche senza account (richiesta di Carmine).
+// 06/11: domande e simulazioni includono una prova di dieci quesiti complessivi.
 // 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
 // 04/11: tolto il glossario (richiesta di Carmine).
 import type { Lingua } from '../i18n';
 const { lingua = 'it' } = Astro.props as { lingua?: Lingua };
 const voci = lingua === 'en' ? [
-  { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
+  { href: '/en/domande-a-tempo', titolo: 'Timed questions: 10 free' },
   { href: '/en/formulari', titolo: 'Formula sheets' },
 ] : [
-  { href: '/domande-a-tempo', titolo: 'Domande a tempo' },
-  { href: '/concorsi/simulazione', titolo: 'Simulazioni a quiz' },
+  { href: '/domande-a-tempo', titolo: 'Domande a tempo e simulazioni: 10 domande gratuite' },
   { href: '/matematica-da-zero', titolo: 'Matematica zero' },
   { href: '/fisica-zero', titolo: 'Fisica zero' },
   { href: '/formulari', titolo: 'Formulari' },

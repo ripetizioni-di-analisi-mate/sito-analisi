@@ -28,6 +28,7 @@ import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenve
 import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
+import { creaTabelleAnteprima, archivioAnteprima, accessoDomande, pagamentoDomande } from './anteprima-domande.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -115,6 +116,7 @@ const MODIFICHE_DASHBOARD = new Set(['/abilita', '/revoca', '/dispositivo-rimuov
 export class Archivio {
   constructor(state) {
     this.sql = state.storage.sql;
+    creaTabelleAnteprima(this.sql);
     this.sql.exec(`
       CREATE TABLE IF NOT EXISTS accessi (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materie TEXT, origine TEXT, creato TEXT);
       CREATE TABLE IF NOT EXISTS acquisti (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, materia TEXT, importo REAL, valuta TEXT, transazione TEXT UNIQUE, creato TEXT);
@@ -199,6 +201,7 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname === '/anteprima-domande') return Response.json(archivioAnteprima(this, c));
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
@@ -836,7 +839,9 @@ export default {
     }
 
     // ===== livelli e punti esperienza =====
-    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/')) return new Response('non trovato', { status: 404 });
+    let percorsoDati;
+    try { percorsoDati = decodeURIComponent(p).replace(/\/{2,}/g, '/'); } catch { return new Response('indirizzo non valido', { status: 400 }); }
+    if (/^\/dati-(domande|risposte|simulazioni)\//.test(percorsoDati)) return new Response('non trovato', { status: 404 });
     // Verifica della risposta di un esercizio da fare: il risultato resta nel Worker, al browser arriva solo l'esito.
     if (p === '/api/verifica' && POST) {
       const { id, risposta, lingua } = await req.json().catch(() => ({}));
@@ -904,8 +909,10 @@ export default {
         q = elenco.find((x) => x.id === ordine[0]);
       }
       const io = await utenteCollegato(env, req).catch(() => null);
+      const accesso = await accessoDomande(env, req, io, [{ id: `${materia}/quiz/${q.id}`, materia }], l, { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+      if (!accesso.consentite.length) return json(pagamentoDomande(accesso, l), 402, { 'cache-control': 'no-store' });
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
+      return json({ ...accesso, token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
         200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/domande/rispondi' && POST) {
@@ -919,6 +926,8 @@ export default {
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
       const io = await utenteCollegato(env, req).catch(() => null);
+      const accesso = await accessoDomande(env, req, io, [{ id: `${tok.m}/quiz/${q.id}`, materia: tok.m }], linguaDi(tok.l), { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+      if (!accesso.consentite.length) return json(pagamentoDomande(accesso, linguaDi(tok.l)), 402, { 'cache-control': 'no-store' });
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
@@ -955,14 +964,22 @@ export default {
         while (presi.length < quote[i] && pile.some((pl) => pl.length)) for (const pl of pile) if (pl.length && presi.length < quote[i]) presi.push(pl.shift());
         elenco.push(...mescola(presi));
       });
-      const domande = elenco.map((q) => ({ id: `${q.materia}/${q.id}`, materia: q.materia, argomento: q.id.split('/')[0], testo: q.testo, scelte: q.scelte }));
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const accesso = await accessoDomande(env, req, io, elenco.map((q) => ({ id: `${q.materia}/quiz/${q.id}`, materia: q.materia })), 'it', { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+      const ammesse = new Set(accesso.consentite);
+      const domande = elenco.filter((q) => ammesse.has(`${q.materia}/quiz/${q.id}`)).map((q) => ({ id: `${q.materia}/${q.id}`, materia: q.materia, argomento: q.id.split('/')[0], testo: q.testo, scelte: q.scelte }));
+      if (!domande.length) return json(pagamentoDomande(accesso), 402, { 'cache-control': 'no-store' });
       const token = await firmaToken(env, { sim: 1, ids: domande.map((d) => d.id), t: Date.now() });
-      return json({ token, domande }, 200, { 'cache-control': 'no-store' });
+      return json({ ...accesso, token, domande, parziale: domande.length < elenco.length }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/simulazione-quiz/correggi' && POST) {
       const { token, risposte } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       if (!tok?.sim || !Array.isArray(tok.ids)) return json({ errore: 'Simulazione non valida: ricarica la pagina.' }, 400);
+      const ioQuota = await utenteCollegato(env, req).catch(() => null);
+      const richiesteQuota = tok.ids.map((id) => { const [materia, ...parti] = id.split('/'); return { materia, id: `${materia}/quiz/${parti.join('/')}` }; });
+      const accesso = await accessoDomande(env, req, ioQuota, richiesteQuota, 'it', { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+      if (accesso.consentite.length !== richiesteQuota.length) return json(pagamentoDomande(accesso), 402, { 'cache-control': 'no-store' });
       const esiti = [];
       for (const id of tok.ids) {
         const [m, argomento] = String(id).split('/');
@@ -983,6 +1000,29 @@ export default {
         confronto = await aDO(env, '/sfi-percentile', { tipo: 'quiz', chiave: materieSim, id: `q|${firma.slice(0, 40)}`, valore: Math.round((1000 * giuste) / esiti.length) / 10, chi }).catch(() => null);
       }
       return json({ esiti, confronto }, 200, { 'cache-control': 'no-store' });
+    }
+    if (p === '/api/simulazione' && POST) {
+      const { materia, argomenti, numero, lingua } = await req.json().catch(() => ({}));
+      const l = linguaDi(lingua);
+      const m = MATERIE.find((m) => m.slug === materia && m.attiva);
+      if (!m || !Array.isArray(argomenti) || !argomenti.length) return json({ errore: l === 'en' ? 'Choose at least one topic.' : 'Scegli almeno un argomento.' }, 400);
+      const r = await env.ASSETS.fetch(new Request(`https://interno/dati-simulazioni/${l}/${materia}.json`));
+      if (!r.ok) return json({ errore: l === 'en' ? 'The exercises did not load.' : 'Gli esercizi non si sono caricati.' }, 503);
+      const { tracce } = await r.json();
+      const gruppi = m.argomenti.filter((a) => argomenti.includes(a.slug)).map((a) => tracce.filter((t) => t.argomento === a.slug && t.html)).filter((g) => g.length);
+      const n = Math.max(1, Math.min(6, Math.round(Number(numero) || 5)));
+      const pesca = (a) => a.splice(Math.floor(Math.random() * a.length), 1)[0];
+      const pile = []; while (gruppi.length) pile.push(pesca(gruppi));
+      const elenco = [];
+      while (elenco.length < n && pile.some((g) => g.length)) for (const g of pile) if (g.length && elenco.length < n) elenco.push(pesca(g));
+      if (!elenco.length) return json({ errore: l === 'en' ? 'No exercises for these topics.' : 'Nessun esercizio per questi argomenti.' }, 404);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const chiave = (t) => `${materia}/esercizi/${t.id.slice(materia.length + 1)}`;
+      const accesso = await accessoDomande(env, req, io, elenco.map((t) => ({ materia, id: chiave(t) })), l, { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+      const ammesse = new Set(accesso.consentite);
+      const concesse = elenco.filter((t) => ammesse.has(chiave(t)));
+      if (!concesse.length) return json(pagamentoDomande(accesso, l), 402, { 'cache-control': 'no-store' });
+      return json({ ...accesso, tracce: concesse, parziale: concesse.length < elenco.length }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/sessione/riepilogo' && POST) {
       const io = await utenteCollegato(env, req).catch(() => null);

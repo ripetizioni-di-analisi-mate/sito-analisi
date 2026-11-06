@@ -3,6 +3,7 @@
 // uno studente online dall'elenco, oppure si cerca un avversario a caso sulla stessa materia.
 // Le domande e le risposte corrette restano nel Worker (worker/sfide.mjs): la pagina riceve una domanda alla volta.
 import Base from '../layouts/Base.astro';
+import AccessoDomande from '../components/AccessoDomande.astro';
 import { MATERIE } from '../data/materie';
 import { catalogoDomande } from '../lib/domande';
 import { DUELLO } from '../data/sfide';
@@ -17,6 +18,7 @@ const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
   <div class="duelli" data-materie={JSON.stringify(materie)} data-domande={DUELLO.domande} data-secondi={DUELLO.secondi}>
     <p class="sopratitolo">Sfide tra studenti</p>
     <h1>Duelli</h1>
+    <AccessoDomande lingua="it" />
     <p class="sommario">Due studenti rispondono alle stesse {DUELLO.domande} domande a tempo di una materia, con due minuti per ciascuna. Vince chi risponde correttamente a più domande; a parità di risposte corrette vince chi ha impiegato meno tempo.</p>
 
     <div class="du-ospite" hidden>
@@ -150,6 +152,7 @@ const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
 </style>
 
 <script>
+  import { aggiornaAccessoDomande } from '../scripts/accesso-domande';
   import { stemmaSVG, rangoDi, gradoDi } from '../../worker/stemmi.mjs';
   type Materia = { slug: string; titolo: string; argomenti: { slug: string; titolo: string }[] };
   const radice = document.querySelector<HTMLElement>('.duelli')!;
@@ -162,6 +165,7 @@ const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
   const post = async (url: string, dati: object) => {
     const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
     const d = await r.json().catch(() => ({}));
+    aggiornaAccessoDomande(radice, d);
     return { ok: r.ok, status: r.status, d };
   };
   const codice = new URLSearchParams(location.search).get('d')?.toUpperCase() || '';

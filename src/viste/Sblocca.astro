@@ -41,6 +41,7 @@ const invito = lingua === 'en' ? {
     <li set:html={t.includeTeoria(m.argomenti.length)} />
     <li set:html={t.includeSvolti(svolti)} />
     <li set:html={t.includeSoluzioni(dafare)} />
+    <li>{lingua === 'en' ? 'Unlimited timed questions and simulations for this subject' : 'Domande a tempo e simulazioni senza limiti per questa materia'}</li>
   </ul>
   <p class="gratis-ora">{t.gratisOra}</p>
   {video.length > 0 && (
