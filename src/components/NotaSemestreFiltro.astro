@@ -1,0 +1,20 @@
+---
+import { PROGRAMMI_SEMESTRE_FILTRO } from '../data/semestre-filtro.mjs';
+interface Props { lingua?: 'it' | 'en'; materia: string }
+const { lingua = 'it', materia } = Astro.props;
+const en = lingua === 'en';
+const programma = PROGRAMMI_SEMESTRE_FILTRO[materia];
+---
+<p class="nota-programma">
+  {en ? 'The course topics are based on the ' : 'Gli argomenti del corso prendono come riferimento il '}
+  <a href={programma.url} target="_blank" rel="noopener">{en ? `2026/2027 ${programma.nomeEn} programme for the filter semester published by the MUR` : `programma di ${programma.nome} per il semestre filtro pubblicato dal MUR per il 2026/2027`}</a>.
+</p>
+
+<style>
+  .nota-programma {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--inchiostro-2);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+</style>

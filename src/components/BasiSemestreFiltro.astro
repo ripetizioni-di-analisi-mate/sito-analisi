@@ -1,0 +1,27 @@
+---
+import { MATERIE } from '../data/materie';
+import { link, type Lingua } from '../i18n';
+interface Props { lingua?: Lingua; materia: string }
+const { lingua = 'it', materia } = Astro.props;
+const en = lingua === 'en';
+const basi = materia === 'matematica-semestre-filtro';
+const corsi = MATERIE.filter(m => m.attiva && ['fisica-semestre-filtro', 'chimica-semestre-filtro'].includes(m.slug));
+---
+<aside class="basi-semestre" aria-label={en ? 'Preparatory mathematics' : 'Matematica preparatoria'}>
+  <strong>{basi ? (en ? 'Preparatory module' : 'Modulo preparatorio') : (en ? 'Before starting: mathematics' : 'Prima di iniziare: la matematica')}</strong>
+  {basi ? (
+    <>
+      <p>{en ? 'Mathematics supports your study of Physics and Chemistry. The three national filter-semester exams are Biology, Physics, and Chemistry with introductory biochemistry; this module develops the mathematical prerequisites.' : 'La matematica serve per affrontare gli esercizi di Fisica e Chimica. I tre esami nazionali del semestre filtro sono Biologia, Fisica e Chimica e propedeutica biochimica; questo modulo prepara alle conoscenze matematiche richieste.'}</p>
+      <p class="rimandi"><a href="https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027" target="_blank" rel="noopener">{en ? 'MUR programmes 2026/2027' : 'Programmi MUR 2026/2027'}</a>{corsi.map(m => <a href={link(lingua, `/${m.slug}`)}>{m.slug.startsWith('fisica') ? (en ? 'Continue with Physics →' : 'Prosegui con Fisica →') : (en ? 'Continue with Chemistry →' : 'Prosegui con Chimica →')}</a>)}</p>
+    </>
+  ) : (
+    <p><a href={link(lingua, '/matematica-semestre-filtro')}>{en ? 'Mathematics foundations for the filter semester' : 'Basi di matematica per il semestre filtro'}</a>{en ? ': formulas, conversions, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed questions.' : ': formule, conversioni, grafici, logaritmi, trigonometria e vettori. Teoria, esercizi svolti e domande a tempo.'}</p>
+  )}
+</aside>
+
+<style>
+  .basi-semestre { margin: 1.2rem 0 1.5rem; padding: 1rem 1.2rem; border-inline-start: 3px solid var(--accento, #2f6f68); background: var(--carta-2, #f7f7f2); border-radius: 0 .45rem .45rem 0; font-size: .95rem; line-height: 1.65; }
+  .basi-semestre strong { display: block; }
+  .basi-semestre p { margin: .4rem 0 0; }
+  .rimandi { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; }
+</style>

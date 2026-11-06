@@ -34,6 +34,8 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
   <h1>{t.prezzi}</h1>
   <p class="sommario">{t.prezziSommario}</p>
 
+  {lingua === 'it' && <section id="pacchetti"><h2>Pacchetti e sconti</h2><p>2 materie −15% · 3 materie −20% · 4 o più −25%.</p><p><a class="bottone-primario" href="/pacchetti">Scegli il tuo pacchetto →</a></p><p class="nota-accesso">Trovi anche i pacchetti di videocorsi con video, PDF e materiale incluso.</p><h2>Singole materie</h2></section>}
+
   <ul class="griglia-materie">
     {aPagamento.map((m) => (
       <li style={`--accento: ${m.colore}`}>
@@ -48,10 +50,10 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
 
   {lingua === 'it' && (
     <>
-      <h2>Videocorsi</h2>
-      <p>Le lezioni registrate dei corsi di Carmine, con video e PDF. Ogni videocorso sblocca in automatico le materie collegate del sito.</p>
+      <h2>Videocorsi singoli</h2>
+      <p>Video, PDF e materie del sito incluse.</p>
       <ul class="elenco-video-prezzi">
-        {VIDEOCORSI.map((v) => <li><SchedaVideocorso v={v} compatta /></li>)}
+        {VIDEOCORSI.filter((v) => !v.pacchettoDi).map((v) => <li><SchedaVideocorso v={v} compatta /></li>)}
       </ul>
     </>
   )}

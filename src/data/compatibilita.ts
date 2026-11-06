@@ -11,7 +11,7 @@ export const MATERIE_COMPATIBILITA = MATERIE
 
 // Peso di ogni richiesta dell'esame nella percentuale di compatibilità.
 export const PESI = {
-  stesso: 1,      // c'è una scheda svolta con lo stesso procedimento (o, per la teoria, l'enunciato nella teoria del sito)
+  stesso: 1,      // il procedimento è spiegato nelle schede o nella teoria; per una prova teorica serve il contenuto richiesto
   argomento: 0.5, // l'argomento è nel programma del sito, ma senza una scheda dello stesso tipo
   nessuno: 0,     // l'argomento non è nel materiale del sito
 } as const;

@@ -151,6 +151,18 @@ const isoRoma = (ms) => { const p = partiRoma(ms); return `${p.y}-${due(p.m)}-${
 
 // ---------- Google Calendar ----------
 const SCOPI_GOOGLE = 'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.freebusy';
+const COOKIE_OAUTH_GOOGLE = '__Host-google_oauth';
+const DURATA_OAUTH_GOOGLE = 15 * 60;
+const cookieOAuthGoogle = (stato, durata = DURATA_OAUTH_GOOGLE) =>
+  `${COOKIE_OAUTH_GOOGLE}=${encodeURIComponent(stato)}; Path=/; Max-Age=${durata}; HttpOnly; Secure; SameSite=Lax`;
+function esitoOAuthGoogle(testo, collegato = false) {
+  // Una pagina del sito interrompe la navigazione iniziata su Google: il link successivo
+  // riconosce di nuovo la sessione amministrativa, che conserva SameSite=Strict.
+  const r = pagina(`<h1>Google Calendar</h1><p>${esc(testo)}</p><p><a class="tasto" href="/admin/lezioni${collegato ? '?collegato=1' : ''}">Torna alle lezioni</a></p>`, 'Collegamento Google Calendar');
+  r.headers.set('set-cookie', cookieOAuthGoogle('', 0));
+  r.headers.set('referrer-policy', 'no-referrer');
+  return r;
+}
 let accessoGoogle = null; // { token, scade } tenuto in memoria finché il Worker resta acceso
 async function tokenGoogle(env, aDO) {
   if (accessoGoogle && accessoGoogle.scade > Date.now() + 60000) return accessoGoogle.token;
@@ -489,31 +501,50 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
 
   // ===== pagina riservata /admin/lezioni e collegamento di Google Calendar =====
   if (p === '/admin/lezioni' || p.startsWith('/admin/google/')) {
-    const ma = h.leggiCookie(req, 'admin');
-    const sess = ma ? await h.leggiToken(env, ma) : null;
-    if (!sess?.admin) return Response.redirect(`${origine}/admin`, 302);
     const ritorno = `${origine}/admin/google/ritorno`;
-    if (p === '/admin/google/collega') {
-      if (!env.GOOGLE_CLIENT_ID) return pagina('Manca il codice GOOGLE_CLIENT_ID nelle impostazioni del sito.');
-      const stato = await h.firmaToken(env, { scopo: 'google', t: Date.now() });
-      const q = new URLSearchParams({ client_id: env.GOOGLE_CLIENT_ID, redirect_uri: ritorno, response_type: 'code', scope: SCOPI_GOOGLE,
-        access_type: 'offline', prompt: 'consent', include_granted_scopes: 'true', state: stato });
-      return Response.redirect(`https://accounts.google.com/o/oauth2/v2/auth?${q}`, 302);
-    }
     if (p === '/admin/google/ritorno') {
+      if (req.method !== 'GET') return new Response('Metodo non consentito', { status: 405, headers: { allow: 'GET' } });
       const u = new URL(req.url);
-      const st = await h.leggiToken(env, u.searchParams.get('state') || '');
-      if (st?.scopo !== 'google' || Date.now() - st.t > 15 * 60000) return pagina('Il collegamento è scaduto. Riprova da Collega Google Calendar.');
-      if (!u.searchParams.get('code')) return pagina('Collegamento annullato.');
+      const stato = u.searchParams.get('state') || '';
+      const inviato = h.leggiCookie(req, COOKIE_OAUTH_GOOGLE);
+      const st = await h.leggiToken(env, stato);
+      // Google torna da un altro sito, quindi il cookie admin Strict non viene inviato.
+      // Il solo ritorno usa un cookie separato, breve e legato allo stato firmato
+      // creato dopo l'accesso amministrativo. Uno stato di un altro browser non basta.
+      if (!stato || stato !== inviato || st?.scopo !== 'google' || typeof st.nonce !== 'string' || !st.nonce
+          || !Number.isFinite(st.t) || st.t > Date.now() + 60000 || Date.now() - st.t > DURATA_OAUTH_GOOGLE * 1000) {
+        return esitoOAuthGoogle('Il collegamento è scaduto o non appartiene a questo browser. Riprova da Collega Google Calendar.');
+      }
+      if (!u.searchParams.get('code')) return esitoOAuthGoogle('Collegamento annullato.');
       const r = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({ code: u.searchParams.get('code'), client_id: env.GOOGLE_CLIENT_ID, client_secret: env.GOOGLE_CLIENT_SECRET || '', redirect_uri: ritorno, grant_type: 'authorization_code' }),
       });
       const d = await r.json().catch(() => ({}));
-      if (!d.refresh_token) { console.log('google collega', r.status, JSON.stringify(d).slice(0, 300)); return pagina('Google non ha concesso l’accesso. Riprova da Collega Google Calendar.'); }
+      if (!r.ok || !d.refresh_token) {
+        console.log('google collega', r.status, typeof d.error === 'string' ? d.error : 'refresh_token_assente');
+        return esitoOAuthGoogle('Google non ha concesso l’accesso. Riprova da Collega Google Calendar.');
+      }
+      const concessi = new Set((d.scope || '').split(/\s+/));
+      if (d.scope && !concessi.has('https://www.googleapis.com/auth/calendar') && !SCOPI_GOOGLE.split(' ').every((s) => concessi.has(s))) {
+        return esitoOAuthGoogle('Google ha concesso solo parte dei permessi. Riprova selezionando sia la disponibilità sia la gestione degli eventi.');
+      }
       await aDO(env, '/pren-imposta', { chiave: 'google_refresh', valore: d.refresh_token });
       accessoGoogle = null;
-      return Response.redirect(`${origine}/admin/lezioni?collegato=1`, 302);
+      return esitoOAuthGoogle('Google Calendar collegato.', true);
+    }
+    const ma = h.leggiCookie(req, 'admin');
+    const sess = ma ? await h.leggiToken(env, ma) : null;
+    if (!sess?.admin) return Response.redirect(`${origine}/admin`, 302);
+    if (p === '/admin/google/collega') {
+      if (!env.GOOGLE_CLIENT_ID) return pagina('Manca il codice GOOGLE_CLIENT_ID nelle impostazioni del sito.');
+      if (!env.GOOGLE_CLIENT_SECRET) return pagina('Manca il segreto GOOGLE_CLIENT_SECRET nelle impostazioni del sito.');
+      const stato = await h.firmaToken(env, { scopo: 'google', t: Date.now(), nonce: crypto.randomUUID() });
+      const q = new URLSearchParams({ client_id: env.GOOGLE_CLIENT_ID, redirect_uri: ritorno, response_type: 'code', scope: SCOPI_GOOGLE,
+        access_type: 'offline', prompt: 'consent', include_granted_scopes: 'true', state: stato });
+      return new Response(null, { status: 302, headers: {
+        location: `https://accounts.google.com/o/oauth2/v2/auth?${q}`, 'set-cookie': cookieOAuthGoogle(stato),
+      } });
     }
     if (p === '/admin/google/scollega' && POST) {
       await aDO(env, '/pren-imposta', { chiave: 'google_refresh', valore: null });

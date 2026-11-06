@@ -182,6 +182,16 @@ main {
 .passi .successivo .freccia-avanti { grid-column: 2; grid-row: 1 / span 2; font-size: 1.4rem; color: var(--accento); }
 .passi .precedente { align-self: flex-start; color: var(--inchiostro-2); font-size: 0.88rem; text-decoration: none; }
 .passi .precedente:hover { text-decoration: underline; }
+.passi .altro-argomento { align-self: flex-start; color: var(--accento); font-size: 0.88rem; text-underline-offset: 0.2em; }
+.tappe-studio { margin: 0.8rem 0 1.5rem; font: 600 0.82rem/1.3 var(--ui); }
+.tappe-studio ol { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; list-style: none; margin: 0; padding: 0; }
+.tappe-studio a { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; color: var(--inchiostro-2); text-decoration: none; }
+.tappe-studio a > span { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; border: 1px solid var(--riga); border-radius: 50%; font-size: 0.74rem; }
+.tappe-studio a[aria-current="step"] { color: var(--accento); }
+.tappe-studio a[aria-current="step"] > span { color: #fff; background: var(--accento); border-color: var(--accento); }
+.tappe-studio a:hover, .tappe-studio a:focus-visible { color: var(--accento); text-decoration: underline; text-underline-offset: 0.2em; }
+@media (max-width: 40rem) { .tappe-studio li { flex: 1 1 calc(50% - 0.8rem); } }
+@media print { .tappe-studio, .percorsi-home { display: none !important; } }
 
 .nota-termini { margin: 0.8rem 0 0; font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); }
 .pie-copyright { max-width: 34rem; }
@@ -414,6 +424,10 @@ html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto
 .cerca-home input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
 .cerca-home input:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
 .cerca-home button { font: inherit; font-size: 0.95rem; padding: 0.6rem 1rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: var(--accento); color: white; cursor: pointer; }
+.percorsi-home { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.1rem 0 0; font: 600 0.88rem var(--ui); }
+.percorsi-home a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0.35rem 0.8rem; border: 1px solid var(--riga); border-radius: 999px; text-decoration: none; color: var(--inchiostro-2); }
+.percorsi-home a:hover, .percorsi-home a:focus-visible { color: var(--verde); border-color: var(--verde); background: color-mix(in srgb, var(--verde) 5%, transparent); }
+.gruppo[id] { scroll-margin-top: 5rem; }
 .nome-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
 /* Macro aree apribili (home e indice) */
 details.gruppo > summary.nome-gruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; }
@@ -1016,6 +1030,12 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .obiettivi li .barra-exp { grid-column: 1 / -1; height: 6px; }
 .obiettivi li:not(.completato) .barra-exp > span { background: var(--c-esempio); }
 .obiettivi li.completato > span:nth-child(2) { color: var(--verde); font-weight: 600; }
+.obiettivi li > span:first-child { min-width: 0; }
+.obiettivi a, .sessioni-account a { color: var(--verde); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.obiettivi a:hover, .sessioni-account a:hover { text-decoration-thickness: 2px; }
+@media (max-width: 30rem) {
+  .obiettivi li { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* account: il tuo percorso */
 .percorso-account { margin-bottom: 2.5rem; }
@@ -1373,17 +1393,24 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
    Striscia a tutta larghezza (versione A scelta da Carmine). Al computer i campi sono già nella barra; al telefono
    la barra è compatta e «Crea l'account» apre i campi (.con-campi). I tasti fissi salgono della sua altezza. */
 .barra-sconto { position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; font-family: var(--ui); color: var(--inchiostro);
-  background: color-mix(in srgb, var(--carta) 55%, white); border-top: 3px solid var(--azione); box-shadow: 0 -6px 24px rgba(34,48,47,.08);
-  padding: .9rem 1rem calc(.9rem + env(safe-area-inset-bottom)); transform: translateY(100%); opacity: 0; transition: transform .35s ease, opacity .35s ease; }
+  background: linear-gradient(110deg, color-mix(in srgb, var(--azione) 7%, white), var(--carta) 60%); border-top: 2px solid var(--azione); box-shadow: 0 -8px 32px rgba(34,48,47,.1);
+  max-height: 85dvh; overflow-y: auto; overscroll-behavior: contain;
+  padding: 1.15rem 1rem calc(1.15rem + env(safe-area-inset-bottom)); transform: translateY(100%); opacity: 0; transition: transform .35s ease, opacity .35s ease; }
 .barra-sconto[hidden] { display: none; }
 .barra-sconto.aperta { opacity: 1; transform: none; }
 .barra-sconto p { margin: 0; }
 .bs-nascosto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.bs-dentro { max-width: 66rem; margin: 0 auto; padding-right: 2rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(22rem, 34rem); gap: .6rem 2rem; align-items: center; }
+.bs-dentro { max-width: 70rem; margin: 0 auto; padding-right: 2rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(22rem, 32rem); gap: .8rem 2rem; align-items: center; }
+.barra-sconto [hidden] { display: none !important; }
+.bs-messaggio { display: flex; align-items: center; gap: 1rem; }
+.bs-messaggio > div:last-child { min-width: 0; }
+.bs-offerta { flex: 0 0 5.4rem; text-align: center; color: var(--azione); }
+.bs-offerta-nota { display: block; margin-top: .35rem; font-size: .72rem; font-weight: 600; line-height: 1.25; }
+.bs-benvenuto { font-size: .67rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--azione); margin-bottom: .3rem !important; }
 .bs-fatto { grid-column: 1 / -1; display: flex; align-items: center; gap: .4rem 1.2rem; flex-wrap: wrap; }
-.bs-titolo { display: flex; align-items: center; gap: .55rem; font-family: var(--titoli); font-weight: 600; font-size: 1.12rem; line-height: 1.25; }
-.bs-pillola { flex: none; font-family: var(--ui); font-size: .82rem; font-weight: 700; letter-spacing: .02em; color: var(--azione);
-  background: color-mix(in srgb, var(--azione) 11%, white); border-radius: 999px; padding: .15rem .55rem; }
+.bs-titolo { display: flex; align-items: center; gap: .55rem; font-family: var(--titoli); font-weight: 600; font-size: 1.22rem; line-height: 1.25; }
+.bs-pillola { display: block; font-family: var(--ui); font-size: 1.6rem; font-weight: 700; letter-spacing: -.04em; color: var(--azione);
+  background: color-mix(in srgb, var(--azione) 10%, white); border: 1px solid color-mix(in srgb, var(--azione) 22%, transparent); border-radius: 14px; padding: .65rem .4rem; }
 .bs-sotto { font-size: .9rem; line-height: 1.4; color: var(--inchiostro-2); margin-top: .3rem !important; }
 .bs-fatto .bs-sotto { margin-top: 0 !important; }
 .bs-campi { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
@@ -1391,20 +1418,26 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 .bs-campi input:focus { outline: 2px solid color-mix(in srgb, var(--azione) 40%, transparent); outline-offset: 0; border-color: var(--azione); }
 .bs-tasto { font: inherit; font-weight: 600; font-size: 1rem; color: white; background: var(--azione); border: 0; border-radius: 8px; padding: .55rem 1.1rem; cursor: pointer; text-decoration: none; text-align: center; white-space: nowrap; }
 .bs-tasto:hover { filter: brightness(1.08); color: white; }
+.bs-tasto:focus-visible, .bs-chiudi:focus-visible { outline: 3px solid var(--azione); outline-offset: 3px; }
 .bs-tasto:disabled { opacity: .6; cursor: wait; }
 .bs-apri { display: none; }
 .bs-nota { font-size: .78rem; line-height: 1.35; color: var(--inchiostro-2); margin-top: .4rem !important; }
 .bs-nota a, .bs-esito a { color: var(--accento); }
 .bs-esito { font-size: .85rem; color: var(--c-attenzione); margin-top: .3rem !important; }
 .bs-esito:empty { display: none; }
-.bs-chiudi { position: absolute; top: .45rem; right: .45rem; width: 2rem; height: 2rem; display: grid; place-items: center; border: 0; background: transparent; color: var(--inchiostro-2); border-radius: 50%; cursor: pointer; }
+.bs-chiudi { position: absolute; top: .3rem; right: .3rem; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 0; background: transparent; color: var(--inchiostro-2); border-radius: 50%; cursor: pointer; }
 .bs-chiudi:hover { background: var(--carta-2); color: var(--inchiostro); }
 .bs-chiudi svg { width: 1rem; height: 1rem; }
 .bs-spunta { width: 1.3rem; height: 1.3rem; color: var(--azione); flex: none; }
 @media (max-width: 760px) {
   .barra-sconto { padding-top: .75rem; }
   .bs-dentro { grid-template-columns: 1fr; padding-right: 0; }
-  .bs-titolo { padding-right: 1.8rem; font-size: 1.04rem; }
+  .bs-messaggio { gap: .8rem; padding-right: 1.8rem; }
+  .bs-offerta { flex-basis: 4.5rem; }
+  .bs-pillola { font-size: 1.35rem; padding: .6rem .3rem; }
+  .bs-offerta-nota { font-size: .66rem; }
+  .bs-benvenuto { font-size: .6rem; }
+  .bs-titolo { font-size: 1.08rem; }
   .bs-sotto { font-size: .85rem; }
   .bs-apri { display: block; width: 100%; margin-top: .65rem; }
   .bs-modulo { display: none; }

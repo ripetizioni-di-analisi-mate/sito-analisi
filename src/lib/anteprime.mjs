@@ -2,6 +2,7 @@
 // Questo modulo decide indirizzo e testi dell'immagine di una pagina. Lo usano src/layouts/Base.astro (meta og:image)
 // e scripts/immagini-og.mjs (che disegna i PNG in dist/og dopo la build): così indirizzo e contenuto coincidono sempre.
 // Le pagine senza materia (home, prezzi, chi sono…) restano sull'immagine generale /og.png.
+import { nomiAllenamento } from './allenamento.mjs';
 
 export const RIPASSO_OG = 'prove-d-esame'; // come RIPASSO in src/data/livelli.ts
 export const DOMINIO = 'ripetizionidianalisi.com';
@@ -12,8 +13,8 @@ const SEZIONI = {
   en: { teoria: 'Theory', 'esercizi-svolti': 'Worked examples', esercizi: 'Exercises', domande: 'Timed questions' },
 };
 const TESTI = {
-  it: { ripasso: "Prove d'esame", domandeRipasso: 'Domande di ripasso', materia: 'Teoria ed esercizi svolti', generale: 'Ripetizioni di Analisi: teoria ed esercizi svolti per le materie scientifiche (università, superiori, concorsi)' },
-  en: { ripasso: 'Exam practice', domandeRipasso: 'Review questions', materia: 'Theory and worked examples', generale: 'Ripetizioni di Analisi: theory and worked examples for Calculus, Linear Algebra and Physics' },
+  it: { domandeRipasso: 'Domande di ripasso', materia: 'Teoria ed esercizi svolti', generale: 'Ripetizioni di Analisi: teoria ed esercizi svolti per le materie scientifiche (università, superiori, concorsi)' },
+  en: { domandeRipasso: 'Review questions', materia: 'Theory and worked examples', generale: 'Ripetizioni di Analisi: theory and worked examples for Calculus, Linear Algebra and Physics' },
 };
 
 // Testi dell'immagine generale (public/og.png e public/og-en.png, disegnate da scripts/og-generale.mjs).
@@ -28,7 +29,7 @@ export const altGenerale = (lingua) => TESTI[lingua === 'en' ? 'en' : 'it'].gene
 
 /**
  * Immagine di anteprima di una pagina.
- * @param {{ lingua?: 'it'|'en', materia?: { slug: string, titolo: string, breve: string, colore: string }, argomento?: string, titoloArgomento?: string, sezione?: string }} p
+ * @param {{ lingua?: 'it'|'en', materia?: { slug: string, titolo: string, breve: string, colore: string, gruppo?: string }, argomento?: string, titoloArgomento?: string, sezione?: string }} p
  * @returns {null | { percorso: string, sopra: string, titolo: string, sotto: string, alt: string, colore: string, lingua: 'it'|'en' }}
  *   percorso è l'indirizzo dentro il sito (/og/…png); null = si usa /og.png.
  */
@@ -47,7 +48,7 @@ export function anteprima({ lingua = 'it', materia, argomento, titoloArgomento, 
   if (!argomento || !SEZIONI[l][sezione]) return diMateria;
   const ripasso = argomento === RIPASSO_OG;
   if (ripasso && sezione !== 'domande') return diMateria;
-  const titolo = ripasso ? T.ripasso : titoloArgomento;
+  const titolo = ripasso ? nomiAllenamento(materia, l).ripasso : titoloArgomento;
   if (!titolo) return diMateria;
   const nomeSezione = ripasso ? T.domandeRipasso : SEZIONI[l][sezione];
   return {

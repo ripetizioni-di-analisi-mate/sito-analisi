@@ -1,0 +1,62 @@
+[
+  [
+    "temperatura-calore-gas",
+    "Temperatura, calore e gas ideali",
+    "Temperatura, calore e gas"
+  ],
+  [
+    "primo-principio-termodinamica",
+    "Primo principio e trasformazioni termodinamiche",
+    "Primo principio"
+  ],
+  [
+    "secondo-principio-entropia",
+    "Secondo principio, macchine termiche ed entropia",
+    "Secondo principio ed entropia"
+  ],
+  [
+    "oscillazioni-onde",
+    "Oscillazioni e onde meccaniche",
+    "Oscillazioni e onde"
+  ],
+  [
+    "suono",
+    "Suono, risonanza ed effetto Doppler",
+    "Suono"
+  ],
+  [
+    "ottica-geometrica",
+    "Riflessione, rifrazione, specchi e lenti",
+    "Ottica geometrica"
+  ],
+  [
+    "interferenza-diffrazione",
+    "Interferenza e diffrazione della luce",
+    "Interferenza e diffrazione"
+  ],
+  [
+    "carica-campo-elettrico",
+    "Carica elettrica, legge di Coulomb e campo elettrico",
+    "Carica e campo elettrico"
+  ],
+  [
+    "flusso-teorema-gauss",
+    "Flusso elettrico e teorema di Gauss",
+    "Flusso e Gauss"
+  ],
+  [
+    "potenziale-condensatori",
+    "Potenziale elettrico e condensatori",
+    "Potenziale e condensatori"
+  ],
+  [
+    "corrente-leggi-ohm",
+    "Corrente elettrica, leggi di Ohm ed effetto Joule",
+    "Corrente e leggi di Ohm"
+  ],
+  [
+    "circuiti-elettrici",
+    "Circuiti elettrici e leggi di Kirchhoff",
+    "Circuiti elettrici"
+  ]
+]

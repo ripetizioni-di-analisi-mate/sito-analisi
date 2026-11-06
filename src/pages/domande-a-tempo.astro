@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import { RIPASSO } from '../data/livelli';
 import { elencoDomande } from '../lib/domande-elenco';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
 const { materie, gruppi, totale } = await elencoDomande();
 ---
 <Base titolo="Domande a tempo: quiz gratuiti per materia e argomento" descrizione={`Quiz a risposta multipla gratuiti su ${materie.length} materie: quattro risposte, due minuti per domanda e la spiegazione dopo ogni risposta. Anche senza account.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]}>
@@ -20,7 +21,7 @@ const { materie, gruppi, totale } = await elencoDomande();
             <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
             <div class="dta-tasti">
               <a class="dta-primario" href={`/${m.slug}/${RIPASSO}/domande`}>Ripasso su tutto</a>
-              <a class="dta-secondario" href={`/${m.slug}/simulazione`}>{m.concorsi ? 'Simulazione a quiz' : 'Simulazione d\'esame'}</a>
+              <a class="dta-secondario" href={`/${m.slug}/simulazione`}>{m.concorsi ? 'Simulazione a quiz' : nomiAllenamento(m).simulazione}</a>
             </div>
             <details>
               <summary>Scegli un argomento</summary>

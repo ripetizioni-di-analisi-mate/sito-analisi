@@ -7,6 +7,8 @@ import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
 import MaterialiStudente from '../components/MaterialiStudente.astro';
 import GratisHome from '../components/GratisHome.astro';
+import PacchettiHome from '../components/PacchettiHome.astro';
+import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
@@ -14,6 +16,11 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const MATERIE = materieL(lingua);
+const gruppi = gruppiL(lingua).map((nome, i) => ({
+  nome,
+  id: i === 0 ? 'materie-home' : `percorso-home-${i}`,
+  breve: nome.startsWith('TOLC') ? (lingua === 'en' ? 'Admission tests' : 'Test d’ingresso') : nome,
+}));
 // Videocorso proprio di ogni materia (in italiano): quello che sblocca per prima la materia; il pacchetto di più corsi non ha una scheda sua.
 const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === slug) : undefined;
 // "Sbloccata" compare solo su ciò che è nell'account: la teoria ed esercizi se la materia è sbloccata, il videocorso se è stato acquistato
@@ -52,16 +59,25 @@ const icona = {
     <button type="submit">{t.cerca}</button>
   </form>
   {lingua === 'it' ? (
-    <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span>Di ogni argomento si leggono gratis l'inizio della teoria e le prime tre schede svolte, senza account.</span></p>
+    <ul class="legenda-home">
+      <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
+      <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: lezioni di Carmine, con video e PDF.</span></li>
+    </ul>
+    <p class="gratis-home solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg><span><b>Prova gratis</b>: anteprime di teoria ed esercizi, senza account.</span></p>
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
   <div class="risorse-home"><GratisHome lingua={lingua} /></div>
+  {lingua === 'it' && <PacchettiHome />}
+  <div class="catalogo-testa"><h2>{lingua === 'it' ? 'Scegli la materia' : 'Choose your subject'}</h2><span>{lingua === 'it' ? 'Il programma e i materiali disponibili' : 'Syllabus and available materials'}</span></div>
+  <nav class="percorsi-home" aria-label={lingua === 'en' ? 'Choose your course area' : 'Scegli il tuo percorso'}>
+    {gruppi.map((g) => <a href={`#${g.id}`} aria-controls={g.id}>{g.breve}</a>)}
+  </nav>
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
-  <div class="catalogo-testa" id="materie-home"><h2>{lingua === 'it' ? 'Scegli la materia' : 'Choose your subject'}</h2><span>{lingua === 'it' ? 'Il programma e i materiali disponibili' : 'Syllabus and available materials'}</span></div>
-  {gruppiL(lingua).map((g, i) => (
-    <details class="gruppo" open={i === 0}>
+  {gruppi.map(({ nome: g, id }, i) => (
+    <details class="gruppo" open={i === 0} id={id}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
+      {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
           <li style="--accento: #6d5a8a">
@@ -153,3 +169,17 @@ const icona = {
   :global(html.collegato.home-chiarezza .risorse-home){margin-top:1rem;font-size:.9rem}
   @media(max-width:560px){.catalogo-testa{margin-top:1.5rem}.scheda-materia{padding:.9rem}.accesso-scheda{padding-left:.9rem}:global(.home-chiarezza .pulsanti-scheda){padding-left:.9rem}}
 </style>
+<script>
+  function apriPercorso(hash: string) {
+    const gruppo = document.getElementById(hash.slice(1));
+    if (!(gruppo instanceof HTMLDetailsElement) || !gruppo.classList.contains('gruppo')) return;
+    gruppo.open = true;
+    gruppo.scrollIntoView({ block: 'start' });
+    gruppo.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
+  }
+  document.querySelectorAll<HTMLAnchorElement>('.percorsi-home a').forEach((a) => {
+    a.addEventListener('click', () => apriPercorso(a.hash));
+  });
+  addEventListener('hashchange', () => apriPercorso(location.hash));
+  if (location.hash) apriPercorso(location.hash);
+</script>

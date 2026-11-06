@@ -90,7 +90,7 @@ export const TESTI = {
     nonTradotta: '',
     // home
     homeSopra: '', homeTitolo: 'Teoria ed esercizi svolti per le materie scientifiche',
-    homeSommario: 'Per ogni materia trovi teoria, definizioni, teoremi e dimostrazioni, esercizi svolti passo dopo passo ed esercizi da risolvere con soluzione.',
+    homeSommario: 'Matematica e fisica, spiegate passo dopo passo.',
     homeDescrizione: "Teoria ed esercizi per gli esami di matematica dell'università, materia per materia.",
     cercaSegnaposto: 'Cerca un argomento, un teorema, un tipo di esercizio…', cercaNelSito: 'Cerca nel sito',
     // pagina della materia

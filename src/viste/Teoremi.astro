@@ -2,6 +2,7 @@
 // Indice analitico di una materia: tutte le definizioni e i teoremi della teoria, argomento per argomento,
 // ciascuno con il collegamento al suo riquadro. Serve a chi cerca un teorema per nome (anche da Google).
 import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { materiaL, argomentoL, link, type Lingua } from '../i18n';
@@ -10,6 +11,7 @@ interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
+const senzaInglese = !en && materia.endsWith('-semestre-filtro') && !(await getCollection('teoria_en')).some((v) => v.id.startsWith(`${materia}/`));
 const indice = await indiceAnalitico(lingua, materia, m.argomenti.map((a) => a.slug));
 const tutte = indice.flatMap((a) => a.voci);
 const nDef = tutte.filter((v) => v.tipo === 'definizione').length;
@@ -40,7 +42,7 @@ const schema = [{
 <Base
   titolo={en ? `Definitions and theorems · ${m.titolo}` : `Teoremi e definizioni · ${m.titolo}`}
   descrizione={SEO(lingua).teoremiDescr(m.titolo, nDef, nTeo, primi)}
-  seo={{ titolo: SEO(lingua).teoremi(m.titolo, m.breve), schema, soloQuestaLingua: !haAltra }}
+  seo={{ titolo: SEO(lingua).teoremi(m.titolo, m.breve), schema, soloQuestaLingua: !haAltra, senzaInglese }}
   percorso={[{ titolo: en ? 'Definitions and theorems' : 'Teoremi e definizioni' }]}
   materia={materia} lingua={lingua}
 >

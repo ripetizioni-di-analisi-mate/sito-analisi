@@ -20,6 +20,7 @@ interface Richiesta {
 interface Esito {
   materia: string; titolo: string; compatibilita: number; conteggi: Record<'stesso' | 'argomento' | 'nessuno', number>;
   perPunti: boolean; richieste: Richiesta[]; collegato: boolean;
+  quote?: { stesso: number; argomento: number };
   successo: { percentuale: number | null; risposte: number } | null;
 }
 
@@ -68,9 +69,6 @@ async function daPdf(f: File, quante: number): Promise<string[]> {
   }
   return pagine;
 }
-
-// Articolo davanti a una percentuale: l'1%, l'8%, l'11%, l'80%… (si legge con una vocale), il 90%, il 100%.
-const articolo = (n: number) => (n === 1 || n === 11 || n === 18 || /^8/.test(String(n)) ? 'l’' : 'il ');
 
 // ---------- pagina ----------
 export function avviaCompatibilita() {
@@ -138,6 +136,8 @@ export function avviaCompatibilita() {
   // Il confronto risponde in streaming (una riga JSON per evento): {"r": richiesta} appena il modello la scrive,
   // poi {"fine": esito} con le percentuali. Le richieste si mostrano subito, il riquadro completo alla fine.
   const confronta = async (materia: string, testo: string) => {
+    esitoBox.hidden = true;
+    esitoBox.innerHTML = '';
     stato.textContent = 'Confronto con il materiale…';
     const r = await fetch('/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo, id: idCompito || undefined }) });
     if (!r.ok || !/ndjson/.test(r.headers.get('content-type') || '')) {
@@ -155,6 +155,13 @@ export function avviaCompatibilita() {
       if (!riga.trim()) return;
       const d = JSON.parse(riga);
       if (d.errore) throw new Error(d.errore);
+      if (d.ricomincia) {
+        arrivate.length = 0;
+        esitoBox.innerHTML = '';
+        esitoBox.hidden = true;
+        stato.textContent = 'Completo il confronto con una seconda analisi…';
+        return;
+      }
       if (d.fine) { esito = d.fine; return; }
       if (d.r) {
         arrivate.push(d.r);
@@ -164,15 +171,17 @@ export function avviaCompatibilita() {
     };
     const lettore = r.body!.pipeThrough(new TextDecoderStream()).getReader();
     let resto = '';
-    for (;;) {
-      const { done, value } = await lettore.read();
-      if (done) break;
-      resto += value;
-      const righe = resto.split('\n');
-      resto = righe.pop()!;
-      righe.forEach(evento);
-    }
-    evento(resto);
+    try {
+      for (;;) {
+        const { done, value } = await lettore.read();
+        if (done) break;
+        resto += value;
+        const righe = resto.split('\n');
+        resto = righe.pop()!;
+        righe.forEach(evento);
+      }
+      evento(resto);
+    } finally { await lettore.cancel().catch(() => {}); lettore.releaseLock(); }
     const finale = esito as (Esito & { id?: string }) | null;
     if (!finale) throw new Error('Il confronto si è interrotto. Riprova tra qualche istante.');
     if (finale.id) idCompito = finale.id;
@@ -197,6 +206,7 @@ export function avviaCompatibilita() {
       }
       await confronta(materia, testo);
     } catch (err) {
+      esitoBox.hidden = true;
       stato.textContent = (err as Error).message;
     } finally { occupato(false); }
   });
@@ -216,14 +226,16 @@ export function avviaCompatibilita() {
   };
   // Mentre il confronto è in corso: le richieste già abbinate, senza percentuali.
   function inCorso(materia: string, richieste: Richiesta[]) {
-    esitoBox.innerHTML = `
-      <div class="compat-sintesi"><p class="compat-righe-sintesi">Confronto in corso · ${richieste.length} ${richieste.length === 1 ? 'richiesta abbinata' : 'richieste abbinate'}</p></div>
-      <ol class="compat-richieste">${richieste.map((r) => rigaHtml(materia, r)).join('')}</ol>`;
+    if (richieste.length === 1) esitoBox.innerHTML = `
+      <div class="compat-sintesi"><p class="compat-righe-sintesi"></p></div>
+      <ol class="compat-richieste"></ol>`;
+    esitoBox.querySelector('.compat-righe-sintesi')!.textContent = `Confronto in corso · ${richieste.length} ${richieste.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}`;
+    esitoBox.querySelector('.compat-richieste')!.insertAdjacentHTML('beforeend', rigaHtml(materia, richieste[richieste.length - 1]));
     esitoBox.hidden = false;
   }
   function mostra(e: Esito, testo: string) {
     const tot = Math.max(e.richieste.length, 1);
-    const quota = (k: 'stesso' | 'argomento') => (100 * e.conteggi[k]) / tot;
+    const quota = (k: 'stesso' | 'argomento') => e.quote?.[k] ?? (100 * e.conteggi[k] * (k === 'stesso' ? 1 : 0.5)) / tot;
     const successo = e.collegato && e.successo?.percentuale != null
       ? `<p class="compat-righe-sintesi">Successo nelle domande a tempo sugli stessi argomenti: <b>${e.successo.percentuale}%</b></p>`
       : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del compito.</p>` : '';
@@ -232,13 +244,13 @@ export function avviaCompatibilita() {
     const acquisto = consigliato
       ? `<div class="compat-consigliato">
           <p class="cc-etichetta"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Acquisto consigliato</p>
-          <p class="cc-titolo">Il materiale di ${esc(e.titolo)} copre ${articolo(e.compatibilita)}${e.compatibilita}% del tuo compito.</p>
+          <p class="cc-titolo">Copertura stimata del tuo compito con ${esc(e.titolo)}: ${e.compatibilita}%.</p>
           <a class="bottone-primario" href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></div>`
       : daComprare ? `<p class="compat-acquisto"><a href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></p>` : '';
     const voci = e.richieste.map((r) => rigaHtml(e.materia, r)).join('');
     esitoBox.innerHTML = `
       <div class="compat-sintesi">
-        <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di compatibilità con ${esc(e.titolo)}</span></p>
+        <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di copertura stimata con ${esc(e.titolo)}</span></p>
         <div class="compat-barra" aria-hidden="true"><i class="b-stesso" style="width:${quota('stesso')}%"></i><i class="b-argomento" style="width:${quota('argomento')}%"></i></div>
         <p class="compat-righe-sintesi">${e.conteggi.stesso} coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte</p>
         ${successo}${acquisto}
@@ -246,7 +258,7 @@ export function avviaCompatibilita() {
       <ol class="compat-richieste">${voci}</ol>
       <details class="compat-dettagli">
         <summary>Come si calcola</summary>
-        <p>Una richiesta vale per intero se c’è un esercizio svolto con lo stesso procedimento (per la teoria, se l’enunciato è nel sito), per metà se c’è solo l’argomento. ${e.perPunti ? 'Ogni esercizio pesa quanto il suo punteggio.' : 'Le richieste hanno tutte lo stesso peso.'}</p>
+        <p>Una richiesta vale per intero se il procedimento necessario è spiegato negli esercizi svolti o nella teoria, per metà se c’è solo l’argomento. Una dimostrazione richiesta deve essere presente nel materiale. ${e.perPunti ? 'Si usano i punteggi indicati; il totale di un esercizio si distribuisce tra i suoi punti quando manca un punteggio specifico.' : 'Le richieste hanno tutte lo stesso peso.'} La stima riguarda il compito caricato; i riferimenti usati sono indicati in ogni riga.</p>
       </details>
       <details class="compat-dettagli">
         <summary>Correggi il testo letto</summary>
@@ -258,9 +270,10 @@ export function avviaCompatibilita() {
     letto.value = testo;
     document.getElementById('compat-ricalcola')!.addEventListener('click', async (ev) => {
       const b = ev.currentTarget as HTMLButtonElement;
+      occupato(true);
       b.disabled = true;
-      try { await confronta(e.materia, letto.value.trim()); } catch (err) { stato.textContent = (err as Error).message; }
-      finally { b.disabled = false; }
+      try { await confronta(e.materia, letto.value.trim()); } catch (err) { esitoBox.hidden = true; stato.textContent = (err as Error).message; }
+      finally { b.disabled = false; occupato(false); }
     });
   }
 }

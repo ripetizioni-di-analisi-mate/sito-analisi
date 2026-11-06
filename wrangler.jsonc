@@ -23,8 +23,16 @@
     "PADDLE_PREZZO_ALGEBRA_LINEARE": "pri_01m61jm6w03harfshmj8a1vfke",
     "PADDLE_PREZZO_FISICA_1": "pri_01m61jnkz4dx9drvpk02cc801d",
     "PADDLE_PREZZO_FISICA_2": "pri_01m61jpx5sxsb03hw6yqyh1mc2",
+    "PADDLE_PREZZO_FISICA_SEMESTRE_FILTRO": "pri_01m6pnh578ve256qazgwgtjgmn",
+    "PADDLE_PREZZO_MATEMATICA_SEMESTRE_FILTRO": "pri_01m6rbfemt3p7k53608ymv6t2v",
+    "PADDLE_PREZZO_CHIMICA_SEMESTRE_FILTRO": "pri_01m6r3stf7qq5b6wwq64pbpx0k",
     "PADDLE_PREZZO_MATEMATICA_GENERALE": "pri_01m644j57901k5gxbwwbpe485v",
     "PADDLE_PREZZO_MATEMATICA_SUPERIORI_5": "pri_01m644kjg8zmzfewdmmwvad9hg",
+    "PADDLE_PREZZO_MATEMATICA_SUPERIORI_3": "pri_01m6r50b23gx2dk93jcwz6cybz",
+    "PADDLE_PREZZO_MATEMATICA_SUPERIORI_4": "pri_01m6pxaxaev6q0psy7z37tsahq",
+    "PADDLE_PREZZO_MATEMATICA_SUPERIORI_2": "pri_01m6r7twtsca6as2r4eb4g7n7k",
+    "PADDLE_PREZZO_FISICA_SUPERIORI_2": "pri_01m6r7c847z7d5jx7kspczac6d",
+    "PADDLE_PREZZO_FISICA_SUPERIORI_3": "pri_01m6r5kp6st4ww18gv912vhtge",
     "PADDLE_PREZZO_FISICA_SUPERIORI_5": "pri_01m6gma0cfccw8aw8e9thnnd4k",
     "PADDLE_PREZZO_MATEMATICA_CONCORSI": "pri_01m66bzzp37j6gp6sn0cx54vdr",
     "PADDLE_PREZZO_LOGICA_CONCORSI": "pri_01m677rv61jsjdajaqqt7tzee2",
@@ -36,7 +44,7 @@
     "PADDLE_PREZZO_VIDEO_ALGEBRA": "pri_01m66v2m485p0fq8c0e9pxawzf",
     // Lezioni individuali (worker/prenotazioni.mjs): codice cliente OAuth di Google (pubblico) e calendario usato.
     // Segreti nel pannello Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET.
-    "GOOGLE_CLIENT_ID": "",
+    "GOOGLE_CLIENT_ID": "488557946173-e8gdo04dfiae9b06pltp7b9gc85p53qe.apps.googleusercontent.com",
     "GOOGLE_CALENDARIO": "primary",
     // Cartelle Google Drive dei videocorsi (slug -> link), mostrate solo a chi ha comprato
     // Mittente delle email (recupero della password); la chiave RESEND_API_KEY è un segreto nel pannello Cloudflare
