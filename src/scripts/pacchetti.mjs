@@ -27,6 +27,22 @@ async function avvia() {
     tabs.forEach((b) => { b.disabled = occupato || pagato; });
     app.querySelectorAll('[data-scegli-materie], [data-scegli-video]').forEach((b) => { b.disabled = occupato || pagato || b.dataset.bloccato === '1'; });
     const m = riepilogo('materie'), v = riepilogo('video');
+    app.querySelector('#riepilogo-materie').hidden = !m;
+    app.querySelector('#riepilogo-video').hidden = !v;
+    app.querySelectorAll('[data-sconto]').forEach((el) => { el.classList.toggle('is-attiva', Boolean(m && Number(el.dataset.sconto) === m.percentuale)); });
+    app.querySelectorAll('[data-scegli-materie], [data-scegli-video]').forEach((b) => {
+      const elenco = b.dataset.scegliMaterie?.split(',');
+      const selezionato = elenco ? Boolean(m && elenco.length === m.chiavi.length && elenco.every((s) => m.chiavi.includes(s))) : Boolean(v && b.dataset.scegliVideo === v.id);
+      b.closest('.pacchetto').classList.toggle('is-selected', selezionato);
+      b.setAttribute('aria-pressed', String(selezionato));
+      const etichetta = b.querySelector('[data-etichetta-scelta]');
+      const segno = b.querySelector('[data-segno-scelta]');
+      if (b.dataset.bloccato !== '1' && etichetta && segno) {
+        etichetta.textContent = selezionato ? 'Selezionato' : 'Scegli il pacchetto';
+        segno.textContent = selezionato ? '✓' : '→';
+      }
+      b.setAttribute('aria-label', `${b.dataset.titolo}: ${etichetta?.textContent || b.textContent}`);
+    });
     scrivi('[data-nomi-materie]', scelte().length ? scelte().map((s) => materie.find((m) => m.slug === s).titolo).join(' + ') : 'Scegli un pacchetto o le materie che ti servono.');
     scrivi('[data-totale-materie]', m ? euro(m.totale) : '—');
     scrivi('[data-risparmio-materie]', m ? `Risparmi ${euro(m.risparmio)} · sconto del ${m.percentuale}% incluso` : '');
@@ -39,7 +55,7 @@ async function avvia() {
       b.disabled = caricando || occupato || pagato || !disponibile(q);
       b.textContent = pagato ? 'Pagamento ricevuto' : occupato ? 'Apro il pagamento…' : caricando ? 'Un momento…' : !q
         ? b.dataset.compra === 'materie' ? 'Scegli almeno due materie' : 'Scegli un pacchetto'
-        : !conf ? 'Pagamento non disponibile' : `${io ? 'Acquista' : 'Accedi e acquista'} · ${euro(q.totale)}`;
+        : !conf ? 'Pagamento non disponibile' : !disponibile(q) ? 'Pacchetto già posseduto o non disponibile' : `${io ? 'Acquista' : 'Accedi e acquista'} · ${euro(q.totale)}`;
     });
   }
   function scheda(tipo) {
@@ -55,14 +71,26 @@ async function avvia() {
       tabs[n].click(); tabs[n].focus();
     });
   });
+  const mostraRiepilogo = (tipo) => {
+    const el = app.querySelector(`#riepilogo-${tipo}`);
+    el.querySelector('h2').focus({ preventScroll: true });
+    scorri(el);
+  };
+  app.querySelector('[data-apri-componi]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (occupato || pagato) return;
+    const el = app.querySelector('#componi'); el.open = true;
+    (el.querySelector('input:not(:disabled)') || el.querySelector('summary')).focus({ preventScroll: true });
+    el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  });
   app.querySelectorAll('[data-scegli-materie]').forEach((b) => b.addEventListener('click', () => {
     const elenco = b.dataset.scegliMaterie.split(',');
     caselle.forEach((c) => { c.checked = !c.disabled && elenco.includes(c.value); });
     app.querySelector('#componi').open = false;
-    avviso(''); aggiorna(); scorri(app.querySelector('#riepilogo-materie'));
+    avviso(''); aggiorna(); mostraRiepilogo('materie');
   }));
   app.querySelectorAll('[data-scegli-video]').forEach((b) => b.addEventListener('click', () => {
-    selezioneVideo = b.dataset.scegliVideo; avviso(''); aggiorna(); scorri(app.querySelector('#riepilogo-video'));
+    selezioneVideo = b.dataset.scegliVideo; avviso(''); aggiorna(); mostraRiepilogo('video');
   }));
   caselle.forEach((c) => c.addEventListener('change', () => { avviso(''); aggiorna(); }));
 
