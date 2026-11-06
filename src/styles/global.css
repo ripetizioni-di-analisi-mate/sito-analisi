@@ -414,6 +414,11 @@ html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto
 .cerca-home input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
 .cerca-home input:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
 .cerca-home button { font: inherit; font-size: 0.95rem; padding: 0.6rem 1rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: var(--accento); color: white; cursor: pointer; }
+.percorsi-home { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.1rem 0 0; font: 600 0.88rem var(--ui); }
+.percorsi-home a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0.35rem 0.8rem; border: 1px solid var(--riga); border-radius: 999px; text-decoration: none; color: var(--inchiostro-2); }
+.percorsi-home a:hover, .percorsi-home a:focus-visible { color: var(--verde); border-color: var(--verde); background: color-mix(in srgb, var(--verde) 5%, transparent); }
+.gruppo[id] { scroll-margin-top: 5rem; }
+.indice-preparazione { padding: 0.35rem 0.5rem 0.5rem; font: 400 0.78rem/1.5 var(--ui); color: var(--inchiostro-2); }
 .nome-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
 /* Macro aree apribili (home e indice) */
 details.gruppo > summary.nome-gruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; }
@@ -1016,6 +1021,12 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .obiettivi li .barra-exp { grid-column: 1 / -1; height: 6px; }
 .obiettivi li:not(.completato) .barra-exp > span { background: var(--c-esempio); }
 .obiettivi li.completato > span:nth-child(2) { color: var(--verde); font-weight: 600; }
+.obiettivi li > span:first-child { min-width: 0; }
+.obiettivi a, .sessioni-account a { color: var(--verde); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.obiettivi a:hover, .sessioni-account a:hover { text-decoration-thickness: 2px; }
+@media (max-width: 30rem) {
+  .obiettivi li { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* account: il tuo percorso */
 .percorso-account { margin-bottom: 2.5rem; }

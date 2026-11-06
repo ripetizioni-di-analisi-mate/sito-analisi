@@ -96,7 +96,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           {(() => {
             const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
               <ol class="indice-materie">
-                {voci.map(({ m: x, nome }) => {
+                {voci.filter(({ m }) => m.attiva).map(({ m: x, nome }) => {
                   const dentro = (
                     <>
                       <span class="materia-punto" aria-hidden="true" />
@@ -112,6 +112,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                     </li>
                   );
                 })}
+                {voci.some(({ m }) => !m.attiva) && <li class="indice-preparazione">{lingua === 'en' ? 'In preparation' : 'In preparazione'}: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>}
               </ol>
             );
             return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (

@@ -11,9 +11,10 @@ import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
-import { materiaL, link, altraLingua, T, type Lingua } from '../i18n';
+import { materiaL, materieL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
+import { creaCatalogoStudio } from '../lib/percorso-studio.mjs';
 import { anteprima, altGenerale, ogGenerale } from '../lib/anteprime.mjs';
 
 const NOME_SITO = 'Ripetizioni di Analisi';
@@ -43,7 +44,9 @@ const altra: Lingua = lingua === 'it' ? 'en' : 'it';
 // Pagine che esistono solo in italiano (videocorsi, concorsi…): il tasto EN porta alla home inglese, non a una pagina inesistente.
 const versoAltra = seo.senzaInglese ? link(altra, '/') : altraLingua(Astro.url.pathname, altra);
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
-const domandeQui = Boolean(materia && argomento && ((await catalogoDomande(lingua))[materia] ?? []).includes(argomento));
+const domandeDisponibili = await catalogoDomande(lingua);
+const domandeQui = Boolean(materia && argomento && (domandeDisponibili[materia] ?? []).includes(argomento));
+const catalogoPercorso = creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua);
 const en = lingua === 'en';
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
@@ -160,7 +163,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
-              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
               {!en && (
                 <div class="pl-sfide">
@@ -237,6 +240,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </div>
 
   {sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
+  <script type="application/json" id="catalogo-percorso" is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>
   <div class="avviso-duello" role="status" aria-live="polite" hidden></div>
@@ -249,6 +253,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <script>
     import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
     import { medagliaLega } from '../scripts/medaglia-lega';
+    import { caricaPercorsoStudio, leggiCatalogoStudio, prossimaAttivita } from '../lib/percorso-studio.mjs';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
     // fino a un minimo; oltre quel minimo la formula scorre nel proprio riquadro.
     function adattaFormule() {
@@ -312,19 +317,19 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     async function caricaPercorso() {
       if (!pl || Date.now() - percorsoChiesto < 30000) return;
       percorsoChiesto = Date.now();
-      const r = await fetch(`/api/percorso?l=${inglese ? 'en' : 'it'}`).catch(() => null);
-      if (!r || !r.ok) return;
-      const d = await r.json();
+      const d = await caricaPercorsoStudio(inglese ? 'en' : 'it');
+      if (!d) { percorsoChiesto = 0; return; }
       if (d.stato) mostraLivello(d.stato);
       pl.querySelector('.pl-oggi-minuti')!.textContent = num(d.oggi?.minuti ?? 0);
       pl.querySelector('.pl-oggi-corrette')!.textContent = num(d.oggi?.corrette ?? 0);
       pl.querySelector('.pl-oggi-giorni')!.textContent = String((d.settimana?.giorni || []).filter((g: any) => g.attivo).length);
       // Fuori da un argomento, il tasto porta all'argomento dell'obiettivo della settimana o all'ultimo studiato.
       const cont = pl.querySelector<HTMLAnchorElement>('.pl-continua')!;
-      const conLink = (d.obiettivi || []).find((o: any) => o.link && !o.completato);
-      const ultima = (d.sessioni || []).find((x: any) => x.materia && x.argomento);
-      const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
-      if (!cont.dataset.qui && dove) cont.href = (inglese ? '/en' : '') + dove;
+      if (!cont.dataset.qui) {
+        const attivita = prossimaAttivita(d, leggiCatalogoStudio(), inglese ? 'en' : 'it');
+        cont.href = attivita.href;
+        cont.textContent = attivita.testo;
+      }
       // Lega della settimana: nome, posizione e numero di studenti del gruppo
       const lg = d.lega, sf = pl.querySelector<HTMLElement>('.pl-sfide');
       if (lg && sf) {

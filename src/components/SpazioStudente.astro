@@ -6,7 +6,6 @@ import { link, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
-const pref = en ? '/en' : '';
 ---
 <section class="spazio-studente" aria-labelledby="ss-nome">
   <div class="ss-eroe">
@@ -29,46 +28,47 @@ const pref = en ? '/en' : '';
   <div class="ss-piede">
     <div class="ss-azioni">
       <a class="ss-riprendi" href="#" hidden><span class="ss-libro" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M10 5.2C8.4 4 6.2 3.6 3 3.8v11.4c3.2-.2 5.4.2 7 1.4 1.6-1.2 3.8-1.6 7-1.4V3.8c-3.2-.2-5.4.2-7 1.4Z"/><path d="M10 5.2v11.4"/></svg></span><span class="ss-rip-testo"><small>{en ? 'Back to' : 'Riprendi'}</small><span class="ss-argomento"></span></span></a>
-      <a class="ss-continua" href={link(lingua, '/livelli-e-punti')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
+      <a class="ss-continua" href={link(lingua, '/domande-a-tempo')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
     </div>
   </div>
 </section>
-<script is:inline define:vars={{ en, pref }}>
+<script>
+  import { caricaPercorsoStudio, leggiCatalogoStudio, prossimaAttivita, ultimaSessioneStudio } from '../lib/percorso-studio.mjs';
   (async () => {
-    const box = document.querySelector('.spazio-studente');
+    const en = document.documentElement.lang === 'en';
+    const pref = en ? '/en' : '';
+    const box = document.querySelector<HTMLElement>('.spazio-studente');
     if (!box || !document.documentElement.classList.contains('collegato')) return;
-    const q = (s) => box.querySelector(s);
-    const r = await fetch(`/api/percorso?l=${en ? 'en' : 'it'}`).catch(() => null);
-    if (!r || !r.ok) return;
-    const d = await r.json();
-    // Tasto principale: obiettivo della settimana con un collegamento, altrimenti le domande dell'ultimo argomento studiato.
-    const conLink = (d.obiettivi || []).find((o) => o.link && !o.completato);
-    const ultima = (d.sessioni || []).find((s) => s.materia && s.argomento);
-    const dove = conLink ? conLink.link : ultima ? `/${ultima.materia}/${ultima.argomento}/domande` : null;
-    const c = q('.ss-continua');
-    if (dove) c.href = pref + dove;
-    else { c.href = '#materie-home'; c.querySelector('span').textContent = en ? 'Choose a topic and start' : 'Scegli un argomento e inizia'; }
+    const q = (s: string) => box.querySelector<HTMLElement>(s)!;
+    const d = await caricaPercorsoStudio(en ? 'en' : 'it');
+    if (!d) return;
+    const catalogo = leggiCatalogoStudio();
+    const ultima = ultimaSessioneStudio(d.sessioni, catalogo, en ? 'en' : 'it');
+    const attivita = prossimaAttivita(d, catalogo, en ? 'en' : 'it');
+    const c = q('.ss-continua') as HTMLAnchorElement;
+    c.href = attivita.href;
+    c.querySelector('span')!.textContent = attivita.testo;
     // Esame più vicino con la data inserita (/api/percorso → esami).
     const esame = (d.esami || [])[0];
-    const es = q('.ss-esame');
+    const es = q('.ss-esame') as HTMLAnchorElement;
     if (esame && es) {
       const giorno = new Date(esame.data + 'T12:00:00');
       const n = Math.round((giorno - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
       if (n >= 0) {
         const lingua = en ? 'en' : 'it';
         const quando = n > 1 ? (en ? `in ${n} days` : `tra ${n} giorni`) : n === 1 ? (en ? 'tomorrow' : 'domani') : (en ? 'today' : 'oggi');
-        es.querySelector('.ss-es-su').textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`;
-        es.querySelector('.ss-es-giu').textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`);
+        es.querySelector('.ss-es-su')!.textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`;
+        es.querySelector('.ss-es-giu')!.textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`);
         es.title = `${esame.titolo} · ${giorno.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`;
         es.href = `${pref}/${esame.materia}`;
         es.hidden = false;
         box.classList.add('con-esame');
       }
     }
-    if (ultima && ultima.titolo && ultima.argomento !== 'prove-d-esame') {
-      const a = q('.ss-riprendi');
-      a.href = `${pref}/${ultima.materia}/${ultima.argomento}/teoria`;
-      a.querySelector('.ss-argomento').textContent = ultima.titolo;
+    if (ultima) {
+      const a = q('.ss-riprendi') as HTMLAnchorElement;
+      a.href = ultima.href;
+      a.querySelector('.ss-argomento')!.textContent = ultima.titolo;
       a.hidden = false;
     }
   })();

@@ -15,6 +15,15 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const MATERIE = materieL(lingua);
+const gruppi = gruppiL(lingua).map((nome, i) => ({
+  nome,
+  id: ['materie-home', 'superiori-home', 'concorsi-home', 'principianti-home', 'test-ingresso-home'][i],
+  breve: nome.startsWith('TOLC') ? (lingua === 'en' ? 'Admission tests' : 'Test d’ingresso') : nome === 'Percorso per principianti' ? 'Da zero' : nome,
+}));
+const disponibili = (materie: { attiva: boolean }[]) => {
+  const n = materie.filter((m) => m.attiva).length;
+  return n ? `${n} ${lingua === 'en' ? 'available' : n === 1 ? 'disponibile' : 'disponibili'}` : t.inPreparazione;
+};
 // Videocorso proprio di ogni materia (in italiano): quello che sblocca per prima la materia; il pacchetto di più corsi non ha una scheda sua.
 const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === slug) : undefined;
 // "Sbloccata" compare solo su ciò che è nell'account: la teoria ed esercizi se la materia è sbloccata, il videocorso se è stato acquistato
@@ -62,10 +71,13 @@ const icona = {
   )}
   <GratisHome lingua={lingua} />
   {lingua === 'it' && <PacchettiHome />}
+  <nav class="percorsi-home" aria-label={lingua === 'en' ? 'Choose your course area' : 'Scegli il tuo percorso'}>
+    {gruppi.map((g) => <a href={`#${g.id}`} aria-controls={g.id}>{g.breve}</a>)}
+  </nav>
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
-  {gruppiL(lingua).map((g, i) => (
-    <details class="gruppo" open={i === 0} id={i === 0 ? 'materie-home' : undefined}>
-      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
+  {gruppi.map(({ nome: g, id }, i) => (
+    <details class="gruppo" open={i === 0} id={id}>
+      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{disponibili(MATERIE.filter((m) => m.gruppo === g))}</span></summary>
       {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
@@ -79,11 +91,10 @@ const icona = {
         </ul>
       )}
       {(() => {
-        // Nelle aree senza sottogruppi con almeno una materia pronta (Università, Percorso per principianti) le materie in preparazione stanno in una riga di testo;
-        // se nessuna è pronta (TOLC, OFA e test di ingresso) restano schede «in preparazione».
-        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = false) => (
+        // Le schede aprono sempre corsi disponibili; quelli in preparazione restano in una riga separata.
+        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
           <ul class="griglia-materie">
-            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
+            {voci.filter(({ m }) => m.attiva).map(({ m, nome }) => (
               <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
                 {m.attiva && lingua === 'it' ? (() => {
                   const v = videoDi(m.slug);
@@ -121,18 +132,34 @@ const icona = {
                 )}
               </li>
             ))}
-            {riga && voci.some(({ m }) => !m.attiva) && (
-              <li class="riga-preparazione">In preparazione: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>
+            {voci.some(({ m }) => !m.attiva) && (
+              <li class="riga-preparazione">{lingua === 'en' ? 'In preparation' : 'In preparazione'}: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>
             )}
           </ul>
         );
         return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
           <details class="sottogruppo">
-            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.length}</span></summary>
+            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{disponibili(b.materie.map(({ m }) => m))}</span></summary>
             {griglia(b.materie)}
           </details>
-        ) : griglia(b.materie, lingua === 'it' && b.materie.some(({ m }) => m.attiva)));
+        ) : griglia(b.materie));
       })()}
     </details>
   ))}
 </Base>
+<script>
+  // Anche un collegamento diretto apre la sezione chiusa; un secondo tocco
+  // sullo stesso collegamento funziona senza dover cambiare prima l'indirizzo.
+  function apriPercorso(hash: string) {
+    const gruppo = document.getElementById(hash.slice(1));
+    if (!(gruppo instanceof HTMLDetailsElement) || !gruppo.classList.contains('gruppo')) return;
+    gruppo.open = true;
+    gruppo.scrollIntoView({ block: 'start' });
+    gruppo.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
+  }
+  document.querySelectorAll<HTMLAnchorElement>('.percorsi-home a').forEach((a) => {
+    a.addEventListener('click', () => apriPercorso(a.hash));
+  });
+  addEventListener('hashchange', () => apriPercorso(location.hash));
+  if (location.hash) apriPercorso(location.hash);
+</script>
