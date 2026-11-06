@@ -1171,6 +1171,7 @@ export default {
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'matematica-superiori-3': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_3 || null,
             'matematica-superiori-4': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_4 || null,
+            'matematica-superiori-2': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_2 || null,
             'fisica-superiori-3': env.PADDLE_PREZZO_FISICA_SUPERIORI_3 || null,
             'fisica-superiori-4': env.PADDLE_PREZZO_FISICA_SUPERIORI_4 || null,
             'fisica-superiori-5': env.PADDLE_PREZZO_FISICA_SUPERIORI_5 || null,
