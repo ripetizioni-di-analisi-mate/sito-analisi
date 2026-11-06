@@ -8,7 +8,7 @@ export function nomiAllenamento(materia, lingua = 'it') {
       simulazione: en ? 'Class test simulation' : 'Simulazione di verifica',
     };
   }
-  if (materia?.slug === 'fisica-semestre-filtro') {
+  if (materia?.slug?.endsWith('-semestre-filtro')) {
     return {
       ripasso: en ? 'Practice and review' : 'Allenamento e ripasso',
       simulazione: en ? 'Exercise practice' : 'Allenamento con esercizi',

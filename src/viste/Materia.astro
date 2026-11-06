@@ -5,6 +5,7 @@ import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
+import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
@@ -34,7 +35,7 @@ import { risultatoDi } from '../lib/risposte';
 // Progressi (con l'account): esercizi da fare con la verifica della risposta, per argomento.
 const verificabili = (a: string) => dafare.filter((v) => v.id.startsWith(`${materia}/${a}/`) && risultatoDi(v)).length;
 const en = lingua === 'en';
-const semestreFiltro = materia === 'fisica-semestre-filtro';
+const semestreFiltro = materia.endsWith('-semestre-filtro');
 const { ripasso: nomeRipasso, simulazione: nomeCompito } = nomiAllenamento(m, lingua);
 // Indice analitico (teoremi e definizioni) della materia.
 import { indiceAnalitico } from '../lib/indice-analitico';
@@ -61,7 +62,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
-  {semestreFiltro && <NotaSemestreFiltro lingua={lingua} />}
+  {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} />}
+  {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
   {m.prezzo && (
     <div class="riquadro-stato" data-materia={m.slug}>
       <div class="stato-sbloccata">
@@ -91,7 +93,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       </div>
     </div>
   )}
-  <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>
+  {materia !== 'matematica-semestre-filtro' && <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>
     <div class="esame-icona" aria-hidden="true">
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg>
     </div>
@@ -110,7 +112,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     </div>
     <button type="button" class="esame-apri">{en ? 'Add' : 'Aggiungi'}</button>
     <button type="button" class="esame-modifica" hidden>{en ? 'Change' : 'Cambia'}</button>
-  </div>
+  </div>}
   <ol class="griglia-argomenti">
     {m.argomenti.map((a) => {
       const pronto = teorie.has(`${materia}/${a.slug}`);

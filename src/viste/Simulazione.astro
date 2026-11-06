@@ -12,7 +12,7 @@ interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
-const semestreFiltro = materia === 'fisica-semestre-filtro';
+const semestreFiltro = materia.endsWith('-semestre-filtro');
 const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
 const nomiProve = nomiAllenamento(m, lingua);
 const dafare = await getCollection('dafare');
@@ -59,7 +59,8 @@ const pref = prefisso(lingua);
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
-    {semestreFiltro && <NotaSemestreFiltro lingua={lingua} />}
+    {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} />}
+    {materia === 'matematica-semestre-filtro' && <p>{en ? 'A preparatory mathematics practice paper for Physics and Chemistry.' : 'Compito di matematica preparatoria per Fisica e Chimica.'}</p>}
 
     <form class="sim-impostazioni">
       <div class="sim-scelte">

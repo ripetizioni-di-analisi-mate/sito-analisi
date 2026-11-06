@@ -1,5 +1,20 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'matematica-semestre-filtro': {
+    titolo: 'Mathematics foundations for the filter semester',
+    breve: 'Mathematics foundations',
+    descrizione: 'Free preparation for Physics and Chemistry: calculations, proportions, powers, units, formulas, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed practice; study materials in Italian.',
+    argomenti: {
+      'calcolo-e-proporzioni': { titolo: 'Calculations, proportions and percentages', breve: 'Calculations and proportions' },
+      'potenze-e-notazione-scientifica': { titolo: 'Powers, roots and scientific notation', breve: 'Powers and notation' },
+      'unita-di-misura': { titolo: 'Units and conversions', breve: 'Units' },
+      'equazioni-e-formule': { titolo: 'Equations and rearranging formulas', breve: 'Equations and formulas' },
+      'funzioni-e-grafici': { titolo: 'Functions, proportionality and graphs', breve: 'Functions and graphs' },
+      'esponenziali-e-logaritmi': { titolo: 'Exponentials, logarithms and applications', breve: 'Exponentials and logarithms' },
+      'trigonometria': { titolo: 'Trigonometry and right triangles', breve: 'Trigonometry' },
+      'vettori-e-componenti': { titolo: 'Vectors, components and products', breve: 'Vectors' },
+    },
+  },
   precorso: {
     titolo: 'Precalculus',
     breve: 'Precalculus',
@@ -313,4 +328,4 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
-export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };
+export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'Semestre filtro': 'Filter semester', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };

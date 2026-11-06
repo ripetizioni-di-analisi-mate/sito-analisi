@@ -435,6 +435,25 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'elettricita-e-circuiti', titolo: 'Carica elettrica e circuiti', breve: 'Elettricità e circuiti' },
     ],
   },
+  {
+    slug: 'matematica-semestre-filtro',
+    titolo: 'Basi di matematica per il semestre filtro',
+    breve: 'Basi di matematica',
+    descrizione: 'Modulo preparatorio gratuito per affrontare Fisica e Chimica: calcolo, proporzioni, potenze, unità di misura, formule, grafici, logaritmi, trigonometria e vettori, con esercizi svolti e domande a tempo.',
+    colore: '#2f6f68',
+    gruppo: 'Semestre filtro',
+    attiva: true,
+    argomenti: [
+      { slug: 'calcolo-e-proporzioni', titolo: 'Calcolo, proporzioni e percentuali', breve: 'Calcolo e proporzioni' },
+      { slug: 'potenze-e-notazione-scientifica', titolo: 'Potenze, radici e notazione scientifica', breve: 'Potenze e notazione' },
+      { slug: 'unita-di-misura', titolo: 'Unità di misura e conversioni', breve: 'Unità di misura' },
+      { slug: 'equazioni-e-formule', titolo: 'Equazioni e formule inverse', breve: 'Equazioni e formule' },
+      { slug: 'funzioni-e-grafici', titolo: 'Funzioni, proporzionalità e grafici', breve: 'Funzioni e grafici' },
+      { slug: 'esponenziali-e-logaritmi', titolo: 'Esponenziali, logaritmi e applicazioni', breve: 'Esponenziali e logaritmi' },
+      { slug: 'trigonometria', titolo: 'Trigonometria e triangoli rettangoli', breve: 'Trigonometria' },
+      { slug: 'vettori-e-componenti', titolo: 'Vettori, componenti e prodotti', breve: 'Vettori' },
+    ],
+  },
   // Test di ingresso all'università: materie in preparazione finché non si concorda il programma con Carmine.
   {
     slug: 'tolc-i',
@@ -492,7 +511,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     breve: 'Fisica semestre filtro',
     descrizione: "Fisica per il semestre filtro di Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.",
     colore: '#5d5d8f',
-    gruppo: 'TOLC, OFA e test di ingresso',
+    gruppo: 'Semestre filtro',
     attiva: true,
     argomenti: [
       { slug: 'metodi-della-fisica', titolo: 'Metodi della fisica, grandezze e vettori', breve: 'Metodi e vettori' },
