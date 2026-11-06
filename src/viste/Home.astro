@@ -1,4 +1,5 @@
 ---
+import '@fontsource/source-sans-3/latin-500-italic.css';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
@@ -45,9 +46,8 @@ const icona = {
 ---
 <Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} sezione="home" ricercaPrincipale seo={{ titolo: SEO(lingua).home }}>
   <div class="home-intro solo-ospiti">
-    <p class="sopratitolo">{lingua === 'it' ? 'Università · Superiori · Concorsi' : 'University · Secondary school · Entrance tests'}</p>
-    <h1>{t.homeTitolo}</h1>
-    <p class="sommario">{lingua === 'it' ? 'Scegli la materia. Trovi teoria, esercizi spiegati passo dopo passo e prove per esercitarti in autonomia.' : 'Choose a subject. Find theory, step-by-step worked examples and exercises to practise on your own.'}</p>
+    <h1 class="home-fascia-motivazionale">{lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'}</h1>
+    <p class="sommario">{lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
   </div>
   <div class="solo-ospiti">
     <Presentazione lingua={lingua} />
@@ -146,7 +146,10 @@ const icona = {
   ))}
 </Base>
 <style>
-  .home-intro{margin-bottom:1.4rem}.home-intro h1{max-width:24ch}.home-intro .sommario{margin-bottom:0}
+  .home-intro{margin-bottom:1.4rem}.home-intro .sommario{margin:17px 0 0}
+  .home-intro .home-fascia-motivazionale{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-height:47px;width:100%;max-width:none;margin:0;padding:10px 14px;background:#9a5e4b;color:#fff;border-radius:10px;text-align:center;font:italic 500 18px/1.4 var(--ui);letter-spacing:.01em;text-wrap:balance}
+  @media(max-width:560px){.home-intro .home-fascia-motivazionale{padding:10px 12px;font-size:17px}}
+  @media(forced-colors:active){.home-intro .home-fascia-motivazionale{background:Canvas;color:CanvasText;border:1px solid CanvasText}}
   .home-personale{margin-bottom:1.4rem}.catalogo-testa{scroll-margin-top:6rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;margin:2rem 0 .8rem;font-family:var(--ui)}
   .catalogo-testa h2{margin:0;font-size:1.3rem}.catalogo-testa>span{color:var(--inchiostro-2);font-size:.88rem}
   :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-left-width:3px;box-shadow:none;background:var(--carta)}
