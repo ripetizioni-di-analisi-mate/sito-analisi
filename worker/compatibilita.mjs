@@ -253,13 +253,13 @@ numero e punto | tipo | argomento | codice | punti | richiesta in breve
 - Se il testo è un test a risposta multipla di un concorso, una verifica di scuola superiore, oppure non contiene esercizi di matematica o di fisica, scrivi soltanto NON_UNIVERSITARIO.
 - Un esame universitario resta valido anche quando contiene argomenti avanzati o fuori dal programma della materia scelta. In quel caso indica - per argomento e codice; NON_UNIVERSITARIO non significa fuori programma.
 - Scrivi soltanto le righe, senza intestazione e senza commenti.
-- Dopo l'ultima richiesta scrivi FINE_CONFRONTO|N, dove N è il numero di richieste scritte. Analizza tutti gli esercizi e tutti i punti del compito.
+- Dopo l'ultima richiesta scrivi su una nuova riga soltanto FINE_CONFRONTO. Analizza tutti gli esercizi e tutti i punti del compito.
 
 Esempio di risposta
 1a|E|A3|S12|8|Calcolare $\\lim_{x \\to 0} \\frac{\\sin x - x}{x^3}$
 1b|E|A3|-|8|Studiare la derivabilità di $f$ in $x = 0$
 2|${conTeoria ? 'T|A5|T14' : 'E|A5|S30'}|6|${conTeoria ? 'Enunciare e dimostrare il teorema di Rolle' : 'Calcolare $\\int_0^1 x e^x \\, dx$'}
-FINE_CONFRONTO|3`;
+FINE_CONFRONTO`;
 
 // Una riga della risposta del modello → richiesta grezza (stessa forma che legge valutaRichieste); null se la riga non è una richiesta.
 export function leggiRiga(riga) {
@@ -314,6 +314,19 @@ function verificaEvento(ev) {
 const concluso = (ev) => ev?.finish_reason === 'stop' || ev?.choices?.some((c) => c.finish_reason === 'stop')
   || ev?.type === 'response.completed';
 
+// Codici tecnici senza testo del compito, risposta del modello o dati personali.
+function diagnosticaConfronto(e) {
+  const messaggio = String(e?.message || '');
+  const conteggio = /^numero di richieste incoerente: (\d+) lette, (\d+) dichiarate$/.exec(messaggio);
+  if (conteggio) return { codice: 'CONTEGGIO', lette: Number(conteggio[1]), dichiarate: Number(conteggio[2]) };
+  const codice = e instanceof SyntaxError ? 'FORMATO'
+    : /troppe richieste/.test(messaggio) ? 'RIGHE'
+    : /esercizi mancanti/.test(messaggio) ? 'ESERCIZI'
+    : /non ha completato/.test(messaggio) ? 'CHIUSURA'
+    : /risposta del modello interrotta/.test(messaggio) ? 'TRONCAMENTO' : 'MODELLO';
+  return { codice };
+}
+
 // Testo del modello a pezzi, in streaming (o tutto insieme, se il modello ignora lo streaming).
 async function* testoModello(env, modello, input, confermaFine) {
   const r = await esegui(env, modello, { ...input, stream: true });
@@ -333,7 +346,7 @@ async function* testoModello(env, modello, input, confermaFine) {
     let t = pezzoDi(ev);
     // Alcuni adattatori aggiungono al flusso il testo completo insieme al riepilogo
     // dei consumi. Non va analizzato di nuovo dopo le righe già ricevute.
-    if (testoEmesso && ev.usage && typeof ev.response === 'string' && t.startsWith(testoEmesso)) t = t.slice(testoEmesso.length);
+    if (testoEmesso && typeof ev.response === 'string' && t.startsWith(testoEmesso)) t = t.slice(testoEmesso.length);
     testoEmesso += t;
     return t;
   };
@@ -370,9 +383,9 @@ async function* richiesteModello(env, modello, input) {
     const k = r.indexOf('<think>');
     if (k >= 0) { pensa = !r.includes('</think>', k); r = r.slice(0, k); }
     if (/NON_UNIVERSITARIO/.test(r) && !n) { nonUniversitario = true; yield { nonUniversitario: true }; return; }
-    const fine = /^\s*FINE_CONFRONTO\s*\|\s*(\d+)\s*$/.exec(r);
+    const fine = /^\s*FINE_CONFRONTO(?:\s*\|\s*(\d+))?\s*$/.exec(r);
     if (fine) {
-      if (Number(fine[1]) !== n || !n) throw new Error(`numero di richieste incoerente: ${n} lette, ${fine[1]} dichiarate`);
+      if (!n || (fine[1] !== undefined && Number(fine[1]) !== n)) throw new Error(`numero di richieste incoerente: ${n} lette, ${fine[1] || 0} dichiarate`);
       completo = true;
       return;
     }
@@ -405,6 +418,9 @@ async function* richiesteModello(env, modello, input) {
 // Il recupero copre l'intero confronto, anche un errore dopo la prima richiesta.
 // Una ripresa sostituisce tutte le righe del tentativo fallito; la quota resta una sola.
 async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codici) {
+  // Il numero delle righe si conta nel codice. Si controlla inoltre che nessun
+  // esercizio esplicitamente numerato nel documento sia saltato dal modello.
+  const attesi = [...esame.matchAll(/(?:^|[\n.])\s*(?:#{1,6}\s*)?(?:esercizio|problema|quesito|domanda)\s+(?:n\.?\s*)?(\d+)\b/gi)].map((r) => String(Number(r[1])));
   const nominati = riferimentiNominati(codici.T, esame);
   const messages = [
     { role: 'system', content: ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, conTeoria) },
@@ -412,25 +428,32 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
   ];
   const it = (async function* () {
     let ultimo = null, avviato = false;
+    const diagnostica = [];
     for (const m of inOrdine(MODELLI_TESTO)) {
       try {
         let n = 0;
+        const esercizi = new Set();
         for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 })) {
           if (!n && avviato) yield { ricomincia: true };
           n++; avviato = true;
+          esercizi.add(String(Number(q.esercizio)));
           yield q;
           if (q.nonUniversitario) return;
         }
         if (!n) throw new Error('nessuna richiesta dal modello');
+        if (attesi.some((n) => !esercizi.has(n))) throw new Error('esercizi mancanti dal confronto');
         delete guasti[m];
         return;
       } catch (e) {
         ultimo = e;
-        console.log('compatibilita confronto', m, String(e?.message || e).slice(0, 200));
+        diagnostica.push(diagnosticaConfronto(e));
+        console.log('compatibilita confronto', m, diagnosticaConfronto(e));
         guasti[m] = Date.now();
       }
     }
-    throw ultimo || new Error('nessun confronto');
+    const errore = new Error(ultimo?.message || 'nessun confronto completo', { cause: ultimo });
+    errore.diagnostica = diagnostica;
+    throw errore;
   })();
   const primo = await it.next();
   return { primo: primo.value, it };
@@ -612,7 +635,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   } catch (e) {
     await rimborsa('confronta');
     const quota = /4006|allocation|neurons|limit/i.test(String(e?.message || ''));
-    return json({ errore: quota ? 'Oggi il controllo degli esami ha raggiunto il limite del sito. Riprova domani.' : 'Il confronto non è riuscito. Riprova tra qualche istante.' }, 502);
+    return json({ errore: quota ? 'Oggi il controllo degli esami ha raggiunto il limite del sito. Riprova domani.' : 'Il confronto non è riuscito. Riprova tra qualche istante.', diagnostica: e.diagnostica || [diagnosticaConfronto(e)] }, 502);
   }
   if (avvio.primo.nonUniversitario) {
     await avvio.it.return();
@@ -640,9 +663,9 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       };
       aggiungi(avvio.primo);
       try { for await (const q of avvio.it) aggiungi(q); } catch (e) {
-        console.log('compatibilita streaming', String(e?.message || e).slice(0, 200));
+        console.log('compatibilita streaming', e.diagnostica || [diagnosticaConfronto(e)]);
         await rimborsa('confronta');
-        manda({ errore: 'Il confronto si è interrotto prima di analizzare tutto il compito. Riprova: il controllo non è stato conteggiato.' });
+        manda({ errore: 'Il confronto si è interrotto prima di analizzare tutto il compito. Riprova: il controllo non è stato conteggiato.', diagnostica: e.diagnostica || [diagnosticaConfronto(e)] });
         ctl.close();
         return;
       }

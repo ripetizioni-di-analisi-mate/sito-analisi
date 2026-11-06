@@ -192,7 +192,7 @@ test('un calcolo che cita un enunciato conserva la scheda svolta pertinente', ()
 });
 
 const riga = '1|-|E|A1|S1|-|Integrare un prodotto per parti\n';
-async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
+async function confronto(risposta, materia = 'analisi-1', assetOk = true, testoEsame = 'Esercizio 1. Calcolare un integrale per parti.') {
   const chiamate = [], attese = [], modelli = [];
   const env = {
     ASSETS: { fetch: async () => assetOk ? Response.json(cat) : new Response('', { status: 503 }) },
@@ -207,7 +207,7 @@ async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
     utenteCollegato: async () => null,
     catalogoDomande: async () => ({}),
   };
-  const req = new Request('https://esempio.test/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo: 'Esercizio 1. Calcolare un integrale per parti.' }) });
+  const req = new Request('https://esempio.test/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo: testoEsame }) });
   const res = await gestisciCompatibilita(req, env, { waitUntil: (p) => attese.push(p) }, '/api/compatibilita/confronta', h);
   const testo = await res.text();
   await Promise.all(attese);
@@ -365,4 +365,43 @@ test('il fallimento di entrambi i modelli rimborsa una volta e non salva una per
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 0);
+});
+
+test('il segnale finale non richiede al modello di ricontare i sottopunti', async () => {
+  const testo = 'Esercizio 1. a) Integrare per parti. b) Calcolare un secondo integrale.\nEsercizio 2. Calcolare un terzo integrale.';
+  const { eventi, modelli } = await confronto('1a|E|A1|S1|-|Primo integrale\n1b|E|A1|S1|-|Secondo integrale\n2|E|A1|S1|-|Terzo integrale\nFINE_CONFRONTO', 'analisi-1', true, testo);
+  assert.equal(eventi.at(-1).fine.richieste.length, 3);
+  assert.equal(modelli.length, 1);
+  assert.doesNotMatch(modelli[0].input.messages[0].content, /FINE_CONFRONTO\|/);
+});
+
+test('un esercizio numerato mancante fa recuperare l’analisi, anche con un segnale finale valido', async () => {
+  const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.';
+  const { eventi, modelli, chiamate } = await confronto((_m, _i, n) => ({ response: n === 1 ? `${riga}FINE_CONFRONTO` : `${riga}2|E|A1|S1|-|Secondo integrale\nFINE_CONFRONTO` }), 'analisi-1', true, testo);
+  assert.equal(modelli.length, 2);
+  assert.equal(eventi.at(-1).fine.richieste.length, 2);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
+});
+
+test('due risposte che saltano un esercizio non producono una percentuale', async () => {
+  const testo = 'Esercizio 1. Calcolare un integrale.\nEsercizio 2. Calcolare un secondo integrale.';
+  const { eventi } = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, testo);
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((e) => !e.fine));
+  assert.deepEqual(eventi.at(-1).diagnostica, [{ codice: 'ESERCIZI' }, { codice: 'ESERCIZI' }]);
+});
+
+test('un riepilogo cumulativo privo dei consumi non ripete le righe già ricevute', async () => {
+  const testo = `${riga}FINE_CONFRONTO\n`;
+  const { eventi, modelli } = await confronto(() => flusso({ response: testo }, { response: testo }, '[DONE]'));
+  assert.equal(eventi.at(-1).fine.richieste.length, 1);
+  assert.equal(eventi.filter((e) => e.r).length, 1);
+  assert.equal(modelli.length, 1);
+});
+
+test('la diagnostica non espone il contenuto degli errori del fornitore', async () => {
+  const { res, eventi } = await confronto(() => { throw new Error('Testo riservato del fornitore con dati personali'); });
+  assert.equal(res.status, 502);
+  assert.doesNotMatch(JSON.stringify(eventi), /Testo riservato|dati personali/);
+  assert.deepEqual(eventi[0].diagnostica, [{ codice: 'MODELLO' }, { codice: 'MODELLO' }]);
 });
