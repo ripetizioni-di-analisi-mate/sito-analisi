@@ -1,25 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
-import { TOLC_I_SEZIONI, TOLC_I_FONTE } from '../data/tolc-i.mjs';
-import { materia } from '../data/materie';
-const prezzo = materia('tolc-i').prezzo;
+import { TOLC } from '../data/tolc.mjs';
+import { materia as materiaIt } from '../data/materie';
+interface Props { materia?: string }
+const { materia = 'tolc-i' } = Astro.props;
+const conf = TOLC[materia];
+const prezzo = materiaIt(materia).prezzo;
 ---
-<Base titolo="Simulazione TOLC-I" descrizione="Allenamento al TOLC-I per Ingegneria: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali." materia="tolc-i" sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
-  <div class="tolc-simulazione">
-    <p class="sopratitolo">Preparati a Ingegneria</p>
-    <h1>Simulazione TOLC-I</h1>
+<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Allenamento al ${conf.nome} per ${conf.area}: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+  <div class="tolc-simulazione" data-materia={materia} data-massimo={conf.quesiti}>
+    <p class="sopratitolo">Preparati a {conf.area}</p>
+    <h1>Simulazione {conf.nome}</h1>
     <p class="sommario">Concentrati su una sezione alla volta. Alla fine trovi punteggio, risposte spiegate e argomenti da ripassare.</p>
     <section id="tolc-inizio">
-      <div class="tolc-specifiche"><strong>50 quesiti · 110 minuti</strong><span>+1 corretta · −0,25 errata · 0 omessa</span></div>
-      <table><thead><tr><th>Sezione</th><th>Quesiti</th><th>Tempo</th></tr></thead><tbody>{TOLC_I_SEZIONI.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.minuti} min</td></tr>)}</tbody></table>
+      <div class="tolc-specifiche"><strong>{conf.quesiti} quesiti · {conf.minuti} minuti</strong><span>+1 corretta · −0,25 errata · 0 omessa</span></div>
+      <table><thead><tr><th>Sezione</th><th>Quesiti</th><th>Tempo</th></tr></thead><tbody>{conf.sezioni.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.minuti} min</td></tr>)}</tbody></table>
       <p>Puoi rivedere le risposte nella sezione aperta. Quando passi alla successiva, perdi il tempo rimasto e la sezione precedente si chiude. Alla scadenza il passaggio è automatico.</p>
       <form id="tolc-form">
         <label class="tolc-inglese"><input type="checkbox" name="inglese" checked /> Aggiungi inglese · 30 quesiti in 15 minuti</label>
-        <p class="tolc-dettaglio">L’inglese ha un risultato separato su 30, senza penalità per gli errori. Totale con inglese: 80 quesiti in 125 minuti.</p>
+        <p class="tolc-dettaglio">L’inglese ha un risultato separato su 30, senza penalità per gli errori. Totale con inglese: {conf.quesiti + 30} quesiti in {conf.minuti + 15} minuti.</p>
         <button class="bottone-primario" type="submit">Inizia la simulazione</button>
       </form>
-      <p class="tolc-dettaglio">La simulazione completa è inclusa nell’<a href="/tolc-i/sblocca">accesso TOLC-I · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href="/tolc-i/prove-d-esame/domande">dieci quiz dimostrativi</a>.</p>
-      <p class="tolc-dettaglio">Quesiti originali di allenamento, non test ufficiali CISIA. <a href={TOLC_I_FONTE} target="_blank" rel="noopener noreferrer">Struttura di riferimento ↗</a>. Le soglie di ammissione dipendono dal bando del tuo ateneo.</p>
+      <p class="tolc-dettaglio">La simulazione completa è inclusa nell’<a href={`/${materia}/sblocca`}>accesso {conf.nome} · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href={`/${materia}/prove-d-esame/domande`}>dieci quiz dimostrativi</a>.</p>
+      <p class="tolc-dettaglio">Quesiti originali di allenamento, non test ufficiali CISIA. <a href={conf.fonte} target="_blank" rel="noopener noreferrer">Struttura di riferimento ↗</a>. Le soglie di ammissione dipendono dal bando del tuo ateneo.</p>
     </section>
     <p id="tolc-messaggio" role="status" hidden></p>
     <section id="tolc-prova" hidden aria-label="Prova in corso">
@@ -35,8 +38,8 @@ const prezzo = materia('tolc-i').prezzo;
     </section>
     <section id="tolc-risultato" hidden aria-label="Risultati della simulazione"><h2>Il tuo risultato</h2><p id="tolc-voto"></p><div class="tolc-tabella"><table><thead><tr><th>Sezione</th><th>Corrette</th><th>Errate</th><th>Omesse</th><th>Punti</th></tr></thead><tbody id="tolc-conto"></tbody></table></div><p>Usa il risultato per scegliere che cosa ripassare. Non indica da solo l’ammissione a un corso di laurea.</p><div id="tolc-revisione"></div></section>
     <button id="tolc-riprova" type="button" class="bottone-primario" hidden>Riprova la correzione</button>
-    <p id="tolc-riparti" hidden><button type="button" class="bottone-secondario">Nuova simulazione</button> <a href="/tolc-i">Torna al percorso</a></p>
-    <noscript><p>Per avviare la simulazione occorre attivare JavaScript. Puoi leggere <a href="/tolc-i">teoria ed esercizi del percorso</a>.</p></noscript>
+    <p id="tolc-riparti" hidden><button type="button" class="bottone-secondario">Nuova simulazione</button> <a href={`/${materia}`}>Torna al percorso</a></p>
+    <noscript><p>Per avviare la simulazione occorre attivare JavaScript. Puoi leggere <a href={`/${materia}`}>teoria ed esercizi del percorso</a>.</p></noscript>
   </div>
 </Base>
 <script>
@@ -46,7 +49,9 @@ const prezzo = materia('tolc-i').prezzo;
   type Riga = { slug: string; titolo: string; corrette: number; errate: number; omesse: number; punti: number; massimo: number; esiti: { id: string; corretta: number; spiegazione: string }[] };
   type Esito = { punti: number; massimo: number; inglese: number | null; sezioni: Riga[] };
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(`tolc-${id}`) as T;
-  const KEY = 'tolc-i-sessione-v1';
+  const radice = document.querySelector<HTMLElement>('.tolc-simulazione')!;
+  const materia = radice.dataset.materia!;
+  const KEY = `${materia}-sessione-v1`;
   let stato: Stato | null = null, timer = 0, invio = false;
   const numero = (n: number) => n.toLocaleString('it-IT', { maximumFractionDigits: 2 });
   const salva = () => { try { localStorage.setItem(KEY, JSON.stringify(stato)); } catch { /* La prova funziona anche senza salvataggio locale. */ } };
@@ -108,7 +113,7 @@ const prezzo = materia('tolc-i').prezzo;
   $('form').addEventListener('submit',async(e)=>{
     e.preventDefault();const b=$('form').querySelector('button')!;b.disabled=true;b.textContent='Preparazione dei quesiti…';avvisa('');
     try{
-      const r=await fetch('/api/tolc-i/inizia',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({inglese:($('form') as HTMLFormElement).querySelector<HTMLInputElement>('[name=inglese]')!.checked})});
+      const r=await fetch(`/api/${materia}/inizia`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({inglese:($('form') as HTMLFormElement).querySelector<HTMLInputElement>('[name=inglese]')!.checked})});
       const d=await r.json();if(!r.ok)throw new Error(d.errore||'Impossibile iniziare la simulazione.');
       stato={...d,risposte:d.sezioni.map((s:S)=>s.domande.map(()=>null)),sezione:0,domanda:0,fine:Date.now()+d.sezioni[0].minuti*60000,creata:Date.now(),conclusa:false};salva();attiva();
     }catch(e){avvisa(e instanceof Error?e.message:'Le domande non si sono caricate. Riprova.');}
@@ -127,14 +132,14 @@ const prezzo = materia('tolc-i').prezzo;
   async function correggi(){
     if(!stato||invio)return;invio=true;clearInterval(timer);$('prova').hidden=true;$('riprova').hidden=true;avvisa('Correzione della simulazione…');
     try{
-      const r=await fetch('/api/tolc-i/correggi',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:stato.token,risposte:stato.risposte})});const d=await r.json();
+      const r=await fetch(`/api/${materia}/correggi`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:stato.token,risposte:stato.risposte})});const d=await r.json();
       if(!r.ok)throw new Error(d.errore||'La correzione non è arrivata.');stato.esito=d;salva();risultato(d);
     }catch(e){avvisa((e instanceof Error?e.message:'Connessione non disponibile.')+' Le risposte sono conservate in questo browser.');$('riprova').hidden=false;}
     finally{invio=false;}
   }
   function risultato(d:Esito){
     if(!stato)return;$('inizio').hidden=true;$('prova').hidden=true;$('risultato').hidden=false;$('riparti').hidden=false;avvisa('');
-    $('voto').textContent=`${numero(d.punti)} / 50${d.inglese===null?'':` · Inglese ${numero(d.inglese)} / 30`}`;
+    $('voto').textContent=`${numero(d.punti)} / ${d.massimo}${d.inglese===null?'':` · Inglese ${numero(d.inglese)} / 30`}`;
     $('conto').innerHTML=d.sezioni.map(s=>`<tr><th scope="row">${s.titolo}</th><td>${s.corrette}</td><td>${s.errate}</td><td>${s.omesse}</td><td><strong>${numero(s.punti)} / ${s.massimo}</strong></td></tr>`).join('');
     const rev=$('revisione');rev.replaceChildren();
     d.sezioni.forEach((s,i)=>{
@@ -142,7 +147,7 @@ const prezzo = materia('tolc-i').prezzo;
       s.esiti.forEach((es,j)=>{
         const q=stato!.sezioni[i].domande[j],r=stato!.risposte[i][j];const article=document.createElement('article');
         const esito=r===null?'Omessa':r===es.corretta-1?'Corretta':'Errata';
-        article.innerHTML=`<h3>Quesito ${j+1} · ${esito}</h3>${q.testo}<p>La tua risposta: ${r===null?'non data':`${'ABCDE'[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${'ABCDE'[es.corretta-1]}.</strong> ${q.scelte[es.corretta-1]}</p><div>${es.spiegazione}</div><p><a href="/tolc-i/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`;group.append(article);
+        article.innerHTML=`<h3>Quesito ${j+1} · ${esito}</h3>${q.testo}<p>La tua risposta: ${r===null?'non data':`${'ABCDE'[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${'ABCDE'[es.corretta-1]}.</strong> ${q.scelte[es.corretta-1]}</p><div>${es.spiegazione}</div><p><a href="/${materia}/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`;group.append(article);
       });rev.append(group);
     });
   }

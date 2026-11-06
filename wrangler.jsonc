@@ -17,6 +17,8 @@
     // Paddle: token del checkout e identificativi dei prezzi, tutti pubblici (non sono segreti)
     "PADDLE_AMBIENTE": "production",
     "PADDLE_CLIENT_TOKEN": "live_3dfdc4fac37285fb2b6966f7b58",
+    "PADDLE_PREZZO_TOLC_S": "pri_01m6s97tkf9pkj9tnqg3mcjgpm",
+    "PADDLE_PREZZO_TOLC_I": "pri_01m6s94tn7fz7xzj64ntrg4rzb",
     "PADDLE_PREZZO_PRECORSO": "pri_01m60xgef8rr7t089736k3fa3z",
     "PADDLE_PREZZO_ANALISI_1": "pri_01m5z6aynthpe6w821c27ycaxk",
     "PADDLE_PREZZO_ANALISI_2": "pri_01m5z6cfsrj5ss4kd532hkgpd7",

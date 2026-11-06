@@ -2,7 +2,7 @@
 // Il gruppo italiano e quello tradotto identificano lo stesso percorso scolastico.
 export function nomiAllenamento(materia, lingua = 'it') {
   const en = lingua === 'en';
-  if (materia?.slug === 'tolc-i') return { ripasso: en ? 'TOLC-I practice' : 'Allenamento TOLC-I', simulazione: en ? 'TOLC-I simulation' : 'Simulazione TOLC-I' };
+  if (['tolc-i', 'tolc-s'].includes(materia?.slug)) { const nome = materia.slug.toUpperCase(); return { ripasso: en ? `${nome} practice` : `Allenamento ${nome}`, simulazione: en ? `${nome} simulation` : `Simulazione ${nome}` }; }
   if (materia?.gruppo === 'Superiori' || materia?.gruppo === 'High school') {
     return {
       ripasso: en ? 'Class test simulations' : 'Simulazioni di verifiche',
