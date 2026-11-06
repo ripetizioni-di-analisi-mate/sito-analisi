@@ -1,0 +1,18 @@
+---
+const { lingua = 'it' } = Astro.props;
+const en = lingua === 'en';
+---
+<aside class="accesso-domande" aria-live="polite">
+  <p data-nota-anteprima>{en
+    ? 'Try 10 questions for free across timed quizzes and simulations of paid subjects. Then unlock the subject to continue.'
+    : 'Prova 10 domande gratuite complessive tra quiz e simulazioni delle materie a pagamento. Poi sblocca la materia per continuare.'}</p>
+  <p data-stato-anteprima hidden></p>
+  <div data-pagamento-domande hidden>
+    <p><strong>{en ? 'Continue with full access' : 'Continua con l’accesso completo'}</strong></p>
+    <div data-link-acquisto class="azioni"></div>
+  </div>
+</aside>
+<style>
+  .accesso-domande { margin: 1rem 0; padding: .85rem 1rem; border: 1px solid var(--riga); border-left: 3px solid var(--accento); border-radius: var(--raggio); background: color-mix(in srgb, var(--accento) 5%, white); font-family: var(--ui); font-size: .9rem; }
+  .accesso-domande p { margin: .25rem 0; }
+</style>

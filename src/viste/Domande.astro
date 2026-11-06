@@ -2,6 +2,7 @@
 // Domande a tempo di un argomento: una alla volta, due minuti ciascuna, spiegazione subito dopo la conferma.
 // I testi arrivano dal Worker (/api/domande/…): la risposta corretta non è mai nella pagina.
 import Base from '../layouts/Base.astro';
+import AccessoDomande from '../components/AccessoDomande.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
@@ -35,16 +36,19 @@ const comeScelte = en
 const T = en ? {
   titolo: personale ? 'Spaced review' : ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
   termina: 'End the session', sommario: personale ? `The questions of ${m.titolo} you got wrong come back here one day later; each correct answer given on the scheduled day moves the question further on, to 3 and then 7 days, and after three correct answers it leaves the review.` : `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
-  ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
+  ospite: 'You can try 10 questions without an account. To continue, unlock the subject. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
 } : {
   titolo: personale ? 'Ripasso dilazionato' : ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
   termina: 'Termina la sessione', sommario: personale ? `Le domande di ${m.titolo} a cui hai risposto in modo sbagliato tornano qui il giorno dopo; ogni risposta corretta data nel giorno previsto sposta la domanda più avanti, a 3 e poi a 7 giorni, e dopo tre risposte corrette la domanda esce dal ripasso.` : `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
-  ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
+  ospite: 'Puoi provare 10 domande anche senza account. Per continuare sblocca la materia. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
 };
+if (!m.prezzo) T.ospite = en
+  ? 'This subject is free, including all its questions. Experience points, level and goals are saved with a free account.'
+  : 'Questa materia è gratuita, comprese tutte le domande. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.';
 // Testi usati dallo script nel browser.
 const JS = en ? {
   caricamento: T.caricamento, errore: 'The questions did not load. Reload the page.', bonus: 'Speed bonus for another § seconds',
@@ -82,6 +86,7 @@ const JS = en ? {
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
     <p class="sommario">{T.sommario}</p>
+    {m.prezzo && <AccessoDomande lingua={lingua} />}
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p class="nota">{en ? 'Mathematics practice for Physics and Chemistry. These questions train the prerequisites; they are not an official filter-semester exam.' : 'Allenamento di matematica per Fisica e Chimica. Queste domande servono a consolidare i prerequisiti; non costituiscono una prova ufficiale del semestre filtro.'}</p>}
 
@@ -121,6 +126,7 @@ const JS = en ? {
 </Base>
 
 <script>
+  import { aggiornaAccessoDomande } from '../scripts/accesso-domande';
   const radice = document.querySelector<HTMLElement>('.domande')!;
   const { materia, argomento, titolo, lingua, pref } = radice.dataset as { materia: string; argomento: string; titolo: string; lingua: string; pref: string };
   const L = JSON.parse(radice.dataset.testi || '{}') as Record<string, string>;
@@ -252,6 +258,7 @@ const JS = en ? {
     const d = r && r.ok ? d0 : null;
     // Con una rete lenta e più tocchi di fila conta solo l'ultima domanda chiesta.
     if (richiesta !== ultimaRichiesta) return;
+    aggiornaAccessoDomande(radice, d0);
     if (!d) {
       // Il Worker spiega il motivo (per esempio: ripasso di oggi senza account, oppure nessuna domanda da ripassare).
       const p = document.createElement('p');
@@ -290,8 +297,10 @@ const JS = en ? {
     const d0 = corrente;
     const scaduto = Date.now() - inizio > d0.secondi * 1000;
     const r = await post('/api/domande/rispondi', { token: d0.token, scelta }).catch(() => null);
-    const d = r && r.ok ? await r.json() : null;
-    if (!d) { esito.hidden = false; esito.textContent = L.nonArrivata; return; }
+    const risposta = r ? await r.json().catch(() => null) : null;
+    aggiornaAccessoDomande(radice, risposta);
+    const d = r?.ok ? risposta : null;
+    if (!d) { esito.hidden = false; esito.textContent = risposta?.errore || L.nonArrivata; return; }
     const e: Esito = { ...d, scelta, scaduto };
     esiti.set(d0.id, e);
     if (corrente?.id !== d0.id) return;

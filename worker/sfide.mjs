@@ -10,6 +10,8 @@ import { livelloDa, PUNTI } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { nomeDallEmail } from './nomi.mjs';
+import PREZZI from '../src/data/prezzi.json';
+import { accessoDomande, pagamentoDomande } from './anteprima-domande.mjs';
 import { aggiungi, risposta, settimanaDi, giornoRoma } from './livelli.mjs';
 
 const ALFABETO = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -423,6 +425,11 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   // ----- da qui serve l'account -----
   const io = await utenteCollegato(env, req).catch(() => null);
   if (!io) return json({ errore: l === 'en' ? 'Log in to take part.' : 'Accedi per partecipare.', ospite: true }, 401);
+  const quotaPartita = async (r) => {
+    const ids = r.turno ? [r.turno.id] : (r.riepilogo || []).map((q) => q.id);
+    if (!ids.length) return null;
+    return accessoDomande(env, req, io, ids.map((id) => ({ materia: r.materia, id: `${r.materia}/quiz/${id}` })), l, { aDO, sha, prezzi: PREZZI, materie: MATERIE });
+  };
 
   if (p === '/api/lega') return json(await aDO(env, '/sfi-lega', { email: io.email, lingua: l }), 200, { 'cache-control': 'no-store' });
   if (p === '/api/lega/nome' && POST) return json(await aDO(env, '/sfi-nome', { email: io.email, soprannome: corpo.soprannome, pubblico: corpo.pubblico !== false }));
@@ -446,6 +453,8 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   if (p === '/api/duelli/partita' && POST) {
     const r = await aDO(env, '/sfi-partita', { email: io.email, lingua: l, codice: corpo.codice, unisci: Boolean(corpo.unisci), servi: Boolean(corpo.servi), accetta: corpo.accetta });
     if (r.errore) return json(r, 404);
+    const accesso = await quotaPartita(r);
+    if (accesso && accesso.consentite.length !== (r.turno ? 1 : r.riepilogo.length)) return json(pagamentoDomande(accesso, l), 402, { 'cache-control': 'no-store' });
     // Testo della domanda in corso e, a duello chiuso per lo studente, spiegazioni del riepilogo.
     const dati = await domandeDi(env, r.materia, l);
     const trova = (id) => dati?.argomenti?.[String(id).split('/')[0]]?.find((x) => x.id === id);
@@ -455,12 +464,16 @@ export async function gestisciSfide(req, env, ctx, p, h) {
       delete r.turno.id;
     }
     if (r.riepilogo) r.riepilogo = r.riepilogo.map((x) => { const q = trova(x.id); return { ...x, testo: q?.testo || '', scelte: q?.scelte || [], spiegazione: q?.spiegazione || '', argomento: titoloArgomento(r.materia, String(x.id).split('/')[0], l) }; });
-    return json(r, 200, { 'cache-control': 'no-store' });
+    return json({ ...r, ...accesso }, 200, { 'cache-control': 'no-store' });
   }
   if (p === '/api/duelli/rispondi' && POST) {
     const n = Number(corpo.n);
     if (!Number.isInteger(n) || n < 0 || n >= DUELLO.domande) return json({ errore: 'dati' }, 400);
     const scelta = Number.isInteger(corpo.scelta) ? corpo.scelta : null;
+    const partita = await aDO(env, '/sfi-partita', { email: io.email, lingua: l, codice: corpo.codice });
+    if (!partita.turno || partita.turno.n !== n) return json({ errore: 'Domanda già chiusa.' }, 400);
+    const accesso = await quotaPartita(partita);
+    if (!accesso?.consentite.length) return json(pagamentoDomande(accesso, l), 402, { 'cache-control': 'no-store' });
     const r = await aDO(env, '/sfi-rispondi', { email: io.email, codice: corpo.codice, n, scelta, lingua: l, catalogo: cat });
     return json(r, r.errore ? 400 : 200, { 'cache-control': 'no-store' });
   }

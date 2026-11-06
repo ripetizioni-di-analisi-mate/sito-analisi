@@ -1,5 +1,5 @@
 ---
-// Domande a tempo di tutte le materie (gratis). 03/11/2026: versione A scelta da Carmine fra tre (B elenco a fisarmonica, C tasti delle materie):
+// Domande a tempo di tutte le materie (dieci quesiti in anteprima). 03/11/2026: versione A scelta da Carmine fra tre (B elenco a fisarmonica, C tasti delle materie):
 // una scheda per materia con «Ripasso su tutto» e la simulazione; gli argomenti si aprono con «Scegli un argomento». Versione inglese: src/pages/en/domande-a-tempo.astro.
 import Base from '../layouts/Base.astro';
 import { RIPASSO } from '../data/livelli';
@@ -7,10 +7,10 @@ import { elencoDomande } from '../lib/domande-elenco';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 const { materie, gruppi, totale } = await elencoDomande();
 ---
-<Base titolo="Domande a tempo: quiz gratuiti per materia e argomento" descrizione={`Quiz a risposta multipla gratuiti su ${materie.length} materie: quattro risposte, due minuti per domanda e la spiegazione dopo ogni risposta. Anche senza account.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]}>
-  <p class="sopratitolo">Gratis</p>
+<Base titolo="Domande a tempo: quiz per materia e argomento, 10 domande gratuite" descrizione={`Quiz a risposta multipla su ${materie.length} materie: 10 domande gratuite complessive tra quiz e simulazioni, poi accesso completo alla materia. Quattro risposte, due minuti per domanda e spiegazione.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]}>
+  <p class="sopratitolo">10 domande gratuite</p>
   <h1>Domande a tempo</h1>
-  <p class="sommario">{totale} domande a risposta multipla: quattro risposte, due minuti per domanda e la spiegazione dopo la conferma. Si usano anche senza account.</p>
+  <p class="sommario">{totale} domande a risposta multipla: quattro risposte, due minuti per domanda e la spiegazione dopo la conferma. Le prime 10 domande sono gratuite, anche senza account, e si conteggiano insieme ai quesiti delle simulazioni. Per proseguire sblocca la materia.</p>
   {gruppi.map((g) => (
     <>
       <p class="dta-gruppo">{g}</p>

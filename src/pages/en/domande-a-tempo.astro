@@ -1,15 +1,15 @@
 ---
-// Timed questions of all subjects with English questions (free). Same layout as the Italian page src/pages/domande-a-tempo.astro.
+// Timed questions of all subjects with English questions (ten-question preview). Same layout as the Italian page src/pages/domande-a-tempo.astro.
 import Base from '../../layouts/Base.astro';
 import { RIPASSO } from '../../data/livelli';
 import { elencoDomande } from '../../lib/domande-elenco';
 import { nomiAllenamento } from '../../lib/allenamento.mjs';
 const { materie, gruppi, totale } = await elencoDomande('en');
 ---
-<Base titolo="Timed questions: free calculus, linear algebra and physics quizzes" descrizione={`Free multiple-choice quizzes on ${materie.length} subjects: four answers, two minutes per question and an explanation after every answer. No account needed.`} lingua="en" percorso={[{ titolo: 'Timed questions' }]} seo={{ titolo: 'Free calculus and physics quizzes with explanations' }}>
-  <p class="sopratitolo">Free</p>
+<Base titolo="Timed questions: calculus, linear algebra and physics, 10 free questions" descrizione={`Multiple-choice quizzes on ${materie.length} subjects. Try 10 questions for free across quizzes and simulations, then unlock the subject to continue.`} lingua="en" percorso={[{ titolo: 'Timed questions' }]} seo={{ titolo: 'Calculus and physics quizzes: 10 free questions with explanations' }}>
+  <p class="sopratitolo">10 free questions</p>
   <h1>Timed questions</h1>
-  <p class="sommario">{totale} multiple-choice questions: four answers, two minutes per question and the explanation after you confirm. No account needed.</p>
+  <p class="sommario">{totale} multiple-choice questions: four answers, two minutes per question and the explanation after you confirm. Try 10 questions for free without an account, shared across quizzes and simulations. Then unlock the subject to continue.</p>
   {gruppi.map((g) => (
     <>
       <p class="dta-gruppo">{g}</p>

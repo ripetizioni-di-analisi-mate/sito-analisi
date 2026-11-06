@@ -4,6 +4,7 @@
 // (risposta corretta, errata, non data) si impostano come nel bando. Le posizioni delle risposte corrette arrivano
 // dal Worker solo alla consegna (/api/simulazione-quiz/correggi). Solo italiano.
 import Base from '../layouts/Base.astro';
+import AccessoDomande from '../components/AccessoDomande.astro';
 import { MATERIE } from '../data/materie';
 import { catalogoDomande } from '../lib/domande';
 interface Props { materia?: string }
@@ -24,6 +25,8 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     <p class="sopratitolo">{materia ? "Prove d'esame" : 'Concorsi'}</p>
     <h1>{titolo}</h1>
     <p class="sommario">{sommario}</p>
+    <AccessoDomande lingua="it" />
+    <p class="sim-anteprima-parziale" role="status" hidden></p>
 
     {materie.length === 0 ? <p>Le domande delle materie dei concorsi sono in preparazione.</p> : (
     <form class="sim-impostazioni">
@@ -87,6 +90,7 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
 </Base>
 
 <script>
+  import { aggiornaAccessoDomande } from '../scripts/accesso-domande';
   const radice = document.querySelector<HTMLElement>('.simulazione-quiz')!;
   type Materia = { slug: string; titolo: string; breve: string; colore: string; argomenti: { slug: string; breve: string }[] };
   type Domanda = { id: string; materia: string; argomento: string; testo: string; scelte: string[] };
@@ -168,8 +172,12 @@ const percorso = materia ? [{ titolo: "Prove d'esame" }, { titolo }] : [{ titolo
     try {
       const r = await fetch('/api/simulazione-quiz', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materie: scelte, numero, recenti: leggi<string[]>(RECENTI, []) }) });
       const d = await r.json();
+      aggiornaAccessoDomande(radice, d);
       if (!r.ok) throw new Error(d.errore || 'rete');
       token = d.token; domande = d.domande;
+      const nota = radice.querySelector<HTMLElement>('.sim-anteprima-parziale')!;
+      nota.hidden = !d.parziale;
+      nota.textContent = `La prova gratuita contiene ${domande.length} quesiti. Per una simulazione completa sblocca le materie selezionate.`;
     } catch (x) {
       err.textContent = x instanceof Error && x.message !== 'rete' ? x.message : 'Le domande non si sono caricate. Ricarica la pagina.';
       err.hidden = false; bottone.disabled = false; return;
