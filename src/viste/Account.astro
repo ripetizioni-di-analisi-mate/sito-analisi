@@ -78,22 +78,24 @@ const sblocca = t.sblocca;
   </section>
 
   {(
-    <script is:inline define:vars={{ lingua }}>
+    <script>
+      import { caricaPercorsoStudio, destinazioneObiettivo, destinazioneSessione, leggiCatalogoStudio } from '../lib/percorso-studio.mjs';
       (async () => {
+        const lingua = document.documentElement.lang === 'en' ? 'en' : 'it';
         const en = lingua === 'en';
         const XP = en ? 'XP' : 'EXP';
-        const r = await fetch(`/api/percorso?l=${lingua}`).catch(() => null);
-        if (!r || !r.ok) return;
-        const d = await r.json();
-        const box = document.getElementById('percorso');
-        const q = (s) => box.querySelector(s);
-        const num = (x) => x.toLocaleString(en ? 'en-US' : 'it-IT');
-        const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const d = await caricaPercorsoStudio(lingua);
+        if (!d?.stato) return;
+        const box = document.getElementById('percorso')!;
+        const q = (s: string) => box.querySelector<HTMLElement>(s)!;
+        const catalogo = leggiCatalogoStudio();
+        const num = (x: number) => x.toLocaleString(en ? 'en-US' : 'it-IT');
+        const esc = (x: unknown) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
         const st = d.stato;
         q('.stemma-account').setAttribute('aria-label', en ? `Level ${st.livello}, ${st.perc} percent toward the next level` : `Livello ${st.livello}, ${st.perc} per cento verso il livello successivo`);
         q('.fascia-livello strong').textContent = st.fascia;
         // stemma del rango (lo disegna lo script qui sotto, lo stesso della testata)
-        window.__statoAccount = st;
+        (window as any).__statoAccount = st;
         document.dispatchEvent(new CustomEvent('stato-account', { detail: st }));
         q('.fascia-livello span').textContent = st.frase;
         q('.dati-livello .barra-exp span').style.width = `${st.perc}%`;
@@ -104,14 +106,24 @@ const sblocca = t.sblocca;
         q('.sett-corrette').textContent = d.settimana.corrette;
         const iniziali = en ? ['M', 'T', 'W', 'T', 'F', 'S', 'S'] : ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
         q('.giorni-settimana').innerHTML = d.settimana.giorni.map((g, i) => `<span class="giorno${g.attivo ? ' attivo' : ''}${g.oggi ? ' oggi' : ''}" title="${g.giorno}"><i></i>${iniziali[i]}</span>`).join('');
-        q('.obiettivi').innerHTML = d.obiettivi.map((o) => `<li class="${o.completato ? 'completato' : ''}"><span>${esc(o.testo)}</span><span>${o.completato ? `${en ? 'Completed' : 'Completato'} · +${o.punti} ${XP}` : `${o.fatto} / ${o.totale} · ${o.punti} ${XP}`}</span><span class="barra-exp"><span style="width:${Math.round((o.fatto / o.totale) * 100)}%"></span></span></li>`).join('');
+        q('.obiettivi').innerHTML = d.obiettivi.map((o) => {
+          const href = destinazioneObiettivo(o, catalogo, lingua);
+          const nome = href ? `<a href="${href}">${esc(o.testo)} <span aria-hidden="true">→</span></a>` : esc(o.testo);
+          return `<li class="${o.completato ? 'completato' : ''}"><span>${nome}</span><span>${o.completato ? `${en ? 'Completed' : 'Completato'} · +${o.punti} ${XP}` : `${o.fatto} / ${o.totale}${o.unita ? ` ${esc(o.unita)}` : ''} · ${o.punti} ${XP}`}</span><span class="barra-exp"><span style="width:${o.totale > 0 ? Math.min(100, Math.round((o.fatto / o.totale) * 100)) : 0}%"></span></span></li>`;
+        }).join('');
         q('.traguardi').innerHTML = [
           ...d.traguardi.map((t) => `<li class="preso"><strong>${esc(t.nome)}</strong><span>+${t.punti} ${XP}</span></li>`),
           ...d.daFare.map((t) => `<li><strong>${esc(t.nome)}</strong><span>+${t.punti} ${XP}</span></li>`),
         ].join('');
-        const data = (ms) => new Date(ms).toLocaleDateString(en ? 'en-US' : 'it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
+        const data = (ms: number) => new Date(ms).toLocaleDateString(en ? 'en-US' : 'it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
         q('.sessioni-account').innerHTML = d.sessioni.length
-          ? d.sessioni.map((s) => `<li><span>${esc(s.titolo || (en ? 'Study' : 'Studio'))} · ${data(s.inizio)}</span><span>${s.minuti} min · ${s.corrette} / ${s.risposte} · +${s.punti}</span></li>`).join('')
+          ? d.sessioni.map((s) => {
+            const destinazione = destinazioneSessione(s, catalogo, lingua);
+            const titolo = esc(destinazione?.titolo || s.titolo || (en ? 'Study' : 'Studio'));
+            const nome = destinazione ? `<a href="${destinazione.href}">${titolo} <span aria-hidden="true">→</span></a>` : titolo;
+            const risposte = s.risposte ? ` · ${s.corrette} / ${s.risposte} ${en ? 'correct' : 'corrette'}` : '';
+            return `<li><span>${nome} · ${data(s.inizio)}</span><span>${s.minuti} min${risposte} · +${s.punti} ${XP}</span></li>`;
+          }).join('')
           : `<li><span>${en ? 'No sessions yet. Study time counts on theory and exercise pages.' : 'Nessuna sessione ancora. Il tempo di studio conta sulle pagine di teoria ed esercizi.'}</span></li>`;
         box.hidden = false;
         if (location.hash === '#percorso') setTimeout(() => box.scrollIntoView(), 50);

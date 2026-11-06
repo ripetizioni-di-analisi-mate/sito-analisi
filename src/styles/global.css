@@ -182,6 +182,16 @@ main {
 .passi .successivo .freccia-avanti { grid-column: 2; grid-row: 1 / span 2; font-size: 1.4rem; color: var(--accento); }
 .passi .precedente { align-self: flex-start; color: var(--inchiostro-2); font-size: 0.88rem; text-decoration: none; }
 .passi .precedente:hover { text-decoration: underline; }
+.passi .altro-argomento { align-self: flex-start; color: var(--accento); font-size: 0.88rem; text-underline-offset: 0.2em; }
+.tappe-studio { margin: 0.8rem 0 1.5rem; font: 600 0.82rem/1.3 var(--ui); }
+.tappe-studio ol { display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; list-style: none; margin: 0; padding: 0; }
+.tappe-studio a { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; color: var(--inchiostro-2); text-decoration: none; }
+.tappe-studio a > span { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; border: 1px solid var(--riga); border-radius: 50%; font-size: 0.74rem; }
+.tappe-studio a[aria-current="step"] { color: var(--accento); }
+.tappe-studio a[aria-current="step"] > span { color: #fff; background: var(--accento); border-color: var(--accento); }
+.tappe-studio a:hover, .tappe-studio a:focus-visible { color: var(--accento); text-decoration: underline; text-underline-offset: 0.2em; }
+@media (max-width: 40rem) { .tappe-studio li { flex: 1 1 calc(50% - 0.8rem); } }
+@media print { .tappe-studio, .percorsi-home { display: none !important; } }
 
 .nota-termini { margin: 0.8rem 0 0; font-family: var(--ui); font-size: 0.82rem; color: var(--inchiostro-2); }
 .pie-copyright { max-width: 34rem; }
@@ -342,6 +352,8 @@ html.collegato .spazio-studente {
 .ss-exp { margin: 0.3rem 0 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.1rem 1rem; font-size: 0.8rem; color: var(--inchiostro-2); }
 .ss-exp strong { color: var(--inchiostro); }
 .ss-piede { padding-top: 0.75rem; border-top: 1px solid var(--riga); }
+.ss-ripasso { display: inline-flex; margin-top: 0.75rem; color: var(--verde); font: 600 0.88rem var(--ui); text-underline-offset: 0.2em; }
+.ss-ripasso[hidden] { display: none; }
 .ss-azioni { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.2rem; }
 .ss-azioni .ss-continua { margin-left: auto; flex: none; }
 .ss-azioni .ss-riprendi { min-width: 0; flex: 0 1 auto; }
@@ -414,6 +426,10 @@ html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto
 .cerca-home input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 0.6rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
 .cerca-home input:focus { outline: 2px solid var(--accento); outline-offset: -1px; }
 .cerca-home button { font: inherit; font-size: 0.95rem; padding: 0.6rem 1rem; border: 1px solid var(--accento); border-radius: var(--raggio); background: var(--accento); color: white; cursor: pointer; }
+.percorsi-home { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.1rem 0 0; font: 600 0.88rem var(--ui); }
+.percorsi-home a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0.35rem 0.8rem; border: 1px solid var(--riga); border-radius: 999px; text-decoration: none; color: var(--inchiostro-2); }
+.percorsi-home a:hover, .percorsi-home a:focus-visible { color: var(--verde); border-color: var(--verde); background: color-mix(in srgb, var(--verde) 5%, transparent); }
+.gruppo[id] { scroll-margin-top: 5rem; }
 .nome-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
 /* Macro aree apribili (home e indice) */
 details.gruppo > summary.nome-gruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; }
@@ -1016,6 +1032,12 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .obiettivi li .barra-exp { grid-column: 1 / -1; height: 6px; }
 .obiettivi li:not(.completato) .barra-exp > span { background: var(--c-esempio); }
 .obiettivi li.completato > span:nth-child(2) { color: var(--verde); font-weight: 600; }
+.obiettivi li > span:first-child { min-width: 0; }
+.obiettivi a, .sessioni-account a { color: var(--verde); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.obiettivi a:hover, .sessioni-account a:hover { text-decoration-thickness: 2px; }
+@media (max-width: 30rem) {
+  .obiettivi li { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* account: il tuo percorso */
 .percorso-account { margin-bottom: 2.5rem; }
