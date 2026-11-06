@@ -15,6 +15,11 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const MATERIE = materieL(lingua);
+const gruppi = gruppiL(lingua).map((nome, i) => ({
+  nome,
+  id: i === 0 ? 'materie-home' : `percorso-home-${i}`,
+  breve: nome.startsWith('TOLC') ? (lingua === 'en' ? 'Admission tests' : 'Test d’ingresso') : nome,
+}));
 // Videocorso proprio di ogni materia (in italiano): quello che sblocca per prima la materia; il pacchetto di più corsi non ha una scheda sua.
 const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === slug) : undefined;
 // "Sbloccata" compare solo su ciò che è nell'account: la teoria ed esercizi se la materia è sbloccata, il videocorso se è stato acquistato
@@ -62,9 +67,12 @@ const icona = {
   )}
   <GratisHome lingua={lingua} />
   {lingua === 'it' && <PacchettiHome />}
+  <nav class="percorsi-home" aria-label={lingua === 'en' ? 'Choose your course area' : 'Scegli il tuo percorso'}>
+    {gruppi.map((g) => <a href={`#${g.id}`} aria-controls={g.id}>{g.breve}</a>)}
+  </nav>
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
-  {gruppiL(lingua).map((g, i) => (
-    <details class="gruppo" open={i === 0} id={i === 0 ? 'materie-home' : undefined}>
+  {gruppi.map(({ nome: g, id }, i) => (
+    <details class="gruppo" open={i === 0} id={id}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g).length}</span></summary>
       {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
@@ -136,3 +144,17 @@ const icona = {
     </details>
   ))}
 </Base>
+<script>
+  function apriPercorso(hash: string) {
+    const gruppo = document.getElementById(hash.slice(1));
+    if (!(gruppo instanceof HTMLDetailsElement) || !gruppo.classList.contains('gruppo')) return;
+    gruppo.open = true;
+    gruppo.scrollIntoView({ block: 'start' });
+    gruppo.querySelector<HTMLElement>('summary')?.focus({ preventScroll: true });
+  }
+  document.querySelectorAll<HTMLAnchorElement>('.percorsi-home a').forEach((a) => {
+    a.addEventListener('click', () => apriPercorso(a.hash));
+  });
+  addEventListener('hashchange', () => apriPercorso(location.hash));
+  if (location.hash) apriPercorso(location.hash);
+</script>
