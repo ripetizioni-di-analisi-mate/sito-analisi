@@ -81,8 +81,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   ) : (
     <>
       <p class="indice-percorsi-titolo">{lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
-      {gruppiL(lingua).map((g, i) => (
-        <details class="indice-gruppo" open={i === 0}>
+      {gruppiL(lingua).map((g) => (
+        <details class="indice-gruppo">
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">
