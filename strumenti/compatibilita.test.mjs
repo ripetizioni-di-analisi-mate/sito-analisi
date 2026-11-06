@@ -193,10 +193,13 @@ test('un calcolo che cita un enunciato conserva la scheda svolta pertinente', ()
 
 const riga = '1|-|E|A1|S1|-|Integrare un prodotto per parti\n';
 async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
-  const chiamate = [], attese = [];
+  const chiamate = [], attese = [], modelli = [];
   const env = {
     ASSETS: { fetch: async () => assetOk ? Response.json(cat) : new Response('', { status: 503 }) },
-    AI: { run: async () => typeof risposta === 'function' ? risposta() : { response: risposta } },
+    AI: { run: async (modello, input) => {
+      modelli.push({ modello, input });
+      return typeof risposta === 'function' ? risposta(modello, input, modelli.length) : { response: risposta };
+    } },
   };
   const h = {
     aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true, rimasti: 3 }; },
@@ -209,7 +212,7 @@ async function confronto(risposta, materia = 'analisi-1', assetOk = true) {
   const testo = await res.text();
   await Promise.all(attese);
   const eventi = testo.trim().split('\n').filter(Boolean).map((r) => JSON.parse(r));
-  return { res, eventi, chiamate };
+  return { res, eventi, chiamate, modelli };
 }
 
 test('un confronto completo restituisce fonti, percentuale e un solo salvataggio', async () => {
@@ -287,4 +290,79 @@ test('un catalogo temporaneamente indisponibile viene ritentato', async () => {
   assert.equal(primo.res.status, 503);
   const secondo = await confronto(`${riga}FINE_CONFRONTO|1`, 'analisi-2', true);
   assert.equal(secondo.eventi.at(-1).fine.compatibilita, 100);
+});
+
+const flusso = (...eventi) => new ReadableStream({ start(c) {
+  for (const e of eventi) c.enqueue(new TextEncoder().encode(`data: ${typeof e === 'string' ? e : JSON.stringify(e)}\n\n`));
+  c.close();
+} });
+
+test('il riepilogo finale con il testo cumulativo non duplica le richieste', async () => {
+  const testo = `${riga}FINE_CONFRONTO|1\n`;
+  const { eventi, modelli } = await confronto(() => flusso(
+    { choices: [{ delta: { content: testo }, finish_reason: null }] },
+    { response: testo, usage: { completion_tokens: 30 } },
+    '[DONE]',
+  ));
+  assert.equal(eventi.at(-1).fine.richieste.length, 1);
+  assert.equal(eventi.filter((e) => e.r).length, 1);
+  assert.equal(modelli.length, 1);
+});
+
+test('stop nel formato response conferma la conclusione del trasporto', async () => {
+  const { eventi } = await confronto(() => flusso({ response: riga }, { response: '', finish_reason: 'stop' }));
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+});
+
+test('response.completed conclude anche le risposte nel formato Responses', async () => {
+  const { eventi } = await confronto(() => flusso(
+    { type: 'response.output_text.delta', delta: riga }, { type: 'response.completed' },
+  ));
+  assert.equal(eventi.at(-1).fine.compatibilita, 100);
+});
+
+test('response.incomplete non pubblica un risultato anche se contiene il segnale testuale', async () => {
+  const { eventi, chiamate } = await confronto(() => flusso(
+    { type: 'response.output_text.delta', delta: `${riga}FINE_CONFRONTO|1\n` }, { type: 'response.incomplete' },
+  ));
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((e) => !e.fine));
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+});
+
+test('un errore dopo la prima riga attiva il secondo modello e sostituisce il tentativo', async () => {
+  const { eventi, chiamate, modelli } = await confronto((_modello, _input, n) => n === 1
+    ? flusso({ response: riga }, { choices: [{ finish_reason: 'length' }] })
+    : { response: '1|E|A1|S1|6|Nuova analisi completa\n2|E|-|-|4|Problema fuori programma\nFINE_CONFRONTO|2' });
+  assert.equal(modelli.length, 2);
+  assert.notEqual(modelli[0].modello, modelli[1].modello);
+  const ripresa = eventi.findIndex((e) => e.ricomincia);
+  assert.ok(ripresa > 0);
+  const esito = eventi.at(-1).fine;
+  assert.equal(esito.compatibilita, 60);
+  assert.equal(esito.richieste.length, 2);
+  assert.equal(esito.richieste[0].testo, 'Nuova analisi completa');
+  assert.equal(eventi.slice(ripresa + 1).filter((e) => e.r).length, 2);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 0);
+  const salvataggi = chiamate.filter((c) => c.percorso === '/comp-compito-esito');
+  assert.equal(salvataggi.length, 1);
+  assert.equal(salvataggi[0].dati.richieste, 2);
+});
+
+test('un conteggio incoerente viene recuperato senza conservare le righe del primo tentativo', async () => {
+  const { eventi, modelli } = await confronto((_modello, _input, n) => ({ response: `${riga}FINE_CONFRONTO|${n === 1 ? 2 : 1}` }));
+  assert.equal(modelli.length, 2);
+  assert.equal(eventi.filter((e) => e.ricomincia).length, 1);
+  assert.equal(eventi.at(-1).fine.richieste.length, 1);
+});
+
+test('il fallimento di entrambi i modelli rimborsa una volta e non salva una percentuale', async () => {
+  const { eventi, chiamate, modelli } = await confronto(() => flusso({ response: riga }));
+  assert.equal(modelli.length, 2);
+  assert.ok(eventi.at(-1).errore);
+  assert.ok(eventi.every((e) => !e.fine));
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 0);
 });
