@@ -23,7 +23,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   <div class="indice-testa">
     <span>{t.indice}</span>
   </div>
-  {ricercaPrincipale ? <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">↗</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+  {ricercaPrincipale ? <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">→</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>}
