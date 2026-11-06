@@ -1,0 +1,76 @@
+---
+import type { Lingua } from '../i18n';
+
+interface Props {
+  lingua: Lingua;
+  gruppi: { nome: string; id: string; breve: string }[];
+}
+const { lingua, gruppi } = Astro.props;
+const inglese = lingua === 'en';
+const titolo = inglese ? 'Choose your study path' : 'Scegli il tuo percorso';
+const tipi: Record<string, string> = {
+  'Università': 'universita', 'University': 'universita',
+  'Superiori': 'superiori', 'High school': 'superiori',
+  'Concorsi': 'concorsi', 'Public exams': 'concorsi',
+  'Percorso per principianti': 'basi', 'Beginners': 'basi',
+  'Semestre filtro': 'semestre', 'Filter semester': 'semestre',
+};
+const descrizioni: Record<string, string> = inglese ? {
+  universita: 'Calculus, algebra and physics', superiori: 'Mathematics and physics',
+  concorsi: 'Mathematics and logic', basi: 'Start with the basics',
+  semestre: 'Medicine and health sciences', test: 'TOLC and OFA',
+} : {
+  universita: 'Analisi, algebra e fisica', superiori: 'Matematica e fisica',
+  concorsi: 'Matematica e logica', basi: 'Riparti dalle basi',
+  semestre: 'Medicina e area sanitaria', test: 'TOLC e OFA',
+};
+const icone: Record<string, string> = {
+  universita: '<path d="m2 9 10-5 10 5-10 5Z"/><path d="M6 11v6c4 3 8 3 12 0v-6M22 9v7"/>',
+  superiori: '<path d="M12 5v15M3 4h4a6 6 0 0 1 5 2 6 6 0 0 1 5-2h4v14h-4a6 6 0 0 0-5 2 6 6 0 0 0-5-2H3Z"/>',
+  concorsi: '<path d="m3 8 9-5 9 5H3ZM5 11v7M10 11v7M14 11v7M19 11v7M3 21h18"/>',
+  basi: '<path d="M12 21v-9M12 15C5 15 3 12 3 7c6 0 9 2 9 8ZM12 12c0-6 3-9 9-9 0 6-3 9-9 9Z"/>',
+  semestre: '<path d="M6 3H4v5a5 5 0 0 0 10 0V3h-2M9 13v3a5 5 0 0 0 10 0v-3"/><circle cx="19" cy="10" r="3"/>',
+  test: '<rect x="5" y="4" width="14" height="18" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="m9 13 2 2 4-4"/>',
+};
+---
+<section class="selettore-percorsi" aria-labelledby="titolo-percorsi-home">
+  <p class="sopra-percorsi">{inglese ? 'YOUR SUBJECTS' : 'LE TUE MATERIE'}</p>
+  <h2 id="titolo-percorsi-home">{titolo}</h2>
+  <nav class="percorsi-home" aria-labelledby="titolo-percorsi-home">
+    {gruppi.map((g, i) => {
+      const tipo = tipi[g.nome] || 'test';
+      const nome = tipo === 'basi' ? (inglese ? 'From scratch' : 'Da zero') : g.breve;
+      return (
+        <a href={`#${g.id}`} aria-controls={g.id} aria-current={i === 0 ? 'location' : undefined}>
+          <svg class="icona-percorso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><Fragment set:html={icone[tipo]} /></svg>
+          <span class="testo-percorso"><strong>{nome}</strong><small>{descrizioni[tipo]}</small></span>
+          <svg class="freccia-percorso" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg>
+        </a>
+      );
+    })}
+  </nav>
+</section>
+<style>
+  .selettore-percorsi { margin: 1.65rem 0 0; }
+  .sopra-percorsi { margin: 0 0 0.25rem; color: var(--verde); font: 600 0.7rem var(--ui); letter-spacing: 0.13em; }
+  h2 { margin: 0 0 1rem; color: var(--inchiostro); font: 600 1.4rem/1.25 var(--ui); }
+  .percorsi-home { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; margin: 0; font-family: var(--ui); }
+  .percorsi-home a { display: flex; align-items: center; gap: 0.65rem; min-width: 0; min-height: 5rem; padding: 0.85rem 0.75rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
+  .percorsi-home a:hover, .percorsi-home a:focus-visible, .percorsi-home a[aria-current="location"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); }
+  .icona-percorso { width: 1.55rem; height: 1.55rem; flex: none; color: var(--verde); }
+  .testo-percorso { flex: 1; min-width: 0; }
+  .testo-percorso strong { display: block; font-size: 0.96rem; font-weight: 600; line-height: 1.25; }
+  .testo-percorso small { display: block; margin-top: 0.25rem; font-size: 0.76rem; font-weight: 400; line-height: 1.35; color: var(--inchiostro-2); }
+  .freccia-percorso { width: 0.9rem; height: 0.9rem; flex: none; color: var(--verde); }
+  @media (max-width: 36rem) {
+    .percorsi-home { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+    .percorsi-home a { gap: 0.5rem; padding: 0.8rem 0.65rem; }
+    .freccia-percorso { display: none; }
+  }
+  @media (max-width: 24rem) {
+    .icona-percorso { width: 1.2rem; height: 1.2rem; }
+    .testo-percorso strong { font-size: 0.9rem; }
+    .testo-percorso small { font-size: 0.72rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .percorsi-home a { transition: none; } }
+</style>
