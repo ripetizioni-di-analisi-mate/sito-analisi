@@ -14,7 +14,7 @@ const compila = async (file, nome) => {
   execFileSync(process.execPath, [join(radice, 'node_modules/rolldown/bin/cli.mjs'), join(radice, file), '--file', destinazione, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: radice });
   return import(pathToFileURL(destinazione).href);
 };
-const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
+const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita, rivalutaEsitoArchiviato, ISTRUZIONI_CONFRONTO } = await compila('worker/compatibilita.mjs', 'worker');
 const { dettagliScheda, dettagliTeoria } = await compila('src/lib/catalogo-compatibilita.ts', 'catalogo');
 const { MATERIE_COMPATIBILITA } = await compila('src/data/compatibilita.ts', 'materie');
 const { trovaVoceTeoria, riferimentiNominati } = await compila('worker/riscontro-teoria.mjs', 'riscontro');
@@ -133,6 +133,62 @@ function catalogoTeoriaReale(materia) {
       .map((r) => ({ tipo: r[1], ancora: r[2], titolo: r[3], ...dettagliTeoria(corpo, r[2]) })) };
   }) };
 }
+
+test('il compito fotografato è coperto al 100% anche se il modello omette massimi, minimi e grafico', () => {
+  const reale = catalogoTeoriaReale('analisi-1');
+  const studio = reale.argomenti.find((a) => a.slug === 'studio-di-funzione');
+  const integrali = reale.argomenti.find((a) => a.slug === 'integrali');
+  for (const [arg, numeri] of [[studio, [1, 7]], [integrali, [2, 4]]]) {
+    arg.schede = numeri.map((n) => {
+      const corpo = readFileSync(join(radice, 'src/content/svolti/analisi-1', arg.slug, `${n}.md`), 'utf8');
+      return { n, titolo: /^titolo: (.+)$/m.exec(corpo)[1], parole: [], ...dettagliScheda(corpo) };
+    });
+  }
+  const { codici } = codifica(reale, false);
+  const ca = (a) => Object.entries(codici.A).find(([, v]) => v.slug === a)[0];
+  const cs = (a, n) => Object.entries(codici.S).find(([, v]) => v.argomento === a && v.n === n)[0];
+  const f = String.raw`$f(x)=\frac{\sqrt{2\cos x-1}}{\sin x}$`;
+  const operazioni = ['Determinare il dominio', 'Individuare la periodicità', 'Studiare il segno', 'Studiare gli estremi del dominio e i punti di singolarità', 'Determinare gli asintoti verticali, orizzontali e obliqui', 'Studiare la monotonia', 'Ricerca massimi e minimi relativi e assoluti', 'Disegnare il grafico della funzione'];
+  const grezze = operazioni.map((op, i) => leggiRiga(`1${'abcdefgh'[i]}|E|${ca(studio.slug)}|${i < 6 ? cs(studio.slug, 7) : '-'}|-|${op} di ${f}`));
+  grezze.push(leggiRiga(`2|E|${ca(integrali.slug)}|${cs(integrali.slug, 4)}|-|Calcolare $\\int_1^2 \\frac{x-2}{x(x-1)} dx$`));
+  grezze.push(leggiRiga(`3|E|${ca(integrali.slug)}|${cs(integrali.slug, 2)}|-|Calcolare $\\int e^x(x^2-1) dx$`));
+  const e = valutaRichieste('analisi-1', reale, codici, grezze);
+  assert.equal(e.compatibilita, 100);
+  assert.equal(e.richieste.length, 10);
+  assert.deepEqual(e.conteggi, { stesso: 10, argomento: 0, nessuno: 0 });
+  assert.match(e.richieste[6].voce.link, /#massimi-minimi-assoluti$/);
+  assert.match(e.richieste[7].voce.link, /#grafico-qualitativo$/);
+  const archivio = { materia: 'analisi-1', compatibilita: 90, esito: JSON.stringify(grezze.map((r, i) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: [6, 7].includes(i) ? 'argomento' : 'stesso', a: i < 8 ? studio.slug : integrali.slug }))) };
+  const aggiornato = rivalutaEsitoArchiviato(archivio, reale);
+  assert.equal(aggiornato.compatibilita, 100);
+  assert.ok(JSON.parse(aggiornato.esito).every((r) => r.l === 'stesso'));
+  assert.equal(archivio.compatibilita, 90, 'il confronto originale non viene sovrascritto');
+});
+
+test('il riscontro degli estremi richiede i criteri effettivi e non promuove contenuti diversi', () => {
+  const reale = catalogoTeoriaReale('analisi-1');
+  const studio = reale.argomenti.find((a) => a.slug === 'studio-di-funzione');
+  const { codici } = codifica(reale, false);
+  const argomento = Object.entries(codici.A).find(([, a]) => a.slug === studio.slug)[0];
+  for (const testo of ['Ricerca massimi e minimi di f(x,y)', 'Massimi e minimi vincolati con Lagrange', 'Disegnare il grafico e risolvere una equazione differenziale', 'Massimi e minimi di una funzione complessa', 'Studiare un integrale', 'Enunciare e dimostrare il criterio degli estremi']) {
+    const e = valutaRichieste('analisi-1', reale, codici, [{ esercizio: '1', tipo: 'esercizio', testo, argomento }]);
+    assert.equal(e.compatibilita, 50, testo);
+  }
+  const incompleto = structuredClone(reale);
+  incompleto.argomenti.find((a) => a.slug === studio.slug).teoria = studio.teoria.filter((v) => v.ancora !== 'criterio-derivata-prima');
+  const e = valutaRichieste('analisi-1', incompleto, codifica(incompleto, false).codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Ricerca massimi e minimi relativi e assoluti di f(x)', argomento }]);
+  assert.equal(e.compatibilita, 50);
+  const storico = { materia: 'analisi-1', compatibilita: 40, esito: JSON.stringify([{ t: 'Massimi e minimi vincolati', l: 'argomento', a: studio.slug }, { t: 'PDE stocastica', l: 'nessuno' }]) };
+  assert.equal(rivalutaEsitoArchiviato(storico, reale), storico);
+  assert.equal(rivalutaEsitoArchiviato({ ...storico, esito: '{' }, reale).esito, '{');
+});
+
+test('le regole considerano la combinazione dei metodi senza richiedere un esercizio identico', () => {
+  const regole = ISTRUZIONI_CONFRONTO('Analisi 1', '', false);
+  assert.match(regole, /combina più procedimenti presenti/);
+  assert.match(regole, /Non pretendere che una sola scheda contenga la soluzione completa/);
+  assert.match(regole, /manca davvero un procedimento necessario/);
+});
 
 test('il teorema fondamentale viene recuperato anche senza codice o con la formula sbagliata', () => {
   const reale = catalogoTeoriaReale('analisi-1'), codici = codifica(reale, true).codici;
