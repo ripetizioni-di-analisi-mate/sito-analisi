@@ -60,7 +60,7 @@ function senzaHtml(base: string) {
 // (stesso n). Corpo: eventuale domanda riformulata, elenco di 4 risposte, "## Spiegazione".
 const domande = defineCollection({
   loader: senzaHtml('./src/content/domande'),
-  schema: z.object({ corretta: z.number().int().min(1).max(4) }),
+  schema: z.object({ corretta: z.number().int().min(1).max(5) }),
 });
 
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.

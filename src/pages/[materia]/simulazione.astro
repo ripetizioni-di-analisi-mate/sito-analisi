@@ -1,5 +1,6 @@
 ---
 import Simulazione from '../../viste/Simulazione.astro';
+import SimulazioneTolcI from '../../viste/SimulazioneTolcI.astro';
 import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
 import { catalogoDomande } from '../../lib/domande';
 import { MATERIE } from '../../data/materie';
@@ -11,4 +12,4 @@ export async function getStaticPaths() {
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
 ---
-{concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
+{materia === 'tolc-i' ? <SimulazioneTolcI /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}

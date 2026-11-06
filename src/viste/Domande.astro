@@ -82,6 +82,7 @@ const JS = en ? {
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
     <p class="sommario">{T.sommario}</p>
+    {materia === 'tolc-i' && <p class="nota">{en ? 'Ten sample questions are available before unlocking TOLC-I. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href="/tolc-i/sblocca">L’accesso TOLC-I</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p class="nota">{en ? 'Mathematics practice for Physics and Chemistry. These questions train the prerequisites; they are not an official filter-semester exam.' : 'Allenamento di matematica per Fisica e Chimica. Queste domande servono a consolidare i prerequisiti; non costituiscono una prova ufficiale del semestre filtro.'}</p>}
 
@@ -140,7 +141,7 @@ const JS = en ? {
   const termina = $<HTMLButtonElement>('.termina'), scheda = $('.scheda-domanda'), riepilogo = $('.riepilogo-sessione');
   const nav = $('.navigazione-domande'), numeri = $('.numeri-domande'), numeroEl = $('.numero-domanda');
   const prec = $<HTMLButtonElement>('.precedente'), succ = $<HTMLButtonElement>('.successiva');
-  const LETTERE = ['A', 'B', 'C', 'D'];
+  const LETTERE = ['A', 'B', 'C', 'D', 'E'];
   const post = (url: string, dati: unknown) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
   const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
   const num = (x: number) => x.toLocaleString(lingua === 'en' ? 'en-US' : 'it-IT');

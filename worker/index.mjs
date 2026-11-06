@@ -8,6 +8,8 @@ import { versoLaLinguaGiusta } from './lingua.mjs';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
+import { gestisciTolcI } from './tolc-i.mjs';
+import { anteprimaTolc } from '../src/data/tolc-i.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
@@ -876,7 +878,11 @@ export default {
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
-      const dati = await domandeDi(env, materia, l);
+      let dati = await domandeDi(env, materia, l);
+      if (materia === 'tolc-i' && vendita) {
+        const accesso = await utenteCollegato(env, req).catch(() => null);
+        if (!accesso?.materie?.includes('tolc-i') && dati) dati = { ...dati, argomenti: anteprimaTolc(dati.argomenti) };
+      }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
       const personale = argomento === RIPASSO_OGGI;
       const ripasso = argomento === RIPASSO || personale;
@@ -935,6 +941,7 @@ export default {
       });
       return json({ ...base, ...r });
     }
+    if (p.startsWith('/api/tolc-i/')) return gestisciTolcI(req, env, p, { json, utenteCollegato, domandeDi, firmaToken, leggiToken });
     if (p === '/api/simulazione-quiz' && POST) {
       // Simulazione della prova preselettiva (materie dei concorsi): domande di più materie e argomenti,
       // pescate a turno. Il browser riceve testi e risposte; la posizione delle corrette arriva solo alla consegna.
@@ -1194,6 +1201,7 @@ export default {
             'fisica-superiori-5': env.PADDLE_PREZZO_FISICA_SUPERIORI_5 || null,
             'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
             'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
+            'tolc-i': env.PADDLE_PREZZO_TOLC_I || null,
           },
           videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
         } : null,

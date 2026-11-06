@@ -491,16 +491,26 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'vettori-e-componenti', titolo: 'Vettori, componenti e prodotti', breve: 'Vettori' },
     ],
   },
-  // Test di ingresso all'università: materie in preparazione finché non si concorda il programma con Carmine.
+  // Test di ingresso all’università: percorsi dedicati.
   {
     slug: 'tolc-i',
     titolo: 'TOLC-I (Ingegneria)',
     breve: 'TOLC-I',
-    descrizione: "La matematica, la logica e le scienze del TOLC-I, il test CISIA per i corsi di laurea in Ingegneria.",
+    descrizione: 'Preparati al TOLC-I per Ingegneria: matematica, logica, fisica e chimica, comprensione verbale e inglese. Un primo percorso con teoria essenziale, esercizi spiegati, quiz a cinque risposte e simulazioni con tempi per sezione.',
     colore: '#4f7a6a',
     gruppo: 'TOLC, OFA e test di ingresso',
-    attiva: false,
-    argomenti: [],
+    attiva: true,
+    argomenti: [
+      { slug: 'aritmetica-e-algebra', titolo: 'Matematica · Aritmetica e algebra', breve: 'Aritmetica e algebra' },
+      { slug: 'geometria', titolo: 'Matematica · Geometria piana, solida e analitica', breve: 'Geometria' },
+      { slug: 'funzioni-e-grafici', titolo: 'Matematica · Funzioni, esponenziali e logaritmi', breve: 'Funzioni e grafici' },
+      { slug: 'trigonometria-e-statistica', titolo: 'Matematica · Trigonometria, statistica e combinatoria', breve: 'Trigonometria e statistica' },
+      { slug: 'logica', titolo: 'Logica e ragionamento', breve: 'Logica' },
+      { slug: 'fisica', titolo: 'Scienze · Fisica', breve: 'Fisica' },
+      { slug: 'chimica', titolo: 'Scienze · Chimica', breve: 'Chimica' },
+      { slug: 'comprensione-verbale', titolo: 'Comprensione verbale', breve: 'Comprensione verbale' },
+      { slug: 'inglese', titolo: 'Inglese', breve: 'Inglese' },
+    ],
   },
   {
     slug: 'tolc-e',

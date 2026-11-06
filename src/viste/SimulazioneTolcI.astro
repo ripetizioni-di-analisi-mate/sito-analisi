@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+import { TOLC_I_SEZIONI, TOLC_I_FONTE } from '../data/tolc-i.mjs';
+import { materia } from '../data/materie';
+const prezzo = materia('tolc-i').prezzo;
+---
+<Base titolo="Simulazione TOLC-I" descrizione="Allenamento al TOLC-I per Ingegneria: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali." materia="tolc-i" sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+  <div class="tolc-simulazione">
+    <p class="sopratitolo">Preparati a Ingegneria</p>
+    <h1>Simulazione TOLC-I</h1>
+    <p class="sommario">Concentrati su una sezione alla volta. Alla fine trovi punteggio, risposte spiegate e argomenti da ripassare.</p>
+    <section id="tolc-inizio">
+      <div class="tolc-specifiche"><strong>50 quesiti · 110 minuti</strong><span>+1 corretta · −0,25 errata · 0 omessa</span></div>
+      <table><thead><tr><th>Sezione</th><th>Quesiti</th><th>Tempo</th></tr></thead><tbody>{TOLC_I_SEZIONI.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.minuti} min</td></tr>)}</tbody></table>
+      <p>Puoi rivedere le risposte nella sezione aperta. Quando passi alla successiva, perdi il tempo rimasto e la sezione precedente si chiude. Alla scadenza il passaggio è automatico.</p>
+      <form id="tolc-form">
+        <label class="tolc-inglese"><input type="checkbox" name="inglese" checked /> Aggiungi inglese · 30 quesiti in 15 minuti</label>
+        <p class="tolc-dettaglio">L’inglese ha un risultato separato su 30, senza penalità per gli errori. Totale con inglese: 80 quesiti in 125 minuti.</p>
+        <button class="bottone-primario" type="submit">Inizia la simulazione</button>
+      </form>
+      <p class="tolc-dettaglio">La simulazione completa è inclusa nell’<a href="/tolc-i/sblocca">accesso TOLC-I · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href="/tolc-i/prove-d-esame/domande">dieci quiz dimostrativi</a>.</p>
+      <p class="tolc-dettaglio">Quesiti originali di allenamento, non test ufficiali CISIA. <a href={TOLC_I_FONTE} target="_blank" rel="noopener noreferrer">Struttura di riferimento ↗</a>. Le soglie di ammissione dipendono dal bando del tuo ateneo.</p>
+    </section>
+    <p id="tolc-messaggio" role="status" hidden></p>
+    <section id="tolc-prova" hidden aria-label="Prova in corso">
+      <ol id="tolc-tappe" aria-label="Sezioni della simulazione"></ol>
+      <div class="tolc-barra"><div><small>Sezione in corso</small><h2 id="tolc-sezione"></h2></div><div class="tolc-tempo"><small>Tempo rimasto</small><strong id="tolc-clock" role="timer">—</strong></div></div>
+      <p id="tolc-conta"></p>
+      <nav id="tolc-numeri" aria-label="Quesiti della sezione"></nav>
+      <div id="tolc-domanda"></div>
+      <div class="tolc-muovi"><button id="tolc-prev" type="button" class="bottone-secondario">← Precedente</button><button id="tolc-clear" type="button" class="bottone-secondario">Togli risposta</button><button id="tolc-next" type="button" class="bottone-secondario">Successiva →</button></div>
+      <button id="tolc-chiudi" type="button" class="bottone-primario">Chiudi la sezione</button>
+      <div id="tolc-conferma" role="alert" hidden><p>Confermando chiudi questa sezione, comprese le domande senza risposta, e perdi il tempo rimasto. Non potrai tornare indietro.</p><button id="tolc-si" class="bottone-primario" type="button">Conferma e continua</button> <button id="tolc-no" class="bottone-secondario" type="button">Continua la sezione</button></div>
+      <p class="tolc-dettaglio">La sessione si conserva in questo browser. Se chiudi la pagina, il tempo continua a scorrere.</p>
+    </section>
+    <section id="tolc-risultato" hidden aria-label="Risultati della simulazione"><h2>Il tuo risultato</h2><p id="tolc-voto"></p><div class="tolc-tabella"><table><thead><tr><th>Sezione</th><th>Corrette</th><th>Errate</th><th>Omesse</th><th>Punti</th></tr></thead><tbody id="tolc-conto"></tbody></table></div><p>Usa il risultato per scegliere che cosa ripassare. Non indica da solo l’ammissione a un corso di laurea.</p><div id="tolc-revisione"></div></section>
+    <button id="tolc-riprova" type="button" class="bottone-primario" hidden>Riprova la correzione</button>
+    <p id="tolc-riparti" hidden><button type="button" class="bottone-secondario">Nuova simulazione</button> <a href="/tolc-i">Torna al percorso</a></p>
+    <noscript><p>Per avviare la simulazione occorre attivare JavaScript. Puoi leggere <a href="/tolc-i">teoria ed esercizi del percorso</a>.</p></noscript>
+  </div>
+</Base>
+<script>
+  type Q = { id: string; testo: string; scelte: string[] };
+  type S = { slug: string; titolo: string; minuti: number; domande: Q[] };
+  type Stato = { token: string; sezioni: S[]; risposte: (number | null)[][]; sezione: number; domanda: number; fine: number; creata: number; conclusa: boolean; esito?: Esito };
+  type Riga = { slug: string; titolo: string; corrette: number; errate: number; omesse: number; punti: number; massimo: number; esiti: { id: string; corretta: number; spiegazione: string }[] };
+  type Esito = { punti: number; massimo: number; inglese: number | null; sezioni: Riga[] };
+  const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(`tolc-${id}`) as T;
+  const KEY = 'tolc-i-sessione-v1';
+  let stato: Stato | null = null, timer = 0, invio = false;
+  const numero = (n: number) => n.toLocaleString('it-IT', { maximumFractionDigits: 2 });
+  const salva = () => { try { localStorage.setItem(KEY, JSON.stringify(stato)); } catch { /* La prova funziona anche senza salvataggio locale. */ } };
+  const avvisa = (t: string) => { $('messaggio').textContent = t; $('messaggio').hidden = !t; };
+  function mostraDomanda() {
+    if (!stato || stato.conclusa) return;
+    const s = stato.sezioni[stato.sezione], i = stato.domanda, q = s.domande[i];
+    $('conferma').hidden = true;
+    $('tappe').replaceChildren(...stato.sezioni.map((sez, n) => {
+      const li = document.createElement('li'); li.textContent = `${n + 1}. ${sez.titolo}`;
+      if (n === stato!.sezione) li.setAttribute('aria-current', 'step');
+      if (n < stato!.sezione) li.textContent += ' ✓';
+      return li;
+    }));
+    $('sezione').textContent = s.titolo;
+    $('conta').textContent = `Quesito ${i + 1} di ${s.domande.length} · ${stato.risposte[stato.sezione].filter((r) => r !== null).length} risposte date`;
+    $('numeri').replaceChildren(...s.domande.map((_, n) => {
+      const b = document.createElement('button');b.type='button';b.textContent=String(n+1);
+      b.setAttribute('aria-label', `Quesito ${n+1}${stato!.risposte[stato!.sezione][n] !== null ? ', risposta data' : ', senza risposta'}`);
+      if (n===i) b.setAttribute('aria-current','true');
+      b.classList.toggle('risposta-data', stato!.risposte[stato!.sezione][n] !== null);
+      b.addEventListener('click',()=>{if(!controllaTempo())return;stato!.domanda=n;salva();mostraDomanda();});return b;
+    }));
+    const box = $('domanda');box.innerHTML=`<h3>Quesito ${i+1}</h3><div class="testo-domanda">${q.testo}</div>`;
+    const fs=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent='Scegli una risposta';fs.append(legend);
+    q.scelte.forEach((scelta,n)=>{
+      const l=document.createElement('label');l.className='tolc-scelta';
+      const input=document.createElement('input');input.type='radio';input.name='risposta';input.value=String(n);input.checked=stato!.risposte[stato!.sezione][i]===n;
+      const span=document.createElement('span');span.innerHTML=`<b>${'ABCDE'[n]}.</b> ${scelta}`;l.append(input,span);
+      input.addEventListener('change',()=>{if(!controllaTempo() || !stato || stato.conclusa)return;stato.risposte[stato.sezione][i]=n;salva();aggiornaRisposte();});fs.append(l);
+    });box.append(fs);
+    $('prev').toggleAttribute('disabled',i===0);$('next').toggleAttribute('disabled',i===s.domande.length-1);
+    $('clear').toggleAttribute('disabled',stato.risposte[stato.sezione][i]===null);
+    $('chiudi').textContent=stato.sezione===stato.sezioni.length-1?'Consegna la simulazione':'Chiudi la sezione e continua →';
+    aggiornaClock();
+  }
+  function aggiornaRisposte(){
+    if(!stato || stato.conclusa)return;
+    const s=stato.sezioni[stato.sezione];
+    $('conta').textContent=`Quesito ${stato.domanda+1} di ${s.domande.length} · ${stato.risposte[stato.sezione].filter(r=>r!==null).length} risposte date`;
+    $('numeri').querySelectorAll('button').forEach((b,n)=>{const data=stato!.risposte[stato!.sezione][n]!==null;b.classList.toggle('risposta-data',data);b.setAttribute('aria-label',`Quesito ${n+1}${data?', risposta data':', senza risposta'}`);});
+    $('clear').toggleAttribute('disabled',stato.risposte[stato.sezione][stato.domanda]===null);
+  }
+  function aggiornaClock(){if(!stato)return;const t=Math.max(0,Math.ceil((stato.fine-Date.now())/1000));$('clock').textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`;$('clock').classList.toggle('in-scadenza',t<60);}
+  function controllaTempo(){
+    if(!stato || stato.conclusa)return false;
+    let cambiata=false;
+    while(stato && !stato.conclusa && Date.now()>=stato.fine){
+      if(stato.sezione===stato.sezioni.length-1){stato.conclusa=true;salva();void correggi();return false;}
+      stato.sezione++;stato.domanda=0;stato.fine+=stato.sezioni[stato.sezione].minuti*60000;cambiata=true;
+    }
+    if(cambiata){salva();avvisa('Tempo scaduto: sei passato alla sezione successiva. Le risposte precedenti sono state conservate.');mostraDomanda();return false;}
+    aggiornaClock();return true;
+  }
+  function attiva(){
+    $('inizio').hidden=true;$('prova').hidden=false;$('riparti').hidden=false;mostraDomanda();
+    clearInterval(timer);controllaTempo();if(stato && !stato.conclusa)timer=window.setInterval(controllaTempo,1000);
+  }
+  $('form').addEventListener('submit',async(e)=>{
+    e.preventDefault();const b=$('form').querySelector('button')!;b.disabled=true;b.textContent='Preparazione dei quesiti…';avvisa('');
+    try{
+      const r=await fetch('/api/tolc-i/inizia',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({inglese:($('form') as HTMLFormElement).querySelector<HTMLInputElement>('[name=inglese]')!.checked})});
+      const d=await r.json();if(!r.ok)throw new Error(d.errore||'Impossibile iniziare la simulazione.');
+      stato={...d,risposte:d.sezioni.map((s:S)=>s.domande.map(()=>null)),sezione:0,domanda:0,fine:Date.now()+d.sezioni[0].minuti*60000,creata:Date.now(),conclusa:false};salva();attiva();
+    }catch(e){avvisa(e instanceof Error?e.message:'Le domande non si sono caricate. Riprova.');}
+    finally{b.disabled=false;b.textContent='Inizia la simulazione';}
+  });
+  $('prev').addEventListener('click',()=>{if(!controllaTempo())return;if(stato && stato.domanda>0){stato.domanda--;salva();mostraDomanda();}});
+  $('next').addEventListener('click',()=>{if(!controllaTempo())return;if(stato && stato.domanda<stato.sezioni[stato.sezione].domande.length-1){stato.domanda++;salva();mostraDomanda();}});
+  $('clear').addEventListener('click',()=>{if(!controllaTempo()||!stato)return;stato.risposte[stato.sezione][stato.domanda]=null;salva();mostraDomanda();});
+  $('chiudi').addEventListener('click',()=>{if(!controllaTempo())return;$('conferma').hidden=false;$('si').focus();});
+  $('no').addEventListener('click',()=>{$('conferma').hidden=true;$('chiudi').focus();});
+  $('si').addEventListener('click',()=>{
+    if(!controllaTempo()||!stato)return;$('conferma').hidden=true;
+    if(stato.sezione===stato.sezioni.length-1){stato.conclusa=true;salva();void correggi();return;}
+    stato.sezione++;stato.domanda=0;stato.fine=Date.now()+stato.sezioni[stato.sezione].minuti*60000;salva();mostraDomanda();$('sezione').setAttribute('tabindex','-1');$('sezione').focus();
+  });
+  async function correggi(){
+    if(!stato||invio)return;invio=true;clearInterval(timer);$('prova').hidden=true;$('riprova').hidden=true;avvisa('Correzione della simulazione…');
+    try{
+      const r=await fetch('/api/tolc-i/correggi',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:stato.token,risposte:stato.risposte})});const d=await r.json();
+      if(!r.ok)throw new Error(d.errore||'La correzione non è arrivata.');stato.esito=d;salva();risultato(d);
+    }catch(e){avvisa((e instanceof Error?e.message:'Connessione non disponibile.')+' Le risposte sono conservate in questo browser.');$('riprova').hidden=false;}
+    finally{invio=false;}
+  }
+  function risultato(d:Esito){
+    if(!stato)return;$('inizio').hidden=true;$('prova').hidden=true;$('risultato').hidden=false;$('riparti').hidden=false;avvisa('');
+    $('voto').textContent=`${numero(d.punti)} / 50${d.inglese===null?'':` · Inglese ${numero(d.inglese)} / 30`}`;
+    $('conto').innerHTML=d.sezioni.map(s=>`<tr><th scope="row">${s.titolo}</th><td>${s.corrette}</td><td>${s.errate}</td><td>${s.omesse}</td><td><strong>${numero(s.punti)} / ${s.massimo}</strong></td></tr>`).join('');
+    const rev=$('revisione');rev.replaceChildren();
+    d.sezioni.forEach((s,i)=>{
+      const group=document.createElement('details');const summary=document.createElement('summary');summary.textContent=`${s.titolo} · Rivedi le risposte`;group.append(summary);
+      s.esiti.forEach((es,j)=>{
+        const q=stato!.sezioni[i].domande[j],r=stato!.risposte[i][j];const article=document.createElement('article');
+        const esito=r===null?'Omessa':r===es.corretta-1?'Corretta':'Errata';
+        article.innerHTML=`<h3>Quesito ${j+1} · ${esito}</h3>${q.testo}<p>La tua risposta: ${r===null?'non data':`${'ABCDE'[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${'ABCDE'[es.corretta-1]}.</strong> ${q.scelte[es.corretta-1]}</p><div>${es.spiegazione}</div><p><a href="/tolc-i/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`;group.append(article);
+      });rev.append(group);
+    });
+  }
+  $('riprova').addEventListener('click',()=>void correggi());
+  $('riparti').querySelector('button')!.addEventListener('click',()=>{
+    if(stato&&!stato.conclusa){avvisa('Completa la sessione in corso prima di avviare una nuova simulazione.');return;}
+    clearInterval(timer);stato=null;try{localStorage.removeItem(KEY);}catch{}location.reload();
+  });
+  try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&typeof d.token==='string'&&Array.isArray(d.sezioni)&&Array.isArray(d.risposte)&&Number.isFinite(d.fine)&&Date.now()-d.creata<6*3600000){stato=d;if(stato!.conclusa){if(stato!.esito)risultato(stato!.esito);else void correggi();}else{avvisa('Sessione ripresa: il tempo continua dalla precedente apertura.');attiva();}}}catch{/* Nessuna sessione da riprendere. */}
+</script>
+<style>
+  .tolc-simulazione{font-family:var(--ui)}.tolc-simulazione h1,.tolc-simulazione h2,.tolc-simulazione h3{font-family:var(--titoli)}
+  .tolc-specifiche{display:flex;flex-direction:column;gap:.4rem;padding:1rem 1.2rem;background:color-mix(in srgb,var(--accento) 7%,var(--carta));border-left:3px solid var(--accento)}
+  .tolc-specifiche span,.tolc-dettaglio{font-size:.83rem;color:var(--inchiostro-2)}.tolc-dettaglio{line-height:1.65}.tolc-inglese{display:flex;align-items:center;gap:.65rem;font-weight:600}
+  table{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.88rem}th,td{text-align:left;padding:.7rem .45rem;border-bottom:1px solid var(--riga)}
+  #tolc-messaggio{padding:1rem;background:var(--carta-2);border:1px solid var(--riga);border-radius:var(--raggio)}
+  #tolc-tappe{display:flex;flex-wrap:wrap;gap:.5rem 1rem;list-style:none;padding:0;font-size:.78rem;color:var(--inchiostro-2)}#tolc-tappe :global([aria-current]){color:var(--accento);font-weight:700}
+  .tolc-barra{display:flex;justify-content:space-between;gap:1rem;align-items:center;border-block:1px solid var(--riga);padding:1rem 0;margin-top:1rem}.tolc-barra small{font-size:.75rem;color:var(--inchiostro-2)}.tolc-barra h2{margin:.25rem 0 0;font-size:1.3rem}.tolc-tempo{text-align:right}.tolc-tempo strong{display:block;font-size:1.7rem;font-variant-numeric:tabular-nums}.in-scadenza{color:#a43831}
+  #tolc-conta{font-size:.83rem;color:var(--inchiostro-2)}#tolc-numeri{display:flex;flex-wrap:wrap;gap:.35rem;margin:1rem 0 1.5rem}#tolc-numeri :global(button){min-width:2.2rem;min-height:2.2rem;border:1px solid var(--riga);border-radius:var(--raggio);background:var(--carta);color:var(--inchiostro);cursor:pointer}#tolc-numeri :global(.risposta-data){background:color-mix(in srgb,var(--accento) 12%,var(--carta))}#tolc-numeri :global([aria-current]){outline:2px solid var(--accento);outline-offset:1px}
+  #tolc-domanda :global(fieldset){border:0;padding:0;margin:1.2rem 0}#tolc-domanda :global(legend){font-size:.82rem;margin-bottom:.6rem}#tolc-domanda :global(.tolc-scelta){display:flex;align-items:flex-start;gap:.65rem;padding:.8rem;margin:.5rem 0;border:1px solid var(--riga);border-radius:var(--raggio);cursor:pointer}#tolc-domanda :global(.tolc-scelta:has(input:checked)){background:color-mix(in srgb,var(--accento) 8%,var(--carta));border-color:var(--accento)}#tolc-domanda :global(input){margin-top:.3rem;accent-color:var(--accento)}
+  .tolc-muovi{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:space-between;margin:1rem 0 1.5rem}.tolc-simulazione button:disabled{opacity:.45;cursor:default}#tolc-conferma{padding:1rem;border:1px solid var(--accento);margin:1rem 0;border-radius:var(--raggio)}#tolc-voto{font-size:1.65rem;font-weight:700;color:var(--accento)}.tolc-tabella{overflow-x:auto}
+  #tolc-revisione :global(details){border-block-start:1px solid var(--riga);padding:1rem 0}#tolc-revisione :global(summary){cursor:pointer;font-weight:600}#tolc-revisione :global(article){margin:1.5rem 0;padding-top:1rem;border-top:1px solid var(--riga)}#tolc-riparti{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  [hidden]{display:none!important}@media(max-width:40rem){.tolc-muovi{justify-content:flex-start}.tolc-barra h2{font-size:1.1rem}th,td{padding:.6rem .3rem;font-size:.8rem}}
+</style>

@@ -7,6 +7,7 @@ import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
+import NotaTolcI from '../components/NotaTolcI.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
@@ -17,8 +18,8 @@ const m = materiaL(lingua, materia);
 const SEZIONI = sezioniL(lingua);
 // Sopratitolo per tipo di materia: l'esame per l'università, il programma per le superiori, il concorso per i concorsi.
 const gruppo = materiaIt(materia).gruppo;
-const sopra = !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
-const titoloPagina = gruppo === 'Superiori'
+const sopra = materia === 'tolc-i' ? (lingua === 'en' ? 'Engineering entrance test' : 'Test di ingresso a Ingegneria') : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
+const titoloPagina = materia === 'tolc-i' ? (lingua === 'en' ? 'TOLC-I Engineering: theory, practice and simulations' : 'TOLC-I Ingegneria: teoria, esercizi e simulazioni') : gruppo === 'Superiori'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
   : SEO(lingua).materia(m.titolo);
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
@@ -61,6 +62,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class="sopratitolo">{sopra}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
+  {materia === 'tolc-i' && lingua === 'it' && <NotaTolcI domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
@@ -139,7 +141,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     {domandeMateria > 0 && (
       <li>
         <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{nomeRipasso}</a></h2>
-        <p class="riassunto">{semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
+        <p class="riassunto">{materia === 'tolc-i' ? (en ? 'Practice across all topics and a section-timed TOLC-I simulation with separate English results.' : 'Quiz su tutti gli argomenti e simulazione TOLC-I con tempi per sezione, correzione finale e risultato di inglese separato.') : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
         <nav aria-label={nomeRipasso}>
           <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
           <a href={link(lingua, `/${materia}/simulazione`)}>{nomeCompito}</a>
