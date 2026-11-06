@@ -352,8 +352,6 @@ html.collegato .spazio-studente {
 .ss-exp { margin: 0.3rem 0 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.1rem 1rem; font-size: 0.8rem; color: var(--inchiostro-2); }
 .ss-exp strong { color: var(--inchiostro); }
 .ss-piede { padding-top: 0.75rem; border-top: 1px solid var(--riga); }
-.ss-ripasso { display: inline-flex; margin-top: 0.75rem; color: var(--verde); font: 600 0.88rem var(--ui); text-underline-offset: 0.2em; }
-.ss-ripasso[hidden] { display: none; }
 .ss-azioni { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.2rem; }
 .ss-azioni .ss-continua { margin-left: auto; flex: none; }
 .ss-azioni .ss-riprendi { min-width: 0; flex: 0 1 auto; }

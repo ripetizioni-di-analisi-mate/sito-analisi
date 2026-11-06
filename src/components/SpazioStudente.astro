@@ -30,7 +30,6 @@ const en = lingua === 'en';
       <a class="ss-riprendi" href="#" hidden><span class="ss-libro" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M10 5.2C8.4 4 6.2 3.6 3 3.8v11.4c3.2-.2 5.4.2 7 1.4 1.6-1.2 3.8-1.6 7-1.4V3.8c-3.2-.2-5.4.2-7 1.4Z"/><path d="M10 5.2v11.4"/></svg></span><span class="ss-rip-testo"><small>{en ? 'Back to' : 'Riprendi'}</small><span class="ss-argomento"></span></span></a>
       <a class="ss-continua" href={link(lingua, '/domande-a-tempo')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
     </div>
-    <a class="ss-ripasso" href={link(lingua, '/account#percorso')} hidden>{en ? 'Today’s review' : 'Il tuo ripasso di oggi'} <span aria-hidden="true">→</span></a>
   </div>
 </section>
 <script>
@@ -71,12 +70,6 @@ const en = lingua === 'en';
       a.href = ultima.href;
       a.querySelector('.ss-argomento')!.textContent = ultima.titolo;
       a.hidden = false;
-    }
-    const materiaRipasso = (d.sessioni || []).find((s) => catalogo[s.materia]?.domande.length)?.materia;
-    const ripasso = q('.ss-ripasso') as HTMLAnchorElement;
-    if (materiaRipasso) {
-      ripasso.href = `${pref}/${materiaRipasso}/ripasso-di-oggi/domande`;
-      ripasso.hidden = false;
     }
   })();
 </script>
