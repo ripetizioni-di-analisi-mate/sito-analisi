@@ -82,6 +82,22 @@ export function avviaCompatibilita() {
   const stato = document.getElementById('compat-stato')!;
   const esitoBox = document.getElementById('compat-esito')!;
   const invia = document.getElementById('compat-invia') as HTMLButtonElement;
+  const attesa = document.getElementById('compat-attesa')!;
+  const fase = document.getElementById('compat-fase')!;
+  const notaAttesa = document.getElementById('compat-attesa-nota')!;
+  const passaggi = Array.from(attesa.querySelectorAll<HTMLElement>('[data-fase]'));
+  const scorri = (el: HTMLElement) => el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  let inAttesa = false;
+  let timerAttesa: ReturnType<typeof setTimeout> | undefined;
+  const aggiornaFase = (nome: 'lettura' | 'confronto', messaggio: string) => {
+    fase.textContent = messaggio;
+    const indice = passaggi.findIndex((p) => p.dataset.fase === nome);
+    passaggi.forEach((p, i) => {
+      p.classList.toggle('completato', i < indice);
+      if (i === indice) p.setAttribute('aria-current', 'step');
+      else p.removeAttribute('aria-current');
+    });
+  };
   const elencoFile = document.getElementById('compat-file')!;
   const inputFile = form.querySelector<HTMLInputElement>('input[name=file]')!;
   const area = form.querySelector<HTMLTextAreaElement>('textarea[name=testo]')!;
@@ -108,8 +124,12 @@ export function avviaCompatibilita() {
 
   const mostraFile = () => {
     elencoFile.innerHTML = files.map((f, i) => `<li>${esc(f.name)} <button type="button" data-togli="${i}" aria-label="Togli ${esc(f.name)}">×</button></li>`).join('');
+    zona.classList.toggle('con-file', files.length > 0);
+    document.getElementById('compat-carica-titolo')!.textContent = files.length ? `${files.length} ${files.length === 1 ? 'file pronto' : 'file pronti'}` : 'Carica il tuo compito';
+    document.getElementById('compat-carica-dettaglio')!.textContent = files.length ? 'Puoi aggiungere altre pagine o togliere i file qui sotto' : 'Trascina qui i file oppure scegli dal dispositivo';
   };
   const aggiungi = (nuovi: FileList | File[]) => {
+    if (inAttesa) return;
     for (const f of Array.from(nuovi)) {
       if (!(f.type.startsWith('image/') || f.type === 'application/pdf')) { stato.textContent = `«${f.name}» non è una foto né un PDF.`; continue; }
       if (files.length < MAX_PAGINE) { files.push(f); prepara(f); }
@@ -131,14 +151,33 @@ export function avviaCompatibilita() {
     if (!r.ok) throw new Error(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.');
     return d;
   };
-  const occupato = (si: boolean) => { invia.disabled = si; };
+  const occupato = (si: boolean) => {
+    inAttesa = si;
+    invia.disabled = si;
+    invia.textContent = si ? 'Verifica in corso…' : 'Controlla la compatibilità';
+    invia.setAttribute('aria-busy', String(si));
+    form.setAttribute('aria-busy', String(si));
+    form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement>('input, textarea, [data-togli]').forEach((el) => { el.disabled = si; });
+    attesa.hidden = !si;
+    clearTimeout(timerAttesa);
+    if (si) {
+      stato.textContent = '';
+      esitoBox.hidden = true;
+      aggiornaFase('lettura', 'Preparazione del compito…');
+      notaAttesa.textContent = 'Può richiedere qualche istante. Attendi qui: il risultato apparirà automaticamente.';
+      timerAttesa = setTimeout(() => {
+        notaAttesa.textContent = 'La verifica sta continuando e può richiedere ancora un po’ di tempo. Mantieni aperta questa pagina.';
+      }, 20000);
+      scorri(attesa);
+    }
+  };
 
   // Il confronto risponde in streaming (una riga JSON per evento): {"r": richiesta} appena il modello la scrive,
   // poi {"fine": esito} con le percentuali. Le richieste si mostrano subito, il riquadro completo alla fine.
   const confronta = async (materia: string, testo: string) => {
     esitoBox.hidden = true;
     esitoBox.innerHTML = '';
-    stato.textContent = 'Confronto con il materiale…';
+    aggiornaFase('confronto', 'Confronto gli esercizi con la teoria e il materiale della materia…');
     const r = await fetch('/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo, id: idCompito || undefined }) });
     if (!r.ok || !/ndjson/.test(r.headers.get('content-type') || '')) {
       const d = await r.json().catch(() => ({}));
@@ -146,7 +185,7 @@ export function avviaCompatibilita() {
       if (d.id) idCompito = d.id;
       stato.textContent = '';
       mostra(d as Esito, testo);
-      esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scorri(esitoBox);
       return;
     }
     const arrivate: Richiesta[] = [];
@@ -159,14 +198,14 @@ export function avviaCompatibilita() {
         arrivate.length = 0;
         esitoBox.innerHTML = '';
         esitoBox.hidden = true;
-        stato.textContent = 'Completo il confronto con una seconda analisi…';
+        aggiornaFase('confronto', 'Completo il confronto con una seconda analisi…');
         return;
       }
       if (d.fine) { esito = d.fine; return; }
       if (d.r) {
         arrivate.push(d.r);
         inCorso(materia, arrivate);
-        if (arrivate.length === 1) esitoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        aggiornaFase('confronto', `${arrivate.length} ${arrivate.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}. Il confronto continua…`);
       }
     };
     const lettore = r.body!.pipeThrough(new TextDecoderStream()).getReader();
@@ -187,20 +226,24 @@ export function avviaCompatibilita() {
     if (finale.id) idCompito = finale.id;
     stato.textContent = '';
     mostra(finale, testo);
+    scorri(esitoBox);
   };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (inAttesa) return;
     const materia = materiaScelta();
     if (!materia) { stato.textContent = 'Scegli la materia.'; return; }
+    if (!area.value.trim() && !files.length) { stato.textContent = 'Carica il compito o incolla il testo.'; return; }
     occupato(true);
     try {
       let testo = area.value.trim();
       idCompito = '';
       if (!testo) {
         if (!files.length) throw new Error('Carica il compito o incolla il testo.');
-        stato.textContent = 'Lettura del compito…';
+        aggiornaFase('lettura', 'Preparazione delle foto o delle pagine del PDF…');
         const pagine = (await Promise.all(files.map(prepara))).flat().slice(0, MAX_PAGINE);
+        aggiornaFase('lettura', 'Lettura del testo e delle formule del compito…');
         const letto = await chiama('/api/compatibilita/leggi', { materia, pagine });
         testo = letto.testo; idCompito = letto.id || '';
       }
@@ -270,6 +313,7 @@ export function avviaCompatibilita() {
     letto.value = testo;
     document.getElementById('compat-ricalcola')!.addEventListener('click', async (ev) => {
       const b = ev.currentTarget as HTMLButtonElement;
+      if (inAttesa) return;
       occupato(true);
       b.disabled = true;
       try { await confronta(e.materia, letto.value.trim()); } catch (err) { esitoBox.hidden = true; stato.textContent = (err as Error).message; }
