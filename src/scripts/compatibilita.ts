@@ -85,18 +85,48 @@ export function avviaCompatibilita() {
   const attesa = document.getElementById('compat-attesa')!;
   const fase = document.getElementById('compat-fase')!;
   const notaAttesa = document.getElementById('compat-attesa-nota')!;
+  const titoloAttesa = document.getElementById('compat-attesa-titolo')!;
+  const percentualeAttesa = document.getElementById('compat-percentuale')!;
+  const etichettaPercentuale = document.getElementById('compat-percentuale-etichetta')!;
+  const barraAttesa = document.getElementById('compat-loading')!;
+  const riempimentoAttesa = barraAttesa.querySelector<HTMLElement>('span')!;
   const passaggi = Array.from(attesa.querySelectorAll<HTMLElement>('[data-fase]'));
   const scorri = (el: HTMLElement) => el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
   let inAttesa = false;
   let timerAttesa: ReturnType<typeof setTimeout> | undefined;
-  const aggiornaFase = (nome: 'lettura' | 'confronto', messaggio: string) => {
+  let timerAvanzamento: ReturnType<typeof setInterval> | undefined;
+  let avanzamento = 0;
+  let limiteStima = 44;
+  let completata = false;
+  // Il servizio non comunica il numero totale di richieste: la stima segue le fasi reali
+  // e avanza dolcemente nell'attesa. Solo un risultato reso correttamente vale il 100%.
+  const aggiornaAvanzamento = (valore: number, finale = false) => {
+    avanzamento = Math.max(avanzamento, Math.min(finale ? 100 : 95, valore));
+    const percentuale = Math.floor(avanzamento);
+    percentualeAttesa.textContent = `${percentuale}%`;
+    riempimentoAttesa.style.width = `${percentuale}%`;
+    barraAttesa.setAttribute('aria-valuenow', String(percentuale));
+    barraAttesa.setAttribute('aria-valuetext', finale ? 'Verifica completata: 100%' : `${percentuale}% stimato`);
+  };
+  const aggiornaFase = (nome: 'lettura' | 'confronto' | 'risultato', messaggio: string) => {
     fase.textContent = messaggio;
+    if (nome === 'confronto') { limiteStima = 95; aggiornaAvanzamento(50); }
     const indice = passaggi.findIndex((p) => p.dataset.fase === nome);
     passaggi.forEach((p, i) => {
       p.classList.toggle('completato', i < indice);
       if (i === indice) p.setAttribute('aria-current', 'step');
       else p.removeAttribute('aria-current');
     });
+  };
+  const completaAttesa = () => {
+    clearInterval(timerAvanzamento);
+    clearTimeout(timerAttesa);
+    completata = true;
+    attesa.dataset.stato = 'completato';
+    titoloAttesa.textContent = 'Verifica completata';
+    etichettaPercentuale.textContent = 'completato';
+    aggiornaFase('risultato', 'Il risultato è pronto qui sotto.');
+    aggiornaAvanzamento(100, true);
   };
   const elencoFile = document.getElementById('compat-file')!;
   const inputFile = form.querySelector<HTMLInputElement>('input[name=file]')!;
@@ -158,9 +188,24 @@ export function avviaCompatibilita() {
     invia.setAttribute('aria-busy', String(si));
     form.setAttribute('aria-busy', String(si));
     form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLButtonElement>('input, textarea, [data-togli]').forEach((el) => { el.disabled = si; });
-    attesa.hidden = !si;
+    attesa.hidden = !si && !completata;
     clearTimeout(timerAttesa);
+    clearInterval(timerAvanzamento);
     if (si) {
+      completata = false;
+      avanzamento = 0;
+      limiteStima = 44;
+      attesa.dataset.stato = 'in-corso';
+      titoloAttesa.textContent = 'Verifica compatibilità in corso';
+      etichettaPercentuale.textContent = 'stimato';
+      riempimentoAttesa.style.transition = 'none';
+      aggiornaAvanzamento(3);
+      // Una nuova verifica riparte subito: non animare all'indietro dal 100% precedente.
+      void riempimentoAttesa.offsetWidth;
+      riempimentoAttesa.style.removeProperty('transition');
+      timerAvanzamento = setInterval(() => {
+        aggiornaAvanzamento(avanzamento + (limiteStima - avanzamento) * 0.025);
+      }, 700);
       stato.textContent = '';
       esitoBox.hidden = true;
       aggiornaFase('lettura', 'Preparazione del compito…');
@@ -185,6 +230,7 @@ export function avviaCompatibilita() {
       if (d.id) idCompito = d.id;
       stato.textContent = '';
       mostra(d as Esito, testo);
+      completaAttesa();
       scorri(esitoBox);
       return;
     }
@@ -205,6 +251,7 @@ export function avviaCompatibilita() {
       if (d.r) {
         arrivate.push(d.r);
         inCorso(materia, arrivate);
+        aggiornaAvanzamento(Math.min(90, 60 + arrivate.length * 3));
         aggiornaFase('confronto', `${arrivate.length} ${arrivate.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}. Il confronto continua…`);
       }
     };
@@ -226,6 +273,7 @@ export function avviaCompatibilita() {
     if (finale.id) idCompito = finale.id;
     stato.textContent = '';
     mostra(finale, testo);
+    completaAttesa();
     scorri(esitoBox);
   };
 
@@ -243,9 +291,11 @@ export function avviaCompatibilita() {
         if (!files.length) throw new Error('Carica il compito o incolla il testo.');
         aggiornaFase('lettura', 'Preparazione delle foto o delle pagine del PDF…');
         const pagine = (await Promise.all(files.map(prepara))).flat().slice(0, MAX_PAGINE);
+        aggiornaAvanzamento(18);
         aggiornaFase('lettura', 'Lettura del testo e delle formule del compito…');
         const letto = await chiama('/api/compatibilita/leggi', { materia, pagine });
         testo = letto.testo; idCompito = letto.id || '';
+        aggiornaAvanzamento(44);
       }
       await confronta(materia, testo);
     } catch (err) {
