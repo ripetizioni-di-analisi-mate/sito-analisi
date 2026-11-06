@@ -8,7 +8,7 @@ import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { FORMULARI } from '../data/formulari';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
-const { materia, argomento, sezione, lingua = 'it', ricercaPrincipale = false } = Astro.props;
+const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
@@ -23,10 +23,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   <div class="indice-testa">
     <span>{t.indice}</span>
   </div>
-  {ricercaPrincipale ? <a class="indice-cerca-link" href="#ricerca-principale">{lingua === 'en' ? 'Search this site' : 'Cerca nel sito'} <span aria-hidden="true">→</span></a> : <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+  <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
-  </form>}
+  </form>
   {lingua === 'it' && <LezioniCarmine dove="indice" />}
   {/* «Compatibilità con il tuo esame» (versione B scelta da Carmine il 04/11) */}
   {lingua === 'it' && (
@@ -175,7 +175,5 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 </script>
 
 <style>
-  .indice-cerca-link{display:flex;justify-content:space-between;padding:.5rem;margin:0 .5rem .9rem;font:400 .9rem var(--ui);color:var(--inchiostro-2);text-decoration:none;border-bottom:1px solid var(--riga)}
-  .indice-cerca-link:hover{text-decoration:underline}
   a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
 </style>
