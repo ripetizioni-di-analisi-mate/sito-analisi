@@ -536,6 +536,24 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'radiazioni-e-ottica', titolo: 'Radiazioni, radioattività e ottica', breve: 'Radiazioni e ottica' },
     ],
   },
+  {
+    slug: 'chimica-semestre-filtro',
+    titolo: 'Chimica e propedeutica biochimica per il semestre filtro',
+    breve: 'Chimica semestre filtro',
+    descrizione: 'Chimica e propedeutica biochimica per Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.',
+    colore: '#387d71',
+    gruppo: 'Semestre filtro',
+    attiva: true,
+    argomenti: [
+      { slug: 'atomo-legami-termodinamica', titolo: 'Atomo, legami, stati della materia e termodinamica', breve: 'Atomo, legami e termodinamica' },
+      { slug: 'soluzioni-proprieta-colligative', titolo: 'Miscele, soluzioni e proprietà colligative', breve: 'Soluzioni e proprietà colligative' },
+      { slug: 'reazioni-cinetica-equilibrio', titolo: 'Reazioni chimiche, cinetica ed equilibrio', breve: 'Reazioni ed equilibrio' },
+      { slug: 'acidi-basi-redox', titolo: 'Acidi, basi, tamponi, redox ed elettrochimica', breve: 'Acidi, basi e redox' },
+      { slug: 'carbonio-idrocarburi-stereochimica', titolo: 'Carbonio, idrocarburi e stereochimica', breve: 'Carbonio e stereochimica' },
+      { slug: 'gruppi-funzionali', titolo: 'Gruppi funzionali e reazioni dei composti organici', breve: 'Gruppi funzionali' },
+      { slug: 'biomolecole', titolo: 'Amminoacidi, proteine, carboidrati, lipidi e acidi nucleici', breve: 'Biomolecole' },
+    ],
+  },
 ];
 
 // Prove in locale: con SOLO_MATERIE="analisi-1,precorso" le altre materie risultano in preparazione (build più rapida).

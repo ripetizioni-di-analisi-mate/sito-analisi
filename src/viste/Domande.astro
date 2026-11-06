@@ -6,11 +6,13 @@ import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { catalogoDomande } from '../lib/domande';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
 const { lingua, materia, argomento, totale } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
+const senzaInglese = !en && semestreFiltro && !(await catalogoDomande('en'))[materia];
 const nomiProve = nomiAllenamento(m, lingua);
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
 // Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
@@ -69,7 +71,7 @@ const JS = en ? {
   descrizione={T.descr}
   percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua}
-  seo={{ noindex: true }}
+  seo={{ noindex: true, senzaInglese }}
 >
   <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
@@ -80,7 +82,7 @@ const JS = en ? {
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
     <p class="sommario">{T.sommario}</p>
-    {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} />}
+    {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p class="nota">{en ? 'Mathematics practice for Physics and Chemistry. These questions train the prerequisites; they are not an official filter-semester exam.' : 'Allenamento di matematica per Fisica e Chimica. Queste domande servono a consolidare i prerequisiti; non costituiscono una prova ufficiale del semestre filtro.'}</p>}
 
     <div class="nota-ospite" hidden>
