@@ -11,6 +11,7 @@ import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
 const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
 const t = T(lingua);
+const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
 const SEZIONI = sezioniL(lingua);
@@ -87,8 +88,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">
               <li style="--colore-materia: #6d5a8a">
-                <a class="voce-materia" href="/concorsi">
-                  <span class="materia-punto" aria-hidden="true" />
+                <a class="voce-materia" href="/concorsi" aria-current={qui === '/concorsi' ? 'page' : undefined}>
                   <span class="materia-testo"><span class="materia-nome">Che cosa studiare</span></span>
                   <small class="materia-prossima">guida gratuita</small>
                 </a>
@@ -101,7 +101,6 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                 {voci.map(({ m: x, nome }) => {
                   const dentro = (
                     <>
-                      <span class="materia-punto" aria-hidden="true" />
                       <span class="materia-testo">
                         <span class="materia-nome">{nome}</span>
                       </span>
@@ -110,7 +109,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   );
                   return (
                     <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)} aria-current={qui === link(lingua, `/${x.slug}`) ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
                     </li>
                   );
                 })}
@@ -132,8 +131,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           <ol class="indice-materie indice-video">
             {VIDEOCORSI.map((v) => (
               <li data-video={v.slug} style="--colore-materia: var(--video)">
-                <a class="voce-materia" href={`/videocorsi/${v.slug}`}>
-                  <span class="video-punto" aria-hidden="true">▶</span>
+                <a class="voce-materia" href={`/videocorsi/${v.slug}`} aria-current={qui === `/videocorsi/${v.slug}` ? 'page' : undefined}>
                   <span class="materia-testo"><span class="materia-nome">{v.titolo.replace(/^Videocorso di /, '')}</span></span>
                   <span class="stato compatto"><span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
                 </a>
@@ -150,8 +148,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
               const x = MATERIE.find((m) => m.slug === f);
               return x && (
                 <li style={`--colore-materia: ${x.colore}`}>
-                  <a class="voce-materia" href={link(lingua, `/formulari/${f}`)}>
-                    <span class="materia-punto" aria-hidden="true" />
+                  <a class="voce-materia" href={link(lingua, `/formulari/${f}`)} aria-current={qui === link(lingua, `/formulari/${f}`) ? 'page' : undefined}>
                     <span class="materia-testo"><span class="materia-nome">{x.titolo}</span></span>
                     <small class="materia-prossima">{lingua === 'en' ? 'free' : 'gratis'}</small>
                   </a>

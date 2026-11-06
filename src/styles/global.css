@@ -116,14 +116,14 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 .indice .in-preparazione small { font-weight: 400; font-size: 0.75rem; }
 .indice ol { list-style: none; padding: 0; margin: 0; }
 .indice > ol > li { margin: 0.15rem 0; }
-.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; text-align: left; font: inherit; font-weight: 600; padding: 0.35rem 0.5rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
+.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; text-align: left; font: 400 0.9rem/1.35 var(--ui); padding: 0.55rem 0.65rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
 .indice button.argomento::after { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; margin-right: 0.3rem; }
 .indice button.argomento[aria-expanded="true"]::after { transform: rotate(45deg); }
 .indice button.argomento:hover { background: var(--carta-2); }
 .indice ol ol { padding-left: 0.5rem; margin-bottom: 0.4rem; }
 .indice ol ol a { display: block; padding: 0.22rem 0.5rem 0.22rem 1rem; color: var(--inchiostro-2); text-decoration: none; border-left: 2px solid transparent; }
 .indice a.attiva { color: var(--accento); border-left-color: var(--accento); font-weight: 600; }
-.indice li.corrente > button.argomento { background: var(--carta-2); color: var(--accento); }
+.indice li.corrente > button.argomento { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); box-shadow: inset 3px 0 var(--verde); }
 .indice ol ol:not(.aperta) { display: none; }
 /* In cima all'indice: la scritta «Indice» e la casella di ricerca */
 .indice-testa { display: flex; justify-content: space-between; align-items: center; margin: 0 0.5rem 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--riga); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inchiostro-2); }
@@ -441,11 +441,15 @@ details.indice-gruppo { margin-bottom: 0.5rem; }
 details.sottogruppo { margin: 0.9rem 0 0 0.2rem; }
 details.sottogruppo > summary.nome-sottogruppo { display: flex; align-items: baseline; gap: 0.6rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.95rem; font-weight: 600; color: var(--inchiostro); padding: 0.35rem 0; }
 details.sottogruppo > summary.nome-sottogruppo h3 { font: inherit; margin: 0; }
-details.indice-sottogruppo { margin: 0.1rem 0 0.4rem 0.6rem; }
-details.indice-sottogruppo > summary { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none; user-select: none; font-family: var(--ui); font-size: 0.9rem; font-weight: 600; color: var(--inchiostro); padding: 0.3rem 0.5rem; }
+details.indice-sottogruppo { margin: 0.15rem 0 0.4rem; }
+details.indice-sottogruppo > summary { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: 2.75rem; cursor: pointer; list-style: none; user-select: none; font: 600 0.9rem/1.35 var(--ui); color: var(--inchiostro); padding: 0.55rem 0.65rem; border-radius: var(--raggio); }
 details.sottogruppo > summary::-webkit-details-marker, details.indice-sottogruppo > summary::-webkit-details-marker { display: none; }
 details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
 details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > summary::before { transform: rotate(45deg); }
+details.indice-sottogruppo > summary::before { display: none; }
+details.indice-sottogruppo > summary::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-bottom: 1.3px solid var(--inchiostro-2); transform: rotate(-45deg); transition: transform 150ms ease; }
+details.indice-sottogruppo[open] > summary::after { transform: rotate(45deg); }
+details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(--verde) 5%, var(--carta)); }
 
 /* Aperture secondarie: lo stesso indicatore dei capitoli, anche nei risultati caricati in pagina. */
 :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary { list-style: none; }
@@ -461,13 +465,14 @@ details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > 
   details.indice-gruppo > summary::before,
   details.sottogruppo > summary::before,
   details.indice-sottogruppo > summary::before,
+  details.indice-sottogruppo > summary::after,
   :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::before { transition: none; }
 }
 .griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
 @media (min-width: 44rem) { .griglia-materie { grid-template-columns: 1fr 1fr; } }
 .griglia-materie li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); }
 .griglia-materie a, .griglia-materie div { display: block; height: 100%; box-sizing: border-box; padding: 0.9rem 1rem; text-decoration: none; color: var(--inchiostro); }
-.griglia-materie h3 { margin: 0; font-size: 1.25rem; color: var(--accento); }
+.griglia-materie h3 { margin: 0; font: 600 1.05rem/1.35 var(--ui); color: var(--accento); }
 .griglia-materie p { margin: 0.3rem 0 0.45rem; color: var(--inchiostro-2); font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .griglia-materie .conteggio, .griglia-argomenti .conteggio { font-family: var(--ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
 .griglia-materie li.in-preparazione { opacity: 0.75; }
@@ -615,17 +620,19 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .icona-contatto { width: 3.3rem; height: 3.3rem; border-radius: 50%; background: color-mix(in srgb, var(--accento) 12%, var(--carta)); color: var(--inchiostro); display: grid; place-items: center; flex: none; }
 .icona-contatto svg { width: 1.5rem; height: 1.5rem; }
 .contatti strong { display: block; font-family: var(--titoli); }
-/* Elenco delle materie nell'indice: un pallino nel colore della materia, voci compatte perché le materie saranno molte */
-.indice-materie { display: grid; gap: 0.1rem; }
-.indice-materie .voce-materia { display: flex; align-items: center; gap: 0.65rem; padding: 0.42rem 0.5rem; border-radius: var(--raggio); text-decoration: none; color: var(--inchiostro); transition: background 0.15s; }
-.indice-materie a.voce-materia:hover, .indice-materie a.voce-materia:focus-visible { background: color-mix(in srgb, var(--colore-materia) 9%, var(--carta)); }
-.materia-punto { flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--colore-materia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--colore-materia) 18%, transparent); }
-.materia-testo { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.25; }
-.materia-nome { font-family: var(--titoli); font-weight: 700; font-size: 1.02rem; color: var(--inchiostro); }
-.materia-prossima { margin-left: auto; font-family: var(--ui); font-size: 0.74rem; color: var(--inchiostro-2); white-space: nowrap; }
+/* Versione «solo testo»: stessa tipografia dei percorsi in tutte le aree, IT e EN. */
+.indice-materie { display: grid; gap: 0; }
+.indice-materie .voce-materia { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; padding: 0.55rem 0.65rem; border-radius: var(--raggio); text-decoration: none; color: var(--inchiostro); transition: background 150ms ease, box-shadow 150ms ease; }
+.indice-gruppo .indice-materie > li + li { border-top: 1px solid color-mix(in srgb, var(--riga) 55%, transparent); }
+.indice-gruppo > .indice-materie { padding: 0.2rem 0 0.35rem; }
+.indice-gruppo a.voce-materia::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-top: 1.3px solid var(--inchiostro-2); transform: rotate(45deg); }
+.indice-materie a.voce-materia:hover, .indice-materie a.voce-materia:focus-visible, .indice-materie a.voce-materia[aria-current="page"] { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); box-shadow: inset 3px 0 var(--verde); }
+.materia-testo { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.35; }
+.materia-nome { font: 400 0.9rem/1.35 var(--ui); color: var(--inchiostro); overflow-wrap: break-word; }
+.materia-prossima { margin-left: auto; max-width: 5.5rem; font: 400 0.72rem/1.3 var(--ui); color: var(--inchiostro-2); text-align: right; }
 .indice-materie .stato { margin-left: auto; }
-.indice-materie .in-preparazione .materia-punto { background: none; border: 1.5px solid var(--riga); box-shadow: none; }
 .indice-materie .in-preparazione .materia-nome { color: var(--inchiostro-2); }
+@media (prefers-reduced-motion: reduce) { .indice-materie .voce-materia { transition: none; } }
 .indice-contatti { margin: 1.5rem 0.5rem 0; padding-top: 1rem; border-top: 1px solid var(--riga); }
 .indice-contatti a { color: var(--inchiostro); font-weight: 600; text-decoration: none; }
 .indice-contatti a:hover { color: var(--accento); }
@@ -914,9 +921,6 @@ html.assistente-aperto .testo-studio > .blocco, html.assistente-aperto .testo-st
 .griglia-materie a.pulsante-video:hover { background: color-mix(in srgb, var(--video) 15%, white); }
 .pulsante-scheda .ok { display: none; align-items: center; gap: 0.2rem; margin-left: 0.15rem; padding-left: 0.4rem; border-left: 1px solid color-mix(in srgb, var(--verde) 40%, transparent); color: var(--verde); }
 .pulsante-scheda .ok svg { width: 0.9rem; height: 0.9rem; }
-/* Indice: sezione Videocorsi, con lo stesso aspetto delle materie */
-.video-punto { flex: none; width: 0.95rem; height: 0.95rem; border-radius: 50%; background: var(--video); color: #fff; font-size: 0.42rem; display: grid; place-items: center; padding-left: 0.08rem; box-sizing: border-box; }
-
 /* ---------- Livelli e punti esperienza ---------- */
 .account-testata { position: relative; display: flex; align-items: stretch; flex: none; }
 .bottone-livello { display: none; }
