@@ -73,7 +73,7 @@ export async function gestisciPacchetti(req, env, h) {
       const base = env.PADDLE_API_URL || (env.PADDLE_AMBIENTE === 'sandbox' ? 'https://sandbox-api.paddle.com' : 'https://api.paddle.com');
       const r = await fetch(`${base}/discounts`, { method: 'POST', signal: AbortSignal.timeout(15000),
         headers: { authorization: `Bearer ${env.PADDLE_API_KEY}`, 'content-type': 'application/json' },
-        body: JSON.stringify({ description: `Pacchetto ${q.titolo}`, ...sconto, mode: 'custom', enabled_for_checkout: true,
+        body: JSON.stringify({ description: q.titolo.startsWith('Pacchetto ') ? q.titolo : `Pacchetto ${q.titolo}`, ...sconto, mode: 'custom', enabled_for_checkout: true,
           usage_limit: 1, recur: false, restrict_to: prezzi, expires_at: new Date(Date.now() + 86400000).toISOString() }) });
       const d = await r.json();
       if (!r.ok || !/^dsc_[a-z0-9]{26}$/.test(d.data?.id || '')) throw new Error(d.error?.code || `HTTP_${r.status}`);

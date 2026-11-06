@@ -12,16 +12,16 @@ const gruppi = [
 ];
 const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.titolo || s).join(' · ');
 ---
-<Base titolo="Pacchetti e sconti" descrizione="Pacchetti di materie con sconti dal 15% al 25% e percorsi di videocorsi con video, PDF e materiale incluso. Un acquisto unico, senza scadenza." percorso={[{ titolo: 'Pacchetti e sconti' }]} lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
+<Base titolo="Pacchetti e sconti" descrizione="Pacchetti di materie con sconti dal 15% al 25% e pacchetti di videocorsi con video, PDF e materiale incluso. Un acquisto unico, senza scadenza." percorso={[{ titolo: 'Pacchetti e sconti' }]} lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
   <div id="pacchetti-app" class="pn-page" data-view="materie" data-materie={JSON.stringify(materie)} data-video={JSON.stringify(video)}>
-    <header><h1>Più materie. <em>Più risparmio.</em></h1><p class="pn-intro">Scegli un percorso o abbina le materie che ti servono.</p><ul class="pn-perks"><li><span aria-hidden="true">✓</span>Un solo acquisto</li><li><span aria-hidden="true">✓</span>Accesso senza scadenza</li></ul></header>
+    <header><h1>Più materie. <em>Più risparmio.</em></h1><p class="pn-intro">Scegli un pacchetto o abbina le materie che ti servono.</p><ul class="pn-perks"><li><span aria-hidden="true">✓</span>Un solo acquisto</li><li><span aria-hidden="true">✓</span>Accesso senza scadenza</li></ul></header>
     <div class="pn-tabs" role="tablist" aria-label="Tipo di pacchetto">
       <button class="pn-tab" type="button" id="tab-materie" role="tab" aria-selected="true" aria-controls="pannello-materie" data-tab="materie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14M12 7C9 4 5 4 2 5v14c3-1 7-1 10 2 3-3 7-3 10-2V5c-3-1-7-1-10 2Z"/></svg>Materie</button>
       <button class="pn-tab" type="button" id="tab-video" role="tab" aria-selected="false" aria-controls="pannello-video" data-tab="video" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 12 8-12 8V4Z"/></svg>Videocorsi</button>
     </div>
     <section id="pannello-materie" role="tabpanel" aria-labelledby="tab-materie">
       <ul class="pn-discounts" aria-label="Sconti sul numero di materie"><li data-sconto="15"><span>2 materie</span><strong>−15%</strong></li><li data-sconto="20"><span>3 materie</span><strong>−20%</strong></li><li data-sconto="25"><span>4 o più materie</span><strong>−25%</strong></li></ul>
-      <div class="pn-section-top"><h2>Percorsi già abbinati</h2><a class="pn-compose-jump" href="#componi" data-apri-componi>Scegli tu le materie <span aria-hidden="true">↗</span></a></div>
+      <div class="pn-section-top"><h2>Pacchetti pronti</h2><a class="pn-compose-jump" href="#componi" data-apri-componi>Scegli tu le materie <span aria-hidden="true">↗</span></a></div>
       <div class="pn-offers">{gruppi.map((g) => <section class:list={['pn-group', { 'pn-group-secondaria': g.id !== 'universita' }]} data-group={g.id} aria-label={g.titolo}>
         <p class="pn-group-name"><span>{g.titolo}</span></p>
         <div class="pn-list">{g.pacchetti.map((id) => PACCHETTI_MATERIE.find((p) => p.id === id)).filter((p) => p && p.materie.every((s) => materie.some((m) => m.slug === s))).map((p) => {
@@ -39,7 +39,7 @@ const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.tito
       <section class="riepilogo-pacchetto" id="riepilogo-materie" aria-label="Riepilogo delle materie" hidden><h2 tabindex="-1">Il tuo pacchetto</h2><div aria-live="polite"><p data-nomi-materie>Scegli un pacchetto o le materie che ti servono.</p><p class="totale-scelto" data-totale-materie>—</p><p class="risparmio" data-risparmio-materie></p></div><button type="button" class="bottone-primario" data-compra="materie" disabled>Scegli almeno due materie</button></section>
     </section>
     <section id="pannello-video" role="tabpanel" aria-labelledby="tab-video" hidden>
-      <p class="pn-video-intro">Video e PDF, con le materie del sito incluse.</p><div class="pn-section-top"><h2>Percorsi in video</h2></div>
+      <p class="pn-video-intro">Video e PDF, con le materie del sito incluse.</p><div class="pn-section-top"><h2>Pacchetti di videocorsi</h2></div>
       <div class="pn-list">{PACCHETTI_VIDEO.map((p) => {
         const q = riepilogoVideo(p.id, video);
         return <article class="pn-offer pacchetto" data-video-offerta={p.id}><div class="pn-offer-line">
@@ -48,8 +48,8 @@ const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.tito
             <button type="button" class="pn-choose" data-titolo={p.titolo} aria-label={`Scegli ${p.titolo}`} aria-pressed="false" data-scegli-video={p.id}><span data-etichetta-scelta>Scegli</span><span data-segno-scelta aria-hidden="true">→</span></button>
           </div></div></article>;
       })}</div>
-      <section class="riepilogo-pacchetto" id="riepilogo-video" aria-label="Riepilogo dei videocorsi" hidden><h2 data-titolo-video tabindex="-1">Il tuo percorso video</h2><div aria-live="polite"><p data-nomi-video>Scegli il pacchetto che ti interessa.</p><p class="totale-scelto" data-totale-video>—</p><p class="risparmio" data-risparmio-video></p></div><button type="button" class="bottone-primario" data-compra="video" disabled>Scegli un pacchetto</button></section>
-      <p class="pn-note">Hai già un videocorso o del materiale? <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivi a Carmine per completare il percorso</a>.</p>
+      <section class="riepilogo-pacchetto" id="riepilogo-video" aria-label="Riepilogo dei videocorsi" hidden><h2 data-titolo-video tabindex="-1">Il tuo pacchetto video</h2><div aria-live="polite"><p data-nomi-video>Scegli il pacchetto che ti interessa.</p><p class="totale-scelto" data-totale-video>—</p><p class="risparmio" data-risparmio-video></p></div><button type="button" class="bottone-primario" data-compra="video" disabled>Scegli un pacchetto</button></section>
+      <p class="pn-note">Hai già un videocorso o del materiale? <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivi a Carmine per abbinare i corsi</a>.</p>
     </section>
     <p id="esito-pacchetto" role="status" aria-live="polite" hidden></p><p class="pn-note">Sconti già inclusi nei prezzi e non cumulabili con altre promozioni. Pagamento sicuro con Paddle.</p><p class="nota-termini-breve">Acquistando accetti i <a href="/termini">termini d’uso</a>.</p>
     <noscript><p>Attiva JavaScript per scegliere e acquistare il pacchetto. <a href="/contatti">Contattaci per assistenza</a>.</p></noscript>

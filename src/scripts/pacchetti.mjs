@@ -55,7 +55,7 @@ async function avvia() {
     scrivi('[data-nomi-materie]', scelte().length ? scelte().map((s) => materie.find((m) => m.slug === s).titolo).join(' + ') : 'Scegli un pacchetto o le materie che ti servono.');
     scrivi('[data-totale-materie]', m ? euro(m.totale) : '—');
     scrivi('[data-risparmio-materie]', m ? `Risparmi ${euro(m.risparmio)} · sconto del ${m.percentuale}% incluso` : '');
-    scrivi('[data-titolo-video]', v?.titolo || 'Il tuo percorso video');
+    scrivi('[data-titolo-video]', v?.titolo || 'Il tuo pacchetto video');
     scrivi('[data-nomi-video]', v ? v.video.map((s) => video.find((v) => v.slug === s).breve).join(' + ') : 'Scegli il pacchetto che ti interessa.');
     scrivi('[data-totale-video]', v ? euro(v.totale) : '—');
     scrivi('[data-risparmio-video]', v ? `Risparmi ${euro(v.risparmio)} · materiale del sito incluso` : '');

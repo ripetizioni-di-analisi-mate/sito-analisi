@@ -4,17 +4,17 @@ export const scontoMaterie = (n) => SCONTI_PACCHETTI.find((s) => n >= s.da)?.per
 export const euro = (centesimi) => (centesimi / 100).toLocaleString('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: centesimi % 100 === 0 ? 0 : 2 });
 
 export const PACCHETTI_MATERIE = [
-  { id: 'analisi', titolo: 'Percorso Analisi', materie: ['analisi-1', 'analisi-2'] },
-  { id: 'fisica', titolo: 'Percorso Fisica', materie: ['fisica-1', 'fisica-2'] },
+  { id: 'analisi', titolo: 'Pacchetto Analisi', materie: ['analisi-1', 'analisi-2'] },
+  { id: 'fisica', titolo: 'Pacchetto Fisica', materie: ['fisica-1', 'fisica-2'] },
   { id: 'base-universitaria', titolo: 'Base universitaria', materie: ['analisi-1', 'algebra-lineare', 'fisica-1'] },
   { id: 'maturita', titolo: 'Maturità scientifica', materie: ['matematica-superiori-5', 'fisica-superiori-5'] },
   { id: 'concorsi', titolo: 'Preparazione concorsi', materie: ['matematica-concorsi', 'logica-concorsi'] },
-  { id: 'scientifico', titolo: 'Percorso scientifico', materie: ['analisi-1', 'analisi-2', 'fisica-1', 'fisica-2'] },
+  { id: 'scientifico', titolo: 'Pacchetto scientifico', materie: ['analisi-1', 'analisi-2', 'fisica-1', 'fisica-2'] },
 ];
 export const PACCHETTI_VIDEO = [
-  { id: 'video-analisi', titolo: 'Percorso Analisi', video: ['analisi-1-e-2'], confronto: ['analisi-1', 'analisi-2'], prezzo: 499 },
+  { id: 'video-analisi', titolo: 'Pacchetto Analisi', video: ['analisi-1-e-2'], confronto: ['analisi-1', 'analisi-2'], prezzo: 499 },
   { id: 'video-basi', titolo: 'Le basi dell’università', video: ['analisi-1', 'algebra'], prezzo: 399 },
-  { id: 'video-economia', titolo: 'Percorso Economia', video: ['matematica-generale', 'algebra'], prezzo: 499 },
+  { id: 'video-economia', titolo: 'Pacchetto Economia', video: ['matematica-generale', 'algebra'], prezzo: 499 },
   { id: 'video-analisi-algebra', titolo: 'Analisi e Algebra', video: ['analisi-1-e-2', 'algebra'], prezzo: 549 },
 ];
 
