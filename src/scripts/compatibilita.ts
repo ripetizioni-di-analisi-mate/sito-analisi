@@ -155,6 +155,13 @@ export function avviaCompatibilita() {
       if (!riga.trim()) return;
       const d = JSON.parse(riga);
       if (d.errore) throw new Error(d.errore);
+      if (d.ricomincia) {
+        arrivate.length = 0;
+        esitoBox.innerHTML = '';
+        esitoBox.hidden = true;
+        stato.textContent = 'Completo il confronto con una seconda analisi…';
+        return;
+      }
       if (d.fine) { esito = d.fine; return; }
       if (d.r) {
         arrivate.push(d.r);

@@ -304,10 +304,15 @@ function pezzoDi(ev) {
 }
 
 function verificaEvento(ev) {
-  if (ev.error || ev.success === false || ev.choices?.some((c) => ['length', 'error', 'content_filter'].includes(c.finish_reason))) {
+  if (ev.error || ev.success === false || ['length', 'error', 'content_filter'].includes(ev.finish_reason)
+    || ['response.failed', 'response.incomplete', 'error'].includes(ev.type)
+    || ev.choices?.some((c) => ['length', 'error', 'content_filter'].includes(c.finish_reason))) {
     throw new Error('risposta del modello interrotta');
   }
 }
+
+const concluso = (ev) => ev?.finish_reason === 'stop' || ev?.choices?.some((c) => c.finish_reason === 'stop')
+  || ev?.type === 'response.completed';
 
 // Testo del modello a pezzi, in streaming (o tutto insieme, se il modello ignora lo streaming).
 async function* testoModello(env, modello, input, confermaFine) {
@@ -315,11 +320,23 @@ async function* testoModello(env, modello, input, confermaFine) {
   if (!(r instanceof ReadableStream)) {
     verificaEvento(r || {});
     yield testoDi(r);
-    if (r?.finish_reason === 'stop' || r?.choices?.some((c) => c.finish_reason === 'stop')) confermaFine();
+    if (concluso(r)) confermaFine();
     return;
   }
   const lettore = r.pipeThrough(new TextDecoderStream()).getReader();
-  let resto = '', terminato = false;
+  let resto = '', terminato = false, testoEmesso = '';
+  const leggiEvento = (dati) => {
+    if (dati === '[DONE]') { terminato = true; return ''; }
+    const ev = JSON.parse(dati);
+    verificaEvento(ev);
+    if (concluso(ev)) terminato = true;
+    let t = pezzoDi(ev);
+    // Alcuni adattatori aggiungono al flusso il testo completo insieme al riepilogo
+    // dei consumi. Non va analizzato di nuovo dopo le righe già ricevute.
+    if (testoEmesso && ev.usage && typeof ev.response === 'string' && t.startsWith(testoEmesso)) t = t.slice(testoEmesso.length);
+    testoEmesso += t;
+    return t;
+  };
   try {
     for (;;) {
       const { done, value } = await lettore.read();
@@ -332,23 +349,13 @@ async function* testoModello(env, modello, input, confermaFine) {
         if (!d.startsWith('data:')) continue;
         const dati = d.slice(5).trim();
         if (!dati) continue;
-        if (dati === '[DONE]') { terminato = true; continue; }
-        const ev = JSON.parse(dati);
-        verificaEvento(ev);
-        if (ev.choices?.some((c) => c.finish_reason === 'stop')) terminato = true;
-        const t = pezzoDi(ev); if (t) yield t;
+        const t = leggiEvento(dati); if (t) yield t;
       }
     }
     // Anche l'ultimo evento conta se il server chiude senza un ritorno a capo.
     if (resto.trim().startsWith('data:')) {
       const dati = resto.trim().slice(5).trim();
-      if (dati === '[DONE]') terminato = true;
-      else if (dati) {
-        const ev = JSON.parse(dati);
-        verificaEvento(ev);
-        if (ev.choices?.some((c) => c.finish_reason === 'stop')) terminato = true;
-        const t = pezzoDi(ev); if (t) yield t;
-      }
+      if (dati) { const t = leggiEvento(dati); if (t) yield t; }
     }
     if (terminato) confermaFine();
   } finally { await lettore.cancel().catch(() => {}); lettore.releaseLock(); }
@@ -365,7 +372,7 @@ async function* richiesteModello(env, modello, input) {
     if (/NON_UNIVERSITARIO/.test(r) && !n) { nonUniversitario = true; yield { nonUniversitario: true }; return; }
     const fine = /^\s*FINE_CONFRONTO\s*\|\s*(\d+)\s*$/.exec(r);
     if (fine) {
-      if (Number(fine[1]) !== n || !n) throw new Error('numero di richieste incoerente');
+      if (Number(fine[1]) !== n || !n) throw new Error(`numero di richieste incoerente: ${n} lette, ${fine[1]} dichiarate`);
       completo = true;
       return;
     }
@@ -395,23 +402,38 @@ async function* richiesteModello(env, modello, input) {
   if (!nonUniversitario && n && !completo && !trasportoCompleto) throw new Error('il modello non ha completato il confronto');
 }
 
-// Avvia il confronto: prova i modelli finché uno scrive la prima richiesta, poi restituisce il resto in streaming.
+// Il recupero copre l'intero confronto, anche un errore dopo la prima richiesta.
+// Una ripresa sostituisce tutte le righe del tentativo fallito; la quota resta una sola.
 async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codici) {
   const nominati = riferimentiNominati(codici.T, esame);
   const messages = [
     { role: 'system', content: ISTRUZIONI_CONFRONTO(titolo, catalogoTesto, conTeoria) },
     { role: 'user', content: `${nominati ? `Voci del catalogo nominate nel compito (verifica sempre la richiesta completa):\n${nominati}\n\n` : ''}Testo dell'esame\n${esame}` },
   ];
-  let ultimo = null;
-  for (const m of inOrdine(MODELLI_TESTO)) {
-    try {
-      const it = richiesteModello(env, m, { messages, max_tokens: 4000 });
-      const primo = await it.next();
-      if (!primo.done) { delete guasti[m]; return { primo: primo.value, it }; }
-    } catch (e) { ultimo = e; console.log('compatibilita confronto', m, String(e?.message || e).slice(0, 200)); }
-    guasti[m] = Date.now();
-  }
-  throw ultimo || new Error('nessun confronto');
+  const it = (async function* () {
+    let ultimo = null, avviato = false;
+    for (const m of inOrdine(MODELLI_TESTO)) {
+      try {
+        let n = 0;
+        for await (const q of richiesteModello(env, m, { messages, max_tokens: /gpt-oss/.test(m) ? 8000 : 6000 })) {
+          if (!n && avviato) yield { ricomincia: true };
+          n++; avviato = true;
+          yield q;
+          if (q.nonUniversitario) return;
+        }
+        if (!n) throw new Error('nessuna richiesta dal modello');
+        delete guasti[m];
+        return;
+      } catch (e) {
+        ultimo = e;
+        console.log('compatibilita confronto', m, String(e?.message || e).slice(0, 200));
+        guasti[m] = Date.now();
+      }
+    }
+    throw ultimo || new Error('nessun confronto');
+  })();
+  const primo = await it.next();
+  return { primo: primo.value, it };
 }
 
 // ---------- calcolo delle percentuali ----------
@@ -609,7 +631,8 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
       const manda = (o) => ctl.enqueue(enc.encode(`${JSON.stringify(o)}\n`));
       const grezze = [];
       const aggiungi = (q) => {
-        if (q.nonUniversitario) return;
+        if (q.ricomincia) { grezze.length = 0; manda({ ricomincia: true }); return; }
+        if (q.nonUniversitario) throw new Error('il secondo modello non ha riconosciuto il compito universitario');
         const riga = rigaRisultato(materia, cat, codici, q, domandePer);
         if (!riga.testo) return;
         grezze.push(q);
