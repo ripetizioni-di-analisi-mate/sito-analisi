@@ -15,6 +15,7 @@ const impronta = crypto.createHash('sha1')
 const fileImpronta = './node_modules/.astro/impronta-plugin';
 if ((fs.existsSync(fileImpronta) ? fs.readFileSync(fileImpronta, 'utf8') : '') !== impronta) {
   fs.rmSync('./node_modules/.astro/data-store.json', { force: true });
+  fs.rmSync('./node_modules/.astro/data-store', { recursive: true, force: true });
   fs.mkdirSync('./node_modules/.astro', { recursive: true });
   fs.writeFileSync(fileImpronta, impronta);
 }
@@ -27,6 +28,10 @@ export default defineConfig({
   site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse' },
+  // Le formule rendono voluminoso il deposito: parti da 1 MiB evitano una singola stringa oltre il limite di V8.
+  experimental: {
+    collectionStorage: { type: 'chunked', chunkSize: 1024 * 1024 },
+  },
   markdown: {
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
