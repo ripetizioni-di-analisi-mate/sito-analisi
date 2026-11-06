@@ -5,136 +5,171 @@ import { VIDEOCORSI } from '../data/videocorsi';
 import { PACCHETTI_MATERIE, PACCHETTI_VIDEO, riepilogoMaterie, riepilogoVideo, euro } from '../data/pacchetti.mjs';
 const materie = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.breve, prezzo: m.prezzo, attiva: true }));
 const video = VIDEOCORSI.map(({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }) => ({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }));
-const pacchetti = PACCHETTI_MATERIE.filter((p) => p.materie.every((s) => materie.some((m) => m.slug === s)));
-const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.titolo || s).join(' + ');
+const gruppi = [
+  { id: 'universita', titolo: 'Università', pacchetti: ['analisi', 'fisica', 'base-universitaria', 'scientifico'] },
+  { id: 'superiori', titolo: 'Superiori', pacchetti: ['maturita'] },
+  { id: 'concorsi', titolo: 'Concorsi', pacchetti: ['concorsi'] },
+];
+const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.titolo || s).join(' · ');
 ---
 <Base titolo="Pacchetti e sconti" descrizione="Pacchetti di materie con sconti dal 15% al 25% e percorsi di videocorsi con video, PDF e materiale incluso. Un acquisto unico, senza scadenza." percorso={[{ titolo: 'Pacchetti e sconti' }]} lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true }}>
-  <h1>Più materie, più risparmio.</h1>
-  <p class="sommario">Un acquisto unico, senza scadenza.</p>
-  <div id="pacchetti-app" data-materie={JSON.stringify(materie)} data-video={JSON.stringify(video)}>
-    <div class="schede-pacchetti" role="tablist" aria-label="Tipo di pacchetto">
-      <button type="button" id="tab-materie" role="tab" aria-label="Materie" aria-describedby="tab-materie-dettagli" aria-selected="true" aria-controls="pannello-materie" data-tab="materie"><span>Materie</span><small id="tab-materie-dettagli">Teoria ed esercizi</small></button>
-      <button type="button" id="tab-video" role="tab" aria-label="Videocorsi" aria-describedby="tab-video-dettagli" aria-selected="false" aria-controls="pannello-video" data-tab="video" tabindex="-1"><span>Videocorsi</span><small id="tab-video-dettagli">Video e PDF</small></button>
+  <div id="pacchetti-app" class="pn-page" data-view="materie" data-materie={JSON.stringify(materie)} data-video={JSON.stringify(video)}>
+    <header><h1>Più materie. <em>Più risparmio.</em></h1><p class="pn-intro">Scegli un percorso o abbina le materie che ti servono.</p><ul class="pn-perks"><li><span aria-hidden="true">✓</span>Un solo acquisto</li><li><span aria-hidden="true">✓</span>Accesso senza scadenza</li></ul></header>
+    <div class="pn-tabs" role="tablist" aria-label="Tipo di pacchetto">
+      <button class="pn-tab" type="button" id="tab-materie" role="tab" aria-selected="true" aria-controls="pannello-materie" data-tab="materie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14M12 7C9 4 5 4 2 5v14c3-1 7-1 10 2 3-3 7-3 10-2V5c-3-1-7-1-10 2Z"/></svg>Materie</button>
+      <button class="pn-tab" type="button" id="tab-video" role="tab" aria-selected="false" aria-controls="pannello-video" data-tab="video" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 4 12 8-12 8V4Z"/></svg>Videocorsi</button>
     </div>
     <section id="pannello-materie" role="tabpanel" aria-labelledby="tab-materie">
-      <ul class="fasce" aria-label="Sconti sul numero di materie"><li data-sconto="15"><strong>−15%</strong><span>2 materie</span></li><li data-sconto="20"><strong>−20%</strong><span>3 materie</span></li><li data-sconto="25"><strong>−25%</strong><span>4 o più materie</span></li></ul>
-      <div class="sezione-pacchetti"><h2>Pacchetti pronti</h2><a href="#componi" data-apri-componi>Scegli tu le materie <span aria-hidden="true">→</span></a></div>
-      <div class="pacchetti-griglia">
-        {pacchetti.map((p) => {
+      <ul class="pn-discounts" aria-label="Sconti sul numero di materie"><li data-sconto="15"><span>2 materie</span><strong>−15%</strong></li><li data-sconto="20"><span>3 materie</span><strong>−20%</strong></li><li data-sconto="25"><span>4 o più materie</span><strong>−25%</strong></li></ul>
+      <div class="pn-section-top"><h2>Percorsi già abbinati</h2><a class="pn-compose-jump" href="#componi" data-apri-componi>Scegli tu le materie <span aria-hidden="true">↗</span></a></div>
+      <div class="pn-offers">{gruppi.map((g) => <section class:list={['pn-group', { 'pn-group-secondaria': g.id !== 'universita' }]} data-group={g.id} aria-label={g.titolo}>
+        <p class="pn-group-name"><span>{g.titolo}</span></p>
+        <div class="pn-list">{g.pacchetti.map((id) => PACCHETTI_MATERIE.find((p) => p.id === id)).filter((p) => p && p.materie.every((s) => materie.some((m) => m.slug === s))).map((p) => {
           const q = riepilogoMaterie(p.materie, materie);
-          return <article class="pacchetto" data-preset={p.id}>
-            <div class="pacchetto-testa"><span class="pacchetto-meta">{p.materie.length} materie</span><span class="sconto">−{q.percentuale}%</span></div>
-            <h3>{p.titolo}</h3>
-            <ul class="comprende" aria-label="Materie incluse">{p.materie.map((s) => <li>{nomi([s])}</li>)}</ul>
-            <div class="pacchetto-prezzo"><p class="prezzi-pacchetto"><strong><span class="solo-lettore">Prezzo del pacchetto: </span>{euro(q.totale)}</strong><del><span class="solo-lettore">Prezzo separato: </span>{euro(q.separato)}</del></p><p class="risparmio">Risparmi {euro(q.risparmio)}</p></div>
-            <button type="button" class="scegli-pacchetto" data-titolo={p.titolo} aria-label={`Scegli ${p.titolo}`} aria-pressed="false" data-scegli-materie={p.materie.join(',')}><span data-etichetta-scelta>Scegli il pacchetto</span><span data-segno-scelta aria-hidden="true">→</span></button>
-          </article>;
-        })}
-      </div>
-      <details class="componi" id="componi">
-        <summary><span>Componi il tuo pacchetto</span><small>Da 2 materie</small></summary>
-        <fieldset><legend>Scegli almeno due materie</legend>
-          <div class="scelta-materie">{materie.map((m) => <label><input type="checkbox" name="materia" value={m.slug} /><span>{m.titolo}<small data-stato-materia={m.slug}>{euro(Math.round(m.prezzo * 100))}</small></span></label>)}</div>
-        </fieldset>
+          return <article class="pn-offer pacchetto" data-preset={p.id}><div class="pn-offer-line">
+            <div class="pn-offer-main"><h3>{p.titolo}</h3><p class="pn-included">{nomi(p.materie)}</p></div>
+            <div class="pn-offer-side"><div><p class="pn-price"><strong><span class="solo-lettore">Prezzo del pacchetto: </span>{euro(q.totale)}</strong><del><span class="solo-lettore">Prezzo separato: </span>{euro(q.separato)}</del></p><p class="pn-saving">Risparmi {euro(q.risparmio)}</p></div>
+              <button type="button" class="pn-choose" data-titolo={p.titolo} aria-label={`Scegli ${p.titolo}`} aria-pressed="false" data-scegli-materie={p.materie.join(',')}><span data-etichetta-scelta>Scegli</span><span data-segno-scelta aria-hidden="true">→</span></button>
+            </div></div></article>;
+        })}</div>
+      </section>)}</div>
+      <details class="pn-composer" id="componi"><summary><span class="pn-plus" aria-hidden="true">+</span><span class="pn-compose-copy"><strong>Le materie le scegli tu</strong><small>Componi un pacchetto da almeno 2 materie.</small></span><span class="pn-compose-arrow" aria-hidden="true">↗</span></summary>
+        <fieldset class="pn-checks"><legend>Scegli le materie da abbinare</legend>{materie.map((m) => <label><input type="checkbox" name="materia" value={m.slug} /><span>{m.titolo}<small data-stato-materia={m.slug}>{euro(Math.round(m.prezzo * 100))}</small></span></label>)}</fieldset>
       </details>
-      <section class="riepilogo-pacchetto" id="riepilogo-materie" aria-label="Riepilogo delle materie" hidden>
-        <h2 tabindex="-1">Il tuo pacchetto</h2>
-        <div aria-live="polite"><p data-nomi-materie>Scegli un pacchetto o le materie che ti servono.</p><p class="totale-scelto" data-totale-materie>—</p><p class="risparmio" data-risparmio-materie></p></div>
-        <button type="button" class="bottone-primario" data-compra="materie" disabled>Scegli almeno due materie</button>
-      </section>
+      <section class="riepilogo-pacchetto" id="riepilogo-materie" aria-label="Riepilogo delle materie" hidden><h2 tabindex="-1">Il tuo pacchetto</h2><div aria-live="polite"><p data-nomi-materie>Scegli un pacchetto o le materie che ti servono.</p><p class="totale-scelto" data-totale-materie>—</p><p class="risparmio" data-risparmio-materie></p></div><button type="button" class="bottone-primario" data-compra="materie" disabled>Scegli almeno due materie</button></section>
     </section>
     <section id="pannello-video" role="tabpanel" aria-labelledby="tab-video" hidden>
-      <div class="sezione-pacchetti"><h2>Pacchetti video</h2></div>
-      <p class="introduzione-video">Video, PDF e materie del sito collegate: tutto incluso.</p>
-      <div class="pacchetti-griglia">
-        {PACCHETTI_VIDEO.map((p) => {
-          const q = riepilogoVideo(p.id, video);
-          const numeroVideo = p.video.reduce((n, s) => n + (video.find((v) => v.slug === s)?.pacchettoDi?.length || 1), 0);
-          return <article class="pacchetto" data-video-offerta={p.id}>
-            <div class="pacchetto-testa"><span class="pacchetto-meta">{numeroVideo} videocorsi</span><span class="video-incluso">Materiale incluso</span></div>
-            <h3>{p.titolo}</h3>
-            <ul class="comprende" aria-label="Videocorsi inclusi">{p.video.map((s) => <li>{video.find((v) => v.slug === s)?.breve}</li>)}</ul>
-            <p class="dati-video">{q.lezioni} lezioni · video e PDF</p>
-            <p class="materiali-inclusi">Sul sito: {nomi(q.inclusi)}</p>
-            <div class="pacchetto-prezzo"><p class="prezzi-pacchetto"><strong><span class="solo-lettore">Prezzo del pacchetto: </span>{euro(q.totale)}</strong><del><span class="solo-lettore">Prezzo dei corsi separati: </span>{euro(q.separato)}</del></p><p class="risparmio">Risparmi {euro(q.risparmio)}</p></div>
-            <button type="button" class="scegli-pacchetto" data-titolo={p.titolo} aria-label={`Scegli ${p.titolo}`} aria-pressed="false" data-scegli-video={p.id}><span data-etichetta-scelta>Scegli il pacchetto</span><span data-segno-scelta aria-hidden="true">→</span></button>
-          </article>;
-        })}
-      </div>
-      <section class="riepilogo-pacchetto" id="riepilogo-video" aria-label="Riepilogo dei videocorsi" hidden>
-        <h2 data-titolo-video tabindex="-1">Il tuo percorso video</h2>
-        <div aria-live="polite"><p data-nomi-video>Scegli il pacchetto che ti interessa.</p><p class="totale-scelto" data-totale-video>—</p><p class="risparmio" data-risparmio-video></p></div>
-        <button type="button" class="bottone-primario" data-compra="video" disabled>Scegli un pacchetto</button>
-      </section>
-      <p class="nota-pacchetti">Hai già un videocorso o del materiale? <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivi a Carmine per completare il percorso</a>.</p>
+      <p class="pn-video-intro">Video e PDF, con le materie del sito incluse.</p><div class="pn-section-top"><h2>Percorsi in video</h2></div>
+      <div class="pn-list">{PACCHETTI_VIDEO.map((p) => {
+        const q = riepilogoVideo(p.id, video);
+        return <article class="pn-offer pacchetto" data-video-offerta={p.id}><div class="pn-offer-line">
+          <div class="pn-offer-main"><h3>{p.titolo}</h3><p class="pn-included">{p.video.map((s) => video.find((v) => v.slug === s)?.breve).join(' · ')}<span class="pn-video-meta">{q.lezioni} lezioni · video e PDF</span></p><details class="pn-inclusi"><summary>Materie del sito incluse</summary><p>{nomi(q.inclusi)}</p></details></div>
+          <div class="pn-offer-side"><div><p class="pn-price"><strong><span class="solo-lettore">Prezzo del pacchetto: </span>{euro(q.totale)}</strong><del><span class="solo-lettore">Prezzo dei corsi separati: </span>{euro(q.separato)}</del></p><p class="pn-saving">Risparmi {euro(q.risparmio)}</p></div>
+            <button type="button" class="pn-choose" data-titolo={p.titolo} aria-label={`Scegli ${p.titolo}`} aria-pressed="false" data-scegli-video={p.id}><span data-etichetta-scelta>Scegli</span><span data-segno-scelta aria-hidden="true">→</span></button>
+          </div></div></article>;
+      })}</div>
+      <section class="riepilogo-pacchetto" id="riepilogo-video" aria-label="Riepilogo dei videocorsi" hidden><h2 data-titolo-video tabindex="-1">Il tuo percorso video</h2><div aria-live="polite"><p data-nomi-video>Scegli il pacchetto che ti interessa.</p><p class="totale-scelto" data-totale-video>—</p><p class="risparmio" data-risparmio-video></p></div><button type="button" class="bottone-primario" data-compra="video" disabled>Scegli un pacchetto</button></section>
+      <p class="pn-note">Hai già un videocorso o del materiale? <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivi a Carmine per completare il percorso</a>.</p>
     </section>
-    <p id="esito-pacchetto" role="status" aria-live="polite" hidden></p>
-    <p class="nota-pacchetti">Sconto già incluso, non cumulabile. Pagamento sicuro con Paddle.</p>
-    <p class="nota-termini-breve">Acquistando accetti i <a href="/termini">termini d’uso</a>.</p>
+    <p id="esito-pacchetto" role="status" aria-live="polite" hidden></p><p class="pn-note">Sconti già inclusi nei prezzi e non cumulabili con altre promozioni. Pagamento sicuro con Paddle.</p><p class="nota-termini-breve">Acquistando accetti i <a href="/termini">termini d’uso</a>.</p>
     <noscript><p>Attiva JavaScript per scegliere e acquistare il pacchetto. <a href="/contatti">Contattaci per assistenza</a>.</p></noscript>
   </div>
   <script>import '../scripts/pacchetti.mjs';</script>
 </Base>
+
 <style>
-  .schede-pacchetti { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .35rem; margin: 1.25rem 0 1.35rem; padding: .3rem; border: 1px solid var(--riga); border-radius: 12px; background: var(--carta-2); font-family: var(--ui); }
-  .schede-pacchetti button { display: flex; flex-direction: column; gap: .05rem; align-items: center; min-width: 0; min-height: 3.6rem; padding: .5rem .7rem; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--inchiostro-2); font: inherit; cursor: pointer; }
-  .schede-pacchetti button > span { font-weight: 600; }
-  .schede-pacchetti small { font-size: .78rem; }
-  .schede-pacchetti button[aria-selected="true"] { border-color: color-mix(in srgb,var(--azione) 23%,var(--riga)); background: #fff; color: var(--azione); box-shadow: 0 1px 3px rgba(34,48,47,.05); }
-  .fasce { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .6rem; list-style: none; padding: 0; margin: 0 0 1.8rem; font-family: var(--ui); }
-  .fasce li { display: flex; flex-direction: column; align-items: center; gap: .05rem; padding: .7rem .4rem; border: 1px solid var(--riga); border-radius: 9px; background: var(--carta); }
-  .fasce strong { font-size: 1.6rem; line-height: 1.3; font-weight: 600; color: var(--azione); font-variant-numeric: tabular-nums; }
-  .fasce span { font-size: .83rem; color: var(--inchiostro-2); text-align: center; }
-  .fasce .is-attiva { border-color: var(--azione); background: color-mix(in srgb,var(--azione) 7%,var(--carta)); }
-  .sezione-pacchetti { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem .8rem; margin: 0 0 .9rem; }
-  .sezione-pacchetti h2 { margin: 0; font-size: 1.2rem; }
-  .sezione-pacchetti a { padding: .25rem 0; font: 600 .85rem/1.4 var(--ui); text-decoration: none; }
-  .sezione-pacchetti a:hover { text-decoration: underline; }
-  .pacchetti-griglia { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
-  .pacchetto { display: flex; flex-direction: column; min-width: 0; padding: 1.15rem; border: 1px solid var(--riga); border-radius: 11px; background: #fff; }
-  .pacchetto-testa { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .35rem .5rem; margin: 0 0 .65rem; font-family: var(--ui); }
-  .pacchetto-meta { color: var(--inchiostro-2); font-size: .75rem; }
-  .sconto { padding: .12rem .5rem; border-radius: 5px; background: color-mix(in srgb,var(--azione) 9%,white); color: var(--azione); font: 600 .8rem/1.4 var(--ui); }
-  .video-incluso { color: var(--azione); font: 600 .72rem/1.4 var(--ui); }
-  .pacchetto h3 { margin: 0; font-size: 1.25rem; line-height: 1.3; }
-  .comprende { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; padding: 0; margin: .75rem 0 .9rem; font-family: var(--ui); }
-  .comprende li { max-width: 100%; padding: .2rem .45rem; border-radius: 5px; background: var(--carta-2); color: var(--inchiostro); font-size: .8rem; line-height: 1.4; }
-  .pacchetto-prezzo { margin-top: auto; padding-top: .4rem; }
-  .prezzi-pacchetto { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .7rem; margin: 0; font-family: var(--ui); font-variant-numeric: tabular-nums; }
-  .prezzi-pacchetto strong { color: var(--inchiostro); font-size: 2rem; line-height: 1.3; font-weight: 700; }
-  .prezzi-pacchetto del { color: var(--inchiostro-2); font-size: .88rem; }
-  .risparmio { margin: .2rem 0 .85rem; color: var(--azione); font: 600 .85rem/1.4 var(--ui); }
-  .scegli-pacchetto { display: flex; align-items: center; justify-content: space-between; gap: .4rem; min-height: 2.75rem; width: 100%; padding: .6rem .75rem; border: 1px solid color-mix(in srgb,var(--azione) 22%,var(--riga)); border-radius: 7px; background: color-mix(in srgb,var(--azione) 5%,white); color: var(--azione); text-align: left; font: 600 .9rem/1.4 var(--ui); cursor: pointer; }
-  .scegli-pacchetto:hover:not(:disabled) { border-color: var(--azione); background: color-mix(in srgb,var(--azione) 9%,white); }
-  .scegli-pacchetto:disabled { border-color: var(--riga); background: var(--carta); color: var(--inchiostro-2); cursor: default; font-weight: 400; }
-  .pacchetto.is-selected { border-color: var(--azione); box-shadow: inset 0 0 0 1px var(--azione); background: color-mix(in srgb,var(--azione) 3%,white); }
-  .pacchetto.is-selected .scegli-pacchetto { background: var(--azione); border-color: var(--azione); color: white; }
-  .componi { margin: 1.25rem 0; border: 1px solid var(--riga); border-radius: 10px; background: var(--carta-2); font-family: var(--ui); scroll-margin-top: 5rem; }
-  .componi summary { display: flex; align-items: center; gap: .6rem; min-height: 3.4rem; padding: .8rem 1rem; list-style: none; color: var(--azione); font-size: .95rem; font-weight: 600; cursor: pointer; }
-  .componi summary::-webkit-details-marker { display: none; }
-  .componi summary small { margin-left: auto; color: var(--inchiostro-2); font-size: .75rem; font-weight: 400; white-space: nowrap; }
-  .componi summary::after { content: ''; flex: none; width: .35rem; height: .35rem; margin-left: .2rem; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(-45deg); }
-  .componi[open] summary::after { transform: rotate(45deg); }
-  fieldset { min-width: 0; border: 0; padding: 0 1rem 1rem; margin: 0; }
-  legend { padding: .2rem 0 .6rem; color: var(--inchiostro-2); font-size: .85rem; }
-  .scelta-materie { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .35rem .9rem; }
-  .scelta-materie label { display: flex; align-items: center; gap: .6rem; min-height: 44px; padding: .45rem 0; font-size: .9rem; cursor: pointer; }
-  .scelta-materie input { flex: none; width: 1.1rem; height: 1.1rem; accent-color: var(--azione); }
-  .scelta-materie small { display: block; color: var(--inchiostro-2); font-size: .78rem; }
-  .scelta-materie input:disabled + span { color: var(--inchiostro-2); }
-  .riepilogo-pacchetto { margin: 1.4rem 0; padding: 1.2rem; border: 1px solid var(--riga); border-top: 3px solid var(--azione); border-radius: 10px; background: #fff; scroll-margin-top: 5rem; }
-  .riepilogo-pacchetto h2 { margin: 0; font-size: 1.25rem; }
-  .riepilogo-pacchetto p { margin: .55rem 0; }
-  .riepilogo-pacchetto [data-nomi-materie], .riepilogo-pacchetto [data-nomi-video] { color: var(--inchiostro-2); font: .95rem/1.5 var(--ui); }
-  .riepilogo-pacchetto .totale-scelto { color: var(--inchiostro); font: 700 2rem/1.3 var(--ui); font-variant-numeric: tabular-nums; }
-  .riepilogo-pacchetto .risparmio { margin-bottom: 1rem; }
-  .riepilogo-pacchetto button { width: 100%; max-width: 100%; margin-top: .3rem; white-space: normal; }
-  .introduzione-video, .dati-video, .materiali-inclusi, .nota-pacchetti { color: var(--inchiostro-2); font: .85rem/1.5 var(--ui); }
-  .introduzione-video { margin: -.45rem 0 1.2rem; }
-  .dati-video { margin: -.35rem 0 .6rem; }
-  .materiali-inclusi { padding-top: .6rem; margin: 0 0 .7rem; border-top: 1px solid var(--riga); }
-  .solo-lettore { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-  #esito-pacchetto { font-family: var(--ui); scroll-margin-top: 5rem; }
-  @media (max-width: 36rem) { .pacchetti-griglia, .scelta-materie { grid-template-columns: minmax(0,1fr); } }
-  @media (max-width: 23rem) { .fasce { gap: .4rem; } .fasce strong { font-size: 1.4rem; } .fasce span { font-size: .76rem; } .componi summary { gap: .4rem; padding-inline: .8rem; font-size: .88rem; } }
+
+.pn-page { --pn-paper:#faf8f2; --pn-panel:#fff; --pn-ink:#22302f; --pn-muted:#626d67; --pn-line:#dddcd2; --pn-green:#2f6f68; --pn-soft:#edf4ef; --pn-sand:#edf2e8; --pn-tone:#2f6f68; --pn-tint:#edf4ef; color-scheme:light; background:var(--pn-paper); color:var(--pn-ink); font:1rem/1.5 var(--ui); }
+.pn-page * { box-sizing:border-box; }
+[hidden] { display:none !important; }
+h1, h2, h3 { font-family:var(--titoli); color:var(--pn-ink); text-wrap:balance; }
+button, input { font:inherit; }
+button { -webkit-tap-highlight-color:transparent; }
+h1 { font-size:33px; line-height:1.15; letter-spacing:-.035em; font-weight:600; margin:0; }
+h1 em { color:var(--pn-green); font-style:normal; }
+.pn-intro { color:var(--pn-muted); margin:8px 0 9px; max-width:34em; font-size:15px; }
+.pn-perks { display:flex; flex-wrap:wrap; align-items:center; gap:5px 17px; list-style:none; padding:0; margin:0 0 16px; color:var(--pn-muted); font-size:12px; }
+.pn-perks li { display:flex; align-items:center; gap:5px; }
+.pn-tabs { display:flex; flex-wrap:wrap; align-items:center; gap:7px; border-bottom:1px solid var(--pn-line); margin-bottom:13px; }
+.pn-tab { display:flex; align-items:center; gap:7px; min-height:44px; padding:9px 13px; margin-bottom:-1px; border:0; border-bottom:2px solid transparent; border-radius:7px 7px 0 0; background:none; color:var(--pn-muted); font-size:14px; font-weight:600; }
+.pn-tab svg { width:16px; height:16px; }
+.pn-tab[aria-selected="true"] { color:var(--pn-tone); border-bottom-color:var(--pn-tone); background:var(--pn-tint); }
+.pn-discounts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:0; padding:12px 0; list-style:none; background:var(--pn-green); border-radius:9px; }
+.pn-discounts li { display:flex; flex-direction:column; align-items:center; gap:0; border-left:1px solid #ffffff3d; min-width:0; }
+.pn-discounts li:first-child { border-left:0; }
+.pn-discounts span { color:#f3f7f2; font-size:12px; }
+.pn-discounts strong { color:#fff; font-weight:600; font-size:27px; line-height:1.2; letter-spacing:-.025em; }
+.pn-discounts li.is-attiva { background:#ffffff18; }
+.pn-discounts li.is-attiva strong { text-decoration:underline; text-decoration-color:#fff; text-underline-offset:4px; text-decoration-thickness:2px; }
+.pn-video-intro { margin:0; padding:13px 15px; background:var(--pn-tint); border-radius:9px; color:var(--pn-tone); font-size:14px; }
+.pn-section-top { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 12px; margin:19px 0 10px; }
+.pn-section-top h2 { margin:0; font-size:21px; font-weight:600; letter-spacing:-.02em; }
+.pn-compose-jump { color:var(--pn-green); background:none; border:0; padding:4px 0; font-size:13px; font-weight:600; }
+.pn-offers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px 14px; }
+.pn-group { min-width:0; margin:0; --pn-tone:#2f6f68; --pn-tint:#edf4ef; }
+.pn-group[data-group="universita"] { grid-column:1 / -1; }
+.pn-group-secondaria .pn-offer-line { grid-template-columns:1fr; gap:10px; }
+.pn-group-secondaria .pn-offer-side { flex-wrap:wrap; text-align:left; gap:8px; }
+.pn-group-secondaria .pn-price { justify-content:flex-start; }
+.pn-group:first-child { margin-top:0; }
+.pn-group[data-group="superiori"] { --pn-tone:#365f80; --pn-tint:#edf3f8; }
+.pn-group[data-group="concorsi"] { --pn-tone:#86581f; --pn-tint:#fbf2df; }
+.pn-page[data-view="video"] { --pn-tone:#67527e; --pn-tint:#f2edf7; }
+.pn-group-name { margin:0 0 7px; color:var(--pn-tone); font-size:11px; font-weight:700; letter-spacing:.075em; text-transform:uppercase; }
+.pn-group-name span { display:inline-flex; align-items:center; gap:6px; padding:3px 8px; background:var(--pn-tint); border-radius:4px; }
+.pn-group-name span::before { content:''; width:5px; height:5px; flex:none; border-radius:50%; background:var(--pn-tone); }
+.pn-list { background:var(--pn-panel); border:1px solid var(--pn-line); border-radius:9px; }
+.pn-offer { position:relative; padding:13px 16px; border-top:1px solid var(--pn-line); transition:background .15s; }
+.pn-offer:first-child { border-top:0; border-radius:8px 8px 0 0; }
+.pn-offer:last-child { border-radius:0 0 8px 8px; }
+.pn-offer:only-child { border-radius:8px; }
+.pn-offer:hover { background:color-mix(in srgb,var(--pn-tint) 65%,var(--pn-panel)); }
+.pn-offer.is-selected { background:var(--pn-tint); box-shadow:inset 3px 0 0 var(--pn-tone); }
+.pn-offer-line { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:9px 21px; }
+.pn-offer-main { min-width:0; }
+.pn-offer h3 { margin:0; font-size:20px; line-height:1.25; font-weight:600; letter-spacing:-.02em; }
+.pn-included { margin:5px 0 0; font-size:13.5px; color:var(--pn-muted); line-height:1.45; }
+.pn-included span { white-space:normal; }
+.pn-separator { color:#9ba69a; padding:0 4px; }
+.pn-video-meta { display:block; color:var(--pn-tone); margin-top:3px; font-size:12px; }
+.pn-offer-side { display:flex; align-items:center; justify-content:space-between; gap:15px; min-width:0; text-align:right; }
+.pn-price { display:flex; justify-content:flex-end; flex-wrap:wrap; align-items:baseline; gap:7px; margin:0; font-variant-numeric:tabular-nums; }
+.pn-price strong { font-weight:600; font-size:24px; letter-spacing:-.03em; line-height:1.2; }
+.pn-price del { color:var(--pn-muted); font-size:12px; }
+.pn-saving { margin:3px 0 0; color:var(--pn-tone); font-size:12px; }
+.pn-choose { display:inline-flex; align-items:center; justify-content:space-between; gap:10px; flex:none; min-height:44px; padding:8px 10px; border:0; border-radius:6px; background:var(--pn-tint); color:var(--pn-tone); font-size:13px; font-weight:600; }
+.pn-choose span:last-child { font-size:16px; }
+.pn-choose[aria-pressed="true"] { background:var(--pn-green); color:#fff; }
+.pn-choose { cursor:pointer; }
+.pn-choose:disabled { cursor:default; max-width:8rem; color:var(--pn-muted); background:var(--pn-paper); white-space:normal; line-height:1.3; }
+.pn-perks li > span { color:var(--pn-green); }
+.pn-compose-jump { text-decoration:none; }
+.pn-compose-jump:hover { text-decoration:underline; }
+.pn-composer summary, .pn-checks label, .pn-inclusi summary { cursor:pointer; }
+.pn-checks input:disabled + span { color:var(--pn-muted); }
+.pn-inclusi { margin:4px 0 0; color:var(--pn-muted); font-size:.75rem; }
+.pn-inclusi summary { color:var(--pn-tone); }
+.pn-inclusi p { margin:5px 0 0; }
+.riepilogo-pacchetto { margin-top:16px; padding:16px; border:1px solid var(--pn-line); border-top:3px solid var(--pn-green); border-radius:8px; background:#fff; scroll-margin-top:5rem; }
+.riepilogo-pacchetto h2 { margin:0; font-size:1.2rem; }
+.riepilogo-pacchetto p { margin:6px 0; }
+.riepilogo-pacchetto [data-nomi-materie], .riepilogo-pacchetto [data-nomi-video] { color:var(--pn-muted); font-size:.9rem; }
+.riepilogo-pacchetto .totale-scelto { font-size:1.5rem; font-weight:600; font-variant-numeric:tabular-nums; }
+.riepilogo-pacchetto .risparmio { color:var(--pn-tone); font-size:.8rem; }
+.riepilogo-pacchetto button { width:100%; max-width:100%; margin-top:8px; white-space:normal; }
+.pacchetto > .riepilogo-pacchetto { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-top:12px; padding:11px 0 0; border:0; border-top:1px solid #cddcce; border-radius:0; background:transparent; }
+.pacchetto > .riepilogo-pacchetto button { width:auto; max-width:100%; margin:0; padding:.6rem .85rem; font-size:.85rem; }
+.pacchetto > .riepilogo-pacchetto .risparmio { margin:0; }
+.solo-lettore, .pacchetto > .riepilogo-pacchetto h2, .pacchetto > .riepilogo-pacchetto [data-nomi-materie], .pacchetto > .riepilogo-pacchetto [data-nomi-video], .pacchetto > .riepilogo-pacchetto .totale-scelto { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+#componi, #esito-pacchetto { scroll-margin-top:5rem; }
+#esito-pacchetto { color:var(--pn-ink); font:inherit; }
+.pn-composer { margin-top:18px; background:#e8f0e5; border-radius:9px; }
+.pn-composer summary { list-style:none; display:flex; align-items:center; gap:10px; padding:14px 16px; }
+.pn-composer summary::-webkit-details-marker { display:none; }
+.pn-plus { display:grid; place-items:center; width:28px; height:28px; flex:none; border:1px solid #bed1bc; border-radius:50%; color:var(--pn-green); background:#f8fbf4; font-size:21px; font-weight:400; }
+.pn-compose-copy { flex:1; min-width:0; }
+.pn-compose-copy strong { display:block; font-family:var(--titoli); font-size:19px; font-weight:600; }
+.pn-compose-copy small { display:block; margin-top:1px; color:var(--pn-muted); font-size:12px; }
+.pn-compose-arrow { flex:none; color:var(--pn-green); font-size:20px; }
+.pn-composer[open] .pn-plus { transform:rotate(45deg); }
+.pn-checks { display:grid; grid-template-columns:1fr 1fr; gap:3px 16px; padding:0 16px 14px; border:0; margin:0; min-width:0; }
+.pn-checks legend { color:var(--pn-muted); font-size:12px; padding-bottom:7px; }
+.pn-checks label { display:flex; align-items:center; gap:9px; min-height:44px; font-size:14px; }
+.pn-checks input { width:17px; height:17px; flex:none; accent-color:var(--pn-green); }
+.pn-checks small { display:block; color:var(--pn-muted); font-size:12px; }
+.pn-note { margin:16px 0 0; padding-top:12px; border-top:1px solid var(--pn-line); color:var(--pn-muted); font-size:12px; }
+@media(max-width:560px) {
+  .pn-offers { grid-template-columns:minmax(0,1fr); gap:14px; }
+  h1 { font-size:29px; }
+  .pn-perks { gap:4px 12px; margin-bottom:12px; }
+  .pn-discounts strong { font-size:25px; }
+  .pn-offer { padding:13px 14px; }
+  .pn-offer-line { grid-template-columns:1fr; gap:9px; }
+  .pn-offer-side { flex-wrap:wrap; text-align:left; gap:10px; }
+  .pn-price { justify-content:flex-start; }
+  .pn-checks { grid-template-columns:1fr; }
+  .pn-composer summary { padding:13px 14px; gap:9px; }
+  .pn-compose-copy strong { font-size:18px; }
+}
+@media(prefers-reduced-motion:reduce) { .pn-offer { transition:none; } }
 </style>

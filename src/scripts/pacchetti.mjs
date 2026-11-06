@@ -38,11 +38,20 @@ async function avvia() {
       const etichetta = b.querySelector('[data-etichetta-scelta]');
       const segno = b.querySelector('[data-segno-scelta]');
       if (b.dataset.bloccato !== '1' && etichetta && segno) {
-        etichetta.textContent = selezionato ? 'Selezionato' : 'Scegli il pacchetto';
+        etichetta.textContent = selezionato ? 'Selezionato' : 'Scegli';
         segno.textContent = selezionato ? '✓' : '→';
       }
       b.setAttribute('aria-label', `${b.dataset.titolo}: ${etichetta?.textContent || b.textContent}`);
     });
+    const compositore = app.querySelector('#componi');
+    const rMaterie = app.querySelector('#riepilogo-materie');
+    const rVideo = app.querySelector('#riepilogo-video');
+    const percorsoMaterie = !compositore.open && m && app.querySelector('[data-scegli-materie][aria-pressed="true"]')?.closest('.pacchetto');
+    const percorsoVideo = v && app.querySelector('[data-scegli-video][aria-pressed="true"]')?.closest('.pacchetto');
+    if (percorsoMaterie) {
+      if (rMaterie.parentElement !== percorsoMaterie) percorsoMaterie.append(rMaterie);
+    } else if (rMaterie.previousElementSibling !== compositore) compositore.after(rMaterie);
+    if (percorsoVideo && rVideo.parentElement !== percorsoVideo) percorsoVideo.append(rVideo);
     scrivi('[data-nomi-materie]', scelte().length ? scelte().map((s) => materie.find((m) => m.slug === s).titolo).join(' + ') : 'Scegli un pacchetto o le materie che ti servono.');
     scrivi('[data-totale-materie]', m ? euro(m.totale) : '—');
     scrivi('[data-risparmio-materie]', m ? `Risparmi ${euro(m.risparmio)} · sconto del ${m.percentuale}% incluso` : '');
@@ -59,6 +68,7 @@ async function avvia() {
     });
   }
   function scheda(tipo) {
+    app.dataset.view = tipo;
     tabs.forEach((t) => { const attiva = t.dataset.tab === tipo; t.setAttribute('aria-selected', String(attiva)); t.tabIndex = attiva ? 0 : -1; });
     app.querySelector('#pannello-materie').hidden = tipo !== 'materie';
     app.querySelector('#pannello-video').hidden = tipo !== 'video';
@@ -93,6 +103,7 @@ async function avvia() {
     selezioneVideo = b.dataset.scegliVideo; avviso(''); aggiorna(); mostraRiepilogo('video');
   }));
   caselle.forEach((c) => c.addEventListener('change', () => { avviso(''); aggiorna(); }));
+  app.querySelector('#componi').addEventListener('toggle', aggiorna);
 
   const params = new URLSearchParams(location.search);
   if (params.get('tipo') === 'video') { scheda('video'); selezioneVideo = params.get('pacchetto'); }
@@ -170,7 +181,7 @@ async function avvia() {
       const pronto = elenco.every((s) => conf?.prezzi[s]);
       b.disabled = tuo || !pronto;
       b.dataset.bloccato = b.disabled ? '1' : '0';
-      if (tuo || !pronto) b.textContent = tuo ? 'Hai già parte di questo pacchetto' : 'In attivazione';
+      if (tuo || !pronto) b.textContent = tuo ? 'Include corsi già tuoi' : 'In attivazione';
     });
     app.querySelectorAll('[data-scegli-video]').forEach((b) => {
       const q = riepilogoVideo(b.dataset.scegliVideo, video);
@@ -178,7 +189,7 @@ async function avvia() {
       const pronto = q.video.every((s) => conf?.videocorsi[s]);
       b.disabled = tuo || !pronto;
       b.dataset.bloccato = b.disabled ? '1' : '0';
-      if (tuo || !pronto) b.textContent = tuo ? 'Hai già parte di questo pacchetto' : 'In attivazione';
+      if (tuo || !pronto) b.textContent = tuo ? 'Include corsi già tuoi' : 'In attivazione';
     });
   } catch (e) { avviso(e.message || 'Errore di connessione. Ricarica la pagina.'); }
   finally { caricando = false; aggiorna(); }
