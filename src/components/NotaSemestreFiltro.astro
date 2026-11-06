@@ -1,12 +1,13 @@
 ---
-interface Props { lingua?: 'it' | 'en' }
-const { lingua = 'it' } = Astro.props;
+import { PROGRAMMI_SEMESTRE_FILTRO } from '../data/semestre-filtro.mjs';
+interface Props { lingua?: 'it' | 'en'; materia: string }
+const { lingua = 'it', materia } = Astro.props;
 const en = lingua === 'en';
-const syllabus = 'https://www.mur.gov.it/sites/default/files/2026-06/Syllabus_FISICA_%20finale%202026.pdf';
+const programma = PROGRAMMI_SEMESTRE_FILTRO[materia];
 ---
 <p class="nota-programma">
   {en ? 'The course topics are based on the ' : 'Gli argomenti del corso prendono come riferimento il '}
-  <a href={syllabus} target="_blank" rel="noopener">{en ? '2026/2027 Physics programme for the filter semester published by the MUR' : 'programma di Fisica per il semestre filtro pubblicato dal MUR per il 2026/2027'}</a>.
+  <a href={programma.url} target="_blank" rel="noopener">{en ? `2026/2027 ${programma.nomeEn} programme for the filter semester published by the MUR` : `programma di ${programma.nome} per il semestre filtro pubblicato dal MUR per il 2026/2027`}</a>.
 </p>
 
 <style>

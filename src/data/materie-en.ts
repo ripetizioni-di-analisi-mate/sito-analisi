@@ -1,5 +1,6 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'chimica-semestre-filtro': { titolo: 'Chemistry and introductory biochemistry for the filter semester', breve: 'Filter semester chemistry', descrizione: 'Chemistry and introductory biochemistry for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and timed questions. Study materials are in Italian.', argomenti: {} },
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',

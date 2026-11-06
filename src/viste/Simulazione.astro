@@ -8,11 +8,13 @@ import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { getCollection } from 'astro:content';
 import { materiaL, link, prefisso, type Lingua } from '../i18n';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { catalogoDomande } from '../lib/domande';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const en = lingua === 'en';
 const m = materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
+const senzaInglese = !en && semestreFiltro && !(await catalogoDomande('en'))[materia];
 const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
 const nomiProve = nomiAllenamento(m, lingua);
 const dafare = await getCollection('dafare');
@@ -54,12 +56,12 @@ if (semestreFiltro) {
 const pref = prefisso(lingua);
 ---
 <Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
-  materia={materia} sezione="simulazione" lingua={lingua} seo={{ noindex: true }}>
+  materia={materia} sezione="simulazione" lingua={lingua} seo={{ noindex: true, senzaInglese }}>
   <div class="simulazione" data-materia={materia} data-pref={pref} data-prezzo={m.prezzo ? '1' : ''} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
-    {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} />}
+    {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p>{en ? 'A preparatory mathematics practice paper for Physics and Chemistry.' : 'Compito di matematica preparatoria per Fisica e Chimica.'}</p>}
 
     <form class="sim-impostazioni">

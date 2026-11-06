@@ -62,7 +62,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
-  {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} />}
+  {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
   {m.prezzo && (
     <div class="riquadro-stato" data-materia={m.slug}>
