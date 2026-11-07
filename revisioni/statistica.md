@@ -23,7 +23,7 @@ Convenzioni dichiarate: mediana pari come media dei valori centrali; altri quant
 
 Il listino è 49 EUR una tantum, imposte incluse nel prezzo Paddle; quantità minima e massima 1. Prodotto `pro_01m6v5e3g6tgk6xtvfa8wpa7ks`, prezzo `pri_01m6v5mj0byq1a6tm6tt6e2xqg`. Home, indice, ricerca, pacchetti a scelta, Pi, simulazione, progressi e compatibilità usano il catalogo condiviso. Le prime tre schede per capitolo seguono l'anteprima ordinaria del sito. Prima dell'acquisto i quiz sono limitati dal server a dieci ID fissi complessivi, anche cambiando sessione, capitolo, lingua o ID richiesto.
 
-Rigenerazione: `python strumenti/genera-statistica.py` (richiede scipy). Testi e banchi sono in `strumenti/statistica/`; i contenuti generati sono versionati. I risultati numerici sono conservati anche nel banco revisionabile `risultati.json`. Nessuna dipendenza Python è necessaria per compilare il sito.
+Rigenerazione: `python strumenti/genera-statistica.py` (richiede scipy). Testi e banchi sono in `strumenti/statistica/`; i contenuti generati sono versionati. La generazione produce anche un report locale dei risultati numerici, escluso dal versionamento. Nessuna dipendenza Python è necessaria per compilare il sito.
 
 Controlli eseguiti il 7 novembre 2026:
 

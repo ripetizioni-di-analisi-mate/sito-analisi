@@ -4,3 +4,7 @@ dist/
 .wrangler/
 .dev.vars
 .claude/
+
+# Report rigenerabile dei controlli di Statistica
+strumenti/statistica/risultati.json
+strumenti/statistica/__pycache__/
