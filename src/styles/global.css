@@ -7,7 +7,7 @@
   --inchiostro: #22302f;
   --inchiostro-2: #5a6664;
   --riga: #ddd6c8;
-  --accento: #2f6f68;        /* verde dei titoli */
+  --accento: #2f6f68;        /* base comune alla palette delle materie */
   --video: #2f6f68;
   --azione: #2f6f68;         /* tasti di acquisto: sempre il verde del sito, anche nelle pagine colorate delle materie */          /* videocorsi: resta verde anche dentro le schede colorate delle materie */
 
@@ -78,7 +78,8 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
 .marchio .logo { width: 32px; height: 32px; flex: none; }
 .marchio span { overflow: hidden; text-overflow: ellipsis; }
 .materia-corrente { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; color: var(--accento); text-decoration: none; padding: 0.2rem 0.55rem; border: 1px solid color-mix(in srgb, var(--accento) 40%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accento) 8%, transparent); white-space: nowrap; }
-.testata::after { content: ''; display: block; height: 3px; background: var(--accento); }
+/* La striscia comune resta petrolio anche passando rapidamente fra materie. */
+.testata::after { content: ''; display: block; height: 3px; background: var(--azione); }
 .bottone-indice, .bottone-cerca, .bottone-account, .bottone-lingua {
   display: inline-flex; align-items: center; gap: 0.4rem;
   font: inherit; font-size: 0.95rem; color: var(--inchiostro);
@@ -573,7 +574,7 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 
 .riquadro-stato { margin: 1.1rem 0 1.6rem; font-family: var(--ui); }
 .riquadro-stato > div { display: none; align-items: center; gap: 0.9rem; padding: 0.95rem 1.1rem; border-radius: var(--raggio); }
-.riquadro-stato .stato-bloccata { display: flex; flex-wrap: wrap; border: 1px solid var(--riga); background: color-mix(in srgb, var(--accento) 5%, transparent); }
+.riquadro-stato .stato-bloccata { display: flex; flex-wrap: wrap; border: 1px solid var(--riga); background: color-mix(in srgb, var(--accento) 3%, transparent); }
 .riquadro-stato .stato-sbloccata { background: color-mix(in srgb, var(--verde) 10%, transparent); border: 1px solid color-mix(in srgb, var(--verde) 35%, transparent); }
 .riquadro-stato .icona { width: 2.4rem; height: 2.4rem; flex: none; }
 .riquadro-stato .stato-sbloccata .icona { color: var(--verde); }

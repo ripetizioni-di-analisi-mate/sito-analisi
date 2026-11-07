@@ -16,13 +16,15 @@ export interface Materia {
   argomenti: Argomento[];
 }
 
+// Palette ravvicinata: 65% della base petrolio #2f6f68 e 35% del colore originario.
+// I colori restano scuri per conservare la leggibilità su carta e nei pulsanti.
 const ELENCO: Omit<Materia, 'prezzo'>[] = [
   {
     slug: 'precorso',
     titolo: 'Precorso',
     breve: 'Precorso',
     descrizione: 'La matematica che serve prima di Analisi matematica 1: logica, polinomi, equazioni e disequazioni di ogni tipo, geometria analitica.',
-    colore: '#a8762b',
+    colore: '#597153',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -63,7 +65,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Analisi matematica 2',
     breve: 'Analisi 2',
     descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
-    colore: '#3b5f8f',
+    colore: '#336976',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -85,7 +87,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Analisi matematica 3',
     breve: 'Analisi 3',
     descrizione: 'Analisi complessa, Cauchy e residui, serie e trasformate di Fourier, Laplace, integrale di Lebesgue, spazi di Hilbert e Banach ed equazioni alle derivate parziali. Moduli per i diversi programmi universitari.',
-    colore: '#466b83',
+    colore: '#376e71',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -107,7 +109,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Algebra lineare e geometria analitica',
     breve: 'Algebra lineare',
     descrizione: 'Vettori, matrici e sistemi lineari, spazi vettoriali e applicazioni lineari, autovalori e diagonalizzazione, rette, piani, coniche e quadriche.',
-    colore: '#6b5ca5',
+    colore: '#44687d',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -128,7 +130,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 1',
     breve: 'Fisica 1',
     descrizione: 'Cinematica, dinamica del punto e del corpo rigido, lavoro ed energia, urti, oscillazioni, gravitazione, fluidi e termodinamica.',
-    colore: '#b0543a',
+    colore: '#5c6658',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -151,7 +153,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 2',
     breve: 'Fisica 2',
     descrizione: 'Elettrostatica, condensatori, circuiti, campo magnetico, induzione, corrente alternata, equazioni di Maxwell, onde elettromagnetiche e ottica.',
-    colore: '#8b4a7a',
+    colore: '#4f626e',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -174,7 +176,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica generale',
     breve: 'Matematica generale',
     descrizione: "La matematica dei corsi di Economia: funzioni e modelli economici, limiti, derivate ed elasticità, ottimizzazione, integrali, matematica finanziaria, matrici e sistemi, funzioni di due variabili.",
-    colore: '#5b7a2e',
+    colore: '#3e7354',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -195,7 +197,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Statistica e probabilità',
     breve: 'Statistica e probabilità',
     descrizione: 'Il corso universitario di statistica e probabilità: dati e indici descrittivi, calcolo delle probabilità, variabili aleatorie, campionamento, stima, intervalli di confidenza, test di ipotesi e regressione. Teoria, esercizi svolti, esercizi con soluzione, quiz e simulazioni.',
-    colore: '#4a6d8c',
+    colore: '#386e75',
     gruppo: 'Università',
     attiva: true,
     argomenti: [
@@ -230,7 +232,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica 2° anno',
     breve: 'Matematica 2° anno',
     descrizione: "Matematica del secondo anno delle superiori: sistemi lineari, radicali, retta, equazioni e disequazioni di secondo grado, geometria euclidea, probabilità e statistica. Teoria, schede svolte, esercizi e domande a tempo. Il percorso segue gli argomenti comuni al biennio; ordine e approfondimenti possono variare secondo la classe.",
-    colore: '#3b5f8f',
+    colore: '#336976',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -254,7 +256,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica 3° anno',
     breve: 'Matematica 3° anno',
     descrizione: "Matematica del terzo anno del liceo scientifico: equazioni e disequazioni, funzioni, piano cartesiano e retta, parabola, circonferenza, ellisse, iperbole, trasformazioni, esponenziali, logaritmi e statistica. Teoria, esercizi svolti passo passo, esercizi da risolvere, quiz e simulazioni di verifiche. La distribuzione degli argomenti tra terzo e quarto anno può variare secondo la classe.",
-    colore: '#6b5ca5',
+    colore: '#44687d',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -278,7 +280,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica 4° anno',
     breve: 'Matematica 4° anno',
     descrizione: "Matematica del quarto anno del liceo scientifico: goniometria e trigonometria, esponenziali e logaritmi, numeri complessi, progressioni, calcolo combinatorio, probabilità e geometria solida. Teoria, esercizi svolti passo passo, esercizi da risolvere e domande a tempo. L'ordine degli argomenti può variare secondo il programma della classe.",
-    colore: '#a8762b',
+    colore: '#597153',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -302,7 +304,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica 5° anno',
     breve: 'Matematica 5° anno',
     descrizione: "Il programma di matematica del quinto anno del liceo scientifico, verso la seconda prova di maturità: limiti, derivate, studio di funzione, integrali, equazioni differenziali, geometria nello spazio e probabilità.",
-    colore: '#8b4a7a',
+    colore: '#4f626e',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -325,7 +327,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 1° anno',
     breve: 'Fisica 1° anno',
     descrizione: "Il programma di fisica del 1° anno delle scuole superiori, con teoria ed esercizi svolti.",
-    colore: '#b0543a',
+    colore: '#5c6658',
     gruppo: 'Superiori',
     attiva: false,
     argomenti: [],
@@ -336,7 +338,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 2° anno',
     breve: 'Fisica 2° anno',
     descrizione: "Fisica per il secondo anno delle superiori: moto, dinamica, lavoro ed energia, temperatura, calore e ottica geometrica. Teoria, esercizi guidati e domande a tempo per le verifiche.",
-    colore: '#9a5b2e',
+    colore: '#546854',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -358,7 +360,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 3° anno',
     breve: 'Fisica 3° anno',
     descrizione: "Meccanica per il terzo anno delle superiori: moti, forze, energia, urti, rotazioni, gravitazione e fluidi. Teoria, esercizi guidati e domande a tempo per le verifiche.",
-    colore: '#7a6a2e',
+    colore: '#496d54',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -382,7 +384,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 4° anno',
     breve: 'Fisica 4° anno',
     descrizione: "Fisica per il quarto anno del liceo scientifico: termodinamica, oscillazioni e onde, suono e ottica, elettrostatica, condensatori e circuiti in corrente continua. Teoria, esercizi svolti passo passo e domande a tempo.",
-    colore: '#4f7a5a',
+    colore: '#3a7363',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -406,7 +408,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica 5° anno',
     breve: 'Fisica 5° anno',
     descrizione: "Il programma di fisica del quinto anno del liceo scientifico, verso l'esame di maturità: campo magnetico, induzione elettromagnetica, corrente alternata, equazioni di Maxwell e onde elettromagnetiche, relatività ristretta e fisica quantistica.",
-    colore: '#5d5d8f',
+    colore: '#3f6976',
     gruppo: 'Superiori',
     attiva: true,
     argomenti: [
@@ -428,7 +430,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica per concorsi',
     breve: 'Matematica per concorsi',
     descrizione: "La matematica dei concorsi pubblici, delle Forze armate e dei test di ammissione, spiegata da zero: calcolo, proporzioni e percentuali, problemi, equazioni, statistica, probabilità e geometria, con quiz a risposta multipla.",
-    colore: '#5b6b7a',
+    colore: '#3e6e6e',
     gruppo: 'Concorsi',
     attiva: true,
     argomenti: [
@@ -448,7 +450,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Logica per concorsi',
     breve: 'Logica per concorsi',
     descrizione: "La logica dei concorsi pubblici e dei test attitudinali: insiemi e diagrammi di Venn, negazioni e implicazioni, condizioni necessarie e sufficienti, sillogismi, ragionamento numerico, problemi di deduzione, logica verbale e ragionamento figurale.",
-    colore: '#6d5a8a',
+    colore: '#456874',
     gruppo: 'Concorsi',
     attiva: true,
     argomenti: [
@@ -468,7 +470,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Matematica zero',
     breve: 'Matematica zero',
     descrizione: "Gratuita. Per chi vuole imparare o ripassare la matematica dalle basi, senza un esame da preparare: numeri, frazioni, percentuali, potenze, calcolo letterale, equazioni, piano cartesiano e geometria.",
-    colore: '#b06a7c',
+    colore: '#5c6d6f',
     gruppo: 'Percorso per principianti',
     attiva: true,
     argomenti: [
@@ -491,7 +493,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica zero',
     breve: 'Fisica zero',
     descrizione: "Gratuita. Per chi vuole imparare la fisica dalle basi, senza un esame da preparare: misure, grafici, vettori, moto, forze, energia, fluidi, calore e circuiti elettrici.",
-    colore: '#8a6a9a',
+    colore: '#4f6d7a',
     gruppo: 'Percorso per principianti',
     attiva: true,
     argomenti: [
@@ -532,7 +534,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'TOLC-I (Ingegneria)',
     breve: 'TOLC-I',
     descrizione: 'Preparati al TOLC-I per Ingegneria: matematica, logica, fisica e chimica, comprensione verbale e inglese. Un primo percorso con teoria essenziale, esercizi spiegati, quiz a cinque risposte e simulazioni con tempi per sezione.',
-    colore: '#4f7a6a',
+    colore: '#3a7369',
     gruppo: 'TOLC, OFA e test di ingresso',
     attiva: true,
     argomenti: [
@@ -552,7 +554,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'TOLC-E (Economia)',
     breve: 'TOLC-E',
     descrizione: "La matematica, la logica e la comprensione del testo del TOLC-E, il test CISIA per i corsi di laurea in Economia.",
-    colore: '#8a6d3b',
+    colore: '#4f6e58',
     gruppo: 'TOLC, OFA e test di ingresso',
     attiva: false,
     argomenti: [],
@@ -562,7 +564,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'TOLC-S (Scienze)',
     breve: 'TOLC-S',
     descrizione: 'Preparati al TOLC-S per i corsi scientifici: matematica di base, ragionamento e comprensione, biologia, chimica, fisica e scienze della Terra, con inglese. Un primo percorso con teoria essenziale, esercizi spiegati, quiz a cinque risposte e simulazioni con tempi per sezione.',
-    colore: '#4a6d8c',
+    colore: '#386e75',
     gruppo: 'TOLC, OFA e test di ingresso',
     attiva: true,
     argomenti: [
@@ -585,7 +587,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'TOL del Politecnico di Milano',
     breve: 'TOL Politecnico',
     descrizione: "La matematica, la logica e la fisica del TOL, il test di ingresso ai corsi di Ingegneria del Politecnico di Milano.",
-    colore: '#5b6b7a',
+    colore: '#3e6e6e',
     gruppo: 'TOLC, OFA e test di ingresso',
     attiva: false,
     argomenti: [],
@@ -595,7 +597,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Recupero degli OFA di matematica',
     breve: 'OFA di matematica',
     descrizione: "La matematica di base da ripassare per superare gli obblighi formativi aggiuntivi (OFA) assegnati dopo il test di ingresso.",
-    colore: '#a8762b',
+    colore: '#597153',
     gruppo: 'TOLC, OFA e test di ingresso',
     attiva: false,
     argomenti: [],
@@ -605,7 +607,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Fisica per il semestre filtro di Medicina',
     breve: 'Fisica semestre filtro',
     descrizione: "Fisica per il semestre filtro di Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.",
-    colore: '#5d5d8f',
+    colore: '#3f6976',
     gruppo: 'Semestre filtro',
     attiva: true,
     argomenti: [
@@ -623,7 +625,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Chimica e propedeutica biochimica per il semestre filtro',
     breve: 'Chimica semestre filtro',
     descrizione: 'Chimica e propedeutica biochimica per Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.',
-    colore: '#387d71',
+    colore: '#32746b',
     gruppo: 'Semestre filtro',
     attiva: true,
     argomenti: [
@@ -641,7 +643,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     titolo: 'Biologia per il semestre filtro',
     breve: 'Biologia semestre filtro',
     descrizione: 'Biologia per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dalla cellula alla genetica e al controllo della proliferazione. Teoria, schede svolte, esercizi con soluzione e 315 quiz spiegati.',
-    colore: '#5b7d50',
+    colore: '#3e7460',
     gruppo: 'Semestre filtro',
     attiva: true,
     argomenti: [
