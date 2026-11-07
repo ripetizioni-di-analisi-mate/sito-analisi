@@ -31,6 +31,8 @@ export default defineConfig({
   // Le formule rendono voluminoso il deposito: parti da 1 MiB evitano una singola stringa oltre il limite di V8.
   experimental: {
     collectionStorage: { type: 'chunked', chunkSize: 1024 * 1024 },
+    // Un solo processo di rendering separa le collezioni dalla memoria usata da Vite.
+    parallelPrerender: { workers: 1 },
   },
   markdown: {
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
