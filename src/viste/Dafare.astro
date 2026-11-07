@@ -2,6 +2,7 @@
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
+import { dataContenuto } from '../lib/date';
 import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
@@ -30,7 +31,7 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
 <Base
   titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
   descrizione={SEO(lingua).dafareDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo)}
-  seo={{ titolo: SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, schema: [{ ...{
+  seo={{ titolo: SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: SEO(lingua).dafareDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo), learningResourceType: 'Exercise', inLanguage: lingua,
   educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

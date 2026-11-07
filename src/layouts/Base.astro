@@ -40,7 +40,7 @@ interface Props {
   ricercaPrincipale?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
-  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean };
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string };
 }
 const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
@@ -87,9 +87,12 @@ const percorsoSchema = [
 // Freccia «indietro» nel percorso (scelta A3 di Carmine, 07/11/2026): torna alla pagina precedente della
 // cronologia se si viene da una pagina del sito; altrimenti porta al livello sopra nel percorso.
 const livelloSopra = percorsoSchema.length > 1 ? percorsoSchema[percorsoSchema.length - 2].url.replace(SITO, '') || '/' : undefined;
+// Data dell'ultima modifica del contenuto (seo.data): finisce nella pagina e nei dati strutturati, così motori e
+// assistenti IA sanno quanto è aggiornata la pagina. Senza data non si scrive nulla (non si inventa).
+const conData = (x: Record<string, unknown>) => (seo.data && !('dateModified' in x) ? { ...x, dateModified: seo.data } : x);
 const schema = {
   '@context': 'https://schema.org',
-  '@graph': [ORGANIZZAZIONE, sitoWeb(lingua), paginaWeb(canonico, titoloCompleto, descrizioneSeo, lingua), ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
+  '@graph': [ORGANIZZAZIONE, sitoWeb(lingua), conData(paginaWeb(canonico, titoloCompleto, descrizioneSeo, lingua)), ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? []).map(conData)],
 };
 // Immagine di anteprima dei link (WhatsApp, Instagram, Telegram…): una per materia e una per argomento e sezione,
 // disegnate dopo la build da scripts/immagini-og.mjs; le altre pagine usano /og.png (in inglese /og-en.png, scripts/og-generale.mjs).
@@ -117,7 +120,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   {bilingue && <link rel="alternate" hreflang="it" href={assoluto(versioneIt)} />}
   {bilingue && <link rel="alternate" hreflang="en" href={assoluto(versioneEn)} />}
   {bilingue && <link rel="alternate" hreflang="x-default" href={assoluto(versioneEn)} />}
-  {noindex && <meta name="robots" content="noindex, follow" />}
+  {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
+  {seo.data && <meta property="article:modified_time" content={seo.data} />}
+  {seo.data && <meta name="last-modified" content={seo.data} />}
   <meta property="og:type" content={seo.tipo ?? 'website'} />
   <meta property="og:site_name" content={NOME_SITO} />
   <meta property="og:title" content={titoloCompleto} />

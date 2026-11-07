@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
 import { url } from '../lib/url';
+import { dataContenuto } from '../lib/date';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
@@ -47,7 +48,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
   descrizione={descrizioneSeo}
-  seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, schema: [{ ...{
+  seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
   '@type': 'LearningResource', name: arg.titolo, description: descrizioneSeo, learningResourceType: 'Lesson', inLanguage: lingua,
   educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

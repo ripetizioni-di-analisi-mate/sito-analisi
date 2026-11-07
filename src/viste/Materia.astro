@@ -3,6 +3,7 @@ import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
+import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
 import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
@@ -53,7 +54,7 @@ const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sbloc
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
   .map((s) => `html[data-materie~="${chiaveVideo(s)}"] .rimando-videocorso{display:none}`).join('') : '';
 ---
-<Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, schema: [{
+<Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livello,
   provider: { '@id': `${SITO}/#organizzazione` },

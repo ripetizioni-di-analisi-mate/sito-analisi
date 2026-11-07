@@ -2,6 +2,7 @@
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
+import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -26,7 +27,7 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
   descrizione={SEO(lingua).dafareListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'dafare', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
+  seo={{ titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'dafare', e.id))), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'dafare', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi }]}
   materia={materia} argomento={argomento} sezione="esercizi"
   precedente={precedente} successivo={successivo}

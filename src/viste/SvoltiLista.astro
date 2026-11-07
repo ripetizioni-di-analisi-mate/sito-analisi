@@ -2,6 +2,7 @@
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
+import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -17,7 +18,7 @@ const base = `/${materia}/${argomento}`;
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
   descrizione={SEO(lingua).svoltiListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), schema: [{
+  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'svolti', e.id))), schema: [{
     '@type': 'ItemList', name: `${arg.titolo} · ${t.sezioni['esercizi-svolti']}`, numberOfItems: voci.length,
     itemListElement: voci.map(({ voce: e }, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.titolo, url: assoluto(link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)) })),
   }], soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
