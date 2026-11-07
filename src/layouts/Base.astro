@@ -84,6 +84,9 @@ const percorsoSchema = [
   ...(m ? [{ nome: m.titolo, url: assoluto(link(lingua, `/${m.slug}`)) }] : []),
   ...percorso.map((p, i) => ({ nome: p.titolo, url: p.href && i < percorso.length - 1 ? assoluto(p.href) : canonico })),
 ];
+// Freccia «indietro» nel percorso (scelta A3 di Carmine, 07/11/2026): torna alla pagina precedente della
+// cronologia se si viene da una pagina del sito; altrimenti porta al livello sopra nel percorso.
+const livelloSopra = percorsoSchema.length > 1 ? percorsoSchema[percorsoSchema.length - 2].url.replace(SITO, '') || '/' : undefined;
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [ORGANIZZAZIONE, sitoWeb(lingua), paginaWeb(canonico, titoloCompleto, descrizioneSeo, lingua), ...(percorsoSchema.length > 1 ? [briciole(percorsoSchema)] : []), ...(seo.schema ?? [])],
@@ -254,6 +257,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       <div class="pagina">
         {(percorso.length > 0 || m) && (
           <nav class="percorso" aria-label="Percorso">
+            {livelloSopra && <a class="indietro" href={livelloSopra} title={en ? 'Back' : 'Torna indietro'} aria-label={en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
             <ol>
               <li><a href={link(lingua, '/')}>{t.materie}</a></li>
               {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
@@ -544,6 +548,19 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       sistema();
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(sistema);
       let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(sistema, 200); });
+    })();
+  </script>
+  <script is:inline>
+    // Freccia «indietro» nel percorso: torna alla pagina precedente se si viene da una pagina del sito,
+    // altrimenti (arrivo da Google, Instagram, link diretto) segue il collegamento al livello sopra.
+    (() => {
+      const a = document.querySelector('.percorso .indietro');
+      if (!a) return;
+      a.addEventListener('click', (ev) => {
+        let dalSito = false;
+        try { dalSito = Boolean(document.referrer) && new URL(document.referrer).origin === location.origin; } catch (_) {}
+        if (dalSito && history.length > 1) { ev.preventDefault(); history.back(); }
+      });
     })();
   </script>
   <script is:inline>

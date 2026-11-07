@@ -163,8 +163,14 @@ main {
 .cassetto-testa button { font: inherit; background: none; border: 0; font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--inchiostro-2); }
 
 /* percorso in alto */
-.percorso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); margin: 0 0 1.25rem; }
-.percorso ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; padding: 0; margin: 0; }
+.percorso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); margin: 0 0 1.25rem; display: flex; align-items: flex-start; gap: 0.45rem; }
+.percorso ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem; padding: 0; margin: 0; min-width: 0; }
+/* Freccia «indietro» (scelta A3 di Carmine, 07/11/2026): cerchietto sottile, discreto, davanti al percorso */
+.percorso .indietro { flex: none; margin-top: -0.2rem; display: inline-grid; place-items: center; width: 1.65rem; height: 1.65rem; border: 1px solid var(--riga); border-radius: 50%; background: #fff; color: var(--inchiostro-2); text-decoration: none; transition: color 0.15s, border-color 0.15s, background 0.15s; }
+.percorso .indietro svg { width: 0.95rem; height: 0.95rem; }
+.percorso .indietro:hover, .percorso .indietro:focus-visible { color: var(--accento); border-color: color-mix(in srgb, var(--accento) 45%, transparent); background: color-mix(in srgb, var(--accento) 6%, #fff); outline: none; }
+.percorso .indietro:active { transform: scale(0.94); }
+@media print { .percorso .indietro { display: none; } }
 .percorso li + li::before { content: '›'; margin-right: 0.3rem; color: var(--riga); }
 .percorso a { color: var(--inchiostro-2); }
 .percorso li[aria-current] { color: var(--inchiostro); }
