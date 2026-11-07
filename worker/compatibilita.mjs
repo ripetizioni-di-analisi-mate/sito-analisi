@@ -13,6 +13,7 @@ import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO } from '../src/data/compatibilita.ts';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
 import { trovaProcedimentoStudio } from './riscontro-procedimenti.mjs';
+import { riconosciMateriaCompito } from './materia-compito.mjs';
 
 const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
@@ -88,9 +89,9 @@ export function archivioCompatibilita(o, pathname, c) {
     case '/comp-compito-esito': {
       const ora = Date.now();
       const r = o.riga('SELECT materia FROM compiti WHERE id = ?', c.id);
-      if (r && r.materia === c.materia) {
-        o.sql.exec('UPDATE compiti SET aggiornato = ?, universita = COALESCE(NULLIF(?, \'\'), universita), testo = ?, compatibilita = ?, richieste = ?, esito = ? WHERE id = ?',
-          ora, c.universita || '', c.testo, c.compatibilita, c.richieste, c.esito, c.id);
+      if (r) {
+        o.sql.exec('UPDATE compiti SET aggiornato = ?, materia = ?, universita = COALESCE(NULLIF(?, \'\'), universita), testo = ?, compatibilita = ?, richieste = ?, esito = ? WHERE id = ?',
+          ora, c.materia, c.universita || '', c.testo, c.compatibilita, c.richieste, c.esito, c.id);
       } else {
         o.sql.exec('INSERT OR REPLACE INTO compiti (id, quando, aggiornato, materia, universita, testo, compatibilita, richieste, esito, pagine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)',
           c.id, ora, ora, c.materia, c.universita || null, c.testo, c.compatibilita, c.richieste, c.esito);
@@ -202,10 +203,10 @@ async function esegui(env, modello, input) {
   }
 }
 
-const ISTRUZIONI_LETTURA = (titolo) => `Questa immagine è una pagina di un compito d'esame universitario di ${titolo}.
+const ISTRUZIONI_LETTURA = (titolo) => `Questa immagine è una pagina di un compito d'esame universitario di matematica o fisica. La materia selezionata, ${titolo}, può essere sbagliata: trascrivi ciò che compare nella pagina.
 Trascrivi il testo degli esercizi e delle domande, nell'ordine in cui compaiono, con le formule in LaTeX tra $…$.
 Mantieni il numero di ogni esercizio, le lettere dei punti (a, b, c…) e il punteggio, se è indicato.
-Non trascrivere nome, cognome, matricola, firme, data, istruzioni generali sulla prova (durata, materiale consentito) e appunti scritti a mano dallo studente.
+Conserva il titolo della materia presente nel documento, utile per riconoscere il corso corretto. Non trascrivere nome, cognome, matricola, firme, data, istruzioni generali sulla prova (durata, materiale consentito) e appunti scritti a mano dallo studente.
 Se nell'immagine non ci sono esercizi di matematica o di fisica, rispondi soltanto NESSUN_ESERCIZIO.
 Rispondi soltanto con la trascrizione, senza commenti.`;
 
@@ -488,6 +489,7 @@ function rigaRisultato(materia, cat, codici, r, domandePer) {
     argomento: arg ? { slug: arg.slug, titolo: arg.titolo } : null,
     scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= SCHEDE_LIBERE, link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
     voce: voce && arg ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null,
+    riferimenti: procedimento?.voci?.map((v) => ({ titolo: v.titolo, link: `/${materia}/${v.argomento}/teoria#${v.ancora}` })) || [],
     teoriaLink: arg ? `/${materia}/${arg.slug}/teoria` : null,
     domandeLink: arg && domandePer[arg.slug] ? `/${materia}/${arg.slug}/domande` : null,
   };
@@ -559,7 +561,7 @@ export function rivalutaEsitoArchiviato(compito, cat) {
   const aggiornate = righe.map((r) => {
     if (r.l === 'stesso') return r;
     const metodo = trovaProcedimentoStudio(codici, r.t, r.a);
-    return metodo ? { ...r, l: 'stesso', v: metodo.voce.titolo, vl: `/${compito.materia}/${metodo.voce.argomento}/teoria#${metodo.voce.ancora}` } : r;
+    return metodo ? { ...r, l: 'stesso', a: metodo.voce.argomento, v: metodo.voce.titolo, vl: `/${compito.materia}/${metodo.voce.argomento}/teoria#${metodo.voce.ancora}` } : r;
   });
   return aggiornate.every((r) => r.l === 'stesso') ? { ...compito, compatibilita: 100, esito: JSON.stringify(aggiornate) } : compito;
 }
@@ -590,9 +592,9 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
 
   if (!POST || (p !== '/api/compatibilita/leggi' && p !== '/api/compatibilita/confronta')) return null;
   const b = await req.json().catch(() => ({}));
-  const materia = typeof b.materia === 'string' && MATERIE_COMPATIBILITA.includes(b.materia) ? b.materia : null;
+  let materia = typeof b.materia === 'string' && MATERIE_COMPATIBILITA.includes(b.materia) ? b.materia : null;
   if (!materia) return json({ errore: 'Scegli la materia del tuo esame universitario.' }, 400);
-  const m = MATERIE.find((x) => x.slug === materia);
+  let m = MATERIE.find((x) => x.slug === materia);
   const io = await h.utenteCollegato(env, req).catch(() => null);
   const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
   const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
@@ -641,6 +643,14 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const testo = typeof b.testo === 'string' ? b.testo.replace(/[\u0000-\u0008\u000b-\u001f]/g, '').trim() : '';
   if (testo.length < 20) return json({ errore: 'Il testo dell’esame è troppo breve: scrivi o incolla gli esercizi.' }, 400);
   if (testo.length > MAX_CARATTERI_TESTO) return json({ errore: `Il testo è troppo lungo: al massimo ${MAX_CARATTERI_TESTO} caratteri, cioè un compito d’esame.` }, 400);
+  const materiaScelta = materia;
+  const riconoscimento = riconosciMateriaCompito(testo, materiaScelta, MATERIE_COMPATIBILITA);
+  materia = riconoscimento.materia;
+  m = MATERIE.find((x) => x.slug === materia);
+  const correzioneMateria = materia !== materiaScelta ? {
+    materiaScelta, titoloScelto: MATERIE.find((x) => x.slug === materiaScelta).titolo,
+    materia, titolo: m.titolo, fonte: riconoscimento.fonte,
+  } : null;
   const [cat, c] = await Promise.all([catalogo(env, materia), conta('confronta')]);
   if (!cat) { if (c.ok) await rimborsa('confronta'); return json({ errore: 'Il confronto per questa materia non è ancora disponibile.' }, 503); }
   if (!c.ok) return limite(c);
@@ -676,6 +686,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
   const corpo = new ReadableStream({
     async start(ctl) {
       const manda = (o) => ctl.enqueue(enc.encode(`${JSON.stringify(o)}\n`));
+      if (correzioneMateria) manda({ materiaCorretta: correzioneMateria });
       const grezze = [];
       const aggiungi = (q) => {
         if (q.ricomincia) { grezze.length = 0; manda({ ricomincia: true }); return; }
@@ -698,7 +709,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi. Controlla il testo e riprova.' });
       } else {
-        manda({ fine: { materia, titolo: m.titolo, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti } });
+        manda({ fine: { materia, titolo: m.titolo, correzioneMateria, ...esito, id, collegato: Boolean(io), rimasti: c.rimasti } });
         ctx.waitUntil(aDO(env, '/comp-compito-esito', {
           id, materia, universita, testo, compatibilita: esito.compatibilita, richieste: esito.richieste.length,
           esito: JSON.stringify(esito.richieste.map((r) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug || null, s: r.scheda?.n || null, v: r.voce?.titolo || null, vl: r.voce?.link || null }))),

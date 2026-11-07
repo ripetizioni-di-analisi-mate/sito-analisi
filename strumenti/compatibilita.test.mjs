@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { DatabaseSync } from 'node:sqlite';
 
 const radice = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const temporanea = mkdtempSync(join(tmpdir(), 'compatibilita-prove-'));
@@ -14,7 +15,8 @@ const compila = async (file, nome) => {
   execFileSync(process.execPath, [join(radice, 'node_modules/rolldown/bin/cli.mjs'), join(radice, file), '--file', destinazione, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: radice });
   return import(pathToFileURL(destinazione).href);
 };
-const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita, rivalutaEsitoArchiviato, ISTRUZIONI_CONFRONTO } = await compila('worker/compatibilita.mjs', 'worker');
+const { codifica, leggiRiga, valutaRichieste, gestisciCompatibilita, rivalutaEsitoArchiviato, ISTRUZIONI_CONFRONTO, creaTabelleCompatibilita, archivioCompatibilita } = await compila('worker/compatibilita.mjs', 'worker');
+const { riconosciMateriaCompito } = await compila('worker/materia-compito.mjs', 'materia');
 const { dettagliScheda, dettagliTeoria } = await compila('src/lib/catalogo-compatibilita.ts', 'catalogo');
 const { MATERIE_COMPATIBILITA } = await compila('src/data/compatibilita.ts', 'materie');
 const { trovaVoceTeoria, riferimentiNominati } = await compila('worker/riscontro-teoria.mjs', 'riscontro');
@@ -34,6 +36,51 @@ const cat = {
 };
 const { codici } = codifica(cat, false);
 const valuta = (...righe) => valutaRichieste('analisi-1', cat, codici, righe.map((r) => typeof r === 'string' ? leggiRiga(r) : r));
+
+test('la materia esplicita nel titolo corregge una selezione sbagliata', () => {
+  for (const [titolo, materia] of [
+    ['Analisi Matematica I', 'analisi-1'], ['Analisi matematica 2', 'analisi-2'],
+    ['Algebra lineare e geometria analitica', 'algebra-lineare'],
+    ['Fisica generale I', 'fisica-1'], ['Fisica II', 'fisica-2'], ['Matematica generale', 'matematica-generale'],
+  ]) {
+    const scelto = materia === 'fisica-1' ? 'analisi-1' : 'fisica-1';
+    assert.deepEqual(riconosciMateriaCompito(`Prova scritta di ${titolo}. Esercizio 1.`, scelto, MATERIE_COMPATIBILITA), { materia, fonte: 'titolo' });
+  }
+});
+
+test('senza titolo servono indizi distinti e i programmi sovrapposti mantengono la scelta', () => {
+  for (const [testo, materia] of [
+    ['Calcolare il limite, la derivata e un integrale.', 'analisi-1'],
+    ['Calcolare le derivate parziali di f(x,y), la Hessiana e gli integrali doppi.', 'analisi-2'],
+    ['Studiare la matrice: determinante, autovalori e autovettori.', 'algebra-lineare'],
+    ['Applicare le leggi di Newton, calcolare accelerazione ed energia cinetica.', 'fisica-1'],
+    ['Calcolare campo elettrico, campo magnetico e capacita del condensatore.', 'fisica-2'],
+    ['Determinare costo marginale ed elasticita della domanda al prezzo dato.', 'matematica-generale'],
+  ]) assert.equal(riconosciMateriaCompito(testo, 'algebra-lineare', MATERIE_COMPATIBILITA).materia, materia);
+  for (const testo of ['Calcolare un integrale.', 'Analisi 1 e Analisi 2', 'Fisica 1/2', 'TOLC: limite e derivata, studio di funzione.']) {
+    assert.equal(riconosciMateriaCompito(testo, 'fisica-1', MATERIE_COMPATIBILITA).materia, 'fisica-1');
+  }
+  assert.equal(riconosciMateriaCompito('Calcolare limite, derivata e integrale.', 'matematica-generale', MATERIE_COMPATIBILITA).materia, 'matematica-generale');
+  assert.equal(riconosciMateriaCompito('Fisica II', 'analisi-1', ['analisi-1']).materia, 'analisi-1');
+});
+
+test('correggere la materia conserva testo letto e immagini del compito', () => {
+  const db = new DatabaseSync(':memory:');
+  try {
+    const o = {
+      sql: { exec: (q, ...p) => p.length ? db.prepare(q).run(...p) : db.exec(q) },
+      riga: (q, ...p) => db.prepare(q).get(...p), righe: (q, ...p) => db.prepare(q).all(...p),
+    };
+    creaTabelleCompatibilita(o.sql);
+    archivioCompatibilita(o, '/comp-compito-nuovo', { id: 'compito', materia: 'fisica-1', letto: 'Analisi matematica I', pagine: ['data:image/png;base64,AQID'] });
+    archivioCompatibilita(o, '/comp-compito-esito', { id: 'compito', materia: 'analisi-1', testo: 'Calcolare la derivata', compatibilita: 100, richieste: 1, esito: '[]' });
+    const salvato = o.riga('SELECT * FROM compiti WHERE id = ?', 'compito');
+    assert.equal(salvato.materia, 'analisi-1');
+    assert.equal(salvato.letto, 'Analisi matematica I');
+    assert.equal(salvato.pagine, 1);
+    assert.deepEqual([...o.riga('SELECT dati FROM compiti_pagine WHERE compito = ?', 'compito').dati], [1, 2, 3]);
+  } finally { db.close(); }
+});
 
 test('la copertura dipende dal materiale: 0, 50 e 100 sono tutti possibili', () => {
   assert.equal(valuta('1|-|E|-|-|-|Risolvere una PDE stocastica').compatibilita, 0);
@@ -206,6 +253,28 @@ test('il compito con esponenziale e radice passa dal 94% al 100% recuperando il 
   assert.equal(archivio.compatibilita, 94);
 });
 
+test('le operazioni dello studio recuperano i metodi presenti anche in capitoli diversi', () => {
+  const reale = catalogoTeoriaReale('analisi-1');
+  for (const [slug, testo] of [
+    ['studio-di-funzione', 'Determinare il dominio e il segno di f(x)'],
+    ['limiti', 'Ricercare gli asintoti di f(x)'],
+    ['derivate', 'Calcolare la derivata prima, la monotonia e gli estremi relativi di f(x)'],
+    ['studio-di-funzione', 'Ricercare massimi e minimi e disegnare il grafico della funzione f(x)'],
+  ]) {
+    const codici = codifica(reale, false).codici;
+    const argomento = Object.entries(codici.A).find(([, a]) => a.slug === slug)[0];
+    const e = valutaRichieste('analisi-1', reale, codici, [{ esercizio: '1', tipo: 'esercizio', testo, argomento }]);
+    assert.equal(e.compatibilita, 100, testo);
+    assert.ok(e.richieste[0].riferimenti.length > 0);
+    for (const r of e.richieste[0].riferimenti) assert.ok(Object.values(codici.T).some((v) => r.link.endsWith(`/${v.argomento}/teoria#${v.ancora}`)));
+  }
+  const incompleto = structuredClone(reale);
+  incompleto.argomenti.find((a) => a.slug === 'derivate').teoria = [];
+  const codici = codifica(incompleto, false).codici;
+  const argomento = Object.entries(codici.A).find(([, a]) => a.slug === 'studio-di-funzione')[0];
+  assert.equal(valutaRichieste('analisi-1', incompleto, codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Calcolare la derivata prima e gli estremi relativi di f(x)', argomento }]).compatibilita, 50);
+});
+
 test('il riscontro degli estremi richiede i criteri effettivi e non promuove contenuti diversi', () => {
   const reale = catalogoTeoriaReale('analisi-1');
   const studio = reale.argomenti.find((a) => a.slug === 'studio-di-funzione');
@@ -316,6 +385,19 @@ test('un confronto completo restituisce fonti, percentuale e un solo salvataggio
   const { eventi, chiamate } = await confronto(`${riga}FINE_CONFRONTO|1`);
   assert.equal(eventi.at(-1).fine.compatibilita, 100);
   assert.equal(chiamate.filter((x) => x.percorso === '/comp-compito-esito').length, 1);
+});
+
+test('il confronto usa la materia corretta, la comunica e consuma un solo controllo', async () => {
+  const { eventi, chiamate, modelli } = await confronto(`${riga}FINE_CONFRONTO|1`, 'fisica-1', true, 'Prova scritta di Analisi Matematica I. Esercizio 1. Calcolare un integrale per parti.');
+  assert.equal(eventi[0].materiaCorretta.materiaScelta, 'fisica-1');
+  const e = eventi.at(-1).fine;
+  assert.equal(e.materia, 'analisi-1');
+  assert.equal(e.correzioneMateria.titolo, 'Analisi matematica 1');
+  assert.equal(e.compatibilita, 100);
+  assert.ok(e.richieste[0].scheda.link.startsWith('/analisi-1/'));
+  assert.equal(chiamate.find((c) => c.percorso === '/comp-compito-esito').dati.materia, 'analisi-1');
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
+  assert.equal(modelli.length, 1);
 });
 
 test('il risultato API corregge il riferimento confuso dal modello prima del salvataggio', async () => {
