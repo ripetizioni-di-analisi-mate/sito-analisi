@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { MISURAZIONE_ATTIVA } from '../data/misurazione';
 ---
 <Base lingua="it" titolo="Informativa sulla privacy" percorso={[{ titolo: 'Informativa sulla privacy' }]} descrizione="Informativa sul trattamento dei dati personali del sito Ripetizioni di Analisi: quali dati raccoglie, a che cosa servono e quali diritti hai.">
   <p class="sopratitolo">Privacy</p>
@@ -40,6 +41,7 @@ import Base from '../layouts/Base.astro';
 
   <h2>Cookie</h2>
   <p>Il sito usa solo cookie tecnici: <code>sessione</code> mantiene l'accesso all'account, <code>dispositivo</code> riconosce il dispositivo collegato all'account, <code>fonte</code> ricorda per 90 giorni il canale della prima visita. <code>invito</code> conserva per 30 giorni il codice del link d'invito aperto, per applicare lo sconto. Non esistono cookie di profilazione né cookie di terze parti per la navigazione. Alcune preferenze di lettura, come l'indice aperto o chiuso, sono salvate solo sul dispositivo e non lasciano il browser. Durante un acquisto Paddle, e durante il pagamento di una lezione Stripe, possono impostare i cookie tecnici necessari al pagamento.</p>
+  {MISURAZIONE_ATTIVA && <p><strong>Cookie di misurazione (solo con il tuo consenso).</strong> Il sito usa gli strumenti di Google (Google Ads e Google Analytics) per contare quante persone arrivano dagli annunci e dalle ricerche e quante di loro creano un account, prenotano una lezione, si iscrivono a un corso o acquistano una materia. Finché non accetti dal banner, Google non imposta cookie e riceve solo segnali anonimi senza identificativi. Se accetti, Google imposta i propri cookie (per esempio <code>_ga</code>, <code>_gcl_au</code>) per riconoscere il browser e attribuire la conversione all'annuncio, e il sito gli trasmette, in forma cifrata e non leggibile, l'email dell'account al momento dell'acquisto, per contare le conversioni con maggiore precisione. Google tratta questi dati secondo la sua <a href="https://policies.google.com/privacy" rel="noopener">informativa sulla privacy</a>. La scelta si cambia in qualsiasi momento da <a href="#" data-consenso-apri>questo link</a>.</p>}
 
   <h2>Base giuridica e conservazione</h2>
   <p>Il trattamento dei dati dell'account, degli acquisti e dell'assistenza si fonda sull'esecuzione del contratto (art. 6.1.b GDPR); le statistiche aggregate sul legittimo interesse a far funzionare il sito. I dati dell'account sono conservati finché il servizio resta attivo, per poter ripristinare l'accesso a chi ha acquistato una materia, oppure fino a quando ne chiedi la cancellazione. I dati delle lezioni prenotate sono conservati per il tempo richiesto dagli obblighi fiscali e contabili.</p>

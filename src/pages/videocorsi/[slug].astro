@@ -122,6 +122,8 @@ const titolo = v.titolo;
           token: conf.token,
           eventCallback: (ev) => {
             if (ev.name !== 'checkout.completed') return;
+            // conversione per Google Ads (src/data/misurazione.ts)
+            try { const d = ev.data || {}; window.misura && window.misura('acquisto', { valore: d.totals && d.totals.total, valuta: d.currency_code, id: d.transaction_id, voce: 'video-' + slug, email: io.email }); } catch (_) {}
             azione.innerHTML = '<p>Pagamento ricevuto. Sto attivando il videocorso nel tuo account…</p>';
             let tentativi = 0;
             const controlla = async () => {

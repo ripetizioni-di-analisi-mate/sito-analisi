@@ -165,6 +165,8 @@ const accedi = link(lingua, '/accedi');
         if (r.status === 409) { esito.innerHTML = ''; esito.append(`${t.esiste} `); const a = document.createElement('a'); a.href = accedi; a.textContent = t.accedi; esito.append(a); return; }
         if (!r.ok) { esito.textContent = d.errore || t.rete; return; }
         scrivi('barra-sconto-chiusa', String(Date.now() + 3650 * 86400000));
+        // conversione per Google Ads (src/data/misurazione.ts)
+        try { window.misura && window.misura('account', { email }); } catch (_) {}
         modulo.hidden = true;
         box.querySelector('.bs-testo').hidden = true;
         box.querySelector('.bs-fatto').hidden = false;

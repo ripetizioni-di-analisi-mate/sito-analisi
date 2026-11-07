@@ -88,6 +88,8 @@ function fonteIngresso(req, url) {
   try { host = new URL(req.headers.get('referer') || '').hostname.replace(/^www\./, ''); } catch { /* nessun referer */ }
   if (host && host === url.hostname.replace(/^www\./, '')) return null; // navigazione interna
   const utm = (url.searchParams.get('utm_source') || '').toLowerCase();
+  // annunci Google Ads: parametro gclid aggiunto da Google, oppure utm_source=google-ads nel suffisso dell'URL finale
+  if (url.searchParams.has('gclid') || /^(google-ads|adwords)$/.test(utm)) return 'Google Ads';
   if (/^(ig|instagram)$/.test(utm) || /Instagram/.test(ua)) return 'Instagram';
   if (/FBAN|FBAV|FB_IAB/.test(ua)) return 'Facebook';
   if (utm) return utm.slice(0, 30);

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { MISURAZIONE_ATTIVA } from '../../data/misurazione';
 ---
 <Base titolo="Privacy policy" percorso={[{ titolo: 'Privacy policy' }]} descrizione="How the Ripetizioni di Analisi website processes personal data: which data it collects, what they are used for and what your rights are." lingua="en" seo={{ soloQuestaLingua: false }}>
   <p class="sopratitolo">Privacy</p>
@@ -39,6 +40,7 @@ import Base from '../../layouts/Base.astro';
 
   <h2>Cookies</h2>
   <p>The website uses only technical cookies: <code>sessione</code> keeps you logged in, <code>dispositivo</code> recognises the device connected to the account, <code>fonte</code> remembers the channel of the first visit for 90 days, <code>invito</code> keeps the code of an opened invite link for 30 days to apply the discount. There are no profiling cookies and no third-party cookies for browsing. Some reading preferences, such as whether the contents panel is open or closed, are stored only on the device and never leave the browser. During a purchase Paddle, and during the payment of a lesson Stripe, may set the technical cookies needed for the payment.</p>
+  {MISURAZIONE_ATTIVA && <p><strong>Measurement cookies (only with your consent).</strong> The website uses Google tools (Google Ads and Google Analytics) to count how many people arrive from ads and searches and how many of them create an account, book a lesson, join a course or buy a subject. Until you accept from the banner, Google sets no cookies and receives only anonymous signals without identifiers. If you accept, Google sets its own cookies (for example <code>_ga</code>, <code>_gcl_au</code>) to recognise the browser and attribute the conversion to the ad, and at the time of a purchase the website sends Google the account email in hashed, unreadable form, to count conversions more accurately. Google processes these data according to its <a href="https://policies.google.com/privacy" rel="noopener">privacy policy</a>. You can change your choice at any time from <a href="#" data-consenso-apri>this link</a>.</p>}
 
   <h2>Legal basis and retention</h2>
   <p>The processing of account, purchase and support data is based on the performance of a contract (Art. 6(1)(b) GDPR); aggregate statistics are based on the legitimate interest in running the website. Account data are kept for as long as the service is active, so that access can be restored to those who purchased a subject, or until you ask for their deletion. Data on booked lessons are kept for the period required by tax and accounting obligations.</p>

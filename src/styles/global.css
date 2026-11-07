@@ -1453,5 +1453,10 @@ html.collegato .scarica-formulario .solo-collegati { display: inline-block; }
 html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1rem); transition: bottom .35s ease; }
 /* al telefono, con la barra aperta, il fumetto di benvenuto di Pi aspetta la visita successiva */
 @media (max-width: 640px) { html.con-barra-sconto .pi-fumetto { display: none !important; } }
+/* banner dei cookie (ConsensoCookie.astro): al telefono i tasti fissi salgono sopra il banner e il fumetto di Pi aspetta */
+@media (max-width: 640px) {
+  html.con-consenso .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + var(--altezza-consenso, 0px) + 1.5rem); }
+  html.con-consenso .pi-fumetto { display: none !important; }
+}
 @media (prefers-reduced-motion: reduce) { .barra-sconto, html.con-barra-sconto .bottoni-fissi { transition: none; } }
 @media print { .barra-sconto { display: none !important; } }

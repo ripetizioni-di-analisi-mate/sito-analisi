@@ -1,0 +1,71 @@
+---
+// Banner dei cookie per la misurazione di Google (Consent Mode v2). Compare solo se in src/data/misurazione.ts c'è un codice
+// e finché il visitatore non ha scelto; la scelta resta nel browser (localStorage «consenso») e vale su tutto il sito.
+// «Accetta» → Google misura le conversioni e il remarketing; «Solo necessari» → il tag resta senza cookie (Consent Mode).
+// Si riapre da qualsiasi link con data-consenso-apri (per esempio nell'informativa sulla privacy).
+import { link, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const s = en ? {
+  titolo: 'Cookies for measurement',
+  testo: 'With your consent, Google cookies measure which pages and which ads bring students to the site. No data is sold.',
+  accetta: 'Accept', rifiuta: 'Only necessary', privacy: 'Privacy policy',
+} : {
+  titolo: 'Cookie di misurazione',
+  testo: 'Con il tuo consenso, i cookie di Google misurano quali pagine e quali annunci portano gli studenti sul sito. Nessun dato viene venduto.',
+  accetta: 'Accetta', rifiuta: 'Solo necessari', privacy: 'Informativa sulla privacy',
+};
+---
+<aside class="consenso" role="dialog" aria-labelledby="consenso-titolo" hidden>
+  <p class="consenso-titolo" id="consenso-titolo">{s.titolo}</p>
+  <p class="consenso-testo">{s.testo} <a href={link(lingua, '/privacy')}>{s.privacy}</a></p>
+  <div class="consenso-tasti">
+    <button type="button" class="consenso-si" data-consenso="si">{s.accetta}</button>
+    <button type="button" class="consenso-no" data-consenso="no">{s.rifiuta}</button>
+  </div>
+</aside>
+
+<script is:inline>
+  (() => {
+    const box = document.querySelector('.consenso');
+    if (!box) return;
+    const leggi = () => { try { return localStorage.getItem('consenso'); } catch { return null; } };
+    const scrivi = (v) => { try { localStorage.setItem('consenso', v); } catch {} };
+    const applica = (v) => {
+      const stato = v === 'si' ? 'granted' : 'denied';
+      if (typeof gtag === 'function') gtag('consent', 'update', { ad_storage: stato, ad_user_data: stato, ad_personalization: stato, analytics_storage: stato });
+    };
+    const misuraAltezza = () => document.documentElement.style.setProperty('--altezza-consenso', `${Math.ceil(box.getBoundingClientRect().height)}px`);
+    const mostra = () => { box.hidden = false; document.documentElement.classList.add('con-consenso'); misuraAltezza(); };
+    addEventListener('resize', () => { if (!box.hidden) misuraAltezza(); });
+    const nascondi = () => { box.hidden = true; document.documentElement.classList.remove('con-consenso'); };
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-consenso]');
+      if (!b) return;
+      scrivi(b.dataset.consenso); applica(b.dataset.consenso); nascondi();
+    });
+    document.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('[data-consenso-apri]')) { e.preventDefault(); mostra(); } });
+    if (!leggi()) mostra();
+  })();
+</script>
+
+<style>
+  .consenso {
+    position: fixed; left: 1rem; bottom: calc(var(--altezza-bs, 0px) + 1rem); z-index: 60;
+    max-width: 22rem; padding: 0.9rem 1rem; border: 1px solid var(--riga); border-radius: var(--raggio);
+    background: #fff; color: var(--inchiostro); box-shadow: 0 6px 24px rgba(34, 48, 47, 0.12);
+    font-family: var(--ui); font-size: 0.92rem; line-height: 1.4;
+  }
+  .consenso-titolo { margin: 0 0 0.25rem; font-weight: 600; }
+  .consenso-testo { margin: 0 0 0.75rem; color: var(--inchiostro-2); }
+  .consenso-testo a { color: var(--accento); }
+  .consenso-tasti { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .consenso-tasti button { font: inherit; font-weight: 600; padding: 0.45rem 0.9rem; border-radius: 999px; cursor: pointer; }
+  .consenso-si { background: var(--azione); color: #fff; border: 1px solid var(--azione); }
+  .consenso-no { background: transparent; color: var(--inchiostro); border: 1px solid var(--riga); }
+  @media (max-width: 40rem) {
+    .consenso { left: 0.75rem; right: 0.75rem; max-width: none; bottom: calc(var(--altezza-bs, 0px) + 0.75rem); }
+  }
+  @media print { .consenso { display: none; } }
+</style>

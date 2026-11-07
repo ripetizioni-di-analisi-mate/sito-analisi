@@ -102,6 +102,8 @@ const pref = prefisso(lingua);
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }
+          // conversione per Google Ads (src/data/misurazione.ts)
+          if (scheda === 'registrati') { try { window.misura && window.misura('account', { email }); } catch (_) {} }
           location.href = destinazione;
         } catch {
           invia.disabled = false; errore(js.connessione);

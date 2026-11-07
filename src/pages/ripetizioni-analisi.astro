@@ -1,8 +1,11 @@
 ---
 // Pagina di servizio: lezioni individuali, corsi di gruppo e videocorsi con Carmine (ricerche "ripetizioni di analisi").
-// Testo approvato da Carmine il 30/10/2026. Nessun prezzo per lezione.
+// Testo approvato da Carmine il 30/10/2026. Prezzi aggiunti il 07/11/2026 per la campagna Google Ads (scelta di Carmine).
 import Base from '../layouts/Base.astro';
 import { SITO, assoluto } from '../lib/seo';
+import { LEZIONI } from '../data/lezioni';
+
+const PREZZO_GRUPPO = 15; // euro a lezione nei corsi di gruppo, pagamento ogni 5-6 lezioni svolte
 
 const WHATSAPP = 'https://wa.me/393885680393';
 
@@ -10,7 +13,8 @@ const domande: [string, string][] = [
   ['Le lezioni sono online?', 'Sì, tutte le lezioni si svolgono online.'],
   ['Posso seguire il corso di gruppo se ho lacune di base?', 'Sì, il corso è pensato anche per chi parte con delle lacune. Per i prerequisiti c’è anche il Precorso sul sito.'],
   ['Devo seguire tutto il corso?', 'No, non c’è alcun vincolo: si può seguire anche solo una parte delle lezioni.'],
-  ['Come si paga il corso di gruppo?', 'Il pagamento avviene ogni cinque o sei lezioni svolte.'],
+  ['Quanto costa il corso di gruppo?', 'Ogni lezione costa 15 €. Il pagamento avviene ogni cinque o sei lezioni svolte.'],
+  ['Quanto costa una lezione individuale?', 'Una lezione individuale di un’ora costa 40 €, pagata online al momento della prenotazione.'],
   ['Come si prenota una lezione individuale?', 'Si prenota dalla pagina Prenota una lezione, scegliendo materia, giorno e ora; il pagamento avviene online al momento della prenotazione.'],
   ['Come ci si iscrive a un corso di gruppo?', 'Ci si iscrive dalla pagina Corsi di gruppo e si aspetta che il gruppo si formi; nel frattempo si possono inviare le tracce d’esame e la data dell’esame.'],
 ];
@@ -26,6 +30,10 @@ const schema = [
     provider: { '@id': `${SITO}/#carmine` },
     areaServed: { '@type': 'Country', name: 'Italia' },
     availableChannel: { '@type': 'ServiceChannel', serviceUrl: WHATSAPP },
+    offers: [
+      { '@type': 'Offer', name: 'Lezione individuale online (1 ora)', price: String(LEZIONI.prezzo), priceCurrency: 'EUR', url: assoluto('/prenota') },
+      { '@type': 'Offer', name: 'Corso di gruppo online (a lezione)', price: String(PREZZO_GRUPPO), priceCurrency: 'EUR', url: assoluto('/corsi-di-gruppo') },
+    ],
   },
   {
     '@type': 'FAQPage',
@@ -42,10 +50,10 @@ const schema = [
 
     <h2>Lezioni individuali</h2>
     <p>La lezione è costruita sulla preparazione dello studente e sul programma del suo corso. Di solito si parte dalle prove d’esame del docente e si lavora sugli argomenti che servono per quell’esame.</p>
-    <p>Giorno e ora si scelgono tra gli orari liberi nella pagina <a href="/prenota">Prenota una lezione</a>.</p>
+    <p>Una lezione dura un’ora e costa {LEZIONI.prezzo} €. Giorno e ora si scelgono tra gli orari liberi nella pagina <a href="/prenota">Prenota una lezione</a>; il pagamento avviene online al momento della prenotazione.</p>
 
     <h2>Corsi di gruppo</h2>
-    <p>I corsi coprono Analisi matematica 1, Analisi matematica 2 e Matematica generale. Il programma si organizza sulle prove d’esame inviate dagli iscritti, con due o tre incontri settimanali da un’ora. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20. Le lezioni sono registrate, quindi una lezione persa si recupera con la registrazione. Ci si iscrive dalla pagina <a href="/corsi-di-gruppo">Corsi di gruppo</a> e si aspetta che il gruppo si formi; il numero di telefono serve per il gruppo WhatsApp del corso.</p>
+    <p>I corsi coprono Analisi matematica 1, Analisi matematica 2 e Matematica generale. Il programma si organizza sulle prove d’esame inviate dagli iscritti, con due o tre incontri settimanali da un’ora. Un corso di Analisi 1 dura circa 30 lezioni, uno di Analisi 2 circa 20. Le lezioni sono registrate, quindi una lezione persa si recupera con la registrazione. Ogni lezione costa {PREZZO_GRUPPO} € e si paga ogni cinque o sei lezioni svolte, senza vincolo di seguire tutto il corso. Ci si iscrive dalla pagina <a href="/corsi-di-gruppo">Corsi di gruppo</a> e si aspetta che il gruppo si formi; il numero di telefono serve per il gruppo WhatsApp del corso.</p>
 
     <h2>Videocorsi</h2>
     <p>Per chi studia con i propri tempi ci sono i <a href="/videocorsi">videocorsi preregistrati</a>: ogni lezione ha il video e il PDF.</p>

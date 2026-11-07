@@ -10,6 +10,8 @@ import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
 import Concentrazione from '../components/Concentrazione.astro';
+import ConsensoCookie from '../components/ConsensoCookie.astro';
+import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '../data/misurazione';
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
@@ -132,6 +134,49 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#faf8f2" />
+  {/* Misurazione delle conversioni (Google Ads, Google Analytics): codici in src/data/misurazione.ts; senza codici non si carica nulla.
+      Consent Mode v2: tutto negato finché il visitatore non accetta dal banner (ConsensoCookie.astro). */}
+  <script is:inline define:vars={{ ads: GOOGLE_ADS_ID, ga4: GA4_ID, etichette: CONVERSIONI, valori: VALORI, attiva: MISURAZIONE_ATTIVA }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    window.gtag = gtag;
+    if (attiva) {
+      let scelta = null;
+      try { scelta = localStorage.getItem('consenso'); } catch (e) {}
+      const stato = scelta === 'si' ? 'granted' : 'denied';
+      gtag('consent', 'default', { ad_storage: stato, ad_user_data: stato, ad_personalization: stato, analytics_storage: stato, wait_for_update: 500 });
+      gtag('set', 'ads_data_redaction', true);
+      gtag('set', 'url_passthrough', true);
+      gtag('js', new Date());
+      if (ads) gtag('config', ads, { allow_enhanced_conversions: true });
+      if (ga4) gtag('config', ga4);
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ads || ga4);
+      document.head.appendChild(s);
+    }
+    // window.misura(evento, dati): un solo punto d'ingresso per le conversioni del sito.
+    // Eventi: acquisto {valore, valuta, id, voce, email} · lezione {valore, id, email} · gruppo {email} · account {email} · whatsapp · compatibilita.
+    window.misura = function (evento, dati) {
+      if (!attiva) return;
+      dati = dati || {};
+      try {
+        if (dati.email) gtag('set', 'user_data', { email: String(dati.email).trim().toLowerCase() });
+        const valuta = dati.valuta || 'EUR';
+        const valore = dati.valore != null ? Number(dati.valore) : valori[evento];
+        const base = {};
+        if (valore != null && !isNaN(valore)) { base.value = valore; base.currency = valuta; }
+        if (dati.id) base.transaction_id = String(dati.id);
+        if (evento === 'acquisto') gtag('event', 'purchase', Object.assign({ items: [{ item_name: dati.voce || 'materia' }] }, base));
+        else gtag('event', evento, Object.assign({}, base));
+        if (ads && etichette[evento]) gtag('event', 'conversion', Object.assign({ send_to: ads + '/' + etichette[evento] }, base));
+      } catch (e) {}
+    };
+    document.addEventListener('click', function (e) {
+      const a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me/"]') : null;
+      if (a) window.misura('whatsapp');
+    }, true);
+  </script>
   <script is:inline>
     try { if (localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
     // Chi sceglie la lingua con il tasto IT/EN la ritrova in tutto il sito (il Worker legge il cookie «lingua»).
@@ -262,6 +307,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </div>
 
   {sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
+  {sezione !== 'stampa' && MISURAZIONE_ATTIVA && <ConsensoCookie lingua={lingua} />}
   <script type="application/json" id="catalogo-percorso" is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
   <div class="avviso-premio" role="status" aria-live="polite" hidden></div>

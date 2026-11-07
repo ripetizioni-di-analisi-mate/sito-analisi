@@ -122,6 +122,8 @@ export function avviaCompatibilita() {
     clearInterval(timerAvanzamento);
     clearTimeout(timerAttesa);
     completata = true;
+    // evento secondario per Google Ads (src/data/misurazione.ts)
+    try { (window as any).misura?.('compatibilita'); } catch {}
     attesa.dataset.stato = 'completato';
     titoloAttesa.textContent = 'Verifica completata';
     etichettaPercentuale.textContent = 'completato';

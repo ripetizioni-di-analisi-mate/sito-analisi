@@ -14,6 +14,8 @@ import StileLezioni from '../../components/StileLezioni.astro';
 </Base>
 
 <script>
+  import { LEZIONI } from '../../data/lezioni';
+  const prezzoLezione = LEZIONI.prezzo;
   const titolo = document.getElementById('titolo')!;
   const contenuto = document.getElementById('contenuto')!;
   const s = new URLSearchParams(location.search).get('s') || '';
@@ -23,6 +25,8 @@ import StileLezioni from '../../components/StileLezioni.astro';
     const r = await fetch('/api/prenota/stato', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ s }) }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
     if (d?.stato === 'pagata') {
+      // conversione per Google Ads, una volta per prenotazione (src/data/misurazione.ts)
+      try { if (!sessionStorage.getItem(`misurata-${s}`)) { sessionStorage.setItem(`misurata-${s}`, '1'); (window as any).misura?.('lezione', { valore: prezzoLezione, id: s, email: d.email }); } } catch {}
       titolo.textContent = 'Lezione prenotata';
       contenuto.innerHTML = `<p class="sommario">Il pagamento è stato ricevuto. All’indirizzo ${esc(d.email)} arrivano l’email di conferma e l’invito di Google Calendar con il link di Google Meet.</p>
         <div class="scheda-lezione"><dl><dt>Materia</dt><dd>${esc(d.materia)}</dd><dt>Quando</dt><dd>${esc(d.quando)}</dd>

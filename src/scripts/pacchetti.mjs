@@ -122,6 +122,8 @@ async function avvia() {
             if (ev.name === 'checkout.error') { avviso('Non riesco ad aprire il pagamento. Riprova o scrivi a Carmine.'); return; }
             if (ev.name !== 'checkout.completed' || pagato) return;
             pagato = true; aggiorna(); avviso('Pagamento ricevuto. Sto sbloccando i tuoi corsi…');
+            // conversione per Google Ads (src/data/misurazione.ts)
+            try { const d = ev.data || {}; window.misura && window.misura('acquisto', { valore: d.totals && d.totals.total, valuta: d.currency_code, id: d.transaction_id, voce: 'pacchetto', email: io?.email }); } catch (_) {}
             let tentativi = 0;
             const controlla = async () => {
               const r = await fetch('/api/io', { cache: 'no-store' }).catch(() => null);
