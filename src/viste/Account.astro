@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import InvitaAmico from '../components/InvitaAmico.astro';
-import PacchettiHome from '../components/PacchettiHome.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
 import { accountTesti } from '../lib/account-testi.mjs';
 import '../styles/account.css';
@@ -22,7 +21,6 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
         <button type="button" id="scheda-progressi" role="tab" aria-controls="progressi-account" aria-selected="false" data-area="progressi">{s.progressi}</button>
         <button type="button" id="scheda-impostazioni" role="tab" aria-controls="impostazioni-account" aria-selected="false" data-area="impostazioni">{s.impostazioni}</button>
       </div>
-      {lingua === 'it' && <PacchettiHome />}
       <section id="studio-account" role="tabpanel" aria-labelledby="scheda-studio">
         <div id="riprendi-account" class="riprendi-account" hidden><div><p class="account-sopratitolo">{s.ultima}</p><h2 id="ultima-materia"></h2><p id="ultimo-argomento"></p></div><a class="bottone-primario" id="riprendi-link" href={pref || '/'}>{s.riprendi}<span aria-hidden="true"> →</span></a></div>
         <h2 class="account-titolo-sezione">{s.contenuti}</h2>
