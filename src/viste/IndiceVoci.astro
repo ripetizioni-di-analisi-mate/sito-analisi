@@ -1,0 +1,104 @@
+---
+// Indice generale di tutto il sito: `/teoremi` (teoremi e proposizioni) e `/definizioni`, in ordine alfabetico,
+// con le materie in cui ogni voce compare e i nomi alternativi come rimandi (src/data/alias-teoremi.ts).
+// È il punto d'ingresso per chi cerca un teorema con il suo nome, qualunque sia la materia.
+import Base from '../layouts/Base.astro';
+import { link, type Lingua } from '../i18n';
+import { assoluto } from '../lib/seo';
+import { vociGlobali, iniziale, etichettaVoce, type VoceGlobale } from '../lib/voci-globali';
+import { ALIAS, ALIAS_EN } from '../data/alias-teoremi';
+interface Props { lingua: Lingua; tipo: 'teoremi' | 'definizioni' }
+const { lingua, tipo } = Astro.props;
+const en = lingua === 'en';
+const tutte = await vociGlobali(lingua);
+const voci = tutte.filter((v) => (tipo === 'definizioni') === (v.tipo === 'definizione'));
+// una riga per titolo (stessa chiave italiana), con le materie in cui compare
+const righe = new Map<string, { titolo: string; voci: VoceGlobale[] }>();
+for (const v of voci) {
+  const r = righe.get(v.chiave) ?? { titolo: v.titolo, voci: [] };
+  r.voci.push(v);
+  righe.set(v.chiave, r);
+}
+const alias = en ? ALIAS_EN : ALIAS;
+type Riga = { titolo: string; voci: VoceGlobale[]; rimando?: string };
+const elenco: Riga[] = [...righe.values()];
+if (tipo === 'teoremi') for (const [k, nomi] of Object.entries(alias)) {
+  const r = righe.get(k);
+  if (!r) continue;
+  for (const n of nomi) if (!righe.has(n.toLowerCase())) elenco.push({ titolo: n, voci: r.voci, rimando: r.titolo });
+}
+const confronta = new Intl.Collator(en ? 'en' : 'it').compare;
+elenco.sort((a, b) => confronta(a.titolo, b.titolo));
+const lettere = new Map<string, Riga[]>();
+for (const r of elenco) { const l = iniziale(r.titolo); lettere.set(l, [...(lettere.get(l) ?? []), r]); }
+const nMaterie = new Set(voci.map((v) => v.materia)).size;
+const t = en ? {
+  titolo: tipo === 'teoremi' ? 'All the theorems' : 'All the definitions',
+  seo: tipo === 'teoremi' ? `All the theorems: statements, proofs and exercises | ${nMaterie} subjects` : `All the definitions: mathematics and physics | ${nMaterie} subjects`,
+  descr: tipo === 'teoremi'
+    ? `${righe.size} theorems and propositions from ${nMaterie} subjects, in alphabetical order: each one with its statement, proof and the exercises in which it is applied.`
+    : `${righe.size} definitions from ${nMaterie} subjects of mathematics and physics, in alphabetical order, each with its own page and the exercises in which it is used.`,
+  sopra: 'Index', sommario: tipo === 'teoremi'
+    ? `${righe.size} theorems and propositions from ${nMaterie} subjects, in alphabetical order. Alternative names point to the page of the theorem; a result that appears in several subjects lists them all.`
+    : `${righe.size} definitions from ${nMaterie} subjects, in alphabetical order; a definition given in several subjects lists them all.`,
+  vedi: 'see', altro: tipo === 'teoremi' ? 'All the definitions' : 'All the theorems', percorso: tipo === 'teoremi' ? 'Theorems' : 'Definitions',
+} : {
+  titolo: tipo === 'teoremi' ? 'Tutti i teoremi' : 'Tutte le definizioni',
+  seo: tipo === 'teoremi' ? `Tutti i teoremi: enunciati, dimostrazioni ed esercizi | ${nMaterie} materie` : `Tutte le definizioni di matematica e fisica | ${nMaterie} materie`,
+  descr: tipo === 'teoremi'
+    ? `${righe.size} teoremi e proposizioni di ${nMaterie} materie in ordine alfabetico: ogni voce ha la sua pagina con enunciato, dimostrazione ed esercizi in cui si applica.`
+    : `${righe.size} definizioni di ${nMaterie} materie di matematica e fisica in ordine alfabetico, ciascuna con la sua pagina e gli esercizi in cui si usa.`,
+  sopra: 'Indice', sommario: tipo === 'teoremi'
+    ? `${righe.size} teoremi e proposizioni di ${nMaterie} materie, in ordine alfabetico. I nomi alternativi rimandano alla pagina del teorema; un risultato presente in più materie le elenca tutte.`
+    : `${righe.size} definizioni di ${nMaterie} materie, in ordine alfabetico; una definizione data in più materie le elenca tutte.`,
+  vedi: 'vedi', altro: tipo === 'teoremi' ? 'Tutte le definizioni' : 'Tutti i teoremi', percorso: tipo === 'teoremi' ? 'Teoremi' : 'Definizioni',
+};
+const schema = [{
+  '@type': 'ItemList', name: t.titolo, numberOfItems: righe.size,
+  itemListElement: [...righe.values()].slice(0, 500).map((r, i) => ({ '@type': 'ListItem', position: i + 1, name: r.titolo, url: assoluto(link(lingua, r.voci[0].href)) })),
+}];
+---
+<Base titolo={t.titolo} descrizione={t.descr} seo={{ titolo: t.seo, schema }} lingua={lingua} nonTradotta={false} percorso={[{ titolo: t.percorso }]}>
+  <p class="sopratitolo">{t.sopra}</p>
+  <h1>{t.titolo}</h1>
+  <p class="sommario">{t.sommario}</p>
+  <nav class="iv-lettere" aria-label="A-Z">
+    {[...lettere.keys()].sort().map((l) => <a href={`#${l === '#' ? 'altro' : l}`}>{l}</a>)}
+    <a class="iv-altro" href={link(lingua, tipo === 'teoremi' ? '/definizioni' : '/teoremi')}>{t.altro} →</a>
+  </nav>
+  {[...lettere.keys()].sort().map((l) => (
+    <section class="iv-sezione">
+      <h2 id={l === '#' ? 'altro' : l}>{l}</h2>
+      <ul class="iv-elenco">
+        {lettere.get(l)!.map((r) => (
+          <li>
+            {r.rimando ? (
+              <><span class="iv-rimando">{r.titolo}</span> <span class="iv-vedi">{t.vedi}</span> <a href={link(lingua, r.voci[0].href)}>{r.rimando}</a></>
+            ) : (
+              <>
+                {r.voci.length === 1
+                  ? <a href={link(lingua, r.voci[0].href)}>{r.titolo}</a>
+                  : <><span class="iv-titolo">{r.titolo}</span> <span class="iv-materie">{r.voci.map((v, i) => <>{i > 0 && ' · '}<a href={link(lingua, v.href)}>{etichettaVoce(v, r.voci)}</a></>)}</span></>}
+                {r.voci.length === 1 && <span class="iv-materia">{r.voci[0].materiaTitolo}</span>}
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>
+<style>
+  .iv-lettere { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 1rem 0 0.5rem; font-family: var(--ui); position: sticky; top: 3.25rem; background: var(--carta); padding: 0.5rem 0; z-index: 2; }
+  .iv-lettere a { min-width: 1.9rem; text-align: center; padding: 0.2rem 0.45rem; border: 1px solid var(--riga); border-radius: 999px; text-decoration: none; color: var(--inchiostro); font-size: 0.85rem; }
+  .iv-lettere a:hover { border-color: var(--accento); color: var(--accento); }
+  .iv-lettere .iv-altro { margin-left: auto; border: 0; color: var(--accento); }
+  .iv-sezione h2 { margin-top: 1.75rem; font-size: 1.1rem; border-bottom: 1px solid var(--riga); padding-bottom: 0.2rem; }
+  .iv-elenco { list-style: none; padding: 0; margin: 0.5rem 0 0; columns: 2; column-gap: 2rem; }
+  .iv-elenco li { break-inside: avoid; padding: 0.22rem 0; font-size: 0.95rem; line-height: 1.4; }
+  .iv-materia, .iv-materie, .iv-vedi { font-family: var(--ui); font-size: 0.8rem; color: var(--inchiostro-2); }
+  .iv-materia { margin-left: 0.4rem; }
+  .iv-materie a { font-size: 0.85rem; }
+  .iv-rimando { color: var(--inchiostro-2); }
+  @media (max-width: 700px) { .iv-elenco { columns: 1; } }
+</style>

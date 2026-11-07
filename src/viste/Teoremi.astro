@@ -53,6 +53,7 @@ const schema = [{
   <nav class="indice-analitico-salti" aria-label={en ? 'Topics' : 'Argomenti'}>
     {indice.map((a) => <a href={`#${a.argomento}`}>{argomentoL(lingua, materia, a.argomento).breve}</a>)}
   </nav>
+  <p class="voce-tutte"><a href={link(lingua, '/teoremi')}>{en ? 'All the theorems on the site' : 'Tutti i teoremi del sito'} →</a> · <a href={link(lingua, '/definizioni')}>{en ? 'All the definitions' : 'Tutte le definizioni'} →</a></p>
   {indice.map((a) => (
     <section class="indice-analitico" id={a.argomento}>
       <h2><a href={href(a.argomento)}>{argomentoL(lingua, materia, a.argomento).titolo}</a></h2>

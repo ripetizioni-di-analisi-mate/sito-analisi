@@ -32,6 +32,9 @@ export async function GET() {
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
+  // indici generali di tutti i teoremi e di tutte le definizioni
+  due('/teoremi', 0.8);
+  due('/definizioni', 0.7);
   due('/concorsi/simulazione', 0.5, false);
   // formulari gratuiti, in italiano e in inglese (quelli tradotti)
   const formulari = await getCollection('formulari');

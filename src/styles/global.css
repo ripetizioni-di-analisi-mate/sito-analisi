@@ -1484,4 +1484,7 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 .voce-vicine .voce-eti { font-family: var(--ui); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accento); font-weight: 600; }
 .voce-vicine a:only-child.voce-dopo { grid-column: 2; }
 .voce-tutte { font-family: var(--ui); font-size: 0.9rem; margin-top: 1.5rem; }
+.voce-alias { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); margin: -0.25rem 0 0.5rem; }
+.voce-alias span, .voce-altre span { font-weight: 600; }
+.voce-altre { font-family: var(--ui); font-size: 0.9rem; margin-top: 1.25rem; }
 @media (max-width: 600px) { .voce-vicine { grid-template-columns: 1fr; } .voce-vicine .voce-dopo { text-align: left; } .voce-vicine a:only-child.voce-dopo { grid-column: auto; } }

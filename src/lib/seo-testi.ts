@@ -54,8 +54,8 @@ const IT = {
     const cosa = tipo === 'definizione' ? 'definizione' : dim ? 'enunciato e dimostrazione' : 'enunciato';
     return scegli(`${v}: ${cosa} | ${a} · ${b}`, `${v}: ${cosa} | ${b}`, `${v} | ${b}`, v);
   },
-  voceDescr: (v: string, tipo: string, dim: boolean, a: string, m: string, testo: string) => {
-    const testa = `${v} (${m}, ${a})${dim ? ', con dimostrazione ed esercizi' : ''}: `;
+  voceDescr: (v: string, tipo: string, dim: boolean, a: string, m: string, testo: string, alias: string[] = []) => {
+    const testa = `${v}${alias.length ? ` (${alias[0]})` : ''} (${m}, ${a})${dim ? ', con dimostrazione ed esercizi' : ''}: `;
     return taglia(testa + (testo.length >= 60 ? testo : tipo === 'definizione' ? 'definizione ed esercizi in cui si usa.' : 'enunciato ed esercizi in cui si applica.'));
   },
 };
@@ -98,8 +98,8 @@ const EN: typeof IT = {
     const cosa = tipo === 'definizione' ? 'definition' : dim ? 'statement and proof' : 'statement';
     return scegli(`${v}: ${cosa} | ${argEn(a)} · ${cercato(b)}`, `${v}: ${cosa} | ${cercato(b)}`, `${v} | ${cercato(b)}`, v);
   },
-  voceDescr: (v, tipo, dim, a, m, testo) => {
-    const testa = `${v} (${cercato(m)}, ${a})${dim ? ', with proof and exercises' : ''}: `;
+  voceDescr: (v, tipo, dim, a, m, testo, alias = []) => {
+    const testa = `${v}${alias.length ? ` (${alias[0]})` : ''} (${cercato(m)}, ${a})${dim ? ', with proof and exercises' : ''}: `;
     return taglia(testa + (testo.length >= 60 ? testo : tipo === 'definizione' ? 'definition and the exercises where it is used.' : 'statement and the exercises where it is applied.'));
   },
 };
