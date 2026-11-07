@@ -4,6 +4,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
+import { FACOLTA } from './data/facolta';
 import { url } from './lib/url';
 
 export type Lingua = 'it' | 'en';
@@ -42,10 +43,26 @@ export function materieL(l: Lingua): Materia[] {
 export const materiaL = (l: Lingua, slug: string): Materia => materieL(l).find((m) => m.slug === slug)!;
 export const argomentoL = (l: Lingua, m: string, a: string): Argomento => materiaL(l, m).argomenti.find((x) => x.slug === a)!;
 export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.gruppo))];
-// Materie di un gruppo divise in blocchi: prima quelle senza sottogruppo, poi un blocco per sottogruppo.
+// Università usa le facoltà; i corsi condivisi mantengono lo stesso oggetto e lo stesso URL.
+// Negli altri gruppi: prima le materie senza sottogruppo, poi un blocco per sottogruppo.
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
+  if (g === 'Università' || g === 'University') {
+    const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
+    const assegnate = new Set<string>(FACOLTA.flatMap((f) => [...f.materie]));
+    return [
+      ...FACOLTA.map((f) => ({
+        sotto: g === 'University' ? f.titoloEn : f.titolo,
+        materie: f.materie.flatMap((slug) => {
+          const m = perSlug.get(slug);
+          return m ? [{ m, nome: m.titolo }] : [];
+        }),
+      })),
+      // Le future materie ancora da assegnare restano raggiungibili nel catalogo.
+      { sotto: null as string | null, materie: delGruppo.filter((m) => !assegnate.has(m.slug)).map((m) => ({ m, nome: m.titolo })) },
+    ].filter((b) => b.materie.length);
+  }
   const sotto = [...new Set(delGruppo.map((m) => m.sottogruppo).filter(Boolean))] as string[];
   const etichetta = (m: Materia) => (m.sottogruppo && m.titolo.startsWith(m.sottogruppo) ? m.titolo.slice(m.sottogruppo.length).replace(/^[,\s]+/, '') : m.titolo);
   return [

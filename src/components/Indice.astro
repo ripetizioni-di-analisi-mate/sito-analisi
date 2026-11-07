@@ -88,7 +88,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     <>
       <p class="indice-percorsi-titolo">{lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
       {gruppiL(lingua).map((g) => (
-        <details class="indice-gruppo">
+        <details class:list={['indice-gruppo', { 'indice-universita': g === 'Università' || g === 'University' }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">
@@ -167,6 +167,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
+  .indice-universita :global(.indice-sottogruppo > summary) { justify-content: flex-start; }
+  .indice-universita :global(.indice-sottogruppo > summary::before) { display: block; }
+  .indice-universita :global(.indice-sottogruppo > summary::after) { display: none; }
+  .indice-universita :global(.indice-sottogruppo > .indice-materie) { margin-left: 0.6rem; }
   details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); }
   @media (prefers-reduced-motion: reduce) { details.indice-gruppo > summary.indice-percorso { transition: none; } }
   a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
