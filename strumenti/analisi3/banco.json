@@ -1,0 +1,4050 @@
+{
+  "funzioni-complesse": [
+    {
+      "title": "Derivate di funzioni intere",
+      "anchor": "derivata-complessa",
+      "cases": [
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{2}+1z$.",
+          "a": "3",
+          "steps": "f'(z)=2z^{1}+1,\\qquad f'(1)=2+1=3.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "2",
+            "4",
+            "-3"
+          ]
+        },
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{3}+2z$.",
+          "a": "5",
+          "steps": "f'(z)=3z^{2}+2,\\qquad f'(1)=3+2=5.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "3",
+            "6",
+            "-5"
+          ]
+        },
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{4}+3z$.",
+          "a": "7",
+          "steps": "f'(z)=4z^{3}+3,\\qquad f'(1)=4+3=7.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "4",
+            "8",
+            "-7"
+          ]
+        },
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{5}+4z$.",
+          "a": "9",
+          "steps": "f'(z)=5z^{4}+4,\\qquad f'(1)=5+4=9.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "5",
+            "10",
+            "-9"
+          ]
+        },
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{6}+5z$.",
+          "a": "11",
+          "steps": "f'(z)=6z^{5}+5,\\qquad f'(1)=6+5=11.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "6",
+            "12",
+            "-11"
+          ]
+        },
+        {
+          "q": "Calcolare $f'(1)$ per $f(z)=z^{7}+6z$.",
+          "a": "13",
+          "steps": "f'(z)=7z^{6}+6,\\qquad f'(1)=7+6=13.",
+          "why": "Il polinomio è intero, quindi si applicano linearità e regola della potenza. Si valuta poi la derivata nel punto richiesto.",
+          "wrong": [
+            "7",
+            "14",
+            "-13"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Parametri nelle equazioni di Cauchy-Riemann",
+      "anchor": "cauchy-riemann",
+      "cases": [
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=1x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=1,\\quad b=2",
+          "steps": "u_x=2x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=2,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=1,\\quad b=1",
+            "a=-1,\\quad b=2",
+            "a=2,\\quad b=1"
+          ]
+        },
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=2x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=2,\\quad b=4",
+          "steps": "u_x=4x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=4,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=2,\\quad b=2",
+            "a=-2,\\quad b=4",
+            "a=4,\\quad b=2"
+          ]
+        },
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=3x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=3,\\quad b=6",
+          "steps": "u_x=6x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=6,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=3,\\quad b=3",
+            "a=-3,\\quad b=6",
+            "a=6,\\quad b=3"
+          ]
+        },
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=4x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=4,\\quad b=8",
+          "steps": "u_x=8x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=8,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=4,\\quad b=4",
+            "a=-4,\\quad b=8",
+            "a=8,\\quad b=4"
+          ]
+        },
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=5x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=5,\\quad b=10",
+          "steps": "u_x=10x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=10,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=5,\\quad b=5",
+            "a=-5,\\quad b=10",
+            "a=10,\\quad b=5"
+          ]
+        },
+        {
+          "q": "Per quali parametri reali $a,b$ la funzione $f(x+iy)=6x^2-ay^2+ibxy$ è olomorfa su $\\mathbb C$?",
+          "a": "a=6,\\quad b=12",
+          "steps": "u_x=12x,\\quad v_y=bx,\\quad u_y=-2ay,\\quad -v_x=-by.\\qquad b=12,\\quad 2a=b.",
+          "why": "Le componenti sono polinomi reali e quindi sono di classe C¹. Le due equazioni devono valere per ogni x e y; confrontando i coefficienti si ottengono entrambi i parametri.",
+          "wrong": [
+            "a=6,\\quad b=6",
+            "a=-6,\\quad b=12",
+            "a=12,\\quad b=6"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Coniugate armoniche di polinomi",
+      "anchor": "armoniche",
+      "cases": [
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=1(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=2xy",
+          "steps": "v_y=u_x=2x,\\quad v=2xy+C(x).\\qquad v_x=2y+C'(x)=-u_y=2y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-2xy",
+            "v(x,y)=1(x^2+y^2)",
+            "v(x,y)=1xy"
+          ]
+        },
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=2(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=4xy",
+          "steps": "v_y=u_x=4x,\\quad v=4xy+C(x).\\qquad v_x=4y+C'(x)=-u_y=4y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-4xy",
+            "v(x,y)=2(x^2+y^2)",
+            "v(x,y)=2xy"
+          ]
+        },
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=3(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=6xy",
+          "steps": "v_y=u_x=6x,\\quad v=6xy+C(x).\\qquad v_x=6y+C'(x)=-u_y=6y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-6xy",
+            "v(x,y)=3(x^2+y^2)",
+            "v(x,y)=3xy"
+          ]
+        },
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=4(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=8xy",
+          "steps": "v_y=u_x=8x,\\quad v=8xy+C(x).\\qquad v_x=8y+C'(x)=-u_y=8y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-8xy",
+            "v(x,y)=4(x^2+y^2)",
+            "v(x,y)=4xy"
+          ]
+        },
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=5(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=10xy",
+          "steps": "v_y=u_x=10x,\\quad v=10xy+C(x).\\qquad v_x=10y+C'(x)=-u_y=10y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-10xy",
+            "v(x,y)=5(x^2+y^2)",
+            "v(x,y)=5xy"
+          ]
+        },
+        {
+          "q": "Trovare la coniugata armonica $v$ di $u(x,y)=6(x^2-y^2)$ su $\\mathbb R^2$, con $v(0,0)=0$.",
+          "a": "v(x,y)=12xy",
+          "steps": "v_y=u_x=12x,\\quad v=12xy+C(x).\\qquad v_x=12y+C'(x)=-u_y=12y,\\quad C'=0.",
+          "why": "Si integra la prima equazione di Cauchy-Riemann rispetto a y e si usa la seconda per determinare la funzione residua di x. Il valore nell'origine annulla la costante.",
+          "wrong": [
+            "v(x,y)=-12xy",
+            "v(x,y)=6(x^2+y^2)",
+            "v(x,y)=6xy"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Equazioni con l'esponenziale complesso",
+      "anchor": "esponenziale-complesso",
+      "cases": [
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{1}$.",
+          "a": "z=1+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{1},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-1+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=1+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=1+i\\pi\\quad\\text{soltanto}"
+          ]
+        },
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{2}$.",
+          "a": "z=2+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{2},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-2+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=2+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=2+i\\pi\\quad\\text{soltanto}"
+          ]
+        },
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{3}$.",
+          "a": "z=3+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{3},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-3+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=3+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=3+i\\pi\\quad\\text{soltanto}"
+          ]
+        },
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{4}$.",
+          "a": "z=4+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{4},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-4+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=4+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=4+i\\pi\\quad\\text{soltanto}"
+          ]
+        },
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{5}$.",
+          "a": "z=5+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{5},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-5+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=5+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=5+i\\pi\\quad\\text{soltanto}"
+          ]
+        },
+        {
+          "q": "Risolvere in $\\mathbb C$ l'equazione $e^z=-e^{6}$.",
+          "a": "z=6+i(2m+1)\\pi,\\quad m\\in\\mathbb Z",
+          "steps": "e^{x+iy}=e^x(\\cos y+i\\sin y),\\quad e^x=e^{6},\\quad y=\\pi+2m\\pi.",
+          "why": "Il modulo determina la parte reale. L'argomento di un numero reale negativo è un multiplo dispari di π, quindi la periodicità fornisce tutte le soluzioni.",
+          "wrong": [
+            "z=-6+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=6+2m\\pi i,\\quad m\\in\\mathbb Z",
+            "z=6+i\\pi\\quad\\text{soltanto}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Valori del logaritmo principale",
+      "anchor": "logaritmo",
+      "cases": [
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{1}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "1+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{1},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{1})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-1+\\frac{3\\pi i}4",
+            "1-\\frac{\\pi i}4",
+            "1+\\frac{11\\pi i}4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{2}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "2+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{2},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{2})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-2+\\frac{3\\pi i}4",
+            "2-\\frac{\\pi i}4",
+            "2+\\frac{11\\pi i}4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{3}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "3+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{3},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{3})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-3+\\frac{3\\pi i}4",
+            "3-\\frac{\\pi i}4",
+            "3+\\frac{11\\pi i}4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{4}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "4+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{4},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{4})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-4+\\frac{3\\pi i}4",
+            "4-\\frac{\\pi i}4",
+            "4+\\frac{11\\pi i}4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{5}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "5+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{5},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{5})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-5+\\frac{3\\pi i}4",
+            "5-\\frac{\\pi i}4",
+            "5+\\frac{11\\pi i}4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Log}\\!\\left(e^{6}e^{3\\pi i/4}\\right)$ usando l'argomento principale in $(-\\pi,\\pi)$.",
+          "a": "6+\\frac{3\\pi i}4",
+          "steps": "|z|=e^{6},\\quad \\operatorname{Arg}z=\\frac{3\\pi}4,\\qquad \\operatorname{Log}z=\\log(e^{6})+i\\frac{3\\pi}4.",
+          "why": "L'angolo fornito appartiene già all'intervallo della determinazione principale. Si somma il logaritmo reale del modulo alla parte immaginaria data dall'argomento.",
+          "wrong": [
+            "-6+\\frac{3\\pi i}4",
+            "6-\\frac{\\pi i}4",
+            "6+\\frac{11\\pi i}4"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Derivabilità isolata",
+      "anchor": "cauchy-riemann",
+      "cases": [
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{2}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{1},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{2}}{h}\\right|=|h|^{1}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        },
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{4}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{2},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{4}}{h}\\right|=|h|^{3}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        },
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{6}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{3},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{6}}{h}\\right|=|h|^{5}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        },
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{8}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{4},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{8}}{h}\\right|=|h|^{7}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        },
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{10}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{5},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{10}}{h}\\right|=|h|^{9}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        },
+        {
+          "q": "Studiare la derivabilità complessa di $f(z)=|z|^{12}$ e calcolare la derivata dove esiste.",
+          "a": "\\text{Solo in }z=0,\\qquad f'(0)=0",
+          "steps": "u=(x^2+y^2)^{6},\\ v=0.\\qquad \\nabla u=0\\iff(x,y)=(0,0).\\qquad \\left|\\frac{|h|^{12}}{h}\\right|=|h|^{11}\\to0.",
+          "why": "Poiché la parte immaginaria è nulla, Cauchy-Riemann richiede entrambe le derivate di u nulle. Ciò accade soltanto nell'origine. Il rapporto incrementale verifica direttamente la sufficienza in quel punto.",
+          "wrong": [
+            "\\text{In ogni punto, con derivata }0",
+            "\\text{In nessun punto}",
+            "\\text{Solo in }z=0,\\qquad f'(0)=1"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Fattori locali di dilatazione",
+      "anchor": "conformi",
+      "cases": [
+        {
+          "q": "Per $f(z)=z^{2}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "4",
+          "steps": "f'(z)=2z^{1},\\qquad |f'(2)|=2\\cdot2^{1}=4.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "6",
+            "8",
+            "-4"
+          ]
+        },
+        {
+          "q": "Per $f(z)=z^{3}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "12",
+          "steps": "f'(z)=3z^{2},\\qquad |f'(2)|=3\\cdot2^{2}=12.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "14",
+            "24",
+            "-12"
+          ]
+        },
+        {
+          "q": "Per $f(z)=z^{4}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "32",
+          "steps": "f'(z)=4z^{3},\\qquad |f'(2)|=4\\cdot2^{3}=32.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "34",
+            "64",
+            "-32"
+          ]
+        },
+        {
+          "q": "Per $f(z)=z^{5}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "80",
+          "steps": "f'(z)=5z^{4},\\qquad |f'(2)|=5\\cdot2^{4}=80.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "82",
+            "160",
+            "-80"
+          ]
+        },
+        {
+          "q": "Per $f(z)=z^{6}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "192",
+          "steps": "f'(z)=6z^{5},\\qquad |f'(2)|=6\\cdot2^{5}=192.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "194",
+            "384",
+            "-192"
+          ]
+        },
+        {
+          "q": "Per $f(z)=z^{7}$, calcolare il fattore locale di dilatazione nel punto $z_0=2$.",
+          "a": "448",
+          "steps": "f'(z)=7z^{6},\\qquad |f'(2)|=7\\cdot2^{6}=448.",
+          "why": "Il fattore di dilatazione è il modulo della derivata, che nel punto scelto è reale positivo e diverso da zero. La trasformazione è quindi conforme localmente.",
+          "wrong": [
+            "450",
+            "896",
+            "-448"
+          ]
+        }
+      ]
+    }
+  ],
+  "integrali-complessi-e-residui": [
+    {
+      "title": "Integrali su segmenti mediante primitive",
+      "anchor": "cauchy",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_\\gamma z^{1}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{4}{2}",
+          "steps": "F(z)=\\frac{z^{2}}{2},\\qquad \\int_\\gamma z^{1}dz=F(2)-F(0)=\\frac{2^{2}}{2}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{4}{2}",
+            "\\frac{4}{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_\\gamma z^{2}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{8}{3}",
+          "steps": "F(z)=\\frac{z^{3}}{3},\\qquad \\int_\\gamma z^{2}dz=F(2)-F(0)=\\frac{2^{3}}{3}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{8}{3}",
+            "\\frac{8}{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_\\gamma z^{3}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{16}{4}",
+          "steps": "F(z)=\\frac{z^{4}}{4},\\qquad \\int_\\gamma z^{3}dz=F(2)-F(0)=\\frac{2^{4}}{4}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{16}{4}",
+            "\\frac{16}{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_\\gamma z^{4}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{32}{5}",
+          "steps": "F(z)=\\frac{z^{5}}{5},\\qquad \\int_\\gamma z^{4}dz=F(2)-F(0)=\\frac{2^{5}}{5}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{32}{5}",
+            "\\frac{32}{6}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_\\gamma z^{5}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{64}{6}",
+          "steps": "F(z)=\\frac{z^{6}}{6},\\qquad \\int_\\gamma z^{5}dz=F(2)-F(0)=\\frac{2^{6}}{6}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{64}{6}",
+            "\\frac{64}{7}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_\\gamma z^{6}\\,dz$, dove $\\gamma$ è il segmento orientato da $0$ a $2$.",
+          "a": "\\frac{128}{7}",
+          "steps": "F(z)=\\frac{z^{7}}{7},\\qquad \\int_\\gamma z^{6}dz=F(2)-F(0)=\\frac{2^{7}}{7}.",
+          "why": "Il polinomio ammette una primitiva intera. La differenza dei valori agli estremi incorpora il verso del segmento.",
+          "wrong": [
+            "-\\frac{128}{7}",
+            "\\frac{128}{8}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Applicazioni della formula di Cauchy alle derivate",
+      "anchor": "formula-cauchy",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{1z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "1\\pi i",
+          "steps": "f''(0)=1,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=1\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "2\\pi i",
+            "-1\\pi i",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{2z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "4\\pi i",
+          "steps": "f''(0)=4,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=4\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "8\\pi i",
+            "-4\\pi i",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{3z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "9\\pi i",
+          "steps": "f''(0)=9,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=9\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "18\\pi i",
+            "-9\\pi i",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{4z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "16\\pi i",
+          "steps": "f''(0)=16,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=16\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "32\\pi i",
+            "-16\\pi i",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{5z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "25\\pi i",
+          "steps": "f''(0)=25,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=25\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "50\\pi i",
+            "-25\\pi i",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{|z|=1}\\dfrac{e^{6z}}{z^3}\\,dz$, con orientazione antioraria.",
+          "a": "36\\pi i",
+          "steps": "f''(0)=36,\\qquad \\int_{|z|=1}\\frac{f(z)}{z^3}dz=\\frac{2\\pi i}{2!}f''(0)=36\\pi i.",
+          "why": "L'esponenziale è intero e il punto zero è interno al cammino. Il denominatore di grado tre richiede la derivata seconda e il fattore 2!.",
+          "wrong": [
+            "72\\pi i",
+            "-36\\pi i",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Residui di poli semplici",
+      "anchor": "singolarita",
+      "cases": [
+        {
+          "q": "Calcolare il residuo in $z=i1$ di $f(z)=\\dfrac1{z^2+1}$.",
+          "a": "\\frac1{2i}",
+          "steps": "h(z)=z^2+1,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i1)=\\frac1{h'(i1)}=\\frac1{2i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{2i}",
+            "\\frac1{1}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare il residuo in $z=i2$ di $f(z)=\\dfrac1{z^2+4}$.",
+          "a": "\\frac1{4i}",
+          "steps": "h(z)=z^2+4,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i2)=\\frac1{h'(i2)}=\\frac1{4i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{4i}",
+            "\\frac1{2}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare il residuo in $z=i3$ di $f(z)=\\dfrac1{z^2+9}$.",
+          "a": "\\frac1{6i}",
+          "steps": "h(z)=z^2+9,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i3)=\\frac1{h'(i3)}=\\frac1{6i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{6i}",
+            "\\frac1{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare il residuo in $z=i4$ di $f(z)=\\dfrac1{z^2+16}$.",
+          "a": "\\frac1{8i}",
+          "steps": "h(z)=z^2+16,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i4)=\\frac1{h'(i4)}=\\frac1{8i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{8i}",
+            "\\frac1{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare il residuo in $z=i5$ di $f(z)=\\dfrac1{z^2+25}$.",
+          "a": "\\frac1{10i}",
+          "steps": "h(z)=z^2+25,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i5)=\\frac1{h'(i5)}=\\frac1{10i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{10i}",
+            "\\frac1{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare il residuo in $z=i6$ di $f(z)=\\dfrac1{z^2+36}$.",
+          "a": "\\frac1{12i}",
+          "steps": "h(z)=z^2+36,\\quad h'(z)=2z,\\qquad \\operatorname{Res}(f,i6)=\\frac1{h'(i6)}=\\frac1{12i}.",
+          "why": "La radice i volte il parametro è semplice perché la derivata del denominatore è diversa da zero. Si applica la formula del rapporto.",
+          "wrong": [
+            "-\\frac1{12i}",
+            "\\frac1{6}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Residui di poli multipli",
+      "anchor": "singolarita",
+      "cases": [
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{1z}}{z^2},0\\right)$.",
+          "a": "1",
+          "steps": "\\frac{e^{1z}}{z^2}=\\frac1{z^2}+\\frac{1}z+\\cdots,\\qquad c_{-1}=1.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-1",
+            "2",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{2z}}{z^2},0\\right)$.",
+          "a": "2",
+          "steps": "\\frac{e^{2z}}{z^2}=\\frac1{z^2}+\\frac{2}z+\\cdots,\\qquad c_{-1}=2.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-2",
+            "4",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{3z}}{z^2},0\\right)$.",
+          "a": "3",
+          "steps": "\\frac{e^{3z}}{z^2}=\\frac1{z^2}+\\frac{3}z+\\cdots,\\qquad c_{-1}=3.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-3",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{4z}}{z^2},0\\right)$.",
+          "a": "4",
+          "steps": "\\frac{e^{4z}}{z^2}=\\frac1{z^2}+\\frac{4}z+\\cdots,\\qquad c_{-1}=4.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-4",
+            "8",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{5z}}{z^2},0\\right)$.",
+          "a": "5",
+          "steps": "\\frac{e^{5z}}{z^2}=\\frac1{z^2}+\\frac{5}z+\\cdots,\\qquad c_{-1}=5.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-5",
+            "10",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\operatorname{Res}\\!\\left(\\dfrac{e^{6z}}{z^2},0\\right)$.",
+          "a": "6",
+          "steps": "\\frac{e^{6z}}{z^2}=\\frac1{z^2}+\\frac{6}z+\\cdots,\\qquad c_{-1}=6.",
+          "why": "La singolarità è un polo doppio. Il residuo è il coefficiente della potenza meno uno, ottenuto dal termine lineare dell'esponenziale.",
+          "wrong": [
+            "-6",
+            "12",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Coefficienti di Laurent in un disco bucato",
+      "anchor": "laurent",
+      "cases": [
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-2)}$ per $0<|z|<2$.",
+          "a": "-\\frac1{2}",
+          "steps": "\\frac1{z(z-2)}=-\\frac1{2z}\\frac1{1-\\frac z{2}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{2^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{2}",
+            "-\\frac1{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-3)}$ per $0<|z|<3$.",
+          "a": "-\\frac1{3}",
+          "steps": "\\frac1{z(z-3)}=-\\frac1{3z}\\frac1{1-\\frac z{3}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{3^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{3}",
+            "-\\frac1{9}",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-4)}$ per $0<|z|<4$.",
+          "a": "-\\frac1{4}",
+          "steps": "\\frac1{z(z-4)}=-\\frac1{4z}\\frac1{1-\\frac z{4}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{4^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{4}",
+            "-\\frac1{16}",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-5)}$ per $0<|z|<5$.",
+          "a": "-\\frac1{5}",
+          "steps": "\\frac1{z(z-5)}=-\\frac1{5z}\\frac1{1-\\frac z{5}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{5^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{5}",
+            "-\\frac1{25}",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-6)}$ per $0<|z|<6$.",
+          "a": "-\\frac1{6}",
+          "steps": "\\frac1{z(z-6)}=-\\frac1{6z}\\frac1{1-\\frac z{6}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{6^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{6}",
+            "-\\frac1{36}",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il coefficiente di $z^{-1}$ nello sviluppo di $\\dfrac1{z(z-7)}$ per $0<|z|<7$.",
+          "a": "-\\frac1{7}",
+          "steps": "\\frac1{z(z-7)}=-\\frac1{7z}\\frac1{1-\\frac z{7}}=-\\sum_{n=0}^\\infty\\frac{z^{n-1}}{7^{n+1}}.",
+          "why": "Nell'anello dato il rapporto della serie geometrica ha modulo minore di uno. Il termine con esponente meno uno corrisponde a n uguale a zero.",
+          "wrong": [
+            "\\frac1{7}",
+            "-\\frac1{49}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Integrali razionali sulla retta",
+      "anchor": "residui",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+1}$.",
+          "a": "\\frac\\pi{1}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+1},i1\\right)=\\frac1{2i}.\\qquad 2\\pi i\\frac1{2i}=\\frac\\pi{1}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{1}",
+            "-\\frac\\pi{1}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+4}$.",
+          "a": "\\frac\\pi{2}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+4},i2\\right)=\\frac1{4i}.\\qquad 2\\pi i\\frac1{4i}=\\frac\\pi{2}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{2}",
+            "-\\frac\\pi{2}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+9}$.",
+          "a": "\\frac\\pi{3}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+9},i3\\right)=\\frac1{6i}.\\qquad 2\\pi i\\frac1{6i}=\\frac\\pi{3}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{3}",
+            "-\\frac\\pi{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+16}$.",
+          "a": "\\frac\\pi{4}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+16},i4\\right)=\\frac1{8i}.\\qquad 2\\pi i\\frac1{8i}=\\frac\\pi{4}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{4}",
+            "-\\frac\\pi{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+25}$.",
+          "a": "\\frac\\pi{5}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+25},i5\\right)=\\frac1{10i}.\\qquad 2\\pi i\\frac1{10i}=\\frac\\pi{5}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{5}",
+            "-\\frac\\pi{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{-\\infty}^{\\infty}\\dfrac{dx}{x^2+36}$.",
+          "a": "\\frac\\pi{6}",
+          "steps": "\\operatorname{Res}\\left(\\frac1{z^2+36},i6\\right)=\\frac1{12i}.\\qquad 2\\pi i\\frac1{12i}=\\frac\\pi{6}.",
+          "why": "Si chiude nel semipiano superiore. Sull'arco di raggio R il modulo dell'integrale è al più πR diviso R² meno il quadrato del parametro, quindi tende a zero. Resta il solo polo superiore.",
+          "wrong": [
+            "\\frac{2\\pi}{6}",
+            "-\\frac\\pi{6}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Conteggi di zeri con Rouché",
+      "anchor": "argomento-rouche",
+      "cases": [
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{3}+z+1$ nel disco $|z|<2$?",
+          "a": "3",
+          "steps": "|z+1|\\le3<2^{3}=|z^{3}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "2",
+            "4",
+            "0"
+          ]
+        },
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{4}+z+1$ nel disco $|z|<2$?",
+          "a": "4",
+          "steps": "|z+1|\\le3<2^{4}=|z^{4}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "3",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{5}+z+1$ nel disco $|z|<2$?",
+          "a": "5",
+          "steps": "|z+1|\\le3<2^{5}=|z^{5}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "4",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{6}+z+1$ nel disco $|z|<2$?",
+          "a": "6",
+          "steps": "|z+1|\\le3<2^{6}=|z^{6}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "5",
+            "7",
+            "0"
+          ]
+        },
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{7}+z+1$ nel disco $|z|<2$?",
+          "a": "7",
+          "steps": "|z+1|\\le3<2^{7}=|z^{7}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "6",
+            "8",
+            "0"
+          ]
+        },
+        {
+          "q": "Quanti zeri, contati con molteplicità, ha $p(z)=z^{8}+z+1$ nel disco $|z|<2$?",
+          "a": "8",
+          "steps": "|z+1|\\le3<2^{8}=|z^{8}|\\quad(|z|=2).",
+          "why": "Rouché confronta il polinomio con la sua potenza principale sul bordo. La potenza ha nell'origine tanti zeri quante sono le unità del suo grado, contati con molteplicità.",
+          "wrong": [
+            "7",
+            "9",
+            "0"
+          ]
+        }
+      ]
+    }
+  ],
+  "misura-e-integrale-di-lebesgue": [
+    {
+      "title": "Misure di unioni di intervalli",
+      "anchor": "lebesgue",
+      "cases": [
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,3]\\cup[2,6]$.",
+          "a": "6",
+          "steps": "[0,3]\\cup[2,6]=[0,6],\\qquad m=6.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "7",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,4]\\cup[3,8]$.",
+          "a": "8",
+          "steps": "[0,4]\\cup[3,8]=[0,8],\\qquad m=8.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "9",
+            "4",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,5]\\cup[4,10]$.",
+          "a": "10",
+          "steps": "[0,5]\\cup[4,10]=[0,10],\\qquad m=10.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "11",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,6]\\cup[5,12]$.",
+          "a": "12",
+          "steps": "[0,6]\\cup[5,12]=[0,12],\\qquad m=12.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "13",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,7]\\cup[6,14]$.",
+          "a": "14",
+          "steps": "[0,7]\\cup[6,14]=[0,14],\\qquad m=14.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "15",
+            "7",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare la misura di Lebesgue di $[0,8]\\cup[7,16]$.",
+          "a": "16",
+          "steps": "[0,8]\\cup[7,16]=[0,16],\\qquad m=16.",
+          "why": "I due intervalli si sovrappongono e la loro unione è un intervallo. La misura coincide con la lunghezza, quindi il tratto comune non viene contato due volte.",
+          "wrong": [
+            "17",
+            "8",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Integrali di funzioni semplici",
+      "anchor": "semplici",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(1\\mathbf1_{[0,2]}+2\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "8",
+          "steps": "\\int f\\,dx=1\\cdot2+2\\cdot3=8.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "3",
+            "7",
+            "9"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(2\\mathbf1_{[0,2]}+3\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "13",
+          "steps": "\\int f\\,dx=2\\cdot2+3\\cdot3=13.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "5",
+            "12",
+            "14"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(3\\mathbf1_{[0,2]}+4\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "18",
+          "steps": "\\int f\\,dx=3\\cdot2+4\\cdot3=18.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "7",
+            "17",
+            "19"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(4\\mathbf1_{[0,2]}+5\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "23",
+          "steps": "\\int f\\,dx=4\\cdot2+5\\cdot3=23.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "9",
+            "22",
+            "24"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(5\\mathbf1_{[0,2]}+6\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "28",
+          "steps": "\\int f\\,dx=5\\cdot2+6\\cdot3=28.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "11",
+            "27",
+            "29"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_{\\mathbb R}(6\\mathbf1_{[0,2]}+7\\mathbf1_{(2,5]})\\,dx$.",
+          "a": "33",
+          "steps": "\\int f\\,dx=6\\cdot2+7\\cdot3=33.",
+          "why": "Gli insiemi sono disgiunti e hanno misure due e tre. La definizione di integrale semplice moltiplica ogni valore per la misura del corrispondente insieme.",
+          "wrong": [
+            "13",
+            "32",
+            "34"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Modifiche su insiemi nulli",
+      "anchor": "integrale-lebesgue",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_0^1(x^{1}+3\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{2}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{1}dx=\\frac1{2}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "3+\\frac1{2}",
+            "\\frac1{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^1(x^{2}+4\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{3}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{2}dx=\\frac1{3}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "4+\\frac1{3}",
+            "\\frac1{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^1(x^{3}+5\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{4}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{3}dx=\\frac1{4}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "5+\\frac1{4}",
+            "\\frac1{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^1(x^{4}+6\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{5}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{4}dx=\\frac1{5}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "6+\\frac1{5}",
+            "\\frac1{6}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^1(x^{5}+7\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{6}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{5}dx=\\frac1{6}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "7+\\frac1{6}",
+            "\\frac1{7}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^1(x^{6}+8\\mathbf1_{\\mathbb Q}(x))\\,dx$.",
+          "a": "\\frac1{7}",
+          "steps": "m(\\mathbb Q\\cap[0,1])=0,\\qquad \\int_0^1f\\,dx=\\int_0^1x^{6}dx=\\frac1{7}.",
+          "why": "L'indicatore dei razionali è nullo quasi ovunque. Il suo coefficiente non modifica l'integrale, che coincide con quello del polinomio.",
+          "wrong": [
+            "8+\\frac1{7}",
+            "\\frac1{8}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Limiti mediante convergenza dominata",
+      "anchor": "dominata",
+      "cases": [
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-1x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{1}",
+          "steps": "0\\le\\frac{e^{-1x}}{1+\\frac xn}\\le e^{-1x},\\qquad \\int_0^\\infty e^{-1x}dx=\\frac1{1}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "1",
+            "-\\frac1{1}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-2x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{2}",
+          "steps": "0\\le\\frac{e^{-2x}}{1+\\frac xn}\\le e^{-2x},\\qquad \\int_0^\\infty e^{-2x}dx=\\frac1{2}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "2",
+            "-\\frac1{2}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-3x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{3}",
+          "steps": "0\\le\\frac{e^{-3x}}{1+\\frac xn}\\le e^{-3x},\\qquad \\int_0^\\infty e^{-3x}dx=\\frac1{3}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "3",
+            "-\\frac1{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-4x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{4}",
+          "steps": "0\\le\\frac{e^{-4x}}{1+\\frac xn}\\le e^{-4x},\\qquad \\int_0^\\infty e^{-4x}dx=\\frac1{4}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "4",
+            "-\\frac1{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-5x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{5}",
+          "steps": "0\\le\\frac{e^{-5x}}{1+\\frac xn}\\le e^{-5x},\\qquad \\int_0^\\infty e^{-5x}dx=\\frac1{5}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "5",
+            "-\\frac1{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\lim_{n\\to\\infty}\\int_0^\\infty\\dfrac{e^{-6x}}{1+\\frac xn}\\,dx$.",
+          "a": "\\frac1{6}",
+          "steps": "0\\le\\frac{e^{-6x}}{1+\\frac xn}\\le e^{-6x},\\qquad \\int_0^\\infty e^{-6x}dx=\\frac1{6}.",
+          "why": "Il limite puntuale è l'esponenziale decrescente. La stessa funzione lo maggiora per ogni n ed è integrabile sulla semiretta. La convergenza dominata consente quindi lo scambio.",
+          "wrong": [
+            "6",
+            "-\\frac1{6}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Concentrazioni e lemma di Fatou",
+      "anchor": "fatou",
+      "cases": [
+        {
+          "q": "Per $f_n(x)=1n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(1,0)",
+          "steps": "\\int_0^1 f_n\\,dx=1n\\frac1n=1,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(1,1)",
+            "(0,1)"
+          ]
+        },
+        {
+          "q": "Per $f_n(x)=2n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(2,0)",
+          "steps": "\\int_0^1 f_n\\,dx=2n\\frac1n=2,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(2,2)",
+            "(0,2)"
+          ]
+        },
+        {
+          "q": "Per $f_n(x)=3n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(3,0)",
+          "steps": "\\int_0^1 f_n\\,dx=3n\\frac1n=3,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(3,3)",
+            "(0,3)"
+          ]
+        },
+        {
+          "q": "Per $f_n(x)=4n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(4,0)",
+          "steps": "\\int_0^1 f_n\\,dx=4n\\frac1n=4,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(4,4)",
+            "(0,4)"
+          ]
+        },
+        {
+          "q": "Per $f_n(x)=5n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(5,0)",
+          "steps": "\\int_0^1 f_n\\,dx=5n\\frac1n=5,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(5,5)",
+            "(0,5)"
+          ]
+        },
+        {
+          "q": "Per $f_n(x)=6n\\mathbf1_{(0,\\frac1n)}(x)$ su $(0,1)$, calcolare $\\lim_n\\int f_n$ e $\\int\\lim_n f_n$, in quest'ordine.",
+          "a": "(6,0)",
+          "steps": "\\int_0^1 f_n\\,dx=6n\\frac1n=6,\\qquad f_n(x)\\to0\\quad(x>0).",
+          "why": "Ogni punto positivo è fuori dal supporto quando n è grande. L'area resta però costante: Fatou fornisce una disuguaglianza stretta e la dominata non è applicabile.",
+          "wrong": [
+            "(0,0)",
+            "(6,6)",
+            "(0,6)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Integrali positivi su spazi prodotto",
+      "anchor": "fubini",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-1x-2y}\\,dy\\,dx$.",
+          "a": "\\frac1{2}",
+          "steps": "\\int_0^\\infty e^{-1x}dx\\int_0^\\infty e^{-2y}dy=\\frac1{1}\\frac1{2}=\\frac1{2}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{3}",
+            "2",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-2x-3y}\\,dy\\,dx$.",
+          "a": "\\frac1{6}",
+          "steps": "\\int_0^\\infty e^{-2x}dx\\int_0^\\infty e^{-3y}dy=\\frac1{2}\\frac1{3}=\\frac1{6}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{5}",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-3x-4y}\\,dy\\,dx$.",
+          "a": "\\frac1{12}",
+          "steps": "\\int_0^\\infty e^{-3x}dx\\int_0^\\infty e^{-4y}dy=\\frac1{3}\\frac1{4}=\\frac1{12}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{7}",
+            "12",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-4x-5y}\\,dy\\,dx$.",
+          "a": "\\frac1{20}",
+          "steps": "\\int_0^\\infty e^{-4x}dx\\int_0^\\infty e^{-5y}dy=\\frac1{4}\\frac1{5}=\\frac1{20}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{9}",
+            "20",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-5x-6y}\\,dy\\,dx$.",
+          "a": "\\frac1{30}",
+          "steps": "\\int_0^\\infty e^{-5x}dx\\int_0^\\infty e^{-6y}dy=\\frac1{5}\\frac1{6}=\\frac1{30}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{11}",
+            "30",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty\\int_0^\\infty e^{-6x-7y}\\,dy\\,dx$.",
+          "a": "\\frac1{42}",
+          "steps": "\\int_0^\\infty e^{-6x}dx\\int_0^\\infty e^{-7y}dy=\\frac1{6}\\frac1{7}=\\frac1{42}.",
+          "why": "L'integranda è non negativa e misurabile. Tonelli consente gli integrali iterati e la separazione delle variabili; i due integrali esponenziali sono finiti.",
+          "wrong": [
+            "\\frac1{13}",
+            "42",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Derivazioni sotto integrale",
+      "anchor": "parametri",
+      "cases": [
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-1x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{1}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=1.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{1}",
+            "\\frac2{1}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-2x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{4}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=2.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{4}",
+            "\\frac2{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-3x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{9}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=3.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{9}",
+            "\\frac2{9}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-4x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{16}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=4.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{16}",
+            "\\frac2{16}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-5x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{25}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=5.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{25}",
+            "\\frac2{25}",
+            "0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\int_0^\\infty x e^{-6x}\\,dx$ derivando rispetto a $a$ la formula $\\int_0^\\infty e^{-ax}dx=\\frac1a$.",
+          "a": "\\frac1{36}",
+          "steps": "-\\int_0^\\infty xe^{-ax}dx=-\\frac1{a^2},\\qquad a=6.",
+          "why": "Su un intorno compatto di un parametro positivo, il valore assoluto della derivata è maggiorato da x volte un esponenziale decrescente integrabile. La derivazione sotto integrale è quindi giustificata.",
+          "wrong": [
+            "-\\frac1{36}",
+            "\\frac2{36}",
+            "0"
+          ]
+        }
+      ]
+    }
+  ],
+  "spazi-lp-e-hilbert": [
+    {
+      "title": "Norme di monomi in L²",
+      "anchor": "spazi-lp",
+      "cases": [
+        {
+          "q": "Calcolare $\\|x^{1}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{3}}",
+          "steps": "\\|x^{1}\\|_2^2=\\int_0^1x^{2}dx=\\frac1{3}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{3}",
+            "\\frac1{\\sqrt{2}}",
+            "\\sqrt{3}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|x^{2}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{5}}",
+          "steps": "\\|x^{2}\\|_2^2=\\int_0^1x^{4}dx=\\frac1{5}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{5}",
+            "\\frac1{\\sqrt{3}}",
+            "\\sqrt{5}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|x^{3}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{7}}",
+          "steps": "\\|x^{3}\\|_2^2=\\int_0^1x^{6}dx=\\frac1{7}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{7}",
+            "\\frac1{\\sqrt{4}}",
+            "\\sqrt{7}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|x^{4}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{9}}",
+          "steps": "\\|x^{4}\\|_2^2=\\int_0^1x^{8}dx=\\frac1{9}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{9}",
+            "\\frac1{\\sqrt{5}}",
+            "\\sqrt{9}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|x^{5}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{11}}",
+          "steps": "\\|x^{5}\\|_2^2=\\int_0^1x^{10}dx=\\frac1{11}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{11}",
+            "\\frac1{\\sqrt{6}}",
+            "\\sqrt{11}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|x^{6}\\|_{L^2(0,1)}$.",
+          "a": "\\frac1{\\sqrt{13}}",
+          "steps": "\\|x^{6}\\|_2^2=\\int_0^1x^{12}dx=\\frac1{13}.",
+          "why": "La norma L² richiede l'integrale del quadrato del modulo e poi la radice. Il monomio è integrabile su questo intervallo.",
+          "wrong": [
+            "\\frac1{13}",
+            "\\frac1{\\sqrt{7}}",
+            "\\sqrt{13}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Appartenenza delle potenze singolari",
+      "anchor": "spazi-lp",
+      "cases": [
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{3}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<3",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{3}}dx<\\infty\\iff\\frac p{3}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le3",
+            "p>3",
+            "\\text{Ogni }p\\ge1"
+          ]
+        },
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{4}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<4",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{4}}dx<\\infty\\iff\\frac p{4}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le4",
+            "p>4",
+            "\\text{Ogni }p\\ge1"
+          ]
+        },
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{5}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<5",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{5}}dx<\\infty\\iff\\frac p{5}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le5",
+            "p>5",
+            "\\text{Ogni }p\\ge1"
+          ]
+        },
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{6}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<6",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{6}}dx<\\infty\\iff\\frac p{6}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le6",
+            "p>6",
+            "\\text{Ogni }p\\ge1"
+          ]
+        },
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{7}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<7",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{7}}dx<\\infty\\iff\\frac p{7}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le7",
+            "p>7",
+            "\\text{Ogni }p\\ge1"
+          ]
+        },
+        {
+          "q": "Per quali $p\\in[1,\\infty)$ la funzione $f(x)=x^{-\\frac1{8}}$ appartiene a $L^p(0,1)$?",
+          "a": "1\\le p<8",
+          "steps": "\\int_0^1|f|^pdx=\\int_0^1x^{-\\frac p{8}}dx<\\infty\\iff\\frac p{8}<1.",
+          "why": "L'integrale della potenza in zero converge se l'esponente è maggiore di meno uno. L'estremo superiore è escluso perché dà l'integrale di uno diviso x.",
+          "wrong": [
+            "1\\le p\\le8",
+            "p>8",
+            "\\text{Ogni }p\\ge1"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Norme di successioni concentrate",
+      "anchor": "convergenze-lp",
+      "cases": [
+        {
+          "q": "Calcolare $\\|n^{\\frac1{2}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{2}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{2}^{2}=n\\frac1n=1,\\qquad \\|f_n\\|_{2}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|n^{\\frac1{3}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{3}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{3}^{3}=n\\frac1n=1,\\qquad \\|f_n\\|_{3}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|n^{\\frac1{4}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{4}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{4}^{4}=n\\frac1n=1,\\qquad \\|f_n\\|_{4}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|n^{\\frac1{5}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{5}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{5}^{5}=n\\frac1n=1,\\qquad \\|f_n\\|_{5}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|n^{\\frac1{6}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{6}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{6}^{6}=n\\frac1n=1,\\qquad \\|f_n\\|_{6}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        },
+        {
+          "q": "Calcolare $\\|n^{\\frac1{7}}\\mathbf1_{(0,\\frac1n)}\\|_{L^{7}(0,1)}$ per ogni $n\\ge1$.",
+          "a": "1",
+          "steps": "\\|f_n\\|_{7}^{7}=n\\frac1n=1,\\qquad \\|f_n\\|_{7}=1.",
+          "why": "L'aumento dell'altezza compensa esattamente la diminuzione della misura del supporto. Il limite puntuale è zero, ma la norma non tende a zero.",
+          "wrong": [
+            "0",
+            "n",
+            "\\frac1n"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Proiezioni sulle costanti",
+      "anchor": "proiezione",
+      "cases": [
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{1}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{2}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{1}dx-c=0,\\qquad c=\\frac1{2}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{3}",
+            "P f=0",
+            "P f=2"
+          ]
+        },
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{2}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{3}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{2}dx-c=0,\\qquad c=\\frac1{3}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{5}",
+            "P f=0",
+            "P f=3"
+          ]
+        },
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{3}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{4}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{3}dx-c=0,\\qquad c=\\frac1{4}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{7}",
+            "P f=0",
+            "P f=4"
+          ]
+        },
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{4}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{5}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{4}dx-c=0,\\qquad c=\\frac1{5}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{9}",
+            "P f=0",
+            "P f=5"
+          ]
+        },
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{5}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{6}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{5}dx-c=0,\\qquad c=\\frac1{6}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{11}",
+            "P f=0",
+            "P f=6"
+          ]
+        },
+        {
+          "q": "Trovare la proiezione ortogonale di $f(x)=x^{6}$ sul sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "P f=\\frac1{7}",
+          "steps": "\\langle f-c,1\\rangle=\\int_0^1x^{6}dx-c=0,\\qquad c=\\frac1{7}.",
+          "why": "L'errore deve essere ortogonale alla funzione costante uno. Poiché l'intervallo ha misura uno, la costante migliore è l'integrale del dato.",
+          "wrong": [
+            "P f=\\frac1{13}",
+            "P f=0",
+            "P f=7"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Errori quadratici di proiezione",
+      "anchor": "proiezione",
+      "cases": [
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{1}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{3}-\\frac1{4}",
+          "steps": "c=\\frac1{2},\\qquad \\int_0^1(x^{1}-c)^2dx=\\frac1{3}-\\frac2{4}+\\frac1{4}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{3}+\\frac1{4}",
+            "0",
+            "\\frac1{4}"
+          ]
+        },
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{2}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{5}-\\frac1{9}",
+          "steps": "c=\\frac1{3},\\qquad \\int_0^1(x^{2}-c)^2dx=\\frac1{5}-\\frac2{9}+\\frac1{9}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{5}+\\frac1{9}",
+            "0",
+            "\\frac1{9}"
+          ]
+        },
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{3}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{7}-\\frac1{16}",
+          "steps": "c=\\frac1{4},\\qquad \\int_0^1(x^{3}-c)^2dx=\\frac1{7}-\\frac2{16}+\\frac1{16}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{7}+\\frac1{16}",
+            "0",
+            "\\frac1{16}"
+          ]
+        },
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{4}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{9}-\\frac1{25}",
+          "steps": "c=\\frac1{5},\\qquad \\int_0^1(x^{4}-c)^2dx=\\frac1{9}-\\frac2{25}+\\frac1{25}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{9}+\\frac1{25}",
+            "0",
+            "\\frac1{25}"
+          ]
+        },
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{5}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{11}-\\frac1{36}",
+          "steps": "c=\\frac1{6},\\qquad \\int_0^1(x^{5}-c)^2dx=\\frac1{11}-\\frac2{36}+\\frac1{36}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{11}+\\frac1{36}",
+            "0",
+            "\\frac1{36}"
+          ]
+        },
+        {
+          "q": "Calcolare il quadrato della distanza di $x^{6}$ dal sottospazio delle costanti in $L^2(0,1)$.",
+          "a": "\\frac1{13}-\\frac1{49}",
+          "steps": "c=\\frac1{7},\\qquad \\int_0^1(x^{6}-c)^2dx=\\frac1{13}-\\frac2{49}+\\frac1{49}.",
+          "why": "Si espande il quadrato dell'errore rispetto alla proiezione. Il termine misto contiene l'integrale del monomio; resta la norma quadrata del dato meno quella della proiezione.",
+          "wrong": [
+            "\\frac1{13}+\\frac1{49}",
+            "0",
+            "\\frac1{49}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Norme di funzionali con Riesz",
+      "anchor": "riesz-debole",
+      "cases": [
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{1}\\,dx$.",
+          "a": "\\frac1{\\sqrt{3}}",
+          "steps": "\\ell(f)=\\langle f,x^{1}\\rangle,\\qquad \\|\\ell\\|=\\|x^{1}\\|_2=\\left(\\frac1{3}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{3}",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{2}\\,dx$.",
+          "a": "\\frac1{\\sqrt{5}}",
+          "steps": "\\ell(f)=\\langle f,x^{2}\\rangle,\\qquad \\|\\ell\\|=\\|x^{2}\\|_2=\\left(\\frac1{5}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{5}",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{3}\\,dx$.",
+          "a": "\\frac1{\\sqrt{7}}",
+          "steps": "\\ell(f)=\\langle f,x^{3}\\rangle,\\qquad \\|\\ell\\|=\\|x^{3}\\|_2=\\left(\\frac1{7}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{7}",
+            "7",
+            "0"
+          ]
+        },
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{4}\\,dx$.",
+          "a": "\\frac1{\\sqrt{9}}",
+          "steps": "\\ell(f)=\\langle f,x^{4}\\rangle,\\qquad \\|\\ell\\|=\\|x^{4}\\|_2=\\left(\\frac1{9}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{9}",
+            "9",
+            "0"
+          ]
+        },
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{5}\\,dx$.",
+          "a": "\\frac1{\\sqrt{11}}",
+          "steps": "\\ell(f)=\\langle f,x^{5}\\rangle,\\qquad \\|\\ell\\|=\\|x^{5}\\|_2=\\left(\\frac1{11}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{11}",
+            "11",
+            "0"
+          ]
+        },
+        {
+          "q": "In $L^2(0,1)$, calcolare la norma del funzionale $\\ell(f)=\\int_0^1 f(x)x^{6}\\,dx$.",
+          "a": "\\frac1{\\sqrt{13}}",
+          "steps": "\\ell(f)=\\langle f,x^{6}\\rangle,\\qquad \\|\\ell\\|=\\|x^{6}\\|_2=\\left(\\frac1{13}\\right)^{\\frac12}.",
+          "why": "Il teorema di Riesz identifica la norma del funzionale con quella del vettore rappresentante. L'uguaglianza nella stima di Cauchy-Schwarz si realizza con un multiplo di questo vettore.",
+          "wrong": [
+            "\\frac1{13}",
+            "13",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Energie da coefficienti ortonormali",
+      "anchor": "basi-hilbert",
+      "cases": [
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|1e_1+2e_2\\|^2$.",
+          "a": "5",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|1e_1+2e_2\\|^2=1+4=5.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "9",
+            "3",
+            "6"
+          ]
+        },
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|2e_1+3e_2\\|^2$.",
+          "a": "13",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|2e_1+3e_2\\|^2=4+9=13.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "25",
+            "5",
+            "14"
+          ]
+        },
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|3e_1+4e_2\\|^2$.",
+          "a": "25",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|3e_1+4e_2\\|^2=9+16=25.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "49",
+            "7",
+            "26"
+          ]
+        },
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|4e_1+5e_2\\|^2$.",
+          "a": "41",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|4e_1+5e_2\\|^2=16+25=41.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "81",
+            "9",
+            "42"
+          ]
+        },
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|5e_1+6e_2\\|^2$.",
+          "a": "61",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|5e_1+6e_2\\|^2=25+36=61.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "121",
+            "11",
+            "62"
+          ]
+        },
+        {
+          "q": "Per due vettori ortonormali $e_1,e_2$ in un Hilbert, calcolare $\\|6e_1+7e_2\\|^2$.",
+          "a": "85",
+          "steps": "\\langle e_1,e_2\\rangle=0,\\qquad \\|6e_1+7e_2\\|^2=36+49=85.",
+          "why": "Il prodotto misto si annulla per ortogonalità. I vettori hanno norma uno, quindi restano i quadrati dei coefficienti.",
+          "wrong": [
+            "169",
+            "13",
+            "86"
+          ]
+        }
+      ]
+    }
+  ],
+  "banach-e-operatori": [
+    {
+      "title": "Norme di operatori di moltiplicazione",
+      "anchor": "operatori",
+      "cases": [
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(1+x)f(x)$.",
+          "a": "2",
+          "steps": "\\|Tf\\|_\\infty\\le(1+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=2.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "1",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(2+x)f(x)$.",
+          "a": "3",
+          "steps": "\\|Tf\\|_\\infty\\le(2+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=3.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "2",
+            "4",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(3+x)f(x)$.",
+          "a": "4",
+          "steps": "\\|Tf\\|_\\infty\\le(3+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=4.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "3",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(4+x)f(x)$.",
+          "a": "5",
+          "steps": "\\|Tf\\|_\\infty\\le(4+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=5.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "4",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(5+x)f(x)$.",
+          "a": "6",
+          "steps": "\\|Tf\\|_\\infty\\le(5+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=6.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "5",
+            "7",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=(6+x)f(x)$.",
+          "a": "7",
+          "steps": "\\|Tf\\|_\\infty\\le(6+1)\\|f\\|_\\infty.\\qquad f=1:\\ \\|Tf\\|_\\infty=7.",
+          "why": "La maggiorazione deriva dal massimo del moltiplicatore. La funzione costante uno ha norma uno e raggiunge il limite superiore in x uguale a uno, quindi la stima è esatta.",
+          "wrong": [
+            "6",
+            "8",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Norme di operatori integrali",
+      "anchor": "operatori",
+      "cases": [
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{1}f(t)\\,dt$.",
+          "a": "\\frac1{2}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{2}}{2}\\le\\frac{\\|f\\|_\\infty}{2}.\\qquad T1(1)=\\frac1{2}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "2",
+            "\\frac1{3}",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{2}f(t)\\,dt$.",
+          "a": "\\frac1{3}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{3}}{3}\\le\\frac{\\|f\\|_\\infty}{3}.\\qquad T1(1)=\\frac1{3}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "3",
+            "\\frac1{4}",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{3}f(t)\\,dt$.",
+          "a": "\\frac1{4}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{4}}{4}\\le\\frac{\\|f\\|_\\infty}{4}.\\qquad T1(1)=\\frac1{4}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "4",
+            "\\frac1{5}",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{4}f(t)\\,dt$.",
+          "a": "\\frac1{5}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{5}}{5}\\le\\frac{\\|f\\|_\\infty}{5}.\\qquad T1(1)=\\frac1{5}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "5",
+            "\\frac1{6}",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{5}f(t)\\,dt$.",
+          "a": "\\frac1{6}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{6}}{6}\\le\\frac{\\|f\\|_\\infty}{6}.\\qquad T1(1)=\\frac1{6}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "6",
+            "\\frac1{7}",
+            "0"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$ con norma uniforme, calcolare la norma di $Tf(x)=\\int_0^x t^{6}f(t)\\,dt$.",
+          "a": "\\frac1{7}",
+          "steps": "|Tf(x)|\\le\\|f\\|_\\infty\\frac{x^{7}}{7}\\le\\frac{\\|f\\|_\\infty}{7}.\\qquad T1(1)=\\frac1{7}.",
+          "why": "Si maggiora il valore assoluto dell'integrale usando la norma uniforme. Il dato costante uno realizza l'uguaglianza, quindi determina la norma dell'operatore.",
+          "wrong": [
+            "7",
+            "\\frac1{8}",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Norme di funzionali di valutazione",
+      "anchor": "duale",
+      "cases": [
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=1f(0)+2f(1)$.",
+          "a": "3",
+          "steps": "|\\ell(f)|\\le(1+2)\\|f\\|_\\infty=3\\|f\\|_\\infty,\\qquad \\ell(1)=3.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "2",
+            "1",
+            "4"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=2f(0)+3f(1)$.",
+          "a": "5",
+          "steps": "|\\ell(f)|\\le(2+3)\\|f\\|_\\infty=5\\|f\\|_\\infty,\\qquad \\ell(1)=5.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "3",
+            "2",
+            "6"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=3f(0)+4f(1)$.",
+          "a": "7",
+          "steps": "|\\ell(f)|\\le(3+4)\\|f\\|_\\infty=7\\|f\\|_\\infty,\\qquad \\ell(1)=7.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "4",
+            "3",
+            "8"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=4f(0)+5f(1)$.",
+          "a": "9",
+          "steps": "|\\ell(f)|\\le(4+5)\\|f\\|_\\infty=9\\|f\\|_\\infty,\\qquad \\ell(1)=9.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "5",
+            "4",
+            "10"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=5f(0)+6f(1)$.",
+          "a": "11",
+          "steps": "|\\ell(f)|\\le(5+6)\\|f\\|_\\infty=11\\|f\\|_\\infty,\\qquad \\ell(1)=11.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "6",
+            "5",
+            "12"
+          ]
+        },
+        {
+          "q": "Su $C([0,1])$, calcolare la norma di $\\ell(f)=6f(0)+7f(1)$.",
+          "a": "13",
+          "steps": "|\\ell(f)|\\le(6+7)\\|f\\|_\\infty=13\\|f\\|_\\infty,\\qquad \\ell(1)=13.",
+          "why": "I coefficienti sono positivi, quindi la funzione costante uno realizza simultaneamente l'uguaglianza ai due estremi. Il limite superiore coincide con la somma dei coefficienti.",
+          "wrong": [
+            "7",
+            "6",
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Punti fissi di contrazioni affini",
+      "anchor": "punto-fisso",
+      "cases": [
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{3}+1$ su $\\mathbb R$.",
+          "a": "\\frac{3}{2}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{3},\\qquad x=\\frac x{3}+1\\iff x=\\frac{3}{2}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{2}{3}",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{4}+1$ su $\\mathbb R$.",
+          "a": "\\frac{4}{3}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{4},\\qquad x=\\frac x{4}+1\\iff x=\\frac{4}{3}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{3}{4}",
+            "4",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{5}+1$ su $\\mathbb R$.",
+          "a": "\\frac{5}{4}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{5},\\qquad x=\\frac x{5}+1\\iff x=\\frac{5}{4}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{4}{5}",
+            "5",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{6}+1$ su $\\mathbb R$.",
+          "a": "\\frac{6}{5}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{6},\\qquad x=\\frac x{6}+1\\iff x=\\frac{6}{5}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{5}{6}",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{7}+1$ su $\\mathbb R$.",
+          "a": "\\frac{7}{6}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{7},\\qquad x=\\frac x{7}+1\\iff x=\\frac{7}{6}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{6}{7}",
+            "7",
+            "0"
+          ]
+        },
+        {
+          "q": "Trovare il punto fisso di $T(x)=\\frac{x}{8}+1$ su $\\mathbb R$.",
+          "a": "\\frac{8}{7}",
+          "steps": "|T(x)-T(y)|=\\frac{|x-y|}{8},\\qquad x=\\frac x{8}+1\\iff x=\\frac{8}{7}.",
+          "why": "La retta reale è completa e il coefficiente di contrazione è strettamente minore di uno. L'equazione algebrica fornisce l'unico punto fisso.",
+          "wrong": [
+            "\\frac{7}{8}",
+            "8",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Stime a posteriori per iterate",
+      "anchor": "punto-fisso",
+      "cases": [
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{3}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{2}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{2}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{3}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{4}"
+          ]
+        },
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{4}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{3}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{3}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{4}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{5}"
+          ]
+        },
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{5}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{4}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{4}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{5}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{6}"
+          ]
+        },
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{6}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{5}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{5}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{6}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{7}"
+          ]
+        },
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{7}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{6}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{6}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{7}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{8}"
+          ]
+        },
+        {
+          "q": "Una contrazione ha costante $q=\\frac1{8}$ e due iterate consecutive soddisfano $|x_n-x_{n-1}|=1$. Quale stima a posteriori fornisce Banach per $|x_*-x_n|$?",
+          "a": "|x_*-x_n|\\le\\frac1{7}",
+          "steps": "|x_*-x_n|\\le\\sum_{j=1}^\\infty q^j|x_n-x_{n-1}|=\\frac q{1-q}=\\frac1{7}.",
+          "why": "La coda delle distanze tra iterate è maggiorata da una serie geometrica. La prima distanza successiva è al più q volte quella nota; per questo il numeratore è q.",
+          "wrong": [
+            "|x_*-x_n|\\le\\frac1{8}",
+            "|x_*-x_n|\\le0",
+            "|x_*-x_n|\\le\\frac1{9}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Inverse mediante serie di Neumann",
+      "anchor": "neumann",
+      "cases": [
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{3}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{3}{2}",
+          "steps": "I-A=\\frac{2}{3}I,\\qquad (I-A)^{-1}=\\frac{3}{2}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{2}{3}",
+            "\\frac1{2}",
+            "1"
+          ]
+        },
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{4}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{4}{3}",
+          "steps": "I-A=\\frac{3}{4}I,\\qquad (I-A)^{-1}=\\frac{4}{3}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{3}{4}",
+            "\\frac1{3}",
+            "1"
+          ]
+        },
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{5}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{5}{4}",
+          "steps": "I-A=\\frac{4}{5}I,\\qquad (I-A)^{-1}=\\frac{5}{4}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{4}{5}",
+            "\\frac1{4}",
+            "1"
+          ]
+        },
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{6}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{6}{5}",
+          "steps": "I-A=\\frac{5}{6}I,\\qquad (I-A)^{-1}=\\frac{6}{5}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{5}{6}",
+            "\\frac1{5}",
+            "1"
+          ]
+        },
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{7}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{7}{6}",
+          "steps": "I-A=\\frac{6}{7}I,\\qquad (I-A)^{-1}=\\frac{7}{6}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{6}{7}",
+            "\\frac1{6}",
+            "1"
+          ]
+        },
+        {
+          "q": "In un Banach non nullo, sia $A=\\frac1{8}I$. Calcolare $\\|(I-A)^{-1}\\|$.",
+          "a": "\\frac{8}{7}",
+          "steps": "I-A=\\frac{7}{8}I,\\qquad (I-A)^{-1}=\\frac{8}{7}I.",
+          "why": "La norma dell'identità è uno. L'inverso è quindi un multiplo dell'identità e la sua norma coincide col valore assoluto del coefficiente; coincide anche con la somma della serie geometrica di Neumann.",
+          "wrong": [
+            "\\frac{7}{8}",
+            "\\frac1{7}",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Compattezza di operatori diagonali",
+      "anchor": "compatti",
+      "cases": [
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{1}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{1}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{1}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        },
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{2}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{2}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{2}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        },
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{3}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{3}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{3}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        },
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{4}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{4}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{4}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        },
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{5}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{5}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{5}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        },
+        {
+          "q": "Su $\\ell^2$, l'operatore $(Tx)_n=\\frac1{n^{6}}x_n$ è compatto? Quanto vale la sua norma?",
+          "a": "\\text{Compatto, con }\\|T\\|=1",
+          "steps": "\\|T\\|=\\sup_{n\\ge1}\\frac1{n^{6}}=1,\\qquad \\|T-T_N\\|=\\frac1{(N+1)^{6}}\\to0.",
+          "why": "I troncamenti T_N hanno rango finito. La convergenza in norma di operatori compatti dà compattezza. Il primo vettore della base canonica realizza la norma uno.",
+          "wrong": [
+            "\\text{Compatto, con }\\|T\\|=0",
+            "\\text{Non compatto, con }\\|T\\|=1",
+            "\\text{Illimitato}"
+          ]
+        }
+      ]
+    }
+  ],
+  "trasformata-di-fourier": [
+    {
+      "title": "Trasformate di esponenziali bilaterali",
+      "anchor": "esempi-fourier",
+      "cases": [
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-1|x|}$.",
+          "a": "\\frac{2}{1+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{1+i\\xi}+\\frac1{1-i\\xi}=\\frac{2}{1+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{1}{1+\\xi^2}",
+            "\\frac{2}{1-\\xi^2}",
+            "\\frac{2}{1+\\xi}"
+          ]
+        },
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-2|x|}$.",
+          "a": "\\frac{4}{4+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{2+i\\xi}+\\frac1{2-i\\xi}=\\frac{4}{4+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{2}{4+\\xi^2}",
+            "\\frac{4}{4-\\xi^2}",
+            "\\frac{4}{4+\\xi}"
+          ]
+        },
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-3|x|}$.",
+          "a": "\\frac{6}{9+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{3+i\\xi}+\\frac1{3-i\\xi}=\\frac{6}{9+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{3}{9+\\xi^2}",
+            "\\frac{6}{9-\\xi^2}",
+            "\\frac{6}{9+\\xi}"
+          ]
+        },
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-4|x|}$.",
+          "a": "\\frac{8}{16+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{4+i\\xi}+\\frac1{4-i\\xi}=\\frac{8}{16+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{4}{16+\\xi^2}",
+            "\\frac{8}{16-\\xi^2}",
+            "\\frac{8}{16+\\xi}"
+          ]
+        },
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-5|x|}$.",
+          "a": "\\frac{10}{25+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{5+i\\xi}+\\frac1{5-i\\xi}=\\frac{10}{25+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{5}{25+\\xi^2}",
+            "\\frac{10}{25-\\xi^2}",
+            "\\frac{10}{25+\\xi}"
+          ]
+        },
+        {
+          "q": "Con $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$, trovare la trasformata di $f(x)=e^{-6|x|}$.",
+          "a": "\\frac{12}{36+\\xi^2}",
+          "steps": "\\widehat f(\\xi)=\\frac1{6+i\\xi}+\\frac1{6-i\\xi}=\\frac{12}{36+\\xi^2}.",
+          "why": "Si separano le semirette positiva e negativa e si integrano due esponenziali con parte reale decrescente. La somma è reale e pari, coerente con il dato.",
+          "wrong": [
+            "\\frac{6}{36+\\xi^2}",
+            "\\frac{12}{36-\\xi^2}",
+            "\\frac{12}{36+\\xi}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Trasformate di indicatori",
+      "anchor": "esempi-fourier",
+      "cases": [
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-1,1]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(1\\xi)}{\\xi}",
+          "steps": "\\int_{-1}^{1}e^{-i\\xi x}dx=\\frac{e^{i1\\xi}-e^{-i1\\xi}}{i\\xi}=\\frac{2\\sin(1\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(1\\xi)}{\\xi}",
+            "\\frac{2\\cos(1\\xi)}{\\xi}",
+            "-\\frac{2\\sin(1\\xi)}{\\xi}"
+          ]
+        },
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-2,2]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(2\\xi)}{\\xi}",
+          "steps": "\\int_{-2}^{2}e^{-i\\xi x}dx=\\frac{e^{i2\\xi}-e^{-i2\\xi}}{i\\xi}=\\frac{2\\sin(2\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(2\\xi)}{\\xi}",
+            "\\frac{2\\cos(2\\xi)}{\\xi}",
+            "-\\frac{2\\sin(2\\xi)}{\\xi}"
+          ]
+        },
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-3,3]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(3\\xi)}{\\xi}",
+          "steps": "\\int_{-3}^{3}e^{-i\\xi x}dx=\\frac{e^{i3\\xi}-e^{-i3\\xi}}{i\\xi}=\\frac{2\\sin(3\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(3\\xi)}{\\xi}",
+            "\\frac{2\\cos(3\\xi)}{\\xi}",
+            "-\\frac{2\\sin(3\\xi)}{\\xi}"
+          ]
+        },
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-4,4]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(4\\xi)}{\\xi}",
+          "steps": "\\int_{-4}^{4}e^{-i\\xi x}dx=\\frac{e^{i4\\xi}-e^{-i4\\xi}}{i\\xi}=\\frac{2\\sin(4\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(4\\xi)}{\\xi}",
+            "\\frac{2\\cos(4\\xi)}{\\xi}",
+            "-\\frac{2\\sin(4\\xi)}{\\xi}"
+          ]
+        },
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-5,5]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(5\\xi)}{\\xi}",
+          "steps": "\\int_{-5}^{5}e^{-i\\xi x}dx=\\frac{e^{i5\\xi}-e^{-i5\\xi}}{i\\xi}=\\frac{2\\sin(5\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(5\\xi)}{\\xi}",
+            "\\frac{2\\cos(5\\xi)}{\\xi}",
+            "-\\frac{2\\sin(5\\xi)}{\\xi}"
+          ]
+        },
+        {
+          "q": "Trovare $\\widehat{\\mathbf1_{[-6,6]}}(\\xi)$ per $\\xi\\ne0$, con la convenzione del capitolo.",
+          "a": "\\frac{2\\sin(6\\xi)}{\\xi}",
+          "steps": "\\int_{-6}^{6}e^{-i\\xi x}dx=\\frac{e^{i6\\xi}-e^{-i6\\xi}}{i\\xi}=\\frac{2\\sin(6\\xi)}{\\xi}.",
+          "why": "Si integra l'esponenziale su un intervallo simmetrico. La formula si prolunga in zero con il valore pari alla lunghezza dell'intervallo.",
+          "wrong": [
+            "\\frac{\\sin(6\\xi)}{\\xi}",
+            "\\frac{2\\cos(6\\xi)}{\\xi}",
+            "-\\frac{2\\sin(6\\xi)}{\\xi}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Traslazioni nello spazio",
+      "anchor": "proprieta-fourier",
+      "cases": [
+        {
+          "q": "Per $f(x)=e^{-|x-1|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i1\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-1),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i1\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i1\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-1)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        },
+        {
+          "q": "Per $f(x)=e^{-|x-2|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i2\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-2),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i2\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i2\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-2)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        },
+        {
+          "q": "Per $f(x)=e^{-|x-3|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i3\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-3),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i3\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i3\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-3)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        },
+        {
+          "q": "Per $f(x)=e^{-|x-4|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i4\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-4),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i4\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i4\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-4)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        },
+        {
+          "q": "Per $f(x)=e^{-|x-5|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i5\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-5),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i5\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i5\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-5)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        },
+        {
+          "q": "Per $f(x)=e^{-|x-6|}$, trovare $\\widehat f(\\xi)$.",
+          "a": "e^{-i6\\xi}\\frac2{1+\\xi^2}",
+          "steps": "f(x)=g(x-6),\\quad g(x)=e^{-|x|},\\qquad \\widehat f=e^{-i6\\xi}\\widehat g.",
+          "why": "Il dato è una traslazione dell'esponenziale bilaterale. La convenzione col segno meno nell'esponenziale della trasformata produce il fattore di fase con segno meno.",
+          "wrong": [
+            "e^{i6\\xi}\\frac2{1+\\xi^2}",
+            "\\frac2{1+(\\xi-6)^2}",
+            "\\frac2{1+\\xi^2}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Trasformate gaussiane",
+      "anchor": "esempi-fourier",
+      "cases": [
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-1x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{1}}e^{-\\frac{\\xi^2}{4}}",
+          "steps": "a=1,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{1}}e^{-\\frac{\\xi^2}{1}}",
+            "2\\sqrt{\\frac\\pi{1}}e^{-\\frac{\\xi^2}{4}}",
+            "\\sqrt{\\frac\\pi{1}}e^{\\frac{\\xi^2}{4}}"
+          ]
+        },
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-2x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{2}}e^{-\\frac{\\xi^2}{8}}",
+          "steps": "a=2,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{2}}e^{-\\frac{\\xi^2}{2}}",
+            "2\\sqrt{\\frac\\pi{2}}e^{-\\frac{\\xi^2}{8}}",
+            "\\sqrt{\\frac\\pi{2}}e^{\\frac{\\xi^2}{8}}"
+          ]
+        },
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-3x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{3}}e^{-\\frac{\\xi^2}{12}}",
+          "steps": "a=3,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{3}}e^{-\\frac{\\xi^2}{3}}",
+            "2\\sqrt{\\frac\\pi{3}}e^{-\\frac{\\xi^2}{12}}",
+            "\\sqrt{\\frac\\pi{3}}e^{\\frac{\\xi^2}{12}}"
+          ]
+        },
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-4x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{4}}e^{-\\frac{\\xi^2}{16}}",
+          "steps": "a=4,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{4}}e^{-\\frac{\\xi^2}{4}}",
+            "2\\sqrt{\\frac\\pi{4}}e^{-\\frac{\\xi^2}{16}}",
+            "\\sqrt{\\frac\\pi{4}}e^{\\frac{\\xi^2}{16}}"
+          ]
+        },
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-5x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{5}}e^{-\\frac{\\xi^2}{20}}",
+          "steps": "a=5,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{5}}e^{-\\frac{\\xi^2}{5}}",
+            "2\\sqrt{\\frac\\pi{5}}e^{-\\frac{\\xi^2}{20}}",
+            "\\sqrt{\\frac\\pi{5}}e^{\\frac{\\xi^2}{20}}"
+          ]
+        },
+        {
+          "q": "Trovare la trasformata di $f(x)=e^{-6x^2}$.",
+          "a": "\\sqrt{\\frac\\pi{6}}e^{-\\frac{\\xi^2}{24}}",
+          "steps": "a=6,\\qquad \\mathcal F(e^{-ax^2})=\\sqrt{\\frac\\pi a}e^{-\\frac{\\xi^2}{4a}}.",
+          "why": "Si applica la formula gaussiana con la convenzione della frequenza angolare. In zero il risultato coincide con l'integrale gaussiano, che controlla il fattore moltiplicativo.",
+          "wrong": [
+            "\\sqrt{\\frac\\pi{6}}e^{-\\frac{\\xi^2}{6}}",
+            "2\\sqrt{\\frac\\pi{6}}e^{-\\frac{\\xi^2}{24}}",
+            "\\sqrt{\\frac\\pi{6}}e^{\\frac{\\xi^2}{24}}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Norme mediante Plancherel",
+      "anchor": "inversione-fourier",
+      "cases": [
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=1$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "2\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=2\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "1",
+            "1\\pi",
+            "\\frac{1}{2\\pi}"
+          ]
+        },
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=2$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "4\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=4\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "2",
+            "2\\pi",
+            "\\frac{2}{2\\pi}"
+          ]
+        },
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=3$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "6\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=6\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "3",
+            "3\\pi",
+            "\\frac{3}{2\\pi}"
+          ]
+        },
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=4$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "8\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=8\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "4",
+            "4\\pi",
+            "\\frac{4}{2\\pi}"
+          ]
+        },
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=5$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "10\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=10\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "5",
+            "5\\pi",
+            "\\frac{5}{2\\pi}"
+          ]
+        },
+        {
+          "q": "Se $f\\in L^2(\\mathbb R)$ e $\\|f\\|_2^2=6$, calcolare $\\|\\widehat f\\|_2^2$ con la convenzione $\\widehat f(\\xi)=\\int f(x)e^{-i\\xi x}dx$.",
+          "a": "12\\pi",
+          "steps": "\\|\\widehat f\\|_2^2=2\\pi\\|f\\|_2^2=12\\pi.",
+          "why": "La trasformata senza fattore di normalizzazione non è unitaria: il quadrato della norma acquista il fattore due π. L'estensione in L² conserva questa identità.",
+          "wrong": [
+            "6",
+            "6\\pi",
+            "\\frac{6}{2\\pi}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Convoluzioni di indicatori nel punto centrale",
+      "anchor": "convoluzione",
+      "cases": [
+        {
+          "q": "Per $g=\\mathbf1_{[0,1]}$, calcolare $(g*g)(1)$.",
+          "a": "1",
+          "steps": "(g*g)(1)=\\int_{\\mathbb R}\\mathbf1_{[0,1]}(1-y)\\mathbf1_{[0,1]}(y)dy=\\int_0^{1}1\\,dy=1.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "2",
+            "3",
+            "0"
+          ]
+        },
+        {
+          "q": "Per $g=\\mathbf1_{[0,2]}$, calcolare $(g*g)(2)$.",
+          "a": "2",
+          "steps": "(g*g)(2)=\\int_{\\mathbb R}\\mathbf1_{[0,2]}(2-y)\\mathbf1_{[0,2]}(y)dy=\\int_0^{2}1\\,dy=2.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "4",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "q": "Per $g=\\mathbf1_{[0,3]}$, calcolare $(g*g)(3)$.",
+          "a": "3",
+          "steps": "(g*g)(3)=\\int_{\\mathbb R}\\mathbf1_{[0,3]}(3-y)\\mathbf1_{[0,3]}(y)dy=\\int_0^{3}1\\,dy=3.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "6",
+            "9",
+            "0"
+          ]
+        },
+        {
+          "q": "Per $g=\\mathbf1_{[0,4]}$, calcolare $(g*g)(4)$.",
+          "a": "4",
+          "steps": "(g*g)(4)=\\int_{\\mathbb R}\\mathbf1_{[0,4]}(4-y)\\mathbf1_{[0,4]}(y)dy=\\int_0^{4}1\\,dy=4.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "8",
+            "12",
+            "0"
+          ]
+        },
+        {
+          "q": "Per $g=\\mathbf1_{[0,5]}$, calcolare $(g*g)(5)$.",
+          "a": "5",
+          "steps": "(g*g)(5)=\\int_{\\mathbb R}\\mathbf1_{[0,5]}(5-y)\\mathbf1_{[0,5]}(y)dy=\\int_0^{5}1\\,dy=5.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "10",
+            "15",
+            "0"
+          ]
+        },
+        {
+          "q": "Per $g=\\mathbf1_{[0,6]}$, calcolare $(g*g)(6)$.",
+          "a": "6",
+          "steps": "(g*g)(6)=\\int_{\\mathbb R}\\mathbf1_{[0,6]}(6-y)\\mathbf1_{[0,6]}(y)dy=\\int_0^{6}1\\,dy=6.",
+          "why": "Nel punto centrale i due intervalli si sovrappongono per tutta la loro lunghezza. L'integrale della funzione indicatrice è quindi la misura dell'intervallo.",
+          "wrong": [
+            "12",
+            "18",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Trasformate di derivate e moltiplicazioni",
+      "anchor": "derivate-fourier",
+      "cases": [
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(1)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{1}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(1)}}=(i\\xi)^{1}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{1}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{1}\\widehat f(\\xi)",
+            "0"
+          ]
+        },
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(2)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{2}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(2)}}=(i\\xi)^{2}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{2}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{2}\\widehat f(\\xi)",
+            "0"
+          ]
+        },
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(3)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{3}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(3)}}=(i\\xi)^{3}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{3}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{3}\\widehat f(\\xi)",
+            "0"
+          ]
+        },
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(4)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{4}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(4)}}=(i\\xi)^{4}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{4}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{4}\\widehat f(\\xi)",
+            "0"
+          ]
+        },
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(5)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{5}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(5)}}=(i\\xi)^{5}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{5}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{5}\\widehat f(\\xi)",
+            "0"
+          ]
+        },
+        {
+          "q": "Per una funzione di Schwartz $f$, esprimere $\\widehat{f^{(6)}}(\\xi)$ mediante $\\widehat f$.",
+          "a": "(i\\xi)^{6}\\widehat f(\\xi)",
+          "steps": "\\widehat{f'}=i\\xi\\widehat f,\\qquad \\widehat{f^{(6)}}=(i\\xi)^{6}\\widehat f.",
+          "why": "Si applica ripetutamente l'integrazione per parti. Le funzioni di Schwartz e tutte le loro derivate tendono a zero alle estremità, quindi ogni termine di bordo è nullo.",
+          "wrong": [
+            "2(i\\xi)^{6}\\widehat f(\\xi)",
+            "\\frac12(i\\xi)^{6}\\widehat f(\\xi)",
+            "0"
+          ]
+        }
+      ]
+    }
+  ],
+  "trasformata-di-laplace": [
+    {
+      "title": "Trasformate di potenze",
+      "anchor": "tabella-laplace",
+      "cases": [
+        {
+          "q": "Calcolare $\\mathcal L[t^{1}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{1}{s^{2}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=1,\\quad 1!=1.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{1}{s^{1}},\\quad\\operatorname{Re}s>0",
+            "\\frac{2}{s^{2}},\\quad\\operatorname{Re}s>0",
+            "\\frac{1}{s^{2}},\\quad\\operatorname{Re}s<0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t^{2}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{2}{s^{3}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=2,\\quad 2!=2.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{2}{s^{2}},\\quad\\operatorname{Re}s>0",
+            "\\frac{4}{s^{3}},\\quad\\operatorname{Re}s>0",
+            "\\frac{2}{s^{3}},\\quad\\operatorname{Re}s<0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t^{3}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{6}{s^{4}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=3,\\quad 3!=6.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{6}{s^{3}},\\quad\\operatorname{Re}s>0",
+            "\\frac{12}{s^{4}},\\quad\\operatorname{Re}s>0",
+            "\\frac{6}{s^{4}},\\quad\\operatorname{Re}s<0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t^{4}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{24}{s^{5}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=4,\\quad 4!=24.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{24}{s^{4}},\\quad\\operatorname{Re}s>0",
+            "\\frac{48}{s^{5}},\\quad\\operatorname{Re}s>0",
+            "\\frac{24}{s^{5}},\\quad\\operatorname{Re}s<0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t^{5}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{120}{s^{6}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=5,\\quad 5!=120.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{120}{s^{5}},\\quad\\operatorname{Re}s>0",
+            "\\frac{240}{s^{6}},\\quad\\operatorname{Re}s>0",
+            "\\frac{120}{s^{6}},\\quad\\operatorname{Re}s<0"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t^{6}](s)$ e indicare un semipiano di convergenza.",
+          "a": "\\frac{720}{s^{7}},\\quad\\operatorname{Re}s>0",
+          "steps": "\\mathcal L[t^n](s)=\\frac{n!}{s^{n+1}},\\qquad n=6,\\quad 6!=720.",
+          "why": "La formula deriva da integrazioni per parti ripetute. La potenza cresce polynomialmente, quindi un fattore esponenziale con parte reale positiva rende l'integrale assolutamente convergente.",
+          "wrong": [
+            "\\frac{720}{s^{6}},\\quad\\operatorname{Re}s>0",
+            "\\frac{1440}{s^{7}},\\quad\\operatorname{Re}s>0",
+            "\\frac{720}{s^{7}},\\quad\\operatorname{Re}s<0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Traslazioni esponenziali",
+      "anchor": "ritardi",
+      "cases": [
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-1t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+1)^2},\\quad\\operatorname{Re}s>-1",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-1t}t](s)=\\frac1{(s+1)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-1)^2},\\quad\\operatorname{Re}s>1",
+            "\\frac1{s+1},\\quad\\operatorname{Re}s>-1",
+            "\\frac2{(s+1)^2},\\quad\\operatorname{Re}s>-1"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-2t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+2)^2},\\quad\\operatorname{Re}s>-2",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-2t}t](s)=\\frac1{(s+2)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-2)^2},\\quad\\operatorname{Re}s>2",
+            "\\frac1{s+2},\\quad\\operatorname{Re}s>-2",
+            "\\frac2{(s+2)^2},\\quad\\operatorname{Re}s>-2"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-3t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+3)^2},\\quad\\operatorname{Re}s>-3",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-3t}t](s)=\\frac1{(s+3)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-3)^2},\\quad\\operatorname{Re}s>3",
+            "\\frac1{s+3},\\quad\\operatorname{Re}s>-3",
+            "\\frac2{(s+3)^2},\\quad\\operatorname{Re}s>-3"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-4t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+4)^2},\\quad\\operatorname{Re}s>-4",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-4t}t](s)=\\frac1{(s+4)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-4)^2},\\quad\\operatorname{Re}s>4",
+            "\\frac1{s+4},\\quad\\operatorname{Re}s>-4",
+            "\\frac2{(s+4)^2},\\quad\\operatorname{Re}s>-4"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-5t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+5)^2},\\quad\\operatorname{Re}s>-5",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-5t}t](s)=\\frac1{(s+5)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-5)^2},\\quad\\operatorname{Re}s>5",
+            "\\frac1{s+5},\\quad\\operatorname{Re}s>-5",
+            "\\frac2{(s+5)^2},\\quad\\operatorname{Re}s>-5"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[t e^{-6t}](s)$ sul suo semipiano di convergenza assoluta.",
+          "a": "\\frac1{(s+6)^2},\\quad\\operatorname{Re}s>-6",
+          "steps": "\\mathcal L[t](s)=\\frac1{s^2},\\qquad \\mathcal L[e^{-6t}t](s)=\\frac1{(s+6)^2}.",
+          "why": "La moltiplicazione per l'esponenziale decrescente sostituisce s con s più il parametro. Il semipiano si trasla della stessa quantità.",
+          "wrong": [
+            "\\frac1{(s-6)^2},\\quad\\operatorname{Re}s>6",
+            "\\frac1{s+6},\\quad\\operatorname{Re}s>-6",
+            "\\frac2{(s+6)^2},\\quad\\operatorname{Re}s>-6"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Trasformate di oscillazioni smorzate",
+      "anchor": "tabella-laplace",
+      "cases": [
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(1t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{1}{(s+1)^2+1}",
+          "steps": "\\mathcal L[\\sin(1t)](s)=\\frac{1}{s^2+1},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{1}{(s-1)^2+1}",
+            "\\frac{s+1}{(s+1)^2+1}",
+            "\\frac{2}{(s+1)^2+1}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(2t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{2}{(s+1)^2+4}",
+          "steps": "\\mathcal L[\\sin(2t)](s)=\\frac{2}{s^2+4},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{2}{(s-1)^2+4}",
+            "\\frac{s+1}{(s+1)^2+4}",
+            "\\frac{4}{(s+1)^2+4}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(3t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{3}{(s+1)^2+9}",
+          "steps": "\\mathcal L[\\sin(3t)](s)=\\frac{3}{s^2+9},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{3}{(s-1)^2+9}",
+            "\\frac{s+1}{(s+1)^2+9}",
+            "\\frac{6}{(s+1)^2+9}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(4t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{4}{(s+1)^2+16}",
+          "steps": "\\mathcal L[\\sin(4t)](s)=\\frac{4}{s^2+16},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{4}{(s-1)^2+16}",
+            "\\frac{s+1}{(s+1)^2+16}",
+            "\\frac{8}{(s+1)^2+16}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(5t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{5}{(s+1)^2+25}",
+          "steps": "\\mathcal L[\\sin(5t)](s)=\\frac{5}{s^2+25},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{5}{(s-1)^2+25}",
+            "\\frac{s+1}{(s+1)^2+25}",
+            "\\frac{10}{(s+1)^2+25}"
+          ]
+        },
+        {
+          "q": "Calcolare $\\mathcal L[e^{-t}\\sin(6t)](s)$ per $\\operatorname{Re}s>-1$.",
+          "a": "\\frac{6}{(s+1)^2+36}",
+          "steps": "\\mathcal L[\\sin(6t)](s)=\\frac{6}{s^2+36},\\qquad s\\mapsto s+1.",
+          "why": "Si combina la trasformata del seno con la traslazione esponenziale. Il coefficiente del seno compare nel numeratore; il suo quadrato compare nel denominatore.",
+          "wrong": [
+            "\\frac{6}{(s-1)^2+36}",
+            "\\frac{s+1}{(s+1)^2+36}",
+            "\\frac{12}{(s+1)^2+36}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Forzanti ritardate",
+      "anchor": "ritardi",
+      "cases": [
+        {
+          "q": "Calcolare la trasformata di $H(t-1)(t-1)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-1s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-1)(t-1)^2]=e^{-1s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-1s}}{s^3}",
+            "\\frac{2e^{1s}}{s^3}",
+            "\\frac{2e^{-1s}}{s^2}"
+          ]
+        },
+        {
+          "q": "Calcolare la trasformata di $H(t-2)(t-2)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-2s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-2)(t-2)^2]=e^{-2s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-2s}}{s^3}",
+            "\\frac{2e^{2s}}{s^3}",
+            "\\frac{2e^{-2s}}{s^2}"
+          ]
+        },
+        {
+          "q": "Calcolare la trasformata di $H(t-3)(t-3)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-3s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-3)(t-3)^2]=e^{-3s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-3s}}{s^3}",
+            "\\frac{2e^{3s}}{s^3}",
+            "\\frac{2e^{-3s}}{s^2}"
+          ]
+        },
+        {
+          "q": "Calcolare la trasformata di $H(t-4)(t-4)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-4s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-4)(t-4)^2]=e^{-4s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-4s}}{s^3}",
+            "\\frac{2e^{4s}}{s^3}",
+            "\\frac{2e^{-4s}}{s^2}"
+          ]
+        },
+        {
+          "q": "Calcolare la trasformata di $H(t-5)(t-5)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-5s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-5)(t-5)^2]=e^{-5s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-5s}}{s^3}",
+            "\\frac{2e^{5s}}{s^3}",
+            "\\frac{2e^{-5s}}{s^2}"
+          ]
+        },
+        {
+          "q": "Calcolare la trasformata di $H(t-6)(t-6)^2$, per $\\operatorname{Re}s>0$.",
+          "a": "\\frac{2e^{-6s}}{s^3}",
+          "steps": "\\mathcal L[t^2](s)=\\frac2{s^3},\\qquad \\mathcal L[H(t-6)(t-6)^2]=e^{-6s}\\frac2{s^3}.",
+          "why": "Il dato è scritto nella forma causale ritardata richiesta dal teorema. Il ritardo introduce il fattore esponenziale, mentre il quadrato mantiene la trasformata della tabella.",
+          "wrong": [
+            "\\frac{e^{-6s}}{s^3}",
+            "\\frac{2e^{6s}}{s^3}",
+            "\\frac{2e^{-6s}}{s^2}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Antitrasformate con poli distinti",
+      "anchor": "convoluzione-laplace",
+      "cases": [
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+1)(s+2)}$.",
+          "a": "e^{-1t}-e^{-2t}",
+          "steps": "\\frac1{(s+1)(s+2)}=\\frac1{s+1}-\\frac1{s+2}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-1t}+e^{-2t}",
+            "e^{-2t}-e^{-1t}",
+            "te^{-1t}"
+          ]
+        },
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+2)(s+3)}$.",
+          "a": "e^{-2t}-e^{-3t}",
+          "steps": "\\frac1{(s+2)(s+3)}=\\frac1{s+2}-\\frac1{s+3}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-2t}+e^{-3t}",
+            "e^{-3t}-e^{-2t}",
+            "te^{-2t}"
+          ]
+        },
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+3)(s+4)}$.",
+          "a": "e^{-3t}-e^{-4t}",
+          "steps": "\\frac1{(s+3)(s+4)}=\\frac1{s+3}-\\frac1{s+4}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-3t}+e^{-4t}",
+            "e^{-4t}-e^{-3t}",
+            "te^{-3t}"
+          ]
+        },
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+4)(s+5)}$.",
+          "a": "e^{-4t}-e^{-5t}",
+          "steps": "\\frac1{(s+4)(s+5)}=\\frac1{s+4}-\\frac1{s+5}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-4t}+e^{-5t}",
+            "e^{-5t}-e^{-4t}",
+            "te^{-4t}"
+          ]
+        },
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+5)(s+6)}$.",
+          "a": "e^{-5t}-e^{-6t}",
+          "steps": "\\frac1{(s+5)(s+6)}=\\frac1{s+5}-\\frac1{s+6}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-5t}+e^{-6t}",
+            "e^{-6t}-e^{-5t}",
+            "te^{-5t}"
+          ]
+        },
+        {
+          "q": "Trovare l'antitrasformata causale di $\\dfrac1{(s+6)(s+7)}$.",
+          "a": "e^{-6t}-e^{-7t}",
+          "steps": "\\frac1{(s+6)(s+7)}=\\frac1{s+6}-\\frac1{s+7}.",
+          "why": "La differenza dei due poli è uno, quindi la decomposizione ha coefficienti uno e meno uno. Ogni termine corrisponde a un esponenziale decrescente.",
+          "wrong": [
+            "e^{-6t}+e^{-7t}",
+            "e^{-7t}-e^{-6t}",
+            "te^{-6t}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Problemi di Cauchy del primo ordine",
+      "anchor": "derivate-laplace",
+      "cases": [
+        {
+          "q": "Risolvere con Laplace $y'+1y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-1t}}{1}",
+          "steps": "(s+1)Y=\\frac1s,\\qquad Y=\\frac1{s(s+1)}=\\frac1{1}\\left(\\frac1s-\\frac1{s+1}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=2(1-e^{-t})",
+            "y(t)=e^{-t}-1",
+            "y(t)=e^{-t}"
+          ]
+        },
+        {
+          "q": "Risolvere con Laplace $y'+2y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-2t}}{2}",
+          "steps": "(s+2)Y=\\frac1s,\\qquad Y=\\frac1{s(s+2)}=\\frac1{2}\\left(\\frac1s-\\frac1{s+2}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=1-e^{-2t}",
+            "y(t)=\\frac{e^{-2t}-1}{2}",
+            "y(t)=e^{-2t}"
+          ]
+        },
+        {
+          "q": "Risolvere con Laplace $y'+3y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-3t}}{3}",
+          "steps": "(s+3)Y=\\frac1s,\\qquad Y=\\frac1{s(s+3)}=\\frac1{3}\\left(\\frac1s-\\frac1{s+3}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=1-e^{-3t}",
+            "y(t)=\\frac{e^{-3t}-1}{3}",
+            "y(t)=e^{-3t}"
+          ]
+        },
+        {
+          "q": "Risolvere con Laplace $y'+4y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-4t}}{4}",
+          "steps": "(s+4)Y=\\frac1s,\\qquad Y=\\frac1{s(s+4)}=\\frac1{4}\\left(\\frac1s-\\frac1{s+4}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=1-e^{-4t}",
+            "y(t)=\\frac{e^{-4t}-1}{4}",
+            "y(t)=e^{-4t}"
+          ]
+        },
+        {
+          "q": "Risolvere con Laplace $y'+5y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-5t}}{5}",
+          "steps": "(s+5)Y=\\frac1s,\\qquad Y=\\frac1{s(s+5)}=\\frac1{5}\\left(\\frac1s-\\frac1{s+5}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=1-e^{-5t}",
+            "y(t)=\\frac{e^{-5t}-1}{5}",
+            "y(t)=e^{-5t}"
+          ]
+        },
+        {
+          "q": "Risolvere con Laplace $y'+6y=1$, $y(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\frac{1-e^{-6t}}{6}",
+          "steps": "(s+6)Y=\\frac1s,\\qquad Y=\\frac1{s(s+6)}=\\frac1{6}\\left(\\frac1s-\\frac1{s+6}\\right).",
+          "why": "La trasformata della derivata contiene il dato iniziale nullo. Si scompone il rapporto e si antitrasforma; sostituendo la soluzione si verifica che la somma di derivata e termine lineare vale uno.",
+          "wrong": [
+            "y(t)=1-e^{-6t}",
+            "y(t)=\\frac{e^{-6t}-1}{6}",
+            "y(t)=e^{-6t}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Problemi di Cauchy oscillatori",
+      "anchor": "cauchy-laplace",
+      "cases": [
+        {
+          "q": "Risolvere $y''+1y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(1t)",
+          "steps": "(s^2+1)Y-s=0,\\qquad Y=\\frac{s}{s^2+1}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(1t)",
+            "y(t)=e^{-1t}",
+            "y(t)=\\cosh(1t)"
+          ]
+        },
+        {
+          "q": "Risolvere $y''+4y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(2t)",
+          "steps": "(s^2+4)Y-s=0,\\qquad Y=\\frac{s}{s^2+4}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(2t)",
+            "y(t)=e^{-2t}",
+            "y(t)=\\cosh(2t)"
+          ]
+        },
+        {
+          "q": "Risolvere $y''+9y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(3t)",
+          "steps": "(s^2+9)Y-s=0,\\qquad Y=\\frac{s}{s^2+9}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(3t)",
+            "y(t)=e^{-3t}",
+            "y(t)=\\cosh(3t)"
+          ]
+        },
+        {
+          "q": "Risolvere $y''+16y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(4t)",
+          "steps": "(s^2+16)Y-s=0,\\qquad Y=\\frac{s}{s^2+16}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(4t)",
+            "y(t)=e^{-4t}",
+            "y(t)=\\cosh(4t)"
+          ]
+        },
+        {
+          "q": "Risolvere $y''+25y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(5t)",
+          "steps": "(s^2+25)Y-s=0,\\qquad Y=\\frac{s}{s^2+25}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(5t)",
+            "y(t)=e^{-5t}",
+            "y(t)=\\cosh(5t)"
+          ]
+        },
+        {
+          "q": "Risolvere $y''+36y=0$, $y(0)=1$, $y'(0)=0$, per $t\\ge0$.",
+          "a": "y(t)=\\cos(6t)",
+          "steps": "(s^2+36)Y-s=0,\\qquad Y=\\frac{s}{s^2+36}.",
+          "why": "La trasformata della derivata seconda porta il termine s moltiplicato per il valore iniziale. Il rapporto ottenuto è quello del coseno; la soluzione soddisfa entrambi i dati.",
+          "wrong": [
+            "y(t)=\\sin(6t)",
+            "y(t)=e^{-6t}",
+            "y(t)=\\cosh(6t)"
+          ]
+        }
+      ]
+    }
+  ],
+  "equazioni-derivate-parziali": [
+    {
+      "title": "Trasporto di dati gaussiani",
+      "anchor": "trasporto",
+      "cases": [
+        {
+          "q": "Risolvere $u_t+1u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-1t)^2}",
+          "steps": "x'(t)=1,\\qquad x- 1t=\\text{costante},\\qquad u(t,x)=f(x-1t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+1t)^2}",
+            "u(t,x)=e^{-x^2-1t}",
+            "u(t,x)=e^{-(x-1t^2)^2}"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t+2u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-2t)^2}",
+          "steps": "x'(t)=2,\\qquad x- 2t=\\text{costante},\\qquad u(t,x)=f(x-2t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+2t)^2}",
+            "u(t,x)=e^{-x^2-2t}",
+            "u(t,x)=e^{-(x-2t^2)^2}"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t+3u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-3t)^2}",
+          "steps": "x'(t)=3,\\qquad x- 3t=\\text{costante},\\qquad u(t,x)=f(x-3t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+3t)^2}",
+            "u(t,x)=e^{-x^2-3t}",
+            "u(t,x)=e^{-(x-3t^2)^2}"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t+4u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-4t)^2}",
+          "steps": "x'(t)=4,\\qquad x- 4t=\\text{costante},\\qquad u(t,x)=f(x-4t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+4t)^2}",
+            "u(t,x)=e^{-x^2-4t}",
+            "u(t,x)=e^{-(x-4t^2)^2}"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t+5u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-5t)^2}",
+          "steps": "x'(t)=5,\\qquad x- 5t=\\text{costante},\\qquad u(t,x)=f(x-5t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+5t)^2}",
+            "u(t,x)=e^{-x^2-5t}",
+            "u(t,x)=e^{-(x-5t^2)^2}"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t+6u_x=0$ sulla retta, con $u(0,x)=e^{-x^2}$.",
+          "a": "u(t,x)=e^{-(x-6t)^2}",
+          "steps": "x'(t)=6,\\qquad x- 6t=\\text{costante},\\qquad u(t,x)=f(x-6t).",
+          "why": "Lungo ogni caratteristica il valore della soluzione resta costante. Si risale quindi al punto iniziale x meno la velocità per il tempo.",
+          "wrong": [
+            "u(t,x)=e^{-(x+6t)^2}",
+            "u(t,x)=e^{-x^2-6t}",
+            "u(t,x)=e^{-(x-6t^2)^2}"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Modi del calore con estremi fissi",
+      "anchor": "calore",
+      "cases": [
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(1x)$.",
+          "a": "u(t,x)=e^{-1t}\\sin(1x)",
+          "steps": "X''=-1X,\\qquad T'=-1T,\\quad T(0)=1,\\qquad T=e^{-1t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{1t}\\sin(1x)",
+            "u(t,x)=e^{-1t}\\cos(1x)",
+            "u(t,x)=\\cos(1t)\\sin(1x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(2x)$.",
+          "a": "u(t,x)=e^{-4t}\\sin(2x)",
+          "steps": "X''=-4X,\\qquad T'=-4T,\\quad T(0)=1,\\qquad T=e^{-4t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{4t}\\sin(2x)",
+            "u(t,x)=e^{-4t}\\cos(2x)",
+            "u(t,x)=\\cos(2t)\\sin(2x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(3x)$.",
+          "a": "u(t,x)=e^{-9t}\\sin(3x)",
+          "steps": "X''=-9X,\\qquad T'=-9T,\\quad T(0)=1,\\qquad T=e^{-9t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{9t}\\sin(3x)",
+            "u(t,x)=e^{-9t}\\cos(3x)",
+            "u(t,x)=\\cos(3t)\\sin(3x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(4x)$.",
+          "a": "u(t,x)=e^{-16t}\\sin(4x)",
+          "steps": "X''=-16X,\\qquad T'=-16T,\\quad T(0)=1,\\qquad T=e^{-16t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{16t}\\sin(4x)",
+            "u(t,x)=e^{-16t}\\cos(4x)",
+            "u(t,x)=\\cos(4t)\\sin(4x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(5x)$.",
+          "a": "u(t,x)=e^{-25t}\\sin(5x)",
+          "steps": "X''=-25X,\\qquad T'=-25T,\\quad T(0)=1,\\qquad T=e^{-25t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{25t}\\sin(5x)",
+            "u(t,x)=e^{-25t}\\cos(5x)",
+            "u(t,x)=\\cos(5t)\\sin(5x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_t=u_{xx}$ su $(0,\\pi)$ con estremi nulli e dato $u(0,x)=\\sin(6x)$.",
+          "a": "u(t,x)=e^{-36t}\\sin(6x)",
+          "steps": "X''=-36X,\\qquad T'=-36T,\\quad T(0)=1,\\qquad T=e^{-36t}.",
+          "why": "Il dato è una sola autofunzione del problema di Dirichlet. La parte temporale risolve un'equazione esponenziale decrescente; il dato e i valori agli estremi sono conservati.",
+          "wrong": [
+            "u(t,x)=e^{36t}\\sin(6x)",
+            "u(t,x)=e^{-36t}\\cos(6x)",
+            "u(t,x)=\\cos(6t)\\sin(6x)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Modi delle onde con velocità iniziale nulla",
+      "anchor": "onde",
+      "cases": [
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(1x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(1t)\\sin(1x)",
+          "steps": "T''+1T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(1t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(1t)\\sin(1x)",
+            "u(t,x)=e^{-1t}\\sin(1x)",
+            "u(t,x)=\\cosh(1t)\\sin(1x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(2x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(2t)\\sin(2x)",
+          "steps": "T''+4T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(2t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(2t)\\sin(2x)",
+            "u(t,x)=e^{-4t}\\sin(2x)",
+            "u(t,x)=\\cosh(2t)\\sin(2x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(3x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(3t)\\sin(3x)",
+          "steps": "T''+9T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(3t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(3t)\\sin(3x)",
+            "u(t,x)=e^{-9t}\\sin(3x)",
+            "u(t,x)=\\cosh(3t)\\sin(3x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(4x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(4t)\\sin(4x)",
+          "steps": "T''+16T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(4t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(4t)\\sin(4x)",
+            "u(t,x)=e^{-16t}\\sin(4x)",
+            "u(t,x)=\\cosh(4t)\\sin(4x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(5x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(5t)\\sin(5x)",
+          "steps": "T''+25T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(5t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(5t)\\sin(5x)",
+            "u(t,x)=e^{-25t}\\sin(5x)",
+            "u(t,x)=\\cosh(5t)\\sin(5x)"
+          ]
+        },
+        {
+          "q": "Risolvere $u_{tt}=u_{xx}$ su $(0,\\pi)$ con estremi fissi, $u(0,x)=\\sin(6x)$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=\\cos(6t)\\sin(6x)",
+          "steps": "T''+36T=0,\\quad T(0)=1,\\quad T'(0)=0,\\qquad T(t)=\\cos(6t).",
+          "why": "La separazione produce un oscillatore con frequenza uguale all'indice del modo. La velocità iniziale nulla elimina il termine seno nella variabile temporale.",
+          "wrong": [
+            "u(t,x)=\\sin(6t)\\sin(6x)",
+            "u(t,x)=e^{-36t}\\sin(6x)",
+            "u(t,x)=\\cosh(6t)\\sin(6x)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Problemi armonici su rettangoli",
+      "anchor": "laplace-edp",
+      "cases": [
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(1x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(1y)}{\\sinh(1)}\\sin(1x)",
+          "steps": "X''=-1X,\\quad Y''=1Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(1y)}{\\sinh(1)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(1y)}{\\cosh(1)}\\sin(1x)",
+            "u(x,y)=y\\sin(1x)",
+            "u(x,y)=\\frac{\\sinh(1y)}{\\sinh(1)}\\cos(1x)"
+          ]
+        },
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(2x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(2y)}{\\sinh(2)}\\sin(2x)",
+          "steps": "X''=-4X,\\quad Y''=4Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(2y)}{\\sinh(2)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(2y)}{\\cosh(2)}\\sin(2x)",
+            "u(x,y)=y\\sin(2x)",
+            "u(x,y)=\\frac{\\sinh(2y)}{\\sinh(2)}\\cos(2x)"
+          ]
+        },
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(3x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(3y)}{\\sinh(3)}\\sin(3x)",
+          "steps": "X''=-9X,\\quad Y''=9Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(3y)}{\\sinh(3)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(3y)}{\\cosh(3)}\\sin(3x)",
+            "u(x,y)=y\\sin(3x)",
+            "u(x,y)=\\frac{\\sinh(3y)}{\\sinh(3)}\\cos(3x)"
+          ]
+        },
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(4x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(4y)}{\\sinh(4)}\\sin(4x)",
+          "steps": "X''=-16X,\\quad Y''=16Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(4y)}{\\sinh(4)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(4y)}{\\cosh(4)}\\sin(4x)",
+            "u(x,y)=y\\sin(4x)",
+            "u(x,y)=\\frac{\\sinh(4y)}{\\sinh(4)}\\cos(4x)"
+          ]
+        },
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(5x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(5y)}{\\sinh(5)}\\sin(5x)",
+          "steps": "X''=-25X,\\quad Y''=25Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(5y)}{\\sinh(5)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(5y)}{\\cosh(5)}\\sin(5x)",
+            "u(x,y)=y\\sin(5x)",
+            "u(x,y)=\\frac{\\sinh(5y)}{\\sinh(5)}\\cos(5x)"
+          ]
+        },
+        {
+          "q": "Nel rettangolo $(0,\\pi)\\times(0,1)$, risolvere $\\Delta u=0$ con dato $\\sin(6x)$ sul lato $y=1$ e zero sugli altri lati.",
+          "a": "u(x,y)=\\frac{\\sinh(6y)}{\\sinh(6)}\\sin(6x)",
+          "steps": "X''=-36X,\\quad Y''=36Y,\\quad Y(0)=0,\\quad Y(1)=1.\\qquad Y(y)=\\frac{\\sinh(6y)}{\\sinh(6)}.",
+          "why": "La condizione sul bordo superiore determina la normalizzazione della funzione iperbolica. Le derivate seconde spaziali si annullano nella somma e i quattro dati al bordo sono soddisfatti.",
+          "wrong": [
+            "u(x,y)=\\frac{\\cosh(6y)}{\\cosh(6)}\\sin(6x)",
+            "u(x,y)=y\\sin(6x)",
+            "u(x,y)=\\frac{\\sinh(6y)}{\\sinh(6)}\\cos(6x)"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Problemi di Poisson in una dimensione",
+      "anchor": "debole",
+      "cases": [
+        {
+          "q": "Risolvere $-u''=1$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{1}2x(1-x)",
+          "steps": "u'=-1x+C,\\qquad u=-\\frac{1}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{1}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{1}2x(1-x)",
+            "u(x)=1x(1-x)",
+            "u(x)=\\frac{1}2x^2"
+          ]
+        },
+        {
+          "q": "Risolvere $-u''=2$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{2}2x(1-x)",
+          "steps": "u'=-2x+C,\\qquad u=-\\frac{2}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{2}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{2}2x(1-x)",
+            "u(x)=2x(1-x)",
+            "u(x)=\\frac{2}2x^2"
+          ]
+        },
+        {
+          "q": "Risolvere $-u''=3$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{3}2x(1-x)",
+          "steps": "u'=-3x+C,\\qquad u=-\\frac{3}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{3}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{3}2x(1-x)",
+            "u(x)=3x(1-x)",
+            "u(x)=\\frac{3}2x^2"
+          ]
+        },
+        {
+          "q": "Risolvere $-u''=4$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{4}2x(1-x)",
+          "steps": "u'=-4x+C,\\qquad u=-\\frac{4}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{4}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{4}2x(1-x)",
+            "u(x)=4x(1-x)",
+            "u(x)=\\frac{4}2x^2"
+          ]
+        },
+        {
+          "q": "Risolvere $-u''=5$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{5}2x(1-x)",
+          "steps": "u'=-5x+C,\\qquad u=-\\frac{5}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{5}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{5}2x(1-x)",
+            "u(x)=5x(1-x)",
+            "u(x)=\\frac{5}2x^2"
+          ]
+        },
+        {
+          "q": "Risolvere $-u''=6$ su $(0,1)$ con $u(0)=u(1)=0$.",
+          "a": "u(x)=\\frac{6}2x(1-x)",
+          "steps": "u'=-6x+C,\\qquad u=-\\frac{6}2x^2+Cx+D.\\qquad D=0,\\quad C=\\frac{6}2.",
+          "why": "Si integra due volte e si impongono entrambe le condizioni al bordo. La soluzione classica appartiene anche a H¹ con traccia nulla ed è quindi la soluzione debole del problema.",
+          "wrong": [
+            "u(x)=-\\frac{6}2x(1-x)",
+            "u(x)=6x(1-x)",
+            "u(x)=\\frac{6}2x^2"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Classificazioni di equazioni del secondo ordine",
+      "anchor": "classificazione",
+      "cases": [
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+3u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=3,\\qquad B^2-AC=1-3=-2<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        },
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+4u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=4,\\qquad B^2-AC=1-4=-3<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        },
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+5u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=5,\\qquad B^2-AC=1-5=-4<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        },
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+6u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=6,\\qquad B^2-AC=1-6=-5<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        },
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+7u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=7,\\qquad B^2-AC=1-7=-6<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        },
+        {
+          "q": "Classificare $u_{xx}+2u_{xy}+8u_{yy}=0$ in tutto il piano.",
+          "a": "\\text{Ellittica}",
+          "steps": "A=1,\\quad B=1,\\quad C=8,\\qquad B^2-AC=1-8=-7<0.",
+          "why": "Il coefficiente della derivata mista è due B. Il discriminante è strettamente negativo e costante, quindi la classificazione è la stessa in ogni punto.",
+          "wrong": [
+            "\\text{Parabolica}",
+            "\\text{Iperbolica}",
+            "\\text{Cambia tipo lungo }x=0"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Formula di d'Alembert con dati polinomiali",
+      "anchor": "onde",
+      "cases": [
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=1u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+1t^2",
+          "steps": "u(t,x)=\\frac{(x-1t)^2+(x+1t)^2}2=x^2+1t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-1t^2",
+            "u(t,x)=x^2+2t^2",
+            "u(t,x)=x^2"
+          ]
+        },
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=4u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+4t^2",
+          "steps": "u(t,x)=\\frac{(x-2t)^2+(x+2t)^2}2=x^2+4t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-4t^2",
+            "u(t,x)=x^2+8t^2",
+            "u(t,x)=x^2"
+          ]
+        },
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=9u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+9t^2",
+          "steps": "u(t,x)=\\frac{(x-3t)^2+(x+3t)^2}2=x^2+9t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-9t^2",
+            "u(t,x)=x^2+18t^2",
+            "u(t,x)=x^2"
+          ]
+        },
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=16u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+16t^2",
+          "steps": "u(t,x)=\\frac{(x-4t)^2+(x+4t)^2}2=x^2+16t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-16t^2",
+            "u(t,x)=x^2+32t^2",
+            "u(t,x)=x^2"
+          ]
+        },
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=25u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+25t^2",
+          "steps": "u(t,x)=\\frac{(x-5t)^2+(x+5t)^2}2=x^2+25t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-25t^2",
+            "u(t,x)=x^2+50t^2",
+            "u(t,x)=x^2"
+          ]
+        },
+        {
+          "q": "Sulla retta, risolvere $u_{tt}=36u_{xx}$ con $u(0,x)=x^2$ e $u_t(0,x)=0$.",
+          "a": "u(t,x)=x^2+36t^2",
+          "steps": "u(t,x)=\\frac{(x-6t)^2+(x+6t)^2}2=x^2+36t^2.",
+          "why": "La velocità è positiva e uguale al parametro. Con velocità iniziale nulla, d'Alembert dà la media dei due dati traslati; i termini misti si cancellano.",
+          "wrong": [
+            "u(t,x)=x^2-36t^2",
+            "u(t,x)=x^2+72t^2",
+            "u(t,x)=x^2"
+          ]
+        }
+      ]
+    }
+  ]
+}

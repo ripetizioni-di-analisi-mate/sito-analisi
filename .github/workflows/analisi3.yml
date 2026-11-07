@@ -1,0 +1,32 @@
+name: Verifica Analisi 3
+on:
+  push:
+    branches: ['codex/analisi-3']
+  pull_request:
+    paths:
+      - 'src/content/**/analisi-3/**'
+      - 'src/data/analisi3.mjs'
+      - 'scripts/analisi-3-condivisi.mjs'
+      - 'strumenti/analisi3/**'
+      - 'strumenti/*analisi3*'
+      - '.github/workflows/analisi3.yml'
+permissions:
+  contents: read
+concurrency:
+  group: analisi3-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-and-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci --no-audit --no-fund
+      - name: Formule, build completa, accessi e risultati numerici
+        run: npm run build

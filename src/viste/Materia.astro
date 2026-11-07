@@ -4,6 +4,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
@@ -64,6 +65,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class="sopratitolo">{sopra}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
+  {materia === 'analisi-3' && lingua === 'it' && <NotaAnalisi3 />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
