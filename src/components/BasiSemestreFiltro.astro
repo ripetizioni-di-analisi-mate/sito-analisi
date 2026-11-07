@@ -5,14 +5,15 @@ interface Props { lingua?: Lingua; materia: string }
 const { lingua = 'it', materia } = Astro.props;
 const en = lingua === 'en';
 const basi = materia === 'matematica-semestre-filtro';
-const corsi = MATERIE.filter(m => m.attiva && ['fisica-semestre-filtro', 'chimica-semestre-filtro'].includes(m.slug));
+const nomi = { 'fisica-semestre-filtro': en ? 'Physics' : 'Fisica', 'chimica-semestre-filtro': en ? 'Chemistry' : 'Chimica', 'biologia-semestre-filtro': en ? 'Biology' : 'Biologia' };
+const corsi = MATERIE.filter(m => m.attiva && Object.hasOwn(nomi, m.slug));
 ---
 <aside class="basi-semestre" aria-label={en ? 'Preparatory mathematics' : 'Matematica preparatoria'}>
   <strong>{basi ? (en ? 'Preparatory module' : 'Modulo preparatorio') : (en ? 'Before starting: mathematics' : 'Prima di iniziare: la matematica')}</strong>
   {basi ? (
     <>
       <p>{en ? 'Mathematics supports your study of Physics and Chemistry. The three national filter-semester exams are Biology, Physics, and Chemistry with introductory biochemistry; this module develops the mathematical prerequisites.' : 'La matematica serve per affrontare gli esercizi di Fisica e Chimica. I tre esami nazionali del semestre filtro sono Biologia, Fisica e Chimica e propedeutica biochimica; questo modulo prepara alle conoscenze matematiche richieste.'}</p>
-      <p class="rimandi"><a href="https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027" target="_blank" rel="noopener">{en ? 'MUR programmes 2026/2027' : 'Programmi MUR 2026/2027'}</a>{corsi.map(m => <a href={link(lingua, `/${m.slug}`)}>{m.slug.startsWith('fisica') ? (en ? 'Continue with Physics →' : 'Prosegui con Fisica →') : (en ? 'Continue with Chemistry →' : 'Prosegui con Chimica →')}</a>)}</p>
+      <p class="rimandi"><a href="https://www.mur.gov.it/it/news/venerdi-19062026/semestre-aperto-aa-2026-2027" target="_blank" rel="noopener">{en ? 'MUR programmes 2026/2027' : 'Programmi MUR 2026/2027'}</a>{corsi.map(m => <a href={link(lingua, `/${m.slug}`)}>{en ? `Continue with ${nomi[m.slug]} →` : `Prosegui con ${nomi[m.slug]} →`}</a>)}</p>
     </>
   ) : (
     <p><a href={link(lingua, '/matematica-semestre-filtro')}>{en ? 'Mathematics foundations for the filter semester' : 'Basi di matematica per il semestre filtro'}</a>{en ? ': formulas, conversions, graphs, logarithms, trigonometry and vectors. Theory, worked examples and timed questions.' : ': formule, conversioni, grafici, logaritmi, trigonometria e vettori. Teoria, esercizi svolti e domande a tempo.'}</p>

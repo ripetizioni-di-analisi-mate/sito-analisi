@@ -1,5 +1,18 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'biologia-semestre-filtro': {
+    titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
+    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and 315 explained questions. Study materials are in Italian.',
+    argomenti: {
+      'organizzazione-biologica': { titolo: 'Biological and molecular organisation of life', breve: 'Cells and biomolecules' },
+      'genoma-cromatina': { titolo: 'Genome, chromatin and epigenetics', breve: 'Genome and chromatin' },
+      'flusso-informazione': { titolo: 'Replication, gene expression and proteins', breve: 'Flow of information' },
+      'genetica-mutazioni': { titolo: 'Mutations, inheritance and traits', breve: 'Genetics and mutations' },
+      'strutture-cellulari': { titolo: 'Membranes, organelles, trafficking and cytoskeleton', breve: 'Cellular structures' },
+      'segnalazione-cellulare': { titolo: 'Adhesion, communication and cell signalling', breve: 'Cell signalling' },
+      'ciclo-cellulare': { titolo: 'Cell cycle, meiosis and cell death', breve: 'Proliferation and survival' },
+    },
+  },
   'tolc-s': { titolo: 'TOLC-S (Science)', breve: 'TOLC-S', descrizione: 'Preparation for the TOLC-S: mathematics, reasoning and reading, biology, chemistry, physics, Earth science and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
   'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'Preparation for the TOLC-I: mathematics, logic, physics, chemistry, verbal comprehension and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
   'chimica-semestre-filtro': { titolo: 'Chemistry and introductory biochemistry for the filter semester', breve: 'Filter semester chemistry', descrizione: 'Chemistry and introductory biochemistry for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and timed questions. Study materials are in Italian.', argomenti: {} },
