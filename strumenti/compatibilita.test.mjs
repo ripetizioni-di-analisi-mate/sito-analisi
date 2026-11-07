@@ -165,6 +165,47 @@ test('il compito fotografato è coperto al 100% anche se il modello omette massi
   assert.equal(archivio.compatibilita, 90, 'il confronto originale non viene sovrascritto');
 });
 
+test('il compito con esponenziale e radice passa dal 94% al 100% recuperando il grafico presente', () => {
+  const reale = catalogoTeoriaReale('analisi-1');
+  for (const [slug, numeri] of [['insiemi', [9, 16]], ['limiti', [8]], ['derivate', [2, 7]], ['serie', [3]], ['integrali', [3]]]) {
+    reale.argomenti.find((a) => a.slug === slug).schede = numeri.map((n) => {
+      const corpo = readFileSync(join(radice, 'src/content/svolti/analisi-1', slug, `${n}.md`), 'utf8');
+      return { n, titolo: /^titolo: (.+)$/m.exec(corpo)[1], parole: [], ...dettagliScheda(corpo) };
+    });
+  }
+  const { codici } = codifica(reale, false);
+  const righe = [
+    ['1a', 'insiemi', 9, String.raw`Determinare il dominio naturale di $f(x)=e^{-4x}\sqrt{e^{3x}-e^{2x}}$`],
+    ['1b', 'insiemi', 16, 'Studiare le intersezioni con gli assi e il segno di $f(x)$'],
+    ['1c', 'limiti', 8, 'Ricercare gli asintoti di $f(x)$'],
+    ['1d', 'derivate', 2, 'Calcolare la derivata prima, monotonia ed estremi relativi di $f(x)$'],
+    ['1e', 'studio-di-funzione', null, 'Disegnare il grafico della funzione $f(x)$'],
+    ['2a', 'serie', 3, String.raw`Studiare il carattere della serie $\sum_{n=1}^{\infty}\cos^7(\pi n)\log\left(\frac{n+1}{n}\right)$`],
+    ['2b', 'serie', 3, String.raw`Studiare il carattere della serie $\sum_{n=1}^{\infty}\frac{\sqrt{n}\arctan x+1}{n^3+2}$`],
+    ['3', 'derivate', 7, String.raw`Calcolare $\lim_{x\to1}\frac{(1+\log x)^{\log x}-1}{(x-1)^2}$`],
+    ['4', 'integrali', 3, String.raw`Risolvere l'integrale $\int\frac{\cos^3 x}{1+\sin^2 x}dx$`],
+  ];
+  const grezze = righe.map(([numero, slug, n, testo]) => {
+    const a = Object.entries(codici.A).find(([, v]) => v.slug === slug)[0];
+    const s = n ? Object.entries(codici.S).find(([, v]) => v.argomento === slug && v.n === n)[0] : '-';
+    return leggiRiga(`${numero}|E|${a}|${s}|-|${testo}`);
+  });
+  const senzaGrafico = structuredClone(reale);
+  const studio = senzaGrafico.argomenti.find((a) => a.slug === 'studio-di-funzione');
+  studio.teoria = studio.teoria.filter((v) => v.ancora !== 'grafico-qualitativo');
+  const parziale = valutaRichieste('analisi-1', senzaGrafico, codifica(senzaGrafico, false).codici, grezze);
+  assert.equal(parziale.compatibilita, 94, 'il riferimento mancante riproduce la penalizzazione originale');
+  const completo = valutaRichieste('analisi-1', reale, codici, grezze);
+  assert.equal(completo.compatibilita, 100);
+  assert.deepEqual(completo.conteggi, { stesso: 9, argomento: 0, nessuno: 0 });
+  assert.match(completo.richieste[4].voce.link, /studio-di-funzione\/teoria#grafico-qualitativo$/);
+  const archivio = { materia: 'analisi-1', compatibilita: 94, esito: JSON.stringify(parziale.richieste.map((r) => ({ e: r.esercizio, p: r.parte, t: r.testo, l: r.livello, a: r.argomento?.slug }))) };
+  const aggiornato = rivalutaEsitoArchiviato(archivio, reale);
+  assert.equal(aggiornato.compatibilita, 100);
+  assert.equal(JSON.parse(aggiornato.esito)[4].l, 'stesso');
+  assert.equal(archivio.compatibilita, 94);
+});
+
 test('il riscontro degli estremi richiede i criteri effettivi e non promuove contenuti diversi', () => {
   const reale = catalogoTeoriaReale('analisi-1');
   const studio = reale.argomenti.find((a) => a.slug === 'studio-di-funzione');
