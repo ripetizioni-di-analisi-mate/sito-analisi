@@ -48,8 +48,21 @@ const IT = {
   dafareDescr: (s: string, a: string, m: string) => `Esercizio di ${m} su ${a.toLowerCase()}: ${s}. Con la soluzione per verificare il risultato.`,
   livello: 'Università',
   teoremi: (m: string, b: string) => scegli(`Teoremi e definizioni di ${m}: l'elenco completo | Ripetizioni di Analisi`, `Teoremi e definizioni di ${m}: l'elenco completo`, `Teoremi e definizioni di ${b}`),
-  teoremiDescr: (m: string, nd: number, nt: number, primi: string[]) => conNomi(`${nt} teoremi e ${nd} definizioni di ${m} con il collegamento alla teoria`, primi),
+  teoremiDescr: (m: string, nd: number, nt: number, primi: string[]) => conNomi(`${nt} teoremi e ${nd} definizioni di ${m} , ognuno con enunciato, dimostrazione ed esercizi`, primi),
+  // pagina singola di un teorema o di una definizione («Teorema di Rolle: enunciato e dimostrazione | Analisi 1»)
+  voce: (v: string, tipo: string, dim: boolean, b: string, a: string) => {
+    const cosa = tipo === 'definizione' ? 'definizione' : dim ? 'enunciato e dimostrazione' : 'enunciato';
+    return scegli(`${v}: ${cosa} | ${a} · ${b}`, `${v}: ${cosa} | ${b}`, `${v} | ${b}`, v);
+  },
+  voceDescr: (v: string, tipo: string, dim: boolean, a: string, m: string, testo: string) => {
+    const testa = `${v} (${m}, ${a})${dim ? ', con dimostrazione ed esercizi' : ''}: `;
+    return taglia(testa + (testo.length >= 60 ? testo : tipo === 'definizione' ? 'definizione ed esercizi in cui si usa.' : 'enunciato ed esercizi in cui si applica.'));
+  },
 };
+// Descrizione entro 158 caratteri, tagliata su una parola intera.
+function taglia(s: string): string {
+  return s.length <= 158 ? s : `${s.slice(0, 155).replace(/\s+\S*$/, '')}…`;
+}
 // Fuori dall'Italia «Analisi matematica» si cerca come «Calculus»: nei titoli inglesi per i motori
 // compare il nome usato all'estero, con il nome del corso fra parentesi nella pagina della materia.
 const NOMI_CERCATI: Record<string, string> = {
@@ -81,5 +94,13 @@ const EN: typeof IT = {
   livello: 'University',
   teoremi: (m, b) => scegli(`${cercato(m)}: all definitions and theorems with proofs | Ripetizioni di Analisi`, `${cercato(m)}: all definitions and theorems with proofs`, `${cercato(m)}: all definitions and theorems`, `${cercato(b)}: definitions and theorems`),
   teoremiDescr: (m, nd, nt, primi) => conNomi(`${nt} theorems and ${nd} definitions of ${cercato(m)}, each linked to its statement and proof`, primi),
+  voce: (v, tipo, dim, b, a) => {
+    const cosa = tipo === 'definizione' ? 'definition' : dim ? 'statement and proof' : 'statement';
+    return scegli(`${v}: ${cosa} | ${argEn(a)} · ${cercato(b)}`, `${v}: ${cosa} | ${cercato(b)}`, `${v} | ${cercato(b)}`, v);
+  },
+  voceDescr: (v, tipo, dim, a, m, testo) => {
+    const testa = `${v} (${cercato(m)}, ${a})${dim ? ', with proof and exercises' : ''}: `;
+    return taglia(testa + (testo.length >= 60 ? testo : tipo === 'definizione' ? 'definition and the exercises where it is used.' : 'statement and the exercises where it is applied.'));
+  },
 };
 export const SEO = (l: Lingua) => (l === 'en' ? EN : IT);

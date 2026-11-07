@@ -1,0 +1,126 @@
+---
+// Pagina singola di un teorema, di una definizione o di una proposizione (`/<materia>/<argomento>/teoria/<ancora>`).
+// Enunciato in chiaro per tutti; la dimostrazione resta riservata a chi ha la materia (vetrina generata da
+// scripts/vetrine.mjs, servita dal Worker; i motori verificati la leggono intera come per la teoria).
+// Il riquadro è lo stesso HTML del capitolo (src/lib/voci-teoria.ts), quindi formule e stile coincidono.
+import { SEO } from '../lib/seo-testi';
+import { SITO, assoluto, accesso } from '../lib/seo';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
+import { perArgomento, numero } from '../lib/nav';
+import { dataContenuto } from '../lib/date';
+import { tutteLeVoci, testoPiano, type VoceTeoria } from '../lib/voci-teoria';
+interface Props { lingua: Lingua; materia: string; argomento: string; ancora: string; voci?: VoceTeoria[] }
+const { lingua, materia, argomento, ancora } = Astro.props;
+const en = lingua === 'en';
+const t = T(lingua);
+const m = materiaL(lingua, materia);
+const arg = argomentoL(lingua, materia, argomento);
+const id = `${materia}/${argomento}`;
+const voci = Astro.props.voci ?? (await tutteLeVoci(lingua)).get(id) ?? [];
+const k = voci.findIndex((v) => v.ancora === ancora);
+const voce = voci[k];
+if (!voce) throw new Error(`Voce ${ancora} non trovata in ${id} (${lingua})`);
+const prima = voci[k - 1], dopo = voci[k + 1];
+const haAltra = ((await tutteLeVoci(en ? 'it' : 'en')).get(id) ?? []).some((v) => v.ancora === ancora);
+const base = `/${materia}/${argomento}`;
+const ETICHETTA = en
+  ? { definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition' }
+  : { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' };
+const etichetta = ETICHETTA[voce.tipo];
+const conDimostrazione = Boolean(voce.dimostrazione);
+const aPagamento = Boolean(m.prezzo);
+
+// esercizi che usano questa voce (frontmatter `teoria` delle schede e delle tracce)
+const svolti = perArgomento(await getCollection('svolti'), materia, argomento).filter((e) => e.data.teoria.includes(ancora));
+const dafare = perArgomento(await getCollection('dafare'), materia, argomento).filter((e) => e.data.teoria.includes(ancora));
+const titoli = async (c: 'svolti' | 'dafare', e: { id: string }) => (await voceL(lingua, c, e.id)).voce.data.titolo as string;
+const svoltiT = await Promise.all(svolti.map(async (e) => ({ n: numero(e.id), titolo: await titoli('svolti', e) })));
+const dafareT = await Promise.all(dafare.map(async (e) => ({ n: numero(e.id), titolo: await titoli('dafare', e) })));
+
+// titolo e descrizione per i motori di ricerca
+const descr = testoPiano(voce.testo);
+const titoloSeo = SEO(lingua).voce(voce.titolo, voce.tipo, conDimostrazione, m.breve, arg.breve);
+const descrizioneSeo = SEO(lingua).voceDescr(voce.titolo, voce.tipo, conDimostrazione, arg.breve, m.breve, descr);
+const sopratitolo = `${etichetta} · ${arg.breve}`;
+// nella pagina singola il numero progressivo del capitolo non serve
+const riquadro = (conDimostrazione ? `${voce.enunciato.slice(0, -6)}${voce.dimostrazione}</div>` : voce.enunciato).replace(/<span class="numero-blocco">[^<]*<\/span>\s*/, '');
+const testi = en ? {
+  leggi: `Read it in the chapter ${arg.titolo}`, paragrafo: 'Section',
+  usata: (tipo: string) => `Exercises where this ${tipo.toLowerCase()} is used`,
+  svolti: 'Worked examples', dafare: 'Practice exercises',
+  vicine: 'Nearby entries', precedente: 'Previous', successiva: 'Next', tutte: `All the definitions and theorems of ${m.titolo}`,
+  sommario: (tipo: string, dim: boolean) => dim
+    ? `Statement of the ${tipo.toLowerCase()} with its hypotheses, proof and the exercises in which it is applied. From the chapter ${arg.titolo} of ${m.titolo}.`
+    : `${tipo} from the chapter ${arg.titolo} of ${m.titolo}, with the exercises in which it is used.`,
+} : {
+  leggi: `Leggi nel capitolo ${arg.titolo}`, paragrafo: 'Paragrafo',
+  usata: (tipo: string) => (tipo === 'Definizione' ? 'Esercizi in cui si usa questa definizione' : `Esercizi in cui si applica ${tipo === 'Teorema' ? 'questo teorema' : 'questa proposizione'}`),
+  svolti: 'Esercizi svolti', dafare: 'Esercizi da fare',
+  vicine: 'Voci vicine', precedente: 'Precedente', successiva: 'Successiva', tutte: `Tutti i teoremi e le definizioni di ${m.titolo}`,
+  sommario: (tipo: string, dim: boolean) => dim
+    ? `Enunciato con le ipotesi, dimostrazione ed esercizi in cui si applica. Dal capitolo ${arg.titolo} di ${m.titolo}.`
+    : `${tipo} del capitolo ${arg.titolo} di ${m.titolo}, con gli esercizi in cui si usa.`,
+};
+const hrefVoce = (v: VoceTeoria) => link(lingua, `${base}/teoria/${v.ancora}`);
+const schema = [{
+  '@type': voce.tipo === 'definizione' ? ['LearningResource', 'DefinedTerm'] : 'LearningResource',
+  name: voce.titolo, description: descrizioneSeo, inLanguage: lingua, url: assoluto(Astro.url.pathname),
+  learningResourceType: voce.tipo === 'definizione' ? 'Definition' : 'Theorem',
+  educationalLevel: SEO(lingua).livello,
+  about: { '@type': 'Thing', name: voce.titolo },
+  ...(voce.tipo === 'definizione' ? { termCode: ancora, inDefinedTermSet: { '@type': 'DefinedTermSet', name: `${m.titolo}`, url: assoluto(link(lingua, `/${materia}/teoremi`)) } } : {}),
+  isPartOf: { '@type': 'LearningResource', name: `${arg.titolo} · ${t.sezioni.teoria}`, url: assoluto(link(lingua, `${base}/teoria`)),
+    isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: m.titolo } },
+  provider: { '@id': `${SITO}/#organizzazione` },
+  author: { '@id': `${SITO}/#carmine` },
+  // l'enunciato è libero; con la materia a pagamento la dimostrazione è riservata
+  ...accesso(!(aPagamento && conDimostrazione)),
+  ...(aPagamento && conDimostrazione ? { hasPart: { '@type': 'WebPageElement', isAccessibleForFree: false, cssSelector: '.contenuto-riservato' } } : {}),
+}];
+---
+<Base
+  titolo={`${voce.titolo} · ${arg.breve}`}
+  descrizione={descrizioneSeo}
+  seo={{ titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', id), schema }}
+  percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria, href: link(lingua, `${base}/teoria`) }, { titolo: voce.titolo }]}
+  materia={materia} argomento={argomento} sezione="teoria"
+  lingua={lingua} nonTradotta={false}
+>
+  <p class="sopratitolo">{sopratitolo}</p>
+  <h1>{voce.titolo}</h1>
+  <p class="sommario">{testi.sommario(etichetta, conDimostrazione)}</p>
+  <div class="testo-studio voce-singola" set:html={riquadro} />
+  <p class="vai-esercizi voce-leggi"><a href={`${link(lingua, `${base}/teoria`)}#${ancora}`}>{testi.leggi} →</a></p>
+
+  {(svoltiT.length > 0 || dafareT.length > 0) && (
+    <>
+      <h2>{testi.usata(etichetta)}</h2>
+      {svoltiT.length > 0 && (
+        <>
+          <p class="voce-gruppo">{testi.svolti}</p>
+          <ul class="elenco-esercizi">
+            {svoltiT.map((e) => <li><a href={link(lingua, `${base}/esercizi-svolti/${e.n}`)}><span class="numero">{e.n}</span><span>{e.titolo}</span></a></li>)}
+          </ul>
+        </>
+      )}
+      {dafareT.length > 0 && (
+        <>
+          <p class="voce-gruppo">{testi.dafare}</p>
+          <ul class="elenco-esercizi">
+            {dafareT.map((e) => <li><a href={link(lingua, `${base}/esercizi/${e.n}`)}><span class="numero">{e.n}</span><span>{e.titolo}</span></a></li>)}
+          </ul>
+        </>
+      )}
+    </>
+  )}
+
+  {(prima || dopo) && (
+    <nav class="voce-vicine" aria-label={testi.vicine}>
+      {prima && <a class="voce-prima" href={hrefVoce(prima)}><span class="voce-eti">← {ETICHETTA[prima.tipo]}</span><span>{prima.titolo}</span></a>}
+      {dopo && <a class="voce-dopo" href={hrefVoce(dopo)}><span class="voce-eti">{ETICHETTA[dopo.tipo]} →</span><span>{dopo.titolo}</span></a>}
+    </nav>
+  )}
+  <p class="voce-tutte"><a href={link(lingua, `/${materia}/teoremi`)}>{testi.tutte} →</a></p>
+</Base>

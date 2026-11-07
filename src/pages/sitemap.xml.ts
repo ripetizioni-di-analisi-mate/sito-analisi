@@ -8,6 +8,7 @@ import { MATERIE } from '../data/materie';
 import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
+import { tutteLeVoci } from '../lib/voci-teoria';
 
 const DATA = DATE as Record<string, { data: string }>;
 const dataDi = (cartella: string, id: string) => DATA[`src/${cartella}/${id}.md`]?.data;
@@ -18,6 +19,8 @@ export async function GET() {
     ['teoria', 'svolti', 'dafare', 'teoria_en', 'svolti_en', 'dafare_en'].map((c) => getCollection(c as 'teoria')),
   );
   const tradotte = new Set([...teoriaEn, ...svoltiEn, ...dafareEn].map((v) => v.id));
+  // pagine singole dei teoremi e delle definizioni (src/lib/voci-teoria.ts)
+  const vociIt = await tutteLeVoci('it'), vociEn = await tutteLeVoci('en');
   const pagine: { it: string; en?: string; priorita: number; dIt?: string; dEn?: string }[] = [];
   const due = (p: string, priorita: number, conEn = true, dIt?: string, dEn?: string) =>
     pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita, dIt, dEn });
@@ -57,6 +60,8 @@ export async function GET() {
       if (!teoria.some((v) => v.id === id)) continue;
       const t = d('teoria', id);
       due(`/${id}/teoria`, 0.8, tradotte.has(id), t.it, t.en);
+      const inglesi = new Set((vociEn.get(id) ?? []).map((v) => v.ancora));
+      for (const v of vociIt.get(id) ?? []) due(`/${id}/teoria/${v.ancora}`, 0.6, inglesi.has(v.ancora), t.it, t.en);
       const sv = svolti.filter((v) => v.id.startsWith(`${id}/`));
       const df = dafare.filter((v) => v.id.startsWith(`${id}/`));
       const dSv = sv.map((v) => d('svolti', v.id));

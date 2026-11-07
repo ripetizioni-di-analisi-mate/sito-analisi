@@ -1,0 +1,17 @@
+---
+// English page of each theorem and definition, only where the theory is translated.
+import Voce from '../../../../../viste/Voce.astro';
+import { MATERIE } from '../../../../../data/materie';
+import { tutteLeVoci } from '../../../../../lib/voci-teoria';
+export async function getStaticPaths() {
+  const attive = new Set(MATERIE.filter((m) => m.attiva).map((m) => m.slug));
+  const voci = await tutteLeVoci('en');
+  return [...voci].flatMap(([id, elenco]) => {
+    const [materia, argomento] = id.split('/');
+    if (!attive.has(materia)) return [];
+    return elenco.map((v) => ({ params: { materia, argomento, ancora: v.ancora }, props: { voci: elenco } }));
+  });
+}
+const { materia, argomento, ancora } = Astro.params;
+---
+<Voce lingua="en" materia={materia!} argomento={argomento!} ancora={ancora!} voci={Astro.props.voci} />

@@ -24,10 +24,11 @@ const haAltra = (await indiceAnalitico(en ? 'it' : 'en', materia, m.argomenti.ma
 const ETICHETTA = en
   ? { definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition' }
   : { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' };
-const href = (a: string, ancora?: string) => link(lingua, `/${materia}/${a}/teoria`) + (ancora ? `#${ancora}` : '');
+// Ogni voce ha la sua pagina (/<materia>/<argomento>/teoria/<ancora>): enunciato, dimostrazione, esercizi che la usano.
+const href = (a: string, ancora?: string) => link(lingua, `/${materia}/${a}/teoria`) + (ancora ? `/${ancora}` : '');
 const sommario = en
-  ? `The ${nDef} definitions and ${nTeo} theorems of the theory of ${m.titolo}, in the order of the topics. Each entry links to its box in the theory page.`
-  : `Le ${nDef} definizioni e i ${nTeo} teoremi della teoria di ${m.titolo}, nell'ordine degli argomenti. Ogni voce porta al suo riquadro nella pagina di teoria.`;
+  ? `The ${nDef} definitions and ${nTeo} theorems of the theory of ${m.titolo}, in the order of the topics. Each entry has its own page with statement, proof and exercises.`
+  : `Le ${nDef} definizioni e i ${nTeo} teoremi della teoria di ${m.titolo}, nell'ordine degli argomenti. Ogni voce ha la sua pagina con enunciato, dimostrazione ed esercizi in cui si usa.`;
 // Elenco per i motori di ricerca: gli argomenti con le loro voci, come indice del corso.
 const schema = [{
   '@type': 'ItemList',

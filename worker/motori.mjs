@@ -109,6 +109,11 @@ export function paginaPerMotore(risposta, tipo, n) {
     }).on('.testo-studio', {
       element(e) { e.onEndTag((fine) => { if (aperto) fine.before('</div>', { html: true }); }); },
     });
+  } else if (tipo === 'voce') {
+    // pagina singola di un teorema: riservata solo la dimostrazione
+    riscrivi.on('.testo-studio details.blocco-dimostrazione', {
+      element(e) { e.before(APRI, { html: true }); e.after('</div>', { html: true }); },
+    });
   } else if (tipo === 'esercizi') {
     // Solo i blocchi esterni: un blocco dentro un altro è già racchiuso (i blocchi .contenuto-riservato non si annidano).
     let dentro = 0;

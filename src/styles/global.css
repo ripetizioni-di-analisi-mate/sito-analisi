@@ -1472,3 +1472,16 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 }
 @media (prefers-reduced-motion: reduce) { .barra-sconto, html.con-barra-sconto .bottoni-fissi { transition: none; } }
 @media print { .barra-sconto { display: none !important; } }
+
+/* ---------- pagina singola di un teorema o di una definizione ---------- */
+.voce-singola > .blocco { margin-top: 1rem; }
+.voce-leggi { margin-top: 0.75rem; }
+.voce-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); font-weight: 600; margin: 1rem 0 0.25rem; }
+.voce-vicine { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 2rem 0 1rem; }
+.voce-vicine a { display: flex; flex-direction: column; gap: 0.2rem; text-decoration: none; color: var(--inchiostro); padding: 0.75rem 0.9rem; border: 1px solid var(--riga); border-radius: var(--raggio); min-width: 0; }
+.voce-vicine a:hover { border-color: var(--accento); }
+.voce-vicine .voce-dopo { text-align: right; }
+.voce-vicine .voce-eti { font-family: var(--ui); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accento); font-weight: 600; }
+.voce-vicine a:only-child.voce-dopo { grid-column: 2; }
+.voce-tutte { font-family: var(--ui); font-size: 0.9rem; margin-top: 1.5rem; }
+@media (max-width: 600px) { .voce-vicine { grid-template-columns: 1fr; } .voce-vicine .voce-dopo { text-align: left; } .voce-vicine a:only-child.voce-dopo { grid-column: auto; } }

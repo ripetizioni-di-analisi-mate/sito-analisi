@@ -62,6 +62,21 @@ function senzaSoluzioni(html, invito) {
   return out;
 }
 
+// Sostituisce il blocco <details> della dimostrazione (ce n'è al massimo uno per pagina singola).
+function senzaDimostrazione(html, invito) {
+  const inizio = html.indexOf('<details class="blocco blocco-dimostrazione"');
+  if (inizio === -1) return html;
+  let p = inizio, profondita = 0;
+  while (p < html.length) {
+    const ap = html.indexOf('<details', p);
+    const ch = html.indexOf('</details>', p);
+    if (ch === -1) return html;
+    if (ap !== -1 && ap < ch) { profondita++; p = ap + 8; }
+    else { profondita--; p = ch + 10; if (profondita === 0) return html.slice(0, inizio) + invito + html.slice(p); }
+  }
+  return html;
+}
+
 // Fine del <div> che si apre in posizione `da`, contando i <div> annidati.
 function fineDiv(html, da) {
   let p = da, profondita = 0;
@@ -85,6 +100,7 @@ const LINGUE = [
     gratis: (url) => `Le prime ${SCHEDE_LIBERE} schede svolte di questo argomento sono gratuite e si trovano negli <a href="${url}">esercizi svolti</a>.`,
     riservata: 'Soluzione riservata a chi ha sbloccato la materia.', soluzione: 'La soluzione completa di questo esercizio è nella versione sbloccata.',
     svolgimento: 'Svolgimento passo per passo nell’accesso completo.',
+    dimostrazione: 'La dimostrazione è riservata a chi ha sbloccato la materia.',
     schedaSopra: 'Scheda dell’accesso completo',
     schedaTitolo: (titolo) => `Le tracce sono libere, gli svolgimenti sono riservati a chi ha sbloccato ${titolo}`,
     schedaResto: (schede, argomenti, esercizi) => `Le prime ${SCHEDE_LIBERE} schede di ogni argomento sono gratuite. Con l’accesso completo ci sono tutte le ${schede} schede svolte, la teoria completa ${argomenti === 1 ? 'dell’argomento' : `dei ${argomenti} argomenti`} e le soluzioni dei ${esercizi} esercizi da fare.`,
@@ -97,6 +113,7 @@ const LINGUE = [
     gratis: (url) => `The first ${SCHEDE_LIBERE} worked examples of this topic are free and are in the <a href="${url}">worked examples</a>.`,
     riservata: 'Solution available to those who have unlocked the subject.', soluzione: 'The full solution of this exercise is in the unlocked version.',
     svolgimento: 'Step-by-step solution in full access.',
+    dimostrazione: 'The proof is available to those who have unlocked the subject.',
     schedaSopra: 'Part of full access',
     schedaTitolo: (titolo) => `The exercises are free to read, the solutions are for those who have unlocked ${titolo}`,
     schedaResto: (schede, argomenti, esercizi) => `The first ${SCHEDE_LIBERE} worked examples of each topic are free. Full access includes all ${schede} worked examples, the complete theory of the ${argomenti} topic${argomenti === 1 ? '' : 's'} and the solutions of the ${esercizi} practice exercises.`,
@@ -107,7 +124,7 @@ function invitoHtml(materia, cosa) {
   return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.sblocca}</a></div>`;
 }
 
-let teorie = 0, esercizi = 0, schedeVetrina = 0;
+let teorie = 0, esercizi = 0, schedeVetrina = 0, voci = 0;
 const problemi = [];
 for (L of LINGUE) for (const materia of A_PAGAMENTO) {
   const base = join(DIST, L.pref, materia);
@@ -185,6 +202,19 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       }
     }
 
+    // --- pagine singole dei teoremi e delle definizioni: enunciato in chiaro, dimostrazione tolta ---
+    // (per ogni voce c'è una vetrina, anche senza dimostrazione, così il Worker ha sempre il file da servire)
+    const cartellaVoci = join(cartella, 'teoria');
+    if (existsSync(cartellaVoci)) {
+      mkdirSync(join(dest, 'teoria'), { recursive: true });
+      for (const f of readdirSync(cartellaVoci)) {
+        if (!f.endsWith('.html')) continue;
+        const h = readFileSync(join(cartellaVoci, f), 'utf8');
+        writeFileSync(join(dest, 'teoria', f), senzaDimostrazione(h, invitoHtml(materia, L.dimostrazione)));
+        voci++;
+      }
+    }
+
     // --- elenco degli esercizi da fare: tracce visibili, soluzioni tolte ---
     if (existsSync(join(cartella, 'esercizi.html'))) {
       const el = readFileSync(join(cartella, 'esercizi.html'), 'utf8');
@@ -203,5 +233,5 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
     }
   }
 }
-console.log(`vetrine: ${teorie} teorie, ${schedeVetrina} schede svolte, ${esercizi} esercizi`);
+console.log(`vetrine: ${teorie} teorie, ${voci} voci singole, ${schedeVetrina} schede svolte, ${esercizi} esercizi`);
 for (const p of problemi) console.warn(`vetrine: ${p}`);

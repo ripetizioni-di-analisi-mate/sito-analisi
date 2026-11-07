@@ -690,6 +690,9 @@ function analizza(pathname) {
   pathname = pathname.slice(pref.length);
   m = pathname.replace(/\.html$/, '').match(/^\/([^/]+)\/([^/]+)\/(teoria|stampa|esercizi-svolti|esercizi)(?:\/(\d+))?\/?$/);
   if (m) return { materia: m[1], argomento: m[2], tipo: m[3], n: m[4] ? Number(m[4]) : undefined, pref };
+  // pagina singola di un teorema o di una definizione: /<materia>/<argomento>/teoria/<ancora>
+  m = pathname.replace(/\.html$/, '').match(/^\/([^/]+)\/([^/]+)\/teoria\/([a-z0-9-]+)\/?$/);
+  if (m) return { materia: m[1], argomento: m[2], tipo: 'voce', ancora: m[3], pref };
   return null;
 }
 // Le pagine cambiano a seconda di chi le guarda (ospite, iscritto, materia sbloccata): niente risposte
@@ -1351,7 +1354,7 @@ export default {
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
-      const ridotta = info.tipo === 'teoria' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n > SCHEDE_LIBERE);
+      const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n > SCHEDE_LIBERE);
       const motore = !sbloccataQui && ridotta && req.method === 'GET'
         ? await motoreVerificato(req).catch(() => null) : null;
       if (motore) {
@@ -1366,6 +1369,9 @@ export default {
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi-svolti/${info.n}`);
         } else if (info.tipo === 'teoria') {
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/teoria`);
+        } else if (info.tipo === 'voce') {
+          // enunciato in chiaro, dimostrazione tolta (scripts/vetrine.mjs)
+          risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/teoria/${info.ancora}`);
         } else if (info.tipo === 'esercizi') {
           risposta = await rispostaVetrina(env, req, info.n
             ? `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi/${info.n}`
