@@ -8,3 +8,29 @@ dist/
 # Report rigenerabile dei controlli di Statistica
 strumenti/statistica/risultati.json
 strumenti/statistica/__pycache__/
+
+# Capitoli condivisi di Analisi 3, rigenerati dalla sorgente Analisi 2
+/src/content/teoria/analisi-3/successioni-e-serie-di-funzioni.md
+/src/content/teoria/analisi-3/serie-di-potenze.md
+/src/content/teoria/analisi-3/serie-di-fourier.md
+/src/content/svolti/analisi-3/successioni-e-serie-di-funzioni/
+/src/content/svolti/analisi-3/serie-di-potenze/
+/src/content/svolti/analisi-3/serie-di-fourier/
+/src/content/dafare/analisi-3/successioni-e-serie-di-funzioni/
+/src/content/dafare/analisi-3/serie-di-potenze/
+/src/content/dafare/analisi-3/serie-di-fourier/
+/src/content/domande/analisi-3/successioni-e-serie-di-funzioni/
+/src/content/domande/analisi-3/serie-di-potenze/
+/src/content/domande/analisi-3/serie-di-fourier/
+/src/content-en/teoria/analisi-3/successioni-e-serie-di-funzioni.md
+/src/content-en/teoria/analisi-3/serie-di-potenze.md
+/src/content-en/teoria/analisi-3/serie-di-fourier.md
+/src/content-en/svolti/analisi-3/successioni-e-serie-di-funzioni/
+/src/content-en/svolti/analisi-3/serie-di-potenze/
+/src/content-en/svolti/analisi-3/serie-di-fourier/
+/src/content-en/dafare/analisi-3/successioni-e-serie-di-funzioni/
+/src/content-en/dafare/analisi-3/serie-di-potenze/
+/src/content-en/dafare/analisi-3/serie-di-fourier/
+/src/content-en/domande/analisi-3/successioni-e-serie-di-funzioni/
+/src/content-en/domande/analisi-3/serie-di-potenze/
+/src/content-en/domande/analisi-3/serie-di-fourier/

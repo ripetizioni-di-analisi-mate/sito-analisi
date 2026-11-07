@@ -7,8 +7,8 @@
     "test:lega": "node --test strumenti/avvisi-lega.test.mjs",
     "test:pacchetti": "node --test strumenti/pacchetti.test.mjs",
     "test:compatibilita": "node --test strumenti/compatibilita.test.mjs",
-    "dev": "astro dev",
-    "build": "node scripts/date-pagine.mjs && NODE_OPTIONS=--max-old-space-size=4096 astro build && node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs",
+    "dev": "node scripts/analisi-3-condivisi.mjs && astro dev",
+    "build": "node scripts/analisi-3-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node scripts/date-pagine.mjs && NODE_OPTIONS=--max-old-space-size=4096 astro build && node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs && node --test strumenti/analisi3.test.mjs",
     "preview": "astro preview"
   },
   "keywords": [],
