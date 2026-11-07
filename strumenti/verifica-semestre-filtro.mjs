@@ -12,7 +12,7 @@ import remarkTracce from '../src/plugins/remark-tracce.mjs';
 import rehypeKatex from '../src/plugins/rehype-katex-tex.mjs';
 import katex from 'katex';
 
-const materia = 'chimica-semestre-filtro';
+const materia = process.argv[2] || 'chimica-semestre-filtro';
 const radice = 'src/content';
 const cartellaTeoria = join(radice, 'teoria', materia);
 const teorie = readdirSync(cartellaTeoria).filter((f) => f.endsWith('.md')).sort();
@@ -55,7 +55,7 @@ for (const nome of teorie) {
   for (const tipo of ['svolti', 'dafare', 'domande']) {
     const cartella = join(radice, tipo, materia, slug);
     const nomi = readdirSync(cartella).filter((f) => /^\d+\.md$/.test(f)).sort((a,b) => parseInt(a)-parseInt(b));
-    assert.ok(nomi.length >= (tipo === 'svolti' ? 10 : 14), `${cartella}: contenuti incompleti`);
+    assert.ok(nomi.length >= (tipo === 'svolti' ? 10 : tipo === 'domande' && materia === 'biologia-semestre-filtro' ? 45 : 14), `${cartella}: contenuti incompleti`);
     for (const nomeFile of nomi) {
       const percorso = join(cartella, nomeFile);
       const { dati, corpo } = leggi(percorso);
@@ -71,14 +71,14 @@ for (const nome of teorie) {
         assert.ok(html.includes('blocco-soluzione'), `${percorso}: soluzione assente`);
       } else {
         assert.ok(dati.corretta >= 1 && dati.corretta <= 4, `${percorso}: indice risposta`);
-        assert.ok(existsSync(join(radice, 'dafare', materia, slug, nomeFile)), `${percorso}: manca la traccia associata`);
+        assert.ok(corpo.split(/^- /m)[0].trim() || existsSync(join(radice, 'dafare', materia, slug, nomeFile)), `${percorso}: mancano testo della domanda e traccia associata`);
         const prima = html.split(/<h2[\s>]/)[0];
         const lista = [...prima.matchAll(/<ul>([\s\S]*?)<\/ul>/g)].pop();
         const opzioni = lista ? [...lista[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((m) => m[1].trim()) : [];
         assert.equal(opzioni.length, 4, `${percorso}: quattro opzioni`);
         assert.equal(new Set(opzioni).size, 4, `${percorso}: opzioni duplicate`);
         assert.ok(corpo.includes('## Spiegazione'), `${percorso}: motivazione assente`);
-        for (const m of corpo.matchAll(/\/chimica-semestre-filtro\/([^/]+)\/teoria#([\w-]+)/g)) {
+        for (const m of corpo.matchAll(new RegExp(`/${materia}/([^/]+)/teoria#([\\w-]+)`, 'g'))) {
           if (m[1] === slug) assert.ok(ancore.has(m[2]), `${percorso}: link teoria ${m[2]} assente`);
         }
         distribuzione[dati.corretta-1]++;

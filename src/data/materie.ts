@@ -601,6 +601,24 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'biomolecole', titolo: 'Amminoacidi, proteine, carboidrati, lipidi e acidi nucleici', breve: 'Biomolecole' },
     ],
   },
+  {
+    slug: 'biologia-semestre-filtro',
+    titolo: 'Biologia per il semestre filtro',
+    breve: 'Biologia semestre filtro',
+    descrizione: 'Biologia per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dalla cellula alla genetica e al controllo della proliferazione. Teoria, schede svolte, esercizi con soluzione e 315 quiz spiegati.',
+    colore: '#5b7d50',
+    gruppo: 'Semestre filtro',
+    attiva: true,
+    argomenti: [
+      { slug: 'organizzazione-biologica', titolo: 'Organizzazione biologica e molecolare della vita', breve: 'Cellule e biomolecole' },
+      { slug: 'genoma-cromatina', titolo: 'Genoma, cromatina ed epigenetica', breve: 'Genoma e cromatina' },
+      { slug: 'flusso-informazione', titolo: 'Replicazione, espressione genica e proteine', breve: 'Flusso dell’informazione' },
+      { slug: 'genetica-mutazioni', titolo: 'Mutazioni, ereditarietà e caratteri', breve: 'Genetica e mutazioni' },
+      { slug: 'strutture-cellulari', titolo: 'Membrane, organelli, traffico e citoscheletro', breve: 'Strutture cellulari' },
+      { slug: 'segnalazione-cellulare', titolo: 'Adesione, comunicazione e segnalazione cellulare', breve: 'Segnalazione cellulare' },
+      { slug: 'ciclo-cellulare', titolo: 'Ciclo cellulare, meiosi e morte cellulare', breve: 'Proliferazione e sopravvivenza' },
+    ],
+  },
 ];
 
 // Prove in locale: con SOLO_MATERIE="analisi-1,precorso" le altre materie risultano in preparazione (build più rapida).
