@@ -55,6 +55,7 @@ const icona = {
   <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
+  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <MaterialiStudente lingua={lingua} />
   <form class="cerca-home" id="ricerca-principale" action={link(lingua, '/cerca')} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
@@ -72,7 +73,7 @@ const icona = {
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
   <div class="risorse-home"><GratisHome lingua={lingua} /></div>
-  {lingua === 'it' && <PacchettiHome />}
+  {lingua === 'it' && <div class="solo-ospiti"><PacchettiHome /></div>}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
@@ -146,6 +147,7 @@ const icona = {
   ))}
 </Base>
 <style>
+  .pacchetti-studente{padding-top:1rem}
   .home-intro{margin-bottom:1.4rem}.home-intro .sommario{margin:17px 0 0}
   .home-intro .home-fascia-motivazionale{box-sizing:border-box;display:flex;align-items:center;justify-content:center;min-height:47px;width:100%;max-width:none;margin:0;padding:10px 14px;background:#24545e;color:#fff;border-radius:10px;text-align:center;font:italic 500 18px/1.4 var(--ui);letter-spacing:.01em;text-wrap:balance}
   @media(max-width:560px){.home-intro .home-fascia-motivazionale{padding:10px 12px;font-size:17px}}
