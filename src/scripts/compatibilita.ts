@@ -14,11 +14,13 @@ interface Richiesta {
   argomento: { slug: string; titolo: string } | null;
   scheda: { n: number; titolo: string; libera: boolean; link: string } | null;
   voce: { titolo: string; tipo: string; link: string } | null;
+  riferimenti?: { titolo: string; link: string }[];
   teoriaLink: string | null; domandeLink: string | null;
   successo?: { risposte: number; corrette: number } | null;
 }
 interface Esito {
   materia: string; titolo: string; compatibilita: number; conteggi: Record<'stesso' | 'argomento' | 'nessuno', number>;
+  correzioneMateria?: { materiaScelta: string; titoloScelto: string; materia: string; titolo: string; fonte: string } | null;
   perPunti: boolean; richieste: Richiesta[]; collegato: boolean;
   quote?: { stesso: number; argomento: number };
   successo: { percentuale: number | null; risposte: number } | null;
@@ -222,6 +224,7 @@ export function avviaCompatibilita() {
   // Il confronto risponde in streaming (una riga JSON per evento): {"r": richiesta} appena il modello la scrive,
   // poi {"fine": esito} con le percentuali. Le richieste si mostrano subito, il riquadro completo alla fine.
   const confronta = async (materia: string, testo: string) => {
+    let materiaConfronto = materia;
     esitoBox.hidden = true;
     esitoBox.innerHTML = '';
     aggiornaFase('confronto', 'Confronto gli esercizi con la teoria e il materiale della materia…');
@@ -242,6 +245,11 @@ export function avviaCompatibilita() {
       if (!riga.trim()) return;
       const d = JSON.parse(riga);
       if (d.errore) throw new Error(d.errore);
+      if (d.materiaCorretta) {
+        materiaConfronto = d.materiaCorretta.materia;
+        aggiornaFase('confronto', `Materia riconosciuta: ${d.materiaCorretta.titolo}. Confronto il compito con il materiale corretto…`);
+        return;
+      }
       if (d.ricomincia) {
         arrivate.length = 0;
         esitoBox.innerHTML = '';
@@ -252,7 +260,7 @@ export function avviaCompatibilita() {
       if (d.fine) { esito = d.fine; return; }
       if (d.r) {
         arrivate.push(d.r);
-        inCorso(materia, arrivate);
+        inCorso(materiaConfronto, arrivate);
         aggiornaAvanzamento(Math.min(90, 60 + arrivate.length * 3));
         aggiornaFase('confronto', `${arrivate.length} ${arrivate.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}. Il confronto continua…`);
       }
@@ -312,6 +320,7 @@ export function avviaCompatibilita() {
   const rigaHtml = (materia: string, r: Richiesta) => {
     const link: string[] = [];
     if (r.scheda) link.push(`<a href="${esc(r.scheda.link)}">${conFormule(r.scheda.titolo)}</a>${r.scheda.libera && !possiede(materia) ? ' (gratuita)' : ''}`);
+    else if (r.riferimenti?.length) link.push(...r.riferimenti.map((v) => `<a href="${esc(v.link)}">${conFormule(v.titolo)}</a>`));
     else if (r.voce) link.push(`<a href="${esc(r.voce.link)}">${conFormule(r.voce.titolo)}</a>`);
     else if (r.argomento && r.teoriaLink) link.push(`<a href="${esc(r.teoriaLink)}">${esc(r.argomento.titolo)}</a>`);
     if (r.domandeLink) link.push(`<a href="${esc(r.domandeLink)}">Domande a tempo</a>${r.successo ? ` ${r.successo.corrette}/${r.successo.risposte}` : ''}`);
@@ -329,6 +338,12 @@ export function avviaCompatibilita() {
     esitoBox.hidden = false;
   }
   function mostra(e: Esito, testo: string) {
+    const selezione = Array.from(form!.querySelectorAll<HTMLInputElement>('input[name="materia"]')).find((input) => input.value === e.materia);
+    if (selezione) selezione.checked = true;
+    const correzione = e.correzioneMateria;
+    const notaMateria = correzione
+      ? `<p class="compat-nota-materia">Avevi selezionato ${esc(correzione.titoloScelto)}. <strong>Il compito è stato valutato secondo ${esc(correzione.titolo)}</strong>, riconosciuta dal testo.</p>`
+      : '';
     const tot = Math.max(e.richieste.length, 1);
     const quota = (k: 'stesso' | 'argomento') => e.quote?.[k] ?? (100 * e.conteggi[k] * (k === 'stesso' ? 1 : 0.5)) / tot;
     const successo = e.collegato && e.successo?.percentuale != null
@@ -345,6 +360,7 @@ export function avviaCompatibilita() {
     const voci = e.richieste.map((r) => rigaHtml(e.materia, r)).join('');
     esitoBox.innerHTML = `
       <div class="compat-sintesi">
+        ${notaMateria}
         <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di copertura stimata con ${esc(e.titolo)}</span></p>
         <div class="compat-barra" aria-hidden="true"><i class="b-stesso" style="width:${quota('stesso')}%"></i><i class="b-argomento" style="width:${quota('argomento')}%"></i></div>
         <p class="compat-righe-sintesi">${e.conteggi.stesso} coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte</p>
