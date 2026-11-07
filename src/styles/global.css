@@ -625,7 +625,12 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .indice-materie .voce-materia { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; padding: 0.55rem 0.65rem; border-radius: var(--raggio); text-decoration: none; color: var(--inchiostro); transition: background 150ms ease, box-shadow 150ms ease; }
 .indice-gruppo .indice-materie > li + li { border-top: 1px solid color-mix(in srgb, var(--riga) 55%, transparent); }
 .indice-gruppo > .indice-materie { padding: 0.2rem 0 0.35rem; }
-.indice-gruppo a.voce-materia::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-top: 1.3px solid var(--inchiostro-2); transform: rotate(45deg); }
+/* La freccia con asta indica una pagina; i chevron che ruotano restano riservati agli elenchi apribili. */
+.indice-gruppo a.voce-materia::after {
+  content: ''; width: 0.95rem; height: 0.95rem; flex: none; margin-right: 0.05rem;
+  background: var(--inchiostro-2); border: 0; transform: none;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M3 10h14M11 4l6 6-6 6' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 .indice-materie a.voce-materia:hover, .indice-materie a.voce-materia:focus-visible, .indice-materie a.voce-materia[aria-current="page"] { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); box-shadow: inset 3px 0 var(--verde); }
 .materia-testo { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.35; }
 .materia-nome { font: 400 0.9rem/1.35 var(--ui); color: var(--inchiostro); overflow-wrap: break-word; }
