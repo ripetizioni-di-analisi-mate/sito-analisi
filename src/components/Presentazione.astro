@@ -2,14 +2,16 @@
 // Presentazione di Carmine (foto, laurea, numeri), usata in home e nelle pagine dei videocorsi.
 // Il titolo cambia a seconda della pagina; il resto è uguale ovunque.
 import { link, type Lingua } from '../i18n';
-interface Props { lingua: Lingua; titolo?: string }
-const { lingua, titolo } = Astro.props;
+interface Props { lingua: Lingua; titolo?: string; motto?: string }
+const { lingua, titolo, motto } = Astro.props;
 ---
 <a class="presentazione-home" href={link(lingua, '/chi-sono')}>
   <img src="/chi-sono/carmine.webp" srcset="/chi-sono/carmine-320.webp 320w, /chi-sono/carmine.webp 640w" sizes="9rem" width="320" height="320" alt="Carmine Tornincasa" />
   <span class="presentazione-testo">
     <strong>{titolo ?? (lingua === 'it' ? 'Ing. Carmine Tornincasa' : 'Carmine Tornincasa, civil engineer')}</strong>
     <span class="presentazione-laurea">{lingua === 'it' ? 'Laureato in Ingegneria civile con 110 e lode all’Università degli Studi della Campania «Luigi Vanvitelli».' : 'Graduated in Civil Engineering with full marks and honours (110 cum laude) from the University of Campania Luigi Vanvitelli.'}</span>
+    {/* Frase di Carmine (08/11, versione A scelta fra tre): sotto la laurea, in corsivo con il filo verde come i fatti della pagina Chi sono. Solo dove la pagina la passa (home). */}
+    {motto && <span class="presentazione-motto">«{motto}»</span>}
   </span>
   <span class="presentazione-numeri">
     <span class="presentazione-numero">

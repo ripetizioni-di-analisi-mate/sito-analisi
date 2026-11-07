@@ -46,11 +46,12 @@ const icona = {
 ---
 <Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} sezione="home" ricercaPrincipale seo={{ titolo: SEO(lingua).home }}>
   <div class="home-intro solo-ospiti">
-    <h1 class="home-fascia-motivazionale">{lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'}</h1>
+    {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
+    <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
     <p class="sommario">{lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
   </div>
   <div class="solo-ospiti">
-    <Presentazione lingua={lingua} />
+    <Presentazione lingua={lingua} motto={lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
   </div>
   <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
@@ -149,10 +150,8 @@ const icona = {
 <style>
   .pacchetti-studente{padding-top:1rem}
   .home-intro{margin-bottom:1.4rem}
-  /* Frase di apertura (08/11, versione B scelta da Carmine): corsivo nel carattere dei titoli, centrata, senza sfondo, riga sottile sotto. */
-  .home-intro .home-fascia-motivazionale{margin:0;padding:0 0 .7rem;border-bottom:1px solid var(--riga);color:var(--inchiostro);text-align:center;font:italic 400 1.45rem/1.35 var(--titoli);text-wrap:balance}
-  @media(max-width:560px){.home-intro .home-fascia-motivazionale{font-size:1.25rem}}
-  .home-intro .sommario{margin-top:.9rem}
+  .solo-lettori{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .home-intro .sommario{margin-top:0}
   .home-personale{margin-bottom:1.4rem}.catalogo-testa{scroll-margin-top:6rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;margin:2rem 0 .8rem;font-family:var(--ui)}
   .catalogo-testa h2{margin:0;font-size:1.3rem}.catalogo-testa>span{color:var(--inchiostro-2);font-size:.88rem}
   :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-left-width:3px;box-shadow:none;background:var(--carta)}
