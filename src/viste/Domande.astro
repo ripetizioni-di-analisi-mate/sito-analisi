@@ -83,6 +83,7 @@ const JS = en ? {
     </div>
     <p class="sommario">{T.sommario}</p>
     {['tolc-i', 'tolc-s'].includes(materia) && <p class="nota">{en ? 'Ten sample questions are available before unlocking TOLC-I. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {materia.toUpperCase()}</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
+    {materia === 'biologia-semestre-filtro' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 315 questions with explanations.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Biologia</a> comprende tutti i 315 quiz con spiegazione.</>}</p>}
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
     {materia === 'matematica-semestre-filtro' && <p class="nota">{en ? 'Mathematics practice for Physics and Chemistry. These questions train the prerequisites; they are not an official filter-semester exam.' : 'Allenamento di matematica per Fisica e Chimica. Queste domande servono a consolidare i prerequisiti; non costituiscono una prova ufficiale del semestre filtro.'}</p>}
 
