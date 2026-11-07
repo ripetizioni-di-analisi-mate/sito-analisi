@@ -31,6 +31,8 @@ import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPac
 import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
 import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from './avvisi-lega.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
+import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDispositivi, sessioneDispositivoValida,
+  cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const CRON_PROMEMORIA = '30 16 * * *';
@@ -140,6 +142,7 @@ export class Archivio {
       CREATE TABLE IF NOT EXISTS pi_eventi (giorno TEXT, evento TEXT, n INTEGER, PRIMARY KEY (giorno, evento));
       CREATE TABLE IF NOT EXISTS pi_prove (giorno TEXT, id TEXT, area TEXT, domanda TEXT, risposta TEXT, modello TEXT, ms INTEGER, stato INTEGER, PRIMARY KEY (giorno, id));
     `);
+    creaTabelleDispositivi(this.sql);
     // colonne aggiunte dopo: il nome dello studente
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
     // e la provenienza della prima visita (Instagram, Google, …)
@@ -220,6 +223,10 @@ export class Archivio {
     if (pathname.startsWith('/sfi-')) { const r = archivioSfide(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/comp-')) { const r = archivioCompatibilita(this, pathname, c); if (r) return Response.json(r); }
     const ora = new Date().toISOString();
+    if (pathname.startsWith('/disp-')) {
+      const r = archivioDispositivi(this, pathname, c);
+      if (r) return Response.json(r);
+    }
     switch (pathname) {
       case '/visita':
         this.sql.exec(`INSERT INTO pagine (giorno, sezione, n) VALUES (?, ?, 1)
@@ -304,29 +311,40 @@ export class Archivio {
         const u = this.riga('SELECT email, versione, creato, nome FROM utenti WHERE email = ?', c.email);
         if (!u || u.versione !== c.versione) return Response.json(null);
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
-        const d = this.riga('SELECT ultimo_uso FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
-        if (!d) return Response.json(null);
+        const d = this.riga('SELECT ultimo_uso, nonce FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
+        if (!d || (d.nonce || null) !== (c.nonce || null)) return Response.json(null);
         if (Date.now() - d.ultimo_uso > 60 * 1000) { // ultima attività: si registra al più una volta al minuto
           this.sql.exec('UPDATE dispositivi SET ultimo_uso = ? WHERE email = ? AND id = ?', Date.now(), c.email, c.dispositivo);
           this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
         }
-        const dispositivi = this.dispositiviDi(u.email).map((x) => ({ nome: x.nome, questo: x.id === c.dispositivo }));
+        const dispositivi = this.dispositiviDi(u.email).map((x) => ({ ...x, questo: x.id === c.dispositivo }));
         return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi, exp: statoDi(this, u.email).exp });
       }
       case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
+        const u = this.riga('SELECT versione FROM utenti WHERE email = ?', c.email);
+        if (!u || (c.versione !== undefined && u.versione !== c.versione)) return Response.json({ ok: false, scaduto: true });
         this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND ultimo_uso < ?', c.email, Date.now() - 60 * 86400 * 1000);
-        if (this.riga('SELECT id FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id)) {
-          this.sql.exec('UPDATE dispositivi SET ultimo_uso = ?, nome = ? WHERE email = ? AND id = ?', Date.now(), c.nome, c.email, c.id);
-          return Response.json({ ok: true });
+        const esistente = this.riga('SELECT nonce FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id);
+        if (esistente) {
+          const nonce = esistente.nonce || c.nonce || nuovoIdDispositivo();
+          this.sql.exec('UPDATE dispositivi SET ultimo_uso = ?, nome = ?, nonce = ? WHERE email = ? AND id = ?', Date.now(), c.nome, nonce, c.email, c.id);
+          this.sql.exec('DELETE FROM gestioni_dispositivi WHERE email = ? AND dispositivo = ?', c.email, c.id);
+          return Response.json({ ok: true, nonce });
         }
         const presenti = this.dispositiviDi(c.email);
-        if (presenti.length >= c.max) return Response.json({ ok: false, dispositivi: presenti.map((x) => x.nome) });
-        this.sql.exec('INSERT INTO dispositivi (email, id, nome, creato, ultimo_uso) VALUES (?, ?, ?, ?, ?)', c.email, c.id, c.nome, ora, Date.now());
-        return Response.json({ ok: true });
+        if (presenti.length >= MAX_DISPOSITIVI) return Response.json({ ok: false, dispositivi: presenti });
+        const nonce = c.nonce || nuovoIdDispositivo();
+        this.sql.exec('INSERT INTO dispositivi (email, id, nome, creato, ultimo_uso, nonce) VALUES (?, ?, ?, ?, ?, ?)', c.email, c.id, c.nome, ora, Date.now(), nonce);
+        this.sql.exec('DELETE FROM gestioni_dispositivi WHERE email = ? AND dispositivo = ?', c.email, c.id);
+        return Response.json({ ok: true, nonce });
       }
       case '/dispositivo-rimuovi':
+        if (c.verifica && !sessioneDispositivoValida(this, { ...c, dispositivo: c.id })) return Response.json({ ok: false });
         if (c.id) this.sql.exec('DELETE FROM dispositivi WHERE email = ? AND id = ?', c.email, c.id);
-        else this.sql.exec('DELETE FROM dispositivi WHERE email = ?', c.email);
+        else {
+          this.sql.exec('DELETE FROM dispositivi WHERE email = ?', c.email);
+          this.sql.exec('DELETE FROM gestioni_dispositivi WHERE email = ?', c.email);
+        }
         return Response.json({ ok: true });
 
       // livelli e punti esperienza
@@ -504,17 +522,16 @@ async function aDO(env, percorso, dati = {}) {
 // ---------- sessione ----------
 const cookieSessione = (valore, durata) =>
   `sessione=${encodeURIComponent(valore)}; Path=/; Max-Age=${durata}; HttpOnly; Secure; SameSite=Lax`;
-async function apriSessione(env, email, versione, dispositivo) {
-  return cookieSessione(await firmaToken(env, { e: email, v: versione, d: dispositivo, t: Date.now() }), DURATA_SESSIONE);
+async function apriSessione(env, email, versione, dispositivo, nonce) {
+  return cookieSessione(await firmaToken(env, { e: email, v: versione, d: dispositivo, g: nonce, t: Date.now() }), DURATA_SESSIONE);
 }
 
 // ---------- dispositivi: al massimo MAX_DISPOSITIVI per account ----------
-const MAX_DISPOSITIVI = 3;
 // Il cookie "dispositivo" resta anche dopo l'uscita: rientrando dallo stesso browser si riusa lo stesso posto.
 const cookieDispositivo = (id) => `dispositivo=${id}; Path=/; Max-Age=34560000; HttpOnly; Secure; SameSite=Lax`;
 function idDispositivo(req) {
   const c = leggiCookie(req, 'dispositivo');
-  return c && /^[0-9a-f]{32}$/.test(c) ? c : [...crypto.getRandomValues(new Uint8Array(16))].map((b) => b.toString(16).padStart(2, '0')).join('');
+  return c && /^[0-9a-f]{32}$/.test(c) ? c : nuovoIdDispositivo();
 }
 function nomeDispositivo(req) {
   const ua = req.headers.get('user-agent') || '';
@@ -524,29 +541,40 @@ function nomeDispositivo(req) {
 }
 const MSG = {
   limite: {
-    it: (l) => `Questo account è già in uso su ${MAX_DISPOSITIVI} dispositivi (${l}). Esci da uno di questi, oppure scrivimi dalla pagina Contatti per scollegarli.`,
-    en: (l) => `This account is already in use on ${MAX_DISPOSITIVI} devices (${l}). Log out on one of them, or message me from the Contact page to disconnect them.`,
+    it: () => `Hai già ${MAX_DISPOSITIVI} dispositivi collegati. Scegli quale scollegare per accedere da questo.`,
+    en: () => `You already have ${MAX_DISPOSITIVI} connected devices. Choose one to disconnect so you can sign in here.`,
   },
 };
 // Registra il dispositivo e apre la sessione; se il limite è raggiunto risponde con l'errore.
 async function entraDaDispositivo(env, req, email, versione, lingua) {
   const id = idDispositivo(req);
-  const r = await aDO(env, '/dispositivo-registra', { email, id, nome: nomeDispositivo(req), max: MAX_DISPOSITIVI });
-  const h = new Headers({ 'content-type': 'application/json' });
+  const nome = nomeDispositivo(req), nonce = nuovoIdDispositivo();
+  const r = await aDO(env, '/dispositivo-registra', { email, id, nome, nonce, versione });
+  const h = new Headers({ 'content-type': 'application/json', 'cache-control': 'no-store, private' });
   h.append('set-cookie', cookieDispositivo(id));
-  if (!r.ok) return new Response(JSON.stringify({ errore: MSG.limite[lingua === 'en' ? 'en' : 'it'](r.dispositivi.join(', ')), limite: true }), { status: 403, headers: h });
-  h.append('set-cookie', await apriSessione(env, email, versione, id));
+  if (!r.ok) {
+    if (r.scaduto) return json({ errore: 'Accedi di nuovo.', scaduto: true }, 401, { 'cache-control': 'no-store' });
+    if (!stessaOrigineDispositivi(req)) return json({ errore: 'Ricarica la pagina e riprova.' }, 403, { 'cache-control': 'no-store' });
+    const gestione = nuovoIdDispositivo();
+    const g = await aDO(env, '/disp-gestione-crea', { id: gestione, email, versione, dispositivo: id, nome, nonce });
+    if (!g.ok) return json({ errore: 'Accedi di nuovo.', scaduto: true }, 401, { 'cache-control': 'no-store' });
+    h.append('set-cookie', cookieGestioneDispositivi(await firmaToken(env, { scopo: 'gestione-dispositivi', id: gestione, t: Date.now() })));
+    return new Response(JSON.stringify({ errore: MSG.limite[lingua === 'en' ? 'en' : 'it'](), limite: true, gestione: true, dispositivi: g.dispositivi, max: MAX_DISPOSITIVI }), { status: 403, headers: h });
+  }
+  h.append('set-cookie', cookieGestioneDispositivi('', 0));
+  h.append('set-cookie', await apriSessione(env, email, versione, id, r.nonce));
   return new Response('{"ok":true}', { headers: h });
 }
 async function tokenSessione(env, req) {
   const t = leggiCookie(req, 'sessione');
-  return t ? leggiToken(env, t) : null;
+  const dati = t ? await leggiToken(env, t) : null;
+  return dati && !dati.scopo ? dati : null;
 }
 // Utente collegato, con le materie sbloccate (una lettura dell'archivio).
 async function utenteCollegato(env, req) {
   const t = await tokenSessione(env, req);
   if (!t?.e) return null;
-  return aDO(env, '/sessione', { email: t.e, versione: t.v, dispositivo: t.d });
+  return aDO(env, '/sessione', { email: t.e, versione: t.v, dispositivo: t.d, nonce: t.g });
 }
 
 // Nome mostrato in testata: quello scelto dallo studente, altrimenti la parte dell'email prima della @.
@@ -776,6 +804,9 @@ export default {
     }
 
     // ===== account =====
+    if (p === '/api/dispositivi' || p.startsWith('/api/dispositivi/')) {
+      return gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
+    }
     if (p === '/api/registrati' && POST) {
       const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina } = await req.json().catch(() => ({}));
       const email = normalizza(e);
@@ -808,7 +839,7 @@ export default {
     }
     if (p === '/api/esci' && POST) {
       const t = await tokenSessione(env, req);
-      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d });
+      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d, versione: t.v, nonce: t.g, verifica: true });
       const h = new Headers({ 'content-type': 'application/json' });
       h.append('set-cookie', cookieSessione('', 0));
       h.append('set-cookie', 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax');
@@ -817,7 +848,7 @@ export default {
     if (p === '/api/io') {
       const io = await utenteCollegato(env, req);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json({ ...io, livello: livelloDa(io.exp || 0) });
+      return json({ ...io, livello: livelloDa(io.exp || 0) }, 200, { 'cache-control': 'no-store, private' });
     }
 
     // ===== percorso d'acquisto: conteggi anonimi (fine dell'anteprima, tasto di acquisto premuto) =====
@@ -1050,7 +1081,7 @@ export default {
     }
     if (p === '/api/password' && POST) {
       const t = await tokenSessione(env, req);
-      if (!t?.e) return json({ errore: 'Accedi di nuovo.' }, 401);
+      if (!t?.e || !(await utenteCollegato(env, req))) return json({ errore: 'Accedi di nuovo.' }, 401);
       const { attuale, nuova } = await req.json().catch(() => ({}));
       if (typeof nuova !== 'string' || nuova.length < 8 || nuova.length > 200) return json({ errore: 'La nuova password deve avere almeno 8 caratteri.' }, 400);
       const u = await aDO(env, '/utente', { email: t.e });
@@ -1058,7 +1089,7 @@ export default {
         return json({ errore: 'La password attuale non è corretta.' }, 401);
       const sale = nuovoSale();
       const r = await aDO(env, '/utente-password', { email: t.e, hash: await hashPassword(nuova, sale), sale, iterazioni: ITERAZIONI_PBKDF2 });
-      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d) });
+      return json({ ok: true }, 200, { 'set-cookie': await apriSessione(env, t.e, r.versione, t.d, t.g) });
     }
 
     if (p === '/lega/avvisi/disattiva') {
@@ -1122,7 +1153,7 @@ export default {
     }
     if (p === '/esci') {
       const t = await tokenSessione(env, req);
-      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d });
+      if (t?.e && t.d) await aDO(env, '/dispositivo-rimuovi', { email: t.e, id: t.d, versione: t.v, nonce: t.g, verifica: true });
       const h = new Headers({ location: '/' });
       h.append('set-cookie', cookieSessione('', 0));
       h.append('set-cookie', 'accesso=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax');

@@ -156,7 +156,7 @@ export const TESTI = {
     salvaPassword: 'Salva e accedi', chiediNuovoLink: 'Chiedi un nuovo link',
     accountDescrizione: 'Le tue materie e i dati del tuo account.', caricamento: 'Caricamento…', leTueMaterie: 'Le tue materie',
     mostraPassword: 'Mostra la password', impostazioni: 'Impostazioni account',
-    tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare al massimo su 3 dispositivi. Uscendo dall'account su un dispositivo, il posto si libera.",
+    tuoiDispositivi: 'I tuoi dispositivi', notaDispositivi: "L'account si può usare su un massimo di 3 dispositivi. Puoi scollegarne uno a distanza da Account, Impostazioni, Dispositivi collegati.",
     cambiaPassword: 'Cambia password', passwordAttuale: 'Password attuale', nuovaPassword: 'Nuova password', aggiornaPassword: 'Aggiorna la password', esci: "Esci dall'account",
     // cerca
     ricerca: 'Ricerca', cercaSommario: 'Materie e corsi, argomenti, definizioni, teoremi, esercizi e videocorsi. La ricerca avviene nel browser, senza inviare nulla.',
@@ -247,7 +247,7 @@ export const TESTI = {
     salvaPassword: 'Save and log in', chiediNuovoLink: 'Request a new link',
     accountDescrizione: 'Your subjects and account details.', caricamento: 'Loading…', leTueMaterie: 'Your subjects',
     mostraPassword: 'Show password', impostazioni: 'Account settings',
-    tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 3 devices. Logging out on a device frees its place.',
+    tuoiDispositivi: 'Your devices', notaDispositivi: 'The account can be used on at most 3 devices. Disconnect one remotely from Account, Settings, Connected devices.',
     cambiaPassword: 'Change password', passwordAttuale: 'Current password', nuovaPassword: 'New password', aggiornaPassword: 'Update password', esci: 'Log out',
     ricerca: 'Search', cercaSommario: 'Subjects and courses, topics, definitions, theorems and exercises. The search runs in your browser and sends nothing.',
     cercaEsempio: 'For example: sign permanence, indeterminate form',

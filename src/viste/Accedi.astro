@@ -3,6 +3,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
+import '../styles/dispositivi-login.css';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
@@ -32,6 +33,16 @@ const pref = prefisso(lingua);
       : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
   <p class="nota-accesso" id="nota-password"><a href="#recupera" id="apri-recupero">{t.passwordDimenticata}</a></p>
+
+  <section class="dispositivi-login" id="gestione-dispositivi-login" aria-labelledby="titolo-dispositivi-login" hidden>
+    <h2 id="titolo-dispositivi-login"></h2>
+    <p class="nota-accesso">{lingua === 'en'
+      ? 'Choose a device to disconnect, then sign in here. The other devices will stay connected.'
+      : 'Scegli un dispositivo da scollegare per accedere da questo. Gli altri rimangono collegati.'}</p>
+    <ul class="dispositivi-login-elenco" id="dispositivi-login-elenco"></ul>
+    <p class="esito-modulo" id="esito-dispositivi-login" role="status" aria-live="polite"></p>
+    <button type="button" class="bottone-secondario" id="torna-accesso-dispositivi">{lingua === 'en' ? 'Back to sign in' : 'Torna all’accesso'}</button>
+  </section>
 
   <form class="modulo" id="modulo-recupero" novalidate hidden>
     <p class="nota-accesso">{t.recuperoSpiegazione}</p>
@@ -68,6 +79,152 @@ const pref = prefisso(lingua);
       const dopo = new URLSearchParams(location.search).get('dopo');
       const destinazione = dopo && dopo.startsWith('/') && !dopo.startsWith('//') ? dopo : `${pref}/account`;
       let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : 'accedi';
+      const en = pref === '/en';
+      const gestioneDispositivi = document.getElementById('gestione-dispositivi-login');
+      const elencoDispositivi = document.getElementById('dispositivi-login-elenco');
+      const esitoDispositivi = document.getElementById('esito-dispositivi-login');
+      const tornaDispositivi = document.getElementById('torna-accesso-dispositivi');
+      const testiDispositivi = en ? {
+        limite: 'You have reached the limit of {max} devices',
+        ultimo: 'Last used: ', dispositivo: 'Device', scegli: 'Disconnect and sign in here',
+        conferma: 'Disconnect {nome}? You will need to sign in again on that device. The other devices will stay connected.',
+        scollega: 'Disconnect and continue', annulla: 'Cancel', attesa: 'Disconnecting…',
+        scaduto: 'For your security, please enter your password again to manage your devices.',
+        aggiornata: 'The device list has changed. Choose a device from the updated list.',
+        vuota: 'No devices to disconnect. Sign in again to continue.',
+      } : {
+        limite: 'Hai raggiunto il limite di {max} dispositivi',
+        ultimo: 'Ultimo utilizzo: ', dispositivo: 'Dispositivo', scegli: 'Scollega e accedi qui',
+        conferma: 'Scollegare {nome}? Su quel dispositivo sarà necessario accedere di nuovo. Gli altri rimangono collegati.',
+        scollega: 'Scollega e continua', annulla: 'Annulla', attesa: 'Scollegamento in corso…',
+        scaduto: 'Per sicurezza, inserisci di nuovo la password per gestire i dispositivi.',
+        aggiornata: 'La lista dei dispositivi è cambiata. Scegli un dispositivo dall’elenco aggiornato.',
+        vuota: 'Non ci sono dispositivi da scollegare. Accedi di nuovo per continuare.',
+      };
+      let scadenzaGestione;
+      let dispositivoInAttesa = false;
+      let chiudiConfermaDispositivo = () => {};
+      const esitoGestione = (testo, errore = false) => {
+        esitoDispositivi.textContent = testo;
+        esitoDispositivi.className = errore ? 'esito-modulo errore' : 'esito-modulo';
+      };
+      const chiudiGestione = (messaggio = '') => {
+        clearTimeout(scadenzaGestione);
+        gestioneDispositivi.hidden = true;
+        elencoDispositivi.replaceChildren();
+        modulo.hidden = false;
+        document.querySelector('.schede-accesso').hidden = false;
+        document.getElementById('nota-password').hidden = false;
+        modulo.password.value = '';
+        invia.disabled = false;
+        esito.textContent = messaggio;
+        esito.className = messaggio ? 'esito-modulo errore' : 'esito-modulo';
+        modulo.password.focus();
+      };
+      const inAttesaDispositivi = (attesa) => {
+        dispositivoInAttesa = attesa;
+        gestioneDispositivi.setAttribute('aria-busy', String(attesa));
+        gestioneDispositivi.querySelectorAll('button').forEach((b) => { b.disabled = attesa; });
+      };
+      const disegnaDispositivi = (dispositivi) => {
+        chiudiConfermaDispositivo = () => {};
+        elencoDispositivi.replaceChildren();
+        const disponibili = dispositivi.filter((d) => d && typeof d.id === 'string' && !d.questo);
+        for (const [indice, dispositivo] of disponibili.entries()) {
+          const nome = typeof dispositivo.nome === 'string' ? dispositivo.nome : testiDispositivi.dispositivo;
+          const li = document.createElement('li');
+          const riga = document.createElement('div'); riga.className = 'dispositivi-login-riga';
+          const dati = document.createElement('div'); dati.className = 'dispositivi-login-dati';
+          const titolo = document.createElement('strong'); titolo.textContent = nome; dati.appendChild(titolo);
+          const ultimo = new Date(dispositivo.ultimo_uso);
+          if (dispositivo.ultimo_uso && !Number.isNaN(ultimo.getTime())) {
+            const data = document.createElement('span');
+            data.textContent = testiDispositivi.ultimo + ultimo.toLocaleString(en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            dati.appendChild(data);
+          }
+          const scegli = document.createElement('button');
+          scegli.type = 'button'; scegli.className = 'bottone-secondario'; scegli.textContent = testiDispositivi.scegli;
+          scegli.setAttribute('aria-label', `${testiDispositivi.scegli}: ${nome}`);
+          scegli.setAttribute('aria-expanded', 'false');
+          const conferma = document.createElement('div');
+          conferma.className = 'dispositivi-login-conferma'; conferma.hidden = true;
+          conferma.id = `conferma-dispositivo-login-${indice}`;
+          scegli.setAttribute('aria-controls', conferma.id);
+          const spiegazione = document.createElement('p'); spiegazione.textContent = testiDispositivi.conferma.replace('{nome}', nome);
+          spiegazione.id = `spiegazione-dispositivo-login-${indice}`;
+          const azioni = document.createElement('div'); azioni.className = 'dispositivi-login-azioni';
+          const continua = document.createElement('button');
+          continua.type = 'button'; continua.className = 'bottone-primario'; continua.textContent = testiDispositivi.scollega;
+          continua.setAttribute('aria-describedby', spiegazione.id);
+          const annulla = document.createElement('button');
+          annulla.type = 'button'; annulla.className = 'bottone-secondario'; annulla.textContent = testiDispositivi.annulla;
+          const chiudi = () => { conferma.hidden = true; scegli.setAttribute('aria-expanded', 'false'); };
+          scegli.addEventListener('click', () => {
+            if (dispositivoInAttesa) return;
+            chiudiConfermaDispositivo();
+            conferma.hidden = false; scegli.setAttribute('aria-expanded', 'true');
+            chiudiConfermaDispositivo = chiudi;
+            continua.focus();
+          });
+          annulla.addEventListener('click', () => { chiudi(); scegli.focus(); });
+          conferma.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !dispositivoInAttesa) { chiudi(); scegli.focus(); }
+          });
+          continua.addEventListener('click', () => sostituisciDispositivo(dispositivo.id));
+          azioni.append(continua, annulla); conferma.append(spiegazione, azioni);
+          riga.append(dati, scegli); li.append(riga, conferma); elencoDispositivi.appendChild(li);
+        }
+        if (!disponibili.length) esitoGestione(testiDispositivi.vuota);
+      };
+      const aggiornaDispositivi = async () => {
+        const risposta = await fetch(`/api/dispositivi?gestione=1${en ? '&l=en' : ''}`, { cache: 'no-store', credentials: 'same-origin' });
+        const dati = await risposta.json().catch(() => ({}));
+        if (risposta.status === 401 || dati.scaduto) { chiudiGestione(testiDispositivi.scaduto); return false; }
+        if (!risposta.ok || !Array.isArray(dati.dispositivi)) throw new Error(js.erroreGenerico);
+        disegnaDispositivi(dati.dispositivi);
+        return true;
+      };
+      const sostituisciDispositivo = async (id) => {
+        if (dispositivoInAttesa) return;
+        inAttesaDispositivi(true); esitoGestione(testiDispositivi.attesa);
+        try {
+          const risposta = await fetch(`/api/dispositivi/sostituisci${en ? '?l=en' : ''}`, {
+            method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id }),
+          });
+          const dati = await risposta.json().catch(() => ({}));
+          if (risposta.ok && dati.ok) { clearTimeout(scadenzaGestione); location.href = destinazione; return; }
+          if (risposta.status === 401 || dati.scaduto) { chiudiGestione(testiDispositivi.scaduto); return; }
+          if (risposta.status === 409 && dati.aggiorna) {
+            if (await aggiornaDispositivi()) {
+              esitoGestione(testiDispositivi.aggiornata);
+              (elencoDispositivi.querySelector('button') || tornaDispositivi).focus();
+            }
+            return;
+          }
+          esitoGestione(dati.errore || js.erroreGenerico, true);
+        } catch {
+          // Rilegge solo l'elenco autorizzato da questo tentativo di accesso.
+          try {
+            if (await aggiornaDispositivi()) esitoGestione(js.connessione, true);
+          } catch { esitoGestione(js.connessione, true); }
+        } finally { inAttesaDispositivi(false); }
+      };
+      const mostraGestione = (dati) => {
+        clearTimeout(scadenzaGestione);
+        modulo.hidden = true;
+        document.querySelector('.schede-accesso').hidden = true;
+        document.getElementById('nota-password').hidden = true;
+        modulo.password.value = '';
+        esito.textContent = '';
+        esitoGestione('');
+        document.getElementById('titolo-dispositivi-login').textContent = testiDispositivi.limite.replace('{max}', dati.max || 3);
+        disegnaDispositivi(dati.dispositivi);
+        gestioneDispositivi.hidden = false;
+        inAttesaDispositivi(false);
+        (elencoDispositivi.querySelector('button') || tornaDispositivi).focus();
+        scadenzaGestione = setTimeout(() => chiudiGestione(testiDispositivi.scaduto), 5 * 60 * 1000);
+      };
+      tornaDispositivi.addEventListener('click', () => { if (!dispositivoInAttesa) chiudiGestione(); });
 
       const imposta = (s) => {
         scheda = s;
@@ -101,7 +258,11 @@ const pref = prefisso(lingua);
             body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua: pref ? 'en' : 'it' }),
           });
           const d = await r.json().catch(() => ({}));
-          if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }
+          if (!r.ok) {
+            invia.disabled = false;
+            if (d.limite && d.gestione && Array.isArray(d.dispositivi)) { mostraGestione(d); return; }
+            return errore(d.errore || js.erroreGenerico);
+          }
           // conversione per Google Ads (src/data/misurazione.ts)
           if (scheda === 'registrati') { try { window.misura && window.misura('account', { email }); } catch (_) {} }
           location.href = destinazione;
