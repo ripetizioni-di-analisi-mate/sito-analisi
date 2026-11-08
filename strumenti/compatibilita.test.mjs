@@ -407,6 +407,31 @@ test('un elenco senza intestazione può essere riconosciuto come programma', asy
   assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
 });
 
+test('il programma nominale provato online resta riconoscibile quando il modello omette o confonde il tipo', async () => {
+  const testo = 'Limiti di funzioni. Continuità. Teorema degli zeri. Derivate. Teorema di Rolle. Formula di Taylor. Integrali definiti. Teorema fondamentale del calcolo. Integrazione per parti.';
+  for (const intestazione of ['', 'TIPO_DOCUMENTO|ESAME\n']) {
+    const { eventi } = await confronto(`${intestazione}1|T|A1|T3|-|Teorema fondamentale del calcolo\nFINE_CONFRONTO`, 'analisi-1', true, testo);
+    assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
+  }
+  for (const elenco of ['Limiti, derivate, integrali', '1. Limiti\n2. Derivate\n3. Integrali', 'Limiti; derivate; integrali']) {
+    const { eventi } = await confronto('1|T|A1|T3|-|Teorema fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, elenco);
+    assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
+  }
+});
+
+test('richieste di calcolo e domande teoriche non diventano programmi per la sola punteggiatura', async () => {
+  for (const testo of [
+    'Calcolare un integrale. Determinare la derivata. Studiare il limite.',
+    'Enunciare Rolle. Dimostrare Taylor. Definire la continuità.',
+    'Calcola un integrale. Trova una primitiva. Giustifica la risposta.',
+    'Si consideri la funzione f. Si mostri la continuità. Si provi il risultato.',
+    'La funzione è continua? Derivabile? Integrabile?',
+  ]) {
+    const { eventi } = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, testo);
+    assert.equal(eventi.at(-1).fine.tipoDocumento, 'esame', testo);
+  }
+});
+
 test('CFU, ore e numeri del programma non pesano sulla copertura e gli argomenti assenti restano visibili', async () => {
   const { eventi } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T3|8|Teorema fondamentale del calcolo\n2|T|-|-|2|Equazioni differenziali stocastiche\nFINE_CONFRONTO', 'analisi-1', true, 'Syllabus di Analisi matematica I. 8 CFU: teorema fondamentale del calcolo; 2 ore: equazioni differenziali stocastiche.');
   const e = eventi.at(-1).fine;
