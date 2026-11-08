@@ -13,7 +13,7 @@ import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
-import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
+import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua, type VoceMateria } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -37,7 +37,9 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
 // Conteggi veri di ogni materia, letti dai file dei contenuti (non scritti a mano).
 const [svolti, dafare] = [await getCollection('svolti'), await getCollection('dafare')];
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
-const conti = (m: (typeof MATERIE)[number]) => `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
+const conti = (m: (typeof MATERIE)[number], argomento?: string) => argomento
+  ? `${conta(svolti, `${m.slug}/${argomento}`)} schede svolte · ${conta(dafare, `${m.slug}/${argomento}`)} esercizi da fare`
+  : `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
 const icona = {
   teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
   video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',
@@ -95,21 +97,21 @@ const icona = {
       {(() => {
         // Nelle aree senza sottogruppi con almeno una materia pronta (Università, Percorso per principianti) le materie in preparazione stanno in una riga di testo;
         // se nessuna è pronta (TOLC, OFA e test di ingresso) restano schede «in preparazione».
-        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = true) => (
+        const griglia = (voci: VoceMateria[], riga = true) => (
           <ul class="griglia-materie">
-            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
+            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome, href, argomento }) => (
               <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
                 {m.attiva && lingua === 'it' ? (() => {
-                  const v = videoDi(m.slug);
+                  const v = argomento ? undefined : videoDi(m.slug);
                   return (
                     <>
                       <div class="scheda-materia">
                         <h3>{nome}</h3>
                         <p>{m.descrizione}</p>
-                        <span class="conti-materia">{conti(m)}</span>
+                        <span class="conti-materia">{conti(m, argomento)}</span>
                       </div>
                       <span class="piede-scheda pulsanti-scheda">
-                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, `/${m.slug}`)}>
+                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, href ?? `/${m.slug}`)}>
                           <Fragment set:html={icona.teoria} />Teoria ed esercizi<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
@@ -118,7 +120,7 @@ const icona = {
                     </>
                   );
                 })() : m.attiva ? (
-                  <a href={link(lingua, `/${m.slug}`)}>
+                  <a href={link(lingua, href ?? `/${m.slug}`)}>
                     <h3>{nome}</h3>
                     <p>{m.descrizione}</p>
                     <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>

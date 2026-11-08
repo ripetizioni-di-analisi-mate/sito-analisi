@@ -1,5 +1,5 @@
 ---
-import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
+import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, type VoceMateria, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
@@ -101,9 +101,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </ol>
           )}
           {(() => {
-            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
+            const lista = (voci: VoceMateria[]) => (
               <ol class="indice-materie">
-                {voci.map(({ m: x, nome }) => {
+                {voci.map(({ m: x, nome, href }) => {
+                  const destinazione = link(lingua, href ?? `/${x.slug}`);
                   const dentro = (
                     <>
                       <span class="materia-testo">
@@ -114,7 +115,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   );
                   return (
                     <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)} aria-current={qui === link(lingua, `/${x.slug}`) ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                      {x.attiva ? <a class="voce-materia" href={destinazione} aria-current={qui === destinazione ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
                     </li>
                   );
                 })}
