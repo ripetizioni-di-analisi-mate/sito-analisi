@@ -1,4 +1,8 @@
-# Verifica della compatibilità con un esame
+# Verifica della compatibilità con un esame o un programma
+
+Il caricamento accetta compiti e programmi universitari, anche syllabus ed elenchi senza esercizi. La lettura delle immagini conserva argomenti, sottoargomenti e indicazioni sulle dimostrazioni. Il confronto riconosce il tipo di documento nella riga iniziale `TIPO_DOCUMENTO|PROGRAMMA` oppure `TIPO_DOCUMENTO|ESAME`; la riga non conta come richiesta. I modelli che omettono questa riga restano compatibili: un’intestazione esplicita di programma o syllabus, oppure un elenco nominale di almeno tre voci senza domande o richieste da svolgere, fornisce il tipo di riserva. Questo riconoscimento prevale su un’eventuale classificazione incoerente del modello. Ogni tentativo riparte dal tipo di riserva, senza conservare la classificazione del modello fallito. Lo streaming, il risultato e la sintesi archiviata conservano il tipo riconosciuto.
+
+Per i programmi si confrontano separatamente i contenuti indicati, con i collegamenti alla teoria o ai procedimenti presenti; una dimostrazione serve solo quando è richiesta. Le voci mancanti restano visibili. Gli argomenti hanno peso uguale: CFU, ore e numerazione vengono esclusi dai pesi anche se il modello li restituisce per errore. La copertura riguarda il programma caricato, non la difficoltà di un futuro compito. Restano i limiti di quattro pagine, 8000 caratteri e quaranta richieste; file o testi troppo lunghi non vengono troncati per produrre una percentuale su una sola parte.
 
 Il catalogo viene generato dal materiale della materia alla compilazione del sito. Per le schede include titolo, parole chiave, termini evidenziati nelle spiegazioni e brevi estratti delle tracce. Per la teoria include le voci dell'indice, un estratto dell'enunciato e la presenza verificata del blocco di dimostrazione.
 

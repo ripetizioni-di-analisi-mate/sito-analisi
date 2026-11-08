@@ -1,5 +1,5 @@
 ---
-import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, type VoceMateria, blocchiGruppo } from '../i18n';
+import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
@@ -37,16 +37,16 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
         <li style="--colore-materia: var(--accento)">
           <a class="voce-materia" href="/compatibilita">
             <span class="lezioni-icona" set:html={'<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h5.5l3.5 3.5v11.5H6A1.5 1.5 0 0 1 4.5 16V4A1.5 1.5 0 0 1 6 2.5Z"/><path d="M11.5 2.5V6H15"/><path d="m7.6 11.6 1.8 1.8 3.4-3.4"/></svg>'} />
-            <span class="materia-testo"><span class="materia-nome">Il sito copre il tuo esame?</span><small class="lezioni-sotto">Carica il compito e scoprilo</small></span>
+            <span class="materia-testo"><span class="materia-nome">Il sito copre il tuo esame?</span><small class="lezioni-sotto">Carica il compito o il programma</small></span>
           </a>
         </li>
       </ol>
     </div>
   )}
   {lingua === 'it' && (
-    <a class="indice-pacchetti" href="/pacchetti" aria-current={qui === '/pacchetti' ? 'page' : undefined}>
+    <a class="indice-pacchetti" href="/pacchetti" data-sconto-bronzo aria-current={qui === '/pacchetti' ? 'page' : undefined}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
-      <span>Pacchetti e sconti</span>
+      <span data-luccichio-bronzo>Pacchetti e sconti</span>
     </a>
   )}
   {m ? (
@@ -101,10 +101,9 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </ol>
           )}
           {(() => {
-            const lista = (voci: VoceMateria[]) => (
+            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
               <ol class="indice-materie">
-                {voci.map(({ m: x, nome, href }) => {
-                  const destinazione = link(lingua, href ?? `/${x.slug}`);
+                {voci.map(({ m: x, nome }) => {
                   const dentro = (
                     <>
                       <span class="materia-testo">
@@ -115,7 +114,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   );
                   return (
                     <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                      {x.attiva ? <a class="voce-materia" href={destinazione} aria-current={qui === destinazione ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)} aria-current={qui === link(lingua, `/${x.slug}`) ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
                     </li>
                   );
                 })}
@@ -162,17 +161,18 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 </script>
 
 <style>
-  .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--riga); border-radius: var(--raggio); color: var(--verde); background: color-mix(in srgb, var(--verde) 5%, var(--carta)); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
+  .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); color: var(--bronzo); background: var(--bronzo-fondo); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
-  .indice-pacchetti:hover, .indice-pacchetti[aria-current="page"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 9%, var(--carta)); }
+  .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
+  .indice-pacchetti[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
-  details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
+  details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
   .indice-universita :global(.indice-sottogruppo > summary) { justify-content: flex-start; }
   .indice-universita :global(.indice-sottogruppo > summary::before) { display: block; }
   .indice-universita :global(.indice-sottogruppo > summary::after) { display: none; }
   .indice-universita :global(.indice-sottogruppo > .indice-materie) { margin-left: 0.6rem; }
-  details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); }
+  details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: transparent; background: #e7ede9; box-shadow: inset 3px 0 var(--azione); }
   @media (prefers-reduced-motion: reduce) { details.indice-gruppo > summary.indice-percorso { transition: none; } }
   a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
 </style>

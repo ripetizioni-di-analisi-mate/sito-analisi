@@ -12,12 +12,13 @@ const descrizioni: Record<string, string> = {
   'fisica-1': 'Meccanica e termodinamica',
   'fisica-2': 'Elettromagnetismo e onde',
   'matematica-generale': 'Matematica per Economia',
+  'matematica-finanziaria': 'Matematica finanziaria',
 };
 ---
 <div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-soglia={SOGLIA_CONSIGLIATO} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
   <form class="compat-modulo" id="compat-modulo" novalidate>
     <div class="compat-intro">
-      <span class="compat-occhiello">Il tuo compito</span>
+      <span class="compat-occhiello">Compito o programma</span>
       <span class="compat-gratis">Gratuito · Senza account</span>
     </div>
     <fieldset class="compat-scelta">
@@ -27,39 +28,39 @@ const descrizioni: Record<string, string> = {
       </div>
     </fieldset>
     <div class="compat-documento">
-      <h2 class="compat-titolo-passo"><span class="compat-numero" aria-hidden="true">2</span>Aggiungi il compito</h2>
+      <h2 class="compat-titolo-passo"><span class="compat-numero" aria-hidden="true">2</span>Aggiungi il compito o il programma</h2>
       <label class="compat-carica">
         <input type="file" name="file" accept="image/*,application/pdf" multiple />
         <span class="compat-upload-icona" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V3m-4 4 4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg></span>
-        <b id="compat-carica-titolo">Carica il tuo compito</b>
+        <b id="compat-carica-titolo">Carica il compito o il programma del corso</b>
         <span id="compat-carica-dettaglio">Trascina qui i file oppure scegli dal dispositivo</span>
         <span class="compat-formati">Foto JPG / PNG o PDF · Fino a {MAX_PAGINE} pagine</span>
       </label>
       <ul class="compat-file" id="compat-file"></ul>
       <details class="compat-incolla">
         <summary>Preferisci incollare il testo?</summary>
-        <label for="compat-testo" class="compat-etichetta-testo">Testo del compito</label>
-        <textarea id="compat-testo" name="testo" rows="6" maxlength="8000" placeholder="Incolla qui gli esercizi o le domande del tuo compito…"></textarea>
+        <label for="compat-testo" class="compat-etichetta-testo">Testo del compito o del programma</label>
+        <textarea id="compat-testo" name="testo" rows="6" maxlength="8000" placeholder="Incolla gli esercizi, le domande o l’elenco degli argomenti del programma…"></textarea>
       </details>
     </div>
     <div class="compat-tasti">
       <button type="submit" class="bottone-primario" id="compat-invia">Controlla la compatibilità</button>
       <span class="esito-modulo compat-stato" id="compat-stato" role="status"></span>
     </div>
-    <p class="compat-nota">Copri nome e matricola prima di caricare il compito. Il testo si conserva senza dati personali per migliorare il materiale. <a href="/privacy">Informativa sulla privacy</a>.</p>
+    <p class="compat-nota">Il tipo di documento viene riconosciuto automaticamente. Copri nomi, matricole e recapiti prima di caricarlo. Il testo si conserva senza dati personali per migliorare il materiale. <a href="/privacy">Informativa sulla privacy</a>.</p>
   </form>
   <div class="compat-attesa" id="compat-attesa" hidden>
     <div class="compat-attesa-testa">
       <span class="compat-spinner" aria-hidden="true"></span>
       <div class="compat-attesa-testo" role="status" aria-live="polite" aria-atomic="true">
         <strong id="compat-attesa-titolo">Verifica compatibilità in corso</strong>
-        <p id="compat-fase">Preparazione del compito…</p>
+        <p id="compat-fase">Preparazione del documento…</p>
       </div>
       <div class="compat-percentuale" aria-hidden="true"><b id="compat-percentuale">0%</b><small id="compat-percentuale-etichetta">stimato</small></div>
     </div>
     <div class="compat-loading" id="compat-loading" role="progressbar" aria-label="Avanzamento della verifica" aria-describedby="compat-fase" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0% stimato"><span></span></div>
     <ol class="compat-passaggi" aria-label="Fasi della verifica">
-      <li data-fase="lettura">Lettura del compito</li>
+      <li data-fase="lettura">Lettura del documento</li>
       <li data-fase="confronto">Confronto con il materiale</li>
       <li data-fase="risultato">Risultato</li>
     </ol>

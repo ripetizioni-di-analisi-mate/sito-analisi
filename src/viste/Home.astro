@@ -13,7 +13,7 @@ import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
-import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua, type VoceMateria } from '../i18n';
+import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
@@ -37,9 +37,7 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
 // Conteggi veri di ogni materia, letti dai file dei contenuti (non scritti a mano).
 const [svolti, dafare] = [await getCollection('svolti'), await getCollection('dafare')];
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
-const conti = (m: (typeof MATERIE)[number], argomento?: string) => argomento
-  ? `${conta(svolti, `${m.slug}/${argomento}`)} schede svolte · ${conta(dafare, `${m.slug}/${argomento}`)} esercizi da fare`
-  : `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
+const conti = (m: (typeof MATERIE)[number]) => `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
 const icona = {
   teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
   video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',
@@ -55,11 +53,11 @@ const icona = {
   <div class="solo-ospiti">
     <Presentazione lingua={lingua} motto={lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
   </div>
-  <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
+  <h1 class="home-personale solo-collegati solo-lettori">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
-  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <MaterialiStudente lingua={lingua} />
+  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <form class="cerca-home" id="ricerca-principale" action={link(lingua, '/cerca')} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
@@ -97,21 +95,21 @@ const icona = {
       {(() => {
         // Nelle aree senza sottogruppi con almeno una materia pronta (Università, Percorso per principianti) le materie in preparazione stanno in una riga di testo;
         // se nessuna è pronta (TOLC, OFA e test di ingresso) restano schede «in preparazione».
-        const griglia = (voci: VoceMateria[], riga = true) => (
+        const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = true) => (
           <ul class="griglia-materie">
-            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome, href, argomento }) => (
+            {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
               <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
                 {m.attiva && lingua === 'it' ? (() => {
-                  const v = argomento ? undefined : videoDi(m.slug);
+                  const v = videoDi(m.slug);
                   return (
                     <>
                       <div class="scheda-materia">
                         <h3>{nome}</h3>
                         <p>{m.descrizione}</p>
-                        <span class="conti-materia">{conti(m, argomento)}</span>
+                        <span class="conti-materia">{conti(m)}</span>
                       </div>
                       <span class="piede-scheda pulsanti-scheda">
-                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, href ?? `/${m.slug}`)}>
+                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, `/${m.slug}`)}>
                           <Fragment set:html={icona.teoria} />Teoria ed esercizi<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
@@ -120,7 +118,7 @@ const icona = {
                     </>
                   );
                 })() : m.attiva ? (
-                  <a href={link(lingua, href ?? `/${m.slug}`)}>
+                  <a href={link(lingua, `/${m.slug}`)}>
                     <h3>{nome}</h3>
                     <p>{m.descrizione}</p>
                     <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>
@@ -150,19 +148,19 @@ const icona = {
   ))}
 </Base>
 <style>
-  .pacchetti-studente{padding-top:1rem}
+  .pacchetti-studente{padding-top:0}
   .home-intro{margin-bottom:1.4rem}
   .solo-lettori{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .home-intro .sommario{margin-top:0}
   .home-personale{margin-bottom:1.4rem}.catalogo-testa{scroll-margin-top:6rem;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;margin:2rem 0 .8rem;font-family:var(--ui)}
   .catalogo-testa h2{margin:0;font-size:1.3rem}.catalogo-testa>span{color:var(--inchiostro-2);font-size:.88rem}
-  :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-left-width:3px;box-shadow:none;background:var(--carta)}
+  :global(.home-chiarezza .griglia-materie>li.con-pulsanti){border-color:#e8e2d7;border-left:3px solid var(--azione);box-shadow:none;background:#fffdf9}
   .scheda-materia{display:flex;flex-direction:column;gap:.55rem;padding:1rem 1.1rem .75rem;flex:1}
   .scheda-materia h3{margin:0;color:var(--inchiostro);font:600 1.05rem/1.35 var(--ui)}
   .scheda-materia p{margin:0;font-size:.95rem;line-height:1.5;color:var(--inchiostro-2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .conti-materia{font:400 .76rem/1.4 var(--ui);color:var(--inchiostro-2);margin-top:auto}
   :global(.home-chiarezza .pulsanti-scheda){justify-content:flex-start;flex-wrap:wrap;padding:.2rem 1.1rem .3rem;gap:.6rem;border:0;background:none}
-  :global(.home-chiarezza .pulsante-scheda){font-size:.85rem;background:none;border:0;border-radius:0;padding:.25rem 0;color:var(--accento);gap:.35rem}
+  :global(.home-chiarezza .pulsante-scheda){font-size:.85rem;background:none;border:0;border-radius:0;padding:.25rem 0;color:var(--azione);gap:.35rem}
   :global(.home-chiarezza .pulsante-scheda:hover){text-decoration:underline;background:none}
   .accesso-scheda{display:block;font:400 .76rem var(--ui);padding:0 1.1rem 1rem;color:var(--inchiostro-2)}
   .nota-accesso-scheda{display:none}

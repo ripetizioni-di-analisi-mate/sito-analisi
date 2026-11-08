@@ -11,6 +11,7 @@ import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './st
 import { gestisciTolcI } from './tolc-i.mjs';
 import { TOLC, demoTolc } from '../src/data/tolc.mjs';
 import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
+import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
@@ -918,17 +919,17 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       let dati = await domandeDi(env, materia, l);
-      const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
+      const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3' || materia === 'matematica-finanziaria';
       if (quizConAnteprima && vendita) {
         const accesso = await utenteCollegato(env, req).catch(() => null);
-        if (!accesso?.materie?.includes(materia) && dati) dati = { ...dati, argomenti: materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
+        if (!accesso?.materie?.includes(materia) && dati) dati = { ...dati, argomenti: materia === 'matematica-finanziaria' ? anteprimaFinanziaria(dati.argomenti) : materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
       const personale = argomento === RIPASSO_OGGI;
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
-      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'matematica-finanziaria' ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
       let ordine = null;
@@ -1235,6 +1236,7 @@ export default {
             'biologia-semestre-filtro': env.PADDLE_PREZZO_BIOLOGIA_SEMESTRE_FILTRO || null,
             'statistica': env.PADDLE_PREZZO_STATISTICA || null,
             'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
+            'matematica-finanziaria': env.PADDLE_PREZZO_MATEMATICA_FINANZIARIA || null,
             'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
             'matematica-superiori-3': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_3 || null,
             'matematica-superiori-4': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_4 || null,

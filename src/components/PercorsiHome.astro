@@ -52,11 +52,12 @@ const icone: Record<string, string> = {
 </section>
 <style>
   .selettore-percorsi { margin: 1.1rem 0 0; }
-  .sopra-percorsi { margin: 0 0 0.25rem; color: var(--verde); font: 600 0.7rem var(--ui); letter-spacing: 0.13em; }
+  .sopra-percorsi { margin: 0 0 0.25rem; color: #8c6843; font: 600 0.7rem var(--ui); letter-spacing: 0.13em; }
+  .sopra-percorsi::after { content: ''; display: block; width: 28px; height: 1px; margin-top: 6px; background: var(--bronzo-dettaglio); }
   h2 { margin: 0 0 0.7rem; color: var(--inchiostro); font: 600 1.4rem/1.25 var(--ui); }
   .percorsi-home { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin: 0; font-family: var(--ui); }
-  .percorsi-home a { display: flex; align-items: center; gap: 0.55rem; min-width: 0; min-height: 3.55rem; padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
-  .percorsi-home a:hover, .percorsi-home a:focus-visible, .percorsi-home a[aria-current="location"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); }
+  .percorsi-home a { display: flex; align-items: center; gap: 0.55rem; min-width: 0; min-height: 3.55rem; padding: 0.5rem 0.65rem; border: 1px solid #eeebe4; border-radius: 7px; background: #fefdfb; color: var(--inchiostro); text-decoration: none; transition: background 150ms ease, border-color 150ms ease; }
+  .percorsi-home a:hover, .percorsi-home a:focus-visible, .percorsi-home a[aria-current="location"] { border-color: transparent; background: #e7ede9; box-shadow: inset 3px 0 var(--azione); color: var(--inchiostro); }
   .icona-percorso { width: 1.3rem; height: 1.3rem; flex: none; color: var(--verde); }
   .testo-percorso { flex: 1; min-width: 0; }
   .testo-percorso strong { display: block; font-size: 0.96rem; font-weight: 600; line-height: 1.25; }

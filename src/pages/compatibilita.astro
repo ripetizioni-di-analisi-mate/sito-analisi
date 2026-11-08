@@ -9,12 +9,12 @@ import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s).titolo).join(', ').replace(/, ([^,]*)$/, ' e $1');
 ---
 <Base lingua="it" titolo="Compatibilità con il tuo esame" percorso={[{ titolo: 'Compatibilità con il tuo esame' }]}
-  descrizione={`Carica il testo del tuo compito d'esame di ${elenco}: il sito calcola quanto è coperto dalla teoria e dagli esercizi svolti.`}
+  descrizione={`Carica il compito d'esame o il programma di ${elenco}: confronta esercizi e argomenti con la teoria e gli esercizi svolti del sito.`}
   seo={{ titolo: 'Compatibilità con il tuo esame universitario | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true }}>
   <div class="pagina-compat">
     <p class="sopratitolo">Esami universitari</p>
     <h1>Compatibilità con il tuo esame</h1>
-    <p class="sommario">Carica il testo del tuo compito e il sito calcola quanto è coperto dalla teoria e dagli esercizi svolti della materia.</p>
+    <p class="sommario">Carica un compito d’esame oppure il programma del corso, anche come elenco di argomenti. Il sito riconosce il documento e indica quanto è coperto e dove studiare ogni voce.</p>
     <CompatibilitaEsame />
   </div>
 </Base>

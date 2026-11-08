@@ -4,7 +4,7 @@
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
-import { FACOLTA, ARGOMENTI_FACOLTA } from './data/facolta';
+import { FACOLTA } from './data/facolta';
 import { url } from './lib/url';
 
 export type Lingua = 'it' | 'en';
@@ -46,8 +46,7 @@ export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.grupp
 // Università usa le facoltà; i corsi condivisi mantengono lo stesso oggetto e lo stesso URL.
 // Negli altri gruppi: prima le materie senza sottogruppo, poi un blocco per sottogruppo.
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
-export interface VoceMateria { m: Materia; nome: string; href?: string; argomento?: string }
-export function blocchiGruppo(materie: Materia[], g: string): { sotto: string | null; materie: VoceMateria[] }[] {
+export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
   if (g === 'Università' || g === 'University') {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
@@ -55,20 +54,9 @@ export function blocchiGruppo(materie: Materia[], g: string): { sotto: string | 
     return [
       ...FACOLTA.map((f) => ({
         sotto: g === 'University' ? f.titoloEn : f.titolo,
-        materie: f.materie.flatMap((slug): VoceMateria[] => {
+        materie: f.materie.flatMap((slug) => {
           const m = perSlug.get(slug);
-          if (m) return [{ m, nome: m.titolo }];
-          const voce = ARGOMENTI_FACOLTA[slug];
-          const origine = voce && perSlug.get(voce.materia);
-          const argomento = origine?.argomenti.find((a) => a.slug === voce.argomento);
-          if (!origine || !argomento) return [];
-          const nome = g === 'University' ? voce.titoloEn : voce.titolo;
-          return [{
-            m: { ...origine, titolo: nome, breve: nome, descrizione: g === 'University' ? voce.descrizioneEn : voce.descrizione, argomenti: [argomento] },
-            nome,
-            href: `/${origine.slug}/${argomento.slug}/teoria`,
-            argomento: argomento.slug,
-          }];
+          return m ? [{ m, nome: m.titolo }] : [];
         }),
       })),
       // Le future materie ancora da assegnare restano raggiungibili nel catalogo.

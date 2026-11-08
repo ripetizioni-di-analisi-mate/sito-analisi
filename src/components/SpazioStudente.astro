@@ -1,37 +1,38 @@
 ---
-// Spazio personale compatto: versione B confermata il 06/11, senza i tre link verdi.
+// Spazio personale in home, versione F «Copertina» scelta da Carmine l'08/11:
+// fascia calda con il saluto, il titolo della fascia (senza rango e grado), la frase con il filo bronzo come la citazione
+// della presentazione, la barra degli EXP e lo stemma grande; sotto, appoggiata alla fascia, la scheda «Continua da qui».
 // Visibile solo a chi ha fatto l'accesso (html.collegato).
-// Il Worker scrive nella pagina nome, stemma, rango, titolo, frase, EXP, barra e prossimo grado (nessuno sfarfallio);
-// il tasto «Continua» e «Riprendi» li completa /api/percorso. La testata non viene toccata.
+// Il Worker scrive nella pagina nome, stemma, titolo, frase, EXP e barra (worker/spazio.mjs, nessuno sfarfallio);
+// la scheda «Continua da qui» e l'esame li completa /api/percorso. La testata non viene toccata.
 import { link, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
 ---
-<section class="spazio-studente" aria-labelledby="ss-nome">
-  <div class="ss-eroe">
-    <div class="ss-stemma" aria-hidden="true"></div>
+<section class="spazio-studente" aria-labelledby="ss-saluto">
+  <div class="ss-copertina">
     <div class="ss-dati">
-      <p class="ss-rango"></p>
-      <h2 class="ss-nome" id="ss-nome"></h2>
-      <p class="ss-titolo"><strong class="ss-fascia"></strong><span class="ss-frase"></span></p>
+      <h2 class="ss-saluto" id="ss-saluto">{en ? 'Hi, ' : 'Ciao, '}<span class="ss-nome"></span>.</h2>
+      <p class="ss-titolo"><span class="ss-fascia"></span></p>
+      <p class="ss-motto"><span class="ss-frase"></span></p>
+      <div class="ss-cammino">
+        <span class="ss-barra"><span></span></span>
+        <p class="ss-exp"><span class="ss-exp-tot"></span> · <span class="ss-mancano"></span></p>
+      </div>
     </div>
-    {/* Esame più vicino (richiesta di Carmine del 03/11, versione A fra tre): solo se lo studente ha inserito una data. */}
-    <a class="ss-esame" href="#" hidden>
-      <span class="ss-es-icona" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="28" height="25" rx="4"/><path d="M6 17h28M13 5v7M27 5v7"/></svg></span>
-      <span class="ss-es-testo"><small class="ss-es-su"></small><span class="ss-es-giu"></span></span>
-    </a>
-    <div class="ss-cammino">
-      <span class="ss-barra"><span></span></span>
-      <p class="ss-exp"><span class="ss-exp-tot"></span><span class="ss-mancano"></span></p>
-    </div>
+    <div class="ss-stemma" aria-hidden="true"></div>
+    {/* Esame più vicino: solo se lo studente ha inserito una data. */}
+    <a class="ss-esame" href="#" hidden><b class="ss-es-giorni"></b> <span class="ss-es-materia"></span></a>
   </div>
-  <div class="ss-piede">
-    <div class="ss-azioni">
-      <a class="ss-riprendi" href="#" hidden><span class="ss-libro" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M10 5.2C8.4 4 6.2 3.6 3 3.8v11.4c3.2-.2 5.4.2 7 1.4 1.6-1.2 3.8-1.6 7-1.4V3.8c-3.2-.2-5.4.2-7 1.4Z"/><path d="M10 5.2v11.4"/></svg></span><span class="ss-rip-testo"><small>{en ? 'Back to' : 'Riprendi'}</small><span class="ss-argomento"></span></span></a>
-      <a class="ss-continua" href={link(lingua, '/domande-a-tempo')}><span>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</span><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></a>
-    </div>
-  </div>
+  <a class="ss-continua" href={link(lingua, '/domande-a-tempo')}>
+    <span class="ss-c-testo">
+      <small class="ss-c-su">{en ? 'To get started' : 'Per cominciare'}</small>
+      <strong class="ss-c-titolo">{en ? 'Choose a topic and start' : 'Scegli un argomento e inizia'}</strong>
+      <span class="ss-c-dove" hidden></span>
+    </span>
+    <span class="ss-c-tasto" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></span>
+  </a>
 </section>
 <script>
   import { caricaPercorsoStudio, leggiCatalogoStudio, prossimaAttivita, ultimaSessioneStudio } from '../lib/percorso-studio.mjs';
@@ -45,32 +46,36 @@ const en = lingua === 'en';
     if (!d) return;
     const catalogo = leggiCatalogoStudio();
     const ultima = ultimaSessioneStudio(d.sessioni, catalogo, en ? 'en' : 'it');
-    const attivita = prossimaAttivita(d, catalogo, en ? 'en' : 'it');
     const c = q('.ss-continua') as HTMLAnchorElement;
-    c.href = attivita.href;
-    c.querySelector('span')!.textContent = attivita.testo;
+    if (ultima) {
+      // Ultimo argomento studiato: «Continua da qui», titolo dell'argomento, materia e sezione.
+      c.href = ultima.href;
+      q('.ss-c-su').textContent = en ? 'Continue from here' : 'Continua da qui';
+      q('.ss-c-titolo').textContent = ultima.titolo;
+      const sezione = ultima.href === ultima.domande ? (en ? 'Timed questions' : 'Domande a tempo') : (en ? 'Theory' : 'Teoria');
+      const dove = q('.ss-c-dove');
+      dove.textContent = ultima.materia && ultima.materia !== ultima.titolo ? `${ultima.materia} · ${sezione}` : sezione;
+      dove.hidden = false;
+    } else {
+      // Studente nuovo: la prossima attività (obiettivo della settimana o scelta di un argomento).
+      const attivita = prossimaAttivita(d, catalogo, en ? 'en' : 'it');
+      c.href = attivita.href;
+      q('.ss-c-titolo').textContent = attivita.testo;
+    }
     // Esame più vicino con la data inserita (/api/percorso → esami).
     const esame = (d.esami || [])[0];
     const es = q('.ss-esame') as HTMLAnchorElement;
     if (esame && es) {
       const giorno = new Date(esame.data + 'T12:00:00');
-      const n = Math.round((giorno - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
+      const n = Math.round((giorno.getTime() - new Date().setHours(12, 0, 0, 0)) / 86400000);
       if (n >= 0) {
-        const lingua = en ? 'en' : 'it';
-        const quando = n > 1 ? (en ? `in ${n} days` : `tra ${n} giorni`) : n === 1 ? (en ? 'tomorrow' : 'domani') : (en ? 'today' : 'oggi');
-        es.querySelector('.ss-es-su')!.textContent = en ? `${esame.titolo} exam` : `Esame di ${esame.titolo}`;
-        es.querySelector('.ss-es-giu')!.textContent = n > 1 ? (en ? `${n} days left` : `Mancano ${n} giorni`) : (en ? `Exam ${quando}` : `L'esame è ${quando}`);
-        es.title = `${esame.titolo} · ${giorno.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`;
+        es.querySelector('.ss-es-giorni')!.textContent = n > 1 ? (en ? `${n} days` : `${n} giorni`) : n === 1 ? (en ? 'Tomorrow' : 'Domani') : (en ? 'Today' : 'Oggi');
+        es.querySelector('.ss-es-materia')!.textContent = n > 1 ? (en ? `to your ${esame.titolo} exam` : `all’esame di ${esame.titolo}`) : (en ? `${esame.titolo} exam` : `l’esame di ${esame.titolo}`);
+        es.title = `${esame.titolo} · ${giorno.toLocaleDateString(en ? 'en' : 'it', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}`;
         es.href = `${pref}/${esame.materia}`;
         es.hidden = false;
         box.classList.add('con-esame');
       }
-    }
-    if (ultima) {
-      const a = q('.ss-riprendi') as HTMLAnchorElement;
-      a.href = ultima.href;
-      a.querySelector('.ss-argomento')!.textContent = ultima.titolo;
-      a.hidden = false;
     }
   })();
 </script>

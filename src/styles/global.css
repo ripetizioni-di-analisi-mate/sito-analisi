@@ -2,14 +2,20 @@
 /* Impianto: una colonna di lettura stretta, indice laterale su computer,
    colore solo come accento dei blocchi. Stile della serie dei Manuali. */
 :root {
-  --carta: #faf8f2;
-  --carta-2: #f1ede4;
-  --inchiostro: #22302f;
-  --inchiostro-2: #5a6664;
-  --riga: #ddd6c8;
-  --accento: #2f6f68;        /* base comune alla palette delle materie */
-  --video: #2f6f68;
-  --azione: #2f6f68;         /* tasti di acquisto: sempre il verde del sito, anche nelle pagine colorate delle materie */          /* videocorsi: resta verde anche dentro le schede colorate delle materie */
+  --carta: #faf9f6;
+  --carta-2: #f1eee7;
+  --inchiostro: #23302e;
+  --inchiostro-2: #59645f;
+  --riga: #e1dcd2;
+  --accento: #214f50;        /* petrolio comune alla navigazione */
+  --video: #214f50;
+  --azione: #214f50;         /* stesso colore per gli stessi comandi in ogni materia */
+  --bronzo: #785735;
+  --bronzo-scuro: #57432e;
+  --bronzo-fondo: #f3ece2;
+  --bronzo-bordo: #dfceb7;
+  --bronzo-icona: #956b41;
+  --bronzo-dettaglio: #a57c50;
 
   --c-definizione: #2f6f68;
   --c-teorema: #3b5f8f;
@@ -30,11 +36,39 @@
   --apertura-lato: 0.32rem;
   --apertura-tratto: 1px;
   --apertura-opacita: 0.65;
+  --altezza-testata: calc(3.25rem + 4px);
   color-scheme: light;
 }
 
+/* Riflesso breve sulle scritte degli sconti, attivato solo quando sono visibili. */
+[data-sconto-bronzo] { --bronzo-testo: var(--bronzo); }
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  [data-sconto-bronzo].bronzo-luccichio [data-luccichio-bronzo] {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(105deg, var(--bronzo-testo) 0%, var(--bronzo-testo) 43%, #b38a57 47%, #ead5af 50%, #b38a57 53%, var(--bronzo-testo) 57%, var(--bronzo-testo) 100%);
+    background-size: 300% 100%;
+    background-position: 100% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: riflesso-bronzo-testo 1.8s cubic-bezier(.28,.05,.38,1) both;
+  }
+}
+@keyframes riflesso-bronzo-testo {
+  from { background-position: 100% 50%; }
+  to { background-position: 0% 50%; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  [data-sconto-bronzo].bronzo-luccichio [data-luccichio-bronzo] {
+    animation: none;
+    background-image: none;
+    color: var(--bronzo-testo);
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4.5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4.5rem; scrollbar-gutter: stable; }
 body {
   margin: 0;
   background: var(--carta);
@@ -58,6 +92,8 @@ ul, ol { padding-left: 1.3rem; }
 hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
 
 /* ---------- struttura della pagina ---------- */
+/* La cornice comune non eredita l'accento della materia aperta sul root. */
+.testata, .indice, .cassetto { --accento: var(--azione); }
 .testata {
   position: sticky; top: 0; z-index: 20;
   background: color-mix(in srgb, var(--carta) 92%, white);
@@ -71,13 +107,14 @@ hr { border: 0; border-top: 1px solid var(--riga); margin: 2rem 0; }
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   font-family: var(--ui);
 }
-.marchio { font-family: var(--titoli); font-weight: 700; font-size: 1.1rem; color: var(--inchiostro); text-decoration: none; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.marchio { font-family: var(--titoli); font-weight: 700; font-size: 1.1rem; line-height: 1.6; color: var(--inchiostro); text-decoration: none; white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 @media (max-width: 30rem) { .marchio { font-size: 0.95rem; } .bottone-cerca span, .bottone-indice span, .bottone-account span:not(.iniziale) { display: none !important; } .bottone-cerca, .bottone-indice, .bottone-account, .bottone-lingua { padding: 0.4rem 0.5rem; } .testata-interna { gap: 0.5rem; } }
 @media (max-width: 24rem) { .marchio > span { display: none; } }
 .marchio { display: inline-flex; align-items: center; gap: 0.5rem; }
 .marchio .logo { width: 32px; height: 32px; flex: none; }
 .marchio span { overflow: hidden; text-overflow: ellipsis; }
 .materia-corrente { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; color: var(--accento); text-decoration: none; padding: 0.2rem 0.55rem; border: 1px solid color-mix(in srgb, var(--accento) 40%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--accento) 8%, transparent); white-space: nowrap; }
+.contesto-materia { margin-bottom: 1rem; }
 /* La striscia comune resta petrolio anche passando rapidamente fra materie. */
 .testata::after { content: ''; display: block; height: 3px; background: var(--azione); }
 .bottone-indice, .bottone-cerca, .bottone-account, .bottone-lingua {
@@ -104,11 +141,12 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 }
 .indice {
   display: none;
-  font-family: var(--ui); font-size: 0.95rem;
+  font: 400 0.95rem/1.6 var(--ui);
   padding: 1.25rem 1rem 2rem;
   border-right: 1px solid var(--riga);
-  position: sticky; top: 3.25rem; align-self: start;
-  max-height: calc(100vh - 3.25rem); overflow-y: auto;
+  position: sticky; top: var(--altezza-testata); align-self: start;
+  max-height: calc(100dvh - var(--altezza-testata)); overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 .indice-materia { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin: 0 0.5rem 0.75rem; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--accento); }
 .indice-materia a { color: var(--accento); text-decoration: none; }
@@ -156,9 +194,9 @@ main {
 }
 
 /* cassetto dell'indice su telefono */
-.cassetto { border: 0; padding: 0; max-width: min(22rem, 88vw); width: 100%; height: 100dvh; max-height: 100dvh; margin: 0; background: var(--carta); color: var(--inchiostro); box-shadow: 0 0 40px rgba(0,0,0,0.18); }
+.cassetto { border: 0; padding: 0; max-width: min(22rem, 88vw); width: 100%; height: 100dvh; max-height: 100dvh; margin: 0; background: var(--carta); color: var(--inchiostro); box-shadow: 0 0 40px rgba(0,0,0,0.18); scrollbar-gutter: stable; }
 .cassetto::backdrop { background: rgba(30, 40, 40, 0.35); }
-.cassetto .indice { display: block; position: static; max-height: none; border: 0; padding-top: 0.75rem; }
+.cassetto .indice { display: block; position: static; max-height: none; border: 0; padding-top: 0.75rem; scrollbar-gutter: auto; }
 .cassetto-testa { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem 0; font-family: var(--ui); }
 .cassetto-testa button { font: inherit; background: none; border: 0; font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--inchiostro-2); }
 
@@ -336,89 +374,86 @@ details.blocco[open] > summary { margin-bottom: 0.5rem; }
 .torna-su[hidden] { display: none; }
 
 /* ---------- home: materie ---------- */
-/* Home per chi ha fatto l'accesso (versione B): lo studente al centro, con il suo stemma, il suo nome e la barra degli EXP.
-   Riquadro bianco e compatto, senza ombre; i colori del rango (--rango-*, scritti dal Worker) solo su testi, bordo e barra. La testata non cambia. */
+/* Home per chi ha fatto l'accesso (versione F «Copertina», scelta da Carmine l'08/11): fascia calda con saluto, titolo della fascia,
+   frase con il filo bronzo come la citazione della presentazione, barra degli EXP e stemma grande; sotto, appoggiata alla fascia,
+   la scheda bianca «Continua da qui». Niente rango e grado nel riquadro (restano in stemma e testata). I colori del rango
+   (--rango-*, scritti dal Worker) solo sul titolo e sulla barra. La testata non cambia. */
 .spazio-studente { display: none; }
 html.collegato .solo-ospiti { display: none; }
-html.collegato .spazio-studente {
-  position: relative; display: flex; flex-direction: column; gap: 0.8rem; margin: 1.2rem 0 1.1rem; padding: 1rem 1.2rem 0.9rem;
-  background: #fff; border: 1px solid color-mix(in srgb, var(--rango-bordo, var(--riga)) 40%, var(--riga)); border-radius: 14px; font-family: var(--ui);
+html.collegato .spazio-studente { display: block; margin: 1.6rem 0 1.6rem; font-family: var(--ui); color: var(--inchiostro); }
+.ss-copertina {
+  position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1rem; padding: 1.6rem 1.8rem 2.6rem;
+  border-radius: 18px; background: radial-gradient(120% 140% at 90% 10%, #f6ead8 0%, #f7f0e5 45%, #faf7f1 100%); box-shadow: inset 0 0 0 1px #efe2cd;
 }
-.ss-eroe { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "stemma dati" "stemma cammino"; align-items: end; gap: 0 1.1rem; }
-.ss-stemma { grid-area: stemma; align-self: center; width: 6.4rem; height: 5.75rem; animation: ss-compare 0.5s ease-out both; }
+.ss-dati { min-width: 0; }
+.ss-saluto { margin: 0; font: 600 2.5rem/1.1 var(--titoli); letter-spacing: -0.015em; color: var(--inchiostro); overflow-wrap: anywhere; }
+.ss-titolo { margin: 0.35rem 0 0; font-size: 1.02rem; color: var(--rango-testo, var(--bronzo)); }
+.ss-titolo:has(.ss-fascia:empty) { display: none; }
+/* Frase della fascia: stesso filo bronzo e stesso corsivo della citazione della presentazione che vede l'ospite. */
+.ss-motto { margin: 0.7rem 0 0; padding-left: 0.75rem; border-left: 2px solid var(--bronzo-dettaglio); font: italic 400 1.08rem/1.4 var(--titoli); color: var(--inchiostro); }
+.ss-motto:has(.ss-frase:empty) { display: none; }
+.ss-frase::before { content: '«'; }
+.ss-frase::after { content: '»'; }
+.ss-cammino { margin-top: 1.1rem; max-width: 22rem; }
+.ss-barra { display: block; height: 6px; border-radius: 6px; background: rgba(165, 124, 80, 0.18); overflow: hidden; }
+.ss-barra > span { display: block; height: 100%; width: var(--perc, 0%); min-width: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--rango-chiaro, #d9b98f), var(--rango-medio, var(--bronzo))); animation: ss-riempi 1.1s 0.2s cubic-bezier(.2,.8,.2,1) both; }
+.ss-exp { margin: 0.35rem 0 0; font-size: 0.8rem; color: var(--inchiostro-2); }
+.ss-stemma { width: 10rem; height: 10rem; filter: drop-shadow(0 12px 18px rgba(120, 87, 53, 0.18)); animation: ss-compare 0.5s ease-out both; }
 .ss-stemma svg { width: 100%; height: 100%; overflow: visible; }
-.ss-dati { grid-area: dati; min-width: 0; display: flex; flex-direction: column; }
-.ss-cammino { grid-area: cammino; align-self: start; margin-top: 0.55rem; }
-.ss-rango { margin: 0; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rango-testo, var(--inchiostro-2)); }
-.spazio-studente .ss-nome { margin: 0.05rem 0 0; font-family: var(--titoli); font-size: 1.55rem; font-weight: 700; line-height: 1.15; color: var(--inchiostro); overflow-wrap: anywhere; }
-.ss-titolo { margin: 0.1rem 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.5rem; }
-.ss-fascia { font-family: var(--titoli); font-size: 1rem; color: var(--rango-testo, var(--inchiostro)); }
-.ss-frase { font-family: var(--titoli); font-style: italic; color: var(--inchiostro-2); font-size: 0.9rem; }
-.ss-barra { display: block; height: 8px; border-radius: 999px; background: color-mix(in srgb, var(--rango-pallido, #eee) 70%, white); overflow: hidden; }
-.ss-barra > span { display: block; height: 100%; width: var(--perc, 0%); min-width: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--rango-chiaro, #9cc), var(--rango-medio, var(--verde))); animation: ss-riempi 1s 0.15s cubic-bezier(.2,.8,.2,1) both; }
-.ss-exp { margin: 0.3rem 0 0; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.1rem 1rem; font-size: 0.8rem; color: var(--inchiostro-2); }
-.ss-exp strong { color: var(--inchiostro); }
-.ss-piede { padding-top: 0.75rem; border-top: 1px solid var(--riga); }
-.ss-azioni { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0.6rem 1.2rem; }
-.ss-azioni .ss-continua { margin-left: auto; flex: none; }
-.ss-azioni .ss-riprendi { min-width: 0; flex: 0 1 auto; }
-.ss-continua { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; min-height: 2.4rem; padding: 0 1.1rem; border-radius: 999px; background: var(--verde); color: #fff !important; font-size: 0.92rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
-.ss-continua svg { width: 1rem; height: 1rem; transition: transform 0.15s ease; }
-.ss-continua:hover { filter: brightness(1.08); }
-.ss-continua:hover svg { transform: translateX(3px); }
-.ss-riprendi { display: flex; align-items: center; gap: 0.65rem; line-height: 1.25; text-decoration: none; color: var(--inchiostro); font-size: 0.92rem; }
-.ss-riprendi[hidden] { display: none; }
-.ss-libro { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 10px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
-.ss-libro svg { width: 1.15rem; height: 1.15rem; }
-.ss-rip-testo { display: flex; flex-direction: column; min-width: 0; }
-.ss-riprendi small { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); }
-.ss-argomento { font-weight: 600; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
-.ss-riprendi:hover .ss-argomento { text-decoration-color: currentColor; }
-/* Esame più vicino nello spazio personale, in alto a destra (solo con una data inserita; versione A scelta da Carmine il 03/11):
-   quadratino con il calendario come «Riprendi», etichetta piccola e giorni mancanti. */
-html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr auto; grid-template-areas: "stemma dati esame" "stemma cammino cammino"; }
-.ss-esame { grid-area: esame; align-self: start; justify-self: end; display: flex; align-items: center; gap: 0.5rem; max-width: 14rem; text-decoration: none; color: var(--inchiostro); line-height: 1.25; }
+/* Esame più vicino: etichetta in alto a destra (solo con una data inserita). */
+.ss-esame { position: absolute; top: 1rem; right: 1.2rem; padding: 0.3rem 0.7rem; border-radius: 99px; background: rgba(255, 255, 255, 0.7); box-shadow: inset 0 0 0 1px #efe2cd; font-size: 0.82rem; color: var(--inchiostro-2); text-decoration: none; }
+.ss-esame b { color: var(--inchiostro); }
 .ss-esame[hidden] { display: none; }
-.ss-es-icona { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9px; background: color-mix(in srgb, var(--rango-pallido, #eee) 75%, white); color: var(--rango-testo, var(--inchiostro-2)); }
-.ss-es-icona svg { width: 1rem; height: 1rem; }
-.ss-es-testo { display: flex; flex-direction: column; min-width: 0; }
-.ss-es-su { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--inchiostro-2); }
-.ss-es-giu { font-size: 0.88rem; font-weight: 600; }
-.ss-esame:hover .ss-es-giu { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-underline-offset: 3px; }
-@media (max-width: 640px) {
-  html.collegato .spazio-studente.con-esame .ss-eroe { grid-template-columns: auto 1fr; grid-template-areas: "stemma dati" "stemma esame" "cammino cammino"; }
-  .ss-esame { justify-self: start; max-width: none; margin: 0.35rem 0 0.3rem; }
+.ss-esame:hover { background: #fff; }
+html.collegato .spazio-studente.con-esame .ss-copertina { padding-top: 2.4rem; }
+/* Scheda «Continua da qui», appoggiata sotto la fascia. */
+.ss-continua {
+  position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: -1.6rem 1.2rem 0; padding: 1rem 1.1rem 1rem 1.3rem;
+  border-radius: 14px; background: #fff; box-shadow: 0 1px 0 #efe2cd, 0 14px 28px -20px rgba(35, 48, 46, 0.35); color: var(--inchiostro); text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+.ss-continua:hover { transform: translateY(-1px); box-shadow: 0 1px 0 #efe2cd, 0 18px 30px -20px rgba(35, 48, 46, 0.42); }
+.ss-c-testo { display: flex; flex-direction: column; min-width: 0; }
+.ss-c-su { font-size: 0.78rem; color: var(--bronzo); }
+.ss-c-titolo { font: 600 1.3rem/1.2 var(--titoli); }
+.ss-c-dove { font-size: 0.84rem; color: var(--inchiostro-2); }
+.ss-c-dove[hidden] { display: none; }
+.ss-c-titolo, .ss-c-dove { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ss-c-tasto { flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem; border-radius: 50%; background: var(--azione); color: #fff; }
+.ss-c-tasto svg { width: 1.2rem; height: 1.2rem; transition: transform 0.15s ease; }
+.ss-continua:hover .ss-c-tasto svg { transform: translateX(2px); }
+.ss-continua:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
 @keyframes ss-riempi { from { width: 0; } }
 @keyframes ss-compare { from { opacity: 0; transform: translateY(4px); } }
-@media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } }
-@media (max-width: 640px) {
-  html.collegato .spazio-studente { padding: 0.85rem 0.9rem 0.8rem; gap: 0.7rem; margin-top: 1rem; }
-  .ss-eroe { grid-template-areas: "stemma dati" "cammino cammino"; align-items: center; gap: 0.55rem 0.8rem; }
-  .ss-stemma { width: 4.6rem; height: 4.15rem; }
-  .ss-cammino { margin-top: 0; }
-  .spazio-studente .ss-nome { font-size: 1.3rem; }
-  .ss-fascia { font-size: 0.95rem; }
-  .ss-frase { font-size: 0.84rem; }
-  .ss-piede { padding-top: 0.65rem; }
-  .ss-azioni { flex-direction: column-reverse; align-items: stretch; }
-  .ss-azioni .ss-continua { margin-left: 0; }
+@media (prefers-reduced-motion: reduce) { .ss-stemma, .ss-barra > span { animation: none; } .ss-continua { transition: none; } }
+@media (max-width: 560px) {
+  html.collegato .spazio-studente { margin-top: 1.1rem; }
+  .ss-copertina { grid-template-columns: 1fr; padding: 1.3rem 1.2rem 2.4rem; }
+  html.collegato .spazio-studente.con-esame .ss-copertina { padding-top: 3rem; }
+  .ss-stemma { position: absolute; right: 0.6rem; top: 1rem; width: 6rem; height: 6rem; }
+  html.collegato .spazio-studente.con-esame .ss-stemma { top: 2.6rem; }
+  .ss-saluto { font-size: 1.9rem; max-width: 11ch; }
+  .ss-titolo, .ss-motto { max-width: 62%; }
+  .ss-motto { font-size: 1rem; }
+  .ss-esame { left: 1.2rem; right: auto; top: 0.9rem; }
+  .ss-continua { margin-left: 0.7rem; margin-right: 0.7rem; }
+  .ss-c-titolo { font-size: 1.15rem; }
 }
 .presentazione-home { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "foto testo" "foto numeri"; align-items: center; column-gap: 1.6rem; row-gap: 0.9rem; margin: 1.5rem 0 0.6rem; font-family: var(--ui); text-decoration: none; color: var(--inchiostro); }
-.presentazione-home img { grid-area: foto; width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px var(--carta), 0 0 0 6px var(--riga); }
+.presentazione-home img { grid-area: foto; width: 9rem; height: 9rem; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 5px var(--carta), 0 0 0 6px var(--bronzo-dettaglio); }
 .presentazione-testo { grid-area: testo; align-self: end; min-width: 0; }
 .presentazione-home strong { display: block; font-family: var(--titoli); font-size: 1.45rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.35rem; }
 .presentazione-home:hover strong { color: var(--accento); }
 .presentazione-laurea { display: block; max-width: 30rem; color: var(--inchiostro-2); font-size: 1rem; line-height: 1.45; }
-.presentazione-motto { display: block; margin-top: 0.7rem; padding-left: 0.75rem; border-left: 2px solid var(--accento); font: italic 400 1.08rem/1.4 var(--titoli); color: var(--inchiostro); }
+.presentazione-motto { display: block; margin-top: 0.7rem; padding-left: 0.75rem; border-left: 2px solid var(--bronzo-dettaglio); font: italic 400 1.08rem/1.4 var(--titoli); color: var(--inchiostro); }
 .presentazione-numeri { grid-area: numeri; align-self: start; display: grid; grid-template-columns: repeat(2, minmax(0, 16rem)); gap: 0.8rem; }
-.presentazione-numero { display: flex; align-items: center; gap: 0.9rem; padding: 0.7rem 1rem; border: 1px solid var(--riga); border-radius: 10px; background: color-mix(in srgb, var(--carta) 60%, white); }
+.presentazione-numero { display: flex; align-items: center; gap: 0.9rem; padding: 0.7rem 1rem; border: 1px solid #eee9df; border-radius: 10px; background: #fefdfb; }
 .presentazione-numero svg { width: 1.9rem; height: 1.9rem; flex: none; color: var(--accento); }
 .presentazione-numero b { display: block; font-family: var(--titoli); font-size: 1.45rem; font-weight: 700; line-height: 1.1; }
 .presentazione-numero small { display: block; color: var(--inchiostro-2); font-size: 0.9rem; }
 @media (max-width: 40rem) {
   .presentazione-home { grid-template-areas: "foto testo" "numeri numeri"; column-gap: 1rem; }
-  .presentazione-home img { width: 5.5rem; height: 5.5rem; box-shadow: 0 0 0 3px var(--carta), 0 0 0 4px var(--riga); }
+  .presentazione-home img { width: 5.5rem; height: 5.5rem; box-shadow: 0 0 0 3px var(--carta), 0 0 0 4px var(--bronzo-dettaglio); }
   .presentazione-testo { align-self: center; }
   .presentazione-home strong { font-size: 1.2rem; }
   .presentazione-laurea { font-size: 0.88rem; }
@@ -559,7 +594,7 @@ details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(
 .nota-accesso { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); }
 
 /* ---------- Accesso: materia sbloccata o in anteprima ---------- */
-:root { --verde: #1f7a4d; }
+:root { --verde: #214f50; }
 .materia-corrente { display: inline-flex; align-items: center; gap: 0.3rem; }
 .materia-corrente .lucchetto { width: 0.95rem; height: 0.95rem; flex: none; }
 .materia-corrente .aperto, .materia-corrente .dicitura-sbloccata { display: none; }
@@ -718,14 +753,13 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .pannello-impostazioni { margin-top: 0.8rem; padding: 0.4rem 1.1rem 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
 .pannello-impostazioni h2 { margin-top: 0.8rem; font-size: 1.15rem; }
 
-/* testata: i pulsanti non si schiacciano; su telefono, dentro una materia, il nome del sito lascia posto alla pillola */
+/* La materia è nel contenuto: la testata conserva gli stessi elementi su ogni pagina. */
 .bottone-indice, .bottone-cerca, .bottone-account, .bottone-lingua, .materia-corrente { flex: none; }
 .bottone-lingua { font-size: 0.85rem; line-height: 1.5; }
 @media (max-width: 30rem) {
   .bottone-indice svg, .bottone-cerca svg, .bottone-account svg { width: 1.15rem; height: 1.15rem; }
   .bottone-lingua { margin-left: 0.4rem; min-width: 2.1rem; }
   .bottone-indice { margin-left: 0; padding-inline: 0.45rem; }
-  .testata-interna:has(.materia-corrente) .marchio span { display: none; }
 }
 .bottone-indice, .bottone-cerca, .bottone-account, .bottone-lingua { height: 2.4rem; box-sizing: border-box; }
 .elenco-dispositivi { font-family: var(--ui); padding-left: 1.2rem; margin: 0.4rem 0 0.8rem; }
