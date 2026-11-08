@@ -583,5 +583,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       document.addEventListener('click', (ev) => { if (ev.target.closest && ev.target.closest('#invia-acquisto, #compra')) manda('tasto'); }, true);
     })();
   </script>
+  <script>
+    import '../scripts/luccichio-sconti';
+  </script>
 </body>
 </html>

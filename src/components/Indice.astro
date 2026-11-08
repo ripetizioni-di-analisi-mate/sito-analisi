@@ -44,9 +44,9 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     </div>
   )}
   {lingua === 'it' && (
-    <a class="indice-pacchetti" href="/pacchetti" aria-current={qui === '/pacchetti' ? 'page' : undefined}>
+    <a class="indice-pacchetti" href="/pacchetti" data-sconto-bronzo aria-current={qui === '/pacchetti' ? 'page' : undefined}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
-      <span>Pacchetti e sconti</span>
+      <span data-luccichio-bronzo>Pacchetti e sconti</span>
     </a>
   )}
   {m ? (
@@ -161,17 +161,17 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 </script>
 
 <style>
-  .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--riga); border-radius: var(--raggio); color: var(--verde); background: color-mix(in srgb, var(--verde) 5%, var(--carta)); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
+  .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); color: var(--bronzo); background: var(--bronzo-fondo); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
-  .indice-pacchetti:hover, .indice-pacchetti[aria-current="page"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 9%, var(--carta)); }
+  .indice-pacchetti:hover, .indice-pacchetti[aria-current="page"] { color: #654626; border-color: #c9ac89; background: #ede1d1; }
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
-  details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.4rem 0.6rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--carta) 55%, white); color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
+  details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
   .indice-universita :global(.indice-sottogruppo > summary) { justify-content: flex-start; }
   .indice-universita :global(.indice-sottogruppo > summary::before) { display: block; }
   .indice-universita :global(.indice-sottogruppo > summary::after) { display: none; }
   .indice-universita :global(.indice-sottogruppo > .indice-materie) { margin-left: 0.6rem; }
-  details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 8%, var(--carta)); }
+  details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: transparent; background: #e7ede9; box-shadow: inset 3px 0 var(--azione); }
   @media (prefers-reduced-motion: reduce) { details.indice-gruppo > summary.indice-percorso { transition: none; } }
   a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
 </style>
