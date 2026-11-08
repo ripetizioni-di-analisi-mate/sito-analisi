@@ -53,7 +53,7 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     }
     voci.push({ t: 'Lezione individuale con Carmine', s: 'Scegli giorno e ora · Google Meet', m: 'Lezioni con Carmine', h: '/prenota', p: `lezioni individuali private ripetizioni prenota prenotazione online meet calendario ${MATERIE_LEZIONI.map((m) => m.titolo).join(' ')}`, c: 'corsi' });
     voci.push({ t: 'Che cosa studiare per il tuo concorso', s: 'Guida gratuita', m: 'Concorsi', h: '/concorsi', p: 'concorsi pubblici guida programma matematica logica test', c: 'corsi' });
-    voci.push({ t: 'Compatibilità con il tuo esame', s: 'Confronto gratuito del tuo compito con il materiale', m: 'Esami universitari', h: '/compatibilita', p: 'compatibilità esame compito traccia prova scritta appello percentuale copertura confronto programma università foto pdf', c: 'corsi' });
+    voci.push({ t: 'Compatibilità con il tuo esame', s: 'Confronto gratuito del compito o del programma con il materiale', m: 'Esami universitari', h: '/compatibilita', p: 'compatibilità esame compito traccia prova scritta appello percentuale copertura confronto programma syllabus argomenti università foto pdf', c: 'corsi' });
     voci.push({ t: 'Domande a tempo di tutte le materie', s: 'Quiz gratuiti per argomento', m: 'Domande a tempo', h: '/domande-a-tempo', p: 'domande a tempo quiz risposta multipla gratis allenamento esame', c: 'esercizi' });
     voci.push({ t: 'Simulazione della prova a quiz per i concorsi', s: 'Matematica e logica · Punteggio e soglia', m: 'Concorsi', h: '/concorsi/simulazione', p: 'simulazione prova concorso quiz test risposta multipla punteggio penalità soglia timer matematica logica', c: 'esercizi' });
   }
