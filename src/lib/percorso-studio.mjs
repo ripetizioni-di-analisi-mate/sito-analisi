@@ -35,20 +35,21 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   const m = catalogo[sessione.materia];
   const base = `${lingua === 'en' ? '/en' : ''}/${sessione.materia}`;
   const a = sessione.argomento;
-  if (!a) return { href: base, domande: null, titolo: m.titolo };
+  if (!a) return { href: base, domande: null, titolo: m.titolo, materia: m.titolo };
   const ripasso = a === 'prove-d-esame' || a === 'ripasso-di-oggi';
   if (ripasso) {
     if (!m.domande.length) return null;
     const href = `${base}/${a}/domande`;
     const titolo = a === 'ripasso-di-oggi'
       ? (lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi') : m.ripasso;
-    return { href, domande: href, titolo };
+    return { href, domande: href, titolo, materia: m.titolo };
   }
   if (!m.argomenti.includes(a)) return null;
   return {
     href: `${base}/${a}/teoria`,
     domande: m.domande.includes(a) ? `${base}/${a}/domande` : null,
     titolo: sessione.titolo || m.titolo,
+    materia: m.titolo,
   };
 }
 

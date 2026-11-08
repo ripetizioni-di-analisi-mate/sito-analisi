@@ -26,16 +26,15 @@ const regole = [
   </ul>
 </section>
 <style>
-  .materiali-studente{display:none;margin:2.3rem 0 2.5rem;font-family:var(--ui)}
-  .ms-testa{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.8rem}
-  .ms-testa h2{margin:0;font:600 1.3rem var(--testo,var(--ui));color:var(--inchiostro)}
+  /* Righe sottili senza riquadro (08/11, con lo spazio personale «Copertina»). */
+  .materiali-studente{display:none;margin:1.9rem 0 1.8rem;font-family:var(--ui)}
+  .ms-testa{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.6rem}
+  .ms-testa h2{margin:0;font:600 1.15rem var(--titoli);color:var(--inchiostro)}
   .ms-testa>a{font-size:.9rem;white-space:nowrap}
-  ul{list-style:none;margin:0;padding:0;border:1px solid var(--riga);border-radius:var(--raggio);overflow:hidden;background:var(--carta)}
-  li{display:none;align-items:center;gap:.8rem;padding:1rem 1.1rem}
-  li+li{border-top:1px solid var(--riga)}
-  .ms-punto{width:.45rem;height:1.9rem;border-radius:1rem;background:var(--materia);flex:none}
-  li>div{flex:1;min-width:0}h3{font:600 1rem var(--ui);margin:0 0 .15rem}p{font-size:.85rem;color:var(--inchiostro-2);margin:0}
-  li>a{font:600 .9rem var(--ui);padding:.5rem .7rem;white-space:nowrap;text-decoration:none;border:1px solid var(--riga);border-radius:var(--raggio)}
+  ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--riga)}
+  li{display:none;align-items:center;gap:.75rem;padding:.8rem .1rem;border-bottom:1px solid var(--riga)}
+  .ms-punto{width:.55rem;height:.55rem;border-radius:50%;background:var(--materia);flex:none}
+  li>div{flex:1;min-width:0}h3{font:600 1rem var(--ui);margin:0 0 .1rem}p{font-size:.82rem;color:var(--inchiostro-2);margin:0}
+  li>a{font:600 .9rem var(--ui);white-space:nowrap;text-decoration:none;color:var(--azione)}
   a:hover{text-decoration:underline}a:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
-  @media(max-width:560px){li{flex-wrap:wrap;gap:.7rem;padding:.9rem}.ms-testa{flex-wrap:wrap;gap:.35rem}li>a{margin-left:1.2rem}li>div{flex-basis:75%}}
 </style>

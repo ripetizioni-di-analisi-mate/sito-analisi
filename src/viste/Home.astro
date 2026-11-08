@@ -53,11 +53,11 @@ const icona = {
   <div class="solo-ospiti">
     <Presentazione lingua={lingua} motto={lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
   </div>
-  <h1 class="home-personale solo-collegati">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
+  <h1 class="home-personale solo-collegati solo-lettori">{lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
   <SpazioStudente lingua={lingua} />
-  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <MaterialiStudente lingua={lingua} />
+  {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <form class="cerca-home" id="ricerca-principale" action={link(lingua, '/cerca')} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
@@ -148,7 +148,7 @@ const icona = {
   ))}
 </Base>
 <style>
-  .pacchetti-studente{padding-top:1rem}
+  .pacchetti-studente{padding-top:0}
   .home-intro{margin-bottom:1.4rem}
   .solo-lettori{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
   .home-intro .sommario{margin-top:0}
