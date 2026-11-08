@@ -260,7 +260,7 @@ numero e punto | tipo | argomento | codice | punti | richiesta in breve
 - Richiesta in breve: al massimo 15 parole, con le formule in LaTeX tra $…$.
 - Se il testo è un test a risposta multipla di un concorso, una verifica di scuola superiore, oppure non contiene né richieste né argomenti di un corso universitario delle materie disponibili, scrivi soltanto NON_UNIVERSITARIO. Accetta anche i programmi di statistica, algebra e matematica per Economia.
 - Un esame universitario resta valido anche quando contiene argomenti avanzati o fuori dal programma della materia scelta. In quel caso indica - per argomento e codice; NON_UNIVERSITARIO non significa fuori programma.
-- Scrivi soltanto le righe, senza intestazione e senza commenti.
+- Scrivi soltanto la riga TIPO_DOCUMENTO, le righe delle richieste e il segnale finale, senza titoli o commenti aggiuntivi. Un elenco di contenuti da studiare resta PROGRAMMA anche quando non riporta la parola «programma».
 - Dopo l'ultima richiesta scrivi su una nuova riga soltanto FINE_CONFRONTO. Analizza tutti gli esercizi e tutti i punti del compito, oppure tutti gli argomenti e sottoargomenti del programma.
 
 Esempio di risposta
@@ -395,7 +395,7 @@ async function* richiesteModello(env, modello, input, tipoIniziale) {
     const documento = /^\s*TIPO_DOCUMENTO\s*\|\s*(PROGRAMMA|ESAME)\s*$/i.exec(r);
     if (documento) {
       if (n) throw new Error('tipo del documento dopo le richieste');
-      tipoDocumento = documento[1].toLowerCase();
+      tipoDocumento = tipoIniziale === 'programma' ? tipoIniziale : documento[1].toLowerCase();
       return;
     }
     if (/NON_UNIVERSITARIO/.test(r) && !n) { nonUniversitario = true; yield { nonUniversitario: true }; return; }
@@ -425,7 +425,7 @@ async function* richiesteModello(env, modello, input, tipoIniziale) {
     if (d?.universitario === false) { nonUniversitario = true; yield { nonUniversitario: true }; }
     else if (Array.isArray(d?.richieste) && d.richieste.length <= MAX_RICHIESTE) {
       completo = true;
-      if (['programma', 'esame'].includes(d.tipoDocumento)) tipoDocumento = d.tipoDocumento;
+      if (tipoIniziale !== 'programma' && ['programma', 'esame'].includes(d.tipoDocumento)) tipoDocumento = d.tipoDocumento;
       for (const r of d.richieste) { n++; yield { ...r, tipoDocumento }; }
     }
   }
@@ -480,7 +480,14 @@ async function avviaConfronto(env, titolo, catalogoTesto, conTeoria, esame, codi
 // riconosce anche elenchi senza intestazione; una citazione «fuori programma»
 // dentro un compito non è invece un'intestazione di programma.
 function tipoDaTesto(testo) {
-  return /(?:^|\n)\s*(?:#{1,6}\s*)?(?:programma(?:\s+(?:del|di|d[’']|dettagliato|didattico|svolto|ufficiale)|\s*[:\n]|\s*$)|syllabus\b|contenuti\s+(?:del corso|dell[’']insegnamento)\b)/i.test(testo) ? 'programma' : 'esame';
+  if (/(?:^|\n)\s*(?:#{1,6}\s*)?(?:programma(?:\s+(?:del|di|d[’']|dettagliato|didattico|svolto|ufficiale)|\s*[:\n]|\s*$)|syllabus\b|contenuti\s+(?:del corso|dell[’']insegnamento)\b)/i.test(testo)) return 'programma';
+  // Un elenco nominale non contiene richieste da svolgere. In questo caso
+  // il riconoscimento non dipende dalla riga facoltativa scritta dal modello.
+  const t = testo.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const richiesta = /\?|\b(?:esercizio|quesito|problema|domanda)\s*(?:n\.?\s*)?\d|\b(?:calcola(?:re|te)?|calcoli|determina(?:re|te)?|determini|risolv(?:ere|i|a|ete)|studia(?:re|te)?|studi|dimostr(?:are|a|i|ate)|enunci(?:are|a|i|ate)|defini(?:re|sci|sca|te)|trova(?:re|te)?|trovi|giustifica(?:re|te)?|giustifichi|verifica(?:re|te)?|verifichi|si\s+(?:consideri|mostri|provi|discuta))\b/;
+  if (richiesta.test(t)) return 'esame';
+  const voci = new Set(t.split(/[\n;,.•]+/).map((v) => v.replace(/^\s*(?:[-*]|\d+[.)]?)\s*/, '').trim()).filter((v) => /[a-z]{3}/.test(v)));
+  return voci.size >= 3 ? 'programma' : 'esame';
 }
 
 // ---------- calcolo delle percentuali ----------
