@@ -10,6 +10,7 @@ export const PACCHETTI_MATERIE = [
   { id: 'maturita', titolo: 'Maturità scientifica', materie: ['matematica-superiori-5', 'fisica-superiori-5'] },
   { id: 'concorsi', titolo: 'Preparazione concorsi', materie: ['matematica-concorsi', 'logica-concorsi'] },
   { id: 'scientifico', titolo: 'Pacchetto scientifico', materie: ['analisi-1', 'analisi-2', 'fisica-1', 'fisica-2'] },
+  { id: 'semestre-filtro', titolo: 'Semestre filtro completo', materie: ['fisica-semestre-filtro', 'chimica-semestre-filtro', 'biologia-semestre-filtro'] },
 ];
 export const PACCHETTI_VIDEO = [
   { id: 'video-analisi', titolo: 'Pacchetto Analisi', video: ['analisi-1-e-2'], confronto: ['analisi-1', 'analisi-2'], prezzo: 499 },

@@ -7,6 +7,7 @@ const materie = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: 
 const video = VIDEOCORSI.map(({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }) => ({ slug, breve, prezzo, sblocca, lezioni, pacchettoDi }));
 const gruppi = [
   { id: 'universita', titolo: 'Università', pacchetti: ['analisi', 'fisica', 'base-universitaria', 'scientifico'] },
+  { id: 'semestre-filtro', titolo: 'Semestre filtro', pacchetti: ['semestre-filtro'] },
   { id: 'superiori', titolo: 'Superiori', pacchetti: ['maturita'] },
   { id: 'concorsi', titolo: 'Concorsi', pacchetti: ['concorsi'] },
 ];
@@ -22,7 +23,7 @@ const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.tito
     <section id="pannello-materie" role="tabpanel" aria-labelledby="tab-materie">
       <ul class="pn-discounts" aria-label="Sconti sul numero di materie"><li data-sconto="15"><span>2 materie</span><strong>−15%</strong></li><li data-sconto="20"><span>3 materie</span><strong>−20%</strong></li><li data-sconto="25"><span>4 o più materie</span><strong>−25%</strong></li></ul>
       <div class="pn-section-top"><h2>Pacchetti pronti</h2><a class="pn-compose-jump" href="#componi" data-apri-componi>Scegli tu le materie <span aria-hidden="true">↗</span></a></div>
-      <div class="pn-offers">{gruppi.map((g) => <section class:list={['pn-group', { 'pn-group-secondaria': g.id !== 'universita' }]} data-group={g.id} aria-label={g.titolo}>
+      <div class="pn-offers">{gruppi.map((g) => <section class:list={['pn-group', { 'pn-group-secondaria': g.id === 'superiori' || g.id === 'concorsi' }]} data-group={g.id} aria-label={g.titolo}>
         <p class="pn-group-name"><span>{g.titolo}</span></p>
         <div class="pn-list">{g.pacchetti.map((id) => PACCHETTI_MATERIE.find((p) => p.id === id)).filter((p) => p && p.materie.every((s) => materie.some((m) => m.slug === s))).map((p) => {
           const q = riepilogoMaterie(p.materie, materie);
@@ -87,7 +88,7 @@ h1 em { color:var(--pn-green); font-style:normal; }
 .pn-compose-jump { color:var(--pn-green); background:none; border:0; padding:4px 0; font-size:13px; font-weight:600; }
 .pn-offers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px 14px; }
 .pn-group { min-width:0; margin:0; --pn-tone:#2f6f68; --pn-tint:#edf4ef; }
-.pn-group[data-group="universita"] { grid-column:1 / -1; }
+.pn-group[data-group="universita"], .pn-group[data-group="semestre-filtro"] { grid-column:1 / -1; }
 .pn-group-secondaria .pn-offer-line { grid-template-columns:1fr; gap:10px; }
 .pn-group-secondaria .pn-offer-side { flex-wrap:wrap; text-align:left; gap:8px; }
 .pn-group-secondaria .pn-price { justify-content:flex-start; }
