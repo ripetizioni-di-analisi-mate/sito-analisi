@@ -20,6 +20,7 @@ interface Richiesta {
 }
 interface Esito {
   materia: string; titolo: string; compatibilita: number; conteggi: Record<'stesso' | 'argomento' | 'nessuno', number>;
+  tipoDocumento?: 'esame' | 'programma';
   correzioneMateria?: { materiaScelta: string; titoloScelto: string; materia: string; titolo: string; fonte: string } | null;
   perPunti: boolean; richieste: Richiesta[]; collegato: boolean;
   quote?: { stesso: number; argomento: number };
@@ -57,6 +58,10 @@ async function daPdf(f: File, quante: number): Promise<string[]> {
   const pdfjs = await import(/* @vite-ignore */ `${PDFJS}pdf.min.mjs`);
   pdfjs.GlobalWorkerOptions.workerSrc = `${PDFJS}pdf.worker.min.mjs`;
   const doc = await pdfjs.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise;
+  if (doc.numPages > quante) {
+    await doc.destroy();
+    throw new Error(`«${f.name}» supera ${quante} pagine. Carica una sezione alla volta per confrontarla per intero.`);
+  }
   const pagine: string[] = [];
   for (let i = 1; i <= Math.min(doc.numPages, quante); i++) {
     const p = await doc.getPage(i);
@@ -159,11 +164,12 @@ export function avviaCompatibilita() {
   const mostraFile = () => {
     elencoFile.innerHTML = files.map((f, i) => `<li>${esc(f.name)} <button type="button" data-togli="${i}" aria-label="Togli ${esc(f.name)}">×</button></li>`).join('');
     zona.classList.toggle('con-file', files.length > 0);
-    document.getElementById('compat-carica-titolo')!.textContent = files.length ? `${files.length} ${files.length === 1 ? 'file pronto' : 'file pronti'}` : 'Carica il tuo compito';
+    document.getElementById('compat-carica-titolo')!.textContent = files.length ? `${files.length} ${files.length === 1 ? 'file pronto' : 'file pronti'}` : 'Carica il compito o il programma del corso';
     document.getElementById('compat-carica-dettaglio')!.textContent = files.length ? 'Puoi aggiungere altre pagine o togliere i file qui sotto' : 'Trascina qui i file oppure scegli dal dispositivo';
   };
   const aggiungi = (nuovi: FileList | File[]) => {
     if (inAttesa) return;
+    if (files.length + nuovi.length > MAX_PAGINE) { stato.textContent = `Puoi aggiungere al massimo ${MAX_PAGINE} file. Carica una sezione alla volta.`; return; }
     for (const f of Array.from(nuovi)) {
       if (!(f.type.startsWith('image/') || f.type === 'application/pdf')) { stato.textContent = `«${f.name}» non è una foto né un PDF.`; continue; }
       if (files.length < MAX_PAGINE) { files.push(f); prepara(f); }
@@ -212,7 +218,7 @@ export function avviaCompatibilita() {
       }, 700);
       stato.textContent = '';
       esitoBox.hidden = true;
-      aggiornaFase('lettura', 'Preparazione del compito…');
+      aggiornaFase('lettura', 'Preparazione del documento…');
       notaAttesa.textContent = 'Può richiedere qualche istante. Attendi qui: il risultato apparirà automaticamente.';
       timerAttesa = setTimeout(() => {
         notaAttesa.textContent = 'La verifica sta continuando e può richiedere ancora un po’ di tempo. Mantieni aperta questa pagina.';
@@ -225,9 +231,10 @@ export function avviaCompatibilita() {
   // poi {"fine": esito} con le percentuali. Le richieste si mostrano subito, il riquadro completo alla fine.
   const confronta = async (materia: string, testo: string) => {
     let materiaConfronto = materia;
+    let tipoDocumento: 'esame' | 'programma' = 'esame';
     esitoBox.hidden = true;
     esitoBox.innerHTML = '';
-    aggiornaFase('confronto', 'Confronto gli esercizi con la teoria e il materiale della materia…');
+    aggiornaFase('confronto', 'Riconosco il documento e confronto i contenuti con il materiale della materia…');
     const r = await fetch('/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo, id: idCompito || undefined }) });
     if (!r.ok || !/ndjson/.test(r.headers.get('content-type') || '')) {
       const d = await r.json().catch(() => ({}));
@@ -247,7 +254,12 @@ export function avviaCompatibilita() {
       if (d.errore) throw new Error(d.errore);
       if (d.materiaCorretta) {
         materiaConfronto = d.materiaCorretta.materia;
-        aggiornaFase('confronto', `Materia riconosciuta: ${d.materiaCorretta.titolo}. Confronto il compito con il materiale corretto…`);
+        aggiornaFase('confronto', `Materia riconosciuta: ${d.materiaCorretta.titolo}. Confronto il documento con il materiale corretto…`);
+        return;
+      }
+      if (d.tipoDocumento) {
+        tipoDocumento = d.tipoDocumento === 'programma' ? 'programma' : 'esame';
+        aggiornaFase('confronto', tipoDocumento === 'programma' ? 'Programma riconosciuto. Confronto gli argomenti con il materiale…' : 'Compito riconosciuto. Confronto le richieste con il materiale…');
         return;
       }
       if (d.ricomincia) {
@@ -260,9 +272,9 @@ export function avviaCompatibilita() {
       if (d.fine) { esito = d.fine; return; }
       if (d.r) {
         arrivate.push(d.r);
-        inCorso(materiaConfronto, arrivate);
+        inCorso(materiaConfronto, arrivate, tipoDocumento);
         aggiornaAvanzamento(Math.min(90, 60 + arrivate.length * 3));
-        aggiornaFase('confronto', `${arrivate.length} ${arrivate.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}. Il confronto continua…`);
+        aggiornaFase('confronto', `${arrivate.length} ${tipoDocumento === 'programma' ? (arrivate.length === 1 ? 'argomento analizzato' : 'argomenti analizzati') : (arrivate.length === 1 ? 'richiesta analizzata' : 'richieste analizzate')}. Il confronto continua…`);
       }
     };
     const lettore = r.body!.pipeThrough(new TextDecoderStream()).getReader();
@@ -292,17 +304,18 @@ export function avviaCompatibilita() {
     if (inAttesa) return;
     const materia = materiaScelta();
     if (!materia) { stato.textContent = 'Scegli la materia.'; return; }
-    if (!area.value.trim() && !files.length) { stato.textContent = 'Carica il compito o incolla il testo.'; return; }
+    if (!area.value.trim() && !files.length) { stato.textContent = 'Carica il compito, il programma o incolla il testo.'; return; }
     occupato(true);
     try {
       let testo = area.value.trim();
       idCompito = '';
       if (!testo) {
-        if (!files.length) throw new Error('Carica il compito o incolla il testo.');
+        if (!files.length) throw new Error('Carica il compito, il programma o incolla il testo.');
         aggiornaFase('lettura', 'Preparazione delle foto o delle pagine del PDF…');
-        const pagine = (await Promise.all(files.map(prepara))).flat().slice(0, MAX_PAGINE);
+        const pagine = (await Promise.all(files.map(prepara))).flat();
+        if (pagine.length > MAX_PAGINE) throw new Error(`I file superano ${MAX_PAGINE} pagine complessive. Carica una sezione alla volta per confrontarla per intero.`);
         aggiornaAvanzamento(18);
-        aggiornaFase('lettura', 'Lettura del testo e delle formule del compito…');
+        aggiornaFase('lettura', 'Lettura degli esercizi o degli argomenti del programma…');
         const letto = await chiama('/api/compatibilita/leggi', { materia, pagine });
         testo = letto.testo; idCompito = letto.id || '';
         aggiornaAvanzamento(44);
@@ -329,47 +342,50 @@ export function avviaCompatibilita() {
         <p class="compat-link"><span class="compat-et ${r.livello}">${ETICHETTE[r.livello]}</span>${link.join(' · ')}</p></div></li>`;
   };
   // Mentre il confronto è in corso: le richieste già abbinate, senza percentuali.
-  function inCorso(materia: string, richieste: Richiesta[]) {
+  function inCorso(materia: string, richieste: Richiesta[], tipoDocumento: 'esame' | 'programma') {
     if (richieste.length === 1) esitoBox.innerHTML = `
       <div class="compat-sintesi"><p class="compat-righe-sintesi"></p></div>
       <ol class="compat-richieste"></ol>`;
-    esitoBox.querySelector('.compat-righe-sintesi')!.textContent = `Confronto in corso · ${richieste.length} ${richieste.length === 1 ? 'richiesta analizzata' : 'richieste analizzate'}`;
+    esitoBox.querySelector('.compat-righe-sintesi')!.textContent = `Confronto in corso · ${richieste.length} ${tipoDocumento === 'programma' ? (richieste.length === 1 ? 'argomento analizzato' : 'argomenti analizzati') : (richieste.length === 1 ? 'richiesta analizzata' : 'richieste analizzate')}`;
     esitoBox.querySelector('.compat-richieste')!.insertAdjacentHTML('beforeend', rigaHtml(materia, richieste[richieste.length - 1]));
     esitoBox.hidden = false;
   }
   function mostra(e: Esito, testo: string) {
+    const programma = e.tipoDocumento === 'programma';
+    const documento = programma ? 'programma' : 'compito';
     const selezione = Array.from(form!.querySelectorAll<HTMLInputElement>('input[name="materia"]')).find((input) => input.value === e.materia);
     if (selezione) selezione.checked = true;
     const correzione = e.correzioneMateria;
     const notaMateria = correzione
-      ? `<p class="compat-nota-materia">Avevi selezionato ${esc(correzione.titoloScelto)}. <strong>Il compito è stato valutato secondo ${esc(correzione.titolo)}</strong>, riconosciuta dal testo.</p>`
+      ? `<p class="compat-nota-materia">Avevi selezionato ${esc(correzione.titoloScelto)}. <strong>Il ${documento} è stato valutato secondo ${esc(correzione.titolo)}</strong>, riconosciuta dal testo.</p>`
       : '';
     const tot = Math.max(e.richieste.length, 1);
     const quota = (k: 'stesso' | 'argomento') => e.quote?.[k] ?? (100 * e.conteggi[k] * (k === 'stesso' ? 1 : 0.5)) / tot;
     const successo = e.collegato && e.successo?.percentuale != null
       ? `<p class="compat-righe-sintesi">Successo nelle domande a tempo sugli stessi argomenti: <b>${e.successo.percentuale}%</b></p>`
-      : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del compito.</p>` : '';
+      : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del ${documento}.</p>` : '';
     const daComprare = !possiede(e.materia) && prezzi[e.materia];
     const consigliato = daComprare && e.compatibilita >= SOGLIA;
     const acquisto = consigliato
       ? `<div class="compat-consigliato">
           <p class="cc-etichetta"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Acquisto consigliato</p>
-          <p class="cc-titolo">Copertura stimata del tuo compito con ${esc(e.titolo)}: ${e.compatibilita}%.</p>
+          <p class="cc-titolo">Copertura stimata del tuo ${documento} con ${esc(e.titolo)}: ${e.compatibilita}%.</p>
           <a class="bottone-primario" href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></div>`
       : daComprare ? `<p class="compat-acquisto"><a href="/${e.materia}/sblocca">Sblocca ${esc(e.titolo)} · ${prezzi[e.materia]} €</a></p>` : '';
     const voci = e.richieste.map((r) => rigaHtml(e.materia, r)).join('');
     esitoBox.innerHTML = `
       <div class="compat-sintesi">
         ${notaMateria}
+        <p class="compat-righe-sintesi"><b>${programma ? 'Programma del corso riconosciuto' : 'Compito d’esame riconosciuto'}</b></p>
         <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di copertura stimata con ${esc(e.titolo)}</span></p>
         <div class="compat-barra" aria-hidden="true"><i class="b-stesso" style="width:${quota('stesso')}%"></i><i class="b-argomento" style="width:${quota('argomento')}%"></i></div>
-        <p class="compat-righe-sintesi">${e.conteggi.stesso} coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte</p>
+        <p class="compat-righe-sintesi">${programma ? `${e.conteggi.stesso} argomenti coperti · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperti` : `${e.conteggi.stesso} richieste coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte`}</p>
         ${successo}${acquisto}
       </div>
       <ol class="compat-richieste">${voci}</ol>
       <details class="compat-dettagli">
         <summary>Come si calcola</summary>
-        <p>Una richiesta vale per intero se il procedimento necessario è spiegato negli esercizi svolti o nella teoria, per metà se c’è solo l’argomento. Una dimostrazione richiesta deve essere presente nel materiale. ${e.perPunti ? 'Si usano i punteggi indicati; il totale di un esercizio si distribuisce tra i suoi punti quando manca un punteggio specifico.' : 'Le richieste hanno tutte lo stesso peso.'} La stima riguarda il compito caricato; i riferimenti usati sono indicati in ogni riga.</p>
+        <p>${programma ? 'Ogni voce del programma vale per intero se il contenuto è spiegato nella teoria o negli esercizi svolti, per metà se è presente solo l’argomento generale, zero se manca. Una dimostrazione deve essere presente solo quando il programma la richiede. Gli argomenti hanno tutti lo stesso peso. La stima riguarda il programma caricato e non la difficoltà di uno specifico compito d’esame.' : `Una richiesta vale per intero se il procedimento necessario è spiegato negli esercizi svolti o nella teoria, per metà se c’è solo l’argomento. Una dimostrazione richiesta deve essere presente nel materiale. ${e.perPunti ? 'Si usano i punteggi indicati; il totale di un esercizio si distribuisce tra i suoi punti quando manca un punteggio specifico.' : 'Le richieste hanno tutte lo stesso peso.'} La stima riguarda il compito caricato.`} I riferimenti usati sono indicati in ogni riga.</p>
       </details>
       <details class="compat-dettagli">
         <summary>Correggi il testo letto</summary>

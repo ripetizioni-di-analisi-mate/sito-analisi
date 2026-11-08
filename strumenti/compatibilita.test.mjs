@@ -387,6 +387,104 @@ test('un confronto completo restituisce fonti, percentuale e un solo salvataggio
   assert.equal(chiamate.filter((x) => x.percorso === '/comp-compito-esito').length, 1);
 });
 
+test('un programma senza esercizi restituisce argomenti e fonti teoriche, senza pretendere dimostrazioni', async () => {
+  const testo = 'Programma del corso di Analisi matematica I\n1. Teorema fondamentale del calcolo.\n2. Formula fondamentale del calcolo.';
+  const { eventi, chiamate } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T3|-|Teorema fondamentale del calcolo\n2|T|A1|T4|-|Formula fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, testo);
+  const e = eventi.at(-1).fine;
+  assert.equal(e.tipoDocumento, 'programma');
+  assert.equal(e.compatibilita, 100);
+  assert.equal(e.richieste.length, 2);
+  assert.ok(e.richieste.every((r) => r.voce?.link.startsWith('/analisi-1/integrali/teoria#')));
+  assert.equal(e.perPunti, false);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
+  const salvato = chiamate.find((c) => c.percorso === '/comp-compito-esito');
+  assert.ok(JSON.parse(salvato.dati.esito).every((r) => r.d === 'programma'));
+});
+
+test('un elenco senza intestazione può essere riconosciuto come programma', async () => {
+  const { eventi } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T3|-|Teorema fondamentale del calcolo\n2|T|A1|T4|-|Formula fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, 'Teorema fondamentale del calcolo; formula fondamentale del calcolo.');
+  assert.equal(eventi.find((e) => e.tipoDocumento)?.tipoDocumento, 'programma');
+  assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
+});
+
+test('CFU, ore e numeri del programma non pesano sulla copertura e gli argomenti assenti restano visibili', async () => {
+  const { eventi } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T3|8|Teorema fondamentale del calcolo\n2|T|-|-|2|Equazioni differenziali stocastiche\nFINE_CONFRONTO', 'analisi-1', true, 'Syllabus di Analisi matematica I. 8 CFU: teorema fondamentale del calcolo; 2 ore: equazioni differenziali stocastiche.');
+  const e = eventi.at(-1).fine;
+  assert.equal(e.compatibilita, 50);
+  assert.equal(e.perPunti, false);
+  assert.deepEqual(e.richieste.map((r) => r.peso), [1, 1]);
+  assert.equal(e.richieste[1].livello, 'nessuno');
+  assert.equal(e.richieste[1].voce, null);
+});
+
+test('una dimostrazione esplicitamente richiesta nel programma deve essere presente', async () => {
+  const { eventi } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T4|-|Dimostrare la formula fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, 'Programma del corso. Formula fondamentale del calcolo con dimostrazione.');
+  assert.equal(eventi.at(-1).fine.compatibilita, 50);
+  const senza = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T4|-|Formula fondamentale del calcolo senza dimostrazione\nFINE_CONFRONTO', 'analisi-1', true, 'Programma del corso. Formula fondamentale del calcolo senza dimostrazione.');
+  assert.equal(senza.eventi.at(-1).fine.compatibilita, 100);
+});
+
+test('un modello senza intestazione mantiene il riconoscimento dal titolo del programma', async () => {
+  const { eventi } = await confronto('1|T|A1|T3|-|Teorema fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, 'Programma di Analisi matematica I. Teorema fondamentale del calcolo.');
+  assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
+  const esame = await confronto(`${riga}FINE_CONFRONTO`, 'analisi-1', true, 'Esercizio 1. Calcolare un integrale per parti anche se fuori programma.');
+  assert.equal(esame.eventi.at(-1).fine.tipoDocumento, 'esame');
+});
+
+test('il recupero di un programma sostituisce le voci incomplete senza contare la riga del tipo', async () => {
+  const { eventi, modelli, chiamate } = await confronto((_m, _i, n) => ({ response: n === 1
+    ? 'TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T3|-|Voce provvisoria\n'
+    : 'TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T4|-|Formula fondamentale del calcolo\nFINE_CONFRONTO' }), 'analisi-1', true, 'Programma del corso. Formula fondamentale del calcolo.');
+  assert.equal(modelli.length, 2);
+  assert.ok(eventi.some((e) => e.ricomincia));
+  assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
+  assert.equal(eventi.at(-1).fine.richieste.length, 1);
+  assert.equal(eventi.at(-1).fine.richieste[0].testo, 'Formula fondamentale del calcolo');
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
+});
+
+async function letturaDocumento(testo) {
+  const chiamate = [], attese = [], modelli = [];
+  const env = { AI: { run: async (_modello, input) => { modelli.push(input); return { response: testo }; } } };
+  const h = {
+    aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true }; },
+    json: (dati, status = 200, headers) => Response.json(dati, { status, headers }),
+    utenteCollegato: async () => null,
+  };
+  const req = new Request('https://esempio.test/api/compatibilita/leggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia: 'analisi-1', pagine: ['data:image/png;base64,AQID'] }) });
+  const res = await gestisciCompatibilita(req, env, { waitUntil: (p) => attese.push(p) }, '/api/compatibilita/leggi', h);
+  const dati = await res.json();
+  await Promise.all(attese);
+  return { res, dati, chiamate, modelli };
+}
+
+test('foto e PDF trascritti come programma vengono accettati e conservati senza esercizi', async () => {
+  const programma = 'Programma di Analisi matematica I\nLimiti, derivate e integrali.';
+  const { res, dati, chiamate, modelli } = await letturaDocumento(programma);
+  assert.equal(res.status, 200);
+  assert.equal(dati.testo, programma);
+  assert.ok(dati.id);
+  assert.equal(chiamate.find((c) => c.percorso === '/comp-compito-nuovo').dati.letto, programma);
+  assert.match(modelli[0].messages[0].content[0].text, /programma.*syllabus/);
+});
+
+test('una foto senza contenuti utili viene rifiutata e rimborsata', async () => {
+  for (const segnale of ['NESSUN_CONTENUTO', 'NESSUN_ESERCIZIO']) {
+    const { res, chiamate } = await letturaDocumento(segnale);
+    assert.equal(res.status, 422);
+    assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+    assert.ok(chiamate.every((c) => c.percorso !== '/comp-compito-nuovo'));
+  }
+});
+
+test('un programma troppo lungo non viene troncato e confrontato solo in parte', async () => {
+  const { res, dati, chiamate } = await letturaDocumento('Programma del corso. ' + 'Argomento; '.repeat(800));
+  assert.equal(res.status, 422);
+  assert.match(dati.errore, /una sezione alla volta/);
+  assert.ok(!dati.testo);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+});
+
 test('il confronto usa la materia corretta, la comunica e consuma un solo controllo', async () => {
   const { eventi, chiamate, modelli } = await confronto(`${riga}FINE_CONFRONTO|1`, 'fisica-1', true, 'Prova scritta di Analisi Matematica I. Esercizio 1. Calcolare un integrale per parti.');
   assert.equal(eventi[0].materiaCorretta.materiaScelta, 'fisica-1');
