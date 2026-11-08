@@ -163,7 +163,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 <style>
   .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); color: var(--bronzo); background: var(--bronzo-fondo); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
-  .indice-pacchetti:hover, .indice-pacchetti[aria-current="page"] { color: #654626; border-color: #c9ac89; background: #ede1d1; }
+  .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
+  .indice-pacchetti[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }

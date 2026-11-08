@@ -3,6 +3,10 @@ import '@fontsource-variable/source-serif-4';
 import '@fontsource/source-sans-3/400.css';
 import '@fontsource/source-sans-3/600.css';
 import '@fontsource/source-sans-3/700.css';
+import fontMarchio from '@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url';
+import fontIndice from '@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url';
+import fontIndiceSemibold from '@fontsource/source-sans-3/files/source-sans-3-latin-600-normal.woff2?url';
+import fontIndiceBold from '@fontsource/source-sans-3/files/source-sans-3-latin-700-normal.woff2?url';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
@@ -112,6 +116,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  {/* Gli stessi font della navigazione sono disponibili fin dal primo disegno di ogni pagina. */}
+  {[fontMarchio, fontIndice, fontIndiceSemibold, fontIndiceBold].map((href) => (
+    <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+  ))}
   <style is:inline set:html={regoleStato}></style>
   <link rel="icon" href={url('/logo.svg')} type="image/svg+xml" />
   <title>{titoloCompleto}</title>
@@ -201,13 +209,6 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
-      {m && (
-        <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
-          {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
-          <span>{m.breve}</span>
-          {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
-        </a>
-      )}
       <div class="account-testata">
         <a class="bottone-account" href={link(lingua, '/account')} aria-label={t.ilTuoAccount}>
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="7" r="3.5"/><path d="M3.5 17.5c1-3.3 3.6-5 6.5-5s5.5 1.7 6.5 5"/></svg>
@@ -260,6 +261,15 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
     <main id="contenuto-principale">
       <div class="pagina">
+        {m && (
+          <div class="contesto-materia">
+            <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
+              {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
+              <span>{m.breve}</span>
+              {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
+            </a>
+          </div>
+        )}
         {(percorso.length > 0 || m) && (
           <nav class="percorso" aria-label="Percorso">
             {livelloSopra && <a class="indietro" href={livelloSopra} title={en ? 'Back' : 'Torna indietro'} aria-label={en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
