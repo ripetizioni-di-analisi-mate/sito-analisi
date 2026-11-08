@@ -2,13 +2,14 @@
 const collegamenti = [...document.querySelectorAll<HTMLElement>('[data-sconto-bronzo]')];
 
 if (collegamenti.length) {
+  const chiaveVisitato = 'rda:sconti:visitati';
   const riduciMovimento = matchMedia('(prefers-reduced-motion: reduce)');
+  let visitato = false;
+  try { visitato = localStorage.getItem(chiaveVisitato) === '1'; } catch { /* Storage non disponibile. */ }
   let timer = 0;
   let fineTimer = 0;
-  let ultimoPassaggio = 0;
-  let inCorso = false;
 
-  const disponibile = () => !document.hidden && !riduciMovimento.matches;
+  const disponibile = () => !visitato && !document.hidden && !riduciMovimento.matches;
   const visibile = (elemento: HTMLElement) => {
     const r = elemento.getBoundingClientRect();
     return elemento.getClientRects().length > 0 && r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight;
@@ -19,11 +20,10 @@ if (collegamenti.length) {
     window.clearTimeout(fineTimer);
     timer = 0;
     fineTimer = 0;
-    inCorso = false;
     collegamenti.forEach((elemento) => elemento.classList.remove('bronzo-luccichio'));
   }
 
-  function programma(ritardo = 18000 + Math.random() * 8000) {
+  function programma() {
     window.clearTimeout(timer);
     if (!disponibile()) return;
     timer = window.setTimeout(() => {
@@ -31,32 +31,35 @@ if (collegamenti.length) {
       if (!disponibile()) return;
       const presenti = collegamenti.filter(visibile);
       if (!presenti.length) { programma(); return; }
-      ultimoPassaggio = performance.now();
-      inCorso = true;
       presenti.forEach((elemento) => elemento.classList.add('bronzo-luccichio'));
       fineTimer = window.setTimeout(() => {
         collegamenti.forEach((elemento) => elemento.classList.remove('bronzo-luccichio'));
         fineTimer = 0;
-        inCorso = false;
         programma();
       }, 1850);
-    }, ritardo);
+    }, 120000 + Math.random() * 60000);
   }
 
-  function riparti() { ferma(); programma(2200); }
-  document.addEventListener('visibilitychange', () => {
+  function segnaVisitato() {
+    visitato = true;
     ferma();
-    if (!document.hidden) programma(3000);
+    try { localStorage.setItem(chiaveVisitato, '1'); } catch { /* Resta spento nella pagina corrente. */ }
+  }
+  collegamenti.forEach((elemento) => {
+    elemento.addEventListener('click', segnaVisitato);
+    elemento.addEventListener('auxclick', (evento) => { if (evento.button === 1) segnaVisitato(); });
   });
+  window.addEventListener('storage', (evento) => {
+    if (evento.key === chiaveVisitato && evento.newValue === '1') {
+      visitato = true;
+      ferma();
+    }
+  });
+  function riparti() { ferma(); programma(); }
+  document.addEventListener('visibilitychange', riparti);
   riduciMovimento.addEventListener('change', riparti);
   window.addEventListener('pagehide', ferma);
   window.addEventListener('pageshow', (evento) => { if (evento.persisted) riparti(); });
 
-  if ('IntersectionObserver' in window) {
-    const osservatore = new IntersectionObserver((voci) => {
-      if (voci.some((voce) => voce.isIntersecting) && !inCorso && performance.now() - ultimoPassaggio > 8000) programma(2200);
-    }, { threshold: 0.6 });
-    collegamenti.forEach((elemento) => osservatore.observe(elemento));
-  }
-  programma(2200);
+  programma();
 }
