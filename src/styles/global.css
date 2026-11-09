@@ -489,10 +489,39 @@ details.indice-sottogruppo > summary { display: flex; align-items: center; justi
 details.sottogruppo > summary::-webkit-details-marker, details.indice-sottogruppo > summary::-webkit-details-marker { display: none; }
 details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
 details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > summary::before { transform: rotate(45deg); }
-details.indice-sottogruppo > summary::before { display: none; }
-details.indice-sottogruppo > summary::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-bottom: 1.3px solid var(--inchiostro-2); transform: rotate(-45deg); transition: transform 150ms ease; }
-details.indice-sottogruppo[open] > summary::after { transform: rotate(45deg); }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::before { display: none; }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-bottom: 1.3px solid var(--inchiostro-2); transform: rotate(-45deg); transition: transform 150ms ease; }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary::after { transform: rotate(45deg); }
 details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(--verde) 5%, var(--carta)); }
+
+/* Università e Superiori condividono la stessa tinta nella home e nell'indice. */
+.indice-gruppo, .home-percorsi-studio { --fondo-percorso: #e7ede9; }
+.indice-percorsi-studio, .home-percorsi-studio {
+  --fondo-sottopercorso: color-mix(in srgb, var(--fondo-percorso) 80%, #66b478);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) {
+  margin: 0.25rem 0 0.25rem 0.55rem;
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary {
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--fondo-sottopercorso) 20%, transparent);
+  box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 16%, transparent);
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after {
+  border-color: var(--verde);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary:is(:hover, :focus-visible),
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary {
+  background: color-mix(in srgb, var(--fondo-sottopercorso) 30%, transparent);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary {
+  color: var(--verde);
+  box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 30%, transparent);
+}
 
 /* Aperture secondarie: lo stesso indicatore dei capitoli, anche nei risultati caricati in pagina. */
 :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary { list-style: none; }
@@ -508,7 +537,8 @@ details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(
   details.indice-gruppo > summary::before,
   details.sottogruppo > summary::before,
   details.indice-sottogruppo > summary::before,
-  details.indice-sottogruppo > summary::after,
+  :is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after,
+  :is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary,
   :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::before { transition: none; }
 }
 .griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
