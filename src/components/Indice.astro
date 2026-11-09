@@ -169,30 +169,29 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
   .indice-percorsi-studio > .indice-sottogruppo {
-    margin: 0.35rem 0 0.35rem 0.55rem;
+    margin: 0 0 0 0.55rem;
+  }
+  .indice-percorsi-studio > .indice-sottogruppo + .indice-sottogruppo {
+    border-top: 1px solid color-mix(in srgb, var(--riga) 75%, transparent);
   }
   .indice-percorsi-studio > .indice-sottogruppo > summary {
-    border: 1px solid color-mix(in srgb, var(--verde) 19%, var(--carta));
-    background: color-mix(in srgb, var(--verde) 5%, var(--carta));
-    transition: background 150ms ease, border-color 150ms ease;
+    padding: 0.35rem 0.55rem;
+    transition: background 150ms ease;
   }
   .indice-percorsi-studio > .indice-sottogruppo > summary::after { border-color: var(--verde); }
   .indice-percorsi-studio > .indice-sottogruppo > summary:is(:hover, :focus-visible),
   .indice-percorsi-studio > .indice-sottogruppo[open] > summary {
-    border-color: color-mix(in srgb, var(--verde) 36%, var(--carta));
-    background: color-mix(in srgb, var(--verde) 10%, var(--carta));
+    background: color-mix(in srgb, var(--verde) 5%, var(--carta));
   }
+  .indice-percorsi-studio > .indice-sottogruppo[open] > summary { color: var(--verde); }
   .indice-percorsi-studio > .indice-sottogruppo > .indice-materie {
-    margin: 0.3rem 0 0.5rem 0.65rem;
+    margin: 0.1rem 0 0.25rem 0.55rem;
     padding-left: 0.2rem;
-    border-left: 1px solid color-mix(in srgb, var(--verde) 25%, var(--carta));
+    border-left: 1px solid var(--riga);
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .indice-percorsi-studio[open] > .indice-sottogruppo,
-    .indice-percorsi-studio > .indice-sottogruppo[open] > .indice-materie {
-      animation: comparsa-percorsi 150ms ease-out;
-    }
-    @keyframes comparsa-percorsi { from { opacity: 0.9; transform: translateY(-3px); } }
+  @media (pointer: fine) {
+    .indice-percorsi-studio > .indice-sottogruppo > summary,
+    .indice-percorsi-studio > .indice-sottogruppo .voce-materia { min-height: 2.25rem; }
   }
   details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: transparent; background: #e7ede9; box-shadow: inset 3px 0 var(--azione); }
   @media (prefers-reduced-motion: reduce) {
