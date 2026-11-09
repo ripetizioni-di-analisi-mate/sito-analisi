@@ -17,7 +17,33 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   <label><span>{en ? 'Postal code' : 'CAP'} <small data-facoltativo-estero hidden>{en ? 'if applicable' : 'se previsto'}</small></span><input name="fattura_cap" autocomplete="section-fattura billing postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required /></label>
   <label>{en ? 'City or town' : 'Comune o città'}<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
   <label><span id="etichetta-provincia">{en ? 'Province code' : 'Sigla della provincia'}</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder={en ? 'e.g. RM' : 'Es. RM'} pattern="[A-Za-z]{2}" maxlength="2" required /></label>
-  <label id="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}<input name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required /></label>
+  <div class="calcolo-cf" data-calcolo-cf>
+    <div class="etichetta-cf">
+      <label for="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}</label>
+      <button type="button" class="aiuto-cf" data-cf-apri aria-haspopup="dialog" aria-controls="finestra-cf" aria-label={en ? 'Help calculating the Italian tax code' : 'Aiuto per calcolare il codice fiscale'}>{en ? 'Help' : 'Aiuto'}</button>
+    </div>
+    <input id="campo-cf" name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required />
+    <dialog id="finestra-cf" class="finestra-cf" data-cf-dialog aria-labelledby="titolo-cf">
+      <div class="contenuto-cf">
+        <div class="testa-cf">
+          <h2 id="titolo-cf" tabindex="-1" autofocus>{en ? 'Calculate tax code' : 'Calcola codice fiscale'}</h2>
+          <button type="button" class="chiudi-cf" data-cf-chiudi aria-label={en ? 'Close' : 'Chiudi'}>×</button>
+        </div>
+        <p>{en ? 'Use the billing recipient’s birth details.' : 'Inserisci i dati di nascita dell’intestatario della fattura.'}</p>
+        <div class="campi-nascita">
+          <label>{en ? 'Date of birth' : 'Data di nascita'}<input type="date" data-cf-data form="calcolatore-cf-locale" /></label>
+          <label>{en ? 'Sex on official records' : 'Sesso anagrafico'}<select data-cf-sesso form="calcolatore-cf-locale">
+            <option value="">{en ? 'Select' : 'Seleziona'}</option><option value="F">{en ? 'Female' : 'Femminile'}</option><option value="M">{en ? 'Male' : 'Maschile'}</option>
+          </select></label>
+          <label class="largo">{en ? 'Town or country of birth' : 'Comune o Stato estero di nascita'}<input type="text" data-cf-luogo list="elenco-luoghi-cf" form="calcolatore-cf-locale" autocomplete="off" spellcheck="false" placeholder={en ? 'e.g. Roma or France' : 'Es. Roma o Francia'} /></label>
+          <datalist id="elenco-luoghi-cf"></datalist>
+        </div>
+        <p data-cf-stato role="status"></p>
+        <small>{en ? 'Check the result against your Italian health card.' : 'Confronta il risultato con la tessera sanitaria.'} <a href="/dati/luoghi-cf-fonti.txt" target="_blank" rel="noopener">{en ? 'Data sources' : 'Fonti dei dati'}</a></small>
+        <button type="submit" class="bottone-primario" form="calcolatore-cf-locale" data-cf-calcola>{en ? 'Calculate' : 'Calcola'}</button>
+      </div>
+    </dialog>
+  </div>
 </div>
 <style>
   .campi-fattura { margin: 0; max-width: none; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -26,6 +52,20 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   .campi-fattura [hidden] { display: none; }
   .campi-fattura input, .campi-fattura select { width: 100%; min-width: 0; box-sizing: border-box; }
   .campi-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
-  #campo-cf input { text-transform: uppercase; }
+  #campo-cf { text-transform: uppercase; }
+  .calcolo-cf { display: grid; align-content: start; gap: .3rem; min-width: 0; }
+  .etichetta-cf, .testa-cf { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+  .aiuto-cf, .chiudi-cf { border: 0; background: transparent; color: var(--accento); font: inherit; cursor: pointer; }
+  .aiuto-cf { padding: 0 .2rem; min-height: 1.5rem; font-size: .85rem; text-decoration: underline; text-underline-offset: .14em; }
+  .finestra-cf { box-sizing: border-box; width: min(25rem, calc(100% - 1.5rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--riga); border-radius: 12px; background: var(--carta, white); color: var(--inchiostro); box-shadow: 0 10px 36px rgb(34 48 47 / 18%); }
+  .finestra-cf::backdrop { background: rgb(34 48 47 / 28%); }
+  .contenuto-cf { display: grid; gap: .8rem; padding: 1rem 1.15rem; }
+  .testa-cf h2 { margin: 0; font-size: 1.2rem; }
+  .chiudi-cf { padding: 0; width: 2rem; height: 2rem; font-size: 1.55rem; line-height: 1; }
+  .campi-nascita { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .6rem; }
+  .finestra-cf p, .finestra-cf small { margin: 0; font-size: .88rem; color: var(--inchiostro-2); }
+  .finestra-cf p:empty { display: none; }
+  .finestra-cf [data-cf-calcola] { justify-self: end; }
   @media (max-width: 36rem) { .campi-fattura { grid-template-columns: minmax(0,1fr); } }
+  @media (max-width: 22rem) { .campi-nascita { grid-template-columns: minmax(0,1fr); } }
 </style>

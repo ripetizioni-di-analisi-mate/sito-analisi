@@ -1,9 +1,13 @@
+import { preparaCalcoloCF } from './calcolo-cf';
+
 export function preparaIndirizzo(fattura: HTMLElement) {
   const paese = fattura.querySelector<HTMLSelectElement>('[name=fattura_paese]')!;
   const cap = fattura.querySelector<HTMLInputElement>('[name=fattura_cap]')!;
   const provincia = fattura.querySelector<HTMLInputElement>('[name=fattura_provincia]')!;
   const cf = fattura.querySelector<HTMLInputElement>('[name=fattura_cf]')!;
   const en = fattura.dataset.lingua === 'en';
+  const calcolatore = preparaCalcoloCF(fattura);
+  const finestra = calcolatore.querySelector<HTMLDialogElement>('[data-cf-dialog]')!;
   function aggiorna() {
     const italia = paese.value === 'IT';
     cap.required = provincia.required = cf.required = italia;
@@ -17,7 +21,8 @@ export function preparaIndirizzo(fattura: HTMLElement) {
       ? (en ? 'Province code' : 'Sigla della provincia')
       : (en ? 'Province or region (if applicable)' : 'Provincia o regione (se prevista)');
     fattura.querySelector<HTMLElement>('[data-facoltativo-estero]')!.hidden = italia;
-    fattura.querySelector<HTMLElement>('#campo-cf')!.hidden = cf.disabled = !italia;
+    if (!italia && finestra.open) finestra.close();
+    calcolatore.hidden = cf.disabled = !italia;
   }
   paese.addEventListener('change', aggiorna);
   window.addEventListener('pageshow', aggiorna);
