@@ -88,7 +88,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     <>
       <p class="indice-percorsi-titolo">{lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
       {gruppiL(lingua).map((g) => (
-        <details class:list={['indice-gruppo', { 'indice-universita': g === 'Università' || g === 'University' }]}>
+        <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">
@@ -168,11 +168,36 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
-  .indice-universita :global(.indice-sottogruppo > summary) { justify-content: flex-start; }
-  .indice-universita :global(.indice-sottogruppo > summary::before) { display: block; }
-  .indice-universita :global(.indice-sottogruppo > summary::after) { display: none; }
-  .indice-universita :global(.indice-sottogruppo > .indice-materie) { margin-left: 0.6rem; }
+  .indice-percorsi-studio > .indice-sottogruppo {
+    margin: 0.35rem 0 0.35rem 0.55rem;
+  }
+  .indice-percorsi-studio > .indice-sottogruppo > summary {
+    border: 1px solid color-mix(in srgb, var(--verde) 19%, var(--carta));
+    background: color-mix(in srgb, var(--verde) 5%, var(--carta));
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+  .indice-percorsi-studio > .indice-sottogruppo > summary::after { border-color: var(--verde); }
+  .indice-percorsi-studio > .indice-sottogruppo > summary:is(:hover, :focus-visible),
+  .indice-percorsi-studio > .indice-sottogruppo[open] > summary {
+    border-color: color-mix(in srgb, var(--verde) 36%, var(--carta));
+    background: color-mix(in srgb, var(--verde) 10%, var(--carta));
+  }
+  .indice-percorsi-studio > .indice-sottogruppo > .indice-materie {
+    margin: 0.3rem 0 0.5rem 0.65rem;
+    padding-left: 0.2rem;
+    border-left: 1px solid color-mix(in srgb, var(--verde) 25%, var(--carta));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .indice-percorsi-studio[open] > .indice-sottogruppo,
+    .indice-percorsi-studio > .indice-sottogruppo[open] > .indice-materie {
+      animation: comparsa-percorsi 150ms ease-out;
+    }
+    @keyframes comparsa-percorsi { from { opacity: 0.9; transform: translateY(-3px); } }
+  }
   details.indice-gruppo > summary.indice-percorso:hover, details.indice-gruppo > summary.indice-percorso:focus-visible, details.indice-gruppo[open] > summary.indice-percorso { border-color: transparent; background: #e7ede9; box-shadow: inset 3px 0 var(--azione); }
-  @media (prefers-reduced-motion: reduce) { details.indice-gruppo > summary.indice-percorso { transition: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    details.indice-gruppo > summary.indice-percorso,
+    .indice-percorsi-studio > .indice-sottogruppo > summary { transition: none; }
+  }
   a:focus-visible,summary:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
 </style>
