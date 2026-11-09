@@ -99,7 +99,7 @@ export const TESTI = {
     nomeSito: 'Ripetizioni di Analisi',
     sezioni: { teoria: 'Teoria', 'esercizi-svolti': 'Esercizi svolti', esercizi: 'Esercizi da fare' } as Record<string, string>,
     indice: 'Indice', chiudi: 'Chiudi', cerca: 'Cerca', accedi: 'Accedi', account: 'Account', ilTuoAccount: 'Il tuo account',
-    sbloccata: 'Sbloccata', materie: 'Materie', altreMaterie: 'altre materie', contatti: 'Contatti e assistenza', chiSono: 'Chi sono', prezzi: 'Prezzi', privacy: 'Informativa sulla privacy', termini: 'Termini e diritti d’autore', rimborsi: 'Rimborsi e recesso',
+    sbloccata: 'Sbloccata', materie: 'Materie', altreMaterie: 'altre materie', contatti: 'Contatti e assistenza', chiSono: 'Chi sono', prezzi: 'Prezzi', privacy: 'Informativa sulla privacy', termini: 'Termini e diritti d’autore', rimborsi: 'Politica di rimborso',
     copyright: '© 2026 Carmine Tornincasa · P. IVA 04779350612. Tutti i diritti riservati. Vietata la riproduzione o la diffusione, anche parziale, senza autorizzazione scritta.',
     notaTermini: 'Con l’acquisto accetti i <a href="/termini">termini d’uso</a>: l’accesso è personale e il materiale non può essere condiviso né diffuso.',
     precedente: 'Precedente', successivo: 'Successivo', argomentoSuccessivo: 'Argomento successivo', tornaSu: "Torna all'inizio della pagina",

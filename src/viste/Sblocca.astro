@@ -68,7 +68,7 @@ const invito = lingua === 'en' ? {
       {compat && <a class="tasto-compat" href={compat}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/></svg><span>Controlla la compatibilità con il tuo esame</span></a>}
       <p class="nota-accesso">{js.haiAccount} <a id="link-accedi" href={`${pref}/accedi`}>{js.accedi}</a></p>
     </form>
-    <p class="nota-termini-breve">{lingua === 'it' ? <>Acquistando accetti i <a href="/termini">termini d’uso</a>. <a href="/rimborsi">Rimborsi e recesso</a>.</> : <>By purchasing you accept the <a href="/en/termini">terms of use</a>. <a href="/en/rimborsi">Refunds and withdrawal</a>.</>}</p>
+    <p class="nota-termini-breve">{lingua === 'it' ? <>Acquistando accetti i <a href="/termini">termini d’uso</a>.</> : <>By purchasing you accept the <a href="/en/termini">terms of use</a>.</>}</p>
   </div>
 
   <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat }}>
