@@ -169,24 +169,27 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   .indice-gruppo { --fondo-percorso: #e7ede9; }
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
+  .indice-percorsi-studio {
+    --fondo-sottopercorso: color-mix(in srgb, var(--fondo-percorso) 80%, #66b478);
+  }
   .indice-percorsi-studio > .indice-sottogruppo {
     margin: 0.25rem 0 0.25rem 0.55rem;
   }
   .indice-percorsi-studio > .indice-sottogruppo > summary {
     padding: 0.35rem 0.65rem;
     border-radius: 7px;
-    background: color-mix(in srgb, var(--fondo-percorso) 50%, transparent);
-    box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 22%, transparent);
+    background: color-mix(in srgb, var(--fondo-sottopercorso) 20%, transparent);
+    box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 16%, transparent);
     transition: background 150ms ease, box-shadow 150ms ease;
   }
   .indice-percorsi-studio > .indice-sottogruppo > summary::after { border-color: var(--verde); }
   .indice-percorsi-studio > .indice-sottogruppo > summary:is(:hover, :focus-visible),
   .indice-percorsi-studio > .indice-sottogruppo[open] > summary {
-    background: color-mix(in srgb, var(--fondo-percorso) 70%, transparent);
+    background: color-mix(in srgb, var(--fondo-sottopercorso) 30%, transparent);
   }
   .indice-percorsi-studio > .indice-sottogruppo[open] > summary {
     color: var(--verde);
-    box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 40%, transparent);
+    box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 30%, transparent);
   }
   .indice-percorsi-studio > .indice-sottogruppo > .indice-materie {
     margin: 0.1rem 0 0.25rem 0.55rem;
