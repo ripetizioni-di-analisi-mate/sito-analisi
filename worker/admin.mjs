@@ -1,9 +1,10 @@
-// Dashboard riservata (/admin): pagina unica con viste a schede (panoramica, studenti, vendite, traffico, strumenti).
+// Dashboard riservata (/admin): pagina unica con viste a schede.
 // I dati arrivano da /admin/api/*; il codice del browser è la funzione `cliente`, inserita nella pagina come sorgente.
 
 const ICONE = {
   panoramica: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/>',
   studenti: '<path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"/><circle cx="10" cy="8" r="3.5"/><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4M15.5 4.6a3.5 3.5 0 0 1 0 6.8"/>',
+  leghe: '<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4m-4 2v5m-4 1h8"/>',
   vendite: '<path d="M17.5 6.5A7 7 0 1 0 17.5 17.5"/><path d="M4 10.5h9M4 13.5h9"/>',
   traffico: '<path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 3 5-6"/>',
   strumenti: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L4 16.7V20h3.3l5.3-5.3a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.4-.6-.6-2.4z"/>',
@@ -18,7 +19,7 @@ const icona = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" st
 
 export function paginaAdmin(aPagamento, materie) {
   const info = materie.map((m) => ({ slug: m.slug, titolo: m.titolo, breve: m.breve, colore: m.colore, prezzo: m.prezzo, argomenti: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve])) }));
-  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['strumenti', 'Strumenti']];
+  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['leghe', 'Leghe'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['strumenti', 'Strumenti']];
   const nav = viste.map(([id, t]) => `<a href="#${id}" data-vista="${id}">${icona(id)}<span>${t}</span></a>`).join('');
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex"><meta name="theme-color" content="#1c2625">
@@ -181,6 +182,12 @@ td.destra,th.destra{text-align:right}
 .chip.attesa{background:color-mix(in srgb,var(--giu) 12%,transparent);color:var(--giu)}
 .chip.fonte-instagram{background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af);color:#fff}
 .chip.corso{background:color-mix(in srgb,#7a5fb0 16%,transparent);color:#7a5fb0}
+.leghe-periodo{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.leghe-periodo label,.leghe-gruppo label{display:flex;gap:.55rem;align-items:center;font-size:.88rem;font-weight:600}
+.leghe-gruppo{padding:.65rem 1.2rem .85rem}
+.leghe-gruppo select{min-width:0;max-width:100%}
+.leghe-kpi .kpi{padding-bottom:1rem}
+.leghe-classifica td:nth-child(2){overflow-wrap:anywhere}
 .corso-dichiarato{border:1px solid color-mix(in srgb,#7a5fb0 35%,transparent);background:color-mix(in srgb,#7a5fb0 7%,transparent);border-radius:12px;padding:.75rem .9rem}
 .corso-dichiarato p{margin:.2rem 0 0}
 .puntini{display:flex;gap:.25rem;flex-wrap:wrap}
@@ -248,7 +255,7 @@ td.destra,th.destra{text-align:right}
   .app{grid-template-columns:minmax(0,1fr)}
   .lato{position:fixed;top:auto;bottom:0;left:0;right:0;height:auto;flex-direction:row;padding:.35rem max(8px,env(safe-area-inset-left,0px)) calc(.35rem + env(safe-area-inset-bottom,0px));z-index:15;gap:0}
   .lato .marchio,.lato .fondo-lato{display:none}
-  .lato nav{grid-auto-flow:column;grid-auto-columns:1fr;width:100%}
+  .lato nav{grid-auto-flow:column;grid-auto-columns:minmax(4.25rem,1fr);width:100%;overflow-x:auto}
   .lato a{flex-direction:column;gap:.15rem;font-size:.7rem;padding:.4rem .2rem;text-align:center}
   main{padding-bottom:6rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .testa h1{font-size:1.3rem}
@@ -311,12 +318,13 @@ function cliente(MATERIE, A_PAGAMENTO) {
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const nf = new Intl.NumberFormat('it-IT');
   const eur = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
-  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', vendite: 'Vendite', traffico: 'Traffico', strumenti: 'Strumenti' };
+  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', leghe: 'Leghe', vendite: 'Vendite', traffico: 'Traffico', strumenti: 'Strumenti' };
   const COL = { acc: 'var(--acc)', avviso: 'var(--avviso)', su: 'var(--su)', ink3: 'var(--ink-3)' };
   const COLORI_FONTI = { Instagram: 'var(--c6)', Google: '#4285f4', 'Diretto o app': '#8b9593', WhatsApp: '#25a35a', Facebook: '#1877f2', TikTok: '#111', Bing: '#00809d', ChatGPT: '#10a37f' };
 
   let D = null, giorni = 30, vista = 'panoramica', aggiornato = null, inCorso = false;
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
+  const statoLeghe = { dati: null, settimana: '', gruppo: '', caricamento: false, errore: false };
   try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
@@ -354,6 +362,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
     return r.json();
   }
   async function carica(silenzioso) {
+    if (vista === 'leghe' && D && !$('#app').hidden) return caricaLeghe();
     if (inCorso) return; inCorso = true;
     const b = $('#aggiorna'); b.classList.add('ruota');
     try {
@@ -362,8 +371,35 @@ function cliente(MATERIE, A_PAGAMENTO) {
       disegna(); if (stato.aperto) apriStudente(stato.aperto, true);
     } catch (e) { if (!silenzioso && e.message !== '401') avviso('Impossibile aggiornare i dati'); }
     finally { inCorso = false; b.classList.remove('ruota'); segnaAggiornato(); }
+    if (vista === 'leghe' && !$('#app').hidden) await caricaLeghe();
   }
-  function segnaAggiornato() { if (aggiornato) $('#stato-agg').textContent = 'Aggiornato alle ' + aggiornato.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }); }
+  async function caricaLeghe(settimana = statoLeghe.settimana) {
+    if (statoLeghe.caricamento) return;
+    statoLeghe.caricamento = true;
+    const selettore = $('#settimana-lega');
+    if (selettore) selettore.disabled = true;
+    segnaAggiornato();
+    try {
+      const dati = await api('leghe' + (settimana ? '?settimana=' + encodeURIComponent(settimana) : ''));
+      if (dati.errore) throw new Error(dati.errore);
+      statoLeghe.dati = dati;
+      statoLeghe.settimana = dati.settimana === dati.corrente ? '' : dati.settimana;
+      statoLeghe.errore = false;
+    } catch (e) { if (e.message !== '401') statoLeghe.errore = true; }
+    finally {
+      statoLeghe.caricamento = false;
+      if (vista === 'leghe' && !$('#app').hidden) { leghe(); segnaAggiornato(); }
+    }
+  }
+  function segnaAggiornato() {
+    const legheAttive = vista === 'leghe';
+    const dataLeghe = statoLeghe.dati ? new Date(statoLeghe.dati.aggiornato) : null;
+    const data = legheAttive ? dataLeghe : aggiornato;
+    let testo = data ? 'Aggiornato alle ' + data.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }) : 'Caricamento…';
+    if (legheAttive && statoLeghe.caricamento) testo = 'Aggiornamento…';
+    else if (legheAttive && statoLeghe.errore) testo = 'Aggiornamento non riuscito';
+    $('#stato-agg').textContent = testo;
+  }
   function mostraLogin() { $('#app').hidden = true; $('#login').hidden = false; setTimeout(() => $('#pw').focus(), 50); }
 
   // ---------- dati derivati ----------
@@ -480,8 +516,9 @@ function cliente(MATERIE, A_PAGAMENTO) {
     $('#titolo-vista').textContent = VISTE[vista];
     $$('.lato a').forEach((a) => a.classList.toggle('attiva', a.dataset.vista === vista));
     $$('.segmenti button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.giorni) === giorni)));
-    $('.segmenti').hidden = vista === 'strumenti';
-    ({ panoramica, studenti, vendite, traffico, strumenti })[vista]();
+    $('.segmenti').hidden = vista === 'strumenti' || vista === 'leghe';
+    ({ panoramica, studenti, leghe, vendite, traffico, strumenti })[vista]();
+    segnaAggiornato();
   }
 
   function panoramica() {
@@ -641,6 +678,45 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
   function collegaCopia(r) { $$('[data-copia]', r).forEach((b) => b.addEventListener('click', () => { navigator.clipboard.writeText(b.dataset.copia).then(() => avviso('Copiata'), () => avviso('Selezionala e copiala a mano')); })); }
 
+  function leghe() {
+    const d = statoLeghe.dati;
+    if (!d) {
+      $('#vista').innerHTML = '<section class="card"><div class="vuoto" role="status">' +
+        (statoLeghe.errore ? 'Impossibile caricare le leghe. Usa Aggiorna per riprovare.' : 'Caricamento delle classifiche…') + '</div></section>';
+      return;
+    }
+    const corrente = d.settimana === d.corrente;
+    const membri = d.gruppi.flatMap((g) => g.membri);
+    const totaleExp = somma(membri.map((m) => m.exp));
+    const riepilogo = d.leghe.map((nome, i) => {
+      const gruppi = d.gruppi.filter((g) => g.lega === i);
+      return { nome, valore: somma(gruppi.map((g) => g.membri.length)), extra: '<small>' + gruppi.length + (gruppi.length === 1 ? ' gruppo' : ' gruppi') + '</small>' };
+    }).filter((r) => r.valore);
+    const gruppo = d.gruppi.find((g) => g.id === statoLeghe.gruppo) || d.gruppi[0];
+    const periodo = d.settimane.map(({ inizio, fine }) => '<option value="' + (inizio === d.corrente ? '' : esc(inizio)) + '"' +
+      (inizio === d.settimana ? ' selected' : '') + '>' + breveData(inizio) + ' – ' + breveData(fine) + '/' + fine.slice(0, 4) + '</option>').join('');
+    const zone = { sale: '<span class="chip pagante">Promozione</span>', scende: '<span class="chip attesa">Retrocessione</span>' };
+    const card = (nome, valore) => '<div class="card kpi"><span class="etichetta">' + nome + '</span><b>' + nf.format(valore) + '</b></div>';
+    $('#vista').innerHTML = '<div class="leghe-periodo"><label>Settimana <select class="scelta" id="settimana-lega"' +
+      (statoLeghe.caricamento ? ' disabled' : '') + '>' + periodo + '</select></label>' +
+      '<span class="chip' + (corrente ? ' pagante' : '') + '">' + (corrente ? 'In corso' : 'Conclusa') + '</span></div>' +
+      '<div class="kpi-riga leghe-kpi">' + card('Partecipanti', membri.length) + card('Gruppi attivi', d.gruppi.length) + card('EXP settimanali', totaleExp) +
+      card('In zona promozione', membri.filter((m) => m.zona === 'sale').length) + card('In zona retrocessione', membri.filter((m) => m.zona === 'scende').length) + '</div>' +
+      (gruppo ? '<div class="due"><section class="card"><header><h2>Classifica per gruppo</h2><span class="nota">' + nf.format(gruppo.membri.length) + ' partecipanti</span></header>' +
+        '<div class="leghe-gruppo"><label>Gruppo <select class="scelta" id="gruppo-lega">' + d.gruppi.map((g) => '<option value="' + esc(g.id) + '"' + (g.id === gruppo.id ? ' selected' : '') + '>' +
+          esc(d.leghe[g.lega]) + ' · Gruppo ' + nf.format(g.numero) + '</option>').join('') + '</select></label></div>' +
+        '<div class="tabella"><table class="leghe-classifica" aria-label="Classifica del gruppo"><thead><tr><th scope="col">Pos.</th><th scope="col">Studente</th><th scope="col" class="destra">EXP</th><th scope="col">Zona</th></tr></thead><tbody>' +
+        gruppo.membri.map((m, i) => '<tr><td class="cifra">' + nf.format(i + 1) + '</td><td>' + esc(m.nome) + '</td><td class="destra cifra">' + nf.format(m.exp) + '</td><td>' + (zone[m.zona] || '—') + '</td></tr>').join('') +
+        '</tbody></table></div></section><section class="card"><header><h2>Partecipanti per lega</h2></header><div class="corpo">' + barre(riepilogo, { quota: false }) + '</div></section></div>' :
+        '<section class="card"><div class="vuoto"><b>Nessun partecipante questa settimana</b>Gli studenti entrano in un gruppo quando guadagnano i primi EXP della settimana.</div></section>');
+    $('#settimana-lega').addEventListener('change', (e) => caricaLeghe(e.target.value));
+    $('#gruppo-lega')?.addEventListener('change', (e) => {
+      statoLeghe.gruppo = e.target.value;
+      leghe();
+      $('#gruppo-lega').focus();
+    });
+  }
+
   function vendite() {
     const g = elencoGiorni(giorni), inc = serie('incasso', giorni), incp = serie('incasso', giorni, giorni), ve = serie('vendite', giorni), vep = serie('vendite', giorni, giorni);
     const inizio = g[0]; const nel = D.acquisti.filter((a) => a.creato.slice(0, 10) >= inizio);
@@ -792,7 +868,16 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
 
   // ---------- navigazione e avvio ----------
-  function daHash() { const h = location.hash.slice(1); vista = VISTE[h] ? h : 'panoramica'; if (D) disegna(); }
+  function daHash() {
+    const h = location.hash.slice(1);
+    const prima = vista;
+    vista = VISTE[h] ? h : 'panoramica';
+    if (!D) return;
+    disegna();
+    if ($('#app').hidden) return;
+    if (vista === 'leghe') caricaLeghe();
+    else if (prima === 'leghe' && Date.now() - aggiornato >= 180000) carica(true);
+  }
   window.addEventListener('hashchange', daHash);
   $$('.segmenti button').forEach((b) => b.addEventListener('click', () => { giorni = Number(b.dataset.giorni); try { localStorage.setItem('dash-giorni', giorni); } catch {} disegna(); }));
   $('#aggiorna').addEventListener('click', () => carica());

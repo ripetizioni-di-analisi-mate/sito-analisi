@@ -61,21 +61,50 @@ export function creaTabelleSfide(sql) {
 }
 
 // ================= leghe settimanali =================
-function classificaGruppo(ar, settimana, lega, gruppo) {
-  const membri = ar.righe(`SELECT l.email, l.entrato, u.nome, u.soprannome, u.pubblico, COALESCE(u.exp, 0) AS tot
-    FROM leghe l JOIN utenti u ON u.email = l.email WHERE l.settimana = ? AND l.lega = ? AND l.gruppo = ? ORDER BY l.entrato, l.email`, settimana, lega, gruppo);
-  if (!membri.length) return [];
+function classifiche(ar, settimana, lega, gruppo) {
   const da = inizioGiorno(settimana), a = inizioGiorno(spostaGiorno(settimana, 7));
-  const exp = new Map(ar.righe(`SELECT email, SUM(punti) AS p FROM exp WHERE quando >= ? AND quando < ? AND email IN (${membri.map(() => '?').join(',')}) GROUP BY email`,
-    da, a, ...membri.map((m) => m.email)).map((r) => [r.email, r.p]));
-  return membri.map((m) => ({ ...m, settimanali: exp.get(m.email) || 0 }))
-    .sort((x, y) => y.settimanali - x.settimanali || x.entrato - y.entrato);
+  const filtro = lega === undefined ? [] : [lega, gruppo];
+  return ar.righe(`SELECT l.lega, l.gruppo, l.email, l.entrato, u.nome, u.soprannome, u.pubblico, COALESCE(u.exp, 0) AS tot,
+      COALESCE((SELECT SUM(e.punti) FROM exp e WHERE e.email = l.email AND e.quando >= ? AND e.quando < ?), 0) AS settimanali
+    FROM leghe l JOIN utenti u ON u.email = l.email
+    WHERE l.settimana = ? ${filtro.length ? 'AND l.lega = ? AND l.gruppo = ?' : ''}
+    ORDER BY l.lega, l.gruppo, settimanali DESC, l.entrato, l.email`, da, a, settimana, ...filtro);
+}
+
+const zonaLega = (i, exp, n, { sale, scende }) => i < sale && exp > 0 ? 'sale' : i >= n - scende ? 'scende' : '';
+
+export function datiLegheAdmin(ar, settimanaRichiesta) {
+  const corrente = settimanaDi()[0];
+  const settimana = settimanaRichiesta || corrente;
+  const adesso = Date.now();
+  let copia = ar.copiaLegheAdmin;
+  if (!copia || copia.corrente !== corrente || adesso - copia.aggiornato >= 180000) {
+    const precedenti = ar.righe('SELECT DISTINCT settimana FROM leghe WHERE settimana < ? ORDER BY settimana DESC LIMIT 11', corrente);
+    const settimane = [corrente, ...precedenti.map((r) => r.settimana)].map((inizio) => ({ inizio, fine: spostaGiorno(inizio, 6) }));
+    copia = ar.copiaLegheAdmin = { corrente, settimane, aggiornato: adesso, dati: new Map() };
+  }
+  if (!copia.settimane.some((s) => s.inizio === settimana)) return { errore: 'Settimana non disponibile' };
+  if (copia.dati.has(settimana)) return copia.dati.get(settimana);
+
+  const gruppi = new Map();
+  for (const m of classifiche(ar, settimana)) {
+    const id = `${m.lega}-${m.gruppo}`;
+    if (!gruppi.has(id)) gruppi.set(id, { id, lega: m.lega, numero: m.gruppo, membri: [] });
+    gruppi.get(id).membri.push({ nome: m.nome || nomeDallEmail(m.email) || 'Studente', exp: m.settimanali });
+  }
+  for (const { lega, membri } of gruppi.values()) {
+    const quote = quoteLega(membri.length, lega);
+    membri.forEach((m, i) => { m.zona = zonaLega(i, m.exp, membri.length, quote); });
+  }
+  const dati = { corrente, settimana, settimane: copia.settimane, aggiornato: adesso, leghe: LEGHE, gruppi: [...gruppi.values()] };
+  copia.dati.set(settimana, dati);
+  return dati;
 }
 
 export function fotografiaLega(ar, email) {
   const settimana = settimanaDi()[0];
   const io = ar.riga('SELECT lega, gruppo FROM leghe WHERE email = ? AND settimana = ?', email, settimana);
-  return io ? { settimana, ...io, membri: classificaGruppo(ar, settimana, io.lega, io.gruppo) } : null;
+  return io ? { settimana, ...io, membri: classifiche(ar, settimana, io.lega, io.gruppo) } : null;
 }
 
 // Prima attività della settimana: si chiude la settimana precedente dello studente (sale, resta o scende)
@@ -86,12 +115,10 @@ export function entraInLega(ar, email) {
   let lega = ar.riga('SELECT COALESCE(lega, 0) AS l FROM utenti WHERE email = ?', email)?.l ?? 0;
   const ultima = ar.riga('SELECT * FROM leghe WHERE email = ? AND settimana < ? ORDER BY settimana DESC LIMIT 1', email, sett);
   if (ultima && !ar.riga('SELECT 1 AS x FROM leghe_esiti WHERE email = ? AND settimana = ?', email, ultima.settimana)) {
-    const cl = classificaGruppo(ar, ultima.settimana, ultima.lega, ultima.gruppo);
+    const cl = classifiche(ar, ultima.settimana, ultima.lega, ultima.gruppo);
     const pos = cl.findIndex((x) => x.email === email) + 1;
-    const { sale, scende } = quoteLega(cl.length, ultima.lega);
-    let passo = 0;
-    if (pos > 0 && pos <= sale && cl[pos - 1].settimanali > 0) passo = 1;
-    else if (pos > 0 && pos > cl.length - scende) passo = -1;
+    const zona = pos > 0 ? zonaLega(pos - 1, cl[pos - 1].settimanali, cl.length, quoteLega(cl.length, ultima.lega)) : '';
+    const passo = zona === 'sale' ? 1 : zona === 'scende' ? -1 : 0;
     lega = Math.max(0, Math.min(LEGHE.length - 1, ultima.lega + passo));
     ar.sql.exec('INSERT OR IGNORE INTO leghe_esiti (email, settimana, posizione, membri, da, a) VALUES (?, ?, ?, ?, ?, ?)', email, ultima.settimana, pos, cl.length, ultima.lega, lega);
     ar.sql.exec('UPDATE utenti SET lega = ? WHERE email = ?', lega, email);
@@ -116,14 +143,14 @@ function statoLega(ar, c) {
     leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, avvisiLega: u.avvisi_lega !== 0, esito,
   };
   if (!io) return { ...base, lega: u.lega, nomeLega: nomi[u.lega], attesa: true };
-  const cl = classificaGruppo(ar, sett, io.lega, io.gruppo);
-  const { sale, scende } = quoteLega(cl.length, io.lega);
+  const cl = classifiche(ar, sett, io.lega, io.gruppo);
+  const quote = quoteLega(cl.length, io.lega);
   return {
-    ...base, lega: io.lega, nomeLega: nomi[io.lega], sale, scende,
+    ...base, lega: io.lega, nomeLega: nomi[io.lega], ...quote,
     gruppo: cl.map((m, i) => ({
       pos: i + 1, nome: m.email === email ? nomePubblico(u) : nomePubblico(m), io: m.email === email,
       exp: m.settimanali, livello: livelloDa(m.tot).livello,
-      zona: i < sale && m.settimanali > 0 ? 'sale' : i >= cl.length - scende ? 'scende' : '',
+      zona: zonaLega(i, m.settimanali, cl.length, quote),
     })),
   };
 }
@@ -137,7 +164,7 @@ export function riassuntoLega(ar, email, l = 'it') {
     const lega = ar.riga('SELECT COALESCE(lega, 0) AS l FROM utenti WHERE email = ?', email)?.l ?? 0;
     return { lega, nome: nomi[lega], posizione: null, membri: 0 };
   }
-  const cl = classificaGruppo(ar, sett, io.lega, io.gruppo);
+  const cl = classifiche(ar, sett, io.lega, io.gruppo);
   return { lega: io.lega, nome: nomi[io.lega], posizione: cl.findIndex((m) => m.email === email) + 1, membri: cl.length };
 }
 
