@@ -3,6 +3,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
+import ConsensoEmail from '../components/ConsensoEmail.astro';
 import '../styles/dispositivi-login.css';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -26,11 +27,12 @@ const pref = prefisso(lingua);
     <label>Password<span class="campo-password"><input type="password" name="password" autocomplete="current-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     <label id="campo-conferma" hidden>{t.ripetiPassword}<span class="campo-password"><input type="password" name="conferma" autocomplete="new-password" minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     {lingua === 'it' && <CampoCorso nascosto />}
+    <ConsensoEmail lingua={lingua} scegliMateria nascosto />
     <p class="esito-modulo" id="esito" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia">{t.accedi}</button>
     <p class="nota-privacy" id="nota-privacy" hidden>{lingua === 'it'
-      ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
-      : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
+      ? <>Consulta come vengono trattati i dati del tuo account. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
+      : <>See how we handle your account data. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
   <p class="nota-accesso" id="nota-password"><a href="#recupera" id="apri-recupero">{t.passwordDimenticata}</a></p>
 
@@ -233,6 +235,7 @@ const pref = prefisso(lingua);
         campoNome.hidden = s !== 'registrati';
         if (campoCorso) campoCorso.hidden = s !== 'registrati';
         document.getElementById('nota-privacy').hidden = s !== 'registrati';
+        modulo.querySelector('[data-consenso-email]').hidden = s !== 'registrati';
         invia.textContent = s === 'registrati' ? js.creaAccount : js.accedi;
         modulo.password.autocomplete = s === 'registrati' ? 'new-password' : 'current-password';
         esito.textContent = ''; esito.className = 'esito-modulo';
@@ -255,7 +258,8 @@ const pref = prefisso(lingua);
         try {
           const r = await fetch(scheda === 'registrati' ? '/api/registrati' : '/api/accedi', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua: pref ? 'en' : 'it',
+              offerte: scheda === 'registrati' && modulo.offerte.checked, materiaEmail: modulo.materiaEmail.value }),
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) {

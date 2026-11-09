@@ -5,6 +5,7 @@
 // nella barra; al telefono la barra è compatta e il tasto «Crea l'account» apre i campi.
 // L'account si crea con /api/registrati (`benvenuto: true`); lo sconto si applica da solo nella pagina Sblocca.
 // Prova: ?barra=1 mostra la barra anche se chiusa o con l'accesso fatto.
+import ConsensoEmail from './ConsensoEmail.astro';
 import { link, type Lingua } from '../i18n';
 import { SCONTO_BENVENUTO, GIORNI_RIPROPOSTA, RITARDO_SECONDI, PAGINE_SENZA_BARRA } from '../data/benvenuto';
 interface Props { lingua: Lingua }
@@ -15,7 +16,7 @@ const s = en ? {
   titolo: 'Give your studies a head start.', benvenuto: 'A welcome gift for you', offerta: 'on your first subject',
   sotto: 'Create your free account. Your discount is applied automatically to your first purchase.', apri: 'Unlock my discount',
   nome: 'Name', email: 'Email', password: 'Password (at least 8 characters)', crea: 'Create free account', chiudi: 'Close',
-  nota: 'Your data are used only to run your account.', privacy: 'Privacy policy', gia: 'Already have an account?', accedi: 'Log in',
+  nota: 'See how we handle your account data.', privacy: 'Privacy policy', gia: 'Already have an account?', accedi: 'Log in',
   nomeNo: 'Enter your name.', emailNo: 'Enter a valid email.', passwordNo: 'The password must be at least 8 characters long.',
   esiste: 'An account with this email already exists.', rete: 'Network error: please try again.',
   fatto: 'Account created.', fattoSotto: `The ${p}% discount is applied automatically to your first purchase of a subject.`, scegli: 'Choose a subject',
@@ -23,7 +24,7 @@ const s = en ? {
   titolo: 'Dai slancio al tuo studio.', benvenuto: 'Un benvenuto per te', offerta: 'sulla prima materia',
   sotto: 'Crea l’account gratuito. Il tuo sconto si applica da solo al primo acquisto.', apri: 'Attiva il mio sconto',
   nome: 'Nome', email: 'Email', password: 'Password (almeno 8 caratteri)', crea: 'Crea l’account gratuito', chiudi: 'Chiudi',
-  nota: 'I tuoi dati servono solo a far funzionare l’account.', privacy: 'Informativa sulla privacy', gia: 'Hai già un account?', accedi: 'Accedi',
+  nota: 'Consulta come vengono trattati i dati del tuo account.', privacy: 'Informativa sulla privacy', gia: 'Hai già un account?', accedi: 'Accedi',
   nomeNo: 'Scrivi il tuo nome.', emailNo: 'Scrivi un’email valida.', passwordNo: 'La password deve avere almeno 8 caratteri.',
   esiste: 'Esiste già un account con questa email.', rete: 'Errore di rete: riprova.',
   fatto: 'Account creato.', fattoSotto: `Il ${p}% di sconto si applica da solo al primo acquisto di una materia.`, scegli: 'Scegli la materia',
@@ -56,6 +57,7 @@ const accedi = link(lingua, '/accedi');
         <input id="bs-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="200" placeholder={s.password} />
         <button type="submit" class="bs-tasto">{s.crea}</button>
       </div>
+      <ConsensoEmail lingua={lingua} />
       <p class="bs-nota">{s.nota} <a href={link(lingua, '/privacy')} target="_blank" rel="noopener">{s.privacy}</a> · {s.gia} <a href={accedi}>{s.accedi}</a></p>
       <p class="bs-esito" role="status" aria-live="polite"></p>
     </form>
@@ -159,7 +161,8 @@ const accedi = link(lingua, '/accedi');
       try {
         const r = await fetch('/api/registrati', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ nome, email, password, lingua, benvenuto: true, pagina: location.pathname }),
+          body: JSON.stringify({ nome, email, password, lingua, benvenuto: true, pagina: location.pathname, offerte: modulo.offerte.checked,
+            materiaEmail: location.pathname.replace(/^\/en(?=\/)/, '').split('/')[1] }),
         });
         const d = await r.json().catch(() => ({}));
         if (r.status === 409) { esito.innerHTML = ''; esito.append(`${t.esiste} `); const a = document.createElement('a'); a.href = accedi; a.textContent = t.accedi; esito.append(a); return; }

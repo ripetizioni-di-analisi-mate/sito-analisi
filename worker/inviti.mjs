@@ -1,3 +1,4 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
 // «Invita un amico»: 15% di sconto a entrambi, solo sulle materie del sito (regole in src/data/inviti.ts).
 //  - Ogni studente ha un codice personale e il link /invito/<CODICE>. Chi lo apre riceve il cookie «invito»
 //    (30 giorni) e arriva alla pagina /invito, che spiega lo sconto.
@@ -106,6 +107,7 @@ async function paddle(env, metodo, percorso, corpo) {
     method: metodo,
     headers: { authorization: `Bearer ${env.PADDLE_API_KEY}`, 'content-type': 'application/json' },
     body: corpo ? JSON.stringify(corpo) : undefined,
+    signal: AbortSignal.timeout(10000),
   });
   const d = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(`Paddle ${r.status} ${d?.error?.code || ''} ${d?.error?.detail || ''}`.trim());
@@ -113,10 +115,9 @@ async function paddle(env, metodo, percorso, corpo) {
 }
 // Codice di sconto personale: 15% (o la percentuale data), un solo uso, valido solo sui prezzi delle materie.
 // Usato anche dallo sconto di benvenuto (worker/benvenuto.mjs) con il 10%.
-export async function creaSconto(env, { prefisso, descrizione, scade, percentuale = SCONTO_INVITO }) {
-  const prezzi = prezziMaterie(env);
+export async function creaSconto(env, { prefisso, descrizione, scade, percentuale = SCONTO_INVITO, materia, codice = prefisso + casuale(8) }) {
+  const prezzi = materia ? [env[variabilePrezzo(materia)]].filter(Boolean) : prezziMaterie(env);
   if (!prezzi.length) throw new Error('prezzi delle materie mancanti');
-  const codice = prefisso + casuale(8);
   const d = await paddle(env, 'POST', '/discounts', {
     description: descrizione.slice(0, 500),
     type: 'percentage',
@@ -127,29 +128,23 @@ export async function creaSconto(env, { prefisso, descrizione, scade, percentual
     restrict_to: prezzi,
     expires_at: scade || null,
   });
+  if (!d?.id) throw new Error('Paddle non ha restituito lo sconto');
   return { id: d.id, codice };
 }
 
 // ---------- email a chi ha invitato ----------
-const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function avvisaPremio(env, a, origine) {
-  if (!env.RESEND_API_KEY) return false;
-  const righe = [
-    'Ciao,',
-    `una persona che hai invitato su Ripetizioni di Analisi ha appena sbloccato una materia. Per questo hai uno sconto del ${SCONTO_INVITO}% sul tuo prossimo acquisto di una materia del sito.`,
-    'Lo sconto si applica da solo al pagamento, quando sei collegato con questo account.',
-  ];
-  const tasto = ['Scegli la materia', `${origine}/prezzi`];
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:540px">
-${righe.map((r) => `<p>${esc(r)}</p>`).join('\n')}
-<p style="margin:24px 0"><a href="${esc(tasto[1])}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${esc(tasto[0])}</a></p>
-<p>Carmine</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [a],
-      subject: `Hai uno sconto del ${SCONTO_INVITO}%`, html, text: [...righe, `${tasto[0]}: ${tasto[1]}`, 'Carmine'].join('\n\n') }),
-  }).catch(() => null);
-  return Boolean(r?.ok);
+  const messaggio = componiEmail({
+    subject: `Il tuo premio Invita un amico · ${SCONTO_INVITO}% di sconto`,
+    titolo: 'Hai ricevuto il premio invito', categoria: 'Invita un amico', bronzo: true,
+    anteprima: 'Lo sconto è disponibile sul tuo prossimo acquisto di una materia.',
+    righe: ['Ciao,', 'una persona che hai invitato ha appena sbloccato una materia. Il tuo premio è disponibile nel tuo account.'],
+    scheda: { valore: `−${SCONTO_INVITO}%`, nota: 'Sul prossimo acquisto di una materia' },
+    dopo: ['Lo sconto si applica al pagamento quando accedi con questo account.'],
+    pulsante: ['Scegli la materia', `${origine}/prezzi`],
+    motivo: 'Ricevi questa email perché è maturato il premio di un tuo invito.',
+  });
+  return (await inviaEmailResend(env, a, messaggio)).ok;
 }
 
 // Dopo l'iscrizione: se il browser ha il cookie dell'invito, il nuovo account risulta invitato.

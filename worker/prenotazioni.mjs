@@ -1,3 +1,4 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
 // Prenotazione delle lezioni individuali (pagina /prenota).
 //  - orari: lunedì-sabato, 10-13 e 15-17 (src/data/lezioni.ts), almeno 24 ore prima;
 //  - il calendario Google di Carmine (collegato una volta dalla pagina /admin/lezioni) toglie gli orari già occupati
@@ -256,18 +257,11 @@ export async function verificaStripe(intestazione, corpo, segreto, adesso = Date
 
 // ---------- email (Resend) ----------
 const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-async function inviaEmail(env, a, oggetto, righe, tasto) {
-  if (!env.RESEND_API_KEY) return false;
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:540px">
-${righe.map((r) => `<p>${esc(r)}</p>`).join('\n')}
-${tasto ? `<p style="margin:24px 0"><a href="${esc(tasto[1])}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${esc(tasto[0])}</a></p>` : ''}
-<p>Carmine</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [a], subject: oggetto, html,
-      text: [...righe, tasto ? `${tasto[0]}: ${tasto[1]}` : '', 'Carmine'].filter(Boolean).join('\n\n') }),
-  }).catch(() => null);
-  return Boolean(r?.ok);
+async function inviaEmail(env, a, oggetto, righe, tasto, dettagli = {}) {
+  const messaggio = componiEmail({
+    subject: oggetto, categoria: 'Lezioni individuali', righe, pulsante: tasto, ...dettagli,
+  });
+  return (await inviaEmailResend(env, a, messaggio)).ok;
 }
 const rigaMeet = (l) => (l.meet ? `Link della lezione su Google Meet: ${l.meet}` : 'Il link di Google Meet arriva con l’invito di Google Calendar a questo indirizzo.');
 const rigaRegole = () => `La lezione si può spostare o disdire con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima dell’inizio. Dopo quel momento non è previsto il rimborso.`;
@@ -488,11 +482,14 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
         } catch (e) { console.log('prenota evento google', String(e?.message || e)); }
         await inviaEmail(env, l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
           `Ciao ${l.nome.split(' ')[0]},`,
-          `la lezione di ${titoloMateria(l.materia)} è confermata per ${quando(l.inizio, l.fine)}. Il pagamento di ${LEZIONI.prezzo} € è stato ricevuto.`,
-          rigaMeet(l),
-          'Se hai una traccia d’esame o degli esercizi su cui lavorare, mandameli su WhatsApp prima della lezione.',
-          rigaRegole(),
-        ], ['Sposta o disdici la lezione', gestione]);
+          `ho ricevuto il pagamento di ${LEZIONI.prezzo} € per la tua lezione di ${titoloMateria(l.materia)}.`,
+        ], ['Gestisci la prenotazione', gestione], {
+          titolo: 'La tua lezione è confermata',
+          anteprima: quando(l.inizio, l.fine),
+          scheda: { etichetta: 'La tua prenotazione', valore: quando(l.inizio, l.fine), nota: 'Ora italiana · Google Meet' },
+          dopo: [rigaMeet(l), 'Se hai una traccia d’esame o degli esercizi su cui lavorare, mandameli su WhatsApp prima della lezione.', rigaRegole()],
+          motivo: 'Ricevi questa email perché hai prenotato una lezione individuale.',
+        });
       }
     } else if (ev.type === 'checkout.session.expired') {
       await aDO(env, '/pren-libera', { id });

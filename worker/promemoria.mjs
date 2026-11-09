@@ -1,10 +1,5 @@
-// Promemoria per tornare a studiare (01/11/2026, richiesta di Carmine).
-// Ogni giorno (cron in wrangler.jsonc) si scrive a chi non entra nel sito da qualche giorno.
-// Calendario, contando i giorni dall'ultima visita: email il 3° e il 6° giorno, si salta il 9°;
-// email il 12° e il 15°, si saltano il 18° e il 21°; email il 24° e il 27°, si saltano tre turni; e così via.
-// Appena lo studente torna sul sito il conto riparte. In fondo a ogni email il link per non riceverle più.
-// Testo: «L'ultima volta stavi studiando …», poi una frase sulla costanza (testi a rotazione), lo stemma
-// del livello con gli EXP (quanti ne mancano al livello successivo), il tasto «Riprendi da dove eri», la firma «Il tuo Tutor Carmine».
+import { componiEmail } from './email.mjs';
+// Composizione dei promemoria e invii manuali dalla dashboard.
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { livelloDa, RIPASSO } from '../src/data/livelli.ts';
@@ -12,24 +7,10 @@ import { nomeRango } from './stemmi.mjs';
 import { nomeDallEmail } from './nomi.mjs';
 
 const SITO = 'https://ripetizionidianalisi.com';
-const GIORNO = 86400 * 1000;
-
-// true se, a `giorni` dall'ultima visita, oggi è un giorno di invio.
-export function giornoDiInvio(giorni) {
-  if (giorni < 3 || giorni % 3) return false;
-  let turno = giorni / 3;
-  for (let salto = 1; ; salto++) {
-    if (turno <= 2) return true;
-    turno -= 2;
-    if (turno <= salto) return false;
-    turno -= salto;
-  }
-}
-
 const TESTI = {
   it: {
     saluto: (n) => (n ? `Ciao ${n},` : 'Ciao,'),
-    ultima: (a, m) => `l'ultima volta stavi studiando <b>${a}</b> di ${m}.`,
+    ultima: (a, m) => `l'ultima volta stavi studiando ${a} di ${m}.`,
     nessuna: 'sono passati alcuni giorni dalla tua ultima visita al sito.',
     // [oggetto, testo] con domande a tempo sull'argomento
     domande: [
@@ -53,7 +34,7 @@ const TESTI = {
   },
   en: {
     saluto: (n) => (n ? `Hi ${n},` : 'Hi,'),
-    ultima: (a, m) => `last time you were studying <b>${a}</b> in ${m}.`,
+    ultima: (a, m) => `last time you were studying ${a} in ${m}.`,
     nessuna: 'a few days have passed since your last visit to the website.',
     domande: [
       [(n, a, m) => `Ten minutes of ${m}, ${n}?`, () => 'Studying a little every day takes you to the exam with the exercises still clear in your mind. How about ten minutes now: a set of timed questions on the topic you left.'],
@@ -75,7 +56,6 @@ const TESTI = {
   },
 };
 
-const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function nomiArgomento(materia, argomento, l) {
   const m = MATERIE.find((x) => x.slug === materia);
@@ -105,8 +85,8 @@ export function componiPromemoria(r, catalogo, linkNo) {
     const [o, f] = elenco[(r.inviati || 0) % elenco.length];
     oggetto = pulisci(o(nome, nomi.titoloA, nomi.breveM));
     frase = f(nomi.breveM);
-    apertura = T.ultima(esc(nomi.titoloA), esc(nomi.titoloM));
-    link = `${SITO}${pref}/${r.materia}/${r.argomento}${conDomande ? '/domande' : ''}`;
+    apertura = T.ultima(nomi.titoloA, nomi.titoloM);
+    link = `${SITO}${pref}/${r.materia}/${r.argomento}${conDomande ? '/domande' : '/teoria'}`;
     tasto = T.riprendi;
   } else {
     oggetto = pulisci(T.generico[0](nome));
@@ -117,31 +97,24 @@ export function componiPromemoria(r, catalogo, linkNo) {
   }
   const st = livelloDa(r.exp || 0, l);
   const num = (x) => x.toLocaleString(l === 'en' ? 'en-US' : 'it-IT');
-  const perc = Math.max(4, st.perc);
-  const stemma = `${SITO}/email/stemmi/${st.livello}.png`;
-  const html = `<div style="background:#faf8f2;padding:24px 18px">
-<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.6;color:#22302f;max-width:520px">
-<p style="margin:0 0 14px">${esc(T.saluto(nome))}</p>
-<p style="margin:0 0 14px">${apertura}</p>
-<p style="margin:0 0 18px">${esc(frase)}</p>
-<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;background:#ffffff;border:1px solid #e3e0d6;border-radius:12px;margin:0 0 20px"><tr>
-<td style="padding:10px 6px 10px 12px;width:84px"><img src="${stemma}" width="78" height="67" alt="" style="display:block"></td>
-<td style="padding:10px 14px 10px 4px;font-family:Arial,sans-serif">
-<div style="font-size:15px;font-weight:bold;color:#22302f">${esc(T.livello(st.livello))} · ${esc(nomeRango(st.livello, l))} · ${esc(st.fascia)}</div>
-<div style="font-size:13px;color:#5b6664;margin-top:2px">${esc(T.exp(num(st.exp), num(st.mancano), st.prossimo === null ? null : st.livello + 1))}</div>
-<div style="height:6px;background:#ece7dc;border-radius:99px;margin-top:8px"><div style="height:6px;width:${perc}%;background:#2f6f68;border-radius:99px"></div></div>
-</td></tr></table>
-<a href="${link}" style="display:inline-block;background:#2f6f68;color:#ffffff;text-decoration:none;padding:13px 22px;border-radius:999px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold">${esc(tasto)}</a>
-<p style="margin:20px 0 0">${esc(T.firma)}</p>
-<p style="font-family:Arial,sans-serif;font-size:12px;color:#7a8482;line-height:1.5;border-top:1px solid #e3e0d6;padding-top:14px;margin-top:22px">${esc(T.piede)} <a href="${linkNo}" style="color:#5b6664">${esc(T.disattiva)}</a></p>
-</div></div>`;
-  const testo = [T.saluto(nome), apertura.replace(/<\/?b>/g, ''), frase, `${tasto}: ${link}`, T.firma, `${T.piede} ${T.disattiva}: ${linkNo}`].join('\n\n');
-  return { oggetto, html, testo };
+  const m = componiEmail({
+    lingua: l, subject: oggetto, titolo: nomi ? T.riprendi : T.scegli, anteprima: apertura,
+    categoria: l === 'en' ? 'Your study progress' : 'Il tuo percorso di studio',
+    righe: [T.saluto(nome), apertura, frase],
+    scheda: {
+      etichetta: nomi?.titoloM,
+      valore: `${T.livello(st.livello)} · ${nomeRango(st.livello, l)} · ${st.fascia}`,
+      nota: T.exp(num(st.exp), num(st.mancano), st.prossimo === null ? null : st.livello + 1),
+      immagine: `${SITO}/email/stemmi/${st.livello}.png`,
+    },
+    pulsante: [tasto, link], firma: T.firma, motivo: T.piede, disattiva: [T.disattiva, linkNo],
+  });
+  return { oggetto, html: m.html, testo: m.text };
 }
 
 // Posto rimasto oggi: il piano gratuito di Resend permette 100 email al giorno, contando anche quelle di recupero
 // della password e quelle già partite oggi.
-const postoOggi = (env, c) => Math.max(0, Math.min(Number(env.PROMEMORIA_MAX_GIORNO) || 60, 95 - (c.recuperiOggi || 0) - (c.inviatiOggi || 0)));
+const postoOggi = (env, c) => Math.max(0, Math.min(Number(env.PROMEMORIA_MAX_GIORNO) || 60, 90 - (c.recuperiOggi || 0) - (c.inviatiOggi || 0) - (c.campagneOggi || 0)));
 
 // Compone e invia (Resend, in blocchi da 100) le email per le righe date; registra gli invii e le toglie dalla coda.
 async function inviaRighe(env, aDO, firmaToken, catalogo, righe, oggi) {
@@ -169,23 +142,16 @@ async function inviaRighe(env, aDO, firmaToken, catalogo, righe, oggi) {
   return inviati;
 }
 
-// Chiamata dal cron: prima chi è rimasto in coda dall'invio «a tutti», poi chi è nel giorno giusto del calendario.
-export async function inviaPromemoria(env, aDO, firmaToken, catalogo) {
-  if (!env.RESEND_API_KEY || env.PROMEMORIA === '0') return { inviati: 0, motivo: 'non attivo' };
+// Smaltisce gli invii richiesti dalla dashboard dopo le automazioni giornaliere.
+export async function inviaCodaPromemoria(env, aDO, firmaToken, catalogo) {
+  if (!env.RESEND_API_KEY || env.PROMEMORIA === '0') return { inviati: 0 };
   const oggi = new Date().toISOString().slice(0, 10);
-  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi });
-  const ora = Date.now();
+  const c = await aDO(env, '/promemoria-candidati', { giorno: oggi, soloCoda: true });
   const righe = (c.righe || []).filter((r) => !r.oggi);
-  const inCoda = righe.filter((r) => r.coda);
-  const daCalendario = righe.filter((r) => {
-    if (r.coda) return false;
-    const ultima = r.ultima || Date.parse(r.creato || '') || ora;
-    return giornoDiInvio(Math.floor((ora - ultima) / GIORNO));
-  });
-  const scelti = [...inCoda, ...daCalendario].slice(0, postoOggi(env, c));
+  const scelti = righe.slice(0, postoOggi(env, c));
   if (!scelti.length) return { inviati: 0 };
   const inviati = await inviaRighe(env, aDO, firmaToken, catalogo, scelti, oggi);
-  return { inviati: inviati.length, codaRimasta: inCoda.length - inviati.filter((e) => inCoda.some((r) => r.email === e)).length };
+  return { inviati: inviati.length };
 }
 
 // Dashboard → «Invia a tutti»: a ogni iscritto che accetta i promemoria, a prescindere dal calendario.

@@ -7,6 +7,7 @@ const ICONE = {
   leghe: '<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4m-4 2v5m-4 1h8"/>',
   vendite: '<path d="M17.5 6.5A7 7 0 1 0 17.5 17.5"/><path d="M4 10.5h9M4 13.5h9"/>',
   traffico: '<path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 3 5-6"/>',
+  email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
   strumenti: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L4 16.7V20h3.3l5.3-5.3a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.4-.6-.6-2.4z"/>',
   aggiorna: '<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/>',
   esci: '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l4-4-4-4M14 12H4"/>',
@@ -19,7 +20,7 @@ const icona = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" st
 
 export function paginaAdmin(aPagamento, materie) {
   const info = materie.map((m) => ({ slug: m.slug, titolo: m.titolo, breve: m.breve, colore: m.colore, prezzo: m.prezzo, argomenti: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve])) }));
-  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['leghe', 'Leghe'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['strumenti', 'Strumenti']];
+  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['leghe', 'Leghe'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['email', 'Email automatiche'], ['strumenti', 'Strumenti']];
   const nav = viste.map(([id, t]) => `<a href="#${id}" data-vista="${id}">${icona(id)}<span>${t}</span></a>`).join('');
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex"><meta name="theme-color" content="#1c2625">
@@ -318,7 +319,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const nf = new Intl.NumberFormat('it-IT');
   const eur = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
-  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', leghe: 'Leghe', vendite: 'Vendite', traffico: 'Traffico', strumenti: 'Strumenti' };
+  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', leghe: 'Leghe', vendite: 'Vendite', traffico: 'Traffico', email: 'Email automatiche', strumenti: 'Strumenti' };
   const COL = { acc: 'var(--acc)', avviso: 'var(--avviso)', su: 'var(--su)', ink3: 'var(--ink-3)' };
   const COLORI_FONTI = { Instagram: 'var(--c6)', Google: '#4285f4', 'Diretto o app': '#8b9593', WhatsApp: '#25a35a', Facebook: '#1877f2', TikTok: '#111', Bing: '#00809d', ChatGPT: '#10a37f' };
 
@@ -516,8 +517,8 @@ function cliente(MATERIE, A_PAGAMENTO) {
     $('#titolo-vista').textContent = VISTE[vista];
     $$('.lato a').forEach((a) => a.classList.toggle('attiva', a.dataset.vista === vista));
     $$('.segmenti button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.giorni) === giorni)));
-    $('.segmenti').hidden = vista === 'strumenti' || vista === 'leghe';
-    ({ panoramica, studenti, leghe, vendite, traffico, strumenti })[vista]();
+    $('.segmenti').hidden = vista === 'strumenti' || vista === 'leghe' || vista === 'email';
+    ({ panoramica, studenti, leghe, vendite, traffico, email, strumenti })[vista]();
     segnaAggiornato();
   }
 
@@ -773,6 +774,64 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<section class="card" style="margin-top:1rem"><header><h2>Campagne dei link</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(camp.map((r) => ({ nome: r.campagna, valore: r.n, colore: 'var(--c6)' })), { quota: false, vuoto: 'Nessun ingresso con utm_campaign nel periodo' }) +
       '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini).</p></div></section>';
+  }
+
+  function email() {
+    const modelli = {
+      'prima-prova': ['Prima prova', 'Dopo 2 giorni dall’iscrizione, prima di iniziare a studiare.'],
+      studio: ['Riprendi lo studio', 'Dopo 3 e 10 giorni di inattività.'],
+      'seconda-materia': ['Seconda materia', 'Analisi 1 → Analisi 2. Dopo 7 giorni, con il 15% di sconto.'],
+      lega: ['Sorpasso in lega', 'Quando cambia la posizione in classifica.'],
+    };
+    $('#vista').innerHTML = '<div class="griglia">' +
+      '<section class="card"><header><h2>Flussi e risultati</h2><span class="nota">Ultimi 30 giorni</span></header><div class="corpo" id="email-flussi" role="status">Caricamento…</div></section>' +
+      '<section class="card"><header><h2>Anteprima dei messaggi</h2></header><div class="corpo">' +
+      '<div class="azioni"><label for="email-modello">Modello</label><select id="email-modello">' +
+      Object.entries(modelli).map(([id, m]) => '<option value="' + id + '">' + esc(m[0]) + '</option>').join('') + '</select>' +
+      '<button type="button" class="bottone" id="email-prova">Invia una prova al titolare</button><span class="nota" role="status" id="email-esito"></span></div>' +
+      '<iframe id="email-anteprima" title="Anteprima dell’email" sandbox style="width:100%;height:520px;border:1px solid var(--riga);border-radius:9px;margin-top:12px"></iframe></div></section></div>';
+    const flussi = $('#email-flussi'), modello = $('#email-modello'), frame = $('#email-anteprima');
+    const aggiornaAnteprima = () => { frame.src = '/admin/api/email-anteprima?tipo=' + encodeURIComponent(modello.value); };
+    modello.addEventListener('change', aggiornaAnteprima);
+    aggiornaAnteprima();
+    async function caricaStato() {
+      try {
+        const d = await api('email-stato');
+        if (!flussi.isConnected) return;
+        const nota = d.statoConsegne === 'permessi' ? 'La chiave di Resend può inviare ma non leggere lo stato delle consegne.' :
+          d.statoConsegne === 'ok' ? 'Le consegne sono verificate con Resend.' : 'Le consegne saranno verificate dopo i primi invii.';
+        flussi.innerHTML = '<p class="nota">' + nf.format(d.consensi || 0) + ' consensi confermati · ' + nf.format(d.revoche || 0) +
+          ' disiscrizioni o revoche · ' + esc(nota) + '</p><div class="tabella"><table><thead><tr><th>Flusso</th><th>Stato</th><th>In coda</th><th>Accettate</th><th>Consegnate</th><th>Errori</th><th>Acquisti</th></tr></thead><tbody>' +
+          d.flussi.map((f) => '<tr><td><strong>' + esc(modelli[f.tipo][0]) + '</strong><br><span class="nota">' + esc(modelli[f.tipo][1]) + '</span></td>' +
+            '<td><button type="button" class="bottone" data-email-flusso="' + f.tipo + '" aria-pressed="' + f.attivo + '"' +
+            (!f.disponibile ? ' disabled' : '') + '>' + (!f.disponibile ? 'Non disponibile' : f.attivo ? 'Attivo' : 'In pausa') + '</button></td>' +
+            [f.coda, f.inviate, d.statoConsegne === 'ok' ? (f.consegnate || 0) : null, f.errori, f.acquisti].map((n) => '<td>' + (n === null ? '—' : nf.format(n || 0)) + '</td>').join('') + '</tr>').join('') +
+          '</tbody></table></div>';
+      } catch { if (flussi.isConnected) flussi.textContent = 'Impossibile caricare lo stato degli invii.'; }
+    }
+    flussi.addEventListener('click', async (e) => {
+      const b = e.target.closest('[data-email-flusso]');
+      if (!b) return;
+      b.disabled = true;
+      try {
+        const r = await api('email-interruttore', { tipo: b.dataset.emailFlusso, attivo: b.getAttribute('aria-pressed') !== 'true' });
+        if (!r.ok) throw new Error('Salvataggio fallito');
+        await caricaStato();
+      } catch { avviso('Impossibile aggiornare il flusso'); }
+      finally { b.disabled = false; }
+    });
+    const prova = $('#email-prova'), esito = $('#email-esito');
+    prova.addEventListener('click', async () => {
+      const tipo = modello.value;
+      if (!(await conferma('Inviare un’email di prova?', 'Il modello «' + modelli[tipo][0] + '» sarà inviato all’indirizzo del titolare con dati di esempio.', 'Invia prova'))) return;
+      prova.disabled = true;
+      try {
+        const r = await api('email-prova', { tipo });
+        esito.textContent = r.ok ? 'Prova accettata da Resend.' : (r.errore || 'Invio di prova non riuscito.');
+      } catch { esito.textContent = 'Invio di prova non riuscito.'; }
+      finally { prova.disabled = false; }
+    });
+    caricaStato();
   }
 
   function strumenti() {

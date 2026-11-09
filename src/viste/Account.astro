@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import InvitaAmico from '../components/InvitaAmico.astro';
+import ConsensoEmail from '../components/ConsensoEmail.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
 import { accountTesti } from '../lib/account-testi.mjs';
 import '../styles/account.css';
@@ -48,6 +49,15 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
             <button class="bottone-secondario" type="submit">{t.salva}</button>
             <p class="esito-modulo" id="esito-nome" role="status"></p>
           </form></details></section>
+        <section class="account-gruppo" aria-labelledby="email-account-titolo">
+          <h2 class="account-titolo-sezione" id="email-account-titolo">{en ? 'Email preferences' : 'Preferenze email'}</h2>
+          <form class="modulo" id="form-preferenze-email">
+            <label class="account-email-spunta"><input name="studio" type="checkbox" disabled /> {en ? 'Reminders to pick up where I left off' : 'Promemoria per riprendere da dove ero'}</label>
+            <ConsensoEmail lingua={lingua} scegliMateria />
+            <button class="bottone-secondario" type="submit" disabled>{t.salva}</button>
+            <p class="esito-modulo" id="esito-email" role="status"></p>
+          </form>
+        </section>
         <section class="account-gruppo dispositivi-account" id="dispositivi" aria-labelledby="dispositivi-titolo"><div class="account-sezione-testata"><h2 class="account-titolo-sezione" id="dispositivi-titolo">{s.dispositivi}</h2><span id="dispositivi-conto"></span></div><p class="account-nota">{s.notaDispositivi}</p><p class="account-nota" id="esito-dispositivi" role="status"></p><ul class="account-dispositivi" id="elenco-dispositivi" aria-busy="false"></ul><button class="account-azione-testo" type="button" id="aggiorna-dispositivi">{s.aggiorna}</button></section>
         <section class="account-gruppo"><details class="account-dettagli"><summary>{s.password}</summary><form class="modulo" id="cambio" novalidate>
             <label>{t.passwordAttuale}<span class="campo-password"><input type="password" name="attuale" autocomplete="current-password" required /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
@@ -63,3 +73,8 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
   </div>
   <script>import '../scripts/account.mjs';</script>
 </Base>
+
+<style>
+  .account-email-spunta{display:flex;align-items:center;gap:.45rem}
+  .account-email-spunta input{width:1rem;height:1rem;accent-color:#214f50}
+</style>
