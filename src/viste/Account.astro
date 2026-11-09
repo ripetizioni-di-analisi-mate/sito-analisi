@@ -28,6 +28,7 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
         <ul class="contenuti-account" id="contenuti-account"></ul>
         <p class="account-nota" id="materie-vuote" hidden>{s.vuoto} <a href={pref || '/'}>{s.esplora}</a></p>
         <p class="account-nota" id="video-errore" hidden></p>
+        <p class="account-nota"><a href={pref + '/recesso'}>{en ? 'My orders and withdrawal options' : 'I miei ordini e il diritto di recesso'}</a></p>
       </section>
       <section id="progressi-account" role="tabpanel" aria-labelledby="scheda-progressi" hidden>
         <p class="account-nota" id="progressi-caricamento" role="status">{t.caricamento}</p><button class="bottone-secondario" type="button" id="progressi-riprova" hidden>{s.riprova}</button>

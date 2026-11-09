@@ -11,17 +11,23 @@ const temp=mkdtempSync(join(tmpdir(),'analisi3-worker-')),bundle=join(temp,'work
 execFileSync(process.execPath,[join(root,'node_modules/rolldown/bin/cli.mjs'),join(root,'worker/index.mjs'),'--file',bundle,'--format','esm','--platform','neutral'],{stdio:'pipe'});
 after(()=>rmSync(temp,{recursive:true,force:true}));
 const {default:worker,firmaToken}=await import(pathToFileURL(bundle));
-const materia='analisi-3',prezzo='pri_01m6v6tp0e2vpg59k9qv555sf3';
+const materia='analisi-3';
 async function banco(materie=null){
  const richieste=[];
- const env={VENDITA:'1',CHIAVE_ACCESSO:'test-only-no-production',PADDLE_CLIENT_TOKEN:'test',PADDLE_PREZZO_ANALISI_3:prezzo,
+ const env={VENDITA:'1',CHIAVE_ACCESSO:'test-only-no-production',STRIPE_SECRET_KEY:'test',STRIPE_WEBHOOK_SECRET:'test',
  ASSETS:{async fetch(req){const path=new URL(req.url||req).pathname;richieste.push(path);if(path==='/dati-domande/analisi-3.json')return new Response(readFileSync(join(root,'dist',path)),{headers:{'content-type':'application/json'}});return new Response(path,{headers:{'content-type':'text/plain'}});}},
- ARCHIVIO:{idFromName:()=> 'test',get:()=>({fetch:async()=>Response.json(materie===null?null:{email:'test@example.test',nome:'Test',materie,versione:1})})}};
+ ARCHIVIO:{idFromName:()=> 'test',get:()=>({fetch:async(url)=>Response.json(new URL(url).pathname==='/sessione' && materie!==null ? {email:'test@example.test',nome:'Test',materie,versione:1} : {})})}};
  const cookie=materie===null?'':'sessione='+await firmaToken(env,{e:'test@example.test',v:1,d:'test',t:Date.now()});
- const invia=(path,body)=>worker.fetch(new Request('https://ripetizionidianalisi.com'+path,{method:body?'POST':'GET',headers:{cookie,'content-type':'application/json','user-agent':'audit-bot','accept-language':'it'},...(body?{body:JSON.stringify(body)}:{})}),env,{waitUntil(){}});
+ const invia=(path,body)=>worker.fetch(new Request('https://ripetizionidianalisi.com'+path,{method:body?'POST':'GET',headers:{cookie,origin:'https://ripetizionidianalisi.com','content-type':'application/json','user-agent':'audit-bot','accept-language':'it'},...(body?{body:JSON.stringify(body)}:{})}),env,{waitUntil(){}});
  return {invia,richieste};
 }
-test('prezzo e listino di Analisi 3',async()=>{const b=await banco();assert.equal((await(await b.invia('/api/config')).json()).paddle.prezzi[materia],prezzo);assert.equal(JSON.parse(readFileSync(join(root,'src/data/prezzi.json')))[materia],55);});
+test('il preventivo Stripe di Analisi 3 coincide con il listino',async()=>{
+ const b=await banco([]), listino=JSON.parse(readFileSync(join(root,'src/data/prezzi.json')));
+ assert.deepEqual(await(await b.invia('/api/config')).json(),{stripe:true});
+ const r=await b.invia('/api/acquisti/preventivo',{tipo:'materia',slug:materia});
+ assert.equal(r.status,200);const q=await r.json();
+ assert.equal(listino[materia],55);assert.equal(q.totale,100*listino[materia]);assert.deepEqual(q.chiavi,[materia]);
+});
 test('l’acquisto di Analisi 2 non sblocca Analisi 3',async()=>{const b=await banco(['analisi-2']);assert.equal(await(await b.invia('/analisi-3/funzioni-complesse/teoria')).text(),'/vetrine/analisi-3/funzioni-complesse/teoria');});
 test('l’acquisto di Analisi 3 apre capitoli nuovi e condivisi',async()=>{const b=await banco([materia]);for(const slug of ['funzioni-complesse','serie-di-fourier'])assert.equal(await(await b.invia('/analisi-3/'+slug+'/teoria')).text(),'/analisi-3/'+slug+'/teoria');});
 test('le prime tre schede sono anteprime e la quarta è riservata',async()=>{const b=await banco();for(const n of [1,3,4])assert.equal(await(await b.invia('/analisi-3/funzioni-complesse/esercizi-svolti/'+n)).text(),(n<=3?'':'/vetrine')+'/analisi-3/funzioni-complesse/esercizi-svolti/'+n);});

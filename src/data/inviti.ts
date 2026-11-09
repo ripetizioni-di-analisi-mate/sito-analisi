@@ -6,7 +6,7 @@
 export const SCONTO_INVITO = 15;
 // Il link d'invito resta valido nel browser dell'amico per questi giorni (cookie «invito»).
 export const GIORNI_COOKIE_INVITO = 30;
-// Il codice di sconto dell'amico si rigenera da solo se non lo usa entro questi giorni (scadenza tecnica su Paddle).
+// Il codice di sconto dell'amico si rigenera da solo se non lo usa entro questi giorni.
 export const GIORNI_SCONTO_AMICO = 30;
 // Codici d'invito: 7 caratteri senza lettere e cifre che si confondono (0/O, 1/I/L).
 export const ALFABETO_INVITO = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';

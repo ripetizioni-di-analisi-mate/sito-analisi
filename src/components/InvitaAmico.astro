@@ -1,7 +1,7 @@
 ---
 // «Invita un amico» nella pagina Account (versione B scelta da Carmine il 02/11/2026): striscia compatta
 // sotto il titolo con «Copia il link» e WhatsApp, e i numeri degli inviti. Dati da /api/invito (worker/inviti.mjs);
-// se la funzione è spenta (manca PADDLE_API_KEY) la striscia resta nascosta.
+// se la funzione è spenta (pagamenti disattivati) la striscia resta nascosta.
 import { SCONTO_INVITO } from '../data/inviti';
 interface Props { lingua: 'it' | 'en' }
 const en = Astro.props.lingua === 'en';

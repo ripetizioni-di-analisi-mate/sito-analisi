@@ -8,7 +8,7 @@ export const GOOGLE_ADS_ID = '';
 export const GA4_ID = '';
 // Etichette delle conversioni create in Google Ads (la parte dopo la barra in «AW-123456789/AbCdEfGh»).
 export const CONVERSIONI = {
-  acquisto: '',   // materia, pacchetto o videocorso pagato con Paddle (valore = importo reale)
+  acquisto: '',   // materia, pacchetto o videocorso pagato sul sito (valore = importo reale)
   lezione: '',    // lezione individuale pagata con Stripe (40 €)
   gruppo: '',     // iscrizione a un corso di gruppo (75 €, primo blocco di 5 lezioni)
   account: '',    // account gratuito creato (1 €, conversione secondaria)

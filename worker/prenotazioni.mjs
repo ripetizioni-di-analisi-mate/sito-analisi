@@ -283,12 +283,12 @@ function campiStripe(oggetto, prefisso = '', fuori = new URLSearchParams()) {
   }
   return fuori;
 }
-async function stripe(env, metodo, percorso, campi, idempotenza) {
+export async function stripe(env, metodo, percorso, campi, idempotenza) {
   const h = { authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'content-type': 'application/x-www-form-urlencoded' };
   if (idempotenza) h['idempotency-key'] = idempotenza;
   const r = await fetch('https://api.stripe.com/v1' + percorso, { method: metodo, headers: h, body: campi ? campiStripe(campi) : undefined });
   const d = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(`Stripe ${r.status}: ${d.error?.message || ''}`);
+  if (!r.ok) throw Object.assign(new Error(`Stripe ${r.status}: ${d.error?.message || ''}`), { status: r.status });
   return d;
 }
 const esa = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -530,6 +530,8 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (!env.STRIPE_WEBHOOK_SECRET || !(await verificaStripe(req.headers.get('stripe-signature'), testo, env.STRIPE_WEBHOOK_SECRET)))
       return new Response('firma non valida', { status: 400 });
     const ev = JSON.parse(testo);
+    const digitale = await h.altriEventiStripe?.(ev);
+    if (digitale) return digitale;
     const s = ev.data?.object || {};
     const id = s.metadata?.prenotazione || s.client_reference_id;
     if (!id) return json({ ok: true });

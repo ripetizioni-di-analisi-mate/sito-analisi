@@ -1,0 +1,31 @@
+---
+import { CODICI_PAESE } from '../data/paesi-fattura.mjs';
+interface Props { lingua?: 'it' | 'en' }
+const { lingua = 'it' } = Astro.props;
+const en = lingua === 'en';
+const nomi = new Intl.DisplayNames(lingua, { type: 'region' });
+const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || codice }))
+  .sort((a, b) => a.nome.localeCompare(b.nome, lingua));
+---
+<div class="modulo campi-fattura" data-campi-fattura data-lingua={lingua}>
+  <label>{en ? 'First name on the invoice' : 'Nome dell’intestatario'}<input name="fattura_nome" autocomplete="section-fattura billing given-name" maxlength="100" required /></label>
+  <label>{en ? 'Last name on the invoice' : 'Cognome dell’intestatario'}<input name="fattura_cognome" autocomplete="section-fattura billing family-name" maxlength="100" required /></label>
+  <label class="largo">{en ? 'Country of residence' : 'Paese di residenza'}<select name="fattura_paese" autocomplete="section-fattura billing country" required>
+    {paesi.map(({ codice, nome }) => <option value={codice} selected={codice === 'IT'}>{nome}</option>)}
+  </select></label>
+  <label class="largo">{en ? 'Residential address (street and house number)' : 'Indirizzo di residenza (via e numero civico)'}<input name="fattura_indirizzo" autocomplete="section-fattura billing address-line1" maxlength="180" required /></label>
+  <label><span>{en ? 'Postal code' : 'CAP'} <small data-facoltativo-estero hidden>{en ? 'if applicable' : 'se previsto'}</small></span><input name="fattura_cap" autocomplete="section-fattura billing postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required /></label>
+  <label>{en ? 'City or town' : 'Comune o città'}<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
+  <label><span id="etichetta-provincia">{en ? 'Province code' : 'Sigla della provincia'}</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder={en ? 'e.g. RM' : 'Es. RM'} pattern="[A-Za-z]{2}" maxlength="2" required /></label>
+  <label id="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}<input name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required /></label>
+</div>
+<style>
+  .campi-fattura { margin: 0; max-width: none; grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .campi-fattura .largo { grid-column: 1 / -1; }
+  .campi-fattura label { align-content: start; }
+  .campi-fattura [hidden] { display: none; }
+  .campi-fattura input, .campi-fattura select { width: 100%; min-width: 0; box-sizing: border-box; }
+  .campi-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
+  #campo-cf input { text-transform: uppercase; }
+  @media (max-width: 36rem) { .campi-fattura { grid-template-columns: minmax(0,1fr); } }
+</style>

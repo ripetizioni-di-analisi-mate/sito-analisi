@@ -18,7 +18,7 @@ import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
-import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
+import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
 import { spazioHome } from './spazio.mjs';
@@ -30,9 +30,11 @@ import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } f
 import { inviaCodaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
-import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
+import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria, scontoInvito } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
-import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
+import { creaTabellePacchetti, archivioPacchetti, completaPacchetto } from './pacchetti.mjs';
+import { creaTabelleStripeDigitale, archivioStripeDigitale, gestisciAcquisti, eventoDigitale, recuperaOrdiniDigitali } from './stripe-digitale.mjs';
+import { creaTabellePostvendita, archivioPostvendita, gestisciPostvendita, webhookPostvendita, sincronizzaPostvendita } from './stripe-postvendita.mjs';
 import { creaTabelleSfide, archivioSfide, datiLegheAdmin, gestisciSfide, sha } from './sfide.mjs';
 import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from './avvisi-lega.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
@@ -183,6 +185,8 @@ export class Archivio {
     // sconto di benvenuto: account creati dalla barra in basso, 10% sulla prima materia (worker/benvenuto.mjs)
     creaTabelleBenvenuto(this.sql);
     creaTabellePacchetti(this.sql);
+    creaTabelleStripeDigitale(this.sql);
+    creaTabellePostvendita(this.sql);
     // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
     creaTabelleSfide(this.sql);
     // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
@@ -221,6 +225,8 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/dig-')) return Response.json(archivioStripeDigitale(this, pathname, c));
+    if (pathname.startsWith('/postvendita-')) return Response.json(archivioPostvendita(this, pathname, c));
     if (pathname === '/em-esegui') return Response.json(await eseguiEmailAutomatiche(this, c, firmaToken));
     if (pathname.startsWith('/em-')) {
       const r = archivioEmail(this, pathname, c);
@@ -402,7 +408,8 @@ export class Archivio {
 
       case '/abilita':
         for (const m of c.materie) {
-          this.sql.exec('INSERT OR IGNORE INTO abilitazioni (email, materia, origine, creato) VALUES (?, ?, ?, ?)', c.email, m, c.origine, ora);
+          this.sql.exec(`INSERT INTO abilitazioni (email, materia, origine, creato) VALUES (?, ?, ?, ?)
+            ON CONFLICT(email,materia) DO UPDATE SET origine=excluded.origine WHERE abilitazioni.origine LIKE 'stripe:%'`, c.email, m, c.origine, ora);
         }
         return Response.json({ ok: true, account: Boolean(this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) });
 
@@ -750,6 +757,16 @@ async function verificaPaddle(req, corpo, segreto) {
   return confrontoCostante(esad, h1);
 }
 
+async function scontoPerMateria(env, io, m, soloOfferta = false) {
+  if (!io || !PREZZI[m] || io.materie.includes(m)) return null;
+  if (m === 'analisi-2') {
+    const s = await aDO(env, '/em-offerta', { email: io.email, materia: m });
+    if (s.id) return s;
+  }
+  if (soloOfferta) return null;
+  return await scontoInvito(env, aDO, io, m) || await scontoBenvenuto(env, aDO, io);
+}
+
 // ---------- worker ----------
 export default {
   // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
@@ -758,6 +775,8 @@ export default {
     if (evento.cron === CRON_LEZIONI) {
       ctx.waitUntil(avvisiLezioni(env, aDO, firmaToken).then((r) => { if (r.lezioni) console.log('avvisi lezioni', JSON.stringify(r)); })
         .catch((e) => console.log('avvisi lezioni', String(e?.message || e))));
+      ctx.waitUntil(recuperaOrdiniDigitali(env, { aDO, dopoAcquistoMateria }).catch(() => console.error('acquisti digitali: recupero rinviato')));
+      ctx.waitUntil(sincronizzaPostvendita(env, aDO).catch(() => console.error('postvendita: sincronizzazione rinviata')));
       ctx.waitUntil(eseguiInvii(env, false).catch(() => console.log('email automatiche: errore nel ciclo orario')));
       return;
     }
@@ -780,7 +799,7 @@ export default {
     const vendita = env.VENDITA !== '0';
     const POST = req.method === 'POST';
 
-    if (p === '/api/pacchetti/checkout') return gestisciPacchetti(req, env, { aDO, json, utenteCollegato, MATERIE, VIDEOCORSI });
+    if (p === '/api/pacchetti/checkout') return json({ errore: 'Il pagamento è cambiato. Ricarica la pagina per acquistare con Stripe.' }, 410);
 
     // ===== un solo indirizzo per ogni pagina =====
     // Google aveva in elenco anche le versioni http:// e www. delle pagine: ora portano tutte, con un
@@ -794,9 +813,16 @@ export default {
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
     if (versoLingua) return versoLingua;
 
+    const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
+      sconto: (io, materia) => scontoPerMateria(env, io, materia) };
+    if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
+    if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
+      return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });
+
     // ===== lezioni individuali: prenotazione, pagamento con Stripe, Google Calendar (worker/prenotazioni.mjs) =====
     if (p.startsWith('/api/prenota/') || p === '/api/stripe/webhook' || p === '/admin/lezioni' || p.startsWith('/admin/google/')) {
-      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza });
+      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza,
+        altriEventiStripe: async (ev) => (await eventoDigitale(env, serviziAcquisto, ev)) || (await webhookPostvendita(env, ev, { aDO })) });
       if (r) return r;
     }
 
@@ -808,28 +834,12 @@ export default {
 
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
     if ((p === '/api/email/offerta' || p === '/api/sconto') && req.method === 'GET') {
-      const materia = url.searchParams.get('materia');
-      if (materia === 'analisi-2') {
-        const io = await utenteCollegato(env, req).catch(() => null);
-        if (io && !io.materie.includes(materia)) {
-          const s = await aDO(env, '/em-offerta', { email: io.email, materia });
-          if (s.id) return json(p === '/api/sconto' ? s : { percentuale: s.percentuale, scade: s.scade }, 200, { 'cache-control': 'no-store' });
-        }
-      }
-      if (p === '/api/email/offerta') return json({}, 200, { 'cache-control': 'no-store' });
+      const io = await utenteCollegato(env, req), m = url.searchParams.get('materia');
+      const offerta = await scontoPerMateria(env, io, m, p === '/api/email/offerta');
+      return json(offerta || {}, 200, { 'cache-control': 'private, no-store' });
     }
-
-    if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
+    if (p.startsWith('/invito/') || p === '/api/invito') {
       const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
-      // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
-      if (r && p === '/api/sconto' && !(await r.clone().json().catch(() => ({}))).id) {
-        const io = await utenteCollegato(env, req).catch(() => null);
-        const materia = url.searchParams.get('materia') || '';
-        if (io && PREZZI[materia] && !io.materie.includes(materia)) {
-          const s = await scontoBenvenuto(env, aDO, io).catch((e) => { console.log('benvenuto: sconto non creato', String(e)); return null; });
-          if (s) return json(s);
-        }
-      }
       if (r) return r;
     }
 
@@ -1267,7 +1277,16 @@ export default {
         const email = normalizza(d.custom_data?.email || d.customer?.email || '');
         const materia = d.custom_data?.materia || '';
         const video = d.custom_data?.videocorso ? chiaveVideo(d.custom_data.videocorso) : '';
-        const importo = Number(d.details?.totals?.total || 0) / 100;
+        const chiave = A_PAGAMENTO.includes(materia) ? materia : VIDEO[video] ? video : null;
+        const prezzo = chiave && env['PADDLE_PREZZO_' + chiave.toUpperCase().replace(/-/g, '_')];
+        const items = d.items;
+        const centesimi = Number(d.details?.totals?.total);
+        if (!emailValida(email) || !prezzo || (video && materia) || d.status !== 'completed' ||
+            !Array.isArray(items) || items.length !== 1 || items[0]?.quantity !== 1 ||
+            (items[0]?.price?.id || items[0]?.price_id) !== prezzo || d.details?.totals?.total == null ||
+            !Number.isSafeInteger(centesimi) || centesimi < 0)
+          return json({ errore: 'Prodotto e ordine non corrispondono.' }, 400);
+        const importo = centesimi / 100;
         if (email && A_PAGAMENTO.includes(materia)) {
           await aDO(env, '/registra-acquisto', { email, materia, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
@@ -1287,42 +1306,8 @@ export default {
     }
 
     // ===== configurazione per il pagamento =====
-    if (p === '/api/config') {
-      return json({
-        paddle: env.PADDLE_CLIENT_TOKEN ? {
-          token: env.PADDLE_CLIENT_TOKEN,
-          ambiente: env.PADDLE_AMBIENTE || 'production',
-          prezzi: {
-            precorso: env.PADDLE_PREZZO_PRECORSO || null,
-            'analisi-1': env.PADDLE_PREZZO_ANALISI_1 || null,
-            'analisi-2': env.PADDLE_PREZZO_ANALISI_2 || null,
-            'analisi-3': env.PADDLE_PREZZO_ANALISI_3 || null,
-            'algebra-lineare': env.PADDLE_PREZZO_ALGEBRA_LINEARE || null,
-            'fisica-1': env.PADDLE_PREZZO_FISICA_1 || null,
-            'fisica-2': env.PADDLE_PREZZO_FISICA_2 || null,
-            'fisica-semestre-filtro': env.PADDLE_PREZZO_FISICA_SEMESTRE_FILTRO || null,
-            'matematica-semestre-filtro': env.PADDLE_PREZZO_MATEMATICA_SEMESTRE_FILTRO || null,
-            'chimica-semestre-filtro': env.PADDLE_PREZZO_CHIMICA_SEMESTRE_FILTRO || null,
-            'biologia-semestre-filtro': env.PADDLE_PREZZO_BIOLOGIA_SEMESTRE_FILTRO || null,
-            'statistica': env.PADDLE_PREZZO_STATISTICA || null,
-            'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
-            'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
-            'matematica-superiori-3': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_3 || null,
-            'matematica-superiori-4': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_4 || null,
-            'matematica-superiori-2': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_2 || null,
-            'fisica-superiori-2': env.PADDLE_PREZZO_FISICA_SUPERIORI_2 || null,
-            'fisica-superiori-3': env.PADDLE_PREZZO_FISICA_SUPERIORI_3 || null,
-            'fisica-superiori-4': env.PADDLE_PREZZO_FISICA_SUPERIORI_4 || null,
-            'fisica-superiori-5': env.PADDLE_PREZZO_FISICA_SUPERIORI_5 || null,
-            'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
-            'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
-            'tolc-i': env.PADDLE_PREZZO_TOLC_I || null,
-            'tolc-s': env.PADDLE_PREZZO_TOLC_S || null,
-          },
-          videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
-        } : null,
-      });
-    }
+    if (p === '/api/config') return json({ stripe: Boolean(vendita && env.STRIPE_SECRET_KEY && env.STRIPE_WEBHOOK_SECRET) },
+      200, { 'cache-control': 'no-store' });
 
     // ===== dashboard =====
     if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(Object.keys(VIDEO)), MATERIE.concat(VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });

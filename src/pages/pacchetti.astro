@@ -52,7 +52,7 @@ const nomi = (slugs) => slugs.map((s) => materie.find((m) => m.slug === s)?.tito
       <section class="riepilogo-pacchetto" id="riepilogo-video" aria-label="Riepilogo dei videocorsi" hidden><h2 data-titolo-video tabindex="-1">Il tuo pacchetto video</h2><div aria-live="polite"><p data-nomi-video>Scegli il pacchetto che ti interessa.</p><p class="totale-scelto" data-totale-video>—</p><p class="risparmio" data-risparmio-video></p></div><button type="button" class="bottone-primario" data-compra="video" disabled>Scegli un pacchetto</button></section>
       <p class="pn-note">Hai già un videocorso o del materiale? <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivi a Carmine per abbinare i corsi</a>.</p>
     </section>
-    <p id="esito-pacchetto" role="status" aria-live="polite" hidden></p><p class="pn-note">Sconti già inclusi nei prezzi e non cumulabili con altre promozioni. Pagamento sicuro con Paddle.</p><p class="nota-termini-breve">Acquistando accetti i <a href="/termini">termini d’uso</a>. <a href="/rimborsi">Rimborsi e recesso</a>.</p>
+    <p id="esito-pacchetto" role="status" aria-live="polite" hidden></p><p class="pn-note">Sconti già inclusi nei prezzi e non cumulabili con altre promozioni. Pagamento sicuro con Stripe.</p><p class="nota-termini-breve">Acquistando accetti i <a href="/termini">termini d’uso</a>. <a href="/rimborsi">Rimborsi e recesso</a>.</p>
     <noscript><p>Attiva JavaScript per scegliere e acquistare il pacchetto. <a href="/contatti">Contattaci per assistenza</a>.</p></noscript>
   </div>
   <script>import '../scripts/pacchetti.mjs';</script>

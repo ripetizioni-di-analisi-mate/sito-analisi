@@ -33,7 +33,7 @@ function banco(t) {
     getAlarm: async () => null,
     setAlarm: async () => {},
   } };
-  const env = { RESEND_API_KEY: 'resend-simulato', PADDLE_API_KEY: 'paddle-simulato', PADDLE_PREZZO_ANALISI_2: 'pri_analisi2', CHIAVE_ACCESSO: 'chiave-simulata' };
+  const env = { RESEND_API_KEY: 'resend-simulato', STRIPE_SECRET_KEY: 'stripe-simulato', CHIAVE_ACCESSO: 'chiave-simulata' };
   const ar = new Archivio(state, env);
   env.ARCHIVIO = { idFromName: () => 'locale', get: () => ({ fetch: (url, opts) => ar.fetch(new Request(url, opts)) }) };
   const ctx = { waitUntil() {} };
@@ -55,13 +55,9 @@ function banco(t) {
   };
   const apri = (url, method = 'GET', headers = {}) => worker.fetch(new Request(url, { method, headers }), env, ctx);
   const cron = (giornaliero = true) => api('/em-esegui', { giornaliero, catalogo: { 'analisi-1': ['limiti'] }, prove: PROVE });
-  const invii = [], sconti = [];
+  const invii = [];
   let erroreInvio = null;
   t.mock.method(globalThis, 'fetch', async (url, op) => {
-    if (url === 'https://api.paddle.com/discounts') {
-      sconti.push(JSON.parse(op.body));
-      return Response.json({ data: { id: 'dsc_analisi2' } });
-    }
     if (url === 'https://api.resend.com/emails') {
       invii.push({ ...JSON.parse(op.body), key: op.headers['Idempotency-Key'] });
       return Response.json({ id: 'mail-' + invii.length }, { status: erroreInvio || 200 });
@@ -69,7 +65,7 @@ function banco(t) {
     if (url.startsWith('https://api.resend.com/emails/mail-')) return Response.json({ last_event: 'delivered' });
     throw new Error('URL inatteso ' + url);
   });
-  return { db, utente, studia, compra, conferma, apri, cron, api, invii, sconti,
+  return { db, utente, studia, compra, conferma, apri, cron, api, invii,
     get ora() { return ora; }, avanza(ms) { ora += ms; }, errore(stato) { erroreInvio = stato; } };
 }
 
@@ -128,14 +124,13 @@ test('offerta limitata ad Analisi 2, attribuita una sola volta e assente per chi
   assert.equal(b.invii.length, 1);
   assert.deepEqual(b.invii[0].to, [email]);
   assert.match(b.invii[0].text, /46,75/);
-  assert.equal(b.sconti.length, 1);
-  assert.deepEqual(b.sconti[0].restrict_to, ['pri_analisi2']);
-  assert.equal(b.sconti[0].usage_limit, 1);
-  assert.equal(b.sconti[0].expires_at, new Date(b.ora + 7 * GIORNO).toISOString());
-  assert.equal((await b.api('/em-offerta', { email, materia: 'analisi-2' })).id, 'dsc_analisi2');
+  const offerta = await b.api('/em-offerta', { email, materia: 'analisi-2' });
+  assert.match(offerta.id, /^STUDIO-/);
+  assert.equal(offerta.scade, b.ora + 7 * GIORNO);
+  assert.equal(offerta.percentuale, 15);
   assert.deepEqual(await b.api('/em-offerta', { email: altro, materia: 'analisi-2' }), {});
   assert.deepEqual(await b.api('/em-offerta', { email, materia: 'analisi-1' }), {});
-  for (let i = 0; i < 2; i++) await b.api('/em-acquisto', { email, materia: 'analisi-2', sconto: 'dsc_analisi2', transazione: 'transazione' });
+  for (let i = 0; i < 2; i++) await b.api('/em-acquisto', { email, materia: 'analisi-2', sconto: offerta.id, transazione: 'transazione' });
   assert.deepEqual(await b.api('/em-offerta', { email, materia: 'analisi-2' }), {});
   assert.equal((await b.api('/em-dashboard')).flussi.find((f) => f.tipo === 'seconda-materia').acquisti, 1);
 });

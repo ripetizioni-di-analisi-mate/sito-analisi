@@ -1,5 +1,5 @@
 ---
-// Pagina di un videocorso, con l'acquisto tramite Paddle (solo in italiano).
+// Pagina di un videocorso, con l'acquisto tramite Stripe (solo in italiano).
 import Base from '../../layouts/Base.astro';
 import Presentazione from '../../components/Presentazione.astro';
 import { MATERIE } from '../../data/materie';
@@ -27,7 +27,6 @@ const schema = [{
   offers: { '@type': 'Offer', price: v.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', category: 'Paid' },
   hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: `PT${oreTotali(v)}H` },
 }];
-const titolo = v.titolo;
 ---
 <Base titolo={v.titolo} percorso={[{ titolo: 'Videocorsi', href: '/videocorsi' }, { titolo: v.breve }]} descrizione={`${v.titolo}: ${v.lezioni} lezioni con video e PDF. L'acquisto sblocca in automatico sul sito ${sblocca.map((m) => m.breve).join(', ')}.`} lingua="it" seo={{ soloQuestaLingua: true, senzaInglese: true, schema }}>
   <div class="testa-video" style={`--accento: ${v.colore}`}>
@@ -60,8 +59,8 @@ const titolo = v.titolo;
     )}
     {materiale > 0 && <p class="risparmio-video">Con la teoria e gli esercizi del sito in omaggio</p>}
     <div id="azione"><p class="esito-modulo">Un momento…</p></div>
-    <p class="metodi-pagamento">Si paga con carta, PayPal, Apple Pay, Google Pay o con gli altri metodi mostrati nella finestra di pagamento. Il pagamento è gestito da Paddle, che invia la ricevuta.</p>
-    {sblocca.length > 0 && <p class="credito">Hai già comprato {nomiOppure} sul sito? Scrivi a Carmine su <a href={`https://wa.me/393885680393?text=${encodeURIComponent(`Ciao Carmine, ho già comprato una materia del sito e vorrei lo sconto sul ${v.titolo}`)}`} target="_blank" rel="noopener">WhatsApp</a> per avere uno sconto sul videocorso pari al prezzo che hai già pagato.</p>}
+    <p class="metodi-pagamento">Paghi una volta sola tramite Stripe con uno dei metodi disponibili al momento del pagamento.</p>
+    {sblocca.length > 0 && <p class="credito">Hai già acquistato {nomiOppure}? Prima di pagare il videocorso, scrivi a Carmine su <a href={`https://wa.me/393885680393?text=${encodeURIComponent(`Ciao Carmine, ho già comprato una materia del sito e vorrei lo sconto sul ${v.titolo}`)}`} target="_blank" rel="noopener">WhatsApp</a>. Carmine verifica quanto hai già pagato, ti invia un link Stripe personale per il prezzo concordato e attiva il videocorso dopo il pagamento. Il pulsante di acquisto su questa pagina applica il prezzo di listino.</p>}
     <p class="nota-termini">Con l'acquisto accetti i <a href="/termini">termini d'uso</a>: l'accesso ai video e alle materie è personale e il materiale non può essere condiviso né diffuso. <a href="/rimborsi">Rimborsi e recesso</a>.</p>
   </div>
 
@@ -90,14 +89,13 @@ const titolo = v.titolo;
     {altri.map((x) => <li><a href={`/videocorsi/${x.slug}`} style={`--accento: ${x.colore}`}><span>{x.titolo}</span><span>{x.lezioni} lezioni · {x.prezzo} €</span></a></li>)}
   </ul>
 
-  <script is:inline define:vars={{ slug: v.slug, chiave, titolo }}>
+  <script is:inline define:vars={{ slug: v.slug, chiave }}>
     (async () => {
       const azione = document.getElementById('azione');
       const qui = location.pathname;
       const [rIo, rConf] = await Promise.all([fetch('/api/io').catch(() => null), fetch('/api/config').catch(() => null)]);
       const io = rIo && rIo.ok ? await rIo.json() : null;
-      const conf = rConf && rConf.ok ? (await rConf.json()).paddle : null;
-      const prezzo = conf && conf.videocorsi ? conf.videocorsi[slug] : null;
+      const attivo = Boolean(rConf?.ok && (await rConf.json()).stripe);
 
       if (!io) {
         azione.innerHTML = `<a class="bottone-primario" href="/accedi?nuovo=1&dopo=${encodeURIComponent(qui)}">Crea un account e acquista</a>
@@ -108,45 +106,18 @@ const titolo = v.titolo;
         azione.innerHTML = `<p class="stato-ok">Hai già questo videocorso.</p><a class="bottone-primario" href="/account">Vai al tuo account</a>`;
         return;
       }
-      if (!prezzo) {
-        azione.innerHTML = `<p>Per acquistare scrivi a Carmine su <a href="https://wa.me/393885680393" target="_blank" rel="noopener">WhatsApp</a>: attiva il videocorso sul tuo account <strong>${io.email}</strong>.</p>`;
+      if (!attivo) {
+        azione.textContent = 'Il pagamento è temporaneamente indisponibile. Riprova tra poco.';
         return;
       }
-      azione.innerHTML = `<button type="button" class="bottone-primario" id="compra">Acquista il videocorso</button>
-        <p class="nota-accesso">Acquisto collegato al tuo account ${io.email}.</p>`;
-      const s = document.createElement('script');
-      s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
-      s.onload = () => {
-        if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
-        Paddle.Initialize({
-          token: conf.token,
-          eventCallback: (ev) => {
-            if (ev.name !== 'checkout.completed') return;
-            // conversione per Google Ads (src/data/misurazione.ts)
-            try { const d = ev.data || {}; window.misura && window.misura('acquisto', { valore: d.totals && d.totals.total, valuta: d.currency_code, id: d.transaction_id, voce: 'video-' + slug, email: io.email }); } catch (_) {}
-            azione.innerHTML = '<p>Pagamento ricevuto. Sto attivando il videocorso nel tuo account…</p>';
-            let tentativi = 0;
-            const controlla = async () => {
-              const r = await fetch('/api/io').catch(() => null);
-              const d = r && r.ok ? await r.json() : null;
-              if (d && d.materie.includes(chiave)) { location.href = '/account#videocorsi'; return; }
-              if (++tentativi < 30) setTimeout(controlla, 2000);
-              else azione.innerHTML = '<p>Pagamento ricevuto. L’attivazione richiede ancora qualche istante: ricarica la pagina tra poco, oppure scrivi a Carmine dalla pagina Contatti.</p>';
-            };
-            controlla();
-          },
-        });
-        document.getElementById('compra').addEventListener('click', () => {
-          Paddle.Checkout.open({
-            items: [{ priceId: prezzo, quantity: 1 }],
-            customer: { email: io.email },
-            customData: { videocorso: slug, email: io.email },
-            settings: { locale: 'it' },
-          });
-        });
-      };
-      s.onerror = () => { azione.innerHTML = '<p>Il modulo di pagamento non si è caricato. Ricarica la pagina o scrivi a Carmine dalla pagina Contatti.</p>'; };
-      document.head.appendChild(s);
+      const compra = document.createElement('a');
+      compra.className = 'bottone-primario';
+      compra.href = '/acquisto?' + new URLSearchParams({ tipo: 'videocorso', slug });
+      compra.textContent = 'Acquista il videocorso';
+      const conto = document.createElement('p');
+      conto.className = 'nota-accesso';
+      conto.textContent = 'Acquisto collegato al tuo account ' + io.email + '.';
+      azione.replaceChildren(compra, conto);
     })();
   </script>
 </Base>

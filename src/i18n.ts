@@ -140,7 +140,7 @@ export const TESTI = {
     includeSoluzioni: (n: number) => `Le <strong>soluzioni</strong> dei ${n} esercizi da fare`,
     unaVoltaSola: 'una volta sola', unMomento: 'Un momento…',
     gratisOra: "Gratis, senza account, restano l'inizio della teoria e le prime 3 schede svolte di ogni argomento.",
-    metodiPagamento: 'Si paga con carta, PayPal, Apple Pay, Google Pay o con gli altri metodi mostrati nella finestra di pagamento. Il pagamento è gestito da Paddle, che invia la ricevuta.',
+    metodiPagamento: 'Puoi pagare con carta o con i metodi disponibili su Stripe al momento del pagamento. Ricevi la conferma dell’ordine via email.',
     almenoOtto: 'almeno 8 caratteri',
     // testi usati dagli script nel browser
     js: {
@@ -152,7 +152,6 @@ export const TESTI = {
       sbloccaOra: 'Sblocca ora', acquistoCollegato: (email: string) => `Acquisto collegato al tuo account ${email}.`,
       pagamentoRicevuto: 'Pagamento ricevuto. Sto sbloccando la materia nel tuo account…',
       sbloccoLento: 'Pagamento ricevuto. Lo sblocco richiede ancora qualche istante: ricarica la pagina tra poco, oppure scrivimi dalla pagina Contatti.',
-      paddleNonCaricato: 'Il modulo di pagamento non si è caricato. Ricarica la pagina o scrivimi dalla pagina Contatti.',
       emailNonValida: 'Scrivi un indirizzo email valido.', passwordCorta: 'La password deve avere almeno 8 caratteri.',
       passwordDiverse: 'Le due password non coincidono.', erroreGenerico: 'Qualcosa non ha funzionato. Riprova.',
       connessione: 'Connessione assente. Riprova tra un momento.', creaAccount: 'Crea l’account',
@@ -233,7 +232,7 @@ export const TESTI = {
     includeSoluzioni: (n: number) => `The <strong>solutions</strong> of the ${n} exercises`,
     unaVoltaSola: 'one-time', unMomento: 'One moment…',
     gratisOra: 'Free, with no account: the beginning of the theory and the first 3 worked examples of each topic.',
-    metodiPagamento: 'You can pay by card, PayPal, Apple Pay, Google Pay or the other methods shown in the payment window. Payment is handled by Paddle, which sends the receipt.',
+    metodiPagamento: 'Pay by card or another method available at Stripe Checkout. We will email you an order confirmation.',
     almenoOtto: 'at least 8 characters',
     js: {
       creaESblocca: 'Create an account and unlock', haiAccount: 'Already have an account?', accedi: 'Log in',
@@ -244,7 +243,6 @@ export const TESTI = {
       sbloccaOra: 'Unlock now', acquistoCollegato: (email: string) => `Purchase linked to your account ${email}.`,
       pagamentoRicevuto: 'Payment received. Unlocking the subject in your account…',
       sbloccoLento: 'Payment received. Unlocking is taking a little longer: reload the page shortly, or message me from the Contact page.',
-      paddleNonCaricato: 'The payment form did not load. Reload the page or message me from the Contact page.',
       emailNonValida: 'Enter a valid email address.', passwordCorta: 'The password must be at least 8 characters long.',
       passwordDiverse: 'The two passwords do not match.', erroreGenerico: 'Something went wrong. Please try again.',
       connessione: 'No connection. Try again in a moment.', creaAccount: 'Create account',

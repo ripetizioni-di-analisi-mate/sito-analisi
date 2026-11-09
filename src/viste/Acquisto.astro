@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import CampiFattura from '../components/CampiFattura.astro';
+import { CONSENSO_FORNITURA, VERSIONE_CONDIZIONI } from '../data/consenso-digitale.mjs';
+import { materieL, prefisso, type Lingua } from '../i18n';
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const pref = prefisso(lingua);
+const titolo = en ? 'Your purchase' : 'Il tuo acquisto';
+const materie = Object.fromEntries(materieL(lingua).filter((m) => m.attiva && m.prezzo).map((m) => [m.slug, m.breve]));
+---
+<Base titolo={titolo} lingua={lingua} descrizione={en ? 'Review your order and billing details.' : 'Controlla il tuo ordine e inserisci i dati per la fattura.'} percorso={[{ titolo }]} seo={{ noindex: true }}>
+  <div class="acquisto" data-acquisto-digitale data-lingua={lingua} data-materie={JSON.stringify(materie)}>
+    <p class="sopratitolo">{en ? 'Digital study materials' : 'Materiale di studio digitale'}</p>
+    <h1>{titolo}</h1>
+    <p id="stato-acquisto" role="status" aria-live="polite">{en ? 'Loading your order…' : 'Caricamento dell’ordine…'}</p>
+    <noscript>{en ? 'Enable JavaScript to complete your purchase.' : 'Per completare l’acquisto, attiva JavaScript nel browser.'}</noscript>
+    <a class="bottone-primario" id="azione-acquisto" hidden></a>
+    <p id="ordini-digitali" hidden><a href={pref + '/recesso'}>{en ? 'View orders and withdrawal options' : 'I miei ordini e il diritto di recesso'}</a></p>
+    <form id="modulo-digitale" hidden>
+      <input type="hidden" name="versioneCondizioni" value={VERSIONE_CONDIZIONI} />
+      <section class="carrello" aria-labelledby="titolo-prodotto">
+        <div><h2 id="titolo-prodotto"></h2><p id="voci-prodotto" hidden></p>
+          <p class="sconto" id="sconto-digitale" hidden></p>
+          <span>{en ? 'One-time purchase' : 'Acquisto una tantum'}</span>
+        </div>
+        <div class="importo"><span>{en ? 'Total' : 'Totale'}</span><strong id="totale-digitale"></strong></div>
+      </section>
+
+      <section class="dati" aria-labelledby="dati-fattura">
+        <h2 id="dati-fattura">{en ? 'Billing details' : 'Dati per la fattura'}</h2>
+        <p>{en ? 'Enter the details of the person receiving the invoice. The study materials will be available in the account used for this purchase.' : 'Inserisci i dati della persona a cui intestare la fattura. Il materiale sarà disponibile nell’account con cui stai acquistando.'}</p>
+        <CampiFattura lingua={lingua} />
+        <p class="nota"><a href={pref + '/privacy#fatturazione-digitale'} target="_blank" rel="noopener">{en ? 'How your billing details are used' : 'Come vengono trattati i dati di fatturazione'}</a></p>
+      </section>
+
+      <section class="conferma" aria-label={en ? 'Confirm your order' : 'Conferma ordine'}>
+        <label><input type="checkbox" name="condizioni" required /><span>{en ? 'I accept the ' : 'Accetto i '}<a href={pref + '/termini'} target="_blank" rel="noopener">{en ? 'terms of sale' : 'termini di vendita'}</a>{en ? ' and have read the ' : ' e ho letto la '}<a href={pref + '/rimborsi'} target="_blank" rel="noopener">{en ? 'refund and withdrawal policy' : 'politica di rimborso e recesso'}</a>.</span></label>
+        <label><input type="checkbox" name="immediato" required /><span>{CONSENSO_FORNITURA[lingua]}</span></label>
+        <button class="bottone-primario" id="paga-digitale" type="submit" disabled>{en ? 'Continue to Stripe' : 'Continua su Stripe'}</button>
+        <p class="nota">{en ? 'You will confirm the payment on Stripe.' : 'Confermerai il pagamento nella pagina di Stripe.'}</p>
+        <p id="errore-acquisto" class="errore" role="alert"></p>
+        <button id="annulla-pendente" class="bottone-secondario" type="button" hidden>{en ? 'Cancel the previous checkout' : 'Annulla il pagamento precedente'}</button>
+      </section>
+    </form>
+    <p class="nota assistenza">{en ? 'Need help with your purchase? ' : 'Hai bisogno di aiuto con l’acquisto? '}<a href={pref + '/contatti'}>{en ? 'Contact Carmine' : 'Contatta Carmine'}</a>.</p>
+  </div>
+</Base>
+<script>
+  import '../scripts/acquisto-digitale';
+</script>
+<style>
+  .acquisto { max-width: 43rem; font-family: var(--ui); }
+  .acquisto [hidden] { display: none !important; }
+  .carrello { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; background: #edf6f2; border: 1px solid #cbded7; border-radius: 12px; }
+  .acquisto h2 { margin: 0; font: 700 1.15rem/1.4 var(--ui); }
+  .carrello p { margin: .25rem 0; line-height: 1.4; }
+  .carrello span, .nota { font-size: .9rem; color: var(--inchiostro-2); }
+  .carrello .sconto { color: var(--azione); font-weight: 600; }
+  .importo { text-align: right; flex: none; }
+  .importo strong { display: block; font-size: 1.4rem; color: var(--azione); }
+  .dati { margin: 1.5rem 0; }
+  .dati > p { margin: .45rem 0 1rem; }
+  .dati > p.nota { margin-top: .55rem; }
+  .conferma { padding-top: 1rem; border-top: 1px solid var(--riga); }
+  .conferma label { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: .8rem; font-size: .94rem; }
+  .conferma input { flex: none; width: 1.1rem; height: 1.1rem; margin: .12rem 0 0; accent-color: var(--azione); }
+  .conferma button { width: 100%; margin-top: .35rem; }
+  .conferma .nota { text-align: center; margin: .4rem 0; }
+  .assistenza { margin-top: 1.6rem; }
+  #errore-acquisto:empty, #stato-acquisto:empty { display: none; }
+  .errore { color: var(--c-attenzione,#903b23); }
+</style>

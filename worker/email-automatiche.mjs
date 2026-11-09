@@ -3,14 +3,12 @@ import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { componiEmail, intestazioniDisiscrizione, inviaEmailResend, mittenteEmail, SITO_EMAIL } from './email.mjs';
 import { componiPromemoria } from './promemoria.mjs';
 import { componiAvvisoLega } from './avvisi-lega.mjs';
-import { creaSconto } from './inviti.mjs';
 
 const GIORNO = 86400000;
 const ORA = GIORNO / 24;
 const PERCENTUALE = 15;
 const ORIGINE = 'analisi-1';
 const DESTINAZIONE = 'analisi-2';
-const PREZZO = 'PADDLE_PREZZO_ANALISI_2';
 const MATERIE_ATTIVE = new Map(MATERIE.filter((m) => m.attiva).map((m) => [m.slug, m]));
 export const FLUSSI_EMAIL = ['prima-prova', 'studio', 'seconda-materia'];
 const ISO = (t) => new Date(t).toISOString();
@@ -65,7 +63,7 @@ function flussoAttivo(ar, tipo) {
 function disponibile(env, tipo) {
   if (!env.RESEND_API_KEY) return false;
   if (tipo === 'studio') return env.PROMEMORIA !== '0';
-  if (tipo === 'seconda-materia') return Boolean(env.PADDLE_API_KEY && env[PREZZO] && MATERIE_ATTIVE.has(DESTINAZIONE));
+  if (tipo === 'seconda-materia') return Boolean(env.STRIPE_SECRET_KEY && MATERIE_ATTIVE.has(DESTINAZIONE));
   return true;
 }
 
@@ -309,14 +307,9 @@ export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, p
     try {
       if (f.tipo === 'seconda-materia' && !f.sconto) {
         const scade = f.scade_sconto || Date.now() + 7 * GIORNO;
-        ar.sql.exec('UPDATE email_automatiche SET scade_sconto = ? WHERE id = ?', scade, f.id);
-        const sconto = await creaSconto(ar.env, {
-          descrizione: 'Ripetizioni di Analisi · seconda materia', scade: ISO(scade), percentuale: PERCENTUALE,
-          materia: f.materia, codice: 'STUDIO' + f.id.replace(/-/g, '').slice(0, 26),
-        });
-        f.sconto = sconto.id;
+        f.sconto = 'STUDIO-' + f.id;
         f.scade_sconto = scade;
-        ar.sql.exec('UPDATE email_automatiche SET sconto = ? WHERE id = ?', f.sconto, f.id);
+        ar.sql.exec('UPDATE email_automatiche SET sconto = ?, scade_sconto = ? WHERE id = ?', f.sconto, scade, f.id);
       }
       if (!destinatarioValido(ar, f)) { annulla(); continue; }
       if (!flussoAttivo(ar, f.tipo)) continue;

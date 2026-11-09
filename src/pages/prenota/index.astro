@@ -3,12 +3,9 @@
 import Base from '../../layouts/Base.astro';
 import StileLezioni from '../../components/StileLezioni.astro';
 import { LEZIONI, GRUPPI_MATERIE_LEZIONI } from '../../data/lezioni';
-import { CODICI_PAESE } from '../../data/paesi-fattura.mjs';
+import CampiFattura from '../../components/CampiFattura.astro';
 
 const WHATSAPP = 'https://wa.me/393885680393';
-const nomiPaesi = new Intl.DisplayNames('it', { type: 'region' });
-const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice) || codice }))
-  .sort((a, b) => a.nome.localeCompare(b.nome, 'it'));
 ---
 <Base lingua="it" titolo="Prenota una lezione" percorso={[{ titolo: 'Ripetizioni online', href: '/ripetizioni-analisi' }, { titolo: 'Prenota una lezione' }]}
   descrizione={`Prenota una lezione individuale di matematica con Carmine Tornincasa. Scegli la materia e l’orario. Un’ora su Google Meet, ${LEZIONI.prezzo} €.`}
@@ -72,18 +69,7 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice)
       <section id="dati-fattura" class="prenota-passo prenota-dati" aria-labelledby="titolo-fattura">
         <h2 id="titolo-fattura" class="prenota-titolo"><span aria-hidden="true">4</span>Dati per la fattura</h2>
         <p class="nota-passo">Indica i dati della persona a cui intestare la fattura. Se acquisti la lezione per tuo figlio e vuoi la fattura a tuo nome, inserisci qui i tuoi dati.</p>
-        <div class="modulo">
-          <label>Nome dell’intestatario<input name="fattura_nome" autocomplete="section-fattura billing given-name" maxlength="100" required /></label>
-          <label>Cognome dell’intestatario<input name="fattura_cognome" autocomplete="section-fattura billing family-name" maxlength="100" required /></label>
-          <label class="largo">Paese di residenza<select name="fattura_paese" autocomplete="section-fattura billing country" required>
-            {paesi.map(({ codice, nome }) => <option value={codice} selected={codice === 'IT'}>{nome}</option>)}
-          </select></label>
-          <label class="largo">Indirizzo di residenza (via e numero civico)<input name="fattura_indirizzo" autocomplete="section-fattura billing address-line1" maxlength="180" required /></label>
-          <label><span>CAP <small data-facoltativo-estero hidden>se previsto</small></span><input name="fattura_cap" autocomplete="section-fattura billing postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required /></label>
-          <label>Comune o città<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
-          <label><span id="etichetta-provincia">Sigla della provincia</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder="Es. CE" pattern="[A-Za-z]{2}" maxlength="2" required /></label>
-          <label id="campo-cf">Codice fiscale dell’intestatario<input name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required /></label>
-        </div>
+        <CampiFattura />
         <p class="nota-termini">Questi dati servono per la fatturazione della lezione. <a href="/privacy#fatturazione">Come vengono trattati i dati</a></p>
       </section>
 
@@ -213,10 +199,7 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice)
     cursor: pointer;
   }
   .prenota-dati .modulo { margin: 0; }
-  #dati-fattura [hidden] { display: none; }
-  #dati-fattura input, #dati-fattura select { min-width: 0; width: 100%; }
-  #dati-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
-  #campo-cf input { text-transform: uppercase; }
+
 
   .prenota-pagamento {
     margin: 1.35rem 0 0;
@@ -256,6 +239,7 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice)
 </style>
 
 <script>
+  import { preparaIndirizzo, datiIntestatario } from '../../lib/campi-fattura';
   import { calendario, descriviOrario, type Orario } from '../../lib/calendario-lezioni';
 
   const modulo = document.getElementById('modulo-prenota') as HTMLFormElement;
@@ -266,27 +250,7 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice)
   const paga = document.getElementById('paga') as HTMLButtonElement;
   const radice = document.getElementById('calendario')!;
   let scelto: Orario | null = null;
-  const fattura = document.getElementById('dati-fattura')!;
-  const paese = fattura.querySelector<HTMLSelectElement>('[name=fattura_paese]')!;
-  const cap = fattura.querySelector<HTMLInputElement>('[name=fattura_cap]')!;
-  const provincia = fattura.querySelector<HTMLInputElement>('[name=fattura_provincia]')!;
-  const cf = fattura.querySelector<HTMLInputElement>('[name=fattura_cf]')!;
-  function aggiornaIndirizzo() {
-    const italia = paese.value === 'IT';
-    cap.required = provincia.required = cf.required = italia;
-    cap.pattern = italia ? '[0-9]{5}' : '.*';
-    cap.maxLength = italia ? 5 : 20;
-    cap.inputMode = italia ? 'numeric' : 'text';
-    provincia.pattern = italia ? '[A-Za-z]{2}' : '.*';
-    provincia.maxLength = italia ? 2 : 100;
-    provincia.placeholder = italia ? 'Es. CE' : '';
-    document.getElementById('etichetta-provincia')!.textContent = italia ? 'Sigla della provincia' : 'Provincia o regione (se prevista)';
-    fattura.querySelector<HTMLElement>('[data-facoltativo-estero]')!.hidden = italia;
-    document.getElementById('campo-cf')!.hidden = cf.disabled = !italia;
-  }
-  paese.addEventListener('change', aggiornaIndirizzo);
-  window.addEventListener('pageshow', aggiornaIndirizzo);
-  aggiornaIndirizzo();
+  const aggiornaIndirizzo = preparaIndirizzo(modulo.querySelector<HTMLElement>('[data-campi-fattura]')!);
 
   const mostraAvviso = (testo: string, errore = false) => {
     avviso.textContent = testo;
@@ -382,11 +346,7 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice)
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(f.get('email') || '').trim())) { esito.textContent = 'Scrivi un indirizzo email valido.'; return; }
     if (!/^[+0-9 ]{6,20}$/.test(String(f.get('telefono') || '').trim())) { esito.textContent = 'Scrivi un numero di telefono valido.'; return; }
     if (!modulo.reportValidity()) { esito.textContent = 'Controlla il campo evidenziato prima di pagare.'; return; }
-    const datiFattura = Object.fromEntries(
-      ['nome', 'cognome', 'paese', 'indirizzo', 'cap', 'comune', 'provincia', 'cf'].map(
-        (campo) => [campo, String(f.get('fattura_' + campo) || '').trim()]
-      )
-    );
+    const datiFattura = datiIntestatario(f);
     if (!f.get('condizioni')) { esito.textContent = 'Per prenotare servono le condizioni accettate.'; return; }
     esito.classList.remove('errore');
     esito.textContent = 'Apertura del pagamento…';
