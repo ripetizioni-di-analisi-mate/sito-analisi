@@ -355,7 +355,7 @@ R_x = m\,a_x \\[4pt]
 R_y = m\,a_y
 \end{cases}
 $$
-$\vec{R}$ è la risultante di tutte le forze applicate al punto materiale, in un sistema di riferimento inerziale; le due equazioni scalari valgono insieme. Il punto è in equilibrio quando $R_x = 0$ e $R_y = 0$.
+$\vec{R}$ è la risultante di tutte le forze applicate al punto materiale, in un sistema di riferimento inerziale; le due equazioni scalari valgono insieme. Un punto in quiete resta in equilibrio *se e solo se* $R_x = 0$ e $R_y = 0$.
 :::
 
 :::formula{#peso-e-terzo-principio titolo="Peso e terzo principio"}
@@ -437,7 +437,7 @@ N_{\mathrm{alto}} = m\,\frac{v^2}{r} - m g,
 \qquad
 N_{\mathrm{basso}} = m g + m\,\frac{v^2}{r}
 $$
-Il corpo percorre l'interno di una guida circolare verticale di raggio $r$, e la prima condizione è necessaria e sufficiente per restare a contatto nel punto più alto. Se la guida è liscia, la conservazione dell'energia meccanica dà $v_{\mathrm{basso}}^2 = v_{\mathrm{alto}}^2 + 4gr$, perciò nel punto più basso serve $v \geq \sqrt{5gr}$.
+Il corpo percorre l'interno di una guida circolare verticale di raggio $r$; in ciascuna formula $v$ è la velocità nel punto considerato. La prima condizione è necessaria e sufficiente per restare a contatto nel punto più alto. Se la guida è liscia, la conservazione dell'energia meccanica dà $v_{\mathrm{basso}}^2 = v_{\mathrm{alto}}^2 + 4gr$, perciò nel punto più basso serve $v \geq \sqrt{5gr}$.
 :::
 
 :::formula{#macchina-di-atwood titolo="Macchina di Atwood"}
@@ -667,7 +667,7 @@ T_0 = 2\pi\sqrt{\frac{\ell}{g}},
 \qquad
 T = mg\cos\theta + m\,\frac{v^2}{\ell}
 $$
-Il periodo $T_0$ vale per piccole oscillazioni, con ampiezza fino a una decina di gradi e filo inestensibile di massa trascurabile; per ampiezza $\theta_0$ maggiore $T_0 \approx 2\pi\sqrt{\dfrac{\ell}{g}}\left(1 + \dfrac{\theta_0^2}{16}\right)$. La terza formula dà la tensione del filo quando forma l'angolo $\theta$ con la verticale. In un ascensore con accelerazione $a$ verso l'alto si sostituisce $g$ con $g + a$.
+Il periodo $T_0$ vale per piccole oscillazioni, con ampiezza fino a una decina di gradi e filo inestensibile di massa trascurabile; per un'ampiezza $\theta_0$ maggiore, in radianti, $T_0 \approx 2\pi\sqrt{\dfrac{\ell}{g}}\left(1 + \dfrac{\theta_0^2}{16}\right)$. La terza formula dà la tensione del filo quando forma l'angolo $\theta$ con la verticale. In un ascensore con accelerazione $a$ verso l'alto si sostituisce $g$ con $g + a$.
 :::
 
 :::formula{#pendolo-fisico-e-di-torsione titolo="Pendolo fisico e pendolo di torsione"}
@@ -835,7 +835,7 @@ m_1 v_{1x} + m_2 v_{2x} = m_1 v_{1x}' + m_2 v_{2x}' \\[6pt]
 m_1 v_{1y} + m_2 v_{2y} = m_1 v_{1y}' + m_2 v_{2y}'
 \end{cases}
 $$
-Le due componenti della quantità di moto si conservano insieme, con forze esterne trascurabili durante l'urto. In un urto elastico tra masse uguali con il bersaglio fermo vale inoltre $\vec{v}_1\,' \cdot \vec{v}_2\,' = 0$, cioè i corpi si allontanano lungo direzioni perpendicolari.
+Le due componenti della quantità di moto si conservano insieme, con forze esterne trascurabili durante l'urto. In un urto elastico tra masse uguali con il bersaglio fermo vale inoltre $\vec{v}_1\,' \cdot \vec{v}_2\,' = 0$, quindi, se l'urto non è centrale, i corpi si allontanano lungo direzioni perpendicolari.
 :::
 
 :::formula{#teorema-di-konig titolo="Teorema di König"}
@@ -1406,7 +1406,7 @@ Q_{\mathrm{tot}} = L_{\mathrm{tot}},
 \qquad
 L_{\mathrm{rett}} = (p_2 - p_1)(V_2 - V_1)
 $$
-Per un ciclo quasistatico $|L_{\mathrm{tot}}|$ è l'area racchiusa nel piano $(V, p)$, positiva se il ciclo è percorso in senso orario. La terza formula vale per il ciclo rettangolare di due isobare e due isocore percorso in senso orario. I calori dei singoli tratti si ottengono da $Q = \Delta U + L$.
+Per un ciclo quasistatico $|L_{\mathrm{tot}}|$ è l'area racchiusa nel piano $(V, p)$, e $L_{\mathrm{tot}}$ è positivo se il ciclo è percorso in senso orario, negativo se è percorso in senso antiorario. La terza formula vale per il ciclo rettangolare di due isobare e due isocore percorso in senso orario. I calori dei singoli tratti si ottengono da $Q = \Delta U + L$.
 :::
 
 ## Secondo principio, macchine termiche ed entropia
@@ -1458,7 +1458,7 @@ $$
 \qquad
 \frac{Q_1}{T_1} + \frac{Q_2}{T_2} \leq 0
 $$
-Le disuguaglianze valgono per ogni macchina tra due serbatoi $T_1 > T_2$, con il segno di uguaglianza *solo* per le macchine reversibili. Una macchina dichiarata che non le soddisfa viola il secondo principio.
+Le disuguaglianze valgono per ogni macchina tra due serbatoi $T_1 > T_2$, con il segno di uguaglianza *solo* per le macchine reversibili. Se i dati di una macchina non soddisfano le disuguaglianze, la macchina viola il secondo principio e quindi non può esistere.
 :::
 
 :::attenzione
@@ -1471,7 +1471,7 @@ $$
 \qquad
 \oint \frac{\delta Q}{T} \leq 0
 $$
-Il sistema compie un ciclo, $Q_i$ è il calore assorbito dal serbatoio alla temperatura $T_i$ e $T$ è la temperatura del serbatoio che fornisce $\delta Q$. Il segno di uguaglianza vale per i cicli reversibili.
+Il sistema compie un ciclo, $Q_i$ è il calore assorbito dal sistema dal serbatoio alla temperatura $T_i$ e $T$ è la temperatura del serbatoio che fornisce $\delta Q$. Il segno di uguaglianza vale per i cicli reversibili.
 :::
 
 :::formula{#entropia titolo="Entropia"}
