@@ -3,9 +3,9 @@
 import { LEGHE, LEGHE_EN } from '../src/data/sfide.ts';
 import { settimanaDi } from './livelli.mjs';
 import { fotografiaLega } from './sfide.mjs';
+import { componiEmail } from './email.mjs';
 
 const SITO = 'https://ripetizionidianalisi.com';
-const esc = (x) => String(x).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ATTESA = 5000; // raggruppa i premi assegnati nella stessa azione
 const SCADENZA = 23 * 3600000; // entro le 24 ore di idempotenza del fornitore
 
@@ -47,23 +47,27 @@ export function componiAvvisoLega(r, linkNo) {
   const en = r.lingua === 'en';
   const lega = (en ? LEGHE_EN : LEGHE)[r.lega];
   const saluto = r.nome?.trim() ? `${en ? 'Hi' : 'Ciao'} ${r.nome.trim()},` : (en ? 'Hi,' : 'Ciao,');
-  const oggetto = en ? `You are now #${r.a} in the ${lega} league` : `Sei sceso in classifica: ora sei ${r.a}° nella lega ${lega}`;
-  const frase = en
-    ? `Another student has overtaken you. You moved from position ${r.da} to position ${r.a} in this week's ${lega} league.`
-    : `Un altro studente ti ha superato. Sei passato dalla ${r.da}ª alla ${r.a}ª posizione nella classifica settimanale della lega ${lega}.`;
-  const invito = en ? 'You can earn more XP with timed questions, exercises and active study.' : 'Puoi guadagnare altri EXP con le domande a tempo, gli esercizi e lo studio attivo.';
-  const tasto = en ? 'View the league' : 'Apri la lega';
-  const piede = en ? 'You receive this email because you participate in the weekly league.' : 'Ricevi questa email perché partecipi alla lega della settimana.';
-  const disattiva = en ? 'Turn off league alerts' : 'Disattiva gli avvisi della lega';
-  const testo = [saluto, frase, invito, `${tasto}: ${SITO}/lega`, `${piede} ${disattiva}: ${linkNo}`].join('\n\n');
-  const html = `<div style="background:#faf8f2;padding:24px 18px"><div style="max-width:520px;font:16px/1.6 Georgia,serif;color:#22302f">
-<p>${esc(saluto)}</p><p>${esc(frase)}</p>
-<div style="background:white;border:1px solid #e3e0d6;border-radius:12px;padding:18px;margin:20px 0;font-family:Arial,sans-serif">
-<div style="font-size:13px;color:#5b6664">${esc(en ? `${lega} league` : `Lega ${lega}`)}</div>
-<div style="font-size:30px;font-weight:bold;margin-top:6px">${r.da}° → ${r.a}°</div></div>
-<p>${esc(invito)}</p><a href="${SITO}/lega" style="display:inline-block;background:#2f6f68;color:white;padding:12px 22px;border-radius:24px;text-decoration:none;font:bold 15px Arial,sans-serif">${tasto}</a>
-<p style="font:12px/1.5 Arial,sans-serif;color:#7a8482;border-top:1px solid #e3e0d6;margin-top:24px;padding-top:14px">${esc(piede)} <a href="${esc(linkNo)}" style="color:#5b6664">${disattiva}</a></p></div></div>`;
-  return { subject: oggetto, text: testo, html };
+  const subject = en ? `League ${lega} · You are now #${r.a}` : `Lega ${lega} · Ora sei in ${r.a}ª posizione`;
+  const anteprima = en
+    ? `Another student moved ahead of you in this week's league.`
+    : 'Un altro studente ti ha superato nella classifica settimanale.';
+  return componiEmail({
+    lingua: en ? 'en' : 'it', subject, anteprima,
+    titolo: en ? 'Your league position has changed' : 'La tua posizione è cambiata',
+    categoria: en ? 'Weekly league' : 'Lega della settimana',
+    righe: [saluto, en
+      ? `Another student overtook you. You moved from position ${r.da} to position ${r.a}.`
+      : `Un altro studente ti ha superato. Sei passato dalla ${r.da}ª alla ${r.a}ª posizione.`],
+    scheda: {
+      etichetta: en ? `${lega} league` : `Lega ${lega}`,
+      valore: en ? `#${r.da} → #${r.a}` : `${r.da}ª → ${r.a}ª posizione`,
+      nota: en ? 'Weekly standings' : 'Classifica settimanale',
+    },
+    dopo: [en ? 'Timed questions, exercises and active study earn you more XP.' : 'Puoi guadagnare altri EXP con le domande a tempo, gli esercizi e lo studio attivo.'],
+    pulsante: [en ? 'View the standings' : 'Vai alla classifica', `${SITO}/lega`],
+    motivo: en ? 'You receive this email because you take part in the weekly league.' : 'Ricevi questa email perché partecipi alla lega settimanale.',
+    disattiva: [en ? 'Turn off league alerts' : 'Disattiva gli avvisi della lega', linkNo],
+  });
 }
 
 export async function programmaAvvisiLega(ar) {

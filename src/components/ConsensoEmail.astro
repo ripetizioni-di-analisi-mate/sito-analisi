@@ -1,0 +1,27 @@
+---
+import { link, materieL, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; scegliMateria?: boolean; nascosto?: boolean }
+const { lingua, scegliMateria = false, nascosto = false } = Astro.props;
+const en = lingua === 'en';
+const materie = scegliMateria ? materieL(lingua).filter((m) => m.attiva) : [];
+---
+<div class="consenso-email" data-consenso-email hidden={nascosto}>
+  <label class="consenso-email-scelta">
+    <input type="checkbox" name="offerte" autocomplete="off" />
+    <span>{en ? 'I’m 18 or older and agree to get free exercises and email offers based on the subject I select and my purchases.' : 'Ho almeno 18 anni e acconsento a ricevere per email esercizi gratuiti e offerte in base alla materia che scelgo e ai miei acquisti.'}</span>
+  </label>
+  {scegliMateria && <label>{en ? 'Subject for the first exercise (optional)' : 'Materia per il primo esercizio (facoltativa)'}
+    <select name="materiaEmail">
+      <option value="">{en ? 'Choose a subject' : 'Scegli la materia'}</option>
+      {materie.map((m) => <option value={m.slug}>{m.titolo}</option>)}
+    </select>
+  </label>}
+  <a href={link(lingua, '/privacy') + '#email-studio-offerte'}>{en ? 'How we use your data for email' : 'Come usiamo i dati per le email'}</a>
+</div>
+<style>
+  .consenso-email{font-size:.83rem;line-height:1.45;display:grid;gap:.35rem;color:inherit}
+  .consenso-email label.consenso-email-scelta{display:flex;align-items:flex-start;gap:.45rem;font-size:inherit;font-weight:400}
+  .consenso-email input[type=checkbox]{width:1rem;height:1rem;margin:.15rem 0 0;flex:none;accent-color:#214f50}
+  .consenso-email select{font:inherit;padding:.3rem .45rem;border:1px solid var(--riga,#e1dcd2);border-radius:6px;background:var(--carta,#faf9f6);color:var(--inchiostro,#23302e)}
+  .consenso-email a{width:fit-content;font-size:.8rem}
+</style>

@@ -54,7 +54,7 @@ export function avviaAccount(root) {
       q(b.getAttribute('aria-controls')).hidden = !scelta;
     }
     if (aggiornaHash) history.replaceState(null, '', '#' + area);
-    if (area === 'impostazioni' && io) caricaDispositivi();
+    if (area === 'impostazioni' && io) { caricaDispositivi(); caricaPreferenzeEmail(); }
   }
   function daHash() {
     const hash = location.hash.slice(1);
@@ -270,6 +270,45 @@ export function avviaAccount(root) {
     }
     invioScollega = false; q('conferma-scollega').disabled = false; q('annulla-scollega').disabled = false; q('conferma-scollega').textContent = s.scollega;
     if (completato) await caricaDispositivi(true);
+  });
+
+  const preferenzeEmail = q('form-preferenze-email');
+  const campiEmail = preferenzeEmail.elements;
+  const esitoEmail = q('esito-email');
+  let preferenzePronte = false, caricamentoPreferenze = null;
+  function mostraPreferenzeEmail(d) {
+    campiEmail.studio.checked = d.studio;
+    campiEmail.offerte.checked = d.offerte || d.inAttesa;
+    campiEmail.materiaEmail.value = d.materia || '';
+    const messaggio = d.inAttesa ? (en ? 'Check your inbox to confirm your choice.' : 'Controlla la posta per confermare la tua scelta.') : '';
+    esito(esitoEmail, d.errore || messaggio, Boolean(d.errore));
+  }
+  async function caricaPreferenzeEmail() {
+    if (preferenzePronte || caricamentoPreferenze) return;
+    const campi = [...preferenzeEmail.querySelectorAll('input, select, button')];
+    campi.forEach((el) => { el.disabled = true; });
+    caricamentoPreferenze = api('/api/email/preferenze');
+    try {
+      mostraPreferenzeEmail(await caricamentoPreferenze);
+      preferenzePronte = true;
+      campi.forEach((el) => { el.disabled = false; });
+    } catch {
+      esito(esitoEmail, en ? 'Email preferences could not be loaded.' : 'Impossibile caricare le preferenze email.', true);
+    } finally { caricamentoPreferenze = null; }
+  }
+  preferenzeEmail.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!preferenzePronte) return;
+    const pulsante = preferenzeEmail.querySelector('button');
+    pulsante.disabled = true;
+    try {
+      const d = await api('/api/email/preferenze', {
+        studio: campiEmail.studio.checked, offerte: campiEmail.offerte.checked, materia: campiEmail.materiaEmail.value, lingua,
+      });
+      mostraPreferenzeEmail(d);
+      if (!d.inAttesa && !d.errore) esito(esitoEmail, en ? 'Preferences saved.' : 'Preferenze salvate.');
+    } catch (error) { esito(esitoEmail, error.message, true); }
+    finally { pulsante.disabled = false; }
   });
 
   const nome = q('form-nome'), cambio = q('cambio');

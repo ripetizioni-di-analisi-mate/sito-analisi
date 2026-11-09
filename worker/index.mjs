@@ -1,3 +1,5 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
+import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
 //  - oscuramento lato server (teoria in anteprima, schede oltre la 3ª, soluzioni, PDF);
@@ -25,7 +27,7 @@ import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../sr
 import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
 import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
-import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { inviaCodaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
@@ -171,6 +173,7 @@ export class Archivio {
       punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
+    creaTabelleEmail(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
     creaTabellePrenotazioni(this.sql);
     // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
@@ -218,6 +221,11 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname === '/em-esegui') return Response.json(await eseguiEmailAutomatiche(this, c, firmaToken));
+    if (pathname.startsWith('/em-')) {
+      const r = archivioEmail(this, pathname, c);
+      if (r) return Response.json(r);
+    }
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
@@ -273,10 +281,12 @@ export class Archivio {
             EXISTS (SELECT 1 FROM promemoria_coda q WHERE q.email = u.email) AS coda,
             (SELECT materia FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS materia,
             (SELECT argomento FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS argomento
-          FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}`, c.giorno, ...(c.solo ? [c.solo] : []));
+          FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}
+          ${c.soloCoda ? 'AND EXISTS (SELECT 1 FROM promemoria_coda q WHERE q.email = u.email)' : ''}`, c.giorno, ...(c.solo ? [c.solo] : []));
         const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
         const inv = this.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', c.giorno);
-        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0 });
+        const campagne = this.riga("SELECT COUNT(*) AS n FROM email_automatiche WHERE tipo != 'studio' AND inviato >= ?", Date.parse(c.giorno));
+        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0, campagneOggi: campagne?.n || 0 });
       }
       case '/promemoria-registra':
         for (const e of c.email || []) {
@@ -288,7 +298,7 @@ export class Archivio {
         for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria_coda (email, creato) VALUES (?, ?)', e, Date.now());
         return Response.json({ ok: true });
       case '/promemoria-no':
-        this.sql.exec('UPDATE utenti SET promemoria = 0 WHERE email = ?', c.email);
+        this.sql.exec('UPDATE utenti SET avvisi_lega = COALESCE(avvisi_lega, promemoria, 1), promemoria = 0 WHERE email = ?', c.email);
         this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', c.email);
         return Response.json({ ok: true });
 
@@ -631,24 +641,19 @@ const TESTI_RECUPERO = {
     bottone: 'Choose the new password',
   },
 };
-const escHtml = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function inviaEmailRecupero(env, destinatario, link, l) {
   const T = TESTI_RECUPERO[l];
-  const [saluto, chiesto, apri, , nonTu, firma] = T.corpo(link);
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:520px">
-<p>${escHtml(saluto)}</p><p>${escHtml(chiesto)}</p><p>${escHtml(apri)}</p>
-<p style="margin:24px 0"><a href="${escHtml(link)}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${escHtml(T.bottone)}</a></p>
-<p style="font-size:13px;color:#5b6664;word-break:break-all">${escHtml(link)}</p>
-<p>${escHtml(nonTu)}</p><p>${escHtml(firma)}</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>',
-      to: [destinatario], subject: T.oggetto, html, text: T.corpo(link).join('\n\n'),
-    }),
+  const [saluto, chiesto, , , nonTu] = T.corpo(link);
+  const messaggio = componiEmail({
+    lingua: l, subject: T.oggetto,
+    titolo: l === 'en' ? 'Reset your password' : 'Imposta una nuova password',
+    categoria: l === 'en' ? 'Account security' : 'Sicurezza dell’account',
+    anteprima: l === 'en' ? 'Your link is valid for one hour.' : 'Il link è valido per un’ora.',
+    righe: [saluto, chiesto], dopo: [nonTu],
+    scheda: { valore: l === 'en' ? 'Valid for one hour' : 'Valido per un’ora' },
+    pulsante: [T.bottone, link],
   });
-  return r.ok;
+  return (await inviaEmailResend(env, destinatario, messaggio)).ok;
 }
 
 // ---------- domande a tempo ----------
@@ -682,6 +687,28 @@ async function catalogoDomande(env) {
     cacheCatalogo = await r.json();
   }
   return cacheCatalogo;
+}
+
+async function eseguiInvii(env, giornaliero) {
+  const [catalogo, prove] = await Promise.all([
+    catalogoDomande(env).catch(() => ({})),
+    env.ASSETS.fetch(new Request('https://interno/dati-email/prove.json'))
+      .then((r) => r.ok ? r.json() : {}).catch(() => ({})),
+  ]);
+  const r = await aDO(env, '/em-esegui', { giornaliero, catalogo, prove });
+  if (giornaliero) await inviaCodaPromemoria(env, aDO, firmaToken, catalogo);
+  if (r.inviati) console.log('email automatiche', JSON.stringify(r));
+}
+
+async function salvaPreferenzeEmail(env, email, c, lingua) {
+  const r = await aDO(env, '/em-salva', { email, offerte: c.offerte === true, studio: c.studio, materia: c.materia });
+  const { token, limite, ...pubbliche } = r;
+  if (limite) return { ...pubbliche, errore: lingua === 'en' ? 'Daily confirmation limit reached. Try again tomorrow.' : 'Limite giornaliero di conferme raggiunto. Riprova domani.' };
+  if (!token) return pubbliche;
+  const esito = await inviaConfermaOfferte(env, email, token, linguaDi(lingua), firmaToken);
+  if (esito.ok) return pubbliche;
+  await aDO(env, '/em-conferma-fallita', { email, token });
+  return { ...pubbliche, inAttesa: false, errore: lingua === 'en' ? 'The confirmation email could not be sent. Try again tomorrow.' : 'Impossibile inviare la conferma. Riprova domani.' };
 }
 
 // ---------- percorsi protetti ----------
@@ -731,6 +758,7 @@ export default {
     if (evento.cron === CRON_LEZIONI) {
       ctx.waitUntil(avvisiLezioni(env, aDO, firmaToken).then((r) => { if (r.lezioni) console.log('avvisi lezioni', JSON.stringify(r)); })
         .catch((e) => console.log('avvisi lezioni', String(e?.message || e))));
+      ctx.waitUntil(eseguiInvii(env, false).catch(() => console.log('email automatiche: errore nel ciclo orario')));
       return;
     }
     // A ogni cron (mattina e pomeriggio): pagine nuove o cambiate segnalate ai motori con IndexNow.
@@ -740,8 +768,7 @@ export default {
       console.log('indexnow', await r.text());
     })().catch((e) => console.log('indexnow', String(e?.message || e))));
     if (evento.cron === CRON_PROMEMORIA) {
-      ctx.waitUntil(inviaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})))
-        .then((r) => console.log('promemoria', JSON.stringify(r))).catch((e) => console.log('promemoria', String(e?.message || e))));
+      ctx.waitUntil(eseguiInvii(env, true).catch(() => console.log('email automatiche: errore nel ciclo giornaliero')));
       return;
     }
     ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
@@ -780,6 +807,18 @@ export default {
     }
 
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
+    if ((p === '/api/email/offerta' || p === '/api/sconto') && req.method === 'GET') {
+      const materia = url.searchParams.get('materia');
+      if (materia === 'analisi-2') {
+        const io = await utenteCollegato(env, req).catch(() => null);
+        if (io && !io.materie.includes(materia)) {
+          const s = await aDO(env, '/em-offerta', { email: io.email, materia });
+          if (s.id) return json(p === '/api/sconto' ? s : { percentuale: s.percentuale, scade: s.scade }, 200, { 'cache-control': 'no-store' });
+        }
+      }
+      if (p === '/api/email/offerta') return json({}, 200, { 'cache-control': 'no-store' });
+    }
+
     if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
       const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
       // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
@@ -816,8 +855,17 @@ export default {
     if (p === '/api/dispositivi' || p.startsWith('/api/dispositivi/')) {
       return gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
     }
+    if (p === '/api/email/preferenze' && (req.method === 'GET' || POST)) {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'Accesso richiesto.' }, 401, { 'cache-control': 'no-store' });
+      if (!POST) return json(await aDO(env, '/em-preferenze', { email: io.email }), 200, { 'cache-control': 'no-store' });
+      if (req.headers.get('origin') !== url.origin) return json({ errore: 'Richiesta non valida.' }, 403);
+      const c = await req.json().catch(() => null);
+      if (!c || typeof c.offerte !== 'boolean' || typeof c.studio !== 'boolean') return json({ errore: 'Preferenze non valide.' }, 400);
+      return json(await salvaPreferenzeEmail(env, io.email, c, c.lingua), 200, { 'cache-control': 'no-store' });
+    }
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina, offerte, materiaEmail } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
       if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
@@ -832,6 +880,7 @@ export default {
       if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
       // account creato dalla barra in basso: 10% sul primo acquisto di una materia (worker/benvenuto.mjs)
       if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
+      if (offerte === true) ctx.waitUntil(salvaPreferenzeEmail(env, email, { offerte, materia: materiaEmail }, lingua).catch(() => {}));
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
@@ -1110,6 +1159,22 @@ export default {
     }
 
     // ===== promemoria: link «Non ricevere più questi promemoria» (anche one-click dei programmi di posta) =====
+    if ((p === '/email/conferma' || p === '/email/disattiva') && (req.method === 'GET' || POST)) {
+      const t = url.searchParams.get('t') || '';
+      const tok = t ? await leggiToken(env, t) : null;
+      const conferma = p === '/email/conferma';
+      let valido = tok?.scopo === (conferma ? 'conferma-offerte-email' : 'offerte-email') && emailValida(tok.r)
+        && (!conferma || (typeof tok.c === 'string' && tok.exp > Date.now()));
+      if (valido && POST) {
+        const r = await aDO(env, conferma ? '/em-conferma' : '/em-disattiva', { email: tok.r, token: tok.c });
+        valido = r.ok;
+      }
+      return new Response(paginaPreferenzeEmail(conferma ? 'conferma' : 'disattiva', tok?.l, valido, POST && valido), {
+        status: valido ? 200 : 400,
+        headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex', 'referrer-policy': 'no-referrer' },
+      });
+    }
+
     if (p === '/promemoria/disattiva') {
       // Con GET solo la pagina di conferma: i programmi che aprono i link per controllarli non disattivano nulla.
       const tok = await leggiToken(env, url.searchParams.get('t') || '');
@@ -1209,7 +1274,10 @@ export default {
           // invita un amico: sconto usato e premio per chi ha invitato (worker/inviti.mjs)
           ctx.waitUntil(dopoAcquistoMateria(env, aDO, url.origin, { email, transazione: d.id, sconto: d.discount_id }).catch((e) => console.log('inviti: webhook', String(e))));
           // sconto di benvenuto: codice del 10% segnato come usato
-          if (d.discount_id) ctx.waitUntil(aDO(env, '/bv-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
+          if (d.discount_id) {
+            ctx.waitUntil(aDO(env, '/bv-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
+            if (materia === 'analisi-2') await aDO(env, '/em-acquisto', { email, materia, sconto: d.discount_id, transazione: d.id });
+          }
         } else if (email && VIDEO[video]) {
           await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });
@@ -1292,6 +1360,23 @@ export default {
       if (p === '/admin/api/revoca' && POST) {
         const { email, materia } = await req.json();
         return json(await aDO(env, '/revoca', { email: normalizza(email), materia }));
+      }
+      if (p === '/admin/api/email-stato' && req.method === 'GET') return json(await aDO(env, '/em-dashboard'), 200, { 'cache-control': 'no-store' });
+      if (p === '/admin/api/email-interruttore' && POST) {
+        const { tipo, attivo } = await req.json().catch(() => ({}));
+        return json(await aDO(env, '/em-interruttore', { tipo, attivo }));
+      }
+      if ((p === '/admin/api/email-anteprima' && req.method === 'GET') || (p === '/admin/api/email-prova' && POST)) {
+        const { tipo } = POST ? await req.json().catch(() => ({})) : { tipo: url.searchParams.get('tipo') };
+        if (!FLUSSI_EMAIL.includes(tipo) && tipo !== 'lega') return json({ errore: 'Modello non valido.' }, 400);
+        const m = esempioEmail(tipo);
+        if (!POST) return new Response(m.html, { headers: {
+          'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
+          'content-security-policy': "default-src 'none'; img-src https://ripetizionidianalisi.com; style-src 'unsafe-inline'; sandbox",
+        } });
+        const destinatario = env.EMAIL_PROVA_DESTINATARIO || 'carminetornincasa98@gmail.com';
+        const prova = await inviaEmailResend(env, destinatario, { ...m, subject: `[PROVA] ${m.subject}` });
+        return json(prova.ok ? { ok: true } : { errore: 'Invio di prova non riuscito.' });
       }
       if (p === '/admin/api/promemoria-prova' && POST) { // email di prova del promemoria, con i dati veri dell'account se esiste
         const email = normalizza((await req.json().catch(() => ({}))).email);

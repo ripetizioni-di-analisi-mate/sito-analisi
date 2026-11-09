@@ -1,15 +1,21 @@
 // Esegui con: node --test strumenti/google-calendar.test.mjs
-// Il router è quello di produzione; si sostituiscono soltanto i dati Astro delle
-// materie, non utilizzati dal collegamento OAuth, per non richiedere una build.
+// Il router di produzione viene compilato senza generare le pagine Astro.
 import assert from 'node:assert/strict';
 import { createHmac } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { execFileSync } from 'node:child_process';
+import test, { after } from 'node:test';
 
-const source = await readFile(new URL('../worker/prenotazioni.mjs', import.meta.url), 'utf8');
-const modulo = source.replace("import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';", "const LEZIONI = { fusoOrario: 'Europe/Rome' }; const MATERIE_LEZIONI = [];");
-assert.notEqual(modulo, source, 'Importazione dei dati delle materie non riconosciuta');
-const { gestisciPrenotazioni } = await import('data:text/javascript;base64,' + Buffer.from(modulo).toString('base64'));
+const root = fileURLToPath(new URL('../', import.meta.url));
+const temp = mkdtempSync(join(tmpdir(), 'google-calendar-'));
+const bundle = join(temp, 'prenotazioni.mjs');
+execFileSync(process.execPath, [join(root, 'node_modules/rolldown/bin/cli.mjs'), join(root, 'worker/prenotazioni.mjs'),
+  '--file', bundle, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: root });
+const { gestisciPrenotazioni } = await import(pathToFileURL(bundle));
+after(() => rmSync(temp, { recursive: true, force: true }));
 const ORIGINE = 'https://ripetizionidianalisi.com';
 const RITORNO = '/admin/google/ritorno';
 const SCOPI = 'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.freebusy';
