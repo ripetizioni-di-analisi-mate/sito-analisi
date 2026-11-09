@@ -12,7 +12,7 @@
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO } from '../src/data/compatibilita.ts';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
-import { trovaProcedimentoStudio } from './riscontro-procedimenti.mjs';
+import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-procedimenti.mjs';
 import { riconosciMateriaCompito } from './materia-compito.mjs';
 
 const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
@@ -205,7 +205,7 @@ async function esegui(env, modello, input) {
 
 const ISTRUZIONI_LETTURA = (titolo) => `Questa immagine può essere una pagina di un compito d'esame universitario oppure del programma di un corso (syllabus, elenco degli argomenti). La materia selezionata, ${titolo}, può essere sbagliata: trascrivi ciò che compare nella pagina.
 Trascrivi il testo degli esercizi e delle domande oppure tutti gli argomenti e sottoargomenti del programma, nell'ordine in cui compaiono, con le formule in LaTeX tra $…$.
-Mantieni il numero di ogni esercizio, le lettere dei punti (a, b, c…) e il punteggio, se è indicato.
+Mantieni il numero di ogni esercizio, le lettere dei punti (a, b, c…) e il punteggio, se è indicato. Trascrivi anche le definizioni e le formule comuni ai sottopunti.
 Per un programma conserva titoli, elenchi, numerazione, teoremi e indicazioni sulle dimostrazioni richieste. Un programma è valido anche senza esercizi o formule. Non trasformare gli argomenti in esercizi e non aggiungere contenuti.
 Conserva il titolo della materia presente nel documento, utile per riconoscere il corso corretto. Non trascrivere nomi di persone, matricole, firme, recapiti, data, bibliografia, istruzioni generali sulla prova (durata, materiale consentito) e appunti scritti a mano dallo studente.
 Se nell'immagine non ci sono esercizi, domande o argomenti di un corso universitario delle materie disponibili, rispondi soltanto NESSUN_CONTENUTO.
@@ -244,10 +244,11 @@ Regole
 - Prima delle richieste scrivi TIPO_DOCUMENTO|PROGRAMMA se il documento è un programma o un elenco di contenuti da studiare, altrimenti TIPO_DOCUMENTO|ESAME se contiene domande o esercizi da svolgere. L'assenza di esercizi non rende invalido un programma.
 - Per un programma, ogni argomento o sottoargomento distinto è una richiesta. Dividi le voci che elencano più contenuti, conserva i nomi e l'ordine, e numerale progressivamente 1, 2, 3… senza duplicare i titoli generali. Non inventare esercizi, domande, punteggi o dimostrazioni richieste. Ignora nomi, recapiti, CFU, ore, bibliografia, modalità d'esame e altre informazioni amministrative.
 - Per ogni voce di programma usa T e il codice T del contenuto teorico corrispondente. Usa E e un codice S o T quando la voce richiede un procedimento di calcolo. Un contenuto spiegato è coperto anche senza un esercizio identico. Il solo titolo generico del capitolo non basta se manca il contenuto specifico; conserva anche le voci fuori catalogo con codici -. Una dimostrazione serve solo se il programma la richiede esplicitamente. Per i programmi il campo punti è sempre -: numeri di capitolo, CFU e ore non sono punteggi.
-- Una richiesta è un singolo compito da svolgere. Se un esercizio ha più punti (a, b, c…), ogni punto è una richiesta separata con lo stesso numero di esercizio.
+- Una richiesta è un singolo compito da svolgere. Se un esercizio ha più punti (a, b, c…), ogni punto è una richiesta separata con lo stesso numero di esercizio. Leggi anche le definizioni nella parte comune dell'esercizio. Nella richiesta breve nomina il tipo di oggetto usato (per esempio «intersezione di due dischi e sua frontiera»), insieme ai simboli.
+- Verificare o dimostrare una proprietà di una funzione assegnata, per esempio la continuità nell'origine, è un esercizio E. Disegnare una regione data da disequazioni o il suo bordo è un esercizio E. Cerca anche le schede che insegnano quel passaggio dentro un calcolo più ampio.
 - Scrivi una riga per richiesta, nell'ordine dell'esame, con esattamente 6 campi separati da |:
 numero e punto | tipo | argomento | codice | punti | richiesta in breve
-- Numero e punto: 1a, 1b, 2a…; se non ci sono punti scrivi soltanto il numero, come 1 o 2. Tipo: E per calcoli e problemi, T per definizioni, enunciati e dimostrazioni da scrivere. Argomento: codice A, oppure -.
+- Numero e punto: 1a, 1b, 2a…; se non ci sono punti scrivi soltanto il numero, come 1 o 2. Tipo: E per calcoli e problemi, T per definizioni, enunciati e dimostrazioni di teoremi. Argomento: codice A, oppure -.
 - codice: per una richiesta E, il codice S della scheda che insegna il procedimento necessario, oppure T se la voce di teoria spiega direttamente il metodo sufficiente a risolverla; per una richiesta T, il codice T della definizione o del teorema richiesto; - se nel catalogo non c'è.
 - Valuta se uno studente può svolgere la richiesta applicando i metodi del corso. Non cercare una copia dell'esercizio: numeri, lettere, funzione, combinazione di funzioni elementari, formulazione e difficoltà di calcolo diversi non riducono la copertura quando i procedimenti necessari sono insegnati.
 - Considera insieme teoria, metodi ed esempi di tutte le schede, anche in capitoli diversi. Una richiesta è coperta anche quando combina più procedimenti presenti: indica il codice S o T più rappresentativo. Non pretendere che una sola scheda contenga la soluzione completa della funzione del compito.
@@ -492,15 +493,17 @@ function tipoDaTesto(testo) {
 
 // ---------- calcolo delle percentuali ----------
 // Una richiesta grezza del modello → riga del risultato: controlla i codici e rende coerenti livello, scheda e argomento.
-function rigaRisultato(materia, cat, codici, r, domandePer) {
+function rigaRisultato(materia, cat, codici, r, domandePer, documento) {
   r = r && typeof r === 'object' ? r : {};
   const pulito = (x, n) => String(x ?? '').replace(/[\u0000-\u001f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n);
   let arg = /^A\d+$/.test(r.argomento) ? codici.A[r.argomento] || null : null;
   const nominata = trovaVoceTeoria(codici.T, r.testo, arg?.slug);
-  const domandaTeorica = r.tipo === 'teoria' || Boolean(nominata && /\b(?:enunci\w*|dimostr\w*)\b/i.test(r.testo || ''));
+  const schedaAnalisiDue = materia === 'analisi-2' && r.tipoDocumento !== 'programma'
+    ? trovaSchedaAnalisiDue(codici, r.testo, r.esercizio, documento) : null;
+  const domandaTeorica = !schedaAnalisiDue && (r.tipo === 'teoria' || Boolean(nominata && /\b(?:enunci\w*|dimostr\w*)\b/i.test(r.testo || '')));
   const tipo = domandaTeorica ? 'teoria' : 'esercizio';
-  const scheda = tipo === 'esercizio' && /^S\d+$/.test(r.scheda) ? codici.S[r.scheda] || null : null;
-  const voceIndicata = /^T\d+$/.test(r.teoria) ? codici.T[r.teoria] || null : null;
+  const scheda = schedaAnalisiDue || (tipo === 'esercizio' && /^S\d+$/.test(r.scheda) ? codici.S[r.scheda] || null : null);
+  const voceIndicata = !schedaAnalisiDue && /^T\d+$/.test(r.teoria) ? codici.T[r.teoria] || null : null;
   const procedimento = tipo === 'esercizio' && !scheda && !voceIndicata ? trovaProcedimentoStudio(codici, r.testo, arg?.slug) : null;
   const voce = (domandaTeorica ? nominata?.voce : null) || voceIndicata || procedimento?.voce;
   const legato = scheda || voce;
@@ -525,9 +528,9 @@ function rigaRisultato(materia, cat, codici, r, domandePer) {
 
 // Assegna i pesi (punteggi dei singoli punti, o totale dell'esercizio ripartito tra le richieste)
 // e calcola la compatibilità.
-export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}) {
+export function valutaRichieste(materia, cat, codici, grezze, successoArg = null, domandePer = {}, documento = '') {
   const viste = new Set();
-  const richieste = grezze.slice(0, MAX_RICHIESTE).map((r) => rigaRisultato(materia, cat, codici, r, domandePer)).filter((r) => {
+  const richieste = grezze.slice(0, MAX_RICHIESTE).map((r) => rigaRisultato(materia, cat, codici, r, domandePer, documento)).filter((r) => {
     const chiave = JSON.stringify([r.esercizio.toLowerCase(), r.parte?.toLowerCase(), r.testo.toLowerCase()]);
     if (!r.testo || viste.has(chiave)) return false;
     viste.add(chiave);
@@ -730,7 +733,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         }
         // CFU, ore e numeri dei capitoli non sono pesi di copertura.
         if (tipoDocumento === 'programma') q = { ...q, punti: null };
-        const riga = rigaRisultato(materia, cat, codici, q, domandePer);
+        const riga = rigaRisultato(materia, cat, codici, q, domandePer, testo);
         if (!riga.testo) return;
         grezze.push(q);
         manda({ r: riga });
@@ -743,7 +746,7 @@ export async function gestisciCompatibilita(req, env, ctx, p, h) {
         ctl.close();
         return;
       }
-      const esito = valutaRichieste(materia, cat, codici, grezze, await successoP, domandePer);
+      const esito = valutaRichieste(materia, cat, codici, grezze, await successoP, domandePer, testo);
       if (!esito.richieste.length) {
         await rimborsa('confronta');
         manda({ errore: 'Nel testo non ho riconosciuto esercizi o argomenti da confrontare. Controlla il testo e riprova.' });

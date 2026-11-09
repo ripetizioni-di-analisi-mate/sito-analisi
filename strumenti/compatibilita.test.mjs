@@ -707,3 +707,36 @@ test('la diagnostica non espone il contenuto degli errori del fornitore', async 
   assert.doesNotMatch(JSON.stringify(eventi), /Testo riservato|dati personali/);
   assert.deepEqual(eventi[0].diagnostica, [{ codice: 'MODELLO' }, { codice: 'MODELLO' }]);
 });
+
+test('Analisi 2 recupera continuità applicata e disegni con le schede del corso', () => {
+  const capitolo = 'funzioni-di-piu-variabili';
+  const materiali = [6, 8].map((n) => {
+    const corpo = readFileSync(join(radice, 'src/content/svolti/analisi-2', capitolo, n + '.md'), 'utf8');
+    return { n, titolo: corpo.match(/^titolo: (.+)$/m)[1], parole: [], ...dettagliScheda(corpo) };
+  });
+  const catalogo = { argomenti: [{
+    slug: capitolo, titolo: 'Funzioni di più variabili', schede: materiali,
+    teoria: [{ ancora: 'continuita-due-variabili', titolo: 'Funzione continua', tipo: 'definizione', contenuto: 'Il limite coincide con il valore della funzione.', dimostrazione: false }],
+  }] };
+  const { codici } = codifica(catalogo, false);
+  const documento = [
+    'Esercizio 5. Calcolare un integrale.',
+    'Esercizio 6. I due insiemi sono (x-1)^2+(y+1)^2 ≤ 4 e (x+1)^2+(y-1)^2 ≤ 4.',
+    'Esercizio 7. Disegnare l’intersezione di due domini non specificati.',
+  ].join('\n');
+  const confronta = (righe) => valutaRichieste('analisi-2', catalogo, codici, righe.map(leggiRiga), null, {}, documento);
+  const esito = confronta([
+    String.raw`4a|T|A1|T1|p2|Dimostrare che $f(x,y)=\frac{x^4-y^3}{x^2+y^2}$ è continua in $(0,0)$`,
+    String.raw`4b|E|-|-|p2|Disegnare l’insieme $D=\{(x,y): \left|x\right|\leq y\leq 2\}$`,
+    String.raw`6a|E|-|-|p3|Disegnare $\Omega=\Omega_1\cap\Omega_2$ e la curva $\gamma=\partial\Omega$`,
+  ]);
+  assert.equal(esito.compatibilita, 100);
+  assert.deepEqual(esito.richieste.map((r) => r.scheda?.n), [6, 8, 8]);
+  assert.ok(esito.richieste.every((r) => r.tipo === 'esercizio'));
+  assert.deepEqual(confronta([
+    '4d|T|A1|T1|-|Enunciare e dimostrare il teorema sulla continuità delle funzioni di due variabili',
+    '6b|E|-|-|-|Calcolare l’integrale curvilineo lungo il bordo dell’intersezione dei dischi',
+    '7a|E|-|-|-|Disegnare l’intersezione dei due domini',
+    '7b|E|-|-|-|Dimostrare che f(x,y) è uniformemente continua',
+  ]).richieste.map((r) => r.livello), ['argomento', 'nessuno', 'nessuno', 'nessuno']);
+});

@@ -33,3 +33,47 @@ export function trovaProcedimentoStudio(codici, richiesta, argomento) {
       : pertinenti[0];
   return { voce: principale, voci: pertinenti };
 }
+
+// Una richiesta può citare soltanto i simboli definiti nel testo dello stesso esercizio.
+function testoEsercizio(documento, numero) {
+  const titoli = [...String(documento || '').matchAll(/^\s*(?:[#*>]+\s*)*esercizio\s+(\d+)\b/gim)];
+  const i = titoli.findIndex((m) => m[1] === String(numero));
+  return i < 0 ? '' : documento.slice(titoli[i].index, titoli[i + 1]?.index);
+}
+
+function normalizzaDisequazioni(testo) {
+  return normalizza(testo)
+    .replace(/\\(?:left|right|bigl|bigr)\b/g, '')
+    .replace(/\\(?:lvert|rvert|vert)\b/g, '|')
+    .replace(/\\(?:leq?|leqslant)\b|≤/g, '<=')
+    .replace(/\\cap\b|∩/g, ' intersezione ')
+    .replace(/\\partial\b|∂/g, ' frontiera ')
+    .replace(/²/g, '^2');
+}
+
+export function trovaSchedaAnalisiDue(codici, richiesta, numero, documento) {
+  const testo = normalizzaDisequazioni(richiesta);
+  const contesto = normalizzaDisequazioni(testoEsercizio(documento, numero));
+  const scheda = (n) => Object.values(codici.S).find((s) =>
+    s.argomento === 'funzioni-di-piu-variabili' && s.n === n && s.tracce?.length);
+
+  // Verificare la continuità di una funzione assegnata è un esercizio applicativo.
+  const funzionePiana = /\b[a-z]\s*\(\s*x\s*,\s*y\s*\)|due variabili|piu variabili/;
+  if (/\b(?:continu[aoei]|continuita)\b/.test(testo)
+      && /\b(?:dimostr|verific|studi|stabil|mostr)\w*/.test(testo)
+      && !/\b(?:teorem|lemma|enunci|uniform|holder|lipschitz|differenziabil|integral|massim|minim|estrem)\w*/.test(testo)
+      && funzionePiana.test(testo + ' ' + contesto)) return scheda(6);
+
+  if (!/\b(?:disegn|rappresent|tracci|schizz)\w*/.test(testo)
+      || /\b(?:integral|massim|minim|estrem|are[ae]|volum|baricentr)\w*/.test(testo)) return null;
+
+  const triangolo = /\|\s*x\s*\|\s*<=\s*y\s*<=|triangol\w*.*(?:vertic|disequazion)/;
+  const regione = /\b(?:insieme|dominio|regione)\b/.test(testo);
+  if (triangolo.test(testo) || (regione && triangolo.test(contesto))) return scheda(8);
+
+  if (!/\bintersezione\b/.test(testo)) return null;
+  const descrizione = testo + '\n' + contesto;
+  const dueDischi = /\b(?:dischi|cerchi)\b/.test(descrizione)
+    || [...descrizione.matchAll(/\^(?:2|\{2\})\s*\+\s*(?:\([^()]+\)|[a-z])\^(?:2|\{2\})\s*<=/g)].length >= 2;
+  return dueDischi ? scheda(8) : null;
+}

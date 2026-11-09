@@ -67,7 +67,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'analisi-2': {
     titolo: 'Mathematical Analysis 2',
     breve: 'Analysis 2',
-    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions.',
+    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions, differential equations and linear systems.',
     argomenti: {
       'funzioni-di-piu-variabili': { titolo: 'Functions of several variables', breve: 'Several variables' },
       'calcolo-differenziale': { titolo: 'Differential calculus in several variables', breve: 'Differential calculus' },
@@ -80,6 +80,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'successioni-e-serie-di-funzioni': { titolo: 'Sequences and series of functions', breve: 'Series of functions' },
       'serie-di-potenze': { titolo: 'Power series and Taylor series', breve: 'Power series' },
       'serie-di-fourier': { titolo: 'Fourier series', breve: 'Fourier series' },
+      'equazioni-differenziali': { titolo: 'Differential equations and linear systems', breve: 'Differential equations' },
     },
   },
   'analisi-3': {

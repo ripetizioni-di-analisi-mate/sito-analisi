@@ -64,7 +64,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'analisi-2',
     titolo: 'Analisi matematica 2',
     breve: 'Analisi 2',
-    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
+    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni, equazioni differenziali e sistemi lineari.',
     colore: '#336976',
     gruppo: 'Università',
     attiva: true,
@@ -80,6 +80,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'successioni-e-serie-di-funzioni', titolo: 'Successioni e serie di funzioni', breve: 'Serie di funzioni' },
       { slug: 'serie-di-potenze', titolo: 'Serie di potenze e serie di Taylor', breve: 'Serie di potenze' },
       { slug: 'serie-di-fourier', titolo: 'Serie di Fourier', breve: 'Serie di Fourier' },
+      { slug: 'equazioni-differenziali', titolo: 'Equazioni differenziali e sistemi lineari', breve: 'Equazioni differenziali' },
     ],
   },
   {
