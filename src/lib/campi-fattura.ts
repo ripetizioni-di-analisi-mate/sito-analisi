@@ -7,6 +7,7 @@ export function preparaIndirizzo(fattura: HTMLElement) {
   const cf = fattura.querySelector<HTMLInputElement>('[name=fattura_cf]')!;
   const en = fattura.dataset.lingua === 'en';
   const calcolatore = preparaCalcoloCF(fattura);
+  const finestra = calcolatore.querySelector<HTMLDialogElement>('[data-cf-dialog]')!;
   function aggiorna() {
     const italia = paese.value === 'IT';
     cap.required = provincia.required = cf.required = italia;
@@ -20,6 +21,7 @@ export function preparaIndirizzo(fattura: HTMLElement) {
       ? (en ? 'Province code' : 'Sigla della provincia')
       : (en ? 'Province or region (if applicable)' : 'Provincia o regione (se prevista)');
     fattura.querySelector<HTMLElement>('[data-facoltativo-estero]')!.hidden = italia;
+    if (!italia && finestra.open) finestra.close();
     calcolatore.hidden = cf.disabled = !italia;
   }
   paese.addEventListener('change', aggiorna);
