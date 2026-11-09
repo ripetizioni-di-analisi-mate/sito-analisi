@@ -6,8 +6,11 @@ export const LEZIONI = {
   prezzo: 40,                 // euro per lezione
   durata: 60,                 // minuti
   giorni: [1, 2, 3, 4, 5, 6], // lunedì … sabato (0 = domenica)
-  ore: [10, 11, 12, 15, 16],  // inizio delle lezioni (ora italiana); 8-10, 13-15 e dalle 17 sono già occupate
-  preavvisoOre: 24,           // si prenota almeno 24 ore prima
+  ore: [10, 11, 12, 14, 15, 16, 17, 18], // fasce 10–13 e 14–19, in ora italiana
+  limitiPrimiGiorni: [1, 1, 2, 2, 3],   // da oggi, contando i giorni di calendario
+  limiteSuccessivi: 6,
+  preavvisoMinuti: 45,        // lascia il tempo per completare il pagamento anche in giornata
+  preavvisoSpostamentoOre: 24,
   rimborsoOre: 24,            // spostamento o disdetta con rimborso fino a 24 ore prima dell'inizio (16 fino al 02/11)
   avvisoMinuti: 2,            // email con il link di Google Meet e promemoria nel calendario, 2 minuti prima
   settimane: 4,               // quante settimane in avanti si vedono

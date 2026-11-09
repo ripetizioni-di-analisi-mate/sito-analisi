@@ -48,7 +48,7 @@ const WHATSAPP = 'https://wa.me/393885680393';
 
       <section class="prenota-passo prenota-calendario" aria-labelledby="titolo-calendario">
         <h2 id="titolo-calendario" class="prenota-titolo"><span aria-hidden="true">2</span>Scegli giorno e ora</h2>
-        <p class="nota-passo">Puoi prenotare dal lunedì al sabato, con almeno {LEZIONI.preavvisoOre} ore di anticipo. Gli orari sono quelli italiani.</p>
+        <p class="nota-passo">Lezioni dal lunedì al sabato, dalle 10 alle 13 e dalle 14 alle 19 (ora italiana). Puoi prenotare anche in giornata, con almeno {LEZIONI.preavvisoMinuti} minuti di anticipo.</p>
         <div id="calendario" class="calendario-lezioni" data-whatsapp={WHATSAPP}>
           <p class="cal-carico" role="status">Caricamento degli orari liberi…</p>
         </div>
@@ -304,7 +304,7 @@ const WHATSAPP = 'https://wa.me/393885680393';
         return;
       }
       calendario(radice, d.orari as Orario[], (o) => { scelto = o; aggiornaRiepilogo(); });
-      paga.disabled = false;
+      paga.disabled = d.orari.length === 0;
     } catch {
       erroreCalendario('Non è stato possibile caricare gli orari.');
     }

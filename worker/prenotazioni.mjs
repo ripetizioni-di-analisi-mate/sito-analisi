@@ -1,7 +1,7 @@
 import { componiEmail, inviaEmailResend } from './email.mjs';
 // Prenotazione delle lezioni individuali (pagina /prenota).
-//  - orari: lunedì-sabato, 10-13 e 15-17 (src/data/lezioni.ts), almeno 24 ore prima;
-//  - il calendario Google di Carmine (collegato una volta dalla pagina /admin/lezioni) toglie gli orari già occupati
+//  - fasce e limiti giornalieri in src/data/lezioni.ts;
+//  - il calendario Google di Carmine (collegato dalla pagina /admin/lezioni) esclude gli orari già occupati
 //    e riceve un evento con il link di Google Meet e l'invito allo studente;
 //  - pagamento di 40 € con Stripe (account di Carmine); mentre si paga l'orario resta bloccato;
 //  - spostamento o disdetta con rimborso fino a 24 ore prima, dal link nell'email di conferma;
@@ -35,6 +35,13 @@ function occupateDB(o, da, a, escluso = '') {
                   AND (stato = 'pagata' OR (stato = 'in-attesa' AND scadenza > ?))`, a, da, escluso, Date.now());
 }
 
+function limiteRaggiunto(o, inizio, escluso = '') {
+  const { y, m, d } = partiRoma(inizio);
+  const da = daOraRoma(y, m, d, 0);
+  const a = daOraRoma(y, m, d + 1, 0);
+  return occupateDB(o, da, a, escluso).filter((l) => l.inizio >= da).length >= limiteGiorno(inizio, Date.now());
+}
+
 // Rotte interne del Durable Object (chiamate con aDO). Restituisce null se il percorso non è suo.
 export function archivioPrenotazioni(o, pathname, c) {
   const ora = new Date().toISOString();
@@ -42,8 +49,8 @@ export function archivioPrenotazioni(o, pathname, c) {
   switch (pathname) {
     case '/pren-occupate':
       return { occupate: occupateDB(o, c.da, c.a) };
-    case '/pren-blocca': { // il controllo e l'inserimento avvengono insieme: due studenti non possono prendere lo stesso orario
-      if (occupateDB(o, c.inizio, c.fine).length) return { ok: false, motivo: 'occupato' };
+    case '/pren-blocca': { // disponibilità e quota si controllano insieme all'inserimento
+      if (occupateDB(o, c.inizio, c.fine).length || limiteRaggiunto(o, c.inizio)) return { ok: false, motivo: 'occupato' };
       const attese = (campo, valore) => o.riga(`SELECT COUNT(*) AS n FROM lezioni WHERE ${campo} = ? AND stato = 'in-attesa' AND scadenza > ?`, valore, Date.now()).n;
       if (attese('email', c.email) >= MAX_ATTESE_EMAIL || (c.rete && attese('rete', c.rete) >= MAX_ATTESE_RETE)) return { ok: false, motivo: 'troppe' };
       o.sql.exec(`INSERT INTO lezioni (id, inizio, fine, materia, nome, email, telefono, universita, note, cf, rete, stato, scadenza, creato, aggiornato)
@@ -77,7 +84,7 @@ export function archivioPrenotazioni(o, pathname, c) {
     case '/pren-sposta': {
       const r = leggi(c.id);
       if (!r || r.stato !== 'pagata') return { ok: false, motivo: 'stato' };
-      if (occupateDB(o, c.inizio, c.fine, c.id).length) return { ok: false, motivo: 'occupato' };
+      if (occupateDB(o, c.inizio, c.fine, c.id).length || limiteRaggiunto(o, c.inizio, c.id)) return { ok: false, motivo: 'occupato' };
       o.sql.exec('UPDATE lezioni SET inizio = ?, fine = ?, spostamenti = spostamenti + 1, avvisata = NULL, aggiornato = ? WHERE id = ?', c.inizio, c.fine, ora, c.id);
       return { ok: true, lezione: leggi(c.id), prima: r };
     }
@@ -121,11 +128,18 @@ export function daOraRoma(y, m, d, h) {
   return t;
 }
 const due = (n) => String(n).padStart(2, '0');
+const giornoRoma = (istante) => {
+  const { y, m, d } = partiRoma(istante);
+  return Date.UTC(y, m - 1, d);
+};
+function limiteGiorno(inizio, adesso) {
+  const giorni = (giornoRoma(inizio) - giornoRoma(adesso)) / (24 * ORA_MS);
+  return LEZIONI.limitiPrimiGiorni[giorni] ?? LEZIONI.limiteSuccessivi;
+}
 
-// Tutti gli orari previsti dalle regole (giorni, ore, preavviso, settimane), senza guardare gli impegni.
+// Considera tutte le fasce da oggi, comprese quelle già trascorse per contare le prenotazioni della giornata.
 export function orariPrevisti(adesso = Date.now()) {
   const oggi = partiRoma(adesso);
-  const minimo = adesso + LEZIONI.preavvisoOre * ORA_MS;
   const fuori = [];
   for (let i = 0; i <= LEZIONI.settimane * 7; i++) {
     const g = new Date(Date.UTC(oggi.y, oggi.m - 1, oggi.d + i));
@@ -133,13 +147,41 @@ export function orariPrevisti(adesso = Date.now()) {
     const [y, m, d] = [g.getUTCFullYear(), g.getUTCMonth() + 1, g.getUTCDate()];
     for (const h of LEZIONI.ore) {
       const inizio = daOraRoma(y, m, d, h);
-      if (inizio < minimo) continue;
       fuori.push({ inizio, fine: inizio + LEZIONI.durata * 60000, giorno: `${y}-${due(m)}-${due(d)}`, ora: `${due(h)}:00` });
     }
   }
   return fuori;
 }
 const siSovrappone = (s, occ) => occ.some((x) => s.inizio < x.fine && s.fine > x.inizio);
+
+// Ordine pseudocasuale stabile, derivato dall'istante dello slot.
+function prioritaOrario({ inizio }) {
+  let h = inizio / ORA_MS;
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  return (h ^ (h >>> 16)) >>> 0;
+}
+
+function selezionaOrari(previsti, impegni, prenotazioni, adesso, minimo) {
+  const presi = new Map();
+  for (const l of prenotazioni) {
+    const giorno = giornoRoma(l.inizio);
+    presi.set(giorno, (presi.get(giorno) ?? 0) + 1);
+  }
+  const candidati = new Map();
+  for (const s of previsti) {
+    if (s.inizio < minimo || siSovrappone(s, impegni) || siSovrappone(s, prenotazioni)) continue;
+    const lista = candidati.get(s.giorno) ?? [];
+    lista.push(s);
+    candidati.set(s.giorno, lista);
+  }
+  return [...candidati.values()].flatMap((lista) => {
+    const { inizio } = lista[0];
+    const limite = Math.max(0, limiteGiorno(inizio, adesso) - (presi.get(giornoRoma(inizio)) ?? 0));
+    lista.sort((a, b) => prioritaOrario(a) - prioritaOrario(b));
+    return lista.slice(0, limite).sort((a, b) => a.inizio - b.inizio);
+  });
+}
 
 const GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
 const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
@@ -300,17 +342,18 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
   };
   const attivo = async () => Boolean(env.STRIPE_SECRET_KEY && (await tokenGoogle(env, aDO).catch(() => null)));
 
-  // Orari liberi: regole del sito, meno impegni del calendario Google, meno lezioni già prese.
-  const orariLiberi = async (escluso = '') => {
-    const previsti = orariPrevisti();
+  const orariLiberi = async (nostre = null) => {
+    const adesso = Date.now();
+    const previsti = orariPrevisti(adesso);
     if (!previsti.length) return [];
     const da = previsti[0].inizio, a = previsti.at(-1).fine;
     const [g, db] = await Promise.all([occupatoGoogle(env, aDO, da, a), aDO(env, '/pren-occupate', { da, a })]);
-    const nostre = escluso ? (await aDO(env, '/pren-leggi', { id: escluso })).lezione : null;
     // la lezione che si sta spostando occupa il suo orario anche in Google: quell'intervallo non conta
     const daGoogle = nostre ? g.filter((x) => !(x.inizio >= nostre.inizio && x.fine <= nostre.fine)) : g;
     const daDB = db.occupate.filter((x) => !(nostre && x.inizio === nostre.inizio && x.fine === nostre.fine));
-    return previsti.filter((s) => !siSovrappone(s, daGoogle) && !siSovrappone(s, daDB));
+    const minimo = adesso + (nostre ? LEZIONI.preavvisoSpostamentoOre * ORA_MS : LEZIONI.preavvisoMinuti * 60000);
+    const alternative = nostre ? previsti.filter((s) => s.inizio !== nostre.inizio) : previsti;
+    return selezionaOrari(alternative, daGoogle, daDB, adesso, minimo);
   };
   const pubblico = (l) => ({ materia: titoloMateria(l.materia), quando: quando(l.inizio, l.fine), inizio: l.inizio, stato: l.stato, meet: l.meet,
     nome: l.nome, email: l.email, rimborsabile: l.stato === 'pagata' && Date.now() <= l.inizio - LEZIONI.rimborsoOre * ORA_MS });
@@ -320,8 +363,8 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const base = { materie: MATERIE_LEZIONI, regole: LEZIONI };
     if (!(await attivo())) return json({ ...base, attivo: false, orari: [] }, 200, { 'cache-control': 'no-store' });
     try {
-      const orari = await orariLiberi();
-      return json({ ...base, attivo: true, orari: orari.map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora })) }, 200, { 'cache-control': 'no-store' });
+      const orari = (await orariLiberi()).map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora }));
+      return json({ ...base, attivo: true, orari }, 200, { 'cache-control': 'no-store' });
     } catch (e) {
       console.log('prenota disponibilita', String(e?.message || e));
       return json({ ...base, attivo: false, orari: [], errore: 'Il calendario non risponde. Riprova tra poco.' }, 503);
@@ -411,7 +454,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const l = await daToken((await corpo()).t);
     if (!l || l.stato !== 'pagata') return json({ errore: 'Prenotazione non trovata.' }, 404);
     try {
-      const orari = (await orariLiberi(l.id)).filter((s) => s.inizio !== l.inizio);
+      const orari = await orariLiberi(l);
       return json({ orari: orari.map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora })) }, 200, { 'cache-control': 'no-store' });
     } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
   }
@@ -421,7 +464,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (!l || l.stato !== 'pagata') return json({ errore: 'Prenotazione non trovata.' }, 404);
     if (Date.now() > l.inizio - LEZIONI.rimborsoOre * ORA_MS) return json({ errore: `Mancano meno di ${LEZIONI.rimborsoOre} ore alla lezione: non si può più spostare dal sito.` }, 409);
     let orari;
-    try { orari = await orariLiberi(l.id); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
+    try { orari = await orariLiberi(l); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
     const scelto = orari.find((s) => s.inizio === Number(c.inizio));
     if (!scelto) return json({ errore: 'Questo orario non è più libero. Scegline un altro.' }, 409);
     const r = await aDO(env, '/pren-sposta', { id: l.id, inizio: scelto.inizio, fine: scelto.fine });
@@ -602,5 +645,5 @@ ${collegato ? '<form method="post" action="/admin/google/scollega" style="margin
 </div></div>
 ${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Codice fiscale</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
     : '<p>Nessuna lezione prenotata dal sito negli ultimi 30 giorni o in programma.</p>'}
-<p class="piccolo">Per le prenotazioni restano le regole della pagina: dal lunedì al sabato, ${LEZIONI.ore.map((o) => `${o}-${o + 1}`).join(', ')}, almeno ${LEZIONI.preavvisoOre} ore prima; gli impegni del tuo calendario tolgono gli orari corrispondenti. Problemi o richieste fuori dalle regole: <a href="${WHATSAPP}">WhatsApp</a>.</p>`);
+<p class="piccolo">Lezioni dal lunedì al sabato nelle fasce 10–13 e 14–19. Per prenotare servono almeno ${LEZIONI.preavvisoMinuti} minuti di anticipo. La disponibilità dipende dagli impegni del calendario e dal limite giornaliero.</p>`);
 }
