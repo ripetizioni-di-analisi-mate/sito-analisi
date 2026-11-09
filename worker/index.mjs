@@ -1332,6 +1332,9 @@ export default {
         return json(await aDO(env, '/dati'));
       }
       if (p === '/admin/api/leghe' && req.method === 'GET') {
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) {
+          return json({ errore: 'Accesso amministrativo non configurato.' }, 503, { 'cache-control': 'no-store' });
+        }
         const dati = await aDO(env, '/dati-leghe', { settimana: url.searchParams.get('settimana') });
         return json(dati, dati.errore ? 400 : 200, { 'cache-control': 'no-store' });
       }

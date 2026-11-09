@@ -12,6 +12,7 @@ import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { nomeDallEmail } from './nomi.mjs';
 import { aggiungi, risposta, settimanaDi, giornoRoma } from './livelli.mjs';
 import { creaTabelleAvvisiLega } from './avvisi-lega.mjs';
+import { classificaConBot, minutoLega } from './bot-lega.mjs';
 
 const ALFABETO = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 const casuale = (n) => [...crypto.getRandomValues(new Uint8Array(n))].map((b) => ALFABETO[b % ALFABETO.length]).join('');
@@ -74,9 +75,10 @@ function classifiche(ar, settimana, lega, gruppo) {
 const zonaLega = (i, exp, n, { sale, scende }) => i < sale && exp > 0 ? 'sale' : i >= n - scende ? 'scende' : '';
 
 export function datiLegheAdmin(ar, settimanaRichiesta) {
-  const corrente = settimanaDi()[0];
-  const settimana = settimanaRichiesta || corrente;
   const adesso = Date.now();
+  const oggi = giornoRoma(adesso);
+  const corrente = settimanaDi(oggi)[0];
+  const settimana = settimanaRichiesta || corrente;
   let copia = ar.copiaLegheAdmin;
   if (!copia || copia.corrente !== corrente || adesso - copia.aggiornato >= 180000) {
     const precedenti = ar.righe('SELECT DISTINCT settimana FROM leghe WHERE settimana < ? ORDER BY settimana DESC LIMIT 11', corrente);
@@ -92,9 +94,15 @@ export function datiLegheAdmin(ar, settimanaRichiesta) {
     if (!gruppi.has(id)) gruppi.set(id, { id, lega: m.lega, numero: m.gruppo, membri: [] });
     gruppi.get(id).membri.push({ nome: m.nome || nomeDallEmail(m.email) || 'Studente', exp: m.settimanali });
   }
-  for (const { lega, membri } of gruppi.values()) {
-    const quote = quoteLega(membri.length, lega);
-    membri.forEach((m, i) => { m.zona = zonaLega(i, m.exp, membri.length, quote); });
+  const minuto = minutoLega(adesso);
+  for (const g of gruppi.values()) {
+    const studenti = g.membri;
+    g.studenti = studenti.length;
+    const quote = quoteLega(g.studenti, g.lega);
+    studenti.forEach((m, i) => { m.zona = zonaLega(i, m.exp, g.studenti, quote); });
+    if (settimana === corrente) {
+      g.membri = classificaConBot(studenti, { settimana, lega: g.lega, gruppo: g.numero, oggi, minuto });
+    }
   }
   const dati = { corrente, settimana, settimane: copia.settimane, aggiornato: adesso, leghe: LEGHE, gruppi: [...gruppi.values()] };
   copia.dati.set(settimana, dati);
@@ -128,11 +136,24 @@ export function entraInLega(ar, email) {
   ar.sql.exec('INSERT OR IGNORE INTO leghe (email, settimana, lega, gruppo, entrato) VALUES (?, ?, ?, ?, ?)', email, sett, lega, gruppo, Date.now());
 }
 
+// La classifica di gioco include i concorrenti simulati. Esiti e sorpassi usano le sole righe di archivio.
+function gruppoDiGioco(ar, email, settimana, io, oggi, ora) {
+  const cl = classifiche(ar, settimana, io.lega, io.gruppo);
+  const quote = quoteLega(cl.length, io.lega);
+  const studenti = cl.map((m, i) => ({
+    nome: nomePubblico(m), io: m.email === email, exp: m.settimanali, livello: livelloDa(m.tot).livello,
+    posizioneStudente: i + 1, zona: zonaLega(i, m.settimanali, cl.length, quote),
+  }));
+  const gruppo = classificaConBot(studenti, { settimana, lega: io.lega, gruppo: io.gruppo, oggi, minuto: minutoLega(ora) });
+  return { gruppo, conSimulati: gruppo.length > studenti.length, quote };
+}
+
 function statoLega(ar, c) {
   const { email } = c;
   const l = c.lingua === 'en' ? 'en' : 'it';
   const nomi = l === 'en' ? LEGHE_EN : LEGHE;
-  const sett = settimanaDi()[0];
+  const ora = Date.now(), oggi = giornoRoma(ora);
+  const sett = settimanaDi(oggi)[0];
   const fine = inizioGiorno(spostaGiorno(sett, 7));
   const u = ar.riga('SELECT email, nome, soprannome, COALESCE(pubblico, 1) AS pubblico, COALESCE(lega, 0) AS lega, COALESCE(avvisi_lega, promemoria, 1) AS avvisi_lega FROM utenti WHERE email = ?', email);
   if (!u) return { errore: 'utente' };
@@ -143,29 +164,29 @@ function statoLega(ar, c) {
     leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, avvisiLega: u.avvisi_lega !== 0, esito,
   };
   if (!io) return { ...base, lega: u.lega, nomeLega: nomi[u.lega], attesa: true };
-  const cl = classifiche(ar, sett, io.lega, io.gruppo);
-  const quote = quoteLega(cl.length, io.lega);
+  const { gruppo, conSimulati, quote } = gruppoDiGioco(ar, email, sett, io, oggi, ora);
   return {
-    ...base, lega: io.lega, nomeLega: nomi[io.lega], ...quote,
-    gruppo: cl.map((m, i) => ({
-      pos: i + 1, nome: m.email === email ? nomePubblico(u) : nomePubblico(m), io: m.email === email,
-      exp: m.settimanali, livello: livelloDa(m.tot).livello,
-      zona: zonaLega(i, m.settimanali, cl.length, quote),
+    ...base, lega: io.lega, nomeLega: nomi[io.lega], ...quote, conSimulati,
+    gruppo: gruppo.map((m) => ({
+      pos: m.pos, nome: m.nome, exp: m.exp, livello: m.livello, io: Boolean(m.io),
+      zona: !conSimulati || m.io ? m.zona : '',
+      ...(m.io ? { posizioneStudente: m.posizioneStudente } : {}),
     })),
   };
 }
 
-// Riassunto per il pannello del livello e lo spazio personale: lega, posizione e numero di studenti del gruppo.
+// Il pannello del livello mostra la stessa posizione della classifica di gioco.
 export function riassuntoLega(ar, email, l = 'it') {
   const nomi = l === 'en' ? LEGHE_EN : LEGHE;
-  const sett = settimanaDi()[0];
+  const ora = Date.now(), oggi = giornoRoma(ora);
+  const sett = settimanaDi(oggi)[0];
   const io = ar.riga('SELECT lega, gruppo FROM leghe WHERE email = ? AND settimana = ?', email, sett);
   if (!io) {
     const lega = ar.riga('SELECT COALESCE(lega, 0) AS l FROM utenti WHERE email = ?', email)?.l ?? 0;
     return { lega, nome: nomi[lega], posizione: null, membri: 0 };
   }
-  const cl = classifiche(ar, sett, io.lega, io.gruppo);
-  return { lega: io.lega, nome: nomi[io.lega], posizione: cl.findIndex((m) => m.email === email) + 1, membri: cl.length };
+  const { gruppo } = gruppoDiGioco(ar, email, sett, io, oggi, ora);
+  return { lega: io.lega, nome: nomi[io.lega], posizione: gruppo.find((m) => m.io)?.pos ?? null, membri: gruppo.length };
 }
 
 // ================= duelli =================

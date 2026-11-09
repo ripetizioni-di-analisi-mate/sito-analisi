@@ -185,7 +185,7 @@ td.destra,th.destra{text-align:right}
 .chip.corso{background:color-mix(in srgb,#7a5fb0 16%,transparent);color:#7a5fb0}
 .leghe-periodo{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
 .leghe-periodo label,.leghe-gruppo label{display:flex;gap:.55rem;align-items:center;font-size:.88rem;font-weight:600}
-.leghe-gruppo{padding:.65rem 1.2rem .85rem}
+.leghe-gruppo{display:flex;align-items:center;gap:.5rem 1.2rem;flex-wrap:wrap;padding:.65rem 1.2rem .85rem}
 .leghe-gruppo select{min-width:0;max-width:100%}
 .leghe-kpi .kpi{padding-bottom:1rem}
 .leghe-classifica td:nth-child(2){overflow-wrap:anywhere}
@@ -325,7 +325,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
 
   let D = null, giorni = 30, vista = 'panoramica', aggiornato = null, inCorso = false;
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
-  const statoLeghe = { dati: null, settimana: '', gruppo: '', caricamento: false, errore: false };
+  const statoLeghe = { dati: null, settimana: '', gruppo: '', mostraBot: false, caricamento: false, errore: false };
   try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
@@ -687,13 +687,14 @@ function cliente(MATERIE, A_PAGAMENTO) {
       return;
     }
     const corrente = d.settimana === d.corrente;
-    const membri = d.gruppi.flatMap((g) => g.membri);
+    const membri = d.gruppi.flatMap((g) => g.membri).filter((m) => !m.bot);
     const totaleExp = somma(membri.map((m) => m.exp));
     const riepilogo = d.leghe.map((nome, i) => {
       const gruppi = d.gruppi.filter((g) => g.lega === i);
-      return { nome, valore: somma(gruppi.map((g) => g.membri.length)), extra: '<small>' + gruppi.length + (gruppi.length === 1 ? ' gruppo' : ' gruppi') + '</small>' };
+      return { nome, valore: somma(gruppi.map((g) => g.studenti)), extra: '<small>' + gruppi.length + (gruppi.length === 1 ? ' gruppo' : ' gruppi') + '</small>' };
     }).filter((r) => r.valore);
     const gruppo = d.gruppi.find((g) => g.id === statoLeghe.gruppo) || d.gruppi[0];
+    const mostraBot = statoLeghe.mostraBot;
     const periodo = d.settimane.map(({ inizio, fine }) => '<option value="' + (inizio === d.corrente ? '' : esc(inizio)) + '"' +
       (inizio === d.settimana ? ' selected' : '') + '>' + breveData(inizio) + ' – ' + breveData(fine) + '/' + fine.slice(0, 4) + '</option>').join('');
     const zone = { sale: '<span class="chip pagante">Promozione</span>', scende: '<span class="chip attesa">Retrocessione</span>' };
@@ -701,20 +702,27 @@ function cliente(MATERIE, A_PAGAMENTO) {
     $('#vista').innerHTML = '<div class="leghe-periodo"><label>Settimana <select class="scelta" id="settimana-lega"' +
       (statoLeghe.caricamento ? ' disabled' : '') + '>' + periodo + '</select></label>' +
       '<span class="chip' + (corrente ? ' pagante' : '') + '">' + (corrente ? 'In corso' : 'Conclusa') + '</span></div>' +
-      '<div class="kpi-riga leghe-kpi">' + card('Partecipanti', membri.length) + card('Gruppi attivi', d.gruppi.length) + card('EXP settimanali', totaleExp) +
+      '<div class="kpi-riga leghe-kpi">' + card('Studenti', membri.length) + card('Gruppi attivi', d.gruppi.length) + card('EXP degli studenti', totaleExp) +
       card('In zona promozione', membri.filter((m) => m.zona === 'sale').length) + card('In zona retrocessione', membri.filter((m) => m.zona === 'scende').length) + '</div>' +
-      (gruppo ? '<div class="due"><section class="card"><header><h2>Classifica per gruppo</h2><span class="nota">' + nf.format(gruppo.membri.length) + ' partecipanti</span></header>' +
+      (gruppo ? '<div class="due"><section class="card"><header><h2>Classifica per gruppo</h2><span class="nota">' + nf.format(gruppo.membri.length) + (gruppo.membri.length === 1 ? ' partecipante' : ' partecipanti') +
+        (mostraBot ? ' · ' + nf.format(gruppo.membri.length - gruppo.studenti) + ' bot' : '') + '</span></header>' +
         '<div class="leghe-gruppo"><label>Gruppo <select class="scelta" id="gruppo-lega">' + d.gruppi.map((g) => '<option value="' + esc(g.id) + '"' + (g.id === gruppo.id ? ' selected' : '') + '>' +
-          esc(d.leghe[g.lega]) + ' · Gruppo ' + nf.format(g.numero) + '</option>').join('') + '</select></label></div>' +
-        '<div class="tabella"><table class="leghe-classifica" aria-label="Classifica del gruppo"><thead><tr><th scope="col">Pos.</th><th scope="col">Studente</th><th scope="col" class="destra">EXP</th><th scope="col">Zona</th></tr></thead><tbody>' +
-        gruppo.membri.map((m, i) => '<tr><td class="cifra">' + nf.format(i + 1) + '</td><td>' + esc(m.nome) + '</td><td class="destra cifra">' + nf.format(m.exp) + '</td><td>' + (zone[m.zona] || '—') + '</td></tr>').join('') +
-        '</tbody></table></div></section><section class="card"><header><h2>Partecipanti per lega</h2></header><div class="corpo">' + barre(riepilogo, { quota: false }) + '</div></section></div>' :
+          esc(d.leghe[g.lega]) + ' · Gruppo ' + nf.format(g.numero) + '</option>').join('') + '</select></label>' +
+        '<label><input type="checkbox" id="mostra-bot-lega" aria-controls="classifica-gruppo"' + (mostraBot ? ' checked' : '') + '> Mostra i bot</label></div>' +
+        '<div class="tabella"><table class="leghe-classifica" id="classifica-gruppo" aria-label="Classifica del gruppo"><thead><tr><th scope="col">Pos.</th><th scope="col">Partecipante</th><th scope="col" class="destra">EXP</th><th scope="col">Zona</th></tr></thead><tbody>' +
+        gruppo.membri.map((m, i) => '<tr><td class="cifra">' + nf.format(i + 1) + '</td><td>' + esc(m.nome) + (mostraBot && m.bot ? ' <span class="chip">Bot</span>' : '') + '</td><td class="destra cifra">' + nf.format(m.exp) + '</td><td>' + (zone[m.zona] || '—') + '</td></tr>').join('') +
+        '</tbody></table></div></section><section class="card"><header><h2>Studenti per lega</h2></header><div class="corpo">' + barre(riepilogo, { quota: false }) + '</div></section></div>' :
         '<section class="card"><div class="vuoto"><b>Nessun partecipante questa settimana</b>Gli studenti entrano in un gruppo quando guadagnano i primi EXP della settimana.</div></section>');
     $('#settimana-lega').addEventListener('change', (e) => caricaLeghe(e.target.value));
     $('#gruppo-lega')?.addEventListener('change', (e) => {
       statoLeghe.gruppo = e.target.value;
       leghe();
       $('#gruppo-lega').focus();
+    });
+    $('#mostra-bot-lega')?.addEventListener('change', (e) => {
+      statoLeghe.mostraBot = e.target.checked;
+      leghe();
+      $('#mostra-bot-lega').focus();
     });
   }
 
