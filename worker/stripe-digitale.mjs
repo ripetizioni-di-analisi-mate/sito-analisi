@@ -90,8 +90,13 @@ export function archivioStripeDigitale(o, p, c) {
       o.sql.exec('UPDATE ordini_stripe SET sessione=COALESCE(sessione,?) WHERE id=?', c.sessione, c.id);
       return { ok: true };
     }
+    case '/dig-fallito':
     case '/dig-scaduto': {
-      o.sql.exec("UPDATE ordini_stripe SET stato='scaduto',fatturazione=NULL WHERE id=? AND stato='in_attesa'", c.id);
+      o.sql.exec(
+        "UPDATE ordini_stripe SET stato=?,fatturazione=NULL WHERE id=? AND stato='in_attesa'",
+        p === '/dig-fallito' ? 'fallito' : 'scaduto',
+        c.id,
+      );
       return { ok: true };
     }
     case '/dig-conferma': {
@@ -266,7 +271,6 @@ async function apriStripe(env, r, origine) {
       customer_email: r.email,
       expires_at: Math.ceil(Date.parse(r.creato) / 1000) + DURATA,
       metadata: { ordine_digitale: r.id },
-      payment_method_types: { 0: 'card' },
       payment_intent_data: { receipt_email: r.email, metadata: { ordine_digitale: r.id } },
       line_items: {
         0: { quantity: 1, price_data: { currency: 'eur', unit_amount: r.in_centesimi, product_data: { name: q.titolo } } },
@@ -323,10 +327,17 @@ export async function eventoDigitale(env, h, ev) {
   const s = ev.data?.object,
     id = s?.metadata?.ordine_digitale;
   if (!id || !ev.type.startsWith('checkout.session.')) return null;
-  if (ev.type === 'checkout.session.expired') {
+  if (ev.type === 'checkout.session.expired' || ev.type === 'checkout.session.async_payment_failed') {
     const { r } = await h.aDO(env, '/dig-leggi', { id });
-    if (r && s.status === 'expired' && sessioneCoerente(s, r)) await h.aDO(env, '/dig-scaduto', { id });
-  } else if (ev.type === 'checkout.session.completed' && s.payment_status === 'paid') {
+    if (r && sessioneCoerente(s, r)) {
+      if (ev.type === 'checkout.session.expired' && s.status === 'expired') await h.aDO(env, '/dig-scaduto', { id });
+      if (ev.type === 'checkout.session.async_payment_failed' && s.status === 'complete' && s.payment_status === 'unpaid')
+        await h.aDO(env, '/dig-fallito', { id });
+    }
+  } else if (
+    ['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(ev.type) &&
+    s.payment_status === 'paid'
+  ) {
     const esito = await h.aDO(env, '/dig-pagato', { id, sessione: s });
     if (!esito?.ok) return errore('Ordine non coerente.', 400);
     if (!(await confermaOrdine(env, h, esito.r))) return errore('Conferma in attesa.', 503);
@@ -336,17 +347,21 @@ export async function eventoDigitale(env, h, ev) {
 
 async function riconcilia(env, h, r) {
   if (r.stato !== 'in_attesa' || !r.sessione) return r;
-  const s = await stripe(env, 'GET', '/checkout/sessions/' + encodeURIComponent(r.sessione));
+  const s = await stripe(env, 'GET', '/checkout/sessions/' + encodeURIComponent(r.sessione) + '?expand[]=payment_intent');
   if (!sessioneCoerente(s, r)) throw new Error('Sessione non coerente.');
   if (s.status === 'open') return { ...r, url: s.url };
-  if (s.payment_status === 'paid' || s.status === 'expired') {
-    await eventoDigitale(env, h, {
-      type: s.status === 'expired' ? 'checkout.session.expired' : 'checkout.session.completed',
-      data: { object: s },
-    });
-    return (await h.aDO(env, '/dig-leggi', { id: r.id })).r;
+  const pagamento = s.payment_intent;
+  if (pagamento && typeof pagamento === 'object') s.payment_intent = pagamento.id;
+  let tipo;
+  if (s.status === 'expired') tipo = 'checkout.session.expired';
+  else if (s.status === 'complete' && s.payment_status === 'paid') tipo = 'checkout.session.completed';
+  else if (s.status === 'complete' && s.payment_status === 'unpaid') {
+    if (['requires_payment_method', 'canceled'].includes(pagamento?.status)) tipo = 'checkout.session.async_payment_failed';
+    else return { ...r, stato: 'in_elaborazione' };
   }
-  return r;
+  if (!tipo) throw new Error('Stato del pagamento non riconosciuto.');
+  await eventoDigitale(env, h, { type: tipo, data: { object: s } });
+  return (await h.aDO(env, '/dig-leggi', { id: r.id })).r;
 }
 
 export async function recuperaOrdiniDigitali(env, h) {
@@ -391,6 +406,7 @@ export async function gestisciAcquisti(req, env, p, h) {
       titolo: ordine.ordine.titolo,
       totale: ordine.in_centesimi,
       destinazione: pref + '/account',
+      riprova: ordine.stato === 'fallito' ? pref + '/acquisto?' + new URLSearchParams(ordine.ordine.selezione) : undefined,
     });
   }
   if (req.method !== 'POST') return errore('Metodo non consentito.', 405);
@@ -428,6 +444,10 @@ export async function gestisciAcquisti(req, env, p, h) {
       await h.aDO(env, '/dig-scaduto', { id: r.id });
       return risposta({ stato: 'scaduto' });
     } catch {
+      try {
+        const ordine = await riconcilia(env, h, r);
+        if (ordine.stato !== 'in_attesa') return risposta({ stato: ordine.stato, sessione: r.sessione });
+      } catch { /* La sessione resta riservata se Stripe non risponde. */ }
       return errore('Verifica il tuo ordine prima di riprovare.', 409);
     }
   }
@@ -457,7 +477,8 @@ export async function gestisciAcquisti(req, env, p, h) {
       const { r } = await h.aDO(env, '/dig-leggi', { id: apertura.pendente });
       const precedente = await riconcilia(env, h, r);
       if (precedente.stato === 'pagato') return errore('Hai già acquistato questo materiale.', 409);
-      if (precedente.stato === 'scaduto') apertura = await h.aDO(env, '/dig-apri', args);
+      if (precedente.stato === 'in_elaborazione') return risposta({ sessione: r.sessione });
+      if (precedente.stato === 'scaduto' || precedente.stato === 'fallito') apertura = await h.aDO(env, '/dig-apri', args);
       else if (!apertura.uguale)
         return risposta(
           {
@@ -467,6 +488,7 @@ export async function gestisciAcquisti(req, env, p, h) {
           409,
         );
       else if (precedente.url) return risposta({ url: precedente.url });
+      else if (r.sessione) return errore('Verifica lo stato del pagamento prima di riprovare.', 409);
       else apertura = { id: r.id };
     }
     if (apertura.posseduto || apertura.scontoUsato)

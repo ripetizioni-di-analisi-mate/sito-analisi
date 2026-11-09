@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { riepilogoMaterie } from '../src/data/pacchetti.mjs';
+import { VERSIONE_CONDIZIONI } from '../src/data/consenso-digitale.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const temp = mkdtempSync(join(tmpdir(), 'stripe-digitale-'));
@@ -77,7 +78,7 @@ function banco(t) {
     messaggi = 0,
     aperte = 0,
     statoErrore = 0;
-  const sessioni = new Map();
+  const sessioni = new Map(), statiPagamento = new Map();
   const h = {
     MATERIE: [
       ['analisi-1', 49],
@@ -110,7 +111,7 @@ function banco(t) {
       assert.doesNotMatch(opts.body, /RSSMRA|Via Esempio/);
       const ricevuta = JSON.parse(opts.body);
       assert.ok(ricevuta.attachments[0].content.length > 100);
-      assert.match(ricevuta.text, /2026-11-09.1/);
+      assert.ok(ricevuta.text.includes(VERSIONE_CONDIZIONI));
       messaggi++;
       return Response.json({ id: 'em_test' });
     }
@@ -126,6 +127,7 @@ function banco(t) {
         ordine = f.get('metadata[ordine_digitale]');
       assert.ok(f.get('cancel_url').includes(ordine));
       assert.equal(f.get('customer_email'), io.email);
+      assert.equal(f.has('payment_method_types[0]'), false);
       assert.doesNotMatch(decodeURIComponent(f.toString()), /RSSMRA|Via Esempio/);
       const sess = {
         id,
@@ -142,11 +144,19 @@ function banco(t) {
       sessioni.set(id, sess);
       return Response.json(sess);
     }
-    const m = u.match(/checkout\/sessions\/(cs_test_\w+)(\/expire)?$/);
+    const url = new URL(u);
+    const m = url.pathname.match(/checkout\/sessions\/(cs_test_\w+)(\/expire)?$/);
     assert.ok(m, u);
     const sess = sessioni.get(m[1]);
-    if (m[2]) sess.status = 'expired';
-    return Response.json(sess);
+    if (m[2]) {
+      if (sess.status !== 'open') return Response.json({ error: { message: 'Session is not open' } }, { status: 400 });
+      sess.status = 'expired';
+      return Response.json(sess);
+    }
+    assert.equal(url.searchParams.get('expand[]'), 'payment_intent');
+    return Response.json({ ...sess, payment_intent: sess.payment_intent && {
+      id: sess.payment_intent, status: statiPagamento.get(sess.payment_intent) || (sess.payment_status === 'paid' ? 'succeeded' : 'processing'),
+    } });
   });
   const call = async (path, data) => {
     const req = new Request(origine + '/api/acquisti/' + path, {
@@ -165,6 +175,7 @@ function banco(t) {
     h,
     call,
     sessioni,
+    statiPagamento,
     sconto: (v) => {
       sconto = v;
     },
@@ -180,7 +191,7 @@ const acquista = (sel, totaleAtteso) => ({
   totaleAtteso,
   condizioni: true,
   immediato: true,
-  versioneCondizioni: '2026-11-09.1',
+  versioneCondizioni: VERSIONE_CONDIZIONI,
   fatturazione: fattura,
 });
 test('prezzi server, dati e consensi, doppio checkout, prova di pagamento ed esito riservato', async (t) => {
@@ -236,6 +247,58 @@ test('bundle materie e video, accessi preesistenti conservati, abbandono e cance
   assert.deepEqual(b.o.materieDi(b.io.email), ['analisi-1', 'analisi-2', 'precorso', 'video-analisi-1-e-2']);
   assert.equal(b.o.riga('SELECT SUM(importo) n FROM acquisti').n, 499);
   assert.equal((await b.call('checkout', acquista({ tipo: 'videocorso', slug: 'analisi-1' }, 36000))).status, 400);
+});
+
+test('pagamento differito: attende senza riaprire Stripe, abilita e invia la conferma una volta sola', async (t) => {
+  const b = banco(t);
+  const ordine = acquista({ tipo: 'materia', slug: 'analisi-1' }, 4900);
+  await b.call('checkout', ordine);
+  const [s] = b.sessioni.values();
+  const notifica = (type, object = s) => eventoDigitale(b.env, b.h, { type: 'checkout.session.' + type, data: { object } });
+  Object.assign(s, { status: 'complete', payment_intent: 'pi_differito' });
+  await notifica('completed');
+  await notifica('async_payment_failed', { ...s, amount_total: 1 });
+  assert.equal((await b.call('stato?session_id=' + s.id)).stato, 'in_elaborazione');
+  assert.equal((await b.call('checkout', ordine)).sessione, s.id);
+  assert.equal((await b.call('checkout', { ...ordine, fatturazione: { ...fattura, nome: 'Secondo' } })).sessione, s.id);
+  assert.equal((await b.call('annulla', { id: s.client_reference_id })).stato, 'in_elaborazione');
+  assert.equal(b.aperte(), 1);
+  assert.deepEqual(b.o.materieDi(b.io.email), []);
+  assert.equal(b.messaggi(), 0);
+  s.payment_status = 'paid';
+  await notifica('async_payment_succeeded');
+  await notifica('async_payment_succeeded');
+  await notifica('completed', { ...s, payment_status: 'unpaid' });
+  await notifica('async_payment_failed', { ...s, payment_status: 'unpaid' });
+  assert.equal((await b.call('stato?session_id=' + s.id)).stato, 'pagato');
+  assert.deepEqual(b.o.materieDi(b.io.email), ['analisi-1']);
+  assert.equal(b.o.riga('SELECT COUNT(*) n FROM acquisti').n, 1);
+  assert.equal(b.messaggi(), 1);
+});
+
+test('fallimento differito: webhook o recupero periodico sbloccano un nuovo acquisto della stessa selezione', async (t) => {
+  const b = banco(t);
+  const ordine = acquista({ tipo: 'materia', slug: 'analisi-1' }, 4900);
+  await b.call('checkout', ordine);
+  const [s] = b.sessioni.values();
+  Object.assign(s, { status: 'complete', payment_intent: 'pi_fallito' });
+  for (let i = 0; i < 2; i++)
+    await eventoDigitale(b.env, b.h, { type: 'checkout.session.async_payment_failed', data: { object: s } });
+  const esito = await b.call('stato?session_id=' + s.id);
+  assert.equal(esito.stato, 'fallito');
+  assert.equal(esito.riprova, '/acquisto?tipo=materia&slug=analisi-1');
+  assert.equal(b.o.riga('SELECT fatturazione FROM ordini_stripe WHERE id=?', s.client_reference_id).fatturazione, null);
+  assert.equal((await b.call('checkout', ordine)).status, 200);
+  const seconda = [...b.sessioni.values()][1];
+  Object.assign(seconda, { status: 'complete', payment_intent: 'pi_recuperato' });
+  b.statiPagamento.set(seconda.payment_intent, 'requires_payment_method');
+  b.o.sql.exec("UPDATE ordini_stripe SET creato='2026-01-01' WHERE id=?", seconda.client_reference_id);
+  await recuperaOrdiniDigitali(b.env, b.h);
+  assert.equal(b.o.riga('SELECT stato FROM ordini_stripe WHERE id=?', seconda.client_reference_id).stato, 'fallito');
+  assert.deepEqual(b.o.materieDi(b.io.email), []);
+  assert.equal(b.messaggi(), 0);
+  assert.equal((await b.call('checkout', ordine)).status, 200);
+  assert.equal(b.aperte(), 3);
 });
 
 test('requisiti aggiornati nel registro prima di aprire Stripe e riprova dopo errore certo del provider', async (t) => {

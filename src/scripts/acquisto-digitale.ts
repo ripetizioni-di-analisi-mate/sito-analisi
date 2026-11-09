@@ -97,6 +97,16 @@ async function esito(sessione: string, tentativo = 0): Promise<void> {
     mostraAzione(en ? 'Browse subjects' : 'Vai alle materie', pref + '/prezzi');
     return;
   }
+  if (d.stato === 'fallito') {
+    stato.textContent = en ? 'Your payment was unsuccessful. You can try again with another payment method.' : 'Il pagamento non è riuscito. Puoi riprovare con un altro metodo di pagamento.';
+    mostraAzione(en ? 'Try again' : 'Riprova', d.riprova);
+    return;
+  }
+  if (d.stato === 'in_elaborazione') {
+    stato.textContent = en ? 'Your payment is processing. We’ll email you when it is confirmed. You can check its status here.' : 'Il pagamento è in elaborazione. Ti invieremo un’email di conferma quando sarà completato. Puoi controllare lo stato da qui.';
+    mostraAzione(en ? 'Check payment status' : 'Controlla lo stato del pagamento', location.href);
+    return;
+  }
   if (tentativo >= 15) {
     stato.textContent = en ? 'Your payment is still being verified. You can check again here in a moment.' : 'La verifica del pagamento è ancora in corso. Tra poco puoi controllare nuovamente lo stato da qui.';
     mostraAzione(en ? 'Check payment status' : 'Controlla lo stato del pagamento', location.href);
@@ -114,15 +124,16 @@ async function apri() {
   if (annullato) {
     const d = await richiedi('annulla', { id: annullato });
     if (!d) return;
+    if (d.stato === 'in_elaborazione') return mostraStatoSessione(d.sessione);
     if (d.stato === 'pagato') {
       stato.textContent = en ? 'Payment already confirmed. Your purchase is available in your account.' : 'Il pagamento risulta già confermato. Il materiale è disponibile nel tuo account.';
       mostraAzione(en ? 'Go to your account' : 'Vai al tuo account', pref + '/account');
       return;
     }
-    if (d.stato !== 'scaduto') throw new Error(en ? 'Check the status of your previous payment before trying again.' : 'Verifica lo stato del pagamento precedente prima di riprovare.');
+    if (!['scaduto', 'fallito'].includes(d.stato)) throw new Error(en ? 'Check the status of your previous payment before trying again.' : 'Verifica lo stato del pagamento precedente prima di riprovare.');
     params.delete('annullato');
     history.replaceState(null, '', location.pathname + '?' + params);
-    stato.textContent = en ? 'The previous checkout was cancelled. You can review the order below.' : 'Il pagamento precedente è stato annullato. Qui puoi ricontrollare l’ordine.';
+    stato.textContent = en ? 'The previous payment was not completed. You can review the order below.' : 'Il pagamento precedente non è stato completato. Qui puoi ricontrollare l’ordine.';
   } else stato.textContent = '';
   if (!['materia','videocorso','materie','video'].includes(tipo || '')) {
     stato.textContent = en ? 'Choose a subject or course to start your order.' : 'Scegli una materia o un videocorso per iniziare l’acquisto.';
@@ -132,12 +143,17 @@ async function apri() {
   await preventivo();
 }
 
+function mostraStatoSessione(sessione: string) {
+  location.assign(location.pathname + '?' + new URLSearchParams({ session_id: sessione }));
+}
+
 annullaPendente.addEventListener('click', async () => {
   annullaPendente.disabled = true;
   paga.disabled = true;
   try {
     const d = await richiedi('annulla', { id: annullaPendente.dataset.ordine });
     if (!d) return;
+    if (d.stato === 'in_elaborazione') return mostraStatoSessione(d.sessione);
     annullaPendente.hidden = true;
     if (d.stato === 'pagato') {
       form.hidden = true;
@@ -147,7 +163,7 @@ annullaPendente.addEventListener('click', async () => {
     }
     errore.textContent = '';
     await preventivo();
-    stato.textContent = en ? 'The previous checkout was cancelled. You can now use the billing details below.' : 'Il pagamento precedente è stato annullato. Puoi proseguire con i dati di fatturazione qui sotto.';
+    stato.textContent = en ? 'The previous payment was not completed. You can now use the billing details below.' : 'Il pagamento precedente non è stato completato. Puoi proseguire con i dati di fatturazione qui sotto.';
   } catch (err) { errore.textContent = err instanceof TypeError ? messaggioRete : (err as Error).message; }
   finally { annullaPendente.disabled = false; }
 });
@@ -165,6 +181,7 @@ form.addEventListener('submit', async (e) => {
     const d = await richiedi('checkout', { ...selezione, lingua: en ? 'en' : 'it', totaleAtteso,
       fatturazione: datiIntestatario(f), versioneCondizioni: f.get('versioneCondizioni'), condizioni: f.has('condizioni'), immediato: f.has('immediato') });
     if (!d) return;
+    if (d.sessione) return mostraStatoSessione(d.sessione);
     const url = new URL(d.url);
     if (url.origin !== 'https://checkout.stripe.com') throw new Error(en ? 'Payment link unavailable.' : 'Link al pagamento non disponibile.');
     location.assign(url.href);
