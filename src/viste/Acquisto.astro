@@ -17,6 +17,7 @@ const materie = Object.fromEntries(materieL(lingua).filter((m) => m.attiva && m.
     <p id="stato-acquisto" role="status" aria-live="polite">{en ? 'Loading your order…' : 'Caricamento dell’ordine…'}</p>
     <noscript>{en ? 'Enable JavaScript to complete your purchase.' : 'Per completare l’acquisto, attiva JavaScript nel browser.'}</noscript>
     <a class="bottone-primario" id="azione-acquisto" hidden></a>
+    <form id="calcolatore-cf-locale" hidden></form>
     <form id="modulo-digitale" hidden>
       <input type="hidden" name="versioneCondizioni" value={VERSIONE_CONDIZIONI} />
       <section class="carrello" aria-labelledby="titolo-prodotto">

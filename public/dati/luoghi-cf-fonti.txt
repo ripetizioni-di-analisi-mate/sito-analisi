@@ -1,0 +1,39 @@
+Luoghi di nascita per il codice fiscale
+
+Archivi ANPR
+Dati del Ministero dell’Interno, Anagrafe Nazionale della Popolazione Residente (ANPR).
+Fonti indicate da ANPR per i singoli record: ISTAT, Agenzia delle Entrate e MAECI.
+Licenza Creative Commons Attribuzione 4.0 Internazionale.
+https://creativecommons.org/licenses/by/4.0/
+https://github.com/italia/anpr/blob/master/src/archivi/ANPR_archivio_comuni_legenda.md
+https://www.anagrafenazionale.interno.it/note-legali/
+
+Originali elaborati il 9 novembre 2026
+• Archivio storico dei Comuni ANPR. Ultimo aggiornamento nei record: 4 giugno 2026.
+  https://www.anagrafenazionale.interno.it/wp-content/uploads/ANPR_archivio_comuni.csv
+  SHA-256 2a83f63414e43eae4ceba69b3c752d41fe8d091ff5a793fed3a5733041535530
+• Tabella 2, Stati esteri. Data di modifica del foglio: 12 gennaio 2024.
+  https://www.anagrafenazionale.interno.it/wp-content/uploads/tabella_2_statiesteri.xlsx
+  SHA-256 9a1843f89ad6a0f6809bee93150c2c8f4a1d92130eddfdd03657b270614b4ed6
+Copie dei due file identificati da queste impronte:
+https://github.com/arro000/ValiCore/tree/846140c08c0f08c4a05e5c6e329b40d012ffec72/data/sources
+
+Classificazione storica degli Stati esteri
+Fonte: Agenzia del Territorio, Ministero dell'Economia e delle Finanze.
+Pubblicazione dei dati: Regione Piemonte e CSI Piemonte, «Codifiche stati esteri -
+Classificazione Ministero», CC BY 4.0.
+https://www.dati.gov.it/node/view-dataset/dataset?id=9bf0bf05-6ac7-4756-8e11-8ab29ae54596
+Copia della tabella distribuita dalla Regione nel progetto Conam (29 luglio 2021).
+Sono stati estratti i campi della classificazione, senza eseguire il codice SQL.
+https://github.com/regione-piemonte/conam/blob/745e15b6f7110924279511588e4a1523d74b7795/conamdb/src/sql/incr/1.1.0-52-Popola_dt_stati_esteri_ministero.sql
+SHA-256 9e4d05066bc093e1cfa332217406603886e1995384304c3b7360173416838c75
+
+Elaborazione di Ripetizioni di Analisi
+Per i Comuni, gli intervalli sovrapposti o contigui con lo stesso nome, provincia e
+codice sono stati uniti. Per gli Stati esteri attuali sono stati selezionati i codici
+ANPR abilitati alla nascita. La data iniziale è stata incrociata con la classificazione
+storica, che fornisce anche nomi e codici dei luoghi cessati. Per un codice attuale
+assente dagli intervalli aperti della classificazione, il suggerimento parte dalla
+data di modifica della tabella ANPR consultata. È un criterio prudenziale di
+copertura dell’archivio. Entrambi gli estremi di ogni periodo sono inclusivi.
+Per luoghi o date fuori copertura si può inserire il codice fiscale assegnato.

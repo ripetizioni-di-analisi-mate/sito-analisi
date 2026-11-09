@@ -18,6 +18,25 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   <label>{en ? 'City or town' : 'Comune o città'}<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
   <label><span id="etichetta-provincia">{en ? 'Province code' : 'Sigla della provincia'}</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder={en ? 'e.g. RM' : 'Es. RM'} pattern="[A-Za-z]{2}" maxlength="2" required /></label>
   <label id="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}<input name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required /></label>
+  <details class="largo calcolo-cf" data-calcolo-cf>
+    <summary>{en ? 'Calculate my Italian tax code' : 'Calcola il codice fiscale'}</summary>
+    <p>{en ? 'Use the billing recipient’s birth details. Their first and last names are taken from the fields above.' : 'Inserisci i dati di nascita dell’intestatario. Nome e cognome sono quelli indicati sopra.'}</p>
+    <div class="nascita-cf">
+      <label>{en ? 'Date of birth' : 'Data di nascita'}<input type="date" data-cf-data form="calcolatore-cf-locale" /></label>
+      <label>{en ? 'Sex on official records' : 'Sesso anagrafico'}<select data-cf-sesso form="calcolatore-cf-locale">
+        <option value="">{en ? 'Select' : 'Seleziona'}</option><option value="F">{en ? 'Female' : 'Femminile'}</option><option value="M">{en ? 'Male' : 'Maschile'}</option>
+      </select></label>
+      <label class="largo">{en ? 'Town in Italy or country at the time of birth' : 'Comune italiano o Stato estero all’epoca della nascita'}<input type="text" data-cf-luogo list="elenco-luoghi-cf" form="calcolatore-cf-locale" autocomplete="off" spellcheck="false" placeholder={en ? 'e.g. Roma or France' : 'Es. Roma o Francia'} /></label>
+      <datalist id="elenco-luoghi-cf"></datalist>
+    </div>
+    <p data-cf-stato role="status"></p>
+    <div data-cf-proposta hidden>
+      <output data-cf-risultato></output>
+      <p>{en ? 'Compare this code with your Italian health card or tax code certificate. If they differ, enter the officially assigned code.' : 'Confrontalo con la tessera sanitaria o con il certificato di attribuzione. Se è diverso, inserisci il codice ufficiale.'}</p>
+      <button type="button" class="bottone-secondario" data-cf-usa>{en ? 'Use this code' : 'Usa questo codice'}</button>
+    </div>
+    <small><a href="/dati/luoghi-cf-fonti.txt" target="_blank" rel="noopener">{en ? 'Birthplace data sources' : 'Fonti dei luoghi di nascita'}</a></small>
+  </details>
 </div>
 <style>
   .campi-fattura { margin: 0; max-width: none; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -27,5 +46,13 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   .campi-fattura input, .campi-fattura select { width: 100%; min-width: 0; box-sizing: border-box; }
   .campi-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
   #campo-cf input { text-transform: uppercase; }
+  @media (min-width: 36.01rem) { .campi-fattura .calcolo-cf:not([open]) { grid-column: 2; margin-top: -.35rem; } }
+  .calcolo-cf summary { width: fit-content; color: var(--accento); cursor: pointer; font-weight: 600; }
+  .calcolo-cf[open] { padding: .8rem 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
+  .calcolo-cf p { margin: .6rem 0; color: var(--inchiostro-2); font-size: .92rem; }
+  .calcolo-cf p:empty { display: none; }
+  .nascita-cf { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .7rem; }
+  .calcolo-cf output { display: block; margin-top: .8rem; font-family: monospace; font-size: 1.12rem; font-weight: 700; overflow-wrap: anywhere; }
+  @media (max-width: 36rem) { .nascita-cf { grid-template-columns: minmax(0,1fr); } }
   @media (max-width: 36rem) { .campi-fattura { grid-template-columns: minmax(0,1fr); } }
 </style>

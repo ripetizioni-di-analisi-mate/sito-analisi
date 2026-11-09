@@ -1,4 +1,5 @@
 import { CODICI_PAESE } from '../src/data/paesi-fattura.mjs';
+import { carattereControlloCF } from '../src/data/codice-fiscale.mjs';
 
 // Controllo formale del CF, comprese le omocodie e il codice provvisorio numerico.
 function codiceFiscaleValido(cf) {
@@ -11,14 +12,7 @@ function codiceFiscaleValido(cf) {
     return cf !== '00000000000' && (somma + Number(cf[10])) % 10 === 0;
   }
   if (!/^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/.test(cf)) return false;
-  const dispari = [1,0,5,7,9,13,15,17,19,21,2,4,18,20,11,3,6,8,12,14,16,10,22,25,24,23];
-  let somma = 0;
-  for (let i = 0; i < 15; i++) {
-    const codice = cf.charCodeAt(i);
-    const n = codice >= 65 ? codice - 65 : codice - 48;
-    somma += i % 2 === 0 ? dispari[n] : n;
-  }
-  return cf.charCodeAt(15) === 65 + somma % 26;
+  return cf[15] === carattereControlloCF(cf);
 }
 
 export function leggiFatturazione(input) {
