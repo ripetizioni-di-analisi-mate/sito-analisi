@@ -78,7 +78,6 @@ async function preventivo() {
 async function esito(sessione: string, tentativo = 0): Promise<void> {
   const d = await richiedi('stato?session_id=' + encodeURIComponent(sessione));
   if (!d) return;
-  document.getElementById('ordini-digitali')!.hidden = false;
   if (d.stato === 'pagato') {
     stato.textContent = en ? 'Payment confirmed. Your purchase is now available in your account.' : 'Pagamento confermato. Il materiale acquistato è disponibile nel tuo account.';
     const destinazione = new URL(d.destinazione || pref + '/account', location.origin);
@@ -118,7 +117,6 @@ async function apri() {
     if (d.stato === 'pagato') {
       stato.textContent = en ? 'Payment already confirmed. Your purchase is available in your account.' : 'Il pagamento risulta già confermato. Il materiale è disponibile nel tuo account.';
       mostraAzione(en ? 'Go to your account' : 'Vai al tuo account', pref + '/account');
-      document.getElementById('ordini-digitali')!.hidden = false;
       return;
     }
     if (d.stato !== 'scaduto') throw new Error(en ? 'Check the status of your previous payment before trying again.' : 'Verifica lo stato del pagamento precedente prima di riprovare.');
