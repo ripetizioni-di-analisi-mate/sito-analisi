@@ -174,3 +174,45 @@ test('email inglese e HTML sicuro non espongono dati degli avversari', () => {
   assert.match(m.subject, /#4/); assert.match(m.text, /position 3 to position 4/);
   assert.ok(!m.html.includes('<script>')); assert.match(m.html, /&lt;script&gt;/);
 });
+
+test('la dashboard riserva le classifiche delle leghe alla sessione amministrativa', async (t) => {
+  const b = banco(t);
+  b.utenti('anna@test.invalid', 80, 1);
+  b.env.ARCHIVIO = { idFromName: () => 'locale', get: () => ({ fetch: (url, opts) => b.ar.fetch(new Request(url, opts)) }) };
+  const url = 'https://ripetizionidianalisi.com/admin/api/leghe';
+  const ctx = { waitUntil() {} };
+  const leggi = (indirizzo, token) => worker.fetch(new Request(indirizzo, { headers: token ? { cookie: `admin=${encodeURIComponent(token)}` } : {} }), b.env, ctx);
+  assert.equal((await leggi(url)).status, 401);
+  assert.equal((await leggi(url, await firmaToken(b.env, { email: 'anna@test.invalid' }))).status, 401);
+  const token = await firmaToken(b.env, { admin: true });
+  const r = await leggi(url, token);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get('cache-control'), 'no-store');
+  assert.deepEqual((await r.json()).gruppi[0].membri, [{ nome: 'anna', exp: 80, zona: 'sale' }]);
+  assert.equal((await leggi(url + '?settimana=2026-10-99', token)).status, 400);
+});
+
+test('lo storico delle leghe conserva settimane e gruppi e usa le zone della classifica studente', async (t) => {
+  const b = banco(t);
+  const settimana = settimanaDi()[0];
+  b.utenti('anna@test.invalid', 80, 2, { lega: 1 });
+  b.utenti('luca@test.invalid', 80, 1, { lega: 1 });
+  for (let i = 0; i < 8; i++) b.utenti(`studente${i}@test.invalid`, i, i + 3, { lega: 1 });
+  b.utenti('altro@test.invalid', 200, 1, { lega: 1, gruppo: 2 });
+  const dati = async (sett) => (await b.api('/dati-leghe', { settimana: sett })).json();
+  const prima = await dati();
+  const studente = await (await b.api('/sfi-lega', { email: 'anna@test.invalid' })).json();
+  assert.deepEqual(prima.gruppi[0].membri.map(({ exp, zona }) => ({ exp, zona })), studente.gruppo.map(({ exp, zona }) => ({ exp, zona })));
+  assert.deepEqual(prima.gruppi[0].membri.slice(0, 2).map((m) => m.nome), ['luca', 'anna']);
+  assert.deepEqual(prima.gruppi[0].membri.slice(-2).map((m) => m.zona), ['scende', 'scende']);
+  assert.equal(prima.gruppi[1].membri[0].exp, 200);
+  b.avanza(7 * 86400000);
+  assert.deepEqual((await dati()).gruppi, []);
+  aggiungi(b.ar, 'anna@test.invalid', 3, 'risposta');
+  assert.deepEqual((await dati(settimana)).gruppi, prima.gruppi);
+  b.avanza(180000);
+  const adesso = await dati();
+  assert.deepEqual(adesso.settimane.map((s) => s.inizio), [settimanaDi()[0], settimana]);
+  assert.equal(adesso.gruppi[0].lega, 2);
+  assert.equal(adesso.gruppi[0].membri[0].exp, 3);
+});

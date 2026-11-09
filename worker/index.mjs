@@ -31,7 +31,7 @@ import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi }
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
 import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
-import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
+import { creaTabelleSfide, archivioSfide, datiLegheAdmin, gestisciSfide, sha } from './sfide.mjs';
 import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from './avvisi-lega.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDispositivi, sessioneDispositivoValida,
@@ -448,6 +448,9 @@ export class Archivio {
             c.email, c.materia, c.importo, c.valuta, c.transazione, ora);
         } catch { return Response.json({ ok: false, doppio: true }); }
         return Response.json({ ok: true });
+
+      case '/dati-leghe':
+        return Response.json(datiLegheAdmin(this, c.settimana));
 
       case '/dati': {
         const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-${giorni - 1} days')
@@ -1274,6 +1277,10 @@ export default {
         // Chi tiene aperta la dashboard con il proprio account collegato risulta attivo anche come studente.
         ctx.waitUntil(utenteCollegato(env, req).catch(() => null));
         return json(await aDO(env, '/dati'));
+      }
+      if (p === '/admin/api/leghe' && req.method === 'GET') {
+        const dati = await aDO(env, '/dati-leghe', { settimana: url.searchParams.get('settimana') });
+        return json(dati, dati.errore ? 400 : 200, { 'cache-control': 'no-store' });
       }
       if (p === '/admin/api/abilita' && POST) {
         const { email: e, materie } = await req.json();
