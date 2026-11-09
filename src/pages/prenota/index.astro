@@ -2,59 +2,79 @@
 // Prenotazione delle lezioni individuali con calendario e pagamento (worker/prenotazioni.mjs).
 import Base from '../../layouts/Base.astro';
 import StileLezioni from '../../components/StileLezioni.astro';
-import { LEZIONI, MATERIE_LEZIONI } from '../../data/lezioni';
+import { LEZIONI, GRUPPI_MATERIE_LEZIONI } from '../../data/lezioni';
 
 const WHATSAPP = 'https://wa.me/393885680393';
-const giorniTesto = 'dal lunedì al sabato';
 ---
 <Base lingua="it" titolo="Prenota una lezione" percorso={[{ titolo: 'Ripetizioni online', href: '/ripetizioni-analisi' }, { titolo: 'Prenota una lezione' }]}
-  descrizione={`Prenota una lezione individuale online con Carmine Tornincasa: ${MATERIE_LEZIONI.map((m) => m.titolo).join(', ')}. Un'ora su Google Meet, ${LEZIONI.prezzo} €.`}
+  descrizione={`Prenota una lezione individuale di matematica con Carmine Tornincasa. Scegli la materia e l’orario. Un’ora su Google Meet, ${LEZIONI.prezzo} €.`}
   seo={{ titolo: 'Prenota una lezione individuale online | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true }}>
   <StileLezioni />
   <div class="prenota">
-    <p class="sopratitolo">Lezione individuale online</p>
-    <h1>Prenota una lezione</h1>
-    <p class="sommario">La lezione dura un’ora e si svolge su Google Meet. Costa {LEZIONI.prezzo} € e si paga con carta al momento della prenotazione.</p>
-    <a class="autore-acquisto" href="/chi-sono">
-      <img src="/chi-sono/carmine-320.webp" width="320" height="320" alt="" />
-      <span>Le lezioni sono tenute dall’<b>Ing. Carmine Tornincasa</b>, che ha seguito oltre mille studenti in più di diecimila ore di lezione.</span>
-    </a>
+    <header class="prenota-intro">
+      <p class="sopratitolo">Lezioni individuali online</p>
+      <h1>Prenota una lezione di matematica</h1>
+      <p class="sommario">La lezione si adatta al tuo programma e agli esercizi o alle prove d’esame che vuoi preparare.</p>
+      <a class="autore-acquisto" href="/chi-sono">
+        <img src="/chi-sono/carmine-320.webp" width="320" height="320" alt="" />
+        <span><b>Ing. Carmine Tornincasa</b><small>Oltre 10.000 ore di lezione</small></span>
+      </a>
+    </header>
     <div id="avviso" class="avviso-lezione" role="status" hidden></div>
 
-    <form id="modulo-prenota" novalidate>
-      <section class="passo">
-        <h2><span>1</span>Materia</h2>
-        <fieldset class="materie-lezione">
-          <legend class="nota-passo">La lezione si costruisce sul programma del tuo corso e sulle prove d’esame del docente.</legend>
-          {MATERIE_LEZIONI.map((m) => (
-            <label><input type="radio" name="materia" value={m.slug} /><span>{m.titolo}</span></label>
-          ))}
-        </fieldset>
+    <form id="modulo-prenota" class="prenota-modulo" novalidate>
+      <ul class="prenota-dettagli" aria-label="Dettagli della lezione">
+        <li><span>Durata</span><strong>{LEZIONI.durata} minuti</strong></li>
+        <li><span>Dove</span><strong>Google Meet</strong></li>
+        <li><span>Costo</span><strong>{LEZIONI.prezzo} €</strong></li>
+      </ul>
+
+      <fieldset class="prenota-passo prenota-materie">
+        <legend class="prenota-titolo"><span aria-hidden="true">1</span>Scegli la materia</legend>
+        {GRUPPI_MATERIE_LEZIONI.map(({ titolo, materie }) => (
+          <div class="prenota-gruppo">
+            <p class="prenota-gruppo-titolo">{titolo}</p>
+            <div class="prenota-scelte">
+              {materie.map((m) => (
+                <label>
+                  <input type="radio" name="materia" value={m.slug} />
+                  <span class="prenota-materia">{m.titolo}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </fieldset>
+
+      <section class="prenota-passo prenota-calendario" aria-labelledby="titolo-calendario">
+        <h2 id="titolo-calendario" class="prenota-titolo"><span aria-hidden="true">2</span>Scegli giorno e ora</h2>
+        <p class="nota-passo">Puoi prenotare dal lunedì al sabato, con almeno {LEZIONI.preavvisoOre} ore di anticipo. Gli orari sono quelli italiani.</p>
+        <div id="calendario" class="calendario-lezioni" data-whatsapp={WHATSAPP}>
+          <p class="cal-carico" role="status">Caricamento degli orari liberi…</p>
+        </div>
       </section>
 
-      <section class="passo">
-        <h2><span>2</span>Giorno e ora</h2>
-        <p class="nota-passo">Si prenota {giorniTesto}, almeno {LEZIONI.preavvisoOre} ore prima. Gli orari mostrati sono quelli ancora liberi.</p>
-        <div id="calendario" class="calendario-lezioni"><p class="cal-carico">Caricamento degli orari liberi…</p></div>
-      </section>
-
-      <section class="passo">
-        <h2><span>3</span>I tuoi dati</h2>
+      <section class="prenota-passo prenota-dati" aria-labelledby="titolo-dati">
+        <h2 id="titolo-dati" class="prenota-titolo"><span aria-hidden="true">3</span>Inserisci i tuoi dati</h2>
         <div class="modulo">
           <label>Nome e cognome<input name="nome" autocomplete="name" required maxlength="80" /></label>
           <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
           <label>Telefono (WhatsApp)<input name="telefono" type="tel" autocomplete="tel" required maxlength="20" placeholder="+39 …" /></label>
-          <label><span>Università e corso di laurea <small>facoltativo</small></span><input name="universita" maxlength="120" /></label>
+          <label><span>Scuola, classe o corso di laurea <small>facoltativo</small></span><input name="universita" maxlength="120" /></label>
           <label class="largo"><span>Argomenti su cui lavorare <small>facoltativo</small></span><textarea name="note" maxlength="500" placeholder="Per esempio: integrali impropri e serie, esame il 20 gennaio"></textarea></label>
           <label class="largo"><span>Codice fiscale <small>facoltativo, per la fattura intestata a te</small></span><input name="cf" maxlength="16" autocomplete="off" style="text-transform: uppercase" /></label>
         </div>
       </section>
 
-      <div class="riquadro-acquisto">
-        <p class="riepilogo" id="riepilogo">Scegli la materia e l’orario.</p>
-        <p class="prezzo"><strong>{LEZIONI.prezzo} €</strong> <span>una lezione da un’ora</span></p>
+      <div class="riquadro-acquisto prenota-pagamento">
+        <h2>Riepilogo e pagamento</h2>
+        <dl class="prenota-riepilogo" aria-live="polite">
+          <div><dt>Materia</dt><dd id="riepilogo-materia">Da scegliere</dd></div>
+          <div><dt>Giorno e ora</dt><dd id="riepilogo-orario">Da scegliere</dd></div>
+        </dl>
+        <p class="prenota-totale"><span>Totale per una lezione</span><strong>{LEZIONI.prezzo} €</strong></p>
         <label class="spunta"><input type="checkbox" name="condizioni" /><span>Accetto le <a href="#condizioni">condizioni di prenotazione</a> e chiedo che la lezione si svolga nella data scelta, anche prima della fine dei 14 giorni previsti per il recesso.</span></label>
-        <button type="submit" id="paga">Paga e prenota</button>
+        <button type="submit" id="paga" disabled>Paga e prenota <span aria-hidden="true">→</span></button>
         <p class="esito-modulo" id="esito" role="status"></p>
         <p class="metodi-pagamento nota-termini">Pagamento sicuro con Stripe: carte di credito e di debito, Apple Pay e Google Pay.</p>
       </div>
@@ -72,16 +92,154 @@ const giorniTesto = 'dal lunedì al sabato';
   </div>
 </Base>
 
+<style>
+  .prenota { --prenota-bordo: #d8e4df; --prenota-chiaro: #edf6f2; }
+  .prenota-intro { margin-bottom: 1.4rem; }
+  .prenota-intro .sommario { max-width: 36rem; }
+  .prenota-intro .autore-acquisto { width: fit-content; }
+  .prenota-intro .autore-acquisto small { display: block; margin-top: 0.1rem; }
+
+  .prenota-modulo {
+    padding: clamp(0.95rem, 3vw, 1.65rem);
+    border: 1px solid var(--prenota-bordo);
+    border-top: 3px solid var(--accento);
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 8px 28px #223f3510;
+  }
+  .prenota-dettagli {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    list-style: none;
+    margin: 0 0 1.35rem;
+    padding: 0.75rem 0;
+    border-radius: 10px;
+    background: var(--prenota-chiaro);
+  }
+  .prenota-dettagli li { display: grid; gap: 0.12rem; padding: 0 0.7rem; margin: 0; }
+  .prenota-dettagli li + li { border-inline-start: 1px solid var(--prenota-bordo); }
+  .prenota-dettagli span { font-size: 0.75rem; color: var(--inchiostro-2); }
+  .prenota-dettagli strong { color: var(--accento); font-size: 0.95rem; line-height: 1.3; }
+  .prenota-passo { margin: 1.3rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--prenota-bordo); }
+  .prenota-materie { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .prenota-titolo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0;
+    margin: 0 0 0.7rem;
+    color: var(--inchiostro);
+    font: 700 1.08rem/1.4 var(--ui);
+  }
+  .prenota-titolo span {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 6px;
+    color: var(--accento);
+    background: var(--prenota-chiaro);
+    font-size: 0.82rem;
+  }
+  .prenota-gruppo + .prenota-gruppo { margin-top: 0.85rem; }
+  .prenota-gruppo-titolo { margin: 0 0 0.35rem; color: var(--inchiostro-2); font-size: 0.85rem; font-weight: 600; }
+  .prenota-scelte { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.45rem; }
+  .prenota-scelte label { position: relative; display: flex; cursor: pointer; min-width: 0; }
+  .prenota-scelte input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .prenota-materia {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 2.85rem;
+    padding: 0.55rem 2rem 0.55rem 0.7rem;
+    border: 1px solid var(--prenota-bordo);
+    border-radius: 9px;
+    background: #fcfdfc;
+    color: var(--inchiostro);
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .prenota-materia::after {
+    content: '';
+    position: absolute;
+    right: 0.68rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 1.5px solid #7f9790;
+    border-radius: 50%;
+    background: white;
+  }
+  .prenota-scelte label:hover .prenota-materia { border-color: #78a99a; background: #f5faf7; }
+  .prenota-scelte input:checked + .prenota-materia { border-color: var(--accento); background: var(--prenota-chiaro); color: var(--accento); box-shadow: inset 0 0 0 1px var(--accento); }
+  .prenota-scelte input:checked + .prenota-materia::after { border-color: var(--accento); background: var(--accento); box-shadow: inset 0 0 0 3px white; }
+  .prenota-scelte input:focus-visible + .prenota-materia { outline: 2px solid var(--accento); outline-offset: 2px; }
+
+  .prenota-calendario .calendario-lezioni { border-color: var(--prenota-bordo); border-radius: 10px; }
+  .prenota-calendario :global(.cal-testa) { background: var(--prenota-chiaro); border-color: var(--prenota-bordo); border-radius: 9px 9px 0 0; }
+  .prenota-calendario :global(.cal-ora) { border-radius: 8px; min-height: 2.5rem; }
+  .prenota-calendario :global(.cal-riprova) {
+    display: inline-block;
+    margin: 0 1rem 1rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--prenota-bordo);
+    border-radius: 8px;
+    background: var(--prenota-chiaro);
+    color: var(--accento);
+    font: 600 0.9rem var(--ui);
+    cursor: pointer;
+  }
+  .prenota-dati .modulo { margin: 0; }
+
+  .prenota-pagamento {
+    margin: 1.35rem 0 0;
+    padding: clamp(0.8rem, 3vw, 1.15rem);
+    border-color: var(--prenota-bordo);
+    border-radius: 12px;
+    background: #f3f8f5;
+    text-align: left;
+  }
+  .prenota-pagamento h2 { margin: 0 0 0.55rem; font: 700 1.08rem/1.4 var(--ui); }
+  .prenota-riepilogo { display: grid; gap: 0.25rem; margin: 0; font-size: 0.94rem; }
+  .prenota-riepilogo > div { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: 0.55rem; }
+  .prenota-riepilogo dt { color: var(--inchiostro-2); }
+  .prenota-riepilogo dd { margin: 0; font-weight: 600; }
+  .prenota-totale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin: 0.8rem 0 0;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--prenota-bordo);
+    font-size: 0.94rem;
+  }
+  .prenota-totale strong { flex: none; color: var(--accento); font-size: 1.45rem; }
+  .prenota .prenota-pagamento .spunta { margin: 0.65rem 0 0.9rem; max-width: none; }
+  .prenota-pagamento #paga { display: flex; align-items: center; justify-content: center; gap: 0.55rem; width: 100%; min-height: 3rem; padding: 0.55rem 0.8rem; border-radius: 9px; }
+  .prenota-pagamento #paga:disabled { cursor: default; }
+  .prenota-pagamento .esito-modulo:empty { display: none; }
+  .prenota-pagamento .metodi-pagamento { margin: 0.6rem 0 0; text-align: center; }
+  .condizioni { scroll-margin-top: 5rem; }
+
+  @media (max-width: 24rem) {
+    .prenota-scelte { grid-template-columns: minmax(0, 1fr); }
+    .prenota-pagamento .prenota-riepilogo > div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  }
+</style>
+
 <script>
   import { calendario, descriviOrario, type Orario } from '../../lib/calendario-lezioni';
 
   const modulo = document.getElementById('modulo-prenota') as HTMLFormElement;
   const avviso = document.getElementById('avviso')!;
   const esito = document.getElementById('esito')!;
-  const riepilogo = document.getElementById('riepilogo')!;
+  const riepilogoMateria = document.getElementById('riepilogo-materia')!;
+  const riepilogoOrario = document.getElementById('riepilogo-orario')!;
   const paga = document.getElementById('paga') as HTMLButtonElement;
   const radice = document.getElementById('calendario')!;
-  let materie: { slug: string; titolo: string }[] = [];
   let scelto: Orario | null = null;
 
   const mostraAvviso = (testo: string, errore = false) => {
@@ -90,11 +248,9 @@ const giorniTesto = 'dal lunedì al sabato';
     avviso.hidden = false;
   };
   const aggiornaRiepilogo = () => {
-    const m = materie.find((x) => x.slug === (modulo.elements.namedItem('materia') as RadioNodeList).value);
-    if (m && scelto) riepilogo.innerHTML = `Lezione di <b>${m.titolo}</b><br>${descriviOrario(scelto)}`;
-    else if (scelto) riepilogo.innerHTML = `${descriviOrario(scelto)}<br>Scegli la materia.`;
-    else if (m) riepilogo.innerHTML = `Lezione di <b>${m.titolo}</b><br>Scegli giorno e ora.`;
-    else riepilogo.textContent = 'Scegli la materia e l’orario.';
+    const m = modulo.querySelector<HTMLInputElement>('input[name="materia"]:checked');
+    riepilogoMateria.textContent = m?.labels?.[0]?.textContent?.trim() || 'Da scegliere';
+    riepilogoOrario.textContent = scelto ? descriviOrario(scelto) : 'Da scegliere';
   };
   modulo.addEventListener('change', aggiornaRiepilogo);
 
@@ -107,23 +263,50 @@ const giorniTesto = 'dal lunedì al sabato';
         .catch(() => {})
     : Promise.resolve();
 
+  function statoCalendario(testo: string, classe = 'cal-vuoto') {
+    const messaggio = document.createElement('p');
+    messaggio.className = classe;
+    messaggio.setAttribute('role', 'status');
+    messaggio.textContent = testo;
+    radice.replaceChildren(messaggio);
+    return messaggio;
+  }
+
+  function erroreCalendario(testo: string) {
+    statoCalendario(testo);
+    const riprova = document.createElement('button');
+    riprova.type = 'button';
+    riprova.className = 'cal-riprova';
+    riprova.textContent = 'Ricarica gli orari';
+    riprova.addEventListener('click', carica);
+    radice.append(riprova);
+  }
+
   async function carica() {
-    await liberata;
+    paga.disabled = true;
     scelto = null;
     aggiornaRiepilogo();
+    statoCalendario('Caricamento degli orari liberi…', 'cal-carico');
+    await liberata;
     try {
       const r = await fetch('/api/prenota/disponibilita', { cache: 'no-store' });
       const d = await r.json();
-      materie = d.materie || [];
-      if (!d.attivo) {
-        radice.innerHTML = `<p class="cal-vuoto">${d.errore || 'Le prenotazioni online non sono ancora attive.'} Per fissare una lezione si scrive su <a href="https://wa.me/393885680393">WhatsApp</a>.</p>`;
-        paga.disabled = true;
+      if (!r.ok) {
+        erroreCalendario(d.errore || 'Non è stato possibile caricare gli orari.');
         return;
       }
-      paga.disabled = false;
+      if (!d.attivo) {
+        const messaggio = statoCalendario('Per fissare una lezione, scrivi su ');
+        const contatto = document.createElement('a');
+        contatto.href = radice.dataset.whatsapp!;
+        contatto.textContent = 'WhatsApp';
+        messaggio.append(contatto, '.');
+        return;
+      }
       calendario(radice, d.orari as Orario[], (o) => { scelto = o; aggiornaRiepilogo(); });
+      paga.disabled = false;
     } catch {
-      radice.innerHTML = '<p class="cal-vuoto">Gli orari non si sono caricati. Ricarica la pagina tra poco.</p>';
+      erroreCalendario('Non è stato possibile caricare gli orari.');
     }
   }
   carica();
@@ -139,6 +322,7 @@ const giorniTesto = 'dal lunedì al sabato';
 
   modulo.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (paga.disabled) return;
     esito.classList.add('errore');
     const f = new FormData(modulo);
     const materia = String(f.get('materia') || '');

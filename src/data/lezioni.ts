@@ -15,10 +15,18 @@ export const LEZIONI = {
   fusoOrario: 'Europe/Rome',
 };
 
-// Materie escluse dalle lezioni individuali (scelta di Carmine).
-export const ESCLUSE_DALLE_LEZIONI = ['biologia-semestre-filtro', 'chimica-semestre-filtro', 'fisica-1', 'fisica-2', 'fisica-superiori-2', 'fisica-superiori-3', 'fisica-superiori-4', 'fisica-superiori-5', 'fisica-zero', 'statistica', 'analisi-3', 'logica-concorsi'];
+// Solo le materie di matematica offerte per le lezioni individuali.
+const GRUPPI_LEZIONI = [
+  { titolo: 'Università', slug: ['precorso', 'analisi-1', 'analisi-2', 'algebra-lineare', 'matematica-generale'] },
+  { titolo: 'Scuole superiori', slug: ['matematica-superiori-2', 'matematica-superiori-3', 'matematica-superiori-4', 'matematica-superiori-5'] },
+  { titolo: 'Basi e concorsi', slug: ['matematica-concorsi', 'matematica-da-zero', 'matematica-semestre-filtro'] },
+];
 
-// Tutte le materie pubblicate sul sito, tranne quelle escluse.
-export const MATERIE_LEZIONI = MATERIE
-  .filter((m) => m.attiva && !ESCLUSE_DALLE_LEZIONI.includes(m.slug))
-  .map((m) => ({ slug: m.slug, titolo: m.titolo }));
+export const GRUPPI_MATERIE_LEZIONI = GRUPPI_LEZIONI.map((gruppo) => ({
+  titolo: gruppo.titolo,
+  materie: MATERIE
+    .filter((m) => m.attiva && gruppo.slug.includes(m.slug))
+    .map((m) => ({ slug: m.slug, titolo: m.titolo })),
+})).filter((gruppo) => gruppo.materie.length > 0);
+
+export const MATERIE_LEZIONI = GRUPPI_MATERIE_LEZIONI.flatMap((gruppo) => gruppo.materie);

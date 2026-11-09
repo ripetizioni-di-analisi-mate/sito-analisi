@@ -7,6 +7,7 @@
 //  - 2 minuti prima della lezione lo studente riceve l'email con il link di Google Meet (cron al minuto 58).
 // Segreti su Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET (GOOGLE_CLIENT_ID è in wrangler.jsonc).
 import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';
+import { materia } from '../src/data/materie.ts';
 
 const ORA_MS = 3600 * 1000;
 const MAX_ATTESE_EMAIL = 2;   // prenotazioni non ancora pagate per indirizzo email
@@ -146,7 +147,7 @@ export function quando(inizio, fine) {
   const gs = new Date(Date.UTC(a.y, a.m - 1, a.d)).getUTCDay();
   return `${GIORNI[gs]} ${a.d} ${MESI[a.m - 1]} ${a.y}, ore ${due(a.h)}:${due(a.min)}-${due(b.h)}:${due(b.min)}`;
 }
-const titoloMateria = (slug) => MATERIE_LEZIONI.find((m) => m.slug === slug)?.titolo || slug;
+const titoloMateria = (slug) => materia(slug)?.titolo || slug;
 const isoRoma = (ms) => { const p = partiRoma(ms); return `${p.y}-${due(p.m)}-${due(p.d)}T${due(p.h)}:${due(p.min)}:00`; };
 
 // ---------- Google Calendar ----------
