@@ -20,9 +20,7 @@ export function preparaIndirizzo(fattura: HTMLElement) {
       ? (en ? 'Province code' : 'Sigla della provincia')
       : (en ? 'Province or region (if applicable)' : 'Provincia o regione (se prevista)');
     fattura.querySelector<HTMLElement>('[data-facoltativo-estero]')!.hidden = italia;
-    fattura.querySelector<HTMLElement>('#campo-cf')!.hidden = cf.disabled = !italia;
-    calcolatore.hidden = !italia;
-    if (!italia) calcolatore.open = false;
+    calcolatore.hidden = cf.disabled = !italia;
   }
   paese.addEventListener('change', aggiorna);
   window.addEventListener('pageshow', aggiorna);
