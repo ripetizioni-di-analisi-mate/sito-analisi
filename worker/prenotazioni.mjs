@@ -9,6 +9,7 @@ import { componiEmail, inviaEmailResend } from './email.mjs';
 // Segreti su Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET (GOOGLE_CLIENT_ID è in wrangler.jsonc).
 import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';
 import { materia } from '../src/data/materie.ts';
+import { leggiFatturazione } from './fatturazione.mjs';
 
 const ORA_MS = 3600 * 1000;
 const MAX_ATTESE_EMAIL = 2;   // prenotazioni non ancora pagate per indirizzo email
@@ -27,6 +28,7 @@ export function creaTabellePrenotazioni(sql) {
   `);
   // momento in cui è partita l'email con il link di Meet, 2 minuti prima della lezione
   try { sql.exec('ALTER TABLE lezioni ADD COLUMN avvisata INTEGER'); } catch { /* già presente */ }
+  try { sql.exec('ALTER TABLE lezioni ADD COLUMN fatturazione TEXT'); } catch { /* già presente */ }
 }
 
 // Orari occupati da lezioni pagate o in attesa di pagamento (escluso, se indicato, l'id dato).
@@ -53,9 +55,9 @@ export function archivioPrenotazioni(o, pathname, c) {
       if (occupateDB(o, c.inizio, c.fine).length || limiteRaggiunto(o, c.inizio)) return { ok: false, motivo: 'occupato' };
       const attese = (campo, valore) => o.riga(`SELECT COUNT(*) AS n FROM lezioni WHERE ${campo} = ? AND stato = 'in-attesa' AND scadenza > ?`, valore, Date.now()).n;
       if (attese('email', c.email) >= MAX_ATTESE_EMAIL || (c.rete && attese('rete', c.rete) >= MAX_ATTESE_RETE)) return { ok: false, motivo: 'troppe' };
-      o.sql.exec(`INSERT INTO lezioni (id, inizio, fine, materia, nome, email, telefono, universita, note, cf, rete, stato, scadenza, creato, aggiornato)
+      o.sql.exec(`INSERT INTO lezioni (id, inizio, fine, materia, nome, email, telefono, universita, note, fatturazione, rete, stato, scadenza, creato, aggiornato)
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'in-attesa', ?, ?, ?)`,
-        c.id, c.inizio, c.fine, c.materia, c.nome, c.email, c.telefono, c.universita, c.note, c.cf, c.rete, c.scadenza, ora, ora);
+        c.id, c.inizio, c.fine, c.materia, c.nome, c.email, c.telefono, c.universita, c.note, JSON.stringify(c.fatturazione), c.rete, c.scadenza, ora, ora);
       return { ok: true };
     }
     case '/pren-sessione':
@@ -72,8 +74,11 @@ export function archivioPrenotazioni(o, pathname, c) {
       o.sql.exec('UPDATE lezioni SET evento = ?, meet = ?, aggiornato = ? WHERE id = ?', c.evento, c.meet, ora, c.id);
       return { ok: true };
     case '/pren-libera': // pagamento annullato o scaduto: l'orario torna libero
-      o.sql.exec("UPDATE lezioni SET stato = 'annullata', aggiornato = ? WHERE id = ? AND stato = 'in-attesa'", ora, c.id);
+      o.sql.exec("UPDATE lezioni SET stato = 'annullata', fatturazione = NULL, aggiornato = ? WHERE id = ? AND stato = 'in-attesa'", ora, c.id);
       return { ok: true };
+    case '/pren-scadute':
+      return { lezioni: o.righe(`SELECT id, sessione FROM lezioni WHERE stato = 'in-attesa'
+        AND fatturazione IS NOT NULL AND scadenza < ? ORDER BY scadenza LIMIT 20`, Date.now() - 24 * ORA_MS) };
     case '/pren-leggi':
       return { lezione: leggi(c.id) };
     case '/pren-da-sessione':
@@ -93,9 +98,9 @@ export function archivioPrenotazioni(o, pathname, c) {
     case '/pren-avvisata':
       o.sql.exec('UPDATE lezioni SET avvisata = ? WHERE id = ?', Date.now(), c.id);
       return { ok: true };
-    case '/pren-elenco': // per la pagina /admin/lezioni: lezioni dagli ultimi 30 giorni in poi
-      return { lezioni: o.righe(`SELECT * FROM lezioni WHERE inizio > ? AND stato IN ('pagata', 'disdetta', 'in-attesa')
-                                  ORDER BY inizio`, Date.now() - 30 * 24 * ORA_MS) };
+    case '/pren-elenco': // solo per la pagina riservata /admin/lezioni
+      return { lezioni: o.righe(`SELECT * FROM lezioni WHERE inizio >= ? AND inizio < ? AND stato IN ('pagata', 'disdetta', 'in-attesa')
+                                  ORDER BY inizio`, c.da ?? Date.now() - 30 * 24 * ORA_MS, c.a ?? Number.MAX_SAFE_INTEGER) };
     case '/pren-imposta':
       if (c.valore == null) o.sql.exec('DELETE FROM impostazioni WHERE chiave = ?', c.chiave);
       else o.sql.exec('INSERT INTO impostazioni (chiave, valore) VALUES (?, ?) ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore', c.chiave, c.valore);
@@ -324,6 +329,14 @@ export async function avvisiLezioni(env, aDO, firmaToken, adesso = Date.now()) {
     await aDO(env, '/pren-avvisata', { id: l.id });
     if (ok) inviate++;
   }
+  // Recupera anche i checkout abbandonati per i quali manca il webhook di scadenza.
+  if (env.STRIPE_SECRET_KEY) {
+    const scadute = await aDO(env, '/pren-scadute', {});
+    for (const l of scadute.lezioni) {
+      const sessione = l.sessione && await stripe(env, 'GET', `/checkout/sessions/${l.sessione}`).catch(() => null);
+      if (!l.sessione || sessione?.status === 'expired') await aDO(env, '/pren-libera', { id: l.id });
+    }
+  }
   return { lezioni: lezioni.length, inviate };
 }
 
@@ -380,13 +393,15 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const dati = {
       materia: MATERIE_LEZIONI.some((m) => m.slug === c.materia) ? c.materia : null,
       nome: pulisci(c.nome, 80), email, telefono: pulisci(c.telefono, 30), universita: pulisci(c.universita, 120),
-      note: pulisci(c.note, 500), cf: pulisci(c.cf, 16).toUpperCase(),
+      note: pulisci(c.note, 500),
     };
     if (!dati.materia) return json({ errore: 'Scegli la materia.' }, 400);
     if (dati.nome.length < 2) return json({ errore: 'Scrivi nome e cognome.' }, 400);
     if (!h.emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
     if (!/^[+0-9 ]{6,20}$/.test(dati.telefono)) return json({ errore: 'Scrivi un numero di telefono valido.' }, 400);
-    if (dati.cf && !/^[A-Z0-9]{11,16}$/.test(dati.cf)) return json({ errore: 'Il codice fiscale non è valido.' }, 400);
+    const fattura = leggiFatturazione(c.fatturazione);
+    if (fattura.errore) return json({ errore: fattura.errore }, 400);
+    dati.fatturazione = fattura.dati;
     if (c.condizioni !== true) return json({ errore: 'Per prenotare servono le condizioni accettate.' }, 400);
     let orari;
     try { orari = await orariLiberi(); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
@@ -429,7 +444,12 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (d?.scopo !== 'annulla' || !d.l) return json({ ok: false }, 400);
     const l = (await aDO(env, '/pren-leggi', { id: d.l })).lezione;
     if (l?.stato === 'in-attesa') {
-      if (l.sessione) await stripe(env, 'POST', `/checkout/sessions/${l.sessione}/expire`).catch(() => {});
+      // Il webhook di un pagamento completato può ancora dover arrivare.
+      // In quel caso non cancelliamo i dati fiscali solo perché si è aperto il link di annullamento.
+      if (l.sessione) {
+        const scaduta = await stripe(env, 'POST', `/checkout/sessions/${l.sessione}/expire`).catch(() => null);
+        if (scaduta?.status !== 'expired') return json({ ok: false }, 409);
+      }
       await aDO(env, '/pren-libera', { id: l.id });
     }
     return json({ ok: true });
@@ -622,7 +642,14 @@ async function paginaAdminLezioni(env, aDO, url) {
   const collegato = Boolean((await aDO(env, '/pren-impostazione', { chiave: 'google_refresh' })).valore);
   let googleOk = false;
   if (collegato) googleOk = Boolean(await tokenGoogle(env, aDO).catch(() => null));
-  const { lezioni } = await aDO(env, '/pren-elenco', {});
+  const mese = url.searchParams.get('mese') || '';
+  const periodo = {};
+  if (/^\d{4}-(0[1-9]|1[0-2])$/.test(mese)) {
+    const [y, m] = mese.split('-').map(Number);
+    periodo.da = daOraRoma(y, m, 1, 0);
+    periodo.a = daOraRoma(y, m + 1, 1, 0);
+  }
+  const { lezioni } = await aDO(env, '/pren-elenco', periodo);
   const adesso = Date.now();
   const STATI = { pagata: 'Pagata', disdetta: 'Disdetta e rimborsata', 'in-attesa': 'In attesa di pagamento' };
   const visibili = lezioni.filter((l) => l.stato !== 'in-attesa' || l.scadenza > adesso);
@@ -630,7 +657,7 @@ async function paginaAdminLezioni(env, aDO, url) {
 <td>${esc(quando(l.inizio, l.fine))}</td><td>${esc(titoloMateria(l.materia))}</td>
 <td>${esc(l.nome)}<br><span class="piccolo"><a href="mailto:${esc(l.email)}">${esc(l.email)}</a> · <a href="https://wa.me/${esc(numeroWhatsApp(l.telefono))}">${esc(l.telefono)}</a></span></td>
 <td>${esc(l.universita || '')}${l.note ? `<br><span class="piccolo">${esc(l.note)}</span>` : ''}</td>
-<td>${l.cf ? esc(l.cf) : '<span class="piccolo">non indicato</span>'}</td>
+<td>${dettagliFattura(l)}</td>
 <td><span class="stato s-${esc(l.stato)}">${esc(STATI[l.stato] || l.stato)}</span>${l.spostamenti ? `<br><span class="piccolo">spostata ${l.spostamenti} ${l.spostamenti === 1 ? 'volta' : 'volte'}</span>` : ''}</td>
 <td>${l.meet ? `<a href="${esc(l.meet)}" target="_blank" rel="noopener">Meet</a>` : ''}</td></tr>`).join('');
   return pagina(`<p class="piccolo"><a href="/admin">← Dashboard</a></p>
@@ -643,7 +670,20 @@ ${url.searchParams.get('collegato') ? '<div class="box ok">Google Calendar colle
 ${collegato ? '<form method="post" action="/admin/google/scollega" style="margin:0"><button class="secondario" type="submit">Scollega</button></form>' : ''}
 <div style="margin-left:auto"><strong>Stripe</strong><br>${env.STRIPE_SECRET_KEY ? '<span class="ok">Chiave inserita</span>' : '<span class="no">Chiave mancante</span>'} · ${env.STRIPE_WEBHOOK_SECRET ? '<span class="ok">webhook pronto</span>' : '<span class="no">segreto del webhook mancante</span>'}</div>
 </div></div>
-${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Codice fiscale</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
-    : '<p>Nessuna lezione prenotata dal sito negli ultimi 30 giorni o in programma.</p>'}
+<form action="/admin/lezioni" class="riga"><label>Mese della lezione <input type="month" name="mese" value="${esc(mese)}" required></label>
+<button type="submit">Mostra</button>${periodo.da ? '<a href="/admin/lezioni">Torna alle lezioni recenti</a>' : ''}</form>
+${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Fatturazione</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
+    : '<p>Nessuna lezione da mostrare per il periodo selezionato.</p>'}
 <p class="piccolo">Lezioni dal lunedì al sabato nelle fasce 10–13 e 14–19. Per prenotare servono almeno ${LEZIONI.preavvisoMinuti} minuti di anticipo. La disponibilità dipende dagli impegni del calendario e dal limite giornaliero.</p>`);
+}
+
+function dettagliFattura(l) {
+  if (l.stato === 'in-attesa') return '—';
+  if (!l.fatturazione) return l.cf ? esc(l.cf) : '—'; // prenotazioni precedenti
+  const f = JSON.parse(l.fatturazione);
+  const righe = [
+    `${f.nome} ${f.cognome}`, f.indirizzo, [f.cap, f.comune, f.provincia, f.paese].filter(Boolean).join(' '),
+    f.cf && `CF ${f.cf}`, l.importo != null && `${l.importo} €`, l.pagamento,
+  ];
+  return `<details><summary>Dati fattura</summary>${righe.filter(Boolean).map(esc).join('<br>')}</details>`;
 }

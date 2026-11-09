@@ -3,8 +3,12 @@
 import Base from '../../layouts/Base.astro';
 import StileLezioni from '../../components/StileLezioni.astro';
 import { LEZIONI, GRUPPI_MATERIE_LEZIONI } from '../../data/lezioni';
+import { CODICI_PAESE } from '../../data/paesi-fattura.mjs';
 
 const WHATSAPP = 'https://wa.me/393885680393';
+const nomiPaesi = new Intl.DisplayNames('it', { type: 'region' });
+const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomiPaesi.of(codice) || codice }))
+  .sort((a, b) => a.nome.localeCompare(b.nome, 'it'));
 ---
 <Base lingua="it" titolo="Prenota una lezione" percorso={[{ titolo: 'Ripetizioni online', href: '/ripetizioni-analisi' }, { titolo: 'Prenota una lezione' }]}
   descrizione={`Prenota una lezione individuale di matematica con Carmine Tornincasa. Scegli la materia e l’orario. Un’ora su Google Meet, ${LEZIONI.prezzo} €.`}
@@ -57,13 +61,30 @@ const WHATSAPP = 'https://wa.me/393885680393';
       <section class="prenota-passo prenota-dati" aria-labelledby="titolo-dati">
         <h2 id="titolo-dati" class="prenota-titolo"><span aria-hidden="true">3</span>Inserisci i tuoi dati</h2>
         <div class="modulo">
-          <label>Nome e cognome<input name="nome" autocomplete="name" required maxlength="80" /></label>
+          <label class="largo"><span>Nome e cognome di chi segue la lezione <small>solo se diverso dall’intestatario della fattura</small></span><input name="nome" autocomplete="section-studente name" maxlength="80" /></label>
           <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200" /></label>
           <label>Telefono (WhatsApp)<input name="telefono" type="tel" autocomplete="tel" required maxlength="20" placeholder="+39 …" /></label>
           <label><span>Scuola, classe o corso di laurea <small>facoltativo</small></span><input name="universita" maxlength="120" /></label>
           <label class="largo"><span>Argomenti su cui lavorare <small>facoltativo</small></span><textarea name="note" maxlength="500" placeholder="Per esempio: integrali impropri e serie, esame il 20 gennaio"></textarea></label>
-          <label class="largo"><span>Codice fiscale <small>facoltativo, per la fattura intestata a te</small></span><input name="cf" maxlength="16" autocomplete="off" style="text-transform: uppercase" /></label>
         </div>
+      </section>
+
+      <section id="dati-fattura" class="prenota-passo prenota-dati" aria-labelledby="titolo-fattura">
+        <h2 id="titolo-fattura" class="prenota-titolo"><span aria-hidden="true">4</span>Dati per la fattura</h2>
+        <p class="nota-passo">Indica i dati della persona a cui intestare la fattura. Se acquisti la lezione per tuo figlio e vuoi la fattura a tuo nome, inserisci qui i tuoi dati.</p>
+        <div class="modulo">
+          <label>Nome dell’intestatario<input name="fattura_nome" autocomplete="section-fattura billing given-name" maxlength="100" required /></label>
+          <label>Cognome dell’intestatario<input name="fattura_cognome" autocomplete="section-fattura billing family-name" maxlength="100" required /></label>
+          <label class="largo">Paese di residenza<select name="fattura_paese" autocomplete="section-fattura billing country" required>
+            {paesi.map(({ codice, nome }) => <option value={codice} selected={codice === 'IT'}>{nome}</option>)}
+          </select></label>
+          <label class="largo">Indirizzo di residenza (via e numero civico)<input name="fattura_indirizzo" autocomplete="section-fattura billing address-line1" maxlength="180" required /></label>
+          <label><span>CAP <small data-facoltativo-estero hidden>se previsto</small></span><input name="fattura_cap" autocomplete="section-fattura billing postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required /></label>
+          <label>Comune o città<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
+          <label><span id="etichetta-provincia">Sigla della provincia</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder="Es. CE" pattern="[A-Za-z]{2}" maxlength="2" required /></label>
+          <label id="campo-cf">Codice fiscale dell’intestatario<input name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required /></label>
+        </div>
+        <p class="nota-termini">Questi dati servono per la fatturazione della lezione. <a href="/privacy#fatturazione">Come vengono trattati i dati</a></p>
       </section>
 
       <div class="riquadro-acquisto prenota-pagamento">
@@ -85,7 +106,7 @@ const WHATSAPP = 'https://wa.me/393885680393';
       <ul>
         <li>Dopo il pagamento arrivano l’email di conferma e l’invito di Google Calendar con il link di Google Meet. Due minuti prima dell’inizio arriva un’altra email con il link per entrare nella lezione.</li>
         <li>La lezione si può spostare o disdire fino a {LEZIONI.rimborsoOre} ore prima dell’inizio, dal link nell’email di conferma. La disdetta entro quel termine dà il rimborso completo sulla carta usata per il pagamento.</li>
-        <li>Quando mancano meno di {LEZIONI.rimborsoOre} ore all’inizio, la lezione non si può più spostare dal sito e il rimborso non è previsto.</li>
+        <li>Se disdici a meno di {LEZIONI.rimborsoOre} ore dall’inizio, la cancellazione ordinaria non dà diritto al rimborso. Restano salvi i diritti previsti dalla legge. <a href="/rimborsi">Politica di rimborso e recesso</a>.</li>
         <li>Per richieste diverse o per un orario che non compare nel calendario si scrive su <a href={WHATSAPP} target="_blank" rel="noopener">WhatsApp</a>.</li>
       </ul>
     </section>
@@ -192,6 +213,10 @@ const WHATSAPP = 'https://wa.me/393885680393';
     cursor: pointer;
   }
   .prenota-dati .modulo { margin: 0; }
+  #dati-fattura [hidden] { display: none; }
+  #dati-fattura input, #dati-fattura select { min-width: 0; width: 100%; }
+  #dati-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
+  #campo-cf input { text-transform: uppercase; }
 
   .prenota-pagamento {
     margin: 1.35rem 0 0;
@@ -241,6 +266,27 @@ const WHATSAPP = 'https://wa.me/393885680393';
   const paga = document.getElementById('paga') as HTMLButtonElement;
   const radice = document.getElementById('calendario')!;
   let scelto: Orario | null = null;
+  const fattura = document.getElementById('dati-fattura')!;
+  const paese = fattura.querySelector<HTMLSelectElement>('[name=fattura_paese]')!;
+  const cap = fattura.querySelector<HTMLInputElement>('[name=fattura_cap]')!;
+  const provincia = fattura.querySelector<HTMLInputElement>('[name=fattura_provincia]')!;
+  const cf = fattura.querySelector<HTMLInputElement>('[name=fattura_cf]')!;
+  function aggiornaIndirizzo() {
+    const italia = paese.value === 'IT';
+    cap.required = provincia.required = cf.required = italia;
+    cap.pattern = italia ? '[0-9]{5}' : '.*';
+    cap.maxLength = italia ? 5 : 20;
+    cap.inputMode = italia ? 'numeric' : 'text';
+    provincia.pattern = italia ? '[A-Za-z]{2}' : '.*';
+    provincia.maxLength = italia ? 2 : 100;
+    provincia.placeholder = italia ? 'Es. CE' : '';
+    document.getElementById('etichetta-provincia')!.textContent = italia ? 'Sigla della provincia' : 'Provincia o regione (se prevista)';
+    fattura.querySelector<HTMLElement>('[data-facoltativo-estero]')!.hidden = italia;
+    document.getElementById('campo-cf')!.hidden = cf.disabled = !italia;
+  }
+  paese.addEventListener('change', aggiornaIndirizzo);
+  window.addEventListener('pageshow', aggiornaIndirizzo);
+  aggiornaIndirizzo();
 
   const mostraAvviso = (testo: string, errore = false) => {
     avviso.textContent = testo;
@@ -259,7 +305,11 @@ const WHATSAPP = 'https://wa.me/393885680393';
   const annullata = qs.get('annullata');
   const liberata = annullata
     ? fetch('/api/prenota/libera', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ t: annullata }) })
-        .then(() => { mostraAvviso('Il pagamento è stato annullato e l’orario è tornato libero. Puoi sceglierne uno nuovo.'); history.replaceState(null, '', location.pathname); })
+        .then((r) => {
+          if (r.ok) mostraAvviso('La richiesta di annullamento è stata elaborata. Controlla gli orari disponibili qui sotto.');
+          else mostraAvviso('Verifica lo stato del pagamento e l’email di conferma prima di prenotare di nuovo.', true);
+          history.replaceState(null, '', location.pathname);
+        })
         .catch(() => {})
     : Promise.resolve();
 
@@ -324,13 +374,19 @@ const WHATSAPP = 'https://wa.me/393885680393';
     e.preventDefault();
     if (paga.disabled) return;
     esito.classList.add('errore');
+    aggiornaIndirizzo();
     const f = new FormData(modulo);
     const materia = String(f.get('materia') || '');
     if (!materia) { esito.textContent = 'Scegli la materia.'; return; }
     if (!scelto) { esito.textContent = 'Scegli il giorno e l’ora.'; return; }
-    if (String(f.get('nome') || '').trim().length < 2) { esito.textContent = 'Scrivi nome e cognome.'; return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(f.get('email') || '').trim())) { esito.textContent = 'Scrivi un indirizzo email valido.'; return; }
     if (!/^[+0-9 ]{6,20}$/.test(String(f.get('telefono') || '').trim())) { esito.textContent = 'Scrivi un numero di telefono valido.'; return; }
+    if (!modulo.reportValidity()) { esito.textContent = 'Controlla il campo evidenziato prima di pagare.'; return; }
+    const datiFattura = Object.fromEntries(
+      ['nome', 'cognome', 'paese', 'indirizzo', 'cap', 'comune', 'provincia', 'cf'].map(
+        (campo) => [campo, String(f.get('fattura_' + campo) || '').trim()]
+      )
+    );
     if (!f.get('condizioni')) { esito.textContent = 'Per prenotare servono le condizioni accettate.'; return; }
     esito.classList.remove('errore');
     esito.textContent = 'Apertura del pagamento…';
@@ -340,8 +396,9 @@ const WHATSAPP = 'https://wa.me/393885680393';
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           materia, inizio: scelto.inizio, condizioni: true,
-          nome: f.get('nome'), email: f.get('email'), telefono: f.get('telefono'),
-          universita: f.get('universita'), note: f.get('note'), cf: f.get('cf'),
+          nome: String(f.get('nome') || '').trim() || [datiFattura.nome, datiFattura.cognome].join(' '),
+          email: f.get('email'), telefono: f.get('telefono'),
+          universita: f.get('universita'), note: f.get('note'), fatturazione: datiFattura,
         }),
       });
       const d = await r.json().catch(() => ({}));
