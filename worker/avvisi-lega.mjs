@@ -47,7 +47,7 @@ export function componiAvvisoLega(r, linkNo) {
   const en = r.lingua === 'en';
   const lega = (en ? LEGHE_EN : LEGHE)[r.lega];
   const saluto = r.nome?.trim() ? `${en ? 'Hi' : 'Ciao'} ${r.nome.trim()},` : (en ? 'Hi,' : 'Ciao,');
-  const subject = en ? `League ${lega} · You are now #${r.a}` : `Lega ${lega} · Ora sei in ${r.a}ª posizione`;
+  const subject = en ? `League ${lega} · You are now #${r.a} among students` : `Lega ${lega} · Ora sei in ${r.a}ª posizione tra gli studenti`;
   const anteprima = en
     ? `Another student moved ahead of you in this week's league.`
     : 'Un altro studente ti ha superato nella classifica settimanale.';
@@ -56,8 +56,8 @@ export function componiAvvisoLega(r, linkNo) {
     titolo: en ? 'Your league position has changed' : 'La tua posizione è cambiata',
     categoria: en ? 'Weekly league' : 'Lega della settimana',
     righe: [saluto, en
-      ? `Another student overtook you. You moved from position ${r.da} to position ${r.a}.`
-      : `Un altro studente ti ha superato. Sei passato dalla ${r.da}ª alla ${r.a}ª posizione.`],
+      ? `Another student overtook you. You moved from position ${r.da} to position ${r.a} among students.`
+      : `Un altro studente ti ha superato. Sei passato dalla ${r.da}ª alla ${r.a}ª posizione tra gli studenti.`],
     scheda: {
       etichetta: en ? `${lega} league` : `Lega ${lega}`,
       valore: en ? `#${r.da} → #${r.a}` : `${r.da}ª → ${r.a}ª posizione`,

@@ -29,16 +29,18 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     <p class="lega-attesa" hidden>Il gruppo di questa settimana si forma con i primi EXP: basta una risposta corretta a una domanda a tempo o qualche minuto di studio. <a href="/domande-a-tempo">Domande a tempo</a></p>
 
     <div class="lega-classifica" hidden>
-      <table>
-        <thead><tr><th>#</th><th>Studente</th><th class="num">EXP della settimana</th></tr></thead>
+      <p class="lega-gruppo" hidden></p>
+      <table aria-label="Classifica del tuo gruppo">
+        <thead><tr><th scope="col" aria-label="Posizione">#</th><th scope="col">Partecipante</th><th scope="col" class="num">EXP della settimana</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
 
     <section class="lega-regole">
       <h2>Come funziona</h2>
-      <p>Le leghe sono dieci, da {LEGHE[0]} a {LEGHE[LEGHE.length - 1]}. Ogni settimana, da lunedì a domenica, chi guadagna i primi EXP entra in un gruppo di al massimo {LEGA_GRUPPO} studenti della propria lega. In classifica conta soltanto l'EXP guadagnato nella settimana, con le stesse regole di <a href="/livelli-e-punti">Livelli e punti</a>: lo studio attivo, le domande a tempo, gli esercizi verificati e i duelli.</p>
-      <p>Domenica a mezzanotte la classifica si chiude. In un gruppo completo di {LEGA_GRUPPO} studenti i primi {q.sale} salgono nella lega successiva e gli ultimi {q.scende} scendono in quella precedente; nei gruppi più piccoli le quote sono proporzionali e sotto i 10 studenti nessuno scende. A parità di EXP è davanti chi è entrato prima nel gruppo.</p>
+      <p>Le leghe sono dieci, da {LEGHE[0]} a {LEGHE[LEGHE.length - 1]}. Ogni settimana, da lunedì a domenica, chi guadagna i primi EXP entra in un gruppo di al massimo {LEGA_GRUPPO} studenti della propria lega. Il tuo punteggio in classifica è la somma degli EXP guadagnati nella settimana con lo studio attivo, le domande a tempo, gli esercizi verificati e i duelli. Trovi il dettaglio in <a href="/livelli-e-punti">Livelli e punti</a>.</p>
+      <p>Nei gruppi con pochi studenti puoi incontrare avversari simulati. Guadagnano EXP di tanto in tanto e nelle leghe più alte possono raggiungere punteggi maggiori. Per salire o scendere di lega conta la tua posizione tra gli studenti.</p>
+      <p>Domenica a mezzanotte la classifica si chiude. In un gruppo completo di {LEGA_GRUPPO} studenti i primi {q.sale} salgono nella lega successiva e gli ultimi {q.scende} scendono in quella precedente. Nei gruppi più piccoli le quote sono proporzionali e sotto i 10 studenti nessuno scende. Tra due studenti con gli stessi EXP precede chi è entrato prima nel gruppo.</p>
     </section>
 
     <section class="lega-nome-pubblico" hidden>
@@ -75,6 +77,7 @@ const q = quoteLega(LEGA_GRUPPO, 4);
   .lega-esito.sale { background: color-mix(in srgb, #2f6f68 10%, var(--carta)); }
   .lega-ospite, .lega-attesa { font-family: var(--ui); margin-top: 1.6rem; }
   .lega-classifica { margin-top: 1.6rem; }
+  .lega-gruppo { margin: 0 0 0.75rem; font: 0.88rem/1.45 var(--ui); color: var(--inchiostro-2); }
   .lega-classifica table { width: 100%; border-collapse: collapse; font-family: var(--ui); font-size: 0.95rem; }
   .lega-classifica th { text-align: left; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--inchiostro-2); font-weight: 600; padding: 0 0.5rem 0.4rem; border-bottom: 1px solid var(--riga); }
   .lega-classifica td { padding: 0.45rem 0.5rem; border-bottom: 1px solid color-mix(in srgb, var(--riga) 60%, transparent); vertical-align: middle; }
@@ -115,43 +118,68 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     return `${m} minuti`;
   }
 
-  async function carica() {
-    const r = await fetch('/api/lega').catch(() => null);
-    if (!r || r.status === 401) { $('.lega-ospite').hidden = false; $('.lega-nome').textContent = 'Lega della settimana'; return; }
+  async function aggiorna(rileggiPreferenze: boolean) {
+    const r = await fetch('/api/lega');
+    if (r.status === 401) {
+      $('.lega-ospite').hidden = false;
+      for (const s of ['.lega-classifica', '.lega-attesa', '.lega-esito', '.lega-nome-pubblico']) $(s).hidden = true;
+      $('.lega-nome').textContent = 'Lega della settimana';
+      $('.lega-tempo').textContent = '';
+      return;
+    }
+    if (!r.ok) throw new Error();
     const d = await r.json();
+    $('.lega-ospite').hidden = true;
     $('.lega-nome').textContent = `Lega ${d.nomeLega}`;
     $('.lega-medaglia').innerHTML = medagliaLega(d.lega, d.leghe[d.lega]);
     $('.lega-tempo').textContent = `La classifica si chiude domenica a mezzanotte: mancano ${mancano(d.fine)}.`;
     radice.querySelectorAll<HTMLElement>('.lega-scala li').forEach((li, i) => { li.classList.toggle('attuale', i === d.lega); li.classList.toggle('passata', i < d.lega); });
     $('.lega-scala').classList.toggle('vicino-fine', d.lega >= d.leghe.length - 2);
     $('.lega-scala').classList.toggle('vicino-inizio', d.lega <= 1);
+    $('.lega-esito').hidden = !d.esito;
     if (d.esito) {
       const e = d.esito, el = $('.lega-esito');
       const dove = e.a > e.da ? `e sei salito nella lega ${e.nomeA}` : e.a < e.da ? `e sei sceso nella lega ${e.nomeA}` : `e sei rimasto nella lega ${e.nomeA}`;
-      el.textContent = `La settimana scorsa sei arrivato ${e.posizione}° su ${e.membri} nella lega ${e.nomeDa} ${dove}.`;
+      el.textContent = `La settimana scorsa hai chiuso al ${e.posizione}° posto tra gli studenti del tuo gruppo nella lega ${e.nomeDa} ${dove}.`;
       el.classList.toggle('sale', e.a > e.da);
-      el.hidden = false;
     }
-    if (d.attesa) $('.lega-attesa').hidden = false;
-    else {
+    $('.lega-attesa').hidden = !d.attesa;
+    $('.lega-classifica').hidden = !!d.attesa;
+    if (!d.attesa) {
       const righe: string[] = [];
       const n = d.gruppo.length;
+      const notaGruppo = $('.lega-gruppo');
+      notaGruppo.hidden = !d.conSimulati;
+      if (d.conSimulati) {
+        const io = d.gruppo.find((m: any) => m.io);
+        const zona = io.zona === 'sale' ? ' · In zona promozione' : io.zona === 'scende' ? ' · In zona retrocessione' : '';
+        notaGruppo.textContent = `Tra gli studenti sei al ${io.posizioneStudente}° posto${zona}.`;
+      }
       d.gruppo.forEach((m: any, i: number) => {
-        if (d.sale && i === 0) righe.push(`<tr class="confine sale"><td colspan="3">Salgono nella lega ${esc(d.leghe[d.lega + 1] || '')}</td></tr>`);
-        if (d.scende && i === n - d.scende) righe.push(`<tr class="confine scende"><td colspan="3">Scendono nella lega ${esc(d.leghe[d.lega - 1] || '')}</td></tr>`);
+        if (!d.conSimulati && d.sale && i === 0) righe.push(`<tr class="confine sale"><td colspan="3">Salgono nella lega ${esc(d.leghe[d.lega + 1] || '')}</td></tr>`);
+        if (!d.conSimulati && d.scende && i === n - d.scende) righe.push(`<tr class="confine scende"><td colspan="3">Scendono nella lega ${esc(d.leghe[d.lega - 1] || '')}</td></tr>`);
         const rg = rangoDi(m.livello);
-        righe.push(`<tr class="${m.io ? 'io ' : ''}${m.zona}"><td class="pos">${m.pos}</td><td><span class="chi"><span class="mini">${stemmaSVG(rg, { perc: 100, id: `l${i}`, grado: gradoDi(m.livello) })}</span><span>${esc(m.nome)}${m.io ? ' <small>(tu)</small>' : ''} <small>· Liv. ${m.livello}</small></span></span></td><td class="num">${num(m.exp)}</td></tr>`);
+        const zona = d.conSimulati ? '' : m.zona || '';
+        righe.push(`<tr class="${m.io ? 'io ' : ''}${zona}"><td class="pos">${m.pos}</td><td><span class="chi"><span class="mini">${stemmaSVG(rg, { perc: 100, id: `l${i}`, grado: gradoDi(m.livello) })}</span><span>${esc(m.nome)}${m.io ? ' <small>(tu)</small>' : ''} <small>· Liv. ${m.livello}</small></span></span></td><td class="num">${num(m.exp)}</td></tr>`);
       });
       $('.lega-classifica tbody').innerHTML = righe.join('');
-      $('.lega-classifica').hidden = false;
     }
     const sez = $('.lega-nome-pubblico');
+    if (!sez.hidden && !rileggiPreferenze) return;
     const f = sez.querySelector('form')!;
     (f.elements.namedItem('soprannome') as HTMLInputElement).value = d.soprannome;
     (f.elements.namedItem('soprannome') as HTMLInputElement).placeholder = d.pubblico ? d.nome : 'Studente';
     (f.elements.namedItem('pubblico') as HTMLInputElement).checked = d.pubblico;
     (f.elements.namedItem('avvisiLega') as HTMLInputElement).checked = d.avvisiLega;
     sez.hidden = false;
+  }
+  let richiesta: Promise<void> | undefined;
+  function carica(rileggiPreferenze = false): Promise<void> {
+    if (richiesta) return rileggiPreferenze ? richiesta.then(() => carica(true)) : richiesta;
+    richiesta = aggiorna(rileggiPreferenze).catch(() => {
+      if ($('.lega-nome-pubblico').hidden && $('.lega-ospite').hidden) $('.lega-tempo').textContent = 'La classifica è temporaneamente indisponibile.';
+    }).finally(() => { richiesta = undefined; });
+    return richiesta;
   }
   radice.querySelector('.lega-nome-pubblico form')!.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -161,8 +189,11 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     const r = await fetch('/api/lega/nome', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
       soprannome: (f.elements.namedItem('soprannome') as HTMLInputElement).value, pubblico: (f.elements.namedItem('pubblico') as HTMLInputElement).checked }) }).catch(() => null);
     const avvisi = await fetch('/api/lega/avvisi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ attivi: (f.elements.namedItem('avvisiLega') as HTMLInputElement).checked }) }).catch(() => null);
-    if (r?.ok && avvisi?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(); }
+    if (r?.ok && avvisi?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(true); }
     else f.querySelector<HTMLElement>('.errore-salvataggio')!.hidden = false;
   });
+  const aggiornaSeVisibile = () => { if (document.visibilityState === 'visible') carica(); };
+  document.addEventListener('visibilitychange', aggiornaSeVisibile);
+  window.setInterval(aggiornaSeVisibile, 120_000);
   carica();
 </script>
