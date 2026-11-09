@@ -51,7 +51,7 @@ export async function GET() {
   for (const v of VIDEOCORSI) due(`/videocorsi/${v.slug}`, 0.6, false);
   for (const p of ['/prezzi', '/contatti']) due(p, 0.3);
   due('/livelli-e-punti', 0.2);
-  for (const p of ['/privacy', '/termini']) due(p, 0.1);
+  for (const p of ['/privacy', '/termini', '/rimborsi']) due(p, 0.1);
   let tuttoIt: string | undefined, tuttoEn: string | undefined;
   for (const m of MATERIE.filter((x) => x.attiva)) {
     const materia = pagine.length;

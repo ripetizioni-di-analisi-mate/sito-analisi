@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import { LEZIONI } from '../data/lezioni';
+---
+<Base titolo="Politica di rimborso e diritto di recesso" percorso={[{ titolo: 'Rimborsi e recesso' }]} descrizione="Come chiedere un rimborso per materie, pacchetti e videocorsi acquistati con Paddle o disdire una lezione con Carmine.">
+  <p class="sopratitolo">Assistenza sugli acquisti</p>
+  <h1>Politica di rimborso e diritto di recesso</h1>
+  <p class="sommario">Se hai acquistato del materiale di studio, trovi il riferimento dell’ordine nella ricevuta di Paddle. Se hai prenotato una lezione con Carmine, trovi il link per gestirla nell’email di conferma.</p>
+
+  <h2>Materie, pacchetti e videocorsi preregistrati</h2>
+  <p>Paddle è il rivenditore autorizzato per questi acquisti digitali una tantum. Per chiedere un rimborso, apri il link di assistenza nella ricevuta oppure <a href="https://paddle.net/">accedi all’assistenza acquirenti di Paddle</a>. Per esercitare il diritto di recesso, apri il portale dal link di gestione dell’ordine nella ricevuta. Per gli acquisti idonei trovi la funzione di recesso durante il periodo previsto.</p>
+  <p>Se acquisti come consumatore nell’Unione europea, di norma hai <strong>14 giorni dalla conclusione del contratto</strong> per recedere senza indicare il motivo. Per i contenuti digitali forniti online, perdi questo diritto una volta iniziata la fornitura solo se hai chiesto espressamente che inizi subito, hai riconosciuto che così perdi il diritto di recesso e hai ricevuto conferma del contratto e di entrambe le dichiarazioni su un supporto durevole, per esempio via email.</p>
+  <p>Se eserciti validamente il recesso, Paddle ti rimborsa quanto pagato entro 14 giorni dalla tua comunicazione. Per richieste diverse, Paddle può valutare un rimborso discrezionale se lo chiedi entro 14 giorni dall’acquisto. Si applicano la <a href="https://www.paddle.com/legal/refund-policy">politica di rimborso di Paddle</a> e le tutele inderogabili previste dalla legge del tuo Paese.</p>
+
+  <h2>Problemi con l’accesso o con i contenuti</h2>
+  <p>Se il materiale acquistato è inaccessibile, difettoso o diverso dalla descrizione, scrivi a <a href="mailto:carminetornincasa98@gmail.com">Carmine Tornincasa</a> indicando il prodotto, l’email usata per acquistarlo e il problema riscontrato. Se il problema persiste, puoi rivolgerti a Paddle tramite la ricevuta. Restano validi i tuoi diritti di legge in caso di difetto di conformità.</p>
+
+  <h2>Lezioni individuali e corsi di gruppo dal vivo</h2>
+  <p>Le lezioni individuali si prenotano sul sito e si pagano con Stripe. Per spostare o disdire una lezione, apri il link nell’email di conferma. Se disdici almeno {LEZIONI.rimborsoOre} ore prima dell’inizio, ricevi il rimborso completo sulla carta usata per pagare. Per le disdette successive si applicano le <a href="/prenota#condizioni">condizioni di prenotazione</a>, fatti salvi i diritti previsti dalla legge.</p>
+  <p>Per i corsi di gruppo in diretta, i pagamenti sono gestiti direttamente da Carmine. Per una disdetta o una richiesta di rimborso relativa al tuo gruppo, <a href="/contatti">contatta Carmine</a> indicando il corso e la data del pagamento.</p>
+  <p><small>Aggiornata il 9 novembre 2026.</small></p>
+</Base>
