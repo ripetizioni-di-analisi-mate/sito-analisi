@@ -248,6 +248,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Pagine: `/formulari` (elenco), `/formulari/<materia>` (indicizzata, dati strutturati LearningResource gratuito, sezioni a pillole, riquadro di scaricamento), `/formulari/<materia>/stampa` (noindex) da cui `node scripts/pdf-formulari.mjs precorso analisi-1 analisi-2` genera `public/pdf/formulari/<materia>.pdf` (usa Chrome di sistema se Playwright non ha il suo Chromium).
 - Il PDF si scarica solo con un account (anche gratuito): il Worker manda gli ospiti a `/formulari/<materia>#scarica`; agli iscritti risponde con `content-disposition: attachment` e `noindex`. Ospiti: tasto «Crea un account gratuito e scarica il PDF» → `/accedi?nuovo=1&dopo=…`.
 - Voce «Formulari» nell'indice laterale (dopo Videocorsi), sitemap, `llms.txt`, Pi.
+- 09/11/2026: aggiunto il **formulario di Fisica 1** (14 sezioni, 139 blocchi, solo italiano; scritto e verificato da due agenti con sympy) per il carosello Instagram «Formulario di Fisica 1» che rimanda a `/formulari/fisica-1`. Inglese non ancora fatto.
 
 ## Invita un amico (02/11/2026, richiesta di Carmine: 15% a entrambi, solo materie)
 - Regole in `src/data/inviti.ts`; codice in `worker/inviti.mjs` (tabelle `inviti`, `invitati`, `sconti_invito`, `premi_invito`; rotte DO `/inv-*`; `/invito/<CODICE>` → cookie `invito` 30 giorni e pagina `/invito`; `/api/invito`; `/api/sconto?materia=`).
