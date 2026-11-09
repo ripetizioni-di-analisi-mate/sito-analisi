@@ -78,7 +78,7 @@ const icona = {
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
-    <details class="gruppo" open={i === 0} id={id}>
+    <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]} open={i === 0} id={id}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
       {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
