@@ -41,6 +41,10 @@ function terna(valore, nome) {
   return (consonanti + vocali).padEnd(3, 'X').slice(0, 3);
 }
 
+export function nomeCalcolabile(valore) {
+  return terna(valore, false) !== null;
+}
+
 // Calcola il codice ordinario dai dati anagrafici. Le omocodie sono attribuite dall'Agenzia.
 export function calcolaCodiceFiscale(dati, oggi = new Date()) {
   const { nome, cognome, dataNascita, sesso, catastale } = dati ?? {};

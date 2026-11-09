@@ -1,4 +1,4 @@
-import { calcolaCodiceFiscale } from '../data/codice-fiscale.mjs';
+import { calcolaCodiceFiscale, nomeCalcolabile } from '../data/codice-fiscale.mjs';
 
 type Luogo = [nome: string, provincia: string, codice: string, dal: string, al: string, inglese?: string];
 const chiave = (testo: string) => testo.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -10,6 +10,9 @@ export function preparaCalcoloCF(fattura: HTMLElement) {
   const cf = sezione.querySelector<HTMLInputElement>('[name=fattura_cf]')!;
   const finestra = sezione.querySelector<HTMLDialogElement>('[data-cf-dialog]')!;
   const apri = sezione.querySelector<HTMLButtonElement>('[data-cf-apri]')!;
+  const spuntaNome = sezione.querySelector<HTMLElement>('[data-cf-nome]')!;
+  const spuntaCognome = sezione.querySelector<HTMLElement>('[data-cf-cognome]')!;
+  const guida = sezione.querySelector<HTMLElement>('[data-cf-guida]')!;
   const data = sezione.querySelector<HTMLInputElement>('[data-cf-data]')!;
   const sesso = sezione.querySelector<HTMLSelectElement>('[data-cf-sesso]')!;
   const luogo = sezione.querySelector<HTMLInputElement>('[data-cf-luogo]')!;
@@ -17,16 +20,33 @@ export function preparaCalcoloCF(fattura: HTMLElement) {
   const stato = sezione.querySelector<HTMLElement>('[data-cf-stato]')!;
   const en = fattura.dataset.lingua === 'en';
   const erroreArchivio = en ? 'Birthplace search is unavailable. Try again or enter your official tax code.' : 'Ricerca dei luoghi non disponibile. Riprova oppure inserisci il codice della tessera sanitaria.';
-  const mancaNome = en ? 'Close this window and enter the billing recipient’s first and last names.' : 'Chiudi la finestra e inserisci nome e cognome dell’intestatario.';
   let apertura = 0;
+
+  function aggiornaRequisiti() {
+    const nomeOk = nomeCalcolabile(nome.value);
+    const cognomeOk = nomeCalcolabile(cognome.value);
+    spuntaNome.dataset.completo = String(nomeOk);
+    spuntaCognome.dataset.completo = String(cognomeOk);
+    apri.disabled = !nomeOk || !cognomeOk;
+    let testo = en ? 'Fill in first' : 'Completa prima';
+    if (!apri.disabled) testo = en ? 'Ready' : 'Dati pronti';
+    else if ((!nomeOk && nome.value.trim()) || (!cognomeOk && cognome.value.trim()))
+      testo = en ? 'Check the spelling or enter your tax code by hand.' : 'Controlla la grafia o inserisci il codice a mano.';
+    else if (nomeOk) testo = en ? 'Last name needed' : 'Manca il cognome';
+    else if (cognomeOk) testo = en ? 'First name needed' : 'Manca il nome';
+    if (guida.textContent !== testo) guida.textContent = testo;
+    if (apri.disabled && finestra.open) chiudi(nomeOk ? cognome : nome);
+  }
 
   function chiudi(destinazione: HTMLElement) {
     finestra.close();
     destinazione.focus({ preventScroll: true });
   }
   apri.addEventListener('click', () => {
+    aggiornaRequisiti();
+    if (apri.disabled) return;
     apertura++;
-    stato.textContent = nome.value.trim() && cognome.value.trim() ? '' : mancaNome;
+    stato.textContent = '';
     finestra.showModal();
   });
   sezione.querySelector('[data-cf-chiudi]')!.addEventListener('click', () => chiudi(apri));
@@ -67,21 +87,23 @@ export function preparaCalcoloCF(fattura: HTMLElement) {
   let compilatoDalCalcolo = false;
   cf.addEventListener('input', () => { compilatoDalCalcolo = false; stato.textContent = ''; });
   for (const campo of [nome, cognome]) campo.addEventListener('input', () => {
+    aggiornaRequisiti();
     stato.textContent = '';
     if (compilatoDalCalcolo) {
       cf.value = '';
       compilatoDalCalcolo = false;
     }
   });
+  for (const campo of [nome, cognome]) campo.addEventListener('change', aggiornaRequisiti);
+  fattura.addEventListener('focusin', aggiornaRequisiti);
+  window.addEventListener('pageshow', aggiornaRequisiti);
+  aggiornaRequisiti();
   finestra.addEventListener('input', () => { stato.textContent = ''; });
 
   async function calcola(evento: Event) {
     evento.preventDefault();
+    aggiornaRequisiti();
     if (!finestra.open || sezione.hidden) return;
-    if (!nome.value.trim() || !cognome.value.trim()) {
-      stato.textContent = mancaNome;
-      return;
-    }
     if (![data, sesso, luogo].every(campo => campo.value.trim())) {
       stato.textContent = en ? 'Enter your date of birth, sex and birthplace.' : 'Completa data di nascita, sesso e luogo di nascita.';
       return;

@@ -18,11 +18,16 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   <label>{en ? 'City or town' : 'Comune o città'}<input name="fattura_comune" autocomplete="section-fattura billing address-level2" maxlength="100" required /></label>
   <label><span id="etichetta-provincia">{en ? 'Province code' : 'Sigla della provincia'}</span><input name="fattura_provincia" autocomplete="section-fattura billing address-level1" autocapitalize="characters" placeholder={en ? 'e.g. RM' : 'Es. RM'} pattern="[A-Za-z]{2}" maxlength="2" required /></label>
   <div class="calcolo-cf" data-calcolo-cf>
-    <div class="etichetta-cf">
-      <label for="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}</label>
-      <button type="button" class="aiuto-cf" data-cf-apri aria-haspopup="dialog" aria-controls="finestra-cf" aria-label={en ? 'Help calculating the Italian tax code' : 'Aiuto per calcolare il codice fiscale'}>{en ? 'Help' : 'Aiuto'}</button>
-    </div>
+    <label for="campo-cf">{en ? 'Italian tax code of the invoice recipient' : 'Codice fiscale dell’intestatario'}</label>
     <input id="campo-cf" name="fattura_cf" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="16" pattern="([A-Za-z0-9]{16}|[0-9]{11})" required />
+    <div class="azioni-cf">
+      <small id="requisiti-cf" data-cf-requisiti role="status" aria-atomic="true">
+        <span data-cf-guida>{en ? 'Fill in first' : 'Completa prima'}</span>
+        <span data-cf-nome data-completo="false">{en ? 'First name' : 'Nome'}</span>
+        <span data-cf-cognome data-completo="false">{en ? 'Last name' : 'Cognome'}</span>
+      </small>
+      <button type="button" class="automatico-cf" data-cf-apri aria-haspopup="dialog" aria-controls="finestra-cf" aria-describedby="requisiti-cf" disabled>{en ? 'Automatic calculation' : 'Calcolo automatico'}</button>
+    </div>
     <dialog id="finestra-cf" class="finestra-cf" data-cf-dialog aria-labelledby="titolo-cf">
       <div class="contenuto-cf">
         <div class="testa-cf">
@@ -54,9 +59,16 @@ const paesi = CODICI_PAESE.map((codice) => ({ codice, nome: nomi.of(codice) || c
   .campi-fattura select { font: inherit; font-weight: 400; padding: 0.6rem 0.8rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: white; color: var(--inchiostro); }
   #campo-cf { text-transform: uppercase; }
   .calcolo-cf { display: grid; align-content: start; gap: .3rem; min-width: 0; }
-  .etichetta-cf, .testa-cf { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
-  .aiuto-cf, .chiudi-cf { border: 0; background: transparent; color: var(--accento); font: inherit; cursor: pointer; }
-  .aiuto-cf { padding: 0 .2rem; min-height: 1.5rem; font-size: .85rem; text-decoration: underline; text-underline-offset: .14em; }
+  .testa-cf, .azioni-cf { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+  .azioni-cf { flex-wrap: wrap; gap: .15rem .65rem; }
+  [data-cf-requisiti] { display: flex; align-items: baseline; flex-wrap: wrap; gap: .15rem .45rem; color: var(--inchiostro-2); font-size: .82rem; }
+  [data-completo] { white-space: nowrap; }
+  [data-completo]::before { content: '○ '; }
+  [data-completo="true"] { color: var(--accento); }
+  [data-completo="true"]::before { content: '✓ '; font-weight: 700; }
+  .automatico-cf, .chiudi-cf { border: 0; background: transparent; color: var(--accento); font: inherit; cursor: pointer; }
+  .automatico-cf { padding: 0; min-height: 1.5rem; font-size: .85rem; text-decoration: underline; text-underline-offset: .14em; }
+  .automatico-cf:disabled { color: var(--inchiostro-2); text-decoration: none; cursor: default; }
   .finestra-cf { box-sizing: border-box; width: min(25rem, calc(100% - 1.5rem)); max-height: calc(100dvh - 2rem); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--riga); border-radius: 12px; background: var(--carta, white); color: var(--inchiostro); box-shadow: 0 10px 36px rgb(34 48 47 / 18%); }
   .finestra-cf::backdrop { background: rgb(34 48 47 / 28%); }
   .contenuto-cf { display: grid; gap: .8rem; padding: 1rem 1.15rem; }
