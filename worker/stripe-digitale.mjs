@@ -306,8 +306,8 @@ async function confermaOrdine(env, h, r) {
     scheda: { etichetta: q.titolo, valore: formatoEuro(r.in_centesimi, en) },
     dopo: [
       en
-        ? 'Before payment you accepted the terms of sale, read the refund policy and made the following declaration. Your statutory rights for defective content still apply.'
-        : 'Prima del pagamento hai accettato le condizioni di vendita, letto la politica di rimborso e confermato la dichiarazione riportata qui sotto. Restano validi i diritti per i contenuti difettosi.',
+        ? 'Before payment you accepted the terms of sale and made the following declaration. Your statutory rights for defective content still apply.'
+        : 'Prima del pagamento hai accettato le condizioni di vendita e confermato la dichiarazione riportata qui sotto. Restano validi i diritti per i contenuti difettosi.',
       q.consensoFornitura,
       (en ? 'Terms version: ' : 'Versione dei termini: ') + q.versioneCondizioni,
       SITO_EMAIL + pref + '/termini',

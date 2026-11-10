@@ -2,12 +2,17 @@ import novembre2026 from './condizioni-digitali/2026-11-09.1.json' with { type: 
 
 // Le email di conferma possono essere ritentate dopo una modifica dei termini.
 // Si allega sempre la versione che il cliente ha accettato per il suo ordine.
-const versioni = new Map([['2026-11-09.1', novembre2026]]);
+// Il 10 novembre è cambiata la spunta del checkout. Le pagine legali sono le stesse.
+const versioni = new Map([
+  ['2026-11-09.1', novembre2026],
+  ['2026-11-10.1', novembre2026],
+]);
 
 export function allegatoContrattoDigitale(lingua, versione) {
   const testo = versioni.get(versione)?.[lingua];
   if (!Array.isArray(testo)) throw new Error('Versione o lingua del contratto assente');
-  const bytes = new TextEncoder().encode(testo.join('\n\n'));
+  const [intestazione, ...corpo] = testo;
+  const bytes = new TextEncoder().encode([intestazione.replace('2026-11-09.1', versione), ...corpo].join('\n\n'));
   const nome = lingua === 'en' ? 'terms-and-refunds' : 'termini-e-rimborsi';
   return {filename: nome+'-'+versione+'.txt',content:btoa(String.fromCharCode(...bytes))};
 }
