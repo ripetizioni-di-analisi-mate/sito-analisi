@@ -87,7 +87,7 @@ y_G = \frac{16 \cdot 4 + 16 \cdot 9}{16 + 16}\,\mathrm{cm} = \frac{208}{32}\,\ma
 $$
 Come controllo, rispetto all'asse $x_G$ i momenti statici delle due parti sono $16 \cdot (4 - 6{,}5) = -40\,\mathrm{cm^3}$ e $16 \cdot (9 - 6{,}5) = 40\,\mathrm{cm^3}$, e la loro somma è nulla.
 
-::struttura{poligoni="-1,0 1,0 1,8 4,8 4,10 -4,10 -4,8 -1,8" punti="0,6.5,G,baricentro" tratteggi="-5.5,6.5 5.5,6.5" frecce="-5.5,0,6,0,x;0,-0.6,0,11.6,y" etichette="6.1,6.8,x_G" quote="-4 10,4 10,8 cm,-0.8;-1 0,1 0,2 cm,1.1;4 0,4 10,10 cm,1.3;-4 8,-4 10,2 cm,-0.8" riferimento=0 titolo="Sezione a T con l'asse di simmetria $y$: il baricentro $G$ dista $y_G = 6{,}5\,\mathrm{cm}$ dal lembo inferiore"}
+::struttura{poligoni="-1,0 1,0 1,8 4,8 4,10 -4,10 -4,8 -1,8" punti="0,6.5,G,baricentro" tratteggi="-5.5,6.5 5.5,6.5" frecce="-5.5,0,6,0,x;0,-0.6,0,11.6,y" etichette="6.1,6.8,x_G" quote="-4 10,4 10,8 cm,-1.9;-1 0,1 0,2 cm,1.1;4 0,4 10,10 cm,1.3;-4 8,-4 10,2 cm,-0.8" riferimento=0 titolo="Sezione a T con l'asse di simmetria $y$: il baricentro $G$ dista $y_G = 6{,}5\,\mathrm{cm}$ dal lembo inferiore"}
 
 :::
 
@@ -117,7 +117,7 @@ $$
 
 ## Momenti d'inerzia
 
-Il baricentro dice dove sta in media l'area; i momenti d'inerzia misurano quanto l'area è lontana da un asse.
+Il baricentro individua la posizione media dell'area; i momenti d'inerzia misurano quanto l'area è lontana da un asse.
 
 :::definizione{#momenti-d-inerzia titolo="Momenti d'inerzia assiali, centrifugo e polare"}
 I **momenti d'inerzia** della figura rispetto agli assi $x$ e $y$, il **momento centrifugo** e il **momento polare** rispetto all'origine $O$ sono
@@ -155,7 +155,7 @@ $$
 
 ## Teorema di Huygens-Steiner
 
-Le tabelle danno i momenti d'inerzia delle figure elementari rispetto ai loro assi baricentrici; il teorema seguente li trasporta su assi paralleli.
+Il teorema seguente collega il momento d'inerzia rispetto a un asse qualsiasi a quello rispetto all'asse baricentrico parallelo, che per le figure elementari è noto.
 
 ::::teorema{#huygens-steiner titolo="Teorema di Huygens-Steiner"}
 Sia $G = (x_G, y_G)$ il baricentro della figura di area $A$, e siano $x_G$ e $y_G$ gli assi baricentrici paralleli agli assi $x$ e $y$. Allora

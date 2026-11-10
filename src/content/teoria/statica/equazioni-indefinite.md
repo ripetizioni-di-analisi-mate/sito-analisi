@@ -71,7 +71,7 @@ Nelle ipotesi delle equazioni indefinite, se le coppie distribuite sono nulle, o
 $$
 \frac{d^2M}{dx^2} = -q .
 $$
-Si ottiene derivando $\dfrac{dM}{dx} = T - m$ e sostituendo $\dfrac{dT}{dx} = -q$. Il momento si ricava allora dal carico con due integrazioni, e le due costanti si determinano con due condizioni su $M$. Con $q$ costante $M(x) = -\dfrac{q\,x^2}{2} + C_1 x + C_2$, e in una trave appoggiata agli estremi le condizioni $M(0) = 0$ e $M(L) = 0$ danno $C_2 = 0$ e $C_1 = \dfrac{qL}{2}$.
+Si ottiene derivando $\dfrac{dM}{dx} = T - m$ e sostituendo $\dfrac{dT}{dx} = -q$. Il momento si ricava allora dal carico con due integrazioni, e le due costanti si determinano con due condizioni su $M$. Con $q$ costante $M(x) = -\dfrac{q\,x^2}{2} + c_1 x + c_2$, e in una trave appoggiata agli estremi le condizioni $M(0) = 0$ e $M(L) = 0$ danno $c_2 = 0$ e $c_1 = \dfrac{qL}{2}$.
 :::
 
 :::richiamo{titolo="Teorema fondamentale del calcolo integrale"}
@@ -158,11 +158,11 @@ Sia una trave di luce $L = 6\,\mathrm{m}$, con una cerniera in $A$ ($x = 0$), un
 
 Integrando $\dfrac{dT}{dx} = -4$ e $\dfrac{dM}{dx} = T$ si ottiene
 $$
-T(x) = C_1 - 4x ,
+T(x) = c_1 - 4x ,
 \qquad
-M(x) = C_2 + C_1 x - 2x^2 .
+M(x) = c_2 + c_1 x - 2x^2 .
 $$
-Le condizioni $M(0) = 0$ e $M(6) = 0$ danno $C_2 = 0$ e $6C_1 - 72 = 0$, quindi $C_1 = 12\,\mathrm{kN}$ e
+Le condizioni $M(0) = 0$ e $M(6) = 0$ danno $c_2 = 0$ e $6c_1 - 72 = 0$, quindi $c_1 = 12\,\mathrm{kN}$ e
 $$
 T(x) = 12 - 4x ,
 \qquad
@@ -206,11 +206,11 @@ Il momento è negativo, cioè tende le fibre superiori, e il suo valore assoluto
 :::esempio{titolo="Trave appoggiata con carico triangolare"}
 Sia una trave appoggiata di luce $L$ con carico $q(x) = \dfrac{q_0\,x}{L}$, nullo in $A$ e uguale a $q_0$ in $B$. Integrando due volte con $M(0) = 0$ si ha
 $$
-T(x) = C_1 - \frac{q_0\,x^2}{2L} ,
+T(x) = c_1 - \frac{q_0\,x^2}{2L} ,
 \qquad
-M(x) = C_1 x - \frac{q_0\,x^3}{6L} ,
+M(x) = c_1 x - \frac{q_0\,x^3}{6L} ,
 $$
-e la condizione $M(L) = 0$ dà $C_1 = \dfrac{q_0 L}{6}$. Le reazioni sono $V_A = \dfrac{q_0 L}{6}$ e $V_B = -T(L) = \dfrac{q_0 L}{3}$. La risultante $\dfrac{q_0 L}{2}$ si ripartisce con il rapporto $1 : 2$, perché è applicata a due terzi della luce. Il taglio si annulla in $x = \dfrac{L}{\sqrt{3}} \approx 0{,}577\,L$, spostato verso l'estremo più caricato. Per $q_0 = 6\,\mathrm{kN/m}$ e $L = 6\,\mathrm{m}$ si ha $T(x) = 6 - \dfrac{x^2}{2}$, che si annulla in $x = 2\sqrt{3} \approx 3{,}46\,\mathrm{m}$.
+e la condizione $M(L) = 0$ dà $c_1 = \dfrac{q_0 L}{6}$. Le reazioni sono $V_A = \dfrac{q_0 L}{6}$ e $V_B = -T(L) = \dfrac{q_0 L}{3}$. La risultante $\dfrac{q_0 L}{2}$ si ripartisce con il rapporto $1 : 2$, perché è applicata a due terzi della luce. Il taglio si annulla in $x = \dfrac{L}{\sqrt{3}} \approx 0{,}577\,L$, spostato verso l'estremo più caricato. Per $q_0 = 6\,\mathrm{kN/m}$ e $L = 6\,\mathrm{m}$ si ha $T(x) = 6 - \dfrac{x^2}{2}$, che si annulla in $x = 2\sqrt{3} \approx 3{,}46\,\mathrm{m}$.
 
 ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello" diagramma="0,0,6,0,6-s^2/2" segni=1 titolo="Diagramma del taglio $T$ ($\mathrm{kN}$) con carico triangolare: parabola che si annulla in $x = 2\sqrt{3}\,\mathrm{m}$"}
 
@@ -247,11 +247,11 @@ Il taglio è di terzo grado e il momento di quarto. Per simmetria il taglio si a
 :::esempio{titolo="Carico sinusoidale"}
 Il carico $q(x) = q_0 \sin\dfrac{\pi x}{L}$ su una trave appoggiata si integra con le primitive di seno e coseno:
 $$
-T(x) = \frac{q_0 L}{\pi}\cos\frac{\pi x}{L} + C_1 ,
+T(x) = \frac{q_0 L}{\pi}\cos\frac{\pi x}{L} + c_1 ,
 \qquad
-M(x) = \frac{q_0 L^2}{\pi^2}\sin\frac{\pi x}{L} + C_1 x + C_2 .
+M(x) = \frac{q_0 L^2}{\pi^2}\sin\frac{\pi x}{L} + c_1 x + c_2 .
 $$
-Le condizioni $M(0) = 0$ e $M(L) = 0$ danno $C_2 = 0$ e $C_1 L = 0$, quindi $C_1 = 0$. Il momento ha la stessa forma del carico, con il massimo $\dfrac{q_0 L^2}{\pi^2}$ in mezzeria, e le reazioni valgono $\dfrac{q_0 L}{\pi}$. Un carico qualsiasi su una trave appoggiata si può sviluppare in serie di termini $\sin\dfrac{k\pi x}{L}$, e per ciascun termine il calcolo è identico a questo.
+Le condizioni $M(0) = 0$ e $M(L) = 0$ danno $c_2 = 0$ e $c_1 L = 0$, quindi $c_1 = 0$. Il momento ha la stessa forma del carico, con il massimo $\dfrac{q_0 L^2}{\pi^2}$ in mezzeria, e le reazioni valgono $\dfrac{q_0 L}{\pi}$. Un carico qualsiasi su una trave appoggiata si può sviluppare in serie di termini $\sin\dfrac{k\pi x}{L}$, e per ciascun termine il calcolo è identico a questo.
 :::
 
 ## Momento flettente massimo

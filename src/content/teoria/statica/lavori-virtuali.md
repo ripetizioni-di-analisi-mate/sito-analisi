@@ -33,7 +33,7 @@ La trave in figura ha in $A = (0, 0)$ un carrello che scorre su un piano orizzon
 :::
 
 :::attenzione
-Gli spostamenti virtuali sono infinitesimi: un punto che ruota attorno al centro si sposta sulla perpendicolare al raggio, e il conto non segue l'arco di circonferenza. Per la trave $AB$ che ruota di $\delta\varphi$ attorno ad $A = (0, 0)$, il punto $B = (6, 0)$ ha $\delta u_B = 0$ e $\delta v_B = 6\,\delta\varphi$. Una rotazione finita di $10^\circ$ sposterebbe $B$ anche in orizzontale, di $6\,(1 - \cos 10^\circ) \approx 0{,}09\,\mathrm{m}$, ma questo termine è di secondo ordine nell'angolo e nel lavoro virtuale non compare.
+Gli spostamenti virtuali sono infinitesimi: un punto che ruota attorno al centro si sposta sulla perpendicolare al raggio, e lo spostamento si calcola su questa retta e non sull'arco di circonferenza. Per la trave $AB$ che ruota di $\delta\varphi$ attorno ad $A = (0, 0)$, il punto $B = (6, 0)$ ha $\delta u_B = 0$ e $\delta v_B = 6\,\delta\varphi$. Una rotazione finita di $10^\circ$ sposterebbe $B$ anche in orizzontale, di $6\,(1 - \cos 10^\circ) \approx 0{,}09\,\mathrm{m}$, ma questo termine è di secondo ordine nell'angolo e nel lavoro virtuale non compare.
 :::
 
 ## Lavoro virtuale di forze e coppie
@@ -337,5 +337,5 @@ verso il basso. Con questo valore il corpo $BD$ ruota attorno a $C$ in equilibri
 :::
 
 :::attenzione
-Tre cerniere allineate formano un meccanismo per spostamenti infinitesimi, e un carico che lavora su quello spostamento non ammette equilibrio. Nella trave con le cerniere fisse $A = (0, 0)$ e $B = (8, 0)$ e la cerniera interna $C = (4, 0)$, il meccanismo ha $\delta v_C = 4\,\delta\varphi_1$. Una forza $P$ verso il basso in $C$ compie il lavoro $-4P\,\delta\varphi_1$, diverso da zero per $\delta\varphi_1 \neq 0$; quindi la struttura non è in equilibrio. Il conto statico porta alla stessa conclusione: con $P$ applicata al corpo $AC$, la rotazione di $AC$ attorno ad $A$ richiede in $C$ una forza verticale $Y_C = P$ dal corpo $CB$, mentre la rotazione di $CB$ attorno a $B$ richiede $Y_C = 0$.
+Tre cerniere allineate formano un meccanismo per spostamenti infinitesimi, e un carico che compie lavoro per quello spostamento non ammette equilibrio. Nella trave con le cerniere fisse $A = (0, 0)$ e $B = (8, 0)$ e la cerniera interna $C = (4, 0)$, il meccanismo ha $\delta v_C = 4\,\delta\varphi_1$. Una forza $P$ verso il basso in $C$ compie il lavoro $-4P\,\delta\varphi_1$, diverso da zero per $\delta\varphi_1 \neq 0$; quindi la struttura non è in equilibrio. Il conto statico porta alla stessa conclusione: con $P$ applicata al corpo $AC$, la rotazione di $AC$ attorno ad $A$ richiede in $C$ una forza verticale $Y_C = P$ dal corpo $CB$, mentre la rotazione di $CB$ attorno a $B$ richiede $Y_C = 0$.
 :::
