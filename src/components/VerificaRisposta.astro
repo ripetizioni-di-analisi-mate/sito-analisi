@@ -1,24 +1,72 @@
 ---
-// Verifica della risposta sotto una traccia degli esercizi da fare (solo se il risultato è un numero o una funzione di x).
-// Il browser legge e mostra in formula ciò che lo studente scrive; il confronto con la soluzione lo fa il Worker (/api/verifica).
+// La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
-interface Props { id: string; tipo: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua }
+interface Props { id: string; tipo?: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua }
 const { id, tipo, primitiva = false, lingua } = Astro.props;
 const en = lingua === 'en';
 const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
 const esempio = tipo === 'numero'
   ? (en ? 'e.g. 3/2, e^6, sqrt(2), pi/4, -inf' : 'per esempio 3/2, e^6, sqrt(2), pi/4, -inf')
   : (en ? 'e.g. x^2/2 + ln|x|, 3x^2, e^x sin x' : 'per esempio x^2/2 + ln|x|, 3x^2, e^x sin x');
+const tasti = [
+  { simbolo: '□', modello: '/(|)', nome: en ? 'Fraction' : 'Frazione', accoda: true },
+  { simbolo: '□', modello: '^(|)', nome: en ? 'Power' : 'Potenza', accoda: true },
+  { simbolo: '√□', modello: '√(|)', nome: en ? 'Square root' : 'Radice quadrata' },
+  { simbolo: '(□)', modello: '(|)', nome: en ? 'Parentheses' : 'Parentesi' },
+  { simbolo: 'π', modello: 'π', nome: en ? 'Pi' : 'Pi greco' },
+  { simbolo: '∞', modello: '∞', nome: en ? 'Infinity' : 'Infinito' },
+  { simbolo: 'e', modello: 'e', nome: en ? 'Euler’s number' : 'Numero di Nepero' },
+  { simbolo: 'ln(□)', modello: 'ln(|)', nome: en ? 'Natural logarithm' : 'Logaritmo naturale' },
+];
 ---
-<form class="verifica zona-libera" data-id={id} novalidate>
-  <label for={campo}>{en ? 'Your answer' : 'La tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : ' (la costante c si può tralasciare)'}</small>}</label>
+<form class="verifica zona-libera" data-id={id} data-tipo={tipo} novalidate>
+  <label for={campo}>{en ? 'Write your answer' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : ' (la costante c si può tralasciare)'}</small>}</label>
   <div class="verifica-riga">
-    <input id={campo} type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
-    <button type="submit">{en ? 'Check' : 'Verifica'}</button>
+    {tipo ? (
+      <>
+        <input id={campo} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
+        <button type="submit">{en ? 'Check' : 'Verifica'}</button>
+      </>
+    ) : (
+      <textarea id={campo} rows="3" autocomplete="off" aria-describedby={`${campo}-confronto`}></textarea>
+    )}
   </div>
-  <p class="verifica-lettura" aria-live="polite"></p>
-  <p class="verifica-esito" role="status" aria-live="polite"></p>
+  <details class="verifica-tastiera">
+    <summary>{en ? 'Math keyboard' : 'Tastiera matematica'}</summary>
+    <div class="verifica-tasti">
+      {tasti.map(({ simbolo, modello, nome, accoda }) => (
+        <button type="button" data-modello={modello} data-accoda={accoda ? '' : undefined} aria-label={nome} title={nome}>
+          <span aria-hidden="true">
+            {modello === '/(|)' ? <span class="verifica-frazione"><span>□</span><span>□</span></span>
+              : modello === '^(|)' ? <>□<sup>□</sup></> : simbolo}
+          </span>
+        </button>
+      ))}
+    </div>
+  </details>
+  {tipo ? (
+    <>
+      <p class="verifica-lettura" aria-live="polite"></p>
+      <p class="verifica-esito" role="status" aria-live="polite"></p>
+    </>
+  ) : (
+    <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Compare your answer with the solution.' : 'Confronta la tua risposta con la soluzione.'}</p>
+  )}
 </form>
+
+<style>
+  .verifica-riga input { font-size: 1rem; }
+  .verifica-riga textarea { flex: 1; min-width: 0; font: 1rem/1.3 var(--ui); padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); resize: vertical; }
+  .verifica-riga textarea:focus { outline: 2px solid color-mix(in srgb, var(--accento) 40%, transparent); border-color: var(--accento); background: #fff; }
+  .verifica-tastiera { margin-top: 0.35rem; color: var(--accento); }
+  .verifica-tastiera > summary { width: fit-content; padding: 0.45rem 0.65rem; border: 1px solid var(--riga); border-radius: 7px; background: var(--carta); font-size: 0.88rem; font-weight: 600; cursor: pointer; }
+  .verifica-tasti { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
+  .verifica-tasti button { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0.25rem; border: 1px solid var(--riga); border-radius: 7px; background: color-mix(in srgb, var(--accento) 6%, #fff); color: var(--accento); font: 600 1rem/1 var(--testo); cursor: pointer; }
+  .verifica-tasti button:hover { background: color-mix(in srgb, var(--accento) 12%, #fff); }
+  .verifica-frazione { display: inline-grid; font-size: 0.77rem; }
+  .verifica-frazione > :first-child { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  .verifica-confronto { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+</style>
 
 <script>
   import katex from 'katex';
@@ -36,10 +84,43 @@ const esempio = tipo === 'numero'
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
     if (f.dataset.pronto) continue;
     f.dataset.pronto = '1';
-    const campo = f.querySelector('input')!;
+    const campo = f.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
+    const corpo = f.previousElementSibling;
+    corpo?.querySelector(':scope > .blocco-soluzione, :scope > .soluzione-riservata, :scope > .velo-blocco')?.before(f);
+    // Tab passa al denominatore o all'esponente quando entrambi gli spazi sono stati inseriti insieme.
+    campo.addEventListener('keydown', (e) => {
+      const posizione = campo.selectionEnd ?? 0;
+      if (e.key !== 'Tab' || e.shiftKey || e.ctrlKey || e.altKey || e.metaKey || campo.selectionStart !== posizione) return;
+      if (!/^\)[/^]\(\)/.test(campo.value.slice(posizione))) return;
+      e.preventDefault();
+      campo.setSelectionRange(posizione + 3, posizione + 3);
+    });
+    f.querySelector('.verifica-tasti')!.addEventListener('click', (e) => {
+      const tasto = (e.target as Element).closest<HTMLButtonElement>('button[data-modello]');
+      if (!tasto) return;
+      const fine = campo.selectionEnd ?? campo.value.length;
+      const inizio = campo.selectionStart ?? fine;
+      const selezione = campo.value.slice(inizio, fine);
+      const accoda = tasto.hasAttribute('data-accoda');
+      let modello = tasto.dataset.modello!;
+      if (accoda && !selezione && !/[\p{L}\p{N})\]∞]$/u.test(campo.value.slice(0, inizio).trimEnd())) {
+        modello = `(|)${modello.replace('|', '')}`;
+      }
+      const [apri, chiudi = ''] = modello.split('|');
+      const prima = (accoda && selezione ? `(${selezione})` : '') + apri;
+      const dentro = !accoda && chiudi ? selezione : '';
+      const testo = prima + dentro + chiudi;
+      if (campo.maxLength >= 0 && campo.value.length - (fine - inizio) + testo.length > campo.maxLength) return;
+      const cursore = inizio + (dentro ? testo.length : prima.length);
+      campo.setRangeText(testo, inizio, fine);
+      campo.focus({ preventScroll: true });
+      campo.setSelectionRange(cursore, cursore);
+      campo.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    if (!f.dataset.tipo) continue;
     const lettura = f.querySelector<HTMLElement>('.verifica-lettura')!;
     const esito = f.querySelector<HTMLElement>('.verifica-esito')!;
-    const bottone = f.querySelector('button')!;
+    const bottone = f.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const mostraLettura = () => {
       const v = campo.value.trim();
       esito.textContent = ''; f.dataset.esito = '';

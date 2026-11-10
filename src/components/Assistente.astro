@@ -140,7 +140,7 @@ const s = en ? {
           const display = k.classList.contains('katex-display');
           k.replaceWith(document.createTextNode(display ? `\n$$${tex}$$\n` : `$${tex}$`));
         });
-        c.querySelectorAll('svg, script, style, button').forEach((x) => x.remove());
+        c.querySelectorAll('svg, script, style, button, .verifica').forEach((x) => x.remove());
         c.querySelectorAll('li').forEach((li) => li.prepend(document.createTextNode('\n- ')));
         c.querySelectorAll('p, h2, h3, div, details, summary').forEach((x) => x.append(document.createTextNode('\n')));
         return c.textContent || '';
