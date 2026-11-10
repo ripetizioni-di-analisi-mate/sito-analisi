@@ -35,7 +35,7 @@ Un vincolo interno collega due corpi e impedisce alcuni dei loro spostamenti *re
 - **Doppio pendolo interno**: due bielle parallele tra i due corpi. Impedisce la rotazione relativa e lo spostamento relativo parallelo alle bielle e lascia libero lo scorrimento relativo perpendicolare alle bielle. Molteplicità $2$.
 - **Incastro interno**: impedisce ogni spostamento relativo, quindi i due tratti formano un solo corpo. Molteplicità $3$. Due aste saldate in un nodo rigido, come il traverso e il pilastro di un telaio, fanno parte dello stesso corpo.
 
-::struttura{nodi="P,0,0,-;C,2,0,-;Q,4,0,-;P1,0,-1.6,-;R1,1.6,-1.6,-;R2,2.4,-1.6,-;Q1,4,-1.6,-;P3,0,-3.2,-;S1,1.8,-3.2,-;U1,1.8,-3,-;U2,1.8,-3.4,-;W1,2.2,-3,-;W2,2.2,-3.4,-;S2,2.2,-3.2,-;Q3,4,-3.2,-" aste="P-C;C-Q;P1-R1;R1-R2;R2-Q1;P3-S1;U1-U2;U1-W1;U2-W2;W1-W2;S2-Q3" cerniere="C;R1;R2;U1;U2;W1;W2" etichette="2,0.55,cerniera interna;2,-1.05,pendolo interno;2,-2.55,doppio pendolo interno" riferimento=0 titolo="Vincoli interni tra due tratti di trave: cerniera interna (molteplicità $2$), pendolo interno (molteplicità $1$), doppio pendolo interno con bielle orizzontali (molteplicità $2$)"}
+::struttura{nodi="P,0,0,-;C,2,0,-;Q,4,0,-;P1,0,-1.6,-;R,2,-1.6,-;Q1,4,-1.6,-;P3,0,-3.2,-;S,2,-3.2,-;Q3,4,-3.2,-" aste="P-C;C-Q;P1-R;R-Q1;P3-S;S-Q3" cerniere="C" interni="R,pendolo,0;S,doppio-pendolo,0" etichette="2,0.55,cerniera interna;2,-1.05,pendolo interno;2,-2.55,doppio pendolo interno" riferimento=0 titolo="Vincoli interni tra due tratti di trave: cerniera interna (molteplicità $2$), pendolo interno (molteplicità $1$), doppio pendolo interno con bielle orizzontali (molteplicità $2$)"}
 
 :::
 
@@ -240,7 +240,7 @@ Se invece si trova una disposizione dei centri compatibile con tutti i vincoli, 
 :::
 
 :::esempio{titolo="Trave Gerber a due corpi"}
-La trave in figura è formata dalla mensola $AC$, incastrata in $A = (0, 0)$, e dalla trave $CD$, collegata alla mensola dalla cerniera interna $C = (3, 0)$ e appoggiata in $D = (7, 0)$ su un carrello con il piano di scorrimento orizzontale. Si ha $n = 2$ e $s = 3 + 2 + 1 = 6 = 3n$. La mensola è ferma, perché è incastrata. Il punto $C$ è quindi fermo e la cerniera interna è, per il corpo $CD$, una cerniera fissa: il centro di $CD$ dovrebbe essere $C$ e dovrebbe stare sulla verticale per $D$, che non passa per $C$. Perciò anche $CD$ è fermo, $l = 0$ e, dalla relazione $3n - s = l - i$, $i = 0$: la trave è **isostatica**.
+La trave in figura è formata dalla mensola $AC$, incastrata in $A = (0, 0)$, e dalla trave $CD$, collegata alla mensola dalla cerniera interna $C = (3, 0)$ e appoggiata in $D = (7, 0)$ su un carrello con il piano di scorrimento orizzontale. Si ha $n = 2$ e $s = 3 + 2 + 1 = 6 = 3n$. La mensola è ferma, perché è incastrata. Il punto $C$ è quindi fermo e la cerniera interna è, per il corpo $CD$, una cerniera fissa. Il centro di $CD$ dovrebbe quindi essere $C$ e stare sulla verticale per $D$, che non passa per $C$. Perciò anche $CD$ è fermo, $l = 0$ e, dalla relazione $3n - s = l - i$, $i = 0$, quindi la trave è **isostatica**.
 
 ::struttura{nodi="A,0,0;C,3,0;D,7,0" aste="A-C;C-D" vincoli="A,incastro,180;D,carrello" cerniere="C" quote="A,C,3 m;C,D,4 m" titolo="Trave Gerber: mensola $AC$ incastrata e trave portata $CD$"}
 

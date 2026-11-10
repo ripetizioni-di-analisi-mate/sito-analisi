@@ -152,7 +152,7 @@ T(x) = 12 - 4x ,
 \qquad
 M(x) = 12x - 4x \cdot \frac{x}{2} = 12x - 2x^2 .
 $$
-Il taglio si annulla in mezzeria, dove il momento vale $M\!\left(3\right) = 18\,\mathrm{kN\,m}$, cioè $\dfrac{qL^2}{8}$.
+Il taglio si annulla in mezzeria, dove il momento vale $M(3) = 18\,\mathrm{kN\,m}$, cioè $\dfrac{qL^2}{8}$.
 
 ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello" diagramma="0,0,6,0,-2*s^2+12*s" verso=-1 carichi="A,B,0.6,0.6,q" titolo="Diagramma del momento flettente $M$ ($\mathrm{kN\,m}$)"}
 :::
@@ -218,7 +218,7 @@ T(x) = 8 - 2x ,
 \qquad
 M(x) = -12 + 8x - x^2 ,
 $$
-un'unica espressione per tutta la trave, perché il carico non cambia lungo di essa. Il momento si annulla in $C$, come deve, e ha il massimo positivo $4\,\mathrm{kN\,m}$ in $x = 4\,\mathrm{m}$, dove $T = 0$.
+un'unica espressione per tutta la trave, perché il carico non cambia lungo di essa. Il momento si annulla nella cerniera $C$ e ha il massimo positivo $4\,\mathrm{kN\,m}$ in $x = 4\,\mathrm{m}$, dove $T = 0$.
 
 ::struttura{nodi="A,0,0;C,2,0;B,6,0" aste="A-B" vincoli="A,incastro,180;B,carrello" cerniere="C" diagramma="0,0,2,0,-s^2+8*s-12;2,0,6,0,-s^2+4*s" verso=-1 titolo="Diagramma del momento flettente $M$ ($\mathrm{kN\,m}$)"}
 :::

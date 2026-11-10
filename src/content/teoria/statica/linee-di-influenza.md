@@ -20,7 +20,7 @@ Sia $X$ una grandezza statica di una struttura isostatica: una reazione vincolar
 $$
 \eta_X(\xi) = \text{valore di } X \text{ quando sulla struttura agisce solo il carico unitario in } \xi .
 $$
-Il suo grafico si disegna lungo l'asse della trave, con le ordinate positive sopra l'asse e negative sotto, e si chiama anch'esso linea di influenza. L'ordinata $\eta_X(\xi)$ dice quanto vale $X$ quando il carico unitario si trova in $\xi$; perciò un carico concentrato $P$ in $\xi$ produce il valore $P\,\eta_X(\xi)$, come si dimostra nella sezione sull'uso delle linee di influenza.
+Il suo grafico si disegna lungo l'asse della trave, con le ordinate positive sopra l'asse e negative sotto, e si chiama anch'esso linea di influenza. L'ordinata $\eta_X(\xi)$ dice quanto vale $X$ quando il carico unitario si trova in $\xi$; perciò un carico concentrato $P$ in $\xi$ produce il valore $P\,\eta_X(\xi)$, come assicura il teorema sul valore di una grandezza con la linea di influenza.
 
 Per la trave appoggiata in figura, con la cerniera in $A$ e il carrello in $B$, l'equilibrio alla rotazione attorno ad $A$ con il carico in $\xi$ dà $V_B\,L - 1 \cdot \xi = 0$, quindi
 $$
@@ -231,7 +231,7 @@ $$
 $$
 e danno $\varphi_1 = \dfrac{b}{L}$, $\varphi_2 = -\dfrac{a}{L}$. Lo spostamento di $S$ è $v(a) = \varphi_1\,a = \dfrac{ab}{L}$, la stessa ordinata trovata con il metodo statico. La figura mostra il meccanismo per $L = 6\,\mathrm{m}$ e $a = 2\,\mathrm{m}$: la configurazione spostata, tratteggiata, coincide con la linea di influenza del momento in $S$.
 
-::struttura{nodi="A,0,0;S,2,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello" tratteggi="0,0 2,1.3333 6,0" punti="2,1.3333,S',pieno" etichette="0.9,1.05,φ_1;4.3,1.05,φ_2" titolo="Meccanismo con la cerniera in $S$ e rotazione relativa $\varphi_1 - \varphi_2 = 1$: lo spostamento di $S$ vale $\dfrac{ab}{L} = \dfrac{4}{3}\,\mathrm{m}$"}
+::struttura{nodi="A,0,0;S,2,0;B,6,0" aste="A-S;S-B" cerniere="S" vincoli="A,cerniera;B,carrello" tratteggi="0,0 2,1.3333 6,0" punti="2,1.3333,S',pieno" etichette="0.9,1.05,φ_1;4.3,1.05,φ_2" titolo="Meccanismo con la cerniera in $S$ e rotazione relativa $\varphi_1 - \varphi_2 = 1$: lo spostamento di $S$ vale $\dfrac{ab}{L} = \dfrac{4}{3}\,\mathrm{m}$"}
 :::
 
 ## Travi Gerber

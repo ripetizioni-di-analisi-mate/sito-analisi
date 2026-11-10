@@ -128,7 +128,7 @@ Sul corpo agiscono soltanto le due forze delle cerniere. L'equilibrio alla rotaz
 :::definizione{#doppio-pendolo-interno titolo="Doppio pendolo interno"}
 Un **doppio pendolo interno** collega due corpi con due bielle parallele. Impedisce la traslazione relativa nella direzione delle bielle e la rotazione relativa, e lascia libera la traslazione relativa nella direzione perpendicolare. Perciò trasmette una forza parallela alle bielle e una coppia, ed è un vincolo doppio. Con le bielle parallele all'asse di una trave trasmette lo sforzo assiale e il momento e nessuna forza perpendicolare all'asse.
 
-::struttura{nodi="A,0,1;C1,3.8,1,-;C2,4.2,1,-;B,7,1" aste="A-C1;C2-B;3.8 0.75-3.8 1.25;4.2 0.75-4.2 1.25;3.8 1.18-4.2 1.18;3.8 0.82-4.2 0.82" cerniere="3.8 1.18;4.2 1.18;3.8 0.82;4.2 0.82" vincoli="A,incastro,180;B,carrello" carichi="A,C1,0.6,0.6,q;C2,B,0.6,0.6,q" etichette="3.9,1.55,C" titolo="Trave con doppio pendolo interno in $C$, bielle parallele all'asse: i due tratti si scambiano una forza orizzontale e una coppia"}
+::struttura{nodi="A,0,0;C,4,0;B,7,0" aste="A-C;C-B" interni="C,doppio-pendolo,0" vincoli="A,incastro,180;B,carrello" carichi="A,B,0.6,0.6,q" quote="A,C,4 m,0.8;C,B,3 m,0.8" titolo="Trave con doppio pendolo interno in $C$, bielle parallele all'asse: i due tratti si scambiano una forza orizzontale e una coppia"}
 
 :::
 
