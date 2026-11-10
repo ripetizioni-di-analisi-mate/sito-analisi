@@ -269,7 +269,7 @@ export function struttura(a) {
       } else s += terreno(ax, ay, ux, uy, 16);
       s += `<circle class="cerniera" cx="${f(cx)}" cy="${f(cy)}" r="4"/>`;
     } else if (v.tipo === 'incastro') {
-      s += terreno(cx, cy, ux, uy, 15);
+      s += terreno(cx, cy, ux, uy, 20);
     } else if (v.tipo === 'pendolo') {
       const L = 40, ax = cx + ux * L, ay = cy + uy * L;
       s += `<line class="biella" x1="${f(cx)}" y1="${f(cy)}" x2="${f(ax)}" y2="${f(ay)}"/>`;
@@ -417,7 +417,9 @@ export function struttura(a) {
         if (d > distanza + 1e-6) { distanza = d; migliore = c; }
       }
       const r = (migliore * Math.PI) / 180, ox = Math.cos(r), oy = -Math.sin(r);
-      const dist = vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
+      // con una coppia nel nodo l'etichetta va fuori dall'arco (raggio 19)
+      const conCoppia = coppieM.some((c) => uguale(c.p));
+      const dist = conCoppia ? 31 : vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
       const cx = X(p[0]) + ox * dist, cy = Y(p[1]) + oy * dist + 6;
       svg += `<text class="nome-nodo" x="${f(cx)}" y="${f(cy)}" text-anchor="${ox > 0.35 ? 'start' : ox < -0.35 ? 'end' : 'middle'}">${testoSvg(n)}</text>`;
     }
