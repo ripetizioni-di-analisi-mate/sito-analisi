@@ -220,7 +220,7 @@ M_O = 2 \cdot (-10) - 3 \cdot 6 + 8 = -30\,\mathrm{kN\,m} .
 $$
 La retta d'azione della risultante ha equazione $-10x - 6y = -30$, cioè $5x + 3y = 15$, e taglia gli assi nei punti $(3, 0)$ e $(0, 5)$. Senza la coppia il momento sarebbe $-38\,\mathrm{kN\,m}$ e la retta d'azione sarebbe $5x + 3y = 19$, che passa per il punto $K = (2, 3)$ in cui si incontrano le rette d'azione di $F_1$ e $F_2$, come stabilisce il **teorema di Varignon**. Con la coppia la retta si sposta parallelamente a sé stessa della distanza $\dfrac{8}{\sqrt{6^2 + 10^2}} = 0{,}69\,\mathrm{m}$.
 
-::struttura{poligoni="0,0 4,0 4,3 0,3" nodi="O,0,0;K,2,3" forze="2 -1.25,0,-1.25,F_1;-1.2 3,1.2,0,F_2" coppie="3 1.5,1,ℳ" tratteggi="2,-1.4 2,4.2;-1.4,3 4.6,3;-0.6,6 4.2,-2" reazioni="3 0,0.75,-1.25,R" punti="2,3;3,0" titolo="Le forze $F_1$, $F_2$, la coppia $\mathcal{M}$ e, nel secondo colore, la risultante sulla retta $5x + 3y = 15$"}
+::struttura{poligoni="0,0 4,0 4,3 0,3" nodi="O,0,0;K,2,3" forze="2 -1.25,0,-1.25,F_1;0 3,1.2,0,F_2" coppie="3 1.5,1,ℳ" tratteggi="2,-1.4 2,4.2;-1.4,3 4.6,3;-0.6,6 4.2,-2" reazioni="3 0,0.75,-1.25,R" punti="2,3;3,0" titolo="Le forze $F_1$, $F_2$, la coppia $\mathcal{M}$ e, nel secondo colore, la risultante sulla retta $5x + 3y = 15$"}
 
 :::
 
@@ -239,7 +239,7 @@ x_C = \frac{10 \cdot 1 + 20 \cdot 4 + 30 \cdot 6}{60} = 4{,}5\,\mathrm{m} .
 $$
 Con lo stesso calcolo si trovano il baricentro di un corpo, come centro dei pesi delle sue parti, e la retta d'azione della risultante di un carico distribuito; per il baricentro si rimanda all'argomento sulla geometria delle masse.
 
-::struttura{nodi="A,0,0;B,7,0;C,4.5,0" aste="A-B" forze="1 0,0,-0.6,10 kN;4 0,0,-1.2,20 kN;6 0,0,-1.8,30 kN" reazioni="4.5 -1.9,0,-1.6,60 kN" quote="A,4.5 0,,2.4" etichette="2.25,-2.15,4,5 m" punti="4.5,0" titolo="Tre carichi paralleli e, nel secondo colore, la loro risultante applicata nel centro $C$"}
+::struttura{nodi="A,0,0;B,7,0;C,4.5,0" aste="A-B" forze="1 0,0,-0.6,10 kN;4 0,0,-1.2,20 kN;6 0,0,-1.8,30 kN" reazioni="4.5 -1.9,0,-1.6,60 kN" quote="A,4.5 0,4.5 m,2.4" punti="4.5,0" titolo="Tre carichi paralleli e, nel secondo colore, la loro risultante applicata nel centro $C$"}
 
 :::dimostrazione
 La risultante è $\sum_i F_i\,\hat{u}$. Si pone $R = \sum_i F_i$ e si indica con $C$ il punto tale che $\overrightarrow{OC} = \dfrac{1}{R}\sum_i F_i\,\overrightarrow{OP_i}$, le cui coordinate sono quelle dell'enunciato. Per la proprietà distributiva del prodotto vettoriale il momento rispetto all'origine $O$ è
@@ -328,7 +328,7 @@ che è il centro delle due forze parziali, $\dfrac{12 \cdot 3 + 18 \cdot 4}{30} 
 
 ::struttura{nodi="A,0,0;B,6,0" aste="A-B" carichi="A,B,0,1.2,q_0" reazioni="4 1.35,0,-1.3,Q" quote="A,4 0,4 m,0.9;4 0,B,2 m,0.9" riferimento=0 titolo="Carico triangolare su $L = 6\,\mathrm{m}$: la risultante $Q = \dfrac{q_0 L}{2}$ passa a $4\,\mathrm{m}$ dall'estremo scarico"}
 
-::struttura{nodi="A,0,0;B,6,0" aste="A-B" carichi="A,B,0.3,1.2,q" reazioni="3.6 1.35,0,-1.3,Q" quote="A,3.6 0,,0.9" etichette="1.8,-0.65,3,6 m" riferimento=0 titolo="Carico trapezoidale da $2$ a $8\,\mathrm{kN/m}$ su $6\,\mathrm{m}$: la risultante $Q = 30\,\mathrm{kN}$ passa a $3{,}6\,\mathrm{m}$ da $A$"}
+::struttura{nodi="A,0,0;B,6,0" aste="A-B" carichi="A,B,0.3,1.2,q" reazioni="3.6 1.35,0,-1.3,Q" quote="A,3.6 0,3.6 m,0.9" riferimento=0 titolo="Carico trapezoidale da $2$ a $8\,\mathrm{kN/m}$ su $6\,\mathrm{m}$: la risultante $Q = 30\,\mathrm{kN}$ passa a $3{,}6\,\mathrm{m}$ da $A$"}
 
 :::dimostrazione
 Il carico trapezoidale è $q(x) = q_1 + (q_2 - q_1)\,\dfrac{x}{L}$, e contiene gli altri due come casi particolari, $q_1 = q_2 = q$ e $q_1 = 0$, $q_2 = q_0$. Per la risultante di un carico distribuito

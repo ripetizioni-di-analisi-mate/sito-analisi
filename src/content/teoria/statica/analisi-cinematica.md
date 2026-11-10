@@ -60,7 +60,7 @@ Per contare i corpi si separano le parti della struttura nei vincoli interni div
 :::definizione{#grado-di-labilita titolo="Grado di labilità e grado di iperstaticità"}
 Il **grado di labilità** $l$ è il numero di parametri indipendenti da cui dipendono gli spostamenti infinitesimi compatibili con i vincoli; se $l = 0$ l'unico spostamento compatibile è quello nullo. Il **grado di iperstaticità** $i$ è il numero di sistemi indipendenti di reazioni vincolari che sono in equilibrio da soli, in assenza di carichi. Se $i > 0$ le equazioni di equilibrio non determinano le reazioni, perché a una soluzione si può sommare uno di questi sistemi moltiplicato per un numero qualsiasi.
 
-In altre parole, $l$ conta i movimenti che i vincoli lasciano possibili e $i$ i vincoli semplici in eccesso. Una mensola con un carrello all'estremo libero ha $l = 0$, perché l'incastro da solo impedisce ogni spostamento, e ha $i = 1$, perché la reazione del carrello e le reazioni dell'incastro che la equilibrano formano un sistema in equilibrio senza carichi.
+In altre parole, $l$ conta i movimenti che i vincoli lasciano possibili e $i$ conta i vincoli semplici in eccesso. Una mensola con un carrello all'estremo libero ha $l = 0$, perché l'incastro da solo impedisce ogni spostamento, e ha $i = 1$, perché la reazione del carrello e le reazioni dell'incastro che la equilibrano formano un sistema in equilibrio senza carichi.
 :::
 
 :::definizione{#classificazione-strutture titolo="Strutture labili, isostatiche e iperstatiche"}
@@ -91,7 +91,7 @@ A = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 1 & L \end{pmatrix} ,
 \qquad
 \det A = L \neq 0 ,
 $$
-e il sistema ha solo la soluzione nulla: la trave non può muoversi.
+e il sistema ha solo la soluzione nulla, quindi la trave non può muoversi.
 :::
 
 :::richiamo{titolo="Rango e sistemi lineari omogenei"}

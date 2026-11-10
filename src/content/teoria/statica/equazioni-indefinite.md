@@ -133,7 +133,7 @@ Integrando le equazioni indefinite su un tratto compaiono costanti arbitrarie. L
 Agli estremi della trave e nelle cerniere interne le caratteristiche della sollecitazione soddisfano le condizioni seguenti, ottenute dalla regola dei salti con valori nulli fuori dalla trave.
 
 - **Estremo libero** scarico: $N = 0$, $T = 0$, $M = 0$. Se nell'estremo destro $x = L$ agiscono una forza $F$ verso il basso e una coppia $\mathcal{M}$ antioraria, allora $T(L^-) = F$ e $M(L^-) = \mathcal{M}$; nell'estremo sinistro $x = 0$ si ha $T(0^+) = -F$ e $M(0^+) = -\mathcal{M}$.
-- **Appoggio** di estremità (cerniera o carrello): $M = 0$, oppure $M = \mathcal{M}$ nell'estremo destro e $M = -\mathcal{M}$ nell'estremo sinistro se vi è applicata una coppia. Il taglio nell'appoggio è incognito e coincide con la reazione: $T(0^+) = V_A$ a sinistra, $T(L^-) = -V_B$ a destra. Un carrello con reazione verticale non trasmette forze orizzontali, quindi nell'estremo vale anche $N = 0$.
+- **Appoggio** di estremità (cerniera o carrello): $M = 0$, oppure $M = \mathcal{M}$ nell'estremo destro e $M = -\mathcal{M}$ nell'estremo sinistro se vi è applicata una coppia. Il taglio nell'appoggio è incognito e coincide con la reazione: $T(0^+) = V_A$ a sinistra, $T(L^-) = -V_B$ a destra. Un carrello con reazione verticale non trasmette forze orizzontali, quindi, se nell'estremo non è applicata una forza orizzontale, vale anche $N = 0$.
 - **Incastro**: nessuna condizione, perché il vincolo trasmette qualsiasi $N$, $T$ e $M$; i valori nell'incastro danno le reazioni.
 - **Cerniera interna** scarica: $M = 0$, perché la cerniera non trasmette momento.
 
