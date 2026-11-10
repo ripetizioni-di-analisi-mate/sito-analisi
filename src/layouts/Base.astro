@@ -522,10 +522,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       su.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // Protezione dei contenuti di studio: niente menu contestuale, copia, trascinamento,
-    // stampa da tastiera. Sulle pagine sbloccate, contenuto velato quando la finestra perde il fuoco (strumenti di cattura su computer).
+    // Il blocco della copia vale per chi non ha sbloccato la materia. Le protezioni
+    // di stampa e cattura si applicano anche alle pagine sbloccate.
     const radice = document.documentElement;
     if (radice.classList.contains('contenuto')) {
+      const sbloccato = radice.classList.contains('sbloccato');
       // La finestra dell'assistente resta libera: lì si scrive, si seleziona e si copia.
       // Si guarda anche la selezione: il bersaglio di copia e scorciatoie è spesso la pagina intera o un nodo di testo.
       const inPi = (n: Node | null | undefined) => {
@@ -533,7 +534,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         return Boolean(el?.closest?.('.assistente, .zona-libera'));
       };
       const libero = (e: Event) => {
-        if (inPi(e.target as Node)) return true;
+        if (sbloccato || inPi(e.target as Node)) return true;
         const sel = getSelection();
         return Boolean(sel && sel.rangeCount && !sel.isCollapsed && inPi(sel.anchorNode) && inPi(sel.focusNode));
       };
@@ -545,7 +546,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         if (k === 'printscreen') { radice.classList.add('velato'); navigator.clipboard?.writeText('').catch(() => {}); }
       });
       addEventListener('keyup', (e) => { if (e.key.toLowerCase() === 'printscreen') setTimeout(() => radice.classList.remove('velato'), 1200); });
-      if (radice.classList.contains('sbloccato')) {
+      if (sbloccato) {
         addEventListener('blur', () => radice.classList.add('velato'));
         addEventListener('focus', () => radice.classList.remove('velato'));
         document.addEventListener('visibilitychange', () => radice.classList.toggle('velato', document.hidden));

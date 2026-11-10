@@ -722,8 +722,8 @@ details.blocco[open] .se-aperto { display: inline; }
 .soluzione-riservata { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); border-left: 3px solid var(--riga); padding: 0.3rem 0 0.3rem 0.8rem; }
 
 /* ---------- protezione dei contenuti ---------- */
-html.contenuto main { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
-html.contenuto main input, html.contenuto main textarea { -webkit-user-select: text; user-select: text; }
+html.contenuto:not(.sbloccato) main { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+html.contenuto:not(.sbloccato) main input, html.contenuto:not(.sbloccato) main textarea { -webkit-user-select: text; user-select: text; }
 html.contenuto img, html.contenuto svg { -webkit-user-drag: none; }
 html.velato main { filter: blur(14px); transition: filter 0.05s; }
 @media print { html.contenuto body { display: none !important; } }
