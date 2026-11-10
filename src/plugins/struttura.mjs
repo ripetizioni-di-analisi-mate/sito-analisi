@@ -33,6 +33,7 @@
 //   tratteggi    "x,y x,y …;…"  spezzate tratteggiate (assi di simmetria, configurazione spostata)
 //   frecce       "x0,y0,x1,y1,etichetta"  frecce sottili (assi di una sezione, spostamenti)
 //   etichette    "x,y,testo"  testi in posizione (pedici con _ : M_A)
+//   Nei testi delle etichette e delle quote i decimali si scrivono con il punto (2.5 m): il disegno mostra 2,5 m.
 //   diagramma    "x0,y0,x1,y1,espressione;…"  diagramma di una sollecitazione lungo uno o più tratti rettilinei:
 //                l'espressione è nella variabile s (da 0 alla lunghezza del tratto, dal primo punto) e il valore
 //                positivo si disegna a sinistra del verso del tratto (per un tratto da sinistra a destra: sopra).
@@ -55,8 +56,9 @@ const f = (v) => v.toFixed(1);
 let contatore = 0;
 
 // Testo con pedici: "R_A" → R con pedice A; "M_{AB}" → pedice AB.
+// I decimali si scrivono con il punto (la virgola separa i campi): il disegno mostra la virgola, 2.5 m → 2,5 m.
 function testoSvg(t) {
-  const parti = String(t).split(/_(\{[^}]*\}|[^\s_]+)/);
+  const parti = String(t).replace(/(\d)\.(\d)/g, '$1,$2').split(/_(\{[^}]*\}|[^\s_]+)/);
   let out = esc(parti[0]);
   for (let i = 1; i < parti.length; i += 2) {
     const p = parti[i].replace(/^\{|\}$/g, '');
@@ -267,7 +269,7 @@ export function struttura(a) {
     } else if (v.tipo === 'incastro') {
       s += terreno(cx, cy, ux, uy, 15);
     } else if (v.tipo === 'pendolo') {
-      const L = 30, ax = cx + ux * L, ay = cy + uy * L;
+      const L = 40, ax = cx + ux * L, ay = cy + uy * L;
       s += `<line class="biella" x1="${f(cx)}" y1="${f(cy)}" x2="${f(ax)}" y2="${f(ay)}"/>`;
       s += `<circle class="cerniera" cx="${f(cx)}" cy="${f(cy)}" r="3.6"/><circle class="cerniera" cx="${f(ax)}" cy="${f(ay)}" r="3.6"/>`;
       s += terreno(ax + ux * 3.6, ay + uy * 3.6, ux, uy, 12);
