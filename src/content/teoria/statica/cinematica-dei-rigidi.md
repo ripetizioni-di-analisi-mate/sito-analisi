@@ -241,9 +241,10 @@ In una catena a un grado di libertà gli spostamenti dipendono da un solo parame
 :::esempio{titolo="Trave a due corpi"}
 La trave in figura ha una cerniera fissa in $A = (0, 0)$, una cerniera interna in $B = (4, 0)$ e un carrello in $C = (7, 0)$ che scorre su un piano orizzontale. I centri sono $C_1 = A$ e $C_{12} = B$; il centro $C_2$ sta sulla verticale per $C$ e sulla retta $AB$, quindi $C_2 = C$. Dal primo teorema delle catene cinematiche $\varphi_1 \cdot 4\,\mathrm{m} = \varphi_2 \cdot (4 - 7)\,\mathrm{m}$, perciò $\varphi_2 = -\dfrac{4}{3}\varphi_1$. Gli spostamenti verticali sono
 $$
-v(x) = \varphi_1\,x \quad (0 \le x \le 4) ,
-\qquad
-v(x) = -\frac{4}{3}\varphi_1\,(x - 7) \quad (4 \le x \le 7) ,
+\begin{aligned}
+v(x) &= \varphi_1\,x & &(0 \le x \le 4\,\mathrm{m}) \\[4pt]
+v(x) &= -\frac{4}{3}\varphi_1\,(x - 7) & &(4\,\mathrm{m} \le x \le 7\,\mathrm{m})
+\end{aligned}
 $$
 e nella cerniera $B$ i due tratti danno lo stesso valore $v_B = 4\,\mathrm{m} \cdot \varphi_1$.
 
