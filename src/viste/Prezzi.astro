@@ -8,6 +8,7 @@ const { lingua } = Astro.props;
 const t = T(lingua);
 const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
 const en = lingua === 'en';
+const gruppiPrezzi = [...new Set(aPagamento.map((m) => m.gruppo))];
 const WA = 'https://wa.me/393885680393';
 // Domande frequenti: solo regole già in vigore sul sito (anteprima, dispositivi, pagamento, corsi di gruppo).
 const domande: { d: string; r: string }[] = en ? [
@@ -36,17 +37,23 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
 
   {lingua === 'it' && <section id="pacchetti"><h2>Pacchetti e sconti</h2><p>2 materie −15% · 3 materie −20% · 4 o più −25%.</p><p><a class="bottone-primario" href="/pacchetti">Scegli il tuo pacchetto →</a></p><p class="nota-accesso">Trovi anche i pacchetti di videocorsi con video, PDF e materiale incluso.</p><h2>Singole materie</h2></section>}
 
-  <ul class="griglia-materie">
-    {aPagamento.map((m) => (
-      <li style={`--accento: ${m.colore}`}>
-        <a href={link(lingua, `/${m.slug}/sblocca`)}>
-          <h3>{m.titolo} · {m.prezzo} €</h3>
-          <p>{m.descrizione}</p>
-          <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>
-        </a>
-      </li>
-    ))}
-  </ul>
+  {gruppiPrezzi.map((g) => (
+    <section class="gruppo-righe" aria-label={g}>
+      <p class="etichetta-gruppo"><span>{g}</span></p>
+      <ul class="elenco-righe">
+        {aPagamento.filter((m) => m.gruppo === g).map((m) => (
+          <li style={`--accento: ${m.colore}`}>
+            <a href={link(lingua, `/${m.slug}/sblocca`)}>
+              <span class="riga-punto" aria-hidden="true"></span>
+              <span class="riga-testo"><strong>{m.titolo}</strong><small>{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</small></span>
+              <span class="riga-valore">{m.prezzo} €</span>
+              <span class="riga-freccia" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
 
   {lingua === 'it' && (
     <>
@@ -59,7 +66,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
   )}
 
   <h2>{t.cosaComprende}</h2>
-  <ul class="cosa-include">
+  <ul class="cosa-include elenco-spunte">
     {t.comprende.map((x) => <li>{x}</li>)}
   </ul>
 
@@ -75,13 +82,14 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
 </Base>
 
 <style>
-  .domande-frequenti { margin: 0.8rem 0 1.5rem; border-top: 1px solid var(--riga); }
-  .domande-frequenti details { border-bottom: 1px solid var(--riga); }
-  .domande-frequenti summary { cursor: pointer; padding: 0.85rem 2rem 0.85rem 0; font-weight: 600; list-style: none; position: relative; }
+  .domande-frequenti { margin: 0.8rem 0 1.5rem; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); overflow: hidden; }
+  .domande-frequenti details + details { border-top: 1px solid var(--scheda-bordo); }
+  .domande-frequenti summary { cursor: pointer; padding: 0.85rem 2.6rem 0.85rem 1rem; font-weight: 600; list-style: none; position: relative; }
+  .domande-frequenti summary:hover { background: color-mix(in srgb, var(--scheda-chiaro) 55%, #fff); }
   .domande-frequenti summary::-webkit-details-marker { display: none; }
-  .domande-frequenti summary::after { content: ''; position: absolute; right: 0.3rem; top: 50%; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: translateY(-50%) rotate(-45deg); transition: transform 0.15s; }
+  .domande-frequenti summary::after { content: ''; position: absolute; right: 1.1rem; top: 50%; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: translateY(-50%) rotate(-45deg); transition: transform 0.15s; }
   .domande-frequenti details[open] > summary::after { transform: translateY(-50%) rotate(45deg); }
   @media (prefers-reduced-motion: reduce) { .domande-frequenti summary::after { transition: none; } }
-  .domande-frequenti p { margin: 0 0 0.95rem; }
+  .domande-frequenti p { margin: 0; padding: 0 1rem 0.95rem; color: var(--inchiostro-2); line-height: 1.55; }
   .elenco-video-prezzi { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.8rem; }
 </style>

@@ -65,7 +65,7 @@ const schema = [{
   </div>
 
   <h2>Che cosa contiene</h2>
-  <ul class="cosa-include">
+  <ul class="cosa-include elenco-spunte">
     <li><strong>{v.lezioni} lezioni</strong>, ciascuna di circa {MINUTI_LEZIONE} minuti, nell'ordine in cui si svolgono i corsi di Carmine.</li>
     <li><strong>Il PDF di ogni lezione</strong>, insieme al video.</li>
     <li><strong>Esercizi svolti e spiegati</strong>, con un metodo per affrontare lo scritto e l'orale.</li>
@@ -85,8 +85,8 @@ const schema = [{
   </div>
 
   <h2>Gli altri videocorsi</h2>
-  <ul class="altri-video">
-    {altri.map((x) => <li><a href={`/videocorsi/${x.slug}`} style={`--accento: ${x.colore}`}><span>{x.titolo}</span><span>{x.lezioni} lezioni · {x.prezzo} €</span></a></li>)}
+  <ul class="elenco-righe">
+    {altri.map((x) => <li style={`--accento: ${x.colore}`}><a href={`/videocorsi/${x.slug}`}><span class="riga-punto" aria-hidden="true"></span><span class="riga-testo"><strong>{x.titolo}</strong><small>{x.lezioni} lezioni · video e PDF</small></span><span class="riga-valore">{x.prezzo} €</span><span class="riga-freccia" aria-hidden="true">→</span></a></li>)}
   </ul>
 
   <script is:inline define:vars={{ slug: v.slug, chiave }}>
@@ -144,10 +144,10 @@ const schema = [{
   .conto-pacchetto td { padding: 0.32rem 0; border-bottom: 1px dashed var(--riga); vertical-align: top; }
   .conto-pacchetto td:last-child { text-align: right; white-space: nowrap; padding-left: 0.6rem; }
   .conto-pacchetto tr.totale td { font-weight: 700; color: #2e7d4f; border-bottom: 0; }
-  .credito { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); background: var(--carta-2); border-radius: var(--raggio); padding: 0.55rem 0.7rem; margin: 0.9rem 0 0; text-align: left; }
+  .credito { font-family: var(--ui); font-size: 0.88rem; color: var(--inchiostro-2); background: var(--scheda-chiaro); border: 1px solid var(--scheda-bordo); border-radius: 10px; padding: 0.65rem 0.85rem; margin: 0.9rem 0 0; text-align: left; line-height: 1.5; }
   .passi-video { font-family: var(--ui); padding-left: 1.3rem; }
   .passi-video li { margin: 0.45rem 0; }
-  .prova-video { margin: 1.5rem 0; padding: 1rem 1.1rem; border: 1px dashed var(--riga); border-radius: 10px; font-family: var(--ui); }
+  .prova-video { margin: 1.5rem 0; padding: 1rem 1.15rem; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); }
   .prova-video p { margin: 0 0 0.7rem; }
   .altri-video { list-style: none; padding: 0; display: grid; gap: 0.5rem; font-family: var(--ui); }
   .altri-video a { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0.85rem; border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); text-decoration: none; color: var(--inchiostro); background: white; }

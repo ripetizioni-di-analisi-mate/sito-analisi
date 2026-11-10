@@ -73,10 +73,12 @@ const schema = [
 
 <style>
   .ripetizioni { max-width: 46rem; }
-  .domande dt { font-weight: 700; margin-top: 0.9rem; }
-  .domande dd { margin: 0.2rem 0 0; }
+  .domande { margin: 0.9rem 0 0; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); overflow: hidden; }
+  .domande dt { font-weight: 600; padding: 0.85rem 1rem 0; }
+  .domande dt:not(:first-child) { border-top: 1px solid var(--scheda-bordo); }
+  .domande dd { margin: 0; padding: 0.2rem 1rem 0.85rem; color: var(--inchiostro-2); line-height: 1.55; }
   .azione { margin: 1.8rem 0 1rem; }
-  .bottone-scrivimi { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.2rem; border-radius: var(--raggio); background: var(--accento); color: white; text-decoration: none; }
+  .bottone-scrivimi { display: inline-block; font-family: var(--ui); font-weight: 700; padding: 0.7rem 1.5rem; border-radius: 999px; background: var(--accento); color: white; text-decoration: none; }
   .bottone-scrivimi:hover { filter: brightness(1.08); }
   .bottone-scrivimi.secondario { background: white; color: var(--accento); border: 1px solid var(--accento); margin-left: 0.4rem; }
   .azione { display: flex; flex-wrap: wrap; gap: 0.6rem; }

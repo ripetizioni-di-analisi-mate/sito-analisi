@@ -130,8 +130,8 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
           {pronto && riassunti[`${materia}/${a.slug}`] && <p class="riassunto">{riassunti[`${materia}/${a.slug}`]}</p>}
           {pronto ? (
             <nav aria-label={a.titolo}>
-              {SEZIONI.map((s) => <a href={link(lingua, `/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? ` (${ns})` : ''}{s.slug === 'esercizi' && nd ? ` (${nd})` : ''}</a>)}
-              {conta(domande, a.slug) > 0 && <a href={link(lingua, `/${materia}/${a.slug}/domande`)}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'} ({conta(domande, a.slug)})</a>}
+              {SEZIONI.map((s) => <a href={link(lingua, `/${materia}/${a.slug}/${s.slug}`)}>{s.titolo}{s.slug === 'esercizi-svolti' && ns ? <span class="n"> {ns}</span> : ''}{s.slug === 'esercizi' && nd ? <span class="n"> {nd}</span> : ''}</a>)}
+              {conta(domande, a.slug) > 0 && <a href={link(lingua, `/${materia}/${a.slug}/domande`)}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}<span class="n"> {conta(domande, a.slug)}</span></a>}
             </nav>
             <div class="progresso-argomento" data-argomento={a.slug} data-schede={ns} data-verificabili={verificabili(a.slug)} data-domande={conta(domande, a.slug)} hidden>
               <span class="progresso-barra" aria-hidden="true"><i></i></span>
@@ -148,7 +148,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
         <h2><a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{nomeRipasso}</a></h2>
         <p class="riassunto">{confTolc ? (en ? `Practice across all topics and a section-timed ${confTolc.nome} simulation with separate English results.` : `Quiz su tutti gli argomenti e simulazione ${confTolc.nome} con tempi per sezione, correzione finale e risultato di inglese separato.`) : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
         <nav aria-label={nomeRipasso}>
-          <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'} ({domandeMateria})</a>
+          <a href={link(lingua, `/${materia}/${RIPASSO}/domande`)}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}<span class="n"> {domandeMateria}</span></a>
           <a href={link(lingua, `/${materia}/simulazione`)}>{nomeCompito}</a>
           <a class="solo-collegati" href={link(lingua, `/${materia}/${RIPASSO_OGGI}/domande`)}>{lingua === 'en' ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
         </nav>

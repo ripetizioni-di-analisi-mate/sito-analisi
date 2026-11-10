@@ -38,7 +38,7 @@ const invito = lingua === 'en' ? {
   <p class="sopratitolo">{m.titolo}</p>
   <h1>{t.sbloccaTitolo(m.titolo)}</h1>
   <p class="sommario">{t.sbloccaSommario}</p>
-  <ul class="cosa-include">
+  <ul class="cosa-include elenco-spunte">
     <li set:html={t.includeTeoria(m.argomenti.length)} />
     <li set:html={t.includeSvolti(svolti)} />
     <li set:html={t.includeSoluzioni(dafare)} />

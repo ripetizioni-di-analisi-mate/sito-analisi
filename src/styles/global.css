@@ -1553,3 +1553,128 @@ html.con-barra-sconto .bottoni-fissi { bottom: calc(var(--altezza-bs, 0px) + 1re
 .voce-alias span, .voce-altre span { font-weight: 600; }
 .voce-altre { font-family: var(--ui); font-size: 0.9rem; margin-top: 1.25rem; }
 @media (max-width: 600px) { .voce-vicine { grid-template-columns: 1fr; } .voce-vicine .voce-dopo { text-align: left; } .voce-vicine a:only-child.voce-dopo { grid-column: auto; } }
+
+/* ===== Allineamento grafico (10/11/2026) =====
+   Le schermate rimaste alla prima versione prendono lo stile di Prenota, Compatibilità e Pacchetti:
+   riquadri bianchi con angoli ampi e ombra leggera, righe separate da un filo, tasselli chiari per numeri e azioni. */
+:root {
+  --scheda-bordo: #d8e4df;
+  --scheda-chiaro: #edf6f2;
+  --scheda-ombra: 0 8px 28px #223f3510;
+  --scheda-raggio: 16px;
+}
+
+/* Pagina della materia: elenco dei capitoli in un solo riquadro */
+.griglia-argomenti { gap: 0; margin: 1.4rem 0 1.5rem; border: 1px solid var(--scheda-bordo); border-radius: var(--scheda-raggio); background: #fff; box-shadow: var(--scheda-ombra); overflow: hidden; }
+.griglia-argomenti li { border: 0; border-radius: 0; padding: 1rem 1.15rem 1.05rem; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.3rem 0.85rem; align-items: start; transition: background 0.15s; }
+.griglia-argomenti li + li { border-top: 1px solid var(--scheda-bordo); }
+.griglia-argomenti li:hover { background: color-mix(in srgb, var(--scheda-chiaro) 45%, #fff); }
+.griglia-argomenti li::before { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 8px; background: color-mix(in srgb, var(--accento) 10%, #fff); font-size: 0.92rem; line-height: 1; grid-row: span 3; }
+.griglia-argomenti h2 { font-size: 1.12rem; line-height: 1.3; padding-top: 0.22rem; }
+.griglia-argomenti h2 a:hover { color: var(--accento); }
+.griglia-argomenti .riassunto { font-family: var(--ui); font-size: 0.92rem; line-height: 1.5; }
+.griglia-argomenti nav { gap: 0.4rem; margin-top: 0.45rem; }
+.griglia-argomenti nav a { display: inline-flex; align-items: baseline; gap: 0.3rem; padding: 0.24rem 0.72rem; border: 1px solid color-mix(in srgb, var(--accento) 16%, #fff); border-radius: 999px; background: color-mix(in srgb, var(--accento) 6%, #fff); color: var(--accento); font-size: 0.85rem; font-weight: 600; line-height: 1.4; text-decoration: none; white-space: nowrap; transition: background 0.15s, border-color 0.15s; }
+.griglia-argomenti nav a:hover { background: color-mix(in srgb, var(--accento) 13%, #fff); border-color: color-mix(in srgb, var(--accento) 35%, #fff); }
+.griglia-argomenti nav a .n, .griglia-argomenti nav a .conta-ripasso { font-weight: 400; font-variant-numeric: tabular-nums; color: color-mix(in srgb, var(--accento) 70%, #fff); }
+.griglia-argomenti nav a .conta-ripasso:empty { display: none; }
+.griglia-argomenti li.in-preparazione { opacity: 0.7; }
+.griglia-argomenti li.in-preparazione:hover { background: none; }
+.griglia-argomenti .progresso-argomento { margin-top: 0.7rem; }
+.griglia-argomenti .progresso-barra { background: var(--scheda-chiaro); }
+@media (max-width: 30rem) {
+  .griglia-argomenti li { padding: 0.9rem 0.85rem; grid-template-columns: 1.8rem minmax(0, 1fr); gap: 0.3rem 0.65rem; }
+  .griglia-argomenti li::before { width: 1.8rem; height: 1.8rem; }
+  .griglia-argomenti nav a { white-space: normal; }
+}
+/* Riquadro «Anteprima gratuita» / «Tutto gratuito» sopra i capitoli */
+.riquadro-stato .stato-bloccata { padding: 1.05rem 1.2rem; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: var(--scheda-chiaro); }
+.riquadro-stato .stato-bloccata .icona { width: 2.6rem; height: 2.6rem; padding: 0.5rem; border-radius: 10px; background: #fff; box-shadow: 0 0 0 1px var(--scheda-bordo); }
+.riquadro-stato .azioni-anteprima { padding-left: 3.5rem; }
+@media (max-width: 30rem) { .riquadro-stato .azioni-anteprima { padding-left: 0; } }
+
+/* Sblocca e videocorsi: che cosa è incluso, come elenco con le spunte in un riquadro */
+.cosa-include.elenco-spunte { list-style: none; margin: 1.3rem 0 0.9rem; padding: 0; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); font-size: 1rem; line-height: 1.45; overflow: hidden; }
+.cosa-include.elenco-spunte li { position: relative; margin: 0; padding: 0.78rem 1rem 0.78rem 3rem; }
+.cosa-include.elenco-spunte li + li { border-top: 1px solid var(--scheda-bordo); }
+.cosa-include.elenco-spunte li::before { content: ''; position: absolute; left: 1rem; top: 0.78rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--scheda-chiaro) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.6 10.4l2.9 2.8 5.9-6' fill='none' stroke='%23214f50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 1rem no-repeat; }
+.cosa-include.elenco-spunte strong, .cosa-include.elenco-spunte b { color: var(--inchiostro); font-weight: 700; }
+.anche-nel-video { padding: 0.75rem 1rem; border: 1px solid var(--scheda-bordo); border-radius: 12px; background: var(--scheda-chiaro); line-height: 1.5; }
+
+/* Riquadro di acquisto (Sblocca, videocorso): stessa scheda delle prenotazioni */
+.riquadro-acquisto:not(.prenota-pagamento) { margin: 1.4rem 0 1rem; padding: clamp(1.1rem, 3vw, 1.7rem); border: 1px solid var(--scheda-bordo); border-top: 3px solid var(--accento); border-radius: var(--scheda-raggio); background: #fff; box-shadow: var(--scheda-ombra); }
+.riquadro-acquisto:not(.prenota-pagamento) > .prezzo { display: flex; align-items: baseline; justify-content: center; gap: 0.5rem; margin: 0 0 1.1rem; padding: 0.7rem 1rem; border-radius: 10px; background: var(--scheda-chiaro); }
+.riquadro-acquisto:not(.prenota-pagamento) > .prezzo strong { line-height: 1.15; }
+.modulo.modulo-acquisto { max-width: 24rem; }
+.modulo-acquisto .campo-corso { border-color: var(--scheda-bordo); border-radius: 10px; background: color-mix(in srgb, var(--scheda-chiaro) 45%, #fff); }
+.modulo-acquisto .bottone-primario { min-height: 3rem; }
+
+/* Elenco a righe in un riquadro (Prezzi, Formulari, altri videocorsi, corsi di gruppo): stessa forma dei pacchetti */
+.gruppo-righe { margin: 0; }
+.etichetta-gruppo { margin: 1.4rem 0 0; line-height: 1; }
+.etichetta-gruppo span { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.22rem 0.6rem; border-radius: 6px; background: var(--scheda-chiaro); font: 700 0.7rem/1.5 var(--ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azione); }
+.etichetta-gruppo span::before { content: ''; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: currentColor; }
+.elenco-righe { list-style: none; margin: 0.7rem 0 1.5rem; padding: 0; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); overflow: hidden; }
+.elenco-righe > li { margin: 0; }
+.elenco-righe > li + li { border-top: 1px solid var(--scheda-bordo); }
+.elenco-righe > li > a { display: flex; align-items: center; gap: 0.85rem; padding: 0.8rem 1rem; color: var(--inchiostro); text-decoration: none; transition: background 0.15s; }
+.elenco-righe > li > a:hover { background: color-mix(in srgb, var(--scheda-chiaro) 55%, #fff); }
+.elenco-righe .riga-punto { flex: none; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--accento); }
+.elenco-righe .riga-testo { flex: 1; min-width: 0; display: grid; gap: 0.12rem; }
+.elenco-righe .riga-testo strong { font-size: 1rem; font-weight: 600; line-height: 1.35; }
+.elenco-righe .riga-testo small { font-size: 0.85rem; line-height: 1.45; color: var(--inchiostro-2); }
+.elenco-righe .riga-valore { flex: none; font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.elenco-righe .riga-etichetta { flex: none; padding: 0.2rem 0.6rem; border-radius: 999px; background: var(--scheda-chiaro); color: var(--azione); font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.elenco-righe .riga-freccia { flex: none; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 8px; background: var(--scheda-chiaro); color: var(--azione); font-size: 1rem; line-height: 1; transition: background 0.15s, color 0.15s; }
+.elenco-righe > li > a:hover .riga-freccia { background: var(--azione); color: #fff; }
+@media (max-width: 34rem) {
+  .elenco-righe > li > a { flex-wrap: wrap; gap: 0.5rem 0.7rem; padding: 0.8rem 0.85rem; }
+  .elenco-righe .riga-testo { flex-basis: calc(100% - 1.4rem); }
+  .elenco-righe .riga-etichetta { margin-left: 1.3rem; }
+  .elenco-righe .riga-valore { margin-left: 1.3rem; }
+  .elenco-righe .riga-freccia { margin-left: auto; }
+}
+
+/* Elenco delle schede di esercizi svolti: un solo riquadro con le righe */
+.elenco-esercizi { gap: 0; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; overflow: hidden; }
+.elenco-esercizi li + li { border-top: 1px solid var(--scheda-bordo); }
+.elenco-esercizi a { gap: 0.85rem; align-items: start; padding: 0.8rem 1rem; border: 0; border-radius: 0; transition: background 0.15s; }
+.elenco-esercizi a:hover { background: color-mix(in srgb, var(--scheda-chiaro) 55%, #fff); }
+.elenco-esercizi .numero { display: grid; place-items: center; flex: none; min-width: 1.9rem; height: 1.9rem; border-radius: 8px; background: color-mix(in srgb, var(--accento) 10%, #fff); font-size: 0.88rem; line-height: 1; }
+.elenco-esercizi .stato { align-self: center; }
+.ingresso-domande { border-color: var(--scheda-bordo); border-radius: 14px; }
+.nota-segnaposto { border-color: var(--scheda-bordo); border-radius: 10px; }
+
+/* Accesso, nuovo account e nuova password: modulo in un riquadro, schede come selettore */
+.schede-accesso { display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem; max-width: 27rem; margin: 1.3rem 0 0; padding: 0.25rem; border-radius: 12px; background: var(--scheda-chiaro); }
+.schede-accesso button { margin: 0; padding: 0.5rem 0.6rem; border: 0; border-radius: 9px; font-weight: 600; color: var(--inchiostro-2); transition: background 0.15s, color 0.15s; }
+.schede-accesso button[aria-selected="true"] { background: #fff; color: var(--accento); box-shadow: 0 1px 3px #223f351f; }
+.modulo.scheda-modulo { max-width: 27rem; margin: 0.8rem 0 1rem; padding: clamp(1.05rem, 3vw, 1.5rem); border: 1px solid var(--scheda-bordo); border-top: 3px solid var(--accento); border-radius: var(--scheda-raggio); background: #fff; box-shadow: var(--scheda-ombra); }
+.modulo.scheda-modulo input:not([type="checkbox"]):not([type="radio"]) { width: 100%; box-sizing: border-box; }
+.modulo.scheda-modulo > .bottone-primario { width: 100%; min-height: 3rem; }
+.modulo.scheda-modulo .campo-corso { border-color: var(--scheda-bordo); border-radius: 10px; background: color-mix(in srgb, var(--scheda-chiaro) 45%, #fff); }
+.modulo.scheda-modulo .esito-modulo:empty { display: none; }
+
+/* Simulazione d'esame e prova a quiz: impostazioni nella scheda comune */
+.sim-impostazioni { gap: 1.1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--scheda-bordo); border-top: 3px solid var(--accento); border-radius: var(--scheda-raggio); box-shadow: var(--scheda-ombra); }
+.sim-scelte select { padding: 0.5rem 0.7rem; border-color: var(--scheda-bordo); background-color: #fff; }
+.sim-argomenti { gap: 0.45rem; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.sim-argomenti label { align-items: center; gap: 0.55rem; padding: 0.5rem 0.7rem; border: 1px solid var(--scheda-bordo); border-radius: 9px; background: #fff; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.sim-argomenti label:hover { background: color-mix(in srgb, var(--scheda-chiaro) 55%, #fff); }
+.sim-argomenti label:has(input:checked) { border-color: color-mix(in srgb, var(--accento) 45%, #fff); background: color-mix(in srgb, var(--accento) 6%, #fff); }
+.sim-argomenti input { width: 1.05rem; height: 1.05rem; margin: 0; flex: none; accent-color: var(--accento); }
+.sim-impostazioni .bottone-primario { min-height: 2.9rem; padding-inline: 1.8rem; }
+
+/* Avviso per chi non ha fatto l'accesso (domande a tempo) */
+.nota-ospite { border: 1px solid var(--scheda-bordo); border-radius: 12px; background: var(--scheda-chiaro); padding: 0.75rem 1.1rem; }
+
+/* Contatti: i recapiti come righe di un riquadro */
+.contatti { gap: 0; max-width: 34rem; border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; font-family: var(--ui); overflow: hidden; }
+.contatti li { gap: 0.9rem; padding: 0.85rem 1rem; }
+.contatti li + li { border-top: 1px solid var(--scheda-bordo); }
+.icona-contatto { width: 2.6rem; height: 2.6rem; border-radius: 10px; background: var(--scheda-chiaro); color: var(--azione); }
+.icona-contatto svg { width: 1.3rem; height: 1.3rem; }
+.contatti strong { font-family: var(--ui); font-size: 0.82rem; font-weight: 600; color: var(--inchiostro-2); }
+.griglia-argomenti nav a.solo-collegati { display: none; }
+html.collegato .griglia-argomenti nav a.solo-collegati { display: inline-flex; }
+.sim-esempio { border-color: var(--scheda-bordo); border-radius: 10px; background: var(--scheda-chiaro); }

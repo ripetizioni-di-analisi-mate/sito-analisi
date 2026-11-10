@@ -235,15 +235,16 @@ const persona = {
   .bio-risultati img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; transition: transform 0.2s; }
   .bio-risultati a:hover img { transform: scale(1.04); }
   .bio-altri { margin-top: 0.75rem; font-family: var(--ui); }
-  .bio-servizi { display: grid; gap: 0.6rem; font-family: var(--ui); }
-  .bio-servizio { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: 0.8rem 1rem; border-radius: var(--raggio); background: var(--carta-2); border: 1px solid var(--riga); }
+  .bio-servizi { display: grid; gap: 0; font-family: var(--ui); border: 1px solid var(--scheda-bordo); border-radius: 14px; background: #fff; overflow: hidden; }
+  .bio-servizio { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: 0.95rem 1.1rem; border-radius: 0; background: #fff; border: 0; }
+  .bio-servizio + .bio-servizio { border-top: 1px solid var(--scheda-bordo); }
   .bio-servizio p { margin: 0 0 0.5rem; }
   .bio-servizio p:last-child, .bio-servizio ul { margin-bottom: 0; }
   .bio-durata { margin-bottom: 0.2rem !important; }
   .bio-loghi { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem 2rem; padding: 1.75rem 1.5rem; border-radius: var(--raggio); background: #0d2a47; }
   .bio-loghi img { height: 4.2rem; width: auto; max-width: 9.5rem; object-fit: contain; }
   /* loghi bianchi resi scuri su fondo chiaro */
-  .bio-loghi.chiari { background: var(--carta-2); border: 1px solid var(--riga); }
+  .bio-loghi.chiari { background: #fff; border: 1px solid var(--scheda-bordo); border-radius: 14px; }
   .bio-loghi.chiari img { filter: brightness(0); opacity: 0.72; }
   @media (max-width: 40rem) {
     .bio-testa { flex-direction: column; text-align: center; }

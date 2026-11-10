@@ -36,16 +36,17 @@ const { materie, gruppi, totale } = await elencoDomande();
   ))}
 </Base>
 <style>
-  .dta-gruppo { font-family: var(--ui); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--inchiostro-2); margin: 2rem 0 0; border-bottom: 1px solid var(--riga); padding-bottom: 0.4rem; }
-  .dta-griglia { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); align-items: start; }
-  .dta-griglia > li { border: 1px solid var(--riga); border-left: 4px solid var(--accento); border-radius: var(--raggio); padding: 0.9rem 1rem; background: #fff; }
-  .dta-griglia h3 { margin: 0; font-size: 1.2rem; color: var(--accento); }
+  .dta-gruppo { display: flex; width: fit-content; align-items: center; gap: 0.4rem; margin: 1.8rem 0 0; padding: 0.22rem 0.6rem; border-radius: 6px; background: var(--scheda-chiaro); font: 700 0.7rem/1.5 var(--ui); letter-spacing: 0.08em; text-transform: uppercase; color: var(--azione); }
+  .dta-gruppo::before { content: ''; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: currentColor; }
+  .dta-griglia { list-style: none; padding: 0; margin: 0.7rem 0 0; display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); align-items: start; }
+  .dta-griglia > li { border: 1px solid var(--scheda-bordo); border-top: 3px solid var(--accento); border-radius: 14px; padding: 0.95rem 1.05rem 1rem; background: #fff; box-shadow: var(--scheda-ombra); }
+  .dta-griglia h3 { margin: 0; font-size: 1.15rem; line-height: 1.3; color: var(--inchiostro); }
   .dta-conti { margin: 0.2rem 0 0.7rem; font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); }
   .dta-tasti { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .dta-tasti a { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; text-decoration: none; border-radius: 999px; padding: 0.3rem 0.8rem; }
   .dta-primario { background: var(--accento); color: #fff; }
   .dta-secondario { color: var(--accento); background: color-mix(in srgb, var(--accento) 11%, transparent); }
-  details { margin-top: 0.7rem; border-top: 1px solid var(--riga); padding-top: 0.5rem; font-family: var(--ui); font-size: 0.9rem; }
+  details { margin-top: 0.8rem; border-top: 1px solid var(--scheda-bordo); padding-top: 0.55rem; font-family: var(--ui); font-size: 0.9rem; }
   summary { cursor: pointer; color: var(--inchiostro-2); }
   details ol { margin: 0.4rem 0 0; padding-left: 1.3rem; display: grid; gap: 0.2rem; }
   details a { color: var(--inchiostro); }

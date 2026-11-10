@@ -13,15 +13,16 @@ const voci = (await getCollection('formulari'))
   <p class="sopratitolo">Gratis</p>
   <h1>Formulari</h1>
   <p class="sommario">Le formule di ogni materia con le loro condizioni di validità, nell'ordine degli argomenti dell'esame. Si leggono qui per intero; il PDF si scarica con un account gratuito.</p>
-  <ul class="griglia-materie">
+  <ul class="elenco-righe">
     {voci.map((v) => {
       const m = trovaMateria(v.id);
       return (
         <li style={`--accento: ${m.colore}`}>
           <a href={`/formulari/${v.id}`}>
-            <h3>{v.data.titolo}</h3>
-            <p>{v.data.sommario}</p>
-            <span class="conteggio">Gratis · PDF con account</span>
+            <span class="riga-punto" aria-hidden="true"></span>
+            <span class="riga-testo"><strong>{v.data.titolo}</strong><small>{v.data.sommario}</small></span>
+            <span class="riga-etichetta">Gratis · PDF con account</span>
+            <span class="riga-freccia" aria-hidden="true">→</span>
           </a>
         </li>
       );

@@ -69,6 +69,14 @@ const WHATSAPP = 'https://wa.me/393885680393';
   .gruppi .punti li, .gruppi .passi-gruppo li { margin: 0.45rem 0; }
   .gruppi #fatto p { margin: 0.4rem 0; }
   .gruppi #fatto .tasti { margin-bottom: 0.2rem; }
+  /* Iscrizione nella scheda comune (allineamento del 10/11) */
+  .gruppi #modulo-gruppo { margin: 2rem 0 0; padding: clamp(1.05rem, 3vw, 1.6rem); border: 1px solid var(--scheda-bordo); border-top: 3px solid var(--accento); border-radius: var(--scheda-raggio); background: #fff; box-shadow: var(--scheda-ombra); }
+  .gruppi #modulo-gruppo > h2 { margin-top: 0; }
+  .gruppi #modulo-gruppo .tasti { margin-bottom: 0; }
+  .gruppi #modulo-gruppo .bottone-primario { min-height: 2.9rem; padding-inline: 2rem; }
+  .gruppi .modulo input[type="file"] { padding: 0.5rem; border: 1px dashed var(--scheda-bordo); border-radius: 10px; background: color-mix(in srgb, var(--scheda-chiaro) 45%, #fff); font-size: 0.9rem; color: var(--inchiostro-2); cursor: pointer; }
+  .gruppi .modulo input[type="file"]::file-selector-button { margin-right: 0.8rem; padding: 0.4rem 0.9rem; border: 1px solid var(--accento); border-radius: 999px; background: #fff; color: var(--accento); font: 600 0.88rem var(--ui); cursor: pointer; }
+  .gruppi .punti, .gruppi .passi-gruppo { font-family: var(--ui); }
 </style>
 
 <script>
