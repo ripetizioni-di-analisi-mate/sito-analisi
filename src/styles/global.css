@@ -1208,8 +1208,12 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .numeri-domande .numero { min-width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--riga); background: #fff; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--inchiostro-2); cursor: pointer; padding: 0 0.4rem; }
 .numeri-domande .numero-giusto { background: color-mix(in srgb, var(--verde) 14%, #fff); border-color: color-mix(in srgb, var(--verde) 50%, transparent); color: var(--verde); }
 .numeri-domande .numero-sbagliato { background: color-mix(in srgb, var(--c-esempio) 12%, #fff); border-color: color-mix(in srgb, var(--c-esempio) 50%, transparent); color: #8a5f1f; }
+.numeri-domande .numero-bloccato { border-style: dashed; background: var(--carta); }
 .numeri-domande .numero-attivo { outline: 2px solid var(--accento); outline-offset: 1px; color: var(--inchiostro); }
 .numero-domanda { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0 0 0.6rem; }
+.blocco-domande { margin: 0; padding: 1.2rem 1.1rem; text-align: left; background: #fff; }
+.blocco-domande .sopratitolo { margin: 0 0 0.3rem; color: var(--azione); }
+.blocco-domande h2 { margin: 0 0 0.9rem; font-size: 1.2rem; line-height: 1.35; }
 @media (max-width: 30rem) { .navigazione-domande { flex-wrap: wrap; } .numeri-domande { order: -1; flex-basis: 100%; } .navigazione-domande .bottone-secondario { flex: 1; } }
 
 /* Tasti di acquisto in un solo colore (area 7, scelta A): il colore della materia resta nel pallino, nella striscia e nei titoli */

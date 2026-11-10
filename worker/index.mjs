@@ -980,6 +980,7 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       let dati = await domandeDi(env, materia, l);
+      const argomentiCompleti = dati?.argomenti;
       const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
       if (quizConAnteprima && vendita) {
         const accesso = await utenteCollegato(env, req).catch(() => null);
@@ -1023,7 +1024,15 @@ export default {
       }
       const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
+      // L'anteprima mostra la lunghezza della serie completa, con i soli ID dimostrativi.
+      let lunghezzaSerie;
+      if (ordine && !personale && argomentiCompleti !== dati?.argomenti) {
+        const totaleCompleto = ripasso
+          ? Object.values(argomentiCompleti).reduce((totale, domande) => totale + domande.length, 0)
+          : argomentiCompleti[argomento].length;
+        lunghezzaSerie = Math.min(DOMANDE_SESSIONE, totaleCompleto);
+      }
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], lunghezzaSerie, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
         200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/domande/rispondi' && POST) {

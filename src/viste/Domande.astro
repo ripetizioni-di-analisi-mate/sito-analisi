@@ -38,12 +38,14 @@ const T = en ? {
   ospite: 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
+  anteprima: 'Free preview', bloccata: 'This question requires full access to the course.', sblocca: 'Unlock the course',
 } : {
   titolo: personale ? 'Ripasso dilazionato' : ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
   termina: 'Termina la sessione', sommario: personale ? `Le domande di ${m.titolo} a cui hai risposto in modo sbagliato tornano qui il giorno dopo; ogni risposta corretta data nel giorno previsto sposta la domanda più avanti, a 3 e poi a 7 giorni, e dopo tre risposte corrette la domanda esce dal ripasso.` : `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
   ospite: 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
+  anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
 };
 // Testi usati dallo script nel browser.
 const JS = en ? {
@@ -54,6 +56,7 @@ const JS = en ? {
   spiegazione: 'Explanation', conclusa: 'Study session completed', minuto: '1 minute of active study', minuti: '§ minutes of active study', sessioneConclusa: 'Session completed',
   unaCorretta: '1 correct answer', piuCorrette: '§ correct answers', su: 'out of', righeCorrette: 'Correct answers', righeStudio: 'Active study', totale: 'Total',
   numero: 'Question § of', scaduto2: 'Time is up: you can still answer, without points, or move to another question.',
+  numeroBloccato: 'Question §, full access required',
   livello: 'Level', massimo: 'Maximum level', alLivello: 'to level', obiettivi: 'Weekly goals', completato: 'Completed', tornaEsercizi: 'Back to the exercises', tornaMateria: 'Back to the topics', percorso: 'Your progress',
 } : {
   caricamento: T.caricamento, errore: 'Le domande non si sono caricate. Ricarica la pagina.', bonus: 'Bonus velocità ancora per § secondi',
@@ -63,6 +66,7 @@ const JS = en ? {
   spiegazione: 'Spiegazione', conclusa: 'Sessione di studio conclusa', minuto: '1 minuto di studio attivo', minuti: '§ minuti di studio attivo', sessioneConclusa: 'Sessione conclusa',
   unaCorretta: '1 risposta corretta', piuCorrette: '§ risposte corrette', su: 'su', righeCorrette: 'Risposte corrette', righeStudio: 'Studio attivo', totale: 'Totale',
   numero: 'Domanda § di', scaduto2: 'Tempo scaduto: puoi ancora rispondere, senza punti, oppure passare a un\'altra domanda.',
+  numeroBloccato: 'Domanda §, accesso completo richiesto',
   livello: 'Livello', massimo: 'Livello massimo', alLivello: 'al livello', obiettivi: 'Obiettivi della settimana', completato: 'Completato', tornaEsercizi: 'Torna agli esercizi', tornaMateria: 'Torna agli argomenti', percorso: 'Il tuo percorso',
 };
 ---
@@ -101,6 +105,11 @@ const JS = en ? {
 
     <section class="scheda-domanda" aria-live="polite">
       <p class="numero-domanda"></p>
+      <div class="velo-blocco velo-scheda blocco-domande" hidden>
+        <p class="sopratitolo">{T.anteprima}</p>
+        <h2>{T.bloccata}</h2>
+        <a class="bottone-sblocca" href={link(lingua, `/${materia}/sblocca`)}>{T.sblocca}</a>
+      </div>
       <div class="tempo" hidden>
         <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="12" r="8" /><path d="M11 8v4l2.5 2M9 2h4" /></svg>
         <div class="barra-tempo"><span></span></div>
@@ -142,6 +151,7 @@ const JS = en ? {
   const tempo = $('.tempo'), barra = $('.barra-tempo span'), secondiEl = $('.secondi'), notaTempo = $('.nota-tempo');
   const termina = $<HTMLButtonElement>('.termina'), scheda = $('.scheda-domanda'), riepilogo = $('.riepilogo-sessione');
   const nav = $('.navigazione-domande'), numeri = $('.numeri-domande'), numeroEl = $('.numero-domanda');
+  const blocco = $('.blocco-domande');
   const prec = $<HTMLButtonElement>('.precedente'), succ = $<HTMLButtonElement>('.successiva');
   const LETTERE = ['A', 'B', 'C', 'D', 'E'];
   const post = (url: string, dati: unknown) => fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
@@ -153,7 +163,7 @@ const JS = en ? {
   interface Domanda { token: string; id: string; numero: number; testo: string; scelte: string[]; secondi: number; collegato: boolean }
   interface Esito { giusta: boolean; corretta: number; spiegazione: string; punti: number; veloce?: boolean; motivo?: string; scelta: number; scaduto: boolean }
   let ordine: string[] = [];
-  let pos = 0;
+  let pos = 0, lunghezzaSerie = 0;
   const domande = new Map<string, Domanda>();
   const esiti = new Map<string, Esito>();
   let corrente: Domanda | null = null;
@@ -173,22 +183,24 @@ const JS = en ? {
 
   function disegnaNumeri() {
     numeri.innerHTML = '';
-    ordine.forEach((id, i) => {
+    for (let i = 0; i < lunghezzaSerie; i++) {
       const li = document.createElement('li');
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = String(i + 1);
-      const e = esiti.get(id);
-      b.className = ['numero', e ? (e.giusta ? 'numero-giusto' : 'numero-sbagliato') : '', i === pos ? 'numero-attivo' : ''].join(' ').trim();
+      const id = ordine[i];
+      const e = id ? esiti.get(id) : undefined;
+      b.className = ['numero', e ? (e.giusta ? 'numero-giusto' : 'numero-sbagliato') : '', id ? '' : 'numero-bloccato', i === pos ? 'numero-attivo' : ''].join(' ').trim();
+      if (!id) b.setAttribute('aria-label', f('numeroBloccato', i + 1));
       if (i === pos) b.setAttribute('aria-current', 'step');
       b.addEventListener('click', () => vai(i));
       li.appendChild(b);
       numeri.appendChild(li);
-    });
+    }
     prec.disabled = pos <= 0;
-    succ.disabled = pos >= ordine.length - 1;
+    succ.disabled = pos >= lunghezzaSerie - 1;
     const daArg = ripasso && ordine[pos] && brevi[argDi(ordine[pos])] ? ` · ${brevi[argDi(ordine[pos])]}` : '';
-    numeroEl.textContent = ordine.length ? `${f('numero', pos + 1)} ${ordine.length}${daArg}` : '';
+    numeroEl.textContent = lunghezzaSerie ? `${f('numero', pos + 1)} ${lunghezzaSerie}${daArg}` : '';
   }
 
   function mostraScelte(d: Domanda, e?: Esito) {
@@ -222,8 +234,8 @@ const JS = en ? {
     spieg.innerHTML = `<h2>${L.spiegazione}</h2>${e.spiegazione}`;
     spieg.hidden = false;
     conferma.hidden = true;
-    prossima.hidden = pos >= ordine.length - 1;
-    nuovaSerie.hidden = pos < ordine.length - 1;
+    prossima.hidden = pos >= lunghezzaSerie - 1;
+    nuovaSerie.hidden = pos < lunghezzaSerie - 1;
     if (ripasso && corrente) svolti.href = `${pref}/${materia}/${argDi(corrente.id)}/esercizi-svolti`;
     svolti.hidden = false;
   }
@@ -231,14 +243,23 @@ const JS = en ? {
   // Apre la domanda in posizione i. Una domanda non ancora risolta si ricarica con un tempo nuovo di due minuti.
   async function vai(i: number) {
     clearInterval(timer);
-    pos = Math.max(0, Math.min(i, Math.max(ordine.length - 1, 0)));
+    const richiesta = ++ultimaRichiesta;
+    pos = Math.max(0, Math.min(i, lunghezzaSerie - 1));
+    corrente = null;
     scelta = 0;
     esito.hidden = true; spieg.hidden = true; prossima.hidden = true; nuovaSerie.hidden = true; svolti.hidden = true; notaTempo.hidden = true;
     conferma.hidden = true; conferma.disabled = true; tempo.hidden = true;
     const id = ordine[pos];
+    const bloccata = ordine.length > 0 && !id;
+    blocco.hidden = !bloccata;
+    testo.hidden = bloccata;
+    if (bloccata) {
+      scelte.replaceChildren();
+      disegnaNumeri();
+      return;
+    }
     const e = id ? esiti.get(id) : undefined;
     if (e) {
-      ultimaRichiesta++;
       corrente = domande.get(id)!;
       testo.innerHTML = corrente.testo;
       mostraScelte(corrente, e);
@@ -249,7 +270,6 @@ const JS = en ? {
     }
     scelte.innerHTML = '';
     testo.innerHTML = `<p class="caricamento">${L.caricamento}</p>`;
-    const richiesta = ++ultimaRichiesta;
     const r = await post('/api/domande/prossima', id ? { materia, argomento, id, lingua } : { materia, argomento, recenti, lingua }).catch(() => null);
     const d0 = r ? await r.json().catch(() => null) : null;
     const d = r && r.ok ? d0 : null;
@@ -265,6 +285,7 @@ const JS = en ? {
     }
     if (!ordine.length) {
       ordine = d.ordine; nav.hidden = false;
+      lunghezzaSerie = d.lunghezzaSerie ?? ordine.length;
       recenti = [...recenti.filter((x) => !ordine.includes(x)), ...ordine].slice(-300);
       try { localStorage.setItem(chiaveRecenti, JSON.stringify(recenti)); } catch { /* niente memoria */ }
     }
@@ -294,7 +315,10 @@ const JS = en ? {
     const scaduto = Date.now() - inizio > d0.secondi * 1000;
     const r = await post('/api/domande/rispondi', { token: d0.token, scelta }).catch(() => null);
     const d = r && r.ok ? await r.json() : null;
-    if (!d) { esito.hidden = false; esito.textContent = L.nonArrivata; return; }
+    if (!d) {
+      if (corrente?.id === d0.id) { esito.hidden = false; esito.textContent = L.nonArrivata; }
+      return;
+    }
     const e: Esito = { ...d, scelta, scaduto };
     esiti.set(d0.id, e);
     if (corrente?.id !== d0.id) return;

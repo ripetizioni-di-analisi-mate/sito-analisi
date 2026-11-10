@@ -90,6 +90,10 @@ test('ospiti e iscritti senza acquisto vedono gli stessi dieci quiz complessivi'
     const dati = await risposta.json();
     assert.equal(dati.totale, 10);
     assert.equal(new Set(dati.ordine).size, 10);
+    assert.equal(dati.lunghezzaSerie, 15);
+    const capitolo = await (await b.invia({argomento:'probabilita-e-combinatoria'})).json();
+    assert.equal(capitolo.lunghezzaSerie, 15);
+    assert.deepEqual(capitolo.ordine, ['probabilita-e-combinatoria/1']);
     const tentativo = await (await b.invia({argomento:'variabili-discrete',id:'variabili-discrete/45'})).json();
     assert.equal(tentativo.totale, 1);
     assert.equal(tentativo.id, 'variabili-discrete/1');
@@ -101,4 +105,10 @@ test('chi acquista Statistica può esercitarsi su tutti i 540 quiz', async () =>
   const r = await b.invia({argomento:'prove-d-esame'});
   assert.equal(r.status,200);
   assert.equal((await r.json()).totale,540);
+  const capitolo = await (await b.invia({argomento:'probabilita-e-combinatoria'})).json();
+  assert.equal(capitolo.totale, 45);
+  assert.equal(new Set(capitolo.ordine).size, 15);
+  assert.equal(capitolo.lunghezzaSerie, undefined);
+  const seconda = await (await b.invia({argomento:'probabilita-e-combinatoria',id:capitolo.ordine[1]})).json();
+  assert.equal(seconda.id, capitolo.ordine[1]);
 });
