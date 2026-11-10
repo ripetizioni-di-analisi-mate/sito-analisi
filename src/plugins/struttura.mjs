@@ -300,13 +300,38 @@ export function struttura(a) {
     const [n, tipo = 'doppio-pendolo', ang = '0'] = campi(s);
     const p = punto(n), cx = X(p[0]), cy = Y(p[1]);
     const t0 = (Number(ang) * Math.PI) / 180, ux = Math.cos(t0), uy = -Math.sin(t0), tx = -uy, ty = ux;
-    const L = 13, b = tipo === 'pendolo' ? [0] : [-7, 7];
+    const L = 16, doppio = tipo !== 'pendolo';
     if (!['pendolo', 'doppio-pendolo'].includes(tipo)) throw new Error(`vincolo interno sconosciuto: "${tipo}" (pendolo, doppio-pendolo)`);
-    // il tratto dell'asta attraversato dalle bielle si cancella, così si vede la sconnessione
-    svg += `<circle class="interruzione" cx="${f(cx)}" cy="${f(cy)}" r="${L - 3}"/>`;
-    for (const j of b) {
-      const sx = cx + tx * j - ux * L, sy = cy + ty * j - uy * L, ex = cx + tx * j + ux * L, ey = cy + ty * j + uy * L;
-      svg += `<line class="biella" x1="${f(sx)}" y1="${f(sy)}" x2="${f(ex)}" y2="${f(ey)}"/><circle class="cerniera" cx="${f(sx)}" cy="${f(sy)}" r="3"/><circle class="cerniera" cx="${f(ex)}" cy="${f(ey)}" r="3"/>`;
+    // il tratto delle aste vicino al nodo si cancella, così si vede la sconnessione; le due parti finiscono
+    // in due piastrine (doppio pendolo) o in due cerniere (pendolo) collegate dalle bielle
+    svg += `<circle class="interruzione" cx="${f(cx)}" cy="${f(cy)}" r="${L}"/>`;
+    const pt = (s2, j) => [cx + ux * s2 + tx * j, cy + uy * s2 + ty * j];
+    if (doppio) {
+      for (const s2 of [-L, L]) {
+        const [p1x, p1y] = pt(s2, -11), [p2x, p2y] = pt(s2, 11);
+        svg += `<line class="piastrina" x1="${f(p1x)}" y1="${f(p1y)}" x2="${f(p2x)}" y2="${f(p2y)}"/>`;
+      }
+      for (const j of [-7, 7]) {
+        const [sx, sy] = pt(-L, j), [ex, ey] = pt(L, j);
+        svg += `<line class="biella" x1="${f(sx)}" y1="${f(sy)}" x2="${f(ex)}" y2="${f(ey)}"/><circle class="cerniera" cx="${f(sx)}" cy="${f(sy)}" r="2.8"/><circle class="cerniera" cx="${f(ex)}" cy="${f(ey)}" r="2.8"/>`;
+      }
+    } else {
+      const [sx, sy] = pt(-L, 0), [ex, ey] = pt(L, 0);
+      // le estremità tagliate delle aste che arrivano nel nodo si collegano alle due cerniere della biella
+      const dirs = [];
+      for (const [q, r] of aste) {
+        const da = Math.abs(q[0] - p[0]) < 1e-9 && Math.abs(q[1] - p[1]) < 1e-9 ? r : Math.abs(r[0] - p[0]) < 1e-9 && Math.abs(r[1] - p[1]) < 1e-9 ? q : null;
+        if (da) { const dx2 = X(da[0]) - cx, dy2 = Y(da[1]) - cy, l = Math.hypot(dx2, dy2) || 1; dirs.push([dx2 / l, dy2 / l]); }
+      }
+      const capi = [[sx, sy], [ex, ey]];
+      dirs.slice(0, 2).forEach(([dx2, dy2], i) => {
+        // ogni asta va alla cerniera più vicina; a parità, la prima asta alla prima cerniera
+        const e = [cx + dx2 * L, cy + dy2 * L];
+        const d0 = Math.hypot(e[0] - capi[0][0], e[1] - capi[0][1]), d1 = Math.hypot(e[0] - capi[1][0], e[1] - capi[1][1]);
+        const c = Math.abs(d0 - d1) < 1 ? capi[i] : d0 < d1 ? capi[0] : capi[1];
+        if (Math.hypot(e[0] - c[0], e[1] - c[1]) > 2) svg += `<line class="piastrina" x1="${f(e[0])}" y1="${f(e[1])}" x2="${f(c[0])}" y2="${f(c[1])}"/>`;
+      });
+      svg += `<line class="biella" x1="${f(sx)}" y1="${f(sy)}" x2="${f(ex)}" y2="${f(ey)}"/><circle class="cerniera" cx="${f(sx)}" cy="${f(sy)}" r="3.6"/><circle class="cerniera" cx="${f(ex)}" cy="${f(ey)}" r="3.6"/>`;
     }
   }
 
