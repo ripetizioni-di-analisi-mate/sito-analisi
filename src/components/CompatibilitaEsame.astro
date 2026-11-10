@@ -3,7 +3,7 @@
 // materiale della materia e risultato richiesta per richiesta. Pagina /compatibilita; dalla pagina Sblocca delle
 // materie universitarie si arriva con ?materia=<slug>. Worker: worker/compatibilita.mjs.
 import { materia as datiMateria } from '../data/materie';
-import { MATERIE_COMPATIBILITA, MAX_PAGINE, SOGLIA_CONSIGLIATO } from '../data/compatibilita';
+import { MATERIE_COMPATIBILITA, MAX_CARATTERI_TESTO, MAX_PAGINE, PESI, SOGLIA_CONSIGLIATO } from '../data/compatibilita';
 const elenco = MATERIE_COMPATIBILITA.map((s) => datiMateria(s));
 const descrizioni: Record<string, string> = {
   'analisi-1': 'Limiti, derivate e integrali',
@@ -14,7 +14,7 @@ const descrizioni: Record<string, string> = {
   'matematica-generale': 'Matematica per Economia',
 };
 ---
-<div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-soglia={SOGLIA_CONSIGLIATO} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
+<div class="compat" id="compat" data-max-pagine={MAX_PAGINE} data-soglia={SOGLIA_CONSIGLIATO} data-peso-parziale={PESI.argomento} data-prezzi={JSON.stringify(Object.fromEntries(elenco.map((m) => [m.slug, m.prezzo])))}>
   <form class="compat-modulo" id="compat-modulo" novalidate>
     <div class="compat-intro">
       <span class="compat-occhiello">Compito o programma</span>
@@ -39,7 +39,7 @@ const descrizioni: Record<string, string> = {
       <details class="compat-incolla">
         <summary>Preferisci incollare il testo?</summary>
         <label for="compat-testo" class="compat-etichetta-testo">Testo del compito o del programma</label>
-        <textarea id="compat-testo" name="testo" rows="6" maxlength="8000" placeholder="Incolla gli esercizi, le domande o l’elenco degli argomenti del programma…"></textarea>
+        <textarea id="compat-testo" name="testo" rows="6" maxlength={MAX_CARATTERI_TESTO} placeholder="Incolla gli esercizi, le domande o l’elenco degli argomenti del programma…"></textarea>
       </details>
     </div>
     <div class="compat-tasti">
@@ -166,6 +166,11 @@ const descrizioni: Record<string, string> = {
   .compat-righe-sintesi + .compat-righe-sintesi { margin-top: 0.25rem; }
   .compat-righe-sintesi b { color: var(--inchiostro); }
   .compat-acquisto { margin: 0.6rem 0 0; font-size: 0.92rem; }
+  .compat-verifica { margin: 0.85rem 0 0; padding: 0.85rem 1rem; border: 1px solid #e7d4ad; border-radius: 10px; background: #fff9ed; color: #493b26; }
+  .compat-verifica:first-child { margin-top: 0; }
+  .compat-verifica p { margin: 0.25rem 0 0.65rem; font-size: 0.88rem; line-height: 1.5; }
+  .compat-verifica-azioni { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; }
+  .compat-verifica-azioni a { color: var(--azione); font-size: 0.88rem; font-weight: 650; }
   .compat-consigliato { position: relative; overflow: hidden; margin: 0.9rem 0 0.1rem; padding: 1rem 1rem 1.05rem; border-radius: var(--raggio); text-align: center;
     background: linear-gradient(180deg, #eaf4ef 0%, #f6faf7 100%); border: 1px solid #cfe2db; animation: cc-entra 0.5s ease-out; }
   .cc-etichetta { position: relative; display: inline-flex; align-items: center; gap: 0.35rem; margin: 0 0 0.35rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--azione); }
