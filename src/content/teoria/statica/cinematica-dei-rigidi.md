@@ -84,7 +84,7 @@ u = -\varphi\,(y - y_C) ,
 \qquad
 v = \varphi\,(x - x_C) .
 $$
-Lo spostamento di $P$ è perpendicolare al segmento $CP$, ha modulo $|\varphi|\,\overline{CP}$ e ha il verso della rotazione. Il centro può stare fuori dal corpo: le formule degli spostamenti valgono in tutto il piano, come se il corpo fosse esteso da una lastra rigida a esso solidale.
+Lo spostamento di $P$ è perpendicolare al segmento $CP$, ha modulo $|\varphi|\,\overline{CP}$ e ha il verso della rotazione. Il centro può stare fuori dal corpo, perché le formule degli spostamenti valgono in tutto il piano, come se il corpo fosse esteso da una lastra rigida a esso solidale.
 
 :::dimostrazione
 Un punto $(x, y)$ ha spostamento nullo se e solo se
@@ -254,7 +254,7 @@ e nella cerniera $B$ i due tratti danno lo stesso valore $v_B = 4\,\mathrm{m} \c
 :::
 
 :::esempio{titolo="Trave con un doppio pendolo"}
-Nella trave in figura il corpo $1$ ha una cerniera fissa in $A = (0, 0)$, la cerniera interna $B = (4, 0)$ lo collega al corpo $2$, e in $C = (7, 0)$ il corpo $2$ ha un doppio pendolo con le bielle orizzontali. Il doppio pendolo impedisce al corpo $2$ di ruotare e di traslare orizzontalmente, quindi $C_2$ è il punto improprio della direzione orizzontale. La retta $C_1 C_{12}$ è la retta $AB$, orizzontale, perciò i tre centri sono allineati e la catena si muove: il corpo $1$ ruota attorno ad $A$ e il corpo $2$ trasla verticalmente con lo spostamento di $B$, $v = 4\,\mathrm{m} \cdot \varphi_1$. Il diagramma degli spostamenti verticali è un segmento inclinato su $AB$ e un segmento orizzontale su $BC$.
+Nella trave in figura il corpo $1$ ha una cerniera fissa in $A = (0, 0)$, la cerniera interna $B = (4, 0)$ lo collega al corpo $2$, e in $C = (7, 0)$ il corpo $2$ ha un doppio pendolo con le bielle orizzontali. Il doppio pendolo impedisce al corpo $2$ di ruotare e di traslare orizzontalmente, quindi $C_2$ è il punto improprio della direzione orizzontale. La retta $C_1 C_{12}$ è la retta $AB$, orizzontale, perciò i tre centri sono allineati e la catena si muove. Il corpo $1$ ruota attorno ad $A$ e il corpo $2$ trasla verticalmente con lo spostamento di $B$, $v = 4\,\mathrm{m} \cdot \varphi_1$. Il diagramma degli spostamenti verticali è un segmento inclinato su $AB$ e un segmento orizzontale su $BC$.
 
 ::struttura{nodi="A,0,0;B,4,0;C,7,0" aste="A-B;B-C" cerniere="B" vincoli="A,cerniera;C,doppio-pendolo,0" tratteggi="0,0 4,1 7,1" titolo="Il corpo $BC$, con il centro improprio orizzontale, trasla verticalmente (configurazione spostata tratteggiata)"}
 

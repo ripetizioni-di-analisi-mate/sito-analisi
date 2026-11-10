@@ -10,6 +10,8 @@
 //                (nomi=0 li nasconde; "A,0,0,-" nasconde solo quello)
 //   aste         "A-B;B-C;C-D"  aste a tratto spesso tra due nodi (travi, pilastri, aste di travature)
 //   cerniere     "B;C"  cerniere interne: cerchietto vuoto sul nodo
+//   interni     "B,doppio-pendolo,0;C,pendolo,90"  vincoli interni nel nodo tra due aste: doppio pendolo interno (due
+//                bielle parallele alla direzione in gradi, 0 = orizzontali) o pendolo interno (una biella)
 //   reticolare=1 cerchietto vuoto su ogni nodo non vincolato (travature reticolari)
 //   vincoli      "A,cerniera;B,carrello;C,incastro,180;D,pendolo,225;E,doppio-pendolo,270"
 //                tipo e direzione in gradi dal nodo verso il terreno (predefinita 270 = terreno sotto):
@@ -287,6 +289,21 @@ export function struttura(a) {
   const vincolati = new Set(vincoli.map((v) => v.n));
   const conCerchio = [...cerniere.map((c) => c.p), ...(String(a.reticolare) === '1' ? [...nodi].filter(([n]) => !vincolati.has(n)).map(([, p]) => p) : [])];
   svg += conCerchio.map((p) => `<circle class="cerniera" cx="${f(X(p[0]))}" cy="${f(Y(p[1]))}" r="4.2"/>`).join('');
+  // Vincoli interni: doppio pendolo interno (due bielle parallele alla direzione data, a cavallo del nodo)
+  // e pendolo interno (una biella), disegnati sopra le aste che arrivano nel nodo.
+  for (const s of lista(a.interni)) {
+    const [n, tipo = 'doppio-pendolo', ang = '0'] = campi(s);
+    const p = punto(n), cx = X(p[0]), cy = Y(p[1]);
+    const t0 = (Number(ang) * Math.PI) / 180, ux = Math.cos(t0), uy = -Math.sin(t0), tx = -uy, ty = ux;
+    const L = 13, b = tipo === 'pendolo' ? [0] : [-7, 7];
+    if (!['pendolo', 'doppio-pendolo'].includes(tipo)) throw new Error(`vincolo interno sconosciuto: "${tipo}" (pendolo, doppio-pendolo)`);
+    // il tratto dell'asta attraversato dalle bielle si cancella, così si vede la sconnessione
+    svg += `<circle class="interruzione" cx="${f(cx)}" cy="${f(cy)}" r="${L - 3}"/>`;
+    for (const j of b) {
+      const sx = cx + tx * j - ux * L, sy = cy + ty * j - uy * L, ex = cx + tx * j + ux * L, ey = cy + ty * j + uy * L;
+      svg += `<line class="biella" x1="${f(sx)}" y1="${f(sy)}" x2="${f(ex)}" y2="${f(ey)}"/><circle class="cerniera" cx="${f(sx)}" cy="${f(sy)}" r="3"/><circle class="cerniera" cx="${f(ex)}" cy="${f(ey)}" r="3"/>`;
+    }
+  }
 
   // Carichi distribuiti
   for (const c of carichi) {
@@ -391,6 +408,7 @@ export function struttura(a) {
       for (const v of vincoli) if (v.n === n) { const g = (v.ang * 180) / Math.PI; occupate.push(g, g - 35, g + 35); }
       for (const F of [...forze, ...reazioni]) if (uguale(F.p)) occupate.push(ang(-F.d[0], -F.d[1]));
       for (const c of carichi) if (uguale(c.p1) || uguale(c.p2)) occupate.push((c.ang * 180) / Math.PI + 180);
+      for (const s of lista(a.interni)) { const [m, , g = '0'] = campi(s); if (m === n) occupate.push(Number(g), Number(g) + 180); }
       // candidati: preferiti in alto a sinistra, poi gli altri
       const candidati = [135, 45, 90, 180, 0, 225, 315, 270];
       let migliore = candidati[0], distanza = -1;
@@ -399,7 +417,7 @@ export function struttura(a) {
         if (d > distanza + 1e-6) { distanza = d; migliore = c; }
       }
       const r = (migliore * Math.PI) / 180, ox = Math.cos(r), oy = -Math.sin(r);
-      const dist = vincoli.some((v) => v.n === n) ? 24 : 16;
+      const dist = vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
       const cx = X(p[0]) + ox * dist, cy = Y(p[1]) + oy * dist + 6;
       svg += `<text class="nome-nodo" x="${f(cx)}" y="${f(cy)}" text-anchor="${ox > 0.35 ? 'start' : ox < -0.35 ? 'end' : 'middle'}">${testoSvg(n)}</text>`;
     }
