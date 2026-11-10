@@ -185,7 +185,7 @@ Si consideri una sezione di Ritter e una delle due parti in cui essa divide la t
 $$
 M_{R_k}^{\text{est}} + M_{R_k}(N_k) = 0 ,
 $$
-dove $M_{R_k}^{\text{est}}$ è il momento rispetto a $R_k$ dei carichi e delle reazioni che agiscono sulla parte e $M_{R_k}(N_k)$ è il momento della forza dell'asta tagliata, supposta di trazione, cioè diretta dalla parte verso la sezione. Ogni equazione contiene un solo sforzo incognito, e uno sforzo calcolato male non si propaga agli altri.
+dove i momenti sono positivi in verso antiorario, $M_{R_k}^{\text{est}}$ è il momento rispetto a $R_k$ dei carichi e delle reazioni che agiscono sulla parte e $M_{R_k}(N_k)$ è il momento della forza dell'asta tagliata, supposta di trazione, cioè diretta dalla parte verso la sezione. Ogni equazione contiene un solo sforzo incognito, e uno sforzo calcolato male non si propaga agli altri.
 
 :::dimostrazione
 L'idea è scegliere un polo per cui le altre due incognite abbiano braccio nullo. La parte isolata è in equilibrio, quindi soddisfa le equazioni cardinali per qualunque polo. Le forze che agiscono su di essa sono i carichi e le reazioni applicati nei suoi nodi e le tre forze delle aste tagliate, ciascuna diretta lungo la propria asta. Le rette delle due aste diverse da $k$ passano per $R_k$, quindi i loro momenti rispetto a $R_k$ sono nulli. Perciò nell'equazione di rotazione attorno a $R_k$ resta soltanto l'incognita $N_k$, che ha braccio non nullo perché la sua retta non passa per $R_k$.
