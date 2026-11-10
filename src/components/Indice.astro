@@ -51,7 +51,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   )}
   {m ? (
     <>
-      <p class="indice-materia">
+      <p class="indice-materia indice-materia-corrente">
         <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a>
         <a class="cambia-materia" href={link(lingua, '/')}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       </p>
@@ -161,6 +161,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 </script>
 
 <style>
+  .indice-materia-corrente { flex-direction: column; align-items: flex-start; gap: 0.2rem; text-wrap: balance; }
   .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); color: var(--bronzo); background: var(--bronzo-fondo); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
   .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
