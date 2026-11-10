@@ -179,7 +179,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: 'La Statica dei corsi di Ingegneria: sistemi di forze, geometria delle masse, vincoli e analisi cinematica, reazioni vincolari, travi Gerber, telai, archi e travature reticolari, diagrammi di N, T e M, lavori virtuali e linee di influenza.',
     colore: '#53675f',
     gruppo: 'Università',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'sistemi-di-forze', titolo: 'Vettori applicati, momenti e sistemi di forze equivalenti', breve: 'Sistemi di forze' },
       { slug: 'geometria-delle-masse', titolo: "Geometria delle masse: baricentri e momenti d'inerzia", breve: 'Geometria delle masse' },

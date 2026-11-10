@@ -840,7 +840,7 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .struttura .riferimento .nome-asse { font-size: 14px; }
 .struttura .quota, .struttura .quota-tacca, .struttura .quota-richiamo { stroke: var(--inchiostro-2); stroke-width: 1.1; fill: none; }
 .struttura .quota-tacca { stroke-width: 1.6; }
-.struttura .quota-testo { font-family: var(--ui); font-size: 14px; fill: var(--inchiostro-2); }
+.struttura .quota-testo { font-family: var(--ui); font-size: 17px; fill: var(--inchiostro-2); }
 .struttura .sezione { fill: color-mix(in srgb, var(--accento) 18%, transparent); stroke: var(--inchiostro); stroke-width: 1.6; stroke-linejoin: round; }
 .struttura .foro { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.6; }
 .struttura .sottile { fill: none; stroke: var(--inchiostro); stroke-width: 1.4; }
@@ -848,16 +848,18 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .struttura .diagramma-area { fill: color-mix(in srgb, var(--accento) 12%, transparent); stroke: none; }
 .struttura .diagramma-tratteggio { stroke: color-mix(in srgb, var(--accento) 55%, transparent); stroke-width: 1; }
 .struttura .diagramma-linea { fill: none; stroke: var(--accento); stroke-width: 2.4; stroke-linejoin: round; }
-.struttura .valore { font-family: var(--ui); font-size: 14px; font-weight: 600; fill: var(--inchiostro); stroke: var(--carta); stroke-width: 4px; stroke-linejoin: round; paint-order: stroke; }
+.struttura .valore { font-family: var(--ui); font-size: 17px; font-weight: 600; fill: var(--inchiostro); stroke: var(--carta); stroke-width: 4px; stroke-linejoin: round; paint-order: stroke; }
 .struttura .segno { font-family: var(--ui); font-size: 19px; font-weight: 700; fill: var(--accento); }
 .struttura .baricentro { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.5; }
 .struttura .baricentro-pieno { fill: var(--inchiostro); }
 .struttura .centro { fill: var(--carta); stroke: var(--c-attenzione); stroke-width: 1.6; }
 .struttura .centro-croce { stroke: var(--c-attenzione); stroke-width: 1.3; }
 .struttura .punto { fill: var(--inchiostro); }
-.struttura .nome-nodo { font-family: var(--testo); font-size: 17px; fill: var(--inchiostro); }
+.struttura .nome-nodo { font-family: var(--testo); font-size: 20px; fill: var(--inchiostro); }
 .struttura .reazione-et { fill: var(--c-attenzione); }
-.struttura .pedice { font-size: 12px; }
+.struttura .pedice { font-size: 14px; }
+.struttura .etichetta, .struttura .etichetta-vettore { font-size: 20px; }
+.struttura .nome-asse { font-size: 19px; }
 /* figure con cursore (::cursore): sotto la legenda il cursore con il suo valore e i numeri calcolati */
 .cursore-comandi { max-width: 520px; margin: 0.55rem auto 0; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro); }
 .cursore-riga { display: flex; align-items: center; gap: 0.9rem; }
