@@ -223,7 +223,7 @@ Una trave ad asse spezzato, per esempio a L (trave a ginocchio) o a portale, for
 :::esempio{titolo="Trave a ginocchio con una forza orizzontale"}
 La trave $ACB$ è formata dal ritto $AC$, alto $3\,\mathrm{m}$, e dal traverso $CB$, lungo $4\,\mathrm{m}$; ha una cerniera al piede $A$ e un carrello su piano orizzontale in $B$. In $C$ agisce una forza orizzontale $F = 6\,\mathrm{kN}$ verso destra.
 
-::struttura{nodi="A,0,0;C,0,3;B,4,3" aste="A-C;C-B" vincoli="A,cerniera;B,carrello" forze="C,1.2,0,F" quote="A,C,3 m,-0.8;C,B,4 m,-0.8" titolo="Trave a ginocchio con la forza orizzontale $F$ nel nodo $C$"}
+::struttura{nodi="A,0,0;C,0,3;B,4,3" aste="A-C;C-B" vincoli="A,cerniera;B,carrello" forze="C,1.2,0,F" quote="A,C,3 m,0.8;C,B,4 m,-0.8" titolo="Trave a ginocchio con la forza orizzontale $F$ nel nodo $C$"}
 
 La forza $F$ ha retta d'azione orizzontale alla quota $3\,\mathrm{m}$, quindi il suo braccio rispetto ad $A$ è $3\,\mathrm{m}$ e il suo momento è orario:
 $$
