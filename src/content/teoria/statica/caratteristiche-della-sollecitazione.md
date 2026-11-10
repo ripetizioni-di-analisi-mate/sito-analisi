@@ -272,7 +272,7 @@ In $B$ il momento vale $24\,\mathrm{kN\,m}$ sia alla sommità del pilastro sia a
 Un arco a tre cerniere con asse a tratti rettilinei si studia come un telaio. La spinta orizzontale, ricavata nell'argomento sulle strutture composte, comprime il traverso e produce momenti di segno opposto a quelli di una trave appoggiata.
 
 :::osservazione{#asta-tra-due-cerniere titolo="Asta scarica fra due cerniere"}
-Sia un'asta rettilinea collegata al resto della struttura da due cerniere ai suoi estremi e priva di carichi lungo l'asse. L'asta è in equilibrio sotto le sole due forze trasmesse dalle cerniere, quindi queste forze sono opposte e dirette lungo la retta che congiunge le cerniere, cioè lungo l'asse dell'asta. Perciò in ogni sezione dell'asta $T = 0$, $M = 0$ e $N$ è costante: l'asta si comporta come un pendolo. In un arco a tre cerniere con una sola forza applicata in chiave, entrambe le aste sono in questa situazione e sono soltanto compresse.
+Sia un'asta rettilinea collegata al resto della struttura da due cerniere ai suoi estremi e priva di carichi lungo l'asse. L'asta è in equilibrio sotto le sole due forze trasmesse dalle cerniere, quindi queste forze sono opposte e dirette lungo la retta che congiunge le cerniere, cioè lungo l'asse dell'asta. Perciò in ogni sezione dell'asta $T = 0$, $M = 0$ e $N$ è costante, e l'asta si comporta come un pendolo. In un arco a tre cerniere con una sola forza applicata in chiave, entrambe le aste sono in questa situazione e sono soltanto compresse.
 :::
 
 :::esempio{titolo="Portale a tre cerniere con carico uniforme"}

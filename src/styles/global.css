@@ -848,7 +848,7 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .struttura .diagramma-area { fill: color-mix(in srgb, var(--accento) 12%, transparent); stroke: none; }
 .struttura .diagramma-tratteggio { stroke: color-mix(in srgb, var(--accento) 55%, transparent); stroke-width: 1; }
 .struttura .diagramma-linea { fill: none; stroke: var(--accento); stroke-width: 2.4; stroke-linejoin: round; }
-.struttura .valore { font-family: var(--ui); font-size: 14px; font-weight: 600; fill: var(--inchiostro); }
+.struttura .valore { font-family: var(--ui); font-size: 14px; font-weight: 600; fill: var(--inchiostro); stroke: var(--carta); stroke-width: 4px; stroke-linejoin: round; paint-order: stroke; }
 .struttura .segno { font-family: var(--ui); font-size: 19px; font-weight: 700; fill: var(--accento); }
 .struttura .baricentro { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.5; }
 .struttura .baricentro-pieno { fill: var(--inchiostro); }

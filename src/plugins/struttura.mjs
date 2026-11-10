@@ -188,6 +188,8 @@ export function struttura(a) {
 
   // Diagramma: area con tratteggio perpendicolare all'asta, contorno, valori
   const etDiagramma = [];
+  // i valori dei diagrammi si scrivono per ultimi, con un alone del colore della carta, così aste e vincoli non li coprono
+  let valoriSvg = '';
   for (const t of tratti) {
     const ok = t.val.filter((v) => Number.isFinite(v[1]));
     if (!ok.length) continue;
@@ -240,7 +242,7 @@ export function struttura(a) {
     if (visti.some((v) => Math.hypot(v.x - e.x, v.y - e.y) < 18 && v.t === e.t)) continue;
     visti.push(e);
     const ancora = Math.abs(e.n[0]) > 0.5 ? (e.n[0] * e.segno > 0 ? 'start' : 'end') : 'middle';
-    svg += `<text class="valore" x="${f(e.x)}" y="${f(e.y + (Math.abs(e.n[1]) > 0.5 ? (e.n[1] * e.segno > 0 ? -2 : 12) : 5))}" text-anchor="${ancora}">${esc(e.t)}</text>`;
+    valoriSvg += `<text class="valore" x="${f(e.x)}" y="${f(e.y + (Math.abs(e.n[1]) > 0.5 ? (e.n[1] * e.segno > 0 ? -2 : 12) : 5))}" text-anchor="${ancora}">${esc(e.t)}</text>`;
   }
 
   // Aste
@@ -457,6 +459,8 @@ export function struttura(a) {
     }
   }
   svg += etichette.map((e) => `<text class="etichetta" x="${f(X(e.p[0]))}" y="${f(Y(e.p[1]))}" text-anchor="middle">${testoSvg(e.t)}</text>`).join('');
+
+  svg += valoriSvg;
 
   // Riferimento x, y orientato in basso a sinistra
   if (String(a.riferimento) !== '0') {
