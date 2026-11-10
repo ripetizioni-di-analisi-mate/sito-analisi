@@ -34,7 +34,7 @@ const invito = lingua === 'en' ? {
   benvenuto: `Sconto di benvenuto: su questo acquisto hai il ${SCONTO_BENVENUTO}% di sconto, applicato al pagamento.`,
 };
 ---
-<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
+<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua} seo={{ titolo: t.sbloccaSeo(m.titolo) }}>
   <p class="sopratitolo">{m.titolo}</p>
   <h1>{t.sbloccaTitolo(m.titolo)}</h1>
   <p class="sommario">{t.sbloccaSommario}</p>

@@ -44,7 +44,7 @@ interface Props {
   ricercaPrincipale?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
-  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string };
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string; canonico?: string };
 }
 const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
@@ -77,8 +77,10 @@ const avanti: Passo | undefined = tappaDopo ? {
   etichetta: en ? 'Continue with this topic' : 'Continua su questo argomento',
 } : successivo;
 const versioneEn = versioneIt === '/' ? '/en' : `/en${versioneIt}`;
-const canonico = assoluto(nonTradotta ? versioneIt : qui);
-const bilingue = !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa';
+// seo.canonico: la pagina è la copia di un'altra (src/lib/canonici.ts); ai motori si indica l'originale, nella stessa lingua,
+// e non si dichiarano versioni in altre lingue (le dichiara l'originale).
+const canonico = assoluto(nonTradotta ? versioneIt : seo.canonico ? link(lingua, seo.canonico) : qui);
+const bilingue = !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa' && !seo.canonico;
 const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
 // Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
 const taglia = (x: string, n = 160) => (x.length <= n ? x : `${x.slice(0, x.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '')}…`);

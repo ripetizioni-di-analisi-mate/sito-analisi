@@ -29,7 +29,7 @@ const domande: { d: string; r: string }[] = en ? [
 ];
 const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type': 'Question', name: x.d, acceptedAnswer: { '@type': 'Answer', text: x.r.replace(/<[^>]+>/g, '') } })) };
 ---
-<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua} seo={{ schema: [schemaFaq] }}>
+<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua} seo={{ titolo: t.prezziTitolo, schema: [schemaFaq] }}>
   <p class="sopratitolo">{t.prezzi}</p>
   <h1>{t.prezzi}</h1>
   <p class="sommario">{t.prezziSommario}</p>

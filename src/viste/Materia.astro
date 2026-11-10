@@ -23,7 +23,7 @@ const SEZIONI = sezioniL(lingua);
 const gruppo = materiaIt(materia).gruppo;
 const confTolc = TOLC[materia];
 const sopra = confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
-const titoloPagina = confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori'
+const titoloPagina = confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
   : SEO(lingua).materia(m.titolo);
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
@@ -56,7 +56,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
 ---
 <Base titolo={sopra} descrizione={SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length)} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
-  url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livello,
+  url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livelloDi(m.titolo),
   provider: { '@id': `${SITO}/#organizzazione` },
   syllabusSections: m.argomenti.map((a) => ({ '@type': 'Syllabus', name: a.titolo, url: assoluto(link(lingua, `/${m.slug}/${a.slug}/teoria`)) })),
   hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'P30D' },

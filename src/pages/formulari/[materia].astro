@@ -11,6 +11,7 @@ export async function getStaticPaths() {
   return voci.filter((v) => (FORMULARI as readonly string[]).includes(v.id)).map((v) => ({ params: { materia: v.id }, props: { voce: v } }));
 }
 const { voce } = Astro.props;
+const inglese = (await getCollection('formulari_en')).some((v) => v.id === voce.id);
 const slug = voce.id;
 const m = trovaMateria(slug);
 const { Content, headings } = await render(voce);
@@ -34,7 +35,7 @@ const schema = [{
   encoding: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: assoluto(pdf) },
 }];
 ---
-<Base titolo={voce.data.titolo} descrizione={voce.data.descrizione} lingua="it" percorso={[{ titolo: 'Formulari', href: '/formulari' }, { titolo: m.titolo }]} seo={{ titolo: `${voce.data.titolo} (PDF gratuito)`, schema }}>
+<Base titolo={voce.data.titolo} descrizione={voce.data.descrizione} lingua="it" percorso={[{ titolo: 'Formulari', href: '/formulari' }, { titolo: m.titolo }]} seo={{ titolo: `${voce.data.titolo} (PDF gratuito)`, schema, soloQuestaLingua: !inglese, senzaInglese: !inglese }}>
   <div class="formulario" style={`--accento: ${m.colore}`}>
     <p class="sopratitolo">Formulario gratuito</p>
     <h1>{voce.data.titolo}</h1>

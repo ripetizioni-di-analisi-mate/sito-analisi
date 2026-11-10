@@ -108,7 +108,7 @@ export const TESTI = {
     // home
     homeSopra: '', homeTitolo: 'Teoria ed esercizi svolti per le materie scientifiche',
     homeSommario: 'Matematica e fisica, spiegate passo dopo passo.',
-    homeDescrizione: "Teoria ed esercizi per gli esami di matematica dell'università, materia per materia.",
+    homeDescrizione: "Teoria ed esercizi svolti di matematica e fisica per università, superiori, test di ingresso e concorsi, materia per materia.",
     cercaSegnaposto: 'Cerca un argomento, un teorema, un tipo di esercizio…', cercaNelSito: 'Cerca nel sito',
     // pagina della materia
     argomentiEsame: "Gli argomenti dell'esame", argomentiConcorso: 'Gli argomenti del concorso', programma: 'Il programma',
@@ -133,7 +133,8 @@ export const TESTI = {
     teoriaUsata: 'Teoria usata', vaiA: 'Vai a', indiceArgomenti: 'Indice degli argomenti',
     // sblocca
     sbloccaTitolo: (m: string) => `Sblocca ${m}`,
-    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, schede di esercizi svolti e soluzioni.`,
+    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, tutte le schede di esercizi svolti e le soluzioni. Pagamento unico, senza abbonamento e senza scadenza.`,
+    sbloccaSeo: (m: string) => `${m}: accesso completo a teoria ed esercizi svolti`,
     sbloccaSommario: 'Un acquisto unico, senza abbonamento: la materia resta sbloccata nel tuo account, su un massimo di 3 dispositivi, senza scadenza.',
     includeTeoria: (n: number) => `La <strong>teoria completa</strong> di tutti ${/^(8|11|18|80|8\d|800)$/.test(String(n)) ? 'gli' : 'i'} ${n} argomenti, con definizioni, teoremi e dimostrazioni`,
     includeSvolti: (n: number) => `Tutte le <strong>${n} schede di esercizi svolti</strong> per tipologia, con ogni passaggio spiegato`,
@@ -182,7 +183,8 @@ export const TESTI = {
     contattiDescrizione: 'Contatti per informazioni sul materiale, assistenza sugli acquisti e segnalazioni.',
     contattiTesto: 'Per informazioni sul materiale didattico, assistenza sugli acquisti o segnalazioni di eventuali errori, puoi contattare:',
     // prezzi
-    prezziDescrizione: "Prezzi dell'accesso completo alle materie di Ripetizioni di Analisi.",
+    prezziDescrizione: "Prezzi delle singole materie, dei pacchetti e dei videocorsi di Ripetizioni di Analisi: pagamento unico, senza abbonamento e senza scadenza.",
+    prezziTitolo: 'Prezzi di materie, pacchetti e videocorsi | Ripetizioni di Analisi',
     prezziSommario: "Un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. L'accesso resta tuo, su un massimo di 3 dispositivi.",
     acquistoUnico: 'acquisto unico', cosaComprende: "Che cosa comprende l'accesso completo",
     comprende: [
@@ -225,7 +227,8 @@ export const TESTI = {
     scheda: 'Sheet', esercizio: 'Exercise', esercizioDaFare: 'Exercise', tutteLeSchede: 'All sheets', tuttiDaFare: 'All exercises',
     teoriaUsata: 'Theory used', vaiA: 'Go to', indiceArgomenti: 'List of topics',
     sbloccaTitolo: (m: string) => `Unlock ${m}`,
-    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, worked examples and solutions.`,
+    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, all the worked examples and the solutions. One-time payment, no subscription, no expiry.`,
+    sbloccaSeo: (m: string) => `${m}: full access to theory and solved problems`,
     sbloccaSommario: 'A one-time purchase, no subscription: the subject stays unlocked in your account, on up to 3 devices, with no expiry.',
     includeTeoria: (n: number) => `The <strong>complete theory</strong> of all ${n} topics, with definitions, theorems and proofs`,
     includeSvolti: (n: number) => `All <strong>${n} sheets of worked examples</strong> by type, with every step explained`,
@@ -269,7 +272,8 @@ export const TESTI = {
     argomento: 'Topic',
     contattiDescrizione: 'Contacts for information about the material, help with purchases and error reports.',
     contattiTesto: 'For information about the study material, help with purchases or to report errors, you can contact:',
-    prezziDescrizione: 'Prices of full access to the subjects of Ripetizioni di Analisi.',
+    prezziDescrizione: 'Prices of full access to each subject on Ripetizioni di Analisi: theory, worked examples and solutions. One-time payment, no subscription, no expiry.',
+    prezziTitolo: 'Prices: one-time payment per subject | Ripetizioni di Analisi',
     prezziSommario: 'One purchase per subject, with no subscription and no renewals. Access stays yours, on up to 3 devices.',
     acquistoUnico: 'one-time purchase', cosaComprende: 'What full access includes',
     comprende: [

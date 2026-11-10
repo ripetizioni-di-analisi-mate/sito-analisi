@@ -9,6 +9,7 @@ import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
 import { tutteLeVoci } from '../lib/voci-teoria';
+import { originale } from '../lib/canonici';
 
 const DATA = DATE as Record<string, { data: string }>;
 const dataDi = (cartella: string, id: string) => DATA[`src/${cartella}/${id}.md`]?.data;
@@ -22,8 +23,10 @@ export async function GET() {
   // pagine singole dei teoremi e delle definizioni (src/lib/voci-teoria.ts)
   const vociIt = await tutteLeVoci('it'), vociEn = await tutteLeVoci('en');
   const pagine: { it: string; en?: string; priorita: number; dIt?: string; dEn?: string }[] = [];
+  // le copie di pagine di un'altra materia (src/lib/canonici.ts) non entrano nella mappa: ci va l'originale
+  const copia = (p: string) => { const x = p.split('/'); return x.length >= 4 && ['teoria', 'esercizi-svolti', 'esercizi'].includes(x[3]) && Boolean(originale(x[1], x[2], x[3] as 'teoria', x[4])); };
   const due = (p: string, priorita: number, conEn = true, dIt?: string, dEn?: string) =>
-    pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita, dIt, dEn });
+    !copia(p) && pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita, dIt, dEn });
   // data di un contenuto nelle due lingue (l'inglese sta in src/content-en)
   const d = (sezione: string, id: string) => ({ it: dataDi(`content/${sezione}`, id), en: dataDi(`content-en/${sezione}`, id) });
 
@@ -48,6 +51,7 @@ export async function GET() {
   due('/corsi-di-gruppo', 0.7, false);
   due('/compatibilita', 0.7, false);
   due('/videocorsi', 0.7, false);
+  due('/pacchetti', 0.5, false);
   for (const v of VIDEOCORSI) due(`/videocorsi/${v.slug}`, 0.6, false);
   for (const p of ['/prezzi', '/contatti']) due(p, 0.3);
   due('/livelli-e-punti', 0.2);

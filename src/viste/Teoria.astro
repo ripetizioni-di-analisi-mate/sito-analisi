@@ -1,4 +1,5 @@
 ---
+import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
@@ -23,7 +24,8 @@ const tuttiNomi = [...new Set([...(voce?.body ?? '').matchAll(/^:{3,4}teorema\{[
 const nominati = [...tuttiNomi.filter((x) => PROPRIO.test(x.slice(1))), ...tuttiNomi.filter((x) => !PROPRIO.test(x.slice(1)))];
 const descrizioneSeo = (() => {
   const somm = voce?.data.sommario ?? '';
-  if (!nominati.length) return somm;
+  // Sommari brevi: davanti si mettono capitolo e materia, così la descrizione dice anche di quale corso si tratta.
+  if (!nominati.length) return somm.length < 110 ? `${arg.breve} · ${materiaL(lingua, materia).breve}. ${somm}` : somm;
   const testa = `${lingua === 'en' ? 'Theorems' : 'Teoremi'}: ${nominati.slice(0, 4).join(', ')}.`;
   return `${testa} ${somm}`.trim();
 })();
@@ -48,9 +50,9 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
   descrizione={descrizioneSeo}
-  seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
+  seo={{ canonico: originale(materia, argomento, 'teoria'), titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
   '@type': 'LearningResource', name: arg.titolo, description: descrizioneSeo, learningResourceType: 'Lesson', inLanguage: lingua,
-  educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
+  educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
