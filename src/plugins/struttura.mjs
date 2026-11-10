@@ -74,7 +74,9 @@ function testoSvg(t) {
 // Numero all'italiana: al massimo due decimali, virgola, niente zeri finali, meno tipografico.
 function numero(v) {
   if (Math.abs(v) < 5e-4) return '0';
-  let t = (Math.round(v * 100) / 100).toFixed(2).replace(/\.?0+$/, '');
+  // tre decimali solo se il valore è esatto con tre (15/8 = 1,875), altrimenti due
+  const tre = Math.abs(v * 1000 - Math.round(v * 1000)) < 1e-6;
+  let t = tre ? (Math.round(v * 1000) / 1000).toFixed(3).replace(/\.?0+$/, '') : (Math.round(v * 100) / 100).toFixed(2).replace(/\.?0+$/, '');
   return t.replace('.', ',').replace('-', '−');
 }
 
