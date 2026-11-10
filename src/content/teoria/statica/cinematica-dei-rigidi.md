@@ -245,6 +245,7 @@ $$
 v(x) &= \varphi_1\,x & &(0 \le x \le 4\,\mathrm{m}) \\[4pt]
 v(x) &= -\frac{4}{3}\varphi_1\,(x - 7) & &(4\,\mathrm{m} \le x \le 7\,\mathrm{m})
 \end{aligned}
+\ ,
 $$
 e nella cerniera $B$ i due tratti danno lo stesso valore $v_B = 4\,\mathrm{m} \cdot \varphi_1$.
 
