@@ -264,7 +264,7 @@ Il portale $ABCD$ ha i pilastri $AB$ e $DC$ alti $4\,\mathrm{m}$ e il traverso $
 
 In $B$ il momento vale $24\,\mathrm{kN\,m}$ sia alla sommità del pilastro sia all'inizio del traverso, con le fibre interne tese in entrambi, come stabilisce il teorema sul nodo rigido.
 
-::struttura{nodi="A,0,0;B,0,4;C,4,4;D,4,0" aste="A-B;B-C;C-D" vincoli="A,cerniera;D,carrello" diagramma="0,0,0,4,6*s;0,4,4,4,-6*s+24;4,4,4,0,0" verso=-1 scala=0.025 titolo="Diagramma del momento flettente $M$ ($\mathrm{kN\,m}$)"}
+::struttura{nodi="A,0,0;B,0,4;C,4,4;D,4,0" aste="A-B;B-C;C-D" vincoli="A,cerniera;D,carrello" diagramma="0,0,0,4,6*s;0,4,4,4,-6*s+24;4,4,4,0,0" verso=-1 scala=0.025 numeri=0 etichette="-0.35,3.7,24" titolo="Diagramma del momento flettente $M$ ($\mathrm{kN\,m}$)"}
 :::
 
 ## Arco a tre cerniere
