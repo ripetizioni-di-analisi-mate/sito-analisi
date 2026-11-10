@@ -54,7 +54,7 @@ Sia data una travatura con $n$ nodi, $a$ aste e $v$ vincoli semplici esterni, e 
 $$
 2n - (a + v) = l - i .
 $$
-Ne segue che la condizione $2n = a + v$ è *necessaria* perché la travatura sia isostatica ($l = i = 0$). Se $2n > a + v$ la travatura è labile; se $2n < a + v$ è iperstatica. Per la travatura della figura iniziale $2n = 16$ e $a + v = 13 + 3 = 16$, quindi la condizione è soddisfatta.
+Ne segue che la condizione $2n = a + v$ è *necessaria* perché la travatura sia isostatica ($l = i = 0$). Se $2n > a + v$ la travatura è labile; se $2n < a + v$ è iperstatica. Per la travatura Pratt di luce $12\,\mathrm{m}$ caricata da tre forze $P$, $2n = 16$ e $a + v = 13 + 3 = 16$, quindi la condizione è soddisfatta.
 
 :::dimostrazione
 Si considera ogni asta come un corpo rigido, quindi i corpi sono $c = a$ e i gradi di libertà sono $3a$. Si contano i vincoli semplici. Nel nodo $j$ concorrono $k_j$ aste, collegate da una cerniera interna che equivale a $2(k_j - 1)$ vincoli semplici; a questi si aggiungono i $v$ vincoli esterni. Ogni asta ha due estremi, perciò $\sum_j k_j = 2a$, e quindi
@@ -77,7 +77,7 @@ Una travatura si dice **semplice** se si costruisce partendo da un triangolo di 
 $$
 a = 2n - 3 .
 $$
-Le travature della figura iniziale e quelle di tipo Pratt, Howe e Warren sono semplici: si costruiscono partendo dal triangolo vicino a un appoggio e procedendo verso l'altro.
+Le travature di tipo Pratt, Howe e Warren, compresa quella di luce $12\,\mathrm{m}$ caricata da tre forze $P$, sono semplici: si costruiscono partendo dal triangolo vicino a un appoggio e procedendo verso l'altro.
 :::
 
 ::::teorema{#travatura-semplice-isostatica titolo="Isostaticità delle travature semplici"}
@@ -93,7 +93,7 @@ Il triangolo iniziale è indeformabile, perché tre lunghezze fissate individuan
 Una travatura semplice vincolata in modo isostatico è un corpo rigido, perciò le reazioni si calcolano prima degli sforzi, con le equazioni cardinali della travatura intera.
 
 :::osservazione{#reazioni-travatura titolo="Equazioni cardinali per la travatura intera"}
-Per una travatura internamente rigida e vincolata con tre vincoli semplici, le tre equazioni cardinali scritte per la travatura intera determinano le tre reazioni, come per una trave; per la scelta delle equazioni e dei poli si rimanda all'argomento sulle equazioni cardinali e sulle reazioni vincolari. Gli sforzi delle aste sono forze interne e non compaiono in queste equazioni. Per la travatura della figura iniziale, con $P = 20\,\mathrm{kN}$, cerniera in $A$ e carrello in $E$,
+Per una travatura internamente rigida e vincolata con tre vincoli semplici, le tre equazioni cardinali scritte per la travatura intera determinano le tre reazioni, come per una trave; per la scelta delle equazioni e dei poli si rimanda all'argomento sulle equazioni cardinali e sulle reazioni vincolari. Gli sforzi delle aste sono forze interne e non compaiono in queste equazioni. Per la travatura Pratt di luce $12\,\mathrm{m}$, con $P = 20\,\mathrm{kN}$, cerniera in $A$ e carrello in $E$,
 $$
 \begin{cases}
 H_A = 0 \\[4pt]
@@ -159,7 +159,7 @@ Sia $K$ un nodo in cui non sono applicati carichi né vincoli esterni.
 - Se in $K$ concorrono tre aste, di cui due allineate, la terza è scarica e le due allineate hanno lo stesso sforzo.
 - Se in $K$ concorrono due sole aste allineate, esse hanno lo stesso sforzo.
 
-Le stesse conclusioni valgono quando nel nodo agisce una forza, esterna o reattiva, diretta lungo una delle aste: la si tratta come un'asta in più con la stessa direzione. Per esempio, nella travatura della figura iniziale i nodi $B$ e $D$ hanno due aste orizzontali allineate e un montante, senza carichi, perciò i montanti $BF$ e $DH$ sono scarichi.
+Le stesse conclusioni valgono quando nel nodo agisce una forza, esterna o reattiva, diretta lungo una delle aste: la si tratta come un'asta in più con la stessa direzione. Per esempio, nella travatura Pratt di luce $12\,\mathrm{m}$ i nodi $B$ e $D$ hanno due aste orizzontali allineate e un montante, senza carichi, perciò i montanti $BF$ e $DH$ sono scarichi.
 
 :::dimostrazione
 Nel primo caso si scrive l'equilibrio del nodo nella direzione perpendicolare alla prima asta: vi compare solo la seconda asta, con il coefficiente $\sin\theta \neq 0$, dove $\theta$ è l'angolo fra le due aste, quindi il suo sforzo è nullo; allo stesso modo è nullo lo sforzo della prima. Nel secondo caso, proiettando l'equilibrio sulla perpendicolare alle due aste allineate, compare solo la terza asta, con coefficiente non nullo perché non è allineata con le altre due, e perciò essa è scarica; la proiezione lungo le due aste allineate dà allora $N_1 - N_2 = 0$. Il terzo caso segue dalla proiezione lungo le due aste.
@@ -169,7 +169,7 @@ Nel primo caso si scrive l'equilibrio del nodo nella direzione perpendicolare al
 ::struttura{nodi="K,0,0;A,-2.4,0;B,1.6,2.2;L,6,0;C,3.6,0;D,8.4,0;E,6,2.4" aste="K-A;K-B;L-C;L-D;L-E" reticolare=1 nomi=0 punti="0,0,K;6,0,K" etichette="-1.7,0.35,N_1 = 0;1.5,0.6,N_2 = 0;4.3,0.35,N_1;7.4,0.35,N_2 = N_1;6.4,1.6,N_3 = 0" riferimento=0 titolo="Nodi scarichi: a sinistra due aste non allineate, a destra tre aste di cui due allineate"}
 
 :::osservazione{#aste-scariche-necessarie titolo="Ruolo delle aste scariche"}
-Un'asta scarica per una condizione di carico ha sforzo non nullo per altre condizioni di carico. Inoltre, togliendo un'asta da una travatura isostatica, il numero $a + v$ scende a $2n - 1$ e per la condizione $2n = a + v$ la travatura diventa labile. Nella travatura della figura iniziale, senza il montante $BF$ il nodo $B$ resterebbe collegato solo da due aste allineate e potrebbe spostarsi in verticale.
+Un'asta scarica per una condizione di carico ha sforzo non nullo per altre condizioni di carico. Inoltre, togliendo un'asta da una travatura isostatica, il numero $a + v$ scende a $2n - 1$ e per la condizione $2n = a + v$ la travatura diventa labile. Nella travatura Pratt di luce $12\,\mathrm{m}$, senza il montante $BF$ il nodo $B$ resterebbe collegato solo da due aste allineate e potrebbe spostarsi in verticale.
 :::
 
 ## Metodo delle sezioni di Ritter
@@ -177,7 +177,7 @@ Un'asta scarica per una condizione di carico ha sforzo non nullo per altre condi
 Quando serve lo sforzo in poche aste, conviene un metodo che dia ciascuno sforzo con una sola equazione, senza risolvere i nodi uno dopo l'altro.
 
 :::definizione{#sezione-di-ritter titolo="Sezione di Ritter e punti di Ritter"}
-Una **sezione di Ritter** è una linea che divide la travatura in due parti tagliando tre aste le cui rette non passano per uno stesso punto e non sono tutte parallele. Il **punto di Ritter** di una delle tre aste è il punto d'intersezione delle rette delle altre due; se le altre due sono parallele, il punto di Ritter è il loro punto improprio. Nella figura iniziale la sezione verticale fra $x = 3\,\mathrm{m}$ e $x = 6\,\mathrm{m}$ taglia le aste $FG$, $FC$ e $BC$: il punto di Ritter di $BC$ è $F$, quello di $FG$ è $C$, quello di $FC$ è il punto improprio delle orizzontali.
+Una **sezione di Ritter** è una linea che divide la travatura in due parti tagliando tre aste le cui rette non passano per uno stesso punto e non sono tutte parallele. Il **punto di Ritter** di una delle tre aste è il punto d'intersezione delle rette delle altre due; se le altre due sono parallele, il punto di Ritter è il loro punto improprio. Nella travatura Pratt di luce $12\,\mathrm{m}$ la sezione verticale fra $x = 3\,\mathrm{m}$ e $x = 6\,\mathrm{m}$ taglia le aste $FG$, $FC$ e $BC$: il punto di Ritter di $BC$ è $F$, quello di $FG$ è $C$, quello di $FC$ è il punto improprio delle orizzontali.
 :::
 
 ::::teorema{#metodo-di-ritter titolo="Metodo delle sezioni di Ritter"}
@@ -248,7 +248,7 @@ Gli schemi più usati si distinguono per la disposizione delle diagonali, e il t
 :::definizione{#travature-tipo titolo="Travature Pratt, Howe, Warren e a mensola"}
 Si considerano travature a correnti paralleli, appoggiate agli estremi e soggette a carichi verso il basso disposti in modo simmetrico, per cui $V_s > 0$ nella metà sinistra e $V_s < 0$ in quella destra. Per il teorema sugli sforzi nei correnti e nelle diagonali, una diagonale interna che *scende* verso la mezzeria è tesa e una che *sale* verso la mezzeria è compressa.
 
-- Nella travatura **Pratt** le diagonali interne scendono verso la mezzeria, quindi sono **tese**, e i montanti sono compressi o scarichi. È lo schema della figura iniziale, in cui le aste d'estremità $AF$ ed $EH$ sono inclinate e compresse.
+- Nella travatura **Pratt** le diagonali interne scendono verso la mezzeria, quindi sono **tese**, e i montanti sono compressi o scarichi. È lo schema della travatura di luce $12\,\mathrm{m}$ usata negli esempi, in cui le aste d'estremità $AF$ ed $EH$ sono inclinate e compresse.
 - Nella travatura **Howe** le diagonali interne salgono verso la mezzeria, quindi sono **compresse**, e i montanti sono tesi o scarichi.
 - Nella travatura **Warren** le diagonali salgono e scendono alternativamente e di solito mancano i montanti; procedendo da un appoggio verso la mezzeria le diagonali sono alternativamente compresse e tese.
 - Nella travatura **a mensola** un estremo è vincolato a una parete e l'altro è libero; sotto carichi verso il basso il corrente superiore è teso e quello inferiore compresso.

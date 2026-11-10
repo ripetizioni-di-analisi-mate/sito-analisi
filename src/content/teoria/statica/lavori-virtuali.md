@@ -227,7 +227,7 @@ M\,\Delta\varphi + \delta L = 0 ,
 \qquad
 \Delta\varphi = \delta\varphi_s - \delta\varphi_d .
 $$
-Quando $\Delta\varphi < 0$ la cerniera si abbassa e i due tratti formano una cuspide rivolta verso il basso, la deformazione che corrisponde a fibre inferiori tese. Il momento in $S$ si ottiene allora come $M = -\dfrac{\delta L}{\Delta\varphi}$.
+Quando $\Delta\varphi < 0$ il tratto di destra ruota in verso antiorario rispetto al tratto di sinistra, quindi i due tratti formano nella cerniera una cuspide rivolta verso il basso; questa deformazione corrisponde alle fibre inferiori tese. Il momento in $S$ si ottiene allora come $M = -\dfrac{\delta L}{\Delta\varphi}$.
 
 :::dimostrazione
 Il momento positivo agisce sul tratto di sinistra in verso antiorario e sul tratto di destra in verso orario, quindi il suo lavoro è $M\,\delta\varphi_s - M\,\delta\varphi_d = M\,\Delta\varphi$. La trave con la cerniera, soggetta ai carichi e alle due coppie $M$, è in equilibrio con le reazioni della trave originaria; per il principio dei lavori virtuali per i sistemi di corpi rigidi il lavoro complessivo è nullo.
@@ -270,7 +270,7 @@ T = -\frac{-24\,\delta\varphi}{-6\,\delta\varphi} = -4\,\mathrm{kN} .
 $$
 Con l'equilibrio del tratto $AS$ si ritrova $T = V_A - 4 \cdot 3 = 8 - 12 = -4\,\mathrm{kN}$.
 
-::struttura{nodi="A,0,0;S,3,0;B,6,0;C,8,0" aste="A-C" vincoli="A,cerniera;B,carrello" forze="2.9 0,0,-1.2,T;3.1 0,0,1.2,T" tratteggi="0,0 3,0.9;3,-0.9 6,0 8,0.6" titolo="Con il doppio pendolo in $S$ i due tratti restano paralleli e si scostano di $\Delta v = -6\,\delta\varphi$ (tratteggiato lo spostamento per $\delta\varphi > 0$)"}
+::struttura{nodi="A,0,0;S,3,0;B,6,0;C,8,0" aste="A-C" interni="S,doppio-pendolo,0" vincoli="A,cerniera;B,carrello" forze="2.75 0,0,-1.2,T;3.25 0,0,1.2,T" tratteggi="0,0 3,0.9;3,-0.9 6,0 8,0.6" titolo="Con il doppio pendolo in $S$ i due tratti restano paralleli e si scostano di $\Delta v = -6\,\delta\varphi$ (tratteggiato lo spostamento per $\delta\varphi > 0$)"}
 
 :::
 
@@ -297,7 +297,7 @@ N = -5\,\mathrm{kN} ,
 $$
 cioè uno sforzo di compressione. Con l'equilibrio alla traslazione orizzontale di tutta la trave $H_A = 5\,\mathrm{kN}$, verso destra, e il tratto $AS$ è in equilibrio con $H_A + N = 0$.
 
-::struttura{nodi="A,0,0;S,2,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello" forze="B,-1.2,0,H;3 0,0,-1.2,F" frecce="3.8,0.5,5,0.5,δw_d" titolo="Con il doppio pendolo assiale in $S$ il tratto $SB$ trasla in orizzontale e solo la forza $H$ compie lavoro"}
+::struttura{nodi="A,0,0;S,2,0;B,6,0" aste="A-B" interni="S,doppio-pendolo,90" vincoli="A,cerniera;B,carrello" forze="B,-1.2,0,H;3 0,0,-1.2,F" frecce="3.8,0.5,5,0.5,δw_d" titolo="Con il doppio pendolo assiale in $S$ il tratto $SB$ trasla in orizzontale e solo la forza $H$ compie lavoro"}
 
 :::
 
