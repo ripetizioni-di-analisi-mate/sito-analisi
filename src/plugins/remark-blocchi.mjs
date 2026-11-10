@@ -10,6 +10,8 @@
 //   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}   (tutti gli attributi in grafico.mjs)
 //   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
 //   ::figura{tipo="serie" celle="…"}   figure del ragionamento figurale: serie, matrici, opzioni, cubi (attributi in figura.mjs)
+//   ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello"}   schemi della Statica: travi, vincoli,
+//       carichi, quote, sezioni e diagrammi delle sollecitazioni (attributi in struttura.mjs)
 //   ::cursore{tipo="epsilon-delta" titolo="…"}   grafico con un cursore che ne cambia un parametro (cursore.mjs):
 //       tipi epsilon-delta (ε nella definizione di limite), secante (h nel rapporto incrementale),
 //       riemann (n nelle somme di Riemann), taylor (grado di McLaurin), somme-parziali (N di una serie);
@@ -21,6 +23,7 @@ import { grafico } from './grafico.mjs';
 import { venn } from './venn.mjs';
 import { cursore } from './cursore.mjs';
 import { figura } from './figura.mjs';
+import { struttura } from './struttura.mjs';
 
 const ETICHETTE = {
   definizione: 'Definizione',
@@ -70,10 +73,10 @@ export default function remarkBlocchi() {
     }
     chiudi();
     visit(tree, (node) => {
-      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura')) {
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;
