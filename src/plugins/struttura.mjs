@@ -9,6 +9,7 @@
 //   nodi         "A,0,0;B,6,0;C,6,3"  nodi con nome e coordinate; il nome compare accanto al nodo
 //                (nomi=0 li nasconde; "A,0,0,-" nasconde solo quello)
 //   aste         "A-B;B-C;C-D"  aste a tratto spesso tra due nodi (travi, pilastri, aste di travature)
+//   catene       "A-B"  catene e tiranti: aste a tratto sottile tra due nodi (lavorano solo a trazione)
 //   cerniere     "B;C"  cerniere interne: cerchietto vuoto sul nodo
 //   interni     "B,doppio-pendolo,0;C,pendolo,90"  vincoli interni nel nodo tra due aste: doppio pendolo interno (due
 //                bielle parallele alla direzione in gradi, 0 = orizzontali) o pendolo interno (una biella)
@@ -99,6 +100,7 @@ export function struttura(a) {
   const coppie = (s) => s.trim().split(/\s+/).map((p) => p.split(',').map(Number)).filter((p) => p.length === 2 && p.every(Number.isFinite));
 
   const aste = lista(a.aste).map((s) => s.split('-').map((n) => punto(n)));
+  const catene = lista(a.catene).map((s) => s.split('-').map((n) => punto(n)));
   const forze = lista(a.forze).map((s) => { const [p, dx, dy, ...et] = campi(s); return { p: punto(p), d: [Number(dx), Number(dy)], et: et.join(',') }; });
   const reazioni = lista(a.reazioni).map((s) => { const [p, dx, dy, ...et] = campi(s); return { p: punto(p), d: [Number(dx), Number(dy)], et: et.join(',') }; });
   const carichi = lista(a.carichi).map((s) => {
@@ -130,7 +132,7 @@ export function struttura(a) {
   });
 
   // Riquadro della struttura (senza diagramma) per scegliere la scala del diagramma
-  const geo = [...nodi.values(), ...aste.flat(), ...vincoli.map((v) => v.p), ...poligoni.flat(), ...linee.flat(), ...tratti.flatMap((t) => [t.p0, t.p1])];
+  const geo = [...nodi.values(), ...aste.flat(), ...catene.flat(), ...vincoli.map((v) => v.p), ...poligoni.flat(), ...linee.flat(), ...tratti.flatMap((t) => [t.p0, t.p1])];
   if (!geo.length) for (const c of cerchi) geo.push([c.c[0] - c.r, c.c[1] - c.r], [c.c[0] + c.r, c.c[1] + c.r]);
   const gx = geo.map((p) => p[0]), gy = geo.map((p) => p[1]);
   const D = Math.max(1e-6, Math.max(...gx) - Math.min(...gx), Math.max(...gy) - Math.min(...gy)) || 1;
@@ -242,6 +244,7 @@ export function struttura(a) {
   }
 
   // Aste
+  svg += catene.map(([p, q]) => `<line class="catena" x1="${f(X(p[0]))}" y1="${f(Y(p[1]))}" x2="${f(X(q[0]))}" y2="${f(Y(q[1]))}"/>`).join('');
   svg += aste.map(([p, q]) => `<line class="asta" x1="${f(X(p[0]))}" y1="${f(Y(p[1]))}" x2="${f(X(q[0]))}" y2="${f(Y(q[1]))}"/>`).join('');
 
   // Vincoli (dimensioni in pixel)
@@ -324,7 +327,9 @@ export function struttura(a) {
     if (c.et) {
       const hm = Math.max(c.h1, c.h2), t = c.h1 >= c.h2 ? 0.25 : 0.75, q = sopra(t);
       const ox = -dir[0], oy = -dir[1];
-      svg += `<text class="etichetta" x="${f(X(q[0]) + ox * 12)}" y="${f(Y(q[1]) - oy * 12 + 5)}" text-anchor="middle">${testoSvg(c.et)}</text>`;
+      // fuori dal diagramma del carico, dalla parte delle code delle frecce
+      const ancoraC = ox < -0.5 ? 'end' : ox > 0.5 ? 'start' : 'middle';
+      svg += `<text class="etichetta" x="${f(X(q[0]) + ox * 10)}" y="${f(Y(q[1]) - oy * 12 + 5)}" text-anchor="${ancoraC}">${testoSvg(c.et)}</text>`;
       void hm;
     }
   }
@@ -403,7 +408,7 @@ export function struttura(a) {
       const occupate = []; // angoli in gradi, y verso l'alto
       const ang = (dx2, dy2) => (Math.atan2(dy2, dx2) * 180) / Math.PI;
       const uguale = (q) => Math.abs(q[0] - p[0]) < 1e-9 && Math.abs(q[1] - p[1]) < 1e-9;
-      for (const [q, r] of aste) {
+      for (const [q, r] of [...aste, ...catene]) {
         if (uguale(q)) occupate.push(ang(r[0] - q[0], r[1] - q[1]));
         if (uguale(r)) occupate.push(ang(q[0] - r[0], q[1] - r[1]));
       }
@@ -421,7 +426,7 @@ export function struttura(a) {
       const r = (migliore * Math.PI) / 180, ox = Math.cos(r), oy = -Math.sin(r);
       // con una coppia nel nodo l'etichetta va fuori dall'arco (raggio 19)
       const conCoppia = coppieM.some((c) => uguale(c.p));
-      const dist = conCoppia ? 31 : vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
+      const dist = conCoppia ? 31 : vincoli.some((v) => v.n === n && v.tipo === 'incastro') ? 30 : vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
       const cx = X(p[0]) + ox * dist, cy = Y(p[1]) + oy * dist + 6;
       svg += `<text class="nome-nodo" x="${f(cx)}" y="${f(cy)}" text-anchor="${ox > 0.35 ? 'start' : ox < -0.35 ? 'end' : 'middle'}">${testoSvg(n)}</text>`;
     }

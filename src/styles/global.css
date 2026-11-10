@@ -821,6 +821,7 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .struttura .asta { stroke: var(--inchiostro); stroke-width: 4.2; stroke-linecap: round; }
 .struttura .vincolo { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.8; stroke-linejoin: round; }
 .struttura .cerniera, .struttura .rullo { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.8; }
+.struttura .catena { stroke: var(--inchiostro); stroke-width: 1.8; stroke-linecap: round; }
 .struttura .interruzione { fill: var(--carta); stroke: none; }
 .struttura .biella { stroke: var(--inchiostro); stroke-width: 2.2; stroke-linecap: round; }
 .struttura .terreno { stroke: var(--inchiostro); stroke-width: 1.8; stroke-linecap: round; }

@@ -63,7 +63,7 @@ Sotto il calcolo, `<div class="spiegazione">` con la spiegazione a parole di ogn
 Tutti gli schemi si fanno con `::struttura` (sintassi completa nell'intestazione di `src/plugins/struttura.mjs`). Esempi pronti:
 - trave appoggiata con carico uniforme e forza: `::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello" carichi="A,B,0.6,0.6,q" forze="2 0,0,-1.5,F" quote="A,2 0,2 m;2 0,B,4 m" titolo="Trave appoggiata con carico uniforme $q$ e forza $F$"}`
 - mensola: `vincoli="A,incastro,180"`; carrello su piano verticale a destra: `vincoli="B,carrello,0"`; pendolo inclinato: `vincoli="B,pendolo,225"`; doppio pendolo che impedisce la traslazione orizzontale e la rotazione: `vincoli="A,doppio-pendolo,180"`;
-- trave Gerber: `cerniere="B"`; doppio pendolo interno con bielle orizzontali in $B$: `interni="B,doppio-pendolo,0"`; pendolo interno: `interni="B,pendolo,90"`; portale: aste `A-B;B-C;C-D` con i nodi agli angoli; arco a tre cerniere; travatura reticolare con `reticolare=1`;
+- trave Gerber: `cerniere="B"`; doppio pendolo interno con bielle orizzontali in $B$: `interni="B,doppio-pendolo,0"`; pendolo interno: `interni="B,pendolo,90"`; portale: aste `A-B;B-C;C-D` con i nodi agli angoli; arco a tre cerniere; travatura reticolare con `reticolare=1`; catene e tiranti a tratto sottile con `catene="A-B"`;
 - diagramma di corpo libero: `reazioni="A,1,0,H_A;A,0,1,V_A;B,0,1,V_B"` (frecce nel secondo colore, con la punta sul nodo);
 - sezione per la geometria delle masse: `poligoni="…"`, `fori="…"`, `cerchi="…"`, `punti="x,y,G,baricentro"`, `tratteggi="…"` per gli assi baricentrici, `frecce="…"` per gli assi orientati con il nome, `riferimento=0`;
 - centri di rotazione: `punti="x,y,C_1,centro"`; configurazione spostata: `tratteggi="…"`;
