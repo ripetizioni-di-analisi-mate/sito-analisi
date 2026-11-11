@@ -56,7 +56,7 @@ export const calculusTimed = {
     question(3, 'For $f(x)=x^3$ on $[0,2]$, what value of $c$ satisfies the Mean Value Theorem?', '$\\dfrac{2}{\\sqrt3}$',
       ['$1$', '$\\sqrt2$', '$\\dfrac43$'],
       'The secant slope is $8/2=4$. Set $3c^2=4$ and select the root in $(0,2)$.'),
-    question(4, 'Where is $f(x)=x^3-6x^2$ concave up?', '$x>2$', ['$x<2$', '$x>4$', '$0<x<4$'],
+    question(4, 'On which maximal interval is $f(x)=x^3-6x^2$ concave up?', '$x>2$', ['$x<2$', '$x>4$', '$0<x<4$'],
       'The second derivative is $6x-12$, which is positive exactly when $x>2$.'),
   ],
   'unit-6': [

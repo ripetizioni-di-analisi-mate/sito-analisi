@@ -11,7 +11,7 @@ interface Props {
 const { topic, number, originalExample } = Astro.props;
 const { worked, exercises } = calculusPractice[topic];
 ---
-<details class="sommario-pagina studio-unita-usa" id={'worked-' + number} hidden>
+<details class="sommario-pagina studio-unita-usa studio-pratica-usa" id={'worked-' + number} hidden>
   <summary>Worked examples ({worked.length + 1})</summary>
   <div>
     <p>{originalExample}</p>
@@ -28,7 +28,7 @@ const { worked, exercises } = calculusPractice[topic];
     </ol>
   </div>
 </details>
-<details class="sommario-pagina studio-unita-usa" id={'exercises-' + number} hidden>
+<details class="sommario-pagina studio-unita-usa studio-pratica-usa" id={'exercises-' + number} hidden>
   <summary>Practice exercises ({exercises.length})</summary>
   <div>
     <ol class="calculus-exercises">
@@ -54,8 +54,10 @@ const { worked, exercises } = calculusPractice[topic];
 </details>
 
 <style>
+  .studio-pratica-usa { grid-column: 1 / -1; min-inline-size: 0; }
   .calculus-exercises { margin: .5rem 0; padding-inline-start: 1.4rem; }
   .calculus-exercises > li { margin-block: .8rem; padding-block-start: .7rem; border-top: 1px solid var(--riga); }
+  .calculus-exercises ol { padding-inline-start: 1.2rem; }
   .calculus-exercises h3 { margin: 0; font-size: 1rem; }
   .calculus-exercises :global(.verifica) { margin-block: .5rem; }
   .calculus-exercises :global(.katex) { font-size: 1.02em; }
