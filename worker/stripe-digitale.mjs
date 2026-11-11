@@ -1,13 +1,15 @@
 // Acquisti una tantum. Il browser sceglie i prodotti; listino, sconti e accessi sono decisi dal server.
 import { riepilogoMaterie, riepilogoVideo, videoPosseduti, videoSovrapposti } from '../src/data/pacchetti.mjs';
 import { VIDEOCORSI } from '../src/data/videocorsi.ts';
-import { CONSENSO_FORNITURA, VERSIONE_CONDIZIONI } from '../src/data/consenso-digitale.mjs';
+import { CONSENSO_FORNITURA, CONSENSO_PREMIUM, VERSIONE_CONDIZIONI, VERSIONE_CONDIZIONI_PREMIUM } from '../src/data/consenso-digitale.mjs';
 import { allegatoContrattoDigitale } from './contratto-digitale.mjs';
 import { leggiFatturazione } from './fatturazione.mjs';
 import { stripe } from './prenotazioni.mjs';
 import { componiEmail, inviaEmailResend, SITO_EMAIL } from './email.mjs';
 import { usaProduct } from '../src/data/stem-usa/pricing.ts';
 import { courseUrl } from '../src/data/stem-usa/catalog.mjs';
+import { PASS_PREMIUM, PREZZO_PASSAGGIO_PREMIUM } from '../src/data/premium.mjs';
+import { attivaPremium, premiumAttivo, scadenzaPremium } from './premium.mjs';
 
 const DURATA = 31 * 60;
 const risposta = (d, status = 200) => Response.json(d, { status, headers: { 'cache-control': 'private, no-store' } });
@@ -15,6 +17,8 @@ const errore = (msg, status) => risposta({ errore: msg }, status);
 const lista = (s) => [...new Set(s)];
 const parse = (r) => r && { ...r, ordine: JSON.parse(r.ordine) };
 const sovrapposti = (a, b) => a.some((k) => b.includes(k));
+const dataPremium = (s, en) => new Date(s).toLocaleString(en ? 'en-GB' : 'it-IT',
+  { timeZone: 'Europe/Rome', dateStyle: 'long', timeStyle: 'short' });
 const formatoEuro = (n, en) =>
   new Intl.NumberFormat(en ? 'en-IE' : 'it-IT', { style: 'currency', currency: 'EUR' }).format(n / 100);
 
@@ -31,7 +35,14 @@ export function archivioStripeDigitale(o, p, c) {
   const adesso = new Date().toISOString();
   const carica = (id) => parse(o.riga('SELECT * FROM ordini_stripe WHERE id = ?', id));
   switch (p) {
+    case '/dig-premium':
+      return premiumAttivo(o, c.email, adesso);
     case '/dig-apri': {
+      if (c.ordine.tipo === 'premium') {
+        const pass = premiumAttivo(o, c.email, adesso);
+        const base = c.ordine.premium.ordineBase;
+        if (base ? (pass?.piano !== 'semestrale' || pass.id !== base) : pass) return { posseduto: true };
+      }
       const posseduti = o.materieDi(c.email);
       const video = c.ordine.tipo === 'video' || c.ordine.tipo === 'videocorso';
       if (video ? videoSovrapposti(c.ordine.chiavi, posseduti, VIDEOCORSI) : sovrapposti(c.ordine.chiavi, posseduti))
@@ -139,6 +150,7 @@ export function archivioStripeDigitale(o, p, c) {
         if (r.stato !== 'in_attesa' || !r.fatturazione) return { ok: false };
         const q = r.ordine;
         q.preesistenti = o.materieDi(r.email).filter((k) => q.abilitazioni.includes(k));
+        if (q.tipo === 'premium') q.premium = attivaPremium(q.premium, adesso);
         let residuo = r.in_centesimi;
         const base = q.importi.reduce((a, b) => a + b, 0);
         for (const [i, k] of q.chiavi.entries()) {
@@ -213,9 +225,27 @@ function sessioneCoerente(s, r) {
   );
 }
 
-export async function preventivoDigitale(c, io, h) {
+export async function preventivoDigitale(c, io, h, env) {
   const tipo = c.tipo;
   const en = c.lingua === 'en';
+  if (tipo === 'premium') {
+    const passaggio = c.slug === 'passaggio';
+    const piano = passaggio ? 'annuale' : c.slug;
+    if (!Object.hasOwn(PASS_PREMIUM, piano)) throw new Error(en ? 'Choose a Premium pass.' : 'Scegli un pass Premium.');
+    const pass = await h.aDO(env, '/dig-premium', { email: io.email });
+    if (passaggio ? pass?.piano !== 'semestrale' : pass)
+      throw new Error(en ? 'Check your current Premium pass in your account.' : 'Controlla il tuo pass Premium nell’account.');
+    const totale = passaggio ? PREZZO_PASSAGGIO_PREMIUM : PASS_PREMIUM[piano].centesimi;
+    const titolo = passaggio
+      ? (en ? 'Upgrade to Premium Annual' : 'Passaggio a Premium Annuale')
+      : PASS_PREMIUM[piano][en ? 'en' : 'it'];
+    return {
+      tipo, titolo, totale, prodotti: [titolo], chiavi: ['premium-' + c.slug], importi: [totale],
+      percentuale: 0, sconto: null, abilitazioni: [], risorse: ['premium'],
+      lingua: en ? 'en' : 'it', selezione: { tipo, slug: c.slug },
+      premium: passaggio ? { piano, ordineBase: pass.id, inizio: pass.inizio } : { piano },
+    };
+  }
   const materiaDigitale = (slug) => h.MATERIE.find((m) => m.slug === slug) || usaProduct(slug);
   let q;
   if (tipo === 'materie') q = riepilogoMaterie(c.materie, h.MATERIE);
@@ -236,7 +266,8 @@ export async function preventivoDigitale(c, io, h) {
     };
   } else throw new Error('Scegli un prodotto.');
   const video = tipo === 'video' || tipo === 'videocorso';
-  if (video ? videoSovrapposti(q.chiavi, io.materie, h.VIDEOCORSI) : sovrapposti(q.chiavi, io.materie))
+  const permanenti = io.materiePermanenti || io.materie;
+  if (video ? videoSovrapposti(q.chiavi, permanenti, h.VIDEOCORSI) : sovrapposti(q.chiavi, permanenti))
     throw new Error('Hai già accesso a questo materiale. Controlla il tuo account prima di acquistare.');
   const sconto = tipo === 'materia' ? await h.sconto(io, c.slug) : null;
   const percentuale = sconto?.percentuale || q.percentuale || 0;
@@ -313,6 +344,12 @@ async function confermaOrdine(env, h, r) {
       (en ? 'Purchase date: ' : 'Data dell’acquisto: ') +
         new Date(r.pagato).toLocaleString(en ? 'en-GB' : 'it-IT', { timeZone: 'Europe/Rome', timeZoneName: 'short' }),
       (en ? 'Included products: ' : 'Prodotti inclusi: ') + q.prodotti.join(', '),
+      ...(q.premium ? [
+        (en ? 'Premium access expires on ' : 'Il tuo accesso Premium scade il ') +
+          dataPremium(q.premium.scade, en) + '.',
+        en ? 'One-time payment. No automatic renewal. Video courses excluded.'
+          : 'Pagamento unico, senza rinnovo automatico. Videocorsi esclusi.',
+      ] : []),
     ],
     scheda: { etichetta: q.titolo, valore: formatoEuro(r.in_centesimi, en) },
     dopo: [
@@ -466,21 +503,27 @@ export async function gestisciAcquisti(req, env, p, h) {
   if (p !== '/api/acquisti/preventivo' && p !== '/api/acquisti/checkout') return errore('Pagina non trovata.', 404);
   let q;
   try {
-    q = await preventivoDigitale(c, io, h);
+    q = await preventivoDigitale(c, io, h, env);
   } catch (e) {
     return errore(e.message, 400);
   }
-  if (p.endsWith('/preventivo'))
-    return risposta({ titolo: q.titolo, totale: q.totale, percentuale: q.percentuale, chiavi: q.chiavi });
+  if (p.endsWith('/preventivo')) {
+    const premium = q.premium ? {
+      mesi: PASS_PREMIUM[q.premium.piano].mesi,
+      scade: q.premium.inizio ? scadenzaPremium(q.premium.inizio, PASS_PREMIUM[q.premium.piano].mesi) : null,
+    } : undefined;
+    return risposta({ titolo: q.titolo, totale: q.totale, percentuale: q.percentuale, chiavi: q.chiavi, premium });
+  }
   const anagrafica = leggiFatturazione(c.fatturazione);
   if (anagrafica.errore) return errore(anagrafica.errore, 400);
-  if (c.versioneCondizioni !== VERSIONE_CONDIZIONI)
+  const versioneCondizioni = q.premium ? VERSIONE_CONDIZIONI_PREMIUM : VERSIONE_CONDIZIONI;
+  if (c.versioneCondizioni !== versioneCondizioni)
     return errore('Ricarica la pagina per leggere le condizioni di vendita aggiornate.', 409);
   if (c.condizioni !== true || c.immediato !== true)
     return errore('Verifica le condizioni di vendita e la richiesta di accesso immediato.', 400);
   if (c.totaleAtteso !== q.totale) return errore('Il prezzo è cambiato. Aggiorna il riepilogo prima di pagare.', 409);
-  q.versioneCondizioni = VERSIONE_CONDIZIONI;
-  q.consensoFornitura = CONSENSO_FORNITURA[q.lingua];
+  q.versioneCondizioni = versioneCondizioni;
+  q.consensoFornitura = (q.premium ? CONSENSO_PREMIUM : CONSENSO_FORNITURA)[q.lingua];
   const id = crypto.randomUUID();
   const args = { id, email: io.email, ordine: q, fatturazione: anagrafica.dati };
   try {

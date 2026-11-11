@@ -1,3 +1,4 @@
+import { PASS_PREMIUM } from '../data/premium.mjs';
 import { accountTesti } from '../lib/account-testi.mjs';
 import { caricaPercorsoStudio, destinazioneObiettivo, destinazioneSessione, leggiCatalogoStudio } from '../lib/percorso-studio.mjs';
 import { stemmaSVG, rangoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
@@ -84,6 +85,14 @@ export function avviaAccount(root) {
     return li;
   }
   async function mostraContenuti() {
+    const pass = io.premium;
+    if (pass && Object.hasOwn(PASS_PREMIUM, pass.piano)) {
+      q('premium-account-titolo').textContent = PASS_PREMIUM[pass.piano][en ? 'en' : 'it'];
+      const data = new Date(pass.scade).toLocaleString(locale, { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Rome' });
+      q('premium-scadenza').textContent = (en ? 'Access until ' : 'Accesso fino al ') + data;
+      q('premium-passaggio').hidden = pass.piano !== 'semestrale';
+      q('premium-account').hidden = false;
+    }
     const lista = q('contenuti-account');
     const acquistate = new Set(io.materie || []);
     for (const m of materie.filter((m) => acquistate.has(m.slug))) lista.append(rigaContenuto(m.titolo, m.href || `${pref}/${m.slug}`));

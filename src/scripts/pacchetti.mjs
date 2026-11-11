@@ -13,13 +13,14 @@ async function avvia() {
   const scrivi = (selettore, testo) => { app.querySelector(selettore).textContent = testo; };
   const avviso = (testo) => { messaggio.hidden = !testo; messaggio.textContent = testo; };
   const scorri = (el) => el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
+  const possedute = () => io?.materiePermanenti || io?.materie || [];
   const scelte = () => caselle.filter((c) => c.checked && !c.disabled).map((c) => c.value);
   const riepilogo = (tipo) => {
     try { return tipo === 'materie' ? riepilogoMaterie(scelte(), materie) : riepilogoVideo(selezioneVideo, video); }
     catch { return null; }
   };
   const disponibile = (q) => q && attivo && (q.tipo === 'materie'
-    ? q.chiavi.every((s) => !io?.materie.includes(s))
+    ? q.chiavi.every((s) => !possedute().includes(s))
     : !videoSovrapposti(q.chiavi, io?.materie || [], video));
   function aggiorna() {
     const m = riepilogo('materie'), v = riepilogo('video');
@@ -120,14 +121,14 @@ async function avvia() {
     io = rIo.ok ? await rIo.json() : null;
     attivo = Boolean((await rConf.json()).stripe);
     caselle.forEach((c) => {
-      const tuo = io?.materie.includes(c.value), pronto = attivo;
+      const tuo = possedute().includes(c.value), pronto = attivo;
       c.disabled = Boolean(tuo || !pronto);
       if (c.disabled) c.checked = false;
       if (tuo || !pronto) app.querySelector(`[data-stato-materia="${c.value}"]`).textContent = tuo ? 'Già nel tuo account' : 'In attivazione';
     });
     app.querySelectorAll('[data-scegli-materie]').forEach((b) => {
       const elenco = b.dataset.scegliMaterie.split(',');
-      const tuo = elenco.some((s) => io?.materie.includes(s));
+      const tuo = elenco.some((s) => possedute().includes(s));
       const pronto = attivo;
       b.disabled = tuo || !pronto;
       b.dataset.bloccato = b.disabled ? '1' : '0';

@@ -42,6 +42,7 @@ import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi }
 import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria, scontoInvito } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
 import { creaTabellePacchetti, archivioPacchetti, completaPacchetto } from './pacchetti.mjs';
+import { accessiPremium, premiumAttivo } from './premium.mjs';
 import { creaTabelleStripeDigitale, archivioStripeDigitale, gestisciAcquisti, eventoDigitale, recuperaOrdiniDigitali } from './stripe-digitale.mjs';
 import { creaTabellePostvendita, archivioPostvendita, gestisciPostvendita, webhookPostvendita, sincronizzaPostvendita } from './stripe-postvendita.mjs';
 import { creaTabelleSfide, archivioSfide, datiLegheAdmin, gestisciSfide, sha } from './sfide.mjs';
@@ -370,7 +371,11 @@ export class Archivio {
           this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
         }
         const dispositivi = this.dispositiviDi(u.email).map((x) => ({ ...x, questo: x.id === c.dispositivo }));
-        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi, exp: statoDi(this, u.email).exp });
+        const materiePermanenti = this.materieDi(u.email);
+        const pass = premiumAttivo(this, u.email);
+        const premium = pass ? { piano: pass.piano, scade: pass.scade } : null;
+        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato,
+          materie: accessiPremium(materiePermanenti, pass), materiePermanenti, premium, dispositivi, exp: statoDi(this, u.email).exp });
       }
       case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
         const u = this.riga('SELECT versione FROM utenti WHERE email = ?', c.email);

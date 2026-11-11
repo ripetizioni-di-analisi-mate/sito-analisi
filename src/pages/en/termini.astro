@@ -1,4 +1,5 @@
 ---
+import { CONDIZIONI_PREMIUM } from '../../data/premium.mjs';
 import Base from '../../layouts/Base.astro';
 // Translation of src/pages/termini.astro: the Italian version prevails.
 ---
@@ -21,6 +22,9 @@ import Base from '../../layouts/Base.astro';
   <p>For earlier orders whose receipt identifies Paddle as the seller, Paddle remains the reseller and handles billing and refunds for those transactions.</p>
   <p>Live individual lessons booked on the website are paid for through Stripe. Carmine collects payments directly for live group courses. To find out who to contact and which terms apply, see the <a href="/en/rimborsi">refund policy and right of withdrawal</a>.</p>
 
+
+  <h2 id="premium">Premium</h2>
+  <p>{CONDIZIONI_PREMIUM.en}</p>
 
   <h2 id="diritti-d-autore">Copyright</h2>
   <p>All content on the website, free and paid, consists of creative works protected by Italian copyright law (Law no. 633 of 22 April 1941) and by international rules. This includes in particular the theory texts, the worked exercises and the exercises with their solutions, the figures and graphs, the PDFs, the selection and order of the topics and the layout of the pages. The name and logo "Ripetizioni di Analisi" identify the service of Carmine Tornincasa.</p>

@@ -1,3 +1,5 @@
+import { CONDIZIONI_PREMIUM } from '../src/data/premium.mjs';
+import { VERSIONE_CONDIZIONI_PREMIUM } from '../src/data/consenso-digitale.mjs';
 import novembre2026 from './condizioni-digitali/2026-11-09.1.json' with { type: 'json' };
 
 // Le email di conferma possono essere ritentate dopo una modifica dei termini.
@@ -6,6 +8,10 @@ import novembre2026 from './condizioni-digitali/2026-11-09.1.json' with { type: 
 const versioni = new Map([
   ['2026-11-09.1', novembre2026],
   ['2026-11-10.1', novembre2026],
+  [VERSIONE_CONDIZIONI_PREMIUM, {
+    it: [...novembre2026.it, 'Premium\n' + CONDIZIONI_PREMIUM.it],
+    en: [...novembre2026.en, 'Premium\n' + CONDIZIONI_PREMIUM.en],
+  }],
 ]);
 
 export function allegatoContrattoDigitale(lingua, versione) {
