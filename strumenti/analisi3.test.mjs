@@ -33,7 +33,18 @@ test('l’acquisto di Analisi 3 apre capitoli nuovi e condivisi',async()=>{const
 test('le prime tre schede sono anteprime e la quarta è riservata',async()=>{const b=await banco();for(const n of [1,3,4])assert.equal(await(await b.invia('/analisi-3/funzioni-complesse/esercizi-svolti/'+n)).text(),(n<=3?'':'/vetrine')+'/analisi-3/funzioni-complesse/esercizi-svolti/'+n);});
 test('il banco delle risposte non è pubblico',async()=>{const b=await banco();assert.equal((await b.invia('/dati-domande/analisi-3.json')).status,404);});
 test('dieci ID fissi in tutte le sessioni senza acquisto',async()=>{let riferimento;for(const materie of [null,[],['analisi-2']]){const b=await banco(materie);const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();assert.equal(r.totale,10);const ids=[...r.ordine].sort();if(riferimento)assert.deepEqual(ids,riferimento);riferimento=ids;}});
-test('tutti i capitoli del corso hanno quiz per chi acquista',async()=>{const b=await banco([materia]);const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();assert.ok(r.totale>112);const bank=JSON.parse(readFileSync(join(root,'dist/dati-domande/analisi-3.json')));assert.equal(Object.keys(bank.argomenti).length,11);});
+test('chi acquista può usare 90 quiz per ciascuno degli 11 capitoli',async()=>{
+ const b=await banco([materia]);
+ const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();
+ assert.equal(r.totale,990);
+ assert.equal(new Set(r.ordine).size,15);
+ const bank=JSON.parse(readFileSync(join(root,'dist/dati-domande/analisi-3.json')));
+ assert.equal(Object.keys(bank.argomenti).length,11);
+ for(const [argomento,domande] of Object.entries(bank.argomenti)){
+  assert.equal(domande.length,90,argomento);
+  assert.equal(new Set(domande.map(d=>d.id)).size,90,argomento);
+ }
+});
 test('l’anteprima limita anche banchi con ordine differente',()=>{const a={b:[{n:3,id:'b/3'},{n:1,id:'b/1'}],a:Array.from({length:30},(_,i)=>({n:i+1,id:'a/'+(i+1)}))};assert.equal(Object.values(anteprimaAnalisi3(a)).flat().length,10);assert.deepEqual(anteprimaAnalisi3(a),anteprimaAnalisi3({a:a.a,b:a.b}));});
 test('i capitoli condivisi conservano contenuti e URL propri',()=>{for(const a of ['successioni-e-serie-di-funzioni','serie-di-potenze','serie-di-fourier']){const source=readFileSync(join(root,'src/content/teoria/analisi-2',a+'.md'),'utf8');const target=readFileSync(join(root,'src/content/teoria/analisi-3',a+'.md'),'utf8');assert.equal(target,source.replace(/\/analisi-2\/(successioni-e-serie-di-funzioni|serie-di-potenze|serie-di-fourier)(?=\/)/g,'/analisi-3/$1'));}});
 test('i principali integrali del banco coincidono con quadrature indipendenti',()=>{
