@@ -48,6 +48,12 @@ const EN = {
   percorso: 'Where this fits', formula: 'Formula',
   mostra: 'Show solution', nascondi: 'Hide solution',
 };
+const DE = {
+  definizione: 'Definition', teorema: 'Satz', proposizione: 'Aussage', dimostrazione: 'Beweis',
+  esempio: 'Beispiel', osservazione: 'Bemerkung', attenzione: 'Hinweis', richiamo: 'Rückblick',
+  soluzione: 'Lösung', percorso: 'Einordnung', formula: 'Formel',
+  mostra: 'Lösung anzeigen', nascondi: 'Lösung ausblenden',
+};
 const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };
 
 const NUMERATI = new Set(['definizione', 'teorema', 'proposizione']);
@@ -57,7 +63,7 @@ const norma = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\
 export default function remarkBlocchi() {
   return (tree, file) => {
     const percorso = String(file?.path || file?.history?.[0] || '');
-    const E = /content-en[\\/]/.test(percorso) ? EN : IT;
+    const E = /content-de[\\/]/.test(percorso) ? DE : /content-en[\\/]/.test(percorso) ? EN : IT;
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
     // i loro titoli diventano "1. …", "2. …"; un blocco da solo resta senza numero.
     // Un blocco che ha lo stesso titolo della sua sezione non ripete il titolo.

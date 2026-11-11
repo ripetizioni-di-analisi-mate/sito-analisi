@@ -6,13 +6,11 @@ import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const DIST = new URL('../dist', import.meta.url).pathname;
-const EN = join(DIST, 'en');
-const tradotte = [];
 
-function giro(cartella, rel) {
+function giro(cartella, rel, tradotte) {
   for (const voce of readdirSync(cartella, { withFileTypes: true })) {
     const pieno = join(cartella, voce.name);
-    if (voce.isDirectory()) { giro(pieno, `${rel}/${voce.name}`); continue; }
+    if (voce.isDirectory()) { giro(pieno, `${rel}/${voce.name}`, tradotte); continue; }
     if (!voce.name.endsWith('.html')) continue;
     const html = readFileSync(pieno, 'utf8');
     if (html.includes('class="avviso-lingua"')) continue;
@@ -22,9 +20,14 @@ function giro(cartella, rel) {
   }
 }
 
-if (existsSync(EN)) giro(EN, '');
-// La home inglese, nella build, è /en.html: corrisponde alla home italiana «/».
-if (existsSync(join(DIST, 'en.html')) && !readFileSync(join(DIST, 'en.html'), 'utf8').includes('class="avviso-lingua"')) tradotte.push('/');
-const elenco = [...new Set(tradotte)].sort();
+const elenco = {};
+for (const lingua of ['en', 'de']) {
+  const tradotte = [];
+  const cartella = join(DIST, lingua);
+  if (existsSync(cartella)) giro(cartella, '', tradotte);
+  const home = join(DIST, `${lingua}.html`);
+  if (existsSync(home) && !readFileSync(home, 'utf8').includes('class="avviso-lingua"')) tradotte.push('/');
+  elenco[lingua] = [...new Set(tradotte)].sort();
+  console.log(`lingue: ${elenco[lingua].length} pagine con la versione ${lingua}`);
+}
 writeFileSync(join(DIST, 'dati-lingue.json'), JSON.stringify(elenco));
-console.log(`lingue: ${elenco.length} pagine con la versione inglese`);

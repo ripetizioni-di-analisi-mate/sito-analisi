@@ -4,16 +4,16 @@
 // Usato dal Worker (testata) e dal browser (pannello e aggiornamenti dopo ogni risposta).
 
 export const RANGHI = [
-  { it: 'Bronzo', en: 'Bronze', chiaro: '#f6c79c', medio: '#b8743d', scuro: '#6b3a17', pallido: '#f3e3d3', corpo: 's1' },
-  { it: 'Argento', en: 'Silver', chiaro: '#ffffff', medio: '#a9b3bb', scuro: '#4d5860', pallido: '#e8ecef', corpo: 's1' },
-  { it: 'Oro', en: 'Gold', chiaro: '#fff3bd', medio: '#e3ab2f', scuro: '#7a4f06', pallido: '#f7ecd0', corpo: 's1' },
-  { it: 'Platino', en: 'Platinum', chiaro: '#f0fdff', medio: '#86c6d4', scuro: '#2a6675', pallido: '#e1f0f3', corpo: 's2' },
-  { it: 'Smeraldo', en: 'Emerald', chiaro: '#c4f7da', medio: '#22a866', scuro: '#0a4a2d', pallido: '#dcf1e5', corpo: 's2' },
-  { it: 'Zaffiro', en: 'Sapphire', chiaro: '#cfe5ff', medio: '#2f6fd6', scuro: '#0f2c66', pallido: '#dde8f8', corpo: 's2' },
-  { it: 'Rubino', en: 'Ruby', chiaro: '#ffd0d5', medio: '#d1263e', scuro: '#5e0915', pallido: '#f6dcdf', corpo: 's3' },
-  { it: 'Ametista', en: 'Amethyst', chiaro: '#eedaff', medio: '#8b45d1', scuro: '#381160', pallido: '#ebe0f5', corpo: 's3' },
-  { it: 'Ossidiana', en: 'Obsidian', chiaro: '#8c9a97', medio: '#2f3b39', scuro: '#0b0f0e', pallido: '#d9dcd9', corpo: 's3' },
-  { it: 'Diamante', en: 'Diamond', chiaro: '#d6f4ff', medio: '#3fb6ea', scuro: '#155f92', pallido: '#e3f5fc', corpo: 'diamante' },
+  { it: 'Bronzo', en: 'Bronze', de: 'Bronze', chiaro: '#f6c79c', medio: '#b8743d', scuro: '#6b3a17', pallido: '#f3e3d3', corpo: 's1' },
+  { it: 'Argento', en: 'Silver', de: 'Silber', chiaro: '#ffffff', medio: '#a9b3bb', scuro: '#4d5860', pallido: '#e8ecef', corpo: 's1' },
+  { it: 'Oro', en: 'Gold', de: 'Gold', chiaro: '#fff3bd', medio: '#e3ab2f', scuro: '#7a4f06', pallido: '#f7ecd0', corpo: 's1' },
+  { it: 'Platino', en: 'Platinum', de: 'Platin', chiaro: '#f0fdff', medio: '#86c6d4', scuro: '#2a6675', pallido: '#e1f0f3', corpo: 's2' },
+  { it: 'Smeraldo', en: 'Emerald', de: 'Smaragd', chiaro: '#c4f7da', medio: '#22a866', scuro: '#0a4a2d', pallido: '#dcf1e5', corpo: 's2' },
+  { it: 'Zaffiro', en: 'Sapphire', de: 'Saphir', chiaro: '#cfe5ff', medio: '#2f6fd6', scuro: '#0f2c66', pallido: '#dde8f8', corpo: 's2' },
+  { it: 'Rubino', en: 'Ruby', de: 'Rubin', chiaro: '#ffd0d5', medio: '#d1263e', scuro: '#5e0915', pallido: '#f6dcdf', corpo: 's3' },
+  { it: 'Ametista', en: 'Amethyst', de: 'Amethyst', chiaro: '#eedaff', medio: '#8b45d1', scuro: '#381160', pallido: '#ebe0f5', corpo: 's3' },
+  { it: 'Ossidiana', en: 'Obsidian', de: 'Obsidian', chiaro: '#8c9a97', medio: '#2f3b39', scuro: '#0b0f0e', pallido: '#d9dcd9', corpo: 's3' },
+  { it: 'Diamante', en: 'Diamond', de: 'Diamant', chiaro: '#d6f4ff', medio: '#3fb6ea', scuro: '#155f92', pallido: '#e3f5fc', corpo: 'diamante' },
 ];
 const ORO = '#e2b240';
 const CORPI = {
@@ -29,7 +29,7 @@ export const coloriRango = (r) => RANGHI[r - 1];
 // Gradi I, II, III dentro ogni titolo: uno ogni tre livelli (1-3, 4-6, 7-9; 10-12, 13-15, 16-19; …).
 export const gradoDi = (livello) => { const da = livello < 10 ? 1 : Math.min(90, Math.floor(livello / 10) * 10); return Math.min(3, Math.floor((livello - da) / 3) + 1); };
 export const ROMANI = ['I', 'II', 'III'];
-export const nomeRango = (livello, lingua = 'it') => `${RANGHI[rangoDi(livello) - 1][lingua === 'en' ? 'en' : 'it']} ${ROMANI[gradoDi(livello) - 1]}`;
+export const nomeRango = (livello, lingua = 'it') => `${RANGHI[rangoDi(livello) - 1][lingua === 'de' ? 'de' : lingua === 'en' ? 'en' : 'it']} ${ROMANI[gradoDi(livello) - 1]}`;
 
 const f1 = (x) => (Math.round(x * 10) / 10).toString();
 function raggi(c, n, r1, r2, cy) {

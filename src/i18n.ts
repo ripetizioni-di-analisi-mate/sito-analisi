@@ -4,33 +4,35 @@
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
+import { ARGOMENTI_DE, MATERIE_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from './data/materie-de';
+import { TESTI_DE } from './data/testi-de';
+import { nellaLingua, senzaLingua, type Lingua } from './lib/lingue-sito';
+export { LINGUE, type Lingua } from './lib/lingue-sito';
 import { FACOLTA } from './data/facolta';
 import { url } from './lib/url';
 
-export type Lingua = 'it' | 'en';
-export const LINGUE: { codice: Lingua; nome: string }[] = [
-  { codice: 'it', nome: 'Italiano' },
-  { codice: 'en', nome: 'English' },
-];
 export const prefisso = (l: Lingua) => (l === 'it' ? '' : `/${l}`);
-
-// Indirizzo di una pagina nella lingua data.
-export function link(l: Lingua, path: string): string {
-  const p = l === 'it' ? path : path === '/' ? `/${l}` : `/${l}${path}`;
-  return url(p);
-}
-// La stessa pagina nell'altra lingua.
-export function altraLingua(pathname: string, verso: Lingua): string {
-  // Prima si toglie «.html»: la home inglese, nella build, ha percorso «/en.html».
-  const pulito = pathname.replace(/\.html$/, '').replace(/\/index$/, '');
-  const senza = pulito.replace(/^\/en(?=\/|$)/, '');
-  return link(verso, senza || '/');
-}
+export const link = (l: Lingua, path: string): string => url(nellaLingua(l, path));
+export const altraLingua = (pathname: string, verso: Lingua): string => link(verso, senzaLingua(pathname));
 
 // ---------- materie nella lingua data ----------
 export function materieL(l: Lingua): Materia[] {
   if (l === 'it') return MATERIE;
   return MATERIE.map((m) => {
+    if (l === 'de') {
+      const de = MATERIE_DE[m.slug];
+      if (!de) return m;
+      const [titolo, descrizione] = de;
+      return {
+        ...m, titolo, breve: titolo, descrizione,
+        gruppo: GRUPPI_DE[m.gruppo] ?? m.gruppo,
+        sottogruppo: m.sottogruppo ? SOTTOGRUPPI_DE[m.sottogruppo] : undefined,
+        argomenti: m.argomenti.map((a) => {
+          const titolo = ARGOMENTI_DE[`${m.slug}/${a.slug}`] ?? ARGOMENTI_DE[a.slug] ?? a.titolo;
+          return { ...a, titolo, breve: titolo };
+        }),
+      };
+    }
     const e = MATERIE_EN[m.slug];
     if (!e) return m;
     return {
@@ -48,12 +50,12 @@ export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.grupp
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
-  if (g === 'Università' || g === 'University') {
+  if (['Università', 'University', GRUPPI_DE['Università']].includes(g)) {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
     const assegnate = new Set<string>(FACOLTA.flatMap((f) => [...f.materie]));
     return [
       ...FACOLTA.map((f) => ({
-        sotto: g === 'University' ? f.titoloEn : f.titolo,
+        sotto: g === 'University' ? f.titoloEn : g === GRUPPI_DE['Università'] ? f.titoloDe : f.titolo,
         materie: f.materie.flatMap((slug) => {
           const m = perSlug.get(slug);
           return m ? [{ m, nome: m.titolo }] : [];
@@ -71,7 +73,7 @@ export function blocchiGruppo(materie: Materia[], g: string) {
   ].filter((b) => b.materie.length);
 }
 export function sezioniL(l: Lingua) {
-  const nomi = TESTI[l].sezioni;
+  const nomi = T(l).sezioni;
   return SEZIONI.map((s) => ({ slug: s.slug, titolo: nomi[s.slug] }));
 }
 
@@ -89,6 +91,7 @@ export async function voceL(l: Lingua, c: Collezione, id: string) {
 export async function vociL(l: Lingua, c: Collezione) {
   const it = await getCollection(c);
   if (l === 'it') return it as any[];
+  if (l === 'de') return [];
   const en = new Map((await getCollection(TRADOTTE[c])).map((v: any) => [v.id, v]));
   return it.map((v: any) => en.get(v.id) ?? v);
 }
@@ -283,10 +286,10 @@ export const TESTI = {
     ],
   },
 };
-export type Testi = (typeof TESTI)['it'];
-export const T = (l: Lingua) => TESTI[l] as Testi;
+export type Testi = typeof TESTI.it;
+export const T = (l: Lingua): Testi => l === 'de' ? TESTI_DE : TESTI[l];
 // I soli testi che servono agli script nel browser (le funzioni non passano: si usano i segnaposto).
 export function testiJs(l: Lingua) {
-  const j = TESTI[l].js as Record<string, unknown>;
+  const j = T(l).js as Record<string, unknown>;
   return Object.fromEntries(Object.entries(j).map(([k, v]) => [k, typeof v === 'function' ? (v as (x: string) => string)('§') : v]));
 }

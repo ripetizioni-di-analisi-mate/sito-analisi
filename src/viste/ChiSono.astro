@@ -118,6 +118,49 @@ const TESTI = {
     videocorsi: 'See the video courses (in Italian)',
     ruolo: 'Private Calculus tutor',
   },
+  de: {
+    titolo: 'Über mich',
+    descrizione: 'Carmine Tornincasa, Nachhilfelehrer für Analysis. Mehr als 1.000 Lernende und über 10.000 Unterrichtsstunden.',
+    nome: 'Carmine Tornincasa',
+    laurea: 'Abschluss in Bauingenieurwesen an der Universität Kampanien „Luigi Vanvitelli“ mit der italienischen Bestnote 110/110 und Auszeichnung.',
+    sottotitolo: 'Nachhilfelehrer und Betreiber des Kanals',
+    seguimi: 'Folge mir auf',
+    punti: [
+      [['Abschluss in Bauingenieurwesen', true], [' und Masterabschluss in Mathematik', false]],
+      [['Über 1.000 Lernende', true], [' betreut und ', false], ['mehr als 10.000 Unterrichtsstunden', true], [' gegeben', false]],
+      [['Ich unterrichte Mathematik ', false], ['seit meiner Schulzeit', true]],
+      [['Einzelunterricht, ', false], ['Online-Gruppenkurse', true], [' und ', false], ['Videokurse', true]],
+    ] as [string, boolean][][],
+    studenti: 'Meine Schülerinnen, Schüler und Studierenden',
+    dove: 'Woher die Lernenden im Jahr 2025 kamen',
+    province: ['Lernende aus ', '78 Provinzen', ', vor allem aus Rom, Mailand und Neapel.'],
+    mappa: 'Karte Italiens mit den Herkunftsprovinzen. Die größten Kreise liegen bei Rom, Mailand und Neapel.',
+    citta: [['400+', 'aus Rom'], ['250+', 'aus Mailand'], ['120+', 'aus Neapel'], ['90+', 'aus Palermo'], ['80+', 'aus Turin']],
+    missione: 'So unterrichte ich',
+    paragrafi: [
+      'Im Unterricht setze ich dort an, wo du nicht weiterkommst. Auf der Website folgt die Theorie der Reihenfolge meiner Stunden. Zu jedem Satz stehen die Voraussetzungen dabei. Die Beispiele sind nach Aufgabentypen geordnet. Auf die Rechnung folgt jeweils die Erklärung.',
+      'Ich möchte, dass du Aufgaben zunehmend selbstständig lösen kannst. Auf Instagram und anderen Kanälen teile ich zusätzliche Erklärungen und Aufgaben.',
+    ],
+    risultati: 'Rückmeldungen nach der Prüfung',
+    risultato: 'Rückmeldung auf Italienisch aus den Instagram-Story-Highlights',
+    altri: 'Weitere Rückmeldungen auf Instagram',
+    servizi: 'Unterricht und Kurse',
+    righeServizi: [
+      ['Einzelunterricht', ['Ich passe die Stunden an deinen Wissensstand an.']],
+      ['Live-Gruppenkurs', [
+        'Die eingesandten Altklausuren bestimmen den Inhalt des Kurses. Es finden mindestens drei einstündige Treffen pro Woche statt.',
+        'Die Stunden werden aufgezeichnet. Zur Anmeldung brauchst du deinen Vor- und Nachnamen sowie deine Telefonnummer.',
+      ]],
+      ['Videokurs', ['Die Aufzeichnungen eines vollständigen Kurses, jeweils mit Video und PDF.']],
+    ] as [string, string[]][],
+    durata: 'Geplanter Umfang',
+    lezioni: ['etwa 30 Stunden für Analysis I', 'etwa 20 Stunden für Analysis II'],
+    supportate: 'Hochschulen, an denen meine Studierenden eingeschrieben sind',
+    prenota: 'Unterricht per WhatsApp anfragen',
+    prova: 'Lernmaterial kostenlos ansehen',
+    videocorsi: 'Videokurse auf Italienisch ansehen',
+    ruolo: 'Nachhilfelehrer für Analysis',
+  },
 }[lingua];
 
 const RISULTATI = Array.from({ length: 14 }, (_, i) => `/chi-sono/risultati/${String(i + 1).padStart(2, '0')}.webp`);
@@ -170,7 +213,7 @@ const persona = {
     </div>
     <img class="bio-mappa" src="/chi-sono/mappa-studenti.webp" width="640" height="702" loading="lazy" alt={TESTI.mappa} />
   </div>
-  <p class="bio-centro"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a><br /><a class="bio-secondario" href={lingua === 'it' ? '/' : '/en'}>{TESTI.prova}</a></p>
+  <p class="bio-centro"><a class="bio-bottone" href={WHATSAPP} target="_blank" rel="noopener">{TESTI.prenota}</a><br /><a class="bio-secondario" href={lingua === 'it' ? '/' : `/${lingua}`}>{TESTI.prova}</a></p>
 
   <h2>{TESTI.missione}</h2>
   {TESTI.paragrafi.map((p) => <p>{p}</p>)}
@@ -190,7 +233,7 @@ const persona = {
         <strong>{nome}</strong>
         <div>
           {testi.map((t) => <p>{t}</p>)}
-          {i === 2 && <p><a href="/videocorsi">{TESTI.videocorsi}</a></p>}
+          {i === 2 && <p><a href={lingua === 'de' ? '/videocorsi?lingua=it' : '/videocorsi'}>{TESTI.videocorsi}</a></p>}
           {i === 1 && (
             <>
               <p class="bio-durata">{TESTI.durata}</p>

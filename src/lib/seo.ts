@@ -1,3 +1,5 @@
+import { nellaLingua, type Lingua } from './lingue-sito';
+
 // Dati per i motori di ricerca: indirizzo del sito, organizzazione, briciole di pane.
 export const SITO = 'https://ripetizionidianalisi.com';
 export const INSTAGRAM = 'https://www.instagram.com/ripetizioni_di_analisi_mate/';
@@ -42,25 +44,25 @@ export function briciole(voci: { nome: string; url: string }[]) {
 }
 
 // Il sito nel suo insieme, con le due lingue in cui è scritto: aiuta i motori a mostrare il nome giusto.
-export function sitoWeb(lingua: 'it' | 'en') {
+export function sitoWeb(lingua: Lingua) {
   return {
     '@type': 'WebSite',
     '@id': `${SITO}/#sito`,
     name: 'Ripetizioni di Analisi',
     alternateName: 'ripetizionidianalisi.com',
     url: `${SITO}/`,
-    inLanguage: ['it', 'en'],
+    inLanguage: ['it', 'en', 'de'],
     publisher: { '@id': `${SITO}/#organizzazione` },
     potentialAction: {
       '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${SITO}${lingua === 'en' ? '/en' : ''}/cerca?q={search_term_string}` },
+      target: { '@type': 'EntryPoint', urlTemplate: `${SITO}${nellaLingua(lingua, '/cerca')}?q={search_term_string}` },
       'query-input': 'required name=search_term_string',
     },
   };
 }
 
 // La pagina corrente, con la sua lingua (le versioni nell'altra lingua sono già indicate con hreflang).
-export function paginaWeb(url: string, titolo: string, descrizione: string, lingua: 'it' | 'en') {
+export function paginaWeb(url: string, titolo: string, descrizione: string, lingua: Lingua) {
   return {
     '@type': 'WebPage',
     '@id': `${url}#pagina`,

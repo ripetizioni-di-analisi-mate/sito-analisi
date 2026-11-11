@@ -20,7 +20,7 @@ const pref = prefisso(lingua);
   </form>
   <p class="nota-accesso" id="nuovo-link" hidden><a href={link(lingua, '/accedi') + '#recupera'}>{t.chiediNuovoLink}</a></p>
 
-  <script is:inline define:vars={{ js, pref }}>
+  <script is:inline define:vars={{ js, pref, lingua }}>
     (() => {
       const m = location.hash.match(/t=([A-Za-z0-9_.-]+)/);
       const token = m ? m[1] : '';
@@ -33,7 +33,7 @@ const pref = prefisso(lingua);
         esito.textContent = t; esito.className = 'esito-modulo errore';
         if (scaduto) { document.getElementById('nuovo-link').hidden = false; modulo.password.disabled = true; invia.hidden = true; }
       };
-      if (!token) errore(pref ? 'This link is incomplete. Request a new one from the login page.' : 'Il link è incompleto. Chiedine uno nuovo dalla pagina di accesso.', true);
+      if (!token) errore(lingua === 'de' ? 'Dieser Link ist unvollständig. Fordere auf der Anmeldeseite einen neuen Link an.' : pref ? 'This link is incomplete. Request a new one from the login page.' : 'Il link è incompleto. Chiedine uno nuovo dalla pagina di accesso.', true);
       modulo.addEventListener('submit', async (e) => {
         e.preventDefault();
         const password = modulo.password.value;
@@ -42,7 +42,7 @@ const pref = prefisso(lingua);
         try {
           const r = await fetch('/api/reimposta-password', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ token, password, lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ token, password, lingua }),
           });
           const d = await r.json().catch(() => ({}));
           invia.disabled = false;

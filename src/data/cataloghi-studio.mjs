@@ -2,8 +2,8 @@ export const CATALOGO_PREDEFINITO = 'IT';
 export const PARAMETRO_CATALOGO = 'catalogo';
 
 export const CATALOGHI_STUDIO = {
-  IT: { percorso: '/', it: 'Italia', en: 'Italy' },
-  US: { percorso: '/us', it: 'Stati Uniti', en: 'United States' },
+  IT: { percorso: '/', it: 'Italia', en: 'Italy', de: 'Italien' },
+  US: { percorso: '/us', it: 'Stati Uniti', en: 'United States', de: 'Vereinigte Staaten' },
 };
 
 export function catalogoStudio(codice) {

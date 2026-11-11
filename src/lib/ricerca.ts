@@ -17,7 +17,7 @@ import { nomiAllenamento } from './allenamento.mjs';
 export type Categoria = 'corsi' | 'argomenti' | 'esercizi' | 'videocorsi';
 export interface VoceRicerca { t: string; s: string; m: string; h: string; p: string; c: Categoria }
 
-const TIPI: Record<Lingua, Record<string, string>> = {
+const TIPI: Record<Exclude<Lingua, 'de'>, Record<string, string>> = {
   it: { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' },
   en: { definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition' },
 };
@@ -36,7 +36,7 @@ const TESTI = {
   },
 };
 
-export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
+export async function vociRicerca(l: Exclude<Lingua, 'de'>): Promise<VoceRicerca[]> {
   const t = T(l);
   const x = TESTI[l];
   const voci: VoceRicerca[] = [];
@@ -108,6 +108,6 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
   return voci;
 }
 
-export async function indiceRicerca(l: Lingua) {
+export async function indiceRicerca(l: Exclude<Lingua, 'de'>) {
   return new Response(JSON.stringify(await vociRicerca(l)), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }

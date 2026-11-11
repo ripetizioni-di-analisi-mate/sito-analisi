@@ -21,6 +21,7 @@ export function creaCatalogoStudio(materie, domande, lingua = 'it') {
     titolo: m.titolo,
     argomenti: m.argomenti.map((a) => a.slug),
     domande: domande[m.slug] || [],
+    ...(lingua === 'de' ? { titoli: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.titolo])) } : {}),
     ripasso: nomiAllenamento(m, lingua).ripasso,
   }]));
 }
@@ -35,7 +36,7 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   const m = catalogo[sessione.materia];
   const base = m.base || `${lingua === 'en' ? '/en' : ''}/${sessione.materia}`;
   const a = sessione.argomento;
-  if (!a) return { href: base, domande: null, titolo: m.titolo, materia: m.titolo };
+  if (!a) return { href: lingua === 'de' ? `/de${base}` : base, domande: null, titolo: m.titolo, materia: m.titolo };
   const ripasso = a === 'prove-d-esame' || a === 'ripasso-di-oggi';
   if (ripasso) {
     if (!m.domande.length) return null;
@@ -45,6 +46,7 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
     return { href, domande: href, titolo, materia: m.titolo };
   }
   if (!m.argomenti.includes(a)) return null;
+  if (lingua === 'de') return { href: `/de/${sessione.materia}#${a}`, domande: null, titolo: m.titoli[a], materia: m.titolo };
   return {
     href: m.base ? `${base}#${a}` : `${base}/${a}/teoria`,
     domande: m.domande.includes(a) ? `${base}/${a}/domande` : null,

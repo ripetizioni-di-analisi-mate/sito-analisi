@@ -7,7 +7,11 @@ import { link, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
-const s = en ? {
+const s = lingua === 'de' ? {
+  titolo: 'Cookies für die Reichweitenmessung',
+  testo: 'Wenn du zustimmst, messen Google-Cookies, über welche Seiten und Anzeigen Lernende zu uns finden. Wir verkaufen keine Daten.',
+  accetta: 'Akzeptieren', rifiuta: 'Nur notwendige', privacy: 'Datenschutzerklärung (Italienisch)',
+} : en ? {
   titolo: 'Cookies for measurement',
   testo: 'With your consent, Google cookies measure which pages and which ads bring students to the site. No data is sold.',
   accetta: 'Accept', rifiuta: 'Only necessary', privacy: 'Privacy policy',
@@ -19,7 +23,7 @@ const s = en ? {
 ---
 <aside class="consenso" role="dialog" aria-labelledby="consenso-titolo" hidden>
   <p class="consenso-titolo" id="consenso-titolo">{s.titolo}</p>
-  <p class="consenso-testo">{s.testo} <a href={link(lingua, '/privacy')}>{s.privacy}</a></p>
+  <p class="consenso-testo">{s.testo} <a href={lingua === 'de' ? '/privacy?lingua=it' : link(lingua, '/privacy')}>{s.privacy}</a></p>
   <div class="consenso-tasti">
     <button type="button" class="consenso-si" data-consenso="si">{s.accetta}</button>
     <button type="button" class="consenso-no" data-consenso="no">{s.rifiuta}</button>
