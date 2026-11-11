@@ -8,6 +8,7 @@ import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { numero, perArgomento, vicini, disponibilitaStudio } from '../lib/nav';
+import { schedeLibere } from '../data/schede-libere.mjs';
 interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
@@ -37,7 +38,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
-  ...accesso(!materiaL(lingua, materia).prezzo || Number(n) <= 3),
+  ...accesso(!materiaL(lingua, materia).prezzo || Number(n) <= schedeLibere(materia, argomento)),
 }, keywords: (voce.data.parole ?? []).join(', ') }] }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'], href: lista }, { titolo: `${t.scheda} ${n}` }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"

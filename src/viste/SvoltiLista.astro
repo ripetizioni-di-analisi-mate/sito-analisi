@@ -7,6 +7,7 @@ import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
+import { schedeLibere } from '../data/schede-libere.mjs';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
@@ -15,6 +16,10 @@ const voci = await Promise.all(perArgomento(await getCollection('svolti'), mater
 const nonTradotta = voci.some((v) => !v.tradotta);
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
+const mostraAccesso = materia === 'scienza-delle-costruzioni' && Boolean(materiaL(lingua, materia).prezzo);
+const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
+  ? (lingua === 'en' ? 'Free worked sheet' : 'Scheda completa gratuita')
+  : (lingua === 'en' ? 'Free problems · solutions with full access' : 'Tracce gratuite · svolgimenti con accesso completo');
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
@@ -34,9 +39,10 @@ const base = `/${materia}/${argomento}`;
   {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
   {voci.length > 0 && (
     <ul class="elenco-esercizi">
-      {voci.map(({ voce: e }) => (
-        <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}{e.data.parole?.length > 0 && <span class="parole">{e.data.parole.join(' · ')}</span>}</span></a></li>
-      ))}
+      {voci.map(({ voce: e }) => {
+        const n = numero(e.id);
+        return <li><a href={link(lingua, `${base}/esercizi-svolti/${n}`)}><span class="numero">{n}</span><span>{e.data.titolo}{mostraAccesso && <span class="parole">{etichettaAccesso(n)}</span>}{e.data.parole?.length > 0 && <span class="parole">{e.data.parole.join(' · ')}</span>}</span></a></li>;
+      })}
     </ul>
   )}
 </Base>

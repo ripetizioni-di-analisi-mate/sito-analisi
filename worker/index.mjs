@@ -19,6 +19,7 @@ import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
+import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
@@ -45,13 +46,24 @@ import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDi
   cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+const SCIENZA_DELLE_COSTRUZIONI = 'scienza-delle-costruzioni';
+const NUMERO_QUIZ_ANTEPRIMA_SCIENZA = 1;
+function quizScienzaRiservato(lingua, personale = false) {
+  const en = lingua === 'en';
+  const errore = personale
+    ? (en ? 'Spaced review is included in full access to Structural Mechanics.' : 'Il ripasso personale è incluso nell’accesso completo a Scienza delle costruzioni.')
+    : (en ? 'This question requires full access to Structural Mechanics.' : 'Per questa domanda serve l’accesso completo a Scienza delle costruzioni.');
+  return {
+    errore,
+    sblocca: `${en ? '/en' : ''}/${SCIENZA_DELLE_COSTRUZIONI}/sblocca`,
+  };
+}
 const CRON_PROMEMORIA = '30 16 * * *';
 const CRON_LEZIONI = '58 * * * *'; // link di Meet 2 minuti prima delle lezioni (worker/prenotazioni.mjs)
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
 const VIDEO = Object.fromEntries(VIDEOCORSI.map((v) => [chiaveVideo(v.slug), v]));
 const conMaterieDeiVideo = (chiavi) => [...new Set(chiavi.flatMap((k) => (VIDEO[k] ? [k, ...VIDEO[k].sblocca] : [k])))];
 const linkDrive = (env) => { try { return JSON.parse(env.VIDEOCORSI_DRIVE || '{}'); } catch { return {}; } };
-const SCHEDE_LIBERE = 3;          // le prime N schede svolte di ogni argomento restano aperte
 const ITERAZIONI_PBKDF2 = 10000;  // costo dell'hash: entro i 10 ms di CPU del piano gratuito Workers; da alzare col piano a pagamento
 const DURATA_SESSIONE = 60 * 60 * 24 * 180; // 180 giorni
 
@@ -811,6 +823,7 @@ export default {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
     const vendita = env.VENDITA !== '0';
+    const scienzaAPagamento = vendita && A_PAGAMENTO.includes(SCIENZA_DELLE_COSTRUZIONI);
     const POST = req.method === 'POST';
 
     if (p === '/api/pacchetti/checkout') return json({ errore: 'Il pagamento è cambiato. Ricarica la pagina per acquistare con Stripe.' }, 410);
@@ -879,7 +892,10 @@ export default {
 
     // ===== sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs) =====
     if (p === '/api/lega' || p === '/api/lega/nome' || p === '/api/lega/avvisi' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
-      const r = await gestisciSfide(req, env, ctx, p, { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi });
+      const r = await gestisciSfide(req, env, ctx, p, {
+        json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi,
+        materiaQuizRiservata: scienzaAPagamento ? SCIENZA_DELLE_COSTRUZIONI : null,
+      });
       if (r) return r;
     }
 
@@ -1007,21 +1023,29 @@ export default {
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const personale = argomento === RIPASSO_OGGI;
+      const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
+      if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
       let dati = await domandeDi(env, materia, l);
       const argomentiCompleti = dati?.argomenti;
       const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
-      if (quizConAnteprima && vendita) {
-        const accesso = await utenteCollegato(env, req).catch(() => null);
-        if (!accesso?.materie?.includes(materia) && dati) dati = { ...dati, argomenti: materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
+      if (anteprimaScienza && argomentiCompleti) {
+        dati = { ...dati, argomenti: Object.fromEntries(Object.entries(argomentiCompleti)
+          .map(([slug, domande]) => [slug, domande.filter((q) => q.n === NUMERO_QUIZ_ANTEPRIMA_SCIENZA)])) };
+      } else if (quizConAnteprima && vendita && !io?.materie?.includes(materia) && dati) {
+        dati = { ...dati, argomenti: materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
-      const personale = argomento === RIPASSO_OGGI;
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
       if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
+      if (!q && anteprimaScienza && typeof id === 'string') {
+        return json(quizScienzaRiservato(l), 403, { 'cache-control': 'no-store' });
+      }
       let ordine = null;
       if (!q && Array.isArray(viste)) {
         // Pagina aperta prima del 31/10 alle 14:48: manda le domande già viste e non l'id.
@@ -1030,9 +1054,8 @@ export default {
       }
       if (!q && personale) {
         // Ripasso di oggi: le domande sbagliate arrivate alla loro data (worker/livelli.mjs, ripasso dilazionato).
-        const io0 = await utenteCollegato(env, req).catch(() => null);
-        if (!io0) return json({ errore: l === 'en' ? 'Today’s review is linked to your account: log in or create a free account. The questions you get wrong come back here after one day.' : 'Il ripasso di oggi è legato all’account: accedi o crea un account gratuito. Le domande sbagliate tornano qui dopo un giorno.' }, 401);
-        const { domande: dovute } = await aDO(env, '/liv-ripasso', { email: io0.email, materia });
+        if (!io) return json({ errore: l === 'en' ? 'Today’s review is linked to your account: log in or create a free account. The questions you get wrong come back here after one day.' : 'Il ripasso di oggi è legato all’account: accedi o crea un account gratuito. Le domande sbagliate tornano qui dopo un giorno.' }, 401);
+        const { domande: dovute } = await aDO(env, '/liv-ripasso', { email: io.email, materia });
         const ids = new Set(elenco.map((x) => x.id));
         ordine = dovute.map((d) => d.slice(materia.length + 1)).filter((x) => ids.has(x)).slice(0, DOMANDE_SESSIONE);
         if (!ordine.length) return json({ errore: l === 'en' ? 'No questions to review today in this subject. The questions you get wrong in the timed questions come back here after one day, then after 3 and 7 days.' : 'Oggi non ci sono domande da ripassare in questa materia. Le domande sbagliate nelle domande a tempo tornano qui dopo un giorno, poi dopo 3 e 7 giorni.', vuoto: true }, 404);
@@ -1050,7 +1073,6 @@ export default {
         if (ripasso) ordine = mescola(ordine);
         q = elenco.find((x) => x.id === ordine[0]);
       }
-      const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
       // L'anteprima mostra la lunghezza della serie completa, con i soli ID dimostrativi.
       let lunghezzaSerie;
@@ -1070,10 +1092,14 @@ export default {
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
       if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (scienzaAPagamento && tok.m === SCIENZA_DELLE_COSTRUZIONI && q.n !== NUMERO_QUIZ_ANTEPRIMA_SCIENZA
+          && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
+        return json(quizScienzaRiservato(linguaDi(tok.l)), 403, { 'cache-control': 'no-store' });
+      }
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
-      const io = await utenteCollegato(env, req).catch(() => null);
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
@@ -1481,6 +1507,8 @@ export default {
       return new Response(null, { status: 301, headers: { location: `${info.pref}/${info.materia}/${info.argomento}/teoria`, 'cache-control': 'no-store' } });
     }
     const protetta = vendita && info && A_PAGAMENTO.includes(info.materia);
+    const schedaSvoltaLibera = info?.tipo === 'esercizi-svolti' && info.n > 0
+      && info.n <= schedeLibere(info.materia, info.argomento);
     // La sessione si verifica solo per le pagine e i PDF, non per font, stili e immagini.
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);
     const io = pagina ? await utenteCollegato(env, req).catch(() => null) : null;
@@ -1491,7 +1519,7 @@ export default {
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
-      const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n > SCHEDE_LIBERE);
+      const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera);
       const motore = !sbloccataQui && ridotta && req.method === 'GET'
         ? await motoreVerificato(req).catch(() => null) : null;
       if (motore) {
@@ -1501,7 +1529,7 @@ export default {
       } else if (!sbloccataQui) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa') {
           risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
-        } else if (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE) {
+        } else if (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera) {
           // scheda bloccata: vetrina con titolo e tracce, svolgimenti tolti (scripts/vetrine.mjs)
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi-svolti/${info.n}`);
         } else if (info.tipo === 'teoria') {
@@ -1544,7 +1572,7 @@ export default {
     }
     // Progressi per argomento: teoria e schede svolte aperte per intero da chi ha l'account.
     if (html && io && info && req.method === 'GET' && risposta.status < 400 && (info.tipo === 'teoria' || (info.tipo === 'esercizi-svolti' && info.n))) {
-      const intera = !protetta || sbloccataQui || (info.tipo === 'esercizi-svolti' && info.n <= SCHEDE_LIBERE);
+      const intera = !protetta || sbloccataQui || schedaSvoltaLibera;
       if (intera) ctx.waitUntil(aDO(env, '/liv-vista', { email: io.email, materia: info.materia, argomento: info.argomento, tipo: info.tipo, n: info.n || 0 }).catch(() => {}));
     }
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).

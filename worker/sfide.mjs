@@ -321,12 +321,23 @@ function mieiDuelli(ar, email, l) {
     });
 }
 
+function duelloRiservato(materia) {
+  return { errore: 'Per giocare a questa materia serve l’accesso completo.', sblocca: `/${materia}/sblocca` };
+}
+
 // Stato di un duello per uno dei due studenti; con unisci = true chi apre il link diventa lo sfidato.
 function partita(ar, c) {
   const { email } = c;
   const l = c.lingua === 'en' ? 'en' : 'it';
   let d = ar.riga('SELECT * FROM duelli WHERE codice = ?', String(c.codice || '').toUpperCase());
   if (!d) return { errore: 'Duello non trovato: controlla il link.' };
+  if (d.materia === c.materiaQuizBloccata) {
+    if (d.stato === 'invito' && d.b === email && c.accetta === false) {
+      ar.sql.exec("UPDATE duelli SET stato = 'rifiutato' WHERE codice = ?", d.codice);
+      return { stato: 'rifiutato' };
+    }
+    return duelloRiservato(d.materia);
+  }
   d = aggiornaDuello(ar, d);
   if (d.stato === 'aperto' && c.unisci && d.a !== email) {
     ar.sql.exec("UPDATE duelli SET b = ?, stato = 'gioco', scade = ? WHERE codice = ? AND stato = 'aperto'", email, Math.min(d.scade, Date.now() + DUELLO.oreLink * 3600000), d.codice);
@@ -377,6 +388,7 @@ function rispondiDuello(ar, c) {
   const { email } = c;
   let d = ar.riga('SELECT * FROM duelli WHERE codice = ?', String(c.codice || '').toUpperCase());
   if (!d || (d.a !== email && d.b !== email)) return { errore: 'Duello non trovato.' };
+  if (d.materia === c.materiaQuizBloccata) return duelloRiservato(d.materia);
   d = aggiornaDuello(ar, d);
   if (!(d.stato === 'gioco' || (d.stato === 'aperto' && d.a === email))) return { errore: 'Il duello è chiuso.', stato: d.stato };
   const domande = domandeDuello(d);
@@ -484,6 +496,7 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   // ----- da qui serve l'account -----
   const io = await utenteCollegato(env, req).catch(() => null);
   if (!io) return json({ errore: l === 'en' ? 'Log in to take part.' : 'Accedi per partecipare.', ospite: true }, 401);
+  const materiaQuizBloccata = h.materiaQuizRiservata && !io.materie?.includes(h.materiaQuizRiservata) ? h.materiaQuizRiservata : null;
 
   if (p === '/api/lega') return json(await aDO(env, '/sfi-lega', { email: io.email, lingua: l }), 200, { 'cache-control': 'no-store' });
   if (p === '/api/lega/nome' && POST) return json(await aDO(env, '/sfi-nome', { email: io.email, soprannome: corpo.soprannome, pubblico: corpo.pubblico !== false }));
@@ -492,6 +505,7 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   const cat = await catalogoDomande(env);
   if (p === '/api/duelli/lobby' && POST) {
     const materia = materiaValida(cat, corpo.materia) ? corpo.materia : null;
+    if (corpo.cerca && materia && materia === materiaQuizBloccata) return json(duelloRiservato(materia), 403);
     const argomento = materia && cat[materia].includes(corpo.argomento) ? corpo.argomento : null;
     const domande = corpo.cerca && materia ? await scegliDomande(h, env, materia, argomento) : null;
     return json(await aDO(env, '/sfi-lobby', { email: io.email, lingua: l, materia, argomento, cerca: Boolean(corpo.cerca && materia), domande }), 200, { 'cache-control': 'no-store' });
@@ -499,6 +513,7 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   if (p === '/api/duelli/esci' && POST) return json(await aDO(env, '/sfi-esci', { email: io.email }));
   if (p === '/api/duelli/crea' && POST) {
     if (!materiaValida(cat, corpo.materia)) return json({ errore: 'Scegli una materia.' }, 400);
+    if (corpo.materia === materiaQuizBloccata) return json(duelloRiservato(corpo.materia), 403);
     const argomento = cat[corpo.materia].includes(corpo.argomento) ? corpo.argomento : null;
     const domande = await scegliDomande(h, env, corpo.materia, argomento);
     if (!domande) return json({ errore: 'Nessuna domanda per questa scelta.' }, 404);
@@ -506,7 +521,8 @@ export async function gestisciSfide(req, env, ctx, p, h) {
     return json(r, r.errore ? 400 : 200);
   }
   if (p === '/api/duelli/partita' && POST) {
-    const r = await aDO(env, '/sfi-partita', { email: io.email, lingua: l, codice: corpo.codice, unisci: Boolean(corpo.unisci), servi: Boolean(corpo.servi), accetta: corpo.accetta });
+    const r = await aDO(env, '/sfi-partita', { email: io.email, lingua: l, codice: corpo.codice, unisci: Boolean(corpo.unisci), servi: Boolean(corpo.servi), accetta: corpo.accetta, materiaQuizBloccata });
+    if (r.sblocca) return json(r, 403, { 'cache-control': 'no-store' });
     if (r.errore) return json(r, 404);
     // Testo della domanda in corso e, a duello chiuso per lo studente, spiegazioni del riepilogo.
     const dati = await domandeDi(env, r.materia, l);
@@ -523,7 +539,8 @@ export async function gestisciSfide(req, env, ctx, p, h) {
     const n = Number(corpo.n);
     if (!Number.isInteger(n) || n < 0 || n >= DUELLO.domande) return json({ errore: 'dati' }, 400);
     const scelta = Number.isInteger(corpo.scelta) ? corpo.scelta : null;
-    const r = await aDO(env, '/sfi-rispondi', { email: io.email, codice: corpo.codice, n, scelta, lingua: l, catalogo: cat });
+    const r = await aDO(env, '/sfi-rispondi', { email: io.email, codice: corpo.codice, n, scelta, lingua: l, catalogo: cat, materiaQuizBloccata });
+    if (r.sblocca) return json(r, 403, { 'cache-control': 'no-store' });
     return json(r, r.errore ? 400 : 200, { 'cache-control': 'no-store' });
   }
   return null;
