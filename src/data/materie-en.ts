@@ -192,6 +192,40 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       "regressione-e-correlazione": { titolo: "Linear regression and correlation", breve: "Regression" },
     },
   },
+  'informatica-superiori-1': {
+    titolo: 'Computer science Year 1', breve: 'Computer science Year 1',
+    descrizione: 'Computer hardware, data representation, spreadsheets and digital sources.',
+    argomenti: {},
+  },
+  'informatica-superiori-2': {
+    titolo: 'Computer science Year 2', breve: 'Computer science Year 2',
+    descrizione: 'Algorithms, conditions, loops, functions, sequences and testing.',
+    argomenti: {},
+  },
+  'informatica-superiori-3': {
+    titolo: 'Computer science Year 3', breve: 'Computer science Year 3',
+    descrizione: 'Data structures, files, classes, HTML and digital formats.',
+    argomenti: {},
+  },
+  'informatica-superiori-4': {
+    titolo: 'Computer science Year 4', breve: 'Computer science Year 4',
+    descrizione: 'Relational databases, SQL queries and a practical database project.',
+    argomenti: {},
+  },
+  'informatica-superiori-5': {
+    titolo: 'Computer science Year 5', breve: 'Computer science Year 5',
+    descrizione: 'Computer science for the final year of the Italian applied sciences secondary school track. Networks, Internet protocols, algorithms, automata, numerical methods and scientific simulations. Study materials are in Italian.',
+    argomenti: {
+      'reti-e-modelli': { titolo: 'Computer networks, Ethernet and layered models', breve: 'Networks and Ethernet' },
+      'ipv4-e-sottoreti': { titolo: 'IPv4 addressing, subnetting and gateways', breve: 'IPv4 and subnetting' },
+      'internet-e-protocolli': { titolo: 'The Internet, TCP and UDP, DNS and the Web', breve: 'Internet protocols' },
+      'complessita-algoritmi': { titolo: 'Searching, sorting and algorithmic complexity', breve: 'Algorithmic complexity' },
+      'automi-e-computabilita': { titolo: 'Automata, languages and limits of computation', breve: 'Automata and computability' },
+      'errori-e-zeri': { titolo: 'Approximation errors and root finding', breve: 'Errors and roots' },
+      'integrazione-numerica': { titolo: 'Numerical integration', breve: 'Numerical integration' },
+      'simulazione-scientifica': { titolo: 'Scientific simulations and model validation', breve: 'Scientific simulations' },
+    },
+  },
   'matematica-superiori-1': {
     titolo: 'Mathematics, 1st year',
     breve: 'Maths 1st year',
@@ -412,5 +446,5 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
   'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
 };
-export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
+export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics', 'Informatica': 'Computer science' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'Semestre filtro': 'Filter semester', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };
