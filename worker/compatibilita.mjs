@@ -11,6 +11,7 @@
 // Vale solo per gli esami universitari (src/data/compatibilita.ts).
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_COMPATIBILITA, PESI, LIMITI, MAX_PAGINE, MAX_CARATTERI_TESTO, RISPOSTE_MINIME_SUCCESSO } from '../src/data/compatibilita.ts';
+import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { trovaVoceTeoria, riferimentiNominati } from './riscontro-teoria.mjs';
 import { trovaProcedimentoStudio, trovaSchedaAnalisiDue } from './riscontro-procedimenti.mjs';
 import { riconosciMateriaCompito } from './materia-compito.mjs';
@@ -20,7 +21,6 @@ const MODELLI_TESTO = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b
 const MAX_IMMAGINE = 1500000;  // caratteri del data URL di una pagina (circa 1 MB)
 const MAX_RICHIESTE = 80;
 const VOCI_PER_GRUPPO = 14;
-const SCHEDE_LIBERE = 3;       // come in index.mjs: le prime tre schede svolte di ogni argomento sono gratuite
 const ARCHIVIO_MAX = 3000;     // confronti anonimi conservati per /admin/esami (tabella vecchia, solo lettura)
 const PAGINE_MAX = 1500;       // compiti di cui si conservano anche le immagini; dei più vecchi resta il testo
 const PARTE = 1024 * 1024;     // le immagini si salvano a pezzi da 1 MB (limite di un valore SQLite: 2 MB)
@@ -604,7 +604,7 @@ function rigaRisultato(materia, cat, codici, r, domandePer, documento) {
     esercizio: pulito(r.esercizio, 8) || '?', parte: pulito(r.parte, 4) || null, testo: pulito(r.testo, 400), tipo, livello, punti,
     puntiTipo: r.puntiTipo === 'parte' ? 'parte' : 'esercizio',
     argomento: arg ? { slug: arg.slug, titolo: arg.titolo } : null,
-    scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= SCHEDE_LIBERE, link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
+    scheda: livello === 'stesso' && scheda ? { n: scheda.n, titolo: scheda.titolo, libera: scheda.n <= schedeLibere(materia, scheda.argomento), link: `/${materia}/${scheda.argomento}/esercizi-svolti/${scheda.n}` } : null,
     voce: voce && arg ? { titolo: voce.titolo, tipo: voce.tipo, link: `/${materia}/${voce.argomento}/teoria#${voce.ancora}` } : null,
     riferimenti: procedimento?.voci?.map((v) => ({ titolo: v.titolo, link: `/${materia}/${v.argomento}/teoria#${v.ancora}` })) || [],
     teoriaLink: arg ? `/${materia}/${arg.slug}/teoria` : null,

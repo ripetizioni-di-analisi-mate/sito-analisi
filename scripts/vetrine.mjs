@@ -2,13 +2,14 @@
 //  - teoria: visibili i primi due paragrafi, poi un riquadro con i titoli dei paragrafi che mancano,
 //    che cosa c'è ancora, prezzo e schede gratuite;
 //  - esercizi da fare: traccia visibile, soluzione sostituita dall'invito.
-//  - schede svolte oltre la terza: titolo, teoria usata e tracce visibili, al posto di ogni
+//  - schede svolte riservate: titolo, teoria usata e tracce visibili, al posto di ogni
 //    svolgimento una riga che rimanda all'accesso completo, in fondo il riquadro di accesso
 //    (la fine della traccia è segnata da src/plugins/remark-tracce.mjs).
 // Il Worker serve queste varianti a chi non ha l'accesso.
 // Le materie a pagamento sono quelle elencate in src/data/prezzi.json.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { SCHEDE_LIBERE, schedeLibere } from '../src/data/schede-libere.mjs';
 
 const A_PAGAMENTO = Object.keys(JSON.parse(readFileSync(new URL('../src/data/prezzi.json', import.meta.url), 'utf8')));
 const DIST = new URL('../dist', import.meta.url).pathname;
@@ -35,7 +36,6 @@ function perMateria(file, inizio, campoTitolo, voceArgomento) {
 const DATI_IT = perMateria('../src/data/materie.ts', /^ {4}slug: '([a-z0-9-]+)',$/m, /^ {4}titolo: '([^']*)'/m, /\{ slug: '([a-z0-9-]+)', titolo: '[^']*', breve: '([^']*)' \}/g);
 const DATI_EN = perMateria('../src/data/materie-en.ts', /^ {2}'?([a-z0-9-]+)'?: \{$/m, /^ {4}titolo: '([^']*)'/m, /^ {6}'?([a-z0-9-]+)'?: \{ titolo: '[^']*', breve: '([^']*)' \}/gm);
 const BREVE_EN = nomiBrevi('../src/data/materie-en.ts', /^ {2}'?([a-z0-9-]+)'?: \{\s*titolo: '[^']*',\s*breve: '([^']*)'/gm);
-const SCHEDE_LIBERE = 3; // come in worker/index.mjs
 const contaPagine = (cartella) => (existsSync(cartella) ? readdirSync(cartella).filter((f) => /^\d+\.html$/.test(f)).length : 0);
 // Testo del titolo di un paragrafo: si tiene l'HTML interno dell'<h2> (anche le formule), senza l'eventuale ancora.
 const titoloH2 = (html, da) => html.slice(html.indexOf('>', da) + 1, html.indexOf('</h2>', da)).replace(/<a class="ancora"[\s\S]*?<\/a>/g, '').trim();
@@ -96,6 +96,7 @@ const LINGUE = [
     breve: BREVE_IT, nomi: DATI_IT.titoli, argomenti: DATI_IT.argomenti, fine: 'Fine dell’anteprima gratuita',
     titolo: (n) => (n === 1 ? 'La teoria di questo argomento continua con un altro paragrafo' : `La teoria di questo argomento continua con altri ${n} paragrafi`),
     resto: (schede, esercizi) => `Nell’accesso completo si trovano anche ${schede === 1 ? 'l’altra scheda svolta' : `le altre ${schede} schede svolte`} di questo argomento e le soluzioni dei ${esercizi} esercizi da fare.`,
+    restoAnteprimaUnica: (schede) => `L’accesso completo include ${schede === 1 ? 'la scheda svolta' : `le ${schede} schede svolte`} di questo argomento.`,
     tasto: (nome, prezzo) => `Sblocca ${nome} · ${prezzo} €`,
     gratis: (url) => `Le prime ${SCHEDE_LIBERE} schede svolte di questo argomento sono gratuite e si trovano negli <a href="${url}">esercizi svolti</a>.`,
     riservata: 'Soluzione riservata a chi ha sbloccato la materia.', soluzione: 'La soluzione completa di questo esercizio è nella versione sbloccata.',
@@ -104,11 +105,14 @@ const LINGUE = [
     schedaSopra: 'Scheda dell’accesso completo',
     schedaTitolo: (titolo) => `Le tracce sono libere, gli svolgimenti sono riservati a chi ha sbloccato ${titolo}`,
     schedaResto: (schede, argomenti, esercizi) => `Le prime ${SCHEDE_LIBERE} schede di ogni argomento sono gratuite. Con l’accesso completo ci sono tutte le ${schede} schede svolte, la teoria completa ${argomenti === 1 ? 'dell’argomento' : `dei ${argomenti} argomenti`} e le soluzioni dei ${esercizi} esercizi da fare.`,
+    schedaRestoAnteprimaUnica: (schede, argomenti) => `L’accesso completo include tutte le ${schede} schede svolte, la teoria dei ${argomenti} argomenti e tutte le domande a tempo.`,
+    schedaGratis: (arg) => `Scheda completa gratuita di ${arg} →`,
     schedeGratis: (arg) => `Le schede gratuite di ${arg} →` },
   { pref: '/en', sblocca: 'Unlock now',
     breve: BREVE_EN, nomi: DATI_EN.titoli, argomenti: DATI_EN.argomenti, fine: 'End of the free preview',
     titolo: (n) => (n === 1 ? 'The theory of this topic continues with one more section' : `The theory of this topic continues with ${n} more sections`),
     resto: (schede, esercizi) => `Full access also includes the other ${schede} worked example${schede === 1 ? '' : 's'} of this topic and the solutions of the ${esercizi} practice exercises.`,
+    restoAnteprimaUnica: (schede) => `Full access includes the ${schede === 1 ? 'worked sheet' : `${schede} worked sheets`} for this topic.`,
     tasto: (nome, prezzo) => `Unlock ${nome} · €${prezzo}`,
     gratis: (url) => `The first ${SCHEDE_LIBERE} worked examples of this topic are free and are in the <a href="${url}">worked examples</a>.`,
     riservata: 'Solution available to those who have unlocked the subject.', soluzione: 'The full solution of this exercise is in the unlocked version.',
@@ -117,6 +121,8 @@ const LINGUE = [
     schedaSopra: 'Part of full access',
     schedaTitolo: (titolo) => `The exercises are free to read, the solutions are for those who have unlocked ${titolo}`,
     schedaResto: (schede, argomenti, esercizi) => `The first ${SCHEDE_LIBERE} worked examples of each topic are free. Full access includes all ${schede} worked examples, the complete theory of the ${argomenti} topic${argomenti === 1 ? '' : 's'} and the solutions of the ${esercizi} practice exercises.`,
+    schedaRestoAnteprimaUnica: (schede, argomenti) => `Full access includes all ${schede} worked sheets, the theory for all ${argomenti} topics and all timed questions.`,
+    schedaGratis: (arg) => `Free worked sheet for ${arg} →`,
     schedeGratis: (arg) => `Free worked examples of ${arg} →` },
 ];
 let L = LINGUE[0];
@@ -133,10 +139,17 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
   const argomentiMateria = readdirSync(base).filter((a) => existsSync(join(base, a, 'teoria.html')));
   const totSchede = argomentiMateria.reduce((n, a) => n + contaPagine(join(base, a, 'esercizi-svolti')), 0);
   const totDaFare = argomentiMateria.reduce((n, a) => n + contaPagine(join(base, a, 'esercizi')), 0);
+  const anteprimaUnica = argomentiMateria.some((a) => schedeLibere(materia, a) === 0);
+  const argomentoGratis = anteprimaUnica && argomentiMateria.find((a) => schedeLibere(materia, a) > 0 && existsSync(join(base, a, 'esercizi-svolti', '1.html')));
+  const linkSchedaGratis = argomentoGratis
+    ? `<p class="velo-gratis"><a href="${L.pref}/${materia}/${argomentoGratis}/esercizi-svolti/1">${L.schedaGratis(L.argomenti[materia]?.[argomentoGratis] || argomentoGratis)}</a></p>`
+    : '';
   for (const argomento of readdirSync(base)) {
     const cartella = join(base, argomento);
     if (!existsSync(join(cartella, 'teoria.html'))) continue;
     const dest = join(DIST, 'vetrine', L.pref, materia, argomento);
+    const cartellaSv = join(cartella, 'esercizi-svolti');
+    const libere = schedeLibere(materia, argomento);
     mkdirSync(join(dest, 'esercizi'), { recursive: true });
 
     // --- teoria a metà ---
@@ -152,14 +165,18 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       if (coda === -1) coda = t.indexOf('<script', taglio);
       const nascoste = posizioni.length - tenute;
       const voci = posizioni.slice(tenute).map((m2) => `<li>${titoloH2(t, m2.index)}</li>`).join('');
-      const schede = Math.max(0, contaPagine(join(cartella, 'esercizi-svolti')) - SCHEDE_LIBERE);
+      const nSchede = contaPagine(cartellaSv);
+      const schede = Math.max(0, nSchede - libere);
       const daFare = contaPagine(join(cartella, 'esercizi'));
       const nome = L.breve[materia] || materia;
+      const resto = anteprimaUnica ? (schede ? L.restoAnteprimaUnica(schede) : '') : L.resto(schede, daFare);
+      const schedeGratis = anteprimaUnica ? linkSchedaGratis
+        : nSchede > 0 ? `<p class="velo-gratis">${L.gratis(`${L.pref}/${materia}/${argomento}/esercizi-svolti`)}</p>` : '';
       const invito = `<div class="velo-blocco fine-anteprima"><p class="velo-sopra">${L.fine}</p><p class="velo-titolo">${L.titolo(nascoste)}</p>`
         + `<ol class="velo-elenco" start="${tenute + 1}">${voci}</ol>`
-        + `<p>${L.resto(schede, daFare)}</p>`
+        + (resto ? `<p>${resto}</p>` : '')
         + `<a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.tasto(nome, PREZZI[materia])}</a>`
-        + (schede > 0 || contaPagine(join(cartella, 'esercizi-svolti')) > 0 ? `<p class="velo-gratis">${L.gratis(`${L.pref}/${materia}/${argomento}/esercizi-svolti`)}</p>` : '')
+        + schedeGratis
         + `</div>`;
       let vetrina = t.slice(0, taglio) + invito + t.slice(coda);
       // nel riquadro "In questa pagina" restano solo i paragrafi visibili
@@ -170,11 +187,10 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
     }
 
     // --- schede svolte oltre le gratuite: tracce visibili, svolgimenti tolti ---
-    const cartellaSv = join(cartella, 'esercizi-svolti');
     if (existsSync(cartellaSv)) {
       mkdirSync(join(dest, 'esercizi-svolti'), { recursive: true });
       for (const f of readdirSync(cartellaSv)) {
-        if (!/^\d+\.html$/.test(f) || parseInt(f, 10) <= SCHEDE_LIBERE) continue;
+        if (!/^\d+\.html$/.test(f) || parseInt(f, 10) <= libere) continue;
         const h = readFileSync(join(cartellaSv, f), 'utf8');
         const apre = h.indexOf('<div class="testo-studio">');
         const chiude = apre === -1 ? -1 : fineDiv(h, apre);
@@ -190,11 +206,14 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
         }).join('');
         if (mancanti) problemi.push(`${L.pref}/${materia}/${argomento}/esercizi-svolti/${f}: ${mancanti} esercizi senza segno di fine traccia (mostrato solo il titolo)`);
         const nomeArg = L.argomenti[materia]?.[argomento] || argomento;
+        const resto = anteprimaUnica ? L.schedaRestoAnteprimaUnica(totSchede, argomentiMateria.length) : L.schedaResto(totSchede, argomentiMateria.length, totDaFare);
+        const schedeGratis = anteprimaUnica ? linkSchedaGratis
+          : `<p class="velo-gratis"><a href="${L.pref}/${materia}/${argomento}/esercizi-svolti/1">${L.schedeGratis(nomeArg)}</a></p>`;
         const riquadro = `<div class="velo-blocco fine-anteprima velo-scheda"><p class="velo-sopra">${L.schedaSopra}</p>`
           + `<p class="velo-titolo">${L.schedaTitolo(L.nomi[materia] || materia)}</p>`
-          + `<p>${L.schedaResto(totSchede, argomentiMateria.length, totDaFare)}</p>`
+          + `<p>${resto}</p>`
           + `<a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.tasto(L.breve[materia] || materia, PREZZI[materia])}</a>`
-          + `<p class="velo-gratis"><a href="${L.pref}/${materia}/${argomento}/esercizi-svolti/1">${L.schedeGratis(nomeArg)}</a></p>`
+          + schedeGratis
           + `</div>`;
         const vetrina = `${h.slice(0, apre)}<div class="testo-studio">${ridotto}</div>${riquadro}${h.slice(chiude + 6)}`;
         writeFileSync(join(dest, 'esercizi-svolti', f), vetrina);

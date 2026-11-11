@@ -14,6 +14,9 @@ const t = T(lingua);
 const m = materiaL(lingua, materia);
 const svolti = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
 const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const scienza = materia === 'scienza-delle-costruzioni';
+const domande = scienza ? (await getCollection('domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
+const en = lingua === 'en';
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
 
@@ -41,9 +44,11 @@ const invito = lingua === 'en' ? {
   <ul class="cosa-include">
     <li set:html={t.includeTeoria(m.argomenti.length)} />
     <li set:html={t.includeSvolti(svolti)} />
-    <li set:html={t.includeSoluzioni(dafare)} />
+    {scienza ? <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li> : <li set:html={t.includeSoluzioni(dafare)} />}
   </ul>
-  <p class="gratis-ora">{t.gratisOra}</p>
+  <p class="gratis-ora">{scienza ? (en
+    ? 'Free preview without an account. Read the beginning of each topic, open one sheet of worked examples and try one question per topic.'
+    : 'Senza account puoi leggere l’inizio di ogni argomento, consultare una scheda svolta e provare una domanda per argomento.') : t.gratisOra}</p>
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
