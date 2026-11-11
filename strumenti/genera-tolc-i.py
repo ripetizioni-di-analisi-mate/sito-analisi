@@ -432,7 +432,7 @@ Leggi: «Un'indagine rileva che i pendolari che usano la bicicletta dichiarano m
 ''')
 
 chapter('inglese', 'Inglese per il TOLC-I',
-'Tempi verbali, domande, pronomi, preposizioni, confronti e lessico in trenta quiz commentati.', r'''
+'Tempi verbali, domande, pronomi, preposizioni, confronti e lessico, con quiz commentati.', r'''
 La sezione di inglese segue le quattro sezioni principali e ha un punteggio separato. Allena la lettura della frase completa: un avverbio di tempo, il soggetto o una preposizione possono determinare la risposta corretta.
 
 ## Presente semplice e progressivo
@@ -497,7 +497,7 @@ Completa: «You should ___ a short break».|take|to take|taking|takes|took|Dopo 
 Completa: «___ did you arrive? At eight».|When|Who|Whose|Which book|How many|La risposta fornisce un orario, quindi la domanda deve riguardare il tempo. When significa quando.
 Completa: «I was tired, ___ I finished the exercise».|but|because of|although of|unless to|despite of|Le due proposizioni sono in contrasto: nonostante la stanchezza, l'esercizio è stato finito. But collega correttamente due proposizioni autonome.
 Nel messaggio «The library will close at 6 p.m. today», che cosa indica library?|Biblioteca|Libreria commerciale|Laboratorio|Aula di informatica|Libretto universitario|Library significa biblioteca. Il messaggio comunica l'orario di chiusura della biblioteca, non quello di un negozio di libri.
-Leggi: «The train leaves at 8:15. Please arrive ten minutes early». A che ora viene chiesto di arrivare?|8:05|8:25|8:15|7:15|8:10|Ten minutes early significa dieci minuti prima. Sottraendo dieci minuti dalle 8:15 si ottengono le 8:05.
+Leggi: «The train leaves at 8\:15. Please arrive ten minutes early». A che ora viene chiesto di arrivare?|8\:05|8\:25|8\:15|7\:15|8\:10|Ten minutes early significa dieci minuti prima. Sottraendo dieci minuti dalle 8\:15 si ottengono le 8\:05.
 Completa: «I have never ___ to London».|been|went|go|being|was|Il present perfect richiede have seguito dal participio passato. Per indicare l'esperienza di una visita si usa been.
 Completa: «There ___ two books on the desk».|are|is|was|has|be|Two books è plurale e la frase è al presente. La struttura esistenziale richiede there are.
 Completa: «We went home ___ the lesson».|after|during of|while to|until of|at to|After seguito dal nome the lesson esprime posteriorità: siamo andati a casa dopo la lezione. Le altre sequenze non sono grammaticali nel contesto.
