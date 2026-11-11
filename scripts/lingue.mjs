@@ -1,9 +1,10 @@
-// Dopo la build: elenco delle pagine italiane che hanno una vera versione inglese.
+// Dopo la build: elenco delle pagine italiane con una versione tradotta.
 // Il Worker lo usa per aprire subito la pagina nella lingua del visitatore (worker/lingua.mjs).
 // Una pagina inglese conta solo se è tradotta: le pagine che mostrano l'italiano con l'avviso
 // «This page is not yet available in English» (classe avviso-lingua) restano fuori.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { LINGUE_TRADOTTE } from '../src/data/codici-lingua.mjs';
 
 const DIST = new URL('../dist', import.meta.url).pathname;
 
@@ -21,7 +22,7 @@ function giro(cartella, rel, tradotte) {
 }
 
 const elenco = {};
-for (const lingua of ['en', 'de']) {
+for (const lingua of LINGUE_TRADOTTE) {
   const tradotte = [];
   const cartella = join(DIST, lingua);
   if (existsSync(cartella)) giro(cartella, '', tradotte);

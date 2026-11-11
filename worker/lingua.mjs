@@ -1,3 +1,5 @@
+import { CODICI_LINGUA, LINGUE_CATALOGO, LINGUE_TRADOTTE, prefissoLingua } from '../src/data/codici-lingua.mjs';
+
 // Preferenza esplicita nel cookie, altrimenti lingua del browser.
 // Il Worker reindirizza solo a pagine presenti nell'indice di build.
 const NON_PERSONE = /bot|crawl|spider|slurp|preview|facebookexternalhit|meta-externalagent|headless|lighthouse|curl|wget|python|httpclient|google-|mediapartners|apis-google|feedfetcher|validator|monitor/i;
@@ -13,7 +15,7 @@ async function pagineTradotte(env) {
     const dati = await r.json();
     // I primi build pubblicavano direttamente l'elenco inglese.
     const perLingua = Array.isArray(dati) ? { en: dati } : dati;
-    elenco = Object.fromEntries(['en', 'de'].map((l) => [l, new Set(perLingua[l] ?? [])]));
+    elenco = Object.fromEntries(LINGUE_TRADOTTE.map((l) => [l, new Set(perLingua[l] ?? [])]));
     return elenco;
   } catch { return {}; }
 }
@@ -47,21 +49,21 @@ export async function versoLaLinguaGiusta(req, env, url) {
 
   const scelta = leggiCookie(req, 'lingua');
   const browser = linguaBrowser(req.headers.get('accept-language'));
-  const voluta = ['it', 'en', 'de'].includes(scelta) ? scelta
-    : browser === 'it' || browser === 'de' ? browser : browser ? 'en' : null;
+  const sceltaEsplicita = CODICI_LINGUA.includes(scelta);
+  const voluta = sceltaEsplicita ? scelta : CODICI_LINGUA.includes(browser) ? browser : browser ? 'en' : null;
   if (!voluta) return null;
 
-  const prefisso = percorso.match(/^\/(en|de)(?=\/|$)/)?.[0] ?? '';
+  const prefisso = prefissoLingua(percorso);
   const corrente = prefisso.slice(1) || 'it';
   if (corrente === voluta) return null;
   const italiano = percorso.slice(prefisso.length) || '/';
   if (ESCLUSI.test(italiano)) return null;
   const tradotte = await pagineTradotte(env);
-  // Un link tedesco aperto direttamente resta in tedesco se non è stata impostata una lingua.
-  if (corrente === 'de' && (!tradotte.de?.has(italiano) || !['it', 'en'].includes(scelta))) return null;
+  // Un link a un catalogo tradotto mantiene la lingua in assenza di una scelta esplicita.
+  if (LINGUE_CATALOGO.includes(corrente) && (!tradotte[corrente]?.has(italiano) || !sceltaEsplicita)) return null;
   const disponibile = (lingua) => lingua === 'it' || tradotte[lingua]?.has(italiano);
-  // Il tedesco è disponibile solo sulle pagine già localizzate. Altrove resta il comportamento IT/EN.
-  const lingua = disponibile(voluta) ? voluta : voluta === 'de' && corrente === 'it' && disponibile('en') ? 'en' : corrente;
+  // I cataloghi tradotti sono disponibili soltanto sulle pagine localizzate.
+  const lingua = disponibile(voluta) ? voluta : LINGUE_CATALOGO.includes(voluta) && corrente === 'it' && disponibile('en') ? 'en' : corrente;
   if (lingua === corrente || (corrente === 'en' && lingua === 'it' && !tradotte.en?.has(italiano))) return null;
 
   const meta = new URL(url);

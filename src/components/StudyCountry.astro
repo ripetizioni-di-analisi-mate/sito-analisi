@@ -1,11 +1,13 @@
 ---
 import type { Lingua } from '../i18n';
 import { CATALOGHI_STUDIO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
+import { linguaCatalogo } from '../lib/lingue-sito';
 import { url } from '../lib/url';
 
 interface Props { lingua: Lingua; corrente: keyof typeof CATALOGHI_STUDIO }
 const { lingua, corrente } = Astro.props;
-const titolo = lingua === 'de' ? 'Wo studierst du?' : lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
+const localizzato = linguaCatalogo(lingua);
+const titolo = lingua === 'es' ? '¿Dónde estudias?' : lingua === 'de' ? 'Wo studierst du?' : lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
 const paesi = Object.entries(CATALOGHI_STUDIO)
   .sort(([, a], [, b]) => a[lingua].localeCompare(b[lingua], lingua));
 ---
@@ -16,7 +18,7 @@ const paesi = Object.entries(CATALOGHI_STUDIO)
   </summary>
   <ul aria-label={titolo}>
     {paesi.map(([codice, paese]) => (
-      <li><a href={`${url(lingua === 'de' && codice === 'IT' ? '/de' : paese.percorso)}?${PARAMETRO_CATALOGO}=${codice}${lingua === 'de' && codice === 'IT' ? '&lingua=de' : ''}`} aria-current={codice === corrente ? 'true' : undefined}>{paese[lingua]}</a></li>
+      <li><a href={`${url(localizzato && codice === 'IT' ? `/${lingua}` : paese.percorso)}?${PARAMETRO_CATALOGO}=${codice}${localizzato && codice === 'IT' ? `&lingua=${lingua}` : ''}`} aria-current={codice === corrente ? 'true' : undefined}>{paese[lingua]}</a></li>
     ))}
   </ul>
 </details>

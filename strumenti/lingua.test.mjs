@@ -5,6 +5,7 @@ import { linguaBrowser, versoLaLinguaGiusta } from '../worker/lingua.mjs';
 
 const env = { ASSETS: { fetch: () => Response.json({
   de: ['/', '/analisi-1', '/fisica-zero/lavoro-ed-energia/teoria'],
+  es: ['/', '/analisi-1', '/fisica-zero/lavoro-ed-energia/teoria'],
   en: ['/', '/analisi-1', '/analisi-1/limiti/teoria'],
 }) } };
 
@@ -26,6 +27,20 @@ test('il tedesco si apre soltanto per pagine presenti e conserva i parametri', a
   assert.equal(await destinazione('/fisica-zero/lavoro-ed-energia/teoria'), '/de/fisica-zero/lavoro-ed-energia/teoria');
   assert.equal(await destinazione('/analisi-1/limiti/teoria'), '/en/analisi-1/limiti/teoria');
   assert.equal(await destinazione('/prenota'), null);
+});
+
+test('lo spagnolo rispetta la disponibilità del materiale e la scelta esplicita', async () => {
+  const spagnolo = { lingua: 'es-MX,es;q=0.9,en;q=0.8' };
+  assert.equal(linguaBrowser('es-419;q=0.9,de;q=0.8'), 'es');
+  assert.equal(await destinazione('/', spagnolo), '/es');
+  assert.equal(await destinazione('/analisi-1?ref=prova', spagnolo), '/es/analisi-1?ref=prova');
+  assert.equal(await destinazione('/fisica-zero/lavoro-ed-energia/teoria', spagnolo), '/es/fisica-zero/lavoro-ed-energia/teoria');
+  assert.equal(await destinazione('/analisi-1/limiti/teoria', spagnolo), '/en/analisi-1/limiti/teoria');
+  assert.equal(await destinazione('/analisi-1/limiti/teoria?lingua=it', spagnolo), null);
+  assert.equal(await destinazione('/argomento-inesistente', spagnolo), null);
+  assert.equal(await destinazione('/es', { lingua: 'it-IT' }), null);
+  assert.equal(await destinazione('/es/analisi-1?lingua=es', { cookie: 'lingua=de' }), null);
+  assert.equal(await destinazione('/de/analisi-1', { cookie: 'lingua=es' }), '/es/analisi-1');
 });
 
 test('i link diretti e le scelte esplicite funzionano in tutte le lingue', async () => {
@@ -50,6 +65,7 @@ test('i robot, gli asset e le API non vengono reindirizzati', async () => {
 test('la scelta di un catalogo conserva la lingua compatibile', () => {
   for (const [path, attesa] of [
     ['/de?catalogo=IT&lingua=de', '/de?lingua=de'],
+    ['/es?catalogo=IT&lingua=es', '/es?lingua=es'],
     ['/en?catalogo=IT&lingua=en', '/en?lingua=en'],
     ['/us?catalogo=US', '/us'],
   ]) {

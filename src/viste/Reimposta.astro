@@ -33,7 +33,7 @@ const pref = prefisso(lingua);
         esito.textContent = t; esito.className = 'esito-modulo errore';
         if (scaduto) { document.getElementById('nuovo-link').hidden = false; modulo.password.disabled = true; invia.hidden = true; }
       };
-      if (!token) errore(lingua === 'de' ? 'Dieser Link ist unvollständig. Fordere auf der Anmeldeseite einen neuen Link an.' : pref ? 'This link is incomplete. Request a new one from the login page.' : 'Il link è incompleto. Chiedine uno nuovo dalla pagina di accesso.', true);
+      if (!token) errore(lingua === 'es' ? 'Este enlace está incompleto. Solicita uno nuevo en la página de acceso.' : lingua === 'de' ? 'Dieser Link ist unvollständig. Fordere auf der Anmeldeseite einen neuen Link an.' : pref ? 'This link is incomplete. Request a new one from the login page.' : 'Il link è incompleto. Chiedine uno nuovo dalla pagina di accesso.', true);
       modulo.addEventListener('submit', async (e) => {
         e.preventDefault();
         const password = modulo.password.value;

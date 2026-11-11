@@ -1,7 +1,8 @@
 ---
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import { GRUPPI_DE } from '../data/materie-de';
-import { inTedesco } from '../lib/lingue-sito';
+import { GRUPPI_ES } from '../data/materie-es';
+import { linguaCatalogo, paginaLocalizzata } from '../lib/lingue-sito';
 import Stato from './Stato.astro';
 import { url } from '../lib/url';
 import { blocchiUsa, gruppiUsa, materieUsa, materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
@@ -21,7 +22,9 @@ const t = T(lingua);
 const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const de = lingua === 'de';
-const MATERIE = usa ? materieUsa : materieL(lingua).filter((x) => !de || !x.attiva || inTedesco(`/${x.slug}`));
+const es = lingua === 'es';
+const localizzato = linguaCatalogo(lingua);
+const MATERIE = usa ? materieUsa : materieL(lingua).filter((x) => !localizzato || !x.attiva || paginaLocalizzata(lingua, `/${x.slug}`));
 const home = usa ? url('/us') : link(lingua, '/');
 const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, '/' + slug);
 const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgomentoUsa(slug, arg, sez) : link(lingua, '/' + slug + '/' + arg + '/' + sez);
@@ -38,7 +41,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   </div>
   <form class="indice-cerca" role="search" action={usa ? url('/us') : link(lingua, '/cerca')} data-us-search={usa || undefined} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
-    <input type="search" name="q" aria-label={t.cerca} placeholder={de ? 'Thema suchen …' : lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
+    <input type="search" name="q" aria-label={t.cerca} placeholder={es ? 'Buscar un tema…' : de ? 'Thema suchen …' : lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>
   {lingua === 'it' && <LezioniCarmine dove="indice" />}
   {/* «Compatibilità con il tuo esame» (versione B scelta da Carmine il 04/11) */}
@@ -61,19 +64,19 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       <span data-luccichio-bronzo>Pacchetti e sconti</span>
     </a>
   )}
-  {de && <div class="lezioni-indice">
-    <p class="indice-materia"><span>Unterricht und Prüfungsvorbereitung</span></p>
+  {localizzato && <div class="lezioni-indice">
+    <p class="indice-materia"><span>{es ? 'Clases y preparación de exámenes' : 'Unterricht und Prüfungsvorbereitung'}</span></p>
     <ol class="indice-materie">
-      <li><a class="voce-materia" href="/prenota?lingua=it" hreflang="it">Einzelunterricht (Italienisch)</a></li>
-      <li><a class="voce-materia" href="/corsi-di-gruppo?lingua=it" hreflang="it">Gruppenkurse (Italienisch)</a></li>
-      <li><a class="voce-materia" href="/compatibilita?lingua=it" hreflang="it">Prüfungsstoff abgleichen (Italienisch)</a></li>
-      <li><a class="voce-materia" href="/videocorsi?lingua=it" hreflang="it">Videokurse (Italienisch)</a></li>
-      <li><a class="voce-materia" href="/pacchetti?lingua=it" hreflang="it">Pakete und Rabatte (Italienisch)</a></li>
+      <li><a class="voce-materia" href="/prenota?lingua=it" hreflang="it">{es ? 'Clases individuales (en italiano)' : 'Einzelunterricht (Italienisch)'}</a></li>
+      <li><a class="voce-materia" href="/corsi-di-gruppo?lingua=it" hreflang="it">{es ? 'Clases en grupo (en italiano)' : 'Gruppenkurse (Italienisch)'}</a></li>
+      <li><a class="voce-materia" href="/compatibilita?lingua=it" hreflang="it">{es ? 'Comprobar el temario de tu examen (en italiano)' : 'Prüfungsstoff abgleichen (Italienisch)'}</a></li>
+      <li><a class="voce-materia" href="/videocorsi?lingua=it" hreflang="it">{es ? 'Videocursos (en italiano)' : 'Videokurse (Italienisch)'}</a></li>
+      <li><a class="voce-materia" href="/pacchetti?lingua=it" hreflang="it">{es ? 'Paquetes y descuentos (en italiano)' : 'Pakete und Rabatte (Italienisch)'}</a></li>
     </ol>
   </div>}
-  {m && de ? (
+  {m && localizzato ? (
     <>
-      <p class="indice-materia indice-materia-corrente"><a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a><a class="cambia-materia" href={link(lingua, '/')}>Alle Fächer</a></p>
+      <p class="indice-materia indice-materia-corrente"><a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a><a class="cambia-materia" href={link(lingua, '/')}>{es ? 'Todas las asignaturas' : 'Alle Fächer'}</a></p>
       <ol class="indice-materie">
         {m.argomenti.map((a) => <li><a class="voce-materia" href={link(lingua, `/${m.slug}#${a.slug}`)}>{a.titolo}</a></li>)}
       </ol>
@@ -131,9 +134,9 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     </>
   ) : (
     <>
-      <p class="indice-percorsi-titolo">{de ? 'Wähle deinen Lernbereich' : lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
+      <p class="indice-percorsi-titolo">{es ? 'Elige tu itinerario' : de ? 'Wähle deinen Lernbereich' : lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
       {(usa ? gruppiUsa : gruppiL(lingua)).map((g) => (
-        <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori].includes(g) }]}>
+        <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori, GRUPPI_ES.Università, GRUPPI_ES.Superiori].includes(g) }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {usa && g === highSchoolName && <p><a href={url(highSchoolPath)}>High school catalog</a></p>}
           {lingua === 'it' && g === 'Concorsi' && (

@@ -1,4 +1,5 @@
 import { nomiAllenamento } from './allenamento.mjs';
+import { LINGUE_CATALOGO } from '../data/codici-lingua.mjs';
 
 // Le quattro sezioni dello stesso argomento rimangono raggiungibili anche
 // nelle singole schede, senza confonderle con il capitolo successivo.
@@ -21,7 +22,7 @@ export function creaCatalogoStudio(materie, domande, lingua = 'it') {
     titolo: m.titolo,
     argomenti: m.argomenti.map((a) => a.slug),
     domande: domande[m.slug] || [],
-    ...(lingua === 'de' ? { titoli: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.titolo])) } : {}),
+    ...(LINGUE_CATALOGO.includes(lingua) ? { titoli: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.titolo])) } : {}),
     ripasso: nomiAllenamento(m, lingua).ripasso,
   }]));
 }
@@ -36,7 +37,8 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   const m = catalogo[sessione.materia];
   const base = m.base || `${lingua === 'en' ? '/en' : ''}/${sessione.materia}`;
   const a = sessione.argomento;
-  if (!a) return { href: lingua === 'de' ? `/de${base}` : base, domande: null, titolo: m.titolo, materia: m.titolo };
+  const localizzato = LINGUE_CATALOGO.includes(lingua) && !m.base;
+  if (!a) return { href: localizzato ? `/${lingua}${base}` : base, domande: null, titolo: m.titolo, materia: m.titolo };
   const ripasso = a === 'prove-d-esame' || a === 'ripasso-di-oggi';
   if (ripasso) {
     if (!m.domande.length) return null;
@@ -46,7 +48,7 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
     return { href, domande: href, titolo, materia: m.titolo };
   }
   if (!m.argomenti.includes(a)) return null;
-  if (lingua === 'de') return { href: `/de/${sessione.materia}#${a}`, domande: null, titolo: m.titoli[a], materia: m.titolo };
+  if (localizzato) return { href: `/${lingua}/${sessione.materia}#${a}`, domande: null, titolo: m.titoli?.[a] || m.titolo, materia: m.titolo };
   return {
     href: m.base ? `${base}#${a}` : `${base}/${a}/teoria`,
     domande: m.domande.includes(a) ? `${base}/${a}/domande` : null,

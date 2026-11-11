@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { inTedesco } from '../lib/lingue-sito';
+import { linguaCatalogo, paginaLocalizzata } from '../lib/lingue-sito';
 import { materieL, T, type Lingua } from '../i18n';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { MATERIE_GRUPPI } from '../data/gruppi';
@@ -10,7 +10,18 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const de = lingua === 'de';
-const x = de ? {
+const es = lingua === 'es';
+const localizzato = linguaCatalogo(lingua);
+const x = es ? {
+  parola: 'Tema o palabra clave', materia: 'Asignatura', tutteMaterie: 'Todas las asignaturas', tipo: 'Contenido', tuttiTipi: 'Todos los contenidos',
+  corsi: 'Asignaturas y cursos', argomenti: 'Temas', esercizi: 'Ejercicios y preguntas', videocorsi: 'Videocursos',
+  filtri: 'Filtros de búsqueda', togliFiltri: 'Quitar filtros', inizio: 'Escribe una palabra clave o elige una asignatura.',
+  sommario: 'Busca una asignatura o un tema y consulta los materiales en los idiomas disponibles.',
+  breve: 'Escribe al menos dos letras o un número.', caricamento: 'Cargando el índice de búsqueda…',
+  errore: 'No se pudo cargar la búsqueda. Comprueba la conexión y vuelve a intentarlo.', riprova: 'Volver a intentar',
+  nessuno: 'Sin resultados. Prueba con una palabra más corta o cambia los filtros.', uno: '1 resultado', risultati: '§ resultados',
+  suggerimento: '¿Quieres buscar', altri: 'Ver § resultados más', senzaJs: 'Activa JavaScript en tu navegador para usar la búsqueda.',
+} : de ? {
   parola: 'Thema oder Stichwort', materia: 'Fach', tutteMaterie: 'Alle Fächer', tipo: 'Inhalt', tuttiTipi: 'Alle Inhalte',
   corsi: 'Fächer und Kurse', argomenti: 'Themen', esercizi: 'Aufgaben und Quiz', videocorsi: 'Videokurse',
   filtri: 'Suchfilter', togliFiltri: 'Filter zurücksetzen', inizio: 'Gib ein Stichwort ein oder wähle ein Fach.',
@@ -39,8 +50,8 @@ const x = de ? {
   suggerimento: 'Prova con', altri: 'Mostra altri §', senzaJs: 'Per usare la ricerca occorre attivare JavaScript nel browser.',
 };
 const gruppi = [{ c: 'corsi', titolo: x.corsi, max: 5 }, { c: 'argomenti', titolo: x.argomenti, max: 8 },
-  ...(!de ? [{ c: 'esercizi', titolo: x.esercizi, max: 8 }] : []), ...(lingua === 'it' ? [{ c: 'videocorsi', titolo: x.videocorsi, max: 5 }] : [])];
-const materie = materieL(lingua).filter((m) => m.attiva && (!de || inTedesco(`/${m.slug}`)));
+  ...(!localizzato ? [{ c: 'esercizi', titolo: x.esercizi, max: 8 }] : []), ...(lingua === 'it' ? [{ c: 'videocorsi', titolo: x.videocorsi, max: 5 }] : [])];
+const materie = materieL(lingua).filter((m) => m.attiva && (!localizzato || paginaLocalizzata(lingua, `/${m.slug}`)));
 const video = Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, v.sblocca]));
 const concorsi = materie.filter((m) => m.gruppo === 'Concorsi').map((m) => m.slug);
 const collegamenti = lingua === 'it' ? {
@@ -225,7 +236,7 @@ const collegamenti = lingua === 'it' ? {
       const controller = new AbortController();
       const limite = setTimeout(() => controller.abort(), 15000);
       try {
-        const prefisso = location.pathname.match(/^\/(en|de)(?=\/|$)/)?.[0] ?? '';
+        const prefisso = location.pathname.match(/^\/(en|de|es)(?=\/|$)/)?.[0] ?? '';
         const percorso = `${prefisso}/indice-ricerca.json`;
         const risposta = await fetch(percorso, { signal: controller.signal });
         if (!risposta.ok) throw new Error('Indice non disponibile');

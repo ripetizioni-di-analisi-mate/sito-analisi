@@ -22,7 +22,7 @@ ${scheda.nota ? `<div style="font-size:13px;color:#59645f;margin-top:4px">${esc(
 </td></tr></table>` : '';
   const bottone = pulsante ? `<table role="presentation" cellspacing="0" cellpadding="0" style="margin:3px 0 17px"><tr><td bgcolor="#214f50" style="border-radius:8px"><a href="${esc(pulsante[1])}" style="display:inline-block;background:#214f50;color:#fff;border:1px solid #214f50;border-radius:8px;text-decoration:none;padding:11px 16px;font:700 14px Arial,sans-serif">${esc(pulsante[0])}</a></td></tr></table>` : '';
   const piede = motivo || disattiva ? `<tr><td style="padding:0 24px 20px"><div style="padding-top:12px;border-top:1px solid #e1dcd2;color:#59645f;font:12px/1.55 Arial,sans-serif">${esc(motivo)}${disattiva ? ` <a href="${esc(disattiva[1])}" style="color:#214f50;text-decoration:underline">${esc(disattiva[0])}</a>.` : ''}</div></td></tr>` : '';
-  const html = `<!doctype html><html lang="${lingua === 'de' ? 'de' : lingua === 'en' ? 'en' : 'it'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
+  const html = `<!doctype html><html lang="${['de', 'es', 'en'].includes(lingua) ? lingua : 'it'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"></head>
 <body style="margin:0;background:#faf9f6;color:#23302e">
 <div style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;mso-hide:all">${esc(anteprima || titolo)}</div>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background:#faf9f6"><tr><td align="center" style="padding:16px 10px">

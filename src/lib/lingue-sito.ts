@@ -1,32 +1,55 @@
 import { MATERIE } from '../data/materie';
-import { MATERIE_DE } from '../data/materie-de';
+import { MATERIE_DE, ARGOMENTI_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from '../data/materie-de';
+import { MATERIE_ES, ARGOMENTI_ES, GRUPPI_ES, SOTTOGRUPPI_ES } from '../data/materie-es';
+import { CODICI_LINGUA, LINGUE_CATALOGO, prefissoLingua } from '../data/codici-lingua.mjs';
 
-export type Lingua = 'it' | 'en' | 'de';
+export type Lingua = (typeof CODICI_LINGUA)[number];
+export type LinguaCatalogo = (typeof LINGUE_CATALOGO)[number];
 
 export const LINGUE: { codice: Lingua; nome: string }[] = [
   { codice: 'it', nome: 'Italiano' },
   { codice: 'en', nome: 'English' },
   { codice: 'de', nome: 'Deutsch' },
+  { codice: 'es', nome: 'Español' },
 ];
 
-export const LOCALE = { it: 'it_IT', en: 'en_US', de: 'de_DE' };
-export const senzaLingua = (path: string) => path.replace(/\/(?:index\.html)$/, '/').replace(/\.html$/, '').replace(/^\/(en|de)(?=\/|$)/, '').replace(/\/$/, '') || '/';
+export const LOCALE = { it: 'it_IT', en: 'en_US', de: 'de_DE', es: 'es_ES' };
+
+export function linguaCatalogo(lingua: Lingua): lingua is LinguaCatalogo {
+  return (LINGUE_CATALOGO as readonly Lingua[]).includes(lingua);
+}
+
+export function senzaLingua(path: string) {
+  const normalizzato = path.replace(/\/(?:index\.html)$/, '/').replace(/\.html$/, '').replace(/\/$/, '');
+  return normalizzato.slice(prefissoLingua(normalizzato).length) || '/';
+}
+
 export const nellaLingua = (lingua: Lingua, path: string) => lingua === 'it' ? path : `/${lingua}${path === '/' ? '' : path}`;
 
-const lezioniDe = ['/fisica-zero/lavoro-ed-energia/teoria'];
-const pagineDe = new Set([
-  ...lezioniDe.filter((path) => MATERIE.some((m) => m.attiva && m.slug === path.split('/')[1])),
-  '/', '/cerca', '/chi-sono', '/contatti', '/prezzi', '/accedi', '/account', '/reimposta-password',
-  ...MATERIE.filter((m) => m.attiva && Object.hasOwn(MATERIE_DE, m.slug)).map((m) => `/${m.slug}`),
-]);
+export const CATALOGHI_LOCALIZZATI = {
+  de: { materie: MATERIE_DE, argomenti: ARGOMENTI_DE, gruppi: GRUPPI_DE, sottogruppi: SOTTOGRUPPI_DE },
+  es: { materie: MATERIE_ES, argomenti: ARGOMENTI_ES, gruppi: GRUPPI_ES, sottogruppi: SOTTOGRUPPI_ES },
+};
 
-export const inTedesco = (path: string) => pagineDe.has(path);
+const pagineComuni = ['/', '/cerca', '/chi-sono', '/contatti', '/prezzi', '/accedi', '/account', '/reimposta-password'];
+const lezioni: Record<LinguaCatalogo, string[]> = {
+  de: ['/fisica-zero/lavoro-ed-energia/teoria'],
+  es: ['/fisica-zero/lavoro-ed-energia/teoria'],
+};
+const pagine = Object.fromEntries(LINGUE_CATALOGO.map((lingua) => [lingua, new Set([
+  ...pagineComuni,
+  ...lezioni[lingua].filter((path) => MATERIE.some((m) => m.attiva && m.slug === path.split('/')[1])),
+  ...MATERIE.filter((m) => m.attiva && Object.hasOwn(CATALOGHI_LOCALIZZATI[lingua].materie, m.slug)).map((m) => `/${m.slug}`),
+])])) as Record<LinguaCatalogo, Set<string>>;
+
+export const paginaLocalizzata = (lingua: LinguaCatalogo, path: string) => pagine[lingua].has(path);
+export const lingueLocalizzate = (path: string) => LINGUE_CATALOGO.filter((lingua) => paginaLocalizzata(lingua, path));
 
 // Una pagina priva di traduzione porta all'argomento o al corso corrispondente nel catalogo.
-export function destinazioneTedesca(path: string) {
-  if (inTedesco(path)) return nellaLingua('de', path);
+export function destinazioneLocalizzata(lingua: LinguaCatalogo, path: string) {
+  if (paginaLocalizzata(lingua, path)) return nellaLingua(lingua, path);
   const [, materia, argomento] = path.split('/');
   const m = MATERIE.find((x) => x.slug === materia);
-  if (!m || !inTedesco(`/${materia}`)) return '/de';
-  return `/de/${materia}${m.argomenti.some((a) => a.slug === argomento) ? `#${argomento}` : ''}`;
+  if (!m || !paginaLocalizzata(lingua, `/${materia}`)) return nellaLingua(lingua, '/');
+  return nellaLingua(lingua, `/${materia}${m.argomenti.some((a) => a.slug === argomento) ? `#${argomento}` : ''}`);
 }

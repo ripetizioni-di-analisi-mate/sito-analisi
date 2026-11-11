@@ -26,7 +26,7 @@ import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
-import { destinazioneTedesca, inTedesco, LINGUE, LOCALE, nellaLingua, senzaLingua } from '../lib/lingue-sito';
+import { destinazioneLocalizzata, linguaCatalogo, lingueLocalizzate, LINGUE, LOCALE, nellaLingua, senzaLingua } from '../lib/lingue-sito';
 import { materiaL, materieL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
@@ -60,17 +60,19 @@ const t = T(lingua);
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const versioneIt = senzaLingua(Astro.url.pathname);
 const de = lingua === 'de';
+const es = lingua === 'es';
+const localizzato = linguaCatalogo(lingua);
 const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
   ...l,
   href: usa ? `${link(l.codice, '/')}?${PARAMETRO_CATALOGO}=${CATALOGO_PREDEFINITO}&lingua=${l.codice}`
     : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
-    : l.codice === 'de' ? destinazioneTedesca(versioneIt)
-    : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !de))
+    : linguaCatalogo(l.codice) ? destinazioneLocalizzata(l.codice, versioneIt)
+    : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !localizzato))
       ? link('en', '/') : altraLingua(Astro.url.pathname, l.codice),
 }));
 const versoIt = altraLingua(Astro.url.pathname, 'it');
 const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
-  path, href: de ? `${link('it', path)}?lingua=it` : link(lingua, path),
+  path, href: localizzato ? `${link('it', path)}?lingua=it` : link(lingua, path),
 }));
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeDisponibili = await catalogoDomande(lingua);
@@ -110,15 +112,15 @@ const avanti: Passo | undefined = tappaDopo ? {
   etichetta: en ? 'Continue with this topic' : 'Continua su questo argomento',
 } : successivo;
 const versioneEn = nellaLingua('en', versioneIt);
-const versioneDe = inTedesco(versioneIt) ? nellaLingua('de', versioneIt) : null;
+const versioniLocalizzate = lingueLocalizzate(versioneIt).map((l) => ({ l, path: nellaLingua(l, versioneIt) }));
 // seo.canonico: la pagina è la copia di un'altra (src/lib/canonici.ts); ai motori si indica l'originale, nella stessa lingua,
 // e non si dichiarano versioni in altre lingue (le dichiara l'originale).
 const canonico = assoluto(nonTradotta ? versioneIt : seo.canonico ? link(lingua, seo.canonico) : qui);
 const bilingue = !usa && !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa' && !seo.canonico;
 const alternati = [
-  ...(bilingue || (de && versioneDe) ? [{ l: 'it', path: versioneIt }] : []),
+  ...(bilingue || (localizzato && versioniLocalizzate.length > 0) ? [{ l: 'it', path: versioneIt }] : []),
   ...(bilingue && !seo.senzaInglese ? [{ l: 'en', path: versioneEn }, { l: 'x-default', path: versioneEn }] : []),
-  ...(versioneDe ? [{ l: 'de', path: versioneDe }] : []),
+  ...versioniLocalizzate,
 ];
 const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
 // Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
@@ -141,9 +143,9 @@ const schema = {
 };
 // Immagine di anteprima dei link (WhatsApp, Instagram, Telegram…): una per materia e una per argomento e sezione,
 // disegnate dopo la build da scripts/immagini-og.mjs; le altre pagine usano /og.png (in inglese /og-en.png, scripts/og-generale.mjs).
-const og = !de && !usa && anteprima({ lingua, materia: m, argomento, sezione, titoloArgomento: m && argomento ? m.argomenti.find((a) => a.slug === argomento)?.titolo : undefined });
+const og = !localizzato && !usa && anteprima({ lingua, materia: m, argomento, sezione, titoloArgomento: m && argomento ? m.argomenti.find((a) => a.slug === argomento)?.titolo : undefined });
 const immagineOg = `${SITO}${og ? og.percorso : ogGenerale(lingua)}`;
-const altOg = og ? og.alt : de ? 'Ripetizioni di Analisi' : altGenerale(lingua);
+const altOg = og ? og.alt : localizzato ? 'Ripetizioni di Analisi' : altGenerale(lingua);
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
 // Spunte delle materie sbloccate: il Worker scrive su <html> data-materie="analisi-1 precorso ...".
@@ -254,7 +256,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           <span class="iniziale" aria-hidden="true"></span>
           <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
         </a>
-        {!de && (
+        {!localizzato && (
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
               <span class="stemma-testata" aria-hidden="true"></span>
@@ -317,8 +319,8 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           </div>
         )}
         {(percorso.length > 0 || m) && (
-          <nav class="percorso" aria-label={de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
-            {livelloSopra && <a class="indietro" href={livelloSopra} title={de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
+          <nav class="percorso" aria-label={es ? 'Ruta de navegación' : de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
+            {livelloSopra && <a class="indietro" href={livelloSopra} title={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
             <ol>
               <li><a href={homeCurriculum}>{t.materie}</a></li>
               {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={hrefMateria}>{m.titolo}</a> : m.titolo}</li>}
@@ -349,12 +351,12 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   </div>
 
   <footer class="pie">
-    <nav class="pie-link" aria-label={de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
+    <nav class="pie-link" aria-label={es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
       <a href={link(lingua, '/chi-sono')}>{t.chiSono}</a>
       {lingua === 'it' && <a href="/ripetizioni-analisi">Ripetizioni online</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
-      {legali.map(({ href }, i) => <a href={href} hreflang={de ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{de && ' (Italienisch)'}</a>)}
+      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
       {cambioLingua.map(({ codice, nome, href }) => <a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a>)}
     </nav>
     <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />
@@ -371,7 +373,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     </a>
   </div>
 
-  {!de && sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
+  {!localizzato && sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
   {sezione !== 'stampa' && MISURAZIONE_ATTIVA && <ConsensoCookie lingua={lingua} />}
   <script type="application/json" id="catalogo-percorso" is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
@@ -444,7 +446,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
     const pl = document.getElementById('pannello-livello');
     const inglese = document.documentElement.lang === 'en';
-    const tedesco = document.documentElement.lang === 'de';
+    const linguaCatalogo = ['de', 'es'].includes(document.documentElement.lang);
     const num = (x: number) => x.toLocaleString(inglese ? 'en-US' : 'it-IT');
     const XP = inglese ? 'XP' : 'EXP';
     function mostraLivello(st: Stato) {
@@ -539,7 +541,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
         // Invito a un duello ricevuto mentre si studia (worker/sfide.mjs): un avviso in basso con Accetta e Più tardi.
         const inv = (d?.inviti || []).find((x: any) => !visti.has(x.codice));
         const box = document.querySelector<HTMLElement>('.avviso-duello');
-        if (inv && box && !inglese && !tedesco) {
+        if (inv && box && !inglese && !linguaCatalogo) {
           visti.add(inv.codice);
           const esc = (x: string) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
           box.innerHTML = `<span><strong>${esc(inv.da)}</strong> ti sfida a un duello su ${esc(inv.argomento || inv.materia)}.</span>`

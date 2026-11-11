@@ -1,69 +1,12 @@
 ---
-import Base from '../../layouts/Base.astro';
-import { getCollection } from 'astro:content';
-import { materieL, link, T } from '../../i18n';
-import { inTedesco } from '../../lib/lingue-sito';
-import { catalogoDomande } from '../../lib/domande';
+import MateriaLocalizzata from '../../viste/MateriaLocalizzata.astro';
+import { materieL } from '../../i18n';
+import { paginaLocalizzata } from '../../lib/lingue-sito';
 
 export function getStaticPaths() {
-  return materieL('de').filter((m) => inTedesco(`/${m.slug}`)).map((m) => ({ params: { materia: m.slug }, props: { m } }));
+  return materieL('de').filter((m) => paginaLocalizzata('de', `/${m.slug}`))
+    .map((m) => ({ params: { materia: m.slug }, props: { m } }));
 }
 const { m } = Astro.props;
-const t = T('de');
-const [teoria, teoriaEn, svolti, svoltiEn, dafare, dafareEn, quiz, quizEn] = await Promise.all([
-  getCollection('teoria'), getCollection('teoria_en'),
-  getCollection('svolti'), getCollection('svolti_en'),
-  getCollection('dafare'), getCollection('dafare_en'),
-  catalogoDomande('it'), catalogoDomande('en'),
-]);
-const presenti = (lista: { id: string }[], id: string) => lista.filter((v) => v.id.startsWith(`${id}/`));
-const completi = (it: { id: string }[], en: { id: string }[]) => it.length > 0 && it.every((v) => en.some((x) => x.id === v.id));
-const risorsa = (id: string, sezione: string, titolo: string, it: boolean, en: boolean) => ({
-  titolo,
-  de: inTedesco(`/${id}/${sezione}`) ? link('de', `/${id}/${sezione}`) : null,
-  it: it ? `${link('it', `/${id}/${sezione}`)}?lingua=it` : null,
-  en: en ? `${link('en', `/${id}/${sezione}`)}?lingua=en` : null,
-});
-const capitoli = m.argomenti.map((a) => {
-  const id = `${m.slug}/${a.slug}`;
-  const schede = presenti(svolti, id), esercizi = presenti(dafare, id);
-  return { ...a, risorse: [
-    risorsa(id, 'teoria', t.sezioni.teoria, teoria.some((x) => x.id === id), teoriaEn.some((x) => x.id === id)),
-    risorsa(id, 'esercizi-svolti', t.sezioni['esercizi-svolti'], schede.length > 0, completi(schede, presenti(svoltiEn, id))),
-    risorsa(id, 'esercizi', t.sezioni.esercizi, m.eserciziDaFare !== false && esercizi.length > 0, m.eserciziDaFare !== false && completi(esercizi, presenti(dafareEn, id))),
-    risorsa(id, 'domande', 'Quiz mit Zeitlimit', quiz[m.slug]?.includes(a.slug), quizEn[m.slug]?.includes(a.slug)),
-  ].filter((r) => r.it || r.en || r.de) };
-});
 ---
-<Base titolo={m.titolo} descrizione={m.descrizione} lingua="de" sezione="catalogo" materia={m.slug} seo={{ titolo: `${m.titolo} | ${t.nomeSito}` }}>
-  <p class="sopratitolo">{m.gruppo}</p>
-  <h1>{m.titolo}</h1>
-  <p class="sommario">{m.descrizione}</p>
-  <p class="nota-accesso">Bei jedem Thema siehst du, in welcher Sprache die Lernmaterialien verfügbar sind.</p>
-  {m.prezzo
-    ? <p><a class="bottone-secondario" href={link('it', `/${m.slug}/sblocca`) + '?lingua=it'} hreflang="it">Vollzugang für {m.prezzo} € (Kauf auf Italienisch)</a></p>
-    : <p class="nota-accesso">{t.tuttoGratis}</p>}
-  <h2>{t.programma}</h2>
-  <ol class="elenco-esercizi capitoli-de">
-    {capitoli.map((a) => <li id={a.slug}>
-      <h3>{a.titolo}</h3>
-      {a.risorse.length > 0
-        ? <ul>{a.risorse.map((r) => <li>
-          <strong>{r.titolo}</strong>
-          {r.de && <a href={r.de} hreflang="de" aria-label={`${r.titolo} auf Deutsch`}>Deutsch</a>}
-          {r.it && <a href={r.it} hreflang="it" aria-label={`${r.titolo} auf Italienisch`}>Italienisch</a>}
-          {r.en && <a href={r.en} hreflang="en" aria-label={`${r.titolo} auf Englisch`}>Englisch</a>}
-        </li>)}</ul>
-        : <p>{t.inPreparazione}</p>}
-    </li>)}
-  </ol>
-</Base>
-
-<style>
-  .capitoli-de > li { padding: .85rem 0; border-bottom: 1px solid var(--riga); scroll-margin-top: 6rem; }
-  .capitoli-de h3 { margin: 0 0 .35rem; }
-  .capitoli-de ul { list-style: none; padding: 0; margin: 0; }
-  .capitoli-de ul li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem; }
-  .capitoli-de ul li a { display: inline; padding: .15rem 0; color: var(--azione); text-decoration: underline; }
-  .capitoli-de ul li strong { font-weight: 600; }
-</style>
+<MateriaLocalizzata lingua="de" m={m} />
