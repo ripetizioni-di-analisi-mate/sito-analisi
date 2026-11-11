@@ -3,16 +3,19 @@ export const FACOLTA = [
   {
     titolo: 'Ingegneria',
     titoloEn: 'Engineering',
+    titoloDe: 'Ingenieurwissenschaften',
     materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statica', 'scienza-delle-costruzioni', 'statistica', 'precorso'],
   },
   {
     titolo: 'Economia',
     titoloEn: 'Economics',
+    titoloDe: 'Wirtschaftswissenschaften',
     materie: ['matematica-generale', 'algebra-lineare', 'statistica', 'precorso'],
   },
   {
     titolo: 'Matematica e Fisica',
     titoloEn: 'Mathematics and Physics',
+    titoloDe: 'Mathematik und Physik',
     materie: ['analisi-1', 'analisi-2', 'analisi-3', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statistica', 'precorso'],
   },
 ] as const;

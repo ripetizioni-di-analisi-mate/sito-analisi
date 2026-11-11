@@ -1,8 +1,8 @@
-import { CATALOGHI_STUDIO, PARAMETRO_CATALOGO, catalogoDiIngresso, catalogoStudio } from '../src/data/cataloghi-studio.mjs';
+import { CATALOGHI_STUDIO, CATALOGO_PREDEFINITO, PARAMETRO_CATALOGO, catalogoDiIngresso, catalogoStudio } from '../src/data/cataloghi-studio.mjs';
 import { navigazioneVisitatore } from './lingua.mjs';
 
 const HOME = new Set(['/', '/en']);
-const INGRESSI = new Set([...HOME, ...Object.values(CATALOGHI_STUDIO).map(c => c.percorso)]);
+const INGRESSI = new Set([...HOME, '/de', ...Object.values(CATALOGHI_STUDIO).map(c => c.percorso)]);
 const COOKIE = 'catalogo_studio';
 const DURATA_PREFERENZA = 365 * 24 * 60 * 60;
 
@@ -15,7 +15,8 @@ export function versoCatalogoStudio(req, url) {
   const manuale = catalogoStudio(scelta);
   if (manuale) {
     const meta = new URL(url);
-    meta.pathname = manuale.percorso;
+    const lingua = meta.searchParams.get('lingua');
+    meta.pathname = scelta === CATALOGO_PREDEFINITO && ['de', 'en'].includes(lingua) ? `/${lingua}` : manuale.percorso;
     meta.searchParams.delete(PARAMETRO_CATALOGO);
     return new Response(null, {
       status: 303,

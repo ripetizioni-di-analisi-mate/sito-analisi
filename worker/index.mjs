@@ -299,11 +299,11 @@ export class Archivio {
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
         this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), c.lingua === 'en' ? 'en' : 'it');
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), c.lingua === 'en' || c.lingua === 'de' ? 'en' : 'it');
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
-        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ?, attivo = ?, lingua = ? WHERE email = ?', ora, Date.now(), c.lingua === 'en' ? 'en' : 'it', c.email);
+        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ?, attivo = ?, lingua = ? WHERE email = ?', ora, Date.now(), c.lingua === 'en' || c.lingua === 'de' ? 'en' : 'it', c.email);
         else this.sql.exec(`UPDATE utenti SET falliti = falliti + 1,
           bloccato_fino = CASE WHEN falliti + 1 >= 8 THEN ? ELSE bloccato_fino END WHERE email = ?`, Date.now() + 15 * 60 * 1000, c.email);
         return Response.json({ ok: true });
@@ -593,9 +593,12 @@ function nomeDispositivo(req) {
   const br = /Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung Internet' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Chrome|CriOS/.test(ua) ? 'Chrome' : /Safari/.test(ua) ? 'Safari' : 'browser';
   return `${so} · ${br}`;
 }
+const linguaAccount = (l) => l === 'de' || l === 'en' ? l : 'it';
+
 const MSG = {
   limite: {
     it: () => `Hai già ${MAX_DISPOSITIVI} dispositivi collegati. Scegli quale scollegare per accedere da questo.`,
+    de: () => `Du hast bereits ${MAX_DISPOSITIVI} Geräte verbunden. Wähle ein Gerät aus, das du abmelden möchtest.`,
     en: () => `You already have ${MAX_DISPOSITIVI} connected devices. Choose one to disconnect so you can sign in here.`,
   },
 };
@@ -613,7 +616,7 @@ async function entraDaDispositivo(env, req, email, versione, lingua) {
     const g = await aDO(env, '/disp-gestione-crea', { id: gestione, email, versione, dispositivo: id, nome, nonce });
     if (!g.ok) return json({ errore: 'Accedi di nuovo.', scaduto: true }, 401, { 'cache-control': 'no-store' });
     h.append('set-cookie', cookieGestioneDispositivi(await firmaToken(env, { scopo: 'gestione-dispositivi', id: gestione, t: Date.now() })));
-    return new Response(JSON.stringify({ errore: MSG.limite[lingua === 'en' ? 'en' : 'it'](), limite: true, gestione: true, dispositivi: g.dispositivi, max: MAX_DISPOSITIVI }), { status: 403, headers: h });
+    return new Response(JSON.stringify({ errore: MSG.limite[linguaAccount(lingua)](), limite: true, gestione: true, dispositivi: g.dispositivi, max: MAX_DISPOSITIVI }), { status: 403, headers: h });
   }
   h.append('set-cookie', cookieGestioneDispositivi('', 0));
   h.append('set-cookie', await apriSessione(env, email, versione, id, r.nonce));
@@ -644,6 +647,23 @@ const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringi
 // ---------- email per il recupero della password (Resend) ----------
 const DURATA_RECUPERO = 60 * 60 * 1000; // il link vale un'ora
 const TESTI_RECUPERO = {
+  de: {
+    nonAttivo: 'Die automatische Wiederherstellung ist derzeit nicht verfügbar. Wende dich an den Support.',
+    limiteIndirizzo: 'Wir haben dir vor Kurzem einen Link geschickt. Schau im Postfach und im Spam-Ordner nach oder versuch es in ein paar Minuten erneut.',
+    limiteSito: 'Heute wurden zu viele E-Mails verschickt. Versuch es morgen erneut oder wende dich an den Support.',
+    invioFallito: 'Die E-Mail konnte nicht gesendet werden. Versuch es in ein paar Minuten erneut oder wende dich an den Support.',
+    linkScaduto: 'Dieser Link ist abgelaufen oder wurde bereits verwendet. Fordere auf der Anmeldeseite einen neuen Link an.',
+    oggetto: 'Neues Passwort für Ripetizioni di Analisi',
+    corpo: (link) => [
+      'Hallo,',
+      'du hast ein neues Passwort für dein Konto auf ripetizionidianalisi.com angefordert.',
+      'Öffne diesen Link innerhalb einer Stunde, um ein neues Passwort festzulegen.',
+      link,
+      'Wenn du diese Anfrage nicht gestellt hast, kannst du die E-Mail ignorieren.',
+      'Carmine',
+    ],
+    bottone: 'Neues Passwort festlegen',
+  },
   it: {
     nonAttivo: 'Il recupero automatico non è ancora attivo. Scrivimi dalla pagina Contatti e ti imposto una nuova password.',
     limiteIndirizzo: 'Ti ho già mandato un link da poco. Controlla la posta, anche nella cartella spam, oppure riprova tra qualche minuto.',
@@ -684,11 +704,11 @@ async function inviaEmailRecupero(env, destinatario, link, l) {
   const [saluto, chiesto, , , nonTu] = T.corpo(link);
   const messaggio = componiEmail({
     lingua: l, subject: T.oggetto,
-    titolo: l === 'en' ? 'Reset your password' : 'Imposta una nuova password',
-    categoria: l === 'en' ? 'Account security' : 'Sicurezza dell’account',
-    anteprima: l === 'en' ? 'Your link is valid for one hour.' : 'Il link è valido per un’ora.',
+    titolo: l === 'de' ? 'Passwort zurücksetzen' : l === 'en' ? 'Reset your password' : 'Imposta una nuova password',
+    categoria: l === 'de' ? 'Kontosicherheit' : l === 'en' ? 'Account security' : 'Sicurezza dell’account',
+    anteprima: l === 'de' ? 'Der Link ist eine Stunde gültig.' : l === 'en' ? 'Your link is valid for one hour.' : 'Il link è valido per un’ora.',
     righe: [saluto, chiesto], dopo: [nonTu],
-    scheda: { valore: l === 'en' ? 'Valid for one hour' : 'Valido per un’ora' },
+    scheda: { valore: l === 'de' ? 'Eine Stunde gültig' : l === 'en' ? 'Valid for one hour' : 'Valido per un’ora' },
     pulsante: [T.bottone, link],
   });
   return (await inviaEmailResend(env, destinatario, messaggio, undefined, 'recupero-password')).ok;
@@ -929,34 +949,34 @@ export default {
       if (req.headers.get('origin') !== url.origin) return json({ errore: 'Richiesta non valida.' }, 403);
       const c = await req.json().catch(() => null);
       if (!c || typeof c.offerte !== 'boolean' || typeof c.studio !== 'boolean') return json({ errore: 'Preferenze non valide.' }, 400);
-      return json(await salvaPreferenzeEmail(env, io.email, c, c.lingua), 200, { 'cache-control': 'no-store' });
+      return json(await salvaPreferenzeEmail(env, io.email, c, c.lingua === 'de' ? 'en' : c.lingua), 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/registrati' && POST) {
       const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina, offerte, materiaEmail } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
-      if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
-      if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
+      if (!emailValida(email)) return json({ errore: lingua === 'de' ? 'Gib eine gültige E-Mail-Adresse ein.' : 'Scrivi un indirizzo email valido.' }, 400);
+      if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: lingua === 'de' ? 'Das Passwort muss zwischen 8 und 200 Zeichen lang sein.' : 'La password deve avere almeno 8 caratteri.' }, 400);
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
       const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso, lingua });
-      if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
+      if (!r.ok) return json({ errore: lingua === 'de' ? 'Es gibt bereits ein Konto mit dieser E-Mail-Adresse. Melde dich an.' : 'Esiste già un account con questa email. Accedi.' }, 409);
       // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
       const invito = leggiCookie(req, 'invito');
       if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
       // account creato dalla barra in basso: 10% sul primo acquisto di una materia (worker/benvenuto.mjs)
       if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
-      if (offerte === true) ctx.waitUntil(salvaPreferenzeEmail(env, email, { offerte, materia: materiaEmail }, lingua).catch(() => {}));
+      if (offerte === true) ctx.waitUntil(salvaPreferenzeEmail(env, email, { offerte, materia: materiaEmail }, lingua === 'de' ? 'en' : lingua).catch(() => {}));
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
       const { email: e, password, lingua } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const u = emailValida(email) ? await aDO(env, '/utente', { email }) : null;
-      const sbagliato = () => json({ errore: 'Email o password non corrette.' }, 401);
+      const sbagliato = () => json({ errore: lingua === 'de' ? 'Die E-Mail-Adresse oder das Passwort ist falsch.' : 'Email o password non corrette.' }, 401);
       if (!u || typeof password !== 'string') return sbagliato();
-      if (u.bloccato_fino > Date.now()) return json({ errore: 'Troppi tentativi. Riprova tra un quarto d’ora.' }, 429);
+      if (u.bloccato_fino > Date.now()) return json({ errore: lingua === 'de' ? 'Zu viele Versuche. Versuch es in 15 Minuten erneut.' : 'Troppi tentativi. Riprova tra un quarto d’ora.' }, 429);
       const ok = confrontoCostante(await hashPassword(password, u.sale, u.iterazioni), u.hash);
       ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok, lingua }));
       if (!ok) return sbagliato();
@@ -1279,9 +1299,9 @@ export default {
     // ===== password dimenticata: link via email (Resend), valido un'ora e una sola volta =====
     if (p === '/api/password-dimenticata' && POST) {
       const { email: e, lingua } = await req.json().catch(() => ({}));
-      const l = lingua === 'en' ? 'en' : 'it';
+      const l = linguaAccount(lingua);
       const email = normalizza(e);
-      if (!emailValida(email)) return json({ errore: l === 'en' ? 'Enter a valid email address.' : 'Scrivi un indirizzo email valido.' }, 400);
+      if (!emailValida(email)) return json({ errore: l === 'de' ? 'Gib eine gültige E-Mail-Adresse ein.' : l === 'en' ? 'Enter a valid email address.' : 'Scrivi un indirizzo email valido.' }, 400);
       if (!env.RESEND_API_KEY) return json({ errore: TESTI_RECUPERO[l].nonAttivo, nonAttivo: true }, 503);
       const conta = await aDO(env, '/recupero-conta', { giorno: new Date().toISOString().slice(0, 10), email, maxSito: Number(env.RECUPERO_MAX_GIORNO) || 90 });
       if (!conta.ok) return json({ errore: TESTI_RECUPERO[l][conta.motivo === 'sito' ? 'limiteSito' : 'limiteIndirizzo'] }, 429);
@@ -1289,7 +1309,7 @@ export default {
       // Stessa risposta che l'account esista o no: dal modulo non si scopre chi è iscritto.
       if (u?.hash) {
         const token = await firmaToken(env, { scopo: 'recupero', r: email, v: u.versione, t: Date.now() });
-        const indirizzo = `${url.origin}${l === 'en' ? '/en' : ''}/reimposta-password#t=${token}`;
+        const indirizzo = `${url.origin}${l === 'it' ? '' : '/' + l}/reimposta-password#t=${token}`;
         const inviata = await inviaEmailRecupero(env, email, indirizzo, l).catch(() => false);
         if (!inviata) return json({ errore: TESTI_RECUPERO[l].invioFallito }, 502);
       }
@@ -1297,12 +1317,12 @@ export default {
     }
     if (p === '/api/reimposta-password' && POST) {
       const { token, password, lingua } = await req.json().catch(() => ({}));
-      const l = lingua === 'en' ? 'en' : 'it';
+      const l = linguaAccount(lingua);
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       const scaduto = () => json({ errore: TESTI_RECUPERO[l].linkScaduto, scaduto: true }, 400);
       if (!tok || tok.scopo !== 'recupero' || typeof tok.r !== 'string' || Date.now() - tok.t > DURATA_RECUPERO) return scaduto();
       if (typeof password !== 'string' || password.length < 8 || password.length > 200)
-        return json({ errore: l === 'en' ? 'The password must be at least 8 characters long.' : 'La password deve avere almeno 8 caratteri.' }, 400);
+        return json({ errore: l === 'de' ? 'Das Passwort muss zwischen 8 und 200 Zeichen lang sein.' : l === 'en' ? 'The password must be at least 8 characters long.' : 'La password deve avere almeno 8 caratteri.' }, 400);
       const u = await aDO(env, '/utente', { email: tok.r });
       if (!u || u.versione !== tok.v) return scaduto(); // link già usato, oppure password cambiata nel frattempo
       const sale = nuovoSale();

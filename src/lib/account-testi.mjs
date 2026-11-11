@@ -1,5 +1,27 @@
 export function accountTesti(lingua) {
-  return lingua === 'en' ? {
+  return lingua === 'de' ? {
+    studio: 'Dein Lernbereich', contenuti: 'Deine Lernmaterialien', riprendi: 'Weiterlernen', ultima: 'Zuletzt gelernt',
+    progressi: 'Lernfortschritt', impostazioni: 'Einstellungen', settimana: 'Diese Woche', minuti: 'Lernzeit', corrette: 'Richtige Antworten', giorni: 'Lerntage',
+    obiettivo: 'Dein nächstes Ziel', raggiunti: 'Erreichte Meilensteine', attivita: 'Letzte Aktivitäten', tutti: 'Alle Meilensteine anzeigen',
+    vuoto: 'Hier findest du deine freigeschalteten Fächer und Videokurse.', esplora: 'Fächer entdecken', dati: 'Kontodaten', nome: 'Name',
+    modifica: 'Name ändern', password: 'Passwort ändern', dispositivi: 'Verbundene Geräte',
+    notaDispositivi: 'Du kannst ein Gerät abmelden, um einen Platz freizugeben. Auf diesem Gerät bleibst du angemeldet.',
+    aggiorna: 'Aktualisieren', scollega: 'Gerät abmelden', questo: 'Dieses Gerät', ultimo: 'Zuletzt verwendet', ora: 'Gerade aktiv',
+    conferma: 'Möchtest du dieses Gerät abmelden?', spiegazione: 'Auf dem abgemeldeten Gerät musst du dich anschließend erneut anmelden.',
+    annulla: 'Abbrechen', attesa: 'Gerät wird abgemeldet …', fatto: 'Gerät abgemeldet. Ein Platz ist frei.',
+    erroreDispositivi: 'Die Geräte konnten nicht geladen werden. Versuch es erneut.',
+    erroreScollega: 'Das Gerät konnte nicht abgemeldet werden. Versuch es erneut.',
+    scaduta: 'Deine Sitzung ist abgelaufen. Melde dich erneut an, um deine Geräte zu verwalten.',
+    accedi: 'Erneut anmelden', posti: 'von', carica: 'Geräte werden geladen …', nessuno: 'Keine Geräte vorhanden.', inviti: 'Freunde einladen',
+    erroreProgressi: 'Der Lernfortschritt konnte gerade nicht geladen werden.', riprova: 'Erneut versuchen',
+    vuotoTraguardi: 'Für deine erste richtige Antwort erhältst du einen Meilenstein.', vuotoSessioni: 'Hier siehst du deine letzten Lernaktivitäten.',
+    completati: 'Alle Wochenziele erreicht.', videoApri: 'Kursvideos öffnen',
+    videoNota: 'Beantrage den Zugriff in Google Drive mit der E-Mail-Adresse deines Kontos. Carmine bestätigt deine Anfrage so bald wie möglich.',
+    videoAttesa: 'Der Link zu den Videos erscheint hier. Bei Fragen hilft dir Carmine weiter.',
+    videoErrore: 'Die Videokurse konnten nicht geladen werden. Lade die Seite neu.',
+    limite: 'Höchste Stufe', punti: 'XP', totale: 'XP insgesamt', livello: 'Stufe', alLivello: 'bis Stufe',
+    completato: 'Abgeschlossen', nessunObiettivo: 'Hier erscheinen deine nächsten Wochenziele.',
+  } : lingua === 'en' ? {
     studio: 'Your study', contenuti: 'Your content', riprendi: 'Resume', ultima: 'Pick up where you left off',
     progressi: 'Progress', impostazioni: 'Settings', settimana: 'This week', minuti: 'Active study', corrette: 'Correct answers', giorni: 'Study days',
     obiettivo: 'Your next goal', raggiunti: 'Achieved milestones', attivita: 'Recent activity', tutti: 'Show all milestones',

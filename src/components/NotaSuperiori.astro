@@ -1,9 +1,12 @@
 ---
-interface Props { lingua?: 'it' | 'en' }
+import type { Lingua } from '../i18n';
+interface Props { lingua?: Lingua }
 const { lingua = 'it' } = Astro.props;
 ---
 <p class="nota-superiori">
-  {lingua === 'en' ? (
+  {lingua === 'de' ? (
+    <>Die Jahrgänge beziehen sich auf weiterführende Schulen in Italien, besonders auf das naturwissenschaftlich ausgerichtete <strong>liceo scientifico</strong>. In der Themenübersicht siehst du, welche Inhalte zu deinem Unterricht passen.</>
+  ) : lingua === 'en' ? (
     <>A course for students from all high school tracks, with particular attention to the <strong>Italian scientific high school (liceo scientifico)</strong> and schools with a strong focus on mathematics. Clear explanations and guided exercises take you through each topic step by step, even if you want to start again from the basics.</>
   ) : (
     <>Un percorso per tutti gli studenti delle superiori, con particolare attenzione al <strong>liceo scientifico</strong> e agli istituti in cui la matematica ha un ruolo centrale. Spiegazioni chiare ed esercizi guidati ti accompagnano passo dopo passo, anche se vuoi ripartire dalle basi.</>
