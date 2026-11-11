@@ -19,7 +19,7 @@ export async function GET() {
       if (!teoria.has(id)) continue;
       t += `- [${a.titolo}: teoria](${assoluto(`/${id}/teoria`)}): ${teoria.get(id)}\n`;
       t += `- [${a.titolo}: esercizi svolti](${assoluto(`/${id}/esercizi-svolti`)})\n`;
-      t += `- [${a.titolo}: esercizi con soluzione](${assoluto(`/${id}/esercizi`)})\n`;
+      if (m.eserciziDaFare !== false) t += `- [${a.titolo}: esercizi con soluzione](${assoluto(`/${id}/esercizi`)})\n`;
     }
     t += '\n';
   }

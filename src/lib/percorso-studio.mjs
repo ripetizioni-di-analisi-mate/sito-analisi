@@ -2,14 +2,14 @@ import { nomiAllenamento } from './allenamento.mjs';
 
 // Le quattro sezioni dello stesso argomento rimangono raggiungibili anche
 // nelle singole schede, senza confonderle con il capitolo successivo.
-export function tappeStudio(materia, argomento, conDomande, lingua = 'it') {
+export function tappeStudio(materia, argomento, conDomande, lingua = 'it', conEserciziDaFare = true) {
   if (!materia || !argomento || argomento === 'prove-d-esame' || argomento === 'ripasso-di-oggi') return [];
   const en = lingua === 'en';
   const base = `${en ? '/en' : ''}/${materia}/${argomento}`;
   return [
     { slug: 'teoria', titolo: en ? 'Theory' : 'Teoria' },
     { slug: 'esercizi-svolti', titolo: en ? 'Worked examples' : 'Esercizi svolti' },
-    { slug: 'esercizi', titolo: en ? 'Practice exercises' : 'Esercizi da fare' },
+    ...(conEserciziDaFare ? [{ slug: 'esercizi', titolo: en ? 'Practice exercises' : 'Esercizi da fare' }] : []),
     ...(conDomande ? [{ slug: 'domande', titolo: en ? 'Timed questions' : 'Domande a tempo' }] : []),
   ].map((t) => ({ ...t, href: `${base}/${t.slug}` }));
 }

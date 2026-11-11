@@ -1,8 +1,11 @@
 ---
 import Simulazione from '../../../viste/Simulazione.astro';
 import { catalogoDomande } from '../../../lib/domande';
+import { MATERIE } from '../../../data/materie';
 export async function getStaticPaths() {
-  return Object.keys(await catalogoDomande('en')).map((materia) => ({ params: { materia } }));
+  const domande = await catalogoDomande('en');
+  return MATERIE.filter((m) => domande[m.slug] && m.eserciziDaFare !== false)
+    .map((m) => ({ params: { materia: m.slug } }));
 }
 ---
 <Simulazione lingua="en" materia={Astro.params.materia!} />

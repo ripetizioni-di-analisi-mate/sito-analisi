@@ -13,7 +13,7 @@ const t = T(lingua);
 const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const m = materia ? materiaL(lingua, materia) : undefined;
 const MATERIE = materieL(lingua);
-const SEZIONI = sezioniL(lingua);
+const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
 const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
@@ -77,7 +77,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
             <ol class:list={{ aperta: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
               <li><a href={link(lingua, `/${m.slug}/${RIPASSO}/domande`)} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
-              <li><a href={link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>
+              {m.eserciziDaFare !== false && <li><a href={link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>}
               <li class="solo-collegati"><a href={link(lingua, `/${m.slug}/${RIPASSO_OGGI}/domande`)} class:list={{ attiva: argomento === RIPASSO_OGGI }}>{lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi'}</a></li>
             </ol>
           </li>

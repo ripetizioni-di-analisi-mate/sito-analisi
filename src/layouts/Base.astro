@@ -64,7 +64,7 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') ||
 const versioneIt = qui.replace(/^\/en(?=\/|$)/, '') || '/';
 const argomentoNormale = m?.argomenti.some((a) => a.slug === argomento);
 const tappe = argomentoNormale && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '')
-  ? tappeStudio(materia, argomento, domandeQui, lingua).map((p) => ({ ...p, href: url(p.href) })) : [];
+  ? tappeStudio(materia, argomento, domandeQui, lingua, m?.eserciziDaFare !== false).map((p) => ({ ...p, href: url(p.href) })) : [];
 const tappa = tappe.findIndex((p) => p.slug === sezione);
 // Le pagine di elenco proseguono nello stesso argomento; le singole schede
 // conservano il proprio ordine numerico.
