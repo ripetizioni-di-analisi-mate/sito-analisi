@@ -10,6 +10,8 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
+import { calculusSlug } from '../src/data/stem-usa/calculus-1-practice.mjs';
+import { calculusTimed } from '../src/data/stem-usa/calculus-1-timed.mjs';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
@@ -718,6 +720,11 @@ async function catalogoDomande(env) {
   return cacheCatalogo;
 }
 
+const argomentiCalculus = Object.keys(calculusTimed);
+async function catalogoPremi(env) {
+  return { ...(await catalogoDomande(env)), [calculusSlug]: argomentiCalculus };
+}
+
 async function eseguiInvii(env, giornaliero) {
   const [catalogo, prove] = await Promise.all([
     catalogoDomande(env).catch(() => ({})),
@@ -1010,7 +1017,7 @@ export default {
       if (!(await aDO(env, '/verifiche-conta', { giorno, chi })).ok) return json({ errore: en ? 'Too many attempts today.' : 'Troppi tentativi oggi.' }, 429);
       const esito = confronta(risposta, giusta);
       if (esito !== 'giusta' || !io) return json({ esito }, 200, { 'cache-control': 'no-store' });
-      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) });
+      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) });
       return json({ esito, ...r }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
@@ -1018,7 +1025,7 @@ export default {
       if (!io) return json({ errore: 'non collegato' }, 401);
       const { materia, argomento, lingua } = await req.json().catch(() => ({}));
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
-      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
@@ -1103,7 +1110,7 @@ export default {
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
-        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoDomande(env),
+        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoPremi(env),
       });
       return json({ ...base, ...r });
     }
@@ -1195,7 +1202,7 @@ export default {
     if (p === '/api/percorso') {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaDi(url.searchParams.get('l')), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaDi(url.searchParams.get('l')), catalogo: await catalogoPremi(env) }));
     }
     if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
       const io = await utenteCollegato(env, req);
@@ -1578,7 +1585,7 @@ export default {
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       const nome = nomeVisibile(io);
-      const en = /^\/en(\/|$)/.test(url.pathname);
+      const en = /^\/(?:en|us)(\/|$)/.test(url.pathname);
       const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
       const riscrivi = new HTMLRewriter();
       // Spazio personale in home (worker/spazio.mjs).

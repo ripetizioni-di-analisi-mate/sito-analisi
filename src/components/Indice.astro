@@ -7,6 +7,7 @@ import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
+import { calculusSlug, calculusTopics } from '../lib/stem-usa-practice';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; usa?: boolean; ricercaPrincipale?: boolean }
@@ -21,7 +22,7 @@ const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgo
 const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
-const conDomande = new Set(m && !usa ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
+const conDomande = new Set(m ? (usa ? (m.slug === calculusSlug ? calculusTopics : []) : (await catalogoDomande(lingua))[m.slug] ?? []) : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
@@ -71,7 +72,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   <li><a href={hrefArgomento(m.slug, a.slug, s.slug)} class:list={{ attiva: corrente && s.slug === sezione }} aria-current={corrente && s.slug === sezione ? 'page' : undefined}>{s.titolo}</a></li>
                 ))}
                 {conDomande.has(a.slug) && (
-                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/domande`)} class:list={{ attiva: corrente && sezione === 'domande' }}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</a></li>
+                  <li><a href={hrefArgomento(m.slug, a.slug, 'domande')} class:list={{ attiva: corrente && sezione === 'domande' }}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</a></li>
                 )}
               </ol>
             </li>
@@ -82,14 +83,16 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             <button type="button" class="argomento" aria-expanded="false" data-apri-argomento>Exam practice</button>
             <ol>
               <li><a href={url('/us/' + m.slug + '#course-practice')}>Review questions</a></li>
-              {m.slug === 'calculus-1' && <>
+              {m.slug === calculusSlug && <>
+                <li><a href={hrefArgomento(m.slug, RIPASSO, 'domande')}>Timed review</a></li>
+                <li class="solo-collegati"><a href={hrefArgomento(m.slug, RIPASSO_OGGI, 'domande')}>Today’s review</a></li>
                 <li><a href={url('/us/calculus-1/practice-exam')}>General practice exam</a></li>
                 <li><a href={url('/us/calculus-1/purdue')}>Purdue exam practice</a></li>
               </>}
             </ol>
           </li>
         )}
-        {conDomande.size > 0 && (
+        {!usa && conDomande.size > 0 && (
           <li class:list={{ corrente: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
             <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
             <ol class:list={{ aperta: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>

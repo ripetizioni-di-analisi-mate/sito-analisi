@@ -5,16 +5,19 @@ import {
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
+import { courses } from '../src/data/stem-usa/catalog.mjs';
 import { entraInLega, riassuntoLega, fotografiaLega } from './sfide.mjs';
 import { accodaSorpassi } from './avvisi-lega.mjs';
 
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
+const materieUsa = new Map(courses.map(course => [course.slug, course]));
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che chiede: 'it' o 'en'.
 const titoloArgomento = (materia, argomento, l = 'it') => (argomento === RIPASSO && (l === 'en' ? 'Exam practice' : 'Prove d\'esame'))
   || (argomento === RIPASSO_OGGI && (l === 'en' ? 'Today\'s review' : 'Ripasso di oggi'))
+  || (/^unit-\d+$/.test(argomento) && materieUsa.get(materia)?.lessons[Number(argomento.slice(5)) - 1]?.title)
   || (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
   || MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
-const titoloMateria = (materia, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materia;
+const titoloMateria = (materia, l = 'it') => (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materieUsa.get(materia)?.title || materia;
 function testoObiettivo(o, l = 'it') {
   const n = OBIETTIVI[o.codice]?.n;
   const en = l === 'en';

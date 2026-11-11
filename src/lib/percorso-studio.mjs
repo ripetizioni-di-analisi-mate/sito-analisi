@@ -33,7 +33,7 @@ export function leggiCatalogoStudio() {
 export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   if (!sessione || !Object.hasOwn(catalogo, sessione.materia)) return null;
   const m = catalogo[sessione.materia];
-  const base = `${lingua === 'en' ? '/en' : ''}/${sessione.materia}`;
+  const base = m.base || `${lingua === 'en' ? '/en' : ''}/${sessione.materia}`;
   const a = sessione.argomento;
   if (!a) return { href: base, domande: null, titolo: m.titolo, materia: m.titolo };
   const ripasso = a === 'prove-d-esame' || a === 'ripasso-di-oggi';
@@ -46,7 +46,7 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   }
   if (!m.argomenti.includes(a)) return null;
   return {
-    href: `${base}/${a}/teoria`,
+    href: m.base ? `${base}#${a}` : `${base}/${a}/teoria`,
     domande: m.domande.includes(a) ? `${base}/${a}/domande` : null,
     titolo: sessione.titolo || m.titolo,
     materia: m.titolo,
