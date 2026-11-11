@@ -66,7 +66,11 @@ export const mathematics = [
     ]),
   course('calculus-2', 'Calculus II', 'Extend one-variable integration and learn to work with sequences, series, and parametric and polar curves.',
     'Calculus I, including definite integrals and substitution.',
-    [purdue, illinoisSyllabus(231, 'MATH 231 Calculus II'), texasMath],
+    [
+      { title: 'Purdue University · MA 16200 lessons and assignments', url: 'https://www.math.purdue.edu/academic/courses/semester/202710/ma16200/16200_Lessons_and_Assignments_for_math_page.html' },
+      illinoisSyllabus(231, 'MATH 231 Calculus II'),
+      { title: 'Purdue University · MA 16200 past exam archive', url: 'https://www.math.purdue.edu/academic/courses/oldexams.php?course=MA16200' },
+    ],
     [
       L('Techniques of integration', 'Integration by parts reverses the product rule: ∫u dv = uv − ∫v du. Partial fractions turn suitable rational expressions into terms with simpler denominators.',
         'To integrate x eˣ, set u = x and dv = eˣ dx. Then ∫x eˣ dx = x eˣ − eˣ + C.',
@@ -86,6 +90,9 @@ export const mathematics = [
       L('Parametric and polar curves', 'For a parametric curve, dy/dx = (dy/dt)/(dx/dt) when dx/dt ≠ 0. In polar coordinates, area swept over an angle interval is ½∫ r² dθ when the region is traced once.',
         'For x = t² and y = t³, the slope at t = 2 is 3t²/(2t) = 3. The parameter identifies the point and the two coordinate rates determine the slope.',
         'For x = 1 + 2t and y = t² − t, what is dy/dx at t = 3?', '5/2', ['5', '2/5', '3'], 'At t = 3, dy/dt = 2t − 1 = 5 and dx/dt = 2. Divide the rates to get 5/2.'),
+      L('Vectors and analytic geometry · Purdue MA 16200', 'Use vector components, dot products and cross products to solve geometric problems in two and three dimensions.',
+        'The vectors (2, 0, 0) and (0, 3, 0) have cross product (0, 0, 6). The triangle they span has area 3.',
+        'What angle do the nonzero vectors (1, 2, 0) and (2, −1, 0) form?', 'π/2', ['0', 'π/4', 'π'], 'Their dot product is 1·2 + 2·(−1) = 0. Since neither vector is zero, the angle is π/2.'),
     ]),
   course('calculus-3', 'Calculus III', 'Study multivariable differentiation, multiple integrals and vector calculus.',
     'Calculus II and basic vectors.',

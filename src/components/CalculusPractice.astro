@@ -1,15 +1,16 @@
 ---
 import VerificaRisposta from './VerificaRisposta.astro';
-import { calculusAnswer, calculusHtml, calculusSlug } from '../lib/stem-usa-practice';
-import { calculusPractice } from '../data/stem-usa/calculus-1-practice.mjs';
+import { calculusAnswer, calculusHtml, type PracticeUnit } from '../lib/stem-usa-practice';
 
 interface Props {
-  topic: keyof typeof calculusPractice;
+  course: string;
+  topic: string;
+  material: PracticeUnit;
   number: number;
   originalExample: string;
 }
-const { topic, number, originalExample } = Astro.props;
-const { worked, exercises } = calculusPractice[topic];
+const { course, topic, material, number, originalExample } = Astro.props;
+const { worked, exercises } = material;
 ---
 <details class="sommario-pagina studio-unita-usa studio-pratica-usa" id={'worked-' + number} hidden>
   <summary>Worked examples ({worked.length + 1})</summary>
@@ -38,7 +39,7 @@ const { worked, exercises } = calculusPractice[topic];
           <p set:html={calculusHtml(exercise.prompt)} />
           <VerificaRisposta
             lingua="en"
-            id={calculusSlug + '/' + topic + '/' + exercise.number}
+            id={course + '/' + topic + '/' + exercise.number}
             tipo={calculusAnswer(exercise.answer, exercise.primitive).tipo}
             primitiva={exercise.primitive}
             mostraIndizio={false}

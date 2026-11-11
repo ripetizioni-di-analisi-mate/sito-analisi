@@ -1,8 +1,7 @@
 import type { Materia } from '../materie';
-import { courseUrl, groups } from './catalog.mjs';
+import { courseUrl, groups, universityTimedTopics } from './catalog.mjs';
 import { highSchoolGroups, highSchoolName } from './high-school/index.mjs';
 import { url } from '../../lib/url';
-import { calculusSlug } from './calculus-1-practice.mjs';
 import { usaProduct } from './pricing';
 
 export const gruppoUsa = 'University';
@@ -44,6 +43,6 @@ export function linkArgomentoUsa(materia: string, argomento: string, sezione: st
   const numero = argomento.slice('unit-'.length);
   const ancora = sezione === 'teoria' ? argomento
     : sezione === 'esercizi-svolti' ? 'worked-' + numero
-    : (materia === calculusSlug || materia.startsWith('hs-') ? 'exercises-' : 'question-') + numero;
+    : (Object.hasOwn(universityTimedTopics, materia) || materia.startsWith('hs-') ? 'exercises-' : 'question-') + numero;
   return url(path + '#' + ancora);
 }

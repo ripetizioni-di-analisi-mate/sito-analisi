@@ -1,0 +1,17 @@
+---
+import Domande from '../../../../viste/Domande.astro';
+import { universityStudies, timedCount } from '../../../../lib/stem-usa-practice';
+import { RIPASSO, RIPASSO_OGGI } from '../../../../data/livelli';
+
+export function getStaticPaths() {
+  return [...universityStudies].flatMap(([course, study]) => [
+    ...Object.entries(study.timed).map(([topic, questions]) => ({
+      params: { course, topic },
+      props: { total: questions.length },
+    })),
+    { params: { course, topic: RIPASSO }, props: { total: timedCount(study) } },
+    { params: { course, topic: RIPASSO_OGGI }, props: { total: 0 } },
+  ]);
+}
+---
+<Domande lingua="en" materia={Astro.params.course!} argomento={Astro.params.topic!} totale={Astro.props.total} usa />

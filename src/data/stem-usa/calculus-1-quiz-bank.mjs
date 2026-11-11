@@ -1,17 +1,7 @@
+import { fraction, question as q, numericQuestion as numeric } from './quiz.mjs';
+
 const m = String.raw;
 
-function fraction(numerator, denominator = 1) {
-  if (!denominator) throw new Error('Zero denominator');
-  let a = Math.abs(numerator), b = Math.abs(denominator);
-  while (b) [a, b] = [b, a % b];
-  const n = Math.abs(numerator / a), d = Math.abs(denominator / a);
-  const sign = numerator * denominator < 0 ? '-' : '';
-  return d === 1 ? sign + n : m`${sign}\dfrac{${n}}{${d}}`;
-}
-
-const math = value => '$' + value + '$';
-const q = (prompt, correct, distractors, explanation) => ({ prompt, correct, distractors, explanation });
-const numeric = (prompt, correct, distractors, explanation) => q(prompt, math(correct), distractors.map(math), explanation);
 const family = (cases, make) => cases.map(values => make(...values));
 
 // The order in each unit determines permanent question IDs. Append future additions.

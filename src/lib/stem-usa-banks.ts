@@ -1,13 +1,14 @@
-import { calculusSlug, calculusTopics, calculusQuestions, calculusAnswers, calculusCounts, calculusTimedCount, calculusHtml, calculusAnswer } from './stem-usa-practice';
+import { universityStudies, timedQuestions, practiceAnswers, practiceCounts, timedCount, calculusHtml, calculusAnswer } from './stem-usa-practice';
 import { highSchoolCourses, highSchoolCourse, highSchoolTimedTopics } from '../data/stem-usa/high-school/index.mjs';
-import { optionsFor } from '../data/stem-usa/catalog.mjs';
+import { optionsFor, universityTimedTopics } from '../data/stem-usa/catalog.mjs';
 import type { Domanda } from './domande';
 
-export const usTimedTopics: Record<string, string[]> = { [calculusSlug]: calculusTopics, ...highSchoolTimedTopics };
-export const usPracticeSlugs = [calculusSlug, ...highSchoolCourses.map(course => course.slug)];
+export const usTimedTopics: Record<string, string[]> = { ...universityTimedTopics, ...highSchoolTimedTopics };
+export const usPracticeSlugs = [...universityStudies.keys(), ...highSchoolCourses.map(course => course.slug)];
 
 export function usQuestions(slug: string): Record<string, Domanda[]> {
-  if (slug === calculusSlug) return calculusQuestions();
+  const study = universityStudies.get(slug);
+  if (study) return timedQuestions(study);
   const course = highSchoolCourse(slug);
   if (!course) return {};
   return Object.fromEntries(course.lessons.map((lesson, index) => {
@@ -24,7 +25,8 @@ export function usQuestions(slug: string): Record<string, Domanda[]> {
 }
 
 export function usAnswers(slug: string) {
-  if (slug === calculusSlug) return calculusAnswers();
+  const study = universityStudies.get(slug);
+  if (study) return practiceAnswers(study);
   const course = highSchoolCourse(slug);
   if (!course) return {};
   return Object.fromEntries(course.lessons.flatMap((lesson, index) => lesson.exercises.flatMap((exercise, i) => exercise[3] === undefined
@@ -32,7 +34,8 @@ export function usAnswers(slug: string) {
 }
 
 export function usContentCounts(slug: string, topics: number) {
-  if (slug === calculusSlug) return { ...calculusCounts, timed: calculusTimedCount, exercises: calculusCounts.exercises, review: topics };
+  const study = universityStudies.get(slug);
+  if (study) return { ...practiceCounts(study), timed: timedCount(study), review: topics };
   const course = highSchoolCourse(slug);
   if (!course) return { worked: topics, exercises: 0, timed: 0, review: topics };
   return {
