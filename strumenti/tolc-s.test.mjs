@@ -15,12 +15,16 @@ for(const a of readdirSync('src/content/domande/tolc-s')){
     return {id:`${a}/${parseInt(f)}`,corretta,scelte,testo:parts[0],spiegazione:parts[1]};
   });
 }
-test('TOLC-S: 12 capitoli, 170 quiz con cinque alternative e spiegazioni',()=>{
-  assert.equal(Object.keys(args).length,12);assert.equal(Object.values(args).flat().length,170);
+test('TOLC-S: 12 capitoli da 90 quesiti, cinque alternative e spiegazioni',()=>{
+  assert.equal(Object.keys(args).length,12);
   for(const [a,qs]of Object.entries(args)){
+    assert.deepEqual(qs.map(q=>q.id),Array.from({length:90},(_,i)=>`${a}/${i+1}`));
     const t=readFileSync(`src/content/teoria/tolc-s/${a}.md`,'utf8');assert(!t.includes('TOLC-I'));assert(t.match(/^## /gm).length>=6);
     for(const m of t.matchAll(/\$([^$\n]+)\$/g))katex.renderToString(m[1],{throwOnError:true,strict:false});
-    for(const q of qs)assert(readFileSync(`src/content/dafare/tolc-s/${q.id}.md`,'utf8').includes(':::soluzione'));
+    const cartella=`src/content/dafare/tolc-s/${a}`;
+    const esercizi=readdirSync(cartella).filter(file=>/^\d+\.md$/.test(file));
+    assert(esercizi.length>0);
+    for(const file of esercizi) assert(readFileSync(`${cartella}/${file}`,'utf8').includes(':::soluzione'));
   }
 });
 test('TOLC-S: 55 quesiti / 120 minuti, oppure 85 / 135 con inglese',()=>{

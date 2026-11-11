@@ -18,13 +18,17 @@ for (const a of readdirSync('src/content/domande/tolc-i')) {
     return {id:`${a}/${parseInt(f)}`,corretta,scelte,testo:parti[0],spiegazione:parti[1]};
   });
 }
-test('110 quesiti originali, cinque alternative e formule valide',()=>{
-  assert.equal(Object.values(argomenti).flat().length,110);
+test('TOLC-I: 9 capitoli da 90 quesiti, cinque alternative e formule valide',()=>{
+  assert.equal(Object.keys(argomenti).length,9);
   for(const [a,qs]of Object.entries(argomenti)){
+    assert.deepEqual(qs.map(q=>q.id),Array.from({length:90},(_,i)=>`${a}/${i+1}`));
     const te=readFileSync(`src/content/teoria/tolc-i/${a}.md`,'utf8');
     assert(te.match(/^## /gm).length>=6);
     for(const m of te.matchAll(/\$([^$\n]+)\$/g))katex.renderToString(m[1],{throwOnError:true,strict:false});
-    for(const q of qs){const file=q.id.split('/')[1];assert(readFileSync(`src/content/dafare/tolc-i/${a}/${file}.md`,'utf8').includes(':::soluzione'));}
+    const cartella=`src/content/dafare/tolc-i/${a}`;
+    const esercizi=readdirSync(cartella).filter(file=>/^\d+\.md$/.test(file));
+    assert(esercizi.length>0);
+    for(const file of esercizi) assert(readFileSync(`${cartella}/${file}`,'utf8').includes(':::soluzione'));
   }
 });
 test('prova 80 quesiti/125 minuti, fisica e chimica, nessun duplicato',()=>{

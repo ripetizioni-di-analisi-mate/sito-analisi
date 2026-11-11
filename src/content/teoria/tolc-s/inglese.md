@@ -1,6 +1,6 @@
 ---
 titolo: "Inglese per il TOLC-S"
-sommario: "Tempi verbali, domande, pronomi, preposizioni, confronti e lessico in trenta quiz commentati."
+sommario: "Tempi verbali, domande, pronomi, preposizioni, confronti e lessico, con quiz commentati."
 ---
 
 La sezione di inglese segue le sei sezioni principali e ha un punteggio separato. Allena la lettura della frase completa: un avverbio di tempo, il soggetto o una preposizione possono determinare la risposta corretta.

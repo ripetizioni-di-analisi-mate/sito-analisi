@@ -1121,6 +1121,19 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .tempo .secondi { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 2.6rem; text-align: right; }
 .nota-tempo { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0.3rem 0 0 2rem; }
 .testo-domanda { margin-top: 1rem; }
+.testo-domanda table {
+  width: 100%;
+  margin-block: 1rem;
+  border-collapse: collapse;
+  font-family: var(--ui);
+  font-size: 0.9rem;
+}
+.testo-domanda :is(th, td) {
+  padding: 0.45rem;
+  border-bottom: 1px solid var(--riga);
+  overflow-wrap: anywhere;
+}
+.testo-domanda th { background: var(--carta-2); }
 .scelte { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
 .scelta { display: flex; align-items: center; gap: 0.9rem; min-height: 3.2rem; text-align: left; font: inherit; color: var(--inchiostro); background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.4rem 1rem; cursor: pointer; }
 .scelta .lettera { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--riga); display: inline-grid; place-items: center; font-family: var(--ui); font-size: 0.85rem; font-weight: 700; color: var(--inchiostro-2); }
