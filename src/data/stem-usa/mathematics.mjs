@@ -96,9 +96,13 @@ export const mathematics = [
     ]),
   course('calculus-3', 'Calculus III', 'Study multivariable differentiation, multiple integrals and vector calculus.',
     'Calculus II and basic vectors.',
-    [purdue, illinoisSyllabus(241, 'MATH 241 Calculus III'), texasMath],
     [
-      L('Vectors and geometry in space', 'The dot product measures alignment and tests orthogonality. A cross product is perpendicular to both factors. A plane can be described by a point and a normal vector.',
+      illinoisSyllabus(241, 'MATH 241 Calculus III'),
+      { title: 'Purdue University · MA 26100 Multivariate Calculus', url: 'https://www.math.purdue.edu/academic/courses/semester/202710/ma26100/index.html' },
+      texasMath,
+    ],
+    [
+      L('Vectors, geometry and curves in space', 'Vectors describe directions, lines and planes in three dimensions. A parametrized curve gives position, velocity and acceleration, and its derivative determines arc length and curvature.',
         'A plane through (1, 0, 2) with normal (2, −1, 3) satisfies 2(x − 1) − y + 3(z − 2) = 0. Equivalently, 2x − y + 3z = 8.',
         'Which vector is normal to x − 2y + 4z = 7?', '(1, −2, 4)', ['(1, 2, 4)', '(−2, 4, 7)', '(4, −2, 1)'], 'The coefficients of x, y and z form a vector perpendicular to the plane.'),
       L('Partial derivatives and tangent planes', 'A partial derivative changes one variable while keeping the others fixed. If z = f(x, y) is differentiable, its tangent plane at (a, b) has slopes fₓ(a, b) and fᵧ(a, b).',
