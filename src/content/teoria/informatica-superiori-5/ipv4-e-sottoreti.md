@@ -33,6 +33,10 @@ Un blocco con prefisso `/p` contiene $2^{32-p}$ indirizzi. Per le sottoreti ordi
 Se il destinatario è nella rete locale, il mittente può consegnare il frame direttamente dopo averne risolto il MAC. Per un destinatario esterno senza una rotta più specifica invia il frame al MAC del **gateway predefinito**. L’IP di destinazione rimane quello finale.
 :::
 
+:::esempio{titolo="Dall’indirizzo IPv4 al MAC con ARP"}
+Su Ethernet con IPv4, ARP risolve l’indirizzo IP del prossimo salto nel relativo MAC. Se `192.168.4.20/24` deve raggiungere una rete esterna tramite il gateway `192.168.4.1`, cerca il MAC di `192.168.4.1` nella cache ARP. Se manca, trasmette una richiesta ARP in broadcast sulla LAN. La risposta del router permette al computer di usare il MAC della sua interfaccia locale.
+:::
+
 ## Scegliere una rotta
 
 :::definizione{#prefisso-piu-lungo titolo="Prefisso più lungo"}

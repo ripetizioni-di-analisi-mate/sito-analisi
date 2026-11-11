@@ -6,7 +6,19 @@ sommario: "Dal nome del sito alla risposta HTTP, attraverso i servizi di rete e 
 ## Organizzare i livelli
 
 :::definizione{#modelli titolo="Modello TCP/IP e modello OSI"}
-Nel modello TCP/IP si distinguono applicazione, trasporto, Internet e accesso alla rete. Il modello OSI descrive sette livelli con una suddivisione diversa. HTTP opera all’applicazione, TCP al trasporto, IP alla rete ed Ethernet copre funzioni di collegamento e accesso al mezzo.
+Nel modello TCP/IP si distinguono applicazione, trasporto, Internet e accesso alla rete. Il modello OSI descrive sette livelli con una suddivisione diversa. In ordine dal più vicino all’utente al più vicino al mezzo fisico, i livelli OSI sono i seguenti.
+
+| Livello OSI | Compito |
+| --- | --- |
+| 7. Applicazione | Fornisce servizi di comunicazione alle applicazioni, per esempio HTTP. |
+| 6. Presentazione | Riguarda il formato e la rappresentazione dei dati. |
+| 5. Sessione | Riguarda l’apertura, la gestione e la chiusura del dialogo. |
+| 4. Trasporto | Gestisce lo scambio fra processi. TCP e UDP operano a questo livello. |
+| 3. Rete | Indirizza e instrada i pacchetti. IP opera a questo livello. |
+| 2. Collegamento | Gestisce i frame sul singolo collegamento. |
+| 1. Fisico | Trasmette i bit sotto forma di segnali. |
+
+TCP/IP raccoglie nell’applicazione le funzioni dei livelli superiori OSI. Ethernet comprende funzioni di collegamento e specifiche fisiche.
 :::
 
 ## Identificare il servizio
