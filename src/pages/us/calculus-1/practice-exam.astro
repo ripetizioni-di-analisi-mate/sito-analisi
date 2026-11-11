@@ -1,0 +1,14 @@
+---
+import UsStem from '../../../layouts/UsStem.astro';
+import UsPractice from '../../../components/UsPractice.astro';
+import { questions } from '../../../data/stem-usa/calculus-exam.mjs';
+import { url } from '../../../lib/url';
+---
+<UsStem title="Calculus I Practice Exam" description="A cumulative U.S. Calculus I practice exam with twelve original questions and worked solutions.">
+  <nav class="stem-crumb" aria-label="Course navigation"><a href={url('/us/calculus-1')}>← Back to Calculus I</a></nav>
+  <header class="stem-hero">
+    <h1>Calculus I practice exam</h1>
+    <p>Review limits, derivatives, applications and definite integrals. Use the 60-minute timer to simulate an exam, or work at your own pace.</p>
+  </header>
+  <UsPractice questions={questions.map(question => ({ ...question, href: url(question.href) }))} minutes={60} />
+</UsStem>

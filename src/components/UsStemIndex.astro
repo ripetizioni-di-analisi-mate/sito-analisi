@@ -1,0 +1,29 @@
+---
+import { groups, courseUrl } from '../data/stem-usa/catalog.mjs';
+import { url } from '../lib/url';
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+---
+<nav class="indice" aria-label="U.S. STEM course index">
+  <div class="indice-testa"><span>U.S. STEM</span></div>
+  <p class="indice-materia"><a href={url('/us')}>All U.S. courses</a></p>
+  {groups.map(group => (
+    <details class="indice-gruppo" open={group.courses.some(course => path === courseUrl(course.slug) || path.startsWith(courseUrl(course.slug) + '/'))}>
+      <summary class="indice-materia">{group.name}</summary>
+      <ul class="indice-materie">
+        {group.courses.map(course => (
+          <li><a class="voce-materia" href={url(courseUrl(course.slug))} aria-current={path === courseUrl(course.slug) ? 'page' : undefined}>
+            <span class="materia-testo"><span class="materia-nome">{course.title}</span></span>
+          </a></li>
+        ))}
+      </ul>
+    </details>
+  ))}
+  <p class="indice-contatti"><a href={url('/')}>Italian curriculum</a></p>
+</nav>
+
+<style>
+  .indice-materia a { color: inherit; }
+  ul { list-style: none; }
+  .indice-gruppo { margin-bottom: .35rem; }
+  .indice-gruppo summary { cursor: pointer; }
+</style>

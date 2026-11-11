@@ -3,6 +3,7 @@ import '@fontsource/source-sans-3/latin-500-italic.css';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
+import StudyCountry from '../components/StudyCountry.astro';
 import Stato from '../components/Stato.astro';
 import Presentazione from '../components/Presentazione.astro';
 import SpazioStudente from '../components/SpazioStudente.astro';
@@ -45,6 +46,7 @@ const icona = {
 };
 ---
 <Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} sezione="home" ricercaPrincipale seo={{ titolo: SEO(lingua).home }}>
+  <StudyCountry lingua={lingua} />
   <div class="home-intro solo-ospiti">
     {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
     <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>

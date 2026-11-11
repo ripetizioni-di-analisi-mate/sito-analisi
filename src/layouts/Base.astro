@@ -10,6 +10,7 @@ import fontIndiceBold from '@fontsource/source-sans-3/files/source-sans-3-latin-
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
+import UsStemIndex from '../components/UsStemIndex.astro';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
@@ -57,6 +58,8 @@ const domandeDisponibili = await catalogoDomande(lingua);
 const domandeQui = Boolean(materia && argomento && (domandeDisponibili[materia] ?? []).includes(argomento));
 const catalogoPercorso = creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua);
 const en = lingua === 'en';
+const catalogoUsa = sezione === 'usa';
+const homeCurriculum = catalogoUsa ? url('/us') : link(lingua, '/');
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
@@ -207,7 +210,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 <body>
   <header class="testata">
     <div class="testata-interna">
-      <a class="marchio" href={link(lingua, '/')}>
+      <a class="marchio" href={homeCurriculum}>
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
@@ -249,9 +252,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           </>
         )}
       </div>
-      <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} title={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
+      {!catalogoUsa && <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} title={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
         <span>{altra.toUpperCase()}</span>
-      </a>
+      </a>}
       <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
         <span>{t.indice}</span>
@@ -260,7 +263,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </header>
 
   <div class="corpo">
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    {catalogoUsa ? <UsStemIndex /> : <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />}
     <main id="contenuto-principale">
       <div class="pagina">
         {m && (
@@ -313,7 +316,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       <a href={link(lingua, '/privacy')}>{t.privacy}</a>
       <a href={link(lingua, '/termini')}>{t.termini}</a>
       <a href={link(lingua, '/rimborsi')}>{t.rimborsi}</a>
-      <a href={versoAltra} hreflang={altra} lang={altra} data-lingua={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
+      {!catalogoUsa && <a href={versoAltra} hreflang={altra} lang={altra} data-lingua={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>}
     </nav>
     <span class="pie-copyright">{t.copyright}</span>
   </footer>
@@ -337,7 +340,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    {catalogoUsa ? <UsStemIndex /> : <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />}
   </dialog>
 
   <script>

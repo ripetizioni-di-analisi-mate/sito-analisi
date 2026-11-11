@@ -1,0 +1,90 @@
+---
+import UsStem from '../../layouts/UsStem.astro';
+import UsPractice from '../../components/UsPractice.astro';
+import { courses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return courses.map(course => ({ params: { course: course.slug }, props: { course } }));
+}
+
+const { course } = Astro.props;
+const questions = course.lessons.map((lesson, index) => ({
+  title: lesson.title,
+  prompt: lesson.prompt,
+  choices: optionsFor(lesson, index),
+  correct: index % (lesson.distractors.length + 1),
+  explanation: lesson.explanation,
+  href: '#unit-' + (index + 1),
+}));
+const longerLessons: Record<string, { title: string; path: string }> = {
+  precalculus: { title: 'Precalculus library', path: '/en/precorso' },
+  'calculus-1': { title: 'Single-variable calculus library', path: '/en/analisi-1' },
+  'calculus-2': { title: 'Integration and series library', path: '/en/analisi-1' },
+  'calculus-3': { title: 'Multivariable calculus library', path: '/en/analisi-2' },
+  'differential-equations': { title: 'Differential equations and linear systems', path: '/en/analisi-2/equazioni-differenziali/teoria' },
+  'linear-algebra': { title: 'Linear algebra library', path: '/en/algebra-lineare' },
+  'statistics-and-probability': { title: 'Statistics and probability library', path: '/en/statistica' },
+  'physics-1-mechanics': { title: 'Mechanics library', path: '/en/fisica-1' },
+  'thermal-physics': { title: 'Thermodynamics exercises in the physics library', path: '/en/fisica-1' },
+  'physics-2-electricity-and-magnetism': { title: 'Electricity and magnetism library', path: '/en/fisica-2' },
+};
+const more = longerLessons[course.slug];
+const title = course.title;
+---
+<UsStem title={title} description={course.description}>
+  <nav class="stem-crumb" aria-label="Course navigation"><a href={url('/us')}>← All U.S. STEM courses</a></nav>
+  <header class="stem-hero">
+    <h1>{title}</h1>
+    <p>{course.description}</p>
+    <p class="stem-prep"><strong>Preparation</strong> {course.preparation}</p>
+    <nav class="stem-jumps" aria-label="Course sections">
+      <a href="#study-units">Study units</a>
+      <a href="#course-practice">Practice quiz</a>
+      {course.slug === 'calculus-1' && <>
+        <a href={url(courseUrl(course.slug) + '/practice-exam')}>General practice exam</a>
+        <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>
+      </>}
+    </nav>
+  </header>
+  <section id="study-units" class="stem-study">
+    <h2>Study units</h2>
+    <ol class="stem-lesson-list">
+      {course.lessons.map((lesson, index) => (
+        <li>
+          <details class="stem-lesson" id={'unit-' + (index + 1)}>
+            <summary>{lesson.title}</summary>
+            <div>
+              <p>{lesson.theory}</p>
+              <p><strong class="stem-worked">Worked example</strong> {lesson.worked}</p>
+            </div>
+          </details>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <UsPractice questions={questions} minutes={questions.length * 2} />
+  {course.slug === 'calculus-1' && (
+    <section class="stem-resources">
+      <h2>Full practice exams</h2>
+      <ul>
+        <li><a href={url(courseUrl(course.slug) + '/practice-exam')}>General Calculus I exam</a> · 12 questions, 60 minutes</li>
+        <li><a href={url(courseUrl(course.slug) + '/purdue')}>Purdue MA 16100 practice</a> · Exam 3, final exam and a warm-up quiz</li>
+      </ul>
+    </section>
+  )}
+  {more && <section class="stem-resources"><h2>More lessons and worked problems</h2><a href={url(more.path)}>{more.title} →</a></section>}
+  <section class="stem-resources">
+    <h2>University syllabi</h2>
+    <ul>{course.sources.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
+  </section>
+</UsStem>
+<script>
+  function openLinkedUnit() {
+    if (!/^#unit-\d+$/.test(location.hash)) return;
+    const details = document.getElementById(location.hash.slice(1));
+    if (details instanceof HTMLDetailsElement) details.open = true;
+  }
+  openLinkedUnit();
+  addEventListener('hashchange', openLinkedUnit);
+</script>

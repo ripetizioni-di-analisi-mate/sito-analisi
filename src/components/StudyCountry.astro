@@ -1,0 +1,25 @@
+---
+import { link, type Lingua } from '../i18n';
+import { url } from '../lib/url';
+
+interface Props { lingua: Lingua; usa?: boolean }
+const { lingua, usa = false } = Astro.props;
+const en = lingua === 'en';
+const title = en ? 'Where do you study?' : 'Dove studi?';
+---
+<nav class="study-country" aria-label={title} id="dove-studi">
+  <strong>{title}</strong>
+  <div>
+    <a href={usa ? url('/') : link(lingua, '/')} aria-current={!usa ? 'true' : undefined}>{en ? 'Italy' : 'Italia'}</a>
+    <a href={url('/us')} aria-current={usa ? 'true' : undefined}>{en ? 'United States' : 'Stati Uniti'}</a>
+  </div>
+</nav>
+
+<style>
+  .study-country { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .85rem; margin: 0 0 1.2rem; padding: .54rem .7rem; background: #eef4ef; border: 1px solid #d4e1d8; border-radius: .7rem; color: #23483e; font-family: var(--ui); }
+  .study-country strong { padding-inline: .2rem; font-size: .92rem; }
+  .study-country div { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .study-country a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .66rem; color: #23483e; border: 1px solid transparent; border-radius: .45rem; font-size: .88rem; font-weight: 650; text-decoration: none; }
+  .study-country a[aria-current], .study-country a:hover { border-color: #a8c3b3; background: #fff; }
+  .study-country a:focus-visible { outline: 2px solid #1f6250; outline-offset: 2px; }
+</style>

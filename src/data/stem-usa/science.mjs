@@ -1,0 +1,52 @@
+import { course, lesson as L, illinois } from './lesson.mjs';
+
+const texas = (title, path) => ({
+  title: 'The University of Texas at Austin · ' + title,
+  url: 'https://catalog.utexas.edu/courses/' + path + '/',
+});
+
+export const science = [
+  course('general-chemistry-1', 'General Chemistry I', 'Use atomic and molecular models to reason about composition, bonding and reactions.',
+    'High-school algebra and basic chemistry vocabulary.',
+    [illinois('CHEM/102', 'CHEM 102 General Chemistry I'), texas('Chemistry courses', 'ch')],
+    [
+      L('Atoms, isotopes and periodic trends', 'Atomic number counts protons. Isotopes of an element differ in neutron count. Periodic trends reflect effective nuclear attraction and shielding, so atomic size generally decreases across a period.',
+        'Carbon-14 has atomic number 6 and mass number 14. It contains six protons and eight neutrons.',
+        'How many neutrons are in chlorine-37, whose atomic number is 17?', '20', ['17', '37', '54'], 'Subtract the atomic number from the mass number: 37 − 17 = 20.'),
+      L('Moles, formulas and stoichiometry', 'Molar mass converts grams to moles. Coefficients in a balanced equation are mole ratios. The limiting reactant is the one that can support the fewest complete reaction equivalents.',
+        'For 2 H₂ + O₂ → 2 H₂O, 4 mol of H₂ and 1 mol of O₂ can make 2 mol of water. The oxygen is limiting because each mole of oxygen requires two moles of hydrogen.',
+        'For N₂ + 3 H₂ → 2 NH₃, what is the maximum NH₃ from 1 mol of N₂ and 6 mol of H₂?', '2 mol', ['1 mol', '3 mol', '4 mol'], 'One mole of N₂ uses 3 mol of H₂ and yields 2 mol of NH₃. Nitrogen runs out first.'),
+      L('Bonding, geometry and polarity', 'A Lewis structure accounts for valence electrons. Electron groups around a central atom give a first prediction of geometry. Molecular polarity depends on the vector sum of individual bond dipoles.',
+        'In CO₂ the central carbon has two electron groups. The molecule is linear, so its two equal bond dipoles cancel.',
+        'Why is H₂O polar even though both O–H bonds are alike?', 'Its bent geometry keeps the bond dipoles from canceling.', ['Its bonds are nonpolar.', 'Its two bond dipoles point in exactly opposite directions.', 'It has no lone pairs.'], 'The two O–H dipoles are at an angle rather than pointing in opposite directions. Their vector sum is nonzero.'),
+      L('Gases and intermolecular forces', 'The ideal-gas equation is PV = nRT. Use kelvin for temperature and units consistent with R. Intermolecular attractions affect boiling points and matter more when molecules are closer together.',
+        'At the same n and T, doubling the volume of an ideal gas halves its pressure.',
+        'A sealed rigid vessel holds an ideal gas at 300 K and 2 atm. What is the pressure at 450 K?', '3 atm', ['1.33 atm', '2 atm', '4.5 atm'], 'The volume and amount are fixed. Multiply the initial pressure by 450/300.'),
+      L('Solutions and concentration', 'Molarity is moles of solute per liter of solution. During a simple dilution, the amount of solute is conserved. This gives M₁V₁ = M₂V₂.',
+        'Diluting 25 mL of 2.0 M solution to a total of 100 mL gives 2.0·25/100 = 0.50 M.',
+        'What is the molarity of 0.25 mol of solute in 0.50 L of solution?', '0.50 M', ['0.125 M', '0.25 M', '2.0 M'], 'Divide 0.25 mol by the total solution volume, 0.50 L.'),
+      L('Chemical equilibrium', 'At equilibrium, forward and reverse rates are equal. For concentration-based equilibria, compare the reaction quotient Q with K. When Q < K, the net reaction proceeds in the forward direction.',
+        'For A ⇌ 2 B, Q = [B]²/[A]. If [B] = 2 and [A] = 4 in the specified concentration units, Q = 1. If K = 4, the net reaction initially produces B.',
+        'If Q is greater than K, which direction brings the mixture toward equilibrium?', 'Toward reactants', ['Toward products', 'Both rates must be zero.', 'The direction cannot be determined from Q and K.'], 'A quotient above K indicates too much product relative to equilibrium. Net reverse reaction reduces Q.'),
+    ]),
+  course('introductory-biology', 'Introductory Biology · Cells and Genetics', 'Connect cellular structures to energy use, gene expression and inheritance.',
+    'Basic chemistry is useful.',
+    [illinois('MCB/150', 'MCB 150 Molecular & Cellular Basis of Life'), texas('Biology courses', 'bio')],
+    [
+      L('Cell structures and organization', 'All cells have a membrane, genetic material and ribosomes. Eukaryotic cells organize many functions into membrane-bound compartments. Prokaryotic cells do not have a membrane-bound nucleus.',
+        'A cell with a nucleus and mitochondria is eukaryotic. The mitochondria help carry out aerobic energy metabolism.',
+        'Which structure directly synthesizes proteins in both prokaryotic and eukaryotic cells?', 'Ribosome', ['Nucleus', 'Mitochondrion', 'Golgi apparatus'], 'Ribosomes translate messenger RNA into polypeptides in both groups. The other listed structures are eukaryotic compartments.'),
+      L('Membranes and transport', 'A cell membrane is a selectively permeable lipid bilayer. Passive movement proceeds down a relevant gradient. Active transport can move a solute against its gradient by coupling transport to an energy source.',
+        'If a channel opens for an uncharged solute that is more concentrated outside the cell, net diffusion initially moves that solute inward.',
+        'A membrane protein uses ATP to move a solute against its concentration gradient. What is this process?', 'Active transport', ['Simple diffusion', 'Osmosis', 'Facilitated diffusion'], 'Movement against the gradient is driven here by energy from ATP, making it active transport.'),
+      L('Enzymes and cellular energy', 'Enzymes accelerate reactions by lowering activation barriers. ATP transfers usable energy between processes. In aerobic respiration, cells extract energy from fuel and use it to make ATP.',
+        'A reaction can be favorable but slow because of a high activation barrier. An enzyme speeds the approach to equilibrium by lowering the barrier.',
+        'What does an enzyme change for a given reaction under fixed conditions?', 'The rate of reaching equilibrium', ['The equilibrium constant', 'The free-energy difference between reactants and products', 'The total mass of reactants and products'], 'An enzyme changes the pathway and activation barrier. It does not change the free energies of the initial and final states.'),
+      L('DNA, RNA and gene expression', 'DNA stores genetic information. In transcription, RNA is made using a DNA template. In translation, a ribosome reads messenger RNA codons to build a polypeptide.',
+        'A cell may transcribe a gene into messenger RNA and later translate that RNA. These are two separate steps between the gene and its protein product.',
+        'Which process uses an mRNA sequence to build a polypeptide?', 'Translation', ['Transcription', 'DNA replication', 'Chromosome segregation'], 'Translation is the ribosome-mediated step that interprets the mRNA sequence as amino acids.'),
+      L('Cell division and Mendelian inheritance', 'Mitosis normally maintains chromosome number in daughter nuclei. Meiosis produces haploid cells and separates paired alleles. Simple Mendelian crosses can be analyzed by combining parental allele probabilities.',
+        'For Aa × Aa at one locus with ordinary segregation, the genotype probabilities are 1/4 AA, 1/2 Aa, and 1/4 aa.',
+        'For Aa × aa, what is the probability of an aa offspring under simple Mendelian inheritance?', '1/2', ['0', '1/4', '1'], 'The aa parent always contributes a. The Aa parent contributes a half the time.'),
+    ]),
+];
