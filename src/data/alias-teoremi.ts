@@ -140,6 +140,18 @@ export const ALIAS: Record<string, string[]> = {
   'teorema del punto fisso di banach': ['Teorema delle contrazioni', 'Teorema di Banach-Caccioppoli'],
   'lemma di fatou': ['Lemma di Fatou sugli integrali'],
   'baire e principio di uniforme limitatezza': ['Teorema di Baire', 'Teorema di Banach-Steinhaus'],
+  // Statica
+  'teorema di huygens-steiner': ['Teorema di Steiner', 'Teorema del trasporto', 'Teorema degli assi paralleli'],
+  'teorema di varignon': ['Teorema dei momenti', 'Teorema di Varignon per i momenti'],
+  'teorema di müller-breslau': ['Principio di Müller-Breslau', 'Metodo cinematico per le linee di influenza'],
+  'metodo delle sezioni di ritter': ['Metodo di Ritter', 'Sezioni di Ritter', 'Metodo delle sezioni'],
+  'cerchio di mohr d\'inerzia': ['Cerchio di Mohr', 'Circonferenza di Mohr per i momenti d\'inerzia'],
+  'primo teorema delle catene cinematiche': ['Primo teorema di allineamento dei centri', 'Allineamento dei centri assoluti e relativi'],
+  'secondo teorema delle catene cinematiche': ['Secondo teorema di allineamento dei centri', 'Allineamento dei centri relativi'],
+  'principio dei lavori virtuali per i sistemi di corpi rigidi': ['Principio dei lavori virtuali', 'PLV', 'Principio degli spostamenti virtuali'],
+  'equazioni cardinali della statica': ['Equazioni di equilibrio del corpo rigido', 'Equazioni cardinali dell\'equilibrio'],
+  'equazioni indefinite di equilibrio': ['Equazioni indefinite di equilibrio della trave', 'Relazioni tra carico, taglio e momento'],
+  'condizione 2n = a + v': ['Condizione di isostaticità delle travature reticolari', 'Regola 2n = a + v'],
 };
 
 // Nomi alternativi in inglese, con la stessa chiave italiana (per le pagine `/en/…`).
@@ -240,6 +252,15 @@ export const ALIAS_EN: Record<string, string[]> = {
   'teorema del punto fisso di banach': ['Banach fixed-point theorem', 'Contraction mapping theorem'],
   'lemma di fatou': ['Fatou\'s lemma'],
   'baire e principio di uniforme limitatezza': ['Baire category theorem', 'Banach-Steinhaus theorem', 'Uniform boundedness principle'],
+  // Statica
+  'teorema di huygens-steiner': ['Parallel axis theorem', 'Huygens-Steiner theorem', 'Steiner\'s theorem'],
+  'teorema di varignon': ['Varignon\'s theorem', 'Principle of moments'],
+  'teorema di müller-breslau': ['Müller-Breslau principle'],
+  'metodo delle sezioni di ritter': ['Method of sections', 'Ritter method'],
+  'cerchio di mohr d\'inerzia': ['Mohr\'s circle for moments of inertia', 'Mohr\'s circle'],
+  'principio dei lavori virtuali per i sistemi di corpi rigidi': ['Principle of virtual work', 'Virtual work principle'],
+  'equazioni cardinali della statica': ['Equilibrium equations of a rigid body'],
+  'equazioni indefinite di equilibrio': ['Differential equations of equilibrium for beams', 'Load-shear-moment relationships'],
 };
 
 // Nomi alternativi di una voce, nella lingua richiesta (chiave: titolo in minuscolo).

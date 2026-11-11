@@ -3,7 +3,7 @@ export const FACOLTA = [
   {
     titolo: 'Ingegneria',
     titoloEn: 'Engineering',
-    materie: ['analisi-1', 'analisi-2', 'analisi-3', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statistica', 'precorso'],
+    materie: ['analisi-1', 'analisi-2', 'analisi-3', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statica', 'statistica', 'precorso'],
   },
   {
     titolo: 'Economia',
