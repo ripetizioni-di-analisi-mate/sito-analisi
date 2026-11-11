@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import { PASS_PREMIUM, PREZZO_PASSAGGIO_PREMIUM, acquistoPremium } from '../data/premium.mjs';
+import { euro } from '../data/pacchetti.mjs';
+import { prefisso, type Lingua } from '../i18n';
+
+interface Props { lingua: Lingua }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const pref = prefisso(lingua);
+const trad = (it: string, inglese: string) => en ? inglese : it;
+const descrizione = trad('Tutte le discipline scritte con un solo pass. Scegli 6 o 12 mesi di accesso.', 'All written study materials with one pass. Choose 6 or 12 months of access.');
+const differenza = euro(PREZZO_PASSAGGIO_PREMIUM);
+const account = pref + '/account';
+const passaggio = acquistoPremium('passaggio', pref);
+---
+<Base titolo="Premium" descrizione={descrizione} lingua={lingua} percorso={[{ titolo: 'Premium' }]}>
+  <section class="premium-page" aria-labelledby="premium-titolo">
+    <header>
+      <h1 id="premium-titolo">Premium</h1>
+      <p class="premium-intro">{descrizione}</p>
+      <p class="premium-note">{trad('Pagamento unico. Senza rinnovo automatico.', 'One-time payment. No automatic renewal.')}</p>
+    </header>
+    <div class="premium-pass" data-premium-pass data-account={account} data-passaggio={passaggio}>
+      {Object.entries(PASS_PREMIUM).map(([slug, pass]) => {
+        const annuale = slug === 'annuale';
+        return (
+          <article class:list={['premium-card', { 'premium-annuale': annuale }]}>
+            <h2>{pass[lingua]}</h2>
+            <p class="premium-prezzo"><strong>{euro(pass.centesimi)}</strong> <span>· {pass.mesi} {trad('mesi', 'months')}</span></p>
+            <p class="premium-note">{trad('Videocorsi esclusi', 'Video courses excluded')}</p>
+            <ul>
+              <li>{annuale ? trad('Tutte le discipline scritte, incluse le nuove pubblicazioni', 'All written subjects, including new releases') : trad('Tutte le discipline scritte pubblicate alla data di acquisto', 'All written subjects available on the purchase date')}</li>
+              <li>{trad('Teoria, esercizi, quiz e aggiornamenti delle materie incluse', 'Theory, exercises, quizzes and updates to included subjects')}</li>
+            </ul>
+            {annuale && <p class="premium-valore">{trad(`6 mesi in più per ${differenza}`, `6 more months for ${differenza}`)}</p>}
+            <a class={annuale ? 'bottone-primario' : 'bottone-secondario'} href={acquistoPremium(slug, pref)} data-piano={slug}>{annuale ? trad('Scegli 12 mesi', 'Choose 12 months') : trad('Scegli 6 mesi', 'Choose 6 months')}</a>
+          </article>
+        );
+      })}
+    </div>
+    <p class="premium-passaggio">{trad(`Con il pass semestrale attivo puoi passare all’annuale per ${differenza}. I 12 mesi decorrono dal primo acquisto.`, `Upgrade your active six-month pass for ${differenza}. The 12 months start on your original purchase date.`)}</p>
+  </section>
+</Base>
+<script>
+  const plans = document.querySelector<HTMLElement>('[data-premium-pass]')!;
+  const en = document.documentElement.lang === 'en';
+  fetch('/api/io', { cache: 'no-store' }).then(async response => {
+    if (!response.ok) return;
+    const { premium } = await response.json();
+    if (!premium) return;
+    for (const link of plans.querySelectorAll<HTMLAnchorElement>('[data-piano]')) {
+      if (premium.piano === 'semestrale' && link.dataset.piano === 'annuale') {
+        link.href = plans.dataset.passaggio!;
+        link.textContent = en ? 'Upgrade to Annual' : 'Passa all’annuale';
+      } else {
+        link.href = plans.dataset.account!;
+        link.textContent = en ? 'Manage your pass' : 'Vedi il tuo pass';
+      }
+    }
+  }).catch(() => {});
+</script>
+<style>
+  .premium-page { max-width: 52rem; font-family: var(--ui); }
+  .premium-page h1 { margin: 0; }
+  .premium-intro { margin: .5rem 0 .3rem; font-size: 1.1rem; }
+  .premium-note { color: var(--inchiostro-2); font-size: .9rem; margin: 0; }
+  .premium-pass { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.2rem; }
+  .premium-card { display: flex; flex-direction: column; align-items: flex-start; padding: 1.25rem; border: 1px solid var(--riga); border-radius: var(--raggio); }
+  .premium-annuale { border-color: #adbbb1; background: #edf4ef; }
+  .premium-card h2 { margin: 0; font-size: 1.25rem; }
+  .premium-prezzo { margin: .5rem 0 .15rem; }
+  .premium-prezzo strong { font-size: 2rem; line-height: 1.15; }
+  .premium-card ul { margin: .9rem 0; padding-left: 1.2rem; }
+  .premium-card li + li { margin-top: .3rem; }
+  .premium-valore { margin: 0 0 .65rem; color: #2b6158; font-size: .93rem; font-weight: 650; }
+  .premium-card a { margin-top: auto; }
+  .premium-passaggio { margin: 1rem 0 0; font-size: .93rem; }
+  @media (max-width: 540px) { .premium-pass { grid-template-columns: minmax(0, 1fr); } }
+</style>

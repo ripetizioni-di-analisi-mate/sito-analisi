@@ -58,6 +58,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       <span data-luccichio-bronzo>Pacchetti e sconti</span>
     </a>
   )}
+  <a class="indice-pacchetti indice-premium" href={link(lingua, '/premium')} aria-current={qui.endsWith('/premium') ? 'page' : undefined}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 3 6 6.5 1-4.8 4.7 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5L2.5 10 9 9Z"/></svg>
+    <span>PREMIUM</span>
+  </a>
   {m ? (
     <>
       <p class="indice-materia indice-materia-corrente">
@@ -189,6 +193,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
 <style>
   .indice-materia-corrente { flex-direction: column; align-items: flex-start; gap: 0.2rem; text-wrap: balance; }
   .indice-pacchetti { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; margin: 0.75rem 0 1rem; padding: 0.55rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); color: var(--bronzo); background: var(--bronzo-fondo); font: 600 0.9rem/1.35 var(--ui); text-decoration: none; }
+  .indice-pacchetti + .indice-premium { margin-top: -.5rem; }
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
   .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
   .indice-pacchetti[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }

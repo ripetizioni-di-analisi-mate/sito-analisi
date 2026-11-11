@@ -5,6 +5,8 @@ import ConsensoEmail from '../components/ConsensoEmail.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
 import { usaProducts } from '../data/stem-usa/pricing';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { acquistoPremium, PREZZO_PASSAGGIO_PREMIUM } from '../data/premium.mjs';
+import { euro } from '../data/pacchetti.mjs';
 import { accountTesti } from '../lib/account-testi.mjs';
 import '../styles/account.css';
 interface Props { lingua: Lingua }
@@ -29,6 +31,11 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
       </div>
       <section id="studio-account" role="tabpanel" aria-labelledby="scheda-studio">
         <div id="riprendi-account" class="riprendi-account" hidden><div><p class="account-sopratitolo">{s.ultima}</p><h2 id="ultima-materia"></h2><p id="ultimo-argomento"></p></div><a class="bottone-primario" id="riprendi-link" href={pref || '/'}>{s.riprendi}<span aria-hidden="true"> →</span></a></div>
+        <section id="premium-account" class="account-gruppo" aria-labelledby="premium-account-titolo" hidden>
+          <h2 class="account-titolo-sezione" id="premium-account-titolo"></h2>
+          <p class="account-nota" id="premium-scadenza"></p>
+          <a class="bottone-secondario" id="premium-passaggio" href={acquistoPremium('passaggio', pref)} hidden>{en ? 'Upgrade to Annual' : 'Passa all’annuale'} · {euro(PREZZO_PASSAGGIO_PREMIUM)}</a>
+        </section>
         <h2 class="account-titolo-sezione">{s.contenuti}</h2>
         <ul class="contenuti-account" id="contenuti-account"></ul>
         <p class="account-nota" id="materie-vuote" hidden>{s.vuoto} <a href={pref || '/'}>{s.esplora}</a></p>

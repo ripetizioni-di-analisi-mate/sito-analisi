@@ -13,6 +13,12 @@ const annullaPendente = document.querySelector<HTMLButtonElement>('#annulla-pend
 const params = new URLSearchParams(location.search);
 const tipo = params.get('tipo');
 const slug = params.get('slug') || '';
+if (tipo === 'premium') {
+  form.querySelector<HTMLInputElement>('[name="versioneCondizioni"]')!.value = pagina.dataset.versionePremium!;
+  form.querySelector<HTMLElement>('[data-consenso-ordinario]')!.hidden = true;
+  form.querySelector<HTMLElement>('[data-consenso-premium]')!.hidden = false;
+  form.querySelector<HTMLAnchorElement>('a[href$="/termini"]')!.hash = 'premium';
+}
 const materie = (params.get('materie') || '').split(',').filter(Boolean);
 const selezione = tipo === 'materie' ? { tipo, materie }
   : tipo === 'video' ? { tipo, pacchetto: params.get('pacchetto') }
@@ -63,6 +69,16 @@ async function preventivo() {
   const elenco = document.getElementById('voci-prodotto')!;
   if (tipo === 'materie') {
     elenco.textContent = materie.map((s) => nomi[s] || s).join(' · ');
+    elenco.hidden = false;
+  }
+  if (d.premium) {
+    const data = d.premium.scade && new Date(d.premium.scade).toLocaleString(en ? 'en-GB' : 'it-IT', {
+      timeZone: 'Europe/Rome', dateStyle: 'long', timeStyle: 'short',
+    });
+    const durata = data
+      ? (en ? 'Access until ' : 'Accesso fino al ') + data
+      : (en ? `${d.premium.mesi} months from payment confirmation` : `${d.premium.mesi} mesi dalla conferma del pagamento`);
+    elenco.textContent = durata + (en ? ' · No automatic renewal · Video courses excluded' : ' · Senza rinnovo automatico · Videocorsi esclusi');
     elenco.hidden = false;
   }
   const sconto = document.getElementById('sconto-digitale')!;
@@ -135,7 +151,7 @@ async function apri() {
     history.replaceState(null, '', location.pathname + '?' + params);
     stato.textContent = en ? 'The previous payment was not completed. You can review the order below.' : 'Il pagamento precedente non è stato completato. Qui puoi ricontrollare l’ordine.';
   } else stato.textContent = '';
-  if (!['materia','videocorso','materie','video'].includes(tipo || '')) {
+  if (!['materia','videocorso','materie','video','premium'].includes(tipo || '')) {
     stato.textContent = en ? 'Choose a subject or course to start your order.' : 'Scegli una materia o un videocorso per iniziare l’acquisto.';
     mostraAzione(en ? 'Browse subjects' : 'Vai alle materie', pref + '/prezzi');
     return;

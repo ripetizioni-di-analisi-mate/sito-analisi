@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { riepilogoMaterie } from '../src/data/pacchetti.mjs';
-import { VERSIONE_CONDIZIONI } from '../src/data/consenso-digitale.mjs';
+import { VERSIONE_CONDIZIONI, VERSIONE_CONDIZIONI_PREMIUM } from '../src/data/consenso-digitale.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const temp = mkdtempSync(join(tmpdir(), 'stripe-digitale-'));
@@ -45,7 +45,8 @@ function banco(t) {
   db.exec(`CREATE TABLE acquisti(email,materia,importo,valuta,transazione UNIQUE,creato);
     CREATE TABLE abilitazioni(email,materia,origine,creato,PRIMARY KEY(email,materia));
     CREATE TABLE sconti_invito(email,id,usato);CREATE TABLE benvenuto(email,sconto_id,usato);
-    CREATE TABLE email_automatiche(email,sconto,acquisto);`);
+    CREATE TABLE email_automatiche(email,sconto,acquisto);
+    CREATE TABLE rimborsi_digitali(ordine_id PRIMARY KEY,confermati);`);
   const o = {
     sql: { exec: (q, ...p) => (p.length ? db.prepare(q).run(...p) : db.exec(q)) },
     righe: (q, ...p) => db.prepare(q).all(...p),
@@ -111,7 +112,8 @@ function banco(t) {
       assert.doesNotMatch(opts.body, /RSSMRA|Via Esempio/);
       const ricevuta = JSON.parse(opts.body);
       assert.ok(ricevuta.attachments[0].content.length > 100);
-      assert.ok(ricevuta.text.includes(VERSIONE_CONDIZIONI));
+      const versione = ricevuta.subject.includes('Premium') ? VERSIONE_CONDIZIONI_PREMIUM : VERSIONE_CONDIZIONI;
+      assert.ok(ricevuta.text.includes(versione));
       messaggi++;
       return Response.json({ id: 'em_test' });
     }
@@ -346,4 +348,60 @@ test('requisiti aggiornati nel registro prima di aprire Stripe e riprova dopo er
   assert.deepEqual(await ad({ ...q, tipo: 'videocorso', chiavi: ['video-analisi-1'] }), { posseduto: true });
   b.o.sql.exec('INSERT INTO sconti_invito VALUES (?,?,?)', b.io.email, 'g', 'txn_vecchio');
   assert.deepEqual(await ad({ ...q, chiavi: ['analisi-2'], sconto: { id: 'g', tipo: 'premio' } }), { scontoUsato: true });
+});
+
+
+test('Premium: prezzi fissi, scadenza, passaggio, rimborso e acquisti permanenti', async (t) => {
+  const b = banco(t);
+  const semi = { tipo: 'premium', slug: 'semestrale' };
+  const annuale = { tipo: 'premium', slug: 'annuale' };
+  const passaggio = { tipo: 'premium', slug: 'passaggio' };
+  const premium = (selezione, totale) => ({
+    ...acquista(selezione, totale), versioneCondizioni: VERSIONE_CONDIZIONI_PREMIUM,
+  });
+  const attivo = () => b.h.aDO(b.env, '/dig-premium', { email: b.io.email });
+  const paga = async (intent) => {
+    const s = [...b.sessioni.values()].at(-1);
+    Object.assign(s, { status: 'complete', payment_status: 'paid', payment_intent: intent });
+    assert.equal((await b.call('stato?session_id=' + s.id)).stato, 'pagato');
+    assert.equal((await eventoDigitale(b.env, b.h, { type: 'checkout.session.completed', data: { object: s } })).status, 200);
+  };
+  b.db.prepare("INSERT INTO abilitazioni VALUES (?, 'analisi-1', 'manuale', '')").run(b.io.email);
+  assert.equal((await b.call('preventivo', annuale)).totale, 29900);
+  assert.equal((await b.call('preventivo', semi)).totale, 18900);
+  assert.equal((await b.call('preventivo', passaggio)).status, 400);
+  assert.equal((await b.call('checkout', acquista(semi, 18900))).status, 409);
+  assert.equal((await b.call('checkout', premium(semi, 100))).status, 409);
+  const semestrale = premium(semi, 18900);
+  assert.equal((await b.call('checkout', semestrale)).status, 200);
+  assert.equal((await b.call('checkout', semestrale)).status, 200);
+  assert.equal((await b.call('checkout', premium(annuale, 29900))).status, 409);
+  assert.equal(attivo(), null);
+  await paga('pi_semestrale');
+  const base = attivo();
+  assert.equal(base.piano, 'semestrale');
+  assert.ok(base.materie.includes('analisi-1'));
+  assert.ok(base.materie.includes('calculus-1'));
+  assert.ok(base.materie.every(slug => !slug.startsWith('video-')));
+  assert.equal(b.o.riga('SELECT count(*) n FROM acquisti').n, 1);
+  assert.equal((await b.call('preventivo', annuale)).status, 400);
+
+  const preventivo = await b.call('preventivo', passaggio);
+  assert.equal(preventivo.totale, 11000);
+  assert.equal(preventivo.premium.mesi, 12);
+  assert.equal((await b.call('checkout', premium(passaggio, 11000))).status, 200);
+  await paga('pi_passaggio');
+  const upgrade = attivo();
+  assert.equal(upgrade.piano, 'annuale');
+  assert.equal(upgrade.inizio, base.inizio);
+  assert.equal(upgrade.scade, preventivo.premium.scade);
+  assert.equal((await b.call('preventivo', passaggio)).status, 400);
+
+  b.db.prepare('INSERT INTO rimborsi_digitali VALUES (?, ?)').run(upgrade.id, 11000);
+  assert.equal(attivo().piano, 'semestrale');
+  b.db.prepare("UPDATE ordini_stripe SET ordine=json_set(ordine, '$.premium.scade', ?) WHERE id=?")
+    .run('2020-01-01T00:00:00.000Z', base.id);
+  assert.equal(attivo(), null);
+  assert.deepEqual(b.o.materieDi(b.io.email), ['analisi-1']);
+  assert.equal((await b.call('preventivo', annuale)).totale, 29900);
 });
