@@ -4,10 +4,7 @@ import UsPractice from '../../components/UsPractice.astro';
 import UsCourseOutline from '../../components/UsCourseOutline.astro';
 import CalculusPractice from '../../components/CalculusPractice.astro';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
-import { calculusPractice, calculusSlug } from '../../data/stem-usa/calculus-1-practice.mjs';
-import { calculusTimed } from '../../data/stem-usa/calculus-1-timed.mjs';
-import { calculusHtml, calculusTimedCount } from '../../lib/stem-usa-practice';
-import { calculusTheory } from '../../data/stem-usa/calculus-1-theory.mjs';
+import { calculusSlug, calculusHtml, universityStudies, timedCount } from '../../lib/stem-usa-practice';
 import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../data/livelli';
 import { T, sezioniL } from '../../i18n';
 import { universityCourses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
@@ -29,7 +26,7 @@ const questions = course.lessons.map((lesson, index) => ({
 const title = course.title;
 const t = T('en');
 const sezioni = sezioniL('en');
-const isCalculus = course.slug === calculusSlug;
+const study = universityStudies.get(course.slug);
 ---
 <UsStem title={title} description={course.description} course={course.slug}>
   <p class="sopratitolo">{t.programma}</p>
@@ -37,13 +34,13 @@ const isCalculus = course.slug === calculusSlug;
   <p class="sommario">{course.description}</p>
   <UsCourseOutline slug={course.slug} topics={course.lessons} />
   <section data-usa-content>
-  {isCalculus && <p class="nota">While signed in, you earn {PUNTI.esercizio} XP the first time you check a correct answer to each practice exercise.</p>}
+  {study && <p class="nota">While signed in, you earn {PUNTI.esercizio} XP the first time you check a correct answer to each practice exercise.</p>}
   <ol class="griglia-argomenti">
     {course.lessons.map((lesson, index) => {
       const number = index + 1;
-      const slug = ('unit-' + number) as keyof typeof calculusPractice;
-      const practice = isCalculus ? calculusPractice[slug] : undefined;
-      const theory = isCalculus ? calculusTheory[slug] : undefined;
+      const slug = 'unit-' + number;
+      const practice = study?.practice[slug];
+      const theory = study?.theory[slug];
       const href = (sezione: string) => linkArgomentoUsa(course.slug, slug, sezione);
       return (
         <li>
@@ -55,7 +52,7 @@ const isCalculus = course.slug === calculusSlug;
                 : sezione.slug === 'esercizi' ? practice?.exercises.length ?? 1 : null;
               return <a href={href(sezione.slug)}>{sezione.titolo}{count !== null && ' (' + count + ')'}</a>;
             })}
-            {practice && <a href={href('domande')}>Timed questions ({calculusTimed[slug].length})</a>}
+            {study?.timed[slug] && <a href={href('domande')}>Timed questions ({study.timed[slug].length})</a>}
           </nav>
           <details class="sommario-pagina studio-unita-usa" id={slug} hidden>
             <summary>{t.sezioni.teoria}</summary>
@@ -76,7 +73,7 @@ const isCalculus = course.slug === calculusSlug;
               </>}
             </div>
           </details>
-          {practice && <CalculusPractice topic={slug} number={number} originalExample={lesson.worked} />}
+          {practice && <CalculusPractice course={course.slug} topic={slug} material={practice} number={number} originalExample={lesson.worked} />}
         </li>
       );
     })}
@@ -85,11 +82,11 @@ const isCalculus = course.slug === calculusSlug;
       <p class="riassunto">Review questions on the topics of {title} with worked solutions.</p>
       <nav aria-label="Exam practice">
         <a href="#course-practice">Review questions ({questions.length})</a>
-        {isCalculus && <>
-          <a href={linkArgomentoUsa(course.slug, RIPASSO, 'domande')}>Timed review ({calculusTimedCount})</a>
+        {study && <>
+          <a href={linkArgomentoUsa(course.slug, RIPASSO, 'domande')}>Timed review ({timedCount(study)})</a>
           <a class="solo-collegati" href={linkArgomentoUsa(course.slug, RIPASSO_OGGI, 'domande')}>Today’s review</a>
           <a href={url(courseUrl(course.slug) + '/practice-exam')}>General practice exam</a>
-          <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>
+          {course.slug === calculusSlug && <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>}
         </>}
       </nav>
     </li>

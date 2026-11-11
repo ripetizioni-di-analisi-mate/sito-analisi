@@ -12,6 +12,12 @@ export const groups = [
 ];
 
 export const universityCourses = groups.flatMap(group => group.courses);
+const coursesWithTimedPractice = new Set(['calculus-1', 'calculus-2']);
+export const universityTimedTopics = Object.fromEntries(
+  universityCourses
+    .filter(course => coursesWithTimedPractice.has(course.slug))
+    .map(course => [course.slug, course.lessons.map((_, index) => 'unit-' + (index + 1))])
+);
 export const courses = [...universityCourses, ...highSchoolCourses];
 export const courseUrl = slug => slug.startsWith('hs-') ? highSchoolPath + '/' + slug.slice(3) : '/us/' + slug;
 

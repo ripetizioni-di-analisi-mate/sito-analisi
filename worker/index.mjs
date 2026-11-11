@@ -10,10 +10,8 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
-import { calculusSlug } from '../src/data/stem-usa/calculus-1-practice.mjs';
-import { calculusTimed } from '../src/data/stem-usa/calculus-1-timed.mjs';
 import { highSchoolTimedTopics } from '../src/data/stem-usa/high-school/index.mjs';
-import { courseUrl } from '../src/data/stem-usa/catalog.mjs';
+import { courseUrl, universityTimedTopics } from '../src/data/stem-usa/catalog.mjs';
 import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
@@ -729,9 +727,8 @@ async function catalogoDomande(env) {
   return cacheCatalogo;
 }
 
-const argomentiCalculus = Object.keys(calculusTimed);
 async function catalogoPremi(env) {
-  return { ...(await catalogoDomande(env)), [calculusSlug]: argomentiCalculus, ...highSchoolTimedTopics };
+  return { ...(await catalogoDomande(env)), ...universityTimedTopics, ...highSchoolTimedTopics };
 }
 
 async function eseguiInvii(env, giornaliero) {

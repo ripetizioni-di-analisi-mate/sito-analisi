@@ -1,4 +1,6 @@
 ---
+import { calculusHtml } from '../lib/stem-usa-practice';
+
 interface Question {
   title: string;
   prompt: string;
@@ -7,8 +9,8 @@ interface Question {
   explanation: string;
   href: string;
 }
-interface Props { questions: Question[]; minutes: number }
-const { questions, minutes } = Astro.props;
+interface Props { questions: Question[]; minutes: number; renderMath?: boolean }
+const { questions, minutes, renderMath = false } = Astro.props;
 ---
 <section id="course-practice" class="stem-practice" data-us-practice>
   <h2>Practice quiz</h2>
@@ -20,19 +22,19 @@ const { questions, minutes } = Astro.props;
     </div>
     {questions.map((question, index) => (
       <fieldset class="stem-question" id={'question-' + (index + 1)} data-question data-correct={question.correct}>
-        <legend>{index + 1}. {question.prompt}</legend>
+        <legend>{index + 1}. {renderMath ? <Fragment set:html={calculusHtml(question.prompt)} /> : question.prompt}</legend>
         <div class="stem-options">
           {question.choices.map((choice, i) => (
             <label class="stem-option">
               <input type="radio" name={'question-' + index} value={i} />
-              <span>{choice}</span>
+              <span>{renderMath ? <Fragment set:html={calculusHtml(choice)} /> : choice}</span>
             </label>
           ))}
         </div>
         <details class="stem-feedback" data-feedback>
           <summary data-verdict>Answer and explanation</summary>
-          <p><strong>{question.choices[question.correct]}</strong></p>
-          <p>{question.explanation}</p>
+          <p><strong>{renderMath ? <Fragment set:html={calculusHtml(question.choices[question.correct])} /> : question.choices[question.correct]}</strong></p>
+          <p>{renderMath ? <Fragment set:html={calculusHtml(question.explanation)} /> : question.explanation}</p>
           <a href={question.href}>Review {question.title.toLowerCase()} →</a>
         </details>
       </fieldset>
