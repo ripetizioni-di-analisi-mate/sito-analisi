@@ -1,5 +1,5 @@
 import { universityStudies, timedQuestions, practiceAnswers, practiceCounts, timedCount, calculusHtml, calculusAnswer } from './stem-usa-practice';
-import { highSchoolCourses, highSchoolCourse, highSchoolTimedTopics } from '../data/stem-usa/high-school/index.mjs';
+import { highSchoolCourses, highSchoolCourse, highSchoolQuestionCount, highSchoolTimedTopics } from '../data/stem-usa/high-school/index.mjs';
 import { optionsFor, universityTimedTopics } from '../data/stem-usa/catalog.mjs';
 import type { Domanda } from './domande';
 
@@ -13,14 +13,21 @@ export function usQuestions(slug: string): Record<string, Domanda[]> {
   if (!course) return {};
   return Object.fromEntries(course.lessons.map((lesson, index) => {
     const topic = 'unit-' + (index + 1);
-    return [topic, [{
-      id: topic + '/1',
-      n: 1,
-      testo: '<p>' + calculusHtml(lesson.prompt) + '</p>',
-      scelte: optionsFor(lesson, index).map(calculusHtml),
-      corretta: index % 4 + 1,
-      spiegazione: '<p>' + calculusHtml(lesson.explanation) + '</p>',
-    }]];
+    const questions = [lesson, ...(lesson.timed ?? []).map(([prompt, correct, distractors, explanation]) => ({
+      prompt, correct, distractors, explanation,
+    }))];
+    return [topic, questions.map((question, offset) => {
+      const position = index + offset;
+      const choices = optionsFor(question, position);
+      return {
+        id: topic + '/' + (offset + 1),
+        n: offset + 1,
+        testo: '<p>' + calculusHtml(question.prompt) + '</p>',
+        scelte: choices.map(calculusHtml),
+        corretta: position % choices.length + 1,
+        spiegazione: '<p>' + calculusHtml(question.explanation) + '</p>',
+      };
+    })];
   }));
 }
 
@@ -41,7 +48,7 @@ export function usContentCounts(slug: string, topics: number) {
   return {
     worked: course.lessons.reduce((sum, lesson) => sum + lesson.worked.length, 0),
     exercises: course.lessons.reduce((sum, lesson) => sum + lesson.exercises.length, 0),
-    timed: course.lessons.length,
+    timed: course.lessons.reduce((sum, lesson) => sum + highSchoolQuestionCount(lesson), 0),
     review: 0,
   };
 }

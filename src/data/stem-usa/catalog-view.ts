@@ -1,6 +1,6 @@
 import type { Materia } from '../materie';
 import { courseUrl, groups, universityTimedTopics } from './catalog.mjs';
-import { highSchoolGroups, highSchoolName } from './high-school/index.mjs';
+import { highSchoolCourse, highSchoolGroups, highSchoolHasStudyPages, highSchoolName } from './high-school/index.mjs';
 import { url } from '../../lib/url';
 import { usaProduct } from './pricing';
 
@@ -39,7 +39,7 @@ export const materiaUsa = (slug: string) => materieUsa.find(m => m.slug === slug
 
 export function linkArgomentoUsa(materia: string, argomento: string, sezione: string) {
   const path = courseUrl(materia);
-  if (sezione === 'domande') return url(path + '/' + argomento + '/domande');
+  if (sezione === 'domande' || highSchoolHasStudyPages(highSchoolCourse(materia))) return url(path + '/' + argomento + '/' + sezione);
   const numero = argomento.slice('unit-'.length);
   const ancora = sezione === 'teoria' ? argomento
     : sezione === 'esercizi-svolti' ? 'worked-' + numero

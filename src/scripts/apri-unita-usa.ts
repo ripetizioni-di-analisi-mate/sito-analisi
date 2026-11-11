@@ -1,5 +1,5 @@
 function openLinkedUnit(hash: string) {
-  if (!/^#(?:unit|worked|exercises)-\d+$/.test(hash)) return;
+  if (!/^#(?:unit|worked|exercises|preview-unit)-\d+$/.test(hash)) return;
   const target = document.getElementById(hash.slice(1));
   const details = target?.closest('details');
   if (details instanceof HTMLDetailsElement) {

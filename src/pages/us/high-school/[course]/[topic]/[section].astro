@@ -1,0 +1,79 @@
+---
+import Base from '../../../../../layouts/Base.astro';
+import VerificaRisposta from '../../../../../components/VerificaRisposta.astro';
+import { highSchoolCourses, highSchoolHasStudyPages } from '../../../../../data/stem-usa/high-school/index.mjs';
+import { linkArgomentoUsa } from '../../../../../data/stem-usa/catalog-view';
+import { calculusAnswer, calculusHtml } from '../../../../../lib/stem-usa-practice';
+import { T } from '../../../../../i18n';
+import '../../../../../styles/stem-usa.css';
+
+export function getStaticPaths() {
+  return highSchoolCourses.filter(highSchoolHasStudyPages).flatMap(course => course.lessons.flatMap((lesson, index) =>
+    ['teoria', 'esercizi-svolti', 'esercizi'].map(section => ({
+      params: { course: course.slug.slice(3), topic: 'unit-' + (index + 1), section },
+      props: { slug: course.slug, lesson },
+    }))
+  ));
+}
+
+const { slug, lesson } = Astro.props;
+const { topic, section } = Astro.params as { topic: string; section: 'teoria' | 'esercizi-svolti' | 'esercizi' };
+const label = T('en').sezioni[section];
+const theoryLink = linkArgomentoUsa(slug, topic, 'teoria');
+const sections = lesson.sections.map(([title, text], index) => ({ id: 'lesson-' + (index + 1), title, text }));
+const studyTitle = lesson.title + ' · ' + label;
+---
+<Base lingua="en" usa titolo={studyTitle} descrizione={lesson.theory} materia={slug} argomento={topic} sezione={section}
+  percorso={[{ titolo: lesson.title, href: theoryLink }, { titolo: label }]}>
+  <div class="stem-usa">
+    <p class="sopratitolo">{label}</p>
+    <h1>{lesson.title}</h1>
+    {section === 'teoria' && <>
+      <details class="sommario-pagina">
+        <summary>On this page</summary>
+        <ol>{sections.map(({ id, title }) => <li><a href={'#' + id}>{title}</a></li>)}</ol>
+      </details>
+      <div class="testo-studio">
+        {sections.map(({ id, title, text }) => (
+          <section id={id} class="algebra-theory">
+            <h2>{title}</h2>
+            <p set:html={calculusHtml(text)} />
+          </section>
+        ))}
+      </div>
+      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'esercizi-svolti')}>See the worked examples →</a></p>
+    </>}
+    {section === 'esercizi-svolti' && <>
+      {lesson.worked.map(([prompt, solution], index) => (
+        <section class="traccia" id={'worked-' + (index + 1)}>
+          <h2>Example {index + 1}</h2>
+          <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
+          <div class="spiegazione">
+            {solution.split('\n').map(step => <p set:html={calculusHtml(step)} />)}
+          </div>
+        </section>
+      ))}
+      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'esercizi')}>Try the practice exercises →</a></p>
+    </>}
+    {section === 'esercizi' && <>
+      {lesson.exercises.map(([title, prompt, solution, answer], index) => (
+        <section class="traccia" id={'exercise-' + (index + 1)}>
+          <h2><span class="numero">{index + 1}.</span> {title}</h2>
+          <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
+          <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + (index + 1)}
+            tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
+          <details class="stem-feedback">
+            <summary>Show solution</summary>
+            <p set:html={calculusHtml(solution)} />
+          </details>
+        </section>
+      ))}
+      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'domande')}>Start the timed questions →</a></p>
+    </>}
+  </div>
+</Base>
+<style>
+  .algebra-theory { scroll-margin-top: 6rem; }
+  .algebra-theory h2 { margin-block: 1.3rem .35rem; }
+  .traccia .spiegazione p { margin-block: .4rem; }
+</style>

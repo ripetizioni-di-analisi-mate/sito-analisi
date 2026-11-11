@@ -1,8 +1,9 @@
 ---
 import UsStem from '../../../../layouts/UsStem.astro';
 import UsCourseOutline from '../../../../components/UsCourseOutline.astro';
+import UsHighSchoolPreview from '../../../../components/UsHighSchoolPreview.astro';
 import VerificaRisposta from '../../../../components/VerificaRisposta.astro';
-import { highSchoolCourses, highSchoolPath } from '../../../../data/stem-usa/high-school/index.mjs';
+import { highSchoolCourses, highSchoolPath, highSchoolHasStudyPages, highSchoolQuestionCount } from '../../../../data/stem-usa/high-school/index.mjs';
 import { linkArgomentoUsa } from '../../../../data/stem-usa/catalog-view';
 import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../../../data/livelli';
 import { calculusAnswer, calculusHtml } from '../../../../lib/stem-usa-practice';
@@ -14,28 +15,35 @@ export function getStaticPaths() {
 
 const { course } = Astro.props;
 const { slug, title, description, lessons, preparation, sources } = course;
+const preview = highSchoolHasStudyPages(course);
+const timed = lessons.reduce((sum, lesson) => sum + highSchoolQuestionCount(lesson), 0);
 ---
 <UsStem title={title} description={description} course={slug}>
   <p class="sopratitolo"><a href={url(highSchoolPath)}>High School</a></p>
   <h1>{title}</h1>
   <p class="sommario">{description}</p>
-  <UsCourseOutline slug={slug} topics={lessons} />
+  <UsCourseOutline slug={slug} topics={lessons} preview={preview}>
+    {preview && <UsHighSchoolPreview slot="preview" lessons={lessons} />}
+  </UsCourseOutline>
   <section data-usa-content>
     <p class="nota">Check a correct answer for the first time to earn {PUNTI.esercizio} XP on exercises with automatic checking.</p>
     <ol class="griglia-argomenti">
       {lessons.map((lesson, index) => {
         const number = index + 1;
+        const questions = highSchoolQuestionCount(lesson);
         const topic = 'unit-' + number;
         const href = (sezione: string) => linkArgomentoUsa(slug, topic, sezione);
         return (
           <li>
-            <h2><a href={href('teoria')}>{lesson.title}</a></h2>
+            <h2><a href={href('teoria')} data-legacy-anchor={preview ? topic : undefined}>{lesson.title}</a></h2>
+            {preview && <p class="riassunto">{lesson.theory.split(/(?<=[.!?])\s/)[0]}</p>}
             <nav aria-label={lesson.title}>
               <a href={href('teoria')}>Theory</a>
-              <a href={href('esercizi-svolti')}>Worked examples ({lesson.worked.length})</a>
-              <a href={href('esercizi')}>Exercises ({lesson.exercises.length})</a>
-              <a href={href('domande')}>Timed question</a>
+              <a href={href('esercizi-svolti')} data-legacy-anchor={preview ? 'worked-' + number : undefined}>Worked examples ({lesson.worked.length})</a>
+              <a href={href('esercizi')} data-legacy-anchor={preview ? 'exercises-' + number : undefined}>Exercises ({lesson.exercises.length})</a>
+              <a href={href('domande')}>{questions === 1 ? 'Timed question' : `Timed questions (${questions})`}</a>
             </nav>
+            {!preview && <>
             <details class="sommario-pagina studio-unita-usa studio-liceo-usa" id={topic} hidden>
               <summary>Theory</summary>
               <div><p set:html={calculusHtml(lesson.theory)} /></div>
@@ -72,12 +80,13 @@ const { slug, title, description, lessons, preparation, sources } = course;
                 </ol>
               </div>
             </details>
+            </>}
           </li>
         );
       })}
     </ol>
     <p class="azioni">
-      <a class="bottone-primario" href={linkArgomentoUsa(slug, RIPASSO, 'domande')}>Timed review ({lessons.length})</a>
+      <a class="bottone-primario" href={linkArgomentoUsa(slug, RIPASSO, 'domande')}>Timed review ({timed})</a>
       <a class="bottone-secondario solo-collegati" href={linkArgomentoUsa(slug, RIPASSO_OGGI, 'domande')}>Today’s review</a>
     </p>
   </section>
@@ -95,4 +104,23 @@ const { slug, title, description, lessons, preparation, sources } = course;
 </style>
 <script>
   import '../../../../scripts/apri-unita-usa';
+
+  function openLegacyLink() {
+    const match = location.hash.match(/^#(unit|worked|exercises)-(\d+)$/);
+    if (!match) return;
+    const [, kind, number] = match;
+    const link = document.querySelector<HTMLAnchorElement>(`[data-legacy-anchor="${kind}-${number}"]`);
+    if (link) {
+      location.replace(link.href);
+      return;
+    }
+    const preview = document.getElementById('preview-unit-' + number);
+    if (preview instanceof HTMLDetailsElement) {
+      preview.open = true;
+      preview.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  openLegacyLink();
+  addEventListener('hashchange', openLegacyLink);
 </script>
