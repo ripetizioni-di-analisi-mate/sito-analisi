@@ -30,7 +30,7 @@ async function banco(materie = null) {
     } },
     ARCHIVIO: { idFromName: () => 'test', get: () => ({ fetch: async (url) => {
       const p = new URL(url).pathname;
-      if (p === '/inv-sconto' || p === '/bv-stato') return Response.json({});
+      if (p === '/inv-sconto' || p === '/bv-stato' || p === '/promo-offerta') return Response.json({});
       assert.equal(p, '/sessione');
       return Response.json(materie === null ? null : { email: 'studente@example.test', nome: 'Studente', materie, versione: 1 });
     } }) },
@@ -96,9 +96,11 @@ test('ospiti e iscritti senza acquisto vedono gli stessi dieci quiz complessivi'
   }
 });
 
-test('chi acquista Biologia può esercitarsi su tutti i 315 quiz', async () => {
+test('chi acquista Biologia può esercitarsi su tutti i 630 quiz', async () => {
   const b = await banco([materia]);
   const r = await b.invia({argomento:'prove-d-esame'});
   assert.equal(r.status,200);
-  assert.equal((await r.json()).totale,315);
+  const sessione = await r.json();
+  assert.equal(sessione.totale, 630);
+  assert.equal(new Set(sessione.ordine).size, 15);
 });
