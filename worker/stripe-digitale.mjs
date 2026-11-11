@@ -6,6 +6,8 @@ import { allegatoContrattoDigitale } from './contratto-digitale.mjs';
 import { leggiFatturazione } from './fatturazione.mjs';
 import { stripe } from './prenotazioni.mjs';
 import { componiEmail, inviaEmailResend, SITO_EMAIL } from './email.mjs';
+import { usaProduct } from '../src/data/stem-usa/pricing.ts';
+import { courseUrl } from '../src/data/stem-usa/catalog.mjs';
 
 const DURATA = 31 * 60;
 const risposta = (d, status = 200) => Response.json(d, { status, headers: { 'cache-control': 'private, no-store' } });
@@ -214,15 +216,16 @@ function sessioneCoerente(s, r) {
 export async function preventivoDigitale(c, io, h) {
   const tipo = c.tipo;
   const en = c.lingua === 'en';
+  const materiaDigitale = (slug) => h.MATERIE.find((m) => m.slug === slug) || usaProduct(slug);
   let q;
   if (tipo === 'materie') q = riepilogoMaterie(c.materie, h.MATERIE);
   else if (tipo === 'video') q = riepilogoVideo(c.pacchetto, h.VIDEOCORSI);
   else if (tipo === 'materia' || tipo === 'videocorso') {
     const v =
       tipo === 'materia'
-        ? h.MATERIE.find((x) => x.slug === c.slug && x.attiva)
+        ? materiaDigitale(c.slug)
         : h.VIDEOCORSI.find((x) => x.slug === c.slug);
-    if (!v || !(v.prezzo > 0)) throw new Error('Prodotto non acquistabile.');
+    if (!v || (tipo === 'materia' && !v.attiva) || !(v.prezzo > 0)) throw new Error('Prodotto non acquistabile.');
     const prezzo = Math.round(v.prezzo * 100);
     q = {
       tipo,
@@ -244,7 +247,7 @@ export async function preventivoDigitale(c, io, h) {
   else if (tipo === 'video') selezione.pacchetto = c.pacchetto;
   else selezione.slug = c.slug;
   const prodotti = q.chiavi.map(
-    (k) => (video ? h.VIDEOCORSI.find((v) => 'video-' + v.slug === k) : h.MATERIE.find((m) => m.slug === k)).titolo,
+    (k) => (video ? h.VIDEOCORSI.find((v) => 'video-' + v.slug === k) : materiaDigitale(k)).titolo,
   );
   return {
     tipo,
@@ -409,11 +412,12 @@ export async function gestisciAcquisti(req, env, p, h) {
       return errore('Verifica del pagamento in corso. Riprova.', 503);
     }
     const pref = ordine.ordine.lingua === 'en' ? '/en' : '';
+    const corsoUsa = ordine.ordine.selezione.tipo === 'materia' && usaProduct(ordine.ordine.selezione.slug);
     return risposta({
       stato: ordine.stato,
       titolo: ordine.ordine.titolo,
       totale: ordine.in_centesimi,
-      destinazione: pref + '/account',
+      destinazione: corsoUsa ? courseUrl(corsoUsa.slug) : pref + '/account',
       riprova: ordine.stato === 'fallito' ? pref + '/acquisto?' + new URLSearchParams(ordine.ordine.selezione) : undefined,
     });
   }

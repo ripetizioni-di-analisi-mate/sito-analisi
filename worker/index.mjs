@@ -12,6 +12,9 @@ import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { calculusSlug } from '../src/data/stem-usa/calculus-1-practice.mjs';
 import { calculusTimed } from '../src/data/stem-usa/calculus-1-timed.mjs';
+import { highSchoolTimedTopics } from '../src/data/stem-usa/high-school/index.mjs';
+import { courseUrl } from '../src/data/stem-usa/catalog.mjs';
+import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
@@ -48,6 +51,12 @@ import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDi
   cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+const sbloccaUsa = (slug) => courseUrl(slug) + '/sblocca';
+const corsoUsaRiservato = (slug, io) => Boolean(usaProduct(slug) && !io?.materie?.includes(slug));
+const rispostaCorsoUsaRiservato = (slug) => json({
+  errore: 'Unlock this course to access the study materials.',
+  sblocca: sbloccaUsa(slug),
+}, 403, { 'cache-control': 'private, no-store' });
 const SCIENZA_DELLE_COSTRUZIONI = 'scienza-delle-costruzioni';
 const NUMERO_QUIZ_ANTEPRIMA_SCIENZA = 1;
 function quizScienzaRiservato(lingua, personale = false) {
@@ -722,7 +731,7 @@ async function catalogoDomande(env) {
 
 const argomentiCalculus = Object.keys(calculusTimed);
 async function catalogoPremi(env) {
-  return { ...(await catalogoDomande(env)), [calculusSlug]: argomentiCalculus };
+  return { ...(await catalogoDomande(env)), [calculusSlug]: argomentiCalculus, ...highSchoolTimedTopics };
 }
 
 async function eseguiInvii(env, giornaliero) {
@@ -999,7 +1008,9 @@ export default {
     }
 
     // ===== livelli e punti esperienza =====
-    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/')) return new Response('non trovato', { status: 404 });
+    const percorsoStudio = normalizedStudyPath(url.pathname);
+    if (percorsoStudio.startsWith('/dati-domande/') || percorsoStudio.startsWith('/dati-risposte/'))
+      return new Response('non trovato', { status: 404 });
     // Verifica della risposta di un esercizio da fare: il risultato resta nel Worker, al browser arriva solo l'esito.
     if (p === '/api/verifica' && POST) {
       const { id, risposta, lingua } = await req.json().catch(() => ({}));
@@ -1007,10 +1018,11 @@ export default {
       const [materia, argomento, n] = String(id || '').split('/');
       if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || typeof risposta !== 'string' || risposta.length > 200)
         return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
       const risultati = await risposteDi(env, materia);
       const giusta = risultati?.[`${argomento}/${n}`];
       if (!giusta) return json({ errore: en ? 'This exercise has no automatic check.' : 'Questo esercizio non ha la verifica automatica.' }, 404);
-      const io = await utenteCollegato(env, req).catch(() => null);
       const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
       const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
       const giorno = new Date().toISOString().slice(0, 10);
@@ -1024,6 +1036,7 @@ export default {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
       const { materia, argomento, lingua } = await req.json().catch(() => ({}));
+      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
@@ -1031,6 +1044,7 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const io = await utenteCollegato(env, req).catch(() => null);
+      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
       const personale = argomento === RIPASSO_OGGI;
       const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
       if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
@@ -1095,11 +1109,13 @@ export default {
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (usaProduct(tok?.m) && (corsoUsaRiservato(tok.m, io) || io?.email !== tok.e))
+        return rispostaCorsoUsaRiservato(tok.m);
       const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
       if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
-      const io = await utenteCollegato(env, req).catch(() => null);
       if (scienzaAPagamento && tok.m === SCIENZA_DELLE_COSTRUZIONI && q.n !== NUMERO_QUIZ_ANTEPRIMA_SCIENZA
           && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
         return json(quizScienzaRiservato(linguaDi(tok.l)), 403, { 'cache-control': 'no-store' });
@@ -1380,7 +1396,7 @@ export default {
       200, { 'cache-control': 'no-store' });
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(Object.keys(VIDEO)), MATERIE.concat(VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(usaProducts.map(v => v.slug), Object.keys(VIDEO)), MATERIE.concat(usaProducts.map(v => ({ ...v, breve: v.titolo, colore: '#2e6b63', argomenti: [] })), VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -1411,7 +1427,7 @@ export default {
       if (p === '/admin/api/abilita' && POST) {
         const { email: e, materie } = await req.json();
         const email = normalizza(e);
-        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m) || VIDEO[m]);
+        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m) || usaProduct(m) || VIDEO[m]);
         if (!emailValida(email) || !valide.length) return json({ errore: 'Email o materie non valide.' }, 400);
         return json(await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo(valide), origine: 'manuale' }));
       }
@@ -1518,11 +1534,16 @@ export default {
       && info.n <= schedeLibere(info.materia, info.argomento);
     // La sessione si verifica solo per le pagine e i PDF, non per font, stili e immagini.
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);
-    const io = pagina ? await utenteCollegato(env, req).catch(() => null) : null;
+    const corsoUsa = usaCoursePath(url.pathname);
+    const io = pagina || corsoUsa ? await utenteCollegato(env, req).catch(() => null) : null;
+    const usaBloccato = corsoUsa && corsoUsaRiservato(corsoUsa.slug, io);
+    if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca') {
+      return new Response(null, { status: 302, headers: { location: sbloccaUsa(corsoUsa.slug), 'cache-control': 'private, no-store' } });
+    }
     let risposta;
     // Materia della pagina (anche la pagina principale della materia): serve per la spunta.
     const primo = url.pathname.replace(/^\/en(?=\/)/, '').split('/')[1]?.replace(/\.html$/, '');
-    let sbloccataQui = Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
+    let sbloccataQui = corsoUsa ? !usaBloccato : Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
@@ -1576,6 +1597,13 @@ export default {
       risposta.headers.set('cache-control', 'private, no-store');
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
+      if (corsoUsa) {
+        const rimuovi = { element(element) { element.remove(); } };
+        const accesso = new HTMLRewriter();
+        if (usaBloccato) accesso.on('[data-usa-content]', rimuovi).on('[data-usa-course-nav]', rimuovi);
+        else accesso.on('[data-usa-outline]', rimuovi);
+        risposta = accesso.transform(risposta);
+      }
     }
     // Progressi per argomento: teoria e schede svolte aperte per intero da chi ha l'account.
     if (html && io && info && req.method === 'GET' && risposta.status < 400 && (info.tipo === 'teoria' || (info.tipo === 'esercizi-svolti' && info.n))) {

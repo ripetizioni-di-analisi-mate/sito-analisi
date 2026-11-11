@@ -13,8 +13,10 @@ import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
-import { blocchiUsa, gruppoUsa, materieUsa } from '../data/stem-usa/catalog-view';
-import { calculusCounts, calculusSlug } from '../lib/stem-usa-practice';
+import { blocchiUsa, gruppiUsa, materieUsa } from '../data/stem-usa/catalog-view';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { highSchoolName, highSchoolPath } from '../data/stem-usa/high-school/index.mjs';
+import { usContentCounts } from '../lib/stem-usa-banks';
 import { url } from '../lib/url';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; usa?: boolean }
@@ -22,17 +24,19 @@ const { lingua, usa = false } = Astro.props;
 const t = T(lingua);
 const MATERIE = usa ? materieUsa : materieL(lingua);
 const schedeDettagliate = lingua === 'it' || usa;
-const hrefMateria = (slug: string) => usa ? url('/us/' + slug) : link(lingua, '/' + slug);
-const gruppi = (usa ? [gruppoUsa] : gruppiL(lingua)).map((nome, i) => ({
+const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, '/' + slug);
+const gruppi = (usa ? gruppiUsa : gruppiL(lingua)).map((nome, i) => ({
   nome,
   id: i === 0 ? 'materie-home' : `percorso-home-${i}`,
   breve: nome.startsWith('TOLC') ? (lingua === 'en' ? 'Admission tests' : 'Test d’ingresso') : nome,
+  href: usa && nome === highSchoolName ? url(highSchoolPath) : undefined,
+  descrizione: usa && nome === highSchoolName ? 'Mathematics and science' : undefined,
 }));
 // Videocorso proprio di ogni materia (in italiano): quello che sblocca per prima la materia; il pacchetto di più corsi non ha una scheda sua.
 const videoDi = (slug: string) => lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === slug) : undefined;
 // "Sbloccata" compare solo su ciò che è nell'account: la teoria ed esercizi se la materia è sbloccata, il videocorso se è stato acquistato
 // (da solo o dentro un pacchetto). Il Worker scrive su <html> data-materie con le materie e le chiavi video-<slug>.
-const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.attiva).map((m) => {
+const regoleSbloccato = lingua === 'it' || usa ? MATERIE.filter((m) => m.prezzo && m.attiva).map((m) => {
   const v = videoDi(m.slug);
   const teoria = `html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .pulsante-teoria .ok{display:inline-flex}html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .nota-anteprima-scheda{display:none}html[data-materie~="${m.slug}"] [data-materia="${m.slug}"] .nota-accesso-scheda{display:inline}`;
   const video = v ? [v.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(v.slug)).map((p) => p.slug)]
@@ -43,8 +47,11 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
 const [svolti, dafare, domande] = await Promise.all([getCollection('svolti'), getCollection('dafare'), getCollection('domande')]);
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
 const conti = (m: (typeof MATERIE)[number]) => {
-  if (usa && m.slug === calculusSlug) return `${m.argomenti.length} study units · ${calculusCounts.worked} worked examples · ${calculusCounts.exercises} practice exercises`;
-  if (usa) return `${m.argomenti.length} study units · ${m.argomenti.length} practice questions`;
+  if (usa) {
+    const counts = usContentCounts(m.slug, m.argomenti.length);
+    return `${m.argomenti.length} topics · ${counts.worked} worked examples` +
+      (counts.exercises ? ` · ${counts.exercises} exercises` : ` · ${counts.review} review questions`);
+  }
   const pratica = m.eserciziDaFare === false ? `${conta(domande, m.slug)} domande a tempo` : `${conta(dafare, m.slug)} esercizi da fare`;
   return `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${pratica}`;
 };
@@ -54,10 +61,10 @@ const icona = {
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
-<Base titolo={t.nomeSito} descrizione={usa ? 'Theory, worked examples and exam practice for U.S. university STEM courses.' : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. University STEM Courses · Ripetizioni di Analisi' : SEO(lingua).home, soloQuestaLingua: usa }}>
+<Base titolo={t.nomeSito} descrizione={usa ? 'Mathematics and science for U.S. high school and university courses, with worked examples and practice.' : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. High School and University STEM Courses · Ripetizioni di Analisi' : SEO(lingua).home, soloQuestaLingua: usa }}>
   <div class="home-intro solo-ospiti">
     {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
-    <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
+    <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. High School and University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
     <p class="sommario">{lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
   </div>
   <div class="solo-ospiti">
@@ -85,7 +92,7 @@ const icona = {
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
-  <div class="risorse-home"><GratisHome lingua={lingua} usa={usa} /></div>
+  {!usa && <div class="risorse-home"><GratisHome lingua={lingua} /></div>}
   {lingua === 'it' && <div class="solo-ospiti"><PacchettiHome /></div>}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
   {usa && <p class="esito-ricerca-usa" role="status" data-esito-usa hidden></p>}
@@ -93,7 +100,8 @@ const icona = {
   {gruppi.map(({ nome: g, id }, i) => (
     <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]} open={i === 0} id={id} data-catalogo-usa={usa || undefined}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
-      {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
+      {!usa && (g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
+      {usa && g === highSchoolName && <p class="nota"><a href={url(highSchoolPath)}>Browse high school courses and curriculum guide</a></p>}
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
           <li style="--accento: #6d5a8a">
@@ -123,11 +131,11 @@ const icona = {
                       </div>
                       <span class="piede-scheda pulsanti-scheda">
                         <a class="pulsante-scheda pulsante-teoria" href={hrefMateria(m.slug)}>
-                          <Fragment set:html={icona.teoria} />{usa ? 'Theory and exercises' : 'Teoria ed esercizi'}<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
+                          <Fragment set:html={icona.teoria} />{usa ? 'Theory and exercises' : 'Teoria ed esercizi'}<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />{usa ? 'Unlocked' : 'Sbloccata'}</span>}
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
                       </span>
-                      <small class="accesso-scheda">{m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : usa ? 'Free access' : 'Tutto gratuito'}</small>
+                      <small class="accesso-scheda">{usa ? `${m.prezzo} € · Full course` : m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : 'Tutto gratuito'}</small>
                     </>
                   );
                 })() : m.attiva ? (
@@ -150,19 +158,19 @@ const icona = {
             )}
           </ul>
         );
-        return (usa ? blocchiUsa : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
+        return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
           <details class="sottogruppo" data-usa-sottogruppo={usa || undefined}>
             <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.filter(({ m }) => m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
             {griglia(b.materie)}
           </details>
         ) : griglia(b.materie));
       })()}
-      {usa && <p data-usa-vuoto hidden>No courses match your search.</p>}
     </details>
   ))}
+  {usa && <p data-usa-vuoto hidden>No courses match your search.</p>}
 </Base>
 <style>
-  [data-catalogo-usa] [hidden], .esito-ricerca-usa[hidden] { display: none !important; }
+  [data-catalogo-usa][hidden], [data-catalogo-usa] [hidden], .esito-ricerca-usa[hidden] { display: none !important; }
   .esito-ricerca-usa { font: .9rem var(--ui); color: var(--inchiostro-2); }
   .pacchetti-studente{padding-top:0}
   .home-intro{margin-bottom:1.4rem}

@@ -3,7 +3,7 @@ import type { Lingua } from '../i18n';
 
 interface Props {
   lingua: Lingua;
-  gruppi: { nome: string; id: string; breve: string }[];
+  gruppi: { nome: string; id: string; breve: string; href?: string; descrizione?: string }[];
 }
 const { lingua, gruppi } = Astro.props;
 const inglese = lingua === 'en';
@@ -41,9 +41,9 @@ const icone: Record<string, string> = {
       const tipo = tipi[g.nome] || 'test';
       const nome = tipo === 'basi' ? (inglese ? 'From scratch' : 'Da zero') : g.breve;
       return (
-        <a href={`#${g.id}`} aria-controls={g.id} aria-current={i === 0 ? 'location' : undefined}>
+        <a href={g.href ?? `#${g.id}`} aria-controls={g.href ? undefined : g.id} aria-current={i === 0 && !g.href ? 'location' : undefined}>
           <svg class="icona-percorso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><Fragment set:html={icone[tipo]} /></svg>
-          <span class="testo-percorso"><strong>{nome}</strong><small>{descrizioni[tipo]}</small></span>
+          <span class="testo-percorso"><strong>{nome}</strong><small>{g.descrizione ?? descrizioni[tipo]}</small></span>
           <svg class="freccia-percorso" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg>
         </a>
       );

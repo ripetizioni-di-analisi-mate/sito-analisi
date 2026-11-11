@@ -34,6 +34,7 @@ export async function GET() {
   const casa = pagine.length;
   due('/', 1.0);
   due('/us', 0.9, false);
+  due('/us/high-school', 0.8, false);
   for (const corso of corsiUsa) due(courseUrl(corso.slug), 0.8, false);
   due('/us/calculus-1/practice-exam', 0.6, false);
   due('/chi-sono', 0.5);

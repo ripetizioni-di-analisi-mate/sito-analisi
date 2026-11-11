@@ -2,6 +2,7 @@ import { mathematics } from './mathematics.mjs';
 import { physics } from './physics.mjs';
 import { computing } from './computing.mjs';
 import { science } from './science.mjs';
+import { highSchoolCourses, highSchoolPath } from './high-school/index.mjs';
 
 export const groups = [
   { id: 'mathematics', name: 'Mathematics', courses: mathematics },
@@ -10,8 +11,9 @@ export const groups = [
   { id: 'natural-sciences', name: 'Natural Sciences', courses: science },
 ];
 
-export const courses = groups.flatMap(group => group.courses);
-export const courseUrl = slug => '/us/' + slug;
+export const universityCourses = groups.flatMap(group => group.courses);
+export const courses = [...universityCourses, ...highSchoolCourses];
+export const courseUrl = slug => slug.startsWith('hs-') ? highSchoolPath + '/' + slug.slice(3) : '/us/' + slug;
 
 export function optionsFor(lesson, index) {
   const choices = [...lesson.distractors];

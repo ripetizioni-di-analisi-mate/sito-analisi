@@ -8,17 +8,23 @@ import { VIDEOCORSI } from '../data/videocorsi';
 import { SCONTO_INVITO } from '../data/inviti';
 import { SCONTO_BENVENUTO } from '../data/benvenuto';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
-interface Props { lingua: Lingua; materia: string }
-const { lingua, materia } = Astro.props;
+import { materiaUsa } from '../data/stem-usa/catalog-view';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { usContentCounts } from '../lib/stem-usa-banks';
+import { url } from '../lib/url';
+interface Props { lingua: Lingua; materia: string; usa?: boolean }
+const { lingua, materia, usa = false } = Astro.props;
 const t = T(lingua);
-const m = materiaL(lingua, materia);
-const svolti = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
-const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
+const usCounts = usa ? usContentCounts(materia, m.argomenti.length) : undefined;
+const svolti = usCounts?.worked ?? (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const dafare = usCounts?.exercises ?? (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
 const scienza = materia === 'scienza-delle-costruzioni';
 const domande = scienza ? (await getCollection('domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
 const en = lingua === 'en';
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
+const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
 
 // «Compatibilità con il tuo esame» prima dell'acquisto: link sotto il tasto, solo materie universitarie e in italiano.
 const conCompat = lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia);
@@ -37,18 +43,22 @@ const invito = lingua === 'en' ? {
   benvenuto: `Sconto di benvenuto: su questo acquisto hai il ${SCONTO_BENVENUTO}% di sconto, applicato al pagamento.`,
 };
 ---
-<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua} seo={{ titolo: t.sbloccaSeo(m.titolo) }}>
+<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua} usa={usa} seo={{ titolo: t.sbloccaSeo(m.titolo) }}>
   <p class="sopratitolo">{m.titolo}</p>
   <h1>{t.sbloccaTitolo(m.titolo)}</h1>
   <p class="sommario">{t.sbloccaSommario}</p>
   <ul class="cosa-include">
-    <li set:html={t.includeTeoria(m.argomenti.length)} />
-    <li set:html={t.includeSvolti(svolti)} />
-    {scienza ? <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li> : <li set:html={t.includeSoluzioni(dafare)} />}
+    {usa ? <li><strong>Lessons for all {m.argomenti.length} topics</strong></li> : <li set:html={t.includeTeoria(m.argomenti.length)} />}
+    {usa ? <li><strong>{svolti} worked examples</strong> with solutions</li> : <li set:html={t.includeSvolti(svolti)} />}
+    {usa ? <>
+      {dafare > 0 && <li><strong>{dafare} practice exercises</strong> with solutions</li>}
+      {usCounts!.timed > 0 && <li><strong>{usCounts!.timed} timed questions</strong> with explanations</li>}
+      {usCounts!.review > 0 && <li><strong>{usCounts!.review} review questions</strong> with explanations</li>}
+    </> : scienza ? <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li> : <li set:html={t.includeSoluzioni(dafare)} />}
   </ul>
-  <p class="gratis-ora">{scienza ? (en
+  {!usa && <p class="gratis-ora">{scienza ? (en
     ? 'Free preview without an account. Read the beginning of each topic, open one sheet of worked examples and try one question per topic.'
-    : 'Senza account puoi leggere l’inizio di ogni argomento, consultare una scheda svolta e provare una domanda per argomento.') : t.gratisOra}</p>
+    : 'Senza account puoi leggere l’inizio di ogni argomento, consultare una scheda svolta e provare una domanda per argomento.') : t.gratisOra}</p>}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
@@ -76,7 +86,7 @@ const invito = lingua === 'en' ? {
     <p class="nota-termini-breve">{lingua === 'it' ? <>Acquistando accetti i <a href="/termini">termini d’uso</a>.</> : <>By purchasing you accept the <a href="/en/termini">terms of use</a>.</>}</p>
   </div>
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat, usa, hrefMateria }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -104,6 +114,7 @@ const invito = lingua === 'en' ? {
         return d.percentuale ? invito.benvenuto : '';
       };
       const aggiornaInvito = async () => {
+        if (usa) return;
         if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : ''); return; }
         if (io.materie.includes(materia)) { mostraInvito(''); return; }
         const offerta = await notaOfferta();
@@ -119,7 +130,7 @@ const invito = lingua === 'en' ? {
         modulo.hidden = true;
         azione.hidden = false;
         if (io.materie.includes(materia)) {
-          azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
+          azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${hrefMateria}">${js.vaiArgomenti}</a>`;
           return false;
         }
         if (!attivo) {
@@ -139,9 +150,9 @@ const invito = lingua === 'en' ? {
       if (!attivo) {
         modulo.hidden = true;
         azione.hidden = false;
-        azione.innerHTML = `<p>${lingua === 'en'
+        azione.innerHTML = `<p>${usa ? 'Purchasing this subject is temporarily unavailable.' : lingua === 'en'
           ? 'Purchasing this subject is not available yet. You can explore the free preview and practise with the timed questions.'
-          : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${pref}/${materia}">${lingua === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;
+          : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${hrefMateria}">${usa ? 'View course topics' : lingua === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;
         return;
       }
 

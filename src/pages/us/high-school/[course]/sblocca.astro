@@ -1,0 +1,9 @@
+---
+import Sblocca from '../../../../viste/Sblocca.astro';
+import { highSchoolCourses } from '../../../../data/stem-usa/high-school/index.mjs';
+
+export function getStaticPaths() {
+  return highSchoolCourses.map(course => ({ params: { course: course.slug.slice(3) }, props: { slug: course.slug } }));
+}
+---
+<Sblocca lingua="en" materia={Astro.props.slug} usa />

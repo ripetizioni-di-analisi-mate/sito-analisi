@@ -3,13 +3,18 @@ import Base from '../layouts/Base.astro';
 import InvitaAmico from '../components/InvitaAmico.astro';
 import ConsensoEmail from '../components/ConsensoEmail.astro';
 import { materieL, testiJs, T, prefisso, type Lingua } from '../i18n';
+import { usaProducts } from '../data/stem-usa/pricing';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { accountTesti } from '../lib/account-testi.mjs';
 import '../styles/account.css';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
 const t = T(lingua), js = testiJs(lingua), s = accountTesti(lingua), pref = prefisso(lingua);
-const materie = materieL(lingua).filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.titolo }));
+const materie = [
+  ...materieL(lingua).filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.titolo, href: `${pref}/${m.slug}` })),
+  ...usaProducts.map((m) => ({ slug: m.slug, titolo: m.titolo, href: courseUrl(m.slug) })),
+];
 const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</g, '\\u003c');
 ---
 <Base titolo={t.ilTuoAccount} percorso={[{ titolo: t.account }]} descrizione={t.accountDescrizione} lingua={lingua} seo={{ noindex: true }}>

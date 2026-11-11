@@ -2,12 +2,15 @@
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
 import { url } from '../lib/url';
-import { blocchiUsa, gruppoUsa, materieUsa, materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
+import { blocchiUsa, gruppiUsa, materieUsa, materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { highSchoolName, highSchoolPath } from '../data/stem-usa/high-school/index.mjs';
 import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
-import { calculusSlug, calculusTopics } from '../lib/stem-usa-practice';
+import { calculusSlug } from '../lib/stem-usa-practice';
+import { usTimedTopics } from '../lib/stem-usa-banks';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; usa?: boolean; ricercaPrincipale?: boolean }
@@ -17,12 +20,12 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const MATERIE = usa ? materieUsa : materieL(lingua);
 const home = usa ? url('/us') : link(lingua, '/');
-const hrefMateria = (slug: string) => usa ? url('/us/' + slug) : link(lingua, '/' + slug);
+const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, '/' + slug);
 const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgomentoUsa(slug, arg, sez) : link(lingua, '/' + slug + '/' + arg + '/' + sez);
 const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
-const conDomande = new Set(m ? (usa ? (m.slug === calculusSlug ? calculusTopics : []) : (await catalogoDomande(lingua))[m.slug] ?? []) : []);
+const conDomande = new Set(m ? (usa ? usTimedTopics[m.slug] ?? [] : (await catalogoDomande(lingua))[m.slug] ?? []) : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
@@ -61,7 +64,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
         <a href={hrefMateria(m.slug)}>{m.titolo}</a>
         <a class="cambia-materia" href={home}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       </p>
-      <ol>
+      <ol data-usa-course-nav={usa || undefined}>
         {m.argomenti.map((a) => {
           const corrente = a.slug === argomento;
           return (
@@ -82,10 +85,12 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           <li>
             <button type="button" class="argomento" aria-expanded="false" data-apri-argomento>Exam practice</button>
             <ol>
-              <li><a href={url('/us/' + m.slug + '#course-practice')}>Review questions</a></li>
-              {m.slug === calculusSlug && <>
+              {!m.slug.startsWith('hs-') && <li><a href={url(courseUrl(m.slug) + '#course-practice')}>Review questions</a></li>}
+              {conDomande.size > 0 && <>
                 <li><a href={hrefArgomento(m.slug, RIPASSO, 'domande')}>Timed review</a></li>
                 <li class="solo-collegati"><a href={hrefArgomento(m.slug, RIPASSO_OGGI, 'domande')}>Today’s review</a></li>
+              </>}
+              {m.slug === calculusSlug && <>
                 <li><a href={url('/us/calculus-1/practice-exam')}>General practice exam</a></li>
                 <li><a href={url('/us/calculus-1/purdue')}>Purdue exam practice</a></li>
               </>}
@@ -107,9 +112,10 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   ) : (
     <>
       <p class="indice-percorsi-titolo">{lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
-      {(usa ? [gruppoUsa] : gruppiL(lingua)).map((g) => (
+      {(usa ? gruppiUsa : gruppiL(lingua)).map((g) => (
         <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
+          {usa && g === highSchoolName && <p><a href={url(highSchoolPath)}>High school catalog</a></p>}
           {lingua === 'it' && g === 'Concorsi' && (
             <ol class="indice-materie">
               <li style="--colore-materia: #6d5a8a">
@@ -140,7 +146,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                 })}
               </ol>
             );
-            return (usa ? blocchiUsa : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
+            return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
               <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
                 {lista(b.materie)}
