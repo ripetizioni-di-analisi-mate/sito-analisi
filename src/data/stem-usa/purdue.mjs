@@ -1,3 +1,5 @@
+import { earlyMidterms } from './purdue-midterms.mjs';
+
 export const exams = [
   {
     "id": "sample",
@@ -168,6 +170,7 @@ export const exams = [
       }
     ]
   },
+  ...earlyMidterms,
   {
     "id": "exam3",
     "name": "Exam 3 practice",
