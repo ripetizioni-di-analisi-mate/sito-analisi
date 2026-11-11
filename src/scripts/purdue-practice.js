@@ -1,4 +1,4 @@
-import { exams } from '../data/stem-usa/purdue.mjs';
+const exams = JSON.parse(document.querySelector('#purdue-exams').textContent);
 
 const letters = 'ABCDE';
 const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;' };
@@ -47,7 +47,7 @@ function showMenu(focus = false) {
     <div class="card-grid">${exams.map(exam => {
       const attempt = attempts[exam.id];
       if (attempt && !attempt.finished && attempt.deadline <= Date.now()) attempt.finished = 'expired';
-      const label = attempt?.finished ? 'View results' : attempt ? 'Resume practice' : exam.id === 'sample' ? 'Start free quiz' : 'Start practice';
+      const label = attempt?.finished ? 'View results' : attempt ? 'Resume practice' : exam.id === 'sample' ? 'Start warm-up' : 'Start practice';
       return `<article class="card">
         <h3>${exam.name}</h3>
         <p class="meta">${exam.questions.length} questions · ${exam.minutes} min</p>

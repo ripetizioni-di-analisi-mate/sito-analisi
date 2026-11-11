@@ -1,5 +1,6 @@
 ---
 import UsStem from '../../../layouts/UsStem.astro';
+import { exams } from '../../../data/stem-usa/purdue.mjs';
 ---
 <UsStem title="Purdue MA 16100 Exam Practice" course="calculus-1" section="Purdue exam practice"
   description="Timed Calculus I practice aligned with Purdue MA 16100.">
@@ -7,6 +8,7 @@ import UsStem from '../../../layouts/UsStem.astro';
   <h1>Calculus I exam practice</h1>
   <p class="sommario">Practice without a calculator, then review your answers step by step.</p>
   <div class="purdue-usa">
+    <script type="application/json" id="purdue-exams" is:inline set:html={JSON.stringify(exams).replaceAll('<', '\\u003c')}></script>
     <div id="purdue-app"></div>
     <dialog id="purdue-submit-dialog" aria-labelledby="confirm-title">
       <h3 id="confirm-title">Submit your answers?</h3>

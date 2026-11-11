@@ -1,0 +1,9 @@
+---
+import Sblocca from '../../../viste/Sblocca.astro';
+import { universityCourses } from '../../../data/stem-usa/catalog.mjs';
+
+export function getStaticPaths() {
+  return universityCourses.map(course => ({ params: { course: course.slug } }));
+}
+---
+<Sblocca lingua="en" materia={Astro.params.course!} usa />

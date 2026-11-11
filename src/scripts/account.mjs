@@ -86,7 +86,7 @@ export function avviaAccount(root) {
   async function mostraContenuti() {
     const lista = q('contenuti-account');
     const acquistate = new Set(io.materie || []);
-    for (const m of materie.filter((m) => acquistate.has(m.slug))) lista.append(rigaContenuto(m.titolo, `${pref}/${m.slug}`));
+    for (const m of materie.filter((m) => acquistate.has(m.slug))) lista.append(rigaContenuto(m.titolo, m.href || `${pref}/${m.slug}`));
     const haVideo = [...acquistate].some((m) => m.startsWith('video-'));
     q('materie-vuote').hidden = lista.children.length > 0 || haVideo;
     lista.hidden = lista.children.length === 0;

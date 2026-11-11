@@ -12,8 +12,11 @@ import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import StudyCountry from '../components/StudyCountry.astro';
 import { CATALOGO_PREDEFINITO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
-import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
-import { calculusSlug, calculusTopics } from '../lib/stem-usa-practice';
+import { linkArgomentoUsa, materieUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { calculusSlug } from '../lib/stem-usa-practice';
+import { usTimedTopics } from '../lib/stem-usa-banks';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { RIPASSO } from '../data/livelli';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
@@ -62,22 +65,21 @@ const versoAltra = usa
   : sezione === 'home' ? `${paginaAltra}?lingua=${altra}` : paginaAltra;
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeDisponibili = await catalogoDomande(lingua);
-const domandeMateria = usa ? (materia === calculusSlug ? calculusTopics : []) : domandeDisponibili[materia ?? ''] ?? [];
+const domandeMateria = (usa ? usTimedTopics : domandeDisponibili)[materia ?? ''] ?? [];
 const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
-const calculus = materiaUsa(calculusSlug)!;
 const catalogoPercorso = {
   ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
-  [calculusSlug]: {
-    titolo: calculus.titolo,
-    argomenti: calculusTopics,
-    domande: calculusTopics,
+  ...Object.fromEntries(Object.entries(usTimedTopics).map(([slug, topics]) => [slug, {
+    titolo: materiaUsa(slug)!.titolo,
+    argomenti: topics,
+    domande: topics,
     ripasso: 'Timed review',
-    base: '/us/' + calculusSlug,
-  },
+    base: courseUrl(slug),
+  }])),
 };
 const en = lingua === 'en';
 const homeCurriculum = usa ? url('/us') : link(lingua, '/');
-const hrefMateria = m ? (usa ? url('/us/' + m.slug) : link(lingua, '/' + m.slug)) : homeCurriculum;
+const hrefMateria = m ? (usa ? url(courseUrl(m.slug)) : link(lingua, '/' + m.slug)) : homeCurriculum;
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
@@ -130,7 +132,7 @@ const altOg = og ? og.alt : altGenerale(lingua);
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
 // Spunte delle materie sbloccate: il Worker scrive su <html> data-materie="analisi-1 precorso ...".
-const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
+const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x) => {
   const sel = `html[data-materie~="${x.slug}"] [data-materia="${x.slug}"]`;
   return `${sel} .stato-bloccata{display:none}${sel} .stato-sbloccata{display:inline-flex}${sel}.riquadro-stato .stato-bloccata{display:none}${sel}.riquadro-stato .stato-sbloccata{display:flex}`;
 }).join('');
@@ -259,7 +261,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
               <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={usa
-                ? (domandeQui ? linkArgomentoUsa(materia!, argomento!, 'domande') : url('/us/' + (materia || calculusSlug) + '#course-practice'))
+                ? (domandeQui ? linkArgomentoUsa(materia!, argomento!, 'domande')
+                  : materia && usTimedTopics[materia] ? linkArgomentoUsa(materia, RIPASSO, 'domande')
+                  : url(courseUrl(materia || calculusSlug) + '#course-practice'))
                 : link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
               {!en && (

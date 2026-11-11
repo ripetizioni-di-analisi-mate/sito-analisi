@@ -1,0 +1,98 @@
+---
+import UsStem from '../../../../layouts/UsStem.astro';
+import UsCourseOutline from '../../../../components/UsCourseOutline.astro';
+import VerificaRisposta from '../../../../components/VerificaRisposta.astro';
+import { highSchoolCourses, highSchoolPath } from '../../../../data/stem-usa/high-school/index.mjs';
+import { linkArgomentoUsa } from '../../../../data/stem-usa/catalog-view';
+import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../../../data/livelli';
+import { calculusAnswer, calculusHtml } from '../../../../lib/stem-usa-practice';
+import { url } from '../../../../lib/url';
+
+export function getStaticPaths() {
+  return highSchoolCourses.map(course => ({ params: { course: course.slug.slice(3) }, props: { course } }));
+}
+
+const { course } = Astro.props;
+const { slug, title, description, lessons, preparation, sources } = course;
+---
+<UsStem title={title} description={description} course={slug}>
+  <p class="sopratitolo"><a href={url(highSchoolPath)}>High School</a></p>
+  <h1>{title}</h1>
+  <p class="sommario">{description}</p>
+  <UsCourseOutline slug={slug} topics={lessons} />
+  <section data-usa-content>
+    <p class="nota">Check a correct answer for the first time to earn {PUNTI.esercizio} XP on exercises with automatic checking.</p>
+    <ol class="griglia-argomenti">
+      {lessons.map((lesson, index) => {
+        const number = index + 1;
+        const topic = 'unit-' + number;
+        const href = (sezione: string) => linkArgomentoUsa(slug, topic, sezione);
+        return (
+          <li>
+            <h2><a href={href('teoria')}>{lesson.title}</a></h2>
+            <nav aria-label={lesson.title}>
+              <a href={href('teoria')}>Theory</a>
+              <a href={href('esercizi-svolti')}>Worked examples ({lesson.worked.length})</a>
+              <a href={href('esercizi')}>Exercises ({lesson.exercises.length})</a>
+              <a href={href('domande')}>Timed question</a>
+            </nav>
+            <details class="sommario-pagina studio-unita-usa studio-liceo-usa" id={topic} hidden>
+              <summary>Theory</summary>
+              <div><p set:html={calculusHtml(lesson.theory)} /></div>
+            </details>
+            <details class="sommario-pagina studio-unita-usa studio-liceo-usa" id={'worked-' + number} hidden>
+              <summary>Worked examples ({lesson.worked.length})</summary>
+              <div>
+                <ol class="esercizi-liceo-usa">
+                  {lesson.worked.map(([prompt, solution]) => (
+                    <li>
+                      <p><strong>Problem</strong> <Fragment set:html={calculusHtml(prompt)} /></p>
+                      <p><strong>Solution</strong> <Fragment set:html={calculusHtml(solution)} /></p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </details>
+            <details class="sommario-pagina studio-unita-usa studio-liceo-usa" id={'exercises-' + number} hidden>
+              <summary>Exercises ({lesson.exercises.length})</summary>
+              <div>
+                <ol class="esercizi-liceo-usa">
+                  {lesson.exercises.map(([label, prompt, solution, answer], i) => (
+                    <li>
+                      <h3>{label}</h3>
+                      <p set:html={calculusHtml(prompt)} />
+                      <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + (i + 1)}
+                        tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
+                      <details class="stem-feedback">
+                        <summary>Show solution</summary>
+                        <p set:html={calculusHtml(solution)} />
+                      </details>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </details>
+          </li>
+        );
+      })}
+    </ol>
+    <p class="azioni">
+      <a class="bottone-primario" href={linkArgomentoUsa(slug, RIPASSO, 'domande')}>Timed review ({lessons.length})</a>
+      <a class="bottone-secondario solo-collegati" href={linkArgomentoUsa(slug, RIPASSO_OGGI, 'domande')}>Today’s review</a>
+    </p>
+  </section>
+  <section class="risorse-usa">
+    <h2>Course references</h2>
+    <p><strong>Preparation</strong> {preparation}</p>
+    <ul>{sources.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
+  </section>
+</UsStem>
+<style>
+  .studio-liceo-usa { grid-column: 1 / -1; min-inline-size: 0; }
+  .esercizi-liceo-usa { margin-block: .5rem; padding-inline-start: 1.4rem; }
+  .esercizi-liceo-usa li { margin-block: .75rem; padding-block-start: .55rem; border-top: 1px solid var(--riga); }
+  .esercizi-liceo-usa h3 { margin: 0; font-size: 1rem; }
+</style>
+<script>
+  import '../../../../scripts/apri-unita-usa';
+</script>

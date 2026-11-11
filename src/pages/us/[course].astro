@@ -1,7 +1,7 @@
 ---
 import UsStem from '../../layouts/UsStem.astro';
 import UsPractice from '../../components/UsPractice.astro';
-import FreeCourseAccess from '../../components/FreeCourseAccess.astro';
+import UsCourseOutline from '../../components/UsCourseOutline.astro';
 import CalculusPractice from '../../components/CalculusPractice.astro';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
 import { calculusPractice, calculusSlug } from '../../data/stem-usa/calculus-1-practice.mjs';
@@ -9,11 +9,11 @@ import { calculusTimed } from '../../data/stem-usa/calculus-1-timed.mjs';
 import { calculusTimedCount } from '../../lib/stem-usa-practice';
 import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../data/livelli';
 import { T, sezioniL } from '../../i18n';
-import { courses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
+import { universityCourses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
 import { url } from '../../lib/url';
 
 export function getStaticPaths() {
-  return courses.map(course => ({ params: { course: course.slug }, props: { course } }));
+  return universityCourses.map(course => ({ params: { course: course.slug }, props: { course } }));
 }
 
 const { course } = Astro.props;
@@ -34,7 +34,8 @@ const isCalculus = course.slug === calculusSlug;
   <p class="sopratitolo">{t.programma}</p>
   <h1>{title}</h1>
   <p class="sommario">{course.description}</p>
-  <FreeCourseAccess lingua="en" href="#unit-1" />
+  <UsCourseOutline slug={course.slug} topics={course.lessons} />
+  <section data-usa-content>
   {isCalculus && <p class="nota">While signed in, you earn {PUNTI.esercizio} XP the first time you check a correct answer to each practice exercise.</p>}
   <ol class="griglia-argomenti">
     {course.lessons.map((lesson, index) => {
@@ -83,6 +84,7 @@ const isCalculus = course.slug === calculusSlug;
     </li>
   </ol>
   <UsPractice questions={questions} minutes={questions.length * 2} />
+  </section>
   <section class="risorse-usa">
     <h2>University syllabi</h2>
     <p><strong>Preparation</strong> {course.preparation}</p>
@@ -90,23 +92,5 @@ const isCalculus = course.slug === calculusSlug;
   </section>
 </UsStem>
 <script>
-  function openLinkedUnit(hash: string) {
-    if (!/^#(?:unit|worked|exercises)-\d+$/.test(hash)) return;
-    const target = document.getElementById(hash.slice(1));
-    const details = target?.closest('details');
-    if (details instanceof HTMLDetailsElement) {
-      details.hidden = false;
-      details.open = true;
-      target?.scrollIntoView({ block: 'start' });
-    }
-  }
-  openLinkedUnit(location.hash);
-  addEventListener('hashchange', () => openLinkedUnit(location.hash));
-  document.addEventListener('click', event => {
-    const link = event.target instanceof Element && event.target.closest<HTMLAnchorElement>('a[href]');
-    if (!link || link.pathname !== location.pathname || !link.hash) return;
-    const dialog = link.closest('dialog[open]');
-    if (dialog instanceof HTMLDialogElement) dialog.close();
-    openLinkedUnit(link.hash);
-  });
+  import '../../scripts/apri-unita-usa';
 </script>

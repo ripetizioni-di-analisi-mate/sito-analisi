@@ -1,7 +1,7 @@
 export const exams = [
   {
     "id": "sample",
-    "name": "Free mini-quiz",
+    "name": "Warm-up quiz",
     "description": "Try six questions on limits, derivatives and integrals. See which topics to review before a full practice exam.",
     "minutes": 15,
     "questions": [

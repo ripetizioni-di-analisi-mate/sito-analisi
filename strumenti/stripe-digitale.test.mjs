@@ -194,6 +194,28 @@ const acquista = (sel, totaleAtteso) => ({
   versioneCondizioni: VERSIONE_CONDIZIONI,
   fatturazione: fattura,
 });
+test('i corsi USA usano i prezzi italiani e sbloccano il corso acquistato', async (t) => {
+  const b = banco(t);
+  const sel = { tipo: 'materia', slug: 'hs-algebra-1', lingua: 'en' };
+  assert.equal((await b.call('preventivo', { ...sel, slug: 'calculus-1' })).totale, 4900);
+  assert.equal((await b.call('preventivo', { ...sel, slug: 'mechanics-of-materials' })).totale, 6500);
+  assert.equal((await b.call('preventivo', sel)).totale, 2900);
+  const ordine = {
+    ...acquista(sel, 2900),
+    fatturazione: { nome: 'Test', cognome: 'Student', indirizzo: '1 Example St', cap: '10001', comune: 'New York', provincia: 'NY', paese: 'US' },
+  };
+  assert.equal((await b.call('checkout', { ...ordine, totaleAtteso: 1 })).status, 409);
+  assert.equal((await b.call('checkout', ordine)).status, 200);
+  const s = [...b.sessioni.values()][0];
+  assert.equal(s.amount_total, 2900);
+  assert.equal(s.currency, 'eur');
+  assert.deepEqual(b.o.materieDi(b.io.email), []);
+  Object.assign(s, { status: 'complete', payment_status: 'paid', payment_intent: 'pi_algebra' });
+  const stato = await b.call('stato?session_id=' + s.id);
+  assert.equal(stato.stato, 'pagato');
+  assert.equal(stato.destinazione, '/us/high-school/algebra-1');
+  assert.deepEqual(b.o.materieDi(b.io.email), ['hs-algebra-1']);
+});
 test('prezzi server, dati e consensi, doppio checkout, prova di pagamento ed esito riservato', async (t) => {
   const b = banco(t),
     sel = { tipo: 'materia', slug: 'analisi-1' };

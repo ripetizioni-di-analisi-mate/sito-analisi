@@ -1,0 +1,27 @@
+---
+import { usaProduct } from '../data/stem-usa/pricing';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { url } from '../lib/url';
+import { usContentCounts } from '../lib/stem-usa-banks';
+
+interface Props { slug: string; topics: { title: string }[] }
+const { slug, topics } = Astro.props;
+const product = usaProduct(slug)!;
+const counts = usContentCounts(slug, topics.length);
+---
+<section data-usa-outline>
+  <div class="riquadro-stato">
+    <div class="stato-bloccata">
+      <div class="testo"><strong>Full course · {product.prezzo} €</strong><span>One-time payment for the lessons, worked examples and practice.</span></div>
+      <div class="azioni-anteprima">
+        <a class="bottone-sblocca" href={url(courseUrl(slug) + '/sblocca')}>Unlock {product.titolo} →</a>
+      </div>
+    </div>
+  </div>
+  <p class="nota">
+    {topics.length} topics · {counts.worked} worked examples{counts.exercises > 0 && ` · ${counts.exercises} practice exercises`}{counts.timed > 0 && ` · ${counts.timed} timed questions`}{counts.review > 0 && ` · ${counts.review} review questions`}
+  </p>
+  <ol class="griglia-argomenti" aria-label="Course topics">
+    {topics.map(topic => <li><h2>{topic.title}</h2></li>)}
+  </ol>
+</section>
