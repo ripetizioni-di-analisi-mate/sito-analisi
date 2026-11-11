@@ -91,6 +91,7 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     }
     const nomiProve = nomiAllenamento(m, l);
     voci.push({ t: `${x.ripasso} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/${RIPASSO}/domande`), p: `${x.paroleDomande} ripasso`, c: 'esercizi' });
+    if (m.eserciziDaFare === false) continue;
     const quiz = l === 'it' && m.gruppo === 'Concorsi';
     const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
     voci.push({ t: `${nomiProve.simulazione} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: quiz ? 'simulazione prova concorso quiz test risposta multipla punteggio timer' : superiori ? (l === 'en' ? 'class test simulation timed written practice' : 'simulazioni verifiche in classe compito scritto prova timer tracce') : x.paroleSimulazione, c: 'esercizi' });

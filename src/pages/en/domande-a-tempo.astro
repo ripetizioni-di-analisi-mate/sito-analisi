@@ -20,7 +20,7 @@ const { materie, gruppi, totale } = await elencoDomande('en');
             <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
             <div class="dta-tasti">
               <a class="dta-primario" href={`/en/${m.slug}/${RIPASSO}/domande`}>Review on everything</a>
-              <a class="dta-secondario" href={`/en/${m.slug}/simulazione`}>{nomiAllenamento(m, 'en').simulazione}</a>
+              {m.simulazione && <a class="dta-secondario" href={`/en/${m.slug}/simulazione`}>{nomiAllenamento(m, 'en').simulazione}</a>}
             </div>
             <details>
               <summary>Choose a topic</summary>

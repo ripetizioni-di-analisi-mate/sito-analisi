@@ -35,9 +35,12 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
   return teoria + video;
 }).join('') : '';
 // Conteggi veri di ogni materia, letti dai file dei contenuti (non scritti a mano).
-const [svolti, dafare] = [await getCollection('svolti'), await getCollection('dafare')];
+const [svolti, dafare, domande] = await Promise.all([getCollection('svolti'), getCollection('dafare'), getCollection('domande')]);
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
-const conti = (m: (typeof MATERIE)[number]) => `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${conta(dafare, m.slug)} esercizi da fare`;
+const conti = (m: (typeof MATERIE)[number]) => {
+  const pratica = m.eserciziDaFare === false ? `${conta(domande, m.slug)} domande a tempo` : `${conta(dafare, m.slug)} esercizi da fare`;
+  return `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${pratica}`;
+};
 const icona = {
   teoria: '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5M7.8 10h5M7.8 13h5"/></svg>',
   video: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5v7l5.5-3.5z" fill="#fff"/></svg>',

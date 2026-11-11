@@ -12,6 +12,7 @@ export interface Materia {
   gruppo: string;      // percorso di studi: la home e l'indice raggruppano per questo
   sottogruppo?: string; // dentro il gruppo, materie raccolte in una voce apribile (per esempio Matematica dal 1° al 5° anno)
   prezzo?: number;     // in euro, da prezzi.json: presente = materia a pagamento
+  eserciziDaFare?: false; // esercitazione autonoma con i quiz, senza tracce aperte
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
 }
@@ -192,6 +193,27 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'equazioni-indefinite', titolo: "Equazioni indefinite di equilibrio della trave", breve: 'Equazioni indefinite' },
       { slug: 'lavori-virtuali', titolo: 'Principio dei lavori virtuali', breve: 'Lavori virtuali' },
       { slug: 'linee-di-influenza', titolo: 'Linee di influenza', breve: 'Linee di influenza' },
+    ],
+  },
+  {
+    slug: 'scienza-delle-costruzioni',
+    titolo: 'Scienza delle costruzioni',
+    breve: 'Scienza delle costruzioni',
+    descrizione: 'Scienza delle costruzioni per Ingegneria. Dai vincoli e dai diagrammi delle sollecitazioni al calcolo di tensioni e spostamenti, alle strutture iperstatiche e al carico critico di Eulero.',
+    colore: '#416c69',
+    gruppo: 'Università',
+    attiva: true,
+    eserciziDaFare: false,
+    argomenti: [
+      { slug: 'statica-vincoli', titolo: 'Equilibrio, vincoli e reazioni vincolari', breve: 'Equilibrio e vincoli' },
+      { slug: 'sollecitazioni', titolo: 'Sforzo normale, taglio e momento flettente', breve: 'Diagrammi di N, T e M' },
+      { slug: 'reticolari', titolo: 'Travature reticolari e forze nelle aste', breve: 'Travature reticolari' },
+      { slug: 'geometria-sezioni', titolo: 'Geometria delle sezioni e momenti d’inerzia', breve: 'Geometria delle sezioni' },
+      { slug: 'tensioni-deformazioni', titolo: 'Tensioni, deformazioni, cerchio di Mohr e legge di Hooke', breve: 'Tensioni e deformazioni' },
+      { slug: 'de-saint-venant', titolo: 'De Saint Venant: sforzo normale, flessione, taglio e torsione', breve: 'De Saint Venant' },
+      { slug: 'linea-elastica', titolo: 'Linea elastica, rotazioni e spostamenti', breve: 'Linea elastica' },
+      { slug: 'iperstatiche', titolo: 'Strutture iperstatiche, lavori virtuali e metodo delle forze', breve: 'Strutture iperstatiche' },
+      { slug: 'stabilita', titolo: 'Stabilità elastica e carico critico di Eulero', breve: 'Stabilità elastica' },
     ],
   },
   {
@@ -783,8 +805,9 @@ export function argomento(m: string, a: string): Argomento {
   return materia(m).argomenti.find((x) => x.slug === a)!;
 }
 // Tutte le coppie (materia, argomento) delle materie attive, per getStaticPaths.
-export function coppie() {
-  return MATERIE.filter((m) => m.attiva).flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
+export function coppie(sezione?: 'esercizi') {
+  return MATERIE.filter((m) => m.attiva && (sezione !== 'esercizi' || m.eserciziDaFare !== false))
+    .flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
 }
 // I gruppi (percorsi di studi) nell'ordine in cui compaiono in home e nell'indice.
 export function gruppi(): string[] {
