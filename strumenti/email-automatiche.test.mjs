@@ -33,7 +33,7 @@ function banco(t) {
     getAlarm: async () => null,
     setAlarm: async () => {},
   } };
-  const env = { RESEND_API_KEY: 'resend-simulato', STRIPE_SECRET_KEY: 'stripe-simulato', CHIAVE_ACCESSO: 'chiave-simulata' };
+  const env = { RESEND_API_KEY: 'resend-simulato', STRIPE_SECRET_KEY: 'stripe-simulato', CHIAVE_ACCESSO: 'chiave-simulata', ADMIN_PASSWORD: 'admin-simulata' };
   const ar = new Archivio(state, env);
   env.ARCHIVIO = { idFromName: () => 'locale', get: () => ({ fetch: (url, opts) => ar.fetch(new Request(url, opts)) }) };
   const ctx = { waitUntil() {} };
@@ -65,7 +65,7 @@ function banco(t) {
     if (url.startsWith('https://api.resend.com/emails/mail-')) return Response.json({ last_event: 'delivered' });
     throw new Error('URL inatteso ' + url);
   });
-  return { db, utente, studia, compra, conferma, apri, cron, api, invii,
+  return { db, env, riapri: () => new Archivio(state, env), utente, studia, compra, conferma, apri, cron, api, invii,
     get ora() { return ora; }, avanza(ms) { ora += ms; }, errore(stato) { erroreInvio = stato; } };
 }
 
@@ -144,9 +144,57 @@ test('un errore temporaneo conserva chiave e corpo e la revoca cancella i prossi
   b.errore(503);
   await b.cron();
   assert.equal(b.invii.length, 2);
+  assert.equal((await b.api('/em-storico', { tipo: 'prima-prova' })).totale, 0);
   await b.api('/em-disattiva', { email: altro });
   b.errore(null); b.avanza(GIORNO / 8);
   await b.cron(false); await b.cron(false);
   assert.equal(b.invii.length, 3);
   assert.deepEqual(b.invii[0], b.invii[2]);
+  const storico = await b.api('/em-storico', { tipo: 'prima-prova' });
+  assert.equal(storico.totale, 1);
+  assert.equal(storico.invii[0].email, email);
+});
+
+test('lo storico recupera gli invii precedenti senza duplicare i promemoria e usa la mezzanotte italiana', async (t) => {
+  const b = banco(t), email = 'studente@esempio.test';
+  const quando = Date.parse('2026-11-08T23:15:00Z');
+  b.db.exec("DELETE FROM email_config WHERE chiave = 'storico-email-dal'");
+  b.db.prepare(`INSERT INTO email_automatiche (id, email, tipo, evento, materia, prossimo, scadenza, stato, iniziato, inviato)
+    VALUES ('vecchio', ?, 'studio', '123/3', 'analisi-1', ?, ?, 'inviata', ?, ?)`).run(email, quando, quando, quando - 1000, quando);
+  b.db.prepare("INSERT INTO promemoria (email, giorno) VALUES (?, '2026-11-08'), (?, '2026-11-08')").run(email, 'altro@esempio.test');
+  b.riapri();
+  b.riapri();
+  const storico = await b.api('/em-storico');
+  assert.equal(storico.totale, 2);
+  assert.deepEqual(storico.conteggi.map(({ giorno, tipo, n }) => ({ giorno, tipo, n })), [
+    { giorno: '2026-11-08', tipo: 'promemoria', n: 1 }, { giorno: '2026-11-09', tipo: 'studio', n: 1 },
+  ]);
+  assert.equal(storico.invii[1].solo_data, 1);
+  await b.cron(false);
+  const flussi = (await b.api('/em-dashboard')).flussi;
+  assert.equal(flussi.find((f) => f.tipo === 'studio').avvio, quando - 1000);
+  assert.equal(flussi.find((f) => f.tipo === 'prima-prova').avvio, b.ora);
+});
+
+test('gli invii di servizio sono consultabili per tipo e giorno solo dall’amministratore', async (t) => {
+  const b = banco(t), email = 'studente@esempio.test';
+  b.utente(email);
+  const r = await worker.fetch(new Request(SITO + '/api/password-dimenticata', {
+    method: 'POST', body: JSON.stringify({ email }),
+  }), b.env, {});
+  assert.equal(r.status, 200);
+  const url = SITO + '/admin/api/email-storico?giorni=7&tipo=recupero-password&giorno=2026-11-09';
+  assert.equal((await b.apri(url)).status, 401);
+  const token = await firmaToken(b.env, { admin: true, t: b.ora });
+  const risposta = await b.apri(url, 'GET', { cookie: 'admin=' + encodeURIComponent(token) });
+  assert.equal(risposta.status, 200);
+  assert.equal(risposta.headers.get('cache-control'), 'private, no-store');
+  const storico = await risposta.json();
+  assert.equal(storico.giorni.length, 7);
+  assert.equal(storico.totale, 1);
+  assert.equal(storico.invii[0].tipo, 'recupero-password');
+  assert.equal(storico.invii[0].email, email);
+  assert.equal(storico.invii[0].oggetto, b.invii[0].subject);
+  assert.equal((await b.api('/em-storico', { tipo: 'studio' })).totale, 0);
+  assert.equal((await b.api('/em-storico', { giorno: '2026-11-08' })).totale, 0);
 });

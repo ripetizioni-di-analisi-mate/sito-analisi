@@ -95,7 +95,7 @@ async function inviaEmail(env, a, oggetto, righe, tasto) {
   const messaggio = componiEmail({
     subject: oggetto, categoria: 'Corsi di gruppo', righe, pulsante: tasto,
   });
-  return (await inviaEmailResend(env, a, messaggio)).ok;
+  return (await inviaEmailResend(env, a, messaggio, undefined, 'corso-gruppo')).ok;
 }
 const titolo = (slug) => MATERIE_GRUPPI.find((m) => m.slug === slug)?.titolo || slug;
 const esa = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');

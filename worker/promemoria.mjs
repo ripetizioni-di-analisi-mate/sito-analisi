@@ -128,17 +128,24 @@ async function inviaRighe(env, aDO, firmaToken, catalogo, righe, oggi) {
       headers: { 'List-Unsubscribe': `<${linkNo}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
     };
   }));
-  const inviati = [];
+  const inviati = [], invii = [];
   for (let i = 0; i < email.length; i += 100) {
     const blocco = email.slice(i, i + 100);
     const r = await fetch('https://api.resend.com/emails/batch', {
       method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
       body: JSON.stringify(blocco),
     });
-    if (r.ok) inviati.push(...blocco.map((x) => x.to[0]));
+    if (r.ok) {
+      const inviato = Date.now();
+      const { data } = await r.json().catch(() => ({}));
+      inviati.push(...blocco.map((x) => x.to[0]));
+      invii.push(...blocco.map((x, j) => ({
+        id: data?.[j]?.id || crypto.randomUUID(), tipo: 'promemoria', email: x.to[0], oggetto: x.subject, inviato,
+      })));
+    }
     else console.log('promemoria', r.status, (await r.text()).slice(0, 300));
   }
-  if (inviati.length) await aDO(env, '/promemoria-registra', { giorno: oggi, email: inviati });
+  if (inviati.length) await aDO(env, '/promemoria-registra', { giorno: oggi, email: inviati, invii });
   return inviati;
 }
 
@@ -190,7 +197,12 @@ export async function provaPromemoria(env, aDO, firmaToken, catalogo, email) {
   });
   if (!r.ok) return { errore: `Resend ha risposto ${r.status}: ${(await r.text()).slice(0, 200)}` };
   // Per uno studente iscritto l'invio a mano conta come quello automatico: niente doppione nello stesso giorno.
-  if (c.righe?.[0]) await aDO(env, '/promemoria-registra', { giorno: new Date().toISOString().slice(0, 10), email: [email] });
+  const inviato = Date.now();
+  const { id } = await r.json().catch(() => ({}));
+  await aDO(env, '/promemoria-registra', {
+    giorno: new Date(inviato).toISOString().slice(0, 10), email: c.righe?.[0] ? [email] : [],
+    invii: [{ id: id || crypto.randomUUID(), tipo: 'prova', email, oggetto: m.oggetto, inviato }],
+  });
   return { ok: true, oggetto: m.oggetto, account: Boolean(c.righe?.[0]) };
 }
 

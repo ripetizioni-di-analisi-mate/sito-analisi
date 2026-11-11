@@ -1,5 +1,6 @@
 // Dashboard riservata (/admin): pagina unica con viste a schede.
 // I dati arrivano da /admin/api/*; il codice del browser è la funzione `cliente`, inserita nella pagina come sorgente.
+import { TIPI_EMAIL } from './storico-email.mjs';
 
 const ICONE = {
   panoramica: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/>',
@@ -153,6 +154,9 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .filtro small{font-weight:400;opacity:.75;margin-left:.2rem}
 select.scelta{border:1px solid var(--riga);border-radius:9px;padding:.38rem .6rem;background:var(--pannello)}
 .tabella{overflow-x:auto}
+.tabella-email-giorni{max-height:16rem;overflow:auto}
+.tabella-email-giorni th{position:sticky;top:0}
+.tabella-email-invii td:nth-child(3),.tabella-email-invii td:nth-child(4){overflow-wrap:anywhere;min-width:9rem}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700;text-align:left;padding:.55rem 1.2rem;border-bottom:1px solid var(--riga);white-space:nowrap;background:var(--pannello-2)}
 th[data-ordina]{cursor:pointer;user-select:none}
@@ -305,14 +309,14 @@ td.destra,th.destra{text-align:right}
 <aside class="cassetto" id="cassetto" aria-hidden="true" role="dialog" aria-label="Scheda dello studente"></aside>
 <div class="toast" id="toast" role="status"></div>
 <script>var __name = function (f) { return f; };
-(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)});</script>
+(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)});</script>
 </body></html>`;
 }
 
 // ---------------------------------------------------------------------------
 // Codice eseguito nel browser. Non usa variabili esterne: riceve i dati come argomenti.
 // Il bundler di Wrangler può inserire chiamate a __name nel sorgente: la pagina ne definisce una versione vuota.
-function cliente(MATERIE, A_PAGAMENTO) {
+function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   const M = Object.fromEntries(MATERIE.map((m) => [m.slug, m]));
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -326,6 +330,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
   let D = null, giorni = 30, vista = 'panoramica', aggiornato = null, inCorso = false;
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
   const statoLeghe = { dati: null, settimana: '', gruppo: '', mostraBot: false, caricamento: false, errore: false };
+  const filtriEmail = { giorni: '30', giorno: '', tipo: '', pagina: 1 };
   try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
@@ -791,14 +796,94 @@ function cliente(MATERIE, A_PAGAMENTO) {
       'seconda-materia': ['Seconda materia', 'Analisi 1 → Analisi 2. Dopo 7 giorni, con il 15% di sconto.'],
       lega: ['Sorpasso in lega', 'Quando cambia la posizione in classifica.'],
     };
+    const formatoData = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeZone: 'Europe/Rome' });
+    const formatoOra = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Rome' });
+    const dataGiorno = (g) => formatoData.format(new Date(g + 'T12:00:00Z'));
     $('#vista').innerHTML = '<div class="griglia">' +
       '<section class="card"><header><h2>Flussi e risultati</h2><span class="nota">Ultimi 30 giorni</span></header><div class="corpo" id="email-flussi" role="status">Caricamento…</div></section>' +
+      '<section class="card"><header><h2>Invii giorno per giorno</h2><span class="nota">Ora italiana</span></header>' +
+      '<div class="strumenti-tab"><label for="email-periodo">Periodo</label><select class="scelta" id="email-periodo">' +
+      [7, 30, 90].map((n) => '<option value="' + n + '">Ultimi ' + n + ' giorni</option>').join('') +
+      '</select><label for="email-tipo">Tipologia</label><select class="scelta" id="email-tipo"><option value="">Tutte le tipologie</option>' +
+      Object.entries(TIPI_EMAIL).map(([tipo, nome]) => '<option value="' + esc(tipo) + '">' + esc(nome) + '</option>').join('') +
+      '</select></div><p class="nota" style="margin:.35rem 1.2rem .7rem" id="email-copertura"></p>' +
+      '<div class="tabella tabella-email-giorni"><table aria-label="Invii per giorno"><thead><tr><th scope="col">Giorno</th><th scope="col" class="destra">Invii</th><th scope="col">Tipologie</th></tr></thead>' +
+      '<tbody id="email-giorni"><tr><td colspan="3">Caricamento…</td></tr></tbody></table></div></section>' +
+      '<section class="card"><header><h2>Email inviate</h2><span id="email-totale" class="nota" role="status"></span></header>' +
+      '<div class="strumenti-tab"><label for="email-giorno">Giorno</label><select class="scelta" id="email-giorno"><option value="">Tutti i giorni del periodo</option></select></div>' +
+      '<div class="tabella tabella-email-invii"><table><thead><tr><th scope="col">Data e ora</th><th scope="col">Tipologia</th><th scope="col">Destinatario</th><th scope="col">Oggetto</th></tr></thead>' +
+      '<tbody id="email-invii"><tr><td colspan="4">Caricamento…</td></tr></tbody></table></div>' +
+      '<div class="strumenti-tab" id="email-pagine" hidden><button type="button" class="bottone" id="email-prev">Precedente</button>' +
+      '<span class="nota" id="email-pagina" role="status"></span><button type="button" class="bottone" id="email-next">Successiva</button></div></section>' +
       '<section class="card"><header><h2>Anteprima dei messaggi</h2></header><div class="corpo">' +
       '<div class="azioni"><label for="email-modello">Modello</label><select id="email-modello">' +
       Object.entries(modelli).map(([id, m]) => '<option value="' + id + '">' + esc(m[0]) + '</option>').join('') + '</select>' +
       '<button type="button" class="bottone" id="email-prova">Invia una prova al titolare</button><span class="nota" role="status" id="email-esito"></span></div>' +
       '<iframe id="email-anteprima" title="Anteprima dell’email" sandbox style="width:100%;height:520px;border:1px solid var(--riga);border-radius:9px;margin-top:12px"></iframe></div></section></div>';
     const flussi = $('#email-flussi'), modello = $('#email-modello'), frame = $('#email-anteprima');
+    const periodo = $('#email-periodo'), tipologia = $('#email-tipo'), giorno = $('#email-giorno');
+    const giornalieri = $('#email-giorni'), invii = $('#email-invii'), totale = $('#email-totale'), copertura = $('#email-copertura');
+    const pagine = $('#email-pagine'), precedente = $('#email-prev'), successiva = $('#email-next');
+    periodo.value = filtriEmail.giorni;
+    tipologia.value = filtriEmail.tipo;
+    let richiesta = 0;
+
+    async function caricaStorico() {
+      const corrente = ++richiesta;
+      totale.textContent = 'Caricamento…';
+      try {
+        const d = await api('email-storico?' + new URLSearchParams(filtriEmail));
+        if (corrente !== richiesta || !invii.isConnected) return;
+        if (!Array.isArray(d.invii)) throw new Error('Dati non disponibili');
+        const perGiorno = new Map(d.giorni.map((r) => [r.giorno, []]));
+        d.conteggi.forEach((r) => perGiorno.get(r.giorno).push(r));
+        giorno.innerHTML = '<option value="">Tutti i giorni del periodo</option>' +
+          d.giorni.map((r) => '<option value="' + esc(r.giorno) + '">' + esc(dataGiorno(r.giorno)) + '</option>').join('');
+        giorno.value = filtriEmail.giorno;
+        copertura.textContent = 'Il registro degli invii accettati da Resend è attivo dal ' +
+          formatoOra.format(d.copertura) + '. Per le date precedenti sono riportati gli invii recuperabili.';
+        giornalieri.innerHTML = d.giorni.map((r) => {
+          const dettagli = perGiorno.get(r.giorno);
+          const n = somma(dettagli.map((x) => x.n));
+          return '<tr><td><button type="button" class="filtro" data-email-giorno="' + esc(r.giorno) + '" aria-pressed="' +
+            String(filtriEmail.giorno === r.giorno) + '">' + esc(dataGiorno(r.giorno)) + '</button>' +
+            (r.parziale ? ' <span class="nota">Dati parziali</span>' : '') + '</td><td class="destra"><b>' +
+            (r.parziale && !n ? '—' : nf.format(n)) + '</b></td><td>' +
+            (dettagli.map((x) => '<span class="chip">' + esc(TIPI_EMAIL[x.tipo] || x.tipo) + ' · ' + nf.format(x.n) + '</span>').join('') || '—') + '</td></tr>';
+        }).join('');
+        totale.textContent = nf.format(d.totale) + (d.totale === 1 ? ' invio registrato' : ' invii registrati');
+        invii.innerHTML = d.invii.length ? d.invii.map((r) => '<tr><td>' +
+          esc(r.solo_data ? formatoData.format(r.inviato) : formatoOra.format(r.inviato)) + '</td><td>' +
+          esc(TIPI_EMAIL[r.tipo] || r.tipo) + '</td><td>' + esc(r.email) + '</td><td>' +
+          esc(r.oggetto || '—') + '</td></tr>').join('') :
+          '<tr><td colspan="4"><div class="vuoto">Nessun invio registrato per questi filtri.</div></td></tr>';
+        filtriEmail.pagina = d.pagina;
+        pagine.hidden = d.pagine <= 1;
+        precedente.disabled = d.pagina <= 1;
+        successiva.disabled = d.pagina >= d.pagine;
+        $('#email-pagina').textContent = 'Pagina ' + d.pagina + ' di ' + d.pagine;
+      } catch {
+        if (corrente !== richiesta || !invii.isConnected) return;
+        totale.textContent = 'Impossibile caricare lo storico.';
+        giornalieri.innerHTML = '<tr><td colspan="3">Dati non disponibili.</td></tr>';
+        invii.innerHTML = '<tr><td colspan="4">Dati non disponibili.</td></tr>';
+        pagine.hidden = true;
+      }
+    }
+
+    function filtraStorico(nuovi) {
+      Object.assign(filtriEmail, { pagina: 1 }, nuovi);
+      caricaStorico();
+    }
+    periodo.addEventListener('change', () => filtraStorico({ giorni: periodo.value, giorno: '' }));
+    tipologia.addEventListener('change', () => filtraStorico({ tipo: tipologia.value }));
+    giorno.addEventListener('change', () => filtraStorico({ giorno: giorno.value }));
+    giornalieri.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-email-giorno]');
+      if (b) filtraStorico({ giorno: filtriEmail.giorno === b.dataset.emailGiorno ? '' : b.dataset.emailGiorno });
+    });
+    precedente.addEventListener('click', () => filtraStorico({ pagina: filtriEmail.pagina - 1 }));
+    successiva.addEventListener('click', () => filtraStorico({ pagina: filtriEmail.pagina + 1 }));
     const aggiornaAnteprima = () => { frame.src = '/admin/api/email-anteprima?tipo=' + encodeURIComponent(modello.value); };
     modello.addEventListener('change', aggiornaAnteprima);
     aggiornaAnteprima();
@@ -809,10 +894,11 @@ function cliente(MATERIE, A_PAGAMENTO) {
         const nota = d.statoConsegne === 'permessi' ? 'La chiave di Resend può inviare ma non leggere lo stato delle consegne.' :
           d.statoConsegne === 'ok' ? 'Le consegne sono verificate con Resend.' : 'Le consegne saranno verificate dopo i primi invii.';
         flussi.innerHTML = '<p class="nota">' + nf.format(d.consensi || 0) + ' consensi confermati · ' + nf.format(d.revoche || 0) +
-          ' disiscrizioni o revoche · ' + esc(nota) + '</p><div class="tabella"><table><thead><tr><th>Flusso</th><th>Stato</th><th>In coda</th><th>Accettate</th><th>Consegnate</th><th>Errori</th><th>Acquisti</th></tr></thead><tbody>' +
+          ' disiscrizioni o revoche · ' + esc(nota) + '</p><div class="tabella"><table><thead><tr><th>Flusso</th><th>Stato</th><th>Primo avvio registrato</th><th>In coda</th><th>Accettate</th><th>Consegnate</th><th>Errori</th><th>Acquisti</th></tr></thead><tbody>' +
           d.flussi.map((f) => '<tr><td><strong>' + esc(modelli[f.tipo][0]) + '</strong><br><span class="nota">' + esc(modelli[f.tipo][1]) + '</span></td>' +
             '<td><button type="button" class="bottone" data-email-flusso="' + f.tipo + '" aria-pressed="' + f.attivo + '"' +
             (!f.disponibile ? ' disabled' : '') + '>' + (!f.disponibile ? 'Non disponibile' : f.attivo ? 'Attivo' : 'In pausa') + '</button></td>' +
+            '<td>' + (f.avvio ? esc(formatoOra.format(f.avvio)) : 'In attesa di rilevazione') + '</td>' +
             [f.coda, f.inviate, d.statoConsegne === 'ok' ? (f.consegnate || 0) : null, f.errori, f.acquisti].map((n) => '<td>' + (n === null ? '—' : nf.format(n || 0)) + '</td>').join('') + '</tr>').join('') +
           '</tbody></table></div>';
       } catch { if (flussi.isConnected) flussi.textContent = 'Impossibile caricare lo stato degli invii.'; }
@@ -836,10 +922,12 @@ function cliente(MATERIE, A_PAGAMENTO) {
       try {
         const r = await api('email-prova', { tipo });
         esito.textContent = r.ok ? 'Prova accettata da Resend.' : (r.errore || 'Invio di prova non riuscito.');
+        if (r.ok) caricaStorico();
       } catch { esito.textContent = 'Invio di prova non riuscito.'; }
       finally { prova.disabled = false; }
     });
     caricaStato();
+    caricaStorico();
   }
 
   function strumenti() {

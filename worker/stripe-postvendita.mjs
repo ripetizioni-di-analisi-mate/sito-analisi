@@ -110,12 +110,12 @@ async function notificheRecesso(env, x, aDO) {
       'Ti contatteremo per comunicarti l’esito. Conserva questa email.',
     ];
     const msg = componiEmail({ subject: en ? 'Your withdrawal declaration was received' : 'Abbiamo ricevuto la tua dichiarazione di recesso', lingua:x.lingua_recesso, righe });
-    if ((await inviaEmailResend(env,x.recapito,msg,'recesso-cliente-'+x.id)).ok) await aDO(env,'/postvendita-email-ok',{id:x.id,tipo:'cliente'});
+    if ((await inviaEmailResend(env,x.recapito,msg,'recesso-cliente-'+x.id,'recesso')).ok) await aDO(env,'/postvendita-email-ok',{id:x.id,tipo:'cliente'});
   }
   if (!x.avviso) {
     const msg = componiEmail({ subject:'Dichiarazione di recesso da esaminare', righe:[`È arrivata una dichiarazione per l’ordine ${x.id} del corso ${titolo}. La richiesta e i dati per rispondere sono nell’area Vendite Stripe.`],
       pulsante:['Apri le richieste','https://ripetizionidianalisi.com'+ADMIN] });
-    if ((await inviaEmailResend(env,SUPPORTO,msg,'recesso-admin-'+x.id)).ok) await aDO(env,'/postvendita-email-ok',{id:x.id,tipo:'titolare'});
+    if ((await inviaEmailResend(env,SUPPORTO,msg,'recesso-admin-'+x.id,'avviso-recesso')).ok) await aDO(env,'/postvendita-email-ok',{id:x.id,tipo:'titolare'});
   }
 }
 
