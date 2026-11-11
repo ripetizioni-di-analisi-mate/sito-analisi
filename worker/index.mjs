@@ -1,5 +1,6 @@
 import { componiEmail, inviaEmailResend } from './email.mjs';
 import { preparaStoricoEmail, registraInviiEmail } from './storico-email.mjs';
+import { archivioPromozioni, codicePromozione, contaPromozioniOggi, creaTabellePromozioni, pulisciPromozioni } from './promozioni-email.mjs';
 import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
@@ -8,6 +9,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
+import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
@@ -177,6 +179,7 @@ export class Archivio {
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
     creaTabelleEmail(this.sql);
+    creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
     creaTabellePrenotazioni(this.sql);
     // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
@@ -229,7 +232,11 @@ export class Archivio {
     const c = req.method === 'POST' ? await req.json() : {};
     if (pathname.startsWith('/dig-')) return Response.json(archivioStripeDigitale(this, pathname, c));
     if (pathname.startsWith('/postvendita-')) return Response.json(archivioPostvendita(this, pathname, c));
-    if (pathname === '/em-esegui') return Response.json(await eseguiEmailAutomatiche(this, c, firmaToken));
+    if (pathname.startsWith('/promo-')) return Response.json(await archivioPromozioni(this, pathname, c, firmaToken, leggiToken));
+    if (pathname === '/em-esegui') {
+      if (c.giornaliero) pulisciPromozioni(this.sql, Date.now());
+      return Response.json(await eseguiEmailAutomatiche(this, c, firmaToken));
+    }
     if (pathname.startsWith('/em-')) {
       const r = archivioEmail(this, pathname, c);
       if (r) return Response.json(r);
@@ -294,7 +301,7 @@ export class Archivio {
         const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
         const inv = this.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', c.giorno);
         const campagne = this.riga("SELECT COUNT(*) AS n FROM email_automatiche WHERE tipo != 'studio' AND inviato >= ?", Date.parse(c.giorno));
-        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0, campagneOggi: campagne?.n || 0 });
+        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0, campagneOggi: (campagne?.n || 0) + contaPromozioniOggi(this, Date.now()) });
       }
       case '/promemoria-registra':
         for (const e of c.email || []) {
@@ -760,14 +767,18 @@ async function verificaPaddle(req, corpo, segreto) {
   return confrontoCostante(esad, h1);
 }
 
-async function scontoPerMateria(env, io, m, soloOfferta = false) {
-  if (!io || !PREZZI[m] || io.materie.includes(m)) return null;
-  if (m === 'analisi-2') {
-    const s = await aDO(env, '/em-offerta', { email: io.email, materia: m });
-    if (s.id) return s;
-  }
-  if (soloOfferta) return null;
-  return await scontoInvito(env, aDO, io, m) || await scontoBenvenuto(env, aDO, io);
+async function scontoPerMateria(env, io, m, soloOfferta = false, req) {
+  if (!io || !Object.hasOwn(PREZZI, m) || io.materie.includes(m)) return null;
+  let codice = null;
+  try { codice = codicePromozione(req ? leggiCookie(req, 'offerta-' + m) : null); } catch { /* cookie non valido */ }
+  const promo = await aDO(env, '/promo-offerta', { email: io.email, materia: m, codice });
+  if (codice && promo.id === codice) return promo;
+  const automatica = m === 'analisi-2' ? await aDO(env, '/em-offerta', { email: io.email, materia: m }) : {};
+  if (automatica.id) return promo.id && promo.percentuale > automatica.percentuale ? promo : automatica;
+  if (soloOfferta && !promo.id) return null;
+  const ordinario = await scontoInvito(env, aDO, io, m) || await scontoBenvenuto(env, aDO, io);
+  if (promo.id && promo.percentuale >= (ordinario?.percentuale || 0)) return promo;
+  return soloOfferta ? null : ordinario;
 }
 
 // ---------- worker ----------
@@ -812,12 +823,26 @@ export default {
       return Response.redirect(verso.toString(), req.method === 'GET' || req.method === 'HEAD' ? 301 : 308);
     }
 
+    if (p.startsWith('/offerta-email/') && (req.method === 'GET' || req.method === 'HEAD')) {
+      const [, , materia, valore, resto] = p.split('/');
+      const codice = codicePromozione(valore);
+      if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
+      const lingua = url.searchParams.get('l') === 'en' ? '/en' : '';
+      return new Response(null, { status: 303, headers: {
+        location: lingua + '/' + materia + '/sblocca', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer',
+        'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
+      } });
+    }
+
+    const versoCatalogo = versoCatalogoStudio(req, url);
+    if (versoCatalogo) return versoCatalogo;
+
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
     if (versoLingua) return versoLingua;
 
     const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
-      sconto: (io, materia) => scontoPerMateria(env, io, materia) };
+      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req) };
     if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
     if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
       return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });
@@ -838,7 +863,7 @@ export default {
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
     if ((p === '/api/email/offerta' || p === '/api/sconto') && req.method === 'GET') {
       const io = await utenteCollegato(env, req), m = url.searchParams.get('materia');
-      const offerta = await scontoPerMateria(env, io, m, p === '/api/email/offerta');
+      const offerta = await scontoPerMateria(env, io, m, p === '/api/email/offerta', req);
       return json(offerta || {}, 200, { 'cache-control': 'private, no-store' });
     }
     if (p.startsWith('/invito/') || p === '/api/invito') {
@@ -1367,6 +1392,20 @@ export default {
         if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
         const filtri = Object.fromEntries(['giorni', 'giorno', 'tipo', 'pagina'].map((k) => [k, url.searchParams.get(k)]));
         return json(await aDO(env, '/em-storico', filtri), 200, headers);
+      }
+      if (p.startsWith('/admin/api/email-promo/')) {
+        const headers = { 'cache-control': 'private, no-store' };
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
+        const azione = p.slice('/admin/api/email-promo/'.length);
+        if ((['catalogo', 'candidati'].includes(azione) && req.method === 'GET') ||
+            (['anteprima', 'invia'].includes(azione) && POST)) {
+          if (POST && req.headers.get('origin') !== url.origin) return json({ errore: 'Origine non valida.' }, 403, headers);
+          const dati = POST ? await req.json().catch(() => null) : Object.fromEntries(url.searchParams);
+          if (!dati || typeof dati !== 'object' || Array.isArray(dati)) return json({ errore: 'Richiesta non valida.' }, 400, headers);
+          const r = await aDO(env, '/promo-' + azione, dati);
+          return json(r, r.stato || 200, headers);
+        }
+        return json({ errore: 'Pagina non trovata.' }, 404, headers);
       }
       if (p === '/admin/api/email-interruttore' && POST) {
         const { tipo, attivo } = await req.json().catch(() => ({}));

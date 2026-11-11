@@ -191,6 +191,22 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'linee-di-influenza': { titolo: 'Influence lines', breve: 'Influence lines' },
     },
   },
+  'scienza-delle-costruzioni': {
+    titolo: 'Structural mechanics',
+    breve: 'Structural mechanics',
+    descrizione: 'Structural mechanics for engineering students, from support reactions and internal force diagrams to stresses, deflections, statically indeterminate structures and Euler buckling. The study materials and quizzes are in Italian.',
+    argomenti: {
+      'statica-vincoli': { titolo: 'Equilibrium, supports and reactions', breve: 'Equilibrium and supports' },
+      'sollecitazioni': { titolo: 'Axial force, shear force and bending moment', breve: 'Internal force diagrams' },
+      'reticolari': { titolo: 'Trusses and member forces', breve: 'Trusses' },
+      'geometria-sezioni': { titolo: 'Cross-section properties and second moments of area', breve: 'Section properties' },
+      'tensioni-deformazioni': { titolo: 'Stress, strain, Mohr’s circle and Hooke’s law', breve: 'Stress and strain' },
+      'de-saint-venant': { titolo: 'Saint-Venant: axial loading, bending, shear and torsion', breve: 'Saint-Venant' },
+      'linea-elastica': { titolo: 'Elastic curves, slopes and deflections', breve: 'Elastic curves' },
+      'iperstatiche': { titolo: 'Statically indeterminate structures, virtual work and the force method', breve: 'Indeterminate structures' },
+      'stabilita': { titolo: 'Elastic stability and Euler buckling', breve: 'Elastic stability' },
+    },
+  },
   'statistica': {
     titolo: 'Statistics and probability',
     breve: 'Statistics and probability',

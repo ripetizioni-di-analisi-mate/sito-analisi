@@ -156,6 +156,13 @@ select.scelta{border:1px solid var(--riga);border-radius:9px;padding:.38rem .6re
 .tabella{overflow-x:auto}
 .tabella-email-giorni{max-height:16rem;overflow:auto}
 .tabella-email-giorni th{position:sticky;top:0}
+.promo-campi{display:grid;gap:.75rem;border:0;padding:0;margin:0;min-width:0}
+.promo-scelte{align-items:end;gap:.75rem}
+.promo-scelte .campo{flex:1 1 12rem;min-width:0}
+.promo-scelte .campo:has(input[type=number]){flex:0 1 8rem}
+.promo-lista{display:grid;max-height:15rem;overflow:auto;border:1px solid var(--riga);border-radius:9px;padding:.55rem .75rem}
+.promo-lista label{display:flex;gap:.45rem;align-items:baseline;padding:.3rem 0;overflow-wrap:anywhere}
+#promo-frame{width:100%;height:490px;border:1px solid var(--riga);border-radius:9px}
 .tabella-email-invii td:nth-child(3),.tabella-email-invii td:nth-child(4){overflow-wrap:anywhere;min-width:9rem}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700;text-align:left;padding:.55rem 1.2rem;border-bottom:1px solid var(--riga);white-space:nowrap;background:var(--pannello-2)}
@@ -331,6 +338,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
   const statoLeghe = { dati: null, settimana: '', gruppo: '', mostraBot: false, caricamento: false, errore: false };
   const filtriEmail = { giorni: '30', giorno: '', tipo: '', pagina: 1 };
+  let pannelloPromo = null;
   try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
@@ -789,6 +797,176 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini).</p></div></section>';
   }
 
+  function pannelloPromozioni() {
+    const pannello = document.createElement('section');
+    pannello.className = 'card';
+    pannello.innerHTML =
+      '<header><h2>Promozioni via email</h2><button class="bottone" type="button" id="promo-apri" aria-expanded="false" aria-controls="promo-form">Crea promozione</button></header>' +
+      '<form class="corpo modulo" id="promo-form" hidden>' +
+      '<fieldset class="promo-campi"><div class="azioni promo-scelte">' +
+      '<label class="campo">Materia da promuovere<select class="scelta" id="promo-materia" required><option value="">Scegli la materia</option></select></label>' +
+      '<label class="campo">Materia già attiva<select class="scelta" id="promo-origine"><option value="">Ultima materia attivata</option></select></label>' +
+      '<label class="campo">Sconto (%)<input id="promo-sconto" type="number" min="1" max="99" step="1" required placeholder="20"></label></div>' +
+      '<label class="campo">Destinatari<input id="promo-cerca" type="search" placeholder="Cerca per nome o email"></label>' +
+      '<p class="nota" style="margin:0">Compaiono gli studenti che hanno confermato di voler ricevere offerte, hanno una materia attiva e possono ancora acquistare quella proposta.</p>' +
+      '<div class="promo-lista" id="promo-lista">Scegli la materia da promuovere.</div>' +
+      '<div class="scelte" id="promo-scelti"></div>' +
+      '<div class="azioni"><button class="bottone" type="submit" id="promo-anteprima">Prepara anteprima</button></div></fieldset>' +
+      '<p class="nota" id="promo-esito" role="status" style="margin:0"></p>' +
+      '<div id="promo-riepilogo" hidden><div class="azioni promo-scelte">' +
+      '<label class="campo">Anteprima per<select class="scelta" id="promo-modello"></select></label>' +
+      '<button class="bottone primario" type="button" id="promo-invia">Invia promozione</button></div>' +
+      '<p id="promo-oggetto"></p><iframe id="promo-frame" title="Anteprima della promozione" sandbox></iframe></div></form>';
+    const campo = (id) => $('#promo-' + id, pannello);
+    const form = campo('form'), campi = $('fieldset', form), apri = campo('apri');
+    const materia = campo('materia'), origine = campo('origine'), sconto = campo('sconto'), cerca = campo('cerca');
+    const lista = campo('lista'), scelte = campo('scelti'), esito = campo('esito'), prepara = campo('anteprima');
+    const riepilogo = campo('riepilogo'), modello = campo('modello'), invia = campo('invia');
+    const selezionati = new Map();
+    let catalogo = false, candidati = [], richiesta = 0, revisione = 0, bozza = null, occupato = false, massimo = 0;
+    prepara.disabled = true;
+
+    function invalida() {
+      revisione++;
+      bozza = null;
+      riepilogo.hidden = true;
+      esito.textContent = '';
+      prepara.disabled = !materia.value || !selezionati.size || occupato;
+    }
+    function disegnaLista() {
+      const filtro = cerca.value.trim().toLocaleLowerCase('it');
+      const visibili = candidati.filter((r) => [r.email, r.nome].some((s) => s?.toLocaleLowerCase('it').includes(filtro)));
+      lista.innerHTML = visibili.length ? visibili.map((r) =>
+        '<label><input type="checkbox" value="' + esc(r.email) + '"' + (selezionati.has(r.email) ? ' checked' : '') + '> ' +
+        '<span><b>' + esc(r.nome || r.email) + '</b> <span class="nota">' +
+        esc((r.nome ? r.email + ' · ' : '') + r.origine) + '</span></span></label>').join('') :
+        (materia.value ? 'Nessun destinatario disponibile.' : 'Scegli la materia da promuovere.');
+      scelte.innerHTML = [...selezionati.values()].map((r) =>
+        '<button class="filtro" type="button" data-promo-rimuovi="' + esc(r.email) + '" aria-label="Rimuovi ' +
+        esc(r.email) + '">' + esc(r.nome || r.email) + ' ×</button>').join('');
+      prepara.textContent = selezionati.size ? 'Prepara anteprima (' + selezionati.size + ')' : 'Prepara anteprima';
+    }
+    async function aggiornaCandidati() {
+      const numero = ++richiesta;
+      if (origine.value === materia.value) origine.value = '';
+      selezionati.clear();
+      candidati = [];
+      invalida();
+      disegnaLista();
+      if (!materia.value) return;
+      lista.textContent = 'Caricamento destinatari…';
+      try {
+        const r = await api('email-promo/candidati?' + new URLSearchParams({ materia: materia.value, origine: origine.value }));
+        if (numero !== richiesta) return;
+        if (!Array.isArray(r.destinatari)) throw new Error(r.errore || 'Dati non disponibili.');
+        candidati = r.destinatari;
+        disegnaLista();
+      } catch (e) { if (numero === richiesta) lista.textContent = e.message === '401' ? 'Accedi alla dashboard.' : e.message; }
+    }
+
+    apri.addEventListener('click', async () => {
+      form.hidden = !form.hidden;
+      apri.setAttribute('aria-expanded', String(!form.hidden));
+      if (form.hidden || catalogo) return;
+      apri.disabled = true;
+      campi.disabled = true;
+      esito.textContent = 'Caricamento…';
+      try {
+        const r = await api('email-promo/catalogo');
+        if (!r.disponibile) throw new Error(r.errore || 'Invio delle promozioni o pagamento Stripe non disponibile.');
+        const opzioni = r.materie.map((m) => '<option value="' + esc(m.slug) + '">' + esc(m.titolo) + '</option>').join('');
+        materia.insertAdjacentHTML('beforeend', opzioni);
+        origine.insertAdjacentHTML('beforeend', opzioni);
+        massimo = r.massimoDestinatari;
+        catalogo = true;
+        campi.disabled = false;
+        esito.textContent = '';
+      } catch (e) { esito.textContent = e.message; }
+      finally { apri.disabled = false; }
+    });
+    materia.addEventListener('change', aggiornaCandidati);
+    origine.addEventListener('change', aggiornaCandidati);
+    cerca.addEventListener('input', disegnaLista);
+    sconto.addEventListener('input', invalida);
+    lista.addEventListener('change', (e) => {
+      const input = e.target;
+      if (!input.matches('input[type=checkbox]')) return;
+      if (input.checked && selezionati.size >= massimo) {
+        input.checked = false;
+        esito.textContent = 'Puoi selezionare fino a ' + massimo + ' destinatari per invio.';
+        return;
+      }
+      if (input.checked) selezionati.set(input.value, candidati.find((r) => r.email === input.value));
+      else selezionati.delete(input.value);
+      invalida();
+      disegnaLista();
+      [...lista.querySelectorAll('input')].find((el) => el.value === input.value)?.focus();
+    });
+    scelte.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-promo-rimuovi]');
+      if (!b) return;
+      selezionati.delete(b.dataset.promoRimuovi);
+      invalida();
+      disegnaLista();
+    });
+    function mostraModello() {
+      const m = bozza.modelli[Number(modello.value)];
+      campo('oggetto').textContent = m.subject;
+      campo('frame').srcdoc = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src https://ripetizionidianalisi.com">' + m.html;
+    }
+    modello.addEventListener('change', mostraModello);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!selezionati.size || occupato) return;
+      invalida();
+      const versione = revisione;
+      occupato = true;
+      prepara.disabled = true;
+      esito.textContent = 'Preparazione…';
+      try {
+        const r = await api('email-promo/anteprima', {
+          materia: materia.value, origine: origine.value, percentuale: Number(sconto.value), emails: [...selezionati.keys()],
+        });
+        if (versione !== revisione) return;
+        if (!r.token || !r.modelli?.length) throw new Error(r.errore || 'Anteprima non disponibile.');
+        bozza = { ...r, materia: materia.selectedOptions[0].text, percentuale: sconto.value };
+        modello.innerHTML = r.modelli.map((m, i) =>
+          '<option value="' + i + '">' + esc(m.email + ' · ' + m.origine) + '</option>').join('');
+        esito.textContent = '';
+        riepilogo.hidden = false;
+        mostraModello();
+        modello.focus();
+      } catch (e) { if (versione === revisione) esito.textContent = e.message; }
+      finally { occupato = false; prepara.disabled = !materia.value || !selezionati.size; }
+    });
+    invia.addEventListener('click', async () => {
+      const daInviare = bozza;
+      if (!daInviare || occupato) return;
+      const n = daInviare.modelli.length;
+      occupato = true;
+      campi.disabled = invia.disabled = true;
+      try {
+        const ok = await conferma('Inviare la promozione?', daInviare.materia + ' con il ' + daInviare.percentuale + '% di sconto. ' +
+          (n === 1 ? 'Destinatario ' + daInviare.modelli[0].email : n + ' destinatari selezionati.') + ' L’offerta dura 7 giorni.', 'Invia');
+        if (!ok || !pannello.isConnected) return;
+        esito.textContent = 'Invio in corso…';
+        const r = await api('email-promo/invia', { token: daInviare.token });
+        if (!Number.isInteger(r.inviate)) throw new Error(r.errore || 'Invio non confermato.');
+        selezionati.clear();
+        invalida();
+        disegnaLista();
+        esito.textContent = r.inviate === 1 ? '1 promozione inviata.' : r.inviate + ' promozioni inviate.';
+        pannello.dispatchEvent(new Event('promozione-inviata', { bubbles: true }));
+      } catch (e) { esito.textContent = e.message; }
+      finally {
+        occupato = false;
+        campi.disabled = invia.disabled = false;
+        prepara.disabled = !materia.value || !selezionati.size;
+      }
+    });
+    return pannello;
+  }
+
   function email() {
     const modelli = {
       'prima-prova': ['Prima prova', 'Dopo 2 giorni dall’iscrizione, prima di iniziare a studiare.'],
@@ -800,6 +978,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     const formatoOra = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Rome' });
     const dataGiorno = (g) => formatoData.format(new Date(g + 'T12:00:00Z'));
     $('#vista').innerHTML = '<div class="griglia">' +
+      '<div id="email-promozioni"></div>' +
       '<section class="card"><header><h2>Flussi e risultati</h2><span class="nota">Ultimi 30 giorni</span></header><div class="corpo" id="email-flussi" role="status">Caricamento…</div></section>' +
       '<section class="card"><header><h2>Invii giorno per giorno</h2><span class="nota">Ora italiana</span></header>' +
       '<div class="strumenti-tab"><label for="email-periodo">Periodo</label><select class="scelta" id="email-periodo">' +
@@ -926,6 +1105,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       } catch { esito.textContent = 'Invio di prova non riuscito.'; }
       finally { prova.disabled = false; }
     });
+    const spazioPromo = $('#email-promozioni');
+    spazioPromo.append(pannelloPromo ||= pannelloPromozioni());
+    spazioPromo.addEventListener('promozione-inviata', caricaStorico);
     caricaStato();
     caricaStorico();
   }

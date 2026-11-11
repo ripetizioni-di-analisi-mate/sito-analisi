@@ -21,6 +21,7 @@ export const TIPI_EMAIL = {
   recesso: 'Conferma richiesta di recesso',
   'avviso-recesso': 'Avviso di recesso al titolare',
   prova: 'Email di prova',
+  promozione: 'Promozione manuale',
 };
 
 export function preparaStoricoEmail(ar, ora) {

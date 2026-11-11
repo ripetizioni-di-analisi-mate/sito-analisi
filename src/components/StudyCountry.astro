@@ -1,25 +1,33 @@
 ---
-import { link, type Lingua } from '../i18n';
+import type { Lingua } from '../i18n';
+import { CATALOGHI_STUDIO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
 import { url } from '../lib/url';
 
-interface Props { lingua: Lingua; usa?: boolean }
-const { lingua, usa = false } = Astro.props;
-const en = lingua === 'en';
-const title = en ? 'Where do you study?' : 'Dove studi?';
+interface Props { lingua: Lingua; corrente: keyof typeof CATALOGHI_STUDIO }
+const { lingua, corrente } = Astro.props;
+const titolo = lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
+const paesi = Object.entries(CATALOGHI_STUDIO)
+  .sort(([, a], [, b]) => a[lingua].localeCompare(b[lingua], lingua));
 ---
-<nav class="study-country" aria-label={title} id="dove-studi">
-  <strong>{title}</strong>
-  <div>
-    <a href={usa ? url('/') : link(lingua, '/')} aria-current={!usa ? 'true' : undefined}>{en ? 'Italy' : 'Italia'}</a>
-    <a href={url('/us')} aria-current={usa ? 'true' : undefined}>{en ? 'United States' : 'Stati Uniti'}</a>
-  </div>
-</nav>
-
-<style>
-  .study-country { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem .85rem; margin: 0 0 1.2rem; padding: .54rem .7rem; background: #eef4ef; border: 1px solid #d4e1d8; border-radius: .7rem; color: #23483e; font-family: var(--ui); }
-  .study-country strong { padding-inline: .2rem; font-size: .92rem; }
-  .study-country div { display: flex; flex-wrap: wrap; gap: .3rem; }
-  .study-country a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .66rem; color: #23483e; border: 1px solid transparent; border-radius: .45rem; font-size: .88rem; font-weight: 650; text-decoration: none; }
-  .study-country a[aria-current], .study-country a:hover { border-color: #a8c3b3; background: #fff; }
-  .study-country a:focus-visible { outline: 2px solid #1f6250; outline-offset: 2px; }
+<details class="study-country" id="dove-studi">
+  <summary>
+    <span>{titolo} · {CATALOGHI_STUDIO[corrente][lingua]}</span>
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg>
+  </summary>
+  <ul aria-label={titolo}>
+    {paesi.map(([codice, paese]) => (
+      <li><a href={`${url(paese.percorso)}?${PARAMETRO_CATALOGO}=${codice}`} aria-current={codice === corrente ? 'true' : undefined}>{paese[lingua]}</a></li>
+    ))}
+  </ul>
+</details>
+<style is:inline data-study-country-style>
+  .study-country { position: relative; color: var(--inchiostro-2); }
+  .study-country > summary { list-style: none; display: flex; align-items: center; gap: 0.4rem; min-height: 2.5rem; cursor: pointer; }
+  .study-country > summary::-webkit-details-marker { display: none; }
+  .study-country > summary:hover, .study-country > summary:focus-visible { text-decoration: underline; text-underline-offset: 0.18em; }
+  .study-country[open] > summary svg { transform: rotate(180deg); }
+  .study-country > ul { position: absolute; z-index: 10; inset: auto 0 100%; max-height: min(50vh, 18rem); overflow: auto; margin: 0; padding: 0.25rem; list-style: none; border: 1px solid var(--riga); border-radius: 0.45rem; background: var(--carta, #fff); box-shadow: 0 4px 16px #182c2420; }
+  .study-country li a { display: flex; justify-content: space-between; align-items: center; min-height: 2.5rem; padding: 0.25rem 0.55rem; border-radius: 0.25rem; color: var(--inchiostro); text-decoration: none; overflow-wrap: anywhere; }
+  .study-country li a:hover, .study-country li a:focus-visible, .study-country li a[aria-current] { background: var(--carta-2, #edf2ed); }
+  .study-country li a[aria-current]::after { content: '✓' / ''; margin-inline-start: 0.4rem; color: var(--accento); }
 </style>

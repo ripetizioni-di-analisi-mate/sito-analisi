@@ -85,13 +85,12 @@ const invito = lingua === 'en' ? {
       const notaInvito = document.getElementById('nota-invito');
       const mostraInvito = (testo) => { notaInvito.textContent = testo; notaInvito.hidden = !testo; };
       const notaOfferta = async () => {
-        if (materia !== 'analisi-2') return '';
-        const r = await fetch('/api/email/offerta?materia=analisi-2').catch(() => null);
+        const r = await fetch('/api/email/offerta?' + new URLSearchParams({ materia })).catch(() => null);
         const d = r?.ok ? await r.json() : {};
         if (!d.percentuale) return '';
         return lingua === 'en'
-          ? `Your personal ${d.percentuale}% discount on Calculus 2 applies at checkout.`
-          : `La tua offerta riservata del ${d.percentuale}% su Analisi 2 si applica al pagamento.`;
+          ? `Your personal ${d.percentuale}% discount on ${titolo} applies at checkout.`
+          : `La tua offerta riservata del ${d.percentuale}% su ${titolo} si applica al pagamento.`;
       };
       // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
       const notaBenvenuto = async () => {

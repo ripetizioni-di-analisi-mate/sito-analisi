@@ -100,13 +100,15 @@ test('ospiti e iscritti senza acquisto vedono gli stessi dieci quiz complessivi'
   }
 });
 
-test('chi acquista Statistica può esercitarsi su tutti i 540 quiz', async () => {
+test('chi acquista Statistica può esercitarsi su tutti i 1.080 quiz', async () => {
   const b = await banco([materia]);
   const r = await b.invia({argomento:'prove-d-esame'});
   assert.equal(r.status,200);
-  assert.equal((await r.json()).totale,540);
+  const ripasso = await r.json();
+  assert.equal(ripasso.totale, 1080);
+  assert.equal(new Set(ripasso.ordine).size, 15);
   const capitolo = await (await b.invia({argomento:'probabilita-e-combinatoria'})).json();
-  assert.equal(capitolo.totale, 45);
+  assert.equal(capitolo.totale, 90);
   assert.equal(new Set(capitolo.ordine).size, 15);
   assert.equal(capitolo.lunghezzaSerie, undefined);
   const seconda = await (await b.invia({argomento:'probabilita-e-combinatoria',id:capitolo.ordine[1]})).json();

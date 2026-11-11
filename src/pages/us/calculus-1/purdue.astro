@@ -1,0 +1,29 @@
+---
+import UsStem from '../../../layouts/UsStem.astro';
+---
+<UsStem title="Purdue MA 16100 Exam Practice" course="calculus-1" section="Purdue exam practice"
+  description="Timed Calculus I practice aligned with Purdue MA 16100.">
+  <p class="sopratitolo">Purdue University · MA 16100</p>
+  <h1>Calculus I exam practice</h1>
+  <p class="sommario">Practice without a calculator, then review your answers step by step.</p>
+  <div class="purdue-usa">
+    <div id="purdue-app"></div>
+    <dialog id="purdue-submit-dialog" aria-labelledby="confirm-title">
+      <h3 id="confirm-title">Submit your answers?</h3>
+      <p id="confirm-message"></p>
+      <form method="dialog">
+        <button class="button secondary" value="cancel" autofocus>Keep working</button>
+        <button class="button" value="submit">Submit answers</button>
+      </form>
+    </dialog>
+    <section class="risorse-usa" aria-label="University syllabi">
+      <p>Independent practice aligned with Purdue’s Fall 2026 syllabus. All practice questions are original.</p>
+      <a href="https://www.math.purdue.edu/~msunkula/MA161/F26/Syllabus" target="_blank" rel="noopener">Course syllabus</a>
+      <a href="https://www.math.purdue.edu/~msunkula/MA161/F26/Schedule" target="_blank" rel="noopener">Lesson schedule</a>
+      <a href="https://www.math.purdue.edu/academic/courses/oldexams.php?course=MA16100" target="_blank" rel="noopener">Official past exams</a>
+    </section>
+  </div>
+</UsStem>
+<script>
+  import '../../../scripts/purdue-practice.js';
+</script>

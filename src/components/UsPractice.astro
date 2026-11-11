@@ -19,7 +19,7 @@ const { questions, minutes } = Astro.props;
       <span data-clock role="timer" aria-label="Time remaining" hidden></span>
     </div>
     {questions.map((question, index) => (
-      <fieldset class="stem-question" data-question data-correct={question.correct}>
+      <fieldset class="stem-question" id={'question-' + (index + 1)} data-question data-correct={question.correct}>
         <legend>{index + 1}. {question.prompt}</legend>
         <div class="stem-options">
           {question.choices.map((choice, i) => (

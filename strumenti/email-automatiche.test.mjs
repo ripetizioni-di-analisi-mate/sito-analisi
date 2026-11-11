@@ -56,8 +56,14 @@ function banco(t) {
   const apri = (url, method = 'GET', headers = {}) => worker.fetch(new Request(url, { method, headers }), env, ctx);
   const cron = (giornaliero = true) => api('/em-esegui', { giornaliero, catalogo: { 'analisi-1': ['limiti'] }, prove: PROVE });
   const invii = [];
+  const promozioni = [];
   let erroreInvio = null;
   t.mock.method(globalThis, 'fetch', async (url, op) => {
+    if (url === 'https://api.resend.com/emails/batch') {
+      const batch = JSON.parse(op.body);
+      promozioni.push({ batch, key: op.headers['Idempotency-Key'] });
+      return Response.json({ data: batch.map((_, i) => ({ id: 'promo-' + i })) }, { status: erroreInvio || 200 });
+    }
     if (url === 'https://api.resend.com/emails') {
       invii.push({ ...JSON.parse(op.body), key: op.headers['Idempotency-Key'] });
       return Response.json({ id: 'mail-' + invii.length }, { status: erroreInvio || 200 });
@@ -65,7 +71,7 @@ function banco(t) {
     if (url.startsWith('https://api.resend.com/emails/mail-')) return Response.json({ last_event: 'delivered' });
     throw new Error('URL inatteso ' + url);
   });
-  return { db, env, riapri: () => new Archivio(state, env), utente, studia, compra, conferma, apri, cron, api, invii,
+  return { db, env, riapri: () => new Archivio(state, env), utente, studia, compra, conferma, apri, cron, api, invii, promozioni,
     get ora() { return ora; }, avanza(ms) { ora += ms; }, errore(stato) { erroreInvio = stato; } };
 }
 
@@ -197,4 +203,80 @@ test('gli invii di servizio sono consultabili per tipo e giorno solo dall’ammi
   assert.equal(storico.invii[0].oggetto, b.invii[0].subject);
   assert.equal((await b.api('/em-storico', { tipo: 'studio' })).totale, 0);
   assert.equal((await b.api('/em-storico', { giorno: '2026-11-08' })).totale, 0);
+});
+
+test('promozione per più account consenzienti, con sconto personale e storico senza duplicati', async (t) => {
+  const b = banco(t);
+  b.env.STRIPE_WEBHOOK_SECRET = 'webhook-simulato';
+  const email = 'andrea@esempio.test', altra = 'elena@esempio.test', senzaConsenso = 'no@esempio.test';
+  for (const [e, materia] of [[email, 'analisi-1'], [altra, 'fisica-1'], [senzaConsenso, 'analisi-1']]) {
+    b.utente(e);
+    b.db.prepare('INSERT INTO abilitazioni (email, materia, creato) VALUES (?, ?, ?)').run(e, materia, new Date(b.ora).toISOString());
+  }
+  for (const e of [email, altra]) await b.apri(await b.conferma(e), 'POST');
+  const catalogo = await b.api('/promo-catalogo');
+  assert.equal(catalogo.disponibile, true);
+  const input = { materia: 'analisi-2', percentuale: 20, emails: [email, altra] };
+  const candidati = await b.api('/promo-candidati', { materia: input.materia });
+  assert.deepEqual(candidati.destinatari.map((r) => r.email).sort(), [email, altra].sort());
+  assert.equal((await b.api('/promo-anteprima', { ...input, emails: [senzaConsenso] })).stato, 409);
+  const anteprima = await b.api('/promo-anteprima', input);
+  assert.equal(anteprima.modelli.length, 2);
+  assert.equal(b.promozioni.length, 0);
+  assert.equal((await b.apri(SITO + '/admin/api/email-promo/catalogo')).status, 401);
+
+  const admin = await firmaToken(b.env, { admin: true, t: b.ora });
+  const post = (origin) => worker.fetch(new Request(SITO + '/admin/api/email-promo/invia', {
+    method: 'POST', headers: { origin, cookie: 'admin=' + admin }, body: JSON.stringify({ token: anteprima.token }),
+  }), b.env, { waitUntil() {} });
+  assert.equal((await post('https://esempio.test')).status, 403);
+  assert.deepEqual(await (await post(SITO)).json(), { inviate: 2 });
+  assert.deepEqual(await (await post(SITO)).json(), { inviate: 2 });
+  assert.equal(b.promozioni.length, 1);
+  const messaggio = b.promozioni[0].batch.find((m) => m.to[0] === email);
+  assert.deepEqual(messaggio.to, [email]);
+  assert.match(messaggio.text, /già attiva la materia Analisi/);
+  assert.match(messaggio.subject, /20%/);
+  assert.ok(messaggio.headers['List-Unsubscribe']);
+  const offerta = await b.api('/promo-offerta', { email, materia: input.materia });
+  assert.equal(offerta.percentuale, 20);
+  assert.deepEqual(await b.api('/promo-offerta', { email: senzaConsenso, materia: input.materia, codice: offerta.id }), {});
+  const reindirizzo = await b.apri(SITO + '/offerta-email/analisi-2/' + offerta.id);
+  assert.equal(reindirizzo.status, 303);
+  assert.equal(reindirizzo.headers.get('location'), '/analisi-2/sblocca');
+  assert.match(reindirizzo.headers.get('set-cookie'), /HttpOnly/);
+
+  b.db.prepare('INSERT INTO promozioni_email (id, email, materia, percentuale, scade) VALUES (?, ?, ?, ?, ?)')
+    .run(crypto.randomUUID(), email, input.materia, 30, offerta.scade);
+  b.db.prepare('INSERT INTO dispositivi (email, id, ultimo_uso, nonce) VALUES (?, ?, ?, ?)')
+    .run(email, 'dispositivo-test', b.ora, 'nonce-test');
+  const studente = await firmaToken(b.env, { e: email, v: 1, d: 'dispositivo-test', g: 'nonce-test', t: b.ora });
+  const preventivo = async (offertaCookie = '') => {
+    const r = await worker.fetch(new Request(SITO + '/api/acquisti/preventivo', {
+      method: 'POST', headers: { origin: SITO, 'content-type': 'application/json', cookie: 'sessione=' + studente + offertaCookie },
+      body: JSON.stringify({ tipo: 'materia', slug: input.materia }),
+    }), b.env, { waitUntil() {} });
+    assert.equal(r.status, 200);
+    return r.json();
+  };
+  assert.equal((await preventivo()).percentuale, 30);
+  const dalLink = await preventivo('; offerta-analisi-2=' + offerta.id);
+  assert.equal(dalLink.percentuale, 20);
+  assert.equal(dalLink.totale, 4400);
+  const storico = await b.api('/em-storico', { tipo: 'promozione' });
+  assert.equal(storico.totale, 2);
+  b.avanza(8 * GIORNO);
+  assert.deepEqual(await b.api('/promo-offerta', { email, materia: input.materia, codice: offerta.id }), {});
+});
+
+test('un consenso revocato dopo l’anteprima impedisce l’invio della promozione', async (t) => {
+  const b = banco(t), email = 'andrea@esempio.test';
+  b.env.STRIPE_WEBHOOK_SECRET = 'webhook-simulato';
+  b.utente(email);
+  b.db.prepare('INSERT INTO abilitazioni (email, materia, creato) VALUES (?, ?, ?)').run(email, 'analisi-1', new Date(b.ora).toISOString());
+  await b.apri(await b.conferma(email), 'POST');
+  const bozza = await b.api('/promo-anteprima', { materia: 'analisi-2', percentuale: 20, emails: [email] });
+  await b.api('/em-disattiva', { email });
+  assert.equal((await b.api('/promo-invia', { token: bozza.token })).stato, 409);
+  assert.equal(b.promozioni.length, 0);
 });

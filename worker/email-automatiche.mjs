@@ -3,6 +3,7 @@ import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { componiEmail, intestazioniDisiscrizione, inviaEmailResend, mittenteEmail, SITO_EMAIL } from './email.mjs';
 import { componiPromemoria } from './promemoria.mjs';
 import { componiAvvisoLega } from './avvisi-lega.mjs';
+import { contaPromozioniOggi } from './promozioni-email.mjs';
 import { registraAvvioEmail, registraInviiEmail, storicoEmail } from './storico-email.mjs';
 
 const GIORNO = 86400000;
@@ -292,7 +293,7 @@ export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, p
     const n = ar.riga('SELECT COUNT(*) AS n FROM email_automatiche WHERE inviato >= ? OR (stato = ? AND iniziato >= ?)', Date.parse(oggi), 'invio', Date.parse(oggi))?.n || 0;
     const rec = ar.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", oggi)?.n || 0;
     const prom = ar.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', oggi)?.n || 0;
-    return Math.max(0, Math.min(20 - n, 90 - n - rec - prom));
+    return Math.max(0, Math.min(20 - n, 90 - n - rec - prom - contaPromozioniOggi(ar, Date.now())));
   };
   let inviati = 0;
   for (let i = 0; i < 6 && abilitati.length; i++) {
