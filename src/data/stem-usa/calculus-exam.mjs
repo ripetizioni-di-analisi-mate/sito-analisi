@@ -1,8 +1,8 @@
 import { optionsFor } from './catalog.mjs';
 
 const items = [
-  ['limits and continuity', 1, 'Evaluate limₓ→₃ (x² − 5x + 6)/(x − 3).', '1', ['0', '−1', '3'],
-    'Factor the numerator as (x − 2)(x − 3). The simplified quotient x − 2 approaches 1.'],
+  ['limits and continuity', 1, 'Evaluate the limit of (√(4 + 3x) − 2)/x as x approaches zero.', '3/4', ['0', '1/4', '3/2'],
+    'Multiply by the conjugate. For nonzero x, the quotient simplifies to 3/(√(4 + 3x) + 2), which tends to 3/4.'],
   ['limits and continuity', 1, 'Let f(x) = ax − 1 for x < 2 and f(x) = x² + 3 for x ≥ 2. What is a if f is continuous at 2?', '4', ['3', '7/2', '8'],
     'The value on the right branch at 2 is 7. Match the left limit 2a − 1 to 7 to obtain a = 4.'],
   ['derivatives and tangent lines', 2, 'What is the slope of the tangent to f(x) = 1/x at x = 2?', '−1/4', ['1/4', '−1/2', '−2'],

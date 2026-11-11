@@ -39,7 +39,11 @@ export const mathematics = [
     ]),
   course('calculus-1', 'Calculus I', 'Limits, derivatives, applications and an introduction to integration in one variable.',
     'Functions, trigonometry and algebra.',
-    [purdue, illinoisSyllabus(221, 'MATH 221 Calculus I'), texasMath],
+    [
+      { title: 'Purdue University · MA 16100 topic and exam schedule', url: 'https://www.math.purdue.edu/~msunkula/MA161/F26/Schedule' },
+      illinoisSyllabus(221, 'MATH 221 Calculus I'),
+      texasMath,
+    ],
     [
       L('Limits and continuity', 'A limit is the value a function approaches near an input. The one-sided limits must agree. Continuity also requires the function value to agree with the limit.',
         'To evaluate limₓ→₂ (x² − 4)/(x − 2), factor and cancel x − 2 for x ≠ 2. The remaining expression approaches 4, even though the original function is undefined at 2.',

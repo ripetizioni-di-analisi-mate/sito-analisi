@@ -6,7 +6,8 @@ import CalculusPractice from '../../components/CalculusPractice.astro';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
 import { calculusPractice, calculusSlug } from '../../data/stem-usa/calculus-1-practice.mjs';
 import { calculusTimed } from '../../data/stem-usa/calculus-1-timed.mjs';
-import { calculusTimedCount } from '../../lib/stem-usa-practice';
+import { calculusHtml, calculusTimedCount } from '../../lib/stem-usa-practice';
+import { calculusTheory } from '../../data/stem-usa/calculus-1-theory.mjs';
 import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../data/livelli';
 import { T, sezioniL } from '../../i18n';
 import { universityCourses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
@@ -42,6 +43,7 @@ const isCalculus = course.slug === calculusSlug;
       const number = index + 1;
       const slug = ('unit-' + number) as keyof typeof calculusPractice;
       const practice = isCalculus ? calculusPractice[slug] : undefined;
+      const theory = isCalculus ? calculusTheory[slug] : undefined;
       const href = (sezione: string) => linkArgomentoUsa(course.slug, slug, sezione);
       return (
         <li>
@@ -58,7 +60,16 @@ const isCalculus = course.slug === calculusSlug;
           <details class="sommario-pagina studio-unita-usa" id={slug} hidden>
             <summary>{t.sezioni.teoria}</summary>
             <div>
-              <p>{lesson.theory}</p>
+              {theory ? theory.map(([heading, explanation, proof]) => (
+                <section class="calculus-theory">
+                  <h3>{heading}</h3>
+                  <p set:html={calculusHtml(explanation)} />
+                  {proof && <details class="stem-feedback">
+                    <summary>Proof</summary>
+                    <p set:html={calculusHtml(proof)} />
+                  </details>}
+                </section>
+              )) : <p>{lesson.theory}</p>}
               {!practice && <>
                 <h3 id={'worked-' + number}>Worked example</h3>
                 <p>{lesson.worked}</p>
@@ -94,3 +105,9 @@ const isCalculus = course.slug === calculusSlug;
 <script>
   import '../../scripts/apri-unita-usa';
 </script>
+
+<style>
+  .calculus-theory + .calculus-theory { margin-block-start: 1.1rem; }
+  .calculus-theory h3 { margin-block: 0 .35rem; }
+  .calculus-theory p { overflow-wrap: break-word; }
+</style>
