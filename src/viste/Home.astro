@@ -13,12 +13,16 @@ import PercorsiHome from '../components/PercorsiHome.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
+import { blocchiUsa, gruppoUsa, materieUsa } from '../data/stem-usa/catalog-view';
+import { url } from '../lib/url';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
-interface Props { lingua: Lingua }
-const { lingua } = Astro.props;
+interface Props { lingua: Lingua; usa?: boolean }
+const { lingua, usa = false } = Astro.props;
 const t = T(lingua);
-const MATERIE = materieL(lingua);
-const gruppi = gruppiL(lingua).map((nome, i) => ({
+const MATERIE = usa ? materieUsa : materieL(lingua);
+const schedeDettagliate = lingua === 'it' || usa;
+const hrefMateria = (slug: string) => usa ? url('/us/' + slug) : link(lingua, '/' + slug);
+const gruppi = (usa ? [gruppoUsa] : gruppiL(lingua)).map((nome, i) => ({
   nome,
   id: i === 0 ? 'materie-home' : `percorso-home-${i}`,
   breve: nome.startsWith('TOLC') ? (lingua === 'en' ? 'Admission tests' : 'Test d’ingresso') : nome,
@@ -38,6 +42,7 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
 const [svolti, dafare, domande] = await Promise.all([getCollection('svolti'), getCollection('dafare'), getCollection('domande')]);
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
 const conti = (m: (typeof MATERIE)[number]) => {
+  if (usa) return `${m.argomenti.length} study units · ${m.argomenti.length} practice questions`;
   const pratica = m.eserciziDaFare === false ? `${conta(domande, m.slug)} domande a tempo` : `${conta(dafare, m.slug)} esercizi da fare`;
   return `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${pratica}`;
 };
@@ -47,10 +52,10 @@ const icona = {
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
-<Base titolo={t.nomeSito} descrizione={SEO(lingua).homeDescr} lingua={lingua} sezione="home" ricercaPrincipale seo={{ titolo: SEO(lingua).home }}>
+<Base titolo={t.nomeSito} descrizione={usa ? 'Theory, worked examples and exam practice for U.S. university STEM courses.' : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. University STEM Courses · Ripetizioni di Analisi' : SEO(lingua).home, soloQuestaLingua: usa }}>
   <div class="home-intro solo-ospiti">
     {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
-    <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
+    <h1 class="solo-lettori">{lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
     <p class="sommario">{lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
   </div>
   <div class="solo-ospiti">
@@ -61,13 +66,15 @@ const icona = {
   <SpazioStudente lingua={lingua} />
   <MaterialiStudente lingua={lingua} />
   {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
-  <form class="cerca-home" id="ricerca-principale" action={link(lingua, '/cerca')} role="search">
+  <form class="cerca-home" id="ricerca-principale" action={usa ? url('/us') : link(lingua, '/cerca')} data-us-search={usa || undefined} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" placeholder={t.cercaSegnaposto} aria-label={t.cercaNelSito} autocomplete="off" />
     </div>
     <button type="submit">{t.cerca}</button>
   </form>
-  {lingua === 'it' ? (
+  {usa ? (
+    <ul class="legenda-home"><li><Fragment set:html={icona.teoria} /><span><b>Theory and exercises</b> · worked examples and exam practice.</span></li></ul>
+  ) : lingua === 'it' ? (
     <ul class="legenda-home">
       <li><Fragment set:html={icona.teoria} /><span><b>Teoria ed esercizi</b>: spiegazioni, svolgimenti e soluzioni.</span></li>
       <li><Fragment set:html={icona.video} /><span><b>Videocorsi</b>: lezioni di Carmine, con video e PDF.</span></li>
@@ -76,12 +83,13 @@ const icona = {
   ) : (
     <p class="nota-anteprima solo-ospiti"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1.8 10S4.8 4.5 10 4.5 18.2 10 18.2 10 15.2 15.5 10 15.5 1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/></svg>{t.homeAnteprima}</p>
   )}
-  <div class="risorse-home"><GratisHome lingua={lingua} /></div>
+  <div class="risorse-home"><GratisHome lingua={lingua} usa={usa} /></div>
   {lingua === 'it' && <div class="solo-ospiti"><PacchettiHome /></div>}
   <PercorsiHome lingua={lingua} gruppi={gruppi} />
+  {usa && <p class="esito-ricerca-usa" role="status" data-esito-usa hidden></p>}
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
-    <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]} open={i === 0} id={id}>
+    <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]} open={i === 0} id={id} data-catalogo-usa={usa || undefined}>
       <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
       {(g === 'Superiori' || g === 'High school') && <NotaSuperiori lingua={lingua} />}
       {lingua === 'it' && g === 'Concorsi' && (
@@ -101,8 +109,8 @@ const icona = {
         const griglia = (voci: { m: (typeof MATERIE)[number]; nome: string }[], riga = true) => (
           <ul class="griglia-materie">
             {voci.filter(({ m }) => !riga || m.attiva).map(({ m, nome }) => (
-              <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && lingua === 'it' }} style={`--accento: ${m.colore}`} data-materia={m.slug}>
-                {m.attiva && lingua === 'it' ? (() => {
+              <li class:list={{ 'in-preparazione': !m.attiva, 'con-pulsanti': m.attiva && schedeDettagliate }} style={`--accento: ${m.colore}`} data-materia={m.slug} data-usa-materia={usa ? m.argomenti.map(a => a.titolo).join(' ') : undefined}>
+                {m.attiva && schedeDettagliate ? (() => {
                   const v = videoDi(m.slug);
                   return (
                     <>
@@ -112,16 +120,16 @@ const icona = {
                         <span class="conti-materia">{conti(m)}</span>
                       </div>
                       <span class="piede-scheda pulsanti-scheda">
-                        <a class="pulsante-scheda pulsante-teoria" href={link(lingua, `/${m.slug}`)}>
-                          <Fragment set:html={icona.teoria} />Teoria ed esercizi<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
+                        <a class="pulsante-scheda pulsante-teoria" href={hrefMateria(m.slug)}>
+                          <Fragment set:html={icona.teoria} />{usa ? 'Theory and exercises' : 'Teoria ed esercizi'}<span aria-hidden="true">→</span>{m.prezzo && <span class="ok"><Fragment set:html={icona.ok} />Sbloccata</span>}
                         </a>
                         {v && <a class="pulsante-scheda pulsante-video" href={`/videocorsi/${v.slug}`}><Fragment set:html={icona.video} />Videocorso<span class="ok"><Fragment set:html={icona.ok} />Sbloccato</span></a>}
                       </span>
-                      <small class="accesso-scheda">{m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : 'Tutto gratuito'}</small>
+                      <small class="accesso-scheda">{m.prezzo ? <><span class="nota-anteprima-scheda">Anteprima gratuita</span><span class="nota-accesso-scheda">Accesso completo</span></> : usa ? 'Free access' : 'Tutto gratuito'}</small>
                     </>
                   );
                 })() : m.attiva ? (
-                  <a href={link(lingua, `/${m.slug}`)}>
+                  <a href={hrefMateria(m.slug)}>
                     <h3>{nome}</h3>
                     <p>{m.descrizione}</p>
                     <span class="piede-scheda"><Stato prezzo={m.prezzo} lingua={lingua} /></span>
@@ -140,17 +148,20 @@ const icona = {
             )}
           </ul>
         );
-        return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
-          <details class="sottogruppo">
+        return (usa ? blocchiUsa : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
+          <details class="sottogruppo" data-usa-sottogruppo={usa || undefined}>
             <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.filter(({ m }) => m.attiva).length || (lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
             {griglia(b.materie)}
           </details>
         ) : griglia(b.materie));
       })()}
+      {usa && <p data-usa-vuoto hidden>No courses match your search.</p>}
     </details>
   ))}
 </Base>
 <style>
+  [data-catalogo-usa] [hidden], .esito-ricerca-usa[hidden] { display: none !important; }
+  .esito-ricerca-usa { font: .9rem var(--ui); color: var(--inchiostro-2); }
   .pacchetti-studente{padding-top:0}
   .home-intro{margin-bottom:1.4rem}
   .solo-lettori{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -171,6 +182,8 @@ const icona = {
   @media(max-width:560px){.catalogo-testa{margin-top:1.5rem}.scheda-materia{padding:.9rem}.accesso-scheda{padding-left:.9rem}:global(.home-chiarezza .pulsanti-scheda){padding-left:.9rem}}
 </style>
 <script>
+  import '../scripts/cerca-usa';
+
   function apriPercorso(hash: string) {
     const gruppo = document.getElementById(hash.slice(1));
     if (!(gruppo instanceof HTMLDetailsElement) || !gruppo.classList.contains('gruppo')) return;

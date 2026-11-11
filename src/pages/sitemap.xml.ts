@@ -5,6 +5,7 @@
 // Le pagine senza contenuti datati (prezzi, contatti…) non hanno data, come raccomandano Google e Bing.
 import { getCollection } from 'astro:content';
 import { MATERIE } from '../data/materie';
+import { courses as corsiUsa, courseUrl } from '../data/stem-usa/catalog.mjs';
 import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
@@ -32,6 +33,9 @@ export async function GET() {
 
   const casa = pagine.length;
   due('/', 1.0);
+  due('/us', 0.9, false);
+  for (const corso of corsiUsa) due(courseUrl(corso.slug), 0.8, false);
+  due('/us/calculus-1/practice-exam', 0.6, false);
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);

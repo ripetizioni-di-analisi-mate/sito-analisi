@@ -5,6 +5,7 @@ import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import { dataContenuto, piuRecente } from '../lib/date';
 import Base from '../layouts/Base.astro';
+import FreeCourseAccess from '../components/FreeCourseAccess.astro';
 import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
@@ -98,16 +99,10 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     </div>
   )}
   {!m.prezzo && (
-    <div class="riquadro-stato">
-      <div class="stato-bloccata">
-        <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11c-3.5-2.6-8.5-3.4-14-2.6v21c5.5-.8 10.5 0 14 2.6 3.5-2.6 8.5-3.4 14-2.6v-21c-5.5-.8-10.5 0-14 2.6z"/><path d="M20 11v21"/></svg>
-        <div class="testo"><strong>{t.tuttoGratis}</strong><span>{quizPerEsercitarsi ? (en ? `Theory, worked examples and ${domandeMateria} timed questions. No account needed.` : `Teoria, esercizi svolti e ${domandeMateria} domande a tempo. Puoi iniziare anche senza account.`) : t.tuttoGratisTesto}</span></div>
-        <div class="azioni-anteprima">
-          <a class="bottone-sblocca" href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}>{t.iniziaPrimo} →</a>
-          {quizPerEsercitarsi && domandeMateria > 0 && <a class="link-sblocca" href={link(linguaDomande, `/${materia}/${RIPASSO}/domande`)}>{en ? 'Start the quiz in Italian' : 'Inizia il ripasso a tempo'}</a>}
-        </div>
-      </div>
-    </div>
+    <FreeCourseAccess lingua={lingua} href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}
+      testo={quizPerEsercitarsi ? (en ? `Theory, worked examples and ${domandeMateria} timed questions. No account needed.` : `Teoria, esercizi svolti e ${domandeMateria} domande a tempo. Puoi iniziare anche senza account.`) : undefined}>
+      {quizPerEsercitarsi && domandeMateria > 0 && <a class="link-sblocca" href={link(linguaDomande, `/${materia}/${RIPASSO}/domande`)}>{en ? 'Start the quiz in Italian' : 'Inizia il ripasso a tempo'}</a>}
+    </FreeCourseAccess>
   )}
   {materia !== 'matematica-semestre-filtro' && <div class="esame-materia solo-collegati" data-materia={materia} data-titolo={m.titolo} hidden>
     <div class="esame-icona" aria-hidden="true">

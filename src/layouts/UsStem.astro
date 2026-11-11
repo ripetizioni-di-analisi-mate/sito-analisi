@@ -1,0 +1,18 @@
+---
+import Base from './Base.astro';
+import '../styles/stem-usa.css';
+
+interface Props {
+  title: string;
+  description: string;
+  course?: string;
+  section?: string;
+}
+const { title, description, course, section } = Astro.props;
+---
+<Base lingua="en" titolo={title} descrizione={description} materia={course} usa
+  percorso={section ? [{ titolo: section }] : undefined} seo={{ titolo: title + ' · Ripetizioni di Analisi' }}>
+  <div class="stem-usa">
+    <slot />
+  </div>
+</Base>

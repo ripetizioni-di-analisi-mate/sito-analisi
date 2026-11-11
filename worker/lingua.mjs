@@ -36,11 +36,14 @@ export function linguaBrowser(intestazione) {
   return voci[0]?.tag.split('-')[0] || null;
 }
 
+export function navigazioneVisitatore(req) {
+  const ua = req.headers.get('user-agent') || '';
+  return req.method === 'GET' && Boolean(ua) && !NON_PERSONE.test(ua);
+}
+
 // Restituisce la risposta di reindirizzamento, oppure null se la pagina va servita così com'è.
 export async function versoLaLinguaGiusta(req, env, url) {
-  if (req.method !== 'GET') return null;
-  const ua = req.headers.get('user-agent') || '';
-  if (!ua || NON_PERSONE.test(ua)) return null;
+  if (!navigazioneVisitatore(req)) return null;
   if (url.searchParams.has('lingua')) return null; // scelta esplicita nell'indirizzo: si rispetta
   const percorso = url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
   if (ESCLUSI.test(percorso)) return null;

@@ -1,0 +1,93 @@
+---
+import UsStem from '../../layouts/UsStem.astro';
+import UsPractice from '../../components/UsPractice.astro';
+import FreeCourseAccess from '../../components/FreeCourseAccess.astro';
+import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
+import { T, sezioniL } from '../../i18n';
+import { courses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
+import { url } from '../../lib/url';
+
+export function getStaticPaths() {
+  return courses.map(course => ({ params: { course: course.slug }, props: { course } }));
+}
+
+const { course } = Astro.props;
+const questions = course.lessons.map((lesson, index) => ({
+  title: lesson.title,
+  prompt: lesson.prompt,
+  choices: optionsFor(lesson, index),
+  correct: index % (lesson.distractors.length + 1),
+  explanation: lesson.explanation,
+  href: '#unit-' + (index + 1),
+}));
+const title = course.title;
+const t = T('en');
+const sezioni = sezioniL('en');
+---
+<UsStem title={title} description={course.description} course={course.slug}>
+  <p class="sopratitolo">{t.programma}</p>
+  <h1>{title}</h1>
+  <p class="sommario">{course.description}</p>
+  <FreeCourseAccess lingua="en" href="#unit-1" />
+  <ol class="griglia-argomenti">
+    {course.lessons.map((lesson, index) => {
+      const slug = 'unit-' + (index + 1);
+      const href = (sezione: string) => linkArgomentoUsa(course.slug, slug, sezione);
+      return (
+        <li>
+          <h2><a href={href('teoria')}>{lesson.title}</a></h2>
+          <p class="riassunto">{lesson.theory.split(/(?<=[.!?])\s/)[0]}</p>
+          <nav aria-label={lesson.title}>
+            {sezioni.map(sezione => <a href={href(sezione.slug)}>{sezione.titolo}{sezione.slug !== 'teoria' && ' (1)'}</a>)}
+          </nav>
+          <details class="sommario-pagina studio-unita-usa" id={slug} hidden>
+            <summary>{t.sezioni.teoria}</summary>
+            <div>
+              <p>{lesson.theory}</p>
+              <h3 id={'worked-' + (index + 1)}>Worked example</h3>
+              <p>{lesson.worked}</p>
+            </div>
+          </details>
+        </li>
+      );
+    })}
+    <li>
+      <h2><a href="#course-practice">Exam practice</a></h2>
+      <p class="riassunto">Review questions on the topics of {title} with worked solutions.</p>
+      <nav aria-label="Exam practice">
+        <a href="#course-practice">Review questions ({questions.length})</a>
+        {course.slug === 'calculus-1' && <>
+          <a href={url(courseUrl(course.slug) + '/practice-exam')}>General practice exam</a>
+          <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>
+        </>}
+      </nav>
+    </li>
+  </ol>
+  <UsPractice questions={questions} minutes={questions.length * 2} />
+  <section class="risorse-usa">
+    <h2>University syllabi</h2>
+    <p><strong>Preparation</strong> {course.preparation}</p>
+    <ul>{course.sources.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
+  </section>
+</UsStem>
+<script>
+  function openLinkedUnit(hash: string) {
+    if (!/^#(?:unit|worked)-\d+$/.test(hash)) return;
+    const target = document.getElementById(hash.slice(1));
+    const details = target?.closest('details');
+    if (details instanceof HTMLDetailsElement) {
+      details.hidden = false;
+      details.open = true;
+      target?.scrollIntoView({ block: 'start' });
+    }
+  }
+  openLinkedUnit(location.hash);
+  addEventListener('hashchange', () => openLinkedUnit(location.hash));
+  document.addEventListener('click', event => {
+    const link = event.target instanceof Element && event.target.closest<HTMLAnchorElement>('a[href]');
+    if (!link || link.pathname !== location.pathname || !link.hash) return;
+    const dialog = link.closest('dialog[open]');
+    if (dialog instanceof HTMLDialogElement) dialog.close();
+    openLinkedUnit(link.hash);
+  });
+</script>

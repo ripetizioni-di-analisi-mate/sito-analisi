@@ -1,22 +1,27 @@
 ---
 import { materieL, materiaL, sezioniL, gruppiL, link, T, type Lingua, blocchiGruppo } from '../i18n';
 import Stato from './Stato.astro';
+import { url } from '../lib/url';
+import { blocchiUsa, gruppoUsa, materieUsa, materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
 import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { catalogoDomande } from '../lib/domande';
 import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
-interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; ricercaPrincipale?: boolean }
-const { materia, argomento, sezione, lingua = 'it' } = Astro.props;
+interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; usa?: boolean; ricercaPrincipale?: boolean }
+const { materia, argomento, sezione, lingua = 'it', usa = false } = Astro.props;
 const t = T(lingua);
 const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-const m = materia ? materiaL(lingua, materia) : undefined;
-const MATERIE = materieL(lingua);
+const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
+const MATERIE = usa ? materieUsa : materieL(lingua);
+const home = usa ? url('/us') : link(lingua, '/');
+const hrefMateria = (slug: string) => usa ? url('/us/' + slug) : link(lingua, '/' + slug);
+const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgomentoUsa(slug, arg, sez) : link(lingua, '/' + slug + '/' + arg + '/' + sez);
 const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
-const conDomande = new Set(m ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
+const conDomande = new Set(m && !usa ? (await catalogoDomande(lingua))[m.slug] ?? [] : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
 const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.slug)}"] [data-video="${v.slug}"] .stato-sbloccata{display:inline-flex}`).join('');
 ---
@@ -24,7 +29,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   <div class="indice-testa">
     <span>{t.indice}</span>
   </div>
-  <form class="indice-cerca" role="search" action={link(lingua, '/cerca')} method="get">
+  <form class="indice-cerca" role="search" action={usa ? url('/us') : link(lingua, '/cerca')} data-us-search={usa || undefined} method="get">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
     <input type="search" name="q" aria-label={t.cerca} placeholder={lingua === 'en' ? 'Search a topic…' : 'Cerca un argomento…'} autocomplete="off" />
   </form>
@@ -52,8 +57,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   {m ? (
     <>
       <p class="indice-materia indice-materia-corrente">
-        <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a>
-        <a class="cambia-materia" href={link(lingua, '/')}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
+        <a href={hrefMateria(m.slug)}>{m.titolo}</a>
+        <a class="cambia-materia" href={home}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       </p>
       <ol>
         {m.argomenti.map((a) => {
@@ -63,7 +68,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
               <button type="button" class="argomento" aria-expanded={corrente ? 'true' : 'false'} data-apri-argomento>{a.titolo}</button>
               <ol class:list={{ aperta: corrente }}>
                 {SEZIONI.map((s) => (
-                  <li><a href={link(lingua, `/${m.slug}/${a.slug}/${s.slug}`)} class:list={{ attiva: corrente && s.slug === sezione }} aria-current={corrente && s.slug === sezione ? 'page' : undefined}>{s.titolo}</a></li>
+                  <li><a href={hrefArgomento(m.slug, a.slug, s.slug)} class:list={{ attiva: corrente && s.slug === sezione }} aria-current={corrente && s.slug === sezione ? 'page' : undefined}>{s.titolo}</a></li>
                 ))}
                 {conDomande.has(a.slug) && (
                   <li><a href={link(lingua, `/${m.slug}/${a.slug}/domande`)} class:list={{ attiva: corrente && sezione === 'domande' }}>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</a></li>
@@ -72,6 +77,18 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </li>
           );
         })}
+        {usa && (
+          <li>
+            <button type="button" class="argomento" aria-expanded="false" data-apri-argomento>Exam practice</button>
+            <ol>
+              <li><a href={url('/us/' + m.slug + '#course-practice')}>Review questions</a></li>
+              {m.slug === 'calculus-1' && <>
+                <li><a href={url('/us/calculus-1/practice-exam')}>General practice exam</a></li>
+                <li><a href={url('/us/calculus-1/purdue')}>Purdue exam practice</a></li>
+              </>}
+            </ol>
+          </li>
+        )}
         {conDomande.size > 0 && (
           <li class:list={{ corrente: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
             <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
@@ -87,7 +104,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   ) : (
     <>
       <p class="indice-percorsi-titolo">{lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
-      {gruppiL(lingua).map((g) => (
+      {(usa ? [gruppoUsa] : gruppiL(lingua)).map((g) => (
         <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school'].includes(g) }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {lingua === 'it' && g === 'Concorsi' && (
@@ -114,13 +131,13 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                   );
                   return (
                     <li data-materia={x.slug} style={`--colore-materia: ${x.colore}`}>
-                      {x.attiva ? <a class="voce-materia" href={link(lingua, `/${x.slug}`)} aria-current={qui === link(lingua, `/${x.slug}`) ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
+                      {x.attiva ? <a class="voce-materia" href={hrefMateria(x.slug)} aria-current={qui === hrefMateria(x.slug) ? 'page' : undefined}>{dentro}</a> : <span class="voce-materia in-preparazione">{dentro}</span>}
                     </li>
                   );
                 })}
               </ol>
             );
-            return blocchiGruppo(MATERIE, g).map((b) => b.sotto ? (
+            return (usa ? blocchiUsa : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
               <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
                 {lista(b.materie)}

@@ -9,6 +9,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
+import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
@@ -832,6 +833,9 @@ export default {
         'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
       } });
     }
+
+    const versoCatalogo = versoCatalogoStudio(req, url);
+    if (versoCatalogo) return versoCatalogo;
 
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);

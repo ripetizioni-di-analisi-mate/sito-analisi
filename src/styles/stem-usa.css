@@ -1,0 +1,67 @@
+.stem-usa [hidden] { display: none !important; }
+.studio-unita-usa { grid-column: 2; margin: .45rem 0; }
+.studio-unita-usa > div { padding: 0 .9rem .7rem; }
+.studio-unita-usa, .studio-unita-usa h3, .stem-practice, .stem-question { scroll-margin-top: 6rem; }
+.studio-unita-usa p { margin: .3rem 0 .7rem; }
+.risorse-usa { margin: 1.5rem 0; }
+.risorse-usa h2 { font-size: 1.15rem; }
+.risorse-usa a { margin-right: .6rem; }
+.stem-practice { margin: 1.5rem 0; }
+.stem-practice > p { margin: 0 0 .8rem; color: var(--inchiostro-2); }
+.stem-question, .purdue-usa .card, .purdue-usa .panel {
+  min-inline-size: 0;
+  margin: 1rem 0;
+  padding: .8rem 1rem;
+  border: 1px solid var(--riga);
+  border-radius: var(--raggio);
+  background: #fffdf9;
+  overflow-wrap: anywhere;
+}
+.stem-question legend { padding-inline: .2rem; font: 600 1rem/1.4 var(--ui); color: var(--inchiostro); }
+.stem-options, .purdue-usa .options { display: grid; gap: .35rem; }
+.stem-option, .purdue-usa .option { display: flex; align-items: start; gap: .55rem; padding: .35rem .45rem; border: 1px solid transparent; border-radius: var(--raggio); cursor: pointer; }
+.stem-option:has(input:checked), .purdue-usa .option:has(input:checked) { background: var(--fondo-percorso); border-color: var(--riga); }
+.stem-option input, .purdue-usa .option input { margin: .28em 0 0; flex: none; accent-color: var(--azione); }
+.stem-feedback, .purdue-usa .review-item { margin: .5rem 0 0; padding: .55rem .7rem; background: var(--fondo-percorso); border: 1px solid var(--riga); border-radius: var(--raggio); }
+.stem-feedback summary, .purdue-usa .review-item summary { font: 600 .9rem/1.4 var(--ui); cursor: pointer; }
+.stem-feedback p { margin: .35rem 0; }
+.stem-button, .purdue-usa .button {
+  border: 1px solid var(--azione);
+  border-radius: var(--raggio);
+  min-height: 2.5rem;
+  background: var(--azione);
+  color: white;
+  padding: .42rem .74rem;
+  font: 600 .9rem/1.4 var(--ui);
+  cursor: pointer;
+}
+.stem-button.stem-secondary, .purdue-usa .button.secondary { color: var(--azione); background: #fffdf9; }
+.stem-button:disabled, .purdue-usa button:disabled { opacity: .52; cursor: default; }
+.stem-quiz-timer, .stem-quiz-actions, .purdue-usa .actions, .purdue-usa .practice-head, .purdue-usa .result-tools {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+}
+.stem-quiz-timer [role="timer"], .purdue-usa .timer { padding: .3rem .6rem; font: 700 1rem/1.35 var(--ui); font-variant-numeric: tabular-nums; color: var(--azione); background: var(--fondo-percorso); border-radius: var(--raggio); }
+.stem-quiz-score { margin: 0; font-weight: 700; color: var(--azione); }
+.purdue-usa .practice-head, .purdue-usa .result-tools { justify-content: space-between; }
+.purdue-usa .card-grid { display: grid; gap: .75rem; }
+.purdue-usa .card { margin: 0; }
+.purdue-usa .card h3 { margin: 0; }
+.purdue-usa .meta, .purdue-usa .note { color: var(--inchiostro-2); font: .9rem/1.4 var(--ui); }
+.purdue-usa .practice-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, 14rem); gap: .75rem; align-items: start; }
+.purdue-usa fieldset { border: 0; padding: 0; margin: 0; min-inline-size: 0; }
+.purdue-usa .actions { margin-top: .9rem; }
+.purdue-usa .numbers { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .25rem; margin: .5rem 0; }
+.purdue-usa .number, .purdue-usa .back { border: 1px solid var(--riga); color: var(--azione); border-radius: var(--raggio); background: #fffdf9; cursor: pointer; min-height: 2rem; }
+.purdue-usa .number.answered { background: var(--fondo-percorso); }
+.purdue-usa .number[aria-current] { background: var(--azione); color: white; }
+.purdue-usa progress { width: 100%; accent-color: var(--azione); }
+.purdue-usa .review-item summary span { margin-inline-start: .45rem; color: var(--inchiostro-2); }
+.purdue-usa .review-item p { margin: .35rem 0; }
+.purdue-usa .review-item ol { padding-left: 1.4rem; }
+.purdue-usa dialog { width: min(28rem, calc(100% - 2rem)); border: 1px solid var(--riga); border-radius: var(--raggio); padding: 1rem; }
+.purdue-usa dialog form { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: end; }
+.purdue-usa dialog::backdrop { background: #162a2590; }
+.purdue-usa .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 40rem) {
+  .purdue-usa .practice-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+}

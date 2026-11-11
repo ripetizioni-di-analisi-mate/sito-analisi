@@ -6,8 +6,12 @@
 // 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
 // 04/11: tolto il glossario (richiesta di Carmine).
 import type { Lingua } from '../i18n';
-const { lingua = 'it' } = Astro.props as { lingua?: Lingua };
-const voci = lingua === 'en' ? [
+import { url } from '../lib/url';
+const { lingua = 'it', usa = false } = Astro.props as { lingua?: Lingua; usa?: boolean };
+const voci = usa ? [
+  { href: url('/us/calculus-1#course-practice'), titolo: 'Timed questions' },
+  { href: url('/us/calculus-1/practice-exam'), titolo: 'Exam simulations' },
+] : lingua === 'en' ? [
   { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
   { href: '/en/formulari', titolo: 'Formula sheets' },
 ] : [
