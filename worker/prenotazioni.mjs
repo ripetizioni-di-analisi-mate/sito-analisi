@@ -304,11 +304,11 @@ export async function verificaStripe(intestazione, corpo, segreto, adesso = Date
 
 // ---------- email (Resend) ----------
 const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-async function inviaEmail(env, a, oggetto, righe, tasto, dettagli = {}) {
+async function inviaEmail(env, tipo, a, oggetto, righe, tasto, dettagli = {}) {
   const messaggio = componiEmail({
     subject: oggetto, categoria: 'Lezioni individuali', righe, pulsante: tasto, ...dettagli,
   });
-  return (await inviaEmailResend(env, a, messaggio)).ok;
+  return (await inviaEmailResend(env, a, messaggio, undefined, tipo)).ok;
 }
 const rigaMeet = (l) => (l.meet ? `Link della lezione su Google Meet: ${l.meet}` : 'Il link di Google Meet arriva con l’invito di Google Calendar a questo indirizzo.');
 const rigaRegole = () => `La lezione si può spostare o disdire con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima dell’inizio. Dopo quel momento non è previsto il rimborso.`;
@@ -321,7 +321,7 @@ export async function avvisiLezioni(env, aDO, firmaToken, adesso = Date.now()) {
   let inviate = 0;
   for (const l of lezioni) {
     const p = partiRoma(l.inizio);
-    const ok = await inviaEmail(env, l.email, `La lezione inizia alle ${due(p.h)}:${due(p.min)}: ecco il link`, [
+    const ok = await inviaEmail(env, 'lezione-promemoria', l.email, `La lezione inizia alle ${due(p.h)}:${due(p.min)}: ecco il link`, [
       `Ciao ${l.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(l.materia)} inizia alle ${due(p.h)}:${due(p.min)}.`,
       l.meet ? `Si entra su Google Meet da questo link: ${l.meet}` : 'Il link di Google Meet è nell’invito di Google Calendar che hai ricevuto alla prenotazione.',
@@ -495,7 +495,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
         start: { dateTime: isoRoma(nuova.inizio), timeZone: LEZIONI.fusoOrario }, end: { dateTime: isoRoma(nuova.fine), timeZone: LEZIONI.fusoOrario },
       }).catch((e) => console.log('prenota sposta google', String(e?.message || e))));
     }
-    ctx.waitUntil(inviaEmail(env, nuova.email, `Lezione spostata: ${quando(nuova.inizio, nuova.fine)}`, [
+    ctx.waitUntil(inviaEmail(env, 'lezione-spostata', nuova.email, `Lezione spostata: ${quando(nuova.inizio, nuova.fine)}`, [
       `Ciao ${nuova.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(nuova.materia)} è stata spostata a ${quando(nuova.inizio, nuova.fine)}. Prima era fissata per ${quando(r.prima.inizio, r.prima.fine)}.`,
       rigaMeet(nuova), rigaRegole(),
@@ -516,7 +516,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const r = await aDO(env, '/pren-disdici', { id: l.id });
     if (l.evento) ctx.waitUntil(google(env, aDO, 'DELETE', `/calendars/${calendario(env)}/events/${encodeURIComponent(l.evento)}?sendUpdates=all`)
       .catch((e) => console.log('prenota disdici google', String(e?.message || e))));
-    ctx.waitUntil(inviaEmail(env, l.email, 'Lezione disdetta e rimborsata', [
+    ctx.waitUntil(inviaEmail(env, 'lezione-disdetta', l.email, 'Lezione disdetta e rimborsata', [
       `Ciao ${l.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(l.materia)} di ${quando(l.inizio, l.fine)} è stata disdetta.`,
       `Il rimborso di ${LEZIONI.prezzo} € è partito sulla carta usata per il pagamento; di solito compare sull’estratto conto entro 5-10 giorni lavorativi.`,
@@ -545,7 +545,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
           await aDO(env, '/pren-evento', { id, ...e });
           l.meet = e.meet;
         } catch (e) { console.log('prenota evento google', String(e?.message || e)); }
-        await inviaEmail(env, l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
+        await inviaEmail(env, 'lezione-confermata', l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
           `Ciao ${l.nome.split(' ')[0]},`,
           `ho ricevuto il pagamento di ${LEZIONI.prezzo} € per la tua lezione di ${titoloMateria(l.materia)}.`,
         ], ['Gestisci la prenotazione', gestione], {

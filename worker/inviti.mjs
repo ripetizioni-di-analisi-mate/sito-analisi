@@ -110,7 +110,7 @@ async function avvisaPremio(env, a, origine) {
     pulsante: ['Scegli la materia', `${origine}/prezzi`],
     motivo: 'Ricevi questa email perché è maturato il premio di un tuo invito.',
   });
-  return (await inviaEmailResend(env, a, messaggio)).ok;
+  return (await inviaEmailResend(env, a, messaggio, undefined, 'premio-invito')).ok;
 }
 
 // Dopo l'iscrizione: se il browser ha il cookie dell'invito, il nuovo account risulta invitato.

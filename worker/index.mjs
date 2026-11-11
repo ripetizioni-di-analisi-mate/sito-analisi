@@ -1,4 +1,5 @@
 import { componiEmail, inviaEmailResend } from './email.mjs';
+import { preparaStoricoEmail, registraInviiEmail } from './storico-email.mjs';
 import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
@@ -191,6 +192,7 @@ export class Archivio {
     creaTabelleSfide(this.sql);
     // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
     creaTabelleCompatibilita(this.sql);
+    preparaStoricoEmail(this, Date.now());
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -299,6 +301,7 @@ export class Archivio {
           this.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', e, c.giorno);
           this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', e);
         }
+        if (c.invii) registraInviiEmail(this.sql, c.invii);
         return Response.json({ ok: true });
       case '/promemoria-coda':
         for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria_coda (email, creato) VALUES (?, ?)', e, Date.now());
@@ -660,7 +663,7 @@ async function inviaEmailRecupero(env, destinatario, link, l) {
     scheda: { valore: l === 'en' ? 'Valid for one hour' : 'Valido per un’ora' },
     pulsante: [T.bottone, link],
   });
-  return (await inviaEmailResend(env, destinatario, messaggio)).ok;
+  return (await inviaEmailResend(env, destinatario, messaggio, undefined, 'recupero-password')).ok;
 }
 
 // ---------- domande a tempo ----------
@@ -1359,6 +1362,12 @@ export default {
         return json(await aDO(env, '/revoca', { email: normalizza(email), materia }));
       }
       if (p === '/admin/api/email-stato' && req.method === 'GET') return json(await aDO(env, '/em-dashboard'), 200, { 'cache-control': 'no-store' });
+      if (p === '/admin/api/email-storico' && req.method === 'GET') {
+        const headers = { 'cache-control': 'private, no-store' };
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
+        const filtri = Object.fromEntries(['giorni', 'giorno', 'tipo', 'pagina'].map((k) => [k, url.searchParams.get(k)]));
+        return json(await aDO(env, '/em-storico', filtri), 200, headers);
+      }
       if (p === '/admin/api/email-interruttore' && POST) {
         const { tipo, attivo } = await req.json().catch(() => ({}));
         return json(await aDO(env, '/em-interruttore', { tipo, attivo }));
@@ -1372,7 +1381,7 @@ export default {
           'content-security-policy': "default-src 'none'; img-src https://ripetizionidianalisi.com; style-src 'unsafe-inline'; sandbox",
         } });
         const destinatario = env.EMAIL_PROVA_DESTINATARIO || 'carminetornincasa98@gmail.com';
-        const prova = await inviaEmailResend(env, destinatario, { ...m, subject: `[PROVA] ${m.subject}` });
+        const prova = await inviaEmailResend(env, destinatario, { ...m, subject: `[PROVA] ${m.subject}` }, undefined, 'prova');
         return json(prova.ok ? { ok: true } : { errore: 'Invio di prova non riuscito.' });
       }
       if (p === '/admin/api/promemoria-prova' && POST) { // email di prova del promemoria, con i dati veri dell'account se esiste

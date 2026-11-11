@@ -3,6 +3,7 @@ import { MATERIE_EN } from '../src/data/materie-en.ts';
 import { componiEmail, intestazioniDisiscrizione, inviaEmailResend, mittenteEmail, SITO_EMAIL } from './email.mjs';
 import { componiPromemoria } from './promemoria.mjs';
 import { componiAvvisoLega } from './avvisi-lega.mjs';
+import { registraAvvioEmail, registraInviiEmail, storicoEmail } from './storico-email.mjs';
 
 const GIORNO = 86400000;
 const ORA = GIORNO / 24;
@@ -120,6 +121,11 @@ export function archivioEmail(ar, p, c) {
       if (!FLUSSI_EMAIL.includes(c.tipo) || typeof c.attivo !== 'boolean') return { errore: 'Flusso non valido.' };
       ar.sql.exec(`INSERT INTO email_config (chiave, valore) VALUES (?, ?) ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore`, c.tipo, c.attivo ? '1' : '0');
       return { ok: true };
+    case '/em-registra':
+      registraInviiEmail(ar.sql, c.righe);
+      return { ok: true };
+    case '/em-storico':
+      return storicoEmail(ar, c, ora);
     case '/em-dashboard': {
       const conteggi = ar.righe(`SELECT tipo, COUNT(inviato) AS inviate,
         SUM(CASE WHEN consegna = 'consegnata' THEN 1 ELSE 0 END) AS consegnate,
@@ -128,7 +134,11 @@ export function archivioEmail(ar, p, c) {
         COUNT(acquisto) AS acquisti
         FROM email_automatiche WHERE prossimo >= ? OR inviato >= ? GROUP BY tipo`, ora - 30 * GIORNO, ora - 30 * GIORNO);
       return {
-        flussi: FLUSSI_EMAIL.map((tipo) => ({ tipo, attivo: flussoAttivo(ar, tipo), disponibile: disponibile(ar.env, tipo), ...conteggi.find((r) => r.tipo === tipo) })),
+        flussi: FLUSSI_EMAIL.map((tipo) => ({
+          tipo, attivo: flussoAttivo(ar, tipo), disponibile: disponibile(ar.env, tipo),
+          avvio: Number(ar.riga('SELECT valore FROM email_config WHERE chiave = ?', 'avvio-email/' + tipo)?.valore) || null,
+          ...conteggi.find((r) => r.tipo === tipo),
+        })),
         consensi: ar.riga('SELECT COUNT(*) AS n FROM email_preferenze WHERE confermato IS NOT NULL')?.n || 0,
         revoche: ar.riga(`SELECT COUNT(*) AS n FROM email_consensi WHERE evento = 'revoca' AND quando >= ?`, ora - 30 * GIORNO)?.n || 0,
         statoConsegne: ar.riga("SELECT valore FROM email_config WHERE chiave = 'stato-consegne'")?.valore || null,
@@ -268,14 +278,16 @@ async function verificaConsegne(ar, ora) {
 export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, prove = {} }, firmaToken) {
   if (!ar.env.RESEND_API_KEY) return { inviati: 0 };
   const ora = Date.now(), oggi = giornoDi(ora);
+  const abilitati = FLUSSI_EMAIL.filter((tipo) => flussoAttivo(ar, tipo) && disponibile(ar.env, tipo));
+  registraAvvioEmail(ar.sql, abilitati, ora);
   ar.sql.exec(`UPDATE email_automatiche SET stato = CASE WHEN iniziato IS NULL THEN 'annullata' ELSE 'errore' END, payload = NULL
     WHERE stato IN ('attesa', 'invio') AND (scadenza <= ? OR iniziato <= ?) `, ora, ora - 22 * ORA);
   if (giornaliero) {
     ar.sql.exec('DELETE FROM email_automatiche WHERE prossimo < ? AND COALESCE(inviato, 0) < ?', ora - 90 * GIORNO, ora - 90 * GIORNO);
+    ar.sql.exec('DELETE FROM email_inviate WHERE inviato < ?', ora - 91 * GIORNO);
     accoda(ar, ora, prove);
   }
 
-  const abilitati = FLUSSI_EMAIL.filter((tipo) => flussoAttivo(ar, tipo) && disponibile(ar.env, tipo));
   const quota = () => {
     const n = ar.riga('SELECT COUNT(*) AS n FROM email_automatiche WHERE inviato >= ? OR (stato = ? AND iniziato >= ?)', Date.parse(oggi), 'invio', Date.parse(oggi))?.n || 0;
     const rec = ar.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", oggi)?.n || 0;
@@ -331,13 +343,16 @@ export async function eseguiEmailAutomatiche(ar, { giornaliero, catalogo = {}, p
       }
       if (!destinatarioValido(ar, f)) { annulla(); continue; }
       if (!flussoAttivo(ar, f.tipo)) continue;
-      const r = await inviaEmailResend(ar.env, f.email, mail, `flusso-email/${f.id}`);
+      const chiave = `flusso-email/${f.id}`;
+      const r = await inviaEmailResend(ar.env, f.email, mail, chiave);
       if (r.ok) {
-        ar.sql.exec("UPDATE email_automatiche SET stato = 'inviata', inviato = ?, resend_id = ?, payload = NULL, errore = NULL WHERE id = ?", Date.now(), r.id, f.id);
+        const inviato = Date.now();
+        ar.sql.exec("UPDATE email_automatiche SET stato = 'inviata', inviato = ?, resend_id = ?, payload = NULL, errore = NULL WHERE id = ?", inviato, r.id, f.id);
         if (f.tipo === 'studio') {
           ar.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', f.email, oggi);
           ar.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', f.email);
         }
+        registraInviiEmail(ar.sql, [{ id: chiave, tipo: f.tipo, email: f.email, oggetto: mail.subject, inviato }]);
         inviati++;
       } else if (r.stato === 409 || r.stato === 429 || r.stato >= 500) {
         ar.sql.exec('UPDATE email_automatiche SET errore = ? WHERE id = ?', r.stato, f.id);
@@ -362,7 +377,7 @@ export async function inviaConfermaOfferte(env, email, token, lingua, firmaToken
     categoria: en ? 'Email preferences' : 'Preferenze email',
     righe: [en ? 'Confirm to receive study suggestions and offers from Ripetizioni di Analisi. You can change your choice whenever you like.' : 'Conferma la tua scelta per ricevere esercizi gratuiti e offerte da Ripetizioni di Analisi. Puoi cambiare preferenza in qualsiasi momento.'],
     pulsante: [en ? 'Review and confirm' : 'Rivedi e conferma', link],
-  }), `consenso-offerte/${token}`);
+  }), `consenso-offerte/${token}`, 'preferenze-email');
 }
 
 export function paginaPreferenzeEmail(tipo, lingua, valido, fatto) {

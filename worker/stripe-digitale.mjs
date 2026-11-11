@@ -318,7 +318,7 @@ async function confermaOrdine(env, h, r) {
     pulsante: [en ? 'Open your account' : 'Apri il tuo account', SITO_EMAIL + pref + '/account'],
   });
   messaggio.attachments = [allegatoContrattoDigitale(q.lingua, q.versioneCondizioni)];
-  const esito = await inviaEmailResend(env, r.email, messaggio, 'conferma-digitale-' + r.id);
+  const esito = await inviaEmailResend(env, r.email, messaggio, 'conferma-digitale-' + r.id, 'acquisto-digitale');
   if (esito.ok) await h.aDO(env, '/dig-conferma', { id: r.id });
   return esito.ok;
 }

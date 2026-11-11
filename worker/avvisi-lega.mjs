@@ -4,6 +4,7 @@ import { LEGHE, LEGHE_EN } from '../src/data/sfide.ts';
 import { settimanaDi } from './livelli.mjs';
 import { fotografiaLega } from './sfide.mjs';
 import { componiEmail } from './email.mjs';
+import { registraInviiEmail } from './storico-email.mjs';
 
 const SITO = 'https://ripetizionidianalisi.com';
 const ATTESA = 5000; // raggruppa i premi assegnati nella stessa azione
@@ -122,7 +123,11 @@ export async function inviaAvvisoLega(ar, env, firmaToken) {
       method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json', 'Idempotency-Key': `lega-sorpasso/${r.id}` },
       body: payload, signal: AbortSignal.timeout(15000),
     });
-    if (risposta.ok) ar.sql.exec("UPDATE leghe_avvisi SET stato = 'inviato', inviato = ? WHERE id = ?", Date.now(), r.id);
+    if (risposta.ok) {
+      const inviato = Date.now();
+      ar.sql.exec("UPDATE leghe_avvisi SET stato = 'inviato', inviato = ? WHERE id = ?", inviato, r.id);
+      registraInviiEmail(ar.sql, [{ id: `lega-sorpasso/${r.id}`, tipo: 'lega', email: r.email, oggetto: JSON.parse(payload).subject, inviato }]);
+    }
     else {
       // Errori permanenti non bloccano gli altri studenti; 409, 429 e 5xx si ritentano.
       if (risposta.status >= 400 && risposta.status < 500 && ![409, 429].includes(risposta.status)) ar.sql.exec("UPDATE leghe_avvisi SET stato = 'errore' WHERE id = ?", r.id);

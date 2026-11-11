@@ -1,3 +1,5 @@
+import { registraInviiDalSito } from './storico-email.mjs';
+
 export const SITO_EMAIL = 'https://ripetizionidianalisi.com';
 export const mittenteEmail = (env) => env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>';
 
@@ -45,7 +47,7 @@ export function intestazioniDisiscrizione(link) {
   return { 'List-Unsubscribe': `<${link}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' };
 }
 
-export async function inviaEmailResend(env, destinatario, messaggio, chiave) {
+export async function inviaEmailResend(env, destinatario, messaggio, chiave, tipo) {
   if (!env.RESEND_API_KEY) return { ok: false, stato: 503 };
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -57,5 +59,10 @@ export async function inviaEmailResend(env, destinatario, messaggio, chiave) {
     signal: AbortSignal.timeout(10000),
   }).catch(() => null);
   const id = r?.ok ? (await r.json().catch(() => ({}))).id : null;
+  if (r?.ok && tipo) {
+    await registraInviiDalSito(env, [{
+      id: chiave || id || crypto.randomUUID(), tipo, email: destinatario, oggetto: messaggio.subject, inviato: Date.now(),
+    }]);
+  }
   return { ok: Boolean(r?.ok), stato: r?.status || 503, id };
 }
