@@ -1,0 +1,62 @@
+import { optionsFor } from '../catalog.mjs';
+
+const m = String.raw;
+const topics = [
+  'Vectors, geometry and curves in space', 'Partial derivatives and tangent planes',
+  'Optimization in several variables', 'Multiple integrals and changes of coordinates',
+  'Line integrals and Green’s theorem', 'Flux, Stokes’ theorem and the divergence theorem',
+];
+
+const items = [
+  [1, 'What is the $z$-intercept of the plane through $(1,2,0)$, $(2,2,1)$ and $(1,3,1)$?',
+    '$-3$', ['$3$', '$-1$', '$0$'], 'The two edge vectors are $(1,0,1)$ and $(0,1,1)$. A normal is $(-1,-1,1)$, and the plane equation is $z=x+y-3$.'],
+  [2, m`For $f(x,y)=\dfrac{x^2y}{x^4+y^2}$, what are the limits along $y=x$ and $y=x^2$ at the origin, in that order?`,
+    '$0$ and $1/2$', ['$0$ and $0$', '$1/2$ and $0$', '$1$ and $1/2$'], 'On the line the expression simplifies to $x/(1+x^2)$. On the parabola it is $1/2$ whenever $x$ is nonzero.'],
+  [3, 'Find the minimum of $3x^2+y^2$ subject to $x+y=8$.',
+    '$48$', ['$16$', '$32$', '$64$'], 'The multiplier equations give $6x=2y$. Thus $x=2$ and $y=6$. The restricted objective is a quadratic with positive leading coefficient.'],
+  [4, m`Evaluate $\int_0^4\int_{\sqrt y}^2 \cos(x^3)\,dx\,dy$.`,
+    m`$\dfrac{\sin 8}{3}$`, [m`$\sin 8$`, m`$\dfrac{\sin 4}{3}$`, m`$\dfrac{2\sin 8}{3}$`],
+    m`Reverse the order to get $0\le x\le2$, $0\le y\le x^2$. Integrating in $y$ leaves $\int_0^2 x^2\cos(x^3)\,dx$.`],
+  [5, m`Find the work of $(2y,x)$ along $(t,t^2)$ for $0\le t\le2$.`,
+    m`$\dfrac{32}{3}$`, [m`$\dfrac{16}{3}$`, m`$\dfrac{8}{3}$`, '$16$'], m`The tangent dot product is $4t^2$. Its integral from zero to two is $32/3$.`],
+  [6, 'Find the outward flux of $(0,0,z+2)$ through the curved upper hemisphere of radius $2$.',
+    m`$\dfrac{40\pi}{3}$`, [m`$\dfrac{16\pi}{3}$`, m`$-\dfrac{8\pi}{3}$`, m`$8\pi$`],
+    m`Closing with the base gives total outward flux $16\pi/3$ since divergence is one. On the base the normal points downward and the field gives flux $-8\pi$. Subtract it.`],
+  [1, m`Find the curvature of $(t,t^2,t^3)$ at $t=1$.`,
+    m`$\dfrac{\sqrt{19}}{7\sqrt{14}}$`, [m`$\dfrac{\sqrt{19}}{7}$`, m`$\dfrac{2\sqrt{19}}{\sqrt{14}}$`, m`$\dfrac{\sqrt{14}}{7\sqrt{19}}$`],
+    m`The velocity and acceleration are $(1,2,3)$ and $(0,2,6)$. Their cross product is $(6,-6,2)$ with magnitude $2\sqrt{19}$. Divide by $(\sqrt{14})^3$.`],
+  [2, m`Let $f(x,y)=e^{xy}+x^2$. At $(1,0)$, find the directional derivative in the direction $(3,-4)$.`,
+    m`$\dfrac25$`, ['$2$', m`$\dfrac65$`, m`$-\dfrac25$`], 'The gradient is $(2,1)$. Dot it with the unit direction $(3/5,-4/5)$ to obtain $(6-4)/5$.'],
+  [3, 'How is the origin classified for $f(x,y)=2x^2+6xy+3y^2$?',
+    'A saddle point.', ['A strict local minimum.', 'A strict local maximum.', 'The Hessian test is inconclusive.'], 'The origin is critical, and the Hessian determinant is $4(6)-6^2=-12$.'],
+  [4, m`Find the volume cut from the first octant by the plane $x+y+z=4$.`,
+    m`$\dfrac{32}{3}$`, [m`$\dfrac{64}{3}$`, '$16$', m`$\dfrac{8}{3}$`],
+    m`At height $z$, the cross section has area $(4-z)^2/2$. Integrate for $0\le z\le4$.`],
+  [5, m`Find $\oint_C (x+y)\,dx+(2x+y)\,dy$ on the clockwise boundary of the triangle with vertices $(0,0)$, $(4,0)$ and $(0,3)$.`,
+    '$-6$', ['$6$', '$-12$', '$0$'], 'The planar curl is $2-1=1$ and the triangle has area $6$. Clockwise orientation gives the negative of the area.'],
+  [6, 'Let $C$ bound the triangle on $z=x+y$ with projected vertices $(0,0)$, $(3,0)$ and $(0,2)$. Orient $C$ counterclockwise from above. Find the circulation of $(0,3x,0)$.',
+    '$9$', ['$-9$', '$18$', '$3$'], 'The curl is $(0,0,3)$. Dotting it with $(-1,-1,1)$ gives $3$, and the projected triangle has area $3$.'],
+  [1, m`Find the length of $(4\cos t,4\sin t,3t)$ for $\pi/6\le t\le5\pi/6$.`,
+    m`$\dfrac{10\pi}{3}$`, [m`$\dfrac{5\pi}{3}$`, m`$\dfrac{14\pi}{3}$`, m`$10\pi$`],
+    m`The speed is $\sqrt{16+9}=5$. The parameter interval has length $2\pi/3$.`],
+  [2, 'On the surface $xz+y^2+z^2=11$, find $z_x$ at $(3,1,2)$.',
+    m`$-\dfrac27$`, [m`$\dfrac27$`, m`$-\dfrac37$`, m`$-\dfrac12$`], 'At fixed $y$, implicit differentiation gives $z+(x+2z)z_x=0$. Evaluate at the given point.'],
+  [3, 'Find the maximum value of $z$ subject to $x+y=4$ and $x^2+y^2+z^2=17$.',
+    '$3$', ['$5$', '$9$', m`$\sqrt{17}$`], 'For fixed sum four, $x^2+y^2$ is minimized at $x=y=2$ with value eight. This leaves the maximum possible $z^2$ equal to nine.'],
+  [4, m`Integrate $x-y$ over the image of $0\le u\le2$, $0\le v\le3$ under $x=2u+v$, $y=u+v$.`,
+    '$6$', ['$3$', '$12$', '$18$'], 'The Jacobian determinant is $2(1)-1(1)=1$ and the integrand becomes $u$. Its integral in $u$ is two, multiplied by the $v$ interval of length three.'],
+  [5, m`Find the work of $\mathbf F=(3x^2+y,x+2y)$ along any piecewise smooth path from $(1,0)$ to $(2,2)$.`,
+    '$15$', ['$16$', '$12$', '$7$'], 'A potential is $x^3+xy+y^2$. Its endpoint values are $1$ and $16$, so the work is $15$.'],
+  [6, m`Find the upward flux of $(x,y,4)$ through $z=x^2+y^2$ over the unit disk.`,
+    m`$3\pi$`, [m`$4\pi$`, m`$2\pi$`, m`$-3\pi$`],
+    m`The dot product with $(-2x,-2y,1)$ is $4-2r^2$. In polar coordinates the flux is $2\pi\int_0^1(4-2r^2)r\,dr=3\pi$.`],
+];
+
+export const calculus3Exam = items.map(([unit, prompt, correct, distractors, explanation], index) => ({
+  title: topics[unit - 1],
+  prompt,
+  choices: optionsFor({ correct, distractors }, index),
+  correct: index % (distractors.length + 1),
+  explanation,
+  href: '/us/calculus-3#unit-' + unit,
+}));

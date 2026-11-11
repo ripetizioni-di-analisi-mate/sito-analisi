@@ -12,7 +12,7 @@ export const groups = [
 ];
 
 export const universityCourses = groups.flatMap(group => group.courses);
-const coursesWithTimedPractice = new Set(['calculus-1', 'calculus-2']);
+const coursesWithTimedPractice = new Set(['calculus-1', 'calculus-2', 'calculus-3']);
 export const universityTimedTopics = Object.fromEntries(
   universityCourses
     .filter(course => coursesWithTimedPractice.has(course.slug))
