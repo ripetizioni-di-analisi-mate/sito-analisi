@@ -1,6 +1,8 @@
+import { calculusAdditionalQuestions } from './calculus-1-quiz-bank.mjs';
+
 const question = (number, prompt, correct, distractors, explanation) => ({ number, prompt, correct, distractors, explanation });
 
-export const calculusTimed = {
+const originalQuestions = {
   'unit-1': [
     question(1, 'Evaluate $\\lim_{x\\to1}\\dfrac{x^3-1}{x^2-1}$.', '$\\dfrac32$', ['$1$', '$2$', '$3$'],
       'After canceling $x-1$, the quotient is $(x^2+x+1)/(x+1)$. Substitute $x=1$.'),
@@ -108,3 +110,12 @@ export const calculusTimed = {
       "Each disk has radius $\\sqrt{x}$, so its area is $\\pi(\\sqrt{x})^2=\\pi x$."),
   ],
 };
+
+// Existing numbers identify saved attempts. Add new IDs after the original questions.
+export const calculusTimed = Object.fromEntries(Object.entries(originalQuestions).map(([unit, original]) => {
+  const additional = calculusAdditionalQuestions[unit].flat().map((item, index) => ({
+    ...item,
+    number: original.length + index + 1,
+  }));
+  return [unit, [...original, ...additional]];
+}));
