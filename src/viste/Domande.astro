@@ -7,10 +7,12 @@ import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande } from '../lib/domande';
-interface Props { lingua: Lingua; materia: string; argomento: string; totale: number }
-const { lingua, materia, argomento, totale } = Astro.props;
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { url } from '../lib/url';
+interface Props { lingua: Lingua; materia: string; argomento: string; totale: number; usa?: boolean }
+const { lingua, materia, argomento, totale, usa = false } = Astro.props;
 const en = lingua === 'en';
-const m = materiaL(lingua, materia);
+const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
 const senzaInglese = !en && (semestreFiltro || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
 const nomiProve = nomiAllenamento(m, lingua);
@@ -25,13 +27,18 @@ const notaAnteprimaScienza = personale
     ? (en ? `Try ${m.argomenti.length} sample questions, one per topic.` : `Puoi provare ${m.argomenti.length} domande gratuite, una per argomento.`)
     : (en ? 'The first question is available in the free preview.' : 'Puoi rispondere gratis alla prima domanda della serie.');
 const arg = personale ? { slug: RIPASSO_OGGI, titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi', breve: en ? 'Today’s review' : 'Ripasso di oggi' }
-  : ripasso ? { slug: RIPASSO, titolo: nomiProve.ripasso, breve: nomiProve.ripasso } : argomentoL(lingua, materia, argomento);
+  : ripasso ? { slug: RIPASSO, titolo: nomiProve.ripasso, breve: nomiProve.ripasso }
+  : usa ? m.argomenti.find(a => a.slug === argomento)! : argomentoL(lingua, materia, argomento);
 if (semestreFiltro && ripasso && !personale) {
   arg.titolo = en ? 'Review of all units' : 'Ripasso su tutte le unità';
   arg.breve = en ? 'Review' : 'Ripasso';
 }
 const base = `/${materia}/${argomento}`;
 const pref = prefisso(lingua);
+const hrefSezione = (sezione: string) => usa ? linkArgomentoUsa(materia, argomento, sezione) : link(lingua, `${base}/${sezione}`);
+const tornaAllaMateria = ripasso || m.eserciziDaFare === false;
+const hrefMateria = usa ? url('/us/' + materia) : link(lingua, '/' + materia);
+const hrefRitorno = tornaAllaMateria ? hrefMateria : hrefSezione('esercizi');
 const n = Math.min(DOMANDE_SESSIONE, totale);
 // Nome breve di ogni argomento, per indicare nel ripasso da quale argomento viene la domanda.
 const brevi = Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve]));
@@ -79,11 +86,11 @@ const JS = en ? {
 <Base
   titolo={`${arg.titolo} · ${T.titolo}`}
   descrizione={T.descr}
-  percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: T.titolo }]}
-  materia={materia} argomento={argomento} sezione="domande" lingua={lingua}
+  percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: hrefSezione('teoria') }, { titolo: T.titolo }]}
+  materia={materia} argomento={argomento} sezione="domande" lingua={lingua} usa={usa}
   seo={{ noindex: true, senzaInglese, soloQuestaLingua: m.eserciziDaFare === false && senzaInglese }}
 >
-  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={ripasso || m.eserciziDaFare === false ? '1' : ''} data-brevi={JSON.stringify(brevi)}>
+  <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
       <div>
         <p class="sopratitolo">{T.titolo}</p>
@@ -101,7 +108,7 @@ const JS = en ? {
 
     <div class="nota-ospite" hidden>
       <p>{T.ospite}</p>
-      <p class="azioni"><a class="bottone-secondario" href={`${pref}/accedi?dopo=${pref}${base}/domande`}>{T.accedi}</a></p>
+      <p class="azioni"><a class="bottone-secondario" href={`${pref}/accedi?dopo=${hrefSezione('domande')}`}>{T.accedi}</a></p>
     </div>
 
     <nav class="navigazione-domande" aria-label={T.navigazione} hidden>
@@ -131,7 +138,7 @@ const JS = en ? {
         <button type="button" class="bottone-primario conferma" disabled hidden>{T.conferma}</button>
         <button type="button" class="bottone-primario prossima" hidden>{T.prossima}</button>
         <button type="button" class="bottone-primario nuova-serie" hidden>{T.nuovaSerie}</button>
-        <a class="link-svolti" href={link(lingua, ripasso ? `/${materia}` : `${base}/esercizi-svolti`)} hidden>{T.svolti}</a>
+        <a class="link-svolti" href={ripasso ? hrefMateria : hrefSezione('esercizi-svolti')} hidden>{T.svolti}</a>
       </div>
     </section>
 
@@ -373,7 +380,7 @@ const JS = en ? {
         <div class="barra-exp grande"><span style="width:${st.perc}%"></span></div>
         <p class="riep-numeri"><span>${num(st.exp)} ${lingua === 'en' ? 'XP' : 'EXP'}</span><span>${st.prossimo === null ? L.massimo : `${num(st.mancano)} ${L.alLivello} ${st.livello + 1}`}</span></p>` : ''}
       ${obiettivi ? `<h3>${L.obiettivi}</h3><ul class="obiettivi">${obiettivi}</ul>` : ''}
-      <p class="azioni-riepilogo"><a class="bottone-primario" href="${pref}/${materia}${tornaAllaMateria ? '' : `/${argomento}/esercizi`}">${tornaAllaMateria ? L.tornaMateria : L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
+      <p class="azioni-riepilogo"><a class="bottone-primario" href="${radice.dataset.ritorno}">${tornaAllaMateria ? L.tornaMateria : L.tornaEsercizi}</a> <a class="bottone-secondario" href="${pref}/account#percorso">${L.percorso}</a></p>`;
     riepilogo.hidden = false;
     riepilogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });

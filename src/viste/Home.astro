@@ -14,6 +14,7 @@ import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { getCollection } from 'astro:content';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
 import { blocchiUsa, gruppoUsa, materieUsa } from '../data/stem-usa/catalog-view';
+import { calculusCounts, calculusSlug } from '../lib/stem-usa-practice';
 import { url } from '../lib/url';
 import { materieL, gruppiL, blocchiGruppo, link, T, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; usa?: boolean }
@@ -42,6 +43,7 @@ const regoleSbloccato = lingua === 'it' ? MATERIE.filter((m) => m.prezzo && m.at
 const [svolti, dafare, domande] = await Promise.all([getCollection('svolti'), getCollection('dafare'), getCollection('domande')]);
 const conta = (lista: { id: string }[], slug: string) => lista.filter((x) => x.id.startsWith(`${slug}/`)).length;
 const conti = (m: (typeof MATERIE)[number]) => {
+  if (usa && m.slug === calculusSlug) return `${m.argomenti.length} study units · ${calculusCounts.worked} worked examples · ${calculusCounts.exercises} practice exercises`;
   if (usa) return `${m.argomenti.length} study units · ${m.argomenti.length} practice questions`;
   const pratica = m.eserciziDaFare === false ? `${conta(domande, m.slug)} domande a tempo` : `${conta(dafare, m.slug)} esercizi da fare`;
   return `${m.argomenti.length} argomenti · ${conta(svolti, m.slug)} schede svolte · ${pratica}`;

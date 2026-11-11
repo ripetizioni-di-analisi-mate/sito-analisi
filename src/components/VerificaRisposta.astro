@@ -1,8 +1,8 @@
 ---
 // La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
-interface Props { id: string; tipo?: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua }
-const { id, tipo, primitiva = false, lingua } = Astro.props;
+interface Props { id: string; tipo?: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua; mostraIndizio?: boolean }
+const { id, tipo, primitiva = false, lingua, mostraIndizio = true } = Astro.props;
 const en = lingua === 'en';
 const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
 const esempio = tipo === 'numero'
@@ -19,7 +19,7 @@ const tasti = [
   { simbolo: 'ln(□)', modello: 'ln(|)', nome: en ? 'Natural logarithm' : 'Logaritmo naturale' },
 ];
 ---
-<form class="verifica zona-libera" data-id={id} data-tipo={tipo} novalidate>
+<form class="verifica zona-libera" data-id={id} data-tipo={tipo} data-senza-indizio={mostraIndizio ? undefined : ''} novalidate>
   <label for={campo}>{en ? 'Write your answer' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : ' (la costante c si può tralasciare)'}</small>}</label>
   <div class="verifica-riga">
     {tipo ? (
@@ -75,11 +75,11 @@ const tasti = [
   const T = inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Correct answer.', sbagliata: 'The result is different. You can try again or ask Pi for a hint below the exercise.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
-    rete: 'Network error: please try again.', exp: 'XP',
+    riprova: 'The result is different. Check your work and try again.', rete: 'Network error: please try again.', exp: 'XP',
   } : {
     leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Risposta corretta.', sbagliata: 'Il risultato è diverso. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
-    rete: 'Errore di rete: riprova.', exp: 'EXP',
+    riprova: 'Il risultato è diverso. Controlla i passaggi e riprova.', rete: 'Errore di rete: riprova.', exp: 'EXP',
   };
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
     if (f.dataset.pronto) continue;
@@ -145,7 +145,8 @@ const tasti = [
       if (!r || !d) { esito.textContent = T.rete; return; }
       if (d.errore) { esito.textContent = d.errore; return; }
       f.dataset.esito = d.esito;
-      esito.textContent = (T as Record<string, string>)[d.esito] || T.sbagliata;
+      const sbagliata = f.hasAttribute('data-senza-indizio') ? T.riprova : T.sbagliata;
+      esito.textContent = d.esito === 'sbagliata' ? sbagliata : (T as Record<string, string>)[d.esito] || sbagliata;
       if (d.esito === 'giusta' && d.punti) {
         const b = document.createElement('strong');
         b.textContent = ` +${d.punti} ${T.exp}`;

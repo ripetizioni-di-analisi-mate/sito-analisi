@@ -2,7 +2,12 @@
 import UsStem from '../../layouts/UsStem.astro';
 import UsPractice from '../../components/UsPractice.astro';
 import FreeCourseAccess from '../../components/FreeCourseAccess.astro';
+import CalculusPractice from '../../components/CalculusPractice.astro';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
+import { calculusPractice, calculusSlug } from '../../data/stem-usa/calculus-1-practice.mjs';
+import { calculusTimed } from '../../data/stem-usa/calculus-1-timed.mjs';
+import { calculusTimedCount } from '../../lib/stem-usa-practice';
+import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../data/livelli';
 import { T, sezioniL } from '../../i18n';
 import { courses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
 import { url } from '../../lib/url';
@@ -23,31 +28,43 @@ const questions = course.lessons.map((lesson, index) => ({
 const title = course.title;
 const t = T('en');
 const sezioni = sezioniL('en');
+const isCalculus = course.slug === calculusSlug;
 ---
 <UsStem title={title} description={course.description} course={course.slug}>
   <p class="sopratitolo">{t.programma}</p>
   <h1>{title}</h1>
   <p class="sommario">{course.description}</p>
   <FreeCourseAccess lingua="en" href="#unit-1" />
+  {isCalculus && <p class="nota">While signed in, you earn {PUNTI.esercizio} XP the first time you check a correct answer to each practice exercise.</p>}
   <ol class="griglia-argomenti">
     {course.lessons.map((lesson, index) => {
-      const slug = 'unit-' + (index + 1);
+      const number = index + 1;
+      const slug = ('unit-' + number) as keyof typeof calculusPractice;
+      const practice = isCalculus ? calculusPractice[slug] : undefined;
       const href = (sezione: string) => linkArgomentoUsa(course.slug, slug, sezione);
       return (
         <li>
           <h2><a href={href('teoria')}>{lesson.title}</a></h2>
           <p class="riassunto">{lesson.theory.split(/(?<=[.!?])\s/)[0]}</p>
           <nav aria-label={lesson.title}>
-            {sezioni.map(sezione => <a href={href(sezione.slug)}>{sezione.titolo}{sezione.slug !== 'teoria' && ' (1)'}</a>)}
+            {sezioni.map(sezione => {
+              const count = sezione.slug === 'esercizi-svolti' ? (practice?.worked.length ?? 0) + 1
+                : sezione.slug === 'esercizi' ? practice?.exercises.length ?? 1 : null;
+              return <a href={href(sezione.slug)}>{sezione.titolo}{count !== null && ' (' + count + ')'}</a>;
+            })}
+            {practice && <a href={href('domande')}>Timed questions ({calculusTimed[slug].length})</a>}
           </nav>
           <details class="sommario-pagina studio-unita-usa" id={slug} hidden>
             <summary>{t.sezioni.teoria}</summary>
             <div>
               <p>{lesson.theory}</p>
-              <h3 id={'worked-' + (index + 1)}>Worked example</h3>
-              <p>{lesson.worked}</p>
+              {!practice && <>
+                <h3 id={'worked-' + number}>Worked example</h3>
+                <p>{lesson.worked}</p>
+              </>}
             </div>
           </details>
+          {practice && <CalculusPractice topic={slug} number={number} originalExample={lesson.worked} />}
         </li>
       );
     })}
@@ -56,7 +73,9 @@ const sezioni = sezioniL('en');
       <p class="riassunto">Review questions on the topics of {title} with worked solutions.</p>
       <nav aria-label="Exam practice">
         <a href="#course-practice">Review questions ({questions.length})</a>
-        {course.slug === 'calculus-1' && <>
+        {isCalculus && <>
+          <a href={linkArgomentoUsa(course.slug, RIPASSO, 'domande')}>Timed review ({calculusTimedCount})</a>
+          <a class="solo-collegati" href={linkArgomentoUsa(course.slug, RIPASSO_OGGI, 'domande')}>Today’s review</a>
           <a href={url(courseUrl(course.slug) + '/practice-exam')}>General practice exam</a>
           <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>
         </>}
@@ -72,7 +91,7 @@ const sezioni = sezioniL('en');
 </UsStem>
 <script>
   function openLinkedUnit(hash: string) {
-    if (!/^#(?:unit|worked)-\d+$/.test(hash)) return;
+    if (!/^#(?:unit|worked|exercises)-\d+$/.test(hash)) return;
     const target = document.getElementById(hash.slice(1));
     const details = target?.closest('details');
     if (details instanceof HTMLDetailsElement) {

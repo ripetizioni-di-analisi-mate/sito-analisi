@@ -12,7 +12,8 @@ import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import StudyCountry from '../components/StudyCountry.astro';
 import { CATALOGO_PREDEFINITO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
-import { materiaUsa } from '../data/stem-usa/catalog-view';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { calculusSlug, calculusTopics } from '../lib/stem-usa-practice';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
@@ -61,8 +62,19 @@ const versoAltra = usa
   : sezione === 'home' ? `${paginaAltra}?lingua=${altra}` : paginaAltra;
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeDisponibili = await catalogoDomande(lingua);
-const domandeQui = Boolean(materia && argomento && (domandeDisponibili[materia] ?? []).includes(argomento));
-const catalogoPercorso = creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua);
+const domandeMateria = usa ? (materia === calculusSlug ? calculusTopics : []) : domandeDisponibili[materia ?? ''] ?? [];
+const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
+const calculus = materiaUsa(calculusSlug)!;
+const catalogoPercorso = {
+  ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
+  [calculusSlug]: {
+    titolo: calculus.titolo,
+    argomenti: calculusTopics,
+    domande: calculusTopics,
+    ripasso: 'Timed review',
+    base: '/us/' + calculusSlug,
+  },
+};
 const en = lingua === 'en';
 const homeCurriculum = usa ? url('/us') : link(lingua, '/');
 const hrefMateria = m ? (usa ? url('/us/' + m.slug) : link(lingua, '/' + m.slug)) : homeCurriculum;
@@ -73,7 +85,8 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') ||
 const versioneIt = qui.replace(/^\/en(?=\/|$)/, '') || '/';
 const argomentoNormale = m?.argomenti.some((a) => a.slug === argomento);
 const tappe = argomentoNormale && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '')
-  ? tappeStudio(materia, argomento, domandeQui, lingua, m?.eserciziDaFare !== false).map((p) => ({ ...p, href: url(p.href) })) : [];
+  ? tappeStudio(materia, argomento, domandeQui, lingua, m?.eserciziDaFare !== false)
+    .map((p) => ({ ...p, href: usa ? linkArgomentoUsa(materia!, argomento!, p.slug) : url(p.href) })) : [];
 const tappa = tappe.findIndex((p) => p.slug === sezione);
 // Le pagine di elenco proseguono nello stesso argomento; le singole schede
 // conservano il proprio ordine numerico.
@@ -245,7 +258,9 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
-              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={usa ? url('/us/' + (materia || 'calculus-1') + '#course-practice') : link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={usa
+                ? (domandeQui ? linkArgomentoUsa(materia!, argomento!, 'domande') : url('/us/' + (materia || calculusSlug) + '#course-practice'))
+                : link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
               {!en && (
                 <div class="pl-sfide">

@@ -1,6 +1,7 @@
 import type { Materia } from '../materie';
 import { groups } from './catalog.mjs';
 import { url } from '../../lib/url';
+import { calculusSlug } from './calculus-1-practice.mjs';
 
 export const gruppoUsa = 'University';
 
@@ -33,7 +34,10 @@ export const materieUsa = blocchiUsa.flatMap(blocco => blocco.materie.map(({ m }
 export const materiaUsa = (slug: string) => materieUsa.find(m => m.slug === slug);
 
 export function linkArgomentoUsa(materia: string, argomento: string, sezione: string) {
+  if (sezione === 'domande') return url('/us/' + materia + '/' + argomento + '/domande');
   const numero = argomento.slice('unit-'.length);
-  const ancora = sezione === 'teoria' ? argomento : sezione === 'esercizi-svolti' ? 'worked-' + numero : 'question-' + numero;
+  const ancora = sezione === 'teoria' ? argomento
+    : sezione === 'esercizi-svolti' ? 'worked-' + numero
+    : (materia === calculusSlug ? 'exercises-' : 'question-') + numero;
   return url('/us/' + materia + '#' + ancora);
 }
