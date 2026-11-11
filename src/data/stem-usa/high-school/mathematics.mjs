@@ -1,5 +1,8 @@
 import { course as C } from '../lesson.mjs';
 import { unit as U, commonCore, mathFramework, texasMath } from './material.mjs';
+import { theory } from './algebra-1/theory.mjs';
+import { worked, exercises } from './algebra-1/practice.mjs';
+import { timed } from './algebra-1/timed.mjs';
 
 const sources = [commonCore, mathFramework, texasMath];
 
@@ -67,7 +70,13 @@ export const highSchoolMath = [
       ['What can a strong positive association in a scatter plot establish by itself?', 'Larger values of one variable tend to occur with larger values of the other.',
         ['Changing the first variable necessarily causes the second to increase.', 'The slope must equal one.', 'Every residual must equal zero.'],
         'Association describes a pattern in the data. A causal claim requires a design or evidence that addresses other explanations.']),
-  ]),
+  ].map((lesson, index) => ({
+    ...lesson,
+    sections: theory[index],
+    worked: [...lesson.worked, ...worked[index]],
+    exercises: [...lesson.exercises, ...exercises[index]],
+    timed: timed[index],
+  }))),
   C('hs-geometry', 'Geometry', 'Use transformations, proofs, trigonometry and measurement to solve geometric problems.', 'Linear equations and coordinates.', sources, [
     U('Rigid motions, angles and congruence',
       'Translations, reflections and rotations preserve lengths and angle measures. Congruence follows when a rigid motion or a sequence of rigid motions maps corresponding points. SAS uses two sides and the angle between them.',

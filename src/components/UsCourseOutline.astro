@@ -4,17 +4,28 @@ import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { url } from '../lib/url';
 import { usContentCounts } from '../lib/stem-usa-banks';
 
-interface Props { slug: string; topics: { title: string }[] }
-const { slug, topics } = Astro.props;
+interface Props {
+  slug: string;
+  topics: { title: string; theory?: string }[];
+  preview?: boolean;
+}
+const { slug, topics, preview = false } = Astro.props;
 const product = usaProduct(slug)!;
 const counts = usContentCounts(slug, topics.length);
 ---
 <section data-usa-outline>
   <div class="riquadro-stato">
     <div class="stato-bloccata">
-      <div class="testo"><strong>Full course · {product.prezzo} €</strong><span>One-time payment for the lessons, worked examples and practice.</span></div>
+      {preview && <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20S10 9 20 9s16 11 16 11-6 11-16 11S4 20 4 20Z"/><circle cx="20" cy="20" r="5"/></svg>}
+      <div class="testo">
+        <strong>{preview ? 'Free preview' : `Full course · ${product.prezzo} €`}</strong>
+        <span>{preview ? 'Read sample theory, try a worked example and a practice exercise from each topic, and take a timed quiz without an account.' : 'One-time payment for the lessons, worked examples and practice.'}</span>
+      </div>
       <div class="azioni-anteprima">
-        <a class="bottone-sblocca" href={url(courseUrl(slug) + '/sblocca')}>Unlock {product.titolo} →</a>
+        {preview ? <>
+          <a class="bottone-sblocca" href="#preview-unit-1">Start with the preview →</a>
+          <a class="link-sblocca" href={url(courseUrl(slug) + '/sblocca')}>Unlock full course · {product.prezzo} €</a>
+        </> : <a class="bottone-sblocca" href={url(courseUrl(slug) + '/sblocca')}>Unlock {product.titolo} →</a>}
       </div>
     </div>
   </div>
@@ -22,6 +33,12 @@ const counts = usContentCounts(slug, topics.length);
     {topics.length} topics · {counts.worked} worked examples{counts.exercises > 0 && ` · ${counts.exercises} practice exercises`}{counts.timed > 0 && ` · ${counts.timed} timed questions`}{counts.review > 0 && ` · ${counts.review} review questions`}
   </p>
   <ol class="griglia-argomenti" aria-label="Course topics">
-    {topics.map(topic => <li><h2>{topic.title}</h2></li>)}
+    {topics.map((topic, index) => (
+      <li>
+        <h2>{preview ? <a href={'#preview-unit-' + (index + 1)}>{topic.title}</a> : topic.title}</h2>
+        {preview && <p class="riassunto">{topic.theory?.split(/(?<=[.!?])\s/)[0]}</p>}
+      </li>
+    ))}
   </ol>
+  <slot name="preview" />
 </section>
