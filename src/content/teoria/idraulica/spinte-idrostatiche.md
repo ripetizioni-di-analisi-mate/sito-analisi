@@ -30,7 +30,7 @@ S = \gamma\,h_G\,A ,
 $$
 cioè il prodotto della pressione nel baricentro per l'area; la direzione è quella della normale al piano e il verso è quello che preme sulla parete.
 
-La formula vale qualunque sia l'inclinazione della superficie, perciò una paratoia verticale, una inclinata e una orizzontale si trattano allo stesso modo: basta conoscere la profondità del baricentro. Una paratoia rettangolare larga $2\,\mathrm{m}$ e alta $3\,\mathrm{m}$, con il bordo superiore sulla superficie libera, ha $h_G = 1{,}5\,\mathrm{m}$ e $A = 6\,\mathrm{m}^2$, quindi $S = 9{,}81 \cdot 1{,}5 \cdot 6 = 88{,}3\,\mathrm{kN}$.
+La formula vale qualunque sia l'inclinazione della superficie, perciò una paratoia verticale, una inclinata e una orizzontale si trattano allo stesso modo, perché basta conoscere la profondità del baricentro. Una paratoia rettangolare larga $2\,\mathrm{m}$ e alta $3\,\mathrm{m}$, con il bordo superiore sulla superficie libera, ha $h_G = 1{,}5\,\mathrm{m}$ e $A = 6\,\mathrm{m}^2$, quindi $S = 9{,}81 \cdot 1{,}5 \cdot 6 = 88{,}3\,\mathrm{kN}$.
 
 :::dimostrazione
 L'idea è che la pressione è una funzione lineare della profondità, perciò il suo integrale sulla superficie si riduce al momento statico di $A$.
@@ -46,7 +46,7 @@ L'integrale rimasto è il momento statico di $A$ rispetto all'asse per il quale 
 ::schema{nodi="A,1.5,0.5,-;B,3.5,2.5,-" aste="A-B" acqua="0,0 6,0 6,4 0,4" solidi="-0.4,-0.7 6.4,-0.7 6.4,0 -0.4,0" pelo="0,6,4,p.i.c." pressioni="A,B,1.4,0.6,p" punti="2.5,1.5,G,baricentro" quote="2.5 1.5,2.5 4,h_G,1.4" etichette="2.1,0.82,α" riferimento=0 titolo="Superficie piana inclinata di $\alpha$ sull'orizzontale: la spinta dipende dalla profondità $h_G$ del baricentro e dall'area"}
 
 :::osservazione{#fondo-orizzontale titolo="Superficie orizzontale e paradosso idrostatico"}
-Su una superficie orizzontale posta alla profondità $h$ la pressione è la stessa in ogni punto, quindi $S = \gamma\,h\,A$ e il centro di spinta coincide con il baricentro. La spinta sul fondo dipende dalla profondità e dall'area del fondo, e non dal volume del liquido contenuto: due recipienti con lo stesso fondo e lo stesso livello ricevono la stessa spinta sul fondo anche se uno è svasato e l'altro cilindrico. Questo risultato prende il nome di **paradosso idrostatico**, e si spiega osservando che le pareti inclinate ricevono dal liquido una componente verticale che equilibra la differenza di peso.
+Su una superficie orizzontale posta alla profondità $h$ la pressione è la stessa in ogni punto, quindi $S = \gamma\,h\,A$ e il centro di spinta coincide con il baricentro. La spinta sul fondo dipende dalla profondità e dall'area del fondo, e non dal volume del liquido contenuto. Due recipienti con lo stesso fondo e lo stesso livello ricevono la stessa spinta sul fondo anche se uno è svasato e l'altro cilindrico. Questo risultato prende il nome di **paradosso idrostatico**, e si spiega osservando che le pareti inclinate ricevono dal liquido una componente verticale che equilibra la differenza di peso.
 :::
 
 ## Il centro di spinta
@@ -88,7 +88,7 @@ $$
 ::::
 
 :::attenzione
-Il centro di spinta non coincide con il baricentro della superficie, salvo il caso della superficie orizzontale. Per una paratoia rettangolare verticale alta $3\,\mathrm{m}$ con il bordo superiore sulla superficie libera il baricentro sta a $1{,}50\,\mathrm{m}$ di profondità, mentre il centro di spinta sta a $2{,}00\,\mathrm{m}$: calcolare il momento rispetto a una cerniera con il braccio del baricentro porterebbe a un risultato più piccolo di un terzo.
+Il centro di spinta non coincide con il baricentro della superficie, salvo il caso della superficie orizzontale. Per una paratoia rettangolare verticale alta $3\,\mathrm{m}$ con il bordo superiore sulla superficie libera il baricentro sta a $1{,}50\,\mathrm{m}$ di profondità, mentre il centro di spinta sta a $2{,}00\,\mathrm{m}$. Calcolare il momento rispetto a una cerniera con il braccio del baricentro porterebbe a un risultato più piccolo di un terzo.
 :::
 
 :::osservazione{#momento-rispetto-al-baricentro titolo="Momento delle pressioni rispetto al baricentro"}
@@ -144,7 +144,7 @@ M = S\,d ,
 $$
 dove $d$ è la distanza fra la cerniera e il centro di spinta misurata sul piano della paratoia. Se la forza di tenuta $F$ è applicata sul bordo opposto, a distanza $\ell$ dalla cerniera, allora $F = \dfrac{S\,d}{\ell}$. Per una paratoia rettangolare larga $2\,\mathrm{m}$ e alta $3\,\mathrm{m}$ con il bordo superiore sulla superficie libera e la cerniera su quel bordo risulta $S = 88{,}3\,\mathrm{kN}$, $d = 2{,}00\,\mathrm{m}$ e quindi $F = 58{,}9\,\mathrm{kN}$.
 
-::schema{nodi="A,0,0;B,0,3" aste="A-B" cerniere="B" acqua="0,0 5,0 5,3 0,3" solidi="-0.6,-0.6 5.4,-0.6 5.4,0 -0.6,0" pelo="0,5,3,p.i.c." pressioni="B,A,0,1.5,γ·h" punti="0,1,C,pieno" forze="0 1,-1.4,0,S" reazioni="0 0,1.4,0,F" quote="0 0,0 1,h/3,-1.9" riferimento=0 titolo="Paratoia incernierata nel bordo superiore $B$ e trattenuta dalla forza $F$ nel bordo inferiore"}
+::schema{nodi="A,0,0;B,0,3" aste="A-B" cerniere="B" acqua="0,0 5,0 5,3 0,3" solidi="-0.6,-0.6 5.4,-0.6 5.4,0 -0.6,0" pelo="0,5,3,p.i.c." pressioni="B,A,0,1.5,γ·h" punti="0,1,C,pieno" forze="0 1,-1.4,0,S" reazioni="0 0,1.4,0,F" riferimento=0 titolo="Paratoia incernierata nel bordo superiore $B$ e trattenuta dalla forza $F$ nel bordo inferiore"}
 :::
 
 :::osservazione{#spinta-netta titolo="Paratoia con liquido su entrambe le facce"}
@@ -159,10 +159,10 @@ diretta dal lato di monte verso quello di valle; la sua retta d'azione si ricava
 
 ## Spinte su superfici curve
 
-Su una superficie curva le forze elementari non sono parallele, perciò la spinta si costruisce per componenti: ciascuna si riconduce a un calcolo già noto.
+Su una superficie curva le forze elementari non sono parallele, perciò la spinta si costruisce per componenti, e ciascuna di esse si riconduce a un calcolo già noto.
 
 :::definizione{#volume-di-pressione titolo="Volume di pressione"}
-Si chiama **volume di pressione** di una superficie il volume compreso fra la superficie stessa, il piano dei carichi idrostatici e le verticali condotte per il suo contorno. Quando il liquido sta sopra la superficie il volume è occupato da liquido ed è detto reale; quando il liquido sta sotto, il volume è quello che il liquido occuperebbe, ed è detto virtuale. La distinzione serve a stabilire il verso della componente verticale della spinta: verso il basso nel primo caso, verso l'alto nel secondo.
+Si chiama **volume di pressione** di una superficie il volume compreso fra la superficie stessa, il piano dei carichi idrostatici e le verticali condotte per il suo contorno. Quando il liquido sta sopra la superficie il volume è occupato da liquido ed è detto reale; quando il liquido sta sotto, il volume è quello che il liquido occuperebbe, ed è detto virtuale. La distinzione serve a stabilire il verso della componente verticale della spinta, che è diretta verso il basso nel primo caso e verso l'alto nel secondo.
 :::
 
 ::::teorema{#spinta-superficie-curva titolo="Componenti della spinta su una superficie curva"}
@@ -190,7 +190,7 @@ Per la componente verticale si consideri il volume di pressione $V_p$, limitato 
 ::schema{nodi="P0,0,1.5,-;P1,0.051,1.112,-;P2,0.201,0.75,-;P3,0.439,0.439,-;P4,0.75,0.201,-;P5,1.112,0.051,-;P6,1.5,0,-" aste="P0-P1;P1-P2;P2-P3;P3-P4;P4-P5;P5-P6" acqua="0,4 0,1.5 0.051,1.112 0.201,0.75 0.439,0.439 0.75,0.201 1.112,0.051 1.5,0 5.5,0 5.5,4" solidi="-0.8,-0.7 5.5,-0.7 5.5,0 1.5,0 1.112,0.051 0.75,0.201 0.439,0.439 0.201,0.75 0.051,1.112 0,1.5 0,4.4 -0.8,4.4" pelo="0,5.5,4,p.i.c." tratteggi="0,4 1.5,4 1.5,0" forze="0.25 0.9,-1.3,0,S_x;0.9 0.25,0,-1.3,S_z" etichette="0.62,2.6,V_p" titolo="Raccordo cilindrico fra parete e fondo: la componente orizzontale si calcola sulla proiezione verticale, quella verticale sul volume di pressione $V_p$"}
 
 :::osservazione{#superficie-cilindrica titolo="Superfici cilindriche e paratoie a settore"}
-Se la superficie è un settore di cilindro circolare, ogni forza elementare di pressione è perpendicolare alla superficie, quindi la sua retta d'azione passa per l'asse del cilindro. Tutte le forze elementari sono allora concorrenti nell'asse, perciò anche la risultante passa per l'asse e il suo momento rispetto a esso è nullo. Su questa proprietà si fondano le **paratoie a settore**, che ruotano attorno a un perno posto sull'asse del cilindro: il momento della spinta rispetto al perno è nullo a qualunque livello dell'acqua, e la manovra richiede solo di vincere il peso e gli attriti.
+Se la superficie è un settore di cilindro circolare, ogni forza elementare di pressione è perpendicolare alla superficie, quindi la sua retta d'azione passa per l'asse del cilindro. Tutte le forze elementari sono allora concorrenti nell'asse, perciò anche la risultante passa per l'asse e il suo momento rispetto a esso è nullo. Su questa proprietà si fondano le **paratoie a settore**, che ruotano attorno a un perno posto sull'asse del cilindro. In esse il momento della spinta rispetto al perno è nullo a qualunque livello dell'acqua, perciò la manovra richiede solo di vincere il peso e gli attriti.
 
 ::schema{nodi="Q0,0,3,-;Q1,0.102,2.224,-;Q2,0.402,1.5,-;Q3,0.879,0.879,-;Q4,1.5,0.402,-;Q5,2.224,0.102,-;Q6,3,0,-" aste="Q0-Q1;Q1-Q2;Q2-Q3;Q3-Q4;Q4-Q5;Q5-Q6" acqua="-3,0 3,0 2.224,0.102 1.5,0.402 0.879,0.879 0.402,1.5 0.102,2.224 0,3 -3,3" solidi="-3.4,-0.7 4.6,-0.7 4.6,0 -3.4,0" pelo="-3,-0.3,3,p.i.c." punti="3,3,O,centro" tratteggi="0.879,0.879 3,3" forze="3 3,1.2,1.885,S" titolo="Paratoia a settore di raggio $R$: la spinta passa per il perno $O$, quindi il suo momento rispetto al perno è nullo"}
 :::
@@ -292,7 +292,7 @@ Si consideri un galleggiante in equilibrio e lo si ruoti di un angolo piccolo at
 $$
 r = \overline{CM} = \frac{I}{V_c} ,
 $$
-dove $I$ è il momento d'inerzia della figura di galleggiamento rispetto all'asse di rotazione e $V_c$ è il volume di carena. La posizione del metacentro dipende quindi dalla forma della figura di galleggiamento: una figura larga ha un momento d'inerzia grande e porta il metacentro in alto.
+dove $I$ è il momento d'inerzia della figura di galleggiamento rispetto all'asse di rotazione e $V_c$ è il volume di carena. La posizione del metacentro dipende quindi dalla forma della figura di galleggiamento, dato che una figura larga ha un momento d'inerzia grande e porta il metacentro in alto.
 :::
 
 :::osservazione{#stabilita-galleggiante titolo="Condizione di stabilità"}
