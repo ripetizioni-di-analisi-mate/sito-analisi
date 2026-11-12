@@ -1,5 +1,13 @@
 # Statistica e probabilità
 
+## Revisione dei contenuti
+
+Il corso comprende 12 capitoli, con 10 schede da due esercizi svolti, 14 tracce e 90 quiz per capitolo. I quiz 1–14 riprendono le tracce dello stesso capitolo. I Markdown sotto `src/content/{teoria,svolti,dafare,domande}/statistica` sono la fonte da modificare. Il generatore della prima edizione produceva un banco da 45 quiz per capitolo e riscrive i file, quindi va riservato alla riproduzione di quella versione in una copia separata.
+
+Per verificare i materiali attuali dalla radice del repository, eseguire `node strumenti/verifica-statistica.mjs`. Dopo la compilazione delle pagine e del banco domande, `node --test strumenti/statistica.test.mjs` verifica anteprima e accessi con dati simulati.
+
+## Prima edizione del 7 novembre 2026
+
 Corso universitario introduttivo pubblicato nel gruppo Università, slug stabile `statistica`. Dodici capitoli, dalla descrizione dei dati alla regressione lineare; metadati inglesi con indicazione dei materiali in italiano. Le lezioni individuali restano quelle già prenotabili: Statistica è esclusa in `src/data/lezioni.ts`.
 
 | Capitolo | Contenuti |

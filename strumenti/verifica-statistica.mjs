@@ -1,5 +1,5 @@
-// Verifica i nuovi contenuti con lo stesso processore Markdown usato dal sito.
-// Uso: node strumenti/verifica-semestre-filtro.mjs
+// Verifica i contenuti di Statistica con lo stesso processore Markdown usato dal sito.
+// Uso: node strumenti/verifica-statistica.mjs
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import assert from 'node:assert/strict';
@@ -41,6 +41,7 @@ async function rendi(percorso, corpo) {
   return html;
 }
 const distribuzione = [0, 0, 0, 0];
+const perCapitolo = { svolti: 10, dafare: 14, domande: 90 };
 for (const nome of teorie) {
   const slug = nome.slice(0, -3);
   const teoriaPath = join(cartellaTeoria, nome);
@@ -52,10 +53,12 @@ for (const nome of teorie) {
   const sezioni = (corpo.match(/^## /gm) ?? []).length;
   assert.ok(sezioni >= 6 && sezioni <= 10, `${teoriaPath}: da 6 a 10 sezioni`);
   totali.teoria++;
+  const posizioni = [0, 0, 0, 0];
   for (const tipo of ['svolti', 'dafare', 'domande']) {
     const cartella = join(radice, tipo, materia, slug);
-    const nomi = readdirSync(cartella).filter((f) => /^\d+\.md$/.test(f)).sort((a,b) => parseInt(a)-parseInt(b));
-    assert.ok(nomi.length >= (tipo === 'svolti' ? 10 : tipo === 'domande' ? 45 : 14), `${cartella}: contenuti incompleti`);
+    const nomi = readdirSync(cartella).filter((f) => /^\d+\.md$/.test(f)).sort((a, b) => parseInt(a) - parseInt(b));
+    const attesi = Array.from({ length: perCapitolo[tipo] }, (_, i) => `${i + 1}.md`);
+    assert.deepEqual(nomi, attesi, `${cartella}: identificativi dei contenuti`);
     for (const nomeFile of nomi) {
       const percorso = join(cartella, nomeFile);
       const { dati, corpo } = leggi(percorso);
@@ -81,14 +84,14 @@ for (const nome of teorie) {
         for (const m of corpo.matchAll(new RegExp(`/${materia}/([^/]+)/teoria#([\\w-]+)`, 'g'))) {
           if (m[1] === slug) assert.ok(ancore.has(m[2]), `${percorso}: link teoria ${m[2]} assente`);
         }
-        distribuzione[dati.corretta-1]++;
+        posizioni[dati.corretta - 1]++;
+        distribuzione[dati.corretta - 1]++;
       }
       totali[tipo]++;
     }
   }
+  assert.ok(Math.max(...posizioni) - Math.min(...posizioni) <= 3, `${slug}: distribuzione delle risposte ${posizioni}`);
 }
-assert.equal(totali.domande, 540);
-assert.equal(totali.svolti, 120);
-assert.equal(totali.dafare, 168);
+for (const [tipo, numero] of Object.entries(perCapitolo)) assert.equal(totali[tipo], teorie.length * numero);
 assert.equal(totali.eserciziSvolti, 240);
 console.log(JSON.stringify({ file, formule, ...totali, distribuzioneRisposte: distribuzione }, null, 2));
