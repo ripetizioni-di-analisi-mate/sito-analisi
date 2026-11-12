@@ -650,8 +650,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   }
   function chipStato(s) {
     const chip = { pagante: '<span class="chip pagante">Pagante</span>', manuale: '<span class="chip manuale">Attivato a mano</span>', gratis: '<span class="chip">Solo gratis</span>', attesa: '<span class="chip attesa">Da registrare</span>' }[s.tipo];
-    if (!s.premium_manuale) return chip;
-    return (s.tipo === 'pagante' ? chip + ' ' : '') + '<span class="chip manuale">Premium</span>';
+    const accesso = s.premium_manuale ? (s.tipo === 'pagante' ? chip + ' ' : '') + '<span class="chip manuale">Premium</span>' : chip;
+    return accesso + (s.gm_manuale ? ' <span class="chip" title="Può consultare le altre leghe">GM</span>' : '');
   }
   function righeStudenti() {
     const r = filtrati(), corpo = $('#corpo-studenti');
@@ -693,6 +693,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
         '<dl class="dati"><dt>Tempo di studio</dt><dd>' + oreMinuti(s.minuti) + '</dd><dt>Domande a tempo</dt><dd>' + (s.risposte ? nf.format(s.risposte) + ' risposte, ' + nf.format(s.corrette || 0) + ' corrette (' + Math.round(100 * (s.corrette || 0) / s.risposte) + '%)' : 'nessuna') + '</dd><dt>Ultimo studio</dt><dd>' + (s.ultimo_studio ? esc(s.ultimo_studio.split('-').reverse().join('/')) : '—') + '</dd></dl></section>' : '') +
       (s.registrato ? '<section><h3>Accesso Premium</h3><p class="nota">' + (s.premium_manuale ? 'Attivo dal ' + esc(dataOra(s.premium_manuale)) + ' · Senza scadenza' : 'Sblocca il materiale scritto di tutte le materie pubblicate.') + '</p>' +
         '<div class="azioni"><button type="button" class="bottone ' + (s.premium_manuale ? 'pericolo' : 'primario') + '" id="c-premium">' + (s.premium_manuale ? 'Revoca Premium' : 'Attiva Premium') + '</button></div></section>' : '') +
+      (s.registrato ? '<section><h3>Accesso GM</h3><p class="nota">Consente di consultare le altre leghe dall’account.</p>' +
+        (s.gm_manuale ? '<p class="nota">Attivo dal ' + esc(dataOra(s.gm_manuale)) + '</p>' : '') +
+        '<div class="azioni"><button type="button" class="bottone ' + (s.gm_manuale ? 'pericolo' : 'primario') + '" id="c-gm">' + (s.gm_manuale ? 'Revoca GM' : 'Attiva GM') + '</button></div></section>' : '') +
       '<section><h3>' + (s.premium_manuale ? 'Accessi individuali' : 'Materie sbloccate') + '</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">' + (s.premium_manuale ? 'Nessun accesso individuale.' : 'Nessuna materia sbloccata.') + '</p>') + '</section>' +
       (daAttivare.length ? '<section><h3>Attiva altre materie</h3><div class="scelte">' + daAttivare.map((m) => '<label class="scelta-m" style="--c:' + M[m].colore + '"><input type="checkbox" value="' + m + '"><i class="punto"></i>' + esc(breveMateria(m)) + '</label>').join('') + '</div><div class="azioni" style="margin-top:.7rem"><button type="button" class="bottone primario" id="c-attiva">Attiva le materie scelte</button></div></section>' : '') +
       '<section><h3>Dispositivi (al massimo 3)</h3>' + (s.dispositivi.length ? '<div class="elenco-m">' + s.dispositivi.map((d) => '<div class="riga-m">' + esc(d.nome) + '<span class="nota" style="margin-left:auto">usato ' + fa(d.ultimo_uso) + '</span></div>').join('') + '</div><div class="azioni" style="margin-top:.6rem"><button type="button" class="bottone pericolo" id="c-scollega">Scollega tutti</button></div>' : '<p class="nota" style="margin:0">Nessun dispositivo collegato.</p>') + '</section>' +
@@ -718,6 +721,34 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
         if (e.message !== '401') avviso('Impossibile aggiornare Premium');
       } finally {
         premium.disabled = false;
+      }
+    });
+    const gm = $('#c-gm', c);
+    if (gm) gm.addEventListener('click', async () => {
+      if (gm.disabled || !s.registrato) return;
+      const attivo = !s.gm_manuale;
+      const azione = attivo ? 'Attiva GM' : 'Revoca GM';
+      const effetto = attivo ? 'Potrà consultare le altre leghe dal proprio account.' : 'Non potrà più consultare le altre leghe dal proprio account.';
+      gm.disabled = true;
+      try {
+        if (!(await conferma(attivo ? 'Attivare GM?' : 'Revocare GM?', s.email + ' · ' + effetto, azione))) return;
+        gm.textContent = attivo ? 'Attivazione…' : 'Revoca…';
+        gm.setAttribute('aria-busy', 'true');
+        const r = await api('gm', { email: s.email, attivo });
+        if (!r.ok || Boolean(r.gm_manuale) !== attivo) { avviso(r.errore || 'Impossibile aggiornare l’accesso GM'); return; }
+        await carica();
+        const aggiornato = S.studenti.find((x) => x.email === s.email);
+        if (!aggiornato || Boolean(aggiornato.gm_manuale) !== attivo) {
+          avviso('Ricarica i dati per verificare lo stato dell’accesso GM.');
+          return;
+        }
+        avviso(attivo ? 'GM attivato' : 'GM revocato');
+      } catch (e) {
+        if (e.message !== '401') avviso('Impossibile aggiornare l’accesso GM');
+      } finally {
+        gm.disabled = false;
+        gm.textContent = azione;
+        gm.removeAttribute('aria-busy');
       }
     });
     $$('[data-revoca]', c).forEach((b) => b.addEventListener('click', async () => {
