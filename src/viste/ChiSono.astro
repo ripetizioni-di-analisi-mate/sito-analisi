@@ -161,6 +161,49 @@ const TESTI = {
     videocorsi: 'Videokurse auf Italienisch ansehen',
     ruolo: 'Nachhilfelehrer für Analysis',
   },
+  es: {
+    titolo: 'Sobre mí',
+    descrizione: 'Carmine Tornincasa, profesor particular de cálculo. Más de 1.000 estudiantes y 10.000 horas de clase.',
+    nome: 'Carmine Tornincasa',
+    laurea: 'Graduado en Ingeniería Civil por la Universidad de Campania Luigi Vanvitelli con la máxima calificación del sistema italiano, 110/110 con honores.',
+    sottotitolo: 'Profesor particular y creador del canal',
+    seguimi: 'Sígueme en',
+    punti: [
+      [['Graduado en Ingeniería Civil', true], [' y con un máster en Matemáticas', false]],
+      [['Más de 1.000 estudiantes', true], [' y ', false], ['10.000 horas de clase', true]],
+      [['Doy clases de matemáticas ', false], ['desde que iba al instituto', true]],
+      [['Clases particulares, ', false], ['cursos en grupo en línea', true], [' y ', false], ['videocursos', true]],
+    ] as [string, boolean][][],
+    studenti: 'Mis estudiantes',
+    dove: 'De dónde eran mis estudiantes en 2025',
+    province: ['Estudiantes de ', '78 provincias italianas', ', sobre todo de Roma, Milán y Nápoles.'],
+    mappa: 'Mapa de Italia con las provincias de origen. Los círculos más grandes están en Roma, Milán y Nápoles.',
+    citta: [['400+', 'de Roma'], ['250+', 'de Milán'], ['120+', 'de Nápoles'], ['90+', 'de Palermo'], ['80+', 'de Turín']],
+    missione: 'Cómo doy clase',
+    paragrafi: [
+      'En clase empezamos por el punto en el que te has atascado. En la web, la teoría sigue el mismo orden que en mis clases. Cada teorema incluye sus hipótesis y los ejemplos se agrupan por tipo de ejercicio. Después de cada cálculo explico cómo se llega al resultado.',
+      'Mi objetivo es que ganes autonomía al resolver ejercicios. En Instagram y en otros canales comparto explicaciones y ejercicios adicionales.',
+    ],
+    risultati: 'Opiniones después del examen',
+    risultato: 'Opinión en italiano de las historias destacadas de Instagram',
+    altri: 'Más opiniones en Instagram',
+    servizi: 'Clases y cursos',
+    righeServizi: [
+      ['Clases particulares', ['Adapto cada clase a tu nivel y a lo que necesitas practicar.']],
+      ['Curso en grupo en directo', [
+        'El contenido se basa en los exámenes de años anteriores que envía el grupo. Hay al menos tres clases de una hora por semana.',
+        'Las clases se graban. Para inscribirte, indica tu nombre, tus apellidos y tu número de teléfono.',
+      ]],
+      ['Videocurso', ['Grabaciones de un curso completo con vídeos y material en PDF.']],
+    ] as [string, string[]][],
+    durata: 'Duración aproximada',
+    lezioni: ['unas 30 horas para Cálculo I', 'unas 20 horas para Cálculo II'],
+    supportate: 'Universidades en las que estudian mis alumnos',
+    prenota: 'Pide una clase por WhatsApp',
+    prova: 'Prueba gratis el material de estudio',
+    videocorsi: 'Ver los videocursos en italiano',
+    ruolo: 'Profesor particular de cálculo',
+  },
 }[lingua];
 
 const RISULTATI = Array.from({ length: 14 }, (_, i) => `/chi-sono/risultati/${String(i + 1).padStart(2, '0')}.webp`);
@@ -233,7 +276,7 @@ const persona = {
         <strong>{nome}</strong>
         <div>
           {testi.map((t) => <p>{t}</p>)}
-          {i === 2 && <p><a href={lingua === 'de' ? '/videocorsi?lingua=it' : '/videocorsi'}>{TESTI.videocorsi}</a></p>}
+          {i === 2 && <p><a href={['de', 'es'].includes(lingua) ? '/videocorsi?lingua=it' : '/videocorsi'}>{TESTI.videocorsi}</a></p>}
           {i === 1 && (
             <>
               <p class="bio-durata">{TESTI.durata}</p>

@@ -1,7 +1,8 @@
 ---
 import '@fontsource/source-sans-3/latin-500-italic.css';
-import { inTedesco } from '../lib/lingue-sito';
+import { linguaCatalogo, paginaLocalizzata } from '../lib/lingue-sito';
 import { GRUPPI_DE } from '../data/materie-de';
+import { GRUPPI_ES } from '../data/materie-es';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
@@ -25,7 +26,10 @@ interface Props { lingua: Lingua; usa?: boolean }
 const { lingua, usa = false } = Astro.props;
 const t = T(lingua);
 const de = lingua === 'de';
-const MATERIE = usa ? materieUsa : materieL(lingua).filter((m) => !de || !m.attiva || inTedesco(`/${m.slug}`));
+const es = lingua === 'es';
+const localizzato = linguaCatalogo(lingua);
+const MATERIE = usa ? materieUsa : materieL(lingua).filter((m) => !localizzato || !m.attiva || paginaLocalizzata(lingua, `/${m.slug}`));
+const notaLingue = es ? 'El catálogo está en español. Cada tema indica en qué idiomas está disponible el material.' : 'Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.';
 const schedeDettagliate = lingua === 'it' || usa;
 const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, '/' + slug);
 const gruppi = (usa ? gruppiUsa : gruppiL(lingua)).map((nome, i) => ({
@@ -64,20 +68,20 @@ const icona = {
   ok: '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 ---
-<Base titolo={t.nomeSito} descrizione={usa ? 'Mathematics and science for U.S. high school and university courses, with worked examples and practice.' : de ? t.homeDescrizione : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. High School and University STEM Courses · Ripetizioni di Analisi' : de ? `${t.homeTitolo} | ${t.nomeSito}` : SEO(lingua).home, soloQuestaLingua: usa }}>
+<Base titolo={t.nomeSito} descrizione={usa ? 'Mathematics and science for U.S. high school and university courses, with worked examples and practice.' : localizzato ? t.homeDescrizione : SEO(lingua).homeDescr} lingua={lingua} usa={usa} sezione="home" ricercaPrincipale seo={{ titolo: usa ? 'U.S. High School and University STEM Courses · Ripetizioni di Analisi' : localizzato ? `${t.homeTitolo} | ${t.nomeSito}` : SEO(lingua).home, soloQuestaLingua: usa }}>
   <div class="home-intro solo-ospiti">
     {/* Il titolo resta per i motori di ricerca e gli screen reader; a schermo la home parte dal sommario (08/11, scelta di Carmine). */}
-    <h1 class="solo-lettori">{de ? t.homeTitolo : lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. High School and University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
-    <p class="sommario">{de ? t.homeSommario : lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
-    {de && <p class="nota-accesso">Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.</p>}
+    <h1 class="solo-lettori">{localizzato ? t.homeTitolo : lingua === 'it' ? 'Matematica e fisica: teoria ed esercizi svolti' : usa ? 'U.S. High School and University STEM Courses' : 'Calculus, Linear Algebra and Physics: theory and solved problems'}</h1>
+    <p class="sommario">{localizzato ? t.homeSommario : lingua === 'it' ? 'Teoria chiara, esercizi svolti e strumenti per verificare la tua preparazione. Scegli la materia e parti da ciò che ti serve.' : 'Clear theory, worked examples and tools to test your understanding. Choose a subject and start with what you need.'}</p>
+    {localizzato && <p class="nota-accesso">{notaLingue}</p>}
   </div>
   <div class="solo-ospiti">
-    <Presentazione lingua={lingua} motto={de ? 'Was du heute verstehst, hilft dir morgen weiter.' : lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
+    <Presentazione lingua={lingua} motto={es ? 'Lo que entiendes hoy te ayuda a avanzar mañana.' : de ? 'Was du heute verstehst, hilft dir morgen weiter.' : lingua === 'it' ? 'Ciò che comprendi oggi diventa la tua forza domani.' : 'What you understand today becomes your strength tomorrow.'} />
   </div>
-  <h1 class="home-personale solo-collegati solo-lettori">{de ? 'Dein Lernbereich' : lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
-  {de && <p class="solo-collegati nota-accesso"><a href="/de/account">Zu deinem Lernbereich</a>. Der Kurskatalog ist auf Deutsch. Die Sprache der Lernmaterialien steht beim jeweiligen Thema.</p>}
+  <h1 class="home-personale solo-collegati solo-lettori">{es ? 'Tu espacio de estudio' : de ? 'Dein Lernbereich' : lingua === 'it' ? 'Il tuo spazio di studio' : 'Your study space'}</h1>
+  {localizzato && <p class="solo-collegati nota-accesso"><a href={link(lingua, "/account")}>{es ? "Ir a tu espacio de estudio" : "Zu deinem Lernbereich"}</a>. {notaLingue}</p>}
   {/* Chi ha fatto l'accesso vede il suo spazio (livello, studio, materie) al posto della presentazione di Carmine. */}
-  {!de && <><SpazioStudente lingua={lingua} /><MaterialiStudente lingua={lingua} /></>}
+  {!localizzato && <><SpazioStudente lingua={lingua} /><MaterialiStudente lingua={lingua} /></>}
   {lingua === 'it' && <div class="pacchetti-studente solo-collegati"><PacchettiHome /></div>}
   <form class="cerca-home" id="ricerca-principale" action={usa ? url('/us') : link(lingua, '/cerca')} data-us-search={usa || undefined} role="search">
     <div class="con-lente"><svg class="lente" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
@@ -102,9 +106,9 @@ const icona = {
   {usa && <p class="esito-ricerca-usa" role="status" data-esito-usa hidden></p>}
   {regoleSbloccato && <style is:inline set:html={regoleSbloccato}></style>}
   {gruppi.map(({ nome: g, id }, i) => (
-    <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori].includes(g) }]} open={i === 0} id={id} data-catalogo-usa={usa || undefined}>
-      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (de ? 'In Vorbereitung' : lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
-      {!usa && ['Superiori', 'High school', GRUPPI_DE.Superiori].includes(g) && <NotaSuperiori lingua={lingua} />}
+    <details class:list={['gruppo', { 'home-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori, GRUPPI_ES.Università, GRUPPI_ES.Superiori].includes(g) }]} open={i === 0} id={id} data-catalogo-usa={usa || undefined}>
+      <summary class="nome-gruppo"><h2>{g}</h2><span class="conta-gruppo">{MATERIE.filter((m) => m.gruppo === g && m.attiva).length || (es ? 'En preparación' : de ? 'In Vorbereitung' : lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
+      {!usa && ['Superiori', 'High school', GRUPPI_DE.Superiori, GRUPPI_ES.Superiori].includes(g) && <NotaSuperiori lingua={lingua} />}
       {usa && g === highSchoolName && <p class="nota"><a href={url(highSchoolPath)}>Browse high school courses and curriculum guide</a></p>}
       {lingua === 'it' && g === 'Concorsi' && (
         <ul class="griglia-materie">
@@ -146,7 +150,7 @@ const icona = {
                   <a href={hrefMateria(m.slug)}>
                     <h3>{nome}</h3>
                     <p>{m.descrizione}</p>
-                    <span class="piede-scheda">{de ? 'Kursinhalte ansehen →' : <Stato prezzo={m.prezzo} lingua={lingua} />}</span>
+                    <span class="piede-scheda">{localizzato ? (es ? 'Ver el temario →' : 'Kursinhalte ansehen →') : <Stato prezzo={m.prezzo} lingua={lingua} />}</span>
                   </a>
                 ) : (
                   <div>
@@ -158,13 +162,13 @@ const icona = {
               </li>
             ))}
             {riga && voci.some(({ m }) => !m.attiva) && (
-              <li class="riga-preparazione">{de ? 'In Vorbereitung' : lingua === 'en' ? 'Coming soon' : 'In preparazione'}: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>
+              <li class="riga-preparazione">{es ? 'En preparación' : de ? 'In Vorbereitung' : lingua === 'en' ? 'Coming soon' : 'In preparazione'}: {voci.filter(({ m }) => !m.attiva).map(({ nome }) => nome).join(', ')}.</li>
             )}
           </ul>
         );
         return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
           <details class="sottogruppo" data-usa-sottogruppo={usa || undefined}>
-            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.filter(({ m }) => m.attiva).length || (de ? 'In Vorbereitung' : lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
+            <summary class="nome-sottogruppo"><h3>{b.sotto}</h3><span class="conta-gruppo">{b.materie.filter(({ m }) => m.attiva).length || (es ? 'En preparación' : de ? 'In Vorbereitung' : lingua === 'it' ? 'In preparazione' : 'Coming soon')}</span></summary>
             {griglia(b.materie)}
           </details>
         ) : griglia(b.materie));

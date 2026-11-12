@@ -10,7 +10,7 @@ import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
 import { tutteLeVoci } from '../lib/voci-teoria';
-import { inTedesco, nellaLingua } from '../lib/lingue-sito';
+import { lingueLocalizzate, nellaLingua, type LinguaCatalogo } from '../lib/lingue-sito';
 import { originale } from '../lib/canonici';
 
 const DATA = DATE as Record<string, { data: string }>;
@@ -94,18 +94,18 @@ export async function GET() {
   }
   pagine[casa].dIt = tuttoIt; pagine[casa].dEn = tuttoEn;
 
-  const voce = (loc: string, alt: { it: string; en?: string; de?: string }, priorita: number, data?: string) =>
+  const voce = (loc: string, alt: { it: string; en?: string; cataloghi: { l: LinguaCatalogo; href: string }[] }, priorita: number, data?: string) =>
     `<url><loc>${assoluto(loc)}</loc>${data ? `<lastmod>${data}</lastmod>` : ''}<priority>${priorita.toFixed(1)}</priority>` +
-    (alt.en || alt.de ? `<xhtml:link rel="alternate" hreflang="it" href="${assoluto(alt.it)}"/>` : '') +
+    (alt.en || alt.cataloghi.length ? `<xhtml:link rel="alternate" hreflang="it" href="${assoluto(alt.it)}"/>` : '') +
     (alt.en ? `<xhtml:link rel="alternate" hreflang="en" href="${assoluto(alt.en)}"/><xhtml:link rel="alternate" hreflang="x-default" href="${assoluto(alt.en)}"/>` : '') +
-    (alt.de ? `<xhtml:link rel="alternate" hreflang="de" href="${assoluto(alt.de)}"/>` : '') + '</url>';
+    alt.cataloghi.map(({ l, href }) => `<xhtml:link rel="alternate" hreflang="${l}" href="${assoluto(href)}"/>`).join('') + '</url>';
   const righe = pagine.flatMap((p) => {
-    const de = inTedesco(p.it) ? nellaLingua('de', p.it) : undefined;
-    const alt = { ...p, de };
+    const cataloghi = lingueLocalizzate(p.it).map((l) => ({ l, href: nellaLingua(l, p.it) }));
+    const alt = { ...p, cataloghi };
     return [
       voce(p.it, alt, p.priorita, p.dIt),
       ...(p.en ? [voce(p.en, alt, p.priorita, p.dEn ?? p.dIt)] : []),
-      ...(de ? [voce(de, alt, p.priorita)] : []),
+      ...cataloghi.map(({ href }) => voce(href, alt, p.priorita)),
     ];
   });
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${righe.join('\n')}\n</urlset>\n`;

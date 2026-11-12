@@ -1,5 +1,26 @@
 export function accountTesti(lingua) {
-  return lingua === 'de' ? {
+  return lingua === 'es' ? {
+    studio: 'Tu espacio de estudio', contenuti: 'Tus materiales', riprendi: 'Seguir estudiando', ultima: 'Lo último que estudiaste',
+    progressi: 'Progreso', impostazioni: 'Ajustes', settimana: 'Esta semana', minuti: 'Tiempo de estudio', corrette: 'Respuestas correctas', giorni: 'Días de estudio',
+    obiettivo: 'Tu próximo objetivo', raggiunti: 'Logros conseguidos', attivita: 'Actividad reciente', tutti: 'Ver todos los logros',
+    vuoto: 'Aquí encontrarás las asignaturas y los videocursos que hayas desbloqueado.', esplora: 'Explorar asignaturas',
+    dati: 'Datos de la cuenta', nome: 'Nombre', modifica: 'Cambiar el nombre', password: 'Cambiar la contraseña', dispositivi: 'Dispositivos conectados',
+    notaDispositivi: 'Desconecta un dispositivo para liberar una plaza. La sesión seguirá abierta en este dispositivo.',
+    aggiorna: 'Actualizar', scollega: 'Desconectar', questo: 'Este dispositivo', ultimo: 'Último uso', ora: 'Activo ahora',
+    conferma: '¿Quieres desconectar este dispositivo?', spiegazione: 'Tendrás que volver a iniciar sesión en el dispositivo que desconectes.',
+    annulla: 'Cancelar', attesa: 'Desconectando…', fatto: 'Dispositivo desconectado. Ya tienes una plaza libre.',
+    erroreDispositivi: 'No se pudieron cargar los dispositivos. Vuelve a intentarlo.', erroreScollega: 'No se pudo desconectar el dispositivo. Vuelve a intentarlo.',
+    scaduta: 'Tu sesión ha caducado. Vuelve a iniciar sesión para gestionar tus dispositivos.',
+    accedi: 'Volver a iniciar sesión', posti: 'de', carica: 'Cargando dispositivos…', nessuno: 'No hay dispositivos que mostrar.', inviti: 'Invitar a un amigo',
+    erroreProgressi: 'No se ha podido cargar tu progreso.', riprova: 'Volver a intentar',
+    vuotoTraguardi: 'Consigue tu primer logro con una respuesta correcta.', vuotoSessioni: 'Aquí verás tu actividad de estudio reciente.',
+    completati: 'Has completado todos los objetivos semanales.', videoApri: 'Abrir los vídeos del curso',
+    videoNota: 'Solicita acceso en Google Drive con el correo de tu cuenta. Carmine confirmará la solicitud en cuanto pueda.',
+    videoAttesa: 'El enlace a los vídeos aparecerá aquí. Si necesitas ayuda, escribe a Carmine.',
+    videoErrore: 'No se pudieron cargar los videocursos. Actualiza la página para volver a intentarlo.',
+    limite: 'Nivel máximo', punti: 'XP', totale: 'XP en total', livello: 'Nivel', alLivello: 'para el nivel',
+    completato: 'Completado', nessunObiettivo: 'Aquí aparecerán tus próximos objetivos semanales.',
+  } : lingua === 'de' ? {
     studio: 'Dein Lernbereich', contenuti: 'Deine Lernmaterialien', riprendi: 'Weiterlernen', ultima: 'Zuletzt gelernt',
     progressi: 'Lernfortschritt', impostazioni: 'Einstellungen', settimana: 'Diese Woche', minuti: 'Lernzeit', corrette: 'Richtige Antworten', giorni: 'Lerntage',
     obiettivo: 'Dein nächstes Ziel', raggiunti: 'Erreichte Meilensteine', attivita: 'Letzte Aktivitäten', tutti: 'Alle Meilensteine anzeigen',

@@ -9,7 +9,7 @@ import { accountTesti } from '../lib/account-testi.mjs';
 import '../styles/account.css';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
-const en = lingua === 'en', de = lingua === 'de';
+const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es';
 const t = T(lingua), js = testiJs(lingua), s = accountTesti(lingua), pref = prefisso(lingua);
 const materie = [
   ...materieL(lingua).filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.titolo, href: `${pref}/${m.slug}` })),
@@ -23,7 +23,7 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
     <p id="chi" class="account-caricamento" role="status">{t.caricamento}</p>
     <div id="pannello" hidden>
       <div class="schede-account" role="tablist" aria-label={t.ilTuoAccount}>
-        <button type="button" id="scheda-studio" role="tab" aria-controls="studio-account" aria-selected="true" data-area="studio">{de ? 'Lernen' : en ? 'Study' : 'Studio'}</button>
+        <button type="button" id="scheda-studio" role="tab" aria-controls="studio-account" aria-selected="true" data-area="studio">{es ? 'Estudio' : de ? 'Lernen' : en ? 'Study' : 'Studio'}</button>
         <button type="button" id="scheda-progressi" role="tab" aria-controls="progressi-account" aria-selected="false" data-area="progressi">{s.progressi}</button>
         <button type="button" id="scheda-impostazioni" role="tab" aria-controls="impostazioni-account" aria-selected="false" data-area="impostazioni">{s.impostazioni}</button>
       </div>
@@ -37,7 +37,7 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
       <section id="progressi-account" role="tabpanel" aria-labelledby="scheda-progressi" hidden>
         <p class="account-nota" id="progressi-caricamento" role="status">{t.caricamento}</p><button class="bottone-secondario" type="button" id="progressi-riprova" hidden>{s.riprova}</button>
         <div id="percorso" hidden>
-          <div class="account-livello"><div class="stemma-account" role="img" aria-label={s.livello}></div><div class="account-livello-dati"><h2 class="fascia-livello"></h2><p id="numero-livello"></p><div class="barra-exp" id="barra-livello" role="progressbar" aria-label={de ? 'Fortschritt bis zur nächsten Stufe' : en ? 'Level progress' : 'Avanzamento del livello'} aria-valuemin="0" aria-valuemax="100"><span></span></div><p class="numeri-livello"><span class="exp-totale"></span><span class="exp-mancano"></span></p></div></div>
+          <div class="account-livello"><div class="stemma-account" role="img" aria-label={s.livello}></div><div class="account-livello-dati"><h2 class="fascia-livello"></h2><p id="numero-livello"></p><div class="barra-exp" id="barra-livello" role="progressbar" aria-label={es ? 'Progreso hasta el siguiente nivel' : de ? 'Fortschritt bis zur nächsten Stufe' : en ? 'Level progress' : 'Avanzamento del livello'} aria-valuemin="0" aria-valuemax="100"><span></span></div><p class="numeri-livello"><span class="exp-totale"></span><span class="exp-mancano"></span></p></div></div>
           <h2 class="account-titolo-sezione">{s.settimana}</h2>
           <div class="account-statistiche"><div><strong id="sett-minuti"></strong><span>{s.minuti}</span></div><div><strong id="sett-corrette"></strong><span>{s.corrette}</span></div><div><strong id="sett-giorni"></strong><span>{s.giorni}</span></div></div>
           <div id="obiettivo-account"><h2 class="account-titolo-sezione">{s.obiettivo}</h2><div class="account-obiettivo-testo"><span id="obiettivo-testo"></span><span id="obiettivo-numeri"></span></div><div class="barra-exp" id="barra-obiettivo" role="progressbar" aria-label={s.obiettivo} aria-valuemin="0" aria-valuemax="100"><span></span></div></div>
@@ -45,7 +45,7 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
           <h2 class="account-titolo-sezione">{s.raggiunti}</h2><ul class="account-traguardi" id="traguardi-raggiunti"></ul><p class="account-nota" id="traguardi-vuoti" hidden>{s.vuotoTraguardi}</p>
           <details class="account-dettagli" id="altri-traguardi" hidden><summary>{s.tutti}</summary><ul class="account-traguardi" id="elenco-altri-traguardi"></ul></details>
           <details class="account-dettagli"><summary>{s.attivita}</summary><ul class="account-sessioni" id="sessioni-account"></ul></details>
-          <p class="account-nota account-guida"><a href={de ? '/en/livelli-e-punti?lingua=en' : `${pref}/livelli-e-punti`}>{de ? 'So funktionieren Stufen und Punkte (Englisch)' : en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a></p>
+          <p class="account-nota account-guida"><a href={de || es ? '/en/livelli-e-punti?lingua=en' : `${pref}/livelli-e-punti`}>{es ? 'Cómo funcionan los niveles y los puntos (en inglés)' : de ? 'So funktionieren Stufen und Punkte (Englisch)' : en ? 'How levels and points work' : 'Come funzionano livelli e punti'}</a></p>
         </div>
       </section>
       <section id="impostazioni-account" role="tabpanel" aria-labelledby="scheda-impostazioni" hidden>
@@ -55,9 +55,9 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
             <p class="esito-modulo" id="esito-nome" role="status"></p>
           </form></details></section>
         <section class="account-gruppo" aria-labelledby="email-account-titolo">
-          <h2 class="account-titolo-sezione" id="email-account-titolo">{de ? 'E-Mail-Einstellungen' : en ? 'Email preferences' : 'Preferenze email'}</h2>
+          <h2 class="account-titolo-sezione" id="email-account-titolo">{es ? 'Preferencias de correo' : de ? 'E-Mail-Einstellungen' : en ? 'Email preferences' : 'Preferenze email'}</h2>
           <form class="modulo" id="form-preferenze-email">
-            <label class="account-email-spunta"><input name="studio" type="checkbox" disabled /> {de ? 'Lernerinnerungen per E-Mail (Englisch)' : en ? 'Reminders to pick up where I left off' : 'Promemoria per riprendere da dove ero'}</label>
+            <label class="account-email-spunta"><input name="studio" type="checkbox" disabled /> {es ? 'Recordatorios de estudio por correo (en inglés)' : de ? 'Lernerinnerungen per E-Mail (Englisch)' : en ? 'Reminders to pick up where I left off' : 'Promemoria per riprendere da dove ero'}</label>
             <ConsensoEmail lingua={lingua} scegliMateria />
             <button class="bottone-secondario" type="submit" disabled>{t.salva}</button>
             <p class="esito-modulo" id="esito-email" role="status"></p>

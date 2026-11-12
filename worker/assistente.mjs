@@ -114,18 +114,18 @@ Materie in preparazione (non ancora acquistabili): ${prossime.map((m) => m.titol
 export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi = {}) {
   const json = (d, s = 200) => new Response(JSON.stringify(d), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
   const b = await req.json().catch(() => ({}));
-  const en = b.lingua === 'en', de = b.lingua === 'de';
-  const msg = (it, eng, deu) => de ? deu : en ? eng : it;
+  const en = b.lingua === 'en', de = b.lingua === 'de', es = b.lingua === 'es';
+  const msg = (it, eng, deu, esp) => es ? esp : de ? deu : en ? eng : it;
 
-  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.', 'Pi ist derzeit nicht verfügbar.') }, 503);
+  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.', 'Pi ist derzeit nicht verfügbar.', 'Pi no está disponible en este momento.') }, 503);
   const materia = MATERIE.find((m) => m.slug === b.materia) || null;
 
   const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-10)
     .map((m) => ({ role: m.ruolo === 'assistente' ? 'assistant' : 'user', content: taglia(m.testo, 2000).trim() }))
     .filter((m) => m.content);
-  if (!messaggi.length || messaggi[messaggi.length - 1].role !== 'user') return json({ errore: msg('Messaggio vuoto.', 'Enter a message.', 'Gib eine Nachricht ein.') }, 400);
+  if (!messaggi.length || messaggi[messaggi.length - 1].role !== 'user') return json({ errore: msg('Messaggio vuoto.', 'Enter a message.', 'Gib eine Nachricht ein.', 'Escribe un mensaje.') }, 400);
   const foto = typeof b.immagine === 'string' && /^data:image\/(jpeg|png|webp);base64,/.test(b.immagine) && b.immagine.length <= MAX_FOTO ? b.immagine : null;
-  if (b.immagine && !foto) return json({ errore: msg('La foto non è valida o è troppo grande.', 'The photo is not valid or is too large.', 'Die Bilddatei ist ungültig oder zu groß.') }, 400);
+  if (b.immagine && !foto) return json({ errore: msg('La foto non è valida o è troppo grande.', 'The photo is not valid or is too large.', 'Die Bilddatei ist ungültig oder zu groß.', 'La imagen no es válida o es demasiado grande.') }, 400);
 
   // Chi scrive: lo studente con l'account, oppure un ospite riconosciuto da un'impronta non reversibile (indirizzo e browser).
   let chi = io?.email;
@@ -145,10 +145,10 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
     await evento(`limite-${conto.motivo === 'sito' ? 'sito' : io ? 'studente' : 'ospite'}`);
     return json({
       errore: conto.motivo === 'sito'
-        ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.')
+        ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.', 'Pi ha alcanzado el límite diario. Vuelve a intentarlo mañana.')
         : io
-          ? msg('Hai raggiunto il limite di messaggi di oggi. Domani Pi sarà di nuovo disponibile.', "You have reached today's message limit. The assistant will be available again tomorrow.", 'Du hast dein Tageslimit erreicht. Morgen kannst du Pi wieder nutzen.')
-          : msg(`Hai usato i messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, 'You have used today’s guest messages. Log in or create a free account to get more.', 'Du hast heute alle Nachrichten für Gäste verbraucht. Melde dich an oder erstelle ein kostenloses Konto, um mehr Nachrichten zu senden.'),
+          ? msg('Hai raggiunto il limite di messaggi di oggi. Domani Pi sarà di nuovo disponibile.', "You have reached today's message limit. The assistant will be available again tomorrow.", 'Du hast dein Tageslimit erreicht. Morgen kannst du Pi wieder nutzen.', 'Has alcanzado tu límite diario de mensajes. Mañana podrás volver a usar Pi.')
+          : msg(`Hai usato i messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, 'You have used today’s guest messages. Log in or create a free account to get more.', 'Du hast heute alle Nachrichten für Gäste verbraucht. Melde dich an oder erstelle ein kostenloses Konto, um mehr Nachrichten zu senden.', 'Has agotado los mensajes de hoy como visitante. Inicia sesión o crea una cuenta gratuita para enviar más.'),
       codice: io ? 'limite' : 'ospite', rimasti: 0,
     }, 429);
   }
@@ -174,7 +174,7 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const sito = sulSito
     ? infoSito(aPagamento, prezzi, env)
     : 'Per domande su materie, prezzi, acquisto o accesso: pagina https://ripetizionidianalisi.com/prezzi, oppure Carmine su WhatsApp dal pulsante verde.';
-  const sistema = `${ISTRUZIONI}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
+  const sistema = `${ISTRUZIONI}${es ? '\n- La lingua dell’interfaccia è lo spagnolo. Rispondi in spagnolo salvo richiesta esplicita di un’altra lingua.' : ''}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
   const rimasti = Math.max(0, maxStudente - conto.n);
   const rimborsa = () => aDO(env, '/assistente-rimborso', { giorno, email: chi }).catch(() => {});
   // Token stimati dai caratteri (circa 4 caratteri per token), più un forfait per la foto.
@@ -228,10 +228,10 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   await evento(quota ? 'errore-quota' : foto ? 'errore-foto' : 'errore-modello');
   return json({
     errore: quota
-      ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.')
+      ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.', 'Pi ha alcanzado el límite diario. Vuelve a intentarlo mañana.')
       : foto
-        ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.', 'Pi konnte das Foto nicht lesen. Lade ein schärferes Bild hoch oder gib die Aufgabe als Text ein.')
-        : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.', 'Pi hat nicht geantwortet. Versuch es gleich noch einmal.'),
+        ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.', 'Pi konnte das Foto nicht lesen. Lade ein schärferes Bild hoch oder gib die Aufgabe als Text ein.', 'Pi no ha podido leer la foto. Prueba con una más nítida o escribe el ejercicio.')
+        : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.', 'Pi hat nicht geantwortet. Versuch es gleich noch einmal.', 'Pi no ha respondido. Vuelve a intentarlo en unos instantes.'),
   }, 502);
 }
 

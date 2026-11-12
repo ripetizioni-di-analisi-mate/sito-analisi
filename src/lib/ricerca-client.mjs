@@ -17,7 +17,7 @@ export function materieVoce(voce, video = {}, collegamenti = {}) {
   const collegate = collegamenti[`${voce.h}\n${voce.t}`] || collegamenti[voce.h];
   if (collegate) return collegate;
   const parti = voce.h.split(/[?#]/, 1)[0].split('/').filter(Boolean);
-  if (parti[0] === 'en' || parti[0] === 'de') parti.shift();
+  if (['en', 'de', 'es'].includes(parti[0])) parti.shift();
   return parti[0] === 'videocorsi' ? video[parti[1]] || [] : [parti[0] || ''];
 }
 

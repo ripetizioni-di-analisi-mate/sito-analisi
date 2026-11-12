@@ -90,9 +90,15 @@ export function stessaOrigineDispositivi(req) {
 
 export async function gestisciDispositivi(req, env, p, h) {
   const url = new URL(req.url);
-  const en = url.searchParams.get('l') === 'en' || h.leggiCookie(req, 'lingua') === 'en';
+  const scelta = url.searchParams.get('l'), cookie = h.leggiCookie(req, 'lingua');
+  const es = (scelta || cookie) === 'es';
+  const en = scelta === 'en' || cookie === 'en';
   const intestazioni = { 'cache-control': 'no-store, private' };
-  const messaggi = en ? {
+  const messaggi = es ? {
+    scaduto: 'Vuelve a iniciar sesión para gestionar tus dispositivos.', corrente: 'Estás usando este dispositivo. Usa Cerrar sesión para desconectarlo.',
+    aggiorna: 'La lista de dispositivos ha cambiado. Actualízala y elige un dispositivo.', account: 'La cuenta conectada ha cambiado. Vuelve a cargar la página.',
+    id: 'Elige un dispositivo.', origine: 'Vuelve a cargar la página e inténtalo de nuevo.',
+  } : en ? {
     scaduto: 'Sign in again to manage your devices.', corrente: 'This is the device you are using. Use Log out to disconnect it.',
     aggiorna: 'The device list has changed. Refresh it and choose a device again.', account: 'The signed-in account has changed. Reload the page.', id: 'Choose a device.', origine: 'Reload the page and try again.',
   } : {
@@ -143,7 +149,7 @@ export async function gestisciDispositivi(req, env, p, h) {
   if (!id) return errore('scaduto');
   let r;
   try { r = await h.aDO(env, '/disp-sostituisci', { gestione: id, id: body.id }); }
-  catch { return h.json({ errore: en ? 'The device could not be replaced. Please try again.' : 'Il dispositivo non è stato sostituito. Riprova.', riprova: true }, 503, intestazioni); }
+  catch { return h.json({ errore: es ? 'No se pudo desconectar el dispositivo. Vuelve a intentarlo.' : en ? 'The device could not be replaced. Please try again.' : 'Il dispositivo non è stato sostituito. Riprova.', riprova: true }, 503, intestazioni); }
   if (!r.ok) return errore(r.codice);
   const headers = new Headers({ 'content-type': 'application/json', ...intestazioni });
   headers.append('set-cookie', h.cookieDispositivo(r.dispositivo));

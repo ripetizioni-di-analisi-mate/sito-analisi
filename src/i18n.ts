@@ -4,9 +4,9 @@
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
-import { ARGOMENTI_DE, MATERIE_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from './data/materie-de';
 import { TESTI_DE } from './data/testi-de';
-import { nellaLingua, senzaLingua, type Lingua } from './lib/lingue-sito';
+import { TESTI_ES } from './data/testi-es';
+import { CATALOGHI_LOCALIZZATI, linguaCatalogo, nellaLingua, senzaLingua, type Lingua } from './lib/lingue-sito';
 export { LINGUE, type Lingua } from './lib/lingue-sito';
 import { FACOLTA } from './data/facolta';
 import { url } from './lib/url';
@@ -19,16 +19,17 @@ export const altraLingua = (pathname: string, verso: Lingua): string => link(ver
 export function materieL(l: Lingua): Materia[] {
   if (l === 'it') return MATERIE;
   return MATERIE.map((m) => {
-    if (l === 'de') {
-      const de = MATERIE_DE[m.slug];
-      if (!de) return m;
-      const [titolo, descrizione] = de;
+    if (linguaCatalogo(l)) {
+      const testi = CATALOGHI_LOCALIZZATI[l];
+      const corso = testi.materie[m.slug];
+      if (!corso) return m;
+      const [titolo, descrizione] = corso;
       return {
         ...m, titolo, breve: titolo, descrizione,
-        gruppo: GRUPPI_DE[m.gruppo] ?? m.gruppo,
-        sottogruppo: m.sottogruppo ? SOTTOGRUPPI_DE[m.sottogruppo] : undefined,
+        gruppo: testi.gruppi[m.gruppo] ?? m.gruppo,
+        sottogruppo: m.sottogruppo ? testi.sottogruppi[m.sottogruppo] : undefined,
         argomenti: m.argomenti.map((a) => {
-          const titolo = ARGOMENTI_DE[`${m.slug}/${a.slug}`] ?? ARGOMENTI_DE[a.slug] ?? a.titolo;
+          const titolo = testi.argomenti[`${m.slug}/${a.slug}`] ?? testi.argomenti[a.slug] ?? a.titolo;
           return { ...a, titolo, breve: titolo };
         }),
       };
@@ -50,12 +51,14 @@ export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.grupp
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
-  if (['Università', 'University', GRUPPI_DE['Università']].includes(g)) {
+  const titoliFacolta: Partial<Record<string, 'titolo' | 'titoloEn' | 'titoloDe' | 'titoloEs'>> = { Università: 'titolo', University: 'titoloEn', [CATALOGHI_LOCALIZZATI.de.gruppi.Università]: 'titoloDe', [CATALOGHI_LOCALIZZATI.es.gruppi.Università]: 'titoloEs' } as const;
+  const titoloFacolta = titoliFacolta[g];
+  if (titoloFacolta) {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
     const assegnate = new Set<string>(FACOLTA.flatMap((f) => [...f.materie]));
     return [
       ...FACOLTA.map((f) => ({
-        sotto: g === 'University' ? f.titoloEn : g === GRUPPI_DE['Università'] ? f.titoloDe : f.titolo,
+        sotto: f[titoloFacolta],
         materie: f.materie.flatMap((slug) => {
           const m = perSlug.get(slug);
           return m ? [{ m, nome: m.titolo }] : [];
@@ -91,7 +94,7 @@ export async function voceL(l: Lingua, c: Collezione, id: string) {
 export async function vociL(l: Lingua, c: Collezione) {
   const it = await getCollection(c);
   if (l === 'it') return it as any[];
-  if (l === 'de') return [];
+  if (linguaCatalogo(l)) return [];
   const en = new Map((await getCollection(TRADOTTE[c])).map((v: any) => [v.id, v]));
   return it.map((v: any) => en.get(v.id) ?? v);
 }
@@ -287,7 +290,7 @@ export const TESTI = {
   },
 };
 export type Testi = typeof TESTI.it;
-export const T = (l: Lingua): Testi => l === 'de' ? TESTI_DE : TESTI[l];
+export const T = (l: Lingua): Testi => l === 'es' ? TESTI_ES : l === 'de' ? TESTI_DE : TESTI[l];
 // I soli testi che servono agli script nel browser (le funzioni non passano: si usano i segnaposto).
 export function testiJs(l: Lingua) {
   const j = T(l).js as Record<string, unknown>;

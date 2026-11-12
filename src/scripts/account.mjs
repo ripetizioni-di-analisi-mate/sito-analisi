@@ -7,7 +7,7 @@ if (root) avviaAccount(root);
 
 export function avviaAccount(root) {
   const { lingua, pref, materie, js } = JSON.parse(root.querySelector('#configurazione-account').textContent);
-  const en = lingua === 'en', de = lingua === 'de', s = accountTesti(lingua), locale = de ? 'de-DE' : en ? 'en-GB' : 'it-IT';
+  const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es', s = accountTesti(lingua), locale = es ? 'es-ES' : de ? 'de-DE' : en ? 'en-GB' : 'it-IT';
   const q = (id) => root.querySelector('#' + id);
   const catalogo = leggiCatalogoStudio();
   const numero = (n) => Number(n || 0).toLocaleString(locale);
@@ -98,7 +98,7 @@ export function avviaAccount(root) {
           try { const u = new URL(v.drive); if (u.protocol === 'https:') drive = u.href; } catch { /* link non ancora disponibile */ }
           const li = rigaContenuto(v.titolo, drive, true);
           if (!root.querySelector('#videocorsi')) li.id = 'videocorsi';
-          li.querySelector('.contenuto-account-nome').append(elemento('small', 'contenuto-account-nota', de ? `${v.lezioni} Unterrichtsstunden mit Video und PDF (Italienisch)` : en ? `${v.lezioni} lessons with video and PDF` : `${v.lezioni} lezioni con video e PDF`));
+          li.querySelector('.contenuto-account-nome').append(elemento('small', 'contenuto-account-nota', es ? `${v.lezioni} clases con vídeo y PDF (en italiano)` : de ? `${v.lezioni} Unterrichtsstunden mit Video und PDF (Italienisch)` : en ? `${v.lezioni} lessons with video and PDF` : `${v.lezioni} lezioni con video e PDF`));
           if (drive) { const a = li.querySelector('a'); a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-label', `${s.videoApri}: ${v.titolo}`); }
           const nota = elemento('p', 'contenuto-video-dettagli', drive ? `${s.videoNota} (${io.email})` : s.videoAttesa);
           li.append(nota); lista.append(li);
@@ -117,7 +117,7 @@ export function avviaAccount(root) {
     const st = d.stato, rango = rangoDi(st.livello);
     const percentuale = Math.max(0, Math.min(100, Number(st.perc) || 0));
     const stemma = root.querySelector('.stemma-account');
-    stemma.innerHTML = stemmaSVG(rango, { perc: percentuale, id: 'a', nastro: true, livello: st.livello, etichetta: de ? 'STUFE' : en ? 'LV.' : 'LIV.' });
+    stemma.innerHTML = stemmaSVG(rango, { perc: percentuale, id: 'a', nastro: true, livello: st.livello, etichetta: es ? 'NIVEL' : de ? 'STUFE' : en ? 'LV.' : 'LIV.' });
     stemma.setAttribute('aria-label', `${s.livello} ${st.livello}, ${nomeRango(st.livello, lingua)}`);
     root.querySelector('.account-livello').setAttribute('style', stileRango(rango));
     root.querySelector('.fascia-livello').textContent = `${nomeRango(st.livello, lingua)} · ${st.fascia}`;
@@ -164,7 +164,7 @@ export function avviaAccount(root) {
     if (ultima) {
       const dest = destinazione(ultima);
       q('ultima-materia').textContent = catalogo[ultima.materia].titolo;
-      q('ultimo-argomento').textContent = de ? dest.titolo : `${dest.titolo}${ultima.risposte > 0 && dest.domande ? (en ? ' · Timed questions' : ' · Domande a tempo') : (en ? ' · Theory' : ' · Teoria')}`;
+      q('ultimo-argomento').textContent = de || es ? dest.titolo : `${dest.titolo}${ultima.risposte > 0 && dest.domande ? (en ? ' · Timed questions' : ' · Domande a tempo') : (en ? ' · Theory' : ' · Teoria')}`;
       q('riprendi-link').href = dest.href;
       q('riprendi-account').hidden = false;
     }
@@ -282,7 +282,7 @@ export function avviaAccount(root) {
     campiEmail.studio.checked = d.studio;
     campiEmail.offerte.checked = d.offerte || d.inAttesa;
     campiEmail.materiaEmail.value = d.materia || '';
-    const messaggio = d.inAttesa ? (de ? 'Bestätige deine Auswahl über den Link in deinem Postfach.' : en ? 'Check your inbox to confirm your choice.' : 'Controlla la posta per confermare la tua scelta.') : '';
+    const messaggio = d.inAttesa ? (es ? 'Confirma tu elección con el enlace que te enviamos por correo.' : de ? 'Bestätige deine Auswahl über den Link in deinem Postfach.' : en ? 'Check your inbox to confirm your choice.' : 'Controlla la posta per confermare la tua scelta.') : '';
     esito(esitoEmail, d.errore || messaggio, Boolean(d.errore));
   }
   async function caricaPreferenzeEmail() {
@@ -295,7 +295,7 @@ export function avviaAccount(root) {
       preferenzePronte = true;
       campi.forEach((el) => { el.disabled = false; });
     } catch {
-      esito(esitoEmail, de ? 'Die E-Mail-Einstellungen konnten nicht geladen werden.' : en ? 'Email preferences could not be loaded.' : 'Impossibile caricare le preferenze email.', true);
+      esito(esitoEmail, es ? 'No se pudieron cargar las preferencias de correo.' : de ? 'Die E-Mail-Einstellungen konnten nicht geladen werden.' : en ? 'Email preferences could not be loaded.' : 'Impossibile caricare le preferenze email.', true);
     } finally { caricamentoPreferenze = null; }
   }
   preferenzeEmail.addEventListener('submit', async (e) => {
@@ -308,7 +308,7 @@ export function avviaAccount(root) {
         studio: campiEmail.studio.checked, offerte: campiEmail.offerte.checked, materia: campiEmail.materiaEmail.value, lingua,
       });
       mostraPreferenzeEmail(d);
-      if (!d.inAttesa && !d.errore) esito(esitoEmail, de ? 'Einstellungen gespeichert.' : en ? 'Preferences saved.' : 'Preferenze salvate.');
+      if (!d.inAttesa && !d.errore) esito(esitoEmail, es ? 'Preferencias guardadas.' : de ? 'Einstellungen gespeichert.' : en ? 'Preferences saved.' : 'Preferenze salvate.');
     } catch (error) { esito(esitoEmail, error.message, true); }
     finally { pulsante.disabled = false; }
   });
@@ -328,7 +328,7 @@ export function avviaAccount(root) {
     if (cambio.elements.nuova.value.length < 8) { esito(q('esito-cambio'), js.nuovaCorta, true); return; }
     const b = cambio.querySelector('button[type="submit"]'); b.disabled = true;
     try { await api('/api/password', { attuale: cambio.elements.attuale.value, nuova: cambio.elements.nuova.value }); cambio.reset(); esito(q('esito-cambio'), js.passwordAggiornata); }
-    catch (error) { esito(q('esito-cambio'), en || de ? js.passwordNonAggiornata : error.message, true); }
+    catch (error) { esito(q('esito-cambio'), en || de || es ? js.passwordNonAggiornata : error.message, true); }
     finally { b.disabled = false; }
   });
   q('esci').addEventListener('click', async () => {
@@ -345,7 +345,7 @@ export function avviaAccount(root) {
     try { io = await api('/api/io'); }
     catch (error) {
       if (error.status === 401) { location.href = `${pref}/accedi?dopo=${encodeURIComponent(pref + '/account' + location.hash)}`; return; }
-      esito(q('chi'), de ? 'Dein Konto konnte gerade nicht geladen werden. Lade die Seite neu.' : en ? 'Your account cannot be loaded right now. Please refresh the page.' : 'In questo momento l’account non si carica. Ricarica la pagina per riprovare.', true); return;
+      esito(q('chi'), es ? 'No se ha podido cargar tu cuenta. Actualiza la página para volver a intentarlo.' : de ? 'Dein Konto konnte gerade nicht geladen werden. Lade die Seite neu.' : en ? 'Your account cannot be loaded right now. Please refresh the page.' : 'In questo momento l’account non si carica. Ricarica la pagina per riprovare.', true); return;
     }
     if (!io?.email) { esito(q('chi'), js.erroreGenerico, true); return; }
     q('nome-account').textContent = io.nome || '—'; q('email-account').textContent = io.email;

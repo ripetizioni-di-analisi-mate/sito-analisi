@@ -1,0 +1,12 @@
+---
+import MateriaLocalizzata from '../../viste/MateriaLocalizzata.astro';
+import { materieL } from '../../i18n';
+import { paginaLocalizzata } from '../../lib/lingue-sito';
+
+export function getStaticPaths() {
+  return materieL('es').filter((m) => paginaLocalizzata('es', `/${m.slug}`))
+    .map((m) => ({ params: { materia: m.slug }, props: { m } }));
+}
+const { m } = Astro.props;
+---
+<MateriaLocalizzata lingua="es" m={m} />

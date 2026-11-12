@@ -7,7 +7,11 @@ import { link, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const en = lingua === 'en';
-const s = lingua === 'de' ? {
+const s = lingua === 'es' ? {
+  titolo: 'Cookies de medición',
+  testo: 'Si das tu consentimiento, usamos cookies de Google para saber qué páginas y anuncios llevan a los estudiantes a este sitio. No vendemos tus datos.',
+  accetta: 'Aceptar', rifiuta: 'Solo las necesarias', privacy: 'Política de privacidad (en italiano)',
+} : lingua === 'de' ? {
   titolo: 'Cookies für die Reichweitenmessung',
   testo: 'Wenn du zustimmst, messen Google-Cookies, über welche Seiten und Anzeigen Lernende zu uns finden. Wir verkaufen keine Daten.',
   accetta: 'Akzeptieren', rifiuta: 'Nur notwendige', privacy: 'Datenschutzerklärung (Italienisch)',
@@ -23,7 +27,7 @@ const s = lingua === 'de' ? {
 ---
 <aside class="consenso" role="dialog" aria-labelledby="consenso-titolo" hidden>
   <p class="consenso-titolo" id="consenso-titolo">{s.titolo}</p>
-  <p class="consenso-testo">{s.testo} <a href={lingua === 'de' ? '/privacy?lingua=it' : link(lingua, '/privacy')}>{s.privacy}</a></p>
+  <p class="consenso-testo">{s.testo} <a href={['de', 'es'].includes(lingua) ? '/privacy?lingua=it' : link(lingua, '/privacy')}>{s.privacy}</a></p>
   <div class="consenso-tasti">
     <button type="button" class="consenso-si" data-consenso="si">{s.accetta}</button>
     <button type="button" class="consenso-no" data-consenso="no">{s.rifiuta}</button>
