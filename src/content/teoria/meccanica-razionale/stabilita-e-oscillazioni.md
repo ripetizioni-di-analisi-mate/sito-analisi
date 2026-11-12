@@ -42,7 +42,7 @@ $$
 $$
 cioè se e solo se $q_0$ è un punto stazionario di $U$, ed equivalentemente di $V = -U$.
 
-Il teorema trasforma la ricerca dell'equilibrio nel calcolo di un gradiente: si scrive il potenziale in funzione delle coordinate lagrangiane e si risolve il sistema $\operatorname{grad} U = 0$. Per l'asta incernierata del blocco precedente, $U'(\vartheta) = -\dfrac{m g \ell}{2}\sin\vartheta$ si annulla per $\vartheta = 0$ e $\vartheta = \pi$, che sono le due configurazioni verticali.
+Il teorema trasforma la ricerca dell'equilibrio nel calcolo di un gradiente, perché basta scrivere il potenziale in funzione delle coordinate lagrangiane e risolvere il sistema $\operatorname{grad} U = 0$. Per l'asta omogenea incernierata in un estremo risulta $U'(\vartheta) = -\dfrac{m g \ell}{2}\sin\vartheta$, che si annulla per $\vartheta = 0$ e $\vartheta = \pi$, quindi le configurazioni di equilibrio sono le due verticali.
 
 :::dimostrazione
 Le equazioni di Lagrange del sistema sono

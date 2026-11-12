@@ -245,7 +245,7 @@ B\,\dot{q} + (A - C)\,r\,p = M_\eta \\[4pt]
 C\,\dot{r} + (B - A)\,p\,q = M_\zeta
 \end{cases}
 $$
-Il sistema contiene le tre incognite $p$, $q$, $r$ e non contiene la reazione del vincolo in $O$, che ha momento nullo rispetto a $O$: le tre equazioni determinano quindi la velocità angolare, e da questa si risale agli angoli di Eulero e alla reazione in $O$. I termini quadratici $(C-B)qr$ e gli altri due sono dovuti al fatto che la terna di riferimento ruota: su un asse fisso, dove $p = q = 0$, essi spariscono e resta la sola $C\,\dot{r} = M_\zeta$.
+Il sistema contiene le tre incognite $p$, $q$, $r$ e non contiene la reazione del vincolo in $O$, che ha momento nullo rispetto a $O$, perciò le tre equazioni determinano la velocità angolare, e da questa si risale agli angoli di Eulero e alla reazione in $O$. I termini quadratici $(C-B)qr$ e gli altri due sono dovuti al fatto che la terna di riferimento ruota. Su un asse fisso, dove $p = q = 0$, essi si annullano e resta la sola $C\,\dot{r} = M_\zeta$.
 
 ::struttura{nodi="O,0,0" poligoni="0.6,0.5 3.3,1.1 3.9,2.9 1.4,3.3" frecce="0,0,3.1,2.1,ζ;0,0,2.6,-0.75,ξ;0,0,0.3,2.9,η" punti="2.4,1.95,G,baricentro" reazioni="0 0,1.1,-1.05,Φ_O" vincoli="O,cerniera" riferimento=0 titolo="Corpo rigido con il punto fisso $O$ e terna solidale principale d'inerzia $\xi$, $\eta$, $\zeta$: tre gradi di libertà e reazione $\vec{\Phi}_O$ di momento nullo rispetto a $O$"}
 
@@ -271,11 +271,11 @@ A\,p^2 + B\,q^2 + C\,r^2 = 2T ,
 \qquad
 A^2 p^2 + B^2 q^2 + C^2 r^2 = |\vec{K}_O|^2 .
 $$
-La prima uguaglianza segue dal teorema dell'energia cinetica, perché il vincolo in $O$ è ideale e fisso e le forze attive hanno momento nullo; la seconda segue dalla seconda equazione cardinale. Le due relazioni determinano $|\vec{\omega}|$ a meno di un intervallo: fissati $T$ e $|\vec{K}_O|$, il vettore $\vec{\omega}$ si muove nella terna solidale sull'intersezione di un ellissoide e di una sfera, perciò $|\vec{\omega}|$ oscilla fra un valore minimo e un valore massimo calcolabili dai due integrali primi. Un satellite in volo libero e una moneta lanciata in aria si muovono alla Poinsot, perché il peso ha momento nullo rispetto al baricentro.
+La prima uguaglianza segue dal teorema dell'energia cinetica, perché il vincolo in $O$ è ideale e fisso e le forze attive hanno momento nullo; la seconda segue dalla seconda equazione cardinale. Le due relazioni limitano $|\vec{\omega}|$ a un intervallo. Fissati $T$ e $|\vec{K}_O|$, il vettore $\vec{\omega}$ si muove nella terna solidale sull'intersezione di un ellissoide e di una sfera, perciò $|\vec{\omega}|$ oscilla fra un valore minimo e un valore massimo calcolabili dai due integrali primi. Un satellite in volo libero e una moneta lanciata in aria si muovono alla Poinsot, perché il peso ha momento nullo rispetto al baricentro.
 :::
 
 ::::teorema{#rotazioni-permanenti titolo="Rotazioni permanenti e loro stabilità"}
-Sia un moto alla Poinsot di un corpo con momenti principali $A$, $B$, $C$ distinti. Il moto è una **rotazione permanente**, cioè $\vec{\omega}$ è costante in modulo, direzione e verso, se e solo se $\vec{\omega}$ è diretta lungo un asse principale d'inerzia in $O$. Inoltre le rotazioni permanenti attorno all'asse di momento d'inerzia massimo e attorno a quello di momento minimo sono stabili, nel senso che una piccola perturbazione iniziale di $\vec{\omega}$ resta piccola; la rotazione attorno all'asse di momento intermedio è instabile. Il risultato spiega perché un corpo lanciato in rotazione si assesta sugli assi estremi e perché i satelliti si stabilizzano facendoli ruotare attorno all'asse di massimo momento d'inerzia.
+Sia un moto alla Poinsot di un corpo con momenti principali $A$, $B$, $C$ distinti. Il moto è una **rotazione permanente**, cioè $\vec{\omega}$ è costante in modulo, direzione e verso, se e solo se $\vec{\omega}$ è diretta lungo un asse principale d'inerzia in $O$. Inoltre le rotazioni permanenti attorno all'asse di momento d'inerzia massimo e attorno a quello di momento minimo sono stabili, nel senso che una piccola perturbazione iniziale di $\vec{\omega}$ resta piccola; la rotazione attorno all'asse di momento intermedio è instabile. Il risultato spiega perché i satelliti si stabilizzano facendoli ruotare attorno all'asse di massimo momento d'inerzia, e perché un corpo lanciato quasi attorno all'asse intermedio cambia orientamento dopo pochi giri.
 
 ::struttura{poligoni="-2,-1 2,-1 2,1 -2,1" nodi="G,0,0,-" frecce="0,0,2.9,0,ξ;0,0,0,1.9,η" punti="0,0,G,baricentro" etichette="0.42,-0.3,ζ uscente" quote="-2 -1,2 -1,2ℓ,0.75;2 -1,2 1,ℓ,0.75" titolo="Lamina rettangolare omogenea di lati $2\ell$ e $\ell$: i momenti principali in $G$ valgono $A = \dfrac{m\,\ell^2}{12}$, $B = \dfrac{m\,\ell^2}{3}$ e $C = \dfrac{5\,m\,\ell^2}{12}$, quindi $\eta$ è l'asse intermedio"}
 
@@ -322,9 +322,9 @@ C\,\Omega\,r - A\,\Omega^2 \cos\vartheta = M\,g\,d .
 $$
 Con l'asse di figura orizzontale, cioè $\vartheta = \dfrac{\pi}{2}$, la condizione si riduce a $C\,\Omega\,\dot{\varphi} = M g d$, quindi
 $$
-\Omega = \frac{M\,g\,d}{C\,\dot{\varphi}} :
+\Omega = \frac{M\,g\,d}{C\,\dot{\varphi}} .
 $$
-la velocità di precessione è inversamente proporzionale alla velocità di rotazione propria, perciò una trottola veloce precede lentamente. Per un disco omogeneo di massa $m$ e raggio $R$ si ha $C = \dfrac{m\,R^2}{2}$ e la relazione diventa $\Omega = \dfrac{2\,g\,d}{R^2\,\dot{\varphi}}$.
+La velocità di precessione è inversamente proporzionale alla velocità di rotazione propria, perciò una trottola veloce precede lentamente. Per un disco omogeneo di massa $m$ e raggio $R$ si ha $C = \dfrac{m\,R^2}{2}$ e la relazione diventa $\Omega = \dfrac{2\,g\,d}{R^2\,\dot{\varphi}}$.
 
 ::struttura{nodi="O,0,0" frecce="0,0,0,3.4,asse di precessione;0,0,1.95,2.4,ζ" tratteggi="0,0 2.6,3.2" cerchi="1.5,1.85,0.62" punti="1.5,1.85,G,baricentro" forze="1.5 1.85,0,-1,Mg" coppie="0 2.75,1,Ω;1.95 2.4,1,φ̇" etichette="0.42,2.05,ϑ" riferimento=0 titolo="Precessione regolare: l'asse di figura $\zeta$ forma l'angolo costante $\vartheta$ con l'asse di precessione e ruota attorno a esso con velocità angolare $\Omega$"}
 
@@ -356,7 +356,7 @@ cioè la relazione dell'enunciato. La seconda equazione di Eulero dà la stessa 
 ::::
 
 :::osservazione{#effetto-giroscopico titolo="Effetto giroscopico"}
-Un giroscopio che ruota velocemente attorno all'asse di figura ha $\vec{K}_O \simeq C\,r\,\hat{e}_\zeta$, cioè momento angolare quasi parallelo all'asse. Per la seconda equazione cardinale, un momento esterno $\vec{M}_O$ perpendicolare all'asse non fa cadere l'asse nella direzione del momento, ma lo fa ruotare attorno alla direzione di $\vec{M}_O \wedge \hat{e}_\zeta$ con velocità $\Omega = \dfrac{|\vec{M}_O|}{C\,r}$, tanto più piccola quanto più la rotazione propria è veloce. Simmetricamente, se un vincolo impone la precessione $\Omega$ a un asse di figura perpendicolare all'asse di precessione, i supporti devono esercitare una coppia di momento
+Un giroscopio che ruota velocemente attorno all'asse di figura ha $\vec{K}_O \simeq C\,r\,\hat{e}_\zeta$, cioè momento angolare quasi parallelo all'asse. Per la seconda equazione cardinale, un momento esterno $\vec{M}_O$ perpendicolare all'asse fa ruotare l'asse attorno alla direzione di $\hat{e}_\zeta \wedge \vec{M}_O$ con velocità $\Omega = \dfrac{|\vec{M}_O|}{C\,r}$, tanto più piccola quanto più la rotazione propria è veloce. La direzione in cui l'asse si sposta è quella del momento applicato, come mostra la relazione $\dfrac{d\hat{e}_\zeta}{dt} = \dfrac{\vec{M}_O}{C\,r}$. Simmetricamente, se un vincolo impone la precessione $\Omega$ a un asse di figura perpendicolare all'asse di precessione, i supporti devono esercitare una coppia di momento
 $$
 |\vec{M}_O| = C\,r\,\Omega ,
 $$
