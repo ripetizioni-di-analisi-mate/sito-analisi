@@ -7,6 +7,7 @@ import remarkDirective from 'remark-directive';
 import remarkBlocchi from '../plugins/remark-blocchi.mjs';
 import remarkTracce from '../plugins/remark-tracce.mjs';
 import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
+import { PROVE_INGRESSO } from '../data/tolc.mjs';
 
 // Le domande non sono rese da Astro (vedi content.config.ts): le rende qui lo stesso processore Markdown
 // del sito, con gli stessi plugin, una volta sola per file.
@@ -22,7 +23,7 @@ function htmlDi(chiave: string, body: string): Promise<string> {
   return rese.get(chiave)!;
 }
 
-export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
+export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string; brano?: string }
 type Lingua = 'it' | 'en';
 
 const senzaSoluzione = (html: string) => html.replace(/<details[^>]*blocco-soluzione[\s\S]*?<\/details>/g, '').trim();
@@ -43,7 +44,7 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
     const ul = [...prima.matchAll(/<ul>([\s\S]*?)<\/ul>/g)].pop();
     if (!ul) throw new Error(`Domanda ${lingua}/${e.id}: manca l'elenco delle risposte`);
     const scelte = [...ul[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((x) => x[1].trim());
-    const numeroScelte = ['tolc-i', 'tolc-s'].includes(m) ? 5 : 4;
+    const numeroScelte = Object.hasOwn(PROVE_INGRESSO, m) ? PROVE_INGRESSO[m].risposte ?? 5 : 4;
     if (scelte.length !== numeroScelte) throw new Error(`Domanda ${lingua}/${e.id}: attese ${numeroScelte} risposte, trovate ${scelte.length}`);
     if (e.data.corretta > numeroScelte) throw new Error(`Domanda ${lingua}/${e.id}: risposta corretta fuori intervallo`);
     let testo = prima.slice(0, ul.index).trim();
@@ -52,7 +53,10 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
       if (!t) throw new Error(`Domanda ${lingua}/${e.id}: nessuna traccia con lo stesso numero`);
       testo = senzaSoluzione(t.rendered?.html ?? '');
     }
-    (out[argomento] ??= []).push({ id: `${argomento}/${n}`, n: Number(n), testo, scelte, corretta: e.data.corretta, spiegazione });
+    (out[argomento] ??= []).push({
+      id: `${argomento}/${n}`, n: Number(n), testo, scelte, corretta: e.data.corretta, spiegazione,
+      ...(e.data.brano ? { brano: e.data.brano } : {}),
+    });
   }
   for (const k of Object.keys(out)) out[k].sort((a, b) => a.n - b.n);
   return out;

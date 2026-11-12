@@ -12,7 +12,7 @@ import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
-import { TOLC } from '../data/tolc.mjs';
+import { PROVE_INGRESSO } from '../data/tolc.mjs';
 import NotaTolcI from '../components/NotaTolcI.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
@@ -25,9 +25,11 @@ const quizPerEsercitarsi = m.eserciziDaFare === false;
 const SEZIONI = sezioniL(lingua).filter((s) => !quizPerEsercitarsi || s.slug !== 'esercizi');
 // Sopratitolo per tipo di materia: l'esame per l'università, il programma per le superiori, il concorso per i concorsi.
 const gruppo = materiaIt(materia).gruppo;
-const confTolc = TOLC[materia];
-const sopra = confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
-const titoloPagina = confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
+const confProva = Object.hasOwn(PROVE_INGRESSO, materia) ? PROVE_INGRESSO[materia] : undefined;
+const sopra = confProva
+  ? confProva.esercitazione ? (lingua === 'en' ? 'Additional learning requirements' : 'Recupero OFA') : (lingua === 'en' ? 'Entrance test' : 'Test d’ingresso')
+  : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
+const titoloPagina = confProva ? (lingua === 'en' ? `${m.titolo} — theory, practice and simulations` : `${m.titolo} — teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
   : SEO(lingua).materia(m.titolo);
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
@@ -36,7 +38,8 @@ const riassunti = Object.fromEntries((await vociL(lingua, 'teoria')).map((v) => 
 const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 // Domande a tempo: quante per argomento.
-const linguaDomande = quizPerEsercitarsi ? 'it' : lingua;
+const linguaDomande = quizPerEsercitarsi || confProva ? 'it' : lingua;
+const linkDomande = (percorso: string) => link(linguaDomande, percorso) + (linguaDomande !== lingua ? '?lingua=it' : '');
 const domande = await getCollection(linguaDomande === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
@@ -83,7 +86,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
   {materia === 'analisi-3' && lingua === 'it' && <NotaAnalisi3 />}
-  {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
+  {confProva && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
@@ -131,7 +134,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
         conteggio: s.slug === 'esercizi-svolti' ? ns : s.slug === 'esercizi' ? nd : undefined,
       })) : [];
       if (pronto && nq) sezioni.push({
-        href: link(linguaDomande, '/' + materia + '/' + a.slug + '/domande'),
+        href: linkDomande(`/${materia}/${a.slug}/domande`),
         titolo: en ? (linguaDomande === 'it' ? 'Timed questions in Italian' : 'Timed questions') : 'Domande a tempo',
         conteggio: nq,
       });
@@ -140,12 +143,12 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     })}
     {domandeMateria > 0 && (
       <li>
-        <h2><a href={link(linguaDomande, `/${materia}/${RIPASSO}/domande`)}>{nomeRipasso}</a></h2>
-        <p class="riassunto">{quizPerEsercitarsi ? notaQuiz : confTolc ? (en ? `Practice across all topics and a section-timed ${confTolc.nome} simulation with separate English results.` : `Quiz su tutti gli argomenti e simulazione ${confTolc.nome} con tempi per sezione, correzione finale e risultato di inglese separato.`) : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
+        <h2><a href={linkDomande(`/${materia}/${RIPASSO}/domande`)}>{nomeRipasso}</a></h2>
+        <p class="riassunto">{quizPerEsercitarsi ? notaQuiz : confProva ? (en ? 'Review all topics and take a timed practice test with explanations. Materials are in Italian.' : 'Quiz su tutti gli argomenti e prova a tempo con punteggio, correzione e spiegazioni finali.') : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}</p>
         <nav aria-label={nomeRipasso}>
-          <a href={link(linguaDomande, `/${materia}/${RIPASSO}/domande`)}>{en ? (linguaDomande === 'it' ? 'Review questions in Italian' : 'Review questions') : 'Domande di ripasso'} ({domandeMateria})</a>
-          {!quizPerEsercitarsi && <a href={link(lingua, `/${materia}/simulazione`)}>{nomeCompito}</a>}
-          <a class="solo-collegati" href={link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`)}>{en ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
+          <a href={linkDomande(`/${materia}/${RIPASSO}/domande`)}>{en ? (linguaDomande === 'it' ? 'Review questions in Italian' : 'Review questions') : 'Domande di ripasso'} ({domandeMateria})</a>
+          {!quizPerEsercitarsi && <a href={confProva ? linkDomande(`/${materia}/simulazione`) : link(lingua, `/${materia}/simulazione`)}>{nomeCompito}</a>}
+          <a class="solo-collegati" href={linkDomande(`/${materia}/${RIPASSO_OGGI}/domande`)}>{en ? 'Today’s review' : 'Il tuo ripasso di oggi'}<span class="conta-ripasso" data-materia={materia}></span></a>
         </nav>
       </li>
     )}

@@ -20,17 +20,34 @@ export function mescolaTolc(lista, casuale = Math.random) {
 // Gli argomenti si alternano: la sezione Scienze comprende fisica e chimica.
 export function creaProvaTolc(argomenti, inglese = true, casuale = Math.random, sezioni = TOLC_I_SEZIONI) {
   return sezioni.filter((s) => inglese || s.slug !== 'inglese').map((s) => {
+    if (s.brani) {
+      const gruppi = new Map();
+      for (const a of s.argomenti) {
+        for (const q of argomenti[a] || []) {
+          if (!q.brano) continue;
+          const chiave = `${a}/${q.brano}`;
+          if (!gruppi.has(chiave)) gruppi.set(chiave, []);
+          gruppi.get(chiave).push(q);
+        }
+      }
+      const completi = [...gruppi.values()].filter(g => g.length === s.numero / s.brani);
+      if (completi.length < s.brani) throw new Error(`Brani insufficienti per ${s.titolo}`);
+      const domande = mescolaTolc(completi, casuale).slice(0, s.brani).flat();
+      return { slug: s.slug, titolo: s.titolo, minuti: s.minuti, domande };
+    }
     const pile = s.argomenti.map((a) => mescolaTolc(argomenti[a] || [], casuale));
-    const domande = [];
-    while (domande.length < s.numero && pile.some((p) => p.length)) {
-      for (const p of pile) if (p.length && domande.length < s.numero) domande.push(p.shift());
+    const domande = s.quote ? pile.flatMap((p, i) => p.slice(0, s.quote[i])) : [];
+    if (!s.quote) {
+      while (domande.length < s.numero && pile.some((p) => p.length)) {
+        for (const p of pile) if (p.length && domande.length < s.numero) domande.push(p.shift());
+      }
     }
     if (domande.length !== s.numero) throw new Error(`Quesiti insufficienti per ${s.titolo}`);
     return { slug: s.slug, titolo: s.titolo, minuti: s.minuti, domande: mescolaTolc(domande, casuale) };
   });
 }
 
-export function correggiSezioneTolc(domande, risposte, inglese = false) {
+export function correggiSezioneTolc(domande, risposte, senzaPenalita = false) {
   let corrette = 0, errate = 0, omesse = 0;
   for (let i = 0; i < domande.length; i++) {
     const r = risposte[i];
@@ -38,7 +55,7 @@ export function correggiSezioneTolc(domande, risposte, inglese = false) {
     else if (r === domande[i].corretta - 1) corrette++;
     else errate++;
   }
-  return { corrette, errate, omesse, punti: corrette - (inglese ? 0 : errate * .25), massimo: domande.length };
+  return { corrette, errate, omesse, punti: corrette - (senzaPenalita ? 0 : errate * .25), massimo: domande.length };
 }
 
 // Dieci quesiti distinti sempre uguali nell'anteprima, anche cambiando argomento.

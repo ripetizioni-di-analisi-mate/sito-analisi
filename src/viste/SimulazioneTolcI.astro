@@ -1,28 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
-import { TOLC } from '../data/tolc.mjs';
+import { PROVE_INGRESSO } from '../data/tolc.mjs';
 import { materia as materiaIt } from '../data/materie';
 interface Props { materia?: string }
 const { materia = 'tolc-i' } = Astro.props;
-const conf = TOLC[materia];
+const conf = PROVE_INGRESSO[materia];
 const prezzo = materiaIt(materia).prezzo;
+const ingleseFacoltativo = !conf.ingleseObbligatorio && conf.sezioni.find(s => s.slug === 'inglese');
+const titolo = conf.esercitazione ? 'Prova di allenamento OFA' : `Simulazione ${conf.nome}`;
 ---
-<Base titolo={`Simulazione ${conf.nome}`} descrizione={`Allenamento al ${conf.nome} per ${conf.area}: tempi separati per sezione, cinque alternative, correzione e spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
-  <div class="tolc-simulazione" data-materia={materia} data-massimo={conf.quesiti}>
-    <p class="sopratitolo">Preparati a {conf.area}</p>
-    <h1>Simulazione {conf.nome}</h1>
-    <p class="sommario">Concentrati su una sezione alla volta. Alla fine trovi punteggio, risposte spiegate e argomenti da ripassare.</p>
+<Base titolo={titolo} descrizione={`Allenamento a tempo per ${conf.area}, con correzione e spiegazioni finali.`} materia={materia} sezione="simulazione" lingua="it" seo={{ noindex: true, senzaInglese: true }}>
+  <div class="tolc-simulazione" data-materia={materia}>
+    <h1>{titolo}</h1>
+    <p class="sommario">Alla consegna trovi il punteggio, le risposte spiegate e i link agli argomenti da ripassare.</p>
     <section id="tolc-inizio">
-      <div class="tolc-specifiche"><strong>{conf.quesiti} quesiti · {conf.minuti} minuti</strong><span>+1 corretta · −0,25 errata · 0 omessa</span></div>
-      <table><thead><tr><th>Sezione</th><th>Quesiti</th><th>Tempo</th></tr></thead><tbody>{conf.sezioni.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.minuti} min</td></tr>)}</tbody></table>
-      <p>Puoi rivedere le risposte nella sezione aperta. Quando passi alla successiva, perdi il tempo rimasto e la sezione precedente si chiude. Alla scadenza il passaggio è automatico.</p>
+      <div class="tolc-specifiche"><strong>{conf.quesiti} quesiti · {conf.minuti} minuti</strong><span>{conf.esercitazione ? '+1 corretta · 0 errata o omessa' : '+1 corretta · −0,25 errata · 0 omessa'}</span></div>
+      {!conf.esercitazione && <table>
+        <thead><tr><th>Sezione</th><th>Quesiti</th><th>Tempo</th>{conf.massimo && <th>Peso</th>}</tr></thead>
+        <tbody>{conf.sezioni.map((s) => <tr><td>{s.titolo}</td><td>{s.numero}</td><td>{s.minuti} min</td>{conf.massimo && <td>{s.peso === 1 / 3 ? '⅓' : s.peso.toLocaleString('it-IT')}</td>}</tr>)}</tbody>
+      </table>}
+      {conf.esercitazione
+        ? <p>Puoi tornare a qualsiasi quesito fino alla consegna. Allo scadere del tempo la prova viene consegnata.</p>
+        : <p>Puoi rivedere le risposte nella sezione aperta. Quando passi alla successiva, perdi il tempo rimasto e la sezione precedente si chiude. Alla scadenza il passaggio è automatico.</p>}
       <form id="tolc-form">
-        <label class="tolc-inglese"><input type="checkbox" name="inglese" checked /> Aggiungi inglese · 30 quesiti in 15 minuti</label>
-        <p class="tolc-dettaglio">L’inglese ha un risultato separato su 30, senza penalità per gli errori. Totale con inglese: {conf.quesiti + 30} quesiti in {conf.minuti + 15} minuti.</p>
-        <button class="bottone-primario" type="submit">Inizia la simulazione</button>
+        {ingleseFacoltativo && <>
+          <label class="tolc-inglese"><input type="checkbox" name="inglese" checked /> Aggiungi inglese · {ingleseFacoltativo.numero} quesiti in {ingleseFacoltativo.minuti} minuti</label>
+          <p class="tolc-dettaglio">L’inglese ha un risultato separato senza penalità. Con questa sezione la prova dura {conf.minuti + ingleseFacoltativo.minuti} minuti e contiene {conf.quesiti + ingleseFacoltativo.numero} quesiti.</p>
+        </>}
+        <button class="bottone-primario" type="submit">{conf.esercitazione ? 'Inizia la prova' : 'Inizia la simulazione'}</button>
       </form>
-      <p class="tolc-dettaglio">La simulazione completa è inclusa nell’<a href={`/${materia}/sblocca`}>accesso {conf.nome} · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href={`/${materia}/prove-d-esame/domande`}>dieci quiz dimostrativi</a>.</p>
-      <p class="tolc-dettaglio">Quesiti originali di allenamento, non test ufficiali CISIA. <a href={conf.fonte} target="_blank" rel="noopener noreferrer">Struttura di riferimento ↗</a>. Le soglie di ammissione dipendono dal bando del tuo ateneo.</p>
+      {prezzo && <p class="tolc-dettaglio">La simulazione completa è inclusa nell’<a href={`/${materia}/sblocca`}>accesso {conf.nome} · {prezzo} €</a>. Puoi iniziare gratuitamente dai <a href={`/${materia}/prove-d-esame/domande`}>dieci quiz dimostrativi</a>.</p>}
+      <p class="tolc-dettaglio">{conf.nota ?? 'Preparazione indipendente con quesiti di allenamento. Le soglie di ammissione dipendono dal bando del tuo ateneo.'} <a href={conf.fonte} target="_blank" rel="noopener noreferrer">{conf.testoFonte ?? 'Struttura di riferimento'} ↗</a>.</p>
     </section>
     <p id="tolc-messaggio" role="status" hidden></p>
     <section id="tolc-prova" hidden aria-label="Prova in corso">
@@ -111,13 +119,17 @@ const prezzo = materiaIt(materia).prezzo;
     clearInterval(timer);controllaTempo();if(stato && !stato.conclusa)timer=window.setInterval(controllaTempo,1000);
   }
   $('form').addEventListener('submit',async(e)=>{
-    e.preventDefault();const b=$('form').querySelector('button')!;b.disabled=true;b.textContent='Preparazione dei quesiti…';avvisa('');
+    e.preventDefault();
+    const b = $('form').querySelector('button')!;
+    if (stato || invio || b.disabled) return;
+    const titolo=b.textContent;b.disabled=true;b.textContent='Preparazione dei quesiti…';avvisa('');
     try{
-      const r=await fetch(`/api/${materia}/inizia`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({inglese:($('form') as HTMLFormElement).querySelector<HTMLInputElement>('[name=inglese]')!.checked})});
+      const inglese = $('form').querySelector<HTMLInputElement>('[name=inglese]')?.checked;
+      const r=await fetch(`/api/${materia}/inizia`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({inglese})});
       const d=await r.json();if(!r.ok)throw new Error(d.errore||'Impossibile iniziare la simulazione.');
       stato={...d,risposte:d.sezioni.map((s:S)=>s.domande.map(()=>null)),sezione:0,domanda:0,fine:Date.now()+d.sezioni[0].minuti*60000,creata:Date.now(),conclusa:false};salva();attiva();
     }catch(e){avvisa(e instanceof Error?e.message:'Le domande non si sono caricate. Riprova.');}
-    finally{b.disabled=false;b.textContent='Inizia la simulazione';}
+    finally{b.disabled=false;b.textContent=titolo;}
   });
   $('prev').addEventListener('click',()=>{if(!controllaTempo())return;if(stato && stato.domanda>0){stato.domanda--;salva();mostraDomanda();}});
   $('next').addEventListener('click',()=>{if(!controllaTempo())return;if(stato && stato.domanda<stato.sezioni[stato.sezione].domande.length-1){stato.domanda++;salva();mostraDomanda();}});
@@ -130,11 +142,18 @@ const prezzo = materiaIt(materia).prezzo;
     stato.sezione++;stato.domanda=0;stato.fine=Date.now()+stato.sezioni[stato.sezione].minuti*60000;salva();mostraDomanda();$('sezione').setAttribute('tabindex','-1');$('sezione').focus();
   });
   async function correggi(){
-    if(!stato||invio)return;invio=true;clearInterval(timer);$('prova').hidden=true;$('riprova').hidden=true;avvisa('Correzione della simulazione…');
+    if(!stato||invio)return;
+    invio=true;
+    clearInterval(timer);
+    $('inizio').hidden=true;
+    $('prova').hidden=true;
+    $('riprova').hidden=true;
+    $('riparti').hidden=true;
+    avvisa('Correzione della simulazione…');
     try{
       const r=await fetch(`/api/${materia}/correggi`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:stato.token,risposte:stato.risposte})});const d=await r.json();
       if(!r.ok)throw new Error(d.errore||'La correzione non è arrivata.');stato.esito=d;salva();risultato(d);
-    }catch(e){avvisa((e instanceof Error?e.message:'Connessione non disponibile.')+' Le risposte sono conservate in questo browser.');$('riprova').hidden=false;}
+    }catch(e){avvisa((e instanceof Error?e.message:'Connessione non disponibile.')+' Le risposte sono conservate in questo browser.');$('riprova').hidden=false;$('riparti').hidden=false;}
     finally{invio=false;}
   }
   function risultato(d:Esito){
@@ -153,6 +172,7 @@ const prezzo = materiaIt(materia).prezzo;
   }
   $('riprova').addEventListener('click',()=>void correggi());
   $('riparti').querySelector('button')!.addEventListener('click',()=>{
+    if (invio) return;
     if(stato&&!stato.conclusa){avvisa('Completa la sessione in corso prima di avviare una nuova simulazione.');return;}
     clearInterval(timer);stato=null;try{localStorage.removeItem(KEY);}catch{}location.reload();
   });
