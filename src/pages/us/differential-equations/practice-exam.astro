@@ -1,0 +1,12 @@
+---
+import UsStem from '../../../layouts/UsStem.astro';
+import UsPractice from '../../../components/UsPractice.astro';
+import { differentialEquationsExam } from '../../../data/stem-usa/differential-equations/exam.mjs';
+import { url } from '../../../lib/url';
+---
+<UsStem title="Differential Equations Practice Exam" course="differential-equations" section="General practice exam" description="An original ordinary differential equations practice exam with solutions and a timer.">
+  <p class="sopratitolo">Exam practice</p>
+  <h1>Differential Equations practice exam</h1>
+  <p class="sommario">Work through 18 questions in 60 minutes on first-order models, linear equations, Laplace transforms, planar systems and series solutions.</p>
+  <UsPractice questions={differentialEquationsExam.map(question => ({ ...question, href: url(question.href) }))} minutes={60} renderMath />
+</UsStem>
