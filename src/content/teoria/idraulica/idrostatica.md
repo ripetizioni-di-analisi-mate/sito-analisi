@@ -118,7 +118,7 @@ Il teorema garantisce che la pressione è una funzione scalare del punto, $p = p
 ::schema{poligoni="0,0 2,0 0,1.5" forze="0 0.75,0.75,0,p_x;1 0,0,0.75,p_z;1 0.75,-0.55,-0.73,p_n" quote="0 0,2 0,dx,0.45;0 0,0 1.5,dz,-1.25" etichette="1.55,1.1,dl" riferimento=0 titolo="Cuneo elementare di spessore $b$: le spinte sulle tre facce"}
 
 :::dimostrazione
-L'idea è di scrivere l'equilibrio di un cuneo elementare di fluido e di far tendere a zero le sue dimensioni: il peso è un infinitesimo di ordine superiore rispetto alle forze di pressione, quindi resta solo l'uguaglianza fra le pressioni.
+L'idea è di scrivere l'equilibrio di un cuneo elementare di fluido e di far tendere a zero le sue dimensioni. Il peso è un infinitesimo di ordine superiore rispetto alle forze di pressione, quindi nel limite resta l'uguaglianza fra le tre pressioni.
 
 Sia un cuneo di fluido di spessore $b$, con i cateti $dx$ e $dz$ e l'ipotenusa di lunghezza $d\ell$, con il vertice nel punto considerato. Siano $p_x$ la pressione sulla faccia perpendicolare all'asse $x$, di area $b\,dz$, $p_z$ la pressione sulla faccia perpendicolare all'asse $z$, di area $b\,dx$, e $p_n$ la pressione sulla faccia inclinata, di area $b\,d\ell$. La forza sulla faccia inclinata è perpendicolare alla faccia e vale $p_n\,b\,d\ell$; le aree delle due facce ortogonali agli assi sono le proiezioni della faccia inclinata, perciò le componenti di tale forza sono $p_n\,b\,dz$ lungo $x$ e $p_n\,b\,dx$ lungo $z$, entrambe dirette verso l'interno del cuneo. Il peso del cuneo vale $\gamma\,b\,\dfrac{dx\,dz}{2}$ ed è diretto verso il basso.
 
@@ -161,7 +161,7 @@ $$
 $$
 L'equazione dice che la pressione cresce nella direzione delle forze di massa e che le superfici a pressione costante sono perpendicolari a $\vec{f}$; da essa si ricava la distribuzione delle pressioni in ogni caso di quiete, anche quando alle forze di peso si aggiungono le forze d'inerzia di un recipiente in movimento.
 
-::schema{poligoni="0,0 1.2,0 1.2,1.2 0,1.2" forze="0.6 0,0,0.7,p;0.6 1.2,0,-0.7,p+∂p/∂z·dz" frecce="0.6,0.72,0.6,0.22,γ·dV" quote="0 0,1.2 0,dx,0.4;1.2 0,1.2 1.2,dz,0.4" riferimento=0 titolo="Equilibrio verticale di un elemento di fluido: le spinte sulle due facce orizzontali e il peso $\gamma\,dx\,dy\,dz$"}
+::schema{poligoni="0,0 1.2,0 1.2,1.2 0,1.2" forze="0.6 0,0,0.7,p;0.6 1.2,0,-0.7,p + dp" frecce="0.6,0.72,0.6,0.22,γ·dV" quote="0 0,1.2 0,dx,0.4;1.2 0,1.2 1.2,dz,0.4" riferimento=0 titolo="Equilibrio verticale di un elemento di fluido: le spinte sulle due facce orizzontali, che differiscono di $dp = -\gamma\,dz$, e il peso $\gamma\,dx\,dy\,dz$"}
 
 :::dimostrazione
 L'idea è di scrivere l'equilibrio alla traslazione di un parallelepipedo elementare di fluido, in cui le pressioni sulle facce opposte differiscono di un infinitesimo.
@@ -323,7 +323,7 @@ Le quote $z_A$ e $z_B$ si elidono, perciò il risultato dipende dal solo dislive
 ::::
 
 :::osservazione{#manometro-metallico titolo="Manometro metallico"}
-Il manometro metallico, o manometro di Bourdon, misura la deformazione di un tubo metallico a sezione ellittica avvolto a spirale: la pressione interna tende a raddrizzare il tubo e lo spostamento dell'estremità libera muove un indice su una scala graduata. Lo strumento si tara in laboratorio con un manometro a liquido e indica la pressione relativa nel punto in cui è installato, perciò la lettura si riporta al punto di interesse aggiungendo il termine $\gamma\,\Delta z$ dovuto al dislivello.
+Il manometro metallico, o manometro di Bourdon, misura la deformazione di un tubo metallico a sezione ellittica avvolto a spirale. La pressione interna tende a raddrizzare il tubo, perciò l'estremità libera si sposta e muove un indice su una scala graduata. Lo strumento si tara in laboratorio con un manometro a liquido e indica la pressione relativa nel punto in cui è installato, perciò la lettura si riporta al punto di interesse aggiungendo il termine $\gamma\,\Delta z$ dovuto al dislivello.
 :::
 
 :::osservazione{#barometro titolo="Barometro di Torricelli"}
@@ -341,7 +341,7 @@ Due liquidi non miscibili in quiete si dispongono con il più pesante in basso e
 $$
 p = \gamma_1\,s_1 + \gamma_2\,h_2 .
 $$
-Ciascun liquido ha il proprio piano dei carichi idrostatici: quello del liquido inferiore sta a $\dfrac{\gamma_1 s_1}{\gamma_2}$ sopra l'interfaccia, cioè più in basso della superficie libera quando il liquido superiore è il più leggero. La quantità $\dfrac{\gamma_1 s_1}{\gamma_2}$ è l'*altezza equivalente*, ossia lo spessore di liquido inferiore che produrrebbe la stessa pressione dello strato superiore.
+Ciascun liquido ha il proprio piano dei carichi idrostatici, e quello del liquido inferiore sta a $\dfrac{\gamma_1 s_1}{\gamma_2}$ sopra l'interfaccia, cioè più in basso della superficie libera quando il liquido superiore è il più leggero. La quantità $\dfrac{\gamma_1 s_1}{\gamma_2}$ è l'*altezza equivalente*, ossia lo spessore di liquido inferiore che produrrebbe la stessa pressione dello strato superiore.
 :::
 
 :::esempio{titolo="Olio sopra acqua in un serbatoio aperto"}

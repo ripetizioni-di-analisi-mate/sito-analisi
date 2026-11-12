@@ -302,7 +302,7 @@ $$
 $$
 quindi un errore $dh$ nella lettura del carico produce un errore relativo sulla portata tanto minore quanto maggiore è il carico. A parità di portata lo stramazzo triangolare lavora con un carico maggiore, e questo compensa il suo esponente più alto. Per $Q = 85\,\mathrm{L/s}$ uno stramazzo Bazin con $b = 0{,}80\,\mathrm{m}$ e $\mu = 0{,}42$ richiede $h = 0{,}148\,\mathrm{m}$, mentre uno stramazzo Thomson con $\theta = 90^\circ$ richiede $h = 0{,}324\,\mathrm{m}$; con un errore di lettura di $1\,\mathrm{mm}$ l'errore sulla portata è dell'$1{,}0\%$ nel primo caso e dello $0{,}77\%$ nel secondo. Per questo lo stramazzo triangolare si preferisce alle portate piccole.
 
-::grafico{f="1.860368*x^1.5;0.01417423*x^2.5" xmin=0 xmax=42 ymin=0 ymax=500 nomi="h (cm),Q (L/s)" punti="30,305.7,pieno;30,69.9,pieno" titolo="Scale di deflusso di uno stramazzo rettangolare con $b = 1{,}00\,\mathrm{m}$ e $\mu = 0{,}42$ (in colore) e di uno stramazzo triangolare con $\theta = 90^\circ$ e $\mu = 0{,}60$ (tratteggiato): con $h = 30\,\mathrm{cm}$ le portate sono $306\,\mathrm{L/s}$ e $69{,}9\,\mathrm{L/s}$"}
+::grafico{f="1.860368*x^1.5;0.01417423*x^2.5" xmin=0 xmax=42 ymin=0 ymax=500 nomi="h,Q" punti="30,305.7,pieno;30,69.9,pieno" titolo="Scale di deflusso, con il carico $h$ in centimetri e la portata $Q$ in litri al secondo: stramazzo rettangolare con $b = 1{,}00\,\mathrm{m}$ e $\mu = 0{,}42$ (in colore) e di uno stramazzo triangolare con $\theta = 90^\circ$ e $\mu = 0{,}60$ (tratteggiato): con $h = 30\,\mathrm{cm}$ le portate sono $306\,\mathrm{L/s}$ e $69{,}9\,\mathrm{L/s}$"}
 :::
 
 :::attenzione

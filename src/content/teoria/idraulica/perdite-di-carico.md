@@ -354,7 +354,7 @@ Nel passaggio da una sezione grande a una piccola la corrente non riempie subito
 $$
 \Delta H = \frac{(v_c - v_2)^2}{2g} = \left( \frac{1}{C_c} - 1 \right)^2 \frac{v_2^2}{2g} ,
 $$
-cioè $\xi \approx 0{,}35$–$0{,}45$ riferito alla velocità di valle.
+cioè $\xi \approx 0{,}3$–$0{,}45$ riferito alla velocità di valle.
 
 ::schema{nodi="A,0,2,-;B,5,2,-;C,11,2,-" condotte="A-B,2;B-C,1" tratteggi="5,2.5 5.9,2.39 7.0,2.39 8.3,2.5;5,1.5 5.9,1.61 7.0,1.61 8.3,1.5" frecce="1.6,2,2.8,2,v_1;9.2,2,10.4,2,v_2" etichette="6.5,3.25,sezione contratta;6.45,1.15,c" riferimento=0 titolo="Brusco restringimento: la corrente si contrae fino alla sezione $c$ e poi si riallarga, e la perdita si produce nel riallargamento"}
 :::

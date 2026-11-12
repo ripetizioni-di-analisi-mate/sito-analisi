@@ -32,7 +32,7 @@ r = \frac{8\,\lambda\,L}{g\,\pi^2 D^5} ,
 $$
 mentre con la formula di Gauckler-Strickler, per una condotta circolare piena in cui $R = \dfrac{D}{4}$, risulta
 $$
-r = \frac{10{,}29\,L}{k_s^2\,D^{16/3}} .
+r = \frac{10{,}29\,L}{k_s^2\,D^{\frac{16}{3}}} .
 $$
 La resistenza ha le dimensioni di $\mathrm{s^2/m^5}$ e dipende solo dalla geometria del ramo e dalla sua scabrezza. Per $\lambda = 0{,}022$, $L = 1000\,\mathrm{m}$ e $D = 0{,}300\,\mathrm{m}$ si ottiene $r = 748\,\mathrm{s^2/m^5}$, quindi una portata di $100\,\mathrm{L/s}$ produce la perdita $\Delta H = 748 \cdot 0{,}100^2 = 7{,}48\,\mathrm{m}$. Tutto il capitolo si svolge su questa scrittura: ogni ramo entra nei conti con il suo valore di $r$.
 :::
@@ -105,7 +105,7 @@ Q = \sqrt{\Delta H}\,\sum_{i=1}^{n} \frac{1}{\sqrt{r_i}} .
 $$
 Elevando al quadrato e ricavando $\Delta H$ si ottiene
 $$
-\Delta H = \frac{Q^2}{\left(\sum_i r_i^{-1/2}\right)^2} ,
+\Delta H = \frac{Q^2}{\left(\sum_i r_i^{-\frac{1}{2}}\right)^2} ,
 $$
 e il confronto con $\Delta H = r_{\mathrm{eq}} Q^2$ dà la tesi.
 :::
@@ -126,7 +126,7 @@ La portata si distribuisce quindi in proporzione inversa alla radice della resis
 :::definizione{#condotta-equivalente titolo="Condotta equivalente"}
 Si chiama **condotta equivalente** a un sistema di rami la condotta singola che, percorsa dalla stessa portata, produce la stessa perdita di carico, cioè la condotta di resistenza $r_{\mathrm{eq}}$. Fissati la lunghezza $L_e$ e l'indice di resistenza $\lambda_e$, il suo diametro si ricava dalla definizione di resistenza:
 $$
-D_e = \left(\frac{8\,\lambda_e\,L_e}{g\,\pi^2\,r_{\mathrm{eq}}}\right)^{1/5} .
+D_e = \left(\frac{8\,\lambda_e\,L_e}{g\,\pi^2\,r_{\mathrm{eq}}}\right)^{\frac{1}{5}} .
 $$
 La condotta equivalente serve a confrontare soluzioni diverse e a semplificare uno schema complesso prima di risolverlo: un fascio di rami in parallelo, sostituito dalla sua condotta equivalente, entra poi nel calcolo come un tronco qualsiasi in serie con gli altri.
 :::
@@ -134,7 +134,7 @@ La condotta equivalente serve a confrontare soluzioni diverse e a semplificare u
 :::esempio{titolo="Sostituzione di due tronchi in serie"}
 Due tronchi in serie di resistenze $r_1 = 598\,\mathrm{s^2/m^5}$ e $r_2 = 1218\,\mathrm{s^2/m^5}$ hanno $r_{\mathrm{eq}} = 1816\,\mathrm{s^2/m^5}$. La condotta equivalente lunga $L_e = 1400\,\mathrm{m}$, con $\lambda_e = 0{,}023$, ha diametro
 $$
-D_e = \left(\frac{8 \cdot 0{,}023 \cdot 1400}{9{,}81 \cdot \pi^2 \cdot 1816}\right)^{1/5} = 0{,}271\,\mathrm{m} ,
+D_e = \left(\frac{8 \cdot 0{,}023 \cdot 1400}{9{,}81 \cdot \pi^2 \cdot 1816}\right)^{\frac{1}{5}} = 0{,}271\,\mathrm{m} ,
 $$
 cioè $271\,\mathrm{mm}$. Il diametro commerciale immediatamente superiore è $300\,\mathrm{mm}$, che dà una resistenza minore e quindi, a parità di dislivello, una portata maggiore di quella del sistema di partenza.
 :::
@@ -146,7 +146,7 @@ Affiancare a una condotta esistente una seconda condotta uguale, sullo stesso pe
 :::attenzione
 Il diametro della condotta equivalente a due rami in parallelo non è la somma dei due diametri.
 
-Due rami uguali di diametro $200\,\mathrm{mm}$ e stessa lunghezza hanno $r_{\mathrm{eq}} = \dfrac{r}{4}$, quindi $D_e^5 = 4\,D^5$ e $D_e = 4^{1/5}\cdot 200 = 264\,\mathrm{mm}$, non $400\,\mathrm{mm}$. Una condotta da $400\,\mathrm{mm}$ avrebbe resistenza $\dfrac{r}{32}$, cioè otto volte minore di quella della coppia.
+Due rami uguali di diametro $200\,\mathrm{mm}$ e stessa lunghezza hanno $r_{\mathrm{eq}} = \dfrac{r}{4}$, quindi $D_e^5 = 4\,D^5$ e $D_e = 4^{\frac{1}{5}}\cdot 200 = 264\,\mathrm{mm}$, non $400\,\mathrm{mm}$. Una condotta da $400\,\mathrm{mm}$ avrebbe resistenza $\dfrac{r}{32}$, cioè otto volte minore di quella della coppia.
 :::
 
 ## Erogazione lungo il percorso
@@ -287,7 +287,7 @@ $$
 $$
 e il diametro minimo si ricava imponendo $r\,Q^2 = \Delta H_{\mathrm{disp}}$, cioè
 $$
-D \geq \left(\frac{8\,\lambda\,L\,Q^2}{g\,\pi^2\,\Delta H_{\mathrm{disp}}}\right)^{1/5} .
+D \geq \left(\frac{8\,\lambda\,L\,Q^2}{g\,\pi^2\,\Delta H_{\mathrm{disp}}}\right)^{\frac{1}{5}} .
 $$
 Si adotta poi il diametro commerciale immediatamente superiore e si ricalcola la perdita effettiva, che risulta minore di quella disponibile; la verifica si chiude controllando che la velocità resti nell'intervallo di uso corrente, fra $0{,}5$ e $2\,\mathrm{m/s}$ circa.
 :::
