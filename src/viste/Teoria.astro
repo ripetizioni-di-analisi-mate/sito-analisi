@@ -27,11 +27,11 @@ const descrizioneSeo = (() => {
   const somm = voce?.data.sommario ?? '';
   // Sommari brevi: davanti si mettono capitolo e materia, così la descrizione dice anche di quale corso si tratta.
   if (!nominati.length) return somm.length < 110 ? `${arg.breve} · ${materiaL(lingua, materia).breve}. ${somm}` : somm;
-  const testa = `${lingua === 'en' ? 'Theorems' : 'Teoremi'}: ${nominati.slice(0, 4).join(', ')}.`;
+  const testa = `${lingua === 'en' ? 'Theorems' : lingua === 'es' ? 'Teoremas' : 'Teoremi'}: ${nominati.slice(0, 4).join(', ')}.`;
   return `${testa} ${somm}`.trim();
 })();
-const svolti = perArgomento(await getCollection('svolti'), materia, argomento);
-const dafare = perArgomento(await getCollection('dafare'), materia, argomento);
+const svolti = perArgomento(await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti'), materia, argomento);
+const dafare = perArgomento(await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare'), materia, argomento);
 const titoliSvolti = Object.fromEntries((await Promise.all(svolti.map((e) => voceL(lingua, 'svolti', e.id)))).map(({ voce: v }) => [v.id, v.data.titolo]));
 const { precedente, successivo } = vicini(materia, argomento, 'teoria', lingua, await disponibilitaStudio(materia, argomento, lingua));
 // Argomento successivo della materia, per chi segue solo il filo della teoria.

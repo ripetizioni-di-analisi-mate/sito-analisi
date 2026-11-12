@@ -1,5 +1,21 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'matematica-finanziaria': {
+    titolo: 'Financial mathematics', breve: 'Financial mathematics',
+    descrizione: 'A dedicated university course in cash-flow valuation, annuities, amortization, NPV and IRR, bonds, term structures, duration, convexity and immunization. Study materials are in Italian.',
+    argomenti: {
+      'regimi-e-tassi': { titolo: 'Financial regimes and equivalent rates', breve: 'Regimes and rates' },
+      'equivalenza-finanziaria': { titolo: 'Financial equivalence and cash-flow valuation', breve: 'Financial equivalence' },
+      'rendite-costanti': { titolo: 'Level, deferred and perpetual annuities', breve: 'Level annuities' },
+      'rendite-variabili': { titolo: 'Variable annuities, continuous cash flows and savings plans', breve: 'Variable annuities' },
+      'ammortamenti': { titolo: 'Loan amortization and outstanding balances', breve: 'Amortization' },
+      'valutazione-investimenti': { titolo: 'NPV, IRR and project comparison', breve: 'NPV and IRR' },
+      'obbligazioni': { titolo: 'Bonds, prices and yields', breve: 'Bonds' },
+      'struttura-a-termine': { titolo: 'Term structure, forward rates and arbitrage', breve: 'Term structure' },
+      'duration-convexity': { titolo: 'Duration, convexity and price sensitivity', breve: 'Duration and convexity' },
+      'immunizzazione': { titolo: 'Financial immunization and interest-rate risk', breve: 'Immunization' },
+    },
+  },
   'biologia-semestre-filtro': {
     titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
     descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and 315 explained questions. Study materials are in Italian.',

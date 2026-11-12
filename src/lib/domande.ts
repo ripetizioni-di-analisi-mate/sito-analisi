@@ -24,16 +24,17 @@ function htmlDi(chiave: string, body: string): Promise<string> {
 }
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
-type Lingua = 'it' | 'en';
+type Lingua = 'it' | 'en' | 'es';
+const COLLEZIONI = { it: 'domande', en: 'domande_en', es: 'domande_es' } as const;
 
 const senzaSoluzione = (html: string) => html.replace(/<details[^>]*blocco-soluzione[\s\S]*?<\/details>/g, '').trim();
 
 // In inglese: le domande tradotte; la traccia inglese se c'è, altrimenti quella italiana.
 export async function domandePer(materia: string, lingua: Lingua = 'it'): Promise<Record<string, Domanda[]>> {
-  const tracce = new Map((await getCollection('dafare')).map((e) => [e.id, e]));
+  const tracce = new Map((await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare')).map((e) => [e.id, e]));
   const tracceEn = lingua === 'en' ? new Map((await getCollection('dafare_en')).map((e) => [e.id, e])) : new Map();
   const out: Record<string, Domanda[]> = {};
-  for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
+  for (const e of await getCollection(COLLEZIONI[lingua])) {
     const [m, argomento, n] = e.id.split('/');
     if (m !== materia) continue;
     const html = await htmlDi(`${lingua}/${e.id}`, e.body ?? '');
@@ -62,12 +63,12 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).
 const memo: Partial<Record<Lingua, Promise<Record<string, string[]>>>> = {};
 export function catalogoDomande(lingua: Lingua | LinguaCatalogo = 'it'): Promise<Record<string, string[]>> {
-  if (lingua !== 'it' && lingua !== 'en') return Promise.resolve({});
+  if (lingua !== 'it' && lingua !== 'en' && lingua !== 'es') return Promise.resolve({});
   return (memo[lingua] ??= calcolaCatalogo(lingua));
 }
 async function calcolaCatalogo(lingua: Lingua): Promise<Record<string, string[]>> {
   const c: Record<string, Set<string>> = {};
-  for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
+  for (const e of await getCollection(COLLEZIONI[lingua])) {
     const [m, a] = e.id.split('/');
     (c[m] ??= new Set()).add(a);
   }

@@ -14,7 +14,7 @@ export const FACOLTA = [
     titoloDe: 'Wirtschaftswissenschaften',
     titoloEs: 'Economía',
     titoloFr: 'Économie',
-    materie: ['matematica-generale', 'algebra-lineare', 'statistica', 'precorso'],
+    materie: ['matematica-generale', 'matematica-finanziaria', 'algebra-lineare', 'statistica', 'precorso'],
   },
   {
     titolo: 'Matematica e Fisica',

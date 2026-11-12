@@ -2,13 +2,10 @@
 import UsStem from '../../layouts/UsStem.astro';
 import UsPractice from '../../components/UsPractice.astro';
 import UsCourseOutline from '../../components/UsCourseOutline.astro';
-import CalculusPractice from '../../components/CalculusPractice.astro';
+import UsStudyCourse from '../../components/UsStudyCourse.astro';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
-import { calculusSlug, calculusHtml, universityStudies, timedCount } from '../../lib/stem-usa-practice';
-import { PUNTI, RIPASSO, RIPASSO_OGGI } from '../../data/livelli';
 import { T, sezioniL } from '../../i18n';
-import { universityCourses, courseUrl, optionsFor } from '../../data/stem-usa/catalog.mjs';
-import { url } from '../../lib/url';
+import { universityCourses, hasUsStudyPages, optionsFor } from '../../data/stem-usa/catalog.mjs';
 
 export function getStaticPaths() {
   return universityCourses.map(course => ({ params: { course: course.slug }, props: { course } }));
@@ -26,54 +23,34 @@ const questions = course.lessons.map((lesson, index) => ({
 const title = course.title;
 const t = T('en');
 const sezioni = sezioniL('en');
-const study = universityStudies.get(course.slug);
+const study = hasUsStudyPages(course.slug);
 ---
-<UsStem title={title} description={course.description} course={course.slug}>
+{study ? <UsStudyCourse course={course} /> : <UsStem title={title} description={course.description} course={course.slug}>
   <p class="sopratitolo">{t.programma}</p>
   <h1>{title}</h1>
   <p class="sommario">{course.description}</p>
   <UsCourseOutline slug={course.slug} topics={course.lessons} />
   <section data-usa-content>
-  {study && <p class="nota">While signed in, you earn {PUNTI.esercizio} XP the first time you check a correct answer to each practice exercise.</p>}
   <ol class="griglia-argomenti">
     {course.lessons.map((lesson, index) => {
       const number = index + 1;
       const slug = 'unit-' + number;
-      const practice = study?.practice[slug];
-      const theory = study?.theory[slug];
       const href = (sezione: string) => linkArgomentoUsa(course.slug, slug, sezione);
       return (
         <li>
           <h2><a href={href('teoria')}>{lesson.title}</a></h2>
           <p class="riassunto">{lesson.theory.split(/(?<=[.!?])\s/)[0]}</p>
           <nav aria-label={lesson.title}>
-            {sezioni.map(sezione => {
-              const count = sezione.slug === 'esercizi-svolti' ? (practice?.worked.length ?? 0) + 1
-                : sezione.slug === 'esercizi' ? practice?.exercises.length ?? 1 : null;
-              return <a href={href(sezione.slug)}>{sezione.titolo}{count !== null && ' (' + count + ')'}</a>;
-            })}
-            {study?.timed[slug] && <a href={href('domande')}>Timed questions ({study.timed[slug].length})</a>}
+            {sezioni.map(sezione => <a href={href(sezione.slug)}>{sezione.titolo}{sezione.slug !== 'teoria' && ' (1)'}</a>)}
           </nav>
           <details class="sommario-pagina studio-unita-usa" id={slug} hidden>
             <summary>{t.sezioni.teoria}</summary>
             <div>
-              {theory ? theory.map(([heading, explanation, proof]) => (
-                <section class="calculus-theory">
-                  <h3>{heading}</h3>
-                  <p set:html={calculusHtml(explanation)} />
-                  {proof && <details class="stem-feedback">
-                    <summary>Proof</summary>
-                    <p set:html={calculusHtml(proof)} />
-                  </details>}
-                </section>
-              )) : <p>{lesson.theory}</p>}
-              {!practice && <>
-                <h3 id={'worked-' + number}>Worked example</h3>
-                <p>{lesson.worked}</p>
-              </>}
+              <p>{lesson.theory}</p>
+              <h3 id={'worked-' + number}>Worked example</h3>
+              <p>{lesson.worked}</p>
             </div>
           </details>
-          {practice && <CalculusPractice course={course.slug} topic={slug} material={practice} number={number} originalExample={lesson.worked} />}
         </li>
       );
     })}
@@ -82,12 +59,7 @@ const study = universityStudies.get(course.slug);
       <p class="riassunto">Review questions on the topics of {title} with worked solutions.</p>
       <nav aria-label="Exam practice">
         <a href="#course-practice">Review questions ({questions.length})</a>
-        {study && <>
-          <a href={linkArgomentoUsa(course.slug, RIPASSO, 'domande')}>Timed review ({timedCount(study)})</a>
-          <a class="solo-collegati" href={linkArgomentoUsa(course.slug, RIPASSO_OGGI, 'domande')}>Today’s review</a>
-          <a href={url(courseUrl(course.slug) + '/practice-exam')}>General practice exam</a>
-          {course.slug === calculusSlug && <a href={url(courseUrl(course.slug) + '/purdue')}>Purdue exam practice</a>}
-        </>}
+
       </nav>
     </li>
   </ol>
@@ -98,13 +70,7 @@ const study = universityStudies.get(course.slug);
     <p><strong>Preparation</strong> {course.preparation}</p>
     <ul>{course.sources.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
   </section>
-</UsStem>
+</UsStem>}
 <script>
   import '../../scripts/apri-unita-usa';
 </script>
-
-<style>
-  .calculus-theory + .calculus-theory { margin-block-start: 1.1rem; }
-  .calculus-theory h3 { margin-block: 0 .35rem; }
-  .calculus-theory p { overflow-wrap: break-word; }
-</style>

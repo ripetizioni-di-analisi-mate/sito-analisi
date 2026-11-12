@@ -11,6 +11,9 @@ import { calculus3Timed } from '../data/stem-usa/calculus-3/timed.mjs';
 import { differentialEquationsPractice } from '../data/stem-usa/differential-equations/practice.mjs';
 import { differentialEquationsTheory } from '../data/stem-usa/differential-equations/theory.mjs';
 import { differentialEquationsTimed } from '../data/stem-usa/differential-equations/timed.mjs';
+import { precalculusPractice } from '../data/stem-usa/precalculus/practice.mjs';
+import { precalculusTheory } from '../data/stem-usa/precalculus/theory.mjs';
+import { precalculusTimed } from '../data/stem-usa/precalculus/timed.mjs';
 import { optionsFor } from '../data/stem-usa/catalog.mjs';
 import { leggi, valore } from '../../worker/valuta.mjs';
 import type { Domanda } from './domande';
@@ -19,7 +22,7 @@ export { calculusSlug };
 
 export interface PracticeUnit {
   worked: { title: string; prompt: string; steps: string[] }[];
-  exercises: { number: number; title: string; prompt: string; answer: string; explanation: string; primitive: boolean }[];
+  exercises: { number: number; title: string; prompt: string; answer?: string; explanation: string; primitive: boolean }[];
 }
 
 interface UniversityStudy {
@@ -29,6 +32,7 @@ interface UniversityStudy {
 }
 
 export const universityStudies = new Map<string, UniversityStudy>([
+  ['precalculus', { theory: precalculusTheory, practice: precalculusPractice, timed: precalculusTimed }],
   [calculusSlug, { theory: calculusTheory, practice: calculusPractice, timed: calculusTimed }],
   ['calculus-2', { theory: calculus2Theory, practice: calculus2Practice, timed: calculus2Timed }],
   ['calculus-3', { theory: calculus3Theory, practice: calculus3Practice, timed: calculus3Timed }],
@@ -63,10 +67,10 @@ export function calculusAnswer(answer: string, primitive: boolean) {
 
 export function practiceAnswers(study: UniversityStudy) {
   return Object.fromEntries(Object.entries(study.practice).flatMap(([topic, material]) =>
-    material.exercises.map(exercise => [
+    material.exercises.flatMap(exercise => exercise.answer === undefined ? [] : [[
       topic + '/' + exercise.number,
       calculusAnswer(exercise.answer, exercise.primitive),
-    ])
+    ]])
   ));
 }
 

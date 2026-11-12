@@ -9,6 +9,7 @@
 // Le materie a pagamento sono quelle elencate in src/data/prezzi.json.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { MATERIE_ES, ARGOMENTI_ES } from '../src/data/materie-es.ts';
 import { SCHEDE_LIBERE, schedeLibere } from '../src/data/schede-libere.mjs';
 
 const A_PAGAMENTO = Object.keys(JSON.parse(readFileSync(new URL('../src/data/prezzi.json', import.meta.url), 'utf8')));
@@ -91,6 +92,7 @@ function fineDiv(html, da) {
 const SEGNO_TRACCIA = '<span class="fine-traccia" hidden></span>';
 
 // Testi delle vetrine in ogni lingua del sito (l'italiano alla radice, le altre sotto /<lingua>).
+const NOMI_ES = Object.fromEntries(Object.entries(MATERIE_ES).map(([slug, [nome]]) => [slug, nome]));
 const LINGUE = [
   { pref: '', sblocca: 'Sblocca ora',
     breve: BREVE_IT, nomi: DATI_IT.titoli, argomenti: DATI_IT.argomenti, fine: 'Fine dell’anteprima gratuita',
@@ -124,10 +126,31 @@ const LINGUE = [
     schedaRestoAnteprimaUnica: (schede, argomenti) => `Full access includes all ${schede} worked sheets, the theory for all ${argomenti} topics and all timed questions.`,
     schedaGratis: (arg) => `Free worked sheet for ${arg} →`,
     schedeGratis: (arg) => `Free worked examples of ${arg} →` },
+  { pref: '/es', sblocca: 'Acceso completo (compra en italiano)',
+    breve: NOMI_ES, nomi: NOMI_ES,
+    argomenti: Object.fromEntries(Object.keys(MATERIE_ES).map((slug) => [slug, ARGOMENTI_ES])),
+    fine: 'Fin de la vista previa gratuita',
+    titolo: (n) => n === 1 ? 'Queda un apartado de teoría' : `Quedan ${n} apartados de teoría`,
+    resto: () => 'El acceso completo incluye la teoría de este tema y las soluciones de los ejercicios.',
+    restoAnteprimaUnica: () => 'El acceso completo incluye los ejercicios resueltos de este tema.',
+    tasto: (nombre, precio) => `Acceso a ${nombre} por ${precio} € (compra en italiano)`,
+    gratis: (url) => `Puedes consultar las primeras fichas gratis en <a href="${url}">Ejercicios resueltos</a>.`,
+    riservata: 'Solución incluida en el acceso completo.',
+    soluzione: 'La solución de este ejercicio está incluida en el acceso completo.',
+    svolgimento: 'Solución paso a paso incluida en el acceso completo.',
+    dimostrazione: 'Demostración incluida en el acceso completo.',
+    schedaSopra: 'Acceso completo',
+    schedaTitolo: (nombre) => `Puedes leer los enunciados gratis. Las soluciones están incluidas en el acceso completo a ${nombre}.`,
+    schedaResto: () => 'También tendrás acceso a la teoría del tema y a las soluciones de los ejercicios para practicar.',
+    schedaRestoAnteprimaUnica: () => 'El acceso completo incluye la teoría y los ejercicios de este tema.',
+    schedaGratis: (tema) => `Ficha gratuita de ${tema} →`,
+    schedeGratis: (tema) => `Ejercicios resueltos gratuitos de ${tema} →` },
+
 ];
 let L = LINGUE[0];
+const linkSblocca = (materia) => L.pref === '/es' ? `/${materia}/sblocca?lingua=it` : `${L.pref}/${materia}/sblocca`;
 function invitoHtml(materia, cosa) {
-  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.sblocca}</a></div>`;
+  return `<div class="velo-blocco"><p>${cosa}</p><a class="bottone-sblocca" href="${linkSblocca(materia)}">${L.sblocca}</a></div>`;
 }
 
 let teorie = 0, esercizi = 0, schedeVetrina = 0, voci = 0;
@@ -175,7 +198,7 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
       const invito = `<div class="velo-blocco fine-anteprima"><p class="velo-sopra">${L.fine}</p><p class="velo-titolo">${L.titolo(nascoste)}</p>`
         + `<ol class="velo-elenco" start="${tenute + 1}">${voci}</ol>`
         + (resto ? `<p>${resto}</p>` : '')
-        + `<a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.tasto(nome, PREZZI[materia])}</a>`
+        + `<a class="bottone-sblocca" href="${linkSblocca(materia)}">${L.tasto(nome, PREZZI[materia])}</a>`
         + schedeGratis
         + `</div>`;
       let vetrina = t.slice(0, taglio) + invito + t.slice(coda);
@@ -212,7 +235,7 @@ for (L of LINGUE) for (const materia of A_PAGAMENTO) {
         const riquadro = `<div class="velo-blocco fine-anteprima velo-scheda"><p class="velo-sopra">${L.schedaSopra}</p>`
           + `<p class="velo-titolo">${L.schedaTitolo(L.nomi[materia] || materia)}</p>`
           + `<p>${resto}</p>`
-          + `<a class="bottone-sblocca" href="${L.pref}/${materia}/sblocca">${L.tasto(L.breve[materia] || materia, PREZZI[materia])}</a>`
+          + `<a class="bottone-sblocca" href="${linkSblocca(materia)}">${L.tasto(L.breve[materia] || materia, PREZZI[materia])}</a>`
           + schedeGratis
           + `</div>`;
         const vetrina = `${h.slice(0, apre)}<div class="testo-studio">${ridotto}</div>${riquadro}${h.slice(chiude + 6)}`;

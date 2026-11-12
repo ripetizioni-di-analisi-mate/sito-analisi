@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { link, T } from '../i18n';
 import { lingueLocalizzate, type LinguaCatalogo } from '../lib/lingue-sito';
+import { MATERIALI_ES } from '../data/materiali-es.mjs';
 import type { Materia } from '../data/materie';
 import { catalogoDomande } from '../lib/domande';
 
@@ -10,17 +11,17 @@ interface Props { m: Materia; lingua: LinguaCatalogo }
 const { m, lingua } = Astro.props;
 const t = T(lingua);
 const testo = lingua === 'fr' ? {
-  quiz: 'Quiz chronométrés', nota: 'Les langues disponibles sont indiquées à côté de chaque support.',
+  quiz: 'Quiz chronométrés', altreLingue: 'Autres langues', disponibles: 'Disponible en',
   acquisto: (prezzo: number) => `Accès complet pour ${prezzo} € (achat en italien)`,
   lingue: { de: 'Allemand', es: 'Espagnol', fr: 'Français', it: 'Italien', en: 'Anglais' },
   etichetta: (titolo: string, nome: string) => `${titolo} en ${nome.toLowerCase()}`,
 } : lingua === 'es' ? {
-  quiz: 'Preguntas con tiempo', nota: 'Junto a cada recurso se indica en qué idiomas puedes consultarlo.',
+  quiz: 'Preguntas cronometradas', altreLingue: 'Otros idiomas', disponibles: 'Disponible en',
   acquisto: (prezzo: number) => `Acceso completo por ${prezzo} € (compra en italiano)`,
   lingue: { de: 'Alemán', es: 'Español', fr: 'Francés', it: 'Italiano', en: 'Inglés' },
   etichetta: (titolo: string, nome: string) => `${titolo} en ${nome.toLowerCase()}`,
 } : {
-  quiz: 'Quiz mit Zeitlimit', nota: 'Bei jedem Thema siehst du, in welcher Sprache die Lernmaterialien verfügbar sind.',
+  quiz: 'Quiz mit Zeitlimit', altreLingue: 'Weitere Sprachen', disponibles: 'Verfügbar auf',
   acquisto: (prezzo: number) => `Vollzugang für ${prezzo} € (Kauf auf Italienisch)`,
   lingue: { de: 'Deutsch', es: 'Spanisch', fr: 'Französisch', it: 'Italienisch', en: 'Englisch' },
   etichetta: (titolo: string, nome: string) => `${titolo} auf ${nome}`,
@@ -44,41 +45,68 @@ const risorsa = (id: string, sezione: string, titolo: string, it: boolean, en: b
 const capitoli = m.argomenti.map((a) => {
   const id = `${m.slug}/${a.slug}`;
   const schede = presenti(svolti, id), esercizi = presenti(dafare, id);
-  return { ...a, risorse: [
+  const risorse = [
     risorsa(id, 'teoria', t.sezioni.teoria, teoria.some((x) => x.id === id), teoriaEn.some((x) => x.id === id)),
     risorsa(id, 'esercizi-svolti', t.sezioni['esercizi-svolti'], schede.length > 0, completi(schede, presenti(svoltiEn, id))),
     risorsa(id, 'esercizi', t.sezioni.esercizi, m.eserciziDaFare !== false && esercizi.length > 0, m.eserciziDaFare !== false && completi(esercizi, presenti(dafareEn, id))),
     risorsa(id, 'domande', testo.quiz, quiz[m.slug]?.includes(a.slug), quizEn[m.slug]?.includes(a.slug)),
-  ].filter((r) => r.lingue.length) };
+  ];
+  const locali = risorse.flatMap((r) => r.lingue.filter((l) => l.codice === lingua).map((l) => ({ ...l, titolo: r.titolo })));
+  const altre = [...new Set(risorse.flatMap((r) => r.lingue.map((l) => l.codice)))].filter((l) => l !== lingua)
+    .map((codice) => ({ nome: testo.lingue[codice], risorse: risorse.flatMap((r) =>
+      r.lingue.filter((l) => l.codice === codice).map((l) => ({ ...l, titolo: r.titolo }))) }));
+  const traduzione = lingua === 'es' ? MATERIALI_ES[id as keyof typeof MATERIALI_ES] : undefined;
+  return { ...a, locali, altre, traduzione };
 });
 ---
 <Base titolo={m.titolo} descrizione={m.descrizione} lingua={lingua} sezione="catalogo" materia={m.slug} seo={{ titolo: `${m.titolo} | ${t.nomeSito}` }}>
   <p class="sopratitolo">{m.gruppo}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
-  <p class="nota-accesso">{testo.nota}</p>
   {m.prezzo
-    ? <p><a class="bottone-secondario" href={link('it', `/${m.slug}/sblocca`) + '?lingua=it'} hreflang="it">{testo.acquisto(m.prezzo)}</a></p>
+    ? <p><a class="bottone-secondario accesso-curso" href={link('it', `/${m.slug}/sblocca`) + '?lingua=it'} hreflang="it">{testo.acquisto(m.prezzo)}</a></p>
     : <p class="nota-accesso">{t.tuttoGratis}</p>}
   <h2>{t.programma}</h2>
-  <ol class="elenco-esercizi capitoli-localizzati">
+  <ol class="capitoli-localizzati">
     {capitoli.map((a) => <li id={a.slug}>
       <h3>{a.titolo}</h3>
-      {a.risorse.length > 0
-        ? <ul>{a.risorse.map((r) => <li>
-          <strong>{r.titolo}</strong>
-          {r.lingue.map(({ codice, href, nome }) => <a href={href} hreflang={codice} aria-label={testo.etichetta(r.titolo, nome)}>{nome}</a>)}
-        </li>)}</ul>
-        : <p>{t.inPreparazione}</p>}
+      {a.locali.length > 0 && <ul class="risorse-capitolo">
+        {a.locali.map(({ codice, href, titolo }) => <li><a href={href} hreflang={codice}>{titolo}</a></li>)}
+      </ul>}
+      {a.traduzione && <p class="nota-traduzione">
+        En español hay {a.traduzione.svolti.length} fichas resueltas y {a.traduzione.esercizi.length} ejercicios para practicar. En italiano e inglés encontrarás más ejercicios.
+      </p>}
+      {a.altre.length > 0 && <details>
+        <summary>{a.locali.length ? testo.altreLingue : `${testo.disponibles} ${new Intl.ListFormat(lingua).format(a.altre.map((l) => lingua === 'de' ? l.nome : l.nome.toLocaleLowerCase(lingua)))}`}</summary>
+        {a.altre.map(({ nome, risorse }) => <div class="lingua-capitolo">
+          <p>{nome}</p>
+          <ul class="risorse-capitolo">
+            {risorse.map(({ codice, href, titolo }) => <li><a href={href} hreflang={codice} aria-label={testo.etichetta(titolo, nome)}>{titolo}</a></li>)}
+          </ul>
+        </div>)}
+      </details>}
+      {!a.locali.length && !a.altre.length && <p>{t.inPreparazione}</p>}
     </li>)}
   </ol>
 </Base>
 
 <style>
-  .capitoli-localizzati > li { padding: .85rem 0; border-bottom: 1px solid var(--riga); scroll-margin-top: 6rem; }
+  .accesso-curso { display: inline-block; max-inline-size: 100%; text-align: center; }
+  .capitoli-localizzati { list-style: none; margin: 0; padding: 0; }
+  .capitoli-localizzati > li { padding: 1.1rem 0; border-bottom: 1px solid var(--riga); scroll-margin-top: 6rem; }
   .capitoli-localizzati h3 { margin: 0 0 .35rem; }
-  .capitoli-localizzati ul { list-style: none; padding: 0; margin: 0; }
-  .capitoli-localizzati ul li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem; }
-  .capitoli-localizzati ul li a { display: inline; padding: .15rem 0; color: var(--azione); text-decoration: underline; }
-  .capitoli-localizzati ul li strong { font-weight: 600; }
+  .risorse-capitolo { display: flex; flex-wrap: wrap; gap: .35rem .5rem; list-style: none; padding: 0; margin: 0; }
+  .risorse-capitolo li { margin: 0; }
+  .risorse-capitolo a {
+    display: inline-flex; align-items: center; min-height: 2.75rem; padding: .3rem .65rem;
+    border: 1px solid var(--riga); border-radius: .45rem; color: var(--azione); text-decoration: none;
+  }
+  .risorse-capitolo a:hover { text-decoration: underline; border-color: var(--azione); }
+  .capitoli-localizzati summary { cursor: pointer; width: fit-content; max-width: 100%; padding: .6rem 0; font-size: .9rem; }
+  .nota-traduzione { font: .9rem/1.5 var(--ui); color: var(--inchiostro-2); margin: .4rem 0 0; }
+  .lingua-capitolo { padding: .25rem 0 .55rem; }
+  .lingua-capitolo p { font-weight: 600; margin: 0 0 .2rem; }
+  @media (max-width: 40rem) {
+    .risorse-capitolo { padding-inline-end: 3.25rem; }
+  }
 </style>

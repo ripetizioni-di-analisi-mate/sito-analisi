@@ -14,10 +14,10 @@ interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
 const arg = argomentoL(lingua, materia, argomento);
-const italiane = perArgomento(await getCollection('dafare'), materia, argomento);
-const voci = await Promise.all(italiane.map((e) => voceL(lingua, 'dafare', e.id)));
-// Esercizi con la verifica della risposta (il risultato si ricava dalla soluzione italiana, uguale nelle due lingue).
-const risultati = Object.fromEntries(italiane.map((e) => [e.id, risultatoDi(e)]));
+const esercizi = perArgomento(await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare'), materia, argomento);
+const voci = await Promise.all(esercizi.map((e) => voceL(lingua, 'dafare', e.id)));
+// Esercizi con la verifica della risposta (il risultato si ricava dalla soluzione, uguale nelle traduzioni).
+const risultati = Object.fromEntries(esercizi.map((e) => [e.id, risultatoDi(e)]));
 const nonTradotta = voci.some((v) => !v.tradotta);
 const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua));
@@ -47,9 +47,9 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
   ))}
   {conDomande && (
     <section class="ingresso-domande">
-      <div class="ingresso-testa"><h2>{lingua === 'en' ? 'Timed questions' : 'Domande a tempo'}</h2><span>{arg.breve}</span></div>
-      <p>{lingua === 'en' ? 'Multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.' : 'Domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.'}</p>
-      <p class="ingresso-azioni"><a class="bottone-primario" href={link(lingua, `${base}/domande`)}>{lingua === 'en' ? 'Start' : 'Inizia'}</a><span>{lingua === 'en' ? 'Up to 15 XP per correct answer' : 'Fino a 15 EXP per risposta corretta'}</span></p>
+      <div class="ingresso-testa"><h2>{lingua === 'en' ? 'Timed questions' : lingua === 'es' ? 'Preguntas cronometradas' : 'Domande a tempo'}</h2><span>{arg.breve}</span></div>
+      <p>{lingua === 'en' ? 'Multiple-choice questions on the exercises of this topic, one at a time, two minutes each. The explanation appears after every answer.' : lingua === 'es' ? 'Responde a preguntas de opción múltiple sobre este tema. Tienes dos minutos por pregunta y verás la explicación tras responder.' : 'Domande a risposta multipla sugli esercizi di questo argomento, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.'}</p>
+      <p class="ingresso-azioni"><a class="bottone-primario" href={link(lingua, `${base}/domande`)}>{lingua === 'en' ? 'Start' : lingua === 'es' ? 'Empezar' : 'Inizia'}</a><span>{lingua === 'en' ? 'Up to 15 XP per correct answer' : lingua === 'es' ? 'Hasta 15 EXP por respuesta correcta' : 'Fino a 15 EXP per risposta corretta'}</span></p>
     </section>
   )}
 </Base>

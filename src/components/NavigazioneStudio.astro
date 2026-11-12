@@ -1,19 +1,21 @@
 ---
 import { materiaL, link, T, type Lingua } from '../i18n';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
-import { highSchoolHasStudyPages, highSchoolCourse } from '../data/stem-usa/high-school/index.mjs';
+import { hasUsStudyPages } from '../data/stem-usa/catalog.mjs';
+import { paginaLocalizzata } from '../lib/lingue-sito';
 import { disponibilitaStudio } from '../lib/nav';
 import { sezioniStudio } from '../lib/percorso-studio.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; usa?: boolean }
 const { materia, argomento, sezione, lingua = 'it', usa = false } = Astro.props;
-const en = lingua === 'en';
+const en = lingua === 'en', es = lingua === 'es';
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const i = m?.argomenti.findIndex((a) => a.slug === argomento) ?? -1;
-const visibile = Boolean(m && i >= 0 && (!usa || highSchoolHasStudyPages(highSchoolCourse(materia))) && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
+const visibile = Boolean(m && i >= 0 && (!usa || hasUsStudyPages(materia)) && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
 const sezioni = !visibile ? [] : usa ? ['teoria', 'esercizi-svolti', 'esercizi', 'domande']
   : sezioniStudio(await disponibilitaStudio(materia!, argomento!, lingua));
-const href = (topic: string, section: string) => usa ? linkArgomentoUsa(materia!, topic, section) : link(lingua, '/' + materia + '/' + topic + '/' + section);
-const nomi = { ...T(lingua).sezioni, domande: en ? 'Timed questions' : 'Domande a tempo' };
+const href = (topic: string, section: string) => usa ? linkArgomentoUsa(materia!, topic, section) : link(lingua, es && !paginaLocalizzata('es', '/' + materia + '/' + topic + '/' + section)
+    ? '/' + materia + '#' + topic : '/' + materia + '/' + topic + '/' + section);
+const nomi = { ...T(lingua).sezioni, domande: es ? 'Preguntas cronometradas' : en ? 'Timed questions' : 'Domande a tempo' };
 const dopo = visibile ? m?.argomenti[i + 1] : undefined;
 ---
 {visibile && ['desktop', 'mobile'].map((modo) => {
@@ -21,8 +23,8 @@ const dopo = visibile ? m?.argomenti[i + 1] : undefined;
   // senza JavaScript; al cambio di larghezza interviene soltanto il CSS.
   const Contenitore = modo === 'mobile' ? 'details' : 'div';
   return <Contenitore class={`studio-percorso-${modo}`}>
-  {modo === 'mobile' && <summary>{en ? 'Study path' : 'Percorso'}<span> · {nomi[sezione!]}</span></summary>}
-  <nav class="studio-sezioni" aria-label={en ? 'Sections of this topic' : 'Sezioni di questo argomento'}>
+  {modo === 'mobile' && <summary>{es ? 'Itinerario de estudio' : en ? 'Study path' : 'Percorso'}<span> · {nomi[sezione!]}</span></summary>}
+  <nav class="studio-sezioni" aria-label={es ? 'Secciones del tema' : en ? 'Sections of this topic' : 'Sezioni di questo argomento'}>
     <ol>
       {sezioni.map((s, n) => (
         <li>
@@ -32,7 +34,7 @@ const dopo = visibile ? m?.argomenti[i + 1] : undefined;
         </li>
       ))}
     </ol>
-    {dopo && <a class="studio-salta" href={href(dopo.slug, 'teoria')}>{en ? 'Next topic' : 'Argomento successivo'}<span aria-hidden="true"> →</span><span class="studio-salta-titolo"> · {dopo.breve}</span></a>}
+    {dopo && <a class="studio-salta" href={href(dopo.slug, 'teoria')}>{es ? 'Tema siguiente' : en ? 'Next topic' : 'Argomento successivo'}<span aria-hidden="true"> →</span><span class="studio-salta-titolo"> · {dopo.breve}</span></a>}
   </nav>
   </Contenitore>;
 })}

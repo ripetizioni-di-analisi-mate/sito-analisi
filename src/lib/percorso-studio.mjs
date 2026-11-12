@@ -1,17 +1,19 @@
 import { nomiAllenamento } from './allenamento.mjs';
 import { LINGUE_CATALOGO } from '../data/codici-lingua.mjs';
+import { MATERIALI_ES } from '../data/materiali-es.mjs';
 
 // Le quattro sezioni dello stesso argomento rimangono raggiungibili anche
 // nelle singole schede, senza confonderle con il capitolo successivo.
 export function tappeStudio(materia, argomento, conDomande, lingua = 'it', conEserciziDaFare = true) {
   if (!materia || !argomento || argomento === 'prove-d-esame' || argomento === 'ripasso-di-oggi') return [];
   const en = lingua === 'en';
-  const base = `${en ? '/en' : ''}/${materia}/${argomento}`;
+  const es = lingua === 'es';
+  const base = `${es ? '/es' : en ? '/en' : ''}/${materia}/${argomento}`;
   return [
-    { slug: 'teoria', titolo: en ? 'Theory' : 'Teoria' },
-    { slug: 'esercizi-svolti', titolo: en ? 'Worked examples' : 'Esercizi svolti' },
-    ...(conEserciziDaFare ? [{ slug: 'esercizi', titolo: en ? 'Practice exercises' : 'Esercizi da fare' }] : []),
-    ...(conDomande ? [{ slug: 'domande', titolo: en ? 'Timed questions' : 'Domande a tempo' }] : []),
+    { slug: 'teoria', titolo: es ? 'Teoría' : en ? 'Theory' : 'Teoria' },
+    { slug: 'esercizi-svolti', titolo: es ? 'Ejercicios resueltos' : en ? 'Worked examples' : 'Esercizi svolti' },
+    ...(conEserciziDaFare ? [{ slug: 'esercizi', titolo: es ? 'Ejercicios para practicar' : en ? 'Practice exercises' : 'Esercizi da fare' }] : []),
+    ...(conDomande ? [{ slug: 'domande', titolo: es ? 'Preguntas cronometradas' : en ? 'Timed questions' : 'Domande a tempo' }] : []),
   ].map((t) => ({ ...t, href: `${base}/${t.slug}` }));
 }
 
@@ -41,13 +43,17 @@ export function destinazioneSessione(sessione, catalogo, lingua = 'it') {
   if (!a) return { href: localizzato ? `/${lingua}${base}` : base, domande: null, titolo: m.titolo, materia: m.titolo };
   const ripasso = a === 'prove-d-esame' || a === 'ripasso-di-oggi';
   if (ripasso) {
-    if (!m.domande.length) return null;
+    if (localizzato || !m.domande.length) return null;
     const href = `${base}/${a}/domande`;
     const titolo = a === 'ripasso-di-oggi'
       ? (lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi') : m.ripasso;
     return { href, domande: href, titolo, materia: m.titolo };
   }
   if (!m.argomenti.includes(a)) return null;
+  if (lingua === 'es' && localizzato && Object.hasOwn(MATERIALI_ES, sessione.materia + '/' + a)) {
+    const href = `/es${base}/${a}`;
+    return { href: href + '/teoria', domande: m.domande.includes(a) ? href + '/domande' : null, titolo: m.titoli?.[a] || m.titolo, materia: m.titolo };
+  }
   if (localizzato) return { href: `/${lingua}/${sessione.materia}#${a}`, domande: null, titolo: m.titoli?.[a] || m.titolo, materia: m.titolo };
   return {
     href: m.base ? `${base}#${a}` : `${base}/${a}/teoria`,
@@ -74,7 +80,8 @@ export function ultimaSessioneStudio(sessioni, catalogo, lingua = 'it') {
 
 export function prossimaAttivita(dati, catalogo, lingua = 'it') {
   const en = lingua === 'en';
-  const domande = en ? 'Continue with the timed questions' : 'Continua con le domande a tempo';
+  const es = lingua === 'es';
+  const domande = es ? 'Continuar con las preguntas cronometradas' : en ? 'Continue with the timed questions' : 'Continua con le domande a tempo';
   for (const o of dati?.obiettivi || []) {
     const href = destinazioneObiettivo(o, catalogo, lingua);
     if (href) return { href, testo: domande };
@@ -82,11 +89,11 @@ export function prossimaAttivita(dati, catalogo, lingua = 'it') {
   const ultima = ultimaSessioneStudio(dati?.sessioni, catalogo, lingua);
   if (ultima) return {
     href: ultima.domande || ultima.href,
-    testo: ultima.domande ? domande : (en ? 'Continue studying' : 'Riprendi lo studio'),
+    testo: ultima.domande ? domande : (es ? 'Continuar estudiando' : en ? 'Continue studying' : 'Riprendi lo studio'),
   };
   return {
-    href: `${en ? '/en' : ''}/domande-a-tempo`,
-    testo: en ? 'Choose a topic and start' : 'Scegli un argomento e inizia',
+    href: es ? '/es' : `${en ? '/en' : ''}/domande-a-tempo`,
+    testo: es ? 'Elige un tema para empezar' : en ? 'Choose a topic and start' : 'Scegli un argomento e inizia',
   };
 }
 
