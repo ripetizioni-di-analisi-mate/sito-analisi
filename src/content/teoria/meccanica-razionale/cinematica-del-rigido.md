@@ -335,15 +335,13 @@ Sia dato un corpo rigido con un punto fisso $\Omega$, e si prendano il riferimen
 $$
 \hat{N} = \frac{\hat{k} \wedge \hat{e}_3}{|\hat{k} \wedge \hat{e}_3|} .
 $$
-Gli **angoli di Eulero** sono i tre angoli
-$$
-\psi = \widehat{\hat{\imath}\,\hat{N}} \quad (\text{precessione}) ,
-\qquad
-\vartheta = \widehat{\hat{k}\,\hat{e}_3} \quad (\text{nutazione}) ,
-\qquad
-\varphi = \widehat{\hat{N}\,\hat{e}_1} \quad (\text{rotazione propria}) ,
-$$
-misurati rispettivamente nel piano $xy$ attorno a $\hat{k}$, nel piano ortogonale a $\hat{N}$ attorno a $\hat{N}$ e nel piano $\xi\eta$ attorno a $\hat{e}_3$. I tre angoli individuano l'orientamento del corpo, e sono quindi tre coordinate lagrangiane per un rigido con un punto fisso: la configurazione si raggiunge dalla posizione iniziale con la rotazione di $\psi$ attorno a $\hat{k}$, poi quella di $\vartheta$ attorno alla linea dei nodi, poi quella di $\varphi$ attorno a $\hat{e}_3$.
+Gli **angoli di Eulero** sono i tre angoli seguenti.
+
+- La **precessione** $\psi$, angolo fra $\hat{\imath}$ e $\hat{N}$, misurato nel piano $xy$ attorno a $\hat{k}$.
+- La **nutazione** $\vartheta$, angolo fra $\hat{k}$ e $\hat{e}_3$, misurato attorno a $\hat{N}$.
+- La **rotazione propria** $\varphi$, angolo fra $\hat{N}$ e $\hat{e}_1$, misurato nel piano $\xi\eta$ attorno a $\hat{e}_3$.
+
+I tre angoli individuano l'orientamento del corpo, e sono quindi tre coordinate lagrangiane per un rigido con un punto fisso: la configurazione si raggiunge dalla posizione iniziale con la rotazione di $\psi$ attorno a $\hat{k}$, poi quella di $\vartheta$ attorno alla linea dei nodi, poi quella di $\varphi$ attorno a $\hat{e}_3$.
 
 ::struttura{linee="0,0 3.2,0;0,0 0,2.8;0,0 -1.5,-1.1;0,0 1.1,2.3;0,0 2.6,-0.8" tratteggi="-1.5,-1.1 2.6,-0.8" punti="0,0,Ω" etichette="3.3,0.1,x;-1.9,-1.3,y;0.1,2.9,z;1.15,2.45,ζ;2.75,-0.85,N;0.45,0.5,ϑ;1.3,-0.35,ψ" riferimento=0 titolo="Linea dei nodi $\hat{N}$, nutazione $\vartheta$ fra $z$ e $\zeta$, precessione $\psi$ fra $x$ e $\hat{N}$"}
 :::
