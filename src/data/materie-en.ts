@@ -202,7 +202,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'cinematica-del-rigido': { titolo: 'Kinematics of a rigid body', breve: 'Rigid-body kinematics' },
       'vincoli-e-coordinate-lagrangiane': { titolo: 'Constraints, degrees of freedom and generalized coordinates', breve: 'Constraints and coordinates' },
       'statica-dei-sistemi': { titolo: 'Statics of particles and systems: cardinal equations', breve: 'Statics of systems' },
-      'lavori-virtuali': { titolo: 'Virtual work, potential energy and equilibrium', breve: 'Virtual work' },
+      'lavori-virtuali': { titolo: 'Virtual work, potential and equilibrium', breve: 'Virtual work' },
       'dinamica-del-punto': { titolo: 'Dynamics of a free and constrained particle', breve: 'Particle dynamics' },
       'dinamica-dei-sistemi': { titolo: 'Dynamics of systems: cardinal equations and energy', breve: 'Dynamics of systems' },
       'dinamica-del-rigido': { titolo: 'Rigid-body dynamics and Euler equations', breve: 'Rigid-body dynamics' },
