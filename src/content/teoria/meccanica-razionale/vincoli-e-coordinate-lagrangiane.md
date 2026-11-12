@@ -258,7 +258,7 @@ $$
 \delta P_i = \sum_{h=1}^{n} \frac{\partial P_i}{\partial q_h}\,\delta q_h ,
 \qquad i = 1, \dots, N ,
 $$
-con $\delta q_1, \dots, \delta q_n$ arbitrari. Lo spostamento virtuale è lo spostamento compatibile con i vincoli pensati immobili nell'istante $t$, cioè con il tempo bloccato; non è uno spostamento che il sistema compie, ma uno spostamento di prova che serve a scrivere le condizioni di equilibrio.
+con $\delta q_1, \dots, \delta q_n$ arbitrari. Lo spostamento virtuale è lo spostamento compatibile con i vincoli pensati immobili nell'istante $t$, cioè con il tempo bloccato, e serve come spostamento di prova per scrivere le condizioni di equilibrio.
 
 Gli spostamenti virtuali di un sistema a vincoli bilaterali formano uno spazio vettoriale di dimensione $n$, poiché i $\delta q_h$ sono arbitrari; in particolare, se $(\delta P_i)$ è virtuale, anche $(-\delta P_i)$ lo è. Con un vincolo unilaterale $f \geq 0$ nella configurazione di confine $f = 0$ gli spostamenti virtuali sono invece quelli che soddisfano la disuguaglianza linearizzata $\sum_i \operatorname{grad}_{P_i} f \cdot \delta P_i \geq 0$, e formano un semispazio. Su questi spostamenti si costruisce il lavoro virtuale, con cui si trovano le configurazioni di equilibrio nell'argomento sui lavori virtuali.
 :::

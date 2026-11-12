@@ -439,7 +439,7 @@ L'orbita è quindi una conica con un fuoco nel centro delle forze, ed è un'elli
 
 ## Dinamica relativa e forze apparenti
 
-:::richiamo{titolo="Teorema di composizione delle accelerazioni"}
+:::richiamo{#teorema-di-coriolis titolo="Teorema di composizione delle accelerazioni"}
 Siano $(O; x, y, z)$ un riferimento fisso e $(\Omega; \xi, \eta, \zeta)$ un riferimento mobile con velocità angolare $\vec{\omega}$. Allora l'accelerazione assoluta di un punto $P$ si scompone come
 $$
 \vec{a}_a = \vec{a}_\tau + \vec{a}_r + \vec{a}_c ,

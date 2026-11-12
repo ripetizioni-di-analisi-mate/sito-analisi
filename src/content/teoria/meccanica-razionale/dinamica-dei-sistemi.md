@@ -360,5 +360,5 @@ mentre nell'urto perfettamente anelastico la velocità comune è $\dfrac{m_1\,v_
 :::esempio{titolo="Punto che si attacca a un'asta incernierata"}
 Un punto materiale di massa $m$, che si muove orizzontalmente con velocità $v_0$, urta l'estremo $B$ di un'asta omogenea $AB$ di massa $3m$ e lunghezza $\ell$, incernierata in $A$ e ferma in posizione verticale, e vi resta attaccato. L'unica forza esterna impulsiva è la reazione della cerniera, il cui momento rispetto ad $A$ è nullo, perciò si conserva $K_A$. Prima dell'urto $K_A^- = m\,v_0\,\ell$; dopo l'urto il sistema ruota attorno ad $A$ con velocità angolare $\omega$ e momento d'inerzia $I_A = \dfrac{1}{3}\,(3m)\,\ell^2 + m\,\ell^2 = 2\,m\,\ell^2$, quindi $K_A^+ = 2\,m\,\ell^2\,\omega$. Dall'uguaglianza segue $\omega = \dfrac{v_0}{2\,\ell}$.
 
-::struttura{nodi="A,0,3;B,0,0" aste="A-B" vincoli="A,cerniera,90" punti="-1.8,0,P,pieno;0,1.5,G,baricentro" frecce="-1.8,0,-0.35,0,v_0" titolo="Il punto $P$ si attacca all'estremo $B$: nell'urto si conserva il momento angolare rispetto alla cerniera $A$"}
+::struttura{nodi="A,0,3;B,0,0" aste="A-B" vincoli="A,cerniera,90" punti="-1.8,0,P,pieno;0,1.5,G,baricentro" frecce="-1.8,0,-0.35,0" etichette="-1.05,0.3,v_0" titolo="Il punto $P$ si attacca all'estremo $B$: nell'urto si conserva il momento angolare rispetto alla cerniera $A$"}
 :::
