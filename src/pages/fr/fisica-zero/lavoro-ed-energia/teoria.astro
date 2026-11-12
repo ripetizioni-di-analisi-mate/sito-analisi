@@ -1,0 +1,11 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import { Content, frontmatter } from '../../../../content-fr/teoria/fisica-zero/lavoro-ed-energia.md';
+---
+<Base titolo={frontmatter.titolo} descrizione={frontmatter.sommario} lingua="fr" materia="fisica-zero" sezione="catalogo" seo={{ senzaInglese: true, tipo: 'article' }}>
+  <p class="sopratitolo">Cours</p>
+  <h1>{frontmatter.titolo}</h1>
+  <p class="sommario">{frontmatter.sommario}</p>
+  <div class="testo-studio"><Content /></div>
+  <p><a href="/fr/fisica-zero#lavoro-ed-energia">Voir les supports de ce chapitre</a></p>
+</Base>

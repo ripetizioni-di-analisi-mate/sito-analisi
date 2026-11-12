@@ -7,10 +7,17 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
-const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es';
+const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es', fr = lingua === 'fr';
 const WA = 'https://wa.me/393885680393';
 // Domande frequenti: solo regole già in vigore sul sito (anteprima, dispositivi, pagamento, corsi di gruppo).
-const domande: { d: string; r: string }[] = es ? [
+const domande: { d: string; r: string }[] = fr ? [
+  { d: 'Que puis-je consulter gratuitement avant d’acheter ?', r: 'La fiche de chaque matière indique les supports accessibles gratuitement. Les cours <a href="/fr/matematica-da-zero">Les bases des mathématiques</a> et <a href="/fr/fisica-zero">Les bases de la physique</a> sont entièrement gratuits.' },
+  { d: 'Combien de temps dure l’accès ?', r: 'Après l’achat, la matière reste accessible depuis ton compte sans limite de durée. Le paiement est unique, sans abonnement ni renouvellement.' },
+  { d: 'Sur combien d’appareils puis-je utiliser mon compte ?', r: 'Tu peux connecter jusqu’à trois appareils. Pour libérer une place, déconnecte un appareil depuis les paramètres du compte.' },
+  { d: 'Comment payer ?', r: 'La page d’achat est en italien. Tu peux y saisir tes coordonnées de facturation et voir les moyens de paiement proposés par Stripe. Tu recevras une confirmation par e-mail.' },
+  { d: 'Dans quelles langues sont les supports ?', r: 'Chaque chapitre indique les langues disponibles. La plupart des supports sont en italien ou en anglais.' },
+  { d: 'À qui m’adresser pour une question sur un achat ?', r: 'Écris à Carmine depuis la page <a href="/fr/contatti">Contact et assistance</a>.' },
+] : es ? [
   { d: '¿Qué puedo consultar gratis antes de comprar?', r: 'La ficha de cada asignatura indica qué material puedes consultar gratis. Los cursos de <a href="/es/matematica-da-zero">Matemáticas desde cero</a> y <a href="/es/fisica-zero">Física desde cero</a> son totalmente gratuitos.' },
   { d: '¿Durante cuánto tiempo tendré acceso?', r: 'Al comprar una asignatura, queda disponible en tu cuenta sin fecha de caducidad. Se paga una sola vez, sin suscripción ni renovaciones.' },
   { d: '¿En cuántos dispositivos puedo usar mi cuenta?', r: 'Puedes tener hasta tres dispositivos conectados. Para liberar una plaza, desconecta un dispositivo desde los ajustes de tu cuenta.' },
@@ -53,7 +60,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
   <ul class="griglia-materie">
     {aPagamento.map((m) => (
       <li style={`--accento: ${m.colore}`}>
-        <a href={de || es ? link(lingua, `/${m.slug}`) : link(lingua, `/${m.slug}/sblocca`)}>
+        <a href={de || es || fr ? link(lingua, `/${m.slug}`) : link(lingua, `/${m.slug}/sblocca`)}>
           <h3>{m.titolo} · {m.prezzo} €</h3>
           <p>{m.descrizione}</p>
           <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>
@@ -77,7 +84,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
     {t.comprende.map((x) => <li>{x}</li>)}
   </ul>
 
-  <h2 id="domande-frequenti">{es ? 'Preguntas frecuentes' : de ? 'Häufige Fragen' : en ? 'Frequently asked questions' : 'Domande frequenti'}</h2>
+  <h2 id="domande-frequenti">{fr ? 'Questions fréquentes' : es ? 'Preguntas frecuentes' : de ? 'Häufige Fragen' : en ? 'Frequently asked questions' : 'Domande frequenti'}</h2>
   <div class="domande-frequenti">
     {domande.map((x) => (
       <details>

@@ -1,6 +1,7 @@
 ---
 import { GRUPPI_DE } from '../data/materie-de';
 import { GRUPPI_ES } from '../data/materie-es';
+import { GRUPPI_FR } from '../data/materie-fr';
 import type { Lingua } from '../i18n';
 
 interface Props {
@@ -11,8 +12,12 @@ const { lingua, gruppi } = Astro.props;
 const inglese = lingua === 'en';
 const de = lingua === 'de';
 const es = lingua === 'es';
-const titolo = es ? 'Elige tu itinerario' : de ? 'Wähle deinen Lernbereich' : inglese ? 'Choose your study path' : 'Scegli il tuo percorso';
+const fr = lingua === 'fr';
+const titolo = fr ? 'Choisis ton parcours' : es ? 'Elige tu itinerario' : de ? 'Wähle deinen Lernbereich' : inglese ? 'Choose your study path' : 'Scegli il tuo percorso';
 const tipi: Record<string, string> = {
+  [GRUPPI_FR.Università]: 'universita', [GRUPPI_FR.Superiori]: 'superiori',
+  [GRUPPI_FR.Concorsi]: 'concorsi', [GRUPPI_FR['Percorso per principianti']]: 'basi',
+  [GRUPPI_FR['Semestre filtro']]: 'semestre',
   [GRUPPI_ES.Università]: 'universita', [GRUPPI_ES.Superiori]: 'superiori',
   [GRUPPI_ES.Concorsi]: 'concorsi', [GRUPPI_ES['Percorso per principianti']]: 'basi',
   [GRUPPI_ES['Semestre filtro']]: 'semestre',
@@ -25,7 +30,11 @@ const tipi: Record<string, string> = {
   'Percorso per principianti': 'basi', 'Beginners': 'basi',
   'Semestre filtro': 'semestre', 'Filter semester': 'semestre',
 };
-const descrizioni: Record<string, string> = es ? {
+const descrizioni: Record<string, string> = fr ? {
+  universita: 'Mathématiques et physique', superiori: 'Mathématiques, physique et informatique',
+  concorsi: 'Mathématiques et raisonnement logique', basi: 'Les bases des mathématiques et de la physique',
+  semestre: 'Semestre de sélection', test: 'TOLC et OFA',
+} : es ? {
   universita: 'Matemáticas y física', superiori: 'Matemáticas, física e informática',
   concorsi: 'Matemáticas y razonamiento lógico', basi: 'Matemáticas y física desde el principio',
   semestre: 'Semestre de selección', test: 'TOLC y OFA',
@@ -52,12 +61,12 @@ const icone: Record<string, string> = {
 };
 ---
 <section class="selettore-percorsi" aria-labelledby="titolo-percorsi-home">
-  <p class="sopra-percorsi">{es ? 'TUS ASIGNATURAS' : de ? 'DEINE FÄCHER' : inglese ? 'YOUR SUBJECTS' : 'LE TUE MATERIE'}</p>
+  <p class="sopra-percorsi">{fr ? 'TES MATIÈRES' : es ? 'TUS ASIGNATURAS' : de ? 'DEINE FÄCHER' : inglese ? 'YOUR SUBJECTS' : 'LE TUE MATERIE'}</p>
   <h2 id="titolo-percorsi-home">{titolo}</h2>
   <nav class="percorsi-home" aria-labelledby="titolo-percorsi-home">
     {gruppi.map((g, i) => {
       const tipo = tipi[g.nome] || 'test';
-      const nome = tipo === 'basi' ? (es ? 'Desde cero' : de ? 'Grundlagen' : inglese ? 'From scratch' : 'Da zero') : g.breve;
+      const nome = tipo === 'basi' ? (fr ? 'Reprendre les bases' : es ? 'Desde cero' : de ? 'Grundlagen' : inglese ? 'From scratch' : 'Da zero') : g.breve;
       return (
         <a href={g.href ?? `#${g.id}`} aria-controls={g.href ? undefined : g.id} aria-current={i === 0 && !g.href ? 'location' : undefined}>
           <svg class="icona-percorso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><Fragment set:html={icone[tipo]} /></svg>

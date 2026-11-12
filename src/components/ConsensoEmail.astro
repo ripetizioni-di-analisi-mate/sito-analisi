@@ -2,21 +2,21 @@
 import { link, materieL, type Lingua } from '../i18n';
 interface Props { lingua: Lingua; scegliMateria?: boolean; nascosto?: boolean }
 const { lingua, scegliMateria = false, nascosto = false } = Astro.props;
-const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es';
+const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es', fr = lingua === 'fr';
 const materie = scegliMateria ? materieL(lingua).filter((m) => m.attiva) : [];
 ---
 <div class="consenso-email" data-consenso-email hidden={nascosto}>
   <label class="consenso-email-scelta">
     <input type="checkbox" name="offerte" autocomplete="off" />
-    <span>{es ? 'Tengo al menos 18 años y acepto recibir ejercicios gratuitos y ofertas por correo en inglés según la asignatura que elija y mis compras.' : de ? 'Ich bin mindestens 18 Jahre alt und möchte kostenlose Aufgaben und Angebote per E-Mail auf Englisch erhalten. Die Auswahl richtet sich nach meinem gewählten Fach und meinen Käufen.' : en ? 'I’m 18 or older and agree to get free exercises and email offers based on the subject I select and my purchases.' : 'Ho almeno 18 anni e acconsento a ricevere per email esercizi gratuiti e offerte in base alla materia che scelgo e ai miei acquisti.'}</span>
+    <span>{fr ? 'J’ai au moins 18 ans et j’accepte de recevoir par e-mail des exercices gratuits et des offres en anglais, en fonction de la matière que je choisis et de mes achats.' : es ? 'Tengo al menos 18 años y acepto recibir ejercicios gratuitos y ofertas por correo en inglés según la asignatura que elija y mis compras.' : de ? 'Ich bin mindestens 18 Jahre alt und möchte kostenlose Aufgaben und Angebote per E-Mail auf Englisch erhalten. Die Auswahl richtet sich nach meinem gewählten Fach und meinen Käufen.' : en ? 'I’m 18 or older and agree to get free exercises and email offers based on the subject I select and my purchases.' : 'Ho almeno 18 anni e acconsento a ricevere per email esercizi gratuiti e offerte in base alla materia che scelgo e ai miei acquisti.'}</span>
   </label>
-  {scegliMateria && <label>{es ? 'Asignatura para el primer ejercicio (opcional)' : de ? 'Fach für die erste Aufgabe (freiwillig)' : en ? 'Subject for the first exercise (optional)' : 'Materia per il primo esercizio (facoltativa)'}
+  {scegliMateria && <label>{fr ? 'Matière du premier exercice (facultatif)' : es ? 'Asignatura para el primer ejercicio (opcional)' : de ? 'Fach für die erste Aufgabe (freiwillig)' : en ? 'Subject for the first exercise (optional)' : 'Materia per il primo esercizio (facoltativa)'}
     <select name="materiaEmail">
-      <option value="">{es ? 'Elige una asignatura' : de ? 'Fach auswählen' : en ? 'Choose a subject' : 'Scegli la materia'}</option>
+      <option value="">{fr ? 'Choisir une matière' : es ? 'Elige una asignatura' : de ? 'Fach auswählen' : en ? 'Choose a subject' : 'Scegli la materia'}</option>
       {materie.map((m) => <option value={m.slug}>{m.titolo}</option>)}
     </select>
   </label>}
-  <a href={(de || es ? '/privacy?lingua=it' : link(lingua, '/privacy')) + '#email-studio-offerte'}>{es ? 'Cómo usamos tus datos para enviarte correos (en italiano)' : de ? 'Datenschutz beim E-Mail-Versand (Italienisch)' : en ? 'How we use your data for email' : 'Come usiamo i dati per le email'}</a>
+  <a href={(de || es || fr ? '/privacy?lingua=it' : link(lingua, '/privacy')) + '#email-studio-offerte'}>{fr ? 'Utilisation de tes données pour les e-mails (en italien)' : es ? 'Cómo usamos tus datos para enviarte correos (en italiano)' : de ? 'Datenschutz beim E-Mail-Versand (Italienisch)' : en ? 'How we use your data for email' : 'Come usiamo i dati per le email'}</a>
 </div>
 <style>
   .consenso-email{font-size:.83rem;line-height:1.45;display:grid;gap:.35rem;color:inherit}

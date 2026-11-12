@@ -11,6 +11,9 @@ const { lingua = 'it', usa = false } = Astro.props as { lingua?: Lingua; usa?: b
 const voci = usa ? [
   { href: url('/us/calculus-1#course-practice'), titolo: 'Timed questions' },
   { href: url('/us/calculus-1/practice-exam'), titolo: 'Exam simulations' },
+] : lingua === 'fr' ? [
+  { href: '/fr/matematica-da-zero', titolo: 'Les bases des mathématiques' },
+  { href: '/fr/fisica-zero', titolo: 'Les bases de la physique' },
 ] : lingua === 'es' ? [
   { href: '/es/matematica-da-zero', titolo: 'Matemáticas desde cero' },
   { href: '/es/fisica-zero', titolo: 'Física desde cero' },
