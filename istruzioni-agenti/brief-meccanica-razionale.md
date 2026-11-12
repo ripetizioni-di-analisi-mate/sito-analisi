@@ -93,3 +93,4 @@ Alla fine elenca i file creati con il numero di parole della teoria e il numero 
 - I punti delle `coppie` non entrano nel calcolo del riquadro della figura: una coppia disegnata fuori dall'ingombro degli altri elementi viene tagliata senza segnalazione. Si rimedia con un'etichetta che estenda il riquadro.
 - La freccia di una forza ha la punta sul punto indicato. Per farla partire dal punto di applicazione si mette la forza in $P + \vec{d}$ con componenti $\vec{d}$; l'etichetta finisce sulla coda, perciò conviene lasciarla vuota e scrivere il nome con `etichette`.
 - Le figure in assonometria si ottengono con `riferimento=0` proiettando $(x, y, z)$ in $(y - 0{,}5x,\ z - 0{,}36x)$ e disegnando gli assi con `frecce`.
+- Il campo `quote` accetta come estremo soltanto un nodo dichiarato in `nodi` oppure una coppia `x y`; un punto definito in `punti` non è riconosciuto e la figura viene scartata con un errore.
