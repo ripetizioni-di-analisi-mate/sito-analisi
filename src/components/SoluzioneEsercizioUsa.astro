@@ -1,0 +1,10 @@
+---
+import { calculusHtml } from '../lib/stem-usa-practice';
+
+interface Props { soluzione: string; riservata?: boolean }
+const { soluzione, riservata } = Astro.props;
+---
+<details class="blocco blocco-soluzione" data-usa-content={riservata || undefined}>
+  <summary class="blocco-etichetta">Show solution</summary>
+  {soluzione.split('\n').map(paragrafo => <p set:html={calculusHtml(paragrafo)} />)}
+</details>

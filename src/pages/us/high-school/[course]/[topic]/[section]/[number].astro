@@ -1,6 +1,7 @@
 ---
 import Base from '../../../../../../layouts/Base.astro';
 import FineAnteprimaUsa from '../../../../../../components/FineAnteprimaUsa.astro';
+import SoluzioneEsercizioUsa from '../../../../../../components/SoluzioneEsercizioUsa.astro';
 import VerificaRisposta from '../../../../../../components/VerificaRisposta.astro';
 import { highSchoolCourses, highSchoolHasStudyPages, FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../../../../../../data/stem-usa/high-school/index.mjs';
 import { linkArgomentoUsa } from '../../../../../../data/stem-usa/catalog-view';
@@ -49,10 +50,7 @@ const next = n < count ? item(n + 1)
   {!worked && <div data-usa-content={!free || undefined}>
     <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + n}
       tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
-    <details class="sommario-pagina">
-      <summary>Show solution</summary>
-      <div class="testo-studio"><p set:html={calculusHtml(solution)} /></div>
-    </details>
+    <SoluzioneEsercizioUsa soluzione={solution} />
   </div>}
   {!free && <FineAnteprimaUsa materia={slug} titolo={worked ? 'Unlock the worked solution' : 'Unlock the solution and answer check'} />}
 </Base>
