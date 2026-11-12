@@ -35,3 +35,4 @@ After writing all files, list the output folders and confirm the number of outpu
 
 ## `::struttura` (figure of Statica and Meccanica razionale)
 Keep every attribute byte-identical (`nodi`, `aste`, `vincoli`, `forze`, `reazioni`, `carichi`, `coppie`, `quote`, `punti`, `poligoni`, `cerchi`, `linee`, `tratteggi`, `frecce`, `diagramma`, `riferimento`), because they are coordinates and symbols. Translate only the `titolo="..."` caption and the word part of `etichette="x,y,text"` and of `quote="A,B,text"` when it is an Italian word (`m` and other unit symbols stay). Inside those texts decimals keep the point, as in the source.
+Translate the label part of `frecce="x0,y0,x1,y1,label"` too when it is an Italian word or phrase (`asse di precessione` -> `precession axis`); the four coordinates stay unchanged.

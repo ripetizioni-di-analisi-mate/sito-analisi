@@ -326,7 +326,7 @@ $$
 $$
 The precession velocity is inversely proportional to the spin velocity, therefore a fast top precesses slowly. For a homogeneous disk of mass $m$ and radius $R$ one has $C = \dfrac{m\,R^2}{2}$ and the relation becomes $\Omega = \dfrac{2\,g\,d}{R^2\,\dot{\varphi}}$.
 
-::struttura{nodi="O,0,0" frecce="0,0,0,3.4,asse di precessione;0,0,1.95,2.4,ζ" tratteggi="0,0 2.6,3.2" cerchi="1.5,1.85,0.62" punti="1.5,1.85,G,baricentro" forze="1.5 1.85,0,-1,Mg" coppie="0 2.75,1,Ω;1.95 2.4,1,φ̇" etichette="0.42,2.05,ϑ" riferimento=0 titolo="Regular precession: the axis of figure $\zeta$ forms the constant angle $\vartheta$ with the axis of precession and rotates about it with angular velocity $\Omega$"}
+::struttura{nodi="O,0,0" frecce="0,0,0,3.4,precession axis;0,0,1.95,2.4,ζ" tratteggi="0,0 2.6,3.2" cerchi="1.5,1.85,0.62" punti="1.5,1.85,G,baricentro" forze="1.5 1.85,0,-1,Mg" coppie="0 2.75,1,Ω;1.95 2.4,1,φ̇" etichette="0.42,2.05,ϑ" riferimento=0 titolo="Regular precession: the axis of figure $\zeta$ forms the constant angle $\vartheta$ with the axis of precession and rotates about it with angular velocity $\Omega$"}
 
 :::dimostrazione
 One writes the components of $\vec{\omega}$ in the body-fixed frame by means of the Euler angles, that is $p = \dot{\psi}\sin\vartheta\sin\varphi + \dot{\vartheta}\cos\varphi$, $q = \dot{\psi}\sin\vartheta\cos\varphi - \dot{\vartheta}\sin\varphi$ and $r = \dot{\varphi} + \dot{\psi}\cos\vartheta$. In the regular precession one has $\dot{\vartheta} = 0$, $\dot{\psi} = \Omega$ and $\dot{\varphi}$ constant, therefore
@@ -362,6 +362,6 @@ $$
 $$
 called the gyroscopic couple, directed perpendicularly to the two axes. A rotor of axial moment $C = 0.9\,\mathrm{kg\,m^2}$ that spins at $100\,\mathrm{rad/s}$, mounted on two bearings at distance $0.5\,\mathrm{m}$ and forced to precess at $2\,\mathrm{rad/s}$, loads the bearings with a couple of $180\,\mathrm{N\,m}$, that is two opposite forces of $360\,\mathrm{N}$.
 
-::struttura{nodi="A,-1.9,0;B,1.9,0" aste="A-B" vincoli="A,cerniera;B,cerniera" cerchi="0,0,0.8" frecce="-2.9,0,3.1,0,ζ;0,-1.9,0,2.3,asse di precessione" reazioni="A,0,1.1,Φ_A;B,0,-1.1,Φ_B" coppie="2.45 0,1,r;0 1.85,1,Ω" quote="A,B,b,-1.6" riferimento=0 titolo="Gyroscopic couple on two bearings at distance $b$: the reactions equal $\dfrac{C\,r\,\Omega}{b}$ and are opposite"}
+::struttura{nodi="A,-1.9,0;B,1.9,0" aste="A-B" vincoli="A,cerniera;B,cerniera" cerchi="0,0,0.8" frecce="-2.9,0,3.1,0,ζ;0,-1.9,0,2.3,precession axis" reazioni="A,0,1.1,Φ_A;B,0,-1.1,Φ_B" coppie="2.45 0,1,r;0 1.85,1,Ω" quote="A,B,b,-1.6" riferimento=0 titolo="Gyroscopic couple on two bearings at distance $b$: the reactions equal $\dfrac{C\,r\,\Omega}{b}$ and are opposite"}
 
 :::
