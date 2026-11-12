@@ -87,3 +87,9 @@ Il PNG di controllo si chiama `/tmp/lavoro/mecraz-<slug>/figure.png`. Ogni figur
 
 ## Consegna
 Alla fine elenca i file creati con il numero di parole della teoria e il numero di figure, e conferma: (a) tutte le ancore citate nei campi `teoria:` esistono nel file di teoria; (b) ogni risultato è stato verificato con un calcolo indipendente (di' con cosa); (c) `node strumenti/anteprima_figure.mjs /tmp/lavoro/mecraz-<slug>/figure.png <file…>` dalla radice del repository dà 0 problemi e hai guardato il PNG; (d) `python3 strumenti/yamlcheck.py <file…>` non segnala errori. Rapporto breve, in italiano.
+
+## Trappole note di `::struttura` (emerse scrivendo la materia)
+- Nelle spezzate (`linee`, `tratteggi`, `poligoni`) i punti si scrivono `x,y x,y`: con lo spazio fra ascissa e ordinata la spezzata viene scartata in silenzio, senza errore.
+- I punti delle `coppie` non entrano nel calcolo del riquadro della figura: una coppia disegnata fuori dall'ingombro degli altri elementi viene tagliata senza segnalazione. Si rimedia con un'etichetta che estenda il riquadro.
+- La freccia di una forza ha la punta sul punto indicato. Per farla partire dal punto di applicazione si mette la forza in $P + \vec{d}$ con componenti $\vec{d}$; l'etichetta finisce sulla coda, perciò conviene lasciarla vuota e scrivere il nome con `etichette`.
+- Le figure in assonometria si ottengono con `riferimento=0` proiettando $(x, y, z)$ in $(y - 0{,}5x,\ z - 0{,}36x)$ e disegnando gli assi con `frecce`.
