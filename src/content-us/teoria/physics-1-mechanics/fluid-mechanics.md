@@ -213,7 +213,7 @@ An **ideal fluid** is incompressible and has no viscosity, which means that no t
 
 In a steady flow the path followed by an element of fluid is called a **streamline**, and the velocity at each point is tangent to the streamline through that point. Streamlines do not cross, since at a crossing point the velocity would have two values. A bundle of streamlines through a closed curve forms a **flow tube**, and no fluid enters or leaves a flow tube across its lateral surface.
 
-The four hypotheses are what make the two laws of the following sections exact. Real flows satisfy them approximately, and the final section states how viscosity changes the conclusions.
+The four hypotheses are what make the continuity equation and Bernoulli's equation exact. Real flows satisfy them approximately, and the treatment of viscosity states how a real fluid departs from those conclusions.
 :::
 
 :::definizione{#volume-flow-rate titolo="Volume flow rate"}
