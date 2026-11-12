@@ -152,6 +152,23 @@ export const ALIAS: Record<string, string[]> = {
   'equazioni cardinali della statica': ['Equazioni di equilibrio del corpo rigido', 'Equazioni cardinali dell\'equilibrio'],
   'equazioni indefinite di equilibrio': ['Equazioni indefinite di equilibrio della trave', 'Relazioni tra carico, taglio e momento'],
   'condizione 2n = a + v': ['Condizione di isostaticità delle travature reticolari', 'Regola 2n = a + v'],
+  // Meccanica razionale
+  'teorema di mozzi': ['Asse di Mozzi', 'Teorema di Mozzi-Chasles', 'Asse elicoidale del moto'],
+  'teorema di composizione delle velocità': ['Teorema di Galileo', 'Legge di composizione delle velocità'],
+  'teorema di composizione delle accelerazioni': ['Teorema di Coriolis', 'Legge di composizione delle accelerazioni'],
+  'formule di poisson': ['Formule di Poisson per i versori del riferimento mobile'],
+  'formula di binet': ['Equazione di Binet', 'Formula di Binet per i moti centrali'],
+  'equazioni di eulero': ['Equazioni di Eulero del corpo rigido', 'Equazioni di Eulero della dinamica'],
+  'equazioni di lagrange': ['Equazioni di Eulero-Lagrange', 'Equazioni di Lagrange del secondo tipo'],
+  'teorema di lagrange-dirichlet': ['Teorema di Dirichlet', 'Criterio di stabilità di Lagrange-Dirichlet'],
+  'teorema di könig per il momento angolare': ['Teorema di König', 'Secondo teorema di König'],
+  'relazione simbolica della dinamica': ['Equazione simbolica della dinamica', 'Principio di d\'Alembert'],
+  'principio dei lavori virtuali': ['PLV', 'Principio degli spostamenti virtuali'],
+  'teorema dell\'energia cinetica': ['Teorema delle forze vive'],
+  'pendolo composto': ['Pendolo fisico'],
+  'moti alla poinsot: integrali primi': ['Moto di Poinsot', 'Moto per inerzia del corpo rigido'],
+  'legge di coulomb-morin e cono d\'attrito': ['Legge di Coulomb-Morin', 'Legge dell\'attrito statico', 'Cono d\'attrito'],
+  'criterio dell\'hessiana': ['Criterio di Sylvester', 'Criterio della matrice hessiana'],
 };
 
 // Nomi alternativi in inglese, con la stessa chiave italiana (per le pagine `/en/…`).
@@ -261,6 +278,23 @@ export const ALIAS_EN: Record<string, string[]> = {
   'principio dei lavori virtuali per i sistemi di corpi rigidi': ['Principle of virtual work', 'Virtual work principle'],
   'equazioni cardinali della statica': ['Equilibrium equations of a rigid body'],
   'equazioni indefinite di equilibrio': ['Differential equations of equilibrium for beams', 'Load-shear-moment relationships'],
+  // Meccanica razionale
+  'teorema di mozzi': ['Mozzi axis', 'Mozzi-Chasles theorem', 'Screw axis theorem'],
+  'teorema di composizione delle velocità': ['Galilean velocity addition', 'Composition of velocities'],
+  'teorema di composizione delle accelerazioni': ['Coriolis theorem', 'Composition of accelerations'],
+  'formule di poisson': ['Poisson formulas'],
+  'formula di binet': ['Binet equation'],
+  'equazioni di eulero': ['Euler equations of rigid-body motion'],
+  'equazioni di lagrange': ['Euler-Lagrange equations', 'Lagrange equations of the second kind'],
+  'teorema di lagrange-dirichlet': ['Lagrange-Dirichlet theorem', 'Dirichlet stability theorem'],
+  'teorema di könig per il momento angolare': ['König\'s theorem for angular momentum'],
+  'relazione simbolica della dinamica': ['d\'Alembert\'s principle', 'Symbolic equation of dynamics'],
+  'principio dei lavori virtuali': ['Principle of virtual work'],
+  'teorema dell\'energia cinetica': ['Work-energy theorem'],
+  'pendolo composto': ['Physical pendulum', 'Compound pendulum'],
+  'moti alla poinsot: integrali primi': ['Poinsot motion', 'Torque-free motion'],
+  'legge di coulomb-morin e cono d\'attrito': ['Coulomb friction law', 'Static friction law', 'Friction cone'],
+  'criterio dell\'hessiana': ['Sylvester criterion', 'Hessian test'],
 };
 
 // Nomi alternativi di una voce, nella lingua richiesta (chiave: titolo in minuscolo).

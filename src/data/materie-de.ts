@@ -18,6 +18,7 @@ export const MATERIE_DE: Record<string, [string, string]> = {
   'fisica-1': ['Physik I', 'Mechanik und Thermodynamik. Der Kurs behandelt Bewegung, Kräfte, Energie, Stöße, Schwingungen, Gravitation und Strömungsmechanik.'],
   'fisica-2': ['Physik II', 'Elektrostatik, elektrische Schaltungen, Magnetfelder, Induktion, Wechselstrom, Maxwell-Gleichungen, elektromagnetische Wellen und Optik.'],
   statica: ['Technische Mechanik: Statik', 'Kräftesysteme, Schwerpunkte, Lagerreaktionen, Gerberträger, Rahmen, Bögen und Fachwerke. Dazu Schnittgrößen, virtuelle Arbeit und Einflusslinien.'],
+  'meccanica-razionale': ['Technische Mechanik: Kinematik und Dynamik', 'Kräftesysteme, Massengeometrie, Kinematik von Punkt und starrem Körper, Bindungen und generalisierte Koordinaten, Statik, Dynamik, Lagrange-Gleichungen, Stabilität und kleine Schwingungen.'],
   'scienza-delle-costruzioni': ['Festigkeitslehre und Baustatik', 'Lagerung, Schnittgrößen, Spannungen und Verformungen, statisch unbestimmte Tragwerke und die Euler’sche Knicklast.'],
   idraulica: ['Hydraulik und Strömungsmechanik', 'Hydrostatik und Druckkräfte, Kontinuitätsgleichung, Bernoulli-Gleichung, Impulssatz, Druckverluste, Rohrleitungen und Pumpen, Ausfluss und Überfälle, Gerinneströmungen und Wechselsprung.'],
   'matematica-generale': ['Mathematik für Wirtschaftswissenschaften', 'Funktionen und ökonomische Modelle, Grenzwerte, Ableitungen, Elastizität, Optimierung, Integralrechnung, Finanzmathematik und lineare Gleichungssysteme.'],
