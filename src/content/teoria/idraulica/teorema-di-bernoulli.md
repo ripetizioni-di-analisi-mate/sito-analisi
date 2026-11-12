@@ -127,9 +127,9 @@ Quando la piezometrica scende sotto l'asse della condotta la pressione relativa 
 Il teorema di Bernoulli vale lungo una traiettoria, mentre nelle applicazioni interessa l'intera corrente che attraversa una sezione, nella quale la velocità varia da punto a punto.
 
 :::richiamo{#coefficiente-di-ragguaglio titolo="Coefficiente di ragguaglio delle potenze cinetiche"}
-Sia $A$ l'area della sezione trasversale di una corrente, $v$ la velocità locale e $V = \dfrac{Q}{A}$ la velocità media. Il coefficiente
+Sia $A$ l'area della sezione trasversale di una corrente, $u$ la velocità locale e $v = \dfrac{Q}{A}$ la velocità media. Il coefficiente
 $$
-\alpha = \frac{1}{A\,V^3}\int_A v^3\,dA
+\alpha = \frac{1}{A\,v^3}\int_A u^3\,dA
 $$
 vale $1$ se la velocità è uniforme e supera $1$ in ogni altro caso. Per il moto turbolento nelle condotte circolari vale fra $1{,}03$ e $1{,}10$, per il moto laminare vale $2$. Si rimanda all'argomento sulla cinematica dei fluidi, la portata e l'equazione di continuità.
 :::
@@ -137,23 +137,23 @@ vale $1$ se la velocità è uniforme e supera $1$ in ogni altro caso. Per il mot
 ::::teorema{#bernoulli-per-correnti titolo="Teorema di Bernoulli per una corrente lineare"}
 Sia una corrente lineare, cioè una corrente le cui linee di corrente sono rettilinee e parallele, o di curvatura trascurabile, di un fluido perfetto incomprimibile in moto permanente. Allora nella sezione trasversale la distribuzione delle pressioni è idrostatica, cioè $z + \dfrac{p}{\gamma}$ ha lo stesso valore $h$ in tutti i punti della sezione, e il carico totale della corrente, definito come potenza per unità di peso transitante,
 $$
-H = h + \alpha\,\frac{V^2}{2g} = z + \frac{p}{\gamma} + \alpha\,\frac{V^2}{2g} ,
+H = h + \alpha\,\frac{v^2}{2g} = z + \frac{p}{\gamma} + \alpha\,\frac{v^2}{2g} ,
 $$
 ha lo stesso valore in due sezioni qualsiasi.
 
-La grandezza $z + \dfrac{p}{\gamma}$ si può calcolare in un punto qualsiasi della sezione, per esempio sull'asse della condotta o sul pelo libero di un canale, e il risultato non cambia. Nelle condotte in pressione si assume $\alpha = 1$, perché lo scostamento da $1$ incide sull'altezza cinetica, che nei problemi di condotta è una frazione piccola del carico totale; da qui in avanti si scrive $H = z + \dfrac{p}{\gamma} + \dfrac{v^2}{2g}$ intendendo per $v$ la velocità media.
+La grandezza $z + \dfrac{p}{\gamma}$ si può calcolare in un punto qualsiasi della sezione, per esempio sull'asse della condotta o sul pelo libero di un canale, e il risultato non cambia. Nelle condotte in pressione si assume $\alpha = 1$, perché lo scostamento da $1$ incide sull'altezza cinetica, che nei problemi di condotta è una frazione piccola del carico totale; da qui in avanti si scrive $H = z + \dfrac{p}{\gamma} + \dfrac{v^2}{2g}$, dove $v$ è la velocità media.
 
 :::dimostrazione
 Le linee di corrente sono rettilinee e parallele, quindi l'accelerazione nella direzione normale alle linee di corrente è nulla. Lungo quella direzione agiscono il peso e le forze di pressione, perciò l'equilibrio è quello di un fluido in quiete e per la **legge di Stevin** la somma $z + \dfrac{p}{\gamma}$ è costante sulla sezione; si indica quel valore comune con $h$.
 
-La potenza transitante attraverso la sezione è l'integrale del carico totale locale moltiplicato per il peso che passa nell'unità di tempo attraverso l'elemento $dA$, cioè per $\gamma\,v\,dA$:
+La potenza transitante attraverso la sezione è l'integrale del carico totale locale moltiplicato per il peso che passa nell'unità di tempo attraverso l'elemento $dA$, cioè per $\gamma\,u\,dA$:
 $$
-P = \int_A \gamma\left(h + \frac{v^2}{2g}\right) v\,dA
-= \gamma\,h\int_A v\,dA + \frac{\gamma}{2g}\int_A v^3\,dA .
+P = \int_A \gamma\left(h + \frac{u^2}{2g}\right) u\,dA
+= \gamma\,h\int_A u\,dA + \frac{\gamma}{2g}\int_A u^3\,dA .
 $$
-Il primo integrale è la portata $Q = V A$ e il secondo vale $\alpha\,V^3 A$ per la definizione del **coefficiente di ragguaglio**, quindi
+Il primo integrale è la portata $Q = v A$ e il secondo vale $\alpha\,v^3 A$ per la definizione del **coefficiente di ragguaglio**, quindi
 $$
-P = \gamma\,Q\,h + \frac{\gamma}{2g}\,\alpha\,V^3 A = \gamma\,Q\left(h + \alpha\,\frac{V^2}{2g}\right) .
+P = \gamma\,Q\,h + \frac{\gamma}{2g}\,\alpha\,v^3 A = \gamma\,Q\left(h + \alpha\,\frac{v^2}{2g}\right) .
 $$
 Dividendo per il peso $\gamma Q$ che transita nell'unità di tempo si ottiene l'espressione di $H$. Il fluido è perfetto, quindi per il **teorema di Bernoulli** il carico totale è costante su ogni traiettoria e, poiché la potenza che entra da una sezione esce dall'altra, il valore di $H$ è lo stesso nelle due sezioni.
 :::

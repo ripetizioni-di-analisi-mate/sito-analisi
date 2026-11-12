@@ -223,7 +223,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "L'Idraulica dei corsi di Ingegneria: statica dei fluidi e spinte, equazione di continuità, teorema di Bernoulli, equazione globale, perdite di carico, lunghe condotte e pompe, reti, foronomia e stramazzi, correnti a pelo libero, profili di moto permanente e risalto idraulico.",
     colore: '#2a6f84',
     gruppo: 'Università',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'idrostatica', titolo: 'Proprietà dei fluidi e statica dei fluidi', breve: 'Idrostatica' },
       { slug: 'spinte-idrostatiche', titolo: 'Spinte su superfici piane e curve e galleggiamento', breve: 'Spinte e galleggiamento' },

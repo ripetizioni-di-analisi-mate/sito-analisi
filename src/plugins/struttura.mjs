@@ -232,7 +232,8 @@ export function struttura(a) {
     if (c.et) {
       const [q1, q2] = [c.pts[0], c.pts[1]];
       const n = normale(q1, q2, 1), m = [(q1[0] + q2[0]) / 2, (q1[1] + q2[1]) / 2];
-      svg += `<text class="etichetta" x="${f(X(m[0]) + n[0] * (sp / 2 + 13))}" y="${f(Y(m[1]) - n[1] * (sp / 2 + 13) + 6)}" text-anchor="middle">${testoSvg(c.et)}</text>`;
+      const d0 = sp / 2 + 14, base = n[1] > 0.3 ? -3 : n[1] < -0.3 ? 15 : 6;
+      svg += `<text class="etichetta" x="${f(X(m[0]) + n[0] * d0)}" y="${f(Y(m[1]) - n[1] * d0 + base)}" text-anchor="${n[0] > 0.5 ? 'start' : n[0] < -0.5 ? 'end' : 'middle'}">${testoSvg(c.et)}</text>`;
     }
   }
 
@@ -530,7 +531,9 @@ export function struttura(a) {
       const occupate = []; // angoli in gradi, y verso l'alto
       const ang = (dx2, dy2) => (Math.atan2(dy2, dx2) * 180) / Math.PI;
       const uguale = (q) => Math.abs(q[0] - p[0]) < 1e-9 && Math.abs(q[1] - p[1]) < 1e-9;
-      for (const [q, r] of [...aste, ...catene]) {
+      const segmenti = [...aste, ...catene];
+      for (const c of condotte) for (let i = 1; i < c.pts.length; i++) segmenti.push([c.pts[i - 1], c.pts[i]]);
+      for (const [q, r] of segmenti) {
         if (uguale(q)) occupate.push(ang(r[0] - q[0], r[1] - q[1]));
         if (uguale(r)) occupate.push(ang(q[0] - r[0], q[1] - r[1]));
       }
@@ -548,7 +551,9 @@ export function struttura(a) {
       const r = (migliore * Math.PI) / 180, ox = Math.cos(r), oy = -Math.sin(r);
       // con una coppia nel nodo l'etichetta va fuori dall'arco (raggio 19)
       const conCoppia = coppieM.some((c) => uguale(c.p));
-      const dist = conCoppia ? 31 : vincoli.some((v) => v.n === n && v.tipo === 'incastro') ? 30 : vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
+      let dist = conCoppia ? 31 : vincoli.some((v) => v.n === n && v.tipo === 'incastro') ? 30 : vincoli.some((v) => v.n === n) || lista(a.interni).some((s) => campi(s)[0] === n) ? 22 : 16;
+      // su una condotta il nome esce dalla parete del tubo
+      for (const c of condotte) if (c.pts.some(uguale)) dist = Math.max(dist, Math.max(7, c.d * k) / 2 + 13);
       const cx = X(p[0]) + ox * dist, cy = Y(p[1]) + oy * dist + 6;
       svg += `<text class="nome-nodo" x="${f(cx)}" y="${f(cy)}" text-anchor="${ox > 0.35 ? 'start' : ox < -0.35 ? 'end' : 'middle'}">${testoSvg(n)}</text>`;
     }

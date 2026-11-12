@@ -10,7 +10,7 @@ Nel moto uniforme l'altezza d'acqua è la stessa in ogni sezione del canale. Un 
 :::richiamo{#richiamo-correnti titolo="Moto uniforme, altezza critica e numero di Froude"}
 In un canale prismatico di pendenza $i > 0$ il moto uniforme ha cadente $J = i$ e altezza $h_0$, che si ricava dalla formula di Gauckler-Strickler
 $$
-Q = k_s\,A\,R^{2/3}\,\sqrt{i} .
+Q = k_s\,A\,R^{\frac{2}{3}}\,\sqrt{i} .
 $$
 L'altezza critica $h_c$ annulla la derivata dell'energia specifica $E = h + \dfrac{Q^2}{2 g A^2}$ ed è l'altezza per cui $Fr = 1$; per la sezione rettangolare di larghezza $b$ vale
 $$
@@ -22,7 +22,7 @@ La corrente è *lenta* se $Fr < 1$, cioè se $h > h_c$, ed è *veloce* se $Fr > 
 :::definizione{#moto-gradualmente-vario titolo="Moto permanente gradualmente vario"}
 Una corrente a pelo libero è in **moto permanente gradualmente vario** quando la portata è costante nel tempo e l'altezza d'acqua varia lungo l'asse del canale in modo tanto lento che in ogni sezione la distribuzione delle pressioni resta idrostatica e la perdita di carico per unità di lunghezza si calcola con la formula del moto uniforme che compete all'altezza locale:
 $$
-J = \frac{v^2}{k_s^2\,R^{4/3}} ,
+J = \frac{v^2}{k_s^2\,R^{\frac{4}{3}}} ,
 \qquad
 v = \frac{Q}{A} .
 $$

@@ -122,11 +122,11 @@ La resistenza al moto in un canale si esprime con le formule monomie ricavate da
 $$
 v = \chi\sqrt{R\,J} ,
 $$
-con $\chi$ coefficiente di Chézy, in $\mathrm{m^{1/2}/s}$. La **formula di Gauckler-Strickler** esprime $\chi = k_s R^{1/6}$ e, in moto uniforme, dove $J = i$, dà
+con $\chi$ coefficiente di Chézy, in $\mathrm{m^{1/2}/s}$. La **formula di Gauckler-Strickler** esprime $\chi = k_s R^{\frac{1}{6}}$ e, in moto uniforme, dove $J = i$, dà
 $$
-v = k_s\,R^{2/3}\,i^{1/2} ,
+v = k_s\,R^{\frac{2}{3}}\,i^{\frac{1}{2}} ,
 \qquad
-Q = k_s\,A\,R^{2/3}\,i^{1/2} ,
+Q = k_s\,A\,R^{\frac{2}{3}}\,i^{\frac{1}{2}} ,
 $$
 con $k_s$ in $\mathrm{m^{1/3}/s}$. Il coefficiente $n = \dfrac{1}{k_s}$ è il coefficiente di Manning. Valori di uso corrente: $k_s = 80 \div 90$ per il calcestruzzo liscio, $70 \div 75$ per il calcestruzzo gettato in opera, $50 \div 60$ per la muratura, $30 \div 40$ per un canale in terra, $20 \div 30$ per un alveo naturale con vegetazione.
 
@@ -144,7 +144,7 @@ R = \frac{4{,}80}{6{,}40} = 0{,}750\,\mathrm{m} ,
 $$
 quindi
 $$
-v = 60 \cdot 0{,}750^{2/3} \cdot 0{,}001^{1/2} = 60 \cdot 0{,}825 \cdot 0{,}0316 = 1{,}57\,\mathrm{m/s} ,
+v = 60 \cdot 0{,}750^{\frac{2}{3}} \cdot 0{,}001^{\frac{1}{2}} = 60 \cdot 0{,}825 \cdot 0{,}0316 = 1{,}57\,\mathrm{m/s} ,
 \qquad
 Q = 4{,}80 \cdot 1{,}57 = 7{,}52\,\mathrm{m^3/s} .
 $$
@@ -158,37 +158,37 @@ La formula di Gauckler-Strickler dà la portata quando si conosce l'altezza. Il 
 :::definizione{#scala-delle-portate titolo="Scala delle portate"}
 Assegnate la forma della sezione, la pendenza $i$ e il coefficiente $k_s$, la funzione
 $$
-Q(h) = k_s\,A(h)\,R(h)^{2/3}\,i^{1/2}
+Q(h) = k_s\,A(h)\,R(h)^{\frac{2}{3}}\,i^{\frac{1}{2}}
 $$
 si dice **scala delle portate** del canale. Risulta strettamente crescente, perché al crescere di $h$ crescono sia l'area bagnata sia il raggio idraulico; perciò a ogni portata corrisponde una sola altezza di moto uniforme.
 
 La scala delle portate si traccia una volta per tutte per un canale assegnato e permette di leggere $h_0$ da $Q$ e viceversa. Nelle sezioni chiuse, come la circolare, la monotonia vale fino al grado di riempimento in cui il contorno bagnato cresce più rapidamente dell'area, oltre il quale la portata smette di crescere.
 
-::grafico{f="60*4*x*(4*x/(4+2*x))^(2/3)*0.0316228" xmin=0 xmax=2 ymin=0 ymax=16 nomi="h,Q" punti="1.2,7.52,pieno" segmenti="1.2,0,1.2,7.52;0,7.52,1.2,7.52" legenda="Q(h) = k_s\,A(h)\,R(h)^{2/3}\,i^{1/2}" titolo="Scala delle portate del canale rettangolare con $b = 4\,\mathrm{m}$, $i = 0{,}001$ e $k_s = 60\,\mathrm{m^{1/3}/s}$: alla portata $Q = 7{,}52\,\mathrm{m^3/s}$ corrisponde $h_0 = 1{,}20\,\mathrm{m}$"}
+::grafico{f="60*4*x*(4*x/(4+2*x))^(2/3)*0.0316228" xmin=0 xmax=2 ymin=0 ymax=16 nomi="h,Q" punti="1.2,7.52,pieno" segmenti="1.2,0,1.2,7.52;0,7.52,1.2,7.52" legenda="Q(h) = k_s\,A(h)\,R(h)^{\frac{2}{3}}\,i^{\frac{1}{2}}" titolo="Scala delle portate del canale rettangolare con $b = 4\,\mathrm{m}$, $i = 0{,}001$ e $k_s = 60\,\mathrm{m^{1/3}/s}$: alla portata $Q = 7{,}52\,\mathrm{m^3/s}$ corrisponde $h_0 = 1{,}20\,\mathrm{m}$"}
 :::
 
 :::osservazione{#altezza-di-moto-uniforme titolo="Calcolo dell'altezza di moto uniforme"}
 L'equazione $Q(h_0) = Q$ non si risolve in forma chiusa, perché $h_0$ compare sia nell'area sia nel raggio idraulico con esponenti diversi. Si procede per tentativi: si assegnano alcuni valori di $h$, si calcola $Q(h)$ e si restringe l'intervallo che contiene la soluzione, finché la portata calcolata differisce da quella assegnata meno della tolleranza scelta.
 
-Per la sezione rettangolare la formula si può riscrivere in modo da ottenere un'iterazione che converge in pochi passi. Da $Q = k_s\,b\,h\left(\dfrac{b\,h}{b + 2h}\right)^{2/3} i^{1/2}$ si ricava
+Per la sezione rettangolare la formula si può riscrivere in modo da ottenere un'iterazione che converge in pochi passi. Da $Q = k_s\,b\,h\left(\dfrac{b\,h}{b + 2h}\right)^{\frac{2}{3}} i^{\frac{1}{2}}$ si ricava
 $$
-h = \left(\frac{Q}{k_s\,b\,i^{1/2}}\right)^{3/5}\left(\frac{b + 2h}{b}\right)^{2/5} ,
+h = \left(\frac{Q}{k_s\,b\,i^{\frac{1}{2}}}\right)^{\frac{3}{5}}\left(\frac{b + 2h}{b}\right)^{\frac{2}{5}} ,
 $$
-che si usa sostituendo a destra il valore del tentativo precedente. La prima stima si prende dall'ipotesi di canale larghissimo, cioè $R \simeq h$, che dà $h \simeq \left(\dfrac{Q}{k_s\,b\,i^{1/2}}\right)^{3/5}$.
+che si usa sostituendo a destra il valore del tentativo precedente. La prima stima si prende dall'ipotesi di canale larghissimo, cioè $R \simeq h$, che dà $h \simeq \left(\dfrac{Q}{k_s\,b\,i^{\frac{1}{2}}}\right)^{\frac{3}{5}}$.
 :::
 
 :::esempio{titolo="Altezza di moto uniforme per tentativi"}
 Un canale rettangolare largo $b = 4\,\mathrm{m}$, con $i = 0{,}0005$ e $k_s = 75\,\mathrm{m^{1/3}/s}$, deve portare $Q = 6\,\mathrm{m^3/s}$. Risulta
 $$
-\frac{Q}{k_s\,b\,i^{1/2}} = \frac{6}{75 \cdot 4 \cdot 0{,}02236} = 0{,}894 ,
+\frac{Q}{k_s\,b\,i^{\frac{1}{2}}} = \frac{6}{75 \cdot 4 \cdot 0{,}02236} = 0{,}894 ,
 $$
-quindi la prima stima è $h = 0{,}894^{3/5} = 0{,}935\,\mathrm{m}$. L'iterazione dà in ordine $1{,}090\,\mathrm{m}$, $1{,}113\,\mathrm{m}$, $1{,}116\,\mathrm{m}$ e $1{,}117\,\mathrm{m}$; con una tolleranza di un millimetro si arresta qui. Il controllo diretto dà
+quindi la prima stima è $h = 0{,}894^{\frac{3}{5}} = 0{,}935\,\mathrm{m}$. L'iterazione dà in ordine $1{,}090\,\mathrm{m}$, $1{,}113\,\mathrm{m}$, $1{,}116\,\mathrm{m}$ e $1{,}117\,\mathrm{m}$; con una tolleranza di un millimetro si arresta qui. Il controllo diretto dà
 $$
 A = 4{,}47\,\mathrm{m^2} ,
 \qquad
 R = 0{,}717\,\mathrm{m} ,
 \qquad
-Q = 75 \cdot 4{,}47 \cdot 0{,}717^{2/3} \cdot 0{,}02236 = 6{,}00\,\mathrm{m^3/s} ,
+Q = 75 \cdot 4{,}47 \cdot 0{,}717^{\frac{2}{3}} \cdot 0{,}02236 = 6{,}00\,\mathrm{m^3/s} ,
 $$
 perciò $h_0 = 1{,}12\,\mathrm{m}$ e la velocità media è $v = 1{,}34\,\mathrm{m/s}$.
 :::
@@ -216,7 +216,7 @@ L'idea è che a parità di area la portata dipende solo dal contorno bagnato, qu
 
 Dalla formula di Gauckler-Strickler, con $R = \dfrac{A}{C}$,
 $$
-Q = k_s\,A\left(\frac{A}{C}\right)^{2/3} i^{1/2} = k_s\,A^{5/3}\,C^{-2/3}\,i^{1/2} .
+Q = k_s\,A\left(\frac{A}{C}\right)^{\frac{2}{3}} i^{\frac{1}{2}} = k_s\,A^{\frac{5}{3}}\,C^{-2/3}\,i^{\frac{1}{2}} .
 $$
 Poiché $A$, $k_s$ e $i$ sono assegnati, $Q$ è funzione decrescente di $C$; perciò $Q$ è massima quando $C$ è minimo.
 
@@ -301,7 +301,7 @@ $$
 $$
 per la forma del numero di Froude scritta sopra. La derivata è nulla se e solo se $Fr = 1$.
 
-Si verifica che il punto è di minimo. Il rapporto $\dfrac{A^3}{B}$ è crescente, perché $A$ cresce e, nelle sezioni usate nei canali, cresce più rapidamente di $B^{1/3}$; perciò $Fr^2 = \dfrac{Q^2 B}{g A^3}$ è decrescente e $\dfrac{dE}{dh} = 1 - Fr^2$ è crescente. Allora la derivata è negativa per $h < h_c$ e positiva per $h > h_c$, quindi $h_c$ è un punto di minimo assoluto. Inoltre $E \to +\infty$ sia per $h \to 0^+$, perché $A \to 0$ e il termine cinetico diverge, sia per $h \to +\infty$, perché il primo termine diverge; perciò il minimo è interno.
+Si verifica che il punto è di minimo. Il rapporto $\dfrac{A^3}{B}$ è crescente, perché $A$ cresce e, nelle sezioni usate nei canali, cresce più rapidamente di $B^{\frac{1}{3}}$; perciò $Fr^2 = \dfrac{Q^2 B}{g A^3}$ è decrescente e $\dfrac{dE}{dh} = 1 - Fr^2$ è crescente. Allora la derivata è negativa per $h < h_c$ e positiva per $h > h_c$, quindi $h_c$ è un punto di minimo assoluto. Inoltre $E \to +\infty$ sia per $h \to 0^+$, perché $A \to 0$ e il termine cinetico diverge, sia per $h \to +\infty$, perché il primo termine diverge; perciò il minimo è interno.
 :::
 ::::
 
@@ -380,7 +380,7 @@ L'altezza di moto uniforme dipende dalla pendenza del fondo e dalla scabrezza; l
 :::definizione{#pendenza-critica titolo="Pendenza critica"}
 Si dice **pendenza critica** $i_c$ la pendenza del fondo per la quale l'altezza di moto uniforme coincide con l'altezza critica. Si ottiene scrivendo la formula di Gauckler-Strickler nello stato critico:
 $$
-i_c = \frac{Q^2}{k_s^2\,A_c^2\,R_c^{4/3}} = \frac{v_c^2}{k_s^2\,R_c^{4/3}} ,
+i_c = \frac{Q^2}{k_s^2\,A_c^2\,R_c^{\frac{4}{3}}} = \frac{v_c^2}{k_s^2\,R_c^{\frac{4}{3}}} ,
 $$
 dove $A_c$, $R_c$ e $v_c$ sono area, raggio idraulico e velocità media calcolati con l'altezza critica.
 
@@ -404,7 +404,7 @@ La distinzione governa il tracciamento dei profili di moto permanente e la posiz
 :::esempio{titolo="Classificazione di un canale"}
 Un canale rettangolare largo $b = 2{,}50\,\mathrm{m}$, con $k_s = 60\,\mathrm{m^{1/3}/s}$ e pendenza $i = 0{,}010$, porta $Q = 5\,\mathrm{m^3/s}$. L'altezza critica è $h_c = 0{,}742\,\mathrm{m}$, da cui $A_c = 1{,}85\,\mathrm{m^2}$, $R_c = 0{,}465\,\mathrm{m}$, $v_c = 2{,}70\,\mathrm{m/s}$ e
 $$
-i_c = \frac{2{,}70^2}{60^2 \cdot 0{,}465^{4/3}} = 0{,}00560 .
+i_c = \frac{2{,}70^2}{60^2 \cdot 0{,}465^{\frac{4}{3}}} = 0{,}00560 .
 $$
 Poiché $i = 0{,}010 > i_c$, l'alveo è a **forte pendenza**. Il calcolo dell'altezza di moto uniforme conferma la conclusione, dato che risulta $h_0 = 0{,}606\,\mathrm{m} < h_c$ e $Fr = 1{,}35$, perciò il moto uniforme è una corrente veloce.
 :::

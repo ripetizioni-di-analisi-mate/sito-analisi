@@ -48,7 +48,7 @@ con $Re = \dfrac{v D}{\nu}$ e $\varepsilon$ scabrezza assoluta della parete. Si 
 :::richiamo{#formule-monomie titolo="Formula di Gauckler-Strickler"}
 Nel campo di moto assolutamente turbolento la cadente si calcola anche con la formula monomia
 $$
-v = k_s\,R^{2/3}\,J^{1/2} ,
+v = k_s\,R^{\frac{2}{3}}\,J^{\frac{1}{2}} ,
 $$
 con $R$ raggio idraulico e $k_s$ coefficiente di scabrezza in $\mathrm{m^{1/3}/s}$, dipendente solo dal materiale della parete. Si rimanda all'argomento sulle perdite di carico distribuite e localizzate.
 :::
@@ -83,7 +83,7 @@ quindi la perdita su tutta la condotta si scrive $\Delta H = r\,Q^2$ con
 $$
 r = \frac{8\,\lambda\,L}{g\,\pi^2 D^5} ,
 $$
-detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Con la formula di Gauckler-Strickler la resistenza vale $r = \dfrac{10{,}29\,L}{k_s^2\,D^{16/3}}$, e si usa questa forma quando la scabrezza della parete è assegnata con $k_s$. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
+detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Con la formula di Gauckler-Strickler la resistenza vale $r = \dfrac{10{,}29\,L}{k_s^2\,D^{\frac{16}{3}}}$, e si usa questa forma quando la scabrezza della parete è assegnata con $k_s$. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
 :::
 
 :::osservazione{#dipendenza-dal-diametro titolo="Il peso del diametro"}
@@ -150,21 +150,21 @@ Nel problema di progetto sono noti la portata da trasportare, il dislivello disp
 ::::teorema{#progetto-del-diametro titolo="Diametro di progetto"}
 Siano assegnati $Q$, $L$ e il carico disponibile $\Delta H = z_1 - z_2$. Con la formula di Darcy-Weisbach il diametro vale
 $$
-D = \left(\frac{8\,\lambda\,L\,Q^2}{\pi^2 g\,\Delta H}\right)^{1/5} ,
+D = \left(\frac{8\,\lambda\,L\,Q^2}{\pi^2 g\,\Delta H}\right)^{\frac{1}{5}} ,
 $$
 e con la formula di Gauckler-Strickler, essendo $J = \dfrac{\Delta H}{L}$,
 $$
-D = \left(\frac{10{,}29\;Q^2}{k_s^2\,J}\right)^{3/16} .
+D = \left(\frac{10{,}29\;Q^2}{k_s^2\,J}\right)^{\frac{3}{16}} .
 $$
 
 :::dimostrazione
 La prima formula si ottiene risolvendo rispetto a $D$ la relazione $\Delta H = \dfrac{8\lambda L Q^2}{\pi^2 g D^5}$.
 
-Per la seconda si parte da $v = k_s R^{2/3} J^{1/2}$ con $R = \dfrac{D}{4}$ per una condotta circolare piena, da cui $J = \dfrac{v^2}{k_s^2}\left(\dfrac{4}{D}\right)^{4/3}$. Sostituendo $v = \dfrac{4Q}{\pi D^2}$ si ha
+Per la seconda si parte da $v = k_s R^{\frac{2}{3}} J^{\frac{1}{2}}$ con $R = \dfrac{D}{4}$ per una condotta circolare piena, da cui $J = \dfrac{v^2}{k_s^2}\left(\dfrac{4}{D}\right)^{\frac{4}{3}}$. Sostituendo $v = \dfrac{4Q}{\pi D^2}$ si ha
 $$
-J = \frac{16\,Q^2}{\pi^2 D^4\,k_s^2}\cdot\frac{4^{4/3}}{D^{4/3}} = \frac{16 \cdot 4^{4/3}}{\pi^2}\;\frac{Q^2}{k_s^2\,D^{16/3}} ,
+J = \frac{16\,Q^2}{\pi^2 D^4\,k_s^2}\cdot\frac{4^{\frac{4}{3}}}{D^{\frac{4}{3}}} = \frac{16 \cdot 4^{\frac{4}{3}}}{\pi^2}\;\frac{Q^2}{k_s^2\,D^{\frac{16}{3}}} ,
 $$
-e poiché $\dfrac{16 \cdot 4^{4/3}}{\pi^2} = 10{,}29$, risulta $J = \dfrac{10{,}29\,Q^2}{k_s^2\,D^{16/3}}$. Risolvendo rispetto a $D$ si ottiene l'esponente $\dfrac{3}{16}$.
+e poiché $\dfrac{16 \cdot 4^{\frac{4}{3}}}{\pi^2} = 10{,}29$, risulta $J = \dfrac{10{,}29\,Q^2}{k_s^2\,D^{\frac{16}{3}}}$. Risolvendo rispetto a $D$ si ottiene l'esponente $\dfrac{3}{16}$.
 :::
 ::::
 
@@ -175,7 +175,7 @@ Il diametro che risolve l'equazione di progetto non è un diametro di produzione
 :::esempio{titolo="Progetto con la formula monomia"}
 Una condotta in ghisa rivestita, $k_s = 90\,\mathrm{m^{1/3}/s}$, deve portare $Q = 80\,\mathrm{L/s}$ su $L = 2000\,\mathrm{m}$ con un dislivello di $30\,\mathrm{m}$. Risulta $J = 0{,}015$ e
 $$
-D = \left(\frac{10{,}29 \cdot 0{,}080^2}{90^2 \cdot 0{,}015}\right)^{3/16} = \left(5{,}42\cdot10^{-4}\right)^{3/16} = 0{,}244\,\mathrm{m} .
+D = \left(\frac{10{,}29 \cdot 0{,}080^2}{90^2 \cdot 0{,}015}\right)^{\frac{3}{16}} = \left(5{,}42\cdot10^{-4}\right)^{\frac{3}{16}} = 0{,}244\,\mathrm{m} .
 $$
 Si adotta quindi $D = 250\,\mathrm{mm}$, per il quale la cadente scende a $J = 0{,}0132$ e la perdita effettiva vale $26{,}4\,\mathrm{m}$: restano $3{,}6\,\mathrm{m}$ da dissipare in una saracinesca di valle. La velocità risulta $1{,}63\,\mathrm{m/s}$, compresa nel campo usuale degli acquedotti.
 :::
