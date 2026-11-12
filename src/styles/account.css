@@ -16,6 +16,9 @@
 .pagina-account .riprendi-account h2 { font-size: 1.3rem; margin: 0 0 0.3rem; }
 .pagina-account .riprendi-account #ultimo-argomento { margin: 0; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.9rem; overflow-wrap: anywhere; }
 .pagina-account .riprendi-account > .bottone-primario { display: inline-flex; align-items: center; gap: 0.65rem; flex: none; padding: 0.65rem 0.95rem; border-radius: var(--raggio); font-size: 0.9rem; }
+.pagina-account .account-offerta-premium { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem 1rem; padding: 0.8rem 0 1rem; margin: 0 0 1.4rem; border-bottom: 1px solid var(--riga); }
+.pagina-account .account-offerta-premium > p { margin: 0; }
+.pagina-account .account-offerta-premium > a { padding: 0.65rem 1.15rem; font-size: 0.9rem; }
 .pagina-account .contenuti-account { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--riga); font-family: var(--ui); }
 .pagina-account .contenuti-account > li { margin: 0; padding: 0; border-bottom: 1px solid var(--riga); }
 .pagina-account .contenuto-account-link { display: flex; align-items: center; gap: 0.8rem; min-width: 0; padding: 0.9rem 0; text-decoration: none; color: var(--inchiostro); }
@@ -122,6 +125,7 @@
 }
 @media (pointer: coarse) {
   .pagina-account .schede-account > button,
+  .pagina-account .account-offerta-premium > a,
   .pagina-account .contenuto-account-link,
   .pagina-account .account-dettagli > summary,
   .pagina-account .dispositivo-scollega,

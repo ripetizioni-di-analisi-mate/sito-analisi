@@ -31,6 +31,12 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
       </div>
       <section id="studio-account" role="tabpanel" aria-labelledby="scheda-studio">
         <div id="riprendi-account" class="riprendi-account" hidden><div><p class="account-sopratitolo">{s.ultima}</p><h2 id="ultima-materia"></h2><p id="ultimo-argomento"></p></div><a class="bottone-primario" id="riprendi-link" href={pref || '/'}>{s.riprendi}<span aria-hidden="true"> →</span></a></div>
+        {(lingua === 'it' || en) && (
+          <div class="account-offerta-premium" id="offerta-premium" hidden>
+            <p class="account-nota" id="descrizione-offerta-premium">{en ? 'Unlock all written subjects' : 'Sblocca tutte le materie scritte'}</p>
+            <a class="bottone-primario" href={`${pref}/premium`} aria-describedby="descrizione-offerta-premium">Premium</a>
+          </div>
+        )}
         <section id="premium-account" class="account-gruppo" aria-labelledby="premium-account-titolo" hidden>
           <h2 class="account-titolo-sezione" id="premium-account-titolo"></h2>
           <p class="account-nota" id="premium-scadenza"></p>

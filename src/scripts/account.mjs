@@ -86,7 +86,10 @@ export function avviaAccount(root) {
   }
   async function mostraContenuti() {
     const pass = io.premium;
-    if (pass && Object.hasOwn(PASS_PREMIUM, pass.piano)) {
+    const passAttivo = pass && Object.hasOwn(PASS_PREMIUM, pass.piano);
+    const offerta = q('offerta-premium');
+    if (offerta) offerta.hidden = Boolean(passAttivo);
+    if (passAttivo) {
       q('premium-account-titolo').textContent = PASS_PREMIUM[pass.piano][en ? 'en' : 'it'];
       const data = new Date(pass.scade).toLocaleString(locale, { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Rome' });
       q('premium-scadenza').textContent = (en ? 'Access until ' : 'Accesso fino al ') + data;
