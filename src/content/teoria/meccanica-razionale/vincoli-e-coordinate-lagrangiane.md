@@ -42,11 +42,11 @@ Un vincolo è **fisso**, o indipendente dal tempo, quando la sua equazione non c
 $$
 x \sin(\omega t) - y \cos(\omega t) = 0 .
 $$
-La distinzione conta nella Meccanica lagrangiana: con vincoli fissi l'energia cinetica è una forma quadratica nelle velocità generalizzate e l'energia meccanica si conserva sotto sollecitazione conservativa, mentre con vincoli mobili compaiono termini di primo grado e di grado zero, come si vede nell'argomento sulle equazioni di Lagrange.
+La distinzione conta nella Meccanica lagrangiana. Con vincoli fissi l'energia cinetica è una forma quadratica nelle velocità generalizzate e l'energia meccanica si conserva sotto sollecitazione conservativa, mentre con vincoli mobili compaiono termini di primo grado e di grado zero, come si vede nell'argomento sulle equazioni di Lagrange.
 :::
 
 :::definizione{#vincolo-liscio titolo="Vincolo liscio e vincolo scabro"}
-Un vincolo è **liscio**, o privo di attrito, quando la forza che esercita sul sistema è ortogonale a ogni spostamento consentito dal vincolo stesso; è **scabro** quando ha anche una componente lungo gli spostamenti consentiti, cioè quando esercita attrito. Un anello che scorre senza attrito su una guida riceve dalla guida una forza ortogonale alla guida; un blocco appoggiato su un pavimento scabro riceve dal pavimento anche una forza tangenziale, che si oppone allo strisciamento.
+Un vincolo è **liscio**, o privo di attrito, quando la forza che esercita sul sistema è ortogonale a ogni spostamento consentito dal vincolo stesso; è **scabro** quando quella forza ha anche una componente lungo gli spostamenti consentiti, cioè quando il vincolo esercita attrito. Un anello che scorre senza attrito su una guida riceve da essa una forza ortogonale alla guida; un blocco appoggiato su un pavimento scabro riceve dal pavimento anche una forza tangenziale, che si oppone allo strisciamento.
 
 Salvo indicazione contraria i vincoli si suppongono lisci, poiché in quel caso la forza del vincolo ha direzione nota e una sola incognita scalare.
 :::
@@ -72,7 +72,7 @@ $$
 P_i = P_i(q_1, \dots, q_n, t) ,
 \qquad i = 1, \dots, N ,
 $$
-con corrispondenza biunivoca e con funzioni di classe $C^1$. Il numero $n$ è il numero di **gradi di libertà** del sistema.
+con corrispondenza biunivoca e con funzioni di classe $C^1$. Il numero $n$ si chiama numero di **gradi di libertà** del sistema.
 
 Il numero di parametri da assegnare per fissare la configurazione si ottiene quindi sottraendo al numero delle coordinate il numero dei vincoli indipendenti. Due punti del piano collegati da un'asta rigida hanno $N = 2$, $m = 1$ e perciò $n = 4 - 1 = 3$ gradi di libertà, che sono le due coordinate di un estremo e l'angolo dell'asta.
 
@@ -86,7 +86,7 @@ I parametri $q_1, \dots, q_n$ che individuano la configurazione di un sistema ol
 $$
 \vec{v}_i = \sum_{h=1}^{n} \frac{\partial P_i}{\partial q_h}\,\dot{q}_h + \frac{\partial P_i}{\partial t} .
 $$
-La scelta delle coordinate lagrangiane non è unica, e si fa in modo che le posizioni dei punti abbiano l'espressione più semplice: negli esercizi piani si usano gli angoli che le aste formano con una direzione fissa, le ascisse dei punti che scorrono su guide rettilinee e gli angoli di rotazione dei dischi. Con queste coordinate si scrivono l'energia cinetica e il potenziale, che sono i dati di partenza delle equazioni di Lagrange.
+La scelta delle coordinate lagrangiane non è unica, e si fa in modo che le posizioni dei punti abbiano l'espressione più semplice. Negli esercizi piani si usano gli angoli che le aste formano con una direzione fissa, le ascisse dei punti che scorrono su guide rettilinee e gli angoli di rotazione dei dischi. Con queste coordinate si scrivono l'energia cinetica e il potenziale, che sono i dati di partenza delle equazioni di Lagrange.
 :::
 
 :::osservazione{#gdl-corpo-rigido titolo="Gradi di libertà dei corpi rigidi e dei sistemi articolati"}
@@ -196,7 +196,7 @@ Un'asta $AB$ si muove nel piano $Oxy$ e il suo estremo $A$ è obbligato ad avere
 $$
 \dot{x} \sin\vartheta - \dot{y} \cos\vartheta = 0 ,
 $$
-e **non** è riducibile a una relazione fra $x$, $y$ e $\vartheta$: il vincolo è anolonomo. Il sistema ha tre coordinate libere e due gradi di libertà cinematici, perché le velocità ammissibili formano in ogni configurazione un sottospazio di dimensione $2$ dello spazio delle terne $(\dot{x}, \dot{y}, \dot{\vartheta})$.
+e **non** è riducibile a una relazione fra $x$, $y$ e $\vartheta$, quindi il vincolo è anolonomo. Il sistema ha tre coordinate libere e due gradi di libertà cinematici, perché le velocità ammissibili formano in ogni configurazione un sottospazio di dimensione $2$ dello spazio delle terne $(\dot{x}, \dot{y}, \dot{\vartheta})$.
 
 :::dimostrazione
 Il versore dell'asta è $\cos\vartheta\,\hat{\imath} + \sin\vartheta\,\hat{\jmath}$, perciò la velocità $\vec{v}_A = \dot{x}\,\hat{\imath} + \dot{y}\,\hat{\jmath}$ è parallela all'asta se e solo se si annulla il determinante
@@ -234,7 +234,7 @@ $$
 \dot{y} + R\,\dot{\varphi} \sin\psi = 0
 \end{cases}
 $$
-che sono anolonome. Infatti il disco, rotolando in avanti di un tratto $s$, ruotando di mezzo giro attorno alla verticale per il punto di contatto e rotolando ancora di $s$, torna nella posizione iniziale con lo stesso $\psi$ e con $\varphi$ diminuito di $\dfrac{2s}{R}$; poiché $s$ è arbitrario, nessuna relazione fra i quattro parametri si conserva lungo i moti ammissibili. Il disco ha quindi quattro parametri di configurazione e due gradi di libertà cinematici, e il caso piano si ritrova ponendo $\psi$ costante.
+che sono anolonome. Infatti il disco, rotolando in avanti di un tratto $s$, ruotando di mezzo giro attorno alla verticale per il punto di contatto, rotolando ancora di $s$ e ruotando di mezzo giro all'indietro, torna nella configurazione iniziale con lo stesso $\psi$ e con $\varphi$ diminuito di $\dfrac{2s}{R}$; poiché $s$ è arbitrario, nessuna relazione fra i quattro parametri si conserva lungo i moti ammissibili. Il disco ha quindi quattro parametri di configurazione e due gradi di libertà cinematici, e il caso piano si ritrova ponendo $\psi$ costante.
 :::
 
 ## Spostamenti possibili e spostamenti virtuali
@@ -263,7 +263,7 @@ con $\delta q_1, \dots, \delta q_n$ arbitrari. Lo spostamento virtuale è lo spo
 Gli spostamenti virtuali di un sistema a vincoli bilaterali formano uno spazio vettoriale di dimensione $n$, poiché i $\delta q_h$ sono arbitrari; in particolare, se $(\delta P_i)$ è virtuale, anche $(-\delta P_i)$ lo è. Con un vincolo unilaterale $f \geq 0$ nella configurazione di confine $f = 0$ gli spostamenti virtuali sono invece quelli che soddisfano la disuguaglianza linearizzata $\sum_i \operatorname{grad}_{P_i} f \cdot \delta P_i \geq 0$, e formano un semispazio. Su questi spostamenti si costruisce il lavoro virtuale, con cui si trovano le configurazioni di equilibrio nell'argomento sui lavori virtuali.
 :::
 
-::::teorema{#spostamenti-virtuali-e-vincoli titolo="Spostamenti virtuali e equazioni di vincolo"}
+::::teorema{#spostamenti-virtuali-e-vincoli titolo="Spostamenti virtuali ed equazioni di vincolo"}
 Sia dato un sistema soggetto a $m$ vincoli olonomi bilaterali $f_\alpha(P_1, \dots, P_N, t) = 0$ indipendenti. Allora gli spostamenti virtuali nella configurazione e nell'istante considerati sono tutte e sole le soluzioni del sistema lineare omogeneo
 $$
 \sum_{i=1}^{N} \operatorname{grad}_{P_i} f_\alpha \cdot \delta P_i = 0 ,
@@ -271,7 +271,7 @@ $$
 $$
 dove $\operatorname{grad}_{P_i} f_\alpha$ è il vettore delle derivate di $f_\alpha$ rispetto alle coordinate di $P_i$. Inoltre, se i vincoli sono fissi, gli spostamenti possibili coincidono con gli spostamenti virtuali, a meno del fattore $dt$; se almeno un vincolo è mobile, i due insiemi sono diversi.
 
-Il teorema dà il modo pratico di calcolare gli spostamenti virtuali quando le coordinate lagrangiane non sono state ancora scelte: si differenziano le equazioni di vincolo tenendo fisso il tempo.
+Il teorema dà il modo pratico di calcolare gli spostamenti virtuali quando le coordinate lagrangiane non sono state ancora scelte, dato che basta differenziare le equazioni di vincolo tenendo fisso il tempo.
 
 :::dimostrazione
 Si sostituisce la rappresentazione $P_i = P_i(q, t)$ nelle equazioni di vincolo, che risultano soddisfatte identicamente in $q$ e in $t$. Derivando rispetto a $q_h$ si ottiene
@@ -354,7 +354,7 @@ Un disco che rotola senza strisciare su una guida fissa riceve dalla guida una r
 :::
 
 :::attenzione
-Un contatto scabro con strisciamento non è un vincolo ideale. Un blocco che striscia su un pavimento scabro riceve una forza di attrito tangenziale $\vec{\Phi}_t$ opposta allo strisciamento, e lo spostamento virtuale del punto di contatto è diretto lungo il pavimento; il lavoro virtuale $\vec{\Phi}_t \cdot \delta P$ è perciò negativo. Per questi sistemi l'attrito si tratta come una forza attiva assegnata.
+Un contatto scabro con strisciamento non è un vincolo ideale. Un blocco che striscia su un pavimento scabro riceve una forza di attrito tangenziale $\vec{\Phi}_t$ opposta allo strisciamento, e lo spostamento virtuale del punto di contatto è diretto lungo il pavimento; il lavoro virtuale $\vec{\Phi}_t \cdot \delta P$ non è perciò nullo. Per questi sistemi l'attrito si tratta come una forza attiva assegnata.
 :::
 
 ## Attrito statico e legge di Coulomb-Morin

@@ -42,7 +42,7 @@ $$
 \dot{\vec{z}}_2 = \dfrac{1}{m}\,\vec{F}(\vec{z}_1, \vec{z}_2, t)
 \end{cases}
 $$
-quindi, se $\vec{F}$ è regolare, il teorema di esistenza e unicità si applica: la posizione e la velocità a un istante $t_0$ determinano il moto. I sei numeri $P(t_0)$ e $\vec{v}_P(t_0)$ sono i **dati iniziali**.
+quindi, se $\vec{F}$ è regolare, il teorema di esistenza e unicità si applica, quindi la posizione e la velocità a un istante $t_0$ determinano il moto. I sei numeri $P(t_0)$ e $\vec{v}_P(t_0)$ sono i **dati iniziali**.
 
 Si incontrano due problemi di segno opposto. Nel problema diretto la forza è assegnata e si cerca il moto, perciò si integra l'equazione; nel problema inverso il moto è assegnato e si cerca la forza, perciò si deriva due volte la legge oraria e si moltiplica per $m$.
 :::
@@ -213,7 +213,7 @@ U_{\text{peso}} = -m g\,y_P ,
 \qquad
 U_{\text{molla}} = -\frac{1}{2}\,k\,(\ell - \ell_0)^2 ,
 $$
-dove $y_P$ è la quota del punto, $\ell$ è la lunghezza della molla e $\ell_0$ la sua lunghezza a riposo. Il lavoro di una forza conservativa lungo un arco da $P_1$ a $P_2$ vale $L = U(P_2) - U(P_1)$, quindi dipende solo dagli estremi: si calcola valutando il potenziale due volte, senza eseguire l'integrale di linea. Per una molla di costante $k = 100\,\mathrm{N/m}$ e lunghezza a riposo nulla, allungata da $0$ a $0{,}20\,\mathrm{m}$, il lavoro è $-\dfrac{1}{2} \cdot 100 \cdot 0{,}04 = -2\,\mathrm{J}$.
+dove $y_P$ è la quota del punto, $\ell$ è la lunghezza della molla e $\ell_0$ la sua lunghezza a riposo. Il lavoro di una forza conservativa lungo un arco da $P_1$ a $P_2$ vale $L = U(P_2) - U(P_1)$, quindi dipende solo dagli estremi e si calcola valutando il potenziale due volte, senza eseguire l'integrale di linea. Per una molla di costante $k = 100\,\mathrm{N/m}$ e lunghezza a riposo nulla, allungata da $0$ a $0{,}20\,\mathrm{m}$, il lavoro è $-\dfrac{1}{2} \cdot 100 \cdot 0{,}04 = -2\,\mathrm{J}$.
 :::
 
 ::::teorema{#conservazione-energia titolo="Conservazione dell'energia meccanica"}
@@ -257,7 +257,7 @@ Allora valgono i fatti seguenti.
 :::dimostrazione
 La forza è conservativa con potenziale $U = -V$, e la reazione del vincolo liscio e fisso ha potenza nulla; perciò per la conservazione dell'energia meccanica $\dfrac{1}{2}\,m\,\dot{x}^2 + V(x) = E$, che è la relazione dell'enunciato.
 
-Il primo membro è non negativo, quindi $V(x) \leq E$ in ogni posizione raggiunta dal moto: il moto si svolge nell'insieme indicato. La funzione $t \mapsto x(t)$ è continua, perciò la sua immagine è un intervallo, e tale intervallo contiene $x_0$: il punto resta nella componente connessa di $x_0$.
+Il primo membro è non negativo, quindi $V(x) \leq E$ in ogni posizione raggiunta dal moto, perciò il moto si svolge nell'insieme indicato. La funzione $t \mapsto x(t)$ è continua, perciò la sua immagine è un intervallo, e tale intervallo contiene $x_0$: il punto resta nella componente connessa di $x_0$.
 
 Se $V'(x_0) = 0$ e $v_0 = 0$, la funzione costante $x(t) = x_0$ soddisfa l'equazione $m\,\ddot{x} = -V'(x)$ e i dati iniziali; per l'unicità della soluzione è il moto cercato.
 
@@ -460,7 +460,7 @@ m\,\vec{a}_r = \vec{F} + \vec{F}_\tau + \vec{F}_c ,
 \qquad
 \vec{F}_c = -m\,\vec{a}_c = -2m\,\vec{\omega} \wedge \vec{v}_r .
 $$
-I due vettori aggiunti sono la **forza di trascinamento** e la **forza di Coriolis**, dette forze apparenti: non descrivono azioni di altri corpi, e compaiono perché il riferimento non è inerziale. Nel riferimento mobile l'equazione fondamentale vale quindi nella stessa forma, purché alle forze vere si sommino le forze apparenti.
+I due vettori aggiunti sono la **forza di trascinamento** e la **forza di Coriolis**, dette forze apparenti, perché non descrivono azioni di altri corpi e compaiono soltanto in un riferimento non inerziale. Nel riferimento mobile l'equazione fondamentale vale quindi nella stessa forma, purché alle forze vere si sommino le forze apparenti.
 
 Se $\Omega$ è fisso, $\vec{\omega}$ è costante e parallelo a un asse fisso, la forza di trascinamento si riduce alla **forza centrifuga** $m\,\omega^2\,\vec{d}$, dove $\vec{d}$ è il vettore che va dall'asse di rotazione a $P$, ortogonale all'asse. Tale forza è conservativa con potenziale $U_c = \dfrac{1}{2}\,m\,\omega^2 d^2$, perciò nei problemi su guide rotanti con velocità angolare costante si conserva l'energia meccanica relativa, calcolata con il potenziale totale $U + U_c$. La forza di Coriolis ha potenza nulla nel moto relativo, perché è ortogonale a $\vec{v}_r$.
 

@@ -29,3 +29,7 @@ Questi file sono stati scritti da un altro autore e saranno venduti a studenti d
 
 ## Rapporto (breve, in italiano)
 Numero di esercizi e tracce verificati, elenco degli errori trovati e corretti (file, cosa era sbagliato, correzione), figure corrette, notazioni uniformate, eventuali dubbi non risolti.
+
+## Convenzioni fissate durante la scrittura (da far rispettare in tutta la materia)
+- Un disco che rotola senza strisciare su una guida fissa toglie **due** gradi di libertà (contatto e non strisciamento): il conteggio è scritto nell'argomento `vincoli-e-coordinate-lagrangiane` e va usato identico negli argomenti 4, 6, 9, 10 e 11.
+- Rotolamento con $\vartheta$ antiorario positivo: $\dot{x}_C + R\,\dot{\vartheta} = 0$, quindi l'avanzamento verso destra corrisponde a una rotazione oraria. Se il tuo argomento usa il segno opposto senza dirlo, correggilo.
