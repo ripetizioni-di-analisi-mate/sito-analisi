@@ -6,12 +6,12 @@ Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi co
 
 ## Controlli
 
-- `python3 strumenti/finanziaria/genera.py` rigenera gli esercizi originali dai parametri riproducibili e il registro delle equazioni da verificare.
-- `python3 strumenti/finanziaria/verifica.py` verifica 1.100 risultati e l’unicità delle risposte numeriche mediante residui di equivalenza, ricorrenze dei prestiti, differenze finite delle derivate e controllo del surplus immunizzato.
 - `node strumenti/finanziaria/verifica.mjs` controlla YAML, ancore, formule KaTeX e struttura dei 1.130 Markdown.
 - Dopo la build, `npm run test:finanziaria` controlla l’accesso tramite il Worker reale: corso indipendente da Matematica generale, anteprime, soluzioni, quiz e configurazione del pagamento.
 
-I nuovi quiz comprendono otto tipologie di calcolo per capitolo, con sei esercizi per tipologia, e dieci quesiti di ragionamento. Le alternative dei calcoli riproducono errori di impostazione, di segno, di scadenza o di conversione. I quesiti di ragionamento sono in `quiz_ragionamento.txt`.
+I Markdown in `src/content` sono la fonte del corso. In ogni capitolo i quiz da 1 a 14 riprendono le tracce. Le altre domande alternano calcoli brevi e applicazioni della teoria. I distrattori riproducono errori di impostazione, di segno, di scadenza o di conversione.
+
+Il generatore `genera.py`, il registro `controlli.json` e il verificatore numerico `verifica.py` fanno riferimento ai dati della prima versione del corso, nel commit `e75424dc`. Eseguire il generatore sulla revisione del corso sovrascrive gli esercizi e i quiz con quelli della prima versione.
 
 ## Programma
 
