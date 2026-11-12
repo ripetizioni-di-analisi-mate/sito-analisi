@@ -4,35 +4,36 @@ import { type Lingua } from '../i18n';
 interface Props { id: string; tipo?: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua; mostraIndizio?: boolean }
 const { id, tipo, primitiva = false, lingua, mostraIndizio = true } = Astro.props;
 const en = lingua === 'en';
+const es = lingua === 'es';
 const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
 const esempio = tipo === 'numero'
-  ? (en ? 'e.g. 3/2, e^6, sqrt(2), pi/4, -inf' : 'per esempio 3/2, e^6, sqrt(2), pi/4, -inf')
-  : (en ? 'e.g. x^2/2 + ln|x|, 3x^2, e^x sin x' : 'per esempio x^2/2 + ln|x|, 3x^2, e^x sin x');
+  ? (en ? 'e.g. 3/2, e^6, sqrt(2), pi/4, -inf' : es ? 'p. ej., 3/2, e^6, sqrt(2), pi/4, -inf' : 'per esempio 3/2, e^6, sqrt(2), pi/4, -inf')
+  : (en ? 'e.g. x^2/2 + ln|x|, 3x^2, e^x sin x' : es ? 'p. ej., x^2/2 + ln|x|, 3x^2, e^x sin x' : 'per esempio x^2/2 + ln|x|, 3x^2, e^x sin x');
 const tasti = [
-  { simbolo: '□', modello: '/(|)', nome: en ? 'Fraction' : 'Frazione', accoda: true },
-  { simbolo: '□', modello: '^(|)', nome: en ? 'Power' : 'Potenza', accoda: true },
-  { simbolo: '√□', modello: '√(|)', nome: en ? 'Square root' : 'Radice quadrata' },
-  { simbolo: '(□)', modello: '(|)', nome: en ? 'Parentheses' : 'Parentesi' },
-  { simbolo: 'π', modello: 'π', nome: en ? 'Pi' : 'Pi greco' },
-  { simbolo: '∞', modello: '∞', nome: en ? 'Infinity' : 'Infinito' },
-  { simbolo: 'e', modello: 'e', nome: en ? 'Euler’s number' : 'Numero di Nepero' },
-  { simbolo: 'ln(□)', modello: 'ln(|)', nome: en ? 'Natural logarithm' : 'Logaritmo naturale' },
+  { simbolo: '□', modello: '/(|)', nome: en ? 'Fraction' : es ? 'Fracción' : 'Frazione', accoda: true },
+  { simbolo: '□', modello: '^(|)', nome: en ? 'Power' : es ? 'Potencia' : 'Potenza', accoda: true },
+  { simbolo: '√□', modello: '√(|)', nome: en ? 'Square root' : es ? 'Raíz cuadrada' : 'Radice quadrata' },
+  { simbolo: '(□)', modello: '(|)', nome: en ? 'Parentheses' : es ? 'Paréntesis' : 'Parentesi' },
+  { simbolo: 'π', modello: 'π', nome: en ? 'Pi' : es ? 'Pi' : 'Pi greco' },
+  { simbolo: '∞', modello: '∞', nome: en ? 'Infinity' : es ? 'Infinito' : 'Infinito' },
+  { simbolo: 'e', modello: 'e', nome: en ? 'Euler’s number' : es ? 'Número de Euler' : 'Numero di Nepero' },
+  { simbolo: 'ln(□)', modello: 'ln(|)', nome: en ? 'Natural logarithm' : es ? 'Logaritmo natural' : 'Logaritmo naturale' },
 ];
 ---
 <form class="verifica zona-libera" data-id={id} data-tipo={tipo} data-senza-indizio={mostraIndizio ? undefined : ''} novalidate>
-  <label for={campo}>{en ? 'Write your answer' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : ' (la costante c si può tralasciare)'}</small>}</label>
+  <label for={campo}>{en ? 'Write your answer' : es ? 'Escribe tu respuesta' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : es ? ' (puedes omitir la constante c)' : ' (la costante c si può tralasciare)'}</small>}</label>
   <div class="verifica-riga">
     {tipo ? (
       <>
         <input id={campo} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
-        <button type="submit">{en ? 'Check' : 'Verifica'}</button>
+        <button type="submit">{en ? 'Check' : es ? 'Comprobar' : 'Verifica'}</button>
       </>
     ) : (
       <textarea id={campo} rows="3" autocomplete="off" aria-describedby={`${campo}-confronto`}></textarea>
     )}
   </div>
   <details class="verifica-tastiera">
-    <summary>{en ? 'Math keyboard' : 'Tastiera matematica'}</summary>
+    <summary>{en ? 'Math keyboard' : es ? 'Teclado matemático' : 'Tastiera matematica'}</summary>
     <div class="verifica-tasti">
       {tasti.map(({ simbolo, modello, nome, accoda }) => (
         <button type="button" data-modello={modello} data-accoda={accoda ? '' : undefined} aria-label={nome} title={nome}>
@@ -50,7 +51,7 @@ const tasti = [
       <p class="verifica-esito" role="status" aria-live="polite"></p>
     </>
   ) : (
-    <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Compare your answer with the solution.' : 'Confronta la tua risposta con la soluzione.'}</p>
+    <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Compare your answer with the solution.' : es ? 'Compara tu respuesta con la solución.' : 'Confronta la tua risposta con la soluzione.'}</p>
   )}
 </form>
 
@@ -72,7 +73,12 @@ const tasti = [
   import katex from 'katex';
   import { leggi, latex } from '../../worker/valuta.mjs';
   const inglese = document.documentElement.lang === 'en';
-  const T = inglese ? {
+  const T = document.documentElement.lang === 'es' ? {
+    leggo: 'Interpretado como', illeggibile: 'No se ha podido interpretar la respuesta. Prueba con 3/2, sqrt(2), e^6, pi/4, inf o x^2 + ln|x|.',
+    giusta: 'Respuesta correcta.', sbagliata: 'El resultado es distinto. Puedes intentarlo de nuevo o pedir una pista a Pi debajo del ejercicio.',
+    vicina: 'El valor se aproxima al resultado. Escribe el valor exacto con fracciones, raíces, π o e.',
+    riprova: 'El resultado es distinto. Revisa los pasos e inténtalo de nuevo.', rete: 'Error de red. Inténtalo de nuevo.', exp: 'EXP',
+  } : inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Correct answer.', sbagliata: 'The result is different. You can try again or ask Pi for a hint below the exercise.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
     riprova: 'The result is different. Check your work and try again.', rete: 'Network error: please try again.', exp: 'XP',
