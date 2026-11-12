@@ -4,6 +4,7 @@ import SimulazioneTolcI from '../../viste/SimulazioneTolcI.astro';
 import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
 import { catalogoDomande } from '../../lib/domande';
 import { MATERIE } from '../../data/materie';
+import { PROVE_INGRESSO } from '../../data/tolc.mjs';
 // La simulazione d'esame ordinaria pesca tra le tracce degli esercizi da fare.
 // Per le materie dei concorsi la simulazione è una prova a quiz corretta in automatico.
 export async function getStaticPaths() {
@@ -14,4 +15,4 @@ export async function getStaticPaths() {
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';
 ---
-{['tolc-i', 'tolc-s'].includes(materia) ? <SimulazioneTolcI materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}
+{Object.hasOwn(PROVE_INGRESSO, materia) ? <SimulazioneTolcI materia={materia} /> : concorso ? <SimulazioneConcorsi materia={materia} /> : <Simulazione lingua="it" materia={materia} />}

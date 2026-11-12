@@ -56,11 +56,11 @@ function senzaHtml(base: string) {
   };
 }
 
-// Domande a tempo: src/content/domande/<materia>/<argomento>/<n>.md, una per traccia degli esercizi da fare
-// (stesso n). Corpo: eventuale domanda riformulata, elenco di 4 risposte, "## Spiegazione".
+// Domande a tempo: testo autonomo o traccia degli esercizi con lo stesso n, elenco di risposte e spiegazione.
+// Il campo brano raggruppa le domande di comprensione da presentare insieme nella simulazione.
 const domande = defineCollection({
   loader: senzaHtml('./src/content/domande'),
-  schema: z.object({ corretta: z.number().int().min(1).max(5) }),
+  schema: z.object({ corretta: z.number().int().min(1).max(5), brano: z.string().min(1).optional() }),
 });
 
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.

@@ -1,14 +1,15 @@
-import { TOLC, provaTolc } from '../src/data/tolc.mjs';
+import { PROVE_INGRESSO, provaTolc } from '../src/data/tolc.mjs';
 import { correggiSezioneTolc } from '../src/data/tolc-i.mjs';
+import PREZZI from '../src/data/prezzi.json' with { type: 'json' };
 
 export async function gestisciTolcI(req, env, path, h) {
   const materia = path.split('/')[2];
-  const conf = Object.hasOwn(TOLC, materia) ? TOLC[materia] : null;
+  const conf = Object.hasOwn(PROVE_INGRESSO, materia) ? PROVE_INGRESSO[materia] : null;
   const risposta = (d, stato = 200) => h.json(d, stato, { 'cache-control': 'no-store' });
   if (!conf) return risposta({ errore: 'Percorso non trovato.' }, 404);
   if (req.method !== 'POST') return risposta({ errore: 'Metodo non consentito.' }, 405);
   const io = await h.utenteCollegato(env, req).catch(() => null);
-  if (env.VENDITA !== '0' && !io?.materie?.includes(materia)) {
+  if (Object.hasOwn(PREZZI, materia) && env.VENDITA !== '0' && !io?.materie?.includes(materia)) {
     return risposta({ errore: `La simulazione completa è inclusa nell’accesso ${conf.nome}. Puoi iniziare dai dieci quiz in anteprima.`, sblocca: `/${materia}/sblocca` }, 403);
   }
   const b = await req.json().catch(() => ({}));
@@ -36,9 +37,21 @@ export async function gestisciTolcI(req, env, path, h) {
       if (domande.some((q) => !q) || !Array.isArray(rs) || rs.length !== domande.length || rs.some((r, j) => r !== null && (!Number.isInteger(r) || r < 0 || r >= domande[j].scelte.length))) {
         return risposta({ errore: 'Formato delle risposte non valido.' }, 400);
       }
-      sezioni.push({ slug: s.slug, titolo: s.titolo, ...correggiSezioneTolc(domande, rs, s.slug === 'inglese'), esiti: domande.map((q) => ({ id: q.id, corretta: q.corretta, spiegazione: q.spiegazione })) });
+      const senzaPenalita = conf.esercitazione || (s.slug === 'inglese' && !conf.ingleseObbligatorio);
+      const esito = correggiSezioneTolc(domande, rs, senzaPenalita);
+      const peso = conf.sezioni.find(sezione => sezione.slug === s.slug)?.peso ?? 1;
+      sezioni.push({
+        slug: s.slug, titolo: s.titolo, ...esito, punti: esito.punti * peso, massimo: esito.massimo * peso,
+        esiti: domande.map((q) => ({ id: q.id, corretta: q.corretta, spiegazione: q.spiegazione })),
+      });
     }
-    return risposta({ sezioni, punti: sezioni.filter((s) => s.slug !== 'inglese').reduce((n, s) => n + s.punti, 0), massimo: conf.quesiti, inglese: sezioni.find((s) => s.slug === 'inglese')?.punti ?? null });
+    const punti = sezioni.filter(s => conf.ingleseObbligatorio || s.slug !== 'inglese').reduce((n, s) => n + s.punti, 0);
+    return risposta({
+      sezioni,
+      punti: Math.round(punti * 100) / 100,
+      massimo: conf.massimo ?? conf.quesiti,
+      inglese: conf.ingleseObbligatorio ? null : sezioni.find(s => s.slug === 'inglese')?.punti ?? null,
+    });
   }
   return risposta({ errore: 'Percorso non trovato.' }, 404);
 }

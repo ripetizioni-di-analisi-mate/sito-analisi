@@ -1,15 +1,20 @@
 ---
-import { TOLC } from '../data/tolc.mjs';
+import { PROVE_INGRESSO } from '../data/tolc.mjs';
 const { domande, schede, materia = 'tolc-i', capitoli = 9 } = Astro.props;
-const conf = TOLC[materia];
+const conf = PROVE_INGRESSO[materia];
+const ingleseFacoltativo = !conf.ingleseObbligatorio && conf.sezioni.find(s => s.slug === 'inglese');
+const titolo = conf.esercitazione ? 'Prova di allenamento OFA' : `Simulazione ${conf.nome}`;
 ---
-<aside class="nota-tolc" aria-label={`Come funziona il ${conf.nome}`}>
-  <div class="tolc-intro"><span class="sopratitolo">Il tuo ingresso a {conf.area}</span><h2>Un percorso verso il tuo test.</h2><p>Studia un argomento, prova i quiz, poi mettiti alla prova con i tempi del test.</p></div>
-  <p class="tolc-raccolta">La prima raccolta: <strong>{capitoli} capitoli · {domande} quiz · {schede} schede svolte</strong></p>
+<aside class="nota-tolc" aria-label={titolo}>
+  <div class="tolc-intro"><h2>{conf.esercitazione ? 'Allenamento a tempo' : 'Struttura della simulazione'}</h2></div>
+  <p class="tolc-raccolta"><strong>{capitoli} capitoli · {domande} quiz · {schede} schede svolte</strong></p>
   <dl>{conf.sezioni.map((s) => <div><dt>{s.titolo}</dt><dd><strong>{s.numero}</strong> quesiti <span>· {s.minuti} min</span></dd></div>)}</dl>
-  <p class="tolc-punti"><strong>{conf.quesiti} quesiti in {conf.minuti} minuti</strong> · +1 corretta, −0,25 errata, 0 omessa. Inglese separato: 30 quesiti in 15 minuti, senza penalità.</p>
-  <div class="tolc-azioni"><a class="bottone-secondario" href={`/${materia}/simulazione`}>Simulazione {conf.nome} →</a><a href={conf.fonte} target="_blank" rel="noopener noreferrer">Struttura e programma CISIA ↗</a></div>
-  <p class="tolc-fonte">Prima raccolta di allenamento con quesiti originali e spiegazioni. Preparazione indipendente: le prove proposte non sono test ufficiali CISIA. Controlla il bando del tuo ateneo per il test richiesto e le soglie di ammissione.</p>
+  <p class="tolc-punti"><strong>{conf.quesiti} quesiti in {conf.minuti} minuti</strong> · {conf.esercitazione ? '+1 corretta, 0 errata o omessa.' : '+1 corretta, −0,25 errata, 0 omessa.'}
+    {ingleseFacoltativo && <> Nella simulazione puoi includere l’inglese, con risultato separato e senza penalità.</>}
+    {conf.massimo && <> Punteggio pesato su {conf.massimo}.</>}
+  </p>
+  <div class="tolc-azioni"><a class="bottone-secondario" href={`/${materia}/simulazione`}>{titolo} →</a><a href={conf.fonte} target="_blank" rel="noopener noreferrer">{conf.testoFonte ?? 'Struttura e programma CISIA'} ↗</a></div>
+  <p class="tolc-fonte">{conf.nota ?? 'Preparazione indipendente con quesiti di allenamento. Consulta il bando del tuo ateneo per conoscere il test richiesto e le soglie di ammissione.'}</p>
 </aside>
 <style>
   .nota-tolc{margin:1.6rem 0 2rem;padding:1.4rem;border:1px solid color-mix(in srgb,var(--accento) 24%,var(--riga));border-radius:var(--raggio);background:color-mix(in srgb,var(--accento) 4%,var(--carta));font-family:var(--ui)}

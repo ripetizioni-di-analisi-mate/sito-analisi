@@ -6,6 +6,7 @@ import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { argomentoL, materiaL, link, prefisso, type Lingua } from '../i18n';
 import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { PROVE_INGRESSO } from '../data/tolc.mjs';
 import { catalogoDomande } from '../lib/domande';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { highSchoolPreviewPage } from '../data/stem-usa/high-school/index.mjs';
@@ -15,6 +16,7 @@ interface Props { lingua: Lingua; materia: string; argomento: string; totale: nu
 const { lingua, materia, argomento, totale, usa = false } = Astro.props;
 const en = lingua === 'en';
 const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
+const provaIngresso = Object.hasOwn(PROVE_INGRESSO, materia) ? PROVE_INGRESSO[materia] : undefined;
 const semestreFiltro = materia.endsWith('-semestre-filtro');
 const senzaInglese = !en && (semestreFiltro || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
 const nomiProve = nomiAllenamento(m, lingua);
@@ -105,7 +107,7 @@ const JS = en ? {
     {(anteprimaScienza || anteprimaUsa) && <p class="nota nota-anteprima-scienza" data-usa-preview={anteprimaUsa || undefined}>
       {notaAnteprima} <a href={usa ? url(courseUrl(materia) + '/sblocca') : link(lingua, '/' + materia + '/sblocca')}>{T.sblocca} · {m.prezzo} €</a>
     </p>}
-    {['tolc-i', 'tolc-s'].includes(materia) && <p class="nota">{en ? 'Ten sample questions are available before unlocking TOLC-I. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {materia.toUpperCase()}</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
+    {provaIngresso && m.prezzo && <p class="nota">{en ? `Ten sample questions are available before unlocking ${provaIngresso.nome}. Full access includes all questions and the timed simulation.` : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {provaIngresso.nome}</a> comprende tutti i quiz e la simulazione a tempo.</>}</p>}
     {materia === 'statistica' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 540 questions with explanations. Materials are in Italian.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Statistica e probabilità</a> comprende tutti i 540 quiz con spiegazione.</>}</p>}
     {materia === 'biologia-semestre-filtro' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 315 questions with explanations.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Biologia</a> comprende tutti i 315 quiz con spiegazione.</>}</p>}
     {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}

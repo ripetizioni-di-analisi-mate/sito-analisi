@@ -498,10 +498,41 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
     },
   },
   'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'The mathematics, logic and science of the TOLC-I, the CISIA test for Engineering degree programmes.', argomenti: {} },
-  'tolc-e': { titolo: 'TOLC-E (Economics)', breve: 'TOLC-E', descrizione: 'The mathematics, logic and reading comprehension of the TOLC-E, the CISIA test for Economics degree programmes.', argomenti: {} },
+  'tolc-e': {
+    titolo: 'TOLC-E (Economics)', breve: 'TOLC-E',
+    descrizione: 'Mathematics, logic, reading and English for the CISIA TOLC-E. Course materials and timed practice tests are in Italian.',
+    argomenti: {
+      'aritmetica-e-algebra': { titolo: 'Mathematics · Arithmetic and algebra', breve: 'Arithmetic and algebra' },
+      'funzioni-e-grafici': { titolo: 'Mathematics · Functions and graphs', breve: 'Functions and graphs' },
+      geometria: { titolo: 'Mathematics · Geometry and conics', breve: 'Geometry and conics' },
+      logica: { titolo: 'Logic and reasoning', breve: 'Logic' },
+      'comprensione-verbale': { titolo: 'Reading comprehension', breve: 'Reading' },
+      inglese: { titolo: 'English', breve: 'English' },
+    },
+  },
   'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
-  'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
-  'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
+  'tol-politecnico': {
+    titolo: 'Politecnico di Milano TOL', breve: 'TOL Politecnico',
+    descrizione: 'Preparation for the Politecnico di Milano engineering admission test, with a 65-question timed practice test. Course materials are in Italian.',
+    argomenti: {
+      matematica: { titolo: 'Mathematics', breve: 'Mathematics' },
+      logica: { titolo: 'Logic, sets and deduction', breve: 'Logic' },
+      statistica: { titolo: 'Statistics, counting and probability', breve: 'Statistics' },
+      'comprensione-verbale': { titolo: 'Reading comprehension', breve: 'Reading' },
+      fisica: { titolo: 'Physics', breve: 'Physics' },
+      inglese: { titolo: 'English · TENG', breve: 'TENG' },
+    },
+  },
+  'ofa-matematica': {
+    titolo: 'Maths for OFA requirements', breve: 'Maths OFA',
+    descrizione: 'Review the maths foundations used in additional learning requirements (OFA) at Italian universities. Course materials are in Italian.',
+    argomenti: {
+      'numeri-e-percentuali': { titolo: 'Numbers, fractions and percentages', breve: 'Numbers and percentages' },
+      'algebra-e-equazioni': { titolo: 'Algebra, equations and inequalities', breve: 'Algebra and equations' },
+      'funzioni-e-grafici': { titolo: 'Elementary functions and graphs', breve: 'Functions and graphs' },
+      'geometria-e-misure': { titolo: 'Geometry, trigonometry and measurement', breve: 'Geometry and measurement' },
+    },
+  },
   'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics', 'Informatica': 'Computer science' };
