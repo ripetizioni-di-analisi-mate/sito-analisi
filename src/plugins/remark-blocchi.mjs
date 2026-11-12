@@ -41,7 +41,7 @@ const ETICHETTE = {
 
 const APRIBILI = { dimostrazione: 'Dimostrazione', soluzione: 'Mostra soluzione' };
 
-// Contenuti inglesi (src/content-en/): stesse direttive, etichette in inglese.
+// Contenuti inglesi (src/content-en/ e src/content-us/): stesse direttive, etichette in inglese.
 const EN = {
   definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition', dimostrazione: 'Proof',
   esempio: 'Example', osservazione: 'Remark', attenzione: 'Warning', richiamo: 'Recall', soluzione: 'Solution',
@@ -75,7 +75,7 @@ const norma = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\
 export default function remarkBlocchi() {
   return (tree, file) => {
     const percorso = String(file?.path || file?.history?.[0] || '');
-    const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-en[\\/]/.test(percorso) ? EN : IT;
+    const E = /content-fr[\\/]/.test(percorso) ? FR : /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-(en|us)[\\/]/.test(percorso) ? EN : IT;
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
     // i loro titoli diventano "1. …", "2. …"; un blocco da solo resta senza numero.
     // Un blocco che ha lo stesso titolo della sua sezione non ripete il titolo.

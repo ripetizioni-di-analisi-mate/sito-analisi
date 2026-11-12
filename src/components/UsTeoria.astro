@@ -1,0 +1,73 @@
+---
+// Teoria dei corsi americani scritti sul programma statunitense: il testo sta in Markdown
+// (src/content-us/teoria/<corso>/<argomento>.md) con gli stessi blocchi e le stesse figure delle
+// materie italiane. I primi due paragrafi sono l'anteprima gratuita; i successivi sono riservati e
+// il Worker li toglie a chi non ha il corso (data-usa-content).
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import IndiceTeoria from './IndiceTeoria.astro';
+import FineAnteprimaUsa from './FineAnteprimaUsa.astro';
+import ElencoSchedeSvolte from './ElencoSchedeSvolte.astro';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { perArgomento, numero } from '../lib/nav';
+import { getCollection } from 'astro:content';
+import { T } from '../i18n';
+import { PARAGRAFI_GRATIS } from '../data/stem-usa/programmi.mjs';
+
+interface Props { corso: string; argomento: string }
+const { corso, argomento } = Astro.props;
+const t = T('en');
+const m = materiaUsa(corso)!;
+const arg = m.argomenti.find((a) => a.slug === argomento)!;
+const voce = await getEntry('teoria_us', `${corso}/${argomento}`);
+const resa = voce ? await render(voce) : null;
+const titoli = resa?.headings.filter((h) => h.depth === 2) ?? [];
+const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
+
+// L'HTML reso si taglia ai paragrafi di secondo livello: i primi due restano liberi, gli altri no.
+const html = voce?.rendered?.html ?? '';
+const tagli: number[] = [];
+for (let i = html.indexOf('<h2'); i >= 0; i = html.indexOf('<h2', i + 1)) tagli.push(i);
+const taglio = tagli.length > PARAGRAFI_GRATIS ? tagli[PARAGRAFI_GRATIS] : html.length;
+const libera = html.slice(0, taglio);
+const riservata = html.slice(taglio);
+const sezioni = titoli.map((h, i) => ({ slug: h.slug, text: h.text, riservata: i >= PARAGRAFI_GRATIS }));
+
+const svolti = perArgomento(await getCollection('svolti_us'), corso, argomento);
+const dafare = perArgomento(await getCollection('dafare_us'), corso, argomento);
+const schede = svolti.map((e) => ({
+  numero: numero(e.id),
+  titolo: e.data.titolo,
+  href: href('esercizi-svolti/' + numero(e.id)),
+  accesso: e.data.gratis ? 'Free worked example' : undefined,
+}));
+---
+<Base lingua="en" usa titolo={`${arg.titolo} · ${t.sezioni.teoria}`} descrizione={voce?.data.sommario ?? arg.titolo}
+  materia={corso} argomento={argomento} sezione="teoria"
+  percorso={[{ titolo: arg.titolo, href: href('teoria') }, { titolo: t.sezioni.teoria }]}>
+  <p class="sopratitolo">{t.sezioni.teoria}</p>
+  <h1>{arg.titolo}</h1>
+  {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
+  <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sezioni} />
+  <div class="testo-studio" set:html={libera} />
+  {riservata && (
+    <>
+      <FineAnteprimaUsa materia={corso} titolo="Continue with the full lesson">
+        <ol class="velo-elenco" start={PARAGRAFI_GRATIS + 1}>
+          {sezioni.filter((s) => s.riservata).map((s) => <li>{s.text}</li>)}
+        </ol>
+        {schede.length > 0 && <p><a href={href('esercizi-svolti')}>Open the free worked examples →</a></p>}
+      </FineAnteprimaUsa>
+      <div class="testo-studio" data-usa-content set:html={riservata} />
+    </>
+  )}
+  {schede.length > 0 && (
+    <>
+      <h2>{t.svoltiSuArgomento}</h2>
+      <ElencoSchedeSvolte schede={schede} />
+    </>
+  )}
+  {dafare.length > 0 && (
+    <p class="vai-esercizi"><a href={href('esercizi')}>{t.dafareSuArgomento(dafare.length)} →</a></p>
+  )}
+</Base>

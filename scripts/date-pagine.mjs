@@ -11,7 +11,7 @@ import { join, relative } from 'node:path';
 
 const RADICE = new URL('..', import.meta.url).pathname;
 const USCITA = join(RADICE, 'src/data/date-pagine.json');
-const CARTELLE = ['src/content', 'src/content-en'];
+const CARTELLE = ['src/content', 'src/content-en', 'src/content-us'];
 
 function file(cartella) {
   const assoluta = join(RADICE, cartella);

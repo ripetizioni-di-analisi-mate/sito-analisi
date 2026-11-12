@@ -69,6 +69,14 @@ const svolti_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...esc
 const domande_en = defineCollection({ loader: senzaHtml('./src/content-en/domande'), schema: domande.schema });
 const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }), schema: dafare.schema });
 
+// Corsi americani: stessa struttura, in src/content-us/, con lo slug del corso al posto della materia
+// (src/content-us/teoria/physics-1-mechanics/<argomento>.md). I contenuti sono scritti in inglese sul
+// programma americano, non tradotti dall'italiano.
+const teoria_us = defineCollection({ loader: glob({ pattern: ['*/*.md'], base: './src/content-us/teoria' }), schema: teoria.schema });
+const svolti_us = defineCollection({ loader: glob({ pattern: ['*/*/*.md'], base: './src/content-us/svolti' }), schema: svolti.schema });
+const dafare_us = defineCollection({ loader: glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }), schema: dafare.schema });
+const domande_us = defineCollection({ loader: senzaHtml('./src/content-us/domande'), schema: domande.schema });
+
 // Formulari gratuiti: src/content/formulari/<materia>.md (pagina /formulari/<materia>, PDF con account gratuito).
 const formulari = defineCollection({
   loader: glob({ pattern: ['*.md'], base: './src/content/formulari' }),
@@ -81,4 +89,4 @@ const formulari = defineCollection({
 // Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
 const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
 
-export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, formulari, formulari_en };
+export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, teoria_us, svolti_us, dafare_us, domande_us, formulari, formulari_en };
