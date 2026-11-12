@@ -131,7 +131,7 @@ Its determinant is $\dfrac{4}{3}\,m^2\,\ell^2 - m^2\,\ell^2\cos^2\vartheta$, whi
 ## Lagrange's equations
 
 :::richiamo{titolo="Schwarz's theorem"}
-If a function of several variables has continuous second derivatives on an open set, then the mixed second derivatives do not depend on the order of differentiation. See the topic on partial derivatives and differentiability of Calculus 2.
+If a function of several variables has continuous second derivatives on an open set, then the mixed second derivatives do not depend on the order of differentiation. See the topic on partial derivatives and differentiability of Mathematical Analysis 2.
 :::
 
 ::::teorema{#equazioni-di-lagrange titolo="Lagrange's equations"}

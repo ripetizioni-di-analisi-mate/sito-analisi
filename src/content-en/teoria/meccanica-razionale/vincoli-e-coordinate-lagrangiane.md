@@ -54,7 +54,7 @@ Unless stated otherwise, constraints are assumed to be smooth, since in that cas
 ## Degrees of freedom and Lagrangian coordinates
 
 :::richiamo{titolo="Implicit function theorem"}
-Let $F : A \subseteq \mathbb{R}^{n+m} \to \mathbb{R}^m$ be of class $C^1$ on the open set $A$, let $F(u_0, w_0) = 0$ with $u_0 \in \mathbb{R}^n$ and $w_0 \in \mathbb{R}^m$, and let the Jacobian matrix $\dfrac{\partial F}{\partial w}(u_0, w_0)$, of order $m$, be invertible. Then there exist a neighborhood $U$ of $u_0$, a neighborhood $W$ of $w_0$ and a unique function $g : U \to W$ of class $C^1$ such that, for $(u, w) \in U \times W$, the equality $F(u, w) = 0$ holds if and only if $w = g(u)$. See the topic on implicit functions of Calculus 2.
+Let $F : A \subseteq \mathbb{R}^{n+m} \to \mathbb{R}^m$ be of class $C^1$ on the open set $A$, let $F(u_0, w_0) = 0$ with $u_0 \in \mathbb{R}^n$ and $w_0 \in \mathbb{R}^m$, and let the Jacobian matrix $\dfrac{\partial F}{\partial w}(u_0, w_0)$, of order $m$, be invertible. Then there exist a neighborhood $U$ of $u_0$, a neighborhood $W$ of $w_0$ and a unique function $g : U \to W$ of class $C^1$ such that, for $(u, w) \in U \times W$, the equality $F(u, w) = 0$ holds if and only if $w = g(u)$. See the topic on implicit functions of Mathematical Analysis 2.
 :::
 
 ::::teorema{#gradi-di-liberta titolo="Degrees of freedom of a holonomic system"}

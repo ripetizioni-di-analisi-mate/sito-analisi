@@ -92,7 +92,7 @@ Choose the frame with the origin $O$ on $\pi$ and with the plane $\pi$ coincidin
 Symmetries suffice for the more regular bodies; for the triangle, the half-disk, the circular sector and the solids of revolution the center of mass is computed by integration.
 
 :::richiamo{titolo="Double and triple integrals"}
-For a continuous function $f$ on a measurable region $D$ of the plane, the double integral $\displaystyle\int_D f\,dA$ is computed by strips with the reduction formulas, and in polar coordinates with $dA = r\,dr\,d\vartheta$. For a region $E$ of space the triple integral is computed by slices or in cylindrical and spherical coordinates, with $dV = r\,dr\,d\vartheta\,dz$ and $dV = r^2 \sin\vartheta\,dr\,d\vartheta\,d\varphi$. See the topics on multiple integrals in Calculus 2.
+For a continuous function $f$ on a measurable region $D$ of the plane, the double integral $\displaystyle\int_D f\,dA$ is computed by strips with the reduction formulas, and in polar coordinates with $dA = r\,dr\,d\vartheta$. For a region $E$ of space the triple integral is computed by slices or in cylindrical and spherical coordinates, with $dV = r\,dr\,d\vartheta\,dz$ and $dV = r^2 \sin\vartheta\,dr\,d\vartheta\,d\varphi$. See the topics on multiple integrals in Mathematical Analysis 2.
 :::
 
 ::::teorema{#baricentri-lamine titolo="Centers of mass of standard plates and arcs"}

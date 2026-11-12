@@ -31,7 +31,7 @@ $$
 \vec{z}(t_0) = \vec{z}_0
 \end{cases}
 $$
-admits one and only one solution, defined in a neighborhood of $t_0$. See the topic on differential equations in Calculus 1 and Calculus 2.
+admits one and only one solution, defined in a neighborhood of $t_0$. See the topic on differential equations in Mathematical Analysis 1 and Mathematical Analysis 2.
 :::
 
 :::osservazione{#problema-del-moto titolo="The problem of motion"}
@@ -90,7 +90,7 @@ With the constant force the equation is $m\,\dot{\vec{v}}_P = \vec{F} - h\,\vec{
 ## The harmonic oscillator
 
 :::richiamo{titolo="Linear second order equations with constant coefficients"}
-The equation $\ddot{x} + 2\gamma\,\dot{x} + \omega_0^2\,x = 0$ has as general integral a linear combination of $e^{\lambda_1 t}$ and $e^{\lambda_2 t}$, where $\lambda_1$ and $\lambda_2$ are the roots of $\lambda^2 + 2\gamma\lambda + \omega_0^2 = 0$; if the roots coincide the two solutions are $e^{\lambda t}$ and $t\,e^{\lambda t}$, and if they are complex conjugate $-\gamma \pm i\,\mu$ the real solutions are $e^{-\gamma t}\cos\mu t$ and $e^{-\gamma t}\sin\mu t$. See the topic on linear differential equations in Calculus 2.
+The equation $\ddot{x} + 2\gamma\,\dot{x} + \omega_0^2\,x = 0$ has as general integral a linear combination of $e^{\lambda_1 t}$ and $e^{\lambda_2 t}$, where $\lambda_1$ and $\lambda_2$ are the roots of $\lambda^2 + 2\gamma\lambda + \omega_0^2 = 0$; if the roots coincide the two solutions are $e^{\lambda t}$ and $t\,e^{\lambda t}$, and if they are complex conjugate $-\gamma \pm i\,\mu$ the real solutions are $e^{-\gamma t}\cos\mu t$ and $e^{-\gamma t}\sin\mu t$. See the topic on linear differential equations in Mathematical Analysis 2.
 :::
 
 ::::teorema{#oscillatore-armonico titolo="Harmonic oscillator"}
