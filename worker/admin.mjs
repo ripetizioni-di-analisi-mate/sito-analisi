@@ -112,6 +112,8 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .suggerimento i{display:inline-block;width:.55rem;height:.55rem;border-radius:2px;margin-right:.35rem}
 .legenda{display:flex;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--ink-2);padding:0 1.2rem}
 .legenda i{display:inline-block;width:.7rem;height:.7rem;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+.traffico-parziale{display:flex;align-items:baseline;flex-wrap:wrap;gap:.25rem .9rem;padding:.5rem .7rem;margin-bottom:.6rem;border:1px solid var(--riga);border-radius:9px;background:var(--pannello-2);color:var(--ink-2);font-size:.84rem}
+.traffico-parziale b{color:var(--ink);font-variant-numeric:tabular-nums}
 
 /* elenchi a barre */
 .barre{display:grid;gap:.55rem}
@@ -438,7 +440,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   }
   // serie giornaliere su un intervallo; fine = quanti giorni prima di oggi termina (per il periodo precedente)
   function serie(nome, n, fine = 0) {
-    const g = elencoGiorni(n, fine);
+    return seriePerGiorni(nome, elencoGiorni(n, fine));
+  }
+  function seriePerGiorni(nome, g) {
     const conta = (lista, campo) => { const c = {}; lista.forEach((x) => { if (x) { const k = x.slice(0, 10); c[k] = (c[k] || 0) + 1; } }); return g.map((d) => c[d] || 0); };
     switch (nome) {
       case 'visite': return g.map((d) => (S.visite[d] || {}).n || 0);
@@ -452,6 +456,33 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     return g.map(() => 0);
   }
   const somma = (a) => a.reduce((s, x) => s + x, 0);
+
+  function andamentoTraffico(conIngressi = false) {
+    // Il Worker aggrega le visite per data UTC. L'ultima data è ancora in corso.
+    const date = elencoGiorni(giorni + 1);
+    const oggi = date.pop();
+    const metriche = [
+      { chiave: 'visitatori', nome: 'Visitatori unici', etichetta: 'visitatori unici', colore: 'var(--c1)', dal: D.inizioVisitatori },
+      { chiave: 'visite', nome: 'Pagine viste', etichetta: 'pagine viste', colore: 'var(--c2)', area: false, tratteggio: !conIngressi, dal: D.visite[0]?.giorno },
+    ];
+    if (conIngressi) metriche.push({ chiave: 'ingressi', nome: 'Ingressi dall’esterno', etichetta: 'ingressi dall’esterno', colore: 'var(--c6)', area: false, tratteggio: true, dal: D.ingressi[0]?.giorno });
+    const dal = metriche.map((m) => m.dal).filter(Boolean).sort()[0];
+    const conclusi = date.filter((g) => dal && g >= dal);
+    const serieG = metriche.map((m) => ({
+      ...m,
+      valori: seriePerGiorni(m.chiave, conclusi).map((v, i) => m.dal && conclusi[i] >= m.dal ? v : null),
+    }));
+    const parziale = '<div class="traffico-parziale"><span title="Giornata calcolata in UTC">In corso · ' + breveData(oggi) + '</span>' +
+      metriche.map((m) => '<span><b>' + nf.format(seriePerGiorni(m.chiave, [oggi])[0]) + '</b> ' + m.etichetta + '</span>').join('') + '</div>';
+    return { conclusi, serieG, parziale };
+  }
+  function graficoTraffico(el, andamento, opz) {
+    if (!andamento.conclusi.length) {
+      el.innerHTML = '<div class="vuoto">Nessuna giornata conclusa nel periodo</div>';
+      return;
+    }
+    grafico(el, andamento.conclusi, andamento.serieG, opz);
+  }
 
   // ---------- componenti grafici ----------
   function scalaBella(max) { if (max <= 4) return 4; const p = Math.pow(10, Math.floor(Math.log10(max))); const n = max / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
@@ -483,11 +514,14 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
           x.valori.forEach((v, i) => { if (v > 0) s += '<rect x="' + (X(i) - (nb * bw) / 2 + kb * bw) + '" y="' + Y(v) + '" width="' + Math.max(1.5, bw - 1) + '" height="' + (Y(0) - Y(v)) + '" rx="2" style="fill:' + x.colore + '" opacity=".9"/>'; });
           return;
         }
-        const pt = x.valori.map((v, i) => [X(i), Y(v)]);
+        // Una serie può iniziare dopo la prima data del grafico.
+        const pt = x.valori.flatMap((v, i) => v == null ? [] : [[X(i), Y(v)]]);
+        if (!pt.length) return;
+        const ultimo = pt.at(-1);
         const d = pt.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('');
-        if (x.area !== false) s += '<path d="' + d + 'L' + X(n - 1) + ' ' + Y(0) + 'L' + X(0) + ' ' + Y(0) + 'Z" fill="url(#a' + k + opz.id + ')"/>';
+        if (x.area !== false) s += '<path d="' + d + 'L' + ultimo[0] + ' ' + Y(0) + 'L' + pt[0][0] + ' ' + Y(0) + 'Z" fill="url(#a' + k + opz.id + ')"/>';
         s += '<path d="' + d + '" fill="none" style="stroke:' + x.colore + '" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"' + (x.tratteggio ? ' stroke-dasharray="4 4"' : '') + '/>';
-        s += '<circle cx="' + pt[n - 1][0] + '" cy="' + pt[n - 1][1] + '" r="3.5" style="fill:' + x.colore + ';stroke:var(--pannello)" stroke-width="2"/>';
+        s += '<circle cx="' + ultimo[0] + '" cy="' + ultimo[1] + '" r="3.5" style="fill:' + x.colore + ';stroke:var(--pannello)" stroke-width="2"/>';
       });
       s += '<line class="mirino" id="m' + opz.id + '" y1="' + su + '" y2="' + Y(0) + '" visibility="hidden"/>';
       s += '<rect x="' + sx + '" y="0" width="' + (W - sx - dx) + '" height="' + H + '" fill="transparent" id="r' + opz.id + '"/></svg><div class="suggerimento" hidden></div>';
@@ -499,7 +533,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
         m.setAttribute('x1', X(i)); m.setAttribute('x2', X(i)); m.setAttribute('visibility', 'visible');
         tip.hidden = false; tip.style.left = (X(i) / W) * box.width + 'px'; tip.style.top = (Y(Math.max(...serieG.map((x) => x.valori[i]))) / H) * box.height + 'px';
         tip.innerHTML = '<b>' + new Date(etichette[i] + 'T12:00:00').toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' }) + '</b><br>' +
-          serieG.map((x) => '<i style="background:' + x.colore + '"></i>' + esc(x.nome) + ': <b>' + (x.formato ? x.formato(x.valori[i]) : nf.format(x.valori[i])) + '</b>').join('<br>');
+          serieG.map((x) => '<i style="background:' + x.colore + '"></i>' + esc(x.nome) + ': <b>' + (x.valori[i] == null ? '—' : x.formato ? x.formato(x.valori[i]) : nf.format(x.valori[i])) + '</b>').join('<br>');
       };
       const esci = () => { m.setAttribute('visibility', 'hidden'); tip.hidden = true; };
       r.addEventListener('mousemove', muovi); r.addEventListener('touchmove', muovi, { passive: true }); r.addEventListener('touchstart', muovi, { passive: true });
@@ -521,7 +555,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     if (precedente > 0) { const p = ((attuale - precedente) / precedente) * 100; const cl = Math.abs(p) < 0.5 ? 'pari' : p > 0 ? 'su' : 'giu'; delta = '<span class="delta ' + cl + '">' + (p > 0 ? '▲ ' : p < 0 ? '▼ ' : '') + Math.abs(Math.round(p)) + '% <span>sui ' + giorni + ' giorni prima</span></span>'; }
     else if (attuale > 0) delta = '<span class="delta su">nuovo <span>sui ' + giorni + ' giorni prima</span></span>';
     else delta = '<span class="delta pari">—</span>';
-    return '<div class="card kpi"><span class="etichetta">' + etichetta + '</span><b>' + valore + '</b>' + delta + sparkline(valori, colore) + '</div>';
+    return '<div class="card kpi"><span class="etichetta">' + etichetta + '</span><b>' + valore + '</b>' + delta + (valori.length > 1 ? sparkline(valori, colore) : '') + '</div>';
   }
 
   // ---------- viste ----------
@@ -542,23 +576,25 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     const is = serie('iscritti', giorni), isp = serie('iscritti', giorni, giorni);
     const pa = serie('paganti', giorni), pap = serie('paganti', giorni, giorni);
     const inc = serie('incasso', giorni), incp = serie('incasso', giorni, giorni);
-    const da = D.inizioVisitatori && D.inizioVisitatori > g[0] ? D.inizioVisitatori : null;
+    const andamento = andamentoTraffico();
+    const [storicoVisitatori, storicoPagine] = andamento.serieG;
+    const notaTraffico = andamento.conclusi.length ? 'Giorni conclusi dal ' + breveData(andamento.conclusi[0]) : 'Giorni conclusi';
     $('#vista').innerHTML =
       '<div class="kpi-riga">' +
-      kpi('Visitatori unici', nf.format(somma(v)), somma(v), somma(vp), v, 'var(--c1)') +
-      kpi('Pagine viste', nf.format(somma(pv)), somma(pv), somma(pvp), pv, 'var(--c2)') +
+      kpi('Visitatori unici', nf.format(somma(v)), somma(v), somma(vp), storicoVisitatori.valori.filter((n) => n != null), storicoVisitatori.colore) +
+      kpi('Pagine viste', nf.format(somma(pv)), somma(pv), somma(pvp), storicoPagine.valori.filter((n) => n != null), storicoPagine.colore) +
       kpi('Nuovi iscritti', nf.format(somma(is)), somma(is), somma(isp), is, 'var(--c3)') +
       kpi('Nuovi clienti', nf.format(somma(pa)), somma(pa), somma(pap), pa, 'var(--c4)') +
       kpi('Incasso lordo', eur.format(somma(inc)), somma(inc), somma(incp), inc, 'var(--c5)') +
       '</div>' +
-      '<div class="due"><section class="card"><header><h2>Visitatori unici</h2><span class="nota">' + (da ? 'contati dal ' + breveData(da) : 'ultimi ' + giorni + ' giorni') + '</span></header>' +
-      '<div class="corpo"><div class="grafico" id="g-andamento"></div></div></section>' +
+      '<div class="due"><section class="card"><header><h2>Visitatori unici</h2><span class="nota">' + notaTraffico + '</span></header>' +
+      legenda(andamento.serieG) + '<div class="corpo">' + andamento.parziale + '<div class="grafico" id="g-andamento"></div></div></section>' +
       '<section class="card"><header><h2>Dalla visita al pagamento</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' + imbuto(somma(v), somma(is), somma(pa)) + '</div></section></div>' +
       '<div class="due"><section class="card"><header><h2>Iscrizioni e nuovi clienti</h2><span class="nota">al giorno</span></header>' +
       legenda([{ nome: 'Nuovi iscritti', colore: 'var(--c3)' }, { nome: 'Nuovi clienti', colore: 'var(--c4)' }]) + '<div class="corpo"><div class="grafico" id="g-iscritti"></div></div></section>' +
       '<section class="card"><header><h2>Da dove arrivano</h2><span class="nota">ingressi dall\u2019esterno</span></header><div class="corpo">' + barreFonti(6) + '</div></section></div>' +
       '<section class="card"><header><h2>Ultime attività</h2><a class="nota" href="#studenti">tutti gli studenti →</a></header><div class="corpo">' + attivita(10) + '</div></section>';
-    grafico($('#g-andamento'), g, [{ nome: 'Visitatori unici', valori: v, colore: 'var(--c1)' }, { nome: 'Pagine viste', valori: pv, colore: 'var(--c2)', area: false, tratteggio: true }], { id: 'and', titolo: 'Visitatori unici', altezza: 210 });
+    graficoTraffico($('#g-andamento'), andamento, { id: 'and', titolo: 'Visitatori unici e pagine viste nei giorni conclusi', altezza: 210 });
     grafico($('#g-iscritti'), g, [{ nome: 'Nuovi iscritti', valori: is, colore: 'var(--c3)', barre: true }, { nome: 'Nuovi clienti', valori: pa, colore: 'var(--c4)', barre: true }], { id: 'isc', titolo: 'Iscrizioni', altezza: 190 });
   }
   function imbuto(vis, isc, pag) {
@@ -760,19 +796,21 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   }
 
   function traffico() {
-    const g = elencoGiorni(giorni), v = serie('visitatori', giorni), pv = serie('visite', giorni), ing = serie('ingressi', giorni);
+    const g = elencoGiorni(giorni), v = serie('visitatori', giorni), pv = serie('visite', giorni);
+    const andamento = andamentoTraffico(true);
+    const [storicoVisitatori, storicoPagine] = andamento.serieG;
     const inizio = g[0]; const vis = D.visitatori.filter((r) => r.giorno >= inizio); const tot = somma(vis.map((r) => r.n)), mob = somma(vis.map((r) => r.mobile || 0));
     const f = fontiPeriodo(); const totF = somma(f.map((x) => x[1])) || 1;
     const isc = {}; (D.fontiIscritti || []).forEach((r) => { isc[r.fonte] = r; });
     const sez = (D.sezioni && D.sezioni[giorni]) || [];
     $('#vista').innerHTML =
       '<div class="kpi-riga">' +
-      kpi('Visitatori unici', nf.format(somma(v)), somma(v), somma(serie('visitatori', giorni, giorni)), v, 'var(--c1)') +
-      kpi('Pagine viste', nf.format(somma(pv)), somma(pv), somma(serie('visite', giorni, giorni)), pv, 'var(--c2)') +
+      kpi('Visitatori unici', nf.format(somma(v)), somma(v), somma(serie('visitatori', giorni, giorni)), storicoVisitatori.valori.filter((n) => n != null), storicoVisitatori.colore) +
+      kpi('Pagine viste', nf.format(somma(pv)), somma(pv), somma(serie('visite', giorni, giorni)), storicoPagine.valori.filter((n) => n != null), storicoPagine.colore) +
       '<div class="card kpi"><span class="etichetta">Pagine per visitatore</span><b>' + (somma(v) ? (somma(pv) / somma(v)).toFixed(1).replace('.', ',') : '—') + '</b><span class="delta pari">media del periodo</span></div>' +
       '<div class="card kpi"><span class="etichetta">Da telefono</span><b>' + (tot ? Math.round((mob / tot) * 100) + '%' : '—') + '</b><span class="delta pari">' + (tot ? nf.format(tot - mob) + ' da computer' : 'nessun dato') + '</span></div></div>' +
-      '<section class="card" style="margin-bottom:1rem"><header><h2>Visite</h2><span class="nota">solo persone: robot e anteprime dei link esclusi</span></header>' + legenda([{ nome: 'Visitatori unici', colore: 'var(--c1)' }, { nome: 'Pagine viste', colore: 'var(--c2)' }, { nome: 'Ingressi dall’esterno', colore: 'var(--c6)' }]) +
-      '<div class="corpo"><div class="grafico" id="g-visite"></div></div></section>' +
+      '<section class="card" style="margin-bottom:1rem"><header><h2>Visite</h2><span class="nota">Giorni conclusi · robot e anteprime esclusi</span></header>' + legenda(andamento.serieG) +
+      '<div class="corpo">' + andamento.parziale + '<div class="grafico" id="g-visite"></div></div></section>' +
       '<div class="due pari"><section class="card"><header><h2>Provenienza</h2><span class="nota">' + giorni + ' giorni</span></header><div class="tabella"><table><thead><tr><th>Fonte</th><th class="destra">Ingressi</th><th class="destra">Quota</th><th class="destra" title="Iscritti da sempre con questa provenienza">Iscritti</th><th class="destra">Paganti</th></tr></thead><tbody>' +
       (f.length ? f.map(([k, n]) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + (COLORI_FONTI[k] || '#7a8a87') + '"></i>' + esc(k) + '</span></td><td class="destra"><b>' + nf.format(n) + '</b></td><td class="destra">' + Math.round((n / totF) * 100) + '%</td><td class="destra">' + ((isc[k] || {}).iscritti || 0) + '</td><td class="destra">' + ((isc[k] || {}).paganti || 0) + '</td></tr>').join('') :
         '<tr><td colspan="5"><div class="vuoto">Nessun ingresso registrato in questo periodo</div></td></tr>') +
@@ -780,7 +818,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '<section class="card"><header><h2>Pagine più viste</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(sez.map((r) => { const m = r.sezione.split('/')[0]; return { nome: nomeSezione(r.sezione), valore: r.n, colore: (M[m] || {}).colore || '#7a8a87' }; }), { quota: false, vuoto: 'Nessuna visita nel periodo' }) + '</div></section></div>' +
       percorsoAcquisto();
-    grafico($('#g-visite'), g, [{ nome: 'Pagine viste', valori: pv, colore: 'var(--c2)', area: false }, { nome: 'Visitatori unici', valori: v, colore: 'var(--c1)' }, { nome: 'Ingressi dall’esterno', valori: ing, colore: 'var(--c6)', area: false, tratteggio: true }], { id: 'vis', titolo: 'Visite' });
+    graficoTraffico($('#g-visite'), andamento, { id: 'vis', titolo: 'Visite nei giorni conclusi' });
   }
 
   // Percorso d'acquisto per materia (conteggi anonimi dal 02/11/2026) e campagne dei link (utm_campaign).
