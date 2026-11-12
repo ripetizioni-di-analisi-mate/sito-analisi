@@ -92,7 +92,7 @@ Quando l'altezza della luce è confrontabile con il carico, la velocità teorica
 ::::teorema{#luce-di-grandi-dimensioni titolo="Portata di una luce rettangolare di grandi dimensioni"}
 Sia una luce rettangolare a battente in parete sottile verticale, di larghezza $b$, con il bordo superiore alla profondità $h_1$ e quello inferiore alla profondità $h_2$ sotto il pelo libero di monte, e sia $\mu$ il suo coefficiente di portata. Allora
 $$
-Q = \frac{2}{3}\,\mu\,b\,\sqrt{2g}\,\left(h_2^{3/2} - h_1^{3/2}\right) .
+Q = \frac{2}{3}\,\mu\,b\,\sqrt{2g}\,\left(h_2^{\frac{3}{2}} - h_1^{\frac{3}{2}}\right) .
 $$
 La formula si applica alle paratoie di fondo e alle luci alte degli sbarramenti, dove la formula per le luci piccole non è abbastanza accurata. Per $b = 1{,}00\,\mathrm{m}$, $h_1 = 0{,}50\,\mathrm{m}$, $h_2 = 1{,}50\,\mathrm{m}$ e $\mu = 0{,}62$ risulta $Q = 2{,}72\,\mathrm{m^3/s}$, contro i $2{,}75\,\mathrm{m^3/s}$ della formula per le luci piccole.
 
@@ -108,8 +108,8 @@ $$
 Il coefficiente $\mu$ si assume uguale per tutte le strisce, poiché la contrazione dipende dalla forma dello spigolo e non dalla profondità. Integrando fra le profondità dei due bordi si ottiene
 $$
 Q = \int_{h_1}^{h_2} \mu\,b\,\sqrt{2 g y}\;dy
-= \mu\,b\,\sqrt{2g}\,\left[\frac{2}{3}\,y^{3/2}\right]_{h_1}^{h_2}
-= \frac{2}{3}\,\mu\,b\,\sqrt{2g}\,\left(h_2^{3/2} - h_1^{3/2}\right) .
+= \mu\,b\,\sqrt{2g}\,\left[\frac{2}{3}\,y^{\frac{3}{2}}\right]_{h_1}^{h_2}
+= \frac{2}{3}\,\mu\,b\,\sqrt{2g}\,\left(h_2^{\frac{3}{2}} - h_1^{\frac{3}{2}}\right) .
 $$
 :::
 ::::
@@ -118,7 +118,7 @@ $$
 Siano $a = h_2 - h_1$ l'altezza della luce, $h_G = \dfrac{h_1 + h_2}{2}$ il carico sul baricentro e $\varepsilon = \dfrac{a}{2\,h_G}$. Il rapporto fra la portata esatta e quella data dalla formula per le luci piccole vale
 $$
 \frac{Q}{\mu\,b\,a\,\sqrt{2 g h_G}}
-= \frac{(1 + \varepsilon)^{3/2} - (1 - \varepsilon)^{3/2}}{3\,\varepsilon}
+= \frac{(1 + \varepsilon)^{\frac{3}{2}} - (1 - \varepsilon)^{\frac{3}{2}}}{3\,\varepsilon}
 = 1 - \frac{\varepsilon^2}{24} - \frac{\varepsilon^4}{128} - \dots
 $$
 perciò la formula per le luci piccole sovrastima la portata di circa $\dfrac{\varepsilon^2}{24}$. Per una luce alta metà del carico sul baricentro risulta $\varepsilon = 0{,}25$ e lo scarto è lo $0{,}26\%$; per una luce alta una volta e mezza il carico risulta $\varepsilon = 0{,}75$ e lo scarto supera il $2\%$. Finché l'altezza della luce resta minore del carico sul baricentro lo scarto si mantiene sotto l'uno per cento, e in questo campo si usa la formula più semplice.
@@ -256,7 +256,7 @@ Si ripete il procedimento delle luci di grandi dimensioni, con il bordo superior
 La striscia compresa fra le profondità $y$ e $y + dy$ sotto il pelo libero dà $dQ = \mu'\,b\,\sqrt{2 g y}\;dy$, quindi
 $$
 Q = \mu'\,b\,\sqrt{2g}\int_0^{h} \sqrt{y}\;dy
-= \frac{2}{3}\,\mu'\,b\,\sqrt{2g}\;h^{3/2}
+= \frac{2}{3}\,\mu'\,b\,\sqrt{2g}\;h^{\frac{3}{2}}
 = \frac{2}{3}\,\mu'\,b\,h\,\sqrt{2 g h} ,
 $$
 e ponendo $\mu = \dfrac{2}{3}\,\mu'$ si ottiene la formula dell'enunciato. Il calcolo giustifica la struttura della formula, cioè la dipendenza dalla potenza $\dfrac{3}{2}$ del carico, mentre il valore di $\mu$ si ricava dalle misure, poiché nella lama le traiettorie sono curve e la distribuzione delle pressioni non è idrostatica.
@@ -274,9 +274,9 @@ valida con $h$ in metri per carichi fra $0{,}05$ e $0{,}60\,\mathrm{m}$ e soglia
 ::::teorema{#stramazzo-triangolare titolo="Portata di uno stramazzo triangolare"}
 Sia uno stramazzo triangolare in parete sottile, con il vertice in basso, asse verticale, angolo al vertice $\theta$ e carico $h$ misurato dal vertice. Allora
 $$
-Q = \frac{8}{15}\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\;h^{5/2} .
+Q = \frac{8}{15}\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\;h^{\frac{5}{2}} .
 $$
-Questa è la **formula di Thomson**. Per $\theta = 90^\circ$, cioè $\tan\dfrac{\theta}{2} = 1$, e $\mu = 0{,}60$ si ottiene la forma di uso corrente $Q = 1{,}42\,h^{5/2}$, con $Q$ in $\mathrm{m^3/s}$ e $h$ in metri; per $h = 0{,}15\,\mathrm{m}$ risulta $Q = 12{,}4\,\mathrm{L/s}$.
+Questa è la **formula di Thomson**. Per $\theta = 90^\circ$, cioè $\tan\dfrac{\theta}{2} = 1$, e $\mu = 0{,}60$ si ottiene la forma di uso corrente $Q = 1{,}42\,h^{\frac{5}{2}}$, con $Q$ in $\mathrm{m^3/s}$ e $h$ in metri; per $h = 0{,}15\,\mathrm{m}$ risulta $Q = 12{,}4\,\mathrm{L/s}$.
 
 ::schema{solidi="0,0 3,0 3,0.6 0.6,3 0,3;3,0 6,0 6,3 5.4,3 3,0.6" acqua="3,0.6 4.8,2.4 1.2,2.4" pelo="1.2,4.8,2.4," tratteggi="-0.5,0.6 3,0.6;-0.5,2.4 1.2,2.4" quote="0 0.6,0 2.4,h,-0.55" etichette="3,1.05,θ" titolo="Stramazzo triangolare di Thomson, visto da valle: il carico $h$ si misura dal vertice del triangolo e la larghezza della luce cresce con la quota"}
 
@@ -285,10 +285,10 @@ Alla profondità $y$ sotto il pelo libero la larghezza della luce vale $2\,(h - 
 $$
 dQ = 2\,\mu\,(h - y)\,\tan\frac{\theta}{2}\,\sqrt{2 g y}\;dy ,
 $$
-e integrando fra $0$ e $h$, con $\displaystyle\int_0^h (h - y)\sqrt{y}\;dy = \frac{2}{3}h^{5/2} - \frac{2}{5}h^{5/2} = \frac{4}{15}h^{5/2}$, si ottiene
+e integrando fra $0$ e $h$, con $\displaystyle\int_0^h (h - y)\sqrt{y}\;dy = \frac{2}{3}h^{\frac{5}{2}} - \frac{2}{5}h^{\frac{5}{2}} = \frac{4}{15}h^{\frac{5}{2}}$, si ottiene
 $$
-Q = 2\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\cdot\frac{4}{15}h^{5/2}
-= \frac{8}{15}\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\;h^{5/2} .
+Q = 2\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\cdot\frac{4}{15}h^{\frac{5}{2}}
+= \frac{8}{15}\,\mu\,\tan\frac{\theta}{2}\,\sqrt{2g}\;h^{\frac{5}{2}} .
 $$
 :::
 ::::
@@ -324,7 +324,7 @@ alla quale il numero di Froude vale $1$, la velocità vale $\sqrt{g\,h_c}$ e ris
 ::::teorema{#stramazzo-parete-grossa titolo="Portata di uno stramazzo in parete grossa"}
 Sia una soglia orizzontale di larghezza $b$ e spessore maggiore di circa tre volte il carico, con il pelo libero di monte alla quota $H$ sopra la soglia e velocità di monte trascurabile. Se le perdite si trascurano e sulla soglia la corrente raggiunge lo stato critico, la portata vale
 $$
-Q = \left(\frac{2}{3}\right)^{3/2} b\,\sqrt{g}\;H^{3/2} = 0{,}385\,b\,H\,\sqrt{2 g H} .
+Q = \left(\frac{2}{3}\right)^{\frac{3}{2}} b\,\sqrt{g}\;H^{\frac{3}{2}} = 0{,}385\,b\,H\,\sqrt{2 g H} .
 $$
 Il coefficiente $0{,}385$ coincide con quello misurato sulle soglie a spigoli vivi, perciò il risultato si usa anche nella forma sperimentale $Q = \mu\,b\,H\sqrt{2 g H}$, con $\mu$ fra $0{,}35$ e $0{,}40$ secondo la forma del ciglio. Per $b = 1{,}50\,\mathrm{m}$ e $H = 0{,}40\,\mathrm{m}$ risultano $Q = 0{,}647\,\mathrm{m^3/s}$ e $h_c = 0{,}267\,\mathrm{m}$.
 
@@ -333,9 +333,9 @@ Sulla soglia la lama si riattacca alla parete, quindi le traiettorie sono rettil
 
 La corrente passa da lenta a veloce superando la soglia, perciò nella sezione di sbocco si realizza lo stato critico, nel quale l'energia specifica è minima. Da $E_{\min} = \dfrac{3}{2}h_c$ e $E = H$ segue allora $h_c = \dfrac{2}{3}H$. Nello stato critico la velocità vale $\sqrt{g\,h_c}$, quindi
 $$
-Q = b\,h_c\sqrt{g\,h_c} = b\,\sqrt{g}\left(\frac{2}{3}H\right)^{3/2} .
+Q = b\,h_c\sqrt{g\,h_c} = b\,\sqrt{g}\left(\frac{2}{3}H\right)^{\frac{3}{2}} .
 $$
-Il confronto con la forma $\mu\,b\,H\sqrt{2 g H}$ dà infine $\mu = \dfrac{1}{\sqrt{2}}\left(\dfrac{2}{3}\right)^{3/2} = 0{,}385$.
+Il confronto con la forma $\mu\,b\,H\sqrt{2 g H}$ dà infine $\mu = \dfrac{1}{\sqrt{2}}\left(\dfrac{2}{3}\right)^{\frac{3}{2}} = 0{,}385$.
 :::
 ::::
 

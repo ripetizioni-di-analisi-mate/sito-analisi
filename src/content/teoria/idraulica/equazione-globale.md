@@ -10,7 +10,7 @@ Il teorema di Bernoulli lega fra loro i carichi di due sezioni e risponde a doma
 :::definizione{#volume-di-controllo titolo="Volume di controllo e superficie di controllo"}
 Si chiama **volume di controllo** una regione fissa dello spazio, occupata dal fluido, scelta per scrivere un bilancio; la sua frontiera è la **superficie di controllo**. La superficie di controllo si compone di due parti: le **sezioni di passaggio**, attraverso le quali il fluido entra ed esce, e la **superficie di contorno**, costituita dalle pareti solide e dalle eventuali superfici libere, attraverso la quale non passa portata.
 
-Il volume di controllo non è un insieme fisso di particelle: le particelle lo attraversano, mentre la regione resta ferma. Per una condotta che compie un gomito, il volume di controllo è il tronco di condotta compreso fra una sezione a monte del gomito e una sezione a valle, e la superficie di contorno è la parete del gomito.
+Le particelle di fluido attraversano il volume di controllo, mentre la regione resta ferma nello spazio. Per una condotta che compie un gomito, il volume di controllo è il tronco di condotta compreso fra una sezione a monte del gomito e una sezione a valle, e la superficie di contorno è la parete del gomito.
 
 ::schema{nodi="A,0,1.2,-;B,6,1.2,-" condotte="A-B,1.6" tratteggi="0.9,0.25 0.9,2.15;5.1,0.25 5.1,2.15" frecce="1.5,1.2,2.5,1.2,v_1;3.5,1.2,4.5,1.2,v_2" etichette="0.9,2.45,1;5.1,2.45,2" riferimento=0 titolo="Volume di controllo in un tronco di condotta: le sezioni $1$ e $2$ sono le sezioni di passaggio, la parete è la superficie di contorno"}
 :::
@@ -38,7 +38,7 @@ Si chiama **flusso di quantità di moto** attraverso una sezione la quantità di
 $$
 \vec{M} = \rho \int_A v^2\,dA\;\hat{t} = \beta\,\rho\,Q\,v\;\hat{t} ,
 $$
-dove $v = \dfrac{Q}{A}$ è la velocità media, $\hat{t}$ il versore della velocità e $\beta$ il coefficiente di ragguaglio definito sotto. Con $\beta = 1$ il flusso di quantità di moto vale $\rho Q v$ e si misura in newton, come una forza.
+dove $v = \dfrac{Q}{A}$ è la velocità media, $\hat{t}$ il versore della velocità e $\beta$ il coefficiente di ragguaglio della quantità di moto. Con $\beta = 1$ il flusso di quantità di moto vale $\rho Q v$ e si misura in newton, come una forza.
 
 In una condotta di diametro $D = 200\,\mathrm{mm}$ che porta $Q = 50\,\mathrm{L/s}$ la velocità media è $v = 1{,}59\,\mathrm{m/s}$ e il flusso di quantità di moto vale $\rho Q v = 1000 \cdot 0{,}050 \cdot 1{,}59 = 79{,}6\,\mathrm{N}$.
 :::
@@ -50,7 +50,7 @@ $$
 $$
 dove $u$ è la velocità locale e $v$ la velocità media; esso corregge il flusso di quantità di moto calcolato con la sola velocità media. Risulta $\beta \ge 1$, con l'uguaglianza quando la velocità è uniforme sulla sezione. Nel moto turbolento in condotta il profilo di velocità è appiattito e $\beta$ vale da $1{,}02$ a $1{,}05$; nel moto laminare, con profilo parabolico, $\beta = \dfrac{4}{3}$.
 
-Nelle applicazioni correnti si pone $\beta = 1$, come per il coefficiente $\alpha$ del teorema di Bernoulli: l'errore che ne segue sul flusso di quantità di moto è di pochi punti percentuali ed è minore dell'incertezza sui dati. In tutto quanto segue si assume $\beta = 1$, salvo indicazione diversa.
+Nelle applicazioni correnti si pone $\beta = 1$, come per il coefficiente $\alpha$ del teorema di Bernoulli, perché l'errore che ne segue sul flusso di quantità di moto è di pochi punti percentuali e risulta minore dell'incertezza sui dati. In tutto l'argomento si assume quindi $\beta = 1$, salvo indicazione diversa.
 :::
 
 ## L'equazione globale dell'equilibrio dinamico
@@ -64,7 +64,7 @@ $$
 $$
 dove $A$ è l'area della sezione, $p_G$ la pressione nel suo baricentro e $\hat{n}$ il versore normale alla sezione **diretto verso l'interno** del volume di controllo. Nella sezione di ingresso $\hat{n}$ ha il verso della velocità, in quella di uscita il verso opposto.
 
-L'espressione vale perché la sezione è di corrente lineare, quindi su di essa la pressione ha distribuzione idrostatica e la risultante delle pressioni su una superficie piana è il prodotto della pressione nel baricentro per l'area. Per una condotta di diametro $D = 200\,\mathrm{mm}$ con pressione relativa $p = 300\,\mathrm{kPa}$ sull'asse, la spinta vale $\Pi = 300 \cdot 0{,}0314 = 9{,}42\,\mathrm{kN}$: un valore molto maggiore del flusso di quantità di moto calcolato sopra per la stessa condotta. Si rimanda all'argomento sulle spinte su superfici piane e curve.
+L'espressione vale perché la sezione è di corrente lineare, quindi su di essa la pressione ha distribuzione idrostatica e la risultante delle pressioni su una superficie piana è il prodotto della pressione nel baricentro per l'area. Per una condotta di diametro $D = 200\,\mathrm{mm}$ con pressione relativa $p = 300\,\mathrm{kPa}$ sull'asse, la spinta vale $\Pi = 300 \cdot 0{,}0314 = 9{,}42\,\mathrm{kN}$, cioè un valore molto maggiore del flusso di quantità di moto della stessa condotta, che vale $79{,}6\,\mathrm{N}$. Si rimanda all'argomento sulle spinte su superfici piane e curve.
 :::
 
 ::::teorema{#equazione-globale titolo="Equazione globale dell'equilibrio dinamico"}
@@ -74,7 +74,7 @@ $$
 $$
 A sinistra compare la variazione del flusso di quantità di moto fra uscita e ingresso, a destra il risultante delle forze esterne applicate al fluido contenuto nel volume.
 
-L'equazione serve a calcolare la forza scambiata fra la corrente e le pareti: risolta rispetto a $\vec{R}$, dà la forza con cui le pareti trattengono il fluido, e la forza che il fluido esercita sulle pareti è $-\vec{R}$ per il principio di azione e reazione. È questa la forza che sollecita gli ancoraggi di un gomito, i bulloni di un ugello e il meccanismo di sollevamento di una paratoia.
+L'equazione serve a calcolare la forza scambiata fra la corrente e le pareti. Risolta rispetto a $\vec{R}$, essa dà la forza con cui le pareti trattengono il fluido, e per il principio di azione e reazione la forza che il fluido esercita sulle pareti è $-\vec{R}$. È questa la forza che sollecita gli ancoraggi di un gomito, i bulloni di un ugello e il meccanismo di sollevamento di una paratoia.
 
 :::dimostrazione
 L'idea è applicare il teorema della quantità di moto alla massa fluida che a un certo istante occupa il volume di controllo, e osservare che in moto permanente la quantità di moto contenuta nel volume non varia nel tempo.
@@ -92,7 +92,7 @@ Le forze esterne applicate a $\mathcal{M}$ sono le pressioni esercitate dal flui
 ::::
 
 :::osservazione{#reazione-delle-pareti titolo="Che cosa contiene la reazione delle pareti"}
-Il vettore $\vec{R}$ raccoglie tutte le azioni che il contorno solido esercita sul fluido, cioè le pressioni normali alla parete e gli sforzi tangenziali dovuti alla viscosità. L'equazione globale fornisce il loro risultante senza che occorra conoscere come le pressioni si distribuiscono sulla parete, e questo è il motivo per cui si usa: la distribuzione delle pressioni dentro un gomito non è nota, mentre il risultante si ottiene da un bilancio.
+Il vettore $\vec{R}$ raccoglie tutte le azioni che il contorno solido esercita sul fluido, cioè le pressioni normali alla parete e gli sforzi tangenziali dovuti alla viscosità. L'equazione globale fornisce il loro risultante senza che occorra conoscere come le pressioni si distribuiscono sulla parete, e questo è il motivo per cui si usa, poiché la distribuzione delle pressioni dentro un gomito non è nota mentre il risultante si ottiene da un bilancio.
 
 La forza che il fluido esercita sulle pareti è $-\vec{R}$. Nei problemi si calcola prima $\vec{R}$ dall'equazione, poi si cambia il segno a entrambe le componenti e si dichiara il verso a parole.
 :::
@@ -145,7 +145,7 @@ F = 2\,(\rho\,Q\,v + p\,A)\,\sin\frac{\theta}{2}
 $$
 ed è diretta secondo la bisettrice dell'angolo formato dalle due sezioni, verso l'esterno della curva.
 
-La formula dà in un colpo solo la forza che gli ancoraggi del gomito devono equilibrare. Per un gomito a $90^\circ$ di diametro $D = 200\,\mathrm{mm}$ con $Q = 50\,\mathrm{L/s}$ e $p = 300\,\mathrm{kPa}$ risulta $\rho Q v = 79{,}6\,\mathrm{N}$, $pA = 9{,}42\,\mathrm{kN}$ e $F = 2 \cdot 9{,}50 \cdot \sin 45^\circ = 13{,}4\,\mathrm{kN}$, inclinata di $45^\circ$ sull'asse di ingresso.
+La formula dà direttamente la forza che gli ancoraggi del gomito devono equilibrare. Per un gomito a $90^\circ$ di diametro $D = 200\,\mathrm{mm}$ con $Q = 50\,\mathrm{L/s}$ e $p = 300\,\mathrm{kPa}$ risulta $\rho Q v = 79{,}6\,\mathrm{N}$, $pA = 9{,}42\,\mathrm{kN}$ e $F = 2 \cdot 9{,}50 \cdot \sin 45^\circ = 13{,}4\,\mathrm{kN}$, inclinata di $45^\circ$ sull'asse di ingresso.
 
 ::schema{nodi="A,0,0,-;B,3.2,0,-;C,3.2,3.2,-" condotte="A-B-C,0.6" tratteggi="0.9,-0.6 0.9,0.6;2.6,2.2 3.8,2.2" forze="0.9 0,1.1,0,Π_1;3.2 2.2,0,-1.1,Π_2;2.4 1,1.2,-1.2,F" etichette="0.72,0.95,1;3.98,2.2,2" riferimento=0 titolo="Gomito a $90^\circ$: le spinte sulle sezioni sono dirette verso l'interno del volume di controllo, la forza $F$ sul gomito è diretta verso l'esterno della curva"}
 
@@ -170,7 +170,7 @@ dove l'ultimo passaggio usa l'identità $1 - \cos\theta = 2\sin^2\dfrac{\theta}{
 :::osservazione{#peso-relativo-dei-termini titolo="Quale termine comanda"}
 Nelle condotte in pressione il termine $pA$ supera di uno o due ordini di grandezza il termine $\rho Q v$, come mostrano i valori $9{,}42\,\mathrm{kN}$ e $79{,}6\,\mathrm{N}$ dell'esempio. La spinta su un gomito dipende perciò soprattutto dalla pressione di esercizio, e un blocco di ancoraggio dimensionato per la sola quantità di moto risulterebbe insufficiente.
 
-Nei getti liberi accade il contrario: la pressione relativa è nulla su tutto il contorno del getto, quindi resta il solo termine $\rho Q v$.
+Nei getti liberi la pressione relativa è nulla su tutto il contorno del getto, quindi resta il solo termine $\rho Q v$.
 :::
 
 :::osservazione{#curva-a-180 titolo="Curva a 180°"}
@@ -178,7 +178,7 @@ Con $\theta = 180^\circ$ le due sezioni sono parallele e opposte, e le spinte $\
 $$
 F = 2\,\rho\,Q\,v + (p_1 + p_2)\,A ,
 $$
-diretta come la velocità in ingresso. La perdita si calcola con il coefficiente $\xi$ della curva, $\Delta H = \xi\,\dfrac{v^2}{2g}$, e la pressione a valle segue dal teorema di Bernoulli: $p_2 = p_1 - \gamma\,\Delta H$, perché il diametro è costante e le due sezioni stanno alla stessa quota.
+diretta come la velocità in ingresso. La perdita si calcola con il coefficiente $\xi$ della curva, $\Delta H = \xi\,\dfrac{v^2}{2g}$, e dal teorema di Bernoulli segue $p_2 = p_1 - \gamma\,\Delta H$, perché il diametro è costante e le due sezioni stanno alla stessa quota.
 :::
 
 ## Riduzioni, ugelli e diffusori
@@ -219,7 +219,7 @@ Il termine $p_2 A_2$ supera il termine $p_1 A_1$ perché l'area cresce più di q
 :::
 
 :::osservazione{#brusco-allargamento titolo="Brusco allargamento"}
-Quando la sezione passa bruscamente da $A_1$ ad $A_2$, la corrente si distacca dallo spigolo e si forma una zona di fluido in ricircolo che occupa la corona di area $A_2 - A_1$. Le misure mostrano che su questa corona la pressione è prossima a $p_1$: assunto ciò, la spinta complessiva sulla sezione di monte del volume di controllo vale $p_1 A_2$ e l'equazione globale proiettata sull'asse della condotta diventa
+Quando la sezione passa bruscamente da $A_1$ ad $A_2$, la corrente si distacca dallo spigolo e si forma una zona di fluido in ricircolo che occupa la corona di area $A_2 - A_1$. Le misure mostrano che su questa corona la pressione è prossima a $p_1$. Assunta questa condizione, la spinta complessiva sulla sezione di monte del volume di controllo vale $p_1 A_2$ e l'equazione globale proiettata sull'asse della condotta diventa
 $$
 \rho\,Q\,(v_2 - v_1) = (p_1 - p_2)\,A_2 .
 $$
@@ -271,7 +271,7 @@ Q_1 = \frac{Q}{2}\,(1 + \cos\alpha) ,
 Q_2 = \frac{Q}{2}\,(1 - \cos\alpha) .
 $$
 
-Le due portate dicono come il getto si ripartisce, e si misurano facilmente in laboratorio: il confronto con la formula è la verifica sperimentale del bilancio di quantità di moto. Per $\alpha = 90^\circ$ si ritrova $F = \rho Q v$ e $Q_1 = Q_2 = \dfrac{Q}{2}$.
+Le due portate dicono come il getto si ripartisce, e si misurano facilmente in laboratorio, perciò il confronto con la formula è la verifica sperimentale del bilancio di quantità di moto. Per $\alpha = 90^\circ$ si ritrova $F = \rho Q v$ e $Q_1 = Q_2 = \dfrac{Q}{2}$.
 
 ::schema{acqua="0,1 3.65,1 4.35,1.4 0,1.4;4.35,1.40 5.65,2.15 5.51,2.38 4.21,1.63;3.65,1.00 2.92,0.58 2.86,0.68 3.59,1.10" solidi="2.98,0.27 5.75,1.87 5.60,2.12 2.83,0.53" frecce="0.6,1.2,1.8,1.2,v" forze="4.9 1.43,-0.75,1.30,F" riferimento=0 titolo="Getto su una piastra inclinata di $\alpha$ sull'asse del getto: la forza è normale alla piastra"}
 
@@ -306,7 +306,7 @@ F_y = \rho\,Q\,v\,\sin\theta ,
 $$
 e modulo $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$.
 
-La deviazione massima si ha per $\theta = 180^\circ$, che dà $F = 2\rho Q v$: raddoppiare la deviazione del getto raddoppia la spinta, ed è il motivo per cui le pale delle turbine Pelton hanno forma di doppio cucchiaio. Quando l'attrito non si trascura si pone $v_2 = k\,v$ con $k$ poco minore di $1$ e si ottiene $F_x = \rho Q v\,(1 - k\cos\theta)$.
+La deviazione massima si ha per $\theta = 180^\circ$, che dà $F = 2\rho Q v$, cioè il doppio della spinta su una piastra piana normale; è questo il motivo per cui le pale delle turbine Pelton hanno forma di doppio cucchiaio. Quando l'attrito non si trascura si pone $v_2 = k\,v$ con $k$ poco minore di $1$ e si ottiene $F_x = \rho Q v\,(1 - k\cos\theta)$.
 
 ::schema{acqua="0,1 3.6,1 3.6,1.4 0,1.4;3.60,1.00 3.88,1.03 4.14,1.13 4.37,1.28 4.56,1.48 4.70,1.72 4.78,1.99 4.80,2.27 4.75,2.54 4.64,2.80 4.29,2.60 4.37,2.43 4.40,2.25 4.39,2.06 4.33,1.88 4.24,1.72 4.11,1.59 3.96,1.49 3.78,1.42 3.60,1.40" solidi="3.54,1.00 3.84,1.02 4.12,1.12 4.37,1.28 4.57,1.50 4.72,1.76 4.79,2.05 4.79,2.35 4.72,2.64 4.57,2.91 4.80,3.07 4.98,2.75 5.07,2.39 5.07,2.02 4.98,1.66 4.80,1.34 4.55,1.07 4.24,0.87 3.89,0.75 3.52,0.72" frecce="0.6,1.2,1.8,1.2,v_1;4.52,2.61,3.97,3.57,v_2" forze="4.34 0.92,1.13,0.75,F" riferimento=0 titolo="Pala fissa che devia il getto dell'angolo $\theta$: la forza è il risultante della variazione di quantità di moto"}
 
@@ -334,7 +334,7 @@ $$
 S = \frac{\gamma\,b\,h_1^2}{2} - \frac{\gamma\,b\,h_2^2}{2} - \rho\,Q\,(v_2 - v_1) .
 $$
 
-La formula dà la forza che il meccanismo di manovra deve equilibrare, e mostra che la spinta è minore della sola spinta idrostatica di monte: parte di essa è spesa per accelerare la corrente. La portata, quando non è assegnata, si ricava dal teorema di Bernoulli fra le due sezioni, perché la perdita di carico sotto la paratoia è piccola.
+La formula dà la forza che il meccanismo di manovra deve equilibrare, e mostra che la spinta è minore della sola spinta idrostatica di monte, perché parte di essa è spesa per accelerare la corrente. La portata, quando non è assegnata, si ricava dal teorema di Bernoulli fra le due sezioni, perché la perdita di carico sotto la paratoia è piccola.
 
 ::schema{acqua="0,0 3,0 3,2.4 0,2.4;3,0 3.3,0 3.3,0.5 3,0.5;3.3,0 8,0 8,0.5 3.3,0.5" solidi="0,-0.5 8,-0.5 8,0 0,0;3,0.5 3.3,0.5 3.3,3.4 3,3.4" pelo="0,3,2.4,p_a;3.3,8,0.5" quote="0 0,0 2.4,h_1,-0.9" frecce="0.6,1.1,1.8,1.1,v_1;4.4,0.25,5.6,0.25,v_2" etichette="2,2.8,1;5.2,1.3,2;7.4,0.95,h_2" riferimento=0 titolo="Paratoia piana in un canale rettangolare: il volume di controllo è compreso fra la sezione $1$ di monte e la sezione $2$ di valle"}
 
@@ -362,13 +362,13 @@ In un canale largo $3\,\mathrm{m}$ con $h_1 = 2{,}40\,\mathrm{m}$ e $h_2 = 0{,}5
 I due bilanci che reggono l'idraulica delle correnti rispondono a domande diverse e si usano insieme sullo stesso problema.
 
 :::osservazione{#energia-e-quantita-di-moto titolo="Due bilanci sullo stesso volume"}
-Il teorema di Bernoulli è un bilancio di energia: è un'equazione scalare, contiene le quote, le pressioni e le velocità, e per essere scritto fra due sezioni richiede di conoscere la perdita di carico $\Delta H$. L'equazione globale è un bilancio di forze: è un'equazione vettoriale, contiene in più la reazione delle pareti e il peso, e vale anche quando la dissipazione è forte, perché la quantità di moto si conserva mentre l'energia meccanica si degrada.
+Il teorema di Bernoulli è un bilancio di energia, scritto come equazione scalare, che contiene le quote, le pressioni e le velocità e che, per essere applicato fra due sezioni, richiede di conoscere la perdita di carico $\Delta H$. L'equazione globale è un bilancio di forze, scritto come equazione vettoriale, che contiene in più la reazione delle pareti e il peso e che vale anche quando la dissipazione è forte, poiché la quantità di moto si conserva mentre l'energia meccanica si degrada.
 
-Nei problemi i due bilanci si usano in sequenza: il teorema di Bernoulli fornisce le velocità e le pressioni nelle sezioni, l'equazione globale fornisce la forza. In un ugello, per esempio, Bernoulli dà la portata a partire dalla pressione in condotta e l'equazione globale dà la forza sui bulloni della flangia.
+Nei problemi i due bilanci si usano in sequenza, perché il teorema di Bernoulli fornisce le velocità e le pressioni nelle sezioni e l'equazione globale fornisce poi la forza. In un ugello, per esempio, Bernoulli dà la portata a partire dalla pressione in condotta e l'equazione globale dà la forza sui bulloni della flangia.
 :::
 
 :::attenzione
-L'equazione globale non fornisce da sola la perdita di carico, e il teorema di Bernoulli non fornisce da solo la forza sulle pareti: ciascuno dei due contiene incognite che l'altro non ha.
+L'equazione globale non fornisce da sola la perdita di carico, e il teorema di Bernoulli non fornisce da solo la forza sulle pareti, poiché ciascuno dei due contiene incognite che l'altro non ha.
 
-Nel brusco allargamento le due equazioni, scritte fra le stesse sezioni, danno risultati diversi. L'equazione globale con l'ipotesi sulla pressione nella corona dà $\dfrac{p_2 - p_1}{\gamma} = \dfrac{v_2\,(v_1 - v_2)}{g}$, mentre il teorema di Bernoulli scritto senza perdita darebbe $\dfrac{p_2 - p_1}{\gamma} = \dfrac{v_1^2 - v_2^2}{2g}$: la differenza fra i due valori è proprio la perdita di Borda $\dfrac{(v_1 - v_2)^2}{2g}$, che in un allargamento da $200\,\mathrm{mm}$ a $300\,\mathrm{mm}$ con $Q = 90\,\mathrm{L/s}$ vale $0{,}129\,\mathrm{m}$.
+Nel brusco allargamento le due equazioni, scritte fra le stesse sezioni, danno risultati diversi. L'equazione globale con l'ipotesi sulla pressione nella corona dà $\dfrac{p_2 - p_1}{\gamma} = \dfrac{v_2\,(v_1 - v_2)}{g}$, mentre il teorema di Bernoulli scritto senza perdita darebbe $\dfrac{p_2 - p_1}{\gamma} = \dfrac{v_1^2 - v_2^2}{2g}$. La differenza fra i due valori è proprio la perdita di Borda $\dfrac{(v_1 - v_2)^2}{2g}$, che in un allargamento da $200\,\mathrm{mm}$ a $300\,\mathrm{mm}$ con $Q = 90\,\mathrm{L/s}$ vale $0{,}129\,\mathrm{m}$.
 :::

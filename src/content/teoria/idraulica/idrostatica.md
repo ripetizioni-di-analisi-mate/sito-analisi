@@ -115,7 +115,7 @@ Sia un fluido in quiete. Allora in ogni punto la pressione ha lo stesso valore s
 
 Il teorema garantisce che la pressione è una funzione scalare del punto, $p = p(x, y, z)$, e che su una parete comunque inclinata agisce il valore della pressione calcolato per quel punto. Su tale conclusione si fonda il calcolo delle spinte sulle superfici piane e curve, trattato nell'argomento sulle spinte idrostatiche.
 
-::schema{poligoni="0,0 2,0 0,1.5" forze="0 0.75,0.75,0,p_x;1 0,0,0.75,p_z;1 0.75,-0.55,-0.73,p_n" quote="0 0,2 0,dx,0.45;0 0,0 1.5,dz,-1.25" etichette="1.55,1.1,dl" riferimento=0 titolo="Cuneo elementare di spessore $b$: le spinte sulle tre facce e il peso proprio"}
+::schema{poligoni="0,0 2,0 0,1.5" forze="0 0.75,0.75,0,p_x;1 0,0,0.75,p_z;1 0.75,-0.55,-0.73,p_n" quote="0 0,2 0,dx,0.45;0 0,0 1.5,dz,-1.25" etichette="1.55,1.1,dl" riferimento=0 titolo="Cuneo elementare di spessore $b$: le spinte sulle tre facce"}
 
 :::dimostrazione
 L'idea è di scrivere l'equilibrio di un cuneo elementare di fluido e di far tendere a zero le sue dimensioni: il peso è un infinitesimo di ordine superiore rispetto alle forze di pressione, quindi resta solo l'uguaglianza fra le pressioni.

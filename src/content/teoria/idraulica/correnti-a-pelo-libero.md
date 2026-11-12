@@ -164,7 +164,7 @@ si dice **scala delle portate** del canale. Risulta strettamente crescente, perc
 
 La scala delle portate si traccia una volta per tutte per un canale assegnato e permette di leggere $h_0$ da $Q$ e viceversa. Nelle sezioni chiuse, come la circolare, la monotonia vale fino al grado di riempimento in cui il contorno bagnato cresce più rapidamente dell'area, oltre il quale la portata smette di crescere.
 
-::grafico{f="60*4*x*(4*x/(4+2*x))^(2/3)*0.0316228" xmin=0 xmax=2 ymin=0 ymax=16 nomi="h,Q" punti="1.2,7.52,pieno" segmenti="1.2,0,1.2,7.52;0,7.52,1.2,7.52" legenda=0 titolo="Scala delle portate del canale rettangolare con $b = 4\,\mathrm{m}$, $i = 0{,}001$ e $k_s = 60\,\mathrm{m^{1/3}/s}$: alla portata $Q = 7{,}52\,\mathrm{m^3/s}$ corrisponde $h_0 = 1{,}20\,\mathrm{m}$"}
+::grafico{f="60*4*x*(4*x/(4+2*x))^(2/3)*0.0316228" xmin=0 xmax=2 ymin=0 ymax=16 nomi="h,Q" punti="1.2,7.52,pieno" segmenti="1.2,0,1.2,7.52;0,7.52,1.2,7.52" legenda="Q(h) = k_s\,A(h)\,R(h)^{2/3}\,i^{1/2}" titolo="Scala delle portate del canale rettangolare con $b = 4\,\mathrm{m}$, $i = 0{,}001$ e $k_s = 60\,\mathrm{m^{1/3}/s}$: alla portata $Q = 7{,}52\,\mathrm{m^3/s}$ corrisponde $h_0 = 1{,}20\,\mathrm{m}$"}
 :::
 
 :::osservazione{#altezza-di-moto-uniforme titolo="Calcolo dell'altezza di moto uniforme"}
@@ -353,7 +353,7 @@ h^3 - E\,h^2 + \frac{q^2}{2g} = 0 ,
 $$
 che si ottiene moltiplicando $E = h + \dfrac{q^2}{2 g h^2}$ per $h^2$. L'equazione ha tre radici reali, delle quali una è negativa e si scarta.
 
-::grafico{curve="t+0.203874/t^2,t,0.25,2.3;t,t,0,2.3" xmin=0 xmax=2.6 ymin=0 ymax=2.3 nomi="E,h" punti="1.1123,0.7415,pieno;1.6,1.5107,pieno;1.6,0.4147,pieno" segmenti="1.6,0.4147,1.6,1.5107;0,0.7415,1.1123,0.7415" etichette="1.72,1.52,corrente lenta;1.72,0.42,corrente veloce;0.1,0.86,altezza critica;1.2,2.08,E = h" legenda=0 titolo="Curva dell'energia specifica per $q = 2\,\mathrm{m^2/s}$: a $E = 1{,}60\,\mathrm{m}$ corrispondono le altezze alternate $1{,}51\,\mathrm{m}$ e $0{,}415\,\mathrm{m}$, e il minimo $E_{\min} = 1{,}11\,\mathrm{m}$ cade in $h_c = 0{,}742\,\mathrm{m}$"}
+::grafico{curve="t+0.203874/t^2,t,0.25,2.3;t,t,0,2.3" xmin=0 xmax=2.6 ymin=0 ymax=2.3 nomi="E,h" punti="1.1123,0.7415,pieno;1.6,1.5107,pieno;1.6,0.4147,pieno" segmenti="1.6,0.4147,1.6,1.5107;0,0.7415,1.1123,0.7415" etichette="1.72,1.52,corrente lenta;1.72,0.42,corrente veloce;0.1,0.86,altezza critica" legenda="E(h) = h + \dfrac{q^2}{2\,g\,h^2};E = h" titolo="Curva dell'energia specifica per $q = 2\,\mathrm{m^2/s}$: a $E = 1{,}60\,\mathrm{m}$ corrispondono le altezze alternate $1{,}51\,\mathrm{m}$ e $0{,}415\,\mathrm{m}$, e il minimo $E_{\min} = 1{,}11\,\mathrm{m}$ cade in $h_c = 0{,}742\,\mathrm{m}$"}
 :::
 
 :::esempio{titolo="Altezza alternata in un canale rettangolare"}
