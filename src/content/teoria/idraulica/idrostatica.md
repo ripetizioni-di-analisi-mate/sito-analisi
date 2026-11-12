@@ -283,7 +283,7 @@ p_A + \gamma\,(z_A - z_1) = \gamma_{\mathrm{Hg}}\,(z_2 - z_1) .
 $$
 Poiché $\gamma_{\mathrm{Hg}}$ è $13{,}6$ volte $\gamma$, un dislivello di mercurio di $0{,}50\,\mathrm{m}$ corrisponde a $6{,}80\,\mathrm{m}$ di colonna d'acqua, e il tubo resta di dimensioni maneggevoli.
 
-::schema{nodi="A,0.6,0,-;B,6.6,0,-" condotte="A-B,0.5" acqua="1.4,0 1.6,0 1.6,3.4 1.4,3.4;4.4,0 4.6,0 4.6,-0.8 4.4,-0.8" poligoni="4.4,-0.8 4.4,-1.2 5.6,-1.2 5.6,0.5 5.4,0.5 5.4,-1.0 4.6,-1.0 4.6,-0.8" pelo="1.4,1.6,3.4;5.4,5.6,0.5" etichette="2.6,0.6,condotta;0.95,2.9,piezometro;5.0,-1.75,mercurio" quote="1.5 0,1.5 3.4,3.40 m,-0.7;5.6 -0.8,5.6 0.5,z_2 − z_1,0.8" riferimento=0 titolo="Piezometro e manometro semplice a mercurio innestati sulla stessa condotta"}
+::schema{nodi="A,0.6,0,-;B,5,0,-" condotte="A-B,0.5" acqua="1.4,0 1.6,0 1.6,3.4 1.4,3.4;4.4,0 4.6,0 4.6,-0.8 4.4,-0.8" poligoni="4.4,-0.8 4.4,-1.2 5.6,-1.2 5.6,0.5 5.4,0.5 5.4,-1.0 4.6,-1.0 4.6,-0.8" pelo="1.4,1.6,3.4;5.4,5.6,0.5" etichette="2.6,0.6,condotta;0.95,2.9,piezometro;5.0,-1.75,mercurio" quote="1.5 0,1.5 3.4,3.40 m,-0.7;5.6 -0.8,5.6 0.5,z_2 − z_1,0.8" riferimento=0 titolo="Piezometro e manometro semplice a mercurio innestati sulla stessa condotta"}
 :::
 
 ::::teorema{#manometro-differenziale titolo="Manometro differenziale"}

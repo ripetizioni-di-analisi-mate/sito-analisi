@@ -192,7 +192,7 @@ Gli sforzi tangenziali di origine viscosa si oppongono al moto relativo degli st
 ::::
 
 :::attenzione
-La perdita di carico si sottrae sempre procedendo da monte verso valle, qualunque sia la geometria della condotta. In una condotta che sale, il carico totale diminuisce comunque nel verso del moto, mentre il carico piezometrico può crescere o diminuire. Per una corrente che passa da $z_1 = 2{,}00\,\mathrm{m}$ con $\dfrac{p_1}{\gamma} = 28{,}54\,\mathrm{m}$ e $\dfrac{v_1^2}{2g} = 0{,}053\,\mathrm{m}$ a $z_2 = 6{,}50\,\mathrm{m}$ con $\dfrac{p_2}{\gamma} = 21{,}41\,\mathrm{m}$ e $\dfrac{v_2^2}{2g} = 0{,}408\,\mathrm{m}$, i carichi totali valgono $H_1 = 30{,}595\,\mathrm{m}$ e $H_2 = 28{,}315\,\mathrm{m}$, quindi la perdita è $2{,}28\,\mathrm{m}$ e la corrente va dalla sezione $1$ alla sezione $2$, nonostante la quota cresca.
+La perdita di carico si sottrae sempre procedendo da monte verso valle, qualunque sia la geometria della condotta. In una condotta che sale, il carico totale diminuisce comunque nel verso del moto, mentre il carico piezometrico può crescere o diminuire. Per una corrente che passa da $z_1 = 2{,}00\,\mathrm{m}$ con $\dfrac{p_1}{\gamma} = 28{,}542\,\mathrm{m}$ e $\dfrac{v_1^2}{2g} = 0{,}053\,\mathrm{m}$ a $z_2 = 6{,}50\,\mathrm{m}$ con $\dfrac{p_2}{\gamma} = 21{,}407\,\mathrm{m}$ e $\dfrac{v_2^2}{2g} = 0{,}408\,\mathrm{m}$, i carichi totali valgono $H_1 = 30{,}595\,\mathrm{m}$ e $H_2 = 28{,}315\,\mathrm{m}$, quindi la perdita è $2{,}28\,\mathrm{m}$ e la corrente va dalla sezione $1$ alla sezione $2$, nonostante la quota cresca.
 :::
 
 ## Piezometri e tubo di Pitot
@@ -213,7 +213,7 @@ $$
 
 Il tubo di Pitot misura quindi la velocità locale della corrente attraverso una misura di lunghezza, e la coppia piezometro-Pitot dà in una sola lettura il carico piezometrico e il carico totale. Nelle condotte i due tubi sono riuniti in un unico strumento, detto *tubo di Pitot-Prandtl*, con una presa frontale e prese laterali collegate ai due rami di un manometro differenziale. Con un dislivello $\Delta = 0{,}22\,\mathrm{m}$ di colonna d'acqua risulta $v = \sqrt{2 \cdot 9{,}81 \cdot 0{,}22} = 2{,}08\,\mathrm{m/s}$.
 
-::schema{acqua="0,0 13,0 13,3.2 0,3.2" solidi="-0.5,-0.7 13.5,-0.7 13.5,0 -0.5,0" pelo="0,13,3.2" linee="4.6,1.2 4.6,5;5.2,1.2 5.2,5;8.2,5.9 8.2,1.2 7,1.2;7.6,5.9 7.6,1.5 7,1.5" frecce="1.2,1.4,3,1.4,v" quote="10.6 4.3,10.6 5.3,Δ,0.9" etichette="4.9,0.75,P;4.9,6.3,piezometro;7.9,6.6,Pitot" piezometrica="3.6,4.3 11.6,4.3" energia="3.6,5.3 11.6,5.3" riferimento=0 titolo="Piezometro e tubo di Pitot nella stessa sezione: il dislivello fra i due livelli è l'altezza cinetica"}
+::schema{nodi="M,0.6,2,-;N,12.4,2,-" condotte="M-N,0.7" linee="4.6,2.35 4.6,5.1;5.2,2.35 5.2,5.1;8.2,6.1 8.2,1.9 7.2,1.9;7.6,6.1 7.6,2.1 7.2,2.1" frecce="1.2,2,2.8,2,v" quote="10.6 4.3,10.6 5.3,Δ,0.9" etichette="4.75,1.25,P;3.8,5.5,piezometro;8,6.5,Pitot" piezometrica="3.6,4.3 11.6,4.3" energia="3.6,5.3 11.6,5.3" riferimento=0 titolo="Piezometro e tubo di Pitot nella stessa sezione: il dislivello fra i due livelli è l'altezza cinetica"}
 
 :::dimostrazione
 Si applica il **teorema di Bernoulli** lungo la linea di corrente che termina nel punto di arresto $A$, fra un punto $P$ che la precede, abbastanza lontano dallo strumento perché la corrente non sia ancora perturbata, e il punto $A$ stesso. I due punti stanno alla stessa quota $z$, la velocità in $P$ vale $v$ e quella in $A$ è nulla, quindi
@@ -244,7 +244,7 @@ $$
 
 La portata si ottiene quindi da una sola misura di dislivello, con due piezometri se la pressione lo consente oppure con un manometro differenziale. La formula non contiene le quote delle due sezioni, perciò il venturimetro funziona allo stesso modo in orizzontale, in verticale o inclinato. Con $D_1 = 200\,\mathrm{mm}$, $D_2 = 100\,\mathrm{mm}$ e $\Delta h = 0{,}85\,\mathrm{m}$ risulta $Q = 33{,}1\,\mathrm{L/s}$.
 
-::schema{acqua="0,0.6 3,0.6 4.4,0.3 6,0.3 7.4,0.6 11,0.6 11,-0.6 7.4,-0.6 6,-0.3 4.4,-0.3 3,-0.6 0,-0.6" linee="0,0.6 3,0.6 4.4,0.3 6,0.3 7.4,0.6 11,0.6;0,-0.6 3,-0.6 4.4,-0.3 6,-0.3 7.4,-0.6 11,-0.6;1.5,0.6 1.5,3.6 2.1,3.6 2.1,0.6;5,0.3 5,2.9 5.6,2.9 5.6,0.3" tratteggi="1.5,0 1.5,0.6;5,0 5,0.3;0,0 11,0" etichette="1.2,-0.95,1;4.7,-0.95,2;1.1,1.6,D_1;4.6,1.3,D_2" quote="2.1 2.9,5 2.9,Δh,-0.45" riferimento=0 titolo="Venturimetro: la strozzatura accelera la corrente e abbassa il carico piezometrico di $\Delta h$"}
+::schema{acqua="0,0.6 3,0.6 4.4,0.3 6,0.3 7.4,0.6 11,0.6 11,-0.6 7.4,-0.6 6,-0.3 4.4,-0.3 3,-0.6 0,-0.6" linee="0,0.6 3,0.6 4.4,0.3 6,0.3 7.4,0.6 11,0.6;0,-0.6 3,-0.6 4.4,-0.3 6,-0.3 7.4,-0.6 11,-0.6;1.5,0.6 1.5,3.6 2.1,3.6 2.1,0.6;5,0.3 5,2.9 5.6,2.9 5.6,0.3" tratteggi="1.5,0 1.5,0.6;5,0 5,0.3;0,0 11,0;2.1,3.6 7.4,3.6;5.6,2.9 7.4,2.9" etichette="1.2,-0.95,1;4.7,-0.95,2;1.1,1.6,D_1;4.6,1.3,D_2" quote="6.9 2.9,6.9 3.6,Δh,0.45" riferimento=0 titolo="Venturimetro: la strozzatura accelera la corrente e abbassa il carico piezometrico di $\Delta h$"}
 
 :::dimostrazione
 Per l'**equazione di continuità** $v_1 A_1 = v_2 A_2 = Q$, quindi $v_1 = \dfrac{Q}{A_1}$ e $v_2 = \dfrac{Q}{A_2}$. Le due sezioni appartengono a una corrente lineare, perciò si applica il **teorema di Bernoulli per una corrente lineare** con $\alpha = 1$:
