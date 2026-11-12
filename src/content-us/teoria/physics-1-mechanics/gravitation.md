@@ -335,7 +335,7 @@ $$
 which is the thesis, and comparing with $K$ gives $E = -K$ and $U = 2E$.
 :::
 
-For an elliptical orbit of semi-major axis $a$ the same expression holds with $a$ in place of $r$, hence $E = -\dfrac{GMm}{2a}$, as the integration of the equation of motion shows. The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases towards zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly.
+The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases towards zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly. For an elliptical orbit of semi-major axis $a$ the same expression holds with $a$ in place of $r$, therefore $E = -\dfrac{GMm}{2a}$, as the integration of the equation of motion shows.
 ::::
 
 :::esempio{#raising-an-orbit titolo="Raising a satellite"}

@@ -3,8 +3,9 @@ import UsStudySection from '../../../../components/UsStudySection.astro';
 import UsTeoria from '../../../../components/UsTeoria.astro';
 import UsSvoltiLista from '../../../../components/UsSvoltiLista.astro';
 import UsDafareLista from '../../../../components/UsDafareLista.astro';
+import Domande from '../../../../viste/Domande.astro';
 import { usSectionPaths } from '../../../../lib/stem-usa-study-pages';
-import { usSezioniMarkdown } from '../../../../lib/stem-usa-markdown';
+import { usSezioniMarkdown, conteggiDomandeUs } from '../../../../lib/stem-usa-markdown';
 import { SEZIONI_USA } from '../../../../data/stem-usa/programmi.mjs';
 
 export async function getStaticPaths() {
@@ -14,6 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { markdown, slug, lesson } = Astro.props as any;
+const conteggi = markdown ? await conteggiDomandeUs() : {};
 const { course, topic, section } = Astro.params as { course: string; topic: string; section: string };
 ---
 {markdown
@@ -21,5 +23,8 @@ const { course, topic, section } = Astro.params as { course: string; topic: stri
       ? <UsTeoria corso={course} argomento={topic} />
       : section === SEZIONI_USA['esercizi-svolti']
         ? <UsSvoltiLista corso={course} argomento={topic} />
-        : <UsDafareLista corso={course} argomento={topic} />)
+        : section === SEZIONI_USA.esercizi
+          ? <UsDafareLista corso={course} argomento={topic} />
+          : <Domande lingua="en" materia={course} argomento={topic} usa
+              totale={conteggi[course]?.[topic] ?? 0} />)
   : <UsStudySection {slug} {lesson} topic={topic} section={section as 'teoria' | 'esercizi-svolti' | 'esercizi'} />}

@@ -24,16 +24,19 @@ function htmlDi(chiave: string, body: string): Promise<string> {
 }
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
-type Lingua = 'it' | 'en';
+type Lingua = 'it' | 'en' | 'us';
 
 const senzaSoluzione = (html: string) => html.replace(/<details[^>]*blocco-soluzione[\s\S]*?<\/details>/g, '').trim();
 
 // In inglese: le domande tradotte; la traccia inglese se c'è, altrimenti quella italiana.
+// Con lingua 'us': i corsi americani scritti sul programma statunitense (src/content-us/).
+const COLLEZIONE = { it: 'domande', en: 'domande_en', us: 'domande_us' } as const;
 export async function domandePer(materia: string, lingua: Lingua = 'it'): Promise<Record<string, Domanda[]>> {
-  const tracce = new Map((await getCollection('dafare')).map((e) => [e.id, e]));
+  const usa = lingua === 'us';
+  const tracce = new Map((await getCollection(usa ? 'dafare_us' : 'dafare')).map((e) => [e.id, e]));
   const tracceEn = lingua === 'en' ? new Map((await getCollection('dafare_en')).map((e) => [e.id, e])) : new Map();
   const out: Record<string, Domanda[]> = {};
-  for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
+  for (const e of await getCollection(COLLEZIONE[lingua] as 'domande')) {
     const [m, argomento, n] = e.id.split('/');
     if (m !== materia) continue;
     const html = await htmlDi(`${lingua}/${e.id}`, e.body ?? '');
@@ -62,12 +65,12 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).
 const memo: Partial<Record<Lingua, Promise<Record<string, string[]>>>> = {};
 export function catalogoDomande(lingua: Lingua | LinguaCatalogo = 'it'): Promise<Record<string, string[]>> {
-  if (lingua !== 'it' && lingua !== 'en') return Promise.resolve({});
+  if (lingua !== 'it' && lingua !== 'en' && lingua !== 'us') return Promise.resolve({});
   return (memo[lingua] ??= calcolaCatalogo(lingua));
 }
 async function calcolaCatalogo(lingua: Lingua): Promise<Record<string, string[]>> {
   const c: Record<string, Set<string>> = {};
-  for (const e of await getCollection(lingua === 'en' ? 'domande_en' : 'domande')) {
+  for (const e of await getCollection(COLLEZIONE[lingua] as 'domande')) {
     const [m, a] = e.id.split('/');
     (c[m] ??= new Set()).add(a);
   }

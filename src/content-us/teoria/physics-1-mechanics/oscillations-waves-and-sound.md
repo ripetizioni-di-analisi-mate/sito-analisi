@@ -272,7 +272,7 @@ A = \frac{F_0}{b\,\omega_0} ,
 $$
 therefore the smaller the damping, the taller and the narrower the peak. A structure is designed so that no expected driving frequency falls near one of its own.
 
-::grafico{f="20/sqrt((800-2*x^2)^2+(8*x)^2);20/sqrt((800-2*x^2)^2+(20*x)^2)" legenda="b = 8.0;b = 20" nomi="ω,A" asintoti="x=20" xmin=-0.5 xmax=40 ymin=-0.012 ymax=0.145 titolo="Driven amplitude against driving frequency for $m = 2.0\,\mathrm{kg}$, $k = 800\,\mathrm{N/m}$ and $F_0 = 20\,\mathrm{N}$: the peak sits at $\omega_0 = 20\,\mathrm{rad/s}$ and is lowered by the damping"}
+::grafico{f="20/sqrt((800-2*x^2)^2+(8*x)^2);20/sqrt((800-2*x^2)^2+(20*x)^2)" legenda="b = 8.0;b = 20" nomi="ω,A" asintoti="x=20" xmin=-0.5 xmax=40 ymin=-0.012 ymax=0.145 titolo="Driven amplitude against driving frequency for $m = 2.0\,\mathrm{kg}$, $k = 800\,\mathrm{N/m}$ and $F_0 = 20\,\mathrm{N}$: the dashed line marks $\omega_0 = 20\,\mathrm{rad/s}$, and the damping lowers and broadens the peak"}
 :::
 
 ## Mechanical waves
@@ -343,7 +343,7 @@ $$
 \end{cases}
 \qquad n \in \mathbb{Z} .
 $$
-The condition on $\Delta r$ turns a question about sound into a measurement of lengths. Two loudspeakers fed by the same signal at $f = 686\,\mathrm{Hz}$ emit sound of wavelength $\lambda = \dfrac{343}{686}\,\mathrm{m} = 0.50\,\mathrm{m}$, hence a listener who stands $0.25\,\mathrm{m}$ farther from one of them than from the other hears a minimum. The same principle governs the standing wave of the next theorem, where the two waves are one wave and its reflection.
+The condition on $\Delta r$ turns a question about sound into a measurement of lengths. Two loudspeakers fed by the same signal at $f = 686\,\mathrm{Hz}$ emit sound of wavelength $\lambda = \dfrac{v}{f} = \dfrac{343\,\mathrm{m/s}}{686\,\mathrm{Hz}} = 0.50\,\mathrm{m}$, therefore a listener standing $0.25\,\mathrm{m}$ farther from one loudspeaker than from the other receives the two waves in antiphase and hears a minimum. The same condition produces the standing wave of the next theorem, where the two waves are one wave and its own reflection.
 :::
 
 ::::teorema{#standing-waves titolo="Standing wave"}

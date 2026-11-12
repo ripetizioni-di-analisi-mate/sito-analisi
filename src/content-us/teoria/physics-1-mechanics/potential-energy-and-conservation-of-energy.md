@@ -252,7 +252,7 @@ The right side is an antiderivative of $-F_x$, hence differentiating both sides 
 
 The relation turns a single function into the whole dynamics of the motion along a line. For $U(y) = mgy$ it returns $F_y = -mg$, the weight; for $U(x) = \dfrac{1}{2}kx^2$ it returns $F_x = -kx$, Hooke's law. Where $U$ decreases the derivative is negative and the force is positive, so the force always points towards the positions of lower potential energy.
 
-::grafico{f="x^3-3*x;3-3*x^2" punti="-1,2,pieno;1,-2,pieno" legenda="U = x^3 - 3x;F_x = 3 - 3x^2" xmin=-2.5 xmax=2.5 ymin=-6.5 ymax=6.5 titolo="$U(x) = x^3 - 3x$ in joules, with $x$ in meters, and the force $F_x = -\dfrac{dU}{dx} = 3 - 3x^2$ in newtons (dashed): the force vanishes at the stationary points $x = \pm 1\,\mathrm{m}$ of $U$"}
+::grafico{f="x^3-3*x;3-3*x^2" punti="-1,2,pieno;1,-2,pieno" legenda="U = x^3 - 3x;F_x = 3 - 3x^2" xmin=-2.5 xmax=2.5 ymin=-6.5 ymax=6.5 titolo="$U(x) = x^3 - 3x$ in joules, with $x$ in meters, and the force $F_x = -\dfrac{dU}{dx} = 3 - 3x^2$ in newtons (dashed); the force vanishes at the stationary points $x = \pm 1\,\mathrm{m}$ of $U$"}
 ::::
 
 :::osservazione{#three-dimensional-case titolo="Motion in space"}
@@ -292,7 +292,7 @@ A position $x_0$ is a position of **equilibrium** when the force vanishes there,
 - $U$ has a maximum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) < 0$, and the equilibrium is **unstable**, since a small displacement produces a force directed away from $x_0$;
 - $U$ is constant on an interval containing $x_0$, and the equilibrium is **neutral**, since the force vanishes on the whole interval and the body stays wherever it is placed.
 
-::grafico{f="(x^2-1)^2;0.25" punti="-1,0,pieno;1,0,pieno;0,1,pieno" etichette="1.62,0.45,E" xmin=-2.1 xmax=2.1 ymin=-0.6 ymax=3.2 nomi="x,U" titolo="$U(x) = (x^2 - 1)^2$ in joules, with $x$ in meters: the two minima at $x = \pm 1\,\mathrm{m}$ are positions of stable equilibrium and the maximum at $x = 0$ is unstable"}
+::grafico{f="(x^2-1)^2;0.25" punti="-1,0,pieno;1,0,pieno;0,1,pieno" etichette="1.62,0.45,E" xmin=-2.1 xmax=2.1 ymin=-0.6 ymax=3.2 nomi="x,U" titolo="$U(x) = (x^2 - 1)^2$ in joules, with $x$ in meters: the two minima at $x = \pm 1\,\mathrm{m}$ are positions of stable equilibrium and the maximum at $x = 0$ is unstable. A body with the mechanical energy $E = 0.25\,\mathrm{J}$ marked by the horizontal line stays in the well where it starts, since $E$ is smaller than $U(0)$"}
 :::
 
 :::esempio{#double-well titolo="Reading a potential energy curve"}

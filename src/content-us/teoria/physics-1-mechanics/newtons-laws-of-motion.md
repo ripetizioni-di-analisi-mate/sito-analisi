@@ -48,7 +48,7 @@ The **mass** of a body measures how strongly the body resists a change of its ve
 $$
 \frac{a_1}{a_2} = \frac{m_2}{m_1} ,
 $$
-so the body with the larger mass receives the smaller acceleration. Mass is a scalar, measured in kilograms, it is the same at every place and it adds when bodies are joined.
+so the body with the larger mass receives the smaller acceleration. Mass is a scalar, measured in kilograms; it is the same at every place, and it adds when bodies are joined.
 
 The relation above is also how an unknown mass is measured dynamically, by comparing its acceleration with that of a known mass under the same force.
 :::
@@ -73,7 +73,7 @@ $$
 The derivative is treated in the calculus course, and the integration of $a(t)$ back to $x(t)$ in the chapter on motion along a straight line.
 :::
 
-:::teorema{#second-law-in-components titolo="The second law in components"}
+::::teorema{#second-law-in-components titolo="The second law in components"}
 Fix axes $x$ and $y$ in the plane of the motion. Then the second law is equivalent to the pair of numerical equations
 $$
 \begin{cases}
@@ -87,7 +87,7 @@ Two vectors are equal exactly when their corresponding components are equal. Wri
 :::
 
 Each axis is then handled on its own, and this is how every problem of this chapter is solved. The axes are chosen so that the acceleration lies along one of them, since the equation of the other axis has zero on its right-hand side and gives directly one of the unknown forces.
-:::
+::::
 
 ## Newton's third law
 
@@ -124,11 +124,11 @@ w = m\,g ,
 $$
 where $\vec{g}$ points vertically downward and $g = 9.81\,\mathrm{m/s^2}$ near the surface of the Earth. Weight is a force, measured in newtons, while mass is a scalar measured in kilograms, hence a body of mass $3.0\,\mathrm{kg}$ has weight $29.4\,\mathrm{N}$.
 
-The same body carried to the Moon keeps its mass and changes its weight, since $g$ there is about $1.6\,\mathrm{m/s^2}$. A body in free fall has the weight as its only force, therefore the second law gives $m\vec{g} = m\vec{a}$, hence $\vec{a} = \vec{g}$ independently of the mass, which is the result used in the chapter on motion along a straight line.
+The same body carried to the Moon keeps its mass and changes its weight, since $g$ there is about $1.6\,\mathrm{m/s^2}$. A body in free fall, with the resistance of the air neglected, has the weight as its only force, therefore the second law gives $m\vec{g} = m\vec{a}$, hence $\vec{a} = \vec{g}$ independently of the mass, which is the result used in the chapter on motion along a straight line.
 :::
 
 :::definizione{#normal-force titolo="Normal force"}
-A surface in contact with a body exerts on it the **normal force** $\vec{N}$, perpendicular to the surface and directed away from it. The normal force is a constraint force, so its magnitude is not given by a formula of its own: it takes whatever value is needed to keep the body from penetrating the surface, and it is found from the equations of motion together with the other unknowns.
+A surface in contact with a body exerts on it the **normal force** $\vec{N}$, perpendicular to the surface and directed away from it. The normal force is a constraint force, so its magnitude is not given by a formula of its own, since it takes whatever value is needed to keep the body from penetrating the surface, and it is found from the equations of motion together with the other unknowns.
 
 A surface can only push, therefore $N \ge 0$, and the condition $N = 0$ is the instant at which the body leaves the surface. On a horizontal plane, with no vertical acceleration and no other vertical force, the equation of the vertical axis gives $N = mg$; with an additional force pressing the body down the value is larger, and with a force pulling it up the value is smaller.
 
@@ -168,7 +168,7 @@ A string is called **ideal** when its mass is negligible and its length does not
 A string of negligible mass has the same tension at all of its points, even when it is accelerating.
 
 :::dimostrazione
-Take a piece of the string between two of its points, of mass $\Delta m$, and let the string be straight there. The forces on that piece along the string are the pulls of the two neighbouring pieces, of magnitudes $T_1$ and $T_2$ and opposite senses. The second law along the string gives
+Take a piece of the string between two of its points, of mass $\Delta m$, and let the string be straight there. The forces on that piece along the string are the pulls of the two neighboring pieces, of magnitudes $T_1$ and $T_2$ and opposite senses. The second law along the string gives
 $$
 T_2 - T_1 = \Delta m \cdot a ,
 $$
@@ -183,15 +183,15 @@ A pulley is **ideal** when its mass and the friction at its axle are negligible 
 
 A load of mass $m$ raised with acceleration $a$ by a rope that passes over a fixed ideal pulley and is pulled downward requires the tension $T = m(g+a)$, and the axle of the pulley must support the two pulls of the rope. When the two parts of the rope are parallel the force on the axle has magnitude $2T$.
 
-::grafico{assi=0 uguale=1 curve="0.7*cos(t),0.7*sin(t),0,6.29" punti="0,0,pieno" vettori="-0.7,0,-0.7,-1.8,T;0.7,0,0.7,-1.8,T;0,0,0,2.1,2T" xmin=-2.4 xmax=2.4 ymin=-2.6 ymax=2.8 titolo="Free-body diagram of an ideal pulley with the two parts of the string vertical: the axle supports the force $2T$"}
+::grafico{assi=0 uguale=1 curve="0.7*cos(t),0.7*sin(t),0,6.29" punti="0,0,pieno" vettori="-0.7,0,-0.7,-1.8,T;0.7,0,0.7,-1.8,T;0,0,0,3.6,2T" xmin=-2.4 xmax=2.4 ymin=-2.6 ymax=4.2 titolo="Free-body diagram of an ideal pulley with the two parts of the string vertical: the axle supports the force $2T$"}
 :::
 
 ## Free-body diagrams
 
 :::definizione{#free-body-diagram titolo="Free-body diagram"}
-A **free-body diagram** of a chosen body is a drawing in which the body is replaced by a point or by a simple outline and every force exerted on it by another body is drawn as an arrow starting at the body, labelled with the name of the force and of its agent.
+A **free-body diagram** of a chosen body is a drawing in which the body is replaced by a point or by a simple outline and every force exerted on it by another body is drawn as an arrow starting at the body, labeled with the name of the force and of its agent.
 
-Three kinds of arrow are excluded from it. Forces exerted by the chosen body on other bodies belong to the diagrams of those bodies. The net force is not an applied force, so it does not appear beside the forces that compose it. The acceleration is not a force, and when it is drawn it is kept outside the diagram, as in the figure on apparent weight.
+Three kinds of arrow are excluded from it. Forces exerted by the chosen body on other bodies belong to the diagrams of those bodies. The net force is not an applied force, so it does not appear beside the forces that compose it. The acceleration is not a force, and when it is drawn it is kept outside the diagram, beside it.
 :::
 
 :::osservazione{#solution-method titolo="Solving a problem with the second law"}
@@ -336,7 +336,7 @@ The first gives $a = g\sin\theta$ and the second gives $N = mg\cos\theta$.
 
 Both results are independent of the mass, so two blocks of different masses released together on the same incline slide side by side. The formulas are checked at the ends of their range: for $\theta = 0$ they give $a = 0$ and $N = mg$, which is the block at rest on a horizontal floor, and for $\theta = 90^\circ$ they give $a = g$ and $N = 0$, which is free fall along a vertical wall.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" linee="0,0 6,0 6,3.4641 0,0" punti="4.3,2.4826,pieno" vettori="4.3,2.4826,4.3,0.4826,w;4.3,2.4826,3.434,3.9826,N;4.3,2.4826,3.434,1.9826;4.3,2.4826,5.166,0.9826" segmenti="3.434,1.9826,4.3,0.4826;5.166,0.9826,4.3,0.4826" etichette="0.95,0.17,30°;2.85,2.2,w sinθ;5.3,1.45,w cosθ" riferimento="0.4,2.6,30,1.1,x,y" xmin=-0.4 xmax=7.0 ymin=-0.6 ymax=4.4 titolo="Block on a frictionless incline of $30^\circ$: the weight splits into $w\sin\theta$ along the plane and $w\cos\theta$ perpendicular to it, and the second component is balanced by $\vec{N}$"}
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" linee="0,0 6,0 6,3.4641 0,0" punti="4.3,2.4826,pieno" vettori="4.3,2.4826,4.3,0.4826,w;4.3,2.4826,3.434,3.9826,N;4.3,2.4826,3.434,1.9826;4.3,2.4826,5.166,0.9826" segmenti="3.434,1.9826,4.3,0.4826;5.166,0.9826,4.3,0.4826" etichette="0.95,0.17,30°;2.85,2.2,w sinθ;5.0,0.55,w cosθ;0.45,3.72,y" riferimento="1.5,2.9,120,1.1, ,x" xmin=-0.4 xmax=7.0 ymin=-0.6 ymax=4.4 titolo="Block on a frictionless incline of $30^\circ$: the weight splits into $w\sin\theta$ along the plane and $w\cos\theta$ perpendicular to it, and the second component is balanced by $\vec{N}$"}
 ::::
 
 :::esempio{#incline-with-a-string titolo="A block held on an incline"}

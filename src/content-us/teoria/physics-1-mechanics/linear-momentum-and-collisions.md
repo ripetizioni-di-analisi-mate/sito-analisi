@@ -33,7 +33,7 @@ $$
 By Newton's second law the right-hand side equals $\vec{F}_{\text{net}}$, therefore the two expressions coincide.
 :::
 
-The form $\vec{F}_{\text{net}} = m\vec{a}$ requires a constant mass. The form written above holds for any system whose particles are fixed once and for all, therefore it applies to a rocket taken together with the fuel it carries and expels, and the final section of this chapter treats that system in this way.
+The form $\vec{F}_{\text{net}} = m\vec{a}$ requires a constant mass. The form written above holds for any system of fixed composition, therefore it applies to a rocket taken together with the fuel it carries and expels, and the final section of this chapter treats that system in this way.
 ::::
 
 :::richiamo{titolo="Derivative of a vector function"}

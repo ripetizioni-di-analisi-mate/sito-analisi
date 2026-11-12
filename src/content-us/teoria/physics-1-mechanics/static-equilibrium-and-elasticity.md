@@ -12,7 +12,7 @@ $$
 $$
 where $\varphi$ is the angle between $\vec{r}$ and $\vec{F}$ and $d = r\sin\varphi$ is the distance from $O$ to the line of action of the force. For forces in a plane the torque is perpendicular to that plane, therefore it is treated as a signed number, positive when the force turns the body counterclockwise. The chapter on fixed-axis rotation establishes these facts.
 
-::grafico{assi=0 uguale=1 linee="0,0 3.6,0" punti="0,0,pieno;3,0,pieno" vettori="0,0,3,0,r;3,0,4.286,1.532,F" segmenti="3,0,1.76,-1.478;0,0,1.76,-1.478" etichette="3.42,0.2,φ;0.45,-1.12,d" xmin=-0.7 xmax=4.9 ymin=-2.1 ymax=2.1 titolo="The torque of $\vec{F}$ about $O$ has magnitude $\tau = rF\sin\varphi = Fd$, where $d$ is the distance from $O$ to the line of action of the force"}
+::grafico{assi=0 uguale=1 linee="0,0 3.6,0" punti="0,0,pieno,O;3,0,pieno" vettori="0,0,3,0,r;3,0,4.286,1.532,F" segmenti="3,0,1.76,-1.478;0,0,1.76,-1.478" etichette="3.42,0.2,φ;0.45,-1.12,d" xmin=-0.7 xmax=4.9 ymin=-2.1 ymax=2.1 titolo="The torque of $\vec{F}$ about $O$ has magnitude $\tau = rF\sin\varphi = Fd$, where $d$ is the distance from $O$ to the line of action of the force"}
 :::
 
 :::definizione{#static-equilibrium titolo="Static equilibrium"}
@@ -63,7 +63,7 @@ The last sum vanishes by hypothesis, therefore the total torque about $O'$ equal
 ::::
 
 :::osservazione
-The hypothesis of the preceding theorem is satisfied in every equilibrium problem, since the first condition is imposed anyway. The reference point for the torques is therefore free, and it is chosen to make the equations simple: a point on the line of action of an unknown force gives that force zero torque, so the torque equation contains one unknown fewer.
+The hypothesis of the preceding theorem is satisfied in every equilibrium problem, since the first condition is imposed anyway. The reference point for the torques is therefore free, and it is chosen to make the equations simple, since a point on the line of action of an unknown force gives that force zero torque, and the torque equation then contains one unknown fewer.
 :::
 
 ## Center of gravity
@@ -231,7 +231,7 @@ with $N$ the normal force and $\mu_s$ the coefficient of static friction. The ch
 :::esempio{#ladder titolo="A ladder against a smooth wall"}
 A homogeneous ladder of mass $M = 18\,\mathrm{kg}$ and length $L = 4.0\,\mathrm{m}$ leans against a smooth vertical wall, making the angle $\theta = 65^\circ$ with a horizontal floor. The wall is smooth, hence it exerts the horizontal force $N_1$ alone; the floor exerts the normal force $N_2$ and the friction force $f$.
 
-::grafico{assi=0 uguale=1 linee="0,-0.4 0,4.1;-0.6,0 4.1,0;1.69,0 0,3.625" punti="0.845,1.8125,pieno,G" vettori="0,3.625,0.75,3.625,N₁;1.69,0,1.69,1.35,N₂;1.69,0,0.94,0,f;0.845,1.8125,0.845,0.46,Mg" etichette="1.33,0.36,65°" xmin=-0.8 xmax=4.35 ymin=-0.6 ymax=4.3 titolo="Forces on the ladder: the smooth wall pushes horizontally, the floor pushes up and holds the foot with friction"}
+::grafico{assi=0 uguale=1 linee="0,-0.4 0,4.1;-0.6,0 2.7,0;1.69,0 0,3.625" punti="0.845,1.8125,pieno,G" vettori="0,3.625,0.75,3.625,N₁;1.69,0,1.69,1.35,N₂;1.69,0,0.94,0,f;0.845,1.8125,0.845,0.46,Mg" etichette="1.28,0.30,65°" xmin=-0.8 xmax=2.95 ymin=-0.6 ymax=4.3 titolo="Forces on the ladder: the smooth wall pushes horizontally, the floor pushes up and holds the foot with friction"}
 
 The three equations are written with torques about the foot of the ladder:
 $$
@@ -259,7 +259,7 @@ The required coefficient grows as $\theta$ decreases, therefore a ladder set at 
 :::osservazione{#tipping titolo="Tipping"}
 A body resting on a flat base touches the floor over a whole region, and the floor pushes with a distributed force. The resultant of that distributed force is a single normal force whose line of action can be placed anywhere inside the base of contact, and nowhere outside it. The torque equation therefore has a solution only while the forces require that line to fall inside the base, and the body **tips** about the edge of the base as soon as the required point reaches that edge.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 0.6,0 0.6,1.2 0,1.2" linee="-0.8,0 1.9,0" punti="0.6,0,pieno;0.3,0.6,pieno,G" vettori="0,1.2,0.58,1.2,F;0.3,0.6,0.3,0.08,Mg" segmenti="0.3,0.6,0.3,-0.5;0,0,0,-0.5;0.6,0,0.6,-0.5;0,-0.34,0.6,-0.34" etichette="0.3,-0.64,w;1.0,0.12,edge" xmin=-1.0 xmax=2.1 ymin=-0.95 ymax=1.7 titolo="Tipping of a crate of width $w$ and height $h$: the limit is reached when $F h = M g \dfrac{w}{2}$, hence $F = \dfrac{M g w}{2h}$"}
+::grafico{assi=0 uguale=1 poligoni="0,0 0.6,0 0.6,1.2 0,1.2" linee="-0.8,0 1.9,0" punti="0.6,0,pieno,edge;0.3,0.6,pieno,G" vettori="0,1.2,0.58,1.2,F;0.3,0.6,0.3,0.08,Mg" segmenti="0.3,0.6,0.3,-0.5;0,0,0,-0.5;0.6,0,0.6,-0.5;0,-0.34,0.6,-0.34;0.6,1.2,1.0,1.2;1.0,0,1.0,1.2" etichette="0.3,-0.64,w;1.07,0.55,h" xmin=-1.0 xmax=2.1 ymin=-0.95 ymax=1.7 titolo="Tipping of a crate of width $w$ and height $h$: the limit is reached when $F h = M g \dfrac{w}{2}$, hence $F = \dfrac{M g w}{2h}$"}
 
 For a crate of width $w$ and height $h$ standing on an incline of angle $\theta$, the same condition on the line of action of the weight gives $\tan\theta = \dfrac{w}{h}$ at the limit.
 :::

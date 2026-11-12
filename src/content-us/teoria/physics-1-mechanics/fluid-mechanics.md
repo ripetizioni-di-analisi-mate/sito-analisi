@@ -74,7 +74,7 @@ $$
 $$
 Letting $\Delta y$ tend to zero yields $\dfrac{dp}{dy} = -\rho g$. Since $\rho$ and $g$ are constant, integrating from the free surface, where $y = 0$ and $p = p_{\mathrm{atm}}$, down to the depth $h$, where $y = -h$, gives $p = p_{\mathrm{atm}} + \rho g h$, and subtracting the values at two depths gives the second relation.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 7,0 7,5 0,5" linee="0,5.7 0,0 7,0 7,5.7;2,1.2 5,1.2 5,3.8 2,3.8 2,1.2" vettori="2.8,3.8,2.8,3.1,p₁A;4.2,1.2,4.2,1.9,p₂A;3.5,2.8,3.5,2.0,w" segmenti="5.9,5,5.9,1.2" etichette="6.05,3.1,h;0.15,5.25,free surface;2.75,0.75,area A" punti="3.5,2.8,pieno" xmin=-0.3 xmax=7.6 ymin=-0.4 ymax=6.1 titolo="A column of fluid at rest: the force from below, the force from above and the weight $w = \rho g A \Delta y$ balance, which gives $\dfrac{dp}{dy} = -\rho g$"}
+::grafico{assi=0 uguale=1 poligoni="0,0 7,0 7,5 0,5" linee="0,5.7 0,0 7,0 7,5.7;2,1.2 5,1.2 5,3.8 2,3.8 2,1.2" vettori="2.8,3.8,2.8,3.1,p₁A;4.0,1.2,4.0,1.9,p₂A;3.5,2.8,3.5,2.0,w" segmenti="5.9,5,5.9,1.2;1.35,1.2,1.35,3.8" etichette="6.05,3.1,h;1.47,2.4,Δy;0.15,5.25,free surface;2.75,0.75,area A" punti="3.5,2.8,pieno" xmin=-0.3 xmax=7.6 ymin=-0.4 ymax=6.1 titolo="A column of fluid at rest: the force from below, the force from above and the weight $w = \rho g A \Delta y$ balance, which gives $\dfrac{dp}{dy} = -\rho g$"}
 :::
 
 The relation shows that the pressure in a liquid at rest depends on the depth alone, and not on the shape of the container nor on the quantity of liquid present. It also fixes the order of magnitude of the effect: in water $\rho g = 9.81 \times 10^{3}\,\mathrm{Pa/m}$, therefore every $10.3\,\mathrm{m}$ of depth add one atmosphere.
@@ -206,7 +206,7 @@ The fraction is what makes the principle usable as a measuring instrument. Ice h
 
 ## Fluid flow and the continuity equation
 
-The quantities of the preceding sections describe a fluid at rest. A moving fluid requires a model of the motion, and the one used in this chapter keeps the four hypotheses listed next.
+The preceding sections describe a fluid at rest, while a moving fluid requires a model of the motion, and the model used in this chapter rests on four hypotheses on the fluid and on its flow.
 
 :::definizione{#ideal-fluid titolo="Ideal fluid and steady flow"}
 An **ideal fluid** is incompressible and has no viscosity, which means that no tangential force is exerted between adjacent layers of fluid or between the fluid and the walls. A flow is **steady** when the velocity at each fixed point of space does not change with time, and it is **irrotational** when no element of fluid rotates about its own centre.
