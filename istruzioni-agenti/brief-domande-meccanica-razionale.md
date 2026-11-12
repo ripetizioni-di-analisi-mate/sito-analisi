@@ -1,0 +1,23 @@
+# Domande a tempo di "Meccanica razionale": 45 domande per argomento (solo italiano)
+
+Repository: /home/claude/sito-analisi. Non usare git, non lanciare la build. Scrivi **solo** nella cartella `src/content/domande/meccanica-razionale/<argomento>/` del tuo argomento. La versione inglese si farà in seguito: non scrivere in `src/content-en/`.
+
+## Prima di scrivere
+1. Leggi per intero `istruzioni-agenti/brief-domande.md` (formato del file, regole per le risposte, regole di scrittura, controlli) e `istruzioni-agenti/brief-domande-aggiuntive.md` (domande senza traccia, copertura, varietà): valgono tutte, con le differenze scritte qui.
+2. Leggi `GUIDA-CONTENUTI.md`, `istruzioni-agenti/brief-meccanica-razionale.md` (notazioni e convenzioni della materia) e carica la skill **scrittura-umana-carmine** con lo strumento Skill.
+3. Leggi la teoria `src/content/teoria/meccanica-razionale/<argomento>.md`, le schede svolte e tutte le tracce `src/content/dafare/meccanica-razionale/<argomento>/*.md` con le loro soluzioni.
+
+## Che cosa scrivere
+- **File 1–14**: una domanda per ogni traccia, con lo stesso numero, secondo `brief-domande.md`. Se la domanda coincide con la traccia (un solo risultato), prima dell'elenco non si scrive nulla: il sito mostra il testo della traccia con la sua figura. Se la traccia chiede più risultati, scrivi prima dell'elenco la domanda riformulata e autosufficiente che chiede **un solo risultato**, con la figura della struttura ripetuta (la stessa riga `::struttura` della traccia) quando la domanda la richiede.
+- **File 15–45**: domande nuove con il testo prima dell'elenco, secondo `brief-domande-aggiuntive.md`, distribuite su tutte le sezioni della teoria. Circa due terzi di calcolo (un momento d'inerzia, la posizione del centro di massa, una velocità o un'accelerazione, la velocità angolare di un rigido, la posizione del centro di istantanea rotazione, l'energia cinetica in una configurazione, il potenziale o la componente lagrangiana $Q_h$, una configurazione di equilibrio, una reazione vincolare, la pulsazione delle piccole oscillazioni, il periodo di un pendolo composto) e un terzo di teoria applicata a un caso preciso (quanti gradi di libertà ha il sistema in figura; se il vincolo è olonomo o anolonomo, fisso o mobile; quale integrale primo si conserva e perché; quale polo rende nullo il termine $\vec{v}_O \wedge \vec{Q}$; se una configurazione di equilibrio è stabile; quale asse è principale d'inerzia per simmetria; se l'accelerazione di Coriolis è nulla).
+- Le domande possono contenere una figura `::struttura` (sintassi nell'intestazione di `src/plugins/struttura.mjs`) su una riga a sé, dopo il testo e prima dell'elenco, separata da righe vuote: i sistemi meccanici si leggono sui disegni. Nella figura solo i dati, mai il risultato. Sistemi piccoli: si risolvono in **due minuti** con carta e penna (un grado di libertà, al massimo due corpi, dati simbolici o numeri semplici).
+- Le risposte possono essere espressioni simboliche nei dati del problema ($\dfrac{1}{3}\,m\,\ell^2$, $\sqrt{\dfrac{3g}{2\ell}}$), valori con unità e verso, brevi frasi. Le sbagliate sono errori tipici della Meccanica razionale: momento d'inerzia rispetto al polo sbagliato (baricentro invece dell'estremo, senza Huygens-Steiner), energia cinetica del rigido senza il termine $\dfrac{1}{2}\,m\,v_G^2$, segno del potenziale invertito, $\dfrac{1}{2}\,m\,\ell^2$ al posto di $\dfrac{1}{3}\,m\,\ell^2$, fattore $2$ dimenticato nell'accelerazione di Coriolis, condizione di puro rotolamento non imposta, configurazione di equilibrio stabile scambiata con quella instabile.
+- Posizione della risposta corretta distribuita sulle 45 (differenza massima 3 tra la posizione più e meno usata).
+
+## Controllo (obbligatorio)
+- Ricalcola con Python e sympy ogni risposta corretta e verifica che le tre sbagliate siano davvero diverse e non difendibili (lavora in `/tmp/lavoro-domande/meccanica-razionale-<argomento>/`). Per le domande di teoria scrivi il ragionamento nel file di lavoro.
+- Disegna tutte le figure delle domande: `node strumenti/anteprima_figure.mjs /tmp/lavoro-domande/meccanica-razionale-<argomento>/figure.png src/content/domande/meccanica-razionale/<argomento>/*.md` dalla radice del repository, 0 problemi, e guarda il PNG.
+- `python3 strumenti/yamlcheck.py` dalla radice del repository, senza errori.
+
+## Rapporto (breve, in italiano)
+File scritti, domande riformulate tra 1 e 14, divisione delle 15–45 tra le sezioni della teoria, numero di domande con figura, conteggio delle posizioni corrette 1-2-3-4, conferma del controllo con sympy, delle figure e di yamlcheck.

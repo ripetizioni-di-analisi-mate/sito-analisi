@@ -18,6 +18,7 @@ export const MATERIE_ES: Record<string, [string, string]> = {
   'fisica-1': ['Física I', 'Mecánica y termodinámica. Movimiento, fuerzas, energía, choques, oscilaciones, gravitación y fluidos.'],
   'fisica-2': ['Física II', 'Electrostática, circuitos eléctricos, magnetismo, inducción, corriente alterna, ecuaciones de Maxwell, ondas electromagnéticas y óptica.'],
   statica: ['Estática', 'Sistemas de fuerzas, centros de gravedad, reacciones en apoyos, vigas, pórticos y estructuras de barras. Esfuerzos internos, trabajo virtual y líneas de influencia.'],
+  'meccanica-razionale': ['Mecánica racional', 'Sistemas de fuerzas, geometría de masas, cinemática del punto y del sólido rígido, vínculos y coordenadas lagrangianas, estática, dinámica, ecuaciones de Lagrange, estabilidad y pequeñas oscilaciones.'],
   'scienza-delle-costruzioni': ['Mecánica de estructuras', 'Equilibrio, esfuerzos internos, tensiones y deformaciones, estructuras hiperestáticas y pandeo de Euler.'],
   'matematica-generale': ['Matemáticas para Economía', 'Funciones y modelos económicos, límites, derivadas, elasticidad, optimización, integrales, matemáticas financieras y sistemas lineales.'],
   statistica: ['Estadística y probabilidad', 'Estadística descriptiva, probabilidad, variables aleatorias, muestreo, estimación, intervalos de confianza, pruebas de hipótesis y regresión.'],
