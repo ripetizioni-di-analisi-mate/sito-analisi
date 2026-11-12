@@ -4,6 +4,7 @@
 // Il riquadro si ritaglia dall'HTML reso dell'intera pagina di teoria (`rendered.html` dell'entry), così
 // formule e stile sono identici a quelli del capitolo.
 import { getCollection } from 'astro:content';
+import { resaVoce } from './resa';
 import type { Lingua } from '../i18n';
 import type { TipoVoce } from './indice-analitico';
 
@@ -115,7 +116,7 @@ export function tutteLeVoci(lingua: Lingua): Promise<Map<string, VoceTeoria[]>> 
     const teoria = await getCollection(lingua === 'en' ? 'teoria_en' : 'teoria');
     const m = new Map<string, VoceTeoria[]>();
     for (const v of teoria) {
-      const html = (v as any).rendered?.html ?? '';
+      const html = (await resaVoce(lingua === 'en' ? 'en' : 'it', 'teoria', v as any)).html;
       const titoli: Record<string, string> = {};
       for (const r of ((v as any).body ?? '').matchAll(/^:{3,4}(?:definizione|teorema|proposizione)\{#([\w-]+)[^}]*?titolo="([^"]+)"/gm)) titoli[r[1]] = r[2].replace(/\$/g, '');
       if (html) m.set(v.id, vociDaHtml(html, titoli));
