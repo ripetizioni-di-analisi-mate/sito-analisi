@@ -75,7 +75,7 @@ const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...esc
 // programma americano, non tradotti dall'italiano.
 const catalogoUsaSospeso = {
   name: 'catalogo-usa-sospeso',
-  load({ store }: LoaderContext) { store.clear(); },
+  async load({ store }: LoaderContext) { store.clear(); },
 };
 const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*.md'], base: './src/content-us/teoria' }) : catalogoUsaSospeso, schema: teoria.schema });
 const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/svolti' }) : catalogoUsaSospeso, schema: svolti.schema });
