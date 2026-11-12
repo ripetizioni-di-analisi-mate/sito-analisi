@@ -2,20 +2,30 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
+import ConsensoEmail from '../components/ConsensoEmail.astro';
 import { MATERIE_COMPATIBILITA } from '../data/compatibilita';
 import { VIDEOCORSI } from '../data/videocorsi';
 import { SCONTO_INVITO } from '../data/inviti';
 import { SCONTO_BENVENUTO } from '../data/benvenuto';
 import { materiaL, link, testiJs, T, prefisso, type Lingua } from '../i18n';
-interface Props { lingua: Lingua; materia: string }
-const { lingua, materia } = Astro.props;
+import { materiaUsa } from '../data/stem-usa/catalog-view';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { usContentCounts } from '../lib/stem-usa-banks';
+import { url } from '../lib/url';
+interface Props { lingua: Lingua; materia: string; usa?: boolean }
+const { lingua, materia, usa = false } = Astro.props;
 const t = T(lingua);
-const m = materiaL(lingua, materia);
-const svolti = (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
-const dafare = (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
+const usCounts = usa ? usContentCounts(materia, m.argomenti.length) : undefined;
+const svolti = usCounts?.worked ?? (await getCollection('svolti')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const dafare = usCounts?.exercises ?? (await getCollection('dafare')).filter((v) => v.id.startsWith(`${materia}/`)).length;
+const scienza = materia === 'scienza-delle-costruzioni';
+const domande = scienza ? (await getCollection('domande')).filter((v) => v.id.startsWith(`${materia}/`)).length : 0;
+const en = lingua === 'en';
 const js = testiJs(lingua);
 const pref = prefisso(lingua);
-const localePaddle = lingua;
+const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
+
 // «Compatibilità con il tuo esame» prima dell'acquisto: link sotto il tasto, solo materie universitarie e in italiano.
 const conCompat = lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia);
 const compat = conCompat ? `/compatibilita?materia=${materia}` : '';
@@ -33,16 +43,22 @@ const invito = lingua === 'en' ? {
   benvenuto: `Sconto di benvenuto: su questo acquisto hai il ${SCONTO_BENVENUTO}% di sconto, applicato al pagamento.`,
 };
 ---
-<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua}>
+<Base titolo={t.sbloccaTitolo(m.titolo)} descrizione={t.sbloccaDescrizione(m.titolo)} materia={materia} percorso={[{ titolo: t.sblocca }]} lingua={lingua} usa={usa} seo={{ titolo: t.sbloccaSeo(m.titolo) }}>
   <p class="sopratitolo">{m.titolo}</p>
   <h1>{t.sbloccaTitolo(m.titolo)}</h1>
   <p class="sommario">{t.sbloccaSommario}</p>
   <ul class="cosa-include">
-    <li set:html={t.includeTeoria(m.argomenti.length)} />
-    <li set:html={t.includeSvolti(svolti)} />
-    <li set:html={t.includeSoluzioni(dafare)} />
+    {usa ? <li><strong>Lessons for all {m.argomenti.length} topics</strong></li> : <li set:html={t.includeTeoria(m.argomenti.length)} />}
+    {usa ? <li><strong>{svolti} worked examples</strong> with solutions</li> : <li set:html={t.includeSvolti(svolti)} />}
+    {usa ? <>
+      {dafare > 0 && <li><strong>{dafare} practice exercises</strong> with solutions</li>}
+      {usCounts!.timed > 0 && <li><strong>{usCounts!.timed} timed questions</strong> with explanations</li>}
+      {usCounts!.review > 0 && <li><strong>{usCounts!.review} review questions</strong> with explanations</li>}
+    </> : scienza ? <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li> : <li set:html={t.includeSoluzioni(dafare)} />}
   </ul>
-  <p class="gratis-ora">{t.gratisOra}</p>
+  {!usa && <p class="gratis-ora">{scienza ? (en
+    ? 'Free preview without an account. Read the beginning of each topic, open one sheet of worked examples and try one question per topic.'
+    : 'Senza account puoi leggere l’inizio di ogni argomento, consultare una scheda svolta e provare una domanda per argomento.') : t.gratisOra}</p>}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}
@@ -61,6 +77,7 @@ const invito = lingua === 'en' ? {
       <label>Email<input type="email" name="email" autocomplete="email" required /></label>
       <label>Password<span class="campo-password"><input type="password" name="password" autocomplete="new-password" required minlength="8" placeholder={t.almenoOtto} /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
       {lingua === 'it' && <CampoCorso />}
+      <ConsensoEmail lingua={lingua} />
       <p class="esito-modulo" id="esito-acquisto" role="status"></p>
       <button class="bottone-primario" type="submit" id="invia-acquisto">{js.creaEPaga}</button>
       {compat && <a class="tasto-compat" href={compat}><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/></svg><span>Controlla la compatibilità con il tuo esame</span></a>}
@@ -69,7 +86,7 @@ const invito = lingua === 'en' ? {
     <p class="nota-termini-breve">{lingua === 'it' ? <>Acquistando accetti i <a href="/termini">termini d’uso</a>.</> : <>By purchasing you accept the <a href="/en/termini">terms of use</a>.</>}</p>
   </div>
 
-  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, localePaddle, invito, compat }}>
+  <script is:inline define:vars={{ materia, titolo: m.titolo, js, pref, lingua, invito, compat, usa, hrefMateria }}>
     (async () => {
       const f = (s, x) => s.replace('§', x);
       const azione = document.getElementById('azione');
@@ -77,41 +94,19 @@ const invito = lingua === 'en' ? {
       const qui = location.pathname;
       const [rIo, rConf] = await Promise.all([fetch('/api/io').catch(() => null), fetch('/api/config').catch(() => null)]);
       let io = rIo && rIo.ok ? await rIo.json() : null;
-      const conf = rConf && rConf.ok ? (await rConf.json()).paddle : null;
-
-      // Paddle si carica una volta sola, quando serve.
-      let paddlePronto = null;
-      const caricaPaddle = () => paddlePronto || (paddlePronto = new Promise((ok, no) => {
-        const s = document.createElement('script');
-        s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
-        s.onload = () => {
-          if (conf.ambiente === 'sandbox') Paddle.Environment.set('sandbox');
-          Paddle.Initialize({
-            token: conf.token,
-            eventCallback: (ev) => {
-              if (ev.name !== 'checkout.completed') return;
-              // conversione per Google Ads (src/data/misurazione.ts)
-              try { const d = ev.data || {}; window.misura && window.misura('acquisto', { valore: d.totals && d.totals.total, valuta: d.currency_code, id: d.transaction_id, voce: materia, email: io.email }); } catch (_) {}
-              azione.innerHTML = `<p>${js.pagamentoRicevuto}</p>`;
-              let tentativi = 0;
-              const controlla = async () => {
-                const r = await fetch('/api/io').catch(() => null);
-                const d = r && r.ok ? await r.json() : null;
-                if (d && d.materie.includes(materia)) { location.href = `${pref}/${materia}`; return; }
-                if (++tentativi < 30) setTimeout(controlla, 2000);
-                else azione.innerHTML = `<p>${js.sbloccoLento}</p>`;
-              };
-              controlla();
-            },
-          });
-          ok();
-        };
-        s.onerror = () => { paddlePronto = null; no(); };
-        document.head.appendChild(s);
-      }));
+      const attivo = Boolean(rConf?.ok && (await rConf.json()).stripe);
+      const paga = () => { location.assign(pref + '/acquisto?' + new URLSearchParams({ tipo: 'materia', slug: materia })); };
       // «Invita un amico»: riga sullo sconto (cookie dell'invito per gli ospiti, stato dell'account per gli iscritti).
       const notaInvito = document.getElementById('nota-invito');
       const mostraInvito = (testo) => { notaInvito.textContent = testo; notaInvito.hidden = !testo; };
+      const notaOfferta = async () => {
+        const r = await fetch('/api/email/offerta?' + new URLSearchParams({ materia })).catch(() => null);
+        const d = r?.ok ? await r.json() : {};
+        if (!d.percentuale) return '';
+        return lingua === 'en'
+          ? `Your personal ${d.percentuale}% discount on ${titolo} applies at checkout.`
+          : `La tua offerta riservata del ${d.percentuale}% su ${titolo} si applica al pagamento.`;
+      };
       // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
       const notaBenvenuto = async () => {
         const r = await fetch('/api/benvenuto').catch(() => null);
@@ -119,55 +114,45 @@ const invito = lingua === 'en' ? {
         return d.percentuale ? invito.benvenuto : '';
       };
       const aggiornaInvito = async () => {
+        if (usa) return;
         if (!io) { mostraInvito(/(?:^|;\s*)invito=[A-Z0-9]{7}/.test(document.cookie) ? invito.ospite : ''); return; }
         if (io.materie.includes(materia)) { mostraInvito(''); return; }
+        const offerta = await notaOfferta();
+        if (offerta) { mostraInvito(offerta); return; }
         const r = await fetch('/api/invito').catch(() => null);
         const d = r && r.ok ? await r.json() : null;
         const testo = d && d.attivo ? (d.scontoAmico ? invito.amico : d.premiDisponibili > 0 ? invito.premio : '') : '';
         mostraInvito(testo || await notaBenvenuto());
       };
       aggiornaInvito().catch(() => {});
-      const paga = async () => {
-        try { await caricaPaddle(); } catch { azione.innerHTML = `<p>${js.paddleNonCaricato}</p>`; return; }
-        // sconto dell'invito (se c'è): un codice personale di Paddle, valido una volta sola
-        const sconto = await fetch(`/api/sconto?materia=${encodeURIComponent(materia)}`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-        Paddle.Checkout.open({
-          ...(sconto.id ? { discountId: sconto.id } : {}),
-          items: [{ priceId: conf.prezzi[materia], quantity: 1 }],
-          customer: { email: io.email },
-          customData: { materia, email: io.email },
-          settings: { locale: localePaddle },
-        });
-      };
-
       // Stato per chi ha già un account: materia già sbloccata, pagamento non attivo, tasto di acquisto.
       const mostraAccount = (premessa = '') => {
         modulo.hidden = true;
         azione.hidden = false;
         if (io.materie.includes(materia)) {
-          azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${pref}/${materia}">${js.vaiArgomenti}</a>`;
+          azione.innerHTML = `<p class="stato-ok">${f(js.giaSbloccata, titolo)}</p><a class="bottone-primario" href="${hrefMateria}">${js.vaiArgomenti}</a>`;
           return false;
         }
-        if (!conf || !conf.prezzi[materia]) {
-          azione.innerHTML = `${premessa}<p>${f(js.pagamentiInArrivo, io.email)}</p>`;
+        if (!attivo) {
+          azione.textContent = lingua === 'en' ? 'Payment is temporarily unavailable. Please try again shortly.' : 'Il pagamento è temporaneamente indisponibile. Riprova tra poco.';
           return false;
         }
         azione.innerHTML = `${premessa}<button type="button" class="bottone-primario" id="compra">${js.sbloccaOra}</button>
           ${compat ? `<a class="tasto-compat" href="${compat}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h6l4 4v14H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 4-4"/></svg><span>Controlla la compatibilità con il tuo esame</span></a>` : ''}
-          <p class="nota-accesso">${f(js.acquistoCollegato, io.email)}</p>`;
+          <p class="nota-accesso"><span data-account></span></p>`;
+        azione.querySelector('[data-account]').textContent = f(js.acquistoCollegato, io.email);
         document.getElementById('compra').addEventListener('click', paga);
-        caricaPaddle().catch(() => {});
         return true;
       };
       if (io) { mostraAccount(); return; }
 
       // Un prezzo non configurato non deve invitare l'ospite a creare un account per pagare.
-      if (!conf || !conf.prezzi[materia]) {
+      if (!attivo) {
         modulo.hidden = true;
         azione.hidden = false;
-        azione.innerHTML = `<p>${localePaddle === 'en'
+        azione.innerHTML = `<p>${usa ? 'Purchasing this subject is temporarily unavailable.' : lingua === 'en'
           ? 'Purchasing this subject is not available yet. You can explore the free preview and practise with the timed questions.'
-          : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${pref}/${materia}">${localePaddle === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;
+          : 'L’acquisto di questa materia non è ancora disponibile. Puoi consultare l’anteprima gratuita e allenarti con le domande a tempo.'}</p><a class="bottone-primario" href="${hrefMateria}">${usa ? 'View course topics' : lingua === 'en' ? 'Explore the free preview' : 'Esplora l’anteprima gratuita'}</a>`;
         return;
       }
 
@@ -195,7 +180,6 @@ const invito = lingua === 'en' ? {
         if (preregistrato.checked) parti.push('Preregistrato: ' + scelti('corsopre'));
         return parti.join('; ');
       };
-      if (conf && conf.prezzi[materia]) caricaPaddle().catch(() => {});
 
       modulo.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -211,7 +195,8 @@ const invito = lingua === 'en' ? {
         try {
           const r = await fetch('/api/registrati', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: corsoSeguito(), lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: corsoSeguito(), lingua: pref ? 'en' : 'it',
+              offerte: modulo.offerte.checked, materiaEmail: materia }),
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) { invia.disabled = false; return errore(d.errore || js.erroreGenerico); }

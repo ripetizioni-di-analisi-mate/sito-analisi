@@ -1,4 +1,5 @@
 ---
+import { originale } from '../lib/canonici';
 // Pagina singola di un teorema, di una definizione o di una proposizione (`/<materia>/<argomento>/teoria/<ancora>`).
 // Enunciato in chiaro per tutti; la dimostrazione resta riservata a chi ha la materia (vetrina generata da
 // scripts/vetrine.mjs, servita dal Worker; i motori verificati la leggono intera come per la teoria).
@@ -50,7 +51,9 @@ const dafareT = await Promise.all(dafare.map(async (e) => ({ n: numero(e.id), ti
 
 // titolo e descrizione per i motori di ricerca
 const descr = testoPiano(voce.testo);
-const titoloSeo = SEO(lingua).voce(voce.titolo, voce.tipo, conDimostrazione, m.breve, arg.breve);
+// lo stesso titolo in un altro capitolo della stessa materia: il titolo per i motori conserva il capitolo
+const ripetuta = (await vociGlobali(lingua)).some((g) => g.chiave === chiave && g.materia === materia && g.argomento !== argomento);
+const titoloSeo = SEO(lingua).voce(voce.titolo, voce.tipo, conDimostrazione, m.breve, arg.breve, ripetuta);
 const descrizioneSeo = SEO(lingua).voceDescr(voce.titolo, voce.tipo, conDimostrazione, arg.breve, m.breve, descr, alias);
 const sopratitolo = `${etichetta} · ${arg.breve}`;
 // nella pagina singola il numero progressivo del capitolo non serve
@@ -77,7 +80,7 @@ const schema = [{
   '@type': voce.tipo === 'definizione' ? ['LearningResource', 'DefinedTerm'] : 'LearningResource',
   name: voce.titolo, description: descrizioneSeo, inLanguage: lingua, url: assoluto(Astro.url.pathname),
   learningResourceType: voce.tipo === 'definizione' ? 'Definition' : 'Theorem',
-  educationalLevel: SEO(lingua).livello,
+  educationalLevel: SEO(lingua).livelloDi(m.titolo),
   about: { '@type': 'Thing', name: voce.titolo },
   ...(alias.length ? { alternateName: alias } : {}),
   ...(voce.tipo === 'definizione' ? { termCode: ancora, inDefinedTermSet: { '@type': 'DefinedTermSet', name: `${m.titolo}`, url: assoluto(link(lingua, `/${materia}/teoremi`)) } } : {}),
@@ -93,7 +96,7 @@ const schema = [{
 <Base
   titolo={`${voce.titolo} · ${arg.breve}`}
   descrizione={descrizioneSeo}
-  seo={{ titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', id), schema }}
+  seo={{ canonico: originale(materia, argomento, 'teoria', ancora), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, senzaInglese: !haAltra && lingua === 'it', data: dataContenuto(lingua, 'teoria', id), schema }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria, href: link(lingua, `${base}/teoria`) }, { titolo: voce.titolo }]}
   materia={materia} argomento={argomento} sezione="teoria"
   lingua={lingua} nonTradotta={false}

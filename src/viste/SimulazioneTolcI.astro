@@ -147,7 +147,7 @@ const prezzo = materiaIt(materia).prezzo;
       s.esiti.forEach((es,j)=>{
         const q=stato!.sezioni[i].domande[j],r=stato!.risposte[i][j];const article=document.createElement('article');
         const esito=r===null?'Omessa':r===es.corretta-1?'Corretta':'Errata';
-        article.innerHTML=`<h3>Quesito ${j+1} · ${esito}</h3>${q.testo}<p>La tua risposta: ${r===null?'non data':`${'ABCDE'[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${'ABCDE'[es.corretta-1]}.</strong> ${q.scelte[es.corretta-1]}</p><div>${es.spiegazione}</div><p><a href="/${materia}/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`;group.append(article);
+        article.innerHTML=`<h3>Quesito ${j+1} · ${esito}</h3><div class="testo-domanda">${q.testo}</div><p>La tua risposta: ${r===null?'non data':`${'ABCDE'[r]}. ${q.scelte[r]}`}</p><p><strong>Risposta corretta: ${'ABCDE'[es.corretta-1]}.</strong> ${q.scelte[es.corretta-1]}</p><div>${es.spiegazione}</div><p><a href="/${materia}/${q.id.split('/')[0]}/teoria">Ripassa questo argomento →</a></p>`;group.append(article);
       });rev.append(group);
     });
   }

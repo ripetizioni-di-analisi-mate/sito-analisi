@@ -1,7 +1,6 @@
-// Videocorsi preregistrati di Carmine (video e PDF su Google Drive), venduti con Paddle.
+// Videocorsi preregistrati di Carmine (video e PDF su Google Drive), acquistabili tramite Stripe.
 // L'acquisto registra l'abilitazione `video-<slug>` e sblocca in automatico le materie del sito in `sblocca`.
-// Il codice del prezzo Paddle è nella variabile PADDLE_PREZZO_VIDEO_<SLUG> (wrangler.jsonc); il link della
-// cartella Drive in VIDEOCORSI_DRIVE (oggetto JSON slug → link), mostrato solo nell'account di chi ha comprato.
+// Il link alla cartella Drive è in VIDEOCORSI_DRIVE (slug → link), visibile a chi ha acquistato.
 
 import PREZZI from './prezzi.json';
 

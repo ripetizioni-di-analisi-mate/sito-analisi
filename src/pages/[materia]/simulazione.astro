@@ -4,10 +4,12 @@ import SimulazioneTolcI from '../../viste/SimulazioneTolcI.astro';
 import SimulazioneConcorsi from '../../viste/SimulazioneConcorsi.astro';
 import { catalogoDomande } from '../../lib/domande';
 import { MATERIE } from '../../data/materie';
-// Le materie che hanno il capitolo «Prove d'esame» (domande a tempo) hanno anche la simulazione d'esame.
+// La simulazione d'esame ordinaria pesca tra le tracce degli esercizi da fare.
 // Per le materie dei concorsi la simulazione è una prova a quiz corretta in automatico.
 export async function getStaticPaths() {
-  return Object.keys(await catalogoDomande('it')).map((materia) => ({ params: { materia } }));
+  const domande = await catalogoDomande('it');
+  return MATERIE.filter((m) => domande[m.slug] && m.eserciziDaFare !== false)
+    .map((m) => ({ params: { materia: m.slug } }));
 }
 const materia = Astro.params.materia!;
 const concorso = MATERIE.find((m) => m.slug === materia)?.gruppo === 'Concorsi';

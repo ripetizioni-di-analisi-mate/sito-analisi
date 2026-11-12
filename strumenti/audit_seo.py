@@ -41,6 +41,7 @@ titoli, descrizioni = defaultdict(list), defaultdict(list)
 hreflang = {}
 lunghezze_t, lunghezze_d = [], []
 indicizzabili = 0
+copie = 0
 link_rotti = Counter()
 for p, f in sorted(pagine.items()):
     h = open(f, encoding='utf-8').read()
@@ -58,7 +59,12 @@ for p, f in sorted(pagine.items()):
     if not d: problemi['senza descrizione'].append(p)
     if not c: problemi['senza canonical'].append(p)
     elif c.group(1) != SITO + (p if p != '/' else '/') and c.group(1) != SITO + p:
-        problemi['canonical diverso dall\'indirizzo'].append(f'{p} -> {c.group(1)}')
+        # copia di una pagina di un'altra materia (src/lib/canonici.ts): l'originale deve esistere; la copia non si conta oltre
+        dest = c.group(1)[len(SITO):]
+        if not esiste(dest): problemi['canonical verso pagina assente'].append(f'{p} -> {dest}')
+        copie += 1
+        indicizzabili -= 1
+        continue
     titoli[t].append(p); descrizioni[d].append(p)
     lunghezze_t.append(len(t)); lunghezze_d.append(len(d))
     if len(t) > 70: problemi['titolo oltre 70 caratteri'].append(f'{len(t)} {t}')
@@ -111,6 +117,7 @@ if os.path.exists(mappa):
     print(f'mappa del sito: {len(locs)} indirizzi, {sum(1 for _ in re.finditer("<lastmod>", open(mappa).read()))} con data')
 
 print(f'pagine html: {len(pagine)}, indicizzabili: {indicizzabili}')
+print(f'copie con canonical verso l\'originale: {copie}')
 if lunghezze_t:
     print(f'titoli: media {sum(lunghezze_t)//len(lunghezze_t)} caratteri, max {max(lunghezze_t)}; descrizioni: media {sum(lunghezze_d)//len(lunghezze_d)}, max {max(lunghezze_d)}')
 for k, v in sorted(problemi.items(), key=lambda x: -len(x[1])):

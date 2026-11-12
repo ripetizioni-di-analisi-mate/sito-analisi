@@ -1,4 +1,4 @@
-// Controlli editoriali eseguiti prima di ogni build del nuovo corso.
+// Controlli editoriali eseguiti prima di ogni build del corso.
 import {readFileSync,readdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import {join} from 'node:path';
@@ -17,7 +17,8 @@ for(const [slug,schede] of Object.entries(banco)){
  for(const tipo of ['teoria','svolti','dafare','domande']){
   const dir=join(cartella,tipo,'analisi-3');
   const paths=tipo==='teoria'?[join(dir,slug+'.md')]:readdirSync(join(dir,slug)).filter(n=>n.endsWith('.md')).map(n=>join(dir,slug,n));
-  assert.equal(paths.length,{teoria:1,svolti:7,dafare:14,domande:14}[tipo]);
+  assert.equal(paths.length,{teoria:1,svolti:7,dafare:14,domande:90}[tipo],slug+': '+tipo);
+  const tracce=new Set();
   for(const path of paths){
    const text=readFileSync(path,'utf8');file++;
    const match=text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);assert.ok(match,path+': frontmatter');
@@ -28,8 +29,20 @@ for(const [slug,schede] of Object.entries(banco)){
    assert.equal(stacks.length,0,path+': blocchi rimasti aperti');
    if(tipo==='svolti'){const n=(body.match(/^## Esercizio /gm)||[]).length;assert.equal(n,2);esempi+=n;assert.equal(data.gratis,Number(path.match(/(\d+)\.md$/)[1])<=3);}
    if(tipo==='dafare')assert.match(body,/:::soluzione/);
-   if(tipo==='domande'){const prima=body.split('## Spiegazione')[0];const options=[...prima.matchAll(/^- (.+)$/gm)].map(m=>m[1]);assert.equal(options.length,4);assert.equal(new Set(options).size,4);assert.ok(data.corretta>=1&&data.corretta<=4);assert.match(body,new RegExp('/analisi-3/'+slug+'/teoria#'));}
+   if(tipo==='domande'){
+    const parti=body.split('## Spiegazione');
+    assert.equal(parti.length,2,path+': spiegazione');
+    const options=[...parti[0].matchAll(/^- (.+)$/gm)].map(m=>m[1]);
+    assert.equal(options.length,4,path+': opzioni');
+    assert.equal(new Set(options).size,4,path+': opzioni distinte');
+    assert.ok(Number.isInteger(data.corretta)&&data.corretta>=1&&data.corretta<=4,path+': risposta corretta');
+    const traccia=parti[0].split('\n- ')[0].trim().replace(/\s+/g,' ');
+    assert.ok(traccia&&!tracce.has(traccia),path+': traccia autonoma e unica');
+    tracce.add(traccia);
+    const riferimento=parti[1].match(new RegExp('/analisi-3/'+slug+'/teoria#([\\w-]+)'));
+    assert.ok(riferimento&&ancore.has(riferimento[1]),path+': rimando alla teoria');
+   }
   }
  }
 }
-console.log('Analisi 3: '+file+' nuovi Markdown, '+formule+' formule valide, '+esempi+' esercizi svolti; ancore, soluzioni e opzioni verificate.');
+console.log('Analisi 3: '+file+' file Markdown, '+formule+' formule valide, '+esempi+' esercizi svolti; ancore, soluzioni e opzioni verificate.');

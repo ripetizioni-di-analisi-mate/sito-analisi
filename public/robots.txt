@@ -29,6 +29,8 @@ Disallow: /vetrine/
 Disallow: /*/stampa
 Disallow: /dati-domande/
 Disallow: /dati-compatibilita/
+Disallow: /dati-risposte/
+Disallow: /dati-email/
 Disallow: /reimposta-password
 Disallow: /en/reimposta-password
 Disallow: /promemoria/

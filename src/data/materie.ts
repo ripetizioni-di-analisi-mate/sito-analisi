@@ -12,6 +12,7 @@ export interface Materia {
   gruppo: string;      // percorso di studi: la home e l'indice raggruppano per questo
   sottogruppo?: string; // dentro il gruppo, materie raccolte in una voce apribile (per esempio Matematica dal 1° al 5° anno)
   prezzo?: number;     // in euro, da prezzi.json: presente = materia a pagamento
+  eserciziDaFare?: false; // esercitazione autonoma con i quiz, senza tracce aperte
   attiva: boolean;     // false = in preparazione, compare in home senza link
   argomenti: Argomento[];
 }
@@ -64,7 +65,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'analisi-2',
     titolo: 'Analisi matematica 2',
     breve: 'Analisi 2',
-    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni.',
+    descrizione: 'Funzioni di più variabili, integrali multipli, curve e superfici, serie di funzioni, equazioni differenziali e sistemi lineari.',
     colore: '#336976',
     gruppo: 'Università',
     attiva: true,
@@ -80,6 +81,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'successioni-e-serie-di-funzioni', titolo: 'Successioni e serie di funzioni', breve: 'Serie di funzioni' },
       { slug: 'serie-di-potenze', titolo: 'Serie di potenze e serie di Taylor', breve: 'Serie di potenze' },
       { slug: 'serie-di-fourier', titolo: 'Serie di Fourier', breve: 'Serie di Fourier' },
+      { slug: 'equazioni-differenziali', titolo: 'Equazioni differenziali e sistemi lineari', breve: 'Equazioni differenziali' },
     ],
   },
   {
@@ -172,6 +174,49 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     ],
   },
   {
+    slug: 'statica',
+    titolo: 'Statica',
+    breve: 'Statica',
+    descrizione: 'La Statica dei corsi di Ingegneria: sistemi di forze, geometria delle masse, vincoli e analisi cinematica, reazioni vincolari, travi Gerber, telai, archi e travature reticolari, diagrammi di N, T e M, lavori virtuali e linee di influenza.',
+    colore: '#53675f',
+    gruppo: 'Università',
+    attiva: true,
+    argomenti: [
+      { slug: 'sistemi-di-forze', titolo: 'Vettori applicati, momenti e sistemi di forze equivalenti', breve: 'Sistemi di forze' },
+      { slug: 'geometria-delle-masse', titolo: "Geometria delle masse: baricentri e momenti d'inerzia", breve: 'Geometria delle masse' },
+      { slug: 'cinematica-dei-rigidi', titolo: 'Cinematica dei sistemi rigidi piani e centro di rotazione', breve: 'Cinematica dei rigidi' },
+      { slug: 'analisi-cinematica', titolo: 'Vincoli e analisi cinematica: labilità e isostaticità', breve: 'Vincoli e labilità' },
+      { slug: 'reazioni-vincolari', titolo: 'Equazioni cardinali della statica e reazioni vincolari', breve: 'Reazioni vincolari' },
+      { slug: 'strutture-composte', titolo: 'Strutture composte: travi Gerber, telai e archi a tre cerniere', breve: 'Strutture composte' },
+      { slug: 'travature-reticolari', titolo: 'Travature reticolari: metodo dei nodi e sezioni di Ritter', breve: 'Travature reticolari' },
+      { slug: 'caratteristiche-della-sollecitazione', titolo: 'Caratteristiche della sollecitazione e diagrammi di N, T e M', breve: 'Diagrammi N, T, M' },
+      { slug: 'equazioni-indefinite', titolo: "Equazioni indefinite di equilibrio della trave", breve: 'Equazioni indefinite' },
+      { slug: 'lavori-virtuali', titolo: 'Principio dei lavori virtuali', breve: 'Lavori virtuali' },
+      { slug: 'linee-di-influenza', titolo: 'Linee di influenza', breve: 'Linee di influenza' },
+    ],
+  },
+  {
+    slug: 'scienza-delle-costruzioni',
+    titolo: 'Scienza delle costruzioni',
+    breve: 'Scienza delle costruzioni',
+    descrizione: 'Scienza delle costruzioni per Ingegneria. Dai vincoli e dai diagrammi delle sollecitazioni al calcolo di tensioni e spostamenti, alle strutture iperstatiche e al carico critico di Eulero.',
+    colore: '#416c69',
+    gruppo: 'Università',
+    attiva: true,
+    eserciziDaFare: false,
+    argomenti: [
+      { slug: 'statica-vincoli', titolo: 'Equilibrio, vincoli e reazioni vincolari', breve: 'Equilibrio e vincoli' },
+      { slug: 'sollecitazioni', titolo: 'Sforzo normale, taglio e momento flettente', breve: 'Diagrammi di N, T e M' },
+      { slug: 'reticolari', titolo: 'Travature reticolari e forze nelle aste', breve: 'Travature reticolari' },
+      { slug: 'geometria-sezioni', titolo: 'Geometria delle sezioni e momenti d’inerzia', breve: 'Geometria delle sezioni' },
+      { slug: 'tensioni-deformazioni', titolo: 'Tensioni, deformazioni, cerchio di Mohr e legge di Hooke', breve: 'Tensioni e deformazioni' },
+      { slug: 'de-saint-venant', titolo: 'De Saint Venant: sforzo normale, flessione, taglio e torsione', breve: 'De Saint Venant' },
+      { slug: 'linea-elastica', titolo: 'Linea elastica, rotazioni e spostamenti', breve: 'Linea elastica' },
+      { slug: 'iperstatiche', titolo: 'Strutture iperstatiche, lavori virtuali e metodo delle forze', breve: 'Strutture iperstatiche' },
+      { slug: 'stabilita', titolo: 'Stabilità elastica e carico critico di Eulero', breve: 'Stabilità elastica' },
+    ],
+  },
+  {
     slug: 'matematica-generale',
     titolo: 'Matematica generale',
     breve: 'Matematica generale',
@@ -241,11 +286,24 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     sottogruppo: 'Matematica',
     titolo: 'Matematica 1° anno',
     breve: 'Matematica 1° anno',
-    descrizione: "Il programma di matematica del 1° anno delle scuole superiori, con teoria ed esercizi svolti.",
+    descrizione: "Matematica per il primo anno delle superiori: numeri, calcolo letterale, equazioni, geometria e statistica. Teoria, esercizi svolti passo passo e 90 domande per argomento per preparare le verifiche. Il percorso segue i contenuti comuni alla prima, con particolare attenzione al liceo scientifico; frazioni algebriche e disequazioni possono essere distribuite diversamente nel biennio.",
     colore: '#2f6f68',
     gruppo: 'Superiori',
-    attiva: false,
-    argomenti: [],
+    attiva: true,
+    argomenti: [
+      { slug: 'numeri-e-operazioni', titolo: 'Numeri naturali, interi e razionali', breve: 'Numeri e operazioni' },
+      { slug: 'potenze-proporzioni-percentuali', titolo: 'Potenze, proporzioni e percentuali', breve: 'Potenze e proporzioni' },
+      { slug: 'insiemi-e-logica', titolo: 'Insiemi e logica elementare', breve: 'Insiemi e logica' },
+      { slug: 'monomi-e-polinomi', titolo: 'Monomi e polinomi', breve: 'Monomi e polinomi' },
+      { slug: 'prodotti-notevoli', titolo: 'Prodotti notevoli', breve: 'Prodotti notevoli' },
+      { slug: 'scomposizioni', titolo: 'Scomposizione dei polinomi', breve: 'Scomposizioni' },
+      { slug: 'frazioni-algebriche', titolo: 'Frazioni algebriche e condizioni di esistenza', breve: 'Frazioni algebriche' },
+      { slug: 'equazioni-primo-grado', titolo: 'Equazioni di primo grado e problemi', breve: 'Equazioni di primo grado' },
+      { slug: 'disequazioni-primo-grado', titolo: 'Disequazioni di primo grado', breve: 'Disequazioni' },
+      { slug: 'geometria-piano-triangoli', titolo: 'Geometria del piano e triangoli', breve: 'Piano e triangoli' },
+      { slug: 'parallele-e-quadrilateri', titolo: 'Rette parallele e quadrilateri', breve: 'Parallele e quadrilateri' },
+      { slug: 'dati-e-statistica', titolo: 'Dati, frequenze e statistica descrittiva', breve: 'Dati e statistica' },
+    ],
   },
   {
     slug: 'matematica-superiori-2',
@@ -347,11 +405,22 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     sottogruppo: 'Fisica',
     titolo: 'Fisica 1° anno',
     breve: 'Fisica 1° anno',
-    descrizione: "Il programma di fisica del 1° anno delle scuole superiori, con teoria ed esercizi svolti.",
+    descrizione: "Fisica per il primo anno delle superiori: misure, incertezze, grafici, densità, vettori, forze, equilibrio e fluidi. Teoria, esercizi svolti passo passo e 90 domande per argomento per preparare le verifiche. Il percorso segue la prima del liceo scientifico; alcuni istituti affrontano i fluidi nel secondo anno.",
     colore: '#5c6658',
     gruppo: 'Superiori',
-    attiva: false,
-    argomenti: [],
+    attiva: true,
+    argomenti: [
+      { slug: 'grandezze-e-unita', titolo: 'Grandezze fisiche e unità di misura', breve: 'Grandezze e unità' },
+      { slug: 'misure-e-incertezze', titolo: 'Misure, strumenti e incertezze', breve: 'Misure e incertezze' },
+      { slug: 'proporzionalita-e-grafici', titolo: 'Proporzionalità, tabelle e grafici', breve: 'Proporzionalità e grafici' },
+      { slug: 'densita', titolo: 'Massa, volume e densità', breve: 'Densità' },
+      { slug: 'vettori', titolo: 'Vettori e loro operazioni', breve: 'Vettori' },
+      { slug: 'forze', titolo: 'Forza peso, forza elastica e attrito', breve: 'Forze' },
+      { slug: 'equilibrio-punto', titolo: 'Equilibrio del punto materiale', breve: 'Equilibrio del punto' },
+      { slug: 'equilibrio-corpo-rigido', titolo: 'Equilibrio del corpo rigido, leve e baricentro', breve: 'Equilibrio dei corpi rigidi' },
+      { slug: 'pressione-fluidi', titolo: 'Pressione ed equilibrio dei fluidi', breve: 'Pressione e fluidi' },
+      { slug: 'archimede-galleggiamento', titolo: 'Principio di Archimede e galleggiamento', breve: 'Archimede e galleggiamento' },
+    ],
   },
   {
     slug: 'fisica-superiori-2',
@@ -444,6 +513,90 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
       { slug: 'relativita-dinamica-energia', titolo: 'Relatività ristretta: dinamica ed energia', breve: 'Relatività: dinamica ed energia' },
       { slug: 'crisi-fisica-classica', titolo: 'Corpo nero, effetto fotoelettrico ed effetto Compton', breve: 'Corpo nero e fotoni' },
       { slug: 'atomo-e-onde-di-materia', titolo: 'Atomo di Bohr, onde di materia e principio di indeterminazione', breve: 'Bohr, de Broglie, indeterminazione' },
+    ],
+  },
+  {
+    slug: 'informatica-superiori-1',
+    sottogruppo: 'Informatica',
+    titolo: 'Informatica 1° anno',
+    breve: 'Informatica 1° anno',
+    descrizione: 'Basi di informatica per il primo anno del liceo scientifico, opzione Scienze applicate. Architettura del computer, codifica dei dati, foglio elettronico e uso delle fonti digitali.',
+    colore: '#416d77',
+    gruppo: 'Superiori',
+    attiva: false,
+    argomenti: [
+      { slug: 'architettura-e-sistemi', titolo: 'Hardware, architettura e sistemi operativi', breve: 'Computer e sistemi' },
+      { slug: 'dati-e-codifica', titolo: 'Numeri binari, dati e caratteri', breve: 'Codifica dei dati' },
+      { slug: 'documenti-e-foglio', titolo: 'Documenti digitali e foglio elettronico', breve: 'Foglio elettronico' },
+      { slug: 'internet-e-fonti', titolo: 'Internet, Web e ricerca delle informazioni', breve: 'Internet e fonti' },
+    ],
+  },
+  {
+    slug: 'informatica-superiori-2',
+    sottogruppo: 'Informatica',
+    titolo: 'Informatica 2° anno',
+    breve: 'Informatica 2° anno',
+    descrizione: 'Informatica per il secondo anno del liceo scientifico, opzione Scienze applicate. Algoritmi, condizioni, cicli, funzioni, sequenze e primi test.',
+    colore: '#416d77',
+    gruppo: 'Superiori',
+    attiva: false,
+    argomenti: [
+      { slug: 'algoritmi-e-variabili', titolo: 'Algoritmi, pseudocodice e variabili', breve: 'Algoritmi e variabili' },
+      { slug: 'condizioni-e-cicli', titolo: 'Condizioni, logica e cicli', breve: 'Condizioni e cicli' },
+      { slug: 'funzioni-e-sequenze', titolo: 'Funzioni, liste e stringhe', breve: 'Funzioni e sequenze' },
+      { slug: 'test-e-debug', titolo: 'Test, casi limite e correzione degli errori', breve: 'Test e debug' },
+    ],
+  },
+  {
+    slug: 'informatica-superiori-3',
+    sottogruppo: 'Informatica',
+    titolo: 'Informatica 3° anno',
+    breve: 'Informatica 3° anno',
+    descrizione: 'Informatica per il terzo anno del liceo scientifico, opzione Scienze applicate. Strutture dati, file, oggetti e classi, HTML e formati digitali.',
+    colore: '#416d77',
+    gruppo: 'Superiori',
+    attiva: false,
+    argomenti: [
+      { slug: 'strutture-dati', titolo: 'Array, matrici e strutture dati', breve: 'Array e matrici' },
+      { slug: 'algoritmi-su-dati', titolo: 'Ricerca, ordinamento e file di dati', breve: 'Ricerca e file' },
+      { slug: 'oggetti-e-classi', titolo: 'Classi, oggetti e metodi', breve: 'Classi e oggetti' },
+      { slug: 'web-e-formati', titolo: 'HTML, CSS e formati digitali', breve: 'Web e formati' },
+    ],
+  },
+  {
+    slug: 'informatica-superiori-4',
+    sottogruppo: 'Informatica',
+    titolo: 'Informatica 4° anno',
+    breve: 'Informatica 4° anno',
+    descrizione: 'Informatica per il quarto anno del liceo scientifico, opzione Scienze applicate. Basi di dati, modello relazionale, interrogazioni SQL e progetto di laboratorio.',
+    colore: '#416d77',
+    gruppo: 'Superiori',
+    attiva: false,
+    argomenti: [
+      { slug: 'modello-relazionale', titolo: 'Modello relazionale, chiavi e relazioni', breve: 'Basi di dati' },
+      { slug: 'sql-filtri-e-join', titolo: 'SQL, filtri e join', breve: 'SQL e join' },
+      { slug: 'sql-gruppi-e-modifiche', titolo: 'SQL, aggregazioni e modifiche', breve: 'Aggregazioni e modifiche' },
+      { slug: 'progetto-dati', titolo: 'Progetto di laboratorio con basi di dati', breve: 'Progetto dati' },
+    ],
+  },
+  {
+    slug: 'informatica-superiori-5',
+    sottogruppo: 'Informatica',
+    titolo: 'Informatica 5° anno',
+    breve: 'Informatica 5° anno',
+    descrizione: 'Informatica per il quinto anno del liceo scientifico, opzione Scienze applicate. Reti, protocolli Internet, complessità, automi, calcolo numerico e simulazioni scientifiche. Teoria, esercizi svolti, domande a tempo e simulazioni di verifiche. L’ordine degli argomenti può variare secondo il programma della classe.',
+    colore: '#416d77',
+    gruppo: 'Superiori',
+    attiva: true,
+    argomenti: [
+      { slug: 'reti-e-modelli', titolo: 'Reti di computer, Ethernet e modelli a livelli', breve: 'Reti ed Ethernet' },
+      { slug: 'ipv4-e-sottoreti', titolo: 'Indirizzamento IPv4, subnetting e gateway', breve: 'IPv4 e sottoreti' },
+      { slug: 'internet-e-protocolli', titolo: 'Internet, TCP e UDP, DNS e Web', breve: 'Internet e protocolli' },
+      { slug: 'complessita-algoritmi', titolo: 'Ricerca, ordinamento e complessità degli algoritmi', breve: 'Complessità' },
+      { slug: 'automi-e-computabilita', titolo: 'Automi, linguaggi e limiti della computazione', breve: 'Automi e computabilità' },
+      { slug: 'errori-e-zeri', titolo: 'Approssimazioni e ricerca degli zeri', breve: 'Errori e zeri' },
+      { slug: 'integrazione-numerica', titolo: 'Integrazione numerica', breve: 'Integrazione numerica' },
+      { slug: 'simulazione-scientifica', titolo: 'Simulazioni scientifiche e confronto con i dati', breve: 'Simulazioni scientifiche' },
     ],
   },
   {
@@ -697,8 +850,9 @@ export function argomento(m: string, a: string): Argomento {
   return materia(m).argomenti.find((x) => x.slug === a)!;
 }
 // Tutte le coppie (materia, argomento) delle materie attive, per getStaticPaths.
-export function coppie() {
-  return MATERIE.filter((m) => m.attiva).flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
+export function coppie(sezione?: 'esercizi') {
+  return MATERIE.filter((m) => m.attiva && (sezione !== 'esercizi' || m.eserciziDaFare !== false))
+    .flatMap((m) => m.argomenti.map((a) => ({ materia: m.slug, argomento: a.slug })));
 }
 // I gruppi (percorsi di studi) nell'ordine in cui compaiono in home e nell'indice.
 export function gruppi(): string[] {

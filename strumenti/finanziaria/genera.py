@@ -314,7 +314,8 @@ def registra(E,path):
     REGISTRO.append({key:E[key] for key in ['answer','unit','params','check']}|{'file':str(path.relative_to(ROOT)),'risultato':risultato(E)})
 
 def scrivi(path,text):
-    path.parent.mkdir(parents=True,exist_ok=True);path.write_text(text,encoding='utf8')
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text.rstrip('\n') + '\n', encoding='utf8')
 
 def front(title,anchor,free=None):
     return '---\ntitolo: '+json.dumps(title,ensure_ascii=False)+'\n'+(('gratis: '+str(free).lower()+'\n') if free is not None else '')+'teoria: ['+anchor+']\nparole: ['+json.dumps(title,ensure_ascii=False)+']\n---\n\n'

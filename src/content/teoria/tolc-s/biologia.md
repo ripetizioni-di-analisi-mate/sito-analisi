@@ -21,7 +21,7 @@ Le cellule vegetali possiedono parete cellulare e, nei tessuti fotosintetici, cl
 
 Il DNA contiene adenina, timina, citosina e guanina; nell'RNA l'uracile sostituisce la timina. La replicazione copia il DNA, la trascrizione produce RNA da uno stampo di DNA, la traduzione usa l'informazione dell'RNA messaggero per costruire una catena polipeptidica.
 
-Un codone è una tripletta di nucleotidi nell'RNA messaggero. Più codoni possono specificare lo stesso amminoacido. Un allele è una variante di un gene: nell'incrocio tra due eterozigoti Aa, con segregazione mendeliana, i genotipi attesi sono AA, Aa e aa nei rapporti 1:2:1.
+Un codone è una tripletta di nucleotidi nell'RNA messaggero. Più codoni possono specificare lo stesso amminoacido. Un allele è una variante di un gene: nell'incrocio tra due eterozigoti Aa, con segregazione mendeliana, i genotipi attesi sono AA, Aa e aa nel rapporto $1:2:1$.
 
 ## Mitosi, meiosi e ciclo cellulare
 

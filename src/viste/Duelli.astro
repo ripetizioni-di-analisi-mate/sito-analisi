@@ -251,6 +251,7 @@ const minuti = Math.round((DUELLO.domande * DUELLO.secondi) / 60);
     if (document.visibilityState === 'visible') {
       const r = await post('/api/duelli/lobby', { materia: selM.value, argomento: selA.value || null, cerca }).catch(() => null);
       if (r?.status === 401) { $('.du-sala').hidden = true; ospite(); return; }
+      if (r?.status === 403 && cerca) { fermaRicerca(); errore(r.d.errore || 'Per giocare serve l’accesso completo.'); }
       if (r?.ok) { $('.du-sala').hidden = false; disegnaSala(r.d); }
     }
     timerSala = window.setTimeout(aggiornaSala, 4000);

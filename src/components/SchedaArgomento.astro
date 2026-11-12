@@ -1,0 +1,29 @@
+---
+interface Props {
+  titolo: string;
+  sommario?: string;
+  sezioni: { href: string; titolo: string; conteggio?: number }[];
+  preparazione: string;
+  progresso?: { slug: string; schede: number; verificabili: number; domande: number };
+}
+const { titolo, sommario, sezioni, preparazione, progresso } = Astro.props;
+const teoria = sezioni[0]?.href;
+---
+<li class:list={{ 'in-preparazione': !teoria }}>
+  <h2>{teoria ? <a href={teoria}>{titolo}</a> : titolo}</h2>
+  {teoria && (sommario || Astro.slots.has('sommario')) && <p class="riassunto"><slot name="sommario">{sommario}</slot></p>}
+  {teoria ? <>
+    <nav aria-label={titolo}>
+      {sezioni.map(({ href, titolo: nome, conteggio }) => (
+        <a href={href}>{nome}{Boolean(conteggio) && ' (' + conteggio + ')'}</a>
+      ))}
+    </nav>
+    {progresso && (
+      <div class="progresso-argomento" data-argomento={progresso.slug} data-schede={progresso.schede}
+        data-verificabili={progresso.verificabili} data-domande={progresso.domande} hidden>
+        <span class="progresso-barra" aria-hidden="true"><i></i></span>
+        <span class="progresso-testo"></span>
+      </div>
+    )}
+  </> : <span class="conteggio">{preparazione}</span>}
+</li>

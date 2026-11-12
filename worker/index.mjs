@@ -1,3 +1,7 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
+import { preparaStoricoEmail, registraInviiEmail } from './storico-email.mjs';
+import { archivioPromozioni, codicePromozione, contaPromozioniOggi, creaTabellePromozioni, pulisciPromozioni } from './promozioni-email.mjs';
+import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, FLUSSI_EMAIL, inviaConfermaOfferte, paginaPreferenzeEmail } from './email-automatiche.mjs';
 // Worker del sito: serve le pagine statiche e aggiunge account e accessi a pagamento.
 //  - account studenti (email e password), sessione in un cookie firmato;
 //  - oscuramento lato server (teoria in anteprima, schede oltre la 3ª, soluzioni, PDF);
@@ -5,6 +9,10 @@
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
+import { versoCatalogoStudio } from './catalogo-studio.mjs';
+import { highSchoolTimedTopics, highSchoolPreviewPage, highSchoolCourse, highSchoolHasStudyPages, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
+import { courseUrl, universityTimedTopics } from '../src/data/stem-usa/catalog.mjs';
+import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
 import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './stemmi.mjs';
@@ -15,9 +23,10 @@ import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
+import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
-import { VIDEOCORSI, chiaveVideo, variabilePrezzoVideo } from '../src/data/videocorsi.ts';
+import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
 import { spazioHome } from './spazio.mjs';
@@ -26,26 +35,45 @@ import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../sr
 import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
 import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
-import { inviaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
+import { inviaCodaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
-import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria } from './inviti.mjs';
+import { creaTabelleInviti, archivioInviti, gestisciInviti, registraInvitato, dopoAcquistoMateria, scontoInvito } from './inviti.mjs';
 import { creaTabelleBenvenuto, archivioBenvenuto, gestisciBenvenuto, scontoBenvenuto } from './benvenuto.mjs';
-import { creaTabellePacchetti, archivioPacchetti, gestisciPacchetti, completaPacchetto } from './pacchetti.mjs';
-import { creaTabelleSfide, archivioSfide, gestisciSfide, sha } from './sfide.mjs';
+import { creaTabellePacchetti, archivioPacchetti, completaPacchetto } from './pacchetti.mjs';
+import { creaTabelleStripeDigitale, archivioStripeDigitale, gestisciAcquisti, eventoDigitale, recuperaOrdiniDigitali } from './stripe-digitale.mjs';
+import { creaTabellePostvendita, archivioPostvendita, gestisciPostvendita, webhookPostvendita, sincronizzaPostvendita } from './stripe-postvendita.mjs';
+import { creaTabelleSfide, archivioSfide, datiLegheAdmin, gestisciSfide, sha } from './sfide.mjs';
 import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from './avvisi-lega.mjs';
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDispositivi, sessioneDispositivoValida,
   cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+const sbloccaUsa = (slug) => courseUrl(slug) + '/sblocca';
+const corsoUsaRiservato = (slug, io) => Boolean(usaProduct(slug) && !io?.materie?.includes(slug));
+const rispostaCorsoUsaRiservato = (slug) => json({
+  errore: 'Unlock this course to access the study materials.',
+  sblocca: sbloccaUsa(slug),
+}, 403, { 'cache-control': 'private, no-store' });
+const SCIENZA_DELLE_COSTRUZIONI = 'scienza-delle-costruzioni';
+const NUMERO_QUIZ_ANTEPRIMA_SCIENZA = 1;
+function quizScienzaRiservato(lingua, personale = false) {
+  const en = lingua === 'en';
+  const errore = personale
+    ? (en ? 'Spaced review is included in full access to Structural Mechanics.' : 'Il ripasso personale è incluso nell’accesso completo a Scienza delle costruzioni.')
+    : (en ? 'This question requires full access to Structural Mechanics.' : 'Per questa domanda serve l’accesso completo a Scienza delle costruzioni.');
+  return {
+    errore,
+    sblocca: `${en ? '/en' : ''}/${SCIENZA_DELLE_COSTRUZIONI}/sblocca`,
+  };
+}
 const CRON_PROMEMORIA = '30 16 * * *';
 const CRON_LEZIONI = '58 * * * *'; // link di Meet 2 minuti prima delle lezioni (worker/prenotazioni.mjs)
 // Videocorsi: l'acquisto registra `video-<slug>` e sblocca le materie collegate.
 const VIDEO = Object.fromEntries(VIDEOCORSI.map((v) => [chiaveVideo(v.slug), v]));
 const conMaterieDeiVideo = (chiavi) => [...new Set(chiavi.flatMap((k) => (VIDEO[k] ? [k, ...VIDEO[k].sblocca] : [k])))];
 const linkDrive = (env) => { try { return JSON.parse(env.VIDEOCORSI_DRIVE || '{}'); } catch { return {}; } };
-const SCHEDE_LIBERE = 3;          // le prime N schede svolte di ogni argomento restano aperte
 const ITERAZIONI_PBKDF2 = 10000;  // costo dell'hash: entro i 10 ms di CPU del piano gratuito Workers; da alzare col piano a pagamento
 const DURATA_SESSIONE = 60 * 60 * 24 * 180; // 180 giorni
 
@@ -172,6 +200,8 @@ export class Archivio {
       punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
+    creaTabelleEmail(this.sql);
+    creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
     creaTabellePrenotazioni(this.sql);
     // iscrizioni ai corsi di gruppo e tracce d'esame (worker/gruppi.mjs)
@@ -181,10 +211,13 @@ export class Archivio {
     // sconto di benvenuto: account creati dalla barra in basso, 10% sulla prima materia (worker/benvenuto.mjs)
     creaTabelleBenvenuto(this.sql);
     creaTabellePacchetti(this.sql);
+    creaTabelleStripeDigitale(this.sql);
+    creaTabellePostvendita(this.sql);
     // sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs)
     creaTabelleSfide(this.sql);
     // «Compatibilità con il tuo esame»: conteggi giornalieri e confronti anonimi (worker/compatibilita.mjs)
     creaTabelleCompatibilita(this.sql);
+    preparaStoricoEmail(this, Date.now());
   }
   righe(q, ...p) { return [...this.sql.exec(q, ...p)]; }
   riga(q, ...p) { return this.righe(q, ...p)[0] ?? null; }
@@ -219,6 +252,17 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/dig-')) return Response.json(archivioStripeDigitale(this, pathname, c));
+    if (pathname.startsWith('/postvendita-')) return Response.json(archivioPostvendita(this, pathname, c));
+    if (pathname.startsWith('/promo-')) return Response.json(await archivioPromozioni(this, pathname, c, firmaToken, leggiToken));
+    if (pathname === '/em-esegui') {
+      if (c.giornaliero) pulisciPromozioni(this.sql, Date.now());
+      return Response.json(await eseguiEmailAutomatiche(this, c, firmaToken));
+    }
+    if (pathname.startsWith('/em-')) {
+      const r = archivioEmail(this, pathname, c);
+      if (r) return Response.json(r);
+    }
     if (pathname.startsWith('/gruppi-')) { const r = archivioGruppi(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/pren-')) { const r = archivioPrenotazioni(this, pathname, c); if (r) return Response.json(r); }
     if (pathname.startsWith('/inv-')) { const r = archivioInviti(this, pathname, c); if (r) return Response.json(r); }
@@ -256,11 +300,11 @@ export class Archivio {
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
         this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), c.lingua === 'en' ? 'en' : 'it');
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), linguaEmail(c.lingua));
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
-        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ?, attivo = ?, lingua = ? WHERE email = ?', ora, Date.now(), c.lingua === 'en' ? 'en' : 'it', c.email);
+        if (c.ok) this.sql.exec('UPDATE utenti SET falliti = 0, bloccato_fino = 0, ultimo_accesso = ?, attivo = ?, lingua = ? WHERE email = ?', ora, Date.now(), linguaEmail(c.lingua), c.email);
         else this.sql.exec(`UPDATE utenti SET falliti = falliti + 1,
           bloccato_fino = CASE WHEN falliti + 1 >= 8 THEN ? ELSE bloccato_fino END WHERE email = ?`, Date.now() + 15 * 60 * 1000, c.email);
         return Response.json({ ok: true });
@@ -274,22 +318,25 @@ export class Archivio {
             EXISTS (SELECT 1 FROM promemoria_coda q WHERE q.email = u.email) AS coda,
             (SELECT materia FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS materia,
             (SELECT argomento FROM sessioni s WHERE s.email = u.email AND s.materia IS NOT NULL ORDER BY ultimo DESC LIMIT 1) AS argomento
-          FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}`, c.giorno, ...(c.solo ? [c.solo] : []));
+          FROM utenti u WHERE u.hash IS NOT NULL AND ${c.solo ? 'u.email = ?' : 'COALESCE(u.promemoria, 1) = 1'}
+          ${c.soloCoda ? 'AND EXISTS (SELECT 1 FROM promemoria_coda q WHERE q.email = u.email)' : ''}`, c.giorno, ...(c.solo ? [c.solo] : []));
         const rec = this.riga("SELECT n FROM recuperi WHERE giorno = ? AND chiave = '*sito'", c.giorno);
         const inv = this.riga('SELECT COUNT(*) AS n FROM promemoria WHERE giorno = ?', c.giorno);
-        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0 });
+        const campagne = this.riga("SELECT COUNT(*) AS n FROM email_automatiche WHERE tipo != 'studio' AND inviato >= ?", Date.parse(c.giorno));
+        return Response.json({ righe, recuperiOggi: rec?.n || 0, inviatiOggi: inv?.n || 0, campagneOggi: (campagne?.n || 0) + contaPromozioniOggi(this, Date.now()) });
       }
       case '/promemoria-registra':
         for (const e of c.email || []) {
           this.sql.exec('INSERT OR IGNORE INTO promemoria (email, giorno) VALUES (?, ?)', e, c.giorno);
           this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', e);
         }
+        if (c.invii) registraInviiEmail(this.sql, c.invii);
         return Response.json({ ok: true });
       case '/promemoria-coda':
         for (const e of c.email || []) this.sql.exec('INSERT OR IGNORE INTO promemoria_coda (email, creato) VALUES (?, ?)', e, Date.now());
         return Response.json({ ok: true });
       case '/promemoria-no':
-        this.sql.exec('UPDATE utenti SET promemoria = 0 WHERE email = ?', c.email);
+        this.sql.exec('UPDATE utenti SET avvisi_lega = COALESCE(avvisi_lega, promemoria, 1), promemoria = 0 WHERE email = ?', c.email);
         this.sql.exec('DELETE FROM promemoria_coda WHERE email = ?', c.email);
         return Response.json({ ok: true });
 
@@ -393,7 +440,8 @@ export class Archivio {
 
       case '/abilita':
         for (const m of c.materie) {
-          this.sql.exec('INSERT OR IGNORE INTO abilitazioni (email, materia, origine, creato) VALUES (?, ?, ?, ?)', c.email, m, c.origine, ora);
+          this.sql.exec(`INSERT INTO abilitazioni (email, materia, origine, creato) VALUES (?, ?, ?, ?)
+            ON CONFLICT(email,materia) DO UPDATE SET origine=excluded.origine WHERE abilitazioni.origine LIKE 'stripe:%'`, c.email, m, c.origine, ora);
         }
         return Response.json({ ok: true, account: Boolean(this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) });
 
@@ -449,6 +497,9 @@ export class Archivio {
             c.email, c.materia, c.importo, c.valuta, c.transazione, ora);
         } catch { return Response.json({ ok: false, doppio: true }); }
         return Response.json({ ok: true });
+
+      case '/dati-leghe':
+        return Response.json(datiLegheAdmin(this, c.settimana));
 
       case '/dati': {
         const sezioni = (giorni) => this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= date('now', '-${giorni - 1} days')
@@ -543,9 +594,14 @@ function nomeDispositivo(req) {
   const br = /Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung Internet' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Chrome|CriOS/.test(ua) ? 'Chrome' : /Safari/.test(ua) ? 'Safari' : 'browser';
   return `${so} · ${br}`;
 }
+const linguaAccount = (l) => l === 'de' || l === 'es' || l === 'en' ? l : 'it';
+const linguaEmail = (l) => linguaAccount(l) === 'it' ? 'it' : 'en';
+
 const MSG = {
   limite: {
     it: () => `Hai già ${MAX_DISPOSITIVI} dispositivi collegati. Scegli quale scollegare per accedere da questo.`,
+    es: () => `Ya tienes ${MAX_DISPOSITIVI} dispositivos conectados. Elige cuál quieres desconectar.`,
+    de: () => `Du hast bereits ${MAX_DISPOSITIVI} Geräte verbunden. Wähle ein Gerät aus, das du abmelden möchtest.`,
     en: () => `You already have ${MAX_DISPOSITIVI} connected devices. Choose one to disconnect so you can sign in here.`,
   },
 };
@@ -563,7 +619,7 @@ async function entraDaDispositivo(env, req, email, versione, lingua) {
     const g = await aDO(env, '/disp-gestione-crea', { id: gestione, email, versione, dispositivo: id, nome, nonce });
     if (!g.ok) return json({ errore: 'Accedi di nuovo.', scaduto: true }, 401, { 'cache-control': 'no-store' });
     h.append('set-cookie', cookieGestioneDispositivi(await firmaToken(env, { scopo: 'gestione-dispositivi', id: gestione, t: Date.now() })));
-    return new Response(JSON.stringify({ errore: MSG.limite[lingua === 'en' ? 'en' : 'it'](), limite: true, gestione: true, dispositivi: g.dispositivi, max: MAX_DISPOSITIVI }), { status: 403, headers: h });
+    return new Response(JSON.stringify({ errore: MSG.limite[linguaAccount(lingua)](), limite: true, gestione: true, dispositivi: g.dispositivi, max: MAX_DISPOSITIVI }), { status: 403, headers: h });
   }
   h.append('set-cookie', cookieGestioneDispositivi('', 0));
   h.append('set-cookie', await apriSessione(env, email, versione, id, r.nonce));
@@ -594,6 +650,40 @@ const json = (dati, stato = 200, intestazioni = {}) => new Response(JSON.stringi
 // ---------- email per il recupero della password (Resend) ----------
 const DURATA_RECUPERO = 60 * 60 * 1000; // il link vale un'ora
 const TESTI_RECUPERO = {
+  es: {
+    nonAttivo: 'El restablecimiento automático no está disponible en este momento. Ponte en contacto con el equipo de ayuda.',
+    limiteIndirizzo: 'Hace poco te enviamos un enlace. Revisa tu bandeja de entrada y la carpeta de correo no deseado, o vuelve a intentarlo en unos minutos.',
+    limiteSito: 'Hemos alcanzado el límite de envíos de hoy. Vuelve a intentarlo mañana o ponte en contacto con el equipo de ayuda.',
+    invioFallito: 'No se pudo enviar el correo. Vuelve a intentarlo en unos minutos o ponte en contacto con el equipo de ayuda.',
+    linkScaduto: 'Este enlace ha caducado o ya se ha utilizado. Solicita uno nuevo en la página de acceso.',
+    oggetto: 'Restablece tu contraseña de Ripetizioni di Analisi',
+    corpo: (link) => [
+      'Hola,',
+      'Has solicitado una nueva contraseña para tu cuenta en ripetizionidianalisi.com.',
+      'Abre este enlace en el plazo de una hora para crear una nueva contraseña.',
+      link,
+      'Si no has hecho esta solicitud, puedes ignorar este correo.',
+      'Carmine',
+    ],
+    bottone: 'Crear una nueva contraseña',
+  },
+  de: {
+    nonAttivo: 'Die automatische Wiederherstellung ist derzeit nicht verfügbar. Wende dich an den Support.',
+    limiteIndirizzo: 'Wir haben dir vor Kurzem einen Link geschickt. Schau im Postfach und im Spam-Ordner nach oder versuch es in ein paar Minuten erneut.',
+    limiteSito: 'Heute wurden zu viele E-Mails verschickt. Versuch es morgen erneut oder wende dich an den Support.',
+    invioFallito: 'Die E-Mail konnte nicht gesendet werden. Versuch es in ein paar Minuten erneut oder wende dich an den Support.',
+    linkScaduto: 'Dieser Link ist abgelaufen oder wurde bereits verwendet. Fordere auf der Anmeldeseite einen neuen Link an.',
+    oggetto: 'Neues Passwort für Ripetizioni di Analisi',
+    corpo: (link) => [
+      'Hallo,',
+      'du hast ein neues Passwort für dein Konto auf ripetizionidianalisi.com angefordert.',
+      'Öffne diesen Link innerhalb einer Stunde, um ein neues Passwort festzulegen.',
+      link,
+      'Wenn du diese Anfrage nicht gestellt hast, kannst du die E-Mail ignorieren.',
+      'Carmine',
+    ],
+    bottone: 'Neues Passwort festlegen',
+  },
   it: {
     nonAttivo: 'Il recupero automatico non è ancora attivo. Scrivimi dalla pagina Contatti e ti imposto una nuova password.',
     limiteIndirizzo: 'Ti ho già mandato un link da poco. Controlla la posta, anche nella cartella spam, oppure riprova tra qualche minuto.',
@@ -629,24 +719,19 @@ const TESTI_RECUPERO = {
     bottone: 'Choose the new password',
   },
 };
-const escHtml = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function inviaEmailRecupero(env, destinatario, link, l) {
   const T = TESTI_RECUPERO[l];
-  const [saluto, chiesto, apri, , nonTu, firma] = T.corpo(link);
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:520px">
-<p>${escHtml(saluto)}</p><p>${escHtml(chiesto)}</p><p>${escHtml(apri)}</p>
-<p style="margin:24px 0"><a href="${escHtml(link)}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${escHtml(T.bottone)}</a></p>
-<p style="font-size:13px;color:#5b6664;word-break:break-all">${escHtml(link)}</p>
-<p>${escHtml(nonTu)}</p><p>${escHtml(firma)}</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>',
-      to: [destinatario], subject: T.oggetto, html, text: T.corpo(link).join('\n\n'),
-    }),
+  const [saluto, chiesto, , , nonTu] = T.corpo(link);
+  const messaggio = componiEmail({
+    lingua: l, subject: T.oggetto,
+    titolo: l === 'es' ? 'Restablece tu contraseña' : l === 'de' ? 'Passwort zurücksetzen' : l === 'en' ? 'Reset your password' : 'Imposta una nuova password',
+    categoria: l === 'es' ? 'Seguridad de la cuenta' : l === 'de' ? 'Kontosicherheit' : l === 'en' ? 'Account security' : 'Sicurezza dell’account',
+    anteprima: l === 'es' ? 'El enlace es válido durante una hora.' : l === 'de' ? 'Der Link ist eine Stunde gültig.' : l === 'en' ? 'Your link is valid for one hour.' : 'Il link è valido per un’ora.',
+    righe: [saluto, chiesto], dopo: [nonTu],
+    scheda: { valore: l === 'es' ? 'Válido durante una hora' : l === 'de' ? 'Eine Stunde gültig' : l === 'en' ? 'Valid for one hour' : 'Valido per un’ora' },
+    pulsante: [T.bottone, link],
   });
-  return r.ok;
+  return (await inviaEmailResend(env, destinatario, messaggio, undefined, 'recupero-password')).ok;
 }
 
 // ---------- domande a tempo ----------
@@ -680,6 +765,32 @@ async function catalogoDomande(env) {
     cacheCatalogo = await r.json();
   }
   return cacheCatalogo;
+}
+
+async function catalogoPremi(env) {
+  return { ...(await catalogoDomande(env)), ...universityTimedTopics, ...highSchoolTimedTopics };
+}
+
+async function eseguiInvii(env, giornaliero) {
+  const [catalogo, prove] = await Promise.all([
+    catalogoDomande(env).catch(() => ({})),
+    env.ASSETS.fetch(new Request('https://interno/dati-email/prove.json'))
+      .then((r) => r.ok ? r.json() : {}).catch(() => ({})),
+  ]);
+  const r = await aDO(env, '/em-esegui', { giornaliero, catalogo, prove });
+  if (giornaliero) await inviaCodaPromemoria(env, aDO, firmaToken, catalogo);
+  if (r.inviati) console.log('email automatiche', JSON.stringify(r));
+}
+
+async function salvaPreferenzeEmail(env, email, c, lingua) {
+  const r = await aDO(env, '/em-salva', { email, offerte: c.offerte === true, studio: c.studio, materia: c.materia });
+  const { token, limite, ...pubbliche } = r;
+  if (limite) return { ...pubbliche, errore: lingua === 'es' ? 'Se alcanzó el límite diario de confirmaciones. Vuelve a intentarlo mañana.' : linguaEmail(lingua) === 'en' ? 'Daily confirmation limit reached. Try again tomorrow.' : 'Limite giornaliero di conferme raggiunto. Riprova domani.' };
+  if (!token) return pubbliche;
+  const esito = await inviaConfermaOfferte(env, email, token, linguaEmail(lingua), firmaToken);
+  if (esito.ok) return pubbliche;
+  await aDO(env, '/em-conferma-fallita', { email, token });
+  return { ...pubbliche, inAttesa: false, errore: lingua === 'es' ? 'No se pudo enviar el correo de confirmación. Vuelve a intentarlo mañana.' : linguaEmail(lingua) === 'en' ? 'The confirmation email could not be sent. Try again tomorrow.' : 'Impossibile inviare la conferma. Riprova domani.' };
 }
 
 // ---------- percorsi protetti ----------
@@ -721,6 +832,20 @@ async function verificaPaddle(req, corpo, segreto) {
   return confrontoCostante(esad, h1);
 }
 
+async function scontoPerMateria(env, io, m, soloOfferta = false, req) {
+  if (!io || !Object.hasOwn(PREZZI, m) || io.materie.includes(m)) return null;
+  let codice = null;
+  try { codice = codicePromozione(req ? leggiCookie(req, 'offerta-' + m) : null); } catch { /* cookie non valido */ }
+  const promo = await aDO(env, '/promo-offerta', { email: io.email, materia: m, codice });
+  if (codice && promo.id === codice) return promo;
+  const automatica = m === 'analisi-2' ? await aDO(env, '/em-offerta', { email: io.email, materia: m }) : {};
+  if (automatica.id) return promo.id && promo.percentuale > automatica.percentuale ? promo : automatica;
+  if (soloOfferta && !promo.id) return null;
+  const ordinario = await scontoInvito(env, aDO, io, m) || await scontoBenvenuto(env, aDO, io);
+  if (promo.id && promo.percentuale >= (ordinario?.percentuale || 0)) return promo;
+  return soloOfferta ? null : ordinario;
+}
+
 // ---------- worker ----------
 export default {
   // Cron di Cloudflare (wrangler.jsonc → triggers): ogni mattina il banco di prova di Pi.
@@ -729,6 +854,9 @@ export default {
     if (evento.cron === CRON_LEZIONI) {
       ctx.waitUntil(avvisiLezioni(env, aDO, firmaToken).then((r) => { if (r.lezioni) console.log('avvisi lezioni', JSON.stringify(r)); })
         .catch((e) => console.log('avvisi lezioni', String(e?.message || e))));
+      ctx.waitUntil(recuperaOrdiniDigitali(env, { aDO, dopoAcquistoMateria }).catch(() => console.error('acquisti digitali: recupero rinviato')));
+      ctx.waitUntil(sincronizzaPostvendita(env, aDO).catch(() => console.error('postvendita: sincronizzazione rinviata')));
+      ctx.waitUntil(eseguiInvii(env, false).catch(() => console.log('email automatiche: errore nel ciclo orario')));
       return;
     }
     // A ogni cron (mattina e pomeriggio): pagine nuove o cambiate segnalate ai motori con IndexNow.
@@ -738,8 +866,7 @@ export default {
       console.log('indexnow', await r.text());
     })().catch((e) => console.log('indexnow', String(e?.message || e))));
     if (evento.cron === CRON_PROMEMORIA) {
-      ctx.waitUntil(inviaPromemoria(env, aDO, firmaToken, await catalogoDomande(env).catch(() => ({})))
-        .then((r) => console.log('promemoria', JSON.stringify(r))).catch((e) => console.log('promemoria', String(e?.message || e))));
+      ctx.waitUntil(eseguiInvii(env, true).catch(() => console.log('email automatiche: errore nel ciclo giornaliero')));
       return;
     }
     ctx.waitUntil(eseguiBanco(env, aDO, A_PAGAMENTO, PREZZI).catch((e) => console.log('banco Pi', String(e?.message || e))));
@@ -749,9 +876,10 @@ export default {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
     const vendita = env.VENDITA !== '0';
+    const scienzaAPagamento = vendita && A_PAGAMENTO.includes(SCIENZA_DELLE_COSTRUZIONI);
     const POST = req.method === 'POST';
 
-    if (p === '/api/pacchetti/checkout') return gestisciPacchetti(req, env, { aDO, json, utenteCollegato, MATERIE, VIDEOCORSI });
+    if (p === '/api/pacchetti/checkout') return json({ errore: 'Il pagamento è cambiato. Ricarica la pagina per acquistare con Stripe.' }, 410);
 
     // ===== un solo indirizzo per ogni pagina =====
     // Google aveva in elenco anche le versioni http:// e www. delle pagine: ora portano tutte, con un
@@ -761,13 +889,34 @@ export default {
       return Response.redirect(verso.toString(), req.method === 'GET' || req.method === 'HEAD' ? 301 : 308);
     }
 
+    if (p.startsWith('/offerta-email/') && (req.method === 'GET' || req.method === 'HEAD')) {
+      const [, , materia, valore, resto] = p.split('/');
+      const codice = codicePromozione(valore);
+      if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
+      const lingua = url.searchParams.get('l') === 'en' ? '/en' : '';
+      return new Response(null, { status: 303, headers: {
+        location: lingua + '/' + materia + '/sblocca', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer',
+        'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
+      } });
+    }
+
+    const versoCatalogo = versoCatalogoStudio(req, url);
+    if (versoCatalogo) return versoCatalogo;
+
     // ===== lingua del visitatore (worker/lingua.mjs) =====
     const versoLingua = await versoLaLinguaGiusta(req, env, url);
     if (versoLingua) return versoLingua;
 
+    const serviziAcquisto = { aDO, utenteCollegato, MATERIE, VIDEOCORSI, conMaterieDeiVideo, dopoAcquistoMateria,
+      sconto: (io, materia) => scontoPerMateria(env, io, materia, false, req) };
+    if (p.startsWith('/api/acquisti/')) return gestisciAcquisti(req, env, p, serviziAcquisto);
+    if (p.startsWith('/api/stripe/postvendita/') || p === '/admin/vendite-stripe' || p.startsWith('/admin/vendite-stripe/'))
+      return gestisciPostvendita(req, env, p, { aDO, utenteCollegato, leggiCookie, leggiToken, json });
+
     // ===== lezioni individuali: prenotazione, pagamento con Stripe, Google Calendar (worker/prenotazioni.mjs) =====
     if (p.startsWith('/api/prenota/') || p === '/api/stripe/webhook' || p === '/admin/lezioni' || p.startsWith('/admin/google/')) {
-      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza });
+      const r = await gestisciPrenotazioni(req, env, ctx, p, { aDO, firmaToken, leggiToken, json, leggiCookie, emailValida, normalizza,
+        altriEventiStripe: async (ev) => (await eventoDigitale(env, serviziAcquisto, ev)) || (await webhookPostvendita(env, ev, { aDO })) });
       if (r) return r;
     }
 
@@ -778,17 +927,13 @@ export default {
     }
 
     // ===== invita un amico: link personale, sconto del 15% a entrambi (worker/inviti.mjs) =====
-    if (p.startsWith('/invito/') || p === '/api/invito' || p === '/api/sconto') {
+    if ((p === '/api/email/offerta' || p === '/api/sconto') && req.method === 'GET') {
+      const io = await utenteCollegato(env, req), m = url.searchParams.get('materia');
+      const offerta = await scontoPerMateria(env, io, m, p === '/api/email/offerta', req);
+      return json(offerta || {}, 200, { 'cache-control': 'private, no-store' });
+    }
+    if (p.startsWith('/invito/') || p === '/api/invito') {
       const r = await gestisciInviti(req, env, ctx, p, { aDO, json, utenteCollegato, leggiCookie });
-      // senza sconto dell'invito, lo sconto di benvenuto di chi ha creato l'account dalla barra in basso
-      if (r && p === '/api/sconto' && !(await r.clone().json().catch(() => ({}))).id) {
-        const io = await utenteCollegato(env, req).catch(() => null);
-        const materia = url.searchParams.get('materia') || '';
-        if (io && PREZZI[materia] && !io.materie.includes(materia)) {
-          const s = await scontoBenvenuto(env, aDO, io).catch((e) => { console.log('benvenuto: sconto non creato', String(e)); return null; });
-          if (s) return json(s);
-        }
-      }
       if (r) return r;
     }
 
@@ -800,7 +945,10 @@ export default {
 
     // ===== sfide tra studenti: leghe settimanali, duelli, percentile delle simulazioni (worker/sfide.mjs) =====
     if (p === '/api/lega' || p === '/api/lega/nome' || p === '/api/lega/avvisi' || p.startsWith('/api/duelli/') || p === '/api/simulazione/esito') {
-      const r = await gestisciSfide(req, env, ctx, p, { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi });
+      const r = await gestisciSfide(req, env, ctx, p, {
+        json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi,
+        materiaQuizRiservata: scienzaAPagamento ? SCIENZA_DELLE_COSTRUZIONI : null,
+      });
       if (r) return r;
     }
 
@@ -814,31 +962,41 @@ export default {
     if (p === '/api/dispositivi' || p.startsWith('/api/dispositivi/')) {
       return gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
     }
+    if (p === '/api/email/preferenze' && (req.method === 'GET' || POST)) {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'Accesso richiesto.' }, 401, { 'cache-control': 'no-store' });
+      if (!POST) return json(await aDO(env, '/em-preferenze', { email: io.email }), 200, { 'cache-control': 'no-store' });
+      if (req.headers.get('origin') !== url.origin) return json({ errore: 'Richiesta non valida.' }, 403);
+      const c = await req.json().catch(() => null);
+      if (!c || typeof c.offerte !== 'boolean' || typeof c.studio !== 'boolean') return json({ errore: 'Preferenze non valide.' }, 400);
+      return json(await salvaPreferenzeEmail(env, io.email, c, linguaAccount(c.lingua)), 200, { 'cache-control': 'no-store' });
+    }
     if (p === '/api/registrati' && POST) {
-      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina } = await req.json().catch(() => ({}));
+      const { email: e, password, lingua, nome, corso: corsoDato, benvenuto, pagina, offerte, materiaEmail } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const corso = typeof corsoDato === 'string' ? corsoDato.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 120) || null : null;
-      if (!emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
-      if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: 'La password deve avere almeno 8 caratteri.' }, 400);
+      if (!emailValida(email)) return json({ errore: lingua === 'es' ? 'Introduce una dirección de correo válida.' : lingua === 'de' ? 'Gib eine gültige E-Mail-Adresse ein.' : 'Scrivi un indirizzo email valido.' }, 400);
+      if (typeof password !== 'string' || password.length < 8 || password.length > 200) return json({ errore: lingua === 'es' ? 'La contraseña debe tener entre 8 y 200 caracteres.' : lingua === 'de' ? 'Das Passwort muss zwischen 8 und 200 Zeichen lang sein.' : 'La password deve avere almeno 8 caratteri.' }, 400);
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
       const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso, lingua });
-      if (!r.ok) return json({ errore: 'Esiste già un account con questa email. Accedi.' }, 409);
+      if (!r.ok) return json({ errore: lingua === 'es' ? 'Ya existe una cuenta con este correo. Inicia sesión.' : lingua === 'de' ? 'Es gibt bereits ein Konto mit dieser E-Mail-Adresse. Melde dich an.' : 'Esiste già un account con questa email. Accedi.' }, 409);
       // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
       const invito = leggiCookie(req, 'invito');
       if (invito) await registraInvitato(env, aDO, email, invito).catch((e) => console.log('inviti: registrazione', String(e)));
       // account creato dalla barra in basso: 10% sul primo acquisto di una materia (worker/benvenuto.mjs)
       if (benvenuto === true) await aDO(env, '/bv-registra', { email, pagina: String(pagina || '') }).catch(() => {});
+      if (offerte === true) ctx.waitUntil(salvaPreferenzeEmail(env, email, { offerte, materia: materiaEmail }, linguaAccount(lingua)).catch(() => {}));
       return entraDaDispositivo(env, req, email, r.versione, lingua);
     }
     if (p === '/api/accedi' && POST) {
       const { email: e, password, lingua } = await req.json().catch(() => ({}));
       const email = normalizza(e);
       const u = emailValida(email) ? await aDO(env, '/utente', { email }) : null;
-      const sbagliato = () => json({ errore: 'Email o password non corrette.' }, 401);
+      const sbagliato = () => json({ errore: lingua === 'es' ? 'El correo o la contraseña son incorrectos.' : lingua === 'de' ? 'Die E-Mail-Adresse oder das Passwort ist falsch.' : 'Email o password non corrette.' }, 401);
       if (!u || typeof password !== 'string') return sbagliato();
-      if (u.bloccato_fino > Date.now()) return json({ errore: 'Troppi tentativi. Riprova tra un quarto d’ora.' }, 429);
+      if (u.bloccato_fino > Date.now()) return json({ errore: lingua === 'es' ? 'Demasiados intentos. Vuelve a intentarlo en 15 minutos.' : lingua === 'de' ? 'Zu viele Versuche. Versuch es in 15 Minuten erneut.' : 'Troppi tentativi. Riprova tra un quarto d’ora.' }, 429);
       const ok = confrontoCostante(await hashPassword(password, u.sale, u.iterazioni), u.hash);
       ctx.waitUntil(aDO(env, '/utente-esito-login', { email, ok, lingua }));
       if (!ok) return sbagliato();
@@ -887,7 +1045,9 @@ export default {
     }
 
     // ===== livelli e punti esperienza =====
-    if (p.startsWith('/dati-domande/') || p.startsWith('/dati-risposte/')) return new Response('non trovato', { status: 404 });
+    const percorsoStudio = normalizedStudyPath(url.pathname);
+    if (percorsoStudio.startsWith('/dati-domande/') || percorsoStudio.startsWith('/dati-risposte/'))
+      return new Response('non trovato', { status: 404 });
     // Verifica della risposta di un esercizio da fare: il risultato resta nel Worker, al browser arriva solo l'esito.
     if (p === '/api/verifica' && POST) {
       const { id, risposta, lingua } = await req.json().catch(() => ({}));
@@ -895,43 +1055,66 @@ export default {
       const [materia, argomento, n] = String(id || '').split('/');
       if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || typeof risposta !== 'string' || risposta.length > 200)
         return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const idAnteprima = argomento + '/esercizi/' + n;
+      if (corsoUsaRiservato(materia, io)
+          && !(Number(n) === FREE_PRACTICE_EXERCISE && highSchoolPreviewPage(materia, idAnteprima)))
+        return rispostaCorsoUsaRiservato(materia);
       const risultati = await risposteDi(env, materia);
       const giusta = risultati?.[`${argomento}/${n}`];
       if (!giusta) return json({ errore: en ? 'This exercise has no automatic check.' : 'Questo esercizio non ha la verifica automatica.' }, 404);
-      const io = await utenteCollegato(env, req).catch(() => null);
       const impronta = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`${req.headers.get('cf-connecting-ip') || ''}|${req.headers.get('user-agent') || ''}`));
       const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
       const giorno = new Date().toISOString().slice(0, 10);
       if (!(await aDO(env, '/verifiche-conta', { giorno, chi })).ok) return json({ errore: en ? 'Too many attempts today.' : 'Troppi tentativi oggi.' }, 429);
       const esito = confronta(risposta, giusta);
       if (esito !== 'giusta' || !io) return json({ esito }, 200, { 'cache-control': 'no-store' });
-      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) });
+      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) });
       return json({ esito, ...r }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
       const { materia, argomento, lingua } = await req.json().catch(() => ({}));
+      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
-      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
+      const io = await utenteCollegato(env, req).catch(() => null);
+      const usaBloccato = corsoUsaRiservato(materia, io);
+      const anteprimaUsa = usaBloccato && l === 'en' && highSchoolPreviewPage(materia, argomento + '/domande');
+      if (usaBloccato && !anteprimaUsa) return rispostaCorsoUsaRiservato(materia);
+      const personale = argomento === RIPASSO_OGGI;
+      const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
+      if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
       let dati = await domandeDi(env, materia, l);
-      const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3' || materia === 'matematica-finanziaria';
-      if (quizConAnteprima && vendita) {
-        const accesso = await utenteCollegato(env, req).catch(() => null);
-        if (!accesso?.materie?.includes(materia) && dati) dati = { ...dati, argomenti: materia === 'matematica-finanziaria' ? anteprimaFinanziaria(dati.argomenti) : materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
+      const argomentiCompleti = dati?.argomenti;
+      const finanziaria = materia === 'matematica-finanziaria';
+      const quizConAnteprima = Object.hasOwn(TOLC, materia) || finanziaria || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
+      if ((anteprimaScienza || anteprimaUsa) && argomentiCompleti) {
+        dati = { ...dati, argomenti: Object.fromEntries(Object.entries(argomentiCompleti)
+          .map(([slug, domande]) => [slug, domande.filter((q) => q.n === (anteprimaUsa ? FREE_TIMED_QUESTION : NUMERO_QUIZ_ANTEPRIMA_SCIENZA))])) };
+      } else if (quizConAnteprima && vendita && !io?.materie?.includes(materia) && dati) {
+        dati = { ...dati, argomenti: finanziaria ? anteprimaFinanziaria(argomentiCompleti)
+          : materia === 'analisi-3' ? anteprimaAnalisi3(argomentiCompleti)
+          : materia === 'statistica' ? anteprimaStatistica(argomentiCompleti)
+          : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(argomentiCompleti)
+          : demoTolc(materia, argomentiCompleti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
-      const personale = argomento === RIPASSO_OGGI;
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
-      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'matematica-finanziaria' ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
+      if (!q && anteprimaUsa && typeof id === 'string') return rispostaCorsoUsaRiservato(materia);
+      if (!q && anteprimaScienza && typeof id === 'string') {
+        return json(quizScienzaRiservato(l), 403, { 'cache-control': 'no-store' });
+      }
       let ordine = null;
       if (!q && Array.isArray(viste)) {
         // Pagina aperta prima del 31/10 alle 14:48: manda le domande già viste e non l'id.
@@ -940,9 +1123,8 @@ export default {
       }
       if (!q && personale) {
         // Ripasso di oggi: le domande sbagliate arrivate alla loro data (worker/livelli.mjs, ripasso dilazionato).
-        const io0 = await utenteCollegato(env, req).catch(() => null);
-        if (!io0) return json({ errore: l === 'en' ? 'Today’s review is linked to your account: log in or create a free account. The questions you get wrong come back here after one day.' : 'Il ripasso di oggi è legato all’account: accedi o crea un account gratuito. Le domande sbagliate tornano qui dopo un giorno.' }, 401);
-        const { domande: dovute } = await aDO(env, '/liv-ripasso', { email: io0.email, materia });
+        if (!io) return json({ errore: l === 'en' ? 'Today’s review is linked to your account: log in or create a free account. The questions you get wrong come back here after one day.' : 'Il ripasso di oggi è legato all’account: accedi o crea un account gratuito. Le domande sbagliate tornano qui dopo un giorno.' }, 401);
+        const { domande: dovute } = await aDO(env, '/liv-ripasso', { email: io.email, materia });
         const ids = new Set(elenco.map((x) => x.id));
         ordine = dovute.map((d) => d.slice(materia.length + 1)).filter((x) => ids.has(x)).slice(0, DOMANDE_SESSIONE);
         if (!ordine.length) return json({ errore: l === 'en' ? 'No questions to review today in this subject. The questions you get wrong in the timed questions come back here after one day, then after 3 and 7 days.' : 'Oggi non ci sono domande da ripassare in questa materia. Le domande sbagliate nelle domande a tempo tornano qui dopo un giorno, poi dopo 3 e 7 giorni.', vuoto: true }, 404);
@@ -960,26 +1142,42 @@ export default {
         if (ripasso) ordine = mescola(ordine);
         q = elenco.find((x) => x.id === ordine[0]);
       }
-      const io = await utenteCollegato(env, req).catch(() => null);
       const token = await firmaToken(env, { q: q.id, m: materia, l, t: Date.now(), e: io?.email || null });
-      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
+      // L'anteprima mostra la lunghezza della serie completa, con i soli ID dimostrativi.
+      let lunghezzaSerie;
+      if (ordine && !personale && argomentiCompleti !== dati?.argomenti) {
+        const totaleCompleto = ripasso
+          ? Object.values(argomentiCompleti).reduce((totale, domande) => totale + domande.length, 0)
+          : argomentiCompleti[argomento].length;
+        lunghezzaSerie = Math.min(DOMANDE_SESSIONE, totaleCompleto);
+      }
+      return json({ token, id: q.id, numero: q.n, testo: q.testo, scelte: q.scelte, ordine: ordine || [q.id], lunghezzaSerie, totale: elenco.length, secondi: PUNTI.secondiDomanda, collegato: Boolean(io) },
         200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/domande/rispondi' && POST) {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
+      const io = await utenteCollegato(env, req).catch(() => null);
       const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
+      if (usaProduct(tok?.m)) {
+        const anteprimaUsa = q?.n === FREE_TIMED_QUESTION && tok.l === 'en' && highSchoolPreviewPage(tok.m, argomento + '/domande');
+        if ((io?.email ?? null) !== tok.e || (corsoUsaRiservato(tok.m, io) && !anteprimaUsa))
+          return rispostaCorsoUsaRiservato(tok.m);
+      }
       if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
+      if (scienzaAPagamento && tok.m === SCIENZA_DELLE_COSTRUZIONI && q.n !== NUMERO_QUIZ_ANTEPRIMA_SCIENZA
+          && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
+        return json(quizScienzaRiservato(linguaDi(tok.l)), 403, { 'cache-control': 'no-store' });
+      }
       const giusta = Number(scelta) === q.corretta;
       const secondi = Math.round((Date.now() - tok.t) / 1000);
       const base = { giusta, corretta: q.corretta, spiegazione: q.spiegazione, secondi };
-      const io = await utenteCollegato(env, req).catch(() => null);
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
-        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoDomande(env),
+        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoPremi(env),
       });
       return json({ ...base, ...r });
     }
@@ -1071,7 +1269,7 @@ export default {
     if (p === '/api/percorso') {
       const io = await utenteCollegato(env, req).catch(() => null);
       if (!io) return json({ errore: 'non collegato' }, 401);
-      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaDi(url.searchParams.get('l')), catalogo: await catalogoDomande(env) }));
+      return json(await aDO(env, '/liv-percorso', { email: io.email, lingua: linguaAccount(url.searchParams.get('l')), catalogo: await catalogoPremi(env) }));
     }
     if (p === '/api/videocorsi') { // i videocorsi comprati, con il link della cartella Drive
       const io = await utenteCollegato(env, req);
@@ -1108,6 +1306,22 @@ export default {
     }
 
     // ===== promemoria: link «Non ricevere più questi promemoria» (anche one-click dei programmi di posta) =====
+    if ((p === '/email/conferma' || p === '/email/disattiva') && (req.method === 'GET' || POST)) {
+      const t = url.searchParams.get('t') || '';
+      const tok = t ? await leggiToken(env, t) : null;
+      const conferma = p === '/email/conferma';
+      let valido = tok?.scopo === (conferma ? 'conferma-offerte-email' : 'offerte-email') && emailValida(tok.r)
+        && (!conferma || (typeof tok.c === 'string' && tok.exp > Date.now()));
+      if (valido && POST) {
+        const r = await aDO(env, conferma ? '/em-conferma' : '/em-disattiva', { email: tok.r, token: tok.c });
+        valido = r.ok;
+      }
+      return new Response(paginaPreferenzeEmail(conferma ? 'conferma' : 'disattiva', tok?.l, valido, POST && valido), {
+        status: valido ? 200 : 400,
+        headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex', 'referrer-policy': 'no-referrer' },
+      });
+    }
+
     if (p === '/promemoria/disattiva') {
       // Con GET solo la pagina di conferma: i programmi che aprono i link per controllarli non disattivano nulla.
       const tok = await leggiToken(env, url.searchParams.get('t') || '');
@@ -1119,9 +1333,9 @@ export default {
     // ===== password dimenticata: link via email (Resend), valido un'ora e una sola volta =====
     if (p === '/api/password-dimenticata' && POST) {
       const { email: e, lingua } = await req.json().catch(() => ({}));
-      const l = lingua === 'en' ? 'en' : 'it';
+      const l = linguaAccount(lingua);
       const email = normalizza(e);
-      if (!emailValida(email)) return json({ errore: l === 'en' ? 'Enter a valid email address.' : 'Scrivi un indirizzo email valido.' }, 400);
+      if (!emailValida(email)) return json({ errore: l === 'es' ? 'Introduce una dirección de correo válida.' : l === 'de' ? 'Gib eine gültige E-Mail-Adresse ein.' : l === 'en' ? 'Enter a valid email address.' : 'Scrivi un indirizzo email valido.' }, 400);
       if (!env.RESEND_API_KEY) return json({ errore: TESTI_RECUPERO[l].nonAttivo, nonAttivo: true }, 503);
       const conta = await aDO(env, '/recupero-conta', { giorno: new Date().toISOString().slice(0, 10), email, maxSito: Number(env.RECUPERO_MAX_GIORNO) || 90 });
       if (!conta.ok) return json({ errore: TESTI_RECUPERO[l][conta.motivo === 'sito' ? 'limiteSito' : 'limiteIndirizzo'] }, 429);
@@ -1129,7 +1343,7 @@ export default {
       // Stessa risposta che l'account esista o no: dal modulo non si scopre chi è iscritto.
       if (u?.hash) {
         const token = await firmaToken(env, { scopo: 'recupero', r: email, v: u.versione, t: Date.now() });
-        const indirizzo = `${url.origin}${l === 'en' ? '/en' : ''}/reimposta-password#t=${token}`;
+        const indirizzo = `${url.origin}${l === 'it' ? '' : '/' + l}/reimposta-password#t=${token}`;
         const inviata = await inviaEmailRecupero(env, email, indirizzo, l).catch(() => false);
         if (!inviata) return json({ errore: TESTI_RECUPERO[l].invioFallito }, 502);
       }
@@ -1137,12 +1351,12 @@ export default {
     }
     if (p === '/api/reimposta-password' && POST) {
       const { token, password, lingua } = await req.json().catch(() => ({}));
-      const l = lingua === 'en' ? 'en' : 'it';
+      const l = linguaAccount(lingua);
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       const scaduto = () => json({ errore: TESTI_RECUPERO[l].linkScaduto, scaduto: true }, 400);
       if (!tok || tok.scopo !== 'recupero' || typeof tok.r !== 'string' || Date.now() - tok.t > DURATA_RECUPERO) return scaduto();
       if (typeof password !== 'string' || password.length < 8 || password.length > 200)
-        return json({ errore: l === 'en' ? 'The password must be at least 8 characters long.' : 'La password deve avere almeno 8 caratteri.' }, 400);
+        return json({ errore: l === 'es' ? 'La contraseña debe tener entre 8 y 200 caracteres.' : l === 'de' ? 'Das Passwort muss zwischen 8 und 200 Zeichen lang sein.' : l === 'en' ? 'The password must be at least 8 characters long.' : 'La password deve avere almeno 8 caratteri.' }, 400);
       const u = await aDO(env, '/utente', { email: tok.r });
       if (!u || u.versione !== tok.v) return scaduto(); // link già usato, oppure password cambiata nel frattempo
       const sale = nuovoSale();
@@ -1200,14 +1414,26 @@ export default {
         const email = normalizza(d.custom_data?.email || d.customer?.email || '');
         const materia = d.custom_data?.materia || '';
         const video = d.custom_data?.videocorso ? chiaveVideo(d.custom_data.videocorso) : '';
-        const importo = Number(d.details?.totals?.total || 0) / 100;
+        const chiave = A_PAGAMENTO.includes(materia) ? materia : VIDEO[video] ? video : null;
+        const prezzo = chiave && env['PADDLE_PREZZO_' + chiave.toUpperCase().replace(/-/g, '_')];
+        const items = d.items;
+        const centesimi = Number(d.details?.totals?.total);
+        if (!emailValida(email) || !prezzo || (video && materia) || d.status !== 'completed' ||
+            !Array.isArray(items) || items.length !== 1 || items[0]?.quantity !== 1 ||
+            (items[0]?.price?.id || items[0]?.price_id) !== prezzo || d.details?.totals?.total == null ||
+            !Number.isSafeInteger(centesimi) || centesimi < 0)
+          return json({ errore: 'Prodotto e ordine non corrispondono.' }, 400);
+        const importo = centesimi / 100;
         if (email && A_PAGAMENTO.includes(materia)) {
           await aDO(env, '/registra-acquisto', { email, materia, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: [materia], origine: 'paddle' });
           // invita un amico: sconto usato e premio per chi ha invitato (worker/inviti.mjs)
           ctx.waitUntil(dopoAcquistoMateria(env, aDO, url.origin, { email, transazione: d.id, sconto: d.discount_id }).catch((e) => console.log('inviti: webhook', String(e))));
           // sconto di benvenuto: codice del 10% segnato come usato
-          if (d.discount_id) ctx.waitUntil(aDO(env, '/bv-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
+          if (d.discount_id) {
+            ctx.waitUntil(aDO(env, '/bv-usato', { sconto: d.discount_id, transazione: d.id }).catch(() => {}));
+            if (materia === 'analisi-2') await aDO(env, '/em-acquisto', { email, materia, sconto: d.discount_id, transazione: d.id });
+          }
         } else if (email && VIDEO[video]) {
           await aDO(env, '/registra-acquisto', { email, materia: video, importo, valuta: d.currency_code || 'EUR', transazione: d.id });
           await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo([video]), origine: 'paddle' });
@@ -1217,46 +1443,11 @@ export default {
     }
 
     // ===== configurazione per il pagamento =====
-    if (p === '/api/config') {
-      return json({
-        paddle: env.PADDLE_CLIENT_TOKEN ? {
-          token: env.PADDLE_CLIENT_TOKEN,
-          ambiente: env.PADDLE_AMBIENTE || 'production',
-          prezzi: {
-            precorso: env.PADDLE_PREZZO_PRECORSO || null,
-            'analisi-1': env.PADDLE_PREZZO_ANALISI_1 || null,
-            'analisi-2': env.PADDLE_PREZZO_ANALISI_2 || null,
-            'analisi-3': env.PADDLE_PREZZO_ANALISI_3 || null,
-            'algebra-lineare': env.PADDLE_PREZZO_ALGEBRA_LINEARE || null,
-            'fisica-1': env.PADDLE_PREZZO_FISICA_1 || null,
-            'fisica-2': env.PADDLE_PREZZO_FISICA_2 || null,
-            'fisica-semestre-filtro': env.PADDLE_PREZZO_FISICA_SEMESTRE_FILTRO || null,
-            'matematica-semestre-filtro': env.PADDLE_PREZZO_MATEMATICA_SEMESTRE_FILTRO || null,
-            'chimica-semestre-filtro': env.PADDLE_PREZZO_CHIMICA_SEMESTRE_FILTRO || null,
-            'biologia-semestre-filtro': env.PADDLE_PREZZO_BIOLOGIA_SEMESTRE_FILTRO || null,
-            'statistica': env.PADDLE_PREZZO_STATISTICA || null,
-            'matematica-generale': env.PADDLE_PREZZO_MATEMATICA_GENERALE || null,
-            'matematica-finanziaria': env.PADDLE_PREZZO_MATEMATICA_FINANZIARIA || null,
-            'matematica-superiori-5': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_5 || null,
-            'matematica-superiori-3': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_3 || null,
-            'matematica-superiori-4': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_4 || null,
-            'matematica-superiori-2': env.PADDLE_PREZZO_MATEMATICA_SUPERIORI_2 || null,
-            'fisica-superiori-2': env.PADDLE_PREZZO_FISICA_SUPERIORI_2 || null,
-            'fisica-superiori-3': env.PADDLE_PREZZO_FISICA_SUPERIORI_3 || null,
-            'fisica-superiori-4': env.PADDLE_PREZZO_FISICA_SUPERIORI_4 || null,
-            'fisica-superiori-5': env.PADDLE_PREZZO_FISICA_SUPERIORI_5 || null,
-            'matematica-concorsi': env.PADDLE_PREZZO_MATEMATICA_CONCORSI || null,
-            'logica-concorsi': env.PADDLE_PREZZO_LOGICA_CONCORSI || null,
-            'tolc-i': env.PADDLE_PREZZO_TOLC_I || null,
-            'tolc-s': env.PADDLE_PREZZO_TOLC_S || null,
-          },
-          videocorsi: Object.fromEntries(VIDEOCORSI.map((v) => [v.slug, env[variabilePrezzoVideo(v.slug)] || null])),
-        } : null,
-      });
-    }
+    if (p === '/api/config') return json({ stripe: Boolean(vendita && env.STRIPE_SECRET_KEY && env.STRIPE_WEBHOOK_SECRET) },
+      200, { 'cache-control': 'no-store' });
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(Object.keys(VIDEO)), MATERIE.concat(VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(usaProducts.map(v => v.slug), Object.keys(VIDEO)), MATERIE.concat(usaProducts.map(v => ({ ...v, breve: v.titolo, colore: '#2e6b63', argomenti: [] })), VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -1277,16 +1468,60 @@ export default {
         ctx.waitUntil(utenteCollegato(env, req).catch(() => null));
         return json(await aDO(env, '/dati'));
       }
+      if (p === '/admin/api/leghe' && req.method === 'GET') {
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) {
+          return json({ errore: 'Accesso amministrativo non configurato.' }, 503, { 'cache-control': 'no-store' });
+        }
+        const dati = await aDO(env, '/dati-leghe', { settimana: url.searchParams.get('settimana') });
+        return json(dati, dati.errore ? 400 : 200, { 'cache-control': 'no-store' });
+      }
       if (p === '/admin/api/abilita' && POST) {
         const { email: e, materie } = await req.json();
         const email = normalizza(e);
-        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m) || VIDEO[m]);
+        const valide = (materie || []).filter((m) => A_PAGAMENTO.includes(m) || usaProduct(m) || VIDEO[m]);
         if (!emailValida(email) || !valide.length) return json({ errore: 'Email o materie non valide.' }, 400);
         return json(await aDO(env, '/abilita', { email, materie: conMaterieDeiVideo(valide), origine: 'manuale' }));
       }
       if (p === '/admin/api/revoca' && POST) {
         const { email, materia } = await req.json();
         return json(await aDO(env, '/revoca', { email: normalizza(email), materia }));
+      }
+      if (p === '/admin/api/email-stato' && req.method === 'GET') return json(await aDO(env, '/em-dashboard'), 200, { 'cache-control': 'no-store' });
+      if (p === '/admin/api/email-storico' && req.method === 'GET') {
+        const headers = { 'cache-control': 'private, no-store' };
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
+        const filtri = Object.fromEntries(['giorni', 'giorno', 'tipo', 'pagina'].map((k) => [k, url.searchParams.get(k)]));
+        return json(await aDO(env, '/em-storico', filtri), 200, headers);
+      }
+      if (p.startsWith('/admin/api/email-promo/')) {
+        const headers = { 'cache-control': 'private, no-store' };
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
+        const azione = p.slice('/admin/api/email-promo/'.length);
+        if ((['catalogo', 'candidati'].includes(azione) && req.method === 'GET') ||
+            (['anteprima', 'invia'].includes(azione) && POST)) {
+          if (POST && req.headers.get('origin') !== url.origin) return json({ errore: 'Origine non valida.' }, 403, headers);
+          const dati = POST ? await req.json().catch(() => null) : Object.fromEntries(url.searchParams);
+          if (!dati || typeof dati !== 'object' || Array.isArray(dati)) return json({ errore: 'Richiesta non valida.' }, 400, headers);
+          const r = await aDO(env, '/promo-' + azione, dati);
+          return json(r, r.stato || 200, headers);
+        }
+        return json({ errore: 'Pagina non trovata.' }, 404, headers);
+      }
+      if (p === '/admin/api/email-interruttore' && POST) {
+        const { tipo, attivo } = await req.json().catch(() => ({}));
+        return json(await aDO(env, '/em-interruttore', { tipo, attivo }));
+      }
+      if ((p === '/admin/api/email-anteprima' && req.method === 'GET') || (p === '/admin/api/email-prova' && POST)) {
+        const { tipo } = POST ? await req.json().catch(() => ({})) : { tipo: url.searchParams.get('tipo') };
+        if (!FLUSSI_EMAIL.includes(tipo) && tipo !== 'lega') return json({ errore: 'Modello non valido.' }, 400);
+        const m = esempioEmail(tipo);
+        if (!POST) return new Response(m.html, { headers: {
+          'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
+          'content-security-policy': "default-src 'none'; img-src https://ripetizionidianalisi.com; style-src 'unsafe-inline'; sandbox",
+        } });
+        const destinatario = env.EMAIL_PROVA_DESTINATARIO || 'carminetornincasa98@gmail.com';
+        const prova = await inviaEmailResend(env, destinatario, { ...m, subject: `[PROVA] ${m.subject}` }, undefined, 'prova');
+        return json(prova.ok ? { ok: true } : { errore: 'Invio di prova non riuscito.' });
       }
       if (p === '/admin/api/promemoria-prova' && POST) { // email di prova del promemoria, con i dati veri dell'account se esiste
         const email = normalizza((await req.json().catch(() => ({}))).email);
@@ -1346,17 +1581,25 @@ export default {
       return new Response(null, { status: 301, headers: { location: `${info.pref}/${info.materia}/${info.argomento}/teoria`, 'cache-control': 'no-store' } });
     }
     const protetta = vendita && info && A_PAGAMENTO.includes(info.materia);
+    const schedaSvoltaLibera = info?.tipo === 'esercizi-svolti' && info.n > 0
+      && info.n <= schedeLibere(info.materia, info.argomento);
     // La sessione si verifica solo per le pagine e i PDF, non per font, stili e immagini.
     const pagina = !/\.[a-z0-9]+$/i.test(url.pathname) || /\.(html|pdf)$/i.test(url.pathname);
-    const io = pagina ? await utenteCollegato(env, req).catch(() => null) : null;
+    const corsoUsa = usaCoursePath(url.pathname);
+    const io = pagina || corsoUsa ? await utenteCollegato(env, req).catch(() => null) : null;
+    const usaBloccato = corsoUsa && corsoUsaRiservato(corsoUsa.slug, io);
+    const usaAnteprima = corsoUsa && highSchoolPreviewPage(corsoUsa.slug, corsoUsa.section);
+    if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca' && !usaAnteprima) {
+      return new Response(null, { status: 302, headers: { location: sbloccaUsa(corsoUsa.slug), 'cache-control': 'private, no-store' } });
+    }
     let risposta;
     // Materia della pagina (anche la pagina principale della materia): serve per la spunta.
     const primo = url.pathname.replace(/^\/en(?=\/)/, '').split('/')[1]?.replace(/\.html$/, '');
-    let sbloccataQui = Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
+    let sbloccataQui = corsoUsa ? !usaBloccato : Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
       // Googlebot e Bingbot verificati leggono la pagina intera, con la parte riservata segnata (worker/motori.mjs).
-      const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n > SCHEDE_LIBERE);
+      const ridotta = info.tipo === 'teoria' || info.tipo === 'voce' || info.tipo === 'esercizi' || (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera);
       const motore = !sbloccataQui && ridotta && req.method === 'GET'
         ? await motoreVerificato(req).catch(() => null) : null;
       if (motore) {
@@ -1366,7 +1609,7 @@ export default {
       } else if (!sbloccataQui) {
         if (info.tipo === 'pdf' || info.tipo === 'stampa') {
           risposta = await rispostaVetrina(env, req, `${info.pref}/${info.materia}/sblocca`);
-        } else if (info.tipo === 'esercizi-svolti' && info.n && info.n > SCHEDE_LIBERE) {
+        } else if (info.tipo === 'esercizi-svolti' && info.n && !schedaSvoltaLibera) {
           // scheda bloccata: vetrina con titolo e tracce, svolgimenti tolti (scripts/vetrine.mjs)
           risposta = await rispostaVetrina(env, req, `/vetrine${info.pref}/${info.materia}/${info.argomento}/esercizi-svolti/${info.n}`);
         } else if (info.tipo === 'teoria') {
@@ -1406,16 +1649,26 @@ export default {
       risposta.headers.set('cache-control', 'private, no-store');
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
+      if (corsoUsa) {
+        const rimuovi = { element(element) { element.remove(); } };
+        const accesso = new HTMLRewriter();
+        if (usaBloccato) {
+          accesso.on('[data-usa-content]', rimuovi);
+          if (!highSchoolHasStudyPages(highSchoolCourse(corsoUsa.slug)))
+            accesso.on('[data-usa-course-nav]', rimuovi);
+        } else accesso.on('[data-usa-outline]', rimuovi).on('[data-usa-preview]', rimuovi);
+        risposta = accesso.transform(risposta);
+      }
     }
     // Progressi per argomento: teoria e schede svolte aperte per intero da chi ha l'account.
     if (html && io && info && req.method === 'GET' && risposta.status < 400 && (info.tipo === 'teoria' || (info.tipo === 'esercizi-svolti' && info.n))) {
-      const intera = !protetta || sbloccataQui || (info.tipo === 'esercizi-svolti' && info.n <= SCHEDE_LIBERE);
+      const intera = !protetta || sbloccataQui || schedaSvoltaLibera;
       if (intera) ctx.waitUntil(aDO(env, '/liv-vista', { email: io.email, materia: info.materia, argomento: info.argomento, tipo: info.tipo, n: info.n || 0 }).catch(() => {}));
     }
     // Segni sulla pagina: utente collegato, materie sbloccate (spunte).
     if (html && io) {
       const nome = nomeVisibile(io);
-      const en = /^\/en(\/|$)/.test(url.pathname);
+      const en = /^\/(?:en|us)(\/|$)/.test(url.pathname);
       const st = livelloDa(io.exp || 0, en ? 'en' : 'it');
       const riscrivi = new HTMLRewriter();
       // Spazio personale in home (worker/spazio.mjs).

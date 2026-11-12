@@ -1,0 +1,16 @@
+---
+import { T, type Lingua } from '../i18n';
+interface Props { lingua: Lingua; href: string; testo?: string }
+const { lingua, href, testo } = Astro.props;
+const t = T(lingua);
+---
+<div class="riquadro-stato">
+  <div class="stato-bloccata">
+    <svg class="icona" viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11c-3.5-2.6-8.5-3.4-14-2.6v21c5.5-.8 10.5 0 14 2.6 3.5-2.6 8.5-3.4 14-2.6v-21c-5.5-.8-10.5 0-14 2.6z"/><path d="M20 11v21"/></svg>
+    <div class="testo"><strong>{t.tuttoGratis}</strong><span>{testo ?? t.tuttoGratisTesto}</span></div>
+    <div class="azioni-anteprima">
+      <a class="bottone-sblocca" href={href}>{t.iniziaPrimo} →</a>
+      <slot />
+    </div>
+  </div>
+</div>

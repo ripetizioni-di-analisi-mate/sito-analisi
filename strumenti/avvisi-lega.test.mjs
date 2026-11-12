@@ -14,11 +14,11 @@ const entry = join(temp, 'entry.mjs'), bundle = join(temp, 'bundle.mjs');
 writeFileSync(entry, [
   `export { Archivio, firmaToken, default as worker } from ${JSON.stringify(join(root, 'worker/index.mjs'))};`,
   `export { aggiungi, settimanaDi } from ${JSON.stringify(join(root, 'worker/livelli.mjs'))};`,
-  `export { fotografiaLega } from ${JSON.stringify(join(root, 'worker/sfide.mjs'))};`,
+  `export { fotografiaLega, riassuntoLega } from ${JSON.stringify(join(root, 'worker/sfide.mjs'))};`,
   `export { componiAvvisoLega } from ${JSON.stringify(join(root, 'worker/avvisi-lega.mjs'))};`,
 ].join('\n'));
 execFileSync(process.execPath, [resolve(root, 'node_modules/rolldown/bin/cli.mjs'), entry, '--file', bundle, '--format', 'esm', '--platform', 'node', '--logLevel', 'silent'], { cwd: root });
-const { Archivio, firmaToken, worker, aggiungi, settimanaDi, fotografiaLega, componiAvvisoLega } = await import(pathToFileURL(bundle));
+const { Archivio, firmaToken, worker, aggiungi, settimanaDi, fotografiaLega, riassuntoLega, componiAvvisoLega } = await import(pathToFileURL(bundle));
 after(() => rmSync(temp, { recursive: true, force: true }));
 
 function banco(t) {
@@ -173,4 +173,90 @@ test('email inglese e HTML sicuro non espongono dati degli avversari', () => {
   const m = componiAvvisoLega({ nome: '<script>test</script>', lingua: 'en', lega: 0, da: 3, a: 4 }, 'https://example.test/?a=1&b=2');
   assert.match(m.subject, /#4/); assert.match(m.text, /position 3 to position 4/);
   assert.ok(!m.html.includes('<script>')); assert.match(m.html, /&lt;script&gt;/);
+});
+
+test('la dashboard riserva le classifiche delle leghe alla sessione amministrativa', async (t) => {
+  const b = banco(t);
+  b.env.ADMIN_PASSWORD = 'solo-per-il-test';
+  b.utenti('anna@test.invalid', 80, 1);
+  b.env.ARCHIVIO = { idFromName: () => 'locale', get: () => ({ fetch: (url, opts) => b.ar.fetch(new Request(url, opts)) }) };
+  const url = 'https://ripetizionidianalisi.com/admin/api/leghe';
+  const ctx = { waitUntil() {} };
+  const leggi = (indirizzo, token) => worker.fetch(new Request(indirizzo, { headers: token ? { cookie: `admin=${encodeURIComponent(token)}` } : {} }), b.env, ctx);
+  assert.equal((await leggi(url)).status, 401);
+  assert.equal((await leggi(url, await firmaToken(b.env, { email: 'anna@test.invalid' }))).status, 401);
+  const token = await firmaToken(b.env, { admin: true });
+  const r = await leggi(url, token);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get('cache-control'), 'no-store');
+  const gruppo = (await r.json()).gruppi[0];
+  assert.equal(gruppo.studenti, 1);
+  assert.equal(gruppo.membri.filter((m) => m.bot).length, 9);
+  const studente = gruppo.membri.find((m) => !m.bot);
+  assert.deepEqual([studente.nome, studente.exp, studente.zona], ['anna', 80, 'sale']);
+  assert.equal((await leggi(url + '?settimana=2026-10-99', token)).status, 400);
+  for (const chiave of ['ADMIN_PASSWORD', 'CHIAVE_ACCESSO']) {
+    const impostata = b.env[chiave];
+    delete b.env[chiave];
+    const provvisorio = await firmaToken(b.env, { admin: true });
+    assert.equal((await leggi(url, provvisorio)).status, 503);
+    b.env[chiave] = impostata;
+  }
+});
+
+test('lo storico delle leghe conserva settimane e gruppi e usa le zone della classifica studente', async (t) => {
+  const b = banco(t);
+  const settimana = settimanaDi()[0];
+  b.utenti('anna@test.invalid', 80, 2, { lega: 1 });
+  b.utenti('luca@test.invalid', 80, 1, { lega: 1 });
+  for (let i = 0; i < 8; i++) b.utenti(`studente${i}@test.invalid`, i, i + 3, { lega: 1 });
+  b.utenti('altro@test.invalid', 200, 1, { lega: 1, gruppo: 2 });
+  const dati = async (sett) => (await b.api('/dati-leghe', { settimana: sett })).json();
+  const prima = await dati();
+  const studente = await (await b.api('/sfi-lega', { email: 'anna@test.invalid' })).json();
+  assert.deepEqual(prima.gruppi[0].membri.map(({ exp, zona }) => ({ exp, zona })), studente.gruppo.map(({ exp, zona }) => ({ exp, zona })));
+  assert.deepEqual(prima.gruppi[0].membri.slice(0, 2).map((m) => m.nome), ['luca', 'anna']);
+  assert.deepEqual(prima.gruppi[0].membri.slice(-2).map((m) => m.zona), ['scende', 'scende']);
+  assert.equal(prima.gruppi[1].membri.find((m) => !m.bot).exp, 200);
+  b.avanza(7 * 86400000);
+  assert.deepEqual((await dati()).gruppi, []);
+  aggiungi(b.ar, 'anna@test.invalid', 3, 'risposta');
+  const storico = (await dati(settimana)).gruppi;
+  assert.equal(storico.length, prima.gruppi.length);
+  for (const [i, g] of storico.entries()) {
+    assert.deepEqual(g.membri, prima.gruppi[i].membri.filter((m) => !m.bot).map(({ pos, ...m }) => m));
+  }
+  b.avanza(180000);
+  const adesso = await dati();
+  assert.deepEqual(adesso.settimane.map((s) => s.inizio), [settimanaDi()[0], settimana]);
+  assert.equal(adesso.gruppi[0].lega, 2);
+  assert.equal(adesso.gruppi[0].membri.find((m) => !m.bot).exp, 3);
+});
+
+test('pagina, pannello e dashboard condividono la classifica di gioco e gli esiti restano tra studenti', async (t) => {
+  const b = banco(t);
+  const email = 'anna@test.invalid';
+  b.utenti(email, 1, 1);
+  const stato = async () => (await b.api('/sfi-lega', { email })).json();
+  const lega = await stato();
+  const admin = (await (await b.api('/dati-leghe', {})).json()).gruppi[0];
+  assert.equal(lega.conSimulati, true);
+  assert.equal(lega.gruppo.length, 10);
+  assert.deepEqual(lega.gruppo.map((m) => [m.pos, m.exp]), admin.membri.map((m) => [m.pos, m.exp]));
+  assert.ok(lega.gruppo.every((m) => !('bot' in m) && !('email' in m) && m.livello >= 1));
+  assert.ok(lega.gruppo.filter((m) => !m.io).every((m) => !('posizioneStudente' in m) && m.zona === ''));
+  const io = lega.gruppo.find((m) => m.io);
+  assert.equal(io.posizioneStudente, 1);
+  assert.equal(io.zona, 'sale');
+  assert.equal(riassuntoLega(b.ar, email).posizione, io.pos);
+  assert.equal(fotografiaLega(b.ar, email).membri.length, 1);
+  assert.equal(b.all().length, 0);
+  b.avanza(7 * 86400000);
+  aggiungi(b.ar, email, 1, 'risposta');
+  const nuova = await stato();
+  assert.equal(nuova.lega, 1);
+  assert.equal(nuova.esito.posizione, 1);
+  assert.equal(nuova.esito.membri, 1);
+  assert.equal(nuova.gruppo.length, 10);
+  assert.equal(b.all().length, 0);
 });

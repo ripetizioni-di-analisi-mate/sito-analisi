@@ -7,6 +7,8 @@ export async function elencoDomande(lingua: Lingua = 'it') {
   const conta = (p: string) => domande.filter((v) => v.id.startsWith(p)).length;
   const materie = materieL(lingua).filter((m) => m.attiva && conta(`${m.slug}/`) > 0).map((m) => ({
     slug: m.slug, titolo: m.titolo, gruppo: m.gruppo, colore: m.colore, concorsi: m.gruppo === 'Concorsi',
+    simulazione: m.eserciziDaFare !== false,
+    prezzoScienza: m.slug === 'scienza-delle-costruzioni' ? m.prezzo : undefined,
     totale: conta(`${m.slug}/`),
     argomenti: m.argomenti.map((a) => ({ slug: a.slug, titolo: a.titolo, n: conta(`${m.slug}/${a.slug}/`) })).filter((a) => a.n > 0),
   }));

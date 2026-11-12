@@ -4,33 +4,36 @@
 import { getCollection, getEntry } from 'astro:content';
 import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
+import { TESTI_DE } from './data/testi-de';
+import { TESTI_ES } from './data/testi-es';
+import { CATALOGHI_LOCALIZZATI, linguaCatalogo, nellaLingua, senzaLingua, type Lingua } from './lib/lingue-sito';
+export { LINGUE, type Lingua } from './lib/lingue-sito';
 import { FACOLTA } from './data/facolta';
 import { url } from './lib/url';
 
-export type Lingua = 'it' | 'en';
-export const LINGUE: { codice: Lingua; nome: string }[] = [
-  { codice: 'it', nome: 'Italiano' },
-  { codice: 'en', nome: 'English' },
-];
 export const prefisso = (l: Lingua) => (l === 'it' ? '' : `/${l}`);
-
-// Indirizzo di una pagina nella lingua data.
-export function link(l: Lingua, path: string): string {
-  const p = l === 'it' ? path : path === '/' ? `/${l}` : `/${l}${path}`;
-  return url(p);
-}
-// La stessa pagina nell'altra lingua.
-export function altraLingua(pathname: string, verso: Lingua): string {
-  // Prima si toglie «.html»: la home inglese, nella build, ha percorso «/en.html».
-  const pulito = pathname.replace(/\.html$/, '').replace(/\/index$/, '');
-  const senza = pulito.replace(/^\/en(?=\/|$)/, '');
-  return link(verso, senza || '/');
-}
+export const link = (l: Lingua, path: string): string => url(nellaLingua(l, path));
+export const altraLingua = (pathname: string, verso: Lingua): string => link(verso, senzaLingua(pathname));
 
 // ---------- materie nella lingua data ----------
 export function materieL(l: Lingua): Materia[] {
   if (l === 'it') return MATERIE;
   return MATERIE.map((m) => {
+    if (linguaCatalogo(l)) {
+      const testi = CATALOGHI_LOCALIZZATI[l];
+      const corso = testi.materie[m.slug];
+      if (!corso) return m;
+      const [titolo, descrizione] = corso;
+      return {
+        ...m, titolo, breve: titolo, descrizione,
+        gruppo: testi.gruppi[m.gruppo] ?? m.gruppo,
+        sottogruppo: m.sottogruppo ? testi.sottogruppi[m.sottogruppo] : undefined,
+        argomenti: m.argomenti.map((a) => {
+          const titolo = testi.argomenti[`${m.slug}/${a.slug}`] ?? testi.argomenti[a.slug] ?? a.titolo;
+          return { ...a, titolo, breve: titolo };
+        }),
+      };
+    }
     const e = MATERIE_EN[m.slug];
     if (!e) return m;
     return {
@@ -48,12 +51,14 @@ export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.grupp
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
-  if (g === 'Università' || g === 'University') {
+  const titoliFacolta: Partial<Record<string, 'titolo' | 'titoloEn' | 'titoloDe' | 'titoloEs'>> = { Università: 'titolo', University: 'titoloEn', [CATALOGHI_LOCALIZZATI.de.gruppi.Università]: 'titoloDe', [CATALOGHI_LOCALIZZATI.es.gruppi.Università]: 'titoloEs' } as const;
+  const titoloFacolta = titoliFacolta[g];
+  if (titoloFacolta) {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
     const assegnate = new Set<string>(FACOLTA.flatMap((f) => [...f.materie]));
     return [
       ...FACOLTA.map((f) => ({
-        sotto: g === 'University' ? f.titoloEn : f.titolo,
+        sotto: f[titoloFacolta],
         materie: f.materie.flatMap((slug) => {
           const m = perSlug.get(slug);
           return m ? [{ m, nome: m.titolo }] : [];
@@ -71,7 +76,7 @@ export function blocchiGruppo(materie: Materia[], g: string) {
   ].filter((b) => b.materie.length);
 }
 export function sezioniL(l: Lingua) {
-  const nomi = TESTI[l].sezioni;
+  const nomi = T(l).sezioni;
   return SEZIONI.map((s) => ({ slug: s.slug, titolo: nomi[s.slug] }));
 }
 
@@ -89,6 +94,7 @@ export async function voceL(l: Lingua, c: Collezione, id: string) {
 export async function vociL(l: Lingua, c: Collezione) {
   const it = await getCollection(c);
   if (l === 'it') return it as any[];
+  if (linguaCatalogo(l)) return [];
   const en = new Map((await getCollection(TRADOTTE[c])).map((v: any) => [v.id, v]));
   return it.map((v: any) => en.get(v.id) ?? v);
 }
@@ -99,7 +105,7 @@ export const TESTI = {
     nomeSito: 'Ripetizioni di Analisi',
     sezioni: { teoria: 'Teoria', 'esercizi-svolti': 'Esercizi svolti', esercizi: 'Esercizi da fare' } as Record<string, string>,
     indice: 'Indice', chiudi: 'Chiudi', cerca: 'Cerca', accedi: 'Accedi', account: 'Account', ilTuoAccount: 'Il tuo account',
-    sbloccata: 'Sbloccata', materie: 'Materie', altreMaterie: 'altre materie', contatti: 'Contatti e assistenza', chiSono: 'Chi sono', prezzi: 'Prezzi', privacy: 'Informativa sulla privacy', termini: 'Termini e diritti d’autore',
+    sbloccata: 'Sbloccata', materie: 'Materie', altreMaterie: 'altre materie', contatti: 'Contatti e assistenza', chiSono: 'Chi sono', prezzi: 'Prezzi', privacy: 'Informativa sulla privacy', termini: 'Termini e diritti d’autore', rimborsi: 'Politica di rimborso',
     copyright: '© 2026 Carmine Tornincasa · P. IVA 04779350612. Tutti i diritti riservati. Vietata la riproduzione o la diffusione, anche parziale, senza autorizzazione scritta.',
     notaTermini: 'Con l’acquisto accetti i <a href="/termini">termini d’uso</a>: l’accesso è personale e il materiale non può essere condiviso né diffuso.',
     precedente: 'Precedente', successivo: 'Successivo', argomentoSuccessivo: 'Argomento successivo', tornaSu: "Torna all'inizio della pagina",
@@ -108,7 +114,7 @@ export const TESTI = {
     // home
     homeSopra: '', homeTitolo: 'Teoria ed esercizi svolti per le materie scientifiche',
     homeSommario: 'Matematica e fisica, spiegate passo dopo passo.',
-    homeDescrizione: "Teoria ed esercizi per gli esami di matematica dell'università, materia per materia.",
+    homeDescrizione: "Teoria ed esercizi svolti di matematica e fisica per università, superiori, test di ingresso e concorsi, materia per materia.",
     cercaSegnaposto: 'Cerca un argomento, un teorema, un tipo di esercizio…', cercaNelSito: 'Cerca nel sito',
     // pagina della materia
     argomentiEsame: "Gli argomenti dell'esame", argomentiConcorso: 'Gli argomenti del concorso', programma: 'Il programma',
@@ -133,14 +139,15 @@ export const TESTI = {
     teoriaUsata: 'Teoria usata', vaiA: 'Vai a', indiceArgomenti: 'Indice degli argomenti',
     // sblocca
     sbloccaTitolo: (m: string) => `Sblocca ${m}`,
-    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, schede di esercizi svolti e soluzioni.`,
+    sbloccaDescrizione: (m: string) => `Accesso completo a ${m}: teoria, tutte le schede di esercizi svolti e le soluzioni. Pagamento unico, senza abbonamento e senza scadenza.`,
+    sbloccaSeo: (m: string) => `${m}: accesso completo a teoria ed esercizi svolti`,
     sbloccaSommario: 'Un acquisto unico, senza abbonamento: la materia resta sbloccata nel tuo account, su un massimo di 3 dispositivi, senza scadenza.',
     includeTeoria: (n: number) => `La <strong>teoria completa</strong> di tutti ${/^(8|11|18|80|8\d|800)$/.test(String(n)) ? 'gli' : 'i'} ${n} argomenti, con definizioni, teoremi e dimostrazioni`,
     includeSvolti: (n: number) => `Tutte le <strong>${n} schede di esercizi svolti</strong> per tipologia, con ogni passaggio spiegato`,
     includeSoluzioni: (n: number) => `Le <strong>soluzioni</strong> dei ${n} esercizi da fare`,
     unaVoltaSola: 'una volta sola', unMomento: 'Un momento…',
     gratisOra: "Gratis, senza account, restano l'inizio della teoria e le prime 3 schede svolte di ogni argomento.",
-    metodiPagamento: 'Si paga con carta, PayPal, Apple Pay, Google Pay o con gli altri metodi mostrati nella finestra di pagamento. Il pagamento è gestito da Paddle, che invia la ricevuta.',
+    metodiPagamento: 'Puoi pagare con carta o con i metodi disponibili su Stripe al momento del pagamento. Ricevi la conferma dell’ordine via email.',
     almenoOtto: 'almeno 8 caratteri',
     // testi usati dagli script nel browser
     js: {
@@ -152,7 +159,6 @@ export const TESTI = {
       sbloccaOra: 'Sblocca ora', acquistoCollegato: (email: string) => `Acquisto collegato al tuo account ${email}.`,
       pagamentoRicevuto: 'Pagamento ricevuto. Sto sbloccando la materia nel tuo account…',
       sbloccoLento: 'Pagamento ricevuto. Lo sblocco richiede ancora qualche istante: ricarica la pagina tra poco, oppure scrivimi dalla pagina Contatti.',
-      paddleNonCaricato: 'Il modulo di pagamento non si è caricato. Ricarica la pagina o scrivimi dalla pagina Contatti.',
       emailNonValida: 'Scrivi un indirizzo email valido.', passwordCorta: 'La password deve avere almeno 8 caratteri.',
       passwordDiverse: 'Le due password non coincidono.', erroreGenerico: 'Qualcosa non ha funzionato. Riprova.',
       connessione: 'Connessione assente. Riprova tra un momento.', creaAccount: 'Crea l’account',
@@ -183,7 +189,8 @@ export const TESTI = {
     contattiDescrizione: 'Contatti per informazioni sul materiale, assistenza sugli acquisti e segnalazioni.',
     contattiTesto: 'Per informazioni sul materiale didattico, assistenza sugli acquisti o segnalazioni di eventuali errori, puoi contattare:',
     // prezzi
-    prezziDescrizione: "Prezzi dell'accesso completo alle materie di Ripetizioni di Analisi.",
+    prezziDescrizione: "Prezzi delle singole materie, dei pacchetti e dei videocorsi di Ripetizioni di Analisi: pagamento unico, senza abbonamento e senza scadenza.",
+    prezziTitolo: 'Prezzi di materie, pacchetti e videocorsi | Ripetizioni di Analisi',
     prezziSommario: "Un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. L'accesso resta tuo, su un massimo di 3 dispositivi.",
     acquistoUnico: 'acquisto unico', cosaComprende: "Che cosa comprende l'accesso completo",
     comprende: [
@@ -196,7 +203,7 @@ export const TESTI = {
     nomeSito: 'Ripetizioni di Analisi',
     sezioni: { teoria: 'Theory', 'esercizi-svolti': 'Worked examples', esercizi: 'Exercises' } as Record<string, string>,
     indice: 'Contents', chiudi: 'Close', cerca: 'Search', accedi: 'Log in', account: 'Account', ilTuoAccount: 'Your account',
-    sbloccata: 'Unlocked', materie: 'Subjects', altreMaterie: 'other subjects', contatti: 'Contact and support', chiSono: 'About me', prezzi: 'Prices', privacy: 'Privacy policy', termini: 'Terms and copyright',
+    sbloccata: 'Unlocked', materie: 'Subjects', altreMaterie: 'other subjects', contatti: 'Contact and support', chiSono: 'About me', prezzi: 'Prices', privacy: 'Privacy policy', termini: 'Terms and copyright', rimborsi: 'Refund policy',
     copyright: '© 2026 Carmine Tornincasa · VAT no. 04779350612. All rights reserved. Reproduction or distribution, in whole or in part, is prohibited without written permission.',
     notaTermini: 'By purchasing you accept the <a href="/en/termini">terms of use</a>: access is personal and the material may not be shared or distributed.',
     precedente: 'Previous', successivo: 'Next', argomentoSuccessivo: 'Next topic', tornaSu: 'Back to top',
@@ -226,14 +233,15 @@ export const TESTI = {
     scheda: 'Sheet', esercizio: 'Exercise', esercizioDaFare: 'Exercise', tutteLeSchede: 'All sheets', tuttiDaFare: 'All exercises',
     teoriaUsata: 'Theory used', vaiA: 'Go to', indiceArgomenti: 'List of topics',
     sbloccaTitolo: (m: string) => `Unlock ${m}`,
-    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, worked examples and solutions.`,
+    sbloccaDescrizione: (m: string) => `Full access to ${m}: theory, all the worked examples and the solutions. One-time payment, no subscription, no expiry.`,
+    sbloccaSeo: (m: string) => `${m}: full access to theory and solved problems`,
     sbloccaSommario: 'A one-time purchase, no subscription: the subject stays unlocked in your account, on up to 3 devices, with no expiry.',
     includeTeoria: (n: number) => `The <strong>complete theory</strong> of all ${n} topics, with definitions, theorems and proofs`,
     includeSvolti: (n: number) => `All <strong>${n} sheets of worked examples</strong> by type, with every step explained`,
     includeSoluzioni: (n: number) => `The <strong>solutions</strong> of the ${n} exercises`,
     unaVoltaSola: 'one-time', unMomento: 'One moment…',
     gratisOra: 'Free, with no account: the beginning of the theory and the first 3 worked examples of each topic.',
-    metodiPagamento: 'You can pay by card, PayPal, Apple Pay, Google Pay or the other methods shown in the payment window. Payment is handled by Paddle, which sends the receipt.',
+    metodiPagamento: 'Pay by card or another method available at Stripe Checkout. We will email you an order confirmation.',
     almenoOtto: 'at least 8 characters',
     js: {
       creaESblocca: 'Create an account and unlock', haiAccount: 'Already have an account?', accedi: 'Log in',
@@ -244,7 +252,6 @@ export const TESTI = {
       sbloccaOra: 'Unlock now', acquistoCollegato: (email: string) => `Purchase linked to your account ${email}.`,
       pagamentoRicevuto: 'Payment received. Unlocking the subject in your account…',
       sbloccoLento: 'Payment received. Unlocking is taking a little longer: reload the page shortly, or message me from the Contact page.',
-      paddleNonCaricato: 'The payment form did not load. Reload the page or message me from the Contact page.',
       emailNonValida: 'Enter a valid email address.', passwordCorta: 'The password must be at least 8 characters long.',
       passwordDiverse: 'The two passwords do not match.', erroreGenerico: 'Something went wrong. Please try again.',
       connessione: 'No connection. Try again in a moment.', creaAccount: 'Create account',
@@ -271,7 +278,8 @@ export const TESTI = {
     argomento: 'Topic',
     contattiDescrizione: 'Contacts for information about the material, help with purchases and error reports.',
     contattiTesto: 'For information about the study material, help with purchases or to report errors, you can contact:',
-    prezziDescrizione: 'Prices of full access to the subjects of Ripetizioni di Analisi.',
+    prezziDescrizione: 'Prices of full access to each subject on Ripetizioni di Analisi: theory, worked examples and solutions. One-time payment, no subscription, no expiry.',
+    prezziTitolo: 'Prices: one-time payment per subject | Ripetizioni di Analisi',
     prezziSommario: 'One purchase per subject, with no subscription and no renewals. Access stays yours, on up to 3 devices.',
     acquistoUnico: 'one-time purchase', cosaComprende: 'What full access includes',
     comprende: [
@@ -281,10 +289,10 @@ export const TESTI = {
     ],
   },
 };
-export type Testi = (typeof TESTI)['it'];
-export const T = (l: Lingua) => TESTI[l] as Testi;
+export type Testi = typeof TESTI.it;
+export const T = (l: Lingua): Testi => l === 'es' ? TESTI_ES : l === 'de' ? TESTI_DE : TESTI[l];
 // I soli testi che servono agli script nel browser (le funzioni non passano: si usano i segnaposto).
 export function testiJs(l: Lingua) {
-  const j = TESTI[l].js as Record<string, unknown>;
+  const j = T(l).js as Record<string, unknown>;
   return Object.fromEntries(Object.entries(j).map(([k, v]) => [k, typeof v === 'function' ? (v as (x: string) => string)('§') : v]));
 }

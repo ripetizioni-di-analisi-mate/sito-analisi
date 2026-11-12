@@ -1,11 +1,14 @@
-// Dashboard riservata (/admin): pagina unica con viste a schede (panoramica, studenti, vendite, traffico, strumenti).
+// Dashboard riservata (/admin): pagina unica con viste a schede.
 // I dati arrivano da /admin/api/*; il codice del browser è la funzione `cliente`, inserita nella pagina come sorgente.
+import { TIPI_EMAIL } from './storico-email.mjs';
 
 const ICONE = {
   panoramica: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/>',
   studenti: '<path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"/><circle cx="10" cy="8" r="3.5"/><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.6-3.4M15.5 4.6a3.5 3.5 0 0 1 0 6.8"/>',
+  leghe: '<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4m-4 2v5m-4 1h8"/>',
   vendite: '<path d="M17.5 6.5A7 7 0 1 0 17.5 17.5"/><path d="M4 10.5h9M4 13.5h9"/>',
   traffico: '<path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 3 5-6"/>',
+  email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
   strumenti: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L4 16.7V20h3.3l5.3-5.3a4 4 0 0 0 5.1-5.4l-2.4 2.4-2.4-.6-.6-2.4z"/>',
   aggiorna: '<path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/>',
   esci: '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 16l4-4-4-4M14 12H4"/>',
@@ -18,7 +21,7 @@ const icona = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" st
 
 export function paginaAdmin(aPagamento, materie) {
   const info = materie.map((m) => ({ slug: m.slug, titolo: m.titolo, breve: m.breve, colore: m.colore, prezzo: m.prezzo, argomenti: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve])) }));
-  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['strumenti', 'Strumenti']];
+  const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['leghe', 'Leghe'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['email', 'Email automatiche'], ['strumenti', 'Strumenti']];
   const nav = viste.map(([id, t]) => `<a href="#${id}" data-vista="${id}">${icona(id)}<span>${t}</span></a>`).join('');
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex"><meta name="theme-color" content="#1c2625">
@@ -151,6 +154,16 @@ main{padding:1.4rem clamp(16px,3vw,2.2rem) 3rem;min-width:0}
 .filtro small{font-weight:400;opacity:.75;margin-left:.2rem}
 select.scelta{border:1px solid var(--riga);border-radius:9px;padding:.38rem .6rem;background:var(--pannello)}
 .tabella{overflow-x:auto}
+.tabella-email-giorni{max-height:16rem;overflow:auto}
+.tabella-email-giorni th{position:sticky;top:0}
+.promo-campi{display:grid;gap:.75rem;border:0;padding:0;margin:0;min-width:0}
+.promo-scelte{align-items:end;gap:.75rem}
+.promo-scelte .campo{flex:1 1 12rem;min-width:0}
+.promo-scelte .campo:has(input[type=number]){flex:0 1 8rem}
+.promo-lista{display:grid;max-height:15rem;overflow:auto;border:1px solid var(--riga);border-radius:9px;padding:.55rem .75rem}
+.promo-lista label{display:flex;gap:.45rem;align-items:baseline;padding:.3rem 0;overflow-wrap:anywhere}
+#promo-frame{width:100%;height:490px;border:1px solid var(--riga);border-radius:9px}
+.tabella-email-invii td:nth-child(3),.tabella-email-invii td:nth-child(4){overflow-wrap:anywhere;min-width:9rem}
 table{border-collapse:collapse;width:100%;font-size:.9rem}
 th{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);font-weight:700;text-align:left;padding:.55rem 1.2rem;border-bottom:1px solid var(--riga);white-space:nowrap;background:var(--pannello-2)}
 th[data-ordina]{cursor:pointer;user-select:none}
@@ -181,6 +194,12 @@ td.destra,th.destra{text-align:right}
 .chip.attesa{background:color-mix(in srgb,var(--giu) 12%,transparent);color:var(--giu)}
 .chip.fonte-instagram{background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af);color:#fff}
 .chip.corso{background:color-mix(in srgb,#7a5fb0 16%,transparent);color:#7a5fb0}
+.leghe-periodo{display:flex;gap:.65rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.leghe-periodo label,.leghe-gruppo label{display:flex;gap:.55rem;align-items:center;font-size:.88rem;font-weight:600}
+.leghe-gruppo{display:flex;align-items:center;gap:.5rem 1.2rem;flex-wrap:wrap;padding:.65rem 1.2rem .85rem}
+.leghe-gruppo select{min-width:0;max-width:100%}
+.leghe-kpi .kpi{padding-bottom:1rem}
+.leghe-classifica td:nth-child(2){overflow-wrap:anywhere}
 .corso-dichiarato{border:1px solid color-mix(in srgb,#7a5fb0 35%,transparent);background:color-mix(in srgb,#7a5fb0 7%,transparent);border-radius:12px;padding:.75rem .9rem}
 .corso-dichiarato p{margin:.2rem 0 0}
 .puntini{display:flex;gap:.25rem;flex-wrap:wrap}
@@ -248,7 +267,7 @@ td.destra,th.destra{text-align:right}
   .app{grid-template-columns:minmax(0,1fr)}
   .lato{position:fixed;top:auto;bottom:0;left:0;right:0;height:auto;flex-direction:row;padding:.35rem max(8px,env(safe-area-inset-left,0px)) calc(.35rem + env(safe-area-inset-bottom,0px));z-index:15;gap:0}
   .lato .marchio,.lato .fondo-lato{display:none}
-  .lato nav{grid-auto-flow:column;grid-auto-columns:1fr;width:100%}
+  .lato nav{grid-auto-flow:column;grid-auto-columns:minmax(4.25rem,1fr);width:100%;overflow-x:auto}
   .lato a{flex-direction:column;gap:.15rem;font-size:.7rem;padding:.4rem .2rem;text-align:center}
   main{padding-bottom:6rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
   .testa h1{font-size:1.3rem}
@@ -297,26 +316,29 @@ td.destra,th.destra{text-align:right}
 <aside class="cassetto" id="cassetto" aria-hidden="true" role="dialog" aria-label="Scheda dello studente"></aside>
 <div class="toast" id="toast" role="status"></div>
 <script>var __name = function (f) { return f; };
-(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)});</script>
+(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)});</script>
 </body></html>`;
 }
 
 // ---------------------------------------------------------------------------
 // Codice eseguito nel browser. Non usa variabili esterne: riceve i dati come argomenti.
 // Il bundler di Wrangler può inserire chiamate a __name nel sorgente: la pagina ne definisce una versione vuota.
-function cliente(MATERIE, A_PAGAMENTO) {
+function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   const M = Object.fromEntries(MATERIE.map((m) => [m.slug, m]));
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const nf = new Intl.NumberFormat('it-IT');
   const eur = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
-  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', vendite: 'Vendite', traffico: 'Traffico', strumenti: 'Strumenti' };
+  const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', leghe: 'Leghe', vendite: 'Vendite', traffico: 'Traffico', email: 'Email automatiche', strumenti: 'Strumenti' };
   const COL = { acc: 'var(--acc)', avviso: 'var(--avviso)', su: 'var(--su)', ink3: 'var(--ink-3)' };
   const COLORI_FONTI = { Instagram: 'var(--c6)', Google: '#4285f4', 'Diretto o app': '#8b9593', WhatsApp: '#25a35a', Facebook: '#1877f2', TikTok: '#111', Bing: '#00809d', ChatGPT: '#10a37f' };
 
   let D = null, giorni = 30, vista = 'panoramica', aggiornato = null, inCorso = false;
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
+  const statoLeghe = { dati: null, settimana: '', gruppo: '', mostraBot: false, caricamento: false, errore: false };
+  const filtriEmail = { giorni: '30', giorno: '', tipo: '', pagina: 1 };
+  let pannelloPromo = null;
   try { const g = Number(localStorage.getItem('dash-giorni')); if ([7, 30, 90].includes(g)) giorni = g; } catch {}
 
   // ---------- utilità di data ----------
@@ -354,6 +376,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
     return r.json();
   }
   async function carica(silenzioso) {
+    if (vista === 'leghe' && D && !$('#app').hidden) return caricaLeghe();
     if (inCorso) return; inCorso = true;
     const b = $('#aggiorna'); b.classList.add('ruota');
     try {
@@ -362,8 +385,35 @@ function cliente(MATERIE, A_PAGAMENTO) {
       disegna(); if (stato.aperto) apriStudente(stato.aperto, true);
     } catch (e) { if (!silenzioso && e.message !== '401') avviso('Impossibile aggiornare i dati'); }
     finally { inCorso = false; b.classList.remove('ruota'); segnaAggiornato(); }
+    if (vista === 'leghe' && !$('#app').hidden) await caricaLeghe();
   }
-  function segnaAggiornato() { if (aggiornato) $('#stato-agg').textContent = 'Aggiornato alle ' + aggiornato.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }); }
+  async function caricaLeghe(settimana = statoLeghe.settimana) {
+    if (statoLeghe.caricamento) return;
+    statoLeghe.caricamento = true;
+    const selettore = $('#settimana-lega');
+    if (selettore) selettore.disabled = true;
+    segnaAggiornato();
+    try {
+      const dati = await api('leghe' + (settimana ? '?settimana=' + encodeURIComponent(settimana) : ''));
+      if (dati.errore) throw new Error(dati.errore);
+      statoLeghe.dati = dati;
+      statoLeghe.settimana = dati.settimana === dati.corrente ? '' : dati.settimana;
+      statoLeghe.errore = false;
+    } catch (e) { if (e.message !== '401') statoLeghe.errore = true; }
+    finally {
+      statoLeghe.caricamento = false;
+      if (vista === 'leghe' && !$('#app').hidden) { leghe(); segnaAggiornato(); }
+    }
+  }
+  function segnaAggiornato() {
+    const legheAttive = vista === 'leghe';
+    const dataLeghe = statoLeghe.dati ? new Date(statoLeghe.dati.aggiornato) : null;
+    const data = legheAttive ? dataLeghe : aggiornato;
+    let testo = data ? 'Aggiornato alle ' + data.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }) : 'Caricamento…';
+    if (legheAttive && statoLeghe.caricamento) testo = 'Aggiornamento…';
+    else if (legheAttive && statoLeghe.errore) testo = 'Aggiornamento non riuscito';
+    $('#stato-agg').textContent = testo;
+  }
   function mostraLogin() { $('#app').hidden = true; $('#login').hidden = false; setTimeout(() => $('#pw').focus(), 50); }
 
   // ---------- dati derivati ----------
@@ -480,8 +530,9 @@ function cliente(MATERIE, A_PAGAMENTO) {
     $('#titolo-vista').textContent = VISTE[vista];
     $$('.lato a').forEach((a) => a.classList.toggle('attiva', a.dataset.vista === vista));
     $$('.segmenti button').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.giorni) === giorni)));
-    $('.segmenti').hidden = vista === 'strumenti';
-    ({ panoramica, studenti, vendite, traffico, strumenti })[vista]();
+    $('.segmenti').hidden = vista === 'strumenti' || vista === 'leghe' || vista === 'email';
+    ({ panoramica, studenti, leghe, vendite, traffico, email, strumenti })[vista]();
+    segnaAggiornato();
   }
 
   function panoramica() {
@@ -641,6 +692,53 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
   function collegaCopia(r) { $$('[data-copia]', r).forEach((b) => b.addEventListener('click', () => { navigator.clipboard.writeText(b.dataset.copia).then(() => avviso('Copiata'), () => avviso('Selezionala e copiala a mano')); })); }
 
+  function leghe() {
+    const d = statoLeghe.dati;
+    if (!d) {
+      $('#vista').innerHTML = '<section class="card"><div class="vuoto" role="status">' +
+        (statoLeghe.errore ? 'Impossibile caricare le leghe. Usa Aggiorna per riprovare.' : 'Caricamento delle classifiche…') + '</div></section>';
+      return;
+    }
+    const corrente = d.settimana === d.corrente;
+    const membri = d.gruppi.flatMap((g) => g.membri).filter((m) => !m.bot);
+    const totaleExp = somma(membri.map((m) => m.exp));
+    const riepilogo = d.leghe.map((nome, i) => {
+      const gruppi = d.gruppi.filter((g) => g.lega === i);
+      return { nome, valore: somma(gruppi.map((g) => g.studenti)), extra: '<small>' + gruppi.length + (gruppi.length === 1 ? ' gruppo' : ' gruppi') + '</small>' };
+    }).filter((r) => r.valore);
+    const gruppo = d.gruppi.find((g) => g.id === statoLeghe.gruppo) || d.gruppi[0];
+    const mostraBot = statoLeghe.mostraBot;
+    const periodo = d.settimane.map(({ inizio, fine }) => '<option value="' + (inizio === d.corrente ? '' : esc(inizio)) + '"' +
+      (inizio === d.settimana ? ' selected' : '') + '>' + breveData(inizio) + ' – ' + breveData(fine) + '/' + fine.slice(0, 4) + '</option>').join('');
+    const zone = { sale: '<span class="chip pagante">Promozione</span>', scende: '<span class="chip attesa">Retrocessione</span>' };
+    const card = (nome, valore) => '<div class="card kpi"><span class="etichetta">' + nome + '</span><b>' + nf.format(valore) + '</b></div>';
+    $('#vista').innerHTML = '<div class="leghe-periodo"><label>Settimana <select class="scelta" id="settimana-lega"' +
+      (statoLeghe.caricamento ? ' disabled' : '') + '>' + periodo + '</select></label>' +
+      '<span class="chip' + (corrente ? ' pagante' : '') + '">' + (corrente ? 'In corso' : 'Conclusa') + '</span></div>' +
+      '<div class="kpi-riga leghe-kpi">' + card('Studenti', membri.length) + card('Gruppi attivi', d.gruppi.length) + card('EXP degli studenti', totaleExp) +
+      card('In zona promozione', membri.filter((m) => m.zona === 'sale').length) + card('In zona retrocessione', membri.filter((m) => m.zona === 'scende').length) + '</div>' +
+      (gruppo ? '<div class="due"><section class="card"><header><h2>Classifica per gruppo</h2><span class="nota">' + nf.format(gruppo.membri.length) + (gruppo.membri.length === 1 ? ' partecipante' : ' partecipanti') +
+        (mostraBot ? ' · ' + nf.format(gruppo.membri.length - gruppo.studenti) + ' bot' : '') + '</span></header>' +
+        '<div class="leghe-gruppo"><label>Gruppo <select class="scelta" id="gruppo-lega">' + d.gruppi.map((g) => '<option value="' + esc(g.id) + '"' + (g.id === gruppo.id ? ' selected' : '') + '>' +
+          esc(d.leghe[g.lega]) + ' · Gruppo ' + nf.format(g.numero) + '</option>').join('') + '</select></label>' +
+        '<label><input type="checkbox" id="mostra-bot-lega" aria-controls="classifica-gruppo"' + (mostraBot ? ' checked' : '') + '> Mostra i bot</label></div>' +
+        '<div class="tabella"><table class="leghe-classifica" id="classifica-gruppo" aria-label="Classifica del gruppo"><thead><tr><th scope="col">Pos.</th><th scope="col">Partecipante</th><th scope="col" class="destra">EXP</th><th scope="col">Zona</th></tr></thead><tbody>' +
+        gruppo.membri.map((m, i) => '<tr><td class="cifra">' + nf.format(i + 1) + '</td><td>' + esc(m.nome) + (mostraBot && m.bot ? ' <span class="chip">Bot</span>' : '') + '</td><td class="destra cifra">' + nf.format(m.exp) + '</td><td>' + (zone[m.zona] || '—') + '</td></tr>').join('') +
+        '</tbody></table></div></section><section class="card"><header><h2>Studenti per lega</h2></header><div class="corpo">' + barre(riepilogo, { quota: false }) + '</div></section></div>' :
+        '<section class="card"><div class="vuoto"><b>Nessun partecipante questa settimana</b>Gli studenti entrano in un gruppo quando guadagnano i primi EXP della settimana.</div></section>');
+    $('#settimana-lega').addEventListener('change', (e) => caricaLeghe(e.target.value));
+    $('#gruppo-lega')?.addEventListener('change', (e) => {
+      statoLeghe.gruppo = e.target.value;
+      leghe();
+      $('#gruppo-lega').focus();
+    });
+    $('#mostra-bot-lega')?.addEventListener('change', (e) => {
+      statoLeghe.mostraBot = e.target.checked;
+      leghe();
+      $('#mostra-bot-lega').focus();
+    });
+  }
+
   function vendite() {
     const g = elencoGiorni(giorni), inc = serie('incasso', giorni), incp = serie('incasso', giorni, giorni), ve = serie('vendite', giorni), vep = serie('vendite', giorni, giorni);
     const inizio = g[0]; const nel = D.acquisti.filter((a) => a.creato.slice(0, 10) >= inizio);
@@ -651,13 +749,13 @@ function cliente(MATERIE, A_PAGAMENTO) {
       kpi('Vendite', nf.format(somma(ve)), somma(ve), somma(vep), ve, 'var(--c4)') +
       '<div class="card kpi"><span class="etichetta">Scontrino medio</span><b>' + (nel.length ? eur.format(medio) : '—') + '</b><span class="delta pari">' + giorni + ' giorni</span></div>' +
       '<div class="card kpi"><span class="etichetta">Incasso da sempre</span><b>' + eur.format(somma(D.totali.map((t) => t.incasso || 0))) + '</b><span class="delta pari">' + nf.format(somma(D.totali.map((t) => t.vendite))) + ' vendite in tutto</span></div></div>' +
-      '<div class="due"><section class="card"><header><h2>Incasso giornaliero</h2><span class="nota">lordo, IVA e commissioni Paddle comprese</span></header><div class="corpo"><div class="grafico" id="g-incasso"></div></div></section>' +
+      '<div class="due"><section class="card"><header><h2>Incasso giornaliero</h2><span class="nota">importi lordi prima dei rimborsi e delle commissioni</span></header><div class="corpo"><div class="grafico" id="g-incasso"></div></div></section>' +
       '<section class="card"><header><h2>Per materia</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(A_PAGAMENTO.map((m) => ({ nome: breveMateria(m), valore: Math.round(((perM[m] || {}).e || 0) * 100) / 100, colore: M[m].colore, extra: '' })).filter((r) => r.valore > 0).sort((a, b) => b.valore - a.valore), { formato: (x) => eur.format(x), vuoto: 'Nessuna vendita nel periodo' }) +
       '<p class="nota" style="margin:1rem 0 .3rem">Prezzi attuali</p><div class="scelte">' + A_PAGAMENTO.map((m) => '<span class="chip"><i class="punto" style="background:' + M[m].colore + '"></i>' + esc(breveMateria(m)) + ' · ' + (M[m].prezzo ? eur.format(M[m].prezzo) : '—') + '</span>').join('') + '</div></div></section></div>' +
-      '<section class="card"><header><h2>Pagamenti</h2><span class="nota">' + nf.format(D.acquisti.length) + ' in tutto</span></header><div class="tabella"><table><thead><tr><th>Data</th><th>Studente</th><th>Materia</th><th class="destra">Importo</th><th class="solo-largo">Transazione</th></tr></thead><tbody>' +
-      (D.acquisti.length ? D.acquisti.map((a) => '<tr class="cliccabile" data-email="' + esc(a.email) + '"><td>' + dataOra(a.creato) + '</td><td>' + esc(a.email) + '</td><td><i class="punto" style="background:' + (M[a.materia] || {}).colore + ';margin-right:.4rem"></i>' + esc(breveMateria(a.materia)) + '</td><td class="destra cifra"><b>' + eur.format(a.importo) + '</b></td><td class="nota solo-largo">' + esc(a.transazione) + '</td></tr>').join('') :
-        '<tr><td colspan="5"><div class="vuoto"><b>Nessun pagamento ancora</b>Le vendite arrivano qui appena Paddle conferma il pagamento.</div></td></tr>') + '</tbody></table></div></section>';
+      '<section class="card"><header><h2>Pagamenti</h2><a class="bottone" href="/admin/vendite-stripe">Fatture e rimborsi Stripe</a><span class="nota">' + nf.format(D.acquisti.length) + ' in tutto</span></header><div class="tabella"><table><thead><tr><th>Data</th><th>Studente</th><th>Materia</th><th class="destra">Importo</th><th class="solo-largo">Transazione</th></tr></thead><tbody>' +
+      (D.acquisti.length ? D.acquisti.map((a) => '<tr class="cliccabile" data-email="' + esc(a.email) + '"><td>' + dataOra(a.creato) + '</td><td>' + esc(a.email) + '</td><td><i class="punto" style="background:' + (M[a.materia] || {}).colore + ';margin-right:.4rem"></i>' + esc(breveMateria(a.materia)) + '</td><td class="destra cifra"><b>' + eur.format(a.importo) + '</b></td><td class="nota solo-largo">' + (String(a.transazione).startsWith('pi_') ? 'Stripe · ' : String(a.transazione).startsWith('txn_') ? 'Paddle · ' : '') + esc(a.transazione) + '</td></tr>').join('') :
+        '<tr><td colspan="5"><div class="vuoto"><b>Nessun pagamento ancora</b>Le vendite compaiono dopo la conferma del pagamento.</div></td></tr>') + '</tbody></table></div></section>';
     grafico($('#g-incasso'), g, [{ nome: 'Incasso', valori: inc, colore: 'var(--c5)', formato: (x) => eur.format(x) }], { id: 'inc', euro: true, titolo: 'Incasso giornaliero' });
   }
 
@@ -699,6 +797,321 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<p class="nota" style="margin:.8rem 0 0">Per sapere quale post porta visite, nel link del carosello aggiungi in fondo <b>?utm_source=ig&amp;utm_campaign=nome-del-post</b> (solo lettere minuscole, numeri e trattini).</p></div></section>';
   }
 
+  function pannelloPromozioni() {
+    const pannello = document.createElement('section');
+    pannello.className = 'card';
+    pannello.innerHTML =
+      '<header><h2>Promozioni via email</h2><button class="bottone" type="button" id="promo-apri" aria-expanded="false" aria-controls="promo-form">Crea promozione</button></header>' +
+      '<form class="corpo modulo" id="promo-form" hidden>' +
+      '<fieldset class="promo-campi"><div class="azioni promo-scelte">' +
+      '<label class="campo">Materia da promuovere<select class="scelta" id="promo-materia" required><option value="">Scegli la materia</option></select></label>' +
+      '<label class="campo">Materia già attiva<select class="scelta" id="promo-origine"><option value="">Ultima materia attivata</option></select></label>' +
+      '<label class="campo">Sconto (%)<input id="promo-sconto" type="number" min="1" max="99" step="1" required placeholder="20"></label></div>' +
+      '<label class="campo">Destinatari<input id="promo-cerca" type="search" placeholder="Cerca per nome o email"></label>' +
+      '<p class="nota" style="margin:0">Compaiono gli studenti che hanno confermato di voler ricevere offerte, hanno una materia attiva e possono ancora acquistare quella proposta.</p>' +
+      '<div class="promo-lista" id="promo-lista">Scegli la materia da promuovere.</div>' +
+      '<div class="scelte" id="promo-scelti"></div>' +
+      '<div class="azioni"><button class="bottone" type="submit" id="promo-anteprima">Prepara anteprima</button></div></fieldset>' +
+      '<p class="nota" id="promo-esito" role="status" style="margin:0"></p>' +
+      '<div id="promo-riepilogo" hidden><div class="azioni promo-scelte">' +
+      '<label class="campo">Anteprima per<select class="scelta" id="promo-modello"></select></label>' +
+      '<button class="bottone primario" type="button" id="promo-invia">Invia promozione</button></div>' +
+      '<p id="promo-oggetto"></p><iframe id="promo-frame" title="Anteprima della promozione" sandbox></iframe></div></form>';
+    const campo = (id) => $('#promo-' + id, pannello);
+    const form = campo('form'), campi = $('fieldset', form), apri = campo('apri');
+    const materia = campo('materia'), origine = campo('origine'), sconto = campo('sconto'), cerca = campo('cerca');
+    const lista = campo('lista'), scelte = campo('scelti'), esito = campo('esito'), prepara = campo('anteprima');
+    const riepilogo = campo('riepilogo'), modello = campo('modello'), invia = campo('invia');
+    const selezionati = new Map();
+    let catalogo = false, candidati = [], richiesta = 0, revisione = 0, bozza = null, occupato = false, massimo = 0;
+    prepara.disabled = true;
+
+    function invalida() {
+      revisione++;
+      bozza = null;
+      riepilogo.hidden = true;
+      esito.textContent = '';
+      prepara.disabled = !materia.value || !selezionati.size || occupato;
+    }
+    function disegnaLista() {
+      const filtro = cerca.value.trim().toLocaleLowerCase('it');
+      const visibili = candidati.filter((r) => [r.email, r.nome].some((s) => s?.toLocaleLowerCase('it').includes(filtro)));
+      lista.innerHTML = visibili.length ? visibili.map((r) =>
+        '<label><input type="checkbox" value="' + esc(r.email) + '"' + (selezionati.has(r.email) ? ' checked' : '') + '> ' +
+        '<span><b>' + esc(r.nome || r.email) + '</b> <span class="nota">' +
+        esc((r.nome ? r.email + ' · ' : '') + r.origine) + '</span></span></label>').join('') :
+        (materia.value ? 'Nessun destinatario disponibile.' : 'Scegli la materia da promuovere.');
+      scelte.innerHTML = [...selezionati.values()].map((r) =>
+        '<button class="filtro" type="button" data-promo-rimuovi="' + esc(r.email) + '" aria-label="Rimuovi ' +
+        esc(r.email) + '">' + esc(r.nome || r.email) + ' ×</button>').join('');
+      prepara.textContent = selezionati.size ? 'Prepara anteprima (' + selezionati.size + ')' : 'Prepara anteprima';
+    }
+    async function aggiornaCandidati() {
+      const numero = ++richiesta;
+      if (origine.value === materia.value) origine.value = '';
+      selezionati.clear();
+      candidati = [];
+      invalida();
+      disegnaLista();
+      if (!materia.value) return;
+      lista.textContent = 'Caricamento destinatari…';
+      try {
+        const r = await api('email-promo/candidati?' + new URLSearchParams({ materia: materia.value, origine: origine.value }));
+        if (numero !== richiesta) return;
+        if (!Array.isArray(r.destinatari)) throw new Error(r.errore || 'Dati non disponibili.');
+        candidati = r.destinatari;
+        disegnaLista();
+      } catch (e) { if (numero === richiesta) lista.textContent = e.message === '401' ? 'Accedi alla dashboard.' : e.message; }
+    }
+
+    apri.addEventListener('click', async () => {
+      form.hidden = !form.hidden;
+      apri.setAttribute('aria-expanded', String(!form.hidden));
+      if (form.hidden || catalogo) return;
+      apri.disabled = true;
+      campi.disabled = true;
+      esito.textContent = 'Caricamento…';
+      try {
+        const r = await api('email-promo/catalogo');
+        if (!r.disponibile) throw new Error(r.errore || 'Invio delle promozioni o pagamento Stripe non disponibile.');
+        const opzioni = r.materie.map((m) => '<option value="' + esc(m.slug) + '">' + esc(m.titolo) + '</option>').join('');
+        materia.insertAdjacentHTML('beforeend', opzioni);
+        origine.insertAdjacentHTML('beforeend', opzioni);
+        massimo = r.massimoDestinatari;
+        catalogo = true;
+        campi.disabled = false;
+        esito.textContent = '';
+      } catch (e) { esito.textContent = e.message; }
+      finally { apri.disabled = false; }
+    });
+    materia.addEventListener('change', aggiornaCandidati);
+    origine.addEventListener('change', aggiornaCandidati);
+    cerca.addEventListener('input', disegnaLista);
+    sconto.addEventListener('input', invalida);
+    lista.addEventListener('change', (e) => {
+      const input = e.target;
+      if (!input.matches('input[type=checkbox]')) return;
+      if (input.checked && selezionati.size >= massimo) {
+        input.checked = false;
+        esito.textContent = 'Puoi selezionare fino a ' + massimo + ' destinatari per invio.';
+        return;
+      }
+      if (input.checked) selezionati.set(input.value, candidati.find((r) => r.email === input.value));
+      else selezionati.delete(input.value);
+      invalida();
+      disegnaLista();
+      [...lista.querySelectorAll('input')].find((el) => el.value === input.value)?.focus();
+    });
+    scelte.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-promo-rimuovi]');
+      if (!b) return;
+      selezionati.delete(b.dataset.promoRimuovi);
+      invalida();
+      disegnaLista();
+    });
+    function mostraModello() {
+      const m = bozza.modelli[Number(modello.value)];
+      campo('oggetto').textContent = m.subject;
+      campo('frame').srcdoc = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; img-src https://ripetizionidianalisi.com">' + m.html;
+    }
+    modello.addEventListener('change', mostraModello);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!selezionati.size || occupato) return;
+      invalida();
+      const versione = revisione;
+      occupato = true;
+      prepara.disabled = true;
+      esito.textContent = 'Preparazione…';
+      try {
+        const r = await api('email-promo/anteprima', {
+          materia: materia.value, origine: origine.value, percentuale: Number(sconto.value), emails: [...selezionati.keys()],
+        });
+        if (versione !== revisione) return;
+        if (!r.token || !r.modelli?.length) throw new Error(r.errore || 'Anteprima non disponibile.');
+        bozza = { ...r, materia: materia.selectedOptions[0].text, percentuale: sconto.value };
+        modello.innerHTML = r.modelli.map((m, i) =>
+          '<option value="' + i + '">' + esc(m.email + ' · ' + m.origine) + '</option>').join('');
+        esito.textContent = '';
+        riepilogo.hidden = false;
+        mostraModello();
+        modello.focus();
+      } catch (e) { if (versione === revisione) esito.textContent = e.message; }
+      finally { occupato = false; prepara.disabled = !materia.value || !selezionati.size; }
+    });
+    invia.addEventListener('click', async () => {
+      const daInviare = bozza;
+      if (!daInviare || occupato) return;
+      const n = daInviare.modelli.length;
+      occupato = true;
+      campi.disabled = invia.disabled = true;
+      try {
+        const ok = await conferma('Inviare la promozione?', daInviare.materia + ' con il ' + daInviare.percentuale + '% di sconto. ' +
+          (n === 1 ? 'Destinatario ' + daInviare.modelli[0].email : n + ' destinatari selezionati.') + ' L’offerta dura 7 giorni.', 'Invia');
+        if (!ok || !pannello.isConnected) return;
+        esito.textContent = 'Invio in corso…';
+        const r = await api('email-promo/invia', { token: daInviare.token });
+        if (!Number.isInteger(r.inviate)) throw new Error(r.errore || 'Invio non confermato.');
+        selezionati.clear();
+        invalida();
+        disegnaLista();
+        esito.textContent = r.inviate === 1 ? '1 promozione inviata.' : r.inviate + ' promozioni inviate.';
+        pannello.dispatchEvent(new Event('promozione-inviata', { bubbles: true }));
+      } catch (e) { esito.textContent = e.message; }
+      finally {
+        occupato = false;
+        campi.disabled = invia.disabled = false;
+        prepara.disabled = !materia.value || !selezionati.size;
+      }
+    });
+    return pannello;
+  }
+
+  function email() {
+    const modelli = {
+      'prima-prova': ['Prima prova', 'Dopo 2 giorni dall’iscrizione, prima di iniziare a studiare.'],
+      studio: ['Riprendi lo studio', 'Dopo 3 e 10 giorni di inattività.'],
+      'seconda-materia': ['Seconda materia', 'Analisi 1 → Analisi 2. Dopo 7 giorni, con il 15% di sconto.'],
+      lega: ['Sorpasso in lega', 'Quando cambia la posizione in classifica.'],
+    };
+    const formatoData = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeZone: 'Europe/Rome' });
+    const formatoOra = new Intl.DateTimeFormat('it-IT', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/Rome' });
+    const dataGiorno = (g) => formatoData.format(new Date(g + 'T12:00:00Z'));
+    $('#vista').innerHTML = '<div class="griglia">' +
+      '<div id="email-promozioni"></div>' +
+      '<section class="card"><header><h2>Flussi e risultati</h2><span class="nota">Ultimi 30 giorni</span></header><div class="corpo" id="email-flussi" role="status">Caricamento…</div></section>' +
+      '<section class="card"><header><h2>Invii giorno per giorno</h2><span class="nota">Ora italiana</span></header>' +
+      '<div class="strumenti-tab"><label for="email-periodo">Periodo</label><select class="scelta" id="email-periodo">' +
+      [7, 30, 90].map((n) => '<option value="' + n + '">Ultimi ' + n + ' giorni</option>').join('') +
+      '</select><label for="email-tipo">Tipologia</label><select class="scelta" id="email-tipo"><option value="">Tutte le tipologie</option>' +
+      Object.entries(TIPI_EMAIL).map(([tipo, nome]) => '<option value="' + esc(tipo) + '">' + esc(nome) + '</option>').join('') +
+      '</select></div><p class="nota" style="margin:.35rem 1.2rem .7rem" id="email-copertura"></p>' +
+      '<div class="tabella tabella-email-giorni"><table aria-label="Invii per giorno"><thead><tr><th scope="col">Giorno</th><th scope="col" class="destra">Invii</th><th scope="col">Tipologie</th></tr></thead>' +
+      '<tbody id="email-giorni"><tr><td colspan="3">Caricamento…</td></tr></tbody></table></div></section>' +
+      '<section class="card"><header><h2>Email inviate</h2><span id="email-totale" class="nota" role="status"></span></header>' +
+      '<div class="strumenti-tab"><label for="email-giorno">Giorno</label><select class="scelta" id="email-giorno"><option value="">Tutti i giorni del periodo</option></select></div>' +
+      '<div class="tabella tabella-email-invii"><table><thead><tr><th scope="col">Data e ora</th><th scope="col">Tipologia</th><th scope="col">Destinatario</th><th scope="col">Oggetto</th></tr></thead>' +
+      '<tbody id="email-invii"><tr><td colspan="4">Caricamento…</td></tr></tbody></table></div>' +
+      '<div class="strumenti-tab" id="email-pagine" hidden><button type="button" class="bottone" id="email-prev">Precedente</button>' +
+      '<span class="nota" id="email-pagina" role="status"></span><button type="button" class="bottone" id="email-next">Successiva</button></div></section>' +
+      '<section class="card"><header><h2>Anteprima dei messaggi</h2></header><div class="corpo">' +
+      '<div class="azioni"><label for="email-modello">Modello</label><select id="email-modello">' +
+      Object.entries(modelli).map(([id, m]) => '<option value="' + id + '">' + esc(m[0]) + '</option>').join('') + '</select>' +
+      '<button type="button" class="bottone" id="email-prova">Invia una prova al titolare</button><span class="nota" role="status" id="email-esito"></span></div>' +
+      '<iframe id="email-anteprima" title="Anteprima dell’email" sandbox style="width:100%;height:520px;border:1px solid var(--riga);border-radius:9px;margin-top:12px"></iframe></div></section></div>';
+    const flussi = $('#email-flussi'), modello = $('#email-modello'), frame = $('#email-anteprima');
+    const periodo = $('#email-periodo'), tipologia = $('#email-tipo'), giorno = $('#email-giorno');
+    const giornalieri = $('#email-giorni'), invii = $('#email-invii'), totale = $('#email-totale'), copertura = $('#email-copertura');
+    const pagine = $('#email-pagine'), precedente = $('#email-prev'), successiva = $('#email-next');
+    periodo.value = filtriEmail.giorni;
+    tipologia.value = filtriEmail.tipo;
+    let richiesta = 0;
+
+    async function caricaStorico() {
+      const corrente = ++richiesta;
+      totale.textContent = 'Caricamento…';
+      try {
+        const d = await api('email-storico?' + new URLSearchParams(filtriEmail));
+        if (corrente !== richiesta || !invii.isConnected) return;
+        if (!Array.isArray(d.invii)) throw new Error('Dati non disponibili');
+        const perGiorno = new Map(d.giorni.map((r) => [r.giorno, []]));
+        d.conteggi.forEach((r) => perGiorno.get(r.giorno).push(r));
+        giorno.innerHTML = '<option value="">Tutti i giorni del periodo</option>' +
+          d.giorni.map((r) => '<option value="' + esc(r.giorno) + '">' + esc(dataGiorno(r.giorno)) + '</option>').join('');
+        giorno.value = filtriEmail.giorno;
+        copertura.textContent = 'Il registro degli invii accettati da Resend è attivo dal ' +
+          formatoOra.format(d.copertura) + '. Per le date precedenti sono riportati gli invii recuperabili.';
+        giornalieri.innerHTML = d.giorni.map((r) => {
+          const dettagli = perGiorno.get(r.giorno);
+          const n = somma(dettagli.map((x) => x.n));
+          return '<tr><td><button type="button" class="filtro" data-email-giorno="' + esc(r.giorno) + '" aria-pressed="' +
+            String(filtriEmail.giorno === r.giorno) + '">' + esc(dataGiorno(r.giorno)) + '</button>' +
+            (r.parziale ? ' <span class="nota">Dati parziali</span>' : '') + '</td><td class="destra"><b>' +
+            (r.parziale && !n ? '—' : nf.format(n)) + '</b></td><td>' +
+            (dettagli.map((x) => '<span class="chip">' + esc(TIPI_EMAIL[x.tipo] || x.tipo) + ' · ' + nf.format(x.n) + '</span>').join('') || '—') + '</td></tr>';
+        }).join('');
+        totale.textContent = nf.format(d.totale) + (d.totale === 1 ? ' invio registrato' : ' invii registrati');
+        invii.innerHTML = d.invii.length ? d.invii.map((r) => '<tr><td>' +
+          esc(r.solo_data ? formatoData.format(r.inviato) : formatoOra.format(r.inviato)) + '</td><td>' +
+          esc(TIPI_EMAIL[r.tipo] || r.tipo) + '</td><td>' + esc(r.email) + '</td><td>' +
+          esc(r.oggetto || '—') + '</td></tr>').join('') :
+          '<tr><td colspan="4"><div class="vuoto">Nessun invio registrato per questi filtri.</div></td></tr>';
+        filtriEmail.pagina = d.pagina;
+        pagine.hidden = d.pagine <= 1;
+        precedente.disabled = d.pagina <= 1;
+        successiva.disabled = d.pagina >= d.pagine;
+        $('#email-pagina').textContent = 'Pagina ' + d.pagina + ' di ' + d.pagine;
+      } catch {
+        if (corrente !== richiesta || !invii.isConnected) return;
+        totale.textContent = 'Impossibile caricare lo storico.';
+        giornalieri.innerHTML = '<tr><td colspan="3">Dati non disponibili.</td></tr>';
+        invii.innerHTML = '<tr><td colspan="4">Dati non disponibili.</td></tr>';
+        pagine.hidden = true;
+      }
+    }
+
+    function filtraStorico(nuovi) {
+      Object.assign(filtriEmail, { pagina: 1 }, nuovi);
+      caricaStorico();
+    }
+    periodo.addEventListener('change', () => filtraStorico({ giorni: periodo.value, giorno: '' }));
+    tipologia.addEventListener('change', () => filtraStorico({ tipo: tipologia.value }));
+    giorno.addEventListener('change', () => filtraStorico({ giorno: giorno.value }));
+    giornalieri.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-email-giorno]');
+      if (b) filtraStorico({ giorno: filtriEmail.giorno === b.dataset.emailGiorno ? '' : b.dataset.emailGiorno });
+    });
+    precedente.addEventListener('click', () => filtraStorico({ pagina: filtriEmail.pagina - 1 }));
+    successiva.addEventListener('click', () => filtraStorico({ pagina: filtriEmail.pagina + 1 }));
+    const aggiornaAnteprima = () => { frame.src = '/admin/api/email-anteprima?tipo=' + encodeURIComponent(modello.value); };
+    modello.addEventListener('change', aggiornaAnteprima);
+    aggiornaAnteprima();
+    async function caricaStato() {
+      try {
+        const d = await api('email-stato');
+        if (!flussi.isConnected) return;
+        const nota = d.statoConsegne === 'permessi' ? 'La chiave di Resend può inviare ma non leggere lo stato delle consegne.' :
+          d.statoConsegne === 'ok' ? 'Le consegne sono verificate con Resend.' : 'Le consegne saranno verificate dopo i primi invii.';
+        flussi.innerHTML = '<p class="nota">' + nf.format(d.consensi || 0) + ' consensi confermati · ' + nf.format(d.revoche || 0) +
+          ' disiscrizioni o revoche · ' + esc(nota) + '</p><div class="tabella"><table><thead><tr><th>Flusso</th><th>Stato</th><th>Primo avvio registrato</th><th>In coda</th><th>Accettate</th><th>Consegnate</th><th>Errori</th><th>Acquisti</th></tr></thead><tbody>' +
+          d.flussi.map((f) => '<tr><td><strong>' + esc(modelli[f.tipo][0]) + '</strong><br><span class="nota">' + esc(modelli[f.tipo][1]) + '</span></td>' +
+            '<td><button type="button" class="bottone" data-email-flusso="' + f.tipo + '" aria-pressed="' + f.attivo + '"' +
+            (!f.disponibile ? ' disabled' : '') + '>' + (!f.disponibile ? 'Non disponibile' : f.attivo ? 'Attivo' : 'In pausa') + '</button></td>' +
+            '<td>' + (f.avvio ? esc(formatoOra.format(f.avvio)) : 'In attesa di rilevazione') + '</td>' +
+            [f.coda, f.inviate, d.statoConsegne === 'ok' ? (f.consegnate || 0) : null, f.errori, f.acquisti].map((n) => '<td>' + (n === null ? '—' : nf.format(n || 0)) + '</td>').join('') + '</tr>').join('') +
+          '</tbody></table></div>';
+      } catch { if (flussi.isConnected) flussi.textContent = 'Impossibile caricare lo stato degli invii.'; }
+    }
+    flussi.addEventListener('click', async (e) => {
+      const b = e.target.closest('[data-email-flusso]');
+      if (!b) return;
+      b.disabled = true;
+      try {
+        const r = await api('email-interruttore', { tipo: b.dataset.emailFlusso, attivo: b.getAttribute('aria-pressed') !== 'true' });
+        if (!r.ok) throw new Error('Salvataggio fallito');
+        await caricaStato();
+      } catch { avviso('Impossibile aggiornare il flusso'); }
+      finally { b.disabled = false; }
+    });
+    const prova = $('#email-prova'), esito = $('#email-esito');
+    prova.addEventListener('click', async () => {
+      const tipo = modello.value;
+      if (!(await conferma('Inviare un’email di prova?', 'Il modello «' + modelli[tipo][0] + '» sarà inviato all’indirizzo del titolare con dati di esempio.', 'Invia prova'))) return;
+      prova.disabled = true;
+      try {
+        const r = await api('email-prova', { tipo });
+        esito.textContent = r.ok ? 'Prova accettata da Resend.' : (r.errore || 'Invio di prova non riuscito.');
+        if (r.ok) caricaStorico();
+      } catch { esito.textContent = 'Invio di prova non riuscito.'; }
+      finally { prova.disabled = false; }
+    });
+    const spazioPromo = $('#email-promozioni');
+    spazioPromo.append(pannelloPromo ||= pannelloPromozioni());
+    spazioPromo.addEventListener('promozione-inviata', caricaStorico);
+    caricaStato();
+    caricaStorico();
+  }
+
   function strumenti() {
     $('#vista').innerHTML = '<section class="card" style="margin-bottom:1rem"><header><h2>Segnalazioni di errori</h2><span class="nota" id="s-conta"></span></header><div class="corpo" id="s-elenco"><p class="nota" style="margin:0">Caricamento…</p></div></section>' +
       '<div class="due pari">' +
@@ -719,7 +1132,7 @@ function cliente(MATERIE, A_PAGAMENTO) {
       '<div class="azioni" style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--riga)"><button type="button" class="bottone primario" id="p-tutti">Invia a tutti</button></div>' +
       '<p class="nota" style="margin:.4rem 0 0">A ogni iscritto che non ha disattivato i promemoria, a prescindere dai giorni. Oltre il limite giornaliero gli altri partono dal giorno dopo alle 17:30.</p><div id="esito-tutti"></div></div></section>' +
       '<section class="card"><header><h2>Collegamenti rapidi</h2></header><div class="corpo"><div class="azioni">' +
-      '<a class="bottone" href="https://vendors.paddle.com/transactions-v2" target="_blank" rel="noopener">Paddle · transazioni</a>' +
+      '<a class="bottone" href="/admin/vendite-stripe">Stripe · vendite digitali</a><a class="bottone" href="https://vendors.paddle.com/transactions-v2" target="_blank" rel="noopener">Paddle · storico transazioni</a>' +
       '<a class="bottone" href="https://vendors.paddle.com/payouts" target="_blank" rel="noopener">Paddle · pagamenti a te</a>' +
       '<a class="bottone" href="https://dash.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>' +
       '<a class="bottone" href="/" target="_blank" rel="noopener">Il sito</a></div></div></section></div>';
@@ -792,7 +1205,16 @@ function cliente(MATERIE, A_PAGAMENTO) {
   }
 
   // ---------- navigazione e avvio ----------
-  function daHash() { const h = location.hash.slice(1); vista = VISTE[h] ? h : 'panoramica'; if (D) disegna(); }
+  function daHash() {
+    const h = location.hash.slice(1);
+    const prima = vista;
+    vista = VISTE[h] ? h : 'panoramica';
+    if (!D) return;
+    disegna();
+    if ($('#app').hidden) return;
+    if (vista === 'leghe') caricaLeghe();
+    else if (prima === 'leghe' && Date.now() - aggiornato >= 180000) carica(true);
+  }
   window.addEventListener('hashchange', daHash);
   $$('.segmenti button').forEach((b) => b.addEventListener('click', () => { giorni = Number(b.dataset.giorni); try { localStorage.setItem('dash-giorni', giorni); } catch {} disegna(); }));
   $('#aggiorna').addEventListener('click', () => carica());

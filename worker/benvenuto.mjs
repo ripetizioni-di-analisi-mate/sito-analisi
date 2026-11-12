@@ -1,14 +1,10 @@
 // Sconto di benvenuto (richiesta di Carmine del 05/11/2026; regole in src/data/benvenuto.ts).
 //  - /api/registrati con `benvenuto: true` (barra in basso, src/components/BarraSconto.astro) registra l'account
 //    nella tabella `benvenuto`.
-//  - Al primo acquisto di una materia la pagina Sblocca chiede /api/sconto: senza sconto dell'invito, il Worker crea
-//    su Paddle un codice personale del 10% (un solo uso, solo i prezzi delle materie) e lo passa al checkout.
-//    Nessuna email e nessun codice da copiare.
-//  - /admin/benvenuto (e .csv): account creati dalla barra e sconti usati.
-// Senza PADDLE_API_KEY la registrazione funziona, ma lo sconto non si applica.
+// La percentuale si applica una sola volta al primo acquisto di una materia.
+// /admin/benvenuto mostra gli account registrati dalla barra e gli sconti utilizzati.
 import PREZZI from '../src/data/prezzi.json';
 import { SCONTO_BENVENUTO } from '../src/data/benvenuto.ts';
-import { creaSconto } from './inviti.mjs';
 
 const MATERIE = Object.keys(PREZZI);
 
@@ -30,11 +26,14 @@ export function archivioBenvenuto(o, pathname, c) {
       const r = o.riga('SELECT sconto_id, usato FROM benvenuto WHERE email = ?', c.email);
       if (!r || r.usato) return { spetta: false };
       const comprato = o.riga(`SELECT 1 AS x FROM acquisti WHERE email = ? AND materia IN (${MATERIE.map(() => '?').join(',')}) LIMIT 1`, c.email, ...MATERIE);
-      return comprato ? { spetta: false } : { spetta: true, id: r.sconto_id || null };
+      if (comprato) return { spetta: false };
+      let id = r.sconto_id;
+      if (!id && c.crea) {
+        id = 'BENV-' + crypto.randomUUID();
+        o.sql.exec('UPDATE benvenuto SET sconto_id = ?, codice = ? WHERE email = ?', id, id, c.email);
+      }
+      return { spetta: true, id };
     }
-    case '/bv-salva-sconto':
-      o.sql.exec('UPDATE benvenuto SET sconto_id = ?, codice = ? WHERE email = ?', c.id, c.codice, c.email);
-      return { ok: true };
     case '/bv-usato':
       o.sql.exec('UPDATE benvenuto SET usato = ? WHERE sconto_id = ? AND usato IS NULL', c.transazione || ora, c.sconto);
       return { ok: true };
@@ -46,16 +45,9 @@ export function archivioBenvenuto(o, pathname, c) {
 
 // Sconto da passare al checkout (chiamato da /api/sconto quando non c'è uno sconto d'invito).
 export async function scontoBenvenuto(env, aDO, io) {
-  if (!io || !env.PADDLE_API_KEY) return null;
-  const s = await aDO(env, '/bv-stato', { email: io.email });
-  if (!s.spetta) return null;
-  let id = s.id;
-  if (!id) {
-    const nuovo = await creaSconto(env, { prefisso: 'BENV', descrizione: `Sconto di benvenuto per ${io.email}`, percentuale: SCONTO_BENVENUTO });
-    await aDO(env, '/bv-salva-sconto', { email: io.email, id: nuovo.id, codice: nuovo.codice });
-    id = nuovo.id;
-  }
-  return { id, tipo: 'benvenuto', percentuale: SCONTO_BENVENUTO };
+  if (!io || !env.STRIPE_SECRET_KEY) return null;
+  const s = await aDO(env, '/bv-stato', { email: io.email, crea: true });
+  return s.id ? { id: s.id, tipo: 'benvenuto', percentuale: SCONTO_BENVENUTO } : null;
 }
 
 // ---------- percorsi del Worker ----------
@@ -67,7 +59,7 @@ export async function gestisciBenvenuto(req, env, ctx, p, h) {
   // Riga «Sconto di benvenuto…» nella pagina Sblocca (solo per sapere se spetta; il codice si crea al pagamento).
   if (p === '/api/benvenuto' && req.method === 'GET') {
     const io = await h.utenteCollegato(env, req).catch(() => null);
-    if (!io || !env.PADDLE_API_KEY) return json({}, 200, { 'cache-control': 'no-store' });
+    if (!io || !env.STRIPE_SECRET_KEY) return json({}, 200, { 'cache-control': 'no-store' });
     const s = await aDO(env, '/bv-stato', { email: io.email });
     return json(s.spetta ? { percentuale: SCONTO_BENVENUTO } : {}, 200, { 'cache-control': 'no-store' });
   }
@@ -83,7 +75,7 @@ export async function gestisciBenvenuto(req, env, ctx, p, h) {
       return new Response('﻿' + [col.join(';'), ...righe.map((r) => col.map((k) => cella(r[k])).join(';'))].join('\r\n'),
         { headers: { 'content-type': 'text/csv; charset=utf-8', 'content-disposition': 'attachment; filename="account-dalla-barra.csv"' } });
     }
-    return paginaAdmin(righe, Boolean(env.PADDLE_API_KEY));
+    return paginaAdmin(righe, Boolean(env.STRIPE_SECRET_KEY));
   }
   return null;
 }
@@ -108,7 +100,7 @@ th{background:#f1ede4;font-size:13px;text-transform:uppercase;letter-spacing:.05
 <p class="piccolo"><a href="/admin">← Dashboard</a></p>
 <h1>Sconto di benvenuto</h1>
 <p class="piccolo">Account creati dalla barra in basso del sito. Ognuno ha il ${SCONTO_BENVENUTO}% sul primo acquisto di una materia, applicato da solo al pagamento.</p>
-${attivo ? '' : '<p class="avviso">Lo sconto non si applica finché su Cloudflare manca la chiave PADDLE_API_KEY (la stessa di «Invita un amico»).</p>'}
+${attivo ? '' : '<p class="avviso">I pagamenti con Stripe non sono configurati.</p>'}
 <div class="numeri"><div><b>${righe.length}</b>account dalla barra</div><div><b>${righe.filter((r) => r.creato.startsWith(oggi)).length}</b>oggi</div><div><b>${righe.filter((r) => r.creato >= settimana).length}</b>ultimi 7 giorni</div><div><b>${righe.filter((r) => r.usato).length}</b>sconti usati</div></div>
 <p><a class="tasto" href="/admin/benvenuto.csv">Scarica l’elenco (CSV)</a></p>
 ${righe.length ? `<div class="tab"><table><thead><tr><th>Studente</th><th>Iscritto il</th><th>Pagina</th><th>Sconto</th></tr></thead><tbody>${tab}</tbody></table></div>` : '<p class="piccolo">Nessun account per ora.</p>'}

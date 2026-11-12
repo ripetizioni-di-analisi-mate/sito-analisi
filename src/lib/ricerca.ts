@@ -1,3 +1,4 @@
+import type { LinguaCatalogo } from './lingue-sito';
 import { materieL, materiaL, argomentoL, link, vociL, T, type Lingua } from '../i18n';
 import { numero } from './nav';
 import { catalogoDomande } from './domande';
@@ -17,7 +18,7 @@ import { nomiAllenamento } from './allenamento.mjs';
 export type Categoria = 'corsi' | 'argomenti' | 'esercizi' | 'videocorsi';
 export interface VoceRicerca { t: string; s: string; m: string; h: string; p: string; c: Categoria }
 
-const TIPI: Record<Lingua, Record<string, string>> = {
+const TIPI: Record<Exclude<Lingua, LinguaCatalogo>, Record<string, string>> = {
   it: { definizione: 'Definizione', teorema: 'Teorema', proposizione: 'Proposizione' },
   en: { definizione: 'Definition', teorema: 'Theorem', proposizione: 'Proposition' },
 };
@@ -36,7 +37,7 @@ const TESTI = {
   },
 };
 
-export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
+export async function vociRicerca(l: Exclude<Lingua, LinguaCatalogo>): Promise<VoceRicerca[]> {
   const t = T(l);
   const x = TESTI[l];
   const voci: VoceRicerca[] = [];
@@ -91,6 +92,7 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
     }
     const nomiProve = nomiAllenamento(m, l);
     voci.push({ t: `${x.ripasso} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/${RIPASSO}/domande`), p: `${x.paroleDomande} ripasso`, c: 'esercizi' });
+    if (m.eserciziDaFare === false) continue;
     const quiz = l === 'it' && m.gruppo === 'Concorsi';
     const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
     voci.push({ t: `${nomiProve.simulazione} · ${m.titolo}`, s: nomiProve.ripasso, m: m.breve, h: link(l, `/${m.slug}/simulazione`), p: quiz ? 'simulazione prova concorso quiz test risposta multipla punteggio timer' : superiori ? (l === 'en' ? 'class test simulation timed written practice' : 'simulazioni verifiche in classe compito scritto prova timer tracce') : x.paroleSimulazione, c: 'esercizi' });
@@ -107,6 +109,6 @@ export async function vociRicerca(l: Lingua): Promise<VoceRicerca[]> {
   return voci;
 }
 
-export async function indiceRicerca(l: Lingua) {
+export async function indiceRicerca(l: Exclude<Lingua, LinguaCatalogo>) {
   return new Response(JSON.stringify(await vociRicerca(l)), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }

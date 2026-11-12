@@ -3,6 +3,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import Base from '../layouts/Base.astro';
 import CampoCorso from '../components/CampoCorso.astro';
+import ConsensoEmail from '../components/ConsensoEmail.astro';
 import '../styles/dispositivi-login.css';
 import { link, testiJs, T, prefisso, type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
@@ -22,37 +23,40 @@ const pref = prefisso(lingua);
 
   <form class="modulo" id="modulo" novalidate>
     <label id="campo-nome" hidden>{t.nome}<input type="text" name="nome" autocomplete="given-name" maxlength="40" /></label>
-    <label>Email<input type="email" name="email" autocomplete="email" required /></label>
-    <label>Password<span class="campo-password"><input type="password" name="password" autocomplete="current-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+    <label>{lingua === 'es' ? 'Correo electrónico' : lingua === 'de' ? 'E-Mail-Adresse' : 'Email'}<input type="email" name="email" autocomplete="email" required /></label>
+    <label>{lingua === 'es' ? 'Contraseña' : lingua === 'de' ? 'Passwort' : 'Password'}<span class="campo-password"><input type="password" name="password" autocomplete="current-password" required minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     <label id="campo-conferma" hidden>{t.ripetiPassword}<span class="campo-password"><input type="password" name="conferma" autocomplete="new-password" minlength="8" /><button type="button" class="mostra-password" data-mostra-password aria-label={t.mostraPassword} aria-pressed="false"><svg class="occhio-aperto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="occhio-chiuso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.7 17.7 0 0 1-3.2 4.1M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
     {lingua === 'it' && <CampoCorso nascosto />}
+    <ConsensoEmail lingua={lingua} scegliMateria nascosto />
     <p class="esito-modulo" id="esito" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia">{t.accedi}</button>
     <p class="nota-privacy" id="nota-privacy" hidden>{lingua === 'it'
-      ? <>I tuoi dati servono solo a far funzionare l'account e non vengono venduti né ceduti a terzi. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
-      : <>Your data are used only to run your account and are never sold or passed on to third parties. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
+      ? <>Consulta come vengono trattati i dati del tuo account. <a href={link(lingua, '/privacy')}>Informativa sulla privacy</a></>
+      : lingua === 'es' ? <>Consulta cómo tratamos los datos de tu cuenta en la <a href="/privacy?lingua=it" hreflang="it">política de privacidad (en italiano)</a>.</>
+      : lingua === 'de' ? <>Informationen zur Verarbeitung deiner Kontodaten findest du in der <a href="/privacy?lingua=it" hreflang="it">Datenschutzerklärung (Italienisch)</a>.</>
+      : <>See how we handle your account data. <a href={link(lingua, '/privacy')}>Privacy policy</a></>}</p>
   </form>
   <p class="nota-accesso" id="nota-password"><a href="#recupera" id="apri-recupero">{t.passwordDimenticata}</a></p>
 
   <section class="dispositivi-login" id="gestione-dispositivi-login" aria-labelledby="titolo-dispositivi-login" hidden>
     <h2 id="titolo-dispositivi-login"></h2>
-    <p class="nota-accesso">{lingua === 'en'
+    <p class="nota-accesso">{lingua === 'es' ? 'Elige un dispositivo para desconectarlo y acceder desde este. Los demás dispositivos seguirán conectados.' : lingua === 'de' ? 'Wähle ein Gerät aus, das du abmelden möchtest. Anschließend kannst du dich hier anmelden.' : lingua === 'en'
       ? 'Choose a device to disconnect, then sign in here. The other devices will stay connected.'
       : 'Scegli un dispositivo da scollegare per accedere da questo. Gli altri rimangono collegati.'}</p>
     <ul class="dispositivi-login-elenco" id="dispositivi-login-elenco"></ul>
     <p class="esito-modulo" id="esito-dispositivi-login" role="status" aria-live="polite"></p>
-    <button type="button" class="bottone-secondario" id="torna-accesso-dispositivi">{lingua === 'en' ? 'Back to sign in' : 'Torna all’accesso'}</button>
+    <button type="button" class="bottone-secondario" id="torna-accesso-dispositivi">{t.tornaAccesso}</button>
   </section>
 
   <form class="modulo" id="modulo-recupero" novalidate hidden>
     <p class="nota-accesso">{t.recuperoSpiegazione}</p>
-    <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+    <label>{lingua === 'es' ? 'Correo electrónico' : lingua === 'de' ? 'E-Mail-Adresse' : 'Email'}<input type="email" name="email" autocomplete="email" required /></label>
     <p class="esito-modulo" id="esito-recupero" role="status"></p>
     <button class="bottone-primario" type="submit" id="invia-recupero">{t.inviaLink}</button>
     <p class="nota-accesso"><a href="#" id="torna-accesso">{t.tornaAccesso}</a></p>
   </form>
 
-  <script is:inline define:vars={{ js, pref }}>
+  <script is:inline define:vars={{ js, pref, lingua }}>
     (() => {
       const modulo = document.getElementById('modulo');
       const esito = document.getElementById('esito');
@@ -79,12 +83,28 @@ const pref = prefisso(lingua);
       const dopo = new URLSearchParams(location.search).get('dopo');
       const destinazione = dopo && dopo.startsWith('/') && !dopo.startsWith('//') ? dopo : `${pref}/account`;
       let scheda = new URLSearchParams(location.search).get('nuovo') ? 'registrati' : 'accedi';
-      const en = pref === '/en';
+      const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es';
       const gestioneDispositivi = document.getElementById('gestione-dispositivi-login');
       const elencoDispositivi = document.getElementById('dispositivi-login-elenco');
       const esitoDispositivi = document.getElementById('esito-dispositivi-login');
       const tornaDispositivi = document.getElementById('torna-accesso-dispositivi');
-      const testiDispositivi = en ? {
+      const testiDispositivi = es ? {
+        limite: 'Has alcanzado el límite de {max} dispositivos',
+        ultimo: 'Último uso: ', dispositivo: 'Dispositivo', scegli: 'Desconectar e iniciar sesión aquí',
+        conferma: '¿Desconectar {nome}? Tendrás que volver a iniciar sesión en ese dispositivo.',
+        scollega: 'Desconectar y continuar', annulla: 'Cancelar', attesa: 'Desconectando…',
+        scaduto: 'Por seguridad, vuelve a introducir tu contraseña para gestionar tus dispositivos.',
+        aggiornata: 'La lista de dispositivos ha cambiado. Elige uno de la lista actualizada.',
+        vuota: 'No hay dispositivos que desconectar. Vuelve a iniciar sesión para continuar.',
+      } : de ? {
+        limite: 'Du hast bereits {max} Geräte verbunden',
+        ultimo: 'Zuletzt verwendet: ', dispositivo: 'Gerät', scegli: 'Gerät abmelden und hier anmelden',
+        conferma: 'Möchtest du {nome} abmelden? Auf diesem Gerät musst du dich anschließend erneut anmelden.',
+        scollega: 'Gerät abmelden und fortfahren', annulla: 'Abbrechen', attesa: 'Gerät wird abgemeldet …',
+        scaduto: 'Gib zur Sicherheit erneut dein Passwort ein, um deine Geräte zu verwalten.',
+        aggiornata: 'Die Geräteliste hat sich geändert. Wähle ein Gerät aus der aktuellen Liste.',
+        vuota: 'Es sind keine Geräte zum Abmelden vorhanden. Melde dich erneut an.',
+      } : en ? {
         limite: 'You have reached the limit of {max} devices',
         ultimo: 'Last used: ', dispositivo: 'Device', scegli: 'Disconnect and sign in here',
         conferma: 'Disconnect {nome}? You will need to sign in again on that device. The other devices will stay connected.',
@@ -139,7 +159,7 @@ const pref = prefisso(lingua);
           const ultimo = new Date(dispositivo.ultimo_uso);
           if (dispositivo.ultimo_uso && !Number.isNaN(ultimo.getTime())) {
             const data = document.createElement('span');
-            data.textContent = testiDispositivi.ultimo + ultimo.toLocaleString(en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+            data.textContent = testiDispositivi.ultimo + ultimo.toLocaleString(es ? 'es-ES' : de ? 'de-DE' : en ? 'en-GB' : 'it-IT', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
             dati.appendChild(data);
           }
           const scegli = document.createElement('button');
@@ -177,7 +197,7 @@ const pref = prefisso(lingua);
         if (!disponibili.length) esitoGestione(testiDispositivi.vuota);
       };
       const aggiornaDispositivi = async () => {
-        const risposta = await fetch(`/api/dispositivi?gestione=1${en ? '&l=en' : ''}`, { cache: 'no-store', credentials: 'same-origin' });
+        const risposta = await fetch(`/api/dispositivi?gestione=1${pref ? '&l=' + lingua : ''}`, { cache: 'no-store', credentials: 'same-origin' });
         const dati = await risposta.json().catch(() => ({}));
         if (risposta.status === 401 || dati.scaduto) { chiudiGestione(testiDispositivi.scaduto); return false; }
         if (!risposta.ok || !Array.isArray(dati.dispositivi)) throw new Error(js.erroreGenerico);
@@ -188,7 +208,7 @@ const pref = prefisso(lingua);
         if (dispositivoInAttesa) return;
         inAttesaDispositivi(true); esitoGestione(testiDispositivi.attesa);
         try {
-          const risposta = await fetch(`/api/dispositivi/sostituisci${en ? '?l=en' : ''}`, {
+          const risposta = await fetch(`/api/dispositivi/sostituisci${pref ? '?l=' + lingua : ''}`, {
             method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ id }),
           });
           const dati = await risposta.json().catch(() => ({}));
@@ -233,6 +253,7 @@ const pref = prefisso(lingua);
         campoNome.hidden = s !== 'registrati';
         if (campoCorso) campoCorso.hidden = s !== 'registrati';
         document.getElementById('nota-privacy').hidden = s !== 'registrati';
+        modulo.querySelector('[data-consenso-email]').hidden = s !== 'registrati';
         invia.textContent = s === 'registrati' ? js.creaAccount : js.accedi;
         modulo.password.autocomplete = s === 'registrati' ? 'new-password' : 'current-password';
         esito.textContent = ''; esito.className = 'esito-modulo';
@@ -255,7 +276,8 @@ const pref = prefisso(lingua);
         try {
           const r = await fetch(scheda === 'registrati' ? '/api/registrati' : '/api/accedi', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ email, password, nome: modulo.nome.value.trim(), corso: scheda === 'registrati' ? corsoSeguito() : '', lingua,
+              offerte: scheda === 'registrati' && modulo.offerte.checked, materiaEmail: modulo.materiaEmail.value }),
           });
           const d = await r.json().catch(() => ({}));
           if (!r.ok) {
@@ -293,7 +315,7 @@ const pref = prefisso(lingua);
         try {
           const r = await fetch('/api/password-dimenticata', {
             method: 'POST', headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ email, lingua: pref ? 'en' : 'it' }),
+            body: JSON.stringify({ email, lingua }),
           });
           const d = await r.json().catch(() => ({}));
           bottone.disabled = false;

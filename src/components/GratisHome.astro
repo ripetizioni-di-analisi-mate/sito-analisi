@@ -6,8 +6,22 @@
 // 03/11 (SEO internazionale): la stessa riga anche nella home inglese, con le pagine gratuite tradotte.
 // 04/11: tolto il glossario (richiesta di Carmine).
 import type { Lingua } from '../i18n';
-const { lingua = 'it' } = Astro.props as { lingua?: Lingua };
-const voci = lingua === 'en' ? [
+import { url } from '../lib/url';
+const { lingua = 'it', usa = false } = Astro.props as { lingua?: Lingua; usa?: boolean };
+const voci = usa ? [
+  { href: url('/us/calculus-1#course-practice'), titolo: 'Timed questions' },
+  { href: url('/us/calculus-1/practice-exam'), titolo: 'Exam simulations' },
+] : lingua === 'es' ? [
+  { href: '/es/matematica-da-zero', titolo: 'Matemáticas desde cero' },
+  { href: '/es/fisica-zero', titolo: 'Física desde cero' },
+  { href: '/formulari?lingua=it', titolo: 'Hojas de fórmulas (en italiano)' },
+  { href: '/en/domande-a-tempo?lingua=en', titolo: 'Preguntas con tiempo (en inglés)' },
+] : lingua === 'de' ? [
+  { href: '/de/matematica-da-zero', titolo: 'Mathematik von Grund auf' },
+  { href: '/de/fisica-zero', titolo: 'Physik von Grund auf' },
+  { href: '/formulari?lingua=it', titolo: 'Formelsammlungen (Italienisch)' },
+  { href: '/en/domande-a-tempo?lingua=en', titolo: 'Quiz mit Zeitlimit (Englisch)' },
+] : lingua === 'en' ? [
   { href: '/en/domande-a-tempo', titolo: 'Timed questions' },
   { href: '/en/formulari', titolo: 'Formula sheets' },
 ] : [
@@ -21,5 +35,5 @@ const voci = lingua === 'en' ? [
 ---
 <p class="gratis-c">
   <svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="2.5" y="7" width="15" height="3.5" rx="0.8"/><path d="M4 10.5V17h12v-6.5M10 7v10M10 7c-1.2-2.8-5-3.3-5-1.2C5 7 8 7 10 7Zm0 0c1.2-2.8 5-3.3 5-1.2C15 7 12 7 10 7Z"/></svg>
-  <span><b>{lingua === 'en' ? 'Free' : 'Gratis'}</b>: {voci.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.titolo}</a></>)}</span>
+  <span><b>{lingua === 'de' ? 'Kostenlos' : lingua === 'en' ? 'Free' : 'Gratis'}</b>: {voci.map((v, i) => <>{i > 0 && ' · '}<a href={v.href}>{v.titolo}</a></>)}</span>
 </p>

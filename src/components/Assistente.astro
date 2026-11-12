@@ -6,7 +6,29 @@ import { type Lingua } from '../i18n';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua: Lingua }
 const { materia, argomento, sezione, lingua } = Astro.props;
 const en = lingua === 'en';
-const s = en ? {
+const s = lingua === 'es' ? {
+  apri: 'Pregunta a Pi', nome: 'Pi', bottone: 'Pregunta a Pi', sotto: 'Asistente de estudio', online: 'En línea', chiudi: 'Cerrar',
+  parte: 'Tu pregunta se refiere a', cambia: 'Elige otro apartado de la página.',
+  scrivi: 'Escribe tu pregunta…', invia: 'Enviar',
+  barra: 'Pregúntale a Pi sobre la teoría o los ejercicios', benvenuto: ['¡Hola! Soy ', 'Pi', '. Te ayudo con tus dudas sobre la teoría y los ejercicios.'], chiudiFumetto: 'Cerrar aviso',
+  bloccata: 'Pi puede responder preguntas sobre las páginas de las asignaturas que has desbloqueado.',
+  sblocca: 'Desbloquear asignatura', accedi: 'Iniciar sesión', attendi: 'Redactando la respuesta…', rimasti: 'mensajes disponibles hoy',
+  ciao: ['¡Hola! Soy Pi.', 'Puedo ayudarte a encontrar material y a entender los pasos de un ejercicio.', '¿En qué te puedo ayudar?'],
+  foto: 'Adjuntar una foto del ejercicio', togli: 'Quitar la foto', fotoAllegata: 'Foto adjunta', fotoDomanda: 'Explícame el ejercicio de la foto.',
+  fotoErrore: 'No se ha podido abrir la foto. Prueba con otra.', nuova: 'Nueva conversación', copia: 'Copiar', copiato: 'Copiado',
+  avviso: 'Pi es una IA. Revisa los pasos y los resultados.',
+} : lingua === 'de' ? {
+  apri: 'Frag Pi', nome: 'Pi', bottone: 'Frag Pi', sotto: 'Lernassistent', online: 'Online', chiudi: 'Schließen',
+  parte: 'Deine Frage bezieht sich auf', cambia: 'Wähle einen anderen Abschnitt auf der Seite.',
+  scrivi: 'Stell deine Frage …', invia: 'Senden',
+  barra: 'Frag Pi zu Theorie und Aufgaben', benvenuto: ['Hallo, ich bin ', 'Pi', '! Ich helfe dir bei Fragen zur Theorie und zu den Aufgaben.'], chiudiFumetto: 'Hinweis schließen',
+  bloccata: 'Pi kann Fragen zu den Seiten deiner freigeschalteten Fächer beantworten.',
+  sblocca: 'Fach freischalten', accedi: 'Anmelden', attendi: 'Antwort wird geschrieben …', rimasti: 'Nachrichten heute übrig',
+  ciao: ['Hallo, ich bin Pi!', 'Ich helfe dir, Lernmaterialien zu finden und Rechenschritte zu verstehen.', 'Wobei kann ich dir helfen?'],
+  foto: 'Foto der Aufgabe anhängen', togli: 'Foto entfernen', fotoAllegata: 'Foto angehängt', fotoDomanda: 'Erkläre mir die Aufgabe auf dem Foto.',
+  fotoErrore: 'Das Foto ließ sich nicht öffnen. Versuch es mit einem anderen.', nuova: 'Neuer Chat', copia: 'Kopieren', copiato: 'Kopiert',
+  avviso: 'Pi ist eine KI. Prüfe die Rechenschritte und Ergebnisse.',
+} : en ? {
   apri: 'Ask Pi', nome: 'Pi', bottone: 'Ask Pi', sotto: 'Virtual assistant', online: 'Online', chiudi: 'Close',
   parte: 'You are asking about', cambia: 'Tap another box on the page to change it.',
   scrivi: 'Write your question…', invia: 'Send',
@@ -140,7 +162,7 @@ const s = en ? {
           const display = k.classList.contains('katex-display');
           k.replaceWith(document.createTextNode(display ? `\n$$${tex}$$\n` : `$${tex}$`));
         });
-        c.querySelectorAll('svg, script, style, button').forEach((x) => x.remove());
+        c.querySelectorAll('svg, script, style, button, .verifica').forEach((x) => x.remove());
         c.querySelectorAll('li').forEach((li) => li.prepend(document.createTextNode('\n- ')));
         c.querySelectorAll('p, h2, h3, div, details, summary').forEach((x) => x.append(document.createTextNode('\n')));
         return c.textContent || '';
@@ -344,7 +366,7 @@ const s = en ? {
             }
           }
           risposta = risposta.trim();
-          if (!risposta) { errore(pannello!.dataset.lingua === 'en' ? 'The assistant did not answer. Please try again.' : 'Pi non ha risposto. Riprova.'); }
+          if (!risposta) { errore(pannello!.dataset.lingua === 'es' ? 'Pi no ha respondido. Vuelve a intentarlo.' : pannello!.dataset.lingua === 'de' ? 'Verbindungsfehler. Versuch es erneut.' : pannello!.dataset.lingua === 'en' ? 'The assistant did not answer. Please try again.' : 'Pi non ha risposto. Riprova.'); }
           else {
             mostraRisposta(box!, risposta, true);
             conversazione.push({ ruolo: 'assistente', testo: risposta });
@@ -363,7 +385,7 @@ const s = en ? {
           if (typeof d.rimasti === 'number') rimasti.textContent = `${d.rimasti} ${testi.rimasti}.`;
         }
       } catch {
-        errore(pannello!.dataset.lingua === 'en' ? 'Connection error. Please try again.' : 'Errore di connessione. Riprova.');
+        errore(pannello!.dataset.lingua === 'es' ? 'Error de conexión. Vuelve a intentarlo.' : pannello!.dataset.lingua === 'de' ? 'Verbindungsfehler. Versuch es erneut.' : pannello!.dataset.lingua === 'en' ? 'Connection error. Please try again.' : 'Errore di connessione. Riprova.');
       }
       inCorso = false;
     }

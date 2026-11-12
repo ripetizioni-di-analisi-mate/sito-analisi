@@ -1,0 +1,12 @@
+---
+import UsStem from '../../../layouts/UsStem.astro';
+import UsPractice from '../../../components/UsPractice.astro';
+import { calculus3Exam } from '../../../data/stem-usa/calculus-3/exam.mjs';
+import { url } from '../../../lib/url';
+---
+<UsStem title="Calculus III Practice Exam" course="calculus-3" section="General practice exam" description="An original Calculus III practice exam with solutions and a timer.">
+  <p class="sopratitolo">Exam practice</p>
+  <h1>Calculus III practice exam</h1>
+  <p class="sommario">Work through 18 questions in 60 minutes. The exam covers space curves, multivariable derivatives, constrained optimization, multiple integrals, and vector calculus.</p>
+  <UsPractice questions={calculus3Exam.map(question => ({ ...question, href: url(question.href) }))} minutes={60} renderMath />
+</UsStem>

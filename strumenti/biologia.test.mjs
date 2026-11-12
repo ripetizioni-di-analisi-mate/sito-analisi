@@ -15,13 +15,12 @@ after(() => rmSync(temp, { recursive: true, force: true }));
 const { default: worker, firmaToken } = await import(pathToFileURL(bundle));
 const materia = 'biologia-semestre-filtro';
 const programma = `/${materia}/organizzazione-biologica`;
-const prezzo = readFileSync(join(root, 'wrangler.jsonc'), 'utf8').match(/"PADDLE_PREZZO_BIOLOGIA_SEMESTRE_FILTRO":\s*"([^"]+)"/)[1];
 
 async function banco(materie = null) {
   const richieste = [];
   const env = {
     VENDITA: '1', CHIAVE_ACCESSO: 'chiave-solo-prove-locali',
-    PADDLE_CLIENT_TOKEN: 'test-only', PADDLE_PREZZO_BIOLOGIA_SEMESTRE_FILTRO: prezzo,
+    STRIPE_SECRET_KEY: 'test-only', STRIPE_WEBHOOK_SECRET: 'test-only',
     ASSETS: { async fetch(req) {
       const path = new URL(req.url || req).pathname;
       richieste.push(path);
@@ -30,23 +29,28 @@ async function banco(materie = null) {
       return new Response(path, { headers: { 'content-type': 'text/plain' } });
     } },
     ARCHIVIO: { idFromName: () => 'test', get: () => ({ fetch: async (url) => {
-      assert.equal(new URL(url).pathname, '/sessione');
+      const p = new URL(url).pathname;
+      if (p === '/inv-sconto' || p === '/bv-stato' || p === '/promo-offerta') return Response.json({});
+      assert.equal(p, '/sessione');
       return Response.json(materie === null ? null : { email: 'studente@example.test', nome: 'Studente', materie, versione: 1 });
     } }) },
   };
   const cookie = materie === null ? '' : `sessione=${await firmaToken(env, {e:'studente@example.test',v:1,d:'test',t:Date.now()})}`;
   const invia = body => worker.fetch(new Request('https://ripetizionidianalisi.com/api/domande/prossima', {method:'POST', headers: {cookie, 'content-type':'application/json'}, body:JSON.stringify({materia, lingua:'it', ...body})}), env, {waitUntil() {}});
-  const apri = path => worker.fetch(new Request('https://ripetizionidianalisi.com' + path, { headers: {cookie, 'accept-language':'it', 'user-agent':'audit-bot'} }), env, { waitUntil() {} });
+  const apri = (path, body) => worker.fetch(new Request('https://ripetizionidianalisi.com' + path, { method:body?'POST':'GET', headers: {cookie, origin:'https://ripetizionidianalisi.com', 'content-type':'application/json', 'accept-language':'it', 'user-agent':'audit-bot'}, ...(body?{body:JSON.stringify(body)}:{}) }), env, { waitUntil() {} });
   return { apri, invia, richieste };
 }
 
-test('Biologia fornisce il proprio prezzo Paddle e resta nel listino a pagamento', async () => {
-  const b = await banco();
-  const config = await (await b.apri('/api/config')).json();
-  assert.equal(config.paddle.prezzi[materia], prezzo);
-  assert.match(prezzo, /^pri_[a-z0-9]{26}$/);
+test('Biologia ha un preventivo Stripe coerente con il listino', async () => {
+  const b = await banco([]);
+  assert.deepEqual(await (await b.apri('/api/config')).json(), { stripe: true });
+  const r = await b.apri('/api/acquisti/preventivo', { tipo:'materia',slug:materia });
+  assert.equal(r.status,200);
+  const q = await r.json();
+  assert.deepEqual(q.chiavi,[materia]);
   const listino = JSON.parse(readFileSync(join(root, 'src/data/prezzi.json')));
   assert.equal(listino[materia], 49);
+  assert.equal(q.totale, 100 * listino[materia]);
 });
 
 test('un ospite riceve anteprima della teoria e delle schede riservate', async () => {
@@ -92,9 +96,11 @@ test('ospiti e iscritti senza acquisto vedono gli stessi dieci quiz complessivi'
   }
 });
 
-test('chi acquista Biologia può esercitarsi su tutti i 315 quiz', async () => {
+test('chi acquista Biologia può esercitarsi su tutti i 630 quiz', async () => {
   const b = await banco([materia]);
   const r = await b.invia({argomento:'prove-d-esame'});
   assert.equal(r.status,200);
-  assert.equal((await r.json()).totale,315);
+  const sessione = await r.json();
+  assert.equal(sessione.totale, 630);
+  assert.equal(new Set(sessione.ordine).size, 15);
 });

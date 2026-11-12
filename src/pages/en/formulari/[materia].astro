@@ -17,7 +17,8 @@ const { Content, headings } = await render(voce);
 const sezioni = headings.filter((h) => h.depth === 2);
 const pdf = pdfFormulario(slug, 'en');
 const indirizzo = `/en/formulari/${slug}`;
-const altri = FORMULARI.filter((x) => x !== slug).map((x) => ({ slug: x, titolo: materiaL('en', x).titolo }));
+const tradotti = new Set((await getCollection('formulari_en')).map((v) => v.id));
+const altri = FORMULARI.filter((x) => x !== slug && tradotti.has(x)).map((x) => ({ slug: x, titolo: materiaL('en', x).titolo }));
 const schema = [{
   '@context': 'https://schema.org',
   '@type': 'LearningResource',

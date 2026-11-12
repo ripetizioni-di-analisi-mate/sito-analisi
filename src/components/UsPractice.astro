@@ -1,0 +1,140 @@
+---
+import { calculusHtml } from '../lib/stem-usa-practice';
+
+interface Question {
+  title: string;
+  prompt: string;
+  choices: string[];
+  correct: number;
+  explanation: string;
+  href: string;
+}
+interface Props { questions: Question[]; minutes: number; renderMath?: boolean }
+const { questions, minutes, renderMath = false } = Astro.props;
+---
+<section id="course-practice" class="stem-practice" data-us-practice>
+  <h2>Practice quiz</h2>
+  <p>{questions.length} questions · one correct answer each</p>
+  <form data-quiz-form data-minutes={minutes}>
+    <div class="stem-quiz-timer" data-quiz-actions hidden>
+      <button type="button" class="stem-button stem-secondary" data-start-timer>Start {minutes}-minute timer</button>
+      <span data-clock role="timer" aria-label="Time remaining" hidden></span>
+    </div>
+    {questions.map((question, index) => (
+      <fieldset class="stem-question" id={'question-' + (index + 1)} data-question data-correct={question.correct}>
+        <legend>{index + 1}. {renderMath ? <Fragment set:html={calculusHtml(question.prompt)} /> : question.prompt}</legend>
+        <div class="stem-options">
+          {question.choices.map((choice, i) => (
+            <label class="stem-option">
+              <input type="radio" name={'question-' + index} value={i} />
+              <span>{renderMath ? <Fragment set:html={calculusHtml(choice)} /> : choice}</span>
+            </label>
+          ))}
+        </div>
+        <details class="stem-feedback" data-feedback>
+          <summary data-verdict>Answer and explanation</summary>
+          <p><strong>{renderMath ? <Fragment set:html={calculusHtml(question.choices[question.correct])} /> : question.choices[question.correct]}</strong></p>
+          <p>{renderMath ? <Fragment set:html={calculusHtml(question.explanation)} /> : question.explanation}</p>
+          <a href={question.href}>Review {question.title.toLowerCase()} →</a>
+        </details>
+      </fieldset>
+    ))}
+    <div class="stem-quiz-actions" data-quiz-actions hidden>
+      <button type="submit" class="stem-button">Check answers</button>
+      <button type="button" class="stem-button stem-secondary" data-try-again hidden>Try again</button>
+      <p class="stem-quiz-score" data-quiz-score role="status" tabindex="-1"></p>
+    </div>
+  </form>
+</section>
+
+<script>
+  function setUpQuiz(quiz: HTMLElement) {
+    const form = quiz.querySelector<HTMLFormElement>('[data-quiz-form]');
+    const score = quiz.querySelector<HTMLElement>('[data-quiz-score]');
+    const clock = quiz.querySelector<HTMLElement>('[data-clock]');
+    const start = quiz.querySelector<HTMLButtonElement>('[data-start-timer]');
+    const retry = quiz.querySelector<HTMLButtonElement>('[data-try-again]');
+    const submit = quiz.querySelector<HTMLButtonElement>('[type="submit"]');
+    if (!form || !score || !clock || !start || !retry || !submit) return;
+    const questions = [...quiz.querySelectorAll<HTMLFieldSetElement>('[data-question]')];
+    const feedback = [...quiz.querySelectorAll<HTMLDetailsElement>('[data-feedback]')];
+    const minutes = Number(form.dataset.minutes);
+    let deadline = 0;
+    let timer: number | undefined;
+    let finished = false;
+
+    quiz.querySelectorAll<HTMLElement>('[data-quiz-actions]').forEach(element => { element.hidden = false; });
+    feedback.forEach(element => { element.hidden = true; });
+
+    function stopClock() {
+      window.clearInterval(timer);
+      timer = undefined;
+      deadline = 0;
+    }
+
+    function finish(expired: boolean) {
+      if (finished) return;
+      finished = true;
+      stopClock();
+      let correct = 0;
+      let blank = 0;
+      questions.forEach(question => {
+        const answer = question.querySelector<HTMLInputElement>('input:checked');
+        const matched = answer?.value === question.dataset.correct;
+        if (matched) correct += 1;
+        if (!answer) blank += 1;
+        const result = question.querySelector<HTMLDetailsElement>('[data-feedback]');
+        const verdict = result?.querySelector('[data-verdict]');
+        if (result && verdict) {
+          result.hidden = false;
+          result.open = !matched;
+          verdict.textContent = matched ? 'Correct · explanation' : answer ? 'Review this answer' : 'Unanswered · explanation';
+        }
+        question.querySelectorAll('input').forEach(input => { input.disabled = true; });
+      });
+      if (score && retry && start && submit && clock) {
+        score.textContent = (expired ? 'Time is up. ' : '') + correct + ' of ' + questions.length + ' correct · ' + blank + ' unanswered';
+        clock.hidden = true;
+        retry.hidden = false;
+        start.disabled = true;
+        submit.disabled = true;
+        score.focus();
+      }
+    }
+
+    function tick() {
+      if (!deadline || !clock) return;
+      const seconds = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      clock.textContent = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+      if (!seconds) finish(true);
+    }
+
+    start.addEventListener('click', () => {
+      if (finished || deadline) return;
+      deadline = Date.now() + minutes * 60_000;
+      start.disabled = true;
+      clock.hidden = false;
+      tick();
+      timer = window.setInterval(tick, 500);
+    });
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      finish(Boolean(deadline && deadline <= Date.now()));
+    });
+
+    retry.addEventListener('click', () => {
+      finished = false;
+      form.reset();
+      form.querySelectorAll('input').forEach(input => { input.disabled = false; });
+      feedback.forEach(element => { element.open = false; element.hidden = true; });
+      start.disabled = false;
+      submit.disabled = false;
+      score.textContent = '';
+      retry.hidden = true;
+      start.focus();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-us-practice]').forEach(setUpQuiz);
+</script>

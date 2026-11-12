@@ -1,0 +1,57 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { blocchiUsa } from '../../../data/stem-usa/catalog-view';
+import { courseUrl } from '../../../data/stem-usa/catalog.mjs';
+import { highSchoolName } from '../../../data/stem-usa/high-school/index.mjs';
+import { commonCore, mathFramework, scienceFramework, texasMath, texasScience } from '../../../data/stem-usa/high-school/material.mjs';
+import { url } from '../../../lib/url';
+import { usContentCounts } from '../../../lib/stem-usa-banks';
+
+const groups = blocchiUsa.filter(group => group.gruppo === highSchoolName);
+const references = [commonCore, mathFramework, texasMath, scienceFramework, texasScience];
+const description = 'High school mathematics and science for grades 9–12, with course topics, worked examples, exercises and timed questions.';
+---
+<Base lingua="en" usa titolo="High School" descrizione={description} percorso={[{ titolo: 'High School' }]} seo={{ titolo: 'U.S. High School Math and Science · Ripetizioni di Analisi' }}>
+  <p class="sopratitolo">Grades 9–12</p>
+  <h1>High School</h1>
+  <p class="sommario">Choose the course or topic you are studying. Course sequences and graduation requirements vary by state and district.</p>
+  <details class="sommario-pagina percorso-liceo-usa">
+    <summary>Find your course if you take Integrated Math</summary>
+    <div>
+      <p>The traditional sequence uses Algebra I, Geometry and Algebra II. In Integrated Math I–III, those areas are taught across several courses. Check your syllabus against these starting points.</p>
+      <ul>
+        <li><strong>Integrated Math I</strong> · <a href={url(courseUrl('hs-algebra-1'))}>Linear functions, systems and data</a> and <a href={url(courseUrl('hs-geometry'))}>rigid motions and congruence</a>.</li>
+        <li><strong>Integrated Math II</strong> · <a href={url(courseUrl('hs-algebra-1'))}>Quadratics</a> and <a href={url(courseUrl('hs-geometry'))}>similarity and right-triangle trigonometry</a>.</li>
+        <li><strong>Integrated Math III</strong> · <a href={url(courseUrl('hs-algebra-2'))}>Polynomial, rational and logarithmic functions, trigonometric models and inference</a>.</li>
+      </ul>
+      <p>Precalculus is an advanced option. In schools that integrate Earth and space science into Biology, Chemistry or Physics, use the Earth and Space Science topics alongside the relevant course.</p>
+    </div>
+  </details>
+  {groups.map(group => (
+    <section class="catalogo-liceo-usa">
+      <h2>{group.sotto}</h2>
+      <ul class="griglia-materie">
+        {group.materie.map(({ m }) => {
+          const counts = usContentCounts(m.slug, m.argomenti.length);
+          return (
+            <li style={`--accento: ${m.colore}`} data-materia={m.slug}>
+              <a href={url(courseUrl(m.slug))}>
+                <h3>{m.titolo}</h3>
+                <p>{m.descrizione}</p>
+                <span class="conteggio">{m.argomenti.length} topics · {counts.exercises} exercises · {m.prezzo} €</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
+  <details class="sommario-pagina percorso-liceo-usa">
+    <summary>Curriculum references</summary>
+    <div><ul>{references.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul></div>
+  </details>
+</Base>
+<style>
+  .percorso-liceo-usa > div { padding: 0 .9rem .7rem; }
+  .catalogo-liceo-usa { margin-block: 1.5rem; }
+</style>

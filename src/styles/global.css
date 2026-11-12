@@ -489,10 +489,39 @@ details.indice-sottogruppo > summary { display: flex; align-items: center; justi
 details.sottogruppo > summary::-webkit-details-marker, details.indice-sottogruppo > summary::-webkit-details-marker { display: none; }
 details.sottogruppo > summary::before, details.indice-sottogruppo > summary::before { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; align-self: center; }
 details.sottogruppo[open] > summary::before, details.indice-sottogruppo[open] > summary::before { transform: rotate(45deg); }
-details.indice-sottogruppo > summary::before { display: none; }
-details.indice-sottogruppo > summary::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-bottom: 1.3px solid var(--inchiostro-2); transform: rotate(-45deg); transition: transform 150ms ease; }
-details.indice-sottogruppo[open] > summary::after { transform: rotate(45deg); }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::before { display: none; }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after { content: ''; width: 0.4rem; height: 0.4rem; flex: none; margin-right: 0.2rem; border-right: 1.3px solid var(--inchiostro-2); border-bottom: 1.3px solid var(--inchiostro-2); transform: rotate(-45deg); transition: transform 150ms ease; }
+:is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary::after { transform: rotate(45deg); }
 details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(--verde) 5%, var(--carta)); }
+
+/* Università e Superiori condividono la stessa tinta nella home e nell'indice. */
+.indice-gruppo, .home-percorsi-studio { --fondo-percorso: #e7ede9; }
+.indice-percorsi-studio, .home-percorsi-studio {
+  --fondo-sottopercorso: color-mix(in srgb, var(--fondo-percorso) 80%, #66b478);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) {
+  margin: 0.25rem 0 0.25rem 0.55rem;
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary {
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--fondo-sottopercorso) 20%, transparent);
+  box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 16%, transparent);
+  transition: background 150ms ease, box-shadow 150ms ease;
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after {
+  border-color: var(--verde);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary:is(:hover, :focus-visible),
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary {
+  background: color-mix(in srgb, var(--fondo-sottopercorso) 30%, transparent);
+}
+:is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo)[open] > summary {
+  color: var(--verde);
+  box-shadow: inset 3px 0 color-mix(in srgb, var(--azione) 30%, transparent);
+}
 
 /* Aperture secondarie: lo stesso indicatore dei capitoli, anche nei risultati caricati in pagina. */
 :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary { list-style: none; }
@@ -508,7 +537,8 @@ details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(
   details.indice-gruppo > summary::before,
   details.sottogruppo > summary::before,
   details.indice-sottogruppo > summary::before,
-  details.indice-sottogruppo > summary::after,
+  :is(details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary::after,
+  :is(.indice-percorsi-studio > details.indice-sottogruppo, .home-percorsi-studio > details.sottogruppo) > summary,
   :is(.dta-griglia details, .compat-incolla, .compat-dettagli, .du-riepilogo details) > summary::before { transition: none; }
 }
 .griglia-materie { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: 0.9rem; }
@@ -526,9 +556,9 @@ details.indice-sottogruppo > summary:hover { background: color-mix(in srgb, var(
 
 /* ---------- indice argomenti di una materia ---------- */
 .griglia-argomenti { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: 0.75rem; counter-reset: arg; }
-.griglia-argomenti li { border: 1px solid var(--riga); border-radius: var(--raggio); padding: 0.8rem 1rem; display: grid; grid-template-columns: 2rem 1fr; gap: 0.2rem 0.5rem; align-items: baseline; }
+.griglia-argomenti > li { border: 1px solid var(--riga); border-radius: var(--raggio); padding: 0.8rem 1rem; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 0.2rem 0.5rem; align-items: baseline; }
 .griglia-argomenti .riassunto { grid-column: 2; margin: 0; color: var(--inchiostro-2); font-size: 0.93rem; line-height: 1.45; }
-.griglia-argomenti li::before { counter-increment: arg; content: counter(arg); font-family: var(--ui); font-weight: 700; color: var(--accento); font-variant-numeric: tabular-nums; grid-row: span 2; font-size: 1.25rem; }
+.griglia-argomenti > li::before { counter-increment: arg; content: counter(arg); font-family: var(--ui); font-weight: 700; color: var(--accento); font-variant-numeric: tabular-nums; grid-row: span 2; font-size: 1.25rem; }
 .griglia-argomenti h2 { margin: 0; font-size: 1.15rem; }
 .griglia-argomenti nav { grid-column: 2; font-family: var(--ui); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; }
 .griglia-argomenti li .conteggio { grid-column: 2; }
@@ -692,8 +722,8 @@ details.blocco[open] .se-aperto { display: inline; }
 .soluzione-riservata { font-family: var(--ui); font-size: 0.9rem; color: var(--inchiostro-2); border-left: 3px solid var(--riga); padding: 0.3rem 0 0.3rem 0.8rem; }
 
 /* ---------- protezione dei contenuti ---------- */
-html.contenuto main { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
-html.contenuto main input, html.contenuto main textarea { -webkit-user-select: text; user-select: text; }
+html.contenuto:not(.sbloccato) main { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+html.contenuto:not(.sbloccato) main input, html.contenuto:not(.sbloccato) main textarea { -webkit-user-select: text; user-select: text; }
 html.contenuto img, html.contenuto svg { -webkit-user-drag: none; }
 html.velato main { filter: blur(14px); transition: filter 0.05s; }
 @media print { html.contenuto body { display: none !important; } }
@@ -787,6 +817,49 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .grafico .poligono { fill: color-mix(in srgb, var(--accento) 16%, transparent); stroke: color-mix(in srgb, var(--accento) 45%, transparent); stroke-width: 1; }
 .grafico .riferimento line { stroke: var(--inchiostro-2); stroke-width: 1.3; }
 .grafico .etichetta, .grafico .etichetta-vettore { font-family: var(--testo); font-style: italic; font-size: 17px; fill: var(--inchiostro); }
+/* schemi della Statica (::struttura): aste, vincoli, carichi, quote, sezioni e diagrammi */
+.struttura .asta { stroke: var(--inchiostro); stroke-width: 4.2; stroke-linecap: round; }
+.struttura .vincolo { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.8; stroke-linejoin: round; }
+.struttura .cerniera, .struttura .rullo { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.8; }
+.struttura .catena { stroke: var(--inchiostro); stroke-width: 1.8; stroke-linecap: round; }
+.struttura .piastrina { stroke: var(--inchiostro); stroke-width: 3.2; stroke-linecap: round; }
+.struttura .interruzione { fill: var(--carta); stroke: none; }
+.struttura .biella { stroke: var(--inchiostro); stroke-width: 2.2; stroke-linecap: round; }
+.struttura .terreno { stroke: var(--inchiostro); stroke-width: 1.8; stroke-linecap: round; }
+.struttura .tratto-terreno { stroke: var(--inchiostro-2); stroke-width: 1.1; }
+.struttura .forza, .struttura .coppia { stroke: var(--accento); stroke-width: 2.6; fill: none; stroke-linecap: round; }
+.struttura .punta-forza { fill: var(--accento); }
+.struttura .reazione { stroke: var(--c-attenzione); stroke-width: 2.4; stroke-linecap: round; }
+.struttura .punta-reazione { fill: var(--c-attenzione); }
+.struttura .carico { stroke: var(--accento); stroke-width: 1.4; }
+.struttura .punta-carico { fill: var(--accento); }
+.struttura .carico-area { fill: color-mix(in srgb, var(--accento) 10%, transparent); stroke: none; }
+.struttura .carico-linea { fill: none; stroke: var(--accento); stroke-width: 1.8; }
+.struttura .punta-sottile { fill: var(--inchiostro); }
+.struttura .freccia-sottile, .struttura .riferimento line { stroke: var(--inchiostro); stroke-width: 1.3; }
+.struttura .riferimento .nome-asse { font-size: 14px; }
+.struttura .quota, .struttura .quota-tacca, .struttura .quota-richiamo { stroke: var(--inchiostro-2); stroke-width: 1.1; fill: none; }
+.struttura .quota-tacca { stroke-width: 1.6; }
+.struttura .quota-testo { font-family: var(--ui); font-size: 17px; fill: var(--inchiostro-2); }
+.struttura .sezione { fill: color-mix(in srgb, var(--accento) 18%, transparent); stroke: var(--inchiostro); stroke-width: 1.6; stroke-linejoin: round; }
+.struttura .foro { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.6; }
+.struttura .sottile { fill: none; stroke: var(--inchiostro); stroke-width: 1.4; }
+.struttura .tratteggio { fill: none; stroke: var(--inchiostro-2); stroke-width: 1.4; stroke-dasharray: 7 5; }
+.struttura .diagramma-area { fill: color-mix(in srgb, var(--accento) 12%, transparent); stroke: none; }
+.struttura .diagramma-tratteggio { stroke: color-mix(in srgb, var(--accento) 55%, transparent); stroke-width: 1; }
+.struttura .diagramma-linea { fill: none; stroke: var(--accento); stroke-width: 2.4; stroke-linejoin: round; }
+.struttura .valore { font-family: var(--ui); font-size: 17px; font-weight: 600; fill: var(--inchiostro); stroke: var(--carta); stroke-width: 4px; stroke-linejoin: round; paint-order: stroke; }
+.struttura .segno { font-family: var(--ui); font-size: 19px; font-weight: 700; fill: var(--accento); }
+.struttura .baricentro { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.5; }
+.struttura .baricentro-pieno { fill: var(--inchiostro); }
+.struttura .centro { fill: var(--carta); stroke: var(--c-attenzione); stroke-width: 1.6; }
+.struttura .centro-croce { stroke: var(--c-attenzione); stroke-width: 1.3; }
+.struttura .punto { fill: var(--inchiostro); }
+.struttura .nome-nodo { font-family: var(--testo); font-size: 20px; fill: var(--inchiostro); }
+.struttura .reazione-et { fill: var(--c-attenzione); }
+.struttura .pedice { font-size: 14px; }
+.struttura .etichetta, .struttura .etichetta-vettore { font-size: 20px; }
+.struttura .nome-asse { font-size: 19px; }
 /* figure con cursore (::cursore): sotto la legenda il cursore con il suo valore e i numeri calcolati */
 .cursore-comandi { max-width: 520px; margin: 0.55rem auto 0; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro); }
 .cursore-riga { display: flex; align-items: center; gap: 0.9rem; }
@@ -1048,6 +1121,19 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .tempo .secondi { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 2.6rem; text-align: right; }
 .nota-tempo { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0.3rem 0 0 2rem; }
 .testo-domanda { margin-top: 1rem; }
+.testo-domanda table {
+  width: 100%;
+  margin-block: 1rem;
+  border-collapse: collapse;
+  font-family: var(--ui);
+  font-size: 0.9rem;
+}
+.testo-domanda :is(th, td) {
+  padding: 0.45rem;
+  border-bottom: 1px solid var(--riga);
+  overflow-wrap: anywhere;
+}
+.testo-domanda th { background: var(--carta-2); }
 .scelte { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
 .scelta { display: flex; align-items: center; gap: 0.9rem; min-height: 3.2rem; text-align: left; font: inherit; color: var(--inchiostro); background: #fff; border: 1px solid var(--riga); border-radius: 10px; padding: 0.4rem 1rem; cursor: pointer; }
 .scelta .lettera { flex: none; width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid var(--riga); display: inline-grid; place-items: center; font-family: var(--ui); font-size: 0.85rem; font-weight: 700; color: var(--inchiostro-2); }
@@ -1178,8 +1264,12 @@ html.collegato .bottone-livello:hover, html.collegato .bottone-livello[aria-expa
 .numeri-domande .numero { min-width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--riga); background: #fff; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--inchiostro-2); cursor: pointer; padding: 0 0.4rem; }
 .numeri-domande .numero-giusto { background: color-mix(in srgb, var(--verde) 14%, #fff); border-color: color-mix(in srgb, var(--verde) 50%, transparent); color: var(--verde); }
 .numeri-domande .numero-sbagliato { background: color-mix(in srgb, var(--c-esempio) 12%, #fff); border-color: color-mix(in srgb, var(--c-esempio) 50%, transparent); color: #8a5f1f; }
+.numeri-domande .numero-bloccato { border-style: dashed; background: var(--carta); }
 .numeri-domande .numero-attivo { outline: 2px solid var(--accento); outline-offset: 1px; color: var(--inchiostro); }
 .numero-domanda { font-family: var(--ui); font-size: 0.85rem; color: var(--inchiostro-2); margin: 0 0 0.6rem; }
+.blocco-domande { margin: 0; padding: 1.2rem 1.1rem; text-align: left; background: #fff; }
+.blocco-domande .sopratitolo { margin: 0 0 0.3rem; color: var(--azione); }
+.blocco-domande h2 { margin: 0 0 0.9rem; font-size: 1.2rem; line-height: 1.35; }
 @media (max-width: 30rem) { .navigazione-domande { flex-wrap: wrap; } .numeri-domande { order: -1; flex-basis: 100%; } .navigazione-domande .bottone-secondario { flex: 1; } }
 
 /* Tasti di acquisto in un solo colore (area 7, scelta A): il colore della materia resta nel pallino, nella striscia e nei titoli */

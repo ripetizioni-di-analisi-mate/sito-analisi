@@ -10,6 +10,8 @@
 //   ::grafico{f="sin(x)/x" xmin=-12 xmax=12 ymin=-0.4 ymax=1.2 punti="0,1"}   (tutti gli attributi in grafico.mjs)
 //   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
 //   ::figura{tipo="serie" celle="…"}   figure del ragionamento figurale: serie, matrici, opzioni, cubi (attributi in figura.mjs)
+//   ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello"}   schemi della Statica: travi, vincoli,
+//       carichi, quote, sezioni e diagrammi delle sollecitazioni (attributi in struttura.mjs)
 //   ::cursore{tipo="epsilon-delta" titolo="…"}   grafico con un cursore che ne cambia un parametro (cursore.mjs):
 //       tipi epsilon-delta (ε nella definizione di limite), secante (h nel rapporto incrementale),
 //       riemann (n nelle somme di Riemann), taylor (grado di McLaurin), somme-parziali (N di una serie);
@@ -21,6 +23,7 @@ import { grafico } from './grafico.mjs';
 import { venn } from './venn.mjs';
 import { cursore } from './cursore.mjs';
 import { figura } from './figura.mjs';
+import { struttura } from './struttura.mjs';
 
 const ETICHETTE = {
   definizione: 'Definizione',
@@ -45,6 +48,18 @@ const EN = {
   percorso: 'Where this fits', formula: 'Formula',
   mostra: 'Show solution', nascondi: 'Hide solution',
 };
+const DE = {
+  definizione: 'Definition', teorema: 'Satz', proposizione: 'Aussage', dimostrazione: 'Beweis',
+  esempio: 'Beispiel', osservazione: 'Bemerkung', attenzione: 'Hinweis', richiamo: 'Rückblick',
+  soluzione: 'Lösung', percorso: 'Einordnung', formula: 'Formel',
+  mostra: 'Lösung anzeigen', nascondi: 'Lösung ausblenden',
+};
+const ES = {
+  definizione: 'Definición', teorema: 'Teorema', proposizione: 'Proposición', dimostrazione: 'Demostración',
+  esempio: 'Ejemplo', osservazione: 'Observación', attenzione: 'Importante', richiamo: 'Recordatorio',
+  soluzione: 'Solución', percorso: 'Dónde se usa', formula: 'Fórmula',
+  mostra: 'Mostrar solución', nascondi: 'Ocultar solución',
+};
 const IT = { ...ETICHETTE, mostra: 'Mostra soluzione', nascondi: 'Nascondi soluzione' };
 
 const NUMERATI = new Set(['definizione', 'teorema', 'proposizione']);
@@ -54,7 +69,7 @@ const norma = (t) => String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\
 export default function remarkBlocchi() {
   return (tree, file) => {
     const percorso = String(file?.path || file?.history?.[0] || '');
-    const E = /content-en[\\/]/.test(percorso) ? EN : IT;
+    const E = /content-es[\\/]/.test(percorso) ? ES : /content-de[\\/]/.test(percorso) ? DE : /content-en[\\/]/.test(percorso) ? EN : IT;
     // Numerazione: dentro ogni sezione (##), se ci sono almeno due definizioni/teoremi/proposizioni,
     // i loro titoli diventano "1. …", "2. …"; un blocco da solo resta senza numero.
     // Un blocco che ha lo stesso titolo della sua sezione non ripete il titolo.
@@ -70,10 +85,10 @@ export default function remarkBlocchi() {
     }
     chiudi();
     visit(tree, (node) => {
-      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura')) {
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;

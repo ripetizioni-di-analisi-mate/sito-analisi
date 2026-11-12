@@ -9,8 +9,7 @@ async function avvia() {
   const messaggio = document.getElementById('esito-pacchetto');
   const tabs = [...app.querySelectorAll('[data-tab]')];
   const bottoni = [...app.querySelectorAll('[data-compra]')];
-  let io = null, conf = null, caricando = true, occupato = false, pagato = false, selezioneVideo = null, atteso = [];
-  let paddlePronto = null;
+  let io = null, attivo = false, caricando = true, selezioneVideo = null;
   const scrivi = (selettore, testo) => { app.querySelector(selettore).textContent = testo; };
   const avviso = (testo) => { messaggio.hidden = !testo; messaggio.textContent = testo; };
   const scorri = (el) => el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
@@ -19,13 +18,10 @@ async function avvia() {
     try { return tipo === 'materie' ? riepilogoMaterie(scelte(), materie) : riepilogoVideo(selezioneVideo, video); }
     catch { return null; }
   };
-  const disponibile = (q) => q && conf && (q.tipo === 'materie'
-    ? q.chiavi.every((s) => conf.prezzi[s] && !io?.materie.includes(s))
-    : q.video.every((s) => conf.videocorsi[s]) && !videoSovrapposti(q.chiavi, io?.materie || [], video));
+  const disponibile = (q) => q && attivo && (q.tipo === 'materie'
+    ? q.chiavi.every((s) => !io?.materie.includes(s))
+    : !videoSovrapposti(q.chiavi, io?.materie || [], video));
   function aggiorna() {
-    app.querySelector('fieldset').disabled = occupato || pagato;
-    tabs.forEach((b) => { b.disabled = occupato || pagato; });
-    app.querySelectorAll('[data-scegli-materie], [data-scegli-video]').forEach((b) => { b.disabled = occupato || pagato || b.dataset.bloccato === '1'; });
     const m = riepilogo('materie'), v = riepilogo('video');
     app.querySelector('#riepilogo-materie').hidden = !m;
     app.querySelector('#riepilogo-video').hidden = !v;
@@ -61,10 +57,10 @@ async function avvia() {
     scrivi('[data-risparmio-video]', v ? `Risparmi ${euro(v.risparmio)} · materiale del sito incluso` : '');
     bottoni.forEach((b) => {
       const q = b.dataset.compra === 'materie' ? m : v;
-      b.disabled = caricando || occupato || pagato || !disponibile(q);
-      b.textContent = pagato ? 'Pagamento ricevuto' : occupato ? 'Apro il pagamento…' : caricando ? 'Un momento…' : !q
+      b.disabled = caricando || !disponibile(q);
+      b.textContent = caricando ? 'Un momento…' : !q
         ? b.dataset.compra === 'materie' ? 'Scegli almeno due materie' : 'Scegli un pacchetto'
-        : !conf ? 'Pagamento non disponibile' : !disponibile(q) ? 'Pacchetto già posseduto o non disponibile' : `${io ? 'Acquista' : 'Accedi e acquista'} · ${euro(q.totale)}`;
+        : !attivo ? 'Pagamento non disponibile' : !disponibile(q) ? 'Pacchetto già posseduto o non disponibile' : `${io ? 'Acquista' : 'Accedi e acquista'} · ${euro(q.totale)}`;
     });
   }
   function scheda(tipo) {
@@ -88,7 +84,6 @@ async function avvia() {
   };
   app.querySelector('[data-apri-componi]')?.addEventListener('click', (e) => {
     e.preventDefault();
-    if (occupato || pagato) return;
     const el = app.querySelector('#componi'); el.open = true;
     (el.querySelector('input:not(:disabled)') || el.querySelector('summary')).focus({ preventScroll: true });
     el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
@@ -109,60 +104,13 @@ async function avvia() {
   if (params.get('tipo') === 'video') { scheda('video'); selezioneVideo = params.get('pacchetto'); }
   else { const elenco = (params.get('materie') || '').split(','); caselle.forEach((c) => { c.checked = elenco.includes(c.value); }); }
 
-  async function caricaPaddle() {
-    if (paddlePronto) return paddlePronto;
-    paddlePronto = new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
-      s.onerror = () => { paddlePronto = null; s.remove(); reject(new Error('Non riesco a caricare il pagamento. Riprova.')); };
-      s.onload = () => {
-        try {
-          if (conf.ambiente === 'sandbox') window.Paddle.Environment.set('sandbox');
-          window.Paddle.Initialize({ token: conf.token, eventCallback: (ev) => {
-            if (ev.name === 'checkout.error') { avviso('Non riesco ad aprire il pagamento. Riprova o scrivi a Carmine.'); return; }
-            if (ev.name !== 'checkout.completed' || pagato) return;
-            pagato = true; aggiorna(); avviso('Pagamento ricevuto. Sto sbloccando i tuoi corsi…');
-            // conversione per Google Ads (src/data/misurazione.ts)
-            try { const d = ev.data || {}; window.misura && window.misura('acquisto', { valore: d.totals && d.totals.total, valuta: d.currency_code, id: d.transaction_id, voce: 'pacchetto', email: io?.email }); } catch (_) {}
-            let tentativi = 0;
-            const controlla = async () => {
-              const r = await fetch('/api/io', { cache: 'no-store' }).catch(() => null);
-              const u = r?.ok ? await r.json().catch(() => null) : null;
-              if (u && atteso.every((k) => u.materie.includes(k))) { location.href = '/account'; return; }
-              if (++tentativi < 30) setTimeout(controlla, 2000);
-              else avviso('Pagamento ricevuto. Lo sblocco sta richiedendo qualche istante: ritroverai i corsi nel tuo account. Per assistenza, scrivi a Carmine.');
-            };
-            controlla();
-          } });
-          resolve();
-        } catch { paddlePronto = null; reject(new Error('Non riesco ad aprire il pagamento. Riprova.')); }
-      };
-      document.head.appendChild(s);
-    });
-    return paddlePronto;
-  }
-  function accesso(tipo) {
-    const ritorno = new URLSearchParams(tipo === 'materie' ? { tipo, materie: scelte().join(',') } : { tipo, pacchetto: selezioneVideo });
-    location.href = `/accedi?dopo=${encodeURIComponent(`/pacchetti?${ritorno}`)}`;
-  }
-  bottoni.forEach((b) => b.addEventListener('click', async () => {
+  bottoni.forEach((b) => b.addEventListener('click', () => {
     const tipo = b.dataset.compra, q = riepilogo(tipo);
-    if (occupato || pagato || !disponibile(q)) return;
-    if (!io) { accesso(tipo); return; }
-    occupato = true; aggiorna(); avviso('');
-    try {
-      const body = tipo === 'materie' ? { tipo, materie: [...q.chiavi] } : { tipo, pacchetto: q.id };
-      await caricaPaddle();
-      const r = await fetch('/api/pacchetti/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
-      const d = await r.json();
-      if (r.status === 401) { accesso(tipo); return; }
-      if (!r.ok) throw new Error(d.errore || 'Pagamento non disponibile. Riprova.');
-      if (d.totale !== q.totale) throw new Error('Il listino è stato aggiornato: ricarica la pagina prima di acquistare.');
-      atteso = d.chiavi;
-      window.Paddle.Checkout.open({ items: d.items, ...(d.discountId ? { discountId: d.discountId } : {}),
-        customer: { email: io.email }, customData: { pacchetto: d.id, email: io.email }, settings: { locale: 'it', showAddDiscounts: false } });
-    } catch (e) { avviso(e.message || 'Errore di connessione. Riprova.'); scorri(messaggio); }
-    finally { occupato = false; aggiorna(); }
+    if (!disponibile(q)) return;
+    const selezione = new URLSearchParams(tipo === 'materie'
+      ? { tipo, materie: q.chiavi.join(',') } : { tipo, pacchetto: q.id });
+    const acquisto = '/acquisto?' + selezione;
+    location.assign(io ? acquisto : '/accedi?dopo=' + encodeURIComponent(acquisto));
   }));
   aggiorna();
   try {
@@ -170,9 +118,9 @@ async function avvia() {
     if (!rIo.ok && rIo.status !== 401) throw new Error('Non riesco a verificare il tuo account. Ricarica la pagina.');
     if (!rConf.ok) throw new Error('Non riesco a caricare i prezzi. Ricarica la pagina.');
     io = rIo.ok ? await rIo.json() : null;
-    conf = (await rConf.json()).paddle;
+    attivo = Boolean((await rConf.json()).stripe);
     caselle.forEach((c) => {
-      const tuo = io?.materie.includes(c.value), pronto = conf?.prezzi[c.value];
+      const tuo = io?.materie.includes(c.value), pronto = attivo;
       c.disabled = Boolean(tuo || !pronto);
       if (c.disabled) c.checked = false;
       if (tuo || !pronto) app.querySelector(`[data-stato-materia="${c.value}"]`).textContent = tuo ? 'Già nel tuo account' : 'In attivazione';
@@ -180,7 +128,7 @@ async function avvia() {
     app.querySelectorAll('[data-scegli-materie]').forEach((b) => {
       const elenco = b.dataset.scegliMaterie.split(',');
       const tuo = elenco.some((s) => io?.materie.includes(s));
-      const pronto = elenco.every((s) => conf?.prezzi[s]);
+      const pronto = attivo;
       b.disabled = tuo || !pronto;
       b.dataset.bloccato = b.disabled ? '1' : '0';
       if (tuo || !pronto) b.textContent = tuo ? 'Include corsi già tuoi' : 'In attivazione';
@@ -188,7 +136,7 @@ async function avvia() {
     app.querySelectorAll('[data-scegli-video]').forEach((b) => {
       const q = riepilogoVideo(b.dataset.scegliVideo, video);
       const tuo = videoSovrapposti(q.chiavi, io?.materie || [], video);
-      const pronto = q.video.every((s) => conf?.videocorsi[s]);
+      const pronto = attivo;
       b.disabled = tuo || !pronto;
       b.dataset.bloccato = b.disabled ? '1' : '0';
       if (tuo || !pronto) b.textContent = tuo ? 'Include corsi già tuoi' : 'In attivazione';

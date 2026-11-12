@@ -8,6 +8,11 @@ const normalizza = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u03
   .replace(/\s+/g, ' ').trim()
   .replace(/\bfondamentale calcolo integrale\b/g, 'fondamentale calcolo');
 const senzaTipo = (s) => s.replace(/^(?:teorema|formula|criterio|principio|definizione|proposizione|lemma|corollario) /, '');
+const NOMI_EQUIVALENTI = new Map([
+  ['rouche capelli per matrici scala', 'teorema rouche capelli'],
+  ['algoritmo gauss per riduzione scala', 'algoritmo gauss'],
+  ['ortogonalizzazione gram schmidt', 'procedimento gram schmidt'],
+]);
 function nomiRichiesti(s) {
   const base = normalizza(s)
     .replace(/\b(?:enunciare|enuncia|enunci|dimostrare|dimostra|dimostri|scrivere|scrivi|riportare|riporta|fornire|fornisci)\b/g, ' ')
@@ -17,7 +22,8 @@ function nomiRichiesti(s) {
   const senzaIstruzioni = base
     .replace(/^(?:(?:enunciati? dimostrazioni?|enunciato|dimostrazione|ipotesi|tesi) )+/, '')
     .replace(/(?: (?:enunciati? dimostrazioni?|enunciato|dimostrazione|ipotesi|tesi))+$/, '');
-  return [...new Set([base, senzaIstruzioni])];
+  const equivalente = NOMI_EQUIVALENTI.get(senzaTipo(senzaIstruzioni));
+  return [...new Set([base, senzaIstruzioni, ...(equivalente ? [equivalente] : [])])];
 }
 
 const cacheNomi = new WeakMap();

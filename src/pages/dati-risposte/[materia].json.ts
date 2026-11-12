@@ -4,9 +4,11 @@ import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { MATERIE } from '../../data/materie';
 import { risultatiMateria } from '../../lib/risposte';
+import { usAnswers, usPracticeSlugs } from '../../lib/stem-usa-banks';
 
 export function getStaticPaths() {
-  return MATERIE.filter((m) => m.attiva).map((m) => ({ params: { materia: m.slug } }));
+  return [...MATERIE.filter((m) => m.attiva).map((m) => m.slug), ...usPracticeSlugs].map(materia => ({ params: { materia } }));
 }
 export const GET: APIRoute = async ({ params }) =>
-  new Response(JSON.stringify(risultatiMateria(await getCollection('dafare'), params.materia!)), { headers: { 'content-type': 'application/json' } });
+  new Response(JSON.stringify(usPracticeSlugs.includes(params.materia!) ? usAnswers(params.materia!) : risultatiMateria(await getCollection('dafare'), params.materia!)),
+    { headers: { 'content-type': 'application/json' } });

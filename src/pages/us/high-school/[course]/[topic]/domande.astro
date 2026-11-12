@@ -1,0 +1,14 @@
+---
+import Domande from '../../../../../viste/Domande.astro';
+import { highSchoolCourses, highSchoolQuestionCount } from '../../../../../data/stem-usa/high-school/index.mjs';
+import { RIPASSO, RIPASSO_OGGI } from '../../../../../data/livelli';
+
+export function getStaticPaths() {
+  return highSchoolCourses.flatMap(course => [
+    ...course.lessons.map((lesson, i) => ({ params: { course: course.slug.slice(3), topic: 'unit-' + (i + 1) }, props: { slug: course.slug, total: highSchoolQuestionCount(lesson) } })),
+    { params: { course: course.slug.slice(3), topic: RIPASSO }, props: { slug: course.slug, total: course.lessons.reduce((sum, lesson) => sum + highSchoolQuestionCount(lesson), 0) } },
+    { params: { course: course.slug.slice(3), topic: RIPASSO_OGGI }, props: { slug: course.slug, total: 0 } },
+  ]);
+}
+---
+<Domande lingua="en" materia={Astro.props.slug} argomento={Astro.params.topic!} totale={Astro.props.total} usa />

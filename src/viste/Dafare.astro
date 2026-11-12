@@ -1,4 +1,5 @@
 ---
+import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
@@ -26,14 +27,20 @@ const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomen
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi`);
 const passo = (v: { id: string } | undefined, tt?: string) => v && { titolo: `${t.esercizio} ${numero(v.id)}`, sotto: tt, href: link(lingua, `${base}/esercizi/${numero(v.id)}`) };
+// Inizio della traccia in testo semplice (senza formule): serve alla descrizione degli esercizi con un titolo generico.
+const traccia = (() => {
+  const primo = (voce.body ?? '').split(/^:::/m)[0].trim().split(/\n\s*\n/)[0] ?? '';
+  return /[$<\\]/.test(primo) ? '' : primo.replace(/[*_`]/g, '').replace(/\s+/g, ' ').trim();
+})();
+const descrizioneSeo = SEO(lingua).dafareDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo, traccia);
 const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua)).successivo;
 ---
 <Base
   titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
-  descrizione={SEO(lingua).dafareDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo)}
-  seo={{ titolo: SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
-  '@type': 'LearningResource', name: voce.data.titolo, description: SEO(lingua).dafareDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo), learningResourceType: 'Exercise', inLanguage: lingua,
-  educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
+  descrizione={descrizioneSeo}
+  seo={{ canonico: originale(materia, argomento, 'esercizi', n), titolo: SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
+  '@type': 'LearningResource', name: voce.data.titolo, description: descrizioneSeo, learningResourceType: 'Exercise', inLanguage: lingua,
+  educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
@@ -51,5 +58,5 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
     <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
   )}
   <div class="testo-studio"><Content /></div>
-  {risultato && <VerificaRisposta id={id} tipo={risultato.tipo} primitiva={risultato.primitiva} lingua={lingua} />}
+  <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} lingua={lingua} />
 </Base>

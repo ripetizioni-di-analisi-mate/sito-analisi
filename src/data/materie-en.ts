@@ -83,7 +83,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'analisi-2': {
     titolo: 'Mathematical Analysis 2',
     breve: 'Analysis 2',
-    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions.',
+    descrizione: 'Functions of several variables, multiple integrals, curves and surfaces, series of functions, differential equations and linear systems.',
     argomenti: {
       'funzioni-di-piu-variabili': { titolo: 'Functions of several variables', breve: 'Several variables' },
       'calcolo-differenziale': { titolo: 'Differential calculus in several variables', breve: 'Differential calculus' },
@@ -96,6 +96,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'successioni-e-serie-di-funzioni': { titolo: 'Sequences and series of functions', breve: 'Series of functions' },
       'serie-di-potenze': { titolo: 'Power series and Taylor series', breve: 'Power series' },
       'serie-di-fourier': { titolo: 'Fourier series', breve: 'Fourier series' },
+      'equazioni-differenziali': { titolo: 'Differential equations and linear systems', breve: 'Differential equations' },
     },
   },
   'analisi-3': {
@@ -188,6 +189,40 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       ottimizzazione: { titolo: 'Unconstrained and constrained extrema', breve: 'Optimization' },
     },
   },
+  'statica': {
+    titolo: 'Structural statics',
+    breve: 'Statics',
+    descrizione: 'Statics for engineering students: force systems, centroids and moments of inertia, constraints and kinematic analysis, support reactions, Gerber beams, frames, three-hinged arches and trusses, axial force, shear and bending moment diagrams, virtual work and influence lines. Learning materials are currently in Italian.',
+    argomenti: {
+      'sistemi-di-forze': { titolo: 'Applied vectors, moments and equivalent force systems', breve: 'Force systems' },
+      'geometria-delle-masse': { titolo: 'Centroids and moments of inertia', breve: 'Centroids and inertia' },
+      'cinematica-dei-rigidi': { titolo: 'Planar rigid-body kinematics and instantaneous centres', breve: 'Rigid-body kinematics' },
+      'analisi-cinematica': { titolo: 'Constraints and kinematic analysis: mechanisms and statically determinate structures', breve: 'Constraints' },
+      'reazioni-vincolari': { titolo: 'Equilibrium equations and support reactions', breve: 'Support reactions' },
+      'strutture-composte': { titolo: 'Compound structures: Gerber beams, frames and three-hinged arches', breve: 'Compound structures' },
+      'travature-reticolari': { titolo: 'Trusses: method of joints and method of sections', breve: 'Trusses' },
+      'caratteristiche-della-sollecitazione': { titolo: 'Internal forces and N, V, M diagrams', breve: 'Internal force diagrams' },
+      'equazioni-indefinite': { titolo: 'Differential equilibrium equations of beams', breve: 'Differential equilibrium' },
+      'lavori-virtuali': { titolo: 'Principle of virtual work', breve: 'Virtual work' },
+      'linee-di-influenza': { titolo: 'Influence lines', breve: 'Influence lines' },
+    },
+  },
+  'scienza-delle-costruzioni': {
+    titolo: 'Structural mechanics',
+    breve: 'Structural mechanics',
+    descrizione: 'Structural mechanics for engineering students, from support reactions and internal force diagrams to stresses, deflections, statically indeterminate structures and Euler buckling. The study materials and quizzes are in Italian.',
+    argomenti: {
+      'statica-vincoli': { titolo: 'Equilibrium, supports and reactions', breve: 'Equilibrium and supports' },
+      'sollecitazioni': { titolo: 'Axial force, shear force and bending moment', breve: 'Internal force diagrams' },
+      'reticolari': { titolo: 'Trusses and member forces', breve: 'Trusses' },
+      'geometria-sezioni': { titolo: 'Cross-section properties and second moments of area', breve: 'Section properties' },
+      'tensioni-deformazioni': { titolo: 'Stress, strain, Mohr’s circle and Hooke’s law', breve: 'Stress and strain' },
+      'de-saint-venant': { titolo: 'Saint-Venant: axial loading, bending, shear and torsion', breve: 'Saint-Venant' },
+      'linea-elastica': { titolo: 'Elastic curves, slopes and deflections', breve: 'Elastic curves' },
+      'iperstatiche': { titolo: 'Statically indeterminate structures, virtual work and the force method', breve: 'Indeterminate structures' },
+      'stabilita': { titolo: 'Elastic stability and Euler buckling', breve: 'Elastic stability' },
+    },
+  },
   'statistica': {
     titolo: 'Statistics and probability',
     breve: 'Statistics and probability',
@@ -207,11 +242,58 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       "regressione-e-correlazione": { titolo: "Linear regression and correlation", breve: "Regression" },
     },
   },
+  'informatica-superiori-1': {
+    titolo: 'Computer science Year 1', breve: 'Computer science Year 1',
+    descrizione: 'Computer hardware, data representation, spreadsheets and digital sources.',
+    argomenti: {},
+  },
+  'informatica-superiori-2': {
+    titolo: 'Computer science Year 2', breve: 'Computer science Year 2',
+    descrizione: 'Algorithms, conditions, loops, functions, sequences and testing.',
+    argomenti: {},
+  },
+  'informatica-superiori-3': {
+    titolo: 'Computer science Year 3', breve: 'Computer science Year 3',
+    descrizione: 'Data structures, files, classes, HTML and digital formats.',
+    argomenti: {},
+  },
+  'informatica-superiori-4': {
+    titolo: 'Computer science Year 4', breve: 'Computer science Year 4',
+    descrizione: 'Relational databases, SQL queries and a practical database project.',
+    argomenti: {},
+  },
+  'informatica-superiori-5': {
+    titolo: 'Computer science Year 5', breve: 'Computer science Year 5',
+    descrizione: 'Computer science for the final year of the Italian applied sciences secondary school track. Networks, Internet protocols, algorithms, automata, numerical methods and scientific simulations. Study materials are in Italian.',
+    argomenti: {
+      'reti-e-modelli': { titolo: 'Computer networks, Ethernet and layered models', breve: 'Networks and Ethernet' },
+      'ipv4-e-sottoreti': { titolo: 'IPv4 addressing, subnetting and gateways', breve: 'IPv4 and subnetting' },
+      'internet-e-protocolli': { titolo: 'The Internet, TCP and UDP, DNS and the Web', breve: 'Internet protocols' },
+      'complessita-algoritmi': { titolo: 'Searching, sorting and algorithmic complexity', breve: 'Algorithmic complexity' },
+      'automi-e-computabilita': { titolo: 'Automata, languages and limits of computation', breve: 'Automata and computability' },
+      'errori-e-zeri': { titolo: 'Approximation errors and root finding', breve: 'Errors and roots' },
+      'integrazione-numerica': { titolo: 'Numerical integration', breve: 'Numerical integration' },
+      'simulazione-scientifica': { titolo: 'Scientific simulations and model validation', breve: 'Scientific simulations' },
+    },
+  },
   'matematica-superiori-1': {
     titolo: 'Mathematics, 1st year',
     breve: 'Maths 1st year',
-    descrizione: 'The mathematics syllabus of the 1st year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'First-year Italian high school mathematics: numbers, algebra, linear equations, geometry and statistics, with worked examples and 90 questions per topic. Study materials are in Italian. The placement of rational expressions and inequalities within the first two years varies by school.',
+    argomenti: {
+      'numeri-e-operazioni': { titolo: 'Natural numbers, integers and rational numbers', breve: 'Numbers and operations' },
+      'potenze-proporzioni-percentuali': { titolo: 'Powers, ratios and percentages', breve: 'Powers and ratios' },
+      'insiemi-e-logica': { titolo: 'Sets and elementary logic', breve: 'Sets and logic' },
+      'monomi-e-polinomi': { titolo: 'Monomials and polynomials', breve: 'Monomials and polynomials' },
+      'prodotti-notevoli': { titolo: 'Special products and algebraic identities', breve: 'Special products' },
+      'scomposizioni': { titolo: 'Factoring polynomials', breve: 'Factoring' },
+      'frazioni-algebriche': { titolo: 'Rational expressions and domain restrictions', breve: 'Rational expressions' },
+      'equazioni-primo-grado': { titolo: 'Linear equations and word problems', breve: 'Linear equations' },
+      'disequazioni-primo-grado': { titolo: 'Linear inequalities', breve: 'Linear inequalities' },
+      'geometria-piano-triangoli': { titolo: 'Plane geometry and triangles', breve: 'Geometry and triangles' },
+      'parallele-e-quadrilateri': { titolo: 'Parallel lines and quadrilaterals', breve: 'Lines and quadrilaterals' },
+      'dati-e-statistica': { titolo: 'Data, frequencies and descriptive statistics', breve: 'Data and statistics' },
+    },
   },
   'matematica-superiori-2': {
     titolo: 'Mathematics, 2nd year',
@@ -291,8 +373,19 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'fisica-superiori-1': {
     titolo: 'Physics, 1st year',
     breve: 'Physics 1st year',
-    descrizione: 'The physics syllabus of the 1st year of Italian high school, with theory and worked exercises.',
-    argomenti: {},
+    descrizione: 'First-year Italian high school physics: measurements, uncertainty, graphs, density, vectors, forces, equilibrium and fluids, with worked examples and 90 questions per topic. Study materials are in Italian. Some schools cover fluids in the second year.',
+    argomenti: {
+      'grandezze-e-unita': { titolo: 'Physical quantities and units', breve: 'Quantities and units' },
+      'misure-e-incertezze': { titolo: 'Measurements, instruments and uncertainty', breve: 'Measurements and uncertainty' },
+      'proporzionalita-e-grafici': { titolo: 'Proportionality, tables and graphs', breve: 'Proportionality and graphs' },
+      'densita': { titolo: 'Mass, volume and density', breve: 'Density' },
+      'vettori': { titolo: 'Vectors and vector operations', breve: 'Vectors' },
+      'forze': { titolo: 'Weight, elastic force and friction', breve: 'Forces' },
+      'equilibrio-punto': { titolo: 'Equilibrium of a particle', breve: 'Particle equilibrium' },
+      'equilibrio-corpo-rigido': { titolo: 'Rigid-body equilibrium, levers and centre of mass', breve: 'Rigid-body equilibrium' },
+      'pressione-fluidi': { titolo: 'Pressure and fluid statics', breve: 'Pressure and fluids' },
+      'archimede-galleggiamento': { titolo: 'Archimedes principle, buoyancy and floating', breve: 'Buoyancy and floating' },
+    },
   },
   'fisica-superiori-2': {
     titolo: 'Physics, 2nd year',
@@ -427,5 +520,5 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
   'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
 };
-export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics' };
+export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics', 'Informatica': 'Computer science' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'Semestre filtro': 'Filter semester', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };

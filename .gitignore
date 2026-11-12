@@ -35,4 +35,14 @@ strumenti/statistica/__pycache__/
 /src/content-en/domande/analisi-3/serie-di-potenze/
 /src/content-en/domande/analisi-3/serie-di-fourier/
 
+# Equazioni differenziali di Analisi 2, generate dal capitolo scalare e dai sistemi
+/src/content/teoria/analisi-2/equazioni-differenziali.md
+/src/content/svolti/analisi-2/equazioni-differenziali/
+/src/content/dafare/analisi-2/equazioni-differenziali/
+/src/content/domande/analisi-2/equazioni-differenziali/
+/src/content-en/teoria/analisi-2/equazioni-differenziali.md
+/src/content-en/svolti/analisi-2/equazioni-differenziali/
+/src/content-en/dafare/analisi-2/equazioni-differenziali/
+/src/content-en/domande/analisi-2/equazioni-differenziali/
+
 /strumenti/finanziaria/__pycache__/

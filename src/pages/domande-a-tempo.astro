@@ -1,5 +1,5 @@
 ---
-// Domande a tempo di tutte le materie (gratis). 03/11/2026: versione A scelta da Carmine fra tre (B elenco a fisarmonica, C tasti delle materie):
+// Domande a tempo di tutte le materie. 03/11/2026: versione A scelta da Carmine fra tre (B elenco a fisarmonica, C tasti delle materie):
 // una scheda per materia con «Ripasso su tutto» e la simulazione; gli argomenti si aprono con «Scegli un argomento». Versione inglese: src/pages/en/domande-a-tempo.astro.
 import Base from '../layouts/Base.astro';
 import { RIPASSO } from '../data/livelli';
@@ -7,10 +7,9 @@ import { elencoDomande } from '../lib/domande-elenco';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 const { materie, gruppi, totale } = await elencoDomande();
 ---
-<Base titolo="Domande a tempo: quiz gratuiti per materia e argomento" descrizione={`Quiz a risposta multipla gratuiti su ${materie.length} materie: quattro risposte, due minuti per domanda e la spiegazione dopo ogni risposta. Anche senza account.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]}>
-  <p class="sopratitolo">Gratis</p>
+<Base titolo="Domande a tempo per materia e argomento" descrizione={`Quiz a risposta multipla su ${materie.length} materie, con due minuti per domanda e una spiegazione dopo ogni risposta. Anteprime gratuite.`} lingua="it" percorso={[{ titolo: 'Domande a tempo' }]} seo={{ titolo: 'Domande a tempo per materia e argomento' }}>
   <h1>Domande a tempo</h1>
-  <p class="sommario">{totale} domande a risposta multipla: quattro risposte, due minuti per domanda e la spiegazione dopo la conferma. Si usano anche senza account.</p>
+  <p class="sommario">{totale} domande a risposta multipla, con due minuti per domanda e la spiegazione dopo la conferma. Puoi provare le anteprime senza account.</p>
   {gruppi.map((g) => (
     <>
       <p class="dta-gruppo">{g}</p>
@@ -20,8 +19,9 @@ const { materie, gruppi, totale } = await elencoDomande();
             <h3>{m.titolo}</h3>
             <p class="dta-conti">{m.argomenti.length} argomenti · {m.totale} domande</p>
             <div class="dta-tasti">
-              <a class="dta-primario" href={`/${m.slug}/${RIPASSO}/domande`}>Ripasso su tutto</a>
-              <a class="dta-secondario" href={`/${m.slug}/simulazione`}>{m.concorsi ? 'Simulazione a quiz' : nomiAllenamento(m).simulazione}</a>
+              <a class="dta-primario" href={`/${m.slug}/${RIPASSO}/domande`}>{m.prezzoScienza ? 'Anteprima e ripasso' : 'Ripasso su tutto'}</a>
+              {m.prezzoScienza && <a class="dta-secondario" href={`/${m.slug}/sblocca`}>Accesso completo · {m.prezzoScienza} €</a>}
+              {m.simulazione && <a class="dta-secondario" href={`/${m.slug}/simulazione`}>{m.concorsi ? 'Simulazione a quiz' : nomiAllenamento(m).simulazione}</a>}
             </div>
             <details>
               <summary>Scegli un argomento</summary>

@@ -1,0 +1,58 @@
+---
+import Base from '../../../../../../layouts/Base.astro';
+import FineAnteprimaUsa from '../../../../../../components/FineAnteprimaUsa.astro';
+import VerificaRisposta from '../../../../../../components/VerificaRisposta.astro';
+import { highSchoolCourses, highSchoolHasStudyPages, FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../../../../../../data/stem-usa/high-school/index.mjs';
+import { linkArgomentoUsa } from '../../../../../../data/stem-usa/catalog-view';
+import { calculusAnswer, calculusHtml } from '../../../../../../lib/stem-usa-practice';
+import { T } from '../../../../../../i18n';
+
+export function getStaticPaths() {
+  return highSchoolCourses.filter(highSchoolHasStudyPages).flatMap(course => course.lessons.flatMap((lesson, index) => {
+    const paths = (section: string, count: number) => Array.from({ length: count }, (_, j) => ({
+      params: { course: course.slug.slice(3), topic: 'unit-' + (index + 1), section, number: String(j + 1) },
+      props: { slug: course.slug, lesson },
+    }));
+    return [...paths('esercizi-svolti', lesson.worked.length), ...paths('esercizi', lesson.exercises.length)];
+  }));
+}
+
+const { slug, lesson } = Astro.props;
+const { topic, section, number } = Astro.params as { topic: string; section: 'esercizi-svolti' | 'esercizi'; number: string };
+const n = Number(number);
+const worked = section === 'esercizi-svolti';
+const [title, prompt, solution, answer] = worked
+  ? [lesson.workedTitles[n - 1], ...lesson.worked[n - 1], undefined]
+  : lesson.exercises[n - 1];
+const free = worked ? n <= FREE_WORKED_EXAMPLES : n === FREE_PRACTICE_EXERCISE;
+const t = T('en');
+const href = (type: string) => linkArgomentoUsa(slug, topic, type);
+const label = worked ? t.scheda : t.esercizio;
+const sectionLabel = t.sezioni[section];
+const count = worked ? lesson.worked.length : lesson.exercises.length;
+const item = (index: number) => ({ titolo: label + ' ' + index, href: href(section + '/' + index) });
+const previous = n > 1 ? item(n - 1) : { titolo: sectionLabel, href: href(section) };
+const next = n < count ? item(n + 1)
+  : { titolo: worked ? t.sezioni.esercizi : 'Timed questions', href: href(worked ? 'esercizi' : 'domande') };
+---
+<Base lingua="en" usa titolo={title} descrizione={lesson.theory} materia={slug} argomento={topic} sezione={section}
+  percorso={[{ titolo: lesson.title, href: href('teoria') }, { titolo: sectionLabel, href: href(section) }, { titolo: label + ' ' + n }]}
+  precedente={previous} successivo={next}>
+  <p class="sopratitolo">{sectionLabel} · {label} {n}</p>
+  <h1>{title}</h1>
+  <div class="testo-studio">
+    <p set:html={calculusHtml(prompt)} />
+    {worked && <div class="spiegazione" data-usa-content={!free || undefined}>
+      {solution.split('\n').map(step => <p set:html={calculusHtml(step)} />)}
+    </div>}
+  </div>
+  {!worked && <div data-usa-content={!free || undefined}>
+    <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + n}
+      tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
+    <details class="sommario-pagina">
+      <summary>Show solution</summary>
+      <div class="testo-studio"><p set:html={calculusHtml(solution)} /></div>
+    </details>
+  </div>}
+  {!free && <FineAnteprimaUsa materia={slug} titolo={worked ? 'Unlock the worked solution' : 'Unlock the solution and answer check'} />}
+</Base>

@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+const { lingua = 'it' } = Astro.props;
+const en = lingua === 'en';
+const titolo = en ? 'Withdraw from your contract here' : 'Recedi dal contratto qui';
+const pref = en ? '/en' : '';
+---
+<Base lingua={lingua} titolo={titolo} descrizione={en ? 'Submit a withdrawal declaration for a digital order placed through Stripe.' : 'Invia la dichiarazione di recesso per un acquisto digitale pagato tramite Stripe.'} percorso={[{ titolo: en ? 'Refunds and withdrawal' : 'Rimborsi e recesso', href: pref+'/rimborsi' }, { titolo }]}>
+  <p class="sopratitolo">{en ? 'Digital purchases' : 'Acquisti digitali'}</p>
+  <h1>{titolo}</h1>
+  <p class="sommario">{en ? 'For study materials, bundles and recorded courses bought through Stripe, select the order and confirm your declaration. We will send an acknowledgement to the email address you provide.' : 'Per materiali, pacchetti e videocorsi acquistati tramite Stripe, seleziona l’ordine e conferma la dichiarazione. Riceverai la conferma all’indirizzo email che indichi.'}</p>
+  <p role="status" aria-live="polite" id="esito-recesso">{en ? 'Loading your orders…' : 'Caricamento degli ordini…'}</p>
+  <p id="accesso-recesso" hidden><a href={pref+'/accedi?dopo='+encodeURIComponent(pref+'/recesso')}>{en ? 'Sign in to the account used for the purchase' : 'Accedi con l’account usato per l’acquisto'}</a></p>
+  <form id="modulo-recesso" class="modulo" hidden>
+    <label>{en ? 'Order' : 'Ordine'}<select name="ordine" required></select></label>
+    <label>{en ? 'Your full name' : 'Il tuo nome e cognome'}<input name="nome" required maxlength="180" autocomplete="name" /></label>
+    <label>{en ? 'Email address for the acknowledgement' : 'Email a cui ricevere la conferma'}<input name="email" type="email" required maxlength="200" autocomplete="email" /></label>
+    <button type="submit">{en ? 'Review declaration' : 'Rileggi la dichiarazione'}</button>
+  </form>
+  <section id="riepilogo-recesso" hidden aria-labelledby="titolo-riepilogo">
+    <h2 id="titolo-riepilogo">{en ? 'Your withdrawal declaration' : 'La tua dichiarazione di recesso'}</h2>
+    <p id="testo-dichiarazione"></p><p id="recapito-recesso"></p>
+    <div class="azioni"><button type="button" id="correggi-recesso">{en ? 'Edit' : 'Modifica'}</button>
+      <button type="button" class="primario" id="conferma-recesso">{en ? 'Confirm withdrawal' : 'Conferma il recesso'}</button></div>
+  </section>
+  <p>{en ? 'If you need help, or prefer to send your declaration by email, contact' : 'Se hai bisogno di assistenza o preferisci comunicare il recesso per email, scrivi a'} <a href="mailto:carminetornincasa98@gmail.com">carminetornincasa98@gmail.com</a>.
+    <a href={pref+'/rimborsi'}>{en ? 'Refunds, including purchases made through Paddle' : 'Politica di rimborso, anche per gli acquisti precedenti su Paddle'}</a>.</p>
+</Base>
+<style>
+  [hidden] { display:none !important } .modulo { max-width:35rem } select { padding:.6rem; font:inherit; max-width:100%; border:1px solid var(--riga); border-radius:.5rem }
+  #riepilogo-recesso { max-width:35rem; padding:1rem; border:1px solid var(--riga); border-radius:.6rem; background:var(--carta-2) }
+  .azioni { display:flex; gap:.5rem; flex-wrap:wrap } button { font:inherit; padding:.5rem .8rem; cursor:pointer; border-radius:.5rem; border:1px solid var(--accento) }
+  .primario { background:var(--accento);color:white }
+</style>
+<script is:inline define:vars={{en}}>
+  (() => {
+    const $ = id => document.getElementById(id);
+    const modulo=$('modulo-recesso'), riepilogo=$('riepilogo-recesso'), esito=$('esito-recesso'), bottone=$('conferma-recesso');
+    const selezione=modulo.elements.namedItem('ordine'), nome=modulo.elements.namedItem('nome'), email=modulo.elements.namedItem('email');
+    let ordini=[], dichiarazione=null;
+    fetch('/api/stripe/postvendita/ordini',{cache:'no-store'}).then(async r => {
+      if(r.status===401){ $('accesso-recesso').hidden=false; esito.textContent=''; return; }
+      if(!r.ok)throw new Error();
+      const dati=await r.json(); ordini=dati.ordini;
+      for(const o of ordini){
+        const data=new Intl.DateTimeFormat(en?'en-GB':'it-IT',{dateStyle:'medium',timeZone:'Europe/Rome'}).format(new Date(o.pagato));
+        const somma=new Intl.NumberFormat(en?'en-GB':'it-IT',{style:'currency',currency:'EUR'}).format(o.importo/100);
+        selezione.add(new Option(o.titolo+' · '+somma+' · '+data+' · '+o.id,o.id));
+      }
+      nome.value=dati.nome||'';email.value=dati.email;
+      modulo.hidden=!ordini.length;
+      esito.textContent=ordini.length?'':(en?'There are no digital Stripe orders in this account.':'Questo account non ha ordini digitali pagati con Stripe.');
+    }).catch(()=>{esito.textContent=en?'Your orders could not be loaded. Reload this page or email us below.':'Impossibile caricare gli ordini. Ricarica la pagina o usa l’email qui sotto.'});
+    modulo.addEventListener('submit', e => {
+      e.preventDefault();
+      const o=ordini.find(o=>o.id===selezione.value);
+      if(!o || !nome.value.trim())return;
+      if(o.inviato){
+        esito.textContent=(en?'Declaration already received on ':'Dichiarazione già ricevuta il ')+new Date(o.inviato).toLocaleString(en?'en-GB':'it-IT');
+        return;
+      }
+      dichiarazione={id:o.id,nome:nome.value.trim(),recapito:email.value.trim(),lingua:en?'en':'it',conferma:true};
+      $('testo-dichiarazione').textContent=(en?'I, ':'Io, ')+dichiarazione.nome+(en?', give notice that I withdraw from my contract for ':', comunico il recesso dal contratto per ')+o.titolo+' ('+o.id+').';
+      $('recapito-recesso').textContent=(en?'Acknowledgement email: ':'Email di conferma: ')+dichiarazione.recapito;
+      esito.textContent='';modulo.hidden=true;riepilogo.hidden=false;bottone.focus();
+    });
+    $('correggi-recesso').addEventListener('click',()=>{dichiarazione=null;riepilogo.hidden=true;modulo.hidden=false;selezione.focus()});
+    bottone.addEventListener('click',async()=>{
+      if(!dichiarazione||bottone.disabled)return;
+      bottone.disabled=true;$('correggi-recesso').disabled=true;
+      try{
+        const r=await fetch('/api/stripe/postvendita/recesso',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(dichiarazione)});
+        if(!r.ok)throw new Error();
+        const d=await r.json();riepilogo.hidden=true;dichiarazione=null;
+        esito.textContent=(en?'Withdrawal declaration received on ':'Dichiarazione di recesso ricevuta il ')+new Date(d.inviato).toLocaleString(en?'en-GB':'it-IT')+
+          (en?'. Acknowledgement address: ':'. Recapito per la conferma: ')+d.recapito+'.';
+      }catch{esito.textContent=en?'We could not confirm submission. Try again or use the email below.':'Non è stato possibile confermare l’invio. Riprova o usa l’email qui sotto.'}
+      finally{bottone.disabled=false;$('correggi-recesso').disabled=false}
+    });
+  })();
+</script>

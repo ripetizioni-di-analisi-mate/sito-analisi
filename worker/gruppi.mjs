@@ -1,3 +1,4 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
 // Iscrizioni ai corsi di gruppo dal vivo (pagina /corsi-di-gruppo).
 //  - lo studente si iscrive a una materia e aspetta che il gruppo si formi;
 //  - dalla sua pagina (/corsi-di-gruppo/la-tua-iscrizione#t=…, link anche nell'email) aggiunge data d'esame,
@@ -91,17 +92,10 @@ export async function archivioFileGruppi(o, req, pathname) {
 // ---------- email ----------
 const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 async function inviaEmail(env, a, oggetto, righe, tasto) {
-  if (!env.RESEND_API_KEY) return false;
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:540px">
-${righe.map((r) => `<p>${esc(r)}</p>`).join('\n')}
-${tasto ? `<p style="margin:24px 0"><a href="${esc(tasto[1])}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${esc(tasto[0])}</a></p>` : ''}
-<p>Carmine</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [a], subject: oggetto, html,
-      text: [...righe, tasto ? `${tasto[0]}: ${tasto[1]}` : '', 'Carmine'].filter(Boolean).join('\n\n') }),
-  }).catch(() => null);
-  return Boolean(r?.ok);
+  const messaggio = componiEmail({
+    subject: oggetto, categoria: 'Corsi di gruppo', righe, pulsante: tasto,
+  });
+  return (await inviaEmailResend(env, a, messaggio, undefined, 'corso-gruppo')).ok;
 }
 const titolo = (slug) => MATERIE_GRUPPI.find((m) => m.slug === slug)?.titolo || slug;
 const esa = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');

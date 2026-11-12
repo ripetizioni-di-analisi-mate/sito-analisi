@@ -11,23 +11,40 @@ const temp=mkdtempSync(join(tmpdir(),'analisi3-worker-')),bundle=join(temp,'work
 execFileSync(process.execPath,[join(root,'node_modules/rolldown/bin/cli.mjs'),join(root,'worker/index.mjs'),'--file',bundle,'--format','esm','--platform','neutral'],{stdio:'pipe'});
 after(()=>rmSync(temp,{recursive:true,force:true}));
 const {default:worker,firmaToken}=await import(pathToFileURL(bundle));
-const materia='analisi-3',prezzo='pri_01m6v6tp0e2vpg59k9qv555sf3';
+const materia='analisi-3';
 async function banco(materie=null){
  const richieste=[];
- const env={VENDITA:'1',CHIAVE_ACCESSO:'test-only-no-production',PADDLE_CLIENT_TOKEN:'test',PADDLE_PREZZO_ANALISI_3:prezzo,
+ const env={VENDITA:'1',CHIAVE_ACCESSO:'test-only-no-production',STRIPE_SECRET_KEY:'test',STRIPE_WEBHOOK_SECRET:'test',
  ASSETS:{async fetch(req){const path=new URL(req.url||req).pathname;richieste.push(path);if(path==='/dati-domande/analisi-3.json')return new Response(readFileSync(join(root,'dist',path)),{headers:{'content-type':'application/json'}});return new Response(path,{headers:{'content-type':'text/plain'}});}},
- ARCHIVIO:{idFromName:()=> 'test',get:()=>({fetch:async()=>Response.json(materie===null?null:{email:'test@example.test',nome:'Test',materie,versione:1})})}};
+ ARCHIVIO:{idFromName:()=> 'test',get:()=>({fetch:async(url)=>Response.json(new URL(url).pathname==='/sessione' && materie!==null ? {email:'test@example.test',nome:'Test',materie,versione:1} : {})})}};
  const cookie=materie===null?'':'sessione='+await firmaToken(env,{e:'test@example.test',v:1,d:'test',t:Date.now()});
- const invia=(path,body)=>worker.fetch(new Request('https://ripetizionidianalisi.com'+path,{method:body?'POST':'GET',headers:{cookie,'content-type':'application/json','user-agent':'audit-bot','accept-language':'it'},...(body?{body:JSON.stringify(body)}:{})}),env,{waitUntil(){}});
+ const invia=(path,body)=>worker.fetch(new Request('https://ripetizionidianalisi.com'+path,{method:body?'POST':'GET',headers:{cookie,origin:'https://ripetizionidianalisi.com','content-type':'application/json','user-agent':'audit-bot','accept-language':'it'},...(body?{body:JSON.stringify(body)}:{})}),env,{waitUntil(){}});
  return {invia,richieste};
 }
-test('prezzo e listino di Analisi 3',async()=>{const b=await banco();assert.equal((await(await b.invia('/api/config')).json()).paddle.prezzi[materia],prezzo);assert.equal(JSON.parse(readFileSync(join(root,'src/data/prezzi.json')))[materia],55);});
+test('il preventivo Stripe di Analisi 3 coincide con il listino',async()=>{
+ const b=await banco([]), listino=JSON.parse(readFileSync(join(root,'src/data/prezzi.json')));
+ assert.deepEqual(await(await b.invia('/api/config')).json(),{stripe:true});
+ const r=await b.invia('/api/acquisti/preventivo',{tipo:'materia',slug:materia});
+ assert.equal(r.status,200);const q=await r.json();
+ assert.equal(listino[materia],55);assert.equal(q.totale,100*listino[materia]);assert.deepEqual(q.chiavi,[materia]);
+});
 test('l’acquisto di Analisi 2 non sblocca Analisi 3',async()=>{const b=await banco(['analisi-2']);assert.equal(await(await b.invia('/analisi-3/funzioni-complesse/teoria')).text(),'/vetrine/analisi-3/funzioni-complesse/teoria');});
 test('l’acquisto di Analisi 3 apre capitoli nuovi e condivisi',async()=>{const b=await banco([materia]);for(const slug of ['funzioni-complesse','serie-di-fourier'])assert.equal(await(await b.invia('/analisi-3/'+slug+'/teoria')).text(),'/analisi-3/'+slug+'/teoria');});
 test('le prime tre schede sono anteprime e la quarta è riservata',async()=>{const b=await banco();for(const n of [1,3,4])assert.equal(await(await b.invia('/analisi-3/funzioni-complesse/esercizi-svolti/'+n)).text(),(n<=3?'':'/vetrine')+'/analisi-3/funzioni-complesse/esercizi-svolti/'+n);});
 test('il banco delle risposte non è pubblico',async()=>{const b=await banco();assert.equal((await b.invia('/dati-domande/analisi-3.json')).status,404);});
 test('dieci ID fissi in tutte le sessioni senza acquisto',async()=>{let riferimento;for(const materie of [null,[],['analisi-2']]){const b=await banco(materie);const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();assert.equal(r.totale,10);const ids=[...r.ordine].sort();if(riferimento)assert.deepEqual(ids,riferimento);riferimento=ids;}});
-test('tutti i capitoli del corso hanno quiz per chi acquista',async()=>{const b=await banco([materia]);const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();assert.ok(r.totale>112);const bank=JSON.parse(readFileSync(join(root,'dist/dati-domande/analisi-3.json')));assert.equal(Object.keys(bank.argomenti).length,11);});
+test('chi acquista può usare 90 quiz per ciascuno degli 11 capitoli',async()=>{
+ const b=await banco([materia]);
+ const r=await(await b.invia('/api/domande/prossima',{materia,lingua:'it',argomento:'prove-d-esame'})).json();
+ assert.equal(r.totale,990);
+ assert.equal(new Set(r.ordine).size,15);
+ const bank=JSON.parse(readFileSync(join(root,'dist/dati-domande/analisi-3.json')));
+ assert.equal(Object.keys(bank.argomenti).length,11);
+ for(const [argomento,domande] of Object.entries(bank.argomenti)){
+  assert.equal(domande.length,90,argomento);
+  assert.equal(new Set(domande.map(d=>d.id)).size,90,argomento);
+ }
+});
 test('l’anteprima limita anche banchi con ordine differente',()=>{const a={b:[{n:3,id:'b/3'},{n:1,id:'b/1'}],a:Array.from({length:30},(_,i)=>({n:i+1,id:'a/'+(i+1)}))};assert.equal(Object.values(anteprimaAnalisi3(a)).flat().length,10);assert.deepEqual(anteprimaAnalisi3(a),anteprimaAnalisi3({a:a.a,b:a.b}));});
 test('i capitoli condivisi conservano contenuti e URL propri',()=>{for(const a of ['successioni-e-serie-di-funzioni','serie-di-potenze','serie-di-fourier']){const source=readFileSync(join(root,'src/content/teoria/analisi-2',a+'.md'),'utf8');const target=readFileSync(join(root,'src/content/teoria/analisi-3',a+'.md'),'utf8');assert.equal(target,source.replace(/\/analisi-2\/(successioni-e-serie-di-funzioni|serie-di-potenze|serie-di-fourier)(?=\/)/g,'/analisi-3/$1'));}});
 test('i principali integrali del banco coincidono con quadrature indipendenti',()=>{

@@ -10,6 +10,13 @@ import fontIndiceBold from '@fontsource/source-sans-3/files/source-sans-3-latin-
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
+import StudyCountry from '../components/StudyCountry.astro';
+import { CATALOGO_PREDEFINITO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
+import { linkArgomentoUsa, materieUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { calculusSlug } from '../lib/stem-usa-practice';
+import { usTimedTopics } from '../lib/stem-usa-banks';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { RIPASSO } from '../data/livelli';
 import Assistente from '../components/Assistente.astro';
 import SegnalaErrore from '../components/SegnalaErrore.astro';
 import BarraSconto from '../components/BarraSconto.astro';
@@ -19,6 +26,7 @@ import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
+import { destinazioneLocalizzata, linguaCatalogo, lingueLocalizzate, LINGUE, LOCALE, nellaLingua, senzaLingua } from '../lib/lingue-sito';
 import { materiaL, materieL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
@@ -36,6 +44,7 @@ interface Props {
   materia?: string;
   argomento?: string;
   sezione?: string;
+  usa?: boolean;
   precedente?: Passo;
   successivo?: Passo;
   prossimo?: { titolo: string; href: string };
@@ -44,31 +53,59 @@ interface Props {
   ricercaPrincipale?: boolean;
   // Motori di ricerca: titolo completo della scheda, dati strutturati, pagine da non indicizzare,
   // pagine senza versione nell'altra lingua.
-  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string };
+  seo?: { titolo?: string; schema?: Record<string, unknown>[]; noindex?: boolean; tipo?: string; soloQuestaLingua?: boolean; senzaInglese?: boolean; data?: string; canonico?: string };
 }
-const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
+const { titolo, descrizione, percorso = [], materia, argomento, sezione, precedente, successivo, prossimo, lingua = 'it', usa = false, nonTradotta = false, ricercaPrincipale = false, seo = {} } = Astro.props;
 const t = T(lingua);
-const m = materia ? materiaL(lingua, materia) : undefined;
-const altra: Lingua = lingua === 'it' ? 'en' : 'it';
-// Pagine che esistono solo in italiano (videocorsi, concorsi…): il tasto EN porta alla home inglese, non a una pagina inesistente.
-const versoAltra = seo.senzaInglese ? link(altra, '/') : altraLingua(Astro.url.pathname, altra);
+const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
+const versioneIt = senzaLingua(Astro.url.pathname);
+const de = lingua === 'de';
+const es = lingua === 'es';
+const localizzato = linguaCatalogo(lingua);
+const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
+  ...l,
+  href: usa ? `${link(l.codice, '/')}?${PARAMETRO_CATALOGO}=${CATALOGO_PREDEFINITO}&lingua=${l.codice}`
+    : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
+    : linguaCatalogo(l.codice) ? destinazioneLocalizzata(l.codice, versioneIt)
+    : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !localizzato))
+      ? link('en', '/') : altraLingua(Astro.url.pathname, l.codice),
+}));
+const versoIt = altraLingua(Astro.url.pathname, 'it');
+const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
+  path, href: localizzato ? `${link('it', path)}?lingua=it` : link(lingua, path),
+}));
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeDisponibili = await catalogoDomande(lingua);
-const domandeQui = Boolean(materia && argomento && (domandeDisponibili[materia] ?? []).includes(argomento));
-const catalogoPercorso = creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua);
+const domandeMateria = (usa ? usTimedTopics : domandeDisponibili)[materia ?? ''] ?? [];
+const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
+const catalogoPercorso = {
+  ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
+  ...Object.fromEntries(Object.entries(usTimedTopics).map(([slug, topics]) => [slug, {
+    titolo: materiaUsa(slug)!.titolo,
+    argomenti: topics,
+    domande: topics,
+    ripasso: 'Timed review',
+    base: courseUrl(slug),
+  }])),
+};
 const en = lingua === 'en';
+const homeCurriculum = usa ? url('/us') : link(lingua, '/');
+const hrefMateria = m ? (usa ? url(courseUrl(m.slug)) : link(lingua, '/' + m.slug)) : homeCurriculum;
 const titoloCompleto = seo.titolo ?? (m ? `${titolo} · ${m.titolo}` : titolo === NOME_SITO ? titolo : `${titolo} · ${NOME_SITO}`);
 
 // Indirizzi per i motori di ricerca: pagina canonica, versioni nelle due lingue.
 const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
-const versioneIt = qui.replace(/^\/en(?=\/|$)/, '') || '/';
+
 const argomentoNormale = m?.argomenti.some((a) => a.slug === argomento);
 const tappe = argomentoNormale && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '')
-  ? tappeStudio(materia, argomento, domandeQui, lingua).map((p) => ({ ...p, href: url(p.href) })) : [];
+  ? tappeStudio(materia, argomento, domandeQui, lingua, m?.eserciziDaFare !== false)
+    .map((p) => ({ ...p, href: usa ? linkArgomentoUsa(materia!, argomento!, p.slug) : url(p.href) })) : [];
 const tappa = tappe.findIndex((p) => p.slug === sezione);
 // Le pagine di elenco proseguono nello stesso argomento; le singole schede
 // conservano il proprio ordine numerico.
-const elencoSezione = versioneIt === `/${materia}/${argomento}/${sezione}`;
+const elencoSezione = usa
+  ? qui === courseUrl(materia ?? '') + '/' + argomento + '/' + sezione
+  : versioneIt === `/${materia}/${argomento}/${sezione}`;
 const tappaDopo = elencoSezione ? tappe[tappa + 1] : undefined;
 const avanti: Passo | undefined = tappaDopo ? {
   titolo: tappaDopo.titolo,
@@ -76,16 +113,24 @@ const avanti: Passo | undefined = tappaDopo ? {
   href: tappaDopo.href,
   etichetta: en ? 'Continue with this topic' : 'Continua su questo argomento',
 } : successivo;
-const versioneEn = versioneIt === '/' ? '/en' : `/en${versioneIt}`;
-const canonico = assoluto(nonTradotta ? versioneIt : qui);
-const bilingue = !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa';
+const versioneEn = nellaLingua('en', versioneIt);
+const versioniLocalizzate = lingueLocalizzate(versioneIt).map((l) => ({ l, path: nellaLingua(l, versioneIt) }));
+// seo.canonico: la pagina è la copia di un'altra (src/lib/canonici.ts); ai motori si indica l'originale, nella stessa lingua,
+// e non si dichiarano versioni in altre lingue (le dichiara l'originale).
+const canonico = assoluto(nonTradotta ? versioneIt : seo.canonico ? link(lingua, seo.canonico) : qui);
+const bilingue = !usa && !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa' && !seo.canonico;
+const alternati = [
+  ...(bilingue || (localizzato && versioniLocalizzate.length > 0) ? [{ l: 'it', path: versioneIt }] : []),
+  ...(bilingue && !seo.senzaInglese ? [{ l: 'en', path: versioneEn }, { l: 'x-default', path: versioneEn }] : []),
+  ...versioniLocalizzate,
+];
 const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
 // Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
 const taglia = (x: string, n = 160) => (x.length <= n ? x : `${x.slice(0, x.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '')}…`);
 const descrizioneSeo = taglia(descrizione ?? t.homeDescrizione);
 const percorsoSchema = [
-  { nome: t.materie, url: assoluto(link(lingua, '/')) },
-  ...(m ? [{ nome: m.titolo, url: assoluto(link(lingua, `/${m.slug}`)) }] : []),
+  { nome: t.materie, url: assoluto(homeCurriculum) },
+  ...(m ? [{ nome: m.titolo, url: assoluto(hrefMateria) }] : []),
   ...percorso.map((p, i) => ({ nome: p.titolo, url: p.href && i < percorso.length - 1 ? assoluto(p.href) : canonico })),
 ];
 // Freccia «indietro» nel percorso (scelta A3 di Carmine, 07/11/2026): torna alla pagina precedente della
@@ -100,13 +145,13 @@ const schema = {
 };
 // Immagine di anteprima dei link (WhatsApp, Instagram, Telegram…): una per materia e una per argomento e sezione,
 // disegnate dopo la build da scripts/immagini-og.mjs; le altre pagine usano /og.png (in inglese /og-en.png, scripts/og-generale.mjs).
-const og = anteprima({ lingua, materia: m, argomento, sezione, titoloArgomento: m && argomento ? m.argomenti.find((a) => a.slug === argomento)?.titolo : undefined });
+const og = !localizzato && !usa && anteprima({ lingua, materia: m, argomento, sezione, titoloArgomento: m && argomento ? m.argomenti.find((a) => a.slug === argomento)?.titolo : undefined });
 const immagineOg = `${SITO}${og ? og.percorso : ogGenerale(lingua)}`;
-const altOg = og ? og.alt : altGenerale(lingua);
+const altOg = og ? og.alt : localizzato ? 'Ripetizioni di Analisi' : altGenerale(lingua);
 // Le pagine con contenuti di studio ricevono le protezioni contro copia e stampa.
 const contenuto = Boolean(materia && argomento) && sezione !== 'stampa';
 // Spunte delle materie sbloccate: il Worker scrive su <html> data-materie="analisi-1 precorso ...".
-const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
+const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x) => {
   const sel = `html[data-materie~="${x.slug}"] [data-materia="${x.slug}"]`;
   return `${sel} .stato-bloccata{display:none}${sel} .stato-sbloccata{display:inline-flex}${sel}.riquadro-stato .stato-bloccata{display:none}${sel}.riquadro-stato .stato-sbloccata{display:flex}`;
 }).join('');
@@ -125,9 +170,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <title>{titoloCompleto}</title>
   <meta name="description" content={descrizioneSeo} />
   <link rel="canonical" href={canonico} />
-  {bilingue && <link rel="alternate" hreflang="it" href={assoluto(versioneIt)} />}
-  {bilingue && <link rel="alternate" hreflang="en" href={assoluto(versioneEn)} />}
-  {bilingue && <link rel="alternate" hreflang="x-default" href={assoluto(versioneEn)} />}
+  {alternati.map(({ l, path }) => <link rel="alternate" hreflang={l} href={assoluto(path)} />)}
   {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />}
   {seo.data && <meta property="article:modified_time" content={seo.data} />}
   {seo.data && <meta name="last-modified" content={seo.data} />}
@@ -141,8 +184,8 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content={altOg} />
-  <meta property="og:locale" content={lingua === 'it' ? 'it_IT' : 'en_US'} />
-  {bilingue && <meta property="og:locale:alternate" content={lingua === 'it' ? 'en_US' : 'it_IT'} />}
+  <meta property="og:locale" content={LOCALE[lingua]} />
+  {alternati.filter(({ l }) => l !== lingua && l !== 'x-default').map(({ l }) => <meta property="og:locale:alternate" content={LOCALE[l as Lingua]} />)}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content={immagineOg} />
   <meta name="twitter:image:alt" content={altOg} />
@@ -195,7 +238,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </script>
   <script is:inline>
     try { if (localStorage.getItem('indice') === 'chiuso') document.documentElement.classList.add('indice-chiuso'); } catch (e) {}
-    // Chi sceglie la lingua con il tasto IT/EN la ritrova in tutto il sito (il Worker legge il cookie «lingua»).
+    // Chi sceglie una lingua nel menu la ritrova in tutto il sito (il Worker legge il cookie «lingua»).
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest ? e.target.closest('a[data-lingua]') : null;
       if (a) document.cookie = 'lingua=' + a.getAttribute('data-lingua') + '; Path=/; Max-Age=31536000; SameSite=Lax; Secure';
@@ -205,7 +248,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 <body>
   <header class="testata">
     <div class="testata-interna">
-      <a class="marchio" href={link(lingua, '/')}>
+      <a class="marchio" href={homeCurriculum}>
         <img class="logo" src={url('/logo.svg')} alt="" width="32" height="32" />
         <span>{NOME_SITO}</span>
       </a>
@@ -215,7 +258,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           <span class="iniziale" aria-hidden="true"></span>
           <span class="se-ospite">{t.accedi}</span><span class="se-collegato">{t.account}</span>
         </a>
-        {(
+        {!localizzato && (
           <>
             <button class="bottone-livello" type="button" aria-label={en ? 'Level' : 'Livello'} aria-expanded="false" aria-controls="pannello-livello">
               <span class="stemma-testata" aria-hidden="true"></span>
@@ -234,7 +277,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
                 <p><strong class="pl-oggi-corrette">–</strong><span>{en ? 'correct answers today' : 'risposte corrette oggi'}</span></p>
                 <p><strong class="pl-oggi-giorni">–</strong><span>{en ? 'days of study this week' : 'giorni di studio questa settimana'}</span></p>
               </div>
-              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
+              <a class="pl-continua" data-qui={domandeQui ? '1' : ''} href={usa
+                ? (domandeQui ? linkArgomentoUsa(materia!, argomento!, 'domande')
+                  : materia && usTimedTopics[materia] ? linkArgomentoUsa(materia, RIPASSO, 'domande')
+                  : url(courseUrl(materia || calculusSlug) + '#course-practice'))
+                : link(lingua, domandeQui ? `/${materia}/${argomento}/domande` : '/domande-a-tempo')}>{en ? 'Continue with the timed questions' : 'Continua con le domande a tempo'}</a>
               {/* Lega della settimana e duelli (versione A2 scelta da Carmine il 03/11/2026) */}
               {!en && (
                 <div class="pl-sfide">
@@ -247,9 +294,12 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           </>
         )}
       </div>
-      <a class="bottone-lingua" href={versoAltra} hreflang={altra} lang={altra} aria-label={altra === 'en' ? 'English version' : 'Versione italiana'} title={altra === 'en' ? 'English version' : 'Versione italiana'} data-lingua={altra}>
-        <span>{altra.toUpperCase()}</span>
-      </a>
+      <details class="selettore-lingua">
+        <summary class="bottone-lingua" aria-label={t.lingua} title={t.lingua}>{lingua.toUpperCase()}</summary>
+        <ul>
+          {cambioLingua.map(({ codice, nome, href }) => <li><a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a></li>)}
+        </ul>
+      </details>
       <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
         <span>{t.indice}</span>
@@ -258,12 +308,12 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </header>
 
   <div class="corpo">
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} ricercaPrincipale={ricercaPrincipale} />
     <main id="contenuto-principale">
       <div class="pagina">
         {m && (
           <div class="contesto-materia">
-            <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={link(lingua, `/${m.slug}`)}>
+            <a class:list={['materia-corrente', { 'a-pagamento': m.prezzo }]} href={hrefMateria}>
               {m.prezzo && <svg class="lucchetto aperto" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10.5l3.6 3.5L15.5 6.5"/></svg>}
               <span>{m.breve}</span>
               {m.prezzo && <span class="dicitura-sbloccata">{t.sbloccata}</span>}
@@ -271,11 +321,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
           </div>
         )}
         {(percorso.length > 0 || m) && (
-          <nav class="percorso" aria-label="Percorso">
-            {livelloSopra && <a class="indietro" href={livelloSopra} title={en ? 'Back' : 'Torna indietro'} aria-label={en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
+          <nav class="percorso" aria-label={es ? 'Ruta de navegación' : de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
+            {livelloSopra && <a class="indietro" href={livelloSopra} title={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
             <ol>
-              <li><a href={link(lingua, '/')}>{t.materie}</a></li>
-              {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a> : m.titolo}</li>}
+              <li><a href={homeCurriculum}>{t.materie}</a></li>
+              {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={hrefMateria}>{m.titolo}</a> : m.titolo}</li>}
               {percorso.map((p, i) => (
                 <li aria-current={i === percorso.length - 1 ? 'page' : undefined}>
                   {p.href && i < percorso.length - 1 ? <a href={p.href}>{p.titolo}</a> : p.titolo}
@@ -284,10 +334,10 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
             </ol>
           </nav>
         )}
-        {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoAltra} data-lingua="it">Italiano</a></p>}
+        {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoIt} data-lingua="it">Italiano</a></p>}
         {materia && argomento && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '') && <>
           <Concentrazione lingua={lingua} />
-          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
+          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} />
         </>}
         <slot />
         {(precedente || avanti) && (
@@ -303,15 +353,15 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
   </div>
 
   <footer class="pie">
-    <nav class="pie-link" aria-label="Informazioni">
+    <nav class="pie-link" aria-label={es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
       <a href={link(lingua, '/chi-sono')}>{t.chiSono}</a>
       {lingua === 'it' && <a href="/ripetizioni-analisi">Ripetizioni online</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
-      <a href={link(lingua, '/privacy')}>{t.privacy}</a>
-      <a href={link(lingua, '/termini')}>{t.termini}</a>
-      <a href={versoAltra} hreflang={altra} lang={altra} data-lingua={altra}>{altra === 'en' ? 'English' : 'Italiano'}</a>
+      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
+      {cambioLingua.map(({ codice, nome, href }) => <a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a>)}
     </nav>
+    <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />
     <span class="pie-copyright">{t.copyright}</span>
   </footer>
 
@@ -325,7 +375,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     </a>
   </div>
 
-  {sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
+  {!localizzato && sezione !== 'stampa' && <BarraSconto lingua={lingua} />}
   {sezione !== 'stampa' && MISURAZIONE_ATTIVA && <ConsensoCookie lingua={lingua} />}
   <script type="application/json" id="catalogo-percorso" is:inline set:html={JSON.stringify(catalogoPercorso)}></script>
 
@@ -334,9 +384,31 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
 
   <dialog class="cassetto" id="cassetto-indice">
     <div class="cassetto-testa"><strong>{t.indice}</strong><button type="button" aria-label={t.chiudi} data-chiudi-indice>×</button></div>
-    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} ricercaPrincipale={ricercaPrincipale} />
+    <Indice materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} ricercaPrincipale={ricercaPrincipale} />
   </dialog>
 
+  <script>
+    const selettoreLingua = document.querySelector<HTMLDetailsElement>('.selettore-lingua');
+    if (selettoreLingua) {
+      document.addEventListener('click', (e) => {
+        if (e.target instanceof Node && !selettoreLingua.contains(e.target)) selettoreLingua.open = false;
+      });
+      selettoreLingua.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape' || !selettoreLingua.open) return;
+        selettoreLingua.open = false;
+        selettoreLingua.querySelector('summary')?.focus();
+      });
+    }
+  </script>
+  <style>
+    .selettore-lingua { position: relative; flex: none; }
+    .selettore-lingua summary { list-style: none; }
+    .selettore-lingua summary::-webkit-details-marker { display: none; }
+    .selettore-lingua ul { position: absolute; z-index: 45; top: calc(100% + .3rem); right: 0; margin: 0; padding: .25rem; min-width: 7.5rem; list-style: none; background: var(--carta); border: 1px solid var(--riga); border-radius: var(--raggio); box-shadow: 0 .3rem 1rem #172d2922; }
+    .selettore-lingua a { display: block; padding: .45rem .6rem; color: var(--inchiostro); font: 600 .9rem var(--ui); text-decoration: none; border-radius: var(--raggio); }
+    .selettore-lingua a:hover, .selettore-lingua a:focus-visible { background: var(--carta-2); }
+    @media print { .selettore-lingua { display: none; } }
+  </style>
   <script>
     import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
     import { medagliaLega } from '../scripts/medaglia-lega';
@@ -376,6 +448,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
     const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
     const pl = document.getElementById('pannello-livello');
     const inglese = document.documentElement.lang === 'en';
+    const linguaCatalogo = ['de', 'es'].includes(document.documentElement.lang);
     const num = (x: number) => x.toLocaleString(inglese ? 'en-US' : 'it-IT');
     const XP = inglese ? 'XP' : 'EXP';
     function mostraLivello(st: Stato) {
@@ -470,7 +543,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         // Invito a un duello ricevuto mentre si studia (worker/sfide.mjs): un avviso in basso con Accetta e Più tardi.
         const inv = (d?.inviti || []).find((x: any) => !visti.has(x.codice));
         const box = document.querySelector<HTMLElement>('.avviso-duello');
-        if (inv && box && !inglese) {
+        if (inv && box && !inglese && !linguaCatalogo) {
           visti.add(inv.codice);
           const esc = (x: string) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
           box.innerHTML = `<span><strong>${esc(inv.da)}</strong> ti sfida a un duello su ${esc(inv.argomento || inv.materia)}.</span>`
@@ -521,10 +594,11 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
       su.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // Protezione dei contenuti di studio: niente menu contestuale, copia, trascinamento,
-    // stampa da tastiera. Sulle pagine sbloccate, contenuto velato quando la finestra perde il fuoco (strumenti di cattura su computer).
+    // Il blocco della copia vale per chi non ha sbloccato la materia. Le protezioni
+    // di stampa e cattura si applicano anche alle pagine sbloccate.
     const radice = document.documentElement;
     if (radice.classList.contains('contenuto')) {
+      const sbloccato = radice.classList.contains('sbloccato');
       // La finestra dell'assistente resta libera: lì si scrive, si seleziona e si copia.
       // Si guarda anche la selezione: il bersaglio di copia e scorciatoie è spesso la pagina intera o un nodo di testo.
       const inPi = (n: Node | null | undefined) => {
@@ -532,7 +606,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         return Boolean(el?.closest?.('.assistente, .zona-libera'));
       };
       const libero = (e: Event) => {
-        if (inPi(e.target as Node)) return true;
+        if (sbloccato || inPi(e.target as Node)) return true;
         const sel = getSelection();
         return Boolean(sel && sel.rangeCount && !sel.isCollapsed && inPi(sel.anchorNode) && inPi(sel.focusNode));
       };
@@ -544,7 +618,7 @@ const regoleStato = MATERIE.filter((x) => x.prezzo).map((x) => {
         if (k === 'printscreen') { radice.classList.add('velato'); navigator.clipboard?.writeText('').catch(() => {}); }
       });
       addEventListener('keyup', (e) => { if (e.key.toLowerCase() === 'printscreen') setTimeout(() => radice.classList.remove('velato'), 1200); });
-      if (radice.classList.contains('sbloccato')) {
+      if (sbloccato) {
         addEventListener('blur', () => radice.classList.add('velato'));
         addEventListener('focus', () => radice.classList.remove('velato'));
         document.addEventListener('visibilitychange', () => radice.classList.toggle('velato', document.hidden));

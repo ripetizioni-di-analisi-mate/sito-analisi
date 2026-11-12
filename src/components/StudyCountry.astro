@@ -1,0 +1,35 @@
+---
+import type { Lingua } from '../i18n';
+import { CATALOGHI_STUDIO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
+import { linguaCatalogo } from '../lib/lingue-sito';
+import { url } from '../lib/url';
+
+interface Props { lingua: Lingua; corrente: keyof typeof CATALOGHI_STUDIO }
+const { lingua, corrente } = Astro.props;
+const localizzato = linguaCatalogo(lingua);
+const titolo = lingua === 'es' ? '¿Dónde estudias?' : lingua === 'de' ? 'Wo studierst du?' : lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
+const paesi = Object.entries(CATALOGHI_STUDIO)
+  .sort(([, a], [, b]) => a[lingua].localeCompare(b[lingua], lingua));
+---
+<details class="study-country" id="dove-studi">
+  <summary>
+    <span>{titolo} · {CATALOGHI_STUDIO[corrente][lingua]}</span>
+    <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg>
+  </summary>
+  <ul aria-label={titolo}>
+    {paesi.map(([codice, paese]) => (
+      <li><a href={`${url(localizzato && codice === 'IT' ? `/${lingua}` : paese.percorso)}?${PARAMETRO_CATALOGO}=${codice}${localizzato && codice === 'IT' ? `&lingua=${lingua}` : ''}`} aria-current={codice === corrente ? 'true' : undefined}>{paese[lingua]}</a></li>
+    ))}
+  </ul>
+</details>
+<style is:inline data-study-country-style>
+  .study-country { position: relative; color: var(--inchiostro-2); }
+  .study-country > summary { list-style: none; display: flex; align-items: center; gap: 0.4rem; min-height: 2.5rem; cursor: pointer; }
+  .study-country > summary::-webkit-details-marker { display: none; }
+  .study-country > summary:hover, .study-country > summary:focus-visible { text-decoration: underline; text-underline-offset: 0.18em; }
+  .study-country[open] > summary svg { transform: rotate(180deg); }
+  .study-country > ul { position: absolute; z-index: 10; inset: auto 0 100%; max-height: min(50vh, 18rem); overflow: auto; margin: 0; padding: 0.25rem; list-style: none; border: 1px solid var(--riga); border-radius: 0.45rem; background: var(--carta, #fff); box-shadow: 0 4px 16px #182c2420; }
+  .study-country li a { display: flex; justify-content: space-between; align-items: center; min-height: 2.5rem; padding: 0.25rem 0.55rem; border-radius: 0.25rem; color: var(--inchiostro); text-decoration: none; overflow-wrap: anywhere; }
+  .study-country li a:hover, .study-country li a:focus-visible, .study-country li a[aria-current] { background: var(--carta-2, #edf2ed); }
+  .study-country li a[aria-current]::after { content: '✓' / ''; margin-inline-start: 0.4rem; color: var(--accento); }
+</style>

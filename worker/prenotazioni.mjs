@@ -1,12 +1,15 @@
+import { componiEmail, inviaEmailResend } from './email.mjs';
 // Prenotazione delle lezioni individuali (pagina /prenota).
-//  - orari: lunedì-sabato, 10-13 e 15-17 (src/data/lezioni.ts), almeno 24 ore prima;
-//  - il calendario Google di Carmine (collegato una volta dalla pagina /admin/lezioni) toglie gli orari già occupati
+//  - fasce e limiti giornalieri in src/data/lezioni.ts;
+//  - il calendario Google di Carmine (collegato dalla pagina /admin/lezioni) esclude gli orari già occupati
 //    e riceve un evento con il link di Google Meet e l'invito allo studente;
 //  - pagamento di 40 € con Stripe (account di Carmine); mentre si paga l'orario resta bloccato;
 //  - spostamento o disdetta con rimborso fino a 24 ore prima, dal link nell'email di conferma;
 //  - 2 minuti prima della lezione lo studente riceve l'email con il link di Google Meet (cron al minuto 58).
 // Segreti su Cloudflare: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, GOOGLE_CLIENT_SECRET (GOOGLE_CLIENT_ID è in wrangler.jsonc).
 import { LEZIONI, MATERIE_LEZIONI } from '../src/data/lezioni.ts';
+import { materia } from '../src/data/materie.ts';
+import { leggiFatturazione } from './fatturazione.mjs';
 
 const ORA_MS = 3600 * 1000;
 const MAX_ATTESE_EMAIL = 2;   // prenotazioni non ancora pagate per indirizzo email
@@ -25,12 +28,20 @@ export function creaTabellePrenotazioni(sql) {
   `);
   // momento in cui è partita l'email con il link di Meet, 2 minuti prima della lezione
   try { sql.exec('ALTER TABLE lezioni ADD COLUMN avvisata INTEGER'); } catch { /* già presente */ }
+  try { sql.exec('ALTER TABLE lezioni ADD COLUMN fatturazione TEXT'); } catch { /* già presente */ }
 }
 
 // Orari occupati da lezioni pagate o in attesa di pagamento (escluso, se indicato, l'id dato).
 function occupateDB(o, da, a, escluso = '') {
   return o.righe(`SELECT inizio, fine FROM lezioni WHERE inizio < ? AND fine > ? AND id != ?
                   AND (stato = 'pagata' OR (stato = 'in-attesa' AND scadenza > ?))`, a, da, escluso, Date.now());
+}
+
+function limiteRaggiunto(o, inizio, escluso = '') {
+  const { y, m, d } = partiRoma(inizio);
+  const da = daOraRoma(y, m, d, 0);
+  const a = daOraRoma(y, m, d + 1, 0);
+  return occupateDB(o, da, a, escluso).filter((l) => l.inizio >= da).length >= limiteGiorno(inizio, Date.now());
 }
 
 // Rotte interne del Durable Object (chiamate con aDO). Restituisce null se il percorso non è suo.
@@ -40,13 +51,13 @@ export function archivioPrenotazioni(o, pathname, c) {
   switch (pathname) {
     case '/pren-occupate':
       return { occupate: occupateDB(o, c.da, c.a) };
-    case '/pren-blocca': { // il controllo e l'inserimento avvengono insieme: due studenti non possono prendere lo stesso orario
-      if (occupateDB(o, c.inizio, c.fine).length) return { ok: false, motivo: 'occupato' };
+    case '/pren-blocca': { // disponibilità e quota si controllano insieme all'inserimento
+      if (occupateDB(o, c.inizio, c.fine).length || limiteRaggiunto(o, c.inizio)) return { ok: false, motivo: 'occupato' };
       const attese = (campo, valore) => o.riga(`SELECT COUNT(*) AS n FROM lezioni WHERE ${campo} = ? AND stato = 'in-attesa' AND scadenza > ?`, valore, Date.now()).n;
       if (attese('email', c.email) >= MAX_ATTESE_EMAIL || (c.rete && attese('rete', c.rete) >= MAX_ATTESE_RETE)) return { ok: false, motivo: 'troppe' };
-      o.sql.exec(`INSERT INTO lezioni (id, inizio, fine, materia, nome, email, telefono, universita, note, cf, rete, stato, scadenza, creato, aggiornato)
+      o.sql.exec(`INSERT INTO lezioni (id, inizio, fine, materia, nome, email, telefono, universita, note, fatturazione, rete, stato, scadenza, creato, aggiornato)
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'in-attesa', ?, ?, ?)`,
-        c.id, c.inizio, c.fine, c.materia, c.nome, c.email, c.telefono, c.universita, c.note, c.cf, c.rete, c.scadenza, ora, ora);
+        c.id, c.inizio, c.fine, c.materia, c.nome, c.email, c.telefono, c.universita, c.note, JSON.stringify(c.fatturazione), c.rete, c.scadenza, ora, ora);
       return { ok: true };
     }
     case '/pren-sessione':
@@ -63,8 +74,11 @@ export function archivioPrenotazioni(o, pathname, c) {
       o.sql.exec('UPDATE lezioni SET evento = ?, meet = ?, aggiornato = ? WHERE id = ?', c.evento, c.meet, ora, c.id);
       return { ok: true };
     case '/pren-libera': // pagamento annullato o scaduto: l'orario torna libero
-      o.sql.exec("UPDATE lezioni SET stato = 'annullata', aggiornato = ? WHERE id = ? AND stato = 'in-attesa'", ora, c.id);
+      o.sql.exec("UPDATE lezioni SET stato = 'annullata', fatturazione = NULL, aggiornato = ? WHERE id = ? AND stato = 'in-attesa'", ora, c.id);
       return { ok: true };
+    case '/pren-scadute':
+      return { lezioni: o.righe(`SELECT id, sessione FROM lezioni WHERE stato = 'in-attesa'
+        AND fatturazione IS NOT NULL AND scadenza < ? ORDER BY scadenza LIMIT 20`, Date.now() - 24 * ORA_MS) };
     case '/pren-leggi':
       return { lezione: leggi(c.id) };
     case '/pren-da-sessione':
@@ -75,7 +89,7 @@ export function archivioPrenotazioni(o, pathname, c) {
     case '/pren-sposta': {
       const r = leggi(c.id);
       if (!r || r.stato !== 'pagata') return { ok: false, motivo: 'stato' };
-      if (occupateDB(o, c.inizio, c.fine, c.id).length) return { ok: false, motivo: 'occupato' };
+      if (occupateDB(o, c.inizio, c.fine, c.id).length || limiteRaggiunto(o, c.inizio, c.id)) return { ok: false, motivo: 'occupato' };
       o.sql.exec('UPDATE lezioni SET inizio = ?, fine = ?, spostamenti = spostamenti + 1, avvisata = NULL, aggiornato = ? WHERE id = ?', c.inizio, c.fine, ora, c.id);
       return { ok: true, lezione: leggi(c.id), prima: r };
     }
@@ -84,9 +98,9 @@ export function archivioPrenotazioni(o, pathname, c) {
     case '/pren-avvisata':
       o.sql.exec('UPDATE lezioni SET avvisata = ? WHERE id = ?', Date.now(), c.id);
       return { ok: true };
-    case '/pren-elenco': // per la pagina /admin/lezioni: lezioni dagli ultimi 30 giorni in poi
-      return { lezioni: o.righe(`SELECT * FROM lezioni WHERE inizio > ? AND stato IN ('pagata', 'disdetta', 'in-attesa')
-                                  ORDER BY inizio`, Date.now() - 30 * 24 * ORA_MS) };
+    case '/pren-elenco': // solo per la pagina riservata /admin/lezioni
+      return { lezioni: o.righe(`SELECT * FROM lezioni WHERE inizio >= ? AND inizio < ? AND stato IN ('pagata', 'disdetta', 'in-attesa')
+                                  ORDER BY inizio`, c.da ?? Date.now() - 30 * 24 * ORA_MS, c.a ?? Number.MAX_SAFE_INTEGER) };
     case '/pren-imposta':
       if (c.valore == null) o.sql.exec('DELETE FROM impostazioni WHERE chiave = ?', c.chiave);
       else o.sql.exec('INSERT INTO impostazioni (chiave, valore) VALUES (?, ?) ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore', c.chiave, c.valore);
@@ -119,11 +133,18 @@ export function daOraRoma(y, m, d, h) {
   return t;
 }
 const due = (n) => String(n).padStart(2, '0');
+const giornoRoma = (istante) => {
+  const { y, m, d } = partiRoma(istante);
+  return Date.UTC(y, m - 1, d);
+};
+function limiteGiorno(inizio, adesso) {
+  const giorni = (giornoRoma(inizio) - giornoRoma(adesso)) / (24 * ORA_MS);
+  return LEZIONI.limitiPrimiGiorni[giorni] ?? LEZIONI.limiteSuccessivi;
+}
 
-// Tutti gli orari previsti dalle regole (giorni, ore, preavviso, settimane), senza guardare gli impegni.
+// Considera tutte le fasce da oggi, comprese quelle già trascorse per contare le prenotazioni della giornata.
 export function orariPrevisti(adesso = Date.now()) {
   const oggi = partiRoma(adesso);
-  const minimo = adesso + LEZIONI.preavvisoOre * ORA_MS;
   const fuori = [];
   for (let i = 0; i <= LEZIONI.settimane * 7; i++) {
     const g = new Date(Date.UTC(oggi.y, oggi.m - 1, oggi.d + i));
@@ -131,13 +152,41 @@ export function orariPrevisti(adesso = Date.now()) {
     const [y, m, d] = [g.getUTCFullYear(), g.getUTCMonth() + 1, g.getUTCDate()];
     for (const h of LEZIONI.ore) {
       const inizio = daOraRoma(y, m, d, h);
-      if (inizio < minimo) continue;
       fuori.push({ inizio, fine: inizio + LEZIONI.durata * 60000, giorno: `${y}-${due(m)}-${due(d)}`, ora: `${due(h)}:00` });
     }
   }
   return fuori;
 }
 const siSovrappone = (s, occ) => occ.some((x) => s.inizio < x.fine && s.fine > x.inizio);
+
+// Ordine pseudocasuale stabile, derivato dall'istante dello slot.
+function prioritaOrario({ inizio }) {
+  let h = inizio / ORA_MS;
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  h = Math.imul(h ^ (h >>> 16), 0x45d9f3b);
+  return (h ^ (h >>> 16)) >>> 0;
+}
+
+function selezionaOrari(previsti, impegni, prenotazioni, adesso, minimo) {
+  const presi = new Map();
+  for (const l of prenotazioni) {
+    const giorno = giornoRoma(l.inizio);
+    presi.set(giorno, (presi.get(giorno) ?? 0) + 1);
+  }
+  const candidati = new Map();
+  for (const s of previsti) {
+    if (s.inizio < minimo || siSovrappone(s, impegni) || siSovrappone(s, prenotazioni)) continue;
+    const lista = candidati.get(s.giorno) ?? [];
+    lista.push(s);
+    candidati.set(s.giorno, lista);
+  }
+  return [...candidati.values()].flatMap((lista) => {
+    const { inizio } = lista[0];
+    const limite = Math.max(0, limiteGiorno(inizio, adesso) - (presi.get(giornoRoma(inizio)) ?? 0));
+    lista.sort((a, b) => prioritaOrario(a) - prioritaOrario(b));
+    return lista.slice(0, limite).sort((a, b) => a.inizio - b.inizio);
+  });
+}
 
 const GIORNI = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
 const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
@@ -146,7 +195,7 @@ export function quando(inizio, fine) {
   const gs = new Date(Date.UTC(a.y, a.m - 1, a.d)).getUTCDay();
   return `${GIORNI[gs]} ${a.d} ${MESI[a.m - 1]} ${a.y}, ore ${due(a.h)}:${due(a.min)}-${due(b.h)}:${due(b.min)}`;
 }
-const titoloMateria = (slug) => MATERIE_LEZIONI.find((m) => m.slug === slug)?.titolo || slug;
+const titoloMateria = (slug) => materia(slug)?.titolo || slug;
 const isoRoma = (ms) => { const p = partiRoma(ms); return `${p.y}-${due(p.m)}-${due(p.d)}T${due(p.h)}:${due(p.min)}:00`; };
 
 // ---------- Google Calendar ----------
@@ -234,12 +283,12 @@ function campiStripe(oggetto, prefisso = '', fuori = new URLSearchParams()) {
   }
   return fuori;
 }
-async function stripe(env, metodo, percorso, campi, idempotenza) {
+export async function stripe(env, metodo, percorso, campi, idempotenza) {
   const h = { authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'content-type': 'application/x-www-form-urlencoded' };
   if (idempotenza) h['idempotency-key'] = idempotenza;
   const r = await fetch('https://api.stripe.com/v1' + percorso, { method: metodo, headers: h, body: campi ? campiStripe(campi) : undefined });
   const d = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(`Stripe ${r.status}: ${d.error?.message || ''}`);
+  if (!r.ok) throw Object.assign(new Error(`Stripe ${r.status}: ${d.error?.message || ''}`), { status: r.status });
   return d;
 }
 const esa = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -255,18 +304,11 @@ export async function verificaStripe(intestazione, corpo, segreto, adesso = Date
 
 // ---------- email (Resend) ----------
 const esc = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-async function inviaEmail(env, a, oggetto, righe, tasto) {
-  if (!env.RESEND_API_KEY) return false;
-  const html = `<div style="font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.55;color:#22302f;max-width:540px">
-${righe.map((r) => `<p>${esc(r)}</p>`).join('\n')}
-${tasto ? `<p style="margin:24px 0"><a href="${esc(tasto[1])}" style="background:#2f6f68;color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:8px;font-family:Arial,sans-serif;font-size:15px;display:inline-block">${esc(tasto[0])}</a></p>` : ''}
-<p>Carmine</p></div>`;
-  const r = await fetch('https://api.resend.com/emails', {
-    method: 'POST', headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: env.MITTENTE || 'Ripetizioni di Analisi <account@ripetizionidianalisi.com>', to: [a], subject: oggetto, html,
-      text: [...righe, tasto ? `${tasto[0]}: ${tasto[1]}` : '', 'Carmine'].filter(Boolean).join('\n\n') }),
-  }).catch(() => null);
-  return Boolean(r?.ok);
+async function inviaEmail(env, tipo, a, oggetto, righe, tasto, dettagli = {}) {
+  const messaggio = componiEmail({
+    subject: oggetto, categoria: 'Lezioni individuali', righe, pulsante: tasto, ...dettagli,
+  });
+  return (await inviaEmailResend(env, a, messaggio, undefined, tipo)).ok;
 }
 const rigaMeet = (l) => (l.meet ? `Link della lezione su Google Meet: ${l.meet}` : 'Il link di Google Meet arriva con l’invito di Google Calendar a questo indirizzo.');
 const rigaRegole = () => `La lezione si può spostare o disdire con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima dell’inizio. Dopo quel momento non è previsto il rimborso.`;
@@ -279,13 +321,21 @@ export async function avvisiLezioni(env, aDO, firmaToken, adesso = Date.now()) {
   let inviate = 0;
   for (const l of lezioni) {
     const p = partiRoma(l.inizio);
-    const ok = await inviaEmail(env, l.email, `La lezione inizia alle ${due(p.h)}:${due(p.min)}: ecco il link`, [
+    const ok = await inviaEmail(env, 'lezione-promemoria', l.email, `La lezione inizia alle ${due(p.h)}:${due(p.min)}: ecco il link`, [
       `Ciao ${l.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(l.materia)} inizia alle ${due(p.h)}:${due(p.min)}.`,
       l.meet ? `Si entra su Google Meet da questo link: ${l.meet}` : 'Il link di Google Meet è nell’invito di Google Calendar che hai ricevuto alla prenotazione.',
     ], l.meet ? ['Entra nella lezione', l.meet] : null);
     await aDO(env, '/pren-avvisata', { id: l.id });
     if (ok) inviate++;
+  }
+  // Recupera anche i checkout abbandonati per i quali manca il webhook di scadenza.
+  if (env.STRIPE_SECRET_KEY) {
+    const scadute = await aDO(env, '/pren-scadute', {});
+    for (const l of scadute.lezioni) {
+      const sessione = l.sessione && await stripe(env, 'GET', `/checkout/sessions/${l.sessione}`).catch(() => null);
+      if (!l.sessione || sessione?.status === 'expired') await aDO(env, '/pren-libera', { id: l.id });
+    }
   }
   return { lezioni: lezioni.length, inviate };
 }
@@ -305,17 +355,18 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
   };
   const attivo = async () => Boolean(env.STRIPE_SECRET_KEY && (await tokenGoogle(env, aDO).catch(() => null)));
 
-  // Orari liberi: regole del sito, meno impegni del calendario Google, meno lezioni già prese.
-  const orariLiberi = async (escluso = '') => {
-    const previsti = orariPrevisti();
+  const orariLiberi = async (nostre = null) => {
+    const adesso = Date.now();
+    const previsti = orariPrevisti(adesso);
     if (!previsti.length) return [];
     const da = previsti[0].inizio, a = previsti.at(-1).fine;
     const [g, db] = await Promise.all([occupatoGoogle(env, aDO, da, a), aDO(env, '/pren-occupate', { da, a })]);
-    const nostre = escluso ? (await aDO(env, '/pren-leggi', { id: escluso })).lezione : null;
     // la lezione che si sta spostando occupa il suo orario anche in Google: quell'intervallo non conta
     const daGoogle = nostre ? g.filter((x) => !(x.inizio >= nostre.inizio && x.fine <= nostre.fine)) : g;
     const daDB = db.occupate.filter((x) => !(nostre && x.inizio === nostre.inizio && x.fine === nostre.fine));
-    return previsti.filter((s) => !siSovrappone(s, daGoogle) && !siSovrappone(s, daDB));
+    const minimo = adesso + (nostre ? LEZIONI.preavvisoSpostamentoOre * ORA_MS : LEZIONI.preavvisoMinuti * 60000);
+    const alternative = nostre ? previsti.filter((s) => s.inizio !== nostre.inizio) : previsti;
+    return selezionaOrari(alternative, daGoogle, daDB, adesso, minimo);
   };
   const pubblico = (l) => ({ materia: titoloMateria(l.materia), quando: quando(l.inizio, l.fine), inizio: l.inizio, stato: l.stato, meet: l.meet,
     nome: l.nome, email: l.email, rimborsabile: l.stato === 'pagata' && Date.now() <= l.inizio - LEZIONI.rimborsoOre * ORA_MS });
@@ -325,8 +376,8 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const base = { materie: MATERIE_LEZIONI, regole: LEZIONI };
     if (!(await attivo())) return json({ ...base, attivo: false, orari: [] }, 200, { 'cache-control': 'no-store' });
     try {
-      const orari = await orariLiberi();
-      return json({ ...base, attivo: true, orari: orari.map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora })) }, 200, { 'cache-control': 'no-store' });
+      const orari = (await orariLiberi()).map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora }));
+      return json({ ...base, attivo: true, orari }, 200, { 'cache-control': 'no-store' });
     } catch (e) {
       console.log('prenota disponibilita', String(e?.message || e));
       return json({ ...base, attivo: false, orari: [], errore: 'Il calendario non risponde. Riprova tra poco.' }, 503);
@@ -342,13 +393,15 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const dati = {
       materia: MATERIE_LEZIONI.some((m) => m.slug === c.materia) ? c.materia : null,
       nome: pulisci(c.nome, 80), email, telefono: pulisci(c.telefono, 30), universita: pulisci(c.universita, 120),
-      note: pulisci(c.note, 500), cf: pulisci(c.cf, 16).toUpperCase(),
+      note: pulisci(c.note, 500),
     };
     if (!dati.materia) return json({ errore: 'Scegli la materia.' }, 400);
     if (dati.nome.length < 2) return json({ errore: 'Scrivi nome e cognome.' }, 400);
     if (!h.emailValida(email)) return json({ errore: 'Scrivi un indirizzo email valido.' }, 400);
     if (!/^[+0-9 ]{6,20}$/.test(dati.telefono)) return json({ errore: 'Scrivi un numero di telefono valido.' }, 400);
-    if (dati.cf && !/^[A-Z0-9]{11,16}$/.test(dati.cf)) return json({ errore: 'Il codice fiscale non è valido.' }, 400);
+    const fattura = leggiFatturazione(c.fatturazione);
+    if (fattura.errore) return json({ errore: fattura.errore }, 400);
+    dati.fatturazione = fattura.dati;
     if (c.condizioni !== true) return json({ errore: 'Per prenotare servono le condizioni accettate.' }, 400);
     let orari;
     try { orari = await orariLiberi(); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
@@ -391,7 +444,12 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (d?.scopo !== 'annulla' || !d.l) return json({ ok: false }, 400);
     const l = (await aDO(env, '/pren-leggi', { id: d.l })).lezione;
     if (l?.stato === 'in-attesa') {
-      if (l.sessione) await stripe(env, 'POST', `/checkout/sessions/${l.sessione}/expire`).catch(() => {});
+      // Il webhook di un pagamento completato può ancora dover arrivare.
+      // In quel caso non cancelliamo i dati fiscali solo perché si è aperto il link di annullamento.
+      if (l.sessione) {
+        const scaduta = await stripe(env, 'POST', `/checkout/sessions/${l.sessione}/expire`).catch(() => null);
+        if (scaduta?.status !== 'expired') return json({ ok: false }, 409);
+      }
       await aDO(env, '/pren-libera', { id: l.id });
     }
     return json({ ok: true });
@@ -416,7 +474,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const l = await daToken((await corpo()).t);
     if (!l || l.stato !== 'pagata') return json({ errore: 'Prenotazione non trovata.' }, 404);
     try {
-      const orari = (await orariLiberi(l.id)).filter((s) => s.inizio !== l.inizio);
+      const orari = await orariLiberi(l);
       return json({ orari: orari.map(({ inizio, giorno, ora }) => ({ inizio, giorno, ora })) }, 200, { 'cache-control': 'no-store' });
     } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
   }
@@ -426,7 +484,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (!l || l.stato !== 'pagata') return json({ errore: 'Prenotazione non trovata.' }, 404);
     if (Date.now() > l.inizio - LEZIONI.rimborsoOre * ORA_MS) return json({ errore: `Mancano meno di ${LEZIONI.rimborsoOre} ore alla lezione: non si può più spostare dal sito.` }, 409);
     let orari;
-    try { orari = await orariLiberi(l.id); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
+    try { orari = await orariLiberi(l); } catch { return json({ errore: 'Il calendario non risponde. Riprova tra poco.' }, 503); }
     const scelto = orari.find((s) => s.inizio === Number(c.inizio));
     if (!scelto) return json({ errore: 'Questo orario non è più libero. Scegline un altro.' }, 409);
     const r = await aDO(env, '/pren-sposta', { id: l.id, inizio: scelto.inizio, fine: scelto.fine });
@@ -437,7 +495,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
         start: { dateTime: isoRoma(nuova.inizio), timeZone: LEZIONI.fusoOrario }, end: { dateTime: isoRoma(nuova.fine), timeZone: LEZIONI.fusoOrario },
       }).catch((e) => console.log('prenota sposta google', String(e?.message || e))));
     }
-    ctx.waitUntil(inviaEmail(env, nuova.email, `Lezione spostata: ${quando(nuova.inizio, nuova.fine)}`, [
+    ctx.waitUntil(inviaEmail(env, 'lezione-spostata', nuova.email, `Lezione spostata: ${quando(nuova.inizio, nuova.fine)}`, [
       `Ciao ${nuova.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(nuova.materia)} è stata spostata a ${quando(nuova.inizio, nuova.fine)}. Prima era fissata per ${quando(r.prima.inizio, r.prima.fine)}.`,
       rigaMeet(nuova), rigaRegole(),
@@ -458,7 +516,7 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     const r = await aDO(env, '/pren-disdici', { id: l.id });
     if (l.evento) ctx.waitUntil(google(env, aDO, 'DELETE', `/calendars/${calendario(env)}/events/${encodeURIComponent(l.evento)}?sendUpdates=all`)
       .catch((e) => console.log('prenota disdici google', String(e?.message || e))));
-    ctx.waitUntil(inviaEmail(env, l.email, 'Lezione disdetta e rimborsata', [
+    ctx.waitUntil(inviaEmail(env, 'lezione-disdetta', l.email, 'Lezione disdetta e rimborsata', [
       `Ciao ${l.nome.split(' ')[0]},`,
       `la lezione di ${titoloMateria(l.materia)} di ${quando(l.inizio, l.fine)} è stata disdetta.`,
       `Il rimborso di ${LEZIONI.prezzo} € è partito sulla carta usata per il pagamento; di solito compare sull’estratto conto entro 5-10 giorni lavorativi.`,
@@ -472,6 +530,8 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
     if (!env.STRIPE_WEBHOOK_SECRET || !(await verificaStripe(req.headers.get('stripe-signature'), testo, env.STRIPE_WEBHOOK_SECRET)))
       return new Response('firma non valida', { status: 400 });
     const ev = JSON.parse(testo);
+    const digitale = await h.altriEventiStripe?.(ev);
+    if (digitale) return digitale;
     const s = ev.data?.object || {};
     const id = s.metadata?.prenotazione || s.client_reference_id;
     if (!id) return json({ ok: true });
@@ -485,13 +545,16 @@ export async function gestisciPrenotazioni(req, env, ctx, p, h) {
           await aDO(env, '/pren-evento', { id, ...e });
           l.meet = e.meet;
         } catch (e) { console.log('prenota evento google', String(e?.message || e)); }
-        await inviaEmail(env, l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
+        await inviaEmail(env, 'lezione-confermata', l.email, `Lezione confermata: ${quando(l.inizio, l.fine)}`, [
           `Ciao ${l.nome.split(' ')[0]},`,
-          `la lezione di ${titoloMateria(l.materia)} è confermata per ${quando(l.inizio, l.fine)}. Il pagamento di ${LEZIONI.prezzo} € è stato ricevuto.`,
-          rigaMeet(l),
-          'Se hai una traccia d’esame o degli esercizi su cui lavorare, mandameli su WhatsApp prima della lezione.',
-          rigaRegole(),
-        ], ['Sposta o disdici la lezione', gestione]);
+          `ho ricevuto il pagamento di ${LEZIONI.prezzo} € per la tua lezione di ${titoloMateria(l.materia)}.`,
+        ], ['Gestisci la prenotazione', gestione], {
+          titolo: 'La tua lezione è confermata',
+          anteprima: quando(l.inizio, l.fine),
+          scheda: { etichetta: 'La tua prenotazione', valore: quando(l.inizio, l.fine), nota: 'Ora italiana · Google Meet' },
+          dopo: [rigaMeet(l), 'Se hai una traccia d’esame o degli esercizi su cui lavorare, mandameli su WhatsApp prima della lezione.', rigaRegole()],
+          motivo: 'Ricevi questa email perché hai prenotato una lezione individuale.',
+        });
       }
     } else if (ev.type === 'checkout.session.expired') {
       await aDO(env, '/pren-libera', { id });
@@ -581,7 +644,14 @@ async function paginaAdminLezioni(env, aDO, url) {
   const collegato = Boolean((await aDO(env, '/pren-impostazione', { chiave: 'google_refresh' })).valore);
   let googleOk = false;
   if (collegato) googleOk = Boolean(await tokenGoogle(env, aDO).catch(() => null));
-  const { lezioni } = await aDO(env, '/pren-elenco', {});
+  const mese = url.searchParams.get('mese') || '';
+  const periodo = {};
+  if (/^\d{4}-(0[1-9]|1[0-2])$/.test(mese)) {
+    const [y, m] = mese.split('-').map(Number);
+    periodo.da = daOraRoma(y, m, 1, 0);
+    periodo.a = daOraRoma(y, m + 1, 1, 0);
+  }
+  const { lezioni } = await aDO(env, '/pren-elenco', periodo);
   const adesso = Date.now();
   const STATI = { pagata: 'Pagata', disdetta: 'Disdetta e rimborsata', 'in-attesa': 'In attesa di pagamento' };
   const visibili = lezioni.filter((l) => l.stato !== 'in-attesa' || l.scadenza > adesso);
@@ -589,7 +659,7 @@ async function paginaAdminLezioni(env, aDO, url) {
 <td>${esc(quando(l.inizio, l.fine))}</td><td>${esc(titoloMateria(l.materia))}</td>
 <td>${esc(l.nome)}<br><span class="piccolo"><a href="mailto:${esc(l.email)}">${esc(l.email)}</a> · <a href="https://wa.me/${esc(numeroWhatsApp(l.telefono))}">${esc(l.telefono)}</a></span></td>
 <td>${esc(l.universita || '')}${l.note ? `<br><span class="piccolo">${esc(l.note)}</span>` : ''}</td>
-<td>${l.cf ? esc(l.cf) : '<span class="piccolo">non indicato</span>'}</td>
+<td>${dettagliFattura(l)}</td>
 <td><span class="stato s-${esc(l.stato)}">${esc(STATI[l.stato] || l.stato)}</span>${l.spostamenti ? `<br><span class="piccolo">spostata ${l.spostamenti} ${l.spostamenti === 1 ? 'volta' : 'volte'}</span>` : ''}</td>
 <td>${l.meet ? `<a href="${esc(l.meet)}" target="_blank" rel="noopener">Meet</a>` : ''}</td></tr>`).join('');
   return pagina(`<p class="piccolo"><a href="/admin">← Dashboard</a></p>
@@ -602,7 +672,20 @@ ${url.searchParams.get('collegato') ? '<div class="box ok">Google Calendar colle
 ${collegato ? '<form method="post" action="/admin/google/scollega" style="margin:0"><button class="secondario" type="submit">Scollega</button></form>' : ''}
 <div style="margin-left:auto"><strong>Stripe</strong><br>${env.STRIPE_SECRET_KEY ? '<span class="ok">Chiave inserita</span>' : '<span class="no">Chiave mancante</span>'} · ${env.STRIPE_WEBHOOK_SECRET ? '<span class="ok">webhook pronto</span>' : '<span class="no">segreto del webhook mancante</span>'}</div>
 </div></div>
-${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Codice fiscale</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
-    : '<p>Nessuna lezione prenotata dal sito negli ultimi 30 giorni o in programma.</p>'}
-<p class="piccolo">Per le prenotazioni restano le regole della pagina: dal lunedì al sabato, ${LEZIONI.ore.map((o) => `${o}-${o + 1}`).join(', ')}, almeno ${LEZIONI.preavvisoOre} ore prima; gli impegni del tuo calendario tolgono gli orari corrispondenti. Problemi o richieste fuori dalle regole: <a href="${WHATSAPP}">WhatsApp</a>.</p>`);
+<form action="/admin/lezioni" class="riga"><label>Mese della lezione <input type="month" name="mese" value="${esc(mese)}" required></label>
+<button type="submit">Mostra</button>${periodo.da ? '<a href="/admin/lezioni">Torna alle lezioni recenti</a>' : ''}</form>
+${righe ? `<div class="tab"><table><thead><tr><th>Quando</th><th>Materia</th><th>Studente</th><th>Università e argomenti</th><th>Fatturazione</th><th>Stato</th><th></th></tr></thead><tbody>${righe}</tbody></table></div>`
+    : '<p>Nessuna lezione da mostrare per il periodo selezionato.</p>'}
+<p class="piccolo">Lezioni dal lunedì al sabato nelle fasce 10–13 e 14–19. Per prenotare servono almeno ${LEZIONI.preavvisoMinuti} minuti di anticipo. La disponibilità dipende dagli impegni del calendario e dal limite giornaliero.</p>`);
+}
+
+function dettagliFattura(l) {
+  if (l.stato === 'in-attesa') return '—';
+  if (!l.fatturazione) return l.cf ? esc(l.cf) : '—'; // prenotazioni precedenti
+  const f = JSON.parse(l.fatturazione);
+  const righe = [
+    `${f.nome} ${f.cognome}`, f.indirizzo, [f.cap, f.comune, f.provincia, f.paese].filter(Boolean).join(' '),
+    f.cf && `CF ${f.cf}`, l.importo != null && `${l.importo} €`, l.pagamento,
+  ];
+  return `<details><summary>Dati fattura</summary>${righe.filter(Boolean).map(esc).join('<br>')}</details>`;
 }

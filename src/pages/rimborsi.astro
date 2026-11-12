@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { LEZIONI } from '../data/lezioni';
+---
+<Base titolo="Politica di rimborso e diritto di recesso" percorso={[{ titolo: 'Rimborsi e recesso' }]} descrizione="Come chiedere un rimborso per materie, pacchetti e videocorsi acquistati online o disdire una lezione con Carmine.">
+  <p class="sopratitolo">Assistenza sugli acquisti</p>
+  <h1>Politica di rimborso e diritto di recesso</h1>
+  <p class="sommario">Per un acquisto digitale, controlla il nome del venditore nella conferma dell’ordine. Per una lezione individuale dal vivo, usa il link di prenotazione nell’email di conferma.</p>
+
+  <h2>Materie, pacchetti e videocorsi preregistrati</h2>
+  <p>Per gli acquisti da Carmine Tornincasa pagati con Stripe, accedi con l’account usato per il pagamento e seleziona l’ordine. Inserisci o conferma nome ed email, quindi conferma il recesso. Riceverai via email copia della tua dichiarazione con la data e l’ora dell’invio.</p>
+  <p><a class="bottone-primario" href="/recesso">Recedi dal contratto qui</a></p>
+  <p>Puoi anche scrivere a <a href="mailto:carminetornincasa98@gmail.com">Carmine Tornincasa</a> comunicando la tua decisione. Per esempio, «Desidero recedere dall’acquisto di [prodotto], ordine [riferimento] del [data]». Indica nome, cognome ed email usata per acquistare. Puoi scrivere anche se non riesci ad accedere all’account.</p>
+  <p>Se acquisti come consumatore nell’Unione europea, di norma hai <strong>14 giorni dalla conclusione del contratto</strong> per recedere senza indicare il motivo. Per i contenuti digitali forniti online, perdi questo diritto una volta iniziata la fornitura solo se hai chiesto espressamente che inizi subito, hai riconosciuto che così perdi il diritto di recesso e hai ricevuto conferma del contratto e di entrambe le dichiarazioni su un supporto durevole, per esempio via email.</p>
+  <p>Quando eserciti validamente il diritto di recesso, Carmine ti rimborsa entro 14 giorni dalla comunicazione, con lo stesso mezzo di pagamento usato per l’acquisto, salvo che tu concordi espressamente un’altra modalità. Restano salvi i diritti previsti dalla legge per i contenuti difettosi o diversi dalla descrizione.</p>
+
+  <h2>Acquisti precedenti presso Paddle</h2>
+  <p>Se nella tua ricevuta il venditore è Paddle, per chiedere un rimborso usa il link di assistenza nella ricevuta o <a href="https://paddle.net/">l’assistenza acquirenti di Paddle</a>. Per gli acquisti idonei, il portale Paddle offre anche la funzione di recesso durante il periodo previsto. A questi ordini si applicano la <a href="https://www.paddle.com/legal/refund-policy">politica di rimborso di Paddle</a> e le tutele inderogabili previste dalla legge.</p>
+
+  <h2>Problemi con l’accesso o con i contenuti</h2>
+  <p>Se il materiale acquistato è inaccessibile, difettoso o diverso dalla descrizione, scrivi a <a href="mailto:carminetornincasa98@gmail.com">Carmine Tornincasa</a> indicando il prodotto, l’email usata per acquistarlo e il problema riscontrato. Restano validi i tuoi diritti di legge in caso di difetto di conformità.</p>
+
+  <h2>Lezioni individuali e corsi di gruppo dal vivo</h2>
+  <p>Le lezioni individuali si prenotano sul sito e si pagano con Stripe. Per spostare o disdire una lezione, apri il link nell’email di conferma. Se disdici almeno {LEZIONI.rimborsoOre} ore prima dell’inizio, ricevi il rimborso completo sulla carta usata per pagare. Per le disdette successive si applicano le <a href="/prenota#condizioni">condizioni di prenotazione</a>, fatti salvi i diritti previsti dalla legge.</p>
+  <p>Per i corsi di gruppo in diretta, i pagamenti sono gestiti direttamente da Carmine. Per una disdetta o una richiesta di rimborso relativa al tuo gruppo, <a href="/contatti">contatta Carmine</a> indicando il corso e la data del pagamento.</p>
+  <p><small>Aggiornata il 9 novembre 2026.</small></p>
+</Base>

@@ -55,7 +55,11 @@ for (const nome of teorie) {
   for (const tipo of ['svolti', 'dafare', 'domande']) {
     const cartella = join(radice, tipo, materia, slug);
     const nomi = readdirSync(cartella).filter((f) => /^\d+\.md$/.test(f)).sort((a,b) => parseInt(a)-parseInt(b));
-    assert.ok(nomi.length >= (tipo === 'svolti' ? 10 : tipo === 'domande' && materia === 'biologia-semestre-filtro' ? 45 : 14), `${cartella}: contenuti incompleti`);
+    if (tipo === 'domande') {
+      assert.deepEqual(nomi, Array.from({ length: 90 }, (_, i) => `${i + 1}.md`), `${cartella}: servono 90 domande con ID consecutivi`);
+    } else {
+      assert.ok(nomi.length >= (tipo === 'svolti' ? 10 : 14), `${cartella}: contenuti incompleti`);
+    }
     for (const nomeFile of nomi) {
       const percorso = join(cartella, nomeFile);
       const { dati, corpo } = leggi(percorso);

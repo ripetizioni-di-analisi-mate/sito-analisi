@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { LEZIONI } from '../../data/lezioni';
+---
+<Base lingua="en" titolo="Refund policy and right of withdrawal" percorso={[{ titolo: 'Refunds and withdrawal' }]} descrizione="How to request a refund for subjects, bundles and recorded video courses paid for online, or cancel a lesson with Carmine.">
+  <p class="sopratitolo">Purchase support</p>
+  <h1>Refund policy and right of withdrawal</h1>
+  <p class="sommario">For a digital purchase, check your order confirmation to see who sold the material. For a live individual lesson, use the booking link in your confirmation email.</p>
+
+  <h2>Subjects, bundles and prerecorded video courses</h2>
+  <p>For purchases from Carmine Tornincasa paid through Stripe, sign in to the account you used at checkout and select the order. Enter or confirm your name and email address, then confirm your withdrawal. We will email you a copy of your declaration showing when you submitted it.</p>
+  <p><a class="bottone-primario" href="/en/recesso">Withdraw from your contract here</a></p>
+  <p>You may also email <a href="mailto:carminetornincasa98@gmail.com">Carmine Tornincasa</a> with a clear statement of your decision, for example “I wish to withdraw from my purchase of [product], order [reference], placed on [date].” Include your name and the email address associated with your purchase. You can use email even if you cannot sign in.</p>
+  <p>If you buy as a consumer in the European Union, you generally have <strong>14 days from the date of the contract</strong> to withdraw without giving a reason. For digital content supplied online, you lose that right once supply begins only if you expressly requested immediate delivery, acknowledged that you would lose the right to withdraw when delivery began, and received confirmation of the contract and both acknowledgements in a form you can keep, such as an email.</p>
+  <p>If you exercise a valid right of withdrawal, Carmine will refund you within 14 days of your notice, using the payment method you used for the purchase, unless you expressly agree otherwise. Your statutory rights for faulty or misdescribed digital content apply.</p>
+
+  <h2>Earlier purchases from Paddle</h2>
+  <p>If your receipt identifies Paddle as the seller, you can use the support link in that receipt or <a href="https://paddle.net/">Paddle Buyer Support</a> to request a refund. The Paddle customer portal also offers a withdrawal option for eligible purchases during the applicable period. <a href="https://www.paddle.com/legal/refund-policy">Paddle’s refund policy</a> and your mandatory consumer rights apply to those orders.</p>
+
+  <h2>Problems with access or content</h2>
+  <p>If you cannot access the material, or if it is faulty or differs from its description, <a href="mailto:carminetornincasa98@gmail.com">email Carmine Tornincasa</a> with the product name, the email address you used at checkout and a description of the problem. Your statutory rights for faulty or misdescribed content apply.</p>
+
+  <h2>Live individual lessons and group courses</h2>
+  <p>Individual lessons are booked on the website and paid for through Stripe. Use the link in your confirmation email to reschedule or cancel. If you cancel at least {LEZIONI.rimborsoOre} hours before the lesson, you receive a full refund to the card used for payment. Later cancellations are subject to the <a href="/prenota#condizioni" hreflang="it">booking terms (in Italian)</a> and your statutory rights.</p>
+  <p>Carmine collects payments directly for live group courses. To cancel or request a refund for a group course, <a href="/en/contatti">contact Carmine</a> with the course name and payment date.</p>
+  <p><small>Updated on 9 November 2026.</small></p>
+</Base>

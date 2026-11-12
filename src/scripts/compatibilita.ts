@@ -1,11 +1,11 @@
 // «Compatibilità con il tuo esame» nel browser (componente CompatibilitaEsame.astro).
-// Le foto si riducono qui (lato lungo 1600 px, JPEG); le pagine dei PDF si disegnano con pdf.js (caricato da jsDelivr
+// Le foto si riducono qui (lato lungo 2200 px, JPEG); le pagine dei PDF si disegnano con pdf.js (caricato da jsDelivr
 // solo quando serve) e partono come immagini, così il modello vede anche le formule. Poi il testo letto va al confronto.
 // Per non far aspettare: foto e PDF si preparano appena scelti (mentre lo studente sceglie la materia), e il risultato
 // del confronto arriva in streaming, una richiesta alla volta, con le percentuali alla fine.
 import katex from 'katex';
 
-const MAX_LATO = 1600;
+const MAX_LATO = 2200;
 const MAX_DATI = 1400000; // caratteri del data URL di una pagina (il Worker accetta fino a 1,5 milioni)
 const PDFJS = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/';
 
@@ -40,41 +40,44 @@ function conFormule(s: string): string {
 
 // ---------- immagini dalle foto e dai PDF ----------
 function suTela(sorgente: CanvasImageSource, w: number, h: number): string {
-  const k = Math.min(1, MAX_LATO / Math.max(w, h));
   const c = document.createElement('canvas');
-  c.width = Math.round(w * k); c.height = Math.round(h * k);
   const g = c.getContext('2d')!;
-  g.fillStyle = 'white'; g.fillRect(0, 0, c.width, c.height);
-  g.drawImage(sorgente, 0, 0, c.width, c.height);
-  let q = 0.82, d = c.toDataURL('image/jpeg', q);
-  while (d.length > MAX_DATI && q > 0.5) { q -= 0.12; d = c.toDataURL('image/jpeg', q); }
-  return d;
+  for (const lato of [MAX_LATO, 1800, 1400]) {
+    const scala = Math.min(1, lato / Math.max(w, h));
+    c.width = Math.max(1, Math.round(w * scala)); c.height = Math.max(1, Math.round(h * scala));
+    g.fillStyle = 'white'; g.fillRect(0, 0, c.width, c.height);
+    g.drawImage(sorgente, 0, 0, c.width, c.height);
+    for (const qualita of [0.9, 0.82, 0.72]) {
+      const dati = c.toDataURL('image/jpeg', qualita);
+      if (dati.length <= MAX_DATI) return dati;
+    }
+  }
+  throw new Error('Una pagina è troppo grande per essere letta. Prova a caricarla come PDF o come foto ritagliata.');
 }
 async function daFoto(f: File): Promise<string> {
-  try { const img = await createImageBitmap(f); return suTela(img, img.width, img.height); }
-  catch { throw new Error(`Non riesco ad aprire «${f.name}». Usa una foto in JPG o PNG.`); }
+  const img = await createImageBitmap(f).catch(() => { throw new Error(`Non riesco ad aprire «${f.name}». Usa una foto in JPG o PNG.`); });
+  try { return suTela(img, img.width, img.height); } finally { img.close(); }
 }
 async function daPdf(f: File, quante: number): Promise<string[]> {
   const pdfjs = await import(/* @vite-ignore */ `${PDFJS}pdf.min.mjs`);
   pdfjs.GlobalWorkerOptions.workerSrc = `${PDFJS}pdf.worker.min.mjs`;
   const doc = await pdfjs.getDocument({ data: new Uint8Array(await f.arrayBuffer()) }).promise;
-  if (doc.numPages > quante) {
-    await doc.destroy();
-    throw new Error(`«${f.name}» supera ${quante} pagine. Carica una sezione alla volta per confrontarla per intero.`);
-  }
-  const pagine: string[] = [];
-  for (let i = 1; i <= Math.min(doc.numPages, quante); i++) {
-    const p = await doc.getPage(i);
-    const base = p.getViewport({ scale: 1 });
-    const viewport = p.getViewport({ scale: MAX_LATO / Math.max(base.width, base.height) });
-    const c = document.createElement('canvas');
-    c.width = Math.round(viewport.width); c.height = Math.round(viewport.height);
-    const g = c.getContext('2d')!;
-    g.fillStyle = 'white'; g.fillRect(0, 0, c.width, c.height);
-    await p.render({ canvasContext: g, viewport }).promise;
-    pagine.push(suTela(c, c.width, c.height));
-  }
-  return pagine;
+  try {
+    if (doc.numPages > quante) throw new Error(`«${f.name}» supera ${quante} pagine. Carica una sezione alla volta per confrontarla per intero.`);
+    const pagine: string[] = [];
+    for (let i = 1; i <= doc.numPages; i++) {
+      const p = await doc.getPage(i);
+      const base = p.getViewport({ scale: 1 });
+      const viewport = p.getViewport({ scale: MAX_LATO / Math.max(base.width, base.height) });
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(viewport.width)); c.height = Math.max(1, Math.round(viewport.height));
+      const g = c.getContext('2d')!;
+      g.fillStyle = 'white'; g.fillRect(0, 0, c.width, c.height);
+      await p.render({ canvasContext: g, viewport }).promise;
+      pagine.push(suTela(c, c.width, c.height));
+    }
+    return pagine;
+  } finally { await doc.destroy(); }
 }
 
 // ---------- pagina ----------
@@ -85,6 +88,7 @@ export function avviaCompatibilita() {
   const prezzi: Record<string, number> = JSON.parse(box.dataset.prezzi || '{}');
   const MAX_PAGINE = Number(box.dataset.maxPagine) || 4;
   const SOGLIA = Number(box.dataset.soglia) || 80;
+  const PESO_PARZIALE = Number(box.dataset.pesoParziale) || 0.9;
   let idCompito = ''; // compito archiviato dalla lettura delle foto: il confronto aggiorna lo stesso
   const stato = document.getElementById('compat-stato')!;
   const esitoBox = document.getElementById('compat-esito')!;
@@ -142,6 +146,7 @@ export function avviaCompatibilita() {
   const area = form.querySelector<HTMLTextAreaElement>('textarea[name=testo]')!;
   const zona = form.querySelector<HTMLElement>('.compat-carica')!;
   let files: File[] = [];
+  let sostituisciFile = false;
   // Pagine già pronte per ogni file, preparate appena il file viene scelto.
   const pronte = new Map<File, Promise<string[]>>();
   const prepara = (f: File) => {
@@ -167,28 +172,67 @@ export function avviaCompatibilita() {
     document.getElementById('compat-carica-titolo')!.textContent = files.length ? `${files.length} ${files.length === 1 ? 'file pronto' : 'file pronti'}` : 'Carica il compito o il programma del corso';
     document.getElementById('compat-carica-dettaglio')!.textContent = files.length ? 'Puoi aggiungere altre pagine o togliere i file qui sotto' : 'Trascina qui i file oppure scegli dal dispositivo';
   };
-  const aggiungi = (nuovi: FileList | File[]) => {
-    if (inAttesa) return;
-    if (files.length + nuovi.length > MAX_PAGINE) { stato.textContent = `Puoi aggiungere al massimo ${MAX_PAGINE} file. Carica una sezione alla volta.`; return; }
-    for (const f of Array.from(nuovi)) {
-      if (!(f.type.startsWith('image/') || f.type === 'application/pdf')) { stato.textContent = `«${f.name}» non è una foto né un PDF.`; continue; }
-      if (files.length < MAX_PAGINE) { files.push(f); prepara(f); }
+  const aggiungi = (nuovi: FileList | File[], sostituisci = false) => {
+    if (inAttesa || !nuovi.length) return;
+    if ((sostituisci ? 0 : files.length) + nuovi.length > MAX_PAGINE) { stato.textContent = `Puoi aggiungere al massimo ${MAX_PAGINE} file. Carica una sezione alla volta.`; return; }
+    const elenco = Array.from(nuovi);
+    const nonValido = elenco.find((f) => !(f.type.startsWith('image/') || f.type === 'application/pdf'));
+    if (nonValido) { stato.textContent = `«${nonValido.name}» non è una foto né un PDF.`; return; }
+    if (sostituisci) {
+      files = [];
+      area.value = '';
+      pronte.clear();
+      esitoBox.hidden = true;
+      attesa.hidden = true;
+      completata = false;
     }
+    files.push(...elenco);
+    elenco.forEach(prepara);
+    stato.textContent = '';
     mostraFile();
   };
-  inputFile.addEventListener('change', () => { aggiungi(inputFile.files || []); inputFile.value = ''; });
+  inputFile.addEventListener('change', () => {
+    aggiungi(inputFile.files || [], sostituisciFile);
+    sostituisciFile = false;
+    inputFile.value = '';
+  });
+  inputFile.addEventListener('cancel', () => { sostituisciFile = false; });
   elencoFile.addEventListener('click', (e) => {
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-togli]');
-    if (b) { files.splice(Number(b.dataset.togli), 1); mostraFile(); }
+    if (b) { const [file] = files.splice(Number(b.dataset.togli), 1); pronte.delete(file); mostraFile(); }
   });
   zona.addEventListener('dragover', (e) => { e.preventDefault(); zona.classList.add('sopra'); });
   zona.addEventListener('dragleave', () => zona.classList.remove('sopra'));
   zona.addEventListener('drop', (e) => { e.preventDefault(); zona.classList.remove('sopra'); if (e.dataTransfer?.files) aggiungi(e.dataTransfer.files); });
 
+  const riquadroVerifica = (documento: string, errore = '') => `
+    <div class="compat-verifica">
+      <strong>${errore ? 'Riprova la lettura' : 'Stima da ricontrollare'}</strong>
+      ${errore ? `<p>${esc(errore)}</p>` : ''}
+      <p>La verifica automatica può leggere solo in parte alcune pagine o formule. Ricarica ${documento} con foto più nitide o un PDF. Per una verifica personale, mandamelo in privato su WhatsApp.</p>
+      <div class="compat-verifica-azioni">
+        <button type="button" class="bottone-secondario" data-compat-ricarica>Carica di nuovo</button>
+        <a href="https://wa.me/393885680393" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
+      </div>
+    </div>`;
+  esitoBox.addEventListener('click', (e) => {
+    if (inAttesa || !(e.target as HTMLElement).closest('[data-compat-ricarica]')) return;
+    sostituisciFile = true;
+    scorri(zona);
+    inputFile.click();
+  });
+  const erroreVerifica = (messaggio: string, verificaPersonale = false) => Object.assign(new Error(messaggio), { verificaPersonale });
+  const mostraErrore = (err: unknown) => {
+    const errore = err as Error & { verificaPersonale?: boolean };
+    stato.textContent = errore.verificaPersonale ? '' : errore.message;
+    esitoBox.hidden = !errore.verificaPersonale;
+    if (errore.verificaPersonale) { esitoBox.innerHTML = riquadroVerifica('il documento', errore.message); scorri(esitoBox); }
+  };
+
   const chiama = async (percorso: string, dati: unknown) => {
     const r = await fetch(percorso, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(dati) });
     const d = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.');
+    if (!r.ok) throw erroreVerifica(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.', d.verificaPersonale);
     return d;
   };
   const occupato = (si: boolean) => {
@@ -238,7 +282,7 @@ export function avviaCompatibilita() {
     const r = await fetch('/api/compatibilita/confronta', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia, testo, id: idCompito || undefined }) });
     if (!r.ok || !/ndjson/.test(r.headers.get('content-type') || '')) {
       const d = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.');
+      if (!r.ok) throw erroreVerifica(d.errore || 'Il controllo non è riuscito. Riprova tra qualche istante.', d.verificaPersonale);
       if (d.id) idCompito = d.id;
       stato.textContent = '';
       mostra(d as Esito, testo);
@@ -251,7 +295,7 @@ export function avviaCompatibilita() {
     const evento = (riga: string) => {
       if (!riga.trim()) return;
       const d = JSON.parse(riga);
-      if (d.errore) throw new Error(d.errore);
+      if (d.errore) throw erroreVerifica(d.errore, d.verificaPersonale);
       if (d.materiaCorretta) {
         materiaConfronto = d.materiaCorretta.materia;
         aggiornaFase('confronto', `Materia riconosciuta: ${d.materiaCorretta.titolo}. Confronto il documento con il materiale corretto…`);
@@ -291,7 +335,7 @@ export function avviaCompatibilita() {
       evento(resto);
     } finally { await lettore.cancel().catch(() => {}); lettore.releaseLock(); }
     const finale = esito as (Esito & { id?: string }) | null;
-    if (!finale) throw new Error('Il confronto si è interrotto. Riprova tra qualche istante.');
+    if (!finale) throw erroreVerifica('Il confronto si è interrotto. Il risultato è incompleto.', true);
     if (finale.id) idCompito = finale.id;
     stato.textContent = '';
     mostra(finale, testo);
@@ -322,8 +366,7 @@ export function avviaCompatibilita() {
       }
       await confronta(materia, testo);
     } catch (err) {
-      esitoBox.hidden = true;
-      stato.textContent = (err as Error).message;
+      mostraErrore(err);
     } finally { occupato(false); }
   });
 
@@ -360,12 +403,13 @@ export function avviaCompatibilita() {
       ? `<p class="compat-nota-materia">Avevi selezionato ${esc(correzione.titoloScelto)}. <strong>Il ${documento} è stato valutato secondo ${esc(correzione.titolo)}</strong>, riconosciuta dal testo.</p>`
       : '';
     const tot = Math.max(e.richieste.length, 1);
-    const quota = (k: 'stesso' | 'argomento') => e.quote?.[k] ?? (100 * e.conteggi[k] * (k === 'stesso' ? 1 : 0.5)) / tot;
+    const quota = (k: 'stesso' | 'argomento') => e.quote?.[k] ?? (100 * e.conteggi[k] * (k === 'stesso' ? 1 : PESO_PARZIALE)) / tot;
     const successo = e.collegato && e.successo?.percentuale != null
       ? `<p class="compat-righe-sintesi">Successo nelle domande a tempo sugli stessi argomenti: <b>${e.successo.percentuale}%</b></p>`
       : !e.collegato ? `<p class="compat-righe-sintesi">Con l’account vedi anche il successo nelle domande a tempo sugli argomenti del ${documento}.</p>` : '';
     const daComprare = !possiede(e.materia) && prezzi[e.materia];
-    const consigliato = daComprare && e.compatibilita >= SOGLIA;
+    const ricontrolla = e.compatibilita <= SOGLIA;
+    const consigliato = daComprare && !ricontrolla && e.conteggi.stesso > 0;
     const acquisto = consigliato
       ? `<div class="compat-consigliato">
           <p class="cc-etichetta"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Acquisto consigliato</p>
@@ -380,16 +424,17 @@ export function avviaCompatibilita() {
         <p class="compat-titolo-esito"><strong>${e.compatibilita}%</strong><span>di copertura stimata con ${esc(e.titolo)}</span></p>
         <div class="compat-barra" aria-hidden="true"><i class="b-stesso" style="width:${quota('stesso')}%"></i><i class="b-argomento" style="width:${quota('argomento')}%"></i></div>
         <p class="compat-righe-sintesi">${programma ? `${e.conteggi.stesso} argomenti coperti · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperti` : `${e.conteggi.stesso} richieste coperte · ${e.conteggi.argomento} in parte · ${e.conteggi.nessuno} non coperte`}</p>
+        ${ricontrolla ? riquadroVerifica(`il ${documento}`) : ''}
         ${successo}${acquisto}
       </div>
       <ol class="compat-richieste">${voci}</ol>
       <details class="compat-dettagli">
         <summary>Come si calcola</summary>
-        <p>${programma ? 'Ogni voce del programma vale per intero se il contenuto è spiegato nella teoria o negli esercizi svolti, per metà se è presente solo l’argomento generale, zero se manca. Una dimostrazione deve essere presente solo quando il programma la richiede. Gli argomenti hanno tutti lo stesso peso. La stima riguarda il programma caricato e non la difficoltà di uno specifico compito d’esame.' : `Una richiesta vale per intero se il procedimento necessario è spiegato negli esercizi svolti o nella teoria, per metà se c’è solo l’argomento. Una dimostrazione richiesta deve essere presente nel materiale. ${e.perPunti ? 'Si usano i punteggi indicati; il totale di un esercizio si distribuisce tra i suoi punti quando manca un punteggio specifico.' : 'Le richieste hanno tutte lo stesso peso.'} La stima riguarda il compito caricato.`} I riferimenti usati sono indicati in ogni riga.</p>
+        <p>Ogni ${programma ? 'voce' : 'richiesta'} vale per intero quando il sito spiega il contenuto o il metodo necessario. Vale il ${Math.round(PESO_PARZIALE * 100)}% se il corso tratta l’argomento ma manca un passaggio o la dimostrazione richiesta, e zero se manca anche l’argomento. ${e.perPunti ? 'Si usano i punteggi indicati e si ripartisce il totale tra i sottopunti quando necessario.' : 'Le voci hanno tutte lo stesso peso.'} I riferimenti sono indicati in ogni riga.</p>
       </details>
       <details class="compat-dettagli">
         <summary>Correggi il testo letto</summary>
-        <textarea rows="6" maxlength="8000" id="compat-letto"></textarea>
+        <textarea rows="6" maxlength="${area.maxLength}" id="compat-letto"></textarea>
         <button type="button" class="bottone-secondario" id="compat-ricalcola">Ricalcola</button>
       </details>`;
     esitoBox.hidden = false;
@@ -400,7 +445,7 @@ export function avviaCompatibilita() {
       if (inAttesa) return;
       occupato(true);
       b.disabled = true;
-      try { await confronta(e.materia, letto.value.trim()); } catch (err) { esitoBox.hidden = true; stato.textContent = (err as Error).message; }
+      try { await confronta(e.materia, letto.value.trim()); } catch (err) { mostraErrore(err); }
       finally { b.disabled = false; occupato(false); }
     });
   }

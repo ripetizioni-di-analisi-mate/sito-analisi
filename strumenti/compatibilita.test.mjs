@@ -82,10 +82,26 @@ test('correggere la materia conserva testo letto e immagini del compito', () => 
   } finally { db.close(); }
 });
 
-test('la copertura dipende dal materiale: 0, 50 e 100 sono tutti possibili', () => {
+test('la copertura distingue contenuti assenti, parziali e completi', () => {
   assert.equal(valuta('1|-|E|-|-|-|Risolvere una PDE stocastica').compatibilita, 0);
-  assert.equal(valuta('1|-|E|A1|-|-|Studiare un integrale').compatibilita, 50);
+  assert.equal(valuta('1|-|E|A1|-|-|Studiare un integrale').compatibilita, 90);
   assert.equal(valuta('1|-|E|A1|S1|-|Integrare un prodotto per parti').compatibilita, 100);
+});
+
+test('l’arrotondamento riserva il 100% ai documenti coperti per intero', () => {
+  const righe = Array.from({ length: 30 }, (_, i) => `${i + 1}|E|A1|S1|-|Integrale per parti ${i + 1}`);
+  assert.equal(valuta(...righe).compatibilita, 100);
+  assert.equal(valuta(...righe, '31|T|A1|T2|-|Dimostrare il teorema').compatibilita, 99);
+});
+
+test('le formulazioni equivalenti di Algebra lineare recuperano le fonti reali', () => {
+  const reale = catalogoTeoriaReale('algebra-lineare');
+  const { codici } = codifica(reale, true);
+  const prova = trovaVoceTeoria(codici.T, 'Dimostrare il teorema di Rouché-Capelli per matrici a scala');
+  assert.equal(prova?.voce.ancora, 'rouche-capelli');
+  assert.equal(prova?.voce.dimostrazione, true);
+  assert.equal(trovaVoceTeoria(codici.T, 'Algoritmo di Gauss per la riduzione a scala')?.voce.ancora, 'algoritmo-di-gauss');
+  assert.equal(trovaVoceTeoria(codici.T, 'Teorema di estensione affine'), null);
 });
 
 test('il metodo spiegato nella teoria può coprire un calcolo', () => {
@@ -96,12 +112,12 @@ test('il metodo spiegato nella teoria può coprire un calcolo', () => {
 });
 
 test('una dimostrazione non presente resta coperta solo in parte', () => {
-  assert.equal(valuta('1|-|T|A1|T2|-|Enunciare e dimostrare il teorema').compatibilita, 50);
+  assert.equal(valuta('1|-|T|A1|T2|-|Enunciare e dimostrare il teorema').compatibilita, 90);
   assert.equal(valuta('1|-|T|A1|T1|-|Dimostrare la formula per parti').compatibilita, 100);
 });
 
 test('codici inesistenti e proprietà ereditate non sono fonti', () => {
-  assert.equal(valuta('1|-|E|A1|S999|-|Calcolare un integrale').compatibilita, 50);
+  assert.equal(valuta('1|-|E|A1|S999|-|Calcolare un integrale').compatibilita, 90);
   assert.equal(valuta({ esercizio: '1', testo: 'Una richiesta', livello: 'stesso', argomento: 'toString', scheda: 'constructor' }).compatibilita, 0);
 });
 
@@ -212,7 +228,7 @@ test('il compito fotografato è coperto al 100% anche se il modello omette massi
   assert.equal(archivio.compatibilita, 90, 'il confronto originale non viene sovrascritto');
 });
 
-test('il compito con esponenziale e radice passa dal 94% al 100% recuperando il grafico presente', () => {
+test('il compito con esponenziale e radice recupera il grafico presente', () => {
   const reale = catalogoTeoriaReale('analisi-1');
   for (const [slug, numeri] of [['insiemi', [9, 16]], ['limiti', [8]], ['derivate', [2, 7]], ['serie', [3]], ['integrali', [3]]]) {
     reale.argomenti.find((a) => a.slug === slug).schede = numeri.map((n) => {
@@ -241,7 +257,7 @@ test('il compito con esponenziale e radice passa dal 94% al 100% recuperando il 
   const studio = senzaGrafico.argomenti.find((a) => a.slug === 'studio-di-funzione');
   studio.teoria = studio.teoria.filter((v) => v.ancora !== 'grafico-qualitativo');
   const parziale = valutaRichieste('analisi-1', senzaGrafico, codifica(senzaGrafico, false).codici, grezze);
-  assert.equal(parziale.compatibilita, 94, 'il riferimento mancante riproduce la penalizzazione originale');
+  assert.equal(parziale.compatibilita, 99, 'il riferimento mancante pesa come copertura parziale');
   const completo = valutaRichieste('analisi-1', reale, codici, grezze);
   assert.equal(completo.compatibilita, 100);
   assert.deepEqual(completo.conteggi, { stesso: 9, argomento: 0, nessuno: 0 });
@@ -272,7 +288,7 @@ test('le operazioni dello studio recuperano i metodi presenti anche in capitoli 
   incompleto.argomenti.find((a) => a.slug === 'derivate').teoria = [];
   const codici = codifica(incompleto, false).codici;
   const argomento = Object.entries(codici.A).find(([, a]) => a.slug === 'studio-di-funzione')[0];
-  assert.equal(valutaRichieste('analisi-1', incompleto, codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Calcolare la derivata prima e gli estremi relativi di f(x)', argomento }]).compatibilita, 50);
+  assert.equal(valutaRichieste('analisi-1', incompleto, codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Calcolare la derivata prima e gli estremi relativi di f(x)', argomento }]).compatibilita, 90);
 });
 
 test('il riscontro degli estremi richiede i criteri effettivi e non promuove contenuti diversi', () => {
@@ -282,12 +298,12 @@ test('il riscontro degli estremi richiede i criteri effettivi e non promuove con
   const argomento = Object.entries(codici.A).find(([, a]) => a.slug === studio.slug)[0];
   for (const testo of ['Ricerca massimi e minimi di f(x,y)', 'Massimi e minimi vincolati con Lagrange', 'Disegnare il grafico e risolvere una equazione differenziale', 'Massimi e minimi di una funzione complessa', 'Studiare un integrale', 'Enunciare e dimostrare il criterio degli estremi']) {
     const e = valutaRichieste('analisi-1', reale, codici, [{ esercizio: '1', tipo: 'esercizio', testo, argomento }]);
-    assert.equal(e.compatibilita, 50, testo);
+    assert.equal(e.compatibilita, 90, testo);
   }
   const incompleto = structuredClone(reale);
   incompleto.argomenti.find((a) => a.slug === studio.slug).teoria = studio.teoria.filter((v) => v.ancora !== 'criterio-derivata-prima');
   const e = valutaRichieste('analisi-1', incompleto, codifica(incompleto, false).codici, [{ esercizio: '1', tipo: 'esercizio', testo: 'Ricerca massimi e minimi relativi e assoluti di f(x)', argomento }]);
-  assert.equal(e.compatibilita, 50);
+  assert.equal(e.compatibilita, 90);
   const storico = { materia: 'analisi-1', compatibilita: 40, esito: JSON.stringify([{ t: 'Massimi e minimi vincolati', l: 'argomento', a: studio.slug }, { t: 'PDE stocastica', l: 'nessuno' }]) };
   assert.equal(rivalutaEsitoArchiviato(storico, reale), storico);
   assert.equal(rivalutaEsitoArchiviato({ ...storico, esito: '{' }, reale).esito, '{');
@@ -413,7 +429,7 @@ test('il programma nominale provato online resta riconoscibile quando il modello
     const { eventi } = await confronto(`${intestazione}1|T|A1|T3|-|Teorema fondamentale del calcolo\nFINE_CONFRONTO`, 'analisi-1', true, testo);
     assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
   }
-  for (const elenco of ['Limiti, derivate, integrali', '1. Limiti\n2. Derivate\n3. Integrali', 'Limiti; derivate; integrali']) {
+  for (const elenco of ['Limiti, derivate, integrali', 'Limiti; derivate; integrali']) {
     const { eventi } = await confronto('1|T|A1|T3|-|Teorema fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, elenco);
     assert.equal(eventi.at(-1).fine.tipoDocumento, 'programma');
   }
@@ -444,7 +460,7 @@ test('CFU, ore e numeri del programma non pesano sulla copertura e gli argomenti
 
 test('una dimostrazione esplicitamente richiesta nel programma deve essere presente', async () => {
   const { eventi } = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T4|-|Dimostrare la formula fondamentale del calcolo\nFINE_CONFRONTO', 'analisi-1', true, 'Programma del corso. Formula fondamentale del calcolo con dimostrazione.');
-  assert.equal(eventi.at(-1).fine.compatibilita, 50);
+  assert.equal(eventi.at(-1).fine.compatibilita, 90);
   const senza = await confronto('TIPO_DOCUMENTO|PROGRAMMA\n1|T|A1|T4|-|Formula fondamentale del calcolo senza dimostrazione\nFINE_CONFRONTO', 'analisi-1', true, 'Programma del corso. Formula fondamentale del calcolo senza dimostrazione.');
   assert.equal(senza.eventi.at(-1).fine.compatibilita, 100);
 });
@@ -468,15 +484,18 @@ test('il recupero di un programma sostituisce le voci incomplete senza contare l
   assert.equal(chiamate.filter((c) => c.percorso === '/comp-conta').length, 1);
 });
 
-async function letturaDocumento(testo) {
+async function letturaDocumento(testo, pagine = ['data:image/png;base64,AQID']) {
   const chiamate = [], attese = [], modelli = [];
-  const env = { AI: { run: async (_modello, input) => { modelli.push(input); return { response: testo }; } } };
+  const env = { AI: { run: async (modello, input) => {
+    modelli.push(input);
+    return typeof testo === 'function' ? testo(modello, input, modelli.length) : { response: testo };
+  } } };
   const h = {
     aDO: async (_env, percorso, dati) => { chiamate.push({ percorso, dati }); return { ok: true }; },
     json: (dati, status = 200, headers) => Response.json(dati, { status, headers }),
     utenteCollegato: async () => null,
   };
-  const req = new Request('https://esempio.test/api/compatibilita/leggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia: 'analisi-1', pagine: ['data:image/png;base64,AQID'] }) });
+  const req = new Request('https://esempio.test/api/compatibilita/leggi', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ materia: 'analisi-1', pagine }) });
   const res = await gestisciCompatibilita(req, env, { waitUntil: (p) => attese.push(p) }, '/api/compatibilita/leggi', h);
   const dati = await res.json();
   await Promise.all(attese);
@@ -502,8 +521,30 @@ test('una foto senza contenuti utili viene rifiutata e rimborsata', async () => 
   }
 });
 
+test('una pagina illeggibile viene ritentata e non viene esclusa dal testo in silenzio', async () => {
+  const pagina1 = 'data:image/png;base64,AQID', pagina2 = 'data:image/png;base64,BAUG';
+  const { res, dati, modelli, chiamate } = await letturaDocumento((_m, input) => ({ response:
+    input.messages[0].content[1].image_url.url === pagina1 ? 'Esercizio 1. Determinare il dominio.' : 'PAGINA_ILLEGGIBILE',
+  }), [pagina1, pagina2]);
+  assert.equal(res.status, 422);
+  assert.match(dati.errore, /pagina 2/);
+  assert.equal(dati.verificaPersonale, true);
+  assert.equal(modelli.length, 3);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+  assert.ok(chiamate.every((c) => c.percorso !== '/comp-compito-nuovo'));
+});
+
+test('una trascrizione tagliata al limite viene sostituita con una lettura completa', async () => {
+  const testo = 'Esercizio 1. Calcolare il limite della successione.';
+  const { res, dati, modelli } = await letturaDocumento((_m, _i, n) => n === 1
+    ? { response: 'Esercizio 1. Calcolare il', finish_reason: 'length' } : { response: testo });
+  assert.equal(res.status, 200);
+  assert.equal(dati.testo, testo);
+  assert.ok(modelli[0].max_tokens > 1800);
+});
+
 test('un programma troppo lungo non viene troncato e confrontato solo in parte', async () => {
-  const { res, dati, chiamate } = await letturaDocumento('Programma del corso. ' + 'Argomento; '.repeat(800));
+  const { res, dati, chiamate } = await letturaDocumento('Programma del corso. ' + 'Argomento; '.repeat(1500));
   assert.equal(res.status, 422);
   assert.match(dati.errore, /una sezione alla volta/);
   assert.ok(!dati.testo);
@@ -547,15 +588,42 @@ test('un numero finale incoerente non produce una percentuale', async () => {
   assert.ok(eventi.every((x) => !x.fine));
 });
 
-test('il confronto comprende tutte le quaranta richieste consentite', async () => {
-  const righe = Array.from({ length: 40 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
-  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|40`);
-  assert.equal(eventi.at(-1).fine.richieste.length, 40);
+test('il confronto comprende tutte le ottanta richieste consentite', async () => {
+  const righe = Array.from({ length: 80 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
+  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|80`);
+  assert.equal(eventi.at(-1).fine.richieste.length, 80);
 });
 
-test('oltre quaranta richieste si segnala l’errore senza troncare il compito', async () => {
-  const righe = Array.from({ length: 41 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
-  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|41`);
+test('quaranta voci di un elenco di dimostrazioni restano nel risultato anche dopo un tentativo parziale', async () => {
+  const voci = ['Teorema fondamentale del calcolo', 'Formula fondamentale del calcolo', ...Array.from({ length: 38 }, (_, i) => `Voce di teoria ${i + 3}`)];
+  const documento = `# Elenco dimostrazioni di teoria\n## Integrali\n${voci.map((v) => `- ${v}`).join('\n')}`;
+  const risposta = (_m, input, n) => {
+    const ids = [...input.messages[1].content.matchAll(/^(\d+)\. /gm)].map((m) => Number(m[1]));
+    const righe = (n === 1 ? ids.slice(0, 2) : ids).map((id) => `${id}|T|${id <= 2 ? 'A1' : '-'}|-|-|Sintesi ${id}`);
+    return { response: `TIPO_DOCUMENTO|ESAME\n${righe.join('\n')}\nFINE_CONFRONTO` };
+  };
+  const { eventi, modelli, chiamate } = await confronto(risposta, 'analisi-1', true, documento);
+  const esito = eventi.at(-1).fine;
+  assert.equal(esito.tipoDocumento, 'programma');
+  assert.equal(esito.richieste.length, 40);
+  assert.deepEqual(esito.richieste.map((r) => r.testo), voci);
+  assert.deepEqual(esito.conteggi, { stesso: 1, argomento: 1, nessuno: 38 });
+  assert.equal(modelli.length, 4);
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-compito-esito').length, 1);
+});
+
+test('un elenco con una voce duplicata e una mancante non produce una percentuale', async () => {
+  const documento = '1. Limiti\n2. Derivate\n3. Integrali';
+  const { eventi, chiamate } = await confronto('1|T|A1|-|-|Limiti\n1|T|A1|-|-|Duplicato\n3|T|A1|-|-|Integrali\nFINE_CONFRONTO', 'analisi-1', true, documento);
+  assert.ok(eventi.at(-1).verificaPersonale);
+  assert.ok(eventi.every((e) => !e.fine));
+  assert.equal(chiamate.filter((c) => c.percorso === '/comp-rimborso').length, 1);
+  assert.ok(chiamate.every((c) => c.percorso !== '/comp-compito-esito'));
+});
+
+test('oltre ottanta richieste si segnala l’errore senza troncare il compito', async () => {
+  const righe = Array.from({ length: 81 }, (_, i) => `${i + 1}|-|E|A1|S1|-|Integrale ${i + 1}`).join('\n');
+  const { eventi } = await confronto(`${righe}\nFINE_CONFRONTO|81`);
   assert.ok(eventi.at(-1).errore);
   assert.ok(eventi.every((x) => !x.fine));
 });
@@ -706,4 +774,37 @@ test('la diagnostica non espone il contenuto degli errori del fornitore', async 
   assert.equal(res.status, 502);
   assert.doesNotMatch(JSON.stringify(eventi), /Testo riservato|dati personali/);
   assert.deepEqual(eventi[0].diagnostica, [{ codice: 'MODELLO' }, { codice: 'MODELLO' }]);
+});
+
+test('Analisi 2 recupera continuità applicata e disegni con le schede del corso', () => {
+  const capitolo = 'funzioni-di-piu-variabili';
+  const materiali = [6, 8].map((n) => {
+    const corpo = readFileSync(join(radice, 'src/content/svolti/analisi-2', capitolo, n + '.md'), 'utf8');
+    return { n, titolo: corpo.match(/^titolo: (.+)$/m)[1], parole: [], ...dettagliScheda(corpo) };
+  });
+  const catalogo = { argomenti: [{
+    slug: capitolo, titolo: 'Funzioni di più variabili', schede: materiali,
+    teoria: [{ ancora: 'continuita-due-variabili', titolo: 'Funzione continua', tipo: 'definizione', contenuto: 'Il limite coincide con il valore della funzione.', dimostrazione: false }],
+  }] };
+  const { codici } = codifica(catalogo, false);
+  const documento = [
+    'Esercizio 5. Calcolare un integrale.',
+    'Esercizio 6. I due insiemi sono (x-1)^2+(y+1)^2 ≤ 4 e (x+1)^2+(y-1)^2 ≤ 4.',
+    'Esercizio 7. Disegnare l’intersezione di due domini non specificati.',
+  ].join('\n');
+  const confronta = (righe) => valutaRichieste('analisi-2', catalogo, codici, righe.map(leggiRiga), null, {}, documento);
+  const esito = confronta([
+    String.raw`4a|T|A1|T1|p2|Dimostrare che $f(x,y)=\frac{x^4-y^3}{x^2+y^2}$ è continua in $(0,0)$`,
+    String.raw`4b|E|-|-|p2|Disegnare l’insieme $D=\{(x,y): \left|x\right|\leq y\leq 2\}$`,
+    String.raw`6a|E|-|-|p3|Disegnare $\Omega=\Omega_1\cap\Omega_2$ e la curva $\gamma=\partial\Omega$`,
+  ]);
+  assert.equal(esito.compatibilita, 100);
+  assert.deepEqual(esito.richieste.map((r) => r.scheda?.n), [6, 8, 8]);
+  assert.ok(esito.richieste.every((r) => r.tipo === 'esercizio'));
+  assert.deepEqual(confronta([
+    '4d|T|A1|T1|-|Enunciare e dimostrare il teorema sulla continuità delle funzioni di due variabili',
+    '6b|E|-|-|-|Calcolare l’integrale curvilineo lungo il bordo dell’intersezione dei dischi',
+    '7a|E|-|-|-|Disegnare l’intersezione dei due domini',
+    '7b|E|-|-|-|Dimostrare che f(x,y) è uniformemente continua',
+  ]).richieste.map((r) => r.livello), ['argomento', 'nessuno', 'nessuno', 'nessuno']);
 });

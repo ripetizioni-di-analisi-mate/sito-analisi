@@ -14,9 +14,7 @@
   "vars": {
     // "0" = sito tutto aperto; qualsiasi altro valore = oscuramento attivo
     "VENDITA": "1",
-    // Paddle: token del checkout e identificativi dei prezzi, tutti pubblici (non sono segreti)
-    "PADDLE_AMBIENTE": "production",
-    "PADDLE_CLIENT_TOKEN": "live_3dfdc4fac37285fb2b6966f7b58",
+    // Prezzi storici Paddle per verificare le notifiche sugli acquisti precedenti.
     "PADDLE_PREZZO_TOLC_S": "pri_01m6s97tkf9pkj9tnqg3mcjgpm",
     "PADDLE_PREZZO_TOLC_I": "pri_01m6s94tn7fz7xzj64ntrg4rzb",
     "PADDLE_PREZZO_PRECORSO": "pri_01m60xgef8rr7t089736k3fa3z",

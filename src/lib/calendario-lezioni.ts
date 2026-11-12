@@ -1,5 +1,5 @@
 // Calendario degli orari liberi per le lezioni individuali (pagine /prenota e /prenota/gestisci).
-// Una settimana alla volta, dal lunedì al sabato; ogni giorno ha i suoi orari liberi come tasti.
+// Una settimana alla volta, dal lunedì al sabato, con i soli giorni prenotabili.
 export type Orario = { inizio: number; giorno: string; ora: string };
 
 const GIORNI = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
@@ -48,14 +48,14 @@ export function calendario(radice: HTMLElement, orari: Orario[], quandoScelto: (
     elenco.className = 'cal-giorni';
     for (let i = 0; i < 6; i++) {
       const g = piu(lun, i);
+      const liberi = perGiorno.get(g);
+      if (!liberi) continue;
       const d = data(g);
       const riga = document.createElement('div');
       riga.className = 'cal-giorno';
-      const liberi = perGiorno.get(g) ?? [];
       riga.innerHTML = `<span class="cal-data"><b>${GIORNI[d.getUTCDay()]}</b> ${d.getUTCDate()} ${MESI_BREVI[d.getUTCMonth()]}</span>`;
       const ore = document.createElement('span');
       ore.className = 'cal-ore';
-      if (!liberi.length) ore.innerHTML = '<span class="cal-nessuno">nessun orario libero</span>';
       for (const o of liberi) {
         const b = document.createElement('button');
         b.type = 'button';

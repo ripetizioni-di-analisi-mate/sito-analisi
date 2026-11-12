@@ -7,29 +7,43 @@ interface Props { lingua: Lingua }
 const { lingua } = Astro.props;
 const t = T(lingua);
 const aPagamento = materieL(lingua).filter((m) => m.attiva && m.prezzo);
-const en = lingua === 'en';
+const en = lingua === 'en', de = lingua === 'de', es = lingua === 'es';
 const WA = 'https://wa.me/393885680393';
 // Domande frequenti: solo regole già in vigore sul sito (anteprima, dispositivi, pagamento, corsi di gruppo).
-const domande: { d: string; r: string }[] = en ? [
-  { d: 'What can I see for free before buying?', r: 'For each topic you can read the beginning of the theory, the first 3 sheets of worked examples and the statements of the exercises, and you can answer the timed questions. No account is needed. <a href="/en/matematica-da-zero">Maths from zero</a> and <a href="/en/fisica-zero">Physics zero</a> are entirely free.' },
+const domande: { d: string; r: string }[] = es ? [
+  { d: '¿Qué puedo consultar gratis antes de comprar?', r: 'La ficha de cada asignatura indica qué material puedes consultar gratis. Los cursos de <a href="/es/matematica-da-zero">Matemáticas desde cero</a> y <a href="/es/fisica-zero">Física desde cero</a> son totalmente gratuitos.' },
+  { d: '¿Durante cuánto tiempo tendré acceso?', r: 'Al comprar una asignatura, queda disponible en tu cuenta sin fecha de caducidad. Se paga una sola vez, sin suscripción ni renovaciones.' },
+  { d: '¿En cuántos dispositivos puedo usar mi cuenta?', r: 'Puedes tener hasta tres dispositivos conectados. Para liberar una plaza, desconecta un dispositivo desde los ajustes de tu cuenta.' },
+  { d: '¿Cómo puedo pagar?', r: 'En la página de compra, que está en italiano, puedes introducir tus datos de facturación y consultar los métodos de pago disponibles en Stripe. Recibirás la confirmación por correo electrónico.' },
+  { d: '¿En qué idiomas está el material de estudio?', r: 'Cada tema indica los idiomas en los que está disponible su material. La mayor parte del contenido está en italiano o en inglés.' },
+  { d: '¿Con quién puedo hablar si tengo dudas sobre una compra?', r: 'Escribe a Carmine desde la página de <a href="/es/contatti">Contacto y ayuda</a>.' },
+] : de ? [
+  { d: 'Was kann ich vor dem Kauf kostenlos ansehen?', r: 'Je nach Fach kannst du den Einstieg in die Theorie, Aufgaben mit Lösungsweg oder Aufgabenstellungen kostenlos ansehen. Die Grundlagenkurse in Mathematik und Physik sind vollständig kostenlos.' },
+  { d: 'Wie lange habe ich Zugang?', r: 'Nach dem Kauf bleibt das Fach dauerhaft in deinem Konto freigeschaltet. Es gibt kein Abo und keine automatische Verlängerung.' },
+  { d: 'Auf wie vielen Geräten kann ich lernen?', r: 'Auf bis zu drei Geräten gleichzeitig. In den Kontoeinstellungen kannst du ein Gerät abmelden und dadurch einen Platz freigeben.' },
+  { d: 'Wie kann ich bezahlen?', r: 'Auf der italienischen Bestellseite gibst du deine Rechnungsdaten ein. Bei Stripe siehst du die verfügbaren Zahlungsarten. Du erhältst eine Bestellbestätigung per E-Mail.' },
+  { d: 'In welcher Sprache sind die Lernmaterialien?', r: 'Beim jeweiligen Thema findest du die verfügbaren Sprachen. Die meisten Lernmaterialien liegen auf Italienisch oder Englisch vor.' },
+  { d: 'An wen wende ich mich bei Fragen zum Kauf?', r: 'Schreib Carmine über <a href="/de/contatti">Kontakt und Hilfe</a>.' },
+] : en ? [
+  { d: 'What can I see for free before buying?', r: 'Each subject page lists the theory, worked examples and timed questions available in its free preview. In <a href="/en/scienza-delle-costruzioni">Structural mechanics</a> you can try one timed question per topic and open one sheet of worked examples without an account. <a href="/en/matematica-da-zero">Maths from zero</a> and <a href="/en/fisica-zero">Physics zero</a> are entirely free.' },
   { d: 'Does the access expire?', r: 'The purchase is a one-off payment, so the subject stays unlocked in your account with no expiry date, with no subscription and no renewals.' },
   { d: 'What does “at most 3 devices” mean?', r: 'The account can be used on three devices, for example your phone, your tablet and your computer. Logging out on one device frees its place, and a device unused for 60 days is freed automatically.' },
-  { d: 'How can I pay?', r: 'By card, PayPal, Apple Pay, Google Pay or the other methods shown in the payment window. Payment is handled by Paddle, which sends the receipt by email.' },
+  { d: 'How can I pay?', r: 'Enter the billing details and pay by card or another method shown by Stripe. You will receive an order confirmation by email.' },
   { d: 'I attend one of Carmine’s group courses: do I have to buy the material?', r: 'When you create your account, tick “Are you already one of Carmine’s students?” and state your course. Carmine checks the registration and unlocks for free the subjects linked to your course.' },
-  { d: 'Does a video course also unlock the subjects on the site?', r: 'Yes. Buying a video course automatically unlocks the related subjects. Whoever has already bought one of those subjects can write to Carmine on <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> to get a discount equal to the price already paid.' },
+  { d: 'Does a video course also unlock the subjects on the site?', r: 'Yes. Buying a video course automatically unlocks the related subjects. Whoever has already bought one of those subjects can write to Carmine on <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> before paying. Carmine will check the amount already paid, send a personal Stripe payment link for the agreed price and activate access after payment.' },
   { d: 'Who do I contact if I have a problem with a payment?', r: 'You can write to Carmine on <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> or from the <a href="/en/contatti">Contacts and support</a> page.' },
 ] : [
-  { d: 'Che cosa si vede gratis prima di acquistare?', r: 'Di ogni argomento si leggono l\'inizio della teoria, le prime 3 schede di esercizi svolti e le tracce degli esercizi da fare, e si risponde alle domande a tempo, senza account. <a href="/matematica-da-zero">Matematica zero</a> e <a href="/fisica-zero">Fisica zero</a> sono interamente gratuite.' },
+  { d: 'Che cosa si vede gratis prima di acquistare?', r: 'La pagina di ogni materia indica quali parti puoi provare gratis. In <a href="/scienza-delle-costruzioni">Scienza delle costruzioni</a> puoi rispondere a una domanda per argomento e consultare una scheda svolta anche senza account. <a href="/matematica-da-zero">Matematica zero</a> e <a href="/fisica-zero">Fisica zero</a> sono interamente gratuite.' },
   { d: 'L\'accesso ha una scadenza?', r: 'L\'acquisto è unico, quindi la materia resta sbloccata nell\'account senza scadenza, senza abbonamento e senza rinnovi.' },
   { d: 'Che cosa significa «al massimo 3 dispositivi»?', r: 'L\'account si usa su tre dispositivi, per esempio il telefono, il tablet e il computer. Uscendo dall\'account su un dispositivo il posto si libera; un dispositivo inutilizzato per 60 giorni si libera da solo.' },
-  { d: 'Come si paga?', r: 'Si paga con carta, PayPal, Apple Pay, Google Pay o con gli altri metodi mostrati nella finestra di pagamento. Il pagamento è gestito da Paddle, che invia la ricevuta per email.' },
+  { d: 'Come si paga?', r: 'Inserisci i dati per la fattura e paga con carta o con uno dei metodi mostrati da Stripe. Riceverai la conferma dell’ordine via email.' },
   { d: 'Frequento un corso di gruppo di Carmine: devo acquistare il materiale?', r: 'Alla creazione dell\'account si spunta «Sei già uno studente di Carmine?» e si indica il corso. Carmine controlla l\'iscrizione e sblocca gratis le materie collegate al corso.' },
-  { d: 'Un videocorso sblocca anche le materie del sito?', r: 'Sì. L\'acquisto di un videocorso sblocca in automatico le materie collegate. Chi ha già acquistato una di quelle materie può scrivere a Carmine su <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> per avere uno sconto sul videocorso pari al prezzo già pagato.' },
+  { d: 'Un videocorso sblocca anche le materie del sito?', r: 'Sì. L\'acquisto di un videocorso sblocca in automatico le materie collegate. Chi ha già acquistato una di quelle materie può scrivere a Carmine su <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> prima di pagare. Carmine verifica quanto hai già versato, ti invia un link Stripe personale con il prezzo concordato e attiva l’accesso dopo il pagamento.' },
   { d: 'A chi si scrive per un problema con un pagamento?', r: 'A Carmine, su <a href="' + WA + '" target="_blank" rel="noopener">WhatsApp</a> oppure dalla pagina <a href="/contatti">Contatti e assistenza</a>.' },
 ];
 const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type': 'Question', name: x.d, acceptedAnswer: { '@type': 'Answer', text: x.r.replace(/<[^>]+>/g, '') } })) };
 ---
-<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua} seo={{ schema: [schemaFaq] }}>
+<Base titolo={t.prezzi} percorso={[{ titolo: t.prezzi }]} descrizione={t.prezziDescrizione} lingua={lingua} seo={{ titolo: t.prezziTitolo, schema: [schemaFaq] }}>
   <p class="sopratitolo">{t.prezzi}</p>
   <h1>{t.prezzi}</h1>
   <p class="sommario">{t.prezziSommario}</p>
@@ -39,7 +53,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
   <ul class="griglia-materie">
     {aPagamento.map((m) => (
       <li style={`--accento: ${m.colore}`}>
-        <a href={link(lingua, `/${m.slug}/sblocca`)}>
+        <a href={de || es ? link(lingua, `/${m.slug}`) : link(lingua, `/${m.slug}/sblocca`)}>
           <h3>{m.titolo} · {m.prezzo} €</h3>
           <p>{m.descrizione}</p>
           <span class="conteggio">{m.argomenti.length} {t.argomenti} · {t.acquistoUnico}</span>
@@ -63,7 +77,7 @@ const schemaFaq = { '@type': 'FAQPage', mainEntity: domande.map((x) => ({ '@type
     {t.comprende.map((x) => <li>{x}</li>)}
   </ul>
 
-  <h2 id="domande-frequenti">{en ? 'Frequently asked questions' : 'Domande frequenti'}</h2>
+  <h2 id="domande-frequenti">{es ? 'Preguntas frecuentes' : de ? 'Häufige Fragen' : en ? 'Frequently asked questions' : 'Domande frequenti'}</h2>
   <div class="domande-frequenti">
     {domande.map((x) => (
       <details>

@@ -1,11 +1,14 @@
 ---
+import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import { dataContenuto, piuRecente } from '../lib/date';
+import ElencoSchedeSvolte from '../components/ElencoSchedeSvolte.astro';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
+import { schedeLibere } from '../data/schede-libere.mjs';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
@@ -14,11 +17,15 @@ const voci = await Promise.all(perArgomento(await getCollection('svolti'), mater
 const nonTradotta = voci.some((v) => !v.tradotta);
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
+const mostraAccesso = materia === 'scienza-delle-costruzioni' && Boolean(materiaL(lingua, materia).prezzo);
+const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
+  ? (lingua === 'en' ? 'Free worked sheet' : 'Scheda completa gratuita')
+  : (lingua === 'en' ? 'Free problems · solutions with full access' : 'Tracce gratuite · svolgimenti con accesso completo');
 ---
 <Base
   titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
   descrizione={SEO(lingua).svoltiListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'svolti', e.id))), schema: [{
+  seo={{ canonico: originale(materia, argomento, 'esercizi-svolti'), titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve, arg.breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'svolti', e.id))), schema: [{
     '@type': 'ItemList', name: `${arg.titolo} · ${t.sezioni['esercizi-svolti']}`, numberOfItems: voci.length,
     itemListElement: voci.map(({ voce: e }, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.titolo, url: assoluto(link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)) })),
   }], soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
@@ -31,11 +38,9 @@ const base = `/${materia}/${argomento}`;
   <h1>{arg.titolo}</h1>
   <p class="sommario">{t.svoltiSommario}</p>
   {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
-  {voci.length > 0 && (
-    <ul class="elenco-esercizi">
-      {voci.map(({ voce: e }) => (
-        <li><a href={link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)}><span class="numero">{numero(e.id)}</span><span>{e.data.titolo}{e.data.parole?.length > 0 && <span class="parole">{e.data.parole.join(' · ')}</span>}</span></a></li>
-      ))}
-    </ul>
-  )}
+  <ElencoSchedeSvolte schede={voci.map(({ voce: e }) => {
+    const n = numero(e.id);
+    return { numero: n, href: link(lingua, base + '/esercizi-svolti/' + n), titolo: e.data.titolo,
+      accesso: mostraAccesso ? etichettaAccesso(n) : undefined, parole: e.data.parole };
+  })} />
 </Base>

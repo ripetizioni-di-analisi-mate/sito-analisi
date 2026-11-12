@@ -2,7 +2,7 @@
 
 Corso autonomo per Università > Economia, con URL e accesso `matematica-finanziaria`.
 
-Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 320 quiz con spiegazione. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese.
+Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 320 quiz con spiegazione. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese, tedesco e spagnolo.
 
 ## Controlli
 
@@ -34,4 +34,4 @@ Riferimenti per il confronto dei programmi:
 
 ## Stato prima della pubblicazione
 
-Il prezzo di 49 euro è una proposta nella bozza, coerente con Statistica e probabilità: resta da confermare con il titolare. Il Worker legge un identificativo Paddle dedicato `PADDLE_PREZZO_MATEMATICA_FINANZIARIA`; nessun prodotto o prezzo esterno è stato creato o modificato. Prima della pubblicazione occorre confermare il prezzo e configurare il prodotto dedicato. L’acquisto di Matematica generale non concede automaticamente accesso a questo corso autonomo.
+Il prezzo proposto è 49 euro, come per Statistica e probabilità. Il checkout Stripe usa il prezzo di `src/data/prezzi.json` e associa l’acquisto allo slug del corso. L’acquisto di Matematica generale non concede automaticamente accesso a Matematica finanziaria.

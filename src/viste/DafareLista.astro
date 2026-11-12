@@ -1,4 +1,5 @@
 ---
+import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
@@ -27,7 +28,7 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
   descrizione={SEO(lingua).dafareListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'dafare', e.id))), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'dafare', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
+  seo={{ canonico: originale(materia, argomento, 'esercizi'), titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve, arg.breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'dafare', e.id))), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'dafare', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi }]}
   materia={materia} argomento={argomento} sezione="esercizi"
   precedente={precedente} successivo={successivo}
@@ -41,7 +42,7 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
     <section class="traccia" id={`esercizio-${numero(v.id)}`}>
       <h2><a href={link(lingua, `${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
       <div class="testo-studio"><Content /></div>
-      {risultati[v.id] && <VerificaRisposta id={v.id} tipo={risultati[v.id].tipo} primitiva={risultati[v.id].primitiva} lingua={lingua} />}
+      <VerificaRisposta id={v.id} tipo={risultati[v.id]?.tipo} primitiva={risultati[v.id]?.primitiva} lingua={lingua} />
     </section>
   ))}
   {conDomande && (

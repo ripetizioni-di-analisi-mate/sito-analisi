@@ -15,7 +15,6 @@ const MODELLI = ['@cf/google/gemma-4-26b-a4b-it', '@cf/openai/gpt-oss-120b'];
 const MODELLI_FOTO = ['@cf/meta/llama-4-scout-17b-16e-instruct', '@cf/mistralai/mistral-small-3.1-24b-instruct'];
 const MAX_STUDENTE = 20;   // messaggi al giorno per studente con account
 const MAX_OSPITE = 5;      // messaggi al giorno senza account
-const SCHEDE_LIBERE = 3;   // come in index.mjs
 const MAX_DISPOSITIVI = 3; // come in index.mjs
 const MAX_GIORNO = 2000;   // messaggi al giorno per tutto il sito
 // Tetti di token al giorno (entrata + uscita), oltre al numero di messaggi.
@@ -85,12 +84,12 @@ const DOMANDA_SUL_SITO = /\bvideo|\blezion|\bdrive\b|\bprezz|\bcost(a|ano|ava|er
 function infoSito(aPagamento, prezzi, env = {}) {
   const attive = MATERIE.filter((m) => m.attiva);
   const prossime = MATERIE.filter((m) => !m.attiva);
-  const riga = (m) => `- ${m.titolo} (${m.gruppo}${m.sottogruppo ? `, ${m.sottogruppo}` : ''}): ${prezzi[m.slug] ? `${prezzi[m.slug]} euro${env[`PADDLE_PREZZO_${m.slug.toUpperCase().replace(/-/g, '_')}`] ? '' : ' (il pagamento online non è ancora attivo: per acquistarla scrivere a Carmine)'}` : 'gratuita'}; argomenti: ${m.argomenti.map((a) => a.breve).join(', ')}. Pagina: https://ripetizionidianalisi.com/${m.slug}`;
+  const riga = (m) => `- ${m.titolo} (${m.gruppo}${m.sottogruppo ? `, ${m.sottogruppo}` : ''}): ${prezzi[m.slug] ? `${prezzi[m.slug]} euro${env.STRIPE_SECRET_KEY ? '' : ' (il pagamento online non è ancora attivo: per acquistarla scrivere a Carmine)'}` : 'gratuita'}; argomenti: ${m.argomenti.map((a) => a.breve).join(', ')}. Pagina: https://ripetizionidianalisi.com/${m.slug}`;
   return `Informazioni sul sito ripetizionidianalisi.com (usale per le domande su materie, prezzi, pagamenti e accesso; non inventare nulla che non sia scritto qui):
 - Il sito è del prof. Carmine Tornincasa, insegnante privato di Analisi matematica, ingegnere civile, con oltre mille studenti seguiti e più di diecimila ore di lezione (pagina "Chi sono": https://ripetizionidianalisi.com/chi-sono).
-- Ogni materia contiene teoria completa con definizioni, teoremi e dimostrazioni, schede di esercizi svolti con ogni passaggio spiegato ed esercizi da fare con la soluzione.
-- Anteprima delle materie a pagamento, gratuita e senza account: i primi 2 paragrafi della teoria di ogni argomento, le prime ${SCHEDE_LIBERE} schede di esercizi svolti e una parte degli esercizi da fare. Matematica zero e Fisica zero sono invece interamente gratuite, con tutta la teoria, tutti gli esercizi svolti e tutte le soluzioni, senza account.
-- Acquisto delle materie a pagamento: si apre la pagina "Sblocca" della materia (https://ripetizionidianalisi.com/<materia>/sblocca), si crea un account gratuito con email e password e si paga. È un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. Il pagamento è gestito da Paddle, che fa da rivenditore ufficiale e invia la ricevuta; si paga con carta e con gli altri metodi mostrati nella finestra di pagamento. Dopo il pagamento la materia si sblocca subito nell'account.
+- Le materie contengono teoria e schede di esercizi svolti. Le attività disponibili per ogni materia sono indicate nella sua pagina. In Scienza delle costruzioni l'accesso completo comprende 810 domande a tempo con spiegazione, teoria e schede svolte.
+- Le anteprime sono gratuite e si possono aprire senza account. Per Scienza delle costruzioni si può leggere l'inizio della teoria, aprire la scheda svolta di Equilibrio e vincoli e provare una domanda per argomento. Per le altre materie l'anteprima è descritta nella pagina del corso. Matematica zero e Fisica zero sono interamente gratuite.
+- Acquisto delle materie a pagamento: si apre la pagina "Sblocca" della materia (https://ripetizionidianalisi.com/<materia>/sblocca), si crea un account gratuito con email e password e si paga. È un acquisto unico per ogni materia, senza abbonamento e senza rinnovi. Il venditore è Carmine Tornincasa. Prima del pagamento si inseriscono i dati per la fattura. Stripe elabora la carta e i metodi mostrati al checkout. Il sito invia per email la conferma. Per recesso e rimborsi si consulta https://ripetizionidianalisi.com/rimborsi. Per i vecchi ordini venduti da Paddle si usa la ricevuta di Paddle. Dopo il pagamento la materia si sblocca subito nell'account.
 - Password dimenticata: nella pagina https://ripetizionidianalisi.com/accedi si tocca «Hai dimenticato la password?», si scrive l'email dell'account e arriva un link (valido un'ora) per sceglierne una nuova; se l'email non arriva, controllare la cartella spam o scrivere a Carmine dalla pagina Contatti.
 - Un account si può usare al massimo su ${MAX_DISPOSITIVI} dispositivi. Lo studente può scollegare un singolo dispositivo a distanza da Account, Impostazioni, Dispositivi collegati. Al limite, dopo email e password corrette, può scegliere «Scollega e accedi qui» per liberare un posto senza contattare Carmine.
 - Chi ha seguito o sta seguendo un corso di Carmine (dal vivo o di gruppo), oppure ha comprato un suo videocorso preregistrato, non paga le materie collegate del sito: all'iscrizione lo indica nel riquadro facoltativo "Sei già uno studente di Carmine?" e Carmine gli attiva le materie gratis a mano, il prima possibile. Chi si è già iscritto senza indicarlo scrive a Carmine su WhatsApp.
@@ -98,36 +97,35 @@ function infoSito(aPagamento, prezzi, env = {}) {
 - Materie utili per corso di studi (indicazione generale: i programmi cambiano da un'università all'altra e per controllare il proprio si può scrivere a Carmine): Ingegneria, Fisica, Matematica e Informatica, primo anno: Precorso, Analisi matematica 1, Algebra lineare e geometria analitica, Fisica 1; secondo anno: Analisi matematica 2, Fisica 2. Economia: Precorso e Matematica generale. Liceo scientifico, quinto anno: Matematica 5° anno e Fisica 5° anno. Concorsi pubblici: Matematica per concorsi e Logica per concorsi. Chi vuole ripassare dalle basi: Matematica zero e Fisica zero, entrambe gratuite.
 - Elenco dei prezzi: https://ripetizionidianalisi.com/prezzi. Guida gratuita per i concorsi: https://ripetizionidianalisi.com/concorsi.
 - Compatibilità con il tuo esame (https://ripetizionidianalisi.com/compatibilita, gratuita, anche senza account e prima dell'acquisto): lo studente carica un compito d'esame oppure il programma di un corso universitario, anche come elenco degli argomenti (foto, PDF o testo), delle materie universitarie disponibili; il sito riconosce automaticamente il tipo di documento, confronta ogni richiesta o argomento con teoria ed esercizi svolti e mostra la copertura stimata con i collegamenti al materiale. Con l'account mostra anche il successo, cioè la quota di domande a tempo indovinate negli argomenti del compito. Non vale per concorsi, test di ingresso e scuole superiori.
-- Formulari gratuiti di Precorso, Analisi matematica 1 e Analisi matematica 2 (le formule con le condizioni di validità, nell'ordine degli argomenti): si leggono per intero su https://ripetizionidianalisi.com/formulari e il PDF si scarica con un account gratuito.${env.PADDLE_API_KEY && env.INVITI !== '0' ? `
+- Formulari gratuiti di Precorso, Analisi matematica 1, Analisi matematica 2 e Fisica 1 (le formule con le condizioni di validità, nell'ordine degli argomenti): si leggono per intero su https://ripetizionidianalisi.com/formulari e il PDF si scarica con un account gratuito.${env.STRIPE_SECRET_KEY && env.INVITI !== '0' ? `
 - Invita un amico: nella pagina Account c'è il link personale da mandare agli amici. Chi lo apre e crea un account nuovo entro 30 giorni ha il 15% di sconto sul primo acquisto di una materia; quando l'amico compra, chi lo ha invitato riceve il 15% di sconto sul prossimo acquisto di una materia (uno per ogni amico che compra). Gli sconti si applicano da soli al pagamento; videocorsi e lezioni sono esclusi. Regole: https://ripetizionidianalisi.com/invito.` : ''}
-- Lega della settimana (https://ripetizionidianalisi.com/lega): con un account si entra ogni settimana in un gruppo di al massimo 30 studenti della propria lega (dieci leghe, da Pitagora a Riemann); conta l'EXP guadagnato da lunedì a domenica; alla chiusura i primi salgono di una lega e gli ultimi scendono. Nella stessa pagina si sceglie il nome mostrato agli altri o si sceglie di non comparire.
+- Lega della settimana (https://ripetizionidianalisi.com/lega): con un account si entra ogni settimana in un gruppo di al massimo 30 studenti della propria lega (dieci leghe, da Pitagora a Riemann); conta l'EXP guadagnato da lunedì a domenica; nei gruppi piccoli partecipano anche avversari simulati, che guadagnano EXP a intervalli irregolari e fanno più punti nelle leghe superiori. Per promozioni e retrocessioni conta la posizione tra gli studenti. Nella stessa pagina si sceglie il nome mostrato agli altri o si sceglie di non comparire.
 - Duelli (https://ripetizionidianalisi.com/duelli): due studenti con l'account rispondono alle stesse 10 domande a tempo di una materia; vince chi dà più risposte corrette, a parità chi impiega meno tempo. Si sfida un amico con un link, uno studente online dall'elenco, oppure si cerca un avversario a caso sulla stessa materia. Le risposte corrette valgono EXP; chi vince riceve 20 EXP in più (10 a testa in caso di parità) per i primi 3 duelli del giorno.
-- Lezioni individuali online con Carmine: si prenotano dalla pagina https://ripetizionidianalisi.com/prenota scegliendo materia, giorno e ora. Materie: ${MATERIE_LEZIONI.map((m) => m.titolo).join(', ')}. La lezione dura un'ora, si svolge su Google Meet e costa ${LEZIONI.prezzo} euro, pagati con carta (Stripe) al momento della prenotazione; si prenota dal lunedì al sabato, almeno ${LEZIONI.preavvisoOre} ore prima. Dopo il pagamento arrivano l'email di conferma e l'invito di Google Calendar con il link di Meet. Spostamento o disdetta con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima, dal link nell'email di conferma; dopo non è previsto il rimborso.
+- Lezioni individuali online con Carmine: si prenotano dalla pagina https://ripetizionidianalisi.com/prenota scegliendo materia, giorno e ora. Materie: ${MATERIE_LEZIONI.map((m) => m.titolo).join(', ')}. La lezione dura un'ora, si svolge su Google Meet e costa ${LEZIONI.prezzo} euro, pagati con carta (Stripe) al momento della prenotazione; si prenota dal lunedì al sabato, anche in giornata, con almeno ${LEZIONI.preavvisoMinuti} minuti di anticipo. Dopo il pagamento arrivano l'email di conferma e l'invito di Google Calendar con il link di Meet. Spostamento o disdetta con rimborso completo fino a ${LEZIONI.rimborsoOre} ore prima, dal link nell'email di conferma; dopo non è previsto il rimborso.
 - Per lezioni in orari diversi, problemi con l'account o con un pagamento, rimborsi e tutto ciò che non è scritto qui: scrivere a Carmine su WhatsApp dal pulsante verde in basso a destra o dalla pagina Contatti (https://ripetizionidianalisi.com/contatti).
 Materie disponibili:
 ${attive.map(riga).join('\n')}
-Videocorsi (lezioni registrate di Carmine, video e PDF di ogni lezione da circa 50 minuti, su Google Drive; acquisto unico con Paddle dalla pagina del corso; dopo il pagamento il link alla cartella compare nell'account e l'accesso va chiesto su Drive con la stessa email; l'acquisto sblocca in automatico le materie collegate del sito; elenco: https://ripetizionidianalisi.com/videocorsi):
+Videocorsi (lezioni registrate di Carmine, video e PDF di ogni lezione da circa 50 minuti, su Google Drive; acquisto unico con Stripe dalla pagina del corso; dopo il pagamento il link alla cartella compare nell'account e l'accesso va chiesto su Drive con la stessa email; l'acquisto sblocca in automatico le materie collegate del sito; elenco: https://ripetizionidianalisi.com/videocorsi):
 ${VIDEOCORSI.map((v) => `- ${v.titolo}: ${v.lezioni} lezioni, ${v.prezzo} euro; sblocca sul sito ${v.sblocca.map((s) => MATERIE.find((m) => m.slug === s)?.titolo || s).join(', ')} (materiale didattico del valore di ${valoreMateriale(v)} euro, incluso e quindi risparmiato). Pagina: https://ripetizionidianalisi.com/videocorsi/${v.slug}`).join('\n')}
 Corsi di gruppo dal vivo (Analisi matematica 1, Analisi matematica 2, Matematica generale): lezioni online, 2 o 3 incontri a settimana da un'ora, tutte registrate; il programma segue le tracce d'esame degli iscritti; pagamento ogni 5 o 6 lezioni svolte, nessun obbligo di seguire tutto. Ci si iscrive dalla pagina https://ripetizionidianalisi.com/corsi-di-gruppo e si aspetta che il gruppo si formi (Carmine scrive su WhatsApp con il calendario); nel frattempo, dalla pagina personale il cui link arriva per email, si inviano le tracce d'esame e la data dell'esame. Il prezzo per lezione non è indicato: per saperlo scrivere a Carmine su WhatsApp.
 Materie in preparazione (non ancora acquistabili): ${prossime.map((m) => m.titolo).join(', ')}.`;
 }
 
 export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi = {}) {
-  const lingua = (b) => (b.lingua === 'en' ? 'en' : 'it');
   const json = (d, s = 200) => new Response(JSON.stringify(d), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
   const b = await req.json().catch(() => ({}));
-  const en = lingua(b) === 'en';
-  const msg = (it, eng) => (en ? eng : it);
+  const en = b.lingua === 'en', de = b.lingua === 'de', es = b.lingua === 'es';
+  const msg = (it, eng, deu, esp) => es ? esp : de ? deu : en ? eng : it;
 
-  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.') }, 503);
+  if (!env.AI) return json({ errore: msg('Pi non è ancora attivo.', 'The assistant is not active yet.', 'Pi ist derzeit nicht verfügbar.', 'Pi no está disponible en este momento.') }, 503);
   const materia = MATERIE.find((m) => m.slug === b.materia) || null;
 
   const messaggi = (Array.isArray(b.messaggi) ? b.messaggi : []).slice(-10)
     .map((m) => ({ role: m.ruolo === 'assistente' ? 'assistant' : 'user', content: taglia(m.testo, 2000).trim() }))
     .filter((m) => m.content);
-  if (!messaggi.length || messaggi[messaggi.length - 1].role !== 'user') return json({ errore: 'Messaggio vuoto.' }, 400);
+  if (!messaggi.length || messaggi[messaggi.length - 1].role !== 'user') return json({ errore: msg('Messaggio vuoto.', 'Enter a message.', 'Gib eine Nachricht ein.', 'Escribe un mensaje.') }, 400);
   const foto = typeof b.immagine === 'string' && /^data:image\/(jpeg|png|webp);base64,/.test(b.immagine) && b.immagine.length <= MAX_FOTO ? b.immagine : null;
-  if (b.immagine && !foto) return json({ errore: msg('La foto non è valida o è troppo grande.', 'The photo is not valid or is too large.') }, 400);
+  if (b.immagine && !foto) return json({ errore: msg('La foto non è valida o è troppo grande.', 'The photo is not valid or is too large.', 'Die Bilddatei ist ungültig oder zu groß.', 'La imagen no es válida o es demasiado grande.') }, 400);
 
   // Chi scrive: lo studente con l'account, oppure un ospite riconosciuto da un'impronta non reversibile (indirizzo e browser).
   let chi = io?.email;
@@ -147,10 +145,10 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
     await evento(`limite-${conto.motivo === 'sito' ? 'sito' : io ? 'studente' : 'ospite'}`);
     return json({
       errore: conto.motivo === 'sito'
-        ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
+        ? msg('Pi ha raggiunto il limite di oggi per tutto il sito. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.', 'Pi ha alcanzado el límite diario. Vuelve a intentarlo mañana.')
         : io
-          ? msg('Hai raggiunto il limite di messaggi di oggi. Domani Pi sarà di nuovo disponibile.', "You have reached today's message limit. The assistant will be available again tomorrow.")
-          : msg(`Hai usato i messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, 'You have used today’s guest messages. Log in or create a free account to get more.'),
+          ? msg('Hai raggiunto il limite di messaggi di oggi. Domani Pi sarà di nuovo disponibile.', "You have reached today's message limit. The assistant will be available again tomorrow.", 'Du hast dein Tageslimit erreicht. Morgen kannst du Pi wieder nutzen.', 'Has alcanzado tu límite diario de mensajes. Mañana podrás volver a usar Pi.')
+          : msg(`Hai usato i messaggi di oggi senza account. Accedi o crea un account gratuito per averne ${Number(env.ASSISTENTE_MAX_STUDENTE) || MAX_STUDENTE} al giorno.`, 'You have used today’s guest messages. Log in or create a free account to get more.', 'Du hast heute alle Nachrichten für Gäste verbraucht. Melde dich an oder erstelle ein kostenloses Konto, um mehr Nachrichten zu senden.', 'Has agotado los mensajes de hoy como visitante. Inicia sesión o crea una cuenta gratuita para enviar más.'),
       codice: io ? 'limite' : 'ospite', rimasti: 0,
     }, 429);
   }
@@ -176,7 +174,7 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   const sito = sulSito
     ? infoSito(aPagamento, prezzi, env)
     : 'Per domande su materie, prezzi, acquisto o accesso: pagina https://ripetizionidianalisi.com/prezzi, oppure Carmine su WhatsApp dal pulsante verde.';
-  const sistema = `${ISTRUZIONI}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
+  const sistema = `${ISTRUZIONI}${es ? '\n- La lingua dell’interfaccia è lo spagnolo. Rispondi in spagnolo salvo richiesta esplicita di un’altra lingua.' : ''}\n\n${sito}\n\nContesto della pagina che lo studente sta leggendo.\n${contesto}`;
   const rimasti = Math.max(0, maxStudente - conto.n);
   const rimborsa = () => aDO(env, '/assistente-rimborso', { giorno, email: chi }).catch(() => {});
   // Token stimati dai caratteri (circa 4 caratteri per token), più un forfait per la foto.
@@ -230,10 +228,10 @@ export async function rispondiAssistente(req, env, io, aDO, aPagamento, prezzi =
   await evento(quota ? 'errore-quota' : foto ? 'errore-foto' : 'errore-modello');
   return json({
     errore: quota
-      ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.')
+      ? msg('Pi ha raggiunto il limite di oggi. Riprova domani.', 'The assistant has reached today’s limit. Please try again tomorrow.', 'Pi hat das Tageslimit erreicht. Versuch es morgen erneut.', 'Pi ha alcanzado el límite diario. Vuelve a intentarlo mañana.')
       : foto
-        ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.')
-        : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.'),
+        ? msg('Pi non è riuscito a leggere la foto. Riprova con una foto più nitida, oppure scrivi l’esercizio.', 'The assistant could not read the photo. Try a sharper photo or type the exercise.', 'Pi konnte das Foto nicht lesen. Lade ein schärferes Bild hoch oder gib die Aufgabe als Text ein.', 'Pi no ha podido leer la foto. Prueba con una más nítida o escribe el ejercicio.')
+        : msg('Pi non ha risposto. Riprova tra qualche istante.', 'The assistant did not answer. Please try again in a moment.', 'Pi hat nicht geantwortet. Versuch es gleich noch einmal.', 'Pi no ha respondido. Vuelve a intentarlo en unos instantes.'),
   }, 502);
 }
 

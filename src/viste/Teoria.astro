@@ -1,7 +1,9 @@
 ---
+import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
+import IndiceTeoria from '../components/IndiceTeoria.astro';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -23,7 +25,8 @@ const tuttiNomi = [...new Set([...(voce?.body ?? '').matchAll(/^:{3,4}teorema\{[
 const nominati = [...tuttiNomi.filter((x) => PROPRIO.test(x.slice(1))), ...tuttiNomi.filter((x) => !PROPRIO.test(x.slice(1)))];
 const descrizioneSeo = (() => {
   const somm = voce?.data.sommario ?? '';
-  if (!nominati.length) return somm;
+  // Sommari brevi: davanti si mettono capitolo e materia, così la descrizione dice anche di quale corso si tratta.
+  if (!nominati.length) return somm.length < 110 ? `${arg.breve} · ${materiaL(lingua, materia).breve}. ${somm}` : somm;
   const testa = `${lingua === 'en' ? 'Theorems' : 'Teoremi'}: ${nominati.slice(0, 4).join(', ')}.`;
   return `${testa} ${somm}`.trim();
 })();
@@ -48,9 +51,9 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
   descrizione={descrizioneSeo}
-  seo={{ titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
+  seo={{ canonico: originale(materia, argomento, 'teoria'), titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
   '@type': 'LearningResource', name: arg.titolo, description: descrizioneSeo, learningResourceType: 'Lesson', inLanguage: lingua,
-  educationalLevel: SEO(lingua).livello, url: assoluto(Astro.url.pathname),
+  educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },
   provider: { '@id': `${SITO}/#organizzazione` },
   author: { '@id': `${SITO}/#carmine` },
@@ -63,14 +66,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   <p class="sopratitolo">{t.sezioni.teoria}</p>
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
   {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
-  {sezioni.length > 1 && (
-    <details class="sommario-pagina">
-      <summary>{t.inQuestaPagina}</summary>
-      <ol>
-        {sezioni.map((s: { slug: string; text: string }) => <li><a href={`#${s.slug}`}>{s.text}</a></li>)}
-      </ol>
-    </details>
-  )}
+  <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sezioni} />
   {Contenuto ? <div class="testo-studio"><Contenuto /></div> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
   <script is:inline define:vars={{ usi, basi, parole }}>
     for (const [id, u] of Object.entries(usi)) {
