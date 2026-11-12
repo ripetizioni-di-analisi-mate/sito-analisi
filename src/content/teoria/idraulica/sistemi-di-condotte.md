@@ -386,7 +386,7 @@ Una pompa inserita in un ramo fornisce al fluido la prevalenza $H_p$, quindi inn
 $$
 h_M + H_p = h_V + r\,Q^2 ,
 $$
-e nell'equazione di maglia il termine $-H_p$ si somma alle perdite, con il segno positivo quando la pompa spinge nel verso di percorrenza. La potenza assorbita dalla pompa vale $P = \dfrac{\gamma\,Q\,H_p}{\eta}$, con $\eta$ rendimento dell'impianto di sollevamento. Se la prevalenza non è costante, si usa la curva caratteristica $H_p = H_p(Q)$ e il bilancio del ramo diventa un'equazione nella sola $Q$. Si rimanda all'argomento sulle lunghe condotte e gli impianti di sollevamento per la curva caratteristica e il punto di funzionamento.
+e nell'equazione di maglia la prevalenza entra con il termine $-H_p$, dove $H_p$ è positiva quando la pompa spinge nel verso di percorrenza e negativa quando spinge nel verso opposto. La potenza assorbita dalla pompa vale $P = \dfrac{\gamma\,Q\,H_p}{\eta}$, con $\eta$ rendimento dell'impianto di sollevamento. Se la prevalenza non è costante, si usa la curva caratteristica $H_p = H_p(Q)$ e il bilancio del ramo diventa un'equazione nella sola $Q$. Si rimanda all'argomento sulle lunghe condotte e gli impianti di sollevamento per la curva caratteristica e il punto di funzionamento.
 :::
 
 ::schema{nodi="A,3.5,3;N,15,10;V,28,16" condotte="A-N,0.6,tratto 1;N-V,0.5,tratto 2" pompa="9,6.3,P" acqua="0,0 3.5,0 3.5,5 0,5;28,13 32,13 32,18 28,18" solidi="0,-1 3.5,-1 3.5,0 0,0;28,12 32,12 32,13 28,13" pelo="0,3.5,5,aspirazione;28,32,18,mandata" titolo="Pompa inserita in un ramo: il carico totale sale di $H_p$ attraversando la macchina"}
