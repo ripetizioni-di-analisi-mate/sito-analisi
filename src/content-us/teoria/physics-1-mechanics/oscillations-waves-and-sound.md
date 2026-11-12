@@ -174,7 +174,7 @@ The period depends on $L$ and $g$ and not on the mass, therefore a pendulum of m
 ::::
 
 :::attenzione
-The replacement of $\sin\theta$ by $\theta$ holds for small angles only. The exact period exceeds the harmonic one by the factor $1 + \dfrac{\theta_0^2}{16} + \dots$, where $\theta_0$ is the angular amplitude in radians. For $\theta_0 = 5^\circ$ the correction is $0.05\%$, below the precision of an ordinary measurement, while for $\theta_0 = 30^\circ$ it reaches $1.7\%$, hence a clock regulated at a small amplitude runs fast when the swing is widened.
+The replacement of $\sin\theta$ by $\theta$ holds for small angles only. The exact period exceeds the harmonic one by the factor $1 + \dfrac{\theta_0^2}{16} + \dots$, where $\theta_0$ is the angular amplitude in radians. For $\theta_0 = 5^\circ$ the correction is $0.05\%$, below the precision of an ordinary measurement, while for $\theta_0 = 30^\circ$ it reaches $1.7\%$, hence a clock regulated at a small amplitude runs slow when the swing is widened, since each swing then takes longer.
 :::
 
 ## The physical pendulum
