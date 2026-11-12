@@ -28,7 +28,7 @@ const anteprima = process.env.ANTEPRIMA === '1';
 export default defineConfig({
   site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
-  build: { format: 'file', assets: 'risorse' },
+  build: { format: 'file', assets: 'risorse', concurrency: 2 },
   integrations: CATALOGO_USA_PUBBLICO ? [] : [{
     name: 'sospensione-catalogo-usa',
     hooks: {
