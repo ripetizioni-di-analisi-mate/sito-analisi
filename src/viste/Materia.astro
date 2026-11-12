@@ -37,7 +37,8 @@ const riassunti = Object.fromEntries((await vociL(lingua, 'teoria')).map((v) => 
 const svolti = await getCollection('svolti');
 const dafare = await getCollection('dafare');
 // Domande a tempo: quante per argomento.
-const linguaDomande = quizPerEsercitarsi ? 'it' : lingua;
+const scienza = materia === 'scienza-delle-costruzioni';
+const linguaDomande = quizPerEsercitarsi || scienza ? 'it' : lingua;
 const domande = await getCollection(linguaDomande === 'en' ? 'domande_en' : 'domande');
 const conta = (lista: { id: string }[], a: string) => lista.filter((v) => v.id.startsWith(`${materia}/${a}/`)).length;
 const domandeMateria = domande.filter((v) => v.id.startsWith(`${materia}/`)).length;
@@ -47,10 +48,10 @@ import { risultatoDi } from '../lib/risposte';
 const verificabili = (a: string) => dafare.filter((v) => v.id.startsWith(`${materia}/${a}/`) && risultatoDi(v)).length;
 const en = lingua === 'en';
 const semestreFiltro = materia.endsWith('-semestre-filtro');
-const anteprimaScienza = materia === 'scienza-delle-costruzioni' && m.prezzo;
+const anteprimaScienza = scienza && m.prezzo;
 const anteprimaTesto = anteprimaScienza
-  ? (en ? 'Read the beginning of each topic, try one sample quiz per topic and open a worked example for free, without an account.'
-    : 'Senza account puoi leggere l’inizio di ogni argomento, provare una domanda per argomento e consultare una scheda svolta.')
+  ? (en ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
+    : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.')
   : t.anteprimaTesto;
 const { ripasso: nomeRipasso, simulazione: nomeCompito } = nomiAllenamento(m, lingua);
 const notaQuiz = en
@@ -142,7 +143,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     {domandeMateria > 0 && (
       <SchedaRipasso materia={materia} titolo={nomeRipasso}
         domande={{ href: link(linguaDomande, `/${materia}/${RIPASSO}/domande`), titolo: en ? (linguaDomande === 'it' ? 'Review questions in Italian' : 'Review questions') : 'Domande di ripasso', conteggio: domandeMateria }}
-        simulazione={quizPerEsercitarsi ? undefined : { href: link(lingua, `/${materia}/simulazione`), titolo: nomeCompito }}
+        simulazione={quizPerEsercitarsi ? undefined : { href: link(scienza ? 'it' : lingua, `/${materia}/simulazione`), titolo: scienza && en ? 'Exam simulation in Italian' : nomeCompito }}
         personale={{ href: link(linguaDomande, `/${materia}/${RIPASSO_OGGI}/domande`), titolo: en ? 'Today’s review' : 'Il tuo ripasso di oggi' }}>
         {quizPerEsercitarsi ? notaQuiz : confTolc ? (en ? `Practice across all topics and a section-timed ${confTolc.nome} simulation with separate English results.` : `Quiz su tutti gli argomenti e simulazione ${confTolc.nome} con tempi per sezione, correzione finale e risultato di inglese separato.`) : semestreFiltro ? (en ? 'Review questions across all units, timed exercise practice and, with an account, review of questions answered incorrectly.' : 'Domande di ripasso su tutte le unità, compiti di allenamento a tempo e, con l’account, ripasso delle domande sbagliate.') : gruppo === 'Superiori' ? (en ? `Review questions on all the topics of ${m.titolo}, timed class test simulations with exercises from different topics and, with an account, review of questions answered incorrectly.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, simulazioni di verifiche in classe a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`) : lingua === 'en' ? `Review questions on all the topics of ${m.titolo}, a timed exam simulation built from the exercises of the different topics and, with the account, the review of the questions answered wrongly.` : m.gruppo === 'Concorsi' ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione della prova a quiz corretta in automatico e, con l'account, il ripasso delle domande sbagliate.` : `Domande di ripasso su tutti gli argomenti di ${m.titolo}, una simulazione d'esame a tempo con esercizi di argomenti diversi e, con l'account, il ripasso delle domande sbagliate.`}
       </SchedaRipasso>

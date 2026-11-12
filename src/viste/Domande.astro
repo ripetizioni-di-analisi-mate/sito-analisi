@@ -16,7 +16,7 @@ const en = lingua === 'en';
 const es = lingua === 'es';
 const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
-const senzaInglese = !en && (semestreFiltro || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
+const senzaInglese = !en && (semestreFiltro || materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
 const nomiProve = nomiAllenamento(m, lingua);
 // Prove d'esame: capitolo finale della materia, con domande di ripasso pescate da tutti gli argomenti.
 // Ripasso di oggi: le domande sbagliate dello studente che tornano dopo 1, 3 e 7 giorni (scelte dal Worker).
@@ -109,7 +109,7 @@ const JS = es ? {
   descrizione={T.descr}
   percorso={ripasso ? [{ titolo: arg.breve }, { titolo: T.titolo }] : [{ titolo: arg.breve, href: hrefSezione('teoria') }, { titolo: T.titolo }]}
   materia={materia} argomento={argomento} sezione="domande" lingua={lingua} usa={usa}
-  seo={{ noindex: true, senzaInglese, soloQuestaLingua: m.eserciziDaFare === false && senzaInglese }}
+  seo={{ noindex: true, senzaInglese, soloQuestaLingua: (materia === 'scienza-delle-costruzioni' || m.eserciziDaFare === false) && senzaInglese }}
 >
   <div class="domande" data-materia={materia} data-argomento={argomento} data-titolo={arg.titolo} data-lingua={lingua} data-pref={pref} data-testi={JSON.stringify(JS)} data-ripasso={ripasso ? '1' : ''} data-torna-alla-materia={tornaAllaMateria ? '1' : ''} data-ritorno={hrefRitorno} data-brevi={JSON.stringify(brevi)}>
     <div class="domande-testa">
