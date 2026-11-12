@@ -336,7 +336,7 @@ $$
 
 La formula dà la forza che il meccanismo di manovra deve equilibrare, e mostra che la spinta è minore della sola spinta idrostatica di monte: parte di essa è spesa per accelerare la corrente. La portata, quando non è assegnata, si ricava dal teorema di Bernoulli fra le due sezioni, perché la perdita di carico sotto la paratoia è piccola.
 
-::schema{acqua="0,0 3,0 3,2.4 0,2.4;3,0 3.3,0 3.3,0.5 3,0.5;3.3,0 8,0 8,0.5 3.3,0.5" solidi="0,-0.5 8,-0.5 8,0 0,0;3,0.5 3.3,0.5 3.3,3.4 3,3.4" pelo="0,3,2.4,p_a;3.3,8,0.5" quote="0 0,0 2.4,h_1,-0.9" frecce="0.6,1.1,1.8,1.1,v_1;4.4,0.25,5.6,0.25,v_2" etichette="2,2.8,1;6.4,1.1,2;7.4,0.95,h_2" riferimento=0 titolo="Paratoia piana in un canale rettangolare: il volume di controllo è compreso fra la sezione $1$ di monte e la sezione $2$ di valle"}
+::schema{acqua="0,0 3,0 3,2.4 0,2.4;3,0 3.3,0 3.3,0.5 3,0.5;3.3,0 8,0 8,0.5 3.3,0.5" solidi="0,-0.5 8,-0.5 8,0 0,0;3,0.5 3.3,0.5 3.3,3.4 3,3.4" pelo="0,3,2.4,p_a;3.3,8,0.5" quote="0 0,0 2.4,h_1,-0.9" frecce="0.6,1.1,1.8,1.1,v_1;4.4,0.25,5.6,0.25,v_2" etichette="2,2.8,1;5.2,1.3,2;7.4,0.95,h_2" riferimento=0 titolo="Paratoia piana in un canale rettangolare: il volume di controllo è compreso fra la sezione $1$ di monte e la sezione $2$ di valle"}
 
 :::dimostrazione
 Si prenda come volume di controllo il tratto di corrente compreso fra la sezione $1$, a monte della paratoia, e la sezione $2$, a valle, entrambe di corrente lineare, e si prenda l'asse $x$ nel verso del moto.

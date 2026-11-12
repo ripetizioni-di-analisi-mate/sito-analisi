@@ -130,7 +130,7 @@ Q = k_s\,A\,R^{2/3}\,i^{1/2} ,
 $$
 con $k_s$ in $\mathrm{m^{1/3}/s}$. Il coefficiente $n = \dfrac{1}{k_s}$ è il coefficiente di Manning. Valori di uso corrente: $k_s = 80 \div 90$ per il calcestruzzo liscio, $70 \div 75$ per il calcestruzzo gettato in opera, $50 \div 60$ per la muratura, $30 \div 40$ per un canale in terra, $20 \div 30$ per un alveo naturale con vegetazione.
 
-Le due formule non si dimostrano: sono espressioni sperimentali, valide nel campo del moto assolutamente turbolento, in cui l'indice di resistenza non dipende più dal numero di Reynolds. Nei canali questa condizione è quasi sempre soddisfatta, perché il raggio idraulico è grande e le velocità sono dell'ordine del metro al secondo. Il legame fra $k_s$ e la scabrezza della parete è trattato nell'argomento sulle perdite di carico distribuite e localizzate.
+Le due formule non si dimostrano, perché sono espressioni sperimentali, valide nel campo del moto assolutamente turbolento, in cui l'indice di resistenza non dipende più dal numero di Reynolds. Nei canali questa condizione è quasi sempre soddisfatta, perché il raggio idraulico è grande e le velocità sono dell'ordine del metro al secondo. Il legame fra $k_s$ e la scabrezza della parete è trattato nell'argomento sulle perdite di carico distribuite e localizzate.
 :::
 
 :::esempio{titolo="Portata in moto uniforme"}
@@ -288,7 +288,7 @@ $$
 $$
 e la funzione $E(h)$ ha un minimo nell'altezza $h_c$ per cui $Fr = 1$. L'altezza $h_c$ si dice **altezza critica** e lo stato corrispondente *stato critico*.
 
-Il teorema dice che il minimo dell'energia specifica e la condizione $Fr = 1$ sono la stessa cosa: per questo l'altezza critica si calcola dalla condizione $Q^2 B = g A^3$, senza derivare la curva. Serve a sapere se una transizione è possibile: in una sezione dove l'energia specifica disponibile scende sotto $E(h_c)$ la portata assegnata non passa.
+Il teorema dice che il minimo dell'energia specifica e la condizione $Fr = 1$ sono la stessa cosa, quindi l'altezza critica si calcola dalla condizione $Q^2 B = g A^3$, senza derivare la curva. Serve a sapere se una transizione è possibile: in una sezione dove l'energia specifica disponibile scende sotto $E(h_c)$ la portata assegnata non passa.
 
 :::dimostrazione
 Si deriva l'energia specifica rispetto all'altezza d'acqua, tenendo la portata costante:
@@ -384,7 +384,7 @@ i_c = \frac{Q^2}{k_s^2\,A_c^2\,R_c^{4/3}} = \frac{v_c^2}{k_s^2\,R_c^{4/3}} ,
 $$
 dove $A_c$, $R_c$ e $v_c$ sono area, raggio idraulico e velocità media calcolati con l'altezza critica.
 
-La pendenza critica dipende dalla portata, perché $h_c$ dipende dalla portata: lo stesso canale può essere a debole pendenza per una portata e a forte pendenza per un'altra. Per un canale rettangolare largo $3\,\mathrm{m}$, con $Q = 6\,\mathrm{m^3/s}$ e $k_s = 70\,\mathrm{m^{1/3}/s}$, risulta $h_c = 0{,}742\,\mathrm{m}$, $R_c = 0{,}496\,\mathrm{m}$, $v_c = 2{,}70\,\mathrm{m/s}$ e $i_c = 0{,}00378$.
+La pendenza critica dipende dalla portata, perché $h_c$ dipende dalla portata, e di conseguenza lo stesso canale può essere a debole pendenza per una portata e a forte pendenza per un'altra. Per un canale rettangolare largo $3\,\mathrm{m}$, con $Q = 6\,\mathrm{m^3/s}$ e $k_s = 70\,\mathrm{m^{1/3}/s}$, risulta $h_c = 0{,}742\,\mathrm{m}$, $R_c = 0{,}496\,\mathrm{m}$, $v_c = 2{,}70\,\mathrm{m/s}$ e $i_c = 0{,}00378$.
 :::
 
 :::osservazione{#alvei-debole-forte titolo="Alvei a debole e a forte pendenza"}
@@ -406,7 +406,7 @@ Un canale rettangolare largo $b = 2{,}50\,\mathrm{m}$, con $k_s = 60\,\mathrm{m^
 $$
 i_c = \frac{2{,}70^2}{60^2 \cdot 0{,}465^{4/3}} = 0{,}00560 .
 $$
-Poiché $i = 0{,}010 > i_c$, l'alveo è a **forte pendenza**. Il calcolo dell'altezza di moto uniforme conferma la conclusione: risulta $h_0 = 0{,}606\,\mathrm{m} < h_c$ e $Fr = 1{,}35$, perciò il moto uniforme è una corrente veloce.
+Poiché $i = 0{,}010 > i_c$, l'alveo è a **forte pendenza**. Il calcolo dell'altezza di moto uniforme conferma la conclusione, dato che risulta $h_0 = 0{,}606\,\mathrm{m} < h_c$ e $Fr = 1{,}35$, perciò il moto uniforme è una corrente veloce.
 :::
 
 ## Celerità delle piccole perturbazioni
@@ -423,7 +423,7 @@ In una sezione qualsiasi vale la stessa formula con l'altezza media, cioè $c = 
 La formula dà il significato del numero di Froude, perché $Fr = \dfrac{v}{c}$, e spiega la differenza fra correnti lente e veloci: in una corrente lenta la perturbazione risale verso monte con velocità $c - v > 0$, in una corrente veloce viene trascinata verso valle. Per $h = 1{,}20\,\mathrm{m}$ risulta $c = 3{,}43\,\mathrm{m/s}$.
 
 :::dimostrazione
-L'idea è di osservare il fenomeno da un riferimento che si muove con la perturbazione: in quel riferimento il moto è permanente, quindi si possono applicare la continuità e l'equazione globale.
+L'idea è di osservare il fenomeno da un riferimento che si muove con la perturbazione, perché in quel riferimento il moto è permanente e si possono applicare la continuità e l'equazione globale.
 
 Si prenda un riferimento solidale con il fronte della perturbazione. In esso l'acqua indisturbata arriva con velocità $c$ e altezza $h$, e attraversa il fronte uscendo con altezza $h + \delta h$ e velocità $c - \delta v$, dove $\delta v$ è la velocità che la perturbazione imprime all'acqua nel riferimento fisso. Sia $b$ la larghezza del canale. L'equazione di continuità dà
 $$
@@ -452,8 +452,8 @@ da cui $c^2 = g\,h$ e perciò $c = \sqrt{g\,h}$.
 :::osservazione{#significato-di-froude titolo="Significato del numero di Froude"}
 Se l'acqua, invece di essere in quiete, si muove con velocità media $v$, le due perturbazioni generate in un punto si propagano con velocità $c - v$ verso monte e $c + v$ verso valle. Il segno della prima dipende dal numero di Froude:
 
-- in una corrente **lenta** risulta $v < c$, quindi $Fr < 1$ e la perturbazione risale il canale: una variazione imposta a valle, per esempio una paratoia, si fa sentire verso monte;
-- in una corrente **veloce** risulta $v > c$, quindi $Fr > 1$ ed entrambe le perturbazioni vanno verso valle: la corrente è governata da ciò che avviene a monte.
+- in una corrente **lenta** risulta $v < c$, quindi $Fr < 1$ e la perturbazione risale il canale, quindi una variazione imposta a valle, per esempio una paratoia, si fa sentire verso monte;
+- in una corrente **veloce** risulta $v > c$, quindi $Fr > 1$ ed entrambe le perturbazioni vanno verso valle, quindi la corrente è governata da ciò che avviene a monte.
 
 Per una corrente alta $1{,}30\,\mathrm{m}$ con altezza media $0{,}969\,\mathrm{m}$ e velocità $1{,}82\,\mathrm{m/s}$ si ha $c = 3{,}08\,\mathrm{m/s}$ e $Fr = 0{,}591$: la perturbazione risale con velocità $1{,}26\,\mathrm{m/s}$ e scende con velocità $4{,}90\,\mathrm{m/s}$.
 

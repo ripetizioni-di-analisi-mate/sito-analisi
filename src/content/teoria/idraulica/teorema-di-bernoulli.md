@@ -36,7 +36,7 @@ H = z + \frac{p}{\gamma} + \frac{v^2}{2g}
 $$
 si chiama **carico totale** del punto e si misura in metri.
 
-Ciascuno dei tre termini è un'energia per unità di peso di fluido: $z$ è l'energia potenziale di posizione, $\dfrac{p}{\gamma}$ è il lavoro che le forze di pressione compiono per spingere l'unità di peso attraverso la sezione, $\dfrac{v^2}{2g}$ è l'energia cinetica. Il carico totale è quindi l'energia meccanica posseduta dall'unità di peso di fluido che transita per quel punto, ed è la grandezza il cui bilancio governa tutto lo studio delle correnti in pressione. In una condotta con l'asse a $z = 4{,}00\,\mathrm{m}$, pressione relativa $p = 150\,\mathrm{kPa}$ e velocità $v = 1{,}91\,\mathrm{m/s}$ risulta $\dfrac{p}{\gamma} = 15{,}29\,\mathrm{m}$, $\dfrac{v^2}{2g} = 0{,}186\,\mathrm{m}$ e $H = 19{,}48\,\mathrm{m}$.
+Ciascuno dei tre termini è un'energia per unità di peso di fluido. La quota geodetica è l'energia potenziale di posizione, l'altezza piezometrica è il lavoro che le forze di pressione compiono per spingere l'unità di peso attraverso la sezione, l'altezza cinetica è l'energia cinetica. Il carico totale è quindi l'energia meccanica posseduta dall'unità di peso di fluido che transita per quel punto, ed è la grandezza il cui bilancio governa tutto lo studio delle correnti in pressione. In una condotta con l'asse a $z = 4{,}00\,\mathrm{m}$, pressione relativa $p = 150\,\mathrm{kPa}$ e velocità $v = 1{,}91\,\mathrm{m/s}$ risulta $\dfrac{p}{\gamma} = 15{,}29\,\mathrm{m}$, $\dfrac{v^2}{2g} = 0{,}186\,\mathrm{m}$ e $H = 19{,}48\,\mathrm{m}$.
 
 ::schema{nodi="M,2,3,-;N,11,3,-" condotte="M-N,0.7" linee="4,3.35 4,6.6;4.6,3.35 4.6,6.6;6.6,7.4 6.6,2.9 5.8,2.9;6,7.4 6,3.1 5.8,3.1;0.6,0 12,0" piezometrica="1.6,6.6 11.4,6.6" energia="1.6,7.4 11.4,7.4" quote="8 0,8 3,z,-0.8;8 3,8 6.6,p/γ,-0.8;8 6.6,8 7.4,v²/2g,-0.8;11.4 0,11.4 7.4,H,-1" etichette="2.6,6.9,piezometrica;3.2,7.7,linea dei carichi totali;2,0.35,piano di riferimento" riferimento=0 titolo="Le tre altezze in una sezione di condotta: il piezometro misura $\dfrac{p}{\gamma}$, il tubo di Pitot aggiunge $\dfrac{v^2}{2g}$"}
 :::
@@ -54,7 +54,7 @@ Si rimanda all'argomento sulla cinematica dei fluidi, la portata e l'equazione d
 :::
 
 ::::teorema{#teorema-di-bernoulli titolo="Teorema di Bernoulli"}
-Sia un fluido perfetto, cioè privo di viscosità, incomprimibile e di peso specifico $\gamma$, in moto permanente sotto l'azione del solo peso. Allora il carico totale è costante lungo ogni traiettoria: presi due punti $1$ e $2$ della stessa traiettoria,
+Sia un fluido perfetto, cioè privo di viscosità, incomprimibile e di peso specifico $\gamma$, in moto permanente sotto l'azione del solo peso. Allora il carico totale è costante lungo ogni traiettoria, cioè, presi due punti $1$ e $2$ della stessa traiettoria, vale
 $$
 z_1 + \frac{p_1}{\gamma} + \frac{v_1^2}{2g} = z_2 + \frac{p_2}{\gamma} + \frac{v_2^2}{2g} .
 $$
@@ -113,7 +113,7 @@ Dalle due linee si leggono tutte le grandezze della corrente, e il disegno sosti
 - La distanza verticale fra la linea dei carichi totali e la piezometrica è $\dfrac{v^2}{2g}$, quindi dove le due linee si avvicinano la corrente è più lenta. In una condotta di diametro costante la portata è la stessa in ogni sezione, perciò l'altezza cinetica è costante e le due linee sono parallele.
 - La distanza verticale fra la piezometrica e l'asse della condotta è $\dfrac{p}{\gamma}$, e si legge in metri di colonna d'acqua.
 - La pendenza della linea dei carichi totali nel verso del moto è la perdita di carico per unità di lunghezza.
-- Dove la condotta cambia diametro l'altezza cinetica cambia, quindi la piezometrica presenta un salto: scende al passaggio a un diametro minore, perché la corrente accelera e parte del carico piezometrico si trasforma in altezza cinetica.
+- Dove la condotta cambia diametro l'altezza cinetica cambia, quindi la piezometrica presenta un salto. Al passaggio a un diametro minore il salto è verso il basso, perché la corrente accelera e parte del carico piezometrico si trasforma in altezza cinetica.
 
 ::schema{acqua="0.2,0.6 2.4,0.6 2.4,9 0.2,9;15,0.6 18.4,0.6 18.4,5.4 15,5.4" solidi="0,0 2.6,0 2.6,0.6 0,0.6;0,0 0.2,0 0.2,9.6 0,9.6;2.4,0.6 2.6,0.6 2.6,3.65 2.4,3.65;2.4,4.35 2.6,4.35 2.6,9.6 2.4,9.6;14.8,0 18.6,0 18.6,0.6 14.8,0.6;14.8,0.6 15,0.6 15,3.65 14.8,3.65;14.8,4.35 15,4.35 15,6 14.8,6;18.4,0 18.6,0 18.6,6 18.4,6" pelo="0.2,2.4,9;15,18.4,5.4" condotte="2.6 4-15 4,0.7" piezometrica="2.6,9 2.7,8.55 15,5.4" energia="2.6,9 2.7,8.85 15,5.7" quote="8 4,8 7.19,p/γ,0;12 6.17,12 6.47,v²/2g,1.2" etichette="6.2,8.6,linea dei carichi totali;5.6,7,piezometrica;1.3,9.5,A;16.7,5.9,B" riferimento=0 titolo="Condotta che collega due serbatoi: la linea dei carichi totali scende nel verso del moto e la distanza dalla piezometrica è l'altezza cinetica"}
 :::
@@ -197,7 +197,7 @@ La perdita di carico si sottrae sempre procedendo da monte verso valle, qualunqu
 
 ## Piezometri e tubo di Pitot
 
-Le due linee non si disegnano soltanto: si misurano, punto per punto, con due strumenti che differiscono per il modo in cui la presa è orientata rispetto alla corrente.
+Le due linee si misurano punto per punto, con due strumenti che differiscono per il modo in cui la presa è orientata rispetto alla corrente.
 
 :::definizione{#piezometro titolo="Piezometro"}
 Il **piezometro** è un tubo trasparente, aperto all'atmosfera, inserito nella parete della condotta con l'asse perpendicolare alla corrente e con il bordo della presa a filo della parete interna. Il liquido sale nel tubo fino alla quota in cui la pressione alla base uguaglia quella della corrente, perciò il livello raggiunto segna il carico piezometrico $h = z + \dfrac{p}{\gamma}$ della sezione. Il piezometro misura quindi direttamente un punto della piezometrica. Per pressioni elevate la colonna richiesta diventa impraticabile e si usa un manometro, mentre per pressioni negative il piezometro aspira aria e si usa un manometro differenziale.
@@ -226,7 +226,7 @@ da cui $\dfrac{p_A - p_P}{\gamma} = \dfrac{v^2}{2g}$. Il liquido nei due tubi è
 
 ## Misuratori di portata a strozzatura
 
-Una strozzatura accelera la corrente e, per il teorema di Bernoulli, ne abbassa il carico piezometrico: la differenza di livello fra due prese diventa allora una misura della portata.
+Una strozzatura accelera la corrente e, per il teorema di Bernoulli, ne abbassa il carico piezometrico, quindi la differenza di livello fra due prese diventa una misura della portata.
 
 :::richiamo{#manometro-differenziale titolo="Manometro differenziale"}
 Un manometro differenziale a $U$ collega due prese di una corrente di liquido di peso specifico $\gamma$ e contiene un liquido manometrico di peso specifico $\gamma_m > \gamma$ immiscibile con il primo. Se il dislivello fra i due menischi è $\Delta$, la differenza dei carichi piezometrici delle due prese vale
@@ -294,7 +294,7 @@ da cui $v = \sqrt{2 g h}$. La portata segue dalla definizione $Q = A v$.
 ::::
 
 :::osservazione{#condotta-tra-due-serbatoi titolo="Condotta che collega due serbatoi"}
-Due serbatoi a livello costante sono collegati da una condotta, e il dislivello fra i peli liberi è $\Delta z$. Si applica il teorema di Bernoulli per i fluidi reali fra i due peli liberi: in entrambi la pressione relativa è nulla e la velocità è trascurabile, quindi i carichi totali coincidono con le quote dei peli liberi e
+Due serbatoi a livello costante sono collegati da una condotta, e il dislivello fra i peli liberi è $\Delta z$. Si applica il teorema di Bernoulli per i fluidi reali fra i due peli liberi. In entrambi la pressione relativa è nulla e la velocità è trascurabile, quindi i carichi totali coincidono con le quote dei peli liberi e
 $$
 \Delta z = \Delta H_{1,2} .
 $$
@@ -303,7 +303,7 @@ Tutto il dislivello è speso in perdite di carico. Se la perdita complessiva si 
 
 ## Cavitazione e limite di aspirazione
 
-Il carico piezometrico può scendere sotto l'asse della condotta, ma non indefinitamente: esiste un valore della pressione al di sotto del quale il liquido non resta liquido.
+Il carico piezometrico può scendere sotto l'asse della condotta, ma non indefinitamente, perché esiste un valore della pressione al di sotto del quale il liquido non resta liquido.
 
 :::definizione{#tensione-di-vapore titolo="Tensione di vapore"}
 La **tensione di vapore** $p_v$ di un liquido è la pressione assoluta alla quale il liquido e il suo vapore sono in equilibrio alla temperatura considerata. Se in un punto della corrente la pressione assoluta scende fino a $p_v$, il liquido evapora e si formano bolle di vapore. Per l'acqua a $20\,^\circ\mathrm{C}$ risulta $p_v = 2{,}34\,\mathrm{kPa}$, cioè $\dfrac{p_v}{\gamma} = 0{,}24\,\mathrm{m}$ di colonna d'acqua; il valore cresce rapidamente con la temperatura. La pressione atmosferica al livello del mare vale $101{,}3\,\mathrm{kPa}$, cioè $10{,}33\,\mathrm{m}$ di colonna d'acqua.
