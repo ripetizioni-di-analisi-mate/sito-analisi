@@ -80,9 +80,9 @@ Il prodotto dei due segni dà il verso in cui si muove il pelo libero procedendo
 :::
 
 :::osservazione{#asintoti titolo="Comportamento vicino a $h_0$ e a $h_c$"}
-Per $h \to h_0$ il numeratore tende a zero e il denominatore a un valore diverso da zero, quindi $\dfrac{dh}{dx} \to 0$: il pelo libero diventa parallelo al fondo e l'altezza di moto uniforme è un asintoto, raggiunto solo a distanza infinita.
+Per $h \to h_0$ il numeratore tende a zero e il denominatore a un valore diverso da zero, quindi $\dfrac{dh}{dx} \to 0$ e il pelo libero diventa parallelo al fondo e l'altezza di moto uniforme è un asintoto, raggiunto solo a distanza infinita.
 
-Per $h \to h_c$ il denominatore tende a zero e il numeratore a un valore diverso da zero, quindi $\left|\dfrac{dh}{dx}\right| \to \infty$: il pelo libero tende a disporsi perpendicolarmente al fondo. L'ipotesi di variazione graduale non è più soddisfatta, perciò in prossimità dell'altezza critica il profilo calcolato con questa equazione descrive soltanto la tendenza della corrente, e il passaggio effettivo avviene su un tratto breve.
+Per $h \to h_c$ il denominatore tende a zero e il numeratore a un valore diverso da zero, quindi $\left|\dfrac{dh}{dx}\right| \to \infty$ e il pelo libero tende a disporsi perpendicolarmente al fondo. L'ipotesi di variazione graduale non è più soddisfatta, perciò in prossimità dell'altezza critica il profilo calcolato con questa equazione descrive soltanto la tendenza della corrente, e il passaggio effettivo avviene su un tratto breve.
 :::
 
 ## Classificazione dei profili
@@ -124,11 +124,11 @@ Nei tre casi limite l'altezza di moto uniforme non esiste oppure coincide con qu
 - **Canale a pendenza critica** ($i = i_c$, cioè $h_0 = h_c$): le due rette coincidono. Restano i profili **C1** sopra e **C3** sotto, entrambi quasi orizzontali, perché numeratore e denominatore si annullano insieme.
 - **Canale in contropendenza** ($i < 0$): il numeratore vale $i - J < 0$ per ogni altezza e l'altezza di moto uniforme non esiste. Restano i profili **A2** e **A3**, con l'andamento dei corrispondenti H2 e H3.
 
-I nomi dei profili non si imparano a memoria: si ricostruiscono ogni volta dal segno del numeratore e del denominatore, una volta note $h_0$ e $h_c$.
+Il nome di ogni profilo si ricostruisce dal segno del numeratore e del denominatore, una volta note $h_0$ e $h_c$.
 :::
 
 :::attenzione
-Un profilo di moto gradualmente vario *non* attraversa l'altezza critica. In un canale a debole pendenza con $h_0 = 1{,}26\,\mathrm{m}$ e $h_c = 0{,}61\,\mathrm{m}$, una corrente che a valle di una paratoia vale $0{,}25\,\mathrm{m}$ segue un profilo M3 e sale verso valle; raggiunta un'altezza prossima a $h_c$, non prosegue con un profilo M2, perché il profilo M2 scende verso valle. Il passaggio da corrente veloce a corrente lenta avviene con un risalto, che è un fenomeno bruscamente vario.
+Un profilo di moto gradualmente vario *non* attraversa l'altezza critica. In un canale a debole pendenza con $h_0 = 1{,}26\,\mathrm{m}$ e $h_c = 0{,}61\,\mathrm{m}$, una corrente che a valle di una paratoia ha altezza $0{,}25\,\mathrm{m}$ segue un profilo M3 e sale verso valle; raggiunta un'altezza prossima a $h_c$, non prosegue con un profilo M2, perché il profilo M2 scende verso valle. Il passaggio da corrente veloce a corrente lenta avviene con un risalto, che è un fenomeno bruscamente vario.
 :::
 
 ## Sezioni di controllo e direzione del tracciamento
@@ -145,15 +145,15 @@ Il profilo si calcola a partire da una sezione di controllo, che fornisce la con
 :::
 
 :::osservazione{#direzione-tracciamento titolo="Da valle per le correnti lente, da monte per le veloci"}
-La celerità delle piccole perturbazioni rispetto all'acqua vale $\sqrt{g\,h_m}$. In una corrente lenta risulta $v < \sqrt{g\,h_m}$, quindi una perturbazione risale la corrente e le condizioni di valle si fanno sentire a monte: il profilo di una corrente lenta si traccia **da valle verso monte**, partendo dalla sezione di controllo posta a valle. In una corrente veloce risulta $v > \sqrt{g\,h_m}$, quindi nessuna perturbazione risale la corrente: il profilo di una corrente veloce si traccia **da monte verso valle**, partendo dalla sezione di controllo posta a monte.
+La celerità delle piccole perturbazioni rispetto all'acqua vale $\sqrt{g\,h_m}$. In una corrente lenta risulta $v < \sqrt{g\,h_m}$, quindi una perturbazione risale la corrente e le condizioni imposte a valle determinano l'altezza nelle sezioni di monte. Il profilo di una corrente lenta si traccia perciò **da valle verso monte**, partendo dalla sezione di controllo posta a valle. In una corrente veloce risulta $v > \sqrt{g\,h_m}$, quindi nessuna perturbazione risale la corrente e l'altezza in una sezione dipende soltanto da ciò che accade a monte. Il profilo di una corrente veloce si traccia perciò **da monte verso valle**, partendo dalla sezione di controllo posta a monte.
 
-Da questa regola segue il procedimento per un canale lungo: si calcolano $h_0$ e $h_c$ in ogni tratto, si individuano le sezioni di controllo, si stabilisce in ciascun tratto se la corrente è lenta o veloce e si traccia ogni profilo nel verso che gli compete, fino a incontrare un altro profilo o un risalto.
+Da questa regola segue il procedimento per un canale lungo. Si calcolano $h_0$ e $h_c$ in ogni tratto, si individuano le sezioni di controllo, si stabilisce in ciascun tratto se la corrente è lenta o veloce e si traccia ogni profilo nel verso che gli compete, fino a incontrare un altro profilo o un risalto.
 :::
 
 :::esempio{titolo="Cambio di pendenza da debole a forte"}
 Un canale rettangolare largo $4\,\mathrm{m}$ porta $Q = 6\,\mathrm{m^3/s}$ con $k_s = 50\,\mathrm{m^{1/3}/s}$; il tratto di monte ha $i_1 = 0{,}0008$ e quello di valle $i_2 = 0{,}020$. Risulta $h_c = 0{,}612\,\mathrm{m}$, $i_c = 0{,}00660$, quindi $h_{01} = 1{,}26\,\mathrm{m}$ con $i_1 < i_c$ e $h_{02} = 0{,}426\,\mathrm{m}$ con $i_2 > i_c$.
 
-La corrente passa da lenta a veloce, perciò nella sezione di cambio di pendenza si stabilisce $h = h_c$, che è la sezione di controllo. A monte la corrente è lenta e il profilo si traccia da valle: partendo da $h_c$ si risale con un profilo M2 che tende a $h_{01}$. A valle la corrente è veloce e il profilo si traccia da monte: partendo da $h_c$ si scende con un profilo S2 che tende a $h_{02}$.
+La corrente passa da lenta a veloce, perciò nella sezione di cambio di pendenza si stabilisce $h = h_c$, che è la sezione di controllo. A monte la corrente è lenta e il profilo si traccia da valle, perciò partendo da $h_c$ si risale con un profilo M2 che tende a $h_{01}$. A valle la corrente è veloce e il profilo si traccia da monte, perciò partendo da $h_c$ si scende con un profilo S2 che tende a $h_{02}$.
 
 ::schema{solidi="0,1.60 6,1.30 12,0.40 12,0.00 0,1.20" tratteggi="0,2.06 6,1.76;6,1.76 12,0.86;0,2.55 6,2.25;6,1.62 12,0.72" linee="0.00,2.55 0.50,2.52 1.00,2.49 1.50,2.47 2.00,2.44 2.50,2.41 3.00,2.38 3.50,2.34 4.00,2.30 4.50,2.25 5.00,2.19 5.50,2.10 6.00,1.77;6.00,1.76 6.50,1.61 7.00,1.52 7.50,1.43 8.00,1.35 8.50,1.27 9.00,1.19 9.50,1.11 10.00,1.03 10.50,0.95 11.00,0.88 11.50,0.80 12.00,0.73" etichette="3.5,2.17,M2;7.3,1.63,S2;13.0,1.12,h_c;13.0,0.42,h_0;2.0,2.72,i_1 < i_c;10.6,1.98,i_2 > i_c" riferimento=0 titolo="Passaggio da debole a forte pendenza: la sezione di controllo è nel cambio di pendenza, con $h = h_c$"}
 :::
@@ -161,7 +161,7 @@ La corrente passa da lenta a veloce, perciò nella sezione di cambio di pendenza
 ## Il risalto idraulico
 
 :::definizione{#risalto titolo="Risalto idraulico"}
-Il **risalto idraulico** è il passaggio brusco da corrente veloce a corrente lenta che avviene in un tratto lungo pochi metri, con forte turbolenza, superficie ondulata e inglobamento d'aria. L'altezza d'acqua passa da un valore $h_1 < h_c$ a un valore $h_2 > h_c$, detti **altezze coniugate**.
+Il **risalto idraulico** è il passaggio brusco da corrente veloce a corrente lenta che avviene in un tratto lungo pochi metri, con forte turbolenza, superficie ondulata e inglobamento d'aria. L'altezza d'acqua passa da un valore $h_1 < h_c$ a un valore $h_2 > h_c$; le due altezze si dicono **coniugate**.
 
 Nel risalto le linee di corrente non sono parallele e la dissipazione è concentrata, perciò l'equazione del profilo non si applica. Il bilancio di energia contiene la perdita $\Delta E$, che è incognita; il bilancio di quantità di moto invece non la contiene, perché le uniche forze in gioco sono le spinte sulle sezioni estreme, il peso e la reazione delle pareti. Il risalto si studia quindi con l'equazione globale.
 
@@ -187,7 +187,7 @@ $$
 \quad\Longrightarrow\quad
 h^3 = \frac{Q^2}{g\,b^2} ,
 $$
-cioè il minimo della spinta totale cade in $h = h_c$. Ogni valore di $S$ maggiore del minimo è assunto da due altezze, una minore e una maggiore di $h_c$: sono le altezze coniugate.
+cioè il minimo della spinta totale cade in $h = h_c$. Ogni valore di $S$ maggiore del minimo è assunto da due altezze, una minore e una maggiore di $h_c$, e queste due altezze sono fra loro coniugate.
 
 ::grafico{f="19.62*x^2+25/x" xmin=0.15 xmax=2.2 ymin=0 ymax=130 punti="0.4,65.6,pieno;1.596,65.6,pieno;0.86,43.6,vuoto" segmenti="0.4,0,0.4,65.6;1.596,0,1.596,65.6;0.86,0,0.86,43.6" nomi="h,S" etichette="0.45,78,h₁;1.66,78,h₂;1.0,34,hc" titolo="Spinta totale $S(h)$ in $\mathrm{kN}$ per $Q = 10\,\mathrm{m^3/s}$ e $b = 4\,\mathrm{m}$: le due altezze coniugate hanno la stessa spinta e il minimo cade in $h_c$"}
 :::
@@ -213,7 +213,7 @@ poiché su una sezione rettangolare verticale con distribuzione idrostatica la s
 $$
 \rho\,Q\,(v_2 - v_1) = \frac{\gamma\,b\,h_1^2}{2} - \frac{\gamma\,b\,h_2^2}{2} ,
 $$
-cioè $S(h_1) = S(h_2)$: la spinta totale si conserva attraverso il risalto.
+cioè $S(h_1) = S(h_2)$, quindi la spinta totale si conserva attraverso il risalto.
 
 Si divide per $b$ e si introduce la portata per unità di larghezza $q = \dfrac{Q}{b}$, con $v = \dfrac{q}{h}$:
 $$
@@ -258,7 +258,7 @@ $$
 \Delta E = E_1 - E_2 = \frac{(h_2 - h_1)^3}{4\,h_1 h_2} .
 $$
 
-La formula dice che la perdita cresce con il cubo del salto di altezza, perciò i risalti con forte differenza fra le due altezze coniugate dissipano molta energia. È questa la ragione per cui il risalto si impiega al piede degli scarichi delle dighe. La potenza dissipata vale $P = \gamma\,Q\,\Delta E$.
+La perdita cresce con il cubo del salto di altezza, perciò i risalti con forte differenza fra le due altezze coniugate dissipano molta energia. È questa la ragione per cui il risalto si impiega al piede degli scarichi delle dighe. La potenza dissipata vale $P = \gamma\,Q\,\Delta E$.
 
 :::dimostrazione
 L'idea è calcolare la differenza delle energie specifiche e sostituirvi la relazione fra le altezze coniugate già dimostrata.
@@ -282,7 +282,7 @@ Le due altezze sono positive e $h_2 > h_1$, perciò $\Delta E > 0$ e il carico t
 ::::
 
 :::osservazione{#lunghezza-del-risalto titolo="Lunghezza del risalto"}
-La lunghezza del risalto non si ricava dalle equazioni di bilancio, perché dipende dalla struttura della turbolenza. Si valuta con formule ricavate da misure di laboratorio su canali rettangolari; la più usata in Italia è quella di Smetana,
+La lunghezza del risalto non si ricava dalle equazioni di bilancio, perché dipende dalla struttura della turbolenza. Si valuta con formule ricavate da misure di laboratorio su canali rettangolari, fra le quali quella di Smetana,
 $$
 L \simeq 6\,(h_2 - h_1) ,
 $$
@@ -320,7 +320,7 @@ La coniugata supera $h_0 = 1{,}45\,\mathrm{m}$, perciò il risalto è allontanat
 :::
 
 :::osservazione{#vasche-di-dissipazione titolo="Vasche di dissipazione"}
-Al piede di uno scarico la corrente arriva veloce e deve essere riportata a corrente lenta prima di immettersi nell'alveo naturale, per non erodere il fondo. La **vasca di dissipazione** è un tratto di canale rivestito, con fondo ribassato rispetto a quello di valle, lungo quanto basta a contenere il risalto. Il ribassamento aumenta l'altezza disponibile a valle e tiene il risalto dentro la vasca anche quando il livello dell'alveo di valle è minore di $h_2$; la lunghezza si prende pari a $L$ aumentata di un margine, e la soglia terminale aiuta a stabilizzare la posizione del risalto. Il dimensionamento completo appartiene alla progettazione delle opere idrauliche.
+Al piede di uno scarico la corrente arriva veloce e deve essere riportata a corrente lenta prima di immettersi nell'alveo naturale, per non erodere il fondo. La **vasca di dissipazione** è un tratto di canale rivestito, con fondo ribassato rispetto a quello di valle, lungo quanto basta a contenere il risalto. Il ribassamento aumenta l'altezza disponibile a valle e tiene il risalto dentro la vasca anche quando il livello dell'alveo di valle è minore di $h_2$; la lunghezza si prende pari a $L$ aumentata di un margine, e la soglia terminale stabilizza la posizione del risalto. Il dimensionamento completo appartiene alla progettazione delle opere idrauliche.
 
 ::schema{solidi="0,0.60 4,0.60 4,0 13,0 13,0.60 17,0.60 17,-0.60 0,-0.60" acqua="0,0.60 4,0.60 4,0 13,0 13,0.60 17,0.60 17,2.00 13,2.00 11.4,1.95 9.8,1.80 8.2,1.50 6.6,1.10 5.0,0.90 4,0.90 0,0.90" linee="0,0.90 5.0,0.90 6.6,1.10 8.2,1.50 9.8,1.80 11.4,1.95 13,2.00 17,2.00" etichette="2.2,1.20,corrente veloce;9.0,2.22,risalto;15.0,1.25,alveo di valle;13.45,0.28,d" riferimento=0 titolo="Vasca di dissipazione: il fondo ribassato di $d$ aumenta l'altezza disponibile e trattiene il risalto"}
 :::
@@ -348,7 +348,7 @@ Nel canale dell'esempio precedente ($b = 4\,\mathrm{m}$, $Q = 8\,\mathrm{m^3/s}$
 
 | $h$ ($\mathrm{m}$) | $v$ ($\mathrm{m/s}$) | $R$ ($\mathrm{m}$) | $E$ ($\mathrm{m}$) | $J$ | $\bar{J}$ | $\Delta x$ ($\mathrm{m}$) |
 |---|---|---|---|---|---|---|
-| 0,300 | 6,667 | 0,2609 | 2,5653 | 0,08814 | — | — |
+| 0,300 | 6,667 | 0,2609 | 2,5653 | 0,08814 |  |  |
 | 0,305 | 6,557 | 0,2646 | 2,4966 | 0,08366 | 0,08590 | 0,807 |
 | 0,310 | 6,452 | 0,2684 | 2,4315 | 0,07948 | 0,08157 | 0,806 |
 
