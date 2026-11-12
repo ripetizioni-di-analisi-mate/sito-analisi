@@ -3,7 +3,11 @@ import type { Lingua } from '../i18n';
 interface Props { lingua?: Lingua }
 const { lingua = 'it' } = Astro.props;
 const en = lingua === 'en';
-const testi = en ? {
+const testi = lingua === 'es' ? {
+  etichetta: 'Modo concentración', attiva: 'Modo concentración activo',
+  descrizione: 'Oculta el índice lateral y la barra de ofertas. Puedes seguir usando la navegación y el asistente Pi.',
+  acceso: 'Modo concentración activo. Puedes abrir el índice desde el menú.', spento: 'Vista completa restaurada.',
+} : en ? {
   etichetta: 'Focus mode', attiva: 'Focus mode active',
   descrizione: 'Hide the side index and promotional bar while studying. Navigation and Pi remain available.',
   acceso: 'Focus mode active. The index is available from the menu button.', spento: 'Standard view restored.',

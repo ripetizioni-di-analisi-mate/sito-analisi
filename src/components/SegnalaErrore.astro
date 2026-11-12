@@ -5,7 +5,11 @@
 import { type Lingua } from '../i18n';
 interface Props { lingua: Lingua }
 const en = Astro.props.lingua === 'en';
-const s = en ? {
+const s = Astro.props.lingua === 'es' ? {
+  apri: 'Avisar de un error en esta página', titolo: 'Avisar de un error', chiudi: 'Cerrar',
+  dove: 'Dónde', etichetta: '¿Qué error has encontrado?', segnaposto: 'Por ejemplo, en el ejercicio 2 debería aparecer 3x en la segunda línea.',
+  email: 'Correo electrónico (opcional, para recibir una respuesta)', invia: 'Enviar', grazie: 'Gracias, tu aviso ha llegado a Carmine.', breve: 'Escribe unas palabras sobre el error.', rete: 'Error de red. Inténtalo de nuevo.',
+} : en ? {
   apri: 'Report a mistake on this page', titolo: 'Report a mistake', chiudi: 'Close',
   dove: 'Where', etichetta: 'What is wrong?', segnaposto: 'For example: in exercise 2 the second line should be 3x, not 2x.',
   email: 'Your email (optional, for a reply)', invia: 'Send', grazie: 'Thank you: the report has reached Carmine.', breve: 'Write at least a few words.', rete: 'Network error: please try again.',

@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import AccessoMateria from './AccessoMateria.astro';
+import SchedaArgomento from './SchedaArgomento.astro';
+import SchedaRipasso from './SchedaRipasso.astro';
+import { FREE_WORKED_EXAMPLES, highSchoolQuestionCount } from '../data/stem-usa/high-school/index.mjs';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { usaProduct } from '../data/stem-usa/pricing';
+import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { T, sezioniL } from '../i18n';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { calculusHtml, universityStudies } from '../lib/stem-usa-practice';
+import { usContentCounts, usTimedTopics } from '../lib/stem-usa-banks';
+import { url } from '../lib/url';
+
+const { course } = Astro.props;
+const { slug, title, description, lessons, preparation, sources } = course;
+const price = usaProduct(slug)!.prezzo;
+const t = T('en');
+const study = universityStudies.get(slug);
+const counts = usContentCounts(slug, lessons.length);
+const highSchool = slug.startsWith('hs-');
+const above = highSchool ? t.programma : t.argomentiEsame;
+const labels = nomiAllenamento(materiaUsa(slug), 'en');
+const sectionLink = (topic: string, section: string) => linkArgomentoUsa(slug, topic, section);
+const simulation = url(courseUrl(slug) + '/simulazione');
+const review = sectionLink(RIPASSO, 'domande');
+---
+<Base lingua="en" usa titolo={above} descrizione={description} materia={slug}
+  seo={{ titolo: title + ' · Ripetizioni di Analisi' }}>
+  <p class="sopratitolo">{above}</p>
+  <h1>{title}</h1>
+  <p class="sommario">{description}</p>
+  <AccessoMateria materia={slug} titolo={title} prezzo={price} lingua="en"
+    anteprima={sectionLink('unit-1', 'teoria')} sblocca={url(courseUrl(slug) + '/sblocca')}
+    testo={'Read the beginning of each topic, open the first ' + FREE_WORKED_EXAMPLES + ' worked examples and try one timed question per topic, without an account.'} />
+  <ol class="griglia-argomenti" data-us-topic-list data-quick-review={study ? simulation + '#course-practice' : undefined}>
+    {lessons.map((lesson, index) => {
+      const topic = usTimedTopics[slug][index];
+      const unit = study?.practice[topic];
+      const links = sezioniL('en').map(({ slug: section, titolo }) => ({
+        href: sectionLink(topic, section),
+        titolo,
+        conteggio: section === 'esercizi-svolti' ? (unit ? unit.worked.length + 1 : lesson.worked.length)
+          : section === 'esercizi' ? (unit ? unit.exercises.length : lesson.exercises.length) : undefined,
+      }));
+      links.push({ href: sectionLink(topic, 'domande'), titolo: 'Timed questions', conteggio: study?.timed[topic].length ?? highSchoolQuestionCount(lesson) });
+      return <SchedaArgomento titolo={lesson.title} sezioni={links} preparazione={t.inPreparazione}>
+        <Fragment slot="sommario" set:html={calculusHtml(lesson.theory.split(/(?<=[.!?])\s/)[0])} />
+      </SchedaArgomento>;
+    })}
+    <SchedaRipasso materia={slug} titolo={labels.ripasso}
+      domande={{ href: review, titolo: 'Review questions', conteggio: counts.timed }}
+      simulazione={{ href: simulation, titolo: labels.simulazione }}
+      personale={{ href: sectionLink(RIPASSO_OGGI, 'domande'), titolo: 'Today’s review' }} personaleRiservato>
+      Review questions on all the topics of {title}, a timed {highSchool ? 'class test' : 'exam'} with exercises from different topics, and review of missed questions with an account and full access.
+    </SchedaRipasso>
+  </ol>
+  <p class="nota">{lessons.length} topics · {counts.worked} worked examples · {counts.exercises} practice exercises · {counts.timed} timed questions</p>
+  <details class="sommario-pagina">
+    <summary>{highSchool ? 'Course references' : 'University syllabi'}</summary>
+    <div class="testo-studio">
+      <p><strong>Preparation</strong> {preparation}</p>
+      <ul>{sources.map(source => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
+    </div>
+  </details>
+</Base>
+<style>
+  .sommario-pagina .testo-studio { padding: 0 .9rem .6rem; }
+</style>
+<script>
+  function openLegacyLink() {
+    const list = document.querySelector<HTMLElement>('[data-us-topic-list]');
+    if (location.hash === '#course-practice' && list?.dataset.quickReview) {
+      location.replace(list.dataset.quickReview);
+      return;
+    }
+    const match = location.hash.match(/^#(unit|preview-unit|worked|exercises)-([1-9]\d*)$/);
+    if (!match) return;
+    const [, kind, number] = match;
+    const index = kind === 'worked' ? 1 : kind === 'exercises' ? 2 : 0;
+    const topic = list?.children[Number(number) - 1];
+    const link = topic?.querySelectorAll<HTMLAnchorElement>('nav a')[index];
+    if (link) location.replace(link.href);
+  }
+  openLegacyLink();
+  addEventListener('hashchange', openLegacyLink);
+</script>

@@ -6,7 +6,7 @@ export const FACOLTA = [
     titoloDe: 'Ingenieurwissenschaften',
     titoloEs: 'Ingeniería',
     titoloFr: 'Ingénierie',
-    materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'statistica', 'precorso'],
+    materie: ['analisi-1', 'analisi-2', 'algebra-lineare', 'fisica-1', 'fisica-2', 'statica', 'meccanica-razionale', 'scienza-delle-costruzioni', 'idraulica', 'statistica', 'precorso'],
   },
   {
     titolo: 'Economia',
@@ -14,7 +14,7 @@ export const FACOLTA = [
     titoloDe: 'Wirtschaftswissenschaften',
     titoloEs: 'Economía',
     titoloFr: 'Économie',
-    materie: ['matematica-generale', 'algebra-lineare', 'statistica', 'precorso'],
+    materie: ['matematica-generale', 'matematica-finanziaria', 'algebra-lineare', 'statistica', 'precorso'],
   },
   {
     titolo: 'Matematica e Fisica',

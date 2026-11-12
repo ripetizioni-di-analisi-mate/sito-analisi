@@ -1,0 +1,39 @@
+---
+import Simulazione from '../../../viste/Simulazione.astro';
+import UsPractice from '../../../components/UsPractice.astro';
+import { universityCourses, hasUsStudyPages, courseUrl, optionsFor } from '../../../data/stem-usa/catalog.mjs';
+import { linkArgomentoUsa } from '../../../data/stem-usa/catalog-view';
+import { url } from '../../../lib/url';
+import '../../../styles/stem-usa.css';
+
+export function getStaticPaths() {
+  return universityCourses.filter(course => hasUsStudyPages(course.slug)).map(course => ({
+    params: { course: course.slug }, props: { course },
+  }));
+}
+const { course } = Astro.props;
+const path = courseUrl(course.slug);
+const questions = course.lessons.map((lesson, index) => ({
+  title: lesson.title, prompt: lesson.prompt, choices: optionsFor(lesson, index),
+  correct: index % (lesson.distractors.length + 1), explanation: lesson.explanation,
+  href: linkArgomentoUsa(course.slug, 'unit-' + (index + 1), 'teoria'),
+}));
+---
+<Simulazione lingua="en" materia={course.slug} usa>
+  <div data-usa-content>
+    <p class="azioni">
+      <a class="bottone-secondario" href={url(path + '/practice-exam')}>Sample exam</a>
+      {course.slug === 'calculus-1' && <a class="bottone-secondario" href={url(path + '/purdue')}>Purdue exam practice</a>}
+    </p>
+    <details class="sommario-pagina" id="course-practice">
+      <summary>Short review quiz</summary>
+      <div class="stem-usa"><UsPractice questions={questions} minutes={questions.length * 2} id="short-review-quiz" /></div>
+    </details>
+  </div>
+</Simulazione>
+<script>
+  if (location.hash === '#course-practice') {
+    const review = document.querySelector<HTMLDetailsElement>('details#course-practice');
+    if (review) review.open = true;
+  }
+</script>

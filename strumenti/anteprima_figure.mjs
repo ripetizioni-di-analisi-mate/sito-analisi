@@ -14,11 +14,11 @@ const attr = (s) => { const o = {}; for (const m of s.matchAll(/(\w+)=(?:"([^"]*
 let html = '', n = 0, errori = 0;
 for (const f of files) {
   const t = fs.readFileSync(f, 'utf8');
-  for (const m of t.matchAll(/^(?:\s*-\s+(?:[A-E]\)\s*)?)?::(grafico|venn|figura|struttura)\{(.*)\}\s*$/gm)) {
+  for (const m of t.matchAll(/^(?:\s*-\s+(?:[A-E]\)\s*)?)?::(grafico|venn|figura|struttura|schema)\{(.*)\}\s*$/gm)) {
     n++;
     try {
       const a = attr(m[2]);
-      const svg = m[1] === 'grafico' ? grafico(a) : m[1] === 'figura' ? figura(a) : m[1] === 'struttura' ? struttura(a) : venn(a);
+      const svg = m[1] === 'grafico' ? grafico(a) : m[1] === 'figura' ? figura(a) : m[1] === 'struttura' || m[1] === 'schema' ? struttura(a) : venn(a);
       if (m[1] === 'grafico' && (a.f || a.curve) && !/class="curva[^"]*" d="M/.test(svg)) { errori++; console.log(`ATTENZIONE ${f}: curva vuota (fuori dal riquadro o espressione non valida): ${m[0]}`); }
       html += `<div class="cella"><p>${path.basename(path.dirname(f))}/${path.basename(f)}</p>${svg}</div>`;
     } catch (e) { errori++; console.log(`ERRORE ${f}: ${e.message}: ${m[0]}`); }

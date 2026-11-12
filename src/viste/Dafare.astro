@@ -14,7 +14,7 @@ interface Props { lingua: Lingua; materia: string; argomento: string; n: string 
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
 const id = `${materia}/${argomento}/${n}`;
-const fratelli = perArgomento(await getCollection('dafare'), materia, argomento);
+const fratelli = perArgomento(await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare'), materia, argomento);
 const risultato = risultatoDi(fratelli.find((x) => x.id === id));
 const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'dafare', id);

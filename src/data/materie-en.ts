@@ -1,5 +1,21 @@
 // Nomi inglesi di materie e argomenti. Gli slug (gli indirizzi) restano quelli italiani.
 export const MATERIE_EN: Record<string, { titolo: string; breve: string; descrizione: string; argomenti: Record<string, { titolo: string; breve: string }> }> = {
+  'matematica-finanziaria': {
+    titolo: 'Financial mathematics', breve: 'Financial mathematics',
+    descrizione: 'A dedicated university course in cash-flow valuation, annuities, amortization, NPV and IRR, bonds, term structures, duration, convexity and immunization. Study materials are in Italian.',
+    argomenti: {
+      'regimi-e-tassi': { titolo: 'Financial regimes and equivalent rates', breve: 'Regimes and rates' },
+      'equivalenza-finanziaria': { titolo: 'Financial equivalence and cash-flow valuation', breve: 'Financial equivalence' },
+      'rendite-costanti': { titolo: 'Level, deferred and perpetual annuities', breve: 'Level annuities' },
+      'rendite-variabili': { titolo: 'Variable annuities, continuous cash flows and savings plans', breve: 'Variable annuities' },
+      'ammortamenti': { titolo: 'Loan amortization and outstanding balances', breve: 'Amortization' },
+      'valutazione-investimenti': { titolo: 'NPV, IRR and project comparison', breve: 'NPV and IRR' },
+      'obbligazioni': { titolo: 'Bonds, prices and yields', breve: 'Bonds' },
+      'struttura-a-termine': { titolo: 'Term structure, forward rates and arbitrage', breve: 'Term structure' },
+      'duration-convexity': { titolo: 'Duration, convexity and price sensitivity', breve: 'Duration and convexity' },
+      'immunizzazione': { titolo: 'Financial immunization and interest-rate risk', breve: 'Immunization' },
+    },
+  },
   'biologia-semestre-filtro': {
     titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
     descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and 315 explained questions. Study materials are in Italian.',
@@ -224,6 +240,24 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'linea-elastica': { titolo: 'Elastic curves, slopes and deflections', breve: 'Elastic curves' },
       'iperstatiche': { titolo: 'Statically indeterminate structures, virtual work and the force method', breve: 'Indeterminate structures' },
       'stabilita': { titolo: 'Elastic stability and Euler buckling', breve: 'Elastic stability' },
+    },
+  },
+  'idraulica': {
+    titolo: 'Hydraulics',
+    breve: 'Hydraulics',
+    descrizione: 'Hydraulics for engineering students: fluid statics and hydrostatic forces, the continuity equation, Bernoulli’s theorem, the momentum equation, head losses, long pipelines and pumps, pipe networks, orifices and weirs, open-channel flow, gradually varied flow profiles and the hydraulic jump. Learning materials are currently in Italian.',
+    argomenti: {
+      'idrostatica': { titolo: 'Fluid properties and fluid statics', breve: 'Fluid statics' },
+      'spinte-idrostatiche': { titolo: 'Hydrostatic forces on plane and curved surfaces and buoyancy', breve: 'Hydrostatic forces' },
+      'cinematica-dei-fluidi': { titolo: 'Fluid kinematics, discharge and the continuity equation', breve: 'Continuity equation' },
+      'teorema-di-bernoulli': { titolo: 'Bernoulli’s theorem and total head', breve: 'Bernoulli’s theorem' },
+      'equazione-globale': { titolo: 'The momentum equation and forces exerted by flowing water', breve: 'Momentum equation' },
+      'perdite-di-carico': { titolo: 'Major and minor head losses', breve: 'Head losses' },
+      'lunghe-condotte': { titolo: 'Long pipelines and pumping systems', breve: 'Pipelines and pumps' },
+      'sistemi-di-condotte': { titolo: 'Pipes in series and in parallel and pipe networks', breve: 'Pipe networks' },
+      'foronomia': { titolo: 'Flow through orifices and over weirs', breve: 'Orifices and weirs' },
+      'correnti-a-pelo-libero': { titolo: 'Open-channel flow: uniform flow and specific energy', breve: 'Open-channel flow' },
+      'profili-e-risalto': { titolo: 'Gradually varied flow profiles and the hydraulic jump', breve: 'Profiles and jump' },
     },
   },
   'statistica': {

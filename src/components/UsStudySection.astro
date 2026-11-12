@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import ElencoSchedeSvolte from './ElencoSchedeSvolte.astro';
+import FineAnteprimaUsa from './FineAnteprimaUsa.astro';
+import IndiceTeoria from './IndiceTeoria.astro';
+import VerificaRisposta from './VerificaRisposta.astro';
+import SoluzioneEsercizioUsa from './SoluzioneEsercizioUsa.astro';
+import { FREE_THEORY_SECTIONS, FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../data/stem-usa/high-school/index.mjs';
+import { linkArgomentoUsa } from '../data/stem-usa/catalog-view';
+import { calculusAnswer, calculusHtml } from '../lib/stem-usa-practice';
+import type { UsStudyTopic } from '../lib/stem-usa-study-pages';
+import { T } from '../i18n';
+
+interface Props { slug: string; lesson: UsStudyTopic; topic: string; section: 'teoria' | 'esercizi-svolti' | 'esercizi' }
+const { slug, lesson, topic, section } = Astro.props;
+const t = T('en');
+const label = t.sezioni[section];
+const href = (type: string) => linkArgomentoUsa(slug, topic, type);
+const sections = lesson.theory.map((entry, index) => ({ ...entry, riservata: index >= FREE_THEORY_SECTIONS }));
+const sheets = lesson.worked.map(({ title }, index) => ({
+  numero: index + 1, titolo: title, href: href('esercizi-svolti/' + (index + 1)),
+  accesso: index < FREE_WORKED_EXAMPLES ? 'Free worked example' : undefined,
+}));
+---
+<Base lingua="en" usa titolo={lesson.title + ' · ' + label} descrizione={lesson.summary} materia={slug} argomento={topic} sezione={section}
+  percorso={[{ titolo: lesson.title, href: href('teoria') }, { titolo: label }]}>
+  <p class="sopratitolo">{label}</p>
+  <h1>{lesson.title}</h1>
+  {section === 'teoria' && <>
+    <p class="sommario">{lesson.summary}</p>
+    <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sections} />
+    <div class="testo-studio">
+      {sections.map(({ slug: id, text, explanation, proof, riservata }) => (
+        <Fragment>
+          <h2 id={id} data-usa-content={riservata || undefined}>{text}</h2>
+          <div class:list={['blocco', proof ? 'blocco-teorema' : 'blocco-definizione']} data-usa-content={riservata || undefined}>
+            <p set:html={calculusHtml(explanation)} />
+            {proof && <details class="sommario-pagina"><summary>Proof</summary><p set:html={calculusHtml(proof)} /></details>}
+          </div>
+        </Fragment>
+      ))}
+    </div>
+    <FineAnteprimaUsa materia={slug} titolo="Continue with the full lesson">
+      <ol class="velo-elenco" start={FREE_THEORY_SECTIONS + 1}>
+        {sections.slice(FREE_THEORY_SECTIONS).map(({ text }) => <li>{text}</li>)}
+      </ol>
+      <p><a href={href('esercizi-svolti')}>Open the free worked examples →</a></p>
+    </FineAnteprimaUsa>
+    <h2>{t.svoltiSuArgomento}</h2>
+    <ElencoSchedeSvolte schede={sheets} />
+    <p class="vai-esercizi"><a href={href('esercizi')}>{t.dafareSuArgomento(lesson.exercises.length)} →</a></p>
+  </>}
+  {section === 'esercizi-svolti' && <>
+    <p class="sommario">{t.svoltiSommario}</p>
+    <ElencoSchedeSvolte schede={sheets} />
+  </>}
+  {section === 'esercizi' && <>
+    <p class="sommario">{t.dafareSommario}</p>
+    {lesson.exercises.map(({ number, title, prompt, explanation, answer, primitive }) => (
+      <section class="traccia" id={'esercizio-' + number}>
+        <h2><a href={href('esercizi/' + number)}><span class="numero">{number}.</span> {title}</a></h2>
+        <div class="testo-studio">
+          <p set:html={calculusHtml(prompt)} />
+          <SoluzioneEsercizioUsa soluzione={explanation} riservata={number !== FREE_PRACTICE_EXERCISE} />
+        </div>
+        <div data-usa-content={number !== FREE_PRACTICE_EXERCISE || undefined}>
+          <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + number}
+            tipo={answer ? calculusAnswer(answer, primitive).tipo : undefined} primitiva={primitive} mostraIndizio={false} />
+        </div>
+      </section>
+    ))}
+    <section class="ingresso-domande">
+      <div class="ingresso-testa"><h2>Timed questions</h2><span>{lesson.title}</span></div>
+      <p>One multiple-choice question at a time, with an explanation after each answer.</p>
+      <p class="ingresso-azioni"><a class="bottone-primario" href={href('domande')}>Start</a></p>
+    </section>
+  </>}
+</Base>

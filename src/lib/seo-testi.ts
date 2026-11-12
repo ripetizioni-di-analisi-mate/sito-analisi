@@ -209,4 +209,17 @@ const EN: typeof IT = {
     return taglia(testa + (testo.length >= 60 ? testo : tipo === 'definizione' ? 'definition and the exercises where it is used.' : 'statement and the exercises where it is applied.'));
   },
 };
-export const SEO = (l: Lingua) => (l === 'en' ? EN : IT);
+const ES: typeof IT = {
+  ...IT,
+  teoria: (a, m) => `${a} · Teoría | ${m}`,
+  svoltiLista: (a, m) => `${a} · Ejercicios resueltos | ${m}`,
+  svoltiListaDescr: (a, m, n) => `${n} fichas de ejercicios resueltos sobre ${a} en ${m}.`,
+  scheda: (s, m) => `${s} · Ejercicios resueltos | ${m}`,
+  schedaDescr: (s, a, m) => `${s}. Ejercicios resueltos paso a paso sobre ${a} en ${m}.`,
+  dafareLista: (a, m) => `${a} · Ejercicios para practicar | ${m}`,
+  dafareListaDescr: (a, m, n) => `${n} ejercicios para practicar ${a} en ${m}.`,
+  dafare: (s, m) => `${s} · Ejercicio | ${m}`,
+  dafareDescr: (s, a, m, traccia) => traccia || `${s}. Ejercicio sobre ${a} en ${m}.`,
+  livelloDi: () => 'Universidad',
+};
+export const SEO = (l: Lingua) => l === 'es' ? ES : l === 'en' ? EN : IT;

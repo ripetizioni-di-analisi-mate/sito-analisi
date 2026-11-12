@@ -11,6 +11,7 @@
 //   ::venn{zone="ab" titolo="A ∩ B"}   diagrammi di Venn (attributi in venn.mjs)
 //   ::figura{tipo="serie" celle="…"}   figure del ragionamento figurale: serie, matrici, opzioni, cubi (attributi in figura.mjs)
 //   ::struttura{nodi="A,0,0;B,6,0" aste="A-B" vincoli="A,cerniera;B,carrello"}   schemi della Statica: travi, vincoli,
+//   ::schema{acqua="…" condotte="A-B,0.4" pelo="0,6,3"}   stesso generatore, per gli schemi dell'Idraulica
 //       carichi, quote, sezioni e diagrammi delle sollecitazioni (attributi in struttura.mjs)
 //   ::cursore{tipo="epsilon-delta" titolo="…"}   grafico con un cursore che ne cambia un parametro (cursore.mjs):
 //       tipi epsilon-delta (ε nella definizione di limite), secante (h nel rapporto incrementale),
@@ -91,10 +92,10 @@ export default function remarkBlocchi() {
     }
     chiudi();
     visit(tree, (node) => {
-      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura')) {
+      if (node.type === 'leafDirective' && (node.name === 'grafico' || node.name === 'venn' || node.name === 'cursore' || node.name === 'figura' || node.name === 'struttura' || node.name === 'schema')) {
         node.type = 'html';
         const attr = { ...(node.attributes || {}), inglese: E === EN };
-        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
+        node.value = node.name === 'grafico' ? grafico(attr) : node.name === 'struttura' || node.name === 'schema' ? struttura(node.attributes || {}) : node.name === 'cursore' ? cursore(attr) : node.name === 'figura' ? figura(node.attributes || {}) : venn(node.attributes || {});
         return;
       }
       if (node.type !== 'containerDirective') return;
