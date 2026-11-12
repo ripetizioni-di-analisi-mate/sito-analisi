@@ -61,6 +61,7 @@ const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : un
 const versioneIt = senzaLingua(Astro.url.pathname);
 const de = lingua === 'de';
 const es = lingua === 'es';
+const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
 const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
   ...l,
@@ -321,8 +322,8 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           </div>
         )}
         {(percorso.length > 0 || m) && (
-          <nav class="percorso" aria-label={es ? 'Ruta de navegación' : de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
-            {livelloSopra && <a class="indietro" href={livelloSopra} title={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
+          <nav class="percorso" aria-label={fr ? 'Fil d’Ariane' : es ? 'Ruta de navegación' : de ? 'Navigationspfad' : en ? 'Breadcrumb' : 'Percorso'}>
+            {livelloSopra && <a class="indietro" href={livelloSopra} title={fr ? 'Retour' : es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'} aria-label={fr ? 'Retour' : es ? 'Volver' : de ? 'Zurück' : en ? 'Back' : 'Torna indietro'}><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 10h-11M9 4.5L3.5 10 9 15.5"/></svg></a>}
             <ol>
               <li><a href={homeCurriculum}>{t.materie}</a></li>
               {m && <li aria-current={percorso.length === 0 ? 'page' : undefined}>{percorso.length > 0 ? <a href={hrefMateria}>{m.titolo}</a> : m.titolo}</li>}
@@ -353,12 +354,12 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   </div>
 
   <footer class="pie">
-    <nav class="pie-link" aria-label={es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
+    <nav class="pie-link" aria-label={fr ? 'Informations' : es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
       <a href={link(lingua, '/chi-sono')}>{t.chiSono}</a>
       {lingua === 'it' && <a href="/ripetizioni-analisi">Ripetizioni online</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
-      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
+      {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{fr ? ' (en italien)' : es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
       {cambioLingua.map(({ codice, nome, href }) => <a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a>)}
     </nav>
     <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />
@@ -411,6 +412,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   </style>
   <script>
     import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
+    import { LINGUE_CATALOGO } from '../data/codici-lingua.mjs';
     import { medagliaLega } from '../scripts/medaglia-lega';
     import { caricaPercorsoStudio, leggiCatalogoStudio, prossimaAttivita } from '../lib/percorso-studio.mjs';
     // Adatta le formule in display alla larghezza dello schermo riducendo il corpo,
@@ -448,7 +450,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     const bl = document.querySelector<HTMLButtonElement>('.bottone-livello');
     const pl = document.getElementById('pannello-livello');
     const inglese = document.documentElement.lang === 'en';
-    const linguaCatalogo = ['de', 'es'].includes(document.documentElement.lang);
+    const linguaCatalogo = LINGUE_CATALOGO.some((l) => l === document.documentElement.lang);
     const num = (x: number) => x.toLocaleString(inglese ? 'en-US' : 'it-IT');
     const XP = inglese ? 'XP' : 'EXP';
     function mostraLivello(st: Stato) {

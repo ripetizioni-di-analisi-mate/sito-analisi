@@ -2,7 +2,7 @@
 
 Corso autonomo per Università > Economia, con URL e accesso `matematica-finanziaria`.
 
-Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 320 quiz con spiegazione. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese, tedesco e spagnolo.
+Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 320 quiz con spiegazione. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese, tedesco, spagnolo e francese.
 
 ## Controlli
 

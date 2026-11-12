@@ -5,6 +5,7 @@ import {
 } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
+import { ARGOMENTI_FR, MATERIE_FR } from '../src/data/materie-fr.ts';
 import { ARGOMENTI_ES, MATERIE_ES } from '../src/data/materie-es.ts';
 import { courses } from '../src/data/stem-usa/catalog.mjs';
 import { entraInLega, riassuntoLega, fotografiaLega } from './sfide.mjs';
@@ -13,45 +14,47 @@ import { accodaSorpassi } from './avvisi-lega.mjs';
 const SESSIONE_PAUSA = 15 * 60 * 1000; // dopo 15 minuti senza attività la sessione si considera chiusa
 const materieUsa = new Map(courses.map(course => [course.slug, course]));
 // I testi (titoli, obiettivi, traguardi) si compongono nella lingua della pagina che li richiede.
-const titoloArgomento = (materia, argomento, l = 'it') => (argomento === RIPASSO && (l === 'es' ? 'Práctica de examen' : l === 'en' ? 'Exam practice' : 'Prove d\'esame'))
-  || (argomento === RIPASSO_OGGI && (l === 'es' ? 'Repaso de hoy' : l === 'en' ? 'Today\'s review' : 'Ripasso di oggi'))
+const titoloArgomento = (materia, argomento, l = 'it') => (argomento === RIPASSO && (l === 'fr' ? 'Entraînement à l’examen' : l === 'es' ? 'Práctica de examen' : l === 'en' ? 'Exam practice' : 'Prove d\'esame'))
+  || (argomento === RIPASSO_OGGI && (l === 'fr' ? 'Révision du jour' : l === 'es' ? 'Repaso de hoy' : l === 'en' ? 'Today\'s review' : 'Ripasso di oggi'))
   || (/^unit-\d+$/.test(argomento) && materieUsa.get(materia)?.lessons[Number(argomento.slice(5)) - 1]?.title)
+  || (l === 'fr' && (ARGOMENTI_FR[`${materia}/${argomento}`] || ARGOMENTI_FR[argomento]))
   || (l === 'es' && (ARGOMENTI_ES[`${materia}/${argomento}`] || ARGOMENTI_ES[argomento]))
   || (l === 'en' && MATERIE_EN[materia]?.argomenti[argomento]?.titolo)
   || MATERIE.find((m) => m.slug === materia)?.argomenti.find((a) => a.slug === argomento)?.titolo || argomento;
-const titoloMateria = (materia, l = 'it') => (l === 'es' && MATERIE_ES[materia]?.[0]) || (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materieUsa.get(materia)?.title || materia;
+const titoloMateria = (materia, l = 'it') => (l === 'fr' && MATERIE_FR[materia]?.[0]) || (l === 'es' && MATERIE_ES[materia]?.[0]) || (l === 'en' && MATERIE_EN[materia]?.titolo) || MATERIE.find((m) => m.slug === materia)?.titolo || materieUsa.get(materia)?.title || materia;
 function testoObiettivo(o, l = 'it') {
   const n = OBIETTIVI[o.codice]?.n;
-  const en = l === 'en', es = l === 'es';
+  const en = l === 'en', es = l === 'es', fr = l === 'fr';
   switch (o.codice) {
-    case 'corrette-arg': return es ? `${n} respuestas correctas sobre ${titoloArgomento(o.materia, o.argomento, l)}` : en ? `${n} correct answers on ${titoloArgomento(o.materia, o.argomento, l)}` : `${n} risposte corrette su ${titoloArgomento(o.materia, o.argomento, l)}`;
-    case 'corrette-tot': return es ? `${n} respuestas correctas` : en ? `${n} correct answers` : `${n} risposte corrette`;
-    case 'giorni': return es ? `Estudia en ${n} días distintos` : en ? `Study on ${n} different days` : `Studia in ${n} giorni diversi`;
-    case 'ore': return es ? '3 horas de estudio activo' : en ? '3 hours of active study' : '3 ore di studio attivo';
-    case 'argomenti': return es ? `Responde preguntas sobre ${n} temas distintos` : en ? `Questions on ${n} different topics` : `Domande su ${n} argomenti diversi`;
-    case 'veloci': return es ? `${n} respuestas correctas en el primer minuto` : en ? `${n} correct answers within the first minute` : `${n} risposte corrette nel primo minuto`;
+    case 'corrette-arg': return fr ? `${n} bonnes réponses sur « ${titoloArgomento(o.materia, o.argomento, l)} »` : es ? `${n} respuestas correctas sobre ${titoloArgomento(o.materia, o.argomento, l)}` : en ? `${n} correct answers on ${titoloArgomento(o.materia, o.argomento, l)}` : `${n} risposte corrette su ${titoloArgomento(o.materia, o.argomento, l)}`;
+    case 'corrette-tot': return fr ? `${n} bonnes réponses` : es ? `${n} respuestas correctas` : en ? `${n} correct answers` : `${n} risposte corrette`;
+    case 'giorni': return fr ? `Travaille ${n} jours différents` : es ? `Estudia en ${n} días distintos` : en ? `Study on ${n} different days` : `Studia in ${n} giorni diversi`;
+    case 'ore': return fr ? '3 heures de travail actif' : es ? '3 horas de estudio activo' : en ? '3 hours of active study' : '3 ore di studio attivo';
+    case 'argomenti': return fr ? `Réponds à des questions sur ${n} chapitres différents` : es ? `Responde preguntas sobre ${n} temas distintos` : en ? `Questions on ${n} different topics` : `Domande su ${n} argomenti diversi`;
+    case 'veloci': return fr ? `${n} bonnes réponses en moins d’une minute` : es ? `${n} respuestas correctas en el primer minuto` : en ? `${n} correct answers within the first minute` : `${n} risposte corrette nel primo minuto`;
     default: return o.codice;
   }
 }
 // Nome di un traguardo o di un obiettivo premiato, dal suo codice.
 function nomePremio(ar, email, codice, l = 'it') {
   const fisso = TRAGUARDI_FISSI.find((t) => t.codice === codice);
-  if (fisso) return l === 'es' ? fisso.nomeEs : l === 'en' ? fisso.nomeEn : fisso.nome;
+  if (fisso) return l === 'fr' ? fisso.nomeFr : l === 'es' ? fisso.nomeEs : l === 'en' ? fisso.nomeEn : fisso.nome;
   let m = codice.match(/^materia-(.+)$/);
-  if (m) return l === 'es' ? `Has practicado todos los temas de ${titoloMateria(m[1], l)}` : l === 'en' ? `All topics of ${titoloMateria(m[1], l)} tried` : `Tutti gli argomenti di ${titoloMateria(m[1], l)} provati`;
+  if (m) return l === 'fr' ? `Tous les chapitres travaillés dans « ${titoloMateria(m[1], l)} »` : l === 'es' ? `Has practicado todos los temas de ${titoloMateria(m[1], l)}` : l === 'en' ? `All topics of ${titoloMateria(m[1], l)} tried` : `Tutti gli argomenti di ${titoloMateria(m[1], l)} provati`;
   m = codice.match(/^ora-\d+-(\d+)$/);
   if (m) {
     const n = Number(m[1]);
+    if (l === 'fr') return n === 1 ? 'Une heure de travail d’affilée' : `${n} heures de travail d’affilée`;
     if (l === 'es') return n === 1 ? 'Una hora seguida de estudio' : `${n} horas seguidas de estudio`;
     if (l === 'en') return n === 1 ? 'One hour of study in a row' : `${n} hours of study in a row`;
     return n === 1 ? "Un'ora di studio di fila" : `${n} ore di studio di fila`;
   }
   m = codice.match(/^livello-(\d+)$/);
-  if (m) return l === 'es' ? `Nivel ${m[1]}` : l === 'en' ? `Level ${m[1]}` : `Livello ${m[1]}`;
+  if (m) return l === 'fr' ? `Niveau ${m[1]}` : l === 'es' ? `Nivel ${m[1]}` : l === 'en' ? `Level ${m[1]}` : `Livello ${m[1]}`;
   m = codice.match(/^obiettivo-(\d{4}-\d{2}-\d{2})-(\d+)$/);
   if (m) {
     const o = ar.riga('SELECT * FROM obiettivi WHERE email = ? AND settimana = ? AND n = ?', email, m[1], Number(m[2]));
-    return o ? `${l === 'es' ? 'Objetivo' : l === 'en' ? 'Goal' : 'Obiettivo'}: ${testoObiettivo(o, l)}` : codice;
+    return o ? `${l === 'fr' ? 'Objectif' : l === 'es' ? 'Objetivo' : l === 'en' ? 'Goal' : 'Obiettivo'}: ${testoObiettivo(o, l)}` : codice;
   }
   return codice;
 }

@@ -7,7 +7,7 @@ import { url } from '../lib/url';
 interface Props { lingua: Lingua; corrente: keyof typeof CATALOGHI_STUDIO }
 const { lingua, corrente } = Astro.props;
 const localizzato = linguaCatalogo(lingua);
-const titolo = lingua === 'es' ? '¿Dónde estudias?' : lingua === 'de' ? 'Wo studierst du?' : lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
+const titolo = lingua === 'fr' ? 'Où étudies-tu ?' : lingua === 'es' ? '¿Dónde estudias?' : lingua === 'de' ? 'Wo studierst du?' : lingua === 'en' ? 'Where do you study?' : 'Dove studi?';
 const paesi = Object.entries(CATALOGHI_STUDIO)
   .sort(([, a], [, b]) => a[lingua].localeCompare(b[lingua], lingua));
 ---

@@ -4,7 +4,9 @@ interface Props { lingua?: Lingua }
 const { lingua = 'it' } = Astro.props;
 ---
 <p class="nota-superiori">
-  {lingua === 'es' ? (
+  {lingua === 'fr' ? (
+    <>Ces cours suivent les programmes du lycée italien, en particulier ceux du <strong>liceo scientifico</strong>, la filière à dominante scientifique. Consulte la liste des chapitres pour retrouver les notions vues en classe.</>
+  ) : lingua === 'es' ? (
     <>Los cursos siguen el programa de la secundaria superior italiana, en especial el del <strong>liceo scientifico</strong>, un itinerario con énfasis en ciencias. Consulta el temario para encontrar lo que estás viendo en clase.</>
   ) : lingua === 'de' ? (
     <>Die Jahrgänge beziehen sich auf weiterführende Schulen in Italien, besonders auf das naturwissenschaftlich ausgerichtete <strong>liceo scientifico</strong>. In der Themenübersicht siehst du, welche Inhalte zu deinem Unterricht passen.</>

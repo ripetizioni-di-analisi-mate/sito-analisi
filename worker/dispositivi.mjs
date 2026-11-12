@@ -91,10 +91,14 @@ export function stessaOrigineDispositivi(req) {
 export async function gestisciDispositivi(req, env, p, h) {
   const url = new URL(req.url);
   const scelta = url.searchParams.get('l'), cookie = h.leggiCookie(req, 'lingua');
-  const es = (scelta || cookie) === 'es';
+  const es = (scelta || cookie) === 'es', fr = (scelta || cookie) === 'fr';
   const en = scelta === 'en' || cookie === 'en';
   const intestazioni = { 'cache-control': 'no-store, private' };
-  const messaggi = es ? {
+  const messaggi = fr ? {
+    scaduto: 'Reconnecte-toi pour gérer tes appareils.', corrente: 'Tu utilises cet appareil. Pour le déconnecter, sélectionne Se déconnecter.',
+    aggiorna: 'La liste des appareils a changé. Actualise-la, puis choisis un appareil.', account: 'Le compte connecté a changé. Actualise la page.',
+    id: 'Choisis un appareil.', origine: 'Actualise la page et réessaie.',
+  } : es ? {
     scaduto: 'Vuelve a iniciar sesión para gestionar tus dispositivos.', corrente: 'Estás usando este dispositivo. Usa Cerrar sesión para desconectarlo.',
     aggiorna: 'La lista de dispositivos ha cambiado. Actualízala y elige un dispositivo.', account: 'La cuenta conectada ha cambiado. Vuelve a cargar la página.',
     id: 'Elige un dispositivo.', origine: 'Vuelve a cargar la página e inténtalo de nuevo.',
@@ -149,7 +153,7 @@ export async function gestisciDispositivi(req, env, p, h) {
   if (!id) return errore('scaduto');
   let r;
   try { r = await h.aDO(env, '/disp-sostituisci', { gestione: id, id: body.id }); }
-  catch { return h.json({ errore: es ? 'No se pudo desconectar el dispositivo. Vuelve a intentarlo.' : en ? 'The device could not be replaced. Please try again.' : 'Il dispositivo non è stato sostituito. Riprova.', riprova: true }, 503, intestazioni); }
+  catch { return h.json({ errore: fr ? 'Impossible de déconnecter l’appareil. Réessaie.' : es ? 'No se pudo desconectar el dispositivo. Vuelve a intentarlo.' : en ? 'The device could not be replaced. Please try again.' : 'Il dispositivo non è stato sostituito. Riprova.', riprova: true }, 503, intestazioni); }
   if (!r.ok) return errore(r.codice);
   const headers = new Headers({ 'content-type': 'application/json', ...intestazioni });
   headers.append('set-cookie', h.cookieDispositivo(r.dispositivo));

@@ -1,6 +1,7 @@
 import { MATERIE } from '../data/materie';
 import { MATERIE_DE, ARGOMENTI_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from '../data/materie-de';
 import { MATERIE_ES, ARGOMENTI_ES, GRUPPI_ES, SOTTOGRUPPI_ES } from '../data/materie-es';
+import { MATERIE_FR, ARGOMENTI_FR, GRUPPI_FR, SOTTOGRUPPI_FR } from '../data/materie-fr';
 import { CODICI_LINGUA, LINGUE_CATALOGO, prefissoLingua } from '../data/codici-lingua.mjs';
 
 export type Lingua = (typeof CODICI_LINGUA)[number];
@@ -11,9 +12,10 @@ export const LINGUE: { codice: Lingua; nome: string }[] = [
   { codice: 'en', nome: 'English' },
   { codice: 'de', nome: 'Deutsch' },
   { codice: 'es', nome: 'Español' },
+  { codice: 'fr', nome: 'Français' },
 ];
 
-export const LOCALE = { it: 'it_IT', en: 'en_US', de: 'de_DE', es: 'es_ES' };
+export const LOCALE = { it: 'it_IT', en: 'en_US', de: 'de_DE', es: 'es_ES', fr: 'fr_FR' };
 
 export function linguaCatalogo(lingua: Lingua): lingua is LinguaCatalogo {
   return (LINGUE_CATALOGO as readonly Lingua[]).includes(lingua);
@@ -29,12 +31,14 @@ export const nellaLingua = (lingua: Lingua, path: string) => lingua === 'it' ? p
 export const CATALOGHI_LOCALIZZATI = {
   de: { materie: MATERIE_DE, argomenti: ARGOMENTI_DE, gruppi: GRUPPI_DE, sottogruppi: SOTTOGRUPPI_DE },
   es: { materie: MATERIE_ES, argomenti: ARGOMENTI_ES, gruppi: GRUPPI_ES, sottogruppi: SOTTOGRUPPI_ES },
+  fr: { materie: MATERIE_FR, argomenti: ARGOMENTI_FR, gruppi: GRUPPI_FR, sottogruppi: SOTTOGRUPPI_FR },
 };
 
 const pagineComuni = ['/', '/cerca', '/chi-sono', '/contatti', '/prezzi', '/accedi', '/account', '/reimposta-password'];
 const lezioni: Record<LinguaCatalogo, string[]> = {
   de: ['/fisica-zero/lavoro-ed-energia/teoria'],
   es: ['/fisica-zero/lavoro-ed-energia/teoria'],
+  fr: ['/fisica-zero/lavoro-ed-energia/teoria'],
 };
 const pagine = Object.fromEntries(LINGUE_CATALOGO.map((lingua) => [lingua, new Set([
   ...pagineComuni,

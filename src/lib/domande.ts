@@ -1,5 +1,6 @@
 // Domande a tempo: dai file Markdown (src/content/domande, in inglese src/content-en/domande) ai dati che il
 // Worker usa per proporre le domande e correggere le risposte. Le pagine del sito non mostrano mai la risposta corretta.
+import type { LinguaCatalogo } from './lingue-sito';
 import { getCollection } from 'astro:content';
 import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
 import remarkMath from 'remark-math';
@@ -60,8 +61,8 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
 
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).
 const memo: Partial<Record<Lingua, Promise<Record<string, string[]>>>> = {};
-export function catalogoDomande(lingua: Lingua | 'de' | 'es' = 'it'): Promise<Record<string, string[]>> {
-  if (lingua === 'de' || lingua === 'es') return Promise.resolve({});
+export function catalogoDomande(lingua: Lingua | LinguaCatalogo = 'it'): Promise<Record<string, string[]>> {
+  if (lingua !== 'it' && lingua !== 'en') return Promise.resolve({});
   return (memo[lingua] ??= calcolaCatalogo(lingua));
 }
 async function calcolaCatalogo(lingua: Lingua): Promise<Record<string, string[]>> {

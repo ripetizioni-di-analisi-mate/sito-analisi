@@ -1,3 +1,5 @@
+import { LINGUE_TRADOTTE } from '../data/codici-lingua.mjs';
+
 // Funzioni della ricerca eseguibili anche senza il DOM, per verificare i casi
 // di corrispondenza, i refusi e i titoli provenienti dall'indice.
 export const normalizza = (testo) => String(testo).toLowerCase().normalize('NFD')
@@ -17,7 +19,7 @@ export function materieVoce(voce, video = {}, collegamenti = {}) {
   const collegate = collegamenti[`${voce.h}\n${voce.t}`] || collegamenti[voce.h];
   if (collegate) return collegate;
   const parti = voce.h.split(/[?#]/, 1)[0].split('/').filter(Boolean);
-  if (['en', 'de', 'es'].includes(parti[0])) parti.shift();
+  if (LINGUE_TRADOTTE.includes(parti[0])) parti.shift();
   return parti[0] === 'videocorsi' ? video[parti[1]] || [] : [parti[0] || ''];
 }
 
