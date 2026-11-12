@@ -288,6 +288,8 @@ $$
 \varepsilon = \frac{\Delta L}{L_0} ,
 $$
 a dimensionless number, often quoted as a percentage. A strain of $10^{-3}$ means an elongation of one millimeter per meter.
+
+The elastic moduli of the sections that follow relate the strain to the stress, hence the strain is the quantity obtained first and the elongation $\Delta L = \varepsilon L_0$ follows from it.
 :::
 
 :::teorema{#hookes-law-solids titolo="Hooke's law for solids"}
