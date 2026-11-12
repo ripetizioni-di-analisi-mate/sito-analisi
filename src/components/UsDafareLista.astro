@@ -33,8 +33,10 @@ const tracce = voci.map((e) => {
   {tracce.map(({ n, titolo, testo, soluzione }) => (
     <section class="traccia" id={'esercizio-' + n}>
       <h2><a href={href('esercizi/' + n)}><span class="numero">{n}.</span> {titolo}</a></h2>
-      <div class="testo-studio" set:html={testo} />
-      {soluzione && <div class="testo-studio" data-usa-content set:html={soluzione} />}
+      <div class="testo-studio">
+        <Fragment set:html={testo} />
+        {soluzione && <div data-usa-content set:html={soluzione} />}
+      </div>
     </section>
   ))}
 </Base>

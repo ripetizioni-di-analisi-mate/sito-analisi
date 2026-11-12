@@ -7,6 +7,7 @@ import Domande from '../../../../viste/Domande.astro';
 import { usSectionPaths } from '../../../../lib/stem-usa-study-pages';
 import { usSezioniMarkdown, conteggiDomandeUs } from '../../../../lib/stem-usa-markdown';
 import { SEZIONI_USA } from '../../../../data/stem-usa/programmi.mjs';
+import { RIPASSO } from '../../../../data/livelli';
 
 export async function getStaticPaths() {
   // Corsi scritti sul programma americano: contenuti in Markdown, indirizzi delle sezioni in inglese.
@@ -26,5 +27,5 @@ const { course, topic, section } = Astro.params as { course: string; topic: stri
         : section === SEZIONI_USA.esercizi
           ? <UsDafareLista corso={course} argomento={topic} />
           : <Domande lingua="en" materia={course} argomento={topic} usa
-              totale={conteggi[course]?.[topic] ?? 0} />)
+              totale={topic === RIPASSO ? Object.values(conteggi[course] ?? {}).reduce((a, b) => a + b, 0) : conteggi[course]?.[topic] ?? 0} />)
   : <UsStudySection {slug} {lesson} topic={topic} section={section as 'teoria' | 'esercizi-svolti' | 'esercizi'} />}

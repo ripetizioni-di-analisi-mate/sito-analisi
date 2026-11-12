@@ -82,7 +82,7 @@ const domandeMateria = (usa ? { ...usTimedTopics, ...domandeUsMd } : domandeDisp
 const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
 const catalogoPercorso = {
   ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
-  ...Object.fromEntries(Object.entries(usTimedTopics).map(([slug, topics]) => [slug, {
+  ...Object.fromEntries(Object.entries({ ...usTimedTopics, ...domandeUsMd }).map(([slug, topics]) => [slug, {
     titolo: materiaUsa(slug)!.titolo,
     argomenti: topics,
     domande: topics,

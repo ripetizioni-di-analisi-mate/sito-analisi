@@ -37,6 +37,8 @@ const passo = (v?: { id: string }) => v && { titolo: `${t.esercizio} ${numero(v.
   {voce.data.teoria.length > 0 && (
     <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={href('teoria') + '#' + x}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
   )}
-  <div class="testo-studio" set:html={testo} />
-  {soluzione && <div class="testo-studio" data-usa-content set:html={soluzione} />}
+  <div class="testo-studio">
+    <Fragment set:html={testo} />
+    {soluzione && <div data-usa-content set:html={soluzione} />}
+  </div>
 </Base>

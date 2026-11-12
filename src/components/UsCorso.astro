@@ -5,6 +5,10 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import AccessoMateria from './AccessoMateria.astro';
 import SchedaArgomento from './SchedaArgomento.astro';
+import SchedaRipasso from './SchedaRipasso.astro';
+import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
+import { nomiAllenamento } from '../lib/allenamento.mjs';
+import { conteggiDomandeUs } from '../lib/stem-usa-markdown';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { usaProduct } from '../data/stem-usa/pricing';
@@ -29,6 +33,10 @@ const totali = {
   tracce: m.argomenti.reduce((n, a) => n + tracce(a.slug).length, 0),
 };
 const sommarioDi = (a: string) => teoria.find((v) => v.id === `${slug}/${a}`)?.data.sommario ?? '';
+const domande = (await conteggiDomandeUs())[slug] ?? {};
+const totaleDomande = Object.values(domande).reduce((n, k) => n + k, 0);
+const labels = nomiAllenamento(m, 'en');
+const simulation = url(courseUrl(slug) + '/simulazione');
 ---
 <Base lingua="en" usa titolo={t.argomentiEsame} descrizione={description} materia={slug}
   seo={{ titolo: title + ' · Ripetizioni di Analisi' }}>
@@ -46,12 +54,19 @@ const sommarioDi = (a: string) => teoria.find((v) => v.id === `${slug}/${a}`)?.d
         conteggio: section === 'esercizi-svolti' ? schede(a.slug).length
           : section === 'esercizi' ? tracce(a.slug).length : undefined,
       })).filter((x) => x.conteggio === undefined || x.conteggio > 0);
+      if (domande[a.slug]) links.push({ href: sectionLink(a.slug, 'domande'), titolo: 'Timed questions', conteggio: domande[a.slug] });
       return <SchedaArgomento titolo={a.titolo} sezioni={links} preparazione={t.inPreparazione}>
         <Fragment slot="sommario">{sommarioDi(a.slug)}</Fragment>
       </SchedaArgomento>;
     })}
+    <SchedaRipasso materia={slug} titolo={labels.ripasso}
+      domande={totaleDomande ? { href: sectionLink(RIPASSO, 'domande'), titolo: 'Review questions', conteggio: totaleDomande } : undefined}
+      simulazione={{ href: simulation, titolo: labels.simulazione }}
+      personale={totaleDomande ? { href: sectionLink(RIPASSO_OGGI, 'domande'), titolo: 'Today’s review' } : undefined} personaleRiservato>
+      A timed exam with practice problems from different chapters{totaleDomande ? ', review questions on all the chapters of the course' : ''}, and review of missed questions with an account and full access.
+    </SchedaRipasso>
   </ol>
-  <p class="nota">{m.argomenti.length} topics · {totali.schede} worked sheets · {totali.tracce} practice problems</p>
+  <p class="nota">{m.argomenti.length} topics · {totali.schede} worked sheets · {totali.tracce} practice problems{totaleDomande ? ` · ${totaleDomande} timed questions` : ''}</p>
   <details class="sommario-pagina">
     <summary>University syllabi</summary>
     <div class="testo-studio">

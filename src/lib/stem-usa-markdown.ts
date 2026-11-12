@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { PROGRAMMI, SEZIONI_USA } from '../data/stem-usa/programmi.mjs';
 import { catalogoDomande } from './domande';
 import { numero } from './nav';
+import { RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 
 type Voce = { id: string };
 const chiave = (id: string) => id.split('/').slice(0, 2).join('/');
@@ -23,7 +24,8 @@ export async function usSezioniMarkdown() {
     ...(ha(svolti, corso, argomento) ? [{ params: { course: corso, topic: argomento, section: SEZIONI_USA['esercizi-svolti'] } }] : []),
     ...(ha(dafare, corso, argomento) ? [{ params: { course: corso, topic: argomento, section: SEZIONI_USA.esercizi } }] : []),
     ...(domande[corso]?.includes(argomento) ? [{ params: { course: corso, topic: argomento, section: SEZIONI_USA.domande } }] : []),
-  ]);
+  ]).concat(Object.keys(domande).filter((corso) => Object.hasOwn(PROGRAMMI, corso)).flatMap((corso) => [RIPASSO, RIPASSO_OGGI]
+    .map((topic) => ({ params: { course: corso, topic, section: SEZIONI_USA.domande } }))));
 }
 
 // Argomenti con domande a tempo, corso per corso: serve alla testata e alla navigazione fra le sezioni.

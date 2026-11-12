@@ -22,7 +22,13 @@ const senzaInglese = !en && semestreFiltro && !(await catalogoDomande('en'))[mat
 const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
 const nomiProve = nomiAllenamento(m, lingua);
 const dafare = usa ? [] : await getCollection('dafare');
-const datiArgomenti = usa ? usSimulationTopics(materia) : m.argomenti.map((a) => ({
+// Corsi americani in Markdown: quante tracce ha ogni argomento.
+const tracceUs: Record<string, number> = {};
+if (usa) for (const v of await getCollection('dafare_us')) {
+  const [corso, argomento] = v.id.split('/');
+  if (corso === materia) tracceUs[argomento] = (tracceUs[argomento] ?? 0) + 1;
+}
+const datiArgomenti = usa ? usSimulationTopics(materia, tracceUs) : m.argomenti.map((a) => ({
   slug: a.slug, titolo: a.titolo, breve: a.breve,
   n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length,
 }));

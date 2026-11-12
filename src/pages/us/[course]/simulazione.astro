@@ -4,6 +4,7 @@ import UsPractice from '../../../components/UsPractice.astro';
 import { universityCourses, hasUsStudyPages, courseUrl, optionsFor } from '../../../data/stem-usa/catalog.mjs';
 import { linkArgomentoUsa } from '../../../data/stem-usa/catalog-view';
 import { url } from '../../../lib/url';
+import { haProgramma } from '../../../data/stem-usa/programmi.mjs';
 import '../../../styles/stem-usa.css';
 
 export function getStaticPaths() {
@@ -12,6 +13,8 @@ export function getStaticPaths() {
   }));
 }
 const { course } = Astro.props;
+// I corsi scritti sul programma americano hanno solo la simulazione costruita sulle loro tracce.
+const markdown = haProgramma(course.slug);
 const path = courseUrl(course.slug);
 const questions = course.lessons.map((lesson, index) => ({
   title: lesson.title, prompt: lesson.prompt, choices: optionsFor(lesson, index),
@@ -20,7 +23,7 @@ const questions = course.lessons.map((lesson, index) => ({
 }));
 ---
 <Simulazione lingua="en" materia={course.slug} usa>
-  <div data-usa-content>
+  {!markdown && <div data-usa-content>
     <p class="azioni">
       <a class="bottone-secondario" href={url(path + '/practice-exam')}>Sample exam</a>
       {course.slug === 'calculus-1' && <a class="bottone-secondario" href={url(path + '/purdue')}>Purdue exam practice</a>}
@@ -29,7 +32,7 @@ const questions = course.lessons.map((lesson, index) => ({
       <summary>Short review quiz</summary>
       <div class="stem-usa"><UsPractice questions={questions} minutes={questions.length * 2} id="short-review-quiz" /></div>
     </details>
-  </div>
+  </div>}
 </Simulazione>
 <script>
   if (location.hash === '#course-practice') {

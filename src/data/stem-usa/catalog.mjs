@@ -26,8 +26,12 @@ export function usStudyPreviewPage(slug, section) {
   // Corsi scritti sul programma americano: le pagine di studio si servono sempre, perché la parte
   // riservata è già marcata dentro la pagina (data-usa-content) come nelle materie italiane.
   if (haProgramma(slug)) {
-    const [argomento, vista, numero, ...resto] = section.split('/');
+    if (section === 'simulazione' || section === 'sblocca') return true;
+    const [argomento, vistaGrezza, numero, ...resto] = section.split('/');
     if (resto.length) return false;
+    // Il Worker usa i nomi interni (domande, esercizi…), le pagine quelli inglesi (timed-questions…).
+    const vista = Object.hasOwn(SEZIONI_USA, vistaGrezza) ? SEZIONI_USA[vistaGrezza] : vistaGrezza;
+    if (argomento === 'prove-d-esame' || argomento === 'ripasso-di-oggi') return vista === SEZIONI_USA.domande && numero === undefined;
     if (!programmaDi(slug).some(a => a.slug === argomento)) return false;
     if (numero === undefined) return Object.values(SEZIONI_USA).includes(vista);
     return [SEZIONI_USA['esercizi-svolti'], SEZIONI_USA.esercizi].includes(vista) && /^[1-9]\d*$/.test(numero);

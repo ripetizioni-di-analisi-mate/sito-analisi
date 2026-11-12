@@ -7,22 +7,24 @@ interface Link {
 interface Props {
   titolo: string;
   materia: string;
-  domande: Link & { conteggio: number };
+  domande?: Link & { conteggio: number };
   simulazione?: Link;
-  personale: Link;
+  personale?: Link;
   personaleRiservato?: boolean;
 }
 
 const { titolo, materia, domande, simulazione, personale, personaleRiservato } = Astro.props;
+// Un corso senza domande a tempo ha solo la simulazione: il titolo porta lì.
+const principale = domande?.href ?? simulazione?.href;
 ---
 <li>
-  <h2><a href={domande.href}>{titolo}</a></h2>
+  <h2><a href={principale}>{titolo}</a></h2>
   <p class="riassunto"><slot /></p>
   <nav aria-label={titolo}>
-    <a href={domande.href}>{domande.titolo} ({domande.conteggio})</a>
+    {domande && <a href={domande.href}>{domande.titolo} ({domande.conteggio})</a>}
     {simulazione && <a href={simulazione.href}>{simulazione.titolo}</a>}
-    <a class="solo-collegati" href={personale.href} data-usa-content={personaleRiservato || undefined}>
+    {personale && <a class="solo-collegati" href={personale.href} data-usa-content={personaleRiservato || undefined}>
       {personale.titolo}<span class="conta-ripasso" data-materia={materia}></span>
-    </a>
+    </a>}
   </nav>
 </li>

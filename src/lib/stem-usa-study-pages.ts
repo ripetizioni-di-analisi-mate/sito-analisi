@@ -1,6 +1,7 @@
 import { courses, hasUsStudyPages } from '../data/stem-usa/catalog.mjs';
 import { highSchoolHasStudyPages } from '../data/stem-usa/high-school/index.mjs';
 import { universityStudies } from './stem-usa-practice';
+import { haProgramma, programmaDi } from '../data/stem-usa/programmi.mjs';
 
 type Worked = { title: string; prompt?: string; steps: string[] };
 type Exercise = { number: number; title: string; prompt: string; explanation: string; answer?: string; primitive: boolean };
@@ -37,7 +38,11 @@ function studyTopics(course: typeof courses[number]): UsStudyTopic[] {
   }));
 }
 
-export function usSimulationTopics(slug: string) {
+export function usSimulationTopics(slug: string, tracce: Record<string, number> = {}) {
+  // Corsi scritti sul programma americano: argomenti del programma, tracce contate dalla collezione dafare_us.
+  if (haProgramma(slug)) return programmaDi(slug).map((a: { slug: string; titolo: string; breve: string }) => ({
+    slug: a.slug, titolo: a.titolo, breve: a.breve, n: tracce[a.slug] ?? 0,
+  }));
   const course = courses.find(item => item.slug === slug);
   return course ? studyTopics(course).map((lesson, index) => ({
     slug: 'unit-' + (index + 1), titolo: lesson.title, breve: lesson.title, n: lesson.exercises.length,
