@@ -860,6 +860,18 @@ html.velato main { filter: blur(14px); transition: filter 0.05s; }
 .struttura .pedice { font-size: 14px; }
 .struttura .etichetta, .struttura .etichetta-vettore { font-size: 20px; }
 .struttura .nome-asse { font-size: 19px; }
+.struttura .acqua { fill: color-mix(in srgb, var(--accento) 15%, transparent); stroke: none; }
+.struttura .solido { stroke: var(--inchiostro); stroke-width: 1.6; stroke-linejoin: round; }
+.struttura .campitura { stroke: var(--inchiostro-2); stroke-width: 1; }
+.struttura .pelo { fill: none; stroke: var(--accento); stroke-width: 1.8; }
+.struttura .pelo-simbolo { fill: var(--accento); stroke: none; }
+.struttura .condotta-parete { fill: none; stroke: var(--inchiostro); stroke-linejoin: round; }
+.struttura .condotta-acqua { fill: none; stroke: color-mix(in srgb, var(--accento) 15%, var(--carta)); stroke-linejoin: round; }
+.struttura .asse-condotta { fill: none; stroke: var(--inchiostro-2); stroke-width: 1; stroke-dasharray: 11 4 2 4; }
+.struttura .piezometrica { fill: none; stroke: var(--c-attenzione); stroke-width: 1.7; stroke-dasharray: 8 5; }
+.struttura .energia { fill: none; stroke: var(--c-attenzione); stroke-width: 1.7; stroke-dasharray: 13 4 2.5 4; }
+.struttura .pompa { fill: var(--carta); stroke: var(--inchiostro); stroke-width: 1.8; }
+.struttura .pompa-segno { fill: var(--inchiostro); stroke: none; }
 /* figure con cursore (::cursore): sotto la legenda il cursore con il suo valore e i numeri calcolati */
 .cursore-comandi { max-width: 520px; margin: 0.55rem auto 0; font-family: var(--ui); font-size: 0.95rem; color: var(--inchiostro); }
 .cursore-riga { display: flex; align-items: center; gap: 0.9rem; }
