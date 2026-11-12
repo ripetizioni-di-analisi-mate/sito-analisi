@@ -26,7 +26,7 @@ C_v = \frac{v_c}{\sqrt{2 g h}} ,
 \qquad
 \mu = C_c\,C_v .
 $$
-Il primo misura il restringimento della vena, il secondo la riduzione di velocità dovuta alla dissipazione nell'imbocco e il terzo riunisce i due effetti. Tutti e tre sono minori di $1$ e si ricavano da misure di laboratorio. I tre coefficienti sono legati dalla relazione $\mu = C_c C_v$, perciò noti due di essi il terzo segue, e una prova in cui si misurano la portata e il diametro della vena contratta determina anche $C_v$.
+Il primo misura il restringimento della vena, il secondo la riduzione di velocità dovuta alla dissipazione nell'imbocco e il terzo riunisce i due effetti. Nelle luci in parete sottile a spigolo vivo tutti e tre risultano minori di $1$, e si ricavano da misure di laboratorio. I tre coefficienti sono legati dalla relazione $\mu = C_c C_v$, perciò noti due di essi il terzo segue, e una prova in cui si misurano la portata e il diametro della vena contratta determina anche $C_v$.
 :::
 
 ## Portata di una luce di piccole dimensioni
@@ -121,7 +121,7 @@ $$
 = \frac{(1 + \varepsilon)^{\frac{3}{2}} - (1 - \varepsilon)^{\frac{3}{2}}}{3\,\varepsilon}
 = 1 - \frac{\varepsilon^2}{24} - \frac{\varepsilon^4}{128} - \dots
 $$
-perciò la formula per le luci piccole sovrastima la portata di circa $\dfrac{\varepsilon^2}{24}$. Per una luce alta metà del carico sul baricentro risulta $\varepsilon = 0{,}25$ e lo scarto è lo $0{,}26\%$; per una luce alta una volta e mezza il carico risulta $\varepsilon = 0{,}75$ e lo scarto supera il $2\%$. Finché l'altezza della luce resta minore del carico sul baricentro lo scarto si mantiene sotto l'uno per cento, e in questo campo si usa la formula più semplice.
+perciò la formula per le luci piccole sovrastima la portata di circa $\dfrac{\varepsilon^2}{24}$. Per una luce alta metà del carico sul baricentro risulta $\varepsilon = 0{,}25$ e lo scarto è lo $0{,}26\%$; per una luce alta una volta e mezza il carico risulta $\varepsilon = 0{,}75$ e lo scarto supera il $2\%$. Finché l'altezza della luce resta minore del carico sul baricentro lo scarto si mantiene intorno all'uno per cento, e in questo campo si usa la formula più semplice.
 :::
 
 ## Efflusso sotto una paratoia e luci rigurgitate
@@ -131,9 +131,9 @@ Una paratoia piana verticale sollevata di $a$ sul fondo di un canale rettangolar
 $$
 Q = \mu\,b\,a\,\sqrt{2 g h} ,
 $$
-dove $h$ è l'altezza d'acqua di monte misurata dal fondo e $\mu$ è il coefficiente di portata della paratoia, compreso fra $0{,}55$ e $0{,}60$ per $\dfrac{a}{h}$ minore di $\dfrac{1}{3}$. A valle della paratoia la vena si contrae in verticale e raggiunge l'altezza $h_c = C_c\,a$, con $C_c$ intorno a $0{,}61$: in quella sezione il numero di Froude è maggiore di uno, quindi la corrente è veloce, e il raccordo con la corrente di valle avviene attraverso un risalto idraulico. Si rimanda all'argomento sui profili di moto permanente e il risalto idraulico.
+dove $h$ è l'altezza d'acqua di monte misurata dal fondo e $\mu$ è il coefficiente di portata della paratoia, compreso fra $0{,}55$ e $0{,}60$ per $\dfrac{a}{h}$ minore di $\dfrac{1}{3}$. A valle della paratoia la vena si contrae in verticale e raggiunge l'altezza $a_c = C_c\,a$, con $C_c$ intorno a $0{,}61$: in quella sezione il numero di Froude è maggiore di uno, quindi la corrente è veloce, e il raccordo con la corrente di valle avviene attraverso un risalto idraulico. Si rimanda all'argomento sui profili di moto permanente e il risalto idraulico.
 
-::schema{solidi="0,-0.35 6,-0.35 6,0 0,0;2.9,0.5 3.1,0.5 3.1,2.9 2.9,2.9" acqua="0,0 2.9,0 2.9,2.2 0,2.2;2.9,0 3.1,0.5 3.5,0.33 6,0.28 6,0 3.1,0" pelo="0,2.9,2.2,;3.9,5.1,0.28," tratteggi="3.5,0 3.5,0.75" frecce="3.9,0.14,4.8,0.14,v_c" etichette="5.3,0.6,h_c" quote="3 0,3 0.5,a,-0.45;0 0,0 2.2,h,-0.5" titolo="Efflusso libero sotto una paratoia piana: la vena si contrae fino all'altezza $h_c = C_c\,a$"}
+::schema{solidi="0,-0.35 6,-0.35 6,0 0,0;2.9,0.5 3.1,0.5 3.1,2.9 2.9,2.9" acqua="0,0 2.9,0 2.9,2.2 0,2.2;2.9,0 3.1,0.5 3.5,0.33 6,0.28 6,0 3.1,0" pelo="0,2.9,2.2,;3.9,5.1,0.28," tratteggi="3.5,0 3.5,0.75" frecce="3.9,0.14,4.8,0.14,v_c" etichette="5.3,0.6,a_c" quote="3 0,3 0.5,a,-0.45;0 0,0 2.2,h,-0.5" titolo="Efflusso libero sotto una paratoia piana: la vena si contrae fino all'altezza $a_c = C_c\,a$"}
 :::
 
 ::::teorema{#luce-rigurgitata titolo="Portata di una luce rigurgitata"}
@@ -302,7 +302,7 @@ $$
 $$
 quindi un errore $dh$ nella lettura del carico produce un errore relativo sulla portata tanto minore quanto maggiore è il carico. A parità di portata lo stramazzo triangolare lavora con un carico maggiore, e questo compensa il suo esponente più alto. Per $Q = 85\,\mathrm{L/s}$ uno stramazzo Bazin con $b = 0{,}80\,\mathrm{m}$ e $\mu = 0{,}42$ richiede $h = 0{,}148\,\mathrm{m}$, mentre uno stramazzo Thomson con $\theta = 90^\circ$ richiede $h = 0{,}324\,\mathrm{m}$; con un errore di lettura di $1\,\mathrm{mm}$ l'errore sulla portata è dell'$1{,}0\%$ nel primo caso e dello $0{,}77\%$ nel secondo. Per questo lo stramazzo triangolare si preferisce alle portate piccole.
 
-::grafico{f="1.860368*x^1.5;0.01417423*x^2.5" xmin=0 xmax=42 ymin=0 ymax=500 nomi="h,Q" punti="30,305.7,pieno;30,69.9,pieno" titolo="Scale di deflusso, con il carico $h$ in centimetri e la portata $Q$ in litri al secondo: stramazzo rettangolare con $b = 1{,}00\,\mathrm{m}$ e $\mu = 0{,}42$ (in colore) e di uno stramazzo triangolare con $\theta = 90^\circ$ e $\mu = 0{,}60$ (tratteggiato): con $h = 30\,\mathrm{cm}$ le portate sono $306\,\mathrm{L/s}$ e $69{,}9\,\mathrm{L/s}$"}
+::grafico{f="1.860368*x^1.5;0.01417423*x^2.5" xmin=0 xmax=42 ymin=0 ymax=500 nomi="h,Q" punti="30,305.7,pieno;30,69.9,pieno" titolo="Scale di deflusso, con il carico $h$ in centimetri e la portata $Q$ in litri al secondo: stramazzo rettangolare con $b = 1{,}00\,\mathrm{m}$ e $\mu = 0{,}42$ (in colore) e stramazzo triangolare con $\theta = 90^\circ$ e $\mu = 0{,}60$ (tratteggiato): con $h = 30\,\mathrm{cm}$ le portate sono $306\,\mathrm{L/s}$ e $69{,}9\,\mathrm{L/s}$"}
 :::
 
 :::attenzione

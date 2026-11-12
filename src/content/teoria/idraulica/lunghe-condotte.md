@@ -81,9 +81,9 @@ J = \frac{\lambda}{D}\,\frac{1}{2g}\,\frac{16\,Q^2}{\pi^2 D^4} = \frac{8\,\lambd
 $$
 quindi la perdita su tutta la condotta si scrive $\Delta H = r\,Q^2$ con
 $$
-r = \frac{8\,\lambda\,L}{\pi^2 g\,D^5} ,
+r = \frac{8\,\lambda\,L}{g\,\pi^2 D^5} ,
 $$
-detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
+detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. Con la formula di Gauckler-Strickler la stessa scrittura ha $r = \dfrac{10{,}29\,L}{k_s^2\,D^{16/3}}$, ed è la forma che si usa quando la scabrezza è assegnata con $k_s$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
 :::
 
 :::osservazione{#dipendenza-dal-diametro titolo="Il peso del diametro"}
@@ -225,7 +225,7 @@ Il massimo si ha nella seconda sezione, perciò il punto critico è a $2100\,\ma
 :::
 
 :::attenzione
-La pressione relativa in una condotta non può scendere sotto il valore che porta il liquido alla sua tensione di vapore. Per l'acqua a $20\,^\circ\mathrm{C}$ la tensione di vapore vale $2{,}34\,\mathrm{kPa}$, quindi in pressioni assolute il limite è $\dfrac{2{,}34}{9{,}81} = 0{,}24\,\mathrm{m}$ e in pressioni relative, con pressione atmosferica $101{,}3\,\mathrm{kPa}$, vale $0{,}24 - 10{,}33 = -10{,}1\,\mathrm{m}$. Nella pratica si impone un margine e si accetta al più $-7\,\mathrm{m}$, perché oltre quel valore l'aria disciolta si libera e forma sacche che riducono la sezione utile. Per la condotta dell'esempio precedente il punto critico a $-8{,}5\,\mathrm{m}$ supera il limite ammesso, perciò la portata va ridotta oppure il tracciato va abbassato.
+La pressione relativa in una condotta non può scendere sotto il valore che porta il liquido alla sua tensione di vapore. Per l'acqua a $20\,^\circ\mathrm{C}$ la tensione di vapore vale $2{,}34\,\mathrm{kPa}$, quindi in pressioni assolute il limite è $\dfrac{2{,}34}{9{,}81} = 0{,}24\,\mathrm{m}$ e in pressioni relative, con pressione atmosferica $101{,}3\,\mathrm{kPa}$, vale $0{,}24 - 10{,}33 = -10{,}09\,\mathrm{m}$. Nella pratica si impone un margine e si accetta al più $-7\,\mathrm{m}$, perché oltre quel valore l'aria disciolta si libera e forma sacche che riducono la sezione utile. Per la condotta dell'esempio precedente il punto critico a $-8{,}5\,\mathrm{m}$ supera il limite ammesso, perciò la portata va ridotta oppure il tracciato va abbassato.
 :::
 
 :::osservazione{#regolazione-con-saracinesca titolo="Riduzione della portata con una saracinesca"}
@@ -347,5 +347,5 @@ C(D) = 20{,}93 + \frac{0{,}0346}{D^5} + 64\,D ,
 $$
 con $D$ in metri, e il suo minimo cade a $D = 0{,}373\,\mathrm{m}$, cioè sul diametro commerciale $400\,\mathrm{mm}$.
 
-::grafico{f="20.93+0.0346/x^5;64*x;20.93+0.0346/x^5+64*x" xmin=0.2 xmax=0.6 ymin=0 ymax=90 punti="0.373,49.8,pieno" nomi="D,C" etichette="0.52,17,energia;0.5,37,condotta;0.44,60,totale" titolo="Costo annuo in migliaia di euro al variare del diametro $D$ in metri: il minimo cade a $D = 0{,}373\,\mathrm{m}$"}
+::grafico{f="20.93+0.0346/x^5;64*x;20.93+0.0346/x^5+64*x" xmin=0.2 xmax=0.6 ymin=0 ymax=90 punti="0.373,49.6,pieno" nomi="D,C" etichette="0.52,17,energia;0.5,37,condotta;0.44,60,totale" titolo="Costo annuo in migliaia di euro al variare del diametro $D$ in metri: il minimo cade a $D = 0{,}373\,\mathrm{m}$"}
 :::

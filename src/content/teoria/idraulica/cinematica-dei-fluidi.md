@@ -24,7 +24,7 @@ La **linea di corrente** relativa all'istante $t$ è invece una curva che in ogn
 $$
 \frac{dx}{v_x} = \frac{dy}{v_y} ,
 $$
-cioè $\dfrac{dy}{dx} = \dfrac{v_y}{v_x}$, che è un'equazione differenziale del primo ordine nella funzione $y(x)$, con $t$ tenuto fisso come parametro. La traiettoria riguarda una particella e un intervallo di tempo; la linea di corrente riguarda un istante e tutto il campo. Le linee di corrente sono quelle che si rendono visibili iniettando un colorante o seminando particelle galleggianti e fotografando con un tempo breve di esposizione.
+cioè $\dfrac{dy}{dx} = \dfrac{v_y}{v_x}$, che è un'equazione differenziale del primo ordine nella funzione $y(x)$, con $t$ tenuto fisso come parametro. La traiettoria riguarda una particella e un intervallo di tempo; la linea di corrente riguarda un istante e tutto il campo. Le linee di corrente si rendono visibili seminando nel fluido particelle galleggianti e fotografandole con un tempo breve di esposizione, poiché ogni particella lascia un trattino diretto come la sua velocità. Il filetto di colorante immesso in un punto fisso disegna invece la stessa curva solo se il moto è permanente.
 :::
 
 :::esempio{titolo="Linee di corrente di un campo assegnato"}
@@ -114,7 +114,7 @@ $$
 :::attenzione
 La relazione $Q = A\,v$ vale per una sezione normale alle linee di corrente. Attraverso una sezione obliqua passa la stessa portata, perché il fluido che entra dalla sezione normale esce da quella obliqua, mentre il prodotto dell'area obliqua per la velocità è maggiore della portata. In una condotta di diametro $200\,\mathrm{mm}$ con velocità media $1{,}43\,\mathrm{m/s}$ la portata è $0{,}0450\,\mathrm{m^3/s}$; una sezione inclinata di $30^\circ$ sulla normale ha area $\dfrac{0{,}0314}{\cos 30^\circ} = 0{,}0363\,\mathrm{m^2}$ e il prodotto per la velocità dà $0{,}0519\,\mathrm{m^3/s}$. Il flusso attraverso quella sezione resta $0{,}0450\,\mathrm{m^3/s}$, perché la velocità forma con la sua normale l'angolo di $30^\circ$ e il prodotto scalare introduce il fattore $\cos 30^\circ$.
 
-::schema{nodi="A,0,0,-;B,7,0,-" condotte="A-B,1.0" tratteggi="2.6,-0.5 2.6,0.5;5.8,-0.5 4.2,0.5" frecce="1.0,0,2.0,0,v" etichette="2.6,0.82,A;4.4,0.82,A′" riferimento=0 titolo="La sezione normale di area $A$ e la sezione obliqua di area $A'$ sono attraversate dalla stessa portata"}
+::schema{nodi="A,0,0,-;B,7,0,-" condotte="A-B,1.0" tratteggi="2.6,-0.5 2.6,0.5;5.18,-0.5 4.6,0.5" frecce="1.0,0,2.0,0,v" etichette="2.6,0.82,A;5.0,0.82,A′" riferimento=0 titolo="La sezione normale di area $A$ e la sezione obliqua di area $A'$ sono attraversate dalla stessa portata"}
 :::
 
 ## L'equazione di continuità
@@ -180,9 +180,9 @@ La portata volumetrica $Q = A\,v$ invece cambia da sezione a sezione, perché lo
 La velocità media riassume la sezione in un solo numero. Nelle espressioni dell'energia e della quantità di moto compaiono invece il cubo e il quadrato della velocità puntuale, le cui medie sulla sezione superano il cubo e il quadrato della velocità media.
 
 :::osservazione{#distribuzione-della-velocita titolo="Distribuzione della velocità nella sezione"}
-Per la viscosità, il fluido aderisce alle pareti, quindi la velocità è nulla sul contorno e massima sull'asse di una condotta o vicino alla superficie libera di un canale. In moto laminare, in una condotta circolare, la distribuzione è parabolica con il massimo sull'asse. In moto turbolento il mescolamento trasversale rende la distribuzione molto più appiattita, con una variazione rapida in un sottile strato vicino alla parete e valori quasi uniformi nella parte centrale; una forma spesso usata per rappresentarla è $u = u_{\max}\left(1 - \dfrac{r}{R}\right)^{1/n}$ con $n$ compreso fra $6$ e $10$. Le due distribuzioni sono misurate in laboratorio con tubi di Pitot o con anemometri; la loro forma si ricava per via teorica solo nel caso laminare, nell'argomento sulle perdite di carico.
+Per la viscosità, il fluido aderisce alle pareti, quindi la velocità è nulla sul contorno e massima sull'asse di una condotta o vicino alla superficie libera di un canale. In moto laminare, in una condotta circolare, la distribuzione è parabolica con il massimo sull'asse. In moto turbolento il mescolamento trasversale rende la distribuzione molto più appiattita, con una variazione rapida in un sottile strato vicino alla parete e valori quasi uniformi nella parte centrale; una forma spesso usata per rappresentarla è $u = u_{\max}\left(1 - \dfrac{r}{r_0}\right)^{1/n}$, dove $r_0$ è il raggio della condotta e $n$ è compreso fra $6$ e $10$. Le due distribuzioni sono misurate in laboratorio con tubi di Pitot o con anemometri; la loro forma si ricava per via teorica solo nel caso laminare, nell'argomento sulle perdite di carico.
 
-::grafico{f="1-x^2;(1-abs(x))^(1/7)" xmin=-1 xmax=1 ymin=0 ymax=1.2 nomi="r/R,u/uₘₐₓ" titolo="Distribuzione della velocità in una condotta circolare: parabolica in moto laminare (curva piena), appiattita in moto turbolento (curva tratteggiata)"}
+::grafico{f="1-x^2;(1-abs(x))^(1/7)" xmin=-1 xmax=1 ymin=0 ymax=1.2 nomi="r/r_0,u/uₘₐₓ" titolo="Distribuzione della velocità in una condotta circolare: parabolica in moto laminare (curva piena), appiattita in moto turbolento (curva tratteggiata)"}
 :::
 
 :::definizione{#coefficienti-di-ragguaglio titolo="Coefficienti di ragguaglio"}
@@ -198,13 +198,13 @@ Il primo compare nell'altezza cinetica della corrente, che vale $\alpha\,\dfrac{
 :::esempio{titolo="Distribuzione parabolica in moto laminare"}
 In una condotta circolare di raggio $R$, in moto laminare, la velocità a distanza $r$ dall'asse è $u = u_{\max}\left(1 - \dfrac{r^2}{R^2}\right)$. Con l'elemento d'area dell'anello $dA = 2\pi r\,dr$ la portata è
 $$
-Q = \int_0^R u_{\max}\left(1 - \frac{r^2}{R^2}\right) 2\pi r\,dr = 2\pi u_{\max}\left[\frac{r^2}{2} - \frac{r^4}{4R^2}\right]_0^R = \frac{\pi R^2 u_{\max}}{2} ,
+Q = \int_0^{r_0} u_{\max}\left(1 - \frac{r^2}{r_0^2}\right) 2\pi r\,dr = 2\pi u_{\max}\left[\frac{r^2}{2} - \frac{r^4}{4 r_0^2}\right]_0^{r_0} = \frac{\pi r_0^2 u_{\max}}{2} ,
 $$
-quindi la velocità media è $v = \dfrac{Q}{\pi R^2} = \dfrac{u_{\max}}{2}$. Con gli stessi integrali si ottengono
+quindi la velocità media è $v = \dfrac{Q}{\pi r_0^2} = \dfrac{u_{\max}}{2}$. Con gli stessi integrali si ottengono
 $$
 \alpha = 2 , \qquad \beta = \frac{4}{3} ,
 $$
-valori che valgono per ogni condotta circolare in moto laminare, poiché non dipendono né da $R$ né da $u_{\max}$.
+valori che valgono per ogni condotta circolare in moto laminare, poiché non dipendono né da $r_0$ né da $u_{\max}$.
 :::
 
 :::osservazione{#valori-dei-coefficienti titolo="Valori dei coefficienti nelle correnti reali"}

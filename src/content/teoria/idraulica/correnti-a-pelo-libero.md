@@ -107,11 +107,11 @@ H_1 - H_2 = z_{f1} - z_{f2} = i\,L ,
 $$
 dato che $i$ è la pendenza del fondo. Per definizione di cadente $H_1 - H_2 = J\,L$, quindi $J\,L = i\,L$ e perciò $J = i$.
 
-Si prenda ora come volume di controllo il tratto di corrente fra le due sezioni e si proietti l'equazione globale sulla direzione del moto, orientata verso valle. Le velocità nelle due sezioni sono uguali in modulo e direzione, quindi il primo membro è nullo. Le due sezioni hanno la stessa area e la stessa distribuzione di pressione, perciò le spinte $\vec{\Pi}_1$ e $\vec{\Pi}_2$ hanno lo stesso modulo e versi opposti, e la loro somma è nulla. Il peso del volume è $G = \gamma A L$ e la sua componente nella direzione del moto è $\gamma A L \sin i$. La forza delle pareti ha componente $-\tau_0\,C\,L$, perché lo sforzo tangenziale è opposto al moto e agisce su una superficie di area $C L$. La proiezione dell'equazione globale è quindi
+Si prenda ora come volume di controllo il tratto di corrente fra le due sezioni e si proietti l'equazione globale sulla direzione del moto, orientata verso valle. Le velocità nelle due sezioni sono uguali in modulo e direzione, quindi il primo membro è nullo. Le due sezioni hanno la stessa area e la stessa distribuzione di pressione, perciò le spinte $\vec{\Pi}_1$ e $\vec{\Pi}_2$ hanno lo stesso modulo e versi opposti, e la loro somma è nulla. Il peso del volume vale $G = \gamma A L$. Nei canali la pendenza del fondo è piccola, perciò il seno dell'angolo che il fondo forma con l'orizzontale si confonde con la sua tangente, che è $i$, e la componente del peso nella direzione del moto vale $\gamma A L i$. La forza delle pareti ha componente $-\tau_0\,C\,L$, perché lo sforzo tangenziale è opposto al moto e agisce su una superficie di area $C L$. La proiezione dell'equazione globale è quindi
 $$
-0 = \gamma\,A\,L\,\sin i - \tau_0\,C\,L ,
+0 = \gamma\,A\,L\,i - \tau_0\,C\,L ,
 $$
-da cui $\tau_0 = \gamma\,\dfrac{A}{C}\,\sin i = \gamma\,R\,\sin i$. Nei canali la pendenza è piccola, quindi $\sin i \simeq \tan i = i$ e si ottiene $\tau_0 = \gamma R i$.
+da cui $\tau_0 = \gamma\,\dfrac{A}{C}\,i = \gamma\,R\,i$.
 
 ::schema{nodi="A,2,2.0;B,6,1.4" nomi=0 acqua="0,1.0 8,0.2 8,1.4 0,2.2" solidi="0,1.0 8,0.2 8,-0.5 0,-0.5" linee="0,2.2 8,1.4" tratteggi="2,0.8 2,2.0;6,0.2 6,1.4" forze="4 1.25,0,-0.8,G" reazioni="4 0.72,-1.1,0.11,τ_0 C L;2 1.45,0.9,-0.09,Π_1;6 0.85,-0.9,0.09,Π_2" quote="2 -0.5,6 -0.5,L,0.5" riferimento=0 titolo="Volume di controllo di lunghezza $L$ in moto uniforme: le spinte sulle sezioni si elidono e la componente del peso equilibra lo sforzo alla parete"}
 :::
@@ -341,7 +341,7 @@ Una corrente a pelo libero si dice:
 - **veloce** (o supercritica) se $Fr > 1$, cioè se $h < h_c$;
 - in stato critico se $Fr = 1$, cioè se $h = h_c$.
 
-L'equivalenza fra le due scritture segue dalla monotonia di $Fr$ rispetto all'altezza d'acqua, dimostrata nello stato critico. In una corrente lenta un aumento dell'energia specifica fa salire il pelo libero, perché $\dfrac{dE}{dh} > 0$; in una corrente veloce lo fa scendere. Questa differenza di segno spiega perché un gradino sul fondo abbassa il pelo libero in una corrente lenta e lo innalza in una corrente veloce.
+L'equivalenza fra le due scritture segue dalla monotonia di $Fr$ rispetto all'altezza d'acqua, stabilita nella dimostrazione del teorema sul minimo dell'energia specifica. In una corrente lenta un aumento dell'energia specifica fa salire il pelo libero, perché $\dfrac{dE}{dh} > 0$; in una corrente veloce lo fa scendere. Questa differenza di segno spiega perché un gradino sul fondo abbassa il pelo libero in una corrente lenta e lo innalza in una corrente veloce.
 :::
 
 :::osservazione{#altezze-alternate titolo="Altezze alternate"}
