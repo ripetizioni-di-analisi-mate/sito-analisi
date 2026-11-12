@@ -43,6 +43,20 @@
 //                verso=-1 inverte tutto (momento dalla parte delle fibre tese). Valori agli estremi e nei punti
 //                di massimo o minimo interni scritti da soli (numeri=0 li toglie); segni=1 mette ⊕ e ⊖;
 //                scala= unità del disegno per unità di sollecitazione (predefinita: il massimo vale 1/5 della struttura)
+//
+//   Idraulica (gli stessi attributi valgono per la direttiva ::schema):
+//   acqua        "0,0 6,0 6,3 0,3;…"  regione d'acqua, riempita nel colore della materia
+//   solidi       "0,-1 6,-1 6,0 0,0;…"  terreno o muratura, con campitura a tratteggio
+//   pelo         "0,6,3,pelo libero"  superficie libera: segmento da x=0 a x=6 alla quota y=3,
+//                con il simbolo ▽ e l'etichetta facoltativa a sinistra
+//   condotte     "A-B,0.5;B-C,0.3,D_2"  tubazione tra due punti, con il diametro in unità del disegno
+//                (parete, acqua all'interno e asse tratto-punto); l'etichetta sta accanto alla mezzeria
+//   piezometrica "0,5 10,4.2;…"  linea piezometrica (tratteggiata)
+//   energia      "0,5.4 10,4.6;…"  linea dei carichi totali (tratto-punto)
+//   pressioni    "A,B,0,1.2,p;…"  diagramma di pressione sul segmento A-B: valori agli estremi in unità
+//                del disegno, frecce perpendicolari rivolte verso il segmento; con un sesto campo -1
+//                le frecce premono dall'altra parte
+//   pompa        "4,0,P"  simbolo della pompa (cerchio con il triangolo) nel punto
 //   riferimento=0  toglie il piccolo sistema x, y orientato in basso a sinistra
 //   titolo       didascalia (formule fra dollari)
 import katex from 'katex';
@@ -79,6 +93,12 @@ function numero(v) {
   const tre = Math.abs(v * 1000 - Math.round(v * 1000)) < 1e-6;
   let t = tre ? (Math.round(v * 1000) / 1000).toFixed(3).replace(/\.?0+$/, '') : (Math.round(v * 100) / 100).toFixed(2).replace(/\.?0+$/, '');
   return t.replace('.', ',').replace('-', '−');
+}
+
+// Versore perpendicolare al segmento p1-p2: con lato = 1 sta a sinistra del verso da p1 a p2.
+function normale(p1, p2, lato = 1) {
+  const L = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) || 1;
+  return [(-(p2[1] - p1[1]) / L) * lato, ((p2[0] - p1[0]) / L) * lato];
 }
 
 export function struttura(a) {
@@ -118,6 +138,20 @@ export function struttura(a) {
   const vincoli = lista(a.vincoli).map((s) => { const [n, tipo, ang = '270'] = campi(s); return { n, p: punto(n), tipo, ang: (Number(ang) * Math.PI) / 180 }; });
   const cerniere = lista(a.cerniere).map((n) => ({ n, p: punto(n) }));
 
+  // Idraulica
+  const acqua = lista(a.acqua).map(coppie), solidi = lista(a.solidi).map(coppie);
+  const peli = lista(a.pelo).map((s) => { const [x0, x1, y, ...et] = campi(s); return { x0: Number(x0), x1: Number(x1), y: Number(y), et: et.join(',') }; });
+  const condotte = lista(a.condotte).map((s) => {
+    const [seg, d = '0.4', ...et] = campi(s);
+    return { pts: seg.split('-').map((n) => punto(n)), d: Number(d), et: et.join(',') };
+  });
+  const piezometriche = lista(a.piezometrica).map(coppie), energie = lista(a.energia).map(coppie);
+  const pressioni = lista(a.pressioni).map((s) => {
+    const [p1, p2, h1, h2, et = '', lato = '1'] = campi(s);
+    return { p1: punto(p1), p2: punto(p2), h1: Number(h1), h2: Number(h2), et, lato: Number(lato) >= 0 ? 1 : -1 };
+  });
+  const pompe = lista(a.pompa).map((s) => { const [x, y, ...et] = campi(s); return { p: [Number(x), Number(y)], et: et.join(',') }; });
+
   // Diagramma delle sollecitazioni: campionamento dei tratti
   const verso = String(a.verso) === '-1' ? -1 : 1;
   const tratti = lista(a.diagramma).map((s) => {
@@ -132,7 +166,8 @@ export function struttura(a) {
   });
 
   // Riquadro della struttura (senza diagramma) per scegliere la scala del diagramma
-  const geo = [...nodi.values(), ...aste.flat(), ...catene.flat(), ...vincoli.map((v) => v.p), ...poligoni.flat(), ...linee.flat(), ...tratti.flatMap((t) => [t.p0, t.p1])];
+  const geo = [...nodi.values(), ...aste.flat(), ...catene.flat(), ...vincoli.map((v) => v.p), ...poligoni.flat(), ...linee.flat(), ...tratti.flatMap((t) => [t.p0, t.p1]),
+    ...acqua.flat(), ...solidi.flat(), ...condotte.flatMap((c) => c.pts)];
   if (!geo.length) for (const c of cerchi) geo.push([c.c[0] - c.r, c.c[1] - c.r], [c.c[0] + c.r, c.c[1] + c.r]);
   const gx = geo.map((p) => p[0]), gy = geo.map((p) => p[1]);
   const D = Math.max(1e-6, Math.max(...gx) - Math.min(...gx), Math.max(...gy) - Math.min(...gy)) || 1;
@@ -158,6 +193,14 @@ export function struttura(a) {
   for (const t of tratteggi) tutti.push(...t);
   for (const fr of frecce) tutti.push(fr.p0, fr.p1);
   for (const e of etichette) tutti.push(e.p);
+  for (const p of peli) tutti.push([p.x0, p.y], [p.x1, p.y + 0.001]);
+  for (const l of [...piezometriche, ...energie]) tutti.push(...l);
+  for (const c of condotte) for (const q of c.pts) tutti.push([q[0] - c.d, q[1] - c.d], [q[0] + c.d, q[1] + c.d]);
+  for (const q of pressioni) {
+    const n = normale(q.p1, q.p2, q.lato);
+    tutti.push([q.p1[0] + n[0] * q.h1, q.p1[1] + n[1] * q.h1], [q.p2[0] + n[0] * q.h2, q.p2[1] + n[1] * q.h2]);
+  }
+  for (const p of pompe) tutti.push(p.p);
   for (const t of tratti) for (const [s2, v] of t.val) if (Number.isFinite(v)) tutti.push(sulDiagramma(t, s2, v));
 
   const xs = tutti.map((p) => p[0]).filter(Number.isFinite), ys = tutti.map((p) => p[1]).filter(Number.isFinite);
@@ -178,6 +221,21 @@ export function struttura(a) {
   const path = (pts, chiuso) => pts.map((p, i) => `${i ? 'L' : 'M'}${P(p)}`).join(' ') + (chiuso ? ' Z' : '');
 
   let svg = '';
+  // Idraulica: terreno e muratura, acqua, condotte
+  svg += solidi.map((q) => `<path class="solido" fill="url(#${id}-campitura)" d="${path(q, true)}"/>`).join('');
+  svg += acqua.map((q) => `<path class="acqua" d="${path(q, true)}"/>`).join('');
+  for (const c of condotte) {
+    const d = path(c.pts), sp = Math.max(7, c.d * k);
+    svg += `<path class="condotta-parete" stroke-width="${f(sp + 3.6)}" d="${d}"/>`;
+    svg += `<path class="condotta-acqua" stroke-width="${f(sp)}" d="${d}"/>`;
+    svg += `<path class="asse-condotta" d="${d}"/>`;
+    if (c.et) {
+      const [q1, q2] = [c.pts[0], c.pts[1]];
+      const n = normale(q1, q2, 1), m = [(q1[0] + q2[0]) / 2, (q1[1] + q2[1]) / 2];
+      svg += `<text class="etichetta" x="${f(X(m[0]) + n[0] * (sp / 2 + 13))}" y="${f(Y(m[1]) - n[1] * (sp / 2 + 13) + 6)}" text-anchor="middle">${testoSvg(c.et)}</text>`;
+    }
+  }
+
   // Sezioni e regioni
   svg += poligoni.map((p) => `<path class="sezione" d="${path(p, true)}"/>`).join('');
   svg += cerchi.filter((c) => !c.foro).map((c) => `<circle class="sezione" cx="${f(X(c.c[0]))}" cy="${f(Y(c.c[1]))}" r="${f(c.r * k)}"/>`).join('');
@@ -185,6 +243,14 @@ export function struttura(a) {
   svg += cerchi.filter((c) => c.foro).map((c) => `<circle class="foro" cx="${f(X(c.c[0]))}" cy="${f(Y(c.c[1]))}" r="${f(c.r * k)}"/>`).join('');
   svg += linee.map((p) => `<path class="sottile" d="${path(p)}"/>`).join('');
   svg += tratteggi.map((p) => `<path class="tratteggio" d="${path(p)}"/>`).join('');
+  svg += piezometriche.map((q) => `<path class="piezometrica" d="${path(q)}"/>`).join('');
+  svg += energie.map((q) => `<path class="energia" d="${path(q)}"/>`).join('');
+  for (const q of peli) {
+    svg += `<line class="pelo" x1="${f(X(q.x0))}" y1="${f(Y(q.y))}" x2="${f(X(q.x1))}" y2="${f(Y(q.y))}"/>`;
+    const xs = X(q.x0 + (q.x1 - q.x0) * 0.12), ys = Y(q.y), r = 7;
+    svg += `<path class="pelo-simbolo" d="M${f(xs - r)} ${f(ys - r * 1.35)} L${f(xs + r)} ${f(ys - r * 1.35)} L${f(xs)} ${f(ys)} Z"/>`;
+    if (q.et) svg += `<text class="etichetta" x="${f(xs + r + 7)}" y="${f(ys - 10)}" text-anchor="start">${testoSvg(q.et)}</text>`;
+  }
 
   // Diagramma: area con tratteggio perpendicolare all'asta, contorno, valori
   const etDiagramma = [];
@@ -361,6 +427,35 @@ export function struttura(a) {
     }
   }
 
+  // Diagrammi di pressione (frecce perpendicolari al segmento, rivolte verso di esso)
+  for (const q of pressioni) {
+    const n = normale(q.p1, q.p2, q.lato);
+    const L = Math.hypot(q.p2[0] - q.p1[0], q.p2[1] - q.p1[1]) || 1;
+    const nf = Math.max(2, Math.round((L * k) / 26));
+    const fuori = (t) => { const h = q.h1 + (q.h2 - q.h1) * t; return [q.p1[0] + (q.p2[0] - q.p1[0]) * t + n[0] * h, q.p1[1] + (q.p2[1] - q.p1[1]) * t + n[1] * h]; };
+    svg += `<path class="carico-area" d="${path([q.p1, fuori(0), fuori(1), q.p2], true)}"/>`;
+    svg += `<path class="carico-linea" d="${path([fuori(0), fuori(1)])}"/>`;
+    for (let i = 0; i <= nf; i++) {
+      const t = i / nf, h = q.h1 + (q.h2 - q.h1) * t;
+      if (h * k < 7) continue;
+      const base = [q.p1[0] + (q.p2[0] - q.p1[0]) * t, q.p1[1] + (q.p2[1] - q.p1[1]) * t], top = fuori(t);
+      svg += `<line class="carico" x1="${f(X(top[0]))}" y1="${f(Y(top[1]))}" x2="${f(X(base[0]))}" y2="${f(Y(base[1]))}" marker-end="url(#${id}-carico)"/>`;
+    }
+    if (q.et) {
+      const t = q.h1 >= q.h2 ? 0.25 : 0.75, c = fuori(t);
+      const ancoraP = n[0] > 0.5 ? 'start' : n[0] < -0.5 ? 'end' : 'middle';
+      svg += `<text class="etichetta" x="${f(X(c[0]) + n[0] * 11)}" y="${f(Y(c[1]) - n[1] * 13 + 5)}" text-anchor="${ancoraP}">${testoSvg(q.et)}</text>`;
+    }
+  }
+
+  // Pompe
+  for (const q of pompe) {
+    const cx = X(q.p[0]), cy = Y(q.p[1]), r = 14;
+    svg += `<circle class="pompa" cx="${f(cx)}" cy="${f(cy)}" r="${r}"/>`;
+    svg += `<path class="pompa-segno" d="M${f(cx - 5)} ${f(cy - 7)} L${f(cx + 8)} ${f(cy)} L${f(cx - 5)} ${f(cy + 7)} Z"/>`;
+    if (q.et) svg += `<text class="etichetta" x="${f(cx)}" y="${f(cy + r + 20)}" text-anchor="middle">${testoSvg(q.et)}</text>`;
+  }
+
   // Forze e reazioni
   const freccia = (F, classe, marker) => {
     const t0 = [F.p[0] - F.d[0], F.p[1] - F.d[1]];
@@ -473,7 +568,7 @@ export function struttura(a) {
   const larghezza = Math.min(560, Math.round((360 * W) / H));
   const descr = a.titolo || 'Schema della struttura';
   return `<figure class="grafico struttura"><svg viewBox="0 0 ${W} ${H}" style="max-width: ${larghezza}px" role="img" aria-label="${esc(testoSemplice(descr))}">
-<defs>${marker('forza', 'punta-forza', 6)}${marker('reazione', 'punta-reazione', 6)}${marker('carico', 'punta-carico', 5)}${marker('sottile', 'punta-sottile', 7)}</defs>
+<defs><pattern id="${id}-campitura" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line class="campitura" x1="0" y1="0" x2="0" y2="7"/></pattern>${marker('forza', 'punta-forza', 6)}${marker('reazione', 'punta-reazione', 6)}${marker('carico', 'punta-carico', 5)}${marker('sottile', 'punta-sottile', 7)}</defs>
 ${svg}
 </svg>${a.titolo ? `<figcaption>${didascalia(a.titolo)}</figcaption>` : ''}</figure>`;
 }
