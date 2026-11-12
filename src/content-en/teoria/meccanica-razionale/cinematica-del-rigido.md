@@ -259,7 +259,7 @@ In a plane rigid motion with $\dot{\vartheta} \neq 0$ the instantaneous center o
 :::
 
 :::richiamo{titolo="Composition of velocities"}
-Given a moving frame, the absolute velocity of a point is the sum of the dragging velocity and the relative velocity:
+Given a moving frame, the absolute velocity of a point is the sum of the transport velocity and the relative velocity:
 $$
 \vec{v}_a = \vec{v}_\tau + \vec{v}_r .
 $$
