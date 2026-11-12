@@ -6,21 +6,27 @@
 import Base from '../layouts/Base.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import { getCollection } from 'astro:content';
-import { materiaL, link, prefisso, type Lingua } from '../i18n';
+import { materiaL, link, type Lingua } from '../i18n';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande } from '../lib/domande';
-interface Props { lingua: Lingua; materia: string }
-const { lingua, materia } = Astro.props;
+import { materiaUsa } from '../data/stem-usa/catalog-view';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { highSchoolCourse } from '../data/stem-usa/high-school/index.mjs';
+import { url } from '../lib/url';
+interface Props { lingua: Lingua; materia: string; usa?: boolean }
+const { lingua, materia, usa = false } = Astro.props;
 const en = lingua === 'en';
-const m = materiaL(lingua, materia);
+const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
 const senzaInglese = !en && semestreFiltro && !(await catalogoDomande('en'))[materia];
 const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
 const nomiProve = nomiAllenamento(m, lingua);
-const dafare = await getCollection('dafare');
+const corso = usa ? highSchoolCourse(materia) : undefined;
+const dafare = usa ? [] : await getCollection('dafare');
+const href = (percorso: string) => usa ? url(courseUrl(materia) + percorso) : link(lingua, '/' + materia + percorso);
 const argomenti = m.argomenti
-  .map((a) => ({ slug: a.slug, titolo: a.titolo, breve: a.breve, n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length }))
-  .filter((a) => a.n > 0);
+  .filter((a, i) => corso ? corso.lessons[i].exercises.length > 0 : dafare.some((v) => v.id.startsWith(`${materia}/${a.slug}/`)))
+  .map(({ slug, titolo, breve }) => ({ slug, titolo, breve, href: href(`/${slug}/esercizi`) }));
 const T = en ? {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
   sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
@@ -53,11 +59,10 @@ if (semestreFiltro) {
   T.inizia = en ? 'Start practice' : 'Inizia l’allenamento';
   T.nuova = en ? 'New practice paper' : 'Nuovo allenamento';
 }
-const pref = prefisso(lingua);
 ---
 <Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
-  materia={materia} sezione="simulazione" lingua={lingua} seo={{ noindex: true, senzaInglese }}>
-  <div class="simulazione" data-materia={materia} data-pref={pref} data-prezzo={m.prezzo ? '1' : ''} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
+  materia={materia} sezione="simulazione" lingua={lingua} usa={usa} seo={{ noindex: true, senzaInglese }}>
+  <div class="simulazione" data-materia={materia} data-sblocca={href('/sblocca')} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
@@ -94,7 +99,7 @@ const pref = prefisso(lingua);
         <p class="sim-voto"></p>
         <p class="sim-nota"></p>
         <p class="sim-confronto" hidden></p>
-        <p><a class="bottone-secondario" href={link(lingua, `/${materia}/simulazione`)}>{T.nuova}</a></p>
+        <p><a class="bottone-secondario" href={href('/simulazione')}>{T.nuova}</a></p>
       </div>
     </div>
   </div>
@@ -103,8 +108,8 @@ const pref = prefisso(lingua);
 <script>
   const radice = document.querySelector<HTMLElement>('.simulazione')!;
   const T = JSON.parse(radice.dataset.testi!);
-  const argomenti: { slug: string; titolo: string; breve: string; n: number }[] = JSON.parse(radice.dataset.argomenti!);
-  const { materia, pref } = radice.dataset as { materia: string; pref: string };
+  const argomenti: { slug: string; titolo: string; breve: string; href: string }[] = JSON.parse(radice.dataset.argomenti!);
+  const { materia, sblocca } = radice.dataset;
   const en = document.documentElement.lang === 'en';
   const form = radice.querySelector<HTMLFormElement>('.sim-impostazioni')!;
   const compito = radice.querySelector<HTMLElement>('.sim-compito')!;
@@ -134,7 +139,7 @@ const pref = prefisso(lingua);
   const cache = new Map<string, Element[]>();
   async function tracce(arg: string) {
     if (!cache.has(arg)) {
-      const r = await fetch(`${pref}/${materia}/${arg}/esercizi`);
+      const r = await fetch(argomenti.find((a) => a.slug === arg)!.href);
       if (!r.ok) throw new Error('rete');
       const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
       cache.set(arg, [...doc.querySelectorAll('section.traccia')]);
@@ -184,7 +189,7 @@ const pref = prefisso(lingua);
           const d = soluzione[0] as HTMLDetailsElement;
           d.open = false; sol.append(d);
         } else {
-          sol.innerHTML = `<p class="soluzione-riservata">${T.riservata} <a href="${pref}/${materia}/sblocca">${T.sblocca}</a></p>`;
+          sol.innerHTML = `<p class="soluzione-riservata">${T.riservata} <a href="${sblocca}">${T.sblocca}</a></p>`;
         }
         const voto = document.createElement('div');
         voto.className = 'sim-voto-esercizio'; voto.hidden = true;

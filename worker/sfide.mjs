@@ -9,6 +9,7 @@ import { LEGHE, LEGHE_EN, LEGA_GRUPPO, quoteLega, DUELLO, PERCENTILE_MINIMO } fr
 import { livelloDa, PUNTI } from '../src/data/livelli.ts';
 import { MATERIE } from '../src/data/materie.ts';
 import { MATERIE_EN } from '../src/data/materie-en.ts';
+import { highSchoolCourse, highSchoolHasStudyPages } from '../src/data/stem-usa/high-school/index.mjs';
 import { nomeDallEmail } from './nomi.mjs';
 import { aggiungi, risposta, settimanaDi, giornoRoma } from './livelli.mjs';
 import { creaTabelleAvvisiLega } from './avvisi-lega.mjs';
@@ -488,7 +489,8 @@ export async function gestisciSfide(req, env, ctx, p, h) {
     const io = await utenteCollegato(env, req).catch(() => null);
     const chi = await sha(`c|${await impronta(req, io)}`); // solo un'impronta: nessun dato personale nell'archivio
     const { materia, inizio, voto, n } = corpo;
-    if (!MATERIE.some((m) => m.slug === materia) || !Number.isFinite(voto) || voto < 0 || voto > 30 || !Number.isFinite(inizio) || !(n >= 3 && n <= 6)) return json({ errore: 'dati' }, 400);
+    const materiaConSimulazione = MATERIE.some((m) => m.slug === materia) || highSchoolHasStudyPages(highSchoolCourse(materia));
+    if (!materiaConSimulazione || !Number.isFinite(voto) || voto < 0 || voto > 30 || !Number.isFinite(inizio) || !(n >= 3 && n <= 6)) return json({ errore: 'dati' }, 400);
     const id = await sha(`t|${chi}|${materia}|${inizio}`);
     return json(await aDO(env, '/sfi-percentile', { tipo: 'trentesimi', chiave: materia, id, valore: Math.round(voto * 2) / 2, chi, aggiorna: true }), 200, { 'cache-control': 'no-store' });
   }

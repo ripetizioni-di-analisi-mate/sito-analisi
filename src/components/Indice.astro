@@ -8,7 +8,7 @@ import Stato from './Stato.astro';
 import { url } from '../lib/url';
 import { blocchiUsa, gruppiUsa, materieUsa, materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
-import { highSchoolName, highSchoolPath } from '../data/stem-usa/high-school/index.mjs';
+import { highSchoolName, highSchoolPath, highSchoolCourse, highSchoolHasStudyPages } from '../data/stem-usa/high-school/index.mjs';
 import LezioniCarmine from './LezioniCarmine.astro';
 import PercorsoIndice from './PercorsoIndice.astro';
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
@@ -32,6 +32,8 @@ const hrefMateria = (slug: string) => usa ? url(courseUrl(slug)) : link(lingua, 
 const hrefArgomento = (slug: string, arg: string, sez: string) => usa ? linkArgomentoUsa(slug, arg, sez) : link(lingua, '/' + slug + '/' + arg + '/' + sez);
 const SEZIONI = sezioniL(lingua).filter((s) => m?.eserciziDaFare !== false || s.slug !== 'esercizi');
 const nomiProve = nomiAllenamento(m, lingua);
+const simulazioneUsa = usa && highSchoolHasStudyPages(highSchoolCourse(m?.slug));
+const ripassoCorrente = argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione';
 // Domande a tempo: voce in più sotto gli argomenti che ne hanno.
 const conDomande = new Set(m ? (usa ? usTimedTopics[m.slug] ?? [] : (await catalogoDomande(lingua))[m.slug] ?? []) : []);
 // Spunta accanto ai videocorsi acquistati: il Worker scrive su <html> data-materie anche le chiavi video-<slug>.
@@ -106,7 +108,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </li>
           );
         })}
-        {usa && (
+        {usa && !simulazioneUsa && (
           <li>
             <button type="button" class="argomento" aria-expanded="false" data-apri-argomento>Exam practice</button>
             <ol>
@@ -122,13 +124,13 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
             </ol>
           </li>
         )}
-        {!usa && conDomande.size > 0 && (
-          <li class:list={{ corrente: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
-            <button type="button" class="argomento" aria-expanded={argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
-            <ol class:list={{ aperta: argomento === RIPASSO || argomento === RIPASSO_OGGI || sezione === 'simulazione' }}>
-              <li><a href={link(lingua, `/${m.slug}/${RIPASSO}/domande`)} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
-              {m.eserciziDaFare !== false && <li><a href={link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>}
-              <li class="solo-collegati"><a href={link(lingua, `/${m.slug}/${RIPASSO_OGGI}/domande`)} class:list={{ attiva: argomento === RIPASSO_OGGI }}>{lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi'}</a></li>
+        {(!usa || simulazioneUsa) && conDomande.size > 0 && (
+          <li class:list={{ corrente: ripassoCorrente }}>
+            <button type="button" class="argomento" aria-expanded={ripassoCorrente ? 'true' : 'false'} data-apri-argomento>{nomiProve.ripasso}</button>
+            <ol class:list={{ aperta: ripassoCorrente }}>
+              <li><a href={hrefArgomento(m.slug, RIPASSO, 'domande')} class:list={{ attiva: argomento === RIPASSO }}>{lingua === 'en' ? 'Review questions' : 'Domande di ripasso'}</a></li>
+              {m.eserciziDaFare !== false && <li><a href={usa ? url(courseUrl(m.slug) + '/simulazione') : link(lingua, `/${m.slug}/simulazione`)} class:list={{ attiva: sezione === 'simulazione' }}>{nomiProve.simulazione}</a></li>}
+              <li class="solo-collegati" data-usa-content={simulazioneUsa || undefined}><a href={hrefArgomento(m.slug, RIPASSO_OGGI, 'domande')} class:list={{ attiva: argomento === RIPASSO_OGGI }}>{lingua === 'en' ? 'Today’s review' : 'Ripasso di oggi'}</a></li>
             </ol>
           </li>
         )}

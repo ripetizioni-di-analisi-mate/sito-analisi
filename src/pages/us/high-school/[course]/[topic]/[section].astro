@@ -3,6 +3,7 @@ import Base from '../../../../../layouts/Base.astro';
 import ElencoSchedeSvolte from '../../../../../components/ElencoSchedeSvolte.astro';
 import FineAnteprimaUsa from '../../../../../components/FineAnteprimaUsa.astro';
 import IndiceTeoria from '../../../../../components/IndiceTeoria.astro';
+import SoluzioneEsercizioUsa from '../../../../../components/SoluzioneEsercizioUsa.astro';
 import VerificaRisposta from '../../../../../components/VerificaRisposta.astro';
 import { highSchoolCourses, highSchoolHasStudyPages, FREE_THEORY_SECTIONS, FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../../../../../data/stem-usa/high-school/index.mjs';
 import { linkArgomentoUsa } from '../../../../../data/stem-usa/catalog-view';
@@ -66,11 +67,14 @@ const sheets = lesson.worked.map((_, index) => ({
   </>}
   {section === 'esercizi' && <>
     <p class="sommario">{t.dafareSommario}</p>
-    {lesson.exercises.map(([title, prompt, , answer], index) => {
+    {lesson.exercises.map(([title, prompt, solution, answer], index) => {
       const number = index + 1;
       return <section class="traccia" id={'esercizio-' + number}>
         <h2><a href={href('esercizi/' + number)}><span class="numero">{number}.</span> {title}</a></h2>
-        <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
+        <div class="testo-studio">
+          <p set:html={calculusHtml(prompt)} />
+          <SoluzioneEsercizioUsa soluzione={solution} riservata={number !== FREE_PRACTICE_EXERCISE} />
+        </div>
         <div data-usa-content={number !== FREE_PRACTICE_EXERCISE || undefined}>
           <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + number}
             tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
