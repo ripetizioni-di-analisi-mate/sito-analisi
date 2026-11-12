@@ -1,0 +1,28 @@
+---
+import UsStem from '../../../layouts/UsStem.astro';
+import UsPractice from '../../../components/UsPractice.astro';
+import { universityCourses, optionsFor } from '../../../data/stem-usa/catalog.mjs';
+import { precalculusTimed } from '../../../data/stem-usa/precalculus/timed.mjs';
+import { linkArgomentoUsa } from '../../../data/stem-usa/catalog-view';
+
+const slug = 'precalculus';
+const course = universityCourses.find(course => course.slug === slug)!;
+const selection = [[2, 7, 15], [2, 9, 13], [3, 13, 14], [6, 11, 15], [8, 12, 19], [8, 12, 17]];
+const questions = selection.flatMap((numbers, topicIndex) => {
+  const topic = 'unit-' + (topicIndex + 1);
+  return numbers.map((number, index) => {
+    const question = precalculusTimed[topic][number - 1];
+    const position = topicIndex * numbers.length + index;
+    return {
+      ...question, title: course.lessons[topicIndex].title, choices: optionsFor(question, position),
+      correct: position % (question.distractors.length + 1), href: linkArgomentoUsa(slug, topic, 'teoria'),
+    };
+  });
+});
+---
+<UsStem title="Precalculus Practice Exam" course={slug} section="Sample exam" description="An 18-question precalculus practice exam with explanations and a timer.">
+  <p class="sopratitolo">Exam practice</p>
+  <h1>Precalculus practice exam</h1>
+  <p class="sommario">Work through 18 questions in 45 minutes on functions, polynomial and rational models, logarithms and trigonometry.</p>
+  <UsPractice {questions} minutes={45} renderMath />
+</UsStem>
