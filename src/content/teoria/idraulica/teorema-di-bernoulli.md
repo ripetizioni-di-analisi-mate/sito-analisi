@@ -192,7 +192,7 @@ Gli sforzi tangenziali di origine viscosa si oppongono al moto relativo degli st
 ::::
 
 :::attenzione
-La perdita di carico si sottrae sempre procedendo da monte verso valle, qualunque sia la geometria della condotta. In una condotta che sale, il carico totale diminuisce comunque nel verso del moto, mentre il carico piezometrico può crescere o diminuire. Per una corrente che passa da $z_1 = 2{,}00\,\mathrm{m}$ con $\dfrac{p_1}{\gamma} = 28{,}54\,\mathrm{m}$ e $\dfrac{v_1^2}{2g} = 0{,}053\,\mathrm{m}$ a $z_2 = 6{,}50\,\mathrm{m}$ con $\dfrac{p_2}{\gamma} = 21{,}41\,\mathrm{m}$ e $\dfrac{v_2^2}{2g} = 0{,}408\,\mathrm{m}$, i carichi totali valgono $H_1 = 30{,}60\,\mathrm{m}$ e $H_2 = 28{,}31\,\mathrm{m}$, quindi la perdita è $2{,}28\,\mathrm{m}$ e la corrente va dalla sezione $1$ alla sezione $2$, nonostante la quota cresca.
+La perdita di carico si sottrae sempre procedendo da monte verso valle, qualunque sia la geometria della condotta. In una condotta che sale, il carico totale diminuisce comunque nel verso del moto, mentre il carico piezometrico può crescere o diminuire. Per una corrente che passa da $z_1 = 2{,}00\,\mathrm{m}$ con $\dfrac{p_1}{\gamma} = 28{,}54\,\mathrm{m}$ e $\dfrac{v_1^2}{2g} = 0{,}053\,\mathrm{m}$ a $z_2 = 6{,}50\,\mathrm{m}$ con $\dfrac{p_2}{\gamma} = 21{,}41\,\mathrm{m}$ e $\dfrac{v_2^2}{2g} = 0{,}408\,\mathrm{m}$, i carichi totali valgono $H_1 = 30{,}595\,\mathrm{m}$ e $H_2 = 28{,}315\,\mathrm{m}$, quindi la perdita è $2{,}28\,\mathrm{m}$ e la corrente va dalla sezione $1$ alla sezione $2$, nonostante la quota cresca.
 :::
 
 ## Piezometri e tubo di Pitot
