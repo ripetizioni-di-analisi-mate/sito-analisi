@@ -26,7 +26,7 @@ $$
 If the work around every closed path vanishes, then $W_1 = W_2$ for every pair of paths, so the work is path independent. Conversely, if the work is path independent, then $W_1 - W_2 = 0$ for every closed path, and the work around a closed path vanishes.
 :::
 
-The theorem gives the test that is actually used on a force: a complete turn is enough. A body carried once around a closed circuit on a frictionless track returns with the same speed, while the same circuit travelled on a rough track costs work at every point, and the body returns slower.
+The theorem gives the test that is actually used on a force, since a complete turn is enough to decide. A body carried once around a closed circuit on a frictionless track returns with the same speed, while the same circuit travelled on a rough track costs work at every point, and the body returns slower.
 ::::
 
 :::definizione{#potential-energy titolo="Potential energy"}
@@ -42,7 +42,7 @@ Only differences of $U$ appear in the relation, therefore adding the same consta
 :::osservazione{#why-potential-energy titolo="What the potential energy is used for"}
 Computing a work means computing an integral along the path, while $U_1 - U_2$ is a difference of two numbers. Once the function $U$ of a conservative force is known, every work done by that force is read off from the initial and the final position, and the path is not needed.
 
-The sign convention is the one that makes the next sections work: $U$ decreases exactly when the force does positive work. A body released in free fall loses potential energy while the weight does positive work on it.
+The sign convention is chosen so that $U$ decreases exactly when the force does positive work. A body released in free fall loses potential energy while the weight does positive work on it.
 :::
 
 ## Gravitational potential energy near the Earth's surface
@@ -162,7 +162,7 @@ $$
 The work-energy theorem gives $W_{\text{tot}} = \Delta K$, therefore $\Delta K = -\Delta U$, that is $\Delta K + \Delta U = 0$. The quantity $K + U$ has zero change between any two positions of the motion, so it is constant.
 :::
 
-The second hypothesis is what admits the normal force of a track and the tension of a string into the problem: both stay perpendicular to the velocity, so both do no work and neither needs a potential energy. The conservation law then connects speed and position directly, without the acceleration and without the time.
+The second hypothesis is what admits the normal force of a track and the tension of a string into the problem, because both stay perpendicular to the velocity, hence both do no work and neither needs a potential energy. The conservation law then connects speed and position directly, without the acceleration and without the time.
 
 ::grafico{f="0.15*(x-5)^2" punti="0,3.75,pieno;5,0,pieno;8,1.35,pieno" xmin=-0.6 xmax=10.6 ymin=-0.7 ymax=4.6 nomi="x,y" titolo="Profile of a frictionless track. The speed at each point is fixed by the height alone, since $\dfrac{1}{2}mv^2 + mgy$ has the same value at every point"}
 ::::
@@ -178,9 +178,9 @@ The mass cancels, therefore the speed at the bottom is the same for every body r
 :::
 
 :::attenzione
-Mechanical energy is conserved *only* under the hypotheses stated above. A block that slides $2.0\,\mathrm{m}$ along a rough horizontal floor and comes to rest had kinetic energy at the start and has none at the end, while its potential energy did not change, hence $E$ decreased.
+Mechanical energy is conserved *only* under the hypotheses of the conservation theorem. A block that slides $2.0\,\mathrm{m}$ along a rough horizontal floor and comes to rest had kinetic energy at the start and has none at the end, while its potential energy did not change, hence $E$ decreased.
 
-A body that is pushed by a hand is a second case in which the hypotheses are not satisfied, since the push is a force that does work and has no potential energy. The relation of the following section covers both cases.
+A body that is pushed by a hand is a second case in which the hypotheses are not satisfied, since the push is a force that does work and has no potential energy. The energy equation with nonconservative forces covers both cases.
 :::
 
 ## Nonconservative forces and the energy equation
@@ -211,11 +211,11 @@ and moving $\Delta U$ to the left side gives the stated relation.
 
 The relation contains the conservation law as the particular case $W_{\text{nc}} = 0$. The work of friction is negative, so friction lowers the mechanical energy; the work of a motor or of a hand pushing in the sense of the motion is positive, so it raises the mechanical energy.
 
-::grafico{f="20-4*x" punti="0,20,pieno;5,0,pieno" xmin=-0.5 xmax=5.4 ymin=-1.4 ymax=22 nomi="x,K" titolo="Kinetic energy of a block that slides on a rough horizontal floor with $K_0 = 20\,\mathrm{J}$ and $f_k = 4\,\mathrm{N}$: friction takes $f_k$ per unit length, hence $K$ falls linearly and the block stops after $5.0\,\mathrm{m}$"}
+::grafico{f="20-4*x" punti="0,20,pieno;5,0,pieno" xmin=-0.5 xmax=5.4 ymin=-1.4 ymax=22 nomi="x,K" titolo="Kinetic energy of a block that slides on a rough horizontal floor with $K_0 = 20\,\mathrm{J}$ and $f_k = 4\,\mathrm{N}$, where friction takes $f_k$ per unit length, hence $K$ falls linearly and the block stops after $5.0\,\mathrm{m}$"}
 ::::
 
 :::esempio{#sliding-with-friction titolo="Block stopped by friction"}
-A block of mass $m = 3.0\,\mathrm{kg}$ slides along a horizontal floor with the initial speed $v_0 = 5.0\,\mathrm{m}/\mathrm{s}$ and stops after a distance $d$. The coefficient of kinetic friction is $\mu_k = 0.25$, hence $f_k = \mu_k m g$ and the energy equation with $\Delta U = 0$ gives
+A block of mass $m = 3.0\,\mathrm{kg}$ slides along a horizontal floor with the initial speed $v_0 = 5.0\,\mathrm{m/s}$ and stops after a distance $d$. The coefficient of kinetic friction is $\mu_k = 0.25$, hence $f_k = \mu_k m g$ and the energy equation with $\Delta U = 0$ gives
 $$
 -\mu_k m g\,d = 0 - \frac{1}{2} m v_0^2
 \quad\Longrightarrow\quad
@@ -274,7 +274,7 @@ Let a body of mass $m$ move along the $x$ axis with mechanical energy $E$ and po
 $$
 U(x) \le E .
 $$
-A position at which $U(x) = E$ is a **turning point**: there the speed is zero, and if the force at that position is not zero the body reverses the sense of its motion.
+A position at which $U(x) = E$ is a **turning point**. There the kinetic energy vanishes, hence the speed is zero, and if the force at that position is not zero the body reverses the sense of its motion.
 
 The speed at a generic position follows from the same relation,
 $$
@@ -288,9 +288,9 @@ hence the speed is largest where $U$ is smallest.
 :::definizione{#equilibrium titolo="Stable, unstable and neutral equilibrium"}
 A position $x_0$ is a position of **equilibrium** when the force vanishes there, that is when $\dfrac{dU}{dx}(x_0) = 0$. The equilibrium is classified by the behaviour of $U$ near $x_0$:
 
-- $U$ has a minimum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) > 0$: the equilibrium is **stable**, since a small displacement produces a force directed back towards $x_0$;
-- $U$ has a maximum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) < 0$: the equilibrium is **unstable**, since a small displacement produces a force directed away from $x_0$;
-- $U$ is constant on an interval containing $x_0$: the equilibrium is **neutral**, since the force vanishes on the whole interval and the body stays wherever it is placed.
+- $U$ has a minimum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) > 0$, and the equilibrium is **stable**, since a small displacement produces a force directed back towards $x_0$;
+- $U$ has a maximum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) < 0$, and the equilibrium is **unstable**, since a small displacement produces a force directed away from $x_0$;
+- $U$ is constant on an interval containing $x_0$, and the equilibrium is **neutral**, since the force vanishes on the whole interval and the body stays wherever it is placed.
 
 ::grafico{f="(x^2-1)^2;0.25" punti="-1,0,pieno;1,0,pieno;0,1,pieno" etichette="1.62,0.45,E" xmin=-2.1 xmax=2.1 ymin=-0.6 ymax=3.2 nomi="x,U" titolo="$U(x) = (x^2 - 1)^2$ in joules, with $x$ in meters: the two minima at $x = \pm 1\,\mathrm{m}$ are positions of stable equilibrium and the maximum at $x = 0$ is unstable"}
 :::
@@ -324,7 +324,7 @@ $$
 where $U^{\text{tot}}$ denotes the sum of the $n$ potential energies evaluated at the same position. The work is therefore a difference of values of a function of position, which is the definition required.
 :::
 
-A body attached to a spring and subject to its own weight is the case that occurs most often, and the two potential energies are simply added.
+A body attached to a spring and subject to its own weight is the case that occurs most often, and the two potential energies are added.
 
 ::grafico{f="2*x^2-4*x" punti="1,-2,pieno;2,0,pieno" xmin=-0.7 xmax=2.9 ymin=-3 ymax=4.2 nomi="y,U" titolo="$U(y) = \dfrac{1}{2}ky^2 - mgy$ for $k = 4\,\mathrm{N/m}$ and $mg = 4\,\mathrm{N}$, with $y$ measured downwards from the unstretched position: the minimum is at the equilibrium position $y = \dfrac{mg}{k}$, and a block released from rest at $y = 0$ comes back to rest at $y = \dfrac{2mg}{k}$"}
 ::::

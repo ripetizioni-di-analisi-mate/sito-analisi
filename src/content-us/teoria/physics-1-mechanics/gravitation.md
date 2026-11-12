@@ -302,8 +302,8 @@ The two formulas answer every question about a satellite from its radius alone. 
 :::esempio{#geostationary titolo="The geostationary orbit"}
 A satellite is geostationary when it stays above the same point of the equator, which requires a circular equatorial orbit with the period of one sidereal day, $T = 8.616 \times 10^{4}\,\mathrm{s}$. Solving $T = 2\pi\sqrt{\dfrac{r^3}{GM_E}}$ for $r$,
 $$
-r = \left(\frac{G M_E T^2}{4\pi^2}\right)^{1/3}
-= \left(\frac{3.984 \times 10^{14} \cdot (8.616 \times 10^{4})^2}{4\pi^2}\right)^{1/3}\,\mathrm{m}
+r = \left(\frac{G M_E T^2}{4\pi^2}\right)^{\frac{1}{3}}
+= \left(\frac{3.984 \times 10^{14} \cdot (8.616 \times 10^{4})^2}{4\pi^2}\right)^{\frac{1}{3}}\,\mathrm{m}
 = 4.22 \times 10^{7}\,\mathrm{m} .
 $$
 The altitude is therefore $r - R_E = 3.58 \times 10^{7}\,\mathrm{m}$, about $35\,800\,\mathrm{km}$, and the orbital speed is $3.07\,\mathrm{km/s}$. The radius is fixed by the period, hence every geostationary satellite occupies the same circle.
@@ -412,7 +412,7 @@ For the planets of the solar system the law takes a form with no constants. Meas
 $$
 T^2 = a^3
 $$
-for every planet, with $T$ in years and $a$ in astronomical units. Mars has $a = 1.524\,\mathrm{AU}$, therefore $T = 1.524^{3/2}\,\mathrm{yr} = 1.88\,\mathrm{yr}$, that is $687\,\mathrm{d}$.
+for every planet, with $T$ in years and $a$ in astronomical units. Mars has $a = 1.524\,\mathrm{AU}$, therefore $T = 1.524^{\frac{3}{2}}\,\mathrm{yr} = 1.88\,\mathrm{yr}$, that is $687\,\mathrm{d}$.
 :::
 
 :::attenzione

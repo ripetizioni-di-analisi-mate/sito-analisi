@@ -37,7 +37,6 @@ $$
 :::dimostrazione
 The motion of the center of mass obeys $\sum \vec{F}_i = M\vec{a}_{\mathrm{cm}}$, and the rotation about an axis through the center of mass obeys $\sum \vec{\tau}_i = I\vec{\alpha}$. The body stays at rest, hence $\vec{a}_{\mathrm{cm}} = \vec{0}$ and $\vec{\alpha} = \vec{0}$, and the two sums vanish. Conversely, let the two sums vanish while the body is at rest. Then $\vec{a}_{\mathrm{cm}} = \vec{0}$ and $\vec{\alpha} = \vec{0}$, therefore the velocity of the center of mass and the angular velocity keep the value zero they already have, and every point of the body stays at rest.
 :::
-::::
 
 For forces lying in the $xy$ plane the first condition splits into two scalar equations and the torque has only the component along $z$, hence the equilibrium of a plane problem is governed by the three equations
 $$
@@ -48,6 +47,7 @@ $$
 \sum \tau = 0 .
 $$
 Three equations determine at most three unknown scalars, which is why a beam on two supports can be solved and a beam on three supports cannot be solved by these conditions alone.
+::::
 
 ::::teorema{#pivot-independence titolo="Independence of the reference point"}
 Let the total force on a body vanish, $\sum \vec{F}_i = \vec{0}$. Then the total torque has the same value about every point.
@@ -81,7 +81,7 @@ For a body whose mass is distributed continuously the sums become integrals,
 $$
 \vec{r}_G = \frac{1}{M}\int \vec{r}\,dm ,
 $$
-one integral per coordinate. The chapter on linear momentum and collisions sets up this definition, and the Calculus chapter on integrals provides the technique. For a homogeneous body $G$ lies at the geometric center of the figure, and on every axis of symmetry the body possesses.
+one integral per coordinate. The chapter on linear momentum and collisions sets up this definition, and the Calculus chapter on integrals provides the technique. For a homogeneous body $G$ lies at the geometric center of the figure, hence it lies on every axis of symmetry of the body.
 :::
 
 ::::teorema{#weight-at-center-of-gravity titolo="Torque of the weight"}
@@ -97,9 +97,9 @@ $$
 $$
 where the vector $\vec{g}$ has been taken out of the sum because it is the same for every particle. The last expression is the torque of $M\vec{g}$ applied at $G$.
 :::
-::::
 
 The theorem is what allows a free-body diagram to carry one weight arrow instead of one arrow per particle, therefore it is used in every diagram that follows.
+::::
 
 ::::teorema{#composite-center-of-gravity titolo="Center of gravity of a composite body"}
 Let a body be divided into the parts of masses $M_1, \dots, M_p$ whose centers of gravity are located by $\vec{r}_1, \dots, \vec{r}_p$. Then
@@ -110,9 +110,9 @@ $$
 :::dimostrazione
 Group the particles of the body according to the part they belong to. The sum $\sum_i m_i \vec{r}_i$ restricted to the $k$-th part equals $M_k \vec{r}_k$, by the definition of the center of gravity of that part. Summing over the parts gives the numerator, and summing the masses of the parts gives the total mass.
 :::
-::::
 
 A body with a hole is treated as the full body together with a part of negative mass occupying the hole, since the sum of the two mass distributions is the real one. For a homogeneous plate of constant thickness the masses are proportional to the areas, therefore the areas can be used in place of the masses.
+::::
 
 :::esempio{titolo="Center of gravity of an L-shaped plate"}
 A homogeneous plate of constant thickness has the shape of an L formed by a horizontal rectangle $60\,\mathrm{cm} \times 12\,\mathrm{cm}$ and a vertical rectangle $12\,\mathrm{cm} \times 36\,\mathrm{cm}$ standing on its left end. With the origin at the lower left corner, the two parts have areas $A_1 = 720\,\mathrm{cm^2}$ and $A_2 = 432\,\mathrm{cm^2}$, and their centers are the centers of the two rectangles:
@@ -194,9 +194,9 @@ $$
 $$
 where $\vec{r}_{21}$ joins $P_1$ to $P_2$. A vector product vanishes with both factors nonzero only when the factors are parallel, hence $\vec{F}_2$ lies along the line $P_1P_2$, and so does $\vec{F}_1$.
 :::
-::::
 
-A straight bar pinned at both ends and loaded at those ends alone is a body of this kind, therefore it carries a force along its own axis: the bars of a truss are treated in this way, and each of them is in tension or in compression.
+A straight bar pinned at both ends and loaded at those ends alone is a body of this kind, therefore it carries a force along its own axis. The bars of a truss are treated in this way, and each of them is in tension or in compression.
+::::
 
 :::esempio{#boom titolo="A hinged beam held by a cable"}
 A homogeneous beam of mass $M = 20\,\mathrm{kg}$ and length $L = 2.4\,\mathrm{m}$ is pinned to a wall at its left end and held horizontal by a cable fastened to its right end, making the angle $\theta = 30^\circ$ with the beam.
@@ -259,7 +259,7 @@ The required coefficient grows as $\theta$ decreases, therefore a ladder set at 
 :::osservazione{#tipping titolo="Tipping"}
 A body resting on a flat base touches the floor over a whole region, and the floor pushes with a distributed force. The resultant of that distributed force is a single normal force whose line of action can be placed anywhere inside the base of contact, and nowhere outside it. The torque equation therefore has a solution only while the forces require that line to fall inside the base, and the body **tips** about the edge of the base as soon as the required point reaches that edge.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 0.6,0 0.6,1.2 0,1.2" linee="-0.8,0 1.9,0" punti="0.6,0,pieno;0.3,0.6,pieno,G" vettori="0,1.2,0.58,1.2,F;0.3,0.6,0.3,0.08,Mg" segmenti="0.3,0.6,0.3,-0.5;0.6,0,0.6,-0.5;0.3,-0.34,0.6,-0.34" etichette="0.45,-0.62,w/2;1.0,0.12,edge" xmin=-1.0 xmax=2.1 ymin=-0.95 ymax=1.7 titolo="Tipping of a crate of width $w$ and height $h$: the limit is reached when $F h = M g \dfrac{w}{2}$, hence $F = \dfrac{M g w}{2h}$"}
+::grafico{assi=0 uguale=1 poligoni="0,0 0.6,0 0.6,1.2 0,1.2" linee="-0.8,0 1.9,0" punti="0.6,0,pieno;0.3,0.6,pieno,G" vettori="0,1.2,0.58,1.2,F;0.3,0.6,0.3,0.08,Mg" segmenti="0.3,0.6,0.3,-0.5;0,0,0,-0.5;0.6,0,0.6,-0.5;0,-0.34,0.6,-0.34" etichette="0.3,-0.64,w;1.0,0.12,edge" xmin=-1.0 xmax=2.1 ymin=-0.95 ymax=1.7 titolo="Tipping of a crate of width $w$ and height $h$: the limit is reached when $F h = M g \dfrac{w}{2}$, hence $F = \dfrac{M g w}{2h}$"}
 
 For a crate of width $w$ and height $h$ standing on an incline of angle $\theta$, the same condition on the line of action of the weight gives $\tan\theta = \dfrac{w}{h}$ at the limit.
 :::
@@ -341,9 +341,9 @@ F = \frac{Y A}{L_0}\,\Delta L .
 $$
 The coefficient multiplying $\Delta L$ does not depend on the load, therefore it is the stiffness of the bar.
 :::
-::::
 
-The result connects this chapter to the one on potential energy and conservation of energy: a loaded bar stores the elastic potential energy $\dfrac{1}{2}k(\Delta L)^2$ with the stiffness just found, and a steel wire that supports a weight is a spring of very large $k$.
+The result connects this chapter to the one on potential energy and conservation of energy, since a loaded bar stores the elastic potential energy $\dfrac{1}{2}k(\Delta L)^2$ with the stiffness just found. A steel wire that supports a weight is therefore a spring of very large $k$.
+::::
 
 :::esempio{titolo="Elongation of a steel rod"}
 A steel rod of length $L_0 = 1.50\,\mathrm{m}$ and cross section $A = 2.0\,\mathrm{cm^2} = 2.0 \times 10^{-4}\,\mathrm{m^2}$ carries the tensile force $F = 1.0 \times 10^{4}\,\mathrm{N}$, with $Y = 2.0 \times 10^{11}\,\mathrm{Pa}$. The stress and the strain are

@@ -6,6 +6,7 @@
 import { getCollection } from 'astro:content';
 import { MATERIE } from '../data/materie';
 import { courses as corsiUsa, courseUrl } from '../data/stem-usa/catalog.mjs';
+import { PROGRAMMI, SEZIONI_USA } from '../data/stem-usa/programmi.mjs';
 import { VIDEOCORSI } from '../data/videocorsi';
 import DATE from '../data/date-pagine.json';
 import { assoluto } from '../lib/seo';
@@ -18,8 +19,8 @@ const dataDi = (cartella: string, id: string) => DATA[`src/${cartella}/${id}.md`
 const piuRecente = (...d: (string | undefined)[]) => d.filter(Boolean).sort().pop();
 
 export async function GET() {
-  const [teoria, svolti, dafare, teoriaEn, svoltiEn, dafareEn] = await Promise.all(
-    ['teoria', 'svolti', 'dafare', 'teoria_en', 'svolti_en', 'dafare_en'].map((c) => getCollection(c as 'teoria')),
+  const [teoria, svolti, dafare, teoriaEn, svoltiEn, dafareEn, svoltiUs, dafareUs] = await Promise.all(
+    ['teoria', 'svolti', 'dafare', 'teoria_en', 'svolti_en', 'dafare_en', 'svolti_us', 'dafare_us'].map((c) => getCollection(c as 'teoria')),
   );
   const tradotte = new Set([...teoriaEn, ...svoltiEn, ...dafareEn].map((v) => v.id));
   // pagine singole dei teoremi e delle definizioni (src/lib/voci-teoria.ts)
@@ -38,6 +39,22 @@ export async function GET() {
   due('/us/high-school', 0.8, false);
   for (const corso of corsiUsa) due(courseUrl(corso.slug), 0.8, false);
   due('/us/calculus-1/practice-exam', 0.6, false);
+  // Corsi americani scritti sul programma statunitense: teoria, schede svolte ed esercizi di ogni argomento.
+  for (const [corso, argomenti] of Object.entries(PROGRAMMI as Record<string, { slug: string }[]>)) {
+    const base = courseUrl(corso);
+    for (const a of argomenti) {
+      const dUs = (sezione: string, id: string) => dataDi(`content-us/${sezione}`, id);
+      due(`${base}/${a.slug}/${SEZIONI_USA.teoria}`, 0.7, false, dUs('teoria', `${corso}/${a.slug}`));
+      const schede = svoltiUs.filter((v) => v.id.startsWith(`${corso}/${a.slug}/`));
+      const tracce = dafareUs.filter((v) => v.id.startsWith(`${corso}/${a.slug}/`));
+      if (schede.length) due(`${base}/${a.slug}/${SEZIONI_USA['esercizi-svolti']}`, 0.6, false,
+        piuRecente(...schede.map((v) => dUs('svolti', v.id))));
+      for (const v of schede) due(`${base}/${a.slug}/${SEZIONI_USA['esercizi-svolti']}/${v.id.split('/').pop()}`, 0.5, false, dUs('svolti', v.id));
+      if (tracce.length) due(`${base}/${a.slug}/${SEZIONI_USA.esercizi}`, 0.6, false,
+        piuRecente(...tracce.map((v) => dUs('dafare', v.id))));
+      for (const v of tracce) due(`${base}/${a.slug}/${SEZIONI_USA.esercizi}/${v.id.split('/').pop()}`, 0.5, false, dUs('dafare', v.id));
+    }
+  }
   due('/chi-sono', 0.5);
   due('/concorsi', 0.6, false);
   due('/domande-a-tempo', 0.6);
