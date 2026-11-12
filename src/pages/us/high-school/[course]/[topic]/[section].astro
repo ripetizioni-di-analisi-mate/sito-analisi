@@ -1,11 +1,13 @@
 ---
 import Base from '../../../../../layouts/Base.astro';
+import ElencoSchedeSvolte from '../../../../../components/ElencoSchedeSvolte.astro';
+import FineAnteprimaUsa from '../../../../../components/FineAnteprimaUsa.astro';
+import IndiceTeoria from '../../../../../components/IndiceTeoria.astro';
 import VerificaRisposta from '../../../../../components/VerificaRisposta.astro';
-import { highSchoolCourses, highSchoolHasStudyPages } from '../../../../../data/stem-usa/high-school/index.mjs';
+import { highSchoolCourses, highSchoolHasStudyPages, FREE_THEORY_SECTIONS, FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../../../../../data/stem-usa/high-school/index.mjs';
 import { linkArgomentoUsa } from '../../../../../data/stem-usa/catalog-view';
 import { calculusAnswer, calculusHtml } from '../../../../../lib/stem-usa-practice';
 import { T } from '../../../../../i18n';
-import '../../../../../styles/stem-usa.css';
 
 export function getStaticPaths() {
   return highSchoolCourses.filter(highSchoolHasStudyPages).flatMap(course => course.lessons.flatMap((lesson, index) =>
@@ -18,62 +20,67 @@ export function getStaticPaths() {
 
 const { slug, lesson } = Astro.props;
 const { topic, section } = Astro.params as { topic: string; section: 'teoria' | 'esercizi-svolti' | 'esercizi' };
-const label = T('en').sezioni[section];
-const theoryLink = linkArgomentoUsa(slug, topic, 'teoria');
-const sections = lesson.sections.map(([title, text], index) => ({ id: 'lesson-' + (index + 1), title, text }));
-const studyTitle = lesson.title + ' · ' + label;
+const t = T('en');
+const label = t.sezioni[section];
+const href = (type: string) => linkArgomentoUsa(slug, topic, type);
+const sections = lesson.sections.map(([text, explanation], index) => ({
+  slug: 'lesson-' + (index + 1), text, explanation, riservata: index >= FREE_THEORY_SECTIONS,
+}));
+const sheets = lesson.worked.map((_, index) => ({
+  numero: index + 1,
+  titolo: lesson.workedTitles[index],
+  href: href('esercizi-svolti/' + (index + 1)),
+  accesso: index < FREE_WORKED_EXAMPLES ? 'Free worked example' : undefined,
+}));
 ---
-<Base lingua="en" usa titolo={studyTitle} descrizione={lesson.theory} materia={slug} argomento={topic} sezione={section}
-  percorso={[{ titolo: lesson.title, href: theoryLink }, { titolo: label }]}>
-  <div class="stem-usa">
-    <p class="sopratitolo">{label}</p>
-    <h1>{lesson.title}</h1>
-    {section === 'teoria' && <>
-      <details class="sommario-pagina">
-        <summary>On this page</summary>
-        <ol>{sections.map(({ id, title }) => <li><a href={'#' + id}>{title}</a></li>)}</ol>
-      </details>
-      <div class="testo-studio">
-        {sections.map(({ id, title, text }) => (
-          <section id={id} class="algebra-theory">
-            <h2>{title}</h2>
-            <p set:html={calculusHtml(text)} />
-          </section>
-        ))}
-      </div>
-      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'esercizi-svolti')}>See the worked examples →</a></p>
-    </>}
-    {section === 'esercizi-svolti' && <>
-      {lesson.worked.map(([prompt, solution], index) => (
-        <section class="traccia" id={'worked-' + (index + 1)}>
-          <h2>Example {index + 1}</h2>
-          <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
-          <div class="spiegazione">
-            {solution.split('\n').map(step => <p set:html={calculusHtml(step)} />)}
+<Base lingua="en" usa titolo={lesson.title + ' · ' + label} descrizione={lesson.theory} materia={slug} argomento={topic} sezione={section}
+  percorso={[{ titolo: lesson.title, href: href('teoria') }, { titolo: label }]}>
+  <p class="sopratitolo">{label}</p>
+  <h1>{lesson.title}</h1>
+  {section === 'teoria' && <>
+    <p class="sommario">{lesson.theory}</p>
+    <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sections} />
+    <div class="testo-studio">
+      {sections.map(({ slug: id, text, explanation, riservata }) => (
+        <Fragment>
+          <h2 id={id} data-usa-content={riservata || undefined}>{text}</h2>
+          <div class="blocco blocco-definizione" data-usa-content={riservata || undefined}>
+            <p set:html={calculusHtml(explanation)} />
           </div>
-        </section>
+        </Fragment>
       ))}
-      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'esercizi')}>Try the practice exercises →</a></p>
-    </>}
-    {section === 'esercizi' && <>
-      {lesson.exercises.map(([title, prompt, solution, answer], index) => (
-        <section class="traccia" id={'exercise-' + (index + 1)}>
-          <h2><span class="numero">{index + 1}.</span> {title}</h2>
-          <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
-          <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + (index + 1)}
+    </div>
+    <FineAnteprimaUsa materia={slug} titolo="Continue with the full lesson">
+      <ol class="velo-elenco" start={FREE_THEORY_SECTIONS + 1}>
+        {sections.slice(FREE_THEORY_SECTIONS).map(({ text }) => <li>{text}</li>)}
+      </ol>
+      <p><a href={href('esercizi-svolti')}>Open the free worked examples →</a></p>
+    </FineAnteprimaUsa>
+    <h2>{t.svoltiSuArgomento}</h2>
+    <ElencoSchedeSvolte schede={sheets} />
+    <p class="vai-esercizi"><a href={href('esercizi')}>{t.dafareSuArgomento(lesson.exercises.length)} →</a></p>
+  </>}
+  {section === 'esercizi-svolti' && <>
+    <p class="sommario">{t.svoltiSommario}</p>
+    <ElencoSchedeSvolte schede={sheets} />
+  </>}
+  {section === 'esercizi' && <>
+    <p class="sommario">{t.dafareSommario}</p>
+    {lesson.exercises.map(([title, prompt, , answer], index) => {
+      const number = index + 1;
+      return <section class="traccia" id={'esercizio-' + number}>
+        <h2><a href={href('esercizi/' + number)}><span class="numero">{number}.</span> {title}</a></h2>
+        <div class="testo-studio"><p set:html={calculusHtml(prompt)} /></div>
+        <div data-usa-content={number !== FREE_PRACTICE_EXERCISE || undefined}>
+          <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + number}
             tipo={answer ? calculusAnswer(answer, false).tipo : undefined} mostraIndizio={false} />
-          <details class="stem-feedback">
-            <summary>Show solution</summary>
-            <p set:html={calculusHtml(solution)} />
-          </details>
-        </section>
-      ))}
-      <p class="vai-esercizi"><a href={linkArgomentoUsa(slug, topic, 'domande')}>Start the timed questions →</a></p>
-    </>}
-  </div>
+        </div>
+      </section>;
+    })}
+    <section class="ingresso-domande">
+      <div class="ingresso-testa"><h2>Timed questions</h2><span>{lesson.title}</span></div>
+      <p>One multiple-choice question at a time, with an explanation after each answer.</p>
+      <p class="ingresso-azioni"><a class="bottone-primario" href={href('domande')}>Start</a></p>
+    </section>
+  </>}
 </Base>
-<style>
-  .algebra-theory { scroll-margin-top: 6rem; }
-  .algebra-theory h2 { margin-block: 1.3rem .35rem; }
-  .traccia .spiegazione p { margin-block: .4rem; }
-</style>

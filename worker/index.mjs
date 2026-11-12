@@ -10,7 +10,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
-import { highSchoolTimedTopics } from '../src/data/stem-usa/high-school/index.mjs';
+import { highSchoolTimedTopics, highSchoolPreviewPage, highSchoolCourse, highSchoolHasStudyPages, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
 import { courseUrl, universityTimedTopics } from '../src/data/stem-usa/catalog.mjs';
 import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
@@ -1055,7 +1055,10 @@ export default {
       if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || typeof risposta !== 'string' || risposta.length > 200)
         return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
       const io = await utenteCollegato(env, req).catch(() => null);
-      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
+      const idAnteprima = argomento + '/esercizi/' + n;
+      if (corsoUsaRiservato(materia, io)
+          && !(Number(n) === FREE_PRACTICE_EXERCISE && highSchoolPreviewPage(materia, idAnteprima)))
+        return rispostaCorsoUsaRiservato(materia);
       const risultati = await risposteDi(env, materia);
       const giusta = risultati?.[`${argomento}/${n}`];
       if (!giusta) return json({ errore: en ? 'This exercise has no automatic check.' : 'Questo esercizio non ha la verifica automatica.' }, 404);
@@ -1080,16 +1083,18 @@ export default {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
       const l = linguaDi(lingua);
       const io = await utenteCollegato(env, req).catch(() => null);
-      if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
+      const usaBloccato = corsoUsaRiservato(materia, io);
+      const anteprimaUsa = usaBloccato && l === 'en' && highSchoolPreviewPage(materia, argomento + '/domande');
+      if (usaBloccato && !anteprimaUsa) return rispostaCorsoUsaRiservato(materia);
       const personale = argomento === RIPASSO_OGGI;
       const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
       if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
       let dati = await domandeDi(env, materia, l);
       const argomentiCompleti = dati?.argomenti;
       const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
-      if (anteprimaScienza && argomentiCompleti) {
+      if ((anteprimaScienza || anteprimaUsa) && argomentiCompleti) {
         dati = { ...dati, argomenti: Object.fromEntries(Object.entries(argomentiCompleti)
-          .map(([slug, domande]) => [slug, domande.filter((q) => q.n === NUMERO_QUIZ_ANTEPRIMA_SCIENZA)])) };
+          .map(([slug, domande]) => [slug, domande.filter((q) => q.n === (anteprimaUsa ? FREE_TIMED_QUESTION : NUMERO_QUIZ_ANTEPRIMA_SCIENZA))])) };
       } else if (quizConAnteprima && vendita && !io?.materie?.includes(materia) && dati) {
         dati = { ...dati, argomenti: materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
       }
@@ -1100,6 +1105,7 @@ export default {
       if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
+      if (!q && anteprimaUsa && typeof id === 'string') return rispostaCorsoUsaRiservato(materia);
       if (!q && anteprimaScienza && typeof id === 'string') {
         return json(quizScienzaRiservato(l), 403, { 'cache-control': 'no-store' });
       }
@@ -1146,11 +1152,14 @@ export default {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       const io = await utenteCollegato(env, req).catch(() => null);
-      if (usaProduct(tok?.m) && (corsoUsaRiservato(tok.m, io) || io?.email !== tok.e))
-        return rispostaCorsoUsaRiservato(tok.m);
       const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
+      if (usaProduct(tok?.m)) {
+        const anteprimaUsa = q?.n === FREE_TIMED_QUESTION && tok.l === 'en' && highSchoolPreviewPage(tok.m, argomento + '/domande');
+        if ((io?.email ?? null) !== tok.e || (corsoUsaRiservato(tok.m, io) && !anteprimaUsa))
+          return rispostaCorsoUsaRiservato(tok.m);
+      }
       if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
       if (scienzaAPagamento && tok.m === SCIENZA_DELLE_COSTRUZIONI && q.n !== NUMERO_QUIZ_ANTEPRIMA_SCIENZA
           && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
@@ -1573,7 +1582,8 @@ export default {
     const corsoUsa = usaCoursePath(url.pathname);
     const io = pagina || corsoUsa ? await utenteCollegato(env, req).catch(() => null) : null;
     const usaBloccato = corsoUsa && corsoUsaRiservato(corsoUsa.slug, io);
-    if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca') {
+    const usaAnteprima = corsoUsa && highSchoolPreviewPage(corsoUsa.slug, corsoUsa.section);
+    if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca' && !usaAnteprima) {
       return new Response(null, { status: 302, headers: { location: sbloccaUsa(corsoUsa.slug), 'cache-control': 'private, no-store' } });
     }
     let risposta;
@@ -1636,8 +1646,11 @@ export default {
       if (corsoUsa) {
         const rimuovi = { element(element) { element.remove(); } };
         const accesso = new HTMLRewriter();
-        if (usaBloccato) accesso.on('[data-usa-content]', rimuovi).on('[data-usa-course-nav]', rimuovi);
-        else accesso.on('[data-usa-outline]', rimuovi);
+        if (usaBloccato) {
+          accesso.on('[data-usa-content]', rimuovi);
+          if (!highSchoolHasStudyPages(highSchoolCourse(corsoUsa.slug)))
+            accesso.on('[data-usa-course-nav]', rimuovi);
+        } else accesso.on('[data-usa-outline]', rimuovi).on('[data-usa-preview]', rimuovi);
         risposta = accesso.transform(risposta);
       }
     }

@@ -103,7 +103,9 @@ const tappe = argomentoNormale && ['teoria', 'esercizi-svolti', 'esercizi', 'dom
 const tappa = tappe.findIndex((p) => p.slug === sezione);
 // Le pagine di elenco proseguono nello stesso argomento; le singole schede
 // conservano il proprio ordine numerico.
-const elencoSezione = versioneIt === `/${materia}/${argomento}/${sezione}`;
+const elencoSezione = usa
+  ? qui === courseUrl(materia ?? '') + '/' + argomento + '/' + sezione
+  : versioneIt === `/${materia}/${argomento}/${sezione}`;
 const tappaDopo = elencoSezione ? tappe[tappa + 1] : undefined;
 const avanti: Passo | undefined = tappaDopo ? {
   titolo: tappaDopo.titolo,
@@ -335,7 +337,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
         {nonTradotta && <p class="avviso-lingua" lang="en">{t.nonTradotta} <a href={versoIt} data-lingua="it">Italiano</a></p>}
         {materia && argomento && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '') && <>
           <Concentrazione lingua={lingua} />
-          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} />
+          <NavigazioneStudio materia={materia} argomento={argomento} sezione={sezione} lingua={lingua} usa={usa} />
         </>}
         <slot />
         {(precedente || avanti) && (

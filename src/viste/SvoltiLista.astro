@@ -4,6 +4,7 @@ import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto } from '../lib/seo';
 import { getCollection } from 'astro:content';
 import { dataContenuto, piuRecente } from '../lib/date';
+import ElencoSchedeSvolte from '../components/ElencoSchedeSvolte.astro';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -37,12 +38,9 @@ const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
   <h1>{arg.titolo}</h1>
   <p class="sommario">{t.svoltiSommario}</p>
   {voci.length === 0 && <p class="nota-segnaposto">{t.svoltiInPreparazione}</p>}
-  {voci.length > 0 && (
-    <ul class="elenco-esercizi">
-      {voci.map(({ voce: e }) => {
-        const n = numero(e.id);
-        return <li><a href={link(lingua, `${base}/esercizi-svolti/${n}`)}><span class="numero">{n}</span><span>{e.data.titolo}{mostraAccesso && <span class="parole">{etichettaAccesso(n)}</span>}{e.data.parole?.length > 0 && <span class="parole">{e.data.parole.join(' · ')}</span>}</span></a></li>;
-      })}
-    </ul>
-  )}
+  <ElencoSchedeSvolte schede={voci.map(({ voce: e }) => {
+    const n = numero(e.id);
+    return { numero: n, href: link(lingua, base + '/esercizi-svolti/' + n), titolo: e.data.titolo,
+      accesso: mostraAccesso ? etichettaAccesso(n) : undefined, parole: e.data.parole };
+  })} />
 </Base>

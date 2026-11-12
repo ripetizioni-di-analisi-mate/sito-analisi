@@ -3,6 +3,7 @@ import { unit as U, commonCore, mathFramework, texasMath } from './material.mjs'
 import { theory } from './algebra-1/theory.mjs';
 import { worked, exercises } from './algebra-1/practice.mjs';
 import { timed } from './algebra-1/timed.mjs';
+import { workedTitles } from './algebra-1/worked-titles.mjs';
 
 const sources = [commonCore, mathFramework, texasMath];
 
@@ -73,6 +74,7 @@ export const highSchoolMath = [
   ].map((lesson, index) => ({
     ...lesson,
     sections: theory[index],
+    workedTitles: workedTitles[index],
     worked: [...lesson.worked, ...worked[index]],
     exercises: [...lesson.exercises, ...exercises[index]],
     timed: timed[index],

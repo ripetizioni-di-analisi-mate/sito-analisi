@@ -3,6 +3,7 @@ import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
 import { getCollection, render } from 'astro:content';
+import IndiceTeoria from '../components/IndiceTeoria.astro';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
@@ -65,14 +66,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   <p class="sopratitolo">{t.sezioni.teoria}</p>
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
   {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
-  {sezioni.length > 1 && (
-    <details class="sommario-pagina">
-      <summary>{t.inQuestaPagina}</summary>
-      <ol>
-        {sezioni.map((s: { slug: string; text: string }) => <li><a href={`#${s.slug}`}>{s.text}</a></li>)}
-      </ol>
-    </details>
-  )}
+  <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sezioni} />
   {Contenuto ? <div class="testo-studio"><Contenuto /></div> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
   <script is:inline define:vars={{ usi, basi, parole }}>
     for (const [id, u] of Object.entries(usi)) {

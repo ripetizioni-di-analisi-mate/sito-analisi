@@ -8,6 +8,7 @@ import { DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../data/livelli';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande } from '../lib/domande';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { highSchoolPreviewPage } from '../data/stem-usa/high-school/index.mjs';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
 import { url } from '../lib/url';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number; usa?: boolean }
@@ -22,7 +23,8 @@ const nomiProve = nomiAllenamento(m, lingua);
 const personale = argomento === RIPASSO_OGGI;
 const ripasso = argomento === RIPASSO || personale;
 const anteprimaScienza = materia === 'scienza-delle-costruzioni' && m.prezzo;
-const notaAnteprimaScienza = personale
+const anteprimaUsa = usa && highSchoolPreviewPage(materia, argomento + '/domande');
+const notaAnteprima = personale
   ? (en ? 'Spaced review is included in full access.' : 'Il ripasso personale è incluso nell’accesso completo.')
   : ripasso
     ? (en ? `Try ${m.argomenti.length} sample questions, one per topic.` : `Puoi provare ${m.argomenti.length} domande gratuite, una per argomento.`)
@@ -49,14 +51,14 @@ const comeScelte = en
 const T = en ? {
   titolo: personale ? 'Spaced review' : ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
   termina: 'End the session', sommario: personale ? `The questions of ${m.titolo} you got wrong come back here one day later; each correct answer given on the scheduled day moves the question further on, to 3 and then 7 days, and after three correct answers it leaves the review.` : `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
-  ospite: anteprimaScienza ? 'Experience points and progress are saved with a free account.' : 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
+  ospite: (anteprimaScienza || anteprimaUsa) ? 'Experience points and progress are saved with a free account.' : 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
   caricamento: 'Loading the question…', risposte: 'Answers', conferma: 'Confirm your answer', prossima: 'Next question', svolti: 'Worked examples of this topic', nuovaSerie: 'New set of questions',
   navigazione: 'Questions', precedente: '← Previous', successiva: 'Next →',
   anteprima: 'Free preview', bloccata: 'This question requires full access to the course.', sblocca: 'Unlock the course',
 } : {
   titolo: personale ? 'Ripasso dilazionato' : ripasso ? 'Domande di ripasso' : 'Domande a tempo', descr: ripasso ? `Domande di ripasso su tutti gli argomenti di ${m.titolo}, con due minuti per ciascuna e la spiegazione dopo ogni risposta.` : `Domande a risposta multipla su ${arg.titolo} (${m.titolo}), con due minuti per ciascuna e la spiegazione dopo ogni risposta.`,
   termina: 'Termina la sessione', sommario: personale ? `Le domande di ${m.titolo} a cui hai risposto in modo sbagliato tornano qui il giorno dopo; ogni risposta corretta data nel giorno previsto sposta la domanda più avanti, a 3 e poi a 7 giorni, e dopo tre risposte corrette la domanda esce dal ripasso.` : `Ogni sessione propone ${comeScelte}, una alla volta, con due minuti per ciascuna. Dopo ogni risposta compare la spiegazione.`,
-  ospite: anteprimaScienza ? 'I punti esperienza e i progressi si salvano con un account gratuito.' : 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
+  ospite: (anteprimaScienza || anteprimaUsa) ? 'I punti esperienza e i progressi si salvano con un account gratuito.' : 'Le domande si possono fare anche senza account. I punti esperienza, il livello e gli obiettivi si salvano con un account gratuito.', accedi: 'Crea un account o accedi',
   caricamento: 'Caricamento della domanda…', risposte: 'Risposte', conferma: 'Conferma la risposta', prossima: 'Domanda successiva', svolti: 'Esercizi svolti di questo argomento', nuovaSerie: 'Nuova serie di domande',
   navigazione: 'Domande', precedente: '← Precedente', successiva: 'Successiva →',
   anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
@@ -100,7 +102,9 @@ const JS = en ? {
       <button type="button" class="bottone-secondario termina" hidden>{T.termina}</button>
     </div>
     <p class="sommario">{T.sommario}</p>
-    {anteprimaScienza && <p class="nota nota-anteprima-scienza">{notaAnteprimaScienza} <a href={link(lingua, `/${materia}/sblocca`)}>{T.sblocca} · {m.prezzo} €</a></p>}
+    {(anteprimaScienza || anteprimaUsa) && <p class="nota nota-anteprima-scienza" data-usa-preview={anteprimaUsa || undefined}>
+      {notaAnteprima} <a href={usa ? url(courseUrl(materia) + '/sblocca') : link(lingua, '/' + materia + '/sblocca')}>{T.sblocca} · {m.prezzo} €</a>
+    </p>}
     {['tolc-i', 'tolc-s'].includes(materia) && <p class="nota">{en ? 'Ten sample questions are available before unlocking TOLC-I. Full access includes all questions and the section-timed simulation.' : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi. <a href={`/${materia}/sblocca`}>L’accesso {materia.toUpperCase()}</a> comprende tutti i quiz e la simulazione con tempi per sezione.</>}</p>}
     {materia === 'statistica' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 540 questions with explanations. Materials are in Italian.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Statistica e probabilità</a> comprende tutti i 540 quiz con spiegazione.</>}</p>}
     {materia === 'biologia-semestre-filtro' && <p class="nota">{en ? <>Ten sample questions are available across the course. <a href={`/en/${materia}/sblocca`}>Full access</a> includes all 315 questions with explanations.</> : <>Prima dello sblocco sono disponibili dieci quesiti dimostrativi complessivi nel corso. <a href={`/${materia}/sblocca`}>L’accesso completo a Biologia</a> comprende tutti i 315 quiz con spiegazione.</>}</p>}

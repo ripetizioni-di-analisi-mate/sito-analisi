@@ -1,0 +1,14 @@
+---
+interface Props { schede: { numero: number; href: string; titolo: string; accesso?: string; parole?: string[] }[] }
+const { schede } = Astro.props;
+---
+{schede.length > 0 && (
+  <ul class="elenco-esercizi">
+    {schede.map(({ numero, href, titolo, accesso, parole }) => (
+      <li><a href={href}><span class="numero">{numero}</span><span>{titolo}
+        {accesso && <span class="parole">{accesso}</span>}
+        {Boolean(parole?.length) && <span class="parole">{parole?.join(' · ')}</span>}
+      </span></a></li>
+    ))}
+  </ul>
+)}
