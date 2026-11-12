@@ -107,7 +107,7 @@ si mantiene costante lungo ogni moto. Si rimanda all'argomento sulla dinamica de
 ::::teorema{#lagrange-dirichlet titolo="Teorema di Lagrange-Dirichlet"}
 Sia dato un sistema olonomo a vincoli fissi, bilaterali e ideali, soggetto a una sollecitazione conservativa di energia potenziale $V$ di classe $C^2$. Se $q_0$ è un punto di **minimo relativo proprio** di $V$, cioè se esiste un intorno di $q_0$ in cui $V(q) > V(q_0)$ per ogni $q \neq q_0$, allora $q_0$ è una configurazione di equilibrio stabile.
 
-Il teorema riduce lo studio della stabilità allo studio di un minimo di una funzione di $n$ variabili, che si affronta con gli strumenti dell'analisi: derivata seconda a un grado di libertà, matrice hessiana a più gradi di libertà. L'idea della dimostrazione è che l'energia meccanica si conserva, e che una buca di potenziale attorno a $q_0$ non lascia uscire un moto che parte con energia piccola.
+Il teorema riduce lo studio della stabilità allo studio di un minimo di una funzione di $n$ variabili, che si affronta con gli strumenti dell'analisi, cioè la derivata seconda a un grado di libertà e la matrice hessiana a più gradi di libertà. L'idea della dimostrazione è che l'energia meccanica si conserva, e che una buca di potenziale attorno a $q_0$ non lascia uscire un moto che parte con energia piccola.
 
 :::dimostrazione
 Poiché $q_0$ è un punto di minimo interno di $V$, il gradiente di $V$ vi è nullo, perciò $q_0$ è una configurazione di equilibrio. Si può supporre $V(q_0) = 0$, dato che l'energia potenziale è definita a meno di una costante additiva.
@@ -132,8 +132,8 @@ per ogni $t \ge 0$. Poiché $\mu$ tende a zero al tendere a zero di $\varepsilon
 :::
 ::::
 
-:::osservazione{#inversione-parziale titolo="Che cosa accade quando il minimo manca"}
-Il teorema di Lagrange-Dirichlet dà una condizione sufficiente. Il risultato inverso vale nei casi che si incontrano negli esercizi: se la matrice hessiana di $V$ in $q_0$ ammette un autovalore negativo, allora l'equilibrio è instabile, per i teoremi di instabilità di Lyapunov. Negli esercizi si conclude quindi la stabilità dal segno dell'hessiana, e si lascia da parte il solo caso in cui l'hessiana è semidefinita e singolare.
+:::osservazione{#inversione-parziale titolo="Condizione sufficiente e criterio di instabilità"}
+Il teorema di Lagrange-Dirichlet dà una condizione sufficiente. Il risultato inverso vale nei casi che si incontrano negli esercizi, perché, se la matrice hessiana di $V$ in $q_0$ ammette un autovalore negativo, allora l'equilibrio è instabile per i teoremi di instabilità di Lyapunov. Negli esercizi si conclude quindi la stabilità dal segno dell'hessiana, e si lascia da parte il solo caso in cui l'hessiana è semidefinita e singolare.
 :::
 
 ## Stabilità a un grado di libertà
@@ -154,7 +154,7 @@ V''(q_0) > 0 & \text{equilibrio stabile} \\[4pt]
 V''(q_0) < 0 & \text{equilibrio instabile}
 \end{cases}
 $$
-Se $V''(q_0) > 0$, per la formula di Taylor $V(q) - V(q_0) = \dfrac{1}{2}\,V''(q_0)\,(q - q_0)^2 + o\big((q-q_0)^2\big)$ è positivo in un intorno bucato di $q_0$, quindi $q_0$ è un minimo proprio e il teorema di Lagrange-Dirichlet si applica. Se $V''(q_0) < 0$ la configurazione è un massimo proprio di $V$ e l'equilibrio è instabile. Nelle applicazioni conviene lavorare con il potenziale $U = -V$: l'equilibrio è stabile dove $U$ ha un massimo.
+Se $V''(q_0) > 0$, per la formula di Taylor $V(q) - V(q_0) = \dfrac{1}{2}\,V''(q_0)\,(q - q_0)^2 + o\big((q-q_0)^2\big)$ è positivo in un intorno bucato di $q_0$, quindi $q_0$ è un minimo proprio e il teorema di Lagrange-Dirichlet si applica. Se $V''(q_0) < 0$ la configurazione è un massimo proprio di $V$ e l'equilibrio è instabile. Nelle applicazioni conviene lavorare con il potenziale $U = -V$, perché l'equilibrio è stabile dove $U$ ha un massimo.
 :::
 
 :::esempio{titolo="Le due configurazioni verticali dell'asta"}
@@ -223,7 +223,7 @@ quindi la sola configurazione **stabile** è $(0, 0)$, con entrambe le aste in b
 ## Equilibrio al variare di un parametro
 
 :::osservazione{#parametro-adimensionale titolo="Il parametro adimensionale di un sistema"}
-Quando il potenziale contiene più costanti, la discussione si semplifica raccogliendo un fattore e introducendo un parametro adimensionale, cioè un numero puro che confronta due effetti. Nei sistemi formati da aste pesanti e molle il parametro è il rapporto fra l'azione del peso e quella elastica, per esempio $\lambda = \dfrac{m g}{2 k \ell}$: le configurazioni di equilibrio e la loro stabilità dipendono allora solo da $\lambda$, e non dai quattro dati separatamente.
+Quando il potenziale contiene più costanti, la discussione si semplifica raccogliendo un fattore e introducendo un parametro adimensionale, cioè un numero puro che confronta due effetti. Nei sistemi formati da aste pesanti e molle il parametro è il rapporto fra l'azione del peso e quella elastica, per esempio $\lambda = \dfrac{m g}{2 k \ell}$. Le configurazioni di equilibrio e la loro stabilità dipendono allora solo da $\lambda$, e non dai quattro dati separatamente.
 :::
 
 :::esempio{#biforcazione titolo="Biforcazione di un'asta appoggiata a due guide"}
@@ -233,9 +233,9 @@ L'asta omogenea $AB$, di massa $m$ e lunghezza $\ell$, ha l'estremo $A$ su una g
 
 Con $\vartheta$ angolo fra l'asta e la guida orizzontale e $\lambda = \dfrac{m g}{2 k \ell}$ risulta
 $$
-U'(\vartheta) = \ell\,\cos\vartheta\,\big( k \ell \sin\vartheta - \tfrac{1}{2} m g \big) ,
+U'(\vartheta) = \ell\,\cos\vartheta\,\left( k \ell \sin\vartheta - \frac{m g}{2} \right) ,
 $$
-quindi l'asta è in equilibrio per $\vartheta = \dfrac{\pi}{2}$, e inoltre, se $\lambda < 1$, nelle due configurazioni oblique con $\sin\vartheta = \lambda$. La configurazione verticale è stabile per $\lambda < 1$ e instabile per $\lambda > 1$, mentre le due oblique sono instabili. Il valore $\lambda = 1$ è un valore di **biforcazione**: attraversandolo cambia il numero delle configurazioni di equilibrio e la verticale perde la stabilità.
+quindi l'asta è in equilibrio per $\vartheta = \dfrac{\pi}{2}$, e inoltre, se $\lambda < 1$, nelle due configurazioni oblique con $\sin\vartheta = \lambda$. La configurazione verticale è stabile per $\lambda < 1$ e instabile per $\lambda > 1$, mentre le due oblique sono instabili. Il valore $\lambda = 1$ è un valore di **biforcazione**, perché attraversandolo cambia il numero delle configurazioni di equilibrio e la verticale perde la stabilità.
 
 ::grafico{f="pi/2" curve="cos(t),pi/2+t,-1.45,1.45" xmin=0 xmax=3 ymin=0 ymax=3.3 nomi="λ,ϑ" etichette="2.2,1.75,ϑ = π/2;0.5,3.05,sin ϑ = λ;1.08,0.2,λ = 1" segmenti="1,0,1,3.15" titolo="Configurazioni di equilibrio al variare di $\lambda$: dalla verticale $\vartheta = \dfrac{\pi}{2}$ si staccano in $\lambda = 1$ i due rami obliqui"}
 :::
@@ -247,7 +247,7 @@ Sia $q_0$ una configurazione di equilibrio di un sistema olonomo conservativo a 
 $$
 \mathbb{A}\,\ddot{x} + \mathbb{V}\,x = 0 .
 $$
-Il sistema linearizzato ha coefficienti costanti, perciò si risolve con i metodi delle equazioni differenziali lineari, e le sue soluzioni danno il periodo e la forma delle oscillazioni attorno all'equilibrio.
+Il sistema linearizzato ha coefficienti costanti, perciò si risolve con i metodi delle equazioni differenziali lineari, e le sue soluzioni danno il periodo e la forma delle oscillazioni attorno all'equilibrio. Parlare di oscillazioni piccole significa che lo scostamento $x$ e la velocità $\dot{x}$ restano abbastanza piccoli perché i termini trascurati siano irrilevanti; il teorema di Lagrange-Dirichlet garantisce che, attorno a una configurazione di equilibrio stabile, dati iniziali piccoli producono moti che restano piccoli per ogni tempo.
 
 :::dimostrazione
 Si sviluppano $T$ e $V$ attorno a $q_0$. Nell'energia cinetica si sostituisce $\mathbb{A}(q) = \mathbb{A}(q_0) + O(|x|)$; poiché $T$ contiene già il fattore quadratico $\dot{x} \cdot \mathbb{A}\,\dot{x}$, i termini trascurati sono di ordine superiore al secondo nelle variabili $x$ e $\dot{x}$, quindi
@@ -276,6 +276,12 @@ $$
 \big( \mathbb{V} - \omega^2\,\mathbb{A} \big)\,u = 0 .
 $$
 L'equazione $\det(\mathbb{V} - \omega^2 \mathbb{A}) = 0$, detta **equazione caratteristica**, è algebrica di grado $n$ in $\omega^2$ e ammette $n$ radici reali e positive $\omega_1^2, \dots, \omega_n^2$, dette **pulsazioni proprie** del sistema. Sostituendo $x = u\cos(\omega t + \varphi)$ nel sistema si ottiene $(-\omega^2 \mathbb{A} + \mathbb{V})\,u\,\cos(\omega t + \varphi) = 0$, che vale per ogni $t$ se e solo se il vettore $(\mathbb{V} - \omega^2\mathbb{A})\,u$ è nullo; tale sistema omogeneo ha soluzioni non nulle se e solo se il determinante della matrice dei coefficienti si annulla.
+
+Le radici sono reali e positive perché $\mathbb{A}$ e $\mathbb{V}$ sono simmetriche e definite positive. Infatti $\omega^2$ è un autovalore della matrice $\mathbb{A}^{-1}\mathbb{V}$, che è simile a una matrice simmetrica definita positiva, e per ogni autovettore $u$ vale $\omega^2 = \dfrac{u \cdot \mathbb{V}\,u}{u \cdot \mathbb{A}\,u} > 0$. Se invece $\mathbb{V}$ ammette un autovalore negativo, cioè se l'equilibrio è instabile, l'equazione caratteristica ha una radice $\omega^2 < 0$ e la soluzione corrispondente contiene un esponenziale crescente, perciò il moto si allontana dalla configurazione.
+:::
+
+:::osservazione{#coordinate-dall-equilibrio titolo="Coordinate misurate dalla configurazione di equilibrio"}
+Negli esercizi conviene prendere come origine delle coordinate la configurazione di equilibrio, perché il termine di primo grado dell'energia potenziale è allora nullo e nello sviluppo restano i soli termini quadratici. Un corpo di massa $m$ appeso a una molla di costante $k$ ha energia potenziale $V(s) = \dfrac{1}{2}\,k\,(s - \ell_0)^2 - m g s$, con $s$ distanza dal punto di sospensione; posto $s = s_0 + x$ con $s_0 = \ell_0 + \dfrac{m g}{k}$ risulta $V = \dfrac{1}{2}\,k\,x^2 + \text{costante}$, quindi il peso non compare più e la pulsazione vale $\sqrt{\dfrac{k}{m}}$, qualunque sia l'allungamento statico della molla. La stessa cosa accade in ogni sistema nel quale il peso produce solo uno spostamento della configurazione di equilibrio.
 :::
 
 :::teorema{#oscillazioni-un-grado-di-liberta titolo="Pulsazione e periodo a un grado di libertà"}
@@ -285,7 +291,7 @@ $$
 \qquad
 \mathcal{T} = \frac{2\pi}{\omega} .
 $$
-Il coefficiente $a(q_0)$ è l'inerzia del sistema rispetto alla coordinata scelta e $V''(q_0)$ ne è la rigidezza: a parità di inerzia un potenziale più curvo dà oscillazioni più rapide.
+Il coefficiente $a(q_0)$ è l'inerzia del sistema rispetto alla coordinata scelta e $V''(q_0)$ ne è la rigidezza, perciò a parità di inerzia un potenziale più curvo dà oscillazioni più rapide.
 :::
 
 :::esempio{titolo="Periodo del pendolo composto"}
@@ -295,7 +301,7 @@ $$
 \qquad
 \mathcal{T} = 2\pi\sqrt{\frac{2\ell}{3g}} .
 $$
-Il confronto con il pendolo semplice, che ha $\omega^2 = \dfrac{g}{L}$, dà la **lunghezza ridotta** $L = \dfrac{2\ell}{3}$: l'asta oscilla come un pendolo semplice lungo due terzi dell'asta.
+Il confronto con il pendolo semplice, che ha $\omega^2 = \dfrac{g}{L}$, dà la **lunghezza ridotta** $L = \dfrac{2\ell}{3}$, quindi l'asta oscilla come un pendolo semplice lungo due terzi dell'asta.
 :::
 
 ## Modi normali e coordinate normali
@@ -305,7 +311,7 @@ Un **modo normale** è una soluzione delle equazioni delle piccole oscillazioni 
 $$
 x(t) = u_r\,\cos(\omega_r t + \varphi_r) ,
 $$
-dove $\omega_r$ è una pulsazione propria e $u_r$ è una soluzione non nulla di $(\mathbb{V} - \omega_r^2\,\mathbb{A})\,u = 0$. Il vettore $u_r$ è definito a meno di un fattore e dice in quale rapporto si muovono le coordinate: le componenti di segno concorde oscillano nello stesso verso, quelle di segno opposto in versi opposti. Il moto generale è la sovrapposizione degli $n$ modi,
+dove $\omega_r$ è una pulsazione propria e $u_r$ è una soluzione non nulla di $(\mathbb{V} - \omega_r^2\,\mathbb{A})\,u = 0$. Il vettore $u_r$ è definito a meno di un fattore e dice in quale rapporto si muovono le coordinate, poiché le componenti di segno concorde oscillano nello stesso verso e quelle di segno opposto oscillano in versi opposti. Il moto generale è la sovrapposizione degli $n$ modi,
 $$
 x(t) = \sum_{r=1}^{n} c_r\,u_r\,\cos(\omega_r t + \varphi_r) ,
 $$
@@ -319,6 +325,14 @@ $$
 \qquad r = 1, \dots, n .
 $$
 Ogni coordinata normale si comporta quindi come un oscillatore armonico indipendente dagli altri.
+
+L'ortogonalità rispetto a $\mathbb{A}$ serve anche a ricavare le costanti dai dati iniziali, perché moltiplicando scalarmente $x(0) = \sum_r \xi_r(0)\,u_r$ per $\mathbb{A}\,u_s$ restano solo i termini con $r = s$, da cui
+$$
+\xi_s(0) = \frac{u_s \cdot \mathbb{A}\,x(0)}{u_s \cdot \mathbb{A}\,u_s} ,
+\qquad
+\dot{\xi}_s(0) = \frac{u_s \cdot \mathbb{A}\,\dot{x}(0)}{u_s \cdot \mathbb{A}\,u_s} .
+$$
+Un moto che parte con $\dot{x}(0) = 0$ e con $x(0)$ parallelo a un solo autovettore eccita quel solo modo, e il sistema oscilla con la pulsazione corrispondente.
 :::
 
 :::esempio{titolo="Due masse e tre molle"}
@@ -330,7 +344,7 @@ $$
 \mathbb{V} = k
 \begin{bmatrix} 2 & -1 \\ -1 & 2 \end{bmatrix} ,
 $$
-e l'equazione caratteristica $(2k - m\omega^2)^2 - k^2 = 0$ dà $\omega_1^2 = \dfrac{k}{m}$ e $\omega_2^2 = \dfrac{3k}{m}$. Il primo modo è $u_1 = (1, 1)$: le due masse si muovono insieme e la molla centrale resta scarica. Il secondo è $u_2 = (1, -1)$: le masse si avvicinano e si allontanano in opposizione, e la molla centrale si deforma del doppio. Le coordinate normali sono $\xi_1 = \dfrac{x_1 + x_2}{2}$ e $\xi_2 = \dfrac{x_1 - x_2}{2}$.
+e l'equazione caratteristica $(2k - m\omega^2)^2 - k^2 = 0$ dà $\omega_1^2 = \dfrac{k}{m}$ e $\omega_2^2 = \dfrac{3k}{m}$. Il primo modo è $u_1 = (1, 1)$, nel quale le due masse si muovono insieme e la molla centrale resta scarica. Il secondo è $u_2 = (1, -1)$, nel quale le masse si avvicinano e si allontanano in opposizione e la molla centrale si deforma del doppio. Le coordinate normali sono $\xi_1 = \dfrac{x_1 + x_2}{2}$ e $\xi_2 = \dfrac{x_1 - x_2}{2}$.
 
 ::struttura{poligoni="2,0 3,0 3,1 2,1;5,0 6,0 6,1 5,1" linee="0,0 8,0;0,0 0,1.6;8,0 8,1.6;0,0.5 0.4,0.75 0.9,0.25 1.4,0.75 1.9,0.5 2,0.5;3,0.5 3.4,0.75 3.9,0.25 4.4,0.75 4.9,0.25 5,0.5;6,0.5 6.4,0.75 6.9,0.25 7.4,0.75 7.9,0.5 8,0.5" etichette="1,1.15,k;4,1.15,k;7,1.15,k;2.5,0.5,m;5.5,0.5,m" frecce="2.5,1.5,3.3,1.5,x_1;5.5,1.5,6.3,1.5,x_2" titolo="Le due masse e le tre molle, con le ascisse misurate dalle posizioni di equilibrio"}
 :::
