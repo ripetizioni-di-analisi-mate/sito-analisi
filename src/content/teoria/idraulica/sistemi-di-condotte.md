@@ -235,7 +235,7 @@ Sia $f$ continua su $[a, b]$ con $f(a)\,f(b) < 0$. Allora esiste $c \in (a, b)$ 
 ::::teorema{#tre-serbatoi titolo="Esistenza e unicità del carico nel nodo"}
 Siano $n \geq 2$ serbatoi di quote $z_1, \dots, z_n$ non tutte uguali, collegati a un nodo $N$ da rami di resistenze $r_1, \dots, r_n$, senza erogazione nel nodo. Allora il carico piezometrico $h_N$ che soddisfa la continuità esiste ed è unico, e appartiene all'intervallo $\left[\min_i z_i,\ \max_i z_i\right]$.
 
-Il teorema garantisce che il procedimento per tentativi su $h_N$ converge a una sola soluzione, qualunque sia il valore di primo tentativo: la funzione da annullare è monotona, quindi il segno dello squilibrio dice subito se il tentativo successivo va alzato o abbassato.
+Il teorema garantisce che il procedimento per tentativi su $h_N$ converge a una sola soluzione, qualunque sia il valore di primo tentativo, perché la funzione da annullare è monotona e il segno dello squilibrio dice subito se il tentativo successivo va alzato o abbassato.
 
 :::dimostrazione
 L'idea è di scrivere la continuità come una sola equazione in $h_N$ e di studiarne la monotonia.
