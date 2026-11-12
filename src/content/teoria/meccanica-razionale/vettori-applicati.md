@@ -41,7 +41,7 @@ $$
 b = \frac{3\,a v}{v\sqrt{2}} = \frac{3\sqrt{2}}{2}\,a .
 $$
 
-::struttura{nodi="O,0,0;P,4,2;H,3.52,2.64" forze="4.9 0.8,0.9,-1.2,v" tratteggi="2.8,3.6 5.5,0;0,0 3.52,2.64" etichette="1.55,1.6,b" punti="0,0;4,2;3.52,2.64" titolo="Il braccio $b$ è la distanza del polo $O$ dalla retta d'azione di $\vec{v}$, misurata sulla perpendicolare $OH$"}
+::struttura{nodi="O,0,0;P,4,2;H,3,3" forze="5.2 0.8,1.2,-1.2,v" tratteggi="2.5,3.5 5.5,0.5;0,0 3,3" etichette="1.2,1.85,b" punti="0,0;4,2;3,3" titolo="Il braccio $b$ è la distanza del polo $O$ dalla retta d'azione di $\vec{v}$, misurata sulla perpendicolare $OH$"}
 
 :::dimostrazione
 Sia $H$ il piede della perpendicolare condotta da $O$ alla retta d'azione, cosicché $|H - O| = b$. Il vettore $P - H$ è parallelo a $\vec{v}$, perciò $(P - H) \wedge \vec{v} = \vec{0}$ e per la proprietà distributiva
