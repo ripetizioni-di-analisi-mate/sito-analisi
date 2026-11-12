@@ -286,7 +286,7 @@ La lunghezza del risalto non si ricava dalle equazioni di bilancio, perché dipe
 $$
 L \simeq 6\,(h_2 - h_1) ,
 $$
-che fornisce valori attendibili per $2 < Fr_1 < 10$. Le misure dello United States Bureau of Reclamation danno in modo equivalente $L$ compreso fra $4{,}5\,h_2$ e $6\,h_2$ nello stesso campo. Per il risalto dell'esempio precedente risulta $L \simeq 6\,(1{,}60 - 0{,}40) = 7{,}2\,\mathrm{m}$.
+che fornisce valori attendibili per $2 < Fr_1 < 10$. Le misure dello United States Bureau of Reclamation danno $L$ compreso fra $4{,}5\,h_2$ e $6\,h_2$ nel campo del risalto stabile. Per il risalto dell'esempio precedente risulta $L \simeq 6\,(1{,}60 - 0{,}40) = 7{,}2\,\mathrm{m}$.
 :::
 
 :::osservazione{#tipi-di-risalto titolo="Forma del risalto secondo $Fr_1$"}

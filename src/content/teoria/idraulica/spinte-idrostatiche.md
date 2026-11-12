@@ -43,7 +43,7 @@ L'integrale rimasto è il momento statico di $A$ rispetto all'asse per il quale 
 :::
 ::::
 
-::schema{nodi="A,1.5,0.5,-;B,3.5,2.5,-" aste="A-B" acqua="0,0 6,0 6,4 0,4" solidi="-0.4,-0.7 6.4,-0.7 6.4,0 -0.4,0" pelo="0,6,4,p.i.c." pressioni="A,B,1.4,0.6,p" punti="2.5,1.5,G,baricentro" quote="2.5 1.5,2.5 4,h_G,1.4" etichette="2.1,0.82,α" riferimento=0 titolo="Superficie piana inclinata di $\alpha$ sull'orizzontale: la spinta dipende dalla profondità $h_G$ del baricentro e dall'area"}
+::schema{nodi="A,1.5,0.5,-;B,3.5,2.5,-" aste="A-B" acqua="0,0 6,0 6,4 0,4" solidi="-0.4,-0.7 6.4,-0.7 6.4,0 -0.4,0" pelo="0,6,4,p.i.c." pressioni="A,B,1.4,0.6,p" punti="2.5,1.5,,baricentro" tratteggi="1.5,0.5 2.75,0.5" quote="2.5 1.5,2.5 4,h_G,1.4" etichette="2.05,0.72,α;2.9,1.12,G" riferimento=0 titolo="Superficie piana inclinata di $\alpha$ sull'orizzontale: la spinta dipende dalla profondità $h_G$ del baricentro e dall'area"}
 
 :::osservazione{#fondo-orizzontale titolo="Superficie orizzontale e paradosso idrostatico"}
 Su una superficie orizzontale posta alla profondità $h$ la pressione è la stessa in ogni punto, quindi $S = \gamma\,h\,A$ e il centro di spinta coincide con il baricentro. La spinta sul fondo dipende dalla profondità e dall'area del fondo, e non dal volume del liquido contenuto. Due recipienti con lo stesso fondo e lo stesso livello ricevono la stessa spinta sul fondo anche se uno è svasato e l'altro cilindrico. Questo risultato prende il nome di **paradosso idrostatico**, e si spiega osservando che le pareti inclinate ricevono dal liquido una componente verticale che equilibra la differenza di peso.
@@ -218,7 +218,7 @@ dove $f$ è il coefficiente d'attrito fra la base e il terreno e $N$ è la risul
 :::osservazione{#sottospinta titolo="Sottospinta"}
 L'acqua che filtra sotto la fondazione esercita sulla base una pressione diretta verso l'alto, detta **sottospinta**. In assenza di drenaggio si assume un diagramma che vale $\gamma h$ sotto il tallone di monte e si annulla sotto lo spigolo di valle, quindi la risultante per unità di lunghezza è $U = \dfrac{\gamma\,h\,B}{2}$, applicata a $\dfrac{B}{3}$ dal tallone, dove $B$ è la larghezza della base. La sottospinta riduce sia $N$ sia il momento stabilizzante, perciò peggiora entrambe le verifiche; i dreni praticati vicino al tallone abbassano il diagramma e riducono $U$.
 
-::schema{nodi="T,0,0;K,1.5,5,-;P,3.5,0" aste="T-K;K-P;T-P" acqua="-3,0 0,0 1.2,4 -3,4" solidi="-3.4,-0.9 6,-0.9 6,0 -3.4,0" pelo="-3,-0.3,4,p.i.c." pressioni="T,P,1.1,0,U,-1" forze="0.4 1.3333,1.5,0,S_x;0.4 1.3333,0,-1.2,S_z;1.6667 1.6667,0,-1.8,W" quote="T,P,B = 3.50 m,1.5" riferimento=0 titolo="Diga a gravità con paramento di monte inclinato: spinta, peso proprio $W$ e sottospinta $U$"}
+::schema{nodi="T,0,0;K,1.5,5,-;P,3.5,0" aste="T-K;K-P;T-P" acqua="-3,0 0,0 1.2,4 -3,4" solidi="-3.4,-0.9 6,-0.9 6,0 -3.4,0" pelo="-3,-0.3,4,p.i.c." pressioni="T,P,1.1,0,U,-1" forze="0.4 1.3333,1.5,0,S_x;0.4 1.3333,0,-1.2;1.6667 1.6667,0,-1.8" etichette="-0.05,2.8,S_z;1.15,2.95,W" quote="T,P,B = 3.50 m,1.5" riferimento=0 titolo="Diga a gravità con paramento di monte inclinato: spinta, peso proprio $W$ e sottospinta $U$"}
 :::
 
 :::osservazione{#terzo-medio titolo="Posizione della risultante sulla base"}
@@ -280,7 +280,7 @@ d = \frac{\rho_c}{\rho}\,a .
 $$
 La frazione immersa è perciò uguale al rapporto fra le densità, e il corpo galleggia solo se $\rho_c < \rho$. Un blocco di legno di densità $650\,\mathrm{kg/m^3}$ e altezza $0{,}50\,\mathrm{m}$ si immerge di $0{,}325\,\mathrm{m}$.
 
-::schema{acqua="-3.2,0 3.2,0 3.2,2 -3.2,2" solidi="-3.6,-0.7 3.6,-0.7 3.6,0 -3.6,0" pelo="-3.2,-1.3,2,p.i.c." poligoni="-1.1,1.3 1.1,1.3 1.1,2.7 -1.1,2.7" punti="0,2.05,G,baricentro;0,1.65,C,centro" forze="-0.35 1.45,0,-1.15,P" reazioni="0.35 2.6,0,1.15,S" quote="-1.1 1.3,-1.1 2,d,-0.8" riferimento=0 titolo="Galleggiante in quiete: il peso $P$ applicato in $G$ e la spinta $S$ applicata nel centro di carena $C$ stanno sulla stessa verticale"}
+::schema{acqua="-3.2,0 3.2,0 3.2,2 -3.2,2" solidi="-3.6,-0.7 3.6,-0.7 3.6,0 -3.6,0" pelo="-3.2,-1.3,2,p.i.c." poligoni="-1.1,1.3 1.1,1.3 1.1,2.7 -1.1,2.7" punti="0,2.05,G,baricentro;0,1.65,C,centro" forze="0 2.05,0,-1.2,P" reazioni="0 1.65,0,1.1,S" quote="-1.1 1.3,-1.1 2,d,-0.8" riferimento=0 titolo="Galleggiante in quiete: il peso $P$ applicato in $G$ e la spinta $S$ applicata nel centro di carena $C$ stanno sulla stessa verticale"}
 :::
 
 ## Stabilità del galleggiante

@@ -360,7 +360,7 @@ cioè $\xi \approx 0{,}3$–$0{,}45$ riferito alla velocità di valle.
 :::
 
 :::osservazione{#imbocco-e-sbocco titolo="Imbocco e sbocco"}
-L'imbocco di una condotta in un serbatoio è un brusco restringimento dall'area del serbatoio a quella della condotta, quindi $\xi = 0{,}5$ per lo spigolo vivo e $\xi \approx 0{,}05$ per l'imbocco raccordato, dove la corrente non si distacca. Lo sbocco in un serbatoio è un brusco allargamento con $A_2 \to \infty$, quindi $\xi = 1$ riferito alla velocità nella condotta. Fra due serbatoi a quote $z_m$ e $z_v$, l'applicazione del teorema di Bernoulli fra i due peli liberi dà
+L'imbocco di una condotta in un serbatoio è un brusco restringimento dall'area del serbatoio a quella della condotta, e le misure danno $\xi = 0{,}5$ per lo spigolo vivo e $\xi \approx 0{,}05$ per l'imbocco raccordato, nel quale la corrente non si distacca. Lo sbocco in un serbatoio è un brusco allargamento con $A_2 \to \infty$, quindi $\xi = 1$ riferito alla velocità nella condotta. Fra due serbatoi a quote $z_m$ e $z_v$, l'applicazione del teorema di Bernoulli fra i due peli liberi dà
 $$
 z_m - z_v = \left( \lambda\,\frac{L}{D} + \sum_i \xi_i \right)\frac{v^2}{2g} ,
 $$
