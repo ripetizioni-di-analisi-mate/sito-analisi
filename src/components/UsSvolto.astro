@@ -1,0 +1,48 @@
+---
+// Una scheda di esercizi svolti dei corsi americani. Le schede con `gratis: true` si leggono per intero;
+// le altre mostrano titolo e teoria usata, e lo svolgimento è riservato (data-usa-content).
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import FineAnteprimaUsa from './FineAnteprimaUsa.astro';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { perArgomento, numero } from '../lib/nav';
+import { titoliAncore } from '../lib/ancore';
+import { T } from '../i18n';
+
+interface Props { corso: string; argomento: string; n: string }
+const { corso, argomento, n } = Astro.props;
+const t = T('en');
+const m = materiaUsa(corso)!;
+const arg = m.argomenti.find((a) => a.slug === argomento)!;
+const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
+const id = `${corso}/${argomento}/${n}`;
+const fratelli = perArgomento(await getCollection('svolti_us'), corso, argomento);
+const voce = fratelli.find((x) => x.id === id)!;
+const i = fratelli.findIndex((x) => x.id === id);
+const { Content } = await render(voce);
+const teoria = (await getCollection('teoria_us')).find((x) => x.id === `${corso}/${argomento}`);
+const ancore = titoliAncore(teoria?.body);
+const libera = voce.data.gratis;
+const passo = (v?: { id: string }) => v && { titolo: `${t.scheda} ${numero(v.id)}`, href: href('esercizi-svolti/' + numero(v.id)) };
+---
+<Base lingua="en" usa titolo={`${arg.breve} · ${voce.data.titolo}`}
+  descrizione={`Worked examples: ${voce.data.titolo} (${arg.titolo}).`}
+  materia={corso} argomento={argomento} sezione="esercizi-svolti"
+  percorso={[{ titolo: arg.breve, href: href('teoria') }, { titolo: t.sezioni['esercizi-svolti'], href: href('esercizi-svolti') }, { titolo: `${t.scheda} ${n}` }]}
+  precedente={passo(fratelli[i - 1]) ?? { titolo: t.tutteLeSchede, sotto: arg.breve, href: href('esercizi-svolti') }}
+  successivo={passo(fratelli[i + 1])}>
+  <p class="sopratitolo">{t.scheda} {n}</p>
+  <h1>{voce.data.titolo}</h1>
+  {voce.data.teoria.length > 0 && (
+    <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={href('teoria') + '#' + x}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
+  )}
+  {libera
+    ? <div class="testo-studio"><Content /></div>
+    : <>
+        <FineAnteprimaUsa materia={corso} titolo={voce.data.titolo}>
+          <p>The worked solutions of this sheet open with the full course.</p>
+          <p><a href={href('esercizi-svolti')}>Open the free worked examples →</a></p>
+        </FineAnteprimaUsa>
+        <div class="testo-studio" data-usa-content><Content /></div>
+      </>}
+</Base>

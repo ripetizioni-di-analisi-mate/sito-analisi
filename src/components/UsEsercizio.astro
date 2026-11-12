@@ -1,0 +1,44 @@
+---
+// Una traccia da svolgere dei corsi americani, con pagina propria da condividere.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { perArgomento, numero } from '../lib/nav';
+import { titoliAncore } from '../lib/ancore';
+import { T } from '../i18n';
+
+interface Props { corso: string; argomento: string; n: string }
+const { corso, argomento, n } = Astro.props;
+const t = T('en');
+const m = materiaUsa(corso)!;
+const arg = m.argomenti.find((a) => a.slug === argomento)!;
+const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
+const id = `${corso}/${argomento}/${n}`;
+const fratelli = perArgomento(await getCollection('dafare_us'), corso, argomento);
+const voce = fratelli.find((x) => x.id === id)!;
+const i = fratelli.findIndex((x) => x.id === id);
+const teoria = (await getCollection('teoria_us')).find((x) => x.id === `${corso}/${argomento}`);
+const ancore = titoliAncore(teoria?.body);
+const SOLUZIONE = '<details class="blocco blocco-soluzione"';
+const html = voce.rendered?.html ?? '';
+const k = html.indexOf(SOLUZIONE);
+const testo = k < 0 ? html : html.slice(0, k);
+const soluzione = k < 0 ? '' : html.slice(k);
+const passo = (v?: { id: string }) => v && { titolo: `${t.esercizio} ${numero(v.id)}`, href: href('esercizi/' + numero(v.id)) };
+---
+<Base lingua="en" usa titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
+  descrizione={`${voce.data.titolo} — practice problem on ${arg.titolo}, with the final answer.`}
+  materia={corso} argomento={argomento} sezione="esercizi"
+  percorso={[{ titolo: arg.breve, href: href('teoria') }, { titolo: t.sezioni.esercizi, href: href('esercizi') }, { titolo: `${t.esercizio} ${n}` }]}
+  precedente={passo(fratelli[i - 1]) ?? { titolo: t.tuttiDaFare, sotto: arg.breve, href: href('esercizi') }}
+  successivo={passo(fratelli[i + 1])}>
+  <p class="sopratitolo">{t.esercizioDaFare} {n}</p>
+  <h1>{voce.data.titolo}</h1>
+  {voce.data.teoria.length > 0 && (
+    <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={href('teoria') + '#' + x}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
+  )}
+  <div class="testo-studio">
+    <Fragment set:html={testo} />
+    {soluzione && <div data-usa-content set:html={soluzione} />}
+  </div>
+</Base>

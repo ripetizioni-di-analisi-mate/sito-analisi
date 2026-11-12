@@ -1,5 +1,6 @@
 import type { Materia } from '../materie';
 import { courseUrl, groups, hasUsStudyPages } from './catalog.mjs';
+import { haProgramma, programmaDi, SEZIONI_USA } from './programmi.mjs';
 import { highSchoolGroups, highSchoolName } from './high-school/index.mjs';
 import { url } from '../../lib/url';
 import { usaProduct } from './pricing';
@@ -23,11 +24,13 @@ export const blocchiUsa = [...groups, ...highSchoolGroups].map((group, index) =>
       colore: colori[index % colori.length],
       prezzo: usaProduct(course.slug)?.prezzo,
       attiva: true,
-      argomenti: course.lessons.map((lesson, i) => ({
-        slug: 'unit-' + (i + 1),
-        titolo: lesson.title,
-        breve: lesson.title,
-      })),
+      argomenti: haProgramma(course.slug)
+        ? programmaDi(course.slug).map((a) => ({ slug: a.slug, titolo: a.titolo, breve: a.breve }))
+        : course.lessons.map((lesson, i) => ({
+          slug: 'unit-' + (i + 1),
+          titolo: lesson.title,
+          breve: lesson.title,
+        })),
     };
     return { m, nome: m.titolo };
   }),
@@ -39,6 +42,12 @@ export const materiaUsa = (slug: string) => materieUsa.find(m => m.slug === slug
 
 export function linkArgomentoUsa(materia: string, argomento: string, sezione: string) {
   const path = courseUrl(materia);
+  // Corsi scritti sul programma americano: argomenti e sezioni hanno indirizzi inglesi.
+  if (haProgramma(materia)) {
+    const [nome, ...resto] = sezione.split('/');
+    const tradotta = (SEZIONI_USA as Record<string, string>)[nome] ?? nome;
+    return url([path, argomento, tradotta, ...resto].join('/'));
+  }
   if (sezione === 'domande' || hasUsStudyPages(materia)) return url(path + '/' + argomento + '/' + sezione);
   const numero = argomento.slice('unit-'.length);
   const ancora = sezione === 'teoria' ? argomento

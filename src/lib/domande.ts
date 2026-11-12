@@ -13,28 +13,34 @@ import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
 // del sito, con gli stessi plugin, una volta sola per file.
 let processore: Promise<MarkdownRenderer> | undefined;
 const rese = new Map<string, Promise<string>>();
+// Il percorso fittizio serve ai plugin per scegliere la lingua delle etichette e dei numeri nelle figure
+// (remark-blocchi guarda se il file sta in content-en o content-us).
+const CARTELLA: Record<string, string> = { it: 'content', en: 'content-en', es: 'content-es', us: 'content-us' };
 function htmlDi(chiave: string, body: string): Promise<string> {
   processore ??= createMarkdownProcessor({
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
     shikiConfig: { theme: 'github-light' },
   } as any);
-  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body)).then((r) => r.code));
+  const [lingua, ...resto] = chiave.split('/');
+  const fileURL = new URL(`file:///src/${CARTELLA[lingua] ?? 'content'}/domande/${resto.join('/')}.md`);
+  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body, { fileURL } as any)).then((r) => r.code));
   return rese.get(chiave)!;
 }
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
-type Lingua = 'it' | 'en' | 'es';
-const COLLEZIONI = { it: 'domande', en: 'domande_en', es: 'domande_es' } as const;
+type Lingua = 'it' | 'en' | 'es' | 'us';
+// Con lingua 'us': i corsi americani scritti sul programma statunitense (src/content-us/).
+const COLLEZIONI = { it: 'domande', en: 'domande_en', es: 'domande_es', us: 'domande_us' } as const;
 
 const senzaSoluzione = (html: string) => html.replace(/<details[^>]*blocco-soluzione[\s\S]*?<\/details>/g, '').trim();
 
 // In inglese: le domande tradotte; la traccia inglese se c'è, altrimenti quella italiana.
 export async function domandePer(materia: string, lingua: Lingua = 'it'): Promise<Record<string, Domanda[]>> {
-  const tracce = new Map((await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare')).map((e) => [e.id, e]));
+  const tracce = new Map((await getCollection(lingua === 'us' ? 'dafare_us' : lingua === 'es' ? 'dafare_es' : 'dafare')).map((e) => [e.id, e]));
   const tracceEn = lingua === 'en' ? new Map((await getCollection('dafare_en')).map((e) => [e.id, e])) : new Map();
   const out: Record<string, Domanda[]> = {};
-  for (const e of await getCollection(COLLEZIONI[lingua])) {
+  for (const e of await getCollection(COLLEZIONI[lingua] as 'domande')) {
     const [m, argomento, n] = e.id.split('/');
     if (m !== materia) continue;
     const html = await htmlDi(`${lingua}/${e.id}`, e.body ?? '');
@@ -63,12 +69,12 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).
 const memo: Partial<Record<Lingua, Promise<Record<string, string[]>>>> = {};
 export function catalogoDomande(lingua: Lingua | LinguaCatalogo = 'it'): Promise<Record<string, string[]>> {
-  if (lingua !== 'it' && lingua !== 'en' && lingua !== 'es') return Promise.resolve({});
+  if (lingua !== 'it' && lingua !== 'en' && lingua !== 'es' && lingua !== 'us') return Promise.resolve({});
   return (memo[lingua] ??= calcolaCatalogo(lingua));
 }
 async function calcolaCatalogo(lingua: Lingua): Promise<Record<string, string[]>> {
   const c: Record<string, Set<string>> = {};
-  for (const e of await getCollection(COLLEZIONI[lingua])) {
+  for (const e of await getCollection(COLLEZIONI[lingua] as 'domande')) {
     const [m, a] = e.id.split('/');
     (c[m] ??= new Set()).add(a);
   }

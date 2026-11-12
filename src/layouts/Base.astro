@@ -77,11 +77,12 @@ const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
 }));
 // Domande a tempo dell'argomento della pagina, se ci sono (collegamento nel pannello del livello).
 const domandeDisponibili = await catalogoDomande(lingua);
-const domandeMateria = (usa ? usTimedTopics : domandeDisponibili)[materia ?? ''] ?? [];
+const domandeUsMd = usa ? await catalogoDomande('us') : {};
+const domandeMateria = (usa ? { ...usTimedTopics, ...domandeUsMd } : domandeDisponibili)[materia ?? ''] ?? [];
 const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
 const catalogoPercorso = {
   ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
-  ...Object.fromEntries(Object.entries(usTimedTopics).map(([slug, topics]) => [slug, {
+  ...Object.fromEntries(Object.entries({ ...usTimedTopics, ...domandeUsMd }).map(([slug, topics]) => [slug, {
     titolo: materiaUsa(slug)!.titolo,
     argomenti: topics,
     domande: topics,

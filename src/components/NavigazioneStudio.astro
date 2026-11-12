@@ -2,6 +2,8 @@
 import { materiaL, link, T, type Lingua } from '../i18n';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { hasUsStudyPages } from '../data/stem-usa/catalog.mjs';
+import { usTimedTopics } from '../lib/stem-usa-banks';
+import { catalogoDomande } from '../lib/domande';
 import { paginaLocalizzata } from '../lib/lingue-sito';
 import { disponibilitaStudio } from '../lib/nav';
 import { sezioniStudio } from '../lib/percorso-studio.mjs';
@@ -11,7 +13,9 @@ const en = lingua === 'en', es = lingua === 'es';
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const i = m?.argomenti.findIndex((a) => a.slug === argomento) ?? -1;
 const visibile = Boolean(m && i >= 0 && (!usa || hasUsStudyPages(materia)) && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
-const sezioni = !visibile ? [] : usa ? ['teoria', 'esercizi-svolti', 'esercizi', 'domande']
+// I corsi americani senza domande a tempo non mostrano la quarta tappa.
+const conDomandeUsa = Boolean(usTimedTopics[materia ?? '']?.length || (await catalogoDomande('us'))[materia ?? '']?.length);
+const sezioni = !visibile ? [] : usa ? ['teoria', 'esercizi-svolti', 'esercizi', ...(conDomandeUsa ? ['domande'] : [])]
   : sezioniStudio(await disponibilitaStudio(materia!, argomento!, lingua));
 const href = (topic: string, section: string) => usa ? linkArgomentoUsa(materia!, topic, section) : link(lingua, es && !paginaLocalizzata('es', '/' + materia + '/' + topic + '/' + section)
     ? '/' + materia + '#' + topic : '/' + materia + '/' + topic + '/' + section);

@@ -1,10 +1,31 @@
 ---
 import UsStudySection from '../../../../components/UsStudySection.astro';
+import UsTeoria from '../../../../components/UsTeoria.astro';
+import UsSvoltiLista from '../../../../components/UsSvoltiLista.astro';
+import UsDafareLista from '../../../../components/UsDafareLista.astro';
+import Domande from '../../../../viste/Domande.astro';
 import { usSectionPaths } from '../../../../lib/stem-usa-study-pages';
+import { usSezioniMarkdown, conteggiDomandeUs } from '../../../../lib/stem-usa-markdown';
+import { SEZIONI_USA } from '../../../../data/stem-usa/programmi.mjs';
+import { RIPASSO } from '../../../../data/livelli';
 
-export function getStaticPaths() { return usSectionPaths(false); }
+export async function getStaticPaths() {
+  // Corsi scritti sul programma americano: contenuti in Markdown, indirizzi delle sezioni in inglese.
+  const markdown = (await usSezioniMarkdown()).map((x) => ({ ...x, props: { markdown: true } }));
+  return [...markdown, ...usSectionPaths(false)];
+}
 
-const { slug, lesson } = Astro.props;
-const params = Astro.params as { topic: string; section: 'teoria' | 'esercizi-svolti' | 'esercizi' };
+const { markdown, slug, lesson } = Astro.props as any;
+const conteggi = markdown ? await conteggiDomandeUs() : {};
+const { course, topic, section } = Astro.params as { course: string; topic: string; section: string };
 ---
-<UsStudySection {slug} {lesson} {...params} />
+{markdown
+  ? (section === SEZIONI_USA.teoria
+      ? <UsTeoria corso={course} argomento={topic} />
+      : section === SEZIONI_USA['esercizi-svolti']
+        ? <UsSvoltiLista corso={course} argomento={topic} />
+        : section === SEZIONI_USA.esercizi
+          ? <UsDafareLista corso={course} argomento={topic} />
+          : <Domande lingua="en" materia={course} argomento={topic} usa
+              totale={topic === RIPASSO ? Object.values(conteggi[course] ?? {}).reduce((a, b) => a + b, 0) : conteggi[course]?.[topic] ?? 0} />)
+  : <UsStudySection {slug} {lesson} topic={topic} section={section as 'teoria' | 'esercizi-svolti' | 'esercizi'} />}
