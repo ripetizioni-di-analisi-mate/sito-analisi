@@ -33,7 +33,7 @@ $$
 so the contact point is at rest, the highest point moves at $2v_{\mathrm{cm}}$ and a point level with the axle moves at $\sqrt{2}\,v_{\mathrm{cm}}$.
 
 :::dimostrazione
-The motion of a rigid body is the superposition of the translation of the center of mass and a rotation about the center of mass, hence the velocity of any point is the sum written in the statement. Take the $x$ axis in the sense of the motion, the $y$ axis upward and the center at the origin, so that $\vec{v}_{\mathrm{cm}} = v_{\mathrm{cm}}\hat{\imath}$ and $\vec{\omega} = -\omega\hat{k}$, since the body turns clockwise while advancing towards $+x$. A rim point at the angle $\varphi$ from the contact point has $\vec{r}\,' = R\sin\varphi\,\hat{\imath} - R\cos\varphi\,\hat{\jmath}$, therefore
+The motion of a rigid body is the superposition of the translation of the center of mass and a rotation about the center of mass, hence the velocity of any point is the sum written in the statement. Take the $x$ axis in the sense of the motion, the $y$ axis upward and the center at the origin, so that $\vec{v}_{\mathrm{cm}} = v_{\mathrm{cm}}\hat{\imath}$ and $\vec{\omega} = -\omega\hat{k}$, since the body turns clockwise while advancing toward $+x$. A rim point at the angle $\varphi$ from the contact point has $\vec{r}\,' = R\sin\varphi\,\hat{\imath} - R\cos\varphi\,\hat{\jmath}$, therefore
 $$
 \vec{\omega} \times \vec{r}\,' = -\omega R\cos\varphi\,\hat{\imath} - \omega R \sin\varphi\,\hat{\jmath} ,
 $$
@@ -48,7 +48,7 @@ $$
 where the last equality uses $1 - \cos\varphi = 2\sin^2\dfrac{\varphi}{2}$. Substituting $\varphi = 0$, $\varphi = \pi$ and $\varphi = \dfrac{\pi}{2}$ gives the three values stated.
 :::
 
-::grafico{assi=0 uguale=1 curve="cos(t),1+sin(t),0,6.29" linee="-2.1,0 2.9,0" punti="0,1,pieno;0,0,pieno" vettori="0,2,1.4,2,2v;0,1,0.7,1,v;1,1,1.7,0.3,√2 v" etichette="0.12,-0.32,v = 0" xmin=-2.3 xmax=3.3 ymin=-0.7 ymax=2.8 titolo="Velocity of four points of a wheel rolling without slipping towards the right, with $v = v_{\mathrm{cm}}$: the contact point is at rest and the highest point moves twice as fast as the axle"}
+::grafico{assi=0 uguale=1 curve="cos(t),1+sin(t),0,6.29" linee="-2.1,0 2.9,0" punti="0,1,pieno;0,0,pieno" vettori="0,2,1.4,2,2v;0,1,0.7,1,v;1,1,1.7,0.3,√2 v" etichette="0.12,-0.32,v = 0" xmin=-2.3 xmax=3.3 ymin=-0.7 ymax=2.8 titolo="Velocity of four points of a wheel rolling without slipping toward the right, with $v = v_{\mathrm{cm}}$: the contact point is at rest and the highest point moves twice as fast as the axle"}
 
 The result explains why the lower part of a rolling wheel is sharp in a photograph while the upper part is blurred, and it is the reason why the static friction at the contact of a rolling body does no work, as the section on the dynamics of rolling shows.
 ::::
@@ -314,7 +314,7 @@ The hypothesis is weaker than the vanishing of the external forces, since a forc
 ::::
 
 :::esempio{#rotating-platform titolo="A body that changes its moment of inertia"}
-A skater turning on a frictionless vertical axis pulls her arms towards her body. The weight and the reaction of the ice are vertical, hence their torque about the axis vanishes, and the angular momentum along the axis is conserved. Reducing the moment of inertia from $I_1 = 3.0\,\mathrm{kg\cdot m^2}$ to $I_2 = 1.0\,\mathrm{kg\cdot m^2}$ while turning at $\omega_1 = 2.0\,\mathrm{rad/s}$ gives
+A skater turning on a frictionless vertical axis pulls her arms toward her body. The weight and the reaction of the ice are vertical, hence their torque about the axis vanishes, and the angular momentum along the axis is conserved. Reducing the moment of inertia from $I_1 = 3.0\,\mathrm{kg\cdot m^2}$ to $I_2 = 1.0\,\mathrm{kg\cdot m^2}$ while turning at $\omega_1 = 2.0\,\mathrm{rad/s}$ gives
 $$
 \omega_2 = \frac{I_1}{I_2}\,\omega_1 = 6.0\,\mathrm{rad/s} .
 $$

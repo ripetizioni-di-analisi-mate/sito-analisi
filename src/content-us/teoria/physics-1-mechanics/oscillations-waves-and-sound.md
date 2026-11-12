@@ -17,7 +17,7 @@ $$
 F_x = -k\,x ,
 \qquad k > 0 ,
 $$
-with $k$ measured in $\mathrm{N/m}$. The minus sign states that the force points towards the origin whatever the sign of $x$, therefore the origin is a position of stable equilibrium.
+with $k$ measured in $\mathrm{N/m}$. The minus sign states that the force points toward the origin whatever the sign of $x$, therefore the origin is a position of stable equilibrium.
 
 Newton's second law applied to this force gives $m\ddot{x} = -kx$, that is,
 $$
@@ -107,7 +107,7 @@ The weight and the normal force are vertical and cancel, and the surface is fric
 
 A stiffer spring raises the frequency and a larger mass lowers it, therefore a measured period determines the mass of a body even where a balance cannot be used, as on an orbiting spacecraft.
 
-::grafico{assi=0 uguale=1 linee="0,-0.8 0,1.3;-0.2,-0.8 4.3,-0.8;0,0.1 0.3,0.1 0.45,0.45 0.75,-0.25 1.05,0.45 1.35,-0.25 1.65,0.45 1.95,-0.25 2.1,0.1 2.3,0.1" poligoni="2.3,-0.8 3.3,-0.8 3.3,0.6 2.3,0.6" segmenti="1.7,-1.35,1.7,1.25" vettori="1.7,-1.15,2.3,-1.15,x;2.8,0.9,2.0,0.9,F = −k x" etichette="1.25,1.45,x = 0" xmin=-0.4 xmax=4.5 ymin=-1.8 ymax=1.8 titolo="The spring is stretched by $x$ and pulls the block back towards the equilibrium position, with $F_x = -kx$"}
+::grafico{assi=0 uguale=1 linee="0,-0.8 0,1.3;-0.2,-0.8 4.3,-0.8;0,0.1 0.3,0.1 0.45,0.45 0.75,-0.25 1.05,0.45 1.35,-0.25 1.65,0.45 1.95,-0.25 2.1,0.1 2.3,0.1" poligoni="2.3,-0.8 3.3,-0.8 3.3,0.6 2.3,0.6" segmenti="1.7,-1.35,1.7,1.25" vettori="1.7,-1.15,2.3,-1.15,x;2.8,0.9,2.0,0.9,F = −k x" etichette="1.25,1.45,x = 0" xmin=-0.4 xmax=4.5 ymin=-1.8 ymax=1.8 titolo="The spring is stretched by $x$ and pulls the block back toward the equilibrium position, with $F_x = -kx$"}
 
 ::::
 
@@ -158,7 +158,7 @@ T = 2\pi\sqrt{\frac{L}{g}} .
 $$
 
 :::dimostrazione
-Let $\theta$ be the angle of the string with the vertical and $s = L\theta$ the arc traveled by the mass. The tension is along the string, therefore it has no tangential component, and the tangential component of the weight is $-mg\sin\theta$, the minus sign stating that it is directed towards the lowest point. Newton's second law along the tangent gives
+Let $\theta$ be the angle of the string with the vertical and $s = L\theta$ the arc traveled by the mass. The tension is along the string, therefore it has no tangential component, and the tangential component of the weight is $-mg\sin\theta$, the minus sign stating that it is directed toward the lowest point. Newton's second law along the tangent gives
 $$
 m\,L\ddot{\theta} = -mg\sin\theta
 \quad\Longrightarrow\quad
@@ -292,7 +292,7 @@ where $y$ is the displacement of the particle whose equilibrium position is $x$.
 $$
 v = \frac{\omega}{k} = \frac{\lambda}{T} = \lambda f ,
 $$
-and $A\sin(kx + \omega t)$ describes the same wave traveling towards decreasing $x$. Each particle performs simple harmonic motion of amplitude $A$ and angular frequency $\omega$, therefore its maximum transverse speed is $\omega A$.
+and $A\sin(kx + \omega t)$ describes the same wave traveling toward decreasing $x$. Each particle performs simple harmonic motion of amplitude $A$ and angular frequency $\omega$, therefore its maximum transverse speed is $\omega A$.
 
 ::grafico{f="2*sin(2*pi*x/1.5)" legenda=0 nomi="x,y" asintoti="y=2;y=-2" segmenti="0,2.45,1.5,2.45" etichette="0.65,2.65,λ;3.0,2.15,A" xmin=-0.2 xmax=3.4 ymin=-2.9 ymax=3.3 titolo="Snapshot of a harmonic wave at a fixed instant: the spatial period is the wavelength $\lambda = \dfrac{2\pi}{k}$"}
 :::
@@ -419,14 +419,14 @@ Let a source emit sound of frequency $f$ in a medium where sound travels with sp
 $$
 f' = f\;\frac{v + v_o}{v - v_s} ,
 $$
-where $v_o$ is positive when the observer moves towards the source and $v_s$ is positive when the source moves towards the observer.
+where $v_o$ is positive when the observer moves toward the source and $v_s$ is positive when the source moves toward the observer.
 
 :::dimostrazione
 Take first the source in motion and the observer at rest. In one period $T$ the source emits one complete wave and advances by $v_sT$, therefore the wavelength ahead of it is shortened to $\lambda' = (v - v_s)T$. The speed of the wave in the medium is unchanged, hence the observer receives
 $$
 f' = \frac{v}{\lambda'} = \frac{v}{(v - v_s)T} = f\,\frac{v}{v - v_s} .
 $$
-Take now the observer in motion and the source at rest. The wavelength in the medium is $\lambda = \dfrac{v}{f}$, and the observer moving towards the source meets the crests at the relative speed $v + v_o$, hence $f' = \dfrac{v + v_o}{\lambda} = f\,\dfrac{v + v_o}{v}$. When both move, the two factors apply one after the other and their product is the stated formula.
+Take now the observer in motion and the source at rest. The wavelength in the medium is $\lambda = \dfrac{v}{f}$, and the observer moving toward the source meets the crests at the relative speed $v + v_o$, hence $f' = \dfrac{v + v_o}{\lambda} = f\,\dfrac{v + v_o}{v}$. When both move, the two factors apply one after the other and their product is the stated formula.
 :::
 
 The shift is positive when source and observer approach and negative when they separate, therefore the pitch of a siren drops as the vehicle passes. The formula is not symmetric in the two speeds, since the medium fixes a preferred frame.

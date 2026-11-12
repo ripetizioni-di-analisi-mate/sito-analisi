@@ -252,7 +252,7 @@ The **vector product** of $\vec{A}$ and $\vec{B}$, written $\vec{A} \times \vec{
 $$
 |\vec{A} \times \vec{B}| = A\,B\sin\varphi ,
 $$
-perpendicular to the plane of $\vec{A}$ and $\vec{B}$, with the sense given by the right-hand rule: the fingers turn from $\vec{A}$ towards $\vec{B}$ through the angle $\varphi$, and the thumb points along the product.
+perpendicular to the plane of $\vec{A}$ and $\vec{B}$, with the sense given by the right-hand rule: the fingers turn from $\vec{A}$ toward $\vec{B}$ through the angle $\varphi$, and the thumb points along the product.
 
 The magnitude equals the area of the parallelogram with sides $\vec{A}$ and $\vec{B}$, and it vanishes exactly when the two vectors are parallel. Reversing the order reverses the sense, hence $\vec{B} \times \vec{A} = -\,\vec{A} \times \vec{B}$, and the order matters in every formula that uses this product.
 

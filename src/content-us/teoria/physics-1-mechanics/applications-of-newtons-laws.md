@@ -211,29 +211,29 @@ The time constant measures how fast the terminal speed is approached, since $v(\
 :::richiamo{titolo="Centripetal acceleration"}
 Hypothesis: a particle moves on a circle of radius $r$ with speed $v$.
 
-Conclusion: its acceleration has the component $a_c = \dfrac{v^2}{r}$ directed towards the center of the circle, and the component $a_t = \dfrac{dv}{dt}$ tangent to it. In uniform circular motion $v$ is constant, hence $a_t = 0$ and the acceleration is radial.
+Conclusion: its acceleration has the component $a_c = \dfrac{v^2}{r}$ directed toward the center of the circle, and the component $a_t = \dfrac{dv}{dt}$ tangent to it. In uniform circular motion $v$ is constant, hence $a_t = 0$ and the acceleration is radial.
 
 The chapter on motion in two and three dimensions establishes both components.
 :::
 
 ::::teorema{#centripetal-force titolo="Net force in uniform circular motion"}
-Let a particle of mass $m$ move with constant speed $v$ on a circle of radius $r$. Then the net force on it is directed towards the center of the circle at every instant and has magnitude
+Let a particle of mass $m$ move with constant speed $v$ on a circle of radius $r$. Then the net force on it is directed toward the center of the circle at every instant and has magnitude
 $$
 F_{\text{net}} = m\,\frac{v^2}{r} = m\,\omega^2 r ,
 $$
 where $\omega = \dfrac{v}{r}$ is the angular speed.
 
 :::dimostrazione
-Newton's second law states $\vec{F}_{\text{net}} = m\vec{a}$, hence the net force has the direction of the acceleration and the magnitude $m a$. In uniform circular motion the acceleration is radial and directed towards the center, with magnitude $\dfrac{v^2}{r}$, therefore the net force is radial and equal to $m\dfrac{v^2}{r}$. Substituting $v = \omega r$ gives the second expression.
+Newton's second law states $\vec{F}_{\text{net}} = m\vec{a}$, hence the net force has the direction of the acceleration and the magnitude $m a$. In uniform circular motion the acceleration is radial and directed toward the center, with magnitude $\dfrac{v^2}{r}$, therefore the net force is radial and equal to $m\dfrac{v^2}{r}$. Substituting $v = \omega r$ gives the second expression.
 :::
 
-The quantity $m\dfrac{v^2}{r}$ is not a new force in the free-body diagram: it is the value that the sum of the real forces must have. Every problem of circular motion is therefore solved by writing the components of the real forces along the radius and setting their sum equal to $m\dfrac{v^2}{r}$, with the axis pointing towards the center.
+The quantity $m\dfrac{v^2}{r}$ is not a new force in the free-body diagram: it is the value that the sum of the real forces must have. Every problem of circular motion is therefore solved by writing the components of the real forces along the radius and setting their sum equal to $m\dfrac{v^2}{r}$, with the axis pointing toward the center.
 
-::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" punti="0,0,pieno;1.4142,1.4142,pieno" vettori="1.4142,1.4142,0.5652,2.2632,v;1.4142,1.4142,0.7071,0.7071,a" segmenti="0,0,1.4142,1.4142" etichette="0.62,0.42,r" xmin=-2.6 xmax=2.9 ymin=-2.6 ymax=2.9 titolo="Uniform circular motion: the velocity is tangent to the circle and the acceleration points towards the center, with $a_c = \dfrac{v^2}{r}$"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" punti="0,0,pieno;1.4142,1.4142,pieno" vettori="1.4142,1.4142,0.5652,2.2632,v;1.4142,1.4142,0.7071,0.7071,a" segmenti="0,0,1.4142,1.4142" etichette="0.62,0.42,r" xmin=-2.6 xmax=2.9 ymin=-2.6 ymax=2.9 titolo="Uniform circular motion: the velocity is tangent to the circle and the acceleration points toward the center, with $a_c = \dfrac{v^2}{r}$"}
 ::::
 
 :::esempio{#conical-pendulum titolo="Conical pendulum"}
-A ball of mass $m$ hangs from a string of length $L$ and travels a horizontal circle, the string making the constant angle $\theta$ with the vertical. The forces on the ball are its weight and the tension of the string, hence with the vertical axis upwards and the horizontal axis towards the center,
+A ball of mass $m$ hangs from a string of length $L$ and travels a horizontal circle, the string making the constant angle $\theta$ with the vertical. The forces on the ball are its weight and the tension of the string, hence with the vertical axis upwards and the horizontal axis toward the center,
 $$
 \begin{cases}
 T\cos\theta - m g = 0 \\[4pt]
@@ -250,7 +250,7 @@ v = \sin\theta\sqrt{\frac{g L}{\cos\theta}} ,
 $$
 and the period follows as $\mathcal{T} = \dfrac{2\pi r}{v} = 2\pi\sqrt{\dfrac{L\cos\theta}{g}}$. For $L = 1.2\,\mathrm{m}$ and $\theta = 25^\circ$ the speed is $1.52\,\mathrm{m/s}$ and the period is $2.09\,\mathrm{s}$.
 
-::grafico{assi=0 uguale=1 linee="-1.1,3 1.1,3;0,3 1.5,0.402" curve="1.5*cos(t),0.402+0.42*sin(t),0,6.29" punti="1.5,0.402,pieno" vettori="1.5,0.402,0.5,2.134,T;1.5,0.402,1.5,-1.33,P;1.5,0.402,0.5,0.402,F" segmenti="0,3,0,0.402" etichette="0.13,2.45,θ" xmin=-2 xmax=2.8 ymin=-1.8 ymax=3.6 titolo="Conical pendulum: the horizontal component of the tension supplies the net force $m\dfrac{v^2}{r}$ towards the center, while the vertical component balances the weight"}
+::grafico{assi=0 uguale=1 linee="-1.1,3 1.1,3;0,3 1.5,0.402" curve="1.5*cos(t),0.402+0.42*sin(t),0,6.29" punti="1.5,0.402,pieno" vettori="1.5,0.402,0.5,2.134,T;1.5,0.402,1.5,-1.33,P;1.5,0.402,0.5,0.402,F" segmenti="0,3,0,0.402" etichette="0.13,2.45,θ" xmin=-2 xmax=2.8 ymin=-1.8 ymax=3.6 titolo="Conical pendulum: the horizontal component of the tension supplies the net force $m\dfrac{v^2}{r}$ toward the center, while the vertical component balances the weight"}
 :::
 
 ## Curves on a road
@@ -262,7 +262,7 @@ v \le \sqrt{\mu_s\, g\, r} .
 $$
 
 :::dimostrazione
-The road is horizontal, hence the weight and the normal force are vertical and cancel, so $N = m g$. The tyres do not slide sideways, therefore the only horizontal force is static friction, and it must supply the net force towards the center:
+The road is horizontal, hence the weight and the normal force are vertical and cancel, so $N = m g$. The tyres do not slide sideways, therefore the only horizontal force is static friction, and it must supply the net force toward the center:
 $$
 f_s = m\,\frac{v^2}{r} .
 $$
@@ -285,7 +285,7 @@ $$
 $$
 
 :::dimostrazione
-The forces on the vehicle are its weight, vertical and of magnitude $m g$, and the normal force, perpendicular to the road surface and therefore tilted by $\theta$ from the vertical. With the $y$ axis vertical and upwards and the $x$ axis horizontal and towards the center of the curve, the components of the normal force are $N\sin\theta$ along $x$ and $N\cos\theta$ along $y$. The vehicle has no vertical acceleration and its horizontal acceleration is $\dfrac{v^2}{r}$ towards the center, hence
+The forces on the vehicle are its weight, vertical and of magnitude $m g$, and the normal force, perpendicular to the road surface and therefore tilted by $\theta$ from the vertical. With the $y$ axis vertical and upwards and the $x$ axis horizontal and toward the center of the curve, the components of the normal force are $N\sin\theta$ along $x$ and $N\cos\theta$ along $y$. The vehicle has no vertical acceleration and its horizontal acceleration is $\dfrac{v^2}{r}$ toward the center, hence
 $$
 \begin{cases}
 N\cos\theta - m g = 0 \\[4pt]
@@ -300,7 +300,7 @@ $$
 
 The angle depends on $v$ and $r$ alone, therefore a bank is designed for one speed, and at any other speed friction makes up the difference. Highway curves are banked for the posted speed, so that the road remains safe when it is wet and $\mu_s$ is small. For $v = 25\,\mathrm{m/s}$ and $r = 120\,\mathrm{m}$ the design angle is $\arctan\dfrac{(25\,\mathrm{m/s})^2}{9.81\,\mathrm{m/s^2} \cdot 120\,\mathrm{m}} = 28.0^\circ$.
 
-::grafico{assi=0 uguale=1 poligoni="-1,0 5,3.4641 5,0" punti="2,1.7321,pieno" vettori="2,1.7321,0.701,3.9821,N;2,1.7321,2,-0.518,P;2,1.7321,0.701,1.7321,F" etichette="-0.1,0.2,θ" xmin=-2 xmax=5.8 ymin=-1.2 ymax=4.6 titolo="Banked curve: the normal force and the weight add to a horizontal net force $m\dfrac{v^2}{r}$ pointing towards the center of the curve"}
+::grafico{assi=0 uguale=1 poligoni="-1,0 5,3.4641 5,0" punti="2,1.7321,pieno" vettori="2,1.7321,0.701,3.9821,N;2,1.7321,2,-0.518,P;2,1.7321,0.701,1.7321,F" etichette="-0.1,0.2,θ" xmin=-2 xmax=5.8 ymin=-1.2 ymax=4.6 titolo="Banked curve: the normal force and the weight add to a horizontal net force $m\dfrac{v^2}{r}$ pointing toward the center of the curve"}
 ::::
 
 ## Vertical circles
@@ -312,7 +312,7 @@ v_{\text{top}} \ge \sqrt{g\,r} .
 $$
 
 :::dimostrazione
-At the top of the circle the center lies vertically below the body, hence the radial axis points downwards. The weight $m g$ points downwards and the contact force, whether the normal force of the track or the tension of the string, also points downwards, towards the center. Newton's second law along the radial axis therefore gives
+At the top of the circle the center lies vertically below the body, hence the radial axis points downwards. The weight $m g$ points downwards and the contact force, whether the normal force of the track or the tension of the string, also points downwards, toward the center. Newton's second law along the radial axis therefore gives
 $$
 N + m g = m\,\frac{v_{\text{top}}^2}{r}
 \quad\Longrightarrow\quad
@@ -321,9 +321,9 @@ $$
 A track can push but cannot pull, and an ideal string can pull but cannot push, hence in both cases $N \ge 0$ is required. That inequality holds if and only if $\dfrac{v_{\text{top}}^2}{r} \ge g$, that is $v_{\text{top}} \ge \sqrt{g r}$.
 :::
 
-At the critical speed $v_{\text{top}} = \sqrt{g r}$ the contact force vanishes and the weight alone supplies the net force towards the center, which is the condition of free fall along a circular path. A loop of radius $6.0\,\mathrm{m}$ therefore requires at least $\sqrt{9.81\,\mathrm{m/s^2} \cdot 6.0\,\mathrm{m}} = 7.67\,\mathrm{m/s}$ at the top. The chapter on potential energy and conservation of energy relates that speed to the height from which the body is released.
+At the critical speed $v_{\text{top}} = \sqrt{g r}$ the contact force vanishes and the weight alone supplies the net force toward the center, which is the condition of free fall along a circular path. A loop of radius $6.0\,\mathrm{m}$ therefore requires at least $\sqrt{9.81\,\mathrm{m/s^2} \cdot 6.0\,\mathrm{m}} = 7.67\,\mathrm{m/s}$ at the top. The chapter on potential energy and conservation of energy relates that speed to the height from which the body is released.
 
-::grafico{assi=0 uguale=1 unicolore=1 curve="2*cos(t),2*sin(t),0,6.29" punti="0,2,pieno;0,-2,pieno" vettori="-0.35,2,-0.35,1.2,N;0.35,2,0.35,0.9,P;-0.35,-2,-0.35,-0.3,N;0.35,-2,0.35,-3.1,P" etichette="1.45,1.75,top;1.25,-1.85,bottom" xmin=-2.8 xmax=3 ymin=-3.6 ymax=2.8 titolo="Vertical loop: at the top both forces point towards the center, at the bottom they oppose each other, hence the contact force is largest at the bottom"}
+::grafico{assi=0 uguale=1 unicolore=1 curve="2*cos(t),2*sin(t),0,6.29" punti="0,2,pieno;0,-2,pieno" vettori="-0.35,2,-0.35,1.2,N;0.35,2,0.35,0.9,P;-0.35,-2,-0.35,-0.3,N;0.35,-2,0.35,-3.1,P" etichette="1.45,1.75,top;1.25,-1.85,bottom" xmin=-2.8 xmax=3 ymin=-3.6 ymax=2.8 titolo="Vertical loop: at the top both forces point toward the center, at the bottom they oppose each other, hence the contact force is largest at the bottom"}
 ::::
 
 :::esempio{#car-over-hill titolo="Car over the crest of a hill"}
@@ -366,7 +366,7 @@ Dividing the first equation by the second gives
 $$
 \tan\theta = \frac{A}{g} ,
 $$
-therefore the angle measures the acceleration and does not depend on the mass. For $A = 2.5\,\mathrm{m/s^2}$ the string hangs at $\arctan\dfrac{2.5}{9.81} = 14.3^\circ$ from the vertical, tilted towards the rear of the vehicle. The same equations written in the ground frame, where the body has acceleration $A$ and only two forces act on it, give the same angle.
+therefore the angle measures the acceleration and does not depend on the mass. For $A = 2.5\,\mathrm{m/s^2}$ the string hangs at $\arctan\dfrac{2.5}{9.81} = 14.3^\circ$ from the vertical, tilted toward the rear of the vehicle. The same equations written in the ground frame, where the body has acceleration $A$ and only two forces act on it, give the same angle.
 :::
 
 :::attenzione

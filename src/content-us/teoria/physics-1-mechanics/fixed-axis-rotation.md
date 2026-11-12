@@ -131,7 +131,7 @@ The two formulas convert one rotation into the motion of each of its points. Poi
 ::::
 
 :::definizione{#centripetal-and-tangential titolo="Radial and tangential acceleration"}
-The acceleration of a point of a rotating body is resolved along the radius and along the tangent to its circle. The **radial component**, also called centripetal, points towards the axis and has magnitude
+The acceleration of a point of a rotating body is resolved along the radius and along the tangent to its circle. The **radial component**, also called centripetal, points toward the axis and has magnitude
 $$
 a_r = \dfrac{v^2}{r} = \omega^2\,r ,
 $$
@@ -141,7 +141,7 @@ a = \sqrt{a_r^2 + a_t^2} .
 $$
 The radial component changes the direction of the velocity and the tangential component changes its magnitude. A body turning at constant $\omega$ has $\alpha = 0$ and keeps the radial component alone, which is the uniform circular motion of the chapter on motion in two and three dimensions.
 
-::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" segmenti="0,0,0,2;0,1.1,-1.3,1.1;-1.3,2,-1.3,1.1" vettori="0,2,0,1.1,aᵣ;0,2,-1.3,2,aₜ;0,2,-1.3,1.1,a" punti="0,0,pieno;0,2,pieno" etichette="0.3,-0.2,O;0.28,2.08,P" xmin=-2.9 xmax=2.9 ymin=-2.5 ymax=2.9 titolo="The acceleration of a point $P$ of the body is the sum of the radial component $a_r = \omega^2 r$, directed towards the axis $O$, and the tangential component $a_t = \alpha r$"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" segmenti="0,0,0,2;0,1.1,-1.3,1.1;-1.3,2,-1.3,1.1" vettori="0,2,0,1.1,aᵣ;0,2,-1.3,2,aₜ;0,2,-1.3,1.1,a" punti="0,0,pieno;0,2,pieno" etichette="0.3,-0.2,O;0.28,2.08,P" xmin=-2.9 xmax=2.9 ymin=-2.5 ymax=2.9 titolo="The acceleration of a point $P$ of the body is the sum of the radial component $a_r = \omega^2 r$, directed toward the axis $O$, and the tangential component $a_t = \alpha r$"}
 :::
 
 ## Moment of inertia

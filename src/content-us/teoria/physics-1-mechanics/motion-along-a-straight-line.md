@@ -86,7 +86,7 @@ v(t) = \lim_{\Delta t \to 0} \frac{x(t + \Delta t) - x(t)}{\Delta t} = \frac{dx}
 $$
 Since the difference quotient is the slope of a secant line, the instantaneous velocity is the slope of the tangent to the position-time graph at the point of abscissa $t$. Its sign tells the sense of the motion at that instant, and its magnitude $|v|$ is the **instantaneous speed**, which is the quantity a speedometer displays.
 
-For the law $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ the derivative is $v(t) = 4 - t$ in SI units. The velocity is positive for $t < 4\,\mathrm{s}$, it vanishes at $t = 4\,\mathrm{s}$ and it is negative afterwards, which is why the position grows up to $t = 4\,\mathrm{s}$ and decreases afterwards. A vanishing velocity is the analytic signature of a reversal, therefore the instants at which $v = 0$ are the ones that separate the stretches used to compute a distance traveled.
+For the law $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ the derivative is $v(t) = 4 - t$ in SI units. The velocity is positive for $t < 4\,\mathrm{s}$, it vanishes at $t = 4\,\mathrm{s}$ and it is negative afterward, which is why the position grows up to $t = 4\,\mathrm{s}$ and decreases afterward. A vanishing velocity is the analytic signature of a reversal, therefore the instants at which $v = 0$ are the ones that separate the stretches used to compute a distance traveled.
 
 ::grafico{f="2+4*x-0.5*x^2;4+2*x" xmin=-0.5 xmax=8.2 ymin=-1 ymax=11.5 nomi="t,x" punti="2,8,pieno" legenda=0 titolo="At $t = 2\,\mathrm{s}$ the tangent to the graph has slope $v(2) = 2\,\mathrm{m/s}$, which is the instantaneous velocity at that instant"}
 :::

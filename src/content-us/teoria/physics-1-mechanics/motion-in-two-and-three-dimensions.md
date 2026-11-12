@@ -302,7 +302,7 @@ A particle in uniform circular motion of radius $R$ and speed $v$ has an acceler
 $$
 a_{\mathrm{rad}} = \frac{v^2}{R} = \omega^2 R ,
 $$
-directed at every instant from the particle towards the center of the circle.
+directed at every instant from the particle toward the center of the circle.
 
 :::dimostrazione
 Place the origin at the center and write the position as
@@ -317,12 +317,12 @@ whose magnitude is $R\omega\sqrt{\sin^2(\omega t) + \cos^2(\omega t)} = R\omega$
 $$
 \vec{a}(t) = -R\omega^2\cos(\omega t)\,\hat{\imath} - R\omega^2\sin(\omega t)\,\hat{\jmath} = -\omega^2\,\vec{r}(t) .
 $$
-The acceleration is therefore the position vector multiplied by the negative number $-\omega^2$, hence it points from the particle towards the center, and its magnitude is $\omega^2 R$. Replacing $\omega$ with $\dfrac{v}{R}$ gives $\dfrac{v^2}{R}$.
+The acceleration is therefore the position vector multiplied by the negative number $-\omega^2$, hence it points from the particle toward the center, and its magnitude is $\omega^2 R$. Replacing $\omega$ with $\dfrac{v}{R}$ gives $\dfrac{v^2}{R}$.
 :::
 
-The result is used in the opposite direction as well, since a particle in uniform circular motion has this acceleration and Newton's second law then requires a resultant force $m\dfrac{v^2}{R}$ directed towards the center, which the chapter on applications of Newton's laws identifies with friction on a flat curve, with a component of the normal force on a banked curve and with the tension of a string in a conical pendulum. A car taking a bend of radius $50\,\mathrm{m}$ at $20\,\mathrm{m/s}$ has $a_{\mathrm{rad}} = 8.0\,\mathrm{m/s^2}$.
+The result is used in the opposite direction as well, since a particle in uniform circular motion has this acceleration and Newton's second law then requires a resultant force $m\dfrac{v^2}{R}$ directed toward the center, which the chapter on applications of Newton's laws identifies with friction on a flat curve, with a component of the normal force on a banked curve and with the tension of a string in a conical pendulum. A car taking a bend of radius $50\,\mathrm{m}$ at $20\,\mathrm{m/s}$ has $a_{\mathrm{rad}} = 8.0\,\mathrm{m/s^2}$.
 
-::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="0,2,-1.3,2,v;0,2,0,1,a;-1.7321,-1,-1.0821,-2.1258,v;-1.7321,-1,-0.8661,-0.5,a;1.7321,-1,2.3821,0.1258,v;1.7321,-1,0.8661,-0.5,a" punti="0,0,pieno,O" xmin=-3.2 xmax=3.2 ymin=-3.2 ymax=3.2 uguale=1 nomi="x,y" titolo="In uniform circular motion the velocity is tangent to the circle and the acceleration points towards the center, with constant magnitude $\dfrac{v^2}{R}$"}
+::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="0,2,-1.3,2,v;0,2,0,1,a;-1.7321,-1,-1.0821,-2.1258,v;-1.7321,-1,-0.8661,-0.5,a;1.7321,-1,2.3821,0.1258,v;1.7321,-1,0.8661,-0.5,a" punti="0,0,pieno,O" xmin=-3.2 xmax=3.2 ymin=-3.2 ymax=3.2 uguale=1 nomi="x,y" titolo="In uniform circular motion the velocity is tangent to the circle and the acceleration points toward the center, with constant magnitude $\dfrac{v^2}{R}$"}
 ::::
 
 ## Nonuniform circular motion
@@ -344,7 +344,7 @@ a_{\mathrm{rad}} = \frac{v^2}{R} ,
 \qquad
 a_{\mathrm{tan}} = \frac{dv}{dt} ,
 $$
-the first directed towards the center and the second along the tangent, hence
+the first directed toward the center and the second along the tangent, hence
 $$
 a = \sqrt{a_{\mathrm{rad}}^2 + a_{\mathrm{tan}}^2} .
 $$
@@ -360,7 +360,7 @@ $$
 \qquad
 \vec{a} = R\alpha\,\hat{u}_T - R\omega^2\,\hat{u}_R .
 $$
-The component along $\hat{u}_R$ has magnitude $R\omega^2 = \dfrac{v^2}{R}$ and the sign $-$ places it towards the center. The two components are perpendicular, therefore the magnitude of the acceleration is the square root of the sum of their squares.
+The component along $\hat{u}_R$ has magnitude $R\omega^2 = \dfrac{v^2}{R}$ and the sign $-$ places it toward the center. The two components are perpendicular, therefore the magnitude of the acceleration is the square root of the sum of their squares.
 :::
 
 The two components answer different questions, since $a_{\mathrm{rad}}$ measures how sharply the path bends at the current speed while $a_{\mathrm{tan}}$ measures how fast the speed changes. A car that enters a bend of radius $100\,\mathrm{m}$ at $10\,\mathrm{m/s}$ while speeding up at $2.0\,\mathrm{m/s^2}$ has $a_{\mathrm{rad}} = 1.0\,\mathrm{m/s^2}$ and $a_{\mathrm{tan}} = 2.0\,\mathrm{m/s^2}$, hence $a = 2.2\,\mathrm{m/s^2}$.

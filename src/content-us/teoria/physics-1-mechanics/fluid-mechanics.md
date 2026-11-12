@@ -334,7 +334,7 @@ The factor $A_1^2 - A_2^2$ is positive since $A_1 > A_2$, therefore $p_1 - p_2 >
 ::grafico{assi=0 uguale=1 poligoni="0,0 2.2,0 3.2,0.45 5,0.45 6,0 9,0 9,1.6 6,1.6 5,1.15 3.2,1.15 2.2,1.6 0,1.6;0.9,1.6 1.3,1.6 1.3,3.9 0.9,3.9;3.9,1.15 4.3,1.15 4.3,2.5 3.9,2.5" linee="0,1.6 2.2,1.6 3.2,1.15 5,1.15 6,1.6 9,1.6;0,0 2.2,0 3.2,0.45 5,0.45 6,0 9,0;0.9,4.3 0.9,1.6;1.3,4.3 1.3,1.6;3.9,4.3 3.9,1.15;4.3,4.3 4.3,1.15" vettori="0.1,0.8,0.85,0.8,v₁;3.4,0.8,4.7,0.8,v₂" segmenti="1.3,3.9,5.3,3.9;4.3,2.5,5.3,2.5;5.3,2.5,5.3,3.9" etichette="5.45,3.1,h;0.1,1.85,A₁;3.95,0.08,A₂" xmin=-0.4 xmax=9.5 ymin=-0.5 ymax=4.7 titolo="Venturi meter: the liquid stands higher over the wide section, and the height difference $h$ gives $p_1 - p_2 = \rho g h$"}
 :::
 
-The two pressures are read on two vertical tubes connected to the pipe, where the liquid rises to the heights $\dfrac{p_1}{\rho g}$ and $\dfrac{p_2}{\rho g}$, hence measuring the difference of the two levels measures the flow rate. The same effect explains why the pressure above a wing, where the air moves faster, is smaller than the pressure below it, and why two sheets of paper held close together are pushed towards each other when air is blown between them.
+The two pressures are read on two vertical tubes connected to the pipe, where the liquid rises to the heights $\dfrac{p_1}{\rho g}$ and $\dfrac{p_2}{\rho g}$, hence measuring the difference of the two levels measures the flow rate. The same effect explains why the pressure above a wing, where the air moves faster, is smaller than the pressure below it, and why two sheets of paper held close together are pushed toward each other when air is blown between them.
 ::::
 
 ## Viscosity and real fluids

@@ -36,7 +36,7 @@ A body sliding along a horizontal floor keeps the normal force perpendicular to 
 :::
 
 :::attenzione
-A force applied to a body in motion can do zero work. In uniform circular motion the net force points towards the center at every instant and the velocity is tangent to the circle, hence $\varphi = 90^\circ$ and the net work over any arc vanishes. This is consistent with the speed being constant in that motion, as the work-energy theorem shows.
+A force applied to a body in motion can do zero work. In uniform circular motion the net force points toward the center at every instant and the velocity is tangent to the circle, hence $\varphi = 90^\circ$ and the net work over any arc vanishes. This is consistent with the speed being constant in that motion, as the work-energy theorem shows.
 
 Work also vanishes when the displacement vanishes, so a person holding a $200\,\mathrm{N}$ suitcase still does no work on it, *whatever* the muscular effort.
 :::
@@ -94,7 +94,7 @@ F_x = -k\,x ,
 $$
 where the positive constant $k$ is the **spring constant**, measured in $\mathrm{N/m}$.
 
-This is an experimental law, established by measuring the elongation produced by known loads, and it holds as long as the deformation stays small enough for the spring to return to its natural length. The minus sign records that the force points towards the origin, since $F_x < 0$ for $x > 0$ and $F_x > 0$ for $x < 0$, and for this reason the spring force is called a restoring force. A spring with $k = 250\,\mathrm{N/m}$ stretched by $x = 0.20\,\mathrm{m}$ pulls the body back with a force of magnitude $50\,\mathrm{N}$.
+This is an experimental law, established by measuring the elongation produced by known loads, and it holds as long as the deformation stays small enough for the spring to return to its natural length. The minus sign records that the force points toward the origin, since $F_x < 0$ for $x > 0$ and $F_x > 0$ for $x < 0$, and for this reason the spring force is called a restoring force. A spring with $k = 250\,\mathrm{N/m}$ stretched by $x = 0.20\,\mathrm{m}$ pulls the body back with a force of magnitude $50\,\mathrm{N}$.
 :::
 
 ::::teorema{#work-of-a-spring titolo="Work done by a spring force"}
@@ -292,6 +292,6 @@ $$
 The mass cancels in the final formula, therefore two blocks of different mass launched at the same speed stop at the same place, as long as the coefficient of friction is the same.
 :::
 
-:::osservazione{#toward-potential-energy titolo="Towards conservation of energy"}
+:::osservazione{#toward-potential-energy titolo="Toward conservation of energy"}
 The work of the weight and the work of a spring force depend on the initial and the final position alone, hence each of them can be written as the decrease of a function of the position, and the work-energy theorem then takes the form of a conservation law. The chapter on potential energy and conservation of energy carries out this step.
 :::

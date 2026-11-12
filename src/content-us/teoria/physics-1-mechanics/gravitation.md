@@ -10,7 +10,7 @@ Let two particles of masses $m_1$ and $m_2$ be separated by the distance $r$. Th
 $$
 F = G\,\frac{m_1 m_2}{r^2} ,
 $$
-where $G$ is a universal constant. The two forces form an action-reaction pair, therefore they have equal magnitudes and opposite senses, and the force on $m_1$ points from $m_1$ towards $m_2$.
+where $G$ is a universal constant. The two forces form an action-reaction pair, therefore they have equal magnitudes and opposite senses, and the force on $m_1$ points from $m_1$ toward $m_2$.
 
 This is an experimental law, established by comparing the acceleration of the Moon with the acceleration of a falling body, and confirmed since by direct measurement in the laboratory. It holds for *every* pair of masses, which is what the word universal records.
 
@@ -77,7 +77,7 @@ A single particle of mass $M$ produces at distance $r$ from itself a field of ma
 $$
 g = \frac{GM}{r^2} ,
 $$
-directed towards $M$. The field describes the source alone, so it can be computed once and then used for any test mass placed in it. Superposition applies to fields as well, since dividing a sum of forces by $m$ gives the sum of the corresponding fields.
+directed toward $M$. The field describes the source alone, so it can be computed once and then used for any test mass placed in it. Superposition applies to fields as well, since dividing a sum of forces by $m$ gives the sum of the corresponding fields.
 :::
 
 :::esempio{#field-between-two-masses titolo="A point where the field vanishes"}
@@ -192,7 +192,7 @@ $$
 The work depends on $r_A$ and $r_B$ alone, therefore the force is conservative. Comparing with $W = U_A - U_B$ gives $U_A = -\dfrac{GMm}{r_A}$ and $U_B = -\dfrac{GMm}{r_B}$ up to one additive constant, and the choice $U \to 0$ as $r \to \infty$ fixes that constant to zero, which is the thesis.
 :::
 
-The potential energy is negative at every finite distance and increases towards zero as $r$ grows, therefore separating two masses requires positive work from an external agent. Every energy balance in this chapter uses this expression together with the kinetic energy.
+The potential energy is negative at every finite distance and increases toward zero as $r$ grows, therefore separating two masses requires positive work from an external agent. Every energy balance in this chapter uses this expression together with the kinetic energy.
 
 ::grafico{curve="t,-1/t,0.22,5" nomi="r,U" legenda=0 etichette="3.85,-0.62,U → 0" xmin=-0.4 xmax=5.4 ymin=-4.6 ymax=0.8 titolo="The potential energy $U(r) = -\dfrac{GMm}{r}$ is negative, increases with $r$ and tends to zero at large distances"}
 ::::
@@ -296,7 +296,7 @@ which is the thesis.
 
 The two formulas answer every question about a satellite from its radius alone. A satellite at $h = 400\,\mathrm{km}$ has $r = 6.77 \times 10^{6}\,\mathrm{m}$, hence $v = 7.67\,\mathrm{km/s}$ and $T = 5.54 \times 10^{3}\,\mathrm{s} = 92.4\,\mathrm{min}$. A larger orbit is slower in both senses, since $v$ decreases and $T$ increases with $r$.
 
-::grafico{assi=0 uguale=1 curve="3*cos(t),3*sin(t),0,6.29" punti="0,0,pieno;2.121,2.121,pieno" vettori="2.121,2.121,1.06,3.18,v;2.121,2.121,0.7,0.7" segmenti="0,0,-2.121,-2.121" etichette="0.1,-0.6,M;3.1,2.1,m;-1.45,-0.95,r;1.78,1.12,F" xmin=-3.8 xmax=4.2 ymin=-3.8 ymax=4 titolo="On a circular orbit the attraction $F = G\,\dfrac{Mm}{r^2}$ is directed towards the center and the velocity is tangent to the orbit"}
+::grafico{assi=0 uguale=1 curve="3*cos(t),3*sin(t),0,6.29" punti="0,0,pieno;2.121,2.121,pieno" vettori="2.121,2.121,1.06,3.18,v;2.121,2.121,0.7,0.7" segmenti="0,0,-2.121,-2.121" etichette="0.1,-0.6,M;3.1,2.1,m;-1.45,-0.95,r;1.78,1.12,F" xmin=-3.8 xmax=4.2 ymin=-3.8 ymax=4 titolo="On a circular orbit the attraction $F = G\,\dfrac{Mm}{r^2}$ is directed toward the center and the velocity is tangent to the orbit"}
 ::::
 
 :::esempio{#geostationary titolo="The geostationary orbit"}
@@ -335,7 +335,7 @@ $$
 which is the thesis, and comparing with $K$ gives $E = -K$ and $U = 2E$.
 :::
 
-The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases towards zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly. For an elliptical orbit of semi-major axis $a$ the same expression holds with $a$ in place of $r$, therefore $E = -\dfrac{GMm}{2a}$, as the integration of the equation of motion shows.
+The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases toward zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly. For an elliptical orbit of semi-major axis $a$ the same expression holds with $a$ in place of $r$, therefore $E = -\dfrac{GMm}{2a}$, as the integration of the equation of motion shows.
 ::::
 
 :::esempio{#raising-an-orbit titolo="Raising a satellite"}

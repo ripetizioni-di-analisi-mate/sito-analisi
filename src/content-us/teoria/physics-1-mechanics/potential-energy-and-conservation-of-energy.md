@@ -250,7 +250,7 @@ $$
 The right side is an antiderivative of $-F_x$, hence differentiating both sides with respect to $x$ gives $\dfrac{dU}{dx} = -F_x$, which is the stated relation.
 :::
 
-The relation turns a single function into the whole dynamics of the motion along a line. For $U(y) = mgy$ it returns $F_y = -mg$, the weight; for $U(x) = \dfrac{1}{2}kx^2$ it returns $F_x = -kx$, Hooke's law. Where $U$ decreases the derivative is negative and the force is positive, so the force always points towards the positions of lower potential energy.
+The relation turns a single function into the whole dynamics of the motion along a line. For $U(y) = mgy$ it returns $F_y = -mg$, the weight; for $U(x) = \dfrac{1}{2}kx^2$ it returns $F_x = -kx$, Hooke's law. Where $U$ decreases the derivative is negative and the force is positive, so the force always points toward the positions of lower potential energy.
 
 ::grafico{f="x^3-3*x;3-3*x^2" punti="-1,2,pieno;1,-2,pieno" legenda="U = x^3 - 3x;F_x = 3 - 3x^2" xmin=-2.5 xmax=2.5 ymin=-6.5 ymax=6.5 titolo="$U(x) = x^3 - 3x$ in joules, with $x$ in meters, and the force $F_x = -\dfrac{dU}{dx} = 3 - 3x^2$ in newtons (dashed); the force vanishes at the stationary points $x = \pm 1\,\mathrm{m}$ of $U$"}
 ::::
@@ -288,7 +288,7 @@ hence the speed is largest where $U$ is smallest.
 :::definizione{#equilibrium titolo="Stable, unstable and neutral equilibrium"}
 A position $x_0$ is a position of **equilibrium** when the force vanishes there, that is when $\dfrac{dU}{dx}(x_0) = 0$. The equilibrium is classified by the behavior of $U$ near $x_0$:
 
-- $U$ has a minimum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) > 0$, and the equilibrium is **stable**, since a small displacement produces a force directed back towards $x_0$;
+- $U$ has a minimum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) > 0$, and the equilibrium is **stable**, since a small displacement produces a force directed back toward $x_0$;
 - $U$ has a maximum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) < 0$, and the equilibrium is **unstable**, since a small displacement produces a force directed away from $x_0$;
 - $U$ is constant on an interval containing $x_0$, and the equilibrium is **neutral**, since the force vanishes on the whole interval and the body stays wherever it is placed.
 
