@@ -1,0 +1,32 @@
+---
+// Elenco delle schede svolte di un argomento dei corsi americani (contenuti in src/content-us/).
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ElencoSchedeSvolte from './ElencoSchedeSvolte.astro';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { perArgomento, numero } from '../lib/nav';
+import { T } from '../i18n';
+
+interface Props { corso: string; argomento: string }
+const { corso, argomento } = Astro.props;
+const t = T('en');
+const m = materiaUsa(corso)!;
+const arg = m.argomenti.find((a) => a.slug === argomento)!;
+const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
+const voci = perArgomento(await getCollection('svolti_us'), corso, argomento);
+---
+<Base lingua="en" usa titolo={`${arg.titolo} · ${t.sezioni['esercizi-svolti']}`}
+  descrizione={`Worked examples on ${arg.titolo}, grouped by type of problem, with the computation first and the explanation in words below.`}
+  materia={corso} argomento={argomento} sezione="esercizi-svolti"
+  percorso={[{ titolo: arg.breve, href: href('teoria') }, { titolo: t.sezioni['esercizi-svolti'] }]}>
+  <p class="sopratitolo">{t.sezioni['esercizi-svolti']}</p>
+  <h1>{arg.titolo}</h1>
+  <p class="sommario">{t.svoltiSommario}</p>
+  <ElencoSchedeSvolte schede={voci.map((e) => ({
+    numero: numero(e.id),
+    href: href('esercizi-svolti/' + numero(e.id)),
+    titolo: e.data.titolo,
+    accesso: e.data.gratis ? 'Free worked sheet' : undefined,
+    parole: e.data.parole,
+  }))} />
+</Base>

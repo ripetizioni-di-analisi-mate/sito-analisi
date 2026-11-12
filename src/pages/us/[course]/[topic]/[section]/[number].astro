@@ -1,10 +1,21 @@
 ---
 import UsStudyItem from '../../../../../components/UsStudyItem.astro';
+import UsSvolto from '../../../../../components/UsSvolto.astro';
+import UsEsercizio from '../../../../../components/UsEsercizio.astro';
 import { usItemPaths } from '../../../../../lib/stem-usa-study-pages';
+import { usVociMarkdown } from '../../../../../lib/stem-usa-markdown';
+import { SEZIONI_USA } from '../../../../../data/stem-usa/programmi.mjs';
 
-export function getStaticPaths() { return usItemPaths(false); }
+export async function getStaticPaths() {
+  const markdown = (await usVociMarkdown()).map((x) => ({ ...x, props: { markdown: true } }));
+  return [...markdown, ...usItemPaths(false)];
+}
 
-const { slug, lesson } = Astro.props;
-const params = Astro.params as { topic: string; section: 'esercizi-svolti' | 'esercizi'; number: string };
+const { markdown, slug, lesson } = Astro.props as any;
+const { course, topic, section, number } = Astro.params as { course: string; topic: string; section: string; number: string };
 ---
-<UsStudyItem {slug} {lesson} {...params} />
+{markdown
+  ? (section === SEZIONI_USA['esercizi-svolti']
+      ? <UsSvolto corso={course} argomento={topic} n={number} />
+      : <UsEsercizio corso={course} argomento={topic} n={number} />)
+  : <UsStudyItem {slug} {lesson} topic={topic} section={section as 'esercizi-svolti' | 'esercizi'} number={number} />}

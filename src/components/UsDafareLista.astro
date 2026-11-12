@@ -1,0 +1,40 @@
+---
+// Elenco delle tracce da svolgere di un argomento dei corsi americani: il testo è visibile a tutti,
+// la soluzione è riservata a chi ha il corso.
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { perArgomento, numero } from '../lib/nav';
+import { T } from '../i18n';
+
+interface Props { corso: string; argomento: string }
+const { corso, argomento } = Astro.props;
+const t = T('en');
+const m = materiaUsa(corso)!;
+const arg = m.argomenti.find((a) => a.slug === argomento)!;
+const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
+const voci = perArgomento(await getCollection('dafare_us'), corso, argomento);
+// La soluzione è un <details class="blocco blocco-soluzione">: si separa dal testo della traccia,
+// così il problema resta leggibile a tutti e solo il risultato è riservato.
+const SOLUZIONE = '<details class="blocco blocco-soluzione"';
+const tracce = voci.map((e) => {
+  const html = e.rendered?.html ?? '';
+  const k = html.indexOf(SOLUZIONE);
+  return { n: numero(e.id), titolo: e.data.titolo, testo: k < 0 ? html : html.slice(0, k), soluzione: k < 0 ? '' : html.slice(k) };
+});
+---
+<Base lingua="en" usa titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
+  descrizione={`Practice problems on ${arg.titolo}, with the final answer.`}
+  materia={corso} argomento={argomento} sezione="esercizi"
+  percorso={[{ titolo: arg.breve, href: href('teoria') }, { titolo: t.sezioni.esercizi }]}>
+  <p class="sopratitolo">{t.sezioni.esercizi}</p>
+  <h1>{arg.titolo}</h1>
+  <p class="sommario">{t.dafareSommario}</p>
+  {tracce.map(({ n, titolo, testo, soluzione }) => (
+    <section class="traccia" id={'esercizio-' + n}>
+      <h2><a href={href('esercizi/' + n)}><span class="numero">{n}.</span> {titolo}</a></h2>
+      <div class="testo-studio" set:html={testo} />
+      {soluzione && <div class="testo-studio" data-usa-content set:html={soluzione} />}
+    </section>
+  ))}
+</Base>

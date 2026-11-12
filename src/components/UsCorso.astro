@@ -1,0 +1,65 @@
+---
+// Pagina principale di un corso americano scritto sul programma statunitense, con i contenuti
+// in Markdown (src/content-us/). Gli argomenti e i conteggi si leggono dalle collezioni *_us.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import AccessoMateria from './AccessoMateria.astro';
+import SchedaArgomento from './SchedaArgomento.astro';
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
+import { usaProduct } from '../data/stem-usa/pricing';
+import { PARAGRAFI_GRATIS } from '../data/stem-usa/programmi.mjs';
+import { T, sezioniL } from '../i18n';
+import { perArgomento } from '../lib/nav';
+import { url } from '../lib/url';
+
+const { course } = Astro.props;
+const { slug, title, description, preparation, sources } = course;
+const t = T('en');
+const m = materiaUsa(slug)!;
+const price = usaProduct(slug)!.prezzo;
+const teoria = await getCollection('teoria_us');
+const svolti = await getCollection('svolti_us');
+const dafare = await getCollection('dafare_us');
+const sectionLink = (topic: string, section: string) => linkArgomentoUsa(slug, topic, section);
+const schede = (a: string) => perArgomento(svolti, slug, a);
+const tracce = (a: string) => perArgomento(dafare, slug, a);
+const totali = {
+  schede: m.argomenti.reduce((n, a) => n + schede(a.slug).length, 0),
+  tracce: m.argomenti.reduce((n, a) => n + tracce(a.slug).length, 0),
+};
+const sommarioDi = (a: string) => teoria.find((v) => v.id === `${slug}/${a}`)?.data.sommario ?? '';
+---
+<Base lingua="en" usa titolo={t.argomentiEsame} descrizione={description} materia={slug}
+  seo={{ titolo: title + ' · Ripetizioni di Analisi' }}>
+  <p class="sopratitolo">{t.argomentiEsame}</p>
+  <h1>{title}</h1>
+  <p class="sommario">{description}</p>
+  <AccessoMateria materia={slug} titolo={title} prezzo={price} lingua="en"
+    anteprima={sectionLink(m.argomenti[0].slug, 'teoria')} sblocca={url(courseUrl(slug) + '/sblocca')}
+    testo={`Read the first ${PARAGRAFI_GRATIS} sections of every chapter and the first three worked sheets of each topic, without an account.`} />
+  <ol class="griglia-argomenti">
+    {m.argomenti.map((a) => {
+      const links = sezioniL('en').map(({ slug: section, titolo }) => ({
+        href: sectionLink(a.slug, section),
+        titolo,
+        conteggio: section === 'esercizi-svolti' ? schede(a.slug).length
+          : section === 'esercizi' ? tracce(a.slug).length : undefined,
+      })).filter((x) => x.conteggio === undefined || x.conteggio > 0);
+      return <SchedaArgomento titolo={a.titolo} sezioni={links} preparazione={t.inPreparazione}>
+        <Fragment slot="sommario">{sommarioDi(a.slug)}</Fragment>
+      </SchedaArgomento>;
+    })}
+  </ol>
+  <p class="nota">{m.argomenti.length} topics · {totali.schede} worked sheets · {totali.tracce} practice problems</p>
+  <details class="sommario-pagina">
+    <summary>University syllabi</summary>
+    <div class="testo-studio">
+      <p><strong>Preparation</strong> {preparation}</p>
+      <ul>{sources.map((source: { url: string; title: string }) => <li><a href={source.url} target="_blank" rel="noopener">{source.title}</a></li>)}</ul>
+    </div>
+  </details>
+</Base>
+<style>
+  .sommario-pagina .testo-studio { padding: 0 .9rem .6rem; }
+</style>

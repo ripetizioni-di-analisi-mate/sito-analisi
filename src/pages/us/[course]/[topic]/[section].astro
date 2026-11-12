@@ -1,19 +1,25 @@
 ---
 import UsStudySection from '../../../../components/UsStudySection.astro';
 import UsTeoria from '../../../../components/UsTeoria.astro';
+import UsSvoltiLista from '../../../../components/UsSvoltiLista.astro';
+import UsDafareLista from '../../../../components/UsDafareLista.astro';
 import { usSectionPaths } from '../../../../lib/stem-usa-study-pages';
-import { PROGRAMMI, SEZIONI_USA } from '../../../../data/stem-usa/programmi.mjs';
+import { usSezioniMarkdown } from '../../../../lib/stem-usa-markdown';
+import { SEZIONI_USA } from '../../../../data/stem-usa/programmi.mjs';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
   // Corsi scritti sul programma americano: contenuti in Markdown, indirizzi delle sezioni in inglese.
-  const markdown = Object.entries(PROGRAMMI).flatMap(([corso, argomenti]) =>
-    argomenti.map((a) => ({ params: { course: corso, topic: a.slug, section: SEZIONI_USA.teoria }, props: { markdown: true } })));
+  const markdown = (await usSezioniMarkdown()).map((x) => ({ ...x, props: { markdown: true } }));
   return [...markdown, ...usSectionPaths(false)];
 }
 
 const { markdown, slug, lesson } = Astro.props as any;
-const params = Astro.params as { course: string; topic: string; section: string };
+const { course, topic, section } = Astro.params as { course: string; topic: string; section: string };
 ---
 {markdown
-  ? <UsTeoria corso={params.course} argomento={params.topic} />
-  : <UsStudySection {slug} {lesson} topic={params.topic} section={params.section as 'teoria' | 'esercizi-svolti' | 'esercizi'} />}
+  ? (section === SEZIONI_USA.teoria
+      ? <UsTeoria corso={course} argomento={topic} />
+      : section === SEZIONI_USA['esercizi-svolti']
+        ? <UsSvoltiLista corso={course} argomento={topic} />
+        : <UsDafareLista corso={course} argomento={topic} />)
+  : <UsStudySection {slug} {lesson} topic={topic} section={section as 'teoria' | 'esercizi-svolti' | 'esercizi'} />}

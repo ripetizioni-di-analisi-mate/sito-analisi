@@ -3,6 +3,8 @@ import UsStem from '../../layouts/UsStem.astro';
 import UsPractice from '../../components/UsPractice.astro';
 import UsCourseOutline from '../../components/UsCourseOutline.astro';
 import UsStudyCourse from '../../components/UsStudyCourse.astro';
+import UsCorso from '../../components/UsCorso.astro';
+import { haProgramma } from '../../data/stem-usa/programmi.mjs';
 import { linkArgomentoUsa } from '../../data/stem-usa/catalog-view';
 import { T, sezioniL } from '../../i18n';
 import { universityCourses, hasUsStudyPages, optionsFor } from '../../data/stem-usa/catalog.mjs';
@@ -25,7 +27,7 @@ const t = T('en');
 const sezioni = sezioniL('en');
 const study = hasUsStudyPages(course.slug);
 ---
-{study ? <UsStudyCourse course={course} /> : <UsStem title={title} description={course.description} course={course.slug}>
+{haProgramma(course.slug) ? <UsCorso course={course} /> : study ? <UsStudyCourse course={course} /> : <UsStem title={title} description={course.description} course={course.slug}>
   <p class="sopratitolo">{t.programma}</p>
   <h1>{title}</h1>
   <p class="sommario">{course.description}</p>

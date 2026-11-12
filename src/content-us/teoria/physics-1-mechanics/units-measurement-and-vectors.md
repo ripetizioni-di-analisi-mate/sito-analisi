@@ -181,7 +181,7 @@ $$
 Components turn a drawing into arithmetic, which is how every force problem in the following chapters is solved.
 :::
 
-:::teorema{#components-operations titolo="Operations in components"}
+::::teorema{#components-operations titolo="Operations in components"}
 Let $\vec{A} = (A_x, A_y, A_z)$ and $\vec{B} = (B_x, B_y, B_z)$, and let $k$ be a real number. Then
 $$
 \vec{A} + \vec{B} = (A_x + B_x,\ A_y + B_y,\ A_z + B_z),
@@ -198,7 +198,7 @@ Since the decomposition on the unit vectors is unique, the components of the sum
 :::
 
 Two vectors are equal exactly when their components are equal, therefore one vector equation in the plane is equivalent to two numerical equations, one per axis. The resultant of several forces is computed in this way: each force is resolved, the $x$ components are added and the $y$ components are added separately, and the magnitude and direction follow from the components of the sum.
-:::
+::::
 
 :::attenzione
 The function $\arctan$ returns angles between $-90^\circ$ and $90^\circ$, so it gives the angle of $\vec{A}$ *only* when $A_x > 0$. For $\vec{A} = (-3, 4)$ it returns $\arctan\left(-\dfrac{4}{3}\right) \approx -53.1^\circ$, which is the angle of the opposite vector $(3, -4)$. Since $\vec{A}$ lies in the second quadrant, its angle is obtained by adding $180^\circ$, hence $\theta \approx 126.9^\circ$.
@@ -218,7 +218,7 @@ where $\varphi$ is the angle between the two vectors when they are drawn from th
 The sign of the scalar product is the sign of $\cos\varphi$: it is positive for $\varphi < 90^\circ$, zero for $\varphi = 90^\circ$ and negative for $\varphi > 90^\circ$. Two nonzero vectors are therefore perpendicular exactly when their scalar product vanishes, which is the quickest test for perpendicularity available.
 :::
 
-:::teorema{#scalar-product-components titolo="Scalar product in components"}
+::::teorema{#scalar-product-components titolo="Scalar product in components"}
 For $\vec{A} = (A_x, A_y, A_z)$ and $\vec{B} = (B_x, B_y, B_z)$,
 $$
 \vec{A} \cdot \vec{B} = A_xB_x + A_yB_y + A_zB_z .
@@ -229,7 +229,7 @@ The unit vectors are mutually perpendicular and have magnitude $1$, hence $\hat{
 :::
 
 The formula gives the angle between two vectors from their components, since $\cos\varphi = \dfrac{\vec{A} \cdot \vec{B}}{A\,B}$. For $\vec{A} = (1, 2)$ and $\vec{B} = (3, -1)$ the product is $3 - 2 = 1$, therefore $\cos\varphi = \dfrac{1}{\sqrt{5}\sqrt{10}} \approx 0.141$ and $\varphi \approx 81.9^\circ$.
-:::
+::::
 
 :::esempio{#work-as-scalar-product titolo="Work of a constant force"}
 A constant force $\vec{F}$ acting on a body that undergoes the displacement $\vec{d}$ does the work
@@ -255,7 +255,7 @@ perpendicular to the plane of $\vec{A}$ and $\vec{B}$, with the sense given by t
 The magnitude equals the area of the parallelogram with sides $\vec{A}$ and $\vec{B}$, and it vanishes exactly when the two vectors are parallel. Reversing the order reverses the sense, hence $\vec{B} \times \vec{A} = -\,\vec{A} \times \vec{B}$, and the order matters in every formula that uses this product.
 :::
 
-:::teorema{#vector-product-components titolo="Vector product in components"}
+::::teorema{#vector-product-components titolo="Vector product in components"}
 For $\vec{A} = (A_x, A_y, A_z)$ and $\vec{B} = (B_x, B_y, B_z)$,
 $$
 \vec{A} \times \vec{B} = (A_yB_z - A_zB_y)\,\hat{\imath} + (A_zB_x - A_xB_z)\,\hat{\jmath} + (A_xB_y - A_yB_x)\,\hat{k} .
@@ -266,7 +266,7 @@ The unit vectors satisfy $\hat{\imath} \times \hat{\jmath} = \hat{k}$, $\hat{\jm
 :::
 
 For two vectors in the $xy$ plane only the last component survives, so $\vec{A} \times \vec{B} = (A_xB_y - A_yB_x)\,\hat{k}$, and the product is perpendicular to the plane. The number $A_xB_y - A_yB_x$ is positive when the turn from $\vec{A}$ to $\vec{B}$ is counterclockwise.
-:::
+::::
 
 :::esempio{#torque-as-vector-product titolo="Torque of a force"}
 The torque of a force $\vec{F}$ applied at the point located by $\vec{r}$ with respect to a chosen origin is
