@@ -6,6 +6,7 @@ import remarkBlocchi from './src/plugins/remark-blocchi.mjs';
 import remarkTracce from './src/plugins/remark-tracce.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from './src/data/cataloghi-studio.mjs';
 
 // Astro conserva in cache le pagine già rese e non si accorge se cambiano i plugin (figure, legende, blocchi):
 // se il codice dei plugin è cambiato dall'ultima build, la cache dei contenuti si svuota.
@@ -28,6 +29,20 @@ export default defineConfig({
   site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse' },
+  integrations: CATALOGO_USA_PUBBLICO ? [] : [{
+    name: 'sospensione-catalogo-usa',
+    hooks: {
+      'astro:build:start': ({ setPrerenderer }) => {
+        setPrerenderer((prerenderer) => ({
+          ...prerenderer,
+          async getStaticPaths() {
+            const risultato = await prerenderer.getStaticPaths();
+            return { ...risultato, paths: risultato.paths.filter(({ pathname }) => !percorsoCatalogoUsa(pathname)) };
+          },
+        }));
+      },
+    },
+  }],
   // Le formule rendono voluminoso il deposito: parti da 1 MiB evitano una singola stringa oltre il limite di V8.
   experimental: {
     collectionStorage: { type: 'chunked', chunkSize: 1024 * 1024 },

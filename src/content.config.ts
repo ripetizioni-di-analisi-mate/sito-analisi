@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { glob, type LoaderContext } from 'astro/loaders';
+import { CATALOGO_USA_PUBBLICO } from './data/cataloghi-studio.mjs';
 import { MATERIE } from './data/materie';
 
 // I contenuti delle materie in preparazione restano fuori dal sito finché la materia non è attivata.
@@ -72,10 +73,14 @@ const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...esc
 // Corsi americani: stessa struttura, in src/content-us/, con lo slug del corso al posto della materia
 // (src/content-us/teoria/physics-1-mechanics/<argomento>.md). I contenuti sono scritti in inglese sul
 // programma americano, non tradotti dall'italiano.
-const teoria_us = defineCollection({ loader: glob({ pattern: ['*/*.md'], base: './src/content-us/teoria' }), schema: teoria.schema });
-const svolti_us = defineCollection({ loader: glob({ pattern: ['*/*/*.md'], base: './src/content-us/svolti' }), schema: svolti.schema });
-const dafare_us = defineCollection({ loader: glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }), schema: dafare.schema });
-const domande_us = defineCollection({ loader: senzaHtml('./src/content-us/domande'), schema: domande.schema });
+const catalogoUsaSospeso = {
+  name: 'catalogo-usa-sospeso',
+  load({ store }: LoaderContext) { store.clear(); },
+};
+const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*.md'], base: './src/content-us/teoria' }) : catalogoUsaSospeso, schema: teoria.schema });
+const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/svolti' }) : catalogoUsaSospeso, schema: svolti.schema });
+const dafare_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }) : catalogoUsaSospeso, schema: dafare.schema });
+const domande_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/domande') : catalogoUsaSospeso, schema: domande.schema });
 
 // Formulari gratuiti: src/content/formulari/<materia>.md (pagina /formulari/<materia>, PDF con account gratuito).
 const formulari = defineCollection({
