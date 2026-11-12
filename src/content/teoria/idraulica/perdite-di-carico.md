@@ -277,13 +277,13 @@ dove $R$ è il raggio idraulico e $\chi$ è il coefficiente di Chézy, che ha le
 :::definizione{#gauckler-strickler titolo="Formula di Gauckler-Strickler"}
 La **formula di Gauckler-Strickler** specifica la dipendenza del coefficiente di Chézy dal raggio idraulico:
 $$
-v = k_s\,R^{2/3}\,J^{1/2} ,
+v = k_s\,R^{\frac{2}{3}}\,J^{\frac{1}{2}} ,
 $$
 dove $k_s$, in $\mathrm{m^{1/3}/s}$, è il coefficiente di scabrezza, tanto più grande quanto più la parete è liscia. Valori di uso corrente, ricavati da misure su condotte e canali in esercizio: materie plastiche $120$, acciaio $100$–$110$, ghisa nuova $90$–$100$, ghisa in esercizio da anni $70$–$80$, calcestruzzo lisciato $75$–$85$, calcestruzzo grezzo $60$–$70$. Il coefficiente $n$ di Manning, usato nei testi di lingua inglese, è il reciproco di $k_s$.
 
 Risolvendo rispetto alla cadente si ottiene la forma di uso corrente
 $$
-J = \frac{v^2}{k_s^2\,R^{4/3}} ,
+J = \frac{v^2}{k_s^2\,R^{\frac{4}{3}}} ,
 $$
 che fornisce direttamente la perdita senza iterazioni. Per una condotta in calcestruzzo con $D = 0{,}40\,\mathrm{m}$, $k_s = 80\,\mathrm{m^{1/3}/s}$ e $Q = 120\,\mathrm{L/s}$ si ha $v = 0{,}955\,\mathrm{m/s}$, $R = 0{,}10\,\mathrm{m}$ e $J = 0{,}00307$.
 :::
@@ -293,9 +293,9 @@ Le formule monomie e la formula di Darcy-Weisbach descrivono la stessa cadente, 
 $$
 \chi = \sqrt{\frac{8g}{\lambda}} ,
 \qquad
-\chi = k_s\,R^{1/6} .
+\chi = k_s\,R^{\frac{1}{6}} .
 $$
-Il confronto mostra il campo d'uso delle formule monomie: $\chi$ dipende dalla sola scabrezza, quindi le formule valgono dove $\lambda$ non dipende dal numero di Reynolds, cioè nel campo assolutamente turbolento. Nell'esempio precedente $\lambda = 0{,}0264$ dà $\chi = 54{,}5\,\mathrm{m^{1/2}/s}$, e $k_s R^{1/6} = 80 \cdot 0{,}681 = 54{,}5\,\mathrm{m^{1/2}/s}$.
+Il confronto mostra il campo d'uso delle formule monomie: $\chi$ dipende dalla sola scabrezza, quindi le formule valgono dove $\lambda$ non dipende dal numero di Reynolds, cioè nel campo assolutamente turbolento. Nell'esempio precedente $\lambda = 0{,}0264$ dà $\chi = 54{,}5\,\mathrm{m^{1/2}/s}$, e $k_s R^{\frac{1}{6}} = 80 \cdot 0{,}681 = 54{,}5\,\mathrm{m^{1/2}/s}$.
 :::
 
 ## Le perdite localizzate

@@ -88,7 +88,7 @@ $$
 ::::
 
 :::attenzione
-Il centro di spinta non coincide con il baricentro della superficie, salvo il caso della superficie orizzontale. Per una paratoia rettangolare verticale alta $3\,\mathrm{m}$ con il bordo superiore sulla superficie libera il baricentro sta a $1{,}50\,\mathrm{m}$ di profondità, mentre il centro di spinta sta a $2{,}00\,\mathrm{m}$. Calcolare il momento rispetto a una cerniera con il braccio del baricentro porterebbe a un risultato più piccolo di un terzo.
+Il centro di spinta non coincide con il baricentro della superficie, salvo il caso della superficie orizzontale. Per una paratoia rettangolare verticale alta $3\,\mathrm{m}$ con il bordo superiore sulla superficie libera il baricentro sta a $1{,}50\,\mathrm{m}$ di profondità, mentre il centro di spinta sta a $2{,}00\,\mathrm{m}$. Calcolare il momento rispetto a una cerniera posta sul bordo superiore con il braccio del baricentro porterebbe a un risultato più piccolo di un quarto.
 :::
 
 :::osservazione{#momento-rispetto-al-baricentro titolo="Momento delle pressioni rispetto al baricentro"}

@@ -74,7 +74,7 @@ Il confronto con la scrittura $\Delta H = r_{\mathrm{eq}} Q^2$, valida per ogni 
 :::
 ::::
 
-::schema{nodi="A,3.5,17;N,15,12;V,28,0;P,30.5,20,-;Q,30.5,3,-" condotte="A-N,0.7,tratto 1;N-V,0.6,tratto 2" acqua="0,13 3.5,13 3.5,20 0,20;26,-2 30.5,-2 30.5,3 26,3" solidi="0,12 3.5,12 3.5,13 0,13;26,-3 30.5,-3 30.5,-2 26,-2" pelo="0,3.5,20,monte;26,30.5,3,valle" piezometrica="3.5,20 15,14.07 28,3" quote="Q,P,18.00 m,1.2" titolo="Due condotte in serie: la piezometrica scende da un pelo libero all'altro con due pendenze diverse"}
+::schema{nodi="A,3.5,17;N,15,12,-;V,28,0,-;P,30.5,20,-;Q,30.5,3,-" etichette="15.95,12.95,N;28.95,-0.95,V" condotte="A-N,0.7,tratto 1;N-V,0.6,tratto 2" acqua="0,13 3.5,13 3.5,20 0,20;26,-2 30.5,-2 30.5,3 26,3" solidi="0,12 3.5,12 3.5,13 0,13;26,-3 30.5,-3 30.5,-2 26,-2" pelo="0,3.5,20,monte;26,30.5,3,valle" piezometrica="3.5,20 15,14.07 28,3" quote="Q,P,18.00 m,1.2" titolo="Due condotte in serie: la piezometrica scende da un pelo libero all'altro con due pendenze diverse"}
 
 :::osservazione{#pendenza-della-piezometrica titolo="Lettura della piezometrica"}
 Nello schema di lunga condotta la cadente di ciascun tronco vale $J_i = \dfrac{r_i Q^2}{L_i}$, quindi la piezometrica è una spezzata formata da segmenti rettilinei, uno per tronco, e cambia pendenza in ogni nodo. Il tronco di diametro minore ha la cadente maggiore, perciò il suo segmento è il più ripido. La quota piezometrica di un nodo intermedio si ottiene togliendo al carico di monte le perdite dei tronchi che precedono il nodo, e la pressione nel nodo è $\dfrac{p}{\gamma} = h - z$, con $z$ quota geodetica dell'asse della condotta.
@@ -111,7 +111,7 @@ e il confronto con $\Delta H = r_{\mathrm{eq}} Q^2$ dà la tesi.
 :::
 ::::
 
-::schema{nodi="M,4,8;V,24,8;B,14,12,-;C,14,4,-" condotte="M-B-V,0.5,ramo 1;M-C-V,0.42,ramo 2" etichette="14,13.4,Q_1;14,2.4,Q_2" frecce="1,8,3.4,8,Q;24.6,8,27,8,Q" titolo="Due rami in parallelo fra i nodi $M$ e $V$: la perdita è la stessa, le portate si sommano"}
+::schema{nodi="M,4,8;V,24,8,-;B,14,12,-;C,14,4,-" condotte="M-B-V,0.5,ramo 1;M-C-V,0.42,ramo 2" etichette="14,13.4,Q_1;14,2.4,Q_2;25.0,8.0,V" frecce="1,8,3.4,8,Q;24.6,8,27,8,Q" titolo="Due rami in parallelo fra i nodi $M$ e $V$: la perdita è la stessa, le portate si sommano"}
 
 :::osservazione{#ripartizione-parallelo titolo="Ripartizione della portata fra i rami"}
 Dalle relazioni $Q_i = \sqrt{\dfrac{\Delta H}{r_i}}$ segue che il rapporto fra due portate non dipende dalla portata complessiva:
@@ -228,7 +228,7 @@ $$
 L'incognita del problema è quindi il solo valore $h_N$: trovato quello, le portate si leggono una per una dalla formula precedente.
 :::
 
-::schema{nodi="N,18,6;A,3.5,16;B,13,14;C,26,2" condotte="A-N,0.55,ramo A;B-N,0.45,ramo B;N-C,0.65,ramo C" acqua="0,13 3.5,13 3.5,20 0,20;10,14 13,14 13,17 10,17;26,-1 30,-1 30,5 26,5" solidi="0,12 3.5,12 3.5,13 0,13;10,13 13,13 13,14 10,14;26,-2 30,-2 30,-1 26,-1" pelo="0,3.5,20,z_A;10,13,17,z_B;26,30,5,z_C" titolo="Tre serbatoi collegati al nodo di diramazione $N$"}
+::schema{nodi="N,18,6,-;A,3.5,16;B,13,14;C,26,2,-" etichette="17.2,5.2,N;26.8,1.2,C" condotte="A-N,0.55,ramo A;B-N,0.45,ramo B;N-C,0.65,ramo C" acqua="0,13 3.5,13 3.5,20 0,20;10,14 13,14 13,17 10,17;26,-1 30,-1 30,5 26,5" solidi="0,12 3.5,12 3.5,13 0,13;10,13 13,13 13,14 10,14;26,-2 30,-2 30,-1 26,-1" pelo="0,3.5,20,z_A;10,13,17,z_B;26,30,5,z_C" titolo="Tre serbatoi collegati al nodo di diramazione $N$"}
 
 :::richiamo{titolo="Teorema degli zeri"}
 Sia $f$ continua su $[a, b]$ con $f(a)\,f(b) < 0$. Allora esiste $c \in (a, b)$ tale che $f(c) = 0$; se inoltre $f$ è strettamente monotona, tale $c$ è unico. Si rimanda all'argomento sulle funzioni continue di Analisi 1.
@@ -278,7 +278,7 @@ Stabilito il verso, le tre portate si scrivono con i segni corretti e l'equazion
 Una **rete aperta ramificata** è una rete il cui schema non contiene maglie chiuse: da ogni nodo si raggiunge la fonte di alimentazione lungo un solo percorso. La portata di ciascun ramo si ricava allora dalla sola continuità, partendo dai nodi terminali e risalendo verso la fonte: la portata di un ramo è la somma delle erogazioni di tutti i nodi che stanno a valle di esso. Note le portate, le perdite si calcolano ramo per ramo e i carichi piezometrici dei nodi si ottengono scendendo dal serbatoio lungo i percorsi.
 :::
 
-::schema{nodi="S,2,10;A,10,10;B,18,14;C,18,6;D,26,14" condotte="S-A,0.5,0;A-B,0.4,1;A-C,0.4,2;B-D,0.33,3" acqua="0,7 2,7 2,12 0,12" solidi="0,6 2,6 2,7 0,7" pelo="0,2,12,serbatoio" frecce="18.9,14,20.2,14,;18.9,6,20.2,6,;26.9,14,28.2,14," titolo="Rete aperta ramificata: da ogni nodo si risale al serbatoio lungo un solo percorso"}
+::schema{nodi="S,2,10;A,10,10;B,18,14;C,18,6,-;D,26,14" etichette="18.85,5.15,C" condotte="S-A,0.5,0;A-B,0.4,1;A-C,0.4,2;B-D,0.33,3" acqua="0,7 2,7 2,12 0,12" solidi="0,6 2,6 2,7 0,7" pelo="0,2,12,serbatoio" frecce="18.9,14,20.2,14,;18.9,6,20.2,6,;26.9,14,28.2,14," titolo="Rete aperta ramificata: da ogni nodo si risale al serbatoio lungo un solo percorso"}
 
 :::osservazione{#dimensionamento-rami titolo="Dimensionamento di un ramo"}
 Nel progetto sono assegnate le erogazioni dei nodi e la pressione minima $\dfrac{p_{\min}}{\gamma}$ richiesta in ciascuno di essi. Per un ramo che va dal nodo $M$, di carico noto $h_M$, al nodo terminale $V$ di quota $z_V$, la perdita disponibile è

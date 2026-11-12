@@ -201,7 +201,7 @@ Si applichi il bilancio dei carichi fra il pelo libero del serbatoio e la sezion
 :::osservazione{#lettura-del-disegno titolo="Lettura dello schema"}
 La piezometrica è una retta che parte dal pelo libero di monte e arriva al pelo libero di valle, oppure alla quota dell'asse della condotta allo sbocco quando la condotta scarica nell'atmosfera, perché in quella sezione la pressione relativa è nulla. Dove la piezometrica sta sopra l'asse della condotta la pressione è positiva; dove sta sotto la pressione è negativa, cioè la condotta è in depressione. Il profilo altimetrico, invece, segue il terreno e può salire e scendere più volte, perciò la distanza fra le due linee cambia da sezione a sezione.
 
-::schema{nodi="A,1.6,4.2,-;C,5,5,-;E,8.2,2.2,-;U,11.4,1,-" acqua="0,5.8 1.6,5.8 1.6,3.9 0,3.9;11.4,1 13,1 13,-0.6 11.4,-0.6" solidi="0,3.6 1.6,3.6 1.6,3.9 0,3.9;11.4,-0.9 13,-0.9 13,-0.6 11.4,-0.6" condotte="A-C-E-U,0.16,D" pelo="0,1.6,5.8,monte;11.4,13,1,valle" piezometrica="1.6,5.8 11.4,1" etichette="7.6,4.6,piezometrica;5,5.6,p<0;8.6,1.6,p>0" titolo="Nel tratto in cui il profilo sale sopra la piezometrica la pressione relativa è negativa"}
+::schema{nodi="A,1.6,4.2,-;C,5,5,-;E,8.2,2.2,-;U,11.4,1,-" acqua="0,5.8 1.6,5.8 1.6,3.9 0,3.9;11.4,1 13,1 13,-0.6 11.4,-0.6" solidi="0,3.6 1.6,3.6 1.6,3.9 0,3.9;11.4,-0.9 13,-0.9 13,-0.6 11.4,-0.6" condotte="A-C-E-U,0.16,D" pelo="0,1.6,5.8,monte;11.4,13,1,valle" piezometrica="1.6,5.8 11.4,1" etichette="7.6,4.6,piezometrica;5,5.6,p<0;8.7,1.45,p>0" titolo="Nel tratto in cui il profilo sale sopra la piezometrica la pressione relativa è negativa"}
 :::
 
 ## Punti critici e condotte vicine al piano dei carichi

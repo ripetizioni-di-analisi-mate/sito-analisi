@@ -64,7 +64,7 @@ Una lastra di area $A = 0{,}60\,\mathrm{m^2}$ scorre alla velocità $V = 0{,}80\
 $$
 \tau = \mu\,\frac{V}{s} = 0{,}20 \cdot \frac{0{,}80}{0{,}0015} = 107\,\mathrm{Pa} ,
 \qquad
-F = \tau\,A = 107 \cdot 0{,}60 = 64{,}0\,\mathrm{N} .
+F = \tau\,A = 106{,}7 \cdot 0{,}60 = 64{,}0\,\mathrm{N} .
 $$
 Lo stesso calcolo dà la coppia resistente nei cuscinetti e nei viscosimetri a cilindri coassiali.
 :::

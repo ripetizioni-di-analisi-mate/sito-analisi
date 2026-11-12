@@ -136,7 +136,7 @@ dove $\Delta H \ge 0$ è la perdita di carico fra le due sezioni. Si rimanda all
 
 ## Spinta su un gomito di condotta
 
-Il gomito è il pezzo speciale su cui la spinta della corrente è maggiore, perché le spinte sulle due sezioni hanno direzioni diverse e non si elidono.
+Nel gomito le spinte sulle due sezioni hanno direzioni diverse, quindi il loro risultante non è nullo e la corrente esercita sul pezzo una forza che gli ancoraggi devono equilibrare.
 
 ::::teorema{#spinta-su-un-gomito titolo="Spinta su un gomito di condotta"}
 Sia un gomito di una condotta di diametro costante $D$, disposto in un piano orizzontale, che devia la corrente dell'angolo $\theta$. Siano $Q$ la portata, $A$ l'area della sezione, $v = \dfrac{Q}{A}$ la velocità e $p$ la pressione, uguale nelle due sezioni perché le perdite nel gomito sono trascurate. Allora la forza che la corrente esercita sul gomito ha modulo
@@ -215,7 +215,7 @@ diretta verso valle, ed è la forza che i bulloni della flangia devono equilibra
 :::osservazione{#diffusore titolo="Diffusore"}
 Un diffusore è un tronco che allarga gradualmente la sezione per trasformare altezza cinetica in altezza piezometrica. La velocità diminuisce, quindi per il teorema di Bernoulli la pressione cresce da monte a valle, e la perdita localizzata si valuta con $\Delta H = \xi\,\dfrac{(v_1 - v_2)^2}{2g}$, dove $\xi$ dipende dall'angolo di apertura ed è dato da misure di laboratorio (per angoli di apertura da $7^\circ$ a $10^\circ$ risulta $\xi$ compreso fra $0{,}15$ e $0{,}30$).
 
-Il termine $p_2 A_2$ supera il termine $p_1 A_1$ perché l'area cresce più di quanto la pressione diminuisca, perciò la forza sul diffusore risulta diretta **verso monte**, in verso opposto a quella che si trova su una riduzione.
+Nel diffusore crescono sia l'area sia la pressione, quindi il termine $p_2 A_2$ supera il termine $p_1 A_1$ e la forza sul diffusore risulta diretta **verso monte**, in verso opposto a quella che si trova su una riduzione.
 :::
 
 :::osservazione{#brusco-allargamento titolo="Brusco allargamento"}
@@ -246,7 +246,7 @@ $$
 
 La formula dà la spinta su un deflettore o su una paletta investita da un getto, e la forza necessaria a tenere ferma la piastra. Per un getto di diametro $40\,\mathrm{mm}$ e velocità $10\,\mathrm{m/s}$ si ha $Q = 12{,}6\,\mathrm{L/s}$ e $S = 126\,\mathrm{N}$.
 
-::schema{acqua="0,1.1 4.3,1.1 4.3,1.5 0,1.5;4.1,1.5 4.3,1.5 4.3,3 4.1,3;4.1,1.1 4.3,1.1 4.3,-0.4 4.1,-0.4" solidi="4.3,-0.6 4.7,-0.6 4.7,3.2 4.3,3.2" frecce="0.5,1.3,1.7,1.3,v" forze="4.3 1.3,-1.3,0,S" riferimento=0 titolo="Getto che urta una piastra piana normale al suo asse: la spinta $S$ vale $\rho Q v$"}
+::schema{acqua="0,1.1 4.3,1.1 4.3,1.5 0,1.5;4.1,1.5 4.3,1.5 4.3,3 4.1,3;4.1,1.1 4.3,1.1 4.3,-0.4 4.1,-0.4" solidi="4.3,-0.6 4.7,-0.6 4.7,3.2 4.3,3.2" frecce="0.5,1.3,1.7,1.3,v" forze="6 1.3,1.3,0,S" riferimento=0 titolo="Getto che urta una piastra piana normale al suo asse: la spinta $S$ vale $\rho Q v$"}
 
 :::dimostrazione
 Si prenda come volume di controllo la regione che contiene il tratto terminale del getto e le due lamine, con la sezione di ingresso $1$ normale al getto e le sezioni di uscita sul contorno delle lamine. Si prenda l'asse $x$ nella direzione del getto.
@@ -273,7 +273,7 @@ $$
 
 Le due portate dicono come il getto si ripartisce, e si misurano facilmente in laboratorio, perciò il confronto con la formula è la verifica sperimentale del bilancio di quantità di moto. Per $\alpha = 90^\circ$ si ritrova $F = \rho Q v$ e $Q_1 = Q_2 = \dfrac{Q}{2}$.
 
-::schema{acqua="0,1 3.65,1 4.35,1.4 0,1.4;4.35,1.40 5.65,2.15 5.51,2.38 4.21,1.63;3.65,1.00 2.92,0.58 2.86,0.68 3.59,1.10" solidi="2.98,0.27 5.75,1.87 5.60,2.12 2.83,0.53" frecce="0.6,1.2,1.8,1.2,v" forze="4.9 1.43,-0.75,1.30,F" riferimento=0 titolo="Getto su una piastra inclinata di $\alpha$ sull'asse del getto: la forza è normale alla piastra"}
+::schema{acqua="0,1 3.65,1 4.35,1.4 0,1.4;4.35,1.40 5.65,2.15 5.51,2.38 4.21,1.63;3.65,1.00 2.92,0.58 2.86,0.68 3.59,1.10" solidi="2.98,0.27 5.75,1.87 5.60,2.12 2.83,0.53" frecce="0.6,1.2,1.8,1.2,v" forze="5.65 0.08,0.75,-1.30,F" riferimento=0 titolo="Getto su una piastra inclinata di $\alpha$ sull'asse del getto: la forza è normale alla piastra"}
 
 :::dimostrazione
 Si prendano l'asse $\xi$ parallelo alla piastra, nel verso della lamina maggiore, e l'asse $\eta$ normale alla piastra. Il volume di controllo contiene il tratto terminale del getto e le due lamine, e tutto il suo contorno è a pressione relativa nulla, perciò le spinte sulle sezioni sono nulle.
@@ -308,7 +308,7 @@ e modulo $F = 2\,\rho\,Q\,v\,\sin\dfrac{\theta}{2}$.
 
 La deviazione massima si ha per $\theta = 180^\circ$, che dà $F = 2\rho Q v$, cioè il doppio della spinta su una piastra piana normale; è questo il motivo per cui le pale delle turbine Pelton hanno forma di doppio cucchiaio. Quando l'attrito non si trascura si pone $v_2 = k\,v$ con $k$ poco minore di $1$ e si ottiene $F_x = \rho Q v\,(1 - k\cos\theta)$.
 
-::schema{acqua="0,1 3.6,1 3.6,1.4 0,1.4;3.60,1.00 3.88,1.03 4.14,1.13 4.37,1.28 4.56,1.48 4.70,1.72 4.78,1.99 4.80,2.27 4.75,2.54 4.64,2.80 4.29,2.60 4.37,2.43 4.40,2.25 4.39,2.06 4.33,1.88 4.24,1.72 4.11,1.59 3.96,1.49 3.78,1.42 3.60,1.40" solidi="3.54,1.00 3.84,1.02 4.12,1.12 4.37,1.28 4.57,1.50 4.72,1.76 4.79,2.05 4.79,2.35 4.72,2.64 4.57,2.91 4.80,3.07 4.98,2.75 5.07,2.39 5.07,2.02 4.98,1.66 4.80,1.34 4.55,1.07 4.24,0.87 3.89,0.75 3.52,0.72" frecce="0.6,1.2,1.8,1.2,v_1;4.52,2.61,3.97,3.57,v_2" forze="4.34 0.92,1.13,0.75,F" riferimento=0 titolo="Pala fissa che devia il getto dell'angolo $\theta$: la forza è il risultante della variazione di quantità di moto"}
+::schema{acqua="0,1 3.6,1 3.6,1.4 0,1.4;3.60,1.00 3.88,1.03 4.14,1.13 4.37,1.28 4.56,1.48 4.70,1.72 4.78,1.99 4.80,2.27 4.75,2.54 4.64,2.80 4.29,2.60 4.37,2.43 4.40,2.25 4.39,2.06 4.33,1.88 4.24,1.72 4.11,1.59 3.96,1.49 3.78,1.42 3.60,1.40" solidi="3.54,1.00 3.84,1.02 4.12,1.12 4.37,1.28 4.57,1.50 4.72,1.76 4.79,2.05 4.79,2.35 4.72,2.64 4.57,2.91 4.80,3.07 4.98,2.75 5.07,2.39 5.07,2.02 4.98,1.66 4.80,1.34 4.55,1.07 4.24,0.87 3.89,0.75 3.52,0.72" frecce="0.6,1.2,1.8,1.2,v_1;4.52,2.61,3.97,3.57,v_2" forze="5.5 0.1,1.3,-0.75,F" riferimento=0 titolo="Pala fissa che devia il getto dell'angolo $\theta$: la forza è il risultante della variazione di quantità di moto"}
 
 :::dimostrazione
 Si prenda l'asse $x$ nella direzione del getto in ingresso. Il contorno del volume di controllo è a pressione relativa nulla, perché il getto è libero, e il peso si trascura, quindi l'equazione globale si riduce a $\rho Q (\vec{v}_2 - \vec{v}_1) = \vec{R}$.
@@ -354,7 +354,7 @@ da cui $R_x$ risulta negativa, cioè diretta verso monte, e la forza sulla parat
 :::osservazione{#paratoia-e-spinta-idrostatica titolo="Confronto con la spinta idrostatica"}
 Se l'acqua fosse ferma su entrambi i lati della paratoia, la spinta sarebbe la differenza delle due spinte idrostatiche, $\dfrac{\gamma b (h_1^2 - h_2^2)}{2}$. Con la corrente in moto si sottrae il termine $\rho Q (v_2 - v_1)$, che è positivo perché la corrente accelera, quindi la spinta risulta minore.
 
-In un canale largo $3\,\mathrm{m}$ con $h_1 = 2{,}40\,\mathrm{m}$ e $h_2 = 0{,}50\,\mathrm{m}$ la differenza delle spinte idrostatiche vale $81{,}1\,\mathrm{kN}$ e il termine di quantità di moto $46{,}3\,\mathrm{kN}$, perciò la spinta sulla paratoia è $34{,}8\,\mathrm{kN}$, cioè meno della metà della sola spinta idrostatica di monte, che vale $84{,}8\,\mathrm{kN}$.
+In un canale largo $3\,\mathrm{m}$ con $h_1 = 2{,}40\,\mathrm{m}$ e $h_2 = 0{,}50\,\mathrm{m}$ il teorema di Bernoulli dà la portata $Q = 9{,}36\,\mathrm{m^3/s}$. La differenza delle spinte idrostatiche vale allora $81{,}1\,\mathrm{kN}$ e il termine di quantità di moto $46{,}3\,\mathrm{kN}$, perciò la spinta sulla paratoia è $34{,}8\,\mathrm{kN}$, cioè meno della metà della sola spinta idrostatica di monte, che vale $84{,}8\,\mathrm{kN}$.
 :::
 
 ## Energia e quantità di moto

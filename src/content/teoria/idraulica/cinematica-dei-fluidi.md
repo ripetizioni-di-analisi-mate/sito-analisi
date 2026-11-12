@@ -182,7 +182,7 @@ La velocità media riassume la sezione in un solo numero. Nelle espressioni dell
 :::osservazione{#distribuzione-della-velocita titolo="Distribuzione della velocità nella sezione"}
 Per la viscosità, il fluido aderisce alle pareti, quindi la velocità è nulla sul contorno e massima sull'asse di una condotta o vicino alla superficie libera di un canale. In moto laminare, in una condotta circolare, la distribuzione è parabolica con il massimo sull'asse. In moto turbolento il mescolamento trasversale rende la distribuzione molto più appiattita, con una variazione rapida in un sottile strato vicino alla parete e valori quasi uniformi nella parte centrale; una forma spesso usata per rappresentarla è $u = u_{\max}\left(1 - \dfrac{r}{r_0}\right)^{1/n}$, dove $r_0$ è il raggio della condotta e $n$ è compreso fra $6$ e $10$. Le due distribuzioni sono misurate in laboratorio con tubi di Pitot o con anemometri; la loro forma si ricava per via teorica solo nel caso laminare, nell'argomento sulle perdite di carico.
 
-::grafico{f="1-x^2;(1-abs(x))^(1/7)" xmin=-1 xmax=1 ymin=0 ymax=1.2 nomi="r/r_0,u/uₘₐₓ" titolo="Distribuzione della velocità in una condotta circolare: parabolica in moto laminare (curva piena), appiattita in moto turbolento (curva tratteggiata)"}
+::grafico{f="1-x^2;(1-abs(x))^(1/7)" xmin=-1 xmax=1 ymin=0 ymax=1.2 nomi="r/r₀,u/uₘₐₓ" titolo="Distribuzione della velocità in una condotta circolare: parabolica in moto laminare (curva piena), appiattita in moto turbolento (curva tratteggiata)"}
 :::
 
 :::definizione{#coefficienti-di-ragguaglio titolo="Coefficienti di ragguaglio"}
@@ -192,11 +192,11 @@ $$
 \qquad
 \beta = \frac{1}{A\,v^2}\int_A u^2\,dA .
 $$
-Il primo compare nell'altezza cinetica della corrente, che vale $\alpha\,\dfrac{v^2}{2g}$, e corregge l'energia cinetica calcolata con la velocità media; il secondo compare nel flusso di quantità di moto attraverso la sezione, che vale $\beta\,\rho\,Q\,v$. Entrambi valgono $1$ se la velocità è uniforme sulla sezione e sono maggiori di $1$ in ogni altro caso, per la disuguaglianza fra la media di una potenza e la potenza della media. Servono a scrivere il teorema di Bernoulli e l'equazione globale per una corrente reale, nella quale la velocità non è uniforme.
+Il primo compare nell'altezza cinetica della corrente, che vale $\alpha\,\dfrac{v^2}{2g}$, e corregge l'energia cinetica calcolata con la velocità media; il secondo compare nel flusso di quantità di moto attraverso la sezione, che vale $\beta\,\rho\,Q\,v$. Entrambi valgono $1$ se la velocità è uniforme sulla sezione e sono maggiori di $1$ in ogni altro caso, per la disuguaglianza fra la media di una potenza e la potenza della media. La stessa disuguaglianza, applicata alle medie di ordine $2$ e $3$, dà $\alpha > \beta > 1$ in ogni sezione con velocità non uniforme. Servono a scrivere il teorema di Bernoulli e l'equazione globale per una corrente reale, nella quale la velocità non è uniforme.
 :::
 
 :::esempio{titolo="Distribuzione parabolica in moto laminare"}
-In una condotta circolare di raggio $R$, in moto laminare, la velocità a distanza $r$ dall'asse è $u = u_{\max}\left(1 - \dfrac{r^2}{R^2}\right)$. Con l'elemento d'area dell'anello $dA = 2\pi r\,dr$ la portata è
+In una condotta circolare di raggio $r_0$, in moto laminare, la velocità a distanza $r$ dall'asse è $u = u_{\max}\left(1 - \dfrac{r^2}{r_0^2}\right)$. Con l'elemento d'area dell'anello $dA = 2\pi r\,dr$ la portata è
 $$
 Q = \int_0^{r_0} u_{\max}\left(1 - \frac{r^2}{r_0^2}\right) 2\pi r\,dr = 2\pi u_{\max}\left[\frac{r^2}{2} - \frac{r^4}{4 r_0^2}\right]_0^{r_0} = \frac{\pi r_0^2 u_{\max}}{2} ,
 $$
@@ -208,7 +208,7 @@ valori che valgono per ogni condotta circolare in moto laminare, poiché non dip
 :::
 
 :::osservazione{#valori-dei-coefficienti titolo="Valori dei coefficienti nelle correnti reali"}
-Le misure nelle condotte in moto turbolento danno $\alpha$ fra $1{,}03$ e $1{,}10$ e $\beta$ fra $1{,}01$ e $1{,}05$, perché la distribuzione appiattita è vicina a quella uniforme; nei canali con distribuzione poco regolare $\alpha$ arriva a $1{,}3$. Nei problemi di condotte in pressione si assume perciò $\alpha = \beta = 1$, e in tutta la materia questa è la convenzione, salvo indicazione contraria del testo. Il moto laminare, con $\alpha = 2$, è l'unico caso in cui l'approssimazione introduce un errore grande; lo si incontra negli oli e nelle condotte di piccolo diametro.
+Le misure nelle condotte in moto turbolento danno $\alpha$ fra $1{,}03$ e $1{,}10$ e $\beta$ fra $1{,}02$ e $1{,}05$, perché la distribuzione appiattita è vicina a quella uniforme; nei canali con distribuzione poco regolare $\alpha$ arriva a $1{,}3$. Nei problemi di condotte in pressione si assume perciò $\alpha = \beta = 1$, e in tutta la materia questa è la convenzione, salvo indicazione contraria del testo. Il moto laminare, con $\alpha = 2$, è l'unico caso in cui l'approssimazione introduce un errore grande; lo si incontra negli oli e nelle condotte di piccolo diametro.
 :::
 
 ## Moto laminare e moto turbolento
