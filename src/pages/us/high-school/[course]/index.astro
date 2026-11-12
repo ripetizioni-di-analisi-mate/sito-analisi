@@ -1,7 +1,7 @@
 ---
 import UsStem from '../../../../layouts/UsStem.astro';
 import UsCourseOutline from '../../../../components/UsCourseOutline.astro';
-import UsHighSchoolCourse from '../../../../components/UsHighSchoolCourse.astro';
+import UsStudyCourse from '../../../../components/UsStudyCourse.astro';
 import VerificaRisposta from '../../../../components/VerificaRisposta.astro';
 import { highSchoolCourses, highSchoolPath, highSchoolHasStudyPages, highSchoolQuestionCount } from '../../../../data/stem-usa/high-school/index.mjs';
 import { linkArgomentoUsa } from '../../../../data/stem-usa/catalog-view';
@@ -18,7 +18,7 @@ const { slug, title, description, lessons, preparation, sources } = course;
 const preview = highSchoolHasStudyPages(course);
 const timed = lessons.reduce((sum, lesson) => sum + highSchoolQuestionCount(lesson), 0);
 ---
-{preview ? <UsHighSchoolCourse course={course} /> : <UsStem title={title} description={description} course={slug}>
+{preview ? <UsStudyCourse course={course} /> : <UsStem title={title} description={description} course={slug}>
   <p class="sopratitolo"><a href={url(highSchoolPath)}>High School</a></p>
   <h1>{title}</h1>
   <p class="sommario">{description}</p>

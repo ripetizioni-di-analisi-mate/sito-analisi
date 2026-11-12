@@ -11,8 +11,8 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 import { CODICI_LINGUA } from '../src/data/codici-lingua.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
-import { highSchoolTimedTopics, highSchoolPreviewPage, highSchoolCourse, highSchoolHasStudyPages, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
-import { courseUrl, universityTimedTopics } from '../src/data/stem-usa/catalog.mjs';
+import { highSchoolTimedTopics, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
+import { courseUrl, hasUsStudyPages, universityTimedTopics, usStudyPreviewPage } from '../src/data/stem-usa/catalog.mjs';
 import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
 import { motoreVerificato, paginaPerMotore } from './motori.mjs';
 import { eseguiIndexNow } from './indexnow.mjs';
@@ -1076,7 +1076,7 @@ export default {
       const io = await utenteCollegato(env, req).catch(() => null);
       const idAnteprima = argomento + '/esercizi/' + n;
       if (corsoUsaRiservato(materia, io)
-          && !(Number(n) === FREE_PRACTICE_EXERCISE && highSchoolPreviewPage(materia, idAnteprima)))
+          && !(Number(n) === FREE_PRACTICE_EXERCISE && usStudyPreviewPage(materia, idAnteprima)))
         return rispostaCorsoUsaRiservato(materia);
       const risultati = await risposteDi(env, materia);
       const giusta = risultati?.[`${argomento}/${n}`];
@@ -1103,7 +1103,7 @@ export default {
       const l = linguaDi(lingua);
       const io = await utenteCollegato(env, req).catch(() => null);
       const usaBloccato = corsoUsaRiservato(materia, io);
-      const anteprimaUsa = usaBloccato && l === 'en' && highSchoolPreviewPage(materia, argomento + '/domande');
+      const anteprimaUsa = usaBloccato && l === 'en' && usStudyPreviewPage(materia, argomento + '/domande');
       if (usaBloccato && !anteprimaUsa) return rispostaCorsoUsaRiservato(materia);
       const personale = argomento === RIPASSO_OGGI;
       const anteprimaScienza = scienzaAPagamento && materia === SCIENZA_DELLE_COSTRUZIONI && !io?.materie?.includes(materia);
@@ -1175,7 +1175,7 @@ export default {
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
       if (usaProduct(tok?.m)) {
-        const anteprimaUsa = q?.n === FREE_TIMED_QUESTION && tok.l === 'en' && highSchoolPreviewPage(tok.m, argomento + '/domande');
+        const anteprimaUsa = q?.n === FREE_TIMED_QUESTION && tok.l === 'en' && usStudyPreviewPage(tok.m, argomento + '/domande');
         if ((io?.email ?? null) !== tok.e || (corsoUsaRiservato(tok.m, io) && !anteprimaUsa))
           return rispostaCorsoUsaRiservato(tok.m);
       }
@@ -1601,7 +1601,7 @@ export default {
     const corsoUsa = usaCoursePath(url.pathname);
     const io = pagina || corsoUsa ? await utenteCollegato(env, req).catch(() => null) : null;
     const usaBloccato = corsoUsa && corsoUsaRiservato(corsoUsa.slug, io);
-    const usaAnteprima = corsoUsa && highSchoolPreviewPage(corsoUsa.slug, corsoUsa.section);
+    const usaAnteprima = corsoUsa && usStudyPreviewPage(corsoUsa.slug, corsoUsa.section);
     if (usaBloccato && corsoUsa.section && corsoUsa.section !== 'sblocca' && !usaAnteprima) {
       return new Response(null, { status: 302, headers: { location: sbloccaUsa(corsoUsa.slug), 'cache-control': 'private, no-store' } });
     }
@@ -1667,7 +1667,7 @@ export default {
         const accesso = new HTMLRewriter();
         if (usaBloccato) {
           accesso.on('[data-usa-content]', rimuovi);
-          if (!highSchoolHasStudyPages(highSchoolCourse(corsoUsa.slug)))
+          if (!hasUsStudyPages(corsoUsa.slug))
             accesso.on('[data-usa-course-nav]', rimuovi);
         } else accesso.on('[data-usa-outline]', rimuovi).on('[data-usa-preview]', rimuovi);
         risposta = accesso.transform(risposta);

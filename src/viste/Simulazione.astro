@@ -9,9 +9,9 @@ import { getCollection } from 'astro:content';
 import { materiaL, link, type Lingua } from '../i18n';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import { catalogoDomande } from '../lib/domande';
-import { materiaUsa } from '../data/stem-usa/catalog-view';
 import { courseUrl } from '../data/stem-usa/catalog.mjs';
-import { highSchoolCourse } from '../data/stem-usa/high-school/index.mjs';
+import { materiaUsa, linkArgomentoUsa } from '../data/stem-usa/catalog-view';
+import { usSimulationTopics } from '../lib/stem-usa-study-pages';
 import { url } from '../lib/url';
 interface Props { lingua: Lingua; materia: string; usa?: boolean }
 const { lingua, materia, usa = false } = Astro.props;
@@ -21,12 +21,15 @@ const semestreFiltro = materia.endsWith('-semestre-filtro');
 const senzaInglese = !en && semestreFiltro && !(await catalogoDomande('en'))[materia];
 const superiori = m.gruppo === 'Superiori' || m.gruppo === 'High school';
 const nomiProve = nomiAllenamento(m, lingua);
-const corso = usa ? highSchoolCourse(materia) : undefined;
 const dafare = usa ? [] : await getCollection('dafare');
-const href = (percorso: string) => usa ? url(courseUrl(materia) + percorso) : link(lingua, '/' + materia + percorso);
-const argomenti = m.argomenti
-  .filter((a, i) => corso ? corso.lessons[i].exercises.length > 0 : dafare.some((v) => v.id.startsWith(`${materia}/${a.slug}/`)))
-  .map(({ slug, titolo, breve }) => ({ slug, titolo, breve, href: href(`/${slug}/esercizi`) }));
+const datiArgomenti = usa ? usSimulationTopics(materia) : m.argomenti.map((a) => ({
+  slug: a.slug, titolo: a.titolo, breve: a.breve,
+  n: dafare.filter((v) => v.id.startsWith(`${materia}/${a.slug}/`)).length,
+}));
+const argomenti = datiArgomenti.filter(a => a.n > 0).map(a => ({ ...a, href: usa
+  ? linkArgomentoUsa(materia, a.slug, 'esercizi') : link(lingua, `/${materia}/${a.slug}/esercizi`),
+}));
+const hrefMateria = (section: string) => usa ? url(courseUrl(materia) + '/' + section) : link(lingua, `/${materia}/${section}`);
 const T = en ? {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
   sommario: `A timed paper made of exercises from different topics of ${m.titolo}, chosen at random among the exercises to do. At the end the solutions appear (for those who have unlocked the subject) and you mark each exercise as correct, partly correct or wrong: the score is out of 30.`,
@@ -35,6 +38,7 @@ const T = en ? {
   esercizio: 'Exercise', valuta: 'How did it go?', giusto: 'Correct', parziale: 'Partly correct', sbagliato: 'Wrong',
   risultato: 'Score', tempo: 'Time used', nuova: 'New simulation', soluzione: 'Solution', riservata: 'The solution is in the full access to the subject.', sblocca: 'Unlock',
   caricamento: 'Preparing the paper…', errore: 'The exercises did not load. Reload the page.', storico: 'Previous simulations', vota: 'Mark every exercise to see the score.', conferma: 'Hand in the paper now?',
+  originale: 'Open this exercise in the course',
   confronto: 'Your score is higher than § of the simulations of this subject marked on the site (# simulations).',
 } : {
   titolo: nomiProve.simulazione, sopra: nomiProve.ripasso,
@@ -44,6 +48,7 @@ const T = en ? {
   esercizio: 'Esercizio', valuta: 'Com\'è andato?', giusto: 'Corretto', parziale: 'Parziale', sbagliato: 'Sbagliato',
   risultato: 'Punteggio', tempo: 'Tempo impiegato', nuova: 'Nuova simulazione', soluzione: 'Soluzione', riservata: 'La soluzione è nell\'accesso completo alla materia.', sblocca: 'Sblocca',
   caricamento: 'Preparazione del compito…', errore: 'Gli esercizi non si sono caricati. Ricarica la pagina.', storico: 'Simulazioni precedenti', vota: 'Valuta ogni esercizio per vedere il punteggio.', conferma: 'Consegnare il compito adesso?',
+  originale: 'Apri l’esercizio nella materia',
   confronto: 'Il tuo punteggio è più alto del § delle simulazioni di questa materia valutate sul sito (# simulazioni).',
 };
 if (superiori) {
@@ -62,7 +67,7 @@ if (semestreFiltro) {
 ---
 <Base titolo={`${T.titolo}`} descrizione={T.sommario} percorso={[{ titolo: T.sopra }, { titolo: T.titolo }]}
   materia={materia} sezione="simulazione" lingua={lingua} usa={usa} seo={{ noindex: true, senzaInglese }}>
-  <div class="simulazione" data-materia={materia} data-sblocca={href('/sblocca')} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
+  <div class="simulazione" data-materia={materia} data-sblocca={hrefMateria('sblocca')} data-testi={JSON.stringify(T)} data-argomenti={JSON.stringify(argomenti)}>
     <p class="sopratitolo">{T.sopra}</p>
     <h1>{T.titolo}</h1>
     <p class="sommario">{T.sommario}</p>
@@ -99,17 +104,18 @@ if (semestreFiltro) {
         <p class="sim-voto"></p>
         <p class="sim-nota"></p>
         <p class="sim-confronto" hidden></p>
-        <p><a class="bottone-secondario" href={href('/simulazione')}>{T.nuova}</a></p>
+        <p><a class="bottone-secondario" href={hrefMateria('simulazione')}>{T.nuova}</a></p>
       </div>
     </div>
   </div>
+  <slot />
 </Base>
 
 <script>
   const radice = document.querySelector<HTMLElement>('.simulazione')!;
   const T = JSON.parse(radice.dataset.testi!);
-  const argomenti: { slug: string; titolo: string; breve: string; href: string }[] = JSON.parse(radice.dataset.argomenti!);
-  const { materia, sblocca } = radice.dataset;
+  const argomenti: { slug: string; titolo: string; breve: string; n: number; href: string }[] = JSON.parse(radice.dataset.argomenti!);
+  const { materia, sblocca } = radice.dataset as { materia: string; sblocca: string };
   const en = document.documentElement.lang === 'en';
   const form = radice.querySelector<HTMLFormElement>('.sim-impostazioni')!;
   const compito = radice.querySelector<HTMLElement>('.sim-compito')!;
@@ -139,7 +145,8 @@ if (semestreFiltro) {
   const cache = new Map<string, Element[]>();
   async function tracce(arg: string) {
     if (!cache.has(arg)) {
-      const r = await fetch(argomenti.find((a) => a.slug === arg)!.href);
+      const a = argomenti.find(x => x.slug === arg)!;
+      const r = await fetch(a.href);
       if (!r.ok) throw new Error('rete');
       const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
       cache.set(arg, [...doc.querySelectorAll('section.traccia')]);
@@ -158,15 +165,18 @@ if (semestreFiltro) {
     let pesca = mescola(scelti);
     while (pesca.length < quanti) pesca = pesca.concat(mescola(scelti));
     pesca = pesca.slice(0, quanti).sort((a, b) => argomenti.findIndex((x) => x.slug === a) - argomenti.findIndex((x) => x.slug === b));
-    form.querySelector<HTMLButtonElement>('button[type=submit]')!.disabled = true;
+    const inizia = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+    inizia.disabled = true;
     elenco.innerHTML = `<li class="sim-caricamento">${T.caricamento}</li>`;
     compito.hidden = false;
     punti = 30 / quanti;
     try {
+      await Promise.all([...new Set(pesca)].map(tracce));
       const usate = new Set<string>();
       const scelte = [];
       for (const arg of pesca) {
-        const tutte = (await tracce(arg)).filter((s) => !usate.has(`${arg}#${s.id}`));
+        const tutte = cache.get(arg)!.filter((s) => !usate.has(`${arg}#${s.id}`));
+        if (!tutte.length) throw new Error('tracce insufficienti');
         const s = tutte[Math.floor(Math.random() * tutte.length)];
         usate.add(`${arg}#${s.id}`);
         scelte.push({ arg, s });
@@ -179,6 +189,7 @@ if (semestreFiltro) {
         const corpo = s.querySelector('.testo-studio')!.cloneNode(true) as HTMLElement;
         const soluzione = [...corpo.querySelectorAll('details.blocco-soluzione, .soluzione-riservata')];
         soluzione.forEach((x) => x.remove());
+        const fonte = s.querySelector('h2 a')?.getAttribute('href');
         const titolo = s.querySelector('h2')?.textContent?.replace(/^\s*\d+\.\s*/, '').trim() || '';
         li.innerHTML = `<p class="sim-testa"><strong>${T.esercizio} ${i + 1}</strong> <span>${a.breve} · ${num(punti)} ${T.punti}</span></p><h2></h2>`;
         li.querySelector('h2')!.textContent = titolo;
@@ -191,6 +202,14 @@ if (semestreFiltro) {
         } else {
           sol.innerHTML = `<p class="soluzione-riservata">${T.riservata} <a href="${sblocca}">${T.sblocca}</a></p>`;
         }
+        if (fonte) {
+          const p = document.createElement('p');
+          const link = document.createElement('a');
+          link.href = fonte;
+          link.textContent = T.originale;
+          p.append(link);
+          sol.append(p);
+        }
         const voto = document.createElement('div');
         voto.className = 'sim-voto-esercizio'; voto.hidden = true;
         voto.innerHTML = `<span>${T.valuta}</span>` + [['1', T.giusto], ['0.5', T.parziale], ['0', T.sbagliato]]
@@ -200,6 +219,7 @@ if (semestreFiltro) {
       });
     } catch {
       elenco.innerHTML = `<li>${T.errore}</li>`;
+      inizia.disabled = false;
       return;
     }
     form.hidden = true;
