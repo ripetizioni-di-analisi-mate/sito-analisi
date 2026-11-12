@@ -198,6 +198,8 @@ Since the decomposition on the unit vectors is unique, the components of the sum
 :::
 
 Two vectors are equal exactly when their components are equal, therefore one vector equation in the plane is equivalent to two numerical equations, one per axis. The resultant of several forces is computed in this way: each force is resolved, the $x$ components are added and the $y$ components are added separately, and the magnitude and direction follow from the components of the sum.
+
+::grafico{vettori="0,0,4,1,A;0,0,1,3,B;0,0,5,4,A + B" segmenti="4,0,4,1;0,1,4,1;1,0,1,3;0,3,1,3;5,0,5,4;0,4,5,4" xmin=-0.6 xmax=6 ymin=-0.6 ymax=4.6 uguale=1 titolo="The components add one axis at a time: from $\vec{A} = (4, 1)$ and $\vec{B} = (1, 3)$ follows $\vec{A} + \vec{B} = (5, 4)$"}
 ::::
 
 :::attenzione
@@ -253,6 +255,8 @@ $$
 perpendicular to the plane of $\vec{A}$ and $\vec{B}$, with the sense given by the right-hand rule: the fingers turn from $\vec{A}$ towards $\vec{B}$ through the angle $\varphi$, and the thumb points along the product.
 
 The magnitude equals the area of the parallelogram with sides $\vec{A}$ and $\vec{B}$, and it vanishes exactly when the two vectors are parallel. Reversing the order reverses the sense, hence $\vec{B} \times \vec{A} = -\,\vec{A} \times \vec{B}$, and the order matters in every formula that uses this product.
+
+::grafico{vettori="0,0,4,1,A;0,0,1,3,B" segmenti="4,1,5,4;1,3,5,4" etichette="2.4,2.1,area;0.8,0.5,φ" xmin=-0.6 xmax=6 ymin=-0.6 ymax=4.6 uguale=1 titolo="$|\vec{A} \times \vec{B}| = A\,B\sin\varphi$ is the area of the parallelogram with sides $\vec{A}$ and $\vec{B}$, and it vanishes when the two vectors are parallel"}
 :::
 
 ::::teorema{#vector-product-components titolo="Vector product in components"}

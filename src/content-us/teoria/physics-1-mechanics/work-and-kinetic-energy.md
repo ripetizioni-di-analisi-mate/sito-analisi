@@ -211,7 +211,7 @@ measured in joules, since $\mathrm{kg} \cdot \mathrm{m^2/s^2} = \mathrm{J}$. It 
 
 ::grafico{f="x^2" punti="2,4,pieno;4,16,pieno" segmenti="2,0,2,4;0,4,2,4;4,0,4,16;0,16,4,16" xmin=-0.5 xmax=5.3 ymin=-1.4 ymax=27 nomi="v,K" titolo="Kinetic energy of a body of mass $2.0\,\mathrm{kg}$ against its speed: doubling the speed from $2.0\,\mathrm{m/s}$ to $4.0\,\mathrm{m/s}$ multiplies the kinetic energy by four"}
 
-The quadratic dependence has a direct consequence for braking, since a car of mass $1200\,\mathrm{kg}$ travelling at $25\,\mathrm{m/s}$ carries
+The quadratic dependence has a direct consequence for braking, since a car of mass $1200\,\mathrm{kg}$ traveling at $25\,\mathrm{m/s}$ carries
 $$
 K = \frac{1}{2} \cdot 1200\,\mathrm{kg} \cdot (25\,\mathrm{m/s})^2 = 3.75 \times 10^{5}\,\mathrm{J} ,
 $$
@@ -237,8 +237,10 @@ $$
 :::dimostrazione
 For a motion along the $x$ axis the resultant has the single component $R_x = m\,\dfrac{dv_x}{dt}$ by **Newton's second law**. Since $dx = v_x\,dt$, the total work is
 $$
-W_{\text{tot}} = \int_{x_1}^{x_2} R_x\,dx = \int_{t_1}^{t_2} m\,\frac{dv_x}{dt}\,v_x\,dt = m \int_{v_1}^{v_2} v_x\,dv_x = \frac{1}{2}m v_2^2 - \frac{1}{2}m v_1^2 .
+W_{\text{tot}} = \int_{x_1}^{x_2} R_x\,dx = \int_{t_1}^{t_2} m\,\frac{dv_x}{dt}\,v_x\,dt = m \int_{v_{x1}}^{v_{x2}} v_x\,dv_x = \frac{1}{2}m v_{x2}^2 - \frac{1}{2}m v_{x1}^2 .
 $$
+The velocity has the single component $v_x$ along the axis, hence $v_x^2 = v^2$ at every instant and the right-hand side is $\dfrac{1}{2}m v_2^2 - \dfrac{1}{2}m v_1^2$.
+
 In the general case the element of work is $\vec{R} \cdot d\vec{r} = m\,\dfrac{d\vec{v}}{dt} \cdot \vec{v}\,dt$. The derivative of the scalar product of $\vec{v}$ with itself is
 $$
 \frac{d}{dt}(\vec{v} \cdot \vec{v}) = 2\,\frac{d\vec{v}}{dt} \cdot \vec{v} ,
@@ -250,7 +252,7 @@ $$
 which is the stated equality.
 :::
 
-The theorem turns a question about forces and distances into a single scalar equation, with no components and no vectors to resolve. A car of mass $1200\,\mathrm{kg}$ travelling at $25\,\mathrm{m/s}$ is brought to rest by a constant braking force of $7.5 \times 10^{3}\,\mathrm{N}$; since the final kinetic energy is zero and the braking force is the only force doing work, $-F\,d = -K_1$, hence
+The theorem turns a question about forces and distances into a single scalar equation, with no components and no vectors to resolve. A car of mass $1200\,\mathrm{kg}$ traveling at $25\,\mathrm{m/s}$ is brought to rest by a constant braking force of $7.5 \times 10^{3}\,\mathrm{N}$; since the final kinetic energy is zero and the braking force is the only force doing work, $-F\,d = -K_1$, hence
 $$
 d = \frac{K_1}{F} = \frac{3.75 \times 10^{5}\,\mathrm{J}}{7.5 \times 10^{3}\,\mathrm{N}} = 50\,\mathrm{m} .
 $$
@@ -282,7 +284,7 @@ The spring force varies along the motion, so Newton's second law would give a no
 ::grafico{assi=0 uguale=1 linee="0,0 0,2.6;0,0 7.4,0;0,0.9 0.2,0.9 0.35,1.25 0.6,0.55 0.85,1.25 1.1,0.55 1.35,1.25 1.5,0.9 1.6,0.9" poligoni="1.6,0 2.4,0 2.4,1.7 1.6,1.7" segmenti="3.6,0,3.6,2.4" vettori="1.6,0.9,3.2,0.9,F;1.6,-0.7,3.6,-0.7,x" etichette="3.75,2.2,natural length" xmin=-0.5 xmax=7.6 ymin=-1.5 ymax=3 titolo="The spring is compressed by $x$ and pushes the block with the force $F = kx$ until the free end reaches the natural length, doing the work $\dfrac{1}{2}k\,x^2$"}
 :::
 
-:::esempio{#distance-against-friction titolo="Distance travelled against friction"}
+:::esempio{#distance-against-friction titolo="Distance traveled against friction"}
 The same block of mass $m = 0.50\,\mathrm{kg}$ leaves the spring at $v_1 = 3.2\,\mathrm{m/s}$ and slides onto a horizontal stretch whose coefficient of kinetic friction is $\mu_k = 0.30$. The vertical acceleration is zero, hence the normal force equals the weight and the friction force has the constant magnitude $f = \mu_k m g$, doing the work $-\mu_k m g\,d$ over the distance $d$. The block stops, so $\Delta K = -\dfrac{1}{2}m v_1^2$ and
 $$
 d = \frac{v_1^2}{2\,\mu_k\,g} = \frac{(3.2\,\mathrm{m/s})^2}{2 \cdot 0.30 \cdot 9.81\,\mathrm{m/s^2}} = 1.7\,\mathrm{m} .

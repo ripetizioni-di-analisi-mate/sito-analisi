@@ -280,6 +280,7 @@ The length of one revolution is $2\pi R$ and the speed is constant, therefore
 $$
 v = \frac{2\pi R}{T} = 2\pi f R .
 $$
+The relation gives the speed of a body from its rate of revolution, hence a point of a wheel of radius $0.30\,\mathrm{m}$ that completes one turn every $0.50\,\mathrm{s}$ moves at $3.8\,\mathrm{m/s}$.
 :::
 
 :::definizione{#angular-velocity titolo="Angular velocity"}
@@ -332,6 +333,8 @@ $$
 \alpha = \frac{d\omega}{dt} ,
 $$
 measured in $\mathrm{rad/s^2}$, and differentiating $v = R\omega$ with $R$ constant gives the relation $\dfrac{dv}{dt} = R\,\alpha$ between the rate of change of the speed and the angular acceleration.
+
+The angular acceleration measures how fast the rotation changes without reference to the radius, therefore it describes at once every point of a rotating rigid body, as the chapter on fixed-axis rotation develops. A wheel whose angular velocity grows uniformly from $0$ to $20\,\mathrm{rad/s}$ in $4.0\,\mathrm{s}$ has $\alpha = 5.0\,\mathrm{rad/s^2}$.
 :::
 
 ::::teorema{#tangential-and-radial-acceleration titolo="Radial and tangential acceleration"}
@@ -377,6 +380,8 @@ $$
 \vec{r}_{PA} = \vec{r}_{PB} + \vec{r}_{BA} ,
 $$
 which is the tip-to-tail addition of the vector from the origin of $A$ to the origin of $B$ and of the vector from the origin of $B$ to the particle.
+
+This relation is the one differentiated to obtain the addition of velocities, hence it is the starting point whenever a motion is known in one frame and asked in another, as for a body seen from the ground and from a moving vehicle.
 :::
 
 ::::teorema{#relative-velocity titolo="Galilean addition of velocities"}

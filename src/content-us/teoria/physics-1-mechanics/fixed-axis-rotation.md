@@ -102,9 +102,9 @@ and solving for $\omega^2$ gives the third equation.
 :::
 
 The first two equations answer every question in which the time is given or requested, while the third one connects angular velocity and angular displacement without the time, which is what a braking problem requires. For a flywheel started from rest with $\alpha = 2.5\,\mathrm{rad/s^2}$, after $6.0\,\mathrm{s}$ the angular velocity is $15\,\mathrm{rad/s}$ and the angular displacement is $45\,\mathrm{rad}$, that is, $7.2$ revolutions.
-::::
 
 ::grafico{f="2+3*x" area="2+3*x;0;0;4" punti="0,2,pieno;4,14,pieno" xmin=-0.9 xmax=5.2 ymin=-2.5 ymax=16 nomi="t,ω" titolo="With constant angular acceleration the graph of $\omega(t)$ is a straight line of slope $\alpha$, and the shaded area equals the angular displacement $\Delta\theta = \omega_0 t + \dfrac{1}{2}\alpha t^2$"}
+::::
 
 ## Angular and linear quantities
 
@@ -141,7 +141,7 @@ a = \sqrt{a_r^2 + a_t^2} .
 $$
 The radial component changes the direction of the velocity and the tangential component changes its magnitude. A body turning at constant $\omega$ has $\alpha = 0$ and keeps the radial component alone, which is the uniform circular motion of the chapter on motion in two and three dimensions.
 
-::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" linee="0,0 1,1.7321" vettori="1,1.7321,0.25,0.4331,aᵣ;1,1.7321,-0.0392,2.3321,aₜ;1,1.7321,-0.7892,1.0331,a" segmenti="0.25,0.4331,-0.7892,1.0331;-0.0392,2.3321,-0.7892,1.0331" punti="0,0,pieno;1,1.7321,pieno" xmin=-2.6 xmax=2.6 ymin=-2.4 ymax=2.9 titolo="The acceleration of a point of the body is the sum of the radial component $a_r = \omega^2 r$, directed towards the axis, and the tangential component $a_t = \alpha r$"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" segmenti="0,0,0,2;0,1.1,-1.3,1.1;-1.3,2,-1.3,1.1" vettori="0,2,0,1.1,aᵣ;0,2,-1.3,2,aₜ;0,2,-1.3,1.1,a" punti="0,0,pieno;0,2,pieno" etichette="0.3,-0.2,O;0.28,2.08,P" xmin=-2.9 xmax=2.9 ymin=-2.5 ymax=2.9 titolo="The acceleration of a point $P$ of the body is the sum of the radial component $a_r = \omega^2 r$, directed towards the axis $O$, and the tangential component $a_t = \alpha r$"}
 :::
 
 ## Moment of inertia
@@ -167,8 +167,8 @@ The moment of inertia depends on the axis, not on the body alone. A uniform rod 
 :::esempio{#rod-about-center titolo="Moment of inertia of a uniform rod"}
 A uniform rod of mass $M$ and length $L$ rotates about the perpendicular axis through its center. The rod is uniform, hence its linear mass density is $\lambda = \dfrac{M}{L}$, and the element of the rod between $x$ and $x + dx$ has mass $dm = \lambda\,dx$ and distance $|x|$ from the axis. Therefore
 $$
-I = \int_{-L/2}^{\,L/2} x^2\,\lambda\,dx
-= \lambda\,\left[\dfrac{x^3}{3}\right]_{-L/2}^{\,L/2}
+I = \int_{-\frac{L}{2}}^{\,\frac{L}{2}} x^2\,\lambda\,dx
+= \lambda\,\left[\dfrac{x^3}{3}\right]_{-\frac{L}{2}}^{\,\frac{L}{2}}
 = \dfrac{M}{L} \cdot \dfrac{2}{3} \cdot \dfrac{L^3}{8}
 = \dfrac{1}{12}\,M L^2 .
 $$
@@ -219,7 +219,7 @@ I = \dfrac{1}{12}\,ML^2 + M\left(\dfrac{L}{2}\right)^2 = \dfrac{1}{3}\,ML^2 ,
 $$
 which agrees with the value obtained by integrating $x^2\,dm$ from $0$ to $L$. The same step gives the moment of inertia of a disk about an axis on its rim, $I = \dfrac{1}{2}MR^2 + MR^2 = \dfrac{3}{2}MR^2$, which the problems on a disk swinging about a point of its rim require.
 
-::grafico{assi=0 uguale=1 curve="1.7*cos(t),1.15*sin(t),0,6.29" punti="0,0,pieno;2.8,0,pieno;0.75,0.65,pieno" segmenti="0,0,2.8,0;0,0,0.75,0.65;2.8,0,0.75,0.65" etichette="-0.75,-0.1,CM;3.0,-0.1,P;1.4,-0.32,d;0.2,0.55,rᵢ;1.95,0.62,hᵢ;0.72,0.9,dm" xmin=-2.4 xmax=3.8 ymin=-1.9 ymax=1.9 titolo="The element $dm$ is at distance $r_i$ from the axis through the center of mass and at distance $h_i$ from the parallel axis through $P$, with the two axes a distance $d$ apart"}
+::grafico{assi=0 uguale=1 curve="2.0*cos(t),1.45*sin(t),0,6.29" punti="0,0,pieno;2.8,0,pieno;0.75,0.65,pieno" segmenti="0,0,2.8,0;0,0,0.75,0.65;2.8,0,0.75,0.65" etichette="-0.8,-0.12,CM;3.05,-0.12,P;1.5,-0.35,d;0.18,0.52,rᵢ;1.95,0.62,hᵢ;0.78,0.92,dm" xmin=-2.7 xmax=3.9 ymin=-2.1 ymax=2.1 titolo="The element $dm$ is at distance $r_i$ from the axis through the center of mass and at distance $h_i$ from the parallel axis through $P$, with the two axes a distance $d$ apart"}
 :::
 
 ## Torque
@@ -235,7 +235,7 @@ measured in $\mathrm{N\cdot m}$, where the **lever arm** $\ell$ is the perpendic
 
 The torque measures the effectiveness of a force in changing the rotation, and it grows with the lever arm. A force of $40\,\mathrm{N}$ applied perpendicular to a wrench $0.30\,\mathrm{m}$ long produces $\tau = 12\,\mathrm{N\cdot m}$, while the same force applied at $0.15\,\mathrm{m}$ from the axis produces half as much.
 
-::grafico{assi=0 uguale=1 vettori="0,0,3,1,r;3,1,3.684,2.879,F" linee="2.33,-0.85 3.9,3.45" segmenti="0,0,2.3277,-0.8471;3,1,4.3,1.4333" punti="0,0,pieno;3,1,pieno" etichette="-0.45,0.05,O;2.8,0.55,A;1.05,-0.72,ℓ;3.72,1.6,φ" xmin=-1.0 xmax=4.9 ymin=-1.6 ymax=3.8 titolo="The torque of $\vec{F}$ about the axis through $O$ is $\tau = F\ell$, where $\ell$ is the distance from $O$ to the line of action of the force"}
+::grafico{assi=0 uguale=1 vettori="0,0,3,1,r;3,1,3.684,2.879,F" linee="2.33,-0.85 3.9,3.45" segmenti="0,0,2.3277,-0.8471;3,1,4.3,1.4333" punti="0,0,pieno;3,1,pieno" etichette="-0.45,0.05,O;3.2,0.45,A;1.05,-0.72,ℓ;3.72,1.6,φ" xmin=-1.0 xmax=4.9 ymin=-1.6 ymax=3.8 titolo="The torque of $\vec{F}$ about the axis through $O$ is $\tau = F\ell$, where $\ell$ is the distance from $O$ to the line of action of the force"}
 :::
 
 :::attenzione

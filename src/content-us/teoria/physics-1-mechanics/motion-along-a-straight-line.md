@@ -6,7 +6,7 @@ sommario: How position, velocity and acceleration are defined for a body moving 
 ## Position, frame of reference and the law of motion
 
 :::definizione{#frame-of-reference titolo="Frame of reference and position"}
-A **frame of reference** is a rigid body taken as fixed, together with a system of coordinates attached to it and a clock that measures time. For a body that moves along a straight line, one axis is enough: a point $O$ of the line is chosen as the **origin**, a positive sense is chosen on the line, and a unit of length is fixed.
+A **frame of reference** is a rigid body taken as fixed, together with a system of coordinates attached to it and a clock that measures time. For a body that moves along a straight line, one axis is enough, and it is fixed by choosing a point $O$ of the line as the **origin**, a positive sense on the line, and a unit of length.
 
 The **position** of the body at the instant $t$ is the coordinate $x$ of the point it occupies, that is, the signed distance from $O$, positive on the side of the positive sense and negative on the other. The position is a scalar with the dimension of a length, and the sign carries the information that in two or three dimensions is carried by the direction of a vector.
 
@@ -20,7 +20,7 @@ t \longmapsto x(t) ,
 $$
 defined on the time interval during which the motion is observed. Knowing $x(t)$ is knowing everything about the motion in that frame, since velocity and acceleration are obtained from it by differentiation.
 
-The graph of $x(t)$ in the plane of the axes $t$ and $x$ is called the **position-time graph**. The graph is not the path of the body: the path is the segment of the line that the body sweeps, while the graph records at which instant each position is occupied.
+The graph of $x(t)$ in the plane of the axes $t$ and $x$ is called the **position-time graph**. The graph differs from the path of the body, since the path is the segment of the line that the body sweeps, while the graph records at which instant each position is occupied.
 
 ::grafico{f="2+4*x-0.5*x^2" xmin=-0.5 xmax=8.2 ymin=-1 ymax=11.5 nomi="t,x" punti="0,2,pieno;4,10,pieno;6,8,pieno" segmenti="4,0,4,10;6,0,6,8" legenda=0 titolo="Position-time graph of the motion $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ (SI units): the body starts at $x = 2\,\mathrm{m}$, reaches $x = 10\,\mathrm{m}$ at $t = 4\,\mathrm{s}$ and then moves back"}
 :::
@@ -30,7 +30,7 @@ The **displacement** between the instants $t_1$ and $t_2 > t_1$ is the change in
 $$
 \Delta x = x(t_2) - x(t_1) ,
 $$
-a signed quantity: it is positive when the final position is on the positive side of the initial one, and negative in the opposite case. The **distance travelled** is instead the length of the path actually covered, and it is a non-negative quantity.
+a signed quantity, positive when the final position is on the positive side of the initial one and negative in the opposite case. The **distance travelled** is instead the length of the path actually covered, and it is a non-negative quantity.
 
 The two quantities coincide when the body moves always in the same sense. When the body reverses, the distance travelled is the sum of the lengths of the single stretches, while the displacement only compares the two end positions. For the motion drawn above, between $t_1 = 1\,\mathrm{s}$ and $t_2 = 6\,\mathrm{s}$ the positions are $x(1) = 5.5\,\mathrm{m}$ and $x(6) = 8\,\mathrm{m}$, hence the displacement is $\Delta x = 2.5\,\mathrm{m}$; the body however first advances to $x = 10\,\mathrm{m}$ and then returns, therefore the distance travelled is $4.5\,\mathrm{m} + 2\,\mathrm{m} = 6.5\,\mathrm{m}$.
 
@@ -46,7 +46,7 @@ v_{\mathrm{av}} = \frac{\Delta x}{\Delta t} = \frac{x(t_2) - x(t_1)}{t_2 - t_1} 
 $$
 measured in $\mathrm{m/s}$. The sign of the average velocity is the sign of the displacement, since $\Delta t > 0$, therefore a positive average velocity means that the body has ended up on the positive side of where it started.
 
-On the position-time graph the average velocity is the slope of the straight line through the two points $(t_1, x(t_1))$ and $(t_2, x(t_2))$, called the **secant line**. The average velocity therefore depends only on the two end positions and ignores everything that happens in between: a body that leaves a point and comes back to it has zero average velocity over that interval, whatever it did meanwhile.
+On the position-time graph the average velocity is the slope of the straight line through the two points $(t_1, x(t_1))$ and $(t_2, x(t_2))$, called the **secant line**. The average velocity therefore depends only on the two end positions and ignores everything that happens in between, hence a body that leaves a point and comes back to it has zero average velocity over that interval, whatever it did meanwhile.
 
 ::grafico{f="2+4*x-0.5*x^2;4+1.5*x" xmin=-0.5 xmax=8.2 ymin=-1 ymax=11.5 nomi="t,x" punti="1,5.5,pieno;4,10,pieno" segmenti="1,0,1,5.5;4,0,4,10;1,5.5,4,5.5;4,5.5,4,10" etichette="2.3,4.9,Δt = 3 s;4.2,7.6,Δx = 4.5 m" legenda=0 titolo="Between $t_1 = 1\,\mathrm{s}$ and $t_2 = 4\,\mathrm{s}$ the average velocity is the slope of the secant line, $v_{\mathrm{av}} = \dfrac{4.5\,\mathrm{m}}{3\,\mathrm{s}} = 1.5\,\mathrm{m/s}$"}
 :::
@@ -141,7 +141,7 @@ The position is an antiderivative of the velocity, since $v = \dfrac{dx}{dt}$. T
 
 The graph of $x(t)$ is a straight line of slope $v$, and the displacement over an interval of duration $\Delta t$ is $v\,\Delta t$. Uniform motion is the motion of a body on which the resultant force vanishes, by Newton's first law, and it is also the phase at constant speed in the multi-stage problems treated further on.
 
-::grafico{f="2+1.5*x;11-2*x" xmin=-0.5 xmax=6.2 ymin=-1 ymax=12 nomi="t,x" punti="0,2,pieno;0,11,pieno" legenda=0 etichette="2.5,9.8,v = 1.5 m/s;4.3,5.2,v = −2 m/s" titolo="Two uniform motions: the line with positive slope describes a body moving in the positive sense, the line with negative slope a body moving in the negative sense"}
+::grafico{f="2+1.5*x;11-2*x" xmin=-0.5 xmax=6.2 ymin=-1 ymax=12 nomi="t,x" punti="0,2,pieno;0,11,pieno" legenda="v = 1.5\,\mathrm{m/s};v = -2.0\,\mathrm{m/s}" titolo="Two uniform motions: the line with positive slope describes a body moving in the positive sense, the line with negative slope a body moving in the negative sense"}
 ::::
 
 ## Motion with constant acceleration
@@ -302,7 +302,7 @@ The function $v$ satisfies $v' = a$, hence $v$ is an antiderivative of $a$. The 
 The second formula is obtained by repeating the argument with $x$ in place of $v$ and $v$ in place of $a$.
 :::
 
-Two data are needed besides $a(t)$, namely the initial velocity and the initial position, because each integration introduces one constant. This is the general method: the equations of uniformly accelerated motion are the particular case $a(t) = a$ constant, and the same scheme governs the oscillator of the chapter on oscillations, where the acceleration depends on the position.
+Two data are needed besides $a(t)$, namely the initial velocity and the initial position, because each integration introduces one constant. This is the general method, of which the equations of uniformly accelerated motion are the particular case $a(t) = a$ constant, and the same scheme governs the oscillator of the chapter on oscillations, where the acceleration depends on the position.
 ::::
 
 :::esempio{titolo="Acceleration growing with time"}

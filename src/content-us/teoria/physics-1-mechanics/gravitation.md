@@ -27,7 +27,7 @@ Its unit follows from the law itself, since $F = G\,\dfrac{m_1m_2}{r^2}$ gives $
 The constant is the same everywhere and for every pair of bodies, which distinguishes it from the acceleration $g$ at a planet's surface: $g$ depends on the mass and the radius of that planet, as the section on surface gravity shows.
 :::
 
-:::esempio{#two-kinds-of-force titolo="How weak the force is"}
+:::esempio{#how-weak-the-force-is titolo="How weak the force is"}
 Two spheres of mass $m_1 = m_2 = 1.0\,\mathrm{kg}$ whose centers are $1.0\,\mathrm{m}$ apart attract each other with
 $$
 F = 6.674 \times 10^{-11}\,\mathrm{N\cdot m^2/kg^2} \cdot \frac{1.0\,\mathrm{kg} \cdot 1.0\,\mathrm{kg}}{(1.0\,\mathrm{m})^2}
@@ -94,7 +94,7 @@ where the positive root is taken because $0 < x < d$. It follows that $x = \dfra
 
 ## Spherical bodies and the variation of $g$
 
-A planet is not a particle, so the law of universal gravitation does not apply to it directly. The following theorem is what allows a planet to be treated as a particle anyway.
+A planet is not a particle, so the law of universal gravitation does not apply to it directly. The shell theorem is what allows a planet to be treated as a particle anyway.
 
 :::teorema{#shell-theorem titolo="Shell theorem"}
 Let a body have spherical symmetry, that is, let its density depend only on the distance from its center. Then:
@@ -250,7 +250,7 @@ The escape speed depends on the planet alone, not on the mass of the body, becau
 $$
 v_f = \sqrt{\frac{2 \cdot 6.674 \times 10^{-11} \cdot 5.97 \times 10^{24}}{6.37 \times 10^{6}}}\,\mathrm{m/s} = 1.12 \times 10^{4}\,\mathrm{m/s} = 11.2\,\mathrm{km/s} ,
 $$
-while for the Moon the same formula gives $2.37\,\mathrm{km/s}$. The small escape speed of the Moon is the reason it has retained no atmosphere, since the typical speed of a gas molecule is a comparable fraction of it.
+while for the Moon the same formula gives $2.37\,\mathrm{km/s}$. The small escape speed of the Moon is the reason it has retained no atmosphere, since at the temperature of its surface the fastest molecules of a gas exceed that speed and leave.
 ::::
 
 :::definizione{#bound-and-unbound titolo="Bound and unbound motion"}
@@ -335,7 +335,7 @@ $$
 which is the thesis, and comparing with $K$ gives $E = -K$ and $U = 2E$.
 :::
 
-The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases towards zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly.
+For an elliptical orbit of semi-major axis $a$ the same expression holds with $a$ in place of $r$, hence $E = -\dfrac{GMm}{2a}$, as the integration of the equation of motion shows. The energy is negative, in agreement with the fact that a circular orbit is a bound motion. A larger orbit has a larger energy, since $-\dfrac{GMm}{2r}$ increases towards zero as $r$ grows, so raising a satellite requires positive work even though the satellite ends up moving more slowly.
 ::::
 
 :::esempio{#raising-an-orbit titolo="Raising a satellite"}
@@ -379,7 +379,7 @@ and the right-hand side is constant because $\vec{L}$ is constant and $m$ does n
 
 The law relates the speed to the distance along one orbit. The area swept near the Sun and the area swept far from it are equal in equal times, hence the planet moves faster at perihelion than at aphelion, and $r_p v_p = r_a v_a$ holds at the two points where the velocity is perpendicular to $\vec{r}$.
 
-::grafico{assi=0 uguale=1 curve="3*cos(t),2.236*sin(t),0,6.29" poligoni="2,0 2.476,-1.263 2.701,-0.973 2.866,-0.661 2.966,-0.334 3,0 2.966,0.334 2.866,0.661 2.701,0.973 2.476,1.263;2,0 -2.973,0.299 -2.988,0.200 -2.997,0.100 -3,0 -2.997,-0.100 -2.988,-0.200 -2.973,-0.299" punti="2,0,pieno" etichette="1.8,-0.55,S" xmin=-3.9 xmax=3.9 ymin=-2.9 ymax=2.9 titolo="The two shaded regions have equal areas, therefore the planet covers the short arc near the Sun and the long arc far from it in the same time"}
+::grafico{assi=0 uguale=1 curve="3*cos(t),2.236*sin(t),0,6.29" poligoni="2,0 2.476,-1.263 2.701,-0.973 2.866,-0.661 2.966,-0.334 3,0 2.966,0.334 2.866,0.661 2.701,0.973 2.476,1.263;2,0 -2.973,0.299 -2.988,0.200 -2.997,0.100 -3,0 -2.997,-0.100 -2.988,-0.200 -2.973,-0.299" punti="2,0,pieno" etichette="1.8,-0.55,S" xmin=-3.9 xmax=3.9 ymin=-2.9 ymax=2.9 titolo="The two shaded regions have equal areas, therefore the planet covers the long arc near the Sun and the short arc far from it in the same time"}
 ::::
 
 ::::teorema{#keplers-third-law titolo="Kepler's third law"}

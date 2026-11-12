@@ -25,7 +25,7 @@ f_s \le \mu_s N ,
 $$
 where the **coefficient of static friction** $\mu_s$ is a dimensionless number that depends on the two materials and on the state of their surfaces. The equality holds at the instant sliding is about to begin, hence $f_{s,\max} = \mu_s N$ is the largest tangential force the contact can sustain without sliding.
 
-This is a law obtained from experiment, not derived from the three laws of motion. Its use has two steps: the actual value of $f_s$ is found from the equilibrium equations, and then it is compared with $\mu_s N$ to decide whether the body stays at rest. A crate of mass $30\,\mathrm{kg}$ on a floor with $\mu_s = 0.50$ withstands a horizontal push up to $\mu_s m g = 0.50 \cdot 30\,\mathrm{kg} \cdot 9.81\,\mathrm{m/s^2} = 147\,\mathrm{N}$, therefore a push of $120\,\mathrm{N}$ leaves it at rest and the static friction force equals $120\,\mathrm{N}$.
+This is a law obtained from experiment, not derived from the three laws of motion. Its use has two steps: the actual value of $f_s$ is found from the equilibrium equations, and then it is compared with $\mu_s N$ to decide whether the body stays at rest. A crate of mass $20\,\mathrm{kg}$ on a floor with $\mu_s = 0.45$ withstands a horizontal push up to $\mu_s m g = 0.45 \cdot 20\,\mathrm{kg} \cdot 9.81\,\mathrm{m/s^2} = 88.3\,\mathrm{N}$, therefore a push of $70\,\mathrm{N}$ leaves it at rest and the static friction force equals $70\,\mathrm{N}$.
 :::
 
 :::teorema{#kinetic-friction titolo="Law of kinetic friction"}
@@ -41,7 +41,7 @@ Since $f_k$ is determined by $N$ alone, the kinetic friction force is known befo
 :::
 
 :::osservazione{#friction-coefficients titolo="Orders of magnitude"}
-Typical values of the coefficients are $\mu_s \approx 0.7$ and $\mu_k \approx 0.6$ for rubber on dry concrete, $\mu_s \approx 0.4$ and $\mu_k \approx 0.3$ for steel on steel, and $\mu_s \approx 0.1$ and $\mu_k \approx 0.03$ for waxed wood on wet snow. Values above $1$ occur for rubber on rough surfaces, therefore $\mu_s \le 1$ is not a law.
+Typical values of the coefficients are $\mu_s \approx 1.0$ and $\mu_k \approx 0.8$ for rubber on dry concrete, $\mu_s \approx 0.74$ and $\mu_k \approx 0.57$ for steel on steel, $\mu_s \approx 0.4$ and $\mu_k \approx 0.3$ for dry wood on wood, and $\mu_s \approx 0.14$ and $\mu_k \approx 0.10$ for waxed wood on wet snow. Values above $1$ occur for rubber on rough surfaces, therefore $\mu_s \le 1$ is not a law.
 
 A coefficient quoted in a problem is known to two significant figures at best, hence a result that depends on friction carries the same precision.
 :::
@@ -79,7 +79,7 @@ P_y = -\,m g \cos\theta ,
 $$
 where the $x$ axis points up the slope. The angle between the weight and the perpendicular to the plane equals $\theta$, which is why the sine multiplies the component along the plane and the cosine the component across it.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" punti="4.2,2.4249,pieno" vettori="4.2,2.4249,4.2,0.0249;4.2,2.4249,3.1608,1.8249;4.2,2.4249,5.2393,0.625" segmenti="3.1608,1.8249,4.2,0.0249;5.2393,0.625,4.2,0.0249" etichette="0.95,0.2,θ;2.05,1.5,mg sinθ;6.4,0.35,mg cosθ;4.52,1.1,P" xmin=-0.6 xmax=7.4 ymin=-0.9 ymax=4.4 titolo="The weight of a body on a plane inclined at $\theta$ splits into $m g \sin\theta$ down the slope and $m g \cos\theta$ perpendicular to it"}
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" punti="4.2,2.4249,pieno" vettori="4.2,2.4249,4.2,0.0249;4.2,2.4249,3.1608,1.8249;4.2,2.4249,5.2393,0.625" segmenti="3.1608,1.8249,4.2,0.0249;5.2393,0.625,4.2,0.0249" etichette="0.95,0.2,θ;2.05,1.5,mg sinθ;5.75,0.3,mg cosθ;4.35,0.9,P" xmin=-0.6 xmax=7.4 ymin=-0.9 ymax=4.4 titolo="The weight of a body on a plane inclined at $\theta$ splits into $m g \sin\theta$ down the slope and $m g \cos\theta$ perpendicular to it"}
 
 Since the body does not leave the surface, its acceleration along $y$ is zero, therefore the equation along $y$ gives $N = m g\cos\theta$ whenever no other force has a component perpendicular to the plane. Every result of this section rests on that value of $N$.
 :::
@@ -108,7 +108,7 @@ Since $m g \cos\theta > 0$ for $0 \le \theta < 90^\circ$, dividing by it preserv
 
 The condition contains neither the mass nor the area of contact, therefore the angle of repose measures $\mu_s$ directly: tilting a plank until the object begins to slide and reading the angle gives $\mu_s = \tan\theta_s$. For $\mu_s = 0.60$ the angle of repose is $\arctan 0.60 = 31.0^\circ$.
 
-::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" punti="4.3,2.55,pieno" vettori="4.3,2.55,4.3,0.15;4.3,2.55,3.2608,4.35;4.3,2.55,5.6856,3.35" riferimento="0.9,2.5,30,1.4,x,y" etichette="0.95,0.2,θ;4.62,1.3,P;3.0,4.62,N;5.35,3.82,f" xmin=-0.6 xmax=7.6 ymin=-0.9 ymax=5.3 titolo="Body at rest on an incline: the friction force balances $m g \sin\theta$ and the normal force balances $m g \cos\theta$, with the axes taken along the plane and perpendicular to it"}
+::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,3.4641" punti="4.3,2.55,pieno" vettori="4.3,2.55,4.3,0.15;4.3,2.55,3.2608,4.35;4.3,2.55,5.3392,3.15" riferimento="0.9,2.5,30,1.4,x,y" etichette="0.95,0.2,θ;4.62,1.3,P;3.0,4.62,N;5.6,3.22,f" xmin=-0.6 xmax=7.6 ymin=-0.9 ymax=5.3 titolo="Body at rest on an incline: the friction force balances $m g \sin\theta$ and the normal force balances $m g \cos\theta$, with the axes taken along the plane and perpendicular to it"}
 ::::
 
 :::esempio{#incline-with-friction titolo="Acceleration down an incline"}
@@ -156,7 +156,7 @@ Take the $y$ axis downwards. While the body falls, the weight $m g$ acts downwar
 For $v < v_t$ the drag is smaller than the weight, therefore $a > 0$ and the speed increases; for $v > v_t$ the drag exceeds the weight, therefore $a < 0$ and the speed decreases. The speed consequently approaches $v_t$ from either side.
 :::
 
-Terminal speed is what makes a long fall in air survivable with a parachute and lethal without one. A skydiver of mass $75\,\mathrm{kg}$ in free fall with $D = 0.25\,\mathrm{kg/m}$ reaches
+Terminal speed fixes the speed with which a body arrives at the ground after a long fall in air. A skydiver of mass $75\,\mathrm{kg}$ in free fall with $D = 0.25\,\mathrm{kg/m}$ reaches
 $$
 v_t = \sqrt{\frac{75\,\mathrm{kg} \cdot 9.81\,\mathrm{m/s^2}}{0.25\,\mathrm{kg/m}}} = 54\,\mathrm{m/s} ,
 $$
@@ -250,7 +250,7 @@ v = \sin\theta\sqrt{\frac{g L}{\cos\theta}} ,
 $$
 and the period follows as $\mathcal{T} = \dfrac{2\pi r}{v} = 2\pi\sqrt{\dfrac{L\cos\theta}{g}}$. For $L = 1.2\,\mathrm{m}$ and $\theta = 25^\circ$ the speed is $1.52\,\mathrm{m/s}$ and the period is $2.09\,\mathrm{s}$.
 
-::grafico{assi=0 uguale=1 linee="-1.1,3 1.1,3;0,3 1.5,0.402" curve="1.5*cos(t),0.402+0.42*sin(t),0,6.29" punti="1.5,0.402,pieno" vettori="1.5,0.402,0.5,2.134,T;1.5,0.402,1.5,-1.33,P;1.5,0.402,0.5,0.402,F" segmenti="0,3,0,0.402" etichette="0.25,2.4,θ" xmin=-2 xmax=2.8 ymin=-1.8 ymax=3.6 titolo="Conical pendulum: the horizontal component of the tension supplies the net force $m\dfrac{v^2}{r}$ towards the centre, while the vertical component balances the weight"}
+::grafico{assi=0 uguale=1 linee="-1.1,3 1.1,3;0,3 1.5,0.402" curve="1.5*cos(t),0.402+0.42*sin(t),0,6.29" punti="1.5,0.402,pieno" vettori="1.5,0.402,0.5,2.134,T;1.5,0.402,1.5,-1.33,P;1.5,0.402,0.5,0.402,F" segmenti="0,3,0,0.402" etichette="0.13,2.45,θ" xmin=-2 xmax=2.8 ymin=-1.8 ymax=3.6 titolo="Conical pendulum: the horizontal component of the tension supplies the net force $m\dfrac{v^2}{r}$ towards the centre, while the vertical component balances the weight"}
 :::
 
 ## Curves on a road
@@ -351,7 +351,7 @@ $$
 $$
 where $\vec{a}'$ is the acceleration measured in the accelerating frame and $\vec{F}_{\text{in}}$ is the **inertial force**. The inertial force has no agent exerting it and no third-law partner, therefore it appears in the equations of the accelerating frame alone.
 
-The frame rotating with a body in circular motion is a particular case, in which the inertial force points away from the centre and has magnitude $m\dfrac{v^2}{r}$. A passenger in a turning car is in equilibrium in that frame, since the inertial force directed outwards balances the friction and the contact forces directed inwards.
+A rotating frame is not described by that formula, since the points of such a frame do not all have the same acceleration. In the frame that rotates with a body travelling a circle of radius $r$ at the constant speed $v$, the body is at rest and the inertial force acting on it, called the **centrifugal force**, points away from the centre and has magnitude $m\dfrac{v^2}{r}$. A passenger in a turning car is in equilibrium in that frame, since the centrifugal force balances the friction and the contact forces directed inwards.
 :::
 
 :::esempio{#accelerating-car-pendulum titolo="Pendulum in an accelerating vehicle"}
