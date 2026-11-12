@@ -202,7 +202,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     descrizione: "Meccanica razionale per Ingegneria, Matematica e Fisica: vettori applicati, geometria delle masse, cinematica del punto e del corpo rigido, vincoli e coordinate lagrangiane, statica e lavori virtuali, dinamica del punto, dei sistemi e del rigido, equazioni di Lagrange, stabilità e piccole oscillazioni.",
     colore: '#4a6b62',
     gruppo: 'Università',
-    attiva: false,
+    attiva: true,
     argomenti: [
       { slug: 'vettori-applicati', titolo: 'Vettori applicati, momenti e sistemi di forze', breve: 'Vettori applicati' },
       { slug: 'geometria-delle-masse', titolo: "Geometria delle masse: baricentri e tensore d'inerzia", breve: 'Geometria delle masse' },
