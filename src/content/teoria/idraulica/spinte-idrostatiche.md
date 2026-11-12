@@ -218,7 +218,7 @@ dove $f$ è il coefficiente d'attrito fra la base e il terreno e $N$ è la risul
 :::osservazione{#sottospinta titolo="Sottospinta"}
 L'acqua che filtra sotto la fondazione esercita sulla base una pressione diretta verso l'alto, detta **sottospinta**. In assenza di drenaggio si assume un diagramma che vale $\gamma h$ sotto il tallone di monte e si annulla sotto lo spigolo di valle, quindi la risultante per unità di lunghezza è $U = \dfrac{\gamma\,h\,B}{2}$, applicata a $\dfrac{B}{3}$ dal tallone, dove $B$ è la larghezza della base. La sottospinta riduce sia $N$ sia il momento stabilizzante, perciò peggiora entrambe le verifiche; i dreni praticati vicino al tallone abbassano il diagramma e riducono $U$.
 
-::schema{nodi="T,0,0;K,1.5,5,-;P,3.5,0" aste="T-K;K-P;T-P" acqua="-3,0 0,0 1.2,4 -3,4" solidi="-3.4,-0.9 6,-0.9 6,0 -3.4,0" pelo="-3,-0.3,4,p.i.c." pressioni="T,P,1.1,0,U,-1" forze="0.4 1.3333,1.5,0,S_x;0.4 1.3333,0,-1.2;1.6667 1.6667,0,-1.8" etichette="-0.05,2.8,S_z;1.15,2.95,W" quote="T,P,B = 3.50 m,1.5" riferimento=0 titolo="Diga a gravità con paramento di monte inclinato: spinta, peso proprio $W$ e sottospinta $U$"}
+::schema{nodi="T,0,0;K,1.5,5,-;P,3.5,0" aste="T-K;K-P;T-P" acqua="-3,0 0,0 1.2,4 -3,4" solidi="-3.4,-0.9 6,-0.9 6,0 -3.4,0" pelo="-3,-0.3,4,p.i.c." pressioni="T,P,1.1,0,U,-1" forze="0.4 1.3333,1.5,0,S_x;0.4 1.3333,0,-1.2;1.6667 1.6667,0,-1.8" etichette="-0.05,2.8,S_z;1.33,2.95,W" quote="T,P,B = 3.50 m,1.5" riferimento=0 titolo="Diga a gravità con paramento di monte inclinato: spinta, peso proprio $W$ e sottospinta $U$"}
 :::
 
 :::osservazione{#terzo-medio titolo="Posizione della risultante sulla base"}

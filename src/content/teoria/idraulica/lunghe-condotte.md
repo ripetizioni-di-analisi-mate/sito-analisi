@@ -83,7 +83,7 @@ quindi la perdita su tutta la condotta si scrive $\Delta H = r\,Q^2$ con
 $$
 r = \frac{8\,\lambda\,L}{g\,\pi^2 D^5} ,
 $$
-detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. Con la formula di Gauckler-Strickler la stessa scrittura ha $r = \dfrac{10{,}29\,L}{k_s^2\,D^{16/3}}$, ed è la forma che si usa quando la scabrezza è assegnata con $k_s$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
+detta **resistenza idraulica** della condotta e misurata in $\mathrm{s^2/m^5}$. La scrittura $\Delta H = r Q^2$ è la forma usata per i sistemi di condotte e per il punto di funzionamento di una pompa, perché raccoglie in un solo numero la lunghezza, il diametro e la scabrezza. Con la formula di Gauckler-Strickler la resistenza vale $r = \dfrac{10{,}29\,L}{k_s^2\,D^{16/3}}$, e si usa questa forma quando la scabrezza della parete è assegnata con $k_s$. Per $L = 1000\,\mathrm{m}$, $D = 250\,\mathrm{mm}$ e $\lambda = 0{,}025$ risulta $r = 2115\,\mathrm{s^2/m^5}$, quindi $Q = 90\,\mathrm{L/s}$ costa $\Delta H = 2115 \cdot 0{,}090^2 = 17{,}1\,\mathrm{m}$.
 :::
 
 :::osservazione{#dipendenza-dal-diametro titolo="Il peso del diametro"}

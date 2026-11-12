@@ -38,14 +38,12 @@ La resistenza ha le dimensioni di $\mathrm{s^2/m^5}$ e dipende solo dalla geomet
 :::
 
 :::osservazione{#ipotesi-del-capitolo titolo="Ipotesi di calcolo"}
-I risultati che seguono si ottengono sotto le ipotesi seguenti, che vanno verificate caso per caso:
-$$
-\begin{cases}
-\text{fluido incomprimibile e moto permanente} \\[4pt]
-\text{schema di lunga condotta, perdite localizzate trascurate} \\[4pt]
-\lambda \text{ costante in ciascun ramo}
-\end{cases}
-$$
+I risultati che seguono si ottengono sotto le ipotesi seguenti, che vanno verificate caso per caso.
+
+- Il fluido è incomprimibile e il moto è permanente.
+- Vale lo schema di lunga condotta, quindi le perdite localizzate e le altezze cinetiche si trascurano.
+- L'indice di resistenza $\lambda$ è costante in ciascun ramo.
+
 La terza ipotesi è soddisfatta quando il moto è assolutamente turbolento, perché in quel campo $\lambda$ dipende solo dalla scabrezza relativa. Se invece $\lambda$ dipende ancora da $Re$, la resistenza cambia con la portata e il calcolo si ripete per approssimazioni successive, aggiornando $\lambda$ a ogni passo.
 :::
 
@@ -59,7 +57,7 @@ $$
 r_{\mathrm{eq}} = \sum_{i=1}^{n} r_i .
 $$
 
-Il risultato permette di sostituire l'intera successione di tronchi con un solo ramo di resistenza $r_{\mathrm{eq}}$ e di ricavare subito la portata quando è noto il dislivello: per due tronchi con $r_1 = 598\,\mathrm{s^2/m^5}$ e $r_2 = 1218\,\mathrm{s^2/m^5}$ posti fra due serbatoi con dislivello $18\,\mathrm{m}$ risulta $Q = \sqrt{\dfrac{18}{1816}} = 0{,}0995\,\mathrm{m^3/s}$.
+Il risultato permette di sostituire l'intera successione di tronchi con un solo ramo di resistenza $r_{\mathrm{eq}}$ e di ricavare subito la portata quando è noto il dislivello: per due tronchi con $r_1 = 598{,}4\,\mathrm{s^2/m^5}$ e $r_2 = 1218\,\mathrm{s^2/m^5}$ posti fra due serbatoi con dislivello $18\,\mathrm{m}$ risulta $Q = \sqrt{\dfrac{18}{1817}} = 0{,}0995\,\mathrm{m^3/s}$.
 
 :::dimostrazione
 L'idea è che la continuità impone una sola portata e il bilancio di energia somma le perdite.
@@ -132,9 +130,9 @@ La condotta equivalente serve a confrontare soluzioni diverse e a semplificare u
 :::
 
 :::esempio{titolo="Sostituzione di due tronchi in serie"}
-Due tronchi in serie di resistenze $r_1 = 598\,\mathrm{s^2/m^5}$ e $r_2 = 1218\,\mathrm{s^2/m^5}$ hanno $r_{\mathrm{eq}} = 1816\,\mathrm{s^2/m^5}$. La condotta equivalente lunga $L_e = 1400\,\mathrm{m}$, con $\lambda_e = 0{,}023$, ha diametro
+Due tronchi in serie di resistenze $r_1 = 598{,}4\,\mathrm{s^2/m^5}$ e $r_2 = 1218\,\mathrm{s^2/m^5}$ hanno $r_{\mathrm{eq}} = 1817\,\mathrm{s^2/m^5}$. La condotta equivalente lunga $L_e = 1400\,\mathrm{m}$, con $\lambda_e = 0{,}023$, ha diametro
 $$
-D_e = \left(\frac{8 \cdot 0{,}023 \cdot 1400}{9{,}81 \cdot \pi^2 \cdot 1816}\right)^{\frac{1}{5}} = 0{,}271\,\mathrm{m} ,
+D_e = \left(\frac{8 \cdot 0{,}023 \cdot 1400}{9{,}81 \cdot \pi^2 \cdot 1817}\right)^{\frac{1}{5}} = 0{,}271\,\mathrm{m} ,
 $$
 cioè $271\,\mathrm{mm}$. Il diametro commerciale immediatamente superiore è $300\,\mathrm{mm}$, che dà una resistenza minore e quindi, a parità di dislivello, una portata maggiore di quella del sistema di partenza.
 :::
@@ -256,7 +254,7 @@ Per il teorema degli zeri esiste $h_N \in (z_{\min}, z_{\max})$ con $\Phi(h_N) =
 :::
 ::::
 
-::grafico{f="sqrt(abs(20-x))/27*(2*(x<20)-1)+sqrt(abs(15-x))/39*(2*(x<15)-1)-sqrt(abs(x-5))/20" xmin=5 xmax=21 ymin=-0.26 ymax=0.26 punti="12.71,0,pieno" nomi="h,Φ" titolo="La funzione $\Phi$ è strettamente decrescente, quindi si annulla in un solo punto, che è il carico $h_N$ del nodo"}
+::grafico{f="sqrt(abs(20-x))/27*(2*(x<20)-1)+sqrt(abs(15-x))/39*(2*(x<15)-1)-sqrt(abs(x-5))/20" xmin=5 xmax=21 ymin=-0.31 ymax=0.26 punti="12.71,0,pieno" nomi="h,Φ" titolo="La funzione $\Phi$ è strettamente decrescente, quindi si annulla in un solo punto, che è il carico $h_N$ del nodo"}
 
 :::osservazione{#verso-ramo-centrale titolo="Verso della portata nel ramo intermedio"}
 Con tre serbatoi di quote $z_A > z_B > z_C$ il verso della portata nel ramo intermedio si stabilisce prima di risolvere, provando $h_N = z_B$. Con questo valore il ramo $B$ non è percorso, e la continuità richiede
@@ -293,9 +291,9 @@ Si adotta poi il diametro commerciale immediatamente superiore e si ricalcola la
 :::
 
 :::esempio{titolo="Pressione in un nodo terminale"}
-Un serbatoio con pelo libero a $100{,}00\,\mathrm{m}$ alimenta il tronco $0$ ($r_0 = 571\,\mathrm{s^2/m^5}$) che porta $120\,\mathrm{L/s}$ al nodo $A$, dal quale partono i rami $A\!-\!B$ ($r_B = 3563\,\mathrm{s^2/m^5}$, $40\,\mathrm{L/s}$) e $A\!-\!C$ ($r_C = 1861\,\mathrm{s^2/m^5}$, $80\,\mathrm{L/s}$). Risulta
+Un serbatoio con pelo libero a $100{,}00\,\mathrm{m}$ alimenta il tronco $0$ ($r_0 = 571{,}2\,\mathrm{s^2/m^5}$) che porta $120\,\mathrm{L/s}$ al nodo $A$, dal quale partono i rami $A\!-\!B$ ($r_B = 3563\,\mathrm{s^2/m^5}$, $40\,\mathrm{L/s}$) e $A\!-\!C$ ($r_C = 1861\,\mathrm{s^2/m^5}$, $80\,\mathrm{L/s}$). Risulta
 $$
-h_A = 100{,}00 - 571 \cdot 0{,}120^2 = 91{,}77\,\mathrm{m} ,
+h_A = 100{,}00 - 571{,}2 \cdot 0{,}120^2 = 91{,}77\,\mathrm{m} ,
 $$
 quindi $h_B = 91{,}77 - 3563 \cdot 0{,}040^2 = 86{,}07\,\mathrm{m}$ e $h_C = 91{,}77 - 1861 \cdot 0{,}080^2 = 79{,}86\,\mathrm{m}$. Con i nodi $B$ e $C$ alle quote $70{,}00\,\mathrm{m}$ e $65{,}00\,\mathrm{m}$ le pressioni valgono $16{,}07\,\mathrm{m}$ e $14{,}86\,\mathrm{m}$ di colonna d'acqua, cioè $158\,\mathrm{kPa}$ e $146\,\mathrm{kPa}$.
 :::
