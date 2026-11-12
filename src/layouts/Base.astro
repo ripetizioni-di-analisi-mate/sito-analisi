@@ -11,7 +11,7 @@ import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import StudyCountry from '../components/StudyCountry.astro';
-import { CATALOGO_PREDEFINITO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
+import { CATALOGO_PREDEFINITO, CATALOGO_USA_PUBBLICO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
 import { linkArgomentoUsa, materieUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { calculusSlug } from '../lib/stem-usa-practice';
 import { usTimedTopics } from '../lib/stem-usa-banks';
@@ -364,7 +364,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
       {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{fr ? ' (en italien)' : es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}
       {cambioLingua.map(({ codice, nome, href }) => <a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a>)}
     </nav>
-    <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />
+    {CATALOGO_USA_PUBBLICO && <StudyCountry lingua={lingua} corrente={usa ? 'US' : CATALOGO_PREDEFINITO} />}
     <span class="pie-copyright">{t.copyright}</span>
   </footer>
 
