@@ -20,6 +20,7 @@ import { stemmaSVG, rangoDi, gradoDi, nomeRango, stileRango, RANGHI } from './st
 import { gestisciTolcI } from './tolc-i.mjs';
 import { TOLC, demoTolc } from '../src/data/tolc.mjs';
 import { anteprimaAnalisi3 } from '../src/data/analisi3.mjs';
+import { anteprimaFinanziaria } from '../src/data/finanziaria.mjs';
 import { anteprimaStatistica } from '../src/data/statistica.mjs';
 import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
@@ -1110,18 +1111,23 @@ export default {
       if (anteprimaScienza && personale) return json(quizScienzaRiservato(l, true), 403, { 'cache-control': 'no-store' });
       let dati = await domandeDi(env, materia, l);
       const argomentiCompleti = dati?.argomenti;
-      const quizConAnteprima = Object.hasOwn(TOLC, materia) || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
+      const finanziaria = materia === 'matematica-finanziaria';
+      const quizConAnteprima = Object.hasOwn(TOLC, materia) || finanziaria || materia === 'biologia-semestre-filtro' || materia === 'statistica' || materia === 'analisi-3';
       if ((anteprimaScienza || anteprimaUsa) && argomentiCompleti) {
         dati = { ...dati, argomenti: Object.fromEntries(Object.entries(argomentiCompleti)
           .map(([slug, domande]) => [slug, domande.filter((q) => q.n === (anteprimaUsa ? FREE_TIMED_QUESTION : NUMERO_QUIZ_ANTEPRIMA_SCIENZA))])) };
       } else if (quizConAnteprima && vendita && !io?.materie?.includes(materia) && dati) {
-        dati = { ...dati, argomenti: materia === 'analisi-3' ? anteprimaAnalisi3(dati.argomenti) : materia === 'statistica' ? anteprimaStatistica(dati.argomenti) : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(dati.argomenti) : demoTolc(materia, dati.argomenti) };
+        dati = { ...dati, argomenti: finanziaria ? anteprimaFinanziaria(argomentiCompleti)
+          : materia === 'analisi-3' ? anteprimaAnalisi3(argomentiCompleti)
+          : materia === 'statistica' ? anteprimaStatistica(argomentiCompleti)
+          : materia === 'biologia-semestre-filtro' ? anteprimaBiologia(argomentiCompleti)
+          : demoTolc(materia, argomentiCompleti) };
       }
       // Prove d'esame (ripasso) e ripasso di oggi: le domande di tutti gli argomenti della materia.
       const ripasso = argomento === RIPASSO || personale;
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
-      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
+      if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
       if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
       if (!q && anteprimaUsa && typeof id === 'string') return rispostaCorsoUsaRiservato(materia);
