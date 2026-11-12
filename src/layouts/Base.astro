@@ -26,7 +26,7 @@ import { GOOGLE_ADS_ID, GA4_ID, CONVERSIONI, VALORI, MISURAZIONE_ATTIVA } from '
 import NavigazioneStudio from '../components/NavigazioneStudio.astro';
 import { MATERIE } from '../data/materie';
 import { url } from '../lib/url';
-import { destinazioneLocalizzata, linguaCatalogo, lingueLocalizzate, LINGUE, LOCALE, nellaLingua, senzaLingua } from '../lib/lingue-sito';
+import { paginaLocalizzata, destinazioneLocalizzata, linguaCatalogo, lingueLocalizzate, LINGUE, LOCALE, nellaLingua, senzaLingua } from '../lib/lingue-sito';
 import { materiaL, materieL, link, altraLingua, T, type Lingua } from '../i18n';
 import { SITO, assoluto, ORGANIZZAZIONE, briciole, sitoWeb, paginaWeb } from '../lib/seo';
 import { catalogoDomande } from '../lib/domande';
@@ -100,6 +100,7 @@ const qui = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') ||
 const argomentoNormale = m?.argomenti.some((a) => a.slug === argomento);
 const tappe = argomentoNormale && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? '')
   ? tappeStudio(materia, argomento, domandeQui, lingua, m?.eserciziDaFare !== false)
+    .filter((p) => !es || paginaLocalizzata('es', '/' + materia + '/' + argomento + '/' + p.slug))
     .map((p) => ({ ...p, href: usa ? linkArgomentoUsa(materia!, argomento!, p.slug) : url(p.href) })) : [];
 const tappa = tappe.findIndex((p) => p.slug === sezione);
 // Le pagine di elenco proseguono nello stesso argomento; le singole schede
@@ -112,7 +113,7 @@ const avanti: Passo | undefined = tappaDopo ? {
   titolo: tappaDopo.titolo,
   sotto: m?.argomenti.find((a) => a.slug === argomento)?.breve,
   href: tappaDopo.href,
-  etichetta: en ? 'Continue with this topic' : 'Continua su questo argomento',
+  etichetta: es ? 'Continuar con este tema' : en ? 'Continue with this topic' : 'Continua su questo argomento',
 } : successivo;
 const versioneEn = nellaLingua('en', versioneIt);
 const versioniLocalizzate = lingueLocalizzate(versioneIt).map((l) => ({ l, path: nellaLingua(l, versioneIt) }));
@@ -342,7 +343,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
         </>}
         <slot />
         {(precedente || avanti) && (
-          <nav class="passi" aria-label="Pagina precedente e successiva">
+          <nav class="passi" aria-label={es ? "Página anterior y siguiente" : "Pagina precedente e successiva"}>
             {avanti && <a class="successivo" href={avanti.href}><small>{avanti.etichetta ?? t.successivo}</small><span>{avanti.titolo}{avanti.sotto ? <em> · {avanti.sotto}</em> : ''}</span><span class="freccia-avanti" aria-hidden="true">→</span></a>}
             {tappaDopo && successivo && successivo.href !== avanti?.href && <a class="altro-argomento" href={successivo.href}>{successivo.etichetta ?? t.argomentoSuccessivo}: {successivo.titolo} →</a>}
             {precedente && <a class="precedente" href={precedente.href}>← {precedente.titolo}{precedente.sotto ? ` · ${precedente.sotto}` : ''}</a>}

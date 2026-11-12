@@ -83,20 +83,25 @@ export function sezioniL(l: Lingua) {
 
 // ---------- contenuti: la versione tradotta se c'è, altrimenti l'italiano ----------
 type Collezione = 'teoria' | 'svolti' | 'dafare';
-const TRADOTTE = { teoria: 'teoria_en', svolti: 'svolti_en', dafare: 'dafare_en' } as const;
+const TRADOTTE = {
+  en: { teoria: 'teoria_en', svolti: 'svolti_en', dafare: 'dafare_en' },
+  es: { teoria: 'teoria_es', svolti: 'svolti_es', dafare: 'dafare_es' },
+} as const;
 
 export async function voceL(l: Lingua, c: Collezione, id: string) {
-  if (l === 'en') {
-    const t = await getEntry(TRADOTTE[c], id);
+  if (l === 'en' || l === 'es') {
+    const t = await getEntry(TRADOTTE[l][c], id);
     if (t) return { voce: t as any, tradotta: true };
   }
+  if (l === 'es') return { voce: undefined, tradotta: false };
   return { voce: (await getEntry(c, id)) as any, tradotta: l === 'it' };
 }
 export async function vociL(l: Lingua, c: Collezione) {
+  if (l === 'es') return await getCollection(TRADOTTE.es[c]);
   const it = await getCollection(c);
   if (l === 'it') return it as any[];
   if (linguaCatalogo(l)) return [];
-  const en = new Map((await getCollection(TRADOTTE[c])).map((v: any) => [v.id, v]));
+  const en = new Map((await getCollection(TRADOTTE.en[c])).map((v: any) => [v.id, v]));
   return it.map((v: any) => en.get(v.id) ?? v);
 }
 

@@ -1,3 +1,4 @@
+import { PERCORSI_STUDIO_ES } from '../data/materiali-es.mjs';
 import { MATERIE } from '../data/materie';
 import { MATERIE_DE, ARGOMENTI_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from '../data/materie-de';
 import { MATERIE_ES, ARGOMENTI_ES, GRUPPI_ES, SOTTOGRUPPI_ES } from '../data/materie-es';
@@ -37,7 +38,7 @@ export const CATALOGHI_LOCALIZZATI = {
 const pagineComuni = ['/', '/cerca', '/chi-sono', '/contatti', '/prezzi', '/accedi', '/account', '/reimposta-password'];
 const lezioni: Record<LinguaCatalogo, string[]> = {
   de: ['/fisica-zero/lavoro-ed-energia/teoria'],
-  es: ['/fisica-zero/lavoro-ed-energia/teoria'],
+  es: ['/fisica-zero/lavoro-ed-energia/teoria', ...PERCORSI_STUDIO_ES],
   fr: ['/fisica-zero/lavoro-ed-energia/teoria'],
 };
 const pagine = Object.fromEntries(LINGUE_CATALOGO.map((lingua) => [lingua, new Set([

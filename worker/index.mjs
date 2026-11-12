@@ -8,7 +8,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
-import { CODICI_LINGUA } from '../src/data/codici-lingua.mjs';
+import { CODICI_LINGUA, prefissoLingua } from '../src/data/codici-lingua.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { highSchoolTimedTopics, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
@@ -758,11 +758,12 @@ async function inviaEmailRecupero(env, destinatario, link, l) {
 // in /dati-domande/, letti solo qui dentro: dal browser quell'indirizzo non è raggiungibile.
 const cacheDomande = {};
 const linguaDi = (x) => (x === 'en' ? 'en' : 'it');
+const linguaQuiz = (x) => x === 'es' ? 'es' : linguaDi(x);
 async function domandeDi(env, materia, lingua = 'it') {
   if (!/^[a-z0-9-]+$/.test(materia || '')) return null;
   const chiave = `${lingua}/${materia}`;
   if (!cacheDomande[chiave]) {
-    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${lingua === 'en' ? 'en/' : ''}${materia}.json`));
+    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${lingua === 'it' ? '' : lingua + '/'}${materia}.json`));
     if (!r.ok) return lingua === 'en' ? domandeDi(env, materia, 'it') : null;
     cacheDomande[chiave] = await r.json();
   }
@@ -813,11 +814,11 @@ async function salvaPreferenzeEmail(env, email, c, lingua) {
 }
 
 // ---------- percorsi protetti ----------
-// Le pagine inglesi stanno sotto /en: stessa protezione, vetrine in /vetrine/en.
+// Le pagine tradotte usano lo stesso controllo di accesso e le vetrine della propria lingua.
 function analizza(pathname) {
   let m = pathname.match(/^\/pdf\/([^/]+)\/([^/]+)\.pdf$/);
   if (m) return { materia: m[1], argomento: m[2], tipo: 'pdf', pref: '' };
-  const pref = /^\/en(?=\/)/.test(pathname) ? '/en' : '';
+  const pref = prefissoLingua(pathname);
   pathname = pathname.slice(pref.length);
   m = pathname.replace(/\.html$/, '').match(/^\/([^/]+)\/([^/]+)\/(teoria|stampa|esercizi-svolti|esercizi)(?:\/(\d+))?\/?$/);
   if (m) return { materia: m[1], argomento: m[2], tipo: m[3], n: m[4] ? Number(m[4]) : undefined, pref };
@@ -1101,7 +1102,7 @@ export default {
     }
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));
-      const l = linguaDi(lingua);
+      const l = linguaQuiz(lingua);
       const io = await utenteCollegato(env, req).catch(() => null);
       const usaBloccato = corsoUsaRiservato(materia, io);
       const anteprimaUsa = usaBloccato && l === 'en' && usStudyPreviewPage(materia, argomento + '/domande');
@@ -1128,7 +1129,7 @@ export default {
       const gruppi = ripasso ? Object.values(dati?.argomenti || {}).filter((x) => x?.length) : [dati?.argomenti?.[argomento]].filter((x) => x?.length);
       const elenco = gruppi.flat();
       if (!elenco.length && quizConAnteprima && vendita) return json({ errore: `Per i quiz di questo argomento serve l’accesso completo ${TOLC[materia]?.nome || (finanziaria ? 'a Matematica finanziaria' : materia === 'analisi-3' ? 'ad Analisi matematica 3' : materia === 'statistica' ? 'a Statistica e probabilità' : 'a Biologia semestre filtro')}. I dieci quesiti dimostrativi si trovano nel ripasso generale.`, sblocca: `/${materia}/sblocca` }, 403);
-      if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : 'Nessuna domanda per questo argomento.' }, 404);
+      if (!elenco.length) return json({ errore: l === 'en' ? 'No questions for this topic.' : l === 'es' ? 'No hay preguntas para este tema.' : 'Nessuna domanda per questo argomento.' }, 404);
       let q = typeof id === 'string' ? elenco.find((x) => x.id === id) : null;
       if (!q && anteprimaUsa && typeof id === 'string') return rispostaCorsoUsaRiservato(materia);
       if (!q && anteprimaScienza && typeof id === 'string') {
@@ -1177,7 +1178,7 @@ export default {
       const { token, scelta } = await req.json().catch(() => ({}));
       const tok = typeof token === 'string' ? await leggiToken(env, token) : null;
       const io = await utenteCollegato(env, req).catch(() => null);
-      const dati = tok ? await domandeDi(env, tok.m, linguaDi(tok.l)) : null;
+      const dati = tok ? await domandeDi(env, tok.m, linguaQuiz(tok.l)) : null;
       const [argomento] = String(tok?.q || '').split('/');
       const q = dati?.argomenti?.[argomento]?.find((x) => x.id === tok.q);
       if (usaProduct(tok?.m)) {
@@ -1185,7 +1186,7 @@ export default {
         if ((io?.email ?? null) !== tok.e || (corsoUsaRiservato(tok.m, io) && !anteprimaUsa))
           return rispostaCorsoUsaRiservato(tok.m);
       }
-      if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
+      if (!q) return json({ errore: tok?.l === 'en' ? 'Question expired: reload the page.' : tok?.l === 'es' ? 'La pregunta ha caducado. Recarga la página.' : 'Domanda scaduta: ricarica la pagina.' }, 400);
       if (scienzaAPagamento && tok.m === SCIENZA_DELLE_COSTRUZIONI && q.n !== NUMERO_QUIZ_ANTEPRIMA_SCIENZA
           && (!io?.materie?.includes(tok.m) || io.email !== tok.e)) {
         return json(quizScienzaRiservato(linguaDi(tok.l)), 403, { 'cache-control': 'no-store' });
@@ -1196,7 +1197,7 @@ export default {
       if (!io || io.email !== tok.e) return json({ ...base, punti: 0, motivo: 'ospite' });
       const r = await aDO(env, '/liv-risposta', {
         email: io.email, token: token.split('.')[1], domanda: `${tok.m}/${q.id}`, materia: tok.m, argomento,
-        corretta: giusta, secondi, lingua: linguaDi(tok.l), catalogo: await catalogoPremi(env),
+        corretta: giusta, secondi, lingua: linguaAccount(tok.l), catalogo: await catalogoPremi(env),
       });
       return json({ ...base, ...r });
     }
@@ -1613,7 +1614,7 @@ export default {
     }
     let risposta;
     // Materia della pagina (anche la pagina principale della materia): serve per la spunta.
-    const primo = url.pathname.replace(/^\/en(?=\/)/, '').split('/')[1]?.replace(/\.html$/, '');
+    const primo = url.pathname.slice(prefissoLingua(url.pathname).length).split('/')[1]?.replace(/\.html$/, '');
     let sbloccataQui = corsoUsa ? !usaBloccato : Boolean(io && A_PAGAMENTO.includes(primo) && io.materie.includes(primo));
     if (protetta) {
       sbloccataQui = Boolean(io?.materie.includes(info.materia));
