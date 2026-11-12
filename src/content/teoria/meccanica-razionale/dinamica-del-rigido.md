@@ -192,7 +192,7 @@ Il sistema delle tre equazioni basta a determinare il moto e le reazioni. Si eli
 :::
 
 :::osservazione{#polo-nel-contatto titolo="Seconda equazione cardinale con polo nel punto di contatto"}
-Per un disco che rotola senza strisciare su una guida rettilinea il punto di contatto $C$ è il centro di istantanea rotazione, ma non è un punto fisso, perciò la seconda equazione cardinale con polo $C$ va giustificata. Per un polo $P$ mobile vale $\dfrac{d\vec{K}_P}{dt} = \vec{M}_P^{(e)} + M\,\vec{v}_P \wedge \vec{v}_G$. Prendendo come $P$ il punto geometrico di contatto, la sua velocità è parallela alla guida e $\vec{v}_G$ è parallela alla guida, quindi il prodotto vettoriale è nullo; inoltre $\vec{K}_C = I_C\,\dot{\vartheta}\,\hat{k}$ con $I_C = I_G + M R^2$ costante, perché la distanza di $G$ dal contatto resta uguale al raggio. Per un disco su guida rettilinea si ottiene perciò $I_C\,\ddot{\vartheta} = M_{Cz}^{(e)}$, e scegliere questo polo conviene perché la reazione del contatto ha momento nullo.
+Per un disco che rotola senza strisciare su una guida rettilinea il punto di contatto $C$ è il centro di istantanea rotazione, ma non è un punto fisso, perciò la seconda equazione cardinale con polo $C$ va giustificata. Per un polo $P$ mobile vale $\dfrac{d\vec{K}_P}{dt} = \vec{M}_P^{(e)} - M\,\vec{v}_P \wedge \vec{v}_G$. Prendendo come $P$ il punto geometrico di contatto, la sua velocità è parallela alla guida e $\vec{v}_G$ è parallela alla guida, quindi il prodotto vettoriale è nullo; inoltre $\vec{K}_C = I_C\,\dot{\vartheta}\,\hat{k}$ con $I_C = I_G + M R^2$ costante, perché la distanza di $G$ dal contatto resta uguale al raggio. Per un disco su guida rettilinea si ottiene perciò $I_C\,\ddot{\vartheta} = M_{Cz}^{(e)}$, e scegliere questo polo conviene perché la reazione del contatto ha momento nullo.
 :::
 
 ::::teorema{#rotolamento-su-piano-inclinato titolo="Rotolamento senza strisciamento su un piano inclinato"}
@@ -208,10 +208,10 @@ $$
 $$
 I corpi con $\beta$ più piccolo scendono più in fretta, indipendentemente da massa e raggio. Per il disco pieno $\beta = \dfrac{1}{2}$ e $a_G = \dfrac{2}{3}\,g\sin\alpha$, per la sfera piena $\beta = \dfrac{2}{5}$ e $a_G = \dfrac{5}{7}\,g\sin\alpha$, per l'anello sottile $\beta = 1$ e $a_G = \dfrac{1}{2}\,g\sin\alpha$.
 
-::struttura{linee="0,0 6,3.46 6,0 0,0" cerchi="2.57,2.48,0.86" punti="2.57,2.48,G,baricentro;3,1.73,C,centro" forze="2.57 2.48,0,-1,mg" reazioni="3 1.73,-0.6,1.04,N;3 1.73,0.95,0.55,F_a" etichette="1.05,0.26,α" coppie="2.57 2.48,-1,ω" titolo="Disco che rotola senza strisciare: il peso in $G$, la reazione normale $N$ e la forza d'attrito $F_a$ nel punto di contatto $C$"}
+::struttura{linee="0,0 6,3.46 6,0 0,0" cerchi="2.57,2.48,0.86" punti="2.57,2.48,G,baricentro;3,1.73,C,centro" forze="2.57 2.48,0,-1,mg" reazioni="3 1.73,-0.6,1.04,N;3 1.73,0.95,0.55,F_a" etichette="1.05,0.26,α" coppie="2.57 2.48,1,ω" titolo="Disco che rotola senza strisciare: il peso in $G$, la reazione normale $N$ e la forza d'attrito $F_a$ nel punto di contatto $C$"}
 
 :::dimostrazione
-Si prende l'asse delle ascisse lungo il piano, orientato verso il basso, e si indica con $x$ l'ascissa di $G$. La condizione di puro rotolamento lega la rotazione alla traslazione, $\dot{x} = R\,\dot{\vartheta}$, quindi $a_G = \ddot{x} = R\,\ddot{\vartheta}$ e il sistema ha un grado di libertà. Le forze esterne sono il peso, la reazione normale $N$ e la forza d'attrito $F_a$, applicate nel punto di contatto. La proiezione della prima equazione cardinale lungo il piano e la seconda equazione cardinale con polo in $G$ danno
+Si prende l'asse delle ascisse lungo il piano, orientato verso il basso, si indica con $x$ l'ascissa di $G$ e con $\vartheta$ l'angolo di rotazione misurato in verso antiorario. La condizione di puro rotolamento lega la rotazione alla traslazione, $\dot{x} = R\,\dot{\vartheta}$, quindi $a_G = \ddot{x} = R\,\ddot{\vartheta}$ e il sistema ha un grado di libertà. Le forze esterne sono il peso, la reazione normale $N$ e la forza d'attrito $F_a$, applicate nel punto di contatto. La proiezione della prima equazione cardinale lungo il piano e la seconda equazione cardinale con polo in $G$ danno
 $$
 \begin{cases}
 m\,a_G = m\,g\,\sin\alpha - F_a \\[4pt]
