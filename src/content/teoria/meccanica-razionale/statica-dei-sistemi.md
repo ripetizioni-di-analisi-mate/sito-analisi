@@ -36,7 +36,7 @@ dove $\hat{t}$ è il versore tangente a $\gamma$ in $P$; in tal caso la reazione
 
 La condizione $\vec{F} \cdot \hat{t} = 0$ è un'unica equazione scalare nella coordinata che individua $P$ su $\gamma$, perciò determina le configurazioni di equilibrio senza che le reazioni compaiano. Trovata la configurazione, la reazione si legge dall'equazione $\vec{\Phi} = -\,\vec{F}$. Per un punto di massa $m$ su una guida rettilinea liscia inclinata di $\alpha$ sull'orizzontale, con una molla di costante $k$ e lunghezza a riposo nulla che lo collega all'estremo superiore della guida, la condizione dà $mg\sin\alpha - k s = 0$, quindi la distanza di equilibrio dall'estremo è $s = \dfrac{mg\sin\alpha}{k}$.
 
-::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" vettori="1.41,-1.41,1.41,-2.61,F;1.41,-1.41,0.56,-0.56,Φ;1.41,-1.41,2.26,-0.56" punti="1.41,-1.41,pieno,P;0,0,pieno,O" etichette="2.45,-0.35,t" xmin=-2.8 xmax=3.4 ymin=-3.2 ymax=2.6 titolo="Punto su una guida circolare liscia: la reazione $\vec{\Phi}$ è ortogonale alla guida, quindi non ha componente lungo il versore tangente $\hat{t}$; l'equilibrio richiede che anche la forza attiva $\vec{F}$ non ne abbia"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" vettori="1.41,-1.41,2.26,-2.26,F;1.41,-1.41,0.56,-0.56,Φ;1.41,-1.41,2.26,-0.56" punti="1.41,-1.41,pieno,P;0,0,pieno,O" etichette="2.45,-0.35,t" xmin=-2.8 xmax=3.4 ymin=-3.2 ymax=2.6 titolo="Punto su una guida circolare liscia: la reazione $\vec{\Phi}$ è ortogonale alla guida, quindi non ha componente lungo il versore tangente $\hat{t}$; l'equilibrio richiede che anche la forza attiva $\vec{F}$ non ne abbia"}
 
 :::dimostrazione
 Il punto è in quiete se e solo se la risultante di tutte le forze è nulla, cioè $\vec{F} + \vec{\Phi} = \vec{0}$. Poiché il vincolo è liscio, la reazione è ortogonale a $\gamma$, perciò $\vec{\Phi} \cdot \hat{t} = 0$. Proiettando l'equazione di equilibrio su $\hat{t}$ si ottiene allora
@@ -243,7 +243,7 @@ Da qui nasce il metodo di calcolo dei sistemi di più corpi, nel quale si scrivo
 :::definizione{#smontaggio titolo="Smontaggio del sistema"}
 **Smontare** un sistema di corpi rigidi significa scrivere il diagramma di corpo libero di ciascun corpo, sostituendo ogni collegamento interno con le reazioni che i due corpi si scambiano. Per un sistema piano di $c$ corpi rigidi si ottengono $3c$ equazioni scalari. Le incognite sono le componenti delle reazioni esterne, le componenti delle reazioni interne e le coordinate lagrangiane della configurazione, e il problema è ben posto quando il loro numero è $3c$.
 
-::struttura{nodi="A,0,0;B,2.5,2;C,5,0" aste="A-B;B-C" vincoli="A,cerniera;C,cerniera" cerniere="B" forze="1.25 1,0,-1,mg;3.75 1,0,-1,mg" quote="A,C,2ℓcosϑ,-1.3" titolo="Due aste incernierate fra loro in $B$ e incernierate a terra in $A$ e in $C$: il sistema ha sei incognite di reazione e sei equazioni"}
+::struttura{nodi="A,0,0;B,2.5,2;C,5,0" aste="A-B;B-C" vincoli="A,cerniera;C,cerniera" cerniere="B" forze="1.25 1,0,-1,mg;3.75 1,0,-1,mg" quote="A,C,2ℓcosϑ,-3" titolo="Due aste incernierate fra loro in $B$ e incernierate a terra in $A$ e in $C$: il sistema ha sei incognite di reazione e sei equazioni"}
 
 ::struttura{nodi="A,0,0;B,2.5,2" aste="A-B" vincoli="A,cerniera" forze="1.25 1,0,-1,mg" reazioni="B,-0.9,0,X_B;B,0,-0.9,Y_B" titolo="Diagramma di corpo libero dell'asta $AB$: in $B$ agisce l'azione dell'asta $BC$, di componenti $-X_B$ e $-Y_B$"}
 
