@@ -54,11 +54,14 @@ const invito = lingua === 'en' ? {
       {dafare > 0 && <li><strong>{dafare} practice exercises</strong> with solutions</li>}
       {usCounts!.timed > 0 && <li><strong>{usCounts!.timed} timed questions</strong> with explanations</li>}
       {usCounts!.review > 0 && <li><strong>{usCounts!.review} review questions</strong> with explanations</li>}
-    </> : scienza ? <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li> : <li set:html={t.includeSoluzioni(dafare)} />}
+    </> : <>
+      <li set:html={t.includeSoluzioni(dafare)} />
+      {scienza && <li><strong>{domande} {en ? 'timed questions' : 'domande a tempo'}</strong> {en ? 'in Italian, with explanations and review across all topics' : 'con spiegazione e ripasso su tutti gli argomenti'}</li>}
+    </>}
   </ul>
   {!usa && <p class="gratis-ora">{scienza ? (en
-    ? 'Free preview without an account. Read the beginning of each topic, open one sheet of worked examples and try one question per topic.'
-    : 'Senza account puoi leggere l’inizio di ogni argomento, consultare una scheda svolta e provare una domanda per argomento.') : t.gratisOra}</p>}
+    ? 'Read the beginning of each topic, open its first three worked exercise sheets and try one timed question without an account.'
+    : 'Senza account puoi leggere l’inizio di ogni capitolo, aprire le prime tre schede di esercizi svolti e provare una domanda a tempo.') : t.gratisOra}</p>}
   {video.length > 0 && (
     <p class="anche-nel-video">Questa materia è inclusa anche {video.length > 1 ? 'nei videocorsi' : 'nel videocorso'} {video.map((v, i) => <>{i > 0 && (i === video.length - 1 ? ' e ' : ', ')}<a href={`/videocorsi/${v.slug}`}>{v.titolo.replace('Videocorso di ', '')}</a> ({v.lezioni} lezioni, {v.prezzo} €)</>)}: chi compra il videocorso la trova già sbloccata.</p>
   )}

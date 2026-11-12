@@ -229,7 +229,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'scienza-delle-costruzioni': {
     titolo: 'Structural mechanics',
     breve: 'Structural mechanics',
-    descrizione: 'Structural mechanics for engineering students, from support reactions and internal force diagrams to stresses, deflections, statically indeterminate structures and Euler buckling. The study materials and quizzes are in Italian.',
+    descrizione: 'Structural mechanics for engineering students, covering reactions, internal forces, stress and failure criteria, deflections, indeterminate structures, energy methods, buckling and plates. The study materials and quizzes are in Italian.',
     argomenti: {
       'statica-vincoli': { titolo: 'Equilibrium, supports and reactions', breve: 'Equilibrium and supports' },
       'sollecitazioni': { titolo: 'Axial force, shear force and bending moment', breve: 'Internal force diagrams' },
@@ -237,9 +237,12 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
       'geometria-sezioni': { titolo: 'Cross-section properties and second moments of area', breve: 'Section properties' },
       'tensioni-deformazioni': { titolo: 'Stress, strain, Mohr’s circle and Hooke’s law', breve: 'Stress and strain' },
       'de-saint-venant': { titolo: 'Saint-Venant: axial loading, bending, shear and torsion', breve: 'Saint-Venant' },
+      'criteri-resistenza': { titolo: 'Failure criteria for ductile and brittle materials', breve: 'Failure criteria' },
       'linea-elastica': { titolo: 'Elastic curves, slopes and deflections', breve: 'Elastic curves' },
       'iperstatiche': { titolo: 'Statically indeterminate structures, virtual work and the force method', breve: 'Indeterminate structures' },
+      'metodi-energetici-spostamenti': { titolo: 'Energy methods and the displacement method', breve: 'Energy and displacement' },
       'stabilita': { titolo: 'Elastic stability and Euler buckling', breve: 'Elastic stability' },
+      'lastre-piane': { titolo: 'Membrane action and plate bending', breve: 'Plates' },
     },
   },
   'idraulica': {
