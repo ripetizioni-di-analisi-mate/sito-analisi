@@ -13,13 +13,18 @@ import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
 // del sito, con gli stessi plugin, una volta sola per file.
 let processore: Promise<MarkdownRenderer> | undefined;
 const rese = new Map<string, Promise<string>>();
+// Il percorso fittizio serve ai plugin per scegliere la lingua delle etichette e dei numeri nelle figure
+// (remark-blocchi guarda se il file sta in content-en o content-us).
+const CARTELLA: Record<string, string> = { it: 'content', en: 'content-en', us: 'content-us' };
 function htmlDi(chiave: string, body: string): Promise<string> {
   processore ??= createMarkdownProcessor({
     remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
     shikiConfig: { theme: 'github-light' },
   } as any);
-  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body)).then((r) => r.code));
+  const [lingua, ...resto] = chiave.split('/');
+  const fileURL = new URL(`file:///src/${CARTELLA[lingua] ?? 'content'}/domande/${resto.join('/')}.md`);
+  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body, { fileURL } as any)).then((r) => r.code));
   return rese.get(chiave)!;
 }
 
