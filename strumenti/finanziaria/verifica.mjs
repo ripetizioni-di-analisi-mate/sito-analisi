@@ -7,6 +7,8 @@ const root=new URL('../..',import.meta.url).pathname;
 const base=join(root,'src/content');
 const chapters=JSON.parse(readFileSync(join(root,'strumenti/finanziaria/capitoli.json')));
 let files=0,formulas=0;
+const stems = new Map();
+assert.equal(chapters.length, 10);
 for(const chapter of chapters){
  const slug=chapter.slug;
  const theory=readFileSync(join(base,'teoria/matematica-finanziaria',slug+'.md'),'utf8');
@@ -14,9 +16,11 @@ for(const chapter of chapters){
  assert.equal(anchors.size,8,slug+': otto concetti di riferimento');
  assert.equal([...theory.matchAll(/^## /gm)].length,8);
  const paths=[join(base,'teoria/matematica-finanziaria',slug+'.md')];
- for(const [collection,count] of [['svolti',8],['dafare',14],['domande',32]]){
+ for(const [collection,count] of [['svolti',8],['dafare',14],['domande',90]]){
   const dir=join(base,collection,'matematica-finanziaria',slug);
-  const names=readdirSync(dir).filter(x=>x.endsWith('.md'));assert.equal(names.length,count);
+  const names=readdirSync(dir).filter(x=>x.endsWith('.md'));
+  assert.equal(names.length, count, dir);
+  for (let n = 1; n <= count; n++) assert.ok(names.includes(n+'.md'), dir+'/'+n+'.md');
   for(const name of names)paths.push(join(dir,name));
  }
  for(const path of paths){
@@ -32,7 +36,12 @@ for(const chapter of chapters){
   if(path.includes('/domande/')){
    const choices=[...md.matchAll(/^- (.+)$/gm)].map(x=>x[1]);
    assert.equal(choices.length,4);assert.equal(new Set(choices).size,4);
-   assert.ok(data.corretta>=1&&data.corretta<=4);assert.match(md,/## Spiegazione/);
+   assert.ok(Number.isInteger(data.corretta) && data.corretta >= 1 && data.corretta <= 4, path);
+   assert.match(md, /## Spiegazione\n\n\S/, path);
+   const stem = md.slice(fm[0].length).trim().split(/\n\n/)[0].replace(/\s+/g, ' ');
+   assert.ok(stem, path);
+   assert.ok(!stems.has(stem), path + ' ripete ' + stems.get(stem));
+   stems.set(stem, path);
   }
   for(const match of md.matchAll(/\$\$([\s\S]*?)\$\$|\$([^\n$]+)\$/g)){
    try{katex.renderToString(match[1]??match[2],{throwOnError:true,strict:false,displayMode:!!match[1]});formulas++;}
@@ -41,4 +50,5 @@ for(const chapter of chapters){
   files++;
  }
 }
+assert.equal(stems.size, 900);
 console.log(files+' Markdown verificati: YAML, ancore, schede, soluzioni e '+formulas+' formule KaTeX.');

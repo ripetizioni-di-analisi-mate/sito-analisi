@@ -1,16 +1,55 @@
 """Ricalcola i residui delle equazioni finanziarie e controlla i risultati scritti nei Markdown."""
 from pathlib import Path
-import json,math,re
-ROOT=Path(__file__).resolve().parents[2]
-records=json.loads((ROOT/'strumenti/finanziaria/controlli.json').read_text())
-errors=[]
+import json
+import math
+import re
+
+from genera import CAPITOLI, MATERIA, ROOT, risultato
+from quiz_calcolo import domande_calcolo
+
+records = json.loads((ROOT/'strumenti/finanziaria/controlli.json').read_text())
+for slug, *_ in CAPITOLI:
+    for num, exercise in domande_calcolo(slug):
+        path = Path('src/content/domande') / MATERIA / slug / f'{num}.md'
+        records.append(exercise | {'file': str(path), 'risultato': risultato(exercise)})
+
+scope = {
+    '__builtins__': {}, 'sum': sum, 'range': range, 'round': round,
+    'enumerate': enumerate, 'zip': zip, 'int': int, 'abs': abs,
+    'prod': math.prod, 'exp': math.exp, 'log': math.log,
+}
+choice_number = re.compile(r'\$(-?\d+(?:\{,\}\d+)?)(?:\\%)?\$(?: (?:euro|anni))?')
+errors = []
 for r in records:
-    p=r['params']|{'ans':r['answer']}
-    env={'__builtins__':{},'sum':sum,'range':range,'round':round,'enumerate':enumerate,'zip':zip,'prod':math.prod,'exp':math.exp,'log':math.log}|p
-    residual=eval(r['check'],env)
-    if abs(residual)>1e-8*max(1,abs(r['answer'])): errors.append((r['file'],'residuo',residual))
-    text=(ROOT/r['file']).read_text()
-    if r['risultato'] not in text: errors.append((r['file'],'risultato assente'))
+    answer = r['answer']
+    tol = 1e-8 * max(1, abs(answer))
+    env = scope | r['params']
+    def residue(value):
+        return eval(r['check'], env | {'ans': value})
+
+    residual = residue(answer)
+    if not math.isfinite(residual) or abs(residual) > tol:
+        errors.append((r['file'], 'residuo', residual))
+    text = (ROOT/r['file']).read_text(encoding='utf8')
+    if r['risultato'] not in text:
+        errors.append((r['file'], 'risultato assente'))
+    if not r['file'].startswith('src/content/domande/'):
+        continue
+    choices = re.findall(r'^- (.+)$', text, re.M)
+    correct = int(re.search(r'^corretta: (\d+)$', text, re.M)[1]) - 1
+    if choices.count(r['risultato']) != 1 or choices[correct] != r['risultato']:
+        errors.append((r['file'], 'risposta numerica errata o duplicata'))
+    for index, choice in enumerate(choices):
+        if index == correct:
+            continue
+        match = choice_number.fullmatch(choice)
+        assert match, (r['file'], choice)
+        displayed = float(match[1].replace('{,}', '.'))
+        if abs(residue(displayed)) <= tol:
+            errors.append((r['file'], 'distrattore soddisfa l’equazione', choice))
+    for alternative in r.get('distractors', []):
+        if abs(residue(alternative)) <= tol:
+            errors.append((r['file'], 'distrattore numerico corretto prima di arrotondare', alternative))
 # Verifica indipendente: somma delle quote capitale e saldo finale dei piani francesi.
 for k in range(8):
     C=10000+500*k;i=.035+.002*k;n=4+k%3
@@ -39,4 +78,5 @@ for H in (3,4):
 if errors:
     for e in errors:print(e)
     raise SystemExit(1)
-print(f'{len(records)} risultati verificati; piani, derivate e immunizzazione controllati indipendentemente.')
+assert len(records) == 1100
+print(f'{len(records)} risultati verificati, comprese le risposte dei quiz di calcolo.')

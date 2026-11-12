@@ -1,0 +1,14 @@
+---
+import Simulazione from '../../../../viste/Simulazione.astro';
+import { highSchoolCourses, highSchoolHasStudyPages } from '../../../../data/stem-usa/high-school/index.mjs';
+
+export function getStaticPaths() {
+  return highSchoolCourses.filter(highSchoolHasStudyPages).map(({ slug }) => ({
+    params: { course: slug.slice(3) },
+    props: { materia: slug },
+  }));
+}
+
+const { materia } = Astro.props;
+---
+<Simulazione lingua="en" materia={materia} usa />

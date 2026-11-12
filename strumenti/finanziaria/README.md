@@ -2,14 +2,16 @@
 
 Corso autonomo per Università > Economia, con URL e accesso `matematica-finanziaria`.
 
-Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 320 quiz con spiegazione. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese, tedesco, spagnolo e francese.
+Contiene dieci capitoli, 80 schede (due svolgimenti per scheda), 140 esercizi con soluzione finale e 900 quiz con spiegazione, 90 per capitolo. Le prime tre schede di ogni capitolo sono gratuite; il banco dei quiz espone dieci ID dimostrativi fissi complessivi. I materiali didattici sono in italiano; le etichette del catalogo sono disponibili anche in inglese, tedesco, spagnolo e francese.
 
 ## Controlli
 
 - `python3 strumenti/finanziaria/genera.py` rigenera gli esercizi originali dai parametri riproducibili e il registro delle equazioni da verificare.
-- `python3 strumenti/finanziaria/verifica.py` verifica 620 risultati mediante residui di equivalenza, ricorrenze dei prestiti, differenze finite delle derivate e controllo del surplus immunizzato.
-- `node strumenti/finanziaria/verifica.mjs` controlla YAML, ancore, formule KaTeX e struttura dei 550 Markdown.
+- `python3 strumenti/finanziaria/verifica.py` verifica 1.100 risultati e l’unicità delle risposte numeriche mediante residui di equivalenza, ricorrenze dei prestiti, differenze finite delle derivate e controllo del surplus immunizzato.
+- `node strumenti/finanziaria/verifica.mjs` controlla YAML, ancore, formule KaTeX e struttura dei 1.130 Markdown.
 - Dopo la build, `npm run test:finanziaria` controlla l’accesso tramite il Worker reale: corso indipendente da Matematica generale, anteprime, soluzioni, quiz e configurazione del pagamento.
+
+I nuovi quiz comprendono otto tipologie di calcolo per capitolo, con sei esercizi per tipologia, e dieci quesiti di ragionamento. Le alternative dei calcoli riproducono errori di impostazione, di segno, di scadenza o di conversione. I quesiti di ragionamento sono in `quiz_ragionamento.txt`.
 
 ## Programma
 

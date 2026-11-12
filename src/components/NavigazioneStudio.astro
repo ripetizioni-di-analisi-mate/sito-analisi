@@ -1,7 +1,7 @@
 ---
 import { materiaL, link, T, type Lingua } from '../i18n';
 import { linkArgomentoUsa, materiaUsa } from '../data/stem-usa/catalog-view';
-import { highSchoolHasStudyPages, highSchoolCourse } from '../data/stem-usa/high-school/index.mjs';
+import { hasUsStudyPages } from '../data/stem-usa/catalog.mjs';
 import { disponibilitaStudio } from '../lib/nav';
 import { sezioniStudio } from '../lib/percorso-studio.mjs';
 interface Props { materia?: string; argomento?: string; sezione?: string; lingua?: Lingua; usa?: boolean }
@@ -9,7 +9,7 @@ const { materia, argomento, sezione, lingua = 'it', usa = false } = Astro.props;
 const en = lingua === 'en';
 const m = materia ? (usa ? materiaUsa(materia) : materiaL(lingua, materia)) : undefined;
 const i = m?.argomenti.findIndex((a) => a.slug === argomento) ?? -1;
-const visibile = Boolean(m && i >= 0 && (!usa || highSchoolHasStudyPages(highSchoolCourse(materia))) && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
+const visibile = Boolean(m && i >= 0 && (!usa || hasUsStudyPages(materia)) && ['teoria', 'esercizi-svolti', 'esercizi', 'domande'].includes(sezione ?? ''));
 const sezioni = !visibile ? [] : usa ? ['teoria', 'esercizi-svolti', 'esercizi', 'domande']
   : sezioniStudio(await disponibilitaStudio(materia!, argomento!, lingua));
 const href = (topic: string, section: string) => usa ? linkArgomentoUsa(materia!, topic, section) : link(lingua, '/' + materia + '/' + topic + '/' + section);

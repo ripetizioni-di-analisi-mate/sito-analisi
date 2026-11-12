@@ -266,7 +266,10 @@ def duration(t,k):
     return ex('Derivate del prezzo obbligazionario','derivate-prezzo',rf'Per i flussi ${c}$, ${c}$ e ${f(cash[2])}$ euro ai tempi $1,2,3$, calcolare la derivata del prezzo rispetto al rendimento annuo effettivo, nel punto $y={f(i)}$.',r'P^{\prime}(y)=-\sum_ht_hC_h(1+y)^{-t_h-1}', 'Si derivano separatamente le potenze negative dei fattori di montante. Tutti i termini della derivata hanno segno negativo, perché le scadenze e i pagamenti sono positivi.',ans,'numero',params,'ans+sum([u*c/(1+i)**(u+1) for c,u in zip(cash,times)])')
 
 def immunizzazione(t,k):
-    delta=.03+.002*k;L=10000+500*k;H=3+k%2;T1=1;T2=6+k%2;L0=L*math.exp(-delta*H);w1=(T2-H)/(T2-T1);w2=1-w1
+    delta=.03+.002*k;L=10000+500*k;H=3+k%2;T1=1;T2=6+k%2
+    if k >= 6 and t in (1, 3):
+        T1, T2 = 2, 8+k%2
+    L0=L*math.exp(-delta*H);w1=(T2-H)/(T2-T1);w2=1-w1
     if t==0:
         A1=4000+200*k;A2=7000+300*k;ans=A1*math.exp(-delta*T1)+A2*math.exp(-delta*T2)-L0
         return ex('Surplus di attività e passività','valore-netto',rf'Le attività pagano ${f(A1)}$ euro al tempo ${T1}$ e ${f(A2)}$ euro al tempo ${T2}$. La passività richiede ${f(L)}$ euro al tempo ${H}$. Calcolare il surplus iniziale con forza piatta $\delta={f(delta)}$.',rf'S={f(A1)}e^{{-{f(delta)}\cdot{T1}}}+{f(A2)}e^{{-{f(delta)}\cdot{T2}}}-{f(L)}e^{{-{f(delta)}\cdot{H}}}', 'Si valutano alla stessa forza sia gli incassi sia l’obbligazione da pagare. Il surplus è il valore delle attività meno il valore della passività.',ans,'euro',dict(A1=A1,A2=A2,L=L,T1=T1,T2=T2,H=H,delta=delta),'ans-A1*exp(-delta*T1)-A2*exp(-delta*T2)+L*exp(-delta*H)')
@@ -310,8 +313,10 @@ def risultato(E, value=None):
     tail={'euro':' euro','percento':r'\%','anni':' anni','numero':''}[E['unit']]
     return '$'+f(v,digits)+('$'+tail if E['unit'] in ('euro','anni') else tail+'$')
 
-def registra(E,path):
-    REGISTRO.append({key:E[key] for key in ['answer','unit','params','check']}|{'file':str(path.relative_to(ROOT)),'risultato':risultato(E)})
+def registra(E, path):
+    record = {key: E[key] for key in ['answer', 'unit', 'params', 'check']}
+    record.update(file=str(path.relative_to(ROOT)), risultato=risultato(E))
+    REGISTRO.append(record)
 
 def scrivi(path,text):
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -320,7 +325,48 @@ def scrivi(path,text):
 def front(title,anchor,free=None):
     return '---\ntitolo: '+json.dumps(title,ensure_ascii=False)+'\n'+(('gratis: '+str(free).lower()+'\n') if free is not None else '')+'teoria: ['+anchor+']\nparole: ['+json.dumps(title,ensure_ascii=False)+']\n---\n\n'
 
+def scrivi_quiz(path, num, question, choices, explanation):
+    correct = (num-1) % 4
+    rendered = choices[-correct:] + choices[:-correct] if correct else choices
+    assert len(rendered) == 4 and len(set(rendered)) == 4, (path, rendered)
+    options = '\n'.join('- ' + choice for choice in rendered)
+    scrivi(path, f'---\ncorretta: {correct+1}\n---\n\n{question}\n\n{options}\n\n## Spiegazione\n\n{explanation}\n')
+
+
+def scrivi_quiz_calcolo(path, num, E, distrattori):
+    question = E['question'] + ' ' + (
+        'Arrotondare il risultato ai centesimi.' if E['unit'] == 'euro'
+        else 'Approssimare il risultato a quattro cifre decimali, quando necessario.'
+    )
+    choices = [risultato(E), *(risultato(E, x) for x in distrattori)]
+    explanation = f"$$\n{E['steps']}\n$$\n\n{E['why']} Il risultato è {risultato(E)}."
+    scrivi_quiz(path, num, question, choices, explanation)
+
+
+
+def leggi_ragionamento():
+    source = Path(__file__).with_name('quiz_ragionamento.txt')
+    capitoli = {}
+    for line in source.read_text(encoding='utf8').splitlines():
+        if not line:
+            continue
+        if line.startswith('[') and line.endswith(']'):
+            slug = line[1:-1]
+            assert slug not in capitoli, slug
+            capitoli[slug] = []
+            continue
+        question, correct, wrong1, wrong2, wrong3, explanation = line.split(' | ')
+        capitoli[slug].append((question, [correct, wrong1, wrong2, wrong3], explanation))
+    assert set(capitoli) == {c[0] for c in CAPITOLI}
+    assert all(len(questions) == 10 for questions in capitoli.values())
+    return capitoli
+
+
 def genera():
+    from quiz_calcolo import domande_calcolo
+
+    REGISTRO.clear()
+    ragionamento = leggi_ragionamento()
     for slug,title,brief,fn in CAPITOLI:
         for t in range(8):
             es=[fn(t,k) for k in (0,1)]
@@ -335,19 +381,21 @@ def genera():
             t=(num-1)%8;k=2+(num-1)//8;E=fn(t,k)
             body=front(E['title'],E['anchor'])+E['question']+'\n\n:::soluzione\n'+risultato(E)+'.\n:::\n'
             path=ROOT/'src/content/dafare'/MATERIA/slug/f'{num}.md';scrivi(path,body);registra(E,path)
-        for num in range(1,33):
-            t=(num-1)%8;k=4+(num-1)//8;E=fn(t,k)
-            v=E['answer'];scale=max(abs(v)*.12,1 if E['unit'] in ('euro','anni') else .1)
-            vals=[v,v+scale,v-scale,v+2.1*scale]
-            correct=(num-1)%4
-            vals=vals[-correct:]+vals[:-correct] if correct else vals
-            rendered=[risultato(E,x) for x in vals]
-            assert len(set(rendered))==4
-            question=E['question']+' '+('Arrotondare il risultato ai centesimi.' if E['unit']=='euro' else 'Approssimare il risultato a quattro cifre decimali, quando necessario.')
-            body='---\ncorretta: '+str(correct+1)+'\n---\n\n'+question+'\n\n'+'\n'.join('- '+x for x in rendered)+'\n\n## Spiegazione\n\n$$\n'+E['steps']+'\n$$\n\n'+E['why']+' Il risultato è '+risultato(E)+'.\n'
-            path=ROOT/'src/content/domande'/MATERIA/slug/f'{num}.md';scrivi(path,body);registra(E,path)
+        quiz = ROOT/'src/content/domande'/MATERIA/slug
+        for num in range(1, 33):
+            t, k = (num-1)%8, 4+(num-1)//8
+            E = fn(t, k)
+            v = E['answer']
+            scale = max(abs(v)*.12, 1 if E['unit'] in ('euro', 'anni') else .1)
+            path = quiz/f'{num}.md'
+            scrivi_quiz_calcolo(path, num, E, [v+scale, v-scale, v+2.1*scale])
+            registra(E, path)
+        for num, E in domande_calcolo(slug):
+            scrivi_quiz_calcolo(quiz/f'{num}.md', num, E, E['distractors'])
+        for num, (question, choices, explanation) in enumerate(ragionamento[slug], start=81):
+            scrivi_quiz(quiz/f'{num}.md', num, question, choices, explanation)
     scrivi(ROOT/'strumenti/finanziaria/controlli.json',json.dumps(REGISTRO,ensure_ascii=False,indent=2)+'\n')
     scrivi(ROOT/'strumenti/finanziaria/capitoli.json',json.dumps([dict(slug=s,titolo=t,breve=b) for s,t,b,_ in CAPITOLI],ensure_ascii=False,indent=2)+'\n')
-    print('10 capitoli; 80 schede con 160 svolgimenti, 140 esercizi e 320 quiz. Controlli numerici:',len(REGISTRO))
+    print('10 capitoli; 80 schede con 160 svolgimenti, 140 esercizi e 900 quiz (90 per capitolo). Risultati da verificare:',len(REGISTRO)+48*len(CAPITOLI))
 
 if __name__=='__main__':genera()

@@ -126,12 +126,16 @@ test('gli stessi dieci ID delimitano l’anteprima in ogni capitolo e sessione',
   }
 });
 
-test('chi ha accesso può usare tutti i 320 quiz', async () => {
+test('chi ha accesso può usare 900 quiz, 90 per capitolo', async () => {
   const b = await banco([materia]);
-  assert.equal((await b.quiz('prove-d-esame')).totale, 320);
+  assert.equal((await b.quiz('prove-d-esame')).totale, 900);
   const { argomenti } = JSON.parse(bancaDomande());
   assert.equal(Object.keys(argomenti).length, 10);
-  for (const domande of Object.values(argomenti)) assert.equal(domande.length, 32);
+  for (const capitolo of CAPITOLI_FINANZIARIA) {
+    assert.equal(argomenti[capitolo].length, 90);
+    assert.equal(new Set(argomenti[capitolo].map((domanda) => domanda.id)).size, 90);
+    assert.equal((await b.quiz(capitolo)).totale, 90);
+  }
 });
 
 test('il filtro anteprima conserva un solo ID per capitolo previsto', () => {

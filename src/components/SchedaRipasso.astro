@@ -1,0 +1,28 @@
+---
+interface Link {
+  href: string;
+  titolo: string;
+}
+
+interface Props {
+  titolo: string;
+  materia: string;
+  domande: Link & { conteggio: number };
+  simulazione?: Link;
+  personale: Link;
+  personaleRiservato?: boolean;
+}
+
+const { titolo, materia, domande, simulazione, personale, personaleRiservato } = Astro.props;
+---
+<li>
+  <h2><a href={domande.href}>{titolo}</a></h2>
+  <p class="riassunto"><slot /></p>
+  <nav aria-label={titolo}>
+    <a href={domande.href}>{domande.titolo} ({domande.conteggio})</a>
+    {simulazione && <a href={simulazione.href}>{simulazione.titolo}</a>}
+    <a class="solo-collegati" href={personale.href} data-usa-content={personaleRiservato || undefined}>
+      {personale.titolo}<span class="conta-ripasso" data-materia={materia}></span>
+    </a>
+  </nav>
+</li>

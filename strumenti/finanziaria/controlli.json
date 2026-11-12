@@ -7830,16 +7830,16 @@
     "risultato": "$364{,}88$ euro"
   },
   {
-    "answer": 40.0,
+    "answer": 16.666666666666664,
     "unit": "percento",
     "params": {
       "H": 3,
-      "T1": 1,
-      "T2": 6
+      "T1": 2,
+      "T2": 8
     },
     "check": "(1-ans/100)*T1+(ans/100)*T2-H",
     "file": "src/content/domande/matematica-finanziaria/immunizzazione/18.md",
-    "risultato": "$40\\%$"
+    "risultato": "$16{,}6667\\%$"
   },
   {
     "answer": 6876.595804910645,
@@ -7856,16 +7856,16 @@
     "risultato": "$6876{,}6$ euro"
   },
   {
-    "answer": 6.000000000000002,
+    "answer": 4.999999999999998,
     "unit": "numero",
     "params": {
       "H": 3,
-      "T1": 1,
-      "T2": 6
+      "T1": 2,
+      "T2": 8
     },
     "check": "ans-(H-T1)*(T2-H)",
     "file": "src/content/domande/matematica-finanziaria/immunizzazione/20.md",
-    "risultato": "$6$"
+    "risultato": "$5$"
   },
   {
     "answer": 4.16033937,
@@ -7938,16 +7938,16 @@
     "risultato": "$533{,}94$ euro"
   },
   {
-    "answer": 50.0,
+    "answer": 28.57142857142857,
     "unit": "percento",
     "params": {
       "H": 4,
-      "T1": 1,
-      "T2": 7
+      "T1": 2,
+      "T2": 9
     },
     "check": "(1-ans/100)*T1+(ans/100)*T2-H",
     "file": "src/content/domande/matematica-finanziaria/immunizzazione/26.md",
-    "risultato": "$50\\%$"
+    "risultato": "$28{,}5714\\%$"
   },
   {
     "answer": 5660.67138752525,
@@ -7964,16 +7964,16 @@
     "risultato": "$5660{,}67$ euro"
   },
   {
-    "answer": 9.0,
+    "answer": 9.999999999999996,
     "unit": "numero",
     "params": {
       "H": 4,
-      "T1": 1,
-      "T2": 7
+      "T1": 2,
+      "T2": 9
     },
     "check": "ans-(H-T1)*(T2-H)",
     "file": "src/content/domande/matematica-finanziaria/immunizzazione/28.md",
-    "risultato": "$9$"
+    "risultato": "$10$"
   },
   {
     "answer": 7.33622832,

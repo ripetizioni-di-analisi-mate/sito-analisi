@@ -33,6 +33,7 @@ export function highSchoolStudyTopic(course, topic) {
 export function highSchoolPreviewPage(slug, section) {
   const course = highSchoolCourse(slug);
   if (!highSchoolHasStudyPages(course)) return false;
+  if (section === 'simulazione') return true;
   const [topic, view, number, ...rest] = section.split('/');
   if (rest.length) return false;
   if (topic === 'prove-d-esame') return view === 'domande' && number === undefined;
