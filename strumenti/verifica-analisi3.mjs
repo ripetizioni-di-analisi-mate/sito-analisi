@@ -17,7 +17,11 @@ for(const [slug,schede] of Object.entries(banco)){
  for(const tipo of ['teoria','svolti','dafare','domande']){
   const dir=join(cartella,tipo,'analisi-3');
   const paths=tipo==='teoria'?[join(dir,slug+'.md')]:readdirSync(join(dir,slug)).filter(n=>n.endsWith('.md')).map(n=>join(dir,slug,n));
-  assert.equal(paths.length,{teoria:1,svolti:7,dafare:14,domande:90}[tipo],slug+': '+tipo);
+  if(tipo==='svolti'||tipo==='dafare'){
+   const numeri=paths.map(path=>Number(path.match(/\/(\d+)\.md$/)?.[1])).sort((a,b)=>a-b);
+   assert.ok(numeri.length>=(tipo==='svolti'?7:14),slug+': numero minimo di '+tipo);
+   assert.deepEqual(numeri,Array.from({length:numeri.length},(_,i)=>i+1),slug+': numerazione continua di '+tipo);
+  }else assert.equal(paths.length,{teoria:1,domande:90}[tipo],slug+': '+tipo);
   const tracce=new Set();
   for(const path of paths){
    const text=readFileSync(path,'utf8');file++;
@@ -27,7 +31,7 @@ for(const [slug,schede] of Object.entries(banco)){
    for(const m of body.matchAll(/\$\$([\s\S]*?)\$\$|\$([^$\n]+)\$/g)){katex.renderToString(m[1]??m[2],{throwOnError:true,strict:false,displayMode:m[1]!==undefined});formule++;}
    const stacks=[];for(const line of body.split('\n')){const d=line.match(/^(:{3,})([a-z]+)?/);if(d){if(d[2])stacks.push(d[1].length);else assert.equal(stacks.pop(),d[1].length,path+': chiusura blocco');}}
    assert.equal(stacks.length,0,path+': blocchi rimasti aperti');
-   if(tipo==='svolti'){const n=(body.match(/^## Esercizio /gm)||[]).length;assert.equal(n,2);esempi+=n;assert.equal(data.gratis,Number(path.match(/(\d+)\.md$/)[1])<=3);}
+   if(tipo==='svolti'){const n=(body.match(/^## Esercizio /gm)||[]).length;assert.ok(n>=2&&n<=4,path+': da due a quattro esercizi per scheda');esempi+=n;assert.equal(data.gratis,Number(path.match(/(\d+)\.md$/)[1])<=3);}
    if(tipo==='dafare')assert.match(body,/:::soluzione/);
    if(tipo==='domande'){
     const parti=body.split('## Spiegazione');

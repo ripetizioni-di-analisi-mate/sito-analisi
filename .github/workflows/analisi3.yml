@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - 'src/content/**/analisi-3/**'
+      - 'src/contenuti-integrativi/analisi-3/**'
       - 'src/data/analisi3.mjs'
       - 'scripts/analisi-3-condivisi.mjs'
       - 'strumenti/analisi3/**'

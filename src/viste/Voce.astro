@@ -96,7 +96,7 @@ const schema = [{
 <Base
   titolo={`${voce.titolo} · ${arg.breve}`}
   descrizione={descrizioneSeo}
-  seo={{ canonico: originale(materia, argomento, 'teoria', ancora), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, senzaInglese: !haAltra && lingua === 'it', data: dataContenuto(lingua, 'teoria', id), schema }}
+  seo={{ canonico: originale(materia, argomento, 'teoria', ancora, lingua), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, senzaInglese: !haAltra && lingua === 'it', data: dataContenuto(lingua, 'teoria', id), schema }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.teoria, href: link(lingua, `${base}/teoria`) }, { titolo: voce.titolo }]}
   materia={materia} argomento={argomento} sezione="teoria"
   lingua={lingua} nonTradotta={false}

@@ -1,0 +1,300 @@
+{
+  "teoria/successioni-e-serie-di-funzioni.md": [
+    [
+      "si cerca il massimo di $|f_n - f|$ su $A$",
+      "si calcola o si stima l'estremo superiore di $|f_n - f|$ su $A$, che può non essere raggiunto"
+    ],
+    [
+      "La continuità è una proprietà locale, quindi per concludere che $f$ è continua su $A$ basta la convergenza totale su *ogni* intervallo chiuso e limitato contenuto in $A$; questa osservazione si usa quando la convergenza totale su tutto $A$ non sussiste.",
+      "Per concludere la continuità di $f$ su $A$ basta la convergenza totale su ogni sottoinsieme compatto di $A$. Infatti, se una successione di punti di $A$ converge a un punto di $A$, l'insieme formato dai suoi termini e dal suo limite è compatto. Su questo insieme la somma è continua per convergenza uniforme. Quando $A$ è un intervallo basta usare gli intervalli chiusi e limitati contenuti in $A$."
+    ]
+  ],
+  "teoria/serie-di-potenze.md": [
+    [
+      "mostra che questa forma dell'insieme di convergenza è generale.",
+      "garantisce la simmetria della parte interna dell'insieme di convergenza. L'eventuale inclusione di ciascuno dei due estremi va esaminata a parte."
+    ],
+    [
+      "quindi le formule sul rapporto e sulla radice dei coefficienti **non si applicano**.",
+      "quindi il criterio del rapporto dei coefficienti può risultare indefinito e la radice di ordine $n$ può non avere limite. In generale vale $R=\\dfrac{1}{\\limsup_{n\\to\\infty}\\sqrt[n]{|a_n|}}$, con le stesse convenzioni per zero e infinito. La formula segue dal criterio della radice nella forma con limite superiore."
+    ],
+    [
+      "La dimostrazione si omette.",
+      "La dimostrazione usa la sommazione per parti. Si ponga $b_n=a_nR^n$ e sia $S_n=\\sum_{k=0}^n b_k$ la somma parziale nell'estremo destro, con limite $S$. Per $t=\\dfrac{x-x_0}{R}\\in[0,1)$ si ha\n$$\n\\sum_{n=0}^{\\infty} b_nt^n=(1-t)\\sum_{n=0}^{\\infty} S_nt^n .\n$$\nSottraendo $S$ si può sostituire $S_n$ con $S_n-S$ al secondo membro, perché i pesi $(1-t)t^n$ sommano a uno. Per $t\\uparrow1$ il contributo di un numero finito di termini tende a zero. Dall'indice in cui $|S_n-S|<\\varepsilon$ in poi, il contributo ha modulo al più $\\varepsilon$."
+    ],
+    [
+      "Essere di classe $C^{\\infty}$ *non basta* per essere analitica. La funzione $f(x) = e^{-1/x^2}$ per $x \\neq 0$, prolungata con $f(0) = 0$, è $C^{\\infty}$ su $\\mathbb{R}$ e tutte le sue derivate in $0$ sono nulle, quindi la sua serie di MacLaurin è la serie identicamente nulla, che converge per ogni $x$ con somma $0$. La somma coincide con $f$ solo in $x = 0$, perciò $f$ **non è analitica** in $0$.",
+      "Essere di classe $C^{\\infty}$ *non basta* per essere analitica. La funzione $f(x) = e^{-\\frac{1}{x^2}}$ per $x \\neq 0$, prolungata con $f(0) = 0$, è $C^{\\infty}$ su $\\mathbb{R}$ e tutte le sue derivate in $0$ sono nulle, quindi la sua serie di MacLaurin è la serie identicamente nulla, che converge per ogni $x$ con somma $0$. La somma coincide con $f$ solo in $x = 0$, perciò $f$ **non è analitica** in $0$."
+    ],
+    [
+      "asintoti=\"x=-1;x=1\"",
+      "segmenti=\"-1,-2.2,-1,2.2;1,-2.2,1,2.2\""
+    ]
+  ],
+  "teoria/serie-di-fourier.md": [
+    [
+      "Un **polinomio trigonometrico** di grado $N$",
+      "Un **polinomio trigonometrico** di grado al più $N$"
+    ],
+    [
+      "I polinomi trigonometrici sono i mattoni della teoria: la serie di Fourier rappresenta una funzione periodica come limite di polinomi trigonometrici, così come la serie di Taylor rappresenta una funzione regolare come limite di polinomi algebrici.",
+      "Le somme parziali di Fourier sono polinomi trigonometrici. Per funzioni a quadrato integrabile convergono in media quadratica. Per ottenere un valore puntuale si verificano ipotesi ulteriori. Nelle serie di Taylor i polinomi parziali sono algebrici e rappresentano la funzione in un intorno del centro se la funzione è analitica."
+    ],
+    [
+      "La dimostrazione richiede lo studio del nucleo di Dirichlet e si rimanda ai testi di riferimento.",
+      "La dimostrazione usa la formula integrale delle somme parziali, sviluppata nel paragrafo sul nucleo di Dirichlet."
+    ],
+    [
+      "la convergenza della serie dei coefficienti si dimostra con l'uguaglianza di Parseval applicata alla derivata e si rimanda ai testi di riferimento.",
+      "la convergenza della serie dei coefficienti si ricava dalla stima con Parseval applicata alla derivata, sviluppata nel paragrafo sulle stime uniformi."
+    ]
+  ],
+  "svolti/serie-di-fourier/1.md": [
+    [
+      "titolo: Serie di Fourier di onde quadre e funzioni a gradino",
+      "titolo: \"Serie di Fourier per onde quadre e gradini\""
+    ],
+    [
+      "f \\text{ dispari} \\implies a_n = 0, \\qquad\nb_n = \\frac{2}{\\pi} \\int_{0}^{\\pi} \\sin(nx)\\, dx",
+      "f \\text{ dispari quasi ovunque} \\implies a_n = 0, \\qquad\nb_n = \\frac{2}{\\pi} \\int_{0}^{\\pi} \\sin(nx)\\, dx"
+    ],
+    [
+      "quindi è **dispari** (il valore in $x = 0$ *non* incide sui coefficienti, che sono integrali). Poiché la funzione è dispari,",
+      "quindi è **dispari quasi ovunque**. I valori ai salti non modificano gli integrali dei coefficienti. Per questa parità,"
+    ],
+    [
+      "f=\"(sign(sin(x))+sign(sin(2*x)))/2+0*log(abs(sin(2*x))-0.05);2/pi*(sin(x)+sin(2*x)+sin(3*x)/3)\"",
+      "f=\"2/pi*(sin(x)+sin(2*x)+sin(3*x)/3)\" linee=\"-7,-1 -6.283185,-1;-6.283185,1 -4.712389,1;-4.712389,0 -1.570796,0;-1.570796,-1 0,-1;0,1 1.570796,1;1.570796,0 4.712389,0;4.712389,-1 6.283185,-1;6.283185,1 7.3,1\" punti=\"-6.283185,0,pieno;-6.283185,-1,vuoto;-6.283185,1,vuoto;-4.712389,0,vuoto;-4.712389,1,vuoto;-1.570796,0,vuoto;-1.570796,-1,vuoto;0,0,pieno;0,-1,vuoto;0,1,vuoto;1.570796,0,vuoto;1.570796,1,vuoto;4.712389,0,vuoto;4.712389,-1,vuoto;6.283185,0,pieno;6.283185,-1,vuoto;6.283185,1,vuoto\""
+    ],
+    [
+      "tratteggiata la somma parziale fino a $\\sin(3x)$",
+      "la curva colorata è la somma parziale fino a $\\sin(3x)$"
+    ],
+    [
+      "b_n = \\frac{2}{\\pi} \\int_{0}^{\\pi/2} \\sin(nx)\\, dx",
+      "b_n = \\frac{2}{\\pi} \\int_{0}^{\\frac{\\pi}{2}} \\sin(nx)\\, dx"
+    ],
+    [
+      "b_n = \\frac{2}{\\pi} \\left[ -\\frac{\\cos(nx)}{n} \\right]_{0}^{\\pi/2}",
+      "b_n = \\frac{2}{\\pi} \\left[ -\\frac{\\cos(nx)}{n} \\right]_{0}^{\\frac{\\pi}{2}}"
+    ]
+  ],
+  "svolti/serie-di-fourier/5.md": [
+    [
+      "perché la funzione è dispari, e il quadrato",
+      "perché la funzione è dispari quasi ovunque, e il quadrato"
+    ]
+  ],
+  "svolti/serie-di-fourier/6.md": [
+    [
+      "f \\text{ dispari} \\implies a_n = 0",
+      "f \\text{ dispari quasi ovunque} \\implies a_n = 0"
+    ],
+    [
+      "La funzione è **dispari**, perciò",
+      "La funzione è **dispari quasi ovunque**, perciò"
+    ]
+  ],
+  "dafare/serie-di-fourier/1.md": [
+    [
+      "La funzione è dispari,",
+      "La funzione è dispari quasi ovunque,"
+    ]
+  ],
+  "dafare/serie-di-fourier/5.md": [
+    [
+      "La funzione è dispari,",
+      "La funzione è dispari quasi ovunque,"
+    ]
+  ],
+  "dafare/serie-di-fourier/11.md": [
+    [
+      "la funzione è dispari,",
+      "la funzione è dispari quasi ovunque,"
+    ]
+  ],
+  "domande/serie-di-fourier/34.md": [
+    [
+      "Per $|x| > \\pi$ la somma è $f(x)$, che è diverso da $x$;",
+      "Per $|x| > \\pi$ la somma ha modulo al più $\\pi$, quindi è diversa da $x$;"
+    ]
+  ],
+  "domande/serie-di-fourier/42.md": [
+    [
+      "definite per $0 < |x| \\leq \\pi$ e prolungate in modo $2\\pi$-periodico,",
+      "definite su $[-\\pi,\\pi)\\setminus\\{0\\}$, con valore arbitrario in zero e prolungate in modo $2\\pi$-periodico,"
+    ]
+  ],
+  "svolti/serie-di-fourier/4.md": [
+    [
+      "titolo: Studio della convergenza e valore nei punti di salto",
+      "titolo: \"Convergenza di Fourier nei punti di salto\""
+    ]
+  ],
+  "svolti/successioni-e-serie-di-funzioni/7.md": [
+    [
+      "titolo: Continuità e derivabilità della somma di una serie",
+      "titolo: \"Continuità e derivabilità delle somme\""
+    ]
+  ],
+  "svolti/successioni-e-serie-di-funzioni/1.md": [
+    [
+      "titolo: Convergenza puntuale di successioni di funzioni",
+      "titolo: \"Limiti puntuali di successioni di funzioni\""
+    ]
+  ],
+  "svolti/successioni-e-serie-di-funzioni/5.md": [
+    [
+      "titolo: Limiti di integrali con la convergenza uniforme",
+      "titolo: \"Limiti di integrali per convergenza uniforme\""
+    ]
+  ],
+  "svolti/successioni-e-serie-di-funzioni/6.md": [
+    [
+      "titolo: Serie di funzioni con convergenza totale sui compatti",
+      "titolo: \"Serie totalmente convergenti sui compatti\""
+    ]
+  ],
+  "svolti/successioni-e-serie-di-funzioni/4.md": [
+    [
+      "titolo: Convergenza puntuale e totale di serie di funzioni",
+      "titolo: \"Convergenza puntuale e totale di serie\""
+    ]
+  ],
+  "svolti/serie-di-potenze/8.md": [
+    [
+      "titolo: Somme di serie numeriche con gli sviluppi notevoli",
+      "titolo: \"Somme numeriche dagli sviluppi notevoli\""
+    ]
+  ],
+  "svolti/serie-di-potenze/7.md": [
+    [
+      "titolo: Serie di Taylor centrate in un punto diverso dall'origine",
+      "titolo: \"Serie di Taylor con centro diverso da zero\""
+    ]
+  ],
+  "svolti/serie-di-potenze/1.md": [
+    [
+      "titolo: Raggio e insieme di convergenza con il criterio del rapporto",
+      "titolo: \"Raggi di convergenza con il rapporto\""
+    ]
+  ],
+  "svolti/serie-di-potenze/5.md": [
+    [
+      "titolo: Sviluppi di MacLaurin per sostituzione e manipolazione",
+      "titolo: \"Sviluppi di MacLaurin per sostituzione\""
+    ]
+  ],
+  "svolti/serie-di-potenze/3.md": [
+    [
+      "titolo: Studio completo del comportamento agli estremi",
+      "titolo: \"Verifiche di convergenza agli estremi\""
+    ]
+  ],
+  "svolti/serie-di-potenze/6.md": [
+    [
+      "titolo: Sviluppi per derivazione e integrazione termine a termine",
+      "titolo: \"Derivazioni e integrazioni di serie\""
+    ]
+  ],
+  "svolti/serie-di-potenze/2.md": [
+    [
+      "titolo: Raggio e insieme di convergenza con il criterio della radice",
+      "titolo: \"Raggi di convergenza con la radice\""
+    ]
+  ],
+  "dafare/serie-di-fourier/4.md": [
+    [
+      "titolo: Serie di Fourier di un polinomio trigonometrico",
+      "titolo: \"Fourier di un polinomio trigonometrico\""
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/7.md": [
+    [
+      "titolo: Convergenza uniforme senza convergenza delle derivate",
+      "titolo: \"Limite uniforme e derivate divergenti\""
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/5.md": [
+    [
+      "titolo: Convergenza uniforme solo lontano dall'origine",
+      "titolo: \"Uniformità lontano dall'origine\""
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/3.md": [
+    [
+      "titolo: Convergenza uniforme su un intervallo limitato",
+      "titolo: \"Convergenza uniforme su intervallo limitato\""
+    ],
+    [
+      "f_n(x) = x \\, e^{-x/n} .",
+      "f_n(x) = x \\, e^{-\\frac xn} ."
+    ],
+    [
+      "Il limite puntuale è $f(x) = x$. Poiché $|f_n(x) - x| = x \\left( 1 - e^{-x/n} \\right) \\leq 1 - e^{-1/n} \\to 0$, la convergenza è uniforme su $[0, 1]$.",
+      "Il limite puntuale è $f(x) = x$. Poiché $|f_n(x) - x| = x \\left( 1 - e^{-\\frac xn} \\right) \\leq 1 - e^{-\\frac1n} \\to 0$, la convergenza è uniforme su $[0, 1]$."
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/13.md": [
+    [
+      "titolo: Serie uniformemente ma non totalmente convergente",
+      "titolo: \"Convergenza uniforme di serie alternata\""
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/11.md": [
+    [
+      "titolo: Convergenza totale di una serie trigonometrica",
+      "titolo: \"Convergenza totale di serie trigonometrica\""
+    ]
+  ],
+  "dafare/serie-di-potenze/1.md": [
+    [
+      "titolo: Insieme di convergenza con il criterio del rapporto",
+      "titolo: \"Insieme di convergenza con il rapporto\""
+    ]
+  ],
+  "dafare/serie-di-potenze/3.md": [
+    [
+      "titolo: Insieme di convergenza con il criterio della radice",
+      "titolo: \"Insieme di convergenza con la radice\""
+    ]
+  ],
+  "dafare/serie-di-potenze/6.md": [
+    [
+      "titolo: Serie centrata con convergenza in entrambi gli estremi",
+      "titolo: \"Convergenza in entrambi gli estremi\""
+    ]
+  ],
+  "dafare/serie-di-potenze/2.md": [
+    [
+      "titolo: Raggio di convergenza con coefficienti esponenziali",
+      "titolo: \"Raggio con coefficienti esponenziali\""
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/9.md": [
+    [
+      "\\lim_{n \\to +\\infty} \\int_1^2 \\frac{e^{x/n}}{x} \\, dx .",
+      "\\lim_{n \\to +\\infty} \\int_1^2 \\frac{e^{\\frac xn}}{x} \\, dx ."
+    ],
+    [
+      "Su $[1, 2]$ si ha $\\left| \\dfrac{e^{x/n}}{x} - \\dfrac{1}{x} \\right| \\leq e^{2/n} - 1 \\to 0$, quindi la convergenza è uniforme e",
+      "Su $[1, 2]$ si ha $\\left| \\dfrac{e^{\\frac xn}}{x} - \\dfrac{1}{x} \\right| \\leq e^{\\frac2n} - 1 \\to 0$, quindi la convergenza è uniforme e"
+    ],
+    [
+      "\\lim_{n \\to +\\infty} \\int_1^2 \\frac{e^{x/n}}{x}\\,dx = \\int_1^2 \\frac{dx}{x} = \\ln 2 .",
+      "\\lim_{n \\to +\\infty} \\int_1^2 \\frac{e^{\\frac xn}}{x}\\,dx = \\int_1^2 \\frac{dx}{x} = \\ln 2 ."
+    ]
+  ],
+  "dafare/successioni-e-serie-di-funzioni/6.md": [
+    [
+      "f_n(x) = x^{1/n}",
+      "f_n(x) = x^{\\frac1n}"
+    ]
+  ],
+  "dafare/serie-di-potenze/4.md": [
+    [
+      "Il rapporto tra i coefficienti oscilla tra $5$ e $\\dfrac{1}{125}$ e non ha limite; la radice $n$-esima vale $5^{-1 - (-1)^n/n} \\to \\dfrac{1}{5}$, quindi $R = 5$. In $x = \\pm 5$ il modulo del termine generale oscilla tra $\\dfrac{1}{5}$ e $5$ e non tende a $0$, perciò $E = (-5,\\, 5)$.",
+      "Il rapporto tra i coefficienti oscilla tra $5$ e $\\dfrac{1}{125}$ e non ha limite; la radice $n$-esima vale $5^{-1 - \\frac{(-1)^n}{n}} \\to \\dfrac{1}{5}$, quindi $R = 5$. In $x = \\pm 5$ il modulo del termine generale oscilla tra $\\dfrac{1}{5}$ e $5$ e non tende a $0$, perciò $E = (-5,\\, 5)$."
+    ]
+  ]
+}

@@ -51,7 +51,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.teoria}`}
   descrizione={descrizioneSeo}
-  seo={{ canonico: originale(materia, argomento, 'teoria'), titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
+  seo={{ canonico: originale(materia, argomento, 'teoria', undefined, lingua), titolo: SEO(lingua).teoria(arg.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'teoria', `${materia}/${argomento}`), schema: [{ ...{
   '@type': 'LearningResource', name: arg.titolo, description: descrizioneSeo, learningResourceType: 'Lesson', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

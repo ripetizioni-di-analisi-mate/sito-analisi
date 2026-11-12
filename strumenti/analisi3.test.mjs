@@ -46,7 +46,23 @@ test('chi acquista può usare 90 quiz per ciascuno degli 11 capitoli',async()=>{
  }
 });
 test('l’anteprima limita anche banchi con ordine differente',()=>{const a={b:[{n:3,id:'b/3'},{n:1,id:'b/1'}],a:Array.from({length:30},(_,i)=>({n:i+1,id:'a/'+(i+1)}))};assert.equal(Object.values(anteprimaAnalisi3(a)).flat().length,10);assert.deepEqual(anteprimaAnalisi3(a),anteprimaAnalisi3({a:a.a,b:a.b}));});
-test('i capitoli condivisi conservano contenuti e URL propri',()=>{for(const a of ['successioni-e-serie-di-funzioni','serie-di-potenze','serie-di-fourier']){const source=readFileSync(join(root,'src/content/teoria/analisi-2',a+'.md'),'utf8');const target=readFileSync(join(root,'src/content/teoria/analisi-3',a+'.md'),'utf8');assert.equal(target,source.replace(/\/analisi-2\/(successioni-e-serie-di-funzioni|serie-di-potenze|serie-di-fourier)(?=\/)/g,'/analisi-3/$1'));}});
+test('i capitoli condivisi conservano la base e integrano gli approfondimenti in italiano',()=>{
+ const capitoli=['successioni-e-serie-di-funzioni','serie-di-potenze','serie-di-fourier'];
+ const rimappa=(testo)=>testo.replace(/\/analisi-2\/(successioni-e-serie-di-funzioni|serie-di-potenze|serie-di-fourier)(?=\/)/g,'/analisi-3/$1');
+ const integrazioni=join(root,'src/contenuti-integrativi/analisi-3/it');
+ const precisazioni=JSON.parse(readFileSync(join(integrazioni,'precisazioni.json'),'utf8'));
+ for(const a of capitoli){
+  const percorso='teoria/'+a+'.md';
+  const base=(precisazioni[percorso]??[]).reduce((testo,[prima,dopo])=>testo.replace(prima,()=>dopo),
+   readFileSync(join(root,'src/content/teoria/analisi-2',a+'.md'),'utf8')).trimEnd();
+  const aggiunta=readFileSync(join(integrazioni,percorso),'utf8').trim();
+  const italiano=readFileSync(join(root,'src/content/teoria/analisi-3',a+'.md'),'utf8');
+  assert.equal(italiano,rimappa(base+'\n\n'+aggiunta+'\n'));
+  const baseEn=readFileSync(join(root,'src/content-en/teoria/analisi-2',a+'.md'),'utf8');
+  const inglese=readFileSync(join(root,'src/content-en/teoria/analisi-3',a+'.md'),'utf8');
+  assert.equal(inglese,rimappa(baseEn));
+ }
+});
 test('i principali integrali del banco coincidono con quadrature indipendenti',()=>{
  function simpson(f,a,b,n=10000){let s=f(a)+f(b);for(let i=1;i<n;i++)s+=(i%2?4:2)*f(a+(b-a)*i/n);return s*(b-a)/(3*n);}
  const vicino=(x,y,tol=1e-7)=>assert.ok(Math.abs(x-y)<tol,JSON.stringify({x,y}));

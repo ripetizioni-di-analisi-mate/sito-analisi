@@ -1,16 +1,18 @@
 # Analisi matematica 3 e Analisi complessa
 
-Corso universitario in 11 capitoli. I tre capitoli di successioni e serie di funzioni, serie di potenze e serie di Fourier vengono sincronizzati dalla sorgente Analisi 2 a ogni build. Gli URL appartengono ad Analisi 3, quindi l'acquisto del nuovo corso include questi capitoli senza richiedere l'acquisto di Analisi 2. Il generatore sostituisce soltanto i rimandi ai capitoli condivisi.
+Corso universitario in 11 capitoli. I capitoli su successioni e serie di funzioni, serie di potenze e serie di Fourier partono dal materiale di Analisi 2. La build aggiunge gli approfondimenti italiani di Analisi 3 e aggiorna i rimandi interni. Gli studenti di Analisi 3 usano gli URL del proprio corso.
 
-Gli otto capitoli nuovi contengono 56 schede per tipologia, 112 esercizi svolti, 112 tracce autonome con risultato e 112 quiz con spiegazione. Ogni tipologia ha sei casi parametrici distinti: due svolti, due tracce e due quiz. I numeri di casi non indicano altrettanti metodi diversi.
+La revisione italiana sviluppa ogni capitolo in 6–10 sezioni e circa 2.500–3.500 parole. La teoria usa i blocchi dei manuali, con ipotesi esplicite, dimostrazioni ed esempi. Le figure mostrano le quantità discusse nel testo. Le schede aggiuntive sviluppano tipi di problemi diversi e rimandano alla teoria usata. Restano disponibili 90 domande a tempo per capitolo.
 
 I moduli sono Analisi complessa (funzioni olomorfe, rami del logaritmo, armoniche, integrali complessi, Cauchy, Laurent, residui e Rouché); Analisi reale e funzionale (Lebesgue, convergenze, Lp, Hilbert, Banach e operatori); Fourier, Laplace ed equazioni alle derivate parziali. Le distribuzioni temperate e la formulazione debole sono introduzioni nei capitoli pertinenti.
 
-Prezzo: 55 EUR una tantum, imposte incluse, accesso personale senza scadenza. Prodotto Paddle pro_01m6v6fb9ejzs1q64vzxyz2q88; prezzo pri_01m6v6tp0e2vpg59k9qv555sf3; quantità minima e massima 1. Le prime tre schede di ogni capitolo seguono l'anteprima ordinaria. Prima dell'acquisto, il server limita i quiz a dieci ID fissi complessivi del corso. Nessuna nuova offerta di lezioni individuali.
+Il prezzo nel listino Stripe è di 55 EUR una tantum, imposte incluse, con accesso personale senza scadenza. Le prime tre schede di ogni capitolo seguono l'anteprima ordinaria. Prima dell'acquisto, il server limita i quiz a dieci ID fissi complessivi del corso.
+
+Le serie di Fourier usano la normalizzazione del periodo indicata in ciascun esercizio. La trasformata sulla retta usa la frequenza angolare e il fattore di inversione `1/(2π)`. Laplace usa la trasformata unilatera e il tempo a partire da zero. I contorni complessi hanno verso positivo antiorario. La teoria degli spazi normati indica quando il campo è reale o complesso. Le equazioni alle derivate parziali esplicitano il dominio e i dati iniziali o al bordo.
 
 Il catalogo condiviso integra home, indice, ricerca, progressi, compatibilità, Pi e pacchetti a scelta. Il pacchetto Analisi 1+2 e i videocorsi esistenti conservano la propria composizione. I nuovi materiali sono in italiano; i metadati inglesi lo dichiarano.
 
-Rigenerazione delle schede: `node strumenti/genera-analisi3.mjs`. Il banco revisionabile è `strumenti/analisi3/banco.json`. Teorie originali in `src/content/teoria/analisi-3`. I capitoli comuni non hanno una seconda sorgente editoriale.
+I Markdown degli otto capitoli propri di Analisi 3 stanno in `src/content/{teoria,svolti,dafare}/analisi-3`. Le integrazioni ai tre capitoli condivisi stanno in `src/contenuti-integrativi/analisi-3/it`. Per recuperare file mancanti dal banco iniziale si può usare `node strumenti/genera-analisi3.mjs`, che conserva i Markdown già presenti.
 
 La build esegue la sincronizzazione, il controllo delle formule con KaTeX, frontmatter, blocchi, ancore, opzioni e conteggi; poi compila il sito e verifica l'accesso nel Worker reale con risorse locali finte, oltre a quadrature e residui numerici indipendenti. Non si effettuano acquisti reali né si scrivono dati negli account degli studenti.
 

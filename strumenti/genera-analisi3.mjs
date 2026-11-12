@@ -1,10 +1,10 @@
-// Rigenera le schede dai casi originali revisionabili; lascia inalterata la teoria.
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+// Ripristina i file mancanti dal banco iniziale. Le schede e le tracce curate in Markdown restano la sorgente editoriale.
+import {existsSync,readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,dirname} from 'node:path';
 const root=new URL('..',import.meta.url).pathname;
 const bank=JSON.parse(readFileSync(join(root,'strumenti/analisi3/banco.json'),'utf8'));
 const md=(data,body)=>'---\n'+Object.entries(data).map(([k,v])=>k+': '+JSON.stringify(v)).join('\n')+'\n---\n\n'+body.trim()+'\n';
-const write=(p,data,body)=>{const out=join(root,p);mkdirSync(dirname(out),{recursive:true});writeFileSync(out,md(data,body));};
+const write=(p,data,body)=>{const out=join(root,p);if(existsSync(out))return;mkdirSync(dirname(out),{recursive:true});writeFileSync(out,md(data,body));};
 for(const [slug,families] of Object.entries(bank)){
  let nq=0,nd=0;
  for(let j=0;j<families.length;j++){
