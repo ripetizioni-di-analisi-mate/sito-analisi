@@ -12,7 +12,7 @@ A force acting on a body is **conservative** when the work it does on the body d
 
 The weight of a body near the surface of the Earth, the force of an ideal spring and the gravitational attraction between two bodies are conservative. Kinetic friction and the resistance of a fluid are nonconservative, since the work they do grows with the length of the path travelled.
 
-::grafico{punti="0,0,pieno,A;4,3,pieno,B" linee="0,0 4,3;0,0 4,0 4,3" xmin=-0.9 xmax=5.2 ymin=-0.9 ymax=4 uguale=1 nomi="x,y" titolo="Two paths joining $A$ and $B$. A conservative force does the same work along both; for the weight that work is $mg\,(y_A - y_B)$, which depends on the two heights alone"}
+::grafico{punti="1,3,pieno,A;5,0,pieno,B" linee="1,3 5,0;1,3 1,0 5,0" xmin=-0.9 xmax=6.2 ymin=-0.9 ymax=4 uguale=1 nomi="x,y" titolo="Two paths joining $A$ and $B$. A conservative force does the same work along both; for the weight that work is $mg\,(y_A - y_B)$, which depends on the two heights alone"}
 :::
 
 ::::teorema{#closed-path-work titolo="Work of a conservative force around a closed path"}
@@ -252,7 +252,7 @@ The right side is an antiderivative of $-F_x$, hence differentiating both sides 
 
 The relation turns a single function into the whole dynamics of the motion along a line. For $U(y) = mgy$ it returns $F_y = -mg$, the weight; for $U(x) = \dfrac{1}{2}kx^2$ it returns $F_x = -kx$, Hooke's law. Where $U$ decreases the derivative is negative and the force is positive, so the force always points towards the positions of lower potential energy.
 
-::grafico{f="x^3-3*x;3-3*x^2" punti="-1,2,pieno;1,-2,pieno" etichette="-1.45,3.2,U;0.35,3.6,Fx" xmin=-2.5 xmax=2.5 ymin=-6.5 ymax=6.5 titolo="$U(x) = x^3 - 3x$ in joules, with $x$ in meters, and the force $F_x = -\dfrac{dU}{dx} = 3 - 3x^2$ in newtons (dashed): the force vanishes at the stationary points $x = \pm 1\,\mathrm{m}$ of $U$"}
+::grafico{f="x^3-3*x;3-3*x^2" punti="-1,2,pieno;1,-2,pieno" legenda="U = x^3 - 3x;F_x = 3 - 3x^2" xmin=-2.5 xmax=2.5 ymin=-6.5 ymax=6.5 titolo="$U(x) = x^3 - 3x$ in joules, with $x$ in meters, and the force $F_x = -\dfrac{dU}{dx} = 3 - 3x^2$ in newtons (dashed): the force vanishes at the stationary points $x = \pm 1\,\mathrm{m}$ of $U$"}
 ::::
 
 :::osservazione{#three-dimensional-case titolo="Motion in space"}
