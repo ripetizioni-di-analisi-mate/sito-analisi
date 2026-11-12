@@ -160,7 +160,7 @@ $$
 $$
 Le componenti si chiamano velocità radiale $\dot{r}$ e velocità trasversa $r\dot{\vartheta}$, accelerazione radiale $\ddot{r} - r\dot{\vartheta}^2$ e accelerazione trasversa $r\ddot{\vartheta} + 2\dot{r}\dot{\vartheta}$. Il termine $-r\dot{\vartheta}^2$ è l'accelerazione centripeta del moto circolare e il termine $2\dot{r}\dot{\vartheta}$ è il termine di Coriolis, che compare ogni volta che il punto si allontana dal centro mentre il raggio ruota.
 
-Per un punto che si muove su una guida rettilinea rotante, con $r = u t$ e $\vartheta = \omega t$, si ottiene $\vec{v}_P = u\,\hat{u}_r + u\omega t\,\hat{u}_\vartheta$ e $\vec{a}_P = -u\omega^2 t\,\hat{u}_r + 2u\omega\,\hat{u}_\vartheta$: l'accelerazione ha una componente trasversa costante anche se il punto si muove di moto uniforme lungo la guida.
+Per un punto che si muove su una guida rettilinea rotante, con $r = u t$ e $\vartheta = \omega t$, si ottiene $\vec{v}_P = u\,\hat{u}_r + u\omega t\,\hat{u}_\vartheta$ e $\vec{a}_P = -u\omega^2 t\,\hat{u}_r + 2u\omega\,\hat{u}_\vartheta$, quindi l'accelerazione ha una componente trasversa costante anche se il punto si muove di moto uniforme lungo la guida.
 
 :::dimostrazione
 Si parte da $P - O = r\,\hat{u}_r$ e si deriva rispetto al tempo il prodotto fra la funzione $r$ e il versore $\hat{u}_r$:

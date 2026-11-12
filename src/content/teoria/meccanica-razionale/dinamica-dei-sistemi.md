@@ -114,7 +114,7 @@ $$
 $$
 e per un sistema continuo $\vec{K}_O = \displaystyle\int_S (P - O) \wedge \vec{v}\,dm$. Per un sistema piano nel piano $Oxy$ il vettore $\vec{K}_O$ è parallelo a $\hat{k}$, e la sua componente è positiva quando il sistema gira attorno a $O$ in verso antiorario. Il momento angolare si misura in $\mathrm{kg\,m^2/s}$.
 
-::struttura{punti="0,0,O,pieno;3,2,P_i,pieno" frecce="0,0,2.9,1.93;3,2,5.1,2.85" etichette="1.75,0.8,P_i − O;4.5,2.0,m_i v_i" titolo="Il momento angolare somma i momenti dei vettori $m_i \vec{v}_i$ rispetto al polo $O$"}
+::struttura{punti="0,0,,pieno;3,2,P_i,pieno" frecce="0,0,2.9,1.93;3,2,5.2,1.2" etichette="-0.3,-0.35,O;1.75,0.8,P_i − O;4.45,1.1,m_i v_i" titolo="Il momento angolare somma i momenti dei vettori $m_i \vec{v}_i$ rispetto al polo $O$"}
 :::
 
 ::::teorema{#seconda-equazione-cardinale titolo="Seconda equazione cardinale della dinamica"}

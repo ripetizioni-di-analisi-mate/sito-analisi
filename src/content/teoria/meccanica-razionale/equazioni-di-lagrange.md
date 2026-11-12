@@ -5,7 +5,7 @@ sommario: Come si scrivono le equazioni del moto di un sistema olonomo a vincoli
 
 ## Sistemi olonomi a vincoli ideali
 
-Le equazioni cardinali della dinamica contengono le reazioni vincolari, che sono incognite, e per un sistema di più corpi vanno scritte corpo per corpo, perciò il numero delle equazioni cresce con il numero dei vincoli. Il metodo di Lagrange elimina le reazioni dal principio e riduce il problema a tante equazioni quanti sono i gradi di libertà.
+Le equazioni cardinali della dinamica contengono le reazioni vincolari, che sono incognite, e per un sistema di più corpi vanno scritte corpo per corpo, perciò il numero delle equazioni cresce con il numero dei vincoli. Il metodo di Lagrange elimina fin dall'inizio le reazioni dei vincoli ideali e riduce il problema a tante equazioni quanti sono i gradi di libertà.
 
 :::richiamo{titolo="Coordinate lagrangiane e spostamenti virtuali"}
 Un sistema di $N$ punti $P_1, \dots, P_N$ soggetto a vincoli olonomi con $n$ gradi di libertà ammette coordinate lagrangiane $q_1, \dots, q_n$ tali che
@@ -104,7 +104,7 @@ Ogni addendo è non negativo, dunque la somma è nulla soltanto se il vettore $\
 :::esempio{titolo="Matrice cinetica di un'asta con un estremo su una guida"}
 L'asta omogenea $AB$, di massa $m$ e lunghezza $2\ell$, ha l'estremo $A$ su una guida orizzontale liscia e ruota attorno ad $A$ nel piano verticale. Si scelgono come coordinate lagrangiane l'ascissa $x$ di $A$ e l'angolo $\vartheta$ che l'asta forma con la verticale discendente.
 
-::struttura{nodi="A,2,0;B,3.376,-1.966" aste="A-B" vincoli="A,carrello,90" linee="-0.6,0 5.2,0;0,0 0.3,0.2 0.7,-0.2 1.1,0.2 1.5,-0.2 1.8,0 2,0" tratteggi="2,0 2,-2.3" punti="0,0,O;2.688,-0.983,G,baricentro" etichette="1,-0.42,k;2.26,-1.1,ϑ" quote="0 0,A,x,-0.62" titolo="Asta con l'estremo $A$ su una guida orizzontale: due gradi di libertà, le coordinate lagrangiane $x$ e $\vartheta$"}
+::struttura{nodi="A,2,0;B,3.376,-1.966" aste="A-B" vincoli="A,carrello,90" linee="-0.6,0 5.2,0" tratteggi="2,0 2,-2.3" punti="0,0,O;2.688,-0.983,G,baricentro" etichette="2.26,-1.1,ϑ" quote="0 0,A,x,-0.62" titolo="Asta con l'estremo $A$ su una guida orizzontale: due gradi di libertà, le coordinate lagrangiane $x$ e $\vartheta$"}
 
 Il centro di massa $G$ è il punto medio dell'asta, quindi
 $$
@@ -313,7 +313,7 @@ La coordinata $q_h$ si dice **ciclica**, o *assente*, quando la lagrangiana non 
 :::
 
 :::teorema{#coordinata-ciclica titolo="Conservazione del momento cinetico"}
-Se la coordinata $q_h$ è ciclica, allora il momento cinetico coniugato $p_h$ è costante lungo ogni moto del sistema. L'uguaglianza segue immediatamente dall'equazione di Lagrange di indice $h$, che si riduce a $\dfrac{d p_h}{dt} = 0$. La costante $p_h$ si calcola con i dati iniziali e lega fra loro le velocità generalizzate, riducendo di uno il numero delle incognite: in un sistema a due gradi di libertà con una coordinata ciclica resta una sola equazione differenziale da studiare.
+Se la coordinata $q_h$ è ciclica, allora il momento cinetico coniugato $p_h$ è costante lungo ogni moto del sistema. La conservazione segue immediatamente dall'equazione di Lagrange di indice $h$, che si riduce a $\dfrac{d p_h}{dt} = 0$. La costante $p_h$ si calcola con i dati iniziali e lega fra loro le velocità generalizzate, riducendo di uno il numero delle incognite: in un sistema a due gradi di libertà con una coordinata ciclica resta una sola equazione differenziale da studiare.
 :::
 
 ::::teorema{#funzione-di-jacobi titolo="Integrale generalizzato dell'energia"}
@@ -329,7 +329,7 @@ perciò se la lagrangiana non dipende esplicitamente dal tempo la funzione di Ja
 $$
 \mathcal{H} = T_2 - T_0 + V .
 $$
-La funzione di Jacobi è quindi un integrale primo anche per sistemi con vincoli mobili di legge indipendente dal tempo, come una guida che ruota con velocità angolare costante, dove l'energia meccanica $T + V$ non si conserva.
+La funzione di Jacobi è quindi un integrale primo anche per sistemi a vincoli mobili, purché la lagrangiana non dipenda esplicitamente dal tempo, come accade per una guida che ruota con velocità angolare costante, dove l'energia meccanica $T + V$ non si conserva.
 
 :::dimostrazione
 Si deriva $\mathcal{H}$ rispetto al tempo lungo il moto:

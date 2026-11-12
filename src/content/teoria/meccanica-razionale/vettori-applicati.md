@@ -323,7 +323,7 @@ C - O = \frac{\displaystyle\sum_{i=1}^{n} c_i\,(P_i - O)}{\displaystyle\sum_{i=1
 $$
 Il punto $C$ dipende dai coefficienti $c_i$ e dai punti di applicazione, e non dipende dal versore $\hat{u}$: se tutti i vettori ruotano dello stesso angolo attorno ai rispettivi punti di applicazione, la retta d'azione della risultante ruota attorno a $C$. Con lo stesso calcolo, applicato ai pesi delle parti di un corpo, si ottiene il centro di massa, trattato nell'argomento sulla geometria delle masse.
 
-::struttura{tratteggi="0,0 4,0 4,2 0,2 0,0" punti="0,0;4,0;4,2;0,2;2,1.4,C,centro" forze="0 0.6,0,0.6,;4 1.2,0,1.2,;4 3.8,0,1.8,;0 4.4,0,2.4," reazioni="2 3.6,0,2.2," etichette="0.2,0.62,F;4.2,1.22,2F;4.2,3.82,3F;0.2,4.42,4F;2.2,3.5,R;-0.45,-0.3,P_1;4.2,-0.3,P_2;4.2,1.7,P_3;-0.45,1.7,P_4" titolo="Quattro vettori paralleli di coefficienti $F$, $2F$, $3F$, $4F$ e la risultante applicata nel centro $C$ di coordinate $\left( 2a, \dfrac{7a}{5} \right)$"}
+::struttura{tratteggi="0,0 4,0 4,2 0,2 0,0" punti="0,0;4,0;4,2;0,2;2,1.4,C,centro" forze="0 0.6,0,0.6,;4 1.2,0,1.2,;4 3.8,0,1.8,;0 4.4,0,2.4," reazioni="2 3.6,0,2.2," quote="0 0,4 0,4a;4 0,4 2,2a,1.4" etichette="0.2,0.62,F;4.2,1.22,2F;4.2,3.82,3F;0.2,4.42,4F;2.2,3.5,R;-0.45,-0.3,P_1;4.2,-0.3,P_2;4.2,1.7,P_3;-0.45,1.7,P_4" titolo="Quattro vettori paralleli di coefficienti $F$, $2F$, $3F$, $4F$ e la risultante applicata nel centro $C$ di coordinate $\left( 2a, \dfrac{7a}{5} \right)$"}
 
 :::dimostrazione
 La risultante è $\sum_i c_i\,\hat{u}$. Si pone $c = \sum_i c_i$ e si indica con $C$ il punto definito nell'enunciato, cosicché $\sum_i c_i\,(P_i - O) = c\,(C - O)$. Per la proprietà distributiva del prodotto vettoriale il momento risultante rispetto a $O$ è

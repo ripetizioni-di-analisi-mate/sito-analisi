@@ -383,7 +383,7 @@ Il luogo dei punti $P$ tali che, posto $\vec{r} = P - O$, risulti $\vec{r} \cdot
 ## Momenti d'inerzia dei corpi omogenei notevoli
 
 ::::teorema{#momenti-notevoli titolo="Momenti d'inerzia di corpi omogenei"}
-Per i corpi omogenei di massa $m$ valgono i valori seguenti, tutti riferiti ad assi baricentrici.
+Per i corpi omogenei di massa $m$ valgono i valori seguenti, riferiti ad assi baricentrici tranne dove è indicato un altro asse.
 
 - Asta di lunghezza $\ell$, asse ortogonale all'asta: $I = \dfrac{m\ell^2}{12}$; rispetto all'asse ortogonale per un estremo, $I = \dfrac{m\ell^2}{3}$.
 - Anello, cioè circonferenza materiale, di raggio $R$: $I = mR^2$ rispetto all'asse ortogonale al piano per il centro, $I = \dfrac{mR^2}{2}$ rispetto a un diametro.

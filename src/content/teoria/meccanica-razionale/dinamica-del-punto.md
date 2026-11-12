@@ -42,7 +42,7 @@ $$
 \dot{\vec{z}}_2 = \dfrac{1}{m}\,\vec{F}(\vec{z}_1, \vec{z}_2, t)
 \end{cases}
 $$
-quindi, se $\vec{F}$ è regolare, il teorema di esistenza e unicità si applica, quindi la posizione e la velocità a un istante $t_0$ determinano il moto. I sei numeri $P(t_0)$ e $\vec{v}_P(t_0)$ sono i **dati iniziali**.
+perciò, se $\vec{F}$ è regolare, il teorema di esistenza e unicità si applica. Ne segue che la posizione e la velocità a un istante $t_0$ determinano il moto. I sei numeri $P(t_0)$ e $\vec{v}_P(t_0)$ sono i **dati iniziali**.
 
 Si incontrano due problemi di segno opposto. Nel problema diretto la forza è assegnata e si cerca il moto, perciò si integra l'equazione; nel problema inverso il moto è assegnato e si cerca la forza, perciò si deriva due volte la legge oraria e si moltiplica per $m$.
 :::
@@ -233,7 +233,7 @@ Perciò $\dfrac{d}{dt}(T - U) = 0$, cioè $T - U = T + V$ è costante.
 ::::
 
 :::osservazione{#reazioni-lisce titolo="Quando la reazione vincolare ha potenza nulla"}
-Se il vincolo è **liscio e fisso**, la reazione $\vec{\Phi}$ è ortogonale alla curva o alla superficie vincolare, mentre la velocità è tangente a essa; perciò $\vec{\Phi} \cdot \vec{v}_P = 0$ e l'ipotesi del teorema di conservazione è soddisfatta. Lo stesso vale per un filo inestensibile teso, perché la tensione è diretta lungo il filo e la velocità del punto è ortogonale a esso. Con un vincolo mobile, oppure con attrito, la potenza della reazione in generale non è nulla.
+Se il vincolo è **liscio e fisso**, la reazione $\vec{\Phi}$ è ortogonale alla curva o alla superficie vincolare, mentre la velocità è tangente a essa; perciò $\vec{\Phi} \cdot \vec{v}_P = 0$ e l'ipotesi del teorema di conservazione è soddisfatta. Lo stesso vale per un filo inestensibile teso e fissato per un estremo, perché la tensione è diretta lungo il filo e la velocità del punto è ortogonale a esso. Con un vincolo mobile, oppure con attrito, la potenza della reazione in generale non è nulla.
 :::
 
 ## Moti unidimensionali conservativi
@@ -290,7 +290,7 @@ $$
 $$
 e il versore binormale è $\hat{b} = \hat{t} \wedge \hat{n}$. Si rimanda all'argomento sulla cinematica del punto e i moti relativi.
 
-::grafico{f="0.18*x^2" legenda=0 uguale=1 vettori="2,0.72,3.22,1.59;2,0.72,0.86,1.59,n" etichette="2.98,1.0,t" punti="2,0.72,pieno,P" xmin=-3.2 xmax=4.0 ymin=-0.6 ymax=2.4 titolo="Versore tangente $\hat{t}$ e versore normale principale $\hat{n}$ nel punto $P$ di una curva piana"}
+::grafico{f="0.18*x^2" legenda=0 uguale=1 vettori="2,0.72,3.22,1.59;2,0.72,1.125,1.936,n" etichette="2.98,1.0,t" punti="2,0.72,pieno,P" xmin=-3.2 xmax=4.0 ymin=-0.6 ymax=2.4 titolo="Versore tangente $\hat{t}$ e versore normale principale $\hat{n}$ nel punto $P$ di una curva piana"}
 :::
 
 ::::teorema{#equazioni-intrinseche titolo="Equazioni del moto in forma intrinseca"}
@@ -304,7 +304,7 @@ m\,\dfrac{\dot{s}^2}{\varrho} = \vec{F} \cdot \hat{n} + \vec{\Phi} \cdot \hat{n}
 $$
 La prima equazione contiene la sola incognita $s(t)$, perciò determina il moto; le altre due danno poi la reazione vincolare, nota la legge oraria. La prima equazione è quindi l'**equazione pura del moto** e le altre due sono le **equazioni delle reazioni**.
 
-::grafico{f="0.18*x^2" legenda=0 uguale=1 vettori="2,0.72,2,-0.38,mg;2,0.72,0.86,1.59,Φ" punti="2,0.72,pieno,P" xmin=-3.2 xmax=4.0 ymin=-0.9 ymax=2.4 titolo="Punto vincolato a una guida liscia: il peso $m g$ e la reazione $\vec{\Phi}$, ortogonale alla guida"}
+::grafico{f="0.18*x^2" legenda=0 uguale=1 vettori="2,0.72,2,-0.38,mg;2,0.72,1.125,1.936,Φ" punti="2,0.72,pieno,P" xmin=-3.2 xmax=4.0 ymin=-0.9 ymax=2.4 titolo="Punto vincolato a una guida liscia: il peso $m g$ e la reazione $\vec{\Phi}$, ortogonale alla guida"}
 
 :::dimostrazione
 L'equazione fondamentale per il punto vincolato è $m\,\vec{a}_P = \vec{F} + \vec{\Phi}$. Si sostituisce l'espressione intrinseca dell'accelerazione e si moltiplica scalarmente per i tre versori della terna, che sono ortonormali. La componente tangenziale dell'accelerazione è $\ddot{s}$, quella normale è $\dfrac{\dot{s}^2}{\varrho}$ e quella binormale è nulla; la componente tangenziale di $\vec{\Phi}$ è nulla per l'ipotesi di vincolo liscio. Si ottengono così le tre equazioni dell'enunciato.

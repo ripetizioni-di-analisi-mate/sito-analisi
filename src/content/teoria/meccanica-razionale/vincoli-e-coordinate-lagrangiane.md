@@ -124,7 +124,7 @@ e il modulo della velocità risulta $|\vec{v}_P| = R\,\sqrt{\dot{\vartheta}^2 + 
 :::
 
 :::esempio{#asta-su-due-guide titolo="Asta con gli estremi su due guide ortogonali"}
-Un'asta $AB$ di lunghezza $\ell$ ha l'estremo $A$ su una guida verticale e l'estremo $B$ su una guida orizzontale, e le due guide si incontrano in $O$. L'asta è un corpo rigido nel piano, quindi parte da tre gradi di libertà; i due manicotti impongono $x_A = 0$ e $y_B = 0$, perciò resta un grado di libertà. Come coordinata lagrangiana si prende l'angolo $\vartheta$ che l'asta forma con la guida orizzontale, e allora
+Un'asta $AB$ di lunghezza $\ell$ ha l'estremo $A$ su una guida verticale e l'estremo $B$ su una guida orizzontale, e le due guide si incontrano in $O$. L'asta è un corpo rigido nel piano, quindi parte da tre gradi di libertà; i due carrelli impongono $x_A = 0$ e $y_B = 0$, perciò resta un grado di libertà. Come coordinata lagrangiana si prende l'angolo $\vartheta$ che l'asta forma con la guida orizzontale, e allora
 $$
 A - O = \ell \sin\vartheta\,\hat{\jmath} ,
 \qquad
@@ -222,7 +222,7 @@ $$
 -\dfrac{\partial \lambda}{\partial \vartheta}\,\cos\vartheta + \lambda \sin\vartheta = 0
 \end{cases}
 $$
-Si moltiplica la prima equazione per $\cos\vartheta$, la seconda per $\sin\vartheta$ e si sottrae la seconda dalla prima; i termini in $\dfrac{\partial \lambda}{\partial \vartheta}$ si cancellano e resta $\lambda\,(\cos^2\vartheta + \sin^2\vartheta) = 0$, cioè $\lambda = 0$. Questo contraddice l'ipotesi che $\lambda$ non sia mai nulla, perciò la funzione $f$ non esiste e il vincolo non è riducibile a una relazione fra le coordinate.
+Si moltiplica la prima equazione per $\cos\vartheta$, la seconda per $\sin\vartheta$ e si sommano le due equazioni; i termini in $\dfrac{\partial \lambda}{\partial \vartheta}$ si cancellano e resta $\lambda\,(\cos^2\vartheta + \sin^2\vartheta) = 0$, cioè $\lambda = 0$. Questo contraddice l'ipotesi che $\lambda$ non sia mai nulla, perciò la funzione $f$ non esiste e il vincolo non è riducibile a una relazione fra le coordinate.
 :::
 ::::
 
