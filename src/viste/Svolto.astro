@@ -13,7 +13,7 @@ interface Props { lingua: Lingua; materia: string; argomento: string; n: string 
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
 const id = `${materia}/${argomento}/${n}`;
-const fratelli = perArgomento(await getCollection('svolti'), materia, argomento);
+const fratelli = perArgomento(await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti'), materia, argomento);
 const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'svolti', id);
 const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'svolti', v.id)).voce.data.titolo;
@@ -55,14 +55,15 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
     <p class="salta-esercizi">{t.vaiA}: {salti.map((s: { slug: string; text: string }) => <a href={`#${s.slug}`}>{s.text}</a>)}</p>
   )}
   <div class="modalita-passi" hidden>
-    <label><input type="checkbox" data-passi /> <span>{lingua === 'en' ? 'One step at a time' : 'Un passaggio alla volta'}</span></label>
-    <small>{lingua === 'en' ? 'After the statement, the solution appears one step at a time.' : 'Dopo la traccia, lo svolgimento compare un passaggio alla volta.'}</small>
+    <label><input type="checkbox" data-passi /> <span>{lingua === 'en' ? 'One step at a time' : lingua === 'es' ? 'Un paso cada vez' : 'Un passaggio alla volta'}</span></label>
+    <small>{lingua === 'en' ? 'After the statement, the solution appears one step at a time.' : lingua === 'es' ? 'Tras el enunciado, la solución aparece paso a paso.' : 'Dopo la traccia, lo svolgimento compare un passaggio alla volta.'}</small>
   </div>
   <div class="testo-studio"><Content /></div>
 </Base>
 
 <script is:inline define:vars={{ testi: lingua === 'en'
   ? { prossimo: 'Show the next step', tutto: 'show everything', di: 'of' }
+  : lingua === 'es' ? { prossimo: 'Mostrar el paso siguiente', tutto: 'mostrar todo', di: 'de' }
   : { prossimo: 'Mostra il passaggio successivo', tutto: 'mostra tutto', di: 'di' } }}>
   // Modalità «un passaggio alla volta»: dopo la traccia (segno .fine-traccia) i passaggi dello svolgimento
   // e la spiegazione si scoprono uno alla volta. La scelta resta nel browser. Senza JavaScript la scheda è quella di sempre.

@@ -16,7 +16,10 @@ const illinoisSyllabus = (number, title) => ({
 export const mathematics = [
   course('precalculus', 'Precalculus', 'Build fluency with the functions and algebra used in introductory calculus.',
     'High-school algebra and coordinate geometry.',
-    [purdue, illinois('MATH/115', 'MATH 115 Precalculus')],
+    [
+      { title: 'Purdue University · MA 15800 Precalculus', url: 'https://www.math.purdue.edu/academic/courses/semester/202710/ma15800/' },
+      illinoisSyllabus(115, 'MATH 115 Preparation for Calculus'),
+    ],
     [
       L('Functions and domains', 'A function assigns exactly one output to each allowed input. To find its real domain, apply each restriction before combining them. A denominator cannot be zero. An even root requires a nonnegative radicand.',
         'For f(x) = √(x − 2)/(x − 4), the root gives x ≥ 2 and the denominator excludes x = 4. The domain is [2, 4) ∪ (4, ∞).',

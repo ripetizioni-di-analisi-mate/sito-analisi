@@ -89,4 +89,9 @@ const formulari = defineCollection({
 // Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
 const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
 
-export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, teoria_us, svolti_us, dafare_us, domande_us, formulari, formulari_en };
+const teoria_es = defineCollection({ loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content-es/teoria' }), schema: teoria.schema });
+const svolti_es = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/svolti' }), schema: svolti.schema });
+const dafare_es = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/dafare' }), schema: dafare.schema });
+const domande_es = defineCollection({ loader: senzaHtml('./src/content-es/domande'), schema: domande.schema });
+
+export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, teoria_es, svolti_es, dafare_es, domande_es, teoria_us, svolti_us, dafare_us, domande_us, formulari, formulari_en };

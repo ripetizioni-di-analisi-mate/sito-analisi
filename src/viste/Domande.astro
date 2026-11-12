@@ -13,6 +13,7 @@ import { url } from '../lib/url';
 interface Props { lingua: Lingua; materia: string; argomento: string; totale: number; usa?: boolean }
 const { lingua, materia, argomento, totale, usa = false } = Astro.props;
 const en = lingua === 'en';
+const es = lingua === 'es';
 const m = usa ? materiaUsa(materia)! : materiaL(lingua, materia);
 const semestreFiltro = materia.endsWith('-semestre-filtro');
 const senzaInglese = !en && (semestreFiltro || m.eserciziDaFare === false) && !(await catalogoDomande('en'))[materia];
@@ -40,7 +41,7 @@ const pref = prefisso(lingua);
 const hrefSezione = (sezione: string) => usa ? linkArgomentoUsa(materia, argomento, sezione) : link(lingua, `${base}/${sezione}`);
 const tornaAllaMateria = ripasso || m.eserciziDaFare === false;
 const hrefMateria = usa ? url(courseUrl(materia)) : link(lingua, '/' + materia);
-const hrefSblocca = usa ? url(courseUrl(materia) + '/sblocca') : link(lingua, '/' + materia + '/sblocca');
+const hrefSblocca = usa ? url(courseUrl(materia) + '/sblocca') : link(es ? 'it' : lingua, '/' + materia + '/sblocca') + (es ? '?lingua=it' : '');
 const hrefRitorno = tornaAllaMateria ? hrefMateria : hrefSezione('esercizi');
 const n = Math.min(DOMANDE_SESSIONE, totale);
 // Nome breve di ogni argomento, per indicare nel ripasso da quale argomento viene la domanda.
@@ -48,7 +49,14 @@ const brevi = Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve]));
 const comeScelte = en
   ? (totale > n ? `${n} multiple-choice questions chosen at random among the ${totale} ${ripasso ? `of all the topics of ${m.titolo}` : 'of this topic'}` : `${totale} multiple-choice questions ${ripasso ? `on all the topics of ${m.titolo}` : 'on this topic'}, in random order`)
   : (totale > n ? `${n} domande a risposta multipla scelte a caso tra le ${totale} ${ripasso ? `di tutti gli argomenti di ${m.titolo}` : 'di questo argomento'}` : `${totale} domande a risposta multipla ${ripasso ? `su tutti gli argomenti di ${m.titolo}` : 'su questo argomento'}, in ordine casuale`);
-const T = en ? {
+const T = es ? {
+  titolo: 'Preguntas cronometradas', descr: `Preguntas de opción múltiple sobre ${arg.titolo}. Tienes dos minutos por pregunta.`,
+  termina: 'Terminar la sesión', sommario: `La sesión incluye ${n} preguntas de opción múltiple en orden aleatorio. Tienes dos minutos para responder a cada una y verás la explicación después.`,
+  ospite: 'Puedes responder sin cuenta. Si creas una cuenta gratuita, se guardarán tus puntos y tus avances.', accedi: 'Crear una cuenta o iniciar sesión',
+  caricamento: 'Cargando la pregunta…', risposte: 'Respuestas', conferma: 'Confirmar respuesta', prossima: 'Siguiente pregunta', svolti: 'Ejercicios resueltos de este tema', nuovaSerie: 'Nueva serie de preguntas',
+  navigazione: 'Preguntas', precedente: '← Anterior', successiva: 'Siguiente →',
+  anteprima: 'Vista previa gratuita', bloccata: 'Esta pregunta requiere acceso completo al curso.', sblocca: 'Desbloquear el curso',
+} : en ? {
   titolo: personale ? 'Spaced review' : ripasso ? 'Review questions' : 'Timed questions', descr: ripasso ? `Review questions on all the topics of ${m.titolo}, two minutes each, with the explanation after every answer.` : `Multiple-choice questions on ${arg.titolo} (${m.titolo}), two minutes each, with the explanation after every answer.`,
   termina: 'End the session', sommario: personale ? `The questions of ${m.titolo} you got wrong come back here one day later; each correct answer given on the scheduled day moves the question further on, to 3 and then 7 days, and after three correct answers it leaves the review.` : `Each session offers ${comeScelte}, one at a time, two minutes each. The explanation appears after every answer.`,
   ospite: (anteprimaScienza || anteprimaUsa) ? 'Experience points and progress are saved with a free account.' : 'You can answer the questions without an account. Experience points, level and goals are saved with a free account.', accedi: 'Create an account or log in',
@@ -64,7 +72,17 @@ const T = en ? {
   anteprima: 'Anteprima gratuita', bloccata: 'Questa domanda è riservata a chi ha acquistato l’accesso completo alla materia.', sblocca: 'Sblocca la materia',
 };
 // Testi usati dallo script nel browser.
-const JS = en ? {
+const JS = es ? {
+  caricamento: T.caricamento, errore: 'No se han podido cargar las preguntas. Recarga la página.', bonus: 'Quedan § segundos para conseguir puntos extra por rapidez',
+  giusta: 'Respuesta correcta', scaduto: 'Se ha agotado el tiempo. La respuesta correcta es §', corretta: 'La respuesta correcta es §',
+  veloce: ' (con puntos extra por rapidez)', ripetuta: '. Mitad de puntos porque ya acertaste esta pregunta esta semana',
+  tardi: ' fuera de tiempo. No suma puntos', nonArrivata: 'No se ha podido enviar la respuesta. Recarga la página.',
+  spiegazione: 'Explicación', conclusa: 'Sesión de estudio completada', minuto: '1 minuto de estudio activo', minuti: '§ minutos de estudio activo', sessioneConclusa: 'Sesión completada',
+  unaCorretta: '1 respuesta correcta', piuCorrette: '§ respuestas correctas', su: 'de', righeCorrette: 'Respuestas correctas', righeStudio: 'Estudio activo', totale: 'Total',
+  numero: 'Pregunta § de', scaduto2: 'Se ha agotado el tiempo. Puedes responder sin sumar puntos o pasar a otra pregunta.',
+  numeroBloccato: 'Pregunta §, requiere acceso completo',
+  livello: 'Nivel', massimo: 'Nivel máximo', alLivello: 'para el nivel', obiettivi: 'Objetivos semanales', completato: 'Completado', tornaEsercizi: 'Volver a los ejercicios', tornaMateria: 'Volver al temario', percorso: 'Tu progreso',
+} : en ? {
   caricamento: T.caricamento, errore: 'The questions did not load. Reload the page.', bonus: 'Speed bonus for another § seconds',
   giusta: 'Correct answer', scaduto: 'Time is up. The correct answer is §', corretta: 'The correct answer is §',
   veloce: ' (with speed bonus)', ripetuta: ', half points because already answered correctly this week',

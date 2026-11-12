@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import { PERCORSI_STUDIO_ES } from '../../../../data/materiali-es.mjs';
+import Teoria from '../../../../viste/Teoria.astro';
+import SvoltiLista from '../../../../viste/SvoltiLista.astro';
+import Svolto from '../../../../viste/Svolto.astro';
+import DafareLista from '../../../../viste/DafareLista.astro';
+import Dafare from '../../../../viste/Dafare.astro';
+import Domande from '../../../../viste/Domande.astro';
+
+export async function getStaticPaths() {
+  const domande = await getCollection('domande_es');
+  return PERCORSI_STUDIO_ES.map((path) => {
+    const [, materia, argomento, ...parti] = path.split('/');
+    return {
+      params: { materia, argomento, parte: parti.join('/') },
+      props: { totale: parti[0] === 'domande' ? domande.filter((x) => x.id.startsWith(`${materia}/${argomento}/`)).length : 0 },
+    };
+  });
+}
+const { materia, argomento, parte } = Astro.params;
+const { totale } = Astro.props;
+const [sezione, n] = parte!.split('/');
+const p = { lingua: 'es' as const, materia: materia!, argomento: argomento! };
+---
+{sezione === 'teoria' && <Teoria {...p} />}
+{sezione === 'esercizi-svolti' && (n ? <Svolto {...p} n={n} /> : <SvoltiLista {...p} />)}
+{sezione === 'esercizi' && (n ? <Dafare {...p} n={n} /> : <DafareLista {...p} />)}
+{sezione === 'domande' && <Domande {...p} totale={totale} />}
