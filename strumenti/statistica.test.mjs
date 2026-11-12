@@ -30,7 +30,7 @@ async function banco(materie = null) {
     } },
     ARCHIVIO: { idFromName: () => 'test', get: () => ({ fetch: async (url) => {
       const p = new URL(url).pathname;
-      if (p === '/inv-sconto' || p === '/bv-stato') return Response.json({});
+      if (p === '/promo-offerta' || p === '/inv-sconto' || p === '/bv-stato') return Response.json({});
       assert.equal(p, '/sessione');
       return Response.json(materie === null ? null : { email: 'studente@example.test', nome: 'Studente', materie, versione: 1 });
     } }) },
