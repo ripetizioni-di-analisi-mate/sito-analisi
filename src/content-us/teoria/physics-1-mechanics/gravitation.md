@@ -63,7 +63,7 @@ The presence of a third body changes neither the magnitude nor the direction of 
 
 The principle reduces every gravitational problem to a sum of two-body forces, and the sum is carried out in components, one axis at a time.
 
-::grafico{assi=0 uguale=1 punti="0,0,pieno;4,0,pieno;0,3,pieno" vettori="0,0,2.2,0,F₂;0,0,0,1.5,F₃;0,0,2.2,1.5,F" segmenti="2.2,0,2.2,1.5;0,1.5,2.2,1.5" etichette="-0.55,-0.35,m;4.05,-0.35,m₂;-0.6,3.05,m₃" xmin=-1.2 xmax=4.8 ymin=-1 ymax=3.6 titolo="The force on $m$ is the vector sum of the attraction of $m_2$ and the attraction of $m_3$"}
+::grafico{assi=0 uguale=1 punti="0,0,pieno;4,0,pieno;0,3,pieno" vettori="0,0,2.2,0,F₂;0,0,0,1.5,F₃;0,0,2.2,1.5" segmenti="2.2,0,2.2,1.5;0,1.5,2.2,1.5" etichette="-0.55,-0.35,m;4.05,-0.35,m₂;-0.6,3.05,m₃;2.35,1.78,F" xmin=-1.2 xmax=4.8 ymin=-1 ymax=3.6 titolo="The force on $m$ is the vector sum of the attraction of $m_2$ and the attraction of $m_3$"}
 :::
 
 :::definizione{#gravitational-field titolo="Gravitational field"}
@@ -159,7 +159,7 @@ which is the thesis.
 
 The two theorems together give the field at every distance from the center of a uniform planet, a result used in the chapter on oscillations, since a body dropped into a tunnel through the center is subject to a force proportional to the displacement and performs simple harmonic motion.
 
-::grafico{curve="t,t,0,1;t,1/t^2,1,4" punti="1,1,pieno" segmenti="1,0,1,1;0,1,1,1" nomi="r,g" legenda=0 etichette="0.93,-0.14,R;0.13,1.13,g₀;2.45,0.33,∝ r⁻²;0.32,0.66,∝ r" xmin=-0.35 xmax=4.4 ymin=-0.25 ymax=1.45 titolo="Field of a uniform sphere: it grows in proportion to $r$ inside and falls as $\dfrac{1}{r^2}$ outside, with the maximum $g_0 = \dfrac{GM}{R^2}$ at the surface"}
+::grafico{curve="t,t,0,1;t,1/t^2,1,4" punti="1,1,pieno" segmenti="1,0,1,1;0,1,1,1" nomi="r,g" legenda=0 etichette="1.08,0.2,R;0.13,1.13,g₀;2.45,0.33,∝ r⁻²;0.32,0.66,∝ r" xmin=-0.35 xmax=4.4 ymin=-0.25 ymax=1.45 titolo="Field of a uniform sphere: it grows in proportion to $r$ inside and falls as $\dfrac{1}{r^2}$ outside, with the maximum $g_0 = \dfrac{GM}{R^2}$ at the surface"}
 ::::
 
 :::osservazione{#g-and-rotation titolo="The measured value of $g$"}
@@ -296,7 +296,7 @@ which is the thesis.
 
 The two formulas answer every question about a satellite from its radius alone. A satellite at $h = 400\,\mathrm{km}$ has $r = 6.77 \times 10^{6}\,\mathrm{m}$, hence $v = 7.67\,\mathrm{km/s}$ and $T = 5.54 \times 10^{3}\,\mathrm{s} = 92.4\,\mathrm{min}$. A larger orbit is slower in both senses, since $v$ decreases and $T$ increases with $r$.
 
-::grafico{assi=0 uguale=1 curve="3*cos(t),3*sin(t),0,6.29" punti="0,0,pieno;2.121,2.121,pieno" vettori="2.121,2.121,1.06,3.18,v;2.121,2.121,0.7,0.7,F" segmenti="0,0,-2.121,-2.121" etichette="0.1,-0.6,M;3.1,2.1,m;-1.45,-0.95,r" xmin=-3.8 xmax=4.2 ymin=-3.8 ymax=4 titolo="On a circular orbit the attraction $F = G\,\dfrac{Mm}{r^2}$ is directed towards the center and the velocity is tangent to the orbit"}
+::grafico{assi=0 uguale=1 curve="3*cos(t),3*sin(t),0,6.29" punti="0,0,pieno;2.121,2.121,pieno" vettori="2.121,2.121,1.06,3.18,v;2.121,2.121,0.7,0.7" segmenti="0,0,-2.121,-2.121" etichette="0.1,-0.6,M;3.1,2.1,m;-1.45,-0.95,r;1.78,1.12,F" xmin=-3.8 xmax=4.2 ymin=-3.8 ymax=4 titolo="On a circular orbit the attraction $F = G\,\dfrac{Mm}{r^2}$ is directed towards the center and the velocity is tangent to the orbit"}
 ::::
 
 :::esempio{#geostationary titolo="The geostationary orbit"}

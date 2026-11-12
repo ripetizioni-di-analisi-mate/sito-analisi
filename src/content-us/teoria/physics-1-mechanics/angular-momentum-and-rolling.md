@@ -145,7 +145,7 @@ $$
 from which both results follow.
 :::
 
-::grafico{assi=0 uguale=1 poligoni="0,0 8,0 8,4.6188" curve="3.5+cos(t),3.1754+sin(t),0,6.29" punti="4,2.3094,pieno;3.5,3.1754,pieno" vettori="3.5,3.1754,3.5,1.1754;4,2.3094,2.7,4.5614;4,2.3094,5.039,2.909" riferimento="6.3,1.1,30,1.3,x,y" etichette="3.72,1.5,Mg;2.35,4.72,N;5.2,3.05,f;1.25,0.22,θ" xmin=-0.6 xmax=9.2 ymin=-0.9 ymax=5.4 titolo="Forces on a body rolling down the slope: the weight is applied at the centre, while the normal force and the static friction act at the contact point, and only the friction has a torque about the centre"}
+::grafico{assi=0 uguale=1 poligoni="8,0 0,0 0,4.6188" curve="4.5+cos(t),3.1754+sin(t),0,6.29" punti="4,2.3094,pieno;4.5,3.1754,pieno" vettori="4.5,3.1754,4.5,1.1754;4,2.3094,5.3,4.5614;4,2.3094,2.961,2.909" riferimento="1.7,1.1,-30,1.3,x,y" etichette="4.28,1.5,Mg;5.65,4.72,N;2.8,3.05,f;6.75,0.22,θ" xmin=-0.8 xmax=8.8 ymin=-0.9 ymax=5.4 titolo="Forces on a body rolling down the slope: the weight is applied at the centre, while the normal force and the static friction act at the contact point, and only the friction has a torque about the centre"}
 
 The acceleration is smaller than $g\sin\theta$, which is the value for a body sliding without friction, and the reduction is larger for a body with more mass far from the axis. Friction is what makes the body turn, therefore a sphere on a frictionless slope would slide down without rotating at all.
 ::::
@@ -253,6 +253,12 @@ $$
 \vec{r}_i \times \vec{F}_{ij} + \vec{r}_j \times \vec{F}_{ji} = (\vec{r}_i - \vec{r}_j) \times \vec{F}_{ij} = \vec{0} ,
 $$
 since $\vec{F}_{ij}$ is parallel to $\vec{r}_i - \vec{r}_j$ by hypothesis. Only the torque of the external forces survives.
+
+If $O$ is the centre of mass, the same computation carried out in the frame of the centre of mass adds to each particle the inertial force $-m_i\vec{a}_{\mathrm{cm}}$, whose total torque about the centre of mass is
+$$
+-\left(\sum_i m_i\vec{r}_i\,'\right) \times \vec{a}_{\mathrm{cm}} = \vec{0}
+$$
+by the definition of the centre of mass, therefore the equation is unchanged even when that frame is not inertial.
 :::
 
 The theorem is what makes rotational problems solvable without any knowledge of the internal forces: the tension in the spokes of a wheel and the forces between the molecules of a spinning top never enter the calculation.

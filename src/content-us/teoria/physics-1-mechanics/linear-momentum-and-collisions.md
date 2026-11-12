@@ -33,7 +33,7 @@ $$
 By Newton's second law the right-hand side equals $\vec{F}_{\text{net}}$, therefore the two expressions coincide.
 :::
 
-The form $\vec{F}_{\text{net}} = m\vec{a}$ requires a constant mass, while the form written above remains valid for a body whose mass changes, such as a rocket that expels fuel. This is the version used in the final section of this chapter.
+The form $\vec{F}_{\text{net}} = m\vec{a}$ requires a constant mass. The form written above holds for any system whose particles are fixed once and for all, therefore it applies to a rocket taken together with the fuel it carries and expels, and the final section of this chapter treats that system in this way.
 ::::
 
 :::richiamo{titolo="Derivative of a vector function"}
@@ -148,7 +148,7 @@ $$
 \quad\Longrightarrow\quad
 V = -\frac{m}{M}\,v = -\frac{0.015\,\mathrm{kg}}{3.0\,\mathrm{kg}} \cdot 700\,\mathrm{m/s} = -3.5\,\mathrm{m/s} .
 $$
-The negative sign states that the rifle moves opposite to the bullet. The two momenta have equal magnitude while the kinetic energies do not, since $K = \dfrac{p^2}{2m}$ and the masses differ by a factor of $200$: the bullet carries $200$ times the kinetic energy of the rifle.
+The negative sign states that the rifle moves opposite to the bullet. The two momenta have equal magnitude while the kinetic energies do not, since $K = \dfrac{p^2}{2m}$ and the masses differ by a factor of $200$, hence the bullet carries $200$ times the kinetic energy of the rifle.
 :::
 
 ## Collisions
@@ -160,7 +160,7 @@ Because the external impulse over such a short interval is negligible, the two c
 :::
 
 :::definizione{#collision-types titolo="Elastic, inelastic and perfectly inelastic collisions"}
-Momentum is conserved in every collision, while kinetic energy is not. Collisions are classified by what happens to the total kinetic energy $K$:
+The total momentum is conserved in every collision, whereas the total kinetic energy need not be. Collisions are classified by what happens to the total kinetic energy $K$:
 
 - **elastic**: $K$ is the same before and after;
 - **inelastic**: $K$ decreases, the difference appearing as internal energy and deformation;
@@ -215,7 +215,7 @@ The loss of kinetic energy depends on the relative velocity alone, hence it vani
 ::::
 
 ::::teorema{#elastic-1d titolo="Elastic collision in one dimension"}
-Let two bodies of masses $m_1$ and $m_2$ collide along one line with velocity components $v_1$ and $v_2$ before the collision, and let the collision be elastic. Then the components after the collision are
+Let two bodies of masses $m_1$ and $m_2$ collide along one line with velocity components $v_1 \ne v_2$ before the collision, and let the collision be elastic. Then the components after the collision are
 $$
 v_1' = \frac{m_1 - m_2}{m_1 + m_2}\,v_1 + \frac{2m_2}{m_1 + m_2}\,v_2 ,
 \qquad
@@ -236,7 +236,7 @@ m_1(v_1 - v_1') = m_2(v_2' - v_2),
 \qquad
 m_1(v_1^2 - v_1'^2) = m_2(v_2'^2 - v_2^2) .
 $$
-The second body is assumed to change velocity, so $v_2' \ne v_2$, and the first body then changes velocity as well. Dividing the second relation by the first and factoring each difference of squares,
+The two bodies exchange a nonzero impulse during the contact, therefore each of them changes velocity and the two differences $v_1 - v_1'$ and $v_2' - v_2$ are nonzero. Dividing the second relation by the first and factoring each difference of squares,
 $$
 v_1 + v_1' = v_2' + v_2 ,
 $$
@@ -265,7 +265,7 @@ The fraction of kinetic energy transferred to the target is
 $$
 \frac{K_2'}{K_1} = \frac{4m_1m_2}{(m_1 + m_2)^2} ,
 $$
-which equals $1$ for equal masses and decreases when the masses differ. Nuclear reactors use this result: a neutron loses energy fastest against nuclei of comparable mass, which is why hydrogen and carbon are used as moderators.
+which equals $1$ for equal masses and decreases when the masses differ. Nuclear reactors use this result, since a neutron loses energy fastest against nuclei of comparable mass, which is why hydrogen and carbon are used as moderators.
 :::
 
 ## Collisions in two dimensions
@@ -316,7 +316,7 @@ $$
 Comparing with the energy relation leaves $2\,\vec{v}_1\,'\cdot\vec{v}_2\,' = 0$, and since both final velocities are nonzero, the two vectors are perpendicular.
 :::
 
-The result turns one measured deflection angle into the complete solution: if the projectile leaves at the angle $\theta$ from its original direction, the target leaves at $90^\circ - \theta$ on the other side, with speeds $v_1\cos\theta$ and $v_1\sin\theta$. Photographs of colliding billiard balls and of nuclear tracks in a cloud chamber show this right angle.
+The result turns one measured deflection angle into the complete solution, because when the projectile leaves at the angle $\theta$ from its original direction, the target leaves at $90^\circ - \theta$ on the other side, with speeds $v_1\cos\theta$ and $v_1\sin\theta$. Photographs of colliding billiard balls and of nuclear tracks in a cloud chamber show this right angle.
 
 ::grafico{uguale=1 nomi="x,y" vettori="0,0,4,0,v₁;0,0,2.684,1.879,v₁′;0,0,1.316,-1.879,v₂′" segmenti="2.684,1.879,4,0" etichette="1.65,0.45,35°;1.2,-0.62,55°" xmin=-0.7 xmax=4.8 ymin=-2.4 ymax=2.4 titolo="Equal masses, elastic collision with the target at rest: the angle between $\vec{v}_1\,'$ and $\vec{v}_2\,'$ is $90^\circ$, and the two final vectors close the triangle on $\vec{v}_1$"}
 ::::
