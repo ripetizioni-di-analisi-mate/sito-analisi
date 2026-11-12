@@ -26,7 +26,7 @@ Si rimanda all'argomento sulle curve e sugli integrali di linea di Analisi 2.
 :::definizione{#ascissa-curvilinea titolo="Ascissa curvilinea e legge oraria"}
 Si supponga che la traiettoria sia una curva regolare e si scelga su di essa un verso di percorrenza e un punto $P_0$ come origine degli archi. L'**ascissa curvilinea** $s$ di un punto della traiettoria è la lunghezza dell'arco che va da $P_0$ a quel punto, presa con il segno positivo nel verso scelto e negativo nel verso opposto. Durante il moto l'ascissa curvilinea diventa una funzione del tempo $s(t)$, detta **legge oraria**, e la posizione si ottiene componendo la curva con la legge oraria.
 
-La derivata $\dot{s}$ è la **velocità scalare** del punto: è positiva quando $P$ avanza nel verso scelto sulla traiettoria e negativa quando torna indietro. Per un punto che percorre una circonferenza di raggio $R$, con $\vartheta$ angolo al centro misurato in verso antiorario, l'arco vale $s = R\,\vartheta$, quindi $\dot{s} = R\,\dot{\vartheta}$.
+La derivata $\dot{s}$ è la **velocità scalare** del punto, ed è positiva quando $P$ avanza nel verso scelto sulla traiettoria e negativa quando torna indietro. Per un punto che percorre una circonferenza di raggio $R$, con $\vartheta$ angolo al centro misurato in verso antiorario, l'arco vale $s = R\,\vartheta$, quindi $\dot{s} = R\,\dot{\vartheta}$.
 :::
 
 :::definizione{#velocita-e-accelerazione titolo="Velocità e accelerazione"}
@@ -58,7 +58,7 @@ $$
 $$
 dove $\hat{n}$ è il **versore normale**, di modulo uno, e $\rho > 0$ è il **raggio di curvatura** della traiettoria nel punto considerato; il suo reciproco $\dfrac{1}{\rho}$ è la **curvatura**. Il **versore binormale** è $\hat{b} = \hat{t} \wedge \hat{n}$, e la terna $(\hat{t}, \hat{n}, \hat{b})$ è la **terna intrinseca**.
 
-Il raggio di curvatura misura quanto la traiettoria si discosta dalla retta: il versore normale punta verso la parte concava della curva, e la circonferenza di centro $C = P + \rho\,\hat{n}$ e raggio $\rho$, detta circonferenza osculatrice, è la circonferenza che approssima meglio la traiettoria vicino a $P$. Per una retta $\hat{t}$ è costante, perciò $\dfrac{d\hat{t}}{ds} = \vec{0}$ e la curvatura è nulla; per una circonferenza di raggio $R$ il raggio di curvatura vale $R$ in ogni punto.
+Il raggio di curvatura misura quanto la traiettoria si discosta dalla retta. Il versore normale punta verso la parte concava della curva, e la circonferenza di centro $C = P + \rho\,\hat{n}$ e raggio $\rho$, detta circonferenza osculatrice, è la circonferenza che approssima meglio la traiettoria vicino a $P$. Per una retta $\hat{t}$ è costante, perciò $\dfrac{d\hat{t}}{ds} = \vec{0}$ e la curvatura è nulla; per una circonferenza di raggio $R$ il raggio di curvatura vale $R$ in ogni punto.
 
 ::grafico{curve="t,0.8*t*t,-1.5,1.5;-0.32+1.31*cos(t),1.23+1.31*sin(t),0,6.29" vettori="0.5,0.2,1.2,0.76;0.5,0.2,0.16,0.63" segmenti="0.5,0.2,-0.32,1.23" punti="0.5,0.2,pieno,P;-0.32,1.23,pieno,C" etichette="1.16,0.5,t;0.05,0.52,n;-0.62,0.92,ρ" uguale=1 xmin=-1.9 xmax=1.9 ymin=-0.35 ymax=2.75 legenda=0 titolo="Versore tangente $\hat{t}$, versore normale $\hat{n}$ e circonferenza osculatrice di centro $C$ e raggio $\rho$"}
 :::
@@ -104,7 +104,7 @@ a_n = \frac{|\vec{v}_P \wedge \vec{a}_P|}{|\vec{v}_P|} ,
 $$
 Le tre formule permettono di calcolare le componenti intrinseche e il raggio di curvatura partendo dalle sole componenti cartesiane del moto, senza determinare prima l'ascissa curvilinea. Per il moto piano con $x = v_0 t$ e $y = -\dfrac{1}{2}\,g t^2$ si ha $\vec{v}_P \wedge \vec{a}_P = -v_0 g\,\hat{k}$ e $|\vec{v}_P| = \sqrt{v_0^2 + g^2t^2}$, quindi
 $$
-\rho = \frac{\big( v_0^2 + g^2t^2 \big)^{3/2}}{v_0\,g} ,
+\rho = \frac{\big( v_0^2 + g^2t^2 \big)^{\frac{3}{2}}}{v_0\,g} ,
 $$
 che all'istante $t = 0$ vale $\dfrac{v_0^2}{g}$.
 
@@ -307,7 +307,7 @@ cioè la derivata che calcola l'osservatore mobile, per il quale i versori $\hat
 $$
 \frac{d\vec{u}}{dt} = \frac{d^{*}\vec{u}}{dt} + \vec{\omega} \wedge \vec{u} .
 $$
-La formula è lo strumento con cui si passa da un riferimento all'altro: la derivata assoluta differisce da quella relativa per il termine $\vec{\omega} \wedge \vec{u}$, dovuto alla rotazione della base mobile. Applicata a $\vec{u} = \vec{\omega}$ dà $\dot{\vec{\omega}} = \dfrac{d^{*}\vec{\omega}}{dt}$, poiché $\vec{\omega} \wedge \vec{\omega} = \vec{0}$: la derivata della velocità angolare è la stessa nei due riferimenti.
+La formula è lo strumento con cui si passa da un riferimento all'altro: la derivata assoluta differisce da quella relativa per il termine $\vec{\omega} \wedge \vec{u}$, dovuto alla rotazione della base mobile. Applicata a $\vec{u} = \vec{\omega}$ dà $\dot{\vec{\omega}} = \dfrac{d^{*}\vec{\omega}}{dt}$, poiché $\vec{\omega} \wedge \vec{\omega} = \vec{0}$, cioè la derivata della velocità angolare è la stessa nei due riferimenti.
 
 :::dimostrazione
 Si deriva rispetto al tempo la scrittura di $\vec{u}$ nella base mobile, ricordando che i versori dipendono dal tempo:
@@ -335,7 +335,7 @@ $$
 $$
 rispettivamente **velocità assoluta**, **velocità relativa** e **velocità di trascinamento** di $P$. La velocità relativa è quella misurata dall'osservatore mobile e si calcola derivando le coordinate $\xi$, $\eta$, $\zeta$. La velocità di trascinamento è la velocità che $P$ avrebbe se fosse fissato rigidamente al riferimento mobile nella posizione occupata all'istante considerato.
 
-Il punto che all'istante $t$ occupa la posizione di $P$ ed è solidale con la terna mobile si chiama punto di trascinamento: la sua velocità si ottiene dalla formula fondamentale della cinematica rigida applicata alla terna mobile, trattata nell'argomento sulla cinematica del corpo rigido.
+Il punto che all'istante $t$ occupa la posizione di $P$ ed è solidale con la terna mobile si chiama punto di trascinamento, e la sua velocità si ottiene dalla formula fondamentale della cinematica rigida applicata alla terna mobile, trattata nell'argomento sulla cinematica del corpo rigido.
 :::
 
 ::::teorema{#composizione-velocita titolo="Teorema di composizione delle velocità"}

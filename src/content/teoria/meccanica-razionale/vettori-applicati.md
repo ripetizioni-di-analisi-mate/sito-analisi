@@ -125,7 +125,7 @@ Il numero
 $$
 I = \vec{R} \cdot \vec{M}_O
 $$
-non dipende dal polo $O$ e si chiama **invariante scalare** del sistema, o trinomio invariante. L'invariante serve a riconoscere subito se un sistema si può ridurre a un solo vettore applicato: la riduzione è possibile, con $\vec{R} \neq \vec{0}$, se e solo se $I = 0$.
+non dipende dal polo $O$ e si chiama **invariante scalare** del sistema, o trinomio invariante. L'invariante serve a riconoscere subito se un sistema si può ridurre a un solo vettore applicato, poiché la riduzione è possibile, quando $\vec{R} \neq \vec{0}$, se e solo se $I = 0$.
 
 :::dimostrazione
 Dalla formula del cambiamento di polo segue
@@ -170,7 +170,7 @@ $$
 \vec{M}'_O = \vec{M}_O
 \end{cases}
 $$
-Un sistema equivalente al sistema vuoto, cioè con $\vec{R} = \vec{0}$ e $\vec{M}_O = \vec{0}$, si dice **equilibrato**.
+Un sistema equivalente al sistema vuoto, cioè con $\vec{R} = \vec{0}$ e $\vec{M}_O = \vec{0}$, si dice **equilibrato**. Poiché le equazioni cardinali contengono le forze soltanto attraverso $\vec{R}$ e $\vec{M}_O$, due sistemi equivalenti producono sullo stesso corpo rigido le stesse reazioni vincolari e lo stesso moto; un sistema complicato si può perciò sostituire con un sistema equivalente più semplice.
 :::
 
 :::teorema{#equivalenza-ogni-polo titolo="Equivalenza rispetto a ogni polo"}
@@ -282,7 +282,7 @@ Siano $(P_1, \vec{v}_1), \dots, (P_n, \vec{v}_n)$ vettori applicati le cui rette
 $$
 \vec{M}_O = (K - O) \wedge \vec{R} ,
 $$
-cioè il momento risultante coincide con il momento della risultante applicata in $K$, e il sistema è equivalente al solo vettore applicato $(K, \vec{R})$. Ne segue $I = 0$, e l'asse centrale è la retta per $K$ parallela a $\vec{R}$. Il caso di gran lunga più usato è quello di un singolo vettore scomposto nelle sue componenti, applicate nello stesso punto: il momento del vettore è allora la somma dei momenti delle componenti, ciascuno calcolato con il proprio braccio.
+cioè il momento risultante coincide con il momento della risultante applicata in $K$, e il sistema è equivalente al solo vettore applicato $(K, \vec{R})$. Ne segue $I = 0$, e l'asse centrale è la retta per $K$ parallela a $\vec{R}$. Il caso di gran lunga più usato è quello di un singolo vettore scomposto nelle sue componenti, applicate nello stesso punto, e allora il momento del vettore è la somma dei momenti delle componenti, ciascuno calcolato con il proprio braccio.
 
 :::dimostrazione
 Per lo scorrimento ogni vettore $(P_i, \vec{v}_i)$ si porta nel punto $K$ della propria retta d'azione senza che il momento cambi, quindi $(P_i - O) \wedge \vec{v}_i = (K - O) \wedge \vec{v}_i$. Sommando su $i$ e usando la proprietà distributiva si ottiene

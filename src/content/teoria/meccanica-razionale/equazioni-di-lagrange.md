@@ -5,7 +5,7 @@ sommario: Come si scrivono le equazioni del moto di un sistema olonomo a vincoli
 
 ## Sistemi olonomi a vincoli ideali
 
-Le equazioni cardinali della dinamica contengono le reazioni vincolari, che sono incognite: per un sistema di più corpi vanno scritte corpo per corpo e il numero delle equazioni cresce con il numero dei vincoli. Il metodo di Lagrange elimina le reazioni dal principio e riduce il problema a tante equazioni quanti sono i gradi di libertà.
+Le equazioni cardinali della dinamica contengono le reazioni vincolari, che sono incognite, e per un sistema di più corpi vanno scritte corpo per corpo, perciò il numero delle equazioni cresce con il numero dei vincoli. Il metodo di Lagrange elimina le reazioni dal principio e riduce il problema a tante equazioni quanti sono i gradi di libertà.
 
 :::richiamo{titolo="Coordinate lagrangiane e spostamenti virtuali"}
 Un sistema di $N$ punti $P_1, \dots, P_N$ soggetto a vincoli olonomi con $n$ gradi di libertà ammette coordinate lagrangiane $q_1, \dots, q_n$ tali che

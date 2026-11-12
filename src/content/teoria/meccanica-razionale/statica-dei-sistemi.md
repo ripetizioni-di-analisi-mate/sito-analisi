@@ -16,7 +16,7 @@ Sia $P$ un punto materiale libero soggetto alle forze $\vec{F}_1, \dots, \vec{F}
 $$
 \vec{R} = \sum_{i=1}^{n} \vec{F}_i = \vec{0} .
 $$
-La condizione segue dalla legge di Newton $m\,\vec{a}_P = \vec{R}$: se $\vec{R} = \vec{0}$ l'accelerazione è nulla e il punto in quiete permane in quiete; se viceversa il punto è in quiete, allora $\vec{a}_P = \vec{0}$ e perciò $\vec{R} = \vec{0}$. Nel piano la condizione vettoriale equivale alle due equazioni scalari $R_x = 0$ e $R_y = 0$.
+La condizione segue dalla legge di Newton $m\,\vec{a}_P = \vec{R}$. Infatti, se $\vec{R} = \vec{0}$, l'accelerazione è nulla e il punto in quiete permane in quiete; se viceversa il punto è in quiete, allora $\vec{a}_P = \vec{0}$ e perciò $\vec{R} = \vec{0}$. Nel piano la condizione vettoriale equivale alle due equazioni scalari $R_x = 0$ e $R_y = 0$. Un punto di massa $m$ appeso a una molla verticale di costante $k$ e lunghezza a riposo $\ell_0$ è in equilibrio quando la forza elastica equilibra il peso, quindi quando la molla è lunga $\ell_0 + \dfrac{m g}{k}$.
 :::
 
 :::definizione{#reazione-vincolare titolo="Forze attive e reazioni vincolari"}
@@ -24,7 +24,7 @@ Le forze applicate a un punto si dividono in **forze attive**, note in funzione 
 $$
 \vec{F} + \vec{\Phi} = \vec{0} .
 $$
-Un vincolo si dice **liscio** quando la reazione che esplica è ortogonale alla curva o alla superficie su cui il punto è obbligato a restare; in tutto l'argomento i vincoli sono lisci e bilaterali, salvo indicazione contraria. L'equazione precedente contiene le due componenti incognite di $\vec{\Phi}$ nel piano, quindi da sola non determina l'equilibrio: occorre separare la parte che riguarda le sole forze attive.
+Un vincolo si dice **liscio** quando la reazione che esplica è ortogonale alla curva o alla superficie su cui il punto è obbligato a restare; in tutto l'argomento i vincoli sono lisci e bilaterali, salvo indicazione contraria. L'equazione precedente contiene le due componenti incognite di $\vec{\Phi}$ nel piano, quindi da sola non determina l'equilibrio, e occorre perciò separare la parte che riguarda le sole forze attive. Per un punto appoggiato su un piano orizzontale liscio e soggetto al solo peso, la reazione vale $\vec{\Phi} = m g\,\hat{\jmath}$ ed è normale al piano, come il vincolo liscio richiede.
 :::
 
 ::::teorema{#equilibrio-punto-vincolato titolo="Equilibrio del punto su una curva o su una superficie liscia"}
@@ -96,7 +96,7 @@ $$
 \qquad
 \vec{M}_O^{(e)} = \sum_{i=1}^{N} (P_i - O) \wedge \vec{F}_i^{(e)} ,
 $$
-e analogamente $\vec{R}^{(i)}$ e $\vec{M}_O^{(i)}$ per le forze interne. La divisione dipende da quale insieme di punti si sceglie come sistema: in un sistema di due aste incernierate fra loro, la forza che un'asta esercita sull'altra è interna se il sistema è formato dalle due aste ed è esterna se il sistema è una sola asta.
+e analogamente $\vec{R}^{(i)}$ e $\vec{M}_O^{(i)}$ per le forze interne. La divisione dipende da quale insieme di punti si sceglie come sistema. In un sistema di due aste incernierate fra loro, per esempio, la forza che un'asta esercita sull'altra è interna se il sistema è formato dalle due aste ed è esterna se il sistema è una sola asta.
 :::
 
 ::::teorema{#forze-interne-nulle titolo="Risultante e momento delle forze interne"}
@@ -106,7 +106,7 @@ $$
 \qquad
 \vec{M}_O^{(i)} = \vec{0} .
 $$
-Il risultato permette di scrivere le equazioni di equilibrio di un sistema senza conoscere le forze interne, che negli esercizi sono le azioni nelle cerniere interne e le tensioni dei fili: esse scompaiono dalle equazioni del sistema complessivo e ricompaiono quando si scrivono le equazioni di un suo sottosistema.
+Il risultato permette di scrivere le equazioni di equilibrio di un sistema senza conoscere le forze interne, che negli esercizi sono le azioni nelle cerniere interne e le tensioni dei fili. Tali forze scompaiono dalle equazioni del sistema complessivo e ricompaiono quando si scrivono le equazioni di un suo sottosistema.
 
 :::dimostrazione
 Per il principio di azione e reazione, la forza $\vec{F}_{ij}$ che il punto $P_j$ esercita su $P_i$ e la forza $\vec{F}_{ji}$ che $P_i$ esercita su $P_j$ soddisfano $\vec{F}_{ij} = -\,\vec{F}_{ji}$ e hanno la stessa retta d'azione, la retta $P_i P_j$. Sommando su tutte le coppie, i termini si cancellano a due a due, quindi $\vec{R}^{(i)} = \vec{0}$. Per i momenti si sommano i contributi di una singola coppia:
@@ -125,7 +125,15 @@ $$
 \vec{M}_O^{(e)} = \vec{0}
 \end{cases}
 $$
-Le due equazioni sono condizioni *necessarie* per ogni sistema, qualunque siano i vincoli e la natura dei corpi. Nei problemi piani esse danno tre equazioni scalari, $R_x^{(e)} = 0$, $R_y^{(e)} = 0$ e $M_O^{(e)} = 0$, e nello spazio sei. Sono lo strumento con cui si calcolano le reazioni vincolari e si scrivono le equazioni di equilibrio di un sistema di corpi rigidi.
+Le due equazioni sono condizioni *necessarie* per ogni sistema, qualunque siano i vincoli e la natura dei corpi. Nei problemi piani esse danno tre equazioni scalari, $R_x^{(e)} = 0$, $R_y^{(e)} = 0$ e $M_O^{(e)} = 0$, e nello spazio sei. Sono lo strumento con cui si calcolano le reazioni vincolari e si scrivono le equazioni di equilibrio di un sistema di corpi rigidi. Per un'asta omogenea di massa $m$ e lunghezza $\ell$, incernierata in $A$ e appoggiata su un carrello in $B$, le tre equazioni scalari con il polo in $A$ sono
+$$
+\begin{cases}
+\Phi_{Ax} = 0 \\[4pt]
+\Phi_{Ay} + \Phi_B - m g = 0 \\[4pt]
+\ell\,\Phi_B - \dfrac{\ell}{2}\,m g = 0
+\end{cases}
+$$
+e danno $\Phi_B = \dfrac{m g}{2}$, $\Phi_{Ay} = \dfrac{m g}{2}$ e $\Phi_{Ax} = 0$.
 
 :::dimostrazione
 Sia il sistema in equilibrio. Ogni punto $P_i$ è in quiete, perciò la risultante di tutte le forze che agiscono su di esso è nulla:
@@ -144,12 +152,18 @@ e poiché $\vec{M}_O^{(i)} = \vec{0}$, segue $\vec{M}_O^{(e)} = \vec{0}$.
 ::::
 
 :::osservazione{#scelta-del-polo titolo="Scelta del polo"}
-Se $\vec{R}^{(e)} = \vec{0}$, per la formula del cambiamento di polo si ha $\vec{M}_{O'}^{(e)} = \vec{M}_O^{(e)}$ per ogni coppia di poli, quindi l'equazione dei momenti scritta rispetto a un polo e quella scritta rispetto a un altro non sono indipendenti: nel piano le equazioni scalari indipendenti restano tre. Il polo si scegli perciò dove conviene, e la scelta standard è un punto in cui si incontrano le rette d'azione di più reazioni incognite, perché quelle reazioni hanno momento nullo e non compaiono nell'equazione. In un'asta con una cerniera in $A$ e un carrello in $B$ il polo si prende in $A$: l'equazione dei momenti contiene allora la sola reazione del carrello.
+Se $\vec{R}^{(e)} = \vec{0}$, per la formula del cambiamento di polo si ha $\vec{M}_{O'}^{(e)} = \vec{M}_O^{(e)}$ per ogni coppia di poli, quindi l'equazione dei momenti scritta rispetto a un polo e quella scritta rispetto a un altro non sono indipendenti, e nel piano le equazioni scalari indipendenti restano tre. Il polo si scegli perciò dove conviene, e la scelta standard è un punto in cui si incontrano le rette d'azione di più reazioni incognite, perché quelle reazioni hanno momento nullo e non compaiono nell'equazione. In un'asta con una cerniera in $A$ e un carrello in $B$ il polo si prende in $A$, e l'equazione dei momenti contiene allora la sola reazione del carrello.
 :::
 
 ## Sufficienza per il corpo rigido
 
-Le equazioni cardinali non bastano in generale: un sistema di due punti collegati da un filo, tirati verso l'esterno da due forze opposte, le soddisfa pur non essendo in equilibrio se il filo è teso oltre misura. Per il corpo rigido invece le equazioni cardinali caratterizzano l'equilibrio.
+:::attenzione
+Per un sistema che non è un corpo rigido le equazioni cardinali sono necessarie e non sufficienti. Si considerino due punti $P_1$ e $P_2$ liberi di scorrere su una retta orizzontale liscia e collegati da una molla di costante $k$ e lunghezza a riposo $\ell_0$, con le forze $-\,F\,\hat{\imath}$ applicata in $P_1$ e $F\,\hat{\imath}$ applicata in $P_2$. Le due forze hanno la stessa retta d'azione e sono opposte, quindi $\vec{R}^{(e)} = \vec{0}$ e $\vec{M}_O^{(e)} = \vec{0}$ *qualunque* sia la distanza $d$ fra i due punti. L'equilibrio si ha però solo per
+$$
+d = \ell_0 + \frac{F}{k} ,
+$$
+cioè quando la forza elastica su ciascun punto equilibra la forza applicata a quel punto.
+:::
 
 :::richiamo{titolo="Unicità della soluzione del problema di Cauchy"}
 Sia $\dot{\vec{y}} = \vec{g}(t, \vec{y})$ un sistema di equazioni differenziali con $\vec{g}$ continua e localmente lipschitziana rispetto a $\vec{y}$. Allora per ogni dato iniziale $\vec{y}(t_0) = \vec{y}_0$ esiste una sola soluzione in un intorno di $t_0$. Si rimanda all'argomento sulle equazioni differenziali di Analisi 1.
@@ -163,10 +177,10 @@ $$
 \vec{M}_G^{(e)} = \vec{0}
 \end{cases}
 $$
-dove $G$ è il centro di massa. Per un corpo rigido nel piano si ottengono così tre equazioni scalari, e per un corpo rigido libero nello spazio sei: tante quante sono i gradi di libertà. Il teorema è la ragione per cui negli esercizi si ragiona sempre su corpi rigidi e le equazioni cardinali bastano a risolverli.
+dove $G$ è il centro di massa. Per un corpo rigido nel piano si ottengono così tre equazioni scalari, e per un corpo rigido libero nello spazio sei, tante quante sono i gradi di libertà. Il teorema è la ragione per cui negli esercizi si ragiona sempre su corpi rigidi e le equazioni cardinali bastano a risolverli.
 
 :::dimostrazione
-La necessità è il teorema sulle equazioni cardinali della statica. Per la sufficienza si usano le equazioni cardinali della dinamica, enunciate nell'argomento sulla dinamica dei sistemi: per ogni sistema materiale valgono
+La necessità è il teorema sulle equazioni cardinali della statica. Per la sufficienza si usano le equazioni cardinali della dinamica, enunciate nell'argomento sulla dinamica dei sistemi, secondo le quali per ogni sistema materiale valgono
 $$
 M\,\vec{a}_G = \vec{R}^{(e)} ,
 \qquad
@@ -174,7 +188,7 @@ M\,\vec{a}_G = \vec{R}^{(e)} ,
 $$
 e per un corpo rigido $\vec{K}_G = \mathbb{I}_G\,\vec{\omega}$. Il moto rigido è individuato dalla posizione di $G$ e dall'orientamento della terna solidale, cioè da sei funzioni del tempo, e le due equazioni precedenti sono sei equazioni differenziali del secondo ordine in tali funzioni, risolubili rispetto alle derivate seconde perché la massa $M$ è positiva e il tensore d'inerzia $\mathbb{I}_G$ è invertibile.
 
-Si consideri ora la quiete nella configurazione assegnata, cioè $\vec{v}_G \equiv \vec{0}$, $\vec{\omega} \equiv \vec{0}$ e configurazione costante. Questa funzione del tempo soddisfa le sei equazioni: il primo membro è identicamente nullo e il secondo è nullo perché nella configurazione assegnata risultante e momento risultante delle forze esterne sono nulli per ipotesi. Dato che il problema di Cauchy con dato iniziale di quiete ha una sola soluzione, la quiete è *la* soluzione del moto, perciò la configurazione è di equilibrio.
+Si consideri ora la quiete nella configurazione assegnata, cioè $\vec{v}_G \equiv \vec{0}$, $\vec{\omega} \equiv \vec{0}$ e configurazione costante. Questa funzione del tempo soddisfa le sei equazioni, poiché il primo membro è identicamente nullo e il secondo è nullo per ipotesi, dato che nella configurazione assegnata risultante e momento risultante delle forze esterne sono nulli. Dato che il problema di Cauchy con dato iniziale di quiete ha una sola soluzione, la quiete è *la* soluzione del moto, perciò la configurazione è di equilibrio.
 :::
 ::::
 
@@ -215,7 +229,7 @@ e su $A$ la forza opposta. La forza è diretta lungo la congiungente, è attratt
 :::definizione{#filo-inestensibile titolo="Filo inestensibile e tensione"}
 Un **filo ideale** è inestensibile, privo di massa e perfettamente flessibile. Esercita sui corpi a cui è attaccato due forze dirette lungo il filo, di intensità uguale $T$, detta **tensione**, orientate da ciascun estremo verso l'altro; la tensione soddisfa $T \ge 0$, perché un filo tira e non spinge. Una **carrucola ideale**, priva di massa e con il perno liscio, cambia la direzione del filo lasciandone invariata la tensione.
 
-Il filo è quindi un vincolo unilaterale: la condizione $T \ge 0$ va verificata alla fine del calcolo, e un valore negativo significa che nella configurazione considerata il filo si allenta e l'equilibrio va riesaminato senza di esso.
+Il filo è quindi un vincolo unilaterale, perciò la condizione $T \ge 0$ va verificata alla fine del calcolo; un valore negativo significa che nella configurazione considerata il filo si allenta e l'equilibrio va riesaminato senza di esso. Un punto di massa $m$ appeso a un filo verticale fissato al soffitto è in equilibrio con $T = m g$, e la stessa tensione agisce sul soffitto, diretta verso il basso.
 :::
 
 ## Sistemi di più corpi rigidi
@@ -223,7 +237,7 @@ Il filo è quindi un vincolo unilaterale: la condizione $T \ge 0$ va verificata 
 :::teorema{#equazioni-cardinali-per-sottosistemi titolo="Equazioni cardinali per ogni sottosistema"}
 Sia un sistema materiale in equilibrio e sia $S$ un qualunque sottoinsieme dei suoi punti. Allora $S$ è in equilibrio, perciò le equazioni cardinali valgono per $S$ con le forze esterne *a* $S$, fra le quali compaiono le azioni che i punti rimanenti esercitano su $S$. Il risultato segue dal teorema sulle equazioni cardinali applicato a $S$, dato che ogni punto di $S$ è in quiete.
 
-Da qui nasce il metodo di calcolo dei sistemi di più corpi: si scrivono le equazioni cardinali del sistema complessivo, nelle quali le azioni interne non compaiono, e poi quelle di un singolo corpo, nelle quali compaiono le azioni dei corpi vicini.
+Da qui nasce il metodo di calcolo dei sistemi di più corpi, nel quale si scrivono prima le equazioni cardinali del sistema complessivo, dove le azioni interne non compaiono, e poi quelle di un singolo corpo, dove le azioni dei corpi vicini compaiono.
 :::
 
 :::definizione{#smontaggio titolo="Smontaggio del sistema"}
@@ -283,7 +297,7 @@ Dopo aver calcolato reazioni e configurazioni conviene sostituirle in un'equazio
 
 - l'equazione dei momenti rispetto a un secondo polo, scritta con le reazioni trovate, deve dare $0$;
 - le equazioni cardinali di un corpo del sistema diverso da quello usato devono essere soddisfatte dalle stesse reazioni interne;
-- un caso limite deve riprodurre un risultato noto: per $k \to 0$ la molla non agisce e l'asta incernierata torna verticale, per $f \to 0$ la condizione di equilibrio con attrito diventa quella del vincolo liscio.
+- un caso limite deve riprodurre un risultato noto, come accade per $k \to 0$, dove la molla non agisce e l'asta incernierata torna verticale, e per $f \to 0$, dove la condizione di equilibrio con attrito diventa quella del vincolo liscio.
 
 La verifica con il secondo polo è una vera verifica quando nel calcolo compaiono reazioni incognite, perché l'equazione dei momenti rispetto al nuovo polo le contiene con bracci diversi. In un sistema a un grado di libertà senza reazioni incognite nell'equazione di configurazione, invece, il cambiamento di polo riproduce la stessa equazione, e allora si ricorre a un caso limite o al confronto fra due sottosistemi.
 :::

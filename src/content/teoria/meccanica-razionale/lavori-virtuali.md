@@ -168,9 +168,9 @@ dove il tempo si tiene fermo e le variazioni $\delta q_h$ sono arbitrarie e indi
 :::
 
 :::definizione{#lavoro-virtuale titolo="Lavoro virtuale"}
-Sia un sistema di forze $\vec{F}_1, \dots, \vec{F}_n$ applicate nei punti $P_1, \dots, P_n$ di un sistema vincolato. Il **lavoro virtuale** della sollecitazione, relativo a un fissato spostamento virtuale, è
+Sia un sistema di forze $\vec{F}_1, \dots, \vec{F}_N$ applicate nei punti $P_1, \dots, P_N$ di un sistema vincolato. Il **lavoro virtuale** della sollecitazione, relativo a un fissato spostamento virtuale, è
 $$
-\delta L = \sum_{i=1}^{n} \vec{F}_i \cdot \delta P_i .
+\delta L = \sum_{i=1}^{N} \vec{F}_i \cdot \delta P_i .
 $$
 Le forze si valutano nella configurazione da cui si parte, perciò $\delta L$ è una funzione lineare delle variazioni $\delta q_h$. Si distinguono le **forze attive**, note in funzione della configurazione, e le **reazioni vincolari**, incognite; i rispettivi lavori virtuali si indicano con $\delta L^{(a)}$ e $\delta L^{(v)}$.
 
@@ -181,11 +181,11 @@ Le forze si valutano nella configurazione da cui si parte, perciò $\delta L$ è
 :::definizione{#componenti-lagrangiane titolo="Componenti lagrangiane della sollecitazione"}
 Sia un sistema a vincoli olonomi con coordinate lagrangiane $q_1, \dots, q_n$. Sostituendo nell'espressione del lavoro virtuale gli spostamenti virtuali dei punti di applicazione si ottiene
 $$
-\delta L = \sum_{i=1}^{n} \vec{F}_i \cdot \sum_{h=1}^{n} \frac{\partial P_i}{\partial q_h}\,\delta q_h = \sum_{h=1}^{n} Q_h\,\delta q_h ,
+\delta L = \sum_{i=1}^{N} \vec{F}_i \cdot \sum_{h=1}^{n} \frac{\partial P_i}{\partial q_h}\,\delta q_h = \sum_{h=1}^{n} Q_h\,\delta q_h ,
 $$
 dove il numero
 $$
-Q_h = \sum_{i} \vec{F}_i \cdot \frac{\partial P_i}{\partial q_h}
+Q_h = \sum_{i=1}^{N} \vec{F}_i \cdot \frac{\partial P_i}{\partial q_h}
 $$
 si chiama **componente lagrangiana della sollecitazione** relativa alla coordinata $q_h$. Il lavoro virtuale si scrive dunque come somma di $n$ termini, uno per grado di libertà, e le $Q_h$ sono le grandezze che compaiono nelle equazioni di equilibrio e nelle equazioni di Lagrange. Se $q_h$ è un angolo, la corrispondente $Q_h$ ha le dimensioni di un momento; se $q_h$ è una lunghezza, ha le dimensioni di una forza.
 :::
@@ -250,7 +250,7 @@ L'attrito radente rende il vincolo non ideale. Un punto appoggiato su un piano s
 ## Il principio dei lavori virtuali
 
 ::::teorema{#principio-dei-lavori-virtuali titolo="Principio dei lavori virtuali"}
-Sia un sistema materiale con vincoli olonomi fissi e ideali, soggetto alla sollecitazione attiva $\vec{F}_1, \dots, \vec{F}_n$. Una configurazione $C$ è di equilibrio se e solo se
+Sia un sistema materiale con vincoli olonomi fissi e ideali, soggetto alla sollecitazione attiva $\vec{F}_1, \dots, \vec{F}_N$. Una configurazione $C$ è di equilibrio se e solo se
 $$
 \delta L^{(a)} \leq 0
 $$
