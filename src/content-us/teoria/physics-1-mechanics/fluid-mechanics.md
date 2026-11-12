@@ -209,7 +209,7 @@ The fraction is what makes the principle usable as a measuring instrument. Ice h
 The preceding sections describe a fluid at rest, while a moving fluid requires a model of the motion, and the model used in this chapter rests on four hypotheses on the fluid and on its flow.
 
 :::definizione{#ideal-fluid titolo="Ideal fluid and steady flow"}
-An **ideal fluid** is incompressible and has no viscosity, which means that no tangential force is exerted between adjacent layers of fluid or between the fluid and the walls. A flow is **steady** when the velocity at each fixed point of space does not change with time, and it is **irrotational** when no element of fluid rotates about its own centre.
+An **ideal fluid** is incompressible and has no viscosity, which means that no tangential force is exerted between adjacent layers of fluid or between the fluid and the walls. A flow is **steady** when the velocity at each fixed point of space does not change with time, and it is **irrotational** when no element of fluid rotates about its own center.
 
 In a steady flow the path followed by an element of fluid is called a **streamline**, and the velocity at each point is tangent to the streamline through that point. Streamlines do not cross, since at a crossing point the velocity would have two values. A bundle of streamlines through a closed curve forms a **flow tube**, and no fluid enters or leaves a flow tube across its lateral surface.
 
@@ -256,7 +256,7 @@ The chapter on work and kinetic energy establishes it, and the proof below appli
 :::
 
 ::::teorema{#bernoullis-equation titolo="Bernoulli's equation"}
-Let an ideal fluid of density $\rho$ flow steadily along a flow tube. Then at every two sections of the tube, labelled by their height $y$ above a fixed reference level, their pressure $p$ and their speed $v$,
+Let an ideal fluid of density $\rho$ flow steadily along a flow tube. Then at every two sections of the tube, labeled by their height $y$ above a fixed reference level, their pressure $p$ and their speed $v$,
 $$
 p_1 + \rho g y_1 + \frac{1}{2}\rho v_1^2 = p_2 + \rho g y_2 + \frac{1}{2}\rho v_2^2 ,
 $$
@@ -282,7 +282,7 @@ and dividing by $dV$ and collecting the quantities with the same index on the sa
 ::grafico{assi=0 uguale=1 poligoni="0,0.4 3.6,0.4 5.4,3.1 9,3.1 9,3.9 5.4,3.9 3,1.4 0,1.4" linee="0,1.4 3,1.4 5.4,3.9 9,3.9;0,0.4 3.6,0.4 5.4,3.1 9,3.1;-0.3,-0.6 9.3,-0.6" vettori="1.4,0.9,2.5,0.9,v₁;7.2,3.5,8.6,3.5,v₂" segmenti="1.4,0.9,1.4,-0.6;7.2,3.5,7.2,-0.6" punti="1.4,0.9,pieno,1;7.2,3.5,pieno,2" etichette="1.55,0.1,y₁;7.35,1.3,y₂;0.1,-1,reference level" xmin=-0.6 xmax=9.8 ymin=-1.3 ymax=4.5 titolo="Along a flow tube the sum $p + \rho g y + \dfrac{1}{2}\rho v^2$ takes the same value at the sections $1$ and $2$"}
 :::
 
-Each term of the sum is an energy per unit volume, since $\mathrm{Pa} = \dfrac{\mathrm{J}}{\mathrm{m^3}}$, therefore the equation is the conservation of mechanical energy written for a unit volume of flowing fluid, with the pressure accounting for the work done by the neighbouring fluid. Two consequences are read off at once: at constant height a larger speed goes with a smaller pressure, and at constant speed the pressure decreases with height according to the law of hydrostatics, which is recovered by setting $v_1 = v_2 = 0$.
+Each term of the sum is an energy per unit volume, since $\mathrm{Pa} = \dfrac{\mathrm{J}}{\mathrm{m^3}}$, therefore the equation is the conservation of mechanical energy written for a unit volume of flowing fluid, with the pressure accounting for the work done by the neighboring fluid. Two consequences are read off at once: at constant height a larger speed goes with a smaller pressure, and at constant speed the pressure decreases with height according to the law of hydrostatics, which is recovered by setting $v_1 = v_2 = 0$.
 ::::
 
 :::attenzione
@@ -300,7 +300,7 @@ v = \sqrt{2gh} .
 $$
 
 :::dimostrazione
-Apply Bernoulli's equation along the streamline that joins a point of the free surface, labelled $1$, to the opening, labelled $2$, and measure heights from the opening, so that $y_1 = h$ and $y_2 = 0$. Both points are in contact with the atmosphere, hence $p_1 = p_2 = p_{\mathrm{atm}}$. The cross-section of the vessel is much larger than $a$, hence the continuity equation gives a speed at the free surface much smaller than $v$, and $v_1$ is set to zero. The equation reduces to
+Apply Bernoulli's equation along the streamline that joins a point of the free surface, labeled $1$, to the opening, labeled $2$, and measure heights from the opening, so that $y_1 = h$ and $y_2 = 0$. Both points are in contact with the atmosphere, hence $p_1 = p_2 = p_{\mathrm{atm}}$. The cross-section of the vessel is much larger than $a$, hence the continuity equation gives a speed at the free surface much smaller than $v$, and $v_1$ is set to zero. The equation reduces to
 $$
 \rho g h = \frac{1}{2}\rho v^2 ,
 $$

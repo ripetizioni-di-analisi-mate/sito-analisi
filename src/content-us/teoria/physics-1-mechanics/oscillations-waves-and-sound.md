@@ -82,7 +82,7 @@ The last formula gives the speed without knowing the instant, which is what most
 ## The mass-spring oscillator
 
 :::teorema{#hookes-law titolo="Hooke's law"}
-Within its range of elastic behaviour, a spring stretched or compressed by $x$ from its natural length exerts the force
+Within its range of elastic behavior, a spring stretched or compressed by $x$ from its natural length exerts the force
 $$
 F_x = -k\,x ,
 $$
@@ -158,7 +158,7 @@ T = 2\pi\sqrt{\frac{L}{g}} .
 $$
 
 :::dimostrazione
-Let $\theta$ be the angle of the string with the vertical and $s = L\theta$ the arc travelled by the mass. The tension is along the string, therefore it has no tangential component, and the tangential component of the weight is $-mg\sin\theta$, the minus sign stating that it is directed towards the lowest point. Newton's second law along the tangent gives
+Let $\theta$ be the angle of the string with the vertical and $s = L\theta$ the arc traveled by the mass. The tension is along the string, therefore it has no tangential component, and the tangential component of the weight is $-mg\sin\theta$, the minus sign stating that it is directed towards the lowest point. Newton's second law along the tangent gives
 $$
 m\,L\ddot{\theta} = -mg\sin\theta
 \quad\Longrightarrow\quad
@@ -180,13 +180,13 @@ The replacement of $\sin\theta$ by $\theta$ holds for small angles only. The exa
 ## The physical pendulum
 
 ::::teorema{#physical-pendulum titolo="Period of the physical pendulum"}
-A rigid body of mass $m$ swings about a fixed horizontal axis at distance $d$ from its centre of mass, with moment of inertia $I$ about that axis and negligible friction. For small angular displacements
+A rigid body of mass $m$ swings about a fixed horizontal axis at distance $d$ from its center of mass, with moment of inertia $I$ about that axis and negligible friction. For small angular displacements
 $$
 T = 2\pi\sqrt{\frac{I}{m\,g\,d}} .
 $$
 
 :::dimostrazione
-The weight acts at the centre of mass, therefore its torque about the axis has magnitude $mgd\sin\theta$ and tends to decrease $\theta$, while the reaction at the axis has zero moment arm and contributes no torque. The second law for fixed-axis rotation gives
+The weight acts at the center of mass, therefore its torque about the axis has magnitude $mgd\sin\theta$ and tends to decrease $\theta$, while the reaction at the axis has zero moment arm and contributes no torque. The second law for fixed-axis rotation gives
 $$
 I\ddot{\theta} = -m\,g\,d\,\sin\theta ,
 $$
@@ -197,7 +197,7 @@ The body therefore swings like a point mass on a string of equivalent length $L_
 ::::
 
 :::richiamo{titolo="Parallel-axis theorem"}
-Let $I_{\mathrm{cm}}$ be the moment of inertia of a body of mass $m$ about an axis through its centre of mass, and let a second axis be parallel to the first at distance $d$. Then
+Let $I_{\mathrm{cm}}$ be the moment of inertia of a body of mass $m$ about an axis through its center of mass, and let a second axis be parallel to the first at distance $d$. Then
 $$
 I = I_{\mathrm{cm}} + m\,d^2 .
 $$
@@ -205,7 +205,7 @@ The theorem supplies the $I$ needed above, and it is established in the chapter 
 :::
 
 :::esempio{#rod-pendulum titolo="Uniform rod pivoted at one end"}
-A uniform rod of length $L$ has $I_{\mathrm{cm}} = \dfrac{1}{12}mL^2$ and its centre of mass at the middle, hence $d = \dfrac{L}{2}$ and, by the **parallel-axis theorem**,
+A uniform rod of length $L$ has $I_{\mathrm{cm}} = \dfrac{1}{12}mL^2$ and its center of mass at the middle, hence $d = \dfrac{L}{2}$ and, by the **parallel-axis theorem**,
 $$
 I = \frac{1}{12}mL^2 + m\frac{L^2}{4} = \frac{1}{3}mL^2 ,
 \qquad
@@ -235,7 +235,7 @@ The amplitude falls by the factor $\dfrac{1}{e}$ in the time $\tau = \dfrac{1}{\
 ::::
 
 :::definizione{#damping-regimes titolo="Critical and overdamped motion"}
-The behaviour changes with the size of $\gamma$ compared with $\omega_0$:
+The behavior changes with the size of $\gamma$ compared with $\omega_0$:
 $$
 \begin{cases}
 \gamma < \omega_0 & \text{underdamped: oscillations of decaying amplitude} \\[4pt]
@@ -284,7 +284,7 @@ The speed of the wave depends on the inertia and the elasticity of the medium an
 :::
 
 :::definizione{#wave-function titolo="Harmonic wave function"}
-A **harmonic wave** travelling along the $x$ axis is described by
+A **harmonic wave** traveling along the $x$ axis is described by
 $$
 y(x, t) = A\sin(kx - \omega t) ,
 $$
@@ -292,7 +292,7 @@ where $y$ is the displacement of the particle whose equilibrium position is $x$.
 $$
 v = \frac{\omega}{k} = \frac{\lambda}{T} = \lambda f ,
 $$
-and $A\sin(kx + \omega t)$ describes the same wave travelling towards decreasing $x$. Each particle performs simple harmonic motion of amplitude $A$ and angular frequency $\omega$, therefore its maximum transverse speed is $\omega A$.
+and $A\sin(kx + \omega t)$ describes the same wave traveling towards decreasing $x$. Each particle performs simple harmonic motion of amplitude $A$ and angular frequency $\omega$, therefore its maximum transverse speed is $\omega A$.
 
 ::grafico{f="2*sin(2*pi*x/1.5)" legenda=0 nomi="x,y" asintoti="y=2;y=-2" segmenti="0,2.45,1.5,2.45" etichette="0.65,2.65,λ;3.0,2.15,A" xmin=-0.2 xmax=3.4 ymin=-2.9 ymax=3.3 titolo="Snapshot of a harmonic wave at a fixed instant: the spatial period is the wavelength $\lambda = \dfrac{2\pi}{k}$"}
 :::
@@ -335,7 +335,7 @@ The speed grows with the tension and falls with the mass per unit length, theref
 ## Interference and standing waves
 
 :::definizione{#interference titolo="Interference"}
-Where two waves overlap, the displacement at each point is the sum of the displacements each wave would produce there. **Constructive interference** occurs where the two arrive in phase and the amplitudes add, **destructive interference** where they arrive in antiphase and the amplitudes subtract. For two identical sources the difference $\Delta r$ of the distances travelled decides which of the two occurs:
+Where two waves overlap, the displacement at each point is the sum of the displacements each wave would produce there. **Constructive interference** occurs where the two arrive in phase and the amplitudes add, **destructive interference** where they arrive in antiphase and the amplitudes subtract. For two identical sources the difference $\Delta r$ of the distances traveled decides which of the two occurs:
 $$
 \begin{cases}
 \Delta r = n\lambda & \text{constructive} \\[4pt]
@@ -347,7 +347,7 @@ The condition on $\Delta r$ turns a question about sound into a measurement of l
 :::
 
 ::::teorema{#standing-waves titolo="Standing wave"}
-Two harmonic waves of equal amplitude and frequency travelling in opposite senses produce
+Two harmonic waves of equal amplitude and frequency traveling in opposite senses produce
 $$
 y(x,t) = 2A\sin kx\,\cos\omega t ,
 $$

@@ -25,16 +25,16 @@ The graph of $x(t)$ in the plane of the axes $t$ and $x$ is called the **positio
 ::grafico{f="2+4*x-0.5*x^2" xmin=-0.5 xmax=8.2 ymin=-1 ymax=11.5 nomi="t,x" punti="0,2,pieno;4,10,pieno;6,8,pieno" segmenti="4,0,4,10;6,0,6,8" legenda=0 titolo="Position-time graph of the motion $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ (SI units): the body starts at $x = 2\,\mathrm{m}$, reaches $x = 10\,\mathrm{m}$ at $t = 4\,\mathrm{s}$ and then moves back"}
 :::
 
-:::definizione{#displacement titolo="Displacement and distance travelled"}
+:::definizione{#displacement titolo="Displacement and distance traveled"}
 The **displacement** between the instants $t_1$ and $t_2 > t_1$ is the change in position
 $$
 \Delta x = x(t_2) - x(t_1) ,
 $$
-a signed quantity, positive when the final position is on the positive side of the initial one and negative in the opposite case. The **distance travelled** is instead the length of the path actually covered, and it is a non-negative quantity.
+a signed quantity, positive when the final position is on the positive side of the initial one and negative in the opposite case. The **distance traveled** is instead the length of the path actually covered, and it is a non-negative quantity.
 
-The two quantities coincide when the body moves always in the same sense. When the body reverses, the distance travelled is the sum of the lengths of the single stretches, while the displacement only compares the two end positions. For the motion drawn above, between $t_1 = 1\,\mathrm{s}$ and $t_2 = 6\,\mathrm{s}$ the positions are $x(1) = 5.5\,\mathrm{m}$ and $x(6) = 8\,\mathrm{m}$, hence the displacement is $\Delta x = 2.5\,\mathrm{m}$; the body however first advances to $x = 10\,\mathrm{m}$ and then returns, therefore the distance travelled is $4.5\,\mathrm{m} + 2\,\mathrm{m} = 6.5\,\mathrm{m}$.
+The two quantities coincide when the body moves always in the same sense. When the body reverses, the distance traveled is the sum of the lengths of the single stretches, while the displacement only compares the two end positions. For the motion drawn above, between $t_1 = 1\,\mathrm{s}$ and $t_2 = 6\,\mathrm{s}$ the positions are $x(1) = 5.5\,\mathrm{m}$ and $x(6) = 8\,\mathrm{m}$, hence the displacement is $\Delta x = 2.5\,\mathrm{m}$; the body however first advances to $x = 10\,\mathrm{m}$ and then returns, therefore the distance traveled is $4.5\,\mathrm{m} + 2\,\mathrm{m} = 6.5\,\mathrm{m}$.
 
-The displacement is what enters the definition of velocity, and the distance travelled is what an odometer reads.
+The displacement is what enters the definition of velocity, and the distance traveled is what an odometer reads.
 :::
 
 ## Average velocity and average speed
@@ -52,7 +52,7 @@ On the position-time graph the average velocity is the slope of the straight lin
 :::
 
 :::definizione{#average-speed titolo="Average speed"}
-The **average speed** between two instants is the ratio of the distance travelled to the elapsed time. It is a non-negative quantity, and it is measured in $\mathrm{m/s}$ as well.
+The **average speed** between two instants is the ratio of the distance traveled to the elapsed time. It is a non-negative quantity, and it is measured in $\mathrm{m/s}$ as well.
 
 Average speed and average velocity have the same magnitude exactly when the body does not reverse during the interval. For the motion of the figure, between $t_1 = 1\,\mathrm{s}$ and $t_2 = 6\,\mathrm{s}$ the average velocity is $\dfrac{2.5\,\mathrm{m}}{5\,\mathrm{s}} = 0.5\,\mathrm{m/s}$, while the average speed is $\dfrac{6.5\,\mathrm{m}}{5\,\mathrm{s}} = 1.3\,\mathrm{m/s}$.
 
@@ -86,7 +86,7 @@ v(t) = \lim_{\Delta t \to 0} \frac{x(t + \Delta t) - x(t)}{\Delta t} = \frac{dx}
 $$
 Since the difference quotient is the slope of a secant line, the instantaneous velocity is the slope of the tangent to the position-time graph at the point of abscissa $t$. Its sign tells the sense of the motion at that instant, and its magnitude $|v|$ is the **instantaneous speed**, which is the quantity a speedometer displays.
 
-For the law $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ the derivative is $v(t) = 4 - t$ in SI units. The velocity is positive for $t < 4\,\mathrm{s}$, it vanishes at $t = 4\,\mathrm{s}$ and it is negative afterwards, which is why the position grows up to $t = 4\,\mathrm{s}$ and decreases afterwards. A vanishing velocity is the analytic signature of a reversal, therefore the instants at which $v = 0$ are the ones that separate the stretches used to compute a distance travelled.
+For the law $x(t) = 2 + 4t - \dfrac{1}{2}t^2$ the derivative is $v(t) = 4 - t$ in SI units. The velocity is positive for $t < 4\,\mathrm{s}$, it vanishes at $t = 4\,\mathrm{s}$ and it is negative afterwards, which is why the position grows up to $t = 4\,\mathrm{s}$ and decreases afterwards. A vanishing velocity is the analytic signature of a reversal, therefore the instants at which $v = 0$ are the ones that separate the stretches used to compute a distance traveled.
 
 ::grafico{f="2+4*x-0.5*x^2;4+2*x" xmin=-0.5 xmax=8.2 ymin=-1 ymax=11.5 nomi="t,x" punti="2,8,pieno" legenda=0 titolo="At $t = 2\,\mathrm{s}$ the tangent to the graph has slope $v(2) = 2\,\mathrm{m/s}$, which is the instantaneous velocity at that instant"}
 :::
@@ -180,7 +180,7 @@ $$
 Multiplying both sides by $2a$ gives the stated relation. For $a = 0$ the relation reduces to $v = v_0$, which holds as well.
 :::
 
-The relation contains no time, therefore it answers at once every question in which the time is neither given nor asked. A car travelling at $30\,\mathrm{m/s}$ that brakes with $a = -6.0\,\mathrm{m/s^2}$ stops after
+The relation contains no time, therefore it answers at once every question in which the time is neither given nor asked. A car traveling at $30\,\mathrm{m/s}$ that brakes with $a = -6.0\,\mathrm{m/s^2}$ stops after
 $$
 d = \frac{v_0^2}{2\,|a|} = \frac{(30\,\mathrm{m/s})^2}{2 \cdot 6.0\,\mathrm{m/s^2}} = 75\,\mathrm{m} ,
 $$
@@ -271,9 +271,9 @@ The same argument applied to the acceleration gives $\Delta v = \displaystyle\in
 ::::
 
 :::attenzione
-The area that gives the displacement is a signed area, therefore the stretches in which the velocity is negative subtract. For $v(t) = 8 - 2t$ in SI units the area between $t = 0$ and $t = 4\,\mathrm{s}$ is $+16\,\mathrm{m}$ and the area between $t = 4\,\mathrm{s}$ and $t = 7\,\mathrm{s}$ is $-9\,\mathrm{m}$, hence the displacement over the whole interval is $7\,\mathrm{m}$ while the distance travelled is $25\,\mathrm{m}$. The distance travelled is obtained by adding the areas with the sign changed where $v < 0$, that is, by integrating $|v(t)|$.
+The area that gives the displacement is a signed area, therefore the stretches in which the velocity is negative subtract. For $v(t) = 8 - 2t$ in SI units the area between $t = 0$ and $t = 4\,\mathrm{s}$ is $+16\,\mathrm{m}$ and the area between $t = 4\,\mathrm{s}$ and $t = 7\,\mathrm{s}$ is $-9\,\mathrm{m}$, hence the displacement over the whole interval is $7\,\mathrm{m}$ while the distance traveled is $25\,\mathrm{m}$. The distance traveled is obtained by adding the areas with the sign changed where $v < 0$, that is, by integrating $|v(t)|$.
 
-::grafico{f="8-2*x" area="8-2*x;0;0;4|0;8-2*x;4;7" xmin=-0.5 xmax=7.6 ymin=-7 ymax=9.5 nomi="t,v" punti="4,0,pieno" legenda=0 titolo="The positive area $16\,\mathrm{m}$ and the negative area $-9\,\mathrm{m}$ give the displacement $7\,\mathrm{m}$; their magnitudes added give the distance travelled $25\,\mathrm{m}$"}
+::grafico{f="8-2*x" area="8-2*x;0;0;4|0;8-2*x;4;7" xmin=-0.5 xmax=7.6 ymin=-7 ymax=9.5 nomi="t,v" punti="4,0,pieno" legenda=0 titolo="The positive area $16\,\mathrm{m}$ and the negative area $-9\,\mathrm{m}$ give the displacement $7\,\mathrm{m}$; their magnitudes added give the distance traveled $25\,\mathrm{m}$"}
 :::
 
 ## From the acceleration back to the position

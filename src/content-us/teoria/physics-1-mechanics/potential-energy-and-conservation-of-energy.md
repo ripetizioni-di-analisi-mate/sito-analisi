@@ -10,7 +10,7 @@ The work-energy theorem relates the total work done on a body to the change of i
 :::definizione{#conservative-force titolo="Conservative force"}
 A force acting on a body is **conservative** when the work it does on the body during a displacement from a position $1$ to a position $2$ is the same for every path joining the two positions. A force that does not have this property is called **nonconservative**.
 
-The weight of a body near the surface of the Earth, the force of an ideal spring and the gravitational attraction between two bodies are conservative. Kinetic friction and the resistance of a fluid are nonconservative, since the work they do grows with the length of the path travelled.
+The weight of a body near the surface of the Earth, the force of an ideal spring and the gravitational attraction between two bodies are conservative. Kinetic friction and the resistance of a fluid are nonconservative, since the work they do grows with the length of the path traveled.
 
 ::grafico{punti="1,3,pieno,A;5,0,pieno,B" linee="1,3 5,0;1,3 1,0 5,0" xmin=-0.9 xmax=6.2 ymin=-0.9 ymax=4 uguale=1 nomi="x,y" titolo="Two paths joining $A$ and $B$. A conservative force does the same work along both; for the weight that work is $mg\,(y_A - y_B)$, which depends on the two heights alone"}
 :::
@@ -19,14 +19,14 @@ The weight of a body near the surface of the Earth, the force of an ideal spring
 Let $\vec{F}$ be a force acting on a body. The work of $\vec{F}$ is the same along every path joining two positions *if and only if* the work of $\vec{F}$ is zero along every closed path.
 
 :::dimostrazione
-Let $\gamma_1$ and $\gamma_2$ be two paths from a position $1$ to a position $2$, and let $W_1$ and $W_2$ be the works of $\vec{F}$ along them. Travelling a path in the opposite sense reverses every displacement element $d\vec{s}$, hence it reverses the sign of every contribution $\vec{F} \cdot d\vec{s}$ and the work changes sign. The closed path obtained by going from $1$ to $2$ along $\gamma_1$ and returning along $\gamma_2$ therefore has work
+Let $\gamma_1$ and $\gamma_2$ be two paths from a position $1$ to a position $2$, and let $W_1$ and $W_2$ be the works of $\vec{F}$ along them. Traveling a path in the opposite sense reverses every displacement element $d\vec{s}$, hence it reverses the sign of every contribution $\vec{F} \cdot d\vec{s}$ and the work changes sign. The closed path obtained by going from $1$ to $2$ along $\gamma_1$ and returning along $\gamma_2$ therefore has work
 $$
 W_{\text{closed}} = W_1 - W_2 .
 $$
 If the work around every closed path vanishes, then $W_1 = W_2$ for every pair of paths, so the work is path independent. Conversely, if the work is path independent, then $W_1 - W_2 = 0$ for every closed path, and the work around a closed path vanishes.
 :::
 
-The theorem gives the test that is actually used on a force, since a complete turn is enough to decide. A body carried once around a closed circuit on a frictionless track returns with the same speed, while the same circuit travelled on a rough track costs work at every point, and the body returns slower.
+The theorem gives the test that is actually used on a force, since a complete turn is enough to decide. A body carried once around a closed circuit on a frictionless track returns with the same speed, while the same circuit traveled on a rough track costs work at every point, and the body returns slower.
 ::::
 
 :::definizione{#potential-energy titolo="Potential energy"}
@@ -188,7 +188,7 @@ A body that is pushed by a hand is a second case in which the hypotheses are not
 :::definizione{#nonconservative-force titolo="Nonconservative force"}
 A force is **nonconservative** when the work it does between two positions depends on the path followed. No potential energy can be assigned to such a force, since a function of position alone could not reproduce two different works between the same two positions.
 
-Kinetic friction is the standard example. A block dragged along a floor against a friction force of constant magnitude $f_k$ receives the work $-f_k s$, where $s$ is the length of the path travelled, therefore a longer path costs more, and a round trip costs twice the one-way value instead of returning zero.
+Kinetic friction is the standard example. A block dragged along a floor against a friction force of constant magnitude $f_k$ receives the work $-f_k s$, where $s$ is the length of the path traveled, therefore a longer path costs more, and a round trip costs twice the one-way value instead of returning zero.
 :::
 
 ::::teorema{#energy-equation titolo="Energy equation with nonconservative forces"}
@@ -286,7 +286,7 @@ hence the speed is largest where $U$ is smallest.
 :::
 
 :::definizione{#equilibrium titolo="Stable, unstable and neutral equilibrium"}
-A position $x_0$ is a position of **equilibrium** when the force vanishes there, that is when $\dfrac{dU}{dx}(x_0) = 0$. The equilibrium is classified by the behaviour of $U$ near $x_0$:
+A position $x_0$ is a position of **equilibrium** when the force vanishes there, that is when $\dfrac{dU}{dx}(x_0) = 0$. The equilibrium is classified by the behavior of $U$ near $x_0$:
 
 - $U$ has a minimum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) > 0$, and the equilibrium is **stable**, since a small displacement produces a force directed back towards $x_0$;
 - $U$ has a maximum at $x_0$, hence $\dfrac{d^2U}{dx^2}(x_0) < 0$, and the equilibrium is **unstable**, since a small displacement produces a force directed away from $x_0$;

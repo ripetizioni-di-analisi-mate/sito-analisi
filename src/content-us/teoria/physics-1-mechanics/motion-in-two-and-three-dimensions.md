@@ -22,7 +22,7 @@ $$
 $$
 that is, the vector from the first position to the second one. Its magnitude $|\Delta\vec{r}|$ is the distance between the two positions.
 
-The displacement depends on the two endpoints alone, hence it is in general shorter than the length of the path travelled between them, and it vanishes whenever the particle returns to its starting point. For a particle that goes once round a circle of radius $R$ the path has length $2\pi R$ and the displacement is zero.
+The displacement depends on the two endpoints alone, hence it is in general shorter than the length of the path traveled between them, and it vanishes whenever the particle returns to its starting point. For a particle that goes once round a circle of radius $R$ the path has length $2\pi R$ and the displacement is zero.
 
 ::grafico{curve="t,1.118*sqrt(t),0.08,5" vettori="0,0,1,1.118,r₁;0,0,4,2.236,r₂;1,1.118,4,2.236,Δr" punti="1,1.118,pieno,P₁;4,2.236,pieno,P₂" xmin=-0.5 xmax=5.4 ymin=-0.5 ymax=3.2 uguale=1 nomi="x,y" titolo="The displacement $\Delta\vec{r} = \vec{r}_2 - \vec{r}_1$ joins the two positions, while the particle travels along the path"}
 :::
@@ -302,14 +302,14 @@ A particle in uniform circular motion of radius $R$ and speed $v$ has an acceler
 $$
 a_{\mathrm{rad}} = \frac{v^2}{R} = \omega^2 R ,
 $$
-directed at every instant from the particle towards the centre of the circle.
+directed at every instant from the particle towards the center of the circle.
 
 :::dimostrazione
-Place the origin at the centre and write the position as
+Place the origin at the center and write the position as
 $$
 \vec{r}(t) = R\cos(\omega t)\,\hat{\imath} + R\sin(\omega t)\,\hat{\jmath} ,
 $$
-which describes the circle of radius $R$ travelled with constant angular velocity $\omega$. Differentiating once,
+which describes the circle of radius $R$ traveled with constant angular velocity $\omega$. Differentiating once,
 $$
 \vec{v}(t) = -R\omega\sin(\omega t)\,\hat{\imath} + R\omega\cos(\omega t)\,\hat{\jmath} ,
 $$
@@ -317,12 +317,12 @@ whose magnitude is $R\omega\sqrt{\sin^2(\omega t) + \cos^2(\omega t)} = R\omega$
 $$
 \vec{a}(t) = -R\omega^2\cos(\omega t)\,\hat{\imath} - R\omega^2\sin(\omega t)\,\hat{\jmath} = -\omega^2\,\vec{r}(t) .
 $$
-The acceleration is therefore the position vector multiplied by the negative number $-\omega^2$, hence it points from the particle towards the centre, and its magnitude is $\omega^2 R$. Replacing $\omega$ with $\dfrac{v}{R}$ gives $\dfrac{v^2}{R}$.
+The acceleration is therefore the position vector multiplied by the negative number $-\omega^2$, hence it points from the particle towards the center, and its magnitude is $\omega^2 R$. Replacing $\omega$ with $\dfrac{v}{R}$ gives $\dfrac{v^2}{R}$.
 :::
 
-The result is used in the opposite direction as well, since a particle in uniform circular motion has this acceleration and Newton's second law then requires a resultant force $m\dfrac{v^2}{R}$ directed towards the centre, which the chapter on applications of Newton's laws identifies with friction on a flat curve, with a component of the normal force on a banked curve and with the tension of a string in a conical pendulum. A car taking a bend of radius $50\,\mathrm{m}$ at $20\,\mathrm{m/s}$ has $a_{\mathrm{rad}} = 8.0\,\mathrm{m/s^2}$.
+The result is used in the opposite direction as well, since a particle in uniform circular motion has this acceleration and Newton's second law then requires a resultant force $m\dfrac{v^2}{R}$ directed towards the center, which the chapter on applications of Newton's laws identifies with friction on a flat curve, with a component of the normal force on a banked curve and with the tension of a string in a conical pendulum. A car taking a bend of radius $50\,\mathrm{m}$ at $20\,\mathrm{m/s}$ has $a_{\mathrm{rad}} = 8.0\,\mathrm{m/s^2}$.
 
-::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="0,2,-1.3,2,v;0,2,0,1,a;-1.7321,-1,-1.0821,-2.1258,v;-1.7321,-1,-0.8661,-0.5,a;1.7321,-1,2.3821,0.1258,v;1.7321,-1,0.8661,-0.5,a" punti="0,0,pieno,O" xmin=-3.2 xmax=3.2 ymin=-3.2 ymax=3.2 uguale=1 nomi="x,y" titolo="In uniform circular motion the velocity is tangent to the circle and the acceleration points towards the centre, with constant magnitude $\dfrac{v^2}{R}$"}
+::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="0,2,-1.3,2,v;0,2,0,1,a;-1.7321,-1,-1.0821,-2.1258,v;-1.7321,-1,-0.8661,-0.5,a;1.7321,-1,2.3821,0.1258,v;1.7321,-1,0.8661,-0.5,a" punti="0,0,pieno,O" xmin=-3.2 xmax=3.2 ymin=-3.2 ymax=3.2 uguale=1 nomi="x,y" titolo="In uniform circular motion the velocity is tangent to the circle and the acceleration points towards the center, with constant magnitude $\dfrac{v^2}{R}$"}
 ::::
 
 ## Nonuniform circular motion
@@ -344,7 +344,7 @@ a_{\mathrm{rad}} = \frac{v^2}{R} ,
 \qquad
 a_{\mathrm{tan}} = \frac{dv}{dt} ,
 $$
-the first directed towards the centre and the second along the tangent, hence
+the first directed towards the center and the second along the tangent, hence
 $$
 a = \sqrt{a_{\mathrm{rad}}^2 + a_{\mathrm{tan}}^2} .
 $$
@@ -360,12 +360,12 @@ $$
 \qquad
 \vec{a} = R\alpha\,\hat{u}_T - R\omega^2\,\hat{u}_R .
 $$
-The component along $\hat{u}_R$ has magnitude $R\omega^2 = \dfrac{v^2}{R}$ and the sign $-$ places it towards the centre. The two components are perpendicular, therefore the magnitude of the acceleration is the square root of the sum of their squares.
+The component along $\hat{u}_R$ has magnitude $R\omega^2 = \dfrac{v^2}{R}$ and the sign $-$ places it towards the center. The two components are perpendicular, therefore the magnitude of the acceleration is the square root of the sum of their squares.
 :::
 
 The two components answer different questions, since $a_{\mathrm{rad}}$ measures how sharply the path bends at the current speed while $a_{\mathrm{tan}}$ measures how fast the speed changes. A car that enters a bend of radius $100\,\mathrm{m}$ at $10\,\mathrm{m/s}$ while speeding up at $2.0\,\mathrm{m/s^2}$ has $a_{\mathrm{rad}} = 1.0\,\mathrm{m/s^2}$ and $a_{\mathrm{tan}} = 2.0\,\mathrm{m/s^2}$, hence $a = 2.2\,\mathrm{m/s^2}$.
 
-::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="1.4142,1.4142,0.4243,0.4243,aᵣ;1.4142,1.4142,0.7778,2.0506,aₜ;1.4142,1.4142,-0.2121,1.0607,a" segmenti="0.4243,0.4243,-0.2121,1.0607;0.7778,2.0506,-0.2121,1.0607" punti="1.4142,1.4142,pieno;0,0,pieno,O" xmin=-3.2 xmax=3.4 ymin=-2.8 ymax=2.8 uguale=1 nomi="x,y" titolo="Nonuniform circular motion: the radial component $\vec{a}_{\mathrm{rad}}$ points to the centre and the tangential component $\vec{a}_{\mathrm{tan}}$ lies along the velocity, which here is increasing"}
+::grafico{curve="2*cos(t),2*sin(t),0,6.2832" vettori="1.4142,1.4142,0.4243,0.4243,aᵣ;1.4142,1.4142,0.7778,2.0506,aₜ;1.4142,1.4142,-0.2121,1.0607,a" segmenti="0.4243,0.4243,-0.2121,1.0607;0.7778,2.0506,-0.2121,1.0607" punti="1.4142,1.4142,pieno;0,0,pieno,O" xmin=-3.2 xmax=3.4 ymin=-2.8 ymax=2.8 uguale=1 nomi="x,y" titolo="Nonuniform circular motion: the radial component $\vec{a}_{\mathrm{rad}}$ points to the center and the tangential component $\vec{a}_{\mathrm{tan}}$ lies along the velocity, which here is increasing"}
 ::::
 
 :::osservazione{#uniform-as-a-special-case titolo="Uniform motion as a special case"}

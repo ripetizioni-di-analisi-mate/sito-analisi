@@ -20,7 +20,7 @@ s = r\,\theta .
 $$
 Since $\theta$ is a ratio of two lengths, the radian is dimensionless, and one complete turn corresponds to $\theta = 2\pi\,\mathrm{rad}$.
 
-The **angular displacement** over a time interval is $\Delta\theta = \theta_2 - \theta_1$, positive for a counterclockwise turn and negative for a clockwise one. The angle is not reduced to a single turn, hence a wheel making three complete counterclockwise revolutions has $\Delta\theta = 6\pi\,\mathrm{rad}$, because the arc travelled by each of its points is three times the circumference.
+The **angular displacement** over a time interval is $\Delta\theta = \theta_2 - \theta_1$, positive for a counterclockwise turn and negative for a clockwise one. The angle is not reduced to a single turn, hence a wheel making three complete counterclockwise revolutions has $\Delta\theta = 6\pi\,\mathrm{rad}$, because the arc traveled by each of its points is three times the circumference.
 
 ::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29;0.55*cos(t),0.55*sin(t),0,0.6981" linee="0,0 2,0;0,0 1.5321,1.2856" punti="0,0,pieno;1.5321,1.2856,pieno,P" etichette="0.7,0.2,θ;0.9,-0.3,r;2.15,0.8,s" xmin=-2.4 xmax=2.8 ymin=-2.4 ymax=2.4 titolo="The point $P$ at distance $r$ from the axis travels the arc $s = r\theta$ while the body turns through the angle $\theta$ measured from the reference line"}
 :::
@@ -117,7 +117,7 @@ a_t = \alpha\,r .
 $$
 
 :::dimostrazione
-The point $P$ moves on a circle of radius $r$, and the arc travelled from the reference line is $s = r\,\theta$ with $r$ constant. Differentiating with respect to the time,
+The point $P$ moves on a circle of radius $r$, and the arc traveled from the reference line is $s = r\,\theta$ with $r$ constant. Differentiating with respect to the time,
 $$
 v = \dfrac{ds}{dt} = r\,\dfrac{d\theta}{dt} = \omega\,r .
 $$
