@@ -218,6 +218,8 @@ P(S)&=0{,}50\cdot0{,}02+0{,}30\cdot0{,}05+0{,}20\cdot0{,}10\\[6pt]
 \end{aligned}
 $$
 
+::grafico{xmin=-0.28 xmax=3.7 ymin=0 ymax=24 nomi="i,n" poligoni="0.72,0 1.28,0 1.28,10 0.72,10;1.72,0 2.28,0 2.28,15 1.72,15;2.72,0 3.28,0 3.28,20 2.72,20" etichette="0.94,11,10;1.94,16,15;2.94,21,20" titolo="Pezzi scartati attesi su 1000 pezzi prodotti. L’asse i indica la linea e n il numero di scarti. Le altezze sommano a 45."}
+
 La prima linea produce più pezzi della terza, quindi i loro tassi di scarto hanno pesi diversi nel totale. Il valore $0{,}045$ è compreso tra $0{,}02$ e $0{,}10$, come deve accadere per una media ponderata con pesi positivi.
 :::
 
@@ -312,6 +314,9 @@ P(D\mid T)=\frac{sp}{sp+f(1-p)}.
 $$
 
 Se $s=0{,}9$ e $f=0{,}05$ restano fissi e la quota iniziale sale dal $2\%$ al $10\%$, il numeratore sale da $0{,}018$ a $0{,}09$. Il denominatore al $10\%$ vale $0{,}09+0{,}045=0{,}135$, quindi il valore predittivo positivo raggiunge $\dfrac{2}{3}$. Lo stesso controllo può dunque avere valori predittivi diversi su produzioni con prevalenze diverse.
+
+::grafico{f="0.9*x/(0.05+0.0085*x)" xmin=0 xmax=20 ymin=0 ymax=90 nomi="p,VPP" legenda=0 punti="2,26.865672;10,66.666667" segmenti="2,0,2,26.865672;10,0,10,66.666667" etichette="2.7,25,27%;10.8,63,67%" titolo="Valore predittivo positivo VPP in funzione della quota difettosa p, entrambi in percentuale. Il tasso di falso positivo è 5% e la sensibilità è 90%."}
+
 :::
 
 :::esempio{titolo="Quota difettosa necessaria per metà di segnalazioni corrette"}

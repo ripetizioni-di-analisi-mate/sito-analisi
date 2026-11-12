@@ -63,6 +63,8 @@ $$
 $$
 
 La somma dei conteggi consente di ricavare una frequenza assoluta mancante. Per esempio, in una tabella con 40 osservazioni e due modalità che contano 13 e 17 casi, la terza modalità conta $40-13-17=10$ casi.
+
+::grafico{assi=0 xmin=-0.08 xmax=3.95 ymin=-2.2 ymax=19.5 poligoni="0.69,0 1.31,0 1.31,13 0.69,13;1.69,0 2.31,0 2.31,17 1.69,17;2.69,0 3.31,0 3.31,10 2.69,10" vettori="0.33,0,3.7,0;0.33,0,0.33,18.1" etichette="0.41,18.65,conteggio;0.94,13.55,13;1.94,17.55,17;2.94,10.55,10;0.94,-1.23,A;1.94,-1.23,B;2.94,-1.23,C" titolo="Diagramma a barre delle tre modalità. La separazione grafica fra A, B e C distingue le categorie. Le altezze rappresentano i conteggi."}
 :::
 
 ::::teorema{#frequenze-aggregate titolo="Frequenza relativa di gruppi riuniti"}
@@ -202,4 +204,6 @@ Un campione grande può descrivere bene una parte della popolazione e trascurarn
 Su 120 studenti invitati, 90 rispondono alla domanda sul mezzo di trasporto. Tra questi, 27 dichiarano di andare a piedi. Il tasso di risposta è $\dfrac{90}{120}=0{,}75$. La quota di chi va a piedi fra le risposte valide è $\dfrac{27}{90}=0{,}30$. La quota di invitati di cui si sa che vanno a piedi è $\dfrac{27}{120}=0{,}225$.
 
 Se interessa la quota effettiva tra i 120 invitati e mancano informazioni sui 30 assenti, si può indicare un intervallo. Il conteggio minimo è 27, se tutti gli assenti usano un altro mezzo. Il massimo è $27+30=57$, se tutti vanno a piedi. Le quote estreme sono quindi $0{,}225$ e $0{,}475$. Questo intervallo riguarda la mancanza di risposte e si distingue da un intervallo di confidenza, che quantifica l'incertezza di campionamento sotto ipotesi specifiche.
+
+::grafico{assi=0 xmin=-4 xmax=124 ymin=-0.32 ymax=1.32 uguale=1 poligoni="0,0 27,0 27,1 0,1" linee="0,0 120,0 120,1 0,1 0,0;27,0 27,1;90,0 90,1" etichette="4,0.46,27 a piedi;49,0.46,63 altri mezzi;95,0.60,30 senza;96.2,0.32,risposta" titolo="I 120 invitati comprendono 90 rispondenti e 30 assenti. La quota effettiva di chi va a piedi dipende dalle risposte mancanti."}
 :::
