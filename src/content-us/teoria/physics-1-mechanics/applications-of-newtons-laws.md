@@ -370,5 +370,5 @@ therefore the angle measures the acceleration and does not depend on the mass. F
 :::
 
 :::attenzione
-An inertial force cannot be added to a free-body diagram drawn in an inertial frame. Writing both $m\dfrac{v^2}{r}$ outwards and the real forces inwards for a car on a flat curve gives a sum of zero, hence it predicts that any speed is safe and contradicts the condition $v \le \sqrt{\mu_s g r}$. The two descriptions are each consistent, and only one frame is used at a time.
+An inertial force cannot be added to a free-body diagram drawn in an inertial frame. For a car on a flat curve the ground frame sees only the real forces, and the friction force supplies the centripetal force, $f_s = m\dfrac{v^2}{r}$. Adding $m\dfrac{v^2}{r}$ outwards to that diagram and still writing $\sum F = m\dfrac{v^2}{r}$ counts the same term twice: it gives $f_s = 2m\dfrac{v^2}{r}$, hence the wrong limit $v \le \sqrt{\dfrac{\mu_s g r}{2}}$ in place of $v \le \sqrt{\mu_s g r}$. Each frame gives a consistent description on its own, therefore only one frame is used at a time.
 :::
