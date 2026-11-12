@@ -87,7 +87,7 @@ Sia un sistema materiale di massa totale $M$ e centro di massa $G$, soggetto al 
 $$
 U = -M g\,y_G ,
 $$
-dove $y_G$ è la quota del centro di massa, e energia potenziale $V = M g\,y_G$. Per scrivere il potenziale del peso basta quindi la quota del centro di massa in funzione delle coordinate lagrangiane. Un'asta omogenea di massa $m$ e lunghezza $\ell$, incernierata nell'origine e inclinata dell'angolo $\vartheta$ rispetto alla verticale discendente, ha il centro di massa nel punto medio, alla quota $y_G = -\dfrac{\ell}{2}\cos\vartheta$, quindi $U = \dfrac{m g \ell}{2}\cos\vartheta$.
+dove $y_G$ è la quota del centro di massa, ed energia potenziale $V = M g\,y_G$. Per scrivere il potenziale del peso basta quindi la quota del centro di massa in funzione delle coordinate lagrangiane. Un'asta omogenea di massa $m$ e lunghezza $\ell$, incernierata nell'origine e inclinata dell'angolo $\vartheta$ rispetto alla verticale discendente, ha il centro di massa nel punto medio, alla quota $y_G = -\dfrac{\ell}{2}\cos\vartheta$, quindi $U = \dfrac{m g \ell}{2}\cos\vartheta$.
 
 ::struttura{nodi="O,0,0;A,1.6,-2.2" aste="O-A" vincoli="O,cerniera,90" punti="0.8,-1.1,G,baricentro" tratteggi="0,0 0,-2.6;-1.1,-1.1 0.8,-1.1" forze="0.8 -1.1,0,-0.9,mg" etichette="0.32,-1,ϑ;-1.45,-1.1,y_G" titolo="Il potenziale del peso di un'asta dipende dalla sola quota $y_G$ del centro di massa"}
 
@@ -153,7 +153,7 @@ U(\vartheta) = \frac{m g \ell}{2}\cos\vartheta - \frac{1}{2}\,k\,\ell^2\,(2 + 2\
 $$
 L'ultimo addendo è costante e si può scartare. Il sistema ricompare nelle configurazioni di equilibrio e nel calcolo della reazione della cerniera.
 
-::struttura{nodi="O,0,0;A,1.3,-1.8;B,0,2.2" aste="O-A" vincoli="O,cerniera,90" punti="0.65,-0.9,G,baricentro" linee="0.00,2.20 0.12,1.82 0.40,1.69 0.11,1.14 0.66,0.88 0.37,0.33 0.93,0.07 0.64,-0.48 1.19,-0.74 0.90,-1.29 1.18,-1.42 1.30,-1.80" tratteggi="0,0 0,-2.2" forze="0.65 -2,0,-0.7,mg" etichette="0.3,-0.85,ϑ;1.25,0.8,k" titolo="Asta incernierata in $O$ con una molla fra $A$ e il punto fisso $B = (0, \ell)$"}
+::struttura{nodi="O,0,0;A,1.3,-1.8;B,0,2.2" aste="O-A" vincoli="O,cerniera,90" punti="0.65,-0.9,G,baricentro" linee="0.00,2.20 0.12,1.82 0.40,1.69 0.11,1.14 0.66,0.88 0.37,0.33 0.93,0.07 0.64,-0.48 1.19,-0.74 0.90,-1.29 1.18,-1.42 1.30,-1.80" tratteggi="0,0 0,-2.2" forze="0.65 -2.35,0,-0.6,mg" etichette="0.3,-0.85,ϑ;1.25,0.8,k" titolo="Asta incernierata in $O$ con una molla fra $A$ e il punto fisso $B = (0, \ell)$"}
 
 :::
 
@@ -319,7 +319,7 @@ U'(\vartheta) = -\left( \frac{m g \ell}{2} - k\,\ell^2 \right)\sin\vartheta .
 $$
 Se $k \neq \dfrac{m g}{2 \ell}$ il coefficiente è diverso da zero, perciò l'equazione $U'(\vartheta) = 0$ equivale a $\sin\vartheta = 0$ e le configurazioni di equilibrio sono due, $\vartheta = 0$ con l'asta verticale verso il basso e $\vartheta = \pi$ con l'asta verticale verso l'alto. Se invece $k = \dfrac{m g}{2 \ell}$ il potenziale è costante, dunque **ogni configurazione è di equilibrio**: in quel caso il momento della molla rispetto a $O$ bilancia il momento del peso per ogni valore di $\vartheta$.
 
-::grafico{f="0.6*cos(x)-1.2;-0.6*cos(x)-1.2;-1.2" xmin=-3.4 xmax=3.4 ymin=-2.1 ymax=-0.3 nomi="ϑ,U" legenda="k < \dfrac{mg}{2\ell};k > \dfrac{mg}{2\ell};k = \dfrac{mg}{2\ell}" titolo="Il potenziale $U(\vartheta)$ in unità di $k\,\ell^2$: i punti stazionari sono $\vartheta = 0$ e $\vartheta = \pi$, e nel caso $k = \dfrac{mg}{2\ell}$ il potenziale è costante"}
+::grafico{f="0.6*cos(x)-1;-0.6*cos(x)-1;-1" xmin=-3.4 xmax=3.4 ymin=-1.9 ymax=-0.2 nomi="ϑ,U" legenda="k < \dfrac{mg}{2\ell};k > \dfrac{mg}{2\ell};k = \dfrac{mg}{2\ell}" titolo="Il potenziale $U(\vartheta)$ in unità di $k\,\ell^2$: i punti stazionari sono $\vartheta = 0$ e $\vartheta = \pi$, e nel caso $k = \dfrac{mg}{2\ell}$ il potenziale è costante"}
 
 :::
 
