@@ -211,7 +211,7 @@ The **free-body diagram** of a body is the drawing of the body isolated from the
 :::
 
 :::richiamo{titolo="Reactions exerted by plane constraints"}
-In the plane the constraints used in the exercises exert the following reactions: the fixed hinge at $A$ a force of components $\Phi_{Ax}$ and $\Phi_{Ay}$ applied at $A$; the roller support and the sleeve on a smooth guide a force orthogonal to the guide; the built-in support a force of two components and a couple $\Gamma_A$; the link a force directed along the connecting rod; the smooth unilateral support a normal force of assigned direction. We refer to the topic on constraints, degrees of freedom and Lagrangian coordinates.
+In the plane the constraints used in the exercises exert the following reactions: the fixed hinge at $A$ a force of components $\Phi_{Ax}$ and $\Phi_{Ay}$ applied at $A$; the roller support and the sleeve on a smooth guide a force orthogonal to the guide; the clamped support a force of two components and a couple $\Gamma_A$; the link a force directed along the connecting rod; the smooth unilateral support a normal force of assigned direction. We refer to the topic on constraints, degrees of freedom and Lagrangian coordinates.
 :::
 
 ## Springs and strings
