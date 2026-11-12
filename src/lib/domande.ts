@@ -2,30 +2,23 @@
 // Worker usa per proporre le domande e correggere le risposte. Le pagine del sito non mostrano mai la risposta corretta.
 import type { LinguaCatalogo } from './lingue-sito';
 import { getCollection } from 'astro:content';
-import { createMarkdownProcessor, type MarkdownRenderer } from '@astrojs/markdown-remark';
-import remarkMath from 'remark-math';
-import remarkDirective from 'remark-directive';
-import remarkBlocchi from '../plugins/remark-blocchi.mjs';
-import remarkTracce from '../plugins/remark-tracce.mjs';
-import rehypeKatex from '../plugins/rehype-katex-tex.mjs';
+import { processoreMarkdown, percorsoFinto } from './resa';
 
 // Le domande non sono rese da Astro (vedi content.config.ts): le rende qui lo stesso processore Markdown
 // del sito, con gli stessi plugin, una volta sola per file.
-let processore: Promise<MarkdownRenderer> | undefined;
+// Le domande rese restano da parte quanto basta a non rifare due volte lo stesso file dentro una materia;
+// passando alla materia dopo, le più vecchie si lasciano andare e la memoria torna libera.
+const QUANTE_RESE = 1500;
 const rese = new Map<string, Promise<string>>();
-// Il percorso fittizio serve ai plugin per scegliere la lingua delle etichette e dei numeri nelle figure
-// (remark-blocchi guarda se il file sta in content-en o content-us).
-const CARTELLA: Record<string, string> = { it: 'content', en: 'content-en', es: 'content-es', us: 'content-us' };
 function htmlDi(chiave: string, body: string): Promise<string> {
-  processore ??= createMarkdownProcessor({
-    remarkPlugins: [remarkMath, remarkDirective, remarkBlocchi, remarkTracce],
-    rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
-    shikiConfig: { theme: 'github-light' },
-  } as any);
+  const gia = rese.get(chiave);
+  if (gia) return gia;
   const [lingua, ...resto] = chiave.split('/');
-  const fileURL = new URL(`file:///src/${CARTELLA[lingua] ?? 'content'}/domande/${resto.join('/')}.md`);
-  if (!rese.has(chiave)) rese.set(chiave, processore.then((p) => p.render(body, { fileURL } as any)).then((r) => r.code));
-  return rese.get(chiave)!;
+  const fileURL = new URL(percorsoFinto(lingua, 'domande', resto.join('/')));
+  const p = processoreMarkdown().then((pr) => pr.render(body, { fileURL } as any)).then((r) => r.code);
+  rese.set(chiave, p);
+  if (rese.size > QUANTE_RESE) rese.delete(rese.keys().next().value as string);
+  return p;
 }
 
 export interface Domanda { id: string; n: number; testo: string; scelte: string[]; corretta: number; spiegazione: string }
@@ -64,6 +57,19 @@ export async function domandePer(materia: string, lingua: Lingua = 'it'): Promis
   }
   for (const k of Object.keys(out)) out[k].sort((a, b) => a.n - b.n);
   return out;
+}
+
+// Materia → argomento → quante domande, letti dagli identificativi dei file: non serve renderle.
+const conti: Partial<Record<Lingua, Promise<Record<string, Record<string, number>>>>> = {};
+export function conteggiDomande(lingua: Lingua = 'it'): Promise<Record<string, Record<string, number>>> {
+  return (conti[lingua] ??= (async () => {
+    const c: Record<string, Record<string, number>> = {};
+    for (const e of await getCollection(COLLEZIONI[lingua] as 'domande')) {
+      const [m, a] = e.id.split('/');
+      ((c[m] ??= {})[a] ??= 0, c[m][a]++);
+    }
+    return c;
+  })());
 }
 
 // Materia → argomenti che hanno almeno una domanda (per le pagine e per i traguardi).

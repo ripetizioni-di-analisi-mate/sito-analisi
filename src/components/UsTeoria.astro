@@ -3,7 +3,8 @@
 // (src/content-us/teoria/<corso>/<argomento>.md) con gli stessi blocchi e le stesse figure delle
 // materie italiane. I primi due paragrafi sono l'anteprima gratuita; i successivi sono riservati e
 // il Worker li toglie a chi non ha il corso (data-usa-content).
-import { getEntry, render } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { resaVoce } from '../lib/resa';
 import Base from '../layouts/Base.astro';
 import IndiceTeoria from './IndiceTeoria.astro';
 import FineAnteprimaUsa from './FineAnteprimaUsa.astro';
@@ -20,12 +21,12 @@ const t = T('en');
 const m = materiaUsa(corso)!;
 const arg = m.argomenti.find((a) => a.slug === argomento)!;
 const voce = await getEntry('teoria_us', `${corso}/${argomento}`);
-const resa = voce ? await render(voce) : null;
+const resa = voce ? await resaVoce('us', 'teoria', voce) : null;
 const titoli = resa?.headings.filter((h) => h.depth === 2) ?? [];
 const href = (sezione: string) => linkArgomentoUsa(corso, argomento, sezione);
 
 // L'HTML reso si taglia ai paragrafi di secondo livello: i primi due restano liberi, gli altri no.
-const html = voce?.rendered?.html ?? '';
+const html = resa?.html ?? '';
 const tagli: number[] = [];
 for (let i = html.indexOf('<h2'); i >= 0; i = html.indexOf('<h2', i + 1)) tagli.push(i);
 const taglio = tagli.length > PARAGRAFI_GRATIS ? tagli[PARAGRAFI_GRATIS] : html.length;

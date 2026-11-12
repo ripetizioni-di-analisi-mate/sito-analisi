@@ -2,7 +2,8 @@
 import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { resaVoce } from '../lib/resa';
 import { dataContenuto } from '../lib/date';
 import { titoliAncore } from '../lib/ancore';
 import Base from '../layouts/Base.astro';
@@ -20,9 +21,9 @@ const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'svolti',
 const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'svolti', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
-const resa = await render(voce);
-const Content = resa.Content;
-const salti = resa.headings.filter((h: { depth: number }) => h.depth === 2);
+// Quando la scheda non è tradotta si mostra quella italiana: i plugin devono vedere il percorso vero.
+const resa = await resaVoce(tradotta ? lingua : 'it', 'svolti', voce);
+const salti = resa.headings.filter((h) => h.depth === 2);
 const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomento}`)).voce?.body);
 const base = `/${materia}/${argomento}`;
 const lista = link(lingua, `${base}/esercizi-svolti`);
@@ -58,7 +59,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
     <label><input type="checkbox" data-passi /> <span>{lingua === 'en' ? 'One step at a time' : lingua === 'es' ? 'Un paso cada vez' : 'Un passaggio alla volta'}</span></label>
     <small>{lingua === 'en' ? 'After the statement, the solution appears one step at a time.' : lingua === 'es' ? 'Tras el enunciado, la solución aparece paso a paso.' : 'Dopo la traccia, lo svolgimento compare un passaggio alla volta.'}</small>
   </div>
-  <div class="testo-studio"><Content /></div>
+  <div class="testo-studio" set:html={resa.html} />
 </Base>
 
 <script is:inline define:vars={{ testi: lingua === 'en'

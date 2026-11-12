@@ -2,7 +2,8 @@
 import { originale } from '../lib/canonici';
 import { SEO } from '../lib/seo-testi';
 import { SITO, assoluto, accesso } from '../lib/seo';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { resaVoce } from '../lib/resa';
 import IndiceTeoria from '../components/IndiceTeoria.astro';
 import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
@@ -14,9 +15,9 @@ const { lingua, materia, argomento } = Astro.props;
 const t = T(lingua);
 const arg = argomentoL(lingua, materia, argomento);
 const { voce, tradotta } = await voceL(lingua, 'teoria', `${materia}/${argomento}`);
-const resa = voce ? await render(voce) : null;
-const Contenuto = resa?.Content ?? null;
-const sezioni = resa?.headings.filter((h: { depth: number }) => h.depth === 2) ?? [];
+// Quando il capitolo non è tradotto si mostra quello italiano: i plugin devono vedere il percorso vero.
+const resa = voce ? await resaVoce(tradotta ? lingua : 'it', 'teoria', voce) : null;
+const sezioni = resa?.headings.filter((h) => h.depth === 2) ?? [];
 // Teoremi e criteri con un nome proprio (Teorema di Binet, Criterio di Leibniz…): sono le parole che gli studenti
 // cercano, quindi compaiono nella descrizione per i motori di ricerca, prima del sommario.
 const NOME = /^(Teorema|Criterio|Formula|Lemma|Regola|Principio|Disuguaglianza|Legge|Theorem|Test|Rule|Principle|Inequality|Law)\b/i;
@@ -67,7 +68,7 @@ const parole = { esercizi: t.eserciziLabel, svolti: t.svoltiMin, dafare: t.daFar
   <h1>{voce?.data.titolo ?? arg.titolo}</h1>
   {voce?.data.sommario && <p class="sommario">{voce.data.sommario}</p>}
   <IndiceTeoria titolo={t.inQuestaPagina} sezioni={sezioni} />
-  {Contenuto ? <div class="testo-studio"><Contenuto /></div> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
+  {resa ? <div class="testo-studio" set:html={resa.html} /> : <p class="nota-segnaposto">{t.teoriaInPreparazione}</p>}
   <script is:inline define:vars={{ usi, basi, parole }}>
     for (const [id, u] of Object.entries(usi)) {
       const b = document.querySelector(`.blocco[id="${CSS.escape(id)}"]`) || document.getElementById(id);

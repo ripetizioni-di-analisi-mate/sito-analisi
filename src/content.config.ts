@@ -1,6 +1,10 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, type LoaderContext } from 'astro/loaders';
 import { CATALOGO_USA_PUBBLICO } from './data/cataloghi-studio.mjs';
+import { parseFrontmatter } from '@astrojs/markdown-remark';
+import { glob as cerca } from 'tinyglobby';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { MATERIE } from './data/materie';
 
 // I contenuti delle materie in preparazione restano fuori dal sito finché la materia non è attivata.
@@ -9,7 +13,7 @@ const escludi = IN_PREPARAZIONE.map((s) => `!${s}/**`);
 
 // Teoria: src/content/teoria/<materia>/<argomento>.md
 const teoria = defineCollection({
-  loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content/teoria' }),
+  loader: senzaHtml('./src/content/teoria', ['*/*.md', ...escludi]),
   schema: z.object({
     titolo: z.string(),
     sommario: z.string().optional(),
@@ -18,7 +22,7 @@ const teoria = defineCollection({
 
 // Esercizi svolti (schede per tipologia): src/content/svolti/<materia>/<argomento>/<n>.md
 const svolti = defineCollection({
-  loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content/svolti' }),
+  loader: senzaHtml('./src/content/svolti'),
   schema: z.object({
     titolo: z.string(),
     gratis: z.boolean().default(false),
@@ -37,23 +41,54 @@ const dafare = defineCollection({
   }),
 });
 
-// Le domande a tempo sono migliaia: la loro versione già resa in HTML (con le formule KaTeX) faceva superare
-// ad Astro la lunghezza massima di una stringa nel deposito dei contenuti (build fallita l'01/11).
-// Nel deposito resta solo il Markdown; l'HTML lo produce src/lib/domande.ts quando servono i dati.
-function senzaHtml(base: string) {
-  const g = glob({ pattern: ['*/*/*.md', ...escludi], base });
+// Le domande a tempo sono più di trentaseimila file. Astro le rendeva tutte in HTML (KaTeX compreso)
+// durante la sincronizzazione dei contenuti, e il risultato veniva poi buttato via: la versione già resa
+// faceva superare la lunghezza massima di una stringa nel deposito dei contenuti (build fallita l'01/11),
+// perciò veniva scartata. Quel lavoro inutile prendeva la maggior parte del tempo di build, quindi questo
+// caricatore legge soltanto il frontmatter e il corpo Markdown: l'HTML lo produce src/lib/domande.ts
+// quando i dati servono, una volta per file.
+function senzaHtml(base: string, includi: string[] = ['*/*/*.md', ...escludi]) {
+  const radice = path.resolve(base);
+
+  async function leggi(ctx: any, assoluto: string, id: string) {
+    const testo = await fs.readFile(assoluto, 'utf8');
+    const digest = ctx.generateDigest(testo);
+    if (ctx.store.get(id)?.digest === digest) return;
+    const { frontmatter, content } = parseFrontmatter(testo);
+    const data = await ctx.parseData({ id, data: frontmatter, filePath: assoluto });
+    ctx.store.set({ id, data, body: content, filePath: path.relative(process.cwd(), assoluto), digest });
+  }
+
   return {
     name: 'glob-senza-html',
-    load: (ctx: any) => g.load({
-      ...ctx,
-      store: new Proxy(ctx.store, {
-        get(t, p) {
-          if (p === 'set') return (e: any) => t.set({ ...e, rendered: undefined, assetImports: undefined });
-          const v = Reflect.get(t, p);
-          return typeof v === 'function' ? v.bind(t) : v;
-        },
-      }),
-    }),
+    load: async (ctx: any) => {
+      const file = await cerca(includi, { cwd: radice });
+      const visti = new Set<string>();
+      for (const f of file) {
+        const id = f.slice(0, -3);
+        visti.add(id);
+        await leggi(ctx, path.join(radice, f), id);
+      }
+      for (const id of ctx.store.keys()) if (!visti.has(id)) ctx.store.delete(id);
+
+      // In sviluppo le modifiche ai file devono arrivare alla pagina aperta.
+      if (!ctx.watcher) return;
+      ctx.watcher.add(radice);
+      const idDi = (f: string) => {
+        const rel = path.relative(radice, f);
+        return rel.startsWith('..') || !rel.endsWith('.md') ? undefined : rel.slice(0, -3);
+      };
+      const aggiorna = async (f: string) => {
+        const id = idDi(f);
+        if (id) await leggi(ctx, f, id).catch((e: any) => ctx.logger.error(`${id}: ${e.message}`));
+      };
+      ctx.watcher.on('add', aggiorna);
+      ctx.watcher.on('change', aggiorna);
+      ctx.watcher.on('unlink', (f: string) => {
+        const id = idDi(f);
+        if (id) ctx.store.delete(id);
+      });
+    },
   };
 }
 
@@ -65,8 +100,8 @@ const domande = defineCollection({
 });
 
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.
-const teoria_en = defineCollection({ loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content-en/teoria' }), schema: teoria.schema });
-const svolti_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/svolti' }), schema: svolti.schema });
+const teoria_en = defineCollection({ loader: senzaHtml('./src/content-en/teoria', ['*/*.md', ...escludi]), schema: teoria.schema });
+const svolti_en = defineCollection({ loader: senzaHtml('./src/content-en/svolti'), schema: svolti.schema });
 const domande_en = defineCollection({ loader: senzaHtml('./src/content-en/domande'), schema: domande.schema });
 const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }), schema: dafare.schema });
 
@@ -77,10 +112,10 @@ const catalogoUsaSospeso = {
   name: 'catalogo-usa-sospeso',
   async load({ store }: LoaderContext) { store.clear(); },
 };
-const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*.md'], base: './src/content-us/teoria' }) : catalogoUsaSospeso, schema: teoria.schema });
-const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/svolti' }) : catalogoUsaSospeso, schema: svolti.schema });
+const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/teoria', ['*/*.md']) : catalogoUsaSospeso, schema: teoria.schema });
+const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/svolti', ['*/*/*.md']) : catalogoUsaSospeso, schema: svolti.schema });
 const dafare_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }) : catalogoUsaSospeso, schema: dafare.schema });
-const domande_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/domande') : catalogoUsaSospeso, schema: domande.schema });
+const domande_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/domande', ['*/*/*.md']) : catalogoUsaSospeso, schema: domande.schema });
 
 // Formulari gratuiti: src/content/formulari/<materia>.md (pagina /formulari/<materia>, PDF con account gratuito).
 const formulari = defineCollection({
@@ -94,8 +129,8 @@ const formulari = defineCollection({
 // Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
 const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
 
-const teoria_es = defineCollection({ loader: glob({ pattern: ['*/*.md', ...escludi], base: './src/content-es/teoria' }), schema: teoria.schema });
-const svolti_es = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/svolti' }), schema: svolti.schema });
+const teoria_es = defineCollection({ loader: senzaHtml('./src/content-es/teoria', ['*/*.md', ...escludi]), schema: teoria.schema });
+const svolti_es = defineCollection({ loader: senzaHtml('./src/content-es/svolti'), schema: svolti.schema });
 const dafare_es = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/dafare' }), schema: dafare.schema });
 const domande_es = defineCollection({ loader: senzaHtml('./src/content-es/domande'), schema: domande.schema });
 
