@@ -251,7 +251,7 @@ The three graphs of a motion are read through the same two operations:
 - the slope of the tangent to the position-time graph at the instant $t$ is the velocity $v(t)$;
 - the slope of the tangent to the velocity-time graph at the instant $t$ is the acceleration $a(t)$.
 
-A horizontal tangent on the position-time graph therefore marks an instant at which the body is at rest, and a horizontal tangent on the velocity-time graph marks an instant of zero acceleration, which is where the speed attains a maximum or a minimum. A straight velocity-time graph means constant acceleration, and a straight position-time graph means constant velocity.
+A horizontal tangent on the position-time graph therefore marks an instant at which the body is at rest, and a horizontal tangent on the velocity-time graph marks an instant of zero acceleration. At such an instant the velocity has a local maximum, a local minimum or neither: for $v(t) = t^3$ the acceleration $3t^2$ vanishes at $t = 0$, while the velocity keeps increasing through that instant. A straight velocity-time graph means constant acceleration, and a straight position-time graph means constant velocity.
 :::
 
 ::::teorema{#area-under-velocity-graph titolo="Displacement as an area"}
