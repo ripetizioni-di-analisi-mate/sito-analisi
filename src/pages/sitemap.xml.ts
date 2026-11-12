@@ -4,6 +4,7 @@
 // scripts/date-pagine.mjs): un elenco e la pagina della materia prendono la data più recente dei loro contenuti.
 // Le pagine senza contenuti datati (prezzi, contatti…) non hanno data, come raccomandano Google e Bing.
 import { getCollection } from 'astro:content';
+import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from '../data/cataloghi-studio.mjs';
 import { MATERIE } from '../data/materie';
 import { courses as corsiUsa, courseUrl } from '../data/stem-usa/catalog.mjs';
 import { PROGRAMMI, SEZIONI_USA } from '../data/stem-usa/programmi.mjs';
@@ -29,7 +30,8 @@ export async function GET() {
   // le copie di pagine di un'altra materia (src/lib/canonici.ts) non entrano nella mappa: ci va l'originale
   const copia = (p: string) => { const x = p.split('/'); return x.length >= 4 && ['teoria', 'esercizi-svolti', 'esercizi'].includes(x[3]) && Boolean(originale(x[1], x[2], x[3] as 'teoria', x[4])); };
   const due = (p: string, priorita: number, conEn = true, dIt?: string, dEn?: string) =>
-    !copia(p) && pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita, dIt, dEn });
+    (CATALOGO_USA_PUBBLICO || !percorsoCatalogoUsa(p)) && !copia(p) &&
+    pagine.push({ it: p, en: conEn ? (p === '/' ? '/en' : `/en${p}`) : undefined, priorita, dIt, dEn });
   // data di un contenuto nelle due lingue (l'inglese sta in src/content-en)
   const d = (sezione: string, id: string) => ({ it: dataDi(`content/${sezione}`, id), en: dataDi(`content-en/${sezione}`, id) });
 

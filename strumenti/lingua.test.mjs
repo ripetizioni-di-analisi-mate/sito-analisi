@@ -80,10 +80,35 @@ test('la scelta di un catalogo conserva la lingua compatibile', () => {
     ['/es?catalogo=IT&lingua=es', '/es?lingua=es'],
     ['/fr?catalogo=IT&lingua=fr', '/fr?lingua=fr'],
     ['/en?catalogo=IT&lingua=en', '/en?lingua=en'],
-    ['/us?catalogo=US', '/us'],
   ]) {
     const url = new URL(path, 'https://ripetizionidianalisi.com');
     const req = new Request(url, { headers: { 'user-agent': 'Mozilla/5.0' } });
     assert.equal(versoCatalogoStudio(req, url)?.headers.get('location'), attesa);
+  }
+});
+
+test('con il catalogo USA sospeso la lingua resta indipendente dal paese e dalla scelta salvata', async () => {
+  for (const path of ['/', '/en', '/?catalogo=US']) {
+    const url = new URL(path, 'https://ripetizionidianalisi.com');
+    const req = new Request(url, { headers: { 'user-agent': 'Mozilla/5.0', 'accept-language': 'en-US', cookie: 'catalogo_studio=US' } });
+    Object.defineProperty(req, 'cf', { value: { country: 'US' } });
+    assert.equal(versoCatalogoStudio(req, url), null);
+  }
+  assert.equal(await destinazione('/', { lingua: 'en-US' }), '/en');
+});
+
+test('i vecchi link del catalogo USA rimandano temporaneamente al catalogo inglese', () => {
+  for (const [path, method, agente, attesa] of [
+    ['/us?catalogo=US&ref=prova', 'GET', 'Mozilla/5.0', '/en?ref=prova'],
+    ['/us.html', 'GET', 'Googlebot', '/en'],
+    ['/us/high-school/algebra-1', 'HEAD', 'curl', '/en'],
+    ['/us/calculus-1/practice-exam', 'GET', 'Mozilla/5.0', '/en'],
+  ]) {
+    const url = new URL(path, 'https://ripetizionidianalisi.com');
+    const req = new Request(url, { method, headers: { 'user-agent': agente } });
+    const risposta = versoCatalogoStudio(req, url);
+    assert.equal(risposta?.status, 302);
+    assert.equal(risposta?.headers.get('location'), attesa);
+    assert.match(risposta?.headers.get('cache-control') ?? '', /no-store/);
   }
 });
