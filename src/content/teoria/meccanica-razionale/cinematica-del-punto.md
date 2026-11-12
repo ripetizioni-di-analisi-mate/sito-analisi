@@ -188,7 +188,7 @@ dove la seconda uguaglianza segue sostituendo $P - O = r\,\hat{u}_r$ e l'espress
 
 La velocità areolare misura la rapidità con cui il raggio vettore spazza area, perciò è grande dove il punto è lontano dal polo e ruota in fretta. Per il moto circolare uniforme di raggio $R$ e velocità angolare $\omega$ vale $\dfrac{1}{2}\,R^2\omega$, costante.
 
-::struttura{nodi="O,0,0;P,2.01,1.41;Q,2.27,0.92" punti="0,0;2.01,1.41;2.27,0.92" poligoni="0,0 2.01,1.41 2.27,0.92" linee="1.73,1.73 1.83,1.63 1.93,1.51 2.02,1.39 2.11,1.25 2.18,1.11 2.25,0.96 2.3,0.81 2.35,0.65 2.39,0.49 2.42,0.33" frecce="0,0,3.2,0,x;0,0,0,2.6,y" etichette="1.3,0.72,ΔA" riferimento=0 titolo="Area spazzata dal segmento $OP$ fra due istanti vicini: la velocità areolare vale $\dfrac{1}{2}\,r^2\,\dot{\vartheta}$"}
+::struttura{nodi="O,0,0;P,2.27,0.92;Q,2.01,1.41" punti="0,0;2.27,0.92;2.01,1.41" poligoni="0,0 2.27,0.92 2.01,1.41" linee="1.73,1.73 1.83,1.63 1.93,1.51 2.02,1.39 2.11,1.25 2.18,1.11 2.25,0.96 2.3,0.81 2.35,0.65 2.39,0.49 2.42,0.33" frecce="0,0,3.2,0,x;0,0,0,2.6,y" etichette="1.3,0.72,ΔA" riferimento=0 titolo="Area spazzata dal segmento $OP$ fra due istanti vicini: la velocità areolare vale $\dfrac{1}{2}\,r^2\,\dot{\vartheta}$"}
 :::
 
 :::osservazione{#accelerazione-trasversa titolo="Accelerazione trasversa e velocità areolare"}
