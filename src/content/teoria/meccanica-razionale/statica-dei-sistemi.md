@@ -36,7 +36,7 @@ dove $\hat{t}$ è il versore tangente a $\gamma$ in $P$; in tal caso la reazione
 
 La condizione $\vec{F} \cdot \hat{t} = 0$ è un'unica equazione scalare nella coordinata che individua $P$ su $\gamma$, perciò determina le configurazioni di equilibrio senza che le reazioni compaiano. Trovata la configurazione, la reazione si legge dall'equazione $\vec{\Phi} = -\,\vec{F}$. Per un punto di massa $m$ su una guida rettilinea liscia inclinata di $\alpha$ sull'orizzontale, con una molla di costante $k$ e lunghezza a riposo nulla che lo collega all'estremo superiore della guida, la condizione dà $mg\sin\alpha - k s = 0$, quindi la distanza di equilibrio dall'estremo è $s = \dfrac{mg\sin\alpha}{k}$.
 
-::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" vettori="1.41,-1.41,1.41,-2.61,F;1.41,-1.41,0.56,-0.56,Φ;1.41,-1.41,2.26,-0.56,t" punti="1.41,-1.41,pieno,P;0,0,pieno,O" etichette="2.45,-0.35,t" xmin=-2.8 xmax=3.4 ymin=-3.2 ymax=2.6 titolo="Punto su una guida circolare liscia: la reazione $\vec{\Phi}$ è ortogonale alla guida, quindi non ha componente lungo il versore tangente $\hat{t}$; l'equilibrio richiede che anche la forza attiva $\vec{F}$ non ne abbia"}
+::grafico{assi=0 uguale=1 curve="2*cos(t),2*sin(t),0,6.29" vettori="1.41,-1.41,1.41,-2.61,F;1.41,-1.41,0.56,-0.56,Φ;1.41,-1.41,2.26,-0.56" punti="1.41,-1.41,pieno,P;0,0,pieno,O" etichette="2.45,-0.35,t" xmin=-2.8 xmax=3.4 ymin=-3.2 ymax=2.6 titolo="Punto su una guida circolare liscia: la reazione $\vec{\Phi}$ è ortogonale alla guida, quindi non ha componente lungo il versore tangente $\hat{t}$; l'equilibrio richiede che anche la forza attiva $\vec{F}$ non ne abbia"}
 
 :::dimostrazione
 Il punto è in quiete se e solo se la risultante di tutte le forze è nulla, cioè $\vec{F} + \vec{\Phi} = \vec{0}$. Poiché il vincolo è liscio, la reazione è ortogonale a $\gamma$, perciò $\vec{\Phi} \cdot \hat{t} = 0$. Proiettando l'equazione di equilibrio su $\hat{t}$ si ottiene allora
@@ -63,7 +63,7 @@ $$
 $$
 La prima condizione individua le configurazioni in cui le forze attive sono ortogonali alla superficie; la seconda dice che in quelle configurazioni la forza attiva deve premere contro la superficie. Quando $\Phi$ risulta negativa il punto si stacca dal vincolo, e il valore dei dati che annulla $\Phi$ è il **valore di distacco**.
 
-::struttura{linee="0,0 6,0" punti="2,0,P;4.6,0,P′" forze="2 0,0,-1.1,mg;4.6 0,0,-1.1,mg;4.6 0,0.9,0.9,F" reazioni="2 0,0,1.1,Φ" titolo="A sinistra la forza attiva preme sull'appoggio e la reazione $\Phi = mg$ è positiva; a destra la forza $\vec{F}$ solleva il punto e per $F\sin\alpha > mg$ la reazione richiesta sarebbe negativa, perciò il punto si distacca"}
+::struttura{linee="0,0 6,0" punti="2,0,P;4.6,0,P′" forze="2 0,0,-1.1,mg;4.6 0,0,-1.1,mg;4.6 0,0.9,0.9,F" reazioni="2 0,0,1.1,Φ" titolo="A sinistra la forza attiva preme sull'appoggio e la reazione $\Phi = mg$ è positiva; a destra la forza $\vec{F}$ solleva il punto, e quando la sua componente verticale supera $mg$ la reazione richiesta risulta negativa, perciò il punto si distacca"}
 :::
 
 :::richiamo{titolo="Legge di Coulomb-Morin per l'attrito statico"}
@@ -82,7 +82,7 @@ F_n \le 0 \\[4pt]
 |\vec{F}_t| \le f\,|F_n|
 \end{cases}
 $$
-La prima condizione dice che la forza attiva preme contro la superficie; la seconda che la componente tangenziale che il vincolo deve equilibrare rientra nel cono d'attrito. In presenza di attrito l'equilibrio non si realizza in una sola configurazione ma in un *insieme* di configurazioni, perciò la risposta di un problema con attrito è una disuguaglianza. Per un punto appoggiato su un piano inclinato di $\alpha$ si ottiene $mg\sin\alpha \le f\,mg\cos\alpha$, cioè $\tan\alpha \le f$.
+La prima condizione dice che la forza attiva preme contro la superficie; la seconda che la componente tangenziale che il vincolo deve equilibrare rientra nel cono d'attrito. In presenza di attrito l'equilibrio si realizza in un *insieme* di configurazioni, perciò la risposta di un problema con attrito è una disuguaglianza. Per un punto appoggiato su un piano inclinato di $\alpha$ si ottiene $mg\sin\alpha \le f\,mg\cos\alpha$, cioè $\tan\alpha \le f$.
 
 ::grafico{assi=0 uguale=1 linee="-2.4,0 2.4,0" segmenti="0,0,0,2.6;0,0,-1.2,2.4;0,0,1.2,2.4" vettori="0,0,0.5,1.4,Φ;0,0,-0.5,-1.4,F" punti="0,0,pieno,P" etichette="0.5,1.95,φ;-1.75,2.75,cono d'attrito" xmin=-2.8 xmax=2.8 ymin=-2 ymax=3.2 titolo="Cono d'attrito di semiapertura $\varphi = \arctan f$: l'equilibrio è possibile se la reazione richiesta, opposta alla forza attiva $\vec{F}$, cade dentro il cono"}
 :::
@@ -152,7 +152,7 @@ e poiché $\vec{M}_O^{(i)} = \vec{0}$, segue $\vec{M}_O^{(e)} = \vec{0}$.
 ::::
 
 :::osservazione{#scelta-del-polo titolo="Scelta del polo"}
-Se $\vec{R}^{(e)} = \vec{0}$, per la formula del cambiamento di polo si ha $\vec{M}_{O'}^{(e)} = \vec{M}_O^{(e)}$ per ogni coppia di poli, quindi l'equazione dei momenti scritta rispetto a un polo e quella scritta rispetto a un altro non sono indipendenti, e nel piano le equazioni scalari indipendenti restano tre. Il polo si scegli perciò dove conviene, e la scelta standard è un punto in cui si incontrano le rette d'azione di più reazioni incognite, perché quelle reazioni hanno momento nullo e non compaiono nell'equazione. In un'asta con una cerniera in $A$ e un carrello in $B$ il polo si prende in $A$, e l'equazione dei momenti contiene allora la sola reazione del carrello.
+Se $\vec{R}^{(e)} = \vec{0}$, per la formula del cambiamento di polo si ha $\vec{M}_{O'}^{(e)} = \vec{M}_O^{(e)}$ per ogni coppia di poli, quindi l'equazione dei momenti scritta rispetto a un polo e quella scritta rispetto a un altro non sono indipendenti, e nel piano le equazioni scalari indipendenti restano tre. Il polo si sceglie perciò dove conviene, e la scelta standard è un punto in cui si incontrano le rette d'azione di più reazioni incognite, perché quelle reazioni hanno momento nullo e non compaiono nell'equazione. In un'asta con una cerniera in $A$ e un carrello in $B$ il polo si prende in $A$, e l'equazione dei momenti contiene allora la sola reazione del carrello.
 :::
 
 ## Sufficienza per il corpo rigido
@@ -205,7 +205,7 @@ Un corpo rigido piano vincolato ha $n$ gradi di libertà residui e un certo nume
 :::definizione{#diagramma-di-corpo-libero titolo="Diagramma di corpo libero"}
 Il **diagramma di corpo libero** di un corpo è il disegno del corpo isolato dai vincoli e dagli altri corpi, con tutte le forze attive e tutte le reazioni che i vincoli e i corpi rimossi esercitano su di esso, ciascuna disegnata in un verso scelto a priori. Le equazioni cardinali si scrivono leggendo il diagramma, e un valore negativo di una componente significa che il verso vero è opposto a quello disegnato.
 
-::struttura{nodi="A,0,0;B,5,0" aste="A-B" vincoli="A,cerniera;B,carrello" forze="5 0,0,-1.2,F" quote="A,B,ℓ" titolo="Asta con cerniera in $A$ e carrello in $B$, caricata dalla forza $\vec{F}$ nell'estremo"}
+::struttura{nodi="A,0,0;B,5,0" aste="A-B" vincoli="A,cerniera;B,carrello" forze="2.5 0,0,-1.2,mg;5 0,0,-1.2,F" quote="A,B,ℓ" titolo="Asta con cerniera in $A$ e carrello in $B$, caricata dalla forza $\vec{F}$ nell'estremo"}
 
 ::struttura{nodi="A,0,0;B,5,0" aste="A-B" reazioni="A,1.2,0,Φ_Ax;A,0,1.2,Φ_Ay;B,0,1.2,Φ_B" forze="2.5 0,0,-1.2,mg;5 0,0,-1.2,F" quote="A,B,ℓ" titolo="Diagramma di corpo libero: tre componenti di reazione incognite e tre equazioni cardinali"}
 :::

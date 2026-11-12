@@ -43,7 +43,7 @@ Quando la terna solidale $\xi$, $\eta$, $\zeta$ è principale d'inerzia in $O$ i
 :::
 
 :::osservazione{#incognite-del-moto titolo="Equazioni e incognite nel moto di un rigido"}
-Un corpo rigido libero ha sei gradi di libertà, e le due equazioni cardinali danno sei equazioni scalari: il moto è perciò determinato dalle forze attive e dai dati iniziali. Quando il corpo è vincolato, i gradi di libertà scendono a $n$ e fra le forze esterne compaiono le reazioni vincolari, che sono incognite. Nei tre casi trattati qui, asse fisso ($n = 1$), moto piano ($n \le 3$) e punto fisso ($n = 3$), si scelgono le componenti delle equazioni cardinali che contengono solo le coordinate lagrangiane, si integra il moto e solo dopo si ricavano le reazioni dalle equazioni rimaste.
+Un corpo rigido libero ha sei gradi di libertà, e le due equazioni cardinali danno sei equazioni scalari, perciò il moto è determinato dalle forze attive e dai dati iniziali. Quando il corpo è vincolato, i gradi di libertà scendono a $n$ e fra le forze esterne compaiono le reazioni vincolari, che sono incognite. Nel caso dell'asse fisso ($n = 1$), del moto piano ($n \le 3$) e del punto fisso ($n = 3$) si scelgono le componenti delle equazioni cardinali che contengono solo le coordinate lagrangiane, si integra il moto e solo dopo si ricavano le reazioni dalle equazioni rimaste.
 :::
 
 ## Il corpo rigido con un asse fisso
@@ -96,7 +96,7 @@ $$
 $$
 dove $(G - O)_\perp$ è la componente di $G - O$ ortogonale all'asse. Le reazioni sono quindi la somma di una parte che dipende solo dalle forze attive e di una parte proporzionale a $\ddot{\vartheta}$ e a $\dot{\vartheta}^2$, che si annulla per ogni moto se e solo se $(G-O)_\perp = \vec{0}$ e $I_{\xi\zeta} = I_{\eta\zeta} = 0$.
 
-::struttura{nodi="O,0,0;B,0,4;C,0,2;D,1.6,3.1,-;E,-1.6,0.9,-" aste="O-B;D-E" vincoli="O,cerniera;B,cerniera,90" punti="0.8,2.55,G,baricentro" tratteggi="0,2 0,3.6" reazioni="O,1.1,0,Φ_O;B,-1.1,0,Φ_B" etichette="0.35,2.75,α" quote="O,B,h,-0.85" titolo="Asta saldata per il punto medio a un albero con due cuscinetti: le reazioni trasversali formano una coppia proporzionale a $\dot{\vartheta}^2$"}
+::struttura{nodi="O,0,0;A,0,4;D,1.7,3.15,-;E,-1.7,0.85,-" aste="O-A;D-E" vincoli="O,cerniera;A,cerniera,90" punti="0,2,G,baricentro" tratteggi="0,2 0,3.7" reazioni="O,1.1,0,Φ_O;A,-1.1,0,Φ_A" etichette="0.38,2.9,α" quote="O,A,h,-0.95" titolo="Corpo saldato a un albero fra i due cuscinetti $O$ e $A$: le reazioni trasversali dipendono da $\ddot{\vartheta}$ e da $\dot{\vartheta}^2$ attraverso i prodotti d'inerzia"}
 
 :::dimostrazione
 Si proiettano le equazioni cardinali sulla terna solidale. Dalla formula fondamentale della cinematica rigida, con $O$ fisso, si ha $\vec{v}_G = \vec{\omega} \wedge (G-O)$ e quindi
@@ -116,7 +116,7 @@ Il momento delle forze esterne rispetto a $O$ è $\vec{M}_O^{(a)} + (A - O) \wed
 ::::
 
 :::definizione{#bilanciamento titolo="Bilanciamento statico e dinamico"}
-Un corpo rigido con asse fisso è **bilanciato staticamente** quando il suo baricentro sta sull'asse di rotazione, cosicché $\vec{a}_G = \vec{0}$ in ogni moto. È **bilanciato dinamicamente** quando l'asse di rotazione è asse principale d'inerzia in un suo punto, cioè quando $I_{\xi\zeta} = I_{\eta\zeta} = 0$. Nei due casi insieme le reazioni dei cuscinetti coincidono con quelle che si calcolerebbero in statica, qualunque sia la velocità angolare, e questo è il motivo per cui alberi, ruote e rotori si equilibrano prima di metterli in rotazione. Una ruota con un difetto di massa $m$ a distanza $e$ dall'asse si bilancia staticamente aggiungendo una massa $m'$ diametralmente opposta con $m'e' = m\,e$, e alla velocità angolare $\omega$ il difetto non equilibrato produce reazioni proporzionali a $m\,e\,\omega^2$, che crescono con il quadrato del numero di giri.
+Un corpo rigido con asse fisso è **bilanciato staticamente** quando il suo baricentro sta sull'asse di rotazione, cosicché $\vec{a}_G = \vec{0}$ in ogni moto. È **bilanciato dinamicamente** quando l'asse di rotazione è asse principale d'inerzia in un suo punto, cioè quando $I_{\xi\zeta} = I_{\eta\zeta} = 0$. Quando valgono entrambe le condizioni, le reazioni dei cuscinetti coincidono con quelle che si calcolerebbero in statica, qualunque sia la velocità angolare, e questo è il motivo per cui alberi, ruote e rotori si equilibrano prima di metterli in rotazione. Una ruota con un difetto di massa $m$ a distanza $e$ dall'asse si bilancia staticamente aggiungendo una massa $m'$ diametralmente opposta con $m'e' = m\,e$, e alla velocità angolare $\omega$ il difetto non equilibrato produce reazioni proporzionali a $m\,e\,\omega^2$, che crescono con il quadrato del numero di giri.
 :::
 
 :::attenzione
@@ -148,7 +148,7 @@ $$
 \qquad
 \mathcal{T} = 2\pi\sqrt{\frac{I_a}{M\,g\,d}} .
 $$
-Il teorema serve a misurare $g$ e a confrontare corpi diversi: due corpi con la stessa $\ell_r$ oscillano con lo stesso periodo, qualunque sia la loro forma. Per un'asta omogenea di lunghezza $\ell$ sospesa per un estremo si ha $I_a = \dfrac{m\,\ell^2}{3}$ e $d = \dfrac{\ell}{2}$, quindi $\ell_r = \dfrac{2\ell}{3}$ e il periodo è quello di un pendolo semplice lungo due terzi dell'asta.
+Il teorema serve a misurare $g$ e a confrontare corpi diversi, poiché due corpi con la stessa $\ell_r$ oscillano con lo stesso periodo, qualunque sia la loro forma. Per un'asta omogenea di lunghezza $\ell$ sospesa per un estremo si ha $I_a = \dfrac{m\,\ell^2}{3}$ e $d = \dfrac{\ell}{2}$, quindi $\ell_r = \dfrac{2\ell}{3}$ e il periodo è quello di un pendolo semplice lungo due terzi dell'asta.
 
 :::dimostrazione
 Il momento assiale del peso rispetto ad $a$ si calcola come momento della risultante $-M g\,\hat{\jmath}$ applicata in $G$. La distanza di $G$ dall'asse è $d$ e il braccio del peso rispetto all'asse è la proiezione orizzontale di tale distanza, cioè $d\,\sin\vartheta$; il momento tende a riportare il corpo verso $\vartheta = 0$, perciò ha il segno opposto a $\vartheta$ e vale $-M g\,d\,\sin\vartheta$. Il vincolo è ideale, dunque per l'equazione del moto attorno a un asse fisso si ottiene $I_a\,\ddot{\vartheta} = -M g\,d \sin\vartheta$. Dividendo per $I_a$ e introducendo $\ell_r = \dfrac{I_a}{M d}$ si ha $\ddot{\vartheta} = -\dfrac{g}{\ell_r}\,\sin\vartheta$, che è l'equazione del pendolo semplice di lunghezza $\ell_r$. Per $|\vartheta|$ piccolo si sostituisce $\sin\vartheta$ con $\vartheta$ e si ottiene l'equazione dell'oscillatore armonico $\ddot{\vartheta} + \dfrac{g}{\ell_r}\,\vartheta = 0$, di pulsazione $\sqrt{\dfrac{g}{\ell_r}} = \sqrt{\dfrac{M g d}{I_a}}$.
@@ -188,7 +188,7 @@ M\,\ddot{y}_G = R_y^{(e)} \\[4pt]
 I_G\,\ddot{\vartheta} = M_{Gz}^{(e)}
 \end{cases}
 $$
-Il sistema delle tre equazioni basta a determinare il moto e le reazioni: si eliminano le reazioni fra le tre equazioni e le equazioni di vincolo fino a ottenere tante equazioni quanti sono i gradi di libertà, si integra, e poi si tornano a calcolare le reazioni. Per un'asta appoggiata per un estremo su un piano orizzontale liscio e lasciata cadere da ferma le forze orizzontali sono nulle, dunque $\ddot{x}_G = 0$ e il baricentro scende lungo una verticale.
+Il sistema delle tre equazioni basta a determinare il moto e le reazioni. Si eliminano le reazioni fra le tre equazioni e le equazioni di vincolo fino a ottenere tante equazioni quanti sono i gradi di libertà, si integra il moto e si tornano poi a calcolare le reazioni. Per un'asta appoggiata per un estremo su un piano orizzontale liscio e lasciata cadere da ferma le forze orizzontali sono nulle, dunque $\ddot{x}_G = 0$ e il baricentro scende lungo una verticale.
 :::
 
 :::osservazione{#polo-nel-contatto titolo="Seconda equazione cardinale con polo nel punto di contatto"}
@@ -206,7 +206,7 @@ e il puro rotolamento è possibile, con coefficiente d'attrito statico $f_s$, fi
 $$
 \tan\alpha \le \frac{1 + \beta}{\beta}\,f_s .
 $$
-I corpi con $\beta$ più piccolo scendono più in fretta, indipendentemente da massa e raggio: per il disco pieno $\beta = \dfrac{1}{2}$ e $a_G = \dfrac{2}{3}\,g\sin\alpha$, per la sfera piena $\beta = \dfrac{2}{5}$ e $a_G = \dfrac{5}{7}\,g\sin\alpha$, per l'anello sottile $\beta = 1$ e $a_G = \dfrac{1}{2}\,g\sin\alpha$.
+I corpi con $\beta$ più piccolo scendono più in fretta, indipendentemente da massa e raggio. Per il disco pieno $\beta = \dfrac{1}{2}$ e $a_G = \dfrac{2}{3}\,g\sin\alpha$, per la sfera piena $\beta = \dfrac{2}{5}$ e $a_G = \dfrac{5}{7}\,g\sin\alpha$, per l'anello sottile $\beta = 1$ e $a_G = \dfrac{1}{2}\,g\sin\alpha$.
 
 ::struttura{linee="0,0 6,3.46 6,0 0,0" cerchi="2.57,2.48,0.86" punti="2.57,2.48,G,baricentro;3,1.73,C,centro" forze="2.57 2.48,0,-1,mg" reazioni="3 1.73,-0.6,1.04,N;3 1.73,0.95,0.55,F_a" etichette="1.05,0.26,α" coppie="2.57 2.48,-1,ω" titolo="Disco che rotola senza strisciare: il peso in $G$, la reazione normale $N$ e la forza d'attrito $F_a$ nel punto di contatto $C$"}
 
@@ -223,7 +223,7 @@ Dalla seconda equazione si ricava $F_a = \beta\,m\,a_G$; sostituendo nella prima
 ::::
 
 :::osservazione{#attrito-volvente titolo="Attrito volvente"}
-Nel rotolamento di un corpo deformabile il contatto non è puntiforme e la reazione del piano non passa per il punto geometrico di contatto. Si schematizza questa situazione aggiungendo alla reazione normale una coppia resistente, il cui momento ha modulo al più $f_v\,N$, con $f_v$ un **coefficiente di attrito volvente** che ha le dimensioni di una lunghezza e si misura in metri. La coppia si oppone alla rotazione, quindi per un corpo che rotola su un piano orizzontale l'equazione del moto attorno a $G$ diventa $I_G\,\ddot{\vartheta} = F_a\,R - f_v\,N$ e il corpo rallenta anche in assenza di strisciamento. I valori di $f_v$ sono piccoli, dell'ordine di $10^{-4}\,\mathrm{m}$ per acciaio su acciaio, e nei problemi di questo argomento si trascurano salvo indicazione esplicita.
+Nel rotolamento di un corpo deformabile il contatto avviene su una piccola area e la reazione del piano risulta spostata in avanti rispetto al punto geometrico di contatto. Si schematizza questa situazione aggiungendo alla reazione normale una coppia resistente, il cui momento ha modulo al più $f_v\,N$, con $f_v$ un **coefficiente di attrito volvente** che ha le dimensioni di una lunghezza e si misura in metri. La coppia si oppone alla rotazione, quindi per un corpo che rotola su un piano orizzontale l'equazione del moto attorno a $G$ diventa $I_G\,\ddot{\vartheta} = F_a\,R - f_v\,N$ e il corpo rallenta anche in assenza di strisciamento. I valori di $f_v$ sono piccoli, dell'ordine di $10^{-4}\,\mathrm{m}$ per acciaio su acciaio, e nei problemi di questo argomento si trascurano salvo indicazione esplicita.
 :::
 
 ## Il corpo rigido con un punto fisso: equazioni di Eulero
