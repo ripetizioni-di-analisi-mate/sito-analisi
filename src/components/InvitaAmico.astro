@@ -8,7 +8,12 @@ interface Props { lingua: Lingua }
 const en = Astro.props.lingua === 'en';
 const de = Astro.props.lingua === 'de';
 const es = Astro.props.lingua === 'es';
-const s = es ? {
+const fr = Astro.props.lingua === 'fr';
+const s = fr ? {
+  breve: `Invite un ami et profitez chacun de ${SCONTO_INVITO} % de réduction`,
+  copia: 'Copier le lien', copiato: 'Lien copié', come: 'Comment ça marche (en italien)',
+  messaggio: `Je révise avec Ripetizioni di Analisi. Avec ce lien, tu bénéficies de ${SCONTO_INVITO} % de réduction sur ta première matière.`,
+} : es ? {
   breve: `Invita a un amigo y ambos tendrán un ${SCONTO_INVITO} % de descuento`,
   copia: 'Copiar enlace', copiato: 'Copiado', come: 'Cómo funciona (en italiano)',
   messaggio: `Estudio con Ripetizioni di Analisi. Con este enlace tienes un ${SCONTO_INVITO} % de descuento en tu primera asignatura.`,
@@ -30,7 +35,7 @@ const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="
 <section class="invita-amico invita-b" id="invita-amico" hidden>
   <span class="invita-icona" set:html={regalo} />
   <div class="invita-corpo">
-    <p class="invita-breve"><strong>{s.breve}</strong> <a href={de || es ? '/invito?lingua=it' : '/invito'}>{s.come}</a></p>
+    <p class="invita-breve"><strong>{s.breve}</strong> <a href={de || es || fr ? '/invito?lingua=it' : '/invito'}>{s.come}</a></p>
     <p class="invita-numeri" data-invita-numeri hidden></p>
   </div>
   <div class="invita-tasti">
@@ -39,7 +44,7 @@ const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="
   </div>
 </section>
 
-<script is:inline define:vars={{ s, en, de, es }}>
+<script is:inline define:vars={{ s, en, de, es, fr }}>
   (async () => {
     const box = document.getElementById('invita-amico');
     if (!box) return;
@@ -47,9 +52,9 @@ const regalo = '<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="
     const d = r && r.ok ? await r.json() : null;
     if (!d || !d.attivo || !d.link) return;
     const numeri = [];
-    if (d.iscritti) numeri.push(es ? `${d.iscritti} ${d.iscritti === 1 ? 'persona registrada' : 'personas registradas'}` : de ? `${d.iscritti} angemeldet` : en ? `${d.iscritti} ${d.iscritti === 1 ? 'friend' : 'friends'} signed up` : `${d.iscritti} ${d.iscritti === 1 ? 'amico iscritto' : 'amici iscritti'}`);
-    if (d.hannoComprato) numeri.push(es ? `${d.hannoComprato} ${d.hannoComprato === 1 ? 'compra' : 'compras'}` : de ? `${d.hannoComprato} mit Kauf` : en ? `${d.hannoComprato} bought` : `${d.hannoComprato} ${d.hannoComprato === 1 ? 'ha comprato' : 'hanno comprato'}`);
-    if (d.premiDisponibili) numeri.push(es ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'descuento disponible' : 'descuentos disponibles'}` : de ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'Rabatt verfügbar' : 'Rabatte verfügbar'}` : en ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'discount' : 'discounts'} to use` : `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'sconto' : 'sconti'} del ${d.percentuale}% da usare`);
+    if (d.iscritti) numeri.push(fr ? `${d.iscritti} ${d.iscritti === 1 ? 'inscription' : 'inscriptions'}` : es ? `${d.iscritti} ${d.iscritti === 1 ? 'persona registrada' : 'personas registradas'}` : de ? `${d.iscritti} angemeldet` : en ? `${d.iscritti} ${d.iscritti === 1 ? 'friend' : 'friends'} signed up` : `${d.iscritti} ${d.iscritti === 1 ? 'amico iscritto' : 'amici iscritti'}`);
+    if (d.hannoComprato) numeri.push(fr ? `${d.hannoComprato} ${d.hannoComprato === 1 ? 'achat' : 'achats'}` : es ? `${d.hannoComprato} ${d.hannoComprato === 1 ? 'compra' : 'compras'}` : de ? `${d.hannoComprato} mit Kauf` : en ? `${d.hannoComprato} bought` : `${d.hannoComprato} ${d.hannoComprato === 1 ? 'ha comprato' : 'hanno comprato'}`);
+    if (d.premiDisponibili) numeri.push(fr ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'réduction disponible' : 'réductions disponibles'}` : es ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'descuento disponible' : 'descuentos disponibles'}` : de ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'Rabatt verfügbar' : 'Rabatte verfügbar'}` : en ? `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'discount' : 'discounts'} to use` : `${d.premiDisponibili} ${d.premiDisponibili === 1 ? 'sconto' : 'sconti'} del ${d.percentuale}% da usare`);
     const n = box.querySelector('[data-invita-numeri]');
     n.textContent = numeri.join(' · '); n.hidden = !numeri.length;
     box.querySelector('[data-invita-wa]').href = `https://wa.me/?text=${encodeURIComponent(`${s.messaggio} ${d.link}`)}`;

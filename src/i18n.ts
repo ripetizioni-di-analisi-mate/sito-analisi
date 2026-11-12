@@ -6,6 +6,7 @@ import { MATERIE, SEZIONI, type Materia, type Argomento } from './data/materie';
 import { MATERIE_EN, GRUPPI_EN, SOTTOGRUPPI_EN } from './data/materie-en';
 import { TESTI_DE } from './data/testi-de';
 import { TESTI_ES } from './data/testi-es';
+import { TESTI_FR } from './data/testi-fr';
 import { CATALOGHI_LOCALIZZATI, linguaCatalogo, nellaLingua, senzaLingua, type Lingua } from './lib/lingue-sito';
 export { LINGUE, type Lingua } from './lib/lingue-sito';
 import { FACOLTA } from './data/facolta';
@@ -51,7 +52,7 @@ export const gruppiL = (l: Lingua) => [...new Set(materieL(l).map((m) => m.grupp
 // Nei sottogruppi l'etichetta è il titolo senza il nome del sottogruppo ("Matematica 1° anno" -> "1° anno").
 export function blocchiGruppo(materie: Materia[], g: string) {
   const delGruppo = materie.filter((m) => m.gruppo === g);
-  const titoliFacolta: Partial<Record<string, 'titolo' | 'titoloEn' | 'titoloDe' | 'titoloEs'>> = { Università: 'titolo', University: 'titoloEn', [CATALOGHI_LOCALIZZATI.de.gruppi.Università]: 'titoloDe', [CATALOGHI_LOCALIZZATI.es.gruppi.Università]: 'titoloEs' } as const;
+  const titoliFacolta: Partial<Record<string, 'titolo' | 'titoloEn' | 'titoloDe' | 'titoloEs' | 'titoloFr'>> = { Università: 'titolo', University: 'titoloEn', [CATALOGHI_LOCALIZZATI.de.gruppi.Università]: 'titoloDe', [CATALOGHI_LOCALIZZATI.es.gruppi.Università]: 'titoloEs', [CATALOGHI_LOCALIZZATI.fr.gruppi.Università]: 'titoloFr' } as const;
   const titoloFacolta = titoliFacolta[g];
   if (titoloFacolta) {
     const perSlug = new Map(delGruppo.map((m) => [m.slug, m]));
@@ -290,7 +291,7 @@ export const TESTI = {
   },
 };
 export type Testi = typeof TESTI.it;
-export const T = (l: Lingua): Testi => l === 'es' ? TESTI_ES : l === 'de' ? TESTI_DE : TESTI[l];
+export const T = (l: Lingua): Testi => l === 'fr' ? TESTI_FR : l === 'es' ? TESTI_ES : l === 'de' ? TESTI_DE : TESTI[l];
 // I soli testi che servono agli script nel browser (le funzioni non passano: si usano i segnaposto).
 export function testiJs(l: Lingua) {
   const j = T(l).js as Record<string, unknown>;

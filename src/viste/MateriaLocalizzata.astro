@@ -9,15 +9,20 @@ import { catalogoDomande } from '../lib/domande';
 interface Props { m: Materia; lingua: LinguaCatalogo }
 const { m, lingua } = Astro.props;
 const t = T(lingua);
-const testo = lingua === 'es' ? {
+const testo = lingua === 'fr' ? {
+  quiz: 'Quiz chronométrés', nota: 'Les langues disponibles sont indiquées à côté de chaque support.',
+  acquisto: (prezzo: number) => `Accès complet pour ${prezzo} € (achat en italien)`,
+  lingue: { de: 'Allemand', es: 'Espagnol', fr: 'Français', it: 'Italien', en: 'Anglais' },
+  etichetta: (titolo: string, nome: string) => `${titolo} en ${nome.toLowerCase()}`,
+} : lingua === 'es' ? {
   quiz: 'Preguntas con tiempo', nota: 'Junto a cada recurso se indica en qué idiomas puedes consultarlo.',
   acquisto: (prezzo: number) => `Acceso completo por ${prezzo} € (compra en italiano)`,
-  lingue: { de: 'Alemán', es: 'Español', it: 'Italiano', en: 'Inglés' },
+  lingue: { de: 'Alemán', es: 'Español', fr: 'Francés', it: 'Italiano', en: 'Inglés' },
   etichetta: (titolo: string, nome: string) => `${titolo} en ${nome.toLowerCase()}`,
 } : {
   quiz: 'Quiz mit Zeitlimit', nota: 'Bei jedem Thema siehst du, in welcher Sprache die Lernmaterialien verfügbar sind.',
   acquisto: (prezzo: number) => `Vollzugang für ${prezzo} € (Kauf auf Italienisch)`,
-  lingue: { de: 'Deutsch', es: 'Spanisch', it: 'Italienisch', en: 'Englisch' },
+  lingue: { de: 'Deutsch', es: 'Spanisch', fr: 'Französisch', it: 'Italienisch', en: 'Englisch' },
   etichetta: (titolo: string, nome: string) => `${titolo} auf ${nome}`,
 };
 const [teoria, teoriaEn, svolti, svoltiEn, dafare, dafareEn, quiz, quizEn] = await Promise.all([

@@ -204,6 +204,49 @@ const TESTI = {
     videocorsi: 'Ver los videocursos en italiano',
     ruolo: 'Profesor particular de cálculo',
   },
+  fr: {
+    titolo: 'À propos',
+    descrizione: 'Carmine Tornincasa, professeur particulier d’analyse. Plus de 1 000 élèves et étudiants accompagnés et 10 000 heures de cours.',
+    nome: 'Carmine Tornincasa',
+    laurea: 'Diplômé en génie civil de l’université de Campanie Luigi Vanvitelli avec la note maximale de 110/110 et les félicitations du jury.',
+    sottotitolo: 'Professeur particulier et créateur de la chaîne',
+    seguimi: 'Retrouve-moi sur',
+    punti: [
+      [['Diplômé en génie civil', true], [' et titulaire d’un master en mathématiques', false]],
+      [['Plus de 1 000 élèves et étudiants accompagnés', true], [' et ', false], ['10 000 heures de cours', true]],
+      [['Je donne des cours de mathématiques ', false], ['depuis le lycée', true]],
+      [['Cours particuliers, ', false], ['cours en groupe à distance', true], [' et ', false], ['cours en vidéo', true]],
+    ] as [string, boolean][][],
+    studenti: 'Mes élèves et étudiants',
+    dove: 'D’où venaient mes élèves et étudiants en 2025',
+    province: ['Des élèves et étudiants de ', '78 provinces italiennes', ', surtout de Rome, Milan et Naples.'],
+    mappa: 'Carte d’Italie indiquant les provinces d’origine. Les cercles les plus grands se trouvent à Rome, Milan et Naples.',
+    citta: [['400+', 'de Rome'], ['250+', 'de Milan'], ['120+', 'de Naples'], ['90+', 'de Palerme'], ['80+', 'de Turin']],
+    missione: 'Comment je donne mes cours',
+    paragrafi: [
+      'En cours, on repart de l’étape qui te pose problème. Sur le site, les notions suivent le même ordre que dans mes cours. Chaque théorème précise ses hypothèses et les exemples sont regroupés par type d’exercice. Après chaque calcul, j’explique comment on obtient le résultat.',
+      'Mon objectif est de t’aider à résoudre les exercices par toi-même. Sur Instagram et d’autres réseaux, je partage des explications et des exercices supplémentaires.',
+    ],
+    risultati: 'Retours après les examens',
+    risultato: 'Témoignage en italien, tiré des stories à la une sur Instagram',
+    altri: 'Plus de témoignages sur Instagram',
+    servizi: 'Cours et accompagnement',
+    righeServizi: [
+      ['Cours particuliers', ['J’adapte chaque cours à ton niveau et à ce que tu veux travailler.']],
+      ['Cours en groupe en direct', [
+        'Le contenu s’appuie sur les sujets d’annales envoyés par le groupe. Il y a au moins trois séances d’une heure par semaine.',
+        'Les séances sont enregistrées. Pour t’inscrire, indique ton nom, ton prénom et ton numéro de téléphone.',
+      ]],
+      ['Cours en vidéo', ['Enregistrements d’un cours complet avec les vidéos et les supports PDF.']],
+    ] as [string, string[]][],
+    durata: 'Durée approximative',
+    lezioni: ['environ 30 heures pour Analyse I', 'environ 20 heures pour Analyse II'],
+    supportate: 'Universités où étudient mes élèves',
+    prenota: 'Demander un cours sur WhatsApp',
+    prova: 'Essayer les supports gratuits',
+    videocorsi: 'Voir les cours en vidéo en italien',
+    ruolo: 'Professeur particulier d’analyse',
+  },
 }[lingua];
 
 const RISULTATI = Array.from({ length: 14 }, (_, i) => `/chi-sono/risultati/${String(i + 1).padStart(2, '0')}.webp`);
@@ -276,7 +319,7 @@ const persona = {
         <strong>{nome}</strong>
         <div>
           {testi.map((t) => <p>{t}</p>)}
-          {i === 2 && <p><a href={['de', 'es'].includes(lingua) ? '/videocorsi?lingua=it' : '/videocorsi'}>{TESTI.videocorsi}</a></p>}
+          {i === 2 && <p><a href={['de', 'es', 'fr'].includes(lingua) ? '/videocorsi?lingua=it' : '/videocorsi'}>{TESTI.videocorsi}</a></p>}
           {i === 1 && (
             <>
               <p class="bio-durata">{TESTI.durata}</p>

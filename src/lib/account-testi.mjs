@@ -1,5 +1,26 @@
 export function accountTesti(lingua) {
-  return lingua === 'es' ? {
+  return lingua === 'fr' ? {
+    studio: 'Ton espace de travail', contenuti: 'Tes supports', riprendi: 'Reprendre', ultima: 'Ta dernière séance',
+    progressi: 'Progression', impostazioni: 'Paramètres', settimana: 'Cette semaine', minuti: 'Temps de travail', corrette: 'Bonnes réponses', giorni: 'Jours travaillés',
+    obiettivo: 'Ton prochain objectif', raggiunti: 'Réussites', attivita: 'Activité récente', tutti: 'Voir toutes les réussites',
+    vuoto: 'Les matières et les cours en vidéo que tu débloques s’affichent ici.', esplora: 'Découvrir les matières',
+    dati: 'Informations du compte', nome: 'Prénom', modifica: 'Modifier le prénom', password: 'Modifier le mot de passe', dispositivi: 'Appareils connectés',
+    notaDispositivi: 'Déconnecte un appareil pour libérer une place. Ta session reste ouverte sur cet appareil.',
+    aggiorna: 'Actualiser', scollega: 'Déconnecter', questo: 'Cet appareil', ultimo: 'Dernière utilisation', ora: 'Actif maintenant',
+    conferma: 'Déconnecter cet appareil ?', spiegazione: 'Tu devras te reconnecter sur l’appareil que tu déconnectes.',
+    annulla: 'Annuler', attesa: 'Déconnexion…', fatto: 'Appareil déconnecté. Une place est disponible.',
+    erroreDispositivi: 'Impossible de charger les appareils. Réessaie.', erroreScollega: 'Impossible de déconnecter l’appareil. Réessaie.',
+    scaduta: 'Ta session a expiré. Reconnecte-toi pour gérer tes appareils.',
+    accedi: 'Se reconnecter', posti: 'sur', carica: 'Chargement des appareils…', nessuno: 'Aucun appareil à afficher.', inviti: 'Inviter un ami',
+    erroreProgressi: 'Impossible de charger ta progression.', riprova: 'Réessayer',
+    vuotoTraguardi: 'Donne une bonne réponse pour obtenir ta première réussite.', vuotoSessioni: 'Tes séances récentes s’afficheront ici.',
+    completati: 'Tu as atteint tous tes objectifs de la semaine.', videoApri: 'Ouvrir les vidéos du cours',
+    videoNota: 'Demande l’accès sur Google Drive avec l’adresse e-mail de ton compte. Carmine validera ta demande dès que possible.',
+    videoAttesa: 'Le lien vers les vidéos s’affichera ici. Écris à Carmine si tu as besoin d’aide.',
+    videoErrore: 'Impossible de charger les cours en vidéo. Actualise la page pour réessayer.',
+    limite: 'Niveau maximal', punti: 'XP', totale: 'XP au total', livello: 'Niveau', alLivello: 'pour le niveau',
+    completato: 'Terminé', nessunObiettivo: 'Tes prochains objectifs hebdomadaires s’afficheront ici.',
+  } : lingua === 'es' ? {
     studio: 'Tu espacio de estudio', contenuti: 'Tus materiales', riprendi: 'Seguir estudiando', ultima: 'Lo último que estudiaste',
     progressi: 'Progreso', impostazioni: 'Ajustes', settimana: 'Esta semana', minuti: 'Tiempo de estudio', corrette: 'Respuestas correctas', giorni: 'Días de estudio',
     obiettivo: 'Tu próximo objetivo', raggiunti: 'Logros conseguidos', attivita: 'Actividad reciente', tutti: 'Ver todos los logros',

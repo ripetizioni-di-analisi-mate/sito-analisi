@@ -11,8 +11,18 @@ const { lingua } = Astro.props;
 const t = T(lingua);
 const de = lingua === 'de';
 const es = lingua === 'es';
+const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
-const x = es ? {
+const x = fr ? {
+  parola: 'Chapitre ou mot-clé', materia: 'Matière', tutteMaterie: 'Toutes les matières', tipo: 'Contenu', tuttiTipi: 'Tous les contenus',
+  corsi: 'Matières et cours', argomenti: 'Chapitres', esercizi: 'Exercices et quiz', videocorsi: 'Cours en vidéo',
+  filtri: 'Filtres de recherche', togliFiltri: 'Réinitialiser les filtres', inizio: 'Saisis un mot-clé ou choisis une matière.',
+  sommario: 'Recherche une matière ou un chapitre, puis consulte les supports dans les langues disponibles.',
+  breve: 'Saisis au moins deux lettres ou un chiffre.', caricamento: 'Chargement de l’index de recherche…',
+  errore: 'Impossible de charger la recherche. Vérifie ta connexion et réessaie.', riprova: 'Réessayer',
+  nessuno: 'Aucun résultat. Essaie un mot-clé plus court ou modifie les filtres.', uno: '1 résultat', risultati: '§ résultats',
+  suggerimento: 'Cherchais-tu', altri: 'Afficher § résultats de plus', senzaJs: 'Active JavaScript dans ton navigateur pour utiliser la recherche.',
+} : es ? {
   parola: 'Tema o palabra clave', materia: 'Asignatura', tutteMaterie: 'Todas las asignaturas', tipo: 'Contenido', tuttiTipi: 'Todos los contenidos',
   corsi: 'Asignaturas y cursos', argomenti: 'Temas', esercizi: 'Ejercicios y preguntas', videocorsi: 'Videocursos',
   filtri: 'Filtros de búsqueda', togliFiltri: 'Quitar filtros', inizio: 'Escribe una palabra clave o elige una asignatura.',
@@ -102,6 +112,7 @@ const collegamenti = lingua === 'it' ? {
   <noscript><p class="nota-segnaposto">{x.senzaJs}</p></noscript>
 
   <script>
+  import { prefissoLingua } from '../data/codici-lingua.mjs';
     import katex from 'katex';
     import { cercaVoci, preparaIndice, suggerisciQuery, vocabolario, paroleQuery, partiTitolo, partiEvidenziate } from '../lib/ricerca-client.mjs';
 
@@ -236,7 +247,7 @@ const collegamenti = lingua === 'it' ? {
       const controller = new AbortController();
       const limite = setTimeout(() => controller.abort(), 15000);
       try {
-        const prefisso = location.pathname.match(/^\/(en|de|es)(?=\/|$)/)?.[0] ?? '';
+        const prefisso = prefissoLingua(location.pathname);
         const percorso = `${prefisso}/indice-ricerca.json`;
         const risposta = await fetch(percorso, { signal: controller.signal });
         if (!risposta.ok) throw new Error('Indice non disponibile');
