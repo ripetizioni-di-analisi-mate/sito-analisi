@@ -1,0 +1,14 @@
+---
+interface Props { titolo: string; sezioni: { slug: string; text: string; riservata?: boolean }[] }
+const { titolo, sezioni } = Astro.props;
+---
+{sezioni.length > 1 && (
+  <details class="sommario-pagina">
+    <summary>{titolo}</summary>
+    <ol>
+      {sezioni.map(({ slug, text, riservata }) => (
+        <li data-usa-content={riservata || undefined}><a href={'#' + slug}>{text}</a></li>
+      ))}
+    </ol>
+  </details>
+)}

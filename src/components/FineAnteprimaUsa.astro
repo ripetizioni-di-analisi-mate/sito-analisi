@@ -1,0 +1,15 @@
+---
+import { courseUrl } from '../data/stem-usa/catalog.mjs';
+import { usaProduct } from '../data/stem-usa/pricing';
+import { T } from '../i18n';
+import { url } from '../lib/url';
+interface Props { materia: string; titolo: string }
+const { materia, titolo } = Astro.props;
+const product = usaProduct(materia)!;
+---
+<div class="velo-blocco fine-anteprima" data-usa-preview>
+  <p class="velo-sopra">End of the free preview</p>
+  <p class="velo-titolo">{titolo}</p>
+  <slot />
+  <a class="bottone-sblocca" href={url(courseUrl(materia) + '/sblocca')}>{T('en').sbloccaTutto} · {product.prezzo} €</a>
+</div>
