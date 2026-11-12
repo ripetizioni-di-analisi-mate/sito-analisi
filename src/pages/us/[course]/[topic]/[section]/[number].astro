@@ -1,0 +1,10 @@
+---
+import UsStudyItem from '../../../../../components/UsStudyItem.astro';
+import { usItemPaths } from '../../../../../lib/stem-usa-study-pages';
+
+export function getStaticPaths() { return usItemPaths(false); }
+
+const { slug, lesson } = Astro.props;
+const params = Astro.params as { topic: string; section: 'esercizi-svolti' | 'esercizi'; number: string };
+---
+<UsStudyItem {slug} {lesson} {...params} />

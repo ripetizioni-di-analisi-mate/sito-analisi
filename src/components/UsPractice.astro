@@ -9,10 +9,10 @@ interface Question {
   explanation: string;
   href: string;
 }
-interface Props { questions: Question[]; minutes: number; renderMath?: boolean }
-const { questions, minutes, renderMath = false } = Astro.props;
+interface Props { questions: Question[]; minutes: number; renderMath?: boolean; id?: string }
+const { questions, minutes, renderMath = false, id = 'course-practice' } = Astro.props;
 ---
-<section id="course-practice" class="stem-practice" data-us-practice>
+<section id={id} class="stem-practice" data-us-practice>
   <h2>Practice quiz</h2>
   <p>{questions.length} questions · one correct answer each</p>
   <form data-quiz-form data-minutes={minutes}>

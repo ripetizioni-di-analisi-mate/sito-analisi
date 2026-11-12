@@ -1,0 +1,10 @@
+---
+import UsStudySection from '../../../../components/UsStudySection.astro';
+import { usSectionPaths } from '../../../../lib/stem-usa-study-pages';
+
+export function getStaticPaths() { return usSectionPaths(false); }
+
+const { slug, lesson } = Astro.props;
+const params = Astro.params as { topic: string; section: 'teoria' | 'esercizi-svolti' | 'esercizi' };
+---
+<UsStudySection {slug} {lesson} {...params} />

@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import FineAnteprimaUsa from './FineAnteprimaUsa.astro';
+import VerificaRisposta from './VerificaRisposta.astro';
+import SoluzioneEsercizioUsa from './SoluzioneEsercizioUsa.astro';
+import { FREE_WORKED_EXAMPLES, FREE_PRACTICE_EXERCISE } from '../data/stem-usa/high-school/index.mjs';
+import { linkArgomentoUsa } from '../data/stem-usa/catalog-view';
+import { calculusAnswer, calculusHtml } from '../lib/stem-usa-practice';
+import type { UsStudyTopic } from '../lib/stem-usa-study-pages';
+import { T } from '../i18n';
+
+interface Props { slug: string; lesson: UsStudyTopic; topic: string; section: 'esercizi-svolti' | 'esercizi'; number: string }
+const { slug, lesson, topic, section, number } = Astro.props;
+const n = Number(number);
+const worked = section === 'esercizi-svolti';
+const example = worked ? lesson.worked[n - 1] : undefined;
+const exercise = worked ? undefined : lesson.exercises.find(item => item.number === n);
+const { title, prompt } = (example ?? exercise)!;
+const free = worked ? n <= FREE_WORKED_EXAMPLES : n === FREE_PRACTICE_EXERCISE;
+const t = T('en');
+const href = (type: string) => linkArgomentoUsa(slug, topic, type);
+const label = worked ? t.scheda : t.esercizio;
+const sectionLabel = t.sezioni[section];
+const numbers = worked ? lesson.worked.map((_, i) => i + 1) : lesson.exercises.map(item => item.number);
+const index = numbers.indexOf(n);
+const item = (i: number) => ({ titolo: label + ' ' + numbers[i], href: href(section + '/' + numbers[i]) });
+const previous = index > 0 ? item(index - 1) : { titolo: sectionLabel, href: href(section) };
+const next = index + 1 < numbers.length ? item(index + 1)
+  : { titolo: worked ? t.sezioni.esercizi : 'Timed questions', href: href(worked ? 'esercizi' : 'domande') };
+---
+<Base lingua="en" usa titolo={title} descrizione={lesson.summary} materia={slug} argomento={topic} sezione={section}
+  percorso={[{ titolo: lesson.title, href: href('teoria') }, { titolo: sectionLabel, href: href(section) }, { titolo: label + ' ' + n }]}
+  precedente={previous} successivo={next}>
+  <p class="sopratitolo">{sectionLabel} · {label} {n}</p>
+  <h1>{title}</h1>
+  <div class="testo-studio">
+    {prompt && <p set:html={calculusHtml(prompt)} />}
+    {example && <div class="spiegazione" data-usa-content={!free || undefined}>
+      {example.steps.map(step => <p set:html={calculusHtml(step)} />)}
+    </div>}
+  </div>
+  {exercise && <div data-usa-content={!free || undefined}>
+    <VerificaRisposta lingua="en" id={slug + '/' + topic + '/' + n}
+      tipo={exercise.answer ? calculusAnswer(exercise.answer, exercise.primitive).tipo : undefined}
+      primitiva={exercise.primitive} mostraIndizio={false} />
+    <div class="testo-studio"><SoluzioneEsercizioUsa soluzione={exercise.explanation} /></div>
+  </div>}
+  {!free && <FineAnteprimaUsa materia={slug} titolo={worked ? 'Unlock the worked solution' : 'Unlock the solution and answer check'} />}
+</Base>
