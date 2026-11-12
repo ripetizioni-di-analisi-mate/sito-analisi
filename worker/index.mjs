@@ -11,6 +11,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 import { CODICI_LINGUA, prefissoLingua } from '../src/data/codici-lingua.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
+import { CATALOGO_USA_PUBBLICO } from '../src/data/cataloghi-studio.mjs';
 import { highSchoolTimedTopics, FREE_PRACTICE_EXERCISE, FREE_TIMED_QUESTION } from '../src/data/stem-usa/high-school/index.mjs';
 import { courseUrl, hasUsStudyPages, universityTimedTopics, usStudyPreviewPage } from '../src/data/stem-usa/catalog.mjs';
 import { normalizedStudyPath, usaCoursePath, usaProduct, usaProducts } from '../src/data/stem-usa/pricing.ts';
@@ -51,6 +52,8 @@ import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDi
   cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
+const MATERIE_PREMIUM = MATERIE.filter((m) => m.attiva && Object.hasOwn(PREZZI, m.slug)).map((m) => m.slug);
+if (CATALOGO_USA_PUBBLICO) MATERIE_PREMIUM.push(...usaProducts.map((m) => m.slug));
 const sbloccaUsa = (slug) => courseUrl(slug) + '/sblocca';
 const corsoUsaRiservato = (slug, io) => Boolean(usaProduct(slug) && !io?.materie?.includes(slug));
 const rispostaCorsoUsaRiservato = (slug) => json({
@@ -182,6 +185,7 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
     // il corso di gruppo già seguito con Carmine, dichiarato all'iscrizione (facoltativo)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN corso TEXT'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN premium_manuale TEXT'); } catch { /* già presente */ }
     // token consumati dall'assistente (entrata e uscita), per il tetto giornaliero
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tin INTEGER DEFAULT 0'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE assistente ADD COLUMN tout INTEGER DEFAULT 0'); } catch { /* già presente */ }
@@ -360,7 +364,7 @@ export class Archivio {
         return Response.json({ ok: Boolean(u), versione: u?.versione });
       }
       case '/sessione': { // verifica che la sessione sia ancora valida e restituisce le materie
-        const u = this.riga('SELECT email, versione, creato, nome FROM utenti WHERE email = ?', c.email);
+        const u = this.riga('SELECT email, versione, creato, nome, premium_manuale FROM utenti WHERE email = ?', c.email);
         if (!u || u.versione !== c.versione) return Response.json(null);
         // il dispositivo deve essere ancora tra quelli registrati (l'uscita o lo scollegamento lo tolgono)
         const d = this.riga('SELECT ultimo_uso, nonce FROM dispositivi WHERE email = ? AND id = ?', c.email, c.dispositivo || '');
@@ -370,7 +374,9 @@ export class Archivio {
           this.sql.exec('UPDATE utenti SET attivo = ? WHERE email = ?', Date.now(), c.email);
         }
         const dispositivi = this.dispositiviDi(u.email).map((x) => ({ ...x, questo: x.id === c.dispositivo }));
-        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie: this.materieDi(u.email), dispositivi, exp: statoDi(this, u.email).exp });
+        const individuali = this.materieDi(u.email);
+        const materie = u.premium_manuale ? [...new Set([...individuali, ...MATERIE_PREMIUM])] : individuali;
+        return Response.json({ email: u.email, nome: u.nome || null, creato: u.creato, materie, dispositivi, exp: statoDi(this, u.email).exp });
       }
       case '/dispositivo-registra': { // al massimo MAX dispositivi per account; quelli fermi da 60 giorni si liberano da soli
         const u = this.riga('SELECT versione FROM utenti WHERE email = ?', c.email);
@@ -492,6 +498,15 @@ export class Archivio {
         this.sql.exec('DELETE FROM abilitazioni WHERE email = ? AND materia = ?', c.email, c.materia);
         return Response.json({ ok: true });
 
+      case '/premium-manuale': {
+        const u = this.riga(`UPDATE utenti
+          SET premium_manuale = CASE WHEN ? THEN COALESCE(premium_manuale, ?) END
+          WHERE email = ? AND hash IS NOT NULL RETURNING premium_manuale`, c.attivo ? 1 : 0, ora, c.email);
+        if (!u) return Response.json({ errore: 'Account studente non trovato.' });
+        this.copiaDati = null;
+        return Response.json({ ok: true, premium_manuale: u.premium_manuale });
+      }
+
       case '/registra-acquisto':
         try {
           this.sql.exec('INSERT INTO acquisti (email, materia, importo, valuta, transazione, creato) VALUES (?, ?, ?, ?, ?, ?)',
@@ -542,7 +557,7 @@ export class Archivio {
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
           // livello e studio di ogni studente (EXP totali in utenti.exp; minuti e risposte dalle tabelle dei livelli)
           // attivita = ultima volta che lo studente ha usato il sito con l'account (pagine, studio, domande), in millisecondi
-          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, GROUP_CONCAT(a.materia, ', ') AS materie,
+          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, u.premium_manuale, GROUP_CONCAT(a.materia, ', ') AS materie,
                               MAX(COALESCE(u.attivo, 0), COALESCE((SELECT MAX(ultimo_uso) FROM dispositivi d WHERE d.email = u.email), 0),
                                   COALESCE((SELECT MAX(ultimo) FROM sessioni s WHERE s.email = u.email), 0),
                                   COALESCE((SELECT MAX(ultimo) FROM studio x WHERE x.email = u.email), 0),
@@ -1505,6 +1520,16 @@ export default {
       if (p === '/admin/api/revoca' && POST) {
         const { email, materia } = await req.json();
         return json(await aDO(env, '/revoca', { email: normalizza(email), materia }));
+      }
+      if (p === '/admin/api/premium' && POST) {
+        const headers = { 'cache-control': 'private, no-store' };
+        if (!env.ADMIN_PASSWORD || !env.CHIAVE_ACCESSO) return json({ errore: 'Accesso amministrativo non configurato.' }, 503, headers);
+        if (req.headers.get('origin') !== url.origin) return json({ errore: 'Origine non valida.' }, 403, headers);
+        const dati = await req.json().catch(() => null);
+        const email = typeof dati?.email === 'string' ? normalizza(dati.email) : '';
+        if (!emailValida(email) || typeof dati?.attivo !== 'boolean') return json({ errore: 'Email o comando non valido.' }, 400, headers);
+        const r = await aDO(env, '/premium-manuale', { email, attivo: dati.attivo });
+        return json(r, r.ok ? 200 : 404, headers);
       }
       if (p === '/admin/api/email-stato' && req.method === 'GET') return json(await aDO(env, '/em-dashboard'), 200, { 'cache-control': 'no-store' });
       if (p === '/admin/api/email-storico' && req.method === 'GET') {

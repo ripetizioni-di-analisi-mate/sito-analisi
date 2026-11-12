@@ -428,7 +428,8 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     const studenti = D.utenti.map((u) => {
       const abil = ab[u.email] || [], acquisti = acq[u.email] || [];
       const spesa = acquisti.reduce((s, a) => s + (Number(a.importo) || 0), 0);
-      const tipo = acquisti.length ? 'pagante' : abil.some((a) => a.origine === 'manuale') ? 'manuale' : 'gratis';
+      const manuale = u.premium_manuale || abil.some((a) => a.origine === 'manuale');
+      const tipo = acquisti.length ? 'pagante' : manuale ? 'manuale' : 'gratis';
       const ultima = Math.max(Number(u.attivita) || 0, u.ultimo_accesso ? Date.parse(u.ultimo_accesso) || 0 : 0) || null;
       return { ...u, ultima, abil, acquisti, spesa, tipo, dispositivi: disp[u.email] || [], registrato: true };
     });
@@ -647,7 +648,11 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     return S.studenti.filter((s) => passaFiltro(s, stato.filtro) && (!stato.fonte || s.fonte === stato.fonte) && (!q || (s.email + ' ' + (s.nome || '')).toLowerCase().includes(q)))
       .sort((a, b) => { const x = val[stato.ordina](a), y = val[stato.ordina](b); return (x > y ? 1 : x < y ? -1 : 0) * stato.verso; });
   }
-  function chipStato(s) { return { pagante: '<span class="chip pagante">Pagante</span>', manuale: '<span class="chip manuale">Attivato a mano</span>', gratis: '<span class="chip">Solo gratis</span>', attesa: '<span class="chip attesa">Da registrare</span>' }[s.tipo]; }
+  function chipStato(s) {
+    const chip = { pagante: '<span class="chip pagante">Pagante</span>', manuale: '<span class="chip manuale">Attivato a mano</span>', gratis: '<span class="chip">Solo gratis</span>', attesa: '<span class="chip attesa">Da registrare</span>' }[s.tipo];
+    if (!s.premium_manuale) return chip;
+    return (s.tipo === 'pagante' ? chip + ' ' : '') + '<span class="chip manuale">Premium</span>';
+  }
   function righeStudenti() {
     const r = filtrati(), corpo = $('#corpo-studenti');
     if (!r.length) { corpo.innerHTML = '<tr><td colspan="7"><div class="vuoto"><b>Nessuno studente trovato</b>Cambia la ricerca o il filtro.</div></td></tr>'; return; }
@@ -686,7 +691,9 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultima attività</dt><dd>' + dataOra(s.ultima) + '</dd><dt>Ultimo accesso con password</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
       (s.registrato ? '<section><h3>Livello e studio</h3><div class="liv-grande">' + stemma(s) + '<div><b>Livello ' + (s.livello || 1) + ' · ' + esc(s.fascia || '') + '</b><span class="nota">Rango ' + esc((D.ranghi || [])[(s.rango || 1) - 1] || '') + ' · ' + nf.format(s.exp || 0) + ' EXP' + (s.mancano ? ' · ne mancano ' + nf.format(s.mancano) + ' al livello ' + ((s.livello || 1) + 1) : '') + '</span><div class="barra-liv"><i style="width:' + (s.perc || 0) + '%"></i></div></div></div>' +
         '<dl class="dati"><dt>Tempo di studio</dt><dd>' + oreMinuti(s.minuti) + '</dd><dt>Domande a tempo</dt><dd>' + (s.risposte ? nf.format(s.risposte) + ' risposte, ' + nf.format(s.corrette || 0) + ' corrette (' + Math.round(100 * (s.corrette || 0) / s.risposte) + '%)' : 'nessuna') + '</dd><dt>Ultimo studio</dt><dd>' + (s.ultimo_studio ? esc(s.ultimo_studio.split('-').reverse().join('/')) : '—') + '</dd></dl></section>' : '') +
-      '<section><h3>Materie sbloccate</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">Nessuna materia sbloccata.</p>') + '</section>' +
+      (s.registrato ? '<section><h3>Accesso Premium</h3><p class="nota">' + (s.premium_manuale ? 'Attivo dal ' + esc(dataOra(s.premium_manuale)) + ' · Senza scadenza' : 'Sblocca il materiale scritto di tutte le materie pubblicate.') + '</p>' +
+        '<div class="azioni"><button type="button" class="bottone ' + (s.premium_manuale ? 'pericolo' : 'primario') + '" id="c-premium">' + (s.premium_manuale ? 'Revoca Premium' : 'Attiva Premium') + '</button></div></section>' : '') +
+      '<section><h3>' + (s.premium_manuale ? 'Accessi individuali' : 'Materie sbloccate') + '</h3>' + (s.abil.length ? '<div class="elenco-m">' + s.abil.map((a) => '<div class="riga-m"><i class="punto" style="background:' + (M[a.materia] || {}).colore + '"></i>' + esc(nomeMateria(a.materia)) + '<span class="chip ' + (a.origine === 'manuale' ? 'manuale' : 'pagante') + '">' + (a.origine === 'manuale' ? 'a mano' : 'acquisto') + '</span><button type="button" data-revoca="' + esc(a.materia) + '">Revoca</button></div>').join('') + '</div>' : '<p class="nota" style="margin:0">' + (s.premium_manuale ? 'Nessun accesso individuale.' : 'Nessuna materia sbloccata.') + '</p>') + '</section>' +
       (daAttivare.length ? '<section><h3>Attiva altre materie</h3><div class="scelte">' + daAttivare.map((m) => '<label class="scelta-m" style="--c:' + M[m].colore + '"><input type="checkbox" value="' + m + '"><i class="punto"></i>' + esc(breveMateria(m)) + '</label>').join('') + '</div><div class="azioni" style="margin-top:.7rem"><button type="button" class="bottone primario" id="c-attiva">Attiva le materie scelte</button></div></section>' : '') +
       '<section><h3>Dispositivi (al massimo 3)</h3>' + (s.dispositivi.length ? '<div class="elenco-m">' + s.dispositivi.map((d) => '<div class="riga-m">' + esc(d.nome) + '<span class="nota" style="margin-left:auto">usato ' + fa(d.ultimo_uso) + '</span></div>').join('') + '</div><div class="azioni" style="margin-top:.6rem"><button type="button" class="bottone pericolo" id="c-scollega">Scollega tutti</button></div>' : '<p class="nota" style="margin:0">Nessun dispositivo collegato.</p>') + '</section>' +
       (s.acquisti.length ? '<section><h3>Pagamenti</h3><div class="elenco-m">' + s.acquisti.map((a) => '<div class="riga-m">' + esc(breveMateria(a.materia)) + '<span class="nota">' + dataOra(a.creato) + '</span><b style="margin-left:auto">' + eur.format(a.importo) + '</b></div>').join('') + '</div></section>' : '') +
@@ -695,8 +702,28 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '</div>';
     if (!ricarica) { const v = $('#velo'); v.hidden = false; requestAnimationFrame(() => { v.classList.add('aperto'); c.classList.add('aperto'); }); c.setAttribute('aria-hidden', 'false'); setTimeout(() => $('.chiudi', c).focus(), 60); }
     $('.chiudi', c).addEventListener('click', chiudiStudente);
+    const premium = $('#c-premium', c);
+    if (premium) premium.addEventListener('click', async () => {
+      const attivo = !s.premium_manuale;
+      const azione = attivo ? 'Attiva Premium' : 'Revoca Premium';
+      const effetto = attivo ? 'Avrà accesso al materiale scritto di tutte le materie pubblicate, senza scadenza.' : 'Conserverà gli accessi acquistati o concessi singolarmente.';
+      premium.disabled = true;
+      try {
+        if (!(await conferma(attivo ? 'Attivare Premium?' : 'Revocare Premium?', s.email + ' · ' + effetto, azione))) return;
+        const r = await api('premium', { email: s.email, attivo });
+        if (!r.ok) { avviso(r.errore || 'Impossibile aggiornare Premium'); return; }
+        avviso(attivo ? 'Premium attivato' : 'Premium revocato');
+        await carica();
+      } catch (e) {
+        if (e.message !== '401') avviso('Impossibile aggiornare Premium');
+      } finally {
+        premium.disabled = false;
+      }
+    });
     $$('[data-revoca]', c).forEach((b) => b.addEventListener('click', async () => {
-      const m = b.dataset.revoca; if (!(await conferma('Revocare ' + nomeMateria(m) + '?', s.email + ' non potrà più aprire le pagine a pagamento di questa materia.', 'Revoca'))) return;
+      const m = b.dataset.revoca;
+      const effetto = s.premium_manuale ? 'Verrà rimosso l’accesso individuale. Il Premium resterà attivo.' : s.email + ' non potrà più aprire le pagine a pagamento di questa materia.';
+      if (!(await conferma('Revocare ' + nomeMateria(m) + '?', effetto, 'Revoca'))) return;
       await api('revoca', { email: s.email, materia: m }); avviso(nomeMateria(m) + ' revocata'); carica(true);
     }));
     const att = $('#c-attiva', c); if (att) att.addEventListener('click', async () => {
