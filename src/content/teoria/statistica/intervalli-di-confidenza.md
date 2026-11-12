@@ -22,6 +22,8 @@ Un laboratorio misura la concentrazione media di una stessa soluzione in condizi
 
 :::attenzione{titolo="Interpretazione di un intervallo osservato"}
 Supponiamo che un intervallo osservato al $95\,\%$ sia $[8,12]$ e che il parametro della popolazione valga $13$. Gli estremi sono ormai fissati e l'evento $8\leq 13\leq 12$ è falso. L'interpretazione che assegna probabilità $0{,}95$ al parametro fisso dopo l'osservazione confonde l'evento osservato con quello che coinvolge gli estremi casuali $L$ e $U$.
+
+::grafico{assi=0 xmin=6.8 xmax=14.5 ymin=-0.88 ymax=0.9 linee="7.2,0 14.0,0;8,-0.16 8,0.15;12,-0.16 12,0.15" poligoni="8,-0.13 12,-0.13 12,0.13 8,0.13" punti="13,0" etichette="7.93,-0.42,8;11.87,-0.42,12;12.87,-0.42,13;8.8,0.46,intervallo osservato;12.63,0.46,θ" titolo="Il segmento colorato va da 8 a 12. Il punto θ = 13 rappresenta il parametro fisso e rimane fuori dal segmento."}
 :::
 
 :::definizione{#pivot titolo="Quantità pivot e quantili inferiori"}
@@ -246,6 +248,8 @@ dove $\lceil\cdot\rceil$ indica l'arrotondamento all'intero superiore. Per piani
 
 :::esempio{titolo="Il controllo dopo l'arrotondamento"}
 Per $z=1{,}96$, $\sigma=5\,\mathrm{g}$ e $E=1{,}4\,\mathrm{g}$ si ha $\left(\dfrac{1{,}96\cdot5}{1{,}4}\right)^2=49$. Il margine a $n=49$ è esattamente $1{,}4\,\mathrm{g}$ con il quantile adottato. Con $48$ misure, $\sqrt{48}<7$, quindi il margine supera il massimo assegnato. L'arrotondamento all'intero superiore conserva la disuguaglianza anche quando il valore teorico è fra due interi.
+
+::grafico{assi=0 xmin=5.3 xmax=93 ymin=-0.4 ymax=4.4 unicolore=1 f="9.8/sqrt(x)" legenda="h=\dfrac{9{,}8}{\sqrt{n}}" vettori="5.7,0,91,0;5.7,0,5.7,4.28" segmenti="5.7,1.4,49,1.4;49,0,49,1.4" punti="49,1.4" etichette="47,-0.24,49;88,-0.24,n;7,4.19,h;13,1.57,E = 1,4" titolo="La curva continua rappresenta il margine. La soglia si raggiunge a 49 misure e resta rispettata per numerosità intere superiori."}
 :::
 
 ::::teorema{#unilateri titolo="Limite inferiore e limite superiore"}

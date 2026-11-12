@@ -21,6 +21,8 @@ P(a<X\le b,\ c<Y\le d)
 \end{aligned}
 $$
 Le due sottrazioni eliminano le regioni $X\le a$ e $Y\le c$. La loro intersezione è stata sottratta due volte, quindi si aggiunge il valore $F_{X,Y}(a,c)$.
+
+::grafico{assi=0 xmin=-0.45 xmax=4.35 ymin=-0.65 ymax=4.8 poligoni="1,2 3,2 3,4 1,4" segmenti="1,0,1,4;3,0,3,4;0,2,3,2;0,4,3,4" unicolore=1 vettori="-0.12,0,4.2,0;0,-0.35,0,4.65" etichette="4.23,-0.27,x;0.06,4.65,y;0.95,-0.34,a;2.97,-0.34,b;-0.25,1.97,c;-0.25,3.97,d;1.25,3.53,R" titolo="Il rettangolo evidenziato R si ottiene dalle quattro soglie a, b, c, d della ripartizione congiunta."}
 :::
 
 :::definizione{#masse-congiunte titolo="Massa congiunta e masse marginali"}
@@ -250,6 +252,8 @@ La densità vale zero fuori da $T(D)$. Il simbolo $D T^{-1}$ indica la matrice d
 Se $X,Y$ sono uniformi indipendenti su $(0,1)$, poniamo $U=X+Y$ e $V=X-Y$. L'inversa è $x=\dfrac{u+v}{2}$ e $y=\dfrac{u-v}{2}$. Il suo determinante vale $-\dfrac12$. Il quadrato di partenza è descritto da $0<u+v<2$ e $0<u-v<2$ nelle nuove coordinate. Perciò la densità congiunta vale $\dfrac12$ nella regione individuata da entrambe le condizioni e zero altrove.
 
 Per $0<u<1$, la sezione verticale soddisfa $-u<v<u$. L'integrale rispetto a $v$ vale allora $\dfrac12\cdot 2u=u$. È lo stesso valore della densità della somma ricavato con la convoluzione.
+
+::grafico{xmin=-0.18 xmax=2.35 ymin=-1.3 ymax=1.28 nomi="u,v" poligoni="0,0 1,1 2,0 1,-1" segmenti="0.6,-0.6,0.6,0.6" punti="0,0,vuoto;1,1,vuoto;2,0,vuoto;1,-1,vuoto" titolo="Regione di densità positiva di (U,V). A sinistra di u=1, la sezione tratteggiata va da −u a u."}
 :::
 
 :::osservazione
