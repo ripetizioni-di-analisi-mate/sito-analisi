@@ -8,6 +8,9 @@ import { calculus2Timed } from '../data/stem-usa/calculus-2/timed.mjs';
 import { calculus3Practice } from '../data/stem-usa/calculus-3/practice.mjs';
 import { calculus3Theory } from '../data/stem-usa/calculus-3/theory.mjs';
 import { calculus3Timed } from '../data/stem-usa/calculus-3/timed.mjs';
+import { differentialEquationsPractice } from '../data/stem-usa/differential-equations/practice.mjs';
+import { differentialEquationsTheory } from '../data/stem-usa/differential-equations/theory.mjs';
+import { differentialEquationsTimed } from '../data/stem-usa/differential-equations/timed.mjs';
 import { optionsFor } from '../data/stem-usa/catalog.mjs';
 import { leggi, valore } from '../../worker/valuta.mjs';
 import type { Domanda } from './domande';
@@ -29,6 +32,7 @@ export const universityStudies = new Map<string, UniversityStudy>([
   [calculusSlug, { theory: calculusTheory, practice: calculusPractice, timed: calculusTimed }],
   ['calculus-2', { theory: calculus2Theory, practice: calculus2Practice, timed: calculus2Timed }],
   ['calculus-3', { theory: calculus3Theory, practice: calculus3Practice, timed: calculus3Timed }],
+  ['differential-equations', { theory: differentialEquationsTheory, practice: differentialEquationsPractice, timed: differentialEquationsTimed }],
 ]);
 
 export const timedCount = (study: UniversityStudy) =>

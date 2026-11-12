@@ -121,9 +121,12 @@ export const mathematics = [
         'For F = (x, y, z), the divergence is 3. The outward flux through the unit cube is 3 times its volume, so it is 3.',
         'What is the outward flux of F = (2x, 0, z) through a closed surface enclosing volume 4?', '12', ['3', '4', '8'], 'The divergence is 2 + 0 + 1 = 3. Multiply this constant by the enclosed volume 4.'),
     ]),
-  course('differential-equations', 'Differential Equations', 'Solve first-order models, linear equations, initial-value problems and systems.',
+  course('differential-equations', 'Differential Equations', 'Solve ordinary differential equations and systems using initial data, Laplace transforms and power series.',
     'Calculus II. Linear algebra is useful for systems.',
-    [purdue, illinois('MATH/285', 'MATH 285 Intro Differential Equations')],
+    [
+      { title: 'Purdue University · MA 26600 Ordinary Differential Equations', url: 'https://www.math.purdue.edu/academic/courses/semester/202710/ma26600/index.html' },
+      illinoisSyllabus(441, 'MATH 441 Differential Equations'),
+    ],
     [
       L('Separable first-order equations', 'An equation y′ = g(x)h(y) can be separated wherever h(y) ≠ 0. Check constant solutions at roots of h before dividing.',
         'For y′ = 2xy with y(0) = 3, integrate dy/y = 2x dx. Then y = C e^(x²) and the initial value gives C = 3.',
