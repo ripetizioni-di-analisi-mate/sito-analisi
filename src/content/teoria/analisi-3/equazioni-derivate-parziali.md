@@ -277,11 +277,30 @@ Questa valutazione non può essere l'integrale del prodotto di $\varphi$ con una
 
 ## Esistenza e metodo dell'energia
 
-:::teorema{#lax-milgram titolo="Lax-Milgram per Poisson"}
+::::teorema{#lax-milgram titolo="Lax-Milgram per Poisson"}
 Su un Hilbert reale $H$, se una forma bilineare $a$ è continua e coerciva, cioè $|a(u,v)|\le C\|u\|\|v\|$ e $a(u,u)\ge\alpha\|u\|^2$ con $C,\alpha>0$ e per ogni $u,v\in H$, allora per ogni funzionale lineare continuo $\ell$ su $H$ esiste un unico $u\in H$ con $a(u,v)=\ell(v)$ per ogni $v\in H$.
 
-Su un dominio limitato Lipschitz, la disuguaglianza di Poincaré rende $\|\nabla u\|_2$ una norma equivalente alla norma di $H^1$ su $H_0^1$. Per $f\in L^2$, la forma $a(u,v)=\int\nabla u\cdot\nabla v$ e il funzionale $\ell(v)=\int fv$ soddisfano le ipotesi. Quindi il problema debole di Poisson ha un'unica soluzione, che minimizza l'energia $\dfrac12\int|\nabla u|^2-\int fu$.
+Su un dominio limitato Lipschitz, la disuguaglianza di Poincaré rende $\|\nabla u\|_2$ una norma equivalente alla norma di $H^1$ su $H_0^1$. Per $f\in L^2$, la forma $a(u,v)=\int\nabla u\cdot\nabla v$ e il funzionale $\ell(v)=\int fv$ soddisfano le ipotesi. Quindi il problema debole di Poisson ha un'unica soluzione, che minimizza l'energia $\dfrac{1}{2}\int|\nabla u|^2-\int fu$.
+
+:::dimostrazione
+La rappresentazione di Riesz trasforma la forma bilineare in un operatore su $H$. Per ogni $w\in H$, il funzionale $v\mapsto a(w,v)$ è continuo, quindi esiste un unico $Tw\in H$ con $(Tw,v)_H=a(w,v)$ per ogni $v$. Per unicità del rappresentante, $T$ è lineare. La continuità della forma dà $\|Tw\|\le C\|w\|$, mentre la coercività e Cauchy-Schwarz danno
+$$
+\alpha\|w\|^2\le (Tw,w)_H\le\|Tw\|\|w\|.
+$$
+Di conseguenza $\|Tw\|\ge\alpha\|w\|$. La stima implica che $T$ è iniettivo e ha immagine chiusa. Infatti, se $Tw_n$ converge, allora $w_n$ è di Cauchy e converge in $H$. Per continuità di $T$, il limite di $Tw_n$ appartiene all'immagine.
+
+Se $z$ è ortogonale all'immagine, allora $(Tw,z)_H=0$ per ogni $w$. Scegliendo $w=z$ si ottiene $a(z,z)=0$, quindi $z=0$ per coercività. L'immagine è chiusa e il suo ortogonale è nullo, perciò coincide con $H$. Sia $g$ il rappresentante di Riesz di $\ell$. La suriettività e l'iniettività di $T$ danno un unico $u$ con $Tu=g$, cioè con $a(u,v)=\ell(v)$ per ogni $v\in H$.
+
+Per Poisson si applica il risultato a $H_0^1$, che è completo, con la forma simmetrica del gradiente. Cauchy-Schwarz e Poincaré danno la continuità di $a$ e $\ell$ e la coercività di $a$. Per ogni $w\in H_0^1$, sviluppando $J(u+w)-J(u)$ si ottiene
+$$
+\begin{aligned}
+J(u+w)-J(u)&=a(u,w)-\ell(w)+\frac{1}{2}a(w,w), \\
+&=\frac{1}{2}a(w,w).
+\end{aligned}
+$$
+L'uguaglianza si ottiene usando il problema debole con funzione test $w$. Il membro destro è positivo per $w\ne0$, quindi $u$ è l'unico minimizzatore.
 :::
+::::
 
 :::esempio{titolo="Unicità e interpretazione del minimo di energia"}
 Se $u_1$ e $u_2$ risolvono lo stesso problema debole, la loro differenza $w$ soddisfa $\int_\Omega \nabla w\cdot\nabla v=0$ per ogni $v\in H_0^1(\Omega)$. La scelta $v=w$ dà $\|\nabla w\|_2=0$. Poincaré implica quindi $\|w\|_2=0$, ossia le due soluzioni coincidono quasi ovunque. Per capire il minimo di energia, indichiamo con $J$ il funzionale e confrontiamo $u$ con $u+w$. Sviluppando il quadrato si trova

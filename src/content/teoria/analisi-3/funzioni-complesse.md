@@ -191,14 +191,29 @@ La stessa scelta ha effetti diversi sulle potenze. Se il ramo aumenta di $2\pi i
 
 ## Funzioni armoniche e coniugate
 
-:::teorema{#armoniche titolo="Coniugate armoniche"}
-L'espansione locale in serie di Taylor, che si deduce dalla formula integrale di Cauchy, rende lisce le componenti di una funzione olomorfa. Si possono quindi derivare le equazioni di Cauchy-Riemann e scambiare le derivate miste. Per esempio $u_{xx}=v_{yx}$ e $u_{yy}=-v_{xy}$, perciò $\Delta u=u_{xx}+u_{yy}=0$. Allo stesso modo $\Delta v=0$. Le due componenti sono dunque armoniche. Se $u\in C^2(\Omega)$ è armonica e $\Omega$ è semplicemente connesso, esiste una coniugata $v$, unica a meno di una costante reale, con $u+iv$ olomorfa.
+::::teorema{#armoniche titolo="Coniugate armoniche"}
+Le componenti reale e immaginaria di una funzione olomorfa sono armoniche. Se $u\in C^2(\Omega)$ è armonica e $\Omega$ è un aperto semplicemente connesso, allora esiste una coniugata $v$, unica a meno di una costante reale, con $u+iv$ olomorfa.
 
-Per $u=x^2-y^2$, da $v_y=u_x=2x$ segue $v=2xy+C(x)$. L'altra equazione dà $v_x=-u_y=2y$, quindi $C'=0$ e $v=2xy+C$.
+:::dimostrazione
+Se $f=u+iv$ è olomorfa, lo sviluppo locale in serie di Taylor garantisce che le componenti abbiano derivate seconde continue. Derivando le equazioni di Cauchy-Riemann si ottengono
+$$
+\begin{aligned}
+u_{xx}+u_{yy}&=v_{yx}-v_{xy}=0,\\
+v_{xx}+v_{yy}&=-u_{yx}+u_{xy}=0.
+\end{aligned}
+$$
+Le derivate miste coincidono per la continuità delle derivate seconde, perciò entrambe le componenti sono armoniche.
+
+Viceversa, se $u$ è armonica, la forma differenziale reale $\omega=-u_y\,dx+u_x\,dy$ è chiusa, perché $\partial_y(-u_y)=-u_{yy}=u_{xx}=\partial_xu_x$. I suoi coefficienti sono di classe $C^1$ e il dominio è semplicemente connesso, quindi il teorema sulle forme chiuse garantisce che $\omega$ abbia una primitiva $v$. Le uguaglianze $v_x=-u_y$ e $v_y=u_x$ verificano le condizioni di Cauchy-Riemann. Poiché $u$ e $v$ hanno parziali continue, $u+iv$ è olomorfa. Due primitive differiscono per una costante sul dominio connesso, il che prova l'unicità a meno di una costante.
+:::
+::::
+
+:::esempio{titolo="Coniugata della parte reale del quadrato"}
+Per $u=x^2-y^2$, l'equazione $v_y=u_x=2x$ determina $v=2xy+C(x)$. L'altra equazione dà $v_x=-u_y=2y$, quindi $C'=0$ e $v=2xy+C$. Il dato $v(0,0)=0$ seleziona $C=0$ e restituisce la parte immaginaria di $z^2$.
 :::
 
 :::osservazione
-La ricerca della coniugata può essere formulata come un problema di primitive reali. Dalle equazioni di Cauchy-Riemann si ricava $dv=-u_y\,dx+u_x\,dy$. Le derivate incrociate dei due coefficienti coincidono quando $u_{xx}+u_{yy}=0$. La semplice connessione garantisce allora che l'integrale di questa forma fra due punti dipenda soltanto dagli estremi. Questo spiega il ruolo dell'ipotesi topologica. Per $u(z)=\log|z|$ sul piano bucato si può calcolare una coniugata su ogni disco che evita zero. Una coniugata globale produrrebbe invece un argomento globale, incompatibile con un giro attorno all'origine.
+La semplice connessione garantisce che l'integrale di $-u_y\,dx+u_x\,dy$ fra due punti dipenda solo dagli estremi. Per $u(z)=\log|z|$ sul piano bucato si può calcolare una coniugata su ogni disco che evita zero. Una coniugata globale richiederebbe che la forma avesse integrale nullo su un giro attorno all'origine, mentre lungo la circonferenza unitaria il suo integrale vale $2\pi$.
 :::
 
 :::esempio{titolo="Dalla componente reale a un polinomio complesso"}
@@ -219,15 +234,22 @@ Per $z^2=u+iv$ le curve $u=0$ sono le diagonali $y=x$ e $y=-x$. Le curve $v=0$ s
 
 ## Trasformazioni conformi
 
-:::teorema{#conformi titolo="Conformità locale e trasformazioni di Möbius"}
-Se $f$ è olomorfa e $f'(z_0)\ne0$, il differenziale è una rotazione di angolo $\arg f'(z_0)$ e una dilatazione di fattore $|f'(z_0)|$. La funzione conserva localmente gli angoli orientati ed è localmente invertibile.
+::::teorema{#conformi titolo="Conformità locale e trasformazioni di Möbius"}
+Se $f$ è olomorfa e $f'(z_0)\ne0$, il differenziale è una rotazione di angolo $\arg f'(z_0)$ e una dilatazione di fattore $|f'(z_0)|$. La funzione conserva localmente gli angoli orientati ed è localmente invertibile. Una trasformazione di Möbius $f(z)=\dfrac{az+b}{cz+d}$ con $ad-bc\ne0$ è conforme in ogni punto in cui $cz+d\ne0$.
 
-Una trasformazione di Möbius $f(z)=\dfrac{az+b}{cz+d}$, con $ad-bc\ne0$, ha derivata $\dfrac{ad-bc}{(cz+d)^2}$ ed è conforme dove è definita. Per $f(z)=\dfrac{z-i}{z+i}$ si ha $|f(z)|<1$ esattamente quando $\operatorname{Im}z>0$, perché $|z-i|<|z+i|$ equivale a $y>0$.
-:::
+:::dimostrazione
+Il differenziale di $f$ in $z_0$ agisce per moltiplicazione per $\lambda=f'(z_0)$. Poiché $\lambda\ne0$, la forma polare $\lambda=|\lambda|e^{i\theta}$ dà la dilatazione e la rotazione enunciate. Se due curve differenziabili passano per $z_0$ con velocità non nulle $v_1,v_2$, l'angolo orientato fra le tangenti è l'argomento di $\dfrac{v_2}{v_1}$ modulo $2\pi$. Le velocità delle curve immagine sono $\lambda v_1$ e $\lambda v_2$, quindi il quoziente che determina l'angolo è lo stesso. Il differenziale è invertibile, dunque il teorema della funzione inversa dà l'invertibilità locale.
 
-:::osservazione
-L'angolo orientato si può calcolare dalle tangenti a due curve. Siano $\gamma_1$ e $\gamma_2$ due curve differenziabili che passano per $z_0$ al parametro zero e hanno velocità non nulle. L'angolo dalla prima tangente alla seconda è l'argomento di $\dfrac{\gamma_2'(0)}{\gamma_1'(0)}$, considerato a meno di un giro intero. Dopo la trasformazione le velocità diventano $f'(z_0)\gamma_1'(0)$ e $f'(z_0)\gamma_2'(0)$. Poiché $f'(z_0)$ è diverso da zero, si semplifica nel rapporto. Le tangenti possono dunque cambiare direzione e lunghezza, mentre l'angolo orientato fra loro resta lo stesso. Questo calcolo chiarisce l'ipotesi sulla derivata nel criterio di conformità.
+Nel caso di una trasformazione di Möbius, la regola del quoziente si applica dove il denominatore è diverso da zero e dà
+$$
+\begin{aligned}
+f'(z)&=\frac{a(cz+d)-c(az+b)}{(cz+d)^2}\\
+&=\frac{ad-bc}{(cz+d)^2}.
+\end{aligned}
+$$
+L'ipotesi $ad-bc\ne0$ garantisce quindi che la derivata sia diversa da zero nel dominio.
 :::
+::::
 
 :::esempio{titolo="Dal semipiano superiore al disco unitario"}
 La mappa $w=\dfrac{z-i}{z+i}$ manda $i$ nell'origine e il punto $-i$ è escluso dal dominio. L'asse reale è l'insieme dei punti equidistanti da $i$ e $-i$. Per questo i suoi punti sono mandati sulla circonferenza unitaria. Sopra l'asse la distanza da $i$ è minore della distanza da $-i$, quindi il modulo dell'immagine è minore di uno. Per vedere che si ottiene tutto il disco, si risolve rispetto a $z$ e si trova $z=i\dfrac{1+w}{1-w}$. Per $|w|<1$ questa espressione ha parte immaginaria $\dfrac{1-|w|^2}{|1-w|^2}>0$, dunque il punto di partenza appartiene al semipiano richiesto.

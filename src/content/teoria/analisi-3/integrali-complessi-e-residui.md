@@ -10,7 +10,7 @@ Per un cammino $\gamma:[a,b]\to\mathbb C$, $C^1$ a tratti, e $f$ continua sulla 
 $$
 \int_\gamma f(z)\,dz=\int_a^b f(\gamma(t))\gamma'(t)\,dt.
 $$
-Invertire il verso cambia il segno. Vale la stima $\left|\int_\gamma f\,dz\right|\le L(\gamma)\max_\gamma|f|$. Per $\gamma(t)=a+re^{it}$, $0\le t\le2\pi$, si ha $dz=ire^{it}dt$ e $\int_\gamma\dfrac{dz}{z-a}=2\pi i$. Il verso è antiorario.
+Quando si scambiano gli estremi della parametrizzazione, l'integrale cambia segno. Vale la stima $\left|\int_\gamma f\,dz\right|\le L(\gamma)\max_\gamma|f|$. Per $\gamma(t)=a+re^{it}$, $0\le t\le2\pi$, si ha $dz=ire^{it}dt$ e $\int_\gamma\dfrac{dz}{z-a}=2\pi i$. Il verso è antiorario.
 :::
 
 :::esempio{titolo="Il segmento e il semicerchio con gli stessi estremi"}
@@ -69,7 +69,7 @@ Una curva chiusa può essere contenuta interamente in un dominio senza che il su
 
 ## Formula di Cauchy e conseguenze
 
-:::teorema{#formula-cauchy titolo="Formula integrale di Cauchy"}
+::::teorema{#formula-cauchy titolo="Formula integrale di Cauchy"}
 Sia $\gamma$ semplice, chiusa, positiva e $C^1$ a tratti. Se $f$ è olomorfa su un aperto contenente la curva e il suo interno, per ogni $a$ interno e intero $n\ge0$ vale
 $$
 \int_\gamma\frac{f(z)}{(z-a)^{n+1}}\,dz=\frac{2\pi i}{n!}f^{(n)}(a).
@@ -77,7 +77,11 @@ $$
 Il caso $n=0$ si ottiene sottraendo il valore $f(a)$ e usando il teorema di Cauchy; derivando rispetto ad $a$ si ottengono gli altri casi. Per $f(z)=e^{2z}$ su $|z|=1$, l'integrale di $\dfrac{e^{2z}}{z^3}$ vale $4\pi i$.
 
 Per un disco chiuso di centro $a$ e raggio $R>0$ contenuto nel dominio di olomorfia, le **stime di Cauchy** danno $|f^{(n)}(a)|\le\dfrac{n!M_R}{R^n}$, dove $M_R=\max_{|z-a|=R}|f(z)|$. Una funzione intera limitata è costante, perché per $n=1$ la stima tende a zero quando $R\to\infty$. Questa è la conclusione del teorema di Liouville.
+
+:::dimostrazione
+Per $n=0$, si scrive $f(z)=f(a)+(z-a)g(z)$. La definizione di derivata rende $g$ limitata vicino ad $a$. Poiché $g$ è olomorfa fuori da $a$, si può deformare il contorno in una circonferenza piccola centrata in $a$. Un taglio collega le due frontiere e permette di applicare il teorema di Cauchy alla regione tagliata. I due lati del taglio hanno contributi opposti e si cancellano. Il modulo dell'integrale di $g$ è al più il prodotto della lunghezza di questa circonferenza per un limite superiore uniforme di $|g|$, quindi l'integrale è nullo. Il termine che resta è $f(a)$ moltiplicato per l'integrale di $\dfrac1{z-a}$, che vale $2\pi i$ su ogni contorno semplice positivo che racchiude $a$. Il valore si ricava deformando il contorno in una piccola circonferenza centrata in $a$. Per derivare rispetto ad $a$ basta confinare $a$ in un disco interno alla curva. La distanza positiva dal contorno rende uniformemente controllate le derivate del nucleo lungo il percorso.
 :::
+::::
 
 :::teorema{#identita-massimo titolo="Principio d'identità e principio del massimo"}
 Su un dominio connesso, due funzioni olomorfe che coincidono su un insieme con punto di accumulazione interno coincidono ovunque. Una funzione olomorfa e non costante su un dominio connesso non ha massimi locali del modulo. Questi risultati seguono dall'espansione locale di Taylor e dalla formula di Cauchy.
@@ -91,9 +95,6 @@ Sulla circonferenza positiva $|z|=2$ si voglia integrare $\dfrac{z^2+1}{z-a}$. P
 ::grafico{uguale=1 nomi="Re,Im" xmin=-2.6 xmax=3.7 ymin=-2.6 ymax=2.6 curve="2*cos(t),2*sin(t),0,6.283185307179586" punti="1,0,pieno,1;2,0,vuoto,2;3,0,pieno,3" titolo="I punti $1$, $2$ e $3$ sono rispettivamente interno, sul bordo ed esterno a $|z|=2$"}
 :::
 
-:::osservazione
-Per $n=0$, si scrive $f(z)=f(a)+(z-a)g(z)$. La definizione di derivata rende $g$ limitata vicino ad $a$. Poiché $g$ è olomorfa fuori da $a$, si può deformare il contorno in una circonferenza piccola centrata in $a$. Un taglio collega le due frontiere e permette di applicare il teorema di Cauchy alla regione tagliata. I due lati del taglio hanno contributi opposti e si cancellano. Il modulo dell'integrale di $g$ è al più il prodotto della lunghezza di questa circonferenza per un limite superiore uniforme di $|g|$, quindi l'integrale è nullo. Il termine che resta è $f(a)$ moltiplicato per l'integrale di $\dfrac1{z-a}$, che vale $2\pi i$ su ogni contorno semplice positivo che racchiude $a$. Il valore si ricava deformando il contorno in una piccola circonferenza centrata in $a$. Per derivare rispetto ad $a$ basta confinare $a$ in un disco interno alla curva. La distanza positiva dal contorno rende uniformemente controllate le derivate del nucleo lungo il percorso.
-:::
 
 :::esempio{titolo="Stime di Cauchy e crescita lineare"}
 Sia $f$ intera e supponiamo che valga $|f(z)|\le A+B|z|$ per ogni $z$, con $A,B\ge0$. Su una circonferenza di centro $a$ e raggio $R$ si ha $|z|\le |a|+R$, quindi le stime di Cauchy danno
@@ -187,7 +188,7 @@ Sia $\gamma$ semplice, chiusa, positiva e $C^1$ a tratti. Se $f$ è olomorfa su 
 $$
 \int_\gamma f(z)\,dz=2\pi i\sum_j\operatorname{Res}(f,a_j).
 $$
-Nessuna singolarità può appartenere al cammino. Con orientazione negativa cambia il segno.
+Le singolarità devono essere disgiunte dal cammino. Con orientazione negativa cambia il segno. La formula sostituisce l'integrazione lungo il contorno con calcoli locali nei punti singolari. Per esempio, per $f(z)=z^{-1}$ sul cerchio unitario positivo basta il residuo $1$ in zero.
 
 :::dimostrazione
 Si eliminano piccoli dischi disgiunti attorno alle singolarità. Si uniscono i piccoli cerchi al bordo esterno mediante tagli e si applica Cauchy alla regione tagliata. Ogni taglio è percorso due volte in versi opposti e il suo contributo si annulla. L'integrale esterno coincide così con la somma degli integrali sulle piccole circonferenze positive. Nelle serie di Laurent, l'unico monomio con integrale non nullo è $(z-a_j)^{-1}$, che dà $2\pi i$. Restano quindi i residui.
@@ -242,7 +243,7 @@ Per il polinomio $z^3+z+1$, fissato un punto $z$ con $|z|=2$, il valore $z^3$ ha
 :::
 
 ::::teorema{#media-sul-cerchio titolo="Proprietà della media sul cerchio"}
-Se $f$ è olomorfa in un intorno del disco chiuso di centro $a$ e raggio $r$, il valore $f(a)$ è la media dei valori di $f$ sulla circonferenza. Questa identità fornisce una prova del principio del massimo locale.
+Se $f$ è olomorfa in un intorno del disco chiuso di centro $a$ e raggio $r$, il valore $f(a)$ è la media dei valori di $f$ sulla circonferenza. Questa identità fornisce una prova del principio del massimo locale. Per $f(z)=z^2$ e $a=0$, la media è zero perché il valore sulla circonferenza compie due giri completi attorno a zero.
 
 :::dimostrazione
 Si parametrizza la formula di Cauchy per $n=0$ con $z=a+re^{it}$. Il fattore $re^{it}$ compare sia in $dz$ sia nel denominatore e si semplifica. Si ottiene

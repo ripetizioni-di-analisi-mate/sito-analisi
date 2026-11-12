@@ -17,7 +17,7 @@ Su $(0,1)$, $x^{-\alpha}$ con $\alpha>0$ appartiene a $L^p$ esattamente quando $
 :::
 
 :::esempio{titolo="Un picco isolato e il massimo essenziale"}
-Su $[0,1]$ si ponga $f(x)=x$ per $x\ne\dfrac12$ e $f(\dfrac12)=3$. L'insieme in cui $|f|>1$ è un singoletto, quindi ha misura zero. Per ogni $a<1$ con $a\ge0$, l'insieme in cui $|f|>a$ contiene il tratto $(a,1]$, salvo al più un punto, quindi ha misura positiva. Il massimo essenziale è $1$, mentre il massimo puntuale è $3$. La norma della classe di $f$ è la stessa della classe del monomio $x$.
+Su $[0,1]$ si ponga $f(x)=x$ per $x\ne\dfrac12$ e $f(\dfrac12)=3$. L'insieme in cui $|f|>1$ è un singoletto, quindi ha misura zero. Per ogni $0\le a<1$, l'insieme in cui $|f|>a$ contiene il tratto $(a,1]$ e ha quindi misura positiva. Il massimo essenziale è $1$, mentre il massimo puntuale è $3$. La norma della classe di $f$ è la stessa della classe del monomio $x$.
 
 ::grafico{linee="0,0 1,1" punti="0.5,0.5,vuoto;0.5,3,pieno;1,1,pieno" segmenti="0,1,1,1" xmin=-0.1 xmax=1.16 ymin=-0.1 ymax=3.4 titolo="Il punto a quota $3$ modifica il massimo puntuale. I livelli fra $0$ e $1$ sono superati su insiemi di misura positiva."}
 
@@ -42,24 +42,35 @@ La condizione $p\geq1$ serve per la disuguaglianza triangolare. Per $p=\dfrac12$
 
 ## Hölder e Minkowski
 
-:::teorema{#holder titolo="Disuguaglianze integrali e completezza"}
+::::teorema{#holder titolo="Disuguaglianze integrali e completezza"}
 Per $f\in L^p$ e $g\in L^q$, con $1\le p,q\le\infty$ e $\dfrac1p+\dfrac1q=1$, vale
 $$
 \int|fg|\,d\mu\le\|f\|_p\|g\|_q.
 $$
 Per $p=q=2$ è Cauchy-Schwarz. La disuguaglianza di Minkowski dà $\|f+g\|_p\le\|f\|_p+\|g\|_p$. Ogni $L^p$, per $1\le p\le\infty$, è completo.
 
-Per $1<p<\infty$, Hölder segue dalla disuguaglianza di Young $ab\le\dfrac{a^p}p+\dfrac{b^q}q$ applicata alle funzioni normalizzate. Minkowski segue applicando Hölder a $|f+g|^{p-1}|f|$ e $|f+g|^{p-1}|g|$. Per la completezza si estrae da una successione di Cauchy una sottosuccessione con differenze di norme sommabili, ottenendo un limite quasi ovunque e poi in norma.
+Hölder garantisce per esempio che il prodotto di due elementi di $L^2$ è integrabile. La completezza assicura che il limite in norma di una successione di Cauchy appartiene allo stesso spazio.
+
+:::dimostrazione
+Per Hölder con $1<p<\infty$ si normalizzano i fattori in modo che le loro potenze abbiano integrale uno. Se $\|f\|_p$ o $\|g\|_q$ è zero, il fattore corrispondente è nullo quasi ovunque e la disuguaglianza vale con uguaglianza. Altrimenti si pongono $a=\dfrac{|f|}{\|f\|_p}$ e $b=\dfrac{|g|}{\|g\|_q}$. Si applica la disuguaglianza di Young e si integra.
+$$
+\begin{aligned}
+\int ab\,d\mu
+&\le \int\left(\frac{a^p}{p}+\frac{b^q}{q}\right)d\mu \\[5pt]
+&= \frac{1}{p}+\frac{1}{q} \\[5pt]
+&=1.
+\end{aligned}
+$$
+Moltiplicando per $\|f\|_p\|g\|_q$ si ottiene la stima. Per $p=1$ e $q=\infty$, si integra la disuguaglianza $|fg|\le |f|\|g\|_\infty$ valida quasi ovunque. Il caso $p=\infty$ si ottiene scambiando $f$ con $g$. Da Hölder segue Minkowski con la stima sui due prodotti mostrata nell'osservazione sulla norma della somma. La completezza si dimostra estraendo termini con differenze di norme sommabili.
 :::
+::::
 
 :::esempio{titolo="Prodotto integrabile e uso degli esponenti coniugati"}
 Su $(0,1)$, la funzione $x^{-\dfrac14}$ appartiene a $L^2$, perché il suo quadrato è $x^{-\dfrac12}$ e ha integrale $2$. Anche la funzione $x$ appartiene a $L^2$ e ha norma $\dfrac1{\sqrt3}$. Cauchy-Schwarz dà quindi $\int_0^1 x^{-\dfrac14}x\,dx\le\sqrt{\dfrac23}$. Il calcolo diretto dà $\dfrac47$. La disuguaglianza fornisce soprattutto una garanzia: il prodotto di due elementi di $L^2$ è in $L^1$, anche quando le due norme si stimano senza conoscere una primitiva del prodotto.
 :::
 
 :::osservazione{titolo="Normalizzazione e uguaglianza in Hölder"}
-Siano $p$ e $q$ coniugati, entrambi finiti e maggiori di uno, e siano $f$ e $g$ di norma positiva. Per applicare Young si pongono $a=\dfrac{|f|}{\|f\|_p}$ e $b=\dfrac{|g|}{\|g\|_q}$. Le potenze $a^p$ e $b^q$ hanno integrale uno. Integrando la stima puntuale per il prodotto $ab$ si ottiene quindi un secondo membro uguale a $\dfrac1p+\dfrac1q=1$. La moltiplicazione per le due norme dà la disuguaglianza per le funzioni di partenza. Se una delle norme è zero, la relativa funzione è nulla quasi ovunque e anche l'integrale del prodotto è zero.
-
-Nella disuguaglianza di Young l'uguaglianza vale quando $a^p=b^q$. Poiché la differenza fra i due membri è non negativa, l'uguaglianza dopo integrazione richiede che questa differenza sia zero quasi ovunque. Di conseguenza, per le due norme positive, Hölder dà uguaglianza esattamente quando le due potenze normalizzate coincidono quasi ovunque. Su $(0,1)$, per $p=3$ e $q=\dfrac32$, si possono prendere $f(x)=x$ e $g(x)=x^2$. Le potenze sono entrambe $x^3$ e l'integrale del prodotto vale $\dfrac14$, uguale al prodotto delle norme.
+Per $1<p,q<\infty$ coniugati e norme positive, la condizione di uguaglianza in Hölder si ricava dalla disuguaglianza di Young per i fattori normalizzati $a=\dfrac{|f|}{\|f\|_p}$ e $b=\dfrac{|g|}{\|g\|_q}$. Nella stima puntuale l'uguaglianza vale quando $a^p=b^q$. Poiché la differenza fra i due membri è non negativa, l'uguaglianza dopo integrazione richiede che questa differenza sia zero quasi ovunque. Di conseguenza, per le due norme positive, Hölder dà uguaglianza esattamente quando le due potenze normalizzate coincidono quasi ovunque. Su $(0,1)$, per $p=3$ e $q=\dfrac32$, si possono prendere $f(x)=x$ e $g(x)=x^2$. Le potenze sono entrambe $x^3$ e l'integrale del prodotto vale $\dfrac14$, uguale al prodotto delle norme.
 :::
 
 :::osservazione
@@ -79,19 +90,32 @@ Per $p=\infty$ le differenze soddisfano le stesse stime uniformi fuori da un ins
 
 ## Inclusioni e convergenze
 
-:::teorema{#convergenze-lp titolo="Inclusioni su spazi di misura finita"}
+::::teorema{#convergenze-lp titolo="Inclusioni su spazi di misura finita"}
 Se $\mu(X)<\infty$ e $1\le p<q\le\infty$, allora
 $$
 L^q\subseteq L^p,\qquad
 \|f\|_p\le\mu(X)^{\frac1p-\frac1q}\|f\|_q.
 $$
-È un'applicazione di Hölder a $|f|^p$ e $1$. Su spazi di misura infinita questa inclusione non vale in generale.
+Per esempio, su uno spazio di misura uno la stima dà $\|f\|_1\le \|f\|_2$. Su spazi di misura infinita questa inclusione non vale in generale.
 
-Per $p<\infty$, convergere in norma $L^p$ implica convergere in misura, poiché $\mu\{|f_n-f|>\varepsilon\}\le\dfrac{\|f_n-f\|_p^p}{\varepsilon^p}$, e implica una sottosuccessione convergente quasi ovunque. Non assicura in generale la convergenza quasi ovunque dell'intera successione.
+Per $p<\infty$, convergere in norma $L^p$ implica convergere in misura, poiché $\mu\{|f_n-f|>\varepsilon\}\le\dfrac{\|f_n-f\|_p^p}{\varepsilon^p}$, e implica una sottosuccessione convergente quasi ovunque.
+
+:::dimostrazione
+L'inclusione si ottiene stimando l'integrale di $|f|^p$. Per $p<q<\infty$, si applica Hölder con esponenti $\dfrac qp$ e $\dfrac q{q-p}$. Il primo fattore $|f|^p$ ha potenza integrabile perché $f\in L^q$, mentre la costante $1$ ha potenza integrabile perché $\mu(X)<\infty$. Segue
+$$
+\begin{aligned}
+\int_X |f|^p\,d\mu
+ &\le \left(\int_X |f|^q\,d\mu\right)^{\frac pq}
+      \left(\int_X 1\,d\mu\right)^{1-\frac pq} \\[5pt]
+ &=\|f\|_q^p\,\mu(X)^{1-\frac pq}.
+\end{aligned}
+$$
+Il membro destro è finito, perciò $f\in L^p$. La radice di ordine $p$ dà la stima sulle norme. Per $q=\infty$ si integra la disuguaglianza $|f|^p\le\|f\|_\infty^p$ quasi ovunque. La stima di Markov dà la convergenza in misura. Per ottenere il limite quasi ovunque si seleziona una sottosuccessione con misure degli insiemi eccezionali sommabili.
 :::
+::::
 
 :::esempio{titolo="La misura totale nel confronto fra norme"}
-Su $(0,2)$ con la misura di Lebesgue, la funzione costante $f=4$ ha $\|f\|_1=8$ e $\|f\|_2=4\sqrt2$. Qui la norma con esponente minore è più grande. La stima di Hölder dà $\|f\|_1\leq\sqrt2\|f\|_2$ e l'uguaglianza mostra che il fattore $\sqrt2$ è necessario per un confronto valido per ogni funzione. In generale, per $q$ finito, si applica Hölder a $|f|^p$ e alla funzione costante uno con esponenti $\dfrac qp$ e $\dfrac q{q-p}$. La norma del secondo fattore è $\mu(X)^{1-\dfrac pq}$. Prendendo la radice di ordine $p$ si ottiene la potenza $\dfrac1p-\dfrac1q$ della misura totale. Se $\mu(X)$ è positiva, si può dividere la misura per $\mu(X)$. Il nuovo spazio ha misura uno e il fattore nella stima diventa uno. Il confronto assume così la forma $\|f\|_p\leq\|f\|_q$ nella misura normalizzata.
+Su $(0,2)$ con la misura di Lebesgue, la funzione costante $f=4$ ha $\|f\|_1=8$ e $\|f\|_2=4\sqrt2$. Qui la norma con esponente minore è più grande. La stima di Hölder dà $\|f\|_1\leq\sqrt2\|f\|_2$ e l'uguaglianza mostra che il fattore $\sqrt2$ è necessario per un confronto valido per ogni funzione. Se $\mu(X)$ è positiva, si può dividere la misura per $\mu(X)$. Il nuovo spazio ha misura uno e il fattore nella stima diventa uno. Il confronto assume così la forma $\|f\|_p\leq\|f\|_q$ nella misura normalizzata.
 :::
 
 :::esempio{titolo="Successioni concentrate"}
@@ -220,23 +244,27 @@ Sottraendo dalla seconda equazione metà della prima, si ricava $\dfrac b{12}=\d
 
 ## Basi ortonormali e Parseval
 
-:::teorema{#basi-hilbert titolo="Bessel e Parseval"}
+:::richiamo{titolo="Proiezione su un sottospazio chiuso"}
+Sia $H$ uno spazio di Hilbert e sia $M$ un suo sottospazio lineare chiuso. Per ogni $x\in H$ esiste un unico $p\in M$ tale che $x-p\perp M$.
+:::
+
+::::teorema{#basi-hilbert titolo="Bessel e Parseval"}
 Per un sistema ortonormale $(e_n)$ si ha $\sum_n|\langle x,e_n\rangle|^2\le\|x\|^2$ (Bessel). Se il sottospazio generato è denso, il sistema è una base ortonormale e
 $$
 x=\sum_n\langle x,e_n\rangle e_n\quad\text{in norma},\qquad
 \|x\|^2=\sum_n|\langle x,e_n\rangle|^2.
 $$
-La seconda identità è Parseval. Ogni Hilbert separabile ha una base ortonormale finita o numerabile. In $L^2(-\pi,\pi)$ le funzioni $\dfrac{e^{inx}}{\sqrt{2\pi}}$, con $n\in\mathbb Z$, formano una base ortonormale: si ottiene la convergenza in norma delle serie di Fourier.
-:::
+La seconda identità è Parseval. Ogni Hilbert separabile ha una base ortonormale finita o numerabile. In $L^2(-\pi,\pi)$ le funzioni $\dfrac{e^{inx}}{\sqrt{2\pi}}$, con $n\in\mathbb Z$, formano una base ortonormale, quindi si ottiene la convergenza in norma delle serie di Fourier.
 
-:::osservazione
-Per i primi $N$ vettori ortonormali, la somma dei primi $N$ coefficienti per i rispettivi vettori è la proiezione sul loro sottospazio. La norma quadrata di questa proiezione è la somma dei moduli quadrati dei coefficienti. Il teorema di Pitagora dà
+:::dimostrazione
+Si calcola la norma del residuo dopo aver conservato un numero finito di coefficienti. Il sottospazio $M_N$ generato da $e_1,\ldots,e_N$ ha dimensione finita ed è chiuso, quindi il teorema di proiezione si applica. La proiezione è la somma dei primi $N$ coefficienti per i rispettivi vettori. La norma quadrata di questa somma è la somma dei moduli quadrati dei coefficienti per ortonormalità. Poiché il residuo è ortogonale a $M_N$, Pitagora dà
 $$
 \left\|x-\sum_{n=1}^N\langle x,e_n\rangle e_n\right\|^2
 =\|x\|^2-\sum_{n=1}^N|\langle x,e_n\rangle|^2.
 $$
-Il membro sinistro è non negativo e dà la disuguaglianza di Bessel. Se il sistema è completo, la distanza dal sottospazio generato dai primi $N$ vettori tende a zero. Passando al limite si ottiene Parseval. Se il sistema è incompleto, l'energia residua può restare positiva.
+Il membro sinistro è non negativo, quindi le somme parziali dei coefficienti al quadrato sono maggiorate da $\|x\|^2$. Il loro limite dà Bessel. Se il sistema è completo, per ogni $\varepsilon>0$ esiste una combinazione finita dei vettori che dista da $x$ meno di $\varepsilon$. Tale combinazione appartiene a $M_N$ per $N$ sufficientemente grande. La proiezione minimizza la distanza, quindi il residuo tende a zero in norma. Passando al limite nell'identità si ottiene Parseval.
 :::
+::::
 
 :::esempio{titolo="Una proiezione trigonometrica incompleta"}
 In $L^2(-\pi,\pi)$ si consideri $f(t)=\cos t+\dfrac12\cos(2t)$. I due coseni sono ortogonali e hanno norma quadrata $\pi$. La proiezione sul sottospazio generato da $\cos t$ è $\cos t$. L'errore quadratico è $\dfrac{\pi}{4}$, dato dal secondo modo. Aggiungendo $\cos(2t)$ al sottospazio, la proiezione coincide con la funzione.
@@ -253,18 +281,25 @@ In questo esempio l'errore si calcola senza sommare di nuovo l'intera serie. Dop
 
 ## Rappresentazione di Riesz e convergenza debole
 
-:::teorema{#riesz-debole titolo="Funzionali e convergenza debole"}
+::::teorema{#riesz-debole titolo="Funzionali e convergenza debole"}
 Sia $H$ uno spazio di Hilbert sul campo scalare $\mathbb K$. Per ogni funzionale lineare continuo $\ell:H\to\mathbb K$ esiste un unico $y\in H$ tale che $\ell(x)=\langle x,y\rangle$, e $\|\ell\|=\|y\|$. È il teorema di Riesz. Per $\ell(f)=\int_0^1f(x)x\,dx$, il vettore rappresentante è $y(x)=x$ e la norma è $\dfrac1{\sqrt3}$.
 
 Si scrive $x_n\rightharpoonup x$ se $\langle x_n,y\rangle\to\langle x,y\rangle$ per ogni $y\in H$. Una successione ortonormale tende debolmente a zero per Bessel, pur avendo norma costante $1$. La convergenza debole unita a $\|x_n\|\to\|x\|$ implica quella in norma, espandendo il quadrato di $\|x_n-x\|$.
+
+:::dimostrazione
+Il rappresentante si costruisce isolando la componente ortogonale al nucleo del funzionale. Se $\ell=0$, si prende $y=0$. Se $\ell\ne0$, si sceglie $v$ con $\ell(v)\ne0$. Il nucleo $K=\ker\ell$ è chiuso per continuità, quindi si può proiettare $v$ su $K$. Il residuo $u=v-P_Kv$ è ortogonale a $K$ e soddisfa $\ell(u)=\ell(v)\ne0$.
+
+Per ogni $x$ il vettore $x-\dfrac{\ell(x)}{\ell(u)}u$ appartiene a $K$. Il suo prodotto scalare con $u$ è dunque zero. Si ricava
+$$
+\ell(x)=\frac{\ell(u)}{\|u\|^2}\langle x,u\rangle
+       =\left\langle x,\frac{\overline{\ell(u)}}{\|u\|^2}u\right\rangle.
+$$
+L'ultimo passaggio usa la coniugazione nel secondo argomento. Se due vettori rappresentano $\ell$, il prodotto scalare con la loro differenza vale zero per ogni $x$. Scegliendo proprio la differenza come vettore di prova, la sua norma risulta zero. Il rappresentante è quindi unico. Cauchy-Schwarz dà $\|\ell\|\le\|y\|$ e, se $y\ne0$, il vettore $\dfrac{y}{\|y\|}$ realizza l'uguaglianza. Per $y=0$ entrambe le norme valgono zero.
 :::
+::::
 
 :::osservazione
 Il teorema di Riesz permette di calcolare una norma di operatore partendo da una norma di vettore. Per ogni $x$ unitario, Cauchy-Schwarz dà $|\ell(x)|\le\|y\|$. Se $y\ne0$, scegliendo $x=\dfrac{y}{\|y\|}$ si raggiunge l'uguaglianza. Nel caso complesso la posizione della coniugazione è essenziale. Con la convenzione adottata, il funzionale $f\mapsto\int f h$ ha rappresentante $\overline h$, mentre il funzionale $f\mapsto\int f\overline h$ ha rappresentante $h$.
-:::
-
-:::osservazione
-Per costruire il rappresentante di un funzionale non nullo si proietta un vettore fuori dal suo nucleo sul nucleo stesso. Il nucleo è chiuso per continuità. Il residuo $u$ è non nullo e ortogonale al nucleo, e $\ell(u)\ne0$. Per ogni $x$, il vettore $x-\dfrac{\ell(x)}{\ell(u)}u$ appartiene al nucleo, quindi il suo prodotto scalare con $u$ è zero. Si ricava $\ell(x)=\dfrac{\ell(u)}{\|u\|^2}\langle x,u\rangle$. Poiché il prodotto è coniugato-lineare nel secondo argomento, il rappresentante è $y=\dfrac{\overline{\ell(u)}}{\|u\|^2}u$. L'unicità segue prendendo come vettore di prova la differenza fra due eventuali rappresentanti.
 :::
 
 :::esempio{titolo="Un prodotto scalare di prova e la norma"}

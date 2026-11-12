@@ -124,13 +124,27 @@ La monotonia dà $\lim\int f_n\le\int f$. Per una funzione semplice $0\le s\le f
 :::
 ::::
 
-:::teorema{#fatou titolo="Lemma di Fatou"}
-Per funzioni misurabili non negative,
+::::teorema{#fatou titolo="Lemma di Fatou"}
+Sia $(f_n)$ una successione di funzioni misurabili non negative. Allora
 $$
 \int\liminf_n f_n\,d\mu\le\liminf_n\int f_n\,d\mu.
 $$
-Si applica la convergenza monotona a $\inf_{k\ge n}f_k$. Per $f_n=n\mathbf1_{(0,\dfrac1n)}$ il limite è zero quasi ovunque e gli integrali valgono $1$: la disuguaglianza può essere stretta.
+Il lemma stima l'integrale del limite inferiore anche in assenza di una maggiorante integrabile. Per $f_n=n\mathbf1_{(0,\frac1n)}$ il limite è zero quasi ovunque e gli integrali valgono $1$, quindi la disuguaglianza è stretta.
+
+:::dimostrazione
+Si approssima il limite inferiore con gli infimi delle code. Per ogni $n$ sia $h_n=\inf_{k\ge n} f_k$. La funzione $h_n$ è misurabile perché è l'infimo di una famiglia numerabile di funzioni misurabili. Inoltre $0\le h_n\le h_{n+1}$ e, per definizione, $h_n\to\liminf_n f_n$ puntualmente. Il **teorema della convergenza monotona** si applica dunque a $(h_n)$.
+
+Per ogni $k\ge n$ vale $h_n\le f_k$, quindi $\int h_n\,d\mu\le\int f_k\,d\mu$. Prendendo l'infimo su tutti questi indici e poi il limite in $n$ si ottiene
+$$
+\begin{aligned}
+\int\liminf_n f_n\,d\mu
+&=\lim_{n\to\infty}\int h_n\,d\mu \\
+&\le\lim_{n\to\infty}\inf_{k\ge n}\int f_k\,d\mu \\
+&=\liminf_n\int f_n\,d\mu.
+\end{aligned}
+$$
 :::
+::::
 
 :::esempio{titolo="Troncamenti che aumentano senza una maggiorante integrabile"}
 Su $(0,1)$ si ponga $f_n(x)=\min(n,\dfrac1x)$. Ogni $f_n$ ha integrale finito e la successione cresce puntualmente a $\dfrac1x$. Separando il tratto costante dal tratto in cui vale $\dfrac1x$ si trova
@@ -146,7 +160,7 @@ Il limite è infinito, in accordo con la convergenza monotona. Il teorema si app
 :::
 
 :::osservazione
-Nel lemma di Fatou la successione degli infimi di coda è crescente. Per ogni $k$, l'infimo di coda è minore o uguale a ciascuno dei termini con indice almeno $k$. Il suo integrale è quindi minore o uguale all'infimo degli integrali della coda. La convergenza monotona applicata agli infimi di coda dà la disuguaglianza del lemma. Il passaggio è a senso unico perché il punto in cui ogni termine è grande può dipendere dall'indice. Nei rettangoli concentrati il supporto si restringe e l'altezza cresce, quindi l'area si conserva benché ogni punto positivo venga escluso.
+Nei rettangoli dell'esempio di Fatou, il supporto si restringe e l'altezza cresce. Il prodotto della base per l'altezza resta uno. Per ogni $x>0$ l'indice dopo il quale il supporto esclude $x$ dipende dal punto, quindi il limite puntuale è zero anche se ciascun integrale vale uno.
 
 ::grafico{linee="0,2 0.5,2 0.5,0;0,4 0.25,4 0.25,0;0,8 0.125,8 0.125,0" etichette="0.49,2.4,n = 2;0.27,4.38,n = 4;0.18,8.3,n = 8" xmin=-0.05 xmax=0.65 ymin=-0.2 ymax=9.1 titolo="I rettangoli della successione di Fatou hanno tutti area $1$. Il loro supporto si restringe verso $0$."}
 
@@ -163,15 +177,25 @@ L'ultima uguaglianza segue per induzione. Vale per $N=1$ e il passaggio da $N$ a
 
 ## Convergenza dominata
 
-:::teorema{#dominata titolo="Convergenza dominata"}
-Siano $f_n$ e $f$ misurabili. Se $f_n\to f$ quasi ovunque ed esiste $g\in L^1(\mu)$ con $|f_n|\le g$ quasi ovunque per ogni $n$, allora
+::::teorema{#dominata titolo="Convergenza dominata"}
+Siano $f_n$ e $f$ misurabili. Se $f_n\to f$ quasi ovunque ed esiste $g\in L^1(\mu)$ con $|f_n|\le g$ quasi ovunque per ogni $n$, allora $f\in L^1(\mu)$ e
 $$
 \int|f_n-f|\,d\mu\to0,\qquad \int f_n\,d\mu\to\int f\,d\mu.
 $$
-La dimostrazione applica Fatou a $2g-|f_n-f|$. Per $f_n(x)=\dfrac{e^{-x}}{1+\dfrac xn}$ su $(0,\infty)$, la dominante $e^{-x}$ è integrabile e il limite è $e^{-x}$; quindi gli integrali tendono a $1$.
+Per $f_n(x)=\dfrac{e^{-x}}{1+\dfrac{x}{n}}$ su $(0,\infty)$, la dominante $e^{-x}$ è integrabile e coincide con il limite. Il teorema dà quindi il limite degli integrali senza calcolare l’integrale di ogni quoziente.
 
-La successione $n\mathbf1_{(0,\dfrac1n)}$ mostra che la sola convergenza quasi ovunque non basta: non può esistere una dominante integrabile comune.
+:::dimostrazione
+Si applica Fatou alla differenza fra una maggiorante integrabile e l'errore. Fuori dall'unione degli insiemi eccezionali valgono tutte le maggiorazioni e il limite puntuale, quindi anche $|f|\le g$. La funzione limite e tutti i termini della successione sono allora integrabili. Per la disuguaglianza triangolare si ha $0\le |f_n-f|\le 2g$ quasi ovunque. Le funzioni $2g-|f_n-f|$ sono perciò misurabili, non negative quasi ovunque e convergono a $2g$ quasi ovunque. Si possono ridefinire su un insieme nullo comune prima di applicare il **lemma di Fatou**, che dà
+$$
+\begin{aligned}
+\int 2g\,d\mu
+&\le\liminf_n\int (2g-|f_n-f|)\,d\mu \\
+&=\int 2g\,d\mu-\limsup_n\int|f_n-f|\,d\mu.
+\end{aligned}
+$$
+Poiché $\int 2g\,d\mu$ è finito, segue $\limsup_n\int|f_n-f|\,d\mu\le0$. Gli integrali dell'errore sono non negativi e quindi tendono a zero. Infine $\left|\int f_n\,d\mu-\int f\,d\mu\right|\le\int|f_n-f|\,d\mu$, perciò convergono anche gli integrali delle funzioni.
 :::
+::::
 
 :::esempio{titolo="Scelta di una maggiorante su una semiretta"}
 Per verificare la dominazione nell'esempio, il denominatore è almeno uno per ogni $n$ e ogni $x>0$. L'esponenziale è quindi una maggiorante indipendente dall'indice. Si ha $\int_0^\infty e^{-x}\,dx=1$, quindi la funzione che maggiora è integrabile sul dominio effettivo. Per ogni $x$ fissato, $\dfrac xn$ tende a zero. Il teorema permette di concludere senza integrare il quoziente per ogni $n$.
@@ -182,11 +206,7 @@ Quando una funzione ha una singolarità o il dominio è illimitato, si può sceg
 :::
 
 :::osservazione
-La conclusione in norma $L^1$ è più informativa della sola convergenza degli integrali. Si ha infatti
-$$
-\left|\int f_n\,d\mu-\int f\,d\mu\right|\le\int |f_n-f|\,d\mu.
-$$
-Dalla maggiorazione di $f_n$ segue la stessa maggiorazione per $f$ quasi ovunque. Quindi $0\le 2g-|f_n-f|$ e si può usare Fatou su questa differenza. Il suo limite puntuale è $2g$, così l'integrale di $2g$ è minore o uguale a $\int 2g-\limsup_n\int |f_n-f|$. Poiché $\int 2g$ è finito, la sottrazione mostra che il limite superiore dell'errore in $L^1$ è zero. Questa prova chiarisce il ruolo distinto delle ipotesi: il limite puntuale identifica la funzione finale e l'integrabilità di $g$ rende lecita la sottrazione.
+La convergenza in norma $L^1$ stima l'errore in valore assoluto, quindi impedisce che contributi positivi e negativi si cancellino prima della stima. Il limite puntuale identifica la funzione finale e l'integrabilità di $g$ permette la sottrazione nella prova.
 
 Una successione traslata come $\mathbf1_{(n,n+1)}$ sulla retta mostra che anche senza picchi crescenti lo scambio può fallire. L'altezza resta uno e gli integrali valgono uno, ma a ogni punto fissato il rettangolo passa al più una volta e il limite è zero. Una maggiorante comune deve valere almeno uno su tutti quegli intervalli e ha quindi integrale infinito.
 :::
@@ -242,13 +262,23 @@ Il calcolo riconduce l'integrale alla misura dell'insieme che supera ogni altezz
 
 ## Integrali dipendenti da un parametro
 
-:::teorema{#parametri titolo="Derivazione sotto il segno di integrale"}
+::::teorema{#parametri titolo="Derivazione sotto il segno di integrale"}
 Sia $I$ un intervallo aperto. Si supponga che $F(t,x)$ sia reale, misurabile in $x$ per ogni $t$ e integrabile in $x$ per un valore $t_0$. Si supponga inoltre che $t\mapsto F(t,x)$ sia differenziabile su $I$ per ogni $x$ al di fuori di un insieme nullo fissato. Si supponga infine che su ogni sottointervallo compatto di $I$ esista una funzione integrabile che maggiori $|\partial_tF(t,x)|$ simultaneamente per tutti i parametri del sottointervallo, salvo un insieme nullo di valori di $x$. Allora
 $$
 \frac d{dt}\int F(t,x)\,d\mu(x)=\int\partial_tF(t,x)\,d\mu(x).
 $$
-Per il segmento che unisce $t_0$ a $t$, il teorema del valor medio maggiora $|F(t,x)-F(t_0,x)|$ con il prodotto di $|t-t_0|$ e di una funzione integrabile. Quindi $F(t,\cdot)$ è integrabile per ogni $t\in I$. Su un compatto che contiene $t$ al suo interno, la stessa stima controlla i rapporti incrementali e consente di applicare la convergenza dominata. Per $t>0$, derivando $\int_0^\infty e^{-tx}\,dx=\dfrac1t$ si ottiene $\int_0^\infty xe^{-tx}\,dx=\dfrac1{t^2}$.
+Per $t>0$, derivando $\int_0^\infty e^{-tx}\,dx=\dfrac1t$ si ottiene $\int_0^\infty xe^{-tx}\,dx=\dfrac1{t^2}$.
+
+:::dimostrazione
+Si usa la maggiorante della derivata per controllare i rapporti incrementali. Per ogni $t\in I$ il segmento che unisce $t_0$ e $t$ è contenuto in un sottointervallo compatto $J$ di $I$. Il **teorema del valor medio** in $t$ dà $|F(t,x)-F(t_0,x)|\le |t-t_0|g_J(x)$ quasi ovunque, dove $g_J$ è la maggiorante integrabile sul compatto. Poiché $F(t_0,\cdot)$ è integrabile, lo è anche $F(t,\cdot)$.
+
+Fissato $t$, si scelga un compatto $K\subset I$ che contenga $t$ al suo interno. Per $h\ne0$ sufficientemente piccolo, il segmento da $t$ a $t+h$ è in $K$. Una seconda applicazione del valor medio dà
+$$
+\left|\frac{F(t+h,x)-F(t,x)}{h}\right|\le g_K(x)
+$$
+quasi ovunque, con la stessa maggiorante per tutti questi incrementi. I rapporti sono misurabili in $x$ e convergono quasi ovunque a $\partial_tF(t,x)$ per differenziabilità. Per ogni successione di incrementi che tende a zero si applica la **convergenza dominata**. Il limite degli integrali dei rapporti è l'integrale della derivata parziale, quindi il limite del rapporto incrementale dell'integrale esiste e ha il valore enunciato.
 :::
+::::
 
 :::osservazione
 Il controllo della derivata può dipendere dall'intorno del parametro in cui si vuole derivare. Nel caso esponenziale, fissato $t_*>0$, si scelgano i valori $t$ tra $\dfrac{t_*}{2}$ e $\dfrac{3t_*}{2}$. I rapporti incrementali sono dominati da $x e^{-\dfrac{t_*}{2}x}$ per il teorema del valor medio. La stima si usa prima di passare al limite. Per ogni $x$ il rapporto incrementale converge a $-xe^{-t_*x}$. La dominata giustifica il passaggio dalla derivata dell'integrale all'integrale della derivata.

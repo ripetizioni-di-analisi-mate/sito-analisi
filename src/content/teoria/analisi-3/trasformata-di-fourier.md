@@ -87,7 +87,7 @@ Il primo fattore $1-e^{-i\xi}$ viene dall'integrazione su un intervallo di lungh
 
 ## Traslazioni, modulazioni e dilatazioni
 
-:::teorema{#proprieta-fourier titolo="Proprietà algebriche"}
+::::teorema{#proprieta-fourier titolo="Proprietà algebriche"}
 Per $f\in L^1$, $a,b\in\mathbb R$ e $c\ne0$,
 $$
 \begin{aligned}
@@ -96,8 +96,34 @@ $$
 \mathcal F[f(cx)](\xi)&=\frac1{|c|}\widehat f\left(\frac\xi c\right).
 \end{aligned}
 $$
-Le formule seguono da cambi di variabile nell'integrale. La trasformata è lineare. Se $f$ è reale e pari, la trasformata è reale e pari. Se è reale e dispari, è immaginaria pura e dispari. Una traslazione nello spazio introduce quindi una fase, mentre una modulazione trasla le frequenze.
+La trasformata è lineare. Se $f$ è reale e pari, la trasformata è reale e pari. Se è reale e dispari, è immaginaria pura e dispari. Una traslazione nello spazio introduce quindi una fase, mentre una modulazione trasla le frequenze.
+
+:::dimostrazione
+Si riconducono i tre integrali alla definizione di $\widehat f$. La traslazione e la dilatazione preservano l'integrabilità, e la modulazione moltiplica per un fattore di modulo uno. Per la traslazione si pone $y=x-a$ e si ottiene
+$$
+\begin{aligned}
+\mathcal F[f(x-a)](\xi)
+&=\int_{\mathbb R} f(y)e^{-i\xi(y+a)}\,dy\\
+&=e^{-ia\xi}\widehat f(\xi).
+\end{aligned}
+$$
+Per la modulazione, sommando gli esponenti si ha
+$$
+\begin{aligned}
+\mathcal F[e^{ibx}f(x)](\xi)
+&=\int_{\mathbb R} f(x)e^{-i(\xi-b)x}\,dx\\
+&=\widehat f(\xi-b).
+\end{aligned}
+$$
+Per la dilatazione il cambio $y=cx$ ha fattore di misura $\dfrac1{|c|}$, perché per $c<0$ si invertono gli estremi. Il nucleo diventa $e^{-i\frac{\xi}{c}y}$, quindi
+$$
+\mathcal F[f(cx)](\xi)
+=\frac1{|c|}\int_{\mathbb R} f(y)e^{-i\frac{\xi}{c}y}\,dy
+=\frac1{|c|}\widehat f\left(\frac{\xi}{c}\right).
+$$
+La linearità segue dalla linearità dell'integrale assolutamente convergente. Se il dato è reale e pari, il prodotto con il seno è dispari e quello con il coseno è pari rispetto a $x$. Il primo integrale si annulla, e il secondo dipende in modo pari da $\xi$. Per un dato reale e dispari si annulla invece il contributo del coseno e resta quello del seno, immaginario e dispari in $\xi$.
 :::
+::::
 
 :::esempio{titolo="Spostare una banda di frequenze"}
 Si prenda $g(x)=e^{-x^2}$ e si ponga $f(x)=e^{3ix}g(x)$. Nel prodotto con $e^{-i\xi x}$ si combinano gli esponenti, ottenendo $e^{-i(\xi-3)x}g(x)$. La trasformata di $f$ è dunque la gaussiana $\widehat g(\xi-3)$, con massimo in $\xi=3$. Un fattore reale $\cos(3x)$ contiene metà di ciascuna delle due modulazioni $e^{3ix}$ ed $e^{-3ix}$. Per $g(x)\cos(3x)$ si ottengono quindi due copie traslate, centrate in $3$ e $-3$, ciascuna con coefficiente $\dfrac12$. La simmetria del risultato è coerente con un dato reale e pari.
@@ -166,11 +192,41 @@ Per $f,g\in L^1(\mathbb R)$, la **convoluzione** è
 $$
 (f*g)(x)=\int_{\mathbb R}f(x-y)g(y)\,dy.
 $$
-Esiste quasi ovunque, appartiene a $L^1$ e $\|f*g\|_1\le\|f\|_1\|g\|_1$. Fubini e il cambio $u=x-y$ danno
+Per gli indicatori, questo integrale misura la sovrapposizione dei supporti. Ad esempio, l'intersezione fra $[0,1]$ e $[x-1,x]$ ha lunghezza uno per $x=1$.
+:::
+
+::::teorema{#teorema-convoluzione titolo="Trasformata di una convoluzione"}
+Se $f,g\in L^1(\mathbb R)$, la convoluzione esiste quasi ovunque, appartiene a $L^1$ e $\|f*g\|_1\le\|f\|_1\|g\|_1$. Vale inoltre
 $$
 \widehat{f*g}=\widehat f\,\widehat g.
 $$
-Per funzioni di Schwartz vale anche $\widehat{fg}=\dfrac1{2\pi}\widehat f*\widehat g$. La convoluzione di due indicatori di intervalli è la lunghezza della loro sovrapposizione traslata: per $\mathbf1_{[0,a]}*\mathbf1_{[0,a]}$ si ottiene la funzione triangolare $x$ su $[0,a]$, $2a-x$ su $[a,2a]$ e zero altrove.
+Ad esempio, il triangolo ottenuto convolvendo due indicatori uguali ha trasformata pari al quadrato di quella dell'indicatore.
+
+:::dimostrazione
+Si dimostra dapprima l'integrabilità assoluta del prodotto nelle due variabili. Il cambio $u=x-y$ preserva la misura in $x$. Per Tonelli,
+$$
+\begin{aligned}
+\int_{\mathbb R}\int_{\mathbb R}|f(x-y)|\,|g(y)|\,dy\,dx
+&=\int_{\mathbb R}|g(y)|
+ \left(\int_{\mathbb R}|f(u)|\,du\right)dy\\
+&=\|f\|_1\|g\|_1.
+\end{aligned}
+$$
+Questo valore è finito. L'integrale interno esiste quindi per quasi ogni $x$ e la disuguaglianza triangolare dà la stima di $\|f*g\|_1$. Il nucleo della trasformata ha modulo uno, quindi Fubini si applica anche all'integrale complesso. Con lo stesso cambio di variabile si ottiene
+$$
+\begin{aligned}
+\widehat{f*g}(\xi)
+&=\int_{\mathbb R}\int_{\mathbb R}f(u)g(y)e^{-i\xi(u+y)}\,du\,dy\\
+&=\left(\int_{\mathbb R}f(u)e^{-i\xi u}\,du\right)
+ \left(\int_{\mathbb R}g(y)e^{-i\xi y}\,dy\right)\\
+&=\widehat f(\xi)\widehat g(\xi).
+\end{aligned}
+$$
+:::
+::::
+
+:::osservazione
+Per funzioni di Schwartz vale anche $\widehat{fg}=\dfrac1{2\pi}\widehat f*\widehat g$. La convoluzione di due indicatori di intervalli è la lunghezza della loro sovrapposizione traslata. Per $\mathbf1_{[0,a]}*\mathbf1_{[0,a]}$ si ottiene la funzione triangolare $x$ su $[0,a]$, $2a-x$ su $[a,2a]$ e zero altrove.
 :::
 
 :::esempio{titolo="Sovrapposizione di due intervalli di ampiezza diversa"}

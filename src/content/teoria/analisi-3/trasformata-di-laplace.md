@@ -133,7 +133,7 @@ Questo termine cancella $sF(s)$ e resta zero. Per un segnale continuo con un cam
 
 ## Traslazioni e ritardi
 
-:::teorema{#ritardi titolo="Traslazioni della frequenza e del tempo"}
+::::teorema{#ritardi titolo="Traslazioni della frequenza e del tempo"}
 Se $F=\mathcal L[f]$ e $a\in\mathbb R$, allora $\mathcal L[e^{at}f(t)](s)=F(s-a)$. Per $\tau>0$ e la funzione di Heaviside $H$,
 $$
 \mathcal L[H(t-\tau)f(t-\tau)](s)=e^{-\tau s}F(s).
@@ -145,7 +145,28 @@ $$
 Un ritardo modifica sia l'istante di attivazione sia l'argomento della funzione. Per trasformare $H(t-\tau)f(t)$ si riscrive $f(t)$ come funzione di $t-\tau$.
 
 ::grafico{f="x*exp(-x);x" xmin=0 xmax=4 ymin=0 ymax=2.5 nomi="t,y" punti="1,0.367879,pieno" legenda="te^{-t};t" titolo="Moltiplicare $t$ per $e^{-t}$ conserva l'origine e smorza il grafico. Nella trasformata si sostituisce $s$ con $s+1$."}
+
+:::dimostrazione
+Per la traslazione in frequenza si combinano i due pesi esponenziali. Per il ritardo si sposta l'origine al tempo di attivazione. Se l'integrale di $f$ converge assolutamente nel punto $s-a$, si ha
+$$
+\begin{aligned}
+\mathcal L[e^{at}f(t)](s)&=\int_0^\infty e^{-st}e^{at}f(t)\,dt\\
+&=\int_0^\infty e^{-(s-a)t}f(t)\,dt\\
+&=F(s-a).
+\end{aligned}
+$$
+Per il ritardo, l'integrando è nullo prima di $\tau$. Se $F(s)$ converge assolutamente, il cambio $u=t-\tau$ dà
+$$
+\begin{aligned}
+\int_\tau^\infty e^{-st}f(t-\tau)\,dt
+&=\int_0^\infty e^{-s(u+\tau)}f(u)\,du\\
+&=e^{-s\tau}\int_0^\infty e^{-su}f(u)\,du\\
+&=e^{-s\tau}F(s).
+\end{aligned}
+$$
+Per l'integrale del modulo lo stesso cambio introduce il fattore positivo $e^{-\tau\operatorname{Re}s}$. Il dominio di convergenza assoluta del segnale ritardato coincide perciò con quello del segnale originario.
 :::
+::::
 
 :::osservazione
 I due cambiamenti si distinguono anche mediante la convergenza assoluta. La moltiplicazione per $e^{at}$ sostituisce il peso $e^{-\sigma t}$ con $e^{-(\sigma-a)t}$. Quindi una frontiera di convergenza con parte reale $\sigma_0$ si sposta in $\sigma_0+a$. Per il ritardo, il cambio $u=t-\tau$ mostra invece che l'integrale del modulo è quello originario moltiplicato per $e^{-\sigma\tau}$. Pertanto il ritardo conserva l'insieme di convergenza assoluta, compresi gli eventuali punti di frontiera. Per esempio $H(t-2)e^{t-2}$ converge per $\operatorname{Re}s>1$, come $e^t$, mentre $e^{-2t}e^t$ converge per $\operatorname{Re}s>-1$.
@@ -197,7 +218,7 @@ Il segnale ha supporto limitato, quindi l'integrale converge per ogni $s$ comple
 
 ## Convoluzione e antitrasformazione
 
-:::teorema{#convoluzione-laplace titolo="Convoluzione causale"}
+::::teorema{#convoluzione-laplace titolo="Convoluzione causale"}
 Per funzioni localmente integrabili di ordine esponenziale,
 $$
 (f*g)(t)=\int_0^t f(t-u)g(u)\,du,\qquad
@@ -209,7 +230,28 @@ $$
 =\frac{e^{-at}-e^{-bt}}{b-a}.
 $$
 Il risultato segue anche dalle frazioni semplici. Il termine $\dfrac1{(s+a)^m}$ si antitrasforma in $\dfrac{t^{m-1}}{(m-1)!}e^{-at}$. Nella scomposizione in frazioni semplici, un polo di ordine $m$ può contribuire anche con potenze del denominatore di ordine minore.
+
+:::dimostrazione
+Si cambia il dominio di integrazione dal triangolo $0\le u\le t$ al quadrante delle due variabili indipendenti $u$ e $v=t-u$. Se $\sigma=\operatorname{Re}s$ appartiene a un semipiano comune di convergenza, si ottiene
+$$
+\begin{aligned}
+\int_0^\infty\int_0^t e^{-\sigma t}|f(t-u)|\,|g(u)|\,du\,dt
+&=\int_0^\infty\int_0^\infty e^{-\sigma(v+u)}|f(v)|\,|g(u)|\,dv\,du\\
+&=\left(\int_0^\infty e^{-\sigma v}|f(v)|\,dv\right)
+\left(\int_0^\infty e^{-\sigma u}|g(u)|\,du\right)\\
+&<\infty.
+\end{aligned}
+$$
+Il cambio lineare ha determinante in modulo uno. La finitezza del prodotto segue dalla convergenza assoluta dei due fattori, quindi per Fubini la convoluzione esiste quasi ovunque e il calcolo complesso si può separare. Ne segue
+$$
+\begin{aligned}
+\mathcal L[f*g](s)
+&=\int_0^\infty\int_0^\infty e^{-s(v+u)}f(v)g(u)\,dv\,du\\
+&=F(s)G(s).
+\end{aligned}
+$$
 :::
+::::
 
 :::teorema{#inversione-laplace titolo="Unicità e formula di inversione"}
 Per funzioni localmente integrabili di ordine esponenziale, l'uguaglianza delle trasformate su un semipiano implica uguaglianza quasi ovunque delle funzioni; se sono continue, l'uguaglianza vale in ogni punto. Per dati con regolarità e crescita sufficienti, per esempio funzioni $C^1$ a tratti di ordine esponenziale con analogo controllo della derivata sui tratti, l'inversione di Bromwich usa
