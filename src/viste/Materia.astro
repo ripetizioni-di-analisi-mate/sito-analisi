@@ -18,6 +18,8 @@ import NotaTolcI from '../components/NotaTolcI.astro';
 import { materiaL, sezioniL, link, vociL, T, type Lingua } from '../i18n';
 import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
+import GuidaMateria from '../components/GuidaMateria.astro';
+import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
 interface Props { lingua: Lingua; materia: string }
 const { lingua, materia } = Astro.props;
 const t = T(lingua);
@@ -28,9 +30,10 @@ const SEZIONI = sezioniL(lingua).filter((s) => !quizPerEsercitarsi || s.slug !==
 const gruppo = materiaIt(materia).gruppo;
 const confTolc = TOLC[materia];
 const sopra = confTolc ? (lingua === 'en' ? `${confTolc.nome} entrance test` : `Test di ingresso a ${confTolc.area}`) : !m.prezzo ? t.programma : gruppo === 'Concorsi' ? t.argomentiConcorso : gruppo === 'Superiori' ? t.programma : t.argomentiEsame;
-const titoloPagina = confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
+const guida = lingua === 'it' ? GUIDE_DISCIPLINE[materia] : undefined;
+const titoloPagina = guida?.titolo ?? (confTolc ? (lingua === 'en' ? `${confTolc.nome}: theory, practice and simulations` : `${confTolc.nome} ${confTolc.area}: teoria, esercizi e simulazioni`) : gruppo === 'Superiori' && lingua === 'en'
   ? (lingua === 'en' ? `${m.titolo}: theory and exercises for class tests` : `${m.titolo}: teoria ed esercizi per le verifiche`)
-  : SEO(lingua).materia(m.titolo);
+  : SEO(lingua).materia(m.titolo));
 const teorie = new Set((await getCollection('teoria')).map((v) => v.id));
 // Riassunto di ogni argomento: la pagina è il programma del corso, non la copia dell'indice.
 const riassunti = Object.fromEntries((await vociL(lingua, 'teoria')).map((v) => [v.id, v.data.sommario]));
@@ -57,9 +60,9 @@ const { ripasso: nomeRipasso, simulazione: nomeCompito } = nomiAllenamento(m, li
 const notaQuiz = en
   ? 'A timed quiz across all topics, with an explanation after each answer. Questions are in Italian.'
   : 'Quiz a tempo su tutti gli argomenti, con la spiegazione dopo ogni risposta. Con un account puoi ripassare le domande che hai sbagliato.';
-const descrizione = quizPerEsercitarsi
+const descrizione = guida?.descrizione ?? (quizPerEsercitarsi
   ? en ? `${m.titolo}. Theory, worked examples and ${domandeMateria} timed questions in Italian.` : `${m.titolo} per Ingegneria. Teoria, esercizi svolti e ${domandeMateria} domande a tempo.`
-  : SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length);
+  : SEO(lingua).materiaDescr(m.titolo, m.descrizione, m.argomenti.length));
 // Indice analitico (teoremi e definizioni) della materia.
 import { indiceAnalitico } from '../lib/indice-analitico';
 const indice = await indiceAnalitico(lingua, materia, m.argomenti.map((a) => a.slug));
@@ -77,7 +80,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livelloDi(m.titolo),
   provider: { '@id': `${SITO}/#organizzazione` },
   syllabusSections: m.argomenti.map((a) => ({ '@type': 'Syllabus', name: a.titolo, url: assoluto(link(lingua, `/${m.slug}/${a.slug}/teoria`)) })),
-  hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Online', courseWorkload: 'P30D' },
   ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
 }] }}>
   {giaVideo && <style is:inline set:html={giaVideo}></style>}
@@ -158,6 +160,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       </li>
     )}
   </ol>
+  {lingua === 'it' && <GuidaMateria materia={m} schede={svolti} />}
 </Base>
 
 <script is:inline define:vars={{ en }}>

@@ -56,14 +56,14 @@ const scegli = (...varianti: string[]) => varianti.find((v) => v.length <= LIMIT
 // cercata resta in testa e Google legge il titolo intero anche quando ne mostra un po' meno.
 const TOLLERANZA = 72;
 const scegliCon = (conMateria: string[], senza: string) =>
-  conMateria.find((v) => v.length <= LIMITE) ?? conMateria.find((v) => v.length <= TOLLERANZA) ?? senza;
+  conMateria.find((v) => v.length <= LIMITE) ?? conMateria.find((v) => v.length <= TOLLERANZA) ?? conMateria.at(-1) ?? senza;
 // Titolo di una pagina di capitolo: capitolo, che cosa contiene, materia. Se non ci sta si accorcia prima la
 // descrizione, poi il nome del capitolo (nome breve); la materia si toglie solo per ultima.
 function titoloCapitolo(a: string, ab: string | undefined, cosa: [string, string], m: string): string {
   const brevi = ab && ab !== a ? [`${ab}: ${cosa[0]} | ${m}`, `${ab}: ${cosa[1]} | ${m}`] : [];
   const interi = [`${a}: ${cosa[0]} | ${m}`, `${a}: ${cosa[1]} | ${m}`];
   // prima il titolo intero del capitolo (anche con la tolleranza), poi il nome breve
-  return interi.find((v) => v.length <= LIMITE) ?? interi.find((v) => v.length <= TOLLERANZA) ?? scegliCon(brevi, `${a}: ${cosa[1]}`);
+  return interi.find((v) => v.length <= LIMITE) ?? interi.find((v) => v.length <= TOLLERANZA) ?? scegliCon(brevi, interi[1]);
 }
 // Frase seguita da un elenco di nomi: si aggiungono nomi finché la descrizione resta entro i 155 caratteri.
 const conNomi = (inizio: string, nomi: string[]) => {
@@ -123,8 +123,9 @@ const IT = {
       ? `${n} schede di quiz svolti su ${a.toLowerCase()} (${senzaParentesi(m)}): per ogni quiz la risposta corretta e la spiegazione del procedimento.`
       : `${n} schede di esercizi svolti su ${a.toLowerCase()} (${senzaParentesi(m)}), divise per tipologia: ogni passaggio è scritto e spiegato a parole.`;
   },
-  scheda: (s: string, m: string) => {
+  scheda: (s: string, m: string, contesto?: string) => {
     const cosa = PAROLE[tipoDi(m)].svolti[1];
+    if (contesto) return `${s} | ${contesto} · ${nomeCercato(m)}`;
     return scegliCon([`${s}: ${cosa} | ${nomeCercato(m)}`, `${s}: ${cosa} | ${nomeBreve(m)}`], `${s}: ${cosa}`);
   },
   schedaDescr: (s: string, a: string, m: string) => (['concorsi', 'test'].includes(tipoDi(m))
@@ -136,7 +137,8 @@ const IT = {
     : `${n} esercizi da svolgere su ${a.toLowerCase()} (${senzaParentesi(m)}), con la soluzione da controllare.`),
   // il nome della materia distingue esercizi con lo stesso titolo in materie diverse; i titoli generici
   // («Quesito 3») prendono anche il nome del capitolo
-  dafare: (s: string, m: string, ab?: string) => {
+  dafare: (s: string, m: string, ab?: string, numero?: string) => {
+    if (numero && ab) return `${s} | ${ab} · ${numero} · ${nomeCercato(m)}`;
     const t = conCapitolo(s, ab), cosa = PAROLE[tipoDi(m)].uno;
     return scegliCon([`${t}: ${cosa[0]} | ${nomeCercato(m)}`, `${t}: ${cosa[0]} | ${nomeBreve(m)}`, `${t}: ${cosa[1]} | ${nomeBreve(m)}`], `${t}: ${cosa[0]}`);
   },
@@ -156,7 +158,7 @@ const IT = {
     const cosa = tipo === 'definizione' ? 'definizione' : dim ? 'enunciato e dimostrazione' : 'enunciato';
     return ripetuta
       ? scegli(`${v}: ${cosa} | ${a} · ${b}`, `${v} | ${a} · ${b}`, `${v} (${a}) | ${b}`, `${v} | ${a}`)
-      : scegli(`${v}: ${cosa} | ${a} · ${b}`, `${v}: ${cosa} | ${b}`, `${v} | ${b}`, v);
+      : scegli(`${v}: ${cosa} | ${a} · ${b}`, `${v}: ${cosa} | ${b}`, `${v} | ${b}`);
   },
   voceDescr: (v: string, tipo: string, dim: boolean, a: string, m: string, testo: string, alias: string[] = []) => {
     const testa = `${v}${alias.length ? ` (${alias[0]})` : ''} (${m}, ${a})${dim ? ', con dimostrazione ed esercizi' : ''}: `;
@@ -189,11 +191,11 @@ const EN: typeof IT = {
   teoria: (a, m, ab) => titoloCapitolo(argEn(a), ARGOMENTI_CERCATI_EN[a] ? undefined : ab, ['definitions, theorems and proofs', 'theory and proofs'], cercato(m)),
   svoltiLista: (a, m, ab) => titoloCapitolo(argEn(a), ARGOMENTI_CERCATI_EN[a] ? undefined : ab, ['solved problems step by step', 'solved problems'], cercato(m)),
   svoltiListaDescr: (a, m, n) => `${n} sheets of worked examples on ${a.toLowerCase()} (${cercato(m)}), grouped by type of problem: every step is written out and explained in words.`,
-  scheda: (s, m) => scegliCon([`${s}: solved problems step by step | ${cercato(m)}`, `${s}: solved problems | ${cercato(m)}`], `${s}: solved problems`),
+  scheda: (s, m, contesto) => contesto ? `${s} | ${contesto} · ${cercato(m)}` : scegliCon([`${s}: solved problems step by step | ${cercato(m)}`, `${s}: solved problems | ${cercato(m)}`], `${s}: solved problems`),
   schedaDescr: (s, a, m) => `${s}: worked examples solved step by step, with the computation and an explanation of every step. ${a}, ${cercato(m)}.`,
   dafareLista: (a, m, ab) => titoloCapitolo(argEn(a), ARGOMENTI_CERCATI_EN[a] ? undefined : ab, ['practice problems with solutions', 'practice problems'], cercato(m)),
   dafareListaDescr: (a, m, n) => `${n} practice problems on ${a.toLowerCase()} (${cercato(m)}), each with the solution to check your answer.`,
-  dafare: (s, m, ab) => { const t = conCapitolo(s, ab); return scegliCon([`${t}: practice problem with solution | ${cercato(m)}`, `${t}: practice problem | ${cercato(m)}`], `${t}: practice problem with solution`); },
+  dafare: (s, m, ab, numero) => { const t = conCapitolo(s, ab); return numero && ab ? `${s} | ${ab} · ${numero} · ${cercato(m)}` : scegliCon([`${t}: practice problem with solution | ${cercato(m)}`, `${t}: practice problem | ${cercato(m)}`], `${t}: practice problem with solution`); },
   dafareDescr: (s, a, m) => `${cercato(m)} practice problem on ${a.toLowerCase()}: ${s}. With the solution to check the result.`,
   livello: 'University',
   livelloDi: () => 'University',

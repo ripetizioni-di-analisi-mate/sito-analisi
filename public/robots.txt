@@ -41,4 +41,4 @@ Disallow: /invito/
 Disallow: /cerca?
 Disallow: /en/cerca?
 
-Sitemap: https://ripetizionidianalisi.com/sitemap.xml
+Sitemap: https://ripetizionidianalisi.com/sitemap-index.xml

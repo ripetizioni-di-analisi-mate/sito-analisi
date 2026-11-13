@@ -14,13 +14,16 @@ interface Props { lingua: Lingua; materia: string; argomento: string; n: string 
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
 const id = `${materia}/${argomento}/${n}`;
-const fratelli = perArgomento(await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti'), materia, argomento);
+const schedeMateria = (await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti')).filter((v) => v.id.startsWith(`${materia}/`));
+const fratelli = perArgomento(schedeMateria, materia, argomento);
 const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'svolti', id);
 const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'svolti', v.id)).voce.data.titolo;
 const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'svolti', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
+const titoloRipetuto = schedeMateria.filter((v) => v.data.titolo === voce.data.titolo).length > 1;
+const titoloSeo = SEO(lingua).scheda(voce.data.titolo, materiaL(lingua, materia).breve, titoloRipetuto ? `${arg.breve} · ${t.scheda} ${n}` : undefined);
 // Quando la scheda non è tradotta si mostra quella italiana: i plugin devono vedere il percorso vero.
 const resa = await resaVoce(tradotta ? lingua : 'it', 'svolti', voce);
 const salti = resa.headings.filter((h) => h.depth === 2);
@@ -33,7 +36,7 @@ const fineSchede = vicini(materia, argomento, 'esercizi-svolti', lingua, await d
 <Base
   titolo={`${arg.breve} · ${t.sezioni['esercizi-svolti']} ${n}`}
   descrizione={SEO(lingua).schedaDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo)}
-  seo={{ canonico: originale(materia, argomento, 'esercizi-svolti', n), titolo: SEO(lingua).scheda(voce.data.titolo, materiaL(lingua, materia).breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'svolti', id), schema: [{ ...{
+  seo={{ canonico: originale(materia, argomento, 'esercizi-svolti', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'svolti', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: SEO(lingua).schedaDescr(voce.data.titolo, arg.titolo, materiaL(lingua, materia).titolo), learningResourceType: 'Worked example', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

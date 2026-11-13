@@ -193,7 +193,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <meta name="twitter:image" content={immagineOg} />
   <meta name="twitter:image:alt" content={altOg} />
   <link rel="apple-touch-icon" href={url('/logo-180.png')} />
-  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <meta name="color-scheme" content="light" />
   <meta name="theme-color" content="#faf8f2" />
   {/* Misurazione delle conversioni (Google Ads, Google Analytics): codici in src/data/misurazione.ts; senza codici non si carica nulla.
@@ -359,6 +359,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     <nav class="pie-link" aria-label={fr ? 'Informations' : es ? 'Información' : de ? 'Informationen' : en ? 'Information' : 'Informazioni'}>
       <a href={link(lingua, '/chi-sono')}>{t.chiSono}</a>
       {lingua === 'it' && <a href="/ripetizioni-analisi">Ripetizioni online</a>}
+      {lingua === 'it' && <a href={url('/materie')}>Tutte le materie</a>}
       <a href={link(lingua, '/prezzi')}>{t.prezzi}</a>
       <a href={link(lingua, '/contatti')}>{t.contatti}</a>
       {legali.map(({ href }, i) => <a href={href} hreflang={localizzato ? 'it' : undefined}>{[t.privacy, t.termini, t.rimborsi][i]}{fr ? ' (en italien)' : es ? ' (en italiano)' : de ? ' (Italienisch)' : ''}</a>)}

@@ -8,7 +8,7 @@
     "test:pacchetti": "node --test strumenti/pacchetti.test.mjs",
     "test:compatibilita": "node --test strumenti/compatibilita.test.mjs",
     "dev": "node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && astro dev",
-    "build": "node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node strumenti/finanziaria/verifica.mjs && node scripts/date-pagine.mjs && NODE_OPTIONS=--max-old-space-size=5632 astro build && node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs && node --test strumenti/analisi3.test.mjs strumenti/finanziaria.test.mjs",
+    "build": "node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node strumenti/finanziaria/verifica.mjs && node scripts/date-pagine.mjs && NODE_OPTIONS=--max-old-space-size=5632 astro build && node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs && node scripts/sitemap-verificata.mjs && node --test strumenti/analisi3.test.mjs strumenti/finanziaria.test.mjs strumenti/seo.test.mjs",
     "preview": "astro preview",
     "test:finanziaria": "node strumenti/finanziaria/verifica.mjs && node --test strumenti/finanziaria.test.mjs"
   },

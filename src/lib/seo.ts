@@ -44,7 +44,25 @@ export function briciole(voci: { nome: string; url: string }[]) {
   };
 }
 
-// Il sito nel suo insieme, con le due lingue in cui è scritto: aiuta i motori a mostrare il nome giusto.
+export function elencoCorsi(materie: { slug: string; titolo: string; descrizione: string }[], lingua: Lingua) {
+  return {
+    '@type': 'ItemList',
+    name: lingua === 'it' ? 'Materie e programmi di studio' : 'Subjects and study programmes',
+    numberOfItems: materie.length,
+    itemListElement: materie.map((materia, i) => ({
+      '@type': 'ListItem', position: i + 1,
+      item: {
+        '@type': 'Course',
+        '@id': `${assoluto(nellaLingua(lingua, `/${materia.slug}`))}#corso`,
+        name: materia.titolo, description: materia.descrizione,
+        url: assoluto(nellaLingua(lingua, `/${materia.slug}`)),
+        provider: { '@id': `${SITO}/#organizzazione` },
+      },
+    })),
+  };
+}
+
+// Il sito nel suo insieme: aiuta i motori a mostrare il nome giusto.
 export function sitoWeb(lingua: Lingua) {
   return {
     '@type': 'WebSite',
