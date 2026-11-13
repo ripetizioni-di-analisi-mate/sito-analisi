@@ -28,6 +28,7 @@ import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
+import { materieGuidate, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
@@ -211,6 +212,7 @@ export class Archivio {
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
     creaTabelleOrientamento(this.sql);
+    creaTabelleStudioGuidato(this.sql);
     creaTabelleEmail(this.sql);
     creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
@@ -263,6 +265,10 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/sg-')) {
+      const r = archivioStudioGuidato(this, pathname, c);
+      if (r) return Response.json(r);
+    }
     if (pathname.startsWith('/ori-')) {
       const r = archivioOrientamento(this, pathname, c);
       if (r) return Response.json(r);
@@ -804,6 +810,15 @@ async function domandeDi(env, materia, lingua = 'it') {
   }
   return cacheDomande[chiave];
 }
+// Titoli degli argomenti per lo Studio guidato (materie guidate e Precorso).
+let titoliGuidatiCache = null;
+function titoliGuidati() {
+  if (titoliGuidatiCache) return titoliGuidatiCache;
+  const t = {};
+  for (const m of MATERIE) if (m.slug === 'precorso' || materieGuidate().includes(m.slug)) t[m.slug] = Object.fromEntries((m.argomenti || []).map((a) => [a.slug, a.titolo]));
+  t.nomeMateria = 'Analisi 1';
+  return (titoliGuidatiCache = t);
+}
 const cacheRisposte = {};
 async function risposteDi(env, materia) {
   if (!(materia in cacheRisposte)) {
@@ -1153,6 +1168,54 @@ export default {
       if (corsoUsaRiservato(materia, io)) return rispostaCorsoUsaRiservato(materia);
       const pulito = (x) => (typeof x === 'string' && /^[a-z0-9-]{1,60}$/.test(x) ? x : null);
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
+    }
+    // ===== Studio guidato (test adattivo sulle lacune, anteprima riservata ai GM: worker/studio-guidato.mjs) =====
+    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi') {
+      const io = await utenteCollegato(env, req).catch(() => null);
+      if (!io) return json({ errore: 'Accedi con il tuo account per usare lo Studio guidato.' }, 401, { 'cache-control': 'no-store' });
+      if (!io.gm) return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, { 'cache-control': 'no-store' });
+      const titoli = titoliGuidati();
+      const nessunaCache = { 'cache-control': 'no-store' };
+      if (p === '/api/studio-guidato') {
+        const materia = url.searchParams.get('materia');
+        if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
+        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
+        const ultimo = storico[0] || null;
+        if (ultimo) { delete ultimo.viste; delete ultimo.risposte; }
+        return json({ ultimo, progresso: progressoGuidato(storico) }, 200, nessunaCache);
+      }
+      if (!POST) return json({ errore: 'Metodo non consentito.' }, 405);
+      const corpo = await req.json().catch(() => ({}));
+      let stato;
+      if (p === '/api/studio-guidato/inizia') {
+        const materia = corpo.materia;
+        if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
+        const argomenti = Array.isArray(corpo.argomenti) ? corpo.argomenti.filter((a) => typeof a === 'string').slice(0, 30) : [];
+        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
+        const viste = storico.slice(0, 3).flatMap((e) => e.viste || []);
+        stato = creaStato({ materia, argomenti, precedente: storico[0] || null, viste });
+      } else {
+        const tok = typeof corpo.token === 'string' ? await leggiToken(env, corpo.token) : null;
+        if (!tok?.s || tok.e !== io.email || !tok.s.q) return json({ errore: 'Il test è scaduto. Ricomincia dalla pagina della materia.' }, 400, nessunaCache);
+        stato = tok.s;
+        const q = stato.q;
+        const dati = await domandeDi(env, q.m, 'it');
+        const d = dati?.argomenti?.[q.id.split('/')[0]]?.find((x) => x.id === q.id);
+        const scelta = Number.isInteger(corpo.scelta) ? corpo.scelta : null;
+        registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta));
+      }
+      const q = prossima(stato);
+      if (!q) {
+        const e = esitoGuidato(stato, titoli);
+        if (e.domande) await aDO(env, '/sg-salva', { email: io.email, materia: stato.m, esito: e });
+        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia: stato.m });
+        delete e.viste; delete e.risposte;
+        return json({ fine: true, esito: e, progresso: progressoGuidato(storico) }, 200, nessunaCache);
+      }
+      const domanda = domandaPubblica(q, await domandeDi(env, q.m, 'it'), titoli, stato);
+      if (!domanda) return json({ errore: 'Domanda non disponibile. Riprova.' }, 500, nessunaCache);
+      const token = await firmaToken(env, { s: stato, e: io.email });
+      return json({ token, domanda }, 200, nessunaCache);
     }
     if (p === '/api/domande/prossima' && POST) {
       const { materia, argomento, id, viste, recenti, lingua } = await req.json().catch(() => ({}));

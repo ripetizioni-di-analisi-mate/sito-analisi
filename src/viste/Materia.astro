@@ -13,6 +13,8 @@ import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import OrientamentoMateria from '../components/OrientamentoMateria.astro';
+import StudioGuidato from '../components/StudioGuidato.astro';
+import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { TOLC } from '../data/tolc.mjs';
 import NotaTolcI from '../components/NotaTolcI.astro';
@@ -92,7 +94,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
-  {lingua === 'it' && <OrientamentoMateria materia={materia} />}
+  {lingua === 'it' && (STUDIO_GUIDATO[materia] ? <StudioGuidato materia={materia} /> : <OrientamentoMateria materia={materia} />)}
   {m.prezzo && (
     <AccessoMateria materia={m.slug} titolo={m.titolo} prezzo={m.prezzo} lingua={lingua} testo={anteprimaTesto}
       anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}>
