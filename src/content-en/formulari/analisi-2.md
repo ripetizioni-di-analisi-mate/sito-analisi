@@ -1,7 +1,7 @@
 ---
-titolo: "Multivariable Calculus formula sheet"
-sommario: "The formulas of Multivariable Calculus (Mathematical Analysis 2) with their hypotheses: limits and derivatives in several variables, the implicit function theorem, Lagrange multipliers, line, double, triple and surface integrals, Green, Gauss and Stokes, power series and Fourier series."
-descrizione: "Multivariable Calculus formula sheet (free PDF): partial derivatives, Hessian, Lagrange multipliers, double and triple integrals, Green, Gauss, Stokes, Fourier."
+titolo: "Formulario di Analisi matematica 2"
+sommario: "Le formule di Analisi 2 con le ipotesi: limiti e derivate in più variabili, Dini, Lagrange, integrali di linea, doppi, tripli e di superficie, Green, Gauss e Stokes, serie di potenze e di Fourier."
+descrizione: "Formulario di Analisi 2 in PDF: limiti in coordinate polari, Hessiana, Lagrange, integrali doppi e tripli, Green, Gauss, Stokes, serie di Taylor e Fourier."
 ---
 
 ## Limits and continuity in two variables
@@ -37,7 +37,7 @@ $$
 \implies
 \lim_{t \to t_0} f(\gamma(t)) = L
 $$
-The implication holds for every curve $\gamma$ in the domain with $\gamma(t) \to P_0$ and $\gamma(t) \neq P_0$ as $t \to t_0$. Therefore, if two restrictions have different limits, the limit of $f$ does not exist. At the origin the most used restrictions are $f(x, mx)$, $f(0, y)$ and $f(x, x^2)$.
+The implication holds for every curve $\gamma$ in the domain with $\gamma(t) \to P_0$ and $\gamma(t) \neq P_0$ as $t \to t_0$. Therefore, if two restrictions have different limits, the limit of $f$ does not exist. At the origin the most commonly used restrictions are $f(x, mx)$, $f(0, y)$ and $f(x, x^2)$.
 :::
 
 :::formula{#confronto-due-variabili titolo="Squeeze theorem"}
@@ -48,7 +48,7 @@ $$
 \implies
 \lim_{(x, y) \to P_0} f(x, y) = L
 $$
-The inequality must hold in a neighborhood of $P_0$, except at most $P_0$ itself. The theorem is used to prove that a limit exists.
+The inequality must hold in a neighborhood of $P_0$, possibly excluding $P_0$ itself. The theorem is used to prove that a limit exists.
 :::
 
 :::formula{#maggiorazioni-utili titolo="Useful bounds"}
@@ -69,7 +69,7 @@ $$
 They hold for every $(x, y)$ and every real $t$, the quotient for $(x, y) \neq (0, 0)$, and they also hold with $y$ in place of $x$.
 :::
 
-:::formula{#limitata-per-infinitesima titolo="Bounded times infinitesimal"}
+:::formula{#limitata-per-infinitesima titolo="Product of a bounded function and an infinitesimal function"}
 $$
 |f(x, y)| \leq C,
 \qquad
@@ -90,8 +90,8 @@ y = y_0 + \rho \sin\theta,
 $$
 $$
 \begin{cases}
-|f(x_0 + \rho \cos\theta,\, y_0 + \rho \sin\theta) - L| \leq g(\rho) \ \text{ for every } \theta \\[4pt]
-g(\rho) \to 0 \ \text{ as } \rho \to 0^+
+|f(x_0 + \rho \cos\theta,\, y_0 + \rho \sin\theta) - L| \leq g(\rho) \ \text{ per ogni } \theta \\[4pt]
+g(\rho) \to 0 \ \text{ per } \rho \to 0^+
 \end{cases}
 \implies
 \lim_{(x, y) \to P_0} f(x, y) = L
@@ -99,7 +99,7 @@ $$
 The function $g(\rho)$ must be **independent of** $\theta$. With $P_0 = (0, 0)$ one has $x^2 + y^2 = \rho^2$.
 :::
 
-:::formula{#limiti-notevoli-due-variabili titolo="Standard limits with an infinitesimal argument"}
+:::formula{#limiti-notevoli-due-variabili titolo="Standard limits with an argument tending to zero"}
 $$
 \begin{aligned}
 \lim_{(x, y) \to P_0} \frac{\sin g(x, y)}{g(x, y)} &= 1,
@@ -115,7 +115,7 @@ They hold if $g(x, y) \to 0$ as $(x, y) \to P_0$ and $g(x, y) \neq 0$ in a neigh
 
 :::formula{#continuita-e-prolungamento titolo="Continuity and continuous extension"}
 $$
-f \text{ continuous at } P_0 \iff \lim_{(x, y) \to P_0} f(x, y) = f(P_0)
+f \text{ continua in } P_0 \iff \lim_{(x, y) \to P_0} f(x, y) = f(P_0)
 $$
 The definition holds for $P_0$ in the domain and an accumulation point of the domain. Polynomials and elementary functions are continuous on their domain, and so are sums, products, quotients with nonzero denominator and compositions of continuous functions. If $P_0$ does not belong to the domain and the limit exists, is finite and equals $L$, the function is extended by continuity by setting $\tilde{f}(P_0) = L$.
 :::
@@ -159,18 +159,18 @@ The two formulations are equivalent and require that $f$ have partial derivative
 
 :::formula{#differenziale-totale titolo="Total differential theorem"}
 $$
-f_x,\ f_y \ \text{continuous at } (x_0, y_0)
+f_x,\ f_y \ \text{continue in } (x_0, y_0)
 \implies
-f \ \text{differentiable at } (x_0, y_0)
+f \ \text{differenziabile in } (x_0, y_0)
 $$
 The partial derivatives must exist in a neighborhood of the point. In particular a function of class $C^1(A)$ is differentiable at every point of the open set $A$.
 :::
 
-:::formula{#schema-implicazioni titolo="Scheme of implications"}
+:::formula{#schema-implicazioni titolo="Implication diagram"}
 $$
-C^1 \implies \text{differentiable} \implies \text{continuous},
+C^1 \implies \text{differenziabile} \implies \text{continua},
 \qquad
-\text{differentiable} \implies \text{has partial derivatives}
+\text{differenziabile} \implies \text{derivabile}
 $$
 None of the implications can be reversed. A function discontinuous at a point is therefore not differentiable at that point.
 :::
@@ -357,15 +357,15 @@ f_x(x_0, y_0) = 0 \\[4pt]
 f_y(x_0, y_0) = 0
 \end{cases}
 $$
-If $(x_0, y_0)$ is a local extremum point interior to the domain and $f$ has partial derivatives there, the system is satisfied. The unconstrained extrema are therefore sought among the critical points and the interior points at which $f$ has no partial derivatives.
+If $(x_0, y_0)$ is a local extremum point interior to the domain and $f$ has partial derivatives there, the system is satisfied. The unconstrained extrema are therefore sought among the critical points and the interior points at which $f$ is not partially differentiable.
 :::
 
 :::formula{#criterio-della-hessiana titolo="Classification with the Hessian matrix"}
 $$
 \begin{aligned}
-\det H > 0, \ f_{xx} > 0 &\implies \text{local minimum} \\[4pt]
-\det H > 0, \ f_{xx} < 0 &\implies \text{local maximum} \\[4pt]
-\det H < 0 &\implies \text{saddle point}
+\det H > 0, \ f_{xx} > 0 &\implies \text{minimo locale} \\[4pt]
+\det H > 0, \ f_{xx} < 0 &\implies \text{massimo locale} \\[4pt]
+\det H < 0 &\implies \text{punto di sella}
 \end{aligned}
 $$
 It holds for $f$ of class $C^2$ at a critical point, with $H = H_f(x_0, y_0)$ and the derivatives evaluated at the point. If $\det H = 0$, the test is inconclusive.
@@ -374,20 +374,20 @@ It holds for $f$ of class $C^2$ at a critical point, with $H = H_f(x_0, y_0)$ an
 :::formula{#caso-degenere titolo="Degenerate Hessian: study of the sign"}
 $$
 \begin{aligned}
-f(x, y) - f(x_0, y_0) \geq 0 \ \text{ near } (x_0, y_0) &\implies \text{local minimum} \\[4pt]
-f(x, y) - f(x_0, y_0) \leq 0 \ \text{ near } (x_0, y_0) &\implies \text{local maximum}
+f(x, y) - f(x_0, y_0) \geq 0 \ \text{ vicino a } (x_0, y_0) &\implies \text{minimo locale} \\[4pt]
+f(x, y) - f(x_0, y_0) \leq 0 \ \text{ vicino a } (x_0, y_0) &\implies \text{massimo locale}
 \end{aligned}
 $$
 The direct study is used when $\det H = 0$. If in *every* neighborhood the difference takes both signs, the point is a saddle point; to prove it, two curves through the point along which the difference has opposite signs suffice.
 :::
 
-:::formula{#weierstrass-metodo-compatto titolo="Weierstrass's theorem and absolute extrema"}
+:::formula{#weierstrass-metodo-compatto titolo="Extreme value theorem and absolute extrema"}
 $$
-K \ \text{compact}, \ f \ \text{continuous on } K
+K \ \text{compatto}, \ f \ \text{continua su } K
 \implies
-f \ \text{attains an absolute maximum and an absolute minimum on } K
+f \ \text{ammette massimo e minimo assoluti su } K
 $$
-A subset of $\mathbb{R}^n$ is compact if it is closed and bounded. The candidates are the interior critical points, the interior points at which $f$ has no partial derivatives and the extremum points of the restriction to the boundary, vertices included; the comparison of the values of $f$ at the candidates gives the maximum and the minimum.
+A subset of $\mathbb{R}^n$ is compact if it is closed and bounded. The candidates are the interior critical points, the interior points at which $f$ is not partially differentiable and the extremum points of the restriction to the boundary, vertices included; the comparison of the values of $f$ at the candidates gives the maximum and the minimum.
 :::
 
 :::formula{#studio-della-frontiera titolo="Restriction to the boundary"}
@@ -458,7 +458,7 @@ It holds at the points with $\gamma'(t_0) \neq \mathbf{0}$. For a plane curve wi
 $$
 L(\gamma) = \int_a^b \lVert \gamma'(t) \rVert \, dt = \int_a^b \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2} \, dt
 $$
-It holds for $\gamma$ piecewise regular; for a plane curve the term $z'(t)^2$ is absent. If the curve traverses the same arc several times, the formula adds up the lengths of the passages; for simple curves it gives the length of the trace.
+It holds for $\gamma$ piecewise regular; for a plane curve the term $z'(t)^2$ is absent. If the curve traverses the same arc several times, the formula adds up the lengths of the traversals; for simple curves it gives the length of the trace.
 :::
 
 :::formula{#lunghezza-grafico-polare titolo="Length of a graph and of a polar curve"}
@@ -482,10 +482,10 @@ For $\gamma$ regular the function $s$ is strictly increasing from $[a, b]$ onto 
 :::formula{#parametrizzazioni-curve titolo="Recurring parametrizations"}
 $$
 \begin{aligned}
-\text{segment from } P \text{ to } Q \qquad & \gamma(t) = P + t\,(Q - P), \quad t \in [0, 1] \\[4pt]
-\text{circle} \qquad & \gamma(t) = (x_0 + r\cos t,\; y_0 + r\sin t), \quad t \in [0, 2\pi] \\[4pt]
-\text{ellipse} \qquad & \gamma(t) = (a\cos t,\; b\sin t), \quad t \in [0, 2\pi] \\[4pt]
-\text{helix} \qquad & \gamma(t) = (\cos t,\; \sin t,\; t), \quad \lVert \gamma'(t) \rVert = \sqrt{2}
+\text{segmento da } P \text{ a } Q \qquad & \gamma(t) = P + t\,(Q - P), \quad t \in [0, 1] \\[4pt]
+\text{circonferenza} \qquad & \gamma(t) = (x_0 + r\cos t,\; y_0 + r\sin t), \quad t \in [0, 2\pi] \\[4pt]
+\text{ellisse} \qquad & \gamma(t) = (a\cos t,\; b\sin t), \quad t \in [0, 2\pi] \\[4pt]
+\text{elica} \qquad & \gamma(t) = (\cos t,\; \sin t,\; t), \quad \lVert \gamma'(t) \rVert = \sqrt{2}
 \end{aligned}
 $$
 The circle and the ellipse are traversed counterclockwise as $t$ increases; the circle has $\lVert \gamma'(t) \rVert = r$.
@@ -523,7 +523,7 @@ $$
 \qquad
 \int_{-\gamma} F \cdot d\gamma = -\int_\gamma F \cdot d\gamma
 $$
-The opposite curve is $(-\gamma)(t) = \gamma(a + b - t)$ with $t \in [a, b]$. The integral of the second kind therefore depends on the direction of traversal indicated in the exercise.
+The reversed curve is $(-\gamma)(t) = \gamma(a + b - t)$ with $t \in [a, b]$. The integral of the second kind therefore depends on the direction of traversal indicated in the exercise.
 :::
 
 ## Conservative fields, potential and Green's theorem
@@ -543,7 +543,7 @@ The field $F$ is continuous on a connected open set $A$ and the potential $U$ is
 $$
 \int_\gamma F \cdot d\gamma = U(Q) - U(P),
 \qquad
-\oint_\gamma F \cdot d\gamma = 0 \ \text{ if } \gamma \text{ is closed}
+\oint_\gamma F \cdot d\gamma = 0 \ \text{ se } \gamma \text{ è chiusa}
 $$
 It holds for $F = \nabla U$ on $A$ and $\gamma$ piecewise regular in $A$ from $P$ to $Q$. Therefore, if the circulation of $F$ along a closed curve contained in $A$ is different from zero, $F$ is not conservative on $A$.
 :::
@@ -552,7 +552,7 @@ It holds for $F = \nabla U$ on $A$ and $\gamma$ piecewise regular in $A$ from $P
 $$
 \frac{\partial F_1}{\partial y} = \frac{\partial F_2}{\partial x} \ \text{ in } A,
 \qquad
-\operatorname{curl} F = (0, 0, 0) \ \text{ in } A \subseteq \mathbb{R}^3
+\operatorname{rot} F = (0, 0, 0) \ \text{ in } A \subseteq \mathbb{R}^3
 $$
 For $F$ of class $C^1$ the condition is *necessary* for $F$ to be conservative. If the cross derivatives are different, the field is therefore not conservative.
 :::
@@ -560,11 +560,11 @@ For $F$ of class $C^1$ the condition is *necessary* for $F$ to be conservative. 
 :::formula{#criterio-campi-conservativi titolo="Criterion for conservative fields"}
 $$
 \begin{cases}
-F \ \text{of class } C^1 \text{ and irrotational in } A \\[4pt]
-A \ \text{simply connected}
+F \ \text{di classe } C^1 \text{ e irrotazionale in } A \\[4pt]
+A \ \text{semplicemente connesso}
 \end{cases}
 \implies
-F \ \text{conservative in } A
+F \ \text{conservativo in } A
 $$
 Simply connected sets are $\mathbb{R}^2$, $\mathbb{R}^3$, convex sets, half-planes and $\mathbb{R}^3$ with a point removed. Not simply connected are $\mathbb{R}^2 \setminus \{(0, 0)\}$, annuli and $\mathbb{R}^3$ with a line removed.
 :::
@@ -939,7 +939,7 @@ $$
 \Phi_\Sigma(\mathbf{F}) = \iint_\Sigma \mathbf{F} \cdot \mathbf{n} \; d\sigma
 = \iint_D \mathbf{F}\bigl( \mathbf{r}(u, v) \bigr) \cdot \bigl( \mathbf{r}_u \wedge \mathbf{r}_v \bigr) \, du \, dv
 $$
-It holds for $\Sigma$ regular, oriented by $\mathbf{n}$, and $\mathbf{F}$ continuous on an open set containing $\Sigma$. The second equality holds if $\mathbf{r}_u \wedge \mathbf{r}_v$ has the direction of $\mathbf{n}$; with the opposite direction the flux changes sign.
+It holds for $\Sigma$ regular, oriented by $\mathbf{n}$, and $\mathbf{F}$ continuous on an open set containing $\Sigma$. The second equality holds if $\mathbf{r}_u \wedge \mathbf{r}_v$ points in the same direction as $\mathbf{n}$; with the opposite direction the flux changes sign.
 :::
 
 :::formula{#flusso-superficie-cartesiana titolo="Flux through a Cartesian surface"}
@@ -958,7 +958,7 @@ It is defined for $\mathbf{F}$ of class $C^1$. The field is solenoidal if $\oper
 
 :::formula{#rotore titolo="Curl"}
 $$
-\operatorname{curl} \mathbf{F} =
+\operatorname{rot} \mathbf{F} =
 \begin{vmatrix}
 \mathbf{i} & \mathbf{j} & \mathbf{k} \\[4pt]
 \dfrac{\partial}{\partial x} & \dfrac{\partial}{\partial y} & \dfrac{\partial}{\partial z} \\[6pt]
@@ -974,9 +974,9 @@ It is defined for $\mathbf{F}$ of class $C^1$. For a plane field $(F_1, F_2, 0)$
 
 :::formula{#proprieta-divergenza-rotore titolo="Identities for divergence and curl"}
 $$
-\operatorname{curl} (\nabla f) = \mathbf{0},
+\operatorname{rot} (\nabla f) = \mathbf{0},
 \qquad
-\operatorname{div} (\operatorname{curl} \mathbf{F}) = 0
+\operatorname{div} (\operatorname{rot} \mathbf{F}) = 0
 $$
 They hold for $f$ and $\mathbf{F}$ of class $C^2$ on an open subset of $\mathbb{R}^3$. Every gradient field is therefore irrotational, and every curl is solenoidal.
 :::
@@ -999,9 +999,9 @@ It holds when the auxiliary surface $\Sigma'$ closes $\Sigma$, that is, $\Sigma 
 :::formula{#teorema-di-stokes titolo="Stokes' theorem"}
 $$
 \oint_{\partial\Sigma} \mathbf{F} \cdot d\mathbf{r}
-= \iint_\Sigma \operatorname{curl} \mathbf{F} \cdot \mathbf{n} \; d\sigma
+= \iint_\Sigma \operatorname{rot} \mathbf{F} \cdot \mathbf{n} \; d\sigma
 $$
-It holds for $\Sigma$ regular and oriented, with boundary $\partial\Sigma$ closed, piecewise regular and coherently oriented, and for $\mathbf{F}$ of class $C^1$ on an open set containing $\Sigma$. The orientation is coherent if an observer standing as $\mathbf{n}$ who walks along the boundary has the surface on his left; for a graph oriented upward the boundary is traversed counterclockwise when seen from above.
+It holds for $\Sigma$ regular and oriented, with boundary $\partial\Sigma$ closed, piecewise regular and consistently oriented, and for $\mathbf{F}$ of class $C^1$ on an open set containing $\Sigma$. The orientation is consistent if an observer aligned with $\mathbf{n}$ who walks along the boundary has the surface on their left; for a graph oriented upward the boundary is traversed counterclockwise when seen from above.
 :::
 
 ## Sequences and series of functions
@@ -1010,14 +1010,14 @@ The proofs and the counterexamples are in the chapter [Sequences and series of f
 
 :::formula{#convergenza-puntuale titolo="Pointwise convergence"}
 $$
-\lim_{n \to +\infty} f_n(x) = f(x) \qquad \text{for every } x \in A
+\lim_{n \to +\infty} f_n(x) = f(x) \qquad \text{per ogni } x \in A
 $$
 The limit is computed for fixed $x$, with the methods for limits of sequences, distinguishing cases when the expression requires it. The function $f$ is the candidate limit for uniform convergence.
 :::
 
-:::formula{#criterio-del-sup titolo="Uniform convergence and the sup criterion"}
+:::formula{#criterio-del-sup titolo="Uniform convergence and the supremum criterion"}
 $$
-f_n \to f \ \text{uniformly on } A
+f_n \to f \ \text{uniformemente su } A
 \iff
 M_n = \sup_{x \in A} |f_n(x) - f(x)| \xrightarrow[n \to +\infty]{} 0
 $$
@@ -1026,9 +1026,9 @@ The value $M_n$ is usually found by studying the derivative of $f_n - f$ on $A$.
 
 :::formula{#continuita-limite-uniforme titolo="Continuity of the uniform limit"}
 $$
-f_n \ \text{continuous on } A, \ f_n \to f \ \text{uniformly on } A
+f_n \ \text{continue su } A, \ f_n \to f \ \text{uniformemente su } A
 \implies
-f \ \text{continuous on } A
+f \ \text{continua su } A
 $$
 Therefore, if the pointwise limit of continuous functions is discontinuous, the convergence is not uniform.
 :::
@@ -1045,8 +1045,8 @@ It holds for $f_n$ continuous on $[a, b]$ with $f_n \to f$ uniformly on $[a, b]$
 :::formula{#derivazione-per-successioni titolo="Differentiation of sequences"}
 $$
 \begin{cases}
-f_n(x_0) \ \text{converges for at least one } x_0 \in [a, b] \\[4pt]
-f_n' \to g \ \text{uniformly on } [a, b]
+f_n(x_0) \ \text{converge per almeno un } x_0 \in [a, b] \\[4pt]
+f_n' \to g \ \text{uniformemente su } [a, b]
 \end{cases}
 \implies
 \left( \lim_{n \to +\infty} f_n \right)' = \lim_{n \to +\infty} f_n'
@@ -1063,32 +1063,32 @@ $$
 The series converges pointwise at $x$ if the numerical series $\sum f_n(x)$ converges. The condition on the remainder is equivalent to uniform convergence on $A$.
 :::
 
-:::formula{#criterio-di-weierstrass titolo="Total convergence (Weierstrass M-test)"}
+:::formula{#criterio-di-weierstrass titolo="Normal convergence (Weierstrass M-test)"}
 $$
 \begin{cases}
-|f_n(x)| \leq M_n \ \text{ for every } x \in A \\[4pt]
-\displaystyle\sum_{n=1}^{\infty} M_n \ \text{ converges}
+|f_n(x)| \leq M_n \ \text{ per ogni } x \in A \\[4pt]
+\displaystyle\sum_{n=1}^{\infty} M_n \ \text{ converge}
 \end{cases}
 \implies
-\sum_{n=1}^{\infty} f_n \ \text{converges totally, hence uniformly, on } A
+\sum_{n=1}^{\infty} f_n \ \text{converge totalmente, quindi uniformemente, su } A
 $$
-The sharpest choice is $M_n = \sup_A |f_n|$. The chain total $\implies$ uniform $\implies$ pointwise holds, and total convergence also implies absolute convergence at every point of $A$.
+The sharpest choice is $M_n = \sup_A |f_n|$. The chain normal $\implies$ uniform $\implies$ pointwise holds, and normal convergence also implies absolute convergence at every point of $A$.
 :::
 
 :::formula{#serie-di-confronto titolo="Numerical series for comparison"}
 $$
-\sum_{n=1}^{\infty} \frac{1}{n^p} \ \text{converges} \iff p > 1,
+\sum_{n=1}^{\infty} \frac{1}{n^p} \ \text{converge} \iff p > 1,
 \qquad
-\sum_{n=0}^{\infty} q^n = \frac{1}{1 - q} \ \text{ for } |q| < 1
+\sum_{n=0}^{\infty} q^n = \frac{1}{1 - q} \ \text{ per } |q| < 1
 $$
-These are the series used most often for the sequence $M_n$ of total convergence.
+These are the series used most often for the sequence $M_n$ of normal convergence.
 :::
 
 :::formula{#resto-di-leibniz titolo="Remainder of an alternating series"}
 $$
 \left| \sum_{n=1}^{\infty} (-1)^n a_n - \sum_{n=1}^{N} (-1)^n a_n \right| \leq a_{N+1}
 $$
-It holds for $(a_n)$ decreasing with $a_n \to 0$. If $a_n = a_n(x)$ and $\sup_A a_{N+1}(x) \to 0$, the series converges uniformly on $A$ even when the convergence is not total.
+It holds for $(a_n)$ decreasing with $a_n \to 0$. If $a_n = a_n(x)$ and $\sup_A a_{N+1}(x) \to 0$, the series converges uniformly on $A$ even when the convergence is not normal.
 :::
 
 :::formula{#teoremi-termine-a-termine titolo="Continuity, term-by-term integration and differentiation"}
@@ -1097,7 +1097,7 @@ $$
 \qquad
 \left( \sum_{n=1}^{\infty} f_n \right)' = \sum_{n=1}^{\infty} f_n'
 $$
-If the $f_n$ are continuous and the series converges uniformly on $[a, b]$, the sum is continuous and the first equality holds. The second holds for $f_n \in C^1([a, b])$ if $\sum f_n(x_0)$ converges at at least one point and $\sum f_n'$ converges uniformly on $[a, b]$, usually totally.
+If the $f_n$ are continuous and the series converges uniformly on $[a, b]$, the sum is continuous and the first equality holds. The second holds for $f_n \in C^1([a, b])$ if $\sum f_n(x_0)$ converges at at least one point and $\sum f_n'$ converges uniformly on $[a, b]$, usually normally.
 :::
 
 :::attenzione
@@ -1111,8 +1111,8 @@ The proofs of the theorems on the radius are in the chapter [Power series and Ta
 :::formula{#teorema-del-raggio titolo="Radius and set of convergence"}
 $$
 \begin{aligned}
-|x - x_0| < R &\implies \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{converges absolutely} \\[4pt]
-|x - x_0| > R &\implies \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{does not converge}
+|x - x_0| < R &\implies \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{converge assolutamente} \\[4pt]
+|x - x_0| > R &\implies \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{non converge}
 \end{aligned}
 $$
 $$
@@ -1158,14 +1158,14 @@ $$
 \sum_{n=1}^{\infty} \frac{x^n}{n^2}: &\quad E = [-1, 1]
 \end{aligned}
 $$
-The three series have radius $1$. At $x = x_0 \pm R$ the numerical series is studied with the comparison test, the limit comparison test and the Leibniz test.
+The three series have radius $1$. At $x = x_0 \pm R$ the numerical series is studied with the comparison test, the limit comparison test and the alternating series test.
 :::
 
 :::formula{#proprieta-della-somma titolo="Properties of the sum"}
 $$
-f(x) = \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{ is continuous on } (x_0 - R,\; x_0 + R)
+f(x) = \sum_{n=0}^{\infty} a_n (x - x_0)^n \ \text{ è continua su } (x_0 - R,\; x_0 + R)
 $$
-It holds for $R > 0$, because for *every* $0 < r < R$ the series converges totally on $[x_0 - r, x_0 + r]$. If $R < +\infty$ and the series converges at $x_0 + R$, by Abel's theorem $\displaystyle\lim_{x \to (x_0 + R)^-} f(x) = \sum_{n=0}^{\infty} a_n R^n$; the same holds at $x_0 - R$.
+It holds for $R > 0$, because for *every* $0 < r < R$ the series converges normally on $[x_0 - r, x_0 + r]$. If $R < +\infty$ and the series converges at $x_0 + R$, by Abel's theorem $\displaystyle\lim_{x \to (x_0 + R)^-} f(x) = \sum_{n=0}^{\infty} a_n R^n$; the same holds at $x_0 - R$.
 :::
 
 :::formula{#derivazione-integrazione-potenze titolo="Term-by-term differentiation and integration"}
@@ -1190,11 +1190,11 @@ $$
 The series is defined for $f$ of class $C^\infty$ near $x_0$; for $x_0 = 0$ it is called the Maclaurin series. The implication holds if the expansion is valid on an interval $(x_0 - \delta, x_0 + \delta)$ with $\delta > 0$; therefore every expansion obtained from known expansions is the Taylor series of the function.
 :::
 
-:::formula{#criterio-di-sviluppabilita titolo="Criterion for expandability"}
+:::formula{#criterio-di-sviluppabilita titolo="Criterion for Taylor series representation"}
 $$
-|f^{(n)}(x)| \leq M L^n \ \text{ for every } n \text{ and every } x \in I
+|f^{(n)}(x)| \leq M L^n \ \text{ per ogni } n \text{ e ogni } x \in I
 \implies
-f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n \ \text{ on } I
+f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n \ \text{ su } I
 $$
 It holds for $f$ of class $C^\infty$ on the interval $I$ centered at $x_0$ and constants $M, L > 0$. The expansion holds *if and only if* the remainder $f(x) - T_n(x)$ tends to $0$ as $n \to \infty$.
 :::
@@ -1251,9 +1251,9 @@ The expansion holds for $-1 < x < 1$ and $\alpha \in \mathbb{R}$. For $\alpha \i
 
 :::formula{#sviluppi-per-sostituzione titolo="Expansions by substitution"}
 $$
-g(t) = \sum_{n=0}^{\infty} a_n t^n \ \text{ for } |t| < R
+g(t) = \sum_{n=0}^{\infty} a_n t^n \ \text{ per } |t| < R
 \implies
-g(c\,x^k) = \sum_{n=0}^{\infty} a_n c^n x^{kn} \ \text{ for } |c\, x^k| < R
+g(c\,x^k) = \sum_{n=0}^{\infty} a_n c^n x^{kn} \ \text{ per } |c\, x^k| < R
 $$
 It holds for $c \neq 0$ and $k \geq 1$ an integer; the region of validity is obtained by imposing on the substituted expression the condition of the original expansion. For example $e^{-x^2} = \displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{n!}$ for every $x \in \mathbb{R}$.
 :::
@@ -1299,8 +1299,8 @@ They hold for $f$ of period $2\pi$, integrable on $[-\pi, \pi]$. The term $\dfra
 :::formula{#serie-di-coseni-e-di-seni titolo="Even functions and odd functions"}
 $$
 \begin{aligned}
-f \ \text{even} &\implies b_n = 0, \quad a_n = \frac{2}{\pi} \int_0^{\pi} f(x) \cos(nx)\, dx \\[6pt]
-f \ \text{odd} &\implies a_n = 0, \quad b_n = \frac{2}{\pi} \int_0^{\pi} f(x) \sin(nx)\, dx
+f \ \text{pari} &\implies b_n = 0, \quad a_n = \frac{2}{\pi} \int_0^{\pi} f(x) \cos(nx)\, dx \\[6pt]
+f \ \text{dispari} &\implies a_n = 0, \quad b_n = \frac{2}{\pi} \int_0^{\pi} f(x) \sin(nx)\, dx
 \end{aligned}
 $$
 For an even function the series contains only cosines, for an odd function only sines. If $f$ is modified at finitely many points, the coefficients remain the same.
@@ -1338,11 +1338,11 @@ It holds at every $x \in \mathbb{R}$ for $f$ of period $2\pi$ and piecewise smoo
 
 :::formula{#convergenza-uniforme-fourier titolo="Uniform convergence"}
 $$
-\sum_{n=1}^{\infty} \bigl( |a_n| + |b_n| \bigr) \ \text{converges},
+\sum_{n=1}^{\infty} \bigl( |a_n| + |b_n| \bigr) \ \text{converge},
 \qquad
 |a_n \cos(nx) + b_n \sin(nx)| \leq |a_n| + |b_n|
 $$
-They hold for $f$ of period $2\pi$, **continuous on** $\mathbb{R}$ and piecewise smooth. By the Weierstrass M-test the series then converges totally, hence uniformly, to $f$ on $\mathbb{R}$. For a function given on $[-\pi, \pi]$ the continuity of the extension requires $f(-\pi) = f(\pi)$.
+They hold for $f$ of period $2\pi$, **continuous on** $\mathbb{R}$ and piecewise smooth. By the Weierstrass M-test the series then converges normally, hence uniformly, to $f$ on $\mathbb{R}$. For a function given on $[-\pi, \pi]$ the continuity of the extension requires $f(-\pi) = f(\pi)$.
 :::
 
 :::formula{#uguaglianza-di-parseval titolo="Parseval's identity"}
@@ -1350,7 +1350,7 @@ $$
 \frac{1}{\pi} \int_{-\pi}^{\pi} f(x)^2\, dx
 = \frac{a_0^2}{2} + \sum_{n=1}^{\infty} \bigl( a_n^2 + b_n^2 \bigr)
 $$
-It holds for $f$ of period $2\pi$ with square integrable on $[-\pi, \pi]$. It is used to sum numerical series with the squares of the coefficients.
+It holds for $f$ of period $2\pi$ whose square is integrable on $[-\pi, \pi]$. It is used to sum numerical series with the squares of the coefficients.
 :::
 
 :::formula{#periodo-generico titolo="Period 2L"}

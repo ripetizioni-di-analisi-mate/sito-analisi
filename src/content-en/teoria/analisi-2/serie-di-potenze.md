@@ -1,6 +1,6 @@
 ---
-titolo: Power series and Taylor series
-sommario: Where a power series converges, how to compute the radius and the set of convergence, how to differentiate and integrate term by term, and how Taylor expansions represent the elementary functions.
+titolo: Serie di potenze e serie di Taylor
+sommario: Dove converge una serie di potenze, come si calcolano il raggio e l'insieme di convergenza, come si deriva e si integra termine a termine, e come gli sviluppi di Taylor rappresentano le funzioni elementari.
 ---
 
 ## Power series and radius of convergence
@@ -14,7 +14,7 @@ where the numbers $a_n$ are the **coefficients** and $x_0$ is the **center**; by
 :::
 
 :::esempio{titolo="The geometric series as a power series"}
-The series $\displaystyle\sum_{n=0}^{\infty} x^n$ is a power series centered at $0$ with all coefficients equal to $1$. For $|x| < 1$ it is a convergent geometric series with sum $\dfrac{1}{1 - x}$; for $|x| \geq 1$ the general term $x^n$ does not tend to $0$, so the series **does not converge**. The set of convergence is the interval $(-1, 1)$, symmetric with respect to the center. The following theorem shows that this shape of the set of convergence is general.
+The series $\displaystyle\sum_{n=0}^{\infty} x^n$ is a power series centered at $0$ with all coefficients equal to $1$. For $|x| < 1$ it is a convergent geometric series with sum $\dfrac{1}{1 - x}$; for $|x| \geq 1$ the general term $x^n$ does not tend to $0$, so the series **does not converge**. The set of convergence is the interval $(-1, 1)$, symmetric with respect to the center. The **radius of convergence theorem** shows that this shape of the set of convergence is general.
 
 ::grafico{f="1/(1-x);1+x+x^2;(1-x^7)/(1-x)" xmin=-1.6 xmax=1.6 ymin=-3 ymax=8 asintoti="x=1" segmenti="-1,-3,-1,8" titolo="$y = \dfrac{1}{1 - x}$ with the partial sums $1 + x + x^2$ (dashed) and $1 + x + \dots + x^6$ (red): inside $(-1, 1)$ they approach the sum, outside they move away from it"}
 :::
@@ -38,7 +38,7 @@ The geometric series $\sum M q^n$ converges because $0 \leq q < 1$, so by the **
 
 Now set
 $$
-R = \sup \{ |x - x_0| : \text{the series converges at } x \} ,
+R = \sup \{ |x - x_0| : \text{la serie converge in } x \} ,
 $$
 the supremum of a nonempty set, since it contains $0$. If $|x - x_0| < R$, by definition of supremum there exists a point of convergence $x_1$ with $|x - x_0| < |x_1 - x_0|$, so by the initial fact the series converges absolutely at $x$. If $|x - x_0| > R$, the series **does not converge** at $x$, because otherwise the number $|x - x_0|$ would belong to the set and would be greater than its supremum, which is absurd.
 :::
@@ -63,7 +63,7 @@ so $E$ is an interval centered at $x_0$ that contains the open interval and may 
 ## Computing the radius
 
 :::teorema{#calcolo-raggio-rapporto titolo="Ratio test for the radius"}
-If $a_n \neq 0$ eventually and there exists
+If $a_n \neq 0$ eventually and the following limit exists
 $$
 \lim_{n \to \infty} \frac{|a_{n+1}|}{|a_n|} = \ell \in [0, +\infty] ,
 $$
@@ -75,7 +75,7 @@ Let $\sum b_n$ have positive terms with $\dfrac{b_{n+1}}{b_n} \to L$. If $L < 1$
 :::
 
 :::teorema{#calcolo-raggio-radice titolo="Root test for the radius"}
-If there exists
+If the following limit exists
 $$
 \lim_{n \to \infty} \sqrt[n]{|a_n|} = \ell \in [0, +\infty] ,
 $$
@@ -89,32 +89,32 @@ A power series is **lacunary** if it contains *only* some powers, for example on
 ## Behavior at the endpoints
 
 :::osservazione{#comportamento-agli-estremi titolo="Study of the endpoints"}
-At the points $x = x_0 - R$ and $x = x_0 + R$ the radius theorem gives no information, and there is *no* general criterion. Each of the two values is substituted into the series and the resulting numerical series is studied with the tests for series: comparison and limit comparison, the Leibniz test for alternating series, the integral test. The two endpoints may behave differently from each other, and all behaviors occur.
+At the points $x = x_0 - R$ and $x = x_0 + R$ the radius theorem gives no information, and there is *no* general criterion. Each of the two values is substituted into the series and the resulting numerical series is studied with the tests for series: comparison and limit comparison, the alternating series test, the integral test. The two endpoints may behave differently from each other, and all behaviors occur.
 :::
 
 :::esempio{titolo="Three series with the same radius and different sets of convergence"}
 The series $\displaystyle\sum_{n=1}^{\infty} x^n$, $\displaystyle\sum_{n=1}^{\infty} \frac{x^n}{n}$, $\displaystyle\sum_{n=1}^{\infty} \frac{x^n}{n^2}$ all have radius $R = 1$.
 
 - $\displaystyle\sum x^n$: at $x = \pm 1$ the general term does not tend to $0$, so the series **does not converge** at either endpoint and $E = (-1, 1)$.
-- $\displaystyle\sum \frac{x^n}{n}$: at $x = 1$ it is the harmonic series, which diverges; at $x = -1$ it is the series $\sum \dfrac{(-1)^n}{n}$, which converges by the **Leibniz test**. Hence $E = [-1, 1)$.
+- $\displaystyle\sum \frac{x^n}{n}$: at $x = 1$ it is the harmonic series, which diverges; at $x = -1$ it is the series $\sum \dfrac{(-1)^n}{n}$, which converges by the **alternating series test**. Hence $E = [-1, 1)$.
 - $\displaystyle\sum \frac{x^n}{n^2}$: at $x = \pm 1$ the absolute value of the general term is $\dfrac{1}{n^2}$, the term of a convergent series, so the series **converges absolutely** at both endpoints and $E = [-1, 1]$.
 :::
 
-## Total convergence and continuity of the sum
+## Normal convergence and continuity of the sum
 
-:::richiamo{titolo="Total convergence"}
-The series of functions $\sum f_n$ converges totally on the set $I$ if the numerical series $\displaystyle\sum_{n} \, \sup_{x \in I} |f_n(x)|$ converges. Total convergence implies **uniform convergence** on $I$. (Chapter on sequences and series of functions.)
+:::richiamo{titolo="Normal convergence"}
+The series of functions $\sum f_n$ converges normally on the set $I$ if the numerical series $\displaystyle\sum_{n} \, \sup_{x \in I} |f_n(x)|$ converges. Normal convergence implies **uniform convergence** on $I$. (Chapter on sequences and series of functions.)
 :::
 
-::::teorema{#convergenza-totale-compatti titolo="Total convergence on interior compact sets"}
-Let $R > 0$ be the radius of convergence of the series $\sum a_n (x - x_0)^n$. For *every* $r$ with $0 < r < R$ the series **converges totally** on the interval $[x_0 - r,\; x_0 + r]$. The properties of the sum stated below follow from this theorem: continuity, term-by-term differentiability and integrability.
+::::teorema{#convergenza-totale-compatti titolo="Normal convergence on interior compact sets"}
+Let $R > 0$ be the radius of convergence of the series $\sum a_n (x - x_0)^n$. For *every* $r$ with $0 < r < R$ the series **converges normally** on the interval $[x_0 - r,\; x_0 + r]$. The properties of the sum follow from this theorem: continuity, term-by-term differentiation and integration.
 
 :::dimostrazione
 For $x \in [x_0 - r, x_0 + r]$ we have $|a_n (x - x_0)^n| \leq |a_n| \, r^n$, and the value $|a_n| \, r^n$ is attained at $x = x_0 + r$, so
 $$
 \sup_{x \in [x_0 - r,\, x_0 + r]} |a_n (x - x_0)^n| = |a_n| \, r^n .
 $$
-Since $r < R$, the point $x_0 + r$ is interior to the interval of convergence, so by the **radius theorem** the series converges absolutely at that point, that is, the series $\sum |a_n| \, r^n$ converges. Therefore the series of the suprema converges and the convergence is **total**.
+Since $r < R$, the point $x_0 + r$ is interior to the interval of convergence, so by the **radius theorem** the series converges absolutely at that point, that is, the series $\sum |a_n| \, r^n$ converges. Therefore the series of the suprema converges and the convergence is **normal**.
 :::
 ::::
 
@@ -123,7 +123,7 @@ Let $R > 0$. The sum function
 $$
 f(x) = \sum_{n=0}^{\infty} a_n (x - x_0)^n
 $$
-is **continuous** on the open interval $(x_0 - R,\; x_0 + R)$. Every point of the open interval belongs to a compact set $[x_0 - r, x_0 + r]$ with $r < R$; on that compact set the convergence is **total**, hence **uniform**, and the sum of a uniformly convergent series of continuous functions is continuous, by the theorem recalled below.
+is **continuous** on the open interval $(x_0 - R,\; x_0 + R)$. Every point of the open interval belongs to a compact set $[x_0 - r, x_0 + r]$ with $r < R$; on that compact set the convergence is **normal**, hence **uniform**, and the sum of a uniformly convergent series of continuous functions is continuous, by the theorem on continuity of the sum in the chapter on sequences and series of functions.
 :::
 
 :::richiamo{titolo="Continuity of the sum of a uniformly convergent series"}
@@ -145,7 +145,7 @@ Let $f(x) = \displaystyle\sum_{n=0}^{\infty} a_n (x - x_0)^n$ with radius $R > 0
 $$
 \sum_{n=1}^{\infty} n \, a_n (x - x_0)^{n-1}
 $$
-has the *same* radius of convergence $R$; the function $f$ is **differentiable** on $(x_0 - R, x_0 + R)$ and its derivative is the sum of the series of derivatives. By iteration, $f$ is of class $C^{\infty}$ on the open interval and every derivative is obtained by differentiating the series term by term. The proof uses total convergence on interior compact sets and the **differentiation theorem for series of functions**, and we refer to the chapter on sequences and series of functions.
+has the *same* radius of convergence $R$; the function $f$ is **differentiable** on $(x_0 - R, x_0 + R)$ and its derivative is the sum of the series of derivatives. By iteration, $f$ is of class $C^{\infty}$ on the open interval and every derivative is obtained by differentiating the series term by term. The proof uses normal convergence on interior compact sets and the **differentiation theorem for series of functions**, and we refer to the chapter on sequences and series of functions.
 :::
 
 :::teorema{#integrazione-termine-a-termine titolo="Term-by-term integration"}
@@ -153,7 +153,7 @@ Under the same hypotheses, for every $x \in (x_0 - R, x_0 + R)$ we have
 $$
 \int_{x_0}^{x} f(t) \, dt = \sum_{n=0}^{\infty} \frac{a_n}{n+1} (x - x_0)^{n+1} ,
 $$
-and the integrated series has the *same* radius $R$. The interchange of integral and series is legitimate because on the compact set with endpoints $x_0$ and $x$ the convergence is **total**, hence **uniform**; the integration theorem for series of functions is in the corresponding chapter. Term-by-term differentiation and integration produce new expansions from known ones, as the examples in the section on expansions show.
+and the integrated series has the *same* radius $R$. The interchange of integral and series is legitimate because on the compact set with endpoints $x_0$ and $x$ the convergence is **normal**, hence **uniform**; the integration theorem for series of functions is in the corresponding chapter. Term-by-term differentiation and integration produce new expansions from known ones, such as the expansions of $\ln(1 + x)$ and $\arctan x$.
 :::
 
 :::esempio{titolo="Derivative of the geometric series"}
@@ -173,13 +173,13 @@ Let $f$ be of class $C^{\infty}$ in a neighborhood of $x_0$. The **Taylor series
 $$
 \sum_{n=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n ,
 $$
-whose partial sums are the Taylor polynomials of $f$ at $x_0$. For $x_0 = 0$ the series is called the **Maclaurin series**. The series is defined for every $C^{\infty}$ function; whether and where its sum coincides with $f$ is the question addressed in the following blocks.
+whose partial sums are the Taylor polynomials of $f$ at $x_0$. For $x_0 = 0$ the series is called the **Maclaurin series**. The series is defined for every $C^{\infty}$ function; whether and where its sum coincides with $f$ must be checked case by case, for example using the criterion for Taylor series representation.
 :::
 
 ::::teorema{#unicita-dello-sviluppo titolo="Uniqueness of the power series expansion"}
 If $f(x) = \displaystyle\sum_{n=0}^{\infty} a_n (x - x_0)^n$ for every $x$ in an interval $(x_0 - \delta, x_0 + \delta)$ with $\delta > 0$, then
 $$
-a_n = \frac{f^{(n)}(x_0)}{n!} \qquad \text{for every } n .
+a_n = \frac{f^{(n)}(x_0)}{n!} \qquad \text{per ogni } n .
 $$
 The *only* power series centered at $x_0$ that can represent $f$ is therefore its **Taylor series**. For this reason an expansion obtained by any of the legitimate procedures (substitution into a known expansion, sum, multiplication by a power, differentiation, integration) is automatically the Taylor series of the function, without computing the derivatives.
 
@@ -197,7 +197,7 @@ If $f$ is the sum of a power series with radius $R > 0$, then $f$ is **different
 :::
 
 :::definizione{#funzione-analitica titolo="Analytic function"}
-$f$ is **analytic** at $x_0$ (or **expandable in a Taylor series** at $x_0$) if there exists a neighborhood of $x_0$ in which $f$ coincides with the sum of its Taylor series centered at $x_0$; it is analytic on an open set if it is analytic at each of its points. The elementary functions (exponentials, logarithms, powers, trigonometric functions and their inverses) are analytic at every interior point of their domain, so for these functions the expansions of the following section really represent the function in the regions indicated.
+$f$ is **analytic** at $x_0$ (or **expandable in a Taylor series** at $x_0$) if there exists a neighborhood of $x_0$ in which $f$ coincides with the sum of its Taylor series centered at $x_0$; it is analytic on an open set if it is analytic at each of its points. The elementary functions (exponentials, logarithms, powers, trigonometric functions and their inverses) are analytic at every interior point of their domain, so for these functions the standard expansions really represent the function in the regions indicated.
 :::
 
 :::attenzione
@@ -206,12 +206,12 @@ Being of class $C^{\infty}$ *is not enough* to be analytic. The function $f(x) =
 ::grafico{f="exp(-1/(x*x))" legenda="y = e^{-1/x^2}" xmin=-2.5 xmax=2.5 ymin=-0.2 ymax=1.1 punti="0,0,pieno" titolo="$y = e^{-1/x^2}$ extended with $0$ at the origin: all the derivatives at $0$ are zero"}
 :::
 
-:::teorema{#criterio-di-sviluppabilita titolo="Expandability criterion"}
-Let $f$ be of class $C^{\infty}$ on the interval $I$ centered at $x_0$ and let $T_n$ be its Taylor polynomial of degree $n$. Then $f$ coincides with the sum of its Taylor series at $x \in I$ *if and only if* the remainder $R_n(x) = f(x) - T_n(x)$ tends to $0$ as $n \to \infty$. A sufficient condition: if there exist constants $M, L > 0$ such that $|f^{(n)}(x)| \leq M L^n$ for every $n$ and every $x \in I$, then $f$ is **expandable** on $I$, since with the **Lagrange remainder**
+:::teorema{#criterio-di-sviluppabilita titolo="Criterion for Taylor series representation"}
+Let $f$ be of class $C^{\infty}$ on the interval $I$ centered at $x_0$ and let $T_n$ be its Taylor polynomial of degree $n$. Then $f$ coincides with the sum of its Taylor series at $x \in I$ *if and only if* the remainder $R_n(x) = f(x) - T_n(x)$ tends to $0$ as $n \to \infty$. A sufficient condition: if there exist constants $M, L > 0$ such that $|f^{(n)}(x)| \leq M L^n$ for every $n$ and every $x \in I$, then $f$ is **representable by its Taylor series** on $I$, since with the **Lagrange remainder**
 $$
 |R_n(x)| \leq \frac{M L^{n+1} |x - x_0|^{n+1}}{(n+1)!} \xrightarrow[n \to \infty]{} 0 ,
 $$
-given that $\dfrac{c^{\,n}}{n!} \to 0$ for every fixed $c$. The derivatives of $\sin x$ and $\cos x$ are bounded by $1$ on all of $\mathbb{R}$, and those of $e^x$ are bounded by $e^K$ on every interval $[-K, K]$, so the condition is satisfied and the three expansions of the following section hold on all of $\mathbb{R}$.
+given that $\dfrac{c^{\,n}}{n!} \to 0$ for every fixed $c$. The derivatives of $\sin x$ and $\cos x$ are bounded by $1$ on all of $\mathbb{R}$, and those of $e^x$ are bounded by $e^K$ on every interval $[-K, K]$, so the condition is satisfied and the standard expansions of $e^x$, $\sin x$ and $\cos x$ hold on all of $\mathbb{R}$.
 
 ::grafico{f="sin(x);x-x^3/6;x-x^3/6+x^5/120-x^7/5040+x^9/362880" xmin=-7 xmax=7 ymin=-2.5 ymax=2.5 titolo="$y = \sin x$ with the Taylor polynomials $T_3$ (dashed) and $T_9$ (red) centered at $0$: as the degree increases the approximation is good on ever wider intervals"}
 :::
@@ -233,7 +233,7 @@ e^x &= \sum_{n=0}^{\infty} \frac{x^n}{n!} && x \in \mathbb{R} \\[8pt]
 (1 + x)^{\alpha} &= \sum_{n=0}^{\infty} \binom{\alpha}{n} x^n && -1 < x < 1
 \end{aligned}
 $$
-The first three hold on all of $\mathbb{R}$ by the **expandability criterion**. The fourth is the sum of the geometric series. The fifth is obtained by integrating term by term the geometric series with ratio $-x$, as shown in the following section, and it holds *also* at $x = 1$ by **Abel's theorem**, because at that point the series converges by the Leibniz test; in particular $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$. In the sixth, called the **binomial series**, $\alpha \in \mathbb{R}$ and
+The first three hold on all of $\mathbb{R}$ by the **criterion for Taylor series representation**. The fourth is the sum of the geometric series. The fifth is obtained by integrating term by term the geometric series with ratio $-x$ and holds *also* at $x = 1$ by **Abel's theorem**, because at that point the series converges by the alternating series test; in particular $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$. In the sixth, called the **binomial series**, $\alpha \in \mathbb{R}$ and
 $$
 \binom{\alpha}{n} = \frac{\alpha (\alpha - 1) \cdots (\alpha - n + 1)}{n!} , \qquad \binom{\alpha}{0} = 1 ;
 $$
@@ -252,7 +252,7 @@ The coefficients are $\dbinom{\frac{1}{2}}{1} = \dfrac{1}{2}$, $\dbinom{\frac{1}
 ## New expansions from known ones
 
 :::osservazione{#sviluppi-per-composizione titolo="Expansions by substitution and combination"}
-By substituting $c x$ or a power $x^k$ for $x$ in a known expansion, multiplying by a power of $x$, adding expansions or decomposing the function, one obtains power series that, by the **uniqueness of the expansion**, are the Taylor series of the functions obtained. The region of validity is transformed accordingly: the condition on $x$ is derived by requiring that the substituted expression belong to the region of the original expansion. For example, from the exponential series with $-x^2$ substituted for $x$:
+By replacing $x$ with $c x$ or a power $x^k$ in a known expansion, multiplying by a power of $x$, adding expansions or decomposing the function, one obtains power series that, by the **uniqueness of the expansion**, are the Taylor series of the functions obtained. The region of validity is transformed accordingly: the condition on $x$ is derived by requiring that the substituted expression belong to the region of the original expansion. For example, from the exponential series with $x$ replaced by $-x^2$:
 $$
 e^{-x^2} = \sum_{n=0}^{\infty} \frac{(-1)^n \, x^{2n}}{n!} , \qquad x \in \mathbb{R} ,
 $$
@@ -268,7 +268,7 @@ and integrating from $0$ to $x$, for $|x| < 1$,
 $$
 \arctan x = \sum_{n=0}^{\infty} \frac{(-1)^n \, x^{2n+1}}{2n+1} .
 $$
-At $x = \pm 1$ the series converges by the **Leibniz test**, so by **Abel's theorem** the equality extends to $[-1, 1]$; in particular, with $x = 1$,
+At $x = \pm 1$ the series converges by the **alternating series test**, so by **Abel's theorem** the equality extends to $[-1, 1]$; in particular, with $x = 1$,
 $$
 \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \cdots
 $$
@@ -289,7 +289,7 @@ $$
 :::
 
 :::osservazione{#limiti-con-taylor titolo="Computing limits"}
-For a limit in indeterminate form as $x \to 0$, each function is replaced by its Maclaurin expansion truncated at the required order, with the remainder written as a little-o. The Taylor series provides the terms of *every* order, so the expansion can be pushed as far as needed. For example, since $\cos x = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)$,
+For a limit in indeterminate form as $x \to 0$, each function is replaced by its Maclaurin expansion truncated at the required order, with the remainder written in little-o notation. The Taylor series provides the terms of *every* order, so the expansion can be pushed as far as needed. For example, since $\cos x = 1 - \dfrac{x^2}{2} + \dfrac{x^4}{24} + o(x^4)$,
 $$
 \lim_{x \to 0} \frac{\cos x - 1 + \dfrac{x^2}{2}}{x^4}
 = \lim_{x \to 0} \frac{\dfrac{x^4}{24} + o(x^4)}{x^4}

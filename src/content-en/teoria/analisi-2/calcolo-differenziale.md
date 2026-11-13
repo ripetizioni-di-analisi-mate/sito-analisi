@@ -1,6 +1,6 @@
 ---
-titolo: Differential calculus in several variables
-sommario: Partial derivatives and gradient, differentiability and tangent plane, directional derivatives and the gradient formula, chain rule, second derivatives and second-order Taylor formula.
+titolo: Calcolo differenziale in più variabili
+sommario: Derivate parziali e gradiente, differenziabilità e piano tangente, derivate direzionali e formula del gradiente, regola della catena, derivate seconde e formula di Taylor al secondo ordine.
 ---
 
 ## Partial derivatives and gradient
@@ -40,7 +40,7 @@ In the exercises, differentiability at a point is checked by first computing the
 :::
 
 :::osservazione
-In one variable, derivability and differentiability are **equivalent**. In two variables the existence of the partial derivatives is a **weaker condition**, since the partial derivatives control $f$ *only* along the two lines through $(x_0, y_0)$ parallel to the axes, while the differentiability limit controls the increment along *every* way of approaching the point. For this reason, in several variables the central notion of differential calculus is differentiability.
+In one variable, the existence of the derivative and differentiability are **equivalent**. In two variables the existence of the partial derivatives is a **weaker condition**, since the partial derivatives control $f$ *only* along the two lines through $(x_0, y_0)$ parallel to the axes, while the differentiability limit controls the increment along *every* way of approaching the point. For this reason, in several variables the central notion of differential calculus is differentiability.
 :::
 
 ::::teorema{#differenziabile-implica-continua titolo="Differentiability implies continuity"}
@@ -51,7 +51,7 @@ By differentiability, as $(h, k) \to (0, 0)$ we have
 $$
 f(x_0 + h,\, y_0 + k) - f(x_0, y_0) = f_x\, h + f_y\, k + o\!\left(\sqrt{h^2 + k^2}\right).
 $$
-The terms $f_x h$ and $f_y k$ tend to $0$ because they are products of a constant and an infinitesimal; the remainder tends to $0$ because it is an $o\!\left(\sqrt{h^2 + k^2}\right)$ and $\sqrt{h^2 + k^2} \to 0$. Hence $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, and this is the **continuity** of $f$ at $(x_0, y_0)$.
+The terms $f_x h$ and $f_y k$ tend to $0$ because they are products of a constant and an infinitesimal; the remainder tends to $0$ because it is $o\!\left(\sqrt{h^2 + k^2}\right)$ and $\sqrt{h^2 + k^2} \to 0$. Hence $f(x_0 + h,\, y_0 + k) \to f(x_0, y_0)$, and this is the **continuity** of $f$ at $(x_0, y_0)$.
 :::
 ::::
 
@@ -104,7 +104,7 @@ f(x_0 + h,\, y_0 + k) - f(x_0, y_0)
 &\quad + \bigl[ f(x_0,\, y_0 + k) - f(x_0, y_0) \bigr].
 \end{aligned}
 $$
-The function $t \mapsto f(t,\, y_0 + k)$ is differentiable on the interval with endpoints $x_0$ and $x_0 + h$, because $f_x$ exists in a neighborhood of $(x_0, y_0)$; by the **mean value theorem** there therefore exists $\xi$ between $x_0$ and $x_0 + h$ such that the first increment equals $f_x(\xi,\, y_0 + k)\, h$. For the same reason there exists $\eta$ between $y_0$ and $y_0 + k$ such that the second increment equals $f_y(x_0, \eta)\, k$. The numerator of the differentiability limit therefore becomes
+The function $t \mapsto f(t,\, y_0 + k)$ is differentiable on the interval with endpoints $x_0$ and $x_0 + h$, because in a neighborhood of $(x_0, y_0)$ the partial derivative $f_x$ exists; by the **mean value theorem** there therefore exists $\xi$ between $x_0$ and $x_0 + h$ such that the first increment equals $f_x(\xi,\, y_0 + k)\, h$. For the same reason there exists $\eta$ between $y_0$ and $y_0 + k$ such that the second increment equals $f_y(x_0, \eta)\, k$. The numerator of the differentiability limit therefore becomes
 $$
 \bigl[ f_x(\xi,\, y_0 + k) - f_x(x_0, y_0) \bigr] h + \bigl[ f_y(x_0, \eta) - f_y(x_0, y_0) \bigr] k .
 $$
@@ -112,7 +112,7 @@ Since $\dfrac{|h|}{\sqrt{h^2 + k^2}} \leq 1$ and $\dfrac{|k|}{\sqrt{h^2 + k^2}} 
 $$
 \bigl| f_x(\xi,\, y_0 + k) - f_x(x_0, y_0) \bigr| + \bigl| f_y(x_0, \eta) - f_y(x_0, y_0) \bigr| .
 $$
-As $(h, k) \to (0, 0)$ the points $(\xi,\, y_0 + k)$ and $(x_0, \eta)$ tend to $(x_0, y_0)$, so by the continuity of $f_x$ and $f_y$ at $(x_0, y_0)$ both terms tend to $0$. By the **comparison theorem** the ratio tends to $0$, therefore $f$ is **differentiable** at $(x_0, y_0)$.
+As $(h, k) \to (0, 0)$ the points $(\xi,\, y_0 + k)$ and $(x_0, \eta)$ tend to $(x_0, y_0)$, so by the continuity of $f_x$ and $f_y$ at $(x_0, y_0)$ both terms tend to $0$. By the **squeeze theorem** the ratio tends to $0$, therefore $f$ is **differentiable** at $(x_0, y_0)$.
 :::
 ::::
 
@@ -123,9 +123,9 @@ If $g$ is continuous on $[a, b]$ and differentiable on $(a, b)$, there exists $c
 :::osservazione
 The condition of the theorem is *sufficient* and the converse is **false**: there exist functions that are differentiable at a point with partial derivatives discontinuous at that point, such as $f(x, y) = (x^2 + y^2) \sin \dfrac{1}{\sqrt{x^2 + y^2}}$ extended with $f(0,0) = 0$, which is differentiable at the origin with zero differential. The scheme of implications between the notions of this chapter is therefore
 $$
-C^1 \implies \text{differentiable} \implies \text{continuous},
+C^1 \implies \text{differenziabile} \implies \text{continua},
 \qquad
-\text{differentiable} \implies \text{partially differentiable},
+\text{differenziabile} \implies \text{derivabile},
 $$
 and *none* of the arrows can be reversed, as the counterexamples of this chapter show.
 :::
@@ -133,7 +133,7 @@ and *none* of the arrows can be reversed, as the counterexamples of this chapter
 ## Directional derivatives and the gradient formula
 
 :::definizione{#derivata-direzionale titolo="Directional derivative"}
-$\mathbf{v} = (v_1, v_2)$ a **unit vector**, that is, a vector of norm $1$. The **directional derivative** of $f$ at $(x_0, y_0)$ along $\mathbf{v}$ is
+Let $\mathbf{v} = (v_1, v_2)$ be a **unit vector**, that is, a vector of norm $1$. The **directional derivative** of $f$ at $(x_0, y_0)$ along $\mathbf{v}$ is
 $$
 D_{\mathbf{v}} f(x_0, y_0) = \lim_{t \to 0} \frac{f(x_0 + t v_1,\, y_0 + t v_2) - f(x_0, y_0)}{t},
 $$
@@ -166,7 +166,7 @@ Without the differentiability hypothesis the **gradient formula** does *not* app
 :::
 
 :::teorema{#direzione-di-massima-crescita titolo="Direction of steepest ascent"}
-$f$ differentiable at $(x_0, y_0)$ with $\nabla f(x_0, y_0) \neq (0,0)$. By the **Cauchy-Schwarz inequality**, for every unit vector $\mathbf{v}$
+Let $f$ be differentiable at $(x_0, y_0)$ with $\nabla f(x_0, y_0) \neq (0,0)$. By the **Cauchy-Schwarz inequality**, for every unit vector $\mathbf{v}$
 $$
 \bigl| D_{\mathbf{v}} f(x_0, y_0) \bigr| = \bigl| \nabla f(x_0, y_0) \cdot \mathbf{v} \bigr| \leq \bigl| \nabla f(x_0, y_0) \bigr|,
 $$
@@ -225,7 +225,7 @@ $$
 In the symbol $f_{xy}$ one differentiates first with respect to $x$ and then with respect to $y$; $f_{xy}$ and $f_{yx}$ are called **mixed second derivatives**. $f$ is **of class** $C^2(A)$ if *all* the second derivatives exist and are continuous on $A$. The second derivatives describe the curvature of the graph and appear in the Taylor formula and in the study of maxima and minima.
 :::
 
-:::teorema{#teorema-di-schwarz titolo="Schwarz theorem"}
+:::teorema{#teorema-di-schwarz titolo="Schwarz's theorem"}
 If the mixed second derivatives $f_{xy}$ and $f_{yx}$ exist in a neighborhood of $(x_0, y_0)$ and are continuous at $(x_0, y_0)$, then
 $$
 f_{xy}(x_0, y_0) = f_{yx}(x_0, y_0).
@@ -242,7 +242,7 @@ f_{xx}(x_0, y_0) & f_{xy}(x_0, y_0) \\[4pt]
 f_{yx}(x_0, y_0) & f_{yy}(x_0, y_0)
 \end{pmatrix}.
 $$
-By the **Schwarz theorem**, if $f$ is of class $C^2$ the matrix is **symmetric**. The Hessian matrix collects the second derivatives as the gradient collects the first ones: it provides the quadratic term of the Taylor formula and, in the chapter on maxima and minima, it classifies critical points through the sign of its eigenvalues.
+By **Schwarz's theorem**, if $f$ is of class $C^2$ the matrix is **symmetric**. The Hessian matrix collects the second derivatives as the gradient collects the first ones: it provides the quadratic term of the Taylor formula and, in the chapter on maxima and minima, it classifies critical points through the sign of its eigenvalues.
 :::
 
 :::esempio
@@ -254,7 +254,7 @@ H_f(x, y) =
 2y & 2x
 \end{pmatrix}.
 $$
-The mixed derivatives **coincide**, in agreement with the **Schwarz theorem**, since $f$ is a polynomial and therefore of class $C^2$.
+The mixed derivatives **coincide**, in agreement with **Schwarz's theorem**, since $f$ is a polynomial and therefore of class $C^2$.
 :::
 
 ## Second-order Taylor formula

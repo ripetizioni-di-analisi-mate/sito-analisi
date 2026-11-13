@@ -1,6 +1,6 @@
 ---
-titolo: Vector fields and Green's theorem
-sommario: Vector fields in the plane and in space, work along a curve, conservative fields and potential, irrotational fields and simply connected domains, Green's theorem and computation of areas.
+titolo: Campi vettoriali e teorema di Green
+sommario: Campi vettoriali nel piano e nello spazio, lavoro lungo una curva, campi conservativi e potenziale, campi irrotazionali e domini semplicemente connessi, teorema di Green e calcolo di aree.
 ---
 
 ## Vector fields
@@ -43,10 +43,10 @@ which in the computation becomes $\displaystyle\int_a^b \bigl( F_1(r(t))\, x'(t)
 $$
 \oint_{\gamma} F \cdot dr .
 $$
-The name comes from physics: if $F$ is a force, the integral measures the work done by the force on a material point traveling along the curve. Circulation is the tool with which **non-conservative** fields are recognized, as the characterization theorem shows.
+The name comes from physics: if $F$ is a force, the integral measures the work done by the force on a particle traveling along the curve. Circulation is the tool with which **non-conservative** fields are recognized, as the characterization theorem shows.
 :::
 
-:::esempio{titolo="Computation of a work"}
+:::esempio{titolo="Computing work"}
 Work of $F(x, y) = (y, x^2)$ along the segment from $(0, 0)$ to $(1, 1)$, parametrized by $r(t) = (t, t)$ with $t \in [0, 1]$. Since $r'(t) = (1, 1)$ and $F(r(t)) = (t, t^2)$, the work is
 $$
 \int_0^1 (t \cdot 1 + t^2 \cdot 1) \, dt = \frac{1}{2} + \frac{1}{3} = \frac{5}{6} .
@@ -58,7 +58,7 @@ $$
 :::definizione{#campo-conservativo titolo="Conservative field and potential"}
 A vector field $F$ continuous on a connected open set $A$ is said to be **conservative** in $A$ if there *exists* a function $U : A \to \mathbb{R}$ of class $C^1$ such that
 $$
-\nabla U(x) = F(x) \qquad \text{for every } x \in A .
+\nabla U(x) = F(x) \qquad \text{per ogni } x \in A .
 $$
 The function $U$ is called a **potential** of $F$ in $A$. In the plane the condition means $U_x = F_1$ and $U_y = F_2$; in space one adds $U_z = F_3$. The property **depends on the set** $A$: the same field can be conservative on an open set and fail to be so on a larger open set, as the counterexample of the rotation field shows.
 :::
@@ -72,7 +72,7 @@ Let $F$ be conservative on a connected open set $A$ with potential $U$ and let $
 $$
 \int_{\gamma} F \cdot dr = U(Q) - U(P) .
 $$
-The work depends **only on the endpoints** of the curve and not on the path joining them; in particular the circulation along *every* closed curve is zero. This theorem is the several-variable analogue of the fundamental theorem of integral calculus and in exercises it replaces the direct computation of the line integral: once a potential is found, the work is a difference of two values.
+The work depends **only on the endpoints** of the curve and not on the path joining them; in particular the circulation along *every* closed curve is zero. This theorem is the several-variable analogue of the fundamental theorem of calculus and in exercises it replaces the direct computation of the line integral: once a potential is found, the work is a difference of two values.
 
 ::grafico{xmin=-0.5 xmax=5 ymin=-0.6 ymax=3.6 uguale=1 curve="0.5+3.5*t,0.5+2*t,0,1;0.5+3.5*t,0.5+2*t+1.5*sin(pi*t),0,1;0.5+3.5*t,0.5+2*t-1.2*sin(pi*t),0,1" vettori="1.97,1.34,2.53,1.66;1.97,0.178,2.53,0.498;1.97,2.793,2.53,3.113" punti="0.5,0.5,pieno,P;4,2.5,pieno,Q" etichette="2.9,1.45,γ₁;0.9,2.2,γ₂;3.4,0.75,γ₃" titolo="Three curves from $P$ to $Q$: for a conservative field the work along each of them equals $U(Q) - U(P)$"}
 
@@ -81,7 +81,7 @@ Let $r : [a, b] \to A$ be a regular parametrization of $\gamma$ with $r(a) = P$ 
 $$
 g'(t) = \nabla U(r(t)) \cdot r'(t) = F(r(t)) \cdot r'(t) .
 $$
-By the **fundamental theorem of integral calculus**, therefore,
+By the **fundamental theorem of calculus**, therefore,
 $$
 \int_{\gamma} F \cdot dr = \int_a^b g'(t) \, dt = g(b) - g(a) = U(Q) - U(P) .
 $$
@@ -103,7 +103,7 @@ On a connected open set two potentials of the same field **differ by a constant*
 Let $F$ be a continuous vector field on a connected open set $A$. The following three conditions are equivalent.
 
 1. $F$ is conservative in $A$.
-2. The work of $F$ depends *only* on the endpoints: for every pair of piecewise regular curves in $A$ with the same endpoints and the same orientation, the two works coincide.
+2. The work of $F$ depends *only* on the endpoints: for every pair of piecewise regular curves in $A$ with the same endpoints and the same orientation, the work done along the two curves is equal.
 3. The circulation of $F$ along every piecewise regular closed curve in $A$ is zero.
 
 The theorem provides the criterion by which one proves that a field is not conservative: once *a single* closed curve with nonzero circulation is found, condition 3 is not satisfied, hence the potential **does not exist**. The same equivalence justifies the construction of the potential as work along a polygonal path.
@@ -111,7 +111,7 @@ The theorem provides the criterion by which one proves that a field is not conse
 :::dimostrazione
 Condition 1 implies condition 2 by the theorem on the work of a conservative field, since the work equals $U(Q) - U(P)$ whatever the curve from $P$ to $Q$.
 
-Conditions 2 and 3 are **equivalent**. If the work depends only on the endpoints and $\gamma$ is closed with initial and final point $P$, one fixes a point $Q$ of the trace different from $P$ and splits $\gamma$ into two arcs, $\gamma_1$ from $P$ to $Q$ and a second arc from $Q$ to $P$, whose opposite $\gamma_2$ goes from $P$ to $Q$; the works along $\gamma_1$ and along $\gamma_2$ coincide, therefore the work along $\gamma_1$ followed by $\gamma_2$ reversed, that is, along $\gamma$, is zero. Conversely, if every circulation is zero and $\gamma_1$, $\gamma_2$ are two curves from $P$ to $Q$, the curve obtained by traversing $\gamma_1$ and then $\gamma_2$ in the opposite direction is closed, hence its work is zero, and the works along $\gamma_1$ and $\gamma_2$ coincide.
+Conditions 2 and 3 are **equivalent**. If the work depends only on the endpoints and $\gamma$ is closed with initial and final point $P$, one fixes a point $Q$ of the trace different from $P$ and splits $\gamma$ into two arcs, $\gamma_1$ from $P$ to $Q$ and a second arc from $Q$ to $P$, whose reverse $\gamma_2$ goes from $P$ to $Q$; the work done along $\gamma_1$ equals that done along $\gamma_2$, therefore the work along $\gamma_1$ followed by $\gamma_2$ reversed, that is, along $\gamma$, is zero. Conversely, if every circulation is zero and $\gamma_1$, $\gamma_2$ are two curves from $P$ to $Q$, the curve obtained by traversing $\gamma_1$ and then $\gamma_2$ in the opposite direction is closed, hence its work is zero, and the work done along $\gamma_1$ equals that done along $\gamma_2$.
 
 Condition 2 implies condition 1. Fixing $P_0 \in A$, for every $x \in A$ one defines $U(x)$ as the work of $F$ along any piecewise regular curve in $A$ from $P_0$ to $x$; such a curve exists because a connected open subset of $\mathbb{R}^n$ is polygonally connected, and the value does not depend on the curve by the hypothesis. One verifies that $U_x = F_1$ at the point $(x, y)$: for small $h$ the horizontal segment from $(x, y)$ to $(x + h, y)$ is contained in $A$, and choosing as path to $(x + h, y)$ a path to $(x, y)$ followed by the segment one obtains
 $$
@@ -130,13 +130,13 @@ If $F = \nabla U$ on $A$ and $\gamma$ is a piecewise regular curve in $A$ from $
 :::definizione{#campo-irrotazionale titolo="Irrotational field (closed field)"}
 A field $F = (F_1, F_2)$ of class $C^1$ on an open set $A \subseteq \mathbb{R}^2$ is said to be **irrotational**, or **closed**, if
 $$
-\frac{\partial F_1}{\partial y}(x, y) = \frac{\partial F_2}{\partial x}(x, y) \qquad \text{for every } (x, y) \in A .
+\frac{\partial F_1}{\partial y}(x, y) = \frac{\partial F_2}{\partial x}(x, y) \qquad \text{per ogni } (x, y) \in A .
 $$
 In space the **curl** of a field $F = (F_1, F_2, F_3)$ of class $C^1$ is the vector field
 $$
-\operatorname{curl} F = \left( \frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z},\;\; \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x},\;\; \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y} \right),
+\operatorname{rot} F = \left( \frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z},\;\; \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x},\;\; \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y} \right),
 $$
-and $F$ is said to be irrotational if $\operatorname{curl} F = (0, 0, 0)$ at every point of $A$. The condition in the plane is the special case with $F_3 = 0$ and components independent of $z$: only the third component of the curl remains. Irrotationality is verified with a computation of partial derivatives, therefore in exercises it is always the *first* check on a given field.
+and $F$ is said to be irrotational if $\operatorname{rot} F = (0, 0, 0)$ at every point of $A$. The condition in the plane is the special case with $F_3 = 0$ and components independent of $z$: only the third component of the curl remains. Irrotationality is verified with a computation of partial derivatives, therefore in exercises it is always the *first* check on a given field.
 :::
 
 ::::teorema{#conservativo-implica-irrotazionale titolo="A conservative field of class C¹ is irrotational"}
@@ -193,15 +193,15 @@ Let $F$ be a field of class $C^1$ that is irrotational on a simply connected ope
 $$
 \begin{cases}
 \dfrac{\partial F_1}{\partial y} = \dfrac{\partial F_2}{\partial x} \ \text{in } A \\[10pt]
-A \ \text{simply connected}
+A \ \text{semplicemente connesso}
 \end{cases}
-\implies F \ \text{conservative in } A .
+\implies F \ \text{conservativo in } A .
 $$
 In the plane, for a domain whose boundary is a closed curve contained in $A$ together with the enclosed region, the proof follows from **Green's theorem**: the circulation is the double integral of $\dfrac{\partial F_2}{\partial x} - \dfrac{\partial F_1}{\partial y}$, which is the zero function, hence every circulation of this type is zero. The general proof requires homotopy theory and is omitted. The counterexample of the rotation field shows that the hypothesis on the domain *cannot* be removed; on an open set that is not simply connected the theorem gives no information and the analysis proceeds by direct computation of the circulations around the holes.
 :::
 
 :::osservazione
-A field that is irrotational on an arbitrary open set $A$ is **conservative** on *every* simply connected open set contained in $A$. The rotation field, not conservative on $\mathbb{R}^2 \setminus \{(0,0)\}$, is conservative on the half-plane $x > 0$, where a potential is $U(x, y) = \arctan \dfrac{y}{x}$. Being conservative is therefore a **property of the pair field and domain**, not of the field alone.
+A field that is irrotational on an arbitrary open set $A$ is **conservative** on *every* simply connected open set contained in $A$. The rotation field, not conservative on $\mathbb{R}^2 \setminus \{(0,0)\}$, is conservative on the half-plane $x > 0$, where a potential is $U(x, y) = \arctan \dfrac{y}{x}$. Being conservative is therefore a **property of the pair consisting of the field and its domain**, not of the field alone.
 :::
 
 ## Construction of the potential
@@ -218,7 +218,7 @@ and is constructed in two steps. From the first equation, integrating $F_1$ with
 $$
 U(x, y) = \int F_1(x, y) \, dx + c(y),
 $$
-where the constant of integration $c(y)$ is a **function of $y$ alone**, since the partial derivative with respect to $x$ of a function of $y$ is zero. Differentiating this expression with respect to $y$ and imposing the second equation one finds $c'(y)$, and with an integration in $y$ one obtains $c(y)$ up to a constant. If the field is conservative, $c'(y)$ turns out to be a function of $y$ alone; if the variable $x$ remains in the expression of $c'(y)$, the field **is not conservative**. In space the procedure has three steps, with a function $c(y, z)$ at the first step and a function $c(z)$ at the second.
+where the constant of integration $c(y)$ is a **function only of** $y$, since the partial derivative with respect to $x$ of a function of $y$ is zero. Differentiating this expression with respect to $y$ and imposing the second equation one finds $c'(y)$, and with an integration in $y$ one obtains $c(y)$ up to a constant. If the field is conservative, $c'(y)$ turns out to be a function of $y$ alone; if the expression for $c'(y)$ still contains the variable $x$, the field **is not conservative**. In space the procedure has three steps, with a function $c(y, z)$ at the first step and a function $c(z)$ at the second.
 :::
 
 :::esempio{titolo="Construction of a potential"}
@@ -267,7 +267,7 @@ The theorem connects the **circulation along the boundary** with a **double inte
 :::dimostrazione
 We prove the identity for a domain $D$ normal with respect to both axes; the general case follows by decomposing the regular domain into normal domains and adding the identities, since the inner cuts are traversed twice in opposite directions and their contributions to the circulation **cancel**.
 
-First step, the identity $\displaystyle\oint_{\partial D} F_1 \, dx = - \iint_D \frac{\partial F_1}{\partial y} \, dx \, dy$ for $D$ normal with respect to the $x$-axis, with $a \leq x \leq b$ and $g_1(x) \leq y \leq g_2(x)$. By the **reduction theorem** and by the **fundamental theorem of integral calculus** applied to the variable $y$,
+First step, the identity $\displaystyle\oint_{\partial D} F_1 \, dx = - \iint_D \frac{\partial F_1}{\partial y} \, dx \, dy$ for $D$ normal with respect to the $x$-axis, with $a \leq x \leq b$ and $g_1(x) \leq y \leq g_2(x)$. By the **reduction theorem** and by the **fundamental theorem of calculus** applied to the variable $y$,
 $$
 \begin{aligned}
 \iint_D \frac{\partial F_1}{\partial y} \, dx \, dy
