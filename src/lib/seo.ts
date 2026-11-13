@@ -1,4 +1,4 @@
-import { CODICI_LINGUA } from '../data/codici-lingua.mjs';
+import { LINGUE_PUBBLICHE } from '../data/codici-lingua.mjs';
 import { nellaLingua, type Lingua } from './lingue-sito';
 
 // Dati per i motori di ricerca: indirizzo del sito, organizzazione, briciole di pane.
@@ -52,7 +52,7 @@ export function sitoWeb(lingua: Lingua) {
     name: 'Ripetizioni di Analisi',
     alternateName: 'ripetizionidianalisi.com',
     url: `${SITO}/`,
-    inLanguage: CODICI_LINGUA,
+    inLanguage: LINGUE_PUBBLICHE,
     publisher: { '@id': `${SITO}/#organizzazione` },
     potentialAction: {
       '@type': 'SearchAction',

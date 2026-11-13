@@ -1,4 +1,5 @@
-import { CODICI_LINGUA, LINGUE_CATALOGO, LINGUE_TRADOTTE, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { LINGUE_CATALOGO, LINGUE_TRADOTTE, linguaPubblica, prefissoLingua, prefissoLinguaSospesa } from '../src/data/codici-lingua.mjs';
+import { PARAMETRO_CATALOGO } from '../src/data/cataloghi-studio.mjs';
 
 // Preferenza esplicita nel cookie, altrimenti lingua del browser.
 // Il Worker reindirizza solo a pagine presenti nell'indice di build.
@@ -15,7 +16,7 @@ async function pagineTradotte(env) {
     const dati = await r.json();
     // I primi build pubblicavano direttamente l'elenco inglese.
     const perLingua = Array.isArray(dati) ? { en: dati } : dati;
-    elenco = Object.fromEntries(LINGUE_TRADOTTE.map((l) => [l, new Set(perLingua[l] ?? [])]));
+    elenco = Object.fromEntries(LINGUE_TRADOTTE.filter(linguaPubblica).map((l) => [l, new Set(perLingua[l] ?? [])]));
     return elenco;
   } catch { return {}; }
 }
@@ -43,14 +44,27 @@ export function navigazioneVisitatore(req) {
 
 // Restituisce la risposta di reindirizzamento, oppure null se la pagina va servita così com'è.
 export async function versoLaLinguaGiusta(req, env, url) {
+  const percorso = url.pathname.replace(/\.html$/, '').replace(/\/$/, '').replace(/\/index$/, '') || '/';
+  const sospesa = prefissoLinguaSospesa(percorso);
+  if (sospesa) {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return new Response(null, { status: 404 });
+    const meta = new URL(url);
+    meta.pathname = '/' + percorso.slice(sospesa.length).replace(/^\/+/, '');
+    meta.searchParams.delete(PARAMETRO_CATALOGO);
+    meta.searchParams.set('lingua', 'it');
+    return new Response(null, {
+      status: 302,
+      headers: { location: meta.pathname + meta.search, 'cache-control': 'private, no-store' },
+    });
+  }
+
   if (!navigazioneVisitatore(req)) return null;
-  if (url.searchParams.has('lingua')) return null; // scelta esplicita nell'indirizzo: si rispetta
-  const percorso = url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
+  if (linguaPubblica(url.searchParams.get('lingua'))) return null;
 
   const scelta = leggiCookie(req, 'lingua');
   const browser = linguaBrowser(req.headers.get('accept-language'));
-  const sceltaEsplicita = CODICI_LINGUA.includes(scelta);
-  const voluta = sceltaEsplicita ? scelta : CODICI_LINGUA.includes(browser) ? browser : browser ? 'en' : null;
+  const sceltaEsplicita = linguaPubblica(scelta);
+  const voluta = sceltaEsplicita ? scelta : linguaPubblica(browser) ? browser : browser ? 'en' : null;
   if (!voluta) return null;
 
   const prefisso = prefissoLingua(percorso);
@@ -68,6 +82,7 @@ export async function versoLaLinguaGiusta(req, env, url) {
 
   const meta = new URL(url);
   meta.pathname = lingua === 'it' ? italiano : `/${lingua}${italiano === '/' ? '' : italiano}`;
+  meta.searchParams.delete('lingua');
   return new Response(null, {
     status: 302,
     headers: { location: meta.pathname + meta.search + meta.hash, 'cache-control': 'private, no-store', vary: 'Accept-Language, Cookie' },
