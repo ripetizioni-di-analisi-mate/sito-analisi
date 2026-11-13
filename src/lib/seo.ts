@@ -1,4 +1,4 @@
-import { CODICI_LINGUA } from '../data/codici-lingua.mjs';
+import { CODICI_LINGUA, LINGUE_TRADOTTE_PUBBLICHE } from '../data/codici-lingua.mjs';
 import { nellaLingua, type Lingua } from './lingue-sito';
 
 // Dati per i motori di ricerca: indirizzo del sito, organizzazione, briciole di pane.
@@ -44,7 +44,7 @@ export function briciole(voci: { nome: string; url: string }[]) {
   };
 }
 
-// Il sito nel suo insieme, con le due lingue in cui è scritto: aiuta i motori a mostrare il nome giusto.
+// Il sito nel suo insieme, con le lingue pubblicate.
 export function sitoWeb(lingua: Lingua) {
   return {
     '@type': 'WebSite',
@@ -52,7 +52,7 @@ export function sitoWeb(lingua: Lingua) {
     name: 'Ripetizioni di Analisi',
     alternateName: 'ripetizionidianalisi.com',
     url: `${SITO}/`,
-    inLanguage: CODICI_LINGUA,
+    inLanguage: LINGUE_TRADOTTE_PUBBLICHE ? CODICI_LINGUA : ['it'],
     publisher: { '@id': `${SITO}/#organizzazione` },
     potentialAction: {
       '@type': 'SearchAction',

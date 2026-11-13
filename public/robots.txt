@@ -23,8 +23,6 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /account
 Disallow: /accedi
-Disallow: /en/account
-Disallow: /en/accedi
 Disallow: /vetrine/
 Disallow: /*/stampa
 Disallow: /dati-domande/
@@ -32,13 +30,11 @@ Disallow: /dati-compatibilita/
 Disallow: /dati-risposte/
 Disallow: /dati-email/
 Disallow: /reimposta-password
-Disallow: /en/reimposta-password
 Disallow: /promemoria/
 Disallow: /prenota/confermata
 Disallow: /prenota/gestisci
 Disallow: /corsi-di-gruppo/la-tua-iscrizione
 Disallow: /invito/
 Disallow: /cerca?
-Disallow: /en/cerca?
 
 Sitemap: https://ripetizionidianalisi.com/sitemap.xml

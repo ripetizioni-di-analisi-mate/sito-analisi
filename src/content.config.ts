@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob, type LoaderContext } from 'astro/loaders';
 import { CATALOGO_USA_PUBBLICO } from './data/cataloghi-studio.mjs';
+import { LINGUE_TRADOTTE_PUBBLICHE } from './data/codici-lingua.mjs';
 import { parseFrontmatter } from '@astrojs/markdown-remark';
 import { glob as cerca } from 'tinyglobby';
 import fs from 'node:fs/promises';
@@ -99,23 +100,24 @@ const domande = defineCollection({
   schema: z.object({ corretta: z.number().int().min(1).max(5) }),
 });
 
+const raccoltaSospesa = {
+  name: 'raccolta-sospesa',
+  async load({ store }: LoaderContext) { store.clear(); },
+};
+
 // Traduzioni inglesi: stessa struttura, in src/content-en/. Quando una voce manca si mostra l'italiano.
-const teoria_en = defineCollection({ loader: senzaHtml('./src/content-en/teoria', ['*/*.md', ...escludi]), schema: teoria.schema });
-const svolti_en = defineCollection({ loader: senzaHtml('./src/content-en/svolti'), schema: svolti.schema });
-const domande_en = defineCollection({ loader: senzaHtml('./src/content-en/domande'), schema: domande.schema });
-const dafare_en = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }), schema: dafare.schema });
+const teoria_en = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-en/teoria', ['*/*.md', ...escludi]) : raccoltaSospesa, schema: teoria.schema });
+const svolti_en = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-en/svolti') : raccoltaSospesa, schema: svolti.schema });
+const domande_en = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-en/domande') : raccoltaSospesa, schema: domande.schema });
+const dafare_en = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-en/dafare' }) : raccoltaSospesa, schema: dafare.schema });
 
 // Corsi americani: stessa struttura, in src/content-us/, con lo slug del corso al posto della materia
 // (src/content-us/teoria/physics-1-mechanics/<argomento>.md). I contenuti sono scritti in inglese sul
 // programma americano, non tradotti dall'italiano.
-const catalogoUsaSospeso = {
-  name: 'catalogo-usa-sospeso',
-  async load({ store }: LoaderContext) { store.clear(); },
-};
-const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/teoria', ['*/*.md']) : catalogoUsaSospeso, schema: teoria.schema });
-const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/svolti', ['*/*/*.md']) : catalogoUsaSospeso, schema: svolti.schema });
-const dafare_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }) : catalogoUsaSospeso, schema: dafare.schema });
-const domande_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/domande', ['*/*/*.md']) : catalogoUsaSospeso, schema: domande.schema });
+const teoria_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/teoria', ['*/*.md']) : raccoltaSospesa, schema: teoria.schema });
+const svolti_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/svolti', ['*/*/*.md']) : raccoltaSospesa, schema: svolti.schema });
+const dafare_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? glob({ pattern: ['*/*/*.md'], base: './src/content-us/dafare' }) : raccoltaSospesa, schema: dafare.schema });
+const domande_us = defineCollection({ loader: CATALOGO_USA_PUBBLICO ? senzaHtml('./src/content-us/domande', ['*/*/*.md']) : raccoltaSospesa, schema: domande.schema });
 
 // Formulari gratuiti: src/content/formulari/<materia>.md (pagina /formulari/<materia>, PDF con account gratuito).
 const formulari = defineCollection({
@@ -127,11 +129,11 @@ const formulari = defineCollection({
   }),
 });
 // Formulari in inglese: src/content-en/formulari/<materia>.md (pagina /en/formulari/<materia>).
-const formulari_en = defineCollection({ loader: glob({ pattern: ['*.md'], base: './src/content-en/formulari' }), schema: formulari.schema });
+const formulari_en = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? glob({ pattern: ['*.md'], base: './src/content-en/formulari' }) : raccoltaSospesa, schema: formulari.schema });
 
-const teoria_es = defineCollection({ loader: senzaHtml('./src/content-es/teoria', ['*/*.md', ...escludi]), schema: teoria.schema });
-const svolti_es = defineCollection({ loader: senzaHtml('./src/content-es/svolti'), schema: svolti.schema });
-const dafare_es = defineCollection({ loader: glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/dafare' }), schema: dafare.schema });
-const domande_es = defineCollection({ loader: senzaHtml('./src/content-es/domande'), schema: domande.schema });
+const teoria_es = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-es/teoria', ['*/*.md', ...escludi]) : raccoltaSospesa, schema: teoria.schema });
+const svolti_es = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-es/svolti') : raccoltaSospesa, schema: svolti.schema });
+const dafare_es = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? glob({ pattern: ['*/*/*.md', ...escludi], base: './src/content-es/dafare' }) : raccoltaSospesa, schema: dafare.schema });
+const domande_es = defineCollection({ loader: LINGUE_TRADOTTE_PUBBLICHE ? senzaHtml('./src/content-es/domande') : raccoltaSospesa, schema: domande.schema });
 
 export const collections = { teoria, svolti, dafare, domande, domande_en, teoria_en, svolti_en, dafare_en, teoria_es, svolti_es, dafare_es, domande_es, teoria_us, svolti_us, dafare_us, domande_us, formulari, formulari_en };

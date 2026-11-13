@@ -1,4 +1,5 @@
-import { CODICI_LINGUA, LINGUE_CATALOGO, LINGUE_TRADOTTE, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { CODICI_LINGUA, LINGUE_CATALOGO, LINGUE_TRADOTTE, LINGUE_TRADOTTE_PUBBLICHE, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { PARAMETRO_CATALOGO } from '../src/data/cataloghi-studio.mjs';
 
 // Preferenza esplicita nel cookie, altrimenti lingua del browser.
 // Il Worker reindirizza solo a pagine presenti nell'indice di build.
@@ -41,8 +42,26 @@ export function navigazioneVisitatore(req) {
   return req.method === 'GET' && Boolean(ua) && !NON_PERSONE.test(ua);
 }
 
+function versoItaliano(req, url) {
+  const prefisso = prefissoLingua(url.pathname);
+  const pdf = url.pathname.match(/^\/pdf\/formulari\/en\/([a-z0-9-]+)\.pdf$/);
+  if (!prefisso && !pdf) return null;
+  if (req.method !== 'GET' && req.method !== 'HEAD') return new Response(null, { status: 404 });
+
+  const meta = new URL(url);
+  const percorso = url.pathname.slice(prefisso.length).replace(/\.html$/, '').replace(/\/index\/?$/, '');
+  meta.pathname = pdf ? `/pdf/formulari/${pdf[1]}.pdf` : `/${percorso.replace(/^\/+/, '')}`;
+  meta.searchParams.delete('lingua');
+  meta.searchParams.delete(PARAMETRO_CATALOGO);
+  return new Response(null, {
+    status: 302,
+    headers: { location: meta.pathname + meta.search, 'cache-control': 'private, no-store' },
+  });
+}
+
 // Restituisce la risposta di reindirizzamento, oppure null se la pagina va servita così com'è.
 export async function versoLaLinguaGiusta(req, env, url) {
+  if (!LINGUE_TRADOTTE_PUBBLICHE) return versoItaliano(req, url);
   if (!navigazioneVisitatore(req)) return null;
   if (url.searchParams.has('lingua')) return null; // scelta esplicita nell'indirizzo: si rispetta
   const percorso = url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';

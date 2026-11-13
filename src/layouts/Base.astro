@@ -12,6 +12,7 @@ import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import StudyCountry from '../components/StudyCountry.astro';
 import { CATALOGO_PREDEFINITO, CATALOGO_USA_PUBBLICO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
+import { LINGUE_TRADOTTE_PUBBLICHE } from '../data/codici-lingua.mjs';
 import { linkArgomentoUsa, materieUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { calculusSlug } from '../lib/stem-usa-practice';
 import { usTimedTopics } from '../lib/stem-usa-banks';
@@ -63,14 +64,14 @@ const de = lingua === 'de';
 const es = lingua === 'es';
 const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
-const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
+const cambioLingua = LINGUE_TRADOTTE_PUBBLICHE ? LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
   ...l,
   href: usa ? `${link(l.codice, '/')}?${PARAMETRO_CATALOGO}=${CATALOGO_PREDEFINITO}&lingua=${l.codice}`
     : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
     : linguaCatalogo(l.codice) ? destinazioneLocalizzata(l.codice, versioneIt)
     : l.codice === 'en' && (seo.senzaInglese || (seo.soloQuestaLingua && !localizzato))
       ? link('en', '/') : altraLingua(Astro.url.pathname, l.codice),
-}));
+})) : [];
 const versoIt = altraLingua(Astro.url.pathname, 'it');
 const legali = ['/privacy', '/termini', '/rimborsi'].map((path) => ({
   path, href: localizzato ? `${link('it', path)}?lingua=it` : link(lingua, path),
@@ -82,13 +83,13 @@ const domandeMateria = (usa ? { ...usTimedTopics, ...domandeUsMd } : domandeDisp
 const domandeQui = Boolean(argomento && domandeMateria.includes(argomento));
 const catalogoPercorso = {
   ...creaCatalogoStudio(materieL(lingua), domandeDisponibili, lingua),
-  ...Object.fromEntries(Object.entries({ ...usTimedTopics, ...domandeUsMd }).map(([slug, topics]) => [slug, {
+  ...(CATALOGO_USA_PUBBLICO ? Object.fromEntries(Object.entries({ ...usTimedTopics, ...domandeUsMd }).map(([slug, topics]) => [slug, {
     titolo: materiaUsa(slug)!.titolo,
     argomenti: topics,
     domande: topics,
     ripasso: 'Timed review',
     base: courseUrl(slug),
-  }])),
+  }])) : {}),
 };
 const en = lingua === 'en';
 const homeCurriculum = usa ? url('/us') : link(lingua, '/');
@@ -122,11 +123,11 @@ const versioniLocalizzate = lingueLocalizzate(versioneIt).map((l) => ({ l, path:
 // e non si dichiarano versioni in altre lingue (le dichiara l'originale).
 const canonico = assoluto(nonTradotta ? versioneIt : seo.canonico ? link(lingua, seo.canonico) : qui);
 const bilingue = !usa && !seo.soloQuestaLingua && !nonTradotta && sezione !== 'stampa' && !seo.canonico;
-const alternati = [
+const alternati = LINGUE_TRADOTTE_PUBBLICHE ? [
   ...(bilingue || (localizzato && versioniLocalizzate.length > 0) ? [{ l: 'it', path: versioneIt }] : []),
   ...(bilingue && !seo.senzaInglese ? [{ l: 'en', path: versioneEn }, { l: 'x-default', path: versioneEn }] : []),
   ...versioniLocalizzate,
-];
+] : [];
 const noindex = seo.noindex || nonTradotta || sezione === 'stampa';
 // Google e Bing mostrano circa 155-160 caratteri: le descrizioni più lunghe si chiudono a fine parola con «…».
 const taglia = (x: string, n = 160) => (x.length <= n ? x : `${x.slice(0, x.lastIndexOf(' ', n - 1)).replace(/[\s,;:.]+$/, '')}…`);
@@ -297,12 +298,12 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           </>
         )}
       </div>
-      <details class="selettore-lingua">
+      {cambioLingua.length > 0 && <details class="selettore-lingua">
         <summary class="bottone-lingua" aria-label={t.lingua} title={t.lingua}>{lingua.toUpperCase()}</summary>
         <ul>
           {cambioLingua.map(({ codice, nome, href }) => <li><a href={href} hreflang={codice} lang={codice} data-lingua={codice}>{nome}</a></li>)}
         </ul>
-      </details>
+      </details>}
       <button class="bottone-indice" type="button" aria-label={t.indice} data-apri-indice>
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
         <span>{t.indice}</span>

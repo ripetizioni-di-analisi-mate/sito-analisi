@@ -8,7 +8,7 @@ import { archivioEmail, creaTabelleEmail, eseguiEmailAutomatiche, esempioEmail, 
 //  - dashboard riservata /admin (iscritti, pagamenti, visite, attivazioni manuali);
 //  - webhook Paddle: l'acquisto sblocca la materia nell'account dell'acquirente.
 // Le materie a pagamento sono quelle di src/data/prezzi.json.
-import { CODICI_LINGUA, prefissoLingua } from '../src/data/codici-lingua.mjs';
+import { CODICI_LINGUA, LINGUE_TRADOTTE_PUBBLICHE, prefissoLingua } from '../src/data/codici-lingua.mjs';
 import { versoLaLinguaGiusta } from './lingua.mjs';
 import { versoCatalogoStudio } from './catalogo-studio.mjs';
 import { CATALOGO_USA_PUBBLICO } from '../src/data/cataloghi-studio.mjs';
@@ -939,7 +939,7 @@ export default {
       const [, , materia, valore, resto] = p.split('/');
       const codice = codicePromozione(valore);
       if (resto !== undefined || !Object.hasOwn(PREZZI, materia) || !codice) return new Response('Offerta non valida.', { status: 404 });
-      const lingua = url.searchParams.get('l') === 'en' ? '/en' : '';
+      const lingua = LINGUE_TRADOTTE_PUBBLICHE && url.searchParams.get('l') === 'en' ? '/en' : '';
       return new Response(null, { status: 303, headers: {
         location: lingua + '/' + materia + '/sblocca', 'cache-control': 'private, no-store', 'referrer-policy': 'no-referrer',
         'set-cookie': 'offerta-' + materia + '=' + codice + '; Path=/; Max-Age=604800; HttpOnly; Secure; SameSite=Lax',
