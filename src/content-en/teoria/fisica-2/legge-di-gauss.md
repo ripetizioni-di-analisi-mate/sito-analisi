@@ -1,6 +1,6 @@
 ---
-titolo: Electric flux and Gauss's law
-sommario: What the flux of the electric field through a surface measures, why the outward flux through a closed surface depends only on the enclosed charge, how Gauss's law gives the field of distributions with spherical, cylindrical and planar symmetry, and what its local form is.
+titolo: Flusso del campo elettrico e legge di Gauss
+sommario: Che cosa misura il flusso del campo elettrico attraverso una superficie, perché il flusso uscente da una superficie chiusa dipende solo dalla carica racchiusa, come la legge di Gauss dà il campo delle distribuzioni con simmetria sferica, cilindrica e piana, e qual è la sua forma locale.
 ---
 
 ## Electric flux
@@ -22,7 +22,7 @@ If the surface is flat, with area $A$, and the field is uniform, the integrand i
 $$
 \Phi_E = E A \cos\theta .
 $$
-The flux is maximum when the field is perpendicular to the surface, that is, parallel to $\hat{n}$, and it is zero when the field is parallel to the surface. A square of side $0.10\,\mathrm{m}$ in a uniform field of $2.0 \cdot 10^3\,\mathrm{N/C}$ making the angle $\theta = 30^\circ$ with the normal is crossed by the flux $2.0 \cdot 10^3 \cdot 0.010 \cdot \cos 30^\circ\,\mathrm{N \cdot m^2/C} \approx 17\,\mathrm{N \cdot m^2/C}$.
+The flux is maximum when the field is perpendicular to the surface, that is, parallel to $\hat{n}$, and it is zero when the field is parallel to the surface. For a square of side $0{,}10\,\mathrm{m}$ in a uniform field of $2{,}0 \cdot 10^3\,\mathrm{N/C}$ making the angle $\theta = 30^\circ$ with the normal, the flux is $2{,}0 \cdot 10^3 \cdot 0{,}010 \cdot \cos 30^\circ\,\mathrm{N \cdot m^2/C} \approx 17\,\mathrm{N \cdot m^2/C}$.
 
 ::grafico{assi=0 uguale=1 linee="1.972,2.726 4.028,0.274" segmenti="0,0.4,5.8,0.4;0,0.95,5.8,0.95;0,1.5,5.8,1.5;0,2.05,5.8,2.05;0,2.6,5.8,2.6" vettori="0.1,2.6,1.5,2.6,E;3,1.5,3.996,2.336,n̂" punti="3,1.5,pieno" etichette="3.908,1.728,θ;1.622,2.826,S" xmin=-0.2 xmax=6 ymin=-0.1 ymax=3.1 titolo="Flat surface $S$ in a uniform field; the flux $\Phi_E = E A \cos\theta$ depends on the angle $\theta$ between $\vec{E}$ and the normal $\hat{n}$"}
 
@@ -47,7 +47,7 @@ A cube of edge $\ell$ is in a uniform field $\vec{E} = E\,\hat{\imath}$, with it
 $$
 \Phi_E = -E\ell^2 + E\ell^2 + 0 = 0 .
 $$
-Every field line that enters the cube leaves it, and the two contributions cancel. With $E = 2.0 \cdot 10^3\,\mathrm{N/C}$ and $\ell = 0.10\,\mathrm{m}$ each of the two faces perpendicular to the field is crossed by a flux of magnitude $20\,\mathrm{N \cdot m^2/C}$, and the total flux is zero.
+Every field line that enters the cube leaves it, and the two contributions cancel. With $E = 2{,}0 \cdot 10^3\,\mathrm{N/C}$ and $\ell = 0{,}10\,\mathrm{m}$ the magnitude of the flux through each of the two faces perpendicular to the field is $20\,\mathrm{N \cdot m^2/C}$, and the total flux is zero.
 
 ::grafico{unicolore=1 assi=0 uguale=1 poligoni="2,0.5 4,0.5 4,2.5 2,2.5" segmenti="0,0.9,6,0.9;0,1.5,6,1.5;0,2.1,6,2.1" vettori="0.1,2.1,1.4,2.1,E;2,1.5,1,1.5,n̂₁;4,1.5,5,1.5,n̂₂" etichette="2.1,2.75,face 1;3.35,2.75,face 2" xmin=-0.1 xmax=6.1 ymin=0.1 ymax=3.1 titolo="Cube in a uniform field, seen from the side; the flux is $-E\ell^2$ through face 1, $+E\ell^2$ through face 2 and zero through the faces parallel to the field, so the total flux is zero"}
 
@@ -64,7 +64,7 @@ The outward flux of the field of a point charge $q$ through a sphere of radius $
 $$
 \Phi_E = \frac{q}{\varepsilon_0} ,
 $$
-whatever the radius $R$. The result depends on the $\dfrac{1}{r^2}$ law of the field, because the area of the sphere grows as $R^2$ and the two factors cancel. For a charge of $1.0\,\mathrm{nC}$ the flux is $\dfrac{1.0 \cdot 10^{-9}}{8.85 \cdot 10^{-12}}\,\mathrm{N \cdot m^2/C} \approx 113\,\mathrm{N \cdot m^2/C}$.
+whatever the radius $R$. The result depends on the $\dfrac{1}{r^2}$ law of the field, because the area of the sphere grows as $R^2$ and the two factors cancel. For a charge of $1{,}0\,\mathrm{nC}$ the flux is $\dfrac{1{,}0 \cdot 10^{-9}}{8{,}85 \cdot 10^{-12}}\,\mathrm{N \cdot m^2/C} \approx 113\,\mathrm{N \cdot m^2/C}$.
 
 :::dimostrazione
 On the sphere the outward unit normal is $\hat{n} = \hat{r}$ and the field has the same magnitude at every point, so $\vec{E} \cdot \hat{n} = \dfrac{q}{4\pi\varepsilon_0 R^2}$ is constant over the whole surface. Therefore
@@ -79,7 +79,7 @@ Let $dA$ be a surface element at distance $r$ from a point $O$, with unit normal
 $$
 d\Omega = \frac{\hat{r} \cdot \hat{n}\, dA}{r^2} = \frac{dA \cos\alpha}{r^2} .
 $$
-The product $dA\cos\alpha$ is the projection of the element onto the sphere of center $O$ and radius $r$; dividing by $r^2$ gives the area that the cone with vertex $O$ resting on the element cuts out on the sphere of unit radius. The solid angle is measured in steradians ($\mathrm{sr}$), is dimensionless and has the sign of $\cos\alpha$. A sphere of radius $R$ is seen from its center under the solid angle $\dfrac{4\pi R^2}{R^2} = 4\pi$, which is the maximum value, corresponding to all directions in space.
+The product $dA\cos\alpha$ is the projection of the element onto the sphere of center $O$ and radius $r$; dividing by $r^2$ gives the area that the cone with vertex $O$ whose rays pass through the element cuts out on the sphere of unit radius. The solid angle is measured in steradians ($\mathrm{sr}$), is dimensionless and has the sign of $\cos\alpha$. A sphere of radius $R$ is seen from its center under the solid angle $\dfrac{4\pi R^2}{R^2} = 4\pi$, which is the maximum value, corresponding to all directions in space.
 
 ::grafico{unicolore=1 assi=0 uguale=1 curve="4*cos(t),4*sin(t),0.176,0.543;cos(t),sin(t),0.236,0.483" linee="3.267,1.712 4.25,1.024" segmenti="0,0,3.659,1.918;0,0,4.76,1.147;3.759,1.368,4.98,1.813" vettori="0,0,3.759,1.368;3.759,1.368,4.447,2.351,n̂" punti="0,0,pieno,q" etichette="4.483,1.736,α;4.2,0.574,dA;1.15,0.3,dΩ;1.9,0.95,r" xmin=-0.5 xmax=5.6 ymin=-0.6 ymax=2.9 titolo="The element $dA$, with normal $\hat{n}$ tilted by $\alpha$ with respect to the radial direction, is seen from the charge $q$ under the solid angle $d\Omega = \dfrac{dA \cos\alpha}{r^2}$, which cuts out the area $d\Omega$ on the sphere of unit radius"}
 
@@ -90,7 +90,7 @@ Let $S$ be a closed surface with no point charges on it, and let $q_{\text{int}}
 $$
 \oint_S \vec{E} \cdot \hat{n}\, dA = \frac{q_{\text{int}}}{\varepsilon_0} .
 $$
-The field $\vec{E}$ is the one produced by *all* the charges, inside and outside, while the flux depends *only* on the charges inside. If the charge is distributed with volume density $\rho$, the enclosed charge is $q_{\text{int}} = \displaystyle\iiint_V \rho\, dV$, where $V$ is the region enclosed by $S$. The law relates the field to the charges that produce it and, for distributions with high symmetry, makes it possible to compute the field without summing the contributions of the individual charges. A closed surface enclosing the charges $+3.0\,\mathrm{nC}$ and $-1.0\,\mathrm{nC}$ is crossed by the outward flux $\dfrac{2.0 \cdot 10^{-9}}{8.85 \cdot 10^{-12}}\,\mathrm{N \cdot m^2/C} \approx 226\,\mathrm{N \cdot m^2/C}$, whatever its shape.
+The field $\vec{E}$ is the one produced by *all* the charges, inside and outside, while the flux depends *only* on the charges inside. If the charge is distributed with volume density $\rho$, the enclosed charge is $q_{\text{int}} = \displaystyle\iiint_V \rho\, dV$, where $V$ is the region enclosed by $S$. The law relates the field to the charges that produce it and, for distributions with high symmetry, makes it possible to compute the field without summing the contributions of the individual charges. For a closed surface enclosing the charges $+3{,}0\,\mathrm{nC}$ and $-1{,}0\,\mathrm{nC}$, the outward flux is $\dfrac{2{,}0 \cdot 10^{-9}}{8{,}85 \cdot 10^{-12}}\,\mathrm{N \cdot m^2/C} \approx 226\,\mathrm{N \cdot m^2/C}$, whatever the shape of the surface.
 
 ::grafico{assi=0 uguale=1 curve="2.6*cos(t)+0.3*cos(2*t),1.6*sin(t)+0.25*sin(3*t),0,6.29" punti="-1,0.35,pieno,+q₁;0.9,-0.45,pieno,−q₂;3.7,1.3,pieno,+q₃" etichette="-2.1,1.45,S" xmin=-3.2 xmax=4.6 ymin=-2 ymax=2 titolo="The flux of the field through the closed surface $S$ is $\dfrac{q_1 - q_2}{\varepsilon_0}$; the outside charge $q_3$ changes the field on $S$ without contributing to the total flux"}
 
@@ -136,11 +136,11 @@ Consider a thin spherical shell of radius $R$ with charge $Q$ distributed unifor
 $$
 \vec{E} =
 \begin{cases}
-\vec{0} & \text{if } r < R \\[8pt]
-\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q}{r^2}\,\hat{r} & \text{if } r > R
+\vec{0} & \text{se } r < R \\[8pt]
+\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q}{r^2}\,\hat{r} & \text{se } r > R
 \end{cases}
 $$
-where $\hat{r}$ is the radial unit vector pointing outward from the center. Outside, the shell produces the same field as a point charge $Q$ placed at the center, and inside the field is zero. With $Q = 5.0\,\mathrm{nC}$ and $R = 0.20\,\mathrm{m}$, at $0.40\,\mathrm{m}$ from the center the field is $\dfrac{8.99 \cdot 10^9 \cdot 5.0 \cdot 10^{-9}}{0.40^2}\,\mathrm{N/C} \approx 281\,\mathrm{N/C}$, and at every interior point it is zero. The same result holds for the gravitational force of a shell of mass; see the topic on gravitation in Physics 1.
+where $\hat{r}$ is the radial unit vector pointing outward from the center. Outside, the shell produces the same field as a point charge $Q$ placed at the center, and inside the field is zero. With $Q = 5{,}0\,\mathrm{nC}$ and $R = 0{,}20\,\mathrm{m}$, at $0{,}40\,\mathrm{m}$ from the center the field is $\dfrac{8{,}99 \cdot 10^9 \cdot 5{,}0 \cdot 10^{-9}}{0{,}40^2}\,\mathrm{N/C} \approx 281\,\mathrm{N/C}$, and at every interior point it is zero. The same result holds for the gravitational force of a shell of mass; see the topic on gravitation in Physics 1.
 
 :::dimostrazione
 The distribution remains the same under every rotation about an axis through the center, so the field must also remain the same. It follows that the magnitude of the field depends only on the distance $r$ from the center, and that the field is radial, $\vec{E} = E(r)\,\hat{r}$, because a component perpendicular to $\hat{r}$ would change direction under a rotation about the line joining the center to the point, while the distribution would remain the same.
@@ -158,11 +158,11 @@ Consider a sphere of radius $R$ with charge $Q$ distributed uniformly throughout
 $$
 E(r) =
 \begin{cases}
-\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q\,r}{R^3} = \dfrac{\rho\, r}{3\varepsilon_0} & \text{if } r \leq R \\[12pt]
-\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q}{r^2} & \text{if } r \geq R
+\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q\,r}{R^3} = \dfrac{\rho\, r}{3\varepsilon_0} & \text{se } r \leq R \\[12pt]
+\dfrac{1}{4\pi\varepsilon_0}\,\dfrac{Q}{r^2} & \text{se } r \geq R
 \end{cases}
 $$
-The magnitude of the field grows linearly from the center to the surface, where it reaches the maximum value $\dfrac{kQ}{R^2}$, and outside it coincides with that of a point charge $Q$ placed at the center. For a sphere with $Q = 10\,\mathrm{nC}$ and $R = 10\,\mathrm{cm}$ the field is about $8.99 \cdot 10^3\,\mathrm{N/C}$ at the surface and half of that, about $4.5 \cdot 10^3\,\mathrm{N/C}$, at $5.0\,\mathrm{cm}$ from the center.
+The magnitude of the field grows linearly from the center to the surface, where it reaches the maximum value $\dfrac{kQ}{R^2}$, and outside it coincides with that of a point charge $Q$ placed at the center. For a sphere with $Q = 10\,\mathrm{nC}$ and $R = 10\,\mathrm{cm}$ the field is about $8{,}99 \cdot 10^3\,\mathrm{N/C}$ at the surface and half of that, about $4{,}5 \cdot 10^3\,\mathrm{N/C}$, at $5{,}0\,\mathrm{cm}$ from the center.
 
 ::grafico{f="x<0 ? NaN : (x<=1 ? x : 1/x^2);x<0 ? NaN : (x<1 ? 0 : 1/x^2)" xmin=-0.3 xmax=4.2 ymin=-0.2 ymax=1.35 nomi="r,E" segmenti="1,0,1,1" etichette="1.05,-0.12,R" legenda="\text{solid sphere};\text{spherical shell}" titolo="Magnitude of the field as a function of the distance from the center, with $r$ in units of $R$ and $E$ in units of $\dfrac{kQ}{R^2}$; for $r > R$ the two fields coincide with that of a point charge"}
 
@@ -194,7 +194,7 @@ Consider an infinite straight wire with charge distributed uniformly, with linea
 $$
 E(r) = \frac{\lambda}{2\pi\varepsilon_0 r} = \frac{2k\lambda}{r} .
 $$
-The field decreases as $\dfrac{1}{r}$, more slowly than the field of a point charge. The infinite-wire model describes a charged wire of finite length at points whose distance from the wire is small compared with the distance from the ends. For $\lambda = 2.0\,\mathrm{nC/m}$, at $10\,\mathrm{cm}$ from the wire the field is $\dfrac{2 \cdot 8.99 \cdot 10^9 \cdot 2.0 \cdot 10^{-9}}{0.10}\,\mathrm{N/C} \approx 360\,\mathrm{N/C}$. The same result is obtained by integrating the contributions of the elements of the wire; see the topic on the electric field.
+The field decreases as $\dfrac{1}{r}$, more slowly than the field of a point charge. The infinite-wire model describes a charged wire of finite length at points whose distance from the wire is small compared with the distance from the ends. For $\lambda = 2{,}0\,\mathrm{nC/m}$, at $10\,\mathrm{cm}$ from the wire the field is $\dfrac{2 \cdot 8{,}99 \cdot 10^9 \cdot 2{,}0 \cdot 10^{-9}}{0{,}10}\,\mathrm{N/C} \approx 360\,\mathrm{N/C}$. The same result is obtained by integrating the contributions of the elements of the wire; see the topic on the electric field.
 
 ::grafico{unicolore=1 assi=0 uguale=1 poligoni="-1.5,-1 1.5,-1 1.5,1 -1.5,1" curve="1.5*cos(t),1+0.25*sin(t),0,6.29;1.5*cos(t),-1+0.25*sin(t),0,6.29" linee="0,-2.3 0,2.3" segmenti="0,-1.6,1.5,-1.6;1.75,-1,1.75,1" vettori="0.05,0.45,2.5,0.45,E;-0.05,0.45,-2.5,0.45;0.05,-0.45,2.5,-0.45;-0.05,-0.45,-2.5,-0.45;0.8,1,0.8,1.8,n̂" etichette="0.65,-1.95,r;1.9,0.05,h;-0.45,2.1,λ;0.12,-1.9,+;0.12,-1.3,+;0.12,1.3,+;0.12,1.9,+" xmin=-2.8 xmax=2.8 ymin=-2.4 ymax=2.4 titolo="Gaussian surface for the infinite wire, a coaxial cylinder of radius $r$ and height $h$; the field is radial, perpendicular to the lateral surface and parallel to the bases"}
 
@@ -216,11 +216,11 @@ Consider an infinite cylinder of radius $R$ with charge distributed uniformly th
 $$
 E(r) =
 \begin{cases}
-\dfrac{\rho\, r}{2\varepsilon_0} & \text{if } r \leq R \\[12pt]
-\dfrac{\lambda}{2\pi\varepsilon_0 r} = \dfrac{\rho R^2}{2\varepsilon_0 r} & \text{if } r \geq R
+\dfrac{\rho\, r}{2\varepsilon_0} & \text{se } r \leq R \\[12pt]
+\dfrac{\lambda}{2\pi\varepsilon_0 r} = \dfrac{\rho R^2}{2\varepsilon_0 r} & \text{se } r \geq R
 \end{cases}
 $$
-Outside, the cylinder produces the same field as a wire placed on the axis with the same charge per unit length; inside, the field grows linearly from the axis to the surface. For $\rho = 1.0\,\mathrm{\mu C/m^3}$ and $R = 1.0\,\mathrm{cm}$ the field at the surface is $\dfrac{1.0 \cdot 10^{-6} \cdot 0.010}{2 \cdot 8.85 \cdot 10^{-12}}\,\mathrm{N/C} \approx 565\,\mathrm{N/C}$.
+Outside, the cylinder produces the same field as a wire placed on the axis with the same charge per unit length; inside, the field grows linearly from the axis to the surface. For $\rho = 1{,}0\,\mathrm{\mu C/m^3}$ and $R = 1{,}0\,\mathrm{cm}$ the field at the surface is $\dfrac{1{,}0 \cdot 10^{-6} \cdot 0{,}010}{2 \cdot 8{,}85 \cdot 10^{-12}}\,\mathrm{N/C} \approx 565\,\mathrm{N/C}$.
 
 ::grafico{f="x<0 ? NaN : (x<=1 ? x : 1/x)" xmin=-0.3 xmax=5.2 ymin=-0.2 ymax=1.35 nomi="r,E" segmenti="1,0,1,1" etichette="1.05,-0.12,R" legenda="E(r)" titolo="Field of a uniformly charged cylinder, with $r$ in units of $R$ and $E$ in units of $\dfrac{\rho R}{2\varepsilon_0}$; the field grows linearly inside and decreases as $\dfrac{1}{r}$ outside"}
 
@@ -240,9 +240,9 @@ An infinite cylindrical surface of radius $R$, with charge $\lambda$ per unit le
 $$
 E(r) =
 \begin{cases}
-0 & \text{if } r < a \\[8pt]
-\dfrac{\lambda_1}{2\pi\varepsilon_0 r} & \text{if } a < r < b \\[12pt]
-\dfrac{\lambda_1 + \lambda_2}{2\pi\varepsilon_0 r} & \text{if } r > b
+0 & \text{se } r < a \\[8pt]
+\dfrac{\lambda_1}{2\pi\varepsilon_0 r} & \text{se } a < r < b \\[12pt]
+\dfrac{\lambda_1 + \lambda_2}{2\pi\varepsilon_0 r} & \text{se } r > b
 \end{cases}
 $$
 When $\lambda_2 = -\lambda_1$ the field is nonzero only between the two surfaces. For the coaxial cable as a capacitor, see the topic on conductors, capacitors and dielectrics.
@@ -255,7 +255,7 @@ Consider an infinite plane with charge distributed uniformly, with surface densi
 $$
 E = \frac{\sigma}{2\varepsilon_0}
 $$
-and, for $\sigma > 0$, points away from the plane on both sides. In each of the two half-spaces the field is uniform and does not depend on the distance from the plane. The model describes a thin charged sheet of finite size at points whose distance from the sheet is small compared with the distance from the edges. For $\sigma = 1.0\,\mathrm{nC/m^2}$ one has $E = \dfrac{1.0 \cdot 10^{-9}}{2 \cdot 8.85 \cdot 10^{-12}}\,\mathrm{N/C} \approx 56\,\mathrm{N/C}$. The same result is obtained as the limit of the field of a charged disk as the radius tends to infinity; see the topic on the electric field.
+and, for $\sigma > 0$, points away from the plane on both sides. In each of the two half-spaces the field is uniform and does not depend on the distance from the plane. The model describes a thin charged sheet of finite size at points whose distance from the sheet is small compared with the distance from the edges. For $\sigma = 1{,}0\,\mathrm{nC/m^2}$ one has $E = \dfrac{1{,}0 \cdot 10^{-9}}{2 \cdot 8{,}85 \cdot 10^{-12}}\,\mathrm{N/C} \approx 56\,\mathrm{N/C}$. The same result is obtained as the limit of the field of a charged disk as the radius tends to infinity; see the topic on the electric field.
 
 ::grafico{unicolore=1 assi=0 uguale=1 poligoni="-1.2,-0.7 1.2,-0.7 1.2,0.7 -1.2,0.7" curve="1.2+0.22*cos(t),0.7*sin(t),0,6.29;-1.2+0.22*cos(t),0.7*sin(t),0,6.29" linee="0,-2.2 0,2.2" vettori="1.2,0,2.5,0,E;-1.2,0,-2.5,0;0.1,1.15,2.5,1.15;-0.1,1.15,-2.5,1.15;0.1,-1.15,2.5,-1.15;-0.1,-1.15,-2.5,-1.15" etichette="0.95,-1,A;-1.45,-1,A;-0.4,2.05,σ;0.1,-1.9,+;0.1,-1.35,+;0.1,1.35,+;0.1,1.9,+" xmin=-2.8 xmax=2.8 ymin=-2.3 ymax=2.3 titolo="Infinite charged plane seen edge-on and Gaussian cylinder crossing it; the flux leaves only through the two bases of area $A$"}
 
@@ -274,7 +274,7 @@ Consider two infinite parallel planes with uniform surface densities $+\sigma$ a
 $$
 E = \frac{\sigma}{\varepsilon_0} .
 $$
-This is the arrangement of the plates of the parallel-plate capacitor; see the topic on conductors, capacitors and dielectrics. For $\sigma = 2.0\,\mathrm{nC/m^2}$ the field between the planes is about $226\,\mathrm{N/C}$.
+This is the arrangement of the plates of the parallel-plate capacitor; see the topic on conductors, capacitors and dielectrics. For $\sigma = 2{,}0\,\mathrm{nC/m^2}$ the field between the planes is about $226\,\mathrm{N/C}$.
 
 ::grafico{unicolore=1 assi=0 uguale=1 linee="0,-2 0,2;3,-2 3,2" vettori="0.25,1.2,2.75,1.2,E;0.25,0,2.75,0;0.25,-1.2,2.75,-1.2" etichette="-0.38,-1.6,+;-0.38,-0.8,+;-0.38,0,+;-0.38,0.8,+;-0.38,1.6,+;3.12,-1.6,−;3.12,-0.8,−;3.12,0,−;3.12,0.8,−;3.12,1.6,−;-1.7,0.1,E = 0;3.8,0.1,E = 0;-0.25,2.25,+σ;2.8,2.25,−σ" xmin=-2 xmax=5 ymin=-2.2 ymax=2.5 titolo="Two parallel planes with densities $+\sigma$ and $-\sigma$; the fields of the two planes add between the plates and cancel outside"}
 
@@ -288,12 +288,12 @@ Consider an infinite slab of thickness $d$ with charge distributed uniformly thr
 $$
 E_x(x) =
 \begin{cases}
--\dfrac{\rho\, d}{2\varepsilon_0} & \text{if } x \leq -\dfrac{d}{2} \\[12pt]
-\dfrac{\rho\, x}{\varepsilon_0} & \text{if } -\dfrac{d}{2} \leq x \leq \dfrac{d}{2} \\[12pt]
-\dfrac{\rho\, d}{2\varepsilon_0} & \text{if } x \geq \dfrac{d}{2}
+-\dfrac{\rho\, d}{2\varepsilon_0} & \text{se } x \leq -\dfrac{d}{2} \\[12pt]
+\dfrac{\rho\, x}{\varepsilon_0} & \text{se } -\dfrac{d}{2} \leq x \leq \dfrac{d}{2} \\[12pt]
+\dfrac{\rho\, d}{2\varepsilon_0} & \text{se } x \geq \dfrac{d}{2}
 \end{cases}
 $$
-Outside, the slab produces the same field as a plane with surface density $\sigma = \rho d$, equal to the charge per unit area of the slab; inside, the field varies linearly and is zero on the midplane. For $\rho = 1.0 \cdot 10^{-5}\,\mathrm{C/m^3}$ and $d = 1.0\,\mathrm{cm}$ the outside field is about $5.6 \cdot 10^3\,\mathrm{N/C}$.
+Outside, the slab produces the same field as a plane with surface density $\sigma = \rho d$, equal to the charge per unit area of the slab; inside, the field varies linearly and is zero on the midplane. For $\rho = 1{,}0 \cdot 10^{-5}\,\mathrm{C/m^3}$ and $d = 1{,}0\,\mathrm{cm}$ the outside field is about $5{,}6 \cdot 10^3\,\mathrm{N/C}$.
 
 ::grafico{f="x<-1 ? -1 : (x>1 ? 1 : x)" xmin=-3.2 xmax=3.2 ymin=-1.5 ymax=1.5 nomi="x,Eₓ" segmenti="-1,-1.5,-1,1.5;1,-1.5,1,1.5" etichette="1.08,-0.3,½d;-1.6,0.3,−½d" legenda="E_x(x)" titolo="Component $E_x$ of the field of a uniformly charged slab of thickness $d$, in units of $\dfrac{\rho d}{2 \varepsilon_0}$; the field is linear inside, constant outside"}
 
@@ -329,7 +329,7 @@ See the topic on surfaces, flux and the theorems of Gauss and Stokes in Mathemat
 :::
 
 ::::teorema{#forma-locale-gauss titolo="Local form of Gauss's law"}
-If the charge is distributed with continuous volume density $\rho$ and the electric field is of class $C^1$, at every point
+If the charge is distributed with continuous volume density $\rho$ and the electric field is of class $C^1$, the following relation holds at every point
 $$
 \nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0} .
 $$

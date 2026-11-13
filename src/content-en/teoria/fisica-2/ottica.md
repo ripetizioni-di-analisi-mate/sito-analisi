@@ -1,12 +1,12 @@
 ---
-titolo: Geometrical and wave optics
-sommario: How light is reflected and refracted according to Snell's laws, how mirrors and thin lenses form images, and how interference, diffraction and polarization reveal the wave nature of light.
+titolo: Ottica geometrica e ondulatoria
+sommario: Come la luce si riflette e si rifrange secondo le leggi di Snell, come specchi e lenti sottili formano le immagini, e come interferenza, diffrazione e polarizzazione rivelano la natura ondulatoria della luce.
 ---
 
 ## Light, rays and index of refraction
 
 :::richiamo{titolo="Electromagnetic waves"}
-Light is a transverse electromagnetic wave that propagates in vacuum with speed $c = 3.00 \cdot 10^{8}\,\mathrm{m/s}$; wavelength $\lambda$ and frequency $\nu$ are related by $c = \lambda\,\nu$. Visible light has wavelengths between about $400\,\mathrm{nm}$ (violet) and $700\,\mathrm{nm}$ (red). See the topic on Maxwell's equations and electromagnetic waves.
+Light is a transverse electromagnetic wave that propagates in vacuum with speed $c = 3{,}00 \cdot 10^{8}\,\mathrm{m/s}$; wavelength $\lambda$ and frequency $\nu$ are related by $c = \lambda\,\nu$. Visible light has wavelengths between about $400\,\mathrm{nm}$ (violet) and $700\,\mathrm{nm}$ (red). See the topic on Maxwell's equations and electromagnetic waves.
 :::
 
 :::definizione{#ottica-geometrica titolo="Light ray and geometrical optics"}
@@ -14,11 +14,11 @@ A **light ray** is an oriented line, perpendicular at every point to the wavefro
 :::
 
 :::definizione{#indice-di-rifrazione titolo="Index of refraction"}
-In a homogeneous transparent medium light propagates with a speed $v$ less than $c$. The **index of refraction** of the medium is the pure number
+In a homogeneous transparent medium light propagates with a speed $v$ less than $c$. The **index of refraction** of the medium is the dimensionless number
 $$
 n = \frac{c}{v} \geq 1 .
 $$
-Vacuum has $n = 1$, air $n \approx 1.0003$, which in problems is approximated by $1.00$, water $n = 1.33$, ordinary glass $n \approx 1.5$, diamond $n = 2.42$. Of two media, the one with the larger index is called *optically denser*. In water, for example, $v = \dfrac{c}{1.33} \approx 2.26 \cdot 10^{8}\,\mathrm{m/s}$.
+Vacuum has $n = 1$, air $n \approx 1{,}0003$, which in problems is approximated by $1{,}00$, water $n = 1{,}33$, ordinary glass $n \approx 1{,}5$, diamond $n = 2{,}42$. Of two media, the one with the larger index is called *optically denser*. In water, for example, $v = \dfrac{c}{1{,}33} \approx 2{,}26 \cdot 10^{8}\,\mathrm{m/s}$.
 :::
 
 :::teorema{#lunghezza-onda-nel-mezzo titolo="Frequency and wavelength in a medium"}
@@ -26,7 +26,7 @@ When light passes from one medium to another the frequency $\nu$ stays the same,
 $$
 \lambda_n = \frac{v}{\nu} = \frac{c}{n\,\nu} = \frac{\lambda}{n} ,
 $$
-where $\lambda$ is the wavelength in vacuum. Light of $600\,\mathrm{nm}$ in vacuum has in water $\lambda_n = \dfrac{600}{1.33}\,\mathrm{nm} \approx 451\,\mathrm{nm}$.
+where $\lambda$ is the wavelength in vacuum. Light with wavelength $600\,\mathrm{nm}$ in vacuum has, in water, wavelength $\lambda_n = \dfrac{600}{1{,}33}\,\mathrm{nm} \approx 451\,\mathrm{nm}$.
 :::
 
 ## Reflection and refraction
@@ -46,14 +46,14 @@ It is an experimental law. A ray that passes from a medium of index $n_1$ to a m
 $$
 n_1 \sin\theta_1 = n_2 \sin\theta_2 .
 $$
-Together with the law of reflection it makes up **Snell's laws**, and it allows one to compute the direction of the refracted ray. A ray that passes from air to glass with $n_2 = 1.50$ and $\theta_1 = 45^\circ$ has $\sin\theta_2 = \dfrac{\sin 45^\circ}{1.50} \approx 0.471$, so $\theta_2 \approx 28.1^\circ$.
+Together with the law of reflection it makes up **Snell's laws**, and it allows one to compute the direction of the refracted ray. A ray that passes from air to glass with $n_2 = 1{,}50$ and $\theta_1 = 45^\circ$ has $\sin\theta_2 = \dfrac{\sin 45^\circ}{1{,}50} \approx 0{,}471$, so $\theta_2 \approx 28{,}1^\circ$.
 
 ::grafico{assi=0 uguale=1 poligoni="-4,0 4,0 4,-3 -4,-3" linee="-4,0 4,0" segmenti="0,-3,0,3" vettori="-2.83,2.83,0,0;0,0,2.83,2.83;0,0,1.41,-2.65" etichette="-0.65,1.2,θ₁;0.3,1.2,θ₁;0.12,-1.3,θ₂;-3.7,0.35,n₁;-3.7,-0.65,n₂;-3.4,2.45,incident;2.15,2.45,reflected;1.55,-2.1,refracted" xmin=-4.2 xmax=4.2 ymin=-3.2 ymax=3.3 titolo="Incident, reflected and refracted rays: the angles are measured from the dashed normal; with $n_2 > n_1$ the refracted ray bends toward the normal"}
 
 :::
 
 :::osservazione{#verso-della-deviazione titolo="Direction of the deviation"}
-From Snell's law, $\sin\theta_2 = \dfrac{n_1}{n_2}\sin\theta_1$, and the sine is increasing between $0$ and $\dfrac{\pi}{2}$.
+Snell's law gives $\sin\theta_2 = \dfrac{n_1}{n_2}\sin\theta_1$, and the sine is increasing between $0$ and $\dfrac{\pi}{2}$.
 
 - If $n_2 > n_1$, then $\theta_2 < \theta_1$: the ray that enters an optically denser medium bends **toward** the normal.
 - If $n_2 < n_1$, then $\theta_2 > \theta_1$: the ray bends away from the normal.
@@ -71,12 +71,12 @@ Consider a transparent slab of thickness $t$ and index $n$, with two flat parall
 $$
 d = \frac{t \sin(\theta_1 - \theta_2)}{\cos\theta_2} , \qquad \sin\theta_2 = \frac{\sin\theta_1}{n} .
 $$
-For this reason a window pane does not alter the direction from which objects are seen. With $t = 1.0\,\mathrm{cm}$, $n = 1.50$ and $\theta_1 = 45^\circ$ we have $\theta_2 \approx 28.1^\circ$ and $d \approx 0.33\,\mathrm{cm}$.
+For this reason a window pane does not alter the direction from which objects are seen. With $t = 1{,}0\,\mathrm{cm}$, $n = 1{,}50$ and $\theta_1 = 45^\circ$ we have $\theta_2 \approx 28{,}1^\circ$ and $d \approx 0{,}33\,\mathrm{cm}$.
 
 :::dimostrazione
 The two faces have parallel normals, so the inner ray strikes the second face at the same angle $\theta_2$ at which it was refracted at the first. **Snell's law** at the two faces gives $\sin\theta_1 = n \sin\theta_2 = \sin\theta_3$, hence $\theta_3 = \theta_1$ and the emerging ray is parallel to the incident one.
 
-Let $A$ and $B$ be the points of entry and exit. The segment $AB$ forms the angle $\theta_2$ with the normal and crosses the thickness $t$, so $AB = \dfrac{t}{\cos\theta_2}$. The displacement $d$ is the distance of $B$ from the extension of the incident ray, which passes through $A$ and forms the angle $\theta_1 - \theta_2$ with $AB$; hence $d = AB \sin(\theta_1 - \theta_2)$.
+Let $A$ and $B$ be the points of entry and exit. The segment $AB$ forms the angle $\theta_2$ with the normal and crosses the thickness $t$, so $AB = \dfrac{t}{\cos\theta_2}$. The displacement $d$ is the distance of $B$ from the extension of the incident ray, which passes through $A$ and forms with $AB$ the angle $\theta_1 - \theta_2$; hence $d = AB \sin(\theta_1 - \theta_2)$.
 :::
 ::::
 
@@ -87,7 +87,7 @@ Consider a ray that passes from a medium of index $n_1$ to a *less* optically de
 $$
 \sin\theta_c = \frac{n_2}{n_1} .
 $$
-For $\theta_1 = \theta_c$ the refracted ray grazes the surface; for $\theta_1 > \theta_c$ there is no refracted ray and all the light is reflected. This phenomenon is called **total internal reflection**, and it guides light in optical fibers. Between water and air $\theta_c = \arcsin\dfrac{1}{1.33} \approx 48.8^\circ$, between glass with $n = 1.50$ and air $\theta_c \approx 41.8^\circ$; hence a ray that strikes the inner face of a glass prism at $45^\circ$ is totally reflected.
+For $\theta_1 = \theta_c$ the refracted ray grazes the surface; for $\theta_1 > \theta_c$ there is no refracted ray and all the light is reflected. This phenomenon is called **total internal reflection**, and it guides light in optical fibers. Between water and air $\theta_c = \arcsin\dfrac{1}{1{,}33} \approx 48{,}8^\circ$, between glass with $n = 1{,}50$ and air $\theta_c \approx 41{,}8^\circ$; hence a ray that strikes the inner face of a glass prism at $45^\circ$ is totally reflected.
 
 ::grafico{assi=0 uguale=1 poligoni="-1,0 7,0 7,-2.6 -1,-2.6" linee="-1,0 7,0" segmenti="2.28,-2.4,2.28,1.2;3.76,-2.4,3.76,1.2" vettori="0,-2,0.93,0;0.93,0,2.17,1.82;0,-2,2.28,0;2.28,0,4.6,0.02;0,-2,3.76,0;3.76,0,6.77,-1.6" punti="0,-2,pieno,S" etichette="1.85,-0.75,θc;3.3,-0.75,θ₁;-0.8,0.3,air;-0.8,-0.5,water" xmin=-1.2 xmax=7.2 ymin=-2.8 ymax=2.2 titolo="Rays emitted by the source $S$ in water: below the critical angle they emerge refracted, at the critical angle $\theta_c$ they emerge grazing, beyond the critical angle they are totally reflected"}
 
@@ -105,7 +105,7 @@ Consider an object at depth $h$ below the flat surface of a medium of index $n_1
 $$
 h' = \frac{n_2}{n_1}\, h .
 $$
-Seen from the air, the bottom of a swimming pool $2.0\,\mathrm{m}$ deep appears at $\dfrac{2.0}{1.33}\,\mathrm{m} \approx 1.5\,\mathrm{m}$.
+Seen from the air, the bottom of a swimming pool $2{,}0\,\mathrm{m}$ deep appears at $\dfrac{2{,}0}{1{,}33}\,\mathrm{m} \approx 1{,}5\,\mathrm{m}$.
 
 ::grafico{assi=0 uguale=1 poligoni="-3,0 3,0 3,-3.4 -3,-3.4" linee="-3,0 3,0" vettori="0,-3,1,0;1,0,1.84,1.81;0,-3,-1,0;-1,0,-1.84,1.81" segmenti="1,0,0,-2.16;-1,0,0,-2.16;0,-3.4,0,1.5" punti="0,-3,pieno,O;0,-2.16,vuoto,O′" etichette="-2.8,0.3,air;-2.8,-0.5,water" xmin=-3.2 xmax=3.2 ymin=-3.6 ymax=2.1 titolo="The rays leaving the water seem to come from $O'$, closer to the surface than the object $O$: for nearly vertical rays $h' = \dfrac{n_2}{n_1}\,h$"}
 
@@ -162,11 +162,11 @@ The **linear magnification** is
 $$
 m = \frac{y'}{y} = -\frac{q}{p} .
 $$
-If $m < 0$ the image is inverted, if $|m| > 1$ it is enlarged. For the mirror the formula follows from the ray directed at the vertex, which is reflected symmetrically with respect to the axis and forms two similar triangles with the object and the image. In the example of the mirror with $R = 40\,\mathrm{cm}$ we have $m = -\dfrac{30}{60} = -0.5$: the image is real, inverted and half as tall as the object.
+If $m < 0$ the image is inverted, if $|m| > 1$ it is enlarged. For the mirror the formula follows from the ray directed at the vertex, which is reflected symmetrically with respect to the axis and forms two similar triangles with the object and the image. In the example of the mirror with $R = 40\,\mathrm{cm}$ we have $m = -\dfrac{30}{60} = -0{,}5$: the image is real, inverted and half as tall as the object.
 :::
 
 :::osservazione{#costruzione-specchi titolo="Ray diagrams for mirrors"}
-The image of the tip of an object is the intersection of two of the principal rays: the ray parallel to the axis, which is reflected through the focus; the ray through the focus, which is reflected parallel to the axis; the ray through the center, which returns on itself; the ray directed at the vertex, which is reflected symmetrically with respect to the axis.
+The image of the tip of an object is the intersection of two of the principal rays: the ray parallel to the axis, which is reflected through the focus; the ray through the focus, which is reflected parallel to the axis; the ray through the center, which retraces its path; the ray directed at the vertex, which is reflected symmetrically with respect to the axis.
 
 - Concave mirror, object beyond $C$: real, inverted and reduced image, between $F$ and $C$.
 - Concave mirror, object between $F$ and $C$: real, inverted and enlarged image, beyond $C$.
@@ -184,7 +184,7 @@ A **lens** is a transparent body bounded by two spherical surfaces, or by one sp
 $$
 P = \frac{1}{f} ,
 $$
-and it is measured in diopters, $1\,\mathrm{D} = 1\,\mathrm{m^{-1}}$; a lens with $f = 25\,\mathrm{cm}$ has $P = 4.0\,\mathrm{D}$.
+and it is measured in diopters, $1\,\mathrm{D} = 1\,\mathrm{m^{-1}}$; a lens with $f = 25\,\mathrm{cm}$ has $P = 4{,}0\,\mathrm{D}$.
 :::
 
 :::teorema{#formula-del-costruttore titolo="Lensmaker's equation"}
@@ -192,7 +192,7 @@ Consider a thin lens of index $n$ immersed in air, with radii of curvature $R_1$
 $$
 \frac{1}{f} = (n - 1)\left( \frac{1}{R_1} - \frac{1}{R_2} \right) .
 $$
-The formula is derived by applying Snell's law, in the paraxial approximation, to the two spherical surfaces; the proof is omitted. A biconvex lens with $R_1 = 20\,\mathrm{cm}$, $R_2 = -20\,\mathrm{cm}$ and $n = 1.50$ has $\dfrac{1}{f} = 0.50 \cdot \dfrac{2}{20\,\mathrm{cm}}$, that is, $f = 20\,\mathrm{cm}$ and $P = 5.0\,\mathrm{D}$.
+The formula is derived by applying Snell's law, in the paraxial approximation, to the two spherical surfaces; the proof is omitted. A biconvex lens with $R_1 = 20\,\mathrm{cm}$, $R_2 = -20\,\mathrm{cm}$ and $n = 1{,}50$ has $\dfrac{1}{f} = 0{,}50 \cdot \dfrac{2}{20\,\mathrm{cm}}$, that is, $f = 20\,\mathrm{cm}$ and $P = 5{,}0\,\mathrm{D}$.
 :::
 
 :::osservazione{#costruzione-lenti titolo="Principal rays of a lens"}
@@ -211,7 +211,7 @@ Consider a thin lens of focal length $f$, in the paraxial approximation, and an 
 $$
 \frac{1}{p} + \frac{1}{q} = \frac{1}{f} , \qquad m = -\frac{q}{p} ,
 $$
-in the sign convention for mirrors and lenses, for both converging and diverging lenses. With $f = 10\,\mathrm{cm}$ and $p = 15\,\mathrm{cm}$ one obtains $q = 30\,\mathrm{cm}$ and $m = -2$. With $p = 5.0\,\mathrm{cm}$, that is, with the object between the focus and the lens, one obtains $\dfrac{1}{q} = \dfrac{1}{10} - \dfrac{1}{5} = -\dfrac{1}{10}$, so $q = -10\,\mathrm{cm}$ and $m = 2$: the image is virtual, upright and enlarged, and the lens works as a magnifying glass.
+in the sign convention for mirrors and lenses, for both converging and diverging lenses. With $f = 10\,\mathrm{cm}$ and $p = 15\,\mathrm{cm}$ one obtains $q = 30\,\mathrm{cm}$ and $m = -2$. With $p = 5{,}0\,\mathrm{cm}$, that is, with the object between the focus and the lens, one obtains $\dfrac{1}{q} = \dfrac{1}{10} - \dfrac{1}{5} = -\dfrac{1}{10}$, so $q = -10\,\mathrm{cm}$ and $m = 2$: the image is virtual, upright and enlarged, and the lens works as a magnifying glass.
 
 :::dimostrazione
 We treat the case of the converging lens with a real image; the other cases are analogous with the signs of the convention. Let $B$ be the foot of the object on the axis and $A$ its tip, at height $y$; let $B'$ and $A'$ be the foot and the tip of the image, at height $y' < 0$.
@@ -247,7 +247,7 @@ It is a postulate of wave optics. Every point of a wavefront behaves as a source
 At a point reached by two light waves the electric field is the sum of the two fields, because Maxwell's equations are linear. Two sources are **coherent** if they emit with the same frequency and with a constant phase difference. If two coherent in-phase sources reach the point $P$ after the paths $r_1$ and $r_2$, the **path difference** $\delta = r_2 - r_1$ corresponds to the phase difference $\varphi = \dfrac{2\pi\,\delta}{\lambda}$, and at $P$ there is
 
 - **constructive interference** if $\delta = m\lambda$, with $m$ an integer, because the waves arrive in phase;
-- **destructive interference** if $\delta = \left( m + \dfrac{1}{2} \right) \lambda$, because the waves arrive in phase opposition and, with equal amplitudes, cancel each other.
+- **destructive interference** if $\delta = \left( m + \dfrac{1}{2} \right) \lambda$, because the waves arrive in opposite phase and, with equal amplitudes, cancel each other.
 :::
 
 ::::teorema{#esperimento-di-young titolo="Two-slit interference"}
@@ -260,7 +260,7 @@ For small angles the bright fringes are at the distances $y_m = \dfrac{m \lambda
 $$
 \Delta y = \frac{\lambda L}{d} .
 $$
-The experiment allows one to measure the wavelength from macroscopic quantities. With $\lambda = 600\,\mathrm{nm}$, $d = 0.20\,\mathrm{mm}$ and $L = 1.5\,\mathrm{m}$ we have $\Delta y = \dfrac{6.00 \cdot 10^{-7} \cdot 1.5}{2.0 \cdot 10^{-4}}\,\mathrm{m} = 4.5\,\mathrm{mm}$.
+The experiment allows one to measure the wavelength from macroscopic quantities. With $\lambda = 600\,\mathrm{nm}$, $d = 0{,}20\,\mathrm{mm}$ and $L = 1{,}5\,\mathrm{m}$ we have $\Delta y = \dfrac{6{,}00 \cdot 10^{-7} \cdot 1{,}5}{2{,}0 \cdot 10^{-4}}\,\mathrm{m} = 4{,}5\,\mathrm{mm}$.
 
 ::grafico{assi=0 uguale=1 linee="0,3.6 0,0.75;0,0.45 0,-0.45;0,-0.75 0,-3.6;8,-3.6 8,3.6;0,0.6 8,3;0,-0.6 8,3" segmenti="0,0,8,0;0,0,8,3;0,0.6,0.45,-0.4" punti="0,0.6,pieno;0,-0.6,pieno;8,3,pieno,P" etichette="-0.75,0.75,S₁;-0.75,-0.95,S₂;1.3,0.12,θ;0.5,-0.8,δ;8.15,0.1,screen;3.8,-0.45,L" xmin=-0.8 xmax=9.6 ymin=-3.8 ymax=4 titolo="The waves that leave $S_1$ and $S_2$ reach $P$ with the path difference $\delta = d \sin\theta$; the figure is not to scale, because in the experiment $d$ is much smaller than $L$"}
 
@@ -274,7 +274,7 @@ The conditions for constructive and destructive interference give the maxima and
 ::::
 
 :::richiamo{titolo="Sum-to-product formulas"}
-For every pair of angles $\alpha$ and $\beta$, $\sin\alpha + \sin\beta = 2 \sin\dfrac{\alpha + \beta}{2} \cos\dfrac{\alpha - \beta}{2}$. See the Precorso topic on trigonometric equations and inequalities.
+For every pair of angles $\alpha$ and $\beta$, $\sin\alpha + \sin\beta = 2 \sin\dfrac{\alpha + \beta}{2} \cos\dfrac{\alpha - \beta}{2}$. See the Preparatory course topic on trigonometric equations and inequalities.
 :::
 
 ::::teorema{#intensita-young titolo="Intensity of the interference pattern"}
@@ -302,10 +302,10 @@ Consider a slit of width $a$, illuminated perpendicularly by a monochromatic pla
 $$
 a \sin\theta = m\lambda , \qquad m = \pm 1, \pm 2, \dots
 $$
-The **central maximum** lies between the minima with $m = \pm 1$, and for small angles it is $w = \dfrac{2\lambda L}{a}$ wide on the screen; the narrower the slit, the wider the pattern. With $\lambda = 500\,\mathrm{nm}$, $a = 0.10\,\mathrm{mm}$ and $L = 2.0\,\mathrm{m}$ we have $w = \dfrac{2 \cdot 5.00 \cdot 10^{-7} \cdot 2.0}{1.0 \cdot 10^{-4}}\,\mathrm{m} = 2.0\,\mathrm{cm}$.
+The **central maximum** lies between the minima with $m = \pm 1$, and for small angles it is $w = \dfrac{2\lambda L}{a}$ wide on the screen; the narrower the slit, the wider the pattern. With $\lambda = 500\,\mathrm{nm}$, $a = 0{,}10\,\mathrm{mm}$ and $L = 2{,}0\,\mathrm{m}$ we have $w = \dfrac{2 \cdot 5{,}00 \cdot 10^{-7} \cdot 2{,}0}{1{,}0 \cdot 10^{-4}}\,\mathrm{m} = 2{,}0\,\mathrm{cm}$.
 
 :::dimostrazione
-By the **Huygens-Fresnel principle** every point of the slit is a source of secondary waves in phase. Divide the slit into two halves and pair each point of the upper half with the point $\dfrac{a}{2}$ below it. In the direction $\theta$ the waves from two paired points have the path difference $\dfrac{a}{2}\sin\theta$, by the same reasoning as in Young's experiment. If $\dfrac{a}{2}\sin\theta = \dfrac{\lambda}{2}$, the waves of each pair arrive in phase opposition and cancel, so the intensity is zero: this is the condition $a \sin\theta = \lambda$. Dividing the slit into $2|m|$ strips and pairing adjacent strips two by two, the same reasoning gives a minimum when $\dfrac{a}{2|m|}\sin\theta = \dfrac{\lambda}{2}$, that is, $a \sin\theta = |m|\lambda$, and by symmetry also in the direction $-\theta$. For $\theta = 0$ all the waves arrive in phase, and that is where the central maximum is.
+By the **Huygens-Fresnel principle** every point of the slit is a source of secondary waves in phase. Divide the slit into two halves and pair each point of the upper half with the point $\dfrac{a}{2}$ below it. In the direction $\theta$ the waves from two paired points have the path difference $\dfrac{a}{2}\sin\theta$, by the same reasoning as in Young's experiment. If $\dfrac{a}{2}\sin\theta = \dfrac{\lambda}{2}$, the waves of each pair arrive in opposite phase and cancel, so the intensity is zero: this is the condition $a \sin\theta = \lambda$. Dividing the slit into $2|m|$ strips and pairing adjacent strips two by two, the same reasoning gives a minimum when $\dfrac{a}{2|m|}\sin\theta = \dfrac{\lambda}{2}$, that is, $a \sin\theta = |m|\lambda$, and by symmetry also in the direction $-\theta$. For $\theta = 0$ all the waves arrive in phase, and that is where the central maximum is.
 :::
 ::::
 
@@ -314,7 +314,7 @@ Adding the contributions of all the points of the slit with an integral one obta
 $$
 I(\theta) = I_0 \left( \frac{\sin\beta}{\beta} \right)^{2} , \qquad \beta = \frac{\pi\, a \sin\theta}{\lambda} .
 $$
-The zeros of $\sin\beta$ with $\beta \neq 0$ are the minima already found. The first secondary maximum is about $4.7\,\%$ of $I_0$, so almost all the light falls in the central maximum, which is twice as wide as the secondary maxima.
+The zeros of $\sin\beta$ with $\beta \neq 0$ are the minima already found. The first secondary maximum is about $4{,}7\,\%$ of $I_0$, so almost all the light falls in the central maximum, which is twice as wide as the secondary maxima.
 
 ::grafico{f="(sin(pi*x+1e-9)/(pi*x+1e-9))^2" nomi="y,I" legenda="I = I_0\left(\dfrac{\sin\beta}{\beta}\right)^2" xmin=-3.3 xmax=3.3 ymin=-0.3 ymax=1.4 titolo="Relative intensity $\dfrac{I}{I_0}$ of single-slit diffraction as a function of the position $y$ on the screen, measured in units of $\dfrac{\lambda L}{a}$: the minima fall at the nonzero integer multiples"}
 
@@ -323,7 +323,7 @@ The zeros of $\sin\beta$ with $\beta \neq 0$ are the minima already found. The f
 ## Diffraction grating
 
 :::definizione{#reticolo-di-diffrazione titolo="Diffraction grating"}
-A **diffraction grating** is a set of $N$ identical, equally spaced parallel slits, in a very large number. The distance $d$ between the centers of two adjacent slits is the **grating spacing**, and it is obtained from the number of lines per unit length: a grating with $600$ lines per millimeter has $d = \dfrac{1}{600}\,\mathrm{mm} \approx 1.67\,\mu\mathrm{m}$.
+A **diffraction grating** is a set of $N$ identical, equally spaced parallel slits, in a very large number. The distance $d$ between the centers of two adjacent slits is the **grating spacing**, and it is obtained from the number of lines per unit length: a grating with $600$ lines per millimeter has $d = \dfrac{1}{600}\,\mathrm{mm} \approx 1{,}67\,\mu\mathrm{m}$.
 :::
 
 ::::teorema{#massimi-del-reticolo titolo="Principal maxima of the grating"}
@@ -331,7 +331,7 @@ Consider a grating of spacing $d$, illuminated perpendicularly by a monochromati
 $$
 d \sin\theta = m\lambda , \qquad m = 0, \pm 1, \pm 2, \dots ,
 $$
-and the integer $m$ is the **order** of the maximum. Since $|\sin\theta| \leq 1$, only the orders with $|m| \leq \dfrac{d}{\lambda}$ are visible. With $600$ lines per millimeter and $\lambda = 500\,\mathrm{nm}$ we have $\sin\theta = 0.30\,m$: the first three orders are at $17.5^\circ$, $36.9^\circ$ and $64.2^\circ$, and the fourth does not exist.
+and the integer $m$ is the **order** of the maximum. Since $|\sin\theta| \leq 1$, only the orders with $|m| \leq \dfrac{d}{\lambda}$ are visible. With $600$ lines per millimeter and $\lambda = 500\,\mathrm{nm}$ we have $\sin\theta = 0{,}30\,m$: the first three orders are at $17{,}5^\circ$, $36{,}9^\circ$ and $64{,}2^\circ$, and the fourth does not exist.
 
 :::dimostrazione
 By the same reasoning as in Young's experiment, the waves from two adjacent slits have in the direction $\theta$ the path difference $d \sin\theta$. If $d \sin\theta = m\lambda$, every pair of adjacent slits sends waves in phase, so all $N$ waves arrive in phase; the amplitude is $N$ times that of one slit and the intensity $N^2$ times.
@@ -356,7 +356,7 @@ It is an experimental law. If linearly polarized light of intensity $I_0$ is inc
 $$
 I = I_0 \cos^2\theta .
 $$
-The law is interpreted by observing that the polarizer transmits the component $E_0 \cos\theta$ of the field, and the intensity is proportional to the square of the amplitude. For *un*polarized light the average value of $\cos^2\theta$ over all directions is $\dfrac{1}{2}$, so the transmitted intensity is $\dfrac{I_0}{2}$; two polarizers with perpendicular axes let no light through. Unpolarized light of $40\,\mathrm{W/m^2}$ exits a polarizer with $20\,\mathrm{W/m^2}$, and a second polarizer rotated by $60^\circ$ with $20 \cdot \cos^2 60^\circ\,\mathrm{W/m^2} = 5.0\,\mathrm{W/m^2}$.
+The law is interpreted by observing that the polarizer transmits the component $E_0 \cos\theta$ of the field, and the intensity is proportional to the square of the amplitude. For *un*polarized light the average value of $\cos^2\theta$ over all directions is $\dfrac{1}{2}$, so the transmitted intensity is $\dfrac{I_0}{2}$; two polarizers with perpendicular axes let no light through. Unpolarized light of $40\,\mathrm{W/m^2}$ exits a polarizer with $20\,\mathrm{W/m^2}$, and a second polarizer rotated by $60^\circ$ with $20 \cdot \cos^2 60^\circ\,\mathrm{W/m^2} = 5{,}0\,\mathrm{W/m^2}$.
 :::
 
 :::teorema{#angolo-di-brewster titolo="Polarization by reflection and Brewster's angle"}
@@ -364,5 +364,5 @@ It is observed experimentally that unpolarized light reflected by a transparent 
 $$
 \tan\theta_B = \frac{n_2}{n_1} .
 $$
-Indeed, the perpendicularity of the two rays is equivalent to $\theta_B + \theta_2 = 90^\circ$, so $\sin\theta_2 = \cos\theta_B$, and Snell's law becomes $n_1 \sin\theta_B = n_2 \cos\theta_B$. From air onto glass with $n = 1.50$ we have $\theta_B = \arctan 1.50 \approx 56.3^\circ$. For this reason polarized sunglasses with a vertical axis reduce glare from horizontal surfaces.
+Indeed, the perpendicularity of the two rays is equivalent to $\theta_B + \theta_2 = 90^\circ$, so $\sin\theta_2 = \cos\theta_B$, and Snell's law becomes $n_1 \sin\theta_B = n_2 \cos\theta_B$. From air onto glass with $n = 1{,}50$ we have $\theta_B = \arctan 1{,}50 \approx 56{,}3^\circ$. For this reason polarized sunglasses with a vertical axis reduce glare from horizontal surfaces.
 :::
