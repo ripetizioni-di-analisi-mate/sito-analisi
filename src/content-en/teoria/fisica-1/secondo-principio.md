@@ -1,6 +1,6 @@
 ---
-titolo: Second law, heat engines and entropy
-sommario: How the second law limits the conversion of heat into work, why the Carnot cycle sets the maximum efficiency between two temperatures and how entropy measures the irreversibility of processes.
+titolo: Secondo principio, macchine termiche ed entropia
+sommario: Come il secondo principio limita la trasformazione di calore in lavoro, perché il ciclo di Carnot fissa il rendimento massimo tra due temperature e come l'entropia misura l'irreversibilità delle trasformazioni.
 ---
 
 ## Reversible and irreversible processes
@@ -22,11 +22,11 @@ For a closed system that goes from a state $A$ to a state $B$, $\Delta U = Q - L
 ## Heat engines and efficiency
 
 :::definizione{#macchina-termica titolo="Heat engine"}
-A **heat engine** is a system that undergoes a cyclic process, absorbs heat from one or more reservoirs, releases part of it to other reservoirs and produces positive work. We denote by $Q_{\text{in}} > 0$ the sum of the heats absorbed in a cycle and by $Q_{\text{out}} > 0$ the sum of the absolute values of the heats released. Since $L = Q$ in a cycle, the work produced in a cycle is
+A **heat engine** is a system that undergoes a cyclic process, absorbs heat from one or more reservoirs, releases part of it to other reservoirs and produces positive work. We denote by $Q_{\text{ass}} > 0$ the sum of the amounts of heat absorbed in a cycle and by $Q_{\text{ced}} > 0$ the sum of the absolute values of the amounts of heat released. Since $L = Q$ in a cycle, the work produced in a cycle is
 $$
-L = Q_{\text{in}} - Q_{\text{out}} .
+L = Q_{\text{ass}} - Q_{\text{ced}} .
 $$
-In the simplest case the engine operates between two reservoirs at temperatures $T_1 > T_2$; then $Q_1$ and $Q_2$ denote the heats exchanged with the hot reservoir and with the cold one, taken with the sign of the convention of the first law. For an engine $Q_1 > 0$, $Q_2 < 0$ and $L = Q_1 + Q_2 > 0$. If the working fluid of the engine goes through a quasi-static cycle, the work is the area enclosed by the cycle in the $(V, p)$ plane, positive when the cycle is traversed clockwise.
+In the simplest case the engine operates between two reservoirs at temperatures $T_1 > T_2$; then $Q_1$ and $Q_2$ denote the amounts of heat exchanged with the hot reservoir and with the cold one, taken with the sign of the convention of the first law. For an engine $Q_1 > 0$, $Q_2 < 0$ and $L = Q_1 + Q_2 > 0$. If the working fluid of the engine goes through a quasi-static cycle, the work is the area enclosed by the cycle in the $(V, p)$ plane, positive when the cycle is traversed clockwise.
 
 ::grafico{curve="3+2*cos(t),3+1.5*sin(t),0,6.29" area="3+1.5*sqrt(1-((x-3)/2)^2);3-1.5*sqrt(1-((x-3)/2)^2);1;5" vettori="2.6,4.47,3.4,4.47;3.4,1.53,2.6,1.53" etichette="2.2,3.1,L = area" xmin=-0.5 xmax=6 ymin=-0.5 ymax=5.5 nomi="V,p" titolo="A cycle traversed clockwise in the $(V, p)$ plane, in arbitrary units: the work done by the fluid in one cycle is positive and equal to the enclosed area"}
 
@@ -35,15 +35,15 @@ In the simplest case the engine operates between two reservoirs at temperatures 
 :::definizione{#rendimento titolo="Efficiency"}
 The **efficiency** of a heat engine is the ratio of the work produced in a cycle to the heat absorbed in the same cycle:
 $$
-\eta = \frac{L}{Q_{\text{in}}} = 1 - \frac{Q_{\text{out}}}{Q_{\text{in}}} .
+\eta = \frac{L}{Q_{\text{ass}}} = 1 - \frac{Q_{\text{ced}}}{Q_{\text{ass}}} .
 $$
-For an engine between two reservoirs the formula becomes $\eta = 1 + \dfrac{Q_2}{Q_1} = 1 - \dfrac{|Q_2|}{Q_1}$. The efficiency is a pure number and measures what fraction of the heat absorbed becomes work. From the formula it follows that $\eta < 1$ whenever the engine releases heat; the second law states that this release is unavoidable. For example, an engine that in each cycle absorbs $2000\,\mathrm{J}$ and releases $1500\,\mathrm{J}$ produces $L = 500\,\mathrm{J}$ and has efficiency $\eta = 0.25$.
+For an engine between two reservoirs the formula becomes $\eta = 1 + \dfrac{Q_2}{Q_1} = 1 - \dfrac{|Q_2|}{Q_1}$. The efficiency is a dimensionless number and measures what fraction of the heat absorbed becomes work. From the formula it follows that $\eta < 1$ whenever the engine releases heat; the second law states that this release is unavoidable. For example, an engine that in each cycle absorbs $2000\,\mathrm{J}$ and releases $1500\,\mathrm{J}$ produces $L = 500\,\mathrm{J}$ and has efficiency $\eta = 0{,}25$.
 :::
 
 ## Refrigerators and heat pumps
 
 :::definizione{#macchina-frigorifera titolo="Refrigerator"}
-A **refrigerator** is a machine that goes through a cycle in which it absorbs heat from a cold reservoir at temperature $T_2$ and releases heat to a hot reservoir at temperature $T_1 > T_2$, receiving work from the outside. With the sign convention $Q_2 > 0$, $Q_1 < 0$ and $L < 0$, and the balance of the cycle $L = Q_1 + Q_2$ gives
+A **refrigerator** is a machine that goes through a cycle in which it absorbs heat from a cold reservoir at temperature $T_2$ and releases heat to a hot reservoir at temperature $T_1 > T_2$, receiving work from the outside. With the sign convention we have $Q_2 > 0$, $Q_1 < 0$ and $L < 0$, and the balance of the cycle $L = Q_1 + Q_2$ gives
 $$
 |Q_1| = Q_2 + |L| ,
 $$
@@ -51,15 +51,15 @@ that is, the hot reservoir receives both the heat extracted from the cold reserv
 :::
 
 :::definizione{#efficienza titolo="Coefficient of performance of refrigerators and heat pumps"}
-The **coefficient of performance** of a refrigerator is the ratio of the heat extracted from the cold reservoir to the work spent:
+The **coefficient of performance** (or efficiency) of a refrigerator is the ratio of the heat extracted from the cold reservoir to the work spent:
 $$
 \varepsilon = \frac{Q_2}{|L|} .
 $$
 For a heat pump the useful effect is the heat released to the hot reservoir, therefore its coefficient of performance is
 $$
-\varepsilon_{\text{hp}} = \frac{|Q_1|}{|L|} = \frac{Q_2 + |L|}{|L|} = \varepsilon + 1 .
+\varepsilon_{\text{pc}} = \frac{|Q_1|}{|L|} = \frac{Q_2 + |L|}{|L|} = \varepsilon + 1 .
 $$
-The coefficients of performance can exceed $1$, since the work spent serves only to transfer heat from one reservoir to the other. For example, a refrigerator that extracts $300\,\mathrm{J}$ from its interior while spending $100\,\mathrm{J}$ of work has $\varepsilon = 3$ and releases $400\,\mathrm{J}$ to the kitchen; the same machine used as a heat pump has $\varepsilon_{\text{hp}} = 4$.
+The coefficients of performance can exceed $1$, since the work spent serves only to transfer heat from one reservoir to the other. For example, a refrigerator that extracts $300\,\mathrm{J}$ from its interior while spending $100\,\mathrm{J}$ of work has $\varepsilon = 3$ and releases $400\,\mathrm{J}$ to the kitchen; the same machine used as a heat pump has $\varepsilon_{\text{pc}} = 4$.
 :::
 
 ## Statements of the second law
@@ -86,7 +86,7 @@ Let two reservoirs at temperatures $T_1 > T_2$ be given.
 
 Suppose the Kelvin-Planck statement is false. Then there exists a machine $M$ that in one cycle absorbs $Q$ from the hot reservoir and produces the work $L = Q$. This work is used to drive a refrigerator $F$ that absorbs $Q_2' > 0$ from the cold reservoir and releases $Q_2' + L$ to the hot reservoir. The machine composed of $M$ and $F$ exchanges no work with the outside; the hot reservoir receives in total $Q_2' + L - Q = Q_2'$ and the cold reservoir releases $Q_2'$. Therefore the only result is the transfer of $Q_2'$ from the cold body to the hot body, and the Clausius statement is false.
 
-Suppose the Clausius statement is false. Then there exists a device $D$ that transfers a heat $Q$ from the cold reservoir to the hot one without other effects. An engine is operated between the two reservoirs that absorbs $Q_1$ from the hot reservoir, produces $L > 0$ and releases $Q$ to the cold reservoir, and $D$ is used to bring $Q$ back to the hot reservoir. The cold reservoir undergoes no change, and the hot reservoir releases in total $Q_1 - Q = L$. Therefore the only result is the complete conversion into work of heat taken from a single reservoir, and the Kelvin-Planck statement is false.
+Suppose the Clausius statement is false. Then there exists a device $D$ that transfers an amount of heat $Q$ from the cold reservoir to the hot one without other effects. An engine is operated between the two reservoirs that absorbs $Q_1$ from the hot reservoir, produces $L > 0$ and releases $Q$ to the cold reservoir, and $D$ is used to bring $Q$ back to the hot reservoir. The cold reservoir undergoes no change, and the hot reservoir releases in total $Q_1 - Q = L$. Therefore the only result is the complete conversion into work of heat taken from a single reservoir, and the Kelvin-Planck statement is false.
 :::
 ::::
 
@@ -107,17 +107,17 @@ Heat exchanges occur only along the isotherms, at the same temperature as the re
 :::
 
 :::richiamo{titolo="Reversible adiabatic process of the ideal gas"}
-In a reversible adiabatic process of an ideal gas $T V^{\gamma - 1} = \text{constant}$ holds, with $\gamma = \dfrac{c_p}{c_V}$. See the topic on the first law of thermodynamics.
+In a reversible adiabatic process of an ideal gas $T V^{\gamma - 1} = \text{costante}$ holds, with $\gamma = \dfrac{c_p}{c_V}$. See the topic on the first law of thermodynamics.
 :::
 
 ::::teorema{#rendimento-di-carnot titolo="Efficiency of the Carnot cycle"}
 Let an ideal gas go through a Carnot cycle between the reservoirs at temperatures $T_1 > T_2$. Then
 $$
 \frac{Q_2}{Q_1} = -\frac{T_2}{T_1}
-\qquad\text{and}\qquad
+\qquad\text{e}\qquad
 \eta_C = 1 - \frac{T_2}{T_1} .
 $$
-The efficiency depends only on the temperatures of the two reservoirs, expressed in kelvins. For a Carnot engine between $T_1 = 800\,\mathrm{K}$ and $T_2 = 300\,\mathrm{K}$ one obtains $\eta_C = 1 - \dfrac{3}{8} = 0.625$. The first relation can be written $\dfrac{Q_1}{T_1} + \dfrac{Q_2}{T_2} = 0$, and from this form the Clausius inequality and entropy arise.
+The efficiency depends only on the temperatures of the two reservoirs, expressed in kelvins. For a Carnot engine between $T_1 = 800\,\mathrm{K}$ and $T_2 = 300\,\mathrm{K}$ one obtains $\eta_C = 1 - \dfrac{3}{8} = 0{,}625$. The first relation can be written $\dfrac{Q_1}{T_1} + \dfrac{Q_2}{T_2} = 0$, and from this form the Clausius inequality and entropy arise.
 
 :::dimostrazione
 Along the isotherm $A \to B$ the internal energy of the ideal gas does not change, because it depends only on the temperature. Therefore, by the first law, the heat absorbed equals the work done by the gas:
@@ -128,14 +128,14 @@ In the same way, along the isotherm $C \to D$ one has
 $$
 Q_2 = nRT_2 \ln\frac{V_D}{V_C} = -\,nRT_2 \ln\frac{V_C}{V_D} < 0 .
 $$
-The processes $B \to C$ and $D \to A$ are reversible adiabatic, therefore
+The processes $B \to C$ and $D \to A$ are reversible and adiabatic, therefore
 $$
 \begin{cases}
 T_1 V_B^{\gamma - 1} = T_2 V_C^{\gamma - 1} \\[4pt]
 T_1 V_A^{\gamma - 1} = T_2 V_D^{\gamma - 1}
 \end{cases}
 $$
-Dividing the first equation by the second, side by side, gives $\left(\dfrac{V_B}{V_A}\right)^{\gamma - 1} = \left(\dfrac{V_C}{V_D}\right)^{\gamma - 1}$, therefore $\dfrac{V_B}{V_A} = \dfrac{V_C}{V_D}$. Then the two logarithms coincide and
+Dividing the corresponding sides of the first equation by those of the second gives $\left(\dfrac{V_B}{V_A}\right)^{\gamma - 1} = \left(\dfrac{V_C}{V_D}\right)^{\gamma - 1}$, therefore $\dfrac{V_B}{V_A} = \dfrac{V_C}{V_D}$. Then the two logarithms coincide and
 $$
 \frac{Q_2}{Q_1} = -\frac{nRT_2 \ln\dfrac{V_C}{V_D}}{nRT_1 \ln\dfrac{V_B}{V_A}} = -\frac{T_2}{T_1} .
 $$
@@ -144,13 +144,13 @@ Finally $\eta_C = 1 + \dfrac{Q_2}{Q_1} = 1 - \dfrac{T_2}{T_1}$.
 ::::
 
 :::osservazione{#efficienza-di-carnot titolo="Carnot refrigerator and heat pump"}
-The Carnot cycle traversed in the reverse direction exchanges the same heats with opposite signs, therefore $\dfrac{|Q_1|}{Q_2} = \dfrac{T_1}{T_2}$ still holds. From the definitions of the coefficient of performance it follows that
+The Carnot cycle traversed in the reverse direction exchanges the same amounts of heat with opposite signs, therefore $\dfrac{|Q_1|}{Q_2} = \dfrac{T_1}{T_2}$ still holds. From the definitions of the coefficient of performance it follows that
 $$
 \varepsilon_C = \frac{Q_2}{|Q_1| - Q_2} = \frac{T_2}{T_1 - T_2} ,
 \qquad
-\varepsilon_{\text{hp},C} = \frac{|Q_1|}{|Q_1| - Q_2} = \frac{T_1}{T_1 - T_2} .
+\varepsilon_{\text{pc},C} = \frac{|Q_1|}{|Q_1| - Q_2} = \frac{T_1}{T_1 - T_2} .
 $$
-The coefficients of performance increase when the two temperatures are close. A Carnot refrigerator between $T_2 = 260\,\mathrm{K}$ and $T_1 = 300\,\mathrm{K}$ has $\varepsilon_C = \dfrac{260}{40} = 6.5$; a Carnot heat pump that heats a house at $300\,\mathrm{K}$ taking heat from the outside at $270\,\mathrm{K}$ has $\varepsilon_{\text{hp},C} = \dfrac{300}{30} = 10$.
+The coefficients of performance increase when the two temperatures are close. A Carnot refrigerator between $T_2 = 260\,\mathrm{K}$ and $T_1 = 300\,\mathrm{K}$ has $\varepsilon_C = \dfrac{260}{40} = 6{,}5$; a Carnot heat pump that heats a house at $300\,\mathrm{K}$ taking heat from the outside at $270\,\mathrm{K}$ has $\varepsilon_{\text{pc},C} = \dfrac{300}{30} = 10$.
 :::
 
 ## Carnot's theorem and thermodynamic temperature
@@ -170,7 +170,7 @@ The machine composed of $M$ and $R$ exchanges no heat with the hot reservoir. Wi
 $$
 (Q_1 - L_R) - (Q_1 - L_M) = L_M - L_R ,
 $$
-heat that is absorbed, and it produces the net work $L_M - L_R$. If $L_M - L_R > 0$, the composite machine would convert completely into work heat taken from a single reservoir, contradicting the **Kelvin-Planck statement**. Therefore $L_M \leq L_R$, that is, $\eta_M \leq \eta_R$. If $M$ is also reversible, the argument is repeated with the roles of the two engines exchanged and one obtains $\eta_R \leq \eta_M$, therefore $\eta_M = \eta_R$.
+heat that is absorbed, and it produces the net work $L_M - L_R$. If $L_M - L_R > 0$, the composite machine would completely convert heat taken from a single reservoir into work, contradicting the **Kelvin-Planck statement**. Therefore $L_M \leq L_R$, that is, $\eta_M \leq \eta_R$. If $M$ is also reversible, the argument is repeated with the roles of the two engines exchanged and one obtains $\eta_R \leq \eta_M$, therefore $\eta_M = \eta_R$.
 :::
 ::::
 
@@ -179,21 +179,21 @@ For an arbitrary engine between $T_1$ and $T_2$ with $Q_1 > 0$, Carnot's theorem
 $$
 \frac{Q_1}{T_1} + \frac{Q_2}{T_2} \leq 0 ,
 $$
-with the equality sign *only* for reversible engines. This relation is the practical criterion for deciding whether a claimed engine is possible. An engine between $400\,\mathrm{K}$ and $300\,\mathrm{K}$ that absorbs $5000\,\mathrm{J}$ and produces $1500\,\mathrm{J}$ would release $3500\,\mathrm{J}$, and $\dfrac{5000}{400} - \dfrac{3500}{300} \approx 0.83\,\mathrm{J/K} > 0$; therefore an engine with this performance **does not exist**. Its claimed efficiency, $0.30$, indeed exceeds $\eta_C = 0.25$.
+with the equality sign *only* for reversible engines. This relation is the practical criterion for deciding whether a claimed engine is possible. An engine between $400\,\mathrm{K}$ and $300\,\mathrm{K}$ that absorbs $5000\,\mathrm{J}$ and produces $1500\,\mathrm{J}$ would release $3500\,\mathrm{J}$, and $\dfrac{5000}{400} - \dfrac{3500}{300} \approx 0{,}83\,\mathrm{J/K} > 0$; therefore an engine with this performance **does not exist**. Its claimed efficiency, $0{,}30$, indeed exceeds $\eta_C = 0{,}25$.
 :::
 
 :::definizione{#temperatura-termodinamica titolo="Thermodynamic temperature"}
 By Carnot's theorem the ratio $\dfrac{|Q_2|}{Q_1}$ is the same for all reversible engines between two reservoirs, and it therefore depends only on the reservoirs and on no property of the working fluid. The **thermodynamic temperature** is the scale defined by the relation
 $$
-\frac{T_2}{T_1} = \frac{|Q_2|}{Q_1} \qquad \text{(reversible engine between } T_1 \text{ and } T_2\text{)} ,
+\frac{T_2}{T_1} = \frac{|Q_2|}{Q_1} \qquad \text{(macchina reversibile tra } T_1 \text{ e } T_2\text{)} ,
 $$
-with the unit fixed by assigning $T = 273.16\,\mathrm{K}$ to the triple point of water. The scale does not depend on any thermometric substance. The **efficiency of the Carnot cycle** computed for the ideal gas shows that the ratio of the heats coincides with the ratio of the ideal-gas temperatures, therefore the two scales coincide and the kelvin of the gas thermometer is the thermodynamic kelvin.
+with the unit fixed by assigning $T = 273{,}16\,\mathrm{K}$ to the triple point of water. The scale does not depend on any thermometric substance. The **efficiency of the Carnot cycle** computed for the ideal gas shows that the ratio of the amounts of heat coincides with the ratio of the ideal-gas temperatures, therefore the two scales coincide and the kelvin of the gas thermometer is the thermodynamic kelvin.
 :::
 
 ## Clausius inequality
 
 ::::teorema{#disuguaglianza-di-clausius titolo="Clausius inequality"}
-Let a system go through a cycle exchanging the heats $Q_1, Q_2, \dots, Q_n$ with $n$ reservoirs at the temperatures $T_1, T_2, \dots, T_n$, where $Q_i$ is the heat absorbed by the system from reservoir $i$. Then
+Let a system go through a cycle exchanging the amounts of heat $Q_1, Q_2, \dots, Q_n$ with $n$ reservoirs at the temperatures $T_1, T_2, \dots, T_n$, where $Q_i$ is the heat absorbed by the system from reservoir $i$. Then
 $$
 \sum_{i=1}^{n} \frac{Q_i}{T_i} \leq 0 ,
 $$
@@ -201,7 +201,7 @@ and the equality sign holds if the cycle is reversible. When the exchanges are c
 $$
 \oint \frac{\delta Q}{T} \leq 0 ,
 $$
-where $\delta Q$ is the infinitesimal heat absorbed and $T$ is the temperature of the reservoir that supplies it. The symbol $\delta Q$ indicates that heat depends on the process and therefore is not the differential of a function of state. For two reservoirs the inequality is the balance $\dfrac{Q_1}{T_1} + \dfrac{Q_2}{T_2} \leq 0$ obtained from Carnot's theorem; the definition of entropy arises from this inequality.
+where $\delta Q$ is the infinitesimal heat absorbed and $T$ is the temperature of the reservoir that supplies it. The symbol $\delta Q$ indicates that heat depends on the process and therefore is not the differential of a state function. For two reservoirs the inequality is the balance $\dfrac{Q_1}{T_1} + \dfrac{Q_2}{T_2} \leq 0$ obtained from Carnot's theorem; the definition of entropy arises from this inequality.
 
 :::dimostrazione
 We introduce an auxiliary reservoir at temperature $T_0$ and, for each $i$, a Carnot engine $C_i$ between $T_0$ and $T_i$, adjusted so that in one cycle it releases to reservoir $i$ exactly the heat $Q_i$ that the system extracts from it (if $Q_i < 0$, the engine $C_i$ extracts the heat $|Q_i|$ from the reservoir). Since $C_i$ is reversible, the heat $Q_{0,i}$ that it exchanges with the auxiliary reservoir satisfies $\dfrac{Q_{0,i}}{T_0} + \dfrac{-Q_i}{T_i} = 0$, that is,
@@ -212,9 +212,9 @@ Consider the machine composed of the system and the $n$ Carnot engines. At the e
 $$
 Q_0 = \sum_{i=1}^{n} Q_{0,i} = T_0 \sum_{i=1}^{n} \frac{Q_i}{T_i} .
 $$
-By the first law applied to the cycle, the composite machine has produced the work $L = Q_0$. By the **Kelvin-Planck statement** it is not possible that $Q_0 > 0$, because the machine would convert completely into work heat taken from a single reservoir. Therefore $Q_0 \leq 0$, and since $T_0 > 0$ one has $\displaystyle\sum_{i=1}^{n} \frac{Q_i}{T_i} \leq 0$.
+By the first law applied to the cycle, the composite machine has produced the work $L = Q_0$. By the **Kelvin-Planck statement** it is not possible that $Q_0 > 0$, because the machine would completely convert heat taken from a single reservoir into work. Therefore $Q_0 \leq 0$, and since $T_0 > 0$ one has $\displaystyle\sum_{i=1}^{n} \frac{Q_i}{T_i} \leq 0$.
 
-If the cycle of the system is reversible, it is traversed in the opposite direction together with the Carnot engines; in this way all the heats change sign, and the same argument gives $-\displaystyle\sum_{i=1}^{n} \frac{Q_i}{T_i} \leq 0$. The two inequalities together give the equality.
+If the cycle of the system is reversible, it is traversed in the opposite direction together with the Carnot engines; in this way all the amounts of heat change sign, and the same argument gives $-\displaystyle\sum_{i=1}^{n} \frac{Q_i}{T_i} \leq 0$. The two inequalities together give the equality.
 :::
 ::::
 
@@ -227,10 +227,10 @@ $$
 $$
 computed along a reversible process from $A$ to $B$ has the same value for *every* reversible process connecting the two states.
 
-The theorem says that, over reversible processes, $\dfrac{\delta Q}{T}$ is the differential of a function of state, while $\delta Q$ alone depends on the path. In a reversible process the temperature of the system equals that of the reservoir with which it exchanges heat, therefore $T$ is also the temperature of the system.
+The theorem says that, over reversible processes, $\dfrac{\delta Q}{T}$ is the differential of a state function, while $\delta Q$ alone depends on the path. In a reversible process the temperature of the system equals that of the reservoir with which it exchanges heat, therefore $T$ is also the temperature of the system.
 
 :::dimostrazione
-Let $\gamma_1$ and $\gamma_2$ be two reversible processes from $A$ to $B$. Traversing $\gamma_1$ from $A$ to $B$ and then $\gamma_2$ in the opposite direction from $B$ to $A$ gives a reversible cycle. In the reverse process every heat exchanged changes sign, therefore the **Clausius inequality** with the equality sign gives
+Let $\gamma_1$ and $\gamma_2$ be two reversible processes from $A$ to $B$. Traversing $\gamma_1$ from $A$ to $B$ and then $\gamma_2$ in the opposite direction from $B$ to $A$ gives a reversible cycle. In the reverse process each amount of heat exchanged changes sign, therefore the **Clausius inequality** with the equality sign gives
 $$
 \int_{\gamma_1} \frac{\delta Q}{T} - \int_{\gamma_2} \frac{\delta Q}{T} = 0 ,
 $$
@@ -243,7 +243,7 @@ that is, the two integrals are equal.
 $$
 S(B) - S(A) = \int_A^B \left( \frac{\delta Q}{T} \right)_{\text{rev}} ,
 $$
-where the integral is computed along any reversible process from $A$ to $B$. The unit of measurement is the $\mathrm{J/K}$. Since $S$ is a state function, the change $\Delta S$ depends only on the initial and final states; for an irreversible process it is therefore computed along a conveniently chosen reversible process between the same states. In a reversible process $dS = \dfrac{\delta Q}{T}$, therefore $\delta Q = T\, dS$; a reversible adiabatic process has $\Delta S = 0$ and is called **isentropic**. For example, a system that reversibly absorbs $1200\,\mathrm{J}$ at the constant temperature of $300\,\mathrm{K}$ has $\Delta S = \dfrac{1200}{300} = 4.0\,\mathrm{J/K}$.
+where the integral is computed along any reversible process from $A$ to $B$. The unit of measurement is $\mathrm{J/K}$. Since $S$ is a state function, the change $\Delta S$ depends only on the initial and final states; for an irreversible process it is therefore computed along a conveniently chosen reversible process between the same states. In a reversible process $dS = \dfrac{\delta Q}{T}$, therefore $\delta Q = T\, dS$; a reversible adiabatic process has $\Delta S = 0$ and is called **isentropic**. For example, a system that reversibly absorbs $1200\,\mathrm{J}$ at the constant temperature of $300\,\mathrm{K}$ has $\Delta S = \dfrac{1200}{300} = 4{,}0\,\mathrm{J/K}$.
 :::
 
 :::osservazione{#diagramma-ts titolo="The TS plane"}
@@ -280,11 +280,11 @@ For $0 < a < b$, $\displaystyle\int_a^b \frac{dx}{x} = \ln b - \ln a = \ln\frac{
 :::
 
 ::::teorema{#entropia-del-gas-perfetto titolo="Change in entropy of the ideal gas"}
-Let $n$ moles of ideal gas with molar heat at constant volume $c_V$ go from the state $(T_A, V_A)$ to the state $(T_B, V_B)$ through an arbitrary process. Then
+Let $n$ moles of ideal gas with molar heat capacity at constant volume $c_V$ go from the state $(T_A, V_A)$ to the state $(T_B, V_B)$ through an arbitrary process. Then
 $$
 \Delta S = n c_V \ln\frac{T_B}{T_A} + nR \ln\frac{V_B}{V_A} = n c_p \ln\frac{T_B}{T_A} - nR \ln\frac{p_B}{p_A} .
 $$
-The formula also holds for irreversible processes, because $S$ is a state function and only the pair of states matters. For example $2.0$ moles of monatomic gas, with $c_V = \dfrac{3}{2}R$, heated at constant volume from $300\,\mathrm{K}$ to $450\,\mathrm{K}$ have $\Delta S = 2.0 \cdot \dfrac{3}{2} \cdot 8.314 \cdot \ln 1.5 \approx 10.1\,\mathrm{J/K}$.
+The formula also holds for irreversible processes, because $S$ is a state function and only the pair of states matters. For example $2{,}0$ moles of monatomic gas, with $c_V = \dfrac{3}{2}R$, heated at constant volume from $300\,\mathrm{K}$ to $450\,\mathrm{K}$ have $\Delta S = 2{,}0 \cdot \dfrac{3}{2} \cdot 8{,}314 \cdot \ln 1{,}5 \approx 10{,}1\,\mathrm{J/K}$.
 
 :::dimostrazione
 $\Delta S$ is computed along a reversible process from $A$ to $B$. In an infinitesimal step the first law gives $\delta Q = dU + p\, dV$, with $dU = n c_V\, dT$ for the ideal gas and $p = \dfrac{nRT}{V}$ by the equation of state. Therefore
@@ -320,19 +320,19 @@ An ideal gas is enclosed in one half of a container with rigid and insulating wa
 $$
 \Delta S = nR \ln\frac{V_B}{V_A} = nR \ln 2 .
 $$
-For one mole $\Delta S = 8.314 \cdot \ln 2 \approx 5.76\,\mathrm{J/K} > 0 = \displaystyle\int \frac{\delta Q}{T}$, in agreement with the theorem on entropy in irreversible processes.
+For one mole $\Delta S = 8{,}314 \cdot \ln 2 \approx 5{,}76\,\mathrm{J/K} > 0 = \displaystyle\int \frac{\delta Q}{T}$, in agreement with the theorem on entropy in irreversible processes.
 :::
 
 ## Entropy of bodies and reservoirs
 
-:::teorema{#entropia-di-corpi-e-serbatoi titolo="Entropy of reservoirs, bodies and changes of state"}
+:::teorema{#entropia-di-corpi-e-serbatoi titolo="Entropy of reservoirs, bodies and phase changes"}
 The following formulas hold, where $Q$ is the heat absorbed.
 
 - A reservoir at temperature $T$ that absorbs the heat $Q$ has $\Delta S = \dfrac{Q}{T}$.
-- A body of mass $m$ and constant specific heat $c$, heated or cooled from $T_A$ to $T_B$, has $\Delta S = m c \ln\dfrac{T_B}{T_A}$.
-- A mass $m$ that changes state at the temperature $T$ with latent heat $\lambda$ has $\Delta S = \pm\dfrac{m \lambda}{T}$, with the positive sign for melting and vaporization.
+- A body of mass $m$ and constant specific heat capacity $c$, heated or cooled from $T_A$ to $T_B$, has $\Delta S = m c \ln\dfrac{T_B}{T_A}$.
+- A mass $m$ that changes phase at the temperature $T$ with latent heat $\lambda$ has $\Delta S = \pm\dfrac{m \lambda}{T}$, with the positive sign for melting and vaporization.
 
-The reservoir exchanges heat at constant temperature, and the exchange can be regarded as reversible for the reservoir, therefore $\Delta S = \dfrac{Q}{T}$ even when the body it is in contact with has a different temperature. For the body, consider heating with a succession of reservoirs at gradually increasing temperatures, so that each exchange is reversible; then $\delta Q = m c\, dT$ and $\Delta S = \displaystyle\int_{T_A}^{T_B} \frac{m c\, dT}{T}$. In the change of state the temperature remains constant, therefore the heat $m\lambda$ is divided by $T$. For example $1.0\,\mathrm{kg}$ of water heated from $293\,\mathrm{K}$ to $353\,\mathrm{K}$, with $c = 4186\,\mathrm{J/(kg\cdot K)}$, has $\Delta S = 4186 \ln\dfrac{353}{293} \approx 780\,\mathrm{J/K}$, and $1.0\,\mathrm{kg}$ of ice melting at $273\,\mathrm{K}$, with $\lambda_f = 3.33 \cdot 10^5\,\mathrm{J/kg}$, has $\Delta S \approx 1.22 \cdot 10^3\,\mathrm{J/K}$.
+The reservoir exchanges heat at constant temperature, and the exchange can be regarded as reversible for the reservoir, therefore $\Delta S = \dfrac{Q}{T}$ even when the body it is in contact with has a different temperature. For the body, consider heating with a succession of reservoirs at gradually increasing temperatures, so that each exchange is reversible; then $\delta Q = m c\, dT$ and $\Delta S = \displaystyle\int_{T_A}^{T_B} \frac{m c\, dT}{T}$. In the phase change the temperature remains constant, therefore the heat $m\lambda$ is divided by $T$. For example $1{,}0\,\mathrm{kg}$ of water heated from $293\,\mathrm{K}$ to $353\,\mathrm{K}$, with $c = 4186\,\mathrm{J/(kg\cdot K)}$, has $\Delta S = 4186 \ln\dfrac{353}{293} \approx 780\,\mathrm{J/K}$, and $1{,}0\,\mathrm{kg}$ of ice melting at $273\,\mathrm{K}$, with $\lambda_f = 3{,}33 \cdot 10^5\,\mathrm{J/kg}$, has $\Delta S \approx 1{,}22 \cdot 10^3\,\mathrm{J/K}$.
 :::
 
 ## Principle of entropy increase
@@ -350,11 +350,11 @@ The system is isolated, therefore in every step of the process $\delta Q = 0$ an
 ::::
 
 :::esempio{titolo="Heat transfer between two reservoirs"}
-A heat $Q = 1000\,\mathrm{J}$ passes by conduction from a reservoir at $500\,\mathrm{K}$ to a reservoir at $250\,\mathrm{K}$. The hot reservoir absorbs $-1000\,\mathrm{J}$ and the cold one $+1000\,\mathrm{J}$, therefore
+An amount of heat $Q = 1000\,\mathrm{J}$ passes by conduction from a reservoir at $500\,\mathrm{K}$ to a reservoir at $250\,\mathrm{K}$. The hot reservoir absorbs $-1000\,\mathrm{J}$ and the cold one $+1000\,\mathrm{J}$, therefore
 $$
-\Delta S_{\text{u}} = -\frac{1000}{500} + \frac{1000}{250} = -2.0 + 4.0 = 2.0\,\mathrm{J/K} > 0 .
+\Delta S_{\text{u}} = -\frac{1000}{500} + \frac{1000}{250} = -2{,}0 + 4{,}0 = 2{,}0\,\mathrm{J/K} > 0 .
 $$
-The reverse transfer would give $\Delta S_{\text{u}} = -2.0\,\mathrm{J/K}$, and the principle excludes it; in this way the **Clausius statement** is recovered.
+The reverse transfer would give $\Delta S_{\text{u}} = -2{,}0\,\mathrm{J/K}$, and the principle excludes it; in this way the **Clausius statement** is recovered.
 :::
 
 :::osservazione{#equilibrio-e-massimo-di-entropia titolo="Equilibrium and maximum of entropy"}
@@ -362,7 +362,7 @@ Two bodies with heat capacity $C = 50\,\mathrm{J/K}$ at the temperatures $400\,\
 $$
 \Delta S(Q) = C \ln\frac{400 - \dfrac{Q}{C}}{400} + C \ln\frac{200 + \dfrac{Q}{C}}{200} .
 $$
-The function increases as long as the hot body is hotter than the other one and has its maximum at $Q = 5\,\mathrm{kJ}$, when both temperatures are $300\,\mathrm{K}$; there $\Delta S \approx 5.9\,\mathrm{J/K}$. The equilibrium state of an isolated system is therefore the state of **maximum entropy** compatible with the constraints.
+The function increases as long as the hot body is hotter than the other one and has its maximum at $Q = 5\,\mathrm{kJ}$, when both temperatures are $300\,\mathrm{K}$; there $\Delta S \approx 5{,}9\,\mathrm{J/K}$. The equilibrium state of an isolated system is therefore the state of **maximum entropy** compatible with the constraints.
 
 ::grafico{f="50*(log(1-x*20/400)+log(1+x*20/200))" punti="5,5.89,pieno" segmenti="5,0,5,5.89" xmin=-0.5 xmax=10.5 ymin=-0.5 ymax=7 nomi="Q,ΔS" titolo="Change in entropy (in $\mathrm{J/K}$) as a function of the heat transferred $Q$ (in $\mathrm{kJ}$): the maximum corresponds to thermal equilibrium at $300\,\mathrm{K}$"}
 
@@ -373,5 +373,5 @@ Let an engine operate between the reservoirs $T_1 > T_2$, absorb $Q_1$ and produ
 $$
 L_{\text{rev}} - L = -\,Q_2 - \frac{T_2}{T_1}\, Q_1 = T_2\, \Delta S_{\text{u}} .
 $$
-The work lost because of irreversibilities is therefore proportional to the entropy produced. For example, an engine between $500\,\mathrm{K}$ and $300\,\mathrm{K}$ that absorbs $1000\,\mathrm{J}$ and produces $250\,\mathrm{J}$ generates $\Delta S_{\text{u}} = -2.0 + 2.5 = 0.5\,\mathrm{J/K}$ and loses $300 \cdot 0.5 = 150\,\mathrm{J}$ compared with the $400\,\mathrm{J}$ of the reversible engine.
+The work lost because of irreversibilities is therefore proportional to the entropy produced. For example, an engine between $500\,\mathrm{K}$ and $300\,\mathrm{K}$ that absorbs $1000\,\mathrm{J}$ and produces $250\,\mathrm{J}$ generates $\Delta S_{\text{u}} = -2{,}0 + 2{,}5 = 0{,}5\,\mathrm{J/K}$ and loses $300 \cdot 0{,}5 = 150\,\mathrm{J}$ compared with the $400\,\mathrm{J}$ of the reversible engine.
 :::

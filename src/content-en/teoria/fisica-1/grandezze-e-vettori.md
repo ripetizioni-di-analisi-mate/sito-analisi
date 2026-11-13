@@ -1,22 +1,22 @@
 ---
-titolo: Physical quantities, units of measurement and vectors
-sommario: How a physical quantity is measured in the International System, how formulas and results are checked with dimensional analysis and significant figures, and how to operate with the vectors that describe displacements, forces, work and torques.
+titolo: Grandezze fisiche, unità di misura e vettori
+sommario: Come si misura una grandezza fisica nel Sistema Internazionale, come si controllano formule e risultati con l'analisi dimensionale e le cifre significative, e come si opera con i vettori che descrivono spostamenti, forze, lavoro e momenti.
 ---
 
 ## Physical quantities and measurement
 
 :::definizione{#grandezza-fisica titolo="Physical quantity"}
-A **physical quantity** is a property of a body or of a phenomenon that can be measured, that is, compared with a standard of the same kind chosen as the **unit of measurement**. The measure is the number that expresses how many times the unit is contained in the quantity, and the value of the quantity is written as the product of that number and the unit:
+A **physical quantity** is a property of a body or of a phenomenon that can be measured, that is, compared with a standard of the same kind chosen as the **unit of measurement**. The measurement is the number that expresses how many times the unit is contained in the quantity, and the value of the quantity is written as the product of that number and the unit:
 $$
-\ell = 2.5\,\mathrm{m}
-\quad\text{means}\quad
-\ell = 2.5 \cdot (1\,\mathrm{m}) .
+\ell = 2{,}5\,\mathrm{m}
+\quad\text{significa}\quad
+\ell = 2{,}5 \cdot (1\,\mathrm{m}) .
 $$
-The number depends on the chosen unit, because the same length is $2.5$ in meters and $250$ in centimeters. For this reason a numerical result in physics is complete *only* when it is accompanied by its unit of measurement.
+The number depends on the chosen unit, because the same length is $2{,}5$ in meters and $250$ in centimeters. For this reason a numerical result in physics is complete *only* when it is accompanied by its unit of measurement.
 :::
 
 :::definizione{#grandezze-fondamentali-e-derivate titolo="Base and derived quantities"}
-The **base quantities** (or fundamental quantities) are a small set of quantities chosen as independent, each with its own unit defined autonomously. The **derived quantities** are defined from the base quantities through a mathematical relation, and their unit is obtained from the same relation. The average velocity is the ratio of a displacement to a time interval, $v = \dfrac{\Delta x}{\Delta t}$, so it is measured in meters per second, $\mathrm{m/s}$; the area of a rectangle is the product of two lengths, so it is measured in $\mathrm{m^2}$.
+The **base quantities** (or fundamental quantities) are a small set of quantities chosen as independent, each with its own unit defined independently. The **derived quantities** are defined from the base quantities through a mathematical relation, and their unit is obtained from the same relation. The average velocity is the ratio of a displacement to a time interval, $v = \dfrac{\Delta x}{\Delta t}$, so it is measured in meters per second, $\mathrm{m/s}$; the area of a rectangle is the product of two lengths, so it is measured in $\mathrm{m^2}$.
 :::
 
 ## The International System
@@ -62,7 +62,7 @@ To change units, each unit is replaced by its value in the new unit and the expr
 $$
 90\,\frac{\mathrm{km}}{\mathrm{h}} = 90 \cdot \frac{1000\,\mathrm{m}}{3600\,\mathrm{s}} = 25\,\mathrm{m/s} .
 $$
-The ratio $\dfrac{3600}{1000}$ equals $3.6$, therefore one goes from $\mathrm{km/h}$ to $\mathrm{m/s}$ by dividing by $3.6$, and in the opposite direction by multiplying by $3.6$. When a unit appears raised to a power, the conversion factor must be raised to the same power; a density of $1\,\mathrm{g/cm^3}$ is therefore
+The ratio $\dfrac{3600}{1000}$ equals $3{,}6$, therefore one goes from $\mathrm{km/h}$ to $\mathrm{m/s}$ by dividing by $3{,}6$, and in the opposite direction by multiplying by $3{,}6$. When a unit appears raised to a power, the conversion factor must be raised to the same power; a density of $1\,\mathrm{g/cm^3}$ is therefore
 $$
 1\,\frac{\mathrm{g}}{\mathrm{cm^3}} = \frac{10^{-3}\,\mathrm{kg}}{10^{-6}\,\mathrm{m^3}} = 10^{3}\,\mathrm{kg/m^3} .
 $$
@@ -89,7 +89,7 @@ This is the principle that every correct physical relation must satisfy:
 - only terms with the same dimensions are added or subtracted;
 - the argument of functions such as $\sin$, $\cos$, $\exp$ and $\ln$ is dimensionless.
 
-The principle follows from the definition of measure, because an equality between quantities remains true under a change of units *only if* every term transforms by the same factor. The argument of $\exp$ must be dimensionless because $e^{x} = 1 + x + \dfrac{x^2}{2} + \dots$ adds different powers of $x$. The principle is used to check a formula before using it. A formula that is not homogeneous is certainly wrong, whereas a homogeneous formula can still contain a wrong numerical coefficient. In the equation of motion $x = x_0 + v_0 t + \dfrac{1}{2} a t^2$ every term has dimension $[L]$, since $[v_0 t] = [L\,T^{-1}]\,[T] = [L]$ and $[a t^2] = [L\,T^{-2}]\,[T^2] = [L]$.
+The principle follows from the definition of measurement, because an equality between quantities remains true under a change of units *only if* every term transforms by the same factor. The argument of $\exp$ must be dimensionless because $e^{x} = 1 + x + \dfrac{x^2}{2} + \dots$ adds different powers of $x$. The principle is used to check a formula before using it. A formula that is not homogeneous is certainly wrong, whereas a homogeneous formula can still contain a wrong numerical coefficient. In the position function $x = x_0 + v_0 t + \dfrac{1}{2} a t^2$ every term has dimension $[L]$, since $[v_0 t] = [L\,T^{-1}]\,[T] = [L]$ and $[a t^2] = [L\,T^{-2}]\,[T^2] = [L]$.
 :::
 
 :::esempio{titolo="Period of the pendulum from dimensional analysis"}
@@ -115,16 +115,16 @@ The period **does not depend on the mass**. Dimensional analysis does not provid
 ## Scientific notation and significant figures
 
 :::definizione{#notazione-scientifica titolo="Scientific notation"}
-A number is written in **scientific notation** when it has the form $a \cdot 10^{n}$, with $1 \leq |a| < 10$ and $n$ an integer. The mass of the Earth is about $5.97 \cdot 10^{24}\,\mathrm{kg}$, the radius of the hydrogen atom in the Bohr model about $5.3 \cdot 10^{-11}\,\mathrm{m}$. In this form products and quotients are computed by separating the coefficients from the powers of ten:
+A number is written in **scientific notation** when it has the form $a \cdot 10^{n}$, with $1 \leq |a| < 10$ and $n$ an integer. The mass of the Earth is about $5{,}97 \cdot 10^{24}\,\mathrm{kg}$, the radius of the hydrogen atom in the Bohr model about $5{,}3 \cdot 10^{-11}\,\mathrm{m}$. In this form products and quotients are computed by separating the coefficients from the powers of ten:
 $$
-(3.0 \cdot 10^{8}) \cdot (2.0 \cdot 10^{-3}) = 6.0 \cdot 10^{5},
+(3{,}0 \cdot 10^{8}) \cdot (2{,}0 \cdot 10^{-3}) = 6{,}0 \cdot 10^{5},
 \qquad
-\frac{6.0 \cdot 10^{5}}{1.5 \cdot 10^{2}} = 4.0 \cdot 10^{3} .
+\frac{6{,}0 \cdot 10^{5}}{1{,}5 \cdot 10^{2}} = 4{,}0 \cdot 10^{3} .
 $$
 :::
 
 :::definizione{#cifre-significative titolo="Significant figures"}
-Every measurement has an uncertainty, and the number of digits with which a value is written declares its precision. The **significant figures** of a number are all the digits starting from the first nonzero digit from the left; the leading zeros only indicate the position of the decimal point. Therefore $0.00470$ has three significant figures, namely $4$, $7$ and the final zero, and $2.50\,\mathrm{kg}$ declares a precision to the hundredth of a kilogram, whereas $2.5\,\mathrm{kg}$ to the tenth. Scientific notation removes the ambiguity of trailing zeros in integers: $1.20 \cdot 10^{3}\,\mathrm{m}$ has three significant figures, $1.2 \cdot 10^{3}\,\mathrm{m}$ has two.
+Every measurement has an uncertainty, and the number of digits with which a value is written indicates its precision. The **significant figures** of a number are all the digits starting from the first nonzero digit from the left; the leading zeros only indicate the position of the decimal separator. Therefore $0{,}00470$ has three significant figures, namely $4$, $7$ and the final zero, and $2{,}50\,\mathrm{kg}$ indicates a precision to the hundredth of a kilogram, whereas $2{,}5\,\mathrm{kg}$ to the tenth. Scientific notation removes the ambiguity of trailing zeros in integers: $1{,}20 \cdot 10^{3}\,\mathrm{m}$ has three significant figures, $1{,}2 \cdot 10^{3}\,\mathrm{m}$ has two.
 :::
 
 :::osservazione{#cifre-nei-calcoli titolo="Significant figures in calculations"}
@@ -133,28 +133,28 @@ A calculated result has at most the precision of the data, and two practical rul
 - In products and quotients the result has as many significant figures as the datum with the fewest.
 - In sums and differences the result has as many decimal places as the datum with the fewest.
 
-If a car covers $125\,\mathrm{m}$ in $4.8\,\mathrm{s}$, the average speed is $\dfrac{125\,\mathrm{m}}{4.8\,\mathrm{s}} = 26.04\ldots\,\mathrm{m/s}$, and since $4.8$ has two significant figures the result is written $26\,\mathrm{m/s}$. In intermediate steps at least one extra digit is kept and only the final result is rounded, so that rounding errors do not accumulate.
+If a car covers $125\,\mathrm{m}$ in $4{,}8\,\mathrm{s}$, the average speed is $\dfrac{125\,\mathrm{m}}{4{,}8\,\mathrm{s}} = 26{,}04\ldots\,\mathrm{m/s}$, and since $4{,}8$ has two significant figures the result is written $26\,\mathrm{m/s}$. In intermediate steps at least one extra digit is kept and only the final result is rounded, so that rounding errors do not accumulate.
 :::
 
 :::definizione{#ordine-di-grandezza titolo="Order of magnitude"}
-The **order of magnitude** of a positive number is the power of ten closest to the number on the logarithmic scale. Once the number is written as $a \cdot 10^{n}$ with $1 \leq a < 10$, the order of magnitude is $10^{n}$ if $a < \sqrt{10} \approx 3.16$ and $10^{n+1}$ if $a \geq \sqrt{10}$. A day lasts $24 \cdot 3600\,\mathrm{s} = 8.64 \cdot 10^{4}\,\mathrm{s}$, and since $8.64 > 3.16$ the order of magnitude is $10^{5}\,\mathrm{s}$. Order-of-magnitude estimates are used to check results, because a value that differs from the estimate by several orders of magnitude signals an error in the calculation or in the units.
+The **order of magnitude** of a positive number is the power of ten closest to the number on the logarithmic scale. Once the number is written as $a \cdot 10^{n}$ with $1 \leq a < 10$, the order of magnitude is $10^{n}$ if $a < \sqrt{10} \approx 3{,}16$ and $10^{n+1}$ if $a \geq \sqrt{10}$. A day lasts $24 \cdot 3600\,\mathrm{s} = 8{,}64 \cdot 10^{4}\,\mathrm{s}$, and since $8{,}64 > 3{,}16$ the order of magnitude is $10^{5}\,\mathrm{s}$. Order-of-magnitude estimates are used to check results, because a value that differs from the estimate by several orders of magnitude signals an error in the calculation or in the units.
 :::
 
 ## Scalar and vector quantities
 
 :::definizione{#scalari-e-vettori titolo="Scalar and vector quantities"}
-A **scalar** quantity is specified by a number with its unit, like mass, time, temperature and energy. A **vector** quantity also requires a direction and an orientation, and it is represented by a vector, that is, by an arrow whose length, on a fixed scale, is the intensity of the quantity. Displacement, velocity, acceleration and force are vector quantities. One writes $\vec{F}$ for the vector and $F$ or $|\vec{F}|$ for its **magnitude**, which is a nonnegative number with the unit of the quantity. For some quantities the point of application also matters: a force applied to an extended body has different rotational effects depending on the point, and these effects are described by the torque of the force. For the geometric theory of vectors we refer to the topic on vectors in the plane and in space in Linear Algebra.
+A **scalar** quantity is specified by a number with its unit, like mass, time, temperature and energy. A **vector** quantity also requires a direction and a sense along it, and it is represented by a vector, that is, by an arrow whose length, on a fixed scale, is the magnitude of the quantity. Displacement, velocity, acceleration and force are vector quantities. One writes $\vec{F}$ for the vector and $F$ or $|\vec{F}|$ for its **magnitude**, which is a nonnegative number with the unit of the quantity. For some quantities the point of application also matters: a force applied to an extended body has different rotational effects depending on the point, and these effects are described by the torque of the force. For the geometric theory of vectors we refer to the topic on vectors in the plane and in space in Linear Algebra.
 :::
 
 :::definizione{#somma-di-vettori titolo="Sum of vectors"}
-The **sum** $\vec{A} + \vec{B}$ is constructed with the tip-to-tail rule: $\vec{B}$ is drawn with its tail at the tip of $\vec{A}$, and the sum goes from the tail of $\vec{A}$ to the tip of $\vec{B}$. If the two vectors are applied at the same point, the sum is the diagonal of the parallelogram that has them as sides. In physics the sum has a direct meaning: two successive displacements are equivalent to their sum displacement, and several forces applied to the same point particle are equivalent to their **resultant**, which is their vector sum. The magnitude of the sum satisfies $|\vec{A} + \vec{B}| \leq A + B$, with equality *only* for vectors with the same direction and the same orientation; two perpendicular forces of $3\,\mathrm{N}$ and $4\,\mathrm{N}$ have a resultant of magnitude $5\,\mathrm{N}$.
+The **sum** $\vec{A} + \vec{B}$ is constructed with the tip-to-tail rule: $\vec{B}$ is drawn with its tail at the tip of $\vec{A}$, and the sum goes from the tail of $\vec{A}$ to the tip of $\vec{B}$. If the two vectors are applied at the same point, the sum is the diagonal of the parallelogram that has them as sides. In physics the sum has a direct meaning: two successive displacements are equivalent to their sum displacement, and several forces applied to the same point particle are equivalent to their **resultant**, which is their vector sum. The magnitude of the sum satisfies $|\vec{A} + \vec{B}| \leq A + B$, with equality *only* for vectors that are parallel and point in the same direction; two perpendicular forces of $3\,\mathrm{N}$ and $4\,\mathrm{N}$ have a resultant of magnitude $5\,\mathrm{N}$.
 
 ::grafico{vettori="0,0,4,1,A;4,1,5,4,B;0,0,5,4,A + B;0,0,1,3,B" segmenti="1,3,5,4" xmin=-0.6 xmax=5.8 ymin=-0.6 ymax=4.6 uguale=1 titolo="The displacement $\vec{A}$ followed by $\vec{B}$ is equivalent to $\vec{A} + \vec{B}$, which is also the diagonal of the parallelogram with sides $\vec{A}$ and $\vec{B}$"}
 
 :::
 
-:::definizione{#differenza-di-vettori titolo="Product by a scalar and difference"}
-The product of a number $k$ and a vector $\vec{A}$ is the vector $k\vec{A}$ with magnitude $|k|\,A$, with the direction of $\vec{A}$, the same orientation if $k > 0$ and the opposite orientation if $k < 0$. When $k$ is a physical quantity the product also changes the unit; the momentum $m\vec{v}$ has the direction and the orientation of the velocity and is measured in $\mathrm{kg\cdot m/s}$. The **difference** is $\vec{A} - \vec{B} = \vec{A} + (-\vec{B})$, and with the two vectors applied at the same point, $\vec{A} - \vec{B}$ goes from the tip of $\vec{B}$ to the tip of $\vec{A}$. For this reason the displacement between the positions $\vec{r}_1$ and $\vec{r}_2$ is $\Delta\vec{r} = \vec{r}_2 - \vec{r}_1$. In the same way the change in velocity $\Delta\vec{v} = \vec{v}_2 - \vec{v}_1$ is nonzero whenever the velocity changes direction, *even* if its magnitude stays the same.
+:::definizione{#differenza-di-vettori titolo="Scalar multiplication and subtraction"}
+The product of a number $k$ and a vector $\vec{A}$ is the vector $k\vec{A}$ with magnitude $|k|\,A$, parallel to $\vec{A}$, pointing in the same direction if $k > 0$ and in the opposite direction if $k < 0$. When $k$ is a physical quantity the product also changes the unit; the momentum $m\vec{v}$ is parallel to and points in the same direction as the velocity and is measured in $\mathrm{kg\cdot m/s}$. The **difference** is $\vec{A} - \vec{B} = \vec{A} + (-\vec{B})$, and with the two vectors applied at the same point, $\vec{A} - \vec{B}$ goes from the tip of $\vec{B}$ to the tip of $\vec{A}$. For this reason the displacement between the positions $\vec{r}_1$ and $\vec{r}_2$ is $\Delta\vec{r} = \vec{r}_2 - \vec{r}_1$. In the same way the change in velocity $\Delta\vec{v} = \vec{v}_2 - \vec{v}_1$ is nonzero whenever the velocity changes direction, *even* if its magnitude stays the same.
 
 ::grafico{vettori="0,0,1,3,r₁;0,0,4,1,r₂;1,3,4,1,Δr" punti="1,3,pieno;4,1,pieno" xmin=-0.6 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="The displacement $\Delta\vec{r} = \vec{r}_2 - \vec{r}_1$ goes from the initial position to the final position"}
 
@@ -167,15 +167,15 @@ Fix an orthogonal Cartesian reference frame $Oxyz$ and denote by $\hat{\imath}$,
 $$
 \vec{A} = A_x\,\hat{\imath} + A_y\,\hat{\jmath} + A_z\,\hat{k} ,
 $$
-and the numbers $A_x$, $A_y$, $A_z$, which have the unit of $\vec{A}$, are its **Cartesian components**; one also writes $\vec{A} = (A_x, A_y, A_z)$. The component $A_x$ is the projection of $\vec{A}$ onto the $x$-axis, with positive sign if the projection has the same orientation as the axis and negative sign if it has the opposite orientation. By the Pythagorean theorem the magnitude is
+and the numbers $A_x$, $A_y$, $A_z$, which have the unit of $\vec{A}$, are its **Cartesian components**; one also writes $\vec{A} = (A_x, A_y, A_z)$. The component $A_x$ is the projection of $\vec{A}$ onto the $x$-axis, with positive sign if the projection points in the same direction as the axis and negative sign if it points in the opposite direction. By the Pythagorean theorem the magnitude is
 $$
 A = \sqrt{A_x^2 + A_y^2 + A_z^2} .
 $$
-The unit vector of a nonzero vector is $\hat{u}_A = \dfrac{\vec{A}}{A}$, which has magnitude $1$ and the direction and orientation of $\vec{A}$, and makes it possible to write $\vec{A} = A\,\hat{u}_A$, separating the intensity from the direction.
+The unit vector of a nonzero vector is $\hat{u}_A = \dfrac{\vec{A}}{A}$, which has magnitude $1$ and is parallel to and points in the same direction as $\vec{A}$, and makes it possible to write $\vec{A} = A\,\hat{u}_A$, separating the magnitude from the direction.
 :::
 
 :::teorema{#componenti-polari titolo="Cartesian components and polar coordinates"}
-Let $\vec{A}$ be a vector in the $xy$-plane with magnitude $A$, and let $\theta$ be the angle it forms with the positive $x$-semiaxis, measured counterclockwise. Then
+Let $\vec{A}$ be a vector in the $xy$-plane with magnitude $A$, and let $\theta$ be the angle it forms with the positive $x$-axis, measured counterclockwise. Then
 $$
 A_x = A\cos\theta,
 \qquad
@@ -187,16 +187,16 @@ A = \sqrt{A_x^2 + A_y^2},
 \qquad
 \tan\theta = \frac{A_y}{A_x} \quad (A_x \neq 0) .
 $$
-The first two formulas follow from the definition of sine and cosine on the unit circle, since the tip of $\vec{A}$ applied at the origin lies on the circle of radius $A$; they therefore hold for every $\theta$, including non-acute ones. The pair $(A, \theta)$ is the **polar** description of the vector, convenient when the data are an intensity and an angle; the Cartesian components are convenient for adding. For $A = 5$ and $\cos\theta = \dfrac{4}{5}$, $\sin\theta = \dfrac{3}{5}$ one obtains $\vec{A} = (4, 3)$.
+The first two formulas follow from the definition of sine and cosine on the unit circle, since the tip of $\vec{A}$ applied at the origin lies on the circle of radius $A$; they therefore hold for every $\theta$, including non-acute ones. The pair $(A, \theta)$ is the **polar** description of the vector, convenient when the data are a magnitude and an angle; the Cartesian components are convenient for adding. For $A = 5$ and $\cos\theta = \dfrac{4}{5}$, $\sin\theta = \dfrac{3}{5}$ one obtains $\vec{A} = (4, 3)$.
 
 ::grafico{vettori="0,0,4,3,A" segmenti="4,0,4,3;0,3,4,3" etichette="0.9,0.25,θ;1.5,-0.5,A cos θ;4.1,1.5,A sin θ" xmin=-0.6 xmax=5.4 ymin=-0.8 ymax=3.6 uguale=1 titolo="$\vec{A}$ has magnitude $5$ and forms with the $x$-axis the angle $\theta$ with $\cos\theta = \dfrac{4}{5}$, so $A_x = 4$ and $A_y = 3$"}
 
 :::
 
 :::attenzione
-The function $\arctan$ returns angles between $-90^\circ$ and $90^\circ$, so it gives the angle of $\vec{A}$ *only* when $A_x > 0$. For $\vec{A} = (-3, 4)$ one obtains $\arctan\left(-\dfrac{4}{3}\right) \approx -53.1^\circ$, which is the angle of the opposite vector $(3, -4)$. Since $\vec{A}$ lies in the second quadrant, its angle is obtained by adding $180^\circ$, that is, $\theta \approx 126.9^\circ$.
+The function $\arctan$ returns angles between $-90^\circ$ and $90^\circ$, so it gives the angle of $\vec{A}$ *only* when $A_x > 0$. For $\vec{A} = (-3, 4)$ one obtains $\arctan\left(-\dfrac{4}{3}\right) \approx -53{,}1^\circ$, which is the angle of the opposite vector $(3, -4)$. Since $\vec{A}$ lies in the second quadrant, its angle is obtained by adding $180^\circ$, that is, $\theta \approx 126{,}9^\circ$.
 
-::grafico{vettori="0,0,-3,4,A;0,0,3,-4,−A" segmenti="-3,0,-3,4" xmin=-4 xmax=4 ymin=-4.6 ymax=4.6 uguale=1 titolo="$\vec{A} = (-3, 4)$ forms with the $x$-axis the angle $126.9^\circ$; the angle $-53.1^\circ$ given by the arctangent is that of $-\vec{A}$"}
+::grafico{vettori="0,0,-3,4,A;0,0,3,-4,−A" segmenti="-3,0,-3,4" xmin=-4 xmax=4 ymin=-4.6 ymax=4.6 uguale=1 titolo="$\vec{A} = (-3, 4)$ forms with the $x$-axis the angle $126{,}9^\circ$; the angle $-53{,}1^\circ$ given by the arctangent is that of $-\vec{A}$"}
 
 :::
 
@@ -211,13 +211,13 @@ The formulas follow by writing the vectors in terms of the unit vectors and coll
 :::
 
 :::esempio{titolo="Resultant of two forces"}
-A point is acted on by $\vec{F}_1$ of magnitude $10\,\mathrm{N}$ at $30^\circ$ and $\vec{F}_2$ of magnitude $6.0\,\mathrm{N}$ at $120^\circ$. The components are $\vec{F}_1 = (8.66,\ 5.00)\,\mathrm{N}$ and $\vec{F}_2 = (-3.00,\ 5.20)\,\mathrm{N}$, hence
+A point is acted on by $\vec{F}_1$ of magnitude $10\,\mathrm{N}$ at $30^\circ$ and $\vec{F}_2$ of magnitude $6{,}0\,\mathrm{N}$ at $120^\circ$. The components are $\vec{F}_1 = (8{,}66;\ 5{,}00)\,\mathrm{N}$ and $\vec{F}_2 = (-3{,}00;\ 5{,}20)\,\mathrm{N}$, hence
 $$
-\vec{R} = \vec{F}_1 + \vec{F}_2 = (5.66,\ 10.20)\,\mathrm{N},
+\vec{R} = \vec{F}_1 + \vec{F}_2 = (5{,}66;\ 10{,}20)\,\mathrm{N},
 \qquad
-R = \sqrt{5.66^2 + 10.20^2}\,\mathrm{N} \approx 11.7\,\mathrm{N} .
+R = \sqrt{5{,}66^2 + 10{,}20^2}\,\mathrm{N} \approx 11{,}7\,\mathrm{N} .
 $$
-Since $R_x > 0$, the angle is $\theta = \arctan\dfrac{10.20}{5.66} \approx 61.0^\circ$. The two forces are perpendicular, and indeed $R = \sqrt{10^2 + 6.0^2}\,\mathrm{N}$.
+Since $R_x > 0$, the angle is $\theta = \arctan\dfrac{10{,}20}{5{,}66} \approx 61{,}0^\circ$. The two forces are perpendicular, and indeed $R = \sqrt{10^2 + 6{,}0^2}\,\mathrm{N}$.
 
 ::grafico{vettori="0,0,8.66,5,F₁;0,0,-3,5.196,F₂;0,0,5.66,10.196,R" segmenti="8.66,5,5.66,10.196;-3,5.196,5.66,10.196" xmin=-4 xmax=10 ymin=-1 ymax=11 uguale=1 titolo="The resultant $\vec{R}$ of $\vec{F}_1$ and $\vec{F}_2$ is the diagonal of the parallelogram constructed on the two forces"}
 
@@ -238,18 +238,18 @@ a formula that follows from the law of cosines and for whose proof we refer to t
 :::
 
 :::osservazione{#componente-lungo-una-direzione titolo="Component along a direction"}
-If $\hat{u}$ is a unit vector and $\theta$ is the angle between $\vec{A}$ and $\hat{u}$, the number $\vec{A} \cdot \hat{u} = A\cos\theta$ is the **component** of $\vec{A}$ along the direction and orientation of $\hat{u}$; in particular $A_x = \vec{A} \cdot \hat{\imath}$. The axes along which a vector is resolved can be chosen freely, provided they are perpendicular, and the choice suited to the problem simplifies the calculations. On a plane inclined at an angle $\alpha$ it is convenient to take one axis parallel to the plane and one perpendicular to it; the weight of magnitude $mg$ then has a component $mg\sin\alpha$ parallel to the plane, directed downward, and a component $mg\cos\alpha$ perpendicular to the plane. The use of this decomposition in dynamics is treated in the topic on Newton's laws.
+If $\hat{u}$ is a unit vector and $\theta$ is the angle between $\vec{A}$ and $\hat{u}$, the number $\vec{A} \cdot \hat{u} = A\cos\theta$ is the **component** of $\vec{A}$ along the direction and sense of $\hat{u}$; in particular $A_x = \vec{A} \cdot \hat{\imath}$. The axes along which a vector is resolved can be chosen freely, provided they are perpendicular, and the choice suited to the problem simplifies the calculations. On a plane inclined at an angle $\alpha$ it is convenient to take one axis parallel to the plane and one perpendicular to it; the weight of magnitude $mg$ then has a component $mg\sin\alpha$ parallel to the plane, directed downward, and a component $mg\cos\alpha$ perpendicular to the plane. The use of this decomposition in dynamics is treated in the topic on Newton's laws.
 
 ::grafico{curve="t,0.57735*t,0,6.5" vettori="3,2.5,3,0.1,P;3,2.5,1.961,1.9;3,2.5,4.039,0.7,P⊥" segmenti="0,0,6.5,0;1.961,1.9,3,0.1;4.039,0.7,3,0.1" etichette="1.1,0.2,α;1.55,2.2,P∥" xmin=-0.5 xmax=6.8 ymin=-0.6 ymax=4.2 uguale=1 titolo="On the plane inclined at $\alpha = 30^\circ$ the weight $\vec{P}$ is resolved into $P_{\parallel} = mg\sin\alpha$ along the plane and $P_{\perp} = mg\cos\alpha$ perpendicular to the plane"}
 
 :::
 
-:::definizione{#lavoro-di-una-forza-costante titolo="Work of a constant force"}
-If a body undergoes a straight-line displacement $\vec{s}$ while a constant force $\vec{F}$ acts on it, the **work** of the force is
+:::definizione{#lavoro-di-una-forza-costante titolo="Work done by a constant force"}
+If a body undergoes a straight-line displacement $\vec{s}$ while a constant force $\vec{F}$ acts on it, the **work** done by the force is
 $$
 L = \vec{F} \cdot \vec{s} = F s \cos\theta .
 $$
-The work depends only on the component of the force along the displacement, $F\cos\theta$, while the component perpendicular to the displacement does zero work. The work is positive (driving) for $\theta < 90^\circ$, zero for $\theta = 90^\circ$, negative (resistive) for $\theta > 90^\circ$. For this reason the normal force of the floor on a crate sliding horizontally does zero work. If the crate is dragged for $5.0\,\mathrm{m}$ with a force of $40\,\mathrm{N}$ inclined at $60^\circ$ to the horizontal, the force does the work $L = 40 \cdot 5.0 \cdot \cos 60^\circ\,\mathrm{J} = 1.0 \cdot 10^{2}\,\mathrm{J}$. The work of variable forces and its connection with energy are treated in the topic on work and energy.
+The work depends only on the component of the force along the displacement, $F\cos\theta$, while the component perpendicular to the displacement does zero work. The work is positive (driving) for $\theta < 90^\circ$, zero for $\theta = 90^\circ$, negative (resistive) for $\theta > 90^\circ$. For this reason the normal force of the floor on a crate sliding horizontally does zero work. If the crate is dragged for $5{,}0\,\mathrm{m}$ with a force of $40\,\mathrm{N}$ inclined at $60^\circ$ to the horizontal, the force does the work $L = 40 \cdot 5{,}0 \cdot \cos 60^\circ\,\mathrm{J} = 1{,}0 \cdot 10^{2}\,\mathrm{J}$. The work done by variable forces and its connection with energy are treated in the topic on work and energy.
 
 ::grafico{vettori="0,0,5,0,s;0,0,2,3.464,F" segmenti="2,3.464,2,0" etichette="0.35,0.3,θ;1.2,-0.45,F cos θ" xmin=-0.6 xmax=5.8 ymin=-0.8 ymax=4 uguale=1 titolo="Only the component $F\cos\theta$ of the force, parallel to the displacement $\vec{s}$, does work"}
 
@@ -262,7 +262,7 @@ The **cross product** $\vec{A} \times \vec{B}$ of two vectors in space is the ve
 
 - magnitude $A B \sin\theta$, with $\theta \in [0^\circ, 180^\circ]$ the angle between the two vectors, equal to the area of the parallelogram with sides $\vec{A}$ and $\vec{B}$;
 - direction perpendicular to the plane containing $\vec{A}$ and $\vec{B}$;
-- orientation given by the **right-hand rule**: with the thumb along $\vec{A}$ and the index finger along $\vec{B}$, the middle finger points along $\vec{A} \times \vec{B}$.
+- sense given by the **right-hand rule**: with the thumb along $\vec{A}$ and the index finger along $\vec{B}$, the middle finger points along $\vec{A} \times \vec{B}$.
 
 In components the product is computed as a symbolic determinant:
 $$
@@ -272,11 +272,11 @@ $$
 &= (A_y B_z - A_z B_y)\,\hat{\imath} + (A_z B_x - A_x B_z)\,\hat{\jmath} + (A_x B_y - A_y B_x)\,\hat{k} .
 \end{aligned}
 $$
-From the formula follow the properties $\vec{B} \times \vec{A} = -\,\vec{A} \times \vec{B}$, $\vec{A} \times \vec{A} = \vec{0}$ and $\hat{\imath} \times \hat{\jmath} = \hat{k}$, $\hat{\jmath} \times \hat{k} = \hat{\imath}$, $\hat{k} \times \hat{\imath} = \hat{\jmath}$; for the equivalence between the formula and the geometric description we refer to the topic on vectors in the plane and in space in Linear Algebra. The order of the factors matters, because swapping them reverses the orientation of the product. The product is zero for parallel vectors and has maximum magnitude, $AB$, for perpendicular vectors.
+From the formula follow the properties $\vec{B} \times \vec{A} = -\,\vec{A} \times \vec{B}$, $\vec{A} \times \vec{A} = \vec{0}$ and $\hat{\imath} \times \hat{\jmath} = \hat{k}$, $\hat{\jmath} \times \hat{k} = \hat{\imath}$, $\hat{k} \times \hat{\imath} = \hat{\jmath}$; for the equivalence between the formula and the geometric description we refer to the topic on vectors in the plane and in space in Linear Algebra. The order of the factors matters, because swapping them reverses the direction of the product. The product is zero for parallel vectors and has maximum magnitude, $AB$, for perpendicular vectors.
 :::
 
 :::definizione{#momento-di-una-forza titolo="Torque of a force"}
-Let $\vec{F}$ be a force applied at the point $P$ and let $O$ be a fixed point, called the **pole**. The **torque** of $\vec{F}$ about $O$ is the vector
+Let $\vec{F}$ be a force applied at the point $P$ and let $O$ be a fixed point, called the **reference point**. The **torque** of $\vec{F}$ about $O$ is the vector
 $$
 \vec{\tau} = \vec{r} \times \vec{F},
 \qquad
@@ -284,16 +284,16 @@ $$
 $$
 Its magnitude is $\tau = r F \sin\theta = F\,b$, where $b = r\sin\theta$ is the lever arm, that is, the distance of $O$ from the line of action of the force. The torque measures the rotational effect of the force about an axis through $O$ perpendicular to the plane of $\vec{r}$ and $\vec{F}$. Since $\tau = F\,b$, a force whose line of action passes through $O$ has zero torque, and for the same force the effect increases with the lever arm, as one experiences when opening a door by pushing close to the hinges or far from them. Torque is measured in $\mathrm{N\cdot m}$; the unit coincides with that of work, but the name joule is avoided for torque, because torque is a vector and work is a scalar. The dynamics of rotations is treated in the topic on rigid body dynamics.
 
-::grafico{vettori="0,0,4,0,r;4,0,5.5,2.598,F" segmenti="2.2,-3.118,5.8,3.118;0,0,3,-1.732" punti="0,0,pieno;4,0,pieno,P" etichette="1.1,-1.3,b;4.35,0.25,θ" xmin=-0.6 xmax=6.2 ymin=-3.4 ymax=3.4 uguale=1 titolo="The lever arm $b$ is the distance of the pole $O$ from the line of action of $\vec{F}$, so $\tau = F\,b = r F \sin\theta$"}
+::grafico{vettori="0,0,4,0,r;4,0,5.5,2.598,F" segmenti="2.2,-3.118,5.8,3.118;0,0,3,-1.732" punti="0,0,pieno;4,0,pieno,P" etichette="1.1,-1.3,b;4.35,0.25,θ" xmin=-0.6 xmax=6.2 ymin=-3.4 ymax=3.4 uguale=1 titolo="The lever arm $b$ is the distance of the reference point $O$ from the line of action of $\vec{F}$, so $\tau = F\,b = r F \sin\theta$"}
 
 :::
 
 :::esempio{titolo="Torque in components"}
-A force $\vec{F} = (2.0\,\hat{\imath} + 3.0\,\hat{\jmath})\,\mathrm{N}$ is applied at the point with position $\vec{r} = (0.50\,\hat{\imath} - 0.20\,\hat{\jmath})\,\mathrm{m}$ relative to the pole. The two vectors lie in the $xy$-plane, so the cross product has only the $z$ component:
+A force $\vec{F} = (2{,}0\,\hat{\imath} + 3{,}0\,\hat{\jmath})\,\mathrm{N}$ is applied at the point with position $\vec{r} = (0{,}50\,\hat{\imath} - 0{,}20\,\hat{\jmath})\,\mathrm{m}$ relative to the reference point. The two vectors lie in the $xy$-plane, so the cross product has only the $z$ component:
 $$
-\tau_z = x F_y - y F_x = 0.50 \cdot 3.0 - (-0.20) \cdot 2.0 = 1.9\,\mathrm{N\cdot m} .
+\tau_z = x F_y - y F_x = 0{,}50 \cdot 3{,}0 - (-0{,}20) \cdot 2{,}0 = 1{,}9\,\mathrm{N\cdot m} .
 $$
-Therefore $\vec{\tau} = 1.9\,\hat{k}\,\mathrm{N\cdot m}$. The positive sign indicates that the force tends to rotate the body counterclockwise, as seen from the positive $z$-semiaxis.
+Therefore $\vec{\tau} = 1{,}9\,\hat{k}\,\mathrm{N\cdot m}$. The positive sign indicates that the force tends to rotate the body counterclockwise, as seen from the positive $z$-axis.
 :::
 
 ## Derivative of a vector
