@@ -1,7 +1,7 @@
 ---
-titolo: "Precalculus formula sheet"
-sommario: "The Precalculus formulas with their conditions of validity: logic, powers and roots, special products and Ruffini's rule, equations and inequalities of every type, logarithms, exponentials, trigonometry, lines and conic sections."
-descrizione: "Precalculus formula sheet (free PDF): special products, Ruffini's rule, logarithms, special angle values, trigonometric identities, lines and conic sections."
+titolo: "Formulario del Precorso di Analisi 1"
+sommario: "Le formule del Precorso con le condizioni di validità: logica, potenze e radici, prodotti notevoli e Ruffini, equazioni e disequazioni di ogni tipo, logaritmi, esponenziali, goniometria, retta e coniche."
+descrizione: "Formulario del Precorso di Analisi 1 in PDF: prodotti notevoli, Ruffini, logaritmi, valori notevoli, formule goniometriche, retta e coniche."
 ---
 
 ## Logic and quantifiers
@@ -13,20 +13,20 @@ $$
 \begin{array}{c|c|c|c|c|c}
 p & q & \lnot p & p \land q & p \lor q & p \Rightarrow q \\
 \hline
-\text{T} & \text{T} & \text{F} & \text{T} & \text{T} & \text{T} \\
-\text{T} & \text{F} & \text{F} & \text{F} & \text{T} & \text{F} \\
-\text{F} & \text{T} & \text{T} & \text{F} & \text{T} & \text{T} \\
-\text{F} & \text{F} & \text{T} & \text{F} & \text{F} & \text{T}
+\text{V} & \text{V} & \text{F} & \text{V} & \text{V} & \text{V} \\
+\text{V} & \text{F} & \text{F} & \text{F} & \text{V} & \text{F} \\
+\text{F} & \text{V} & \text{V} & \text{F} & \text{V} & \text{V} \\
+\text{F} & \text{F} & \text{V} & \text{F} & \text{F} & \text{V}
 \end{array}
 $$
 The disjunction $p \lor q$ is inclusive, that is, it is true also when $p$ and $q$ are both true. The implication is false *only if* the hypothesis is true and the conclusion is false.
 :::
 
-:::formula{#doppia-implicazione titolo="Double implication"}
+:::formula{#doppia-implicazione titolo="Biconditional"}
 $$
 p \Leftrightarrow q \equiv (p \Rightarrow q) \land (q \Rightarrow p)
 $$
-The double implication is true when $p$ and $q$ have the same truth value. The symbol $\equiv$ indicates that two propositions have the same truth table.
+The biconditional is true when $p$ and $q$ have the same truth value. The symbol $\equiv$ indicates that two propositions have the same truth table.
 :::
 
 :::formula{#leggi-di-de-morgan titolo="De Morgan's laws"}
@@ -49,11 +49,11 @@ The contrapositive $\lnot q \Rightarrow \lnot p$ is equivalent to the original i
 :::formula{#condizione-necessaria-sufficiente titolo="Necessary and sufficient condition"}
 $$
 \begin{aligned}
-p \Rightarrow q \quad &\iff \quad p \ \text{is sufficient for} \ q \ \text{and} \ q \ \text{is necessary for} \ p \\
-p \Leftrightarrow q \quad &\iff \quad p \ \text{is necessary and sufficient for} \ q
+p \Rightarrow q \quad &\iff \quad p \ \text{è sufficiente per} \ q \ \text{e} \ q \ \text{è necessaria per} \ p \\
+p \Leftrightarrow q \quad &\iff \quad p \ \text{è necessaria e sufficiente per} \ q
 \end{aligned}
 $$
-From the contrapositive it follows that, if the necessary condition $q$ is false, then $p$ is also false. For example "$n$ multiple of $4$" is sufficient for "$n$ even", while "$n$ even" is necessary for "$n$ multiple of $4$".
+From the contrapositive it follows that, if the necessary condition $q$ is false, then $p$ is also false. For example "$n$ is a multiple of $4$" is sufficient for "$n$ is even", while "$n$ is even" is necessary for "$n$ is a multiple of $4$".
 :::
 
 :::formula{#negazione-quantificatori titolo="Negation of quantifiers"}
@@ -66,15 +66,15 @@ $$
 With several quantifiers all of them are exchanged, from the outermost to the innermost, and finally the predicate is negated. For example the negation of $\forall x \ \exists y : y > x$ is $\exists x \ \forall y : y \leq x$. A single counterexample is enough to make a universal proposition false.
 :::
 
-:::formula{#schemi-di-dimostrazione titolo="Proof schemes"}
+:::formula{#schemi-di-dimostrazione titolo="Proof methods"}
 $$
 \begin{aligned}
-&\text{direct:} && p \Rightarrow \dots \Rightarrow q \\
-&\text{by contrapositive:} && \lnot q \Rightarrow \lnot p \\
-&\text{by contradiction:} && p \land \lnot q \Rightarrow \text{contradiction}
+&\text{diretta:} && p \Rightarrow \dots \Rightarrow q \\
+&\text{per contronominale:} && \lnot q \Rightarrow \lnot p \\
+&\text{per assurdo:} && p \land \lnot q \Rightarrow \text{contraddizione}
 \end{aligned}
 $$
-The three schemes prove the same implication $p \Rightarrow q$. Proof by contradiction is based on the equivalence $\lnot(p \Rightarrow q) \equiv p \land \lnot q$.
+The three methods prove the same implication $p \Rightarrow q$. Proof by contradiction is based on the equivalence $\lnot(p \Rightarrow q) \equiv p \land \lnot q$.
 :::
 
 ## Powers
@@ -92,11 +92,11 @@ They hold for $a \neq 0$, $b \neq 0$ and $n$ a natural number. The expression $0
 $$
 (-a)^n =
 \begin{cases}
-a^n & \text{if } n \text{ is even} \\
--a^n & \text{if } n \text{ is odd}
+a^n & \text{se } n \text{ è pari} \\
+-a^n & \text{se } n \text{ è dispari}
 \end{cases}
 $$
-It holds for every real $a$ and natural $n$. The expression $-2^4$ denotes the opposite of $2^4$, that is, $-16$, while $(-2)^4 = 16$.
+It holds for every real $a$ and natural number $n$. The expression $-2^4$ denotes the negative of $2^4$, that is, $-16$, while $(-2)^4 = 16$.
 :::
 
 :::formula{#proprieta-delle-potenze titolo="Properties of powers"}
@@ -133,18 +133,18 @@ With exponent $x < 0$ the third inequality is reversed. Powers with different ba
 
 ## Roots and rationalization
 
-The conditions of existence and the three cases of rationalization are explained in the same chapter [Powers and roots](/en/precorso/potenze-e-radici/teoria).
+The domain restrictions and the three cases of rationalization are explained in the same chapter [Powers and roots](/en/precorso/potenze-e-radici/teoria).
 
-:::formula{#radice-n-esima titolo="n-th root and conditions of existence"}
+:::formula{#radice-n-esima titolo="n-th root and domain restrictions"}
 $$
 \begin{gathered}
-\sqrt[n]{a} = x \iff x^n = a \qquad (n \text{ odd},\ a \in \mathbb{R}), \\[6pt]
+\sqrt[n]{a} = x \iff x^n = a \qquad (n \text{ dispari},\ a \in \mathbb{R}), \\[6pt]
 \sqrt[n]{a} = x \iff
 \begin{cases}
 x \geq 0 \\
 x^n = a
 \end{cases}
-\qquad (n \text{ even},\ a \geq 0).
+\qquad (n \text{ pari},\ a \geq 0).
 \end{gathered}
 $$
 With an even index the root exists *only if* the radicand is greater than or equal to zero, and its value is greater than or equal to zero. For example $\sqrt{49} = 7$, while the equation $x^2 = 49$ has the solutions $x = \pm 7$; with an odd index $\sqrt[3]{-8} = -2$.
@@ -167,7 +167,7 @@ $$
 They hold for $a \geq 0$ and $p \geq 1$ a natural number. Roots with different indices are brought to the common index given by the least common multiple of the indices. For example $\sqrt{3} = \sqrt[6]{27}$ and $\sqrt[3]{5} = \sqrt[6]{25}$, therefore $\sqrt{3} > \sqrt[3]{5}$.
 :::
 
-:::formula{#radice-di-un-quadrato titolo="Root of a square and moving factors under the root sign"}
+:::formula{#radice-di-un-quadrato titolo="Root of a square and moving factors into and out of radicals"}
 $$
 \sqrt{a^2} = |a|, \qquad \sqrt{a^2 b} = |a|\sqrt{b}, \qquad a\sqrt{b} = \sqrt{a^2 b} \quad (a \geq 0)
 $$
@@ -192,9 +192,9 @@ $$
 They hold for $a > 0$, with $0 < k < n$ in the second and $b \geq 0$, $a \neq b$ in the third. The third multiplies by the conjugate binomial, since $(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b}) = a - b$; with a number in place of a root we have for example $\dfrac{1}{\sqrt{5} - 1} = \dfrac{\sqrt{5} + 1}{4}$.
 :::
 
-## Special products
+## Standard algebraic identities
 
-The expansions and their use in factorization are in the chapter [Factorization, Ruffini's rule and polynomial division](/en/precorso/polinomi/teoria).
+The expansions and their use in factorization are in the chapter [Factorization, synthetic division and polynomial division](/en/precorso/polinomi/teoria).
 
 :::formula{#quadrato-di-binomio titolo="Square of a binomial and of a trinomial"}
 $$
@@ -230,7 +230,7 @@ A^3 + B^3 = (A + B)(A^2 - AB + B^2), \\[4pt]
 A^3 - B^3 = (A - B)(A^2 + AB + B^2) .
 \end{gathered}
 $$
-They hold for every value of $A$ and $B$. The second factor, called the false square, as a trinomial in $A$ has discriminant $-3B^2$, which is negative for $B \neq 0$; therefore it has no real roots and the factorization ends.
+They hold for every value of $A$ and $B$. The second factor, a quadratic that is not a perfect square, viewed as a trinomial in $A$ has discriminant $-3B^2$, which is negative for $B \neq 0$; therefore it has no real roots and the factorization ends.
 :::
 
 :::formula{#differenza-di-potenze titolo="Sum and difference of powers"}
@@ -250,7 +250,7 @@ $$
 It holds for $n$ a natural number. The coefficients are the rows of Pascal's triangle, for example $(A + B)^4 = A^4 + 4A^3 B + 6A^2 B^2 + 4AB^3 + B^4$. In the expansion of $(A - B)^n$ the signs of the terms alternate.
 :::
 
-:::formula{#trinomio-speciale titolo="Special trinomial"}
+:::formula{#trinomio-speciale titolo="Monic quadratic trinomial"}
 $$
 x^2 + (a + b)\,x + a b = (x + a)(x + b)
 $$
@@ -268,12 +268,12 @@ Factoring by grouping is completed when the groups leave the same factor, for ex
 :::
 
 :::attenzione
-The sum of squares $x^2 + k^2$ with $k \neq 0$ does not factor into first-degree factors with real coefficients. For example $x^2 + 4 \geq 4$ for every $x$, therefore $x^2 + 4$ has no real roots.
+The sum of squares $x^2 + k^2$ with $k \neq 0$ does not factor into linear factors with real coefficients. For example $x^2 + 4 \geq 4$ for every $x$, therefore $x^2 + 4$ has no real roots.
 :::
 
-## Division, Ruffini's rule and factorization
+## Division, synthetic division and factorization
 
-The theorems with their proofs are in the chapter [Factorization, Ruffini's rule and polynomial division](/en/precorso/polinomi/teoria#divisione-tra-polinomi).
+The theorems with their proofs are in the chapter [Factorization, synthetic division and polynomial division](/en/precorso/polinomi/teoria#divisione-tra-polinomi).
 
 :::formula{#principio-di-identita titolo="Identity principle for polynomials"}
 $$
@@ -287,23 +287,23 @@ With the principle one determines unknown coefficients, for example from $x^2 + 
 $$
 \begin{cases}
 A(x) = B(x)\,Q(x) + R(x) \\[4pt]
-R(x) = 0 \ \text{ or } \ \deg R < \deg B
+R(x) = 0 \ \text{ oppure } \ \deg R < \deg B
 \end{cases}
 $$
 For every nonzero divisor $B$ the quotient $Q$ and the remainder $R$ exist and are unique. If $\deg A \geq \deg B$, the quotient has degree $\deg A - \deg B$; if $R = 0$, the polynomial $B$ divides $A$.
 :::
 
-:::formula{#teorema-del-resto-e-di-ruffini titolo="Remainder theorem and Ruffini's theorem"}
+:::formula{#teorema-del-resto-e-di-ruffini titolo="Remainder theorem and factor theorem"}
 $$
 \begin{gathered}
 P(x) = (x - c)\,Q(x) + P(c), \\[4pt]
-(x - c) \ \text{divides} \ P(x) \iff P(c) = 0 .
+(x - c) \ \text{divide} \ P(x) \iff P(c) = 0 .
 \end{gathered}
 $$
 The remainder of the division by $x - c$ is therefore $P(c)$ and is computed without carrying out the division. For a divisor $ax - b$ with $a \neq 0$ the remainder is $P\left(\dfrac{b}{a}\right)$.
 :::
 
-:::formula{#schema-di-ruffini titolo="Ruffini's scheme"}
+:::formula{#schema-di-ruffini titolo="Synthetic division table"}
 $$
 \begin{array}{c|ccc|c}
  & 1 & -2 & -5 & 6 \\
@@ -316,7 +316,7 @@ In the first row the coefficients are written in decreasing order of degree, wit
 
 :::formula{#radici-razionali titolo="Rational roots of a polynomial"}
 $$
-P\left(\frac{p}{q}\right) = 0 \implies p \mid a_0 \ \text{ and } \ q \mid a_n
+P\left(\frac{p}{q}\right) = 0 \implies p \mid a_0 \ \text{ e } \ q \mid a_n
 $$
 It holds for $P(x) = a_n x^n + \dots + a_0$ with integer coefficients and $a_0 \neq 0$, and for $\dfrac{p}{q}$ in lowest terms. The rational roots are therefore sought among a finite number of candidates; if $a_n = 1$, they are integers that divide the constant term.
 :::
@@ -325,7 +325,7 @@ It holds for $P(x) = a_n x^n + \dots + a_0$ with integer coefficients and $a_0 \
 $$
 ax^2 + bx + c = a\,(x - x_1)(x - x_2)
 $$
-It holds for $a \neq 0$ and $\Delta = b^2 - 4ac \geq 0$, with $x_1$ and $x_2$ the roots of the trinomial; if $\Delta = 0$ we have $ax^2 + bx + c = a\,(x - x_1)^2$. If $\Delta < 0$ the trinomial does not factor into real first-degree factors.
+It holds for $a \neq 0$ and $\Delta = b^2 - 4ac \geq 0$, with $x_1$ and $x_2$ the roots of the trinomial; if $\Delta = 0$ we have $ax^2 + bx + c = a\,(x - x_1)^2$. If $\Delta < 0$ the trinomial does not factor into real linear factors.
 :::
 
 :::formula{#molteplicita-di-una-radice titolo="Multiplicity of a root"}
@@ -350,7 +350,7 @@ It holds for $a \neq 0$. For $a = 0$ the equation has no solutions if $b \neq 0$
 $$
 ax^2 + bx + c = 0 \iff x = \frac{-b \pm \sqrt{\Delta}}{2a}, \qquad \Delta = b^2 - 4ac
 $$
-It holds for $a \neq 0$ and $\Delta \geq 0$. For $\Delta > 0$ the solutions are two and distinct, for $\Delta = 0$ there is only the double solution $x = -\dfrac{b}{2a}$, for $\Delta < 0$ the equation **has no real solutions**.
+It holds for $a \neq 0$ and $\Delta \geq 0$. For $\Delta > 0$ there are two distinct solutions, for $\Delta = 0$ there is a single repeated root $x = -\dfrac{b}{2a}$, for $\Delta < 0$ the equation **has no real solutions**.
 :::
 
 :::formula{#formula-ridotta titolo="Reduced quadratic formula"}
@@ -360,7 +360,7 @@ $$
 It holds for $a \neq 0$ and $\dfrac{\Delta}{4} \geq 0$. It is the quadratic formula with numerator and denominator divided by $2$, and it shortens the computations when $b$ is even. For example $x^2 - 6x + 4 = 0$ has $\dfrac{\Delta}{4} = 9 - 4 = 5$, therefore $x = 3 \pm \sqrt{5}$.
 :::
 
-:::formula{#equazioni-incomplete titolo="Incomplete quadratic equations"}
+:::formula{#equazioni-incomplete titolo="Quadratic equations with a missing constant or linear term"}
 $$
 \begin{gathered}
 ax^2 + bx = 0 \iff x = 0 \ \vee \ x = -\frac{b}{a}, \\[6pt]
@@ -393,7 +393,7 @@ Every solution $t > 0$ gives $x = \pm\sqrt{t}$, the solution $t = 0$ gives $x = 
 
 ## Polynomial and rational inequalities
 
-The examples with the sign table are in the chapter [Polynomial and rational equations and inequalities](/en/precorso/equazioni-polinomiali/teoria#tabella-dei-segni).
+The examples with the sign chart are in the chapter [Polynomial and rational equations and inequalities](/en/precorso/equazioni-polinomiali/teoria#tabella-dei-segni).
 
 :::formula{#principi-di-equivalenza titolo="Equivalence principles for inequalities"}
 $$
@@ -408,9 +408,9 @@ Multiplying both sides by a negative quantity reverses the direction of the ineq
 :::formula{#segno-del-trinomio titolo="Sign of the quadratic trinomial"}
 $$
 \begin{aligned}
-\Delta > 0 &\implies ax^2 + bx + c > 0 \ \text{ for } x < x_1 \vee x > x_2 \\
-\Delta = 0 &\implies ax^2 + bx + c > 0 \ \text{ for } x \neq x_0 \\
-\Delta < 0 &\implies ax^2 + bx + c > 0 \ \text{ for every } x
+\Delta > 0 &\implies ax^2 + bx + c > 0 \ \text{ per } x < x_1 \vee x > x_2 \\
+\Delta = 0 &\implies ax^2 + bx + c > 0 \ \text{ per } x \neq x_0 \\
+\Delta < 0 &\implies ax^2 + bx + c > 0 \ \text{ per ogni } x
 \end{aligned}
 $$
 They hold for $a > 0$, with $x_1 < x_2$ the roots of the trinomial and $x_0$ the double root; for $x_1 < x < x_2$ the trinomial is negative. For $a < 0$ the signs are the opposite, and alternatively one multiplies by $-1$ reversing the direction of the inequality.
@@ -418,9 +418,9 @@ They hold for $a > 0$, with $x_1 < x_2$ the roots of the trinomial and $x_0$ the
 
 :::formula{#segno-prodotto-quoziente titolo="Sign of a product and of a quotient"}
 $$
-\operatorname{sign}\left(\frac{N(x)}{D(x)}\right) = \operatorname{sign}\bigl(N(x)\,D(x)\bigr) \qquad (D(x) \neq 0)
+\operatorname{segno}\left(\frac{N(x)}{D(x)}\right) = \operatorname{segno}\bigl(N(x)\,D(x)\bigr) \qquad (D(x) \neq 0)
 $$
-A product is positive where the number of negative factors is even and negative where it is odd; in the sign table each factor occupies one row. A factor $(x - c)^m$ with $m$ even is positive for $x \neq c$, with $m$ odd it has the sign of $x - c$.
+A product is positive where the number of negative factors is even and negative where it is odd; in the sign chart each factor occupies one row. A factor $(x - c)^m$ with $m$ even is positive for $x \neq c$, with $m$ odd it has the sign of $x - c$.
 :::
 
 :::formula{#equazioni-fratte titolo="Rational equations"}
@@ -431,7 +431,7 @@ N(x) = 0 \\
 D(x) \neq 0
 \end{cases}
 $$
-The conditions of existence $D(x) \neq 0$ are written for all the denominators of the original equation, before reducing to a common denominator. The solutions of $N(x) = 0$ that make a denominator vanish are discarded.
+The domain restrictions $D(x) \neq 0$ are written for all the denominators of the original equation, before reducing to a common denominator. The solutions of $N(x) = 0$ that make a denominator vanish are discarded.
 :::
 
 :::formula{#disequazioni-fratte titolo="Rational inequalities"}
@@ -445,7 +445,7 @@ D(x) \neq 0
 \end{cases}
 \end{gathered}
 $$
-The zeros of the denominator are excluded for every direction of the inequality; with $\geq$ and $\leq$ the zeros of the numerator are included.
+The zeros of the denominator are excluded for every inequality sign; with $\geq$ and $\leq$ the zeros of the numerator are included.
 :::
 
 :::attenzione
@@ -465,14 +465,14 @@ Here $S_A$ and $S_B$ are the solution sets of the individual inequalities. The s
 
 ## Absolute value
 
-Every solving form descends from the definition by cases, as shown in the chapter [Equations and inequalities with absolute value](/en/precorso/valore-assoluto/teoria).
+Every solution method follows from the piecewise definition, as shown in the chapter [Equations and inequalities with absolute value](/en/precorso/valore-assoluto/teoria).
 
 :::formula{#definizione-valore-assoluto titolo="Absolute value and distance"}
 $$
 |x| =
 \begin{cases}
-x & \text{if } x \geq 0 \\
--x & \text{if } x < 0
+x & \text{se } x \geq 0 \\
+-x & \text{se } x < 0
 \end{cases}
 $$
 The absolute value is always greater than or equal to zero and equals zero *only if* $x = 0$. The number $|x - c|$ is the distance between $x$ and $c$ on the real line; for an expression $A$ we have $|A| = A$ where $A \geq 0$ and $|A| = -A$ where $A < 0$.
@@ -584,7 +584,7 @@ B \geq 0 \\
 A = B^2
 \end{cases}
 $$
-The condition of existence $A \geq 0$ follows from $A = B^2$. Without the condition $B \geq 0$ squaring introduces extraneous solutions: from $\sqrt{x} = x - 2$ one obtains $x^2 - 5x + 4 = 0$, but the root $x = 1$ gives $x - 2 = -1 < 0$, therefore the only solution is $x = 4$.
+The domain restriction $A \geq 0$ follows from $A = B^2$. Without the condition $B \geq 0$ squaring introduces extraneous solutions: from $\sqrt{x} = x - 2$ one obtains $x^2 - 5x + 4 = 0$, but the root $x = 1$ gives $x - 2 = -1 < 0$, therefore the only solution is $x = 4$.
 :::
 
 :::formula{#equazione-due-radici titolo="Equation √A = √B"}
@@ -641,7 +641,7 @@ A \geq 0 \\
 A < B
 \end{cases}
 $$
-The condition of existence $B \geq 0$ follows from $0 \leq A < B$.
+The domain restriction $B \geq 0$ follows from $0 \leq A < B$.
 :::
 
 :::formula{#radici-di-indice-dispari titolo="Roots with odd index"}
@@ -651,12 +651,12 @@ $$
 \sqrt[3]{A} < B \iff A < B^3, \qquad \sqrt[3]{A} > B \iff A > B^3 .
 \end{gathered}
 $$
-They hold without conditions of existence and without cases on the sign of the sides, because $y = x^3$ is strictly increasing on all of $\mathbb{R}$. The same holds for every odd index $n$, with $B^n$ in place of $B^3$.
+They hold without domain restrictions and without distinguishing cases according to the signs of the two sides, because $y = x^3$ is strictly increasing on all of $\mathbb{R}$. The same holds for every odd index $n$, with $B^n$ in place of $B^3$.
 :::
 
 ## Logarithms
 
-The properties and the solving methods are explained in the chapter [Logarithmic equations and inequalities](/en/precorso/logaritmiche/teoria).
+The properties and the solution methods are explained in the chapter [Logarithmic equations and inequalities](/en/precorso/logaritmiche/teoria).
 
 :::formula{#definizione-di-logaritmo titolo="Definition of logarithm"}
 $$
@@ -679,7 +679,7 @@ $$
 \log_a (x^p) = p \log_a x .
 \end{gathered}
 $$
-They hold for $a > 0$, $a \neq 1$, $x > 0$, $y > 0$ and $p$ real. With the unknown in the arguments, the conditions of existence are written before applying them.
+They hold for $a > 0$, $a \neq 1$, $x > 0$, $y > 0$ and $p$ real. With the unknown in the arguments, the domain restrictions are written before applying them.
 :::
 
 :::formula{#logaritmo-di-una-potenza-pari titolo="Logarithm of an even power"}
@@ -715,7 +715,7 @@ A = B \\
 A > 0
 \end{cases}
 $$
-It holds for $a > 0$, $a \neq 1$, because the logarithmic function is injective. The condition $B > 0$ follows from $A = B$ and $A > 0$. If the equation is obtained with the properties from several logarithms, the conditions of existence are written for all the logarithms of the original equation.
+It holds for $a > 0$, $a \neq 1$, because the logarithmic function is injective. The condition $B > 0$ follows from $A = B$ and $A > 0$. If the equation is obtained by applying the logarithm rules to several logarithms, the domain restrictions are written for all the logarithms of the original equation.
 :::
 
 :::formula{#logaritmo-uguale-a-un-numero titolo="Equation logₐ A = k"}
@@ -749,7 +749,7 @@ A > 0
 \quad (0 < a < 1).
 \end{gathered}
 $$
-With a base greater than $1$ the direction of the inequality is preserved, with a base between $0$ and $1$ it is reversed. In each system the condition of existence concerns the smaller argument, because the positivity of the other follows from the inequality; with $\geq$, $<$, $\leq$ the rule is the same.
+With a base greater than $1$ the direction of the inequality is preserved, with a base between $0$ and $1$ it is reversed. In each system the domain restriction concerns the smaller argument, because the positivity of the other follows from the inequality; with $\geq$, $<$, $\leq$ the rule is the same.
 :::
 
 :::formula{#disequazione-logaritmo-numero titolo="Inequality logₐ A > k"}
@@ -773,7 +773,7 @@ The examples with the two bases and with the substitution are in the chapter [Ex
 
 :::formula{#funzione-esponenziale titolo="Exponential function"}
 $$
-y = a^x, \qquad a^x > 0 \ \text{ for every } x \in \mathbb{R}
+y = a^x, \qquad a^x > 0 \ \text{ per ogni } x \in \mathbb{R}
 $$
 It holds for $a > 0$, $a \neq 1$. The graph passes through $(0, 1)$ and has the horizontal asymptote $y = 0$; the function is strictly increasing for $a > 1$ and strictly decreasing for $0 < a < 1$. Moreover $\left(\dfrac{1}{a}\right)^x = a^{-x}$ holds.
 :::
@@ -818,7 +818,7 @@ With a base greater than $1$ the direction of the inequality is preserved, with 
 
 :::formula{#esponenziale-secondo-membro-negativo titolo="Inequalities with a negative or zero right-hand side"}
 $$
-a^A > k \ \text{ on the whole domain of } A, \qquad a^A < k \ \text{ never}
+a^A > k \ \text{ in tutto il dominio di } A, \qquad a^A < k \ \text{ mai}
 $$
 They hold for $a > 0$ and $k \leq 0$, because $a^A > 0$. Likewise $a^A \geq k$ is always satisfied and $a^A \leq k$ has no solutions.
 :::
@@ -948,7 +948,7 @@ They hold for every real $x$ and are obtained by writing $3x = 2x + x$ and apply
 $$
 \sin^2 x = \frac{1 - \cos 2x}{2}, \qquad \cos^2 x = \frac{1 + \cos 2x}{2}, \qquad \sin x \cos x = \frac{\sin 2x}{2}
 $$
-They hold for every real $x$ and follow from the double-angle formulas. They transform a second-degree expression in sine and cosine into a first-degree expression in $\sin 2x$ and $\cos 2x$.
+They hold for every real $x$ and follow from the double-angle formulas. They transform a quadratic expression in sine and cosine into a linear expression in $\sin 2x$ and $\cos 2x$.
 :::
 
 :::formula{#formule-di-bisezione titolo="Half-angle formulas"}
@@ -996,7 +996,7 @@ They hold for all real $a, b$ and transform a product into a sum.
 
 ## Trigonometric equations and inequalities
 
-The solving methods, with an example for each type of equation, are in the chapter [Trigonometric equations and inequalities](/en/precorso/goniometriche/teoria#equazioni-elementari).
+The solution methods, with an example for each type of equation, are in the chapter [Trigonometric equations and inequalities](/en/precorso/goniometriche/teoria#equazioni-elementari).
 
 :::formula{#equazioni-elementari titolo="Elementary equations"}
 $$
@@ -1105,7 +1105,7 @@ They hold for $A(x_1, y_1)$ and $B(x_2, y_2)$. The distance is the Pythagorean t
 $$
 y = mx + q, \qquad ax + by + c = 0, \qquad m = -\frac{a}{b}, \quad q = -\frac{c}{b}
 $$
-The slope-intercept form describes the non-vertical lines, the general form, with $(a, b) \neq (0, 0)$, describes every line; the passage from one to the other holds for $b \neq 0$. Vertical lines have equation $x = k$, horizontal lines $y = k$.
+The slope-intercept form describes the non-vertical lines, the general form, with $(a, b) \neq (0, 0)$, describes every line; conversion from one form to the other is valid for $b \neq 0$. Vertical lines have equation $x = k$, horizontal lines $y = k$.
 :::
 
 :::formula{#coefficiente-angolare titolo="Slope and line through a point"}
@@ -1189,15 +1189,15 @@ The equation $x^2 + y^2 + ax + by + c = 0$ represents a circle *only if* $\dfrac
 $$
 x^2 + kx = \left(x + \frac{k}{2}\right)^2 - \frac{k^2}{4}, \qquad Ax^2 + Bx = A\left(x + \frac{B}{2A}\right)^2 - \frac{B^2}{4A}
 $$
-The first holds for every real $k$, the second for $A \neq 0$. By completing the square in $x$ and in $y$ a second-degree equation without the $xy$ term is brought to standard form.
+The first holds for every real $k$, the second for $A \neq 0$. By completing the square in $x$ and in $y$ a quadratic equation without the $xy$ term is brought to standard form.
 :::
 
 :::formula{#retta-e-circonferenza titolo="Position of a line relative to a circle"}
 $$
 \begin{aligned}
-d(C, s) < r &\iff s \ \text{is a secant} \\
-d(C, s) = r &\iff s \ \text{is a tangent} \\
-d(C, s) > r &\iff s \ \text{is external}
+d(C, s) < r &\iff s \ \text{è secante} \\
+d(C, s) = r &\iff s \ \text{è tangente} \\
+d(C, s) > r &\iff s \ \text{è esterna}
 \end{aligned}
 $$
 Here $d(C, s)$ is the distance from the center $C$ to the line $s$, computed with the formula for the distance from a point to a line, and $r$ is the radius.
@@ -1224,7 +1224,7 @@ $$
 It holds for $k \neq 0$, and the asymptotes are the coordinate axes. For $k > 0$ the branches lie in the first and third quadrants, with vertices $(\sqrt{k}, \sqrt{k})$ and $(-\sqrt{k}, -\sqrt{k})$; for $k < 0$ they lie in the second and fourth.
 :::
 
-:::formula{#funzione-omografica titolo="Homographic function"}
+:::formula{#funzione-omografica titolo="Linear fractional function"}
 $$
 y = \frac{ax + b}{cx + d}, \qquad x = -\frac{d}{c}, \qquad y = \frac{a}{c}
 $$
@@ -1258,5 +1258,5 @@ f(x, y) = 0
 \end{cases}
 \quad \longrightarrow \quad \alpha x^2 + \beta x + \gamma = 0
 $$
-Substituting the equation of the line into that of the conic $f(x, y) = 0$ one obtains the resolvent equation; if it is of second degree, the line is a secant for $\Delta > 0$, a tangent for $\Delta = 0$ and external for $\Delta < 0$. The tangent lines from a point $P(x_0, y_0)$ are found by imposing $\Delta = 0$ on the line $y - y_0 = m(x - x_0)$; the vertical line $x = x_0$ is checked separately.
+Substituting the equation of the line into that of the conic $f(x, y) = 0$ one obtains the resulting equation; if it is quadratic, the line is a secant for $\Delta > 0$, a tangent for $\Delta = 0$ and external for $\Delta < 0$. The tangent lines from a point $P(x_0, y_0)$ are found by imposing $\Delta = 0$ on the line $y - y_0 = m(x - x_0)$; the vertical line $x = x_0$ is checked separately.
 :::

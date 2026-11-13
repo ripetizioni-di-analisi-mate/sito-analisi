@@ -1,6 +1,6 @@
 ---
-titolo: Trigonometric equations and inequalities
-sommario: Sine, cosine and tangent on the unit circle, the identities that relate them, and the solution methods for every type of trigonometric equation and inequality.
+titolo: Equazioni e disequazioni goniometriche
+sommario: Seno, coseno e tangente sulla circonferenza goniometrica, le identità che li legano e i metodi risolutivi per ogni tipo di equazione e disequazione goniometrica.
 ---
 
 ## The unit circle
@@ -8,26 +8,24 @@ sommario: Sine, cosine and tangent on the unit circle, the identities that relat
 :::definizione{#circonferenza-goniometrica titolo="Unit circle, sine and cosine"}
 The **unit circle** is the circle with center at the origin and radius $1$. An angle $x$, measured in radians from the positive half of the horizontal axis in the counterclockwise direction, determines a point $P$ on it, and one sets
 $$
-\cos x = \text{abscissa of } P, \qquad \sin x = \text{ordinate of } P .
+\cos x = \text{ascissa di } P, \qquad \sin x = \text{ordinata di } P .
 $$
 Since $P$ lies on the circle of radius $1$, we have $-1 \leq \sin x \leq 1$ and $-1 \leq \cos x \leq 1$. Adding $2\pi$ to the angle does not change the point $P$, therefore sine and cosine are **periodic** with period $2\pi$:
 $$
 \sin(x + 2\pi) = \sin x, \qquad \cos(x + 2\pi) = \cos x .
 $$
-Because of this periodicity, a trigonometric equation that has one solution has infinitely many, and the solutions are written as **families** depending on an integer.
+Because of this periodicity, a trigonometric equation that has one solution has **infinitely many**, and the solutions are written as families depending on an integer.
 
 ::grafico{curve="cos(t),sin(t),0,6.29;0.25*cos(t),0.25*sin(t),0,1.047" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="0,0,0.5,0.866" vettori="0,0,0.5,0;0.5,0,0.5,0.866,sin x" punti="0.5,0.866,pieno,P" etichette="0.28,0.2,x;0.1,-0.17,cos x" titolo="Unit circle: the angle $x$ determines the point $P$, with abscissa $\cos x$ and ordinate $\sin x$"}
-
 :::
 
 :::definizione{#tangente titolo="Tangent"}
 $$
-\tan x = \frac{\sin x}{\cos x}, \qquad \text{for } \cos x \neq 0, \ \text{that is } x \neq \frac{\pi}{2} + n\pi, \ n \in \mathbb{Z} .
+\tan x = \frac{\sin x}{\cos x}, \qquad \text{per } \cos x \neq 0, \ \text{cioè } x \neq \frac{\pi}{2} + n\pi, \ n \in \mathbb{Z} .
 $$
-The **tangent** is periodic with period $\pi$: adding $\pi$ to the angle changes the sign of *both* sine and cosine, therefore their ratio does **not change**. On the unit circle, $\tan x$ is the ordinate of the point where the line through the origin and $P$ intersects the line tangent to the circle at the point $(1, 0)$.
+The tangent is **periodic** with period $\pi$: adding $\pi$ to the angle changes the sign of both sine and cosine, therefore their ratio **does not change**. On the unit circle, $\tan x$ is the ordinate of the point where the line through the origin and $P$ intersects the line tangent to the circle at the point $(1, 0)$.
 
 ::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.6 ymin=-1.3 ymax=1.4 segmenti="1,-1.3,1,1.4;0,0,1,1" vettori="1,0,1,1,tan x" punti="0.7071,0.7071,pieno,P;1,1,pieno,T" titolo="$\tan x$ is the ordinate of the point $T$ where the line $OP$ meets the line tangent to the circle at $(1, 0)$; here $x = \dfrac{\pi}{4}$ and $\tan x = 1$"}
-
 :::
 
 :::definizione{#valori-notevoli titolo="Special values"}
@@ -37,7 +35,7 @@ The **tangent** is periodic with period $\pi$: adding $\pi$ to the angle changes
 | $\cos x$ | $1$ | $\dfrac{\sqrt{3}}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{1}{2}$ | $0$ | $-1$ | $0$ |
 | $\tan x$ | $0$ | $\dfrac{\sqrt{3}}{3}$ | $1$ | $\sqrt{3}$ | undefined | $0$ | undefined |
 
-These values, together with the symmetries of **related angles**, cover *all* the special angles of the circle. The solutions of the trigonometric equations in the exercises are almost always expressed with angles from this table.
+These values, together with the symmetries of related angles, cover *all* the special angles of the circle. The solutions of the trigonometric equations in the exercises are almost always expressed with angles from this table.
 :::
 
 ## The identities
@@ -47,7 +45,7 @@ For every $x \in \mathbb{R}$,
 $$
 \sin^2 x + \cos^2 x = 1 .
 $$
-It is the **Pythagorean theorem** applied to the triangle with legs $|\cos x|$ and $|\sin x|$ and hypotenuse the radius $1$. It is used to pass from one function to the other: given $\sin x$, the value of $\cos x$ is determined **up to sign**, and the sign is read from the **quadrant** in which the angle lies. In equations it allows one to write $\sin^2 x = 1 - \cos^2 x$, and with this substitution an equation containing both functions reduces to one containing a single function.
+It is the **Pythagorean theorem** applied to the triangle with legs $|\cos x|$ and $|\sin x|$ and hypotenuse the radius $1$. It is used to pass from one function to the other: given $\sin x$, the value of $\cos x$ is determined **up to sign**, and the sign is read from the quadrant in which the angle lies. In equations it allows one to write $\sin^2 x = 1 - \cos^2 x$, and with this substitution an equation containing both functions reduces to one containing *a single* function.
 :::
 
 :::esempio
@@ -62,10 +60,9 @@ For every $x \in \mathbb{R}$:
 - $\sin(\pi + x) = -\sin x$ and $\cos(\pi + x) = -\cos x$;
 - $\sin\left(\dfrac{\pi}{2} - x\right) = \cos x$ and $\cos\left(\dfrac{\pi}{2} - x\right) = \sin x$.
 
-They follow from the **symmetries of the unit circle** with respect to the axes and to the bisector of the first quadrant. They make it possible to reduce *every* angle to the first quadrant and to turn a cosine into a sine, for example in equations of the form $\sin A = \cos B$. From the second line it follows that $\cos\dfrac{5\pi}{6} = \cos\left(\pi - \dfrac{\pi}{6}\right) = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$.
+They follow from the **symmetries** of the unit circle with respect to the axes and to the bisector of the first quadrant. They make it possible to reduce *every* angle to the first quadrant and to turn a cosine into a sine, for example in equations of the form $\sin A = \cos B$. From the second line it follows that $\cos\dfrac{5\pi}{6} = \cos\left(\pi - \dfrac{\pi}{6}\right) = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$.
 
 ::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.7 xmax=1.7 ymin=-1.3 ymax=1.3 segmenti="0,0,0.866,0.5;0,0,-0.866,0.5;0,0,-0.866,-0.5;0,0,0.866,-0.5;-0.866,0.5,0.866,0.5;0.866,0.5,0.866,-0.5" punti="0.866,0.5;-0.866,0.5;-0.866,-0.5;0.866,-0.5" etichette="0.95,0.6,x;-1.35,0.62,π − x;-1.35,-0.72,π + x;0.95,-0.72,−x" titolo="With $x = \dfrac{\pi}{6}$: the point of $\pi - x$ is symmetric with respect to the $y$-axis, that of $-x$ with respect to the $x$-axis, that of $\pi + x$ with respect to the origin"}
-
 :::
 
 :::teorema{#formule-di-addizione titolo="Addition and double-angle formulas"}
@@ -84,7 +81,7 @@ The two alternative forms of $\cos 2a$ follow from the **Pythagorean identity** 
 :::
 
 :::esempio
-With the **subtraction formula** for the cosine:
+With the **cosine subtraction formula**:
 $$
 \begin{aligned}
 \cos\frac{\pi}{12} = \cos\left(\frac{\pi}{3} - \frac{\pi}{4}\right)
@@ -98,13 +95,13 @@ $$
 ## The graphs of sine and cosine
 
 :::osservazione
-The graph of the sine is the **sine wave**: over one period it starts at $0$, rises to $1$ at $\dfrac{\pi}{2}$, returns to $0$ at $\pi$, falls to $-1$ at $\dfrac{3\pi}{2}$ and rises back to $0$ at $2\pi$. The graph of the cosine has the **same shape**, shifted $\dfrac{\pi}{2}$ to the left, since $\cos x = \sin\left(x + \dfrac{\pi}{2}\right)$.
+The graph of the sine is the **sine wave**: over one period it starts at $0$, rises to $1$ at $\dfrac{\pi}{2}$, returns to $0$ at $\pi$, falls to $-1$ at $\dfrac{3\pi}{2}$ and rises back to $0$ at $2\pi$. The graph of the cosine has the same shape, shifted $\dfrac{\pi}{2}$ to the left, since $\cos x = \sin\left(x + \dfrac{\pi}{2}\right)$.
 
 ::grafico{f="sin(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \sin x$ over two periods"}
 
 ::grafico{f="cos(x)" xmin=-6.3 xmax=6.3 ymin=-1.5 ymax=1.5 titolo="$y = \cos x$ over two periods"}
 
-The solutions of the elementary equations can be read from the graph: for $|k| < 1$ the horizontal line $y = k$ intersects the sine wave at two points in each period, therefore the solutions form **two families**.
+The solutions of the elementary equations can be read from the graph: for $|k| < 1$ the horizontal line $y = k$ intersects the sine wave at **two points** in each period, therefore the solutions form **two families**.
 :::
 
 ## Elementary equations
@@ -114,22 +111,21 @@ Let $k \in \mathbb{R}$ and let $n \in \mathbb{Z}$.
 
 - $\sin x = k$ with $|k| \leq 1$: if $\alpha$ is an angle with $\sin \alpha = k$, the solutions are
 $$
-x = \alpha + 2n\pi \quad \text{or} \quad x = \pi - \alpha + 2n\pi .
+x = \alpha + 2n\pi \quad \text{oppure} \quad x = \pi - \alpha + 2n\pi .
 $$
 - $\cos x = k$ with $|k| \leq 1$: if $\alpha$ is an angle with $\cos \alpha = k$, the solutions are
 $$
-x = \alpha + 2n\pi \quad \text{or} \quad x = -\alpha + 2n\pi .
+x = \alpha + 2n\pi \quad \text{oppure} \quad x = -\alpha + 2n\pi .
 $$
-- $\tan x = k$, for *every* $k \in \mathbb{R}$: if $\alpha$ is an angle with $\tan \alpha = k$, the solutions are
+- $\tan x = k$, for every $k \in \mathbb{R}$: if $\alpha$ is an angle with $\tan \alpha = k$, the solutions are
 $$
 x = \alpha + n\pi .
 $$
-- $\sin x = k$ and $\cos x = k$ with $|k| > 1$ have **no solutions**, since sine and cosine take *only* values between $-1$ and $1$.
+- $\sin x = k$ and $\cos x = k$ with $|k| > 1$ **have no solutions**, since sine and cosine take *only* values between $-1$ and $1$.
 
-On the unit circle: the points with ordinate $k$ are the two points of angles $\alpha$ and $\pi - \alpha$, **symmetric with respect to the vertical axis**; the points with abscissa $k$ are the two points of angles $\alpha$ and $-\alpha$, **symmetric with respect to the horizontal axis**. The tangent has period $\pi$, hence its solutions are half a turn apart.
+On the unit circle: the points with ordinate $k$ are the two points of angles $\alpha$ and $\pi - \alpha$, symmetric with respect to the vertical axis; the points with abscissa $k$ are the two points of angles $\alpha$ and $-\alpha$, symmetric with respect to the horizontal axis. The tangent has period $\pi$, hence its solutions are **half a turn** apart.
 
 ::grafico{curve="cos(t),sin(t),0,6.29" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="-1.4,0.866,1.4,0.866;0,0,0.5,0.866;0,0,-0.5,0.866" punti="0.5,0.866,pieno,π/3;-0.5,0.866,pieno,2π/3" titolo="$\sin x = \dfrac{\sqrt{3}}{2}$: the line $y = \dfrac{\sqrt{3}}{2}$ meets the circle at the two points of angles $\dfrac{\pi}{3}$ and $\dfrac{2\pi}{3}$"}
-
 :::
 
 :::esempio{titolo="Three elementary equations"}
@@ -146,13 +142,13 @@ For $n \in \mathbb{Z}$:
 - $\sin A = \sin B$ *if and only if* $A = B + 2n\pi$ or $A = \pi - B + 2n\pi$;
 - $\cos A = \cos B$ *if and only if* $A = B + 2n\pi$ or $A = -B + 2n\pi$.
 
-The alternatives are the same as for the elementary equations: two angles have the same sine when they coincide up to full turns or are **supplementary** up to full turns, and the same cosine when they coincide or are **opposite** up to full turns. An equation of the form $\sin A = \cos B$ is brought into this form with **related angles**, by writing $\cos B = \sin\left(\dfrac{\pi}{2} - B\right)$.
+The alternatives are the same as for the elementary equations: two angles have the same sine when they coincide up to full turns or are **supplementary** up to full turns, and the same cosine when they coincide or are **negatives of each other** up to full turns. An equation of the form $\sin A = \cos B$ is brought into this form with **related angles**, by writing $\cos B = \sin\left(\dfrac{\pi}{2} - B\right)$.
 :::
 
 :::esempio
 $\sin 2x = \sin\left(x + \dfrac{\pi}{3}\right)$. The two alternatives are
 $$
-2x = x + \frac{\pi}{3} + 2n\pi \quad \text{or} \quad 2x = \pi - x - \frac{\pi}{3} + 2n\pi ,
+2x = x + \frac{\pi}{3} + 2n\pi \quad \text{oppure} \quad 2x = \pi - x - \frac{\pi}{3} + 2n\pi ,
 $$
 therefore the first gives $x = \dfrac{\pi}{3} + 2n\pi$, and the second gives $3x = \dfrac{2\pi}{3} + 2n\pi$, that is $x = \dfrac{2\pi}{9} + \dfrac{2n\pi}{3}$.
 :::
@@ -167,7 +163,7 @@ a t^2 + b t + c = 0 \\[4pt]
 -1 \leq t \leq 1
 \end{cases}
 $$
-Each root $t$ with $|t| \leq 1$ gives the elementary equation $\sin x = t$; a root with $|t| > 1$ is **discarded**, because the condition $-1 \leq t \leq 1$ is *not* satisfied. The same procedure applies with $t = \cos x$. If the equation contains both $\sin^2 x$ and $\cos x$, the substitution $\sin^2 x = 1 - \cos^2 x$, which follows from the **Pythagorean identity**, brings it to a single function.
+Each root $t$ with $|t| \leq 1$ gives the elementary equation $\sin x = t$; a root with $|t| > 1$ **must be discarded**, because the condition $-1 \leq t \leq 1$ is not satisfied. The same procedure applies with $t = \cos x$. If the equation contains both $\sin^2 x$ and $\cos x$, the substitution $\sin^2 x = 1 - \cos^2 x$, which follows from the **Pythagorean identity**, expresses it in terms of a single function.
 :::
 
 :::esempio
@@ -176,16 +172,16 @@ $2\cos^2 x - \cos x - 1 = 0$. Setting $t = \cos x$, the equation $2t^2 - t - 1 =
 
 ## Homogeneous and linear equations
 
-:::teorema{#omogenee-e-lineari titolo="Homogeneous equations of second degree"}
+:::teorema{#omogenee-e-lineari titolo="Homogeneous quadratic equations"}
 An equation of the form
 $$
 a\sin^2 x + b\sin x \cos x + c\cos^2 x = 0
 $$
-is called **homogeneous of second degree** in sine and cosine. If $a \neq 0$, the points with $\cos x = 0$ are *not* solutions, because for them $\sin^2 x = 1$ and the left-hand side equals $a \neq 0$. One can therefore **divide by** $\cos^2 x$, obtaining the quadratic equation
+is called **homogeneous of degree two** in sine and cosine. If $a \neq 0$, the points with $\cos x = 0$ are *not* solutions, because for them $\sin^2 x = 1$ and the left-hand side equals $a \neq 0$. One can therefore divide by $\cos^2 x$, obtaining the quadratic equation
 $$
 a\tan^2 x + b\tan x + c = 0 ,
 $$
-whose roots give **elementary equations in the tangent**. If $a = 0$, one factors out $\cos x$ and the equation splits into two factors.
+whose roots give elementary equations in the tangent. If $a = 0$, one factors out $\cos x$ and the equation **splits into two factors**.
 :::
 
 :::teorema{#angolo-aggiunto titolo="Auxiliary angle method"}
@@ -200,18 +196,17 @@ and for every $x$,
 $$
 a\sin x + b\cos x = R\sin(x + \varphi) .
 $$
-The equality is verified by expanding $R\sin(x + \varphi)$ with the **addition formula** for the sine. With this form, the linear equation $a\sin x + b\cos x = c$ becomes the **elementary equation** $\sin(x + \varphi) = \dfrac{c}{R}$, which has solutions *if and only if* $|c| \leq R$.
+The equality is verified by expanding $R\sin(x + \varphi)$ with the **sine addition formula**. With this form, the linear equation $a\sin x + b\cos x = c$ becomes the elementary equation $\sin(x + \varphi) = \dfrac{c}{R}$, which has solutions *if and only if* $|c| \leq R$.
 :::
 
 :::esempio
 $\sin x + \sqrt{3}\cos x = 1$. Here $R = \sqrt{1 + 3} = 2$, and from $\cos\varphi = \dfrac{1}{2}$, $\sin\varphi = \dfrac{\sqrt{3}}{2}$ it follows that $\varphi = \dfrac{\pi}{3}$. The equation becomes $2\sin\left(x + \dfrac{\pi}{3}\right) = 1$, that is $\sin\left(x + \dfrac{\pi}{3}\right) = \dfrac{1}{2}$, therefore
 $$
-x + \frac{\pi}{3} = \frac{\pi}{6} + 2n\pi \quad \text{or} \quad x + \frac{\pi}{3} = \frac{5\pi}{6} + 2n\pi ,
+x + \frac{\pi}{3} = \frac{\pi}{6} + 2n\pi \quad \text{oppure} \quad x + \frac{\pi}{3} = \frac{5\pi}{6} + 2n\pi ,
 $$
 which gives $x = -\dfrac{\pi}{6} + 2n\pi$ or $x = \dfrac{\pi}{2} + 2n\pi$.
 
 ::grafico{f="sin(x)+sqrt(3)*cos(x);1" xmin=-3.5 xmax=6.5 ymin=-2.5 ymax=2.5 punti="-0.5236,1,pieno;1.5708,1,pieno,π/2;5.7596,1,pieno,11π/6" etichette="-1.75,1.3,−π/6" titolo="$y = \sin x + \sqrt{3}\cos x = 2\sin\left(x + \dfrac{\pi}{3}\right)$ oscillates between $-2$ and $2$ and meets the line $y = 1$ at $-\dfrac{\pi}{6}$ and $\dfrac{\pi}{2}$, up to multiples of $2\pi$"}
-
 :::
 
 :::attenzione
@@ -221,32 +216,30 @@ Dividing by a factor that can vanish **loses solutions**. In the equation $\sin 
 ## Elementary inequalities
 
 :::teorema{#disequazioni-goniometriche titolo="Elementary inequalities"}
-The inequality $\sin x > k$ with $|k| < 1$ is read on the **unit circle**: the solutions are the angles whose point has **ordinate greater than** $k$. The procedure over one period:
+The inequality $\sin x > k$ with $|k| < 1$ is read on the unit circle: the solutions are the angles whose point has ordinate greater than $k$. The procedure over one period:
 
 1. solve the equation $\sin x = k$ over one turn, finding two angles;
 2. the two corresponding points divide the circle into two arcs;
 3. the arc whose points have ordinate greater than $k$ gives the interval of solutions;
 4. the general solution is obtained by adding $2n\pi$ to the endpoints of the interval.
 
-For $\cos x > k$ the procedure is the same, with the abscissa in place of the ordinate. If $k \geq 1$ the inequality $\sin x > k$ has **no solutions**, because the sine does not exceed $1$; if $k = -1$ all $x$ are solutions except $x = \dfrac{3\pi}{2} + 2n\pi$, where the sine equals $-1$; if $k < -1$ *every* $x \in \mathbb{R}$ is a solution.
+For $\cos x > k$ the procedure is the same, with the abscissa in place of the ordinate. If $k \geq 1$ the inequality $\sin x > k$ **has no solutions**, because the sine does not exceed $1$; if $k = -1$ all $x$ are solutions except $x = \dfrac{3\pi}{2} + 2n\pi$, where the sine equals $-1$; if $k < -1$ *every* $x \in \mathbb{R}$ is a solution.
 :::
 
 :::esempio
-$\sin x > \dfrac{1}{2}$. On $[0, 2\pi)$ the equation $\sin x = \dfrac{1}{2}$ has solutions $\dfrac{\pi}{6}$ and $\dfrac{5\pi}{6}$; the arc with ordinate greater than $\dfrac{1}{2}$ is the **upper one**, therefore the solutions over one period are $\dfrac{\pi}{6} < x < \dfrac{5\pi}{6}$ and the **general solution** is
+$\sin x > \dfrac{1}{2}$. On $[0, 2\pi)$ the equation $\sin x = \dfrac{1}{2}$ has solutions $\dfrac{\pi}{6}$ and $\dfrac{5\pi}{6}$; the arc with ordinate greater than $\dfrac{1}{2}$ is the **upper** one, therefore the solutions over one period are $\dfrac{\pi}{6} < x < \dfrac{5\pi}{6}$ and the general solution is
 $$
 \frac{\pi}{6} + 2n\pi < x < \frac{5\pi}{6} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
 
 ::grafico{curve="cos(t),sin(t),0.5236,2.618;cos(t),sin(t),2.618,6.8068" uguale=1 xmin=-1.4 xmax=1.4 ymin=-1.3 ymax=1.3 segmenti="-1.4,0.5,1.4,0.5;0,0,0.866,0.5;0,0,-0.866,0.5" punti="0.866,0.5,vuoto,π/6;-0.866,0.5,vuoto,5π/6" titolo="$\sin x > \dfrac{1}{2}$: the solid arc, with ordinate greater than $\dfrac{1}{2}$, goes from $\dfrac{\pi}{6}$ to $\dfrac{5\pi}{6}$, endpoints excluded"}
-
 :::
 
 :::esempio
-$\cos x > -\dfrac{\sqrt{2}}{2}$. On $[0, 2\pi)$ the equation $\cos x = -\dfrac{\sqrt{2}}{2}$ has solutions $\dfrac{3\pi}{4}$ and $\dfrac{5\pi}{4}$; the arc with abscissa greater than $-\dfrac{\sqrt{2}}{2}$ is the one containing the point of angle $0$, therefore the solutions on $[0, 2\pi)$ are $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$ and the **general solution** is
+$\cos x > -\dfrac{\sqrt{2}}{2}$. On $[0, 2\pi)$ the equation $\cos x = -\dfrac{\sqrt{2}}{2}$ has solutions $\dfrac{3\pi}{4}$ and $\dfrac{5\pi}{4}$; the arc with abscissa greater than $-\dfrac{\sqrt{2}}{2}$ is the one containing the point of angle $0$, therefore the solutions on $[0, 2\pi)$ are $\left[0, \dfrac{3\pi}{4}\right) \cup \left(\dfrac{5\pi}{4}, 2\pi\right)$ and the general solution is
 $$
 -\frac{3\pi}{4} + 2n\pi < x < \frac{3\pi}{4} + 2n\pi, \qquad n \in \mathbb{Z} .
 $$
 
 ::grafico{f="cos(x);-0.7071" xmin=-6.5 xmax=6.5 ymin=-1.5 ymax=1.5 area="cos(x);-0.7071;-2.356;2.356|cos(x);-0.7071;3.927;6.5|cos(x);-0.7071;-6.5;-3.927" punti="-2.356,-0.7071,vuoto,−3π/4;2.356,-0.7071,vuoto,3π/4" titolo="$\cos x > -\dfrac{\sqrt{2}}{2}$: the graph of the cosine lies above the line $y = -\dfrac{\sqrt{2}}{2}$ for $-\dfrac{3\pi}{4} < x < \dfrac{3\pi}{4}$, up to multiples of $2\pi$"}
-
 :::
