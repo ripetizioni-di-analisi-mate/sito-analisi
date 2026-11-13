@@ -1,6 +1,6 @@
 ---
-titolo: Matrices and matrix operations
-sommario: Matrices and their types, sum, row-by-column product, transpose and powers, the inverse matrix, row echelon reduction and the computation of the inverse with the Gauss-Jordan method.
+titolo: Matrici e operazioni tra matrici
+sommario: Le matrici e i loro tipi, somma, prodotto righe per colonne, trasposta e potenze, la matrice inversa, la riduzione a scala per righe e il calcolo dell'inversa con il metodo di Gauss-Jordan.
 ---
 
 ## Matrices and notation
@@ -16,7 +16,7 @@ a_{21} & a_{22} & \cdots & a_{2n} \\
 a_{m1} & a_{m2} & \cdots & a_{mn}
 \end{pmatrix} .
 $$
-The number $a_{ij}$ is the **entry in position** $(i, j)$; the first index indicates the row and the second the column. One writes briefly $A = (a_{ij})$, and the set of $m \times n$ matrices is denoted by $M_{m,n}(\mathbb{R})$. Two matrices are equal if they have the same dimensions and the entries in the same position coincide, so an equality between $m \times n$ matrices is equivalent to $mn$ equalities between numbers. Matrices collect into a single object the coefficients of a linear system, of a linear map or of a quadratic form, and the operations between matrices translate the operations on these objects.
+The number $a_{ij}$ is the **entry in position** $(i, j)$; the first index indicates the row and the second the column. For short, one writes $A = (a_{ij})$, and the set of $m \times n$ matrices is denoted by $M_{m,n}(\mathbb{R})$. Two matrices are equal if they have the same dimensions and the entries in the same position coincide, so an equality between $m \times n$ matrices is equivalent to $mn$ equalities between numbers. Matrices collect into a single object the coefficients of a linear system, of a linear map or of a quadratic form, and the operations between matrices translate the operations on these objects.
 :::
 
 :::esempio
@@ -51,7 +51,7 @@ Let $A = (a_{ij}) \in M_n(\mathbb{R})$.
 - $A$ is **diagonal** if $a_{ij} = 0$ for $i \neq j$; one writes $A = \operatorname{diag}(a_{11}, \dots, a_{nn})$.
 - The **identity matrix** $I_n$ is the diagonal matrix with all diagonal entries equal to $1$.
 
-A diagonal matrix is both upper and lower triangular. The product of two upper triangular matrices of the same order is upper triangular, and the same holds for diagonal matrices. On these classes computations become simpler: row echelon reduction produces upper triangular matrices, and the powers of a diagonal matrix are computed entry by entry.
+A diagonal matrix is both upper and lower triangular. The product of two upper triangular matrices of the same order is upper triangular, and the same holds for diagonal matrices. Computations become simpler for these classes: reduction to row echelon form produces upper triangular matrices, and the powers of a diagonal matrix are computed entry by entry.
 :::
 
 :::esempio
@@ -105,13 +105,13 @@ K =
 2 & -3 & 0
 \end{pmatrix} .
 $$
-$S$ is symmetric, since $s_{12} = s_{21} = 2$, $s_{13} = s_{31} = -3$ and $s_{23} = s_{32} = 4$. $K$ is skew-symmetric, since it has zero diagonal and the entries in mirror positions are opposite.
+$S$ is symmetric, since $s_{12} = s_{21} = 2$, $s_{13} = s_{31} = -3$ and $s_{23} = s_{32} = 4$. $K$ is skew-symmetric, since it has a zero diagonal and the entries in mirror positions are negatives of one another.
 :::
 
-## Sum and multiplication by a scalar
+## Addition and scalar multiplication
 
-:::definizione{#somma-e-prodotto-per-scalare titolo="Sum and multiplication by a scalar"}
-Let $A = (a_{ij})$ and $B = (b_{ij})$ be in $M_{m,n}(\mathbb{R})$ and let $k \in \mathbb{R}$. The **sum** and the **multiplication by a scalar** are performed entry by entry:
+:::definizione{#somma-e-prodotto-per-scalare titolo="Addition and scalar multiplication"}
+Let $A = (a_{ij})$ and $B = (b_{ij})$ be in $M_{m,n}(\mathbb{R})$ and let $k \in \mathbb{R}$. **Addition** and **scalar multiplication** are performed entry by entry:
 $$
 A + B = (a_{ij} + b_{ij}),
 \qquad
@@ -156,7 +156,7 @@ A + B =
 $$
 :::
 
-:::teorema{#proprieta-operazioni-lineari titolo="Properties of the sum and of multiplication by a scalar"}
+:::teorema{#proprieta-operazioni-lineari titolo="Properties of addition and scalar multiplication"}
 For all $A, B, C \in M_{m,n}(\mathbb{R})$ and all $h, k \in \mathbb{R}$:
 
 - $(A + B) + C = A + (B + C)$ and $A + B = B + A$;
@@ -209,11 +209,11 @@ $BA$ is also defined, since $B$ has two columns and $A$ has two rows, but it is 
 :::
 
 :::osservazione{#prodotto-per-colonne titolo="The column-by-column product and linear systems"}
-Column $k$ of $AB$ is the product of $A$ by column $k$ of $B$. The product of $A \in M_{m,n}(\mathbb{R})$ by a column vector $x \in \mathbb{R}^n$ is the **linear combination of the columns** $A^1, \dots, A^n$ of $A$ with coefficients the components of $x$:
+Column $k$ of $AB$ is the product of $A$ by column $k$ of $B$. The product of $A \in M_{m,n}(\mathbb{R})$ by a column vector $x \in \mathbb{R}^n$ is the **linear combination of the columns** $A^1, \dots, A^n$ of $A$ with coefficients given by the components of $x$:
 $$
 Ax = x_1 A^1 + x_2 A^2 + \dots + x_n A^n .
 $$
-This reading explains the definition of the product: a linear system of $m$ equations in $n$ unknowns is written as a single matrix equation $Ax = b$, with $A$ the coefficient matrix and $b$ the column of constant terms. The system
+This interpretation explains the definition of the product: a linear system of $m$ equations in $n$ unknowns is written as a single matrix equation $Ax = b$, with $A$ the coefficient matrix and $b$ the column of constant terms. The system
 $$
 \begin{cases}
 2x_1 - x_2 = 3 \\[4pt]
@@ -227,7 +227,7 @@ is equivalent to $\begin{pmatrix} 2 & -1 \\ 1 & 4 \end{pmatrix} \begin{pmatrix} 
 :::
 
 ::::teorema{#proprieta-del-prodotto titolo="Properties of the row-by-column product"}
-Let $A, B, C$ be matrices and $k \in \mathbb{R}$, with dimensions such that the written operations are defined. Then:
+Let $A, B, C$ be matrices and $k \in \mathbb{R}$, with dimensions such that the stated operations are defined. Then:
 
 - $(AB)C = A(BC)$ (associative property);
 - $A(B + C) = AB + AC$ and $(A + B)C = AC + BC$ (distributive properties);
@@ -288,7 +288,7 @@ $$
 Two matrices $A, B \in M_n(\mathbb{R})$ **commute** if $AB = BA$. Every matrix commutes with $I_n$, with the zero matrix and with its own powers; two diagonal matrices of the same order always commute, because their product is the diagonal matrix of the products of the diagonal entries. To find *all* the matrices that commute with a given matrix $A$ one writes $X$ with unknown entries and solves the linear system obtained from the equality $AX = XA$.
 :::
 
-:::osservazione{#prodotti-notevoli titolo="Special products of matrices"}
+:::osservazione{#prodotti-notevoli titolo="Standard algebraic identities for matrices"}
 By the distributive property, for all $A, B \in M_n(\mathbb{R})$
 $$
 (A + B)^2 = (A + B)(A + B) = A^2 + AB + BA + B^2 .
@@ -347,9 +347,9 @@ $$
 one has $AC = A = A I_2$, and yet $C \neq I_2$. Cancellation is allowed when $A$ is invertible: multiplying both sides on the left by $A^{-1}$ gives $B = C$.
 :::
 
-## Transpose matrix
+## Transpose of a matrix
 
-:::definizione{#trasposta titolo="Transpose matrix"}
+:::definizione{#trasposta titolo="Transpose of a matrix"}
 Let $A = (a_{ij}) \in M_{m,n}(\mathbb{R})$. The **transpose** of $A$ is the matrix $A^T \in M_{n,m}(\mathbb{R})$ with entry in position $(i, j)$ equal to $a_{ji}$, that is, the matrix whose columns are the rows of $A$. A square matrix is symmetric if and only if $A^T = A$, and it is skew-symmetric if and only if $A^T = -A$. The transpose is used to write the dot product in matrix form, $u \cdot v = u^T v$ for column vectors $u, v \in \mathbb{R}^n$, and to pass from the rows to the columns of a matrix.
 :::
 
@@ -378,7 +378,7 @@ The product $A A^T$ is square and symmetric, in agreement with the properties of
 :::
 
 ::::teorema{#proprieta-della-trasposta titolo="Properties of the transpose"}
-Let $A, B$ be matrices and $k \in \mathbb{R}$, with dimensions such that the written operations are defined. Then:
+Let $A, B$ be matrices and $k \in \mathbb{R}$, with dimensions such that the stated operations are defined. Then:
 
 - $(A^T)^T = A$;
 - $(A + B)^T = A^T + B^T$ and $(kA)^T = k A^T$;
@@ -559,10 +559,10 @@ Let $A \in M_n(\mathbb{R})$.
 - If $A$ has a zero row or a zero column, then $A$ is not invertible.
 - If there exists $B \in M_n(\mathbb{R})$ with $B \neq O$ such that $AB = O$ or $BA = O$, then $A$ is not invertible.
 
-The second point says that a **zero divisor is not invertible**; in particular a nilpotent matrix is not invertible. These conditions make it possible to rule out invertibility without computations, while row echelon reduction decides in every case.
+The second point says that a **zero divisor is not invertible**; in particular a nilpotent matrix is not invertible. These conditions make it possible to rule out invertibility without computations, while reduction to row echelon form decides in every case.
 
 :::dimostrazione
-If row $i$ of $A$ is zero, by the definition of the product row $i$ of $AB$ is zero for every $B$, so $AB \neq I_n$ for every $B$ and $A$ has no inverse; if column $k$ of $A$ is zero, one argues in the same way on column $k$ of $BA$. Now suppose $AB = O$ with $B \neq O$ and, by contradiction, $A$ invertible. Multiplying on the left by $A^{-1}$ gives
+If row $i$ of $A$ is zero, by the definition of the product row $i$ of $AB$ is zero for every $B$, so $AB \neq I_n$ for every $B$ and $A$ has no inverse; if column $k$ of $A$ is zero, one argues in the same way on column $k$ of $BA$. Now suppose $AB = O$ with $B \neq O$ and, for a contradiction, that $A$ is invertible. Multiplying on the left by $A^{-1}$ gives
 $$
 B = I_n B = (A^{-1} A) B = A^{-1} (AB) = A^{-1} O = O,
 $$
@@ -578,10 +578,10 @@ $$
 With the same factoring, for $N$ nilpotent with $N^3 = O$ one has $(I_n - N)(I_n + N + N^2) = I_n - N^3 = I_n$, therefore $I_n - N$ is invertible with inverse $I_n + N + N^2$.
 :::
 
-## Row echelon reduction
+## Reduction to row echelon form
 
 :::definizione{#operazioni-elementari titolo="Elementary row operations"}
-Let $A$ be a matrix with rows $R_1, \dots, R_m$. The **elementary row operations** are three:
+Let $A$ be a matrix with rows $R_1, \dots, R_m$. There are three **elementary row operations**:
 
 - swapping two rows, $R_i \leftrightarrow R_j$;
 - multiplying a row by a nonzero scalar, $R_i \to k R_i$ with $k \neq 0$;
@@ -617,14 +617,14 @@ The first matrix is in row echelon form with pivots $2$, $-1$, $5$ in columns $1
 :::
 
 ::::teorema{#algoritmo-di-gauss titolo="Gaussian elimination"}
-Every matrix can be transformed into a row echelon matrix with a finite number of elementary row operations, and with further operations into a reduced row echelon matrix. Row echelon reduction is used to solve linear systems, to compute the rank and to compute the inverse. The number of pivots does not depend on the chosen operations and is the rank of the matrix, which is covered in the topic on linear systems and rank.
+Every matrix can be transformed into a row echelon matrix with a finite number of elementary row operations, and with further operations into a reduced row echelon matrix. Reduction to row echelon form is used to solve linear systems, to compute the rank and to compute the inverse. The number of pivots does not depend on the chosen operations and is the rank of the matrix, which is covered in the topic on linear systems and rank.
 
 :::dimostrazione
 We proceed by induction on the number $m$ of rows. If the matrix is zero, it is already in row echelon form. Otherwise let $c$ be the first nonzero column; with a swap one brings to the first row a row with a nonzero entry $p$ in column $c$, which becomes the pivot. For each row $R_i$ with $i \geq 2$ and entry $a_{ic}$ in column $c$, the operation $R_i \to R_i - \dfrac{a_{ic}}{p} R_1$ makes that entry zero. After these steps the columns to the left of $c$ are zero and in column $c$ the only nonzero entry is the pivot in the first row. By the induction hypothesis, the submatrix formed by the rows from the second on is reduced to row echelon form with operations that do not affect the first row; the resulting matrix is in row echelon form, because the pivots of the subsequent rows lie to the right of column $c$. To obtain the reduced form one divides each nonzero row by its pivot and, proceeding from the last pivot to the first, makes the entries above each pivot zero with operations of the third type.
 :::
 ::::
 
-:::esempio{titolo="Row echelon reduction of a 3 × 4 matrix"}
+:::esempio{titolo="Reduction to row echelon form of a 3 × 4 matrix"}
 $$
 \begin{pmatrix}
 1 & 2 & -1 & 3 \\
@@ -679,14 +679,14 @@ E^{-1} =
 $$
 
 :::dimostrazione
-Row $i$ of $EA$ is the product of row $i$ of $E$ by $A$, that is, the linear combination of the rows of $A$ with coefficients the entries of row $i$ of $E$. For $R_i \to R_i + k R_j$ row $i$ of $E$ has $1$ in position $i$ and $k$ in position $j$, so row $i$ of $EA$ is $R_i + k R_j$, while the other rows of $E$ coincide with those of $I_m$ and leave the other rows of $A$ unchanged. The other two types are verified in the same way. Now let $E'$ be the elementary matrix of the inverse operation. By the first point $E'E$ is obtained by applying to $E$ the inverse of the operation that produced $E$ from $I_m$, hence $E'E = I_m$; by the same reasoning $EE' = I_m$, therefore $E' = E^{-1}$.
+Row $i$ of $EA$ is the product of row $i$ of $E$ by $A$, that is, the linear combination of the rows of $A$ with coefficients given by the entries of row $i$ of $E$. For $R_i \to R_i + k R_j$ row $i$ of $E$ has $1$ in position $i$ and $k$ in position $j$, so row $i$ of $EA$ is $R_i + k R_j$, while the other rows of $E$ coincide with those of $I_m$ and leave the other rows of $A$ unchanged. The other two types are verified in the same way. Now let $E'$ be the elementary matrix of the inverse operation. By the first point $E'E$ is obtained by applying to $E$ the inverse of the operation that produced $E$ from $I_m$, hence $E'E = I_m$; by the same reasoning $EE' = I_m$, therefore $E' = E^{-1}$.
 :::
 ::::
 
 ## Computing the inverse with the Gauss-Jordan method
 
 ::::teorema{#teorema-di-gauss-jordan titolo="Gauss-Jordan theorem"}
-Let $A \in M_n(\mathbb{R})$ and let $R$ be the reduced row echelon matrix obtained from $A$ with elementary row operations. Then $A$ is invertible *if and only if* $R = I_n$, that is, if and only if the row echelon reduction of $A$ produces $n$ pivots. In that case the same operations that transform $A$ into $I_n$ transform $I_n$ into $A^{-1}$.
+Let $A \in M_n(\mathbb{R})$ and let $R$ be the reduced row echelon matrix obtained from $A$ with elementary row operations. Then $A$ is invertible *if and only if* $R = I_n$, that is, if and only if the reduction to row echelon form of $A$ produces $n$ pivots. In that case the same operations that transform $A$ into $I_n$ transform $I_n$ into $A^{-1}$.
 
 The theorem provides at once an **invertibility criterion** and a **method for computing** the inverse. An upper triangular matrix with all diagonal entries nonzero, for example, has $n$ pivots and is therefore invertible.
 
@@ -794,7 +794,7 @@ $$
 Let $A \in M_n(\mathbb{R})$ be invertible. The equations in the unknown $X$
 $$
 AX = B
-\qquad \text{and} \qquad
+\qquad \text{e} \qquad
 XA = B
 $$
 have respectively the unique solutions $X = A^{-1} B$ and $X = B A^{-1}$: in the first case one multiplies on the left by $A^{-1}$, in the second on the right, and the two results are in general different because the product is not commutative. For $AX = B$ one can avoid computing $A^{-1}$ by reducing the augmented matrix $\left( A \mid B \right)$ to $\left( I_n \mid X \right)$, by the same argument as in the Gauss-Jordan theorem. When $A$ is *not* invertible, one writes $X$ with unknown entries and solves the resulting linear system; the solutions may not exist or may be infinitely many.

@@ -1,12 +1,12 @@
 ---
-titolo: Linear maps
-sommario: The functions between vector spaces that preserve sums and scalar multiples, the matrix that represents them, kernel and image, the rank-nullity theorem, isomorphisms, composition and change of basis.
+titolo: Applicazioni lineari
+sommario: Le funzioni tra spazi vettoriali che conservano somme e prodotti per scalare, la matrice che le rappresenta, nucleo e immagine, il teorema della dimensione, gli isomorfismi, la composizione e il cambiamento di base.
 ---
 
 ## Definition and examples
 
 :::definizione{#applicazione-lineare titolo="Linear map"}
-Let $V$ and $W$ be real vector spaces. A function $f : V \to W$ is a **linear map** if for every $u, v \in V$ and every $\lambda \in \mathbb{R}$ the two conditions are satisfied together:
+Let $V$ and $W$ be real vector spaces. A function $f : V \to W$ is a **linear map** if for every $u, v \in V$ and every $\lambda \in \mathbb{R}$ both conditions hold:
 $$
 \begin{cases}
 f(u + v) = f(u) + f(v) \\[4pt]
@@ -16,13 +16,13 @@ $$
 A linear map from $V$ to itself is called an **endomorphism** of $V$. The two conditions are equivalent to the single condition $f(\alpha u + \beta v) = \alpha f(u) + \beta f(v)$ for every $u, v \in V$ and $\alpha, \beta \in \mathbb{R}$; by induction, $f$ sends *every* linear combination to the linear combination of the images with the same coefficients. The associated matrix and the construction of $f$ from its values on a basis are based on this property.
 :::
 
-:::teorema{#proprieta-elementari titolo="First properties"}
+:::teorema{#proprieta-elementari titolo="Basic properties"}
 Let $f : V \to W$ be linear. Then $f(0_V) = 0_W$ and $f(-v) = -f(v)$ for every $v \in V$. Indeed, setting $\lambda = 0$ in the second condition gives $f(0_V) = f(0 \cdot 0_V) = 0 \cdot f(0_V) = 0_W$, and setting $\lambda = -1$ gives the second equality. The first property provides an immediate check, because a map with $f(0_V) \neq 0_W$ **is not linear**.
 :::
 
-:::esempio{titolo="The linear maps of the exam"}
-- For every $A \in M_{m,n}(\mathbb{R})$ the function $f_A : \mathbb{R}^n \to \mathbb{R}^m$, $f_A(x) = Ax$, is linear, since the row-by-column product satisfies $A(x + y) = Ax + Ay$ and $A(\lambda x) = \lambda\, Ax$. All functions such as $f(x, y, z) = (x + 2y,\ y - z)$, in which each component is a polynomial of degree one with no constant term, are of this type.
-- The derivative $D : \mathbb{R}_n[x] \to \mathbb{R}_{n-1}[x]$, $D(p) = p'$, is linear, since the derivative of a sum is the sum of the derivatives and multiplicative constants can be taken outside.
+:::esempio{titolo="Linear maps in exam problems"}
+- For every $A \in M_{m,n}(\mathbb{R})$ the function $f_A : \mathbb{R}^n \to \mathbb{R}^m$, $f_A(x) = Ax$, is linear, since the row-by-column product satisfies $A(x + y) = Ax + Ay$ and $A(\lambda x) = \lambda\, Ax$. All functions such as $f(x, y, z) = (x + 2y,\ y - z)$, in which each component is a linear polynomial with no constant term, are of this type.
+- The derivative $D : \mathbb{R}_n[x] \to \mathbb{R}_{n-1}[x]$, $D(p) = p'$, is linear, since the derivative of a sum is the sum of the derivatives and constant factors can be taken outside the derivative.
 - Transposition $M_n(\mathbb{R}) \to M_n(\mathbb{R})$, $A \mapsto A^T$, and the trace $M_n(\mathbb{R}) \to \mathbb{R}$, $A \mapsto \operatorname{tr} A$, are linear.
 - The rotation by a right angle about the origin, $R(x, y) = (-y, x)$, is linear. Rotating the parallelogram built on $u$ and $v$ gives the parallelogram built on $R(u)$ and $R(v)$, so the diagonal $u + v$ goes to the diagonal $R(u) + R(v)$.
 
@@ -36,7 +36,7 @@ The condition $f(0_V) = 0_W$ is *necessary* and not sufficient for linearity.
 - $f(x, y) = (x + 1,\ y)$ is not linear, since $f(0, 0) = (1, 0)$.
 - $g(x, y) = (xy,\ x)$ satisfies $g(0, 0) = (0, 0)$ and is not linear, since $g(2, 2) = (4, 2)$ is different from $2\, g(1, 1) = (2, 2)$.
 
-To rule out linearity a numerical counterexample suffices; to prove it, the two conditions with generic vectors and scalars are needed.
+To rule out linearity a numerical counterexample suffices; to prove it, the two conditions for arbitrary vectors and scalars are needed.
 :::
 
 ## Maps defined on the vectors of a basis
@@ -61,7 +61,7 @@ that is, $f$ is linear. If $g$ is another linear map with $g(v_i) = w_i$, by lin
 If $\mathcal{B} = (v_1, \dots, v_n)$ is a basis of $V$, every $v \in V$ can be written in one and only one way as $v = a_1 v_1 + \dots + a_n v_n$.
 :::
 
-:::esempio{titolo="A map assigned on a basis of the plane"}
+:::esempio{titolo="A map specified on a basis of the plane"}
 We look for a linear $f : \mathbb{R}^2 \to \mathbb{R}^3$ with $f(1, 1) = (2, 0, 1)$ and $f(1, 2) = (1, 1, 0)$. The vectors $(1, 1)$ and $(1, 2)$ form a basis of $\mathbb{R}^2$, since they are not proportional, so $f$ **exists and is unique**. We write $(x, y) = a\,(1, 1) + b\,(1, 2)$, that is
 $$
 \begin{cases}
@@ -80,8 +80,8 @@ f(x, y) &= (2x - y)\,(2, 0, 1) + (y - x)\,(1, 1, 0) \\[6pt]
 $$
 :::
 
-:::osservazione{#valori-su-vettori-dipendenti titolo="Values assigned on dependent vectors"}
-If the values are assigned on *linearly dependent* vectors $u_1, \dots, u_k$, every relation among the vectors must also hold among the values: for example, from $u_3 = u_1 + u_2$ it follows that a linear $f$ satisfies $f(u_3) = f(u_1) + f(u_2)$. If all the relations are respected, $f$ exists, and it is unique *if and only if* $u_1, \dots, u_k$ span $V$; if a relation is not respected, $f$ **does not exist**. There is, for example, no linear map $f : \mathbb{R}^2 \to \mathbb{R}^2$ with $f(1, 0) = (1, 1)$, $f(0, 1) = (2, 0)$ and $f(1, 1) = (3, 2)$, since from $(1, 1) = (1, 0) + (0, 1)$ it would follow that $f(1, 1) = (3, 1)$.
+:::osservazione{#valori-su-vettori-dipendenti titolo="Values specified on dependent vectors"}
+If the values are specified on *linearly dependent* vectors $u_1, \dots, u_k$, every relation among the vectors must also hold among the values: for example, from $u_3 = u_1 + u_2$ it follows that a linear $f$ satisfies $f(u_3) = f(u_1) + f(u_2)$. If all the relations are satisfied, $f$ exists, and it is unique *if and only if* $u_1, \dots, u_k$ span $V$; if a relation is not satisfied, $f$ **does not exist**. There is, for example, no linear map $f : \mathbb{R}^2 \to \mathbb{R}^2$ with $f(1, 0) = (1, 1)$, $f(0, 1) = (2, 0)$ and $f(1, 1) = (3, 2)$, since from $(1, 1) = (1, 0) + (0, 1)$ it would follow that $f(1, 1) = (3, 1)$.
 :::
 
 ## The associated matrix
@@ -170,23 +170,23 @@ We apply the **subspace criterion**. Since $f(0_V) = 0_W$, the zero vector belon
 A subset $U \subseteq V$ is a subspace if and only if $0 \in U$, $u + v \in U$ for every $u, v \in U$ and $\lambda u \in U$ for every $u \in U$ and $\lambda \in \mathbb{R}$.
 :::
 
-:::teorema{#generatori-dell-immagine titolo="Generators of the image and rank"}
+:::teorema{#generatori-dell-immagine titolo="Spanning set for the image and rank"}
 If $v_1, \dots, v_n$ span $V$, then $f(v_1), \dots, f(v_n)$ span $\operatorname{Im} f$. Indeed every vector of the image is $f(v)$ with $v = \sum_i a_i v_i$, so $f(v) = \sum_i a_i f(v_i)$. For $f(x) = Ax$ with the standard bases the vectors $f(e_j)$ are the columns of $A$, therefore the image is the subspace spanned by the **columns** of $A$ and
 $$
 \dim \operatorname{Im} f = \operatorname{rk} A .
 $$
-The equality holds for the matrix associated with respect to any bases, since its columns are the coordinates of the generators $f(v_j)$ and passing to coordinates preserves linear independence. The number $\dim \operatorname{Im} f$ is called the **rank** of $f$.
+The equality holds for the associated matrix with respect to arbitrary bases, since its columns are the coordinates of the spanning vectors $f(v_j)$ and passing to coordinates preserves linear independence. The number $\dim \operatorname{Im} f$ is called the **rank** of $f$.
 :::
 
 :::osservazione{#calcolo-di-nucleo-e-immagine titolo="Computing kernel and image"}
 Let $A \in M_{m,n}(\mathbb{R})$ be the matrix of $f$ with respect to the standard bases.
 
-- The kernel is the solution set of the homogeneous system $Ax = 0$, which is solved by row reduction. There are $n - \operatorname{rk} A$ free parameters and each one gives a vector of a basis of the kernel (see the topic on linear systems).
-- The image is spanned by the columns of $A$; a basis consists of the columns of $A$ corresponding to the pivots of the echelon form. To write the image in Cartesian form one requires that the generic vector $(x, y, z)$ be linearly dependent on the basis vectors, for example by setting a determinant equal to zero.
+- The kernel is the solution set of the homogeneous system $Ax = 0$, which is solved by reduction to row echelon form. There are $n - \operatorname{rk} A$ free parameters and each one gives a vector of a basis of the kernel (see the topic on linear systems).
+- The image is spanned by the columns of $A$; a basis consists of the columns of $A$ corresponding to the pivots of the echelon form. To write the image in Cartesian form one requires that an arbitrary vector $(x, y, z)$ be linearly dependent on the basis vectors, for example by setting a determinant equal to zero.
 :::
 
 :::esempio{titolo="Kernel and image in space"}
-Let $f(x, y, z) = (x + y,\ y - z,\ x + z)$. Row reduction of the matrix gives
+Let $f(x, y, z) = (x + y,\ y - z,\ x + z)$. Reduction of the matrix to row echelon form gives
 $$
 \begin{pmatrix}
 1 & 1 & 0 \\
@@ -261,7 +261,7 @@ $$
 The theorem is also called the dimension theorem; the name rank-nullity comes from the fact that $\dim \ker f$ is called the nullity of $f$. Once one of the two dimensions is computed, the other follows without further computation. If $A \in M_{m,n}(\mathbb{R})$ is a matrix associated with $f$, one obtains $\dim \ker f = n - \operatorname{rk} A$, which is the number of free parameters of the system $Ax = 0$.
 
 :::dimostrazione
-Let $(u_1, \dots, u_k)$ be a basis of $\ker f$, with $k = 0$ if the kernel is zero, and complete it to a basis $(u_1, \dots, u_k, v_1, \dots, v_r)$ of $V$, so that $\dim V = k + r$. It suffices to prove that $f(v_1), \dots, f(v_r)$ form a basis of $\operatorname{Im} f$. The images of the vectors of a basis span $\operatorname{Im} f$ and $f(u_i) = 0_W$, so $f(v_1), \dots, f(v_r)$ span $\operatorname{Im} f$. For independence, let $b_1 f(v_1) + \dots + b_r f(v_r) = 0_W$. Then $b_1 v_1 + \dots + b_r v_r \in \ker f$, so there exist $a_1, \dots, a_k$ with
+Let $(u_1, \dots, u_k)$ be a basis of $\ker f$, with $k = 0$ if the kernel is zero, and extend it to a basis $(u_1, \dots, u_k, v_1, \dots, v_r)$ of $V$, so that $\dim V = k + r$. It suffices to prove that $f(v_1), \dots, f(v_r)$ form a basis of $\operatorname{Im} f$. The images of the vectors of a basis span $\operatorname{Im} f$ and $f(u_i) = 0_W$, so $f(v_1), \dots, f(v_r)$ span $\operatorname{Im} f$. For independence, let $b_1 f(v_1) + \dots + b_r f(v_r) = 0_W$. Then $b_1 v_1 + \dots + b_r v_r \in \ker f$, so there exist $a_1, \dots, a_k$ with
 $$
 b_1 v_1 + \dots + b_r v_r = a_1 u_1 + \dots + a_k u_k .
 $$
@@ -269,7 +269,7 @@ Since $u_1, \dots, u_k, v_1, \dots, v_r$ are independent, all the coefficients a
 :::
 ::::
 
-:::richiamo{titolo="Completion to a basis"}
+:::richiamo{titolo="Extension to a basis"}
 If $\dim V = n$ and $u_1, \dots, u_k \in V$ are linearly independent, with $k < n$, then there exist $v_1, \dots, v_{n-k} \in V$ such that $(u_1, \dots, u_k, v_1, \dots, v_{n-k})$ is a basis of $V$.
 :::
 
@@ -306,7 +306,7 @@ If $f : V \to W$ is an isomorphism, then $\ker f = \{0_V\}$ and $\operatorname{I
 ::::
 
 :::esempio{#isomorfismo-delle-coordinate titolo="The coordinate isomorphism"}
-Let $\mathcal{B}$ be a basis of $V$, with $\dim V = n$. The function $V \to \mathbb{R}^n$ that assigns to $v$ the coordinate column $[v]_{\mathcal{B}}$ is the linear map that sends the basis $\mathcal{B}$ to the standard basis, and it is an **isomorphism**. Therefore $\mathbb{R}_2[x]$ is isomorphic to $\mathbb{R}^3$ and $M_2(\mathbb{R})$ is isomorphic to $\mathbb{R}^4$, and questions about independence, generators and bases of polynomials or matrices are solved on the coordinates in $\mathbb{R}^n$. The polynomial $2 - x + 3x^2$ corresponds to $(2, -1, 3)$, the matrix $\begin{pmatrix} 1 & 0 \\ 4 & -2 \end{pmatrix}$ corresponds to $(1, 0, 4, -2)$.
+Let $\mathcal{B}$ be a basis of $V$, with $\dim V = n$. The function $V \to \mathbb{R}^n$ that assigns to $v$ the coordinate column $[v]_{\mathcal{B}}$ is the linear map that sends the basis $\mathcal{B}$ to the standard basis, and it is an **isomorphism**. Therefore $\mathbb{R}_2[x]$ is isomorphic to $\mathbb{R}^3$ and $M_2(\mathbb{R})$ is isomorphic to $\mathbb{R}^4$, and questions about independence, spanning sets and bases of polynomials or matrices are answered using the coordinates in $\mathbb{R}^n$. The polynomial $2 - x + 3x^2$ corresponds to $(2, -1, 3)$, the matrix $\begin{pmatrix} 1 & 0 \\ 4 & -2 \end{pmatrix}$ corresponds to $(1, 0, 4, -2)$.
 :::
 
 :::teorema{#isomorfismi-e-determinante titolo="Isomorphisms and determinant"}
@@ -320,7 +320,7 @@ Let $f : U \to V$ and $g : V \to W$ be linear and let $\mathcal{A}$, $\mathcal{B
 $$
 M^{\mathcal{A}}_{\mathcal{C}}(g \circ f) = M^{\mathcal{B}}_{\mathcal{C}}(g)\, M^{\mathcal{A}}_{\mathcal{B}}(f) .
 $$
-Composing linear maps corresponds to **multiplying the matrices** in the order in which the composition is written, so the matrix of the map applied first stands on the right. The definition of the row-by-column product is the one that makes this rule true.
+Composing linear maps corresponds to **multiplying the matrices** in the order in which the composition is written, so the matrix of the map applied first appears on the right. The definition of the row-by-column product is the one that makes this rule true.
 
 :::dimostrazione
 For $u_1, u_2 \in U$ and $\alpha, \beta \in \mathbb{R}$, the linearity of $f$ and then that of $g$ give
@@ -359,7 +359,7 @@ Let $f : V \to W$ be an isomorphism and let $A = M^{\mathcal{B}}_{\mathcal{C}}(f
 $$
 M^{\mathcal{C}}_{\mathcal{B}}(f^{-1}) = A^{-1} .
 $$
-Indeed $f^{-1} \circ f = \operatorname{id}_V$, and the matrix of the identity with the same basis in the domain and in the codomain is the identity matrix; by the matrix of the composition $M^{\mathcal{C}}_{\mathcal{B}}(f^{-1})\, A = I_n$, and in the same way $f \circ f^{-1} = \operatorname{id}_W$ gives $A\, M^{\mathcal{C}}_{\mathcal{B}}(f^{-1}) = I_n$. For $f(x, y) = (x + y,\ x + 2y)$ one obtains
+Indeed $f^{-1} \circ f = \operatorname{id}_V$, and the matrix of the identity with the same basis in the domain and in the codomain is the identity matrix; by the formula for the matrix of a composition $M^{\mathcal{C}}_{\mathcal{B}}(f^{-1})\, A = I_n$, and in the same way $f \circ f^{-1} = \operatorname{id}_W$ gives $A\, M^{\mathcal{C}}_{\mathcal{B}}(f^{-1}) = I_n$. For $f(x, y) = (x + y,\ x + 2y)$ one obtains
 $$
 \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}^{-1}
 =
@@ -391,11 +391,11 @@ $$
 In computations $\mathcal{B}$ and $\mathcal{C}$ are the standard bases, $P$ and $Q$ have as columns the vectors of the new bases, and the formula gives the matrix of $f$ with respect to the new bases with two products and one inverse.
 
 :::dimostrazione
-We write $f = \operatorname{id}_W \circ f \circ \operatorname{id}_V$, where $\operatorname{id}_V$ goes from $V$ with the basis $\mathcal{B}'$ to $V$ with the basis $\mathcal{B}$, $f$ goes from $V$ with the basis $\mathcal{B}$ to $W$ with the basis $\mathcal{C}$, and $\operatorname{id}_W$ goes from $W$ with the basis $\mathcal{C}$ to $W$ with the basis $\mathcal{C}'$. By the **matrix of the composition**
+We write $f = \operatorname{id}_W \circ f \circ \operatorname{id}_V$, where $\operatorname{id}_V$ goes from $V$ with the basis $\mathcal{B}'$ to $V$ with the basis $\mathcal{B}$, $f$ goes from $V$ with the basis $\mathcal{B}$ to $W$ with the basis $\mathcal{C}$, and $\operatorname{id}_W$ goes from $W$ with the basis $\mathcal{C}$ to $W$ with the basis $\mathcal{C}'$. By the formula for the **matrix of a composition**
 $$
 M^{\mathcal{B}'}_{\mathcal{C}'}(f) = M^{\mathcal{C}}_{\mathcal{C}'}(\operatorname{id}_W)\, M^{\mathcal{B}}_{\mathcal{C}}(f)\, M^{\mathcal{B}'}_{\mathcal{B}}(\operatorname{id}_V) ,
 $$
-and by the matrix of the inverse map $M^{\mathcal{C}}_{\mathcal{C}'}(\operatorname{id}_W) = \big( M^{\mathcal{C}'}_{\mathcal{C}}(\operatorname{id}_W) \big)^{-1} = Q^{-1}$.
+and by the formula for the matrix of the inverse map $M^{\mathcal{C}}_{\mathcal{C}'}(\operatorname{id}_W) = \big( M^{\mathcal{C}'}_{\mathcal{C}}(\operatorname{id}_W) \big)^{-1} = Q^{-1}$.
 :::
 ::::
 
@@ -422,7 +422,7 @@ P^{-1} A P =
 =
 \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} .
 $$
-The result can be read on the vectors of the new basis, since $f(1, 1) = (2, 2) = 2\,(1, 1)$ and $f(2, 1) = (6, 3) = 3\,(2, 1)$. With respect to $\mathcal{B}'$ the matrix is **diagonal**, and the search for bases of this kind is the subject of the topic on eigenvalues and diagonalization.
+The result can be read off from the vectors of the new basis, since $f(1, 1) = (2, 2) = 2\,(1, 1)$ and $f(2, 1) = (6, 3) = 3\,(2, 1)$. With respect to $\mathcal{B}'$ the matrix is **diagonal**, and the search for bases of this kind is the subject of the topic on eigenvalues and diagonalization.
 
 ::grafico{vettori="0,0,6,3;0,0,2,2;0,0,2,1;0,0,1,1" etichette="3.3,1.05,f(b₂);0.75,1.55,f(b₁);1.25,0.22,b₂;0.3,0.65,b₁" segmenti="0,0,3.4,3.4;0,0,6.6,3.3" xmin=-0.5 xmax=6.9 ymin=-0.5 ymax=3.7 uguale=1 titolo="The vectors $b_1 = (1, 1)$ and $b_2 = (2, 1)$ and their images $f(b_1) = 2\,b_1$ and $f(b_2) = 3\,b_2$: each one stays on its own line through the origin"}
 
@@ -436,11 +436,11 @@ Two matrices $A, A' \in M_n(\mathbb{R})$ are **similar** if there exists an inve
 If $A, A' \in M_n(\mathbb{R})$ are similar, then they have the same determinant, the same trace and the same rank. The three quantities therefore depend only on the endomorphism and are used to prove that two matrices **are not similar**. The matrices $\begin{pmatrix} 3 & 1 \\ 2 & 0 \end{pmatrix}$ and $\begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$ both have trace $3$, but the determinants are $-2$ and $2$, therefore they are not similar.
 
 :::dimostrazione
-Let $A' = P^{-1} A P$. By **Binet's theorem** $\det A' = \det P^{-1} \det A \det P = \det A$, since $\det P^{-1} \det P = \det I_n = 1$. For the trace we use the equality $\operatorname{tr}(XY) = \operatorname{tr}(YX)$, valid for $X, Y \in M_n(\mathbb{R})$ because both traces are equal to $\sum_{i,j} x_{ij} y_{ji}$; with $X = P^{-1}$ and $Y = AP$ we obtain $\operatorname{tr} A' = \operatorname{tr}(A P P^{-1}) = \operatorname{tr} A$. Finally $A$ and $A'$ are matrices of the same endomorphism $f$, so the rank of both is $\dim \operatorname{Im} f$.
+Let $A' = P^{-1} A P$. By **multiplicativity of the determinant** $\det A' = \det P^{-1} \det A \det P = \det A$, since $\det P^{-1} \det P = \det I_n = 1$. For the trace we use the equality $\operatorname{tr}(XY) = \operatorname{tr}(YX)$, valid for $X, Y \in M_n(\mathbb{R})$ because both traces are equal to $\sum_{i,j} x_{ij} y_{ji}$; with $X = P^{-1}$ and $Y = AP$ we obtain $\operatorname{tr} A' = \operatorname{tr}(A P P^{-1}) = \operatorname{tr} A$. Finally $A$ and $A'$ are matrices of the same endomorphism $f$, so the rank of both is $\dim \operatorname{Im} f$.
 :::
 ::::
 
-:::richiamo{titolo="Binet's theorem"}
+:::richiamo{titolo="Multiplicativity of the determinant"}
 If $A, B \in M_n(\mathbb{R})$, then $\det(AB) = \det A \det B$.
 :::
 
@@ -450,14 +450,14 @@ Equal determinant, trace and rank are *not* enough for similarity. The matrices 
 
 ## Linear maps with a parameter
 
-:::osservazione{#applicazioni-con-parametro titolo="Discussion as the parameter varies"}
-When the matrix $A_k$ of $f$ depends on a parameter $k$, the discussion follows the rank of $A_k$.
+:::osservazione{#applicazioni-con-parametro titolo="Analysis as the parameter varies"}
+When the matrix $A_k$ of $f$ depends on a parameter $k$, the analysis is based on the rank of $A_k$.
 
 - If $A_k$ is square, compute $\det A_k$. For the values of $k$ with $\det A_k \neq 0$ the map is an isomorphism, with $\ker f = \{0\}$ and $\operatorname{Im} f = W$.
 - For each of the values that make the determinant vanish, substitute $k$ in the matrix and compute rank, kernel and image as for a numerical matrix.
 - If $A_k$ is not square, reduce it to row echelon form keeping $k$ in the computations and identify the values of $k$ for which a row vanishes; alternatively, use minors and the bordered minors theorem.
 
-The question whether a vector $w$ belongs to $\operatorname{Im} f$ is equivalent to the solvability of the system $A_k x = w$, which is discussed with the **Rouché-Capelli theorem** (see the topic on linear systems).
+The question whether a vector $w$ belongs to $\operatorname{Im} f$ is equivalent to the solvability of the system $A_k x = w$, which is analyzed using the **Rouché-Capelli theorem** (see the topic on linear systems).
 :::
 
 :::esempio{titolo="An endomorphism with a parameter"}

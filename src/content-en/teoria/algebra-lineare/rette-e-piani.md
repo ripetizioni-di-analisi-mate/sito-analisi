@@ -1,6 +1,6 @@
 ---
-titolo: Lines and planes in space
-sommario: Equations of planes and lines in space, relative positions, angles, distances, orthogonal projections, pencils of planes, and the line of minimum distance between two skew lines.
+titolo: Rette e piani nello spazio
+sommario: Equazioni di piani e rette nello spazio, posizioni reciproche, angoli, distanze, proiezioni ortogonali, fasci di piani e retta di minima distanza tra due rette sghembe.
 ---
 
 ## The plane: Cartesian equation and normal vector
@@ -19,7 +19,7 @@ The vector $\vec{n}$ is called a **normal vector** to the plane. A plane is ther
 ::::teorema{#equazione-cartesiana-piano titolo="Cartesian equation of the plane"}
 Every plane in space is the solution set of an equation
 $$
-ax + by + cz + d = 0 \qquad \text{with } (a, b, c) \neq (0, 0, 0),
+ax + by + cz + d = 0 \qquad \text{con } (a, b, c) \neq (0, 0, 0),
 $$
 and the vector $(a, b, c)$ is normal to the plane. Conversely, every equation of this kind represents a plane with normal vector $(a, b, c)$. The components of a normal vector can therefore be read off the equation, and a point and a normal vector are enough to write the equation. The plane through $P_0 = (1, 2, -1)$ with $\vec{n} = (2, -1, 3)$ has equation $2(x - 1) - (y - 2) + 3(z + 1) = 0$, that is, $2x - y + 3z + 3 = 0$.
 
@@ -53,7 +53,7 @@ Let $P_0$ be a point and $\vec{u}$, $\vec{w}$ two non-parallel vectors. The plan
 $$
 P = P_0 + s\,\vec{u} + t\,\vec{w}, \qquad s, t \in \mathbb{R} .
 $$
-Passing to Cartesian form requires a normal vector, which is $\vec{n} = \vec{u} \times \vec{w}$. The reverse passage consists in solving the Cartesian equation, which has two free unknowns. For the plane $x + y - z = 1$ we set $y = s$, $z = t$ and obtain $x = 1 - s + t$, hence $P = (1, 0, 0) + s\,(-1, 1, 0) + t\,(1, 0, 1)$.
+Converting to Cartesian form requires a normal vector, which is $\vec{n} = \vec{u} \times \vec{w}$. Converting back consists of solving the Cartesian equation, which has two free variables. For the plane $x + y - z = 1$ we set $y = s$, $z = t$ and obtain $x = 1 - s + t$, hence $P = (1, 0, 0) + s\,(-1, 1, 0) + t\,(1, 0, 1)$.
 :::
 
 ## The line: parametric and Cartesian equations
@@ -82,12 +82,12 @@ $$
 a_1 x + b_1 y + c_1 z + d_1 = 0 \\[4pt]
 a_2 x + b_2 y + c_2 z + d_2 = 0
 \end{cases}
-\qquad \text{with } \operatorname{rk} \begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \end{pmatrix} = 2 .
+\qquad \text{con } \operatorname{rk} \begin{pmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \end{pmatrix} = 2 .
 $$
 The two equations are called **Cartesian equations** of the line. The rank condition says that the normal vectors $\vec{n}_1$ and $\vec{n}_2$ are not parallel; by the **Rouché-Capelli theorem** the system then has $\infty^1$ solutions, which form a line. The Cartesian equations of a line are *not* unique, because any pair of distinct planes containing it represents it; the set of all these planes is the pencil of planes having the line as its axis.
 :::
 
-:::osservazione{#passaggio-tra-forme titolo="Passing between the two forms"}
+:::osservazione{#passaggio-tra-forme titolo="Converting between the two forms"}
 - **From parametric to Cartesian**: solve for $t$ in an equation where its coefficient is nonzero and substitute it into the other two. For the line of the previous example, $t = y + 1$ gives $x = 2y + 3$ and $z = -3y - 1$, so the Cartesian equations are
 $$
 \begin{cases}
@@ -95,7 +95,7 @@ x - 2y - 3 = 0 \\[4pt]
 3y + z + 1 = 0
 \end{cases}
 $$
-- **From Cartesian to parametric**: solve the system choosing a free unknown as parameter, or compute a point and a direction vector. The line lies in both planes, so its direction vector is orthogonal to $\vec{n}_1$ and to $\vec{n}_2$, and one can take
+- **From Cartesian to parametric**: solve the system choosing a free variable as a parameter, or compute a point and a direction vector. The line lies in both planes, so its direction vector is orthogonal to $\vec{n}_1$ and to $\vec{n}_2$, and one can take
 $$
 \vec{v} = \vec{n}_1 \times \vec{n}_2 .
 $$
@@ -132,7 +132,7 @@ Let $r$ be the line $P = P_0 + t\,\vec{v}$ and $\pi$ the plane $ax + by + cz + d
 The criterion requires a single dot product. In the intersecting case the common point is found by substituting the parametric equations into the equation of the plane. For $r : P = (1 + t,\ 2t,\ -1 + t)$ and $\pi : x - y + 2z = 1$ we have $\vec{n} \cdot \vec{v} = (1, -1, 2) \cdot (1, 2, 1) = 1 \neq 0$; the substitution gives $t - 1 = 1$, hence $t = 2$ and the common point is $(3, 4, 1)$.
 
 :::dimostrazione
-Let $P_0 = (x_0, y_0, z_0)$. Substituting the coordinates of $P_0 + t\,\vec{v}$ into the equation of the plane gives the first-degree equation in the unknown $t$
+Let $P_0 = (x_0, y_0, z_0)$. Substituting the coordinates of $P_0 + t\,\vec{v}$ into the equation of the plane gives the linear equation in the unknown $t$
 $$
 (\vec{n} \cdot \vec{v})\, t + (a x_0 + b y_0 + c z_0 + d) = 0 .
 $$
@@ -193,7 +193,7 @@ $$
 $$
 The formula contains the *sine*, because the dot product measures the angle with the normal. For $\vec{v} = (1, 0, 1)$ and the plane $x + y = 2$, with $\vec{n} = (1, 1, 0)$, we have $\sin\theta = \dfrac{1}{2}$, hence $\theta = \dfrac{\pi}{6}$.
 
-::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2" etichette="1.0,0.85,v;1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : z = 0$ and of the line $r$ through the origin with $\vec{v} = (2, 0, 1)$: $r$ forms the angle $\theta$ with $\pi$ and the angle $\dfrac{\pi}{2} - \theta$ with $\vec{n} = (0, 0, 1)$"}
+::grafico{f="0.5*x" vettori="0,0,0,2,n;0,0,2.4,1.2" etichette="1.0,0.85,v;1.3,0.2,θ;0.2,1.3,π/2 − θ;3,-0.4,π;-2.6,-1,r" xmin=-3 xmax=3.4 ymin=-1.6 ymax=2.5 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : z = 0$ and of the line $r$ through the origin with $\vec{v} = (2, 0, 1)$: $r$ forms with $\pi$ the angle $\theta$ and with $\vec{n} = (0, 0, 1)$ the angle $\dfrac{\pi}{2} - \theta$"}
 
 :::
 
@@ -209,13 +209,13 @@ If the planes are intersecting, the section by a plane perpendicular to the comm
 :::
 
 :::osservazione{#parallelismo-perpendicolarita titolo="Parallelism and perpendicularity"}
-The conditions of parallelism and perpendicularity are read off the direction and normal vectors.
+The conditions for parallelism and perpendicularity can be determined from the direction and normal vectors.
 
 - A line $r$ is parallel to the plane $\pi$ if and only if $\vec{v} \cdot \vec{n} = 0$, and is perpendicular to $\pi$ if and only if $\vec{v}$ and $\vec{n}$ are parallel.
 - Two planes are parallel if and only if $\vec{n}_1$ and $\vec{n}_2$ are parallel, and are perpendicular if and only if $\vec{n}_1 \cdot \vec{n}_2 = 0$.
 - Two lines are perpendicular if and only if $\vec{v} \cdot \vec{w} = 0$, even when they are skew.
 
-These conditions are used to write lines and planes subject to given constraints. The line through $P_0$ perpendicular to the plane $\pi$ has direction vector $\vec{n}$, and the plane through $P_0$ perpendicular to the line $r$ has normal vector $\vec{v}$.
+These conditions are used to write equations of lines and planes subject to given constraints. The line through $P_0$ perpendicular to the plane $\pi$ has direction vector $\vec{n}$, and the plane through $P_0$ perpendicular to the line $r$ has normal vector $\vec{v}$.
 :::
 
 ## Distances
@@ -252,7 +252,7 @@ Alternatively, one finds the foot $H$ of the perpendicular, by intersecting $r$ 
 ::grafico{f="1+0*x" area="((x+2)/2+1+3-abs((x+2)/2+1-3))/2;(x/2+2+abs(x/2))/2;-2;4" vettori="-2,1,0,1,v;-2,1,2,3" segmenti="2,3,2,1" punti="-2,1,pieno;2,1,pieno,H;2,3,pieno,P" etichette="4.3,0.55,r;-0.6,2.2,AP;-2.6,1.2,A" xmin=-2.8 xmax=4.8 ymin=-0.6 ymax=3.6 uguale=1 titolo="In the plane $z = 0$, the line $r$ through $A = (-2, 1, 0)$ with $\vec{v} = (2, 0, 0)$ and the point $P = (2, 3, 0)$: the parallelogram spanned by $\vec{v}$ and $\overrightarrow{AP}$ has base $\|\vec{v}\| = 2$ and height $d(P, r) = \|\overrightarrow{HP}\| = 2$"}
 
 :::dimostrazione
-Apply the vectors $\vec{v}$ and $\overrightarrow{AP}$ at the point $A$. The parallelogram they determine has area $\|\overrightarrow{AP} \times \vec{v}\|$, by the geometric meaning of the cross product. The same area is the product of base and height: the base is the side $\vec{v}$, of length $\|\vec{v}\|$, which lies on $r$, and the height relative to this base is the distance from $P$ to the line $r$. Dividing the area by $\|\vec{v}\|$ gives the formula.
+Place the vectors $\vec{v}$ and $\overrightarrow{AP}$ at the point $A$. The parallelogram they determine has area $\|\overrightarrow{AP} \times \vec{v}\|$, by the geometric meaning of the cross product. The same area is the product of base and height: the base is the side $\vec{v}$, of length $\|\vec{v}\|$, which lies on $r$, and the height relative to this base is the distance from $P$ to the line $r$. Dividing the area by $\|\vec{v}\|$ gives the formula.
 :::
 ::::
 
@@ -260,14 +260,14 @@ Apply the vectors $\vec{v}$ and $\overrightarrow{AP}$ at the point $A$. The para
 The other distances reduce to the two previous formulas.
 
 - Two parallel planes have distance equal to the distance from any point of one of them to the other. If the equations have the same coefficients, $ax + by + cz + d_1 = 0$ and $ax + by + cz + d_2 = 0$, the distance is $\dfrac{|d_1 - d_2|}{\sqrt{a^2 + b^2 + c^2}}$.
-- A line parallel to a plane has, from the plane, the distance of any one of its points.
+- The distance between a line and a parallel plane equals the distance from any point on the line to the plane.
 - Two parallel lines have distance equal to the distance from a point of one to the other.
 - Lines and planes that have points in common have distance $0$.
 
-The planes $x + 2y - 2z - 3 = 0$ and $x + 2y - 2z + 6 = 0$ have distance $\dfrac{|-3 - 6|}{3} = 3$. What remains is skew lines, whose distance is positive and is computed with the theorem on the common perpendicular.
+The planes $x + 2y - 2z - 3 = 0$ and $x + 2y - 2z + 6 = 0$ have distance $\dfrac{|-3 - 6|}{3} = 3$. The remaining case is that of skew lines, whose distance is positive and is computed with the theorem on the common perpendicular.
 :::
 
-## Orthogonal projections and symmetric points
+## Orthogonal projections and reflected points
 
 :::definizione{#proiezione-punto-piano titolo="Orthogonal projection of a point onto a plane"}
 Let $P$ be a point and $\pi : ax + by + cz + d = 0$ a plane with normal vector $\vec{n}$. The **orthogonal projection** of $P$ onto $\pi$ is the point $H \in \pi$ such that $\overrightarrow{HP}$ is parallel to $\vec{n}$, that is, the foot of the perpendicular to $\pi$ drawn from $P$. To find it, intersect $\pi$ with the line $P + t\,\vec{n}$; solving the equation in $t$ gives
@@ -277,12 +277,12 @@ $$
 For $P = (3, 1, 2)$ and $\pi : x + y + z = 0$ the line $(3 + t,\ 1 + t,\ 2 + t)$ meets the plane when $6 + 3t = 0$, that is, for $t = -2$, hence $H = (1, -1, 0)$.
 :::
 
-:::definizione{#punto-simmetrico titolo="Symmetric point"}
-The **symmetric** of a point $P$ with respect to a plane, or to a line, is the point $P'$ such that the orthogonal projection $H$ of $P$ is the midpoint of the segment $P P'$. From the midpoint formula it follows that
+:::definizione{#punto-simmetrico titolo="Reflected point"}
+The **reflection** of a point $P$ with respect to a plane, or to a line, is the point $P'$ such that the orthogonal projection $H$ of $P$ is the midpoint of the segment $P P'$. From the midpoint formula it follows that
 $$
 P' = 2H - P ,
 $$
-where the operation is carried out on the coordinates. The symmetric with respect to a point $C$ is obtained with the same formula, with $H = C$. In the case of the plane $x + y + z = 0$ and of $P = (3, 1, 2)$ we have $H = (1, -1, 0)$, hence $P' = (2, -2, 0) - (3, 1, 2) = (-1, -3, -2)$; as a check, $\overrightarrow{P P'} = (-4, -4, -4)$ is parallel to $\vec{n}$.
+where the operation is carried out on the coordinates. The reflection with respect to a point $C$ is obtained with the same formula, with $H = C$. In the case of the plane $x + y + z = 0$ and of $P = (3, 1, 2)$ we have $H = (1, -1, 0)$, hence $P' = (2, -2, 0) - (3, 1, 2) = (-1, -3, -2)$; as a check, $\overrightarrow{P P'} = (-4, -4, -4)$ is parallel to $\vec{n}$.
 
 ::grafico{f="1+0*x" segmenti="1,3,1,-1" vettori="-1.5,1,-1.5,2.2,n" punti="1,3,pieno,P;1,1,pieno,H;1,-1,pieno,P′" etichette="2.6,1.25,π" xmin=-2.5 xmax=3 ymin=-1.6 ymax=3.6 uguale=1 nomi="x,z" titolo="Section by the plane $y = 0$ of the plane $\pi : z = 1$ and of the point $P = (1, 0, 3)$: the orthogonal projection $H = (1, 0, 1)$ is the midpoint of the segment $P P'$, with $P' = (1, 0, -1)$"}
 
@@ -294,11 +294,11 @@ The orthogonal projection of $P$ onto the line $r : A + t\,\vec{v}$ is the point
 - Intersect $r$ with the plane through $P$ that has normal vector $\vec{v}$.
 - Impose $\left( P - A - t\,\vec{v} \right) \cdot \vec{v} = 0$, which gives $t = \dfrac{\overrightarrow{AP} \cdot \vec{v}}{\|\vec{v}\|^2}$, and substitute the value of $t$ into the equations of $r$.
 
-For the line $r$ with parametric equations $x = 1 + t$, $y = t$, $z = -t$, with $A = (1, 0, 0)$ and $\vec{v} = (1, 1, -1)$, and for the point $P = (2, 3, 1)$ we have $\overrightarrow{AP} = (1, 3, 1)$ and $\overrightarrow{AP} \cdot \vec{v} = 1 + 3 - 1 = 3 = \|\vec{v}\|^2$, hence $t = 1$, $H = (2, 1, -1)$ and the symmetric of $P$ with respect to $r$ is $P' = (2, -1, -3)$. Moreover $d(P, r) = \|\overrightarrow{HP}\| = \|(0, 2, 2)\| = 2\sqrt{2}$.
+For the line $r$ with parametric equations $x = 1 + t$, $y = t$, $z = -t$, with $A = (1, 0, 0)$ and $\vec{v} = (1, 1, -1)$, and for the point $P = (2, 3, 1)$ we have $\overrightarrow{AP} = (1, 3, 1)$ and $\overrightarrow{AP} \cdot \vec{v} = 1 + 3 - 1 = 3 = \|\vec{v}\|^2$, hence $t = 1$, $H = (2, 1, -1)$ and the reflection of $P$ with respect to $r$ is $P' = (2, -1, -3)$. Moreover $d(P, r) = \|\overrightarrow{HP}\| = \|(0, 2, 2)\| = 2\sqrt{2}$.
 :::
 
 :::osservazione{#proiezione-retta-piano titolo="Orthogonal projection of a line onto a plane"}
-Let $r$ be a line not perpendicular to the plane $\pi$. The orthogonal projections onto $\pi$ of the points of $r$ form a line, the intersection of $\pi$ with the plane that contains $r$ and is perpendicular to $\pi$. The plane that contains $r$ and is perpendicular to $\pi$ is determined with the pencil of planes with axis $r$. Alternatively, project two points of $r$; if $r$ meets $\pi$, it is convenient to choose as first point the intersection point, which coincides with its own projection. If $r$ is perpendicular to $\pi$, the projection is the single intersection point. On the plane $z = 0$ the projection is obtained by setting the third coordinate to zero, therefore the line $(1 + t,\ t,\ 2t)$ projects onto the line $(1 + t,\ t,\ 0)$.
+Let $r$ be a line not perpendicular to the plane $\pi$. The orthogonal projections of the points of $r$ onto $\pi$ form a line, the intersection of $\pi$ with the plane that contains $r$ and is perpendicular to $\pi$. The plane that contains $r$ and is perpendicular to $\pi$ is determined with the pencil of planes with axis $r$. Alternatively, project two points of $r$; if $r$ meets $\pi$, it is convenient to choose as first point the intersection point, which coincides with its own projection. If $r$ is perpendicular to $\pi$, the projection is the single intersection point. On the plane $z = 0$ the projection is obtained by setting the third coordinate to zero, therefore the line $(1 + t,\ t,\ 2t)$ projects onto the line $(1 + t,\ t,\ 0)$.
 :::
 
 ## Pencils of planes

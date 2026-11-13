@@ -1,6 +1,6 @@
 ---
-titolo: Linear systems and rank
-sommario: How to write a linear system in matrix form, how to compute the rank, when a system has solutions and how many, how to solve it with Gauss or with Cramer, and how to discuss it as a parameter varies.
+titolo: Sistemi lineari e rango
+sommario: Come si scrive un sistema lineare in forma matriciale, come si calcola il rango, quando un sistema ha soluzioni e quante, come si risolve con Gauss o con Cramer e come si discute al variare di un parametro.
 ---
 
 ## Linear systems and matrix form
@@ -22,9 +22,9 @@ with coefficients $a_{ij} \in \mathbb{R}$ and constant terms $b_i \in \mathbb{R}
 A linear system is called
 
 - **consistent** if it has *at least one* solution, inconsistent if it has none;
-- **determined** if it is consistent with exactly one solution, underdetermined if it is consistent with more than one solution.
+- **uniquely solvable** if it is consistent with exactly one solution; it has non-unique solutions if it is consistent with more than one solution.
 
-The system formed by $x + y = 1$ and $x + y = 3$ is inconsistent, because the same quantity $x + y$ cannot equal both $1$ and $3$. An underdetermined system always has infinitely many solutions, as follows from the Rouché-Capelli theorem; consequently a linear system with exactly two solutions does not exist.
+The system formed by $x + y = 1$ and $x + y = 3$ is inconsistent, because the same quantity $x + y$ cannot equal both $1$ and $3$. A system with non-unique solutions always has infinitely many solutions, as follows from the Rouché-Capelli theorem; consequently a linear system with exactly two solutions does not exist.
 :::
 
 :::definizione{#forma-matriciale titolo="Matrix form"}
@@ -73,11 +73,11 @@ $$
 :::osservazione{#interpretazione-geometrica titolo="Geometric interpretation"}
 An equation $a x + b y = c$ with $(a, b) \neq (0, 0)$ represents a line in the plane, so solving a system of two equations in two unknowns means finding the points common to two lines. There are three possible cases.
 
-- The lines are **intersecting**: the system is determined and the solution is the point of intersection. This happens when the coefficients of the unknowns are *not* proportional, that is, when $\det A \neq 0$.
+- The lines are **intersecting**: the system is uniquely solvable and the solution is the point of intersection. This happens when the coefficients of the unknowns are *not* proportional, that is, when $\det A \neq 0$.
 - The lines are **parallel and distinct**: the system is inconsistent.
 - The lines are **coincident**: the two equations are proportional and the system has infinitely many solutions, the points of the line.
 
-::grafico{f="3-x;x-1" punti="2,1,pieno" etichette="0.9,3.0,x + y = 3;3.3,1.7,x − y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x - y = 1$ is determined: the two lines meet only at the point $(2, 1)$"}
+::grafico{f="3-x;x-1" punti="2,1,pieno" etichette="0.9,3.0,x + y = 3;3.3,1.7,x − y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x - y = 1$ is uniquely solvable: the two lines meet only at the point $(2, 1)$"}
 
 ::grafico{f="3-x;1-x" etichette="2.1,1.5,x + y = 3;-1.4,0.55,x + y = 1" xmin=-1.5 xmax=5 ymin=-2 ymax=4 uguale=1 titolo="The system formed by $x + y = 3$ and $x + y = 1$ is inconsistent: the two lines are parallel and distinct"}
 
@@ -112,7 +112,7 @@ The theorem concerns operations performed one after another. Two operations perf
 A system whose augmented matrix is in echelon form is solved from the bottom up. The first nonzero entry of each nonzero row is called the **pivot**.
 
 - If a row has the form $(0 \ \cdots \ 0 \mid c)$ with $c \neq 0$, it corresponds to the equation $0 = c$, so the system is **inconsistent**.
-- Otherwise the unknowns of the columns with a pivot are found by back substitution, from the last equation to the first, and the unknowns of the columns without a pivot remain free: each one is assigned a real parameter.
+- Otherwise the variables corresponding to the columns with a pivot are found by back substitution, from the last equation to the first, and the variables corresponding to the columns without a pivot remain free: each one is assigned a real parameter.
 
 Rows of the form $(0 \ \cdots \ 0 \mid 0)$ correspond to the equation $0 = 0$ and are discarded. The number of free parameters is therefore the number of unknowns minus the number of pivots.
 :::
@@ -121,7 +121,7 @@ Rows of the form $(0 \ \cdots \ 0 \mid 0)$ correspond to the equation $0 = 0$ an
 **Gaussian elimination** solves a system in two phases: the augmented matrix $(A \mid b)$ is reduced to echelon form by elementary row operations, then the resulting echelon system is solved. By the theorem on equivalent systems the solutions found are those of the original system. The method applies with any number of equations and unknowns and establishes in the same computation whether the system is consistent.
 :::
 
-:::esempio{titolo="A determined system"}
+:::esempio{titolo="A uniquely solvable system"}
 $$
 \begin{cases}
 x + y + z = 6 \\[4pt]
@@ -148,7 +148,7 @@ $$
 0 & 0 & -1 & -3
 \end{array}\right)
 $$
-The last equation $-z = -3$ gives $z = 3$; the second, $y - z = -1$, gives $y = 2$; the first gives $x = 6 - y - z = 1$. There are three pivots and three unknowns, so no unknown is free and the **unique solution** is $(1, 2, 3)$.
+The last equation $-z = -3$ gives $z = 3$; the second, $y - z = -1$, gives $y = 2$; the first gives $x = 6 - y - z = 1$. There are three pivots and three unknowns, so no variable is free and the **unique solution** is $(1, 2, 3)$.
 :::
 
 ## The rank of a matrix
@@ -225,7 +225,7 @@ $$
 \end{vmatrix}
 = 1 \neq 0,
 $$
-so $\operatorname{rk} A \geq 2$. Its bordered minors are $(3 - 2)(4 - 2) = 2$ and they are obtained by adding row $3$ and one of columns $2$ and $4$:
+so $\operatorname{rk} A \geq 2$. It has $(3 - 2)(4 - 2) = 2$ bordered minors, obtained by adding row $3$ and one of columns $2$ and $4$:
 $$
 \begin{vmatrix}
 1 & 2 & 0 \\
@@ -263,7 +263,7 @@ Reduce $(A \mid b)$ to an echelon matrix $(S \mid c)$ by elementary row operatio
 
 The pivots of $S$ are the pivots of $(S \mid c)$ that are not in the last column. Hence $\operatorname{rk} (S \mid c) = \operatorname{rk} S + 1$ if and only if the last column contains a pivot, that is, if and only if a row $(0 \ \cdots \ 0 \mid c_i)$ with $c_i \neq 0$ appears; in that case the system contains the equation $0 = c_i$ and is inconsistent.
 
-If instead the ranks are both equal to $r$, every nonzero row has its pivot in a column of $S$. The $r$ pivot unknowns are found by back substitution in terms of the other $n - r$, which remain free, and to every choice of values of the free unknowns there corresponds exactly one solution. Therefore the solution is unique if $r = n$, whereas if $r < n$ the solutions are infinitely many and depend on $n - r$ parameters.
+If instead the ranks are both equal to $r$, every nonzero row has its pivot in a column of $S$. The $r$ pivot variables are found by back substitution in terms of the other $n - r$, which remain free, and to every choice of values of the free variables there corresponds exactly one solution. Therefore the solution is unique if $r = n$, whereas if $r < n$ the solutions are infinitely many and depend on $n - r$ parameters.
 :::
 ::::
 
@@ -295,14 +295,14 @@ $$
 so $\operatorname{rk} (A \mid b) = 3 \neq \operatorname{rk} A$ and the system is **inconsistent**. The reason can also be read from the equations: the sum of the first two gives $2x + 4z = 2$, which contradicts the third.
 :::
 
-:::osservazione{#incognite-libere titolo="Choice of the free unknowns"}
+:::osservazione{#incognite-libere titolo="Choice of the free variables"}
 When the common rank $r$ has been found with a nonzero minor $M$ of order $r$, the system is solved in three steps.
 
 - Keep the $r$ equations corresponding to the rows of $M$; the others are consequences of these and are discarded.
 - The unknowns corresponding to the columns of $M$ stay on the left, the other $n - r$ move to the right and become parameters.
 - The resulting $r \times r$ system has determinant $M \neq 0$, so it has exactly one solution for each value of the parameters.
 
-In the previous system, with the constant term of the third equation replaced by $2$, both ranks are $2$ and the solutions are $\infty^{3 - 2} = \infty^1$. The minor used involves the columns of $x$ and $y$, so $z = t$ is free; from the equations $x + y = 2 - t$ and $x - y = -3t$ one obtains $x = 1 - 2t$, $y = 1 + t$, and the solutions are $(1 - 2t, \, 1 + t, \, t)$ with $t \in \mathbb{R}$.
+In the previous system, with the constant term of the third equation replaced by $2$, both ranks are $2$ and there are $\infty^{3 - 2} = \infty^1$ solutions. The minor used involves the columns of $x$ and $y$, so $z = t$ is free; from the equations $x + y = 2 - t$ and $x - y = -3t$ one obtains $x = 1 - 2t$, $y = 1 + t$, and the solutions are $(1 - 2t, \, 1 + t, \, t)$ with $t \in \mathbb{R}$.
 :::
 
 ## Cramer's rule
@@ -328,7 +328,7 @@ If $A \in M_n(\mathbb{R})$ and $\det A \neq 0$, then $A$ is invertible and $(A^{
 :::
 
 :::richiamo{titolo="Laplace expansion along a column"}
-For every $A \in M_n(\mathbb{R})$ and every column $j$, $\det A = \sum_{i=1}^{n} a_{ij}\, C_{ij}$.
+For every $A \in M_n(\mathbb{R})$ and every column $j$, we have $\det A = \sum_{i=1}^{n} a_{ij}\, C_{ij}$.
 :::
 
 :::esempio
@@ -364,7 +364,7 @@ The solution is $(2, 1)$, as can be checked by substitution: $4 + 1 = 5$ and $2 
 :::
 
 :::attenzione
-The rule requires the hypothesis $\det A \neq 0$. If $\det A = 0$ the ratios are not defined and the system can be either inconsistent or underdetermined: the system formed by $x + y = 1$ and $2x + 2y = 3$ is inconsistent, whereas the one formed by $x + y = 1$ and $2x + 2y = 2$ has the infinitely many solutions $(1 - t, t)$. In both cases $\det A = 0$, and to decide one applies the **Rouché-Capelli theorem**.
+The rule requires the hypothesis $\det A \neq 0$. If $\det A = 0$ the ratios are not defined and the system can be either inconsistent or consistent with non-unique solutions: the system formed by $x + y = 1$ and $2x + 2y = 3$ is inconsistent, whereas the one formed by $x + y = 1$ and $2x + 2y = 2$ has the infinitely many solutions $(1 - t, t)$. In both cases $\det A = 0$, and to decide one applies the **Rouché-Capelli theorem**.
 :::
 
 ## Homogeneous systems and structure of the solutions
@@ -378,10 +378,10 @@ its solution set. Given any system $A x = b$, the system $A x = 0$ with the same
 :::
 
 ::::teorema{#soluzioni-non-banali titolo="Nontrivial solutions of a homogeneous system"}
-Let $A \in M_{m,n}(\mathbb{R})$. The homogeneous system $A x = 0$ has solutions other than the trivial one if and only if $\operatorname{rk} A < n$; in that case the solutions are $\infty^{n - \operatorname{rk} A}$. If $A$ is square, this happens if and only if $\det A = 0$. In particular, a homogeneous system with more unknowns than equations, $n > m$, *always* has nontrivial solutions, since $\operatorname{rk} A \leq m < n$.
+Let $A \in M_{m,n}(\mathbb{R})$. The homogeneous system $A x = 0$ has solutions other than the trivial one if and only if $\operatorname{rk} A < n$; in that case there are $\infty^{n - \operatorname{rk} A}$ solutions. If $A$ is square, this happens if and only if $\det A = 0$. In particular, a homogeneous system with more unknowns than equations, $n > m$, *always* has nontrivial solutions, since $\operatorname{rk} A \leq m < n$.
 
 :::dimostrazione
-Adding a zero column does not change the rank, because every minor that contains that column is zero; hence $\operatorname{rk} (A \mid 0) = \operatorname{rk} A$. By the Rouché-Capelli theorem the solution is unique, and then it is the trivial one, if and only if $\operatorname{rk} A = n$, whereas the solutions are $\infty^{n - \operatorname{rk} A}$ if $\operatorname{rk} A < n$. For $A$ square of order $n$ the condition $\operatorname{rk} A < n$ is equivalent to $\det A = 0$, by the properties of the rank.
+Adding a zero column does not change the rank, because every minor that contains that column is zero; hence $\operatorname{rk} (A \mid 0) = \operatorname{rk} A$. By the Rouché-Capelli theorem the solution is unique, and then it is the trivial one, if and only if $\operatorname{rk} A = n$, whereas there are $\infty^{n - \operatorname{rk} A}$ solutions if $\operatorname{rk} A < n$. For $A$ square of order $n$ the condition $\operatorname{rk} A < n$ is equivalent to $\det A = 0$, by the properties of the rank.
 :::
 ::::
 
@@ -400,7 +400,7 @@ Adding the two equations gives $3x = 0$, so $x = 0$, and the first gives $y = z$
 $$
 S_0 = \{ t\,(0, 1, 1) : t \in \mathbb{R} \} = \langle (0, 1, 1) \rangle,
 $$
-in agreement with the theorem, since $\operatorname{rk} A = 2$ and the solutions are $\infty^{3 - 2} = \infty^1$.
+in agreement with the theorem, since $\operatorname{rk} A = 2$ and there are $\infty^{3 - 2} = \infty^1$ solutions.
 :::
 
 ::::teorema{#struttura-delle-soluzioni titolo="Structure of the solutions"}
@@ -435,17 +435,17 @@ that is, the particular solution $(1, 0, 0)$ plus the solutions of the homogeneo
 
 ## Systems with a parameter
 
-:::osservazione{#discussione-con-parametro titolo="Discussion of a system with a parameter"}
-**Discussing** a system that depends on a real parameter $k$ means establishing, for each value of $k$, whether the system is consistent, how many solutions it has and what they are. For a square system, with $n$ equations in $n$ unknowns, the procedure has three steps.
+:::osservazione{#discussione-con-parametro titolo="Analysis of a system with a parameter"}
+**Analyzing** a system that depends on a real parameter $k$ means establishing, for each value of $k$, whether the system is consistent, how many solutions it has and what they are. For a square system, with $n$ equations in $n$ unknowns, the procedure has three steps.
 
 - Compute $\det A$ as a function of $k$ and find its zeros.
-- For the values of $k$ with $\det A \neq 0$ we have $\operatorname{rk} A = \operatorname{rk}(A \mid b) = n$, so the system is determined; the solution is found with Cramer's rule or with Gauss.
+- For the values of $k$ with $\det A \neq 0$ we have $\operatorname{rk} A = \operatorname{rk}(A \mid b) = n$, so the system is uniquely solvable; the solution is found by Cramer's rule or by Gaussian elimination.
 - For each of the values with $\det A = 0$, substitute the value into the system and apply the Rouché-Capelli theorem to the resulting numerical system.
 
 If the system is not square, compute the ranks of $A$ and of $(A \mid b)$ as functions of $k$, with the bordered minors theorem or with reduction to echelon form.
 :::
 
-:::esempio{titolo="Complete discussion"}
+:::esempio{titolo="Complete analysis"}
 $$
 \begin{cases}
 x + y + z = 1 \\[4pt]
@@ -463,11 +463,11 @@ x + y + kz = 1
 $$
 The determinant vanishes for $k = 1$ and for $k = -1$.
 
-- If $k \neq \pm 1$, the system is **determined**. Subtracting the first equation from the third gives $(k - 1) z = 0$, so $z = 0$ since $k \neq 1$; adding the first two leaves $(k + 1) y = 2$. The solution is
+- If $k \neq \pm 1$, the system is **uniquely solvable**. Subtracting the first equation from the third gives $(k - 1) z = 0$, so $z = 0$ since $k \neq 1$; adding the first two leaves $(k + 1) y = 2$. The solution is
 $$
 \left( \frac{k - 1}{k + 1}, \ \frac{2}{k + 1}, \ 0 \right).
 $$
-- If $k = 1$, the third equation coincides with the first. The minor $\begin{vmatrix} 1 & 1 \\ -1 & 1 \end{vmatrix} = 2$ is nonzero, so $\operatorname{rk} A = \operatorname{rk} (A \mid b) = 2$ and the solutions are $\infty^1$. Subtracting the second equation from the first gives $2x = 0$, therefore the solutions are $(0, \, 1 - t, \, t)$ with $t \in \mathbb{R}$.
+- If $k = 1$, the third equation coincides with the first. The minor $\begin{vmatrix} 1 & 1 \\ -1 & 1 \end{vmatrix} = 2$ is nonzero, so $\operatorname{rk} A = \operatorname{rk} (A \mid b) = 2$ and there are $\infty^1$ solutions. Subtracting the second equation from the first gives $2x = 0$, therefore the solutions are $(0, \, 1 - t, \, t)$ with $t \in \mathbb{R}$.
 - If $k = -1$, the columns of $y$ and $z$ in the first two rows give the minor $\begin{vmatrix} 1 & 1 \\ -1 & 1 \end{vmatrix} = 2 \neq 0$, so $\operatorname{rk} A = 2$. Its bordered minor in the augmented matrix with the third row and the column of constant terms equals $\begin{vmatrix} 1 & 1 & 1 \\ -1 & 1 & 1 \\ 1 & -1 & 1 \end{vmatrix} = 4 \neq 0$, therefore $\operatorname{rk} (A \mid b) = 3$ and the system is **inconsistent**.
 :::
 

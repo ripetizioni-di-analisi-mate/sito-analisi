@@ -1,6 +1,6 @@
 ---
-titolo: Vector spaces, bases and dimension
-sommario: The common structure of vectors, matrices and polynomials, subspaces described by generators or by equations, bases, dimension and Grassmann's formula for sum and intersection.
+titolo: Spazi vettoriali, basi e dimensione
+sommario: La struttura comune a vettori, matrici e polinomi, i sottospazi descritti con generatori o con equazioni, le basi, la dimensione e la formula di Grassmann per somma e intersezione.
 ---
 
 ## Vector spaces
@@ -10,7 +10,7 @@ A **real vector space** is a set $V$ equipped with two operations, addition $V \
 
 - Addition is associative and commutative: $(u + v) + w = u + (v + w)$ and $u + v = v + u$.
 - There exists a zero vector $0 \in V$ with $v + 0 = v$ for every $v$.
-- Every $v$ has an opposite $-v$ with $v + (-v) = 0$.
+- Every $v$ has an additive inverse $-v$ with $v + (-v) = 0$.
 - Distributivity: $\lambda(u + v) = \lambda u + \lambda v$ and $(\lambda + \mu)v = \lambda v + \mu v$.
 - Compatibility: $\lambda(\mu v) = (\lambda\mu)v$ and $1 \cdot v = v$.
 
@@ -26,7 +26,7 @@ For $\mathbb{R}_n[x]$ the condition on the degree is written as an inequality be
 :::
 
 :::osservazione{#proprieta-elementari titolo="Computational rules"}
-The axioms imply the rules $0 \cdot v = 0$, $\lambda \cdot 0 = 0$ and $(-1)\,v = -v$. For the first one we write $0 \cdot v = (0 + 0)\,v = 0 \cdot v + 0 \cdot v$; adding the opposite of $0 \cdot v$ to both sides gives $0 = 0 \cdot v$. Moreover, the zero-product law holds: if $\lambda v = 0$, then $\lambda = 0$ or $v = 0$. These rules are used in all subsequent computations without being cited.
+The axioms imply the rules $0 \cdot v = 0$, $\lambda \cdot 0 = 0$ and $(-1)\,v = -v$. For the first one we write $0 \cdot v = (0 + 0)\,v = 0 \cdot v + 0 \cdot v$; adding the additive inverse of $0 \cdot v$ to both sides gives $0 = 0 \cdot v$. Moreover, the zero-product law holds: if $\lambda v = 0$, then $\lambda = 0$ or $v = 0$. These rules are used in all subsequent computations without being cited.
 :::
 
 ## Vector subspaces
@@ -40,14 +40,14 @@ Let $V$ be a vector space and let $W \subseteq V$. Then $W$ is a subspace of $V$
 $$
 \begin{cases}
 0 \in W \\[4pt]
-u + v \in W \quad \text{for every } u, v \in W \\[4pt]
-\lambda u \in W \quad \text{for every } u \in W, \ \lambda \in \mathbb{R}
+u + v \in W \quad \text{per ogni } u, v \in W \\[4pt]
+\lambda u \in W \quad \text{per ogni } u \in W, \ \lambda \in \mathbb{R}
 \end{cases}
 $$
 The criterion reduces the verification of the axioms to three checks. To rule out that $W$ is a subspace, a counterexample to *one* of the three conditions is sufficient, and the quickest one to check is $0 \in W$.
 
 :::dimostrazione
-If $W$ is a subspace, the sum and the scalar multiple of elements of $W$ lie in $W$ by definition, and $0 \in W$ since for every $u \in W$ we have $0 = 0 \cdot u \in W$. Conversely, if the three conditions are satisfied, the two operations of $V$ remain operations on $W$. The associative, commutative, distributive and compatibility properties hold in $W$ because they hold in $V$; the zero vector lies in $W$ by the first condition, and the opposite of $u \in W$ is $-u = (-1)\,u$, which lies in $W$ by the third. Therefore $W$ is a vector space.
+If $W$ is a subspace, the sum and the scalar multiple of elements of $W$ lie in $W$ by definition, and $0 \in W$ since for every $u \in W$ we have $0 = 0 \cdot u \in W$. Conversely, if the three conditions are satisfied, the two operations of $V$ remain operations on $W$. The associative, commutative, distributive and compatibility properties hold in $W$ because they hold in $V$; the zero vector lies in $W$ by the first condition, and the additive inverse of $u \in W$ is $-u = (-1)\,u$, which lies in $W$ by the third. Therefore $W$ is a vector space.
 :::
 ::::
 
@@ -86,7 +86,7 @@ $$
 The numbers $\lambda_i$ are the coefficients of the combination. Determining whether $v$ is a linear combination of $v_1, \dots, v_k$ is equivalent to determining whether a linear system in the unknowns $\lambda_i$ has a solution. For example $(3, 5) = \lambda_1 (1, 1) + \lambda_2 (1, 2)$ is equivalent to the system $\lambda_1 + \lambda_2 = 3$, $\lambda_1 + 2\lambda_2 = 5$, which has the solution $\lambda_1 = 1$, $\lambda_2 = 2$.
 :::
 
-::::teorema{#sottospazio-generato titolo="Subspace spanned"}
+::::teorema{#sottospazio-generato titolo="Span"}
 Let $v_1, \dots, v_k \in V$. The set of all their linear combinations
 $$
 \langle v_1, \dots, v_k \rangle = \{ \lambda_1 v_1 + \dots + \lambda_k v_k : \lambda_1, \dots, \lambda_k \in \mathbb{R} \}
@@ -123,7 +123,7 @@ The vectors $v_1, \dots, v_k \in V$ are **linearly independent** if the only lin
 $$
 \lambda_1 v_1 + \dots + \lambda_k v_k = 0 \quad \Longrightarrow \quad \lambda_1 = \dots = \lambda_k = 0 .
 $$
-Otherwise they are **linearly dependent**, and a zero combination with coefficients not all zero is called a dependence relation. The verification consists in solving the homogeneous system in the unknowns $\lambda_i$: the vectors are independent when the *only* solution is the zero one.
+Otherwise they are **linearly dependent**, and a linear combination equal to zero with coefficients not all zero is called a dependence relation. The verification consists in solving the homogeneous system in the unknowns $\lambda_i$: the vectors are independent when the *only* solution is the zero one.
 :::
 
 ::::teorema{#caratterizzazione-dipendenza titolo="Dependence and linear combinations"}
@@ -134,7 +134,7 @@ If $\lambda_1 v_1 + \dots + \lambda_k v_k = 0$ with a coefficient $\lambda_j \ne
 $$
 v_j = -\sum_{i \neq j} \frac{\lambda_i}{\lambda_j}\, v_i ,
 $$
-so $v_j$ is a combination of the others. Conversely, if $v_j = \sum_{i \neq j} \mu_i v_i$, then $\sum_{i \neq j} \mu_i v_i - v_j = 0$ is a zero combination in which the coefficient of $v_j$ equals $-1 \neq 0$, therefore the vectors are dependent.
+so $v_j$ is a combination of the others. Conversely, if $v_j = \sum_{i \neq j} \mu_i v_i$, then $\sum_{i \neq j} \mu_i v_i - v_j = 0$ is a linear combination equal to zero in which the coefficient of $v_j$ equals $-1 \neq 0$, therefore the vectors are dependent.
 :::
 ::::
 
@@ -146,7 +146,7 @@ so $v_j$ is a combination of the others. Conversely, if $v_j = \sum_{i \neq j} \
 :::
 
 :::attenzione
-For three or more vectors, pairwise comparison does not decide. The vectors $(1, 0)$, $(0, 1)$, $(1, 1)$ are pairwise non-proportional, yet they are **dependent**, because $(1, 1) = (1, 0) + (0, 1)$.
+For three or more vectors, pairwise comparison is inconclusive. The vectors $(1, 0)$, $(0, 1)$, $(1, 1)$ are pairwise non-proportional, yet they are **dependent**, because $(1, 1) = (1, 0) + (0, 1)$.
 
 ::grafico{vettori="0,0,1,0,u;0,0,0,1,v;0,0,1,1,w" segmenti="1,0,1,1;0,1,1,1" xmin=-0.6 xmax=1.8 ymin=-0.5 ymax=1.6 uguale=1 titolo="The vector $w = (1, 1)$ is the diagonal of the parallelogram with sides $u = (1, 0)$ and $v = (0, 1)$: since $w = u + v$, the three vectors are dependent"}
 
@@ -177,7 +177,7 @@ $$
 :::
 
 ::::teorema{#aggiunta-di-un-vettore titolo="Adding a vector to an independent set"}
-Let $v_1, \dots, v_k \in V$ be linearly independent and let $v \in V$ with $v \notin \langle v_1, \dots, v_k \rangle$. Then $v_1, \dots, v_k, v$ are linearly independent. The theorem allows one to extend an independent set one vector at a time, and it is used to complete an independent set to a basis.
+Let $v_1, \dots, v_k \in V$ be linearly independent and let $v \in V$ with $v \notin \langle v_1, \dots, v_k \rangle$. Then $v_1, \dots, v_k, v$ are linearly independent. The theorem allows one to extend an independent set one vector at a time, and it is used to extend an independent set to a basis.
 
 :::dimostrazione
 Let $\lambda_1 v_1 + \dots + \lambda_k v_k + \mu v = 0$. If $\mu \neq 0$, we would have $v = -\dfrac{1}{\mu}(\lambda_1 v_1 + \dots + \lambda_k v_k) \in \langle v_1, \dots, v_k \rangle$, contrary to the hypothesis; hence $\mu = 0$. The relation becomes $\lambda_1 v_1 + \dots + \lambda_k v_k = 0$, and since $v_1, \dots, v_k$ are independent, all the $\lambda_i$ are zero.
@@ -191,7 +191,7 @@ A **basis** of $V$ is an ordered sequence $\mathcal{B} = (v_1, \dots, v_n)$ of v
 :::
 
 :::osservazione{#basi-canoniche titolo="Standard bases"}
-- In $\mathbb{R}^n$ the standard basis consists of $e_1 = (1, 0, \dots, 0)$, $\dots$, $e_n = (0, \dots, 0, 1)$, and $(a_1, \dots, a_n) = a_1 e_1 + \dots + a_n e_n$.
+- In $\mathbb{R}^n$ the standard basis consists of $e_1 = (1, 0, \dots, 0)$, $\dots$, $e_n = (0, \dots, 0, 1)$, and we have $(a_1, \dots, a_n) = a_1 e_1 + \dots + a_n e_n$.
 - In $M_{m,n}(\mathbb{R})$ the standard basis consists of the $mn$ matrices $E_{ij}$ with $1$ in position $(i, j)$ and $0$ elsewhere.
 - In $\mathbb{R}_n[x]$ the standard basis is $(1, x, x^2, \dots, x^n)$, consisting of $n + 1$ polynomials.
 :::
@@ -221,7 +221,7 @@ Once a basis of $V$ is fixed, passing from vectors to coordinates preserves sums
 ## Dimension
 
 ::::teorema{#lemma-di-steinitz titolo="Steinitz lemma"}
-Let $V$ be spanned by $w_1, \dots, w_n$. Then every set of linearly independent vectors of $V$ has *at most* $n$ elements. For example $\mathbb{R}^3$ is spanned by the three standard vectors, so four vectors of $\mathbb{R}^3$ are always dependent.
+Let $V$ be spanned by $w_1, \dots, w_n$. Then every set of linearly independent vectors of $V$ has *at most* $n$ elements. For example $\mathbb{R}^3$ is spanned by the three standard basis vectors, so four vectors of $\mathbb{R}^3$ are always dependent.
 
 :::dimostrazione
 Let $v_1, \dots, v_m \in V$ with $m > n$; we show that they are dependent. Since the $w_i$ span $V$, each $v_j$ can be written $v_j = \sum_{i=1}^{n} a_{ij} w_i$. The homogeneous system
@@ -252,7 +252,7 @@ Let $(v_1, \dots, v_n)$ and $(w_1, \dots, w_m)$ be two bases of $V$. The $w_j$ a
 ::::
 
 :::definizione{#dimensione titolo="Dimension"}
-The **dimension** of $V$, denoted by $\dim V$, is the number of elements of any basis; by convention $\dim \{0\} = 0$. From the standard bases one reads
+The **dimension** of $V$, denoted by $\dim V$, is the number of elements of any basis; by convention $\dim \{0\} = 0$. From the standard bases we obtain
 $$
 \dim \mathbb{R}^n = n , \qquad \dim M_{m,n}(\mathbb{R}) = mn , \qquad \dim \mathbb{R}_n[x] = n + 1 .
 $$
@@ -270,7 +270,7 @@ Let $\dim V = n$. Then:
 The last two properties reduce the checks: to verify that $n$ vectors of a space of dimension $n$ form a basis it is sufficient to check *only one* of the two conditions, usually independence by means of the determinant.
 
 :::dimostrazione
-The first two properties follow from the **Steinitz lemma** applied to a basis of $V$, which consists of $n$ vectors that are independent and generators. Let $v_1, \dots, v_n$ be independent: if they did not span $V$, there would exist $v \notin \langle v_1, \dots, v_n \rangle$ and, by the theorem on adding a vector, $v_1, \dots, v_n, v$ would be $n + 1$ independent vectors, contrary to the first property. Now let $v_1, \dots, v_n$ be generators: if they were dependent, one of them would be a combination of the others and, removing it, $V$ would be spanned by $n - 1$ vectors, contrary to the second property.
+The first two properties follow from the **Steinitz lemma** applied to a basis of $V$, which consists of $n$ vectors that form an independent spanning set. Let $v_1, \dots, v_n$ be independent: if they did not span $V$, there would exist $v \notin \langle v_1, \dots, v_n \rangle$ and, by the theorem on adding a vector, $v_1, \dots, v_n, v$ would be $n + 1$ independent vectors, contrary to the first property. Now let $v_1, \dots, v_n$ be generators: if they were dependent, one of them would be a combination of the others and, removing it, $V$ would be spanned by $n - 1$ vectors, contrary to the second property.
 :::
 ::::
 
@@ -282,7 +282,7 @@ If $v_1, \dots, v_k$ are linearly independent and $v \notin \langle v_1, \dots, 
 Let $\dim V = n$ and let $W$ be a subspace of $V$. Then $\dim W \leq n$, and $\dim W = n$ if and only if $W = V$. Indeed, by the Steinitz lemma, every set of independent vectors of $W$ has at most $n$ elements. If $W \neq \{0\}$, we choose an independent set $w_1, \dots, w_m$ of $W$ with $m$ maximal; every $w \in W$ belongs to $\langle w_1, \dots, w_m \rangle$, since otherwise, by the theorem on adding a vector, $w_1, \dots, w_m, w$ would be $m + 1$ independent vectors of $W$. Hence $(w_1, \dots, w_m)$ is a basis of $W$ and $\dim W = m \leq n$. If $m = n$, by the consequences of the dimension $w_1, \dots, w_n$ form a basis of $V$, therefore $W = V$. The theorem is used to prove equalities between subspaces: if $U \subseteq W$ and $\dim U = \dim W$, then $U = W$.
 :::
 
-## Extracting and completing bases
+## Extracting and extending bases
 
 ::::teorema{#estrazione-di-una-base titolo="Extracting a basis"}
 Let $v_1, \dots, v_k$ be generators of $V \neq \{0\}$. Then a basis of $V$ can be chosen among them. In particular $\dim \langle v_1, \dots, v_k \rangle$ is the maximum number of independent vectors among $v_1, \dots, v_k$.
@@ -292,7 +292,7 @@ If $v_1, \dots, v_k$ are independent, they already form a basis. Otherwise, by t
 :::
 ::::
 
-::::teorema{#completamento-a-base titolo="Completion to a basis"}
+::::teorema{#completamento-a-base titolo="Extension to a basis"}
 Let $\dim V = n$ and let $v_1, \dots, v_k \in V$ be linearly independent, with $k < n$. Then there exist $v_{k+1}, \dots, v_n \in V$ such that $(v_1, \dots, v_n)$ is a basis of $V$. The added vectors can be chosen among those of any fixed basis of $V$, for example the standard basis.
 
 :::dimostrazione
@@ -301,10 +301,10 @@ Let $(e_1, \dots, e_n)$ be a basis of $V$. Since $k < n$, by the consequences of
 ::::
 
 :::osservazione{#metodo-della-riduzione-a-scala titolo="The method with row reduction"}
-In $\mathbb{R}^n$, or in coordinates, extraction and completion are carried out with row reduction.
+In $\mathbb{R}^n$, or in coordinates, extraction and extension are carried out with row reduction.
 
 - **Extraction**: write the generators as *columns* of a matrix $A$ and reduce $A$ to row echelon form. The columns of $A$ corresponding to the pivot columns form a basis of $\langle v_1, \dots, v_k \rangle$, and $\dim \langle v_1, \dots, v_k \rangle = \operatorname{rk} A$. The method is correct because elementary row operations do not change the solutions of $A x = 0$, that is, the linear relations among the columns.
-- **Completion**: write the independent vectors as *rows* and reduce to row echelon form, then add the standard vectors $e_j$ corresponding to the columns without a pivot. Row operations do not change the subspace spanned by the rows, and the echelon rows together with the added vectors have a pivot in every column, so they form $n$ independent vectors and span $\mathbb{R}^n$. Since the echelon rows span the same subspace as the original vectors, the original vectors together with the added ones also span $\mathbb{R}^n$, and by the consequences of the dimension they form a basis of it.
+- **Extension**: write the independent vectors as *rows* and reduce to row echelon form, then add the standard basis vectors $e_j$ corresponding to the columns without a pivot. Row operations do not change the subspace spanned by the rows, and the echelon rows together with the added vectors have a pivot in every column, so they form $n$ independent vectors and span $\mathbb{R}^n$. Since the echelon rows span the same subspace as the original vectors, the original vectors together with the added ones also span $\mathbb{R}^n$, and by the consequences of the dimension they form a basis of it.
 :::
 
 :::esempio{titolo="Extraction with row reduction"}
@@ -407,7 +407,7 @@ $$
 The formula allows one to compute one of the four dimensions knowing the other three, and it provides a check on the computations. Two distinct planes through the origin in $\mathbb{R}^3$ have sum $\mathbb{R}^3$, so $\dim (U \cap W) = 2 + 2 - 3 = 1$, that is, they intersect in a line.
 
 :::dimostrazione
-Let $(z_1, \dots, z_r)$ be a basis of $U \cap W$. By the **completion theorem** it is completed to a basis $(z_1, \dots, z_r, u_1, \dots, u_s)$ of $U$ and to a basis $(z_1, \dots, z_r, w_1, \dots, w_t)$ of $W$, so $\dim U = r + s$ and $\dim W = r + t$. We show that $\mathcal{B} = (z_1, \dots, z_r, u_1, \dots, u_s, w_1, \dots, w_t)$ is a basis of $U + W$. The vectors of $\mathcal{B}$ span $U + W$, since they contain a basis of $U$ and a basis of $W$. For independence, let
+Let $(z_1, \dots, z_r)$ be a basis of $U \cap W$. By the **extension theorem** it is extended to a basis $(z_1, \dots, z_r, u_1, \dots, u_s)$ of $U$ and to a basis $(z_1, \dots, z_r, w_1, \dots, w_t)$ of $W$, so $\dim U = r + s$ and $\dim W = r + t$. We show that $\mathcal{B} = (z_1, \dots, z_r, u_1, \dots, u_s, w_1, \dots, w_t)$ is a basis of $U + W$. The vectors of $\mathcal{B}$ span $U + W$, since they contain a basis of $U$ and a basis of $W$. For independence, let
 $$
 \sum_i a_i z_i + \sum_j b_j u_j + \sum_l c_l w_l = 0 .
 $$
@@ -418,7 +418,7 @@ $$
 :::
 ::::
 
-:::richiamo{titolo="Completion to a basis"}
+:::richiamo{titolo="Extension to a basis"}
 If $\dim V = n$ and $v_1, \dots, v_k \in V$ are linearly independent with $k < n$, there exist $v_{k+1}, \dots, v_n$ such that $(v_1, \dots, v_n)$ is a basis of $V$.
 :::
 
@@ -437,7 +437,7 @@ The sum of two subspaces $U$ and $W$ is **direct** if $U \cap W = \{0\}$, and in
 :::
 
 ::::teorema{#caratterizzazione-somma-diretta titolo="Uniqueness of the decomposition"}
-Let $U$ and $W$ be subspaces of $V$. The sum $U + W$ is direct if and only if every vector of $U + W$ can be written in **only one way** as $u + w$ with $u \in U$ and $w \in W$. In a direct sum every vector therefore has two well-determined components, one in $U$ and one in $W$.
+Let $U$ and $W$ be subspaces of $V$. The sum $U + W$ is direct if and only if every vector of $U + W$ can be written in **only one way** as $u + w$ with $u \in U$ and $w \in W$. In a direct sum every vector therefore has two uniquely determined components, one in $U$ and one in $W$.
 
 ::grafico{f="x/2;-x" vettori="0,0,2,1,u;0,0,-1,1,w;0,0,1,2,v" segmenti="2,1,1,2;-1,1,1,2" xmin=-2.5 xmax=3 ymin=-1.5 ymax=2.6 uguale=1 titolo="$\mathbb{R}^2 = U \oplus W$ with $U = \langle (2, 1) \rangle$ and $W = \langle (-1, 1) \rangle$ (dashed): the vector $v = (1, 2)$ decomposes in only one way as $u + w$, with $u = (2, 1)$ and $w = (-1, 1)$"}
 
@@ -447,14 +447,14 @@ Let $U \cap W = \{0\}$ and let $u + w = u' + w'$ with $u, u' \in U$ and $w, w' \
 ::::
 
 :::osservazione{#criterio-dei-supplementari titolo="Criterion for complementary subspaces"}
-Let $\dim V = n$. Then $V = U \oplus W$ if and only if the conditions
+Let $\dim V = n$. Then $V = U \oplus W$ if and only if the following conditions are satisfied simultaneously
 $$
 \begin{cases}
 U \cap W = \{0\} \\[4pt]
 \dim U + \dim W = n
 \end{cases}
 $$
-are satisfied together, and this is equivalent to saying that the union of a basis of $U$ and a basis of $W$ is a basis of $V$. Indeed, by Grassmann's formula the two conditions give $\dim (U + W) = n$, and by the theorem on the dimension of a subspace $U + W = V$. In $\mathbb{R}^3$ the plane $U : x + y + z = 0$ and the line $W = \langle (1, 1, 1) \rangle$ are **complementary**, since $(1, 1, 1)$ does not satisfy the equation of $U$ and $2 + 1 = 3$. The complement is *not* unique: $\langle (1, 0, 0) \rangle$ is also a complement of $U$.
+and this is equivalent to saying that the union of a basis of $U$ and a basis of $W$ is a basis of $V$. Indeed, by Grassmann's formula the two conditions give $\dim (U + W) = n$, and by the theorem on the dimension of a subspace $U + W = V$. In $\mathbb{R}^3$ the plane $U : x + y + z = 0$ and the line $W = \langle (1, 1, 1) \rangle$ are **complementary**, since $(1, 1, 1)$ does not satisfy the equation of $U$ and $2 + 1 = 3$. The complement is *not* unique: $\langle (1, 0, 0) \rangle$ is also a complement of $U$.
 :::
 
 :::esempio{titolo="Symmetric and skew-symmetric matrices"}

@@ -1,6 +1,6 @@
 ---
-titolo: Vectors in the plane and in space
-sommario: What a geometric vector is, how to compute with components, and how the dot product, the cross product and the scalar triple product measure angles, areas and volumes and detect orthogonality, parallelism and coplanarity.
+titolo: Vettori nel piano e nello spazio
+sommario: Che cos'è un vettore geometrico, come si opera con le componenti, come prodotto scalare, prodotto vettoriale e prodotto misto misurano angoli, aree e volumi e riconoscono ortogonalità, parallelismo e complanarità.
 ---
 
 ## Geometric vectors and operations
@@ -23,7 +23,7 @@ This is the head-to-tail rule; when $\vec{v}$ and $\vec{w}$ are applied at the s
 :::
 
 :::definizione{#prodotto-per-scalare titolo="Multiplication by a scalar"}
-Let $\lambda \in \mathbb{R}$ and let $\vec{v}$ be a vector. The vector $\lambda \vec{v}$ has length equal to $|\lambda|$ times the length of $\vec{v}$, the same direction as $\vec{v}$, the same orientation if $\lambda > 0$ and the opposite orientation if $\lambda < 0$; if $\lambda = 0$ or $\vec{v} = \vec{0}$, one sets $\lambda \vec{v} = \vec{0}$. The vector $(-1)\vec{v}$ is denoted by $-\vec{v}$ and is the **opposite** of $\vec{v}$; the **difference** is $\vec{v} - \vec{w} = \vec{v} + (-\vec{w})$. If $\vec{v} = \overrightarrow{AB}$ and $\vec{w} = \overrightarrow{AC}$, then $\vec{v} - \vec{w} = \overrightarrow{CB}$, that is, the difference is the vector going from the head of $\vec{w}$ to the head of $\vec{v}$.
+Let $\lambda \in \mathbb{R}$ and let $\vec{v}$ be a vector. The vector $\lambda \vec{v}$ has length equal to $|\lambda|$ times the length of $\vec{v}$, the same direction as $\vec{v}$, the same orientation if $\lambda > 0$ and the opposite orientation if $\lambda < 0$; if $\lambda = 0$ or $\vec{v} = \vec{0}$, one sets $\lambda \vec{v} = \vec{0}$. The vector $(-1)\vec{v}$ is denoted by $-\vec{v}$ and is the **negative** of $\vec{v}$; the **difference** is $\vec{v} - \vec{w} = \vec{v} + (-\vec{w})$. If $\vec{v} = \overrightarrow{AB}$ and $\vec{w} = \overrightarrow{AC}$, then $\vec{v} - \vec{w} = \overrightarrow{CB}$, that is, the difference is the vector going from the head of $\vec{w}$ to the head of $\vec{v}$.
 
 ::grafico{vettori="0,0,3,1,v;0,0,1,2,w;1,2,3,1,v − w" xmin=-0.6 xmax=3.8 ymin=-0.6 ymax=2.8 uguale=1 titolo="The difference $\vec{v} - \vec{w}$ goes from the head of $\vec{w}$ to the head of $\vec{v}$, because $\vec{w} + (\vec{v} - \vec{w}) = \vec{v}$"}
 
@@ -33,9 +33,9 @@ Let $\lambda \in \mathbb{R}$ and let $\vec{v}$ be a vector. The vector $\lambda 
 For every triple of vectors $\vec{u}, \vec{v}, \vec{w}$ and for every $\lambda, \mu \in \mathbb{R}$ the following properties hold.
 
 - Commutativity and associativity of the sum: $\vec{v} + \vec{w} = \vec{w} + \vec{v}$ and $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$.
-- Identity element and opposite: $\vec{v} + \vec{0} = \vec{v}$ and $\vec{v} + (-\vec{v}) = \vec{0}$.
+- Identity element and additive inverse: $\vec{v} + \vec{0} = \vec{v}$ and $\vec{v} + (-\vec{v}) = \vec{0}$.
 - Distributivity: $\lambda(\vec{v} + \vec{w}) = \lambda\vec{v} + \lambda\vec{w}$ and $(\lambda + \mu)\vec{v} = \lambda\vec{v} + \mu\vec{v}$.
-- Mixed associativity and unit: $\lambda(\mu\vec{v}) = (\lambda\mu)\vec{v}$ and $1\,\vec{v} = \vec{v}$.
+- Associativity of scalar multiplication and unit scalar: $\lambda(\mu\vec{v}) = (\lambda\mu)\vec{v}$ and $1\,\vec{v} = \vec{v}$.
 
 These are the same properties that define a **vector space**, and the general theory is covered in the topic on vector spaces.
 :::
@@ -130,7 +130,7 @@ Let $\vec{u}$ and $\vec{v}$ be nonzero vectors applied at the same point. The **
 :::
 
 :::definizione{#prodotto-scalare titolo="Dot product"}
-Let $\vec{u}$ and $\vec{v}$ be nonzero vectors and let $\theta$ be the angle between them. The **dot product** (or scalar product) is the real number
+Let $\vec{u}$ and $\vec{v}$ be nonzero vectors and let $\theta$ be the angle between them. The **dot product** is the real number
 $$
 \vec{u} \cdot \vec{v} = \|\vec{u}\|\, \|\vec{v}\| \cos\theta ;
 $$
@@ -166,7 +166,7 @@ In a triangle with sides of length $a$, $b$, $c$, if $\gamma$ is the angle betwe
 :::
 
 :::teorema{#proprieta-del-prodotto-scalare titolo="Properties of the dot product"}
-For every triple of vectors $\vec{u}, \vec{v}, \vec{w}$ and for every $\lambda \in \mathbb{R}$:
+For every triple of vectors $\vec{u}, \vec{v}, \vec{w}$ and for every $\lambda \in \mathbb{R}$ the following properties hold:
 
 - symmetry: $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$;
 - linearity: $(\vec{u} + \vec{w}) \cdot \vec{v} = \vec{u} \cdot \vec{v} + \vec{w} \cdot \vec{v}$ and $(\lambda\vec{u}) \cdot \vec{v} = \lambda\,(\vec{u} \cdot \vec{v})$;
@@ -206,7 +206,7 @@ Let $\vec{u} \neq \vec{0}$ and $\vec{v}$ be two vectors. There exists a unique p
 $$
 \begin{cases}
 \vec{v} = \vec{v}_{\parallel} + \vec{v}_{\perp} \\[4pt]
-\vec{v}_{\parallel} = \lambda\,\vec{u} \ \text{ for some } \lambda \in \mathbb{R} \\[4pt]
+\vec{v}_{\parallel} = \lambda\,\vec{u} \ \text{ per qualche } \lambda \in \mathbb{R} \\[4pt]
 \vec{v}_{\perp} \cdot \vec{u} = 0
 \end{cases}
 $$
@@ -236,7 +236,7 @@ For $\vec{v} = (3, 1, 2)$ and $\vec{u} = (1, 1, 0)$ one has $\vec{v} \cdot \vec{
 ## Cross product
 
 :::definizione{#prodotto-vettoriale titolo="Cross product"}
-Let $\vec{u} = (u_1, u_2, u_3)$ and $\vec{v} = (v_1, v_2, v_3)$ be vectors in space. The **cross product** (or vector product) is the vector
+Let $\vec{u} = (u_1, u_2, u_3)$ and $\vec{v} = (v_1, v_2, v_3)$ be vectors in space. The **cross product** is the vector
 $$
 \vec{u} \times \vec{v} = \left( u_2 v_3 - u_3 v_2,\ \ u_3 v_1 - u_1 v_3,\ \ u_1 v_2 - u_2 v_1 \right) .
 $$
@@ -264,7 +264,7 @@ The result is orthogonal to both factors, since $(2, -1, 2) \cdot (1, 0, -1) = 0
 :::
 
 :::teorema{#proprieta-algebriche-del-prodotto-vettoriale titolo="Algebraic properties of the cross product"}
-For every triple of vectors $\vec{u}, \vec{v}, \vec{w}$ in space and for every $\lambda \in \mathbb{R}$:
+For every triple of vectors $\vec{u}, \vec{v}, \vec{w}$ in space and for every $\lambda \in \mathbb{R}$ the following properties hold:
 
 - anticommutativity: $\vec{v} \times \vec{u} = -\,\vec{u} \times \vec{v}$, and in particular $\vec{u} \times \vec{u} = \vec{0}$;
 - linearity: $(\vec{u} + \vec{w}) \times \vec{v} = \vec{u} \times \vec{v} + \vec{w} \times \vec{v}$ and $(\lambda\vec{u}) \times \vec{v} = \lambda\,(\vec{u} \times \vec{v})$;
@@ -290,7 +290,7 @@ Let $\vec{u}$ and $\vec{v}$ be nonzero vectors in space and let $\theta \in [0, 
 - $\|\vec{u} \times \vec{v}\| = \|\vec{u}\|\,\|\vec{v}\|\sin\theta$;
 - if $\vec{u} \times \vec{v} \neq \vec{0}$, the orientation of $\vec{u} \times \vec{v}$ is given by the right-hand rule: with the thumb along $\vec{u}$ and the index finger along $\vec{v}$, the middle finger points along $\vec{u} \times \vec{v}$.
 
-The first property provides a vector orthogonal to two given vectors with a single computation. If $\vec{u}$ and $\vec{v}$ are not parallel, the vectors orthogonal to both are *exactly* the multiples of $\vec{u} \times \vec{v}$, since they are orthogonal to the plane determined by $\vec{u}$ and $\vec{v}$ and therefore have the direction of the line perpendicular to that plane. The second property is the basis of the area formulas. The orientation rule is derived from the case $\vec{i} \times \vec{j} = \vec{k}$, and its justification is omitted.
+The first property provides a vector orthogonal to two given vectors with a single computation. If $\vec{u}$ and $\vec{v}$ are not parallel, the vectors orthogonal to both are *exactly* the multiples of $\vec{u} \times \vec{v}$, since they are orthogonal to the plane determined by $\vec{u}$ and $\vec{v}$ and therefore have the direction of the line perpendicular to that plane. The second property is the basis of the area formulas. The orientation rule is consistent with the case $\vec{i} \times \vec{j} = \vec{k}$, and its general justification is omitted.
 
 :::dimostrazione
 For the first property one computes
@@ -441,7 +441,7 @@ Three vectors $\vec{u}$, $\vec{v}$, $\vec{w}$ are called **coplanar** if, when a
 ::::teorema{#criterio-di-complanarita titolo="Coplanarity criterion"}
 Let $\vec{u}$, $\vec{v}$, $\vec{w}$ be vectors in space. Then
 $$
-\vec{u}, \vec{v}, \vec{w} \ \text{coplanar}
+\vec{u}, \vec{v}, \vec{w} \ \text{complanari}
 \quad\Longleftrightarrow\quad
 \vec{u} \cdot (\vec{v} \times \vec{w}) = 0 .
 $$
