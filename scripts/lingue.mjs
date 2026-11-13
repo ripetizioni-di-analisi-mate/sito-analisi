@@ -4,7 +4,7 @@
 // «This page is not yet available in English» (classe avviso-lingua) restano fuori.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { LINGUE_TRADOTTE } from '../src/data/codici-lingua.mjs';
+import { LINGUE_TRADOTTE, linguaPubblica } from '../src/data/codici-lingua.mjs';
 
 const DIST = new URL('../dist', import.meta.url).pathname;
 
@@ -22,7 +22,7 @@ function giro(cartella, rel, tradotte) {
 }
 
 const elenco = {};
-for (const lingua of LINGUE_TRADOTTE) {
+for (const lingua of LINGUE_TRADOTTE.filter(linguaPubblica)) {
   const tradotte = [];
   const cartella = join(DIST, lingua);
   if (existsSync(cartella)) giro(cartella, '', tradotte);

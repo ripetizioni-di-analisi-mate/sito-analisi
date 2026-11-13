@@ -3,7 +3,7 @@ import { MATERIE } from '../data/materie';
 import { MATERIE_DE, ARGOMENTI_DE, GRUPPI_DE, SOTTOGRUPPI_DE } from '../data/materie-de';
 import { MATERIE_ES, ARGOMENTI_ES, GRUPPI_ES, SOTTOGRUPPI_ES } from '../data/materie-es';
 import { MATERIE_FR, ARGOMENTI_FR, GRUPPI_FR, SOTTOGRUPPI_FR } from '../data/materie-fr';
-import { CODICI_LINGUA, LINGUE_CATALOGO, prefissoLingua } from '../data/codici-lingua.mjs';
+import { CODICI_LINGUA, LINGUE_CATALOGO, linguaPubblica, prefissoLingua } from '../data/codici-lingua.mjs';
 
 export type Lingua = (typeof CODICI_LINGUA)[number];
 export type LinguaCatalogo = (typeof LINGUE_CATALOGO)[number];
@@ -48,7 +48,7 @@ const pagine = Object.fromEntries(LINGUE_CATALOGO.map((lingua) => [lingua, new S
 ])])) as Record<LinguaCatalogo, Set<string>>;
 
 export const paginaLocalizzata = (lingua: LinguaCatalogo, path: string) => pagine[lingua].has(path);
-export const lingueLocalizzate = (path: string) => LINGUE_CATALOGO.filter((lingua) => paginaLocalizzata(lingua, path));
+export const lingueLocalizzate = (path: string) => LINGUE_CATALOGO.filter((lingua) => linguaPubblica(lingua) && paginaLocalizzata(lingua, path));
 
 // Una pagina priva di traduzione porta all'argomento o al corso corrispondente nel catalogo.
 export function destinazioneLocalizzata(lingua: LinguaCatalogo, path: string) {

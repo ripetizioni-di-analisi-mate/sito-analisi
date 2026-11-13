@@ -1,5 +1,5 @@
 import { CATALOGHI_STUDIO, CATALOGO_PREDEFINITO, CATALOGO_USA_PUBBLICO, PARAMETRO_CATALOGO, catalogoDiIngresso, catalogoStudio, percorsoCatalogoUsa } from '../src/data/cataloghi-studio.mjs';
-import { LINGUE_CATALOGO, LINGUE_TRADOTTE } from '../src/data/codici-lingua.mjs';
+import { LINGUE_CATALOGO, LINGUE_TRADOTTE, linguaPubblica, prefissoLinguaSospesa } from '../src/data/codici-lingua.mjs';
 import { navigazioneVisitatore } from './lingua.mjs';
 
 const HOME = new Set(['/', '/en']);
@@ -21,14 +21,15 @@ export function versoCatalogoStudio(req, url) {
 
   if (!navigazioneVisitatore(req)) return null;
   const percorso = url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/$/, '') || '/';
-  if (!INGRESSI.has(percorso)) return null;
+  if (prefissoLinguaSospesa(percorso) || !INGRESSI.has(percorso)) return null;
 
   const scelta = url.searchParams.get(PARAMETRO_CATALOGO);
   const manuale = catalogoStudio(scelta);
   if (manuale) {
     const meta = new URL(url);
     const lingua = meta.searchParams.get('lingua');
-    meta.pathname = scelta === CATALOGO_PREDEFINITO && LINGUE_TRADOTTE.includes(lingua) ? `/${lingua}` : manuale.percorso;
+    meta.pathname = scelta === CATALOGO_PREDEFINITO && linguaPubblica(lingua) && LINGUE_TRADOTTE.includes(lingua) ? `/${lingua}` : manuale.percorso;
+    if (!linguaPubblica(lingua)) meta.searchParams.delete('lingua');
     meta.searchParams.delete(PARAMETRO_CATALOGO);
     return new Response(null, {
       status: 303,

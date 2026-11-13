@@ -7,6 +7,7 @@ import remarkTracce from './src/plugins/remark-tracce.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from './src/data/cataloghi-studio.mjs';
+import { prefissoLinguaSospesa } from './src/data/codici-lingua.mjs';
 
 // Astro conserva in cache le pagine già rese e non si accorge se cambiano i plugin (figure, legende, blocchi):
 // se il codice dei plugin è cambiato dall'ultima build, la cache dei contenuti si svuota.
@@ -29,15 +30,20 @@ export default defineConfig({
   site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse', concurrency: 2 },
-  integrations: CATALOGO_USA_PUBBLICO ? [] : [{
-    name: 'sospensione-catalogo-usa',
+  integrations: [{
+    name: 'percorsi-pubblici',
     hooks: {
       'astro:build:start': ({ setPrerenderer }) => {
         setPrerenderer((prerenderer) => ({
           ...prerenderer,
           async getStaticPaths() {
             const risultato = await prerenderer.getStaticPaths();
-            return { ...risultato, paths: risultato.paths.filter(({ pathname }) => !percorsoCatalogoUsa(pathname)) };
+            return {
+              ...risultato,
+              paths: risultato.paths.filter(({ pathname }) =>
+                (CATALOGO_USA_PUBBLICO || !percorsoCatalogoUsa(pathname)) &&
+                !prefissoLinguaSospesa(pathname.replace(/^\/dati-domande(?=\/)/, ''))),
+            };
           },
         }));
       },
