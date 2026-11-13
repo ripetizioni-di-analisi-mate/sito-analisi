@@ -69,6 +69,8 @@ Se la ripartizione è continua e strettamente crescente intorno alla soglia, il 
 
 :::esempio{titolo="Lettura del quantile dalla ripartizione"}
 Per la ripartizione che vale $x^2$ tra $0$ e $1$, il quantile di ordine $\dfrac14$ soddisfa $q_{\frac14}^2=\dfrac14$. La radice $\dfrac12$ appartiene all'intervallo, quindi è la soglia cercata. La radice negativa è fuori dal tratto su cui vale l'equazione. Se la ripartizione fosse costante al livello richiesto per un intero intervallo, la definizione tramite estremo inferiore sceglierebbe l'estremo sinistro.
+
+::grafico{curve="t,0,-0.35,0;t,t*t,0,1;t,1,1,1.4" punti="0.5,0.25,pieno" segmenti="0,0.25,0.5,0.25;0.5,0,0.5,0.25" etichette="0.46,-0.10,0,5;-0.25,0.25,0,25" xmin=-0.35 xmax=1.42 ymin=-0.16 ymax=1.18 nomi="x,F_X" legenda=0 titolo="Il livello $p=\dfrac14$ della ripartizione si raggiunge alla soglia $x=\dfrac12$"}
 :::
 
 ## Valore atteso e varianza
@@ -236,6 +238,8 @@ Se $X\sim U(1,4)$ e $Y=9-2X$, gli estremi trasformati sono $7$ e $1$. Quindi la 
 
 :::esempio{titolo="Due rami per una trasformazione quadratica"}
 Sia $X\sim U(-2,2)$ e sia $Y=X^2$. L'equazione $x^2=y$ ha due soluzioni per $0<y<4$. Per ottenere la ripartizione si osserva che $X^2\le y$ equivale a $-\sqrt y\le X\le\sqrt y$. L'intervallo ha lunghezza $2\sqrt y$, quindi $F_Y(y)=\dfrac{\sqrt y}{2}$ per $0<y<4$. La densità è $f_Y(y)=\dfrac1{4\sqrt y}$ sullo stesso intervallo. I valori di $F_Y$ sono $0$ a sinistra e $1$ a destra. Per un vettore di variabili e per le trasformazioni che dipendono da più componenti si rimanda al capitolo sulle distribuzioni congiunte.
+
+::grafico{curve="t,t*t,-2,2" linee="-2,1 2,1" punti="-1,1,pieno;1,1,pieno" segmenti="-1,0,-1,1;1,0,1,1" poligoni="-1,0 1,0 1,-0.21 -1,-0.21" xmin=-2.4 xmax=2.4 ymin=-0.45 ymax=4.55 nomi="x,y" legenda="y=x^2" titolo="Alla soglia $y=1$ corrispondono due radici. La fascia sull'asse orizzontale indica i valori di $X$ per cui $Y\le 1$"}
 :::
 
 :::osservazione{titolo="Probabilità e densità della trasformata"}

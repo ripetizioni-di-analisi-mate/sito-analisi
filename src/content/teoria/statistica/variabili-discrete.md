@@ -25,6 +25,8 @@ $$
 c+3c+4c=1,\qquad c=\frac18.
 $$
 La costante è positiva, quindi tutte le masse sono ammissibili. Nell'intervallo $(0,3]$ cadono $1$ e $3$, perciò $P(0<X\le 3)=\dfrac38+\dfrac48=\dfrac78$. L'estremo aperto esclude la massa in $0$, mentre l'estremo chiuso include la massa in $3$.
+
+::grafico{xmin=-0.7 xmax=3.8 ymin=-0.09 ymax=0.66 nomi="x,p_X(x)" legenda=0 linee="0,0 0,0.125;1,0 1,0.375;3,0 3,0.5" punti="0,0.125,pieno;1,0.375,pieno;3,0.5,pieno" etichette="0.16,0.17,⅛;1.16,0.42,⅜;3.13,0.545,½" titolo="Le masse in 1 e 3 contribuiscono alla probabilità dell’intervallo, mentre la massa in 0 è esclusa."}
 :::
 
 :::attenzione
@@ -188,6 +190,8 @@ $$
 P(X\le 1)=P(X=0)+P(X=1)=e^{-2}+2e^{-2}=3e^{-2}.
 $$
 Il conteggio almeno pari a due è l'evento complementare e ha probabilità $1-3e^{-2}$. Il tasso orario, da solo, è insufficiente a giustificare la legge. Nell'esempio il processo di Poisson omogeneo è un'ipotesi esplicita.
+
+::grafico{xmin=-0.7 xmax=5.8 ymin=-0.045 ymax=0.37 nomi="k,p_X(k)" legenda=0 linee="0,0 0,0.135335;1,0 1,0.270671;2,0 2,0.270671;3,0 3,0.180447;4,0 4,0.090224;5,0 5,0.036089" punti="0,0.135335,pieno;1,0.270671,pieno;2,0.270671,pieno;3,0.180447,pieno;4,0.090224,pieno;5,0.036089,pieno" segmenti="1.5,0,1.5,0.3" etichette="0.67,0.327,fino a 1;3.5,0.327,da 2 in poi" titolo="Primi sei valori della massa di Poisson con parametro 2. La linea separa le due masse della somma dalle masse del complementare."}
 :::
 
 :::osservazione

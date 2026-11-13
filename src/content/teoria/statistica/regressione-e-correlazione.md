@@ -31,6 +31,8 @@ S_{xy}&=\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y).
 \end{aligned}
 $$
 Le prime due descrivono la dispersione delle singole variabili. Nella terza, una coppia di scarti dello stesso segno dà un contributo positivo, mentre una coppia di segni opposti dà un contributo negativo. Il segno della somma indica quale tipo di contributo prevale. Nei cinque dati dell'esempio le medie sono $\bar x=3$ e $\bar y=4$. Le somme dei quadrati valgono entrambe $10$ e la somma dei prodotti è $4+1+0+0+4=9$.
+
+::grafico{xmin=-2.7 xmax=2.7 ymin=-2.7 ymax=2.7 nomi="u,v" punti="-2,-2;-1,-1;0,1;1,0;2,2" titolo="Diagramma degli scarti centrati u e v. I tre punti fuori dagli assi hanno scarti dello stesso segno e contribuiscono con 4, 1 e 4."}
 :::
 
 :::osservazione
@@ -247,6 +249,8 @@ SE_{\mathrm{pred}}&=2\sqrt{1+\frac1{16}}=\frac{\sqrt{17}}2.
 \end{aligned}
 $$
 Al $95\%$ si moltiplicano entrambi per $t_{14,0{,}975}\approx2{,}145$. Il primo margine è circa $1{,}073$ e il secondo circa $4{,}422$. Una stima precisa della media può quindi accompagnarsi a un intervallo ampio per una risposta individuale.
+
+::grafico{assi=0 xmin=14 xmax=26 ymin=0 ymax=3 linee="18.927,2 21.073,2;15.578,1 24.422,1" punti="18.927,2;21.073,2;15.578,1;24.422,1;20,2;20,1" segmenti="20,0.7,20,2.3" etichette="18.4,2.3,M;15.3,1.3,P;20.1,2.5,20" titolo="Intervalli al 95% alla stessa ascissa. M riguarda la risposta media, P la previsione individuale. La verticale tratteggiata indica il centro comune 20."}
 :::
 
 :::attenzione

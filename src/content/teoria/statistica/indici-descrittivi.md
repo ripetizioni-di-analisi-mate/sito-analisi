@@ -27,6 +27,8 @@ $$
 \bar x=\frac{120+480}{40}\,\mathrm{mg/L}=15\,\mathrm{mg/L}.
 $$
 Il risultato è più vicino a $16$ perché le osservazioni del secondo gruppo sono tre volte quelle del primo. La media semplice delle medie dei due gruppi darebbe $14\,\mathrm{mg/L}$ e assegnerebbe lo stesso peso ai due gruppi.
+
+::grafico{xmin=10.5 xmax=17.5 ymin=-0.7 ymax=35 nomi="x,n" poligoni="11.7,0 12.3,0 12.3,10 11.7,10;15.7,0 16.3,0 16.3,30 15.7,30" segmenti="15,0,15,30" etichette="11.85,12.1,10;15.85,32.2,30" titolo="Le barre rappresentano i due gruppi tramite la loro media e la loro numerosità. La verticale a 15 indica la media ponderata."}
 :::
 
 :::osservazione
@@ -62,6 +64,8 @@ Almeno metà dei dati è minore o uguale alla mediana e almeno metà è maggiore
 I dati ordinati sono $2,2,4,5,7,7,8,10$. Il primo quartile occupa il posto $\lceil 8\cdot0{,}25\rceil=2$, quindi $Q_1=2$. Il terzo quartile occupa il posto $\lceil8\cdot0{,}75\rceil=6$, quindi $Q_3=7$. Per la mediana si usano i posti $4$ e $5$, perciò $\operatorname{Med}(x)=6$.
 
 Se è disponibile una tabella di frequenze, il posto $6$ si trova cercando il primo valore la cui frequenza cumulata assoluta raggiunge almeno $6$. Al valore $5$ la cumulata è $4$, mentre al valore $7$ è $6$. Si ottiene così $Q_3=7$ senza espandere la tabella.
+
+::grafico{xmin=-0.3 xmax=9 ymin=-0.6 ymax=11.6 nomi="k,xₖ" punti="1,2;2,2;3,4;4,5;5,7;6,7;7,8;8,10" segmenti="2,0,2,2;6,0,6,7" titolo="I punti danno i valori in ordine di rango. Le verticali ai ranghi 2 e 6 raggiungono rispettivamente il primo e il terzo quartile."}
 :::
 
 :::attenzione

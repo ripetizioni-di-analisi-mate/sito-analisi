@@ -150,6 +150,8 @@ Si indica con $t_{\nu,p}$ il quantile di ordine $p$ della t di Student con $\nu$
 
 Su $16$ osservazioni normali si hanno $\bar x=96$, $s=8$ e si verifica $H_0:\mu\ge100$ contro $H_1:\mu<100$. L'errore standard stimato vale $\dfrac{8}{\sqrt{16}}=2$, quindi $t_{\mathrm{oss}}=-2$. Al livello $0{,}05$ la soglia inferiore è $t_{15,0{,}05}\approx-1{,}753$. Poiché $-2<-1{,}753$, si rifiuta $H_0$. Con un'alternativa bilatera allo stesso livello, il confronto sarebbe con $t_{15,0{,}975}\approx2{,}131$ e il risultato sarebbe di mancato rifiuto.
 
+::grafico{f="0.39235316*(1+x^2/15)^(-8)" area="0.39235316*(1+x^2/15)^(-8);0;-4.4;-1.753" segmenti="-1.753,0,-1.753,0.08834" punti="-2,0,pieno" xmin=-4.4 xmax=4.4 ymin=-0.06 ymax=0.45 nomi="t,f" legenda="t_{15}" titolo="Il punto osservato vale −2. Si trova a sinistra della soglia −1,753, nella regione di rifiuto del test unilatero."}
+
 :::
 
 ## Proporzioni e confronto di campioni
@@ -253,6 +255,8 @@ Un rifiuto nel test di adattamento significa che gli scostamenti complessivi son
 Sia $S^2$ la varianza campionaria corretta di $n\ge2$ osservazioni indipendenti da una popolazione normale. Sotto $H_0:\sigma^2=\sigma_0^2$, con $\sigma_0^2>0$, la statistica $Q_\sigma=\dfrac{(n-1)S^2}{\sigma_0^2}$ ha legge $\chi^2_{n-1}$. Si indica con $\chi^2_{\nu,p}$ il quantile di ordine $p$ per $\nu$ gradi di libertà. Per il test bilatero a code uguali, si rifiuta se $Q_\sigma$ raggiunge o supera $\chi^2_{n-1,1-\frac{\alpha}{2}}$ oppure è al più $\chi^2_{n-1,\frac{\alpha}{2}}$. Per l'alternativa superiore si usa la sola coda destra e per quella inferiore la sola coda sinistra.
 
 Poiché la legge chi quadrato è asimmetrica, due code di uguale probabilità hanno estremi a distanze diverse dal centro. Per esempio, con $\nu=9$ e $\alpha=0{,}05$ gli estremi dell'intervallo centrale sono circa $2{,}700$ e $19{,}023$.
+
+::grafico{f="0.00379945*max(0,x)^3.5*exp(-x/2)" area="0.00379945*max(0,x)^3.5*exp(-x/2);0;0;2.7|0.00379945*max(0,x)^3.5*exp(-x/2);0;19.023;31.6" segmenti="2.7,0,2.7,0.03186;19.023,0,19.023,0.00844" xmin=-0.4 xmax=31.6 ymin=-0.013 ymax=0.128 nomi="q,f" legenda="\chi^2_{9}" titolo="Sotto la legge chi quadrato a nove gradi di libertà, ciascuna zona colorata ha probabilità 0,025. Le soglie sono 2,700 e 19,023."}
 
 :::
 

@@ -136,6 +136,8 @@ $$
 Un esito comune a tutti e tre è contato tre volte nelle probabilità singole e tre volte nelle intersezioni a coppie. L'ultimo termine gli restituisce il contributo che gli spetta. Un esito comune a due soli eventi è contato due volte nel primo gruppo e una volta nel secondo, perciò contribuisce una volta.
 
 La stessa scomposizione vale per le cardinalità. Tra $40$ iscritti, $18$ seguono un laboratorio, $13$ un seminario e $9$ un corso integrativo. Se le intersezioni a coppie hanno rispettivamente $5$, $4$ e $3$ iscritti e $2$ seguono tutte le attività, quelli che ne seguono almeno una sono $18+13+9-5-4-3+2=30$.
+
+::venn{tipo="tre" zone="a,b,c,ab,ac,bc,abc" nomi="L,S,C" elementi="a:11;b:7;c:4;ab:3;ac:2;bc:1;abc:2;u:10" universo=1 ambiente="Ω" titolo="Le regioni dell’unione contano 30 iscritti a laboratorio, seminario o corso. Ogni numero è riferito a una regione disgiunta."}
 :::
 
 ## Equiprobabilità e scelta degli esiti
@@ -244,6 +246,8 @@ $$
 4\cdot3+2\cdot3\cdot3=30.
 $$
 La distinzione tra zero e cifra pari non nulla è necessaria perché la scelta finale cambia quante cifre possono occupare il primo posto.
+
+::grafico{assi=0 xmin=0 xmax=10.5 ymin=0.4 ymax=5.8 linee="2.4,3 3.6,4.4 6.9,4.4;2.4,3 3.6,1.6 6.9,1.6" etichette="0.15,3,Ultima cifra;3.85,4.75,Ultima 0;3.85,1.95,Ultima 2 o 4;7.2,4.3,4 × 3 = 12;7.2,1.5,2 × 3 × 3 = 18" titolo="I 12 numeri che terminano con 0 si sommano ai 18 che terminano con 2 o 4."}
 :::
 
 :::esempio{titolo="Una commissione con due profili"}

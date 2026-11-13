@@ -15,6 +15,8 @@ Quando si stima una media, $\bar X$ indica la media campionaria come variabile a
 
 :::esempio{titolo="Due stime da una stessa rilevazione"}
 Su cinque turni scelti indipendentemente si registrano $1,0,2,1,1$ richieste d'intervento. Per stimare il numero medio di richieste per turno si può usare $\bar X$. Con questi dati si ottiene $\bar x=1$. Per stimare la probabilità che in un turno ci sia almeno una richiesta si usa invece la media degli indicatori $\mathbf{1}_{\{X_i\ge 1\}}$, che valgono uno nei turni con almeno una richiesta. La stima corrispondente è $\dfrac45$ perché quattro turni soddisfano la condizione. I due numeri si riferiscono a parametri diversi, quindi rispondono a domande diverse sullo stesso insieme di osservazioni.
+
+::grafico{xmin=-0.35 xmax=5.8 ymin=-0.35 ymax=2.6 nomi="i,xᵢ" punti="1,1;2,0;3,2;4,1;5,1" segmenti="1,0,1,1;3,0,3,2;4,0,4,1;5,0,5,1" linee="0.6,1 5.35,1" titolo="La linea orizzontale indica la media di una richiesta per turno. I punti sopra zero indicano i quattro turni con almeno una richiesta."}
 :::
 
 :::osservazione
@@ -287,4 +289,6 @@ Quando due stimatori sono corretti per lo stesso parametro, sotto lo stesso mode
 
 :::esempio{titolo="Il confronto può dipendere dal parametro"}
 Sia $X$ una misura con media $\theta$ e varianza $1$. Si confrontino $T=X$ e $U=\dfrac X2$. Per $T$ l'errore quadratico medio è $1$. Per $U$ la varianza è $\dfrac14$ e la distorsione è $-\dfrac{\theta}{2}$, quindi $MSE_\theta(U)=\dfrac{1+\theta^2}{4}$. Per $\theta=0$ la seconda regola ha errore quadratico medio $\dfrac14$, mentre per $\theta=2$ ha errore quadratico medio $\dfrac54$. Il restringimento dei valori verso zero riduce la varianza in entrambi i casi. La distanza del parametro da zero stabilisce se tale riduzione compensa la distorsione.
+
+::grafico{f="1;(1+x^2)/4" xmin=-3.1 xmax=3.1 ymin=-0.25 ymax=2.9 nomi="θ,R" punti="-1.73205,1;1.73205,1;0,0.25;2,1.25" segmenti="-1.73205,0,-1.73205,1;1.73205,0,1.73205,1" legenda="MSE_\theta(T);MSE_\theta(U)" titolo="Vicino a zero la curva di U sta sotto la retta di T. I due errori coincidono per θ uguale a −√3 e √3."}
 :::

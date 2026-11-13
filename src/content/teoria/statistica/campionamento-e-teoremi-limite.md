@@ -13,6 +13,8 @@ Una **statistica** è una funzione dei dati e di costanti note. La media, il mas
 
 :::esempio{titolo="Distribuzione della media di due prove"}
 Due misure indipendenti valgono ciascuna $0$ o $1$ con la stessa probabilità. I quattro esiti ordinati sono equiprobabili. La media delle due misure vale $0$ nell'esito $(0,0)$, vale $\dfrac12$ negli esiti $(0,1)$ e $(1,0)$ e vale $1$ nell'esito $(1,1)$. Quindi la sua distribuzione assegna probabilità $\dfrac14$, $\dfrac12$ e $\dfrac14$ ai tre valori. Se il campione osservato è $(1,0)$, la media osservata è $\bar x=\dfrac12$.
+
+::grafico{xmin=-0.27 xmax=1.35 ymin=-0.05 ymax=0.66 nomi="m,p" linee="0,0 0,0.25;0.5,0 0.5,0.5;1,0 1,0.25" punti="0,0.25;0.5,0.5;1,0.25" etichette="0.08,0.31,¼;0.5,0.56,½;1,0.31,¼;0.5,-0.035,½" titolo="La massa della media è doppia in un mezzo, dove confluiscono due esiti ordinati."}
 :::
 
 :::attenzione
@@ -49,6 +51,8 @@ $$
 \operatorname{Var}(\bar X_n)=\tau^2+\frac{\sigma_E^2}{n}.
 $$
 Infatti la media è $\mu+B+\bar E_n$. La varianza di $\bar E_n$ è quella del singolo errore divisa per $n$. Quando le sessioni sono ripetute indipendentemente, la componente di calibrazione cambia tra sessioni e contribuisce alla variabilità delle loro medie. La stessa componente $B$ compare con coefficiente uno in ogni media e conserva la propria varianza. Per esempio, con $\tau=1$, $\sigma_E=4$ e $n=16$, la varianza della media è $1+\dfrac{16}{16}=2$. Se si trattassero tutte le misure come indipendenti, si otterrebbe $\dfrac{17}{16}$, perché ciascuna misura ha varianza $17$. Il confronto mostra l'effetto di una covarianza positiva sulla precisione.
+
+::grafico{curve="t,1+16/t,1,48;t,17/t,1,48" xmin=-0.45 xmax=49 ymin=-0.22 ymax=6.8 nomi="n,V" legenda="1+\dfrac{16}{n};\dfrac{17}{n}" segmenti="16,0,16,2" punti="16,2;16,1.0625" asintoti="y=1" titolo="Con errore comune, la varianza della media tende a 1. Per 16 misure vale 2, mentre con varianza individuale 17 e indipendenza varrebbe 17 sedicesimi."}
 :::
 
 ## Distribuzioni esatte da una popolazione normale
