@@ -12,7 +12,6 @@ import '../styles/global.css';
 import Indice from '../components/Indice.astro';
 import StudyCountry from '../components/StudyCountry.astro';
 import { CATALOGO_PREDEFINITO, CATALOGO_USA_PUBBLICO, PARAMETRO_CATALOGO } from '../data/cataloghi-studio.mjs';
-import { linguaPubblica } from '../data/codici-lingua.mjs';
 import { linkArgomentoUsa, materieUsa, materiaUsa } from '../data/stem-usa/catalog-view';
 import { calculusSlug } from '../lib/stem-usa-practice';
 import { usTimedTopics } from '../lib/stem-usa-banks';
@@ -64,7 +63,7 @@ const de = lingua === 'de';
 const es = lingua === 'es';
 const fr = lingua === 'fr';
 const localizzato = linguaCatalogo(lingua);
-const cambioLingua = LINGUE.filter((l) => l.codice !== lingua && linguaPubblica(l.codice)).map((l) => ({
+const cambioLingua = LINGUE.filter((l) => l.codice !== lingua).map((l) => ({
   ...l,
   href: usa ? `${link(l.codice, '/')}?${PARAMETRO_CATALOGO}=${CATALOGO_PREDEFINITO}&lingua=${l.codice}`
     : sezione === 'home' ? `${link(l.codice, '/')}?lingua=${l.codice}`
