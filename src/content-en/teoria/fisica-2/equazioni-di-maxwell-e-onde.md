@@ -1,6 +1,6 @@
 ---
-titolo: Maxwell's equations and electromagnetic waves
-sommario: How the displacement current completes Ampère's law, what the four Maxwell equations are, why they imply waves that travel at the speed of light, and how much energy and momentum these waves carry.
+titolo: Equazioni di Maxwell e onde elettromagnetiche
+sommario: Come la corrente di spostamento completa la legge di Ampère, quali sono le quattro equazioni di Maxwell, perché da esse seguono onde che si propagano alla velocità della luce, e quanta energia e quantità di moto queste onde trasportano.
 ---
 
 ## Displacement current
@@ -8,11 +8,11 @@ sommario: How the displacement current completes Ampère's law, what the four Ma
 Throughout this topic the fields are in vacuum, unless stated explicitly, and currents are denoted by the lowercase letter $i$, because the letter $I$ denotes the intensity of a wave.
 
 :::richiamo{titolo="Ampère's law"}
-In the steady state, for every oriented closed curve $\gamma$ we have $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{enc}}$, where $i_{\text{enc}}$ is the current enclosed by $\gamma$, that is, the current through any surface bounded by $\gamma$, with the positive direction fixed by the right-hand rule. See the topic on the sources of the magnetic field.
+In the steady state, for every oriented closed curve $\gamma$ we have $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{conc}}$, where $i_{\text{conc}}$ is the current enclosed by $\gamma$, that is, the current through any surface bounded by $\gamma$, with the positive direction fixed by the right-hand rule. See the topic on the sources of the magnetic field.
 :::
 
 :::osservazione{#incoerenza-legge-ampere titolo="Ampère's law and a charging capacitor"}
-Consider a parallel-plate capacitor that is being charged through a wire carrying the current $i$, and a closed curve $\gamma$ that encircles the wire. The flat surface $S_1$ is crossed by the wire, so the current through it is $i$. The surface $S_2$, which has the same boundary, passes between the plates, where there are no moving charges, so the current through it is zero. Ampère's law would therefore give two different values for the same circulation $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l}$, and in the form of the reminder it holds only for steady currents.
+Consider a parallel-plate capacitor that is being charged through a wire carrying the current $i$, and a closed curve $\gamma$ that encircles the wire. The flat surface $S_1$ is crossed by the wire, so the current through it is $i$. The surface $S_2$, which has the same boundary, passes between the plates, where there are no moving charges, so the current through it is zero. Ampère's law would therefore give two different values for the same circulation $\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l}$, and in the stated form it holds only for steady currents.
 
 Between the plates, however, there is an electric field that grows while the capacitor charges, and its flux through $S_2$ varies in time. Maxwell added to Ampère's law a term proportional to the rate of change of that flux.
 
@@ -25,7 +25,7 @@ Let $S$ be an oriented surface and let $\Phi_E = \displaystyle\iint_S \vec{E} \c
 $$
 i_s = \varepsilon_0 \frac{d\Phi_E}{dt} .
 $$
-It is measured in amperes, like a conduction current, because the product $\varepsilon_0 \Phi_E$ is measured in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$. The displacement current does *not* correspond to a motion of charges. For example, if the uniform field between the plates of a capacitor of area $A = 0.010\,\mathrm{m^2}$ grows at the rate $\dfrac{dE}{dt} = 1.0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, the displacement current is $i_s = \varepsilon_0 A \dfrac{dE}{dt} = 8.85 \cdot 10^{-12} \cdot 0.010 \cdot 1.0 \cdot 10^{12}\,\mathrm{A} \approx 0.089\,\mathrm{A}$.
+It is measured in amperes, like a conduction current, because the product $\varepsilon_0 \Phi_E$ is measured in $\mathrm{C^2/(N\cdot m^2)} \cdot \mathrm{N\cdot m^2/C} = \mathrm{C}$. The displacement current does *not* correspond to a motion of charges. For example, if the uniform field between the plates of a capacitor of area $A = 0{,}010\,\mathrm{m^2}$ grows at the rate $\dfrac{dE}{dt} = 1{,}0 \cdot 10^{12}\,\mathrm{V/(m\cdot s)}$, the displacement current is $i_s = \varepsilon_0 A \dfrac{dE}{dt} = 8{,}85 \cdot 10^{-12} \cdot 0{,}010 \cdot 1{,}0 \cdot 10^{12}\,\mathrm{A} \approx 0{,}089\,\mathrm{A}$.
 :::
 
 ::::teorema{#corrente-spostamento-condensatore titolo="Displacement current in a parallel-plate capacitor"}
@@ -33,7 +33,7 @@ Consider a parallel-plate capacitor in vacuum, with plates of area $A$, connecte
 $$
 i_s = i .
 $$
-The displacement current therefore continues between the plates the conduction current, which stops at the plates. Hence the surfaces $S_1$ and $S_2$, which have the same boundary $\gamma$, give the same enclosed current. A capacitor being charged with $i = 2.0\,\mathrm{A}$ is crossed by a displacement current of $2.0\,\mathrm{A}$, whatever the area of the plates and their separation.
+The displacement current therefore continues the conduction current, which stops at the plates, across the space between them. Hence the surfaces $S_1$ and $S_2$, which have the same boundary $\gamma$, give the same enclosed current. A capacitor being charged with $i = 2{,}0\,\mathrm{A}$ is crossed by a displacement current of $2{,}0\,\mathrm{A}$, whatever the area of the plates and their separation.
 
 :::dimostrazione
 Neglecting edge effects, the field between the plates is uniform, perpendicular to the plates, with magnitude $E = \dfrac{\sigma}{\varepsilon_0} = \dfrac{q}{\varepsilon_0 A}$, while outside it is zero. The flux through the surface, oriented from the positive plate toward the negative one, is therefore
@@ -49,11 +49,11 @@ Differentiating with respect to time gives $i_s = \varepsilon_0 \dfrac{d\Phi_E}{
 :::teorema{#legge-ampere-maxwell titolo="Ampère-Maxwell law"}
 For every oriented closed curve $\gamma$ and every surface $S$ bounded by $\gamma$, oriented by the right-hand rule,
 $$
-\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{enc}} + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt} = \mu_0 \left( i_{\text{enc}} + i_s \right) ,
+\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{conc}} + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt} = \mu_0 \left( i_{\text{conc}} + i_s \right) ,
 $$
-where $i_{\text{enc}}$ is the conduction current through $S$ and $\Phi_E$ is the flux of the electric field through $S$. It is a postulate, introduced by Maxwell to make Ampère's law consistent with the conservation of charge and confirmed by the experimental discovery of electromagnetic waves.
+where $i_{\text{conc}}$ is the conduction current through $S$ and $\Phi_E$ is the flux of the electric field through $S$. It is a postulate, introduced by Maxwell to make Ampère's law consistent with the conservation of charge and confirmed by the experimental discovery of electromagnetic waves.
 
-The law states that the magnetic field is generated both by currents and by electric fields that vary in time. In the steady state the flux $\Phi_E$ is constant and Ampère's law is recovered. For example, if a capacitor is charged with $i = 2.0\,\mathrm{A}$, the circulation of $\vec{B}$ along a curve that encircles the wire is $\mu_0 i \approx 2.5 \cdot 10^{-6}\,\mathrm{T\cdot m}$ even with a surface that passes between the plates.
+The law states that the magnetic field is generated both by currents and by electric fields that vary in time. In the steady state the flux $\Phi_E$ is constant and Ampère's law is recovered. For example, if a capacitor is charged with $i = 2{,}0\,\mathrm{A}$, the circulation of $\vec{B}$ along a curve that encircles the wire is $\mu_0 i \approx 2{,}5 \cdot 10^{-6}\,\mathrm{T\cdot m}$ even with a surface that passes between the plates.
 :::
 
 ::::teorema{#campo-magnetico-nel-condensatore titolo="Magnetic field between the plates of a capacitor"}
@@ -62,7 +62,7 @@ Consider a parallel-plate capacitor in vacuum with circular plates of radius $R$
 - $B = \dfrac{\mu_0\, i\, r}{2\pi R^2}$ for $0 \le r \le R$;
 - $B = \dfrac{\mu_0\, i}{2\pi r}$ for $r \ge R$.
 
-The field grows linearly with $r$ up to the edge of the plates, where it reaches the maximum value $\dfrac{\mu_0 i}{2\pi R}$, and outside it coincides with the field of a straight wire carrying the current $i$. With $R = 5.0\,\mathrm{cm}$ and $i = 2.0\,\mathrm{A}$ the maximum field is $\dfrac{4\pi \cdot 10^{-7} \cdot 2.0}{2\pi \cdot 0.050}\,\mathrm{T} = 8.0\,\mu\mathrm{T}$.
+The field grows linearly with $r$ up to the edge of the plates, where it reaches the maximum value $\dfrac{\mu_0 i}{2\pi R}$, and outside it coincides with the field of a straight wire carrying the current $i$. With $R = 5{,}0\,\mathrm{cm}$ and $i = 2{,}0\,\mathrm{A}$ the maximum field is $\dfrac{4\pi \cdot 10^{-7} \cdot 2{,}0}{2\pi \cdot 0{,}050}\,\mathrm{T} = 8{,}0\,\mu\mathrm{T}$.
 
 ::grafico{assi=0 uguale=1 unicolore=1 poligoni="2,0 1.879,0.684 1.532,1.286 1,1.732 0.347,1.970 -0.347,1.970 -1,1.732 -1.532,1.286 -1.879,0.684 -2,0 -1.879,-0.684 -1.532,-1.286 -1,-1.732 -0.347,-1.970 0.347,-1.970 1,-1.732 1.532,-1.286 1.879,-0.684" curve="cos(t),sin(t),0,6.29;3*cos(t),3*sin(t),0,6.29" vettori="0.45,1.0,-0.45,1.0,B;0.7,3.0,-0.7,3.0,B" segmenti="0,0,1.414,-1.414" etichette="0.75,-0.55,R;-0.12,-0.12,⊙;-1.45,0.15,⊙;1.25,0.15,⊙;-0.12,-1.45,⊙;-0.95,-1.0,⊙" xmin=-3.6 xmax=3.6 ymin=-3.4 ymax=3.6 legenda=0 titolo="Top view: between the plates the field $\vec{E}$ points out of the page and grows; the magnetic field lines are coaxial circles traversed counterclockwise, inside and outside the edge of the plates"}
 
@@ -90,10 +90,10 @@ $$
 \displaystyle\oint_S \vec{E} \cdot \hat{n}\, dA = \frac{Q_{\text{int}}}{\varepsilon_0} \\[14pt]
 \displaystyle\oint_S \vec{B} \cdot \hat{n}\, dA = 0 \\[14pt]
 \displaystyle\oint_\gamma \vec{E} \cdot d\vec{l} = -\frac{d\Phi_B}{dt} \\[14pt]
-\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{enc}} + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt}
+\displaystyle\oint_\gamma \vec{B} \cdot d\vec{l} = \mu_0\, i_{\text{conc}} + \mu_0 \varepsilon_0 \frac{d\Phi_E}{dt}
 \end{cases}
 $$
-where $Q_{\text{int}}$ is the charge contained in $S$, $\Phi_B$ and $\Phi_E$ are the fluxes of the two fields through $\Sigma$, and $i_{\text{enc}}$ is the conduction current through $\Sigma$. They are postulates, which bring together Gauss's law, Gauss's law for magnetism, the Faraday-Neumann-Lenz law and the Ampère-Maxwell law; their consequences are confirmed by experiment as long as quantum effects are negligible.
+where $Q_{\text{int}}$ is the charge contained in $S$, $\Phi_B$ and $\Phi_E$ are the fluxes of the two fields through $\Sigma$, and $i_{\text{conc}}$ is the conduction current through $\Sigma$. They are postulates, which bring together Gauss's law, Gauss's law for magnetism, the Faraday-Neumann-Lenz law and the Ampère-Maxwell law; their consequences are confirmed by experiment as long as quantum effects are negligible.
 
 Together with the **Lorentz force** $\vec{F} = q \left( \vec{E} + \vec{v} \times \vec{B} \right)$, which describes the action of the fields on charges, Maxwell's equations contain all of classical electromagnetism.
 :::
@@ -108,7 +108,7 @@ In statics the time derivatives are zero and the equations for $\vec{E}$ and for
 :::
 
 :::osservazione{#maxwell-nel-vuoto titolo="Maxwell's equations away from charges and currents"}
-In a region with no charges and no currents we have $Q_{\text{int}} = 0$ and $i_{\text{enc}} = 0$, and the equations become
+In a region with no charges and no currents we have $Q_{\text{int}} = 0$ and $i_{\text{conc}} = 0$, and the equations become
 $$
 \begin{cases}
 \displaystyle\oint_S \vec{E} \cdot \hat{n}\, dA = 0 \\[14pt]
@@ -123,7 +123,7 @@ A varying magnetic field generates an electric field, and a varying electric fie
 ## Local form of Maxwell's equations
 
 :::richiamo{titolo="Divergence theorem and Stokes' theorem"}
-Let $\vec{F}$ be a vector field of class $C^1$. For a region $V$ bounded by a closed surface $S$ with outward normal, $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA = \iiint_V \nabla \cdot \vec{F}\, dV$, and for an oriented surface $\Sigma$ with boundary $\gamma$ oriented by the right-hand rule, $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l} = \iint_\Sigma \left( \nabla \times \vec{F} \right) \cdot \hat{n}\, dA$. See the Mathematical Analysis 2 topic on surfaces, fluxes and the theorems of Gauss and Stokes.
+Let $\vec{F}$ be a vector field of class $C^1$. For a region $V$ bounded by a closed surface $S$ with outward normal, we have $\displaystyle\oint_S \vec{F} \cdot \hat{n}\, dA = \iiint_V \nabla \cdot \vec{F}\, dV$, and for an oriented surface $\Sigma$ with boundary $\gamma$ oriented by the right-hand rule, we have $\displaystyle\oint_\gamma \vec{F} \cdot d\vec{l} = \iint_\Sigma \left( \nabla \times \vec{F} \right) \cdot \hat{n}\, dA$. See the Mathematical Analysis 2 topic on surfaces, fluxes and the theorems of Gauss and Stokes.
 :::
 
 ::::teorema{#forma-locale-maxwell titolo="Maxwell's equations in local form"}
@@ -143,13 +143,13 @@ We prove that Gauss's law implies the first equation. Let $V$ be any region with
 $$
 \iiint_V \left( \nabla \cdot \vec{E} - \frac{\rho}{\varepsilon_0} \right) dV = 0 .
 $$
-The integrand is continuous; if it were nonzero at some point, by the sign-preservation property the integral over a small sphere around that point would be nonzero. Since the integral vanishes over *every* region, $\nabla \cdot \vec{E} = \dfrac{\rho}{\varepsilon_0}$ everywhere. The second equation follows in the same way.
+The integrand is continuous; if it were nonzero at some point, by the sign-preservation property the integral over a small sphere around that point would be nonzero. Since the integral vanishes over *every* region, we have $\nabla \cdot \vec{E} = \dfrac{\rho}{\varepsilon_0}$ everywhere. The second equation follows in the same way.
 
 For the third, apply Stokes' theorem to the Faraday-Neumann-Lenz law on a fixed surface $\Sigma$; since $\Sigma$ does not depend on time, the derivative of the flux is the flux of the derivative, and
 $$
 \iint_\Sigma \left( \nabla \times \vec{E} + \frac{\partial \vec{B}}{\partial t} \right) \cdot \hat{n}\, dA = 0
 $$
-for every $\Sigma$; choosing small disks perpendicular to the integrand vector, one concludes that the integrand is zero. The fourth is obtained in the same way, with $i_{\text{enc}} = \displaystyle\iint_\Sigma \vec{J} \cdot \hat{n}\, dA$. The converse implications are obtained by integrating.
+for every $\Sigma$; choosing small disks perpendicular to the integrand vector, one concludes that the integrand is zero. The fourth is obtained in the same way, with $i_{\text{conc}} = \displaystyle\iint_\Sigma \vec{J} \cdot \hat{n}\, dA$. The converse implications are obtained by integrating.
 :::
 ::::
 
@@ -234,9 +234,9 @@ For $g(x + vt)$ the computation is the same, with $v$ in place of $-v$ in the ti
 :::teorema{#velocita-della-luce titolo="Speed of electromagnetic waves"}
 Electromagnetic waves propagate in vacuum with speed
 $$
-c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = \frac{1}{\sqrt{4\pi \cdot 10^{-7} \cdot 8.85 \cdot 10^{-12}}}\,\mathrm{m/s} \approx 3.00 \cdot 10^{8}\,\mathrm{m/s} .
+c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}} = \frac{1}{\sqrt{4\pi \cdot 10^{-7} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{m/s} \approx 3{,}00 \cdot 10^{8}\,\mathrm{m/s} .
 $$
-The result follows from the theorem on traveling waves, and the value coincides with the measured speed of light; from this coincidence Maxwell concluded that light is an electromagnetic wave. The speed depends neither on the frequency nor on the amplitude of the wave. Light from the Sun, which is $1.50 \cdot 10^{11}\,\mathrm{m}$ from the Earth, arrives after $\dfrac{1.50 \cdot 10^{11}}{3.00 \cdot 10^{8}}\,\mathrm{s} = 500\,\mathrm{s}$, that is, about $8.3$ minutes.
+The result follows from the theorem on traveling waves, and the value coincides with the measured speed of light; from this coincidence Maxwell concluded that light is an electromagnetic wave. The speed depends neither on the frequency nor on the amplitude of the wave. Light from the Sun, which is $1{,}50 \cdot 10^{11}\,\mathrm{m}$ from the Earth, arrives after $\dfrac{1{,}50 \cdot 10^{11}}{3{,}00 \cdot 10^{8}}\,\mathrm{s} = 500\,\mathrm{s}$, that is, about $8{,}3$ minutes.
 :::
 
 :::osservazione{#sorgenti-onde titolo="How electromagnetic waves are produced"}
@@ -254,7 +254,7 @@ where $E_0 > 0$ is the amplitude, $k > 0$ the wave number and $\omega > 0$ the a
 $$
 c = \frac{\omega}{k} = \lambda f ,
 $$
-that is, in one period a crest of the wave advances by one wavelength. The field $E_0 \sin(kx + \omega t)$ describes a harmonic wave traveling in the negative direction of the $x$ axis. For example, a radio wave of frequency $f = 100\,\mathrm{MHz}$ has $\lambda = \dfrac{3.00 \cdot 10^{8}}{1.00 \cdot 10^{8}}\,\mathrm{m} = 3.00\,\mathrm{m}$, $\omega = 2\pi f \approx 6.28 \cdot 10^{8}\,\mathrm{rad/s}$ and $k = \dfrac{2\pi}{\lambda} \approx 2.09\,\mathrm{rad/m}$.
+that is, in one period a crest of the wave advances by one wavelength. The field $E_0 \sin(kx + \omega t)$ describes a harmonic wave traveling in the negative direction of the $x$ axis. For example, a radio wave of frequency $f = 100\,\mathrm{MHz}$ has $\lambda = \dfrac{3{,}00 \cdot 10^{8}}{1{,}00 \cdot 10^{8}}\,\mathrm{m} = 3{,}00\,\mathrm{m}$, $\omega = 2\pi f \approx 6{,}28 \cdot 10^{8}\,\mathrm{rad/s}$ and $k = \dfrac{2\pi}{\lambda} \approx 2{,}09\,\mathrm{rad/m}$.
 
 ::grafico{f="sin(pi*x/2)" segmenti="1,1.25,5,1.25;1,0,1,1;5,0,5,1" punti="1,1,pieno;5,1,pieno" etichette="2.85,1.38,λ;6.3,-1.25,E₀ sin(kx)" xmin=-0.5 xmax=9.2 ymin=-1.5 ymax=1.6 nomi="x,E" titolo="Electric field of a harmonic wave at the instant $t = 0$, in units of $E_0$: two consecutive crests are one wavelength $\lambda$ apart"}
 
@@ -265,7 +265,7 @@ In a plane traveling wave in vacuum propagating in the positive direction of the
 $$
 B(x,t) = \frac{E(x,t)}{c} .
 $$
-At every point and every instant the magnitudes therefore satisfy $E = cB$. The two fields oscillate in phase, are perpendicular to each other and to the direction of propagation, and the cross product $\vec{E} \times \vec{B}$ points in the direction of propagation of the wave. For a wave traveling in the negative direction of the $x$ axis, instead, $B = -\dfrac{E}{c}$, and $\vec{E} \times \vec{B}$ points along $-\hat{\imath}$. The relation gives the magnetic field of a wave when the electric field is known; for example, $E_0 = 300\,\mathrm{V/m}$ corresponds to $B_0 = \dfrac{300}{3.00 \cdot 10^{8}}\,\mathrm{T} = 1.00\,\mu\mathrm{T}$.
+At every point and every instant the magnitudes therefore satisfy $E = cB$. The two fields oscillate in phase, are perpendicular to each other and to the direction of propagation, and the cross product $\vec{E} \times \vec{B}$ points in the direction of propagation of the wave. For a wave traveling in the negative direction of the $x$ axis, instead, $B = -\dfrac{E}{c}$, and $\vec{E} \times \vec{B}$ points along $-\hat{\imath}$. The relation gives the magnetic field of a wave when the electric field is known; for example, $E_0 = 300\,\mathrm{V/m}$ corresponds to $B_0 = \dfrac{300}{3{,}00 \cdot 10^{8}}\,\mathrm{T} = 1{,}00\,\mu\mathrm{T}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 10.2,0;0,0 0,2.3;0,0 -1.2,-1.2" curve="t,1.6*sin(t),0,9.42;t-0.75*sin(t),-0.75*sin(t),0,9.42" vettori="7.854,0,7.854,1.6,E;8.9,-1.4,10.3,-1.4,c;7.854,0,7.104,-0.75,B" etichette="10.35,-0.1,x;0.12,2.4,y;-1.55,-1.45,z" xmin=-1.8 xmax=10.8 ymin=-2 ymax=2.6 legenda=0 titolo="Harmonic plane wave traveling along the $x$ axis: the electric field oscillates along $y$, the magnetic field along $z$, in phase, and $\vec{E} \times \vec{B}$ points in the direction of propagation"}
 
@@ -297,10 +297,10 @@ In a plane traveling wave in vacuum the electric and magnetic energy densities a
 $$
 u = u_E + u_B = \varepsilon_0 E^2 = \frac{B^2}{\mu_0} .
 $$
-For a harmonic wave the density $u = \varepsilon_0 E_0^2 \sin^2(kx - \omega t)$ oscillates between $0$ and $\varepsilon_0 E_0^2$, and its time average is $\langle u \rangle = \dfrac{1}{2} \varepsilon_0 E_0^2$, because the average value of $\sin^2$ over one period is $\dfrac{1}{2}$. With $E_0 = 100\,\mathrm{V/m}$ we have $\langle u \rangle = \dfrac{1}{2} \cdot 8.85 \cdot 10^{-12} \cdot 100^2\,\mathrm{J/m^3} \approx 4.4 \cdot 10^{-8}\,\mathrm{J/m^3}$.
+For a harmonic wave the density $u = \varepsilon_0 E_0^2 \sin^2(kx - \omega t)$ oscillates between $0$ and $\varepsilon_0 E_0^2$, and its time average is $\langle u \rangle = \dfrac{1}{2} \varepsilon_0 E_0^2$, because the average value of $\sin^2$ over one period is $\dfrac{1}{2}$. With $E_0 = 100\,\mathrm{V/m}$ we have $\langle u \rangle = \dfrac{1}{2} \cdot 8{,}85 \cdot 10^{-12} \cdot 100^2\,\mathrm{J/m^3} \approx 4{,}4 \cdot 10^{-8}\,\mathrm{J/m^3}$.
 
 :::dimostrazione
-By the relation between the fields $B = \dfrac{E}{c}$, and by the speed of electromagnetic waves $c^2 = \dfrac{1}{\mu_0 \varepsilon_0}$, so
+The relation between the fields gives $B = \dfrac{E}{c}$, and the speed of electromagnetic waves gives $c^2 = \dfrac{1}{\mu_0 \varepsilon_0}$, so
 $$
 u_B = \frac{B^2}{2\mu_0} = \frac{E^2}{2\mu_0 c^2} = \frac{\mu_0 \varepsilon_0 E^2}{2\mu_0} = \frac{1}{2} \varepsilon_0 E^2 = u_E .
 $$
@@ -317,7 +317,7 @@ and it is measured in $\mathrm{W/m^2}$, because $\dfrac{\mathrm{V/m} \cdot \math
 $$
 S = \frac{EB}{\mu_0} = \frac{E^2}{\mu_0 c} .
 $$
-The magnitude of $\vec{S}$ is the power through a surface of unit area perpendicular to the direction of propagation, as stated by the theorem on the energy flux of a plane wave. At a point where $E = 300\,\mathrm{V/m}$ and $B = 1.00\,\mu\mathrm{T}$ we have $S = \dfrac{300 \cdot 1.00 \cdot 10^{-6}}{4\pi \cdot 10^{-7}}\,\mathrm{W/m^2} \approx 239\,\mathrm{W/m^2}$.
+The magnitude of $\vec{S}$ is the power through a surface of unit area perpendicular to the direction of propagation, as stated by the theorem on the energy flux of a plane wave. At a point where $E = 300\,\mathrm{V/m}$ and $B = 1{,}00\,\mu\mathrm{T}$ we have $S = \dfrac{300 \cdot 1{,}00 \cdot 10^{-6}}{4\pi \cdot 10^{-7}}\,\mathrm{W/m^2} \approx 239\,\mathrm{W/m^2}$.
 :::
 
 ::::teorema{#poynting-e-densita titolo="Energy flux of a plane wave"}
@@ -327,10 +327,10 @@ S = u\, c .
 $$
 The energy of the field therefore travels with the wave at the speed $c$, and the magnitude of the Poynting vector is the power per unit area carried by the wave.
 
-::grafico{assi=0 uguale=1 linee="2,0 5,0;2,2 5,2" curve="5+0.35*cos(t),1+sin(t),0,6.29;2+0.35*cos(t),1+sin(t),0,6.29" vettori="5.4,1,7.2,1,S" segmenti="2,-0.45,5,-0.45" etichette="3.15,-0.85,c dt;4.95,0.85,A" xmin=0.8 xmax=7.8 ymin=-1.2 ymax=2.6 legenda=0 titolo="In the time $dt$ the energy contained in the cylinder with base $A$ and height $c\,dt$, that is, $u A c\,dt$, crosses the surface $A$"}
+::grafico{assi=0 uguale=1 linee="2,0 5,0;2,2 5,2" curve="5+0.35*cos(t),1+sin(t),0,6.29;2+0.35*cos(t),1+sin(t),0,6.29" vettori="5.4,1,7.2,1,S" segmenti="2,-0.45,5,-0.45" etichette="3.15,-0.85,c dt;4.95,0.85,A" xmin=0.8 xmax=7.8 ymin=-1.2 ymax=2.6 legenda=0 titolo="In the time $dt$ the surface $A$ is crossed by the energy contained in the cylinder with base $A$ and height $c\,dt$, that is, $u A c\,dt$"}
 
 :::dimostrazione
-The wave advances by the distance $c\, dt$ in the time $dt$, so the energy that crosses the surface is the energy contained in the cylinder with base $A$ and height $c\, dt$ that precedes it. If $dt$ is small enough that the energy density in the cylinder can be considered constant, $dU = u A c\, dt$. By the energy density of a wave $u c = \varepsilon_0 c E^2$, and since $\varepsilon_0 c = \dfrac{\varepsilon_0 \mu_0 c^2}{\mu_0 c} = \dfrac{1}{\mu_0 c}$ we obtain
+The wave advances by the distance $c\, dt$ in the time $dt$, so the energy that crosses the surface is the energy contained in the cylinder with base $A$ and height $c\, dt$ that precedes it. If $dt$ is small enough that the energy density in the cylinder can be considered constant, $dU = u A c\, dt$. The energy density of a wave gives $u c = \varepsilon_0 c E^2$, and since $\varepsilon_0 c = \dfrac{\varepsilon_0 \mu_0 c^2}{\mu_0 c} = \dfrac{1}{\mu_0 c}$ we obtain
 $$
 u\, c = \frac{E^2}{\mu_0 c} = \frac{E B}{\mu_0} = S .
 $$
@@ -342,7 +342,7 @@ The **intensity** $I$ of a wave is the time average of the magnitude of the Poyn
 $$
 I = \langle S \rangle = \frac{E_0^2}{2\mu_0 c} = \frac{1}{2}\, c\, \varepsilon_0 E_0^2 = \frac{E_0 B_0}{2\mu_0} = c \langle u \rangle .
 $$
-The intensity is proportional to the square of the amplitude, so doubling the amplitude of the electric field quadruples the intensity. When the intensity is known, $E_0 = \sqrt{\dfrac{2I}{c\, \varepsilon_0}}$. Solar radiation, outside the Earth's atmosphere, has intensity $I \approx 1.36\,\mathrm{kW/m^2}$; a harmonic wave with the same intensity has $E_0 = \sqrt{\dfrac{2 \cdot 1360}{3.00 \cdot 10^{8} \cdot 8.85 \cdot 10^{-12}}}\,\mathrm{V/m} \approx 1.0 \cdot 10^{3}\,\mathrm{V/m}$ and $B_0 = \dfrac{E_0}{c} \approx 3.4\,\mu\mathrm{T}$.
+The intensity is proportional to the square of the amplitude, so doubling the amplitude of the electric field quadruples the intensity. When the intensity is known, $E_0 = \sqrt{\dfrac{2I}{c\, \varepsilon_0}}$. Solar radiation, outside the Earth's atmosphere, has intensity $I \approx 1{,}36\,\mathrm{kW/m^2}$; a harmonic wave with the same intensity has $E_0 = \sqrt{\dfrac{2 \cdot 1360}{3{,}00 \cdot 10^{8} \cdot 8{,}85 \cdot 10^{-12}}}\,\mathrm{V/m} \approx 1{,}0 \cdot 10^{3}\,\mathrm{V/m}$ and $B_0 = \dfrac{E_0}{c} \approx 3{,}4\,\mu\mathrm{T}$.
 :::
 
 :::teorema{#sorgente-isotropa titolo="Intensity of an isotropic source"}
@@ -350,7 +350,7 @@ A point source that emits the average power $P$ uniformly in all directions, cal
 $$
 I(r) = \frac{P}{4\pi r^2} .
 $$
-The formula follows from the conservation of energy. The average power $P$ crosses every sphere centered at the source and is distributed uniformly over the area $4\pi r^2$. The intensity decreases as the inverse square of the distance and the amplitude of the field, proportional to $\sqrt{I}$, as the inverse of the distance. A lamp that emits the light power $P = 10\,\mathrm{W}$ produces at $r = 2.0\,\mathrm{m}$ the intensity $I = \dfrac{10}{4\pi \cdot 2.0^2}\,\mathrm{W/m^2} \approx 0.20\,\mathrm{W/m^2}$.
+The formula follows from the conservation of energy. The average power $P$ crosses every sphere centered at the source and is distributed uniformly over the area $4\pi r^2$. The intensity decreases as the inverse square of the distance and the amplitude of the field, proportional to $\sqrt{I}$, as the inverse of the distance. A lamp that emits the light power $P = 10\,\mathrm{W}$ produces at $r = 2{,}0\,\mathrm{m}$ the intensity $I = \dfrac{10}{4\pi \cdot 2{,}0^2}\,\mathrm{W/m^2} \approx 0{,}20\,\mathrm{W/m^2}$.
 :::
 
 ## Momentum and radiation pressure
@@ -360,7 +360,7 @@ An electromagnetic wave that carries the energy $U$ in vacuum also carries a mom
 $$
 p = \frac{U}{c} ,
 $$
-directed in the direction of propagation. This follows from Maxwell's equations and the Lorentz force, here without proof, and is confirmed by measurements of the force exerted by light. The factor $\dfrac{1}{c}$ is very small; for example a laser pulse of $1.0\,\mathrm{J}$ carries $p = \dfrac{1.0}{3.00 \cdot 10^{8}}\,\mathrm{kg \cdot m/s} \approx 3.3 \cdot 10^{-9}\,\mathrm{kg \cdot m/s}$.
+directed in the direction of propagation. This follows from Maxwell's equations and the Lorentz force, here without proof, and is confirmed by measurements of the force exerted by light. The factor $\dfrac{1}{c}$ is very small; for example a laser pulse of $1{,}0\,\mathrm{J}$ carries $p = \dfrac{1{,}0}{3{,}00 \cdot 10^{8}}\,\mathrm{kg \cdot m/s} \approx 3{,}3 \cdot 10^{-9}\,\mathrm{kg \cdot m/s}$.
 :::
 
 :::richiamo{titolo="Impulse-momentum theorem"}
@@ -373,12 +373,12 @@ Consider a plane wave of intensity $I$ incident perpendicularly on a flat surfac
 - $p_{\text{rad}} = \dfrac{I}{c}$ if the surface absorbs all the radiation;
 - $p_{\text{rad}} = \dfrac{2I}{c}$ if the surface reflects all the radiation.
 
-With $I = 1.36\,\mathrm{kW/m^2}$ and an absorbing surface we have $p_{\text{rad}} = \dfrac{1360}{3.00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4.5 \cdot 10^{-6}\,\mathrm{Pa}$, of the order of $10^{-11}$ times atmospheric pressure. Hence radiation pressure matters only for very light bodies with a large surface, such as solar sails, and for very small dust grains.
+With $I = 1{,}36\,\mathrm{kW/m^2}$ and an absorbing surface we have $p_{\text{rad}} = \dfrac{1360}{3{,}00 \cdot 10^{8}}\,\mathrm{Pa} \approx 4{,}5 \cdot 10^{-6}\,\mathrm{Pa}$, of the order of $10^{-11}$ times atmospheric pressure. Hence radiation pressure matters only for very light bodies with a large surface, such as solar sails, and for very small dust grains.
 
 :::dimostrazione
 In the time $\Delta t$ the energy $U = I A\, \Delta t$ reaches the surface, and by the theorem on the momentum of an electromagnetic wave it carries the momentum $\dfrac{U}{c} = \dfrac{I A\, \Delta t}{c}$, perpendicular to the surface. If the surface absorbs the radiation, this momentum is transferred to the surface. If it reflects it, the reflected wave has momentum opposite to that of the incident wave; so the momentum of the radiation changes by $\dfrac{2U}{c}$ in magnitude, and the surface receives an equal and opposite momentum. By the **impulse-momentum theorem** the average force is the momentum received divided by $\Delta t$, hence
 $$
-F = \frac{I A}{c} \quad \text{(absorption)} , \qquad F = \frac{2 I A}{c} \quad \text{(reflection)} ,
+F = \frac{I A}{c} \quad \text{(assorbimento)} , \qquad F = \frac{2 I A}{c} \quad \text{(riflessione)} ,
 $$
 and dividing by $A$ gives the two pressures.
 :::
@@ -394,10 +394,10 @@ Electromagnetic waves all have the same nature and in vacuum the same speed $c$,
 - infrared, with $\lambda$ from about $700\,\mathrm{nm}$ to $1\,\mathrm{mm}$, emitted abundantly by hot bodies;
 - visible light, with $\lambda$ from about $400\,\mathrm{nm}$ (violet) to $700\,\mathrm{nm}$ (red);
 - ultraviolet, with $\lambda$ from about $10\,\mathrm{nm}$ to $400\,\mathrm{nm}$;
-- X-rays, with $\lambda$ from about $0.01\,\mathrm{nm}$ to $10\,\mathrm{nm}$;
-- gamma rays, with $\lambda$ less than about $0.01\,\mathrm{nm}$, emitted in nuclear processes.
+- X-rays, with $\lambda$ from about $0{,}01\,\mathrm{nm}$ to $10\,\mathrm{nm}$;
+- gamma rays, with $\lambda$ less than about $0{,}01\,\mathrm{nm}$, emitted in nuclear processes.
 
-Yellow light with $\lambda = 580\,\mathrm{nm}$ has frequency $f = \dfrac{3.00 \cdot 10^{8}}{5.80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5.17 \cdot 10^{14}\,\mathrm{Hz}$.
+Yellow light with $\lambda = 580\,\mathrm{nm}$ has frequency $f = \dfrac{3{,}00 \cdot 10^{8}}{5{,}80 \cdot 10^{-7}}\,\mathrm{Hz} \approx 5{,}17 \cdot 10^{14}\,\mathrm{Hz}$.
 
 ::grafico{assi=0 poligoni="-13,0 3,0 3,0.8 -13,0.8;-6.4,0 -6.15,0 -6.15,0.8 -6.4,0.8" segmenti="-11,0,-11,0.8;-8,0,-8,0.8;-6.4,0,-6.4,0.8;-6.15,0,-6.15,0.8;-3,0,-3,0.8;0,0,0,0.8" linee="-12,0 -12,-0.18;-9,0 -9,-0.18;-6,0 -6,-0.18;-3,0 -3,-0.18;0,0 0,-0.18;3,0 3,-0.18" vettori="-6.27,2.0,-6.27,0.95" etichette="-12.3,0.3,γ;-9.75,0.3,X;-7.55,0.3,UV;-4.9,0.3,IR;-2.85,0.3,microwaves;0.9,0.3,radio;-7.0,2.25,visible;-12.6,-0.6,1 pm;-9.6,-0.6,1 nm;-6.6,-0.6,1 μm;-3.7,-0.6,1 mm;-0.45,-0.6,1 m;2.4,-0.6,1 km" xmin=-13.5 xmax=3.5 ymin=-1.1 ymax=2.7 uguale=1 titolo="Electromagnetic spectrum on a logarithmic scale of the wavelength $\lambda$, which decreases to the left while the frequency $f = \dfrac{c}{\lambda}$ increases; visible light occupies the narrow band between $400\,\mathrm{nm}$ and $700\,\mathrm{nm}$"}
 

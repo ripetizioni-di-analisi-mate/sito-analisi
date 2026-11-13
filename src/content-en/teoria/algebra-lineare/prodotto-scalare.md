@@ -1,30 +1,30 @@
 ---
-titolo: Scalar product, orthogonality and the spectral theorem
-sommario: The standard scalar product, norm and angles, orthonormal bases, orthogonal projections with the Gram-Schmidt process, orthogonal matrices and the orthogonal diagonalization of symmetric matrices.
+titolo: Prodotto scalare, ortogonalità e teorema spettrale
+sommario: Il prodotto scalare standard, la norma e gli angoli, le basi ortonormali, le proiezioni ortogonali con il procedimento di Gram-Schmidt, le matrici ortogonali e la diagonalizzazione ortogonale delle matrici simmetriche.
 ---
 
-## Standard scalar product and norm
+## Standard inner product and norm
 
-:::definizione{#prodotto-scalare-standard titolo="Standard scalar product"}
-Given $u = (u_1, \dots, u_n)$ and $v = (v_1, \dots, v_n)$ in $\mathbb{R}^n$, the **standard scalar product** of $u$ and $v$ is the real number
+:::definizione{#prodotto-scalare-standard titolo="Standard inner product"}
+Given $u = (u_1, \dots, u_n)$ and $v = (v_1, \dots, v_n)$ in $\mathbb{R}^n$, the **standard inner product** of $u$ and $v$ is the real number
 $$
 \langle u, v \rangle = u_1 v_1 + u_2 v_2 + \dots + u_n v_n ,
 $$
-also denoted by $u \cdot v$. Writing the vectors as columns one gets $\langle u, v \rangle = u^T v$, that is, the row-by-column product of the row $u^T$ by the column $v$; this is the form used in computations with matrices. For $u = (1, 2, -1)$ and $v = (3, 0, 1)$ one obtains $\langle u, v \rangle = 3 + 0 - 1 = 2$. In $\mathbb{R}^2$ and in $\mathbb{R}^3$ the definition coincides with the scalar product of geometric vectors, for which we refer to the topic on vectors in the plane and in space.
+also denoted by $u \cdot v$. Writing the vectors as columns one gets $\langle u, v \rangle = u^T v$, that is, the row-by-column product of the row $u^T$ by the column $v$; this is the form used in computations with matrices. For $u = (1, 2, -1)$ and $v = (3, 0, 1)$ one obtains $\langle u, v \rangle = 3 + 0 - 1 = 2$. In $\mathbb{R}^2$ and in $\mathbb{R}^3$ the definition coincides with the inner product of geometric vectors, for which we refer to the topic on vectors in the plane and in space.
 :::
 
-:::teorema{#proprieta-prodotto-scalare titolo="Properties of the scalar product"}
+:::teorema{#proprieta-prodotto-scalare titolo="Properties of the inner product"}
 For every $u, v, w \in \mathbb{R}^n$ and every $\alpha, \beta \in \mathbb{R}$ the following hold:
 
 - **symmetry**: $\langle u, v \rangle = \langle v, u \rangle$;
 - **bilinearity**: $\langle \alpha u + \beta w, v \rangle = \alpha \langle u, v \rangle + \beta \langle w, v \rangle$, and likewise in the second argument;
 - **positive definiteness**: $\langle v, v \rangle = v_1^2 + \dots + v_n^2 \geq 0$, with equality *only if* $v = 0$.
 
-The three properties follow directly from the definition, because the scalar product is a sum of products of components. Bilinearity makes it possible to expand products as in algebra: for example $\langle u + v, u + v \rangle = \langle u, u \rangle + 2\langle u, v \rangle + \langle v, v \rangle$.
+The three properties follow directly from the definition, because the inner product is a sum of products of components. Bilinearity makes it possible to expand products as in algebra: for example $\langle u + v, u + v \rangle = \langle u, u \rangle + 2\langle u, v \rangle + \langle v, v \rangle$.
 :::
 
-:::osservazione{#prodotto-scalare-generale titolo="Scalar products on a vector space"}
-On any real vector space $V$, a **scalar product** is any function $\langle \cdot, \cdot \rangle : V \times V \to \mathbb{R}$ that is symmetric, bilinear and positive definite. An example on $M_n(\mathbb{R})$ is $\langle A, B \rangle = \operatorname{tr}(A^T B)$, which is the sum of the products of the entries in the same position. The definitions and theorems of this topic use only the three properties, therefore they hold for every scalar product; in exam exercises the scalar product is almost always the standard one on $\mathbb{R}^n$.
+:::osservazione{#prodotto-scalare-generale titolo="Inner products on a vector space"}
+On any real vector space $V$, an **inner product** is any function $\langle \cdot, \cdot \rangle : V \times V \to \mathbb{R}$ that is symmetric, bilinear and positive definite. An example on $M_n(\mathbb{R})$ is $\langle A, B \rangle = \operatorname{tr}(A^T B)$, which is the sum of the products of the entries in the same position. The definitions and theorems of this topic use only the three properties, therefore they hold for every inner product; in exam exercises the inner product is almost always the standard one on $\mathbb{R}^n$.
 :::
 
 :::definizione{#norma titolo="Norm and distance"}
@@ -32,7 +32,7 @@ The **norm** of $v \in \mathbb{R}^n$ is the number
 $$
 \|v\| = \sqrt{\langle v, v \rangle} = \sqrt{v_1^2 + \dots + v_n^2} ,
 $$
-and the **distance** between $u$ and $v$ is $d(u, v) = \|u - v\|$. By positive definiteness the norm is zero *only* for the zero vector; from bilinearity it follows that $\|\alpha v\| = |\alpha|\, \|v\|$. A vector of norm $1$ is called a **unit vector**: if $v \neq 0$, the vector $\dfrac{v}{\|v\|}$ is a unit vector with the same direction and the same orientation as $v$, and passing from $v$ to its unit vector is called *normalization*. For $v = (1, 2, -1)$ one has $\|v\| = \sqrt{6}$, therefore the unit vector is $\dfrac{1}{\sqrt{6}}\,(1, 2, -1)$.
+and the **distance** between $u$ and $v$ is $d(u, v) = \|u - v\|$. By positive definiteness the norm is zero *only* for the zero vector; from bilinearity it follows that $\|\alpha v\| = |\alpha|\, \|v\|$. A vector of norm $1$ is called a **unit vector**: if $v \neq 0$, the vector $\dfrac{v}{\|v\|}$ is a unit vector parallel to and pointing in the same direction as $v$, and passing from $v$ to its unit vector is called *normalization*. For $v = (1, 2, -1)$ one has $\|v\| = \sqrt{6}$, therefore the unit vector is $\dfrac{1}{\sqrt{6}}\,(1, 2, -1)$.
 :::
 
 ## Cauchy-Schwarz inequality and angle between vectors
@@ -49,7 +49,7 @@ If $v = 0$ both sides are zero and the vectors are dependent. Let $v \neq 0$. Fo
 $$
 0 \leq \|u - t v\|^2 = \|v\|^2\, t^2 - 2 \langle u, v \rangle\, t + \|u\|^2 .
 $$
-The right-hand side is a polynomial of degree two in $t$ with positive leading coefficient that takes no negative values, therefore its discriminant is less than or equal to zero:
+The right-hand side is a quadratic polynomial in $t$ with positive leading coefficient that takes no negative values, therefore its discriminant is less than or equal to zero:
 $$
 4 \langle u, v \rangle^2 - 4 \|u\|^2 \|v\|^2 \leq 0 ,
 $$
@@ -74,7 +74,7 @@ Let $u, v \in \mathbb{R}^n$ be nonzero. The **angle** between $u$ and $v$ is the
 $$
 \cos \theta = \frac{\langle u, v \rangle}{\|u\|\, \|v\|} .
 $$
-The definition makes sense for every $n$ thanks to the Cauchy-Schwarz inequality, and in $\mathbb{R}^2$ and $\mathbb{R}^3$ it gives back the geometric angle. The sign of the scalar product gives the type of angle: $\theta$ is acute if $\langle u, v \rangle > 0$, right if $\langle u, v \rangle = 0$, obtuse if $\langle u, v \rangle < 0$. For $u = (3, 1)$ and $v = (1, 2)$ one gets $\langle u, v \rangle = 5$, $\|u\| = \sqrt{10}$, $\|v\| = \sqrt{5}$, therefore $\cos\theta = \dfrac{5}{\sqrt{50}} = \dfrac{1}{\sqrt{2}}$ and $\theta = \dfrac{\pi}{4}$.
+The definition makes sense for every $n$ thanks to the Cauchy-Schwarz inequality, and in $\mathbb{R}^2$ and $\mathbb{R}^3$ it gives the geometric angle. The sign of the inner product gives the type of angle: $\theta$ is acute if $\langle u, v \rangle > 0$, right if $\langle u, v \rangle = 0$, obtuse if $\langle u, v \rangle < 0$. For $u = (3, 1)$ and $v = (1, 2)$ one gets $\langle u, v \rangle = 5$, $\|u\| = \sqrt{10}$, $\|v\| = \sqrt{5}$, therefore $\cos\theta = \dfrac{5}{\sqrt{50}} = \dfrac{1}{\sqrt{2}}$ and $\theta = \dfrac{\pi}{4}$.
 
 ::grafico{vettori="0,0,3,1;0,0,1,2" curve="0.9*cos(t),0.9*sin(t),0.3218,1.1071" etichette="1.05,0.75,θ;1.6,0.25,u;0.2,1.1,v" xmin=-0.6 xmax=3.6 ymin=-0.6 ymax=2.6 uguale=1 titolo="The vectors $u = (3, 1)$ and $v = (1, 2)$ form the angle $\theta = \dfrac{\pi}{4}$, since $\cos\theta = \dfrac{1}{\sqrt{2}}$"}
 
@@ -87,22 +87,22 @@ Two vectors $u, v \in \mathbb{R}^n$ are **orthogonal**, written $u \perp v$, if 
 $$
 \langle v_i, v_j \rangle =
 \begin{cases}
-1 & \text{if } i = j \\[4pt]
-0 & \text{if } i \neq j
+1 & \text{se } i = j \\[4pt]
+0 & \text{se } i \neq j
 \end{cases}
 $$
 The zero vector is orthogonal to every vector. In $\mathbb{R}^4$ the vectors $(1, 1, 2, -1)$ and $(2, 1, -1, 1)$ are orthogonal, because $2 + 1 - 2 - 1 = 0$.
 :::
 
 :::teorema{#teorema-di-pitagora titolo="Pythagorean theorem"}
-If $u, v \in \mathbb{R}^n$ are orthogonal, then $\|u + v\|^2 = \|u\|^2 + \|v\|^2$. This follows from the expansion $\|u + v\|^2 = \|u\|^2 + 2\langle u, v \rangle + \|v\|^2$, in which the middle term is zero by hypothesis. By induction the formula extends to any number of pairwise orthogonal vectors. The theorem will be used to prove that the orthogonal projection realizes the minimum distance from a subspace.
+If $u, v \in \mathbb{R}^n$ are orthogonal, then $\|u + v\|^2 = \|u\|^2 + \|v\|^2$. This follows from the expansion $\|u + v\|^2 = \|u\|^2 + 2\langle u, v \rangle + \|v\|^2$, in which the middle term is zero by hypothesis. By induction the formula extends to any number of pairwise orthogonal vectors. The theorem will be used to prove that the orthogonal projection attains the minimum distance from a subspace.
 :::
 
 ::::teorema{#ortogonali-indipendenti titolo="Independence of orthogonal vectors"}
 If $v_1, \dots, v_k \in \mathbb{R}^n$ are nonzero and pairwise orthogonal, then they are **linearly independent**. Consequently, an orthogonal set of $n$ nonzero vectors of $\mathbb{R}^n$ is a basis, with no need to compute a rank or a determinant.
 
 :::dimostrazione
-Let $\alpha_1 v_1 + \dots + \alpha_k v_k = 0$. Fix an index $j$ and take the scalar product with $v_j$; by bilinearity and since $\langle v_i, v_j \rangle = 0$ for $i \neq j$, one obtains
+Let $\alpha_1 v_1 + \dots + \alpha_k v_k = 0$. Fix an index $j$ and take the inner product with $v_j$; by bilinearity and since $\langle v_i, v_j \rangle = 0$ for $i \neq j$, one obtains
 $$
 0 = \langle \alpha_1 v_1 + \dots + \alpha_k v_k, v_j \rangle = \alpha_j \langle v_j, v_j \rangle = \alpha_j \|v_j\|^2 .
 $$
@@ -111,7 +111,7 @@ Since $v_j \neq 0$, one has $\|v_j\|^2 > 0$, therefore $\alpha_j = 0$. The index
 ::::
 
 :::definizione{#base-ortonormale titolo="Orthonormal basis"}
-A basis of a subspace $W \subseteq \mathbb{R}^n$ is called **orthogonal** if its vectors are pairwise orthogonal, **orthonormal** if in addition they are unit vectors. The standard basis $e_1, \dots, e_n$ is orthonormal. From an orthogonal basis one obtains an orthonormal basis by dividing each vector by its norm: the vectors $(1, 1)$ and $(1, -1)$ are orthogonal, therefore $\dfrac{1}{\sqrt{2}}\,(1, 1)$ and $\dfrac{1}{\sqrt{2}}\,(1, -1)$ form an orthonormal basis of $\mathbb{R}^2$. Orthonormal bases are those in which coordinates are computed with a scalar product, as stated by the following theorem.
+A basis of a subspace $W \subseteq \mathbb{R}^n$ is called **orthogonal** if its vectors are pairwise orthogonal, **orthonormal** if in addition they are unit vectors. The standard basis $e_1, \dots, e_n$ is orthonormal. From an orthogonal basis one obtains an orthonormal basis by dividing each vector by its norm: the vectors $(1, 1)$ and $(1, -1)$ are orthogonal, therefore $\dfrac{1}{\sqrt{2}}\,(1, 1)$ and $\dfrac{1}{\sqrt{2}}\,(1, -1)$ form an orthonormal basis of $\mathbb{R}^2$. Orthonormal bases are those in which coordinates are computed with an inner product, as stated by the following theorem.
 :::
 
 ::::teorema{#coordinate-base-ortonormale titolo="Coordinates with respect to an orthonormal basis"}
@@ -119,10 +119,10 @@ Let $\{ e_1, \dots, e_k \}$ be an orthonormal basis of the subspace $W$. Then fo
 $$
 w = \langle w, e_1 \rangle\, e_1 + \dots + \langle w, e_k \rangle\, e_k ,
 $$
-that is, the $i$-th coordinate of $w$ is the scalar product $\langle w, e_i \rangle$. If the basis is only orthogonal, with vectors $w_1, \dots, w_k$, the $i$-th coordinate is $\dfrac{\langle w, w_i \rangle}{\langle w_i, w_i \rangle}$. In both cases solving a linear system is avoided.
+that is, the $i$-th coordinate of $w$ is the inner product $\langle w, e_i \rangle$. If the basis is only orthogonal, with vectors $w_1, \dots, w_k$, the $i$-th coordinate is $\dfrac{\langle w, w_i \rangle}{\langle w_i, w_i \rangle}$. In both cases solving a linear system is avoided.
 
 :::dimostrazione
-Since $\{ e_1, \dots, e_k \}$ is a basis of $W$, there exist $\alpha_1, \dots, \alpha_k$ with $w = \alpha_1 e_1 + \dots + \alpha_k e_k$. Taking the scalar product with $e_j$ and using $\langle e_i, e_j \rangle = 0$ for $i \neq j$ and $\langle e_j, e_j \rangle = 1$, one obtains $\langle w, e_j \rangle = \alpha_j$. For an orthogonal basis the same computation gives $\langle w, w_j \rangle = \alpha_j \langle w_j, w_j \rangle$, from which the second formula follows.
+Since $\{ e_1, \dots, e_k \}$ is a basis of $W$, there exist $\alpha_1, \dots, \alpha_k$ with $w = \alpha_1 e_1 + \dots + \alpha_k e_k$. Taking the inner product with $e_j$ and using $\langle e_i, e_j \rangle = 0$ for $i \neq j$ and $\langle e_j, e_j \rangle = 1$, one obtains $\langle w, e_j \rangle = \alpha_j$. For an orthogonal basis the same computation gives $\langle w, w_j \rangle = \alpha_j \langle w_j, w_j \rangle$, from which the second formula follows.
 :::
 ::::
 
@@ -182,11 +182,11 @@ with equality if and only if $\|P_W(v) - w\| = 0$, that is, $w = P_W(v)$.
 ::::
 
 :::esempio{titolo="Projection onto a plane in space"}
-Let $W = \langle (1, 0, 1), (1, 1, -1) \rangle$ and let $v = (2, 3, 2)$. The two generators are orthogonal, since $1 + 0 - 1 = 0$, therefore the formula applies directly:
+Let $W = \langle (1, 0, 1), (1, 1, -1) \rangle$ and let $v = (2, 3, 2)$. The two spanning vectors are orthogonal, since $1 + 0 - 1 = 0$, therefore the formula applies directly:
 $$
 P_W(v) = \frac{4}{2}\,(1, 0, 1) + \frac{3}{3}\,(1, 1, -1) = (3, 1, 1) .
 $$
-The difference $v - P_W(v) = (-1, 2, 1)$ is orthogonal to both generators, as the theorem predicts, and the distance of $v$ from $W$ is $\|(-1, 2, 1)\| = \sqrt{6}$.
+The difference $v - P_W(v) = (-1, 2, 1)$ is orthogonal to both spanning vectors, as the theorem predicts, and the distance of $v$ from $W$ is $\|(-1, 2, 1)\| = \sqrt{6}$.
 :::
 
 ## The Gram-Schmidt process
@@ -200,7 +200,7 @@ u_2 &= v_2 - \frac{\langle v_2, u_1 \rangle}{\langle u_1, u_1 \rangle}\, u_1 \\[
 u_3 &= v_3 - \frac{\langle v_3, u_1 \rangle}{\langle u_1, u_1 \rangle}\, u_1 - \frac{\langle v_3, u_2 \rangle}{\langle u_2, u_2 \rangle}\, u_2
 \end{aligned}
 $$
-and so on, subtracting from each $v_j$ its projections onto the $u_i$ already built, are nonzero, pairwise orthogonal, and for every $j$ one has $\langle u_1, \dots, u_j \rangle = \langle v_1, \dots, v_j \rangle$. Dividing each $u_j$ by its norm one obtains an **orthonormal basis** of $\langle v_1, \dots, v_k \rangle$. The process is used to build orthonormal bases of a given subspace, to compute orthogonal projections and, in orthogonal diagonalization, to make a basis of an eigenspace orthonormal.
+and so on, subtracting from each $v_j$ its projections onto the $u_i$ already constructed, are nonzero, pairwise orthogonal, and for every $j$ one has $\langle u_1, \dots, u_j \rangle = \langle v_1, \dots, v_j \rangle$. Dividing each $u_j$ by its norm one obtains an **orthonormal basis** of $\langle v_1, \dots, v_k \rangle$. The process is used to build orthonormal bases of a given subspace, to compute orthogonal projections and, in orthogonal diagonalization, to make a basis of an eigenspace orthonormal.
 
 :::dimostrazione
 We proceed by induction on $j$. For $j = 1$ one has $u_1 = v_1 \neq 0$. Assume that $u_1, \dots, u_{j-1}$ are nonzero, pairwise orthogonal, and span $W_{j-1} = \langle v_1, \dots, v_{j-1} \rangle$. The sum subtracted from $v_j$ is the orthogonal projection $P_{W_{j-1}}(v_j)$, therefore $u_j = v_j - P_{W_{j-1}}(v_j)$ is orthogonal to $W_{j-1}$ by the **theorem on orthogonal projection onto a subspace**, and in particular to $u_1, \dots, u_{j-1}$. The vector $u_j$ is nonzero, because otherwise $v_j = P_{W_{j-1}}(v_j)$ would belong to $W_{j-1}$, contradicting the independence of $v_1, \dots, v_j$. Finally, $u_j$ is a combination of $v_j$ and of vectors of $W_{j-1}$, and conversely $v_j = u_j + P_{W_{j-1}}(v_j)$, therefore the two sets $\{ u_1, \dots, u_j \}$ and $\{ v_1, \dots, v_j \}$ span the same subspace.
@@ -227,9 +227,9 @@ The projections do not change if a vector $u_i$ is replaced by a nonzero multipl
 :::definizione{#complemento-ortogonale titolo="Orthogonal complement"}
 Let $W \subseteq \mathbb{R}^n$ be a subspace. The **orthogonal complement** of $W$ is the set
 $$
-W^\perp = \{ v \in \mathbb{R}^n : \langle v, w \rangle = 0 \ \text{ for every } w \in W \} .
+W^\perp = \{ v \in \mathbb{R}^n : \langle v, w \rangle = 0 \ \text{ per ogni } w \in W \} .
 $$
-It is a subspace of $\mathbb{R}^n$, by the bilinearity of the scalar product. If $W = \langle w_1, \dots, w_k \rangle$, a vector is orthogonal to all of $W$ if and only if it is orthogonal to the generators, therefore $W^\perp$ is the solution set of the homogeneous system $\langle v, w_1 \rangle = 0, \dots, \langle v, w_k \rangle = 0$, whose coefficient matrix is the matrix with the generators as rows. For $W = \langle (1, 1, 0) \rangle$ in $\mathbb{R}^3$ one has $W^\perp = \{ x + y = 0 \} = \langle (1, -1, 0), (0, 0, 1) \rangle$.
+It is a subspace of $\mathbb{R}^n$, by the bilinearity of the inner product. If $W = \langle w_1, \dots, w_k \rangle$, a vector is orthogonal to all of $W$ if and only if it is orthogonal to the spanning vectors, therefore $W^\perp$ is the solution set of the homogeneous system $\langle v, w_1 \rangle = 0, \dots, \langle v, w_k \rangle = 0$, whose coefficient matrix is the matrix with the spanning vectors as rows. For $W = \langle (1, 1, 0) \rangle$ in $\mathbb{R}^3$ one has $W^\perp = \{ x + y = 0 \} = \langle (1, -1, 0), (0, 0, 1) \rangle$.
 :::
 
 ::::teorema{#dimensione-complemento titolo="Dimension of the orthogonal complement"}
@@ -253,7 +253,7 @@ If $A \in M_{k,n}(\mathbb{R})$, the solution set of the system $Ax = 0$ is a sub
 :::osservazione{#complemento-forma-cartesiana titolo="Complement of a subspace in Cartesian form"}
 If $W$ is given in Cartesian form, that is, as the solution set of $Ax = 0$, each equation says that $x$ is orthogonal to a row of $A$. So $W$ is the orthogonal complement of the subspace spanned by the rows of $A$ and, by the property $(W^\perp)^\perp = W$,
 $$
-W^\perp = \langle \text{rows of } A \rangle ,
+W^\perp = \langle \text{righe di } A \rangle ,
 $$
 of dimension $\operatorname{rk} A$. The two conversions from parametric to Cartesian form and vice versa thus become a computation of complements: the plane $W = \{ x + y - z = 0 \}$ of $\mathbb{R}^3$ has complement $W^\perp = \langle (1, 1, -1) \rangle$, and the vector $(1, 1, -1)$ is the normal vector to the plane.
 
@@ -268,7 +268,7 @@ A matrix $Q \in M_n(\mathbb{R})$ is called **orthogonal** if
 $$
 Q^T Q = I_n ,
 $$
-that is, if $Q$ is invertible with $Q^{-1} = Q^T$. The entry in position $(i, j)$ of $Q^T Q$ is the scalar product between column $i$ and column $j$ of $Q$, therefore the condition is equivalent to saying that the **columns** of $Q$ form an orthonormal basis of $\mathbb{R}^n$; since also $Q Q^T = I_n$, the same holds for the rows. Checking orthogonality therefore requires only scalar products between columns, and the inverse is obtained by transposing.
+that is, if $Q$ is invertible with $Q^{-1} = Q^T$. The entry in position $(i, j)$ of $Q^T Q$ is the inner product between column $i$ and column $j$ of $Q$, therefore the condition is equivalent to saying that the **columns** of $Q$ form an orthonormal basis of $\mathbb{R}^n$; since also $Q Q^T = I_n$, the same holds for the rows. Checking orthogonality therefore requires only inner products between columns, and the inverse is obtained by transposing.
 :::
 
 ::::teorema{#proprieta-matrici-ortogonali titolo="Properties of orthogonal matrices"}
@@ -282,11 +282,11 @@ Let $Q \in M_n(\mathbb{R})$ be orthogonal. Then:
 Orthogonal matrices are the change-of-basis matrices between orthonormal bases and describe the rigid transformations that fix the origin: rotations, if $\det Q = 1$, and compositions of rotations with a reflection, if $\det Q = -1$.
 
 :::dimostrazione
-For the first property, $\langle Qu, Qv \rangle = (Qu)^T (Qv) = u^T Q^T Q\, v = u^T v = \langle u, v \rangle$. For the second, from **Binet's theorem** and from $\det Q^T = \det Q$ it follows that $(\det Q)^2 = \det(Q^T Q) = \det I_n = 1$. For the third, if $Qv = \lambda v$ with $v \neq 0$, the first property gives $\|v\| = \|Qv\| = |\lambda|\, \|v\|$, therefore $|\lambda| = 1$. For the fourth, if $Q$ and $R$ are orthogonal, then $(QR)^T (QR) = R^T Q^T Q R = R^T R = I_n$, and $(Q^{-1})^T Q^{-1} = Q Q^T = I_n$.
+For the first property, $\langle Qu, Qv \rangle = (Qu)^T (Qv) = u^T Q^T Q\, v = u^T v = \langle u, v \rangle$. For the second, by **multiplicativity of the determinant** and $\det Q^T = \det Q$ it follows that $(\det Q)^2 = \det(Q^T Q) = \det I_n = 1$. For the third, if $Qv = \lambda v$ with $v \neq 0$, the first property gives $\|v\| = \|Qv\| = |\lambda|\, \|v\|$, therefore $|\lambda| = 1$. For the fourth, if $Q$ and $R$ are orthogonal, then $(QR)^T (QR) = R^T Q^T Q R = R^T R = I_n$, and $(Q^{-1})^T Q^{-1} = Q Q^T = I_n$.
 :::
 ::::
 
-:::richiamo{titolo="Binet's theorem"}
+:::richiamo{titolo="Multiplicativity of the determinant"}
 If $A, B \in M_n(\mathbb{R})$, then $\det(AB) = \det A \cdot \det B$.
 :::
 
@@ -339,10 +339,10 @@ therefore $(\lambda - \mu) \langle u, v \rangle = 0$ and, since $\lambda \neq \m
 Let $A \in M_n(\mathbb{R})$. The following conditions are equivalent:
 
 - $A$ is symmetric;
-- there exists an orthonormal basis of $\mathbb{R}^n$ made of eigenvectors of $A$;
+- there exists an orthonormal basis of $\mathbb{R}^n$ consisting of eigenvectors of $A$;
 - there exists an orthogonal matrix $P$ such that $P^T A P = D$ is diagonal.
 
-In particular **every real symmetric matrix is diagonalizable**, and the diagonalizing matrix can be chosen orthogonal, so that $P^{-1} = P^T$. For a symmetric matrix there is therefore no need to compare algebraic and geometric multiplicities: diagonalizability is guaranteed from the start, and the work consists in building $P$.
+In particular **every real symmetric matrix is diagonalizable**, and the diagonalizing matrix can be chosen orthogonal, so that $P^{-1} = P^T$. For a symmetric matrix there is therefore no need to compare algebraic and geometric multiplicities: diagonalizability is guaranteed from the start, and the work consists of constructing $P$.
 
 :::dimostrazione
 The second and the third conditions are equivalent, because the columns of $P$ are the eigenvectors of the basis and a matrix is orthogonal if and only if its columns are orthonormal. If the third holds, then $A = P D P^T$ and $A^T = P D^T P^T = P D P^T = A$, therefore $A$ is symmetric.
@@ -364,13 +364,13 @@ For a symmetric matrix $A$ with distinct eigenvalues $\lambda_1, \dots, \lambda_
 $$
 \mathbb{R}^n = V_{\lambda_1} \oplus \dots \oplus V_{\lambda_r},
 \qquad
-V_{\lambda_i} \perp V_{\lambda_j} \ \text{ for } i \neq j ,
+V_{\lambda_i} \perp V_{\lambda_j} \ \text{ per } i \neq j ,
 $$
 and $m_a(\lambda_i) = m_g(\lambda_i)$ for every $i$. When there are two distinct eigenvalues, each eigenspace is the orthogonal complement of the other: $V_{\lambda_2} = V_{\lambda_1}^\perp$. It is therefore enough to compute the smaller eigenspace and obtain the other as its orthogonal complement, without a second system. For the matrix $\begin{pmatrix} 2 & 1 & 1 \\ 1 & 2 & 1 \\ 1 & 1 & 2 \end{pmatrix}$, with eigenvalues $4$ and $1$, one gets $V_4 = \langle (1, 1, 1) \rangle$ and therefore $V_1 = \{ x + y + z = 0 \}$.
 :::
 
 :::osservazione{#interpretazione-geometrica-spettrale titolo="Geometric interpretation"}
-A symmetric matrix acts on $\mathbb{R}^n$ as a dilation by the factor $\lambda_i$ along each of the pairwise orthogonal directions of the basis of eigenvectors. In $\mathbb{R}^2$, if $A$ is invertible, that is, if no eigenvalue is zero, the unit circle is transformed into an ellipse whose axes lie along the eigenvectors and whose semi-axes are equal to the absolute values of the eigenvalues. For $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ the eigenvalues are $4$, with eigenvector $(1, 1)$, and $2$, with eigenvector $(1, -1)$.
+A symmetric matrix acts on $\mathbb{R}^n$ as a scaling by the factor $\lambda_i$ along each of the pairwise orthogonal directions of the basis of eigenvectors. In $\mathbb{R}^2$, if $A$ is invertible, that is, if no eigenvalue is zero, the unit circle is transformed into an ellipse whose axes lie along the eigenvectors and whose semi-axes are equal to the absolute values of the eigenvalues. For $A = \begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$ the eigenvalues are $4$, with eigenvector $(1, 1)$, and $2$, with eigenvector $(1, -1)$.
 
 ::grafico{curve="cos(t),sin(t),0,6.29;3*cos(t)+sin(t),cos(t)+3*sin(t),0,6.29" vettori="0,0,2.828,2.828,Ae₁;0,0,1.414,-1.414" etichette="0.15,-1.55,Ae₂" xmin=-3.8 xmax=3.8 ymin=-3.5 ymax=3.5 uguale=1 titolo="The matrix $A$ with rows $(3, 1)$ and $(1, 3)$ transforms the unit circle into an ellipse with semi-axes $4$ and $2$ along the orthogonal eigenvectors $e_1 = \dfrac{1}{\sqrt{2}}\,(1, 1)$ and $e_2 = \dfrac{1}{\sqrt{2}}\,(1, -1)$"}
 
@@ -433,7 +433,7 @@ $$
 A matrix with orthogonal but *not* normalized columns is not orthogonal. In the example of order $2$, the matrix $M = \begin{pmatrix} 2 & 1 \\ -1 & 2 \end{pmatrix}$ has orthogonal columns, but $M^T M = 5 I_2$, therefore $M^T \neq M^{-1}$ and $M^T A M = \begin{pmatrix} 5 & 0 \\ 0 & 30 \end{pmatrix}$ is not the matrix of eigenvalues. Normalization is the step that makes $P^T$ equal to $P^{-1}$.
 :::
 
-:::osservazione{#decomposizione-spettrale titolo="Spectral decomposition and sign of a symmetric matrix"}
+:::osservazione{#decomposizione-spettrale titolo="Spectral decomposition and definiteness of a symmetric matrix"}
 If $e_1, \dots, e_n$ are the columns of $P$, with $A e_i = \lambda_i e_i$, the equality $A = P D P^T$ can be written as
 $$
 A = \lambda_1\, e_1 e_1^T + \dots + \lambda_n\, e_n e_n^T ,

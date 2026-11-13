@@ -11,9 +11,6 @@ export type LinguaCatalogo = (typeof LINGUE_CATALOGO)[number];
 export const LINGUE: { codice: Lingua; nome: string }[] = [
   { codice: 'it', nome: 'Italiano' },
   { codice: 'en', nome: 'English' },
-  { codice: 'de', nome: 'Deutsch' },
-  { codice: 'es', nome: 'Español' },
-  { codice: 'fr', nome: 'Français' },
 ];
 
 export const LOCALE = { it: 'it_IT', en: 'en_US', de: 'de_DE', es: 'es_ES', fr: 'fr_FR' };

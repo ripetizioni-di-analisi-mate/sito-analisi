@@ -1,6 +1,6 @@
 ---
-titolo: Sets, induction and elementary functions
-sommario: The language of sets and the number sets from N to R, the principle of induction and the binomial theorem, then the elementary functions with their graphs, the starting toolkit for all of analysis.
+titolo: Insiemi, induzione e funzioni elementari
+sommario: Il linguaggio degli insiemi e gli insiemi numerici da N a R, il principio di induzione e il binomio di Newton, poi le funzioni elementari con i loro grafici, il bagaglio di partenza per tutta l'analisi.
 ---
 
 ## The language of sets
@@ -8,7 +8,7 @@ sommario: The language of sets and the number sets from N to R, the principle of
 :::definizione{#insiemi titolo="Set, membership, inclusion"}
 A **set** is a collection of objects, called **elements**. The notation $x \in A$ means that $x$ is an element of $A$; $x \notin A$ means that it is not. A set is given by listing its elements, as in $\{1, 2, 3\}$, or by stating the property that identifies them: $\{x \in E : P(x)\}$ is the set of the elements of $E$ for which $P(x)$ is true. The empty set $\emptyset$ is the set with no elements.
 
-$A \subseteq B$ ($A$ is contained in $B$, or $A$ is a **subset** of $B$) means that *every* element of $A$ also belongs to $B$. Equality of sets is equivalent to **double inclusion**:
+$A \subseteq B$ ($A$ is contained in $B$, or $A$ is a **subset** of $B$) means that *every* element of $A$ also belongs to $B$. Equality of sets is equivalent to **mutual inclusion**:
 $$
 A = B \iff
 \begin{cases}
@@ -16,7 +16,7 @@ A \subseteq B \\[2pt]
 B \subseteq A
 \end{cases}
 $$
-Double inclusion is the method used to prove that two sets are equal: the two inclusions are verified *separately*.
+Mutual inclusion is the method used to prove that two sets are equal: the two inclusions are verified *separately*.
 
 ::venn{tipo="incluso" nomi="B,A" zone="ab" titolo="$A \subseteq B$: every element of $A$ also belongs to $B$"}
 
@@ -27,7 +27,7 @@ $A = \{x \in \mathbb{R} : x^2 < 4\}$. We have $1 \in A$ because $1^2 = 1 < 4$, a
 :::
 
 :::attenzione
-The symbols $\in$ and $\subseteq$ have **different** meanings: $\in$ relates an element to a set, $\subseteq$ relates two sets. For $A = \{1, 2\}$ the correct statements are $1 \in A$ and $\{1\} \subseteq A$; the statements $1 \subseteq A$ and $\{1\} \in A$ are **false**, because $\{1\}$ is not one of the two elements of $A$ and $1$ is not a set.
+The symbols $\in$ and $\subseteq$ have **different** meanings: $\in$ relates an element to a set, $\subseteq$ relates two sets. For $A = \{1, 2\}$ the correct statements are $1 \in A$ and $\{1\} \subseteq A$; the statements $1 \subseteq A$ and $\{1\} \in A$ are **false**, because $1$ is not a set and $\{1\}$ is not one of the two elements of $A$.
 :::
 
 ## Operations on sets
@@ -36,9 +36,9 @@ The symbols $\in$ and $\subseteq$ have **different** meanings: $\in$ relates an 
 For $A$ and $B$ subsets of a universal set $E$:
 $$
 \begin{gathered}
-A \cup B = \{x : x \in A \text{ or } x \in B\}, \qquad
-A \cap B = \{x : x \in A \text{ and } x \in B\}, \\[6pt]
-A \setminus B = \{x : x \in A \text{ and } x \notin B\}, \qquad
+A \cup B = \{x : x \in A \text{ oppure } x \in B\}, \qquad
+A \cap B = \{x : x \in A \text{ e } x \in B\}, \\[6pt]
+A \setminus B = \{x : x \in A \text{ e } x \notin B\}, \qquad
 A^{c} = E \setminus A .
 \end{gathered}
 $$
@@ -112,7 +112,7 @@ $$
 (a, +\infty) = \{x : x > a\}, \qquad (-\infty, b] = \{x : x \leq b\}, \qquad (-\infty, +\infty) = \mathbb{R} .
 \end{gathered}
 $$
-A round bracket excludes the endpoint, a square bracket includes it; next to $+\infty$ and $-\infty$, which are not real numbers, the bracket is *always* round. $[a, b]$ is called a **closed bounded interval**, $(a, b)$ an **open interval**. The domains of the elementary functions and the solution sets of inequalities are intervals or unions of intervals, so this notation appears in every function study.
+A round bracket excludes the endpoint, a square bracket includes it; next to $+\infty$ and $-\infty$, which are not real numbers, the bracket is *always* round. $[a, b]$ is called a **closed bounded interval**, $(a, b)$ an **open interval**. The domains of the elementary functions and the solution sets of inequalities are intervals or unions of intervals, so this notation appears in every analysis of a function.
 :::
 
 :::esempio{titolo="Operations on intervals"}
@@ -135,7 +135,7 @@ $$
 M = \max A \iff
 \begin{cases}
 M \in A \\[2pt]
-a \leq M \quad \text{for every } a \in A
+a \leq M \quad \text{per ogni } a \in A
 \end{cases}
 $$
 The **minimum** is defined analogously with lower bounds. The maximum, when it exists, is **unique**: if $M_1$ and $M_2$ are both maxima, then $M_1 \leq M_2$ because $M_2$ is an upper bound and $M_1 \in A$, and $M_2 \leq M_1$ for the same reason, so $M_1 = M_2$.
@@ -155,8 +155,8 @@ Let $A \subseteq \mathbb{R}$ be nonempty. The **supremum** of $A$, denoted by $\
 Let $A \subseteq \mathbb{R}$ be nonempty and $L \in \mathbb{R}$. Then $L = \sup A$ *if and only if*
 $$
 \begin{cases}
-a \leq L \quad \text{for every } a \in A \\[4pt]
-\text{for every } \varepsilon > 0 \ \text{there exists } a \in A \ \text{such that } a > L - \varepsilon
+a \leq L \quad \text{per ogni } a \in A \\[4pt]
+\text{per ogni } \varepsilon > 0 \ \text{esiste } a \in A \ \text{tale che } a > L - \varepsilon
 \end{cases}
 $$
 Analogously, $\ell = \inf A$ if and only if $\ell \leq a$ for every $a \in A$ and for every $\varepsilon > 0$ there exists $a \in A$ such that $a < \ell + \varepsilon$. The first condition says that $L$ is an **upper bound**; the second says that, going below $L$ by *any* amount $\varepsilon$, the set contains an element beyond $L - \varepsilon$. In verifications the second condition becomes an inequality in the variable that describes the elements of $A$.
@@ -177,7 +177,7 @@ $A = \left\{ \dfrac{1}{n} : n \in \mathbb{N},\ n \geq 1 \right\}$. The supremum 
 ## The completeness of R
 
 :::teorema{#completezza titolo="Completeness of R"}
-Every nonempty subset of $\mathbb{R}$ that is bounded above has a **supremum** in $\mathbb{R}$; every nonempty subset that is bounded below has an infimum. This property is called **completeness** and is *taken* as an axiom of the real numbers. It distinguishes $\mathbb{R}$ from $\mathbb{Q}$ and is the hypothesis on which the existence theorems of analysis depend: the proof of the intermediate zero theorem, in the chapter on limits and continuity, constructs the zero precisely as the supremum of a set.
+Every nonempty subset of $\mathbb{R}$ that is bounded above has a **supremum** in $\mathbb{R}$; every nonempty subset that is bounded below has an infimum. This property is called **completeness** and is *taken* as an axiom of the real numbers. It distinguishes $\mathbb{R}$ from $\mathbb{Q}$ and is the hypothesis on which the existence theorems of analysis depend: the proof of Bolzano's theorem, in the chapter on limits and continuity, constructs the zero precisely as the supremum of a set.
 :::
 
 :::osservazione
@@ -190,8 +190,8 @@ In $\mathbb{Q}$ completeness **does not hold**. Let $A = \{x \in \mathbb{Q} : x 
 Let $P(n)$ be a statement that depends on a natural number $n$ and let $n_0 \in \mathbb{N}$. If
 $$
 \begin{cases}
-P(n_0) \ \text{is true} \\[4pt]
-\text{for every } n \geq n_0, \ \text{if } P(n) \ \text{is true then } P(n+1) \ \text{is true}
+P(n_0) \ \text{è vera} \\[4pt]
+\text{per ogni } n \geq n_0, \ \text{se } P(n) \ \text{è vera allora } P(n+1) \ \text{è vera}
 \end{cases}
 $$
 then $P(n)$ is true for *every* $n \geq n_0$. The first condition is called the **base case**, the second the **inductive step**; in the step, the statement $P(n)$ that is assumed true is called the **inductive hypothesis**. The principle is taken as a property of the set $\mathbb{N}$. It is used to prove identities, inequalities and divisibility properties that depend on a natural index, and every proof by induction is organized in the same two points: verification of the base case and verification of the step. The first applications are the formula for the sum of the first $n$ natural numbers and Bernoulli's inequality.
@@ -275,7 +275,7 @@ $$
 \binom{n}{k} = \binom{n}{n-k}, \qquad
 \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1} \quad (k \leq n - 1).
 $$
-The first two properties follow from the definition, since exchanging $k$ with $n - k$ leaves the denominator $k!\,(n-k)!$ unchanged. The third is **Stifel's formula** (Pascal's rule) and is verified by bringing the two fractions to the common denominator $(k+1)!\,(n-k)!$. Stifel's formula generates **Pascal's triangle**, in which each coefficient is the sum of the two coefficients above it, and it enters the inductive step of the proof of the binomial theorem. For example $\dbinom{4}{1} + \dbinom{4}{2} = 4 + 6 = 10 = \dbinom{5}{2}$.
+The first two properties follow from the definition; in particular, the second holds because exchanging $k$ with $n - k$ leaves the denominator $k!\,(n-k)!$ unchanged. The third is **Pascal's rule** and is verified by bringing the two fractions to the common denominator $(k+1)!\,(n-k)!$. Pascal's rule generates **Pascal's triangle**, in which each coefficient is the sum of the two coefficients above it, and it enters the inductive step of the proof of the binomial theorem. For example $\dbinom{4}{1} + \dbinom{4}{2} = 4 + 6 = 10 = \dbinom{5}{2}$.
 :::
 
 ## The binomial theorem
@@ -286,7 +286,7 @@ $$
 (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{\,n-k}\, b^{\,k}
 = a^n + n\,a^{n-1}b + \binom{n}{2} a^{n-2}b^2 + \cdots + n\,a\,b^{n-1} + b^n .
 $$
-For $n = 2$ and $n = 3$ the formula gives the square and the cube of a binomial. The proof proceeds by **induction** on $n$: in the step, the expansion of $(a+b)^n$ is multiplied by $a + b$ and like terms are grouped using **Stifel's formula**. The formula makes it possible to expand any power of a binomial and to determine a single term of the expansion *without* computing the others: the term containing $b^k$ is $\dbinom{n}{k} a^{\,n-k} b^{\,k}$.
+For $n = 2$ and $n = 3$ the formula gives the square and the cube of a binomial. The proof proceeds by **induction** on $n$: in the step, the expansion of $(a+b)^n$ is multiplied by $a + b$ and like terms are grouped using **Pascal's rule**. The formula makes it possible to expand any power of a binomial and to determine a single term of the expansion *without* computing the others: the term containing $b^k$ is $\dbinom{n}{k} a^{\,n-k} b^{\,k}$.
 :::
 
 :::esempio{titolo="Expansion of a power"}
@@ -310,9 +310,9 @@ so a set with $n$ elements has $2^n$ **subsets** in total, since $\dbinom{n}{k}$
 ## Functions, domain and range
 
 :::definizione{#funzione titolo="Function, domain, codomain and range"}
-A function $f : A \to B$ is a rule that assigns to each element $x \in A$ *one and only one* element $f(x) \in B$. The set $A$ is the **domain**, $B$ is the **codomain**; the **range** (or image) is the set of values taken,
+A function $f : A \to B$ is a rule that assigns to each element $x \in A$ *one and only one* element $f(x) \in B$. The set $A$ is the **domain**, $B$ is the **codomain**; the **range** is the set of values attained,
 $$
-f(A) = \{ y \in B : y = f(x) \ \text{for some}\ x \in A \} \subseteq B .
+f(A) = \{ y \in B : y = f(x) \ \text{per qualche}\ x \in A \} \subseteq B .
 $$
 The **graph** of $f$ is the set of points $(x, f(x))$ of the plane, as $x \in A$ varies. Since each $x$ corresponds to a single value, every vertical line $x = c$ with $c \in A$ meets the graph in *exactly* one point. In this course $A$ and $B$ are subsets of $\mathbb{R}$; limits, derivatives and integrals are defined for functions of this type, therefore domain, range and graph are the starting point of every following chapter.
 :::
@@ -342,9 +342,9 @@ On the graph, injectivity is read with **horizontal lines**: $f$ is injective if
 :::
 
 :::definizione{#funzione-inversa titolo="Inverse function"}
-If $f : A \to B$ is bijective, for every $y \in B$ there exists one and only one $x \in A$ with $f(x) = y$; the **inverse function** $f^{-1} : B \to A$ assigns this $x$ to $y$. The following hold:
+If $f : A \to B$ is bijective, for every $y \in B$ there exists one and only one $x \in A$ with $f(x) = y$; the **inverse function** $f^{-1} : B \to A$ associates $y$ with this $x$. The following hold:
 $$
-f^{-1}(f(x)) = x \ \text{for every}\ x \in A, \qquad f(f^{-1}(y)) = y \ \text{for every}\ y \in B .
+f^{-1}(f(x)) = x \ \text{per ogni}\ x \in A, \qquad f(f^{-1}(y)) = y \ \text{per ogni}\ y \in B .
 $$
 The point $(a, b)$ belongs to the graph of $f$ *if and only if* $(b, a)$ belongs to the graph of $f^{-1}$, so the graph of $f^{-1}$ is the **reflection** of the graph of $f$ across the bisector $y = x$. When $f$ is injective but the codomain is larger than the range, the **codomain is restricted** to the range and the function so obtained is inverted. With this construction the roots, the logarithm and the inverse trigonometric functions of this chapter are defined.
 :::
@@ -361,7 +361,7 @@ Given $f : A \to \mathbb{R}$ and $g : B \to \mathbb{R}$, the **composite functio
 $$
 \{ x \in A : f(x) \in B \} .
 $$
-Composition reads complicated functions as **chains of elementary functions**: $h(x) = \sqrt{x^2 + 1}$ is the composite of $f(x) = x^2 + 1$ with $g(y) = \sqrt{y}$. This reading guides the computation of the natural domain and, in the chapter on derivatives, the chain rule.
+Composition expresses complicated functions as **chains of elementary functions**: $h(x) = \sqrt{x^2 + 1}$ is the composite of $f(x) = x^2 + 1$ with $g(y) = \sqrt{y}$. This interpretation guides the computation of the natural domain and, in the chapter on derivatives, the chain rule.
 :::
 
 :::attenzione
@@ -376,7 +376,7 @@ Let $A$ be symmetric with respect to the origin, that is $-x \in A$ for every $x
 - **even** if $f(-x) = f(x)$ for every $x \in A$; the graph is symmetric with respect to the $y$-axis;
 - **odd** if $f(-x) = -f(x)$ for every $x \in A$; the graph is symmetric with respect to the origin.
 
-The functions $x^2$, $x^4$, $|x|$, $\cos x$ are even; $x$, $x^3$, $\sin x$, $\tan x$ are odd. A symmetry **halves the work**: in function studies $f$ is studied for $x \geq 0$ and the graph is reflected.
+The functions $x^2$, $x^4$, $|x|$, $\cos x$ are even; $x$, $x^3$, $\sin x$, $\tan x$ are odd. A symmetry **halves the work**: when analyzing a function, $f$ is studied for $x \geq 0$ and the graph is reflected.
 
 ::grafico{f="x^2;x^3" xmin=-2.5 xmax=2.5 ymin=-4 ymax=5 punti="-1.5,2.25;1.5,2.25;-1.5,-3.375;1.5,3.375" segmenti="-1.5,2.25,1.5,2.25;-1.5,-3.375,1.5,3.375" titolo="$y = x^2$ is even: the graph is symmetric with respect to the $y$-axis; $y = x^3$ (dashed) is odd: the graph is symmetric with respect to the origin"}
 
@@ -391,7 +391,7 @@ $f$ is **increasing** on a set $I$ of the domain if $x_1 < x_2$ implies $f(x_1) 
 :::
 
 :::definizione{#limitata titolo="Bounded function"}
-$f$ is **bounded above** if there exists $M \in \mathbb{R}$ with $f(x) \leq M$ for every $x$ in the domain, **bounded below** if there exists $m \in \mathbb{R}$ with $f(x) \geq m$, **bounded** if both conditions hold, that is if $|f(x)| \leq C$ for a constant $C$. $\sin x$ and $\cos x$ are bounded, with values in $[-1, 1]$; $x^2$ is bounded below and unbounded above. Boundedness is read on the range and reappears in the chapter on limits, in the theorem on a bounded function times an infinitesimal one, and in the Weierstrass theorem.
+$f$ is **bounded above** if there exists $M \in \mathbb{R}$ with $f(x) \leq M$ for every $x$ in the domain, **bounded below** if there exists $m \in \mathbb{R}$ with $f(x) \geq m$, **bounded** if both conditions hold, that is if $|f(x)| \leq C$ for a constant $C$. $\sin x$ and $\cos x$ are bounded, with values in $[-1, 1]$; $x^2$ is bounded below and unbounded above. Boundedness is read on the range and reappears in the chapter on limits, in the theorem on a bounded function times an infinitesimal one, and in the extreme value theorem.
 :::
 
 ## Graph transformations
@@ -407,7 +407,7 @@ From the graph of $f$, for $k > 0$ and $a > 1$, the following graphs are obtaine
 - $|f(x)|$: the part of the graph with $f(x) \geq 0$ stays in place, the part with $f(x) < 0$ is reflected above the $x$-axis;
 - $f(|x|)$: the part of the graph with $x \geq 0$ stays in place and is also reflected to the left of the $y$-axis; the function obtained is **even**.
 
-The verifications follow from the **definition of graph**: for example $(x_0, y_0)$ belongs to the graph of $f$ if and only if $(x_0 + k, y_0)$ belongs to the graph of $f(x - k)$. With these rules the graph of many functions is drawn starting from the **elementary graphs**, *without* a complete function study.
+The verifications follow from the **definition of graph**: for example $(x_0, y_0)$ belongs to the graph of $f$ if and only if $(x_0 + k, y_0)$ belongs to the graph of $f(x - k)$. With these rules the graph of many functions is drawn starting from the **elementary graphs**, *without* a complete analysis of the function.
 
 ::grafico{f="x^2;(x-2)^2;x^2+1" xmin=-3 xmax=5 ymin=-1 ymax=7 titolo="From $y = x^2$: $y = (x - 2)^2$ (dashed) is translated to the right by $2$, $y = x^2 + 1$ (red) is translated upward by $1$"}
 
@@ -462,7 +462,7 @@ For $a > 0$, $a \neq 1$, the **exponential function** $f(x) = a^x$ has domain $\
 $$
 a^{x+y} = a^x\, a^y, \qquad a^{x-y} = \frac{a^x}{a^y}, \qquad (a^x)^y = a^{x y}, \qquad a^0 = 1 .
 $$
-For $a > 1$ the function is **strictly increasing**; for $0 < a < 1$ it is **strictly decreasing**. Since $a^x = \left(\dfrac{1}{a}\right)^{-x}$, the graphs for reciprocal bases are symmetric with respect to the $y$-axis. The base most used in analysis is the number $e = 2.71828\ldots$; the behavior at the ends of the domain and the standard limits involving $e$ are found in the chapter on limits.
+For $a > 1$ the function is **strictly increasing**; for $0 < a < 1$ it is **strictly decreasing**. Since $a^x = \left(\dfrac{1}{a}\right)^{-x}$, the graphs for reciprocal bases are symmetric with respect to the $y$-axis. The base most used in analysis is the number $e = 2{,}71828\ldots$; the behavior at the ends of the domain and the standard limits involving $e$ are found in the chapter on limits.
 
 ::grafico{f="exp(x)" xmin=-3 xmax=3 ymin=-1 ymax=8 asintoti="y=0" titolo="$y = e^x$: range $(0, +\infty)$, strictly increasing"}
 
@@ -498,14 +498,14 @@ On the circle centered at the origin with radius $1$, the point reached by rotat
 $$
 \tan x = \frac{\sin x}{\cos x} ,
 $$
-with domain $x \neq \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$), range $\mathbb{R}$, fundamental period $\pi$; it is odd. Notable values:
+with domain $x \neq \dfrac{\pi}{2} + k\pi$ ($k \in \mathbb{Z}$), range $\mathbb{R}$, fundamental period $\pi$; it is odd. Standard values:
 $$
 \begin{array}{c|ccccc}
 x & 0 & \dfrac{\pi}{6} & \dfrac{\pi}{4} & \dfrac{\pi}{3} & \dfrac{\pi}{2} \\[8pt]
 \hline
 \sin x & 0 & \dfrac{1}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{\sqrt{3}}{2} & 1 \\[10pt]
 \cos x & 1 & \dfrac{\sqrt{3}}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{1}{2} & 0 \\[10pt]
-\tan x & 0 & \dfrac{\sqrt{3}}{3} & 1 & \sqrt{3} & \text{undef.}
+\tan x & 0 & \dfrac{\sqrt{3}}{3} & 1 & \sqrt{3} & \text{n.d.}
 \end{array}
 $$
 These values, together with the symmetries and periodicity, make it possible to write in closed form the solutions of the trigonometric equations in the exercises.
@@ -554,7 +554,7 @@ All three have domain $\mathbb{R}$. $\sinh x$ is **odd**, strictly increasing, w
 $$
 \cosh^2 x - \sinh^2 x = 1 ,
 $$
-which is verified by expanding the squares: $\cosh^2 x - \sinh^2 x = \dfrac{e^{2x} + 2 + e^{-2x}}{4} - \dfrac{e^{2x} - 2 + e^{-2x}}{4} = 1$. The point $(\cosh t, \sinh t)$ therefore belongs to the **hyperbola** $x^2 - y^2 = 1$, hence the name. The hyperbolic functions appear in the antiderivatives of some irrational functions, in the chapter on integrals.
+which is verified by expanding the squares: $\cosh^2 x - \sinh^2 x = \dfrac{e^{2x} + 2 + e^{-2x}}{4} - \dfrac{e^{2x} - 2 + e^{-2x}}{4} = 1$. The point $(\cosh t, \sinh t)$ therefore belongs to the **hyperbola** $x^2 - y^2 = 1$, hence the name. The hyperbolic functions appear in the antiderivatives of some functions involving radicals, in the chapter on integrals.
 
 ::grafico{f="(exp(x)+exp(-x))/2" xmin=-3 xmax=3 ymin=-1 ymax=6 titolo="$y = \cosh x$: even, range $[1, +\infty)$"}
 
@@ -572,7 +572,7 @@ When a function is given by a single analytic expression, the **natural domain**
 - the argument of $\arcsin$ and of $\arccos$ belongs to $[-1, 1]$;
 - in $f(x)^{g(x)}$ the base $f(x)$ is greater than $0$.
 
-The conditions must *all* hold at the same point, therefore they are collected in a **system** and the domain is its solution set. The natural domain is the **first step** of every function study and of every limit computation.
+The conditions must *all* hold at the same point, therefore they are collected in a **system** and the domain is its solution set. The natural domain is the **first step** in analyzing any function and computing any limit.
 :::
 
 :::esempio{titolo="Domain with a logarithm and a root"}
@@ -582,7 +582,7 @@ $$
 x - 1 > 0 \\[4pt]
 4 - x^2 > 0
 \end{cases}
-\qquad\text{that is}\qquad
+\qquad\text{cioè}\qquad
 \begin{cases}
 x > 1 \\[4pt]
 -2 < x < 2
@@ -599,7 +599,7 @@ For $a > 0$, $a \neq 1$, the equation $a^x = b$ has a solution *if and only if* 
 - if $a > 1$, then $a^{f(x)} > a^{g(x)} \iff f(x) > g(x)$;
 - if $0 < a < 1$, then $a^{f(x)} > a^{g(x)} \iff f(x) < g(x)$.
 
-For logarithms, the **existence conditions** are added to the comparison of the arguments, and they enter a **system**: for $a > 1$,
+For logarithms, the **domain conditions** are added to the comparison of the arguments, forming a **system**: for $a > 1$,
 $$
 \log_a f(x) > \log_a g(x)
 \iff
@@ -608,7 +608,7 @@ f(x) > g(x) \\[4pt]
 g(x) > 0
 \end{cases}
 $$
-where the condition $f(x) > 0$ follows from the other two. For $0 < a < 1$ the direction of the comparison between the arguments is **reversed** and the existence condition to impose becomes the one on $f$:
+where the condition $f(x) > 0$ follows from the other two. For $0 < a < 1$ the direction of the comparison between the arguments is **reversed** and the domain condition to impose becomes the one on $f$:
 $$
 \log_a f(x) > \log_a g(x)
 \iff

@@ -1,6 +1,6 @@
 ---
-titolo: Functions of several variables
-sommario: The space ℝⁿ with norm, distance and neighborhoods, subsets of the plane, functions of two or more variables with domain and level sets, limits in two variables, continuity and the Weierstrass theorem.
+titolo: Funzioni di più variabili
+sommario: Lo spazio ℝⁿ con norma, distanza e intorni, gli insiemi del piano, le funzioni di due o più variabili con dominio e insiemi di livello, i limiti in due variabili, la continuità e il teorema di Weierstrass.
 ---
 
 ## The space ℝⁿ
@@ -55,7 +55,7 @@ Every point of the plane is of *exactly* one of the three types. The set of inte
 :::
 
 :::esempio{titolo="Points of the disk"}
-Let $A = \{ (x, y) : x^2 + y^2 < 1 \}$ be the open unit disk. Let $P_0$ be a point with $x^2 + y^2 < 1$. Its distance from the origin is $\lVert P_0 \rVert < 1$, so its distance from the circle is $1 - \lVert P_0 \rVert$. The disk with centre $P_0$ and radius $r = 1 - \lVert P_0 \rVert$ is therefore contained in $A$, and $P_0$ is **interior**. If instead $x^2 + y^2 > 1$, the distance of $P_0$ from the circle is $\lVert P_0 \rVert - 1$, and the disk with centre $P_0$ and this radius contains no points of $A$; hence $P_0$ is **exterior**. A point on the circle $x^2 + y^2 = 1$ is a **boundary** point, since every neighborhood of it contains points inside and outside the disk; therefore $\partial A$ is the unit circle, which does not belong to $A$.
+Let $A = \{ (x, y) : x^2 + y^2 < 1 \}$ be the open unit disk. Let $P_0$ be a point with $x^2 + y^2 < 1$. Its distance from the origin is $\lVert P_0 \rVert < 1$, so its distance from the circle is $1 - \lVert P_0 \rVert$. The disk with center $P_0$ and radius $r = 1 - \lVert P_0 \rVert$ is therefore contained in $A$, and $P_0$ is **interior**. If instead $x^2 + y^2 > 1$, the distance of $P_0$ from the circle is $\lVert P_0 \rVert - 1$, and the disk with center $P_0$ and this radius contains no points of $A$; hence $P_0$ is **exterior**. A point on the circle $x^2 + y^2 = 1$ is a **boundary** point, since every neighborhood of it contains points inside and outside the disk; therefore $\partial A$ is the unit circle, which does not belong to $A$.
 
 ::grafico{f="NaN" curve="cos(t),sin(t),0,6.29" area="0.2+sqrt(abs(0.1225-(x+0.3)^2));0.2-sqrt(abs(0.1225-(x+0.3)^2));-0.65;0.05|1+sqrt(abs(0.1225-(x-1.5)^2));1-sqrt(abs(0.1225-(x-1.5)^2));1.15;1.85|-0.643+sqrt(abs(0.1225-(x-0.766)^2));-0.643-sqrt(abs(0.1225-(x-0.766)^2));0.416;1.116" punti="-0.3,0.2,pieno,interior;1.5,1,pieno,exterior;0.766,-0.643,pieno,boundary" etichette="-0.75,-0.45,A" xmin=-2 xmax=2.6 ymin=-1.5 ymax=1.7 uguale=1 titolo="The open disk $A$, with its boundary dashed: a neighborhood of an interior point lies in $A$, a neighborhood of an exterior point lies outside $A$, every neighborhood of a boundary point contains points inside and outside"}
 
@@ -77,14 +77,14 @@ A set that is not open is *not* necessarily closed: the annulus $\{ (x, y) : 1 \
 :::
 
 :::definizione{#limitati-e-compatti titolo="Bounded set and compact set"}
-$A \subseteq \mathbb{R}^2$ is **bounded** if it is contained in a disk centered at the origin, that is, if there exists $R > 0$ with $\lVert P \rVert \leq R$ for every $P \in A$. A closed and bounded set is called **compact**. The closed disk $x^2 + y^2 \leq 4$ is compact; the half-plane $y \geq 0$ is closed but not bounded, so it is not compact. Compact sets are the sets on which the **Weierstrass theorem** in several variables applies, and problems of absolute maximum and minimum are set up on them.
+$A \subseteq \mathbb{R}^2$ is **bounded** if it is contained in a disk centered at the origin, that is, if there exists $R > 0$ with $\lVert P \rVert \leq R$ for every $P \in A$. A closed and bounded set is called **compact**. The closed disk $x^2 + y^2 \leq 4$ is compact; the half-plane $y \geq 0$ is closed but not bounded, so it is not compact. Compact sets are the sets on which the **extreme value theorem** in several variables applies, and problems of absolute maximum and minimum are set up on them.
 :::
 
 :::definizione{#insiemi-connessi titolo="Connected set"}
-$A \subseteq \mathbb{R}^2$ is **path-connected** if every pair of points of $A$ can be joined by a continuous curve entirely contained in $A$. A disk and an annulus are connected; the union of two disjoint disks is not. On an open connected set a continuous function that vanishes at no point has **constant sign**, so connectedness enters sign studies: the sign is determined at a sample point for each connected piece.
+$A \subseteq \mathbb{R}^2$ is **path-connected** if every pair of points of $A$ can be joined by a continuous curve entirely contained in $A$. A disk and an annulus are connected; the union of two disjoint disks is not. On an open connected set a continuous function that vanishes at no point has **constant sign**, so connectedness enters sign analysis: the sign is determined at a sample point for each connected component.
 :::
 
-## Functions of two and more variables
+## Functions of two or more variables
 
 :::definizione{#funzione-due-variabili titolo="Function of two or more variables"}
 A **function of two variables** is a rule $f : A \subseteq \mathbb{R}^2 \to \mathbb{R}$ that assigns to each point $(x, y) \in A$ a real number $z = f(x, y)$. The **graph**
@@ -98,7 +98,7 @@ is in general a **surface** in space. For $f(x, y) = x^2 + y^2$ the graph is a p
 The **natural domain** of $f(x, y)$ is the set of points of the plane at which the expression defining $f$ makes sense. The conditions are the same as in Mathematical Analysis 1:
 
 - denominators different from zero;
-- arguments of even-index roots greater than or equal to zero;
+- radicands of even roots greater than or equal to zero;
 - arguments of logarithms greater than zero;
 - arguments of $\arcsin$ and $\arccos$ between $-1$ and $1$.
 
@@ -119,7 +119,7 @@ the union of the open first and third quadrants, axes excluded. The inequality i
 ## Level curves and level surfaces
 
 :::definizione{#curve-di-livello titolo="Level curve"}
-For $f : A \subseteq \mathbb{R}^2 \to \mathbb{R}$ and $k \in \mathbb{R}$, the **level curve** $k$ is the set
+For $f : A \subseteq \mathbb{R}^2 \to \mathbb{R}$ and $k \in \mathbb{R}$, the **level curve** corresponding to $k$ is the set
 $$
 E_k = \{ (x, y) \in A : f(x, y) = k \} .
 $$
@@ -127,14 +127,14 @@ It is the projection onto the $xy$-plane of the points of the graph at height $z
 :::
 
 :::esempio{titolo="Level curves of the paraboloid"}
-For $f(x, y) = x^2 + y^2$ the level curve $k$ is the solution set of $x^2 + y^2 = k$. If $k > 0$ it is the **circle** with center the origin and radius $\sqrt{k}$; if $k = 0$ it is the single point $(0, 0)$; if $k < 0$ it is **empty**, since a sum of squares is *never* negative. The circles become denser moving away from the origin, and this reflects the increasingly rapid growth of the paraboloid.
+For $f(x, y) = x^2 + y^2$ the level curve corresponding to $k$ is the solution set of $x^2 + y^2 = k$. If $k > 0$ it is the **circle** with center at the origin and radius $\sqrt{k}$; if $k = 0$ it is the single point $(0, 0)$; if $k < 0$ it is **empty**, since a sum of squares is *never* negative. The circles become denser moving away from the origin, and this reflects the increasingly rapid growth of the paraboloid.
 
 ::grafico{curve="cos(t),sin(t),0,6.29;sqrt(2)*cos(t),sqrt(2)*sin(t),0,6.29;sqrt(3)*cos(t),sqrt(3)*sin(t),0,6.29;2*cos(t),2*sin(t),0,6.29" punti="0,0,pieno,k = 0" etichette="0.1,1.04,k = 1;0.1,1.45,k = 2;0.1,1.77,k = 3;0.1,2.04,k = 4" xmin=-3 xmax=3 ymin=-2.5 ymax=2.5 uguale=1 titolo="Level curves of $f(x, y) = x^2 + y^2$ for $k = 0, 1, 2, 3, 4$: the circles become denser moving away from the origin"}
 
 :::
 
 :::definizione{#superfici-di-livello titolo="Level surface"}
-For a function of three variables $f : A \subseteq \mathbb{R}^3 \to \mathbb{R}$ the level set $\{ (x, y, z) \in A : f(x, y, z) = k \}$ is in general a surface in space and is called a **level surface**. For $f(x, y, z) = x^2 + y^2 + z^2$ the level surfaces $k > 0$ are the **spheres** with center the origin and radius $\sqrt{k}$. Since the graph of a function of three variables cannot be drawn, level surfaces are its main tool of visualization.
+For a function of three variables $f : A \subseteq \mathbb{R}^3 \to \mathbb{R}$ the level set $\{ (x, y, z) \in A : f(x, y, z) = k \}$ is in general a surface in space and is called a **level surface**. For $f(x, y, z) = x^2 + y^2 + z^2$ the level surfaces $k > 0$ are the **spheres** with center at the origin and radius $\sqrt{k}$. Since the graph of a function of three variables cannot be drawn, level surfaces are its main tool of visualization.
 :::
 
 ## Limits in two variables
@@ -148,7 +148,7 @@ if for every $\varepsilon > 0$ there exists $\delta > 0$ such that, for every $(
 $$
 0 < \lVert (x, y) - (x_0, y_0) \rVert < \delta \implies |f(x, y) - L| < \varepsilon .
 $$
-The limit is $+\infty$ if for every $M > 0$ there exists $\delta > 0$ such that $f(x, y) > M$ at the same points. The structure is that of Mathematical Analysis 1 with the **norm** in place of the absolute value; for this reason the uniqueness of the limit, the limits of sum, product and quotient and the comparison theorem hold with the same statements and the same proofs, and we refer to the chapter on limits in Mathematical Analysis 1.
+The limit is $+\infty$ if for every $M > 0$ there exists $\delta > 0$ such that $f(x, y) > M$ at the same points. The structure is that of Mathematical Analysis 1 with the **norm** in place of the absolute value; for this reason the uniqueness of the limit, the limits of sum, product and quotient and the squeeze theorem hold with the same statements and the same proofs, and we refer to the chapter on limits in Mathematical Analysis 1.
 :::
 
 :::osservazione
@@ -184,11 +184,11 @@ and the $y$-axis also gives $0$; along the parabola $y = x^2$, however, $f(x, x^
 
 ## Computing limits: comparison and polar coordinates
 
-:::teorema{#confronto-due-variabili titolo="Comparison theorem in two variables"}
-If in a neighborhood of $P_0$ (excluding at most $P_0$)
+:::teorema{#confronto-due-variabili titolo="Squeeze theorem in two variables"}
+If in a neighborhood of $P_0$ (excluding at most $P_0$) we have
 $$
 |f(x, y) - L| \leq g(x, y)
-\qquad \text{with} \qquad
+\qquad \text{con} \qquad
 \lim_{(x, y) \to P_0} g(x, y) = 0 ,
 $$
 then $f(x, y) \to L$ as $(x, y) \to P_0$. The proof is identical to the one in one variable, and we refer to the chapter on limits in Mathematical Analysis 1. It is the tool with which one proves that a limit *exists*: one bounds $|f - L|$ from above by a simpler function that tends to $0$.
@@ -206,8 +206,8 @@ $$
 hold, together with the analogous ones with $y$ in place of $x$. The third follows from $(|x| - |y|)^2 \geq 0$ by expanding the square. In limits with denominator $x^2 + y^2$ these inequalities **eliminate the denominator**: since $x^2 \leq x^2 + y^2$, the ratio $\dfrac{x^2}{x^2 + y^2}$ lies between $0$ and $1$, so every factor of this kind is bounded above by $1$.
 :::
 
-:::teorema{#limitata-per-infinitesima titolo="Bounded times infinitesimal"}
-If $|f(x, y)| \leq C$ in a neighborhood of $P_0$ and $g(x, y) \to 0$ as $(x, y) \to P_0$, then $f(x, y)\, g(x, y) \to 0$. This follows from **comparison**, since $|f g| \leq C |g| \to 0$. It is used with the typical **bounded factors**: $\sin$ and $\cos$ of any argument, and ratios of the form $\dfrac{x^2}{x^2 + y^2}$ bounded above by $1$.
+:::teorema{#limitata-per-infinitesima titolo="Product of a bounded function and an infinitesimal function"}
+If $|f(x, y)| \leq C$ in a neighborhood of $P_0$ and $g(x, y) \to 0$ as $(x, y) \to P_0$, then $f(x, y)\, g(x, y) \to 0$. This follows from the **squeeze theorem**, since $|f g| \leq C |g| \to 0$. It is used with the typical **bounded factors**: $\sin$ and $\cos$ of any argument, and ratios of the form $\dfrac{x^2}{x^2 + y^2}$ bounded above by $1$.
 :::
 
 :::esempio{titolo="Limit with an upper bound"}
@@ -221,7 +221,7 @@ $$
 \leq \frac{x^2 + y^2}{2} \cdot \frac{y^2}{x^2 + y^2}
 = \frac{y^2}{2} ,
 $$
-and $\dfrac{y^2}{2} \to 0$, so by **comparison** the limit is $0$.
+and $\dfrac{y^2}{2} \to 0$, so by the **squeeze theorem** the limit is $0$.
 :::
 
 :::proposizione{#coordinate-polari titolo="Computation with polar coordinates"}
@@ -235,8 +235,8 @@ $$
 where $\rho = \lVert (x, y) - P_0 \rVert$ is the distance from the point. If there exists a function $g(\rho)$, independent of $\theta$, such that
 $$
 \begin{cases}
-|f(x_0 + \rho \cos\theta,\; y_0 + \rho \sin\theta) - L| \leq g(\rho) \ \text{ for every } \theta \\[4pt]
-g(\rho) \to 0 \ \text{ as } \rho \to 0^+
+|f(x_0 + \rho \cos\theta,\; y_0 + \rho \sin\theta) - L| \leq g(\rho) \ \text{ per ogni } \theta \\[4pt]
+g(\rho) \to 0 \ \text{ per } \rho \to 0^+
 \end{cases}
 $$
 then $\displaystyle\lim_{(x, y) \to P_0} f(x, y) = L$. The method is convenient when the **denominator** is $x^2 + y^2$: with $P_0$ at the origin it becomes $\rho^2$ and simplifies, since $\cos^2\theta + \sin^2\theta = 1$. The bound *independent* of $\theta$ guarantees that the approach to $L$ is **uniform** in all directions, as the definition of limit requires.
@@ -298,23 +298,23 @@ exists, the function $\tilde{f}$ that coincides with $f$ on $A$ and takes the va
 :::esempio{titolo="Extension to the origin"}
 $f(x, y) = \dfrac{\ln(1 + x^2 + y^2)}{x^2 + y^2}$ is defined on $\mathbb{R}^2 \setminus \{(0,0)\}$. In polar coordinates the quantity $x^2 + y^2$ becomes $\rho^2$, so
 $$
-f = \frac{\ln(1 + \rho^2)}{\rho^2} \to 1 \qquad \text{as } \rho \to 0^+ ,
+f = \frac{\ln(1 + \rho^2)}{\rho^2} \to 1 \qquad \text{per } \rho \to 0^+ ,
 $$
 by the **standard limit of the logarithm** with argument $\rho^2 \to 0$; the expression depends only on $\rho$, so the convergence is uniform in $\theta$. Therefore $f$ **extends continuously** by setting $\tilde{f}(0, 0) = 1$.
 :::
 
-## The Weierstrass theorem
+## The extreme value theorem
 
-:::teorema{#weierstrass-piu-variabili titolo="Weierstrass theorem in several variables"}
+:::teorema{#weierstrass-piu-variabili titolo="Extreme value theorem in several variables"}
 If $K \subset \mathbb{R}^n$ is compact, that is, closed and bounded, and $f : K \to \mathbb{R}$ is continuous, then $f$ attains an **absolute maximum and minimum** on $K$: there exist $P_m, P_M \in K$ such that
 $$
-f(P_m) \leq f(P) \leq f(P_M) \qquad \text{for every } P \in K .
+f(P_m) \leq f(P) \leq f(P_M) \qquad \text{per ogni } P \in K .
 $$
-The statement extends the Weierstrass theorem of Mathematical Analysis 1, with the **compact set** $K$ in place of the interval $[a, b]$. It guarantees that problems of absolute maximum and minimum on a compact set have a solution; the points at which to look for it are determined with partial derivatives and Lagrange multipliers, and we refer to the chapter on maxima and minima. The proof uses sequences in $\mathbb{R}^n$ and is omitted.
+The statement extends the extreme value theorem of Mathematical Analysis 1, with the **compact set** $K$ in place of the interval $[a, b]$. It guarantees that problems of absolute maximum and minimum on a compact set have a solution; the points at which to look for it are determined with partial derivatives and Lagrange multipliers, and we refer to the chapter on maxima and minima. The proof uses sequences in $\mathbb{R}^n$ and is omitted.
 :::
 
 :::esempio{titolo="Checking the hypotheses"}
-Let $f(x, y) = \dfrac{x + y}{1 + x^2 + y^2}$ on $K = \{ (x, y) : x^2 + y^2 \leq 4 \}$. The function is continuous on $\mathbb{R}^2$, since it is a quotient of polynomials with a denominator that never vanishes; the set $K$ is closed, because it is defined by a non-strict inequality, and it is bounded, because it is contained in the disk of radius $2$. Both hypotheses are satisfied, so the **Weierstrass theorem** applies and $f$ attains an **absolute maximum and minimum** on $K$.
+Let $f(x, y) = \dfrac{x + y}{1 + x^2 + y^2}$ on $K = \{ (x, y) : x^2 + y^2 \leq 4 \}$. The function is continuous on $\mathbb{R}^2$, since it is a quotient of polynomials with a denominator that never vanishes; the set $K$ is closed, because it is defined by a non-strict inequality, and it is bounded, because it is contained in the disk of radius $2$. Both hypotheses are satisfied, so the **extreme value theorem** applies and $f$ attains an **absolute maximum and minimum** on $K$.
 :::
 
 :::attenzione

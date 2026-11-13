@@ -1,6 +1,6 @@
 ---
-titolo: Implicit functions
-sommario: When an equation F(x, y) = 0 defines a function y = φ(x), how to compute the derivatives of φ without knowing it, and how the result extends to surfaces and systems.
+titolo: Funzioni implicite
+sommario: Quando un'equazione F(x, y) = 0 definisce una funzione y = φ(x), come si calcolano le derivate di φ senza conoscerla, e come il risultato si estende alle superfici e ai sistemi.
 ---
 
 ## The problem
@@ -21,7 +21,7 @@ Let $(x_0, y_0) \in Z$. A function $\varphi : I \to \mathbb{R}$, with $I$ a neig
 $$
 \begin{cases}
 \varphi(x_0) = y_0 \\[4pt]
-F(x, \varphi(x)) = 0 \quad \text{for every } x \in I .
+F(x, \varphi(x)) = 0 \quad \text{per ogni } x \in I .
 \end{cases}
 $$
 The notion is **local**: the same equation can define different functions near different points of the curve, and near some points it may define none.
@@ -35,12 +35,12 @@ For $F(x, y) = x^2 + y^2 - 1$ the zero set is the unit circle, which is **not th
 :::
 
 :::osservazione
-In general it is not possible to solve $F(x, y) = 0$ for $y$ algebraically. The equation $y^5 + y + x = 0$ assigns to each $x$ *one and only one* $y$, since the function $y \mapsto y^5 + y$ is strictly increasing and takes all real values; the solution $y = \varphi(x)$, however, cannot be written in terms of elementary functions. **Dini's theorem** guarantees existence, local uniqueness and regularity of the implicit function *without* exhibiting it, and it provides its derivatives.
+In general it is not possible to solve $F(x, y) = 0$ for $y$ algebraically. The equation $y^5 + y + x = 0$ assigns to each $x$ *one and only one* $y$, since the function $y \mapsto y^5 + y$ is strictly increasing and takes all real values; the solution $y = \varphi(x)$, however, cannot be written in terms of elementary functions. The **implicit function theorem** guarantees existence, local uniqueness and regularity of the implicit function *without* exhibiting it, and it provides its derivatives.
 :::
 
-## Dini's theorem
+## The implicit function theorem
 
-::::teorema{#teorema-di-dini titolo="Dini's theorem (two variables)"}
+::::teorema{#teorema-di-dini titolo="Implicit function theorem (two variables)"}
 Let $F$ be of class $C^1$ on an open set $A \subseteq \mathbb{R}^2$ and let $(x_0, y_0) \in A$ be such that
 $$
 \begin{cases}
@@ -55,11 +55,11 @@ $$
 The theorem is used in two stages: first the two conditions are checked at the given point, then $\varphi'(x_0) = -\dfrac{F_x(x_0, y_0)}{F_y(x_0, y_0)}$ is computed from the values of the partial derivatives at the point, *without* knowing $\varphi$.
 
 :::dimostrazione
-Let $F_y(x_0, y_0) > 0$ (in the opposite case one argues on $-F$). Since $F_y$ is continuous, by the **sign-preservation property** there exists a rectangle $R = [x_0 - a, x_0 + a] \times [y_0 - b, y_0 + b] \subseteq A$ on which $F_y > 0$. For each fixed $x$ the function $y \mapsto F(x, y)$ is therefore strictly increasing on $[y_0 - b, y_0 + b]$. Since $F(x_0, y_0) = 0$, we have $F(x_0, y_0 - b) < 0 < F(x_0, y_0 + b)$; by the continuity of $F$ there then exists $\delta \in (0, a]$ such that
+Let $F_y(x_0, y_0) > 0$ (in the opposite case one applies the argument to $-F$). Since $F_y$ is continuous, by the **sign preservation property** there exists a rectangle $R = [x_0 - a, x_0 + a] \times [y_0 - b, y_0 + b] \subseteq A$ on which $F_y > 0$. For each fixed $x$ the function $y \mapsto F(x, y)$ is therefore strictly increasing on $[y_0 - b, y_0 + b]$. Since $F(x_0, y_0) = 0$, we have $F(x_0, y_0 - b) < 0 < F(x_0, y_0 + b)$; by the continuity of $F$ there then exists $\delta \in (0, a]$ such that
 $$
-F(x, y_0 - b) < 0 < F(x, y_0 + b) \qquad \text{for every } x \in I = (x_0 - \delta,\, x_0 + \delta) .
+F(x, y_0 - b) < 0 < F(x, y_0 + b) \qquad \text{per ogni } x \in I = (x_0 - \delta,\, x_0 + \delta) .
 $$
-For fixed $x \in I$, the continuous function $y \mapsto F(x, y)$ changes sign at the endpoints of $[y_0 - b, y_0 + b]$, hence by the **intermediate zero theorem** there exists $y \in (y_0 - b, y_0 + b)$ with $F(x, y) = 0$; such a $y$ is unique by strict monotonicity, and we set $\varphi(x) = y$.
+For fixed $x \in I$, the continuous function $y \mapsto F(x, y)$ changes sign at the endpoints of $[y_0 - b, y_0 + b]$, hence by **Bolzano's theorem** there exists $y \in (y_0 - b, y_0 + b)$ with $F(x, y) = 0$; such a $y$ is unique by strict monotonicity, and we set $\varphi(x) = y$.
 
 ::grafico{f="sqrt(1-x*x)" segmenti="0.4,0.5,0.8,0.5;0.4,1.1,0.8,1.1;0.4,0.5,0.4,1.1;0.8,0.5,0.8,1.1" punti="0.6,0.8,pieno" etichette="0.47,0.43,F < 0;0.47,1.15,F > 0;0.85,0.95,R" xmin=-0.2 xmax=1.4 ymin=-0.15 ymax=1.35 uguale=1 titolo="The case $F(x, y) = x^2 + y^2 - 1$ near $(x_0, y_0) = \left(\dfrac{3}{5}, \dfrac{4}{5}\right)$: in the rectangle $R$ the function is negative on the lower side and positive on the upper side, and for each $x$ the zero is unique"}
 
@@ -75,7 +75,7 @@ On $R$ the function $|F_x|$ is bounded and $F_y$ has a positive minimum, therefo
 :::
 ::::
 
-:::richiamo{titolo="Intermediate zero theorem"}
+:::richiamo{titolo="Bolzano's theorem"}
 If $g$ is continuous on $[a, b]$ and $g(a)\, g(b) < 0$, there exists $c \in (a, b)$ with $g(c) = 0$.
 :::
 
@@ -84,7 +84,7 @@ If $F$ is differentiable on an open set containing the segment with endpoints $P
 :::
 
 :::esempio{titolo="Application to the circle"}
-$F(x, y) = x^2 + y^2 - 1$ at the point $\left( \dfrac{3}{5}, \dfrac{4}{5} \right)$. We have $F\!\left( \dfrac{3}{5}, \dfrac{4}{5} \right) = \dfrac{9}{25} + \dfrac{16}{25} - 1 = 0$ and $F_y\!\left( \dfrac{3}{5}, \dfrac{4}{5} \right) = \dfrac{8}{5} \neq 0$, therefore **Dini's theorem** applies and
+$F(x, y) = x^2 + y^2 - 1$ at the point $\left( \dfrac{3}{5}, \dfrac{4}{5} \right)$. We have $F\!\left( \dfrac{3}{5}, \dfrac{4}{5} \right) = \dfrac{9}{25} + \dfrac{16}{25} - 1 = 0$ and $F_y\!\left( \dfrac{3}{5}, \dfrac{4}{5} \right) = \dfrac{8}{5} \neq 0$, therefore the **implicit function theorem** applies and
 $$
 \varphi'\!\left( \tfrac{3}{5} \right)
 = -\,\frac{F_x}{F_y}
@@ -108,11 +108,11 @@ The condition $F_y(x_0, y_0) \neq 0$ is *sufficient*, not *necessary*. For $F(x,
 ## Higher derivatives of the implicit function
 
 :::proposizione{#derivata-seconda-implicita titolo="Second derivative of the implicit function"}
-If $F$ is of class $C^2$ and Dini's theorem applies, the implicit function $\varphi$ is **of class** $C^2$ and
+If $F$ is of class $C^2$ and the implicit function theorem applies, the implicit function $\varphi$ is **of class** $C^2$ and
 $$
 \varphi''(x) = -\,\frac{F_{xx} F_y^2 - 2 F_{xy} F_x F_y + F_{yy} F_x^2}{F_y^3} ,
 $$
-with all partial derivatives evaluated at $(x, \varphi(x))$. The formula is obtained by differentiating the identity $\varphi' = -\dfrac{F_x}{F_y}$ with respect to $x$ using the **chain rule** and substituting $\varphi'$ again. At the points where $\varphi'(x_0) = 0$, that is $F_x(x_0, y_0) = 0$, the formula reduces to
+with all partial derivatives evaluated at $(x, \varphi(x))$. The formula is obtained by differentiating with respect to $x$ the identity $\varphi' = -\dfrac{F_x}{F_y}$ using the **chain rule** and substituting $\varphi'$ again. At the points where $\varphi'(x_0) = 0$, that is $F_x(x_0, y_0) = 0$, the formula reduces to
 $$
 \varphi''(x_0) = -\,\frac{F_{xx}(x_0, y_0)}{F_y(x_0, y_0)} .
 $$
@@ -123,7 +123,7 @@ If $F$ is differentiable and $t \mapsto (x(t), y(t))$ is differentiable, then $h
 :::
 
 :::esempio{titolo="Practical method: differentiating the identity"}
-In exercises it is convenient to **differentiate twice the identity** $F(x, \varphi(x)) = 0$ instead of applying the formula. For the circle $x^2 + y^2 = 1$, with $y = \varphi(x)$, the first differentiation gives $2x + 2y\,y' = 0$, from which $y' = -\dfrac{x}{y}$. Differentiating again we obtain $2 + 2(y')^2 + 2y\,y'' = 0$, hence
+In exercises it is convenient to **differentiate the identity twice** $F(x, \varphi(x)) = 0$ instead of applying the formula. For the circle $x^2 + y^2 = 1$, with $y = \varphi(x)$, the first differentiation gives $2x + 2y\,y' = 0$, from which $y' = -\dfrac{x}{y}$. Differentiating again we obtain $2 + 2(y')^2 + 2y\,y'' = 0$, hence
 $$
 y'' = -\,\frac{1 + (y')^2}{y}
 = -\,\frac{1 + \dfrac{x^2}{y^2}}{y}
@@ -151,7 +151,7 @@ If $F_y(x_0, y_0) \neq 0$ this line coincides with the tangent to the graph of t
 Tangent line to the curve $x^2 + 3y^2 = 4$ at the point $(1, 1)$. Setting $F(x, y) = x^2 + 3y^2 - 4$, we have $F(1, 1) = 0$, $F_x(1, 1) = 2$ and $F_y(1, 1) = 6$, therefore the tangent is
 $$
 2(x - 1) + 6(y - 1) = 0,
-\qquad \text{that is} \qquad
+\qquad \text{cioè} \qquad
 x + 3y = 4 .
 $$
 
@@ -163,9 +163,9 @@ $$
 The equation of the tangent line can be written $\nabla F(x_0, y_0) \cdot (x - x_0,\; y - y_0) = 0$: the gradient is **orthogonal** to the tangent line, hence to the level curve. This property is taken up again in the chapter on constrained maxima and minima, where it underlies the **method of Lagrange multipliers**.
 :::
 
-## Dini's theorem in three variables
+## The implicit function theorem in three variables
 
-:::teorema{#teorema-di-dini-tre-variabili titolo="Dini's theorem (three variables)"}
+:::teorema{#teorema-di-dini-tre-variabili titolo="Implicit function theorem (three variables)"}
 Let $F$ be of class $C^1$ on an open set $A \subseteq \mathbb{R}^3$ and let $P_0 = (x_0, y_0, z_0) \in A$ be such that
 $$
 \begin{cases}
@@ -198,7 +198,7 @@ This form holds at every point of the surface with $\nabla F(P_0) \neq (0,0,0)$,
 Tangent plane to the sphere $x^2 + y^2 + z^2 = 9$ at the point $(1, 2, 2)$. Setting $F(x, y, z) = x^2 + y^2 + z^2 - 9$, we have $F(1, 2, 2) = 0$ and $\nabla F(1, 2, 2) = (2, 4, 4) \neq (0,0,0)$, therefore the tangent plane is
 $$
 2(x - 1) + 4(y - 2) + 4(z - 2) = 0,
-\qquad \text{that is} \qquad
+\qquad \text{cioè} \qquad
 x + 2y + 2z = 9 .
 $$
 Since $F_z(1,2,2) = 4 \neq 0$, near the point the sphere is the **graph of a function** $z = g(x, y)$ with $g_x(1, 2) = -\dfrac{2}{4} = -\dfrac{1}{2}$ and $g_y(1, 2) = -1$.
@@ -206,7 +206,7 @@ Since $F_z(1,2,2) = 4 \neq 0$, near the point the sphere is the **graph of a fun
 
 ## Systems of equations and the Jacobian matrix
 
-:::teorema{#dini-per-sistemi titolo="Dini's theorem for systems"}
+:::teorema{#dini-per-sistemi titolo="Implicit function theorem for systems"}
 Let $F, G$ be of class $C^1$ on an open subset of $\mathbb{R}^3$ and let $P_0 = (x_0, y_0, z_0)$ be a solution of the system
 $$
 \begin{cases}

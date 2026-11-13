@@ -1,9 +1,9 @@
 ---
-titolo: Determinant and inverse matrix
-sommario: How to compute the determinant of a square matrix, which properties simplify the computation, and how the determinant decides invertibility and gives the formula for the inverse.
+titolo: Determinante e matrice inversa
+sommario: Come si calcola il determinante di una matrice quadrata, quali proprietà permettono di semplificarne il calcolo e come il determinante decide l'invertibilità e fornisce la formula dell'inversa.
 ---
 
-## Determinant of order 2 and 3
+## Determinants of orders 2 and 3
 
 :::definizione{#determinante-ordine-2 titolo="Determinant of order 2"}
 Let $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in M_2(\mathbb{R})$. The **determinant** of $A$ is the real number
@@ -92,7 +92,7 @@ The definition is recursive: a determinant of order $n$ reduces to $n$ determina
 Let $A \in M_n(\mathbb{R})$ with $n \geq 2$. For *every* row $i$ and *every* column $j$,
 $$
 \det A = \sum_{k=1}^{n} a_{ik} C_{ik}
-\qquad \text{and} \qquad
+\qquad \text{e} \qquad
 \det A = \sum_{k=1}^{n} a_{kj} C_{kj} .
 $$
 Hence the determinant can be expanded along any row or any column, with the same result. In computations one chooses the row or column with the **most zeros**, because the terms with $a_{ik} = 0$ do not require computing the cofactor. The proof uses the expression of the determinant as a sum over the permutations of the indices and is omitted.
@@ -141,7 +141,7 @@ The first property and the row swap follow from the expression of the determinan
 ::::
 
 :::attenzione
-Multiplying the whole matrix by $k$ means multiplying *each* of the $n$ rows by $k$, hence
+Multiplying the whole matrix by $k$ means multiplying by $k$ *each* of the $n$ rows, hence
 $$
 \det (kA) = k^n \det A .
 $$
@@ -208,12 +208,12 @@ $$
 The two operations make the first column zero below the entry $a_{11} = 2$ and do not change the determinant. The expansion along the first column therefore has a single term, with sign $(-1)^{1+1} = +1$.
 :::
 
-::::teorema{#determinante-matrici-elementari titolo="Determinant of the product by an elementary matrix"}
+::::teorema{#determinante-matrici-elementari titolo="Determinant of the product with an elementary matrix"}
 Let $E \in M_n(\mathbb{R})$ be an elementary matrix and let $B \in M_n(\mathbb{R})$. Then
 $$
 \det (EB) = \det E \cdot \det B ,
 $$
-with $\det E = -1$ for a row swap, $\det E = k$ for $R_i \to k R_i$, $\det E = 1$ for $R_i \to R_i + k R_j$. In every case $\det E \neq 0$. The proposition is the special case of Binet's theorem from which the proof of the general case starts.
+with $\det E = -1$ for a row swap, $\det E = k$ for $R_i \to k R_i$, $\det E = 1$ for $R_i \to R_i + k R_j$. In every case $\det E \neq 0$. The proposition is the special case of multiplicativity of the determinant from which the proof of the general case starts.
 
 :::dimostrazione
 By the theorem on elementary matrices, $EB$ is the matrix obtained from $B$ by the operation that defines $E$, so by the effect of elementary operations $\det (EB) = c \det B$, with $c = -1$, $c = k$ or $c = 1$ according to the type. With $B = I_n$ one gets $\det E = c \det I_n = c$, therefore $\det (EB) = \det E \cdot \det B$.
@@ -229,12 +229,12 @@ If $E$ is the elementary matrix of a row operation, then $EA$ is the matrix obta
 ::::teorema{#invertibilita-e-determinante titolo="Invertibility criterion"}
 Let $A \in M_n(\mathbb{R})$. Then
 $$
-A \text{ is invertible} \iff \det A \neq 0 .
+A \text{ è invertibile} \iff \det A \neq 0 .
 $$
 Matrices with zero determinant are called **singular**. The criterion reduces the question of invertibility to the computation of a single number, and it is the starting point for the formula of the inverse and for the discussion of matrices with a parameter. For example $\begin{pmatrix} 2 & 1 \\ 4 & 2 \end{pmatrix}$ **is not invertible**, since its determinant is $0$.
 
 :::dimostrazione
-Reduce $A$ to reduced row echelon form by elementary row operations: denoting by $E_1, \dots, E_r$ the elementary matrices of the operations used, one obtains $R = E_r \cdots E_1 A$. Applying $r$ times the proposition on the product by an elementary matrix,
+Reduce $A$ to reduced row echelon form by elementary row operations: denoting by $E_1, \dots, E_r$ the elementary matrices of the operations used, one obtains $R = E_r \cdots E_1 A$. Applying $r$ times the proposition on the product with an elementary matrix,
 $$
 \det R = \det E_r \cdots \det E_1 \cdot \det A ,
 $$
@@ -250,14 +250,14 @@ Let $A \in M_n(\mathbb{R})$ and let $R$ be the reduced row echelon matrix obtain
 By the properties of the determinant, if a row of $A$ is a linear combination of the others, then $\det A = 0$, since with operations of the form $R_i \to R_i + k R_j$ that row becomes zero without the determinant changing. The converse also holds, and the complete formulation in terms of rank and linear independence is found in the topics on linear systems and vector spaces. For $A = \begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 1 \\ 2 & 5 & 7 \end{pmatrix}$ the third row is $2R_1 + R_2$, so $\det A = 0$ and $A$ **is not invertible**.
 :::
 
-## Binet's theorem
+## Multiplicativity of the determinant
 
-::::teorema{#teorema-di-binet titolo="Binet's theorem"}
+::::teorema{#teorema-di-binet titolo="Multiplicativity of the determinant"}
 Let $A, B \in M_n(\mathbb{R})$. Then
 $$
 \det (AB) = \det A \cdot \det B .
 $$
-The theorem makes it possible to compute the determinant of a product *without* carrying out the product. Two consequences of constant use follow: $\det (A^k) = (\det A)^k$ for every integer $k \geq 1$, and $\det (AB) = \det (BA)$ even when $AB \neq BA$. With $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ we have
+The theorem makes it possible to compute the determinant of a product *without* carrying out the product. Two frequently used consequences follow: $\det (A^k) = (\det A)^k$ for every integer $k \geq 1$, and $\det (AB) = \det (BA)$ even when $AB \neq BA$. With $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ we have
 $$
 AB = \begin{pmatrix} 4 & 3 \\ 10 & 7 \end{pmatrix},
 \qquad
@@ -268,7 +268,7 @@ two different matrices, both with determinant $-2 = \det A \cdot \det B = (-2) \
 :::dimostrazione
 We distinguish two cases.
 
-- $A$ **invertible**. By the Gauss-Jordan theorem there exist elementary matrices with $E_r \cdots E_1 A = I_n$; multiplying on the left by the inverses one gets $A = F_1 F_2 \cdots F_r$, where $F_i = E_i^{-1}$ is again elementary. Applying $r$ times the proposition on the product by an elementary matrix,
+- $A$ **invertible**. By the Gauss-Jordan theorem there exist elementary matrices with $E_r \cdots E_1 A = I_n$; multiplying on the left by the inverses one gets $A = F_1 F_2 \cdots F_r$, where $F_i = E_i^{-1}$ is again elementary. Applying $r$ times the proposition on the product with an elementary matrix,
 $$
 \det (AB) = \det (F_1 F_2 \cdots F_r B) = \det F_1 \cdots \det F_r \cdot \det B ,
 $$
@@ -286,11 +286,11 @@ Let $A \in M_n(\mathbb{R})$ be invertible. Then
 $$
 \det (A^{-1}) = \frac{1}{\det A} .
 $$
-Indeed $A A^{-1} = I_n$, so by **Binet's theorem** $\det A \cdot \det (A^{-1}) = \det I_n = 1$. Together with $\det A^T = \det A$ and $\det (kA) = k^n \det A$, the formula makes it possible to compute the determinant of expressions such as $2 A^T B^{-1}$ knowing only $\det A$ and $\det B$. For $A, B \in M_3(\mathbb{R})$ with $\det A = 3$ and $\det B = -2$ one gets $\det (2 A^T B^{-1}) = 8 \cdot 3 \cdot \left(-\dfrac{1}{2}\right) = -12$.
+Indeed $A A^{-1} = I_n$, so by **multiplicativity of the determinant** $\det A \cdot \det (A^{-1}) = \det I_n = 1$. Together with $\det A^T = \det A$ and $\det (kA) = k^n \det A$, the formula makes it possible to compute the determinant of expressions such as $2 A^T B^{-1}$ knowing only $\det A$ and $\det B$. For $A, B \in M_3(\mathbb{R})$ with $\det A = 3$ and $\det B = -2$ one gets $\det (2 A^T B^{-1}) = 8 \cdot 3 \cdot \left(-\dfrac{1}{2}\right) = -12$.
 :::
 
-:::osservazione{#binet-geometrico titolo="Geometric meaning of Binet's theorem"}
-Let $A \in M_2(\mathbb{R})$. The map $x \mapsto Ax$ transforms the square with sides $e_1 = (1, 0)$ and $e_2 = (0, 1)$ into the parallelogram with sides $Ae_1$ and $Ae_2$, which are the columns of $A$; by the geometric meaning of the determinant and by $\det A^T = \det A$, its area is $|\det A|$. More generally, $|\det A|$ is the factor by which the map multiplies areas. Applying first $B$ and then $A$ multiplies areas by $|\det B|$ and then by $|\det A|$, in agreement with Binet's theorem. For linear maps, see the dedicated topic.
+:::osservazione{#binet-geometrico titolo="Geometric meaning of multiplicativity of the determinant"}
+Let $A \in M_2(\mathbb{R})$. The map $x \mapsto Ax$ transforms the square with sides $e_1 = (1, 0)$ and $e_2 = (0, 1)$ into the parallelogram with sides $Ae_1$ and $Ae_2$, which are the columns of $A$; by the geometric meaning of the determinant and by $\det A^T = \det A$, its area is $|\det A|$. More generally, $|\det A|$ is the factor by which the map multiplies areas. Applying first $B$ and then $A$ multiplies areas by $|\det B|$ and then by $|\det A|$, in agreement with multiplicativity of the determinant. For linear maps, see the dedicated topic.
 
 ::grafico{area="1;0;0;1" vettori="0,0,2,1,Ae₁;0,0,1,2,Ae₂" segmenti="2,1,3,3;1,2,3,3;1,0,1,1;0,1,1,1" etichette="0.25,0.35,1;1.4,1.55,3" xmin=-0.5 xmax=3.5 ymin=-0.5 ymax=3.4 uguale=1 titolo="With $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ the square of area $1$ (shaded) becomes the parallelogram with sides $Ae_1 = (2, 1)$ and $Ae_2 = (1, 2)$, of area $\det A = 3$"}
 
@@ -299,7 +299,7 @@ Let $A \in M_2(\mathbb{R})$. The map $x \mapsto Ax$ transforms the square with s
 ## Inverse via the cofactor matrix
 
 :::definizione{#matrice-dei-complementi-algebrici titolo="Cofactor matrix"}
-Let $A \in M_n(\mathbb{R})$ with $n \geq 2$. The **cofactor matrix** of $A$ is the matrix $\operatorname{cof} A = (C_{ij})$ that has in position $(i, j)$ the cofactor $C_{ij}$ of $a_{ij}$. Its transpose $(\operatorname{cof} A)^T$, which has $C_{ji}$ in position $(i, j)$, is called the **adjugate matrix** of $A$. The two matrices are the ingredients of the formula for the inverse.
+Let $A \in M_n(\mathbb{R})$ with $n \geq 2$. The **cofactor matrix** of $A$ is the matrix $\operatorname{cof} A = (C_{ij})$ that has in position $(i, j)$ the cofactor $C_{ij}$ of $a_{ij}$. Its transpose $(\operatorname{cof} A)^T$, which has in position $(i, j)$ the entry $C_{ji}$, is called the **adjugate matrix** of $A$. The two matrices are the ingredients of the formula for the inverse.
 :::
 
 ::::teorema{#formula-dell-inversa titolo="Formula for the inverse"}
@@ -320,7 +320,7 @@ Let $P = A\, (\operatorname{cof} A)^T$. The entry in position $(i, k)$ of $P$ is
 $$
 p_{ik} = \sum_{j=1}^{n} a_{ij}\, C_{kj} .
 $$
-If $k = i$, the sum is the expansion of $\det A$ along row $i$, so by **Laplace's theorem** $p_{ii} = \det A$. If $k \neq i$, let $A'$ be the matrix obtained from $A$ by replacing row $k$ with row $i$. The cofactors $C_{k1}, \dots, C_{kn}$ do not depend on row $k$, so they are the same for $A$ and for $A'$, and the sum is the expansion of $\det A'$ along row $k$. Since $A'$ has two equal rows, $p_{ik} = \det A' = 0$. Therefore $P = \det A \cdot I_n$, and dividing by $\det A \neq 0$ one gets $A \cdot \dfrac{1}{\det A}(\operatorname{cof} A)^T = I_n$. By the inverse from a single equality, the matrix $\dfrac{1}{\det A}(\operatorname{cof} A)^T$ is the inverse of $A$.
+If $k = i$, the sum is the expansion of $\det A$ along row $i$, so by **Laplace's theorem** $p_{ii} = \det A$. If $k \neq i$, let $A'$ be the matrix obtained from $A$ by replacing row $k$ with row $i$. The cofactors $C_{k1}, \dots, C_{kn}$ do not depend on row $k$, so they are the same for $A$ and for $A'$, and the sum is the expansion of $\det A'$ along row $k$. Since $A'$ has two equal rows, $p_{ik} = \det A' = 0$. Therefore $P = \det A \cdot I_n$, and dividing by $\det A \neq 0$ one gets $A \cdot \dfrac{1}{\det A}(\operatorname{cof} A)^T = I_n$. By the result on an inverse from a single equality, the matrix $\dfrac{1}{\det A}(\operatorname{cof} A)^T$ is the inverse of $A$.
 :::
 ::::
 

@@ -1,6 +1,6 @@
 ---
-titolo: Limits and continuity
-sommario: What it means for a function to tend to a value, how limits are computed, which theorems govern them, and what continuity adds.
+titolo: Limiti e continuità
+sommario: Che cosa significa che una funzione tende a un valore, come si calcolano i limiti, quali teoremi li governano, e che cosa aggiunge la continuità.
 ---
 
 ## Neighborhoods and accumulation points
@@ -24,11 +24,11 @@ $x_0 \in \mathbb{R}$ is an **accumulation point** of $A \subseteq \mathbb{R}$ if
 ## Definition of limit
 
 :::definizione{#limite-finito titolo="Finite limit at a point"}
-$f : A \to \mathbb{R}$, $x_0$ an accumulation point of $A$. We write $\displaystyle\lim_{x \to x_0} f(x) = L$, with $L \in \mathbb{R}$, if for every $\varepsilon > 0$ there exists $\delta > 0$ such that, for every $x \in A$,
+Let $f : A \to \mathbb{R}$ and let $x_0$ be an accumulation point of $A$. We write $\displaystyle\lim_{x \to x_0} f(x) = L$, with $L \in \mathbb{R}$, if for every $\varepsilon > 0$ there exists $\delta > 0$ such that, for every $x \in A$,
 $$
 0 < |x - x_0| < \delta \implies |f(x) - L| < \varepsilon .
 $$
-Given a distance $\varepsilon$ from $L$, as small as desired, there exists a neighborhood of $x_0$ in which *all* the values $f(x)$ lie at a distance less than $\varepsilon$ from $L$; the radius $\delta$ **depends on** $\varepsilon$. The condition $0 < |x - x_0|$ excludes $x_0$, so the value $f(x_0)$, even when it exists, **plays no role** in the limit.
+Given a distance $\varepsilon$ from $L$, as small as desired, there exists a neighborhood of $x_0$ in which *all* the values $f(x)$ lie at a distance from $L$ of less than $\varepsilon$; the radius $\delta$ **depends on** $\varepsilon$. The condition $0 < |x - x_0|$ excludes $x_0$, so the value $f(x_0)$, even when it exists, **plays no role** in the limit.
 :::
 
 :::esempio{titolo="Verification using the definition"}
@@ -88,7 +88,7 @@ which is a **contradiction**. With an infinite limit the same argument works wit
 ::::
 
 ::::teorema{#permanenza-del-segno titolo="Sign-preservation theorem"}
-If $\displaystyle\lim_{x \to x_0} f(x) = L > 0$ (including $L = +\infty$), there exists a neighborhood $U$ of $x_0$ with $f(x) > 0$ for every $x \in U \cap A$, $x \neq x_0$. Similarly with $L < 0$ and $f(x) < 0$. It is used to deduce the **sign** of a function near a point from its limit; it is used in the intermediate zero theorem and in the study of monotonicity.
+If $\displaystyle\lim_{x \to x_0} f(x) = L > 0$ (including $L = +\infty$), there exists a neighborhood $U$ of $x_0$ with $f(x) > 0$ for every $x \in U \cap A$, $x \neq x_0$. Similarly with $L < 0$ and $f(x) < 0$. It is used to deduce the **sign** of a function near a point from its limit; it is used in Bolzano's theorem and in the study of monotonicity.
 
 :::dimostrazione
 For finite $L$, apply the definition with $\varepsilon = \dfrac{L}{2} > 0$: there exists $\delta$ such that $|f(x) - L| < \dfrac{L}{2}$ for $0 < |x - x_0| < \delta$, hence $f(x) > L - \dfrac{L}{2} = \dfrac{L}{2} > 0$. For $L = +\infty$, apply the definition with $M = 1$.
@@ -113,10 +113,10 @@ that is, $|f(x) - L| < \varepsilon$.
 :::
 ::::
 
-:::teorema{#limitata-per-infinitesima titolo="Bounded times infinitesimal"}
+:::teorema{#limitata-per-infinitesima titolo="Product of a bounded function and an infinitesimal function"}
 If $|f(x)| \leq C$ in a neighborhood of $x_0$ and $g(x) \to 0$, then $f(x)\,g(x) \to 0$. This follows from the **squeeze theorem**: $0 \leq |f(x) g(x)| \leq C\,|g(x)| \to 0$.
 $$
-\lim_{x \to +\infty} \frac{\sin x}{x} = 0 \qquad\text{since } |\sin x| \leq 1 \text{ and } \frac{1}{x} \to 0 .
+\lim_{x \to +\infty} \frac{\sin x}{x} = 0 \qquad\text{perché } |\sin x| \leq 1 \text{ e } \frac{1}{x} \to 0 .
 $$
 The limit of $\sin x$ as $x \to +\infty$ does not exist; the theorem requires *only* that $\sin x$ be **bounded**.
 
@@ -131,7 +131,7 @@ If $f(x) \to L$ and $g(x) \to M$ with $L, M \in \mathbb{R}$, then
 $$
 \begin{gathered}
 f(x) + g(x) \to L + M, \qquad f(x)\,g(x) \to L M, \\[4pt]
-\frac{f(x)}{g(x)} \to \frac{L}{M} \quad \text{if } M \neq 0 .
+\frac{f(x)}{g(x)} \to \frac{L}{M} \quad \text{se } M \neq 0 .
 \end{gathered}
 $$
 With infinite limits the following rules hold ($L \in \mathbb{R}$; $0^{+}$ denotes a quantity that tends to $0$ while remaining positive; the cases with the signs changed are symmetric):
@@ -164,7 +164,7 @@ $$
 = \lim_{x \to +\infty} \frac{x^3\left(2 - \dfrac{1}{x^2}\right)}{x^3\left(5 + \dfrac{1}{x} + \dfrac{1}{x^3}\right)}
 = \frac{2}{5}
 $$
-After cancelling $x^3$, the terms $\dfrac{1}{x^2}$, $\dfrac{1}{x}$, $\dfrac{1}{x^3}$ tend to $0$. In a ratio of polynomials as $x \to \pm\infty$, *only* the **highest-degree terms** matter.
+After canceling $x^3$, the terms $\dfrac{1}{x^2}$, $\dfrac{1}{x}$, $\dfrac{1}{x^3}$ tend to $0$. In a ratio of polynomials as $x \to \pm\infty$, *only* the **highest-degree terms** matter.
 :::
 
 :::teorema{#limite-funzione-composta titolo="Limit of a composite function"}
@@ -235,14 +235,14 @@ Each factor is reduced to a **fundamental limit** with the appropriate substitut
 The fundamental limits hold when the argument tends to $0$ (or to infinity, for the limit defining $e$). The ratio $\dfrac{\sin x}{x}$ as $x \to \pi$ is *not* a fundamental limit: the numerator tends to $0$ and the denominator to $\pi$, so the limit is $0$ with no indeterminate form.
 :::
 
-## Infinitesimals, infinities and Landau symbols
+## Infinitesimal and infinitely large functions, and Landau notation
 
-:::definizione{#infinitesimo-infinito titolo="Infinitesimal, infinite, little-o"}
-$f$ is **infinitesimal** as $x \to x_0$ if $f(x) \to 0$; it is **infinite** if $|f(x)| \to +\infty$. With $g(x) \neq 0$ near $x_0$, one writes $f(x) = o(g(x))$ ($f$ is **little-o** of $g$) if
+:::definizione{#infinitesimo-infinito titolo="Infinitesimal function, infinitely large function, little-o"}
+$f$ is **infinitesimal** as $x \to x_0$ if $f(x) \to 0$; it is **infinitely large** if $|f(x)| \to +\infty$. With $g(x) \neq 0$ near $x_0$, one writes $f(x) = o(g(x))$ ($f$ is **little-o** of $g$) if
 $$
 \lim_{x \to x_0} \frac{f(x)}{g(x)} = 0 .
 $$
-Between infinitesimals, $f = o(g)$ means that $f$ tends to $0$ faster than $g$; between infinities, that $f$ tends to infinity more slowly than $g$. The symbol records an approximation together with the order of the error: from the fundamental sine limit, $\sin x = x + o(x)$ as $x \to 0$, since $\dfrac{\sin x - x}{x} = \dfrac{\sin x}{x} - 1 \to 0$.
+For infinitesimal functions, $f = o(g)$ means that $f$ tends to $0$ faster than $g$; for infinitely large functions, that $f$ tends to infinity more slowly than $g$. The symbol records an approximation together with the order of the error: from the fundamental sine limit, $\sin x = x + o(x)$ as $x \to 0$, since $\dfrac{\sin x - x}{x} = \dfrac{\sin x}{x} - 1 \to 0$.
 :::
 
 :::definizione{#funzioni-asintotiche titolo="Asymptotically equivalent functions"}
@@ -259,7 +259,7 @@ $$
 Replacing a function with an asymptotically equivalent one is legitimate in products and quotients, *not* in sums and differences. As $x \to 0$ we have $\sin x \sim x$, but $\sin x - x$ is not asymptotically equivalent to $x - x = 0$: the limit of $\dfrac{\sin x - x}{x^3}$ equals $-\dfrac{1}{6}$ (**Taylor's formula**), whereas the substitution would give $0$.
 :::
 
-:::teorema{#gerarchia-degli-infiniti titolo="Hierarchy of infinities"}
+:::teorema{#gerarchia-degli-infiniti titolo="Hierarchy of growth rates"}
 For $\alpha > 0$, $\beta > 0$, $a > 1$:
 $$
 \lim_{x \to +\infty} \frac{(\ln x)^{\beta}}{x^{\alpha}} = 0, \qquad
@@ -312,7 +312,7 @@ therefore $y = x$ is an **oblique asymptote** on both sides; $x = 0$ is a **vert
 ## Continuous functions
 
 :::definizione{#funzione-continua titolo="Continuous function"}
-$f : A \to \mathbb{R}$, $x_0 \in A$ an accumulation point of $A$. $f$ is **continuous** at $x_0$ if
+Let $f : A \to \mathbb{R}$ and let $x_0 \in A$ be an accumulation point of $A$. The function $f$ is **continuous** at $x_0$ if
 $$
 \lim_{x \to x_0} f(x) = f(x_0) ,
 $$
@@ -345,10 +345,10 @@ $\dfrac{\sin x}{x}$ at $0$: **removable**, the limit equals $1$. The sign functi
 
 They hold for $f$ continuous on a closed and bounded interval $[a, b]$; without either of the two hypotheses the conclusions *may* fail, as the examples show.
 
-::::teorema{#teorema-degli-zeri titolo="Intermediate zero theorem"}
+::::teorema{#teorema-degli-zeri titolo="Bolzano's theorem"}
 If $f$ is continuous on $[a, b]$ and $f(a)\, f(b) < 0$, there exists $c \in (a, b)$ with $f(c) = 0$. It guarantees a solution of $f(x) = 0$ *without* solving the equation: it locates the roots of equations that cannot be solved algebraically, such as $x = \cos x$, and counts the zeros in curve sketching.
 $$
-x^3 + x - 1 = 0 \text{ has a solution in } (0, 1): \quad f(0) = -1 < 0, \ f(1) = 1 > 0 .
+x^3 + x - 1 = 0 \text{ ha una soluzione in } (0, 1): \quad f(0) = -1 < 0, \ f(1) = 1 > 0 .
 $$
 
 ::grafico{f="x^3+x-1" xmin=-0.5 xmax=1.5 ymin=-2 ymax=2 punti="0,-1,pieno;1,1,pieno;0.6823,0,pieno,c" titolo="$f(x) = x^3 + x - 1$ is continuous, $f(0) = -1 < 0$ and $f(1) = 1 > 0$: the graph crosses the $x$-axis at a point $c \in (0, 1)$"}
@@ -369,7 +369,7 @@ Without continuity the theorem **does not apply**: $f(x) = -1$ for $x \in [0, 1)
 
 :::
 
-:::teorema{#teorema-di-weierstrass titolo="Weierstrass theorem"}
+:::teorema{#teorema-di-weierstrass titolo="Extreme value theorem"}
 If $f$ is continuous on $[a, b]$, it attains a **maximum and a minimum**: there exist $x_m, x_M \in [a, b]$ with $f(x_m) \leq f(x) \leq f(x_M)$ for every $x \in [a, b]$. It guarantees that the maximum and minimum problem on a closed and bounded interval has a solution; differential calculus establishes where to look for it. The proof, which uses the Bolzano-Weierstrass theorem on sequences, is not included.
 
 - $f(x) = x$ on $(0, 1)$: continuous, with neither maximum nor minimum, since the interval is *not* closed.
@@ -380,10 +380,10 @@ If $f$ is continuous on $[a, b]$, it attains a **maximum and a minimum**: there 
 If $f$ is continuous on $[a, b]$ with minimum $m$ and maximum $M$, for every $y \in [m, M]$ there exists $x \in [a, b]$ with $f(x) = y$: the **image** of $[a, b]$ is the interval $[m, M]$. A continuous function on an interval takes *all* the values between two values it takes; this is how the image of a function is determined and how the solutions of $f(x) = k$ are counted. Without continuity it does not hold: the function equal to $-1$ on $[0, 1)$ and to $1$ on $[1, 2]$ takes the values $-1$ and $1$ but not the value $0$. It does not hold either if the domain is not an interval: $\dfrac{1}{x}$ is continuous on the set $[-1, 1] \setminus \{0\}$, takes the values $-1$ and $1$ and does not take the value $0$.
 
 :::dimostrazione
-For $y = m$ or $y = M$ the conclusion is the **Weierstrass theorem**. For $m < y < M$ let $g(x) = f(x) - y$, which is continuous, with $g(x_m) = m - y < 0$ and $g(x_M) = M - y > 0$; by the **intermediate zero theorem** on the interval with endpoints $x_m$ and $x_M$ there exists $x$ with $g(x) = 0$, that is, $f(x) = y$.
+For $y = m$ or $y = M$ the conclusion is the **extreme value theorem**. For $m < y < M$ let $g(x) = f(x) - y$, which is continuous, with $g(x_m) = m - y < 0$ and $g(x_M) = M - y > 0$; by **Bolzano's theorem** on the interval with endpoints $x_m$ and $x_M$ there exists $x$ with $g(x) = 0$, that is, $f(x) = y$.
 :::
 ::::
 
-:::richiamo{titolo="Intermediate zero theorem"}
+:::richiamo{titolo="Bolzano's theorem"}
 If $f$ is continuous on $[a, b]$ and $f(a)\, f(b) < 0$, there exists $c \in (a, b)$ with $f(c) = 0$.
 :::

@@ -1,12 +1,12 @@
 ---
-titolo: Integral calculus
-sommario: Antiderivatives and integration techniques, the Riemann definite integral with the fundamental theorem of calculus, and the computation of areas.
+titolo: Calcolo integrale
+sommario: Le primitive e le tecniche di integrazione, l'integrale definito secondo Riemann con il teorema fondamentale del calcolo, e il calcolo delle aree.
 ---
 
 ## Antiderivatives and indefinite integral
 
 :::definizione{#primitiva titolo="Antiderivative and indefinite integral"}
-Let $f : I \to \mathbb{R}$ with $I$ an interval. A function $F : I \to \mathbb{R}$ is an **antiderivative** of $f$ on $I$ if $F$ is differentiable and $F'(x) = f(x)$ for every $x \in I$. The **indefinite integral** of $f$ is the set of all antiderivatives of $f$ and is denoted by $\displaystyle\int f(x)\, dx$. For example $\dfrac{x^3}{3}$ is an antiderivative of $x^2$, because its derivative is $x^2$. Finding antiderivatives is the *inverse operation* of differentiation; together with the fundamental formula of calculus it reduces the computation of definite integrals to finding an antiderivative.
+Let $f : I \to \mathbb{R}$ with $I$ an interval. A function $F : I \to \mathbb{R}$ is an **antiderivative** of $f$ on $I$ if $F$ is differentiable and $F'(x) = f(x)$ for every $x \in I$. The **indefinite integral** of $f$ is the set of all antiderivatives of $f$ and is denoted by $\displaystyle\int f(x)\, dx$. For example $\dfrac{x^3}{3}$ is an antiderivative of $x^2$, because its derivative is $x^2$. Finding antiderivatives is the *inverse operation* of differentiation; together with the Newton–Leibniz formula it reduces the computation of definite integrals to finding an antiderivative.
 :::
 
 ::::teorema{#due-primitive titolo="Two antiderivatives differ by a constant"}
@@ -18,7 +18,7 @@ $$
 ::grafico{f="x^3/3;x^3/3+1;x^3/3-1" xmin=-2.6 xmax=2.6 ymin=-4 ymax=4 titolo="Three antiderivatives of $x^2$: $\dfrac{x^3}{3}$ in color, $\dfrac{x^3}{3} + 1$ dashed, $\dfrac{x^3}{3} - 1$ in red; each graph is a vertical translation of another"}
 
 :::dimostrazione
-Let $H = G - F$. The function $H$ is differentiable on $I$ and $H'(x) = G'(x) - F'(x) = f(x) - f(x) = 0$ for every $x \in I$. Let $x_1 < x_2$ be two points of $I$. Since $I$ is an interval, $[x_1, x_2] \subseteq I$, therefore $H$ is continuous on $[x_1, x_2]$ and differentiable on $(x_1, x_2)$ and **Lagrange's mean value theorem** applies: there exists $\xi \in (x_1, x_2)$ such that
+Let $H = G - F$. The function $H$ is differentiable on $I$ and $H'(x) = G'(x) - F'(x) = f(x) - f(x) = 0$ for every $x \in I$. Let $x_1 < x_2$ be two points of $I$. Since $I$ is an interval, $[x_1, x_2] \subseteq I$, therefore $H$ is continuous on $[x_1, x_2]$ and differentiable on $(x_1, x_2)$ and the **mean value theorem** applies: there exists $\xi \in (x_1, x_2)$ such that
 $$
 H(x_2) - H(x_1) = H'(\xi)\,(x_2 - x_1) = 0 .
 $$
@@ -26,7 +26,7 @@ Hence $H$ takes the same value at every pair of points of $I$, that is, it is **
 :::
 ::::
 
-:::richiamo{titolo="Lagrange's mean value theorem"}
+:::richiamo{titolo="Mean value theorem"}
 If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, there exists $\xi \in (a, b)$ such that $f(b) - f(a) = f'(\xi)\,(b - a)$.
 :::
 
@@ -58,7 +58,7 @@ $$
 :::
 
 :::teorema{#integrali-quasi-immediati titolo="Elementary integrals in composite form"}
-If a function $f(x)$ appears in place of $x$ and the factor $f'(x)$ appears in the integrand, the **chain rule**, read backward, gives
+If in place of $x$ there appears a function $f(x)$ and the factor $f'(x)$ appears in the integrand, the **chain rule**, read backward, gives
 $$
 \begin{gathered}
 \int f'(x)\, [f(x)]^{\alpha}\, dx = \frac{[f(x)]^{\alpha+1}}{\alpha+1} + c \ \ (\alpha \neq -1), \qquad
@@ -68,7 +68,7 @@ $$
 \int \frac{f'(x)}{1 + [f(x)]^2}\, dx = \arctan f(x) + c .
 \end{gathered}
 $$
-These integrals are called **almost immediate**: one recognizes in the integrand the derivative $f'(x)$, possibly up to a multiplicative constant.
+These integrals are **recognized by the chain rule**: one recognizes in the integrand the derivative $f'(x)$, possibly up to a multiplicative constant.
 :::
 
 :::esempio
@@ -82,7 +82,7 @@ In the first integral the numerator $-\sin x$ is the derivative of the denominat
 ## Integration by parts
 
 ::::teorema{#per-parti titolo="Integration by parts"}
-Let $f$ and $g$ be differentiable with continuous derivative on an interval. Then
+Let $f$ and $g$ be differentiable with continuous derivatives on an interval. Then
 $$
 \int f(x)\, g'(x)\, dx = f(x)\, g(x) - \int f'(x)\, g(x)\, dx ,
 $$
@@ -97,7 +97,7 @@ By the **product rule**, $(f g)' = f' g + f g'$, therefore $f g$ is an antideriv
 $$
 \int f'(x)\, g(x)\, dx + \int f(x)\, g'(x)\, dx = f(x)\, g(x) + c ,
 $$
-and moving the first integral to the right-hand side gives the formula. The version for the definite integral follows by applying the **fundamental formula of calculus** to the antiderivative $f g$.
+and moving the first integral to the right-hand side gives the formula. The version for the definite integral follows by applying the **Newton–Leibniz formula** to the antiderivative $f g$.
 :::
 ::::
 
@@ -113,13 +113,13 @@ Typical cases, with the choice of the factor to differentiate:
 $$
 \int \ln x\, dx = \int 1 \cdot \ln x\, dx = x \ln x - \int x \cdot \frac{1}{x}\, dx = x \ln x - x + c
 $$
-We set $f(x) = \ln x$ and $g'(x) = 1$, therefore $f'(x) = \dfrac{1}{x}$ and $g(x) = x$. The product $x \cdot \dfrac{1}{x}$ equals $1$, hence the new integral is **immediate**.
+We set $f(x) = \ln x$ and $g'(x) = 1$, therefore $f'(x) = \dfrac{1}{x}$ and $g(x) = x$. The product $x \cdot \dfrac{1}{x}$ equals $1$, hence the new integral can be **evaluated directly**.
 :::
 
 ## Integration by substitution
 
 :::teorema{#per-sostituzione titolo="Integration by substitution"}
-Let $f$ be continuous and $g$ differentiable with continuous derivative. If $F$ is an antiderivative of $f$, then
+Let $f$ be continuous and $g$ differentiable with a continuous derivative. If $F$ is an antiderivative of $f$, then
 $$
 \int f(g(x))\, g'(x)\, dx = F(g(x)) + c ,
 $$
@@ -158,7 +158,7 @@ To integrate $\dfrac{P(x)}{Q(x)}$ with $P$ and $Q$ polynomials:
 - to each real root $x_0$ of multiplicity $m$ correspond the terms $\dfrac{A_1}{x - x_0} + \dots + \dfrac{A_m}{(x - x_0)^m}$; for $k \geq 2$ the integral of $\dfrac{A_k}{(x - x_0)^k}$ is $-\dfrac{A_k}{(k-1)\,(x - x_0)^{k-1}}$;
 - to each second-degree factor with negative discriminant (complex conjugate roots) corresponds a term $\dfrac{Ax + B}{x^2 + px + q}$: one isolates in the numerator the derivative of the denominator, which gives a logarithm, and the rest is brought by **completing the square** to the form $\dfrac{1}{u^2 + k^2}$, whose integral is $\dfrac{1}{k} \arctan \dfrac{u}{k}$.
 
-The constants of the decomposition are determined with the **identity principle for polynomials** or by substituting the roots of the denominator.
+The constants of the decomposition are determined with the **polynomial identity principle** or by substituting the roots of the denominator.
 :::
 
 :::esempio{titolo="Simple real roots"}
@@ -197,7 +197,7 @@ and the common value is called the **definite integral** of $f$ on $[a, b]$, den
 :::
 
 :::teorema{#funzioni-integrabili titolo="Classes of integrable functions"}
-If $f$ is continuous on $[a, b]$, or monotonic on $[a, b]$, then $f$ is **integrable** on $[a, b]$. The proof for continuous functions uses uniform continuity and is omitted. *Not* every bounded function is integrable: the **Dirichlet function**, which equals $1$ on the rationals and $0$ on the irrationals, has every lower sum equal to $0$ and every upper sum equal to $b - a$, therefore it is not integrable.
+If $f$ is continuous on $[a, b]$, or monotonic on $[a, b]$, then $f$ is **integrable** on $[a, b]$. The proofs are omitted. *Not* every bounded function is integrable: the **Dirichlet function**, which equals $1$ on the rationals and $0$ on the irrationals, has every lower sum equal to $0$ and every upper sum equal to $b - a$, therefore it is not integrable.
 :::
 
 ## Properties of the integral and mean value theorem
@@ -218,12 +218,12 @@ If $f$ is continuous on $[a, b]$, there exists $c \in [a, b]$ such that
 $$
 \int_a^b f(x)\, dx = f(c)\,(b - a) .
 $$
-The number $\dfrac{1}{b-a} \displaystyle\int_a^b f(x)\, dx$ is the **integral mean** of $f$ on $[a, b]$, therefore the theorem states that a continuous function **attains its own mean**. It is used in the proof of the fundamental theorem of calculus.
+The number $\dfrac{1}{b-a} \displaystyle\int_a^b f(x)\, dx$ is the **average value** of $f$ on $[a, b]$, therefore the theorem states that a continuous function **attains its average value**. It is used in the proof of the fundamental theorem of calculus.
 
-::grafico{f="x^2" area="x^2;0;0;2" segmenti="0,1.3333,2,1.3333;2,0,2,1.3333;1.1547,0,1.1547,1.3333" punti="1.1547,1.3333,pieno;1.1547,0,pieno,c" xmin=-0.4 xmax=2.6 ymin=-0.4 ymax=4.6 titolo="For $f(x) = x^2$ on $[0, 2]$ the integral mean is $\dfrac{4}{3}$: the dashed rectangle with base $[0, 2]$ and height $\dfrac{4}{3}$ has the same area as the colored region, and $f(c) = \dfrac{4}{3}$ for $c = \dfrac{2}{\sqrt{3}}$"}
+::grafico{f="x^2" area="x^2;0;0;2" segmenti="0,1.3333,2,1.3333;2,0,2,1.3333;1.1547,0,1.1547,1.3333" punti="1.1547,1.3333,pieno;1.1547,0,pieno,c" xmin=-0.4 xmax=2.6 ymin=-0.4 ymax=4.6 titolo="For $f(x) = x^2$ on $[0, 2]$ the average value is $\dfrac{4}{3}$: the dashed rectangle with base $[0, 2]$ and height $\dfrac{4}{3}$ has the same area as the colored region, and $f(c) = \dfrac{4}{3}$ for $c = \dfrac{2}{\sqrt{3}}$"}
 
 :::dimostrazione
-By **Weierstrass's theorem** $f$ has a minimum $m$ and a maximum $M$ on $[a, b]$. Since $m \leq f(x) \leq M$ for every $x \in [a, b]$, by the monotonicity of the integral
+By the **extreme value theorem** $f$ has a minimum $m$ and a maximum $M$ on $[a, b]$. Since $m \leq f(x) \leq M$ for every $x \in [a, b]$, by the monotonicity of the integral
 $$
 m\,(b - a) \leq \int_a^b f(x)\, dx \leq M\,(b - a) ,
 $$
@@ -231,7 +231,7 @@ therefore the number $\mu = \dfrac{1}{b-a} \displaystyle\int_a^b f(x)\, dx$ belo
 :::
 ::::
 
-:::richiamo{titolo="Weierstrass's theorem"}
+:::richiamo{titolo="Extreme value theorem"}
 If $f$ is continuous on $[a, b]$, it has a maximum and a minimum: there exist $x_m, x_M \in [a, b]$ with $f(x_m) \leq f(x) \leq f(x_M)$ for every $x \in [a, b]$.
 :::
 
@@ -255,9 +255,9 @@ The variable $x$ is the upper limit of integration; the integration variable $t$
 ::::teorema{#teorema-fondamentale titolo="Fundamental theorem of calculus"}
 Let $f$ be continuous on $[a, b]$. Then the integral function $F(x) = \displaystyle\int_a^x f(t)\, dt$ is differentiable on $[a, b]$ and
 $$
-F'(x) = f(x) \qquad \text{for every } x \in [a, b] ,
+F'(x) = f(x) \qquad \text{per ogni } x \in [a, b] ,
 $$
-where at the endpoints $a$ and $b$ the right and the left derivative are meant. Therefore *every* continuous function on an interval **has antiderivatives**, and the integral function is one of them. The theorem links differentiation and integration, and the fundamental formula of calculus follows from it.
+where at the endpoints $a$ and $b$ the right and the left derivative are meant. Therefore *every* continuous function on an interval **has antiderivatives**, and the integral function is one of them. The theorem links differentiation and integration, and the Newton–Leibniz formula follows from it.
 
 ::grafico{f="2+sin(x)" area="2+sin(x);0;1;2" punti="1,0,pieno,x;2,0,pieno,x + h" nomi="t,y" xmin=-0.4 xmax=3.6 ymin=-0.4 ymax=3.6 titolo="$F(x + h) - F(x)$ is the area of the colored strip between $x$ and $x + h$, under the graph of $f$; by the mean value theorem for integrals it equals $f(c_h) \cdot h$"}
 
@@ -278,7 +278,7 @@ As $h \to 0$ the point $c_h$, lying between $x$ and $x + h$, tends to $x$; since
 If $f$ is continuous on $[a, b]$, there exists $c \in [a, b]$ such that $\displaystyle\int_a^b f(x)\, dx = f(c)\,(b - a)$.
 :::
 
-:::teorema{#formula-fondamentale titolo="Fundamental formula of calculus"}
+:::teorema{#formula-fondamentale titolo="Newton–Leibniz formula"}
 If $f$ is continuous on $[a, b]$ and $G$ is an antiderivative of $f$, then
 $$
 \int_a^b f(x)\, dx = G(b) - G(a) = \bigl[ G(x) \bigr]_a^b .

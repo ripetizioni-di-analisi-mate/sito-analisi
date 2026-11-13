@@ -1,6 +1,6 @@
 ---
-titolo: Conductors, capacitors and dielectrics
-sommario: Why the interior field of a conductor in equilibrium is zero and the charge lies on the surface, how to compute the capacitance of parallel-plate, spherical and cylindrical capacitors and of their combinations, how much energy the electric field stores and how a dielectric changes capacitance, field and energy.
+titolo: Conduttori, condensatori e dielettrici
+sommario: Perché in un conduttore in equilibrio il campo interno è nullo e la carica sta in superficie, come si calcola la capacità dei condensatori piano, sferico e cilindrico e dei loro collegamenti, quanta energia immagazzina il campo elettrico e come un dielettrico modifica capacità, campo ed energia.
 ---
 
 ## Conductors in electrostatic equilibrium
@@ -30,7 +30,7 @@ The flux of the electric field through a closed surface $S$ equals the charge $Q
 ::::teorema{#carica-sulla-superficie titolo="Charge on the surface of a conductor"}
 In a conductor in electrostatic equilibrium the volume charge density is zero at every interior point, and any net charge of the conductor is distributed over its surface with surface density $\sigma$.
 
-The result says that to describe a charged conductor it is enough to know $\sigma$ on the surface. The distribution of $\sigma$ depends on the shape of the conductor and on nearby charges; on an isolated sphere, by symmetry, it is uniform, and a sphere of radius $R$ with charge $Q$ has $\sigma = \dfrac{Q}{4\pi R^2}$.
+This result shows that to describe a charged conductor it is enough to know $\sigma$ on the surface. The distribution of $\sigma$ depends on the shape of the conductor and on nearby charges; on an isolated sphere, by symmetry, it is uniform, and a sphere of radius $R$ with charge $Q$ has $\sigma = \dfrac{Q}{4\pi R^2}$.
 
 ::grafico{unicolore=1 assi=0 uguale=1 poligoni="1.300,0.000 1.293,0.136 1.272,0.270 1.236,0.402 1.188,0.529 1.126,0.650 1.052,0.764 0.966,0.870 0.870,0.966 0.764,1.052 0.650,1.126 0.529,1.188 0.402,1.236 0.270,1.272 0.136,1.293 0.000,1.300 -0.136,1.293 -0.270,1.272 -0.402,1.236 -0.529,1.188 -0.650,1.126 -0.764,1.052 -0.870,0.966 -0.966,0.870 -1.052,0.764 -1.126,0.650 -1.188,0.529 -1.236,0.402 -1.272,0.270 -1.293,0.136 -1.300,0.000 -1.293,-0.136 -1.272,-0.270 -1.236,-0.402 -1.188,-0.529 -1.126,-0.650 -1.052,-0.764 -0.966,-0.870 -0.870,-0.966 -0.764,-1.052 -0.650,-1.126 -0.529,-1.188 -0.402,-1.236 -0.270,-1.272 -0.136,-1.293 -0.000,-1.300 0.136,-1.293 0.270,-1.272 0.402,-1.236 0.529,-1.188 0.650,-1.126 0.764,-1.052 0.870,-0.966 0.966,-0.870 1.052,-0.764 1.126,-0.650 1.188,-0.529 1.236,-0.402 1.272,-0.270 1.293,-0.136 1.300,-0.000" vettori="1.65,0.0,2.45,0.0,E;1.167,1.167,1.732,1.732;0.0,1.65,0.0,2.45;-1.167,1.167,-1.732,1.732;-1.65,0.0,-2.45,0.0;-1.167,-1.167,-1.732,-1.732;-0.0,-1.65,-0.0,-2.45;1.167,-1.167,1.732,-1.732" etichette="1.33,0.30,+;0.96,0.95,+;0.31,1.32,+;-0.45,1.32,+;-1.10,0.95,+;-1.47,0.30,+;-1.47,-0.46,+;-1.10,-1.11,+;-0.45,-1.48,+;0.31,-1.48,+;0.96,-1.11,+;1.33,-0.46,+;-0.4,-0.1,E = 0" xmin=-4 xmax=4 ymin=-2.6 ymax=2.6 titolo="Charged conducting sphere in equilibrium: the charge lies on the surface, the interior field is zero and the exterior field is perpendicular to the surface"}
 
@@ -59,7 +59,7 @@ Consider a conductor with a cavity inside it.
 - If the cavity does *not* contain charges, the field in the cavity is zero and there is no charge on the wall of the cavity. Indeed, a field line in the cavity would go from a positive to a negative charge of the wall, and the integral of the field along that line would be positive, whereas the wall is equipotential. A closed conducting enclosure therefore isolates its interior from external fields, and it is called an **electrostatic shield** or Faraday cage.
 - If the cavity contains a charge $q$, the charge $-q$ is induced on the wall of the cavity. Indeed, a closed surface contained in the material and surrounding the cavity has zero flux, so it encloses zero total charge. If the conductor has net charge $Q$, the charge $Q + q$ is on the outer surface.
 
-For example, a neutral conducting spherical shell containing a charge $q = 5.0\,\mathrm{nC}$ carries $-5.0\,\mathrm{nC}$ on the inner surface and $+5.0\,\mathrm{nC}$ on the outer one, and outside the field is that of a charge $q$ placed at the center of the shell, whatever the position of $q$ in the cavity.
+For example, a neutral conducting spherical shell containing a charge $q = 5{,}0\,\mathrm{nC}$ carries $-5{,}0\,\mathrm{nC}$ on the inner surface and $+5{,}0\,\mathrm{nC}$ on the outer one, and outside the field is that of a charge $q$ placed at the center of the shell, whatever the position of $q$ in the cavity.
 :::
 
 ## Field at the surface and the effect of sharp points
@@ -69,7 +69,7 @@ Let $\sigma$ be the surface charge density at a point of the surface of a conduc
 $$
 \vec{E} = \frac{\sigma}{\varepsilon_0}\,\hat{n} .
 $$
-The theorem gives the field near a conductor from the local charge density, and vice versa; the field points outward where $\sigma > 0$ and inward where $\sigma < 0$. For example, where $\sigma = 1.0\,\mu\mathrm{C/m^2}$ the field is $E = \dfrac{1.0 \cdot 10^{-6}}{8.85 \cdot 10^{-12}}\,\mathrm{V/m} \approx 1.1 \cdot 10^{5}\,\mathrm{V/m}$.
+The theorem gives the field near a conductor from the local charge density, and vice versa; the field points outward where $\sigma > 0$ and inward where $\sigma < 0$. For example, where $\sigma = 1{,}0\,\mu\mathrm{C/m^2}$ the field is $E = \dfrac{1{,}0 \cdot 10^{-6}}{8{,}85 \cdot 10^{-12}}\,\mathrm{V/m} \approx 1{,}1 \cdot 10^{5}\,\mathrm{V/m}$.
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 6,0 6,2 0,2" linee="0,2 6,2;2.4,1.4 3.6,1.4 3.6,2.6 2.4,2.6 2.4,1.4" vettori="3,2.6,3,3.8,E" etichette="0.33,2.10,+;0.93,2.10,+;1.53,2.10,+;2.13,2.10,+;2.68,2.10,+;3.18,2.10,+;3.73,2.10,+;4.33,2.10,+;4.93,2.10,+;5.53,2.10,+;3.75,2.75,ΔA;0.5,0.8,E = 0;4.3,0.8,conductor" xmin=-0.2 xmax=6.2 ymin=-0.2 ymax=4.1 titolo="The small cylinder with bases of area $\Delta A$ straddling the surface encloses the charge $\sigma\,\Delta A$; flux leaves only through the outer base"}
 
@@ -92,9 +92,9 @@ Consider two conducting spheres of radii $R_1$ and $R_2$, at a distance much lar
 $$
 \frac{\sigma_1}{\sigma_2} = \frac{R_2}{R_1} .
 $$
-By Coulomb's theorem the fields at the surfaces are in the same ratio. The result extends qualitatively to a conductor of any shape, on which the charge density and the field are more intense where the radius of curvature of the surface is smaller, that is, near points and edges. If the field near a point exceeds the dielectric strength of air, the air becomes conducting and the point discharges; the lightning rod works on this principle. With $R_1 = 1\,\mathrm{cm}$ and $R_2 = 10\,\mathrm{cm}$ we have $\sigma_1 = 10\,\sigma_2$.
+By Coulomb's theorem the fields at the surfaces are in the same ratio. The result extends qualitatively to a conductor of any shape, on which the charge density and field strength are greater where the radius of curvature of the surface is smaller, that is, near points and edges. If the field near a point exceeds the dielectric strength of air, the air becomes conducting and the point discharges; the lightning rod works on this principle. With $R_1 = 1\,\mathrm{cm}$ and $R_2 = 10\,\mathrm{cm}$ we have $\sigma_1 = 10\,\sigma_2$.
 
-::grafico{unicolore=1 assi=0 uguale=1 poligoni="0.662,1.346 0.551,1.395 0.436,1.435 0.318,1.466 0.198,1.487 0.077,1.498 -0.045,1.499 -0.166,1.491 -0.286,1.472 -0.405,1.444 -0.520,1.407 -0.632,1.360 -0.741,1.304 -0.844,1.240 -0.942,1.168 -1.033,1.088 -1.118,1.000 -1.195,0.906 -1.265,0.807 -1.326,0.702 -1.378,0.592 -1.422,0.478 -1.456,0.361 -1.480,0.242 -1.495,0.122 -1.500,0.000 -1.495,-0.122 -1.480,-0.242 -1.456,-0.361 -1.422,-0.478 -1.378,-0.592 -1.326,-0.702 -1.265,-0.807 -1.195,-0.906 -1.118,-1.000 -1.033,-1.088 -0.942,-1.168 -0.844,-1.240 -0.741,-1.304 -0.632,-1.360 -0.520,-1.407 -0.405,-1.444 -0.286,-1.472 -0.166,-1.491 -0.045,-1.499 0.077,-1.498 0.198,-1.487 0.318,-1.466 0.436,-1.435 0.551,-1.395 0.662,-1.346 3.4,0" vettori="0.0,1.6,0.0,2.25;-1.131,1.131,-1.591,1.591;-1.6,0.0,-2.25,0.0;-1.131,-1.131,-1.591,-1.591;-0.0,-1.6,-0.0,-2.25;2.075,0.763,2.472,1.57;2.075,-0.763,2.472,-1.57;3.5,0,5.2,0,E" etichette="-0.64,1.50,+;-1.65,0.49,+;-1.65,-0.65,+;-0.64,-1.66,+;2.17,0.68,+;2.17,-0.84,+;2.72,0.41,+;2.72,-0.57,+;3.13,0.21,+;3.13,-0.37,+;3.41,0.14,+" xmin=-2.6 xmax=5.6 ymin=-2.5 ymax=2.5 titolo="On a pointed conductor the charge density and the field are more intense where the radius of curvature is smaller, that is, near the point"}
+::grafico{unicolore=1 assi=0 uguale=1 poligoni="0.662,1.346 0.551,1.395 0.436,1.435 0.318,1.466 0.198,1.487 0.077,1.498 -0.045,1.499 -0.166,1.491 -0.286,1.472 -0.405,1.444 -0.520,1.407 -0.632,1.360 -0.741,1.304 -0.844,1.240 -0.942,1.168 -1.033,1.088 -1.118,1.000 -1.195,0.906 -1.265,0.807 -1.326,0.702 -1.378,0.592 -1.422,0.478 -1.456,0.361 -1.480,0.242 -1.495,0.122 -1.500,0.000 -1.495,-0.122 -1.480,-0.242 -1.456,-0.361 -1.422,-0.478 -1.378,-0.592 -1.326,-0.702 -1.265,-0.807 -1.195,-0.906 -1.118,-1.000 -1.033,-1.088 -0.942,-1.168 -0.844,-1.240 -0.741,-1.304 -0.632,-1.360 -0.520,-1.407 -0.405,-1.444 -0.286,-1.472 -0.166,-1.491 -0.045,-1.499 0.077,-1.498 0.198,-1.487 0.318,-1.466 0.436,-1.435 0.551,-1.395 0.662,-1.346 3.4,0" vettori="0.0,1.6,0.0,2.25;-1.131,1.131,-1.591,1.591;-1.6,0.0,-2.25,0.0;-1.131,-1.131,-1.591,-1.591;-0.0,-1.6,-0.0,-2.25;2.075,0.763,2.472,1.57;2.075,-0.763,2.472,-1.57;3.5,0,5.2,0,E" etichette="-0.64,1.50,+;-1.65,0.49,+;-1.65,-0.65,+;-0.64,-1.66,+;2.17,0.68,+;2.17,-0.84,+;2.72,0.41,+;2.72,-0.57,+;3.13,0.21,+;3.13,-0.37,+;3.41,0.14,+" xmin=-2.6 xmax=5.6 ymin=-2.5 ymax=2.5 titolo="On a pointed conductor the charge density and field strength are greater where the radius of curvature is smaller, that is, near the point"}
 
 :::dimostrazione
 The two spheres and the wire form a single conductor, therefore by the theorem on the equipotential conductor they are at the same potential. Since the spheres are far apart, the potential of each is that of an isolated sphere with its own charge, hence
@@ -122,7 +122,7 @@ An isolated conducting sphere of radius $R$ has capacitance
 $$
 C = 4\pi\varepsilon_0 R = \frac{R}{k} .
 $$
-A sphere of radius $10\,\mathrm{cm}$ has $C = \dfrac{0.10}{8.99 \cdot 10^{9}}\,\mathrm{F} \approx 11\,\mathrm{pF}$, and the Earth, with $R \approx 6.37 \cdot 10^{6}\,\mathrm{m}$, has $C \approx 7.1 \cdot 10^{-4}\,\mathrm{F}$. The farad is therefore a very large unit for isolated conductors.
+A sphere of radius $10\,\mathrm{cm}$ has $C = \dfrac{0{,}10}{8{,}99 \cdot 10^{9}}\,\mathrm{F} \approx 11\,\mathrm{pF}$, and the Earth, with $R \approx 6{,}37 \cdot 10^{6}\,\mathrm{m}$, has $C \approx 7{,}1 \cdot 10^{-4}\,\mathrm{F}$. The farad is therefore a very large unit for isolated conductors.
 
 :::dimostrazione
 The charge $Q$ is distributed uniformly over the surface, therefore by Gauss's law outside the sphere the field is that of a point charge $Q$ placed at the center. The potential on the surface, with reference at infinity, is hence $V = \dfrac{kQ}{R}$, and $C = \dfrac{Q}{V} = \dfrac{R}{k} = 4\pi\varepsilon_0 R$.
@@ -130,7 +130,7 @@ The charge $Q$ is distributed uniformly over the surface, therefore by Gauss's l
 ::::
 
 :::definizione{#condensatore titolo="Capacitor"}
-A **capacitor** is a system of two conductors, called **plates**, in complete induction, that is, arranged so that all the field lines leaving one plate end on the other. Under these conditions the plates carry opposite charges $+Q$ and $-Q$, and the capacitance of the capacitor is
+A **capacitor** is a system of two conductors, called **plates**, in complete electrostatic induction, that is, arranged so that all the field lines leaving one plate end on the other. Under these conditions the plates carry opposite charges $+Q$ and $-Q$, and the capacitance of the capacitor is
 $$
 C = \frac{Q}{\Delta V} ,
 $$
@@ -159,7 +159,7 @@ and between the plates the field is uniform, perpendicular to the plates, with m
 $$
 E = \frac{\sigma}{\varepsilon_0} = \frac{\Delta V}{d} , \qquad \sigma = \frac{Q}{A} .
 $$
-The capacitance increases with the area and decreases with the distance. With $A = 1.0\,\mathrm{m^2}$ and $d = 1.0\,\mathrm{mm}$ one obtains $C = \dfrac{8.85 \cdot 10^{-12} \cdot 1.0}{1.0 \cdot 10^{-3}}\,\mathrm{F} = 8.85\,\mathrm{nF}$; capacitances of the order of a microfarad therefore require large areas, small distances and a dielectric between the plates.
+The capacitance increases with the area and decreases with the distance. With $A = 1{,}0\,\mathrm{m^2}$ and $d = 1{,}0\,\mathrm{mm}$ one obtains $C = \dfrac{8{,}85 \cdot 10^{-12} \cdot 1{,}0}{1{,}0 \cdot 10^{-3}}\,\mathrm{F} = 8{,}85\,\mathrm{nF}$; capacitances of the order of a microfarad therefore require large areas, small distances and a dielectric between the plates.
 
 ::grafico{unicolore=1 assi=0 uguale=1 linee="1,0 1,3;5,0 5,3" vettori="1.4,0.6,4.6,0.6;1.4,1.2,4.6,1.2;1.4,1.8,4.6,1.8;1.4,2.4,4.6,2.4,E" segmenti="1,-0.35,5,-0.35" etichette="1.08,0.22,+;1.08,0.82,+;1.08,1.42,+;1.08,2.02,+;1.08,2.62,+;4.75,0.22,−;4.75,0.82,−;4.75,1.42,−;4.75,2.02,−;4.75,2.62,−;2.95,-0.75,d;0.6,3.25,+Q;4.75,3.25,−Q" xmin=-0.5 xmax=6.5 ymin=-1 ymax=3.5 titolo="Parallel-plate capacitor: the charges $+Q$ and $-Q$ lie on the facing sides of the plates and between the plates the field is uniform, $E = \dfrac{\sigma}{\varepsilon_0}$"}
 
@@ -178,9 +178,9 @@ Consider two concentric spherical plates, a conducting sphere of radius $R_1$ an
 $$
 C = 4\pi\varepsilon_0\,\frac{R_1 R_2}{R_2 - R_1} .
 $$
-For $R_2 \to +\infty$ one recovers the capacitance of the isolated sphere, $4\pi\varepsilon_0 R_1$. If instead the distance $d = R_2 - R_1$ is much smaller than $R_1$, we have $R_1 R_2 \approx R_1^2$ and $C \approx \dfrac{\varepsilon_0 \cdot 4\pi R_1^2}{d}$, that is, the formula of the parallel-plate capacitor with the area of the sphere. With $R_1 = 10\,\mathrm{cm}$ and $R_2 = 11\,\mathrm{cm}$ one obtains $C \approx 1.2 \cdot 10^{-10}\,\mathrm{F} = 120\,\mathrm{pF}$.
+For $R_2 \to +\infty$ one recovers the capacitance of the isolated sphere, $4\pi\varepsilon_0 R_1$. If instead the distance $d = R_2 - R_1$ is much smaller than $R_1$, we have $R_1 R_2 \approx R_1^2$ and $C \approx \dfrac{\varepsilon_0 \cdot 4\pi R_1^2}{d}$, that is, the formula of the parallel-plate capacitor with the area of the sphere. With $R_1 = 10\,\mathrm{cm}$ and $R_2 = 11\,\mathrm{cm}$ one obtains $C \approx 1{,}2 \cdot 10^{-10}\,\mathrm{F} = 120\,\mathrm{pF}$.
 
-::grafico{f="4/x^2+0*sqrt((x-1)*(2.5-x))" punti="1,4,pieno;2.5,0.64,pieno;1,0,vuoto;2.5,0,vuoto" segmenti="1,0,1,4;2.5,0,2.5,0.64" xmin=0 xmax=3.6 ymin=-0.4 ymax=4.8 nomi="r,E" legenda="E(r)" titolo="Field of a spherical capacitor with $R_1 = 1$ and $R_2 = 2.5$: $E = \dfrac{Q}{4\pi\varepsilon_0 r^2}$ between the plates, zero for $r < R_1$ and for $r > R_2$"}
+::grafico{f="4/x^2+0*sqrt((x-1)*(2.5-x))" punti="1,4,pieno;2.5,0.64,pieno;1,0,vuoto;2.5,0,vuoto" segmenti="1,0,1,4;2.5,0,2.5,0.64" xmin=0 xmax=3.6 ymin=-0.4 ymax=4.8 nomi="r,E" legenda="E(r)" titolo="Field of a spherical capacitor with $R_1 = 1$ and $R_2 = 2{,}5$: $E = \dfrac{Q}{4\pi\varepsilon_0 r^2}$ between the plates, zero for $r < R_1$ and for $r > R_2$"}
 
 :::dimostrazione
 Assign the charge $+Q$ to the inner sphere and $-Q$ to the shell. For $R_1 < r < R_2$ the spherical surface of radius $r$ encloses the charge $Q$, therefore by **Gauss's law** and spherical symmetry the field is radial with magnitude $E(r) = \dfrac{Q}{4\pi\varepsilon_0 r^2}$. Integrating along a radius,
@@ -196,7 +196,7 @@ Consider two coaxial cylindrical plates of length $\ell$, a conducting cylinder 
 $$
 C = \frac{2\pi\varepsilon_0\,\ell}{\ln \dfrac{b}{a}} .
 $$
-The capacitance is proportional to the length, and the **capacitance per unit length** $\dfrac{C}{\ell}$ depends only on the ratio $\dfrac{b}{a}$. The model describes the coaxial cable; with $b = 2a$ one obtains $\dfrac{C}{\ell} = \dfrac{2\pi \cdot 8.85 \cdot 10^{-12}}{\ln 2}\,\mathrm{F/m} \approx 80\,\mathrm{pF/m}$.
+The capacitance is proportional to the length, and the **capacitance per unit length** $\dfrac{C}{\ell}$ depends only on the ratio $\dfrac{b}{a}$. The model describes the coaxial cable; with $b = 2a$ one obtains $\dfrac{C}{\ell} = \dfrac{2\pi \cdot 8{,}85 \cdot 10^{-12}}{\ln 2}\,\mathrm{F/m} \approx 80\,\mathrm{pF/m}$.
 
 :::dimostrazione
 Assign the charge $+Q$ to the inner cylinder and $-Q$ to the shell, with linear density $\lambda = \dfrac{Q}{\ell}$. For $a < r < b$ apply **Gauss's law** to a coaxial cylinder of radius $r$ and length $h$. By symmetry the field is radial and the flux crosses only the lateral surface, therefore $E \cdot 2\pi r h = \dfrac{\lambda h}{\varepsilon_0}$ and $E(r) = \dfrac{\lambda}{2\pi\varepsilon_0 r}$. Integrating along a radius,
@@ -214,7 +214,7 @@ Consider $n$ capacitors of capacitances $C_1, \dots, C_n$ connected in **paralle
 $$
 C_{\text{eq}} = C_1 + C_2 + \dots + C_n .
 $$
-All the capacitors have the same potential difference $\Delta V$, and the charge is shared in proportion to the capacitances, $Q_i = C_i\,\Delta V$. The equivalent capacitance is larger than the capacitance of each capacitor; two capacitors of $2.0\,\mu\mathrm{F}$ and $3.0\,\mu\mathrm{F}$ in parallel are equivalent to $5.0\,\mu\mathrm{F}$.
+All the capacitors have the same potential difference $\Delta V$, and the charge is shared in proportion to the capacitances, $Q_i = C_i\,\Delta V$. The equivalent capacitance is larger than the capacitance of each capacitor; two capacitors of $2{,}0\,\mu\mathrm{F}$ and $3{,}0\,\mu\mathrm{F}$ in parallel are equivalent to $5{,}0\,\mu\mathrm{F}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 0,1.35;-0.2,1.35 0.2,1.35;-0.4,1.65 0.4,1.65;0,1.65 0,3 6,3 6,1.65;5.6,1.65 6.4,1.65;5.6,1.35 6.4,1.35;6,1.35 6,0 0,0;3,3 3,1.65;2.6,1.65 3.4,1.65;2.6,1.35 3.4,1.35;3,1.35 3,0" punti="3,3,pieno;3,0,pieno" etichette="0.5,1.75,+;0.35,1.05,−;-1.05,1.4,ΔV;3.55,1.4,C₁;6.55,1.4,C₂" xmin=-1.4 xmax=7.4 ymin=-0.5 ymax=3.5 titolo="Capacitors in parallel: the plates connected to the same wire are at the same potential, therefore all the capacitors have the same $\Delta V$"}
 
@@ -232,12 +232,12 @@ Consider $n$ capacitors, initially uncharged, of capacitances $C_1, \dots, C_n$ 
 $$
 \frac{1}{C_{\text{eq}}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n} .
 $$
-All the capacitors have the same charge $Q$, and the potential difference is shared in inverse proportion to the capacitances, $\Delta V_i = \dfrac{Q}{C_i}$, therefore the capacitor with the smallest capacitance has the largest voltage. The equivalent capacitance is smaller than the smallest of the capacitances; for two capacitors $C_{\text{eq}} = \dfrac{C_1 C_2}{C_1 + C_2}$, and from $2.0\,\mu\mathrm{F}$ and $3.0\,\mu\mathrm{F}$ one obtains $1.2\,\mu\mathrm{F}$.
+All the capacitors have the same charge $Q$, and the potential difference is shared in inverse proportion to the capacitances, $\Delta V_i = \dfrac{Q}{C_i}$, therefore the capacitor with the smallest capacitance has the largest voltage. The equivalent capacitance is smaller than the smallest of the capacitances; for two capacitors $C_{\text{eq}} = \dfrac{C_1 C_2}{C_1 + C_2}$, and from $2{,}0\,\mu\mathrm{F}$ and $3{,}0\,\mu\mathrm{F}$ one obtains $1{,}2\,\mu\mathrm{F}$.
 
 ::grafico{assi=0 uguale=1 linee="0,0 0,1.35;-0.2,1.35 0.2,1.35;-0.4,1.65 0.4,1.65;0,1.65 0,3 2.35,3;2.35,2.6 2.35,3.4;2.65,2.6 2.65,3.4;2.65,3 4.35,3;4.35,2.6 4.35,3.4;4.65,2.6 4.65,3.4;4.65,3 6,3 6,0 0,0" etichette="0.5,1.75,+;0.35,1.05,−;-1.05,1.4,ΔV;2.25,3.65,C₁;4.25,3.65,C₂;2.0,3.1,+;2.85,3.1,−;4.0,3.1,+;4.85,3.1,−" xmin=-1.4 xmax=7 ymin=-0.5 ymax=4.1 titolo="Capacitors in series: the inner plates, connected to each other and isolated, form a neutral conductor, therefore all the capacitors have the same charge $Q$"}
 
 :::dimostrazione
-The negative plate of one capacitor and the positive plate of the next, with the wire that connects them, form an isolated conductor, initially uncharged, hence with zero total charge by conservation of charge. If the positive plate of the first capacitor receives the charge $Q$, by complete induction its negative plate carries $-Q$, therefore the positive plate of the second carries $+Q$, and so on; hence every capacitor has charge $Q$. The potential differences add along the series,
+The negative plate of one capacitor and the positive plate of the next, with the wire that connects them, form an isolated conductor, initially uncharged, hence with zero total charge by conservation of charge. If the positive plate of the first capacitor receives the charge $Q$, by complete electrostatic induction its negative plate carries $-Q$, therefore the positive plate of the second carries $+Q$, and so on; hence every capacitor has charge $Q$. The potential differences add along the series,
 $$
 \Delta V = \Delta V_1 + \dots + \Delta V_n = Q \left( \frac{1}{C_1} + \dots + \frac{1}{C_n} \right) ,
 $$
@@ -246,11 +246,11 @@ and $\dfrac{\Delta V}{Q} = \dfrac{1}{C_{\text{eq}}}$ gives the claim.
 ::::
 
 :::esempio{titolo="Reduction of a capacitor network"}
-A capacitor $C_1 = 3.0\,\mu\mathrm{F}$ is connected in series with the parallel combination of $C_2 = 2.0\,\mu\mathrm{F}$ and $C_3 = 4.0\,\mu\mathrm{F}$, and the potential difference $\Delta V = 12\,\mathrm{V}$ is applied across the network. First the parallel combination is replaced by $C_{23} = C_2 + C_3 = 6.0\,\mu\mathrm{F}$, then the series by
+A capacitor $C_1 = 3{,}0\,\mu\mathrm{F}$ is connected in series with the parallel combination of $C_2 = 2{,}0\,\mu\mathrm{F}$ and $C_3 = 4{,}0\,\mu\mathrm{F}$, and the potential difference $\Delta V = 12\,\mathrm{V}$ is applied across the network. First the parallel combination is replaced by $C_{23} = C_2 + C_3 = 6{,}0\,\mu\mathrm{F}$, then the series by
 $$
-C_{\text{eq}} = \frac{C_1 C_{23}}{C_1 + C_{23}} = \frac{3.0 \cdot 6.0}{9.0}\,\mu\mathrm{F} = 2.0\,\mu\mathrm{F} .
+C_{\text{eq}} = \frac{C_1 C_{23}}{C_1 + C_{23}} = \frac{3{,}0 \cdot 6{,}0}{9{,}0}\,\mu\mathrm{F} = 2{,}0\,\mu\mathrm{F} .
 $$
-The charge delivered by the source is $Q = C_{\text{eq}}\,\Delta V = 24\,\mu\mathrm{C}$, and it is also the charge of $C_1$ and of the parallel combination. Therefore $\Delta V_1 = \dfrac{24}{3.0}\,\mathrm{V} = 8.0\,\mathrm{V}$ and the parallel combination has $\Delta V_{23} = 4.0\,\mathrm{V}$, from which $Q_2 = 8.0\,\mu\mathrm{C}$ and $Q_3 = 16\,\mu\mathrm{C}$. In other words, the network is traversed backward, from the equivalent capacitor to the individual capacitors.
+The charge delivered by the source is $Q = C_{\text{eq}}\,\Delta V = 24\,\mu\mathrm{C}$, and it is also the charge of $C_1$ and of the parallel combination. Therefore $\Delta V_1 = \dfrac{24}{3{,}0}\,\mathrm{V} = 8{,}0\,\mathrm{V}$ and the parallel combination has $\Delta V_{23} = 4{,}0\,\mathrm{V}$, from which $Q_2 = 8{,}0\,\mu\mathrm{C}$ and $Q_3 = 16\,\mu\mathrm{C}$. In other words, the network is traversed backward, from the equivalent capacitor to the individual capacitors.
 :::
 
 ## Energy of the capacitor and of the electric field
@@ -260,7 +260,7 @@ A capacitor of capacitance $C$ with charge $Q$ and potential difference $\Delta 
 $$
 U = \frac{Q^2}{2C} = \frac{1}{2} C\,\Delta V^2 = \frac{1}{2} Q\,\Delta V .
 $$
-The energy equals the work needed to charge the capacitor, and it is returned when the capacitor discharges, for example in the flash of a camera. Of the three forms, the convenient one is the one containing the quantity that stays constant in the problem: $\dfrac{Q^2}{2C}$ for an isolated capacitor, $\dfrac{1}{2} C\,\Delta V^2$ for a capacitor connected to a source. A $100\,\mu\mathrm{F}$ capacitor at $50\,\mathrm{V}$ stores $U = \dfrac{1}{2} \cdot 100 \cdot 10^{-6} \cdot 50^2\,\mathrm{J} = 0.125\,\mathrm{J}$.
+The energy equals the work needed to charge the capacitor, and it is returned when the capacitor discharges, for example in the flash of a camera. Of the three forms, the convenient one is the one containing the quantity that stays constant in the problem: $\dfrac{Q^2}{2C}$ for an isolated capacitor, $\dfrac{1}{2} C\,\Delta V^2$ for a capacitor connected to a source. A $100\,\mu\mathrm{F}$ capacitor at $50\,\mathrm{V}$ stores $U = \dfrac{1}{2} \cdot 100 \cdot 10^{-6} \cdot 50^2\,\mathrm{J} = 0{,}125\,\mathrm{J}$.
 
 ::grafico{f="2*x+0*sqrt(x*(3-x))" area="2*x;0;0;3" segmenti="3,0,3,6;0,6,3,6" punti="3,6,pieno" etichette="1.9,1.4,U" xmin=-0.4 xmax=4 ymin=-0.6 ymax=7.4 nomi="q,ΔV" legenda="\Delta V(q)" titolo="During charging $\Delta V = \dfrac{q}{C}$ grows linearly with $q$; the work to bring the charge from $0$ to $Q$ is the area of the triangle, $\dfrac{1}{2} Q\,\Delta V$"}
 
@@ -278,7 +278,7 @@ In a region of empty space where there is the electric field $\vec{E}$, the ener
 $$
 u = \frac{1}{2} \varepsilon_0 E^2 ,
 $$
-which is measured in $\mathrm{J/m^3}$. The energy of a system of charges can therefore be thought of as distributed in the space where the field is, with density $u$, and it is obtained by integrating $u$ over the volume. The formula is derived for the parallel-plate capacitor and holds for any electrostatic field in vacuum. Where $E = 1.0 \cdot 10^{6}\,\mathrm{V/m}$ we have $u = \dfrac{1}{2} \cdot 8.85 \cdot 10^{-12} \cdot 10^{12}\,\mathrm{J/m^3} \approx 4.4\,\mathrm{J/m^3}$.
+which is measured in $\mathrm{J/m^3}$. The energy of a system of charges can therefore be thought of as distributed in the region occupied by the field, with density $u$, and it is obtained by integrating $u$ over the volume. The formula is derived for the parallel-plate capacitor and holds for any electrostatic field in vacuum. Where $E = 1{,}0 \cdot 10^{6}\,\mathrm{V/m}$ we have $u = \dfrac{1}{2} \cdot 8{,}85 \cdot 10^{-12} \cdot 10^{12}\,\mathrm{J/m^3} \approx 4{,}4\,\mathrm{J/m^3}$.
 
 :::dimostrazione
 In a parallel-plate capacitor the field is uniform and is confined to the volume $A\,d$ between the plates. Since $C = \dfrac{\varepsilon_0 A}{d}$ and $\Delta V = E\,d$, the energy of the capacitor is
@@ -294,7 +294,7 @@ The plates of a parallel-plate capacitor with charge $Q$ attract each other with
 $$
 F = \frac{Q^2}{2\varepsilon_0 A} = \frac{1}{2} \varepsilon_0 E^2 A .
 $$
-The force equals the energy density times the area, and it corresponds to the field $\dfrac{\sigma}{2\varepsilon_0}$ produced by one plate alone, acting on the charge $Q$ of the other; indeed, the total field $\dfrac{\sigma}{\varepsilon_0}$ also includes the contribution of the plate on which the force acts, and a plate exerts no force on itself. With $A = 0.010\,\mathrm{m^2}$ and $Q = 0.10\,\mu\mathrm{C}$ one obtains $F = \dfrac{(1.0 \cdot 10^{-7})^2}{2 \cdot 8.85 \cdot 10^{-12} \cdot 0.010}\,\mathrm{N} \approx 0.056\,\mathrm{N}$.
+The force equals the energy density times the area, and it corresponds to the field $\dfrac{\sigma}{2\varepsilon_0}$ produced by one plate alone, acting on the charge $Q$ of the other; indeed, the total field $\dfrac{\sigma}{\varepsilon_0}$ also includes the contribution of the plate on which the force acts, and a plate exerts no force on itself. With $A = 0{,}010\,\mathrm{m^2}$ and $Q = 0{,}10\,\mu\mathrm{C}$ one obtains $F = \dfrac{(1{,}0 \cdot 10^{-7})^2}{2 \cdot 8{,}85 \cdot 10^{-12} \cdot 0{,}010}\,\mathrm{N} \approx 0{,}056\,\mathrm{N}$.
 
 :::dimostrazione
 Consider the isolated capacitor, hence with constant $Q$, and slowly move one plate away by $dx$ with an external force that balances the attraction. The energy with the plates at distance $x$ is $U(x) = \dfrac{Q^2}{2C} = \dfrac{Q^2\,x}{2\varepsilon_0 A}$. The work of the external force, $F\,dx$, equals the increase in energy $dU$, because the capacitor is isolated and no source does work; hence
@@ -312,19 +312,19 @@ This is an experimental law. If the space between the plates of a capacitor of c
 $$
 C = \varepsilon_r\,C_0 , \qquad \varepsilon_r \geq 1 ,
 $$
-where $\varepsilon_r$ is a number that depends only on the material, whatever the shape of the capacitor. The law makes it possible to obtain larger capacitances for the same dimensions, and for this reason real capacitors contain a dielectric. For example, a $10\,\mathrm{pF}$ capacitor in vacuum filled with Teflon, with $\varepsilon_r \approx 2.1$, has capacitance $21\,\mathrm{pF}$.
+where $\varepsilon_r$ is a number that depends only on the material, whatever the shape of the capacitor. The law makes it possible to obtain larger capacitances for the same dimensions, and for this reason real capacitors contain a dielectric. For example, a $10\,\mathrm{pF}$ capacitor in vacuum filled with Teflon, with $\varepsilon_r \approx 2{,}1$, has capacitance $21\,\mathrm{pF}$.
 :::
 
 :::definizione{#costante-dielettrica-relativa titolo="Relative permittivity"}
-The dimensionless number $\varepsilon_r$ in the law of the capacitor with a dielectric is called the **relative permittivity** of the material, and the product $\varepsilon = \varepsilon_0\,\varepsilon_r$ is called the absolute permittivity. Vacuum has $\varepsilon_r = 1$, air $\varepsilon_r \approx 1.0006$, polyethylene $\varepsilon_r \approx 2.3$, glass values roughly between $4$ and $10$ and water $\varepsilon_r \approx 80$. Since $\varepsilon_r$ of air differs from $1$ by less than one part in a thousand, in problems air is treated as vacuum. The capacitances of a capacitor filled with a dielectric are obtained by replacing $\varepsilon_0$ with $\varepsilon$; for example, a filled parallel-plate capacitor has $C = \dfrac{\varepsilon_0 \varepsilon_r A}{d}$.
+The dimensionless number $\varepsilon_r$ in the law of the capacitor with a dielectric is called the **relative permittivity** of the material, and the product $\varepsilon = \varepsilon_0\,\varepsilon_r$ is called the absolute permittivity. Vacuum has $\varepsilon_r = 1$, air $\varepsilon_r \approx 1{,}0006$, polyethylene $\varepsilon_r \approx 2{,}3$, glass values roughly between $4$ and $10$ and water $\varepsilon_r \approx 80$. Since $\varepsilon_r$ of air differs from $1$ by less than one part in a thousand, in problems air is treated as vacuum. The capacitance of a capacitor filled with a dielectric is obtained by replacing $\varepsilon_0$ with $\varepsilon$; for example, a filled parallel-plate capacitor has $C = \dfrac{\varepsilon_0 \varepsilon_r A}{d}$.
 :::
 
 :::osservazione{#polarizzazione titolo="Polarization of the dielectric"}
-In a dielectric the charges are *not* free to move over macroscopic distances. In an electric field, however, each molecule deforms or orients itself and becomes a small dipole aligned with the field; the dielectric is said to be **polarized**. Inside a homogeneous dielectric the charges of neighboring dipoles compensate each other, while on the faces facing the plates a layer of **polarization charges** remains, negative near the positive plate and positive near the negative one. The field of these charges is opposite to that of the free charges of the plates, and reduces it. For the dipole in an electric field see the topic on the electric field.
+In a dielectric the charges are *not* free to move over macroscopic distances. In an electric field, however, each molecule deforms or orients itself and becomes a small dipole aligned with the field; the dielectric is said to be **polarized**. Inside a homogeneous dielectric the charges of neighboring dipoles compensate each other, while on the faces adjacent to the plates a layer of **polarization charges** remains, negative near the positive plate and positive near the negative one. The field of these charges is opposite to that of the free charges of the plates, and reduces it. For the dipole in an electric field see the topic on the electric field.
 :::
 
 ::::teorema{#campo-nel-dielettrico titolo="Field and polarization charges"}
-Consider a parallel-plate capacitor with free charge density $\sigma$ on the plates, completely filled by a dielectric of constant $\varepsilon_r$, and let $E_0 = \dfrac{\sigma}{\varepsilon_0}$ be the field that would exist in vacuum with the same charge. In the dielectric the field and the density of the polarization charges are
+Consider a parallel-plate capacitor with free charge density $\sigma$ on the plates, completely filled by a dielectric with relative permittivity $\varepsilon_r$, and let $E_0 = \dfrac{\sigma}{\varepsilon_0}$ be the field that would exist in vacuum with the same charge. In the dielectric the field and the density of the polarization charges are
 $$
 E = \frac{E_0}{\varepsilon_r} = \frac{\sigma}{\varepsilon_0 \varepsilon_r} ,
 \qquad
@@ -332,7 +332,7 @@ E = \frac{E_0}{\varepsilon_r} = \frac{\sigma}{\varepsilon_0 \varepsilon_r} ,
 $$
 The density $\sigma_p$ is smaller than $\sigma$, therefore the field is reduced without vanishing; in the limit $\varepsilon_r \to +\infty$ one would have $\sigma_p = \sigma$ and zero field, as in a conductor. For the same reason two point charges immersed in a dielectric attract or repel each other with a force $\varepsilon_r$ times smaller than in vacuum, and the energy density in the dielectric is $u = \dfrac{1}{2} \varepsilon_0 \varepsilon_r E^2$.
 
-::grafico{unicolore=1 assi=0 uguale=1 poligoni="1,0 5,0 5,3 1,3" linee="1,0 1,3;5,0 5,3" vettori="1.85,0.3,4.15,0.3;1.85,1.5,4.15,1.5,E;1.85,2.7,4.15,2.7" etichette="1.08,0.22,+;1.08,0.82,+;1.08,1.42,+;1.08,2.02,+;1.08,2.62,+;4.75,0.22,−;4.75,0.82,−;4.75,1.42,−;4.75,2.02,−;4.75,2.62,−;1.43,0.52,−;1.43,1.12,−;1.43,1.72,−;1.43,2.32,−;4.41,0.52,+;4.41,1.12,+;4.41,1.72,+;4.41,2.32,+;0.7,3.3,σ;1.25,3.3,−σₚ;4.25,3.3,+σₚ;4.85,3.3,−σ" xmin=-0.5 xmax=6.5 ymin=-0.3 ymax=3.7 titolo="Polarized dielectric: the polarization charges $\mp\sigma_p$ on the faces facing the plates reduce the field to $E = \dfrac{E_0}{\varepsilon_r}$"}
+::grafico{unicolore=1 assi=0 uguale=1 poligoni="1,0 5,0 5,3 1,3" linee="1,0 1,3;5,0 5,3" vettori="1.85,0.3,4.15,0.3;1.85,1.5,4.15,1.5,E;1.85,2.7,4.15,2.7" etichette="1.08,0.22,+;1.08,0.82,+;1.08,1.42,+;1.08,2.02,+;1.08,2.62,+;4.75,0.22,−;4.75,0.82,−;4.75,1.42,−;4.75,2.02,−;4.75,2.62,−;1.43,0.52,−;1.43,1.12,−;1.43,1.72,−;1.43,2.32,−;4.41,0.52,+;4.41,1.12,+;4.41,1.72,+;4.41,2.32,+;0.7,3.3,σ;1.25,3.3,−σₚ;4.25,3.3,+σₚ;4.85,3.3,−σ" xmin=-0.5 xmax=6.5 ymin=-0.3 ymax=3.7 titolo="Polarized dielectric: the polarization charges $\mp\sigma_p$ on the faces adjacent to the plates reduce the field to $E = \dfrac{E_0}{\varepsilon_r}$"}
 
 :::dimostrazione
 For the same charge $Q$, by the law of the capacitor with a dielectric the potential difference is $\Delta V = \dfrac{Q}{\varepsilon_r C_0} = \dfrac{\Delta V_0}{\varepsilon_r}$. The field is uniform, therefore $E = \dfrac{\Delta V}{d} = \dfrac{E_0}{\varepsilon_r}$. Then apply **Gauss's law** to a small cylinder with one base inside the positive plate and the other in the dielectric. The charge enclosed per unit area is the free charge of the plate, $\sigma$, plus the polarization charge of the face of the dielectric, $-\sigma_p$, hence
@@ -352,13 +352,13 @@ When a dielectric is inserted until it fills a charged capacitor, the effect dep
 :::
 
 :::definizione{#rigidita-dielettrica titolo="Dielectric strength"}
-The **dielectric strength** of an insulator is the maximum magnitude $E_{\max}$ of the electric field that the material withstands without becoming conducting. Beyond this value a discharge occurs in the material, and the capacitor is damaged or discharges. For air under ordinary conditions $E_{\max} \approx 3 \cdot 10^{6}\,\mathrm{V/m}$. In a parallel-plate capacitor the maximum potential difference that can be applied is $\Delta V_{\max} = E_{\max}\,d$; with $1.0\,\mathrm{mm}$ of air one obtains about $3\,\mathrm{kV}$. The solid dielectrics used in capacitors usually have a higher dielectric strength than air, and therefore increase both the capacitance and the working voltage.
+The **dielectric strength** of an insulator is the maximum magnitude $E_{\max}$ of the electric field that the material withstands without becoming conducting. Beyond this value a discharge occurs in the material, and the capacitor is damaged or discharges. For air under ordinary conditions $E_{\max} \approx 3 \cdot 10^{6}\,\mathrm{V/m}$. In a parallel-plate capacitor the maximum potential difference that can be applied is $\Delta V_{\max} = E_{\max}\,d$; with $1{,}0\,\mathrm{mm}$ of air one obtains about $3\,\mathrm{kV}$. The solid dielectrics used in capacitors usually have a higher dielectric strength than air, and therefore increase both the capacitance and the working voltage.
 :::
 
 ## Partially filled capacitors
 
 ::::teorema{#condensatore-parzialmente-riempito titolo="Dielectric slab parallel to the plates"}
-In a parallel-plate capacitor of area $A$ and separation $d$, with negligible edge effects, insert a dielectric slab of constant $\varepsilon_r$, thickness $s < d$ and area $A$, parallel to the plates. The capacitance becomes
+In a parallel-plate capacitor of area $A$ and separation $d$, with negligible edge effects, insert a dielectric slab with relative permittivity $\varepsilon_r$, thickness $s < d$ and area $A$, parallel to the plates. The capacitance becomes
 $$
 C = \frac{\varepsilon_0 A}{d - s + \dfrac{s}{\varepsilon_r}} .
 $$
@@ -376,7 +376,7 @@ and $C = \dfrac{Q}{\Delta V}$ gives the claim. The position of the slab changes 
 ::::
 
 ::::teorema{#dielettrico-affiancato titolo="Dielectric occupying part of the area"}
-In a parallel-plate capacitor of area $A$ and separation $d$, a dielectric of constant $\varepsilon_r$ fills the whole thickness over a part $A_1$ of the area, while the remaining part $A_2 = A - A_1$ is empty. The capacitance is
+In a parallel-plate capacitor of area $A$ and separation $d$, a dielectric with relative permittivity $\varepsilon_r$ fills the whole thickness over a part $A_1$ of the area, while the remaining part $A_2 = A - A_1$ is empty. The capacitance is
 $$
 C = \frac{\varepsilon_0 \left( A_2 + \varepsilon_r A_1 \right)}{d} .
 $$

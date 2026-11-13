@@ -1,6 +1,6 @@
 ---
-titolo: Double and triple integrals
-sommario: How to integrate a function of two or three variables, how a multiple integral reduces to single integrals, how changes of variables simplify the domain, and how to compute areas, volumes, masses and centroids.
+titolo: Integrali doppi e tripli
+sommario: Come si integra una funzione di due o tre variabili, come un integrale multiplo si riduce a integrali semplici, come i cambiamenti di variabile semplificano il dominio, e come si calcolano aree, volumi, masse e baricentri.
 ---
 
 ## The double integral over rectangles
@@ -20,7 +20,7 @@ Every function continuous on $R$ is integrable, and integrability is preserved i
 
 :::
 
-:::teorema{#teorema-di-fubini titolo="Reduction theorem (Fubini) on rectangles"}
+:::teorema{#teorema-di-fubini titolo="Fubini's theorem on iterated integrals over rectangles"}
 If $f$ is continuous on $R = [a, b] \times [c, d]$, then
 $$
 \iint_R f(x, y)\, dx\, dy
@@ -39,7 +39,7 @@ $$
 &= \frac{8}{3} \cdot \frac{1}{2} = \frac{4}{3}
 \end{aligned}
 $$
-In the inner integral $x$ is a **constant**, therefore it comes out of the integral sign; what remains is $\displaystyle\int_0^2 y^2\, dy = \dfrac{8}{3}$.
+In the inner integral $x$ is a **constant**, therefore it can be factored out of the integral; what remains is $\displaystyle\int_0^2 y^2\, dy = \dfrac{8}{3}$.
 :::
 
 :::teorema{#variabili-separate titolo="Functions with separated variables"}
@@ -48,7 +48,7 @@ $$
 \iint_{[a,b] \times [c,d]} g(x)\, h(y)\, dx\, dy
 = \left( \int_a^b g(x)\, dx \right) \left( \int_c^d h(y)\, dy \right) .
 $$
-It follows from **Fubini's theorem**, since in the inner integral the factor that does not depend on the variable of integration comes out of the integral sign. The result holds *only* on rectangles: on a general domain the limits of the inner integral depend on the other variable and the factorization is not possible.
+It follows from **Fubini's theorem**, since in the inner integral the factor that does not depend on the variable of integration can be factored out of the integral. The result holds *only* on rectangles: on a general domain the limits of the inner integral depend on the other variable and the factorization is not possible.
 :::
 
 ## Normal domains and reduction formulas
@@ -65,7 +65,7 @@ g_1(x) \leq y \leq g_2(x)
 $$
 The domain is normal with respect to the $y$-axis if it is described in the same way with the roles exchanged: $c \leq y \leq d$ and $h_1(y) \leq x \leq h_2(y)$. A domain normal with respect to $x$ is crossed by vertical segments that enter through the graph of $g_1$ and exit through the graph of $g_2$; this description directly provides the **limits of integration**. The disk and the triangle are normal with respect to both axes; many regions that are not normal can be split into a union of normal domains.
 
-::grafico{xmin=-0.4 xmax=4.8 ymin=-0.6 ymax=3.6 area="2.6+0.5*sin(x);0.4+0.15*(x-2.5)^2;0.8;4" curve="t,0.4+0.15*(t-2.5)^2,0.8,4;2.2,t,0.4135,3.0043;t,2.6+0.5*sin(t),0.8,4" segmenti="0.8,0,0.8,2.959;4,0,4,2.222" etichette="0.75,-0.45,a;3.95,-0.45,b;2.9,0.75,y = g₁(x);2.9,3.05,y = g₂(x)" titolo="A domain normal with respect to the $x$-axis: the vertical segment at abscissa $x$ enters through the graph of $g_1$ and exits through the graph of $g_2$"}
+::grafico{xmin=-0.4 xmax=4.8 ymin=-0.6 ymax=3.6 area="2.6+0.5*sin(x);0.4+0.15*(x-2.5)^2;0.8;4" curve="t,0.4+0.15*(t-2.5)^2,0.8,4;2.2,t,0.4135,3.0043;t,2.6+0.5*sin(t),0.8,4" segmenti="0.8,0,0.8,2.959;4,0,4,2.222" etichette="0.75,-0.45,a;3.95,-0.45,b;2.9,0.75,y = g₁(x);2.9,3.05,y = g₂(x)" titolo="A domain normal with respect to the $x$-axis: the vertical segment at the point with x-coordinate $x$ enters through the graph of $g_1$ and exits through the graph of $g_2$"}
 
 :::
 
@@ -87,7 +87,7 @@ The outer variable ranges over a *fixed* interval, while the limits of the inner
 :::
 
 :::esempio{titolo="Domain between a parabola and a line"}
-Let $D$ be the region lying between the parabola $y = x^2$ and the line $y = x$. The two curves intersect where $x^2 = x$, that is, at $x = 0$ and $x = 1$, and for $0 \leq x \leq 1$ we have $x^2 \leq x$. The domain is **normal with respect to the $x$-axis**:
+Let $D$ be the region lying between the parabola $y = x^2$ and the line $y = x$. The two curves intersect where $x^2 = x$, that is, at $x = 0$ and $x = 1$, and for $0 \leq x \leq 1$ we have $x^2 \leq x$. The domain is **normal with respect to the** $x$-axis:
 $$
 D = \left\{ (x, y) :
 \begin{cases}
@@ -191,7 +191,7 @@ $$
 $$
 **Polar coordinates** are convenient when the domain is a disk, an annulus or a circular sector, or when the function contains the quantity $x^2 + y^2$, since $x^2 + y^2 = \rho^2$. A disk centered at the origin with radius $R$ becomes the rectangle $0 \leq \rho \leq R$, $0 \leq \theta \leq 2\pi$.
 
-::grafico{xmin=-2.6 xmax=2.6 ymin=-2.3 ymax=2.4 uguale=1 area="sqrt(abs(4-x^2));-sqrt(abs(4-x^2));-2;-1|sqrt(abs(4-x^2));sqrt(abs(1-x^2));-1;1|-sqrt(abs(1-x^2));-sqrt(abs(4-x^2));-1;1|sqrt(abs(4-x^2));-sqrt(abs(4-x^2));1;2" curve="2*cos(t),2*sin(t),0,6.29;0.6216*t,0.7833*t,0,1.5;0.45*cos(t),0.45*sin(t),0,0.9;cos(t),sin(t),0,6.29" punti="0.932,1.175,pieno,P" etichette="0.2,0.85,ρ;0.55,0.18,θ" titolo="The annulus $1 \leq \rho \leq 2$: the point $P$ is at distance $\rho$ from the origin and the segment $OP$ forms the angle $\theta$ with the positive $x$-semiaxis"}
+::grafico{xmin=-2.6 xmax=2.6 ymin=-2.3 ymax=2.4 uguale=1 area="sqrt(abs(4-x^2));-sqrt(abs(4-x^2));-2;-1|sqrt(abs(4-x^2));sqrt(abs(1-x^2));-1;1|-sqrt(abs(1-x^2));-sqrt(abs(4-x^2));-1;1|sqrt(abs(4-x^2));-sqrt(abs(4-x^2));1;2" curve="2*cos(t),2*sin(t),0,6.29;0.6216*t,0.7833*t,0,1.5;0.45*cos(t),0.45*sin(t),0,0.9;cos(t),sin(t),0,6.29" punti="0.932,1.175,pieno,P" etichette="0.2,0.85,ρ;0.55,0.18,θ" titolo="The annulus $1 \leq \rho \leq 2$: the point $P$ is at distance $\rho$ from the origin and the segment $OP$ forms the angle $\theta$ with the positive $x$-axis"}
 
 :::
 
@@ -239,7 +239,7 @@ If $\Phi : D' \to D$ is $C^1$, injective, with Jacobian $J \neq 0$ in the interi
 ## Triple integrals
 
 :::definizione{#integrale-triplo titolo="Triple integral"}
-The **triple integral** $\displaystyle\iiint_E f(x, y, z)\, dx\, dy\, dz$ of a bounded function over a region $E \subseteq \mathbb{R}^3$ is defined through Riemann sums over subdivisions into rectangular boxes, as for the double integral, and every function continuous on a closed and bounded region bounded by regular surfaces is integrable. Linearity, additivity with respect to the domain, monotonicity and the change of variables theorem hold, with the Jacobian given by the determinant of the $3 \times 3$ matrix of partial derivatives. For $f = 1$ the integral is the **volume** of $E$; with $f$ equal to a density the integral is the **mass** of the solid, as shown in the section on applications.
+The **triple integral** $\displaystyle\iiint_E f(x, y, z)\, dx\, dy\, dz$ of a bounded function over a region $E \subseteq \mathbb{R}^3$ is defined through Riemann sums over subdivisions into rectangular boxes, as for the double integral, and every function continuous on a closed and bounded region enclosed by regular surfaces is integrable. Linearity, additivity with respect to the domain, monotonicity and the change of variables theorem hold, with the Jacobian given by the determinant of the $3 \times 3$ matrix of partial derivatives. For $f = 1$ the integral is the **volume** of $E$; with $f$ equal to a density the integral is the **mass** of the solid.
 :::
 
 :::teorema{#integrazione-per-fili titolo="Integration by vertical lines"}
@@ -279,7 +279,7 @@ $$
 $$
 The integrand is $1$ and depends only on $z$, therefore the double integral over each cross-section is the **area of the cross-section**.
 
-::grafico{xmin=-1.8 xmax=1.8 ymin=-0.4 ymax=1.5 uguale=1 nomi="x,z" f="x^2;1+0*sqrt(1-x^2)" area="1;x^2;-1;1" segmenti="-0.7071,0.5,0.7071,0.5" punti="-0.7071,0.5;0.7071,0.5" etichette="0.82,0.42,(√z, z);-1.75,1.08,z = 1" titolo="Cross-section of the solid $E$ with the plane $y = 0$: at height $z$ the solid is cut in the disk $x^2 + y^2 \leq z$, of radius $\sqrt{z}$"}
+::grafico{xmin=-1.8 xmax=1.8 ymin=-0.4 ymax=1.5 uguale=1 nomi="x,z" f="x^2;1+0*sqrt(1-x^2)" area="1;x^2;-1;1" segmenti="-0.7071,0.5,0.7071,0.5" punti="-0.7071,0.5;0.7071,0.5" etichette="0.82,0.42,(√z, z);-1.75,1.08,z = 1" titolo="Cross-section of the solid $E$ with the plane $y = 0$: at height $z$ the cross-section of the solid is the disk $x^2 + y^2 \leq z$, of radius $\sqrt{z}$"}
 
 :::
 
@@ -299,7 +299,7 @@ The Jacobian is $\rho$, the same as for polar coordinates, so $dx\, dy\, dz = \r
 :::
 
 :::teorema{#coordinate-sferiche titolo="Spherical coordinates"}
-**Spherical coordinates** identify a point by the distance $r$ from the origin, the **colatitude** $\varphi$ measured from the positive $z$-semiaxis and the **longitude** $\theta$:
+**Spherical coordinates** identify a point by the distance $r$ from the origin, the **colatitude** $\varphi$ measured from the positive $z$-axis and the **longitude** $\theta$:
 $$
 \begin{cases}
 x = r \sin\varphi \cos\theta \\
@@ -310,7 +310,7 @@ z = r \cos\varphi
 $$
 The absolute value of the Jacobian is $r^2 \sin\varphi$, so $dx\, dy\, dz = r^2 \sin\varphi\, dr\, d\varphi\, d\theta$. The identity $x^2 + y^2 + z^2 = r^2$ holds, therefore spherical coordinates are convenient for spheres, spherical caps and functions of the distance from the origin: the ball $x^2 + y^2 + z^2 \leq R^2$ becomes the box $0 \leq r \leq R$, $0 \leq \varphi \leq \pi$, $0 \leq \theta \leq 2\pi$, and the half-ball with $z \geq 0$ is obtained with $0 \leq \varphi \leq \dfrac{\pi}{2}$.
 
-::grafico{xmin=-2.6 xmax=2.6 ymin=-2.4 ymax=2.5 uguale=1 nomi="x,z" curve="2*cos(t),2*sin(t),0,6.29;0.5646*t,0.8253*t,0,2;0.6*cos(t),0.6*sin(t),0.9708,1.5708" segmenti="1.1293,1.6507,0,1.6507;1.1293,1.6507,1.1293,0" punti="1.1293,1.6507,pieno,P" etichette="0.72,0.62,r;0.1,0.72,φ" titolo="Cross-section with the plane $y = 0$, in the half-plane $\theta = 0$: the point $P$ is at distance $r$ from the origin and has colatitude $\varphi$ measured from the positive $z$-semiaxis"}
+::grafico{xmin=-2.6 xmax=2.6 ymin=-2.4 ymax=2.5 uguale=1 nomi="x,z" curve="2*cos(t),2*sin(t),0,6.29;0.5646*t,0.8253*t,0,2;0.6*cos(t),0.6*sin(t),0.9708,1.5708" segmenti="1.1293,1.6507,0,1.6507;1.1293,1.6507,1.1293,0" punti="1.1293,1.6507,pieno,P" etichette="0.72,0.62,r;0.1,0.72,φ" titolo="Cross-section with the plane $y = 0$, in the half-plane $\theta = 0$: the point $P$ is at distance $r$ from the origin and has colatitude $\varphi$ measured from the positive $z$-axis"}
 
 :::
 
@@ -326,7 +326,7 @@ $$
 The integrand $r^2 \sin\varphi$ is a product of factors in separated variables and the limits are constant, so the triple integral is the **product of the three single integrals**.
 :::
 
-## Applications: areas, volumes, masses and centroids
+## Applications: areas, volumes, masses and centers of mass
 
 :::definizione{#area-e-volume titolo="Area and volume as integrals"}
 The area of a domain $D \subseteq \mathbb{R}^2$ and the volume of a region $E \subseteq \mathbb{R}^3$ are the **integrals of the constant function** $1$:
@@ -342,8 +342,8 @@ $$
 so the volume under a graph is computed with a double integral. The volume of the solid lying between two graphs $g \leq f$ on $D$ is the **integral of the difference** $f - g$.
 :::
 
-:::definizione{#massa-e-baricentro titolo="Mass and centroid"}
-Let $\delta(x, y) \geq 0$ be the **surface density** of a plane lamina $D$. The **mass** and the **centroid** $(\bar{x}, \bar{y})$ of the lamina are
+:::definizione{#massa-e-baricentro titolo="Mass and center of mass"}
+Let $\delta(x, y) \geq 0$ be the **surface density** of a plane lamina $D$. The **mass** and the **center of mass** $(\bar{x}, \bar{y})$ of the lamina are
 $$
 m = \iint_D \delta(x, y)\, dx\, dy ,
 \qquad
@@ -351,15 +351,15 @@ m = \iint_D \delta(x, y)\, dx\, dy ,
 \qquad
 \bar{y} = \frac{1}{m} \iint_D y\, \delta(x, y)\, dx\, dy .
 $$
-For a solid $E$ with density $\delta(x, y, z)$ the formulas are the same with triple integrals and the third coordinate $\bar{z}$. If the lamina is homogeneous, that is, $\delta$ is constant, the density cancels between numerator and denominator and the centroid depends *only* on the shape: each coordinate of the centroid is the mean of the values of that coordinate over the domain. If a homogeneous domain is symmetric with respect to a line, the centroid lies on that line, since in the integral of the transverse coordinate the integrand is odd with respect to the symmetry.
+For a solid $E$ with density $\delta(x, y, z)$ the formulas are the same with triple integrals and the third coordinate $\bar{z}$. If the lamina is homogeneous, that is, $\delta$ is constant, the density cancels between numerator and denominator and the center of mass depends *only* on the shape: each coordinate of the center of mass is the mean of the values of that coordinate over the domain. If a homogeneous domain is symmetric with respect to a line, the center of mass lies on that line, since in the integral of the transverse coordinate the integrand is odd with respect to the symmetry.
 :::
 
-:::esempio{titolo="Centroid of a rectangle with variable density"}
+:::esempio{titolo="Center of mass of a rectangle with variable density"}
 The lamina $[0, 1] \times [0, 1]$ with density $\delta(x, y) = x$ has mass
 $$
 m = \int_0^1 \int_0^1 x \, dy\, dx = \frac{1}{2} ,
 \qquad
 \bar{x} = \frac{1}{m} \int_0^1 \int_0^1 x \cdot x \, dy\, dx = 2 \cdot \frac{1}{3} = \frac{2}{3} .
 $$
-The centroid has abscissa $\dfrac{2}{3} > \dfrac{1}{2}$, shifted toward the right-hand part of the lamina, where the **density is greater**; by the symmetry of the density with respect to the line $y = \dfrac{1}{2}$ we get $\bar{y} = \dfrac{1}{2}$.
+The center of mass has x-coordinate $\dfrac{2}{3} > \dfrac{1}{2}$, shifted toward the right-hand part of the lamina, where the **density is greater**; by the symmetry of the density with respect to the line $y = \dfrac{1}{2}$ we get $\bar{y} = \dfrac{1}{2}$.
 :::

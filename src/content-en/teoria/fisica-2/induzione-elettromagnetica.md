@@ -1,6 +1,6 @@
 ---
-titolo: Electromagnetic induction
-sommario: How a change in the magnetic flux linked with a circuit generates an electromotive force, how to compute the emf of a moving rod and of a rotating loop, what inductance and the RL circuit are, and where the energy of the magnetic field resides.
+titolo: Induzione elettromagnetica
+sommario: Come la variazione del flusso magnetico concatenato con un circuito genera una forza elettromotrice, come si calcolano la f.e.m. di una sbarretta in moto e di una spira rotante, che cosa sono l'induttanza e il circuito RL, e dove si trova l'energia del campo magnetico.
 ---
 
 ## Flux linkage and the Faraday-Neumann-Lenz law
@@ -29,27 +29,27 @@ $$
 $$
 where $\mathcal{E}$ is positive if it acts in the direction of the circuit associated with the normal $\hat{n}$ by the right-hand rule. The emf is determined by the rate at which the flux changes, whatever the value of the flux; the minus sign expresses Lenz's law on the direction of the induced current. If the flux varies uniformly during the interval $\Delta t$, the emf equals $-\dfrac{\Delta\Phi_B}{\Delta t}$; in general this ratio is the **average emf**.
 
-For example, if the field perpendicular to a coil of $100$ turns with area $20\,\mathrm{cm^2}$ increases uniformly from $0$ to $0.60\,\mathrm{T}$ in $0.15\,\mathrm{s}$, the flux linkage increases by $100 \cdot 20 \cdot 10^{-4} \cdot 0.60\,\mathrm{Wb} = 0.12\,\mathrm{Wb}$ and the magnitude of the emf is $\dfrac{0.12}{0.15}\,\mathrm{V} = 0.80\,\mathrm{V}$.
+For example, if the field perpendicular to a coil of $100$ turns with area $20\,\mathrm{cm^2}$ increases uniformly from $0$ to $0{,}60\,\mathrm{T}$ in $0{,}15\,\mathrm{s}$, the flux linkage increases by $100 \cdot 20 \cdot 10^{-4} \cdot 0{,}60\,\mathrm{Wb} = 0{,}12\,\mathrm{Wb}$ and the magnitude of the emf is $\dfrac{0{,}12}{0{,}15}\,\mathrm{V} = 0{,}80\,\mathrm{V}$.
 :::
 
 :::osservazione{#modi-di-variare-il-flusso titolo="Ways to change the flux"}
-For a flat loop in a uniform field $\Phi_B = B A\cos\theta$, so the flux varies if at least one of the three factors changes.
+For a flat loop in a uniform field we have $\Phi_B = B A\cos\theta$, so the flux varies if at least one of the three factors changes.
 
 - The magnitude of the field varies, for example because the current that generates it varies or because a magnet approaches; the loop is at rest.
 - The area of the loop varies, as when a rod slides on two conducting rails; one then speaks of *motional* emf.
 - The angle $\theta$ varies, as in a loop rotating in the field; this is the principle of the alternator.
 
-The Faraday-Neumann-Lenz law describes all three cases with the same formula. In the first case the emf is due to an induced electric field, in the other two to the Lorentz force on the charges of the moving conductor.
+The Faraday-Neumann-Lenz law describes all three cases with the same formula. In the first case the emf is due to an induced electric field; in the other two it is due to the Lorentz force on the charges of the moving conductor.
 :::
 
 ## Induced current and Lenz's law
 
 :::definizione{#corrente-indotta titolo="Induced current"}
-If the circuit in which the induced emf $\mathcal{E}$ is generated is closed and has total resistance $R$, and if the self-induction of the circuit is negligible, the **induced current**
+If the circuit in which the induced emf $\mathcal{E}$ is generated is closed and has total resistance $R$, and if the self-induction of the circuit is negligible, the **induced current** in it is
 $$
-i = \frac{\mathcal{E}}{R} = -\frac{1}{R}\,\frac{d\Phi_B}{dt}
+i = \frac{\mathcal{E}}{R} = -\frac{1}{R}\,\frac{d\Phi_B}{dt} .
 $$
-flows in it. The induced current exists only as long as the flux varies. If the circuit is open, a potential difference equal in magnitude to $\mathcal{E}$ is measured across the gap, while the current is zero.
+The induced current exists only as long as the flux varies. If the circuit is open, a potential difference equal in magnitude to $\mathcal{E}$ is measured across the gap, while the current is zero.
 :::
 
 ::::teorema{#carica-indotta titolo="Induced charge (Felici's law)"}
@@ -57,7 +57,7 @@ Consider a circuit of resistance $R$, with negligible self-induction, whose flux
 $$
 q = \int_{t_1}^{t_2} i\,dt = -\frac{\Phi_2 - \Phi_1}{R} .
 $$
-The charge depends only on the change in flux, whatever the rate at which it occurs, and for this reason a measurement of charge makes it possible to measure a magnetic field. If a circular loop of radius $5.0\,\mathrm{cm}$ and resistance $0.20\,\mathrm{\Omega}$ is pulled out of a perpendicular field of $0.40\,\mathrm{T}$, the charge that passes through it has magnitude $\dfrac{0.40 \cdot \pi \cdot 0.050^2}{0.20}\,\mathrm{C} \approx 16\,\mathrm{mC}$, whether the extraction is slow or fast.
+The charge depends only on the change in flux, whatever the rate at which it occurs, and for this reason a measurement of charge makes it possible to measure a magnetic field. If a circular loop of radius $5{,}0\,\mathrm{cm}$ and resistance $0{,}20\,\mathrm{\Omega}$ is pulled out of a perpendicular field of $0{,}40\,\mathrm{T}$, the charge that passes through it has magnitude $\dfrac{0{,}40 \cdot \pi \cdot 0{,}050^2}{0{,}20}\,\mathrm{C} \approx 16\,\mathrm{mC}$, whether the extraction is slow or fast.
 
 :::dimostrazione
 By the definition of induced current $i = -\dfrac{1}{R}\,\dfrac{d\Phi_B}{dt}$, and $R$ is constant. Integrating between $t_1$ and $t_2$, by the fundamental theorem of calculus we obtain
@@ -87,11 +87,11 @@ A charge $q$ moving with velocity $\vec{v}$ in a magnetic field $\vec{B}$ is sub
 :::
 
 ::::teorema{#fem-mozionale titolo="Emf of a moving rod"}
-A straight conducting rod of length $\ell$ translates with constant velocity $\vec{v}$ in a uniform magnetic field $\vec{B}$, with $\vec{v}$, $\vec{B}$ and the rod mutually perpendicular. Then the electromotive force
+A straight conducting rod of length $\ell$ translates with constant velocity $\vec{v}$ in a uniform magnetic field $\vec{B}$, with $\vec{v}$, $\vec{B}$ and the rod mutually perpendicular. Then the electromotive force generated between the ends of the rod is
 $$
-\mathcal{E} = B \ell v
+\mathcal{E} = B \ell v .
 $$
-is generated between the ends of the rod. If the rod closes a circuit by sliding on two conducting rails, the same emf is obtained from the Faraday-Neumann-Lenz law, because the area of the circuit changes. A rod $20\,\mathrm{cm}$ long moving at $3.0\,\mathrm{m/s}$ in a field of $0.50\,\mathrm{T}$ has across its ends the emf $0.50 \cdot 0.20 \cdot 3.0\,\mathrm{V} = 0.30\,\mathrm{V}$.
+If the rod closes a circuit by sliding on two conducting rails, the same emf is obtained from the Faraday-Neumann-Lenz law, because the area of the circuit changes. A rod $20\,\mathrm{cm}$ long moving at $3{,}0\,\mathrm{m/s}$ in a field of $0{,}50\,\mathrm{T}$ has across its ends the emf $0{,}50 \cdot 0{,}20 \cdot 3{,}0\,\mathrm{V} = 0{,}30\,\mathrm{V}$.
 
 ::grafico{assi=0 linee="0,2 7,2;0,0 7,0;0,2 0,1.6 0.3,1.5 -0.3,1.3 0.3,1.1 -0.3,0.9 0.3,0.7 -0.3,0.5 0,0.4 0,0" poligoni="4.42,-0.3 4.58,-0.3 4.58,2.3 4.42,2.3" vettori="4.7,1.3,5.9,1.3,v;4.3,0.7,3.1,0.7,F;3.0,2.3,1.8,2.3,i" etichette="-0.75,1.0,R;1.4,1.4,⊗;2.6,1.4,⊗;1.4,0.6,⊗;2.6,0.6,⊗;5.6,0.5,⊗;6.6,1.5,⊗;6.6,0.5,⊗;4.85,-0.35,ℓ;6.8,2.4,B ⊗" xmin=-1.2 xmax=7.2 ymin=-0.7 ymax=2.8 uguale=1 titolo="Rod on two rails in a field $\vec{B}$ pointing into the page: the rod moves to the right, the induced current flows counterclockwise and the magnetic force $\vec{F}$ on the rod opposes the motion"}
 
@@ -105,7 +105,7 @@ In the circuit closed by the rails let $x$ be the distance of the rod from the f
 ::::
 
 :::osservazione{#fem-mozionale-generale titolo="Motional emf in general"}
-If a circuit, or a part of it, moves in a static magnetic field, the emf is the circulation of the Lorentz force per unit charge:
+If a circuit, or a part of it, moves in a static magnetic field, the emf is the closed line integral of the Lorentz force per unit charge:
 $$
 \mathcal{E} = \oint_\gamma \left( \vec{v} \times \vec{B} \right) \cdot d\vec{\ell} ,
 $$
@@ -113,7 +113,7 @@ where $\vec{v}$ is the velocity of the element $d\vec{\ell}$. Only the moving pa
 $$
 \mathcal{E} = \int_0^\ell B\,\omega s\,ds = \frac{1}{2} B \omega \ell^2 .
 $$
-For $B = 0.40\,\mathrm{T}$, $\ell = 0.50\,\mathrm{m}$ and $\omega = 20\,\mathrm{rad/s}$ we obtain $\mathcal{E} = 1.0\,\mathrm{V}$. The same result holds for the Faraday disk, a conducting disk of radius $\ell$ rotating about its own axis, between the center and the rim.
+For $B = 0{,}40\,\mathrm{T}$, $\ell = 0{,}50\,\mathrm{m}$ and $\omega = 20\,\mathrm{rad/s}$ we obtain $\mathcal{E} = 1{,}0\,\mathrm{V}$. The same result holds for the Faraday disk, a conducting disk of radius $\ell$ rotating about its own axis, between the center and the rim.
 :::
 
 ## Rod on rails: forces and energy balance
@@ -135,9 +135,9 @@ and the velocity decreases according to the law
 $$
 v(t) = v_0\,e^{-\frac{t}{\tau}} , \qquad \tau = \frac{m R}{B^2 \ell^2} .
 $$
-The rod stops only asymptotically, after covering the distance $v_0 \tau$. With $m = 0.10\,\mathrm{kg}$, $R = 0.50\,\mathrm{\Omega}$, $B = 0.50\,\mathrm{T}$, $\ell = 0.40\,\mathrm{m}$ and $v_0 = 2.0\,\mathrm{m/s}$ we have $\tau = 1.25\,\mathrm{s}$, and the distance covered is $2.5\,\mathrm{m}$.
+The rod stops only asymptotically, after covering the distance $v_0 \tau$. With $m = 0{,}10\,\mathrm{kg}$, $R = 0{,}50\,\mathrm{\Omega}$, $B = 0{,}50\,\mathrm{T}$, $\ell = 0{,}40\,\mathrm{m}$ and $v_0 = 2{,}0\,\mathrm{m/s}$ we have $\tau = 1{,}25\,\mathrm{s}$, and the distance covered is $2{,}5\,\mathrm{m}$.
 
-::grafico{f="exp(-x)+0*sqrt(x)" segmenti="0,1,1,0" punti="0,1,pieno;1,0.368,pieno" xmin=-0.3 xmax=4.6 ymin=-0.2 ymax=1.3 nomi="t,v" legenda="v(t) = v_0\,e^{-\frac{t}{\tau}}" titolo="Velocity of the rod, in units of $v_0$, with time in units of $\tau$: the tangent at the origin meets the time axis at $t = \tau$, where $v = \dfrac{v_0}{e} \approx 0.37\,v_0$"}
+::grafico{f="exp(-x)+0*sqrt(x)" segmenti="0,1,1,0" punti="0,1,pieno;1,0.368,pieno" xmin=-0.3 xmax=4.6 ymin=-0.2 ymax=1.3 nomi="t,v" legenda="v(t) = v_0\,e^{-\frac{t}{\tau}}" titolo="Velocity of the rod, in units of $v_0$, with time in units of $\tau$: the tangent at the origin meets the time axis at $t = \tau$, where $v = \dfrac{v_0}{e} \approx 0{,}37\,v_0$"}
 
 :::dimostrazione
 By the theorem on the emf of a moving rod, the emf $B \ell v$ acts in the circuit, so the current $I = \dfrac{B \ell v}{R}$ flows. The rod carrying current is subject to the force $I\,\vec{\ell} \times \vec{B}$, of magnitude $I \ell B = \dfrac{B^2 \ell^2 v}{R}$; by Lenz's law the force opposes the motion, because the induced current opposes the increase in the area of the circuit. The weight and the normal force of the rails are perpendicular to the motion, therefore **Newton's second law** along the rails gives
@@ -151,7 +151,7 @@ This is a first-order linear equation with $a = \dfrac{1}{\tau}$ and $b = 0$, so
 ::::
 
 :::osservazione{#bilancio-energetico-sbarretta titolo="Energy balance"}
-The power of the magnetic braking force is $-F v = -\dfrac{B^2 \ell^2 v^2}{R}$, and the power dissipated in the resistor by the Joule effect is $R I^2 = \dfrac{B^2 \ell^2 v^2}{R}$. The two powers are equal in magnitude, so the kinetic energy lost by the rod is entirely converted into heat in the resistor; for the launched rod the total heat is $\dfrac{1}{2} m v_0^2$. If instead an external force keeps the rod at constant velocity, it must balance the braking force, and its power $F v$ equals the electrical power $\mathcal{E} I$ delivered to the circuit.
+The power of the magnetic braking force is $-F v = -\dfrac{B^2 \ell^2 v^2}{R}$, and the power dissipated in the resistor by Joule heating is $R I^2 = \dfrac{B^2 \ell^2 v^2}{R}$. The two powers are equal in magnitude, so the kinetic energy lost by the rod is entirely converted into heat in the resistor; for the launched rod the total heat is $\dfrac{1}{2} m v_0^2$. If instead an external force keeps the rod at constant velocity, it must balance the braking force, and its power $F v$ equals the electrical power $\mathcal{E} I$ delivered to the circuit.
 
 On vertical rails, with the rod falling, the weight $mg$ is constant and the braking force grows with the velocity; the rod reaches the **terminal velocity** at which the two forces balance, $v_{\text{lim}} = \dfrac{m g R}{B^2 \ell^2}$.
 :::
@@ -163,7 +163,7 @@ A coil of $N$ flat turns of area $A$ rotates with constant angular velocity $\om
 $$
 \mathcal{E}(t) = N B A \omega \sin(\omega t) .
 $$
-The emf is **alternating**, with maximum value $\mathcal{E}_{\max} = N B A \omega$ and frequency equal to the rotation frequency $f = \dfrac{\omega}{2\pi}$. The maximum value occurs when the plane of the turns is parallel to $\vec{B}$, that is, when the flux is zero and varies most rapidly. For a coil of $100$ turns of area $0.010\,\mathrm{m^2}$ rotating at $50$ revolutions per second in a field of $0.20\,\mathrm{T}$ we have $\omega = 2\pi \cdot 50\,\mathrm{rad/s}$ and $\mathcal{E}_{\max} \approx 63\,\mathrm{V}$.
+The emf is **alternating**, with maximum value $\mathcal{E}_{\max} = N B A \omega$ and frequency equal to the rotation frequency $f = \dfrac{\omega}{2\pi}$. The maximum value occurs when the plane of the turns is parallel to $\vec{B}$, that is, when the flux is zero and varies most rapidly. For a coil of $100$ turns of area $0{,}010\,\mathrm{m^2}$ rotating at $50$ revolutions per second in a field of $0{,}20\,\mathrm{T}$ we have $\omega = 2\pi \cdot 50\,\mathrm{rad/s}$ and $\mathcal{E}_{\max} \approx 63\,\mathrm{V}$.
 
 ::grafico{f="cos(x);sin(x)" xmin=-0.4 xmax=13.2 ymin=-1.5 ymax=1.7 nomi="ωt,y" legenda="\dfrac{\Phi_B}{NBA};\dfrac{\mathcal{E}}{NBA\omega}" titolo="Flux linkage and emf in the rotating loop, divided by their respective maximum values: the emf is maximum in magnitude where the flux vanishes"}
 
@@ -190,7 +190,7 @@ The circulation of a field $\vec{F}$ along a closed curve $\gamma$ is the line i
 :::
 
 :::teorema{#faraday-forma-integrale titolo="Faraday's law in integral form"}
-This is a postulate of electromagnetism, which extends the Faraday-Neumann-Lenz law to any closed line, even in the absence of conductors. For every stationary oriented closed curve $\gamma$, boundary of a surface $S$,
+This is a postulate of electromagnetism, which extends the Faraday-Neumann-Lenz law to any closed curve, even in the absence of conductors. For every stationary oriented closed curve $\gamma$, boundary of a surface $S$,
 $$
 \oint_\gamma \vec{E} \cdot d\vec{\ell} = -\frac{d}{dt} \iint_S \vec{B} \cdot \hat{n}\,dS .
 $$
@@ -206,11 +206,11 @@ An infinite straight solenoid of radius $a$ contains a uniform magnetic field $B
 $$
 E(r) =
 \begin{cases}
-\dfrac{r}{2} \left| \dfrac{dB}{dt} \right| & \text{if } r \leq a \\[10pt]
-\dfrac{a^2}{2 r} \left| \dfrac{dB}{dt} \right| & \text{if } r \geq a
+\dfrac{r}{2} \left| \dfrac{dB}{dt} \right| & \text{se } r \leq a \\[10pt]
+\dfrac{a^2}{2 r} \left| \dfrac{dB}{dt} \right| & \text{se } r \geq a
 \end{cases}
 $$
-The field grows linearly inside, is maximum at the surface of the solenoid and decreases as $\dfrac{1}{r}$ outside, where the magnetic field is zero. With $a = 2.0\,\mathrm{cm}$ and $\left| \dfrac{dB}{dt} \right| = 0.50\,\mathrm{T/s}$, the field equals $2.5\,\mathrm{mV/m}$ both at $1.0\,\mathrm{cm}$ and at $4.0\,\mathrm{cm}$ from the axis, and $5.0\,\mathrm{mV/m}$ at the surface.
+The field grows linearly inside, is maximum at the surface of the solenoid and decreases as $\dfrac{1}{r}$ outside, where the magnetic field is zero. With $a = 2{,}0\,\mathrm{cm}$ and $\left| \dfrac{dB}{dt} \right| = 0{,}50\,\mathrm{T/s}$, the field equals $2{,}5\,\mathrm{mV/m}$ both at $1{,}0\,\mathrm{cm}$ and at $4{,}0\,\mathrm{cm}$ from the axis, and $5{,}0\,\mathrm{mV/m}$ at the surface.
 
 ::grafico{f="min(x,1/x)" segmenti="1,0,1,1" xmin=-0.3 xmax=4.6 ymin=-0.2 ymax=1.3 nomi="r,E" legenda=0 titolo="Magnitude of the induced electric field as a function of the distance $r$ from the axis, with $r$ in units of the radius $a$ and $E$ in units of $\dfrac{a}{2} \left| \dfrac{dB}{dt} \right|$"}
 
@@ -218,7 +218,7 @@ The field grows linearly inside, is maximum at the surface of the solenoid and d
 The system is invariant under rotations about the axis and translations along the axis, so the field lines of the induced field are coaxial circles and the magnitude $E$ depends only on $r$. We apply **Faraday's law in integral form** to the circle of radius $r$, oriented so that the normal to the disk is in the same direction as $\vec{B}$. The field $\vec{E}$ is tangent and has constant magnitude along the circle, therefore the circulation equals $2\pi r\,E$, up to sign. The magnetic flux is $\pi r^2 B$ if $r \leq a$, and $\pi a^2 B$ if $r \geq a$, since outside the solenoid the field is zero. Equating the magnitudes we obtain
 $$
 2\pi r\,E = \pi r^2 \left| \frac{dB}{dt} \right|
-\quad \text{or} \quad
+\quad \text{oppure} \quad
 2\pi r\,E = \pi a^2 \left| \frac{dB}{dt} \right| ,
 $$
 from which the two expressions of $E(r)$ follow.
@@ -226,7 +226,7 @@ from which the two expressions of $E(r)$ follow.
 ::::
 
 :::osservazione{#correnti-parassite titolo="Eddy currents"}
-In a conducting block that moves in a magnetic field, or that is located in a varying field, the induced electric field drives closed currents inside the material, called **eddy currents** or Foucault currents. By Lenz's law they oppose the cause that generates them, so they brake the motion of the conductor, and they dissipate energy by the Joule effect. The first effect is exploited in electromagnetic brakes, the second in induction cooktops. In transformer cores eddy currents are a defect, and they are reduced by building the core from laminations insulated from one another.
+In a conducting block that moves in a magnetic field, or that is located in a varying field, the induced electric field drives closed currents inside the material, called **eddy currents** or Foucault currents. By Lenz's law they oppose the cause that generates them, so they slow the conductor, and they dissipate energy by Joule heating. The first effect is exploited in electromagnetic brakes, the second in induction cooktops. In transformer cores eddy currents are a defect, and they are reduced by building the core from laminations insulated from one another.
 :::
 
 ## Self-induction and inductance
@@ -240,11 +240,11 @@ where $\Phi_B$ is the self-linked flux. In vacuum $L$ depends only on the shape 
 :::
 
 ::::teorema{#fem-autoindotta titolo="Self-induced emf"}
-If the current in a rigid circuit of inductance $L$ varies in time, the self-induced emf
+If the current in a rigid circuit of inductance $L$ varies in time, the self-induced emf generated in the circuit is
 $$
-\mathcal{E}_L = -L\,\frac{di}{dt}
+\mathcal{E}_L = -L\,\frac{di}{dt} .
 $$
-is generated in the circuit. By Lenz's law the self-induced emf opposes the change in the current; inductance is therefore the electrical analog of mass, which opposes the change in velocity. If the current in a coil with $L = 0.20\,\mathrm{H}$ increases by $50\,\mathrm{A}$ per second, an emf of magnitude $0.20 \cdot 50\,\mathrm{V} = 10\,\mathrm{V}$ is generated across it, directed opposite to the current.
+By Lenz's law the self-induced emf opposes the change in the current; inductance is therefore the electrical analog of mass, which opposes the change in velocity. If the current in a coil with $L = 0{,}20\,\mathrm{H}$ increases by $50\,\mathrm{A}$ per second, an emf of magnitude $0{,}20 \cdot 50\,\mathrm{V} = 10\,\mathrm{V}$ is generated across it, directed opposite to the current.
 
 :::dimostrazione
 The self-linked flux is $\Phi_B = L i$, and $L$ is constant because the circuit is rigid. By the **Faraday-Neumann-Lenz law**
@@ -263,7 +263,7 @@ A solenoid of length $\ell$, with $N$ turns of area $A$, long compared with the 
 $$
 L = \frac{\mu_0 N^2 A}{\ell} = \mu_0 n^2 A \ell , \qquad n = \frac{N}{\ell} .
 $$
-The inductance grows with the square of the number of turns, because doubling $N$ doubles both the field and the number of turns crossed by the flux. A solenoid with $N = 400$, $\ell = 20\,\mathrm{cm}$ and turns of radius $1.0\,\mathrm{cm}$ has $L = \dfrac{4\pi \cdot 10^{-7} \cdot 400^2 \cdot \pi \cdot 0.010^2}{0.20}\,\mathrm{H} \approx 0.32\,\mathrm{mH}$.
+The inductance grows with the square of the number of turns, because doubling $N$ doubles both the field and the number of turns crossed by the flux. A solenoid with $N = 400$, $\ell = 20\,\mathrm{cm}$ and turns of radius $1{,}0\,\mathrm{cm}$ has $L = \dfrac{4\pi \cdot 10^{-7} \cdot 400^2 \cdot \pi \cdot 0{,}010^2}{0{,}20}\,\mathrm{H} \approx 0{,}32\,\mathrm{mH}$.
 
 :::dimostrazione
 With $n = \dfrac{N}{\ell}$ and current $i$, the field inside is uniform and equals $B = \mu_0 \dfrac{N}{\ell}\,i$. The flux through one turn is $B A$, so the flux linked with the $N$ turns is
@@ -292,7 +292,7 @@ In a circuit consisting of an ideal source of constant emf $\mathcal{E}$, a resi
 $$
 i(t) = \frac{\mathcal{E}}{R} \left( 1 - e^{-\frac{t}{\tau}} \right) , \qquad \tau = \frac{L}{R} .
 $$
-The quantity $\tau$ is the **time constant** of the circuit. At the instant of closing the current is zero and its derivative equals $\dfrac{\mathcal{E}}{L}$, because the whole emf of the source is balanced by the self-induced emf; as $t \to +\infty$ the current tends to $\dfrac{\mathcal{E}}{R}$, as in a circuit without an inductor. With $\mathcal{E} = 6.0\,\mathrm{V}$, $R = 3.0\,\mathrm{\Omega}$ and $L = 0.12\,\mathrm{H}$ we have $\tau = 40\,\mathrm{ms}$, the steady-state current is $2.0\,\mathrm{A}$ and after a time $\tau$ the current equals $2.0 \cdot (1 - e^{-1})\,\mathrm{A} \approx 1.3\,\mathrm{A}$.
+The quantity $\tau$ is the **time constant** of the circuit. At the instant the switch closes the current is zero and its derivative equals $\dfrac{\mathcal{E}}{L}$, because the whole emf of the source is balanced by the self-induced emf; as $t \to +\infty$ the current tends to $\dfrac{\mathcal{E}}{R}$, as in a circuit without an inductor. With $\mathcal{E} = 6{,}0\,\mathrm{V}$, $R = 3{,}0\,\mathrm{\Omega}$ and $L = 0{,}12\,\mathrm{H}$ we have $\tau = 40\,\mathrm{ms}$, the steady-state current is $2{,}0\,\mathrm{A}$ and after a time $\tau$ the current equals $2{,}0 \cdot (1 - e^{-1})\,\mathrm{A} \approx 1{,}3\,\mathrm{A}$.
 
 ::grafico{f="1-exp(-x)+0*sqrt(x);exp(-x)+0*sqrt(x)" asintoti="y=1" segmenti="1,0,1,0.632;0,0.632,1,0.632" punti="1,0.632,pieno;1,0.368,pieno" xmin=-0.3 xmax=5.2 ymin=-0.2 ymax=1.35 nomi="t,i" legenda="\text{closing: } 1 - e^{-\frac{t}{\tau}};\text{opening: } e^{-\frac{t}{\tau}}" titolo="Current in the RL circuit, in units of the steady-state value, with time in units of $\tau$: after a time $\tau$ the current has reached $63\,\%$ of the final value on closing and has dropped to $37\,\%$ on opening"}
 
@@ -311,11 +311,11 @@ $$
 ::::
 
 ::::teorema{#circuito-rl-apertura titolo="Opening an RL circuit"}
-In an RL circuit carrying the steady-state current $I_0$, at time $t = 0$ the source is cut out with a changeover switch, and the inductor remains closed on the resistor $R$. Then for $t \geq 0$
+In an RL circuit carrying the steady-state current $I_0$, at time $t = 0$ the source is disconnected by a changeover switch, while the inductor remains in a closed circuit with the resistor $R$. Then for $t \geq 0$
 $$
 i(t) = I_0\,e^{-\frac{t}{\tau}} , \qquad \tau = \frac{L}{R} .
 $$
-The current decreases gradually, because the inductor opposes the change in current; the time in which the current halves is $\tau \ln 2$. With $L = 0.12\,\mathrm{H}$ and $R = 3.0\,\mathrm{\Omega}$ the current halves in $40 \cdot 0.693\,\mathrm{ms} \approx 28\,\mathrm{ms}$.
+The current decreases gradually, because the inductor opposes the change in current; the time in which the current halves is $\tau \ln 2$. With $L = 0{,}12\,\mathrm{H}$ and $R = 3{,}0\,\mathrm{\Omega}$ the current halves in $40 \cdot 0{,}693\,\mathrm{ms} \approx 28\,\mathrm{ms}$.
 
 :::dimostrazione
 In the loop formed by the inductor and the resistor the only emf is the self-induced one, so
@@ -329,7 +329,7 @@ By the solution formula for first-order linear equations, with $b = 0$ and $i(0)
 ::::
 
 :::osservazione{#costante-di-tempo-rl titolo="Meaning of the time constant"}
-The time constant $\tau = \dfrac{L}{R}$ is measured in seconds, since $1\,\mathrm{H/\Omega} = 1\,\mathrm{V \cdot s/A} \cdot 1\,\mathrm{A/V} = 1\,\mathrm{s}$. After a time $\tau$ the closing current has reached $63\,\%$ of the steady-state value, since $1 - e^{-1} \approx 0.632$, and after $5\tau$ it has reached more than $99\,\%$ of it; for this reason, after a few time constants, the circuit is considered to be in steady state. If a circuit with an inductor is opened abruptly without offering the current an alternative path, the current drops in a very short time and the self-induced emf $-L\,\dfrac{di}{dt}$ becomes very large; this phenomenon is the origin of the spark observed at the contacts of a switch.
+The time constant $\tau = \dfrac{L}{R}$ is measured in seconds, since $1\,\mathrm{H/\Omega} = 1\,\mathrm{V \cdot s/A} \cdot 1\,\mathrm{A/V} = 1\,\mathrm{s}$. After a time $\tau$ the current after closing the switch has reached $63\,\%$ of the steady-state value, since $1 - e^{-1} \approx 0{,}632$, and after $5\tau$ it has reached more than $99\,\%$ of it; for this reason, after a few time constants, the circuit is considered to be in steady state. If a circuit with an inductor is opened abruptly without offering the current an alternative path, the current drops in a very short time and the self-induced emf $-L\,\dfrac{di}{dt}$ becomes very large; this phenomenon is the origin of the spark observed at the contacts of a switch.
 :::
 
 ## Energy of the magnetic field
@@ -339,14 +339,14 @@ An inductor of inductance $L$ carrying the current $I$ stores the energy
 $$
 U = \frac{1}{2} L I^2 .
 $$
-The energy is the work, denoted by $W$ because $L$ is the inductance, that the source does against the self-induced emf to bring the current from $0$ to $I$; when the current goes to zero, the inductor returns the same energy, which on opening the RL circuit is dissipated in the resistor. With $L = 0.12\,\mathrm{H}$ and $I = 2.0\,\mathrm{A}$ we have $U = \dfrac{1}{2} \cdot 0.12 \cdot 2.0^2\,\mathrm{J} = 0.24\,\mathrm{J}$.
+The energy is the work, denoted by $W$ because $L$ is the inductance, that the source does against the self-induced emf to bring the current from $0$ to $I$; when the current goes to zero, the inductor returns the same energy, which on opening the RL circuit is dissipated in the resistor. With $L = 0{,}12\,\mathrm{H}$ and $I = 2{,}0\,\mathrm{A}$ we have $U = \dfrac{1}{2} \cdot 0{,}12 \cdot 2{,}0^2\,\mathrm{J} = 0{,}24\,\mathrm{J}$.
 
 :::dimostrazione
-Multiplying both sides of the loop rule of the RL circuit, $\mathcal{E} = R\,i + L\,\dfrac{di}{dt}$, by $i$ we obtain
+Multiplying by $i$ both sides of the RL circuit loop equation, $\mathcal{E} = R\,i + L\,\dfrac{di}{dt}$, gives
 $$
 \mathcal{E}\,i = R\,i^2 + L\,i\,\frac{di}{dt} = R\,i^2 + \frac{d}{dt} \left( \frac{1}{2} L i^2 \right) .
 $$
-The power $\mathcal{E}\,i$ delivered by the source is therefore the sum of the power dissipated by the Joule effect and the rate at which the quantity $\dfrac{1}{2} L i^2$ grows. The work done against the self-induced emf while the current goes from $0$ to $I$ is
+The power $\mathcal{E}\,i$ delivered by the source is therefore the sum of the power dissipated by Joule heating and the rate at which the quantity $\dfrac{1}{2} L i^2$ grows. The work done against the self-induced emf while the current goes from $0$ to $I$ is
 $$
 W = \int L\,i\,\frac{di}{dt}\,dt = \int_0^I L\,i\,di = \frac{1}{2} L I^2 ,
 $$
@@ -359,7 +359,7 @@ In a region where the magnetic field has magnitude $B$, in vacuum, the magnetic 
 $$
 u_B = \frac{B^2}{2 \mu_0} .
 $$
-The energy of the inductor therefore resides in the magnetic field, distributed in space with density $u_B$; the formula, derived for the solenoid, holds for any magnetic field, and the energy contained in a volume is obtained by integrating $u_B$. A field of $1.0\,\mathrm{T}$ has energy density $\dfrac{1}{2 \cdot 4\pi \cdot 10^{-7}}\,\mathrm{J/m^3} \approx 4.0 \cdot 10^5\,\mathrm{J/m^3}$. The analogous formula for the electric field, $u_E = \dfrac{1}{2} \varepsilon_0 E^2$, is found in the topic on conductors, capacitors, and dielectrics.
+The energy of the inductor therefore resides in the magnetic field, distributed in space with density $u_B$; the formula, derived for the solenoid, holds for any magnetic field, and the energy contained in a volume is obtained by integrating $u_B$. A field of $1{,}0\,\mathrm{T}$ has energy density $\dfrac{1}{2 \cdot 4\pi \cdot 10^{-7}}\,\mathrm{J/m^3} \approx 4{,}0 \cdot 10^5\,\mathrm{J/m^3}$. The analogous formula for the electric field, $u_E = \dfrac{1}{2} \varepsilon_0 E^2$, is found in the topic on conductors, capacitors, and dielectrics.
 
 :::dimostrazione
 Consider a solenoid of length $\ell$, with $N$ turns of area $A$, carrying the current $I$. By the theorem on the **inductance of a solenoid** the energy equals
@@ -385,7 +385,7 @@ A long solenoid, with $n_1$ turns per unit length, contains inside it, far from 
 $$
 M = \mu_0\,n_1 N_2 A_2 .
 $$
-With $n_1 = 2000$ turns per meter, $N_2 = 50$ and inner turns of radius $1.0\,\mathrm{cm}$ we have $M = 4\pi \cdot 10^{-7} \cdot 2000 \cdot 50 \cdot \pi \cdot 0.010^2\,\mathrm{H} \approx 3.9 \cdot 10^{-5}\,\mathrm{H}$; if the current in the outer solenoid varies by $100\,\mathrm{A}$ per second, an emf of about $3.9\,\mathrm{mV}$ is induced in the inner coil.
+With $n_1 = 2000$ turns per meter, $N_2 = 50$ and inner turns of radius $1{,}0\,\mathrm{cm}$ we have $M = 4\pi \cdot 10^{-7} \cdot 2000 \cdot 50 \cdot \pi \cdot 0{,}010^2\,\mathrm{H} \approx 3{,}9 \cdot 10^{-5}\,\mathrm{H}$; if the current in the outer solenoid varies by $100\,\mathrm{A}$ per second, an emf of about $3{,}9\,\mathrm{mV}$ is induced in the inner coil.
 
 :::dimostrazione
 The current $i_1$ generates inside the outer solenoid the uniform field $B_1 = \mu_0 n_1 i_1$, parallel to the axis. The flux through each turn of the inner coil is $B_1 A_2$, so the flux linked with the coil is

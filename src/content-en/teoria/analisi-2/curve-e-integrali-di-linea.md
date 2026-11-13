@@ -1,6 +1,6 @@
 ---
-titolo: Curves and line integrals
-sommario: Parametric curves in the plane and in space, regularity and tangent vector, length and arc length, line integrals of the first and second kind with applications to mass, center of mass and work.
+titolo: Curve e integrali di linea
+sommario: Curve parametriche nel piano e nello spazio, regolarità e vettore tangente, lunghezza e ascissa curvilinea, integrali di linea di prima e di seconda specie con le applicazioni a massa, baricentro e lavoro.
 ---
 
 ## Parametric curves
@@ -38,7 +38,7 @@ The graph of a function $f : [a, b] \to \mathbb{R}$ is the trace of the curve $\
 :::definizione{#curva-regolare titolo="Regular curve"}
 A curve $\gamma : [a, b] \to \mathbb{R}^n$ is **regular** if it is of class $C^1$ and $\gamma'(t) \neq \mathbf{0}$ for *every* $t \in (a, b)$, where
 $$
-\gamma'(t) = (x'(t), y'(t)) \qquad \text{or} \qquad \gamma'(t) = (x'(t), y'(t), z'(t)).
+\gamma'(t) = (x'(t), y'(t)) \qquad \text{oppure} \qquad \gamma'(t) = (x'(t), y'(t), z'(t)).
 $$
 If $\gamma(t)$ is the position of a point at time $t$, the vector $\gamma'(t)$ is its velocity. The condition $\gamma'(t) \neq \mathbf{0}$ guarantees that at every point the curve has a well-defined direction of motion, hence a tangent line; it is this condition that makes the construction of line integrals possible.
 :::
@@ -86,19 +86,19 @@ The vanishing of $\gamma'$ at a point does *not* imply that the trace has a sing
 :::definizione{#curve-equivalenti titolo="Equivalent curves"}
 Two regular curves $\gamma : [a, b] \to \mathbb{R}^n$ and $\delta : [c, d] \to \mathbb{R}^n$ are **equivalent** if there exists a function $\varphi : [c, d] \to [a, b]$ of class $C^1$, bijective and with $\varphi'(u) \neq 0$ for every $u$, such that
 $$
-\delta(u) = \gamma(\varphi(u)) \qquad \text{for every } u \in [c, d].
+\delta(u) = \gamma(\varphi(u)) \qquad \text{per ogni } u \in [c, d].
 $$
 The function $\varphi$ is called a **change of parameter** and the curve $\delta$ a **reparametrization** of $\gamma$. Two equivalent curves have the same trace, traversed with different laws. The notion serves to give meaning to line integrals: the geometric and physical quantities of the chapter, such as length and mass, do *not* depend on the chosen parametrization, and this independence must be verified.
 :::
 
-:::definizione{#orientazione titolo="Orientation and opposite curve"}
-Since $\varphi'$ is continuous and never zero on an interval, its sign is constant. If $\varphi' > 0$, the two equivalent curves traverse the trace in the same direction and are said to have the **same orientation**; if $\varphi' < 0$, they traverse it in opposite directions. The **opposite curve** of $\gamma : [a, b] \to \mathbb{R}^n$ is
+:::definizione{#orientazione titolo="Orientation and reversed curve"}
+Since $\varphi'$ is continuous and never zero on an interval, its sign is constant. If $\varphi' > 0$, the two equivalent curves traverse the trace in the same direction and are said to have the **same orientation**; if $\varphi' < 0$, they traverse it in opposite directions. The **reversed curve** of $\gamma : [a, b] \to \mathbb{R}^n$ is
 $$
 -\gamma(t) = \gamma(a + b - t), \qquad t \in [a, b],
 $$
 which traverses the same trace from the final point to the initial one. Orientation is *irrelevant* for integrals of the first kind and determines the sign of those of the second kind.
 
-::grafico{xmin=-1.8 xmax=1.8 ymin=-0.5 ymax=1.8 uguale=1 curve="cos(t),sin(t),0,3.1416" vettori="0.707,0.707,0,1.414,γ′;0.707,0.707,1.414,0,(−γ)′" punti="1,0,pieno,γ(a);-1,0,pieno,γ(b)" titolo="A curve and its opposite: same trace, tangent vectors pointing in opposite directions"}
+::grafico{xmin=-1.8 xmax=1.8 ymin=-0.5 ymax=1.8 uguale=1 curve="cos(t),sin(t),0,3.1416" vettori="0.707,0.707,0,1.414,γ′;0.707,0.707,1.414,0,(−γ)′" punti="1,0,pieno,γ(a);-1,0,pieno,γ(b)" titolo="A curve and its reverse: same trace, tangent vectors pointing in opposite directions"}
 
 :::
 
@@ -119,17 +119,17 @@ $$
 that is, in components,
 $$
 L(\gamma) = \int_a^b \sqrt{x'(t)^2 + y'(t)^2} \, dt
-\qquad \text{or} \qquad
+\qquad \text{oppure} \qquad
 L(\gamma) = \int_a^b \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2} \, dt .
 $$
 For a Cartesian curve $\gamma(t) = (t, f(t))$, $t \in [a, b]$, the formula becomes
 $$
 L(\gamma) = \int_a^b \sqrt{1 + f'(t)^2} \, dt .
 $$
-The proof compares the length of the inscribed polygonal paths with the integral of the velocity, and we refer to standard textbooks for it. The formula says that the length is the **integral of the magnitude of the velocity**, in agreement with the kinematic interpretation: distance traveled equals the integral of the speed.
+The proof compares the length of the inscribed polygonal paths with the integral of the speed, and we refer to standard textbooks for it. The formula says that the length is the **integral of the magnitude of the velocity**, in agreement with the kinematic interpretation: distance traveled equals the integral of the speed.
 :::
 
-:::esempio{titolo="Length of the circle"}
+:::esempio{titolo="Circumference of the circle"}
 For the circle of radius $r$, $\gamma(t) = (r \cos t, r \sin t)$ with $t \in [0, 2\pi]$, one has $\gamma'(t) = (-r \sin t, r \cos t)$, hence $\lVert \gamma'(t) \rVert = r$ and
 $$
 L(\gamma) = \int_0^{2\pi} r \, dt = 2\pi r ,
@@ -151,7 +151,7 @@ In the case $\varphi' < 0$ one has $\lVert \delta'(u) \rVert = -\lVert \gamma'(\
 ::::
 
 :::attenzione
-The formula measures the **path traveled** by the parametrization, *not* the length of the trace. The curve $\gamma(t) = (\cos t, \sin t)$ on $[0, 4\pi]$ traverses the unit circle twice and the formula returns $4\pi$, twice the length of the trace. Equality between the two quantities is guaranteed for **simple curves**.
+The formula measures the **distance traveled** along the parametrized curve, *not* the length of the trace. The curve $\gamma(t) = (\cos t, \sin t)$ on $[0, 4\pi]$ traverses the unit circle twice and the formula returns $4\pi$, twice the length of the trace. Equality between the two quantities is guaranteed for **simple curves**.
 :::
 
 ## Arc length
@@ -255,7 +255,7 @@ hence the integral of the second kind is the integral of the first kind of the *
 The two types of integral respond differently to a change of orientation.
 
 - The integral of the first kind is **invariant** under reparametrizations, *even* with a change of direction: the integrand contains the magnitude $\lVert \gamma'(t) \rVert$, which is not affected by the sign of $\varphi'$, and the same change of variable seen for the length applies. In particular $\displaystyle\int_{-\gamma} f \, ds = \int_\gamma f \, ds$: the mass of a wire does not depend on the direction in which it is traversed.
-- The integral of the second kind **changes sign** on the opposite curve: the integrand contains the vector $\gamma'(t)$, which is reversed with the direction of travel, hence $\displaystyle\int_{-\gamma} F \cdot d\gamma = -\int_\gamma F \cdot d\gamma$. The work done by the field along the reversed path is the opposite of the work along the direct path.
+- The integral of the second kind **changes sign** on the reversed curve: the integrand contains the vector $\gamma'(t)$, which is reversed with the direction of travel, hence $\displaystyle\int_{-\gamma} F \cdot d\gamma = -\int_\gamma F \cdot d\gamma$. The work done by the field along the reversed path is the negative of the work along the forward path.
 
 For this reason an integral of the second kind is assigned on an **oriented curve**: the statement of the exercise specifies the direction, for example by indicating the initial point and the final point or the counterclockwise direction on a closed curve.
 :::

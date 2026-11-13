@@ -1,6 +1,6 @@
 ---
-titolo: Systems of particles, momentum and collisions
-sommario: How momentum, impulse and the center of mass describe systems of several bodies, why the total momentum is conserved in the absence of external forces, and how this law, together with energy, solves collisions, explosions and the motion of a rocket.
+titolo: Sistemi di punti, quantità di moto e urti
+sommario: Come quantità di moto, impulso e centro di massa descrivono i sistemi di più corpi, perché in assenza di forze esterne la quantità di moto totale si conserva e come questa legge, insieme all'energia, risolve urti, esplosioni e il moto di un razzo.
 ---
 
 ## Momentum of a particle
@@ -10,7 +10,7 @@ Let $P$ be a particle of mass $m$ moving with velocity $\vec{v}$. The **momentum
 $$
 \vec{p} = m\,\vec{v} .
 $$
-It has the direction and the sense of the velocity and is measured in $\mathrm{kg\cdot m/s}$, a unit that coincides with $\mathrm{N\cdot s}$. Two bodies with the same velocity have momenta proportional to their masses; for example a car of $1200\,\mathrm{kg}$ at $15\,\mathrm{m/s}$ has $p = 1.8 \cdot 10^4\,\mathrm{kg\cdot m/s}$, a tennis ball of $0.058\,\mathrm{kg}$ at $30\,\mathrm{m/s}$ has $p \approx 1.7\,\mathrm{kg\cdot m/s}$. Momentum is the quantity that bodies exchange when they interact, and in collision problems it is the first one to be written.
+It points in the same direction as the velocity and is measured in $\mathrm{kg\cdot m/s}$, a unit that coincides with $\mathrm{N\cdot s}$. Two bodies with the same velocity have momenta proportional to their masses; for example a car of $1200\,\mathrm{kg}$ at $15\,\mathrm{m/s}$ has $p = 1{,}8 \cdot 10^4\,\mathrm{kg\cdot m/s}$, a tennis ball of $0{,}058\,\mathrm{kg}$ at $30\,\mathrm{m/s}$ has $p \approx 1{,}7\,\mathrm{kg\cdot m/s}$. Momentum is the quantity that bodies exchange when they interact, and in collision problems it is the first quantity to write down.
 :::
 
 :::teorema{#secondo-principio-quantita-di-moto titolo="Newton's second law in terms of momentum"}
@@ -18,10 +18,10 @@ Newton's second law, which is an experimental law and for which we refer to the 
 $$
 \vec{F} = \frac{d\vec{p}}{dt} ,
 $$
-where $\vec{F}$ is the resultant of the forces acting on the particle. If the mass is constant, then $\dfrac{d\vec{p}}{dt} = m\,\dfrac{d\vec{v}}{dt} = m\,\vec{a}$, so this form coincides with $\vec{F} = m\vec{a}$. The form with $\vec{p}$ states that the force measures the rate at which momentum changes, and from this form follow the impulse-momentum theorem and the equation of variable-mass systems. For example, if the momentum of a body increases uniformly by $6.0\,\mathrm{kg\cdot m/s}$ every $2.0\,\mathrm{s}$, the resultant force has magnitude $3.0\,\mathrm{N}$.
+where $\vec{F}$ is the resultant of the forces acting on the particle. If the mass is constant, then $\dfrac{d\vec{p}}{dt} = m\,\dfrac{d\vec{v}}{dt} = m\,\vec{a}$, so this form coincides with $\vec{F} = m\vec{a}$. The form with $\vec{p}$ states that the force measures the rate at which momentum changes, and from this form follow the impulse–momentum theorem and the equation of variable-mass systems. For example, if the momentum of a body increases uniformly by $6{,}0\,\mathrm{kg\cdot m/s}$ every $2{,}0\,\mathrm{s}$, the resultant force has magnitude $3{,}0\,\mathrm{N}$.
 :::
 
-## Impulse and the impulse-momentum theorem
+## Impulse and the impulse–momentum theorem
 
 :::definizione{#impulso titolo="Impulse of a force"}
 Let $\vec{F}(t)$ be a force acting on a particle in the time interval $[t_1, t_2]$. The **impulse** of the force over the interval is the vector
@@ -30,11 +30,11 @@ $$
 $$
 computed component by component. For a constant force the impulse is $\vec{J} = \vec{F}\,\Delta t$, with $\Delta t = t_2 - t_1$. If the force has a fixed direction, the magnitude of the impulse is the area under the graph of $F(t)$, and this makes it possible to compute it even when the force is known only at certain points or from a graph.
 
-::grafico{f="3*sin(pi*min(max(x,0),4)/4)" area="3*sin(pi*x/4);0;0;4" segmenti="0,1.91,4,1.91;4,0,4,1.91" etichette="4.15,1.85,Fₘ" xmin=-0.3 xmax=5.2 ymin=-0.4 ymax=3.6 nomi="t,F" titolo="The impulse of the force $F(t) = F_{\max} \sin \dfrac{\pi t}{\tau}$, with $F_{\max} = 3\,\mathrm{kN}$ and $\tau = 4\,\mathrm{ms}$, is the shaded area $J = \dfrac{2 F_{\max} \tau}{\pi} \approx 7.6\,\mathrm{N\cdot s}$; the dashed rectangle with base $\tau$ and height $F_m \approx 1.9\,\mathrm{kN}$ has the same area"}
+::grafico{f="3*sin(pi*min(max(x,0),4)/4)" area="3*sin(pi*x/4);0;0;4" segmenti="0,1.91,4,1.91;4,0,4,1.91" etichette="4.15,1.85,Fₘ" xmin=-0.3 xmax=5.2 ymin=-0.4 ymax=3.6 nomi="t,F" titolo="The impulse of the force $F(t) = F_{\max} \sin \dfrac{\pi t}{\tau}$, with $F_{\max} = 3\,\mathrm{kN}$ and $\tau = 4\,\mathrm{ms}$, is the shaded area $J = \dfrac{2 F_{\max} \tau}{\pi} \approx 7{,}6\,\mathrm{N\cdot s}$; the dashed rectangle with base $\tau$ and height $F_m \approx 1{,}9\,\mathrm{kN}$ has the same area"}
 
 :::
 
-::::teorema{#teorema-dell-impulso titolo="Impulse-momentum theorem"}
+::::teorema{#teorema-dell-impulso titolo="Impulse–momentum theorem"}
 Let $\vec{F}(t)$ be the resultant of the forces acting on a particle in the interval $[t_1, t_2]$. Then the impulse of the resultant is equal to the change in momentum:
 $$
 \vec{J} = \vec{p}(t_2) - \vec{p}(t_1) = \Delta \vec{p} .
@@ -63,17 +63,17 @@ In the graph of $F(t)$ it is the height of the rectangle with base $\Delta t$ an
 :::
 
 :::esempio{titolo="Tennis ball against a wall"}
-A tennis ball of mass $m = 0.058\,\mathrm{kg}$ hits a wall perpendicularly with speed $30\,\mathrm{m/s}$ and bounces back at $25\,\mathrm{m/s}$; the contact lasts $\Delta t = 4.0\,\mathrm{ms}$. With the $x$ axis pointing from the wall outward, $v_1 = -30\,\mathrm{m/s}$ and $v_2 = 25\,\mathrm{m/s}$, therefore
+A tennis ball of mass $m = 0{,}058\,\mathrm{kg}$ hits a wall perpendicularly with speed $30\,\mathrm{m/s}$ and bounces back at $25\,\mathrm{m/s}$; the contact lasts $\Delta t = 4{,}0\,\mathrm{ms}$. With the $x$ axis pointing from the wall outward, $v_1 = -30\,\mathrm{m/s}$ and $v_2 = 25\,\mathrm{m/s}$, therefore
 $$
-J_x = m\,(v_2 - v_1) = 0.058 \cdot 55\,\mathrm{kg\cdot m/s} \approx 3.2\,\mathrm{N\cdot s},
+J_x = m\,(v_2 - v_1) = 0{,}058 \cdot 55\,\mathrm{kg\cdot m/s} \approx 3{,}2\,\mathrm{N\cdot s},
 \qquad
-F_m = \frac{J_x}{\Delta t} \approx 8.0 \cdot 10^{2}\,\mathrm{N} .
+F_m = \frac{J_x}{\Delta t} \approx 8{,}0 \cdot 10^{2}\,\mathrm{N} .
 $$
-The change in velocity is the sum of the two magnitudes, because the velocity reverses its sense. The average force of the wall is about $1400$ times the weight of the ball, which is $0.57\,\mathrm{N}$.
+The change in velocity is the sum of the two magnitudes, because the velocity reverses direction. The average force of the wall is about $1400$ times the weight of the ball, which is $0{,}57\,\mathrm{N}$.
 :::
 
 :::osservazione{#forze-impulsive titolo="Impulsive forces"}
-Forces that are very intense and act for a very short time, such as the contact forces in a collision, are called **impulsive**. During a small interval $\Delta t$, a force of bounded magnitude, such as weight or friction, produces an impulse of magnitude at most $F_{\max}\,\Delta t$, which tends to zero with $\Delta t$; impulsive forces instead produce a finite impulse. Therefore, over the interval of the collision, all non-impulsive forces can be neglected. In the example of the tennis ball, the impulse of the weight during contact is $0.57 \cdot 0.004\,\mathrm{N\cdot s} \approx 2 \cdot 10^{-3}\,\mathrm{N\cdot s}$, compared with $3.2\,\mathrm{N\cdot s}$ for the impulse of the wall.
+Forces that are very intense and act for a very short time, such as the contact forces in a collision, are called **impulsive**. During a small interval $\Delta t$, a force of bounded magnitude, such as weight or friction, produces an impulse of magnitude at most $F_{\max}\,\Delta t$, which tends to zero with $\Delta t$; impulsive forces instead produce a finite impulse. Therefore, over the interval of the collision, all non-impulsive forces can be neglected. In the example of the tennis ball, the impulse of the weight during contact is $0{,}57 \cdot 0{,}004\,\mathrm{N\cdot s} \approx 2 \cdot 10^{-3}\,\mathrm{N\cdot s}$, compared with $3{,}2\,\mathrm{N\cdot s}$ for the impulse of the wall.
 :::
 
 ## Systems of particles and center of mass
@@ -101,7 +101,7 @@ z_{cm} = \frac{\sum_i m_i z_i}{M} .
 $$
 Each coordinate of the center of mass is the average of the coordinates of the particles, weighted by the masses; therefore the center of mass is closer to the particles of greater mass. For two particles on the $x$ axis the center of mass lies on the segment joining them and divides the segment into parts inversely proportional to the masses.
 
-::grafico{punti="1,1,pieno,m₁ = 2 kg;5,1,pieno,m₂ = 1 kg;3,5,pieno,m₃ = 1 kg;2.5,2,vuoto,CM" segmenti="1,1,5,1;5,1,3,5;3,5,1,1" xmin=-0.6 xmax=6.4 ymin=-0.6 ymax=5.8 uguale=1 titolo="The center of mass of the masses $m_1 = 2\,\mathrm{kg}$ at $(1, 1)$, $m_2 = 1\,\mathrm{kg}$ at $(5, 1)$, $m_3 = 1\,\mathrm{kg}$ at $(3, 5)$ has $x_{cm} = \dfrac{2 + 5 + 3}{4} = 2.5\,\mathrm{m}$ and $y_{cm} = \dfrac{2 + 1 + 5}{4} = 2\,\mathrm{m}$, and is closer to the larger mass"}
+::grafico{punti="1,1,pieno,m₁ = 2 kg;5,1,pieno,m₂ = 1 kg;3,5,pieno,m₃ = 1 kg;2.5,2,vuoto,CM" segmenti="1,1,5,1;5,1,3,5;3,5,1,1" xmin=-0.6 xmax=6.4 ymin=-0.6 ymax=5.8 uguale=1 titolo="The center of mass of the masses $m_1 = 2\,\mathrm{kg}$ at $(1, 1)$, $m_2 = 1\,\mathrm{kg}$ at $(5, 1)$, $m_3 = 1\,\mathrm{kg}$ at $(3, 5)$ has $x_{cm} = \dfrac{2 + 5 + 3}{4} = 2{,}5\,\mathrm{m}$ and $y_{cm} = \dfrac{2 + 1 + 5}{4} = 2\,\mathrm{m}$, and is closer to the larger mass"}
 
 :::
 
@@ -124,7 +124,7 @@ $$
 $$
 that is, it is obtained by treating each part as a particle located at its center of mass. The rule holds for any number of parts and makes it possible to compute the center of mass of L-shaped plates, of bodies with holes (subtracting the missing part as a negative mass) and of systems made of rods and spheres.
 
-::grafico{area="1;0;0;4|4;1;0;1" punti="2,0.5,pieno,C₁;0.5,2.5,pieno,C₂;1.357,1.357,vuoto,CM" segmenti="2,0.5,0.5,2.5" xmin=-0.6 xmax=4.6 ymin=-0.6 ymax=4.6 uguale=1 titolo="Uniform L-shaped plate made of a $4 \times 1$ rectangle (center $C_1$) and a $1 \times 3$ rectangle (center $C_2$): the center of mass lies on the segment $C_1C_2$ and has coordinates $x_{cm} = y_{cm} = \dfrac{4 \cdot 2 + 3 \cdot 0.5}{7} = \dfrac{19}{14}$"}
+::grafico{area="1;0;0;4|4;1;0;1" punti="2,0.5,pieno,C₁;0.5,2.5,pieno,C₂;1.357,1.357,vuoto,CM" segmenti="2,0.5,0.5,2.5" xmin=-0.6 xmax=4.6 ymin=-0.6 ymax=4.6 uguale=1 titolo="Uniform L-shaped plate made of a $4 \times 1$ rectangle (center $C_1$) and a $1 \times 3$ rectangle (center $C_2$): the center of mass lies on the segment $C_1C_2$ and has coordinates $x_{cm} = y_{cm} = \dfrac{4 \cdot 2 + 3 \cdot 0{,}5}{7} = \dfrac{19}{14}$"}
 
 :::dimostrazione
 Let $I_1$ and $I_2$ be the sets of indices of the particles of the two parts. By the definition of the center of mass of each part, $\sum_{i \in I_1} m_i\,\vec{r}_i = M_1\,\vec{r}_1$ and $\sum_{i \in I_2} m_i\,\vec{r}_i = M_2\,\vec{r}_2$. Splitting the sum that defines $\vec{r}_{cm}$ into the two parts we obtain
@@ -138,11 +138,11 @@ For a continuous body the proof is the same, with the integrals over the two par
 ## Motion of the center of mass
 
 ::::teorema{#quantita-di-moto-del-sistema titolo="Total momentum and velocity of the center of mass"}
-For a system of particles with constant total mass $M$, the velocity of the center of mass is $\vec{v}_{cm} = \dfrac{d\vec{r}_{cm}}{dt}$ and
+For a system of particles with constant total mass $M$, the velocity of the center of mass is $\vec{v}_{cm} = \dfrac{d\vec{r}_{cm}}{dt}$ and we have
 $$
 \vec{P} = M\,\vec{v}_{cm} .
 $$
-The total momentum of the system is therefore that of a single particle of mass $M$ moving with the center of mass. For two carts of $2.0\,\mathrm{kg}$ and $1.0\,\mathrm{kg}$ with velocities $3.0\,\mathrm{m/s}$ and $0$ we have $P = 6.0\,\mathrm{kg\cdot m/s}$, therefore $v_{cm} = 2.0\,\mathrm{m/s}$.
+The total momentum of the system is therefore that of a single particle of mass $M$ moving with the center of mass. For two carts of $2{,}0\,\mathrm{kg}$ and $1{,}0\,\mathrm{kg}$ with velocities $3{,}0\,\mathrm{m/s}$ and $0$ we have $P = 6{,}0\,\mathrm{kg\cdot m/s}$, therefore $v_{cm} = 2{,}0\,\mathrm{m/s}$.
 
 :::dimostrazione
 The masses are constant, so differentiating with respect to time the definition $M\,\vec{r}_{cm} = \sum_i m_i\,\vec{r}_i$ we obtain $M\,\vec{v}_{cm} = \sum_i m_i\,\vec{v}_i = \vec{P}$.
@@ -153,10 +153,10 @@ The masses are constant, so differentiating with respect to time the definition 
 Let a system of particles have constant total mass $M$ and let $\vec{F}_{\mathrm{est}}$ be the resultant of the external forces only. Then
 $$
 \frac{d\vec{P}}{dt} = \vec{F}_{\mathrm{est}},
-\qquad\text{i.e.}\qquad
+\qquad\text{cioè}\qquad
 M\,\vec{a}_{cm} = \vec{F}_{\mathrm{est}} .
 $$
-This equation is the **first cardinal equation** of the dynamics of systems. The center of mass moves like a particle of mass $M$ acted on by the resultant of the external forces, whatever the internal forces are. For example, the center of mass of a projectile that explodes in flight keeps following the parabola it would have followed without the explosion, until a fragment touches the ground, because the forces of the explosion are internal and the resultant of the external forces remains the total weight $M\vec{g}$.
+This equation is the **linear momentum balance** for systems of particles. The center of mass moves like a particle of mass $M$ acted on by the resultant of the external forces, whatever the internal forces are. For example, the center of mass of a projectile that explodes in flight keeps following the parabola it would have followed without the explosion, until a fragment touches the ground, because the forces of the explosion are internal and the resultant of the external forces remains the total weight $M\vec{g}$.
 
 :::dimostrazione
 Let $\vec{F}_i$ be the resultant of the external forces on $P_i$ and let $\vec{F}_{ij}$ be the force that particle $P_j$ exerts on $P_i$, with $j \neq i$. Newton's second law applied to particle $P_i$ gives
@@ -187,9 +187,9 @@ A projectile is launched from horizontal ground and, neglecting air resistance, 
 ::::teorema{#conservazione-quantita-di-moto titolo="Conservation of momentum"}
 Let a system of particles be such that the resultant of the external forces is zero at every instant of a time interval. Then over that interval the total momentum is constant:
 $$
-\vec{P} = \sum_i m_i\,\vec{v}_i = \text{constant},
+\vec{P} = \sum_i m_i\,\vec{v}_i = \text{costante},
 \qquad
-\vec{v}_{cm} = \text{constant} .
+\vec{v}_{cm} = \text{costante} .
 $$
 A system on which no external forces act is called **isolated**, and conservation holds in particular for isolated systems. The law does not require knowledge of the internal forces, which in collisions and explosions are complicated and unknown; it is enough to equate the total momentum before and after the interaction. Internal forces can dissipate energy, therefore the total kinetic energy can change even when $\vec{P}$ is conserved.
 
@@ -199,28 +199,28 @@ By the **center-of-mass theorem** $\dfrac{d\vec{P}}{dt} = \vec{F}_{\mathrm{est}}
 ::::
 
 :::osservazione{#conservazione-per-componenti titolo="Conservation of a single component"}
-If the resultant of the external forces has zero component along a fixed direction, for example $F_{\mathrm{est},x} = 0$, the first cardinal equation read along $x$ gives $\dfrac{dP_x}{dt} = 0$, so only the component $P_x$ is conserved. On a smooth horizontal plane, for example, the weight and the normal reaction are vertical, so the horizontal component of momentum is conserved, while the vertical one can change. Conservation also holds in approximate form during a collision or an explosion, because non-impulsive external forces, such as weight, produce a negligible impulse over that interval; therefore $\vec{P}$ immediately after is equal to $\vec{P}$ immediately before.
+If the resultant of the external forces has zero component along a fixed direction, for example $F_{\mathrm{est},x} = 0$, the linear momentum balance along $x$ gives $\dfrac{dP_x}{dt} = 0$, so only the component $P_x$ is conserved. On a smooth horizontal plane, for example, the weight and the normal force are vertical, so the horizontal component of momentum is conserved, while the vertical one can change. Conservation also holds in approximate form during a collision or an explosion, because non-impulsive external forces, such as weight, produce a negligible impulse over that interval; therefore $\vec{P}$ immediately after is equal to $\vec{P}$ immediately before.
 :::
 
 :::esempio{titolo="Recoil"}
-A rifle of mass $M = 4.0\,\mathrm{kg}$, free to move, fires a bullet of mass $m = 10\,\mathrm{g}$ horizontally at $v = 400\,\mathrm{m/s}$. Before the shot the system is at rest and the forces of the gases are internal, so the horizontal component of momentum remains zero: $m\,v + M\,V = 0$, from which
+A rifle of mass $M = 4{,}0\,\mathrm{kg}$, free to move, fires a bullet of mass $m = 10\,\mathrm{g}$ horizontally at $v = 400\,\mathrm{m/s}$. Before the shot the system is at rest and the forces of the gases are internal, so the horizontal component of momentum remains zero: $m\,v + M\,V = 0$, from which
 $$
-V = -\frac{m}{M}\,v = -\frac{0.010}{4.0} \cdot 400\,\mathrm{m/s} = -1.0\,\mathrm{m/s} .
+V = -\frac{m}{M}\,v = -\frac{0{,}010}{4{,}0} \cdot 400\,\mathrm{m/s} = -1{,}0\,\mathrm{m/s} .
 $$
-The minus sign indicates that the rifle **recoils** in the sense opposite to the bullet, with a speed that is smaller the larger its mass.
+The minus sign indicates that the rifle **recoils** in the direction opposite to the bullet, with a speed that is smaller the larger its mass.
 :::
 
 :::esempio{titolo="Person on a boat"}
-A person of mass $m = 70\,\mathrm{kg}$ walks from one end to the other of a boat of mass $M = 140\,\mathrm{kg}$ and length $L = 3.0\,\mathrm{m}$, initially at rest; the horizontal resistance of the water is neglected. The external forces are vertical and the system starts from rest, so the center of mass stays at rest horizontally. If the boat moves by $d$ in one sense, the person moves by $L - d$ relative to the water in the opposite sense, and the position of the center of mass does not change if $m\,(L - d) - M\,d = 0$, that is
+A person of mass $m = 70\,\mathrm{kg}$ walks from one end to the other of a boat of mass $M = 140\,\mathrm{kg}$ and length $L = 3{,}0\,\mathrm{m}$, initially at rest; the horizontal resistance of the water is neglected. The external forces are vertical and the system starts from rest, so the center of mass stays at rest horizontally. If the boat moves by $d$ in one direction, the person moves by $L - d$ relative to the water in the opposite direction, and the position of the center of mass does not change if $m\,(L - d) - M\,d = 0$, that is
 $$
-d = \frac{m\,L}{m + M} = \frac{70 \cdot 3.0}{210}\,\mathrm{m} = 1.0\,\mathrm{m} .
+d = \frac{m\,L}{m + M} = \frac{70 \cdot 3{,}0}{210}\,\mathrm{m} = 1{,}0\,\mathrm{m} .
 $$
 :::
 
 ## Collisions in one dimension
 
 :::definizione{#urto titolo="Collision"}
-A **collision** is an interaction between two bodies that lasts a very short time, during which the bodies exchange impulsive forces; it is assumed that the positions do not change during the collision. If the external forces are not impulsive, the total momentum immediately after the collision is equal to that immediately before, by the **conservation of momentum** in approximate form. Collisions with a fixed constraint, such as a wall or the floor, whose reaction is impulsive, are an exception. On the basis of kinetic energy, collisions are divided into three classes:
+A **collision** is an interaction between two bodies that lasts a very short time, during which the bodies exchange impulsive forces; it is assumed that the positions do not change during the collision. If the external forces are not impulsive, the total momentum immediately after the collision is equal to that immediately before, by the **conservation of momentum** in approximate form. Collisions with a fixed constraint, such as a wall or the floor, whose reaction force is impulsive, are an exception. On the basis of kinetic energy, collisions are divided into three classes:
 
 - **elastic**, if the total kinetic energy is conserved;
 - **inelastic**, if the total kinetic energy decreases;
@@ -236,7 +236,7 @@ V = \frac{m_1 v_1 + m_2 v_2}{m_1 + m_2},
 \qquad
 \Delta K = -\frac{1}{2}\,\frac{m_1 m_2}{m_1 + m_2}\,(v_1 - v_2)^2 .
 $$
-The velocity $V$ is the velocity of the center of mass, which the collision leaves unchanged. The kinetic energy always decreases, except in the case $v_1 = v_2$ in which there is no collision, and the loss depends only on the relative velocity. For $m_1 = 2.0\,\mathrm{kg}$ at $3.0\,\mathrm{m/s}$ against $m_2 = 1.0\,\mathrm{kg}$ at rest we obtain $V = 2.0\,\mathrm{m/s}$, and the kinetic energy goes from $9.0\,\mathrm{J}$ to $6.0\,\mathrm{J}$, with $\Delta K = -3.0\,\mathrm{J}$.
+The velocity $V$ is the velocity of the center of mass, which the collision leaves unchanged. The kinetic energy always decreases, except in the case $v_1 = v_2$ in which there is no collision, and the loss depends only on the relative velocity. For $m_1 = 2{,}0\,\mathrm{kg}$ at $3{,}0\,\mathrm{m/s}$ against $m_2 = 1{,}0\,\mathrm{kg}$ at rest we obtain $V = 2{,}0\,\mathrm{m/s}$, and the kinetic energy goes from $9{,}0\,\mathrm{J}$ to $6{,}0\,\mathrm{J}$, with $\Delta K = -3{,}0\,\mathrm{J}$.
 
 :::dimostrazione
 Conservation of momentum gives $m_1 v_1 + m_2 v_2 = (m_1 + m_2)\,V$, from which the first formula follows. For the second, $V$ is substituted into the final energy:
@@ -251,11 +251,11 @@ $$
 ::::
 
 ::::teorema{#pendolo-balistico titolo="Ballistic pendulum"}
-A bullet of mass $m$ and horizontal velocity $v$ embeds itself in a block of mass $M$ hanging from inextensible strings of negligible mass, at rest in the equilibrium position; after the collision the block with the bullet rises to a maximum height $h$ above the initial position. Then, neglecting air friction,
+A bullet of mass $m$ and horizontal velocity $v$ embeds itself in a block of mass $M$ hanging from inextensible strings of negligible mass, at rest in the equilibrium position; after the collision the block with the bullet rises to a maximum height $h$ above the initial position. Then, neglecting air resistance,
 $$
 v = \frac{m + M}{m}\,\sqrt{2 g h} .
 $$
-The ballistic pendulum measures large speeds, such as that of a bullet, through a height of a few centimeters. With $m = 10\,\mathrm{g}$, $M = 2.0\,\mathrm{kg}$ and $h = 5.0\,\mathrm{cm}$ we obtain $v \approx 2.0 \cdot 10^{2}\,\mathrm{m/s}$; the kinetic energy remaining after the collision is the fraction $\dfrac{m}{m + M} \approx 0.5\,\%$ of that of the bullet.
+The ballistic pendulum measures large speeds, such as that of a bullet, through a height of a few centimeters. With $m = 10\,\mathrm{g}$, $M = 2{,}0\,\mathrm{kg}$ and $h = 5{,}0\,\mathrm{cm}$ we obtain $v \approx 2{,}0 \cdot 10^{2}\,\mathrm{m/s}$; the kinetic energy remaining after the collision is the fraction $\dfrac{m}{m + M} \approx 0{,}5\,\%$ of that of the bullet.
 
 ::grafico{curve="1+2.4*t,4.5-3.2*t,0,1;1+4*sin(t),4.5-4*cos(t),0,0.6435" vettori="-1.6,0.5,0.6,0.5,v" segmenti="1,4.5,1,0.5;1,0.5,3.4,0.5;3.4,0.5,3.4,1.3" punti="1,4.5,vuoto;1,0.5,pieno;3.4,1.3,pieno" etichette="3.55,0.8,h;1.15,0.05,M" xmin=-2 xmax=4.6 ymin=-0.4 ymax=5 uguale=1 titolo="The bullet embeds itself in the block at rest (perfectly inelastic collision), then the system rises along the dashed arc up to height $h$ (conservation of mechanical energy)"}
 
@@ -275,7 +275,7 @@ v_1' = \frac{(m_1 - m_2)\,v_1 + 2 m_2 v_2}{m_1 + m_2},
 \qquad
 v_2' = \frac{(m_2 - m_1)\,v_2 + 2 m_1 v_1}{m_1 + m_2} ,
 $$
-and the relative velocity changes sign: $v_2' - v_1' = -(v_2 - v_1)$. The formulas give the final velocities directly; the relation on the relative velocity, together with conservation of momentum, forms a linear system that is simpler to solve by hand. For $m_1 = 1.0\,\mathrm{kg}$ at $3.0\,\mathrm{m/s}$ against $m_2 = 2.0\,\mathrm{kg}$ at rest we obtain $v_1' = -1.0\,\mathrm{m/s}$ and $v_2' = 2.0\,\mathrm{m/s}$.
+and the relative velocity changes sign: $v_2' - v_1' = -(v_2 - v_1)$. The formulas give the final velocities directly; the relation on the relative velocity, together with conservation of momentum, forms a linear system that is simpler to solve by hand. For $m_1 = 1{,}0\,\mathrm{kg}$ at $3{,}0\,\mathrm{m/s}$ against $m_2 = 2{,}0\,\mathrm{kg}$ at rest we obtain $v_1' = -1{,}0\,\mathrm{m/s}$ and $v_2' = 2{,}0\,\mathrm{m/s}$.
 
 ::grafico{f="min(3*x,8-x);x+4;max(6,2*x+2)" punti="2,6,pieno" etichette="4.7,2.0,body 1;3.9,11.2,body 2;4.9,8.0,CM" xmin=-0.3 xmax=5.6 ymin=-0.6 ymax=14 nomi="t,x" titolo="Position-time graphs in the elastic collision between $m_1 = 1\,\mathrm{kg}$ with $v_1 = 3\,\mathrm{m/s}$ and $m_2 = 2\,\mathrm{kg}$ at rest at $x = 6\,\mathrm{m}$; after the collision $v_1' = -1\,\mathrm{m/s}$ and $v_2' = 2\,\mathrm{m/s}$, while the center of mass (dashed line) moves with constant velocity $v_{cm} = 1\,\mathrm{m/s}$"}
 
@@ -287,7 +287,7 @@ m_1\,(v_1 - v_1') = m_2\,(v_2' - v_2) \\[6pt]
 m_1\,(v_1 - v_1')(v_1 + v_1') = m_2\,(v_2' - v_2)(v_2' + v_2)
 \end{cases}
 $$
-where the second equation is obtained by multiplying by $2$ the conservation of kinetic energy, which becomes $m_1 v_1^2 + m_2 v_2^2 = m_1 v_1'^2 + m_2 v_2'^2$, and factoring the differences of squares. The solution $v_1' = v_1$, $v_2' = v_2$ corresponds to no collision and is discarded; therefore $v_1' \neq v_1$, the left-hand side of the first equation is nonzero and the second equation can be divided by the first, giving $v_1 + v_1' = v_2' + v_2$, that is $v_2' - v_1' = -(v_2 - v_1)$. Solving for $v_2' = v_1 + v_1' - v_2$ and substituting into the first equation we obtain $(m_1 + m_2)\,v_1' = (m_1 - m_2)\,v_1 + 2 m_2 v_2$, which is the formula for $v_1'$; that for $v_2'$ follows by exchanging the indices.
+where the second equation is obtained by multiplying by $2$ the equation for conservation of kinetic energy, which becomes $m_1 v_1^2 + m_2 v_2^2 = m_1 v_1'^2 + m_2 v_2'^2$, and factoring the differences of squares. The solution $v_1' = v_1$, $v_2' = v_2$ corresponds to no collision and is discarded; therefore $v_1' \neq v_1$, the left-hand side of the first equation is nonzero and the second equation can be divided by the first, giving $v_1 + v_1' = v_2' + v_2$, that is $v_2' - v_1' = -(v_2 - v_1)$. Solving for $v_2' = v_1 + v_1' - v_2$ and substituting into the first equation we obtain $(m_1 + m_2)\,v_1' = (m_1 - m_2)\,v_1 + 2 m_2 v_2$, which is the formula for $v_1'$; that for $v_2'$ follows by exchanging the indices.
 :::
 ::::
 
@@ -304,7 +304,7 @@ For a collision along a line the **coefficient of restitution** is defined as
 $$
 e = -\frac{v_2' - v_1'}{v_2 - v_1} ,
 $$
-the ratio between the relative velocity of separation and that of approach. It equals $e = 1$ in elastic collisions, by the relation on the relative velocity, and $e = 0$ in perfectly inelastic collisions, because $v_1' = v_2'$; inelastic collisions have $0 < e < 1$. For a ball hitting the floor at rest we have $e = \dfrac{v'}{v}$, the ratio between the speeds after and before the collision; if the ball falls from a height $h$ and bounces up to $h'$, conservation of mechanical energy during the flight gives $e = \sqrt{\dfrac{h'}{h}}$.
+the ratio between the relative speed of separation and that of approach. It equals $e = 1$ in elastic collisions, by the relation on the relative velocity, and $e = 0$ in perfectly inelastic collisions, because $v_1' = v_2'$; inelastic collisions have $0 < e < 1$. For a ball hitting the floor at rest we have $e = \dfrac{v'}{v}$, the ratio between the speeds after and before the collision; if the ball falls from a height $h$ and bounces up to $h'$, conservation of mechanical energy during the flight gives $e = \sqrt{\dfrac{h'}{h}}$.
 :::
 
 ## Collisions in two dimensions
@@ -317,7 +317,7 @@ m_1 v_{1x} + m_2 v_{2x} = m_1 v_{1x}' + m_2 v_{2x}' \\[6pt]
 m_1 v_{1y} + m_2 v_{2y} = m_1 v_{1y}' + m_2 v_{2y}'
 \end{cases}
 $$
-In a perfectly inelastic collision the unknowns are the two components of the common velocity, so the system determines them. In an elastic collision the unknowns are four, the components of $\vec{v}_1'$ and of $\vec{v}_2'$, while the equations are three, the two components of momentum and conservation of kinetic energy; therefore one more piece of data is needed, usually the direction of one of the two bodies after the collision, which depends on the point where the bodies touch.
+In a perfectly inelastic collision the unknowns are the two components of the common velocity, so the system determines them. In an elastic collision there are four unknowns, the components of $\vec{v}_1'$ and of $\vec{v}_2'$, while there are three equations, the two components of momentum and conservation of kinetic energy; therefore one more piece of data is needed, usually the direction of one of the two bodies after the collision, which depends on the point where the bodies touch.
 :::
 
 ::::teorema{#urto-elastico-masse-uguali titolo="Oblique elastic collision between equal masses"}
@@ -327,10 +327,10 @@ $$
 $$
 The velocities $\vec{v}_1'$ and $\vec{v}_2'$ are therefore the legs of a right triangle with hypotenuse $\vec{v}_1$. If the first body is deflected by an angle $\theta$, then $v_1' = v_1 \cos\theta$ and $v_2' = v_1 \sin\theta$, and the second body moves off at an angle $\dfrac{\pi}{2} - \theta$ on the other side of the initial direction. Billiard balls after a glancing shot separate at a right angle to a good approximation.
 
-::grafico{vettori="0,0,4,0,v₁;0,0,1,1.732,v₁';0,0,3,-1.732,v₂'" segmenti="1,1.732,4,0" xmin=-0.6 xmax=4.8 ymin=-2.2 ymax=2.4 uguale=1 titolo="With $v_1 = 4\,\mathrm{m/s}$ and deflection $\theta = 60^\circ$ we have $v_1' = 2\,\mathrm{m/s}$ and $v_2' = 2\sqrt{3}\,\mathrm{m/s}$ at $30^\circ$ on the other side; the dashed segment is $\vec{v}_2'$ applied at the tip of $\vec{v}_1'$, and $\vec{v}_1' + \vec{v}_2' = \vec{v}_1$"}
+::grafico{vettori="0,0,4,0,v₁;0,0,1,1.732,v₁';0,0,3,-1.732,v₂'" segmenti="1,1.732,4,0" xmin=-0.6 xmax=4.8 ymin=-2.2 ymax=2.4 uguale=1 titolo="With $v_1 = 4\,\mathrm{m/s}$ and deflection $\theta = 60^\circ$ we have $v_1' = 2\,\mathrm{m/s}$ and $v_2' = 2\sqrt{3}\,\mathrm{m/s}$ at $30^\circ$ on the other side; the dashed segment is $\vec{v}_2'$ placed with its tail at the tip of $\vec{v}_1'$, and $\vec{v}_1' + \vec{v}_2' = \vec{v}_1$"}
 
 :::dimostrazione
-The masses are equal, so dividing by $m$ the conservation of momentum and that of kinetic energy we obtain
+The masses are equal, so dividing by $m$ the equations for conservation of momentum and kinetic energy we obtain
 $$
 \begin{cases}
 \vec{v}_1 = \vec{v}_1' + \vec{v}_2' \\[6pt]
@@ -379,7 +379,7 @@ K^{*} = \frac{1}{2}\,\mu\,(v_1 - v_2)^2,
 \qquad
 \mu = \frac{m_1 m_2}{m_1 + m_2} ,
 $$
-where $\mu$ is called the **reduced mass**; the formula coincides with the energy loss of the perfectly inelastic collision. For $m_1 = 1.0\,\mathrm{kg}$ at $3.0\,\mathrm{m/s}$ and $m_2 = 2.0\,\mathrm{kg}$ at rest we have $K = 4.5\,\mathrm{J}$, $v_{cm} = 1.0\,\mathrm{m/s}$ and $\dfrac{1}{2}\,M v_{cm}^2 = 1.5\,\mathrm{J}$, therefore $K^{*} = 3.0\,\mathrm{J}$.
+where $\mu$ is called the **reduced mass**; the formula coincides with the energy loss of the perfectly inelastic collision. For $m_1 = 1{,}0\,\mathrm{kg}$ at $3{,}0\,\mathrm{m/s}$ and $m_2 = 2{,}0\,\mathrm{kg}$ at rest we have $K = 4{,}5\,\mathrm{J}$, $v_{cm} = 1{,}0\,\mathrm{m/s}$ and $\dfrac{1}{2}\,M v_{cm}^2 = 1{,}5\,\mathrm{J}$, therefore $K^{*} = 3{,}0\,\mathrm{J}$.
 :::
 
 ## Variable-mass systems and the rocket
@@ -392,11 +392,11 @@ $$
 The term $\vec{u}\,\dfrac{dM}{dt}$ has the dimensions of a force and is called **thrust**. In a rocket the gases leave backward with relative speed $u$, while $\dfrac{dM}{dt} < 0$, so the thrust points forward and has magnitude $u\,\left|\dfrac{dM}{dt}\right|$. A wagon that receives sand falling vertically has $\dfrac{dM}{dt} > 0$ and $\vec{u} = -\vec{v}$, so to keep it at constant velocity an external force $\vec{v}\,\dfrac{dM}{dt}$ is needed.
 
 :::dimostrazione
-We apply the **impulse-momentum theorem** to the system formed by the body and the mass $|dM|$ exchanged in the interval $dt$; the forces between the body and that mass are internal. In the case where the body gains mass ($dM > 0$), at time $t$ the momentum of the system is $M\vec{v} + dM\,(\vec{v} + \vec{u})$, at time $t + dt$ it is $(M + dM)(\vec{v} + d\vec{v})$. Neglecting the product $dM\,d\vec{v}$, which is an infinitesimal of higher order, the change is
+We apply the **impulse–momentum theorem** to the system formed by the body and the mass $|dM|$ exchanged in the interval $dt$; the forces between the body and that mass are internal. In the case where the body gains mass ($dM > 0$), at time $t$ the momentum of the system is $M\vec{v} + dM\,(\vec{v} + \vec{u})$, at time $t + dt$ it is $(M + dM)(\vec{v} + d\vec{v})$. Neglecting the product $dM\,d\vec{v}$, which is an infinitesimal of higher order, the change is
 $$
 (M + dM)(\vec{v} + d\vec{v}) - M\vec{v} - dM\,(\vec{v} + \vec{u}) = M\,d\vec{v} - \vec{u}\,dM ,
 $$
-and by the impulse-momentum theorem it is equal to $\vec{F}_{\mathrm{est}}\,dt$. In the case where the body loses mass ($dM < 0$), at time $t$ the momentum is $M\vec{v}$ and at time $t + dt$ it is $(M + dM)(\vec{v} + d\vec{v}) + (-dM)(\vec{v} + \vec{u})$, and the change has the same expression $M\,d\vec{v} - \vec{u}\,dM$. In both cases, dividing by $dt$, we obtain the claim.
+and by the impulse–momentum theorem it is equal to $\vec{F}_{\mathrm{est}}\,dt$. In the case where the body loses mass ($dM < 0$), at time $t$ the momentum is $M\vec{v}$ and at time $t + dt$ it is $(M + dM)(\vec{v} + d\vec{v}) + (-dM)(\vec{v} + \vec{u})$, and the change has the same expression $M\,d\vec{v} - \vec{u}\,dM$. In both cases, dividing by $dt$, we obtain the claim.
 :::
 ::::
 
@@ -405,7 +405,7 @@ A rocket expels gas with relative velocity of constant magnitude $u$, directed o
 $$
 v_f = v_i + u \ln \frac{M_i}{M_f} .
 $$
-The increase in velocity depends only on the exhaust velocity and on the mass ratio, and the required ratio grows exponentially with the required velocity, since $\dfrac{M_i}{M_f} = \exp\left(\dfrac{v_f - v_i}{u}\right)$. With $u = 2.5\,\mathrm{km/s}$ and $\dfrac{M_i}{M_f} = 4$ we obtain $v_f - v_i = 2.5 \ln 4\,\mathrm{km/s} \approx 3.5\,\mathrm{km/s}$; to double this value the mass ratio must go from $4$ to $16$. In the presence of weight, for a vertical launch the term $-g\,t$ is added, where $t$ is the burn time.
+The increase in velocity depends only on the exhaust velocity and on the mass ratio, and the required ratio grows exponentially with the required velocity, since $\dfrac{M_i}{M_f} = \exp\left(\dfrac{v_f - v_i}{u}\right)$. With $u = 2{,}5\,\mathrm{km/s}$ and $\dfrac{M_i}{M_f} = 4$ we obtain $v_f - v_i = 2{,}5 \ln 4\,\mathrm{km/s} \approx 3{,}5\,\mathrm{km/s}$; to double this value the mass ratio must go from $4$ to $16$. In the presence of weight, for a vertical launch the term $-g\,t$ is added, where $t$ is the burn time.
 
 :::dimostrazione
 Along the direction of motion, the **equation of variable-mass systems** with $\vec{F}_{\mathrm{est}} = \vec{0}$ and $u_x = -u$ gives $M\,\dfrac{dv}{dt} = -u\,\dfrac{dM}{dt}$. Dividing by $M$ and integrating in time from the initial to the final instant we obtain

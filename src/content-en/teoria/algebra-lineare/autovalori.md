@@ -1,12 +1,12 @@
 ---
-titolo: Eigenvalues, eigenvectors and diagonalization
-sommario: How to compute the eigenvalues and eigenspaces of a matrix or of an endomorphism, when a matrix is diagonalizable and how to build the diagonalizing matrix, with applications to powers and to matrices with a parameter.
+titolo: Autovalori, autovettori e diagonalizzazione
+sommario: Come si calcolano autovalori e autospazi di una matrice o di un endomorfismo, quando una matrice è diagonalizzabile e come si costruisce la matrice diagonalizzante, con le applicazioni alle potenze e alle matrici con parametro.
 ---
 
 ## Eigenvalues and eigenvectors
 
 :::definizione{#autovalore-autovettore titolo="Eigenvalue and eigenvector of an endomorphism"}
-Let $V$ be a real vector space and let $f : V \to V$ be a linear map, called an **endomorphism** of $V$. A number $\lambda \in \mathbb{R}$ is an **eigenvalue** of $f$ if there exists a vector $v \in V$ that satisfies the two conditions *together*
+Let $V$ be a real vector space and let $f : V \to V$ be a linear map, called an **endomorphism** of $V$. A number $\lambda \in \mathbb{R}$ is an **eigenvalue** of $f$ if there exists a vector $v \in V$ that satisfies the two conditions *simultaneously*
 $$
 \begin{cases}
 v \neq 0 \\[4pt]
@@ -90,7 +90,7 @@ $$
 therefore $A$ and $B$ have the **same eigenvalues**, with the same multiplicity as roots, the same trace and the same determinant. The theorem makes it possible to define the characteristic polynomial of an endomorphism and provides a quick way to rule out that two matrices are similar: if the trace, the determinant or the eigenvalues differ, the matrices are not similar.
 
 :::dimostrazione
-Since $P^{-1} I_n P = I_n$, one has $B - \lambda I_n = P^{-1} A P - \lambda P^{-1} I_n P = P^{-1}(A - \lambda I_n) P$. By **Binet's theorem**
+Since $P^{-1} I_n P = I_n$, one has $B - \lambda I_n = P^{-1} A P - \lambda P^{-1} I_n P = P^{-1}(A - \lambda I_n) P$. By **multiplicativity of the determinant**
 $$
 \det(B - \lambda I_n) = \det(P^{-1}) \det(A - \lambda I_n) \det P = \det(A - \lambda I_n) ,
 $$
@@ -98,7 +98,7 @@ since $\det(P^{-1}) \det P = \det(P^{-1} P) = \det I_n = 1$.
 :::
 ::::
 
-:::richiamo{titolo="Binet's theorem"}
+:::richiamo{titolo="Multiplicativity of the determinant"}
 If $A, B \in M_n(\mathbb{R})$, then $\det(AB) = \det A \cdot \det B$.
 :::
 
@@ -168,7 +168,7 @@ Let $\lambda_0$ be an eigenvalue of $A \in M_n(\mathbb{R})$. Then
 $$
 1 \leq m_g(\lambda_0) \leq m_a(\lambda_0) .
 $$
-In particular, if $m_a(\lambda_0) = 1$ then $m_g(\lambda_0) = 1$ with no need for computations, so the rank of $A - \lambda_0 I_n$ needs to be computed *only* for multiple eigenvalues.
+In particular, if $m_a(\lambda_0) = 1$ then $m_g(\lambda_0) = 1$ with no need for computations, so the rank of $A - \lambda_0 I_n$ needs to be computed *only* for repeated eigenvalues.
 
 :::dimostrazione
 Let $g = m_g(\lambda_0)$. One has $g \geq 1$ because $V_{\lambda_0}$ contains a nonzero vector. Let $v_1, \dots, v_g$ be a basis of $V_{\lambda_0}$; by the **basis extension theorem** there exist $v_{g+1}, \dots, v_n$ such that $v_1, \dots, v_n$ is a basis of $\mathbb{R}^n$. The matrix $P$ that has these vectors as columns is invertible and satisfies $Pe_j = v_j$, where $e_j$ is the $j$-th vector of the standard basis, therefore $P^{-1} v_j = e_j$. For $j \leq g$ the $j$-th column of $P^{-1}AP$ is
@@ -179,7 +179,7 @@ so
 $$
 P^{-1} A P = \begin{pmatrix} \lambda_0 I_g & B \\ 0 & C \end{pmatrix}
 $$
-with $C \in M_{n-g}(\mathbb{R})$. Expanding $\det(P^{-1}AP - \lambda I_n)$ by Laplace along the first column, and repeating the expansion $g$ times, one obtains $(\lambda_0 - \lambda)^g \det(C - \lambda I_{n-g})$. Since $A$ and $P^{-1}AP$ are similar, they have the same characteristic polynomial, therefore $p_A(\lambda) = (\lambda_0 - \lambda)^g\, p_C(\lambda)$. It follows that $(\lambda - \lambda_0)^g$ divides $p_A$, that is, $m_a(\lambda_0) \geq g$.
+with $C \in M_{n-g}(\mathbb{R})$. Expanding $\det(P^{-1}AP - \lambda I_n)$ by Laplace expansion along the first column, and repeating the expansion $g$ times, one obtains $(\lambda_0 - \lambda)^g \det(C - \lambda I_{n-g})$. Since $A$ and $P^{-1}AP$ are similar, they have the same characteristic polynomial, therefore $p_A(\lambda) = (\lambda_0 - \lambda)^g\, p_C(\lambda)$. It follows that $(\lambda - \lambda_0)^g$ divides $p_A$, that is, $m_a(\lambda_0) \geq g$.
 :::
 ::::
 
@@ -242,8 +242,8 @@ Let $P$ be an invertible matrix with columns $v_1, \dots, v_n$ and let $D$ be di
 Let $A \in M_n(\mathbb{R})$. Then $A$ is diagonalizable if and only if both conditions are satisfied
 $$
 \begin{cases}
-p_A \text{ has } n \text{ real roots, counted with their multiplicity} \\[4pt]
-m_g(\lambda) = m_a(\lambda) \text{ for every eigenvalue } \lambda
+p_A \text{ ha } n \text{ radici reali, contate con la loro molteplicità} \\[4pt]
+m_g(\lambda) = m_a(\lambda) \text{ per ogni autovalore } \lambda
 \end{cases}
 $$
 The criterion is applied in two steps. One factors the characteristic polynomial, and if there are non-real roots the matrix **is not diagonalizable**; then, for each eigenvalue with $m_a \geq 2$, one computes the rank of $A - \lambda I_n$. Simple eigenvalues require no checks, because for them $m_g = m_a = 1$.
@@ -267,7 +267,7 @@ A real matrix with non-real eigenvalues is not diagonalizable over $\mathbb{R}$.
 :::
 
 :::osservazione{#matrici-simmetriche-diagonalizzabili titolo="Symmetric matrices"}
-Every real **symmetric matrix** is diagonalizable, and the diagonalizing matrix can be chosen with orthonormal columns. This result is the spectral theorem, for which we refer to the topic on the scalar product and the spectral theorem; in exercises it makes it possible to assert the diagonalizability of a symmetric matrix without computing ranks.
+Every real **symmetric matrix** is diagonalizable, and the diagonalizing matrix can be chosen with orthonormal columns. This result is the spectral theorem, for which we refer to the topic on the inner product and the spectral theorem; in exercises it makes it possible to assert the diagonalizability of a symmetric matrix without computing ranks.
 :::
 
 ## The diagonalizing matrix and powers
@@ -333,7 +333,7 @@ When $A$ depends on a real parameter $k$, diagonalizability is discussed by foll
 - Compute $p_A(\lambda)$, trying to factor it with $k$ treated as a constant; often a Laplace expansion along a row with many zeros immediately isolates a factor.
 - Identify the values of $k$ for which some roots are not real, and for these the matrix is not diagonalizable, and those for which two eigenvalues coincide.
 - For the values of $k$ with real and distinct eigenvalues the matrix is diagonalizable.
-- For each value of $k$ with a multiple eigenvalue, substitute $k$ into the matrix and compute $m_g$ via the rank.
+- For each value of $k$ with a repeated eigenvalue, substitute $k$ into the matrix and compute $m_g$ via the rank.
 
 Even when the eigenvalues do not depend on $k$, the rank of $A - \lambda I_n$ may depend on $k$, and then the discussion concerns *only* the computation of $m_g$.
 :::

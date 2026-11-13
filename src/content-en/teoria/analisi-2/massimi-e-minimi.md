@@ -1,6 +1,6 @@
 ---
-titolo: Unconstrained and constrained maxima and minima
-sommario: Where to look for the extrema of a function of several variables, how to classify them with the Hessian matrix, how to handle compact sets and constraints with Lagrange multipliers.
+titolo: Massimi e minimi liberi e vincolati
+sommario: Dove cercare gli estremi di una funzione di più variabili, come classificarli con la matrice Hessiana, come trattare i compatti e i vincoli con i moltiplicatori di Lagrange.
 ---
 
 ## Unconstrained maxima and minima
@@ -36,7 +36,7 @@ Let $(x_0, y_0)$ be a local extremum point for $f$, interior to the domain, and 
 $$
 \nabla f(x_0, y_0) = (0, 0) .
 $$
-The theorem says where to look for unconstrained extrema: among the **critical points**, in addition to any interior points where $f$ is not differentiable and to the points of the boundary of the domain. For $f(x, y) = x^2 + y^2 - 4x$ the system $f_x = 2x - 4 = 0$, $f_y = 2y = 0$ has the *unique* solution $(2, 0)$, hence any unconstrained extremum is at $(2, 0)$.
+The theorem says where to look for unconstrained extrema: among the **critical points**, in addition to any interior points where $f$ is not partially differentiable and to the points of the boundary of the domain. For $f(x, y) = x^2 + y^2 - 4x$ the system $f_x = 2x - 4 = 0$, $f_y = 2y = 0$ has the *unique* solution $(2, 0)$, hence any unconstrained extremum is at $(2, 0)$.
 
 :::dimostrazione
 Let $(x_0, y_0)$ be a local maximum point (for the minimum the argument is the same). The one-variable function $g(t) = f(t, y_0)$ is defined in a neighborhood of $t = x_0$, because the point is interior to the domain, and it is differentiable at $x_0$ with $g'(x_0) = f_x(x_0, y_0)$. Since $f$ has a local maximum at $(x_0, y_0)$, the restriction $g$ has a local maximum at the interior point $x_0$, hence by **Fermat's theorem in one variable** $g'(x_0) = 0$, that is $f_x(x_0, y_0) = 0$. Applying the same argument to $h(t) = f(x_0, t)$ we obtain $f_y(x_0, y_0) = 0$.
@@ -65,10 +65,10 @@ f_{xx}(x_0, y_0) & f_{xy}(x_0, y_0) \\[4pt]
 f_{yx}(x_0, y_0) & f_{yy}(x_0, y_0)
 \end{pmatrix} .
 $$
-Since $f$ is of class $C^2$, by **Schwarz's theorem** the mixed derivatives coincide, hence the matrix is **symmetric**. In two variables the Hessian plays the role of the second derivative in one variable: its sign, in the sense defined below, classifies the critical points.
+Since $f$ is of class $C^2$, by **Schwarz's theorem** the mixed derivatives coincide, hence the matrix is **symmetric**. In two variables the Hessian plays the role of the second derivative in one variable: its definiteness, in the sense defined below, classifies the critical points.
 :::
 
-:::definizione{#segno-matrice-simmetrica titolo="Sign of a symmetric matrix"}
+:::definizione{#segno-matrice-simmetrica titolo="Definiteness of a symmetric matrix"}
 A symmetric matrix $H$ of order $2$ is called
 
 - **positive definite** if its eigenvalues are both positive;
@@ -76,7 +76,7 @@ A symmetric matrix $H$ of order $2$ is called
 - **indefinite** if it has one positive and one negative eigenvalue;
 - semidefinite (degenerate case) if *at least one* eigenvalue is zero, that is, if $\det H = 0$.
 
-For a matrix of order $2$ the sign can be read from the determinant and the first entry, *without* computing the eigenvalues: since $\det H$ is the product of the eigenvalues, $\det H > 0$ means eigenvalues of the same sign, with the common sign given by the sign of $f_{xx}$, while $\det H < 0$ means eigenvalues of opposite signs. In $n$ variables the same criterion uses the leading principal minors (Sylvester's criterion), for which we refer to the linear algebra course.
+For a matrix of order $2$ its definiteness can be determined from the determinant and the first entry, *without* computing the eigenvalues: since $\det H$ is the product of the eigenvalues, $\det H > 0$ means eigenvalues of the same sign, with the common sign given by the sign of $f_{xx}$, while $\det H < 0$ means eigenvalues of opposite signs. In $n$ variables the same criterion uses the leading principal minors (Sylvester's criterion), for which we refer to the linear algebra course.
 :::
 
 :::teorema{#criterio-della-hessiana titolo="Classification with the Hessian matrix"}
@@ -85,7 +85,7 @@ Let $f$ be of class $C^2$ and let $(x_0, y_0)$ be a critical point with Hessian 
 - If $\det H > 0$ and $f_{xx}(x_0, y_0) > 0$, then $(x_0, y_0)$ is a **local minimum point**.
 - If $\det H > 0$ and $f_{xx}(x_0, y_0) < 0$, then $(x_0, y_0)$ is a **local maximum point**.
 - If $\det H < 0$, then $(x_0, y_0)$ is a **saddle point**.
-- If $\det H = 0$, the criterion does *not* decide and the point must be studied directly.
+- If $\det H = 0$, the criterion is *inconclusive* and the point must be studied directly.
 
 The proof uses Taylor's formula to second order: near the critical point the difference $f(x, y) - f(x_0, y_0)$ has the sign of the quadratic form associated with the Hessian; we refer to the chapter on differential calculus in several variables. In computations the criterion is applied as follows: each critical point is found by solving the system $\nabla f = (0, 0)$, the three second derivatives are computed at the point, and one looks at $\det H$ and $f_{xx}$.
 :::
@@ -113,7 +113,7 @@ Along lines the sign can be constant *even* at a saddle point. For $f(x, y) = (y
 
 ## Absolute extrema on compact sets
 
-:::teorema{#weierstrass-in-piu-variabili titolo="Weierstrass's theorem"}
+:::teorema{#weierstrass-in-piu-variabili titolo="Extreme value theorem"}
 Let $K \subset \mathbb{R}^2$ be a compact set, that is, closed and bounded, and let $f$ be continuous on $K$. Then $f$ attains an **absolute maximum and minimum** on $K$. The theorem guarantees that the problem has a solution *before* the computations even begin: on a rectangle, a disk or a triangle (boundary included) the absolute extrema of a continuous function always exist. The theorem is stated in $\mathbb{R}^n$ in the chapter on functions of several variables; the proof uses sequences in $\mathbb{R}^n$ and is omitted.
 :::
 
@@ -121,7 +121,7 @@ Let $K \subset \mathbb{R}^2$ be a compact set, that is, closed and bounded, and 
 The absolute extrema on $K$ are attained at **interior points** or on the **boundary**. At interior extremum points **Fermat's theorem** applies, hence the candidates are of three types:
 
 - the critical points interior to $K$;
-- any interior points where $f$ is not differentiable;
+- any interior points where $f$ is not partially differentiable;
 - the extremum points of the restriction of $f$ to the boundary of $K$.
 
 The values of $f$ at *all* the candidates are computed and compared: the largest value is the absolute maximum, the smallest is the absolute minimum. Classification with the Hessian is not needed in this method, since the final comparison of the values decides everything; even an interior saddle point can remain among the candidates without causing errors.
@@ -137,7 +137,7 @@ If the boundary consists of several pieces, such as the sides of a rectangle or 
 :::
 
 :::esempio{titolo="Absolute extrema on a square"}
-$f(x, y) = xy$ on the square $K = [0, 1] \times [0, 1]$. The function is continuous and $K$ is compact, therefore by **Weierstrass's theorem** the maximum and minimum exist. The only critical point is the origin, which is *not* interior to $K$, therefore the extrema are on the boundary. On the sides $x = 0$ and $y = 0$ we have $f = 0$; on the side $x = 1$ the restriction is $g(y) = y$, increasing on $[0, 1]$, with values from $0$ to $1$; on the side $y = 1$ the restriction is $g(x) = x$, with the same values. The comparison gives the **absolute maximum** $1$ at $(1, 1)$ and the **absolute minimum** $0$, attained at all points of the two sides on the axes.
+$f(x, y) = xy$ on the square $K = [0, 1] \times [0, 1]$. The function is continuous and $K$ is compact, therefore by the **extreme value theorem** the maximum and minimum exist. The only critical point is the origin, which is *not* interior to $K$, therefore the extrema are on the boundary. On the sides $x = 0$ and $y = 0$ we have $f = 0$; on the side $x = 1$ the restriction is $g(y) = y$, increasing on $[0, 1]$, with values from $0$ to $1$; on the side $y = 1$ the restriction is $g(x) = x$, with the same values. The comparison gives the **absolute maximum** $1$ at $(1, 1)$ and the **absolute minimum** $0$, attained at all points of the two sides on the axes.
 
 ::grafico{curve="(t+abs(t))/2,(abs(t)-t)/2,-1,1" area="1;0;0;1" punti="1,1,pieno,maximum 1" etichette="0.3,-0.27,minimum 0" xmin=-0.4 xmax=1.6 ymin=-0.4 ymax=1.5 uguale=1 titolo="The square $K = [0, 1] \times [0, 1]$: $f(x, y) = xy$ has maximum $1$ at the vertex $(1, 1)$ and minimum $0$ on the two sides lying on the axes (in color)"}
 
@@ -157,7 +157,7 @@ $$
 At constrained extremum points the two gradients are **parallel**: the level curves of $f$ are **tangent** to the constraint curve, since if they crossed it the value of $f$ along the constraint would still be increasing.
 
 :::dimostrazione
-Since $\nabla g(x_0, y_0) \neq (0, 0)$, one of the two partial derivatives of $g$ is nonzero; let $g_y(x_0, y_0) \neq 0$ (in the case $g_x \neq 0$ the roles of the variables are exchanged). By **Dini's theorem**, near $(x_0, y_0)$ the set $Z$ is the graph of a function $y = \varphi(x)$ of class $C^1$ with $\varphi(x_0) = y_0$ and
+Since $\nabla g(x_0, y_0) \neq (0, 0)$, one of the two partial derivatives of $g$ is nonzero; let $g_y(x_0, y_0) \neq 0$ (in the case $g_x \neq 0$ the roles of the variables are exchanged). By the **implicit function theorem**, near $(x_0, y_0)$ the set $Z$ is the graph of a function $y = \varphi(x)$ of class $C^1$ with $\varphi(x_0) = y_0$ and
 $$
 \varphi'(x_0) = -\frac{g_x(x_0, y_0)}{g_y(x_0, y_0)} .
 $$
@@ -170,7 +170,7 @@ Setting $\lambda = \dfrac{f_y(x_0, y_0)}{g_y(x_0, y_0)}$, from the equality it f
 :::
 ::::
 
-:::richiamo{titolo="Dini's theorem"}
+:::richiamo{titolo="Implicit function theorem"}
 If $g$ is of class $C^1$, $g(x_0, y_0) = 0$ and $g_y(x_0, y_0) \neq 0$, then near $(x_0, y_0)$ the zero set of $g$ is the graph of a function $y = \varphi(x)$ of class $C^1$, with $\varphi'(x) = -\dfrac{g_x(x, \varphi(x))}{g_y(x, \varphi(x))}$.
 :::
 
@@ -183,7 +183,7 @@ f_y(x, y) = \lambda\, g_y(x, y) \\[4pt]
 g(x, y) = 0
 \end{cases}
 $$
-The solutions of the system, together with any points of the constraint with $\nabla g = (0, 0)$, are the candidates. When the constraint is a compact set, by **Weierstrass's theorem** the maximum and the minimum exist and are found by comparing the values of $f$ at the candidates. When the constraint is *not* compact, existence must be **justified separately**, for example by studying the behavior of $f$ along the constraint at infinity. The value of $\lambda$ serves only to solve the system and as a rule does not appear in the answer.
+The solutions of the system, together with any points of the constraint with $\nabla g = (0, 0)$, are the candidates. When the constraint is a compact set, by the **extreme value theorem** the maximum and the minimum exist and are found by comparing the values of $f$ at the candidates. When the constraint is *not* compact, existence must be **justified separately**, for example by studying the behavior of $f$ along the constraint at infinity. The value of $\lambda$ serves only to solve the system and as a rule does not appear in the answer.
 :::
 
 :::esempio{titolo="Maximum and minimum on a circle"}
@@ -233,7 +233,7 @@ A geometric optimization problem asks for the figure that maximizes or minimizes
 - The variables are chosen, that is, the measurements that determine the figure, with the geometric restrictions ($x > 0$ for a length).
 - The **objective function** to be optimized is written, together with the **constraint equation** linking the variables.
 - The problem is solved by substitution, obtaining one variable from the constraint to reduce to a function of one variable, or with Lagrange multipliers; with two variables and a constraint that can be solved explicitly, substitution is usually faster.
-- One justifies that the extremum found is really absolute: with Weierstrass's theorem if the domain is compact, otherwise by studying the objective function at the ends of the domain (for example, a volume that tends to $0$ at the boundary makes the unique interior critical point a maximum).
+- One justifies that the extremum found is really absolute: with the extreme value theorem if the domain is compact, otherwise by studying the objective function at the ends of the domain (for example, a volume that tends to $0$ at the boundary makes the unique interior critical point a maximum).
 
 For distances it is convenient to optimize the **square of the distance**, which has the same extremum points as the distance and avoids the square root in the computations.
 :::

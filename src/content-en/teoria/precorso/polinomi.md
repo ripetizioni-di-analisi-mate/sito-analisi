@@ -1,6 +1,6 @@
 ---
-titolo: Factorization, Ruffini's rule and polynomial division
-sommario: What a polynomial is, how special products are expanded and recognized, how polynomial division is carried out and how a polynomial is factored with Ruffini's rule.
+titolo: Fattorizzazione, Ruffini e divisione tra polinomi
+sommario: Che cos'è un polinomio, come si sviluppano e si riconoscono i prodotti notevoli, come si esegue la divisione tra polinomi e come si scompone un polinomio in fattori con la regola di Ruffini.
 ---
 
 ## Polynomials and degree
@@ -14,16 +14,16 @@ with $a_n \neq 0$. The numbers $a_n, \dots, a_0$ are the coefficients, $a_n$ is 
 :::
 
 :::teorema{#principio-di-identita titolo="Identity principle for polynomials"}
-Two polynomials take the same value for every real $x$ *if and only if* they have the same degree and the same coefficients, term by term. The principle makes it possible to determine unknown coefficients by equating the coefficients of terms of the same degree, and it is used to check divisions and factorizations. From the equality $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ it follows that $b = -4$ and $c = 3$.
+Two polynomials take the same value for every real $x$ *if and only if* they have the **same degree** and the **same coefficients**, term by term. The principle makes it possible to determine unknown coefficients by equating the coefficients of terms of the same degree, and it is used to check divisions and factorizations. From the equality $x^2 + bx + c = (x - 1)(x - 3) = x^2 - 4x + 3$ it follows that $b = -4$ and $c = 3$.
 :::
 
 :::osservazione
 In the product of two polynomials the degrees **add up**, so $\deg (PQ) = \deg P + \deg Q$. For this reason a polynomial of degree $4$ factored into two factors of positive degree has factors of degrees $1$ and $3$ or $2$ and $2$.
 :::
 
-## Special products
+## Standard algebraic identities
 
-The following identities hold for all values of $A$ and $B$ and are used in both directions, to expand and to factor.
+The following identities hold for all values of $A$ and $B$ and are used in *both* directions, to expand and to factor.
 
 :::teorema{#prodotti-notevoli titolo="Square and cube of a binomial"}
 $$
@@ -33,7 +33,7 @@ $$
 (A - B)^3 = A^3 - 3A^2 B + 3A B^2 - B^3 .
 \end{gathered}
 $$
-Read from right to left, they factor: a trinomial is the **square of a binomial** when two terms are squares and the third is twice the product of the two bases, and the sign of this double product determines the sign in the binomial.
+Read from right to left, they **factor**: a trinomial is the **square of a binomial** when two terms are squares and the third is **twice the product** of the two bases, and the sign of this double product determines the sign in the binomial.
 :::
 
 :::esempio
@@ -44,7 +44,7 @@ $(2x + 3)^2 = 4x^2 + 12x + 9$. In the opposite direction, $x^2 - 10x + 25 = (x -
 $$
 A^2 - B^2 = (A - B)(A + B)
 $$
-It is the quickest factorization to recognize: two squares separated by a **minus sign**. It can also be applied several times in a row, when one of the factors obtained is itself a difference of squares.
+It is the quickest factorization to recognize: two squares separated by a **minus sign**. It can also be applied *several times* in a row, when one of the factors obtained is itself a difference of squares.
 :::
 
 :::esempio
@@ -52,7 +52,7 @@ $9x^2 - 16 = (3x - 4)(3x + 4)$. With two successive applications, $x^4 - 1 = (x^
 :::
 
 :::attenzione
-The sum of two squares $x^2 + k^2$, with $k \neq 0$, *cannot* be factored into first-degree factors with real coefficients. For example $x^2 + 4 \geq 4 > 0$ for every $x$, so $x^2 + 4$ has **no real roots** and no factor of the form $x - c$ divides it.
+The sum of two squares $x^2 + k^2$, with $k \neq 0$, *cannot* be factored into linear factors with real coefficients. For example $x^2 + 4 \geq 4 > 0$ for every $x$, so $x^2 + 4$ **has no real roots** and no factor of the form $x - c$ divides it.
 
 ::grafico{f="x^2+4;4" xmin=-3 xmax=3 ymin=-1 ymax=10 punti="0,4,pieno" titolo="$y = x^2 + 4$ never goes below the line $y = 4$ (dashed), which it touches at the point $(0, 4)$, so it does not meet the $x$-axis: $x^2 + 4$ has no real roots"}
 
@@ -63,7 +63,7 @@ $$
 A^3 + B^3 = (A + B)(A^2 - AB + B^2), \qquad
 A^3 - B^3 = (A - B)(A^2 + AB + B^2)
 $$
-The second factor, called a **false square**, has a negative discriminant and no real roots, so the factorization does not continue; the discriminant criterion is found in the chapter on polynomial equations and inequalities.
+The second factor, **a quadratic that is not a perfect square**, has a negative discriminant and **has no real roots**, so the factorization does not continue; the discriminant criterion is found in the chapter on polynomial equations and inequalities.
 :::
 
 :::esempio
@@ -73,22 +73,22 @@ $x^3 + 8 = (x + 2)(x^2 - 2x + 4)$, with $A = x$ and $B = 2$. Similarly $27x^3 - 
 ## Polynomial division
 
 :::teorema{#divisione-tra-polinomi titolo="Division with remainder"}
-Given a dividend $A(x)$ and a nonzero divisor $B(x)$, there exist a unique **quotient** $Q(x)$ and a unique **remainder** $R(x)$ such that
+Given a dividend $A(x)$ and a nonzero divisor $B(x)$, there exist a *unique* **quotient** $Q(x)$ and **remainder** $R(x)$ such that
 $$
 \begin{cases}
 A(x) = B(x)\, Q(x) + R(x) \\[4pt]
-R(x) = 0 \ \text{ or } \ \deg R < \deg B
+R(x) = 0 \ \text{ oppure } \ \deg R < \deg B
 \end{cases}
 $$
-The structure is the same as that of division with remainder between integers. When $R(x) = 0$ the division is **exact** and $B(x)$ divides $A(x)$, that is, $B$ is a factor of $A$; for this reason division is a factorization tool.
+The structure is the same as that of division with remainder between integers. When $R(x) = 0$ the division is **exact** and $B(x)$ divides $A(x)$, that is, $B$ is a **factor** of $A$; for this reason division is a factorization tool.
 :::
 
 :::esempio{titolo="The division algorithm, step by step"}
-Division of $A(x) = 2x^3 - 3x^2 + 4x - 5$ by $B(x) = x^2 - x + 1$. The first term of the quotient is the ratio of the highest-degree terms, $\dfrac{2x^3}{x^2} = 2x$; the divisor is multiplied by $2x$ and the product is subtracted from the dividend:
+Division of $A(x) = 2x^3 - 3x^2 + 4x - 5$ by $B(x) = x^2 - x + 1$. The first term of the quotient is the ratio of the terms of **highest degree**, $\dfrac{2x^3}{x^2} = 2x$; the divisor is multiplied by $2x$ and the product is subtracted from the dividend:
 $$
 2x^3 - 3x^2 + 4x - 5 - 2x\,(x^2 - x + 1) = -x^2 + 2x - 5 .
 $$
-The partial remainder $-x^2 + 2x - 5$ has degree $2$, equal to the degree of the divisor, so the algorithm continues on the partial remainder. The next term of the quotient is $\dfrac{-x^2}{x^2} = -1$:
+The partial remainder $-x^2 + 2x - 5$ has degree $2$, equal to the degree of the divisor, so the algorithm **continues** on the partial remainder. The next term of the quotient is $\dfrac{-x^2}{x^2} = -1$:
 $$
 -x^2 + 2x - 5 - (-1)(x^2 - x + 1) = x - 4 .
 $$
@@ -99,40 +99,40 @@ $$
 :::
 
 :::osservazione
-The dividend is written with the degrees in decreasing order, and missing degrees are counted with coefficient $0$. The check uses the **identity principle**: expanding $B(x)\,Q(x) + R(x)$ must give back $A(x)$, coefficient by coefficient.
+The dividend is written with the degrees in decreasing order, and **missing degrees** are counted with coefficient $0$. The check uses the **identity principle**: expanding $B(x)\,Q(x) + R(x)$ must give back $A(x)$, coefficient by coefficient.
 :::
 
-## Remainder theorem and Ruffini's theorem
+## Remainder theorem and factor theorem
 
 ::::teorema{#teorema-del-resto titolo="Remainder theorem"}
-The remainder of the division of $P(x)$ by $x - c$ is $P(c)$. The remainder is therefore obtained with a **single evaluation** of the polynomial, without carrying out the division. The remainder of $x^3 - 2x + 1$ divided by $x - 2$ is $P(2) = 8 - 4 + 1 = 5$.
+The remainder of the division of $P(x)$ by $x - c$ is $P(c)$. The remainder is therefore obtained with a *single* evaluation of the polynomial, **without carrying out the division**. The remainder of $x^3 - 2x + 1$ divided by $x - 2$ is $P(2) = 8 - 4 + 1 = 5$.
 
-::grafico{f="x^3-2*x+1" xmin=-2.5 xmax=2.6 ymin=-4 ymax=8 punti="2,5,pieno,P(2) = 5" segmenti="2,0,2,5" titolo="$y = x^3 - 2x + 1$: the remainder of the division by $x - 2$ is the ordinate $P(2) = 5$ of the point of the graph with abscissa $2$"}
+::grafico{f="x^3-2*x+1" xmin=-2.5 xmax=2.6 ymin=-4 ymax=8 punti="2,5,pieno,P(2) = 5" segmenti="2,0,2,5" titolo="$y = x^3 - 2x + 1$: the remainder of the division by $x - 2$ is the y-coordinate $P(2) = 5$ of the point of the graph with x-coordinate $2$"}
 
 :::dimostrazione
 By the **theorem on division with remainder** there exist $Q(x)$ and $R(x)$ such that $P(x) = (x - c)\,Q(x) + R(x)$, with $R(x) = 0$ or $\deg R < \deg(x - c) = 1$. In both cases $R(x)$ is a **constant** $R$. Evaluating the equality at $x = c$ gives
 $$
 P(c) = (c - c)\,Q(c) + R = 0 + R = R ,
 $$
-therefore the remainder equals $P(c)$.
+therefore the remainder **equals** $P(c)$.
 :::
 ::::
 
-:::teorema{#teorema-di-ruffini titolo="Ruffini's theorem"}
-The binomial $x - c$ divides $P(x)$ *if and only if* $P(c) = 0$, that is, if and only if $c$ is a root of $P$. The statement follows from the **remainder theorem**, since the division is exact if and only if the remainder $P(c)$ is zero. The theorem connects roots to factorization: *every* root found produces a **first-degree factor**. For $P(x) = x^2 - 5x + 6$ we have $P(2) = 4 - 10 + 6 = 0$, so $x - 2$ divides $P$; indeed $P(x) = (x - 2)(x - 3)$.
+:::teorema{#teorema-di-ruffini titolo="Factor theorem"}
+The binomial $x - c$ divides $P(x)$ *if and only if* $P(c) = 0$, that is, if and only if $c$ is a root of $P$. The statement follows from the **remainder theorem**, since the division is exact if and only if the remainder $P(c)$ is zero. The theorem connects roots to factorization: every root found produces a **linear factor**. For $P(x) = x^2 - 5x + 6$ we have $P(2) = 4 - 10 + 6 = 0$, so $x - 2$ divides $P$; indeed $P(x) = (x - 2)(x - 3)$.
 
-::grafico{f="x^2-5*x+6" xmin=-0.5 xmax=5 ymin=-1 ymax=6 punti="2,0,pieno;3,0,pieno" titolo="The roots $2$ and $3$ of $P(x) = x^2 - 5x + 6$ are the abscissas of the points where the graph meets the $x$-axis"}
+::grafico{f="x^2-5*x+6" xmin=-0.5 xmax=5 ymin=-1 ymax=6 punti="2,0,pieno;3,0,pieno" titolo="The roots $2$ and $3$ of $P(x) = x^2 - 5x + 6$ are the x-coordinates of the points where the graph meets the $x$-axis"}
 
 :::
 
 :::definizione{#molteplicita-di-una-radice titolo="Multiplicity of a root"}
 Let $c$ be a root of the polynomial $P$ and let $m \geq 1$ be an integer. The root $c$ has **multiplicity** $m$ if
 $$
-P(x) = (x - c)^m\, Q(x) \qquad \text{with } Q(c) \neq 0 ,
+P(x) = (x - c)^m\, Q(x) \qquad \text{con } Q(c) \neq 0 ,
 $$
 that is, if $(x - c)^m$ divides $P$ and $(x - c)^{m + 1}$ does not. A root of multiplicity $1$ is called **simple**, of multiplicity $2$ **double**, of multiplicity $3$ triple. The multiplicity is found by dividing by $x - c$ until the quotient no longer has $c$ as a root: the number of exact divisions is $m$.
 
-The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is the **sign-preservation theorem**, found in the chapter on limits of Mathematical Analysis 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
+The multiplicity determines the sign of $P$ near $c$. For $x \neq c$ the factor $(x - c)^m$ is positive if $m$ is *even*, while if $m$ is *odd* it has the sign of $x - c$, which changes at $c$. The factor $Q$ does not vanish at $c$, so near $c$ it has the sign of $Q(c)$ (this is **preservation of sign**, found in the chapter on limits of Mathematical Analysis 1). Therefore the graph of $P$ **crosses** the $x$-axis at roots of odd multiplicity and **touches it without crossing** at roots of even multiplicity; in the study of the sign this property decides whether a row of the sign chart changes sign, as shown in the chapter on polynomial equations and inequalities.
 :::
 
 :::esempio
@@ -142,10 +142,10 @@ $P(x) = x^3 - 3x^2 + 4 = (x - 2)^2 (x + 1)$. The root $2$ is **double**, since $
 
 :::
 
-## Ruffini's rule
+## Synthetic division
 
-:::definizione{#ruffini titolo="Ruffini's rule"}
-**Ruffini's rule** is the scheme that carries out the division of $P(x)$ by $x - c$ using only the coefficients.
+:::definizione{#ruffini titolo="Synthetic division"}
+**Synthetic division** is the scheme that carries out the division of $P(x)$ by $x - c$ using *only* the coefficients.
 
 1. In the first row the coefficients of $P$ are written in order of decreasing degree, with $0$ in place of missing degrees; the number $c$ is written on the left.
 2. The first coefficient is brought down unchanged into the row of results.
@@ -168,18 +168,18 @@ x^3 - 2x^2 - 5x + 6 = (x - 1)(x^2 - x - 6) = (x - 1)(x - 3)(x + 2) ,
 $$
 where the last equality is checked by expanding the product $(x - 3)(x + 2) = x^2 - x - 6$.
 
-::grafico{f="x^3-2*x^2-5*x+6" xmin=-2.6 xmax=3.6 ymin=-6 ymax=10 punti="-2,0,pieno;1,0,pieno;3,0,pieno" titolo="$y = x^3 - 2x^2 - 5x + 6$ meets the $x$-axis at the three roots $-2$, $1$, $3$, one for each first-degree factor"}
+::grafico{f="x^3-2*x^2-5*x+6" xmin=-2.6 xmax=3.6 ymin=-6 ymax=10 punti="-2,0,pieno;1,0,pieno;3,0,pieno" titolo="$y = x^3 - 2x^2 - 5x + 6$ meets the $x$-axis at the three roots $-2$, $1$, $3$, one for each linear factor"}
 
 :::
 
 ## Rational roots
 
 :::teorema{#radici-razionali titolo="Finding rational roots"}
-Let $P(x) = a_n x^n + \dots + a_0$ have integer coefficients, with $a_0 \neq 0$. If the fraction $\dfrac{p}{q}$, in lowest terms, is a root of $P$, then $p$ divides the **constant term** $a_0$ and $q$ divides the **leading coefficient** $a_n$. The theorem provides a finite list of candidates; each candidate $c$ is tested by computing $P(c)$, and by **Ruffini's theorem** every candidate with $P(c) = 0$ produces the factor $x - c$. When the leading coefficient is $1$, any rational roots are integers that divide the constant term.
+Let $P(x) = a_n x^n + \dots + a_0$ have integer coefficients, with $a_0 \neq 0$. If the fraction $\dfrac{p}{q}$, in lowest terms, is a root of $P$, then $p$ **divides the constant term** $a_0$ and $q$ **divides the leading coefficient** $a_n$. The theorem provides a *finite* list of candidates; each candidate $c$ is tested by computing $P(c)$, and by the **factor theorem** every candidate with $P(c) = 0$ produces the factor $x - c$. When the leading coefficient is $1$, any rational roots are integers that divide the constant term.
 :::
 
 :::esempio
-$P(x) = 2x^3 + x^2 - 5x + 2$. The divisors of the constant term $2$ are $\pm 1, \pm 2$; the positive divisors of the leading coefficient $2$ are $1, 2$. The candidates are therefore $\pm 1$, $\pm 2$, $\pm\dfrac{1}{2}$. Since $P(1) = 2 + 1 - 5 + 2 = 0$, the number $1$ is a root and $x - 1$ divides $P$. *Not every* candidate is a root: $P(-1) = -2 + 1 + 5 + 2 = 6 \neq 0$.
+$P(x) = 2x^3 + x^2 - 5x + 2$. The divisors of the constant term $2$ are $\pm 1, \pm 2$; the positive divisors of the leading coefficient $2$ are $1, 2$. The candidates are therefore $\pm 1$, $\pm 2$, $\pm\dfrac{1}{2}$. Since $P(1) = 2 + 1 - 5 + 2 = 0$, the number $1$ is a **root** and $x - 1$ divides $P$. *Not* every candidate is a root: $P(-1) = -2 + 1 + 5 + 2 = 6 \neq 0$.
 
 ::grafico{f="2*x^3+x^2-5*x+2" xmin=-2.6 xmax=1.8 ymin=-3 ymax=8 punti="1,0,pieno;-1,6,pieno,P(−1) = 6" etichette="1.15,-0.9,P(1) = 0" segmenti="-1,0,-1,6" titolo="$y = 2x^3 + x^2 - 5x + 2$: the candidate $1$ is a root, the candidate $-1$ is not, since $P(-1) = 6$; the graph also meets the $x$-axis at the candidates $-2$ and $\dfrac{1}{2}$"}
 
@@ -198,7 +198,7 @@ x^3 + 2x^2 + 3x + 6 = x^2 (x + 2) + 3\,(x + 2) = (x + 2)(x^2 + 3) .
 $$
 :::
 
-:::teorema{#trinomio-speciale titolo="Special trinomial"}
+:::teorema{#trinomio-speciale titolo="Monic quadratic trinomial"}
 $$
 x^2 + (a + b)\,x + ab = (x + a)(x + b)
 $$
@@ -213,22 +213,22 @@ For example $x^2 + 5x + 6 = (x + 2)(x + 3)$, since $2 + 3 = 5$ and $2 \cdot 3 = 
 :::
 
 :::definizione{#strategia-di-fattorizzazione titolo="Factorization strategy"}
-The factorization of a polynomial proceeds in the following order, and after each step it starts again from the first step on the factors obtained.
+The factorization of a polynomial proceeds in the following order, and after *each* step it **starts again from the first step** on the factors obtained.
 
 1. Factoring out the common factor.
-2. Recognizing special products: square and cube of a binomial, difference of squares, sum and difference of cubes.
-3. For trinomials of the form $x^2 + sx + p$, the special trinomial.
+2. Recognizing standard algebraic identities: square and cube of a binomial, difference of squares, sum and difference of cubes.
+3. For trinomials of the form $x^2 + sx + p$, the monic quadratic trinomial.
 4. With four or more terms, factoring by grouping.
-5. Finding rational roots and Ruffini's rule: every root $c$ found produces the factor $x - c$ and lowers the degree of the quotient by one. The step also applies to second-degree trinomials $ax^2 + bx + c$ with $a \neq 1$ and rational roots, which are not special trinomials.
+5. Finding rational roots and synthetic division: every root $c$ found produces the factor $x - c$ and lowers the degree of the quotient by one. The step also applies to quadratic trinomials $ax^2 + bx + c$ with $a \neq 1$ and rational roots, which are not monic quadratic trinomials.
 
-The factorization **ends** when *every* factor has degree $1$ or is a second-degree factor with no real roots; how to recognize the latter with the discriminant is found in the chapter on polynomial equations and inequalities.
+The factorization **ends** when every factor has degree $1$ or is a quadratic factor **with no real roots**; how to recognize the latter with the discriminant is found in the chapter on polynomial equations and inequalities.
 :::
 
 :::esempio{titolo="A complete factorization"}
 $$
 2x^4 + 2x^3 - 12x^2 = 2x^2\,(x^2 + x - 6) = 2x^2\,(x + 3)(x - 2)
 $$
-The first step is **factoring out the common factor** $2x^2$. The factor $x^2 + x - 6$ is a **special trinomial**, since $3 + (-2) = 1$ and $3 \cdot (-2) = -6$, so it factors as $(x + 3)(x - 2)$. The non-constant factors, namely $x$ (which appears twice), $x + 3$ and $x - 2$, all have degree $1$, therefore the factorization is **complete**.
+The first step is **factoring out the common factor** $2x^2$. The factor $x^2 + x - 6$ is a **monic quadratic trinomial**, since $3 + (-2) = 1$ and $3 \cdot (-2) = -6$, so it factors as $(x + 3)(x - 2)$. The non-constant factors, namely $x$ (which appears twice), $x + 3$ and $x - 2$, all have degree $1$, therefore the factorization is **complete**.
 
 ::grafico{f="2*x^4+2*x^3-12*x^2" xmin=-3.6 xmax=2.5 ymin=-35 ymax=15 punti="-3,0,pieno;0,0,pieno;2,0,pieno" titolo="$y = 2x^4 + 2x^3 - 12x^2$: at the simple roots $-3$ and $2$ the graph crosses the $x$-axis; at the root $0$, double because of the factor $x^2$, it touches the axis without crossing it"}
 

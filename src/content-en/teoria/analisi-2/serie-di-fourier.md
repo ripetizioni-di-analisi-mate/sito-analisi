@@ -1,6 +1,6 @@
 ---
-titolo: Fourier series
-sommario: How a periodic function is expanded in a series of sines and cosines, how the coefficients are computed, at which points and in what sense the series converges, and how Parseval's identity links the function to its coefficients.
+titolo: Serie di Fourier
+sommario: Come una funzione periodica si sviluppa in serie di seni e coseni, come si calcolano i coefficienti, in quali punti e in che senso la serie converge, e come l'uguaglianza di Parseval lega la funzione ai suoi coefficienti.
 ---
 
 ## Periodic functions and trigonometric polynomials
@@ -9,7 +9,7 @@ sommario: How a periodic function is expanded in a series of sines and cosines, 
 $f : \mathbb{R} \to \mathbb{R}$ is **periodic** with period $T > 0$ if $f(x + T) = f(x)$ for every $x \in \mathbb{R}$. A function defined only on $[-\pi, \pi)$ extends uniquely to a $2\pi$-periodic function on $\mathbb{R}$, the **periodic extension**, by repeating its values on each interval $[\pi, 3\pi)$, $[-3\pi, -\pi)$ and so on. For an integrable $T$-periodic function the integral over one period does *not* depend on the starting point:
 $$
 \int_{a}^{a + T} f(x)\, dx = \int_{0}^{T} f(x)\, dx
-\qquad \text{for every } a \in \mathbb{R} .
+\qquad \text{per ogni } a \in \mathbb{R} .
 $$
 Periodic functions describe phenomena that repeat, such as oscillations, waves and signals. The theory is developed for the period $2\pi$, the common period of $\sin x$ and $\cos x$, and is carried over to an arbitrary period by a change of variable.
 
@@ -32,14 +32,14 @@ $$
 \begin{gathered}
 \int_{-\pi}^{\pi} \cos(nx) \cos(mx)\, dx =
 \begin{cases}
-0 & \text{if } n \neq m \\
-\pi & \text{if } n = m
+0 & \text{se } n \neq m \\
+\pi & \text{se } n = m
 \end{cases}
 \\[8pt]
 \int_{-\pi}^{\pi} \sin(nx) \sin(mx)\, dx =
 \begin{cases}
-0 & \text{if } n \neq m \\
-\pi & \text{if } n = m
+0 & \text{se } n \neq m \\
+\pi & \text{se } n = m
 \end{cases}
 \\[8pt]
 \int_{-\pi}^{\pi} \sin(nx) \cos(mx)\, dx = 0,
@@ -157,14 +157,14 @@ $$
 
 ## Pointwise convergence
 
-The notions of pointwise, uniform and total convergence for series of functions are treated in the chapter on sequences and series of functions.
+The notions of pointwise, uniform and normal convergence for series of functions are treated in the chapter on sequences and series of functions.
 
 :::richiamo{titolo="Pointwise convergence of a series of functions"}
 The series of functions $\sum f_n$ **converges pointwise** at $x$ if the numerical series $\sum f_n(x)$ converges; it converges pointwise on a set $I$ if it converges at every point of $I$.
 :::
 
 :::definizione{#regolare-a-tratti titolo="Piecewise smooth function"}
-A $2\pi$-periodic function $f : \mathbb{R} \to \mathbb{R}$ is **piecewise smooth** if there exists a partition $-\pi = x_0 < x_1 < \dots < x_k = \pi$ such that $f$ is differentiable with continuous derivative on each open interval $(x_{i-1}, x_i)$, and at each point $x_i$ the one-sided limits of $f$ and of $f'$ exist and are finite. A piecewise smooth function can have a *finite* number of jumps in one period; at the jump points $f(x^+)$ and $f(x^-)$ denote the right and left limits. The class includes the functions met in the exercises, such as step functions, the sawtooth wave and the periodic extensions of polynomials, and in this class the convergence theorems have a simple statement.
+$f : \mathbb{R} \to \mathbb{R}$, a $2\pi$-periodic function, is **piecewise smooth** if there exists a partition $-\pi = x_0 < x_1 < \dots < x_k = \pi$ such that $f$ is differentiable with a continuous derivative on each open interval $(x_{i-1}, x_i)$, and at each point $x_i$ the one-sided limits of $f$ and of $f'$ exist and are finite. A piecewise smooth function can have a *finite* number of jumps in one period; at the jump points $f(x^+)$ and $f(x^-)$ denote the right and left limits. The class includes the functions met in the exercises, such as step functions, the sawtooth wave and the periodic extensions of polynomials, and in this class the convergence theorems have a simple statement.
 :::
 
 :::teorema{#convergenza-puntuale titolo="Pointwise convergence theorem"}
@@ -196,12 +196,12 @@ The periodic extension of the sawtooth wave $f(x) = x$, $x \in [-\pi, \pi)$, has
 
 ## Uniform convergence
 
-:::richiamo{titolo="Total convergence (Weierstrass M-test)"}
-If $|f_n(x)| \leq M_n$ for every $x \in I$ and the numerical series $\sum M_n$ converges, then the series of functions $\sum f_n$ converges **totally**, hence **uniformly**, on $I$.
+:::richiamo{titolo="Normal convergence (Weierstrass M-test)"}
+If $|f_n(x)| \leq M_n$ for every $x \in I$ and the numerical series $\sum M_n$ converges, then the series of functions $\sum f_n$ converges **normally**, hence **uniformly**, on $I$.
 :::
 
 :::teorema{#convergenza-uniforme titolo="Uniform convergence for continuous piecewise smooth functions"}
-Let $f$ be a $2\pi$-periodic function, continuous on $\mathbb{R}$ and piecewise smooth. Then the series of the absolute values of the coefficients $\displaystyle\sum_{n=1}^{\infty} \bigl( |a_n| + |b_n| \bigr)$ converges, therefore the Fourier series converges **totally**, and hence **uniformly**, to $f$ on all of $\mathbb{R}$. Total convergence follows from the **Weierstrass M-test**, since $|a_n \cos(nx) + b_n \sin(nx)| \leq |a_n| + |b_n|$; the convergence of the series of coefficients is proved with Parseval's identity applied to the derivative and is left to the reference texts. To verify the continuity hypothesis for a function given on $[-\pi, \pi]$ one must check *also* the junction points $\pm\pi$, that is, that the values at the endpoints coincide: the extension of $x^2$ is continuous, that of $x$ is not.
+Let $f$ be a $2\pi$-periodic function, continuous on $\mathbb{R}$ and piecewise smooth. Then the series of the absolute values of the coefficients $\displaystyle\sum_{n=1}^{\infty} \bigl( |a_n| + |b_n| \bigr)$ converges, therefore the Fourier series converges **normally**, and hence **uniformly**, to $f$ on all of $\mathbb{R}$. Normal convergence follows from the **Weierstrass M-test**, since $|a_n \cos(nx) + b_n \sin(nx)| \leq |a_n| + |b_n|$; the convergence of the series of coefficients is proved with Parseval's identity applied to the derivative and is left to the reference texts. To verify the continuity hypothesis for a function given on $[-\pi, \pi]$ one must check *also* the junction points $\pm\pi$, that is, that the values at the endpoints coincide: the extension of $x^2$ is continuous, that of $x$ is not.
 :::
 
 :::richiamo{titolo="Continuity of the uniform limit"}
