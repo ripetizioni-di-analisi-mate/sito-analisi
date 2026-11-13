@@ -24,13 +24,11 @@ const tasti = [
   <label for={campo}>{en ? 'Write your answer' : es ? 'Escribe tu respuesta' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : es ? ' (puedes omitir la constante c)' : ' (la costante c si può tralasciare)'}</small>}</label>
   <div class="verifica-riga">
     {tipo ? (
-      <>
-        <input id={campo} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
-        <button type="submit">{en ? 'Check' : es ? 'Comprobar' : 'Verifica'}</button>
-      </>
+      <input id={campo} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
     ) : (
       <textarea id={campo} rows="3" autocomplete="off" aria-describedby={`${campo}-confronto`}></textarea>
     )}
+    <button type="submit">{en ? 'Submit' : es ? 'Enviar' : 'Invia'}</button>
   </div>
   <details class="verifica-tastiera">
     <summary>{en ? 'Math keyboard' : es ? 'Teclado matemático' : 'Tastiera matematica'}</summary>
@@ -46,17 +44,16 @@ const tasti = [
     </div>
   </details>
   {tipo ? (
-    <>
-      <p class="verifica-lettura" aria-live="polite"></p>
-      <p class="verifica-esito" role="status" aria-live="polite"></p>
-    </>
+    <p class="verifica-lettura" aria-live="polite"></p>
   ) : (
-    <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Compare your answer with the solution.' : es ? 'Compara tu respuesta con la solución.' : 'Confronta la tua risposta con la soluzione.'}</p>
+    <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Submit your answer to compare it with the solution.' : es ? 'Envía tu respuesta para compararla con la solución.' : 'Premi «Invia» per confrontare la tua risposta con la soluzione.'}</p>
   )}
+  <p class="verifica-esito" role="status" aria-live="polite"></p>
 </form>
 
 <style>
   .verifica-riga input { font-size: 1rem; }
+  .verifica-riga button { align-self: flex-start; min-height: 44px; flex-shrink: 0; }
   .verifica-riga textarea { flex: 1; min-width: 0; font: 1rem/1.3 var(--ui); padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); resize: vertical; }
   .verifica-riga textarea:focus { outline: 2px solid color-mix(in srgb, var(--accento) 40%, transparent); border-color: var(--accento); background: #fff; }
   .verifica-tastiera { margin-top: 0.35rem; color: var(--accento); }
@@ -67,6 +64,10 @@ const tasti = [
   .verifica-frazione { display: inline-grid; font-size: 0.77rem; }
   .verifica-frazione > :first-child { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
   .verifica-confronto { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  @media (max-width: 30rem) {
+    .verifica-riga { flex-wrap: wrap; }
+    .verifica-riga input, .verifica-riga textarea { flex-basis: 100%; }
+  }
 </style>
 
 <script>
@@ -78,19 +79,33 @@ const tasti = [
     giusta: 'Respuesta correcta.', sbagliata: 'El resultado es distinto. Puedes intentarlo de nuevo o pedir una pista a Pi debajo del ejercicio.',
     vicina: 'El valor se aproxima al resultado. Escribe el valor exacto con fracciones, raíces, π o e.',
     riprova: 'El resultado es distinto. Revisa los pasos e inténtalo de nuevo.', rete: 'Error de red. Inténtalo de nuevo.', exp: 'EXP',
+    vuota: 'Escribe tu respuesta antes de enviarla.',
+    confronto: 'Compara tu respuesta con la solución. Este ejercicio requiere una comprobación manual.',
+    riservata: 'Desbloquea la materia para comparar tu respuesta con la solución.',
+    senzaSoluzione: 'La solución no está disponible en esta página.',
   } : inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Correct answer.', sbagliata: 'The result is different. You can try again or ask Pi for a hint below the exercise.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
     riprova: 'The result is different. Check your work and try again.', rete: 'Network error: please try again.', exp: 'XP',
+    vuota: 'Write your answer before submitting it.',
+    confronto: 'Compare your answer with the solution. This exercise requires a manual check.',
+    riservata: 'Unlock the subject to compare your answer with the solution.',
+    senzaSoluzione: 'The solution is not available on this page.',
   } : {
     leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Risposta corretta.', sbagliata: 'Il risultato è diverso. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
     riprova: 'Il risultato è diverso. Controlla i passaggi e riprova.', rete: 'Errore di rete: riprova.', exp: 'EXP',
+    vuota: 'Scrivi la tua risposta prima di inviare.',
+    confronto: 'Confronta la tua risposta con la soluzione. Per questo esercizio la verifica è manuale.',
+    riservata: 'Sblocca la materia per confrontare la tua risposta con la soluzione.',
+    senzaSoluzione: 'La soluzione non è disponibile in questa pagina.',
   };
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
     if (f.dataset.pronto) continue;
     f.dataset.pronto = '1';
     const campo = f.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
+    // Il riferimento resta quello dell'esercizio anche dopo lo spostamento del modulo.
+    const esercizio = f.closest('.traccia') ?? f.parentElement;
     const corpo = f.previousElementSibling;
     corpo?.querySelector(':scope > .blocco-soluzione, :scope > .soluzione-riservata, :scope > .velo-blocco')?.before(f);
     // Tab passa al denominatore o all'esponente quando entrambi gli spazi sono stati inseriti insieme.
@@ -123,13 +138,13 @@ const tasti = [
       campo.setSelectionRange(cursore, cursore);
       campo.dispatchEvent(new Event('input', { bubbles: true }));
     });
-    if (!f.dataset.tipo) continue;
-    const lettura = f.querySelector<HTMLElement>('.verifica-lettura')!;
+    const lettura = f.querySelector<HTMLElement>('.verifica-lettura');
     const esito = f.querySelector<HTMLElement>('.verifica-esito')!;
     const bottone = f.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const mostraLettura = () => {
       const v = campo.value.trim();
       esito.textContent = ''; f.dataset.esito = '';
+      if (!lettura) return;
       if (!v) { lettura.textContent = ''; return; }
       const n = leggi(v);
       if (!n) { lettura.textContent = ''; return; }
@@ -139,7 +154,20 @@ const tasti = [
     f.addEventListener('submit', async (e) => {
       e.preventDefault();
       const risposta = campo.value.trim();
-      if (!risposta) { campo.focus(); return; }
+      if (!risposta) { esito.textContent = T.vuota; campo.focus(); return; }
+      if (!f.dataset.tipo) {
+        const soluzione = esercizio?.querySelector<HTMLDetailsElement>('details.blocco-soluzione, details.stem-feedback');
+        const riservata = esercizio?.querySelector<HTMLElement>('.soluzione-riservata, .velo-blocco');
+        if (soluzione) {
+          soluzione.open = true;
+          esito.textContent = T.confronto;
+          f.dataset.esito = 'confronto';
+        } else {
+          esito.textContent = riservata ? T.riservata : T.senzaSoluzione;
+        }
+        (soluzione ?? riservata)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        return;
+      }
       if (!leggi(risposta)) { esito.textContent = T.illeggibile; f.dataset.esito = 'illeggibile'; return; }
       bottone.disabled = true;
       const r = await fetch('/api/verifica', {
