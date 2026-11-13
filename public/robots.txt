@@ -21,6 +21,8 @@ User-agent: MistralAI-User
 Allow: /
 Disallow: /admin
 Disallow: /api/
+Disallow: /orientamento
+Disallow: /risorse/TestOrientamento.
 Disallow: /account
 Disallow: /accedi
 Disallow: /en/account

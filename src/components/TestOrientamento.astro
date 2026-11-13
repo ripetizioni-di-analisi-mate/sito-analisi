@@ -1,0 +1,66 @@
+---
+import { MATERIE } from '../data/materie';
+import { PROFILI_STUDIO } from '../data/orientamento-studio.mjs';
+import { AREE_UNIVERSITA } from '../data/orientamento-universita.mjs';
+import '../styles/orientamento.css';
+interface Props { tipo: 'studio' | 'universita' }
+const { tipo } = Astro.props;
+const studio = tipo === 'studio';
+const materie = MATERIE.filter((m) => m.attiva && PROFILI_STUDIO[m.slug]);
+const gruppi = [...new Set(materie.map((m) => m.gruppo))];
+const obiettivi = [
+  ['iniziare', 'Cominciare la disciplina', 'Verifico le basi per affrontare il corso.'],
+  ['recuperare', 'Recuperare le basi', 'Individuo i prerequisiti da riprendere.'],
+  ['riprendere', 'Riprendere lo studio', 'Controllo le basi e alcuni argomenti del corso.'],
+  ['esame', 'Preparare una prova', 'Controllo un campione di competenze della materia.'],
+];
+---
+<div class="orientamento ori-test" data-orientamento-test={tipo}>
+  <p class="sopratitolo">{studio ? 'Orientamento allo studio' : 'Orientamento universitario'}</p>
+  <h1>{studio ? 'Da dove comincio?' : 'Quale corso scegliere?'}</h1>
+  <p class="sommario ori-introduzione">{studio ? 'Verifica le basi della disciplina e individua le prime attività da affrontare.' : 'Le attività che ti interessano e le tue preferenze aiutano a scegliere quali percorsi approfondire.'}</p>
+  <noscript><p class="ori-avviso">Per svolgere il test occorre abilitare JavaScript. Puoi comunque esplorare <a href="/">le discipline del sito</a>.</p></noscript>
+  <p class="ori-nota" data-ori-caricamento role="status">Preparazione del test…</p>
+  <div class="ori-avviso" data-ori-ripresa hidden>
+    <p data-ori-ripresa-testo></p>
+    <div class="ori-azioni"><button class="bottone-primario" type="button" data-ori-riprendi>Riprendi</button><button class="ori-testo-bottone" type="button" data-ori-scartabozza>Elimina la bozza e ricomincia</button></div>
+  </div>
+  <form class="ori-configurazione" data-ori-configurazione hidden>
+    {studio ? <>
+      <label class="ori-campo" for="ori-materia">La disciplina
+        <select id="ori-materia" name="materia" required>
+          <option value="">Scegli la disciplina</option>
+          {gruppi.map((gruppo) => <optgroup label={gruppo}>{materie.filter((m) => m.gruppo === gruppo).map((m) => <option value={m.slug}>{m.titolo}</option>)}</optgroup>)}
+        </select>
+      </label>
+      <fieldset class="ori-obiettivi"><legend>Che cosa vuoi fare?</legend>
+        {obiettivi.map(([valore, titolo, nota], i) => <label class="ori-obiettivo"><input type="radio" name="obiettivo" value={valore} checked={i === 0} /><span><strong>{titolo}</strong><small>{nota}</small></span></label>)}
+      </fieldset>
+      <div class="ori-perimetro" data-ori-perimetro hidden><h2>Che cosa verifica questo test</h2><p data-ori-perimetro-testo></p><ul data-ori-competenze></ul></div>
+    </> : <>
+      <label class="ori-campo" for="ori-area">Hai già un’area in mente? <span class="ori-facoltativo">Facoltativo</span>
+        <select id="ori-area" name="areaScelta"><option value="">Voglio esplorare tutte le aree</option>{AREE_UNIVERSITA.map((a) => <option value={a.id}>{a.titolo}</option>)}</select>
+      </label>
+      <div class="ori-perimetro"><h2>Come funziona</h2><p>44 domande sulle attività che ti interessano e su ciò che cerchi negli studi. Puoi scegliere “Non conosco abbastanza questa attività”.</p><p>Il risultato riepiloga le tue risposte e propone corsi da confrontare. Scegliendo un’area puoi aggiungere fino a 6 domande sui suoi indirizzi.</p></div>
+    </>}
+    <label class="ori-consenso-locale"><input type="checkbox" name="conservaLocale" /><span>Conserva le risposte su questo dispositivo <small>Facoltativo · puoi riprendere entro 30 giorni dall’ultima attività.</small></span></label>
+    <p class="ori-nota">{studio ? 'Il risultato riguarda i quesiti svolti. Le soluzioni si aprono al termine.' : 'È un riepilogo degli interessi dichiarati; non valuta attitudini o personalità.'} <a href="/orientamento#metodo">Metodo</a> · <a href="/privacy#orientamento">Come trattiamo le risposte</a>.</p>
+    <button type="submit" class="bottone-primario" data-ori-inizia>Inizia il test <span aria-hidden="true">→</span></button>
+  </form>
+  <section class="ori-sessione" data-ori-sessione hidden aria-label="Test in corso">
+    <div class="ori-avanzamento"><p data-ori-contatore aria-live="polite"></p><button type="button" class="ori-testo-bottone" data-ori-pausa>Salva e interrompi</button></div>
+    <progress data-ori-progresso value="0" max="100" aria-label="Domande completate"></progress>
+    <p class="ori-etichetta" data-ori-blocco></p>
+    <form data-ori-form-domanda>
+      <fieldset class="ori-quesito"><legend data-ori-domanda tabindex="-1"></legend><div data-ori-figura></div><div class="ori-scelte" data-ori-scelte></div></fieldset>
+      <p class="ori-errore" data-ori-domanda-errore role="alert"></p>
+      <div class="ori-navigazione"><button type="button" class="bottone-secondario" data-ori-indietro>Precedente</button><button type="submit" class="bottone-primario" data-ori-avanti>Conferma e continua</button></div>
+      <button type="button" class="ori-testo-bottone" data-ori-aggiorna-risultato hidden>Aggiorna il risultato</button>
+    </form>
+    <p class="ori-nota" data-ori-salvataggio-locale role="status"></p>
+  </section>
+  <section class="ori-risultato" data-ori-risultato hidden aria-label="Il risultato del test" tabindex="-1"></section>
+  <div class="ori-gestione-locale" data-ori-gestione-locale hidden><button type="button" class="ori-testo-bottone" data-ori-elimina-locale>Cancella le risposte da questo dispositivo</button><p class="ori-nota" data-ori-locale-stato role="status"></p></div>
+  <p class="ori-errore" data-ori-errore role="alert"></p>
+</div>
+<script>import '../scripts/orientamento.mjs';</script>

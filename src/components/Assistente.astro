@@ -327,10 +327,12 @@ const s = lingua === 'fr' ? {
       }
       const attesa = aggiungi({ ruolo: 'attesa', testo: testi.attendi });
       if (!katex) import('katex').then((k) => { katex = k.default; }).catch(() => {});
-      const ps = parti();
-      const p = forzata && forzata.el === parte ? forzata : ps.find((x) => x.el === parte);
+      // I risultati di orientamento, anche nell'account, non entrano nel contesto inviato a Pi.
+      const contestoPaginaConsentito = !document.querySelector('[data-orientamento-test], [data-orientamento-salvati]');
+      const ps = contestoPaginaConsentito ? parti() : [];
+      const p = contestoPaginaConsentito ? (forzata && forzata.el === parte ? forzata : ps.find((x) => x.el === parte)) : undefined;
       // Pagine senza testo di studio (home, prezzi, guida…): si manda l'inizio del testo della pagina.
-      const pagina = !studio ? { titolo: document.querySelector('main h1')?.textContent?.trim() || document.title, testo: (document.querySelector('main')?.innerText || '').replace(/\s+\n/g, '\n').slice(0, 3000) } : null;
+      const pagina = contestoPaginaConsentito && !studio ? { titolo: document.querySelector('main h1')?.textContent?.trim() || document.title, testo: (document.querySelector('main')?.innerText || '').replace(/\s+\n/g, '\n').slice(0, 3000) } : null;
       const errore = (t: string) => {
         attesa.remove();
         conversazione.pop();

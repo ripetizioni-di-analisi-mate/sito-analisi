@@ -9,4 +9,4 @@ export const GIORNI_RIPROPOSTA = 14;
 // Secondi di navigazione prima dell'invito, mantenuti anche cambiando pagina nella stessa scheda.
 export const RITARDO_SECONDI = 30;
 // Pagine dove la barra non compare: accesso, pagamento, pagine riservate, prove in corso.
-export const PAGINE_SENZA_BARRA = /^\/(?:en\/)?(?:accedi|account|admin|reimposta-password|promemoria|prenota|invito|pacchetti)(?:\/|$)|\/sblocca\/?$|\/simulazione\/?$|\/domande\/?$/;
+export const PAGINE_SENZA_BARRA = /^\/(?:en\/)?(?:accedi|account|admin|reimposta-password|promemoria|prenota|invito|pacchetti|orientamento)(?:\/|$)|\/sblocca\/?$|\/simulazione\/?$|\/domande\/?$/;

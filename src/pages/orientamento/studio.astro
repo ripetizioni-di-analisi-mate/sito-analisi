@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import TestOrientamento from '../../components/TestOrientamento.astro';
+---
+<Base lingua="it" titolo="Da dove comincio a studiare?" percorso={[{ titolo: 'Orientamento', href: '/orientamento' }, { titolo: 'Da dove comincio?' }]}
+  descrizione="Scegli una disciplina e verifica le competenze di partenza. Ricevi attività ordinate con teoria, esempi ed esercizi."
+  seo={{ titolo: 'Da dove comincio a studiare? Test per disciplina', noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
+  <TestOrientamento tipo="studio" />
+</Base>
