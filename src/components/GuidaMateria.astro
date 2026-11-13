@@ -1,0 +1,55 @@
+---
+import { MATERIE, type Materia } from '../data/materie';
+import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
+import { originale } from '../lib/canonici';
+import { schedeLibere } from '../data/schede-libere.mjs';
+import { url } from '../lib/url';
+
+interface Props {
+  materia: Materia;
+  schede: { id: string; data: { titolo: string; parole: string[] } }[];
+}
+const { materia, schede } = Astro.props;
+const guida = GUIDE_DISCIPLINE[materia.slug];
+const argomenti = guida?.esempi.length ? guida.esempi : materia.argomenti.map((a) => a.slug);
+const esempi = argomenti.flatMap((slug) => {
+  const scheda = schede.filter((s) => s.id.startsWith(`${materia.slug}/${slug}/`))
+    .sort((a, b) => Number(a.id.split('/').pop()) - Number(b.id.split('/').pop()))
+    .find((s) => Number(s.id.split('/').pop()) <= schedeLibere(materia.slug, slug));
+  if (!scheda) return [];
+  const numero = scheda.id.split('/').pop()!;
+  const href = originale(materia.slug, slug, 'esercizi-svolti', numero)
+    ?? `/${materia.slug}/${slug}/esercizi-svolti/${numero}`;
+  return [{ ...scheda.data, href, argomento: materia.argomenti.find((a) => a.slug === slug)?.titolo }];
+}).slice(0, 3);
+const collegate = (guida?.collegate ?? []).map((slug) => MATERIE.find((m) => m.slug === slug && m.attiva))
+  .filter((m): m is Materia => Boolean(m));
+---
+{guida && <section class="guida-materia" aria-labelledby="guida-materia-titolo">
+  <h2 id="guida-materia-titolo">Studiare {materia.titolo}</h2>
+  <p>{guida.preparazione}</p>
+  <p>{guida.metodo}</p>
+  {esempi.length > 0 && <>
+    <h2>Esercizi svolti di {materia.titolo}</h2>
+    <p>Schede complete da leggere gratuitamente prima di proseguire con gli altri esercizi del programma.</p>
+    <ul class="elenco-esercizi">
+      {esempi.map((esempio) => <li><a href={url(esempio.href)}>
+        <span>{esempio.titolo}<span class="parole">{esempio.argomento}</span></span>
+      </a></li>)}
+    </ul>
+  </>}
+  {collegate.length > 0 && <>
+    <h2>Materie collegate</h2>
+    <ul>
+      {collegate.map((m) => <li><a href={url(`/${m.slug}`)}>{m.titolo}</a><p>{m.descrizione}</p></li>)}
+    </ul>
+  </>}
+  <p class="nota">Materiale a cura di <a href={url('/chi-sono')}>Carmine Tornincasa</a>.</p>
+</section>}
+
+<style>
+  .guida-materia { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--bordo, #ddd8cd); }
+  .guida-materia h2 { margin-top: 1.8rem; }
+  .guida-materia p, .guida-materia li { line-height: 1.65; }
+  .guida-materia li + li { margin-top: .75rem; }
+</style>

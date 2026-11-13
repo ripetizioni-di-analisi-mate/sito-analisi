@@ -19,6 +19,8 @@ const voci = await Promise.all(esercizi.map((e) => voceL(lingua, 'dafare', e.id)
 // Esercizi con la verifica della risposta (il risultato si ricava dalla soluzione, uguale nelle traduzioni).
 const risultati = Object.fromEntries(esercizi.map((e) => [e.id, risultatoDi(e)]));
 const nonTradotta = voci.some((v) => !v.tradotta);
+const haAltra = voci.length > 0 && (await Promise.all(voci.map(({ voce }) =>
+  voceL(lingua === 'it' ? 'en' : 'it', 'dafare', voce.id)))).every((v) => v.tradotta);
 const resi = await Promise.all(voci.map(async ({ voce: v }) => ({ v, Content: (await render(v)).Content })));
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
@@ -28,7 +30,7 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
 <Base
   titolo={`${arg.titolo} · ${t.sezioni.esercizi}`}
   descrizione={SEO(lingua).dafareListaDescr(arg.titolo, materiaL(lingua, materia).titolo, voci.length)}
-  seo={{ canonico: originale(materia, argomento, 'esercizi'), titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve, arg.breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'dafare', e.id))), soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'dafare', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
+  seo={{ canonico: originale(materia, argomento, 'esercizi'), titolo: SEO(lingua).dafareLista(arg.titolo, materiaL(lingua, materia).breve, arg.breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'dafare', e.id))), soloQuestaLingua: !haAltra }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni.esercizi }]}
   materia={materia} argomento={argomento} sezione="esercizi"
   precedente={precedente} successivo={successivo}

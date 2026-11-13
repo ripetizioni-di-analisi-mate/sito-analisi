@@ -15,6 +15,8 @@ const t = T(lingua);
 const arg = argomentoL(lingua, materia, argomento);
 const voci = await Promise.all(perArgomento(await getCollection(lingua === 'es' ? 'svolti_es' : 'svolti'), materia, argomento).map((e) => voceL(lingua, 'svolti', e.id)));
 const nonTradotta = voci.some((v) => !v.tradotta);
+const haAltra = voci.length > 0 && (await Promise.all(voci.map(({ voce }) =>
+  voceL(lingua === 'it' ? 'en' : 'it', 'svolti', voce.id)))).every((v) => v.tradotta);
 const { precedente, successivo } = vicini(materia, argomento, 'esercizi-svolti', lingua, await disponibilitaStudio(materia, argomento, lingua));
 const base = `/${materia}/${argomento}`;
 const mostraAccesso = materia === 'scienza-delle-costruzioni' && Boolean(materiaL(lingua, materia).prezzo);
@@ -28,7 +30,7 @@ const etichettaAccesso = (n: number) => n <= schedeLibere(materia, argomento)
   seo={{ canonico: originale(materia, argomento, 'esercizi-svolti'), titolo: SEO(lingua).svoltiLista(arg.titolo, materiaL(lingua, materia).breve, arg.breve), data: piuRecente(...voci.map(({ voce: e }) => dataContenuto(lingua, 'svolti', e.id))), schema: [{
     '@type': 'ItemList', name: `${arg.titolo} · ${t.sezioni['esercizi-svolti']}`, numberOfItems: voci.length,
     itemListElement: voci.map(({ voce: e }, i) => ({ '@type': 'ListItem', position: i + 1, name: e.data.titolo, url: assoluto(link(lingua, `${base}/esercizi-svolti/${numero(e.id)}`)) })),
-  }], soloQuestaLingua: lingua === 'it' ? !(await voceL('en', 'svolti', voci[0]?.voce.id ?? '')).tradotta : nonTradotta }}
+  }], soloQuestaLingua: !haAltra }}
   percorso={[{ titolo: arg.breve, href: link(lingua, `${base}/teoria`) }, { titolo: t.sezioni['esercizi-svolti'] }]}
   materia={materia} argomento={argomento} sezione="esercizi-svolti"
   precedente={precedente} successivo={successivo}

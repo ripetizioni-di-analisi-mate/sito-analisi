@@ -14,7 +14,8 @@ interface Props { lingua: Lingua; materia: string; argomento: string; n: string 
 const { lingua, materia, argomento, n } = Astro.props;
 const t = T(lingua);
 const id = `${materia}/${argomento}/${n}`;
-const fratelli = perArgomento(await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare'), materia, argomento);
+const eserciziMateria = (await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare')).filter((v) => v.id.startsWith(`${materia}/`));
+const fratelli = perArgomento(eserciziMateria, materia, argomento);
 const risultato = risultatoDi(fratelli.find((x) => x.id === id));
 const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'dafare', id);
@@ -22,6 +23,8 @@ const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'dafare',
 const [tPrec, tSucc] = [await titolo(fratelli[i - 1]), await titolo(fratelli[i + 1])];
 const haAltra = (await voceL(lingua === 'it' ? 'en' : 'it', 'dafare', id)).tradotta;
 const arg = argomentoL(lingua, materia, argomento);
+const titoloRipetuto = eserciziMateria.filter((v) => v.data.titolo === voce.data.titolo).length > 1;
+const titoloSeo = SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve, arg.breve, titoloRipetuto ? n : undefined);
 const { Content } = await render(voce);
 const ancore = titoliAncore((await voceL(lingua, 'teoria', `${materia}/${argomento}`)).voce?.body);
 const base = `/${materia}/${argomento}`;
@@ -38,7 +41,7 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
 <Base
   titolo={`${arg.breve} · ${t.esercizioDaFare} ${n}`}
   descrizione={descrizioneSeo}
-  seo={{ canonico: originale(materia, argomento, 'esercizi', n), titolo: SEO(lingua).dafare(voce.data.titolo, materiaL(lingua, materia).breve, arg.breve), tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
+  seo={{ canonico: originale(materia, argomento, 'esercizi', n), titolo: titoloSeo, tipo: 'article', soloQuestaLingua: !haAltra, data: dataContenuto(lingua, 'dafare', id), schema: [{ ...{
   '@type': 'LearningResource', name: voce.data.titolo, description: descrizioneSeo, learningResourceType: 'Exercise', inLanguage: lingua,
   educationalLevel: SEO(lingua).livelloDi(materiaL(lingua, materia).titolo), url: assoluto(Astro.url.pathname),
   isPartOf: { '@type': 'Course', '@id': `${assoluto(link(lingua, `/${materia}`))}#corso`, name: materiaL(lingua, materia).titolo },

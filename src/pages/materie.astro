@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { MATERIE } from '../data/materie';
+import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
+import { elencoCorsi } from '../lib/seo';
+import { url } from '../lib/url';
+
+const materie = MATERIE.filter((m) => m.attiva);
+const gruppi = [...new Set(materie.map((m) => m.gruppo))];
+const descrizioni: Record<string, string> = {
+  'Università': 'Programmi per gli esami di matematica, fisica, economia e ingegneria, con teoria e schede svolte per argomento.',
+  'Superiori': 'Matematica, fisica e informatica per anno scolastico, con spiegazioni ed esercizi per le verifiche.',
+  'Concorsi': 'Calcolo e ragionamento logico per le prove a quiz dei concorsi pubblici.',
+  'Percorso per principianti': 'Percorsi gratuiti per riprendere le operazioni, le equazioni e le prime leggi della fisica.',
+  'Semestre filtro': 'Basi matematiche e materiali di fisica, chimica e biologia per il semestre filtro di Medicina.',
+  'TOLC, OFA e test di ingresso': 'Preparazione ai test di ingresso con ripasso per argomento, quiz commentati e simulazioni.',
+};
+---
+<Base titolo="Tutte le materie" lingua="it"
+  descrizione="Tutte le materie di Ripetizioni di Analisi. Programmi, teoria ed esercizi svolti per università, superiori, concorsi, TOLC e semestre filtro."
+  percorso={[{ titolo: 'Tutte le materie' }]}
+  seo={{ titolo: 'Materie, programmi ed esercizi svolti | Ripetizioni di Analisi', soloQuestaLingua: true, senzaInglese: true, schema: [elencoCorsi(materie, 'it')] }}>
+  <h1>Materie, programmi ed esercizi svolti</h1>
+  <p class="sommario">{materie.length} percorsi con capitoli di teoria, esercizi svolti e domande di ripasso. Le pagine delle materie presentano il programma e le anteprime disponibili.</p>
+  <nav aria-label="Percorsi di studio">
+    <ul>{gruppi.map((gruppo, i) => <li><a href={`#gruppo-${i}`}>{gruppo}</a></li>)}</ul>
+  </nav>
+  {gruppi.map((gruppo, i) => <section aria-labelledby={`gruppo-${i}`}>
+    <h2 id={`gruppo-${i}`}>{gruppo}</h2>
+    <p>{descrizioni[gruppo]}</p>
+    <ul class="catalogo-materie">
+      {materie.filter((m) => m.gruppo === gruppo).map((m) => <li>
+        <h3><a href={url(`/${m.slug}`)}>{m.titolo}</a></h3>
+        <p>{GUIDE_DISCIPLINE[m.slug]?.descrizione ?? m.descrizione}</p>
+        <p class="nota">{m.argomenti.length} capitoli · {m.prezzo ? 'Anteprime gratuite e accesso completo a pagamento' : 'Accesso gratuito'}</p>
+      </li>)}
+    </ul>
+  </section>)}
+</Base>
+<style>
+  section { margin-top: 2.5rem; }
+  .catalogo-materie { padding: 0; list-style: none; }
+  .catalogo-materie > li { padding: 1.1rem 0; border-bottom: 1px solid var(--bordo, #ddd8cd); }
+  .catalogo-materie h3, .catalogo-materie p { margin: .35rem 0; }
+</style>
