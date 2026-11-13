@@ -209,7 +209,10 @@ test('GM attivo riceve pagine e bundle senza cache o validator; common e KaTeX r
   const b = banco(t), io = await b.credenziali('gm-pagine@test.invalid');
   const richieste = risorseFittizie(b);
   const condizionali = { 'if-none-match': '"asset-di-prova"', 'if-modified-since': 'Fri, 13 Nov 2026 12:00:00 GMT', 'if-match': '*', 'if-unmodified-since': 'Fri, 13 Nov 2026 12:00:00 GMT', 'if-range': '"asset-di-prova"' };
-  for (const path of ['/orientamento', '/orientamento/studio', '/orientamento/universita', bundleRiservato, bundleRiservato + '.map']) {
+  // «Quale corso scegliere?» è sospeso: per il GM l'indirizzo porta a «Da dove comincio?».
+  const sospeso = await b.api(io, 'GET', undefined, {}, '/orientamento/universita');
+  assert.equal(sospeso.status, 302); assert.equal(sospeso.headers.get('location'), '/orientamento/studio');
+  for (const path of ['/orientamento', '/orientamento/studio', bundleRiservato, bundleRiservato + '.map']) {
     const r = await b.api(io, 'GET', undefined, condizionali, path);
     assert.equal(r.status, 200, path); assertPrivata(r);
     assert.match(r.headers.get('vary'), /Accept-Encoding/);

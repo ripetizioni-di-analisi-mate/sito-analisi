@@ -955,6 +955,10 @@ export default {
       if (negata) return negata;
       req = richiestaPrivataOrientamento(req);
     }
+    // «Quale corso scegliere?» sospeso (13/11/2026, richiesta di Carmine): l'indirizzo porta a «Da dove comincio?».
+    if (/^\/orientamento\/universita\/?$/.test(p)) {
+      return new Response(null, { status: 302, headers: { location: '/orientamento/studio', 'cache-control': 'no-store' } });
+    }
 
     if (p.startsWith('/offerta-email/') && (req.method === 'GET' || req.method === 'HEAD')) {
       const [, , materia, valore, resto] = p.split('/');

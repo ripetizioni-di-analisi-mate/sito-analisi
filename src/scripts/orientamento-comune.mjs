@@ -192,7 +192,8 @@ export function avviaRisultatiSalvati(contesto = document) {
         await verificaGmOrientamento(accountAtteso);
         if (corrente !== caricamento) return;
         pulisciBozzeScadute();
-        const record = Array.isArray(data.risultati) ? data.risultati : [];
+        // «Quale corso scegliere?» è sospeso: si mostrano solo i risultati di «Da dove comincio?».
+        const record = Array.isArray(data.risultati) ? data.risultati.filter((r) => r.tipo === 'studio') : [];
         stato.textContent = record.length ? 'I risultati sono visibili soltanto nel tuo account.' : 'I risultati che scegli di salvare al termine di un test compariranno qui.';
         for (const r of record) {
           const li = elemento('li', null, 'ori-salvato');

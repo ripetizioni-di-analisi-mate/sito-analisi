@@ -3,8 +3,8 @@ import Base from '../../layouts/Base.astro';
 import '../../styles/orientamento.css';
 ---
 <Base lingua="it" titolo="Orientamento" percorso={[{ titolo: 'Orientamento' }]}
-  descrizione="Anteprima riservata ai GM: verifica le basi di una disciplina e confronta i percorsi universitari attraverso domande su interessi e preferenze."
-  seo={{ titolo: 'Orientamento allo studio e alla scelta universitaria', noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
+  descrizione="Anteprima riservata ai GM: verifica le basi di una disciplina e ricevi un percorso collegato a teoria ed esercizi."
+  seo={{ titolo: 'Orientamento allo studio: da dove comincio?', noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
   <div class="orientamento" id="orientamento-home">
     <p class="sopratitolo">Anteprima riservata ai GM</p>
     <h1>Orientamento</h1>
@@ -16,13 +16,6 @@ import '../../styles/orientamento.css';
         <h2>Da dove comincio?</h2>
         <p>Scegli una disciplina, verifica le basi e ricevi un percorso collegato a teoria ed esercizi.</p>
         <span class="ori-ingresso-fondo">Trova il tuo punto di partenza <span aria-hidden="true">→</span></span>
-      </a>
-      <a class="ori-ingresso ori-ingresso-universita" href="/orientamento/universita">
-        <span class="ori-icona" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m2 12 14-7 14 7-14 7Z"/><path d="M8 15v8c4 4 12 4 16 0v-8M29 13v10"/></svg></span>
-        <span class="ori-etichetta">Orientamento universitario</span>
-        <h2>Quale corso scegliere?</h2>
-        <p>Esplora interessi e preferenze. Confronta più percorsi e scopri che cosa approfondire.</p>
-        <span class="ori-ingresso-fondo">Esplora i percorsi universitari <span aria-hidden="true">→</span></span>
       </a>
     </div>
     <p class="ori-nota">In questa anteprima l’accesso è riservato agli account GM. Scegli tu se conservare le risposte sul dispositivo o salvare il risultato nell’account. <a href="/privacy#orientamento">Conservazione e cancellazione</a>.</p>
@@ -37,13 +30,9 @@ import '../../styles/orientamento.css';
       <h2>Da una risposta a un’attività</h2>
       <p>Il test di studio propone tre quesiti per ciascuna delle sei competenze indicate prima di cominciare. Se le risposte sulla stessa competenza sono diverse, aggiunge un quesito di conferma. Le soluzioni permettono di controllare ogni correzione.</p>
       <p>Le risposte distinguono argomenti nuovi, passaggi da riprendere e quesiti risolti. Il piano comincia dalla prima base da riprendere o studiare, secondo l’ordine dei prerequisiti della disciplina, e collega spiegazione, esempio ed esercizi. Un risultato positivo riguarda soltanto i quesiti svolti.</p>
-      <h2>Dagli interessi ai corsi da confrontare</h2>
-      <p>Il questionario universitario raccoglie due risposte per ogni area. Mette in evidenza le attività valutate “Molto” o “Moltissimo” e mostra il collegamento editoriale ai percorsi. Le altre risposte restano consultabili; “Non conosco abbastanza” conserva il suo significato di attività da conoscere.</p>
-      <p>Le aree con entrambe le risposte alte vengono presentate insieme. Anche una sola risposta alta rimane visibile. Quando le possibilità sono molte, scegli tu due aree da confrontare. Gli approfondimenti riguardano soltanto la famiglia che scegli; le preferenze di studio e le priorità indicano che cosa controllare nei piani dei corsi.</p>
-      <p>Queste regole descrivono le risposte date. Non attribuiscono punteggi di attitudine, profili di personalità, percentuali di compatibilità o probabilità di successo. Il questionario è originale e non è stato validato come test psicometrico. Per una scelta concreta occorre verificare programmi, requisiti e attività sul sito dell’istituzione e, se utile, confrontarsi con il suo servizio di orientamento.</p>
       <h2>Servizi consultati per l’impostazione</h2>
-      <p>Dalle <a href="https://www.orientazione.it/per-chi-studia/pps-prove-di-posizionamento" target="_blank" rel="noopener noreferrer">PPS di CISIA</a> abbiamo ripreso il principio di collegare correzione e ripasso; dalle informazioni pubbliche di <a href="https://www.almalaurea.it/orientamento/strumenti-orientamento-universitario/almaorientati" target="_blank" rel="noopener noreferrer">AlmaOrièntati</a>, l’utilità di collegare interessi e contenuti dei corsi. <a href="https://www.universitaly.it/it/cerca-corsi" target="_blank" rel="noopener noreferrer">Universitaly</a> permette di cercare l’offerta ufficiale delle università e delle istituzioni AFAM.</p>
-      <p>Domande, testi e regole di questo sito sono nostri. I collegamenti permettono di consultare servizi distinti: non implicano affiliazioni o approvazioni. Il nostro questionario non riproduce i loro test o i loro algoritmi; in particolare non calcola corrispondenze sui CFU dei singoli corsi.</p>
+      <p>Dalle <a href="https://www.orientazione.it/per-chi-studia/pps-prove-di-posizionamento" target="_blank" rel="noopener noreferrer">PPS di CISIA</a> abbiamo ripreso il principio di collegare correzione e ripasso.</p>
+      <p>Domande, testi e regole di questo sito sono nostri. I collegamenti permettono di consultare servizi distinti: non implicano affiliazioni o approvazioni. Il nostro test non riproduce le loro prove.</p>
       <p><a href="/termini#orientamento">Condizioni del servizio</a> · <a href="/privacy#orientamento">Informativa sulle risposte</a>.</p>
     </details>
   </div>
