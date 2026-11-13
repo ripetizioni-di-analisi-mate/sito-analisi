@@ -62,6 +62,17 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     </div>
   )}
   {lingua === 'it' && (
+    <div class="lezioni-indice" data-orientamento-gm hidden>
+      <p class="indice-materia"><span>Orientamento</span></p>
+      <ol class="indice-materie"><li style="--colore-materia: var(--accento)">
+        <a class="voce-materia" href="/orientamento" aria-current={qui.startsWith('/orientamento') ? 'page' : undefined}>
+          <span class="lezioni-icona" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="m13.7 6.3-2.1 5.3-5.3 2.1 2.1-5.3Z"/></svg></span>
+          <span class="materia-testo"><span class="materia-nome">Trova il tuo punto di partenza</span><small class="lezioni-sotto">Studio e scelta universitaria</small></span>
+        </a>
+      </li></ol>
+    </div>
+  )}
+  {lingua === 'it' && (
     <a class="indice-pacchetti" href="/pacchetti" data-sconto-bronzo aria-current={qui === '/pacchetti' ? 'page' : undefined}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
       <span data-luccichio-bronzo>Pacchetti e sconti</span>

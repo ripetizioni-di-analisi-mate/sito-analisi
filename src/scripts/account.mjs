@@ -1,6 +1,7 @@
 import { accountTesti } from '../lib/account-testi.mjs';
 import { caricaPercorsoStudio, destinazioneObiettivo, destinazioneSessione, leggiCatalogoStudio } from '../lib/percorso-studio.mjs';
 import { stemmaSVG, rangoDi, nomeRango, stileRango } from '../../worker/stemmi.mjs';
+import { avviaRisultatiSalvati } from './orientamento-comune.mjs';
 
 const root = document.getElementById('account-page');
 if (root) avviaAccount(root);
@@ -61,6 +62,7 @@ export function avviaAccount(root) {
     attiva(hash === 'percorso' ? 'progressi' : hash === 'dispositivi' ? 'impostazioni' : hash);
     if (hash === 'dispositivi' && io) q('dispositivi').scrollIntoView({ block: 'start' });
     if (hash === 'videocorsi') root.querySelector('#videocorsi')?.scrollIntoView({ block: 'start' });
+    if (hash === 'orientamento' && io?.gm === true) root.querySelector('#orientamento')?.scrollIntoView({ block: 'start' });
   }
   schede.forEach((b) => b.addEventListener('click', () => attiva(b.dataset.area, true)));
   root.querySelector('.schede-account').addEventListener('keydown', (event) => {
@@ -366,6 +368,9 @@ export function avviaAccount(root) {
     q('nome-account').textContent = io.nome || '—'; q('email-account').textContent = io.email;
     nome.elements.nome.value = io.nome || '';
     q('chi').hidden = true; q('pannello').hidden = false; esci.hidden = false;
+    // Riusa l'identità appena verificata: Premium da solo non apre l'anteprima GM.
+    document.querySelectorAll('[data-orientamento-gm]').forEach((el) => { el.hidden = io.gm !== true; });
+    if (lingua === 'it' && io.gm === true) avviaRisultatiSalvati(root);
     daHash();
     await Promise.allSettled([mostraContenuti(), caricaPercorso()]);
   })();

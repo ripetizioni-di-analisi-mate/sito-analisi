@@ -7,6 +7,7 @@ import remarkTracce from './src/plugins/remark-tracce.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from './src/data/cataloghi-studio.mjs';
+import verificaBundleOrientamento from './scripts/orientamento-bundle.mjs';
 
 // Astro conserva in cache le pagine già rese e non si accorge se cambiano i plugin (figure, legende, blocchi):
 // se il codice dei plugin è cambiato dall'ultima build, la cache dei contenuti si svuota.
@@ -52,5 +53,8 @@ export default defineConfig({
     rehypePlugins: [[rehypeKatex, { strict: false, output: 'html' }]],
     shikiConfig: { theme: 'github-light' },
   },
-  vite: { define: { 'import.meta.env.ANTEPRIMA': JSON.stringify(anteprima) } },
+  vite: {
+    define: { 'import.meta.env.ANTEPRIMA': JSON.stringify(anteprima) },
+    plugins: [verificaBundleOrientamento()],
+  },
 });

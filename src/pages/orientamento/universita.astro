@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import TestOrientamento from '../../components/TestOrientamento.astro';
+---
+<Base lingua="it" titolo="Quale corso universitario scegliere?" percorso={[{ titolo: 'Orientamento', href: '/orientamento' }, { titolo: 'Scelta universitaria' }]}
+  descrizione="Esplora interessi e preferenze di studio con domande originali e confronta percorsi universitari motivati dalle tue risposte."
+  seo={{ titolo: 'Orientamento universitario: quale corso scegliere?', noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
+  <TestOrientamento tipo="universita" />
+</Base>

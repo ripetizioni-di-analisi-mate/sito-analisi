@@ -1,0 +1,10 @@
+---
+import { PROFILI_STUDIO } from '../data/orientamento-studio.mjs';
+interface Props { materia: string }
+const { materia } = Astro.props;
+---
+{PROFILI_STUDIO[materia] && <p class="orientamento-materia" data-orientamento-gm hidden><a href={`/orientamento/studio?materia=${encodeURIComponent(materia)}`}>Da dove cominciare? Verifica le tue basi <span aria-hidden="true">→</span></a></p>}
+<style>
+  .orientamento-materia{font-family:var(--ui);font-size:.95rem;margin:1rem 0 1.4rem}
+  .orientamento-materia a{color:var(--azione);text-decoration:underline;text-underline-offset:.18em}
+</style>

@@ -50,6 +50,10 @@ import { programmaAvvisiLega, inviaAvvisoLega, paginaAvvisiDisattivati } from '.
 import { creaTabelleCompatibilita, archivioCompatibilita, gestisciCompatibilita, paginaCompito } from './compatibilita.mjs';
 import { MAX_DISPOSITIVI, nuovoIdDispositivo, creaTabelleDispositivi, archivioDispositivi, sessioneDispositivoValida,
   cookieGestioneDispositivi, stessaOrigineDispositivi, gestisciDispositivi } from './dispositivi.mjs';
+import {
+  creaTabelleOrientamento, archivioOrientamento, gestisciOrientamento, tipoRisorsaOrientamento,
+  proteggiOrientamento, richiestaPrivataOrientamento, rispostaPrivataOrientamento, normalizzaPercorsoOrientamento,
+} from './orientamento.mjs';
 
 const A_PAGAMENTO = Object.keys(PREZZI);
 const MATERIE_PREMIUM = MATERIE.filter((m) => m.attiva && Object.hasOwn(PREZZI, m.slug)).map((m) => m.slug);
@@ -206,6 +210,7 @@ export class Archivio {
       punto TEXT, testo TEXT, email TEXT, letta INTEGER DEFAULT 0)`);
     // livelli, punti esperienza, sessioni di studio, obiettivi e traguardi (worker/livelli.mjs)
     creaTabelleLivelli(this.sql);
+    creaTabelleOrientamento(this.sql);
     creaTabelleEmail(this.sql);
     creaTabellePromozioni(this.sql);
     // lezioni individuali prenotate dal sito (worker/prenotazioni.mjs)
@@ -258,6 +263,10 @@ export class Archivio {
     if (pathname.startsWith('/gruppi-file-salva') || pathname.startsWith('/gruppi-file-apri')) return archivioFileGruppi(this, req, pathname);
     if (pathname === '/comp-pagina') return paginaCompito(this, req);
     const c = req.method === 'POST' ? await req.json() : {};
+    if (pathname.startsWith('/ori-')) {
+      const r = archivioOrientamento(this, pathname, c);
+      if (r) return Response.json(r);
+    }
     if (pathname.startsWith('/dig-')) return Response.json(archivioStripeDigitale(this, pathname, c));
     if (pathname.startsWith('/postvendita-')) return Response.json(archivioPostvendita(this, pathname, c));
     if (pathname.startsWith('/promo-')) return Response.json(await archivioPromozioni(this, pathname, c, firmaToken, leggiToken));
@@ -898,6 +907,7 @@ export default {
   // Alle 16:30 UTC (17:30 in Italia d'inverno) i promemoria per tornare a studiare (worker/promemoria.mjs).
   async scheduled(evento, env, ctx) {
     if (evento.cron === CRON_LEZIONI) {
+      ctx.waitUntil(aDO(env, '/ori-pulisci').catch(() => console.error('orientamento: pulizia rinviata')));
       ctx.waitUntil(avvisiLezioni(env, aDO, firmaToken).then((r) => { if (r.lezioni) console.log('avvisi lezioni', JSON.stringify(r)); })
         .catch((e) => console.log('avvisi lezioni', String(e?.message || e))));
       ctx.waitUntil(recuperaOrdiniDigitali(env, { aDO, dopoAcquistoMateria }).catch(() => console.error('acquisti digitali: recupero rinviato')));
@@ -921,6 +931,9 @@ export default {
   async fetch(req, env, ctx) {
     const url = new URL(req.url);
     const p = url.pathname.replace(/\.html$/, '');
+    const percorsoNormalizzato = normalizedStudyPath(url.pathname);
+    const percorsoOrientamento = normalizzaPercorsoOrientamento(url.pathname);
+    const orientamentoRiservato = tipoRisorsaOrientamento(percorsoNormalizzato) || tipoRisorsaOrientamento(percorsoOrientamento);
     const vendita = env.VENDITA !== '0';
     const scienzaAPagamento = vendita && A_PAGAMENTO.includes(SCIENZA_DELLE_COSTRUZIONI);
     const POST = req.method === 'POST';
@@ -933,6 +946,14 @@ export default {
     if (url.hostname === 'www.ripetizionidianalisi.com' || (url.protocol === 'http:' && url.hostname === 'ripetizionidianalisi.com')) {
       const verso = new URL(url); verso.protocol = 'https:'; verso.hostname = 'ripetizionidianalisi.com'; verso.port = '';
       return Response.redirect(verso.toString(), req.method === 'GET' || req.method === 'HEAD' ? 301 : 308);
+    }
+
+    // Pagine, bundle e relative mappe richiedono una sessione GM verificata.
+    // Il ruolo viene letto dall'archivio anche per gli accessi diretti ai file.
+    if (orientamentoRiservato) {
+      const negata = await proteggiOrientamento(req, env, { aDO, tokenSessione, durataSessione: DURATA_SESSIONE }, orientamentoRiservato);
+      if (negata) return negata;
+      req = richiestaPrivataOrientamento(req);
     }
 
     if (p.startsWith('/offerta-email/') && (req.method === 'GET' || req.method === 'HEAD')) {
@@ -1005,6 +1026,9 @@ export default {
     }
 
     // ===== account =====
+    if (percorsoNormalizzato === '/api/orientamento' || percorsoOrientamento === '/api/orientamento') {
+      return gestisciOrientamento(req, env, { aDO, json, tokenSessione, durataSessione: DURATA_SESSIONE });
+    }
     if (p === '/api/dispositivi' || p.startsWith('/api/dispositivi/')) {
       return gestisciDispositivi(req, env, p, { aDO, json, tokenSessione, leggiToken, leggiCookie, cookieDispositivo, apriSessione });
     }
@@ -1692,6 +1716,7 @@ export default {
       }
     }
     if (!risposta) risposta = await env.ASSETS.fetch(pagina && req.method === 'GET' ? senzaCondizioni(req) : req);
+    if (orientamentoRiservato) risposta = rispostaPrivataOrientamento(risposta);
     // Indirizzi tecnici di Cloudflare (*.workers.dev, anteprime dei rami): mai negli indici, la pagina vera è su ripetizionidianalisi.com.
     if (url.hostname.endsWith('.workers.dev')) {
       risposta = new Response(risposta.body, risposta);
@@ -1716,6 +1741,11 @@ export default {
       risposta.headers.set('cache-control', 'private, no-store');
       risposta.headers.delete('etag');
       risposta.headers.delete('last-modified');
+      if (io?.gm !== true) {
+        risposta = new HTMLRewriter().on('[data-orientamento-gm]', {
+          element(element) { element.remove(); },
+        }).transform(risposta);
+      }
       if (corsoUsa) {
         const rimuovi = { element(element) { element.remove(); } };
         const accesso = new HTMLRewriter();
