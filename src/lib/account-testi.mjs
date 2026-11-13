@@ -1,5 +1,6 @@
 export function accountTesti(lingua) {
   return lingua === 'fr' ? {
+    esci: 'Se déconnecter', uscitaInCorso: 'Déconnexion…', erroreUscita: 'La déconnexion n’a pas abouti. Vérifie ta connexion et réessaie.',
     studio: 'Ton espace de travail', contenuti: 'Tes supports', riprendi: 'Reprendre', ultima: 'Ta dernière séance',
     progressi: 'Progression', impostazioni: 'Paramètres', settimana: 'Cette semaine', minuti: 'Temps de travail', corrette: 'Bonnes réponses', giorni: 'Jours travaillés',
     obiettivo: 'Ton prochain objectif', raggiunti: 'Réussites', attivita: 'Activité récente', tutti: 'Voir toutes les réussites',
@@ -21,6 +22,7 @@ export function accountTesti(lingua) {
     limite: 'Niveau maximal', punti: 'XP', totale: 'XP au total', livello: 'Niveau', alLivello: 'pour le niveau',
     completato: 'Terminé', nessunObiettivo: 'Tes prochains objectifs hebdomadaires s’afficheront ici.',
   } : lingua === 'es' ? {
+    esci: 'Cerrar sesión', uscitaInCorso: 'Cerrando sesión…', erroreUscita: 'No se ha podido cerrar la sesión. Comprueba tu conexión y vuelve a intentarlo.',
     studio: 'Tu espacio de estudio', contenuti: 'Tus materiales', riprendi: 'Seguir estudiando', ultima: 'Lo último que estudiaste',
     progressi: 'Progreso', impostazioni: 'Ajustes', settimana: 'Esta semana', minuti: 'Tiempo de estudio', corrette: 'Respuestas correctas', giorni: 'Días de estudio',
     obiettivo: 'Tu próximo objetivo', raggiunti: 'Logros conseguidos', attivita: 'Actividad reciente', tutti: 'Ver todos los logros',
@@ -42,6 +44,7 @@ export function accountTesti(lingua) {
     limite: 'Nivel máximo', punti: 'XP', totale: 'XP en total', livello: 'Nivel', alLivello: 'para el nivel',
     completato: 'Completado', nessunObiettivo: 'Aquí aparecerán tus próximos objetivos semanales.',
   } : lingua === 'de' ? {
+    esci: 'Vom Konto abmelden', uscitaInCorso: 'Abmeldung läuft …', erroreUscita: 'Die Abmeldung konnte nicht abgeschlossen werden. Prüfe deine Verbindung und versuche es erneut.',
     studio: 'Dein Lernbereich', contenuti: 'Deine Lernmaterialien', riprendi: 'Weiterlernen', ultima: 'Zuletzt gelernt',
     progressi: 'Lernfortschritt', impostazioni: 'Einstellungen', settimana: 'Diese Woche', minuti: 'Lernzeit', corrette: 'Richtige Antworten', giorni: 'Lerntage',
     obiettivo: 'Dein nächstes Ziel', raggiunti: 'Erreichte Meilensteine', attivita: 'Letzte Aktivitäten', tutti: 'Alle Meilensteine anzeigen',
@@ -64,6 +67,7 @@ export function accountTesti(lingua) {
     limite: 'Höchste Stufe', punti: 'XP', totale: 'XP insgesamt', livello: 'Stufe', alLivello: 'bis Stufe',
     completato: 'Abgeschlossen', nessunObiettivo: 'Hier erscheinen deine nächsten Wochenziele.',
   } : lingua === 'en' ? {
+    esci: 'Sign out', uscitaInCorso: 'Signing out…', erroreUscita: 'Could not sign out. Check your connection and try again.',
     studio: 'Your study', contenuti: 'Your content', riprendi: 'Resume', ultima: 'Pick up where you left off',
     progressi: 'Progress', impostazioni: 'Settings', settimana: 'This week', minuti: 'Active study', corrette: 'Correct answers', giorni: 'Study days',
     obiettivo: 'Your next goal', raggiunti: 'Achieved milestones', attivita: 'Recent activity', tutti: 'Show all milestones',
@@ -80,6 +84,7 @@ export function accountTesti(lingua) {
     videoAttesa: 'Your video link will appear here soon. Contact Carmine if you need help.', videoErrore: 'Your video courses could not be loaded. Refresh the page to try again.',
     limite: 'Maximum level', punti: 'XP', totale: 'XP in total', livello: 'Level', alLivello: 'to level', completato: 'Completed', nessunObiettivo: 'Your new weekly goals will appear here.',
   } : {
+    esci: 'Esci dall’account', uscitaInCorso: 'Uscita in corso…', erroreUscita: 'Non è stato possibile completare l’uscita. Controlla la connessione e riprova.',
     studio: 'Il tuo studio', contenuti: 'I tuoi contenuti', riprendi: 'Riprendi', ultima: 'Riprendi da dove eri rimasto',
     progressi: 'Progressi', impostazioni: 'Impostazioni', settimana: 'Questa settimana', minuti: 'Studio attivo', corrette: 'Risposte corrette', giorni: 'Giorni di studio',
     obiettivo: 'Il prossimo obiettivo', raggiunti: 'Traguardi raggiunti', attivita: 'Ultime attività', tutti: 'Mostra tutti i traguardi',

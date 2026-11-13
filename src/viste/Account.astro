@@ -19,7 +19,14 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
 ---
 <Base titolo={t.ilTuoAccount} percorso={[{ titolo: t.account }]} descrizione={t.accountDescrizione} lingua={lingua} seo={{ noindex: true }}>
   <div class="pagina-account" id="account-page">
-    <h1>{s.studio}</h1>
+    <div class="account-intestazione">
+      <h1>{s.studio}</h1>
+      <button class="account-esci" type="button" id="esci" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M14 8l4 4-4 4M9 12h11"/></svg>
+        <span id="esci-testo">{s.esci}</span>
+      </button>
+    </div>
+    <p class="esito-modulo" id="esito-esci" role="status" aria-live="polite"></p>
     <p id="chi" class="account-caricamento" role="status">{t.caricamento}</p>
     <div id="pannello" hidden>
       <div class="schede-account" role="tablist" aria-label={t.ilTuoAccount}>
@@ -70,7 +77,6 @@ const configurazione = JSON.stringify({ lingua, pref, materie, js }).replace(/</
             <p class="esito-modulo" id="esito-cambio" role="status"></p>
             <button class="bottone-secondario" type="submit">{t.aggiornaPassword}</button>
           </form></details><details class="account-dettagli" id="inviti-account" hidden><summary>{s.inviti}</summary><InvitaAmico lingua={lingua} /></details></section>
-        <button class="account-azione-testo account-esci" type="button" id="esci">{t.esci}</button><p class="esito-modulo" id="esito-esci" role="status"></p>
       </section>
     </div>
     <dialog class="account-conferma" id="conferma-dispositivo" aria-labelledby="conferma-dispositivo-titolo" aria-describedby="conferma-dispositivo-nome conferma-dispositivo-nota"><h2 id="conferma-dispositivo-titolo">{s.conferma}</h2><p id="conferma-dispositivo-nome"></p><p id="conferma-dispositivo-nota">{s.spiegazione}</p><p id="errore-conferma-dispositivo" role="alert"></p><div class="account-conferma-azioni"><button type="button" class="bottone-secondario" id="annulla-scollega">{s.annulla}</button><button type="button" class="bottone-primario" id="conferma-scollega">{s.scollega}</button></div></dialog>

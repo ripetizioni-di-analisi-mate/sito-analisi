@@ -156,13 +156,13 @@ function statoLega(ar, c) {
   const ora = Date.now(), oggi = giornoRoma(ora);
   const sett = settimanaDi(oggi)[0];
   const fine = inizioGiorno(spostaGiorno(sett, 7));
-  const u = ar.riga('SELECT email, nome, soprannome, COALESCE(pubblico, 1) AS pubblico, COALESCE(lega, 0) AS lega, COALESCE(avvisi_lega, promemoria, 1) AS avvisi_lega FROM utenti WHERE email = ?', email);
+  const u = ar.riga('SELECT email, nome, soprannome, COALESCE(pubblico, 1) AS pubblico, COALESCE(lega, 0) AS lega, COALESCE(avvisi_lega, promemoria, 1) AS avvisi_lega, gm_manuale FROM utenti WHERE email = ?', email);
   if (!u) return { errore: 'utente' };
   const io = ar.riga('SELECT * FROM leghe WHERE email = ? AND settimana = ?', email, sett);
   const esitoRiga = ar.riga('SELECT * FROM leghe_esiti WHERE email = ? AND settimana = ?', email, spostaGiorno(sett, -7));
   const esito = esitoRiga ? { posizione: esitoRiga.posizione, membri: esitoRiga.membri, da: esitoRiga.da, a: esitoRiga.a, nomeDa: nomi[esitoRiga.da], nomeA: nomi[esitoRiga.a] } : null;
   const base = {
-    leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, avvisiLega: u.avvisi_lega !== 0, esito,
+    leghe: nomi, fine, settimana: sett, nome: nomePubblico(u), soprannome: u.soprannome || '', pubblico: u.pubblico !== 0, avvisiLega: u.avvisi_lega !== 0, esito, gm: Boolean(u.gm_manuale),
   };
   if (!io) return { ...base, lega: u.lega, nomeLega: nomi[u.lega], attesa: true };
   const { gruppo, conSimulati, quote } = gruppoDiGioco(ar, email, sett, io, oggi, ora);
@@ -172,6 +172,36 @@ function statoLega(ar, c) {
       pos: m.pos, nome: m.nome, exp: m.exp, livello: m.livello, io: Boolean(m.io),
       zona: !conSimulati || m.io ? m.zona : '',
       ...(m.io ? { posizioneStudente: m.posizioneStudente } : {}),
+    })),
+  };
+}
+
+// Il GM osserva i gruppi esistenti senza iscriversi o modificare lega e punteggio.
+// La lettura usa gli stessi nomi pubblici e gli stessi avversari della pagina studente.
+function osservaLega(ar, c) {
+  const u = ar.riga('SELECT gm_manuale FROM utenti WHERE email = ? AND hash IS NOT NULL', c.email);
+  if (!u?.gm_manuale) return { errore: 'Il permesso GM non è attivo.', status: 403 };
+  if (!Number.isSafeInteger(c.lega) || c.lega < 0 || c.lega >= LEGHE.length ||
+      (c.gruppo !== undefined && (!Number.isSafeInteger(c.gruppo) || c.gruppo < 1))) {
+    return { errore: 'Lega o gruppo non valido.', status: 400 };
+  }
+  const nomi = c.lingua === 'en' ? LEGHE_EN : LEGHE;
+  const ora = Date.now(), oggi = giornoRoma(ora), settimana = settimanaDi(oggi)[0];
+  const gruppi = ar.righe(`SELECT l.gruppo AS numero, COUNT(*) AS membri
+    FROM leghe l JOIN utenti u ON u.email = l.email
+    WHERE l.settimana = ? AND l.lega = ? GROUP BY l.gruppo ORDER BY l.gruppo`, settimana, c.lega);
+  const scelto = c.gruppo === undefined ? gruppi[0] : gruppi.find((g) => g.numero === c.gruppo);
+  if (c.gruppo !== undefined && !scelto) return { errore: 'Gruppo non disponibile.', status: 404 };
+  const base = {
+    gm: true, osservazione: true, leghe: nomi, lega: c.lega, nomeLega: nomi[c.lega], settimana,
+    fine: inizioGiorno(spostaGiorno(settimana, 7)), gruppi, gruppoNumero: scelto?.numero ?? null, esito: null,
+  };
+  if (!scelto) return { ...base, attesa: true, gruppo: [], conSimulati: false, sale: 0, scende: 0 };
+  const { gruppo, conSimulati, quote } = gruppoDiGioco(ar, null, settimana, { lega: c.lega, gruppo: scelto.numero }, oggi, ora);
+  return {
+    ...base, attesa: false, ...quote, conSimulati,
+    gruppo: gruppo.map((m) => ({
+      pos: m.pos, nome: m.nome, exp: m.exp, livello: m.livello, io: false, zona: conSimulati ? '' : m.zona,
     })),
   };
 }
@@ -432,6 +462,7 @@ function percentile(ar, c) {
 export function archivioSfide(ar, pathname, c) {
   switch (pathname) {
     case '/sfi-lega': return statoLega(ar, c);
+    case '/sfi-lega-gm': return osservaLega(ar, c);
     case '/sfi-nome': {
       const s = String(c.soprannome || '').replace(/[<>"\u0000-\u001f]/g, '').replace(/\s+/g, ' ').trim().slice(0, 24);
       ar.sql.exec('UPDATE utenti SET soprannome = ?, pubblico = ? WHERE email = ?', s || null, c.pubblico ? 1 : 0, c.email);
@@ -483,6 +514,10 @@ export async function gestisciSfide(req, env, ctx, p, h) {
   const { json, aDO, utenteCollegato, catalogoDomande, domandeDi, linguaDi } = h;
   const corpo = POST ? await req.clone().json().catch(() => ({})) : {};
   const l = linguaDi(corpo.lingua || new URL(req.url).searchParams.get('l'));
+  const headersGM = { 'cache-control': 'private, no-store' };
+  if (p === '/api/lega/gm' && req.method !== 'GET') {
+    return json({ errore: 'Metodo non consentito.' }, 405, { ...headersGM, allow: 'GET' });
+  }
 
   // ----- percentile delle simulazioni (anche senza account) -----
   if (p === '/api/simulazione/esito' && POST) {
@@ -497,9 +532,20 @@ export async function gestisciSfide(req, env, ctx, p, h) {
 
   // ----- da qui serve l'account -----
   const io = await utenteCollegato(env, req).catch(() => null);
-  if (!io) return json({ errore: l === 'en' ? 'Log in to take part.' : 'Accedi per partecipare.', ospite: true }, 401);
+  if (!io) return json({ errore: l === 'en' ? 'Log in to take part.' : 'Accedi per partecipare.', ospite: true }, 401, p === '/api/lega/gm' ? headersGM : {});
   const materiaQuizBloccata = h.materiaQuizRiservata && !io.materie?.includes(h.materiaQuizRiservata) ? h.materiaQuizRiservata : null;
 
+  if (p === '/api/lega/gm') {
+    if (!io.gm) return json({ errore: 'Il permesso GM non è attivo.' }, 403, headersGM);
+    const params = new URL(req.url).searchParams;
+    const lega = params.get('lega'), gruppo = params.get('gruppo');
+    if (params.getAll('lega').length !== 1 || !/^[0-9]$/.test(lega || '') || Number(lega) >= LEGHE.length ||
+        (params.has('gruppo') && (params.getAll('gruppo').length !== 1 || !/^[1-9][0-9]*$/.test(gruppo || '') || !Number.isSafeInteger(Number(gruppo))))) {
+      return json({ errore: 'Lega o gruppo non valido.' }, 400, headersGM);
+    }
+    const dati = await aDO(env, '/sfi-lega-gm', { email: io.email, lingua: l, lega: Number(lega), ...(gruppo === null ? {} : { gruppo: Number(gruppo) }) });
+    return json(dati, dati.status || 200, headersGM);
+  }
   if (p === '/api/lega') return json(await aDO(env, '/sfi-lega', { email: io.email, lingua: l }), 200, { 'cache-control': 'no-store' });
   if (p === '/api/lega/nome' && POST) return json(await aDO(env, '/sfi-nome', { email: io.email, soprannome: corpo.soprannome, pubblico: corpo.pubblico !== false }));
   if (p === '/api/lega/avvisi' && POST) return json(await aDO(env, '/sfi-avvisi', { email: io.email, attivi: corpo.attivi === true }));

@@ -30,9 +30,9 @@ export function avviaAccount(root) {
           : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 5C9 3 6 3 3 3v16c3 0 6 0 9 2 3-2 6-2 9-2V3c-3 0-6 0-9 2Zm0 0v16"/></svg>';
     return el;
   };
-  async function api(path, body) {
+  async function api(path, body, signal) {
     const r = await fetch(path, {
-      credentials: 'same-origin', cache: 'no-store',
+      credentials: 'same-origin', cache: 'no-store', signal,
       ...(body === undefined ? {} : { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }),
     });
     const d = await r.json().catch(() => ({}));
@@ -331,10 +331,25 @@ export function avviaAccount(root) {
     catch (error) { esito(q('esito-cambio'), en || de || es || fr ? js.passwordNonAggiornata : error.message, true); }
     finally { b.disabled = false; }
   });
-  q('esci').addEventListener('click', async () => {
-    q('esci').disabled = true;
-    try { await api('/api/esci', {}); location.href = pref || '/'; }
-    catch { esito(q('esito-esci'), js.connessione, true); q('esci').disabled = false; }
+  const esci = q('esci'), testoEsci = q('esci-testo');
+  esci.addEventListener('click', async () => {
+    if (esci.disabled) return;
+    esci.disabled = true;
+    esci.setAttribute('aria-busy', 'true');
+    testoEsci.textContent = s.uscitaInCorso;
+    esito(q('esito-esci'), s.uscitaInCorso);
+    const controller = new AbortController();
+    const attesa = setTimeout(() => controller.abort(), 10000);
+    try {
+      const risposta = await api('/api/esci', {}, controller.signal);
+      if (!risposta.ok) throw new Error(s.erroreUscita);
+      location.replace(pref || '/');
+    } catch {
+      esito(q('esito-esci'), s.erroreUscita, true);
+      testoEsci.textContent = s.esci;
+      esci.disabled = false;
+      esci.removeAttribute('aria-busy');
+    } finally { clearTimeout(attesa); }
   });
   const invito = root.querySelector('#invita-amico');
   if (invito) {
@@ -350,7 +365,7 @@ export function avviaAccount(root) {
     if (!io?.email) { esito(q('chi'), js.erroreGenerico, true); return; }
     q('nome-account').textContent = io.nome || '—'; q('email-account').textContent = io.email;
     nome.elements.nome.value = io.nome || '';
-    q('chi').hidden = true; q('pannello').hidden = false;
+    q('chi').hidden = true; q('pannello').hidden = false; esci.hidden = false;
     daHash();
     await Promise.allSettled([mostraContenuti(), caricaPercorso()]);
   })();

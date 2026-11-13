@@ -9,13 +9,27 @@ const q = quoteLega(LEGA_GRUPPO, 4);
 <Base titolo={titolo} descrizione="La classifica settimanale degli studenti: dieci leghe, gruppi di trenta, i primi salgono e gli ultimi scendono." percorso={[{ titolo }]}
   lingua="it" seo={{ noindex: true }}>
   <div class="lega" data-leghe={JSON.stringify(LEGHE)}>
-    <p class="sopratitolo">{titolo}</p>
+    <div class="lega-barra">
+      <p class="sopratitolo">{titolo}</p>
+      <div class="lega-gm" hidden>
+        <button type="button" class="lega-gm-apri" aria-label="Apri i comandi GM" aria-expanded="false" aria-controls="lega-gm-pannello">GM</button>
+        <div class="lega-gm-pannello" id="lega-gm-pannello" role="group" aria-label="Comandi GM" hidden>
+          <div class="lega-gm-titolo"><strong>Visualizza una lega</strong><button type="button" class="lega-gm-chiudi" aria-label="Chiudi i comandi GM">×</button></div>
+          <label>Lega<select id="lega-gm-lega"><option value="mia">La mia lega</option>{LEGHE.map((nome, i) => <option value={i}>{nome}</option>)}</select></label>
+          <label class="lega-gm-gruppo" hidden>Gruppo<select id="lega-gm-gruppo"></select></label>
+          <p class="lega-gm-esito" role="status" aria-live="polite"></p>
+          <div class="lega-gm-azioni"><button type="button" class="lega-gm-riprova" hidden>Riprova</button><button type="button" class="lega-gm-mia">Torna alla mia lega</button><button type="button" class="lega-gm-foto">Prepara screenshot</button></div>
+          <p class="lega-gm-nota">Per rivedere i comandi dopo lo screenshot, premi Esc o tocca lo stemma della lega.</p>
+        </div>
+      </div>
+    </div>
     <div class="lega-testa">
       <div class="lega-medaglia" aria-hidden="true"></div>
       <div>
         <h1 class="lega-nome">Classifica</h1>
         <p class="lega-tempo"></p>
       </div>
+      <button type="button" class="lega-foto-ritorna" aria-label="Mostra di nuovo i comandi GM" hidden></button>
     </div>
     <ol class="lega-scala" aria-label="Le dieci leghe">{LEGHE.map((n, i) => <li data-i={i}><span>{n}</span></li>)}</ol>
 
@@ -27,6 +41,7 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     </div>
 
     <p class="lega-attesa" hidden>Il gruppo di questa settimana si forma con i primi EXP: basta una risposta corretta a una domanda a tempo o qualche minuto di studio. <a href="/domande-a-tempo">Domande a tempo</a></p>
+    <p class="lega-vuota" hidden>In questa lega non ci sono ancora gruppi per la settimana in corso.</p>
 
     <div class="lega-classifica" hidden>
       <p class="lega-gruppo" hidden></p>
@@ -58,7 +73,31 @@ const q = quoteLega(LEGA_GRUPPO, 4);
 </Base>
 
 <style is:global>
-  .lega-testa { display: flex; align-items: center; gap: 1rem; margin: 0.4rem 0 0.8rem; }
+  .lega-barra { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+  .lega-barra > .sopratitolo { margin: 0; }
+  .lega-gm { position: relative; flex: none; font-family: var(--ui); }
+  .lega-gm-apri { min-width: 44px; min-height: 44px; padding: 0.3rem 0.6rem; border: 0; border-radius: var(--raggio); background: none; color: var(--inchiostro-2); font: 600 0.75rem var(--ui); cursor: pointer; }
+  .lega-gm-apri:hover, .lega-gm-apri[aria-expanded="true"] { color: var(--accento); background: var(--carta-2); }
+  .lega-gm button:focus-visible, .lega-gm select:focus-visible { outline: 2px solid var(--accento); outline-offset: 3px; }
+  .lega-gm-pannello { position: absolute; right: 0; top: calc(100% + 0.3rem); z-index: 35; width: min(20rem, calc(100vw - 3rem)); padding: 1rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: var(--carta); box-shadow: 0 0.5rem 1.8rem rgb(0 0 0 / 12%); }
+  .lega-gm-titolo { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.65rem; font-size: 0.92rem; }
+  .lega-gm-chiudi { border: 0; background: none; color: var(--inchiostro-2); min-width: 36px; min-height: 36px; font: 1.4rem var(--ui); cursor: pointer; }
+  .lega-gm-pannello label { display: block; margin-bottom: 0.75rem; font-size: 0.84rem; }
+  .lega-gm-pannello select { display: block; width: 100%; min-height: 44px; margin-top: 0.3rem; padding: 0.5rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: var(--carta); color: var(--inchiostro); font: 1rem var(--ui); }
+  .lega-gm-azioni { display: grid; gap: 0.5rem; }
+  .lega-gm-azioni button { min-height: 44px; padding: 0.5rem 0.65rem; border: 1px solid var(--riga); border-radius: var(--raggio); background: none; color: var(--inchiostro); font: 0.88rem var(--ui); cursor: pointer; }
+  .lega-gm-azioni .lega-gm-foto { color: var(--accento); border-color: var(--accento); }
+  .lega-gm button:disabled, .lega-gm select:disabled { opacity: 0.55; cursor: default; }
+  .lega-gm-esito, .lega-gm-nota { margin: 0.7rem 0; font-size: 0.78rem; line-height: 1.45; color: var(--inchiostro-2); }
+  .lega-gm-esito:empty { display: none; }
+  .lega-gm-nota { margin-bottom: 0; }
+  .lega-gm-esito.errore { color: var(--c-attenzione); }
+  .lega-testa { position: relative; display: flex; align-items: center; gap: 1rem; margin: 0.4rem 0 0.8rem; }
+  .lega-foto-ritorna { position: absolute; inset: 0; border: 0; background: transparent; cursor: pointer; }
+  .lega-foto-ritorna:focus-visible { outline: 2px solid var(--accento); outline-offset: 4px; }
+  .lega[data-foto] .lega-gm, .lega[data-foto] .lega-regole, .lega[data-foto] .lega-nome-pubblico, .lega[data-foto] .lega-esito,
+  body.lega-foto .bottoni-fissi, body.lega-foto .pi-lancio, body.lega-foto .assistente, body.lega-foto .torna-su,
+  body.lega-foto .bottone-whatsapp, body.lega-foto .avviso-premio, body.lega-foto .avviso-duello { display: none !important; }
   .lega-testa h1 { margin: 0; }
   .lega-tempo { margin: 0.15rem 0 0; font-family: var(--ui); color: var(--inchiostro-2); font-size: 0.92rem; }
   .lega-medaglia { flex: none; width: 3.6rem; height: 3.6rem; }
@@ -75,7 +114,7 @@ const q = quoteLega(LEGA_GRUPPO, 4);
   .lega-scala.vicino-fine li:last-child:not(.attuale) span, .lega-scala.vicino-inizio li:first-child:not(.attuale) span { display: none; }
   .lega-esito { font-family: var(--ui); margin: 1.6rem 0 1rem; padding: 0.7rem 0.9rem; border-radius: var(--raggio); background: var(--carta-2); }
   .lega-esito.sale { background: color-mix(in srgb, #2f6f68 10%, var(--carta)); }
-  .lega-ospite, .lega-attesa { font-family: var(--ui); margin-top: 1.6rem; }
+  .lega-ospite, .lega-attesa, .lega-vuota { font-family: var(--ui); margin-top: 1.6rem; }
   .lega-classifica { margin-top: 1.6rem; }
   .lega-gruppo { margin: 0 0 0.75rem; font: 0.88rem/1.45 var(--ui); color: var(--inchiostro-2); }
   .lega-classifica table { width: 100%; border-collapse: collapse; font-family: var(--ui); font-size: 0.95rem; }
@@ -118,17 +157,75 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     return `${m} minuti`;
   }
 
-  async function aggiorna(rileggiPreferenze: boolean) {
-    const r = await fetch('/api/lega');
-    if (r.status === 401) {
-      $('.lega-ospite').hidden = false;
-      for (const s of ['.lega-classifica', '.lega-attesa', '.lega-esito', '.lega-nome-pubblico']) $(s).hidden = true;
-      $('.lega-nome').textContent = 'Lega della settimana';
-      $('.lega-tempo').textContent = '';
-      return;
+  type SceltaGM = { lega: number; gruppo?: number } | null;
+  let scelta: SceltaGM = null;
+  let ultimaRichiesta: SceltaGM = null;
+  let autorizzato = false, fotografando = false;
+  let richiesta: AbortController | undefined;
+  let sequenza = 0;
+  const gm = $('.lega-gm');
+  const pannelloGM = $('.lega-gm-pannello');
+  const apriGM = $<HTMLButtonElement>('.lega-gm-apri');
+  const scegliLega = $<HTMLSelectElement>('#lega-gm-lega');
+  const scegliGruppo = $<HTMLSelectElement>('#lega-gm-gruppo');
+  const esitoGM = $('.lega-gm-esito');
+
+  function chiudiGM(focus = false) {
+    pannelloGM.hidden = true;
+    apriGM.setAttribute('aria-expanded', 'false');
+    if (focus && autorizzato) apriGM.focus({ preventScroll: true });
+  }
+  function mostraGM(focus = true) {
+    if (!autorizzato || fotografando) return;
+    pannelloGM.hidden = false;
+    apriGM.setAttribute('aria-expanded', 'true');
+    if (focus) scegliLega.focus();
+  }
+  function foto(attiva: boolean, focus = true) {
+    if (attiva && !autorizzato) return;
+    fotografando = attiva;
+    radice.toggleAttribute('data-foto', attiva);
+    document.body.classList.toggle('lega-foto', attiva);
+    const ritorna = $<HTMLButtonElement>('.lega-foto-ritorna');
+    ritorna.hidden = !attiva;
+    chiudiGM();
+    if (focus) {
+      if (attiva) ritorna.focus({ preventScroll: true });
+      else if (autorizzato) apriGM.focus({ preventScroll: true });
     }
-    if (!r.ok) throw new Error();
-    const d = await r.json();
+  }
+  function occupato(attivo: boolean) {
+    pannelloGM.setAttribute('aria-busy', String(attivo));
+    scegliLega.disabled = attivo;
+    scegliGruppo.disabled = attivo;
+    $<HTMLButtonElement>('.lega-gm-riprova').disabled = attivo;
+    $<HTMLButtonElement>('.lega-gm-mia').disabled = attivo || !scelta;
+    $<HTMLButtonElement>('.lega-gm-foto').disabled = attivo;
+  }
+  function mostraOspite() {
+    autorizzato = false;
+    scelta = null;
+    gm.hidden = true;
+    foto(false, false);
+    $('.lega-ospite').hidden = false;
+    for (const s of ['.lega-classifica', '.lega-attesa', '.lega-vuota', '.lega-esito', '.lega-nome-pubblico']) $(s).hidden = true;
+    $('.lega-classifica tbody').replaceChildren();
+    $('.lega-medaglia').replaceChildren();
+    $('.lega-nome').textContent = 'Lega della settimana';
+    $('.lega-tempo').textContent = '';
+    radice.querySelectorAll('.lega-scala li').forEach((li) => li.classList.remove('attuale', 'passata'));
+  }
+  function mostra(d: any, rileggiPreferenze: boolean) {
+    const osservazione = d.osservazione === true;
+    autorizzato = d.gm === true;
+    scelta = osservazione ? { lega: d.lega, ...(d.gruppoNumero ? { gruppo: d.gruppoNumero } : {}) } : null;
+    gm.hidden = !autorizzato;
+    if (!autorizzato) foto(false, false);
+    scegliLega.value = scelta ? String(scelta.lega) : 'mia';
+    scegliGruppo.replaceChildren(...(d.gruppi || []).map((g: any) => new Option(`Gruppo ${g.numero} · ${g.membri} studenti`, String(g.numero))));
+    scegliGruppo.value = d.gruppoNumero ? String(d.gruppoNumero) : '';
+    $('.lega-gm-gruppo').hidden = !osservazione || (d.gruppi || []).length < 2;
+    $('.lega-classifica table').setAttribute('aria-label', osservazione ? `Classifica della lega ${d.nomeLega}, gruppo ${d.gruppoNumero || 1}` : 'Classifica del tuo gruppo');
     $('.lega-ospite').hidden = true;
     $('.lega-nome').textContent = `Lega ${d.nomeLega}`;
     $('.lega-medaglia').innerHTML = medagliaLega(d.lega, d.leghe[d.lega]);
@@ -136,22 +233,24 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     radice.querySelectorAll<HTMLElement>('.lega-scala li').forEach((li, i) => { li.classList.toggle('attuale', i === d.lega); li.classList.toggle('passata', i < d.lega); });
     $('.lega-scala').classList.toggle('vicino-fine', d.lega >= d.leghe.length - 2);
     $('.lega-scala').classList.toggle('vicino-inizio', d.lega <= 1);
-    $('.lega-esito').hidden = !d.esito;
-    if (d.esito) {
+    $('.lega-esito').hidden = osservazione || !d.esito;
+    if (!osservazione && d.esito) {
       const e = d.esito, el = $('.lega-esito');
       const dove = e.a > e.da ? `e sei salito nella lega ${e.nomeA}` : e.a < e.da ? `e sei sceso nella lega ${e.nomeA}` : `e sei rimasto nella lega ${e.nomeA}`;
       el.textContent = `La settimana scorsa hai chiuso al ${e.posizione}° posto tra gli studenti del tuo gruppo nella lega ${e.nomeDa} ${dove}.`;
       el.classList.toggle('sale', e.a > e.da);
     }
-    $('.lega-attesa').hidden = !d.attesa;
+    $('.lega-attesa').hidden = osservazione || !d.attesa;
+    $('.lega-vuota').hidden = !osservazione || !d.attesa;
     $('.lega-classifica').hidden = !!d.attesa;
+    if (d.attesa) $('.lega-classifica tbody').replaceChildren();
     if (!d.attesa) {
       const righe: string[] = [];
       const n = d.gruppo.length;
       const notaGruppo = $('.lega-gruppo');
-      notaGruppo.hidden = !d.conSimulati;
-      if (d.conSimulati) {
-        const io = d.gruppo.find((m: any) => m.io);
+      const io = !osservazione && d.gruppo.find((m: any) => m.io);
+      notaGruppo.hidden = !d.conSimulati || !io;
+      if (d.conSimulati && io) {
         const zona = io.zona === 'sale' ? ' · In zona promozione' : io.zona === 'scende' ? ' · In zona retrocessione' : '';
         notaGruppo.textContent = `Tra gli studenti sei al ${io.posizioneStudente}° posto${zona}.`;
       }
@@ -160,11 +259,13 @@ const q = quoteLega(LEGA_GRUPPO, 4);
         if (!d.conSimulati && d.scende && i === n - d.scende) righe.push(`<tr class="confine scende"><td colspan="3">Scendono nella lega ${esc(d.leghe[d.lega - 1] || '')}</td></tr>`);
         const rg = rangoDi(m.livello);
         const zona = d.conSimulati ? '' : m.zona || '';
-        righe.push(`<tr class="${m.io ? 'io ' : ''}${zona}"><td class="pos">${m.pos}</td><td><span class="chi"><span class="mini">${stemmaSVG(rg, { perc: 100, id: `l${i}`, grado: gradoDi(m.livello) })}</span><span>${esc(m.nome)}${m.io ? ' <small>(tu)</small>' : ''} <small>· Liv. ${m.livello}</small></span></span></td><td class="num">${num(m.exp)}</td></tr>`);
+        const sonoIo = !osservazione && m.io;
+        righe.push(`<tr class="${sonoIo ? 'io ' : ''}${zona}"><td class="pos">${m.pos}</td><td><span class="chi"><span class="mini">${stemmaSVG(rg, { perc: 100, id: `l${i}`, grado: gradoDi(m.livello) })}</span><span>${esc(m.nome)}${sonoIo ? ' <small>(tu)</small>' : ''} <small>· Liv. ${m.livello}</small></span></span></td><td class="num">${num(m.exp)}</td></tr>`);
       });
       $('.lega-classifica tbody').innerHTML = righe.join('');
     }
     const sez = $('.lega-nome-pubblico');
+    if (osservazione) { sez.hidden = true; return; }
     if (!sez.hidden && !rileggiPreferenze) return;
     const f = sez.querySelector('form')!;
     (f.elements.namedItem('soprannome') as HTMLInputElement).value = d.soprannome;
@@ -173,14 +274,77 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     (f.elements.namedItem('avvisiLega') as HTMLInputElement).checked = d.avvisiLega;
     sez.hidden = false;
   }
-  let richiesta: Promise<void> | undefined;
-  function carica(rileggiPreferenze = false): Promise<void> {
-    if (richiesta) return rileggiPreferenze ? richiesta.then(() => carica(true)) : richiesta;
-    richiesta = aggiorna(rileggiPreferenze).catch(() => {
-      if ($('.lega-nome-pubblico').hidden && $('.lega-ospite').hidden) $('.lega-tempo').textContent = 'La classifica è temporaneamente indisponibile.';
-    }).finally(() => { richiesta = undefined; });
-    return richiesta;
+  async function carica(rileggiPreferenze = false, destinazione: SceltaGM = scelta, chiudiDopo = false): Promise<void> {
+    const turno = ++sequenza;
+    richiesta?.abort();
+    const controller = new AbortController();
+    richiesta = controller;
+    ultimaRichiesta = destinazione;
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    occupato(true);
+    esitoGM.textContent = 'Caricamento…';
+    esitoGM.classList.remove('errore');
+    $('.lega-gm-riprova').hidden = true;
+    try {
+      const parametri = destinazione ? new URLSearchParams({ lega: String(destinazione.lega), ...(destinazione.gruppo ? { gruppo: String(destinazione.gruppo) } : {}) }) : null;
+      const percorso = parametri ? '/api/lega/gm?' + parametri : '/api/lega';
+      const opzioni = { credentials: 'same-origin' as const, cache: 'no-store' as const, signal: controller.signal };
+      let r = await fetch(percorso, opzioni);
+      if (turno !== sequenza) return;
+      if (r.status === 403 && destinazione) {
+        // Il permesso può essere revocato mentre questa pagina è aperta.
+        autorizzato = false;
+        scelta = null;
+        gm.hidden = true;
+        foto(false, false);
+        for (const s of ['.lega-classifica', '.lega-vuota', '.lega-attesa', '.lega-esito', '.lega-nome-pubblico']) $(s).hidden = true;
+        $('.lega-classifica tbody').replaceChildren();
+        $('.lega-nome').textContent = 'Lega della settimana';
+        $('.lega-medaglia').replaceChildren();
+        r = await fetch('/api/lega', opzioni);
+        rileggiPreferenze = true;
+      }
+      if (turno !== sequenza) return;
+      if (r.status === 401) { mostraOspite(); return; }
+      if (r.status === 404 && destinazione?.gruppo) ultimaRichiesta = { lega: destinazione.lega };
+      if (!r.ok) throw new Error(r.status === 404 ? 'Il gruppo non è più disponibile. Scegli di nuovo la lega.' : 'Non è stato possibile caricare la classifica. Riprova.');
+      const d = await r.json();
+      if (turno !== sequenza) return;
+      if (!Array.isArray(d.leghe) || typeof d.nomeLega !== 'string' || (d.osservazione && !d.gm)) throw new Error('Non è stato possibile caricare la classifica. Riprova.');
+      mostra(d, rileggiPreferenze);
+      esitoGM.textContent = '';
+      if (chiudiDopo) chiudiGM(true);
+    } catch (errore) {
+      if (turno !== sequenza) return;
+      const testo = controller.signal.aborted ? 'La connessione è lenta. Scegli di nuovo la lega per riprovare.' : (errore instanceof Error ? errore.message : 'Non è stato possibile caricare la classifica. Riprova.');
+      scegliLega.value = scelta ? String(scelta.lega) : 'mia';
+      scegliGruppo.value = scelta?.gruppo ? String(scelta.gruppo) : '';
+      if (autorizzato) {
+        esitoGM.textContent = testo;
+        esitoGM.classList.add('errore');
+        $('.lega-gm-riprova').hidden = false;
+        mostraGM(false);
+      } else if ($('.lega-nome-pubblico').hidden && $('.lega-ospite').hidden) $('.lega-tempo').textContent = 'La classifica è temporaneamente indisponibile.';
+    } finally {
+      clearTimeout(timeout);
+      if (turno === sequenza) { richiesta = undefined; occupato(false); }
+    }
   }
+  apriGM.addEventListener('click', () => pannelloGM.hidden ? mostraGM() : chiudiGM());
+  $('.lega-gm-chiudi').addEventListener('click', () => chiudiGM(true));
+  scegliLega.addEventListener('change', () => carica(true, scegliLega.value === 'mia' ? null : { lega: Number(scegliLega.value) }, true));
+  scegliGruppo.addEventListener('change', () => { if (scelta) carica(false, { lega: scelta.lega, gruppo: Number(scegliGruppo.value) }, true); });
+  $('.lega-gm-mia').addEventListener('click', () => carica(true, null, true));
+  $('.lega-gm-riprova').addEventListener('click', () => carica(true, ultimaRichiesta, true));
+  $('.lega-gm-foto').addEventListener('click', (evento) => foto(true, (evento as MouseEvent).detail === 0));
+  $('.lega-foto-ritorna').addEventListener('click', () => foto(false));
+  document.addEventListener('pointerdown', (evento) => { if (!gm.contains(evento.target as Node)) chiudiGM(); });
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'Escape') return;
+    if (fotografando) { evento.preventDefault(); foto(false); }
+    else if (!pannelloGM.hidden) { evento.preventDefault(); chiudiGM(true); }
+  });
+  window.addEventListener('pagehide', () => foto(false, false));
   radice.querySelector('.lega-nome-pubblico form')!.addEventListener('submit', async (e) => {
     e.preventDefault();
     const f = e.target as HTMLFormElement;
@@ -192,7 +356,7 @@ const q = quoteLega(LEGA_GRUPPO, 4);
     if (r?.ok && avvisi?.ok) { f.querySelector<HTMLElement>('.salvato')!.hidden = false; carica(true); }
     else f.querySelector<HTMLElement>('.errore-salvataggio')!.hidden = false;
   });
-  const aggiornaSeVisibile = () => { if (document.visibilityState === 'visible') carica(); };
+  const aggiornaSeVisibile = () => { if (document.visibilityState === 'visible' && !fotografando && !richiesta) carica(); };
   document.addEventListener('visibilitychange', aggiornaSeVisibile);
   window.setInterval(aggiornaSeVisibile, 120_000);
   carica();
