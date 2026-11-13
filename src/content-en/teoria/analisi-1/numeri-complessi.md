@@ -1,6 +1,6 @@
 ---
-titolo: Complex numbers
-sommario: What complex numbers are, how they are represented in algebraic, trigonometric and exponential form, how powers and roots are computed, and how equations are solved in the complex field.
+titolo: Numeri complessi
+sommario: Che cosa sono i numeri complessi, come si rappresentano in forma algebrica, trigonometrica ed esponenziale, come si calcolano potenze e radici, e come si risolvono le equazioni in campo complesso.
 ---
 
 ## Definition and algebraic form
@@ -84,7 +84,7 @@ which is zero *only* for $z = 0$. For every $z, w \in \mathbb{C}$ the following 
 $$
 \begin{gathered}
 z \cdot \bar{z} = |z|^2, \qquad |z \cdot w| = |z| \, |w|, \qquad \left| \frac{z}{w} \right| = \frac{|z|}{|w|} \ \ (w \neq 0), \\[6pt]
-|z + w| \leq |z| + |w| \quad \text{(triangle inequality)}.
+|z + w| \leq |z| + |w| \quad \text{(disuguaglianza triangolare)}.
 \end{gathered}
 $$
 The identity $z \bar{z} = |z|^2$ is verified by computation: $(a + ib)(a - ib) = a^2 + b^2$. From it follow the **reciprocal formula**, $\dfrac{1}{z} = \dfrac{\bar{z}}{|z|^2}$, and the **multiplicativity of the modulus**: $|zw|^2 = zw \, \overline{zw} = z \bar{z} \, w \bar{w} = |z|^2 |w|^2$. The trigonometric form and the loci in the plane described by equations such as $|z - z_0| = r$ are based on the modulus.
@@ -92,7 +92,7 @@ The identity $z \bar{z} = |z|^2$ is verified by computation: $(a + ib)(a - ib) =
 
 ## The complex plane
 
-:::definizione{#piano-di-gauss titolo="Complex plane (Gauss plane)"}
+:::definizione{#piano-di-gauss titolo="Complex plane"}
 The number $z = a + ib$ is represented in the Cartesian plane by the point with coordinates $(a, b)$: the horizontal axis contains the real numbers, the vertical axis the purely imaginary numbers $ib$. With this identification
 
 - the sum $z + w$ is the sum of the vectors joining the origin to the points $z$ and $w$ (**parallelogram rule**);
@@ -123,15 +123,15 @@ Every $z = a + ib \neq 0$ can be written as
 $$
 z = \rho \, (\cos\theta + i \sin\theta), \qquad \rho = |z| = \sqrt{a^2 + b^2},
 $$
-where $\theta$, called the **argument** of $z$, is the angle that the vector of $z$ forms with the positive real semi-axis, determined by $\cos\theta = \dfrac{a}{\rho}$ and $\sin\theta = \dfrac{b}{\rho}$ up to multiples of $2\pi$. The **principal argument** is the value $\theta \in (-\pi, \pi]$; for $a \neq 0$ it is obtained from the arctangent of $\dfrac{b}{a}$, corrected according to the quadrant:
+where $\theta$, called the **argument** of $z$, is the angle that the vector of $z$ forms with the positive real axis, determined by $\cos\theta = \dfrac{a}{\rho}$ and $\sin\theta = \dfrac{b}{\rho}$ up to multiples of $2\pi$. The **principal argument** is the value $\theta \in (-\pi, \pi]$; for $a \neq 0$ it is obtained from the arctangent of $\dfrac{b}{a}$, corrected according to the quadrant:
 $$
 \theta =
 \begin{cases}
-\arctan \dfrac{b}{a} & \text{if } a > 0 \\[10pt]
-\arctan \dfrac{b}{a} + \pi & \text{if } a < 0,\ b \geq 0 \\[10pt]
-\arctan \dfrac{b}{a} - \pi & \text{if } a < 0,\ b < 0 \\[10pt]
-\dfrac{\pi}{2} & \text{if } a = 0,\ b > 0 \\[10pt]
--\dfrac{\pi}{2} & \text{if } a = 0,\ b < 0
+\arctan \dfrac{b}{a} & \text{se } a > 0 \\[10pt]
+\arctan \dfrac{b}{a} + \pi & \text{se } a < 0,\ b \geq 0 \\[10pt]
+\arctan \dfrac{b}{a} - \pi & \text{se } a < 0,\ b < 0 \\[10pt]
+\dfrac{\pi}{2} & \text{se } a = 0,\ b > 0 \\[10pt]
+-\dfrac{\pi}{2} & \text{se } a = 0,\ b < 0
 \end{cases}
 $$
 The correction is necessary because the arctangent returns *only* angles in $\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)$, that is points with positive real part. The trigonometric form is the representation suited to products, powers and roots.
@@ -155,7 +155,7 @@ z \cdot w = \rho \sigma \, \bigl( \cos(\theta + \varphi) + i \sin(\theta + \varp
 \frac{z}{w} = \frac{\rho}{\sigma} \, \bigl( \cos(\theta - \varphi) + i \sin(\theta - \varphi) \bigr).
 \end{gathered}
 $$
-In the product the moduli **multiply** and the arguments **add**; in the quotient the moduli divide and the arguments subtract. The product formula is obtained by expanding the product of the two trigonometric forms and applying the addition formulas for sine and cosine; the quotient formula follows by applying the product formula to $\dfrac{z}{w}$ and $w$. Multiplying by $w$ therefore means rotating by $\varphi$ and scaling by $\sigma$: it is this **geometric reading** that makes powers immediate.
+In the product the moduli **are multiplied** and the arguments **are added**; in the quotient the moduli are divided and the arguments are subtracted. The product formula is obtained by expanding the product of the two trigonometric forms and applying the addition formulas for sine and cosine; the quotient formula follows by applying the product formula to $\dfrac{z}{w}$ and $w$. Multiplying by $w$ therefore means rotating by $\varphi$ and scaling by $\sigma$: it is this **geometric interpretation** that makes powers straightforward.
 
 ::grafico{xmin=-1 xmax=3 ymin=-0.8 ymax=3.5 uguale=1 nomi="Re,Im" vettori="0,0,2,1,z;0,0,1,1,w;0,0,1,3,zw" titolo="With $z = 2 + i$ and $w = 1 + i$, of modulus $\sqrt{2}$ and argument $\dfrac{\pi}{4}$: the product $zw = 1 + 3i$ is $z$ rotated by $\dfrac{\pi}{4}$, with modulus $\sqrt{5} \cdot \sqrt{2} = \sqrt{10}$"}
 
@@ -209,7 +209,7 @@ $e^{i\pi} = \cos\pi + i\sin\pi = -1$, and $i = e^{i\frac{\pi}{2}}$. The number $
 ## n-th roots
 
 ::::teorema{#radici-n-esime titolo="n-th roots of a complex number"}
-Let $w = \sigma \, e^{i\varphi} \neq 0$ and $n \geq 1$ an integer. The equation $z^n = w$ has *exactly* $n$ distinct solutions:
+Let $w = \sigma \, e^{i\varphi} \neq 0$ and $n \geq 1$ be an integer. The equation $z^n = w$ has *exactly* $n$ distinct solutions:
 $$
 z_k = \sqrt[n]{\sigma} \; e^{\,i \left( \frac{\varphi + 2k\pi}{n} \right)}, \qquad k = 0, 1, \dots, n - 1 .
 $$
@@ -262,8 +262,8 @@ The two solutions are **conjugate**, as *always* happens for polynomials with re
 An equation in which $\bar{z}$, $|z|$, $\operatorname{Re}(z)$ or $\operatorname{Im}(z)$ appear is *not* algebraic in $z$ alone and is solved by setting $z = x + iy$ with $x, y \in \mathbb{R}$: substituting $\bar{z} = x - iy$ and $|z| = \sqrt{x^2 + y^2}$, the equation splits into **real part and imaginary part** and becomes the system
 $$
 \begin{cases}
-\operatorname{Re}(\text{left-hand side}) = \operatorname{Re}(\text{right-hand side}) \\[4pt]
-\operatorname{Im}(\text{left-hand side}) = \operatorname{Im}(\text{right-hand side})
+\operatorname{Re}(\text{primo membro}) = \operatorname{Re}(\text{secondo membro}) \\[4pt]
+\operatorname{Im}(\text{primo membro}) = \operatorname{Im}(\text{secondo membro})
 \end{cases}
 $$
 of two **real equations** in the unknowns $x$ and $y$. Equations of the form $z^n = w$ are instead solved with the formula for $n$-th roots, *without* going through $x$ and $y$.
@@ -287,7 +287,7 @@ Every polynomial $p(z) = a_n z^n + \dots + a_1 z + a_0$ with complex coefficient
 $$
 p(z) = a_n (z - z_1)(z - z_2) \cdots (z - z_n).
 $$
-In $\mathbb{C}$, unlike in $\mathbb{R}$, no polynomial equation is left **without solutions**: the number of roots is determined by the degree. The proof requires tools from complex analysis and is taken for granted.
+In $\mathbb{C}$, unlike in $\mathbb{R}$, no polynomial equation is left **without solutions**: the number of roots is determined by the degree. The proof requires tools from complex analysis, and the result is assumed here.
 :::
 
 ::::teorema{#radici-coniugate titolo="Complex conjugate roots of real polynomials"}
@@ -312,11 +312,11 @@ For every $z, w \in \mathbb{C}$: $\overline{z + w} = \bar{z} + \bar{w}$ and $\ov
 :::
 
 :::teorema{#fattorizzazione-reale titolo="Real factorization of polynomials"}
-Every polynomial with real coefficients of degree $n \geq 1$ factors in $\mathbb{R}$ as a product of **first-degree factors** and **second-degree factors** with negative discriminant. The factorization is obtained from the complex one by pairing each non-real root $z_0 = \alpha + i\beta$ with its **conjugate**: the product
+Every polynomial with real coefficients of degree $n \geq 1$ factors in $\mathbb{R}$ as a product of **linear factors** and **quadratic factors** with negative discriminant. The factorization is obtained from the complex one by pairing each non-real root $z_0 = \alpha + i\beta$ with its **conjugate**: the product
 $$
 (z - z_0)(z - \bar{z}_0) = z^2 - 2\alpha z + (\alpha^2 + \beta^2)
 $$
-has real coefficients and discriminant $4\alpha^2 - 4(\alpha^2 + \beta^2) = -4\beta^2 < 0$. This factorization is used in the integration of rational functions, where the irreducible second-degree factors produce the terms with logarithm and arctangent.
+has real coefficients and discriminant $4\alpha^2 - 4(\alpha^2 + \beta^2) = -4\beta^2 < 0$. This factorization is used in the integration of rational functions, where the irreducible quadratic factors produce the terms with logarithm and arctangent.
 :::
 
 :::esempio

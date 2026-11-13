@@ -1,7 +1,7 @@
 ---
-titolo: "Calculus 1 formula sheet"
-sommario: "The formulas of Calculus 1 (Mathematical Analysis 1) with their hypotheses: elementary functions and trigonometry, complex numbers, standard limits, derivatives and Taylor expansions, integrals and improper integrals, series and differential equations."
-descrizione: "Calculus 1 formula sheet (free PDF): standard limits, derivatives, Maclaurin series, basic antiderivatives, series and differential equations, with hypotheses."
+titolo: "Formulario di Analisi matematica 1"
+sommario: "Le formule di Analisi matematica 1 con le loro ipotesi: funzioni elementari e goniometria, numeri complessi, limiti notevoli, derivate e sviluppi di Taylor, integrali e integrali impropri, serie ed equazioni differenziali."
+descrizione: "Formulario di Analisi 1 in PDF: limiti notevoli, derivate, sviluppi di McLaurin, integrali immediati, serie ed equazioni differenziali, con le ipotesi."
 ---
 
 ## Sets, induction and the binomial theorem
@@ -12,27 +12,27 @@ The proofs and the examples are in the chapter [Sets, induction and elementary f
 $$
 L = \sup A \iff
 \begin{cases}
-a \leq L \quad \text{for every } a \in A \\[4pt]
-\text{for every } \varepsilon > 0 \text{ there exists } a \in A \text{ with } a > L - \varepsilon
+a \leq L \quad \text{per ogni } a \in A \\[4pt]
+\text{per ogni } \varepsilon > 0 \text{ esiste } a \in A \text{ con } a > L - \varepsilon
 \end{cases}
 $$
 $$
 \ell = \inf A \iff
 \begin{cases}
-a \geq \ell \quad \text{for every } a \in A \\[4pt]
-\text{for every } \varepsilon > 0 \text{ there exists } a \in A \text{ with } a < \ell + \varepsilon
+a \geq \ell \quad \text{per ogni } a \in A \\[4pt]
+\text{per ogni } \varepsilon > 0 \text{ esiste } a \in A \text{ con } a < \ell + \varepsilon
 \end{cases}
 $$
-It holds for $A \subseteq \mathbb{R}$ nonempty and $L, \ell \in \mathbb{R}$. If $A$ is not bounded above one sets $\sup A = +\infty$, and this is equivalent to saying that for every $M > 0$ there exists $a \in A$ with $a > M$. The maximum of $A$ exists *if and only if* $\sup A \in A$, and in that case it coincides with $\sup A$.
+It holds for nonempty $A \subseteq \mathbb{R}$ and $L, \ell \in \mathbb{R}$. If $A$ is not bounded above one sets $\sup A = +\infty$, and this is equivalent to saying that for every $M > 0$ there exists $a \in A$ with $a > M$. The maximum of $A$ exists *if and only if* $\sup A \in A$, and in that case it coincides with $\sup A$.
 :::
 
 :::formula{#principio-di-induzione titolo="Principle of induction"}
 $$
 \begin{cases}
-P(n_0) \ \text{is true} \\[4pt]
-P(n) \implies P(n+1) \quad \text{for every } n \geq n_0
+P(n_0) \ \text{è vera} \\[4pt]
+P(n) \implies P(n+1) \quad \text{per ogni } n \geq n_0
 \end{cases}
-\qquad \implies \qquad P(n) \ \text{is true for every } n \geq n_0
+\qquad \implies \qquad P(n) \ \text{è vera per ogni } n \geq n_0
 $$
 The first condition is the base case, the second the inductive step, in which $P(n)$ is the inductive hypothesis. The conclusion requires that *both* conditions be satisfied.
 :::
@@ -106,7 +106,7 @@ They hold for $a, b > 0$ and $x, y \in \mathbb{R}$; in the last one $m \in \math
 $$
 \begin{gathered}
 \sqrt{x^2} = |x|, \qquad \left( \sqrt{x} \right)^2 = x \ \ (x \geq 0), \qquad \sqrt{a\,b} = \sqrt{a}\,\sqrt{b} \ \ (a, b \geq 0), \\[8pt]
-\sqrt[n]{x^n} = |x| \ \ (n \text{ even}), \qquad \sqrt[n]{x^n} = x \ \ (n \text{ odd})
+\sqrt[n]{x^n} = |x| \ \ (n \text{ pari}), \qquad \sqrt[n]{x^n} = x \ \ (n \text{ dispari})
 \end{gathered}
 $$
 The first holds for every $x \in \mathbb{R}$; for $x = -3$ one has $\sqrt{9} = 3 = |-3|$. Roots with odd index are defined on all of $\mathbb{R}$, those with even index on $[0, +\infty)$.
@@ -116,8 +116,8 @@ The first holds for every $x \in \mathbb{R}$; for $x = -3$ one has $\sqrt{9} = 3
 $$
 |x| =
 \begin{cases}
-x & \text{if } x \geq 0 \\[2pt]
--x & \text{if } x < 0
+x & \text{se } x \geq 0 \\[2pt]
+-x & \text{se } x < 0
 \end{cases}
 \qquad
 |xy| = |x|\,|y|, \qquad |x + y| \leq |x| + |y|
@@ -125,7 +125,7 @@ $$
 $$
 \begin{gathered}
 |f(x)| < a \iff -a < f(x) < a, \\[6pt]
-|f(x)| > a \iff f(x) < -a \ \ \text{or} \ \ f(x) > a
+|f(x)| > a \iff f(x) < -a \ \ \text{oppure} \ \ f(x) > a
 \end{gathered}
 $$
 The two equivalences hold for $a > 0$. For $a < 0$ the first inequality has no solutions and the second is satisfied at every point of the domain of $f$.
@@ -181,14 +181,14 @@ f(x) < g(x) \\[2pt]
 f(x) > 0
 \end{cases}
 $$
-The system contains the existence condition of the smaller argument, and the other existence condition follows from the two in the system. With a number $c$ on the right-hand side one writes $c = \log_a a^{c}$, therefore for $a > 1$ the inequality $\log_a f(x) > c$ is equivalent to $f(x) > a^{c}$.
+The system contains the domain condition of the smaller argument, and the other domain condition follows from the two in the system. With a number $c$ on the right-hand side one writes $c = \log_a a^{c}$, therefore for $a > 1$ the inequality $\log_a f(x) > c$ is equivalent to $f(x) > a^{c}$.
 :::
 
 :::formula{#dominio-naturale titolo="Conditions for the natural domain"}
 $$
 \begin{array}{ll}
 \dfrac{N(x)}{D(x)} & D(x) \neq 0 \\[12pt]
-\sqrt[n]{g(x)}, \ n \text{ even} & g(x) \geq 0 \\[6pt]
+\sqrt[n]{g(x)}, \ n \text{ pari} & g(x) \geq 0 \\[6pt]
 \log_a g(x) & g(x) > 0 \\[6pt]
 \tan g(x) & g(x) \neq \dfrac{\pi}{2} + k\pi, \ k \in \mathbb{Z} \\[12pt]
 \arcsin g(x), \ \arccos g(x) & -1 \leq g(x) \leq 1 \\[6pt]
@@ -201,24 +201,24 @@ The conditions relative to the different operations of an expression must hold a
 :::formula{#simmetrie-e-periodicita titolo="Symmetries and periodicity"}
 $$
 \begin{gathered}
-f(-x) = f(x) \ \ \text{(even)}, \qquad f(-x) = -f(x) \ \ \text{(odd)}, \\[6pt]
-f(x + T) = f(x) \ \ \text{(periodic with period } T\text{)}, \\[8pt]
-\sin(\omega x), \ \cos(\omega x) \ \text{have period} \ \frac{2\pi}{|\omega|}, \qquad \tan(\omega x) \ \text{has period} \ \frac{\pi}{|\omega|}
+f(-x) = f(x) \ \ \text{(pari)}, \qquad f(-x) = -f(x) \ \ \text{(dispari)}, \\[6pt]
+f(x + T) = f(x) \ \ \text{(periodica di periodo } T\text{)}, \\[8pt]
+\sin(\omega x), \ \cos(\omega x) \ \text{hanno periodo} \ \frac{2\pi}{|\omega|}, \qquad \tan(\omega x) \ \text{ha periodo} \ \frac{\pi}{|\omega|}
 \end{gathered}
 $$
-Even and odd require a domain symmetric with respect to the origin; the graph of an even function is symmetric with respect to the $y$-axis, that of an odd function with respect to the origin. The periods in the second line are the minimal periods and hold for $\omega \neq 0$.
+Evenness and oddness require a domain symmetric with respect to the origin; the graph of an even function is symmetric with respect to the $y$-axis, that of an odd function with respect to the origin. The periods in the second line are the fundamental periods and hold for $\omega \neq 0$.
 :::
 
 :::formula{#trasformazioni-del-grafico titolo="Transformations of the graph"}
 $$
 \begin{array}{ll}
-f(x) + k & \text{vertical translation by } k \\[4pt]
-f(x - k) & \text{horizontal translation by } k \\[4pt]
-a\,f(x) & \text{vertical stretch by a factor } a \\[4pt]
-f(ax) & \text{horizontal compression by a factor } a \\[4pt]
--f(x), \ \ f(-x) & \text{reflection across the } x\text{-axis, across the } y\text{-axis} \\[4pt]
-|f(x)| & \text{the part with } f(x) < 0 \text{ is reflected across the } x\text{-axis} \\[4pt]
-f(|x|) & \text{the part with } x \geq 0 \text{ is kept and reflected across the } y\text{-axis}
+f(x) + k & \text{traslazione verticale di } k \\[4pt]
+f(x - k) & \text{traslazione orizzontale di } k \\[4pt]
+a\,f(x) & \text{dilatazione verticale di fattore } a \\[4pt]
+f(ax) & \text{compressione orizzontale di fattore } a \\[4pt]
+-f(x), \ \ f(-x) & \text{simmetria rispetto all'asse } x, \text{ rispetto all'asse } y \\[4pt]
+|f(x)| & \text{la parte con } f(x) < 0 \text{ si riflette rispetto all'asse } x \\[4pt]
+f(|x|) & \text{la parte con } x \geq 0 \text{ si conserva e si riflette rispetto all'asse } y
 \end{array}
 $$
 The translations are upward and to the right for $k > 0$, downward and to the left for $k < 0$. Stretch and compression refer to $a > 1$; for $0 < a < 1$ the two effects are exchanged.
@@ -235,7 +235,7 @@ x & 0 & \dfrac{\pi}{6} & \dfrac{\pi}{4} & \dfrac{\pi}{3} & \dfrac{\pi}{2} & \pi 
 \hline
 \sin x & 0 & \dfrac{1}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{\sqrt{3}}{2} & 1 & 0 \\[10pt]
 \cos x & 1 & \dfrac{\sqrt{3}}{2} & \dfrac{\sqrt{2}}{2} & \dfrac{1}{2} & 0 & -1 \\[10pt]
-\tan x & 0 & \dfrac{\sqrt{3}}{3} & 1 & \sqrt{3} & \text{undef.} & 0
+\tan x & 0 & \dfrac{\sqrt{3}}{3} & 1 & \sqrt{3} & \text{n.d.} & 0
 \end{array}
 $$
 The angles are measured in radians, and the angle of $180^\circ$ corresponds to $\pi$. The values in the other quadrants are obtained with the reduction formulas.
@@ -306,7 +306,7 @@ It holds for $a, b \in \mathbb{R}$ not both zero. It reduces a linear equation i
 :::formula{#equazioni-goniometriche titolo="Elementary trigonometric equations"}
 $$
 \begin{gathered}
-\sin x = m \iff x = \arcsin m + 2k\pi \ \ \text{or} \ \ x = \pi - \arcsin m + 2k\pi, \\[6pt]
+\sin x = m \iff x = \arcsin m + 2k\pi \ \ \text{oppure} \ \ x = \pi - \arcsin m + 2k\pi, \\[6pt]
 \cos x = m \iff x = \pm \arccos m + 2k\pi, \qquad
 \tan x = m \iff x = \arctan m + k\pi
 \end{gathered}
@@ -370,11 +370,11 @@ $$
 $$
 \theta =
 \begin{cases}
-\arctan \dfrac{b}{a} & \text{if } a > 0 \\[10pt]
-\arctan \dfrac{b}{a} + \pi & \text{if } a < 0, \ b \geq 0 \\[10pt]
-\arctan \dfrac{b}{a} - \pi & \text{if } a < 0, \ b < 0 \\[10pt]
-\dfrac{\pi}{2} & \text{if } a = 0, \ b > 0 \\[10pt]
--\dfrac{\pi}{2} & \text{if } a = 0, \ b < 0
+\arctan \dfrac{b}{a} & \text{se } a > 0 \\[10pt]
+\arctan \dfrac{b}{a} + \pi & \text{se } a < 0, \ b \geq 0 \\[10pt]
+\arctan \dfrac{b}{a} - \pi & \text{se } a < 0, \ b < 0 \\[10pt]
+\dfrac{\pi}{2} & \text{se } a = 0, \ b > 0 \\[10pt]
+-\dfrac{\pi}{2} & \text{se } a = 0, \ b < 0
 \end{cases}
 $$
 It holds for $z = a + ib \neq 0$. The formula gives the principal argument $\theta \in (-\pi, \pi]$, and every other argument differs from $\theta$ by an integer multiple of $2\pi$.
@@ -404,7 +404,7 @@ They hold for $z = \rho e^{i\theta}$ and $w = \sigma e^{i\varphi}$ with $\rho, \
 $$
 z^n = w \iff z = z_k = \sqrt[n]{\sigma}\; e^{\,i\frac{\varphi + 2k\pi}{n}}, \qquad k = 0, 1, \dots, n - 1
 $$
-It holds for $w = \sigma e^{i\varphi} \neq 0$ and $n \geq 1$ integer. The solutions are *exactly* $n$, have modulus $\sqrt[n]{\sigma}$ and are the vertices of a regular polygon with $n$ sides centered at the origin. The $n$-th roots of unity are $e^{\,i\frac{2k\pi}{n}}$; for $n = 4$ they are $1$, $i$, $-1$, $-i$.
+It holds for $w = \sigma e^{i\varphi} \neq 0$ and an integer $n \geq 1$. There are *exactly* $n$ solutions; they have modulus $\sqrt[n]{\sigma}$ and are the vertices of a regular polygon with $n$ sides centered at the origin. The $n$-th roots of unity are $e^{\,i\frac{2k\pi}{n}}$; for $n = 4$ they are $1$, $i$, $-1$, $-i$.
 :::
 
 :::formula{#equazioni-di-secondo-grado titolo="Quadratic equations in the complex field"}
@@ -429,10 +429,10 @@ It is used for equations in which $\bar{z}$, $|z|$, $\operatorname{Re}(z)$ or $\
 :::formula{#luoghi-geometrici titolo="Loci in the complex plane"}
 $$
 \begin{gathered}
-|z - z_0| = r \ \ \text{circle with center } z_0 \text{ and radius } r, \\[6pt]
-|z - z_0| \leq r \ \ \text{disk with center } z_0 \text{ and radius } r, \\[6pt]
-|z - z_1| = |z - z_2| \ \ \text{perpendicular bisector of the segment with endpoints } z_1, z_2, \\[6pt]
-\operatorname{Re}(z) = k \ \ \text{line } x = k, \qquad \operatorname{Im}(z) = k \ \ \text{line } y = k
+|z - z_0| = r \ \ \text{circonferenza di centro } z_0 \text{ e raggio } r, \\[6pt]
+|z - z_0| \leq r \ \ \text{cerchio di centro } z_0 \text{ e raggio } r, \\[6pt]
+|z - z_1| = |z - z_2| \ \ \text{asse del segmento di estremi } z_1, z_2, \\[6pt]
+\operatorname{Re}(z) = k \ \ \text{retta } x = k, \qquad \operatorname{Im}(z) = k \ \ \text{retta } y = k
 \end{gathered}
 $$
 They hold for $r > 0$, $z_1 \neq z_2$ and $k \in \mathbb{R}$. The number $|z - w|$ is the distance between the points $z$ and $w$.
@@ -490,9 +490,9 @@ $$
 = \lim_{x \to \pm\infty} \frac{a_n x^n}{b_m x^m}
 =
 \begin{cases}
-\dfrac{a_n}{b_m} & \text{if } n = m \\[10pt]
-0 & \text{if } n < m \\[4pt]
-\pm\infty & \text{if } n > m
+\dfrac{a_n}{b_m} & \text{se } n = m \\[10pt]
+0 & \text{se } n < m \\[4pt]
+\pm\infty & \text{se } n > m
 \end{cases}
 $$
 It holds for $a_n \neq 0$ and $b_m \neq 0$, because for $x \to \pm\infty$ a polynomial is asymptotic to its term of highest degree. For $n > m$ the sign of the infinity is the sign of $\dfrac{a_n}{b_m}\, x^{\,n-m}$.
@@ -540,42 +540,42 @@ The inequalities are required in a neighborhood of $x_0$, except possibly at $x_
 
 :::formula{#continuita-e-discontinuita titolo="Continuity and points of discontinuity"}
 $$
-f \ \text{continuous at } x_0 \iff \lim_{x \to x_0} f(x) = f(x_0)
+f \ \text{continua in } x_0 \iff \lim_{x \to x_0} f(x) = f(x_0)
 $$
 It holds for $x_0$ belonging to the domain and an accumulation point of it. A point of discontinuity $x_0$ is called
 
-- removable, if the limit exists finite and is different from $f(x_0)$, or $f(x_0)$ is not defined;
-- a jump discontinuity (or of the first kind), if the one-sided limits exist finite and are different;
+- removable, if the limit exists and is finite and is different from $f(x_0)$, or $f(x_0)$ is not defined;
+- a jump discontinuity (or of the first kind), if the one-sided limits exist and are finite and are different;
 - of the second kind, if *at least one* of the one-sided limits is infinite or does not exist.
 :::
 
-:::formula{#teoremi-sulle-funzioni-continue titolo="Bolzano (zeros), Weierstrass and intermediate value theorems"}
+:::formula{#teoremi-sulle-funzioni-continue titolo="Bolzano's theorem, the extreme value theorem and the intermediate value theorem"}
 $$
 \begin{gathered}
-f(a)\, f(b) < 0 \implies \text{there exists } c \in (a, b) \text{ with } f(c) = 0, \\[6pt]
-\text{there exist } x_m, x_M \in [a, b] \text{ with } f(x_m) \leq f(x) \leq f(x_M) \ \text{for every } x \in [a, b], \\[6pt]
+f(a)\, f(b) < 0 \implies \text{esiste } c \in (a, b) \text{ con } f(c) = 0, \\[6pt]
+\text{esistono } x_m, x_M \in [a, b] \text{ con } f(x_m) \leq f(x) \leq f(x_M) \ \text{per ogni } x \in [a, b], \\[6pt]
 f\bigl( [a, b] \bigr) = [m, M]
 \end{gathered}
 $$
-The three statements require $f$ continuous on the closed and bounded interval $[a, b]$; in the third line $m$ and $M$ are the minimum and the maximum of $f$ on $[a, b]$. Bolzano’s theorem on zeros locates the solutions of $f(x) = 0$, the Weierstrass theorem guarantees the existence of maximum and minimum.
+The three statements require $f$ continuous on the closed and bounded interval $[a, b]$; in the third line $m$ and $M$ are the minimum and the maximum of $f$ on $[a, b]$. Bolzano's theorem locates the solutions of $f(x) = 0$, the extreme value theorem guarantees the existence of maximum and minimum.
 :::
 
 :::formula{#asintoti titolo="Vertical, horizontal and oblique asymptotes"}
 $$
 \begin{gathered}
-x = x_0 \ \text{vertical:} \quad \lim_{x \to x_0^{+}} f(x) = \pm\infty \ \ \text{or} \ \ \lim_{x \to x_0^{-}} f(x) = \pm\infty, \\[8pt]
-y = L \ \text{horizontal:} \quad \lim_{x \to +\infty} f(x) = L \in \mathbb{R}, \\[8pt]
-y = mx + q \ \text{oblique:} \quad
+x = x_0 \ \text{verticale:} \quad \lim_{x \to x_0^{+}} f(x) = \pm\infty \ \ \text{oppure} \ \ \lim_{x \to x_0^{-}} f(x) = \pm\infty, \\[8pt]
+y = L \ \text{orizzontale:} \quad \lim_{x \to +\infty} f(x) = L \in \mathbb{R}, \\[8pt]
+y = mx + q \ \text{obliquo:} \quad
 \begin{cases}
 \displaystyle m = \lim_{x \to +\infty} \frac{f(x)}{x} \in \mathbb{R}, \ m \neq 0 \\[10pt]
 \displaystyle q = \lim_{x \to +\infty} \bigl( f(x) - mx \bigr) \in \mathbb{R}
 \end{cases}
 \end{gathered}
 $$
-For $x \to -\infty$ the definitions are analogous, and the asymptotes may be different on the two sides. The oblique asymptote exists *if and only if* both limits exist finite, with $m \neq 0$. On the same side a function has at most one horizontal or oblique asymptote.
+For $x \to -\infty$ the definitions are analogous, and the asymptotes may be different on the two sides. The oblique asymptote exists *if and only if* both limits exist and are finite, with $m \neq 0$. On the same side a function has at most one horizontal or oblique asymptote.
 :::
 
-## Standard limits and hierarchy of infinities
+## Standard limits and hierarchy of growth rates
 
 The standard limits are proved in the chapter [Limits and continuity](/en/analisi-1/limiti/teoria).
 
@@ -598,7 +598,7 @@ $$
 \lim_{x \to \pm\infty} \left( 1 + \frac{a}{x} \right)^{x} = e^{a}, \qquad
 \lim_{x \to 0} (1 + x)^{\frac{1}{x}} = e
 $$
-The second holds for every $a \in \mathbb{R}$. The number $e = 2.71828\ldots$ is the base of the natural logarithms. They are used for the forms $1^{\infty}$.
+The second holds for every $a \in \mathbb{R}$. The number $e = 2{,}71828\ldots$ is the base of the natural logarithms. They are used for the forms $1^{\infty}$.
 :::
 
 :::formula{#limiti-notevoli-esponenziali titolo="Standard exponential and logarithmic limits"}
@@ -614,11 +614,11 @@ $$
 They hold for $\alpha \in \mathbb{R}$ and $a > 0$, with $a \neq 1$ in the last one. As for the trigonometric limits, in place of $x$ one can write a function that tends to $0$ and does not vanish near the point.
 :::
 
-:::formula{#forma-uno-alla-infinito titolo="The form one to the infinity"}
+:::formula{#forma-uno-alla-infinito titolo="One raised to infinity"}
 $$
 \lim_{x \to x_0} f(x)^{g(x)} = e^{\,L}, \qquad L = \lim_{x \to x_0} g(x)\,\bigl( f(x) - 1 \bigr)
 $$
-It holds if $f(x) > 0$, $f(x) \to 1$, $g(x) \to \pm\infty$ and the limit $L$ exists finite; if $L = +\infty$ the limit equals $+\infty$, if $L = -\infty$ it equals $0$. The formula follows from $f(x)^{g(x)} = e^{\,g(x) \ln f(x)}$ and from $\ln f(x) \sim f(x) - 1$.
+It holds if $f(x) > 0$, $f(x) \to 1$, $g(x) \to \pm\infty$ and the limit $L$ exists and is finite; if $L = +\infty$ the limit equals $+\infty$, if $L = -\infty$ it equals $0$. The formula follows from $f(x)^{g(x)} = e^{\,g(x) \ln f(x)}$ and from $\ln f(x) \sim f(x) - 1$.
 :::
 
 :::formula{#funzioni-asintotiche titolo="Asymptotic equivalences as x tends to 0"}
@@ -635,7 +635,7 @@ They hold for $x \to 0$, with $a > 0$, $a \neq 1$ and $\alpha \neq 0$, and in pl
 Asymptotically equivalent functions are substituted in products and quotients, and substitution in sums and differences may give a wrong result. For $x \to 0$ one has $\sin x \sim x$ and $\displaystyle\lim_{x \to 0} \frac{\sin x - x}{x^3} = -\frac{1}{6}$, whereas substituting $x$ for $\sin x$ would give $0$. In these cases Taylor expansions are used.
 :::
 
-:::formula{#gerarchia-degli-infiniti titolo="Hierarchy of infinities"}
+:::formula{#gerarchia-degli-infiniti titolo="Hierarchy of growth rates"}
 $$
 \lim_{x \to +\infty} \frac{(\ln x)^{\beta}}{x^{\alpha}} = 0, \qquad
 \lim_{x \to +\infty} \frac{x^{\alpha}}{a^{x}} = 0, \qquad
@@ -644,14 +644,14 @@ $$
 They hold for $\alpha > 0$, $\beta > 0$ and $a > 1$. For $x \to +\infty$ the logarithm grows more slowly than *every* power, and every power more slowly than every exponential with base greater than $1$. In the forms $\dfrac{\infty}{\infty}$ one factors out, in the numerator and in the denominator, the term that grows fastest.
 :::
 
-:::formula{#gerarchia-per-le-successioni titolo="Hierarchy of infinities for sequences"}
+:::formula{#gerarchia-per-le-successioni titolo="Hierarchy of growth rates for sequences"}
 $$
 \lim_{n \to +\infty} \frac{(\ln n)^{\beta}}{n^{\alpha}} = 0, \qquad
 \lim_{n \to +\infty} \frac{n^{\alpha}}{a^{n}} = 0, \qquad
 \lim_{n \to +\infty} \frac{a^{n}}{n!} = 0, \qquad
 \lim_{n \to +\infty} \frac{n!}{n^{n}} = 0
 $$
-They hold for $\alpha > 0$, $\beta > 0$ and $a > 1$. In order of growth the infinities are $(\ln n)^{\beta}$, $n^{\alpha}$, $a^n$, $n!$, $n^n$.
+They hold for $\alpha > 0$, $\beta > 0$ and $a > 1$. In increasing order of growth, the divergent sequences are $(\ln n)^{\beta}$, $n^{\alpha}$, $a^n$, $n!$, $n^n$.
 :::
 
 :::formula{#limiti-notevoli-di-successioni titolo="Standard limits of sequences"}
@@ -662,13 +662,13 @@ $$
 \lim_{n \to +\infty} \left( 1 + \frac{a}{n} \right)^{n} = e^{a}, \\[8pt]
 \lim_{n \to +\infty} q^{n} =
 \begin{cases}
-0 & \text{if } |q| < 1 \\[2pt]
-1 & \text{if } q = 1 \\[2pt]
-+\infty & \text{if } q > 1
+0 & \text{se } |q| < 1 \\[2pt]
+1 & \text{se } q = 1 \\[2pt]
++\infty & \text{se } q > 1
 \end{cases}
 \end{gathered}
 $$
-The second holds for $a > 0$, the third for every $a \in \mathbb{R}$. For $q \leq -1$ the sequence $q^n$ has no limit. The first limit follows from $\sqrt[n]{n} = e^{\frac{\ln n}{n}}$ and from the hierarchy of infinities.
+The second holds for $a > 0$, the third for every $a \in \mathbb{R}$. For $q \leq -1$ the sequence $q^n$ has no limit. The first limit follows from $\sqrt[n]{n} = e^{\frac{\ln n}{n}}$ and from the hierarchy of growth rates.
 :::
 
 ## Derivatives
@@ -683,7 +683,7 @@ f'_{\pm}(x_0) = \lim_{h \to 0^{\pm}} \frac{f(x_0 + h) - f(x_0)}{h}, \\[8pt]
 y = f(x_0) + f'(x_0)\,(x - x_0)
 \end{gathered}
 $$
-The function $f$ is differentiable at the point $x_0$, interior to the domain, if the first limit exists *finite*, and this happens *if and only if* the one-sided derivatives exist finite and coincide. The third formula is the tangent line to the graph at the point $(x_0, f(x_0))$. A function differentiable at $x_0$ is continuous at $x_0$.
+The function $f$ is differentiable at the point $x_0$, interior to the domain, if the first limit exists and is *finite*, and this happens *if and only if* the one-sided derivatives exist and are finite and coincide. The third formula is the tangent line to the graph at the point $(x_0, f(x_0))$. A function differentiable at $x_0$ is continuous at $x_0$.
 :::
 
 :::formula{#regole-di-derivazione titolo="Differentiation rules"}
@@ -732,7 +732,7 @@ $$
 They hold for $x > 0$ in the square root and in $\log_a x$, with $a > 0$ and $a \neq 1$; for $x \neq 0$ in $\dfrac{1}{x}$, $\ln|x|$, $|x|$ and $\sqrt[3]{x}$; for every $x$ in the hyperbolic functions. At the point $0$ the functions $|x|$ and $\sqrt[3]{x}$ are not differentiable.
 :::
 
-:::formula{#derivate-di-funzioni-composte titolo="Derivatives of frequent composite functions"}
+:::formula{#derivate-di-funzioni-composte titolo="Derivatives of common composite functions"}
 $$
 \begin{gathered}
 \left( [f(x)]^{\alpha} \right)' = \alpha\, [f(x)]^{\alpha - 1} f'(x), \qquad
@@ -743,7 +743,7 @@ $$
 \left( \arctan f(x) \right)' = \frac{f'(x)}{1 + [f(x)]^2}
 \end{gathered}
 $$
-They are the chain rule applied to the elementary derivatives and hold where $f$ is differentiable and the outer function is differentiable at $f(x)$. In particular the root requires $f(x) > 0$, the logarithm $f(x) \neq 0$, the power with arbitrary real $\alpha$ $f(x) > 0$.
+They are the chain rule applied to the elementary derivatives and hold where $f$ is differentiable and the outer function is differentiable at $f(x)$. In particular the root requires $f(x) > 0$, the logarithm $f(x) \neq 0$, the power with arbitrary real $\alpha$ requires $f(x) > 0$.
 :::
 
 :::formula{#derivata-di-f-alla-g titolo="Derivative of a power with variable base and exponent"}
@@ -769,9 +769,9 @@ They hold for every $n \geq 1$ and $a \in \mathbb{R}$, with $x \neq 1$ in the fo
 :::formula{#punti-di-non-derivabilita titolo="Corner points, cusps and inflection points with vertical tangent"}
 $$
 \begin{gathered}
-\text{corner point:} \quad f'_{-}(x_0) \neq f'_{+}(x_0), \ \text{at least one finite}, \\[6pt]
-\text{cusp:} \quad f'_{-}(x_0) = \pm\infty, \ \ f'_{+}(x_0) = \mp\infty, \\[6pt]
-\text{inflection point with vertical tangent:} \quad f'_{-}(x_0) = f'_{+}(x_0) = +\infty \ \ \text{or} \ \ -\infty
+\text{punto angoloso:} \quad f'_{-}(x_0) \neq f'_{+}(x_0), \ \text{almeno una finita}, \\[6pt]
+\text{cuspide:} \quad f'_{-}(x_0) = \pm\infty, \ \ f'_{+}(x_0) = \mp\infty, \\[6pt]
+\text{flesso a tangente verticale:} \quad f'_{-}(x_0) = f'_{+}(x_0) = +\infty \ \ \text{oppure} \ \ -\infty
 \end{gathered}
 $$
 The classification concerns the points where $f$ is continuous and not differentiable, and the one-sided derivatives are the one-sided limits of the difference quotient. At the point $0$ the function $|x|$ has a corner point, $\sqrt{|x|}$ a cusp, $\sqrt[3]{x}$ an inflection point with vertical tangent.
@@ -783,14 +783,14 @@ The theorems with their proofs are in the chapter [Differential calculus and Tay
 
 :::formula{#teorema-di-fermat titolo="Fermat's theorem"}
 $$
-x_0 \ \text{point of local maximum or minimum} \implies f'(x_0) = 0
+x_0 \ \text{punto di massimo o di minimo locale} \implies f'(x_0) = 0
 $$
 It holds if $x_0$ is interior to the domain and $f$ is differentiable at $x_0$. The condition $f'(x_0) = 0$ is *necessary* and not sufficient, because $x^3$ has zero derivative at $0$ and is strictly increasing.
 :::
 
 :::formula{#teorema-di-rolle titolo="Rolle's theorem"}
 $$
-f(a) = f(b) \implies \text{there exists } c \in (a, b) \text{ with } f'(c) = 0
+f(a) = f(b) \implies \text{esiste } c \in (a, b) \text{ con } f'(c) = 0
 $$
 It holds for $f$ continuous on $[a, b]$ and differentiable on $(a, b)$.
 :::
@@ -798,8 +798,8 @@ It holds for $f$ continuous on $[a, b]$ and differentiable on $(a, b)$.
 :::formula{#teorema-di-lagrange titolo="Mean value theorem (Lagrange)"}
 $$
 \begin{gathered}
-\text{there exists } c \in (a, b) \text{ with } f'(c) = \frac{f(b) - f(a)}{b - a}, \\[8pt]
-|f'(x)| \leq K \ \text{on } (a, b) \implies |f(b) - f(a)| \leq K\,(b - a)
+\text{esiste } c \in (a, b) \text{ con } f'(c) = \frac{f(b) - f(a)}{b - a}, \\[8pt]
+|f'(x)| \leq K \ \text{su } (a, b) \implies |f(b) - f(a)| \leq K\,(b - a)
 \end{gathered}
 $$
 It holds for $f$ continuous on $[a, b]$ and differentiable on $(a, b)$. The estimate in the second line follows from the first and is used to prove inequalities.
@@ -807,7 +807,7 @@ It holds for $f$ continuous on $[a, b]$ and differentiable on $(a, b)$. The esti
 
 :::formula{#teorema-di-cauchy titolo="Cauchy's mean value theorem"}
 $$
-\text{there exists } c \in (a, b) \text{ with } \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}
+\text{esiste } c \in (a, b) \text{ con } \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)}
 $$
 It holds for $f$ and $g$ continuous on $[a, b]$ and differentiable on $(a, b)$, with $g'(x) \neq 0$ for every $x \in (a, b)$. For $g(x) = x$ one obtains the mean value theorem.
 :::
@@ -815,10 +815,10 @@ It holds for $f$ and $g$ continuous on $[a, b]$ and differentiable on $(a, b)$, 
 :::formula{#monotonia-e-segno-della-derivata titolo="Monotonicity and sign of the derivative"}
 $$
 \begin{gathered}
-f' \geq 0 \ \text{on } I \iff f \ \text{increasing on } I, \\[6pt]
-f' \leq 0 \ \text{on } I \iff f \ \text{decreasing on } I, \\[6pt]
-f' > 0 \ \text{on } I \implies f \ \text{strictly increasing on } I, \\[6pt]
-f' = 0 \ \text{on } I \implies f \ \text{constant on } I
+f' \geq 0 \ \text{su } I \iff f \ \text{crescente su } I, \\[6pt]
+f' \leq 0 \ \text{su } I \iff f \ \text{decrescente su } I, \\[6pt]
+f' > 0 \ \text{su } I \implies f \ \text{strettamente crescente su } I, \\[6pt]
+f' = 0 \ \text{su } I \implies f \ \text{costante su } I
 \end{gathered}
 $$
 They hold for $f$ differentiable on an *interval* $I$. On a union of intervals they are applied to each interval separately. For example the function $\dfrac{1}{x}$ has negative derivative on $\mathbb{R} \setminus \{0\}$, but satisfies $f(-1) < f(1)$, therefore it is not decreasing on $\mathbb{R} \setminus \{0\}$.
@@ -826,7 +826,7 @@ They hold for $f$ differentiable on an *interval* $I$. On a union of intervals t
 
 :::formula{#limite-della-derivata titolo="Limit of the derivative"}
 $$
-\lim_{x \to x_0} f'(x) = L \in \mathbb{R} \implies f \ \text{differentiable at } x_0 \ \text{and} \ f'(x_0) = L
+\lim_{x \to x_0} f'(x) = L \in \mathbb{R} \implies f \ \text{derivabile in } x_0 \ \text{e} \ f'(x_0) = L
 $$
 It holds for $f$ continuous at $x_0$ and differentiable in a neighborhood of $x_0$, except possibly at $x_0$; with the one-sided limits of $f'$ one obtains the one-sided derivatives. It is used at the junction points of piecewise-defined functions. If the limit of $f'$ does not exist, the criterion gives no information and one computes the limit of the difference quotient.
 :::
@@ -835,15 +835,15 @@ It holds for $f$ continuous at $x_0$ and differentiable in a neighborhood of $x_
 $$
 \lim_{x \to x_0} \frac{f(x)}{g(x)} = \lim_{x \to x_0} \frac{f'(x)}{g'(x)}
 $$
-It holds if the conditions
+It holds if the following conditions are satisfied
 $$
 \begin{cases}
-f, g \ \text{differentiable on } U \setminus \{x_0\}, \ \ g'(x) \neq 0 \ \text{on } U \setminus \{x_0\} \\[4pt]
-f, g \to 0 \ \ \text{or} \ \ |f|, |g| \to +\infty \\[4pt]
-\text{the limit of } \dfrac{f'}{g'} \ \text{exists, finite or infinite}
+f, g \ \text{derivabili in } U \setminus \{x_0\}, \ \ g'(x) \neq 0 \ \text{in } U \setminus \{x_0\} \\[4pt]
+f, g \to 0 \ \ \text{oppure} \ \ |f|, |g| \to +\infty \\[4pt]
+\text{il limite di } \dfrac{f'}{g'} \ \text{esiste, finito o infinito}
 \end{cases}
 $$
-are satisfied, where $U$ is a neighborhood of $x_0 \in \mathbb{R} \cup \{\pm\infty\}$; the same holds for one-sided limits. The forms $0 \cdot \infty$ and $\infty - \infty$ are reduced to a quotient, the forms $1^{\infty}$, $0^{0}$, $\infty^{0}$ are reduced to a quotient with $f^{g} = e^{\,g \ln f}$.
+where $U$ is a neighborhood of $x_0 \in \mathbb{R} \cup \{\pm\infty\}$; the same holds for one-sided limits. The forms $0 \cdot \infty$ and $\infty - \infty$ are reduced to a quotient, the forms $1^{\infty}$, $0^{0}$, $\infty^{0}$ are reduced to a quotient with $f^{g} = e^{\,g \ln f}$.
 :::
 
 ## Taylor and Maclaurin expansions
@@ -875,7 +875,7 @@ e^{x} &= 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots + \frac{x^n}{n!} + o(x^n
 \cos x &= 1 - \frac{x^2}{2} + \frac{x^4}{24} - \cdots + \frac{(-1)^n x^{2n}}{(2n)!} + o(x^{2n+1})
 \end{aligned}
 $$
-They hold for $x \to 0$ and every $n \in \mathbb{N}$. The sine contains *only* odd powers and the cosine only even powers, therefore the remainder is written one order higher than the last term.
+They hold for $x \to 0$ and every $n \in \mathbb{N}$. The sine contains *only* odd powers and the cosine only even powers, therefore the remainder is written at an order higher than that of the last term.
 :::
 
 :::formula{#mclaurin-iperboliche titolo="Maclaurin expansions of hyperbolic sine and cosine"}
@@ -951,8 +951,8 @@ The criteria for maxima, minima, convexity and inflection points are in the chap
 :::formula{#criterio-della-derivata-prima titolo="First derivative test"}
 $$
 \begin{gathered}
-f' > 0 \ \text{to the left}, \ \ f' < 0 \ \text{to the right of } x_0 \implies x_0 \ \text{point of local maximum}, \\[6pt]
-f' < 0 \ \text{to the left}, \ \ f' > 0 \ \text{to the right of } x_0 \implies x_0 \ \text{point of local minimum}
+f' > 0 \ \text{a sinistra}, \ \ f' < 0 \ \text{a destra di } x_0 \implies x_0 \ \text{di massimo relativo}, \\[6pt]
+f' < 0 \ \text{a sinistra}, \ \ f' > 0 \ \text{a destra di } x_0 \implies x_0 \ \text{di minimo relativo}
 \end{gathered}
 $$
 It holds for $f$ continuous at $x_0$ and differentiable in a neighborhood of $x_0$, except possibly at $x_0$. The test does not require differentiability at $x_0$, therefore it also applies to corner points and cusps. If $f'$ has the same sign on both sides, $x_0$ is neither a maximum nor a minimum.
@@ -961,8 +961,8 @@ It holds for $f$ continuous at $x_0$ and differentiable in a neighborhood of $x_
 :::formula{#criterio-della-derivata-seconda titolo="Second derivative test"}
 $$
 \begin{gathered}
-f'(x_0) = 0, \ \ f''(x_0) > 0 \implies x_0 \ \text{point of local minimum}, \\[6pt]
-f'(x_0) = 0, \ \ f''(x_0) < 0 \implies x_0 \ \text{point of local maximum}
+f'(x_0) = 0, \ \ f''(x_0) > 0 \implies x_0 \ \text{punto di minimo relativo}, \\[6pt]
+f'(x_0) = 0, \ \ f''(x_0) < 0 \implies x_0 \ \text{punto di massimo relativo}
 \end{gathered}
 $$
 It holds for $f$ twice differentiable at $x_0$. For $f''(x_0) = 0$ the test is inconclusive, as shown by $x^4$, $-x^4$ and $x^3$, which at $0$ have a minimum, a maximum and an inflection point.
@@ -982,15 +982,15 @@ $$
 \min_{[a, b]} f = \min \bigl\{ f(a),\ f(b),\ f(x_1), \dots, f(x_k) \bigr\}
 \end{gathered}
 $$
-It holds for $f$ continuous on $[a, b]$, where $x_1, \dots, x_k$ are the interior stationary points and the interior points of non-differentiability; the Weierstrass theorem guarantees the existence of maximum and minimum. On a domain that is not closed or not bounded, existence is decided with the limits at the endpoints of the domain.
+It holds for $f$ continuous on $[a, b]$, where $x_1, \dots, x_k$ are the interior stationary points and the interior points of non-differentiability; the extreme value theorem guarantees the existence of maximum and minimum. On a domain that is not closed or not bounded, existence is decided with the limits at the endpoints of the domain.
 :::
 
 :::formula{#convessita-e-derivata-seconda titolo="Convexity and second derivative"}
 $$
 \begin{gathered}
 f\bigl( (1 - t)\,x_1 + t\,x_2 \bigr) \leq (1 - t)\,f(x_1) + t\,f(x_2), \\[6pt]
-f'' \geq 0 \ \text{on } I \iff f \ \text{convex on } I, \qquad f'' \leq 0 \ \text{on } I \iff f \ \text{concave on } I, \\[6pt]
-f \ \text{convex on } I \iff f(x) \geq f(x_0) + f'(x_0)\,(x - x_0)
+f'' \geq 0 \ \text{su } I \iff f \ \text{convessa su } I, \qquad f'' \leq 0 \ \text{su } I \iff f \ \text{concava su } I, \\[6pt]
+f \ \text{convessa su } I \iff f(x) \geq f(x_0) + f'(x_0)\,(x - x_0)
 \end{gathered}
 $$
 The first line, required for every $x_1, x_2 \in I$ and every $t \in [0, 1]$, is the definition of a convex function on the interval $I$. The second holds for $f$ twice differentiable on $I$, and with $f'' > 0$ at the interior points the convexity is strict. The third holds for $f$ differentiable on $I$, with the inequality required for every $x, x_0 \in I$, and says that the graph of a convex function lies above every tangent line.
@@ -998,7 +998,7 @@ The first line, required for every $x_1, x_2 \in I$ and every $t \in [0, 1]$, is
 
 :::formula{#punti-di-flesso titolo="Inflection points"}
 $$
-x_0 \ \text{inflection point}, \ \ f \ \text{twice differentiable at } x_0 \implies f''(x_0) = 0
+x_0 \ \text{punto di flesso}, \ \ f \ \text{derivabile due volte in } x_0 \implies f''(x_0) = 0
 $$
 The candidates are the zeros of $f''$ and the points where $f''$ does not exist. A candidate at which $f$ is continuous and the graph has a tangent line is an inflection point if $f''$ changes sign at the point. The tangent at the inflection point is $y = f(x_0) + f'(x_0)(x - x_0)$, and the graph crosses it.
 :::
@@ -1058,7 +1058,7 @@ $$
 They hold for $a \neq 0$, with $F$ an antiderivative of $f$, and follow from the substitution $t = ax + b$.
 :::
 
-:::formula{#quasi-immediati-potenza-logaritmo-esponenziale titolo="Near-elementary integrals with power, logarithm and exponential"}
+:::formula{#quasi-immediati-potenza-logaritmo-esponenziale titolo="Integrals reducible to basic power, logarithmic and exponential formulas"}
 $$
 \begin{gathered}
 \int f'(x)\, [f(x)]^{\alpha}\, dx = \frac{[f(x)]^{\alpha + 1}}{\alpha + 1} + c \ \ (\alpha \neq -1), \\[8pt]
@@ -1070,7 +1070,7 @@ $$
 They hold for $f$ differentiable with continuous derivative, on the intervals where the integrand is defined. The integrand contains the derivative of the inner function, possibly up to a multiplicative constant, as in $\displaystyle\int x\, e^{x^2}\, dx = \frac{1}{2}\, e^{x^2} + c$.
 :::
 
-:::formula{#quasi-immediati-goniometrici titolo="Near-elementary integrals with trigonometric and inverse trigonometric functions"}
+:::formula{#quasi-immediati-goniometrici titolo="Integrals reducible to basic trigonometric and inverse trigonometric formulas"}
 $$
 \begin{gathered}
 \int f'(x) \cos f(x)\, dx = \sin f(x) + c, \qquad
@@ -1151,11 +1151,11 @@ They hold for $f$ continuous, with antiderivative $F$, and for $g$, $\varphi$ di
 :::formula{#sostituzioni-tipiche titolo="Typical substitutions"}
 $$
 \begin{array}{ll}
-\text{function of } e^{x} & t = e^{x}, \quad dx = \dfrac{dt}{t} \\[12pt]
-\ln x \text{ with the factor } \dfrac{1}{x} & t = \ln x, \quad dt = \dfrac{dx}{x} \\[12pt]
+\text{funzione di } e^{x} & t = e^{x}, \quad dx = \dfrac{dt}{t} \\[12pt]
+\ln x \text{ con il fattore } \dfrac{1}{x} & t = \ln x, \quad dt = \dfrac{dx}{x} \\[12pt]
 \sqrt[n]{ax + b} & t = \sqrt[n]{ax + b}, \quad dx = \dfrac{n\,t^{n-1}}{a}\, dt \\[12pt]
 \sqrt{a^2 - x^2} & x = a \sin t, \quad dx = a \cos t\, dt \\[8pt]
-\text{rational in } \sin x, \ \cos x & t = \tan \dfrac{x}{2}, \quad dx = \dfrac{2}{1 + t^2}\, dt
+\text{razionale in } \sin x, \ \cos x & t = \tan \dfrac{x}{2}, \quad dx = \dfrac{2}{1 + t^2}\, dt
 \end{array}
 $$
 In the third line $a \neq 0$. In the fourth $a > 0$ and $t \in \left[ -\dfrac{\pi}{2}, \dfrac{\pi}{2} \right]$, so that $\sqrt{a^2 - x^2} = a \cos t$. In the last one $x \in (-\pi, \pi)$, and sine and cosine are expressed with the half-angle substitution formulas.
@@ -1164,14 +1164,14 @@ In the third line $a \neq 0$. In the fourth $a > 0$ and $t \in \left[ -\dfrac{\p
 :::formula{#decomposizione-in-fratti-semplici titolo="Partial fraction decomposition"}
 $$
 \begin{array}{ll}
-\text{factor of } Q(x) & \text{terms of the decomposition} \\
+\text{fattore di } Q(x) & \text{addendi della decomposizione} \\
 \hline
 x - x_0 & \dfrac{A}{x - x_0} \\[12pt]
 (x - x_0)^m & \dfrac{A_1}{x - x_0} + \dfrac{A_2}{(x - x_0)^2} + \cdots + \dfrac{A_m}{(x - x_0)^m} \\[12pt]
 x^2 + px + q, \ \ p^2 - 4q < 0 & \dfrac{Ax + B}{x^2 + px + q}
 \end{array}
 $$
-It holds for $\dfrac{P(x)}{Q(x)}$ with the degree of $P$ less than the degree of $Q$; otherwise one first performs the division with remainder, $\dfrac{P}{Q} = S + \dfrac{R}{Q}$. The constants are determined by the principle of identity of polynomials or by substituting the roots of $Q$.
+It holds for $\dfrac{P(x)}{Q(x)}$ with the degree of $P$ less than the degree of $Q$; otherwise one first performs the division with remainder, $\dfrac{P}{Q} = S + \dfrac{R}{Q}$. The constants are determined by the polynomial identity principle or by substituting the roots of $Q$.
 :::
 
 :::formula{#integrali-dei-fratti-semplici titolo="Integrals of partial fractions"}
@@ -1189,9 +1189,9 @@ The third holds for $p^2 - 4q < 0$ and is obtained by writing $Ax + B = \dfrac{A
 $$
 \int \frac{dx}{x^2 + px + q} =
 \begin{cases}
-\dfrac{2}{\sqrt{-\Delta}} \arctan \dfrac{2x + p}{\sqrt{-\Delta}} + c & \text{if } \Delta < 0 \\[14pt]
--\dfrac{2}{2x + p} + c & \text{if } \Delta = 0 \\[14pt]
-\dfrac{1}{\sqrt{\Delta}} \ln \left| \dfrac{2x + p - \sqrt{\Delta}}{2x + p + \sqrt{\Delta}} \right| + c & \text{if } \Delta > 0
+\dfrac{2}{\sqrt{-\Delta}} \arctan \dfrac{2x + p}{\sqrt{-\Delta}} + c & \text{se } \Delta < 0 \\[14pt]
+-\dfrac{2}{2x + p} + c & \text{se } \Delta = 0 \\[14pt]
+\dfrac{1}{\sqrt{\Delta}} \ln \left| \dfrac{2x + p - \sqrt{\Delta}}{2x + p + \sqrt{\Delta}} \right| + c & \text{se } \Delta > 0
 \end{cases}
 $$
 Here $\Delta = p^2 - 4q$. The case $\Delta < 0$ is obtained by completing the square, $x^2 + px + q = \left( x + \dfrac{p}{2} \right)^2 + \dfrac{-\Delta}{4}$, and the case $\Delta > 0$ with partial fractions.
@@ -1217,9 +1217,9 @@ They hold for $f$ and $g$ integrable, with $\alpha, \beta \in \mathbb{R}$; monot
 :::formula{#integrali-di-funzioni-simmetriche titolo="Integrals of even, odd and periodic functions"}
 $$
 \begin{gathered}
-\int_{-a}^{a} f(x)\, dx = 0 \ \ (f \text{ odd}), \qquad
-\int_{-a}^{a} f(x)\, dx = 2 \int_0^{a} f(x)\, dx \ \ (f \text{ even}), \\[8pt]
-\int_{c}^{c + T} f(x)\, dx = \int_0^{T} f(x)\, dx \ \ (f \text{ periodic with period } T)
+\int_{-a}^{a} f(x)\, dx = 0 \ \ (f \text{ dispari}), \qquad
+\int_{-a}^{a} f(x)\, dx = 2 \int_0^{a} f(x)\, dx \ \ (f \text{ pari}), \\[8pt]
+\int_{c}^{c + T} f(x)\, dx = \int_0^{T} f(x)\, dx \ \ (f \text{ periodica di periodo } T)
 \end{gathered}
 $$
 The first two hold for $f$ integrable on $[-a, a]$ with $a > 0$, the third for $f$ integrable on a period and every $c \in \mathbb{R}$.
@@ -1227,9 +1227,9 @@ The first two hold for $f$ integrable on $[-a, a]$ with $a > 0$, the third for $
 
 :::formula{#teorema-della-media-integrale titolo="Mean value theorem for integrals"}
 $$
-\frac{1}{b - a} \int_a^b f(x)\, dx = f(c) \quad \text{for some } c \in [a, b]
+\frac{1}{b - a} \int_a^b f(x)\, dx = f(c) \quad \text{per qualche } c \in [a, b]
 $$
-It holds for $f$ continuous on $[a, b]$, with $a < b$. The left-hand side is the integral mean of $f$ on $[a, b]$.
+It holds for $f$ continuous on $[a, b]$, with $a < b$. The left-hand side is the average value of $f$ on $[a, b]$.
 :::
 
 :::formula{#teorema-fondamentale-del-calcolo titolo="Fundamental theorem of calculus"}
@@ -1267,7 +1267,7 @@ $$
 \int_{-\infty}^{+\infty} f(x)\, dx = \int_{-\infty}^{c} f(x)\, dx + \int_{c}^{+\infty} f(x)\, dx
 \end{gathered}
 $$
-The first holds for $f$ integrable on every $[a, t]$; the second for $f$ unbounded near $a$ and integrable on every $[t, b]$ with $a < t < b$. The integral converges if the limit exists finite, diverges if it is infinite, is indeterminate if the limit does not exist. An infinite endpoint, or a point near which $f$ is unbounded, is called a **critical point** of the integral. With several critical points the integral is split into integrals with a single critical point and converges if *all* of them converge; the behavior does not depend on $c$.
+The first holds for $f$ integrable on every $[a, t]$; the second for $f$ unbounded near $a$ and integrable on every $[t, b]$ with $a < t < b$. The integral converges if the limit exists and is finite, diverges if it is infinite, is oscillatory if the limit does not exist. An infinite endpoint, or a point near which $f$ is unbounded, is called a **singular point** of the integral. With several singular points the integral is split into integrals with a single singular point and converges if *all* of them converge; the behavior does not depend on $c$.
 :::
 
 :::formula{#integrali-campione titolo="Reference integrals of powers"}
@@ -1278,22 +1278,22 @@ $$
 The first integral converges *if and only if* $\alpha > 1$, the second *if and only if* $\alpha < 1$, and in the other cases they diverge to $+\infty$. Therefore $\displaystyle\int_0^{+\infty} \frac{dx}{x^{\alpha}}$ diverges for every $\alpha \in \mathbb{R}$.
 :::
 
-:::formula{#campioni-con-punto-critico-qualunque titolo="Reference integrals with the critical point at an arbitrary endpoint"}
+:::formula{#campioni-con-punto-critico-qualunque titolo="Reference integrals with the singular point at an arbitrary endpoint"}
 $$
 \begin{gathered}
-\int_a^{b} \frac{dx}{(x - a)^{\alpha}} \ \ \text{and} \ \ \int_a^{b} \frac{dx}{(b - x)^{\alpha}} \ \ \text{converge} \iff \alpha < 1, \\[8pt]
-\int_c^{+\infty} \frac{dx}{x^{\alpha}} \ \ \text{converges} \iff \alpha > 1
+\int_a^{b} \frac{dx}{(x - a)^{\alpha}} \ \ \text{e} \ \ \int_a^{b} \frac{dx}{(b - x)^{\alpha}} \ \ \text{convergono} \iff \alpha < 1, \\[8pt]
+\int_c^{+\infty} \frac{dx}{x^{\alpha}} \ \ \text{converge} \iff \alpha > 1
 \end{gathered}
 $$
-They hold for $a < b$ and $c > 0$. Moving the endpoint away from the critical point does not change the behavior.
+They hold for $a < b$ and $c > 0$. Changing the nonsingular endpoint does not change convergence behavior.
 :::
 
 :::formula{#campioni-con-esponenziale-e-logaritmo titolo="Reference integrals with exponential and logarithm"}
 $$
 \begin{gathered}
 \int_0^{+\infty} e^{-\lambda x}\, dx = \frac{1}{\lambda} \ \ (\lambda > 0), \qquad
-\int_2^{+\infty} \frac{dx}{x\,(\ln x)^{\beta}} \ \ \text{converges} \iff \beta > 1, \\[8pt]
-\int_0^{\frac{1}{2}} \frac{dx}{x\,|\ln x|^{\beta}} \ \ \text{converges} \iff \beta > 1
+\int_2^{+\infty} \frac{dx}{x\,(\ln x)^{\beta}} \ \ \text{converge} \iff \beta > 1, \\[8pt]
+\int_0^{\frac{1}{2}} \frac{dx}{x\,|\ln x|^{\beta}} \ \ \text{converge} \iff \beta > 1
 \end{gathered}
 $$
 For $\lambda \leq 0$ the first integral diverges. The reference integrals with the logarithm are reduced to those of powers with the substitution $u = \ln x$, and are needed when comparison with powers is inconclusive.
@@ -1302,37 +1302,37 @@ For $\lambda \leq 0$ the first integral diverges. The reference integrals with t
 :::formula{#criterio-del-confronto-per-gli-integrali titolo="Comparison test for integrals"}
 $$
 \begin{gathered}
-0 \leq f(x) \leq g(x), \quad \int g \ \text{converges} \implies \int f \ \text{converges}, \\[8pt]
-0 \leq f(x) \leq g(x), \quad \int f \ \text{diverges} \implies \int g \ \text{diverges}
+0 \leq f(x) \leq g(x), \quad \int g \ \text{converge} \implies \int f \ \text{converge}, \\[8pt]
+0 \leq f(x) \leq g(x), \quad \int f \ \text{diverge} \implies \int g \ \text{diverge}
 \end{gathered}
 $$
-It holds with the inequalities satisfied near the critical point, for $f$ and $g$ integrable on every closed and bounded interval that does not contain the critical point. The integral of a nonnegative function either converges or diverges to $+\infty$.
+It holds with the inequalities satisfied near the singular point, for $f$ and $g$ integrable on every closed and bounded interval that does not contain the singular point. The integral of a nonnegative function either converges or diverges to $+\infty$.
 :::
 
 :::formula{#confronto-asintotico-per-gli-integrali titolo="Limit comparison test for integrals"}
 $$
-f(x) \sim g(x) \ \ (x \to c) \implies \int f \ \text{and} \int g \ \text{have the same behavior}
+f(x) \sim g(x) \ \ (x \to c) \implies \int f \ \text{e} \int g \ \text{hanno lo stesso carattere}
 $$
-It holds for $f$ and $g$ positive near the critical point $c$, finite or infinite; in practice $g$ is a reference integrand, obtained with the standard limits or with Taylor expansions. More generally, setting $L = \displaystyle\lim_{x \to c} \frac{f(x)}{g(x)}$,
+It holds for $f$ and $g$ positive near the singular point $c$, finite or infinite; in practice $g$ is a reference integrand, obtained with the standard limits or with Taylor expansions. More generally, setting $L = \displaystyle\lim_{x \to c} \frac{f(x)}{g(x)}$,
 
 - if $0 < L < +\infty$, the integrals of $f$ and of $g$ have the same behavior;
 - if $L = 0$ and the integral of $g$ converges, the integral of $f$ converges as well;
 - if $L = +\infty$ and the integral of $g$ diverges, the integral of $f$ diverges as well.
 :::
 
-:::formula{#ordine-di-infinitesimo-e-di-infinito titolo="Order of infinitesimal and of infinity of the integrand"}
+:::formula{#ordine-di-infinitesimo-e-di-infinito titolo="Decay and blow-up orders of the integrand"}
 $$
 f(x) \sim \frac{k}{x^{p}} \ \ (x \to +\infty), \qquad f(x) \sim \frac{k}{|x - x_0|^{p}} \ \ (x \to x_0)
 $$
-It holds for $f$ positive, $k > 0$ and $p > 0$. For $x \to +\infty$ the integral converges if $p > 1$ and diverges if $p \leq 1$; at the finite critical point $x_0$ the integral converges if $p < 1$ and diverges if $p \geq 1$.
+It holds for $f$ positive, $k > 0$ and $p > 0$. For $x \to +\infty$ the integral converges if $p > 1$ and diverges if $p \leq 1$; at the finite singular point $x_0$ the integral converges if $p < 1$ and diverges if $p \geq 1$.
 :::
 
 :::formula{#convergenza-assoluta-degli-integrali titolo="Absolute convergence of integrals"}
 $$
-\int_a^{+\infty} |f(x)|\, dx \ \text{converges} \implies \int_a^{+\infty} f(x)\, dx \ \text{converges}, \qquad
+\int_a^{+\infty} |f(x)|\, dx \ \text{converge} \implies \int_a^{+\infty} f(x)\, dx \ \text{converge}, \qquad
 \left| \int_a^{+\infty} f(x)\, dx \right| \leq \int_a^{+\infty} |f(x)|\, dx
 $$
-It holds for $f$ integrable on every closed and bounded interval contained in $[a, +\infty)$, and the same statement holds for finite critical points. It is used for integrands of variable sign, for example with $\left| \dfrac{\cos x}{x^2} \right| \leq \dfrac{1}{x^2}$ on $[1, +\infty)$. The converse implication is false, as shown by $\displaystyle\int_1^{+\infty} \frac{\sin x}{x}\, dx$, which converges while the integral of the absolute value diverges.
+It holds for $f$ integrable on every closed and bounded interval contained in $[a, +\infty)$, and the same statement holds for finite singular points. It is used for integrands of variable sign, for example with $\left| \dfrac{\cos x}{x^2} \right| \leq \dfrac{1}{x^2}$ on $[1, +\infty)$. The converse implication is false, as shown by $\displaystyle\int_1^{+\infty} \frac{\sin x}{x}\, dx$, which converges while the integral of the absolute value diverges.
 :::
 
 :::formula{#integrali-impropri-notevoli titolo="Standard improper integrals"}
@@ -1341,30 +1341,30 @@ $$
 \int_{-\infty}^{+\infty} e^{-x^2}\, dx = \sqrt{\pi}, \qquad
 \int_0^{+\infty} \frac{\sin x}{x}\, dx = \frac{\pi}{2}
 $$
-The third integral converges and does not converge absolutely. At $0$ the function $\dfrac{\sin x}{x}$ tends to $1$, therefore $0$ is not a critical point.
+The third integral converges and does not converge absolutely. At $0$ the function $\dfrac{\sin x}{x}$ tends to $1$, therefore $0$ is not a singular point.
 :::
 
 :::attenzione
-The fundamental formula of integral calculus applies to a function continuous on the whole closed interval of integration. The function $\dfrac{1}{x^2}$ is not defined at $0$, and $-\dfrac{1}{x}$ is an antiderivative of it only on the intervals that do not contain $0$. Therefore the formula does not apply to $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$, and the computation $\left[ -\dfrac{1}{x} \right]_{-1}^{1} = -2$ would give a negative value for a positive function. The point $0$ is a critical point interior to the interval, therefore the integral is split into the integrals on $[-1, 0)$ and on $(0, 1]$; since both diverge to $+\infty$, the original integral diverges as well.
+The Newton–Leibniz formula applies to a function continuous on the whole closed interval of integration. The function $\dfrac{1}{x^2}$ is not defined at $0$, and $-\dfrac{1}{x}$ is an antiderivative of it only on the intervals that do not contain $0$. Therefore the formula does not apply to $\displaystyle\int_{-1}^{1} \frac{dx}{x^2}$, and the computation $\left[ -\dfrac{1}{x} \right]_{-1}^{1} = -2$ would give a negative value for a positive function. The point $0$ is a singular point interior to the interval, therefore the integral is split into the integrals on $[-1, 0)$ and on $(0, 1]$; since both diverge to $+\infty$, the original integral diverges as well.
 :::
 
-## Numerical series and power series
+## Series of numbers and power series
 
-The tests and the reference series are proved in the chapter [Numerical series](/en/analisi-1/serie/teoria).
+The tests and the reference series are proved in the chapter [Series of numbers](/en/analisi-1/serie/teoria).
 
 :::formula{#somme-parziali-e-condizione-necessaria titolo="Partial sums and necessary condition"}
 $$
 s_N = \sum_{n=1}^{N} a_n, \qquad \sum_{n=1}^{\infty} a_n = \lim_{N \to +\infty} s_N, \qquad
-\sum_{n=1}^{\infty} a_n \ \text{converges} \implies \lim_{n \to +\infty} a_n = 0
+\sum_{n=1}^{\infty} a_n \ \text{converge} \implies \lim_{n \to +\infty} a_n = 0
 $$
-The series converges if the limit of the partial sums exists finite, diverges if it is infinite, is indeterminate if it does not exist. The condition $a_n \to 0$ is *necessary* and not sufficient, as shown by the harmonic series. The behavior does not change if finitely many terms are modified.
+The series converges if the limit of the partial sums exists and is finite, diverges if it is infinite, is oscillatory if it does not exist. The condition $a_n \to 0$ is *necessary* and not sufficient, as shown by the harmonic series. The behavior does not change if finitely many terms are modified.
 :::
 
 :::formula{#serie-geometrica titolo="Geometric series"}
 $$
 \sum_{n=0}^{\infty} q^{n} = \frac{1}{1 - q}, \qquad \sum_{n=n_0}^{\infty} q^{n} = \frac{q^{n_0}}{1 - q} \qquad (|q| < 1)
 $$
-The series converges *if and only if* $|q| < 1$, diverges to $+\infty$ for $q \geq 1$ and is indeterminate for $q \leq -1$. The sum is the first term divided by $1 - q$.
+The series converges *if and only if* $|q| < 1$, diverges to $+\infty$ for $q \geq 1$ and is oscillatory for $q \leq -1$. The sum is the first term divided by $1 - q$.
 :::
 
 :::formula{#serie-telescopica titolo="Telescoping series and Mengoli's series"}
@@ -1378,8 +1378,8 @@ The telescoping series converges *if and only if* the sequence $(b_n)$ converges
 :::formula{#serie-armonica-generalizzata titolo="Generalized harmonic series"}
 $$
 \begin{gathered}
-\sum_{n=1}^{\infty} \frac{1}{n^{\alpha}} \ \ \text{converges} \iff \alpha > 1, \\[8pt]
-\sum_{n=2}^{\infty} \frac{1}{n^{\alpha} (\ln n)^{\beta}} \ \ \text{converges} \iff \alpha > 1 \ \ \text{or} \ \ \alpha = 1, \ \beta > 1
+\sum_{n=1}^{\infty} \frac{1}{n^{\alpha}} \ \ \text{converge} \iff \alpha > 1, \\[8pt]
+\sum_{n=2}^{\infty} \frac{1}{n^{\alpha} (\ln n)^{\beta}} \ \ \text{converge} \iff \alpha > 1 \ \ \text{oppure} \ \ \alpha = 1, \ \beta > 1
 \end{gathered}
 $$
 They hold for $\alpha, \beta \in \mathbb{R}$, and when they do not converge the two series diverge to $+\infty$. For $\alpha = 1$ the first is the harmonic series, which diverges. They are the reference terms of the limit comparison test.
@@ -1388,9 +1388,9 @@ They hold for $\alpha, \beta \in \mathbb{R}$, and when they do not converge the 
 :::formula{#confronto-e-confronto-asintotico-per-le-serie titolo="Comparison and limit comparison tests"}
 $$
 \begin{gathered}
-0 \leq a_n \leq b_n, \quad \sum b_n \ \text{converges} \implies \sum a_n \ \text{converges}, \\[6pt]
-0 \leq a_n \leq b_n, \quad \sum a_n \ \text{diverges} \implies \sum b_n \ \text{diverges}, \\[10pt]
-a_n \sim b_n \implies \sum a_n \ \text{and} \ \sum b_n \ \text{have the same behavior}
+0 \leq a_n \leq b_n, \quad \sum b_n \ \text{converge} \implies \sum a_n \ \text{converge}, \\[6pt]
+0 \leq a_n \leq b_n, \quad \sum a_n \ \text{diverge} \implies \sum b_n \ \text{diverge}, \\[10pt]
+a_n \sim b_n \implies \sum a_n \ \text{e} \ \sum b_n \ \text{hanno lo stesso carattere}
 \end{gathered}
 $$
 They hold for series with eventually nonnegative terms, with $b_n > 0$ in the third line. More generally, if $\dfrac{a_n}{b_n} \to \ell \in (0, +\infty)$ the two series have the same behavior; if $\ell = 0$ the convergence of $\sum b_n$ implies that of $\sum a_n$; if $\ell = +\infty$ the divergence of $\sum b_n$ implies that of $\sum a_n$.
@@ -1398,24 +1398,24 @@ They hold for series with eventually nonnegative terms, with $b_n > 0$ in the th
 
 :::formula{#criteri-del-rapporto-e-della-radice titolo="Ratio test and root test"}
 $$
-\ell = \lim_{n \to +\infty} \frac{a_{n+1}}{a_n} \ \ \text{or} \ \ \ell = \lim_{n \to +\infty} \sqrt[n]{a_n}, \qquad
-\ell < 1 \implies \sum a_n \ \text{converges}, \qquad \ell > 1 \implies \sum a_n \ \text{diverges}
+\ell = \lim_{n \to +\infty} \frac{a_{n+1}}{a_n} \ \ \text{oppure} \ \ \ell = \lim_{n \to +\infty} \sqrt[n]{a_n}, \qquad
+\ell < 1 \implies \sum a_n \ \text{converge}, \qquad \ell > 1 \implies \sum a_n \ \text{diverge}
 $$
 The ratio test holds for $a_n > 0$, the root test for $a_n \geq 0$ eventually, with $\ell$ finite or $+\infty$. For $\ell = 1$ the tests give no information, because $\sum \dfrac{1}{n}$ and $\sum \dfrac{1}{n^2}$ both give $\ell = 1$. The ratio test is suited to factorials, the root test to $n$-th powers.
 :::
 
 :::formula{#criterio-dell-integrale titolo="Integral test"}
 $$
-\sum_{n=n_0}^{\infty} f(n) \ \text{converges} \iff \int_{n_0}^{+\infty} f(x)\, dx \ \text{converges}
+\sum_{n=n_0}^{\infty} f(n) \ \text{converge} \iff \int_{n_0}^{+\infty} f(x)\, dx \ \text{converge}
 $$
 It holds for $f : [n_0, +\infty) \to \mathbb{R}$ nonnegative and decreasing. With $f(x) = \dfrac{1}{x^{\alpha}}$ it gives the behavior of the generalized harmonic series.
 :::
 
-:::formula{#criterio-di-leibniz titolo="Leibniz test"}
+:::formula{#criterio-di-leibniz titolo="Alternating series test"}
 $$
-\sum_{n=1}^{\infty} (-1)^{n}\, b_n \ \text{converges}, \qquad |s - s_N| \leq b_{N+1}
+\sum_{n=1}^{\infty} (-1)^{n}\, b_n \ \text{converge}, \qquad |s - s_N| \leq b_{N+1}
 $$
-It holds if the conditions
+It holds if the following conditions are satisfied for every $n$
 $$
 \begin{cases}
 b_n \geq 0 \\[2pt]
@@ -1423,15 +1423,15 @@ b_{n+1} \leq b_n \\[2pt]
 \displaystyle\lim_{n \to +\infty} b_n = 0
 \end{cases}
 $$
-are satisfied for every $n$, where $s$ is the sum of the series and $s_N$ the partial sum. The error made by stopping at $s_N$ does not exceed the first neglected term.
+where $s$ is the sum of the series and $s_N$ the partial sum. The error made by stopping at $s_N$ does not exceed the first neglected term.
 :::
 
 :::formula{#convergenza-assoluta-delle-serie titolo="Absolute convergence of series"}
 $$
-\sum_{n=1}^{\infty} |a_n| \ \text{converges} \implies \sum_{n=1}^{\infty} a_n \ \text{converges}, \qquad
+\sum_{n=1}^{\infty} |a_n| \ \text{converge} \implies \sum_{n=1}^{\infty} a_n \ \text{converge}, \qquad
 \left| \sum_{n=1}^{\infty} a_n \right| \leq \sum_{n=1}^{\infty} |a_n|
 $$
-It reduces a series of arbitrary sign to a series with nonnegative terms. The converse implication is false, because $\sum \dfrac{(-1)^n}{n}$ converges by the Leibniz test, whereas the series of the absolute values is the harmonic series.
+It reduces a series of arbitrary sign to a series with nonnegative terms. The converse implication is false, because $\sum \dfrac{(-1)^n}{n}$ converges by the alternating series test, whereas the series of the absolute values is the harmonic series.
 :::
 
 :::formula{#somme-di-serie-notevoli titolo="Sums of standard series and linearity"}
@@ -1449,7 +1449,7 @@ Linearity holds if $\sum a_n$ and $\sum b_n$ converge, with $\alpha, \beta \in \
 :::formula{#raggio-di-convergenza titolo="Power series and radius of convergence"}
 $$
 \sum_{n=0}^{\infty} c_n (x - x_0)^n, \qquad
-R = \frac{1}{\ell}, \qquad \ell = \lim_{n \to +\infty} \frac{|c_{n+1}|}{|c_n|} \ \ \text{or} \ \ \ell = \lim_{n \to +\infty} \sqrt[n]{|c_n|}
+R = \frac{1}{\ell}, \qquad \ell = \lim_{n \to +\infty} \frac{|c_{n+1}|}{|c_n|} \ \ \text{oppure} \ \ \ell = \lim_{n \to +\infty} \sqrt[n]{|c_n|}
 $$
 The series converges absolutely for $|x - x_0| < R$ and does not converge for $|x - x_0| > R$; at the endpoints $x_0 - R$ and $x_0 + R$ the behavior is studied by substituting the value. The formula for the radius holds if the limit $\ell$ exists, finite or $+\infty$, with $R = +\infty$ for $\ell = 0$ and $R = 0$ for $\ell = +\infty$; the limit of the ratio requires $c_n \neq 0$ eventually.
 :::
@@ -1472,7 +1472,7 @@ The first three hold for every $x \in \mathbb{R}$; the geometric series for $-1 
 
 The solution methods are proved in the chapter [Differential equations](/en/analisi-1/equazioni-differenziali/teoria).
 
-:::formula{#problema-di-cauchy titolo="Cauchy problem, existence and uniqueness"}
+:::formula{#problema-di-cauchy titolo="Initial value problem, existence and uniqueness"}
 $$
 \begin{cases}
 y' = f(x, y) \\[2pt]
@@ -1496,7 +1496,7 @@ y' + a(x)\, y = b(x) \implies y(x) = e^{-A(x)} \left( C + \int b(x)\, e^{A(x)}\,
 y(x) = e^{-A(x)} \left( y_0 + \int_{x_0}^{x} b(t)\, e^{A(t)}\, dt \right)
 \end{gathered}
 $$
-They hold for $a$ and $b$ continuous on an interval $I$, with $A$ an antiderivative of $a$ and $C \in \mathbb{R}$. The second line is the solution of the Cauchy problem with $y(x_0) = y_0$, in which $A(x) = \displaystyle\int_{x_0}^{x} a(t)\, dt$ is the antiderivative of $a$ that vanishes at $x_0$. The solutions are defined on all of $I$ and have the form $C e^{-A(x)} + y_p(x)$, with $y_p$ a particular solution.
+They hold for $a$ and $b$ continuous on an interval $I$, with $A$ an antiderivative of $a$ and $C \in \mathbb{R}$. The second line is the solution of the initial value problem with $y(x_0) = y_0$, in which $A(x) = \displaystyle\int_{x_0}^{x} a(t)\, dt$ is the antiderivative of $a$ that vanishes at $x_0$. The solutions are defined on all of $I$ and have the form $C e^{-A(x)} + y_p(x)$, with $y_p$ a particular solution.
 :::
 
 :::formula{#equazione-di-bernoulli titolo="Bernoulli equation"}
@@ -1513,9 +1513,9 @@ $$
 $$
 y(x) =
 \begin{cases}
-C_1 e^{r_1 x} + C_2 e^{r_2 x} & \text{if } \Delta > 0 \\[4pt]
-(C_1 + C_2 x)\, e^{r x} & \text{if } \Delta = 0 \\[4pt]
-e^{\lambda x} \bigl( C_1 \cos(\mu x) + C_2 \sin(\mu x) \bigr) & \text{if } \Delta < 0
+C_1 e^{r_1 x} + C_2 e^{r_2 x} & \text{se } \Delta > 0 \\[4pt]
+(C_1 + C_2 x)\, e^{r x} & \text{se } \Delta = 0 \\[4pt]
+e^{\lambda x} \bigl( C_1 \cos(\mu x) + C_2 \sin(\mu x) \bigr) & \text{se } \Delta < 0
 \end{cases}
 $$
 They hold for $a, b \in \mathbb{R}$ and $C_1, C_2 \in \mathbb{R}$. Here $r_1 \neq r_2$ are the real roots, $r = -\dfrac{a}{2}$ the double root, $\lambda \pm i\mu$ the complex conjugate roots, with $\lambda = -\dfrac{a}{2}$ and $\mu = \dfrac{\sqrt{-\Delta}}{2}$.
@@ -1525,13 +1525,13 @@ They hold for $a, b \in \mathbb{R}$ and $C_1, C_2 \in \mathbb{R}$. Here $r_1 \ne
 $$
 y = C_1 y_1 + C_2 y_2 + y_p
 $$
-It holds for $y'' + a y' + b y = f(x)$ with $f$ continuous, where $y_1$ and $y_2$ are non-proportional solutions of the associated homogeneous equation and $y_p$ is any particular solution of the complete equation. If $f = f_1 + f_2$, the sum of the particular solutions relative to $f_1$ and to $f_2$ is a particular solution relative to $f$.
+It holds for $y'' + a y' + b y = f(x)$ with $f$ continuous, where $y_1$ and $y_2$ are linearly independent solutions of the associated homogeneous equation and $y_p$ is any particular solution of the nonhomogeneous equation. If $f = f_1 + f_2$, the sum of the particular solutions relative to $f_1$ and to $f_2$ is a particular solution relative to $f$.
 :::
 
 :::formula{#metodo-di-somiglianza titolo="Method of undetermined coefficients"}
 $$
 \begin{array}{lll}
-f(x) & \text{trial } y_p & \text{associated number} \\
+f(x) & \text{tentativo } y_p & \text{numero associato} \\
 \hline
 p_n(x) & q_n(x) & 0 \\[4pt]
 A\, e^{\gamma x} & a_0\, e^{\gamma x} & \gamma \\[4pt]
@@ -1547,10 +1547,10 @@ Here $p_n$ is a polynomial of degree $n$ and $q_n$ a polynomial of degree $n$ wi
 $$
 y_p = -y_1 \int \frac{y_2\, f}{W}\, dx + y_2 \int \frac{y_1\, f}{W}\, dx, \qquad W = y_1 y_2' - y_1' y_2
 $$
-It holds for $f$ continuous, with $y_1$ and $y_2$ non-proportional solutions of the homogeneous equation associated with $y'' + a y' + b y = f(x)$; the Wronskian $W$ never vanishes. It also applies to forcing terms that do not appear in the table of the method of undetermined coefficients.
+It holds for $f$ continuous, with $y_1$ and $y_2$ linearly independent solutions of the homogeneous equation associated with $y'' + a y' + b y = f(x)$; the Wronskian $W$ never vanishes. It also applies to forcing terms that do not appear in the table of the method of undetermined coefficients.
 :::
 
-:::formula{#problema-di-cauchy-del-secondo-ordine titolo="Second-order Cauchy problem"}
+:::formula{#problema-di-cauchy-del-secondo-ordine titolo="Second-order initial value problem"}
 $$
 \begin{cases}
 y'' + a y' + b y = f(x) \\[2pt]

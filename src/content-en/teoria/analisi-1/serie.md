@@ -1,6 +1,6 @@
 ---
-titolo: Numerical series
-sommario: What it means to add infinitely many terms, which tests establish the behavior of a series, and how a power series is studied.
+titolo: Serie numeriche
+sommario: Che cosa significa sommare infiniti termini, con quali criteri si stabilisce il carattere di una serie, e come si studia una serie di potenze.
 ---
 
 ## Review of sequences
@@ -8,11 +8,11 @@ sommario: What it means to add infinitely many terms, which tests establish the 
 Two results on sequences that are used throughout the chapter.
 
 :::definizione{#successione titolo="Limit of a sequence"}
-A **sequence** is a function $a : \mathbb{N} \to \mathbb{R}$; its value at $n$ is written $a_n$. One writes $\displaystyle\lim_{n \to +\infty} a_n = L$, with $L \in \mathbb{R}$, if for every $\varepsilon > 0$ there exists $N$ such that $|a_n - L| < \varepsilon$ for every $n > N$; one writes $\displaystyle\lim_{n \to +\infty} a_n = +\infty$ if for every $M > 0$ there exists $N$ such that $a_n > M$ for every $n > N$, and similarly for $-\infty$. A sequence with a finite limit is called **convergent**, one with an infinite limit **divergent**, one without a limit **indeterminate**. The theorems of the chapter on limits hold for limits of sequences: uniqueness, sign permanence, comparison, algebra of limits, standard limits and the hierarchy of infinities.
+A **sequence** is a function $a : \mathbb{N} \to \mathbb{R}$; its value at $n$ is written $a_n$. One writes $\displaystyle\lim_{n \to +\infty} a_n = L$, with $L \in \mathbb{R}$, if for every $\varepsilon > 0$ there exists $N$ such that $|a_n - L| < \varepsilon$ for every $n > N$; one writes $\displaystyle\lim_{n \to +\infty} a_n = +\infty$ if for every $M > 0$ there exists $N$ such that $a_n > M$ for every $n > N$, and similarly for $-\infty$. A sequence with a finite limit is called **convergent**, one with an infinite limit **divergent to infinity**, one without a limit **oscillatory**. The theorems of the chapter on limits hold for limits of sequences: uniqueness, preservation of sign, comparison, algebra of limits, standard limits and the hierarchy of growth rates.
 
 - $a_n = \dfrac{1}{n}$ converges to $0$.
 - $a_n = n^2$ diverges to $+\infty$.
-- $a_n = (-1)^n$ is indeterminate, because its values oscillate between $-1$ and $1$.
+- $a_n = (-1)^n$ is oscillatory, because its values oscillate between $-1$ and $1$.
 :::
 
 :::teorema{#successioni-monotone titolo="Bounded monotone sequences"}
@@ -30,13 +30,13 @@ Depending on the limit of the partial sums, the series $\displaystyle\sum_{n=1}^
 
 - **converges**, with sum $s \in \mathbb{R}$, if $s_N \to s$; in this case one writes $\displaystyle\sum_{n=1}^{\infty} a_n = s$;
 - **diverges** to $+\infty$ or to $-\infty$, if $s_N \to +\infty$ or $s_N \to -\infty$;
-- is **indeterminate**, if $s_N$ has no limit.
+- is **oscillatory**, if $s_N$ has no limit.
 
-Studying the behavior of a series means establishing which of the three cases it falls into. For example $\displaystyle\sum_{n=1}^{\infty} (-1)^n$ has partial sums $-1, 0, -1, 0, \dots$, which have no limit, therefore the series is indeterminate.
+Studying the behavior of a series means establishing which of the three cases it falls into. For example $\displaystyle\sum_{n=1}^{\infty} (-1)^n$ has partial sums $-1, 0, -1, 0, \dots$, which have no limit, therefore the series is oscillatory.
 :::
 
 :::osservazione
-The behavior of a series **does not depend on its first terms**: if a finite number of terms is modified, from some index on the partial sums change by a constant, therefore convergence, divergence and indeterminacy are preserved, while the *sum* in general changes. For this reason the hypotheses of the tests are required **eventually**, that is, from some index on, and the starting index of the series is chosen where the general term is defined.
+The behavior of a series **does not depend on its first terms**: if a finite number of terms is modified, from some index on the partial sums change by a constant, therefore convergence, divergence and oscillation are preserved, while the *sum* in general changes. For this reason the hypotheses of the tests are required **eventually**, that is, from some index on, and the starting index of the series is chosen where the general term is defined.
 :::
 
 ## Reference series
@@ -48,7 +48,7 @@ For $q \in \mathbb{R}$, the series $\displaystyle\sum_{n=0}^{\infty} q^n$
 
 - **converges** if $|q| < 1$, with sum $\dfrac{1}{1 - q}$;
 - **diverges** to $+\infty$ if $q \geq 1$;
-- is **indeterminate** if $q \leq -1$.
+- is **oscillatory** if $q \leq -1$.
 
 For $|q| < 1$ and any starting index one has $\displaystyle\sum_{n=n_0}^{\infty} q^n = \dfrac{q^{n_0}}{1 - q}$: the sum is the *first term* divided by $1 - q$. It is one of the few series whose sum is known, and it serves as the term of comparison in the ratio and root tests.
 
@@ -57,7 +57,7 @@ For $q \neq 1$, the identity $(1 - q)(1 + q + \cdots + q^N) = 1 - q^{N+1}$ gives
 $$
 s_N = \sum_{n=0}^{N} q^n = \frac{1 - q^{N+1}}{1 - q} .
 $$
-If $|q| < 1$, then $q^{N+1} \to 0$, therefore $s_N \to \dfrac{1}{1 - q}$. If $q > 1$, then $q^{N+1} \to +\infty$, therefore $s_N = \dfrac{q^{N+1} - 1}{q - 1} \to +\infty$. If $q = 1$, then $s_N = N + 1 \to +\infty$. If $q \leq -1$, the sequence $q^{N+1}$ changes sign at every step without tending to $0$, therefore it has no limit, and hence $s_N$ has no limit either: the series is **indeterminate**.
+If $|q| < 1$, then $q^{N+1} \to 0$, therefore $s_N \to \dfrac{1}{1 - q}$. If $q > 1$, then $q^{N+1} \to +\infty$, therefore $s_N = \dfrac{q^{N+1} - 1}{q - 1} \to +\infty$. If $q = 1$, then $s_N = N + 1 \to +\infty$. If $q \leq -1$, the sequence $q^{N+1}$ changes sign at every step without tending to $0$, therefore it has no limit, and hence $s_N$ has no limit either: the series is **oscillatory**.
 :::
 ::::
 
@@ -76,7 +76,7 @@ A series is **telescoping** if its general term can be written as $a_n = b_n - b
 $$
 s_N = \sum_{n=1}^{N} (b_n - b_{n+1}) = b_1 - b_{N+1} ,
 $$
-therefore the series converges *if and only if* $(b_n)$ converges, and the sum is $b_1 - \displaystyle\lim_{n \to +\infty} b_n$. This is the second case in which the sum is computed exactly; the expression $a_n = b_n - b_{n+1}$ is generally obtained with the **partial fraction decomposition**.
+therefore the series converges *if and only if* $(b_n)$ converges, and the sum is $b_1 - \displaystyle\lim_{n \to +\infty} b_n$. This is the second case in which the sum is computed exactly; the expression $a_n = b_n - b_{n+1}$ is generally obtained using **partial fraction decomposition**.
 :::
 
 :::esempio{titolo="Mengoli's series"}
@@ -91,7 +91,7 @@ The harmonic series
 $$
 \sum_{n=1}^{\infty} \frac{1}{n}
 $$
-**diverges** to $+\infty$, *even though* its general term tends to $0$. It is the term of comparison for many divergent series and it is the counterexample showing that the necessary condition is not sufficient.
+**diverges** to $+\infty$, *even though* its general term tends to $0$. It is the term of comparison for many divergent series and it is the counterexample showing that a general term tending to zero is not enough for convergence.
 
 :::dimostrazione
 The terms are grouped into blocks: for every $k \geq 1$, the block of terms with index from $2^{k-1} + 1$ to $2^k$ contains $2^{k-1}$ terms, each greater than or equal to $\dfrac{1}{2^k}$, therefore
@@ -116,7 +116,7 @@ It is the reference scale for limit comparison: the behavior of many series is d
 ::::teorema{#condizione-necessaria titolo="Necessary condition for convergence"}
 If $\displaystyle\sum_{n=1}^{\infty} a_n$ converges, then $a_n \to 0$. Equivalently: if the general term does *not* tend to $0$, the series **does not converge**. It is the first check to perform on every series, because it immediately rules out convergence when the general term is not infinitesimal.
 $$
-\sum_{n=1}^{\infty} \frac{n}{n+1} \quad\text{does not converge, because } \frac{n}{n+1} \to 1 \neq 0 ;
+\sum_{n=1}^{\infty} \frac{n}{n+1} \quad\text{non converge, perché } \frac{n}{n+1} \to 1 \neq 0 ;
 $$
 the terms are positive, therefore the partial sums increase and the series **diverges** to $+\infty$.
 
@@ -132,7 +132,7 @@ The condition is *necessary* and *not sufficient*: $a_n \to 0$ **does not imply 
 ## Series with nonnegative terms
 
 :::teorema{#termini-non-negativi titolo="Behavior of series with nonnegative terms"}
-If $a_n \geq 0$ eventually, the series **either converges or diverges** to $+\infty$: the indeterminate case does *not* occur. Indeed the partial sums are eventually increasing, therefore by the theorem on monotone sequences they have a limit, finite or $+\infty$; the series converges *if and only if* the partial sums are **bounded**. All the tests of this section are based on this fact.
+If $a_n \geq 0$ eventually, the series **either converges or diverges** to $+\infty$: the oscillatory case does *not* occur. Indeed the partial sums are eventually increasing, therefore by the theorem on monotone sequences they have a limit, finite or $+\infty$; the series converges *if and only if* the partial sums are **bounded**. All the tests of this section are based on this fact.
 :::
 
 ::::teorema{#criterio-del-confronto titolo="Comparison test"}
@@ -178,7 +178,7 @@ If $0 \leq a_n \leq b_n$ eventually: the convergence of $\sum b_n$ implies that 
 :::
 
 :::esempio{titolo="Standard limits in limit comparison"}
-$\displaystyle\sum_{n=1}^{\infty} \sin \frac{1}{n}$ **diverges**: since $\dfrac{1}{n} \to 0$, by the **standard limit of the sine** $\sin \dfrac{1}{n} \sim \dfrac{1}{n}$, and the harmonic series diverges. $\displaystyle\sum_{n=1}^{\infty} \left( 1 - \cos \frac{1}{n} \right)$ **converges**: $1 - \cos \dfrac{1}{n} \sim \dfrac{1}{2n^2}$ and $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ converges.
+$\displaystyle\sum_{n=1}^{\infty} \sin \frac{1}{n}$ **diverges**. Since $\dfrac{1}{n} \to 0$, by the **standard sine limit** $\sin \dfrac{1}{n} \sim \dfrac{1}{n}$, and the harmonic series diverges. $\displaystyle\sum_{n=1}^{\infty} \left( 1 - \cos \frac{1}{n} \right)$ **converges**, because $1 - \cos \dfrac{1}{n} \sim \dfrac{1}{2n^2}$ and $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^2}$ converges.
 :::
 
 :::teorema{#criterio-del-rapporto titolo="Ratio test"}
@@ -204,7 +204,7 @@ It is the test suited to the case in which the general term is an $n$-th **power
 :::teorema{#criterio-dell-integrale titolo="Integral test"}
 Let $f : [n_0, +\infty) \to \mathbb{R}$ be *nonnegative* and *decreasing*, with $a_n = f(n)$. Then
 $$
-\sum_{n=n_0}^{\infty} a_n \ \text{converges} \iff \int_{n_0}^{+\infty} f(x)\, dx \ \text{converges} .
+\sum_{n=n_0}^{\infty} a_n \ \text{converge} \iff \int_{n_0}^{+\infty} f(x)\, dx \ \text{converge} .
 $$
 The test connects series to **improper integrals**, for which see the corresponding chapter; with $f(x) = \dfrac{1}{x^{\alpha}}$ it yields the generalized harmonic series. For example $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n \ln n}$ **diverges**, because the integral of $\dfrac{1}{x \ln x}$ over $[2, +\infty)$ equals $\displaystyle\lim_{t \to +\infty} \bigl( \ln \ln t - \ln \ln 2 \bigr) = +\infty$.
 
@@ -215,20 +215,20 @@ The test connects series to **improper integrals**, for which see the correspond
 ## Series with terms of varying sign
 
 :::teorema{#convergenza-assoluta titolo="Absolute convergence"}
-The series $\sum a_n$ **converges absolutely** if the series of absolute values $\sum |a_n|$ converges. Absolute convergence *implies* convergence, and
+The series $\sum a_n$ **converges absolutely** if the series of absolute values $\sum |a_n|$ converges. Absolute convergence *implies* convergence, and the following inequality holds
 $$
 \left| \sum_{n=1}^{\infty} a_n \right| \leq \sum_{n=1}^{\infty} |a_n| .
 $$
 A series that converges but does not converge absolutely is called **conditionally convergent**. The theorem reduces a series with terms of any sign to a series with nonnegative terms, to which the tests of the previous section apply. The proof applies the comparison test to the inequalities $0 \leq a_n + |a_n| \leq 2|a_n|$ and is omitted.
 :::
 
-:::teorema{#criterio-di-leibniz titolo="Leibniz test"}
+:::teorema{#criterio-di-leibniz titolo="Alternating series test"}
 Let $(b_n)$ be a sequence with
 
 $$
 \begin{cases}
-b_n \geq 0 \ \text{for every } n \\[4pt]
-b_{n+1} \leq b_n \ \text{for every } n \\[4pt]
+b_n \geq 0 \ \text{per ogni } n \\[4pt]
+b_{n+1} \leq b_n \ \text{per ogni } n \\[4pt]
 b_n \to 0
 \end{cases}
 $$
@@ -273,23 +273,23 @@ with the convention $(x - x_0)^0 = 1$ also for $x = x_0$. For each fixed $x$ it 
 For every power series there exists $R \in [0, +\infty]$, called the **radius of convergence**, such that the series
 
 - **converges absolutely** for every $x$ with $|x - x_0| < R$;
-- **does not converge** for every $x$ with $|x - x_0| > R$.
+- **does not converge** for any $x$ with $|x - x_0| > R$.
 
 At the two endpoints $x = x_0 - R$ and $x = x_0 + R$ the behavior depends on the series and is studied *by substituting the value*, with the tests for numerical series. The set of convergence is therefore an interval with center $x_0$, with the endpoints included or excluded according to the study. The proof uses comparison with geometric series and is omitted.
 :::
 
-:::teorema{#calcolo-del-raggio titolo="Ratio and root for the radius"}
+:::teorema{#calcolo-del-raggio titolo="Ratio and root tests for the radius"}
 If the coefficients are eventually nonzero and
 $$
 \lim_{n \to +\infty} \frac{|c_{n+1}|}{|c_n|} = \ell
-\qquad\text{or}\qquad
+\qquad\text{oppure}\qquad
 \lim_{n \to +\infty} \sqrt[n]{|c_n|} = \ell ,
 $$
 exists, finite or $+\infty$, then $R = \dfrac{1}{\ell}$, with the conventions $R = +\infty$ for $\ell = 0$ and $R = 0$ for $\ell = +\infty$. The statement follows by applying the **ratio test** or the **root test** to the series of absolute values. For example $\displaystyle\sum_{n=0}^{\infty} \frac{x^n}{n!}$ has $\dfrac{|c_{n+1}|}{|c_n|} = \dfrac{1}{n+1} \to 0$, therefore $R = +\infty$: the series **converges** for *every* $x \in \mathbb{R}$.
 :::
 
 :::esempio{titolo="Study of the endpoints"}
-$\displaystyle\sum_{n=1}^{\infty} \frac{x^n}{n}$: since $\dfrac{|c_{n+1}|}{|c_n|} = \dfrac{n}{n+1} \to 1$, the radius is $R = 1$ and the series converges absolutely on $(-1, 1)$. At $x = 1$ the series is the harmonic series, which **diverges**; at $x = -1$ the series is $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n}{n}$, which **converges** by the **Leibniz test**. The set of convergence is $[-1, 1)$.
+$\displaystyle\sum_{n=1}^{\infty} \frac{x^n}{n}$: since $\dfrac{|c_{n+1}|}{|c_n|} = \dfrac{n}{n+1} \to 1$, the radius is $R = 1$ and the series converges absolutely on $(-1, 1)$. At $x = 1$ the series is the harmonic series, which **diverges**; at $x = -1$ the series is $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^n}{n}$, which **converges** by the **alternating series test**. The set of convergence is $[-1, 1)$.
 
 ::grafico{f="-log(1-x)+0*sqrt(x+1);x+x^2/2+x^3/3+x^4/4+x^5/5" asintoti="x=1" punti="-1,-0.6931,pieno" xmin=-1.8 xmax=1.6 ymin=-1.5 ymax=4 titolo="From the series of $\ln(1 + x)$ with $-x$ in place of $x$, the sum of $\sum \dfrac{x^n}{n}$ is $-\ln(1 - x)$ (in color), defined on the set of convergence $[-1, 1)$; dashed, the partial sum up to $\dfrac{x^5}{5}$"}
 
@@ -305,7 +305,7 @@ $$
 For $|x| < 1$:
 $$
 \frac{1}{1 - x} = \sum_{n=0}^{\infty} x^n , \qquad
-\ln(1 + x) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1}\, x^n}{n} \quad (\text{also valid at } x = 1).
+\ln(1 + x) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1}\, x^n}{n} \quad (\text{valida anche in } x = 1).
 $$
 These equalities follow from **Taylor's formula with remainder**, treated in the chapter on derivatives, and are assumed here. They make it possible to compute **exact sums** of numerical series by substitution: with $x = 1$ in the first one obtains $\displaystyle\sum_{n=0}^{\infty} \frac{1}{n!} = e$; with $x = 1$ in the last, $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} = \ln 2$.
 

@@ -1,6 +1,6 @@
 ---
-titolo: Differential calculus and Taylor
-sommario: The derivative as the limit of the difference quotient, the differentiation rules, the theorems of Fermat, Rolle and Lagrange with their consequences, L'Hôpital's rule and Taylor's formula.
+titolo: Calcolo differenziale e Taylor
+sommario: La derivata come limite del rapporto incrementale, le regole di calcolo, i teoremi di Fermat, Rolle e Lagrange con le loro conseguenze, il teorema di de l'Hôpital e la formula di Taylor.
 ---
 
 ## The derivative
@@ -94,7 +94,7 @@ $$
 \begin{gathered}
 (f + g)'(x) = f'(x) + g'(x), \qquad (c\,f)'(x) = c\, f'(x), \\[6pt]
 (f\,g)'(x) = f'(x)\, g(x) + f(x)\, g'(x), \\[6pt]
-\left( \frac{f}{g} \right)'(x) = \frac{f'(x)\, g(x) - f(x)\, g'(x)}{g(x)^2} \quad \text{if } g(x) \neq 0 .
+\left( \frac{f}{g} \right)'(x) = \frac{f'(x)\, g(x) - f(x)\, g'(x)}{g(x)^2} \quad \text{se } g(x) \neq 0 .
 \end{gathered}
 $$
 With these rules and the table of elementary derivatives, every function built with the four operations can be differentiated *without* going back to the definition.
@@ -172,23 +172,23 @@ The condition $f'(x_0) = 0$ is *necessary* for an interior local extremum, *not 
 :::
 
 ::::teorema{#teorema-di-rolle titolo="Rolle's theorem"}
-Let $f$ be continuous on $[a, b]$, differentiable on $(a, b)$, with $f(a) = f(b)$. Then there exists $c \in (a, b)$ such that $f'(c) = 0$. Between two points of the graph at the same height there is therefore a point with a **horizontal tangent**. Lagrange's theorem is deduced from Rolle's theorem.
+Let $f$ be continuous on $[a, b]$, differentiable on $(a, b)$, with $f(a) = f(b)$. Then there exists $c \in (a, b)$ such that $f'(c) = 0$. Between two points of the graph at the same height there is therefore a point with a **horizontal tangent**. The mean value theorem is deduced from Rolle's theorem.
 
 ::grafico{f="x^3-4*x+1+0*sqrt(4-x^2)" xmin=-2.6 xmax=2.6 ymin=-3 ymax=5.5 punti="-2,1,pieno,A;2,1,pieno,B;-1.1547,4.0792,pieno,c₁;1.1547,-2.0792,pieno,c₂" segmenti="-2,1,2,1;-1.9,4.0792,-0.4,4.0792;0.4,-2.0792,1.9,-2.0792" titolo="$f(x) = x^3 - 4x + 1$ on $[-2, 2]$ has $f(-2) = f(2) = 1$: at the points $c = \pm\dfrac{2}{\sqrt{3}}$ the tangent is horizontal"}
 
 :::dimostrazione
-Since $f$ is continuous on $[a, b]$, by the **Weierstrass theorem** $f$ attains on $[a, b]$ a maximum value $M$ and a minimum value $m$.
+Since $f$ is continuous on $[a, b]$, by the **extreme value theorem** $f$ attains on $[a, b]$ a maximum value $M$ and a minimum value $m$.
 
 - If $M = m$, the function is **constant** on $[a, b]$, therefore $f'(c) = 0$ for every $c \in (a, b)$.
 - If $M > m$, *at least one* of the two values is different from $f(a) = f(b)$, therefore it is attained at a point $c$ interior to the interval. The point $c$ is an interior local extremum and $f$ is differentiable at $c$, hence by **Fermat's theorem** $f'(c) = 0$.
 :::
 ::::
 
-:::richiamo{titolo="Weierstrass theorem"}
+:::richiamo{titolo="Extreme value theorem"}
 If $f$ is continuous on $[a, b]$, then $f$ attains a maximum and a minimum on $[a, b]$.
 :::
 
-::::teorema{#teorema-di-lagrange titolo="Lagrange's theorem"}
+::::teorema{#teorema-di-lagrange titolo="Mean value theorem"}
 Let $f$ be continuous on $[a, b]$ and differentiable on $(a, b)$. Then there exists $c \in (a, b)$ such that
 $$
 f'(c) = \frac{f(b) - f(a)}{b - a} .
@@ -214,7 +214,7 @@ from $g'(c) = 0$ it follows that $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 If $f$ is continuous on $[a, b]$, differentiable on $(a, b)$ and $f(a) = f(b)$, then there exists $c \in (a, b)$ with $f'(c) = 0$.
 :::
 
-:::teorema{#teorema-di-cauchy titolo="Cauchy's theorem"}
+:::teorema{#teorema-di-cauchy titolo="Cauchy's mean value theorem"}
 Let $f$ and $g$ be continuous on $[a, b]$ and differentiable on $(a, b)$. Then there exists $c \in (a, b)$ such that
 $$
 \bigl( f(b) - f(a) \bigr)\, g'(c) = \bigl( g(b) - g(a) \bigr)\, f'(c) .
@@ -223,10 +223,10 @@ If moreover $g'(x) \neq 0$ on $(a, b)$, then $g(b) \neq g(a)$ by **Rolle's theor
 $$
 \frac{f'(c)}{g'(c)} = \frac{f(b) - f(a)}{g(b) - g(a)} .
 $$
-For $g(x) = x$ one recovers **Lagrange's theorem**. The proof applies Rolle's theorem to the function $h(x) = \bigl( f(b) - f(a) \bigr) g(x) - \bigl( g(b) - g(a) \bigr) f(x)$. Cauchy's theorem is the step through which L'Hôpital's rule is proved.
+For $g(x) = x$ one recovers the **mean value theorem**. The proof applies Rolle's theorem to the function $h(x) = \bigl( f(b) - f(a) \bigr) g(x) - \bigl( g(b) - g(a) \bigr) f(x)$. Cauchy's mean value theorem is the step through which L'Hôpital's rule is proved.
 :::
 
-## Consequences of Lagrange's theorem
+## Consequences of the mean value theorem
 
 ::::teorema{#monotonia-e-derivata titolo="Monotonicity and sign of the derivative"}
 Let $f$ be differentiable on an interval $I$.
@@ -234,10 +234,10 @@ Let $f$ be differentiable on an interval $I$.
 - $f'(x) \geq 0$ for every $x \in I$ *if and only if* $f$ is **increasing** on $I$; similarly, $f'(x) \leq 0$ on $I$ if and only if $f$ is **decreasing** on $I$.
 - If $f'(x) > 0$ for every $x \in I$, then $f$ is **strictly increasing** on $I$. This condition is *sufficient*, *not necessary*: $x^3$ is strictly increasing on $\mathbb{R}$ and has zero derivative at $0$.
 
-The study of the sign of $f'$ determines the intervals of monotonicity and, together with Fermat's theorem, classifies the stationary points; this is how curve sketching is built.
+The study of the sign of $f'$ determines the intervals of monotonicity and, together with Fermat's theorem, classifies the stationary points; this provides the basis for curve sketching.
 
 :::dimostrazione
-Let $f'(x) \geq 0$ on $I$ and let $x_1 < x_2$ in $I$. By **Lagrange's theorem** on $[x_1, x_2]$ there exists $c \in (x_1, x_2)$ with
+Let $f'(x) \geq 0$ on $I$ and let $x_1 < x_2$ in $I$. By the **mean value theorem** on $[x_1, x_2]$ there exists $c \in (x_1, x_2)$ with
 $$
 f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1) \geq 0 ,
 $$
@@ -245,7 +245,7 @@ therefore $f(x_1) \leq f(x_2)$ and $f$ is **increasing** on $I$; if $f' > 0$ on 
 :::
 ::::
 
-:::richiamo{titolo="Lagrange's theorem"}
+:::richiamo{titolo="Mean value theorem"}
 If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, there exists $c \in (a, b)$ with $f'(c) = \dfrac{f(b) - f(a)}{b - a}$.
 :::
 
@@ -253,16 +253,16 @@ If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, there exists $c
 If $f$ is differentiable on an interval $I$ and $f'(x) = 0$ for every $x \in I$, then $f$ is **constant** on $I$. Consequently two functions with the same derivative on an interval differ by a **constant**; the computation of antiderivatives, treated in the chapter on integrals, is based on this fact.
 
 :::dimostrazione
-Let $x_1 < x_2$ be any two points of $I$. By **Lagrange's theorem** on $[x_1, x_2]$ there exists $c \in (x_1, x_2)$ with $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1) = 0$, therefore $f(x_1) = f(x_2)$. The values of $f$ at any two points coincide, hence $f$ is **constant** on $I$.
+Let $x_1 < x_2$ be any two points of $I$. By the **mean value theorem** on $[x_1, x_2]$ there exists $c \in (x_1, x_2)$ with $f(x_2) - f(x_1) = f'(c)\,(x_2 - x_1) = 0$, therefore $f(x_1) = f(x_2)$. The values of $f$ at any two points coincide, hence $f$ is **constant** on $I$.
 :::
 ::::
 
 :::attenzione
-The hypothesis that the domain is an interval *cannot* be dropped: $f(x) = \dfrac{|x|}{x}$ has zero derivative at every point of $\mathbb{R} \setminus \{0\}$, equals $-1$ on the negatives and $1$ on the positives, therefore it **is not constant**. The theorem applies *separately* to each of the two intervals $(-\infty, 0)$ and $(0, +\infty)$.
+The hypothesis that the domain is an interval *cannot* be dropped: $f(x) = \dfrac{|x|}{x}$ has zero derivative at every point of $\mathbb{R} \setminus \{0\}$, equals $-1$ for negative arguments and $1$ for positive arguments, therefore it **is not constant**. The theorem applies *separately* to each of the two intervals $(-\infty, 0)$ and $(0, +\infty)$.
 :::
 
 :::teorema{#limite-della-derivata titolo="Limit of the derivative"}
-Let $f$ be continuous at $x_0$ and differentiable in a neighborhood of $x_0$, except possibly at $x_0$. If $f'(x) \to L \in \mathbb{R}$ as $x \to x_0$, then $f$ is **differentiable** at $x_0$ and $f'(x_0) = L$; the version with one-sided limits gives the one-sided derivatives. It is proved by applying **Lagrange's theorem** on the interval with endpoints $x_0$ and $x$. This criterion is used to study the differentiability of piecewise functions: one differentiates each expression and computes the one-sided limits of the derivative at the junction points. If the limit of $f'$ does not exist, the criterion **gives no information** and one goes back to the difference quotient.
+Let $f$ be continuous at $x_0$ and differentiable in a neighborhood of $x_0$, except possibly at $x_0$. If $f'(x) \to L \in \mathbb{R}$ as $x \to x_0$, then $f$ is **differentiable** at $x_0$ and $f'(x_0) = L$; the version with one-sided limits gives the one-sided derivatives. It is proved by applying the **mean value theorem** on the interval with endpoints $x_0$ and $x$. This criterion is used to study the differentiability of piecewise functions: one differentiates each expression and computes the one-sided limits of the derivative at the junction points. If the limit of $f'$ does not exist, the criterion **gives no information** and one goes back to the difference quotient.
 :::
 
 ## L'Hôpital's rule
@@ -271,8 +271,8 @@ Let $f$ be continuous at $x_0$ and differentiable in a neighborhood of $x_0$, ex
 Let $x_0 \in \mathbb{R} \cup \{\pm\infty\}$ and let $U$ be a neighborhood of $x_0$. If
 $$
 \begin{cases}
-f \text{ and } g \text{ differentiable on } U \setminus \{x_0\}, \text{ with } g'(x) \neq 0 \text{ on } U \setminus \{x_0\} \\[4pt]
-f(x) \to 0 \text{ and } g(x) \to 0 \text{ as } x \to x_0, \text{ or } |f(x)| \to +\infty \text{ and } |g(x)| \to +\infty \\[4pt]
+f \text{ e } g \text{ derivabili in } U \setminus \{x_0\}, \text{ con } g'(x) \neq 0 \text{ in } U \setminus \{x_0\} \\[4pt]
+f(x) \to 0 \text{ e } g(x) \to 0 \text{ per } x \to x_0, \text{ oppure } |f(x)| \to +\infty \text{ e } |g(x)| \to +\infty \\[4pt]
 \displaystyle \lim_{x \to x_0} \frac{f'(x)}{g'(x)} = L \in \mathbb{R} \cup \{\pm\infty\}
 \end{cases}
 $$
@@ -280,7 +280,7 @@ then
 $$
 \lim_{x \to x_0} \frac{f(x)}{g(x)} = L .
 $$
-The same holds for one-sided limits. The theorem is used on the **indeterminate forms** $\dfrac{0}{0}$ and $\dfrac{\infty}{\infty}$; the forms $0 \cdot \infty$ and $\infty - \infty$ are reduced to them by algebraic transformations, the exponential forms $1^{\infty}$, $0^{0}$, $\infty^{0}$ by writing $f(x)^{g(x)} = e^{g(x) \ln f(x)}$. The proof uses Cauchy's theorem and is omitted. This theorem is used to prove the **hierarchy of infinities** stated in the chapter on limits.
+The same holds for one-sided limits. The theorem is used on the **indeterminate forms** $\dfrac{0}{0}$ and $\dfrac{\infty}{\infty}$; the forms $0 \cdot \infty$ and $\infty - \infty$ are reduced to them by algebraic transformations, the exponential forms $1^{\infty}$, $0^{0}$, $\infty^{0}$ by writing $f(x)^{g(x)} = e^{g(x) \ln f(x)}$. The proof uses Cauchy's mean value theorem and is omitted. This theorem is used to prove the **hierarchy of growth rates** stated in the chapter on limits.
 :::
 
 :::esempio
@@ -326,7 +326,7 @@ Let $f$ be differentiable $n + 1$ times on an interval $I$ and let $x_0, x \in I
 $$
 f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}\,(x - x_0)^k + \frac{f^{(n+1)}(c)}{(n+1)!}\,(x - x_0)^{n+1} .
 $$
-For $n = 0$ the formula is **Lagrange's theorem**. The point $c$ is *not* known; however, if $|f^{(n+1)}| \leq K$ on $I$, the formula yields the estimate
+For $n = 0$ the formula is the **mean value theorem**. The point $c$ is *not* known; however, if $|f^{(n+1)}| \leq K$ on $I$, the formula yields the estimate
 $$
 \bigl| f(x) - T_n(x) \bigr| \leq \frac{K}{(n+1)!}\,|x - x_0|^{n+1} ,
 $$
@@ -358,7 +358,7 @@ $$
 \begin{gathered}
 o(x^n) + o(x^n) = o(x^n) , \qquad c \cdot o(x^n) = o(x^n) , \\[6pt]
 x^m \cdot o(x^n) = o(x^{m+n}) , \qquad o(x^m) \cdot o(x^n) = o(x^{m+n}) , \\[6pt]
-o(x^m) = o(x^n) \quad \text{for } m > n .
+o(x^m) = o(x^n) \quad \text{per } m > n .
 \end{gathered}
 $$
 Each equality is read *from left to right*: the sum of two quantities negligible with respect to $x^n$ is negligible with respect to $x^n$, and likewise for the others. The last rule **lowers the order** of a remainder to match it with the other terms. In composite functions one substitutes the **expansion of the inner function** for the variable of the outer expansion, as the worked examples on expansions of composite functions show.

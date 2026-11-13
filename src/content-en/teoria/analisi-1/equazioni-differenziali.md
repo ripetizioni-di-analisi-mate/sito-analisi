@@ -1,9 +1,9 @@
 ---
-titolo: Differential equations
-sommario: What differential equations and the Cauchy problem are, and the solution methods for first-order equations and for second-order equations with constant coefficients.
+titolo: Equazioni differenziali
+sommario: Che cosa sono le equazioni differenziali e il problema di Cauchy, i metodi risolutivi per il primo ordine e per il secondo ordine a coefficienti costanti.
 ---
 
-## Differential equations and the Cauchy problem
+## Differential equations and the initial value problem
 
 :::definizione{#equazione-differenziale titolo="Differential equation, order, solution"}
 A **differential equation** is an equation whose unknown is a *function* $y(x)$ and in which one or more derivatives of $y$ appear. The **order** of the equation is the highest order of differentiation present: $y' = 2y$ has order $1$, $y'' + y = 0$ has order $2$. A **solution** (or integral) on an interval $I$ is a function $y : I \to \mathbb{R}$, differentiable on $I$ as many times as the order requires, which, when substituted into the equation, turns it into an identity for every $x \in I$. To verify that a function is a solution, one computes its derivatives and substitutes them into the equation.
@@ -17,8 +17,8 @@ $y = e^{3x}$ is a solution of $y' = 3y$ on $\mathbb{R}$, since $y' = 3e^{3x} = 3
 The **general solution** of a differential equation is the family of *all* its solutions; for the equations of order $n$ treated in this chapter it depends on $n$ arbitrary constants. A **particular solution** is the single solution obtained by assigning a value to the constants. The general solution of $y' = 3y$ is $y = Ce^{3x}$ with $C \in \mathbb{R}$; for $C = 1$ one obtains the particular solution $y = e^{3x}$.
 :::
 
-:::definizione{#problema-di-cauchy titolo="Cauchy problem"}
-A **Cauchy problem** for a first-order equation is the system
+:::definizione{#problema-di-cauchy titolo="Initial value problem"}
+An **initial value problem** for a first-order equation is the system
 $$
 \begin{cases}
 y' = f(x, y) \\[4pt]
@@ -28,7 +28,7 @@ $$
 formed by the equation and an **initial condition**. The initial condition selects, among the infinitely many solutions in the general solution, the one whose graph passes through the point $(x_0, y_0)$: one substitutes $x_0$ and $y_0$ into the general solution and solves for the constant.
 :::
 
-:::esempio{titolo="Solving a Cauchy problem"}
+:::esempio{titolo="Solving an initial value problem"}
 For the problem $y' = 3y$ with $y(0) = 2$, the general solution is $y = Ce^{3x}$. Imposing the initial condition gives $y(0) = C = 2$, so the **solution** is $y = 2e^{3x}$.
 
 ::grafico{f="2*exp(3*x);exp(3*x);-exp(3*x)" punti="0,2,pieno" xmin=-2 xmax=1.2 ymin=-4 ymax=6 titolo="Three solutions of $y' = 3y$: $y = 2e^{3x}$ in color, $y = e^{3x}$ dashed, $y = -e^{3x}$ in red; the condition $y(0) = 2$ selects the solution passing through $(0, 2)$"}
@@ -38,11 +38,11 @@ For the problem $y' = 3y$ with $y(0) = 2$, the general solution is $y = Ce^{3x}$
 ## Local existence and uniqueness
 
 :::teorema{#esistenza-unicita titolo="Local existence and uniqueness"}
-Let $f(x, y)$ be defined on an open rectangle of the plane containing the point $(x_0, y_0)$. If $f$ and the partial derivative $\dfrac{\partial f}{\partial y}$ are continuous on the rectangle, then the Cauchy problem $y' = f(x, y)$ with $y(x_0) = y_0$ has **one and only one solution**, defined in a neighborhood of $x_0$. The theorem guarantees that the problem is well posed before any computation. The adjective *local* indicates that the solution is guaranteed *only* near $x_0$: the maximal interval on which it is defined can be smaller than the one on which $f$ is defined, as the exercises on the interval of existence show. The proof requires sequences of functions and is deferred to later courses.
+Let $f(x, y)$ be defined on an open rectangle of the plane containing the point $(x_0, y_0)$. If $f$ and the partial derivative $\dfrac{\partial f}{\partial y}$ are continuous on the rectangle, then the initial value problem $y' = f(x, y)$ with $y(x_0) = y_0$ has **one and only one solution**, defined in a neighborhood of $x_0$. The theorem guarantees that the problem is well posed before any computation. The adjective *local* indicates that the solution is guaranteed *only* near $x_0$: the maximal interval on which it is defined can be smaller than the one on which $f$ is defined, as the exercises on the interval of existence show. The proof requires sequences of functions and is deferred to later courses.
 :::
 
 :::attenzione
-Without the continuity of $\dfrac{\partial f}{\partial y}$, uniqueness **may fail**. The Cauchy problem $y' = 2\sqrt{|y|}$ with $y(0) = 0$ has *at least two* solutions on $\mathbb{R}$: the zero function $y \equiv 0$ and the function $y = x\,|x|$, for which $y' = 2|x| = 2\sqrt{|y|}$. The function $f(x, y) = 2\sqrt{|y|}$ is continuous, but its partial derivative with respect to $y$ is unbounded near $y = 0$, so the hypothesis of the theorem **is not satisfied**.
+Without the continuity of $\dfrac{\partial f}{\partial y}$, uniqueness **may fail**. The initial value problem $y' = 2\sqrt{|y|}$ with $y(0) = 0$ has *at least two* solutions on $\mathbb{R}$: the zero function $y \equiv 0$ and the function $y = x\,|x|$, for which $y' = 2|x| = 2\sqrt{|y|}$. The function $f(x, y) = 2\sqrt{|y|}$ is continuous, but its partial derivative with respect to $y$ is unbounded near $y = 0$, so the hypothesis of the theorem **is not satisfied**.
 
 ::grafico{f="x*abs(x);0" punti="0,0,pieno" xmin=-2 xmax=2 ymin=-2.5 ymax=2.5 titolo="Two solutions of the problem $y' = 2\sqrt{|y|}$, $y(0) = 0$: $y = x|x|$ in color and $y = 0$ dashed, both passing through the origin"}
 
@@ -95,7 +95,7 @@ with $C = \pm e^{c} \neq 0$. The value $C = 0$ gives back the zero solution, so 
 :::
 
 :::osservazione
-The **interval of existence** of the solution of a Cauchy problem is the largest interval containing $x_0$ on which the function found is differentiable and satisfies the equation. It can be bounded *even* when $f$ is defined on the whole plane. The problem $y' = 1 + y^2$ with $y(0) = 0$ has solution $y = \tan x$: the solution is defined on $\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)$, the interval containing $0$ on which the tangent is differentiable, and it tends to infinity at the endpoints.
+The **interval of existence** of the solution of an initial value problem is the largest interval containing $x_0$ on which the function found is differentiable and satisfies the equation. It can be bounded *even* when $f$ is defined on the whole plane. The problem $y' = 1 + y^2$ with $y(0) = 0$ has solution $y = \tan x$: the solution is defined on $\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)$, the interval containing $0$ on which the tangent is differentiable, and it tends to infinity at the endpoints.
 
 ::grafico{f="tan(x)+0*sqrt(2.4674-x*x)" asintoti="x=-1.5708;x=1.5708" punti="0,0,pieno" xmin=-3 xmax=3 ymin=-5 ymax=5 titolo="The solution $y = \tan x$ of the problem $y' = 1 + y^2$, $y(0) = 0$, is defined only on $\left(-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right)$, even though the equation makes sense on the whole plane"}
 
@@ -136,7 +136,7 @@ The general solution of $y' + a(x)\,y = b(x)$ is
 $$
 y = C e^{-A(x)} + y_p(x) ,
 $$
-where $Ce^{-A(x)}$ is the **general solution of the associated homogeneous equation** and $y_p$ is *any* **particular solution** of the complete equation. The structure can be read off the solution formula by separating the term with the constant $C$ from the term with the antiderivative. The same structure holds for every linear equation, of any order, and is taken up again for the second order.
+where $Ce^{-A(x)}$ is the **general solution of the associated homogeneous equation** and $y_p$ is *any* **particular solution** of the nonhomogeneous equation. The structure can be read off the solution formula by separating the term with the constant $C$ from the term with the antiderivative. The same structure holds for every linear equation, of any order, and is taken up again for the second order.
 :::
 
 :::esempio
@@ -148,7 +148,7 @@ e^{x} y = (x - 1)e^{x} + C
 \quad\implies\quad
 y = x - 1 + Ce^{-x} ,
 $$
-where the antiderivative of $xe^{x}$ is computed **by parts**. The term $Ce^{-x}$ solves the associated homogeneous equation, the term $x - 1$ is a **particular solution** of the complete equation.
+where the antiderivative of $xe^{x}$ is computed **by parts**. The term $Ce^{-x}$ solves the associated homogeneous equation, the term $x - 1$ is a **particular solution** of the nonhomogeneous equation.
 
 ::grafico{f="x-1;x-1+3*exp(-x);x-1-3*exp(-x)" xmin=-1.5 xmax=6 ymin=-5 ymax=6 titolo="Solutions of $y' + y = x$: the particular solution $y = x - 1$ in color, those with $C = 3$ (dashed) and $C = -3$ (in red); as $x \to +\infty$ the term $Ce^{-x}$ tends to $0$ and the graphs approach the line"}
 
@@ -161,7 +161,7 @@ A **Bernoulli equation** has the form
 $$
 y' + a(x)\, y = b(x)\, y^{\alpha}
 $$
-with $a$, $b$ continuous and $\alpha \in \mathbb{R}$, $\alpha \neq 0$, $\alpha \neq 1$ (for $\alpha = 0$ the equation is linear, for $\alpha = 1$ it is linear homogeneous). If $\alpha > 0$, the zero function $y \equiv 0$ is a **solution**. In the regions where $y \neq 0$ (with $y > 0$ if $\alpha$ is not an integer), the substitution
+with $a$, $b$ continuous and $\alpha \in \mathbb{R}$, $\alpha \neq 0$, $\alpha \neq 1$ (for $\alpha = 0$ the equation is linear, for $\alpha = 1$ it is homogeneous linear). If $\alpha > 0$, the zero function $y \equiv 0$ is a **solution**. In the regions where $y \neq 0$ (with $y > 0$ if $\alpha$ is not an integer), the substitution
 $$
 z = y^{1 - \alpha}
 $$
@@ -190,7 +190,7 @@ A **second-order linear equation with constant coefficients** has the form
 $$
 y'' + a\, y' + b\, y = f(x)
 $$
-with $a, b \in \mathbb{R}$ and $f$ continuous on an interval $I$. If $f \equiv 0$ the equation is called **homogeneous**; the equation with $f \equiv 0$ is the associated homogeneous equation. These equations describe the oscillating systems of physics, such as the spring with friction and the electric circuit, in which $f$ represents the external forcing term.
+with $a, b \in \mathbb{R}$ and $f$ continuous on an interval $I$. If $f \equiv 0$ the equation is called **homogeneous**; the equation $y'' + a\, y' + b\, y = 0$ is the associated homogeneous equation. These equations describe the oscillating systems of physics, such as the spring with friction and the electric circuit, in which $f$ represents the external forcing term.
 :::
 
 ::::teorema{#equazione-caratteristica titolo="Characteristic equation"}
@@ -207,7 +207,7 @@ obtained by looking for solutions of the form $y = e^{rx}$. Setting $\Delta = a^
 in all cases $C_1, C_2 \in \mathbb{R}$ are arbitrary constants.
 
 :::dimostrazione
-Substituting $y = e^{rx}$ into the equation gives $(r^2 + ar + b)\, e^{rx} = 0$ and, since $e^{rx} > 0$, the function $e^{rx}$ is a solution *if and only if* $r$ is a **root of the characteristic equation**. For $\Delta > 0$ this provides the two non-proportional solutions $e^{r_1 x}$ and $e^{r_2 x}$. For $\Delta = 0$ the double root is $r = -\dfrac{a}{2}$ and $x e^{rx}$ is also a solution: substituting gives $(r^2 + ar + b)\, x e^{rx} + (2r + a)\, e^{rx} = 0$, where $r^2 + ar + b = 0$ because $r$ is a root and $2r + a = 0$ by the choice of $r$. For $\Delta < 0$ the roots are $\lambda \pm i\mu$ and by **Euler's formula**
+Substituting $y = e^{rx}$ into the equation gives $(r^2 + ar + b)\, e^{rx} = 0$ and, since $e^{rx} > 0$, the function $e^{rx}$ is a solution *if and only if* $r$ is a **root of the characteristic equation**. For $\Delta > 0$ this provides the two linearly independent solutions $e^{r_1 x}$ and $e^{r_2 x}$. For $\Delta = 0$ the double root is $r = -\dfrac{a}{2}$ and $x e^{rx}$ is also a solution: substituting gives $(r^2 + ar + b)\, x e^{rx} + (2r + a)\, e^{rx} = 0$, where $r^2 + ar + b = 0$ because $r$ is a root and $2r + a = 0$ by the choice of $r$. For $\Delta < 0$ the roots are $\lambda \pm i\mu$ and by **Euler's formula**
 $$
 e^{(\lambda + i\mu)x} = e^{\lambda x} \bigl( \cos(\mu x) + i \sin(\mu x) \bigr) ;
 $$
@@ -216,11 +216,11 @@ the real part $e^{\lambda x}\cos(\mu x)$ and the imaginary part $e^{\lambda x}\s
 ::::
 
 :::teorema{#spazio-delle-soluzioni titolo="Structure of the solution space"}
-The solutions of the homogeneous equation $y'' + ay' + by = 0$ form a **vector space of dimension** $2$: if $y_1$ and $y_2$ are *non-proportional* solutions, every solution can be written in one and only one way as $C_1 y_1 + C_2 y_2$. The general solution of the complete equation $y'' + ay' + by = f(x)$ is
+The solutions of the homogeneous equation $y'' + ay' + by = 0$ form a **vector space of dimension** $2$: if $y_1$ and $y_2$ are *linearly independent* solutions, every solution can be written in one and only one way as $C_1 y_1 + C_2 y_2$. The general solution of the nonhomogeneous equation $y'' + ay' + by = f(x)$ is
 $$
 y = C_1 y_1 + C_2 y_2 + y_p ,
 $$
-where $y_p$ is any particular solution of the complete equation. Hence the solution proceeds in **two steps**: the general solution of the homogeneous equation via the characteristic equation, then a particular solution via the method of undetermined coefficients or via variation of constants. The proof relies on the existence and uniqueness theorem for the second order and is deferred to later courses.
+where $y_p$ is any particular solution of the nonhomogeneous equation. Hence the solution proceeds in **two steps**: the general solution of the homogeneous equation via the characteristic equation, then a particular solution via the method of undetermined coefficients or via variation of parameters. The proof relies on the existence and uniqueness theorem for the second order and is deferred to later courses.
 :::
 
 :::esempio
@@ -230,7 +230,7 @@ $y'' - y = 0$: the characteristic equation $r^2 - 1 = 0$ has roots $\pm 1$, so $
 
 :::
 
-## Non-homogeneous equations: the method of undetermined coefficients
+## Nonhomogeneous equations: the method of undetermined coefficients
 
 :::teorema{#somiglianza titolo="Method of undetermined coefficients"}
 If the forcing term $f(x)$ of $y'' + ay' + by = f(x)$ has one of the forms in the table, the equation admits a **particular solution of the indicated form**; the coefficients of the trial function are determined by *substituting* it into the equation and equating the coefficients of corresponding terms.
@@ -252,12 +252,12 @@ $$
 y = C_1 \cos x + C_2 \sin x + \frac{x \sin x}{2} .
 $$
 
-::grafico{f="x*sin(x)/2" xmin=-25 xmax=25 ymin=-13 ymax=13 titolo="$y = \dfrac{x \sin x}{2}$: the amplitude of the oscillations grows over time (resonance)"}
+::grafico{f="x*sin(x)/2" xmin=-25 xmax=25 ymin=-13 ymax=13 titolo="$y = \dfrac{x \sin x}{2}$: the amplitude of the oscillations grows as $|x|$ increases (resonance)"}
 
 :::
 
-:::teorema{#variazione-delle-costanti titolo="Variation of constants"}
-Let $y_1$ and $y_2$ be non-proportional solutions of the associated homogeneous equation and let
+:::teorema{#variazione-delle-costanti titolo="Variation of parameters"}
+Let $y_1$ and $y_2$ be linearly independent solutions of the associated homogeneous equation and let
 $$
 W(x) = y_1(x)\, y_2'(x) - y_1'(x)\, y_2(x)
 $$
@@ -268,9 +268,9 @@ $$
 The method applies to *every* continuous $f$, including those outside the table of the method of undetermined coefficients, for example to $y'' + y = \dfrac{1}{\cos x}$. The name comes from the form of the trial function $y_p = c_1(x)\, y_1 + c_2(x)\, y_2$, in which the constants of the general solution of the homogeneous equation are **replaced by functions**; the formula is verified by direct substitution into the equation.
 :::
 
-## Second-order Cauchy problem and equations of order n
+## Second-order initial value problem and equations of order n
 
-:::teorema{#cauchy-secondo-ordine titolo="Second-order Cauchy problem"}
+:::teorema{#cauchy-secondo-ordine titolo="Second-order initial value problem"}
 The problem
 $$
 \begin{cases}
