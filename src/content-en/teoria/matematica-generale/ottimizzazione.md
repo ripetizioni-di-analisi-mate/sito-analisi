@@ -1,28 +1,28 @@
 ---
-titolo: Unconstrained and constrained maxima and minima
-sommario: How to find and classify the maxima and minima of a function of two variables, with stationary points and the Hessian matrix, how to look for absolute extrema on a closed and bounded set and extrema on a constraint, with substitution and with Lagrange multipliers, and how these methods solve the problems of profit, of the consumer and of minimum cost.
+titolo: Unconstrained and constrained extrema
+sommario: How to find and classify extrema of functions of two variables using stationary points and the Hessian, find absolute extrema on closed and bounded sets, and use substitution and Lagrange multipliers for constrained extrema and applications to profit, consumer choice, and cost minimization.
 ---
 
-## Relative and absolute maxima and minima
+## Local and absolute maxima and minima<span id="relative-and-absolute-maxima-and-minima"></span>
 
-:::definizione{#estremi-relativi titolo="Relative and absolute maxima and minima"}
-Let $f$ be a function of two variables defined on a set $D \subseteq \mathbb{R}^2$ and let $P_0 = (x_0, y_0) \in D$. The point $P_0$ is a **relative maximum point** (or local maximum point) of $f$ if there exists a disk $B$ centered at $P_0$ such that
+:::definizione{#estremi-relativi titolo="Local and absolute maxima and minima"}
+Let $f$ be a function of two variables defined on a set $D \subseteq \mathbb{R}^2$ and let $P_0 = (x_0, y_0) \in D$. The point $P_0$ is a **point of local maximum** (also called a point of relative maximum) of $f$ if there exists a disk $B$ centered at $P_0$ such that
 $$
 f(x, y) \leq f(x_0, y_0) \qquad \text{for every } (x, y) \in B \cap D ,
 $$
-and it is a **relative minimum point** if the opposite inequality holds, $f(x, y) \geq f(x_0, y_0)$. If the inequality holds for *every* $(x, y) \in D$, the maximum or the minimum is called **absolute**. With strict inequalities for $(x, y) \neq (x_0, y_0)$ one speaks of a *strict* maximum or minimum. Maxima and minima are together called **extrema**.
+and it is a **point of local minimum** if the reverse inequality holds, $f(x, y) \geq f(x_0, y_0)$. If the inequality holds for *every* $(x, y) \in D$, the maximum or the minimum is called **absolute**. With strict inequalities for $(x, y) \neq (x_0, y_0)$ one speaks of a *strict* maximum or minimum. Maxima and minima are together called **extrema**.
 
-In other words, $P_0$ is a relative minimum point when no nearby point gives $f$ a smaller value, and an absolute minimum point when no point of the domain does. For example $f(x, y) = x^2 + y^2$ has a strict absolute minimum at $(0, 0)$, because $f(0, 0) = 0$ and $x^2 + y^2 > 0$ for every $(x, y) \neq (0, 0)$. The notions of disk, interior point and closed and bounded set are those of the topic Functions of two variables.
+In other words, $P_0$ is a local minimum point when no nearby point gives $f$ a smaller value, and an absolute minimum point when no point of the domain does. For example $f(x, y) = x^2 + y^2$ has a strict absolute minimum at $(0, 0)$, because $f(0, 0) = 0$ and $x^2 + y^2 > 0$ for every $(x, y) \neq (0, 0)$. Disks, interior points, and closed and bounded sets are defined in the chapter on functions of two variables.
 :::
 
 ## Stationary points and the first-order condition
 
 :::richiamo{titolo="Fermat's theorem"}
-Let $g$ be defined on an interval $I$ and let $t_0$ be an interior point of $I$ that is a relative maximum or minimum point of $g$. If $g$ is differentiable at $t_0$, then $g'(t_0) = 0$.
+Let $g$ be defined on an interval $I$ and let $t_0$ be an interior point of $I$ that is a point of local maximum or minimum of $g$. If $g$ is differentiable at $t_0$, then $g'(t_0) = 0$.
 :::
 
 ::::teorema{#condizione-primo-ordine titolo="Fermat's theorem in two variables"}
-Let $P_0 = (x_0, y_0)$ be an interior point of the domain of $f$ that is a relative maximum or minimum point. If the partial derivatives exist at $P_0$, then
+Let $P_0 = (x_0, y_0)$ be an interior point of the domain of $f$ that is a local maximum or minimum point. If the partial derivatives exist at $P_0$, then
 $$
 \begin{cases}
 f_x(x_0, y_0) = 0 \\[4pt]
@@ -34,12 +34,12 @@ $$
 The theorem reduces the search for interior extrema to solving a system of two equations in two unknowns. As in the one-variable case, the condition is *necessary* but *not sufficient*, and the points found must then be classified.
 
 :::dimostrazione
-The idea is to look at $f$ only along the horizontal line through $P_0$, where it becomes a function of one variable. Set $g(t) = f(x_0 + t, y_0)$. Since $P_0$ is interior, $g$ is defined on an interval that contains $t = 0$ in its interior. If $P_0$ is a relative maximum point of $f$, then $g(t) \leq g(0)$ for $t$ near $0$, so $t = 0$ is a relative maximum point of $g$. The derivative $g'(0)$ is the limit of the difference quotient $\dfrac{f(x_0 + t, y_0) - f(x_0, y_0)}{t}$, that is, by definition $f_x(x_0, y_0)$. **Fermat's theorem** applied to $g$ therefore gives $f_x(x_0, y_0) = 0$. With the vertical line, $h(t) = f(x_0, y_0 + t)$, one obtains in the same way $f_y(x_0, y_0) = 0$. The case of the minimum is analogous.
+The proof restricts $f$ to the horizontal line through $P_0$, where it is a function of one variable. Set $g(t) = f(x_0 + t, y_0)$. Since $P_0$ is interior, $g$ is defined on an interval that contains $t = 0$ in its interior. If $P_0$ is a local maximum point of $f$, then $g(t) \leq g(0)$ for $t$ near $0$, so $t = 0$ is a local maximum point of $g$. The derivative $g'(0)$ is the limit of the difference quotient $\dfrac{f(x_0 + t, y_0) - f(x_0, y_0)}{t}$, that is, by definition $f_x(x_0, y_0)$. **Fermat's theorem** applied to $g$ therefore gives $f_x(x_0, y_0) = 0$. With the vertical line, $h(t) = f(x_0, y_0 + t)$, one obtains in the same way $f_y(x_0, y_0) = 0$. The case of the minimum is analogous.
 :::
 ::::
 
 :::definizione{#punto-stazionario titolo="Stationary point"}
-An interior point $P_0$ at which $\nabla f(P_0) = (0, 0)$ is called a **stationary point** (or critical point) of $f$. For a function with partial derivatives at every point of an open domain, the relative maxima and minima must be sought *only* among the stationary points. For example, for $f(x, y) = x^2 + y^2 - 2x + 4y$ we have
+An interior point $P_0$ at which $\nabla f(P_0) = (0, 0)$ is called a **stationary point** (or critical point) of $f$. For a function with partial derivatives at every point of an open domain, the local maxima and minima must be sought *only* among the stationary points. For example, for $f(x, y) = x^2 + y^2 - 2x + 4y$ we have
 $$
 \begin{cases}
 f_x = 2x - 2 = 0 \\[4pt]
@@ -51,11 +51,11 @@ x = 1 \\[4pt]
 y = -2
 \end{cases}
 $$
-so the only stationary point is $(1, -2)$. Completing the squares one writes $f(x, y) = (x - 1)^2 + (y + 2)^2 - 5$. The sum of the two squares is positive at every point other than $(1, -2)$, so $(1, -2)$ is an absolute minimum with value $-5$.
+so the only stationary point is $(1, -2)$. Completing the squares gives $f(x, y) = (x - 1)^2 + (y + 2)^2 - 5$. The sum of the two squares is positive at every point other than $(1, -2)$, so $(1, -2)$ is an absolute minimum with value $-5$.
 :::
 
 :::definizione{#punto-di-sella titolo="Saddle point"}
-A stationary point $P_0$ is a **saddle point** if every disk centered at $P_0$ contains points where $f > f(P_0)$ and points where $f < f(P_0)$. A saddle point is therefore neither a relative maximum point nor a relative minimum point. The typical example is $f(x, y) = x^2 - y^2$ at the origin. The gradient $(2x, -2y)$ vanishes at $(0, 0)$, but along the $x$-axis the function equals $x^2$, positive for $x \neq 0$, and along the $y$-axis it equals $-y^2$, negative for $y \neq 0$. The name comes from the shape of the graph near the origin, similar to a saddle, with heights that increase when moving along the $x$-axis and decrease when moving along the $y$-axis.
+A stationary point $P_0$ is a **saddle point** if every disk centered at $P_0$ contains points where $f > f(P_0)$ and points where $f < f(P_0)$. A saddle point is therefore neither a local maximum point nor a local minimum point. The typical example is $f(x, y) = x^2 - y^2$ at the origin. The gradient $(2x, -2y)$ vanishes at $(0, 0)$, but along the $x$-axis the function equals $x^2$, positive for $x \neq 0$, and along the $y$-axis it equals $-y^2$, negative for $y \neq 0$. The name comes from the shape of the graph near the origin, similar to a saddle, with heights that increase when moving along the $x$-axis and decrease when moving along the $y$-axis.
 
 ::grafico{f="x^2;-x^2" punti="0,0,pieno" xmin=-3 xmax=3 ymin=-5 ymax=5 nomi="t,z" legenda="z = f(t, 0) = t^2;z = f(0, t) = -t^2" titolo="Restrictions of $f(x, y) = x^2 - y^2$ to the two axes: at $t = 0$ the first has a minimum and the second a maximum, so $(0, 0)$ is a saddle point"}
 
@@ -70,12 +70,12 @@ $$
 $$
 its determinant, computed with the rule for $2 \times 2$ matrices.
 
-- If $\det H(P_0) > 0$ and $f_{xx}(P_0) > 0$, then $P_0$ is a **relative minimum** point.
-- If $\det H(P_0) > 0$ and $f_{xx}(P_0) < 0$, then $P_0$ is a **relative maximum** point.
+- If $\det H(P_0) > 0$ and $f_{xx}(P_0) > 0$, then $P_0$ is a **local minimum** point.
+- If $\det H(P_0) > 0$ and $f_{xx}(P_0) < 0$, then $P_0$ is a **local maximum** point.
 - If $\det H(P_0) < 0$, then $P_0$ is a **saddle point**.
-- If $\det H(P_0) = 0$, the test does not allow a conclusion.
+- If $\det H(P_0) = 0$, the test is inconclusive.
 
-The Hessian matrix and Schwarz's theorem are those of the topic Functions of two variables. The test classifies a stationary point by computing three numbers, $f_{xx}$, $f_{xy}$ and $f_{yy}$ at $P_0$, and for functions of two variables it plays the role of the second derivative test. When $\det H(P_0) > 0$, the product $f_{xx} f_{yy}$ is greater than $f_{xy}^2 \geq 0$, so $f_{xx}$ and $f_{yy}$ have the same sign and one can look at either of them. For $f(x, y) = x^2 - y^2$ at $(0, 0)$ we have $\det H = 2 \cdot (-2) - 0 = -4 < 0$, in agreement with the saddle point seen before.
+The Hessian matrix and Schwarz's theorem are covered in the chapter on functions of two variables. The test classifies a stationary point by computing three numbers, $f_{xx}$, $f_{xy}$ and $f_{yy}$ at $P_0$, and for functions of two variables it plays the role of the second derivative test. When $\det H(P_0) > 0$, the product $f_{xx} f_{yy}$ is greater than $f_{xy}^2 \geq 0$, so $f_{xx}$ and $f_{yy}$ have the same sign and one can look at either of them. For $f(x, y) = x^2 - y^2$ at $(0, 0)$ we have $\det H = 2 \cdot (-2) - 0 = -4 < 0$, in agreement with the saddle point seen before.
 
 :::dimostrazione
 The idea is that near a stationary point the sign of $f(x_0 + h, y_0 + k) - f(x_0, y_0)$ is the sign of the quadratic form
@@ -84,7 +84,7 @@ Q(h, k) = a h^2 + 2 b h k + c k^2,
 \qquad
 a = f_{xx}(P_0),\ \ b = f_{xy}(P_0),\ \ c = f_{yy}(P_0) .
 $$
-This follows from the second-order Taylor formula, for which we refer to the topic Differential calculus in several variables of Mathematical Analysis 2:
+This follows from the second-order Taylor formula, as discussed in the chapter on differential calculus in several variables in Mathematical Analysis 2.
 $$
 f(x_0 + h, y_0 + k) = f(x_0, y_0) + f_x(P_0)\,h + f_y(P_0)\,k + \frac{1}{2}\,Q(h, k) + R(h, k),
 $$
@@ -100,7 +100,7 @@ $$
 :::
 ::::
 
-:::esempio{titolo="A function with a minimum and a saddle"}
+:::esempio{titolo="A function with a minimum and a saddle point"}
 We find and classify the stationary points of $f(x, y) = x^3 + y^3 - 3xy$. The first-order system is
 $$
 \begin{cases}
@@ -119,15 +119,15 @@ H(0, 0) = \begin{pmatrix} 0 & -3 \\ -3 & 0 \end{pmatrix},
 \qquad
 H(1, 1) = \begin{pmatrix} 6 & -3 \\ -3 & 6 \end{pmatrix} .
 $$
-At $(0, 0)$ we have $\det H = -9 < 0$, therefore the origin is a **saddle point**. At $(1, 1)$ we have $\det H = 36 - 9 = 27 > 0$ and $f_{xx} = 6 > 0$, therefore $(1, 1)$ is a **relative minimum**, with $f(1, 1) = -1$. The minimum is not absolute, because along the $x$-axis the function equals $x^3$, which tends to $-\infty$ as $x \to -\infty$.
+At $(0, 0)$ we have $\det H = -9 < 0$, therefore the origin is a **saddle point**. At $(1, 1)$ we have $\det H = 36 - 9 = 27 > 0$ and $f_{xx} = 6 > 0$, therefore $(1, 1)$ is a **local minimum**, with $f(1, 1) = -1$. The minimum is not absolute, because along the $x$-axis the function equals $x^3$, which tends to $-\infty$ as $x \to -\infty$.
 
-::grafico{f="2*x^3-3*x^2;3*x^2" punti="0,0,pieno;1,-1,pieno" xmin=-1 xmax=2 ymin=-2 ymax=4 nomi="t,z" legenda="z = f(t, t) = 2t^3 - 3t^2;z = f(t, -t) = 3t^2" titolo="Along the line $y = x$ the function $x^3 + y^3 - 3xy$ has a maximum at $t = 0$ and a minimum at $t = 1$; along $y = -x$ it has a minimum at $t = 0$"}
+::grafico{f="2*x^3-3*x^2;3*x^2" punti="0,0,pieno;1,-1,pieno" xmin=-1 xmax=2 ymin=-2 ymax=4 nomi="t,z" legenda="z = f(t, t) = 2t^3 - 3t^2;z = f(t, -t) = 3t^2" titolo="Along the line $y = x$ the function $x^3 + y^3 - 3xy$ has a maximum at $t = 0$ and a minimum at $t = 1$. Along $y = -x$ it has a minimum at $t = 0$"}
 
 :::
 
 ## Inconclusive cases
 
-:::osservazione{#casi-indecisi titolo="The case of zero determinant"}
+:::osservazione{#casi-indecisi titolo="The zero-determinant case"}
 When $\det H(P_0) = 0$ the stationary point can be a minimum, a maximum or a saddle, and one studies directly the sign of the difference $f(x, y) - f(P_0)$ near $P_0$. For the three functions
 $$
 f_1(x, y) = x^4 + y^4,
@@ -151,7 +151,7 @@ The sign of $f_{xx}$ and of $f_{yy}$ is not enough to classify a stationary poin
 
 ## Absolute maxima and minima on closed and bounded sets
 
-:::richiamo{titolo="Weierstrass theorem in two variables"}
+:::richiamo{titolo="Extreme value theorem in two variables"}
 Let $K \subseteq \mathbb{R}^2$ be a closed and bounded set and let $f$ be continuous on $K$. Then $f$ attains on $K$ an absolute maximum and an absolute minimum, that is, there exist $P_1, P_2 \in K$ such that $f(P_1) \leq f(x, y) \leq f(P_2)$ for every $(x, y) \in K$.
 :::
 
@@ -163,11 +163,11 @@ Let $f$ be continuous on a closed and bounded set $K$, with partial derivatives 
 - Add the vertices of the boundary, where two pieces meet.
 - Compute $f$ at all the points found. The largest value is the absolute maximum and the smallest is the absolute minimum.
 
-The **Weierstrass theorem** guarantees that the maximum and minimum exist, so comparing a finite number of values identifies them. If the set is not bounded the conclusion may fail. For example $f(x, y) = x + y$ is continuous on the closed set $\{(x, y) : x \geq 0,\ y \geq 0\}$ and has no maximum, because $f(t, t) = 2t$ grows without bound.
+The **extreme value theorem** guarantees that the maximum and minimum exist, so comparing a finite number of values identifies them. If the set is not bounded the conclusion may fail. For example $f(x, y) = x + y$ is continuous on the closed set $\{(x, y) : x \geq 0,\ y \geq 0\}$ and has no maximum, because $f(t, t) = 2t$ grows without bound.
 :::
 
 :::esempio{titolo="Absolute extrema on a triangle"}
-We look for the absolute maximum and minimum of $f(x, y) = x^2 + y^2 - 2x - 4y$ on the triangle $T$ with vertices $(0, 0)$, $(4, 0)$ and $(0, 4)$, that is, the set $x \geq 0$, $y \geq 0$, $x + y \leq 4$. The triangle is closed and bounded and $f$ is continuous, so the extrema exist by the Weierstrass theorem.
+We look for the absolute maximum and minimum of $f(x, y) = x^2 + y^2 - 2x - 4y$ on the triangle $T$ with vertices $(0, 0)$, $(4, 0)$ and $(0, 4)$, that is, the set $x \geq 0$, $y \geq 0$, $x + y \leq 4$. The triangle is closed and bounded and $f$ is continuous, so the extrema exist by the extreme value theorem.
 
 The system $f_x = 2x - 2 = 0$, $f_y = 2y - 4 = 0$ gives the point $(1, 2)$, interior because $1 + 2 < 4$, with $f(1, 2) = -5$. On the three sides one obtains functions of one variable:
 $$
@@ -198,13 +198,13 @@ When one variable can be obtained from the constraint as a function of the other
 $$
 \varphi(x) = f(x, h(x)), \qquad x \in I ,
 $$
-with the methods of the topic Derivatives, marginal functions and elasticity. The same holds when the constraint is described with a parameter, like the circle $x = r\cos t$, $y = r\sin t$. We look for the minimum of $f(x, y) = x^2 + y^2$ on the line $x + 2y = 5$. From the constraint $x = 5 - 2y$, and therefore
+using the methods from the chapter on derivatives, marginal functions, and elasticity. The same holds when the constraint is described with a parameter, like the circle $x = r\cos t$, $y = r\sin t$. We look for the minimum of $f(x, y) = x^2 + y^2$ on the line $x + 2y = 5$. Solving the constraint gives $x = 5 - 2y$. Therefore
 $$
 \varphi(y) = (5 - 2y)^2 + y^2 = 5y^2 - 20y + 25,
 \qquad
 \varphi'(y) = 10y - 20 .
 $$
-The derivative vanishes at $y = 2$, is negative before and positive after, so $y = 2$ is the absolute minimum of $\varphi$. The constrained minimum point is $(1, 2)$, with $f(1, 2) = 5$; there is no maximum, because $\varphi(y) \to +\infty$ as $y \to \pm\infty$. Since $x^2 + y^2$ is the square of the distance of $(x, y)$ from the origin, the distance of the line from the origin is $\sqrt{5}$.
+The derivative vanishes at $y = 2$, is negative before and positive after, so $y = 2$ is where $\varphi$ attains its absolute minimum. The constrained minimum point is $(1, 2)$, with $f(1, 2) = 5$; there is no maximum, because $\varphi(y) \to +\infty$ as $y \to \pm\infty$. Since $x^2 + y^2$ is the square of the distance of $(x, y)$ from the origin, the distance of the line from the origin is $\sqrt{5}$.
 
 ::grafico{f="(5-x)/2" curve="sqrt(5)*cos(t),sqrt(5)*sin(t),0,6.29" punti="1,2,pieno" xmin=-3 xmax=5 ymin=-3 ymax=4 uguale=1 legenda="x + 2y = 5;x^2 + y^2 = 5" titolo="On the constraint $x + 2y = 5$ the minimum of $x^2 + y^2$ is at the point $(1, 2)$, where the level curve $x^2 + y^2 = 5$ is tangent to the line"}
 
@@ -227,18 +227,18 @@ $$
 The theorem gives a *necessary* condition for constrained extrema that does not require solving the constraint for one variable. The points of the constraint where $\nabla g = (0, 0)$ must be examined separately. For $f(x, y) = x + y$ and $g(x, y) = x^2 + y^2 - 2$ the condition is $(1, 1) = \lambda\,(2x, 2y)$, so $x = y = \dfrac{1}{2\lambda}$, and on the constraint one obtains the points $(1, 1)$ and $(-1, -1)$, where $f$ equals $2$ and $-2$.
 
 :::dimostrazione
-The idea is to travel along the constraint with a curve and to apply Fermat's theorem along it. Since $\nabla g(P_0) \neq (0, 0)$, the implicit function theorem (Dini's theorem, for which we refer to the topic Implicit functions of Mathematical Analysis 2) ensures that near $P_0$ the points of the constraint form a curve $\big( x(t), y(t) \big)$, with $t$ in an open interval containing $0$, differentiable, with $\big( x(0), y(0) \big) = P_0$ and tangent vector $\vec{v} = \big( x'(0), y'(0) \big) \neq (0, 0)$.
+The proof parametrizes the constraint by a curve and applies Fermat's theorem to the resulting function of one variable. Since $\nabla g(P_0) \neq (0, 0)$, the implicit function theorem (Dini's theorem, discussed in the chapter on implicit functions in Mathematical Analysis 2) ensures that near $P_0$ the points of the constraint form a curve $\big( x(t), y(t) \big)$, with $t$ in an open interval containing $0$, differentiable, with $\big( x(0), y(0) \big) = P_0$ and tangent vector $\vec{v} = \big( x'(0), y'(0) \big) \neq (0, 0)$.
 
-The function $\varphi(t) = f(x(t), y(t))$ has a relative maximum or minimum at $t = 0$, because $P_0$ is an extremum of $f$ on the constraint. By Fermat's theorem $\varphi'(0) = 0$, and by the derivative along a curve this means $\nabla f(P_0) \cdot \vec{v} = 0$. Moreover $g(x(t), y(t)) = 0$ for every $t$, so its derivative is also zero, and at $t = 0$ it gives $\nabla g(P_0) \cdot \vec{v} = 0$. The vectors of the plane perpendicular to the nonzero vector $\vec{v}$ all lie on one line through the origin, hence $\nabla f(P_0)$ and $\nabla g(P_0)$ are parallel. Since $\nabla g(P_0) \neq (0, 0)$, there exists $\lambda$ with $\nabla f(P_0) = \lambda\,\nabla g(P_0)$.
+The function $\varphi(t) = f(x(t), y(t))$ has a local maximum or minimum at $t = 0$, because $P_0$ is an extremum of $f$ on the constraint. By Fermat's theorem $\varphi'(0) = 0$, and by the derivative along a curve this means $\nabla f(P_0) \cdot \vec{v} = 0$. Moreover $g(x(t), y(t)) = 0$ for every $t$, so its derivative is also zero, and at $t = 0$ it gives $\nabla g(P_0) \cdot \vec{v} = 0$. The vectors of the plane perpendicular to the nonzero vector $\vec{v}$ all lie on one line through the origin, hence $\nabla f(P_0)$ and $\nabla g(P_0)$ are parallel. Since $\nabla g(P_0) \neq (0, 0)$, there exists $\lambda$ with $\nabla f(P_0) = \lambda\,\nabla g(P_0)$.
 :::
 ::::
 
 :::definizione{#funzione-lagrangiana titolo="Lagrangian function"}
-The **Lagrangian function** of the problem of extrema of $f$ with the constraint $g = 0$ is the function of three variables
+The **Lagrangian function** for finding extrema of $f$ with the constraint $g = 0$ is the function of three variables
 $$
 \mathcal{L}(x, y, \lambda) = f(x, y) - \lambda\,g(x, y) .
 $$
-Setting its partial derivatives equal to zero gives together the condition of Lagrange's theorem and the constraint:
+Setting its partial derivatives equal to zero gives both the condition of the Lagrange multiplier theorem and the constraint.
 $$
 \begin{cases}
 \mathcal{L}_x = f_x - \lambda\,g_x = 0 \\[4pt]
@@ -246,11 +246,11 @@ $$
 \mathcal{L}_\lambda = -g(x, y) = 0
 \end{cases}
 $$
-The solutions of the system are the candidate points. If the constraint is closed and bounded, like a circle or an ellipse, the extrema exist by the Weierstrass theorem, and they are found by comparing the values of $f$ at the candidates and at the points of the constraint with $\nabla g = (0, 0)$. A frequent strategy for solving the system is to obtain $\lambda$ from the first two equations and set the resulting expressions equal.
+The solutions of the system are the candidate points. If the constraint is closed and bounded, like a circle or an ellipse, the extrema exist by the extreme value theorem, and they are found by comparing the values of $f$ at the candidates and at the points of the constraint with $\nabla g = (0, 0)$. One way to solve the system is to obtain $\lambda$ from the first two equations and set the resulting expressions equal.
 :::
 
 :::esempio{titolo="Maximum and minimum of xy on a circle"}
-We look for the extrema of $f(x, y) = xy$ on the circle $x^2 + y^2 = 8$. With $g(x, y) = x^2 + y^2 - 8$ the Lagrange system is
+We look for the extrema of $f(x, y) = xy$ on the circle $x^2 + y^2 = 8$. With $g(x, y) = x^2 + y^2 - 8$ the Lagrange multiplier equations are
 $$
 \begin{cases}
 y = 2\lambda x \\[4pt]
@@ -262,14 +262,14 @@ Substituting the second equation into the first gives $y = 4\lambda^2 y$. If $y 
 :::
 
 :::osservazione{#interpretazione-geometrica titolo="Geometric interpretation"}
-By the theorem on the gradient and level curves, seen in the topic Functions of two variables, the gradient of $f$ at a point is perpendicular to the level curve of $f$ through that point. The same holds for $\nabla g$ and the constraint, which is the level curve $0$ of $g$. The condition $\nabla f(P_0) = \lambda\,\nabla g(P_0)$ then says that at $P_0$ the level curve of $f$ and the constraint have the same perpendicular line, hence the same tangent line. Therefore at a constrained extremum the level curve of $f$ is **tangent to the constraint**. At a point where the level curve crosses the constraint, instead, moving along the constraint to one side and to the other one passes from larger values of $f$ to smaller values, and the point is not an extremum.
+By the theorem on the gradient and level curves, covered in the chapter on functions of two variables, the gradient of $f$ at a point is perpendicular to the level curve of $f$ through that point. The same holds for $\nabla g$ and the constraint, which is the level curve $0$ of $g$. The condition $\nabla f(P_0) = \lambda\,\nabla g(P_0)$ then says that at $P_0$ the level curve of $f$ and the constraint have the same perpendicular line, hence the same tangent line. Therefore at a constrained extremum the level curve of $f$ is **tangent to the constraint**. At a point where the level curve crosses the constraint, instead, moving along the constraint to one side and to the other one passes from larger values of $f$ to smaller values, and the point is not an extremum.
 
 ::grafico{f="4/x" curve="sqrt(8)*cos(t),sqrt(8)*sin(t),0,6.29" vettori="2,2,4,4,∇f" punti="2,2,pieno;-2,-2,pieno" xmin=-5 xmax=5 ymin=-5 ymax=5 uguale=1 legenda="xy = 4;x^2 + y^2 = 8" titolo="At the maximum points $(2, 2)$ and $(-2, -2)$ the level curve $xy = 4$ is tangent to the circle $x^2 + y^2 = 8$, and $\nabla f(2, 2) = (2, 2)$ is perpendicular to both"}
 
 :::
 
 :::attenzione
-The hypothesis $\nabla g(P_0) \neq (0, 0)$ of Lagrange's theorem cannot be omitted. On the curve $y^2 - x^3 = 0$, which has a cusp at the origin, we have $x^3 = y^2 \geq 0$, that is, $x \geq 0$, so $f(x, y) = x$ has minimum $0$ at the point $(0, 0)$. The Lagrange system
+The hypothesis $\nabla g(P_0) \neq (0, 0)$ of the Lagrange multiplier theorem cannot be omitted. On the curve $y^2 - x^3 = 0$, which has a cusp at the origin, we have $x^3 = y^2 \geq 0$, that is, $x \geq 0$, so $f(x, y) = x$ has minimum $0$ at the point $(0, 0)$. The Lagrange multiplier equations
 $$
 \begin{cases}
 1 = -3\lambda x^2 \\[4pt]
@@ -277,9 +277,9 @@ $$
 y^2 = x^3
 \end{cases}
 $$
-has *no* solutions. Indeed the first equation requires $\lambda \neq 0$ and $x \neq 0$, the second then gives $y = 0$, and the constraint gives $x = 0$, which contradicts the first. The minimum is at the origin, where $\nabla g = (-3x^2, 2y) = (0, 0)$, and this is why the points with zero constraint gradient must always be added to the candidates.
+have *no* solutions. Indeed the first equation requires $\lambda \neq 0$ and $x \neq 0$, the second then gives $y = 0$, and the constraint gives $x = 0$, which contradicts the first. The minimum is at the origin, where $\nabla g = (-3x^2, 2y) = (0, 0)$, and this is why the points with zero constraint gradient must always be added to the candidates.
 
-::grafico{curve="t^2,t^3,-1.4,1.4" vettori="0,0,1,0,∇f" punti="0,0,pieno" xmin=-2 xmax=4 ymin=-3 ymax=3 uguale=1 legenda="y^2 = x^3" titolo="On the curve $y^2 = x^3$ the function $f(x, y) = x$ has its minimum at the cusp $(0, 0)$, where $\nabla g = (0, 0)$ and the Lagrange condition does not hold"}
+::grafico{curve="t^2,t^3,-1.4,1.4" vettori="0,0,1,0,∇f" punti="0,0,pieno" xmin=-2 xmax=4 ymin=-3 ymax=3 uguale=1 legenda="y^2 = x^3" titolo="On the curve $y^2 = x^3$ the function $f(x, y) = x$ has its minimum at the cusp $(0, 0)$, where $\nabla g = (0, 0)$ and the Lagrange multiplier condition does not hold"}
 
 :::
 
@@ -310,7 +310,7 @@ A consumer with income $m$ buys the quantities $x$ and $y$ of two goods, at pric
 $$
 \max\, U(x, y) \qquad \text{subject to the budget constraint} \qquad p_1 x + p_2 y = m, \quad x, y > 0 .
 $$
-The first two equations of the Lagrange system are $U_x = \lambda p_1$ and $U_y = \lambda p_2$, and dividing them gives
+The first two Lagrange multiplier equations are $U_x = \lambda p_1$ and $U_y = \lambda p_2$, and dividing them gives
 $$
 \frac{U_x}{U_y} = \frac{p_1}{p_2} ,
 $$
@@ -318,7 +318,7 @@ that is, at the optimal choice the **marginal rate of substitution** equals the 
 :::
 
 :::esempio{titolo="Optimal choice with utility xy"}
-Let $U(x, y) = xy$, with $p_1 = 2$, $p_2 = 4$ and $m = 80$ euros. The Lagrange system is
+Let $U(x, y) = xy$, with $p_1 = 2$, $p_2 = 4$ and $m = 80$ euros. The Lagrange multiplier equations are
 $$
 \begin{cases}
 y = 2\lambda \\[4pt]
@@ -333,7 +333,7 @@ The first two equations give $x = 2y$, and the constraint becomes $8y = 80$, so 
 :::
 
 :::esempio{#minimo-costo titolo="Minimum cost of the firm"}
-A firm uses labor $L$ and capital $K$, paid $w = 2$ and $r = 8$ euros per unit, with production function $Q = \sqrt{LK}$, and wants to produce $Q = 4$ units at minimum cost. The problem is to minimize the cost $C = 2L + 8K$ on the isoquant $\sqrt{LK} = 4$, that is, $LK = 16$, with $L, K > 0$. The Lagrange system, with the constraint $LK - 16 = 0$, is
+A firm uses labor $L$ and capital $K$, paid $w = 2$ and $r = 8$ euros per unit, with production function $Q = \sqrt{LK}$, and wants to produce $Q = 4$ units at minimum cost. The problem is to minimize the cost $C = 2L + 8K$ on the isoquant $\sqrt{LK} = 4$, that is, $LK = 16$, with $L, K > 0$. The Lagrange multiplier equations for the constraint $LK - 16 = 0$ are
 $$
 \begin{cases}
 2 = \lambda K \\[4pt]
