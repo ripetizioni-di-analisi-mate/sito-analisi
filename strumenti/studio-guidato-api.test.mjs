@@ -1,5 +1,5 @@
 // Prova dell'API dello Studio guidato con il Worker vero e un archivio SQLite in memoria.
-// Richiede una build con Analisi 1 e Precorso: SOLO_MATERIE="analisi-1,precorso" npx astro build
+// Richiede una build con Analisi 1, Precorso e Fisica 1: SOLO_MATERIE="analisi-1,precorso,fisica-1" npx astro build
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
@@ -18,7 +18,7 @@ const { Archivio, firmaToken, worker } = await import(pathToFileURL(bundle));
 after(() => rmSync(temp, { recursive: true, force: true }));
 const origine = 'https://ripetizionidianalisi.com';
 const dati = (m) => JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}.json`), 'utf8'));
-const DATI = { 'analisi-1': dati('analisi-1'), precorso: dati('precorso') };
+const DATI = { 'analisi-1': dati('analisi-1'), precorso: dati('precorso'), 'fisica-1': dati('fisica-1') };
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
 function banco(t) {
@@ -87,4 +87,45 @@ test('test completo: domande senza la soluzione, esito con i rimandi, ricontroll
   const secondo = await prova({ ricontrollo: true }, []);
   assert.equal(secondo.esito.domande, 2);
   assert.deepEqual([secondo.progresso.test, secondo.progresso.trovate, secondo.progresso.risolte], [2, 2, 2]);
+});
+
+test('Fisica 1: test su un capitolo con la base in Analisi 1, nomi delle materie ed esito salvato a parte', async (t) => {
+  const b = banco(t);
+  const tok = await b.utente('gm-fisica@test.invalid', true);
+  const sbagliate = ['fisica-1/cinematica-1d#4', 'analisi-1/derivate#1'];
+  let r = await b.api(tok, '/api/studio-guidato/inizia', { materia: 'fisica-1', argomento: 'cinematica-1d' });
+  const etichette = [];
+  let n = 0;
+  while (!r.d.fine) {
+    assert.equal(r.status, 200, JSON.stringify(r.d));
+    assert.ok(r.d.domanda.testo && r.d.domanda.scelte.length === 4, 'testo e quattro risposte');
+    assert.ok(!('corretta' in r.d.domanda) && !('spiegazione' in r.d.domanda));
+    const q = JSON.parse(Buffer.from(r.d.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString()).s.q;
+    etichette.push([q.m, r.d.domanda.base, r.d.domanda.materiaBase]);
+    const giusta = Number(corretta(q.id, q.m)) - 1;
+    r = await b.api(tok, '/api/studio-guidato/rispondi', { token: r.d.token, scelta: sbagliate.includes(q.k) ? (giusta + 1) % 4 : giusta });
+    assert.ok(++n <= 12);
+  }
+  assert.ok(etichette.some(([m, base, nome]) => m === 'analisi-1' && base === true && nome === 'Analisi 1'));
+  assert.ok(etichette.filter(([m]) => m === 'fisica-1').every(([, base, nome]) => base === false && nome === null));
+  const e = r.d.esito;
+  assert.deepEqual(e.lacune.map((l) => l.k), ['analisi-1/derivate#1', 'fisica-1/cinematica-1d#4']);
+  assert.equal(e.lacune[0].materia, 'Analisi 1');
+  assert.equal(e.lacune[1].materia, 'Fisica 1');
+  assert.equal(e.titoloCapitolo, 'Cinematica in una dimensione');
+  assert.equal(e.lacune[0].teoria[0].href, '/analisi-1/derivate/teoria#regole-di-derivazione');
+  assert.ok(e.lacune[1].teoria.every((x) => x.titolo) && e.lacune[1].schede[0].titolo);
+  // L'esito di Fisica 1 non compare in Analisi 1.
+  assert.equal((await b.api(tok, '/api/studio-guidato?materia=fisica-1')).d.progresso.test, 1);
+  assert.equal((await b.api(tok, '/api/studio-guidato?materia=analisi-1')).d.ultimo, null);
+  // «Non so da dove iniziare»: dodici capitoli, tutte risposte giuste.
+  r = await b.api(tok, '/api/studio-guidato/inizia', { materia: 'fisica-1' });
+  n = 0;
+  while (!r.d.fine) {
+    const q = JSON.parse(Buffer.from(r.d.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString()).s.q;
+    r = await b.api(tok, '/api/studio-guidato/rispondi', { token: r.d.token, scelta: Number(corretta(q.id, q.m)) - 1 });
+    n++;
+  }
+  assert.equal(n, 12);
+  assert.equal(r.d.esito.lacune.length, 0);
 });

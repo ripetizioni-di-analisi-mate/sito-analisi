@@ -1,6 +1,7 @@
 // Studio guidato (13/11/2026, richiesta di Carmine): test adattivo che trova le lacune
 // di uno studente, ne cerca la causa nelle basi e indica i capitoli da studiare in ordine.
 // Anteprima riservata ai GM: Analisi 1 (basi dal Precorso) e Analisi 2 (basi da Analisi 1, Precorso e capitoli precedenti).
+// Dal 14/11/2026 sera anche Fisica 1 (basi dai capitoli precedenti di Fisica 1, dal Precorso e da Analisi 1).
 //
 // Per ogni argomento del corso:
 //   interni = argomenti della stessa materia da cui dipende (si verificano se l'argomento risulta debole);
@@ -49,6 +50,25 @@ export const STUDIO_GUIDATO = {
     },
   },
 
+  // Fisica 1 (14/11/2026 sera, richiesta di Carmine). L'ordine delle chiavi è l'ordine dei capitoli nel test.
+  // Le basi di ogni abilità sono in RIMANDI: capitoli precedenti di Fisica 1, Precorso e Analisi 1
+  // (derivate, integrali, equazioni a variabili separabili).
+  'fisica-1': {
+    dipendenze: {
+      'grandezze-e-vettori': { interni: [], basi: ['potenze-e-radici', 'goniometriche', 'analisi-1/derivate'] },
+      'cinematica-1d': { interni: [], basi: ['equazioni-polinomiali', 'geometria-analitica', 'analisi-1/derivate', 'analisi-1/integrali', 'analisi-1/equazioni-differenziali'] },
+      'moto-nel-piano': { interni: ['grandezze-e-vettori', 'cinematica-1d'], basi: [] },
+      'leggi-di-newton': { interni: ['grandezze-e-vettori', 'cinematica-1d', 'moto-nel-piano'], basi: [] },
+      'lavoro-ed-energia': { interni: ['grandezze-e-vettori', 'leggi-di-newton'], basi: ['analisi-1/integrali', 'analisi-1/derivate'] },
+      oscillazioni: { interni: ['leggi-di-newton', 'lavoro-ed-energia', 'corpo-rigido'], basi: ['goniometriche', 'esponenziali'] },
+      'quantita-di-moto': { interni: ['grandezze-e-vettori', 'leggi-di-newton'], basi: [] },
+      'corpo-rigido': { interni: ['grandezze-e-vettori', 'lavoro-ed-energia'], basi: [] },
+      gravitazione: { interni: ['grandezze-e-vettori', 'leggi-di-newton', 'lavoro-ed-energia'], basi: ['potenze-e-radici'] },
+      fluidi: { interni: ['grandezze-e-vettori'], basi: [] },
+      'primo-principio': { interni: ['grandezze-e-vettori', 'lavoro-ed-energia'], basi: ['equazioni-polinomiali', 'logaritmiche'] },
+      'secondo-principio': { interni: ['primo-principio'], basi: [] },
+    },
+  },
 };
 
 // Regole del test (si possono ritoccare senza cambiare il motore). Dal 14/11/2026 sera il test lavora per
@@ -249,6 +269,117 @@ export const RIMANDI = {
     'convergenza-uniforme,convergenza-puntuale|3|analisi-2/successioni-e-serie-di-funzioni#6,analisi-1/studio-di-funzione#7',
     'luguaglianza-di-parseval|5|analisi-1/integrali#4',
     'periodo-generico,funzioni-periodiche-e-polinomi-trigonometrici|6|precorso/goniometriche#2,analisi-1/integrali#2',
+  ],
+  // Fisica 1: abilità nell'ordine di studio-guidato-livelli.json. Le basi puntano a un capitolo precedente
+  // di Fisica 1, al Precorso o ad Analisi 1 (derivate, integrali, equazioni differenziali).
+  'fisica-1/grandezze-e-vettori': [
+    'il-sistema-internazionale|1|precorso/potenze-e-radici#0',
+    'analisi-dimensionale|2|precorso/potenze-e-radici#0',
+    'notazione-scientifica-e-cifre-significative|1|precorso/potenze-e-radici#0',
+    'componenti-cartesiane-e-polari|3|precorso/goniometriche#0',
+    'grandezze-scalari-e-vettoriali,componenti-cartesiane-e-polari|3,4|fisica-1/grandezze-e-vettori#3',
+    'prodotto-scalare-e-lavoro|5|fisica-1/grandezze-e-vettori#3',
+    'prodotto-vettoriale-e-momento-di-una-forza|6|fisica-1/grandezze-e-vettori#3',
+    'derivata-di-un-vettore|7|analisi-1/derivate#1',
+  ],
+  'fisica-1/cinematica-1d': [
+    'velocità-media-e-velocità-istantanea,moto-rettilineo-uniforme|1|precorso/equazioni-polinomiali#0',
+    'moto-uniformemente-accelerato|2|precorso/equazioni-polinomiali#1',
+    'caduta-libera-e-lancio-verticale|3|fisica-1/cinematica-1d#1',
+    'grafici-orari-e-aree|4|precorso/geometria-analitica#1',
+    'velocità-media-e-velocità-istantanea,accelerazione|5|analisi-1/derivate#1',
+    'dallaccelerazione-alla-legge-oraria|6|analisi-1/integrali#0',
+    'accelerazione-dipendente-dalla-velocità|7|analisi-1/equazioni-differenziali#0',
+  ],
+  'fisica-1/moto-nel-piano': [
+    'vettori-posizione-velocità-e-accelerazione,moto-con-accelerazione-costante|4|fisica-1/grandezze-e-vettori#7',
+    'lanci-da-una-quota,moto-del-proiettile|1,5|fisica-1/cinematica-1d#2',
+    'moto-del-proiettile,altezza-massima-tempo-di-volo-e-gittata|2|fisica-1/grandezze-e-vettori#3',
+    'moto-circolare-uniforme|3|fisica-1/grandezze-e-vettori#0',
+    'moto-circolare-non-uniforme|6|fisica-1/moto-nel-piano#3',
+    'moti-relativi-e-trasformazioni-di-galileo|7|fisica-1/grandezze-e-vettori#4',
+  ],
+  'fisica-1/leggi-di-newton': [
+    'forze-e-primo-principio-della-dinamica,secondo-principio-massa-e-peso|1|fisica-1/cinematica-1d#1',
+    'terzo-principio-e-reazioni-vincolari,sistemi-non-inerziali-e-forze-apparenti|1|fisica-1/leggi-di-newton#0',
+    'fili-ideali-e-carrucole,sistemi-di-corpi-collegati|2,5|fisica-1/leggi-di-newton#0',
+    'attrito-radente|4|fisica-1/leggi-di-newton#1',
+    'piano-inclinato|3|fisica-1/grandezze-e-vettori#3',
+    'forza-elastica|6|fisica-1/leggi-di-newton#0',
+    'dinamica-del-moto-circolare|7|fisica-1/moto-nel-piano#3',
+  ],
+  'fisica-1/lavoro-ed-energia': [
+    'lavoro-di-una-forza-costante,potenza|1,6|fisica-1/grandezze-e-vettori#5',
+    'lavoro-di-una-forza-variabile|7,4|analisi-1/integrali#4',
+    'energia-cinetica-e-teorema-dellenergia-cinetica|2|fisica-1/lavoro-ed-energia#0',
+    'forze-conservative,energia-potenziale,curve-di-energia-potenziale-ed-equilibrio|7|analisi-1/derivate#3',
+    'conservazione-dellenergia-meccanica|3,4|fisica-1/lavoro-ed-energia#2',
+    'forze-non-conservative-e-lavoro-dellattrito|5|fisica-1/leggi-di-newton#3',
+  ],
+  'fisica-1/oscillazioni': [
+    'moto-periodico-e-moto-armonico-semplice,equazione-del-moto-armonico|1|precorso/goniometriche#2',
+    'oscillatore-massa-molla|2|fisica-1/leggi-di-newton#5',
+    'energia-del-moto-armonico|4|fisica-1/lavoro-ed-energia#4',
+    'pendolo-semplice|3|fisica-1/oscillazioni#0',
+    'pendolo-fisico-e-pendolo-di-torsione|5|fisica-1/corpo-rigido#1',
+    'oscillazioni-smorzate|6|precorso/esponenziali#1',
+    'oscillazioni-forzate-e-risonanza|7|fisica-1/oscillazioni#5',
+  ],
+  'fisica-1/quantita-di-moto': [
+    'quantità-di-moto-di-un-punto-materiale,impulso-e-teorema-dellimpulso|1|fisica-1/leggi-di-newton#0',
+    'sistemi-di-punti-e-centro-di-massa,moto-del-centro-di-massa,teorema-di-könig|2|',
+    'conservazione-della-quantità-di-moto|5|fisica-1/quantita-di-moto#0',
+    'urti-in-una-dimensione|3|fisica-1/quantita-di-moto#2',
+    'urti-in-una-dimensione|4|fisica-1/quantita-di-moto#2',
+    'urti-in-due-dimensioni|6|fisica-1/grandezze-e-vettori#3',
+    'sistemi-a-massa-variabile-e-razzo|7|fisica-1/quantita-di-moto#0',
+  ],
+  'fisica-1/corpo-rigido': [
+    'corpo-rigido-e-grandezze-angolari,momento-di-una-forza-e-momento-angolare||fisica-1/grandezze-e-vettori#6',
+    'momento-dinerzia|1|',
+    'seconda-equazione-cardinale-e-moto-di-rotazione|2|fisica-1/corpo-rigido#1',
+    'energia-nei-moti-di-rotazione|3|fisica-1/lavoro-ed-energia#4',
+    'conservazione-del-momento-angolare|5|fisica-1/corpo-rigido#1',
+    'rotolamento-puro|4|fisica-1/corpo-rigido#3',
+    'equilibrio-statico-del-corpo-rigido|6,7|fisica-1/corpo-rigido#0',
+  ],
+  'fisica-1/gravitazione': [
+    'legge-di-gravitazione-universale|1|fisica-1/grandezze-e-vettori#2',
+    'campo-gravitazionale,energia-potenziale-gravitazionale|4|fisica-1/grandezze-e-vettori#4',
+    'energia-potenziale-gravitazionale,velocità-di-fuga-e-moti-non-legati|5,6|fisica-1/lavoro-ed-energia#4',
+    'corpi-a-simmetria-sferica,accelerazione-di-gravità-e-quota|2|fisica-1/gravitazione#0',
+    'orbite-circolari-e-satelliti|3|fisica-1/leggi-di-newton#6',
+    'orbite-circolari-e-satelliti,energia-potenziale-gravitazionale|7|fisica-1/gravitazione#4',
+    'leggi-di-keplero|7|precorso/potenze-e-radici#1',
+  ],
+  'fisica-1/fluidi': [
+    'densità-e-pressione,legge-di-stevino|1|fisica-1/grandezze-e-vettori#0',
+    'legge-di-stevino|2|fisica-1/fluidi#0',
+    'principio-di-pascal-e-torchio-idraulico|5|fisica-1/fluidi#0',
+    'principio-di-archimede|4|fisica-1/fluidi#0',
+    'galleggiamento|3|fisica-1/fluidi#3',
+    'fluidi-in-moto-portata-ed-equazione-di-continuità|6|fisica-1/grandezze-e-vettori#0',
+    'teorema-di-bernoulli,applicazioni-torricelli-e-venturi|6,7|fisica-1/fluidi#5',
+    'viscosità||',
+  ],
+  'fisica-1/primo-principio': [
+    'temperatura-ed-equilibrio-termico,dilatazione-termica|4|precorso/equazioni-polinomiali#0',
+    'calore-e-calorimetria|1|precorso/equazioni-polinomiali#0',
+    'cambiamenti-di-stato-e-propagazione-del-calore|2|fisica-1/primo-principio#1',
+    'gas-perfetto-ed-equazione-di-stato|3|fisica-1/grandezze-e-vettori#0',
+    'lavoro-termodinamico,primo-principio-della-termodinamica|5|fisica-1/lavoro-ed-energia#1',
+    'energia-interna-e-calori-molari-del-gas-perfetto|5|fisica-1/primo-principio#4',
+    'trasformazioni-del-gas-perfetto|6|precorso/logaritmiche#1',
+    'cicli-termodinamici|7|fisica-1/primo-principio#4',
+  ],
+  'fisica-1/secondo-principio': [
+    'macchine-termiche-e-rendimento|1,4|fisica-1/primo-principio#7',
+    'macchine-frigorifere-e-pompe-di-calore|1|fisica-1/secondo-principio#0',
+    'ciclo-di-carnot,teorema-di-carnot-e-temperatura-termodinamica|2,5|fisica-1/secondo-principio#0',
+    'enunciati-del-secondo-principio,trasformazioni-reversibili-e-irreversibili|2|',
+    'disuguaglianza-di-clausius,entropia|3|fisica-1/secondo-principio#2',
+    'entropia-del-gas-perfetto|6|fisica-1/primo-principio#6',
+    'entropia-di-corpi-e-serbatoi,principio-di-aumento-dellentropia|3,7|fisica-1/primo-principio#1',
   ],
   'precorso/logica': ['proposizioni,connettivi-logici||', 'connettivi-logici|1|', 'implicazione|3|', 'condizione-necessaria-e-sufficiente|2|', 'quantificatori|1|', 'tecniche-di-dimostrazione|4|'],
   'precorso/potenze-e-radici': ['proprietà-delle-potenze|1|', 'potenze-a-esponente-razionale-e-reale|1|', 'radici-n-esime|2|', 'razionalizzazione|3|', 'confronto-tra-potenze-e-tra-radici|4|', 'radici-n-esime|2|'],
