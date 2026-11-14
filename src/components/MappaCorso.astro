@@ -1,5 +1,5 @@
 ---
-// Nuova pagina della materia (14/11/2026, scelta di Carmine «A + C»): mappa del corso senza fili
+// Nuova pagina della materia (14/11/2026, scelta di Carmine «A + C», poi versione compatta «1»): mappa del corso senza fili
 // sovrapposti, fascia dello Studio guidato, riga dell'anteprima e argomenti come tappe di un percorso.
 // Anteprima riservata ai GM: il contenitore ha data-orientamento-gm e si mostra solo dopo la verifica
 // in Base.astro, che aggiunge anche html.gm-anteprima per nascondere la vista classica.
@@ -31,72 +31,77 @@ function disegno(verticale: boolean) {
   const archi = mappa.diretti.map(([d, a]: [string, string]) => verticale
     ? `M${x(d)} ${y(d) + 44} C ${x(d)} ${y(d) + 75}, ${x(a)} ${y(a) - 45}, ${x(a)} ${y(a) - 17}`
     : `M${x(d)} ${y(d)} C ${x(d) + 92} ${y(d)}, ${x(a) - 92} ${y(a)}, ${x(a)} ${y(a)}`);
-  return { W, H, archi, nodi: presenti.map((a) => ({ slug: a.slug, n: numero[a.slug], breve: mappa.brevi[a.slug] || a.titolo, tx: x(a.slug), ty: y(a.slug) })) };
+  const vb = verticale ? `0 0 ${W} ${H}` : '26 29 823 222';
+  return { W, H, vb, archi, nodi: presenti.map((a) => ({ slug: a.slug, n: numero[a.slug], breve: mappa.brevi[a.slug] || a.titolo, tx: x(a.slug), ty: y(a.slug) })) };
 }
 const oriz = disegno(false), vert = disegno(true);
 const bersaglio = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>`;
+const freccia = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>`;
 const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`;
 ---
 <div class="mc" data-orientamento-gm hidden data-mappa-corso={materia}>
+  {prezzo && (
+    <div class="mc-az" data-materia={materia}>
+      <span class="stato-bloccata">
+        <a class="mc-a1" href={anteprima}>Inizia dall'anteprima<span set:html={freccia} /></a>
+        <a class="mc-a2" href={sblocca}>Sblocca tutto <span>· {prezzo} €</span></a>
+        {compatibilita && <a class="mc-a3" href={compatibilita}>Il materiale copre il tuo esame?</a>}
+      </span>
+      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>
+    </div>
+  )}
+
   <figure class="mc-fig">
-    {[oriz, vert].map((d, i) => (
-      <svg class:list={['mc-mappa', i ? 'mc-vert' : 'mc-oriz']} viewBox={`0 0 ${d.W} ${d.H}`} role="group" aria-label="Mappa del corso: ogni filo porta da un argomento a quello che lo usa subito dopo">
-        <g class="mc-archi">{d.archi.map((a) => <path d={a} />)}</g>
-        {d.nodi.map((n) => (
-          <a href={`#arg-${n.slug}`} class="mc-nodo" data-nodo={n.slug} transform={`translate(${n.tx} ${n.ty})`} aria-label={`${n.n}. ${argomenti.find((a) => a.slug === n.slug)!.titolo}`}>
-            <circle r="17" /><text class="mc-nn" y="5">{n.n}</text><text class="mc-nl" y="37">{n.breve}</text>
-          </a>
-        ))}
-      </svg>
-    ))}
-    <figcaption>
-      <span class="mc-leg"><i class="l-ok"></i>Pronto</span><span class="mc-leg"><i class="l-deb"></i>Da riprendere</span><span class="mc-leg"><i class="l-nv"></i>Da verificare</span>
-      <span class="mc-spieg">Ogni filo porta da un argomento a quello che lo usa subito dopo.</span>
-    </figcaption>
+    <div class="mc-m">
+      {[oriz, vert].map((d, i) => (
+        <svg class:list={['mc-mappa', i ? 'mc-vert' : 'mc-oriz']} viewBox={d.vb} role="group" aria-label="Mappa del corso: ogni filo porta da un argomento a quello che lo usa subito dopo">
+          <g class="mc-archi">{d.archi.map((a) => <path d={a} />)}</g>
+          {d.nodi.map((n) => (
+            <a href={`#arg-${n.slug}`} class="mc-nodo" data-nodo={n.slug} transform={`translate(${n.tx} ${n.ty})`} aria-label={`${n.n}. ${argomenti.find((a) => a.slug === n.slug)!.titolo}`}>
+              <circle r="17" /><text class="mc-nn" y="5">{n.n}</text><text class="mc-nl" y="37">{n.breve}</text>
+            </a>
+          ))}
+        </svg>
+      ))}
+      <figcaption class="mc-leg"><span><i class="l-ok"></i>Pronto</span><span><i class="l-deb"></i>Da riprendere</span><span><i></i>Da verificare</span></figcaption>
+    </div>
     <div class="mc-guida">
-      <span class="mc-ic" set:html={bersaglio} />
-      <div class="mc-guida-testo" data-mc-guida>
-        <strong>Studio guidato</strong>
-        <p>Un test che si adatta alle tue risposte e colora questa mappa: trovi gli argomenti da riprendere e la loro causa.</p>
+      <div class="mc-g1">
+        <span class="mc-gt"><span set:html={bersaglio} />Studio guidato</span>
+        <div class="mc-gn" data-mc-numeri hidden><b data-mc-trovate>0</b>lacune<i></i><b data-mc-risolte>0</b>risolte</div>
+        <div class="mc-gbar" data-mc-barra hidden></div>
       </div>
-      <div class="mc-guida-azioni">
-        <a class="mc-btn" href={`/studio-guidato/${materia}`} data-mc-principale>Inizia il test</a>
-        <a class="mc-btn vuoto" href={`/studio-guidato/${materia}`} data-mc-rifai hidden>Rifai il test</a>
+      <p class="mc-g2" data-mc-guida>Un test che si adatta alle tue risposte, trova le lacune e colora la mappa.</p>
+      <div class="mc-g3">
+        <a class="mc-rifai" href={`/studio-guidato/${materia}`} data-mc-rifai hidden>Rifai il test</a>
+        <a class="mc-btn" href={`/studio-guidato/${materia}`} data-mc-principale>Inizia il test<span set:html={freccia} /></a>
       </div>
     </div>
   </figure>
 
-  {prezzo && (
-    <p class="mc-ant" data-materia={materia}>
-      <span class="stato-bloccata"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20S10 9 20 9s16 11 16 11-6 11-16 11S4 20 4 20Z"/><circle cx="20" cy="20" r="5"/></svg>
-        <span>Di ogni argomento sono gratuiti l'inizio della teoria e le prime 3 schede svolte.</span>
-        <a href={anteprima}>Inizia dall'anteprima</a><a href={sblocca}>Sblocca tutto, {prezzo} €</a>
-        {compatibilita && <a href={compatibilita}>Il materiale copre il tuo esame?</a>}</span>
-      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Accesso completo attivo</strong></span>
-    </p>
-  )}
-
+  <div class="mc-ph"><h2>Programma</h2><span>Tocca un cerchio della mappa per arrivare all’argomento</span></div>
   <ol class="mc-perc">
     {argomenti.map((a) => (
       <li id={`arg-${a.slug}`} data-tappa={a.slug}>
-        <span class="mc-pallino" data-n={numero[a.slug]}>{numero[a.slug]}</span>
+        <span class="mc-num">{String(numero[a.slug]).padStart(2, '0')}</span>
         <div class="mc-cp">
-          <h2><a href={href(a.slug, 'teoria')}>{a.titolo}</a><em class="mc-stato" hidden></em></h2>
+          <h3><a href={href(a.slug, 'teoria')}>{a.titolo}</a></h3>
           {a.riassunto && <p>{a.riassunto}</p>}
           <div class="mc-r">
             <a href={href(a.slug, 'teoria')}>Teoria</a>
-            {a.svolti > 0 && <a href={href(a.slug, 'esercizi-svolti')}>{a.svolti} esercizi svolti</a>}
-            {a.dafare > 0 && <a href={href(a.slug, 'esercizi')}>{a.dafare} esercizi da fare</a>}
+            {a.svolti > 0 && <a href={href(a.slug, 'esercizi-svolti')}>{a.svolti} svolti</a>}
+            {a.dafare > 0 && <a href={href(a.slug, 'esercizi')}>{a.dafare} da fare</a>}
             {a.domande > 0 && <a href={href(a.slug, 'domande')}>{a.domande} domande</a>}
           </div>
         </div>
+        <em class="mc-stato" hidden></em>
       </li>
     ))}
     {ripasso && (
       <li class="mc-fine">
-        <span class="mc-pallino" set:html={bersaglio} />
+        <span class="mc-num mc-num-ic" set:html={bersaglio} />
         <div class="mc-cp">
-          <h2><a href={ripasso.href}>Prove d'esame</a></h2>
+          <h3><a href={ripasso.href}>Prove d'esame</a></h3>
           <p>{ripasso.domande} domande di ripasso su tutto il programma e la simulazione d'esame.</p>
           <div class="mc-r"><a href={ripasso.href}>Domande di ripasso</a><a href={ripasso.simulazione}>Simulazione d'esame</a><a class="solo-collegati" href={ripasso.oggi} hidden>Il tuo ripasso di oggi</a></div>
         </div>
@@ -108,69 +113,92 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
 
 <style is:global>
   html.gm-anteprima .vista-classica { display: none !important; }
-  .mc { font-family: var(--ui); margin-top: 1.4rem; }
-  .mc-fig { margin: 0 0 1.1rem; border: 1px solid var(--riga); border-radius: 16px; background: #fff; overflow: hidden; }
-  .mc-mappa { display: block; width: 100%; height: auto; padding: 1.1rem 1.4rem .2rem; box-sizing: border-box; overflow: visible; }
-  .mc-vert { display: none; max-width: 340px; margin: 0 auto; }
-  .mc-archi path { fill: none; stroke: #c9c2b4; stroke-width: 1.3; }
+  .mc { font-family: var(--ui); margin-top: 1.1rem; }
+  .mc-az { margin: 0 0 1.2rem; }
+  .mc-az .stato-bloccata { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+  .mc-az a { display: inline-flex; align-items: center; gap: .4rem; height: 2.2rem; padding: 0 .9rem; border-radius: 8px; font-size: .88rem; font-weight: 600; text-decoration: none; }
+  .mc-a1 > span, .mc-btn > span { display: inline-flex; }
+  .mc-az svg { width: .85rem; }
+  .mc-a1 { background: var(--azione); color: #fff; }
+  .mc-a2 { border: 1px solid #d6d0c4; color: var(--inchiostro); background: #fff; }
+  .mc-a2 span { color: #7a827e; font-weight: 500; }
+  .mc-az .mc-a3 { color: var(--inchiostro-2); font-weight: 500; padding: 0 .4rem; text-decoration: underline; text-decoration-color: #cfc8bb; text-underline-offset: 3px; }
+  .mc-az .stato-sbloccata { display: none; align-items: center; gap: .4rem; padding: .25rem .75rem .25rem .3rem; border-radius: 999px; background: #e4f0ec; color: var(--verde); font-size: .86rem; font-weight: 600; }
+  .mc-az .stato-sbloccata svg { width: 1.1rem; height: 1.1rem; }
+  .mc-fig { margin: 0; background: #fff; border: 1px solid #e1dbd0; border-radius: 14px; box-shadow: 0 1px 2px rgba(19,46,43,.06), 0 10px 26px -20px rgba(19,46,43,.4); overflow: hidden; }
+  .mc-m { position: relative; padding: 1.5rem 1.4rem 2.2rem; }
+  .mc-mappa { display: block; width: 100%; height: auto; overflow: visible; }
+  .mc-vert { display: none; max-width: 320px; margin: 0 auto; }
+  .mc-archi path { fill: none; stroke: #d6cfc2; stroke-width: 1.4; }
   .mc-nodo { cursor: pointer; text-decoration: none; }
-  .mc-nodo circle { fill: #fff; stroke: var(--azione); stroke-width: 1.5; transition: stroke-width .15s; }
-  .mc-nodo:hover circle, .mc-nodo:focus-visible circle { stroke-width: 3; }
+  .mc-nodo circle { fill: #fff; stroke: #8a918d; stroke-width: 1.4; transition: stroke-width .15s; }
+  .mc-nodo:hover circle, .mc-nodo:focus-visible circle { stroke-width: 2.6; }
   .mc-nodo:focus-visible { outline: none; }
-  .mc-nn { font: 600 15px var(--titoli); fill: var(--azione); text-anchor: middle; }
-  .mc-nl { font: 500 13.5px var(--ui); fill: var(--inchiostro-2); text-anchor: middle; }
-  .mc-nodo.ok circle { fill: var(--azione); } .mc-nodo.ok .mc-nn { fill: #fff; }
-  .mc-nodo.debole circle { fill: #f6e3d9; stroke: #b0552b; } .mc-nodo.debole .mc-nn { fill: #8a3d17; }
-  .mc-fig figcaption { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; align-items: center; padding: 0 1.4rem 1rem; font-size: .84rem; color: var(--inchiostro-2); }
-  .mc-leg { display: inline-flex; align-items: center; gap: .35rem; }
-  .mc-leg i { width: .8rem; height: .8rem; border-radius: 50%; border: 1.5px solid var(--azione); background: #fff; }
-  .mc-leg .l-ok { background: var(--azione); } .mc-leg .l-deb { background: #f6e3d9; border-color: #b0552b; }
-  .mc-spieg { margin-left: auto; }
-  .mc-guida { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; background: #e9f0ed; border-top: 1px solid #d7e3de; }
-  .mc-ic { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: #fff; color: var(--azione); display: grid; place-items: center; }
-  .mc-ic svg { width: 1.4rem; }
-  .mc-guida-testo strong { font-size: 1.05rem; color: var(--azione); }
-  .mc-guida-testo p { margin: .15rem 0 0; font-size: .93rem; line-height: 1.4; color: #3d4a48; }
-  .mc-guida-testo b { color: var(--inchiostro); }
-  .mc-guida-azioni { margin-left: auto; flex: none; display: flex; gap: .5rem; }
-  .mc-btn { display: inline-flex; align-items: center; padding: .6rem 1.15rem; border-radius: 999px; background: var(--azione); color: #fff; text-decoration: none; font-weight: 600; font-size: .96rem; border: 1.5px solid var(--azione); }
-  .mc-btn.vuoto { background: #fff; color: var(--azione); }
-  .mc-btn[hidden] { display: none; }
-  .mc-ant { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; font-size: .9rem; color: var(--inchiostro-2); margin: 0 0 1.6rem; }
-  .mc-ant .stato-bloccata, .mc-ant .stato-sbloccata { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; }
-  .mc-ant .stato-sbloccata { display: none; color: var(--verde); }
-  .mc-ant svg { width: 1.05rem; height: 1.05rem; color: var(--azione); flex: none; }
-  .mc-ant .stato-sbloccata svg { color: var(--verde); }
-  .mc-ant a { color: var(--azione); font-weight: 600; text-underline-offset: 3px; }
+  .mc-nn { font: 600 14px var(--ui); fill: var(--inchiostro); text-anchor: middle; }
+  .mc-nl { font: 500 13px var(--ui); fill: #7a827e; text-anchor: middle; }
+  .mc-nodo.ok circle { fill: var(--azione); stroke: var(--azione); } .mc-nodo.ok .mc-nn { fill: #fff; }
+  .mc-nodo.debole circle { fill: #e07a4f; stroke: #e07a4f; filter: drop-shadow(0 0 6px rgba(224,122,79,.5)); } .mc-nodo.debole .mc-nn { fill: #fff; }
+  .mc-leg { position: absolute; right: 1.3rem; bottom: .75rem; display: flex; gap: .85rem; font-size: .74rem; color: #7a827e; }
+  .mc-leg span { display: inline-flex; align-items: center; gap: .32rem; }
+  .mc-leg i { width: .5rem; height: .5rem; border-radius: 50%; border: 1.2px solid #8a918d; }
+  .mc-leg .l-ok { background: var(--azione); border-color: var(--azione); } .mc-leg .l-deb { background: #e07a4f; border-color: #e07a4f; }
+  .mc-guida { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.3rem; padding: .85rem 1.3rem; border-top: 1px solid #ebe6dc; background: #fbfaf7; }
+  .mc-gt { display: flex; align-items: center; gap: .4rem; font-size: .84rem; font-weight: 600; color: var(--azione); white-space: nowrap; }
+  .mc-gt svg { width: .95rem; }
+  .mc-gn { display: flex; align-items: baseline; gap: .3rem; margin-top: .25rem; font-size: .78rem; color: #7a827e; font-variant-numeric: tabular-nums; }
+  .mc-gn b { font: 600 1.1rem/1 var(--titoli); color: var(--inchiostro); }
+  .mc-gn i { width: 1px; height: .9rem; background: #dcd6ca; margin: 0 .4rem; align-self: center; }
+  .mc-gn[hidden], .mc-gbar[hidden], .mc-rifai[hidden] { display: none; }
+  .mc-gbar { display: flex; gap: 3px; width: 9.5rem; margin-top: .45rem; }
+  .mc-gbar i { flex: 1; height: 3px; border-radius: 2px; background: #e4dfd5; }
+  .mc-gbar i.on { background: var(--azione); }
+  .mc-g2 { margin: 0; padding-left: 1.3rem; border-left: 1px solid #e4dfd5; font-size: .87rem; line-height: 1.4; color: #6b7470; }
+  .mc-g2 small { display: block; font-size: .74rem; color: #7a827e; }
+  .mc-g2 b { display: block; font: 600 .98rem/1.3 var(--titoli); color: var(--inchiostro); margin-top: .1rem; }
+  .mc-g3 { display: flex; align-items: center; gap: .9rem; }
+  .mc-rifai { font-size: .8rem; color: #7a827e; text-decoration: none; border-bottom: 1px solid #dcd6ca; white-space: nowrap; }
+  .mc-btn { display: inline-flex; align-items: center; gap: .3rem; height: 2.15rem; padding: 0 .8rem 0 .95rem; border-radius: 8px; background: var(--azione); color: #fff; font-size: .86rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .mc-btn svg { width: .8rem; }
+  .mc-ph { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: 2rem 0 0; padding: 0 .2rem .6rem; border-bottom: 1px solid #ddd7cb; }
+  .mc-ph h2 { font: 600 1.25rem var(--titoli); margin: 0; }
+  .mc-ph span { font-size: .78rem; color: #8a918d; }
   .mc-perc { list-style: none; padding: 0; margin: 0; }
-  .mc-perc > li { position: relative; display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; padding: 0 0 1.5rem; scroll-margin-top: calc(var(--altezza-testata) + 1rem); }
-  .mc-perc > li::before { content: ''; position: absolute; left: 1.27rem; top: 2.6rem; bottom: 0; width: 2px; background: var(--riga); }
-  .mc-perc > li.mc-fine::before { display: none; }
-  .mc-pallino { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 1.5px solid #c9c2b4; font: 600 1.05rem var(--titoli); color: var(--inchiostro-2); position: relative; z-index: 1; box-sizing: border-box; }
-  .mc-pallino svg { width: 1.3rem; color: var(--azione); }
-  .mc-perc .ok .mc-pallino { background: var(--azione); border-color: var(--azione); color: #fff; }
-  .mc-perc .debole .mc-pallino { border: 2px solid #b0552b; color: #8a3d17; background: #fdf4ef; }
-  .mc-perc .prossimo .mc-pallino { box-shadow: 0 0 0 5px #f6e3d9; }
-  .mc-perc .lampo .mc-cp { animation: mc-lampo 1.4s ease-out; }
+  .mc-perc > li { display: grid; grid-template-columns: 2.4rem 1fr auto; gap: 0 1rem; padding: 1rem .2rem; border-bottom: 1px solid #ebe6dc; scroll-margin-top: calc(var(--altezza-testata) + 1rem); }
+  .mc-num { font: 500 1rem var(--titoli); color: #a39c8f; padding-top: .12rem; font-variant-numeric: tabular-nums; }
+  .mc-num-ic svg { width: 1.15rem; color: var(--azione); }
+  .mc-perc h3 { font: 600 1.1rem/1.3 var(--titoli); margin: 0; }
+  .mc-perc h3 a { color: var(--inchiostro); text-decoration: none; }
+  .mc-perc h3 a:hover { color: var(--azione); }
+  .mc-cp p { margin: .25rem 0 .55rem; font-size: .93rem; line-height: 1.55; color: var(--inchiostro-2); max-width: 42rem; }
+  .mc-r { display: flex; flex-wrap: wrap; row-gap: .3rem; font-size: .85rem; }
+  .mc-r a { color: var(--inchiostro-2); text-decoration: none; padding-right: .75rem; margin-right: .75rem; border-right: 1px solid #e1dbcf; }
+  .mc-r a:last-child { border: 0; }
+  .mc-r a:first-child { color: var(--azione); font-weight: 600; }
+  .mc-r a:hover { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
+  .mc-r a.solo-collegati[hidden] { display: none; }
+  html.collegato .mc-r a.solo-collegati { display: inline; }
+  .mc-stato { align-self: start; font: 600 .74rem var(--ui); font-style: normal; padding: .18rem .55rem; border-radius: 999px; white-space: nowrap; }
+  .mc-stato[hidden] { display: none; }
+  .ok .mc-stato { background: #e4f0ec; color: #1f5a4f; }
+  .debole .mc-stato { background: #fbe7dd; color: #a8481f; }
+  .nv .mc-stato { color: #9a948a; border: 1px solid #e1dbcf; }
+  .mc-perc > li.prossimo { box-shadow: inset 2px 0 0 #e07a4f; background: linear-gradient(90deg, #fdf5f0, transparent 70%); }
+  .mc-perc .lampo .mc-cp { animation: mc-lampo 1.4s ease-out; border-radius: 8px; }
   @keyframes mc-lampo { 0% { background: #e1ece8; } 100% { background: transparent; } }
-  .mc-cp { padding-top: .35rem; border-radius: 10px; }
-  .mc-perc h2 { font: 600 1.18rem var(--titoli); margin: 0; display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
-  .mc-perc h2 a { text-decoration: none; color: inherit; }
-  .mc-stato { font: 600 .78rem var(--ui); font-style: normal; padding: .15rem .55rem; border-radius: 999px; }
-  .ok .mc-stato { background: #e1ece8; color: var(--azione); }
-  .debole .mc-stato { background: #f6e3d9; color: #8a3d17; }
-  .mc-cp p { font-size: .93rem; line-height: 1.5; color: var(--inchiostro-2); margin: .3rem 0 0; max-width: 42rem; }
-  .mc-r { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
-  .mc-r a { font-size: .85rem; padding: .25rem .7rem; border: 1px solid var(--riga); border-radius: 999px; background: #fff; text-decoration: none; color: var(--inchiostro); }
-  .mc-r a:first-child { border-color: var(--azione); color: var(--azione); font-weight: 600; }
-  .mc-r a:hover { background: #eef4f1; }
-  html.collegato .mc-r a.solo-collegati { display: inline-block; }
-  .mc-dopo { margin: .2rem 0 0 3.6rem; font-size: .92rem; display: flex; gap: .8rem; flex-wrap: wrap; color: var(--inchiostro-2); }
+  .mc-dopo { margin: 1rem 0 0 3.6rem; font-size: .9rem; display: flex; gap: .8rem; flex-wrap: wrap; color: var(--inchiostro-2); }
   .mc-dopo a { color: var(--azione); font-weight: 600; }
   @media (max-width: 700px) {
     .mc-oriz { display: none; } .mc-vert { display: block; }
-    .mc-guida { flex-wrap: wrap; } .mc-guida-azioni { margin-left: 0; }
-    .mc-spieg { margin-left: 0; }
+    .mc-m { padding: 1.2rem 1rem 1rem; }
+    .mc-leg { position: static; justify-content: center; margin-top: .6rem; }
+    .mc-guida { grid-template-columns: 1fr; gap: .7rem; }
+    .mc-g2 { padding-left: 0; border-left: 0; }
+    .mc-g3 { justify-content: space-between; flex-direction: row-reverse; }
+    .mc-ph span { display: none; }
+    .mc-perc > li { position: relative; grid-template-columns: 1.8rem 1fr; gap: 0 .7rem; }
+    .mc-stato { position: absolute; top: 1rem; right: .2rem; }
+    .mc-perc > li.ok h3, .mc-perc > li.debole h3, .mc-perc > li.nv h3 { padding-right: 6.4rem; }
+    .mc-vert { max-width: 280px; }
     .mc-dopo { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) { .mc-perc .lampo .mc-cp { animation: none; } }
@@ -192,38 +220,49 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (!d?.ultimo) return;
-        const deboli: string[] = [];
         for (const a of d.ultimo.argomenti || []) {
           if (a.stima === null || a.stima === undefined) continue;
           const stato = a.stima >= 2 ? 'ok' : 'debole';
-          if (stato === 'debole') deboli.push(a.a);
           box.querySelectorAll(`[data-nodo="${a.a}"]`).forEach((n) => n.classList.add(stato));
           const t = box.querySelector<HTMLElement>(`[data-tappa="${a.a}"]`);
           if (!t) continue;
           t.classList.add(stato);
-          const et = t.querySelector<HTMLElement>('.mc-stato')!;
-          et.textContent = stato === 'ok' ? 'Pronto' : 'Da riprendere';
-          et.hidden = false;
-          if (stato === 'ok') t.querySelector('.mc-pallino')!.textContent = '✓';
         }
+        // Dopo un test ogni argomento mostra lo stato; quelli non verificati restano «Da verificare».
+        box.querySelectorAll<HTMLElement>('[data-tappa]').forEach((t) => {
+          if (!t.classList.contains('ok') && !t.classList.contains('debole')) t.classList.add('nv');
+          const et = t.querySelector<HTMLElement>('.mc-stato')!;
+          et.textContent = t.classList.contains('ok') ? 'Pronto' : t.classList.contains('debole') ? 'Da riprendere' : 'Da verificare';
+          et.hidden = false;
+        });
         const p = d.progresso;
         const prossimo = p?.prossimo;
         if (prossimo?.m === materia) box.querySelector(`[data-tappa="${prossimo.a}"]`)?.classList.add('prossimo');
-        const testo = box.querySelector<HTMLElement>('[data-mc-guida] p')!;
-        const quando = new Date(p.ultimo).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
-        const conteggio = !p.trovate ? 'Nessuna lacuna negli argomenti verificati'
-          : p.test === 1 ? `${p.trovate} ${p.trovate === 1 ? 'lacuna trovata' : 'lacune trovate'}`
-          : `${p.risolte} ${p.risolte === 1 ? 'lacuna risolta' : 'lacune risolte'} su ${p.trovate}`;
+        box.querySelector<HTMLElement>('[data-mc-trovate]')!.textContent = String(p.trovate);
+        box.querySelector<HTMLElement>('[data-mc-risolte]')!.textContent = String(p.risolte);
+        box.querySelector<HTMLElement>('[data-mc-numeri]')!.hidden = false;
+        if (p.trovate) {
+          const barra = box.querySelector<HTMLElement>('[data-mc-barra]')!;
+          for (let k = 0; k < Math.min(p.trovate, 12); k++) {
+            const i = document.createElement('i');
+            if (k < p.risolte) i.className = 'on';
+            barra.append(i);
+          }
+          barra.hidden = false;
+        }
+        const testo = box.querySelector<HTMLElement>('[data-mc-guida]')!;
         testo.textContent = '';
-        testo.append(`Ultimo test: ${quando}. ${conteggio}.`);
         if (prossimo) {
-          testo.append(' Prossimo passo: ');
+          const piccolo = document.createElement('small');
+          piccolo.textContent = 'Prossimo passo';
           const b = document.createElement('b');
           b.textContent = prossimo.m === materia ? prossimo.titolo : `${prossimo.titolo} (Precorso)`;
-          testo.append(b, '.');
+          testo.append(piccolo, b);
+        } else {
+          testo.textContent = 'Nessuna lacuna negli argomenti verificati. Puoi passare alla simulazione d’esame.';
         }
         const principale = box.querySelector<HTMLAnchorElement>('[data-mc-principale]')!;
-        principale.textContent = 'Continua';
+        principale.firstChild!.textContent = 'Continua';
         principale.href = prossimo ? prossimo.link.teoria : `/${materia}/simulazione`;
         box.querySelector<HTMLElement>('[data-mc-rifai]')!.hidden = false;
       })
