@@ -354,6 +354,13 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Titoli di schede e tracce: tenuti entro 45 caratteri, perché il titolo della pagina aggiunge «: esercizio con soluzione | Idraulica» e sopra i 70 caratteri Google lo taglia (dopo l'intervento le pagine lunghe sono il 18%, contro il 28% di Statica).
 - Pubblicazione: ramo `idraulica-materia`. Gli acquisti passano da Stripe con i prezzi del catalogo (`prezzi.json`): non serve creare nessun prodotto. Inglese e traduzione delle domande non ancora fatti.
 
+## Domande 46-90 di Meccanica razionale e Idraulica (15/11/2026, richiesta di Carmine: «90 domande per capitolo senza essere ripetitive»)
+- 23 capitoli portati da 45 a 90 domande a tempo (Meccanica razionale anche in inglese; Idraulica solo italiano): 1035 domande nuove italiane e 540 inglesi. Brief: `istruzioni-agenti/brief-domande-46-90.md` e `brief-verifica-domande-46-90.md`.
+- **Le 46-90 di Statica e Fisica 1 sono famiglie di varianti numeriche: per Carmine sono ripetitive.** Qui ogni autore ha prima catalogato le 45 esistenti (abilità × situazione) e pianificato 45 domande su coppie nuove; vietati numeri cambiati, dato e incognita invertiti, «variazione» o «rapporto» fra configurazioni dello stesso sistema, testi a stampo. Un verificatore indipendente per capitolo ha rifatto i conti con sympy e riscritto circa 155 doppioni (molti trovati a mano: il controllo testuale non basta).
+- Controllo automatico dei testi simili: `python3 strumenti/domande-simili.py <cartella> 0.7` (parole senza numeri, `difflib`); su Statica segnala 37 coppie in un solo capitolo, sulle materie nuove 0-1 coppie per capitolo, tutte controllate a mano.
+- `strumenti/verifica-domande.mjs` fallisce su queste materie perché le domande 1-14 prendono il testo dalla traccia: è previsto.
+- Build parziale: con `SOLO_MATERIE` vanno incluse anche `analisi-1` e `fisica-zero`, altrimenti le pagine in spagnolo, francese e tedesco si fermano con errore.
+
 
 ## Build più leggera (12/11/2026, dopo tre build di Cloudflare fallite)
 - Sintomo: dal 12/11 ogni pubblicazione su `main` falliva (ultima riuscita: Idraulica, `ca21bba8`). Le build cadevano dopo 13-15 minuti, quindi **non** per il limite di 20 minuti: finivano la memoria. La macchina di Cloudflare ha 8 GB di RAM, 2 vCPU (piano gratuito) e 20 minuti (https://developers.cloudflare.com/workers/ci-cd/builds/limits-and-pricing/).
