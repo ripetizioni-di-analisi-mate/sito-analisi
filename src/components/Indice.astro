@@ -80,8 +80,8 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   )}
   {lingua === 'it' && (
     <a class="indice-scaffale" href="/pacchetti" data-pacchetti-gm hidden aria-current={qui === '/pacchetti' ? 'page' : undefined}>
-      <span class="is-libri" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-      <span class="is-testo"><strong>Pacchetti e sconti</strong><small>Fino al 25% con più materie</small></span>
+      <span class="is-cartellino" aria-hidden="true"><span class="is-tag">−25%</span><svg class="is-scintilla" viewBox="0 0 20 20"><path d="M10 0c.9 5.6 3.5 8.2 10 10-6.5 1.8-9.1 4.4-10 10-.9-5.6-3.5-8.2-10-10 6.5-1.8 9.1-4.4 10-10Z"/></svg></span>
+      <span class="is-testo"><strong>Pacchetti e sconti</strong><small>Più materie insieme</small></span>
     </a>
   )}
   {localizzato && <div class="lezioni-indice">
@@ -232,15 +232,20 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
   .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
   .indice-pacchetti[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
-  .indice-scaffale { display: flex; align-items: center; gap: 0.7rem; margin: 0.75rem 0 1rem; padding: 0.5rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); background: var(--bronzo-fondo); font-family: var(--ui); text-decoration: none; }
+  .indice-scaffale { display: flex; align-items: center; gap: 0.8rem; margin: 0.75rem 0 1rem; padding: 0.5rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); background: var(--bronzo-fondo); font-family: var(--ui); text-decoration: none; }
   .indice-scaffale:hover { border-color: #c9ac89; background: #ede1d1; }
   .indice-scaffale[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
-  .is-libri { flex: none; display: flex; align-items: flex-end; gap: 2px; height: 1.7rem; padding: 0 2px; border-bottom: 2px solid var(--bronzo-dettaglio); }
-  .is-libri span { width: 0.42rem; border-radius: 1.5px 1.5px 0 0; }
-  .is-libri span:nth-child(1) { height: 1.4rem; background: var(--c-definizione); }
-  .is-libri span:nth-child(2) { height: 1.6rem; background: var(--c-teorema); }
-  .is-libri span:nth-child(3) { height: 1.25rem; background: var(--c-esempio); }
-  .is-libri span:nth-child(4) { height: 1.5rem; background: var(--c-osservazione); }
+  .is-cartellino { position: relative; flex: none; width: 3.6rem; height: 1.9rem; display: grid; place-items: center; }
+  /* Cartellino appeso dal foro: oscilla ogni tanto, con un riflesso e una scintilla nell'angolo. */
+  .is-tag { position: relative; overflow: hidden; width: 3.5rem; height: 1.7rem; padding-right: 0.4rem; background: var(--bronzo-icona); color: #fff; font: 600 0.8rem/1.7rem var(--titoli); text-align: right; clip-path: polygon(0.75rem 0, 100% 0, 100% 100%, 0.75rem 100%, 0 50%); transform: rotate(-8deg); transform-origin: 0.6rem 50%; animation: is-oscilla 7s ease-in-out 1.2s infinite; }
+  .is-tag::before { content: ""; position: absolute; left: 0.5rem; top: calc(50% - 0.19rem); width: 0.38rem; height: 0.38rem; border-radius: 50%; background: var(--bronzo-fondo); }
+  .is-tag::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 35%, #fff9 50%, transparent 65%); transform: translateX(-120%); animation: is-riflesso 7s ease-in-out 1.2s infinite; }
+  .is-scintilla { position: absolute; right: -0.3rem; top: -0.5rem; width: 1rem; height: 1rem; fill: #e2b46a; filter: drop-shadow(0 0 2px #fff); opacity: 0; animation: is-brilla 7s ease-in-out 1.2s infinite; }
+  .indice-scaffale:hover .is-tag, .indice-scaffale:hover .is-tag::after, .indice-scaffale:hover .is-scintilla { animation-duration: 1.4s; animation-delay: 0s; }
+  @keyframes is-oscilla { 0%, 62%, 100% { transform: rotate(-8deg); } 67% { transform: rotate(-22deg); } 73% { transform: rotate(5deg); } 79% { transform: rotate(-15deg); } 85% { transform: rotate(-4deg); } 90% { transform: rotate(-9deg); } }
+  @keyframes is-riflesso { 0%, 66% { transform: translateX(-120%); } 82%, 100% { transform: translateX(120%); } }
+  @keyframes is-brilla { 0%, 70%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); } 78% { opacity: 1; transform: scale(1.1) rotate(45deg); } 88% { opacity: 0; transform: scale(.4) rotate(90deg); } }
+  @media (prefers-reduced-motion: reduce) { .is-tag, .is-tag::after, .is-scintilla { animation: none; } }
   .is-testo { display: flex; flex-direction: column; min-width: 0; }
   .is-testo strong { color: var(--bronzo-scuro); font: 600 0.92rem/1.3 var(--ui); }
   .is-testo small { color: var(--bronzo); font: 600 0.78rem/1.3 var(--ui); }
