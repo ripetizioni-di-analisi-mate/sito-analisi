@@ -17,7 +17,12 @@ execFileSync(process.execPath, [join(root, 'node_modules/rolldown/bin/cli.mjs'),
 const { Archivio, firmaToken, worker } = await import(pathToFileURL(bundle));
 after(() => rmSync(temp, { recursive: true, force: true }));
 const origine = 'https://ripetizionidianalisi.com';
-const dati = (m) => JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}.json`), 'utf8'));
+// Le materie più pesanti hanno il file diviso in pezzi `<m>--2.json` … (partiDomande in src/lib/domande.ts).
+const dati = (m) => {
+  const d = JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}.json`), 'utf8'));
+  for (let k = 2; k <= (d.parti ?? 1); k++) Object.assign(d.argomenti, JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}--${k}.json`), 'utf8')).argomenti);
+  return d;
+};
 const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi'].map((m) => [m, dati(m)]));
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
@@ -31,8 +36,10 @@ function banco(t) {
   } }, transactionSync: (fn) => fn(), getAlarm: async () => null, setAlarm: async () => {} } };
   const env = { CHIAVE_ACCESSO: 'studio-guidato-test', VENDITA: '1' };
   env.ASSETS = { fetch: async (req) => {
-    const m = new URL(req.url).pathname.match(/^\/dati-domande\/([a-z0-9-]+)\.json$/);
-    return m && DATI[m[1]] ? Response.json(DATI[m[1]]) : new Response('no', { status: 404 });
+    // I file veri della build, pezzi compresi: così il Worker li riunisce come in produzione.
+    const m = new URL(req.url).pathname.match(/^\/dati-domande\/([a-z0-9-]+?)(--\d+)?\.json$/);
+    return m && DATI[m[1]] ? new Response(readFileSync(join(root, 'dist/dati-domande', `${m[1]}${m[2] ?? ''}.json`)), { headers: { 'content-type': 'application/json' } })
+      : new Response('no', { status: 404 });
   } };
   const ar = new Archivio(state, env);
   env.ARCHIVIO = { idFromName: () => 'test', get: () => ({ fetch: (url, init) => ar.fetch(new Request(url, init)) }) };

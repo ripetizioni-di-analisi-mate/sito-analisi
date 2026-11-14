@@ -804,9 +804,21 @@ async function domandeDi(env, materia, lingua = 'it') {
   if (!/^[a-z0-9-]+$/.test(materia || '')) return null;
   const chiave = `${lingua}/${materia}`;
   if (!cacheDomande[chiave]) {
-    const r = await env.ASSETS.fetch(new Request(`https://interno/dati-domande/${lingua === 'it' ? '' : lingua + '/'}${materia}.json`));
+    const base = `https://interno/dati-domande/${lingua === 'it' ? '' : lingua + '/'}${materia}`;
+    const r = await env.ASSETS.fetch(new Request(`${base}.json`));
     if (!r.ok) return lingua === 'en' ? domandeDi(env, materia, 'it') : null;
-    cacheDomande[chiave] = await r.json();
+    const dati = await r.json();
+    // Le materie più pesanti sono divise in pezzi `<materia>--2.json` … (partiDomande in src/lib/domande.ts).
+    if (dati.parti > 1) {
+      const pezzi = await Promise.all(Array.from({ length: dati.parti - 1 }, async (_, i) => {
+        const p = await env.ASSETS.fetch(new Request(`${base}--${i + 2}.json`));
+        if (!p.ok) throw new Error(`Domande: manca il pezzo ${i + 2} di ${lingua}/${materia}`);
+        return p.json();
+      }));
+      for (const p of pezzi) Object.assign(dati.argomenti, p.argomenti);
+      delete dati.parti;
+    }
+    cacheDomande[chiave] = dati;
   }
   return cacheDomande[chiave];
 }

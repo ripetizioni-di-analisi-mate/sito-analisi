@@ -360,6 +360,7 @@ Frazioni sempre in colonna (anche negli esponenti); connettivi espliciti (quindi
 - Controllo automatico dei testi simili: `python3 strumenti/domande-simili.py <cartella> 0.7` (parole senza numeri, `difflib`); su Statica segnala 37 coppie in un solo capitolo, sulle materie nuove 0-1 coppie per capitolo, tutte controllate a mano.
 - `strumenti/verifica-domande.mjs` fallisce su queste materie perché le domande 1-14 prendono il testo dalla traccia: è previsto.
 - Build parziale: con `SOLO_MATERIE` vanno incluse anche `analisi-1` e `fisica-zero`, altrimenti le pagine in spagnolo, francese e tedesco si fermano con errore.
+- **File dei dati delle domande divisi in pezzi** (15/11/2026): la prima pubblicazione è fallita perché `dist/dati-domande/meccanica-razionale.json` pesava 28,5 MiB e Cloudflare non accetta file oltre 25 MiB (le formule rese e le figure SVG pesano 15-30 volte il Markdown). Ora `partiDomande` in `src/lib/domande.ts` stima il peso dal Markdown (×30, tetto 20 MB) e divide gli argomenti in `<materia>.json` (con `parti: N`) e `<materia>--2.json` …; `domandeDi` in `worker/index.mjs` li riunisce. Divise oggi: Meccanica razionale (3 pezzi, il più grande 12,5 MB), Idraulica, Fisica 1, Statica e, nella build completa, le altre materie con più di circa 670 KB di Markdown. Il test `strumenti/studio-guidato-api.test.mjs` legge i file veri della build, pezzi compresi.
 
 
 ## Build più leggera (12/11/2026, dopo tre build di Cloudflare fallite)
