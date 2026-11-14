@@ -157,6 +157,11 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-esame { display: contents; }
   .pm-esame .esame-materia { margin: 0; min-height: 2.75rem; font-size: .9rem; }
   .pm-esame .esame-titolo { font-weight: 400; color: var(--inchiostro); }
+  .pm-esame .esame-materia:has(.esame-modulo[hidden]) { flex-wrap: nowrap; white-space: nowrap; }
+  .pm-esame .esame-modifica { display: none; }
+  .pm-esame .con-data .esame-titolo, .pm-esame .con-data .esame-testo { cursor: pointer; }
+  .pm-esame .esame-lunga { display: none; }
+  .pm-esame .esame-breve { display: inline; }
   .pm-oro { display: inline-flex; align-items: center; gap: .6rem; height: 2.85rem; padding: 0 .4rem 0 1.1rem; border-radius: 999px; color: var(--pm-oro-testo); font-size: .95rem; font-weight: 600; text-decoration: none; white-space: nowrap;
     background: var(--pm-oro) linear-gradient(110deg, var(--pm-oro) 38%, #f6edcf 50%, var(--pm-oro) 62%) 160% 0 / 250% 100% no-repeat; animation: pm-luce 3.2s ease-in-out infinite;
     box-shadow: 0 4px 12px rgba(170,145,80,.18), inset 0 1px 0 rgba(255,255,255,.45); }
@@ -231,7 +236,14 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
     .pm-esame .esame-materia:not(.con-data) .esame-titolo, .pm-esame .esame-testo { display: none !important; }
     .pm-esame .esame-apri { font-size: 0; margin: 0; text-decoration: none; color: var(--inchiostro); }
     .pm-esame .esame-apri::after { content: 'Data d’esame'; font-size: .82rem; }
-    .pm-esame .esame-modifica { display: none; }
+    .pm-esame .esame-modifica { display: inline; font-size: inherit; margin-left: 0; }
+    .pm-link:has(.con-data) { gap: 0 .3rem; font-size: .76rem; flex-wrap: wrap; }
+    .pm-link:has(.con-data) .esame-icona { display: none; }
+    .pm-link:has(.con-data) a { gap: .2rem; }
+    .pm-link:has(.con-data) .esame-materia { font-size: inherit; gap: .2rem; }
+    .pm-link:has(.esame-modulo:not([hidden])) { flex-wrap: wrap; justify-content: flex-start; gap: 0 .9rem; }
+    .pm-link:has(.esame-modulo:not([hidden])) .esame-materia { flex: 1 0 100%; flex-wrap: wrap; white-space: normal; gap: .3rem .45rem; padding-bottom: .5rem; }
+    .pm-esame .con-data .esame-titolo { cursor: auto; }
     .pm-ph { font-size: 1.35rem; margin: 1.2rem 0 .4rem; }
     .pm-perc > li { position: relative; grid-template-columns: 1.8rem minmax(0, 1fr); gap: .45rem .6rem; padding: .85rem 0; }
     .pm-num { font-size: 1.05rem; padding-top: .1rem; }

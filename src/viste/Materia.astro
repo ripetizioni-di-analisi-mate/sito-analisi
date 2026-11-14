@@ -222,11 +222,18 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
       const d = new Date(data + 'T12:00:00');
       const giorni = Math.round((d - new Date(new Date().setHours(12, 0, 0, 0))) / 86400000);
       const quando = d.toLocaleDateString(lingua, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      titolo.textContent = giorni > 1 ? (en ? `${giorni} days to the exam` : `Mancano ${giorni} giorni all'esame`)
+      const frase = giorni > 1 ? (en ? `${giorni} days to the exam` : `Mancano ${giorni} giorni all'esame`)
         : giorni === 1 ? (en ? 'Exam tomorrow' : 'L\'esame è domani')
         : giorni === 0 ? (en ? 'Exam today' : 'L\'esame è oggi')
         : (en ? 'Exam date passed' : 'La data dell\'esame è passata');
-      testo.textContent = quando; testo.hidden = false;
+      // Nella riga dei link della pagina nuova (ProgrammaMateria.astro) frase e data compaiono in forma breve.
+      const fraseBreve = giorni > 1 ? (en ? `Exam in ${giorni} days` : `Esame tra ${giorni} giorni`) : frase;
+      const dataBreve = d.toLocaleDateString(lingua, { day: 'numeric', month: 'short' });
+      const coppia = (lunga, breve) => ['esame-lunga', 'esame-breve'].map((classe, i) => {
+        const el = document.createElement('span'); el.className = classe; el.textContent = i ? breve : lunga; return el;
+      });
+      titolo.replaceChildren(...coppia(frase, fraseBreve));
+      testo.replaceChildren(...coppia(quando, dataBreve)); testo.hidden = false;
     };
     const invia = async (data) => {
       salva.disabled = togli.disabled = true;
@@ -245,6 +252,10 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     togli.addEventListener('click', () => invia(null));
     apri.addEventListener('click', apriModulo);
     modifica.addEventListener('click', apriModulo);
+    // Nella riga dei link, al computer, «Cambia» non c'è: la data si cambia toccando la scritta.
+    for (const el of [titolo, testo]) el.addEventListener('click', () => {
+      if (attuale && modulo.hidden && box.closest('.pm-esame') && getComputedStyle(modifica).display === 'none') apriModulo();
+    });
     annulla.addEventListener('click', () => mostraEsame(attuale));
     for (const s of [selG, selM, selA]) s.addEventListener('change', () => { errore.hidden = true; });
     fetch(`/api/progressi?materia=${encodeURIComponent(materia)}`).then((r) => (r.ok ? r.json() : null)).then((d) => {
