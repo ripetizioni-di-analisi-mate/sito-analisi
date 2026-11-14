@@ -172,18 +172,92 @@ export function linkRisultato(record) {
   return `${base}?risultato=${encodeURIComponent(record.id)}`;
 }
 
-export function avviaRisultatiSalvati(contesto = document) {
+const TESTI_SALVATI = {
+  it: {
+    caricamento: 'Caricamento dei risultati…',
+    privati: 'I risultati sono visibili soltanto nel tuo account.',
+    vuoto: 'I risultati che scegli di salvare al termine di un test compariranno qui.',
+    titolo: 'Orientamento allo studio', scade: 'Scade il', aggiornato: 'Test aggiornato',
+    elimina: 'Elimina', conferma: 'Conferma eliminazione', annulla: 'Annulla', riprova: 'Riprova',
+    rimossa: 'Risultato eliminato dall’account. La copia salvata su questo browser è stata rimossa.',
+    revocato: 'Risultato eliminato dall’account. L’accesso GM non è più disponibile; la copia locale è stata conservata.',
+    cambiatoDopo: 'Risultato eliminato dall’account. L’account è poi cambiato: la cancellazione della copia sul browser non è stata eseguita. Aggiorna l’elenco.',
+    localeNonDisponibile: 'Risultato eliminato dall’account. Non è stato possibile verificare la cancellazione della copia sul browser; puoi gestirla dalla pagina del test o dalle impostazioni del browser.',
+    localeAggiornata: 'Risultato eliminato dall’account. La copia locale è cambiata durante l’operazione e non è stata rimossa.',
+    localeDiversa: 'Risultato eliminato dall’account. La bozza di un’altra prova su questo browser è rimasta disponibile.',
+    eliminato: 'Risultato eliminato dall’account.', nessunRisultato: 'Non ci sono risultati salvati nell’account.',
+    accountCambiato: 'L’account è cambiato in un’altra scheda. Aggiorna l’elenco prima di continuare.',
+    accediAvviso: 'Accedi con l’account GM per aprire l’orientamento.', accedi: 'Accedi',
+    servizio: 'Il servizio non è disponibile. Riprova tra poco.',
+  },
+  en: {
+    caricamento: 'Loading your results…',
+    privati: 'Your results are visible only in your account.',
+    vuoto: 'Results you choose to save after a test will appear here.',
+    titolo: 'Study guidance', scade: 'Expires on', aggiornato: 'Test updated',
+    elimina: 'Delete', conferma: 'Confirm deletion', annulla: 'Cancel', riprova: 'Try again',
+    rimossa: 'The result has been deleted from your account. The copy saved in this browser has been removed.',
+    revocato: 'The result has been deleted from your account. GM access is no longer available; the local copy has been kept.',
+    cambiatoDopo: 'The result has been deleted from your account. The account then changed, so the browser copy was not deleted. Refresh the list.',
+    localeNonDisponibile: 'The result has been deleted from your account. We could not verify whether the browser copy was removed; you can manage it from the test page or your browser settings.',
+    localeAggiornata: 'The result has been deleted from your account. The local copy changed during the operation and has not been removed.',
+    localeDiversa: 'The result has been deleted from your account. The draft of another test in this browser is still available.',
+    eliminato: 'The result has been deleted from your account.', nessunRisultato: 'There are no results saved in your account.',
+    accountCambiato: 'The account changed in another tab. Refresh the list before continuing.',
+    accediAvviso: 'Sign in with your GM account to open study guidance.', accedi: 'Sign in',
+    servizio: 'The service is not available right now. Please try again shortly.',
+  },
+};
+
+// Si traduce soltanto la presentazione del box: codici, status e verifiche
+// delle funzioni condivise restano gli stessi anche sulle pagine italiane.
+function erroreRisultatiSalvati(error, en) {
+  const s = TESTI_SALVATI[en ? 'en' : 'it'];
+  if (error.codice === 'account-cambiato') return s.accountCambiato;
+  if (!en) return error.message || s.servizio;
+  const perCodice = {
+    accesso: s.accediAvviso,
+    'riservato-gm': 'This study guidance preview is restricted to GM accounts.',
+    'account-non-valido': 'Reload the page to verify your account before continuing.',
+    origine: 'Reopen the test on this website and try again.',
+    formato: 'The request format is not valid. Reload the page and try again.',
+    richiesta: 'Choose the result to delete.',
+    dimensione: 'The data sent is too large. Reload the page and try again.',
+    indisponibile: 'Your results are not available right now. Please try again shortly.',
+  };
+  if (Object.hasOwn(perCodice, error.codice)) return perCodice[error.codice];
+  if (error.status === 401) return s.accediAvviso;
+  if (error.status === 403) return 'Access is not available for this account.';
+  if (error.status === 405) return 'This request method is not allowed. Reload the page and try again.';
+  if (error.message === 'La connessione non è disponibile. Riprova tra poco.')
+    return 'The connection is not available. Please try again shortly.';
+  if (error.message === 'Aggiorna l’elenco prima di eliminare un risultato.')
+    return 'Refresh the list before deleting a result.';
+  return s.servizio;
+}
+
+export function avviaRisultatiSalvati(contesto = document, lingua = document.documentElement.lang) {
   for (const box of contesto.querySelectorAll('[data-orientamento-salvati]')) {
     if (box.dataset.oriAvviato) continue;
     box.dataset.oriAvviato = '1';
+    const en = (box.dataset.oriLingua || lingua) === 'en';
+    const s = TESTI_SALVATI[en ? 'en' : 'it'];
+    const locale = en ? 'en-GB' : 'it-IT';
+    box.lang = en ? 'en' : 'it';
+    let titoliMaterie = {};
+    try {
+      const titoli = JSON.parse(box.dataset.oriTitoliMaterie || '{}');
+      if (titoli && typeof titoli === 'object' && !Array.isArray(titoli)) titoliMaterie = titoli;
+    } catch { /* Un dizionario assente o non valido usa il titolo di riserva. */ }
     const stato = box.querySelector('[data-ori-salvati-stato]');
     const lista = box.querySelector('[data-ori-salvati-lista]');
     const riprova = box.querySelector('[data-ori-salvati-riprova]');
+    riprova.textContent = s.riprova;
     let caricamento = 0;
     async function carica() {
       const corrente = ++caricamento;
       riprova.hidden = true;
-      stato.textContent = 'Caricamento dei risultati…';
+      stato.textContent = s.caricamento;
       lista.replaceChildren();
       try {
         const io = await verificaGmOrientamento();
@@ -194,47 +268,48 @@ export function avviaRisultatiSalvati(contesto = document) {
         pulisciBozzeScadute();
         // «Quale corso scegliere?» è sospeso: si mostrano solo i risultati di «Da dove comincio?».
         const record = Array.isArray(data.risultati) ? data.risultati.filter((r) => r.tipo === 'studio') : [];
-        stato.textContent = record.length ? 'I risultati sono visibili soltanto nel tuo account.' : 'I risultati che scegli di salvare al termine di un test compariranno qui.';
+        stato.textContent = record.length ? s.privati : s.vuoto;
         for (const r of record) {
           const li = elemento('li', null, 'ori-salvato');
           const a = collegamento('', linkRisultato(r));
-          const titolo = r.tipo === 'universita' ? 'Scelta universitaria' : r.esito?.titolo || 'Orientamento allo studio';
+          a.hreflang = 'it';
+          const titoloTradotto = Object.hasOwn(titoliMaterie, r.materia) && typeof titoliMaterie[r.materia] === 'string'
+            ? titoliMaterie[r.materia].trim() : '';
+          const titolo = titoloTradotto || (!en && r.esito?.titolo) || s.titolo;
           a.append(elemento('strong', titolo));
           const dataSalvataggio = new Date(r.aggiornato);
           const dataScadenza = r.scade ? new Date(r.scade) : null;
           const formato = { day: 'numeric', month: 'long', year: 'numeric' };
-          const scadenza = dataScadenza && !Number.isNaN(dataScadenza.getTime()) ? ` · Scade il ${dataScadenza.toLocaleDateString('it-IT', formato)}` : '';
-          a.append(elemento('small', `${Number.isNaN(dataSalvataggio.getTime()) ? '' : dataSalvataggio.toLocaleDateString('it-IT', formato)}${scadenza}${r.daAggiornare ? ' · Test aggiornato' : ''}`));
+          const scadenza = dataScadenza && !Number.isNaN(dataScadenza.getTime()) ? ` · ${s.scade} ${dataScadenza.toLocaleDateString(locale, formato)}` : '';
+          a.append(elemento('small', `${Number.isNaN(dataSalvataggio.getTime()) ? '' : dataSalvataggio.toLocaleDateString(locale, formato)}${scadenza}${r.daAggiornare ? ` · ${s.aggiornato}` : ''}`));
           let confermato = false;
-          const elimina = bottone('Elimina', async () => {
-            if (!confermato) { confermato = true; elimina.textContent = 'Conferma eliminazione'; annulla.hidden = false; return; }
+          const elimina = bottone(s.elimina, async () => {
+            if (!confermato) { confermato = true; elimina.textContent = s.conferma; annulla.hidden = false; return; }
             elimina.disabled = true;
             try {
               const cancellazione = await eliminaRisultatoOrientamento(r, accountAtteso);
               if (corrente !== caricamento) return;
               li.remove();
-              if (cancellazione.bozzaLocale === 'rimossa') stato.textContent = 'Risultato eliminato dall’account. La copia salvata su questo browser è stata rimossa.';
+              if (cancellazione.bozzaLocale === 'rimossa') stato.textContent = s.rimossa;
               else if (cancellazione.bozzaLocale === 'accesso-revocato') {
                 lista.replaceChildren(); riprova.hidden = false;
-                stato.textContent = 'Risultato eliminato dall’account. L’accesso GM non è più disponibile; la copia locale è stata conservata.';
+                stato.textContent = s.revocato;
               }
               else if (['non-disponibile', 'account-cambiato'].includes(cancellazione.bozzaLocale)) {
                 lista.replaceChildren();
-                stato.textContent = cancellazione.bozzaLocale === 'account-cambiato'
-                  ? 'Risultato eliminato dall’account. L’account è poi cambiato: la cancellazione della copia sul browser non è stata eseguita. Aggiorna l’elenco.'
-                  : 'Risultato eliminato dall’account. Non è stato possibile verificare la cancellazione della copia sul browser; puoi gestirla dalla pagina del test o dalle impostazioni del browser.';
+                stato.textContent = cancellazione.bozzaLocale === 'account-cambiato' ? s.cambiatoDopo : s.localeNonDisponibile;
                 riprova.hidden = false;
-              } else if (cancellazione.bozzaLocale === 'aggiornata') stato.textContent = 'Risultato eliminato dall’account. La copia locale è cambiata durante l’operazione e non è stata rimossa.';
-              else if (cancellazione.bozzaLocale === 'diversa') stato.textContent = 'Risultato eliminato dall’account. La bozza di un’altra prova su questo browser è rimasta disponibile.';
-              else stato.textContent = lista.children.length ? 'Risultato eliminato dall’account.' : 'Non ci sono risultati salvati nell’account.';
+              } else if (cancellazione.bozzaLocale === 'aggiornata') stato.textContent = s.localeAggiornata;
+              else if (cancellazione.bozzaLocale === 'diversa') stato.textContent = s.localeDiversa;
+              else stato.textContent = lista.children.length ? s.eliminato : s.nessunRisultato;
             } catch (error) {
               if (corrente !== caricamento) return;
               lista.replaceChildren();
-              stato.textContent = error.codice === 'account-cambiato' ? 'L’account è cambiato in un’altra scheda. Aggiorna l’elenco prima di continuare.' : error.message;
+              stato.textContent = erroreRisultatiSalvati(error, en);
               elimina.disabled = false; riprova.hidden = false;
             }
           }, 'ori-testo-bottone');
-          const annulla = bottone('Annulla', () => { confermato = false; elimina.textContent = 'Elimina'; annulla.hidden = true; }, 'ori-testo-bottone');
+          const annulla = bottone(s.annulla, () => { confermato = false; elimina.textContent = s.elimina; annulla.hidden = true; }, 'ori-testo-bottone');
           annulla.hidden = true;
           const azioni = elemento('div', null, 'ori-azioni'); azioni.append(elimina, annulla);
           li.append(a, azioni); lista.append(li);
@@ -243,8 +318,9 @@ export function avviaRisultatiSalvati(contesto = document) {
         if (corrente !== caricamento) return;
         lista.replaceChildren();
         if (error.status === 401) {
-          stato.replaceChildren(document.createTextNode('Accedi con l’account GM per aprire l’orientamento. '), collegamento('Accedi', '/accedi?dopo=%2Forientamento'));
-        } else { stato.textContent = error.message; riprova.hidden = false; }
+          const prefisso = en ? '/en' : '';
+          stato.replaceChildren(document.createTextNode(s.accediAvviso + ' '), collegamento(s.accedi, `${prefisso}/accedi?dopo=${encodeURIComponent(prefisso + '/orientamento')}`));
+        } else { stato.textContent = erroreRisultatiSalvati(error, en); riprova.hidden = false; }
       }
     }
     riprova.addEventListener('click', carica);

@@ -45,7 +45,7 @@ export function normalizzaPercorsoOrientamento(percorso) {
 
 // Il chiamante normalizza prima il percorso, incluse le varianti .html e index.
 export function tipoRisorsaOrientamento(percorso) {
-  if (percorso === '/orientamento' || percorso.startsWith('/orientamento/')) return 'pagina';
+  if (/^\/(?:en\/)?orientamento(?:\/|$)/.test(percorso)) return 'pagina';
   return risorsaTestOrientamento(percorso) ? 'script' : null;
 }
 

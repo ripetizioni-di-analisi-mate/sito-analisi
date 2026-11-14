@@ -157,7 +157,7 @@ test('la revoca GM vale subito con lo stesso token, senza leggere, modificare o 
     assert.equal((await r.json()).codice, 'riservato-gm');
   }
   const richieste = risorseFittizie(b);
-  for (const path of ['/orientamento/studio', bundleRiservato]) {
+  for (const path of ['/orientamento/studio', '/en/orientamento', bundleRiservato]) {
     const r = await b.api(io, 'GET', undefined, { 'if-none-match': '"asset-di-prova"' }, path);
     assert.equal(r.status, 403); assertPrivata(r);
   }
@@ -175,6 +175,11 @@ test('pagine e bundle GM negano anche accessi diretti, alias HTML, slash, percen
     '/orientamento/%2e%2e/orientamento/universita', '/%2forientamento/studio',
     '/x%3f%2f..%2forientamento/studio', '/x%23%2f..%2forientamento/studio',
     '/x%3f%2f%2f..%2forientamento/studio', '/x%23%5c..%5corientamento%5cstudio',
+    '/en/orientamento', '/en/orientamento/', '/en/orientamento.html', '/en/orientamento/index.html',
+    '/en/orientamento/studio', '/en/orientamento/studio.html', '/en/orientamento/studio/index.html',
+    '//en//orientamento//', '/%65n/%6frientamento', '/en%2forientamento', '/en/orientamento%2fstudio',
+    '/en/orientamento/%2e%2e/orientamento/studio', '/x%3f%2f..%2fen/orientamento',
+    '/x%23%5c..%5cen%5corientamento', '/en/orientamento?provenienza=pagina-inglese',
   ];
   const script = [
     bundleRiservato, bundleRiservato + '.map', bundleRiservato + '/', bundleRiservato + '/index.html',
@@ -187,13 +192,16 @@ test('pagine e bundle GM negano anche accessi diretti, alias HTML, slash, percen
     for (const path of paths) {
       const ospite = await b.api(null, 'GET', undefined, {}, path);
       assert.equal(ospite.status, ospiteStato, path); assertPrivata(ospite);
-      if (ospiteStato === 302) assert.ok(ospite.headers.get('location').startsWith('/accedi?dopo='));
+      if (ospiteStato === 302) {
+        const richiesta = new URL(origine + path);
+        assert.equal(ospite.headers.get('location'), `/accedi?dopo=${encodeURIComponent(richiesta.pathname + richiesta.search)}`);
+      }
       const negato = await b.api(nonGM, 'GET', undefined, {}, path);
       assert.equal(negato.status, 403, path); assertPrivata(negato);
       assert.equal((await negato.text()).includes('contenuto-consegnato-da-ASSETS'), false);
     }
   }
-  for (const path of ['/orientamento/studio', bundleRiservato]) {
+  for (const path of ['/orientamento/studio', '/en/orientamento', bundleRiservato]) {
     const head = await b.api(nonGM, 'HEAD', undefined, { 'if-none-match': '"asset-di-prova"' }, path);
     assert.equal(head.status, 403); assert.equal(await head.text(), ''); assertPrivata(head);
   }
@@ -212,7 +220,11 @@ test('GM attivo riceve pagine e bundle senza cache o validator; common e KaTeX r
   // «Quale corso scegliere?» è sospeso: per il GM l'indirizzo porta a «Da dove comincio?».
   const sospeso = await b.api(io, 'GET', undefined, {}, '/orientamento/universita');
   assert.equal(sospeso.status, 302); assert.equal(sospeso.headers.get('location'), '/orientamento/studio');
-  for (const path of ['/orientamento', '/orientamento/studio', bundleRiservato, bundleRiservato + '.map']) {
+  for (const path of [
+    '/orientamento', '/orientamento/studio', '/en/orientamento', '/en/orientamento.html',
+    '/en/orientamento/index.html', '/%65n/%6frientamento', '/en/orientamento/studio',
+    bundleRiservato, bundleRiservato + '.map',
+  ]) {
     const r = await b.api(io, 'GET', undefined, condizionali, path);
     assert.equal(r.status, 200, path); assertPrivata(r);
     assert.match(r.headers.get('vary'), /Accept-Encoding/);
@@ -221,7 +233,7 @@ test('GM attivo riceve pagine e bundle senza cache o validator; common e KaTeX r
   }
   const head = await b.api(io, 'HEAD', undefined, condizionali, bundleRiservato);
   assert.equal(head.status, 200); assert.equal(await head.text(), ''); assertPrivata(head);
-  for (const path of ['/risorse/orientamento-comune.prova.js', '/risorse/katex.prova.js', '/risorse/Account.prova.js']) {
+  for (const path of ['/risorse/orientamento-comune.prova.js', '/risorse/katex.prova.js', '/risorse/Account.prova.js', '/en/orientamento-altro']) {
     const r = await b.api(null, 'GET', undefined, {}, path);
     assert.equal(r.status, 200, path);
     assert.match(r.headers.get('cache-control'), /public/);
@@ -238,11 +250,13 @@ test('pagine e script richiedono anche token non scaduto e dispositivo non revoc
   ].entries()) {
     const io = await b.credenziali(`token-gm-${i}@test.invalid`, token);
     assert.equal((await b.api(io, 'GET', undefined, {}, '/orientamento/studio')).status, 302);
+    assert.equal((await b.api(io, 'GET', undefined, {}, '/en/orientamento')).status, 302);
     assert.equal((await b.api(io, 'GET', undefined, {}, bundleRiservato)).status, 401);
   }
   const io = await b.credenziali('device-gm@test.invalid');
   b.db.prepare('DELETE FROM dispositivi WHERE email = ? AND id = ?').run(io.email, io.d);
   assert.equal((await b.api(io, 'GET', undefined, {}, '/orientamento')).status, 302);
+  assert.equal((await b.api(io, 'GET', undefined, {}, '/en/orientamento')).status, 302);
   assert.equal((await b.api(io, 'GET', undefined, {}, bundleRiservato)).status, 401);
   const ruotato = await b.credenziali('nonce-gm@test.invalid');
   b.db.prepare('UPDATE dispositivi SET nonce = ? WHERE email = ? AND id = ?').run('nuova-generazione', ruotato.email, ruotato.d);
@@ -261,7 +275,7 @@ test('archivio non disponibile o risposta inattesa: pagine, bundle e API rimango
     async () => Response.json(null),
   ]) {
     b.env.ARCHIVIO = { idFromName: () => 'test', get: () => ({ fetch }) };
-    for (const path of ['/orientamento/studio', bundleRiservato, '/api/orientamento']) {
+    for (const path of ['/orientamento/studio', '/en/orientamento', bundleRiservato, '/api/orientamento']) {
       const r = await b.api(io, 'GET', undefined, {}, path);
       assert.equal(r.status, 503, path); assertPrivata(r);
       assert.equal((await r.text()).includes('contenuto-consegnato-da-ASSETS'), false);
