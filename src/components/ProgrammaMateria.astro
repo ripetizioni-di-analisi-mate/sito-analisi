@@ -1,0 +1,273 @@
+---
+// Pagina della materia, versione «A2» (14/11/2026, scelta di Carmine sulla tavola dei disegni): riquadro dello
+// Studio guidato a tre passi, riga con anteprima, compatibilità e tasto oro «Sblocca tutto» (apre il riquadro
+// dell'accesso completo), programma a righe con le barrette di schede svolte, esercizi da fare e domande a tempo.
+// Vale per ogni materia in italiano. Anteprima riservata ai GM: il contenitore ha data-orientamento-gm e si mostra
+// solo dopo la verifica in Base.astro, che aggiunge html.gm-anteprima per nascondere la vista classica.
+// Lo Studio guidato funziona solo dove ci sono le domande classificate (STUDIO_GUIDATO); altrove «In preparazione».
+interface Argomento { slug: string; titolo: string; riassunto?: string; pronto: boolean; svolti: number; dafare: number; verificabili: number; domande: number }
+interface Props {
+  materia: string;
+  titolo: string;
+  argomenti: Argomento[];
+  prezzo?: number;
+  anteprima: string;
+  sblocca: string;
+  compatibilita?: string;
+  studioGuidato: boolean;
+  incluso: string[];
+  ripasso?: { titolo: string; domande: number; href: string; simulazione?: { href: string; titolo: string }; oggi: string };
+  teoremi?: { href: string; teoremi: number; definizioni: number };
+}
+const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, studioGuidato, incluso, ripasso, teoremi } = Astro.props;
+const ic = (corpo: string, tratto = 1.7) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${tratto}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${corpo}</svg>`;
+const I = {
+  bersaglio: ic('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'),
+  freccia: ic('<path d="M5 12h14M14 7l5 5-5 5"/>'),
+  occhio: ic('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/>'),
+  foglio: ic('<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 3.5-4"/>'),
+  lucchetto: ic('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/>', 1.8),
+  svolti: ic('<rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8.5 12 2.5 2.5 4.5-5"/>'),
+  dafare: ic('<path d="M4 20l1-4L16 5l3 3L8 19z"/>'),
+  domande: ic('<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>'),
+  avanti: ic('<path d="m9 6 6 6-6 6"/>'),
+  spunta: ic('<path d="m5 12.5 4.5 4.5L19 7.5"/>', 2.2),
+  chiudi: ic('<path d="M6 6l12 12M18 6 6 18"/>'),
+};
+const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`;
+---
+<div class="pm" data-orientamento-gm hidden data-programma-materia={materia}>
+  <section class="pm-sg">
+    <div class="pm-sg1">
+      <span class="pm-sg-ic" set:html={I.bersaglio} />
+      <div class="pm-sg-t">
+        <h2>Studio guidato</h2>
+        <p>Il livello delle domande si adatta alle tue risposte.</p>
+      </div>
+      {studioGuidato
+        ? <a class="pm-btn" href={`/studio-guidato/${materia}`}>Inizia il test</a>
+        : <span class="pm-btn pm-btn-off">In preparazione</span>}
+    </div>
+    <ol class="pm-sg2">
+      <li><b>1</b>Rispondi alle domande</li>
+      <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
+      <li><b>2</b>Trovi le tue lacune e la loro causa</li>
+      <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
+      <li><b>3</b>Segui il percorso</li>
+    </ol>
+  </section>
+
+  {prezzo && (
+    <div class="pm-az" data-materia={materia}>
+      <div class="stato-bloccata">
+        <span class="pm-link">
+          <a href={anteprima}><span set:html={I.occhio} />Anteprima gratuita</a>
+          {compatibilita && <a href={compatibilita}><span set:html={I.foglio} />Copre il tuo esame?</a>}
+        </span>
+        <a class="pm-oro" href={sblocca} data-pm-apri><span set:html={I.lucchetto} />Sblocca tutto<b>{prezzo} €</b></a>
+      </div>
+      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>
+    </div>
+  )}
+
+  <h2 class="pm-ph">Programma</h2>
+  <ol class="pm-perc">
+    {argomenti.map((a, i) => (
+      <li data-arg={a.pronto ? a.slug : undefined} data-schede={a.svolti} data-verificabili={a.verificabili} data-domande={a.domande} class:list={{ 'pm-prep': !a.pronto }}>
+        <span class="pm-num">{String(i + 1).padStart(2, '0')}</span>
+        <div class="pm-cp">
+          <h3>{a.pronto ? <a href={href(a.slug, 'teoria')}>{a.titolo}<span set:html={I.avanti} /></a> : a.titolo}</h3>
+          {a.riassunto && <p>{a.riassunto}</p>}
+        </div>
+        {a.pronto ? (
+          <div class="pm-voci">
+            <em class="pm-stato" hidden></em>
+            {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">Esercizi svolti</span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn">Esercizi da fare</span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">Domande a tempo</span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+          </div>
+        ) : <em class="pm-stato pm-stato-prep">In preparazione</em>}
+      </li>
+    ))}
+    {ripasso && (
+      <li class="pm-fine">
+        <span class="pm-num pm-num-ic" set:html={I.bersaglio} />
+        <div class="pm-cp">
+          <h3><a href={ripasso.href}>{ripasso.titolo}<span set:html={I.avanti} /></a></h3>
+          <p>{ripasso.domande} domande di ripasso su tutto il programma.</p>
+        </div>
+        <div class="pm-voci">
+          <a class="pm-v" href={ripasso.href}><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">Domande di ripasso</span><span class="pm-vc">{ripasso.domande}</span><span set:html={I.avanti} /></span></a>
+          {ripasso.simulazione && <a class="pm-v" href={ripasso.simulazione.href}><span class="pm-vr"><span set:html={I.foglio} /><span class="pm-vn">{ripasso.simulazione.titolo}</span><span set:html={I.avanti} /></span></a>}
+          <a class="pm-v solo-collegati" href={ripasso.oggi} hidden><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">Il tuo ripasso di oggi</span><span set:html={I.avanti} /></span></a>
+        </div>
+      </li>
+    )}
+  </ol>
+  {teoremi && <p class="pm-dopo"><a href={teoremi.href}>Indice di teoremi e definizioni</a><span>{teoremi.teoremi} teoremi e {teoremi.definizioni} definizioni</span></p>}
+
+  {prezzo && (
+    <dialog class="pm-dlg" aria-labelledby={`pm-dlg-${materia}`}>
+      <div class="pm-dlg-testa">
+        <div><span>Accesso completo</span><h2 id={`pm-dlg-${materia}`}>{titolo}</h2></div>
+        <button type="button" class="pm-dlg-x" aria-label="Chiudi" data-pm-chiudi set:html={I.chiudi} />
+      </div>
+      <ul>{incluso.map((v) => <li><span set:html={I.spunta} />{v}</li>)}</ul>
+      <p class="pm-dlg-tot"><span>Totale</span><b>{prezzo} €</b></p>
+      <a class="pm-oro pm-oro-largo" href={sblocca}><span set:html={I.lucchetto} />Vai al pagamento</a>
+      <div class="pm-dlg-link">
+        {compatibilita && <a href={compatibilita}><span set:html={I.foglio} /><span>Vuoi controllare la compatibilità prima dell'acquisto?</span><span set:html={I.avanti} /></a>}
+        <a href={anteprima}><span set:html={I.occhio} /><span>Prova prima l'anteprima gratuita</span><span set:html={I.avanti} /></a>
+      </div>
+    </dialog>
+  )}
+</div>
+
+<style is:global>
+  html.gm-anteprima .vista-classica { display: none !important; }
+  .pm { font-family: var(--ui); margin-top: 1.2rem; --pm-oro: #d6c28e; --pm-oro-testo: #2b2210; --pm-sabbia: #f4efe1; --pm-sabbia-bordo: #e7dec8; }
+  .pm svg { width: 1em; height: 1em; flex: none; }
+  .pm a > span:has(> svg), .pm li > span:has(> svg), .pm button > span:has(> svg) { display: inline-flex; }
+
+  .pm-sg { background: #fff; border: 1px solid var(--pm-sabbia-bordo); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(31,42,40,.04), 0 10px 28px rgba(31,42,40,.05); }
+  .pm-sg1 { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.1rem; padding: 1.15rem 1.3rem; }
+  .pm-sg-ic { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--azione); color: #fff; font-size: 1.35rem; flex: none; }
+  .pm-sg-t { flex: 1 1 15rem; }
+  .pm-sg-t h2 { font: 700 1.3rem/1.2 var(--titoli); margin: 0; }
+  .pm-sg-t p { margin: .15rem 0 0; font-size: .95rem; line-height: 1.45; color: var(--inchiostro-2); }
+  .pm-btn { display: inline-flex; align-items: center; height: 2.85rem; padding: 0 1.5rem; border-radius: 999px; background: var(--azione); color: #fff; font-size: 1rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .pm-btn:hover { filter: brightness(1.12); color: #fff; }
+  .pm-btn-off { background: none; color: var(--inchiostro-2); border: 1px solid var(--riga); font-weight: 500; }
+  .pm-sg2 { list-style: none; margin: 0; padding: .8rem 1.3rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; background: var(--pm-sabbia); border-top: 1px solid var(--pm-sabbia-bordo); font-size: .9rem; color: var(--inchiostro); }
+  .pm-sg2 li { display: inline-flex; align-items: baseline; gap: .5rem; }
+  .pm-sg2 b { font: 700 1.05rem var(--titoli); color: var(--azione); }
+  .pm-sg2 .pm-fr { align-self: center; color: #a8966a; font-size: 1.05rem; }
+
+  .pm-az { margin: .55rem 0 0; font-size: .95rem; }
+  .pm-az .stato-bloccata { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .3rem 1.4rem; }
+  .pm-link { display: flex; flex-wrap: wrap; gap: 0 1.35rem; }
+  .pm-link a { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-link a:hover { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
+  .pm-link svg { color: var(--azione); font-size: 1.05rem; }
+  .pm-az .stato-sbloccata { display: none; align-items: center; gap: .4rem; margin-top: .5rem; padding: .25rem .75rem .25rem .3rem; border-radius: 999px; background: color-mix(in srgb, var(--verde) 12%, transparent); color: var(--verde); font-size: .88rem; font-weight: 600; }
+  .pm-az .stato-sbloccata svg { width: 1.1rem; height: 1.1rem; }
+  .pm-oro { display: inline-flex; align-items: center; gap: .6rem; height: 2.85rem; padding: 0 .4rem 0 1.1rem; border-radius: 999px; color: var(--pm-oro-testo); font-size: .95rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+    background: var(--pm-oro) linear-gradient(110deg, var(--pm-oro) 38%, #f6edcf 50%, var(--pm-oro) 62%) 160% 0 / 250% 100% no-repeat; animation: pm-luce 3.2s ease-in-out infinite;
+    box-shadow: 0 4px 12px rgba(170,145,80,.18), inset 0 1px 0 rgba(255,255,255,.45); }
+  .pm-oro:hover { color: var(--pm-oro-testo); filter: brightness(1.03); }
+  .pm-oro b { display: inline-flex; align-items: center; height: 2.1rem; padding: 0 .85rem; border-radius: 999px; background: var(--carta); font: 700 1.05rem var(--titoli); }
+  .pm-oro-largo { justify-content: center; width: 100%; height: 3.2rem; padding: 0 1rem; font-size: 1.05rem; box-sizing: border-box; }
+  @keyframes pm-luce { 0% { background-position: 160% 0; } 55%, 100% { background-position: -60% 0; } }
+
+  .pm .esame-materia { margin: .9rem 0 0; }
+  .pm-ph { font: 700 1.6rem var(--titoli); margin: 1.9rem 0 .5rem; }
+  .pm-perc { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid var(--riga); }
+  .pm-perc > li { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr) 13.5rem; gap: .2rem 1.4rem; padding: 1.3rem 0; border-top: 1px solid var(--riga); }
+  .pm-num { font: 700 1.3rem var(--titoli); color: #7d765c; font-variant-numeric: tabular-nums; }
+  .pm-num-ic { color: var(--azione); padding-top: .15rem; }
+  .pm-perc h3 { font: 700 1.25rem/1.3 var(--titoli); margin: 0; }
+  .pm-perc h3 a { color: var(--inchiostro); text-decoration: none; }
+  .pm-perc h3 a > span { margin-left: .3rem; vertical-align: -.12em; color: var(--azione); font-size: .95rem; }
+  .pm-perc h3 a:hover { color: var(--azione); }
+  .pm-cp p { margin: .4rem 0 0; font: 400 .98rem/1.5 var(--testo); color: var(--inchiostro-2); }
+  .pm-prep h3 { color: var(--inchiostro-2); }
+  .pm-voci { display: flex; flex-direction: column; gap: .1rem; }
+  .pm-stato { font: 600 .8rem var(--ui); font-style: normal; color: var(--azione); margin-bottom: .2rem; }
+  .pm-stato.pm-zero, .pm-stato-prep { color: var(--inchiostro-2); font-weight: 400; }
+  .pm-stato[hidden] { display: none; }
+  .pm-v { display: flex; flex-direction: column; justify-content: center; gap: .3rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-vr { display: flex; align-items: center; gap: .4rem; font-size: .88rem; }
+  .pm-vr > span:first-child { color: var(--azione); font-size: .95rem; }
+  .pm-vr > span:last-child { color: var(--inchiostro-2); font-size: .8rem; }
+  .pm-vn { flex: 1; }
+  .pm-vc { color: var(--inchiostro-2); font-size: .82rem; font-variant-numeric: tabular-nums; }
+  .pm-v:hover .pm-vn { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
+  .pm-barra { display: block; height: 4px; border-radius: 2px; background: var(--riga); overflow: hidden; }
+  .pm-barra i { display: block; width: 0; height: 100%; border-radius: 2px; background: var(--azione); transition: width .4s ease-out; }
+  .pm-v.solo-collegati[hidden] { display: none; }
+  html.collegato .pm-v.solo-collegati { display: flex; }
+  .pm-dopo { margin: 1rem 0 0; font-size: .9rem; display: flex; gap: .8rem; flex-wrap: wrap; color: var(--inchiostro-2); }
+  .pm-dopo a { color: var(--azione); font-weight: 600; }
+
+  .pm-dlg { width: min(31rem, calc(100vw - 2rem)); padding: 1.7rem 1.7rem 1.3rem; border: 0; border-radius: 20px; background: var(--carta); color: var(--inchiostro); font-family: var(--ui); box-shadow: 0 2px 4px rgba(31,42,40,.06), 0 24px 60px rgba(31,42,40,.25); box-sizing: border-box; }
+  .pm-dlg::backdrop { background: rgba(35,48,46,.45); }
+  .pm-dlg-testa { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .pm-dlg-testa span { font-size: .88rem; color: var(--inchiostro-2); }
+  .pm-dlg-testa h2 { font: 700 1.7rem/1.15 var(--titoli); margin: .2rem 0 0; }
+  .pm-dlg-x { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; margin: -.5rem -.6rem 0 0; border: 0; border-radius: 50%; background: none; color: var(--inchiostro-2); font-size: 1.15rem; cursor: pointer; }
+  .pm-dlg-x:hover { background: var(--carta-2); }
+  .pm-dlg ul { list-style: none; margin: 1.2rem 0; padding: 1.1rem 0; display: flex; flex-direction: column; gap: .75rem; border-block: 1px solid var(--riga); font-size: 1rem; }
+  .pm-dlg ul li { display: flex; align-items: center; gap: .75rem; }
+  .pm-dlg ul svg { color: var(--azione); font-size: 1.15rem; }
+  .pm-dlg-tot { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 1.1rem; font-size: 1rem; }
+  .pm-dlg-tot b { font: 700 2.1rem/1 var(--titoli); }
+  .pm-dlg-link { display: flex; flex-direction: column; margin-top: .9rem; font-size: .95rem; }
+  .pm-dlg-link a { display: flex; align-items: center; gap: .55rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-dlg-link a + a { border-top: 1px solid var(--riga); }
+  .pm-dlg-link a > span:nth-child(2) { flex: 1; }
+  .pm-dlg-link a > span:first-child { color: var(--azione); font-size: 1.05rem; }
+  .pm-dlg-link a > span:last-child { color: var(--inchiostro-2); font-size: .85rem; }
+  .pm-dlg-link a:hover > span:nth-child(2) { color: var(--azione); }
+
+  @media (max-width: 640px) {
+    .pm-sg1 { padding: 1rem; } .pm-sg2 { padding: .75rem 1rem; }
+    .pm-btn { width: 100%; justify-content: center; box-sizing: border-box; }
+    .pm-az .stato-bloccata { flex-direction: column-reverse; align-items: stretch; gap: .2rem; margin-top: .9rem; }
+    .pm-az .pm-oro { justify-content: center; }
+    .pm-link { justify-content: center; }
+    .pm-perc > li { grid-template-columns: 2rem minmax(0, 1fr); gap: .5rem .8rem; }
+    .pm-voci, .pm-perc > li > .pm-stato { grid-column: 2; }
+    .pm-dlg { padding: 1.3rem 1.2rem 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pm-oro { animation: none; } .pm-barra i { transition: none; } }
+</style>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('[data-programma-materia]')) {
+    const materia = box.dataset.programmaMateria!;
+    // «Sblocca tutto» apre il riquadro dell'accesso completo; senza <dialog> il link porta alla pagina Sblocca.
+    const dlg = box.querySelector<HTMLDialogElement>('.pm-dlg');
+    if (dlg && typeof dlg.showModal === 'function') {
+      box.querySelector('[data-pm-apri]')?.addEventListener('click', (e) => { e.preventDefault(); dlg.showModal(); });
+      dlg.querySelector('[data-pm-chiudi]')?.addEventListener('click', () => dlg.close());
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    }
+    // La riga della data d'esame (Materia.astro) sta dopo la vista classica: nella pagina nuova va sopra il programma.
+    const spostaEsame = () => {
+      const esame = document.querySelector<HTMLElement>('.esame-materia');
+      if (!box.hidden && esame && !box.contains(esame)) box.querySelector('.pm-ph')!.before(esame);
+    };
+    new MutationObserver(spostaEsame).observe(box, { attributes: true, attributeFilter: ['hidden'] });
+    spostaEsame();
+    // Con l'account: avanzamento di ogni argomento (stessi dati della vista classica, /api/progressi).
+    if (!document.documentElement.classList.contains('collegato')) continue;
+    fetch(`/api/progressi?materia=${encodeURIComponent(materia)}`, { credentials: 'same-origin' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!d?.argomenti) return;
+        box.querySelectorAll<HTMLElement>('li[data-arg]').forEach((li) => {
+          const p = d.argomenti[li.dataset.arg!] || { teoria: false, schede: 0, esercizi: 0, domande: 0 };
+          const tot = { schede: Number(li.dataset.schede), esercizi: Number(li.dataset.verificabili), domande: Number(li.dataset.domande) };
+          const quote = [p.teoria ? 1 : 0];
+          for (const voce of ['schede', 'esercizi', 'domande'] as const) {
+            if (!tot[voce]) continue;
+            const fatti = Math.min(p[voce] || 0, tot[voce]);
+            const quota = fatti / tot[voce];
+            quote.push(quota);
+            const el = li.querySelector<HTMLElement>(`[data-voce="${voce}"]`);
+            if (!el) continue;
+            el.querySelector<HTMLElement>('.pm-barra i')!.style.width = `${Math.round(quota * 100)}%`;
+            // Negli esercizi da fare conta la verifica automatica, presente solo in una parte delle tracce: il numero resta il totale.
+            if (voce === 'esercizi') el.title = `${fatti} verificati su ${tot[voce]} con la verifica della risposta`;
+            else el.querySelector<HTMLElement>('.pm-vc')!.textContent = `${fatti} su ${tot[voce]}`;
+          }
+          const media = Math.round((quote.reduce((a, b) => a + b, 0) / quote.length) * 100);
+          const stato = li.querySelector<HTMLElement>('.pm-stato')!;
+          stato.textContent = media >= 100 ? 'Completato' : media > 0 ? `${media}%` : 'Da iniziare';
+          stato.classList.toggle('pm-zero', media === 0);
+          stato.hidden = false;
+        });
+      })
+      .catch(() => {});
+  }
+</script>

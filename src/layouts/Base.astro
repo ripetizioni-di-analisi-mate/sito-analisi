@@ -425,7 +425,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     const ingressiOrientamento = [...document.querySelectorAll<HTMLElement>('[data-orientamento-gm]')];
     if (ingressiOrientamento.length) {
       let richiestaOrientamento = 0;
-      // html.gm-anteprima nasconde la vista classica dove c'è un'anteprima che la sostituisce (MappaCorso.astro).
+      // html.gm-anteprima nasconde la vista classica dove c'è un'anteprima che la sostituisce (ProgrammaMateria.astro).
       const nascondiOrientamento = () => { ingressiOrientamento.forEach((el) => { el.hidden = true; }); document.documentElement.classList.remove('gm-anteprima'); };
       async function verificaOrientamentoGM() {
         const richiesta = ++richiestaOrientamento;
