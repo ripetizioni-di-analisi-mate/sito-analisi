@@ -7,7 +7,7 @@ import { RIMANDI, REGOLE_SG } from '../src/data/studio-guidato.mjs';
 
 const CLASSI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-livelli.json', import.meta.url), 'utf8'));
 const TITOLI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-rimandi.json', import.meta.url), 'utf8'));
-const titoli = { 'analisi-1': Object.fromEntries(capitoli('analisi-1').map((a) => [a, a])), precorso: {}, nomeMateria: 'Analisi 1' };
+const titoli = { 'analisi-1': Object.fromEntries(capitoli('analisi-1').map((a) => [a, a])), precorso: {}, nomeMateria: 'Analisi 1', nomi: { 'analisi-1': 'Analisi 1', precorso: 'Precorso' } };
 
 // Studente simulato: sa(k, livello) dice se risponde bene a una domanda dell'abilità k («materia/argomento#i»).
 function simula(sa, opzioni = {}) {

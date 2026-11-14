@@ -28,7 +28,7 @@ import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
-import { materieGuidate, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
+import { materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
@@ -815,8 +815,13 @@ let titoliGuidatiCache = null;
 function titoliGuidati() {
   if (titoliGuidatiCache) return titoliGuidatiCache;
   const t = {};
-  for (const m of MATERIE) if (m.slug === 'precorso' || materieGuidate().includes(m.slug)) t[m.slug] = Object.fromEntries((m.argomenti || []).map((a) => [a.slug, a.titolo]));
-  t.nomeMateria = 'Analisi 1';
+  // Materie guidate e materie da cui prendono le basi (Precorso, Analisi 1 per Analisi 2).
+  const servono = new Set(['precorso', ...materieGuidate(), ...materieDelleBasi()]);
+  t.nomi = {};
+  for (const m of MATERIE) if (servono.has(m.slug)) {
+    t[m.slug] = Object.fromEntries((m.argomenti || []).map((a) => [a.slug, a.titolo]));
+    t.nomi[m.slug] = m.slug === 'precorso' ? 'Precorso' : (m.breve || m.titolo);
+  }
   return (titoliGuidatiCache = t);
 }
 const cacheRisposte = {};

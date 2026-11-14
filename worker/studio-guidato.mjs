@@ -19,6 +19,8 @@ import TITOLI_RIMANDI from '../src/data/studio-guidato-rimandi.json' with { type
 
 export const VERSIONE_SG = 2;
 export const materieGuidate = () => Object.keys(STUDIO_GUIDATO);
+// Materie da cui si prendono le basi (dalle chiavi dei rimandi).
+export const materieDelleBasi = () => [...new Set(Object.keys(RIMANDI).map((k) => k.split('/')[0]))];
 export const capitoli = (materia) => Object.keys(STUDIO_GUIDATO[materia]?.dipendenze || {});
 
 // Banca: per materia e argomento, le domande con livello (1-3) e indice dell'abilità.
@@ -166,7 +168,7 @@ function rimandi(k) {
 // Esito del test: stato di ogni abilità e lacune in ordine di studio (prima le basi, poi il capitolo).
 export function esito(stato, titoli) {
   const tit = (m, a) => titoli?.[m]?.[a] || a;
-  const nomeMateria = (m) => (m === MATERIA_BASI ? 'Precorso' : titoli?.nomeMateria || m);
+  const nomeMateria = (m) => titoli?.nomi?.[m] || (m === MATERIA_BASI ? 'Precorso' : titoli?.nomeMateria || m);
   const voce = (u, statoVoce) => {
     const p = parti(u.k);
     return { k: u.k, m: p.m, a: p.a, nome: nomeAbilita(u.k), capitolo: tit(p.m, p.a), materia: nomeMateria(p.m), stato: statoVoce };
@@ -202,7 +204,7 @@ export function esito(stato, titoli) {
   else {
     const primo = lacune[0];
     sintesi = primo.per.length
-      ? `Il punto da cui ripartire è ${min(primo.nome)} (${primo.materia === 'Precorso' ? `Precorso, ${primo.capitolo}` : primo.capitolo}), perché è la base di ${min(primo.per[0])}.`
+      ? `Il punto da cui ripartire è ${min(primo.nome)} (${primo.m !== stato.m ? `${primo.materia}, ${primo.capitolo}` : primo.capitolo}), perché è la base di ${min(primo.per[0])}.`
       : `Il punto da cui ripartire in ${min(cap)} è ${min(primo.nome)}.`;
     const altri = lacune.length - 1;
     if (altri) sintesi += ` ${altri === 1 ? 'C’è un altro punto' : `Ci sono altri ${altri} punti`} da riprendere${gravi.length ? '' : ', tutti da consolidare'}.`;
@@ -257,7 +259,8 @@ export function domandaPubblica(q, dati, titoli, stato) {
   const massimo = stato.modo === 'cerca' ? null : stato.modo === 'ricontrollo' ? stato.u.length : REGOLE_SG.maxDomandeTest + stato.n0;
   return {
     numero: stato.n + 1, massimo, testo: d.testo, scelte: d.scelte,
-    argomento: titoli?.[q.m]?.[argomento] || argomento, base: q.m === MATERIA_BASI,
+    // base: domanda di un'altra materia (Precorso, oppure Analisi 1 per Analisi 2).
+    argomento: titoli?.[q.m]?.[argomento] || argomento, base: q.m !== stato.m, materiaBase: q.m !== stato.m ? (titoli?.nomi?.[q.m] || q.m) : null,
     fase: stato.modo === 'cerca' ? 'cerca' : stato.modo === 'ricontrollo' ? 'ricontrollo' : stato.u[stato.i]?.tipo === 'base' ? 'base' : 'capitolo',
   };
 }

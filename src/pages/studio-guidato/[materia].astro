@@ -150,7 +150,7 @@ const nome = m.breve || m.titolo;
       $('[data-sg-barra]').classList.toggle('senza', !d.massimo);
       if (d.massimo) $('[data-sg-barra] span').style.width = `${Math.round(100 * d.numero / d.massimo)}%`;
       $('[data-sg-argomento]').textContent = d.argomento;
-      const etichetta = d.base ? 'Basi · Precorso' : d.fase === 'base' ? 'Base di un altro capitolo' : d.fase === 'cerca' ? 'Ricerca del capitolo' : d.fase === 'ricontrollo' ? 'Ricontrollo' : '';
+      const etichetta = d.base ? `Basi · ${d.materiaBase || 'Precorso'}` : d.fase === 'base' ? 'Base di un altro capitolo' : d.fase === 'cerca' ? 'Ricerca del capitolo' : d.fase === 'ricontrollo' ? 'Ricontrollo' : '';
       $('[data-sg-provenienza]').textContent = etichetta;
       $('[data-sg-provenienza]').hidden = !etichetta;
       $('[data-sg-testo]').innerHTML = d.testo;
@@ -198,7 +198,7 @@ const nome = m.breve || m.titolo;
       test.hidden = true; intro.hidden = true; ris.hidden = false;
       const lacune = e.lacune || [];
       const percorso = lacune.map((l: any, k: number) => {
-        const dove = l.m === 'precorso' ? `Precorso · ${esc(l.capitolo)}` : esc(l.capitolo);
+        const dove = l.m !== materia ? `${esc(l.materia)} · ${esc(l.capitolo)}` : esc(l.capitolo);
         const perche = [
           `${dove}.`,
           l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : 'Sbagliata la domanda di livello medio.',
