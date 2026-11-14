@@ -1,0 +1,232 @@
+---
+// Nuova pagina della materia (14/11/2026, scelta di Carmine «A + C»): mappa del corso senza fili
+// sovrapposti, fascia dello Studio guidato, riga dell'anteprima e argomenti come tappe di un percorso.
+// Anteprima riservata ai GM: il contenitore ha data-orientamento-gm e si mostra solo dopo la verifica
+// in Base.astro, che aggiunge anche html.gm-anteprima per nascondere la vista classica.
+// Mappa e percorso si colorano con l'ultimo esito dello Studio guidato (/api/studio-guidato).
+import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
+
+interface Argomento { slug: string; titolo: string; riassunto?: string; svolti: number; dafare: number; domande: number }
+interface Props {
+  materia: string;
+  argomenti: Argomento[];
+  prezzo?: number;
+  anteprima: string;
+  sblocca: string;
+  compatibilita?: string;
+  ripasso?: { domande: number; href: string; simulazione: string; oggi: string };
+  teoremi?: { href: string; teoremi: number; definizioni: number };
+}
+const { materia, argomenti, prezzo, anteprima, sblocca, compatibilita, ripasso, teoremi } = Astro.props;
+const { mappa } = STUDIO_GUIDATO[materia];
+const numero = Object.fromEntries(argomenti.map((a, i) => [a.slug, i + 1]));
+const presenti = argomenti.filter((a) => mappa.posizioni[a.slug]);
+
+// Disegno orizzontale (computer) e verticale (telefono) della stessa mappa.
+function disegno(verticale: boolean) {
+  const P = mappa.posizioni;
+  const x = (s: string) => verticale ? 70 + P[s][1] * 85 : 60 + P[s][0] * 185;
+  const y = (s: string) => verticale ? 30 + P[s][0] * 105 : 50 + P[s][1] * 66;
+  const W = verticale ? 340 : 860, H = verticale ? 500 : 250;
+  const archi = mappa.diretti.map(([d, a]: [string, string]) => verticale
+    ? `M${x(d)} ${y(d) + 44} C ${x(d)} ${y(d) + 75}, ${x(a)} ${y(a) - 45}, ${x(a)} ${y(a) - 17}`
+    : `M${x(d)} ${y(d)} C ${x(d) + 92} ${y(d)}, ${x(a) - 92} ${y(a)}, ${x(a)} ${y(a)}`);
+  return { W, H, archi, nodi: presenti.map((a) => ({ slug: a.slug, n: numero[a.slug], breve: mappa.brevi[a.slug] || a.titolo, tx: x(a.slug), ty: y(a.slug) })) };
+}
+const oriz = disegno(false), vert = disegno(true);
+const bersaglio = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>`;
+const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`;
+---
+<div class="mc" data-orientamento-gm hidden data-mappa-corso={materia}>
+  <figure class="mc-fig">
+    {[oriz, vert].map((d, i) => (
+      <svg class:list={['mc-mappa', i ? 'mc-vert' : 'mc-oriz']} viewBox={`0 0 ${d.W} ${d.H}`} role="group" aria-label="Mappa del corso: ogni filo porta da un argomento a quello che lo usa subito dopo">
+        <g class="mc-archi">{d.archi.map((a) => <path d={a} />)}</g>
+        {d.nodi.map((n) => (
+          <a href={`#arg-${n.slug}`} class="mc-nodo" data-nodo={n.slug} transform={`translate(${n.tx} ${n.ty})`} aria-label={`${n.n}. ${argomenti.find((a) => a.slug === n.slug)!.titolo}`}>
+            <circle r="17" /><text class="mc-nn" y="5">{n.n}</text><text class="mc-nl" y="37">{n.breve}</text>
+          </a>
+        ))}
+      </svg>
+    ))}
+    <figcaption>
+      <span class="mc-leg"><i class="l-ok"></i>Pronto</span><span class="mc-leg"><i class="l-deb"></i>Da riprendere</span><span class="mc-leg"><i class="l-nv"></i>Da verificare</span>
+      <span class="mc-spieg">Ogni filo porta da un argomento a quello che lo usa subito dopo.</span>
+    </figcaption>
+    <div class="mc-guida">
+      <span class="mc-ic" set:html={bersaglio} />
+      <div class="mc-guida-testo" data-mc-guida>
+        <strong>Studio guidato</strong>
+        <p>Un test che si adatta alle tue risposte e colora questa mappa: trovi gli argomenti da riprendere e la loro causa.</p>
+      </div>
+      <div class="mc-guida-azioni">
+        <a class="mc-btn" href={`/studio-guidato/${materia}`} data-mc-principale>Inizia il test</a>
+        <a class="mc-btn vuoto" href={`/studio-guidato/${materia}`} data-mc-rifai hidden>Rifai il test</a>
+      </div>
+    </div>
+  </figure>
+
+  {prezzo && (
+    <p class="mc-ant" data-materia={materia}>
+      <span class="stato-bloccata"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20S10 9 20 9s16 11 16 11-6 11-16 11S4 20 4 20Z"/><circle cx="20" cy="20" r="5"/></svg>
+        <span>Di ogni argomento sono gratuiti l'inizio della teoria e le prime 3 schede svolte.</span>
+        <a href={anteprima}>Inizia dall'anteprima</a><a href={sblocca}>Sblocca tutto, {prezzo} €</a>
+        {compatibilita && <a href={compatibilita}>Il materiale copre il tuo esame?</a>}</span>
+      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><strong>Accesso completo attivo</strong></span>
+    </p>
+  )}
+
+  <ol class="mc-perc">
+    {argomenti.map((a) => (
+      <li id={`arg-${a.slug}`} data-tappa={a.slug}>
+        <span class="mc-pallino" data-n={numero[a.slug]}>{numero[a.slug]}</span>
+        <div class="mc-cp">
+          <h2><a href={href(a.slug, 'teoria')}>{a.titolo}</a><em class="mc-stato" hidden></em></h2>
+          {a.riassunto && <p>{a.riassunto}</p>}
+          <div class="mc-r">
+            <a href={href(a.slug, 'teoria')}>Teoria</a>
+            {a.svolti > 0 && <a href={href(a.slug, 'esercizi-svolti')}>{a.svolti} esercizi svolti</a>}
+            {a.dafare > 0 && <a href={href(a.slug, 'esercizi')}>{a.dafare} esercizi da fare</a>}
+            {a.domande > 0 && <a href={href(a.slug, 'domande')}>{a.domande} domande</a>}
+          </div>
+        </div>
+      </li>
+    ))}
+    {ripasso && (
+      <li class="mc-fine">
+        <span class="mc-pallino" set:html={bersaglio} />
+        <div class="mc-cp">
+          <h2><a href={ripasso.href}>Prove d'esame</a></h2>
+          <p>{ripasso.domande} domande di ripasso su tutto il programma e la simulazione d'esame.</p>
+          <div class="mc-r"><a href={ripasso.href}>Domande di ripasso</a><a href={ripasso.simulazione}>Simulazione d'esame</a><a class="solo-collegati" href={ripasso.oggi} hidden>Il tuo ripasso di oggi</a></div>
+        </div>
+      </li>
+    )}
+  </ol>
+  {teoremi && <p class="mc-dopo"><a href={teoremi.href}>Indice di teoremi e definizioni</a><span>{teoremi.teoremi} teoremi e {teoremi.definizioni} definizioni</span></p>}
+</div>
+
+<style is:global>
+  html.gm-anteprima .vista-classica { display: none !important; }
+  .mc { font-family: var(--ui); margin-top: 1.4rem; }
+  .mc-fig { margin: 0 0 1.1rem; border: 1px solid var(--riga); border-radius: 16px; background: #fff; overflow: hidden; }
+  .mc-mappa { display: block; width: 100%; height: auto; padding: 1.1rem 1.4rem .2rem; box-sizing: border-box; overflow: visible; }
+  .mc-vert { display: none; max-width: 340px; margin: 0 auto; }
+  .mc-archi path { fill: none; stroke: #c9c2b4; stroke-width: 1.3; }
+  .mc-nodo { cursor: pointer; text-decoration: none; }
+  .mc-nodo circle { fill: #fff; stroke: var(--azione); stroke-width: 1.5; transition: stroke-width .15s; }
+  .mc-nodo:hover circle, .mc-nodo:focus-visible circle { stroke-width: 3; }
+  .mc-nodo:focus-visible { outline: none; }
+  .mc-nn { font: 600 15px var(--titoli); fill: var(--azione); text-anchor: middle; }
+  .mc-nl { font: 500 13.5px var(--ui); fill: var(--inchiostro-2); text-anchor: middle; }
+  .mc-nodo.ok circle { fill: var(--azione); } .mc-nodo.ok .mc-nn { fill: #fff; }
+  .mc-nodo.debole circle { fill: #f6e3d9; stroke: #b0552b; } .mc-nodo.debole .mc-nn { fill: #8a3d17; }
+  .mc-fig figcaption { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; align-items: center; padding: 0 1.4rem 1rem; font-size: .84rem; color: var(--inchiostro-2); }
+  .mc-leg { display: inline-flex; align-items: center; gap: .35rem; }
+  .mc-leg i { width: .8rem; height: .8rem; border-radius: 50%; border: 1.5px solid var(--azione); background: #fff; }
+  .mc-leg .l-ok { background: var(--azione); } .mc-leg .l-deb { background: #f6e3d9; border-color: #b0552b; }
+  .mc-spieg { margin-left: auto; }
+  .mc-guida { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.4rem; background: #e9f0ed; border-top: 1px solid #d7e3de; }
+  .mc-ic { flex: none; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: #fff; color: var(--azione); display: grid; place-items: center; }
+  .mc-ic svg { width: 1.4rem; }
+  .mc-guida-testo strong { font-size: 1.05rem; color: var(--azione); }
+  .mc-guida-testo p { margin: .15rem 0 0; font-size: .93rem; line-height: 1.4; color: #3d4a48; }
+  .mc-guida-testo b { color: var(--inchiostro); }
+  .mc-guida-azioni { margin-left: auto; flex: none; display: flex; gap: .5rem; }
+  .mc-btn { display: inline-flex; align-items: center; padding: .6rem 1.15rem; border-radius: 999px; background: var(--azione); color: #fff; text-decoration: none; font-weight: 600; font-size: .96rem; border: 1.5px solid var(--azione); }
+  .mc-btn.vuoto { background: #fff; color: var(--azione); }
+  .mc-btn[hidden] { display: none; }
+  .mc-ant { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; font-size: .9rem; color: var(--inchiostro-2); margin: 0 0 1.6rem; }
+  .mc-ant .stato-bloccata, .mc-ant .stato-sbloccata { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; }
+  .mc-ant .stato-sbloccata { display: none; color: var(--verde); }
+  .mc-ant svg { width: 1.05rem; height: 1.05rem; color: var(--azione); flex: none; }
+  .mc-ant .stato-sbloccata svg { color: var(--verde); }
+  .mc-ant a { color: var(--azione); font-weight: 600; text-underline-offset: 3px; }
+  .mc-perc { list-style: none; padding: 0; margin: 0; }
+  .mc-perc > li { position: relative; display: grid; grid-template-columns: 2.6rem 1fr; gap: 1rem; padding: 0 0 1.5rem; scroll-margin-top: calc(var(--altezza-testata) + 1rem); }
+  .mc-perc > li::before { content: ''; position: absolute; left: 1.27rem; top: 2.6rem; bottom: 0; width: 2px; background: var(--riga); }
+  .mc-perc > li.mc-fine::before { display: none; }
+  .mc-pallino { width: 2.6rem; height: 2.6rem; border-radius: 50%; display: grid; place-items: center; background: #fff; border: 1.5px solid #c9c2b4; font: 600 1.05rem var(--titoli); color: var(--inchiostro-2); position: relative; z-index: 1; box-sizing: border-box; }
+  .mc-pallino svg { width: 1.3rem; color: var(--azione); }
+  .mc-perc .ok .mc-pallino { background: var(--azione); border-color: var(--azione); color: #fff; }
+  .mc-perc .debole .mc-pallino { border: 2px solid #b0552b; color: #8a3d17; background: #fdf4ef; }
+  .mc-perc .prossimo .mc-pallino { box-shadow: 0 0 0 5px #f6e3d9; }
+  .mc-perc .lampo .mc-cp { animation: mc-lampo 1.4s ease-out; }
+  @keyframes mc-lampo { 0% { background: #e1ece8; } 100% { background: transparent; } }
+  .mc-cp { padding-top: .35rem; border-radius: 10px; }
+  .mc-perc h2 { font: 600 1.18rem var(--titoli); margin: 0; display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .mc-perc h2 a { text-decoration: none; color: inherit; }
+  .mc-stato { font: 600 .78rem var(--ui); font-style: normal; padding: .15rem .55rem; border-radius: 999px; }
+  .ok .mc-stato { background: #e1ece8; color: var(--azione); }
+  .debole .mc-stato { background: #f6e3d9; color: #8a3d17; }
+  .mc-cp p { font-size: .93rem; line-height: 1.5; color: var(--inchiostro-2); margin: .3rem 0 0; max-width: 42rem; }
+  .mc-r { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
+  .mc-r a { font-size: .85rem; padding: .25rem .7rem; border: 1px solid var(--riga); border-radius: 999px; background: #fff; text-decoration: none; color: var(--inchiostro); }
+  .mc-r a:first-child { border-color: var(--azione); color: var(--azione); font-weight: 600; }
+  .mc-r a:hover { background: #eef4f1; }
+  html.collegato .mc-r a.solo-collegati { display: inline-block; }
+  .mc-dopo { margin: .2rem 0 0 3.6rem; font-size: .92rem; display: flex; gap: .8rem; flex-wrap: wrap; color: var(--inchiostro-2); }
+  .mc-dopo a { color: var(--azione); font-weight: 600; }
+  @media (max-width: 700px) {
+    .mc-oriz { display: none; } .mc-vert { display: block; }
+    .mc-guida { flex-wrap: wrap; } .mc-guida-azioni { margin-left: 0; }
+    .mc-spieg { margin-left: 0; }
+    .mc-dopo { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .mc-perc .lampo .mc-cp { animation: none; } }
+</style>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>('[data-mappa-corso]')) {
+    const materia = box.dataset.mappaCorso!;
+    // Un tocco su un cerchio della mappa porta alla tappa e la evidenzia per un attimo.
+    box.querySelectorAll<SVGAElement>('[data-nodo]').forEach((n) => n.addEventListener('click', (e) => {
+      const tappa = box.querySelector<HTMLElement>(`[data-tappa="${n.dataset.nodo}"]`);
+      if (!tappa) return;
+      e.preventDefault();
+      tappa.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      tappa.classList.remove('lampo'); void tappa.offsetWidth; tappa.classList.add('lampo');
+    }));
+    // Esito dell'ultimo Studio guidato: colora mappa e percorso, aggiorna la fascia.
+    fetch(`/api/studio-guidato?materia=${encodeURIComponent(materia)}`, { credentials: 'same-origin', cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!d?.ultimo) return;
+        const deboli: string[] = [];
+        for (const a of d.ultimo.argomenti || []) {
+          if (a.stima === null || a.stima === undefined) continue;
+          const stato = a.stima >= 2 ? 'ok' : 'debole';
+          if (stato === 'debole') deboli.push(a.a);
+          box.querySelectorAll(`[data-nodo="${a.a}"]`).forEach((n) => n.classList.add(stato));
+          const t = box.querySelector<HTMLElement>(`[data-tappa="${a.a}"]`);
+          if (!t) continue;
+          t.classList.add(stato);
+          const et = t.querySelector<HTMLElement>('.mc-stato')!;
+          et.textContent = stato === 'ok' ? 'Pronto' : 'Da riprendere';
+          et.hidden = false;
+          if (stato === 'ok') t.querySelector('.mc-pallino')!.textContent = '✓';
+        }
+        const p = d.progresso;
+        const prossimo = p?.prossimo;
+        if (prossimo?.m === materia) box.querySelector(`[data-tappa="${prossimo.a}"]`)?.classList.add('prossimo');
+        const testo = box.querySelector<HTMLElement>('[data-mc-guida] p')!;
+        const quando = new Date(p.ultimo).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
+        const conteggio = !p.trovate ? 'Nessuna lacuna negli argomenti verificati'
+          : p.test === 1 ? `${p.trovate} ${p.trovate === 1 ? 'lacuna trovata' : 'lacune trovate'}`
+          : `${p.risolte} ${p.risolte === 1 ? 'lacuna risolta' : 'lacune risolte'} su ${p.trovate}`;
+        testo.textContent = '';
+        testo.append(`Ultimo test: ${quando}. ${conteggio}.`);
+        if (prossimo) {
+          testo.append(' Prossimo passo: ');
+          const b = document.createElement('b');
+          b.textContent = prossimo.m === materia ? prossimo.titolo : `${prossimo.titolo} (Precorso)`;
+          testo.append(b, '.');
+        }
+        const principale = box.querySelector<HTMLAnchorElement>('[data-mc-principale]')!;
+        principale.textContent = 'Continua';
+        principale.href = prossimo ? prossimo.link.teoria : `/${materia}/simulazione`;
+        box.querySelector<HTMLElement>('[data-mc-rifai]')!.hidden = false;
+      })
+      .catch(() => {});
+  }
+</script>

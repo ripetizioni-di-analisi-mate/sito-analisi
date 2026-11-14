@@ -425,7 +425,8 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
     const ingressiOrientamento = [...document.querySelectorAll<HTMLElement>('[data-orientamento-gm]')];
     if (ingressiOrientamento.length) {
       let richiestaOrientamento = 0;
-      const nascondiOrientamento = () => { ingressiOrientamento.forEach((el) => { el.hidden = true; }); };
+      // html.gm-anteprima nasconde la vista classica dove c'è un'anteprima che la sostituisce (MappaCorso.astro).
+      const nascondiOrientamento = () => { ingressiOrientamento.forEach((el) => { el.hidden = true; }); document.documentElement.classList.remove('gm-anteprima'); };
       async function verificaOrientamentoGM() {
         const richiesta = ++richiestaOrientamento;
         nascondiOrientamento();
@@ -434,6 +435,7 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
           const io = risposta.ok ? await risposta.json() : null;
           if (richiesta === richiestaOrientamento && io?.gm === true) {
             ingressiOrientamento.forEach((el) => { el.hidden = false; });
+            document.documentElement.classList.add('gm-anteprima');
           }
         } catch { /* Senza verifica gli ingressi restano nascosti. */ }
       }

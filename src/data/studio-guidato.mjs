@@ -22,6 +22,14 @@ export const STUDIO_GUIDATO = {
       serie: { interni: ['limiti'], basi: [] },
       'equazioni-differenziali': { interni: ['integrali', 'derivate'], basi: ['equazioni-polinomiali', 'esponenziali', 'goniometriche'] },
     },
+    // Mappa del corso nella pagina della materia (14/11/2026): si disegnano solo i collegamenti diretti
+    // (riduzione transitiva di «interni»), così i fili formano un albero e non si incrociano.
+    // posizioni: [colonna, riga] nel disegno orizzontale; in verticale si scambiano.
+    mappa: {
+      diretti: [['insiemi', 'limiti'], ['limiti', 'derivate'], ['limiti', 'serie'], ['derivate', 'studio-di-funzione'], ['derivate', 'integrali'], ['integrali', 'equazioni-differenziali'], ['integrali', 'integrali-impropri']],
+      posizioni: { insiemi: [0, 1], 'numeri-complessi': [0, 2.35], limiti: [1, 1], derivate: [2, 0.45], serie: [2, 1.95], 'studio-di-funzione': [3, 0], integrali: [3, 1], 'equazioni-differenziali': [4, 0.55], 'integrali-impropri': [4, 1.55] },
+      brevi: { insiemi: 'Insiemi', 'numeri-complessi': 'Complessi', limiti: 'Limiti', derivate: 'Derivate', 'studio-di-funzione': 'Studio di funzione', integrali: 'Integrali', 'integrali-impropri': 'Impropri', serie: 'Serie', 'equazioni-differenziali': 'Eq. differenziali' },
+    },
   },
 };
 

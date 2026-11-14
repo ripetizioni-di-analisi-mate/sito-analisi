@@ -13,7 +13,7 @@ import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import OrientamentoMateria from '../components/OrientamentoMateria.astro';
-import StudioGuidato from '../components/StudioGuidato.astro';
+import MappaCorso from '../components/MappaCorso.astro';
 import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { TOLC } from '../data/tolc.mjs';
@@ -74,6 +74,8 @@ const nDefinizioni = indice.reduce((n, a) => n + a.voci.filter((v) => v.tipo ===
 // Videocorso proprio della materia (solo in italiano, stessa regola della home): rimando nel riquadro dell'accesso attivo,
 // nascosto a chi ha già il videocorso, da solo o nel pacchetto.
 import { VIDEOCORSI, chiaveVideo } from '../data/videocorsi';
+// Materie con lo Studio guidato: per i GM la pagina mostra la mappa del corso (MappaCorso.astro).
+const guidata = lingua === 'it' && Boolean(STUDIO_GUIDATO[materia]);
 const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sblocca[0] === materia) : undefined;
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
   .map((s) => `html[data-materie~="${chiaveVideo(s)}"] .rimando-videocorso{display:none}`).join('') : '';
@@ -94,14 +96,19 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
-  {lingua === 'it' && (STUDIO_GUIDATO[materia] ? <StudioGuidato materia={materia} /> : <OrientamentoMateria materia={materia} />)}
-  {m.prezzo && (
+  {lingua === 'it' && !guidata && <OrientamentoMateria materia={materia} />}
+  {guidata && <MappaCorso materia={materia} prezzo={m.prezzo} anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
+    compatibilita={MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}
+    argomenti={m.argomenti.filter((a) => teorie.has(`${materia}/${a.slug}`)).map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], svolti: conta(svolti, a.slug), dafare: conta(dafare, a.slug), domande: conta(domande, a.slug) }))}
+    ripasso={domandeMateria > 0 ? { domande: domandeMateria, href: `/${materia}/${RIPASSO}/domande`, simulazione: `/${materia}/simulazione`, oggi: `/${materia}/${RIPASSO_OGGI}/domande` } : undefined}
+    teoremi={indice.length > 0 ? { href: `/${materia}/teoremi`, teoremi: nTeoremi, definizioni: nDefinizioni } : undefined} />}
+  {m.prezzo && (<div class:list={{ 'vista-classica': guidata }}>
     <AccessoMateria materia={m.slug} titolo={m.titolo} prezzo={m.prezzo} lingua={lingua} testo={anteprimaTesto}
       anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}>
       {video && <a slot="accesso-attivo" class="rimando-videocorso" href={'/videocorsi/' + video.slug}>Se ti serve anche il videocorso →</a>}
       {lingua === 'it' && MATERIE_COMPATIBILITA.includes(materia) && <a class="link-sblocca" href={'/compatibilita?materia=' + materia}>Il materiale copre il tuo esame? Controllalo</a>}
     </AccessoMateria>
-  )}
+  </div>)}
   {!m.prezzo && (
     <FreeCourseAccess lingua={lingua} href={link(lingua, `/${materia}/${m.argomenti[0].slug}/teoria`)}
       testo={quizPerEsercitarsi ? (en ? `Theory, worked examples and ${domandeMateria} timed questions. No account needed.` : `Teoria, esercizi svolti e ${domandeMateria} domande a tempo. Puoi iniziare anche senza account.`) : undefined}>
@@ -128,7 +135,7 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     <button type="button" class="esame-apri">{en ? 'Add' : 'Aggiungi'}</button>
     <button type="button" class="esame-modifica" hidden>{en ? 'Change' : 'Cambia'}</button>
   </div>}
-  <ol class="griglia-argomenti">
+  <ol class:list={["griglia-argomenti", { "vista-classica": guidata }]}>
     {m.argomenti.map((a) => {
       const pronto = teorie.has(`${materia}/${a.slug}`);
       const ns = conta(svolti, a.slug), nd = conta(dafare, a.slug);
