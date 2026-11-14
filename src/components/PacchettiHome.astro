@@ -1,6 +1,6 @@
 ---
-// Riquadro dei pacchetti in home. La versione «scaffale» (14/11/2026, scelta D di Carmine)
-// è un'anteprima riservata ai GM: gli altri vedono la riga bronzo di sempre.
+// Riquadro dei pacchetti in home: versione «scaffale» (14/11/2026, scelta D di Carmine).
+// La riga bronzo classica resta solo come riserva se il Pacchetto scientifico non è disponibile.
 import { MATERIE } from '../data/materie';
 import { PACCHETTI_MATERIE, riepilogoMaterie, euro } from '../data/pacchetti.mjs';
 const catalogo = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.breve, prezzo: m.prezzo, attiva: true }));
@@ -8,7 +8,8 @@ const pacchetto = PACCHETTI_MATERIE.find((p) => p.id === 'scientifico');
 const conto = pacchetto && pacchetto.materie.every((s) => catalogo.some((m) => m.slug === s)) ? riepilogoMaterie(pacchetto.materie, catalogo) : null;
 const libri = conto ? pacchetto!.materie.map((s) => catalogo.find((m) => m.slug === s)!.titolo) : [];
 ---
-<a class="pacchetti-home" href="/pacchetti" data-sconto-bronzo data-pacchetti-classico>
+{!conto && (
+<a class="pacchetti-home" href="/pacchetti" data-sconto-bronzo>
   <span class="pacchetti-icona" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
   </span>
@@ -18,8 +19,9 @@ const libri = conto ? pacchetto!.materie.map((s) => catalogo.find((m) => m.slug 
   </span>
   <span class="pacchetti-freccia" aria-hidden="true">→</span>
 </a>
+)}
 {conto && (
-  <a class="pacchetti-scaffale" href="/pacchetti" data-pacchetti-gm hidden>
+  <a class="pacchetti-scaffale" href="/pacchetti">
     <span class="ps-libri" aria-hidden="true">
       {libri.map((t) => <span class="ps-libro" title={t}></span>)}
       <span class="ps-nastro">−{conto.percentuale}%</span>
@@ -31,7 +33,6 @@ const libri = conto ? pacchetto!.materie.map((s) => catalogo.find((m) => m.slug 
     <span class="ps-link">Tutti i pacchetti <span aria-hidden="true">→</span></span>
   </a>
 )}
-<script>import '../scripts/pacchetti-gm';</script>
 <style>
   .pacchetti-home { display: flex; align-items: center; gap: .65rem; margin: -.55rem 0 1.25rem; padding: .55rem .75rem; border: 1px solid var(--bronzo-bordo); border-radius: 8px; background: var(--bronzo-fondo); color: var(--bronzo); text-decoration: none; font-family: var(--ui); }
   .pacchetti-home:hover { border-color: #c9ac89; background: #ede1d1; }
