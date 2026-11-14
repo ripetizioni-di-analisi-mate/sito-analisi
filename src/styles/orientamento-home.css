@@ -1,0 +1,73 @@
+/* Facciata dell’orientamento: le regole non cambiano test, risultati o pagina Account. */
+.pagina:has(> .ori-home){max-width:60rem}
+.ori-home{max-width:none;container-type:inline-size}
+.ori-home-testata{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;margin:0 0 1rem}
+.ori-home-testata .sopratitolo{margin:0;font-size:.78rem;letter-spacing:.075em}
+.ori-home-gm{display:inline-flex;align-items:center;gap:.3rem;border:1px solid var(--riga);border-radius:99px;padding:.2rem .65rem;color:var(--inchiostro-2);font:600 .76rem/1.5 var(--ui);white-space:nowrap}
+.ori-home-gm svg{width:.9rem;height:.9rem}
+.ori-home-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);border:1px solid #cbd9d1;border-radius:16px;background:#f0f5f1;overflow:hidden}
+.ori-home-inizio{padding:2rem 2.1rem;align-self:center}
+.ori-home h1{font-size:clamp(2.1rem,4.5cqi,2.8rem);line-height:1.13;letter-spacing:-.025em;margin:0 0 .85rem;text-wrap:balance}
+.ori-home-intro{font:400 1.05rem/1.55 var(--ui);color:var(--inchiostro-2);max-width:36ch;margin:0}
+.ori-home-dati{display:flex;flex-wrap:wrap;gap:.35rem 1rem;list-style:none;padding:0;margin:1.15rem 0 1.35rem;font:400 .88rem/1.5 var(--ui);color:var(--inchiostro-2)}
+.ori-home-dati strong{color:var(--inchiostro);font-weight:700}
+.ori-home-dati li+li{border-left:1px solid #bccbc2;padding-left:1rem}
+.ori-home-inizia{display:inline-flex;align-items:center;justify-content:center;gap:1.3rem;min-height:3rem;padding:.7rem 1.1rem;border:1px solid var(--azione);border-radius:7px;background:var(--azione);color:#fff;text-decoration:none;font:600 1rem/1.4 var(--ui);transition:background .15s,box-shadow .15s}
+.ori-home-inizia svg{width:1.2rem;height:1.2rem;flex:none}
+.ori-home-inizia:hover{background:#173f40;box-shadow:0 2px 5px #214f501f;text-decoration:none}
+.ori-home-inizia:focus-visible{outline:3px solid var(--azione);outline-offset:4px}
+.ori-home-lingua{font:400 .8rem/1.45 var(--ui);color:var(--inchiostro-2);margin:.65rem 0 0;max-width:42ch}
+.ori-home-percorso{padding:1.65rem 1.8rem;border-left:1px solid #d4dfd7;background:#fafcf9}
+.ori-home-percorso h2{font:600 .82rem/1.4 var(--ui);letter-spacing:.035em;text-transform:uppercase;color:var(--inchiostro-2);margin:0 0 1.1rem}
+.ori-home-percorso ol{list-style:none;margin:0;padding:0;display:grid;gap:1.2rem}
+.ori-home-percorso li{display:grid;grid-template-columns:1.7rem minmax(0,1fr);gap:.7rem;align-items:start}
+.ori-home-numero{display:grid;place-items:center;width:1.7rem;height:1.7rem;border:1px solid #c8d7cd;background:#edf3ee;color:var(--azione);border-radius:50%;font:600 .82rem/1 var(--ui)}
+.ori-home-percorso h3{font:600 .98rem/1.4 var(--ui);margin:.1rem 0 .15rem;text-wrap:initial}
+.ori-home-percorso p{font:400 .9rem/1.45 var(--ui);color:var(--inchiostro-2);margin:0;max-width:37ch}
+.ori-home .ori-home-salvati{margin:1.1rem 0 0;padding:1.2rem 1.4rem;border:1px solid var(--riga);border-radius:12px;background:#fff}
+.ori-home-salvati .ori-testata-sezione{flex-wrap:wrap;gap:.4rem 1rem;align-items:center}
+.ori-home-salvati h2{display:flex;align-items:center;gap:.55rem;font-size:1.18rem}
+.ori-home-salvati h2 svg{width:1.15rem;height:1.15rem;color:var(--azione);flex:none}
+.ori-home-salvati .ori-testata-sezione>a{font-size:.86rem;white-space:normal}
+.ori-home-salvati .ori-nota{margin:.65rem 0 0;font-size:.9rem;max-width:62ch}
+.ori-home-salvati .ori-lista-salvati:empty{display:none;margin:0!important}
+.ori-home-salvati .ori-lista-salvati{margin:.5rem 0 0!important;gap:0}
+.ori-home-salvati .ori-salvato{padding:.8rem 0;gap:.6rem 1rem}
+.ori-home-salvati .ori-salvato:last-child{border-bottom:0;padding-bottom:0}
+.ori-home-salvati .ori-salvato>a:hover strong{text-decoration:underline;text-underline-offset:3px}
+.ori-home-salvati .ori-azioni{gap:.3rem .75rem}
+.ori-home-privacy{display:flex;align-items:flex-start;gap:.55rem;margin:1.1rem .1rem;font:400 .85rem/1.5 var(--ui);color:var(--inchiostro-2);max-width:85ch}
+.ori-home-privacy svg{width:1.15rem;height:1.15rem;flex:none;color:var(--azione);margin-top:.1rem}
+.ori-home-privacy strong{font-weight:600;color:var(--inchiostro)}
+.ori-home .ori-home-metodo{margin:0;border-top:1px solid var(--riga);padding-top:.35rem}
+.ori-home-metodo summary{padding:.65rem .1rem;font-size:.95rem}
+.ori-home-metodo-testo{padding:0 .1rem .5rem;max-width:49rem}
+.ori-home-metodo-testo h2{font:600 1rem/1.4 var(--ui);margin:1.15rem 0 .5rem}
+.ori-home-metodo-testo p{font-size:.9rem;margin:.65rem 0}
+@container (max-width:42rem){
+  .ori-home-hero{grid-template-columns:1fr}
+  .ori-home-inizio{padding:1.5rem}
+  .ori-home-intro{max-width:48ch}
+  .ori-home-percorso{padding:1.3rem 1.5rem;border-left:0;border-top:1px solid #d4dfd7}
+  .ori-home-percorso h2{margin-bottom:.9rem}
+  .ori-home-percorso ol{gap:.85rem}
+  .ori-home-percorso p{max-width:55ch}
+}
+@container (max-width:25rem){
+  .ori-home-testata{gap:.5rem;margin-bottom:.85rem}
+  .ori-home-testata .sopratitolo{font-size:.7rem}
+  .ori-home-gm{font-size:.7rem;padding:.15rem .5rem}
+  .ori-home-inizio{padding:1.3rem 1.15rem}
+  .ori-home h1{font-size:2.05rem}
+  .ori-home-intro{font-size:1rem}
+  .ori-home-dati{font-size:.82rem;gap:.25rem .7rem;margin:1rem 0}
+  .ori-home-dati li+li{padding-left:.7rem}
+  .ori-home-inizia{width:100%;justify-content:space-between}
+  .ori-home-percorso{padding:1.2rem 1.15rem}
+  .ori-home-percorso li{gap:.6rem}
+  .ori-home .ori-home-salvati{padding:1rem 1.1rem}
+  .ori-home-salvati .ori-testata-sezione{align-items:flex-start}
+  .ori-home-salvati .ori-salvato{flex-wrap:wrap}
+  .ori-home-salvati .ori-salvato>a{flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){.ori-home-inizia{transition:none}}

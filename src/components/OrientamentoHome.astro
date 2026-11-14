@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+import { materieL } from '../i18n';
+import '../styles/orientamento.css';
+import '../styles/orientamento-home.css';
+
+interface Props { lingua: 'it' | 'en' }
+const { lingua } = Astro.props;
+const en = lingua === 'en';
+const materie = materieL(lingua).filter((m) => m.attiva);
+const titoliMaterie = Object.fromEntries(materie.map((m) => [m.slug, m.titolo]));
+const t = en ? {
+  pagina: 'Guidance', etichetta: 'Study guidance', anteprima: 'GM preview',
+  titolo: 'Where should I start?',
+  descrizione: 'Check your foundations and find out what to study first, with links to explanations and exercises.',
+  materie: 'subjects', domande: 'initial questions', inizia: 'Choose a subject',
+  linguaTest: 'The test and its results are currently in Italian.',
+  come: 'How it works',
+  passi: [
+    { titolo: 'Choose your starting point', testo: 'Select a subject and what you want to work towards.' },
+    { titolo: 'Check your foundations', testo: 'Answer the questions. Up to 6 follow-up questions may help clarify your answers.' },
+    { titolo: 'Start studying', testo: 'Get up to 3 practical activities, with explanations, examples and exercises.' },
+  ],
+  risultati: 'Your saved results', account: 'Open your account (Italian)',
+  caricamento: 'Loading your results…', riprova: 'Try again',
+  risultatiLingua: 'Saved results open in Italian.',
+  privacyTitolo: 'You choose what to save.',
+  privacy: 'Keep answers on this device or save a result in your account only if you choose to.',
+  conservazione: 'Storage and deletion',
+  metodo: 'How we build your study plan',
+  metodoTitolo: 'From an answer to an activity',
+  metodoDomande: 'The test starts with three questions for each of the six skills shown before you begin. If answers within a skill give mixed indications, it adds a follow-up question. You can check each correction against the solutions.',
+  metodoPiano: 'Your answers distinguish new topics, steps to revisit and questions you have solved. The plan gives priority to foundations to revisit or learn, follows the subject’s prerequisites and links explanations, examples and exercises. A positive result applies only to the questions you answered.',
+  fontiTitolo: 'Services consulted for the approach',
+  fontiPrima: 'The principle of linking corrections to revision was informed by ',
+  fontiLink: 'CISIA’s placement tests (PPS)', fontiDopo: '.',
+  originalita: 'Our questions, text and rules are original. These links let you consult separate services and do not imply affiliation or endorsement. Our test does not reproduce their tests.',
+  termini: 'Terms of service', informativa: 'Answer privacy information',
+} : {
+  pagina: 'Orientamento', etichetta: 'Orientamento allo studio', anteprima: 'Anteprima GM',
+  titolo: 'Da dove comincio?',
+  descrizione: 'Verifica le basi e scopri cosa studiare per primo, con teoria ed esercizi già collegati.',
+  materie: 'discipline', domande: 'domande iniziali', inizia: 'Scegli la disciplina',
+  linguaTest: 'Il test e i suoi risultati sono attualmente in italiano.',
+  come: 'Come funziona',
+  passi: [
+    { titolo: 'Scegli da dove partire', testo: 'Indica la disciplina e l’obiettivo che vuoi raggiungere.' },
+    { titolo: 'Verifica le basi', testo: 'Rispondi ai quesiti. Se serve, fino a 6 domande di conferma aiutano a chiarire le risposte.' },
+    { titolo: 'Passa allo studio', testo: 'Ricevi fino a 3 attività pratiche, con teoria, esempi ed esercizi.' },
+  ],
+  risultati: 'I tuoi risultati salvati', account: 'Apri l’account',
+  caricamento: 'Caricamento dei risultati…', riprova: 'Riprova',
+  risultatiLingua: 'I risultati salvati si aprono in italiano.',
+  privacyTitolo: 'Scegli tu cosa salvare.',
+  privacy: 'Conserva le risposte sul dispositivo o salva un risultato nell’account solo se lo desideri.',
+  conservazione: 'Conservazione e cancellazione',
+  metodo: 'Come vengono costruiti i consigli',
+  metodoTitolo: 'Da una risposta a un’attività',
+  metodoDomande: 'Il test propone inizialmente tre quesiti per ciascuna delle sei competenze indicate prima di cominciare. Se le risposte sulla stessa competenza danno indicazioni diverse, aggiunge un quesito di conferma. Le soluzioni permettono di controllare ogni correzione.',
+  metodoPiano: 'Le risposte distinguono argomenti nuovi, passaggi da riprendere e quesiti risolti. Il piano dà precedenza alle basi da riprendere o studiare, segue l’ordine dei prerequisiti della disciplina e collega teoria, esempi ed esercizi. Un risultato positivo riguarda soltanto i quesiti svolti.',
+  fontiTitolo: 'Servizi consultati per l’impostazione',
+  fontiPrima: 'Dalle ', fontiLink: 'PPS di CISIA',
+  fontiDopo: ' abbiamo ripreso il principio di collegare correzione e ripasso.',
+  originalita: 'Domande, testi e regole di questo sito sono nostri. I collegamenti permettono di consultare servizi distinti: non implicano affiliazioni o approvazioni. Il nostro test non riproduce le loro prove.',
+  termini: 'Condizioni del servizio', informativa: 'Informativa sulle risposte',
+};
+const legale = (path: string) => `${en ? '/en' : ''}${path}#orientamento`;
+---
+<Base lingua={lingua} titolo={t.pagina} percorso={[{ titolo: t.pagina }]}
+  descrizione={t.descrizione} seo={{ titolo: `${t.etichetta}: ${t.titolo.toLowerCase()}`, noindex: true }}>
+  <div class="orientamento ori-home" id="orientamento-home">
+    <div class="ori-home-testata">
+      <p class="sopratitolo">{t.etichetta}</p>
+      <span class="ori-home-gm">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4.5" y="8.5" width="11" height="8" rx="2"/><path d="M7 8.5V6a3 3 0 0 1 6 0v2.5M10 12v1.5"/></svg>
+        {t.anteprima}
+      </span>
+    </div>
+    <section class="ori-home-hero" aria-labelledby="ori-home-titolo">
+      <div class="ori-home-inizio">
+        <h1 id="ori-home-titolo">{t.titolo}</h1>
+        <p class="ori-home-intro">{t.descrizione}</p>
+        <ul class="ori-home-dati" role="list">
+          <li><strong>{materie.length}</strong> {t.materie}</li>
+          <li><strong>18</strong> {t.domande}</li>
+        </ul>
+        <a class="ori-home-inizia" href="/orientamento/studio" hreflang="it">
+          {t.inizia}<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h13M11 5l5 5-5 5"/></svg>
+        </a>
+        {en && <p class="ori-home-lingua">{t.linguaTest}</p>}
+      </div>
+      <div class="ori-home-percorso">
+        <h2>{t.come}</h2>
+        <ol role="list">
+          {t.passi.map((passo, i) => (
+            <li>
+              <span class="ori-home-numero" aria-hidden="true">{i + 1}</span>
+              <div><h3>{passo.titolo}</h3><p>{passo.testo}</p></div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+    <section class="ori-salvati ori-home-salvati" aria-labelledby="ori-salvati-titolo"
+      data-orientamento-salvati data-ori-lingua={lingua} data-ori-titoli-materie={JSON.stringify(titoliMaterie)}>
+      <div class="ori-testata-sezione">
+        <h2 id="ori-salvati-titolo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h12v17l-6-4-6 4z"/></svg>{t.risultati}</h2>
+        <a href="/account#orientamento" hreflang="it">{t.account} <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="ori-nota" data-ori-salvati-stato role="status">{t.caricamento}</p>
+      <ul class="ori-lista-salvati" data-ori-salvati-lista></ul>
+      <button type="button" class="ori-testo-bottone" data-ori-salvati-riprova hidden>{t.riprova}</button>
+      {en && <p class="ori-home-lingua">{t.risultatiLingua}</p>}
+    </section>
+    <p class="ori-home-privacy">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 2 6 2.5V9c0 4-3 6.5-6 8-3-1.5-6-4-6-8V4.5z"/><path d="m7 9.5 2 2 4-4"/></svg>
+      <span><strong>{t.privacyTitolo}</strong> {t.privacy} <a href={legale('/privacy')}>{t.conservazione}</a>.</span>
+    </p>
+    <details class="ori-metodo ori-home-metodo" id="metodo">
+      <summary>{t.metodo}</summary>
+      <div class="ori-home-metodo-testo">
+        <h2>{t.metodoTitolo}</h2>
+        <p>{t.metodoDomande}</p>
+        <p>{t.metodoPiano}</p>
+        <h2>{t.fontiTitolo}</h2>
+        <p>{t.fontiPrima}<a href="https://www.orientazione.it/per-chi-studia/pps-prove-di-posizionamento" target="_blank" rel="noopener noreferrer">{t.fontiLink}</a>{t.fontiDopo}</p>
+        <p>{t.originalita}</p>
+        <p><a href={legale('/termini')}>{t.termini}</a> · <a href={legale('/privacy')}>{t.informativa}</a>.</p>
+      </div>
+    </details>
+  </div>
+  <script>
+    import { avviaRisultatiSalvati } from '../scripts/orientamento-comune.mjs';
+    avviaRisultatiSalvati();
+  </script>
+</Base>
