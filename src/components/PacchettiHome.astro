@@ -1,4 +1,14 @@
-<a class="pacchetti-home" href="/pacchetti" data-sconto-bronzo>
+---
+// Riquadro dei pacchetti in home. La versione «scaffale» (14/11/2026, scelta D di Carmine)
+// è un'anteprima riservata ai GM: gli altri vedono la riga bronzo di sempre.
+import { MATERIE } from '../data/materie';
+import { PACCHETTI_MATERIE, riepilogoMaterie, euro } from '../data/pacchetti.mjs';
+const catalogo = MATERIE.filter((m) => m.attiva && m.prezzo).map((m) => ({ slug: m.slug, titolo: m.breve, prezzo: m.prezzo, attiva: true }));
+const pacchetto = PACCHETTI_MATERIE.find((p) => p.id === 'scientifico');
+const conto = pacchetto && pacchetto.materie.every((s) => catalogo.some((m) => m.slug === s)) ? riepilogoMaterie(pacchetto.materie, catalogo) : null;
+const libri = conto ? pacchetto!.materie.map((s) => catalogo.find((m) => m.slug === s)!.titolo) : [];
+---
+<a class="pacchetti-home" href="/pacchetti" data-sconto-bronzo data-pacchetti-classico>
   <span class="pacchetti-icona" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
   </span>
@@ -8,6 +18,33 @@
   </span>
   <span class="pacchetti-freccia" aria-hidden="true">→</span>
 </a>
+{conto && (
+  <a class="pacchetti-scaffale" href="/pacchetti" data-pacchetti-gm hidden>
+    <span class="ps-libri" aria-hidden="true">
+      {libri.map((t) => <span class="ps-libro" title={t}></span>)}
+      <span class="ps-nastro">−{conto.percentuale}%</span>
+    </span>
+    <span class="ps-testo">
+      <strong>{libri.length} materie, un solo acquisto</strong>
+      <span><span class="ps-nome">{pacchetto!.titolo}: </span><b>{euro(conto.totale)}</b> invece di {euro(conto.separato)}</span>
+    </span>
+    <span class="ps-link">Tutti i pacchetti <span aria-hidden="true">→</span></span>
+  </a>
+)}
+<script>
+  // Mostra lo scaffale solo dopo la verifica GM; senza verifica resta la riga classica.
+  const scaffali = [...document.querySelectorAll<HTMLElement>('[data-pacchetti-gm]')];
+  if (scaffali.length) {
+    fetch('/api/io', { credentials: 'same-origin', cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((io) => {
+        if (io?.gm !== true) return;
+        scaffali.forEach((el) => { el.hidden = false; });
+        document.querySelectorAll<HTMLElement>('[data-pacchetti-classico]').forEach((el) => { el.hidden = true; });
+      })
+      .catch(() => {});
+  }
+</script>
 <style>
   .pacchetti-home { display: flex; align-items: center; gap: .65rem; margin: -.55rem 0 1.25rem; padding: .55rem .75rem; border: 1px solid var(--bronzo-bordo); border-radius: 8px; background: var(--bronzo-fondo); color: var(--bronzo); text-decoration: none; font-family: var(--ui); }
   .pacchetti-home:hover { border-color: #c9ac89; background: #ede1d1; }
@@ -17,4 +54,31 @@
   .pacchetti-testo strong { --bronzo-testo: var(--bronzo-scuro); color: var(--bronzo-scuro); font-size: .95rem; font-weight: 600; line-height: 1.35; }
   .pacchetti-testo > span { font-size: .85rem; font-weight: 600; line-height: 1.35; color: var(--bronzo); }
   .pacchetti-freccia { flex: none; margin-left: auto; color: var(--bronzo); font-size: 1.1rem; line-height: 1; }
+
+  .pacchetti-scaffale { display: flex; align-items: center; gap: 1.1rem; margin: -.55rem 0 1.25rem; padding: .6rem .9rem .6rem .8rem; border: 1px solid var(--bronzo-bordo); border-radius: 10px; background: var(--bronzo-fondo); color: var(--bronzo-scuro); text-decoration: none; font-family: var(--ui); }
+  .pacchetti-scaffale:hover { border-color: #c9ac89; background: #ede1d1; }
+  .ps-libri { position: relative; flex: none; display: flex; align-items: flex-end; gap: 2px; height: 2.6rem; padding: 0 3px; border-bottom: 2px solid var(--bronzo-dettaglio); }
+  .ps-libro { width: .7rem; border-radius: 2px 2px 0 0; }
+  .ps-libro:nth-child(1) { height: 2.2rem; background: var(--c-definizione); }
+  .ps-libro:nth-child(2) { height: 2.45rem; background: var(--c-teorema); }
+  .ps-libro:nth-child(3) { height: 2rem; background: var(--c-esempio); }
+  .ps-libro:nth-child(4) { height: 2.3rem; background: var(--c-osservazione); }
+  .ps-nastro { position: absolute; right: -1.35rem; top: -.45rem; padding: 1px 5px; border: 1px solid var(--bronzo-bordo); border-radius: 5px; background: #fffdf9; color: var(--bronzo-scuro); font: 600 .78rem/1.3 var(--titoli); transform: rotate(6deg); box-shadow: 0 1px 4px #57432e22; }
+  .ps-testo { display: flex; flex-direction: column; min-width: 0; margin-left: .9rem; }
+  .ps-testo strong { font: 600 1.02rem/1.25 var(--titoli); color: var(--bronzo-scuro); }
+  .ps-testo > span { font-size: .85rem; line-height: 1.35; color: var(--inchiostro-2); }
+  .ps-testo b { font: 600 .92rem var(--titoli); color: var(--bronzo-scuro); }
+  .ps-link { flex: none; margin-left: auto; color: var(--bronzo); font-size: .88rem; font-weight: 700; white-space: nowrap; }
+  @media (max-width: 560px) {
+    .pacchetti-scaffale { gap: .7rem; padding: .5rem .75rem .5rem .7rem; }
+    .ps-libri { height: 2.1rem; }
+    .ps-libro { width: .55rem; }
+    .ps-libro:nth-child(1) { height: 1.8rem; } .ps-libro:nth-child(2) { height: 2rem; } .ps-libro:nth-child(3) { height: 1.6rem; } .ps-libro:nth-child(4) { height: 1.9rem; }
+    .ps-nastro { right: -1.2rem; font-size: .7rem; }
+    .ps-testo { margin-left: .8rem; }
+    .ps-testo strong { font-size: .95rem; }
+    .ps-nome { display: none; }
+    .ps-link { font-size: 0; }
+    .ps-link span { font-size: 1.1rem; }
+  }
 </style>
