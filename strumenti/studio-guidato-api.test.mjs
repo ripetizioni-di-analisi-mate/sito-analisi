@@ -1,5 +1,5 @@
 // Prova dell'API dello Studio guidato con il Worker vero e un archivio SQLite in memoria.
-// Richiede una build con Analisi 1, Precorso e Fisica 1: SOLO_MATERIE="analisi-1,precorso,fisica-1" npx astro build
+// Richiede una build con le materie del test: SOLO_MATERIE="analisi-1,analisi-2,analisi-3,precorso,fisica-1,logica-concorsi" npx astro build
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
@@ -18,7 +18,7 @@ const { Archivio, firmaToken, worker } = await import(pathToFileURL(bundle));
 after(() => rmSync(temp, { recursive: true, force: true }));
 const origine = 'https://ripetizionidianalisi.com';
 const dati = (m) => JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}.json`), 'utf8'));
-const DATI = { 'analisi-1': dati('analisi-1'), precorso: dati('precorso'), 'fisica-1': dati('fisica-1') };
+const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi'].map((m) => [m, dati(m)]));
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
 function banco(t) {
@@ -128,4 +128,45 @@ test('Fisica 1: test su un capitolo con la base in Analisi 1, nomi delle materie
   }
   assert.equal(n, 12);
   assert.equal(r.d.esito.lacune.length, 0);
+});
+
+// Logica per concorsi e Analisi 3 (14/11/2026 notte).
+const giro = async (b, tok, inizio, sbagliate) => {
+  let r = await b.api(tok, '/api/studio-guidato/inizia', inizio);
+  const etichette = [];
+  let n = 0;
+  while (!r.d.fine) {
+    assert.equal(r.status, 200, JSON.stringify(r.d));
+    assert.ok(r.d.domanda.testo && r.d.domanda.scelte.length === 4, 'testo e quattro risposte');
+    const q = JSON.parse(Buffer.from(r.d.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString()).s.q;
+    etichette.push([q.m, r.d.domanda.base, r.d.domanda.materiaBase]);
+    const giusta = Number(corretta(q.id, q.m)) - 1;
+    r = await b.api(tok, '/api/studio-guidato/rispondi', { token: r.d.token, scelta: sbagliate.includes(q.k) ? (giusta + 1) % 4 : giusta });
+    assert.ok(++n <= 20);
+  }
+  return { esito: r.d.esito, etichette, n };
+};
+
+test('Analisi 3: base in Analisi 1 con il nome della materia, capitoli presi da Analisi 2 dentro Analisi 3', async (t) => {
+  const b = banco(t);
+  const tok = await b.utente('gm-analisi3@test.invalid', true);
+  const { esito, etichette } = await giro(b, tok, { materia: 'analisi-3', argomento: 'trasformata-di-laplace' }, ['analisi-3/trasformata-di-laplace#5', 'analisi-1/integrali#3']);
+  assert.ok(etichette.some(([m, base, nome]) => m === 'analisi-1' && base === true && nome === 'Analisi 1'));
+  assert.deepEqual(esito.lacune.map((l) => l.k), ['analisi-1/integrali#3', 'analisi-3/trasformata-di-laplace#5']);
+  assert.equal(esito.lacune[1].materia, 'Analisi 3');
+  assert.ok(esito.lacune.every((l) => l.teoria.every((x) => x.titolo)));
+  const fourier = await giro(b, tok, { materia: 'analisi-3', argomento: 'serie-di-fourier' }, []);
+  assert.equal(fourier.esito.lacune.length, 0);
+  assert.ok(fourier.etichette.every(([m]) => m === 'analisi-3'));
+});
+
+test('Logica per concorsi: test completo e «Non so da dove iniziare» sugli otto capitoli', async (t) => {
+  const b = banco(t);
+  const tok = await b.utente('gm-logica@test.invalid', true);
+  const { esito } = await giro(b, tok, { materia: 'logica-concorsi', argomento: 'sillogismi' }, ['logica-concorsi/sillogismi#4', 'logica-concorsi/insiemi-e-venn#3', 'precorso/logica#2']);
+  assert.equal(esito.lacune[0].k, 'logica-concorsi/insiemi-e-venn#3');
+  assert.equal(esito.lacune[0].teoria[0].href, '/logica-concorsi/insiemi-e-venn/teoria#relazioni-tra-categorie');
+  const tutto = await giro(b, tok, { materia: 'logica-concorsi' }, []);
+  assert.equal(tutto.n, 8);
+  assert.equal(tutto.esito.lacune.length, 0);
 });

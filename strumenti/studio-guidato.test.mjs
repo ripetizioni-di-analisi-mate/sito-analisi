@@ -8,6 +8,9 @@ import { RIMANDI, REGOLE_SG } from '../src/data/studio-guidato.mjs';
 const CLASSI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-livelli.json', import.meta.url), 'utf8'));
 const TITOLI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-rimandi.json', import.meta.url), 'utf8'));
 const titoli = { 'analisi-1': Object.fromEntries(capitoli('analisi-1').map((a) => [a, a])), precorso: {}, nomeMateria: 'Analisi 1', nomi: { 'analisi-1': 'Analisi 1', precorso: 'Precorso' } };
+// Materie aggiunte il 14/11/2026 notte (Logica per concorsi, Analisi 3): nomi come in titoliGuidati del Worker.
+const NOMI = { 'analisi-1': 'Analisi 1', 'analisi-2': 'Analisi 2', 'analisi-3': 'Analisi 3', 'logica-concorsi': 'Logica per concorsi', precorso: 'Precorso' };
+const TITOLI_ALTRE = Object.fromEntries(['logica-concorsi', 'analisi-3'].map((m) => [m, { [m]: Object.fromEntries(capitoli(m).map((a) => [a, a])), 'analisi-1': {}, 'analisi-2': {}, precorso: {}, nomi: NOMI }]));
 const titoliFisica = { 'fisica-1': Object.fromEntries(capitoli('fisica-1').map((a) => [a, a])), 'analisi-1': {}, precorso: {}, nomi: { 'fisica-1': 'Fisica 1', 'analisi-1': 'Analisi 1', precorso: 'Precorso' } };
 
 // Studente simulato: sa(k, livello) dice se risponde bene a una domanda dell'abilità k («materia/argomento#i»).
@@ -20,7 +23,7 @@ function simula(sa, opzioni = {}, materia = 'analisi-1') {
     registra(s, sa(q.k, q.liv));
     assert.ok(s.n <= 30);
   }
-  return { e: esito(s, materia === 'fisica-1' ? titoliFisica : titoli), chieste, s };
+  return { e: esito(s, materia === 'fisica-1' ? titoliFisica : TITOLI_ALTRE[materia] || titoli), chieste, s };
 }
 const tutto = () => true;
 
@@ -187,4 +190,57 @@ test('Fisica 1: ricontrollo con domande nuove', () => {
   const viste = new Set(primo.e.viste);
   assert.ok(secondo.chieste.every((c) => !viste.has(c.id)));
   assert.deepEqual([progresso([secondo.e, primo.e]).trovate, progresso([secondo.e, primo.e]).risolte], [1, 1]);
+});
+
+// ---------- Logica per concorsi e Analisi 3 (14/11/2026 notte) ----------
+for (const [materia, n] of [['logica-concorsi', 8], ['analisi-3', 11]]) {
+  test(`${materia}: ${n} capitoli, ogni abilità con domande medie e semplici e basi esistenti`, () => {
+    assert.equal(capitoli(materia).length, n);
+    for (const a of capitoli(materia)) {
+      const nomi = CLASSI.abilita[`${materia}/${a}`];
+      assert.ok(nomi.length >= 6 && nomi.length <= 8, a);
+      assert.equal(banca(materia)[a].length, 90, a);
+      nomi.forEach((_, i) => {
+        const q = banca(materia)[a].filter((x) => x.ab === i);
+        assert.ok(q.length >= 6, `${a}#${i}: ${q.length} domande`);
+        assert.ok(q.filter((x) => x.livello === 2).length >= 2, `${a}#${i}: domande di livello medio`);
+        assert.ok(q.some((x) => x.livello === 1), `${a}#${i}: domande di livello base`);
+        for (const b of RIMANDI[`${materia}/${a}`][i].split('|')[2].split(',').filter(Boolean)) {
+          const [arg, idx] = b.split('#');
+          assert.ok(CLASSI.abilita[arg]?.[Number(idx)], `${a}#${i}: base ${b}`);
+          assert.notEqual(b, `${materia}/${a}#${i}`, `${a}#${i}: base uguale all'abilità`);
+        }
+      });
+    }
+  });
+
+  test(`${materia}: studente preparato, una domanda per abilità; studente in difficoltà, al massimo ${REGOLE_SG.maxDomandeTest} domande`, () => {
+    for (const a of capitoli(materia)) {
+      const bravo = simula(tutto, { argomento: a }, materia);
+      assert.equal(bravo.e.domande, CLASSI.abilita[`${materia}/${a}`].length, a);
+      assert.equal(bravo.e.lacune.length, 0);
+      const { e } = simula(() => false, { argomento: a }, materia);
+      assert.ok(e.domande <= REGOLE_SG.maxDomandeTest, `${a}: ${e.domande}`);
+    }
+  });
+}
+
+test('Analisi 3: la base in Analisi 1 va per prima con il nome della materia; i capitoli presi da Analisi 2 restano in Analisi 3', () => {
+  const k = 'analisi-3/trasformata-di-laplace#5', base = 'analisi-1/integrali#3';
+  const { e, chieste } = simula((q) => q !== k && q !== base, { argomento: 'trasformata-di-laplace' }, 'analisi-3');
+  assert.deepEqual(chieste.filter((c) => c.k === k || c.k === base).map((c) => c.k), [k, k, base]);
+  assert.deepEqual(e.lacune.map((l) => l.k), [base, k]);
+  assert.equal(e.lacune[0].materia, 'Analisi 1');
+  const k2 = 'analisi-3/equazioni-derivate-parziali#3', base2 = 'analisi-3/serie-di-fourier#2';
+  const due = simula((q) => q !== k2 && q !== base2 && !q.startsWith('analisi-1/'), { argomento: 'equazioni-derivate-parziali' }, 'analisi-3');
+  assert.ok(due.e.lacune.some((l) => l.k === base2 && l.materia === 'Analisi 3'));
+  assert.ok(due.e.lacune.find((l) => l.k === base2).teoria[0].href.startsWith('/analisi-3/serie-di-fourier/teoria#'));
+});
+
+test('Logica per concorsi: la base in un capitolo precedente viene verificata e va per prima', () => {
+  const k = 'logica-concorsi/sillogismi#4', base = 'logica-concorsi/insiemi-e-venn#3';
+  const { e } = simula((q) => q !== k && q !== base && !q.startsWith('precorso/'), { argomento: 'sillogismi' }, 'logica-concorsi');
+  assert.equal(e.lacune[0].k, base);
+  assert.ok(e.lacune.some((l) => l.k === k));
+  assert.equal(e.lacune[0].teoria[0].href, '/logica-concorsi/insiemi-e-venn/teoria#relazioni-tra-categorie');
 });
