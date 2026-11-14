@@ -14,7 +14,6 @@ import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
 import OrientamentoMateria from '../components/OrientamentoMateria.astro';
 import MappaCorso from '../components/MappaCorso.astro';
-import IndiceCorsoAnteprima from '../components/IndiceCorsoAnteprima.astro';
 import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
 import { TOLC } from '../data/tolc.mjs';
@@ -24,8 +23,8 @@ import { materia as materiaIt } from '../data/materie';
 import { nomiAllenamento } from '../lib/allenamento.mjs';
 import GuidaMateria from '../components/GuidaMateria.astro';
 import { GUIDE_DISCIPLINE } from '../data/seo-discipline';
-interface Props { lingua: Lingua; materia: string; anteprimaDesign?: boolean }
-const { lingua, materia, anteprimaDesign = false } = Astro.props;
+interface Props { lingua: Lingua; materia: string }
+const { lingua, materia } = Astro.props;
 const t = T(lingua);
 const m = materiaL(lingua, materia);
 const quizPerEsercitarsi = m.eserciziDaFare === false;
@@ -81,7 +80,7 @@ const video = lingua === 'it' ? VIDEOCORSI.find((v) => !v.pacchettoDi && v.sbloc
 const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?.includes(video.slug)).map((p) => p.slug)]
   .map((s) => `html[data-materie~="${chiaveVideo(s)}"] .rimando-videocorso{display:none}`).join('') : '';
 ---
-<Base titolo={sopra} descrizione={descrizione} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, ...(anteprimaDesign ? { noindex: true, canonico: `/${materia}` } : {}), data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
+<Base titolo={sopra} descrizione={descrizione} materia={materia} lingua={lingua} seo={{ titolo: titoloPagina, data: piuRecente(...m.argomenti.map((a) => dataContenuto(lingua, 'teoria', `${materia}/${a.slug}`))), schema: [{
   '@type': 'Course', '@id': `${assoluto(link(lingua, `/${m.slug}`))}#corso`, name: m.titolo, description: m.descrizione,
   url: assoluto(link(lingua, `/${m.slug}`)), inLanguage: lingua, educationalLevel: SEO(lingua).livelloDi(m.titolo),
   provider: { '@id': `${SITO}/#organizzazione` },
@@ -89,9 +88,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   ...(m.prezzo ? { offers: { '@type': 'Offer', category: 'Paid', price: m.prezzo, priceCurrency: 'EUR', availability: 'https://schema.org/InStock', url: assoluto(link(lingua, `/${m.slug}/sblocca`)) }, isAccessibleForFree: false } : { isAccessibleForFree: true }),
 }] }}>
   {giaVideo && <style is:inline set:html={giaVideo}></style>}
-  {anteprimaDesign ? <IndiceCorsoAnteprima lingua={lingua} materia={materia} titolo={m.titolo} prezzo={m.prezzo}
-    argomenti={m.argomenti.filter((a) => teorie.has(`${materia}/${a.slug}`)).map((a) => ({ slug: a.slug, titolo: a.titolo, riassunto: riassunti[materia + '/' + a.slug], svolti: conta(svolti, a.slug), dafare: conta(dafare, a.slug), verificabili: verificabili(a.slug), domande: conta(domande, a.slug) }))}
-    teoremi={nTeoremi} definizioni={nDefinizioni} domande={domandeMateria} /> : <>
   <p class="sopratitolo">{sopra}</p>
   <h1>{m.titolo}</h1>
   <p class="sommario">{m.descrizione}</p>
@@ -176,7 +172,6 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
     )}
   </ol>
   {lingua === 'it' && <GuidaMateria materia={m} schede={svolti} />}
-  </>}
 </Base>
 
 <script is:inline define:vars={{ en }}>
