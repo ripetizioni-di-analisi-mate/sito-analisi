@@ -8,6 +8,9 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { CATALOGO_USA_PUBBLICO, percorsoCatalogoUsa } from './src/data/cataloghi-studio.mjs';
 import verificaBundleOrientamento from './scripts/orientamento-bundle.mjs';
+import { frammentoDaAmbiente, pezzoDi } from './scripts/pezzi.mjs';
+
+const frammento = frammentoDaAmbiente();
 
 // Astro conserva in cache le pagine già rese e non si accorge se cambiano i plugin (figure, legende, blocchi):
 // se il codice dei plugin è cambiato dall'ultima build, la cache dei contenuti si svuota.
@@ -30,15 +33,20 @@ export default defineConfig({
   site: 'https://ripetizionidianalisi.com',
   trailingSlash: 'never',
   build: { format: 'file', assets: 'risorse', concurrency: 2 },
-  integrations: CATALOGO_USA_PUBBLICO ? [] : [{
-    name: 'sospensione-catalogo-usa',
+  // Pagine escluse dalla build: catalogo statunitense sospeso e, con FRAMMENTO="i/N", le pagine degli altri pezzi.
+  integrations: (CATALOGO_USA_PUBBLICO && !frammento) ? [] : [{
+    name: 'filtro-pagine',
     hooks: {
       'astro:build:start': ({ setPrerenderer }) => {
         setPrerenderer((prerenderer) => ({
           ...prerenderer,
           async getStaticPaths() {
             const risultato = await prerenderer.getStaticPaths();
-            return { ...risultato, paths: risultato.paths.filter(({ pathname }) => !percorsoCatalogoUsa(pathname)) };
+            const paths = risultato.paths.filter(({ pathname }) =>
+              (CATALOGO_USA_PUBBLICO || !percorsoCatalogoUsa(pathname))
+              && (!frammento || pezzoDi(pathname, frammento.totale) === frammento.indice));
+            if (frammento) console.log(`pezzo ${frammento.indice}/${frammento.totale}: ${paths.length} pagine su ${risultato.paths.length}`);
+            return { ...risultato, paths };
           },
         }));
       },

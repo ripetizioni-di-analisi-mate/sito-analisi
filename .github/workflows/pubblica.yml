@@ -1,0 +1,132 @@
+# Pubblicazione del sito: build divisa in pezzi paralleli, unione, controlli, pubblicazione su Cloudflare.
+#
+# - pezzi: 10 macchine costruiscono ognuna una parte delle pagine (FRAMMENTO=i/10, scripts/pezzi.mjs).
+# - controlli: le verifiche che prima stavano in testa a `npm run build`, in parallelo ai pezzi.
+# - pubblica: unisce i pezzi (scripts/unisci-pezzi.mjs), esegue i passi finali di `npm run build`
+#   (vetrine, lingue, immagini di anteprima, mappa del sito, test) e pubblica con wrangler.
+#
+# Pubblica solo da `main` e solo se esistono i segreti CLOUDFLARE_API_TOKEN e CLOUDFLARE_ACCOUNT_ID
+# (GitHub → Settings → Secrets and variables → Actions). I rami `build-pezzi/…` fanno tutto tranne la pubblicazione.
+name: Pubblica il sito
+on:
+  push:
+    branches: ['main', 'build-pezzi/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+# Un push nuovo su main ferma la pubblicazione ancora in corso: va online sempre l'ultima versione.
+concurrency:
+  group: pubblica-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  PEZZI: 10
+
+jobs:
+  pezzi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: true
+      matrix:
+        pezzo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci --no-audit --no-fund
+      # Deposito delle collezioni di Astro: con la copia della build precedente si rileggono solo i file cambiati.
+      - uses: actions/cache/restore@v6.1.0
+        with:
+          path: |
+            node_modules/.astro/data-store
+            node_modules/.astro/impronta-plugin
+          key: astro-deposito-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs', 'src/content.config.ts', 'src/plugins/**') }}-${{ github.run_id }}
+          restore-keys: astro-deposito-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs', 'src/content.config.ts', 'src/plugins/**') }}-
+      - name: Contenuti generati e date delle pagine
+        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node scripts/date-pagine.mjs
+      - name: Pagine del pezzo ${{ matrix.pezzo }}
+        run: npx astro build
+        env:
+          FRAMMENTO: ${{ matrix.pezzo }}/${{ env.PEZZI }}
+          NODE_OPTIONS: --max-old-space-size=12288
+      - name: Archivio del pezzo
+        run: tar -I 'zstd -T0 -3' -cf pezzo.tar.zst -C dist .
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: pezzo-${{ matrix.pezzo }}
+          path: pezzo.tar.zst
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+      - if: matrix.pezzo == 1 && github.event_name == 'push'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: |
+            node_modules/.astro/data-store
+            node_modules/.astro/impronta-plugin
+          key: astro-deposito-v1-${{ hashFiles('package-lock.json', 'astro.config.mjs', 'src/content.config.ts', 'src/plugins/**') }}-${{ github.run_id }}
+
+  controlli:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci --no-audit --no-fund
+      - name: Verifiche dei contenuti (Analisi 3, Matematica finanziaria)
+        run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs && node strumenti/verifica-analisi3.mjs && node strumenti/finanziaria/verifica.mjs
+
+  pubblica:
+    needs: [pezzi, controlli]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/analisi-2-condivisi.mjs && node scripts/analisi-3-condivisi.mjs
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: pezzo-*
+          path: pezzi
+      - name: Unione dei pezzi
+        run: |
+          for d in pezzi/pezzo-*; do tar -I zstd -xf "$d/pezzo.tar.zst" -C "$d" && rm "$d/pezzo.tar.zst"; done
+          node scripts/unisci-pezzi.mjs dist pezzi/pezzo-*
+      - uses: actions/cache/restore@v6.1.0
+        with:
+          path: node_modules/.astro/og
+          key: immagini-og-v1-${{ github.run_id }}
+          restore-keys: immagini-og-v1-
+      - name: Vetrine, lingue, immagini di anteprima, mappa del sito
+        run: node scripts/vetrine.mjs && node scripts/lingue.mjs && node scripts/immagini-og.mjs && node scripts/sitemap-verificata.mjs
+      - name: Test sul sito costruito
+        run: node --test strumenti/analisi3.test.mjs strumenti/finanziaria.test.mjs strumenti/seo.test.mjs
+      - if: github.event_name == 'push'
+        uses: actions/cache/save@v6.1.0
+        with:
+          path: node_modules/.astro/og
+          key: immagini-og-v1-${{ github.run_id }}
+      - name: Pubblicazione su Cloudflare
+        if: github.ref == 'refs/heads/main' && env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
+        run: npx --yes wrangler@4.162.0 deploy
+      - name: Pubblicazione saltata
+        if: github.ref != 'refs/heads/main' || env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == ''
+        run: echo "Pubblicazione saltata (ramo di prova o segreti CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID mancanti)."
