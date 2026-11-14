@@ -1190,10 +1190,11 @@ export default {
       if (p === '/api/studio-guidato/inizia') {
         const materia = corpo.materia;
         if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
-        const argomenti = Array.isArray(corpo.argomenti) ? corpo.argomenti.filter((a) => typeof a === 'string').slice(0, 30) : [];
+        // argomento = capitolo scelto dallo studente (assente: «Non so da dove iniziare»); ricontrollo = solo le lacune dell'ultimo test.
+        const argomento = typeof corpo.argomento === 'string' ? corpo.argomento : null;
         const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
         const viste = storico.slice(0, 3).flatMap((e) => e.viste || []);
-        stato = creaStato({ materia, argomenti, precedente: storico[0] || null, viste });
+        stato = creaStato({ materia, argomento, ricontrollo: corpo.ricontrollo === true, precedente: storico[0] || null, viste });
       } else {
         const tok = typeof corpo.token === 'string' ? await leggiToken(env, corpo.token) : null;
         if (!tok?.s || tok.e !== io.email || !tok.s.q) return json({ errore: 'Il test è scaduto. Ricomincia dalla pagina della materia.' }, 400, nessunaCache);

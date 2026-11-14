@@ -1,69 +1,108 @@
-// Prove del motore dello Studio guidato (worker/studio-guidato.mjs) con studenti simulati.
+// Prove del motore dello Studio guidato (worker/studio-guidato.mjs, versione 2 per abilità) con studenti simulati.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { creaStato, prossima, registra, esito, progresso, banca } from '../worker/studio-guidato.mjs';
-import { STUDIO_GUIDATO } from '../src/data/studio-guidato.mjs';
+import { readFileSync } from 'node:fs';
+import { creaStato, prossima, registra, esito, progresso, banca, capitoli } from '../worker/studio-guidato.mjs';
+import { RIMANDI, REGOLE_SG } from '../src/data/studio-guidato.mjs';
 
-const titoli = { 'analisi-1': Object.fromEntries(Object.keys(STUDIO_GUIDATO['analisi-1'].dipendenze).map((a) => [a, a])),
-  precorso: { logica: 'Logica', 'potenze-e-radici': 'Potenze', polinomi: 'Polinomi', 'equazioni-polinomiali': 'Fratte', 'valore-assoluto': 'Modulo', irrazionali: 'Irrazionali', logaritmiche: 'Log', esponenziali: 'Esp', goniometriche: 'Gonio', 'geometria-analitica': 'Geo' }, nomeMateria: 'Analisi 1' };
+const CLASSI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-livelli.json', import.meta.url), 'utf8'));
+const TITOLI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-rimandi.json', import.meta.url), 'utf8'));
+const titoli = { 'analisi-1': Object.fromEntries(capitoli('analisi-1').map((a) => [a, a])), precorso: {}, nomeMateria: 'Analisi 1' };
 
-// Studente simulato: per ogni (materia/argomento) il livello massimo che sa risolvere.
+// Studente simulato: sa(k, livello) dice se risponde bene a una domanda dell'abilità k («materia/argomento#i»).
 function simula(sa, opzioni = {}) {
-  const s = creaStato({ materia: 'analisi-1', argomenti: opzioni.argomenti, precedente: opzioni.precedente, viste: opzioni.viste });
-  const livelli = [];
+  const s = creaStato({ materia: 'analisi-1', ...opzioni });
+  const chieste = [];
   let q;
   while ((q = prossima(s))) {
-    livelli.push([q.m, q.id.split('/')[0], q.liv]);
-    registra(s, q.liv <= (sa[`${q.m}/${q.id.split('/')[0]}`] ?? 3));
-    assert.ok(s.n <= 45);
+    chieste.push({ k: q.k, liv: q.liv, id: `${q.m}:${q.id}` });
+    registra(s, sa(q.k, q.liv));
+    assert.ok(s.n <= 30);
   }
-  return { e: esito(s, titoli), livelli, s };
+  return { e: esito(s, titoli), chieste, s };
 }
+const tutto = () => true;
 
-test('la banca ha livelli 1-3 per tutte le domande di Analisi 1 e Precorso', () => {
-  for (const m of ['analisi-1', 'precorso']) {
-    const b = banca(m);
-    assert.ok(Object.keys(b).length >= 9);
-    for (const qs of Object.values(b)) for (const l of [1, 2, 3]) assert.ok(qs.filter((q) => q.livello === l).length >= 15);
+test('ogni abilità ha paragrafo della teoria, domande e rimandi con i titoli', () => {
+  for (const [chiave, nomi] of Object.entries(CLASSI.abilita)) {
+    assert.equal(RIMANDI[chiave]?.length, nomi.length, chiave);
+    assert.equal(TITOLI[chiave]?.length, nomi.length, `${chiave}: rifare node scripts/studio-guidato-rimandi.mjs`);
+    const [m, a] = chiave.split('/');
+    nomi.forEach((_, i) => {
+      assert.ok(TITOLI[chiave][i].t.length >= 1 && TITOLI[chiave][i].t.every((x) => x.titolo), `${chiave}#${i}`);
+      assert.deepEqual(TITOLI[chiave][i].t.map((x) => x.id).join(','), RIMANDI[chiave][i].split('|')[0], `${chiave}#${i}: titoli non aggiornati`);
+      assert.ok(banca(m)[a].some((q) => q.ab === i), `${chiave}#${i} senza domande`);
+    });
   }
 });
 
-test('studente preparato: nessuna lacuna, livelli avanzati, test breve', () => {
-  const { e } = simula({});
+test('studente preparato sul capitolo: una domanda per abilità, nessuna lacuna', () => {
+  const { e, chieste } = simula(tutto, { argomento: 'limiti' });
+  assert.equal(e.domande, 8);
+  assert.equal(new Set(chieste.map((c) => c.k)).size, 8);
   assert.equal(e.lacune.length, 0);
-  assert.ok(e.argomenti.every((a) => a.stima === 3));
-  assert.ok(e.domande <= 9 * 3, `domande ${e.domande}`);
+  assert.ok(e.abilita.every((a) => a.stato === 'ok'));
 });
 
-test('tre errori di fila: le domande scendono di livello', () => {
-  const { livelli } = simula({ 'analisi-1/limiti': 0 }, { argomenti: ['limiti'] });
-  const lim = livelli.filter(([m, a]) => a === 'limiti').map(([, , l]) => l);
-  assert.deepEqual(lim.slice(0, 3), [2, 1, 1]);
+test('un test non supera mai il numero massimo di domande', () => {
+  for (const a of capitoli('analisi-1')) {
+    const { e } = simula(() => false, { argomento: a });
+    assert.ok(e.domande <= REGOLE_SG.maxDomandeTest, `${a}: ${e.domande}`);
+    assert.ok(e.abilita.every((x) => x.stato !== 'ok'));
+    assert.ok(e.abilita.filter((x) => x.stato !== 'nv').length >= Math.min(e.abilita.length, 6), `${a}: abilità verificate`);
+  }
 });
 
-test('limiti deboli per una base del Precorso: la causa è trovata e messa per prima', () => {
-  const { e } = simula({ 'analisi-1/limiti': 0, 'precorso/polinomi': 0 }, { argomenti: ['limiti'] });
-  assert.equal(e.lacune[0].m, 'precorso');
-  assert.equal(e.lacune[0].a, 'polinomi');
-  assert.ok(e.lacune.some((l) => l.a === 'limiti'));
-  assert.match(e.sintesi, /dipendono da/);
-  assert.match(e.sintesi, /polinomi/i);
+test('errore su una abilità: domanda più semplice sulla stessa abilità, poi la base; la base va per prima', () => {
+  const k = 'analisi-1/limiti#0', base = 'precorso/polinomi#5';
+  const { e, chieste } = simula((q) => q !== k && q !== base, { argomento: 'limiti' });
+  const su = chieste.filter((c) => c.k === k);
+  assert.equal(su.length, 2);
+  assert.ok(su[1].liv <= su[0].liv);
+  assert.equal(chieste[2].k, base, 'dopo due errori si verifica la base');
+  assert.equal(e.lacune[0].k, base);
+  assert.equal(e.lacune[0].tipo, 'base');
+  assert.deepEqual(e.lacune[0].per, ['Forme 0/0 con scomposizione']);
+  assert.equal(e.lacune[1].k, k);
+  assert.equal(e.lacune.length, 2);
+  assert.match(e.sintesi, /Raccoglimenti e trinomi/);
+  assert.match(e.lacune[0].teoria[0].href, /^\/precorso\/polinomi\/teoria#strategia-di-fattorizzazione$/);
+  assert.match(e.lacune[1].schede[0].href, /^\/analisi-1\/limiti\/esercizi-svolti\/1$/);
+  assert.ok(e.domande <= 11);
 });
 
-test('secondo test: riparte dal livello raggiunto, ricontrolla le lacune e non ripete le domande', () => {
-  const primo = simula({ 'analisi-1/limiti': 0, 'precorso/polinomi': 0 }, { argomenti: ['limiti', 'derivate'] });
-  const secondo = simula({}, { argomenti: ['limiti', 'derivate'], precedente: primo.e, viste: primo.e.viste });
-  assert.equal(secondo.livelli[0][1], 'polinomi', 'la lacuna di base si ricontrolla per prima');
+test('errore solo sulla domanda media: abilità da consolidare, senza verifica della base', () => {
+  const k = 'analisi-1/limiti#3';
+  const { e, chieste } = simula((q, liv) => q !== k || liv < 2, { argomento: 'limiti' });
+  assert.equal(e.lacune.length, 1);
+  assert.equal(e.lacune[0].stato, 'incerta');
+  assert.ok(chieste.every((c) => c.k.startsWith('analisi-1/limiti#')));
+});
+
+test('«Non so da dove iniziare»: una domanda per capitolo fino al primo errore, poi il test sul capitolo', () => {
+  const { e, chieste } = simula((q) => !q.startsWith('analisi-1/limiti#') && !q.startsWith('precorso/'));
+  assert.equal(e.capitolo, 'limiti');
+  assert.deepEqual(chieste.slice(0, 3).map((c) => c.k.split('#')[0]), ['analisi-1/insiemi', 'analisi-1/numeri-complessi', 'analisi-1/limiti']);
+  assert.ok(e.domande <= REGOLE_SG.maxDomandeTest + 2);
+  assert.ok(e.lacune.length >= 1);
+  const tuttoGiusto = simula(tutto);
+  assert.equal(tuttoGiusto.e.domande, 9);
+  assert.equal(tuttoGiusto.e.capitolo, null);
+  assert.equal(tuttoGiusto.e.lacune.length, 0);
+});
+
+test('ricontrollo: una domanda per lacuna, domande nuove, progresso aggiornato', () => {
+  const k = 'analisi-1/limiti#0', base = 'precorso/polinomi#5';
+  const primo = simula((q) => q !== k && q !== base, { argomento: 'limiti' });
+  const secondo = simula(tutto, { ricontrollo: true, precedente: primo.e, viste: primo.e.viste });
+  assert.equal(secondo.e.domande, 2);
+  assert.deepEqual(secondo.chieste.map((c) => c.k), [base, k]);
   const viste = new Set(primo.e.viste);
-  assert.ok(secondo.e.viste.every((id) => !viste.has(id)));
+  assert.ok(secondo.chieste.every((c) => !viste.has(c.id)));
   assert.equal(secondo.e.lacune.length, 0);
   const p = progresso([secondo.e, primo.e]);
-  assert.equal(p.trovate, primo.e.lacune.length);
-  assert.equal(p.risolte, primo.e.lacune.length);
-});
-
-test('argomento già avanzato: una sola domanda di controllo', () => {
-  const primo = simula({}, { argomenti: ['serie'] });
-  const secondo = simula({}, { argomenti: ['serie'], precedente: primo.e, viste: primo.e.viste });
-  assert.equal(secondo.e.domande, 1);
+  assert.deepEqual([p.trovate, p.risolte, p.test], [2, 2, 2]);
+  const terzo = simula((q) => q !== base, { ricontrollo: true, precedente: primo.e });
+  assert.equal(terzo.e.lacune.length, 1);
+  assert.equal(progresso([terzo.e, primo.e]).risolte, 1);
 });

@@ -58,32 +58,33 @@ test('solo i GM usano lo Studio guidato', async (t) => {
   assert.equal((await b.api(tok, '/api/studio-guidato/inizia', { materia: 'analisi-1' })).status, 403);
 });
 
-test('test completo: domande senza la soluzione, esito salvato, secondo test con il progresso', async (t) => {
+test('test completo: domande senza la soluzione, esito con i rimandi, ricontrollo con il progresso', async (t) => {
   const b = banco(t);
   const tok = await b.utente('gm@test.invalid', true);
-  // Studente che sbaglia tutto sui limiti e sui polinomi e risponde bene al resto.
-  const prova = async () => {
-    let r = await b.api(tok, '/api/studio-guidato/inizia', { materia: 'analisi-1', argomenti: ['limiti', 'derivate'] });
+  // Studente che sbaglia le forme 0/0 dei limiti e la scomposizione dei polinomi e risponde bene al resto.
+  const prova = async (inizio, sbagliate) => {
+    let r = await b.api(tok, '/api/studio-guidato/inizia', { materia: 'analisi-1', ...inizio });
     let n = 0;
     while (!r.d.fine) {
       assert.equal(r.status, 200, JSON.stringify(r.d));
       assert.ok(!('corretta' in r.d.domanda) && !('spiegazione' in r.d.domanda));
       const stato = JSON.parse(Buffer.from(r.d.token.split('.')[0].replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString());
       const q = stato.s.q;
-      const sbaglia = /^(limiti|polinomi)\//.test(q.id);
       const giusta = Number(corretta(q.id, q.m)) - 1;
-      r = await b.api(tok, '/api/studio-guidato/rispondi', { token: r.d.token, scelta: sbaglia ? (giusta + 1) % 4 : giusta });
-      assert.ok(++n < 50);
+      r = await b.api(tok, '/api/studio-guidato/rispondi', { token: r.d.token, scelta: sbagliate.includes(q.k) ? (giusta + 1) % 4 : giusta });
+      assert.ok(++n <= 12);
     }
     return r.d;
   };
-  const primo = await prova();
-  assert.ok(primo.esito.lacune.some((l) => l.a === 'polinomi'));
-  assert.ok(primo.esito.lacune.some((l) => l.a === 'limiti'));
-  assert.equal(primo.esito.lacune[0].m, 'precorso');
+  const primo = await prova({ argomento: 'limiti' }, ['analisi-1/limiti#0', 'precorso/polinomi#5']);
+  assert.deepEqual(primo.esito.lacune.map((l) => l.k), ['precorso/polinomi#5', 'analisi-1/limiti#0']);
+  assert.equal(primo.esito.lacune[0].teoria[0].href, '/precorso/polinomi/teoria#strategia-di-fattorizzazione');
+  assert.ok(primo.esito.lacune[0].teoria[0].titolo && primo.esito.lacune[1].schede[0].titolo);
+  assert.ok(!('viste' in primo.esito) && !('risposte' in primo.esito));
   const stato = await b.api(tok, '/api/studio-guidato?materia=analisi-1');
   assert.equal(stato.d.progresso.test, 1);
-  assert.ok(stato.d.progresso.prossimo);
-  const secondo = await prova();
-  assert.equal(secondo.progresso.test, 2);
+  assert.equal(stato.d.ultimo.lacune.length, 2);
+  const secondo = await prova({ ricontrollo: true }, []);
+  assert.equal(secondo.esito.domande, 2);
+  assert.deepEqual([secondo.progresso.test, secondo.progresso.trovate, secondo.progresso.risolte], [2, 2, 2]);
 });

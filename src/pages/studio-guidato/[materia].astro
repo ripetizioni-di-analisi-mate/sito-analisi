@@ -1,5 +1,5 @@
 ---
-// Studio guidato: test adattivo sulle lacune (anteprima riservata ai GM, 13/11/2026).
+// Studio guidato: test sulle lacune per abilità (anteprima riservata ai GM; versione 2 del 14/11/2026).
 // Le domande e la correzione arrivano dal Worker (/api/studio-guidato/…, worker/studio-guidato.mjs):
 // la risposta corretta non è mai nella pagina.
 import Base from '../../layouts/Base.astro';
@@ -15,37 +15,36 @@ const argomenti = m.argomenti.filter((a) => STUDIO_GUIDATO[materia!].dipendenze[
 const nome = m.breve || m.titolo;
 ---
 <Base lingua="it" titolo={`Studio guidato · ${m.titolo}`} percorso={[{ titolo: m.titolo, href: `/${materia}` }, { titolo: 'Studio guidato' }]}
-  descrizione="Un test che si adatta alle risposte, individua le lacune e la loro causa e indica i capitoli da studiare in ordine."
+  descrizione="Un test breve sul capitolo scelto: individua le abilità da riprendere e indica i paragrafi della teoria e le schede svolte da cui ripartire."
   seo={{ titolo: `Studio guidato · ${m.titolo}`, noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
   <div class="sg-pagina" id="studio-guidato" data-materia={materia} data-nome={nome}>
     <p class="sopratitolo">Studio guidato · {nome}</p>
 
     <section data-sg-intro>
-      <h1>Parti dalle tue lacune</h1>
-      <p class="sommario">Le domande si adattano alle tue risposte. Dopo una risposta giusta la domanda successiva è più difficile, dopo una sbagliata è più semplice. Quando un argomento risulta debole il test verifica anche le basi da cui dipende, per trovare la causa delle difficoltà.</p>
-      <p class="sg-ripresa" data-sg-ripresa hidden></p>
+      <h1>Da dove ripartire</h1>
+      <p class="sommario">Scegli il capitolo su cui ti sei bloccato. Il test propone una domanda per ogni abilità del capitolo e, dove sbagli, verifica la base da cui dipende. Alla fine indica i paragrafi della teoria e le schede svolte da cui ripartire.</p>
+      <div class="sg-ripresa" data-sg-ripresa hidden></div>
       <fieldset class="sg-scegli">
-        <legend>Argomenti da verificare</legend>
-        <label class="sg-tutti"><input type="checkbox" data-sg-tutti checked /> Tutti gli argomenti</label>
+        <legend>Su che cosa ti sei bloccato?</legend>
+        <label class="sg-tutti"><input type="radio" name="argomento" value="" checked /> Non so da dove iniziare</label>
         <div class="sg-elenco">
-          {argomenti.map((a) => <label><input type="checkbox" name="argomento" value={a.slug} checked /> {a.titolo}</label>)}
+          {argomenti.map((a) => <label><input type="radio" name="argomento" value={a.slug} /> {a.titolo}</label>)}
         </div>
       </fieldset>
-      <p class="sg-nota">Il numero di domande dipende dalle risposte, fino a un massimo di 45, senza limite di tempo. La risposta «Non lo so» conta come risposta sbagliata.</p>
+      <p class="sg-nota" data-sg-nota-inizio>Con «Non so da dove iniziare» il test propone una domanda per capitolo e prosegue sul primo capitolo con una risposta sbagliata.</p>
       <button type="button" class="sg-btn" data-sg-inizia>Inizia il test</button>
       <p class="sg-errore" data-sg-errore role="alert"></p>
     </section>
 
     <section data-sg-test hidden aria-label="Test in corso">
-      <h1>Parti dalle tue lacune</h1>
+      <h1>Da dove ripartire</h1>
       <div class="sg-avanz"><span data-sg-numero></span></div>
-      <div class="sg-arg"><span class="nome" data-sg-argomento></span><span class="sg-provenienza" data-sg-provenienza hidden>Basi · Precorso</span>
-        <span class="sg-livelli" aria-label="Livello della domanda"><span data-l="1">Base</span><span data-l="2">Medio</span><span data-l="3">Avanzato</span></span></div>
+      <div class="sg-arg"><span class="nome" data-sg-argomento></span><span class="sg-provenienza" data-sg-provenienza hidden></span></div>
       <form class="sg-dom" data-sg-form>
         <fieldset><legend class="q" data-sg-testo tabindex="-1"></legend><div data-sg-scelte></div></fieldset>
         <div class="sg-nav"><button type="button" class="sg-link" data-sg-nonso>Non lo so</button><button type="submit" class="sg-btn" data-sg-conferma disabled>Conferma</button></div>
       </form>
-      <p class="sg-nota">La domanda successiva dipende da questa risposta: più difficile se è giusta, più semplice se è sbagliata.</p>
+      <p class="sg-nota">Senza limite di tempo. La risposta «Non lo so» conta come risposta sbagliata.</p>
     </section>
 
     <section data-sg-risultato hidden aria-label="Il risultato" tabindex="-1"></section>
@@ -60,6 +59,7 @@ const nome = m.breve || m.titolo;
     .sg-scegli label{display:flex;gap:.55rem;align-items:center;padding:.3rem 0}
     .sg-tutti{font-weight:600;border-bottom:1px solid var(--riga);margin-bottom:.3rem}
     .sg-elenco{columns:2;column-gap:1.5rem}
+    .sg-scegli input{accent-color:var(--azione)}
     @media(max-width:650px){.sg-elenco{columns:1}}
     .sg-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.75rem 1.3rem;border:0;border-radius:var(--raggio);background:var(--azione);color:#fff;text-decoration:none;font:700 1rem var(--ui);cursor:pointer}
     .sg-btn[disabled]{opacity:.5;cursor:default}
@@ -70,8 +70,6 @@ const nome = m.breve || m.titolo;
     .sg-arg{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin:0 0 1rem}
     .sg-arg .nome{font-weight:700;color:var(--inchiostro)}
     .sg-provenienza{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.1rem .45rem;border-radius:4px;background:#f6e3d9;color:#8a3d17}
-    .sg-livelli{display:inline-flex;border:1px solid var(--riga);border-radius:999px;overflow:hidden;font-size:.82rem}
-    .sg-livelli span{padding:.2rem .7rem;color:#6a716f}.sg-livelli span.su{background:var(--azione);color:#fff;font-weight:700}
     .sg-dom{padding:1.2rem 1.3rem;border:1px solid var(--riga);border-radius:10px;background:#fff}
     .sg-dom fieldset{border:0;margin:0;padding:0;min-width:0}
     .sg-dom .q{font-family:var(--testo);font-size:1.12rem;margin:0 0 1rem;color:var(--inchiostro);overflow-x:auto;max-width:100%}
@@ -87,17 +85,24 @@ const nome = m.breve || m.titolo;
     .sg-pagina h2{font-family:var(--testo);font-size:1.3rem;margin:1.4rem 0 .6rem}
     .sg-percorso{list-style:none;padding:0;margin:0;counter-reset:p}
     .sg-percorso li{counter-increment:p;display:grid;grid-template-columns:2.2rem 1fr;gap:.2rem .8rem;padding:.9rem 0;border-bottom:1px solid var(--riga)}
-    .sg-percorso li::before{content:counter(p);display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:#fff;color:var(--azione);border:1.5px solid var(--azione);font-weight:700;grid-row:span 3}
+    .sg-percorso li::before{content:counter(p);display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:#fff;color:var(--azione);border:1.5px solid var(--azione);font-weight:700;grid-row:span 4}
     .sg-percorso li:first-child::before{background:var(--azione);color:#fff}
     .sg-percorso strong{font-size:1.05rem;color:var(--inchiostro)}
     .sg-percorso .perche{font-size:.93rem;color:#4b5654}
     .sg-percorso .vai{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem}
-    .sg-percorso .vai a{font-size:.88rem;padding:.25rem .7rem;border-radius:999px;border:1px solid var(--azione);color:var(--azione);text-decoration:none}
+    .sg-percorso .dove{font-size:.85rem;color:#5f6866}
+    .sg-percorso .vai{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.5rem;margin-top:.45rem}
+    .sg-percorso .vai a{display:flex;flex-direction:column;gap:.1rem;font-size:.92rem;line-height:1.3;padding:.5rem .75rem;border-radius:var(--raggio);border:1px solid var(--riga);background:#fff;color:var(--inchiostro);text-decoration:none}
+    .sg-percorso .vai a:hover{border-color:var(--azione)}
+    .sg-percorso .vai small{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--azione)}
+    .sg-chip{display:flex;flex-wrap:wrap;gap:.4rem;margin:0}
+    .sg-chip span{font-size:.88rem;padding:.2rem .65rem;border-radius:999px;background:#eaf2ef;color:#1f5a4f}
+    .sg-chip.nv span{background:var(--carta-2);color:#5f6866}
+    .sg-ripresa{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem}
+    .sg-ripresa[hidden]{display:none}
+    .sg-ripresa .sg-btn{padding:.5rem 1rem;font-size:.92rem}
     .sg-etichetta{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.1rem .45rem;border-radius:4px;margin-left:.4rem;vertical-align:.15em}
     .e-base{background:#f6e3d9;color:#8a3d17}.e-corso{background:#f4ecd2;color:#7a5a08}.e-nv{background:var(--carta-2);color:#6a716f}
-    .sg-livelli-tab{width:100%;border-collapse:collapse;font-size:.95rem}
-    .sg-livelli-tab td{padding:.45rem .2rem;border-bottom:1px solid var(--riga)}
-    .sg-scala{display:inline-flex;gap:3px;margin-right:.5rem;vertical-align:middle}.sg-scala i{width:1.6rem;height:.45rem;border-radius:2px;background:var(--carta-2)}.sg-scala i.on{background:var(--azione)}
     .sg-azioni{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
     .sg-btn.sec{background:#fff;color:var(--azione);border:1px solid var(--azione)}
   </style>
@@ -119,18 +124,21 @@ const nome = m.breve || m.titolo;
       return d;
     }
 
-    // Argomenti: «Tutti» seleziona o toglie tutto.
-    const tutti = $<HTMLInputElement>('[data-sg-tutti]');
-    const caselle = [...radice.querySelectorAll<HTMLInputElement>('input[name="argomento"]')];
-    tutti.addEventListener('change', () => caselle.forEach((c) => { c.checked = tutti.checked; }));
-    caselle.forEach((c) => c.addEventListener('change', () => { tutti.checked = caselle.every((x) => x.checked); }));
+    const scelto = () => radice.querySelector<HTMLInputElement>('input[name="argomento"]:checked')?.value || '';
+    const notaInizio = $('[data-sg-nota-inizio]');
+    radice.querySelectorAll<HTMLInputElement>('input[name="argomento"]').forEach((c) => c.addEventListener('change', () => {
+      notaInizio.textContent = scelto()
+        ? 'Al massimo 12 domande: una per ogni abilità del capitolo, più le domande di verifica dove la risposta è sbagliata.'
+        : 'Con «Non so da dove iniziare» il test propone una domanda per capitolo e prosegue sul primo capitolo con una risposta sbagliata.';
+    }));
 
     function mostraDomanda(d: any) {
       intro.hidden = true; ris.hidden = true; test.hidden = false;
-      $('[data-sg-numero]').textContent = `Domanda ${d.numero}`;
+      $('[data-sg-numero]').textContent = d.massimo ? `Domanda ${d.numero} · al massimo ${d.massimo}` : `Domanda ${d.numero}`;
       $('[data-sg-argomento]').textContent = d.argomento;
-      $('[data-sg-provenienza]').hidden = !d.base;
-      radice.querySelectorAll<HTMLElement>('.sg-livelli span').forEach((s) => s.classList.toggle('su', Number(s.dataset.l) === d.livello));
+      const etichetta = d.base ? 'Basi · Precorso' : d.fase === 'base' ? 'Base di un altro capitolo' : d.fase === 'cerca' ? 'Ricerca del capitolo' : d.fase === 'ricontrollo' ? 'Ricontrollo' : '';
+      $('[data-sg-provenienza]').textContent = etichetta;
+      $('[data-sg-provenienza]').hidden = !etichetta;
       $('[data-sg-testo]').innerHTML = d.testo;
       $('[data-sg-scelte]').innerHTML = d.scelte.map((s: string, i: number) =>
         `<label class="sg-scelta"><input type="radio" name="scelta" value="${i}" /><span>${s}</span></label>`).join('');
@@ -160,9 +168,8 @@ const nome = m.breve || m.titolo;
     }
 
     $('[data-sg-inizia]').addEventListener('click', () => {
-      const argomenti = caselle.filter((c) => c.checked).map((c) => c.value);
-      if (!argomenti.length) { errore.textContent = 'Scegli almeno un argomento.'; return; }
-      avanza('/api/studio-guidato/inizia', { materia, argomenti });
+      const argomento = scelto();
+      avanza('/api/studio-guidato/inizia', argomento ? { materia, argomento } : { materia });
     });
     $('[data-sg-form]').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -171,33 +178,43 @@ const nome = m.breve || m.titolo;
     });
     $('[data-sg-nonso]').addEventListener('click', () => avanza('/api/studio-guidato/rispondi', { token, scelta: null }));
 
-    const scala = (n: number) => `<span class="sg-scala">${[1, 2, 3].map((i) => `<i class="${i <= n ? 'on' : ''}"></i>`).join('')}</span>`;
+    const minuscola = (x: string) => esc(x[0].toLowerCase() + x.slice(1));
     function mostraEsito(e: any, prog: any) {
       test.hidden = true; intro.hidden = true; ris.hidden = false;
       const lacune = e.lacune || [];
       const percorso = lacune.map((l: any) => {
+        const dove = l.m === 'precorso' ? `Precorso · ${esc(l.capitolo)}` : esc(l.capitolo);
         const perche = [
-          l.abilita?.length ? `Risposte sbagliate su: ${l.abilita.map((x: string) => esc(x[0].toLowerCase() + x.slice(1))).join(', ')}.` : '',
-          l.per?.length ? `È una base di ${l.per.map((x: string) => esc(x[0].toLowerCase() + x.slice(1))).join(', ')}.` : '',
+          l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : 'Risposta sbagliata alla domanda di livello medio.',
+          l.per?.length ? `È la base di ${l.per.map((x: string) => `«${minuscola(x)}»`).join(', ')}.` : '',
         ].filter(Boolean).join(' ');
-        return `<li><strong>${esc(l.titolo)} <span class="sg-etichetta ${l.m === 'precorso' ? 'e-base' : 'e-corso'}">${esc(l.materia)}</span></strong>
-          <span class="perche">${perche || 'Le risposte su questo argomento indicano passaggi da riprendere.'}</span>
-          <span class="vai"><a href="${l.link.teoria}">Teoria</a><a href="${l.link.svolti}">Esempi svolti</a><a href="${l.link.domande}">Domande</a></span></li>`;
+        const vai = [
+          ...l.teoria.map((t: any) => `<a href="${t.href}"><small>Teoria</small>${esc(t.titolo)}</a>`),
+          ...l.schede.map((x: any) => `<a href="${x.href}"><small>Scheda svolta</small>${esc(x.titolo)}</a>`),
+          `<a href="${l.domande}"><small>Allenamento</small>Domande a tempo del capitolo</a>`,
+        ].join('');
+        return `<li><strong>${esc(l.nome)} <span class="sg-etichetta ${l.stato === 'lacuna' ? 'e-base' : 'e-corso'}">${l.stato === 'lacuna' ? 'Da riprendere' : 'Da consolidare'}</span></strong>
+          <span class="dove">${dove}</span>
+          <span class="perche">${perche}</span>
+          <span class="vai">${vai}</span></li>`;
       }).join('');
-      const livelli = (e.argomenti || []).map((a: any) => `<tr><td>${esc(a.titolo)}</td><td>${a.stima === null
-        ? '<span class="sg-etichetta e-nv" style="margin:0">Da verificare</span>' : `${scala(a.stima)}${esc(a.nome)}`}</td></tr>`).join('');
-      const contatori = [`<span>Domande: <b>${e.domande}</b></span>`, `<span>Lacune trovate: <b>${lacune.length}</b></span>`];
-      if (prog && prog.test > 1) contatori.push(`<span>Lacune risolte dai test precedenti: <b>${prog.risolte}</b> su ${prog.trovate}</span>`);
-      ris.innerHTML = `<h1>Le tue lacune</h1>
+      const nomi = (stato: string) => (e.abilita || []).filter((a: any) => a.stato === stato).map((a: any) => `<span>${esc(a.nome)}</span>`).join('');
+      const sai = nomi('ok'), nonVerificate = nomi('nv');
+      const contatori = [`<span>Domande: <b>${e.domande}</b></span>`, `<span>Punti da riprendere: <b>${lacune.length}</b></span>`];
+      if (prog && prog.test > 1) contatori.push(`<span>Risolti dai test precedenti: <b>${prog.risolte}</b> su ${prog.trovate}</span>`);
+      const titolo = e.modo === 'ricontrollo' ? 'Ricontrollo' : e.titoloCapitolo ? esc(e.titoloCapitolo) : 'Tutti i capitoli';
+      ris.innerHTML = `<p class="sopratitolo">${titolo}</p><h1>Da dove ripartire</h1>
         <div class="sg-sintesi">${esc(e.sintesi)}</div>
         <div class="sg-cont">${contatori.join('')}</div>
-        ${lacune.length ? `<h2>Il tuo percorso</h2><ol class="sg-percorso">${percorso}</ol>` : ''}
-        <h2>Il tuo livello per argomento</h2>
-        <table class="sg-livelli-tab"><tbody>${livelli}</tbody></table>
-        <p class="sg-nota">Quando hai studiato questi capitoli, rifai il test. Il test ricontrolla le lacune trovate, riparte dal livello raggiunto e cerca le successive.</p>
-        <div class="sg-azioni">${lacune.length ? `<a class="sg-btn" href="${lacune[0].link.teoria}">Comincia dal punto 1</a>` : `<a class="sg-btn" href="/${materia}/simulazione">Simulazione d’esame</a>`}
-        <button type="button" class="sg-btn sec" data-sg-rifai>Rifai il test</button></div>`;
+        ${lacune.length ? `<h2>Il tuo percorso, in ordine</h2><ol class="sg-percorso">${percorso}</ol>` : ''}
+        ${sai ? `<h2>Abilità verificate senza errori</h2><p class="sg-chip">${sai}</p>` : ''}
+        ${nonVerificate ? `<h2>Abilità non verificate in questo test</h2><p class="sg-chip nv">${nonVerificate}</p>` : ''}
+        ${lacune.length ? '<p class="sg-nota">Dopo lo studio, il ricontrollo propone una domanda nuova per ciascun punto del percorso.</p>' : ''}
+        <div class="sg-azioni">${lacune.length ? `<a class="sg-btn" href="${lacune[0].teoria[0]?.href || lacune[0].domande}">Comincia dal punto 1</a><button type="button" class="sg-btn sec" data-sg-ricontrolla>Ricontrolla le lacune</button>`
+          : `<a class="sg-btn" href="/${materia}/simulazione">Simulazione d’esame</a>`}
+        <button type="button" class="sg-btn sec" data-sg-rifai>Scegli un altro capitolo</button></div>`;
       ris.querySelector('[data-sg-rifai]')!.addEventListener('click', () => { ris.hidden = true; intro.hidden = false; window.scrollTo({ top: 0 }); });
+      ris.querySelector('[data-sg-ricontrolla]')?.addEventListener('click', () => avanza('/api/studio-guidato/inizia', { materia, ricontrollo: true }));
       ris.focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -208,7 +225,10 @@ const nome = m.breve || m.titolo;
       if (new URLSearchParams(location.search).has('esito')) { mostraEsito(d.ultimo, d.progresso); return; }
       const r = $('[data-sg-ripresa]');
       const quando = new Date(d.ultimo.quando).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
-      r.innerHTML = `Ultimo test: ${quando}. Il nuovo test ricontrolla le lacune trovate e riparte dal livello raggiunto. <a href="?esito">Rivedi il risultato</a>`;
+      const n = d.ultimo.lacune.length;
+      r.innerHTML = `<span>Ultimo test: ${quando}${d.ultimo.titoloCapitolo ? `, ${esc(d.ultimo.titoloCapitolo)}` : ''}. ${n ? `${n === 1 ? 'Un punto' : `${n} punti`} da riprendere.` : 'Nessuna lacuna.'} <a href="?esito">Rivedi il risultato</a></span>
+        ${n ? '<button type="button" class="sg-btn sec" data-sg-ricontrolla>Ricontrolla le lacune</button>' : ''}`;
+      r.querySelector('[data-sg-ricontrolla]')?.addEventListener('click', () => avanza('/api/studio-guidato/inizia', { materia, ricontrollo: true }));
       r.hidden = false;
     }).catch((e) => { errore.textContent = e.message; $<HTMLButtonElement>('[data-sg-inizia]').disabled = true; });
   </script>
