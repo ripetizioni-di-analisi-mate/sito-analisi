@@ -140,6 +140,7 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
   max-width: 76rem; margin: 0 auto;
 }
 .indice {
+  --indice-titolo: #152321;
   display: none;
   font: 400 0.95rem/1.6 var(--ui);
   padding: 1.25rem 1rem 2rem;
@@ -148,21 +149,21 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
   max-height: calc(100dvh - var(--altezza-testata)); overflow-y: auto;
   scrollbar-gutter: stable;
 }
-.indice-materia { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin: 0 0.5rem 0.75rem; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--accento); }
-.indice-materia a { color: var(--accento); text-decoration: none; }
+.indice-materia { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin: 0 0.5rem 0.75rem; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; color: var(--indice-titolo); }
+.indice-materia a { color: var(--indice-titolo); text-decoration: none; }
 .indice-materia .cambia-materia { font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--inchiostro-2); font-size: 0.8rem; }
 .indice .in-preparazione { color: var(--inchiostro-2); }
 .indice .in-preparazione small { font-weight: 400; font-size: 0.75rem; }
 .indice ol { list-style: none; padding: 0; margin: 0; }
 .indice > ol > li { margin: 0.15rem 0; }
-.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; text-align: left; font: 400 0.9rem/1.35 var(--ui); padding: 0.55rem 0.65rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
+.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; text-align: left; font: 600 0.9rem/1.35 var(--ui); padding: 0.55rem 0.65rem; border: 0; border-radius: var(--raggio); color: var(--indice-titolo); background: none; text-decoration: none; cursor: pointer; }
 .indice button.argomento::after { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; margin-right: 0.3rem; }
 .indice button.argomento[aria-expanded="true"]::after { transform: rotate(45deg); }
 .indice button.argomento:hover { background: var(--carta-2); }
 .indice ol ol { padding-left: 0.5rem; margin-bottom: 0.4rem; }
 .indice ol ol a { display: block; padding: 0.22rem 0.5rem 0.22rem 1rem; color: var(--inchiostro-2); text-decoration: none; border-left: 2px solid transparent; }
 .indice a.attiva { color: var(--accento); border-left-color: var(--accento); font-weight: 600; }
-.indice li.corrente > button.argomento { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); box-shadow: inset 3px 0 var(--verde); }
+.indice li.corrente > button.argomento { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--indice-titolo); box-shadow: inset 3px 0 var(--verde); }
 .indice ol ol:not(.aperta) { display: none; }
 /* In cima all'indice: la scritta «Indice» e la casella di ricerca */
 .indice-testa { display: flex; justify-content: space-between; align-items: center; margin: 0 0.5rem 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--riga); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inchiostro-2); }
