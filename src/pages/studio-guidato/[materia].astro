@@ -18,93 +18,113 @@ const nome = m.breve || m.titolo;
   descrizione="Un test breve sul capitolo scelto: individua le abilità da riprendere e indica i paragrafi della teoria e le schede svolte da cui ripartire."
   seo={{ titolo: `Studio guidato · ${m.titolo}`, noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
   <div class="sg-pagina" id="studio-guidato" data-materia={materia} data-nome={nome}>
-    <p class="sopratitolo">Studio guidato · {nome}</p>
-
     <section data-sg-intro>
-      <h1>Da dove ripartire</h1>
-      <p class="sommario">Scegli il capitolo su cui ti sei bloccato. Il test propone una domanda per ogni abilità del capitolo e, dove sbagli, verifica la base da cui dipende. Alla fine indica i paragrafi della teoria e le schede svolte da cui ripartire.</p>
+      <header class="sg-testa"><h1>Studio guidato</h1><p>Su che cosa ti sei bloccato?</p></header>
+      <div class="sg-righe">
+        <button type="button" data-sg-arg="">
+          <svg class="sg-bers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+          <span><b>Non so da dove iniziare</b><small>Una domanda per capitolo, poi il test sul primo capitolo da riprendere.</small></span><svg class="sg-fr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+        {argomenti.map((a, n) => <button type="button" data-sg-arg={a.slug}><i>{String(n + 1).padStart(2, '0')}</i><span><b>{a.titolo}</b></span><svg class="sg-fr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>)}
+      </div>
+      <p class="sg-nota">Il test parte appena scegli. Al massimo 12 domande, senza limite di tempo.</p>
       <div class="sg-ripresa" data-sg-ripresa hidden></div>
-      <fieldset class="sg-scegli">
-        <legend>Su che cosa ti sei bloccato?</legend>
-        <label class="sg-tutti"><input type="radio" name="argomento" value="" checked /> Non so da dove iniziare</label>
-        <div class="sg-elenco">
-          {argomenti.map((a) => <label><input type="radio" name="argomento" value={a.slug} /> {a.titolo}</label>)}
-        </div>
-      </fieldset>
-      <p class="sg-nota" data-sg-nota-inizio>Con «Non so da dove iniziare» il test propone una domanda per capitolo e prosegue sul primo capitolo con una risposta sbagliata.</p>
-      <button type="button" class="sg-btn" data-sg-inizia>Inizia il test</button>
       <p class="sg-errore" data-sg-errore role="alert"></p>
     </section>
 
     <section data-sg-test hidden aria-label="Test in corso">
-      <h1>Da dove ripartire</h1>
-      <div class="sg-avanz"><span data-sg-numero></span></div>
-      <div class="sg-arg"><span class="nome" data-sg-argomento></span><span class="sg-provenienza" data-sg-provenienza hidden></span></div>
+      <div class="sg-avanz"><div class="sg-barra" data-sg-barra aria-hidden="true"><span></span></div>
+        <div class="sg-sopra"><span class="sg-arg"><b data-sg-argomento></b><em data-sg-provenienza hidden></em></span><span data-sg-numero></span></div></div>
       <form class="sg-dom" data-sg-form>
-        <fieldset><legend class="q" data-sg-testo tabindex="-1"></legend><div data-sg-scelte></div></fieldset>
+        <fieldset><legend class="q" data-sg-testo tabindex="-1"></legend><div class="sg-scelte" data-sg-scelte></div></fieldset>
         <div class="sg-nav"><button type="button" class="sg-link" data-sg-nonso>Non lo so</button><button type="submit" class="sg-btn" data-sg-conferma disabled>Conferma</button></div>
       </form>
-      <p class="sg-nota">Senza limite di tempo. La risposta «Non lo so» conta come risposta sbagliata.</p>
     </section>
 
     <section data-sg-risultato hidden aria-label="Il risultato" tabindex="-1"></section>
   </div>
 
   <style is:global>
-    .sg-pagina{font-family:var(--ui);max-width:46rem}
-    .sg-pagina h1{margin:.2rem 0 .6rem}
-    .sg-ripresa{padding:.8rem 1rem;border-left:4px solid var(--azione);background:#eaf2ef;border-radius:0 8px 8px 0}
-    .sg-scegli{border:1px solid var(--riga);border-radius:10px;padding:.8rem 1.1rem;margin:1.2rem 0;background:#fff}
-    .sg-scegli legend{font-weight:700;padding:0 .3rem}
-    .sg-scegli label{display:flex;gap:.55rem;align-items:center;padding:.3rem 0}
-    .sg-tutti{font-weight:600;border-bottom:1px solid var(--riga);margin-bottom:.3rem}
-    .sg-elenco{columns:2;column-gap:1.5rem}
-    .sg-scegli input{accent-color:var(--azione)}
-    @media(max-width:650px){.sg-elenco{columns:1}}
-    .sg-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.75rem 1.3rem;border:0;border-radius:var(--raggio);background:var(--azione);color:#fff;text-decoration:none;font:700 1rem var(--ui);cursor:pointer}
-    .sg-btn[disabled]{opacity:.5;cursor:default}
-    .sg-link{background:none;border:0;color:var(--azione);text-decoration:underline;font:600 .95rem var(--ui);cursor:pointer;padding:0}
-    .sg-nota{font-size:.92rem;color:#5f6866;margin:.9rem 0}
-    .sg-errore{color:#9b2c1c;font-weight:600}
-    .sg-avanz{font-size:.92rem;color:#5b6462;margin:.4rem 0 .8rem}
-    .sg-arg{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin:0 0 1rem}
-    .sg-arg .nome{font-weight:700;color:var(--inchiostro)}
-    .sg-provenienza{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.1rem .45rem;border-radius:4px;background:#f6e3d9;color:#8a3d17}
-    .sg-dom{padding:1.2rem 1.3rem;border:1px solid var(--riga);border-radius:10px;background:#fff}
-    .sg-dom fieldset{border:0;margin:0;padding:0;min-width:0}
-    .sg-dom .q{font-family:var(--testo);font-size:1.12rem;margin:0 0 1rem;color:var(--inchiostro);overflow-x:auto;max-width:100%}
-    .sg-scelta{display:flex;align-items:center;gap:.8rem;padding:.7rem .9rem;margin:.45rem 0;border:1px solid var(--riga);border-radius:var(--raggio);font-size:1.05rem;cursor:pointer;overflow-x:auto}
-    .sg-scelta:has(input:checked){border-color:var(--azione);background:#eaf2ef}
-    .sg-scelta input{accent-color:var(--azione);flex:none}
-    .sg-scelta p{margin:0}
-    .sg-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
-    .sg-sintesi{padding:1.1rem 1.3rem;border-left:4px solid var(--azione);background:#eaf2ef;border-radius:0 10px 10px 0;font-family:var(--testo);font-size:1.12rem;color:var(--inchiostro);line-height:1.5}
-    .sg-cont{display:flex;gap:.6rem;margin:1rem 0 1.4rem;flex-wrap:wrap}
-    .sg-cont span{padding:.35rem .8rem;border-radius:999px;background:#fff;border:1px solid var(--riga);font-size:.92rem}
-    .sg-cont b{color:var(--azione)}
-    .sg-pagina h2{font-family:var(--testo);font-size:1.3rem;margin:1.4rem 0 .6rem}
-    .sg-percorso{list-style:none;padding:0;margin:0;counter-reset:p}
-    .sg-percorso li{counter-increment:p;display:grid;grid-template-columns:2.2rem 1fr;gap:.2rem .8rem;padding:.9rem 0;border-bottom:1px solid var(--riga)}
-    .sg-percorso li::before{content:counter(p);display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:#fff;color:var(--azione);border:1.5px solid var(--azione);font-weight:700;grid-row:span 4}
-    .sg-percorso li:first-child::before{background:var(--azione);color:#fff}
-    .sg-percorso strong{font-size:1.05rem;color:var(--inchiostro)}
-    .sg-percorso .perche{font-size:.93rem;color:#4b5654}
-    .sg-percorso .vai{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem}
-    .sg-percorso .dove{font-size:.85rem;color:#5f6866}
-    .sg-percorso .vai{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.5rem;margin-top:.45rem}
-    .sg-percorso .vai a{display:flex;flex-direction:column;gap:.1rem;font-size:.92rem;line-height:1.3;padding:.5rem .75rem;border-radius:var(--raggio);border:1px solid var(--riga);background:#fff;color:var(--inchiostro);text-decoration:none}
-    .sg-percorso .vai a:hover{border-color:var(--azione)}
-    .sg-percorso .vai small{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--azione)}
-    .sg-chip{display:flex;flex-wrap:wrap;gap:.4rem;margin:0}
-    .sg-chip span{font-size:.88rem;padding:.2rem .65rem;border-radius:999px;background:#eaf2ef;color:#1f5a4f}
-    .sg-chip.nv span{background:var(--carta-2);color:#5f6866}
-    .sg-ripresa{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem}
+    .sg-pagina{font-family:var(--ui);max-width:42rem;color:var(--inchiostro)}
+    .sg-pagina section:not([hidden]){display:flex;flex-direction:column;gap:1.25rem}
+    .sg-testa h1{margin:0 0 .35rem;font-size:2.1rem;line-height:1.15}
+    .sg-testa p{margin:0;font-size:1.06rem;line-height:1.45;color:var(--inchiostro-2)}
+    .sg-righe{display:flex;flex-direction:column;border-bottom:1px solid var(--riga)}
+    .sg-righe button{display:grid;grid-template-columns:2.25rem minmax(0,1fr) 1rem;align-items:center;gap:0 .9rem;min-height:3.5rem;padding:.4rem 0;border:0;border-top:1px solid var(--riga);background:none;color:var(--inchiostro);text-align:left;cursor:pointer;font-family:var(--ui)}
+    .sg-righe button:hover b{color:var(--azione)}
+    .sg-righe i{font:700 1.2rem var(--titoli);color:#7d765c}
+    .sg-righe span{display:flex;flex-direction:column;gap:.05rem}
+    .sg-righe b{font:700 1.12rem/1.3 var(--titoli)}
+    .sg-righe small{font-size:.88rem;color:var(--inchiostro-2)}
+    .sg-bers{width:22px;height:22px;color:var(--azione)}
+    .sg-fr{width:15px;height:15px;color:var(--azione)}
+    .sg-nota{margin:0;font-size:.88rem;color:var(--inchiostro-2)}
+    .sg-btn{display:inline-flex;align-items:center;justify-content:center;height:2.9rem;padding:0 1.5rem;border:0;border-radius:999px;background:var(--azione);color:#fff;text-decoration:none;font:600 1rem var(--ui);cursor:pointer}
+    .sg-btn[disabled]{opacity:.45;cursor:default}
+    .sg-link{background:none;border:0;color:var(--inchiostro);text-decoration:underline;text-underline-offset:3px;font:400 .94rem var(--ui);cursor:pointer;padding:0;min-height:2.75rem;align-self:flex-start}
+    .sg-errore{color:#9b2c1c;font-weight:600;margin:0}
+    .sg-errore:empty{display:none}
     .sg-ripresa[hidden]{display:none}
-    .sg-ripresa .sg-btn{padding:.5rem 1rem;font-size:.92rem}
-    .sg-etichetta{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.1rem .45rem;border-radius:4px;margin-left:.4rem;vertical-align:.15em}
-    .e-base{background:#f6e3d9;color:#8a3d17}.e-corso{background:#f4ecd2;color:#7a5a08}.e-nv{background:var(--carta-2);color:#6a716f}
-    .sg-azioni{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
-    .sg-btn.sec{background:#fff;color:var(--azione);border:1px solid var(--azione)}
+    .sg-ripresa a{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.2rem 1rem;padding:.8rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem;color:var(--inchiostro);text-decoration:none}
+    .sg-ripresa a:hover{border-color:var(--azione)}
+    .sg-ripresa b{font-weight:600;color:var(--azione);white-space:nowrap}
+    .sg-btn.sec{background:none;color:var(--azione);border:1.5px solid var(--azione);height:2.5rem;padding:0 1.1rem;font-size:.92rem}
+    .sg-avanz{display:flex;flex-direction:column;gap:.5rem}
+    .sg-barra{height:3px;border-radius:2px;background:var(--riga)}
+    .sg-barra span{display:block;height:3px;border-radius:2px;background:var(--azione);width:0;transition:width .25s}
+    .sg-barra.senza{display:none}
+    .sg-sopra{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;font-size:.88rem;color:var(--inchiostro-2)}
+    .sg-sopra>span:last-child{white-space:nowrap;flex:none}
+    .sg-arg em{font-style:normal;margin-left:.5rem;color:#785735;white-space:nowrap}
+    .sg-arg b{font-weight:400}
+    .sg-dom{display:flex;flex-direction:column;gap:1.25rem}
+    .sg-dom fieldset{border:0;margin:0;padding:0;min-width:0}
+    .sg-dom .q{font:700 1.55rem/1.35 var(--titoli);padding:.9rem 0 .2rem;margin:0 0 1rem;overflow-x:auto;max-width:100%}
+    .sg-dom .q p{margin:0 0 .5rem}
+    .sg-scelte{display:flex;flex-direction:column;border-bottom:1px solid var(--riga);counter-reset:sc}
+    .sg-scelta{counter-increment:sc;position:relative;display:flex;align-items:center;gap:1rem;min-height:3.5rem;padding:.35rem .75rem;border-top:1px solid var(--riga);font:1.18rem var(--testo);cursor:pointer;overflow-x:auto}
+    .sg-scelta::before{content:counter(sc,upper-alpha);font:700 1.05rem var(--titoli);color:var(--azione);width:1rem;flex:none}
+    .sg-scelta input{position:absolute;opacity:0;pointer-events:none}
+    .sg-scelta:hover{background:#fbf9f3}
+    .sg-scelta:has(input:checked){background:#f4efe1;box-shadow:inset 3px 0 0 var(--azione)}
+    .sg-scelta:has(input:focus-visible){outline:2px solid var(--azione);outline-offset:-2px}
+    .sg-scelta p{margin:0}
+    .sg-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .sg-nav .sg-link{color:var(--inchiostro-2);align-self:center}
+    .sg-sintesi{margin:0;padding-left:1rem;border-left:3px solid var(--azione);font:1.12rem/1.5 var(--testo)}
+    .sg-tappe{display:flex;flex-direction:column;margin:.3rem 0 0;padding:0;list-style:none}
+    .sg-tappe li{display:grid;grid-template-columns:2.5rem minmax(0,1fr);gap:1rem}
+    .sg-filo{display:flex;flex-direction:column;align-items:center}
+    .sg-filo b{width:2.5rem;height:2.5rem;border-radius:10px;border:1.5px solid var(--azione);background:#fff;color:var(--azione);font:700 1.05rem var(--titoli);display:grid;place-items:center;box-sizing:border-box}
+    .sg-tappe li:first-child .sg-filo b{background:var(--azione);color:#fff}
+    .sg-filo::after{content:'';flex:1;width:2px;background:var(--riga)}
+    .sg-tappe li:last-child .sg-filo::after{display:none}
+    .sg-tappa{display:flex;flex-direction:column;gap:.5rem;padding:1rem 1.1rem;margin-bottom:.9rem;background:#fff;border:1px solid var(--riga);border-radius:14px}
+    .sg-tappe li:last-child .sg-tappa{margin-bottom:0}
+    .sg-tappe li:first-child .sg-tappa{background:#f4efe1;border-color:#e7dec8}
+    .sg-qui{font-size:.75rem;font-weight:600;letter-spacing:.06em;color:#785735}
+    .sg-tit{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem}
+    .sg-tit h2{margin:0;font:700 1.25rem/1.3 var(--titoli)}
+    .sg-tit span{font-size:.82rem;font-weight:600;white-space:nowrap;color:#785735}
+    .sg-tit span.cons{color:var(--azione)}
+    .sg-perche{margin:0;font-size:.88rem;line-height:1.45;color:var(--inchiostro-2)}
+    .sg-vai{display:flex;flex-wrap:wrap;gap:.5rem}
+    .sg-vai a{flex:1 1 12.5rem;display:flex;flex-direction:column;gap:.1rem;padding:.6rem .9rem;border:1px solid var(--riga);border-radius:10px;background:#fff;text-decoration:none;color:var(--inchiostro);font-size:.88rem;line-height:1.3}
+    .sg-vai a:hover{border-color:var(--azione)}
+    .sg-vai small{font-size:.75rem;font-weight:600;color:var(--azione)}
+    .sg-chip{display:flex;flex-wrap:wrap;gap:.5rem;margin:0}
+    .sg-chip span{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .75rem .3rem .5rem;border-radius:999px;background:#e6efec;color:#1f5a4f;font-size:.88rem}
+    .sg-chip.nv span{background:#efebe2;color:var(--inchiostro-2);padding-left:.75rem}
+    .sg-chip svg{width:14px;height:14px;flex:none}
+    .sg-etich{margin:0 0 -.7rem;font-size:.82rem;color:var(--inchiostro-2)}
+    .sg-dopo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:.85rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem}
+    @media(max-width:640px){
+      .sg-testa h1{font-size:1.7rem}
+      .sg-dom .q{font-size:1.3rem}
+      .sg-tappe li{grid-template-columns:2rem minmax(0,1fr);gap:.6rem}
+      .sg-filo b{width:2rem;height:2rem;font-size:.95rem;border-radius:8px}
+      .sg-tit{flex-direction:column;gap:.1rem}
+      .sg-dopo .sg-btn{flex:1 1 auto}
+    }
   </style>
   <script>
     const radice = document.getElementById('studio-guidato')!;
@@ -124,17 +144,11 @@ const nome = m.breve || m.titolo;
       return d;
     }
 
-    const scelto = () => radice.querySelector<HTMLInputElement>('input[name="argomento"]:checked')?.value || '';
-    const notaInizio = $('[data-sg-nota-inizio]');
-    radice.querySelectorAll<HTMLInputElement>('input[name="argomento"]').forEach((c) => c.addEventListener('change', () => {
-      notaInizio.textContent = scelto()
-        ? 'Al massimo 12 domande: una per ogni abilità del capitolo, più le domande di verifica dove la risposta è sbagliata.'
-        : 'Con «Non so da dove iniziare» il test propone una domanda per capitolo e prosegue sul primo capitolo con una risposta sbagliata.';
-    }));
-
     function mostraDomanda(d: any) {
       intro.hidden = true; ris.hidden = true; test.hidden = false;
-      $('[data-sg-numero]').textContent = d.massimo ? `Domanda ${d.numero} · al massimo ${d.massimo}` : `Domanda ${d.numero}`;
+      $('[data-sg-numero]').textContent = d.massimo ? `${d.numero} di ${d.massimo} al massimo` : `Domanda ${d.numero}`;
+      $('[data-sg-barra]').classList.toggle('senza', !d.massimo);
+      if (d.massimo) $('[data-sg-barra] span').style.width = `${Math.round(100 * d.numero / d.massimo)}%`;
       $('[data-sg-argomento]').textContent = d.argomento;
       const etichetta = d.base ? 'Basi · Precorso' : d.fase === 'base' ? 'Base di un altro capitolo' : d.fase === 'cerca' ? 'Ricerca del capitolo' : d.fase === 'ricontrollo' ? 'Ricontrollo' : '';
       $('[data-sg-provenienza]').textContent = etichetta;
@@ -167,10 +181,11 @@ const nome = m.breve || m.titolo;
       p.textContent = msg;
     }
 
-    $('[data-sg-inizia]').addEventListener('click', () => {
-      const argomento = scelto();
+    const righe = [...radice.querySelectorAll<HTMLButtonElement>('[data-sg-arg]')];
+    righe.forEach((b) => b.addEventListener('click', () => {
+      const argomento = b.dataset.sgArg;
       avanza('/api/studio-guidato/inizia', argomento ? { materia, argomento } : { materia });
-    });
+    }));
     $('[data-sg-form]').addEventListener('submit', (e) => {
       e.preventDefault();
       const s = radice.querySelector<HTMLInputElement>('input[name="scelta"]:checked');
@@ -182,37 +197,35 @@ const nome = m.breve || m.titolo;
     function mostraEsito(e: any, prog: any) {
       test.hidden = true; intro.hidden = true; ris.hidden = false;
       const lacune = e.lacune || [];
-      const percorso = lacune.map((l: any) => {
+      const percorso = lacune.map((l: any, k: number) => {
         const dove = l.m === 'precorso' ? `Precorso · ${esc(l.capitolo)}` : esc(l.capitolo);
         const perche = [
-          l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : 'Risposta sbagliata alla domanda di livello medio.',
+          `${dove}.`,
+          l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : 'Sbagliata la domanda di livello medio.',
           l.per?.length ? `È la base di ${l.per.map((x: string) => `«${minuscola(x)}»`).join(', ')}.` : '',
         ].filter(Boolean).join(' ');
         const vai = [
           ...l.teoria.map((t: any) => `<a href="${t.href}"><small>Teoria</small>${esc(t.titolo)}</a>`),
           ...l.schede.map((x: any) => `<a href="${x.href}"><small>Scheda svolta</small>${esc(x.titolo)}</a>`),
-          `<a href="${l.domande}"><small>Allenamento</small>Domande a tempo del capitolo</a>`,
-        ].join('');
-        return `<li><strong>${esc(l.nome)} <span class="sg-etichetta ${l.stato === 'lacuna' ? 'e-base' : 'e-corso'}">${l.stato === 'lacuna' ? 'Da riprendere' : 'Da consolidare'}</span></strong>
-          <span class="dove">${dove}</span>
-          <span class="perche">${perche}</span>
-          <span class="vai">${vai}</span></li>`;
+        ].join('') || `<a href="${l.domande}"><small>Allenamento</small>Domande a tempo del capitolo</a>`;
+        return `<li><div class="sg-filo"><b>${k + 1}</b></div><div class="sg-tappa">
+          ${k === 0 ? '<span class="sg-qui">PARTI DA QUI</span>' : ''}
+          <div class="sg-tit"><h2>${esc(l.nome)}</h2><span${l.stato === 'lacuna' ? '' : ' class="cons"'}>${l.stato === 'lacuna' ? 'Da riprendere' : 'Da consolidare'}</span></div>
+          <p class="sg-perche">${perche}</p>
+          <div class="sg-vai">${vai}</div></div></li>`;
       }).join('');
-      const nomi = (stato: string) => (e.abilita || []).filter((a: any) => a.stato === stato).map((a: any) => `<span>${esc(a.nome)}</span>`).join('');
-      const sai = nomi('ok'), nonVerificate = nomi('nv');
-      const contatori = [`<span>Domande: <b>${e.domande}</b></span>`, `<span>Punti da riprendere: <b>${lacune.length}</b></span>`];
-      if (prog && prog.test > 1) contatori.push(`<span>Risolti dai test precedenti: <b>${prog.risolte}</b> su ${prog.trovate}</span>`);
-      const titolo = e.modo === 'ricontrollo' ? 'Ricontrollo' : e.titoloCapitolo ? esc(e.titoloCapitolo) : 'Tutti i capitoli';
-      ris.innerHTML = `<p class="sopratitolo">${titolo}</p><h1>Da dove ripartire</h1>
-        <div class="sg-sintesi">${esc(e.sintesi)}</div>
-        <div class="sg-cont">${contatori.join('')}</div>
-        ${lacune.length ? `<h2>Il tuo percorso, in ordine</h2><ol class="sg-percorso">${percorso}</ol>` : ''}
-        ${sai ? `<h2>Abilità verificate senza errori</h2><p class="sg-chip">${sai}</p>` : ''}
-        ${nonVerificate ? `<h2>Abilità non verificate in questo test</h2><p class="sg-chip nv">${nonVerificate}</p>` : ''}
-        ${lacune.length ? '<p class="sg-nota">Dopo lo studio, il ricontrollo propone una domanda nuova per ciascun punto del percorso.</p>' : ''}
-        <div class="sg-azioni">${lacune.length ? `<a class="sg-btn" href="${lacune[0].teoria[0]?.href || lacune[0].domande}">Comincia dal punto 1</a><button type="button" class="sg-btn sec" data-sg-ricontrolla>Ricontrolla le lacune</button>`
-          : `<a class="sg-btn" href="/${materia}/simulazione">Simulazione d’esame</a>`}
-        <button type="button" class="sg-btn sec" data-sg-rifai>Scegli un altro capitolo</button></div>`;
+      const spunta = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+      const nomi = (stato: string, segno = '') => (e.abilita || []).filter((a: any) => a.stato === stato).map((a: any) => `<span>${segno}${esc(a.nome)}</span>`).join('');
+      const sai = nomi('ok', spunta), nonVerificate = nomi('nv');
+      const capitolo = e.modo === 'ricontrollo' ? 'Ricontrollo' : e.titoloCapitolo ? esc(e.titoloCapitolo) : 'Tutti i capitoli';
+      ris.innerHTML = `<header class="sg-testa"><h1>Da dove ripartire</h1><p>${capitolo} · ${e.domande} domande</p></header>
+        <p class="sg-sintesi">${esc(e.sintesi)}</p>
+        ${lacune.length ? `<ol class="sg-tappe">${percorso}</ol>` : ''}
+        ${sai ? `<p class="sg-etich">Senza errori</p><p class="sg-chip">${sai}</p>` : ''}
+        ${nonVerificate ? `<p class="sg-etich">Non verificate in questo test</p><p class="sg-chip nv">${nonVerificate}</p>` : ''}
+        ${lacune.length ? '<div class="sg-dopo"><span>Dopo lo studio: una domanda nuova per ogni punto.</span><button type="button" class="sg-btn" data-sg-ricontrolla>Ricontrolla le lacune</button></div>'
+          : `<div class="sg-dopo"><span>Nessun punto da riprendere in questo test.</span><a class="sg-btn" href="/${materia}/simulazione">Simulazione d’esame</a></div>`}
+        <button type="button" class="sg-link" data-sg-rifai>Scegli un altro capitolo</button>`;
       ris.querySelector('[data-sg-rifai]')!.addEventListener('click', () => { ris.hidden = true; intro.hidden = false; window.scrollTo({ top: 0 }); });
       ris.querySelector('[data-sg-ricontrolla]')?.addEventListener('click', () => avanza('/api/studio-guidato/inizia', { materia, ricontrollo: true }));
       ris.focus({ preventScroll: true });
@@ -224,12 +237,10 @@ const nome = m.breve || m.titolo;
       if (!d.ultimo) return;
       if (new URLSearchParams(location.search).has('esito')) { mostraEsito(d.ultimo, d.progresso); return; }
       const r = $('[data-sg-ripresa]');
-      const quando = new Date(d.ultimo.quando).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
       const n = d.ultimo.lacune.length;
-      r.innerHTML = `<span>Ultimo test: ${quando}${d.ultimo.titoloCapitolo ? `, ${esc(d.ultimo.titoloCapitolo)}` : ''}. ${n ? `${n === 1 ? 'Un punto' : `${n} punti`} da riprendere.` : 'Nessuna lacuna.'} <a href="?esito">Rivedi il risultato</a></span>
-        ${n ? '<button type="button" class="sg-btn sec" data-sg-ricontrolla>Ricontrolla le lacune</button>' : ''}`;
-      r.querySelector('[data-sg-ricontrolla]')?.addEventListener('click', () => avanza('/api/studio-guidato/inizia', { materia, ricontrollo: true }));
+      const quando = new Date(d.ultimo.quando).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
+      r.innerHTML = `<a href="?esito"><span>Ultimo test: ${quando}${d.ultimo.titoloCapitolo ? `, ${esc(d.ultimo.titoloCapitolo)}` : ''} · ${n ? `${n === 1 ? 'un punto' : `${n} punti`} da riprendere` : 'nessun punto da riprendere'}</span><b>Rivedi il risultato</b></a>`;
       r.hidden = false;
-    }).catch((e) => { errore.textContent = e.message; $<HTMLButtonElement>('[data-sg-inizia]').disabled = true; });
+    }).catch((e) => { errore.textContent = e.message; righe.forEach((b) => { b.disabled = true; }); });
   </script>
 </Base>
