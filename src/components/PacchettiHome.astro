@@ -31,20 +31,7 @@ const libri = conto ? pacchetto!.materie.map((s) => catalogo.find((m) => m.slug 
     <span class="ps-link">Tutti i pacchetti <span aria-hidden="true">→</span></span>
   </a>
 )}
-<script>
-  // Mostra lo scaffale solo dopo la verifica GM; senza verifica resta la riga classica.
-  const scaffali = [...document.querySelectorAll<HTMLElement>('[data-pacchetti-gm]')];
-  if (scaffali.length) {
-    fetch('/api/io', { credentials: 'same-origin', cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((io) => {
-        if (io?.gm !== true) return;
-        scaffali.forEach((el) => { el.hidden = false; });
-        document.querySelectorAll<HTMLElement>('[data-pacchetti-classico]').forEach((el) => { el.hidden = true; });
-      })
-      .catch(() => {});
-  }
-</script>
+<script>import '../scripts/pacchetti-gm';</script>
 <style>
   .pacchetti-home { display: flex; align-items: center; gap: .65rem; margin: -.55rem 0 1.25rem; padding: .55rem .75rem; border: 1px solid var(--bronzo-bordo); border-radius: 8px; background: var(--bronzo-fondo); color: var(--bronzo); text-decoration: none; font-family: var(--ui); }
   .pacchetti-home:hover { border-color: #c9ac89; background: #ede1d1; }

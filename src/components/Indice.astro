@@ -73,9 +73,15 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
     </div>
   )}
   {lingua === 'it' && (
-    <a class="indice-pacchetti" href="/pacchetti" data-sconto-bronzo aria-current={qui === '/pacchetti' ? 'page' : undefined}>
+    <a class="indice-pacchetti" href="/pacchetti" data-sconto-bronzo data-pacchetti-classico aria-current={qui === '/pacchetti' ? 'page' : undefined}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></svg>
       <span data-luccichio-bronzo>Pacchetti e sconti</span>
+    </a>
+  )}
+  {lingua === 'it' && (
+    <a class="indice-scaffale" href="/pacchetti" data-pacchetti-gm hidden aria-current={qui === '/pacchetti' ? 'page' : undefined}>
+      <span class="is-libri" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <span class="is-testo"><strong>Pacchetti e sconti</strong><small>Fino al 25% con più materie</small></span>
     </a>
   )}
   {localizzato && <div class="lezioni-indice">
@@ -209,6 +215,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   <p class="indice-contatti"><a href={link(lingua, '/contatti')}>{t.contatti}</a></p>
 </nav>
 <script>
+  import '../scripts/pacchetti-gm';
   // Un tocco sul nome dell'argomento apre le sue tre sezioni, un secondo tocco le richiude.
   document.querySelectorAll<HTMLButtonElement>('[data-apri-argomento]').forEach((b) => {
     b.addEventListener('click', () => {
@@ -225,6 +232,18 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   .indice-pacchetti svg { flex: none; width: 1.1rem; height: 1.1rem; }
   .indice-pacchetti:hover { color: #654626; border-color: #c9ac89; background: #ede1d1; }
   .indice-pacchetti[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
+  .indice-scaffale { display: flex; align-items: center; gap: 0.7rem; margin: 0.75rem 0 1rem; padding: 0.5rem 0.65rem; border: 1px solid var(--bronzo-bordo); border-radius: var(--raggio); background: var(--bronzo-fondo); font-family: var(--ui); text-decoration: none; }
+  .indice-scaffale:hover { border-color: #c9ac89; background: #ede1d1; }
+  .indice-scaffale[aria-current="page"] { box-shadow: inset 3px 0 var(--bronzo); }
+  .is-libri { flex: none; display: flex; align-items: flex-end; gap: 2px; height: 1.7rem; padding: 0 2px; border-bottom: 2px solid var(--bronzo-dettaglio); }
+  .is-libri span { width: 0.42rem; border-radius: 1.5px 1.5px 0 0; }
+  .is-libri span:nth-child(1) { height: 1.4rem; background: var(--c-definizione); }
+  .is-libri span:nth-child(2) { height: 1.6rem; background: var(--c-teorema); }
+  .is-libri span:nth-child(3) { height: 1.25rem; background: var(--c-esempio); }
+  .is-libri span:nth-child(4) { height: 1.5rem; background: var(--c-osservazione); }
+  .is-testo { display: flex; flex-direction: column; min-width: 0; }
+  .is-testo strong { color: var(--bronzo-scuro); font: 600 0.92rem/1.3 var(--ui); }
+  .is-testo small { color: var(--bronzo); font: 600 0.78rem/1.3 var(--ui); }
   .indice-percorsi-titolo { margin: 1.1rem 0.5rem 0.65rem; color: var(--verde); font: 600 0.78rem/1.35 var(--ui); }
   details.indice-gruppo > summary.indice-percorso { align-items: center; gap: 0.5rem; min-width: 0; min-height: 3.1rem; margin: 0 0 0.35rem; padding: 0.5rem 0.6rem; border: 1px solid transparent; border-radius: 7px; background: transparent; color: var(--inchiostro); letter-spacing: 0; text-transform: none; transition: background 150ms ease, border-color 150ms ease; }
   details.indice-gruppo > summary.indice-percorso::before { display: none; }
