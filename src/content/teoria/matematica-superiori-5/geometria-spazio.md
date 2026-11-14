@@ -1,12 +1,12 @@
 ---
 titolo: Geometria analitica nello spazio
-sommario: Come si descrivono con le coordinate i punti, i vettori, i piani, le rette e le superfici sferiche dello spazio, come si calcolano distanze, angoli e prodotti tra vettori e come si stabilisce la posizione reciproca di rette e piani.
+sommario: Punti, vettori, piani, rette e superfici sferiche nello spazio, con esempi su intersezioni, proiezioni e distanze.
 ---
 
 ## Coordinate cartesiane nello spazio
 
 :::definizione{#coordinate-spazio titolo="Sistema di riferimento cartesiano nello spazio"}
-Un **sistema di riferimento cartesiano** nello spazio è formato da tre rette orientate, gli assi $x$, $y$ e $z$, che passano per uno stesso punto $O$, detto origine, e sono perpendicolari a due a due; su tutti e tre gli assi si usa la stessa unità di misura. Gli assi si orientano in modo che, guardando il piano degli assi $x$ e $y$ dal semiasse positivo delle $z$, la rotazione di un angolo retto che porta il semiasse positivo delle $x$ sul semiasse positivo delle $y$ sia antioraria.
+Un **sistema di riferimento cartesiano** nello spazio è formato da tre rette orientate, gli assi $x$, $y$ e $z$, che passano per uno stesso punto $O$, detto origine, e sono perpendicolari a due a due. Su tutti e tre gli assi si usa la stessa unità di misura. Gli assi si orientano in modo che, guardando il piano degli assi $x$ e $y$ dal semiasse positivo delle $z$, la rotazione di un angolo retto che porta il semiasse positivo delle $x$ sul semiasse positivo delle $y$ sia antioraria.
 
 Per un punto $P$ dello spazio si conducono i tre piani che passano per $P$ e sono perpendicolari agli assi. Questi piani intersecano gli assi in tre punti, e le loro coordinate sugli assi sono le **coordinate** di $P$, che si scrive $P(x_P, y_P, z_P)$. I numeri $x_P$, $y_P$ e $z_P$ si chiamano ascissa, ordinata e **quota** di $P$.
 
@@ -53,7 +53,7 @@ Per $A(1, 0, 2)$, $B(3, 4, -1)$ e $C(-1, 2, 5)$ si ha $G(1, 2, 2)$.
 ## Vettori nello spazio
 
 :::definizione{#vettori-spazio titolo="Vettori e loro componenti"}
-Un **vettore** è individuato da una direzione, un verso e un modulo, cioè una lunghezza. Si indica con $\vec{v}$ e si rappresenta con una freccia; due frecce parallele, con lo stesso verso e la stessa lunghezza rappresentano lo stesso vettore. Siano $\vec{i}$, $\vec{j}$ e $\vec{k}$ i vettori di modulo $1$ diretti come i semiassi positivi $x$, $y$ e $z$. Ogni vettore si scrive in un solo modo come
+Un **vettore non nullo** è individuato da una direzione, un verso e un modulo, cioè una lunghezza. Il vettore nullo ha modulo zero e componenti $(0,0,0)$. Si indica con $\vec{v}$ e si rappresenta con una freccia; due frecce parallele, con lo stesso verso e la stessa lunghezza rappresentano lo stesso vettore. Siano $\vec{i}$, $\vec{j}$ e $\vec{k}$ i vettori di modulo $1$ diretti come i semiassi positivi $x$, $y$ e $z$. Ogni vettore si scrive in un solo modo come
 $$
 \vec{v} = a\,\vec{i} + b\,\vec{j} + c\,\vec{k} ,
 $$
@@ -71,7 +71,7 @@ $$
 \qquad
 k\,(a, b, c) = (ka,\ kb,\ kc) .
 $$
-Il vettore $k\,\vec{v}$ ha la stessa direzione di $\vec{v}$, lo stesso verso se $k > 0$ e verso opposto se $k < 0$, e ha modulo $|k|\,|\vec{v}|$. Per $\vec{u} = (1, -2, 3)$ e $\vec{v} = (2, 0, -1)$ si ha $\vec{u} + \vec{v} = (3, -2, 2)$ e $3\vec{u} - 2\vec{v} = (3 - 4,\ -6 - 0,\ 9 + 2) = (-1, -6, 11)$.
+Se $\vec{v}$ e $k$ sono non nulli, il vettore $k\,\vec{v}$ ha la stessa direzione di $\vec{v}$. Il suo verso coincide con quello di $\vec{v}$ per $k>0$ ed è opposto per $k<0$. Il modulo è $|k|\,|\vec{v}|$. Per $k=0$ il prodotto è il vettore nullo. Per $\vec{u} = (1, -2, 3)$ e $\vec{v} = (2, 0, -1)$ si ha $\vec{u} + \vec{v} = (3, -2, 2)$ e $3\vec{u} - 2\vec{v} = (3 - 4,\ -6 - 0,\ 9 + 2) = (-1, -6, 11)$.
 
 Un vettore di modulo $1$ si chiama **versore**. Dividendo un vettore non nullo per il suo modulo si ottiene il versore con la stessa direzione e lo stesso verso. Per esempio $\vec{v} = (2, -1, 2)$ ha modulo $3$, quindi il suo versore è $\left( \dfrac{2}{3}, -\dfrac{1}{3}, \dfrac{2}{3} \right)$.
 :::
@@ -99,11 +99,11 @@ La formula si ottiene dividendo la definizione di prodotto scalare per $|\vec{u}
 $$
 \cos \theta = \frac{1 + 0 + 0}{\sqrt{2} \cdot \sqrt{2}} = \frac{1}{2} ,
 $$
-quindi $\theta = \dfrac{\pi}{3}$. Il denominatore è positivo, quindi l'angolo è acuto, retto oppure ottuso secondo che il prodotto scalare sia positivo, nullo oppure negativo.
+quindi $\theta = \dfrac{\pi}{3}$. Il denominatore è positivo, quindi il segno del prodotto scalare distingue tre casi. Se è positivo, $0\leq\theta<\dfrac{\pi}{2}$. Se è nullo, $\theta=\dfrac{\pi}{2}$. Se è negativo, $\dfrac{\pi}{2}<\theta\leq\pi$.
 :::
 
 :::definizione{#prodotto-vettoriale titolo="Prodotto vettoriale"}
-Siano $\vec{u}$ e $\vec{v}$ due vettori non paralleli e sia $\theta$ l'angolo tra di essi. Il **prodotto vettoriale** $\vec{u} \times \vec{v}$ è il vettore che ha
+Siano $\vec{u}$ e $\vec{v}$ due vettori non nulli e non paralleli e sia $\theta$ l'angolo tra di essi. Il **prodotto vettoriale** $\vec{u} \times \vec{v}$ è il vettore che ha
 
 - modulo $|\vec{u}|\,|\vec{v}| \sin \theta$;
 - direzione perpendicolare sia a $\vec{u}$ sia a $\vec{v}$;
@@ -150,7 +150,7 @@ Siano $\vec{u} = (a, b, c)$ e $\vec{v} = (a', b', c')$ due vettori non nulli.
 - $\vec{u}$ e $\vec{v}$ sono **paralleli** se e solo se esiste un numero $k$ tale che $\vec{v} = k\,\vec{u}$, cioè se le componenti sono proporzionali; questo accade se e solo se $\vec{u} \times \vec{v} = \vec{0}$.
 - $\vec{u}$ e $\vec{v}$ sono **perpendicolari** se e solo se $\vec{u} \cdot \vec{v} = a a' + b b' + c c' = 0$.
 
-La seconda condizione segue dalla definizione di prodotto scalare, perché $\cos \theta = 0$ se e solo se $\theta = \dfrac{\pi}{2}$. Per esempio $(2, -1, 3)$ e $(-4, 2, -6)$ sono paralleli, perché il secondo è il primo moltiplicato per $-2$, mentre $(1, 2, 2)$ e $(2, -2, 1)$ sono perpendicolari, perché $2 - 4 + 2 = 0$. Tre punti $A$, $B$ e $C$ sono allineati se e solo se $\overrightarrow{AB}$ e $\overrightarrow{AC}$ sono paralleli.
+La seconda condizione segue dalla definizione di prodotto scalare, perché $\cos \theta = 0$ se e solo se $\theta = \dfrac{\pi}{2}$. Per esempio $(2, -1, 3)$ e $(-4, 2, -6)$ sono paralleli, perché il secondo è il primo moltiplicato per $-2$, mentre $(1, 2, 2)$ e $(2, -2, 1)$ sono perpendicolari, perché $2 - 4 + 2 = 0$. Tre punti distinti $A$, $B$ e $C$ sono allineati se e solo se $\overrightarrow{AB}$ e $\overrightarrow{AC}$ sono paralleli.
 :::
 
 ## Equazione del piano
@@ -173,7 +173,7 @@ Per esempio, il piano per $P_0(1, -2, 3)$ con vettore normale $\vec{n} = (2, 1, 
 Alcuni coefficienti nulli corrispondono a posizioni particolari del piano $ax + by + cz + d = 0$.
 
 - Se $d = 0$, il piano passa per l'origine; per esempio $x - 2y + z = 0$.
-- Se $a = 0$, il vettore normale $(0, b, c)$ è perpendicolare all'asse $x$, quindi il piano è parallelo all'asse $x$; per esempio $y + z - 2 = 0$. Allo stesso modo $b = 0$ dà un piano parallelo all'asse $y$ e $c = 0$ un piano parallelo all'asse $z$.
+- Se $a = 0$, il vettore normale $(0, b, c)$ è perpendicolare all'asse $x$, quindi la direzione dell'asse $x$ è parallela al piano. Con $d=0$ l'asse è contenuto nel piano, come in $y+z=0$. Con $d\ne0$ l'asse è esterno, come in $y+z-2=0$. Lo stesso criterio vale per l'asse $y$ se $b=0$ e per l'asse $z$ se $c=0$.
 - Se $a = b = 0$, l'equazione si riduce a $z = k$ e il piano è parallelo al piano $z = 0$; per esempio $z = 3$ è il piano orizzontale formato dai punti con quota $3$. Allo stesso modo $x = k$ e $y = k$ sono piani paralleli ai piani coordinati $x = 0$ e $y = 0$.
 :::
 
@@ -182,7 +182,7 @@ Per tre punti $A$, $B$ e $C$ non allineati passa uno e un solo piano. I vettori 
 $$
 \vec{n} = \overrightarrow{AB} \times \overrightarrow{AC} .
 $$
-In alternativa si sostituiscono le coordinate dei tre punti nell'equazione $ax + by + cz + d = 0$ e si risolve il sistema nelle incognite $a$, $b$, $c$ e $d$, che ha infinite soluzioni tutte proporzionali tra loro.
+In alternativa si sostituiscono le coordinate dei tre punti nell'equazione $ax + by + cz + d = 0$ e si risolve il sistema nelle incognite $a$, $b$, $c$ e $d$, che ammette infinite soluzioni non nulle, tutte multiple di una stessa soluzione. La soluzione con tutti i coefficienti nulli si scarta perché rappresenta l'intero spazio.
 :::
 
 :::esempio{titolo="Piano che interseca gli assi in tre punti dati"}
@@ -226,7 +226,7 @@ e il piano cercato è $-x + y + z = 0$.
 ## Equazioni della retta
 
 :::definizione{#retta-parametriche titolo="Equazioni parametriche della retta"}
-Sia $r$ la retta che passa per $P_0(x_0, y_0, z_0)$ ed è parallela al vettore non nullo $\vec{v} = (l, m, n)$, detto **vettore direzione** di $r$. Un punto $P$ sta su $r$ se e solo se $\overrightarrow{P_0 P}$ è parallelo a $\vec{v}$, cioè se $\overrightarrow{P_0 P} = t\,\vec{v}$ per qualche numero reale $t$. Scrivendo questa uguaglianza componente per componente si ottengono le **equazioni parametriche** di $r$:
+Sia $r$ la retta che passa per $P_0(x_0, y_0, z_0)$ ed è parallela al vettore non nullo $\vec{v} = (l, m, n)$, detto **vettore direzione** di $r$. Un punto $P$ sta su $r$ se e solo se $\overrightarrow{P_0 P}=t\,\vec{v}$ per qualche numero reale $t$. Il valore $t=0$ dà $P_0$, mentre ogni valore non nullo dà uno spostamento parallelo a $\vec{v}$. Scrivendo questa uguaglianza componente per componente si ottengono le **equazioni parametriche** di $r$:
 $$
 \begin{cases}
 x = x_0 + l\,t \\
@@ -235,7 +235,7 @@ z = z_0 + n\,t
 \end{cases}
 \qquad t \in \mathbb{R} .
 $$
-Le componenti $l$, $m$ e $n$ si chiamano anche **parametri direttori** della retta. A ogni valore del parametro $t$ corrisponde un punto della retta. Per la retta per $P_0(1, -1, 2)$ con $\vec{v} = (2, 1, -3)$, il valore $t = 1$ dà il punto $(3, 0, -1)$ e il valore $t = -1$ dà il punto $(-1, -2, 5)$. Il punto $Q(5, 1, 0)$ *non* sta sulla retta, perché la prima equazione $5 = 1 + 2t$ dà $t = 2$, mentre la seconda $1 = -1 + t$ dà $t = 2$ e la terza $0 = 2 - 3t$ dà $t = \dfrac{2}{3}$.
+Le componenti $l$, $m$ e $n$ si chiamano anche **parametri direttori** della retta. A ogni valore del parametro $t$ corrisponde un punto della retta. Per la retta per $P_0(1, -1, 2)$ con $\vec{v} = (2, 1, -3)$, il valore $t = 1$ dà il punto $(3, 0, -1)$ e il valore $t = -1$ dà il punto $(-1, -2, 5)$. Per verificare se un punto appartiene alla retta occorre usare lo stesso valore di $t$ per tutte e tre le coordinate. Per $Q(5,1,0)$ l'ascissa e l'ordinata impongono $t=2$, che dà quota $-4$. Quindi $Q$ è esterno alla retta.
 :::
 
 :::teorema{#retta-due-punti titolo="Retta per due punti"}
@@ -304,7 +304,7 @@ Due rette dello spazio possono essere
 - **parallele**, se hanno vettori direzione paralleli; in questo caso sono distinte oppure coincidenti;
 - **sghembe**, se non hanno punti in comune e non sono parallele.
 
-Due rette incidenti o parallele stanno in uno stesso piano, mentre due rette sghembe non stanno in nessun piano. Per stabilire la posizione si confrontano prima i vettori direzione. Se non sono paralleli, si uguagliano le equazioni parametriche delle due rette, usando due parametri diversi $t$ e $s$. Se il sistema ha soluzione le rette sono incidenti, altrimenti sono sghembe. Due rette si dicono **perpendicolari** se sono incidenti e i loro vettori direzione sono perpendicolari.
+Due rette incidenti o parallele stanno in uno stesso piano. Due rette sghembe appartengono a piani distinti e nessun piano contiene entrambe. Se le direzioni sono parallele, si verifica se un punto della seconda retta appartiene alla prima. Se appartiene, le rette coincidono. Se è esterno, sono parallele distinte. Se le direzioni sono diverse, si uguagliano le coordinate usando due parametri indipendenti $t$ e $s$. Una soluzione comune alle tre equazioni individua l'intersezione. Se il sistema è incompatibile, le rette sono sghembe. Due rette sono **perpendicolari** se sono incidenti e hanno vettori direzione ortogonali.
 :::
 
 :::esempio{titolo="Rette incidenti e rette sghembe"}
@@ -321,11 +321,17 @@ Dalla seconda equazione $t = s$, e la prima diventa $1 + t = 3 - t$, quindi $t =
 Sia ora $s'$ la retta $x = s$, $y = 1$, $z = s$, con vettore direzione $(1, 0, 1)$, che non è parallelo a $\vec{v}$. Il sistema $1 + t = s$, $2t = 1$, $-t = s$ dà $t = \dfrac{1}{2}$ dalla seconda equazione; poi la prima dà $s = \dfrac{3}{2}$ e la terza dà $s = -\dfrac{1}{2}$. Il sistema non ha soluzioni, quindi $r$ e $s'$ sono **sghembe**.
 :::
 
+:::attenzione
+Il prodotto scalare nullo garantisce l'ortogonalità delle direzioni. Per la perpendicolarità delle rette serve anche un punto comune. Per esempio le rette $r\colon (x,y,z)=(t,0,0)$ e $s\colon (x,y,z)=(0,u,2)$ hanno direzioni $(1,0,0)$ e $(0,1,0)$, con prodotto scalare nullo. Le quote sono però $0$ su $r$ e $2$ su $s$, quindi le rette sono sghembe.
+
+::grafico{assi=0 uguale=1 poligoni="-1.5,-0.5 0.5,-0.5 1.5,0.5 -0.5,0.5;-1.5,1.5 0.5,1.5 1.5,2.5 -0.5,2.5" linee="-0.75,-0.75 0.75,0.75;-1.6,2 1.6,2" segmenti="0,0,0,2" punti="0,0,pieno;0,2,pieno" etichette="0.82,0.77,r;1.72,2.13,s;1.65,-0.2,z = 0;1.65,2.63,z = 2" xmin=-2.25 xmax=2.55 ymin=-1.05 ymax=2.95 titolo="La retta $r$ appartiene al piano $z=0$ e la retta $s$ appartiene al piano $z=2$. Le direzioni sono ortogonali e le rette sono sghembe"}
+:::
+
 :::teorema{#posizione-retta-piano titolo="Posizione reciproca di una retta e di un piano"}
 Sia $r$ una retta con vettore direzione $\vec{v}$ e sia $\pi$ un piano con vettore normale $\vec{n}$.
 
 - Se $\vec{v} \cdot \vec{n} \neq 0$, la retta e il piano sono **incidenti**, cioè hanno un solo punto in comune.
-- Se $\vec{v} \cdot \vec{n} = 0$, la retta è **parallela** al piano. In questo caso, se un punto di $r$ sta in $\pi$ la retta è contenuta nel piano, altrimenti non ha punti in comune con il piano.
+- Se $\vec{v} \cdot \vec{n} = 0$, la direzione della retta è parallela al piano. Se un punto di $r$ sta in $\pi$, la retta è **contenuta** nel piano. Se il punto è esterno, la retta è **parallela ed esterna** al piano.
 
 Nella pratica si sostituiscono le equazioni parametriche di $r$ nell'equazione di $\pi$ e si ottiene un'equazione di primo grado in $t$. Se l'equazione ha una soluzione, essa dà il punto di intersezione; se è impossibile, la retta è parallela al piano e non lo incontra; se è un'identità, la retta è contenuta nel piano.
 
@@ -351,7 +357,14 @@ La distanza del punto $P_0(x_0, y_0, z_0)$ dal piano $\pi : ax + by + cz + d = 0
 $$
 d(P_0, \pi) = \frac{|a x_0 + b y_0 + c z_0 + d|}{\sqrt{a^2 + b^2 + c^2}} .
 $$
-La formula è analoga a quella della distanza di un punto da una retta nel piano cartesiano, e si ottiene calcolando le coordinate di $H$ con il procedimento della proiezione ortogonale, svolto con coordinate generiche. Per $P_0(2, 0, 4)$ e $\pi : 2x - y + 2z - 3 = 0$ si ha
+Per trovare $H$ si scrive $H=P_0+t\vec n$ e si impone che appartenga al piano. Sostituendo queste coordinate si ottiene
+$$
+\begin{aligned}
+ax_0+by_0+cz_0+d+t(a^2+b^2+c^2)&=0,\\[6pt]
+t&=-\frac{ax_0+by_0+cz_0+d}{a^2+b^2+c^2}.
+\end{aligned}
+$$
+Il segmento $P_0H$ ha lunghezza $|t|\,|\vec n|$. Da qui si ricava la formula della distanza. Per $P_0(2, 0, 4)$ e $\pi : 2x - y + 2z - 3 = 0$ si ha
 $$
 d(P_0, \pi) = \frac{|4 - 0 + 8 - 3|}{\sqrt{4 + 1 + 4}} = \frac{9}{3} = 3 .
 $$
@@ -386,7 +399,11 @@ Per i piani $2x - y + 2z - 3 = 0$ e $2x - y + 2z + 6 = 0$ la distanza è $\dfrac
 :::
 
 :::teorema{#distanza-punto-retta titolo="Distanza di un punto da una retta"}
-La distanza del punto $P$ dalla retta $r$ è la lunghezza del segmento $PH$, dove $H$ è il punto di $r$ tale che $PH$ sia perpendicolare a $r$. Il punto $H$ si trova intersecando $r$ con il piano per $P$ perpendicolare a $r$. In alternativa, se $A$ è un punto di $r$ e $\vec{v}$ è un suo vettore direzione, vale
+La distanza del punto $P$ dalla retta $r$ è la lunghezza del segmento $PH$, dove $H$ è il punto di $r$ tale che $PH$ sia perpendicolare a $r$. Il punto $H$ si trova intersecando $r$ con il piano per $P$ perpendicolare a $r$. Se $A$ è un punto di $r$ e $\vec v$ è un suo vettore direzione, si può anche scrivere $H=A+t\vec v$ e imporre l'ortogonalità di $\overrightarrow{HP}=\overrightarrow{AP}-t\vec v$ a $\vec v$. Si ottiene
+$$
+t=\frac{\overrightarrow{AP}\cdot\vec v}{|\vec v|^2}.
+$$
+Se interessa soltanto la distanza, vale
 $$
 d(P, r) = \frac{\left| \overrightarrow{AP} \times \vec{v} \right|}{|\vec{v}|} ,
 $$
@@ -426,7 +443,7 @@ Per esempio la superficie sferica di centro $C(1, -2, 3)$ e raggio $4$ ha equazi
 :::
 
 :::teorema{#equazione-sfera titolo="Centro e raggio dall'equazione"}
-L'equazione $x^2 + y^2 + z^2 + ax + by + cz + d = 0$ rappresenta una superficie sferica se e solo se
+L'equazione $x^2 + y^2 + z^2 + ax + by + cz + d = 0$ rappresenta una superficie sferica di raggio positivo se e solo se
 $$
 \frac{a^2}{4} + \frac{b^2}{4} + \frac{c^2}{4} - d > 0 .
 $$
@@ -436,7 +453,7 @@ C\left( -\frac{a}{2}, -\frac{b}{2}, -\frac{c}{2} \right) ,
 \qquad
 R = \sqrt{\frac{a^2}{4} + \frac{b^2}{4} + \frac{c^2}{4} - d} .
 $$
-Le formule si ottengono confrontando l'equazione con quella della definizione. Per $x^2 + y^2 + z^2 - 4x + 2y + 6z + 5 = 0$ si ha $C(2, -1, -3)$ e $R^2 = 4 + 1 + 9 - 5 = 9$, quindi $R = 3$.
+Le formule si ottengono completando i quadrati. Se la quantità sotto radice è zero, l'equazione ha come unica soluzione il punto $C$. Se è negativa, l'equazione non ha soluzioni reali. Per $x^2 + y^2 + z^2 - 4x + 2y + 6z + 5 = 0$ si ha $C(2, -1, -3)$ e $R^2 = 4 + 1 + 9 - 5 = 9$, quindi $R = 3$.
 :::
 
 :::attenzione
@@ -450,7 +467,7 @@ Siano $C$ il centro e $R$ il raggio di una superficie sferica, e sia $\delta$ la
 - Se $\delta = R$, il piano è **tangente** e ha un solo punto in comune con la superficie.
 - Se $\delta < R$, il piano è **secante** e interseca la superficie lungo una circonferenza, che ha centro nella proiezione $H$ di $C$ sul piano e raggio $r = \sqrt{R^2 - \delta^2}$.
 
-Il raggio $r$ si ottiene con il teorema di Pitagora nel triangolo rettangolo che ha per vertici $C$, $H$ e un punto $Q$ della circonferenza, perché $\overline{CQ} = R$ e $\overline{CH} = \delta$. Per la superficie sferica di centro $C(1, 2, -1)$ e raggio $5$ e il piano $z = 3$ si ha $\delta = 3 - (-1) = 4 < 5$. Il piano è quindi secante e interseca la superficie lungo la circonferenza di centro $H(1, 2, 3)$ e raggio $r = \sqrt{25 - 16} = 3$.
+Per $\delta>0$ il raggio $r$ si ottiene con il teorema di Pitagora nel triangolo rettangolo $CHQ$, con $Q$ sulla circonferenza. Infatti $\overline{CQ}=R$ e $\overline{CH}=\delta$. Per $\delta=0$ il piano passa per il centro, quindi $H=C$ e $r=R$. Per la superficie sferica di centro $C(1, 2, -1)$ e raggio $5$ e il piano $z = 3$ si ha $\delta = 3 - (-1) = 4 < 5$. Il piano è quindi secante e interseca la superficie lungo la circonferenza di centro $H(1, 2, 3)$ e raggio $r = \sqrt{25 - 16} = 3$.
 
 ::grafico{f="3+0*x" curve="1+5*cos(t),-1+5*sin(t),0,6.29" segmenti="1,-1,1,3;1,-1,4,3" punti="1,-1,pieno,C;1,3,pieno,H;4,3,pieno,Q" nomi="x,z" xmin=-6 xmax=8 ymin=-8 ymax=6 uguale=1 legenda="z = 3;(x - 1)^2 + (z + 1)^2 = 25" titolo="Sezione con il piano $y = 2$: la superficie sferica di centro $C(1, 2, -1)$ e raggio $5$ e il piano $z = 3$; nel triangolo $CHQ$ si ha $\overline{CH} = 4$ e $\overline{CQ} = 5$, quindi $\overline{HQ} = 3$"}
 
@@ -469,6 +486,6 @@ $$
 $$
 Il risultato si controlla con la distanza, perché $d(C, \pi) = \dfrac{|2 - 2 + 6 - 15|}{3} = 3 = R$.
 
-::grafico{assi=0 uguale=1 f="4.243-x" curve="3*cos(t),3*sin(t),0,6.29" vettori="0,0,2.121,2.121" punti="0,0,pieno,C;2.121,2.121,pieno,T" etichette="4.1,0.55,π;0.75,1.3,R" xmin=-3.6 xmax=5 ymin=-3.6 ymax=4 legenda="0" titolo="Sezione con un piano che contiene il centro $C$ e il punto di tangenza $T$: il piano tangente appare come la retta perpendicolare al raggio $CT$ nel punto $T$"}
+::grafico{assi=0 uguale=1 f="3*sqrt(2)-x" curve="3*cos(t),3*sin(t),0,6.29" vettori="0,0,2.121,2.121" punti="0,0,pieno,C;2.121,2.121,pieno,T" etichette="4.1,0.55,π;0.75,1.3,R" xmin=-3.6 xmax=5 ymin=-3.6 ymax=4 legenda="0" titolo="Sezione con un piano che contiene il centro $C$ e il punto di tangenza $T$: il piano tangente appare come la retta perpendicolare al raggio $CT$ nel punto $T$"}
 
 :::

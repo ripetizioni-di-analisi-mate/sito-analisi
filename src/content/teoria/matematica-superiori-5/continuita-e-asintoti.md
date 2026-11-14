@@ -1,16 +1,16 @@
 ---
 titolo: Continuità e asintoti
-sommario: Che cos'è una funzione continua in un punto e in un intervallo, come si classificano i punti di discontinuità, che cosa affermano i teoremi di Weierstrass, dei valori intermedi e di esistenza degli zeri, come si approssima uno zero con il metodo di bisezione, come si trovano gli asintoti verticali, orizzontali e obliqui e come si traccia il grafico probabile di una funzione.
+sommario: Continuità e discontinuità, teoremi sulle funzioni continue, metodo di bisezione e asintoti per tracciare il grafico probabile.
 ---
 
 ## Funzioni continue
 
 :::definizione{#continuita-punto titolo="Funzione continua in un punto"}
-Sia $f$ una funzione definita in un intorno $I(x_0)$ del punto $x_0$, compreso il punto $x_0$. La funzione $f$ è **continua** in $x_0$ se
+Sia $x_0$ un punto del dominio di $f$. Se $x_0$ è un punto di accumulazione del dominio, cioè se altri punti del dominio si avvicinano quanto si vuole a $x_0$, la funzione $f$ è **continua** in $x_0$ se
 $$
 \lim_{x \to x_0} f(x) = f(x_0) .
 $$
-L'uguaglianza contiene tre richieste, che devono essere soddisfatte insieme:
+Per verificare la continuità si controllano insieme queste tre condizioni.
 $$
 \begin{cases}
 f(x_0) \text{ esiste} \\[4pt]
@@ -18,11 +18,11 @@ f(x_0) \text{ esiste} \\[4pt]
 \displaystyle\lim_{x \to x_0} f(x) = f(x_0)
 \end{cases}
 $$
-Con la definizione di limite vista nell'argomento sui limiti, la continuità in $x_0$ significa che per ogni $\varepsilon > 0$ esiste $\delta > 0$ tale che $|f(x) - f(x_0)| < \varepsilon$ per ogni $x$ con $|x - x_0| < \delta$. In altre parole, se $x$ è vicino a $x_0$, allora $f(x)$ è vicino a $f(x_0)$. Per esempio $f(x) = x^2 + 1$ è continua in $x_0 = 2$, perché $f(2) = 5$ e $\displaystyle\lim_{x \to 2} \left( x^2 + 1 \right) = 5$.
+Con la definizione di limite vista nell'argomento sui limiti, la continuità in $x_0$ significa che per ogni $\varepsilon > 0$ esiste $\delta > 0$ tale che $|f(x) - f(x_0)| < \varepsilon$ per ogni $x$ del dominio con $|x - x_0| < \delta$. In altre parole, se $x$ è vicino a $x_0$, allora $f(x)$ è vicino a $f(x_0)$. Se $x_0$ è isolato nel dominio, si sceglie un intorno tanto piccolo che il solo punto del dominio al suo interno è $x_0$. In quel punto lo scarto $|f(x_0)-f(x_0)|$ è nullo per ogni tolleranza $\varepsilon>0$, quindi $f$ è continua. Per esempio $f(x) = x^2 + 1$ è continua in $x_0 = 2$, perché $f(2) = 5$ e $\displaystyle\lim_{x \to 2} \left( x^2 + 1 \right) = 5$.
 :::
 
 :::definizione{#continuita-destra-sinistra titolo="Continuità a destra e a sinistra"}
-Sia $f$ definita in $x_0$ e a destra di $x_0$. La funzione è **continua a destra** in $x_0$ se $\displaystyle\lim_{x \to x_0^+} f(x) = f(x_0)$. Allo stesso modo, con il limite sinistro, si definisce la **continuità a sinistra**. Un limite esiste se e solo se il limite destro e il limite sinistro esistono e sono uguali, quindi $f$ è continua in $x_0$ se e *solo se* è continua sia a destra sia a sinistra.
+Sia $f$ definita in $x_0$ e a destra di $x_0$. La funzione è **continua a destra** in $x_0$ se $\displaystyle\lim_{x \to x_0^+} f(x) = f(x_0)$. Allo stesso modo, con il limite sinistro, si definisce la **continuità a sinistra**. Quando il dominio permette di avvicinarsi a $x_0$ da entrambi i lati, la continuità in $x_0$ equivale alla continuità a destra e a sinistra. Infatti i due limiti laterali devono coincidere entrambi con $f(x_0)$.
 
 Questa definizione serve per le funzioni definite a tratti. Per la funzione che vale $x^2$ per $x \leq 1$ e $2x$ per $x > 1$ si ha $f(1) = 1$. Il limite sinistro in $1$ è $1$, quindi la funzione è continua a sinistra; il limite destro è $2$, quindi la funzione *non* è continua a destra, e perciò non è continua in $1$.
 :::
@@ -30,11 +30,11 @@ Questa definizione serve per le funzioni definite a tratti. Per la funzione che 
 :::definizione{#continuita-intervallo titolo="Funzione continua in un intervallo"}
 Una funzione è **continua in un intervallo** se è continua in ogni punto dell'intervallo. In un estremo chiuso dell'intervallo si richiede solo la continuità da una parte. Per esempio $f$ è continua in $[a, b]$ se è continua in ogni punto di $(a, b)$, continua a destra in $a$ e continua a sinistra in $b$. Una funzione continua in tutti i punti del suo dominio si dice semplicemente **continua**.
 
-Il grafico di una funzione continua in un intervallo si disegna senza staccare la matita dal foglio. La funzione $\sqrt{x}$ è continua in $[0, +\infty)$, e nel punto $0$ è continua a destra, perché $\displaystyle\lim_{x \to 0^+} \sqrt{x} = 0 = \sqrt{0}$.
+All’estremo chiuso si considerano gli $x$ appartenenti all’intervallo. Per esempio la funzione $\sqrt{x}$ è continua in $[0, +\infty)$, e nel punto $0$ è continua a destra, perché $\displaystyle\lim_{x \to 0^+} \sqrt{x} = 0 = \sqrt{0}$.
 :::
 
 :::teorema{#continuita-funzioni-elementari titolo="Continuità delle funzioni elementari e delle operazioni"}
-Le funzioni elementari sono continue in tutti i punti del loro dominio: i polinomi, le funzioni razionali fratte, le radici, le potenze, le funzioni esponenziali, le funzioni logaritmiche, le funzioni goniometriche e le loro inverse. Inoltre, se $f$ e $g$ sono continue in $x_0$, sono continue in $x_0$ anche
+Polinomi, funzioni razionali fratte, radici, funzioni potenza, esponenziali, logaritmi, funzioni goniometriche e loro inverse sono continui nei rispettivi domini. Inoltre, se $f$ e $g$ sono continue in $x_0$, sono continue in $x_0$ anche
 $$
 f + g ,
 \qquad
@@ -44,7 +44,7 @@ f \cdot g ,
 \qquad
 \frac{f}{g} \quad \text{se } g(x_0) \neq 0 .
 $$
-Se $g$ è continua in $x_0$ e $f$ è continua in $g(x_0)$, la funzione composta $f\big( g(x) \big)$ è continua in $x_0$.
+Se $g$ è continua in $x_0$ e $f$ è continua in $g(x_0)$, la funzione composta $f\big(g(x)\big)$ è continua in $x_0$ nel suo dominio, formato dagli $x$ del dominio di $g$ per cui $g(x)$ appartiene al dominio di $f$.
 
 Il teorema permette di calcolare il limite di una funzione continua per sostituzione, cioè calcolando la funzione nel punto. Per esempio
 $$
@@ -56,7 +56,7 @@ Per i polinomi e le funzioni razionali fratte il teorema segue dai teoremi sul l
 :::
 
 :::esempio{titolo="Limite di una funzione composta"}
-Si calcola $\displaystyle\lim_{x \to 0} e^{\frac{\sin x}{x}}$. Per il limite notevole visto nell'argomento sui limiti, l'esponente $\dfrac{\sin x}{x}$ tende a $1$. La funzione esponenziale è continua in $1$, quindi
+Si calcola $\displaystyle\lim_{x \to 0} e^{\dfrac{\sin x}{x}}$. Per il limite notevole visto nell'argomento sui limiti, l'esponente $\dfrac{\sin x}{x}$ tende a $1$. La funzione esponenziale è continua in $1$, quindi
 $$
 \lim_{x \to 0} e^{\frac{\sin x}{x}} = e^{1} = e .
 $$
@@ -70,7 +70,7 @@ Sia $f$ definita in un intorno di $x_0$, escluso al più il punto $x_0$. Il punt
 - $f$ è definita in $x_0$, ma il limite per $x \to x_0$ non esiste, oppure è infinito, oppure è diverso da $f(x_0)$;
 - $f$ non è definita in $x_0$, ma è definita in tutti i punti vicini a $x_0$.
 
-Per esempio la funzione $\dfrac{1}{x}$ non è definita in $0$, ma è definita in tutti gli altri punti; perciò $0$ è un punto di discontinuità. I punti di discontinuità si classificano in tre specie, secondo i valori del limite destro e del limite sinistro.
+Per esempio la funzione $\dfrac{1}{x}$ non è definita in $0$, ma è definita in tutti gli altri punti; perciò $0$ è un punto di discontinuità. La classificazione in tre specie qui descritta riguarda i punti ai quali il dominio si avvicina da entrambi i lati. A una frontiera accessibile da un solo lato si studia il limite da quel lato.
 :::
 
 :::definizione{#discontinuita-prima-specie titolo="Discontinuità di prima specie"}
@@ -89,14 +89,14 @@ Il numero $|\ell_2 - \ell_1|$ si chiama **salto** della funzione in $x_0$. Nel g
 :::
 
 :::definizione{#discontinuita-seconda-specie titolo="Discontinuità di seconda specie"}
-Il punto $x_0$ è una **discontinuità di seconda specie** se *almeno uno* dei due limiti, destro o sinistro, è infinito oppure non esiste. Per $f(x) = e^{\frac{1}{x}}$ e $x_0 = 0$ si ha:
+Il punto $x_0$ è una **discontinuità di seconda specie** se *almeno uno* dei due limiti, destro o sinistro, è infinito oppure non esiste. Per $f(x) = e^{\dfrac{1}{x}}$ e $x_0 = 0$ si ha:
 
 - per $x \to 0^+$ l'esponente $\dfrac{1}{x}$ tende a $+\infty$, quindi $f(x) \to +\infty$;
 - per $x \to 0^-$ l'esponente tende a $-\infty$, quindi $f(x) \to 0$.
 
 Il limite destro è infinito, perciò $0$ è una discontinuità di seconda specie. Anche $\dfrac{1}{x}$ ha in $0$ una discontinuità di seconda specie, perché i due limiti sono $+\infty$ e $-\infty$. Per la funzione $\sin \dfrac{1}{x}$ i due limiti in $0$ non esistono, perché i valori oscillano tra $-1$ e $1$ sempre più rapidamente.
 
-::grafico{f="exp(1/x)" punti="0,0,vuoto" asintoti="x=0" xmin=-4 xmax=4 ymin=-1 ymax=7 legenda="y = e^{\frac{1}{x}}" titolo="La funzione $e^{\frac{1}{x}}$ tende a $0$ per $x \to 0^-$ e a $+\infty$ per $x \to 0^+$, quindi in $0$ ha una discontinuità di seconda specie"}
+::grafico{f="exp(1/x)" punti="0,0,vuoto" asintoti="x=0" xmin=-4 xmax=4 ymin=-1 ymax=7 legenda="y = e^{\frac{1}{x}}" titolo="La funzione $e^{\dfrac{1}{x}}$ tende a $0$ per $x \to 0^-$ e a $+\infty$ per $x \to 0^+$, quindi in $0$ ha una discontinuità di seconda specie"}
 
 :::
 
@@ -110,12 +110,12 @@ Per esempio $f(x) = \dfrac{\sin x}{x}$ non è definita in $0$, e per il limite n
 :::
 
 :::osservazione{#ricerca-discontinuita titolo="Dove si cercano i punti di discontinuità"}
-Per il teorema sulla continuità delle funzioni elementari, una funzione scritta con una sola espressione è continua nel suo dominio. I punti di discontinuità si cercano quindi
+Le espressioni ottenute da funzioni elementari mediante le operazioni elencate sono continue dove tali operazioni sono definite. Per queste espressioni e per le funzioni costruite raccordandone più di una, i punti da controllare sono
 
 - nei punti esclusi dal dominio vicino ai quali la funzione è definita, come gli zeri di un denominatore;
 - nei punti in cui cambia l'espressione di una funzione definita a tratti.
 
-In ciascuno di questi punti si calcolano il limite destro e il limite sinistro. Per $f(x) = \dfrac{x^2 - 4}{x - 2}$ l'unico punto escluso è $2$. Per $x \neq 2$ si ha $f(x) = \dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$, che tende a $4$, quindi $2$ è una discontinuità eliminabile.
+Se il dominio arriva al punto da entrambi i lati si confrontano il limite sinistro e il limite destro. Se il dominio arriva da una parte sola, si calcola il limite dal lato accessibile. Per esempio per $\ln x$ si studia $x\to0^+$, mentre per $\sqrt{x}$ si verifica la continuità da destra in $0$. Per $f(x) = \dfrac{x^2 - 4}{x - 2}$ l'unico punto escluso è $2$. Per $x \neq 2$ si ha $f(x) = \dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$, che tende a $4$, quindi $2$ è una discontinuità eliminabile.
 :::
 
 ## Teoremi sulle funzioni continue
@@ -125,7 +125,7 @@ Sia $f$ una funzione continua in un intervallo chiuso e limitato $[a, b]$. Allor
 $$
 f(x_1) \leq f(x) \leq f(x_2) \qquad \text{per ogni } x \in [a, b] .
 $$
-Il teorema garantisce che il massimo e il minimo esistono, ma non dice dove si trovano; per trovarli si usano le derivate, come si vede nell'argomento su massimi, minimi, flessi e studio di funzione. Per esempio $f(x) = x^3 - 3x$ è continua in $[-2, 2]$. Il suo valore massimo è $2$, assunto in $x = -1$ e in $x = 2$, e il suo valore minimo è $-2$, assunto in $x = -2$ e in $x = 1$. La dimostrazione si studia all'università.
+Il teorema garantisce l’esistenza dei valori estremi. L’argomento su massimi, minimi, flessi e studio di funzione mostra come individuarli con le derivate. Per esempio $f(x) = x^3 - 3x$ è continua in $[-2, 2]$. Il suo valore massimo è $2$, assunto in $x = -1$ e in $x = 2$, e il suo valore minimo è $-2$, assunto in $x = -2$ e in $x = 1$. La dimostrazione si studia all'università.
 
 ::grafico{f="x^3-3*x+0*sqrt(4-x^2)" punti="-2,-2,pieno;-1,2,pieno;1,-2,pieno;2,2,pieno" segmenti="-2,2,2,2;-2,-2,2,-2" xmin=-3 xmax=3 ymin=-3 ymax=3 legenda="y = x^3 - 3x" titolo="In $[-2, 2]$ la funzione $x^3 - 3x$ ha massimo $2$, assunto in $x = -1$ e in $x = 2$, e minimo $-2$, assunto in $x = -2$ e in $x = 1$"}
 
@@ -143,7 +143,7 @@ Sia $f$ una funzione continua in un intervallo chiuso e limitato $[a, b]$, con $
 
 Nel grafico il punto $\big( a, f(a) \big)$ e il punto $\big( b, f(b) \big)$ stanno da parti opposte rispetto all'asse $x$, e la curva che li unisce non ha interruzioni, quindi attraversa l'asse $x$. Il teorema serve a dimostrare che un'equazione $f(x) = 0$ ha una soluzione anche quando non si sa risolverla. Per esempio $f(x) = x^3 - x - 1$ è un polinomio, quindi è continua in $[1, 2]$, e $f(1) = -1 < 0$, $f(2) = 5 > 0$. Perciò l'equazione $x^3 - x - 1 = 0$ ha una soluzione tra $1$ e $2$, che vale circa $1{,}32$. La dimostrazione si studia all'università.
 
-::grafico{f="x^3-x-1" punti="1,-1,pieno;2,5,pieno;1.3247,0,vuoto" segmenti="1,0,1,-1;2,0,2,5" xmin=-1 xmax=3 ymin=-3 ymax=6 legenda="y = x^3 - x - 1" titolo="La funzione $x^3 - x - 1$ è negativa in $1$ e positiva in $2$, quindi si annulla in un punto $c$ di $(1, 2)$, con $c \approx 1{,}32$"}
+::grafico{f="x^3-x-1" punti="1,-1,pieno;2,5,pieno;1.3247,0,pieno" segmenti="1,0,1,-1;2,0,2,5" xmin=-1 xmax=3 ymin=-3 ymax=6 legenda="y = x^3 - x - 1" titolo="La funzione $x^3 - x - 1$ è negativa in $1$ e positiva in $2$, quindi si annulla in un punto $c$ di $(1, 2)$, con $c \approx 1{,}32$"}
 
 :::
 
@@ -158,7 +158,7 @@ Il teorema di esistenza degli zeri garantisce *almeno* uno zero. Se inoltre $f$ 
 :::teorema{#teorema-valori-intermedi titolo="Teorema dei valori intermedi"}
 Sia $f$ una funzione continua in un intervallo chiuso e limitato $[a, b]$, con minimo $m$ e massimo $M$. Allora $f$ assume tutti i valori compresi tra $m$ e $M$, cioè per ogni $y_0$ con $m \leq y_0 \leq M$ esiste almeno un punto $c$ di $[a, b]$ tale che $f(c) = y_0$.
 
-Il teorema segue dal teorema di esistenza degli zeri applicato alla funzione $f(x) - y_0$. Per esempio $f(x) = x^2 + x$ è crescente in $[0, 2]$, quindi ha minimo $f(0) = 0$ e massimo $f(2) = 6$. Il valore $3$ è compreso tra $0$ e $6$, perciò esiste $c$ in $(0, 2)$ con $c^2 + c = 3$. Risolvendo l'equazione si trova $c = \dfrac{-1 + \sqrt{13}}{2} \approx 1{,}30$.
+Se $y_0$ è un estremo tra $m$ e $M$, esiste già un punto in cui $f$ assume quel valore. Per $m<y_0<M$, si prende l’intervallo con estremi nei punti in cui $f$ assume $m$ e $M$. Agli estremi la funzione continua $f(x)-y_0$ ha segni opposti, quindi il **teorema di esistenza degli zeri** garantisce un punto in cui $f(x)=y_0$. Per esempio $f(x) = x^2 + x$ è crescente in $[0, 2]$, quindi ha minimo $f(0) = 0$ e massimo $f(2) = 6$. Il valore $3$ è compreso tra $0$ e $6$, perciò esiste $c$ in $(0, 2)$ con $c^2 + c = 3$. Risolvendo l'equazione si trova $c = \dfrac{-1 + \sqrt{13}}{2} \approx 1{,}30$.
 
 ::grafico{f="x^2+x+0*sqrt(x*(2-x))" punti="0,0,pieno;2,6,pieno;1.3028,3,pieno" segmenti="0,3,1.3028,3;1.3028,0,1.3028,3" xmin=-1 xmax=3 ymin=-1 ymax=7 legenda="y = x^2 + x" titolo="In $[0, 2]$ la funzione $x^2 + x$ assume tutti i valori tra $0$ e $6$; il valore $3$ è assunto in $c = \dfrac{-1 + \sqrt{13}}{2}$"}
 
@@ -177,26 +177,31 @@ Il **metodo di bisezione** è un procedimento per approssimare uno zero di una f
 2. se $f(m) = 0$, lo zero è $m$;
 3. altrimenti si sceglie la metà, $[a, m]$ oppure $[m, b]$, ai cui estremi $f$ ha segno opposto, e si ripete il procedimento in questa metà.
 
-A ogni passo l'intervallo che contiene lo zero si dimezza. Dopo $n$ passi la sua ampiezza è
+Se il punto medio è uno zero, il procedimento termina con il valore esatto. Altrimenti, a ogni passo l’intervallo che contiene uno zero si dimezza. Dopo $n$ dimezzamenti la sua ampiezza è
 $$
-\frac{b - a}{2^n} ,
+\frac{b-a}{2^n}.
 $$
-quindi ogni punto dell'intervallo approssima lo zero con un errore minore di questo numero. Il numero di passi necessario per un errore minore di un valore fissato si trova risolvendo la disequazione $\dfrac{b - a}{2^n} < \text{errore}$.
+
+Sia $m_n$ il punto medio dell’intervallo ottenuto dopo $n$ dimezzamenti e sia $c$ uno zero al suo interno. La distanza $|m_n-c|$ è al più metà dell’ampiezza, quindi
+$$
+|m_n-c|\leq\frac{b-a}{2^{n+1}} .
+$$
+Per garantire un’ampiezza inferiore a una tolleranza si usa $\dfrac{b-a}{2^n}$. Per garantire l’errore del punto medio si usa invece $\dfrac{b-a}{2^{n+1}}$.
 :::
 
 :::esempio{titolo="Approssimazione di $\sqrt{2}$"}
-Il numero $\sqrt{2}$ è lo zero positivo di $f(x) = x^2 - 2$. Poiché $f(1) = -1 < 0$ e $f(2) = 2 > 0$, lo zero sta in $(1, 2)$. Nella tabella ogni riga riporta l'intervallo, il punto medio e il segno di $f$ nel punto medio.
+Il numero $\sqrt{2}$ è lo zero positivo di $f(x) = x^2 - 2$. Poiché $f(1) = -1 < 0$ e $f(2) = 2 > 0$, lo zero sta in $(1, 2)$. Si parte da $[1,2]$. Ogni riga riporta il punto medio, il valore di $f$ nel punto medio e l’intervallo conservato.
 
-| intervallo | $m$ | $f(m)$ | nuovo intervallo |
-| --- | --- | --- | --- |
-| $[1, 2]$ | $1{,}5$ | $0{,}25 > 0$ | $[1;\ 1{,}5]$ |
-| $[1;\ 1{,}5]$ | $1{,}25$ | $-0{,}4375 < 0$ | $[1{,}25;\ 1{,}5]$ |
-| $[1{,}25;\ 1{,}5]$ | $1{,}375$ | $-0{,}109\ldots < 0$ | $[1{,}375;\ 1{,}5]$ |
-| $[1{,}375;\ 1{,}5]$ | $1{,}4375$ | $0{,}066\ldots > 0$ | $[1{,}375;\ 1{,}4375]$ |
+| $m$ | $f(m)$ | Intervallo conservato |
+| --- | --- | --- |
+| $1{,}5$ | $0{,}25 > 0$ | $[1;\ 1{,}5]$ |
+| $1{,}25$ | $-0{,}4375 < 0$ | $[1{,}25;\ 1{,}5]$ |
+| $1{,}375$ | $-\dfrac{7}{64}$ | $[1{,}375;\ 1{,}5]$ |
+| $1{,}4375$ | $\dfrac{17}{256}$ | $[1{,}375;\ 1{,}4375]$ |
 
-Dopo quattro passi lo zero sta in un intervallo di ampiezza $\dfrac{1}{2^4} = \dfrac{1}{16} = 0{,}0625$, e infatti $\sqrt{2} = 1{,}414\ldots$ appartiene a $[1{,}375;\ 1{,}4375]$. Per avere un errore minore di $0{,}001$ serve $2^n > 1000$, cioè $n \geq 10$, perché $2^{10} = 1024$.
+Dopo quattro passi lo zero sta in un intervallo di ampiezza $\dfrac{1}{2^4} = \dfrac{1}{16} = 0{,}0625$, e infatti $\sqrt{2} = 1{,}414\ldots$ appartiene a $[1{,}375;\ 1{,}4375]$. Il punto medio $1{,}40625$ dista da $\sqrt{2}$ meno di $0{,}03125$. Per ottenere un intervallo di ampiezza minore di $0{,}001$ servono $10$ passi, perché $2^9<1000<2^{10}$. Se si richiede soltanto che il punto medio abbia un errore minore di $0{,}001$, il limite sull’errore lo garantisce già dopo $9$ passi.
 
-::grafico{f="x^2-2" punti="1,-1,pieno;2,2,pieno;1.5,0.25,pieno;1.25,-0.4375,pieno;1.375,-0.1094,pieno;1.4142,0,vuoto" segmenti="1.5,0,1.5,0.25;1.25,0,1.25,-0.4375;1.375,0,1.375,-0.1094" xmin=0 xmax=2 ymin=-2 ymax=2 legenda="y = x^2 - 2" titolo="I punti medi $1{,}5$, $1{,}25$ e $1{,}375$ restringono l'intervallo che contiene lo zero $\sqrt{2}$ di $x^2 - 2$"}
+::grafico{f="x^2-2" punti="1,-1,pieno;2,2,pieno;1.5,0.25,pieno;1.25,-0.4375,pieno;1.375,-0.109375,pieno;1.4142,0,pieno" segmenti="1.5,0,1.5,0.25;1.25,0,1.25,-0.4375;1.375,0,1.375,-0.109375" xmin=0 xmax=2 ymin=-2 ymax=2 legenda="y = x^2 - 2" titolo="I punti medi $1{,}5$, $1{,}25$ e $1{,}375$ restringono l'intervallo che contiene lo zero $\sqrt{2}$ di $x^2 - 2$"}
 
 :::
 
@@ -209,14 +214,18 @@ $$
 \qquad
 \lim_{x \to x_0^+} f(x)
 $$
-è $+\infty$ oppure $-\infty$. Gli asintoti verticali si cercano nei punti esclusi dal dominio e negli estremi del dominio che non gli appartengono. Per $f(x) = \dfrac{3}{x - 2}$ il punto escluso è $2$. Per $x \to 2^+$ il denominatore tende a $0$ con valori positivi, quindi $f(x) \to +\infty$; per $x \to 2^-$ il denominatore è negativo, quindi $f(x) \to -\infty$. Perciò la retta $x = 2$ è un asintoto verticale.
+è $+\infty$ oppure $-\infty$. Il limite si calcola dai lati da cui il dominio arriva a $x_0$. Tra i punti da controllare ci sono le frontiere del dominio e i raccordi tra espressioni, anche quando in $x_0$ è assegnato un valore. Per $f(x) = \dfrac{3}{x - 2}$ il punto escluso è $2$. Per $x \to 2^+$ il denominatore tende a $0$ con valori positivi, quindi $f(x) \to +\infty$; per $x \to 2^-$ il denominatore è negativo, quindi $f(x) \to -\infty$. Perciò la retta $x = 2$ è un asintoto verticale.
 
 ::grafico{f="3/(x-2)" asintoti="x=2" xmin=-4 xmax=8 ymin=-6 ymax=6 legenda="y = \dfrac{3}{x - 2}" titolo="Il grafico di $\dfrac{3}{x - 2}$ si avvicina alla retta $x = 2$, verso l'alto da destra e verso il basso da sinistra"}
 
 :::
 
 :::osservazione{#asintoto-verticale-un-lato titolo="Asintoti verticali da una sola parte"}
-Un asintoto verticale può esserci da una parte sola. La funzione $\ln x$ è definita solo per $x > 0$, e $\displaystyle\lim_{x \to 0^+} \ln x = -\infty$, quindi l'asse $y$ è un asintoto verticale, a destra di $0$. La funzione $e^{\frac{1}{x}}$ tende a $+\infty$ per $x \to 0^+$ e a $0$ per $x \to 0^-$, quindi la retta $x = 0$ è un asintoto verticale soltanto a destra.
+Un asintoto verticale può esserci da una parte sola. La funzione $\ln x$ è definita solo per $x > 0$, e $\displaystyle\lim_{x \to 0^+} \ln x = -\infty$, quindi l'asse $y$ è un asintoto verticale, a destra di $0$. Per $e^{\dfrac{1}{x}}$ si ottiene invece un limite da ciascun lato. Da destra vale $+\infty$ e da sinistra vale $0$, quindi l’asintoto verticale è ancora solo da destra.
+
+Sia ora $g(x)=\dfrac{1}{x^2}$ per $x<0$ e $g(x)=x+1$ per $x\geq0$. Il limite sinistro è $+\infty$ e il limite destro coincide con $g(0)=1$. La retta $x=0$ è un asintoto verticale da sinistra anche se il grafico contiene il punto $(0,1)$.
+
+::grafico{f="(1-sign(x))/(2*x^2)+(x+1)*(1+sign(x))/2" punti="0,1,pieno" asintoti="x=0" xmin=-4 xmax=4 ymin=-1 ymax=7 legenda="y=g(x)" titolo="Il ramo sinistro diverge lungo $x=0$, mentre il ramo destro parte dal punto $(0,1)$"}
 :::
 
 :::attenzione
@@ -264,26 +273,30 @@ m = \lim_{x \to +\infty} \frac{f(x)}{x} ,
 \qquad
 q = \lim_{x \to +\infty} \big( f(x) - mx \big) .
 $$
-Lo stesso vale per $x \to -\infty$. La formula di $m$ si ricava dalla definizione. Se $f(x) - mx - q$ tende a $0$, dividendo per $x$ anche $\dfrac{f(x)}{x} - m - \dfrac{q}{x}$ tende a $0$, e poiché $\dfrac{q}{x} \to 0$ si ottiene $\dfrac{f(x)}{x} \to m$. La formula di $q$ segue dalla definizione, perché dire che $f(x) - mx - q$ tende a $0$ equivale a dire che $f(x) - mx$ tende a $q$.
+Lo stesso vale per $x \to -\infty$. Il limite del rapporto dà il coefficiente angolare $m$, mentre il limite della differenza dà l’intercetta $q$. La formula di $m$ si ricava dalla definizione. Se $f(x) - mx - q$ tende a $0$, dividendo per $x$ anche $\dfrac{f(x)}{x} - m - \dfrac{q}{x}$ tende a $0$, e poiché $\dfrac{q}{x} \to 0$ si ottiene $\dfrac{f(x)}{x} \to m$. La formula di $q$ segue dalla definizione, perché dire che $f(x) - mx - q$ tende a $0$ equivale a dire che $f(x) - mx$ tende a $q$.
 
-Le formule servono quando non si vede l'asintoto a occhio. Per $f(x) = \dfrac{2x^2 - 3x}{x + 1}$ si ha
+I due limiti determinano prima la pendenza e poi l’intercetta della retta. Per $f(x) = \dfrac{2x^2 - 3x}{x + 1}$ si ha
 $$
-m = \lim_{x \to \pm\infty} \frac{2x^2 - 3x}{x\,(x + 1)} = 2 ,
-\qquad
-q = \lim_{x \to \pm\infty} \left( \frac{2x^2 - 3x}{x + 1} - 2x \right) = \lim_{x \to \pm\infty} \frac{-5x}{x + 1} = -5 ,
+m = \lim_{x \to \pm\infty} \frac{2x^2 - 3x}{x\,(x + 1)} = 2 .
 $$
-quindi la retta $y = 2x - 5$ è un asintoto obliquo, a destra e a sinistra.
+$$
+\begin{aligned}
+q &= \lim_{x \to \pm\infty} \left( \frac{2x^2 - 3x}{x + 1} - 2x \right) \\[6pt]
+  &= \lim_{x \to \pm\infty} \frac{-5x}{x + 1} = -5 .
+\end{aligned}
+$$
+Quindi la retta $y = 2x - 5$ è un asintoto obliquo, a destra e a sinistra.
 :::
 
 :::osservazione{#asintoti-funzioni-razionali titolo="Asintoti delle funzioni razionali fratte"}
-Sia $f(x) = \dfrac{N(x)}{D(x)}$, con $N$ e $D$ polinomi senza zeri comuni. Gli asintoti orizzontali e obliqui dipendono dai gradi dei due polinomi:
+Sia $f(x) = \dfrac{N(x)}{D(x)}$, con $D$ polinomio diverso dal polinomio nullo. Se $N$ è il polinomio nullo, la funzione vale $0$ sul suo dominio e ha asintoto orizzontale $y=0$ a entrambi gli infiniti. Negli altri casi, per studiare gli asintoti si usa la frazione ridotta, cioè si semplificano i fattori comuni. Gli zeri del denominatore originale rimangono esclusi dal dominio. Gli asintoti orizzontali e obliqui dipendono dai gradi dei due polinomi della frazione ridotta.
 
 - se il grado di $N$ è minore del grado di $D$, l'asintoto orizzontale è $y = 0$;
 - se i gradi sono uguali, l'asintoto orizzontale è $y = \dfrac{a}{b}$, dove $a$ e $b$ sono i coefficienti dei termini di grado massimo di $N$ e di $D$;
 - se il grado di $N$ supera di $1$ il grado di $D$, c'è un asintoto obliquo, e si trova con la divisione tra polinomi;
 - se il grado di $N$ supera di $2$ o più il grado di $D$, non ci sono asintoti orizzontali né obliqui.
 
-Gli asintoti verticali sono le rette $x = x_0$ con $x_0$ zero del denominatore. Nel caso dell'asintoto obliquo, la divisione di $N$ per $D$ dà un quoziente $Q(x) = mx + q$ e un resto $R(x)$, e si ha $f(x) = mx + q + \dfrac{R(x)}{D(x)}$. Il resto ha grado minore di $D$, quindi l'ultima frazione tende a $0$. Per $\dfrac{2x^2 - 3x}{x + 1}$ la divisione dà $2x^2 - 3x = (x + 1)(2x - 5) + 5$, e si ritrova l'asintoto $y = 2x - 5$.
+Gli asintoti verticali sono le rette $x=x_0$ per gli zeri reali del denominatore ridotto. Se un fattore si cancella completamente dal denominatore, nel punto escluso il limite è finito e la discontinuità è eliminabile. Nel caso dell'asintoto obliquo, la divisione di $N$ per $D$ dà un quoziente $Q(x) = mx + q$ e un resto $R(x)$, e si ha $f(x) = mx + q + \dfrac{R(x)}{D(x)}$. Il resto ha grado minore di $D$, quindi l'ultima frazione tende a $0$. Per $\dfrac{2x^2 - 3x}{x + 1}$ la divisione dà $2x^2 - 3x = (x + 1)(2x - 5) + 5$, e si ritrova l'asintoto $y = 2x - 5$.
 :::
 
 :::attenzione
@@ -293,7 +306,12 @@ m = \lim_{x \to +\infty} \left( 1 + \frac{\ln x}{x} \right) = 1 ,
 \qquad
 \lim_{x \to +\infty} \big( f(x) - x \big) = \lim_{x \to +\infty} \ln x = +\infty ,
 $$
-quindi il grafico *non* ha asintoto obliquo. Inoltre l'asintoto destro e quello sinistro possono essere diversi: per $\sqrt{x^2 + 1}$ si trovano $y = x$ a destra e $y = -x$ a sinistra, perché $\sqrt{x^2 + 1}$ è vicino a $|x|$ quando $|x|$ è grande.
+quindi il grafico *non* ha asintoto obliquo. Inoltre l'asintoto destro e quello sinistro possono essere diversi: per $\sqrt{x^2 + 1}$ si trovano $y = x$ a destra e $y = -x$ a sinistra, perché
+$$
+\sqrt{x^2+1}-|x|=\frac{1}{\sqrt{x^2+1}+|x|}\longrightarrow 0
+\qquad (x\to\pm\infty).
+$$
+A destra $|x|=x$ e a sinistra $|x|=-x$.
 :::
 
 ## Grafico probabile di una funzione
@@ -302,12 +320,12 @@ quindi il grafico *non* ha asintoto obliquo. Inoltre l'asintoto destro e quello 
 Il **grafico probabile** di una funzione è un disegno approssimato del grafico, ottenuto senza le derivate. Si ricavano nell'ordine:
 
 1. il dominio $D$;
-2. le eventuali simmetrie: $f$ è pari se $f(-x) = f(x)$, dispari se $f(-x) = -f(x)$;
+2. le eventuali simmetrie. Se il dominio è simmetrico rispetto a $0$, si confrontano $f(-x)$ e $f(x)$ per verificare se $f$ è pari o dispari;
 3. le intersezioni con gli assi;
 4. il segno di $f$, cioè dove il grafico sta sopra e dove sta sotto l'asse $x$;
 5. i limiti agli estremi del dominio e nei punti esclusi, quindi gli asintoti e i punti di discontinuità.
 
-Il disegno si traccia con questi elementi, collegando i tratti in modo coerente con il segno e con i limiti. I massimi, i minimi e la concavità si trovano con le derivate, come si vede nell'argomento su massimi, minimi, flessi e studio di funzione; il grafico probabile può quindi essere impreciso su questi aspetti.
+Il disegno collega i tratti in modo coerente con il segno e i limiti. Per determinare massimi, minimi e concavità serve un’analisi ulteriore, descritta nell’argomento su massimi, minimi, flessi e studio di funzione.
 :::
 
 :::esempio{titolo="Grafico probabile di una funzione razionale fratta"}
