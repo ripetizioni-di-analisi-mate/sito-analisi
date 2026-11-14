@@ -12,7 +12,6 @@ import FreeCourseAccess from '../components/FreeCourseAccess.astro';
 import NotaAnalisi3 from '../components/NotaAnalisi3.astro';
 import NotaSemestreFiltro from '../components/NotaSemestreFiltro.astro';
 import BasiSemestreFiltro from '../components/BasiSemestreFiltro.astro';
-import OrientamentoMateria from '../components/OrientamentoMateria.astro';
 import ProgrammaMateria from '../components/ProgrammaMateria.astro';
 import { STUDIO_GUIDATO } from '../data/studio-guidato.mjs';
 import NotaSuperiori from '../components/NotaSuperiori.astro';
@@ -105,10 +104,9 @@ const giaVideo = video ? [video.slug, ...VIDEOCORSI.filter((p) => p.pacchettoDi?
   <p class:list={['sommario', { 'vista-classica': nuova }]}>{m.descrizione}</p>
   {materia === 'analisi-3' && lingua === 'it' && <NotaAnalisi3 />}
   {confTolc && lingua === 'it' && <NotaTolcI materia={materia} capitoli={m.argomenti.length} domande={domandeMateria} schede={svolti.filter((v) => v.id.startsWith(`${materia}/`)).length} />}
-  {gruppo === 'Superiori' && <NotaSuperiori lingua={lingua} />}
+  {gruppo === 'Superiori' && <div class:list={{ 'vista-classica': nuova }}><NotaSuperiori lingua={lingua} /></div>}
   {semestreFiltro && materia !== 'matematica-semestre-filtro' && <NotaSemestreFiltro lingua={lingua} materia={materia} />}
   {materia.endsWith('-semestre-filtro') && <BasiSemestreFiltro lingua={lingua} materia={materia} />}
-  {lingua === 'it' && !guidata && <OrientamentoMateria materia={materia} />}
   {nuova && <ProgrammaMateria materia={materia} titolo={m.titolo} prezzo={m.prezzo} studioGuidato={guidata} incluso={incluso}
     anteprima={link(lingua, '/' + materia + '/' + m.argomenti[0].slug + '/teoria')} sblocca={link(lingua, '/' + m.slug + '/sblocca')}
     compatibilita={MATERIE_COMPATIBILITA.includes(materia) ? '/compatibilita?materia=' + materia : undefined}

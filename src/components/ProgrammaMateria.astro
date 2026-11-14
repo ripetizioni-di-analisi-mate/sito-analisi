@@ -49,26 +49,23 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
         : <span class="pm-btn pm-btn-off">In preparazione</span>}
     </div>
     <ol class="pm-sg2">
-      <li><b>1</b>Rispondi alle domande</li>
+      <li><b>1</b><span class="pm-lungo">Rispondi alle domande</span><span class="pm-corto">Domande</span></li>
       <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-      <li><b>2</b>Trovi le tue lacune e la loro causa</li>
+      <li><b>2</b><span class="pm-lungo">Trovi le tue lacune e la loro causa</span><span class="pm-corto">Lacune</span></li>
       <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-      <li><b>3</b>Segui il percorso</li>
+      <li><b>3</b><span class="pm-lungo">Segui il percorso</span><span class="pm-corto">Percorso</span></li>
     </ol>
   </section>
 
-  {prezzo && (
-    <div class="pm-az" data-materia={materia}>
-      <div class="stato-bloccata">
-        <span class="pm-link">
-          <a href={anteprima}><span set:html={I.occhio} />Anteprima gratuita</a>
-          {compatibilita && <a href={compatibilita}><span set:html={I.foglio} />Copre il tuo esame?</a>}
-        </span>
-        <a class="pm-oro" href={sblocca} data-pm-apri><span set:html={I.lucchetto} />Sblocca tutto<b>{prezzo} €</b></a>
-      </div>
-      <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>
+  <div class="pm-az" data-materia={prezzo ? materia : undefined}>
+    <div class="pm-link">
+      {prezzo && <a class="stato-bloccata" href={anteprima}><span set:html={I.occhio} />Prova gratis</a>}
+      {prezzo && compatibilita && <a class="stato-bloccata" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">Copre il tuo esame?</span><span class="pm-corto">Copre l’esame?</span></a>}
+      {prezzo && <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>}
+      <span class="pm-esame" data-pm-esame></span>
     </div>
-  )}
+    {prezzo && <a class="pm-oro stato-bloccata" href={sblocca} data-pm-apri><span set:html={I.lucchetto} />Sblocca tutto<b>{prezzo} €</b></a>}
+  </div>
 
   <h2 class="pm-ph">Programma</h2>
   <ol class="pm-perc">
@@ -82,9 +79,9 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
         {a.pronto ? (
           <div class="pm-voci">
             <em class="pm-stato" hidden></em>
-            {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn">Esercizi svolti</span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
-            {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn">Esercizi da fare</span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
-            {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn">Domande a tempo</span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.svolti > 0 && <a class="pm-v" href={href(a.slug, 'esercizi-svolti')} data-voce="schede"><span class="pm-vr"><span set:html={I.svolti} /><span class="pm-vn"><span class="pm-lungo">Esercizi svolti</span><span class="pm-corto">Svolti</span></span><span class="pm-vc">{a.svolti}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.dafare > 0 && <a class="pm-v" href={href(a.slug, 'esercizi')} data-voce="esercizi"><span class="pm-vr"><span set:html={I.dafare} /><span class="pm-vn"><span class="pm-lungo">Esercizi da fare</span><span class="pm-corto">Da fare</span></span><span class="pm-vc">{a.dafare}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
+            {a.domande > 0 && <a class="pm-v" href={href(a.slug, 'domande')} data-voce="domande"><span class="pm-vr"><span set:html={I.domande} /><span class="pm-vn"><span class="pm-lungo">Domande a tempo</span><span class="pm-corto">Domande</span></span><span class="pm-vc">{a.domande}</span><span set:html={I.avanti} /></span><span class="pm-barra"><i></i></span></a>}
           </div>
         ) : <em class="pm-stato pm-stato-prep">In preparazione</em>}
       </li>
@@ -125,8 +122,12 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
 
 <style is:global>
   html.gm-anteprima .vista-classica { display: none !important; }
+  /* Sopra il titolo restano solo la freccia e «Materie»: l'etichetta della materia e l'ultima voce del percorso ripetevano il titolo. */
+  html.gm-anteprima .pagina:has([data-programma-materia]) > .contesto-materia,
+  html.gm-anteprima .pagina:has([data-programma-materia]) > .percorso li[aria-current] { display: none; }
   .pm { font-family: var(--ui); margin-top: 1.2rem; --pm-oro: #d6c28e; --pm-oro-testo: #2b2210; --pm-sabbia: #f4efe1; --pm-sabbia-bordo: #e7dec8; }
   .pm svg { width: 1em; height: 1em; flex: none; }
+  .pm-corto { display: none; }
   .pm a > span:has(> svg), .pm li > span:has(> svg), .pm button > span:has(> svg) { display: inline-flex; }
 
   .pm-sg { background: #fff; border: 1px solid var(--pm-sabbia-bordo); border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(31,42,40,.04), 0 10px 28px rgba(31,42,40,.05); }
@@ -143,14 +144,19 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-sg2 b { font: 700 1.05rem var(--titoli); color: var(--azione); }
   .pm-sg2 .pm-fr { align-self: center; color: #a8966a; font-size: 1.05rem; }
 
-  .pm-az { margin: .55rem 0 0; font-size: .95rem; }
-  .pm-az .stato-bloccata { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .3rem 1.4rem; }
-  .pm-link { display: flex; flex-wrap: wrap; gap: 0 1.35rem; }
-  .pm-link a { display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-az { display: flex; align-items: center; justify-content: space-between; gap: .3rem .6rem; margin: .55rem 0 0; font-size: .9rem; }
+  .pm-link { display: flex; flex-wrap: wrap; align-items: center; gap: 0 .9rem; flex: 1 1 0; min-width: 0; }
+  .pm-az .pm-oro { flex: none; height: 2.6rem; gap: .5rem; padding-left: .9rem; }
+  .pm-az .pm-oro b { height: 1.9rem; padding: 0 .7rem; }
+  .pm-link a { align-items: center; gap: .4rem; white-space: nowrap; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-link a.stato-bloccata, .pm-az .pm-oro.stato-bloccata { display: inline-flex; }
   .pm-link a:hover { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
-  .pm-link svg { color: var(--azione); font-size: 1.05rem; }
-  .pm-az .stato-sbloccata { display: none; align-items: center; gap: .4rem; margin-top: .5rem; padding: .25rem .75rem .25rem .3rem; border-radius: 999px; background: color-mix(in srgb, var(--verde) 12%, transparent); color: var(--verde); font-size: .88rem; font-weight: 600; }
+  .pm-link a svg { color: var(--azione); font-size: 1.05rem; }
+  .pm-az .stato-sbloccata { display: none; align-items: center; gap: .4rem; padding: .25rem .75rem .25rem .3rem; border-radius: 999px; background: color-mix(in srgb, var(--verde) 12%, transparent); color: var(--verde); font-size: .88rem; font-weight: 600; }
   .pm-az .stato-sbloccata svg { width: 1.1rem; height: 1.1rem; }
+  .pm-esame { display: contents; }
+  .pm-esame .esame-materia { margin: 0; min-height: 2.75rem; font-size: .9rem; }
+  .pm-esame .esame-titolo { font-weight: 400; color: var(--inchiostro); }
   .pm-oro { display: inline-flex; align-items: center; gap: .6rem; height: 2.85rem; padding: 0 .4rem 0 1.1rem; border-radius: 999px; color: var(--pm-oro-testo); font-size: .95rem; font-weight: 600; text-decoration: none; white-space: nowrap;
     background: var(--pm-oro) linear-gradient(110deg, var(--pm-oro) 38%, #f6edcf 50%, var(--pm-oro) 62%) 160% 0 / 250% 100% no-repeat; animation: pm-luce 3.2s ease-in-out infinite;
     box-shadow: 0 4px 12px rgba(170,145,80,.18), inset 0 1px 0 rgba(255,255,255,.45); }
@@ -159,30 +165,29 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-oro-largo { justify-content: center; width: 100%; height: 3.2rem; padding: 0 1rem; font-size: 1.05rem; box-sizing: border-box; }
   @keyframes pm-luce { 0% { background-position: 160% 0; } 55%, 100% { background-position: -60% 0; } }
 
-  .pm .esame-materia { margin: .9rem 0 0; }
   .pm-ph { font: 700 1.6rem var(--titoli); margin: 1.9rem 0 .5rem; }
   .pm-perc { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid var(--riga); }
-  .pm-perc > li { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr) 13.5rem; gap: .2rem 1.4rem; padding: 1.3rem 0; border-top: 1px solid var(--riga); }
+  .pm-perc > li { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr) 13.5rem; gap: .2rem 1.4rem; padding: 1rem 0; border-top: 1px solid var(--riga); }
   .pm-num { font: 700 1.3rem var(--titoli); color: #7d765c; font-variant-numeric: tabular-nums; }
   .pm-num-ic { color: var(--azione); padding-top: .15rem; }
   .pm-perc h3 { font: 700 1.25rem/1.3 var(--titoli); margin: 0; }
   .pm-perc h3 a { color: var(--inchiostro); text-decoration: none; }
   .pm-perc h3 a > span { margin-left: .3rem; vertical-align: -.12em; color: var(--azione); font-size: .95rem; }
   .pm-perc h3 a:hover { color: var(--azione); }
-  .pm-cp p { margin: .4rem 0 0; font: 400 .98rem/1.5 var(--testo); color: var(--inchiostro-2); }
+  .pm-cp p { margin: .3rem 0 0; font: 400 .95rem/1.45 var(--testo); color: var(--inchiostro-2); }
   .pm-prep h3 { color: var(--inchiostro-2); }
-  .pm-voci { display: flex; flex-direction: column; gap: .1rem; }
-  .pm-stato { font: 600 .8rem var(--ui); font-style: normal; color: var(--azione); margin-bottom: .2rem; }
+  .pm-voci { display: flex; flex-direction: column; gap: .5rem; padding-top: .3rem; }
+  .pm-stato { font: 600 .78rem/1 var(--ui); font-style: normal; color: var(--azione); }
   .pm-stato.pm-zero, .pm-stato-prep { color: var(--inchiostro-2); font-weight: 400; }
   .pm-stato[hidden] { display: none; }
-  .pm-v { display: flex; flex-direction: column; justify-content: center; gap: .3rem; min-height: 2.75rem; color: var(--inchiostro); text-decoration: none; }
-  .pm-vr { display: flex; align-items: center; gap: .4rem; font-size: .88rem; }
+  .pm-v { display: flex; flex-direction: column; gap: .22rem; color: var(--inchiostro); text-decoration: none; }
+  .pm-vr { display: flex; align-items: center; gap: .4rem; font-size: .84rem; line-height: 1.2; }
   .pm-vr > span:first-child { color: var(--azione); font-size: .95rem; }
   .pm-vr > span:last-child { color: var(--inchiostro-2); font-size: .8rem; }
   .pm-vn { flex: 1; }
   .pm-vc { color: var(--inchiostro-2); font-size: .82rem; font-variant-numeric: tabular-nums; }
   .pm-v:hover .pm-vn { color: var(--azione); text-decoration: underline; text-underline-offset: 3px; }
-  .pm-barra { display: block; height: 4px; border-radius: 2px; background: var(--riga); overflow: hidden; }
+  .pm-barra { display: block; height: 3px; border-radius: 2px; background: var(--riga); overflow: hidden; }
   .pm-barra i { display: block; width: 0; height: 100%; border-radius: 2px; background: var(--azione); transition: width .4s ease-out; }
   .pm-v.solo-collegati[hidden] { display: none; }
   html.collegato .pm-v.solo-collegati { display: flex; }
@@ -210,13 +215,40 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-dlg-link a:hover > span:nth-child(2) { color: var(--azione); }
 
   @media (max-width: 640px) {
-    .pm-sg1 { padding: 1rem; } .pm-sg2 { padding: .75rem 1rem; }
-    .pm-btn { width: 100%; justify-content: center; box-sizing: border-box; }
-    .pm-az .stato-bloccata { flex-direction: column-reverse; align-items: stretch; gap: .2rem; margin-top: .9rem; }
-    .pm-az .pm-oro { justify-content: center; }
-    .pm-link { justify-content: center; }
-    .pm-perc > li { grid-template-columns: 2rem minmax(0, 1fr); gap: .5rem .8rem; }
-    .pm-voci, .pm-perc > li > .pm-stato { grid-column: 2; }
+    /* Telefono: stessi blocchi del computer in forma ridotta (richiesta di Carmine del 14/11). */
+    .pm-lungo { display: none; } .pm-corto { display: inline; }
+    .pm-sg1 { flex-wrap: nowrap; gap: .7rem; padding: .8rem .9rem; }
+    .pm-sg-ic { width: 2.2rem; height: 2.2rem; font-size: 1.1rem; }
+    .pm-sg-t { flex: 1 1 auto; min-width: 0; } .pm-sg-t h2 { font-size: 1.1rem; } .pm-sg-t p { display: none; }
+    .pm-btn { height: 2.4rem; padding: 0 1rem; font-size: .9rem; }
+    .pm-sg2 { flex-wrap: nowrap; justify-content: space-between; gap: .3rem; padding: .55rem .9rem; font-size: .82rem; }
+    .pm-sg2 li { gap: .35rem; } .pm-sg2 b { font-size: .95rem; }
+    .pm-az { flex-direction: column; align-items: stretch; gap: .1rem; margin-top: .3rem; font-size: .82rem; }
+    .pm-link { flex: none; flex-wrap: nowrap; justify-content: space-between; gap: 0 .5rem; }
+    .pm-link a { min-height: 2.5rem; gap: .3rem; }
+    .pm-az .pm-oro { justify-content: center; height: 2.5rem; }
+    .pm-esame .esame-materia { font-size: .82rem; min-height: 2.5rem; flex-wrap: nowrap; gap: .3rem; }
+    .pm-esame .esame-materia:not(.con-data) .esame-titolo, .pm-esame .esame-testo { display: none !important; }
+    .pm-esame .esame-apri { font-size: 0; margin: 0; text-decoration: none; color: var(--inchiostro); }
+    .pm-esame .esame-apri::after { content: 'Data d’esame'; font-size: .82rem; }
+    .pm-esame .esame-modifica { display: none; }
+    .pm-ph { font-size: 1.35rem; margin: 1.2rem 0 .4rem; }
+    .pm-perc > li { position: relative; grid-template-columns: 1.8rem minmax(0, 1fr); gap: .45rem .6rem; padding: .85rem 0; }
+    .pm-num { font-size: 1.05rem; padding-top: .1rem; }
+    .pm-perc h3 { font-size: 1.08rem; padding-right: 5.2rem; }
+    .pm-cp p { font-size: .9rem; line-height: 1.4; }
+    /* Voci con il nome intero: affiancate finché ci stanno, poi a capo. */
+    .pm-voci { grid-column: 2; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.2rem, 1fr)); gap: .55rem .8rem; padding-top: .1rem; }
+    .pm-voci .pm-lungo { display: inline; } .pm-voci .pm-corto { display: none; }
+    .pm-v { min-width: 0; }
+    .pm-vr { font-size: .76rem; gap: .25rem; }
+    .pm-vr > span:last-child:has(> svg) { display: none; }
+    .pm-vn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pm-vc { font-size: .72rem; white-space: nowrap; }
+    .pm-stato { position: absolute; top: 1rem; right: 0; font-size: .72rem; }
+    .pm-perc > li > .pm-stato-prep { grid-column: auto; }
+    .pm-fine .pm-voci { grid-template-columns: 1fr; gap: .5rem; }
+    .pm-fine .pm-vr { font-size: .84rem; }
     .pm-dlg { padding: 1.3rem 1.2rem 1rem; }
   }
   @media (prefers-reduced-motion: reduce) { .pm-oro { animation: none; } .pm-barra i { transition: none; } }
@@ -232,10 +264,11 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
       dlg.querySelector('[data-pm-chiudi]')?.addEventListener('click', () => dlg.close());
       dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
     }
-    // La riga della data d'esame (Materia.astro) sta dopo la vista classica: nella pagina nuova va sopra il programma.
+    // La riga della data d'esame (Materia.astro) sta dopo la vista classica: nella pagina nuova va
+    // nella riga dell'anteprima, accanto ai link.
     const spostaEsame = () => {
       const esame = document.querySelector<HTMLElement>('.esame-materia');
-      if (!box.hidden && esame && !box.contains(esame)) box.querySelector('.pm-ph')!.before(esame);
+      if (!box.hidden && esame && !box.contains(esame)) box.querySelector('[data-pm-esame]')!.append(esame);
     };
     new MutationObserver(spostaEsame).observe(box, { attributes: true, attributeFilter: ['hidden'] });
     spostaEsame();
