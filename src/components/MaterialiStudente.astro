@@ -37,4 +37,10 @@ const regole = [
   li>div{flex:1;min-width:0}h3{font:600 1rem var(--ui);margin:0 0 .1rem}p{font-size:.82rem;color:var(--inchiostro-2);margin:0}
   li>a{font:600 .9rem var(--ui);white-space:nowrap;text-decoration:none;color:var(--azione)}
   a:hover{text-decoration:underline}a:focus-visible{outline:2px solid var(--accento);outline-offset:3px}
+  /* Tutta la riga è cliccabile (15/11): il link «Studia» si estende sull'intera riga. */
+  li{position:relative;transition:background-color .15s}
+  li>a::after{content:'';position:absolute;inset:0}
+  li:hover{background:color-mix(in srgb,var(--materia) 6%,transparent)}
+  li:hover h3{color:var(--azione)}
+  li>a:focus-visible{outline:none}li:has(>a:focus-visible){outline:2px solid var(--accento);outline-offset:2px}
 </style>
