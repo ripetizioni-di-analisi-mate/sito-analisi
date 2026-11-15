@@ -13,6 +13,9 @@ La stessa ricerca si può misurare anche con il numero di istruzioni di confront
 
 :::esempio{titolo="Due input con lo stesso numero di celle"}
 Si cerca il codice `8` da sinistra in `[8, 3, 1, 5]` e in `[3, 1, 5, 8]`, con arresto alla prima uguaglianza. Entrambi gli elenchi hanno $n=4$. Nel primo elenco basta la visita all’indice `0`. Nel secondo si leggono gli indici da `0` a `3`, quindi si contano quattro visite. La posizione del bersaglio influisce sul costo a parità di dimensione.
+
+::grafico{assi=0 uguale=1 xmin=-2.6 xmax=5.6 ymin=-0.7 ymax=3.4 poligoni="0,2 1,2 1,3 0,3;0,0 4,0 4,1 0,1" linee="0,2 4,2 4,3 0,3 0,2;1,2 1,3;2,2 2,3;3,2 3,3;0,0 4,0 4,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1" etichette="0.5,2.5,8;1.5,2.5,3;2.5,2.5,1;3.5,2.5,5;0.5,0.5,3;1.5,0.5,1;2.5,0.5,5;3.5,0.5,8;-1.3,2.5,1 visita;-1.3,0.5,4 visite;0.5,-0.4,0;1.5,-0.4,1;2.5,-0.4,2;3.5,-0.4,3" titolo="Celle visitate nella ricerca di $8$, colorate: una nel primo elenco, quattro nel secondo. Sotto le celle, gli indici."}
+
 :::
 
 :::definizione{#casi-di-costo titolo="Caso migliore, peggiore e medio"}
@@ -25,6 +28,9 @@ $$
 $$
 
 Con quattro celle, i costi possibili sono $1$, $2$, $3$ e $4$. Poiché le posizioni sono equiprobabili, il costo medio è $\dfrac{10}{4}=2{,}5$. Se la ricerca può fallire, occorre conoscere anche la probabilità di assenza per includere il costo delle ricerche fallite nella media.
+
+::grafico{xmin=-0.6 xmax=4.4 ymin=0 ymax=5 f="2.5" punti="0,1,pieno;1,2,pieno;2,3,pieno;3,4,pieno" nomi="k,V" legenda="V=\dfrac{n+1}{2}=2{,}5" titolo="Visite $V=k+1$ quando il bersaglio è all’indice $k$, con $n=4$. La retta indica il costo medio $\dfrac{n+1}{2}=2{,}5$."}
+
 :::
 
 ## Crescita del costo
@@ -43,7 +49,11 @@ Per il costo $C(n)=n$ si ha $C(2n)=2C(n)$. Per $C(n)=n^2$ si ha $C(2n)=4C(n)$. S
 :::
 
 :::attenzione
-L’ordine di crescita da solo lascia indeterminato il costo per una taglia piccola. Per esempio $C_1(n)=40n$ e $C_2(n)=n^2$ hanno costi $400$ e $100$ per $n=10$. Per $n=100$ i costi sono $4000$ e $10000$. Quando la taglia è nota e le operazioni sono confrontabili, il conteggio esplicito permette di scegliere tra i due metodi.
+L’ordine di crescita da solo lascia indeterminato il costo per una taglia piccola. Per esempio $C_1(n)=40n$ e $C_2(n)=n^2$ hanno costi $400$ e $100$ per $n=10$. Per $n=100$ i costi sono $4000$ e $10000$. Le due curve si incontrano dove $40n=n^2$, cioè per $n=40$, quindi $C_2$ è minore di $C_1$ per $0<n<40$ e maggiore per $n>40$.
+
+::grafico{f="40*x;x^2+0*sqrt(x)" xmin=-10 xmax=90 ymin=0 ymax=8000 nomi="n,C" legenda="C_1=40n;C_2=n^2" punti="40,1600,pieno;10,400;10,100" segmenti="40,0,40,1600" titolo="Costi $C_1=40n$ e $C_2=n^2$: le curve si incontrano nel punto $(40,\,1600)$."}
+
+Quando la taglia è nota e le operazioni sono confrontabili, il conteggio esplicito permette di scegliere tra i due metodi.
 :::
 
 ## Conteggio nei cicli
@@ -53,6 +63,29 @@ Per contare le esecuzioni di un’istruzione si individua il ciclo che la contie
 
 Se il numero di passi interni cambia, si somma il costo relativo a ogni valore dell’indice esterno. Per esempio, con indici da $0$ a $n-1$, una coppia $(i,j)$ con $i<j$ si può visitare fissando $i$ e facendo variare $j$ da $i+1$ a $n-1$. Per $i=0$ ci sono $n-1$ passi interni, per $i=1$ ce ne sono $n-2$ e per $i=n-1$ ce ne sono zero. Il totale è $\dfrac{n(n-1)}{2}$.
 :::
+
+::::teorema{#somma-interi titolo="Somma dei primi interi positivi"}
+Per ogni intero $n\geq 1$ vale
+
+$$
+1+2+\cdots+n=\frac{n(n+1)}{2}.
+$$
+
+La formula dà il costo medio della ricerca lineare, il numero delle coppie $i<j$ e i confronti dell’ordinamento per selezione. Per esempio $1+2+\cdots+10=\dfrac{10\cdot 11}{2}=55$.
+
+:::dimostrazione
+Si scrive la somma $S$ due volte, la seconda in ordine inverso, e si sommano i termini che occupano la stessa posizione.
+
+$$
+\begin{aligned}
+S&=1+2+\cdots+(n-1)+n\\[4pt]
+S&=n+(n-1)+\cdots+2+1
+\end{aligned}
+$$
+
+Nella posizione $k$ compaiono $k$ e $n+1-k$, la cui somma è $n+1$. Le posizioni sono $n$, quindi $2S=n(n+1)$ e perciò $S=\dfrac{n(n+1)}{2}$. Scrivendo $n-1$ al posto di $n$ si ottiene $1+2+\cdots+(n-1)=\dfrac{n(n-1)}{2}$, che è il numero delle coppie con $i<j$.
+:::
+::::
 
 :::esempio{titolo="Una somma triangolare e un controllo finale"}
 Il codice visita una volta ogni coppia di elementi distinti di `[2, 5, 8, 11]` e poi conta tutte le celle in un secondo ciclo. Si assume che ogni incremento valga un’operazione.
@@ -69,7 +102,11 @@ for valore in valori:
 assert operazioni == 10
 ```
 
-Il ciclo interno esegue $3$, $2$, $1$ e $0$ incrementi. Il ciclo finale ne esegue $4$. Quindi il risultato è $3+2+1+0+4=10$. Per una taglia generica il conto è $\dfrac{n(n-1)}{2}+n$ e l’ordine è $\Theta(n^2)$. Gli indici sono interi e `range(inizio, fine)` include `inizio` ed esclude `fine`.
+Il ciclo interno esegue $3$, $2$, $1$ e $0$ incrementi. Il ciclo finale ne esegue $4$. Quindi il risultato è $3+2+1+0+4=10$. Le sei coppie visitate dal ciclo annidato sono i punti $(i,j)$ con $0\leq i<j\leq 3$.
+
+::grafico{xmin=-0.5 xmax=3.7 ymin=-0.5 ymax=3.7 uguale=1 f="x" nomi="i,j" punti="0,1,pieno;0,2,pieno;0,3,pieno;1,2,pieno;1,3,pieno;2,3,pieno" legenda="j=i" titolo="Le coppie $(i,j)$ con $0\leq i<j\leq 3$ stanno sopra la retta $j=i$; per $i=0$, $1$, $2$ se ne contano $3$, $2$ e $1$."}
+
+Per una taglia generica il conto è $\dfrac{n(n-1)}{2}+n$ e l’ordine è $\Theta(n^2)$. Gli indici sono interi e `range(inizio, fine)` include `inizio` ed esclude `fine`.
 :::
 
 :::esempio{titolo="Un indice che raddoppia"}
@@ -114,6 +151,32 @@ Dopo ogni visita fallita resta al massimo la metà degli elementi, arrotondata p
 
 La stima temporale $\Theta(\log n)$ nel caso peggiore presuppone accessi agli indici e confronti di costo costante. Se per raggiungere ogni centro bisogna scorrere una sequenza elemento per elemento, il numero di visite centrali da solo lascia fuori il costo di questi spostamenti.
 :::
+
+::::teorema{#visite-binaria titolo="Visite nel caso peggiore della ricerca binaria"}
+Sia $n\geq 1$ il numero di elementi di un array ordinato. La ricerca binaria con estremi inclusi e centro inferiore esegue al massimo $\lfloor\log_2 n\rfloor+1$ visite. Il massimo viene raggiunto quando il bersaglio è maggiore di tutti gli elementi.
+
+Il teorema permette di stimare il costo senza tracciare la ricerca. Per $n=100$ si ha $2^6=64\leq 100<128=2^7$, quindi $\lfloor\log_2 100\rfloor=6$ e le visite sono al massimo $7$.
+
+:::dimostrazione
+Si mostra che dopo una visita fallita resta al massimo metà dell’intervallo, arrotondata per difetto. Sia $L=r-\ell+1$ la lunghezza dell’intervallo $[\ell,r]$ e sia $m=\left\lfloor\dfrac{\ell+r}{2}\right\rfloor$ il centro. Gli indici a sinistra del centro sono
+
+$$
+m-\ell=\left\lfloor\frac{r-\ell}{2}\right\rfloor=\left\lfloor\frac{L-1}{2}\right\rfloor,
+$$
+
+mentre quelli a destra sono
+
+$$
+r-m=(L-1)-\left\lfloor\frac{L-1}{2}\right\rfloor=\left\lfloor\frac{L}{2}\right\rfloor.
+$$
+
+L’ultima uguaglianza si controlla nei due casi: per $L=2h$ entrambi i membri valgono $h$, per $L=2h+1$ valgono ancora $h$. Poiché $\left\lfloor\dfrac{L-1}{2}\right\rfloor\leq\left\lfloor\dfrac{L}{2}\right\rfloor$, dopo una visita fallita la lunghezza è al massimo $\left\lfloor\dfrac{L}{2}\right\rfloor$.
+
+Partendo da $n$, dopo $t$ visite fallite la lunghezza è al massimo $\left\lfloor\dfrac{n}{2^t}\right\rfloor$. La visita numero $t+1$ avviene solo se l’intervallo è non vuoto, cioè se $\left\lfloor\dfrac{n}{2^t}\right\rfloor\geq 1$, ossia $2^t\leq n$. Poiché $t$ è intero, questa condizione equivale a $t\leq\lfloor\log_2 n\rfloor$, perciò le visite sono al massimo $\lfloor\log_2 n\rfloor+1$.
+
+Se il bersaglio è maggiore di tutti gli elementi, ogni visita fallisce e resta la parte destra, che ha esattamente $\left\lfloor\dfrac{L}{2}\right\rfloor$ indici. Allora le lunghezze sono esattamente $n$, $\left\lfloor\dfrac{n}{2}\right\rfloor$, $\left\lfloor\dfrac{n}{4}\right\rfloor$, … e il numero di visite è uguale al massimo.
+:::
+::::
 
 ## Duplicati e test della ricerca
 
@@ -172,6 +235,9 @@ La selezione standard esegue questa scansione anche quando l’array è già ord
 
 :::esempio{titolo="Due passate con un minimo già in sede"}
 In `[9, 3, 7, 2, 6]` il minimo globale è `2` all’indice `3`. La prima passata lo scambia con `9` all’indice `0` e produce `[2, 3, 7, 9, 6]`. Nella seconda passata il minimo della parte da ordinare è `3`, già all’indice `1`. Si eseguono comunque tre confronti fra chiavi nella seconda passata. Gli scambi effettivi nelle prime due passate sono quindi uno, mentre i confronti sono $4+3=7$.
+
+::grafico{assi=0 uguale=1 xmin=-2.8 xmax=5.4 ymin=-0.4 ymax=5.3 poligoni="0,2 1,2 1,3 0,3;0,0 2,0 2,1 0,1" linee="0,4 5,4 5,5 0,5 0,4;1,4 1,5;2,4 2,5;3,4 3,5;4,4 4,5;0,2 5,2 5,3 0,3 0,2;1,2 1,3;2,2 2,3;3,2 3,3;4,2 4,3;0,0 5,0 5,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1;4,0 4,1" etichette="0.5,4.5,9;1.5,4.5,3;2.5,4.5,7;3.5,4.5,2;4.5,4.5,6;0.5,2.5,2;1.5,2.5,3;2.5,2.5,7;3.5,2.5,9;4.5,2.5,6;0.5,0.5,2;1.5,0.5,3;2.5,0.5,7;3.5,0.5,9;4.5,0.5,6;-1.4,4.5,Inizio;-1.4,2.5,Passata 1;-1.4,0.5,Passata 2" vettori="0.5,3.95,3.4,3.05;3.5,3.95,0.6,3.05" titolo="Selezione su $[9,3,7,2,6]$. La prima passata scambia $9$ e $2$; le celle colorate formano la parte già ordinata."}
+
 :::
 
 ## Inserzione, stabilità e memoria
@@ -180,6 +246,9 @@ In `[9, 3, 7, 2, 6]` il minimo globale è `2` all’indice `3`. La prima passata
 Nell’**ordinamento per inserzione** il prefisso a sinistra è già ordinato. Si conserva la nuova chiave in una variabile, si spostano di una cella a destra le chiavi del prefisso maggiori e si inserisce la chiave nello spazio liberato. La prima passata inserisce l’elemento di indice `1` nel prefisso formato dall’indice `0`.
 
 In `[2, 6, 9, 5]`, dopo aver ordinato il prefisso `[2, 6, 9]`, si deve inserire `5`. Prima si sposta `9` all’indice `3`, poi si sposta `6` all’indice `2`. Il valore `2` precede `5`, quindi si inserisce `5` all’indice `1`. Il risultato è `[2, 5, 6, 9]`. Gli spostamenti sono due e i confronti fra chiavi sono tre, compreso quello che stabilisce l’arresto.
+
+::grafico{assi=0 uguale=1 xmin=-0.6 xmax=4.6 ymin=-0.5 ymax=3.4 poligoni="1,0 2,0 2,1 1,1" linee="0,2 4,2 4,3 0,3 0,2;1,2 1,3;2,2 2,3;3,2 3,3;0,0 4,0 4,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1" etichette="0.5,2.5,2;1.5,2.5,6;2.5,2.5,9;3.5,2.5,5;0.5,0.5,2;1.5,0.5,5;2.5,0.5,6;3.5,0.5,9" vettori="2.5,1.95,3.4,1.05;1.5,1.95,2.4,1.05;3.5,1.95,1.6,1.05" titolo="Inserzione di $5$ nel prefisso $[2,6,9]$. I valori $9$ e $6$ si spostano di una cella a destra e $5$ occupa l’indice $1$."}
+
 :::
 
 :::osservazione{#costo-inserzione titolo="Confronti e spostamenti nell’inserzione"}
@@ -204,6 +273,11 @@ Se l’applicazione deve conservare l’array di partenza e ne prepara una copia
 Si vogliono cercare codici in $64$ record privi di ordinamento. Una ricerca lineare fallita visita $64$ celle. Per usare la ricerca binaria occorre prima disporre di un array ordinato. Se l’ordinamento scelto è la selezione standard, il suo costo in confronti fra chiavi è $\dfrac{64\cdot63}{2}=2016$. Dopo l’ordinamento ogni ricerca binaria visita al massimo $7$ celle.
 
 Per un’unica ricerca in questo scenario, la preparazione della lista ordinata richiede già più lavoro della ricerca lineare. Per $100$ ricerche si possono invece confrontare $6400$ visite lineari nel caso peggiore con $2016$ confronti di preparazione più al massimo $700$ visite binarie. Se si attribuisce lo stesso costo alle due unità e si trascurano gli altri costi, il secondo totale è $2716$. Questo confronto vale quando si può riutilizzare l’ordinamento e le ricerche lineari richiedono tutte $64$ visite. La stima cambia se i bersagli compaiono in posizioni iniziali o se l’array viene modificato fra le richieste.
+
+Con $q$ ricerche le due stime sono $64q$ e $2016+7q$. Esse coincidono per $57q=2016$, cioè per $q=\dfrac{2016}{57}\approx 35{,}4$. Per $q=35$ i totali sono $2240$ e $2261$, mentre per $q=36$ sono $2304$ e $2268$, quindi l’ordinamento iniziale dà il totale minore da $36$ ricerche in su.
+
+::grafico{f="64*x;2016+7*x+0*sqrt(x)" xmin=-10 xmax=90 ymin=0 ymax=6000 nomi="q,C" legenda="C=64q;C=2016+7q" punti="35.37,2263.6,pieno" segmenti="35.37,0,35.37,2263.6" titolo="Costo di $q$ ricerche su $64$ record. Le rette si incontrano per $q=\dfrac{2016}{57}\approx 35{,}4$."}
+
 :::
 
 :::osservazione{titolo="La scelta dipende anche dall’output"}

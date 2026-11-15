@@ -20,6 +20,12 @@ Dopo aver osservato il campione, $L$ e $U$ assumono valori numerici fissati. Il 
 Un laboratorio misura la concentrazione media di una stessa soluzione in condizioni controllate. In ogni serie di misure usa la stessa procedura al $95\,\%$. Se il modello è rispettato e la copertura è esatta, il numero atteso di intervalli che contengono la concentrazione media in $200$ serie è $200\cdot0{,}95=190$. Il conteggio ottenuto in una particolare sequenza di serie può differire da $190$. La copertura è una proprietà della procedura sotto il modello.
 :::
 
+:::esempio{titolo="Dieci intervalli dalla stessa procedura"}
+Una popolazione normale ha $\mu=70\,\mathrm{g}$ e $\sigma=6\,\mathrm{g}$, e da essa si estraggono dieci campioni indipendenti di $36$ unità. L'errore standard è $\dfrac{6}{\sqrt{36}}=1\,\mathrm{g}$, quindi ogni intervallo al $95\,\%$ ha semiampiezza $1{,}96\,\mathrm{g}$. Le dieci medie osservate sono $69{,}2$, $70{,}8$, $71{,}1$, $68{,}6$, $70{,}3$, $72{,}3$, $69{,}7$, $70{,}5$, $68{,}9$ e $70{,}1\,\mathrm{g}$. Il sesto intervallo è $[70{,}34,74{,}26]\,\mathrm{g}$ e lascia fuori $\mu$, perché $72{,}3-1{,}96=70{,}34>70$. Gli altri nove intervalli contengono $\mu$. I centri cambiano da un campione all'altro, mentre la semiampiezza resta uguale perché dipende soltanto da $\sigma$, da $n$ e dal livello.
+
+::grafico{assi=0 xmin=65.4 xmax=75.4 ymin=-1.3 ymax=11.6 linee="65.9,0 74.9,0;66,-0.15 66,0.15;68,-0.15 68,0.15;72,-0.15 72,0.15;74,-0.15 74,0.15;70,0 70,10.8;67.24,1 71.16,1;68.84,2 72.76,2;69.14,3 73.06,3;66.64,4 70.56,4;68.34,5 72.26,5;67.74,7 71.66,7;68.54,8 72.46,8;66.94,9 70.86,9;68.14,10 72.06,10" poligoni="70.34,5.82 74.26,5.82 74.26,6.18 70.34,6.18" punti="69.2,1;70.8,2;71.1,3;68.6,4;70.3,5;72.3,6;69.7,7;70.5,8;68.9,9;70.1,10" etichette="65.75,-0.7,66;67.75,-0.7,68;69.75,-0.7,70;71.75,-0.7,72;73.75,-0.7,74;70.25,11.2,μ = 70;72.6,6.75,esclude μ;74.5,-0.7,g" titolo="Ogni segmento orizzontale è l'intervallo di un campione, con la media osservata al centro. Il segmento colorato del sesto campione è l'unico che non contiene $\mu=70$."}
+:::
+
 :::attenzione{titolo="Interpretazione di un intervallo osservato"}
 Supponiamo che un intervallo osservato al $95\,\%$ sia $[8,12]$ e che il parametro della popolazione valga $13$. Gli estremi sono ormai fissati e l'evento $8\leq 13\leq 12$ è falso. L'interpretazione che assegna probabilità $0{,}95$ al parametro fisso dopo l'osservazione confonde l'evento osservato con quello che coinvolge gli estremi casuali $L$ e $U$.
 
@@ -90,6 +96,8 @@ ha legge t di Student con $\nu$ gradi di libertà. Per simmetria, $P(-q\leq T\le
 
 :::esempio{titolo="Effetto della stima della variabilità"}
 Un campione normale di $9$ tempi di lavorazione ha media $\bar x=18\,\mathrm{min}$ e deviazione standard campionaria corretta $s=3\,\mathrm{min}$. L'errore standard stimato vale $1\,\mathrm{min}$ e $\nu=8$. Al $95\,\%$, $t_{8,0{,}975}\approx2{,}306$, quindi l'intervallo è circa $[15{,}694,20{,}306]\,\mathrm{min}$. A parità di errore standard, il quantile normale $1{,}96$ darebbe una semiampiezza minore. Il quantile t più grande tiene conto della variabilità aggiunta dalla stima di $\sigma$.
+
+::grafico{f="0.38669*(1+x*x/8)^(-4.5);exp(-x*x/2)/sqrt(2*PI)" area="0.38669*(1+x*x/8)^(-4.5);0;-2.306;2.306" segmenti="-2.306,0,-2.306,0.039;2.306,0,2.306,0.039;-1.96,0,-1.96,0.0584;1.96,0,1.96,0.0584" etichette="2.38,0.085,2,306;0.95,0.03,1,96" xmin=-4 xmax=4 ymin=-0.04 ymax=0.46 nomi="t,y" legenda="f_{t_8}(t);\varphi(t)" titolo="L'area colorata sotto la densità t con $8$ gradi di libertà vale $0{,}95$ ed è compresa fra $-2{,}306$ e $2{,}306$. La densità normale standard, tratteggiata, ha code più sottili e racchiude il $95\,\%$ fra $-1{,}96$ e $1{,}96$."}
 :::
 
 :::osservazione
@@ -140,6 +148,8 @@ Il coefficiente di $p^2$ è positivo, quindi la disequazione è verificata fra l
 
 :::esempio{titolo="Limite superiore con zero successi"}
 Con $n=12$ e $\widehat p=0$, la disequazione di Wilson si riduce a $p((12+z^2)p-z^2)\leq0$. Pertanto l'intervallo bilatero al $95\,\%$ è circa $[0,0{,}2425]$. La soluzione esatta binomiale a code uguali si ricava invece invertendo le probabilità binomiali delle due code. La discrezione di $K$ fa sì che la procedura esatta garantisca almeno il livello dichiarato, con una copertura generalmente superiore.
+
+::grafico{f="15.8416*x^2-3.8416*x" area="0;15.8416*x^2-3.8416*x;0;0.2425" punti="0,0;0.2425,0" etichette="0.25,-0.09,0,2425" xmin=-0.04 xmax=0.36 ymin=-0.3 ymax=0.6 nomi="p,y" legenda="(12+z^2)p^2-z^2p" titolo="Con $z=1{,}96$ il polinomio $(12+z^2)p^2-z^2p$ è minore o uguale a zero fra le radici $0$ e $0{,}2425$ circa. I valori di $p$ della regione colorata formano l'intervallo di Wilson."}
 :::
 
 :::osservazione
@@ -244,6 +254,8 @@ $$
 n_{\min}=\left\lceil\left(\frac{z\sigma}{E}\right)^2\right\rceil,
 $$
 dove $\lceil\cdot\rceil$ indica l'arrotondamento all'intero superiore. Per pianificare una proporzione con il margine normale si usa $n\geq\dfrac{z^2p_*(1-p_*)}{E^2}$, dove $p_*$ è la proporzione scelta in fase di progetto. Il valore $p_*=\dfrac12$ massimizza $p_*(1-p_*)$, quindi dà il margine di progetto prudente entro questa approssimazione. Il criterio riguarda la precisione del margine normale e la copertura della procedura scelta resta una questione distinta.
+
+::grafico{f="x*(1-x)" punti="0.5,0.25" segmenti="0.5,0,0.5,0.25;0,0.25,0.5,0.25" etichette="0.56,0.272,massimo 0,25;0.44,-0.022,0,5" xmin=-0.12 xmax=1.18 ymin=-0.04 ymax=0.31 nomi="p*,y" legenda="p_*(1-p_*)" titolo="Il prodotto $p_*(1-p_*)$ si annulla in $0$ e in $1$ e raggiunge il valore massimo $\dfrac14$ in $p_*=\dfrac12$."}
 :::
 
 :::esempio{titolo="Il controllo dopo l'arrotondamento"}
@@ -262,6 +274,8 @@ Si considera il limite superiore. L'evento $\mu\leq U$ equivale a $Z\geq-z_{1-\a
 
 :::esempio{titolo="Confronto con una soglia minima"}
 Per valutare se la media di una popolazione normale supera una soglia di servizio, si usa un limite inferiore. Con $\bar x=52$, errore standard $2$ e $z_{0{,}95}\approx1{,}645$, il limite inferiore al $95\,\%$ è circa $48{,}71$. Quindi l'insieme di confidenza contiene soltanto valori almeno pari a $48{,}71$. Nel capitolo sui test di ipotesi, la stessa soglia critica corrisponde a un test unilatero sulla media costruito con il medesimo pivot.
+
+::grafico{f="exp(-x*x/2)/sqrt(2*PI)" area="exp(-x*x/2)/sqrt(2*PI);0;-4;1.645" segmenti="1.645,0,1.645,0.1031" etichette="1.72,0.14,1,645;-0.9,0.17,0,95" xmin=-4 xmax=4 ymin=-0.04 ymax=0.46 nomi="z,y" legenda="\varphi(z)" titolo="Per il limite inferiore l'evento $\mu\geq L$ equivale a $Z\leq1{,}645$. L'area colorata vale $0{,}95$ e il $5\,\%$ escluso sta tutto nella coda destra del pivot."}
 :::
 
 :::osservazione

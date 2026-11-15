@@ -25,6 +25,8 @@ $$
 \end{aligned}
 $$
 I due incassi hanno lo stesso importo. Poiché il secondo è disponibile un anno più tardi, il suo valore attuale è minore. La somma attualizzata supera l'esborso di circa $4{,}13\,\mathrm{euro}$.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=3 ymin=-1.3 ymax=0.95 linee="-0.3,0 2.55,0;2.43,0.06 2.55,0 2.43,-0.06;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04" vettori="0,0,0,-1;1,0,1,0.6;2,0,2,0.6" etichette="-0.22,-1.12,100;0.88,0.72,60;1.88,0.72,60;0.1,0.12,0;1.1,-0.15,1;2.1,-0.15,2;2.75,-0.03,t" titolo="Flussi dell'investimento in euro, con $t$ in anni. La freccia verso il basso è l'esborso di $100$ alla data $0$; le frecce verso l'alto sono gli incassi di $60$ alle date $1$ e $2$."}
 :::
 
 :::osservazione
@@ -86,6 +88,8 @@ Sia $C_0>0$ e siano $F_k\geq 0$ per ogni $k$, con almeno un $F_k>0$. Supponiamo 
 
 Per un tasso assegnato $i>-1$, inoltre, il VAN è positivo esattamente quando $i<i^*$. In questo caso si può confrontare il TIR con il tasso di valutazione per stabilire il segno del VAN.
 
+::grafico{f="-300+165/(1+x/100)+181.5/(1+x/100)^2" xmin=-40 xmax=160 ymin=-400 ymax=600 asintoti="y=-300" punti="0,46.5,pieno;10,0,pieno" etichette="17,70,i* = 10%" nomi="i,VAN" legenda="\operatorname{VAN}(i)" titolo="VAN in euro del flusso con esborso di $300$ euro e incassi di $165$ e $181{,}5$ euro alle date $1$ e $2$, con $i$ in punti percentuali. La funzione è decrescente, vale $46{,}5$ euro per $i=0$, si annulla nell'unico TIR $i^*=10\%$ e tende a $-300$ euro per $i\to+\infty$."}
+
 :::dimostrazione
 Ogni incasso positivo perde valore attuale quando il tasso cresce. Formalmente, la derivata rispetto a $i$ è
 $$
@@ -100,6 +104,8 @@ Almeno un addendo è strettamente negativo e gli altri sono al più nulli, quind
 Un investimento costa $260\,\mathrm{euro}$ e paga $150\,\mathrm{euro}$ alla fine di ciascuno dei due anni successivi. Al tasso zero il VAN è $40\,\mathrm{euro}$. Al $20\%$ è $-260+125+\dfrac{625}{6}<0$, quindi l'unico TIR è compreso tra $0\%$ e $20\%$.
 
 Il punto medio è il $10\%$. A questo tasso il VAN vale $-260+\dfrac{150}{1{,}1}+\dfrac{150}{1{,}1^2}\approx0{,}33\,\mathrm{euro}$. Poiché è positivo e il VAN è decrescente, si conserva l'intervallo dal $10\%$ al $20\%$. Ogni ripetizione dimezza l'ampiezza dell'intervallo. La ricerca termina quando le due estremità concordano alla precisione richiesta.
+
+::grafico{f="-260+150/(1+x/100)+150/(1+x/100)^2" xmin=0 xmax=20 ymin=-40 ymax=60 punti="0,40,pieno;10,0.33,pieno;20,-30.83,pieno" segmenti="10,-40,10,60;20,-40,20,60" nomi="i,VAN" legenda="\operatorname{VAN}(i)" titolo="VAN in euro del progetto da $260$ euro con due incassi di $150$ euro, con $i$ in punti percentuali. Il VAN vale $40$ euro per $i=0$, circa $0{,}33$ euro per $i=10\%$ e circa $-30{,}83$ euro per $i=20\%$; le rette tratteggiate delimitano l'intervallo conservato dopo il primo passo."}
 :::
 
 ## Flussi con più cambiamenti di segno
@@ -150,6 +156,8 @@ $$
 \end{aligned}
 $$
 Il VAN di $B$ è maggiore di $\dfrac{300}{11}\,\mathrm{euro}$. Passare da $A$ a $B$ costa $400\,\mathrm{euro}$ oggi e produce $470\,\mathrm{euro}$ in più tra un anno. Il rendimento di questo impiego aggiuntivo è $17{,}5\%$, superiore al tasso di valutazione. Il confronto incrementale spiega perché al $10\%$ si sceglie $B$.
+
+::grafico{f="-100+130/(1+x/100);-500+600/(1+x/100)" xmin=0 xmax=45 ymin=-100 ymax=100 punti="10,18.18,pieno;10,45.45,pieno;17.5,10.64,vuoto;20,0,pieno;30,0,pieno" segmenti="10,0,10,45.45" nomi="i,VAN" legenda="\operatorname{VAN}_A(i);\operatorname{VAN}_B(i)" titolo="VAN in euro dei progetti $A$ e $B$ al variare di $i$, in punti percentuali. Gli zeri sono i TIR, $30\%$ per $A$ e $20\%$ per $B$. Le curve si incontrano per $i=17{,}5\%$ (punto vuoto); al $10\%$ il VAN di $B$ è maggiore."}
 :::
 
 :::osservazione
@@ -179,6 +187,8 @@ q&=\frac{121}{110}=1{,}1.
 \end{aligned}
 $$
 Poiché $q>0$, la differenza $\dfrac{121-110q}{q^2}$ ha il segno di $121-110q$. Quindi $B$ ha VAN maggiore per $i<10\%$, mentre $A$ ha VAN maggiore per $i>10\%$. L'esborso iniziale si semplifica solo perché è uguale per i due progetti.
+
+::grafico{f="110/(1+x/100);121/(1+x/100)^2" xmin=0 xmax=20 ymin=80 ymax=125 punti="10,100,pieno" segmenti="10,80,10,100" nomi="i,euro" legenda="\dfrac{110}{1+i};\dfrac{121}{(1+i)^2}" titolo="Valori attuali in euro degli incassi di $A$ e di $B$, con $i$ in punti percentuali. Le curve si incontrano per $i=10\%$, dove entrambi gli incassi valgono $100$ euro; a sinistra la curva di $B$ sta sopra, a destra sta sotto."}
 :::
 
 :::osservazione
@@ -197,6 +207,8 @@ Moltiplicare tutti i flussi per $-1$ lascia invariati gli zeri del VAN. Il fluss
 
 :::esempio{titolo="Spese pagate alla data di erogazione"}
 Il contratto prevede un capitale nominale di $1050\,\mathrm{euro}$, spese immediate di $50\,\mathrm{euro}$ e un rimborso di $1100\,\mathrm{euro}$ tra un anno. Alla data iniziale sono disponibili $1000\,\mathrm{euro}$, quindi $1000=\dfrac{1100}{1+i}$ e $i=10\%$. Se si usassero i $1050\,\mathrm{euro}$ nominali come importo disponibile, si otterrebbe un tasso minore perché il rimborso verrebbe confrontato con un capitale iniziale maggiore.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.7 xmax=2.1 ymin=-1.4 ymax=1.25 linee="-0.3,0 1.65,0;1.53,0.06 1.65,0 1.53,-0.06;0,-0.04 0,0.04;1,-0.04 1,0.04" vettori="0,0,0,1;1,0,1,-1.1" etichette="-0.3,1.08,1000;0.7,-1.25,1100;0.1,-0.15,0;1.1,0.12,1;1.85,-0.03,t" titolo="Flussi del debitore in euro, con $t$ in anni. La freccia verso l'alto è il capitale disponibile di $1000=1050-50$ alla data $0$; la freccia verso il basso è il rimborso di $1100$ alla data $1$."}
 :::
 
 :::osservazione
@@ -219,10 +231,12 @@ Gli incrementi di $S_m$ sono non negativi, quindi la somma cumulata resta almeno
 Un progetto costa $105\,\mathrm{euro}$ e incassa $55\,\mathrm{euro}$ alla fine del primo anno, $55$ alla fine del secondo e $44$ alla fine del terzo. La somma non scontata dei primi due incassi è $110\,\mathrm{euro}$, quindi il recupero semplice avviene al secondo anno.
 
 Al tasso del $10\%$, i primi due incassi valgono $50+\dfrac{500}{11}\approx95{,}45\,\mathrm{euro}$. Il terzo vale $\dfrac{44}{1{,}1^3}\approx33{,}06\,\mathrm{euro}$. La cumulata supera $105\,\mathrm{euro}$ al terzo anno, quindi il recupero attualizzato avviene a quella data. Prima della terza scadenza si dispone ancora soltanto dei primi due incassi.
+
+::grafico{f="105" xmin=0 xmax=3.5 ymin=0 ymax=200 punti="1,50,pieno;2,95.45,pieno;3,128.51,pieno;1,55,vuoto;2,110,vuoto;3,154,vuoto" nomi="t,euro" legenda="C_0=105" titolo="Somme cumulate degli incassi alle date $1$, $2$, $3$, in euro. I punti vuoti sono le somme nominali $55$, $110$, $154$; i punti pieni sono le somme attualizzate al $10\%$, circa $50$, $95{,}45$, $128{,}51$. I punti vuoti superano la retta del costo alla data $2$, quelli pieni alla data $3$."}
 :::
 
 :::attenzione
-Due progetti possono recuperare il costo alla stessa data e avere VAN diversi. Al $10\%$ annuo, due progetti che costano $100\,\mathrm{euro}$ e incassano entrambi $110\,\mathrm{euro}$ dopo un anno recuperano entrambi il costo al primo anno. Se il secondo progetto incassa anche $121\,\mathrm{euro}$ al secondo anno, il suo VAN è maggiore di $100\,\mathrm{euro}$.
+Due progetti possono recuperare il costo alla stessa data e avere VAN diversi. Al $10\%$ annuo, due progetti che costano $100\,\mathrm{euro}$ e incassano entrambi $110\,\mathrm{euro}$ dopo un anno recuperano entrambi il costo al primo anno. Se il secondo progetto incassa anche $121\,\mathrm{euro}$ al secondo anno, il suo VAN vale $100\,\mathrm{euro}$, mentre quello del primo progetto è nullo.
 
 Se compaiono pagamenti dopo una prima cumulata positiva, questa può tornare sotto il costo iniziale. Il significato del primo attraversamento va quindi distinto da quello di recupero permanente. Con flussi a scadenze discrete, un recupero fra due scadenze richiede inoltre un'ipotesi aggiuntiva sulla distribuzione temporale dei pagamenti.
 :::

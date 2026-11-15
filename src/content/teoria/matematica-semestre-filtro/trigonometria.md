@@ -175,6 +175,23 @@ $$
 ::grafico{uguale=1 xmin=-1.45 xmax=1.45 ymin=-1.35 ymax=1.35 curve="cos(t),sin(t),0,6.283185307179586;0.35*cos(t),0.35*sin(t),0,2.617993877991494" legenda=0 punti="-0.866025403784,0.5,pieno,P" linee="0,0 -0.866025403784,0.5" segmenti="-0.866025403784,0,-0.866025403784,0.5;-0.866025403784,0.5,0,0.5" etichette="0.12,0.39,150°" titolo="Il punto P di 150° ha ascissa negativa e ordinata positiva."}
 :::
 
+::::teorema{#angoli-supplementari titolo="Seno e coseno di angoli supplementari"}
+Per ogni angolo $\theta$ valgono
+$$
+\begin{aligned}
+\sin(180^\circ-\theta)&=\sin\theta,\\[6pt]
+\cos(180^\circ-\theta)&=-\cos\theta.
+\end{aligned}
+$$
+Le due uguaglianze riportano un angolo del secondo quadrante a un angolo acuto. Per esempio, con $\theta=60^\circ$ si ottiene $\sin120^\circ=\sin60^\circ=\dfrac{\sqrt{3}}{2}$ e $\cos120^\circ=-\cos60^\circ=-\dfrac{1}{2}$.
+
+:::dimostrazione
+L'idea è che i punti della circonferenza goniometrica corrispondenti a $\theta$ e a $180^\circ-\theta$ sono simmetrici rispetto all'asse $y$. La simmetria rispetto all'asse $y$ porta il semiasse positivo $x$ nel semiasse negativo $x$ e inverte il verso di rotazione. Il raggio di angolo $\theta$, misurato in senso antiorario dal semiasse positivo $x$, va quindi nel raggio che forma l'angolo $\theta$ in senso orario dal semiasse negativo $x$. Quest'ultimo raggio ha misura $180^\circ-\theta$.
+
+Il punto $(\cos\theta,\sin\theta)$ va perciò nel punto $(\cos(180^\circ-\theta),\sin(180^\circ-\theta))$. La simmetria rispetto all'asse $y$ cambia segno all'ascissa e lascia invariata l'ordinata, quindi $\cos(180^\circ-\theta)=-\cos\theta$ e $\sin(180^\circ-\theta)=\sin\theta$.
+:::
+::::
+
 :::osservazione{titolo="Angoli negativi e angoli coterminali"}
 L'angolo $-60^\circ$ si misura in senso orario a partire dal semiasse positivo $x$. Il suo lato finale coincide con quello di $300^\circ$, perché le due misure differiscono di un giro. Quindi $\cos(-60^\circ)=\dfrac{1}{2}$ e $\sin(-60^\circ)=-\dfrac{\sqrt{3}}{2}$. La direzione nel piano può ammettere diverse misure dello stesso angolo orientato. Se il problema chiede un valore in $[0^\circ,360^\circ)$, nell'esempio la risposta è $300^\circ$.
 :::
@@ -208,6 +225,22 @@ Il seno è negativo nel terzo quadrante, quindi $\sin\theta=-\dfrac{12}{13}$. La
 :::attenzione{titolo="Quando la tangente è definita"}
 La tangente di $\theta$ è il rapporto $\dfrac{\sin\theta}{\cos\theta}$ per $\cos\theta\ne0$. A $90^\circ$ e $270^\circ$ il punto appartiene all'asse verticale, quindi il denominatore del rapporto è zero e la tangente non è definita. A $0^\circ$ il punto ha coordinate $(1,0)$, quindi la tangente vale zero. Nei problemi con proiezione orizzontale nulla l'angolo si determina dalla direzione verticale, prima di impostare un rapporto.
 :::
+
+::::teorema{#tangente-coseno titolo="Relazione tra tangente e coseno"}
+Per ogni angolo $\theta$ con $\cos\theta\ne0$ vale
+$$
+1+\tan^2\theta=\frac{1}{\cos^2\theta}.
+$$
+La relazione permette di ricavare il coseno quando è nota la tangente, senza calcolare l'angolo. Per esempio, se $\tan\theta=\dfrac{3}{4}$ e $\theta$ è acuto, si ha $\dfrac{1}{\cos^2\theta}=1+\dfrac{9}{16}=\dfrac{25}{16}$, quindi $\cos^2\theta=\dfrac{16}{25}$. Il coseno di un angolo acuto è positivo, perciò $\cos\theta=\dfrac{4}{5}$ e $\sin\theta=\tan\theta\cos\theta=\dfrac{3}{5}$.
+
+:::dimostrazione
+Si parte dall'identità $\sin^2\theta+\cos^2\theta=1$. Poiché $\cos\theta\ne0$, anche $\cos^2\theta\ne0$, quindi si possono dividere entrambi i membri per $\cos^2\theta$:
+$$
+\frac{\sin^2\theta}{\cos^2\theta}+\frac{\cos^2\theta}{\cos^2\theta}=\frac{1}{\cos^2\theta}.
+$$
+Il primo termine è il quadrato di $\dfrac{\sin\theta}{\cos\theta}=\tan\theta$ e il secondo vale $1$. Si ottiene perciò $\tan^2\theta+1=\dfrac{1}{\cos^2\theta}$.
+:::
+::::
 
 :::osservazione{titolo="Periodo della tangente e controllo dei segni"}
 Se si aggiunge un angolo piatto, il punto della circonferenza goniometrica si sposta all'estremo opposto del diametro. Entrambe le coordinate cambiano segno. Dunque, ogni volta che il coseno è diverso da zero, il loro rapporto conserva il proprio valore. La tangente si ripete quindi ogni $180^\circ$.

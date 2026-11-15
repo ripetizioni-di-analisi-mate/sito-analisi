@@ -18,6 +18,19 @@ A questa forma si arriva con i **principi di equivalenza**: sommare ai due membr
 Per esempio $3(x - 2) + 5 = 2x$ equivale a $3x - 1 = 2x$, da cui $x = 1$.
 :::
 
+:::esempio{titolo="Un'equazione di primo grado con parametro"}
+$(k - 2)\,x = k^2 - 4$, dove $k$ è un numero reale assegnato. Il coefficiente di $x$ è $k - 2$, quindi la discussione separa il caso in cui è diverso da zero da quello in cui è nullo.
+
+- Per $k \neq 2$ si dividono i due membri per $k - 2$; poiché $k^2 - 4 = (k - 2)(k + 2)$, l'unica soluzione è $x = k + 2$.
+- Per $k = 2$ l'equazione diventa $0 \cdot x = 0$, che è un'**identità**, perciò ogni $x$ reale è soluzione.
+
+Per $k = 3$ si ottiene $x = 5$; per $k = -2$ si ottiene $x = 0$.
+:::
+
+:::attenzione
+Dividere i due membri per un'espressione che contiene $x$ presuppone che l'espressione sia diversa da zero, e può far perdere soluzioni. Da $x^2 = 3x$, dividendo per $x$, si ottiene $x = 3$; il valore $x = 0$ soddisfa l'equazione di partenza, poiché $0 = 0$, ed è stato perso. Portando tutto al primo membro si ha $x\,(x - 3) = 0$, quindi le soluzioni sono $0$ e $3$.
+:::
+
 ## Equazioni di secondo grado
 
 ::::teorema{#equazioni-secondo-grado titolo="Formula risolutiva"}
@@ -39,6 +52,14 @@ $$
 :::
 ::::
 
+:::osservazione
+Quando il coefficiente $b$ è pari, cioè $b = 2\beta$, il discriminante vale $\Delta = 4\beta^2 - 4ac = 4\left( \beta^2 - ac \right)$, quindi $\sqrt{\Delta} = 2\sqrt{\dfrac{\Delta}{4}}$ e semplificando il fattore $2$ si ottiene la **formula ridotta**
+$$
+x = \frac{-\beta \pm \sqrt{\dfrac{\Delta}{4}}}{a}, \qquad \frac{\Delta}{4} = \beta^2 - ac .
+$$
+Per $x^2 - 6x + 7 = 0$ si ha $\beta = -3$ e $\dfrac{\Delta}{4} = 9 - 7 = 2$, quindi $x = 3 \pm \sqrt{2}$. Con la formula completa si avrebbe $\Delta = 8$ e $x = \dfrac{6 \pm 2\sqrt{2}}{2}$, che dopo la semplificazione dà lo stesso risultato.
+:::
+
 :::definizione{#discriminante titolo="Discriminante"}
 Il segno di $\Delta = b^2 - 4ac$ conta le soluzioni reali:
 
@@ -52,6 +73,14 @@ Per $x^2 - 2x - 3 = 0$ si ha $\Delta = 4 + 12 = 16 > 0$ e le soluzioni sono $x =
 
 :::
 
+:::esempio{titolo="Il discriminante in un'equazione con parametro"}
+Si cercano i valori di $k$ per cui $x^2 - 2kx + k + 2 = 0$ ha **due soluzioni reali distinte**. Il coefficiente $b = -2k$ è pari, quindi si usa
+$$
+\frac{\Delta}{4} = k^2 - (k + 2) = k^2 - k - 2 = (k - 2)(k + 1) .
+$$
+Le soluzioni sono due e distinte quando $\dfrac{\Delta}{4} > 0$, che è una **disequazione di secondo grado** nel parametro $k$. Il trinomio $(k - 2)(k + 1)$ ha radici $-1$ e $2$ e coefficiente direttore positivo, quindi è positivo fuori dall'intervallo delle radici, e la condizione è soddisfatta per $k < -1$ oppure $k > 2$. Per $k = -1$ e per $k = 2$ il discriminante è nullo e l'equazione diventa $(x + 1)^2 = 0$ oppure $(x - 2)^2 = 0$, con una soluzione doppia.
+:::
+
 :::definizione{#equazioni-incomplete titolo="Equazioni incomplete"}
 La formula risolutiva si applica anche alle equazioni con $b = 0$ oppure $c = 0$; questi casi si risolvono con meno calcoli per via diretta.
 
@@ -61,7 +90,7 @@ La formula risolutiva si applica anche alle equazioni con $b = 0$ oppure $c = 0$
 Per esempio $3x^2 - 12 = 0$ equivale a $x^2 = 4$, quindi $x = \pm 2$.
 :::
 
-:::teorema{#somma-e-prodotto titolo="Somma e prodotto delle radici"}
+::::teorema{#somma-e-prodotto titolo="Somma e prodotto delle radici"}
 Se $\Delta \geq 0$, le radici $x_1$ e $x_2$ di $ax^2 + bx + c = 0$ (eventualmente coincidenti) soddisfano
 $$
 x_1 + x_2 = -\frac{b}{a}, \qquad x_1 \cdot x_2 = \frac{c}{a} ,
@@ -71,6 +100,22 @@ $$
 ax^2 + bx + c = a\,(x - x_1)(x - x_2) .
 $$
 Le due uguaglianze seguono dalla **formula risolutiva**, sommando e moltiplicando le espressioni delle radici; la scomposizione si verifica sviluppando $a\,(x - x_1)(x - x_2) = ax^2 - a\,(x_1 + x_2)\,x + a\,x_1 x_2$ e sostituendo la somma e il prodotto. Con esse si trovano a mente le radici intere e si scompongono i trinomi: per $x^2 - 7x + 12$ due numeri con somma $7$ e prodotto $12$ sono $3$ e $4$, quindi le radici sono $3$ e $4$ e il trinomio è $(x - 3)(x - 4)$. Quando le radici sono razionali, la stessa scomposizione si ottiene anche con la ricerca delle radici razionali e la regola di Ruffini del capitolo sulla fattorizzazione dei polinomi; la formula risolutiva la fornisce anche quando le radici sono irrazionali.
+
+:::dimostrazione
+Per la formula risolutiva le radici sono $x_1 = \dfrac{-b - \sqrt{\Delta}}{2a}$ e $x_2 = \dfrac{-b + \sqrt{\Delta}}{2a}$. Nella somma i termini con $\sqrt{\Delta}$ si cancellano, quindi
+$$
+x_1 + x_2 = \frac{-2b}{2a} = -\frac{b}{a} .
+$$
+Il prodotto dei numeratori è il prodotto della somma per la differenza di $-b$ e $\sqrt{\Delta}$, perciò vale $b^2 - \Delta = b^2 - \left( b^2 - 4ac \right) = 4ac$, e
+$$
+x_1 \cdot x_2 = \frac{4ac}{4a^2} = \frac{c}{a} .
+$$
+Se $\Delta = 0$ le due espressioni coincidono e i calcoli restano validi con $x_1 = x_2$.
+:::
+::::
+
+:::osservazione
+Il segno delle radici si legge dai coefficienti senza risolvere l'equazione. Se $\dfrac{c}{a} < 0$, il prodotto delle radici è negativo, quindi le radici sono reali e **discordi**; il discriminante è infatti positivo, perché $ac < 0$ dà $-4ac > 0$ e quindi $\Delta = b^2 - 4ac > 0$. Per $3x^2 + 5x - 7 = 0$ il prodotto vale $-\dfrac{7}{3}$, perciò l'equazione ha una radice positiva e una negativa; la formula risolutiva le dà uguali a $\dfrac{-5 \pm \sqrt{109}}{6}$, cioè circa $0{,}91$ e $-2{,}57$.
 :::
 
 ## Equazioni di grado superiore
@@ -111,15 +156,30 @@ Per esempio $x^4 - 5x^2 + 4 = 0$ diventa $t^2 - 5t + 4 = 0$, con soluzioni $t = 
 
 :::
 
+:::esempio{titolo="Un'equazione trinomia"}
+$x^6 - 9x^3 + 8 = 0$. L'equazione contiene soltanto i gradi $6$, $3$ e $0$, e $x^6 = \left( x^3 \right)^2$, quindi la sostituzione $t = x^3$ la trasforma in
+$$
+t^2 - 9t + 8 = 0 ,
+$$
+con soluzioni $t = 1$ e $t = 8$, perché la loro somma è $9$ e il loro prodotto è $8$. A differenza del caso biquadratico, l'equazione $x^3 = t$ ha una e una sola soluzione reale per *ogni* $t$, cioè $x = \sqrt[3]{t}$. Perciò da $x^3 = 1$ segue $x = 1$ e da $x^3 = 8$ segue $x = 2$. L'equazione ha grado $6$ e soltanto due soluzioni reali; i fattori rimanenti $x^2 + x + 1$ e $x^2 + 2x + 4$ hanno discriminante negativo.
+
+::grafico{f="x^6-9*x^3+8" xmin=-0.8 xmax=2.4 ymin=-14 ymax=14 punti="1,0,pieno;2,0,pieno" titolo="$y = x^6 - 9x^3 + 8$ incontra l'asse $x$ soltanto in $1$ e in $2$"}
+
+:::
+
 ## Disequazioni di primo grado
 
 :::definizione{#disequazioni-primo-grado titolo="Disequazione di primo grado"}
 Una disequazione del tipo $ax + b > 0$ (o con $\geq$, $<$, $\leq$), con $a \neq 0$, si risolve isolando $x$ con due regole: sommare ai due membri la stessa quantità conserva il verso; moltiplicare i due membri per una quantità positiva conserva il verso, per una quantità *negativa* **lo inverte**. Le soluzioni formano una **semiretta**. Da $5 - 2x > 1$ segue $-2x > -4$, e dividendo per $-2$, con il verso invertito, $x < 2$.
 :::
 
+:::osservazione
+Se dopo le semplificazioni il coefficiente di $x$ è nullo, la disequazione si riduce a una disuguaglianza tra numeri, e le soluzioni sono tutti i reali oppure nessuno. La disequazione $2(x + 1) > 2x + 5$ diventa $2 > 5$, che è falsa, quindi **non ha soluzioni**. La disequazione $2(x + 1) > 2x - 1$ diventa $2 > -1$, che è vera, quindi è soddisfatta da *ogni* $x$ reale.
+:::
+
 ## Disequazioni di secondo grado
 
-:::teorema{#segno-della-parabola titolo="Segno del trinomio di secondo grado"}
+::::teorema{#segno-della-parabola titolo="Segno del trinomio di secondo grado"}
 Sia $y = ax^2 + bx + c$ con $a > 0$ e $\Delta = b^2 - 4ac$. Il grafico è una parabola con concavità verso l'alto, e il trinomio è **positivo** dove la parabola sta **sopra** l'asse $x$.
 
 - $\Delta > 0$, radici $x_1 < x_2$: il trinomio è positivo per $x < x_1$ oppure $x > x_2$, nullo nelle radici, negativo per $x_1 < x < x_2$.
@@ -129,10 +189,29 @@ Sia $y = ax^2 + bx + c$ con $a > 0$ e $\Delta = b^2 - 4ac$. Il grafico è una pa
 Per $a < 0$ i segni sono gli **opposti**; in alternativa si moltiplicano i due membri per $-1$ invertendo il verso, così da ricondursi al caso $a > 0$.
 
 ::grafico{f="x*x-2*x-3" xmin=-4 xmax=6 ymin=-5 ymax=7 punti="-1,0,pieno;3,0,pieno" titolo="$y = x^2 - 2x - 3$: la parabola sta sopra l'asse $x$ per $x < -1$ e per $x > 3$, sotto tra le radici"}
+
+:::dimostrazione
+L'idea è scrivere il trinomio come prodotto o come somma di termini di segno noto. Si distinguono i tre casi.
+
+- $\Delta > 0$. Per la scomposizione del teorema sulla somma e il prodotto delle radici, $ax^2 + bx + c = a\,(x - x_1)(x - x_2)$, e $a > 0$. Per $x < x_1$ i fattori $x - x_1$ e $x - x_2$ sono entrambi negativi, quindi il prodotto è positivo; per $x_1 < x < x_2$ sono discordi, quindi il prodotto è negativo; per $x > x_2$ sono entrambi positivi, quindi il prodotto è positivo.
+- $\Delta = 0$. La scomposizione diventa $a\,(x - x_0)^2$, che è positiva per $x \neq x_0$, perché è il prodotto del numero positivo $a$ per il quadrato di un numero diverso da zero.
+- $\Delta < 0$. Completando il quadrato come nella dimostrazione della formula risolutiva si ottiene
+$$
+ax^2 + bx + c = a \left[ \left( x + \frac{b}{2a} \right)^2 - \frac{\Delta}{4a^2} \right] .
+$$
+Poiché $\Delta < 0$, il termine $-\dfrac{\Delta}{4a^2}$ è positivo, quindi l'espressione tra quadre è la somma di un quadrato e di un numero positivo ed è positiva per ogni $x$. Moltiplicata per $a > 0$ resta positiva.
 :::
+::::
 
 :::esempio
 $x^2 - 2x - 3 \geq 0$. Il discriminante è $\Delta = 4 + 12 = 16 > 0$ e le radici sono $-1$ e $3$. Poiché $a = 1 > 0$, il trinomio è positivo **fuori dall'intervallo delle radici** e nullo nelle radici, quindi le soluzioni sono $x \leq -1$ oppure $x \geq 3$. Per $x^2 + x + 1 > 0$ il discriminante è $\Delta = -3 < 0$ e $a > 0$, quindi *ogni* $x$ reale è soluzione.
+:::
+
+:::attenzione
+Estrarre la radice quadrata dei due membri di una disequazione fa perdere le soluzioni negative. Da $x^2 > 4$ *non* segue $x > 2$: il valore $x = -3$ soddisfa la prima disuguaglianza, poiché $9 > 4$, e non la seconda. La disequazione equivale a $(x - 2)(x + 2) > 0$, e il trinomio è positivo fuori dall'intervallo delle radici, quindi le soluzioni sono $x < -2$ oppure $x > 2$.
+
+::grafico{f="x^2;4" xmin=-4 xmax=4 ymin=-1 ymax=10 punti="-2,4,vuoto;2,4,vuoto;-3,9,pieno" etichette="-2.2,9,(−3, 9)" titolo="La parabola $y = x^2$ sta sopra la retta $y = 4$ (tratteggiata) per $x < -2$ e per $x > 2$; il punto $(-3, 9)$ appartiene al primo tratto"}
+
 :::
 
 ## Disequazioni di grado superiore
@@ -165,6 +244,10 @@ Sia $c$ una radice di $P$ di molteplicità $m$, cioè $P(x) = (x - c)^m\, Q(x)$ 
 - uguale a quello di $x - c$, se $m$ è dispari, poiché $(x - c)^m = (x - c)^{m - 1}\,(x - c)$ e $(x - c)^{m - 1}$ è positivo, perché $m - 1$ è pari.
 
 Nella tabella dei segni il fattore $(x - c)^m$ occupa quindi una *sola* riga, che cambia segno in $c$ *solo se* $m$ è dispari. I fattori di $Q$ non si annullano in $c$, quindi le loro righe non cambiano segno in $c$. Perciò $P$ cambia segno nelle radici di molteplicità dispari e conserva il segno in quelle di molteplicità pari, dove il grafico tocca l'asse $x$ senza attraversarlo. Nella disequazione $(x - 1)^2 (x + 3) < 0$ la riga di $(x - 1)^2$ porta soltanto segni più, quindi il segno del prodotto è quello di $x + 3$ e le soluzioni sono $x < -3$.
+:::
+
+:::attenzione
+Con il verso $\leq$ oppure $\geq$ una radice di molteplicità pari può essere una soluzione **isolata**, che la sola lettura dei segni della tabella non mostra. Nella disequazione $(x - 1)^2 (x + 3) \leq 0$ il prodotto è negativo per $x < -3$ e nullo in $-3$ e in $1$. Il valore $x = 1$ soddisfa la disequazione, poiché il primo membro vale $0$, anche se non appartiene all'intervallo $x \leq -3$. Le soluzioni sono perciò $x \leq -3$ oppure $x = 1$.
 :::
 
 ## Equazioni fratte
@@ -251,6 +334,17 @@ Moltiplicare i due membri per il denominatore ne presuppone il **segno**, che di
 
 :::
 
+:::attenzione
+Una disequazione fratta *non* equivale al sistema che chiede numeratore e denominatore positivi, perché un quoziente è positivo anche quando numeratore e denominatore sono entrambi negativi. Per $\dfrac{x + 2}{x - 1} \geq 0$ il sistema
+$$
+\begin{cases}
+x + 2 \geq 0 \\[2pt]
+x - 1 > 0
+\end{cases}
+$$
+ha soluzioni $x > 1$. Il valore $x = -3$ non soddisfa il sistema, eppure $\dfrac{-3 + 2}{-3 - 1} = \dfrac{1}{4} > 0$. La tabella dei segni comprende entrambi i casi e dà le soluzioni $x \leq -2$ oppure $x > 1$.
+:::
+
 :::esempio
 $\dfrac{x + 2}{x - 1} \leq 0$. Il numeratore è positivo per $x > -2$ e nullo in $-2$; il denominatore è positivo per $x > 1$. Il quoziente è negativo dove i segni sono **discordi**, cioè per $-2 < x < 1$. Il verso $\leq$ **include** lo zero del numeratore ed **esclude** quello del denominatore, quindi le soluzioni sono $-2 \leq x < 1$.
 
@@ -294,4 +388,14 @@ x^2 - 4 < 0 \\[2pt]
 \end{cases}
 $$
 La prima disequazione equivale a $x^2 < 4$ e ha soluzioni $-2 < x < 2$. La seconda ha soluzioni $x \geq -\dfrac{1}{2}$. L'**intersezione** dei due insiemi è $-\dfrac{1}{2} \leq x < 2$, che è l'insieme delle soluzioni del sistema.
+:::
+
+:::esempio{titolo="Un sistema senza soluzioni"}
+$$
+\begin{cases}
+x^2 - 1 < 0 \\[2pt]
+x - 3 > 0
+\end{cases}
+$$
+La prima disequazione ha soluzioni $-1 < x < 1$, perché il trinomio $x^2 - 1$ ha radici $\pm 1$ ed è negativo tra le radici. La seconda ha soluzioni $x > 3$. Ogni soluzione della prima è minore di $1$ e ogni soluzione della seconda è maggiore di $3$, quindi l'intersezione è vuota e il sistema **non ha soluzioni**, anche se ciascuna disequazione ne ha infinite.
 :::

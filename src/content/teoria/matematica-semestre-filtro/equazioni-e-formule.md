@@ -247,6 +247,25 @@ Aggiungendo $b^2$ a entrambi i membri si trova $(2ax+b)^2=b^2-4ac=\Delta$. Un qu
 :::
 ::::
 
+::::teorema{#annullamento-prodotto titolo="Legge di annullamento del prodotto"}
+Siano $A$ e $B$ due numeri reali. Il prodotto $AB$ è uguale a zero se e solo se almeno uno dei due fattori è uguale a zero. Quando il primo membro di un'equazione è scritto come prodotto di fattori di primo grado e il secondo membro è zero, l'equazione si riduce perciò a un'equazione di primo grado per ciascun fattore. Per esempio, $(x+5)(x-4)=0$ equivale a $x+5=0$ oppure $x-4=0$, quindi le soluzioni sono $-5$ e $4$.
+
+:::dimostrazione
+Se $A=0$ oppure $B=0$, il prodotto $AB$ vale zero, perché ogni numero moltiplicato per zero dà zero. Viceversa, si suppone $AB=0$ e $A\ne0$. Poiché $A\ne0$, esiste il reciproco $\dfrac{1}{A}$ e si possono moltiplicare per esso i due membri di $AB=0$. Si ottiene $B=\dfrac{1}{A}\cdot0=0$, quindi, se il primo fattore è diverso da zero, il secondo è nullo.
+:::
+::::
+
+:::attenzione{titolo="Prodotto uguale a un numero diverso da zero"}
+La legge riguarda soltanto i prodotti uguali a zero. Nell'equazione $(x-1)(x-3)=3$, uguagliare a $3$ un fattore alla volta darebbe $x=4$ e $x=6$. Per $x=6$ il primo membro vale $5\cdot3=15$, quindi $6$ non è una soluzione. Si sviluppa invece il prodotto e si porta $3$ al primo membro.
+$$
+\begin{aligned}
+x^2-4x+3-3&=0 \\[6pt]
+x(x-4)&=0 .
+\end{aligned}
+$$
+Le soluzioni sono $0$ e $4$, e per entrambe il primo membro iniziale vale $3$.
+:::
+
 :::esempio{titolo="Due radici della stessa parabola"}
 Per $x^2-5x+6=0$ si ha $\Delta=(-5)^2-4\cdot1\cdot6=1$. La formula fornisce
 $$
@@ -330,6 +349,25 @@ Sottraendo la prima equazione dalla seconda si ottiene $10a=0{,}2$, quindi $a=0{
 Il dominio matematico raccoglie i valori per cui le espressioni hanno significato. Un denominatore deve essere diverso da zero. Un radicando di radice quadrata reale deve essere non negativo. Il modello può imporre ulteriori condizioni. Per esempio, un volume di liquido può essere limitato dalla capacità del recipiente e un tempo trascorso è maggiore o uguale a zero. Risolvere l'equazione e imporre questi vincoli sono due passaggi distinti.
 
 Un'operazione non invertibile può aggiungere candidati. Per esempio, elevando al quadrato i membri di $\sqrt{x+5}=x-1$ si ricava $x^2-3x-4=0$, quindi $x=4$ oppure $x=-1$. Per $x=-1$ il primo membro vale $2$ e il secondo vale $-2$, perciò il valore è escluso. Per $x=4$ entrambi valgono $3$. In questo caso la condizione $x-1\ge0$ avrebbe escluso $-1$ prima del calcolo.
+:::
+
+:::richiamo{titolo="Legge di annullamento del prodotto"}
+Se $A$ e $B$ sono numeri reali, allora $AB=0$ se e solo se $A=0$ oppure $B=0$.
+:::
+
+::::teorema{#quadrato-membri titolo="Elevamento al quadrato di membri non negativi"}
+Siano $L$ e $R$ due numeri reali non negativi. Allora $L=R$ se e solo se $L^2=R^2$. In un'equazione con una radice quadrata, come $\sqrt{x+5}=x-1$, si impone quindi che entrambi i membri siano non negativi. Per i valori che soddisfano questa condizione l'elevamento al quadrato produce un'equazione equivalente e non aggiunge candidati.
+
+:::dimostrazione
+Se $L=R$, i quadrati dei due numeri coincidono, quindi $L^2=R^2$. Viceversa, da $L^2=R^2$ segue $L^2-R^2=0$, cioè $(L-R)(L+R)=0$. Per la legge di annullamento del prodotto si ha $L-R=0$ oppure $L+R=0$. Nel secondo caso la somma di due numeri non negativi è zero, perciò $L=R=0$. In entrambi i casi vale quindi $L=R$.
+:::
+::::
+
+:::esempio{titolo="Condizione sul secondo membro"}
+Nell'equazione $\sqrt{x+5}=x-1$ il primo membro è non negativo dove è definito. La condizione $x-1\ge0$ rende non negativo anche il secondo membro e implica $x+5\ge6>0$, quindi si lavora con $x\ge1$. In questa regione l'equazione equivale a $x+5=(x-1)^2$, cioè a $x^2-3x-4=0$. Delle due radici $4$ e $-1$ soltanto $4$ soddisfa $x\ge1$. Senza la condizione, il valore $-1$ soddisfa $L^2=R^2$ con $L=2$ e $R=-2$, e il teorema non si applica perché $R<0$.
+
+::grafico{f="sqrt(x+5);x-1" xmin=-6 xmax=7 ymin=-4 ymax=6 punti="4,3,pieno;-1,2,vuoto;-1,-2,vuoto" segmenti="-1,-2,-1,2" titolo="Le curve $y=\sqrt{x+5}$ e $y=x-1$ si incontrano solo in $(4,3)$. In $x=-1$ i membri valgono $2$ e $-2$"}
+
 :::
 
 :::esempio{titolo="Tempo di arrivo al suolo"}

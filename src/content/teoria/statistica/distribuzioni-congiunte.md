@@ -75,6 +75,8 @@ $$
 ::grafico{xmin=-0.13 xmax=1.24 ymin=-0.12 ymax=1.22 poligoni="0,0 1,0 1,1" linee="0,0 1,1 1,0" segmenti="0.55,0,0.55,0.55;0.32,0.32,1,0.32" etichette="0.73,0.16,D;0.31,0.6,y=x" titolo="Supporto triangolare D con una sezione verticale e una sezione orizzontale"}
 
 Per esempio, per trovare $P(Y>\dfrac12)$ conviene partire dalle sezioni orizzontali. Si integra $2(1-y)$ fra $\dfrac12$ e $1$, ottenendo $\dfrac14$. Il valore è inferiore a $\dfrac12$ perché, al crescere di $y$, le sezioni disponibili si accorciano.
+
+::grafico{xmin=-0.15 xmax=1.3 ymin=-0.18 ymax=2.3 nomi="y,f" linee="-0.12,0 0,0 0,2 1,0 1.2,0" poligoni="0.5,0 0.5,1 1,0" segmenti="0.5,0,0.5,1" titolo="Densità marginale $f_Y(y)=2(1-y)$ su $(0,1)$. L'area colorata è il triangolo di base $\dfrac{1}{2}$ e altezza $1$, che vale $P\left(Y>\dfrac{1}{2}\right)=\dfrac{1}{4}$."}
 :::
 
 :::attenzione{titolo="Due marginali con densità"}
@@ -97,6 +99,10 @@ La divisione normalizza la sezione verticale a integrale uno. Questa formula def
 
 :::esempio{titolo="Normalizzazione di una sezione"}
 Se la densità vale $2$ per $0<y<x<1$, allora $f_X(x)=2x$ per $0<x<1$. A $X=x$ fissato, la densità condizionata vale $\dfrac1x$ su $(0,x)$. La lunghezza dell'intervallo è $x$, quindi si tratta di un'uniforme su $(0,x)$. In particolare, $P(Y\le\dfrac{x}{2}\mid X=x)=\dfrac12$. La soglia è a metà della sezione disponibile per quel valore di $x$.
+
+Per $x=\dfrac12$ la densità condizionata vale $2$ su $(0,\dfrac12)$, per $x=1$ vale $1$ su $(0,1)$. In entrambi i casi il rettangolo sotto il grafico ha area uno.
+
+::grafico{xmin=-0.12 xmax=1.3 ymin=-0.18 ymax=2.4 nomi="y,f" linee="-0.1,0 0,0 0,2 0.5,2 0.5,0 1.2,0;0,1 1,1 1,0" poligoni="0,0 0.25,0 0.25,2 0,2" segmenti="0.25,0,0.25,2" etichette="0.55,2.1,X = 0,5;1.04,1.12,X = 1" titolo="Densità condizionate di $Y$ dato $X=\dfrac{1}{2}$ e dato $X=1$. L'area colorata vale $P\left(Y\le\dfrac{1}{4}\ \middle|\ X=\dfrac{1}{2}\right)=\dfrac{1}{2}$."}
 :::
 
 ::::teorema{#indipendenza-congiunta titolo="Fattorizzazione e indipendenza"}
@@ -111,6 +117,10 @@ Nel caso con densità, il prodotto $f_Xf_Y$ assegna a ogni rettangolo il prodott
 
 :::attenzione{titolo="Fattori e forma del supporto"}
 Una densità costante sul triangolo $0<y<x<1$ appare come un prodotto di costanti all'interno della regione. Per esempio, però, vicino a $(\dfrac14,\dfrac34)$ le due marginali sono positive e la densità congiunta è zero. L'uguaglianza tra prodotto e congiunta deve valere anche fuori dalla regione in cui la congiunta è positiva.
+
+Con la densità $2$ sul triangolo, le marginali sono $f_X(x)=2x$ e $f_Y(y)=2(1-y)$. Nel punto $(\dfrac14,\dfrac34)$ il loro prodotto vale $\dfrac12\cdot\dfrac12=\dfrac14$, mentre la congiunta vale zero, quindi $X$ e $Y$ sono dipendenti.
+
+::grafico{xmin=-0.12 xmax=1.25 ymin=-0.12 ymax=1.2 uguale=1 poligoni="0,0 1,0 1,1" linee="0,1 1,1 1,0" segmenti="0,0,1,1" punti="0.25,0.75,pieno,P" etichette="0.68,0.2,f = 2;0.12,0.9,f = 0" titolo="La congiunta è positiva solo nel triangolo colorato, il prodotto delle marginali su tutto il quadrato $(0,1)^2$. Nel punto $P=\left(\dfrac{1}{4},\dfrac{3}{4}\right)$ i due valori differiscono."}
 :::
 
 :::osservazione
@@ -185,6 +195,10 @@ Poiché il membro sinistro è non negativo, si ottiene $|\rho|\le1$. L'uguaglian
 
 :::attenzione{titolo="Correlazione nulla con dipendenza"}
 L'indipendenza implica $E[XY]=E[X]E[Y]$ quando esistono i secondi momenti e quindi implica covarianza zero. L'implicazione inversa è falsa. Se $X$ è uniforme su $\{-1,0,1\}$ e $Y=X^2$, allora $E[X]=E[X^3]=0$ per simmetria. La covarianza vale zero. Tuttavia $P(Y=0\mid X=0)=1$, mentre $P(Y=0)=\dfrac13$. Per una coppia normale congiunta, la covarianza zero è sufficiente per l'indipendenza. L'ipotesi riguarda la legge della coppia.
+
+La retta di regressione di $Y$ su $X$, studiata nel capitolo sulla regressione, ha pendenza $\dfrac{\operatorname{Cov}(X,Y)}{\operatorname{Var}(X)}=0$. Si tratta quindi della retta orizzontale $y=E[Y]=\dfrac23$, sebbene $Y$ sia una funzione di $X$.
+
+::grafico{f="x^2;2/3" xmin=-1.7 xmax=1.7 ymin=-0.45 ymax=1.75 uguale=1 legenda="y=x^2;y=\dfrac{2}{3}" punti="-1,1,pieno;0,0,pieno;1,1,pieno" titolo="I tre valori equiprobabili della coppia $(X,X^2)$ stanno sulla parabola. La retta di regressione è orizzontale perché la covarianza è zero."}
 :::
 
 ## Combinazioni lineari e convoluzione
@@ -236,7 +250,9 @@ $$
 F_M(t)=\prod_{i=1}^n F_i(t),\qquad
 P(m>t)=\prod_{i=1}^n(1-F_i(t)).
 $$
-Il massimo è al più $t$ quando tutte le variabili sono al più $t$. Il minimo supera $t$ quando tutte superano $t$. L'indipendenza permette di moltiplicare. Se le variabili hanno la stessa ripartizione $F$, i prodotti diventano $F(t)^n$ e $(1-F(t))^n$. Per tre uniformi indipendenti su $(0,1)$, per esempio, $P(M\le\dfrac12)=\dfrac18$.
+Il massimo è al più $t$ quando tutte le variabili sono al più $t$. Il minimo supera $t$ quando tutte superano $t$. L'indipendenza permette di moltiplicare. Se le variabili hanno la stessa ripartizione $F$, i prodotti diventano $F(t)^n$ e $(1-F(t))^n$. Per tre uniformi indipendenti su $(0,1)$, per esempio, $P(M\le\dfrac12)=\dfrac18$. Per le stesse variabili $P(m>\dfrac12)=(1-\dfrac12)^3=\dfrac18$, e le due curve del grafico si incontrano nel punto $(\dfrac12,\dfrac18)$, perché in $t=\dfrac12$ si ha $1-t=t$.
+
+::grafico{curve="t,t^3,0,1;t,(1-t)^3,0,1" xmin=-0.12 xmax=1.25 ymin=-0.12 ymax=1.18 nomi="t,p" legenda="F_M(t)=t^3;P(m>t)=(1-t)^3" punti="0.5,0.125,pieno" segmenti="0.5,0,0.5,0.125" titolo="Ripartizione del massimo e probabilità che il minimo superi $t$, per tre uniformi indipendenti su $(0,1)$."}
 :::
 
 :::teorema{#jacobiano-congiunto titolo="Cambio di variabili per una densità congiunta"}

@@ -13,6 +13,10 @@ Una **proposizione** è un enunciato per il quale ha senso chiedersi se è vero 
 - "$x + 1 = 3$": enunciato con una variabile, che diventa una proposizione quando si assegna un valore a $x$. Un enunciato di questo tipo si chiama **predicato** e si indica con $p(x)$; i predicati si trasformano in proposizioni anche con i quantificatori.
 :::
 
+:::attenzione
+Un predicato in cui la variabile non ha un valore assegnato *non* è una proposizione. L'enunciato "$x^2 > 4$" è vero per $x = 3$, perché $9 > 4$, ed è falso per $x = 1$, perché $1 < 4$; quindi ha un valore di verità soltanto dopo che si è scelto $x$ oppure dopo che si è quantificata la variabile. Anche "$100$ è un numero grande" non è una proposizione, perché l'aggettivo *grande* non ha un significato matematico preciso.
+:::
+
 ## Connettivi logici
 
 I connettivi costruiscono proposizioni nuove a partire da proposizioni date; il valore di verità del risultato dipende soltanto dai valori di verità delle parti, secondo le tavole di verità.
@@ -54,7 +58,22 @@ Per $x = 2$: la proposizione "$x > 0 \land x > 3$" è falsa, perché la seconda 
 In matematica la "o" è **inclusiva**: $p \lor q$ è vera anche quando $p$ e $q$ sono vere insieme. L'enunciato "$6$ è pari o $6$ è divisibile per $3$" è vero, e le due parti sono vere entrambe.
 :::
 
-:::teorema{#leggi-di-de-morgan titolo="Leggi di De Morgan"}
+:::esempio{titolo="Tavola di verità di una proposizione composta"}
+La tavola di verità di $(p \lor q) \land \lnot p$ si costruisce colonna per colonna: prima si calcolano $p \lor q$ e $\lnot p$, poi la loro congiunzione.
+$$
+\begin{array}{c|c|c|c|c}
+p & q & p \lor q & \lnot p & (p \lor q) \land \lnot p \\
+\hline
+\text{V} & \text{V} & \text{V} & \text{F} & \text{F} \\
+\text{V} & \text{F} & \text{V} & \text{F} & \text{F} \\
+\text{F} & \text{V} & \text{V} & \text{V} & \text{V} \\
+\text{F} & \text{F} & \text{F} & \text{V} & \text{F}
+\end{array}
+$$
+La proposizione è vera soltanto nella terza riga, cioè quando $p$ è falsa e $q$ è vera, quindi ha la stessa tavola di verità di $\lnot p \land q$. Su questa equivalenza si basa il ragionamento per esclusione: se "$p$ o $q$" è vera e $p$ è falsa, allora $q$ è vera. Per esempio, da "$x = 1$ oppure $x = 4$" e da $x \neq 1$ segue $x = 4$.
+:::
+
+::::teorema{#leggi-di-de-morgan titolo="Leggi di De Morgan"}
 $$
 \lnot (p \land q) \equiv \lnot p \lor \lnot q,
 \qquad
@@ -66,10 +85,38 @@ Il simbolo $\equiv$ indica che le due proposizioni hanno la **stessa tavola di v
 
 ::venn{zone="u" nomi="P,Q" titolo="$\lnot(p \lor q)$ è vera nel complementare di $P \cup Q$, cioè fuori da $P$ e fuori da $Q$: è l'insieme di verità di $\lnot p \land \lnot q$"}
 
+:::dimostrazione
+Si confrontano le tavole di verità riga per riga. Per la prima legge:
+$$
+\begin{array}{c|c|c|c|c|c|c}
+p & q & p \land q & \lnot (p \land q) & \lnot p & \lnot q & \lnot p \lor \lnot q \\
+\hline
+\text{V} & \text{V} & \text{V} & \text{F} & \text{F} & \text{F} & \text{F} \\
+\text{V} & \text{F} & \text{F} & \text{V} & \text{F} & \text{V} & \text{V} \\
+\text{F} & \text{V} & \text{F} & \text{V} & \text{V} & \text{F} & \text{V} \\
+\text{F} & \text{F} & \text{F} & \text{V} & \text{V} & \text{V} & \text{V}
+\end{array}
+$$
+La colonna di $\lnot (p \land q)$ e quella di $\lnot p \lor \lnot q$ coincidono in tutte e quattro le righe, quindi le due proposizioni sono equivalenti.
+
+La seconda legge segue dalla prima applicata alle proposizioni $\lnot p$ e $\lnot q$. Si ottiene $\lnot (\lnot p \land \lnot q) \equiv \lnot \lnot p \lor \lnot \lnot q$, e poiché la doppia negazione riporta alla proposizione di partenza si ha $\lnot (\lnot p \land \lnot q) \equiv p \lor q$. Negando entrambi i membri si ricava $\lnot p \land \lnot q \equiv \lnot (p \lor q)$.
 :::
+
+::::
 
 :::esempio{titolo="Negare una congiunzione"}
 La negazione di "$x > 0$ e $x < 5$" è "$x \leq 0$ oppure $x \geq 5$". Per le **leggi di De Morgan** la negazione di una congiunzione è la disgiunzione delle due negazioni; poiché negare $x > 0$ significa affermare $x \leq 0$ e negare $x < 5$ significa affermare $x \geq 5$, si ottiene $x \leq 0 \lor x \geq 5$.
+:::
+
+:::esempio{titolo="Negare una disgiunzione"}
+La negazione di "$x < -1$ oppure $x > 1$" è "$x \geq -1$ e $x \leq 1$", cioè $-1 \leq x \leq 1$. Per la seconda **legge di De Morgan** la negazione di una disgiunzione è la congiunzione delle due negazioni. La disgiunzione $x < -1 \lor x > 1$ descrive le soluzioni della disequazione $x^2 > 1$, perciò la sua negazione descrive le soluzioni di $x^2 \leq 1$.
+
+::grafico{f="x^2;1" xmin=-3 xmax=3 ymin=-1 ymax=6 area="1;x^2;-1;1" punti="-1,1,pieno;1,1,pieno" legenda="y = x^2;y = 1" titolo="Per $-1 \leq x \leq 1$ il grafico di $y = x^2$ sta sotto la retta $y = 1$ o la tocca: è l'insieme di verità della negazione di $x < -1 \lor x > 1$"}
+
+:::
+
+:::attenzione
+La negazione di "$x > 0$ e $x < 5$" *non* è "$x \leq 0$ e $x \geq 5$". Per $x = 7$ la proposizione "$x > 0$ e $x < 5$" è falsa, perché $7 < 5$ è falsa, e anche "$x \leq 0$ e $x \geq 5$" è falsa, perché $7 \leq 0$ è falsa. Due proposizioni false per lo stesso valore di $x$ non sono una la negazione dell'altra. La congiunzione $x \leq 0 \land x \geq 5$ è anzi falsa per ogni $x$ reale, perché nessun numero è insieme minore o uguale a $0$ e maggiore o uguale a $5$.
 :::
 
 ## Implicazione
@@ -92,11 +139,31 @@ Quando $p$ è falsa l'implicazione è **vera** qualunque sia $q$: l'implicazione
 
 :::
 
-:::teorema{#negazione-dell-implicazione titolo="Negazione dell'implicazione"}
+::::teorema{#negazione-dell-implicazione titolo="Negazione dell'implicazione"}
 $$
 \lnot (p \Rightarrow q) \equiv p \land \lnot q .
 $$
 L'implicazione è falsa soltanto quando l'ipotesi è vera e la tesi è falsa, quindi negarla significa affermare proprio questo caso: la negazione di un'implicazione è una **congiunzione**. Per mostrare che "se $x > 1$ allora $x^2 > 4$" è falsa si esibisce un valore con $x > 1$ e $x^2 \leq 4$, per esempio $x = \dfrac{3}{2}$, per il quale $x^2 = \dfrac{9}{4} \leq 4$.
+
+:::dimostrazione
+Si confrontano le tavole di verità delle due proposizioni.
+$$
+\begin{array}{c|c|c|c|c|c}
+p & q & p \Rightarrow q & \lnot (p \Rightarrow q) & \lnot q & p \land \lnot q \\
+\hline
+\text{V} & \text{V} & \text{V} & \text{F} & \text{F} & \text{F} \\
+\text{V} & \text{F} & \text{F} & \text{V} & \text{V} & \text{V} \\
+\text{F} & \text{V} & \text{V} & \text{F} & \text{F} & \text{F} \\
+\text{F} & \text{F} & \text{V} & \text{F} & \text{V} & \text{F}
+\end{array}
+$$
+La colonna di $\lnot (p \Rightarrow q)$ si ottiene invertendo quella dell'implicazione, ed è vera soltanto nella seconda riga. Anche $p \land \lnot q$ è vera soltanto nella seconda riga, perché è l'unica in cui $p$ è vera e $q$ è falsa. Le due colonne coincidono, quindi le due proposizioni sono equivalenti.
+:::
+
+::::
+
+:::osservazione
+Dalla stessa tavola segue $p \Rightarrow q \equiv \lnot p \lor q$, perché entrambe le proposizioni sono false soltanto quando $p$ è vera e $q$ è falsa. Applicando la seconda legge di De Morgan a $\lnot p \lor q$ si ritrova la negazione dell'implicazione: $\lnot (\lnot p \lor q) \equiv \lnot \lnot p \land \lnot q \equiv p \land \lnot q$. Per esempio "se $x > 3$ allora $x > 1$" equivale a "$x \leq 3$ oppure $x > 1$", che è vera per ogni $x$ reale.
 :::
 
 :::definizione{#inversa-contronominale titolo="Inversa e contronominale"}
@@ -119,6 +186,10 @@ Implicazione: "se $n$ è multiplo di $4$, allora $n$ è pari", vera. Contronomin
 Da $p \Rightarrow q$ vera e $q$ vera *non* segue che $p$ sia vera. L'implicazione "se $x > 2$ allora $x^2 > 4$" è vera; per $x = -3$ la tesi $x^2 > 4$ è vera e l'ipotesi $x > 2$ è falsa.
 :::
 
+:::attenzione
+La proposizione $\lnot p \Rightarrow \lnot q$, che nega ipotesi e tesi *senza* scambiarle, *non* è equivalente a $p \Rightarrow q$. L'implicazione "se $n$ è multiplo di $4$, allora $n$ è pari" è vera, mentre "se $n$ non è multiplo di $4$, allora $n$ è dispari" è falsa, perché $n = 6$ non è multiplo di $4$ ed è pari. La proposizione $\lnot p \Rightarrow \lnot q$ è la contronominale dell'inversa $q \Rightarrow p$, quindi ha la stessa tavola di verità dell'inversa.
+:::
+
 ## Condizione necessaria e sufficiente
 
 :::definizione{#necessaria-sufficiente titolo="Condizione necessaria e condizione sufficiente"}
@@ -132,6 +203,17 @@ Se valgono sia $p \Rightarrow q$ sia $q \Rightarrow p$, si scrive $p \Leftrighta
 
 :::esempio
 Per un numero naturale $n$, "essere multiplo di $4$" è condizione *sufficiente* per "essere pari", perché ogni multiplo di $4$ è pari; di conseguenza "essere pari" è condizione *necessaria* per "essere multiplo di $4$". La condizione "essere pari" non è invece sufficiente per "essere multiplo di $4$", perché $n = 6$ è pari e ha resto $2$ nella divisione per $4$. Nei numeri reali vale $x = 2 \Leftrightarrow x^3 = 8$, perché il cubo assume ogni valore una sola volta, quindi ciascuna uguaglianza è condizione necessaria e sufficiente per l'altra.
+:::
+
+:::esempio{titolo="Condizioni con una disequazione"}
+Per $x$ reale si confrontano "$x^2 < 4$" e "$x < 2$". La disequazione $x^2 < 4$ ha per soluzioni $-2 < x < 2$, e ognuno di questi valori verifica $x < 2$, quindi l'implicazione $x^2 < 4 \Rightarrow x < 2$ è vera. L'implicazione opposta è falsa, perché $x = -3$ verifica $x < 2$ e per questo valore $x^2 = 9 \geq 4$. Perciò "$x^2 < 4$" è condizione **sufficiente e non necessaria** per "$x < 2$", e "$x < 2$" è condizione **necessaria e non sufficiente** per "$x^2 < 4$".
+
+::grafico{f="x^2;4" xmin=-4 xmax=4 ymin=-1 ymax=10 area="4;x^2;-2;2" punti="-2,4,pieno;2,4,pieno;-3,9,pieno" segmenti="-3,0,-3,9" legenda="y = x^2;y = 4" titolo="Per $-2 < x < 2$ il grafico di $y = x^2$ sta sotto la retta $y = 4$; il valore $x = -3$ verifica $x < 2$ e ha $x^2 = 9$"}
+
+:::
+
+:::osservazione
+La locuzione "$p$ solo se $q$" significa $p \Rightarrow q$, cioè afferma che $q$ è condizione necessaria per $p$. La frase "un intero è multiplo di $6$ solo se è pari" è vera, perché $6k = 2 \cdot 3k$; la frase "un intero è pari solo se è multiplo di $6$" è falsa, perché $4$ è pari e non è multiplo di $6$. In "$p$ se e solo se $q$" la parte "se $q$" esprime l'implicazione $q \Rightarrow p$ e la parte "solo se $q$" esprime l'implicazione $p \Rightarrow q$.
 :::
 
 ## Quantificatori
@@ -152,6 +234,10 @@ Per dimostrare una proposizione universale serve un argomento valido per ogni el
 
 :::
 
+:::esempio{titolo="Il ruolo dell'insieme"}
+Con $A = \{1, 2, 3, 4\}$ la proposizione "$\forall x \in A : x^2 \leq 16$" è vera, perché i quadrati degli elementi di $A$ sono $1$, $4$, $9$, $16$ e sono tutti minori o uguali a $16$. La proposizione "$\exists x \in A : x^2 = 8$" è falsa, perché nessuno dei quattro quadrati vale $8$; invece "$\exists x \in \mathbb{R} : x^2 = 8$" è vera, perché $x = 2\sqrt{2}$ verifica $x^2 = 4 \cdot 2 = 8$. L'insieme in cui varia la variabile fa quindi parte della proposizione, e cambiando l'insieme può cambiare il valore di verità.
+:::
+
 :::teorema{#negazione-dei-quantificatori titolo="Negazione dei quantificatori"}
 $$
 \lnot \bigl( \forall x \in A : p(x) \bigr) \equiv \exists x \in A : \lnot p(x),
@@ -159,6 +245,10 @@ $$
 \lnot \bigl( \exists x \in A : p(x) \bigr) \equiv \forall x \in A : \lnot p(x) .
 $$
 La negazione **scambia** $\forall$ con $\exists$ e **nega il predicato**. Con più quantificatori si procede dall'esterno verso l'interno, scambiandoli uno per uno, e alla fine si nega il predicato. Questa regola serve in tutta l'Analisi, perché le definizioni di limite contengono catene di quantificatori e la loro negazione è il primo passo di molte verifiche e dimostrazioni.
+:::
+
+:::attenzione
+La negazione di una proposizione universale cambia anche il quantificatore, oltre al predicato. La negazione di "$\forall x \in \mathbb{R} : x^2 > 0$" è "$\exists x \in \mathbb{R} : x^2 \leq 0$", vera per $x = 0$. La proposizione "$\forall x \in \mathbb{R} : x^2 \leq 0$", ottenuta negando soltanto il predicato, è falsa, perché per $x = 1$ si ha $x^2 = 1 > 0$; poiché anche la proposizione di partenza è falsa, le due *non* sono una la negazione dell'altra.
 :::
 
 :::esempio{titolo="Negazione con due quantificatori"}
@@ -183,6 +273,14 @@ $$
 m + n = 2a + 2b = 2(a + b) .
 $$
 La somma è il doppio dell'intero $a + b$, perciò è **pari**.
+:::
+
+:::attenzione
+Una proposizione universale *non* si dimostra controllando un numero finito di casi. Il numero $n^2 + n + 41$ è primo per ogni $n$ naturale da $0$ a $39$; per $n = 40$ invece si ha
+$$
+40^2 + 40 + 41 = 40 \cdot (40 + 1) + 41 = 41 \cdot 40 + 41 = 41^2 = 1681 ,
+$$
+che non è primo. Quindi la proposizione "$\forall n \in \mathbb{N} : n^2 + n + 41$ è primo" è falsa e $n = 40$ ne è un **controesempio**.
 :::
 
 :::definizione{#dimostrazione-per-contronominale titolo="Dimostrazione per contronominale"}

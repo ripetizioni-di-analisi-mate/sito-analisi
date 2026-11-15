@@ -61,6 +61,30 @@ $$
 Per una funzione monotona, questo permette di misurare l’ampiezza dell’intervallo che contiene l’integrale a partire dalle due sole altezze agli estremi. Per una funzione generica servono informazioni sul suo andamento. Se $f(0)=f(2)=0$ ma $f(1)=1$ e il grafico unisce i tre punti con segmenti, con un solo intervallo le due somme coincidono a zero. L’integrale è l’area del triangolo, pari a $1$.
 :::
 
+::::teorema{#errore-monotona titolo="Errore dei rettangoli per una funzione monotona"}
+Sia $f$ continua e crescente su $[a,b]$ e siano $L_n$, $R_n$ le somme dei rettangoli sinistri e destri su una griglia uniforme di passo $h$. Allora
+$$
+L_n\le I\le R_n,
+\qquad
+\left|I-\frac{L_n+R_n}{2}\right|\le \frac{h\bigl(f(b)-f(a)\bigr)}{2}.
+$$
+Il teorema dà un errore massimo calcolabile prima di conoscere $I$. Per $f(x)=x^2$ su $[0,2]$ con $n=2$ si ha $L_2=1$ e $R_2=5$, quindi la media $3$ dista al più $\dfrac{1\cdot(4-0)}{2}=2$ dall’integrale. L’errore effettivo è $3-\dfrac{8}{3}=\dfrac{1}{3}$, che rispetta il limite.
+
+:::dimostrazione
+L’idea è confrontare $f$ con le sue altezze ai bordi su ogni tratto. Poiché $f$ è crescente, per $x\in[x_i,x_{i+1}]$ vale $f(x_i)\le f(x)\le f(x_{i+1})$. Integrando su un tratto di larghezza $h$ si ottiene
+$$
+h\,f(x_i)\le\int_{x_i}^{x_{i+1}}f(x)\,dx\le h\,f(x_{i+1}).
+$$
+Sommando per $i=0,\ldots,n-1$, a sinistra compare $L_n$, al centro $I$ e a destra $R_n$, quindi $L_n\le I\le R_n$.
+
+Le altezze $f(x_1),\ldots,f(x_{n-1})$ compaiono in entrambe le somme, quindi nella differenza si elidono:
+$$
+R_n-L_n=h\sum_{i=1}^{n}f(x_i)-h\sum_{i=0}^{n-1}f(x_i)=h\bigl(f(x_n)-f(x_0)\bigr).
+$$
+Poiché $x_0=a$ e $x_n=b$, si ha $R_n-L_n=h\bigl(f(b)-f(a)\bigr)$. Il punto medio di un intervallo dista da ogni punto dell’intervallo al più metà della sua lunghezza. Poiché $I$ appartiene a $[L_n,R_n]$, la distanza fra $I$ e $\dfrac{L_n+R_n}{2}$ è al più $\dfrac{h\bigl(f(b)-f(a)\bigr)}{2}$. Per una funzione decrescente si scambiano i ruoli di $L_n$ e $R_n$ e si ottiene lo stesso limite con $f(a)-f(b)$.
+:::
+::::
+
 ## Rettangoli con altezza al centro
 
 :::definizione{#punti-medi titolo="Metodo dei punti medi"}
@@ -77,6 +101,8 @@ $$
 M_2=1(0{,}25+2{,}25)=2{,}5.
 $$
 La stima si può confrontare con $\dfrac{8}{3}$, ottenuto dalla primitiva. L’errore assoluto vale $\dfrac{8}{3}-\dfrac{5}{2}=\dfrac{1}{6}$. Una valutazione ai nodi $0$, $1$, $2$ darebbe informazioni diverse, perché nessuno di questi è il centro di un tratto.
+
+::grafico{f="x^2" poligoni="0,0 0,0.25 1,0.25 1,0;1,0 1,2.25 2,2.25 2,0" punti="0.5,0.25,pieno;1.5,2.25,pieno" segmenti="0.5,0,0.5,0.25;1.5,0,1.5,2.25" xmin=-0.5 xmax=2.7 ymin=-0.6 ymax=4.9 legenda="f(x)=x^2" titolo="Le altezze dei due rettangoli sono $f(0{,}5)=0{,}25$ e $f(1{,}5)=2{,}25$, prese al centro di ciascun tratto"}
 :::
 
 :::osservazione
@@ -115,6 +141,30 @@ $$
 La formula composta richiede $n$ pari e positivo. Il numero di pannelli è quindi $\dfrac{n}{2}$. Gli estremi globali hanno peso $1$. I nodi con indice dispari hanno peso $4$ perché sono centri di pannello. I nodi interni con indice pari hanno peso $2$ perché sono estremi di due pannelli. Con quattro intervalli la successione è $1,4,2,4,1$.
 :::
 
+::::teorema{#pannello-simpson titolo="Integrale della parabola per tre punti equidistanti"}
+Sia $p$ un polinomio di grado al più due e siano $y_0=p(-h)$, $y_1=p(0)$, $y_2=p(h)$ con $h>0$. Allora
+$$
+\int_{-h}^{h}p(u)\,du=\frac{h}{3}\bigl(y_0+4y_1+y_2\bigr).
+$$
+Il teorema spiega da dove vengono i pesi $1,4,1$ del pannello. Su un pannello $[x_{2j},x_{2j+2}]$ si pone $u=x-x_{2j+1}$, così il centro del pannello diventa $u=0$ e gli estremi diventano $u=\pm h$; la traslazione non cambia l’area. Per esempio, la parabola $p(u)=u^2+2u+2$ vale $1$, $2$ e $5$ in $-1$, $0$ e $1$; la formula dà $\dfrac{1}{3}(1+8+5)=\dfrac{14}{3}$, che coincide con l’integrale esatto.
+
+:::dimostrazione
+Si scrive $p(u)=\alpha+\beta u+\gamma u^2$ e si calcolano separatamente i due membri. Il termine $\beta u$ è dispari, quindi il suo integrale su $[-h,h]$ è zero, e
+$$
+\int_{-h}^{h}p(u)\,du=2\alpha h+\frac{2\gamma h^3}{3}.
+$$
+Dai valori nei nodi si ha $y_1=\alpha$ e $y_0+y_2=(\alpha-\beta h+\gamma h^2)+(\alpha+\beta h+\gamma h^2)=2\alpha+2\gamma h^2$. Di conseguenza
+$$
+\begin{aligned}
+\frac{h}{3}\bigl(y_0+4y_1+y_2\bigr)
+&=\frac{h}{3}\bigl(2\alpha+2\gamma h^2+4\alpha\bigr)\\[6pt]
+&=2\alpha h+\frac{2\gamma h^3}{3}.
+\end{aligned}
+$$
+I due membri coincidono, perciò la formula vale per ogni polinomio di grado al più due.
+:::
+::::
+
 :::esempio{titolo="Calcolare un pannello"}
 Con $f(x)=x^2$ su $[0,2]$ e due intervalli, $h=1$. Le tre altezze sono $0$, $1$ e $4$. La formula fornisce
 $$
@@ -128,7 +178,9 @@ La formula è esatta anche per i polinomi di grado tre. Per capirlo si prende il
 :::
 
 :::esempio{titolo="Un integrando di quarto grado"}
-Per $f(x)=x^4$ su $[0,2]$ e due intervalli, il pannello usa le altezze $0$, $1$ e $16$. Ne risulta $S_2=\dfrac{0+4+16}{3}=\dfrac{20}{3}$. L’integrale esatto è $\dfrac{32}{5}$ perché una primitiva è $\dfrac{x^5}{5}$. La stima supera il valore esatto di $\dfrac{4}{15}$. La griglia rispetta le ipotesi della formula e il calcolo è corretto. La differenza dipende dall’approssimazione della funzione con la parabola interpolante.
+Per $f(x)=x^4$ su $[0,2]$ e due intervalli, il pannello usa le altezze $0$, $1$ e $16$. Ne risulta $S_2=\dfrac{0+4+16}{3}=\dfrac{20}{3}$. L’integrale esatto è $\dfrac{32}{5}$ perché una primitiva è $\dfrac{x^5}{5}$. La stima supera il valore esatto di $\dfrac{4}{15}$. La griglia rispetta le ipotesi della formula e il calcolo è corretto. La differenza dipende dall’approssimazione della funzione con la parabola interpolante. La parabola che passa per $(0,0)$, $(1,1)$ e $(2,16)$ è $p(x)=7x^2-6x$, e Simpson calcola esattamente il suo integrale.
+
+::grafico{f="x^4;7*x^2-6*x" punti="0,0,pieno;1,1,pieno;2,16,pieno" xmin=-0.5 xmax=2.6 ymin=-3 ymax=18 legenda="f(x)=x^4;p(x)=7x^2-6x" titolo="La parabola $p$ passa per i tre nodi del pannello ma si discosta da $x^4$ fra un nodo e l’altro, perciò $S_2=\dfrac{20}{3}$ differisce da $I=\dfrac{32}{5}$"}
 :::
 
 ## Misure irregolari, segno e unità
@@ -139,6 +191,8 @@ $$
 (x_{i+1}-x_i)\frac{f(x_i)+f(x_{i+1})}{2}.
 $$
 Si sommano quindi tutti i contributi. Se le larghezze sono diverse, la stessa misura interna può avere un peso diverso da quello di un altro nodo interno. Per esempio, ai tempi $0$, $1$ e $3\,\mathrm{s}$ si misurano portate di $2$, $4$ e $8\,\mathrm{L/s}$. Il primo tratto fornisce $1\cdot3=3\,\mathrm{L}$ e il secondo $2\cdot6=12\,\mathrm{L}$. Il totale stimato è $15\,\mathrm{L}$.
+
+::grafico{poligoni="0,0 0,2 1,4 1,0;1,0 1,4 3,8 3,0" linee="0,2 1,4 3,8" punti="0,2,pieno;1,4,pieno;3,8,pieno" segmenti="1,0,1,4" xmin=-0.5 xmax=3.7 ymin=-0.8 ymax=9 nomi="t,q" legenda=0 titolo="Il primo trapezio ha base $1\,\mathrm{s}$ e area $3\,\mathrm{L}$, il secondo ha base $2\,\mathrm{s}$ e area $12\,\mathrm{L}$"}
 :::
 
 :::osservazione
@@ -152,7 +206,7 @@ Per applicare il singolo pannello di Simpson a tre misure, i due intervalli devo
 :::esempio{#segno-unita titolo="Spostamento e distanza"}
 Una velocità negativa descrive un moto nel verso opposto a quello positivo. L’integrale di $v$ è lo **spostamento** nel modello. L’integrale di $|v|$ è la **distanza percorsa** nel modello. Per un profilo lineare con velocità iniziale $2\,\mathrm{m/s}$, velocità finale $-2\,\mathrm{m/s}$ e durata $4\,\mathrm{s}$, il cambio di verso avviene a $2\,\mathrm{s}$. I triangoli sopra e sotto l’asse dei tempi hanno entrambi area di $2\cdot\dfrac{2}{2}=2\,\mathrm m$. Si sottraggono per ottenere lo spostamento di $0\,\mathrm m$ e si sommano per ottenere la distanza di $4\,\mathrm m$. Se i dati descrivono solo gli estremi, questi valori valgono per il modello lineare fra i campioni.
 
-::grafico{f="2-x" area="2-x;0;0;4" punti="0,2,pieno;2,0,pieno;4,-2,pieno" etichette="1,0.45,+;3,-0.5,−" xmin=-0.7 xmax=4.8 ymin=-2.7 ymax=2.7 nomi="t,v" legenda="v=2-t" titolo="I due triangoli hanno area uguale. L’integrale della velocità li conta con segni opposti."}
+::grafico{f="2-x" area="2-x;0;0;4" punti="0,2,pieno;2,0,pieno;4,-2,pieno" etichette="1,0.45,+;3.3,-0.7,−" xmin=-0.7 xmax=4.8 ymin=-2.7 ymax=2.7 nomi="t,v" legenda="v=2-t" titolo="I due triangoli hanno area uguale. L’integrale della velocità li conta con segni opposti."}
 :::
 
 ## Raffinare e controllare la stima
@@ -163,10 +217,14 @@ Su un intervallo fisso, raddoppiare il numero di tratti dimezza $h$. Se $Q_n$ e 
 
 :::esempio{titolo="Due trapezi e quattro trapezi"}
 Per $x^2$ su $[0,2]$, l’integrale esatto è $\dfrac{8}{3}$. Con due e quattro trapezi si ottengono $3$ e $\dfrac{11}{4}$. La variazione fra le stime è $3-\dfrac{11}{4}=\dfrac{1}{4}$. L’errore assoluto di quattro trapezi è $\dfrac{11}{4}-\dfrac{8}{3}=\dfrac{1}{12}$. Per questo integrando il dimezzamento del passo riduce l’errore a un quarto. Il valore $\dfrac{1}{4}$ calcolato fra le due stime e il rapporto fra gli errori sono quantità diverse, anche se qui coincidono numericamente.
+
+::grafico{f="x^2" poligoni="0,0 0.5,0.25 1,1 1.5,2.25 2,4 2,0" segmenti="0,0,1,1;1,1,2,4" punti="0.5,0.25,pieno;1,1,pieno;1.5,2.25,pieno;2,4,pieno" xmin=-0.5 xmax=2.7 ymin=-0.6 ymax=4.9 legenda="f(x)=x^2" titolo="Le corde tratteggiate sono quelle di $T_2$; la regione colorata è quella di $T_4$, più vicina al grafico della parabola"}
 :::
 
 :::attenzione
 Due griglie possono saltare entrambe una variazione stretta. Per esempio su $[0,2]$ i trapezi con $n=2$ campionano ai nodi $0$, $1$, $2$, mentre quelli con $n=4$ aggiungono $0{,}5$ e $1{,}5$. Una funzione continua può valere zero in tutti questi punti e avere un picco triangolare tra $0$ e $0{,}5$. Entrambe le stime danno zero, mentre l’integrale è positivo. Quando è disponibile una garanzia, come il limite ricavato dai due rettangoli per una funzione monotona, è possibile confrontarla direttamente con la tolleranza richiesta.
+
+::grafico{poligoni="0.125,0 0.25,1 0.375,0" linee="0,0 0.125,0 0.25,1 0.375,0 2,0" punti="0,0,pieno;0.5,0,pieno;1,0,pieno;1.5,0,pieno;2,0,pieno" xmin=-0.3 xmax=2.4 ymin=-0.4 ymax=1.4 legenda=0 titolo="Il picco fra $0{,}125$ e $0{,}375$ non contiene nodi, quindi con $n=2$ e con $n=4$ tutti i campioni valgono zero"}
 :::
 
 :::esempio{titolo="Un numero di intervalli per la tolleranza"}

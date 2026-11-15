@@ -22,6 +22,8 @@ I=2000\cdot 0{,}04\cdot\frac{3}{4}=60\,\mathrm{euro},
 \qquad M=2060\,\mathrm{euro}.
 $$
 Ogni mese matura un dodicesimo dell'interesse annuo di $80\,\mathrm{euro}$. Il valore di $60\,\mathrm{euro}$ si ritrova anche sommando nove quote mensili.
+
+::grafico{curve="t,2000+80*t,0,3.3" xmin=-0.4 xmax=3.3 ymin=1800 ymax=2300 nomi="t,M" legenda="M(t)=2000\,(1+0{,}04\,t)" punti="0,2000,pieno;0.75,2060,pieno" segmenti="0.75,1800,0.75,2060;0,2060,0.75,2060" etichette="0.82,2030,2060" titolo="Montante in euro di $2000$ euro al $4\%$ annuo semplice in funzione della durata $t$ in anni. A $t=\dfrac{3}{4}$ il montante vale $2060$ euro."}
 :::
 
 :::osservazione
@@ -65,6 +67,8 @@ Queste due relazioni descrivono la stessa operazione vista alle due date. Per pa
 
 :::esempio{titolo="Interessi su due periodi"}
 Un deposito di $1000\,\mathrm{euro}$ rende il $10\%$ annuo composto. Al termine del primo anno il montante è $1100\,\mathrm{euro}$. Nel secondo anno l'interesse è il $10\%$ di $1100\,\mathrm{euro}$, quindi vale $110\,\mathrm{euro}$. Il montante finale è $1210\,\mathrm{euro}$. I $10\,\mathrm{euro}$ in più rispetto ai $200\,\mathrm{euro}$ di interesse semplice sono l'interesse maturato sui $100\,\mathrm{euro}$ del primo anno.
+
+::grafico{assi=0 uguale=1 xmin=-0.4 xmax=2.8 ymin=-1.3 ymax=1.55 linee="-0.2,0 2.45,0" vettori="2,0,2,1.21,+1210;0,0,0,-1,−1000;2.4,0,2.65,0" etichette="-0.14,-0.17,0;0.92,-0.17,1;1.92,-0.17,2;2.7,-0.12,t" segmenti="1,-0.06,1,0.06" titolo="Asse dei tempi del depositante, in anni. La freccia verso il basso è l'uscita di $1000$ euro alla data $0$; la freccia verso l'alto è l'entrata di $1210$ euro alla data $2$."}
 :::
 
 :::osservazione
@@ -108,6 +112,8 @@ D=5000\cdot0{,}06\cdot\frac{1}{2}=150\,\mathrm{euro},
 \qquad V=4850\,\mathrm{euro}.
 $$
 Il rapporto $\dfrac{150}{5000}$ misura lo sconto relativo alla somma futura. Il rapporto $\dfrac{150}{4850}$ misura invece il costo dell'anticipo rispetto alla somma ricevuta. I due rapporti usano la stessa differenza in euro e basi di calcolo diverse.
+
+::grafico{assi=0 uguale=1 xmin=-0.8 xmax=7.4 ymin=-3.4 ymax=3.5 linee="-0.4,0 6.6,0" vettori="6,0,6,3,+5000;0,0,0,-2.91,−4850;6.5,0,7,0" etichette="-0.28,-0.4,0;5.85,-0.4,6;6.85,-0.4,mesi" segmenti="1,-0.08,1,0.08;2,-0.08,2,0.08;3,-0.08,3,0.08;4,-0.08,4,0.08;5,-0.08,5,0.08" titolo="Flussi della banca che anticipa il credito. Alla data $0$ paga $4850$ euro (uscita, verso il basso); dopo sei mesi incassa $5000$ euro (entrata, verso l'alto)."}
 :::
 
 :::attenzione
@@ -127,6 +133,8 @@ Lo sconto si può anche scrivere $D=Vit$. La somma su cui si calcola l'interesse
 
 :::esempio{titolo="Confronto a parità di tasso dichiarato"}
 Per un credito di $1100\,\mathrm{euro}$ a un anno, il tasso razionale del $10\%$ dà un valore attuale di $1000\,\mathrm{euro}$. Lo sconto commerciale del $10\%$ dà un valore attuale di $990\,\mathrm{euro}$. Nel primo caso lo sconto è il $10\%$ di $1000\,\mathrm{euro}$ e nel secondo è il $10\%$ di $1100\,\mathrm{euro}$. Per questo il valore attuale razionale è maggiore.
+
+::grafico{f="100*(1-0.1*x);100/(1+0.1*x)" xmin=0 xmax=11 ymin=0 ymax=100 nomi="t,V (%)" legenda="\text{Commerciale};\text{Razionale}" punti="1,90,pieno;1,90.909,pieno;10,0,pieno;10,50,pieno" titolo="Valore attuale in percentuale dell'importo a scadenza, al $10\%$ annuo e con $t$ in anni. La retta commerciale $100\,(1-0{,}1\,t)$ si annulla a $t=10$; la curva razionale $\dfrac{100}{1+0{,}1\,t}$ resta positiva e a $t=10$ vale $50$."}
 :::
 
 :::osservazione
@@ -197,6 +205,8 @@ $$
 \left(1+\frac{j}{2m}\right)^2=1+\frac{j}{m}+\frac{j^2}{4m^2}.
 $$
 Il termine aggiuntivo è positivo. Elevando entrambi i fattori alla potenza $m$, il vantaggio del secondo si conserva sul montante annuo. In questo confronto si tiene fisso il nominale e si misura l'effetto della frequenza.
+
+::grafico{xmin=0 xmax=13 ymin=118 ymax=128.6 nomi="m,euro" punti="1,120,pieno;2,123.6,pieno;3,124.864,pieno;4,125.509,pieno;6,126.162,pieno;12,126.825,pieno" asintoti="y=127.497" titolo="Interessi di un anno su $1000$ euro al nominale $j=12\%$ convertibile $m$ volte, cioè $1000\left[\left(1+\dfrac{0{,}12}{m}\right)^m-1\right]$. I valori crescono con $m$ e restano sotto $1000\,(e^{0{,}12}-1)\approx127{,}50$ euro, la retta tratteggiata."}
 :::
 
 :::attenzione
@@ -229,6 +239,8 @@ $$
 =0{,}06.
 $$
 Il fattore di montante è $e^{0{,}06}$. La forza media annua sul biennio è $\dfrac{0{,}06}{2}=0{,}03$. Il valore finale $\delta(2)=0{,}04$ descrive invece la crescita relativa alla fine del biennio. Usarlo per l'intero intervallo sovrastimerebbe il montante.
+
+::grafico{f="2+x" area="2+x;0;0;2" xmin=0 xmax=2.6 ymin=0 ymax=5 nomi="u,δ (%)" legenda="100\,\delta(u)=2+u" punti="0,2,pieno;2,4,pieno" titolo="Forza $\delta(u)=0{,}02+0{,}01u$ in punti percentuali, con $u$ in anni. L'area colorata fra $0$ e $2$ vale $6$ punti percentuali, cioè $0{,}06$, ed è l'esponente del fattore di montante sul biennio."}
 :::
 
 ## Scindibilità e reinvestimento

@@ -25,6 +25,9 @@ Il rapporto $\dfrac{M}{P}$ è il fattore di crescita sull'intera durata. La pote
 
 :::esempio{titolo="Rendimento annuo e rendimento complessivo"}
 Uno zero coupon si acquista per $800\,\mathrm{euro}$ e rimborsa $968\,\mathrm{euro}$ dopo due anni. Il rapporto $\dfrac{968}{800}$ è $1{,}21$, quindi il rendimento complessivo è $21\%$. Il fattore annuo è $\sqrt{1{,}21}=1{,}1$, perciò il rendimento annuo effettivo è il $10\%$. Si verifica il risultato capitalizzando $800\,\mathrm{euro}$ per due anni al $10\%$.
+
+::grafico{assi=0 unicolore=1 legenda=0 xmin=-0.5 xmax=3.25 ymin=-1.2 ymax=1.25 linee="-0.3,0 2.55,0;0,-0.035 0,0.035;1,-0.035 1,0.035;2,-0.035 2,0.035" vettori="0,0,0,-0.826;2,0,2,1.0" etichette="-0.08,-0.976,800;1.92,1.09,968;0.04,0.07,0;1.04,-0.15,1;2.04,-0.15,2;2.6,-0.03,t (anni)" titolo="Flussi dello zero coupon: esborso di 800 euro oggi e incasso di 968 euro fra due anni. Frecce verso l'alto per gli incassi e verso il basso per gli esborsi, importi in euro."}
+
 :::
 
 :::osservazione
@@ -86,7 +89,10 @@ Ogni termine $F_k(1+i)^{-t_k}$ è continuo e strettamente decrescente per $i>-1$
 ::::
 
 :::esempio{titolo="Ricerca del tasso per tentativi"}
-Un titolo costa $900\,\mathrm{euro}$ e paga $60\,\mathrm{euro}$ fra un anno e $1060\,\mathrm{euro}$ fra due anni. Al $10\%$ annuo il prezzo teorico è circa $930{,}58\,\mathrm{euro}$. Al $15\%$ è circa $853{,}69\,\mathrm{euro}$. Il prezzo osservato è fra questi valori, quindi il TRES appartiene all'intervallo fra $10\%$ e $15\%$. Con la bisezione si valuta il prezzo teorico al punto medio. Se questo prezzo è maggiore di quello osservato, si conserva la metà con i tassi più alti. Se è minore, si conserva la metà con i tassi più bassi.
+Un titolo costa $900\,\mathrm{euro}$ e paga $60\,\mathrm{euro}$ fra un anno e $1060\,\mathrm{euro}$ fra due anni. Al $10\%$ annuo il prezzo teorico è circa $930{,}58\,\mathrm{euro}$. Al $15\%$ è circa $853{,}69\,\mathrm{euro}$. Il prezzo osservato è fra questi valori, quindi il TRES appartiene all'intervallo fra $10\%$ e $15\%$. Con la bisezione si valuta il prezzo teorico al punto medio. Se questo prezzo è maggiore di quello osservato, si conserva la metà con i tassi più alti. Se è minore, si conserva la metà con i tassi più bassi. Moltiplicando l'equazione $900=\dfrac{60}{q}+\dfrac{1060}{q^2}$ per $q^2$, con $q=1+i$, si ottiene $900q^2-60q-1060=0$. La sua radice positiva è $q=\dfrac{1+\sqrt{1061}}{30}$, quindi il TRES è circa l'$11{,}91\%$.
+
+::grafico{f="60/(1+x/100)+1060/(1+x/100)^2;900" xmin=0 xmax=20 ymin=760 ymax=1160 nomi="i,P" legenda="P(i);P_{\mathrm{obs}}=900" punti="10,930.58,vuoto;15,853.69,vuoto;11.91,900,pieno" segmenti="11.91,760,11.91,900" etichette="12.3,785,i ≈ 11,91" titolo="Prezzo teorico in euro al variare del rendimento annuo percentuale. L'intersezione con la retta del prezzo osservato dà il TRES; i punti vuoti sono le prove al 10% e al 15%."}
+
 :::
 
 :::attenzione
@@ -116,6 +122,9 @@ P&=\frac{30}{1{,}05}+\frac{1030}{1{,}05^2}\\[6pt]
  &\approx962{,}81\,\mathrm{euro}.
 \end{aligned}
 $$
+
+::grafico{assi=0 unicolore=1 legenda=0 xmin=-0.5 xmax=3.25 ymin=-1.2 ymax=1.25 linee="-0.3,0 2.55,0;0,-0.035 0,0.035;1,-0.035 1,0.035;2,-0.035 2,0.035" vettori="0,0,0,-0.935;1,0,1,0.2;2,0,2,1.0" etichette="-0.16,-1.085,962,81;0.947,0.29,30;1.893,1.09,1030;0.04,0.07,0;1.04,-0.15,1;2.04,-0.15,2;2.6,-0.03,t (semestri)" titolo="Flussi del titolo con cedole semestrali valutato al 5% per semestre. Frecce verso l'alto per gli incassi e verso il basso per gli esborsi, importi in euro. Le lunghezze delle frecce non sono in scala."}
+
 :::
 
 :::osservazione
@@ -142,6 +151,18 @@ Un titolo di nominale $2000\,\mathrm{euro}$ quota al corso secco $98{,}5$ per $1
 
 :::osservazione
 Nel calcolo del valore attuale tra due cedole conta il tempo *residuo* alla prossima scadenza. Se lo stesso conteggio viene usato per il rateo e per lo sconto, il prossimo flusso dista $1-\alpha$ periodi. Con cedole regolari, $t_k=k-\alpha$ per la $k$-esima scadenza residua. Il prezzo teorico tel quel è dunque $q^{\alpha}\sum_{k=1}^{n}F_kv^k$. Si può ottenere lo stesso risultato partendo dal valore subito dopo la cedola precedente e capitalizzandolo per $\alpha$ periodi, perché in quel tratto il titolo non paga alcun flusso. Il corso secco si ricava poi sottraendo il rateo, che segue la regola lineare.
+:::
+
+:::esempio{titolo="Tel quel e corso secco durante un periodo"}
+Un titolo di nominale $1000\,\mathrm{euro}$ paga una cedola annua di $50\,\mathrm{euro}$ e, subito dopo uno stacco, ha tre cedole residue. Al rendimento annuo effettivo del $4\%$ il suo prezzo in quella data è
+
+$$
+P_0=50\,a_{\overline 3|0{,}04}+\frac{1000}{1{,}04^3}\approx1027{,}75\,\mathrm{euro}.
+$$
+
+Fino alla cedola successiva il titolo non paga alcun flusso, quindi dopo una frazione $\alpha$ del periodo il prezzo tel quel è $P_{\mathrm{tq}}(\alpha)=1027{,}75\cdot1{,}04^{\alpha}$ e il corso secco è $P_{\mathrm{s}}(\alpha)=P_{\mathrm{tq}}(\alpha)-50\alpha$. A metà periodo si hanno $P_{\mathrm{tq}}\approx1048{,}10\,\mathrm{euro}$ e $P_{\mathrm{s}}\approx1023{,}10\,\mathrm{euro}$. Subito prima della cedola il tel quel vale circa $1068{,}86\,\mathrm{euro}$, cioè la cedola di $50\,\mathrm{euro}$ più il prezzo $1018{,}86\,\mathrm{euro}$ del titolo con due cedole residue. Dopo lo stacco il tel quel scende a $1018{,}86\,\mathrm{euro}$, che è anche il corso secco a fine periodo. Perciò alla data cedolare il tel quel diminuisce dell'importo della cedola, mentre il corso secco varia con continuità.
+
+::grafico{curve="t,1027.7509*1.04^t,0,1;t,1027.7509*1.04^t-50*t,0,1" xmin=0 xmax=1.15 ymin=1000 ymax=1100 nomi="α,euro" legenda="P_{\mathrm{tq}}(\alpha);P_{\mathrm{s}}(\alpha)" punti="0,1027.75,pieno;1,1068.86,vuoto;1,1018.86,pieno" titolo="Prezzo tel quel e corso secco nel periodo che precede la prossima cedola, per il titolo con cedola di 50 euro, tre cedole residue e rendimento del 4% annuo."}
 :::
 
 :::attenzione
@@ -172,10 +193,16 @@ Un titolo di nominale $1000\,\mathrm{euro}$ paga $60\,\mathrm{euro}$ fra un anno
 Per un rimborso $M$ diverso dal nominale, la stessa identità dà $P-M=(C-iM)a_{\overline n|i}$. Il confronto con $M$ dipende quindi da $\dfrac{C}{M}$, mentre per il confronto con $N$ occorre tenere conto anche di $M-N$. Per esempio, con $N=1000$, $M=1050$, $C=20$, una sola scadenza e $i=5\%$, il prezzo $\dfrac{1070}{1{,}05}$ è sopra il nominale e sotto il rimborso.
 :::
 
+:::esempio{titolo="Avvicinamento alla pari"}
+Due titoli di nominale e rimborso $1000\,\mathrm{euro}$ hanno dieci cedole annue residue, di $60\,\mathrm{euro}$ il primo e di $40\,\mathrm{euro}$ il secondo, e sono valutati al rendimento costante del $5\%$. Dopo $k$ stacchi restano $10-k$ cedole, quindi la relazione fra prezzo e nominale dà $P=1000\pm10\,a_{\overline{10-k}|0{,}05}$, con il segno più per il primo titolo. Oggi i prezzi sono circa $1077{,}22$ e $922{,}78\,\mathrm{euro}$. Dopo cinque anni si ha $a_{\overline 5|0{,}05}\approx4{,}3295$, perciò i prezzi diventano circa $1043{,}29$ e $956{,}71\,\mathrm{euro}$. Il fattore della rendita diminuisce quando diminuiscono le cedole residue, quindi premio e sconto si riducono a ogni stacco e alla scadenza resta il solo rimborso di $1000\,\mathrm{euro}$.
+
+::grafico{curve="t,1000+10*(1-1.05^(t-10))/0.05,0,10;t,1000-10*(1-1.05^(t-10))/0.05,0,10" xmin=0 xmax=10.8 ymin=900 ymax=1100 nomi="t,P" legenda="\text{cedola }60;\text{cedola }40" punti="0,1077.22,pieno;0,922.78,pieno;10,1000,pieno" asintoti="y=1000" titolo="Prezzi in euro subito dopo lo stacco al rendimento costante del 5%, con t anni trascorsi su dieci. Le curve uniscono i valori calcolati alle date cedolari t = 0, 1, …, 10."}
+:::
+
 :::esempio{titolo="Curva del prezzo a flussi fissi"}
 Un titolo di nominale $1000\,\mathrm{euro}$ paga $50\,\mathrm{euro}$ alla fine del primo anno e $1050\,\mathrm{euro}$ alla fine del secondo. Il rendimento effettivo annuo è $i$. Al $5\%$ il titolo quota alla pari. Poiché gli incassi sono positivi, ogni aumento di $i$ riduce il valore attuale di entrambi. Per misurare la sensibilità del prezzo a questi cambiamenti si rimanda al capitolo su duration e convexity.
 
-::grafico{f="50/(1+x/100)+1050/(1+x/100)^2" xmin=-1 xmax=13 ymin=850 ymax=1150 nomi="i,P" punti="5,1000,pieno" etichette="5.8,1015,Alla pari" legenda="P(i)" titolo="Prezzo in euro al variare del rendimento annuo percentuale per un titolo con due anni residui"}
+::grafico{f="50/(1+x/100)+1050/(1+x/100)^2" xmin=0 xmax=13 ymin=850 ymax=1150 nomi="i,P" punti="5,1000,pieno" etichette="5.8,1015,Alla pari" legenda="P(i)" titolo="Prezzo in euro al variare del rendimento annuo percentuale per un titolo con due anni residui"}
 
 :::
 
@@ -201,6 +228,9 @@ Se una cedola è incassata prima della data finale, il suo contributo al patrimo
 
 :::esempio{titolo="Patrimonio finale con reinvestimento"}
 Un titolo costa $1000\,\mathrm{euro}$, paga due cedole annue da $50\,\mathrm{euro}$ e rimborsa $1000\,\mathrm{euro}$ al secondo anno. Il TRES è il $5\%$. Se la prima cedola viene reinvestita al $2\%$, vale $51\,\mathrm{euro}$ al secondo anno. Il patrimonio finale è $51+50+1000=1101\,\mathrm{euro}$. Il rendimento annuo realizzato è $\sqrt{1{,}101}-1$, inferiore al $5\%$ perché $1{,}101<1{,}05^2$.
+
+::grafico{assi=0 unicolore=1 legenda=0 xmin=-0.5 xmax=3.25 ymin=-1.2 ymax=1.25 linee="-0.3,0 2.55,0;0,-0.035 0,0.035;1,-0.035 1,0.035;2,-0.035 2,0.035" vettori="0,0,0,-0.952;1,0,1,0.2;2,0,2,1.0" segmenti="1,0.2,2,0.2" etichette="-0.107,-1.102,1000;0.947,0.29,50;1.893,1.09,1050;0.04,0.07,0;1.04,-0.15,1;2.04,-0.15,2;2.6,-0.03,t (anni);1.3,0.26,51 a t = 2" titolo="Il titolo costa 1000 euro e paga 50 euro al primo anno e 1050 euro al secondo. La prima cedola reinvestita al 2% vale 51 euro al secondo anno. Frecce verso l'alto per gli incassi e verso il basso per gli esborsi, importi in euro. Le lunghezze delle frecce non sono in scala."}
+
 :::
 
 ## Portafoglio di titoli
@@ -211,6 +241,9 @@ Siano $x_j$ il numero di unità detenute del titolo $j$ e $P_j$ il prezzo unitar
 
 :::esempio{titolo="Dai pesi di mercato alle quantità"}
 Si investono $4500\,\mathrm{euro}$ in due zero coupon, destinando il $40\%$ al primo e il $60\%$ al secondo. Il primo costa $90\,\mathrm{euro}$ per unità e rimborsa $100\,\mathrm{euro}$ tra un anno. Il secondo costa $75\,\mathrm{euro}$ e rimborsa $100\,\mathrm{euro}$ tra due anni. Le quantità sono $\dfrac{1800}{90}=20$ unità del primo titolo e $\dfrac{2700}{75}=36$ del secondo. Il portafoglio paga $2000\,\mathrm{euro}$ al primo anno e $3600\,\mathrm{euro}$ al secondo. I pesi degli incassi differiscono dai pesi di mercato perché i prezzi unitari dei due titoli sono diversi.
+
+::grafico{assi=0 unicolore=1 legenda=0 xmin=-0.5 xmax=3.25 ymin=-1.2 ymax=1.25 linee="-0.3,0 2.55,0;0,-0.035 0,0.035;1,-0.035 1,0.035;2,-0.035 2,0.035" vettori="0,0,0,-1.0;1,0,1,0.444;2,0,2,0.8" etichette="-0.107,-1.15,4500;0.893,0.534,2000;1.893,0.89,3600;0.04,0.07,0;1.04,-0.15,1;2.04,-0.15,2;2.6,-0.03,t (anni)" titolo="Flussi aggregati del portafoglio di 20 e 36 zero coupon. Frecce verso l'alto per gli incassi e verso il basso per gli esborsi, importi in euro."}
+
 :::
 
 :::osservazione

@@ -145,6 +145,22 @@ L'energia finale vale $72\,\mathrm{J}$. La massa è la stessa nei due stati, qui
 Per valutare una legge si calcolano quantità che il modello prevede costanti. Per una relazione affine, le pendenze tra coppie successive di punti devono coincidere. Per la proporzionalità diretta deve coincidere anche il rapporto tra ordinata e ascissa. Per una dipendenza inversa si controllano i prodotti $xy$. Per una dipendenza quadratica della forma $y=kx^2$ si confrontano i rapporti tra ordinate e quadrati delle ascisse. Questi test si eseguono su misure espresse nelle stesse unità, così i risultati sono confrontabili.
 :::
 
+::::teorema{#allineamento titolo="Condizione di allineamento di tre punti"}
+Siano $P_1=(x_1,y_1)$, $P_2=(x_2,y_2)$ e $P_3=(x_3,y_3)$ tre punti con $x_1<x_2<x_3$. I tre punti appartengono a una stessa retta se e solo se
+$$
+\frac{y_2-y_1}{x_2-x_1}=\frac{y_3-y_2}{x_3-x_2}.
+$$
+La condizione giustifica il controllo delle pendenze su una tabella di misure. Per esempio, i punti $(0,1)$, $(2,5)$ e $(5,11)$ hanno pendenze $\dfrac{4}{2}=2$ e $\dfrac{6}{3}=2$, quindi stanno sulla retta $y=2x+1$.
+
+:::dimostrazione
+L'idea è costruire la retta con i primi due punti e controllare che contenga il terzo.
+
+Se i tre punti stanno sulla retta $y=mx+q$, la formula della pendenza applicata alle coppie $P_1,P_2$ e $P_2,P_3$ dà in entrambi i casi il valore $m$, quindi i due rapporti coincidono.
+
+Viceversa, sia $m$ il valore comune dei due rapporti e sia $q=y_1-mx_1$. Dal primo rapporto segue $y_2=y_1+m(x_2-x_1)=mx_2+q$, quindi $P_2$ sta sulla retta $y=mx+q$. Dal secondo rapporto segue $y_3=y_2+m(x_3-x_2)=mx_2+q+mx_3-mx_2=mx_3+q$, perciò anche $P_3$ sta sulla stessa retta.
+:::
+::::
+
 :::esempio{titolo="Un incremento di ascissa, tre risposte"}
 Si confrontano tre modelli adimensionali. Tutti producono il valore $4$ a $x=2$. Passando a $x=4$, il modello diretto $y=2x$ fornisce $8$. Il modello inverso $y=\dfrac{8}{x}$ fornisce $2$. Il modello quadratico $y=x^2$ fornisce $16$. Con un solo punto ciascuno dei tre modelli può essere compatibile con i dati, perché il coefficiente si può ricavare da quel punto. Una seconda misura distingue questi tre modelli candidati, perché le previsioni sono diverse.
 
@@ -219,6 +235,30 @@ Nel grafico velocità-tempo, lo **spostamento** tra due istanti è l'area con se
 
 Per una velocità costante, la regione è un rettangolo. Se la velocità varia linearmente e i valori iniziale e finale hanno lo stesso segno, lo spostamento è il prodotto tra durata e media aritmetica delle due velocità. La formula segue dall'area del trapezio. Se il grafico attraversa l'asse, la suddivisione all'istante in cui $v=0$ consente di ricavare anche la distanza.
 :::
+
+::::teorema{#spostamento-lineare titolo="Spostamento con velocità che varia linearmente"}
+Se tra gli istanti $t_1<t_2$ la velocità varia linearmente da $v_1$ a $v_2$, lo spostamento è
+$$
+\Delta s=\frac{v_1+v_2}{2}\,(t_2-t_1).
+$$
+La formula vale con qualunque segno delle due velocità. Quando $v_1$ e $v_2$ hanno lo stesso segno, il corpo non inverte il moto e la distanza percorsa è $|\Delta s|$. Per esempio, una velocità che scende da $5$ a $1\,\mathrm{m/s}$ in $3\,\mathrm{s}$ produce uno spostamento di $\dfrac{5+1}{2}\cdot 3\,\mathrm{m}=9\,\mathrm{m}$.
+
+:::dimostrazione
+L'idea è calcolare l'area con segno della regione tra il segmento e l'asse dei tempi. Si pone $\Delta t=t_2-t_1$.
+
+Se $v_1$ e $v_2$ sono maggiori o uguali a zero, la regione si ottiene dal rettangolo di altezza $v_1$ aggiungendo, se $v_2>v_1$, o togliendo, se $v_2<v_1$, il triangolo di altezza $|v_2-v_1|$, entrambi di base $\Delta t$. In tutti e due i casi l'area vale
+$$
+v_1\Delta t+\frac{(v_2-v_1)\Delta t}{2}=\frac{v_1+v_2}{2}\,\Delta t.
+$$
+Se entrambe sono minori o uguali a zero, la regione è la simmetrica rispetto all'asse di quella delle velocità $-v_1$ e $-v_2$, quindi l'area con segno cambia soltanto di segno e la formula resta valida.
+
+Se $v_1>0>v_2$, la velocità si annulla all'istante $t_0$ in cui $t_0-t_1=\dfrac{v_1}{v_1-v_2}\Delta t$, e di conseguenza $t_2-t_0=\dfrac{-v_2}{v_1-v_2}\Delta t$. I due triangoli hanno aree con segno $\dfrac{v_1(t_0-t_1)}{2}$ e $\dfrac{v_2(t_2-t_0)}{2}$, perciò
+$$
+\Delta s=\frac{\Delta t}{2}\cdot\frac{v_1^2-v_2^2}{v_1-v_2}=\frac{v_1+v_2}{2}\,\Delta t,
+$$
+perché $v_1^2-v_2^2=(v_1-v_2)(v_1+v_2)$. Il caso $v_1<0<v_2$ si tratta allo stesso modo.
+:::
+::::
 
 :::esempio{titolo="Due regioni separate da un'inversione di marcia"}
 La velocità diminuisce linearmente da $4\,\mathrm{m/s}$ a $-2\,\mathrm{m/s}$ tra $0$ e $6\,\mathrm{s}$. La pendenza è $-1\,\mathrm{m/s^2}$, quindi $v(t)=4\,\mathrm{m/s}-(1\,\mathrm{m/s^2})t$. La velocità si annulla al tempo $t=4\,\mathrm{s}$. Prima di quell'istante la regione ha forma triangolare, con base di $4\,\mathrm{s}$ e altezza di $4\,\mathrm{m/s}$. Dopo lo zero la regione è un triangolo con base di $2\,\mathrm{s}$ e altezza geometrica di $2\,\mathrm{m/s}$. Indicando con $S_+$ e $S_-$ le aree geometriche sopra e sotto l'asse, si ottiene
