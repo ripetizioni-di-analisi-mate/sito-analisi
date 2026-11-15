@@ -22,6 +22,9 @@ V_0=\frac{220}{1{,}1}+\frac{363}{1{,}1^2}
 +\frac{1331}{1{,}1^3}=1500\,\mathrm{euro}.
 $$
 Al tempo $3$ l'ultima rata è già alla data di valutazione e quindi entra nel montante con il suo importo nominale. Le altre due rate maturano interessi rispettivamente per due anni e un anno. Si trova $M_3=220\cdot1{,}1^2+363\cdot1{,}1+1331=1996{,}50\,\mathrm{euro}$, lo stesso importo che si ottiene da $1500\cdot1{,}1^3$.
+
+::grafico{assi=0 unicolore=1 legenda=0 xmin=-0.5 xmax=4.1 ymin=-0.45 ymax=2.35 linee="-0.3,0 3.5,0;3.38,0.06 3.5,0 3.38,-0.06;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04;3,-0.04 3,0.04" vettori="1,0,1,0.331;2,0,2,0.546;3,0,3,2.0" etichette="0.85,0.44,220;1.85,0.66,363;2.8,2.12,1331;-0.04,-0.2,0;0.96,-0.2,1;1.96,-0.2,2;2.96,-0.2,3;3.55,-0.03,t (anni)" titolo="Incassi di $220$, $363$ e $1331$ euro alle date $1$, $2$ e $3$. Le frecce verso l'alto sono incassi e le loro altezze sono proporzionali agli importi."}
+
 :::
 
 :::attenzione
@@ -68,6 +71,9 @@ La prima rata è $\dfrac{500}{3}\,\mathrm{euro}$ e l'ultima è $\dfrac{800}{3}\,
 
 :::osservazione
 Se $d<0$, le rate diminuiscono. Perché rappresentino tutte incassi non negativi basta verificare $R_1+(n-1)d\geq0$, poiché l'ultima rata è la più piccola. La condizione è utile anche nella ricerca di $n$. Per esempio, a partire da $240$ euro con decremento di $70$ euro, la quarta rata è $30$ euro e la quinta sarebbe $-40$ euro. Un piano di soli incassi con questi parametri si può quindi prolungare al massimo per quattro scadenze.
+
+::grafico{curve="t,240-70*(t-1),1,5" xmin=0 xmax=5.8 ymin=-80 ymax=320 nomi="k,euro" punti="1,240,pieno;2,170,pieno;3,100,pieno;4,30,pieno;5,-40,vuoto" segmenti="1,0,1,240;2,0,2,170;3,0,3,100;4,0,4,30;5,0,5,-40" etichette="1.12,262,240;2.12,192,170;3.12,122,100;4.12,52,30;5.15,-58,−40" legenda="R_k=240-70(k-1)" titolo="Rate di una progressione aritmetica con $R_1=240$ euro e $d=-70$ euro. I punti pieni sono le prime quattro rate; il punto vuoto è la quinta rata, che sarebbe negativa."}
+
 :::
 
 :::esempio{titolo="Valore di un incremento dal secondo anno"}
@@ -102,7 +108,10 @@ Un abbonamento prevede quattro incassi annuali e il primo incasso è $110$ euro 
 :::
 
 :::osservazione
-Se $i>g$, i valori attuali diminuiscono perché $\rho<1$, anche quando gli importi nominali aumentano. Se $i<g$, i valori attuali aumentano perché $\rho>1$. Per una rendita finita di rate positive il valore resta positivo in entrambi i casi. Quando $i<g$, il denominatore $i-g$ e il fattore $1-\rho^n$ sono entrambi negativi, quindi il loro rapporto è positivo.
+Se $i>g$, i valori attuali diminuiscono perché $\rho<1$, anche quando gli importi nominali aumentano. Se $i<g$, i valori attuali aumentano perché $\rho>1$. Per una rendita finita di rate positive il valore resta positivo in entrambi i casi. Quando $i<g$, il denominatore $i-g$ e il fattore $1-\rho^n$ sono entrambi negativi, quindi il loro rapporto è positivo. Per esempio, con $R_1=100$ euro, $g=10\%$ e $i=20\%$ la sesta rata vale $100\cdot1{,}1^5=161{,}05$ euro, mentre il suo valore attuale è $\dfrac{161{,}05}{1{,}2^6}\approx53{,}94$ euro.
+
+::grafico{curve="t,100*1.1^(t-1),1,6;t,100*1.1^(t-1)/1.2^t,1,6" xmin=0 xmax=6.6 ymin=0 ymax=200 nomi="k,euro" punti="1,100,pieno;2,110,pieno;3,121,pieno;4,133.1,pieno;5,146.41,pieno;6,161.051,pieno;1,83.333,vuoto;2,76.389,vuoto;3,70.023,vuoto;4,64.188,vuoto;5,58.839,vuoto;6,53.936,vuoto" legenda="R_k=100\cdot1{,}1^{k-1};R_kv^k\ \text{con}\ i=20\%" titolo="Rate che crescono del $10\%$ (punti pieni) e loro valori attuali al $20\%$ (punti vuoti). Poiché $\rho=\dfrac{1{,}1}{1{,}2}<1$, i valori attuali diminuiscono anche se gli importi aumentano."}
+
 :::
 
 :::esempio{titolo="Valutazione di una rendita differita"}
@@ -129,6 +138,9 @@ Una rendita perpetua paga $120$ euro fra un anno e aumenta del $2\%$ a ogni scad
 
 :::attenzione
 La condizione $i>g$ riguarda la perpetuità, poiché si deve sommare un numero infinito di valori attuali. Se $i=g=5\%$ e la prima rata è $105$ euro, dieci rate valgono $1000$ euro. In una perpetuità con gli stessi dati le somme parziali valgono $100n$ euro e crescono senza limite.
+
+::grafico{f="3000*(1-(1.02/1.06)^x);100*x" xmin=0 xmax=54 ymin=0 ymax=6000 nomi="n,euro" asintoti="y=3000" legenda="i=6\%,\ g=2\%,\ R_1=120;i=g=5\%,\ R_1=105" titolo="Valore attuale delle prime $n$ rate di due perpetuità crescenti. Con $i>g$ le somme parziali si avvicinano a $\dfrac{120}{0{,}04}=3000$ euro; con $i=g$ valgono $100n$ euro e crescono senza limite."}
+
 :::
 
 ## Densità di pagamento e forza costante
@@ -150,7 +162,10 @@ V_0=\frac{c(1-e^{-\delta T})}{\delta},
 \qquad
 M_T=\frac{c(e^{\delta T}-1)}{\delta}.
 $$
-Per $\delta=0$ l'importo complessivo è $cT$ a entrambe le date, poiché i fattori finanziari sono uguali a $1$. Con $c=600\,\mathrm{euro/anno}$ e $T=2$ anni l'importo senza interessi è $1200$ euro. Se $\delta>0$, il valore attuale è minore di $1200$ euro perché ogni euro futuro è scontato, mentre il montante è maggiore perché i versamenti precedenti a $T$ maturano interesse.
+Per $\delta=0$ l'importo complessivo è $cT$ a entrambe le date, poiché i fattori finanziari sono uguali a $1$. Con $c=600\,\mathrm{euro/anno}$ e $T=2$ anni l'importo senza interessi è $1200$ euro. Se $\delta>0$, il valore attuale è minore di $1200$ euro perché ogni euro futuro è scontato, mentre il montante è maggiore perché i versamenti precedenti a $T$ maturano interesse. Con $\delta=0{,}05\,\mathrm{anno}^{-1}$ si ottengono $V_0=12000\left(1-e^{-0{,}1}\right)\approx1141{,}95$ euro e $M_2=12000\left(e^{0{,}1}-1\right)\approx1262{,}05$ euro.
+
+::grafico{f="600;600*exp(-0.05*x)" area="600*exp(-0.05*x);0;0;2" xmin=0 xmax=3 ymin=0 ymax=750 nomi="t,euro/anno" legenda="c=600;600e^{-0{,}05t}" titolo="Densità costante di $600$ euro all'anno e densità attualizzata con $\delta=0{,}05$. L'area colorata fra $0$ e $2$ è il valore attuale $V_0=12000\left(1-e^{-0{,}1}\right)$ euro."}
+
 :::
 
 :::osservazione
@@ -204,6 +219,9 @@ $$
 =1000e^{-0{,}18}\,\mathrm{euro}.
 $$
 Fra il tempo $1$ e il tempo $2$ trascorre un solo anno con la prima forza. Fra il tempo $2$ e il tempo $5$ trascorrono tre anni con la seconda. Gli integrali si sommano, quindi il fattore complessivo è il prodotto dei fattori relativi ai due intervalli.
+
+::grafico{curve="t,t<1.999?0.03:(t<2.001?0/0:0.05),0,5.5" area="0.03;0;1;2|0.05;0;2;5" segmenti="2,0.03,2,0.05;5,0,5,0.05" etichette="0.25,0.034,δ = 0,03;3.2,0.054,δ = 0,05" xmin=-0.2 xmax=6 ymin=0 ymax=0.07 nomi="u,δ(u)" legenda=0 titolo="Forza di interesse a due livelli, in $\mathrm{anno}^{-1}$. L'area colorata fra $1$ e $5$ vale $0{,}03\cdot1+0{,}05\cdot3=0{,}18$ ed è l'esponente del fattore di sconto $e^{-0{,}18}$."}
+
 :::
 
 :::osservazione
@@ -232,6 +250,9 @@ La differenza al numeratore è la parte dell'obiettivo da coprire con i nuovi ve
 
 :::esempio{titolo="Deposito finale a integrazione"}
 Un conto rende il $10\%$ annuo. Si versano $1000$ euro oggi e $500$ euro fra un anno. L'obiettivo è $2000$ euro alla fine del secondo anno. A quella data i depositi già previsti valgono $1000\cdot1{,}1^2+500\cdot1{,}1=1760\,\mathrm{euro}$. Occorre quindi versare $240$ euro alla scadenza. Se si decidesse di versare l'integrazione un anno prima, l'importo diventerebbe $\dfrac{240}{1{,}1}\,\mathrm{euro}$, perché deve maturare un anno di interesse prima di coprire la stessa differenza finale.
+
+::grafico{curve="t,t<0.999?1000*1.1^t:(t<1.001?0/0:(t<1.999?1600*1.1^(t-1):0/0)),0,2" segmenti="1,1100,1,1600;2,1760,2,2000" punti="0,1000,pieno;1,1100,vuoto;1,1600,pieno;2,1760,vuoto;2,2000,pieno" etichette="0.1,850,1000;1.06,1020,1100;0.68,1640,1600;1.8,1590,1760;1.65,2080,2000" xmin=-0.1 xmax=2.5 ymin=0 ymax=2500 nomi="t,euro" legenda=0 titolo="Saldo del conto al $10\%$ con depositi di $1000$ euro al tempo $0$, $500$ euro al tempo $1$ e $240$ euro al tempo $2$. I punti vuoti sono i saldi prima dei depositi, i punti pieni quelli subito dopo."}
+
 :::
 
 :::osservazione

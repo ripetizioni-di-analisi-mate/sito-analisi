@@ -16,6 +16,8 @@ Per chiedere una pagina, il browser deve specificare la risorsa, individuare l'a
 
 :::osservazione
 Il modello **OSI** distingue sette livelli. Partendo dai dati usati dall'applicazione si incontrano applicazione, presentazione, sessione, trasporto, rete, collegamento dati e fisico. Il livello rete OSI corrisponde, per funzione generale, al livello Internet di TCP/IP. I livelli collegamento dati e fisico rientrano nell'accesso alla rete del modello TCP/IP. Le funzioni dei tre livelli superiori OSI sono trattate, in questo confronto, nell'applicazione TCP/IP. La corrispondenza descrive il ruolo dei livelli. Per classificare un protocollo si osserva il compito che svolge nello scambio.
+
+::grafico{assi=0 uguale=1 xmin=-1 xmax=13 ymin=-1 ymax=8.5 linee="0,0 5,0 5,7 0,7 0,0;0,1 5,1;0,2 5,2;0,3 5,3;0,4 5,4;0,5 5,5;0,6 5,6;7,0 12,0 12,7 7,7 7,0;7,2 12,2;7,3 12,3;7,4 12,4" segmenti="5,2,7,2;5,3,7,3;5,4,7,4" etichette="2,7.6,OSI;8.8,7.6,TCP/IP;0.3,0.5,Fisico;0.3,1.5,Collegamento dati;0.3,2.5,Rete;0.3,3.5,Trasporto;0.3,4.5,Sessione;0.3,5.5,Presentazione;0.3,6.5,Applicazione;7.3,1,Accesso alla rete;7.3,2.5,Internet;7.3,3.5,Trasporto;7.3,5.5,Applicazione" titolo="Corrispondenza per funzione fra i sette livelli OSI e i quattro livelli TCP/IP."}
 :::
 
 :::esempio{#incapsulamento-web titolo="Incapsulamento durante una richiesta"}
@@ -92,6 +94,8 @@ In una rete didattica DHCP assegna al portatile `192.0.2.20/24`, indica il gatew
 
 :::osservazione
 In uno scambio iniziale IPv4 tipico, il client cerca un server DHCP con `Discover`. Un server propone una configurazione con `Offer`. Il client seleziona la proposta con `Request` e il server conferma con `ACK`. La conferma DHCP riguarda l'assegnazione. La conferma TCP, pur usando la stessa abbreviazione, riguarda invece numeri di sequenza.
+
+::grafico{assi=0 uguale=1 xmin=-1 xmax=11 ymin=0 ymax=8 linee="1,0.8 1,6.8;9,0.8 9,6.8" vettori="1,6,9,6;9,4.5,1,4.5;1,3,9,3;9,1.5,1,1.5" etichette="0.4,7.4,Client;8,7.4,Server DHCP;4.3,6.45,Discover;4.5,4.95,Offer;4.2,3.45,Request;4.7,1.95,ACK" titolo="Scambio DHCP iniziale in IPv4, dall'alto verso il basso."}
 :::
 
 ## Nomi e ruoli del DNS
@@ -106,7 +110,9 @@ Un indirizzo può cambiare mentre il nome di un servizio rimane lo stesso. Il **
 :::
 
 :::definizione{#resolver-autoritativo titolo="Resolver e server autoritativo"}
-Il **resolver** riceve la richiesta del client e cerca la risposta. Può rispondere da una cache valida oppure interrogare altri server. Un server **autoritativo** pubblica i dati per le zone DNS di cui è responsabile. Se la cache è vuota, un resolver ricorsivo può seguire indicazioni dalla radice verso i server dei domini di primo livello e fino al server autoritativo della zona. Le risposte intermedie aiutano a individuare il server da interrogare.
+Il **resolver** riceve la richiesta del client e cerca la risposta. Può rispondere da una cache valida oppure interrogare altri server. Un server **autoritativo** pubblica i dati per le zone DNS di cui è responsabile. Se la cache è vuota, un resolver ricorsivo può seguire indicazioni dalla radice verso i server dei domini di primo livello (TLD, *top-level domain*) e fino al server autoritativo della zona. Le risposte intermedie aiutano a individuare il server da interrogare.
+
+::grafico{assi=0 uguale=1 xmin=-1 xmax=15 ymin=0 ymax=10 linee="0,0.6 0,8.8;3.5,0.6 3.5,8.8;7,0.6 7,8.8;10.5,0.6 10.5,8.8;14,0.6 14,8.8" vettori="0,8.1,3.5,8.1;3.5,7.1,7,7.1;7,6.1,3.5,6.1;3.5,5.1,10.5,5.1;10.5,4.1,3.5,4.1;3.5,3.1,14,3.1;14,2.1,3.5,2.1;3.5,1.1,0,1.1" etichette="-0.6,9.4,Client;2.6,9.4,Resolver;6.3,9.4,Radice;9.9,9.4,TLD;12.6,9.4,Autoritativo;1.3,8.45,A?;4.9,7.45,A?;4.9,6.45,NS;8.3,5.45,A?;8.3,4.45,NS;11.8,3.45,A?;11.8,2.45,A;1.3,1.45,A" titolo="Risoluzione con cache vuota: il resolver segue i rinvii (record NS) dalla radice al server autoritativo, che fornisce il record A."}
 :::
 
 :::esempio{titolo="Risoluzione di un alias"}
@@ -121,6 +127,8 @@ Il **TTL** (*Time To Live*) indica per quanto tempo un dato DNS può essere riut
 
 :::esempio{titolo="Un indirizzo aggiornato e due cache"}
 Alle 10:00 un resolver memorizza l'indirizzo `192.0.2.60` con TTL di $300\,\mathrm{s}$. Il dato scade alle 10:05. Alle 10:01 il server autoritativo aggiorna il record a `192.0.2.61`. Supponiamo che il resolver mantenga il record fino a scadenza. Alle 10:03 sono passati $180\,\mathrm{s}$, quindi può rispondere con il vecchio indirizzo e un TTL residuo di $120\,\mathrm{s}$. Un secondo resolver che non possiede il record può invece ottenere il nuovo indirizzo nello stesso istante. Dopo la scadenza, una richiesta al primo resolver richiede un nuovo dato. La differenza tra le due risposte dipende dagli istanti di memorizzazione.
+
+::grafico{xmin=-0.5 xmax=6.5 ymin=-0.5 ymax=6 nomi="t,TTL" linee="0,5 5,0" segmenti="3,0,3,2;0,2,3,2;1,0,1,5.5" punti="0,5,pieno;3,2,pieno,10:03;5,0,vuoto" etichette="1.1,5.6,aggiornamento" titolo="TTL residuo, in minuti, della copia memorizzata alle 10:00 con TTL di $300\,\mathrm{s}$; $t$ è il numero di minuti dopo le 10:00."}
 :::
 
 :::attenzione

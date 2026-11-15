@@ -21,6 +21,8 @@ Il **surplus** è $S(\delta)=A(\delta)-L(\delta)$. Un surplus positivo indica un
 
 :::esempio{titolo="Valori uguali a una stessa data"}
 Una passività richiede $1210\,\mathrm{euro}$ al tempo $2$. La forza annua è $\delta_0=\log(1{,}1)$, quindi l'effettivo annuo è il $10\%$. Il valore attuale è $1210(1{,}1)^{-2}=1000\,\mathrm{euro}$. Un titolo che paga $1100\,\mathrm{euro}$ al tempo $1$ vale anch'esso $1000\,\mathrm{euro}$. La copertura è esatta a $\delta_0$ e l'incasso precede la scadenza del debito. Per pagare al tempo $2$ occorre capitalizzare il ricavo del titolo per un anno.
+
+::grafico{assi=0 uguale=1 xmin=-0.4 xmax=3.6 ymin=-1.65 ymax=1.5 linee="-0.2,0 3.3,0" vettori="1,0,1,1.1;2,0,2,-1.21" unicolore=1 punti="0,0,pieno" etichette="1,1.3,1100;2,-1.45,1210;0,-0.22,0;1,-0.22,1;2,0.22,2;3.3,-0.22,t" legenda=0 titolo="Incasso di $1100$ euro al tempo $1$ (verso l'alto) e pagamento di $1210$ euro al tempo $2$ (verso il basso). Con effettivo annuo del $10\%$ entrambi valgono $1000$ euro al tempo $0$."}
 :::
 
 :::osservazione
@@ -51,6 +53,8 @@ $$
 -1000\cdot1+1000\cdot2=1000.
 $$
 Per un aumento di forza di $0{,}001\,\mathrm{anno}^{-1}$, il termine lineare è $1\,\mathrm{euro}$. Il valore di entrambe le parti scende. A primo ordine scende di più il valore della passività, perché i suoi incassi equivalenti sono collocati più lontano nel tempo.
+
+::grafico{f="1000*exp(-x);1000*exp(-2*x)" xmin=-0.32 xmax=0.32 ymin=0 ymax=2000 nomi="h,euro" punti="0,1000,pieno" legenda="A=1000e^{-h};L=1000e^{-2h}" titolo="Valori attuali dopo uno spostamento $h$ della forza. In $h=0$ le due curve valgono $1000$ euro, con pendenze $-1000$ per l'attività e $-2000$ per la passività."}
 :::
 
 :::osservazione
@@ -85,6 +89,8 @@ Un impegno ha valore attuale $1200\,\mathrm{euro}$ e duration di $3$ anni. I tit
 
 :::osservazione
 Con $T_1=2$, $T_2=6$ e $D_L=7$ si trova $w_1=-\dfrac14$ e $w_2=\dfrac54$. La soluzione algebrica prevede una posizione corta nel titolo breve e l'investimento del ricavato nel titolo lungo. La fattibilità di tale soluzione dipende dalle operazioni ammesse. Se il problema consente soltanto acquisti, una duration di sette anni è fuori dall'intervallo raggiungibile con quei due titoli.
+
+::grafico{f="(6-x)/4;(x-2)/4" xmin=0 xmax=8.4 ymin=-0.6 ymax=1.75 nomi="D,w" segmenti="2,-0.5,2,1.5;6,-0.5,6,1.5" punti="3,0.75,pieno;3,0.25,pieno;7,-0.25,vuoto;7,1.25,vuoto" legenda="w_1=\dfrac{6-D_L}{4};w_2=\dfrac{D_L-2}{4}" titolo="Quote dei titoli con scadenze $2$ e $6$ al variare della duration $D_L$, riportata sull'asse orizzontale. Fra le due rette tratteggiate entrambe le quote sono non negative. I punti pieni corrispondono a $D_L=3$ e quelli vuoti a $D_L=7$."}
 :::
 
 ## Convexity e dispersione delle scadenze
@@ -109,6 +115,8 @@ C_A=\frac{1^2+5^2}{2}=13\,\mathrm{anni}^2,\qquad
 C_L=3^2=9\,\mathrm{anni}^2.
 $$
 Il surplus ha derivata seconda pari a $1000(13-9)=4000$ rispetto alla forza. La passività ha un'unica data, quindi la sua varianza delle scadenze è zero. Per le attività la varianza è $13-3^2=4\,\mathrm{anni}^2$. In generale la convexity è la somma della varianza e della duration al quadrato, perciò a duration uguali il confronto riguarda la dispersione delle date.
+
+::grafico{assi=0 uguale=1 xmin=-0.4 xmax=6.6 ymin=-2.5 ymax=1.5 linee="-0.2,0 6.3,0" vettori="1,0,1,1;5,0,5,1;3,0,3,-2" unicolore=1 punti="0,0,pieno" etichette="1,1.25,500;5,1.25,500;3,-2.25,1000;0,-0.22,0;1,-0.22,1;3,0.22,3;5,-0.22,5;6.3,-0.22,t" legenda=0 titolo="Valori attuali al tempo $0$, in euro. Le attività stanno alle date $1$ e $5$ (verso l'alto), la passività alla data $3$ (verso il basso). La data media è $3$ per entrambe le parti."}
 :::
 
 :::osservazione
@@ -149,6 +157,8 @@ Il termine quadratico è $2000h^2$. Uno spostamento di $0{,}01\,\mathrm{anno}^{-
 
 :::attenzione
 L'uguaglianza delle convexity lascia il segno da studiare. Si considerino, alla forza iniziale, attività con valori $3$ euro al tempo $1$ e $1$ euro al tempo $3$, e passività con valori $1$ euro al tempo $0$ e $3$ euro al tempo $2$. Entrambi i valori totali sono $4$ euro, entrambe le somme pesate delle date sono $6$ e quelle dei quadrati sono $12$. Il surplus è però $(e^{-h}-1)^3$, quindi cambia segno attraversando $h=0$. Le prime due derivate nulle lasciano un termine cubico.
+
+::grafico{f="(exp(-x)-1)^3" xmin=-0.65 xmax=0.65 ymin=-0.2 ymax=0.65 nomi="h,euro" punti="0,0,pieno" segmenti="-0.5,-0.02,-0.5,0.02;0.5,-0.02,0.5,0.02;-0.02,0.5,0.02,0.5" etichette="-0.5,-0.06,−0,5;0.5,0.05,0,5;-0.08,0.5,0,5" legenda="S(\delta_0+h)=(e^{-h}-1)^3" titolo="Surplus con valori, duration e convexity uguali. Il surplus è positivo per $h<0$, negativo per $h>0$ e ha in $h=0$ un flesso a tangente orizzontale."}
 :::
 
 ## Prezzo e reinvestimento all'orizzonte
@@ -167,6 +177,8 @@ Per una scadenza precedente a $H$ l'esponente $\delta(H-t_k)$ descrive un montan
 
 :::esempio{titolo="Due flussi ai lati dell'orizzonte"}
 Con forza iniziale nulla, un portafoglio paga $400\,\mathrm{euro}$ tra un anno e $400\,\mathrm{euro}$ tra tre anni. Per $H=2$ si ha $W_2(\delta)=400e^\delta+400e^{-\delta}$. Il primo termine cresce con la forza, poiché descrive il reinvestimento del primo rimborso. Il secondo diminuisce, perché al tempo $2$ si sconta il rimborso del tempo $3$. Alla forza iniziale i due contributi alla derivata sono $400$ e $-400$, quindi la sensibilità lineare si annulla.
+
+::grafico{f="400*exp(x);400*exp(-x);400*exp(x)+400*exp(-x)" xmin=-0.55 xmax=0.55 ymin=0 ymax=1000 nomi="δ,euro" punti="0,800,pieno" segmenti="-0.5,-20,-0.5,20;0.5,-20,0.5,20" etichette="-0.5,-55,−0,5;0.5,-55,0,5" legenda="400e^{\delta};400e^{-\delta};W_2(\delta)" titolo="Valore al tempo $2$ dei due rimborsi in funzione della forza $\delta$. Il montante del primo rimborso cresce, il valore del secondo diminuisce e la somma $W_2$ ha minimo $800$ euro in $\delta=0$."}
 :::
 
 :::osservazione

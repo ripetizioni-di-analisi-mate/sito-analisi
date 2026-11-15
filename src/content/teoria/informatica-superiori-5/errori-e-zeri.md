@@ -43,6 +43,8 @@ Al centesimo il passo è $0{,}01$, perciò il massimo errore dovuto a un singolo
 
 :::esempio{titolo="Intervallo compatibile con una lettura"}
 Un display che arrotonda al decimo mostra $12{,}4\,\mathrm{cm}$. Se l'unica fonte di errore è l'arrotondamento, la lunghezza appartiene all'intervallo chiuso da $12{,}35\,\mathrm{cm}$ a $12{,}45\,\mathrm{cm}$. Gli estremi rappresentano i due casi a metà e la regola adottata dal display può escluderne uno o entrambi. Il limite di $0{,}05\,\mathrm{cm}$ resta valido anche senza conoscere quella regola.
+
+::grafico{assi=0 uguale=1 xmin=-1 xmax=21 ymin=-2.6 ymax=2.4 linee="0,0 20,0;0,-0.4 0,0.4;20,-0.4 20,0.4" poligoni="5,-0.35 15,-0.35 15,0.35 5,0.35" punti="5,0,vuoto;10,0,pieno;15,0,vuoto" etichette="0,-1.3,12,3;5,-1.3,12,35;10,-1.3,12,4;15,-1.3,12,45;20,-1.3,12,5;10,1.4,lettura" titolo="La lettura $12{,}4\,\mathrm{cm}$ al decimo è compatibile con le lunghezze fra $12{,}35\,\mathrm{cm}$ e $12{,}45\,\mathrm{cm}$."}
 :::
 
 :::definizione{#virgola-mobile titolo="Rappresentazione binaria a precisione finita"}
@@ -125,7 +127,24 @@ Per garantire un errore al più $\varepsilon>0$ è quindi sufficiente che la lar
 
 :::esempio{titolo="Calcolare il numero di dimezzamenti"}
 Se l'intervallo iniziale è largo $3$ e la tolleranza è $0{,}1$, la larghezza finale deve essere al più $0{,}2$. Dopo tre dimezzamenti è $\dfrac{3}{8}=0{,}375$, mentre dopo quattro è $\dfrac{3}{16}=0{,}1875$. Quattro è il primo numero di passi che garantisce la tolleranza con questa stima. Il vero errore di un centro specifico può essere inferiore al limite garantito.
+
+::grafico{f="0.2" xmin=-0.6 xmax=6.4 ymin=-0.4 ymax=3.4 nomi="k,L" punti="0,3,pieno;1,1.5,pieno;2,0.75,pieno;3,0.375,pieno;4,0.1875,pieno;5,0.09375,pieno" segmenti="4,0,4,0.1875" legenda="L = 0{,}2" titolo="Larghezza $L_k=\dfrac{3}{2^k}$ dopo $k$ dimezzamenti; il primo punto sotto la soglia $0{,}2$ si ha per $k=4$."}
 :::
+
+::::teorema{#passi-bisezione titolo="Numero di passi della bisezione"}
+Sia $[a,b]$ un intervallo di larghezza $L=b-a$ che soddisfa le ipotesi della bisezione e sia $\varepsilon>0$ la tolleranza richiesta. Se nessun punto medio valutato è uno zero, dopo $n$ dimezzamenti l'intervallo conservato ha larghezza $\dfrac{L}{2^n}$ e il suo centro $c_n$ soddisfa $|c_n-r|\leq\varepsilon$ per almeno uno zero $r$ non appena
+$$
+n\geq \log_2\frac{L}{\varepsilon}-1.
+$$
+
+:::dimostrazione
+L'idea è seguire la larghezza passo per passo. Al passo $0$ l'intervallo è $[a,b]$ e la sua larghezza è $L=\dfrac{L}{2^0}$. Si supponga che dopo $n$ passi l'intervallo $[a_n,b_n]$ abbia larghezza $\dfrac{L}{2^n}$. Il passo successivo conserva $[a_n,m]$ oppure $[m,b_n]$, con $m$ punto medio, e ciascuno dei due intervalli è largo $\dfrac{b_n-a_n}{2}=\dfrac{L}{2^{n+1}}$. Per induzione la larghezza dopo $n$ passi è quindi $\dfrac{L}{2^n}$ per ogni $n$.
+
+Per l'invariante l'intervallo conservato contiene uno zero $r$, e il centro dista da ogni punto dell'intervallo al più metà della larghezza. Perciò $|c_n-r|\leq\dfrac{L}{2^{n+1}}$. Questa quantità è al più $\varepsilon$ se e solo se $2^{n+1}\geq\dfrac{L}{\varepsilon}$. Poiché $\log_2$ è crescente, la disuguaglianza equivale a $n+1\geq\log_2\dfrac{L}{\varepsilon}$, cioè alla condizione dell'enunciato.
+:::
+
+La formula dà il numero di passi prima di avviare il programma. Con $L=3$ e $\varepsilon=0{,}1$ si ha $\log_2 30\approx4{,}91$, quindi serve $n\geq3{,}91$ e il minimo intero è $n=4$, come nel conteggio fatto a mano.
+::::
 
 :::definizione{#residuo titolo="Residuo ed errore sulla variabile"}
 Il **residuo** della stima $\widehat x$ è $|f(\widehat x)|$. Misura lo scarto da zero sul valore della funzione, quindi ha la stessa unità di $f$. L'errore sulla variabile è la distanza fra $\widehat x$ e lo zero cercato. Per esempio, se $f(x)=0{,}001(x-10)$ e $\widehat x=9$, il residuo è $0{,}001$ ma l'errore sulla variabile è $1$.
@@ -135,6 +154,12 @@ $$
 |\widehat x-r|\leq \frac{|f(\widehat x)|}{q}.
 $$
 Questa stima chiarisce quando un residuo piccolo si può tradurre in una garanzia sulla posizione della radice. Per esempio, con residuo $0{,}04$ e $q=2$, l'errore sulla variabile è al più $0{,}02$.
+:::
+
+:::esempio{titolo="Stesso residuo, errori diversi"}
+Le funzioni $g(x)=2(x-1)$ e $h(x)=\dfrac{1}{4}(x-1)$ hanno lo stesso zero $r=1$. La stima $1{,}25$ per $g$ e la stima $3$ per $h$ hanno lo stesso residuo, perché $g(1{,}25)=2\cdot0{,}25=0{,}5$ e $h(3)=\dfrac{1}{4}\cdot2=0{,}5$. Gli errori sulla variabile sono però $0{,}25$ e $2$. Per $g$ la derivata vale $2$ e la stima del valor medio dà $\dfrac{0{,}5}{2}=0{,}25$. Per $h$ la derivata vale $\dfrac{1}{4}$ e la stessa stima dà $0{,}5\cdot4=2$. A parità di residuo, quindi, l'errore sulla variabile è tanto più grande quanto più piccola è la pendenza vicino allo zero.
+
+::grafico{f="2*(x-1);0.25*(x-1)" xmin=-0.4 xmax=3.6 ymin=-0.9 ymax=1.4 punti="1,0,pieno,r;1.25,0.5,pieno;3,0.5,pieno" segmenti="1.25,0,1.25,0.5;3,0,3,0.5;0,0.5,3,0.5" legenda="y = 2(x-1);y = \frac{1}{4}(x-1)" titolo="Con residuo $0{,}5$ la stima dista $0{,}25$ dallo zero sulla retta di pendenza $2$ e dista $2$ sulla retta di pendenza $\dfrac{1}{4}$."}
 :::
 
 :::esempio{#laboratorio-bisezione titolo="Bisezione in Python"}
@@ -212,6 +237,28 @@ La tangente è $y=3x-\dfrac{17}{4}$. Lo zero cercato è fra $1{,}4$ e $1{,}5$. C
 ::grafico{f="x^2-2;3*x-4.25" xmin=-0.12 xmax=1.95 ymin=-1.05 ymax=1.8 punti="1.5,0.25,pieno,P;1.4166666667,0" segmenti="1.5,0,1.5,0.25" titolo="La tangente in $x_0=1{,}5$ incontra l'asse in $x_1=\dfrac{17}{12}$."}
 :::
 
+::::teorema{#newton-radice titolo="Errore di Newton per la radice quadrata"}
+Sia $c>0$, sia $f(x)=x^2-c$ e sia $r=\sqrt c$ il suo zero positivo. Se $x_k>0$, il passo di Newton dà
+$$
+x_{k+1}-r=\frac{(x_k-r)^2}{2x_k}.
+$$
+In particolare $x_{k+1}\geq r$, e se anche $x_k\geq r$ allora $x_{k+1}-r\leq\dfrac{(x_k-r)^2}{2r}$.
+
+:::dimostrazione
+Si scrive il passo in forma di una sola frazione e si riconosce un quadrato. Poiché $f'(x_k)=2x_k\neq0$, il passo è definito e vale
+$$
+x_{k+1}=x_k-\frac{x_k^2-c}{2x_k}=\frac{x_k^2+c}{2x_k}.
+$$
+Si sottrae $r$ e si usa $c=r^2$.
+$$
+x_{k+1}-r=\frac{x_k^2-2rx_k+r^2}{2x_k}=\frac{(x_k-r)^2}{2x_k}.
+$$
+Il numeratore è un quadrato e il denominatore è positivo, quindi $x_{k+1}-r\geq0$. Se inoltre $x_k\geq r$, allora $2x_k\geq2r$, perciò la frazione è al più $\dfrac{(x_k-r)^2}{2r}$.
+:::
+
+La formula dice che l'errore del passo successivo è proporzionale al quadrato dell'errore attuale. Per $c=2$ e $x_0=1{,}5$ l'errore iniziale è circa $0{,}0858$; la formula dà $x_1-r\approx\dfrac{0{,}0858^2}{3}\approx0{,}00245$ e poi $x_2-r\approx2{,}1\cdot10^{-6}$, con $x_2=\dfrac{577}{408}$. Il numero di cifre decimali corrette passa quindi da due a cinque in un solo passo.
+::::
+
 :::attenzione
 La formula di Newton descrive un passo e la convergenza dipende dal punto iniziale. Per $f(x)=x^3-2x+2$ si ha $f'(x)=3x^2-2$. Partendo da $0$, i valori $f(0)=2$ e $f'(0)=-2$ danno $x_1=1$. In $1$, i valori $f(1)=1$ e $f'(1)=1$ danno $x_2=0$. Le iterazioni successive ripetono il ciclo, benché le due derivate siano diverse da zero. La stessa funzione ha uno zero fra $-2$ e $-1$, perché è continua e $f(-2)=-2$, $f(-1)=3$.
 
@@ -265,4 +312,6 @@ La bisezione usa valutazioni di $f$, richiede un intervallo continuo con cambio 
 Si può mantenere l'intervallo con cambio di segno e usare Newton per proporre un punto interno. Una regola semplice accetta il punto di Newton se cade nella metà centrale dell'intervallo. Se la proposta cade fuori da quella regione, si usa il medio. Dopo la valutazione si conserva il sottointervallo con cambio di segno, come nella bisezione. Se la proposta sta nella metà centrale, dista da ciascun estremo al più tre quarti della larghezza, quindi anche il sottointervallo conservato è largo al più $\dfrac{3}{4}$ della larghezza precedente.
 
 Per esempio, partendo da $[1,2]$ e usando Newton dal centro $1{,}5$ per $f(x)=x^2-2$, la proposta è $\dfrac{17}{12}$, compresa fra $1{,}25$ e $1{,}75$. Poiché $f\left(\dfrac{17}{12}\right)=\dfrac{1}{144}>0$ e il valore all'estremo sinistro è negativo, si conserva $\left[1,\dfrac{17}{12}\right]$. Anche se la proposta di Newton successiva dovesse uscire dall'intervallo, un passo al centro permette di continuare.
+
+::grafico{f="x^2-2" xmin=-0.1 xmax=2.2 ymin=-1.3 ymax=2.3 area="2.3;-1.3;1.25;1.75" punti="1,-1;2,2;1.4166666667,0.0069444444,pieno,N" segmenti="1.25,0,1.25,-0.4375;1.75,0,1.75,1.0625" titolo="La metà centrale di $[1,2]$ va da $1{,}25$ a $1{,}75$; la proposta di Newton $\dfrac{17}{12}$ cade al suo interno e viene accettata."}
 :::

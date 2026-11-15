@@ -37,6 +37,10 @@ Il diagramma evidenzia gli esiti che soddisfano entrambe le condizioni. L'unione
 
 :::osservazione
 La definizione di esito dipende dall'informazione richiesta. Se si osserva soltanto il numero di teste in tre lanci, gli esiti della registrazione sono $0,1,2,3$. Lo spazio delle sequenze ordinate conserva anche le posizioni delle teste. Il numero $1$ corrisponde allora a tre sequenze, mentre il numero $0$ corrisponde a una sola. La scelta dello spazio determina quali informazioni si possono ricostruire da un esito e quali probabilità vanno attribuite agli esiti elementari.
+
+Con una moneta regolare le otto sequenze ordinate sono equiprobabili. I numeri di teste $0,1,2,3$ raccolgono rispettivamente $1$, $3$, $3$ e $1$ sequenze, quindi hanno probabilità $\dfrac{1}{8}$, $\dfrac{3}{8}$, $\dfrac{3}{8}$ e $\dfrac{1}{8}$.
+
+::grafico{xmin=-0.6 xmax=3.8 ymin=-0.04 ymax=0.48 nomi="k,p" linee="0,0 0,0.125;1,0 1,0.375;2,0 2,0.375;3,0 3,0.125" punti="0,0.125;1,0.375;2,0.375;3,0.125" etichette="0,0.17,0,125;1,0.42,0,375;2,0.42,0,375;3,0.17,0,125" titolo="Probabilità del numero $k$ di teste in tre lanci. I valori $1$ e $2$ corrispondono a tre sequenze ciascuno."}
 :::
 
 ## Assiomi e assegnazione delle probabilità
@@ -79,6 +83,8 @@ Per ogni evento $A$ vale $P(A^c)=1-P(A)$. Se $A\subseteq B$, allora $P(A)\le P(B
 
 :::dimostrazione
 L'evento $A$ e il suo complementare sono incompatibili e la loro unione è $\Omega$. Per additività $P(A)+P(A^c)=1$, da cui segue la formula. Per $A\subseteq B$, gli eventi $A$ e $B\setminus A$ sono incompatibili e la loro unione è $B$. Perciò $P(B)=P(A)+P(B\setminus A)\ge P(A)$. Infine $\varnothing=\Omega^c$ e ogni evento è incluso in $\Omega$.
+
+::venn{tipo="incluso" nomi="B,A" zone="a" universo=1 ambiente="Ω" titolo="Se $A\subseteq B$, l'evento $B$ è unione dei due eventi incompatibili $A$ e $B\setminus A$, colorato."}
 :::
 ::::
 
@@ -91,7 +97,9 @@ Una **partizione** di $\Omega$ è una famiglia di eventi non vuoti a due a due i
 :::
 
 :::esempio{titolo="Classi di esito incompatibili"}
-Un lotto può essere accettato, riesaminato oppure respinto. Se il procedimento assegna uno solo di questi tre esiti, le tre categorie formano una partizione. Con probabilità di riesame $0{,}12$ e di rifiuto $0{,}08$, la probabilità che il lotto non venga accettato al primo controllo è $0{,}12+0{,}08=0{,}20$. La somma è giustificata dal fatto che nessun esito è classificato contemporaneamente in entrambe le categorie.
+Un lotto può essere accettato, riesaminato oppure respinto. Se il procedimento assegna uno solo di questi tre esiti, le tre categorie formano una partizione. Con probabilità di riesame $0{,}12$ e di rifiuto $0{,}08$, la probabilità che il lotto non venga accettato al primo controllo è $0{,}12+0{,}08=0{,}20$. La somma è giustificata dal fatto che nessun esito è classificato contemporaneamente in entrambe le categorie. La probabilità di accettazione è quindi $1-0{,}20=0{,}80$.
+
+::grafico{assi=0 uguale=1 xmin=-0.3 xmax=10.3 ymin=-1.1 ymax=4.2 poligoni="8,0 9.2,0 9.2,3 8,3;9.2,0 10,0 10,3 9.2,3" linee="0,0 10,0 10,3 0,3 0,0;8,0 8,3;9.2,0 9.2,3" segmenti="8.6,3,8.6,3.45;9.6,0,9.6,-0.45" etichette="2.6,1.5,Accettato  0,80;6.4,3.75,Riesame  0,12;8.1,-0.8,Respinto  0,08" titolo="Le tre categorie formano una partizione di Ω. La parte colorata è l'evento «non accettato», di probabilità $0{,}12+0{,}08=0{,}20$."}
 :::
 
 :::osservazione
@@ -156,6 +164,10 @@ Si lanciano due dadi regolari e indipendenti. Un esito è la coppia ordinata $(i
 
 :::attenzione{titolo="Esiti raggruppati con pesi diversi"}
 Le undici somme possibili di due dadi regolari non sono equiprobabili. La somma $2$ ha una sola coppia favorevole, mentre la somma $3$ ne ha due. Se si registrano direttamente le somme, occorre quindi attribuire a ciascuna la probabilità totale delle coppie che la producono. Lo stesso problema si presenta se si raggruppano le coppie senza ordine. La coppia di valori diversi $\{2,5\}$ corrisponde a due coppie ordinate, mentre il doppio $2$ ne ha una sola.
+
+Per $s$ compreso tra $2$ e $12$, il numero di coppie ordinate con somma $s$ è $6-|s-7|$. Le probabilità delle somme crescono quindi da $\dfrac{1}{36}$ a $\dfrac{6}{36}$ e poi decrescono in modo simmetrico.
+
+::grafico{xmin=0.6 xmax=12.8 ymin=-0.4 ymax=7 nomi="s,N" linee="2,0 2,1;3,0 3,2;4,0 4,3;5,0 5,4;6,0 6,5;7,0 7,6;8,0 8,5;9,0 9,4;10,0 10,3;11,0 11,2;12,0 12,1" punti="2,1;3,2;4,3;5,4;6,5;7,6;8,5;9,4;10,3;11,2;12,1" titolo="Numero $N$ di coppie ordinate con somma $s$. Dividendo per $36$ si ottiene $P(S=s)$, che per $s=7$ vale $\dfrac{6}{36}=\dfrac{1}{6}$ e per $s=2$ vale $\dfrac{1}{36}$."}
 :::
 
 :::osservazione
@@ -170,6 +182,10 @@ Un esito si costruisce in $k$ stadi successivi. Per ogni scelta già effettuata,
 :::dimostrazione
 Dopo il primo stadio ci sono $a_1$ esiti parziali. Ciascuno ammette $a_2$ continuazioni, quindi dopo due stadi gli esiti parziali sono $a_1a_2$. Ogni esito di lunghezza due ammette $a_3$ continuazioni. Ripetendo l'argomento fino allo stadio $k$ si ottiene il prodotto indicato.
 :::
+
+Gli esiti si rappresentano con un albero delle scelte. Ogni livello corrisponde a uno stadio e ogni foglia a un esito completo. Con $a_1=2$ e $a_2=3$ ciascuno dei due rami del primo stadio ha tre continuazioni, perciò le foglie sono $2\cdot3=6$.
+
+::grafico{assi=0 uguale=1 xmin=-0.6 xmax=7.4 ymin=0 ymax=6 linee="0,3 3,4.5;0,3 3,1.5;3,4.5 6,5.5;3,4.5 6,4.5;3,4.5 6,3.5;3,1.5 6,2.5;3,1.5 6,1.5;3,1.5 6,0.5" punti="0,3;3,4.5;3,1.5;6,5.5;6,4.5;6,3.5;6,2.5;6,1.5;6,0.5" etichette="3,5,a;3,1,b;6.6,5.5,a1;6.6,4.5,a2;6.6,3.5,a3;6.6,2.5,b1;6.6,1.5,b2;6.6,0.5,b3" titolo="Albero delle scelte con $a_1=2$ e $a_2=3$. Le sei foglie sono gli esiti completi."}
 ::::
 
 :::esempio{titolo="Un codice con cifre distinte"}
@@ -275,6 +291,10 @@ P(K=1)=\frac{\binom{3}{1}\binom{5}{2}}{\binom{8}{3}}
 =\frac{30}{56}=\frac{15}{28}.
 $$
 Per avere almeno un difettoso basta escludere i campioni formati solo da pezzi integri. La probabilità è $1-\dfrac{\binom{5}{3}}{\binom{8}{3}}=\dfrac{23}{28}$. I due eventi richiesti hanno probabilità diverse perché il secondo comprende anche i campioni con due o tre pezzi difettosi.
+
+Con la stessa formula i campioni con $k=0,1,2,3$ difettosi sono $\binom{5}{3}=10$, $30$, $\binom{3}{2}\binom{5}{1}=15$ e $\binom{3}{3}=1$. La loro somma è $56$, perché ogni campione ha un solo numero di pezzi difettosi.
+
+::grafico{xmin=-0.7 xmax=3.9 ymin=-0.9 ymax=35 nomi="k,N" linee="0,0 0,10;1,0 1,30;2,0 2,15;3,0 3,1" punti="0,10;1,30,pieno;2,15;3,1" etichette="0.3,11.5,10;1.3,31.5,30;2.3,16.5,15;3.3,2.5,1" titolo="Numero $N$ di campioni con $k$ pezzi difettosi su $\binom{8}{3}=56$. Il valore $k=1$ corrisponde a $P(K=1)=\dfrac{30}{56}=\dfrac{15}{28}$."}
 :::
 
 :::attenzione{titolo="Reinserimento e probabilità del complementare"}

@@ -39,6 +39,8 @@ Si usa la linearità dell'attesa per il centro della distribuzione e l'indipende
 
 :::esempio{titolo="Precisione di un nuovo campionamento"}
 Le singole misure hanno deviazione standard $12\,\mathrm{mm}$. Per un campione di $36$ misure indipendenti, la media ha errore standard $\dfrac{12}{6}\,\mathrm{mm}=2\,\mathrm{mm}$. Per ottenere $1\,\mathrm{mm}$ occorrono almeno $144$ misure, perché $\dfrac{12}{\sqrt n}\le1$ equivale a $n\ge144$. Dimezzare l'errore standard richiede dunque il quadruplo delle osservazioni se la dispersione della popolazione resta la stessa.
+
+::grafico{curve="t,12/sqrt(t),4,156" xmin=0 xmax=160 ymin=-0.3 ymax=6.6 nomi="n,SE" legenda="SE=\dfrac{12}{\sqrt n}" punti="36,2;144,1" segmenti="36,0,36,2;144,0,144,1" etichette="44,2.5,n = 36;144,1.5,n = 144" titolo="L'errore standard $\dfrac{12}{\sqrt n}$ in millimetri vale $2$ per $n=36$ e $1$ per $n=144$."}
 :::
 
 :::osservazione{titolo="Stima dell'errore standard"}
@@ -89,6 +91,10 @@ Per ottenere la prima legge si scompone il vettore delle osservazioni normali st
 
 :::esempio{titolo="Gradi di libertà da un campione di nove misure"}
 Per nove osservazioni normali indipendenti, la statistica $\dfrac{\bar X_9-\mu}{\dfrac{S}{3}}$ ha legge $t_8$. Il numero $8$ è anche il numero di gradi di libertà di $\dfrac{8S^2}{\sigma^2}$. Gli scarti dalla media campionaria hanno somma zero, quindi uno di essi è determinato dagli altri otto.
+
+La densità della $t_8$ vale circa $0{,}387$ in zero, contro $0{,}399$ della normale standard, e in $3$ vale circa $0{,}013$, contro $0{,}0044$. La $t_8$ assegna quindi più probabilità alle code, perché al denominatore della statistica compare la stima $S$ al posto di $\sigma$.
+
+::grafico{f="0.386699*(1+x^2/8)^(-4.5);exp(-x^2/2)/sqrt(2*PI)" xmin=-4.2 xmax=4.2 ymin=-0.03 ymax=0.46 nomi="t,f" legenda="t_8;N(0,1)" titolo="Densità della $t_8$ e della normale standard. Le code della $t_8$ sono più alte."}
 :::
 
 ## Limiti di probabilità da media e varianza
@@ -127,6 +133,8 @@ Siano $16$ misure i.i.d. con deviazione standard $8\,\mathrm{g}$. La varianza de
 
 :::esempio{titolo="Quando il limite di Chebyshev è raggiunto"}
 Una variabile centrata $X$ vale $-5$, $0$ e $5$ con probabilità rispettivamente $0{,}08$, $0{,}84$ e $0{,}08$. Per simmetria $E[X]=0$ e la varianza è $E[X^2]=25\cdot0{,}16=4$. Alla soglia $5$ l'evento $|X|\ge5$ ha probabilità $0{,}16$, uguale al limite $\dfrac4{25}$. Se si considera solo la coda $X\ge5$, la probabilità vale invece $0{,}08$. Il limite di Chebyshev riguarda l'unione delle due code, quindi può essere usato anche per una singola coda sfruttando l'inclusione degli eventi. Con i soli momenti, la forma della distribuzione e le probabilità delle singole code restano in generale indeterminate.
+
+::grafico{xmin=-7 xmax=7 ymin=-0.06 ymax=1 nomi="x,p" linee="-5,0 -5,0.08;0,0 0,0.84;5,0 5,0.08" punti="-5,0.08;0,0.84;5,0.08" etichette="-5,0.15,0,08;0.9,0.84,0,84;5,0.15,0,08" titolo="Le due code $|X|\ge5$ hanno probabilità complessiva $0{,}16$, uguale al limite $\dfrac{4}{25}$ di Chebyshev."}
 :::
 
 ## Legge debole dei grandi numeri
@@ -150,6 +158,8 @@ Fissata $\varepsilon$, il denominatore cresce con $n$ e il limite superiore tend
 
 :::esempio{titolo="Frequenze relative di un esito"}
 Sia $X_i$ uguale a $1$ se la prova $i$ dà un certo esito e uguale a $0$ altrimenti. Per prove indipendenti con probabilità di successo $p$, gli indicatori sono i.i.d. e hanno attesa $p$. La loro media è la frequenza relativa dei successi e converge in probabilità a $p$. Se $p=0{,}4$ e $n=400$, la probabilità di uno scarto di almeno $0{,}1$ è al più $\dfrac{0{,}4\cdot0{,}6}{400\cdot0{,}1^2}=0{,}06$. Il limite deriva dai soli parametri della Bernoulli.
+
+::grafico{curve="t,24/t,24,990" xmin=0 xmax=1000 ymin=-0.06 ymax=1.12 nomi="n,L" legenda="L=\dfrac{24}{n}" punti="400,0.06" segmenti="400,0,400,0.06" etichette="400,0.17,n = 400" titolo="Limite di Chebyshev $\dfrac{0{,}4\cdot0{,}6}{n\cdot0{,}1^2}=\dfrac{24}{n}$ per uno scarto di almeno $0{,}1$. Per $n=400$ vale $0{,}06$."}
 :::
 
 :::attenzione
@@ -172,6 +182,8 @@ Per una numerosità sufficientemente grande, si approssima la legge di $\bar X_n
 
 :::esempio{titolo="Una soglia per il consumo totale"}
 Il consumo giornaliero di ciascuno di $64$ dispositivi indipendenti ha la stessa legge, con media $5\,\mathrm{kWh}$ e deviazione standard $2\,\mathrm{kWh}$. Per il consumo totale $T_{64}$, la media è $320\,\mathrm{kWh}$ e la deviazione standard è $16\,\mathrm{kWh}$. La soglia di $352\,\mathrm{kWh}$ corrisponde a due errori standard sopra la media, perché $\dfrac{352-320}{16}=2$. Con il teorema centrale del limite si ottiene $P(T_{64}>352)\approx1-\Phi(2)\approx0{,}0228$.
+
+::grafico{f="exp(-x^2/2)/sqrt(2*PI)" area="exp(-x^2/2)/sqrt(2*PI);0;2;3.9" segmenti="2,0,2,0.05399" xmin=-3.9 xmax=4 ymin=-0.035 ymax=0.46 nomi="z,f" legenda="N(0,1)" etichette="2.1,0.11,352 kWh;0.1,0.42,320 kWh" titolo="La soglia di $352\,\mathrm{kWh}$ corrisponde a $z=2$. L'area colorata approssima $P(T_{64}>352)\approx0{,}0228$."}
 :::
 
 :::attenzione
@@ -180,6 +192,8 @@ Il teorema è asintotico. Una soglia fissa come $n=30$ può dare un'approssimazi
 
 :::esempio{titolo="Confronto con una legge esatta asimmetrica"}
 Si considerino $36$ tempi indipendenti di legge esponenziale con media e deviazione standard entrambe pari a un minuto. Nella scala del totale, la soglia $45$ dista $9$ minuti dalla media. La deviazione standard del totale è $6\,\mathrm{min}$, perciò il teorema centrale del limite dà $P(T_{36}>45)\approx1-\Phi(1{,}5)\approx0{,}0668$. Se si conosce la legge delle singole misure, la somma ha esattamente una legge gamma di forma $36$ e tasso $1$ per minuto. La coda gamma vale circa $0{,}0742$. La probabilità approssimata e quella esatta differiscono perché la somma di esponenziali resta asimmetrica a numerosità finita. Quando il modello gamma è noto, il valore esatto può essere usato per misurare l'errore dell'approssimazione.
+
+::grafico{f="exp(35*log(x+1e-12)-x-92.1361756);exp(-((x-36)/6)^2/2)/(6*sqrt(2*PI))" area="exp(35*log(x)-x-92.1361756);0;45;60" segmenti="45,0,45,0.02018" xmin=0 xmax=60 ymin=-0.005 ymax=0.078 nomi="t,f" legenda="\text{gamma di forma }36;N(36,36)" titolo="Densità esatta del totale e normale approssimante. L'area colorata è la coda esatta $P(T_{36}>45)\approx0{,}0742$."}
 :::
 
 ## Proporzioni e correzione di continuità
@@ -195,6 +209,10 @@ Le formule seguono da quelle per la media campionaria, poiché $\hat p$ è la me
 
 :::definizione{#correzione-continuita titolo="Correzione di continuità"}
 Il conteggio $K$ assume valori interi. Nella sua approssimazione mediante una normale $Y$ di media $np$ e varianza $np(1-p)$, la massa in $k$ viene approssimata dall'area sopra l'intervallo $(k-0{,}5,k+0{,}5)$. Questa scelta si chiama **correzione di continuità**. Per l'evento $a\le K\le b$, con $a,b$ interi, le soglie diventano $a-0{,}5$ e $b+0{,}5$. Per $K\ge k$ si usa la coda a destra di $k-0{,}5$. Prima di correggere la soglia si determina quindi l'insieme degli interi ammessi dall'evento originale.
+
+Nel caso $n=100$ e $p=0{,}5$, ogni rettangolo dell'istogramma ha base $1$ centrata sul conteggio $k$ e altezza $P(K=k)$, quindi la sua area è la massa in $k$. I tre rettangoli dei conteggi $49$, $50$ e $51$ coprono l'intervallo da $48{,}5$ a $51{,}5$, dove si integra la densità normale di media $50$ e varianza $25$.
+
+::grafico{f="exp(-((x-50)/5)^2/2)/(5*sqrt(2*PI))" area="exp(-((x-50)/5)^2/2)/(5*sqrt(2*PI));0;48.5;51.5" linee="41.5,0 41.5,0.02229 42.5,0.02229 42.5,0;42.5,0 42.5,0.03007 43.5,0.03007 43.5,0;43.5,0 43.5,0.03895 44.5,0.03895 44.5,0;44.5,0 44.5,0.04847 45.5,0.04847 45.5,0;45.5,0 45.5,0.05796 46.5,0.05796 46.5,0;46.5,0 46.5,0.06659 47.5,0.06659 47.5,0;47.5,0 47.5,0.07353 48.5,0.07353 48.5,0;48.5,0 48.5,0.07803 49.5,0.07803 49.5,0;49.5,0 49.5,0.07959 50.5,0.07959 50.5,0;50.5,0 50.5,0.07803 51.5,0.07803 51.5,0;51.5,0 51.5,0.07353 52.5,0.07353 52.5,0;52.5,0 52.5,0.06659 53.5,0.06659 53.5,0;53.5,0 53.5,0.05796 54.5,0.05796 54.5,0;54.5,0 54.5,0.04847 55.5,0.04847 55.5,0;55.5,0 55.5,0.03895 56.5,0.03895 56.5,0;56.5,0 56.5,0.03007 57.5,0.03007 57.5,0;57.5,0 57.5,0.02229 58.5,0.02229 58.5,0" xmin=37.2 xmax=61 ymin=-0.006 ymax=0.095 nomi="k,p" legenda="N(50,25)" titolo="Istogramma di $\operatorname{Bin}(100,0{,}5)$ e densità normale. L'area colorata, da $48{,}5$ a $51{,}5$, approssima la massa dei conteggi $49$, $50$ e $51$."}
 :::
 
 :::esempio{titolo="Area normale per tre conteggi interi"}

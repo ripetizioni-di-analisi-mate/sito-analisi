@@ -28,6 +28,8 @@ A_2=\frac{121}{1{,}1^2}=100\,\mathrm{euro}.
 $$
 
 Il prezzo è $150\,\mathrm{euro}$, perciò le quote di prezzo valgono $\dfrac13$ e $\dfrac23$. La duration è $1\cdot\dfrac13+2\cdot\dfrac23=\dfrac53\,\mathrm{anni}$. La scadenza del titolo è due anni. La media finanziaria è inferiore a due perché il primo incasso contribuisce al prezzo.
+
+::grafico{xmin=0 xmax=2.6 ymin=0 ymax=150 nomi="t,euro" vettori="1,0,1,55,55;2,0,2,121,121" unicolore=1 punti="1,50,pieno,50;2,100,pieno,100;1.6667,0,pieno,D" legenda=0 titolo="Le frecce sono gli importi pagati alle date $1$ e $2$, i punti pieni i loro valori attuali al $10\%$. Il punto $D$ sull'asse dei tempi è la duration $\dfrac{5}{3}\,\mathrm{anni}$."}
 :::
 
 :::osservazione
@@ -36,6 +38,8 @@ Due titoli con gli stessi tempi di pagamento possono avere duration diverse. Con
 
 :::osservazione
 Al variare del rendimento cambiano anche i pesi. Se due flussi scadono a $t_1<t_2$, il rapporto dei loro valori attuali è $\dfrac{C_2}{C_1}(1+y)^{-(t_2-t_1)}$. Quando $y$ aumenta, il rapporto diminuisce perché $t_2-t_1>0$. In questo caso la quota di prezzo della scadenza più lontana si riduce, quindi la duration di Macaulay diminuisce. Con un unico flusso il suo peso vale sempre uno e la duration resta pari alla scadenza.
+
+::grafico{f="(55/(1+x/100)+242/(1+x/100)^2)/(55/(1+x/100)+121/(1+x/100)^2)" xmin=0 xmax=100 ymin=0 ymax=2.5 nomi="y,D" asintoti="y=1;y=2" punti="10,1.6667,pieno" legenda="D(y)" titolo="Duration del titolo che paga $55\,\mathrm{euro}$ al tempo $1$ e $121\,\mathrm{euro}$ al tempo $2$, con il rendimento $y$ in punti percentuali. La curva decresce e resta fra la prima e l'ultima scadenza; al $10\%$ vale $\dfrac{5}{3}$."}
 :::
 
 :::osservazione
@@ -67,6 +71,8 @@ D_{\mathrm{mod}}(y)=-\frac{P'(y)}{P(y)}=\frac{D(y)}{1+y}.
 $$
 
 La derivata misura la variazione in euro per unità di tasso. Dividendo per il prezzo si ottiene la variazione relativa, quindi si possono confrontare titoli con prezzi diversi. Poiché $P'(y)<0$, un aumento del rendimento riduce il prezzo.
+
+::grafico{f="100*1.05/(1+x/100);100*(1.05/(1+x/100))^5" xmin=0 xmax=10 ymin=50 ymax=150 nomi="y,P" punti="5,100,pieno" legenda="T=1;T=5" titolo="Prezzi in euro di due zero coupon con scadenza $1$ e $5\,\mathrm{anni}$, in funzione del rendimento $y$ in punti percentuali; entrambi valgono $100\,\mathrm{euro}$ al rendimento del $5\%$. Nel punto comune la curva con $T=5$ è più ripida, perché $D_{\mathrm{mod}}=\dfrac{5}{1{,}05}$ contro $\dfrac{1}{1{,}05}$."}
 
 :::dimostrazione
 Si deriva la somma dei valori attuali mantenendo fissi pagamenti e date. Per ciascun flusso si ha
@@ -108,6 +114,8 @@ $$
 $$
 
 La curva del prezzo è strettamente convessa, quindi il suo grafico si trova sopra la retta tangente. La differenza fra prezzo e tangente compare già con un titolo a pagamento unico, perché il fattore di sconto varia in modo non lineare con il tasso.
+
+::grafico{f="88/(1+x/100)+145.2/(1+x/100)^2;200-320/110*(x-10)" xmin=0 xmax=30 ymin=140 ymax=240 nomi="y,P" punti="10,200,pieno" legenda="P(y);\text{Retta tangente}" titolo="Prezzo in euro, in funzione del rendimento $y$ in punti percentuali, di un titolo che paga $88\,\mathrm{euro}$ al tempo $1$ e $145{,}20\,\mathrm{euro}$ al tempo $2$, con la retta tangente al rendimento del $10\%$, dove $P=200\,\mathrm{euro}$. La curva sta sopra la tangente da entrambi i lati."}
 
 :::dimostrazione
 Si deriva una seconda volta il valore attuale di ogni pagamento. La derivata di $(1+y)^{-t_k-1}$ porta un fattore $-t_k-1$, quindi la seconda derivata del termine è $t_k(t_k+1)C_k(1+y)^{-t_k-2}$. Dividendo la somma per $P(y)$, il valore attuale di ciascun pagamento diventa il peso $w_k$. Almeno un $t_k$ è positivo, perciò il numeratore della formula in pesi è strettamente positivo.
@@ -168,7 +176,7 @@ Si applica il teorema di Taylor alla funzione $P$ nel punto $y$. Si sottrae $P(y
 Un titolo a due anni paga $110{,}25\,\mathrm{euro}$ a scadenza. Al rendimento del $5\%$ il prezzo è $100\,\mathrm{euro}$. Se il rendimento sale al $9\%$, vale $\Delta y=0{,}04$. Il prezzo lineare è $100\bigl(1-\dfrac{2}{1{,}05}\cdot 0{,}04\bigr)\approx92{,}38\,\mathrm{euro}$. La convexity è $\dfrac{6}{1{,}05^2}$ e il termine quadratico aggiunge circa $0{,}435\,\mathrm{euro}$. Il prezzo al secondo ordine è circa $92{,}82\,\mathrm{euro}$ e il prezzo esatto è $\dfrac{110{,}25}{1{,}09^2}\approx92{,}80\,\mathrm{euro}$. Prima dell'arrotondamento, il prezzo esatto e quello al secondo ordine differiscono di circa $0{,}021\,\mathrm{euro}$.
 :::
 
-::grafico{f="110.25/(1.05+x/100)^2-100;-200/1.05*x/100;100*(-2/1.05*x/100+3/1.05^2*(x/100)^2)" xmin=-16 xmax=16 ymin=-32 ymax=44 nomi="h,ΔP" legenda="\text{Variazione esatta};\text{Primo ordine};\text{Secondo ordine}" titolo="Zero coupon a due anni con rendimento iniziale del 5 per cento. Lo spostamento h è in punti percentuali e la variazione di prezzo in euro."}
+::grafico{f="110.25/(1.05+x/100)^2-100;-200/1.05*x/100;100*(-2/1.05*x/100+3/1.05^2*(x/100)^2)" xmin=-16 xmax=16 ymin=-32 ymax=44 nomi="h,ΔP" legenda="\text{Variazione esatta};\text{Primo ordine};\text{Secondo ordine}" titolo="Zero coupon a due anni con rendimento iniziale del $5\%$. Lo spostamento $h$ è in punti percentuali e la variazione di prezzo $\Delta P$ è in euro."}
 
 :::osservazione
 Dimezzando lo spostamento, il termine quadratico si riduce a un quarto. Per confrontare le stime numeriche si calcola l'errore in euro come differenza fra prezzo stimato e prezzo esatto. Nel grafico la coordinata orizzontale è lo spostamento in punti percentuali, e la coordinata verticale è la variazione di prezzo in euro. Le tre curve passano per il punto corrispondente allo spostamento nullo e hanno in quel punto la stessa pendenza. Il prezzo esatto e il secondo ordine hanno anche la stessa curvatura locale. La formula con la convexity è una stima locale. Se lo spostamento è ampio, il ricalcolo esatto tiene conto anche dei termini di ordine superiore.
@@ -217,10 +225,14 @@ La prima uguaglianza discende dal rapporto fra la derivata del prezzo e il prezz
 
 :::esempio{titolo="Un titolo con cedole e uno zero coupon"}
 Due titoli scadono fra tre anni. Il primo è uno zero coupon, quindi la sua duration di Macaulay è $3\,\mathrm{anni}$. Nel secondo, le quote di valore attuale dei pagamenti ai tempi $1$, $2$ e $3$ sono $0{,}1$, $0{,}1$ e $0{,}8$. La duration è $0{,}1+0{,}2+2{,}4=2{,}7\,\mathrm{anni}$. Allo stesso rendimento annuo effettivo, il titolo con cedole ha anche duration modificata minore, perché il divisore $1+y$ è uguale per i due titoli.
+
+::grafico{xmin=0 xmax=3.6 ymin=0 ymax=1.2 nomi="t,peso" vettori="1,0,1,0.1,10%;2,0,2,0.1,10%;3,0,3,0.8,80%" unicolore=1 punti="2.7,0,pieno,D" legenda=0 titolo="Quote di valore attuale del titolo con cedole alle date $1$, $2$ e $3$. La duration $2{,}7\,\mathrm{anni}$ precede la scadenza; nello zero coupon tutto il peso sta alla data $3$."}
 :::
 
 :::osservazione
 Per una rendita perpetua posticipata con rata annua costante $R>0$ e rendimento $y>0$, il prezzo è $P(y)=\dfrac R y$. La derivata prima è $-\dfrac R {y^2}$ e la seconda è $\dfrac{2R}{y^3}$. Pertanto $D_{\mathrm{mod}}=\dfrac1y$, $D=\dfrac{1+y}{y}$ e $\mathcal C=\dfrac{2}{y^2}$. Con $y=5\%$ la duration di Macaulay vale $21\,\mathrm{anni}$. La media è finita perché i valori attuali delle rate lontane diminuiscono geometricamente.
+
+::grafico{f="(1+x/100)/(x/100)" xmin=0 xmax=20 ymin=0 ymax=50 nomi="y,D" asintoti="y=1" punti="5,21,pieno" legenda="D=\dfrac{1+y}{y}" titolo="Duration di Macaulay di una rendita perpetua posticipata, con il rendimento $y$ in punti percentuali. Al $5\%$ vale $21\,\mathrm{anni}$; al crescere del rendimento si avvicina a $1$, la data della prima rata."}
 :::
 
 ## Controlli mediante le derivate
@@ -236,6 +248,8 @@ P''(y)&\approx\frac{P(y+h)-2P(y)+P(y-h)}{h^2}.
 $$
 
 Sviluppando i prezzi attorno a $y$, nella differenza si eliminano il termine costante e quelli di ordine pari. Nella somma si elimina il termine lineare e sottraendo due volte $P(y)$ si elimina anche il termine costante. Il divisore $2h$ deriva dalla distanza fra i due rendimenti estremi.
+
+::grafico{f="5/(x/100)" xmin=2 xmax=8 ymin=0 ymax=200 nomi="y,P" punti="3,166.67,pieno;5,100,pieno;7,71.43,pieno;5,119.05,vuoto" segmenti="3,166.67,7,71.43;5,100,5,119.05" legenda="P(y)=\dfrac{5}{y}" titolo="Rendita perpetua con rata $5\,\mathrm{euro}$ e rendimento $y$ in punti percentuali, prezzi ai rendimenti $3\%$, $5\%$ e $7\%$ ($h=0{,}02$). La pendenza della corda stima $P'$; il punto medio della corda, a $119{,}05\,\mathrm{euro}$, sta sopra il prezzo centrale di $100\,\mathrm{euro}$, e la distanza fra i due è metà di $P(y+h)-2P(y)+P(y-h)$."}
 :::
 
 :::esempio{titolo="Stima della sensibilità da tre prezzi"}
