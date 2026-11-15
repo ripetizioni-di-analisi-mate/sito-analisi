@@ -37,7 +37,7 @@ import { spazioHome } from './spazio.mjs';
 import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } from './livelli.mjs';
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
-import { confronta } from './valuta.mjs';
+import { confronta, confrontaMulti } from './valuta.mjs';
 import { esercizioRisolto, quizSbagliato, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
 import { inviaCodaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
@@ -1165,7 +1165,12 @@ export default {
       const { id, risposta, lingua } = await req.json().catch(() => ({}));
       const en = lingua === 'en';
       const [materia, argomento, n] = String(id || '').split('/');
-      if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || typeof risposta !== 'string' || risposta.length > 200)
+      // Una risposta (testo) oppure, negli esercizi con più caselle, un elenco: testi, o righe di testi per le matrici.
+      const breve = (x, max) => typeof x === 'string' && x.length <= max;
+      const valida = typeof risposta === 'string' ? risposta.length <= 200
+        : Array.isArray(risposta) && risposta.length <= 30 && JSON.stringify(risposta).length <= 6000
+          && risposta.every((x) => breve(x, 200) || (Array.isArray(x) && x.length <= 8 && x.every((r) => Array.isArray(r) && r.length <= 8 && r.every((y) => breve(y, 40)))));
+      if (!/^[a-z0-9-]+$/.test(materia || '') || !/^[a-z0-9-]+$/.test(argomento || '') || !/^\d+$/.test(n || '') || !valida)
         return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
       const io = await utenteCollegato(env, req).catch(() => null);
       const idAnteprima = argomento + '/esercizi/' + n;
@@ -1179,12 +1184,17 @@ export default {
       const chi = io?.email || [...new Uint8Array(impronta).slice(0, 8)].map((x) => x.toString(16).padStart(2, '0')).join('');
       const giorno = new Date().toISOString().slice(0, 10);
       if (!(await aDO(env, '/verifiche-conta', { giorno, chi })).ok) return json({ errore: en ? 'Too many attempts today.' : 'Troppi tentativi oggi.' }, 429);
-      const esito = confronta(risposta, giusta);
-      const scelta = giusta.tipo === 'scelta';
-      if (scelta && esito === 'sbagliata' && io) await aDO(env, '/liv-quiz-sbagliato', { email: io.email, id: `${materia}/${argomento}/${n}` });
-      if (esito !== 'giusta' || !io) return json({ esito }, 200, { 'cache-control': 'no-store' });
+      const multi = giusta.tipo === 'multi';
+      if (multi !== Array.isArray(risposta)) return json({ errore: en ? 'Invalid request.' : 'Richiesta non valida.' }, 400);
+      const piu = multi ? confrontaMulti(risposta, giusta) : null;
+      const esito = multi ? piu.esito : confronta(risposta, giusta);
+      const extra = multi ? { campi: piu.campi, giuste: piu.giuste } : {};
+      // Con i menu (quiz, classificazioni) una risposta sbagliata toglie gli EXP: niente punti provando tutte le voci.
+      const scelta = giusta.tipo === 'scelta' || (multi && giusta.campi.some((c) => c.t === 'scelta'));
+      if (scelta && (esito === 'sbagliata' || esito === 'parziale') && io) await aDO(env, '/liv-quiz-sbagliato', { email: io.email, id: `${materia}/${argomento}/${n}` });
+      if (esito !== 'giusta' || !io) return json({ esito, ...extra }, 200, { 'cache-control': 'no-store' });
       const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, scelta, lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) });
-      return json({ esito, ...r }, 200, { 'cache-control': 'no-store' });
+      return json({ esito, ...extra, ...r }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/studio' && POST) { // un minuto di studio attivo
       const io = await utenteCollegato(env, req).catch(() => null);

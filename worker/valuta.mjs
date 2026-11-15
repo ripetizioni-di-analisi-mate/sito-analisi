@@ -10,32 +10,37 @@ const FUNZIONI = {
   sin: Math.sin, cos: Math.cos, tan: Math.tan, arctan: Math.atan, atan: Math.atan, arcsin: Math.asin, asin: Math.asin, arccos: Math.acos, acos: Math.acos,
   sinh: Math.sinh, cosh: Math.cosh, tanh: Math.tanh,
 };
-const PAROLE = [...Object.keys({ sqrt: 1, cbrt: 1, ln: 1, log: 1, exp: 1, abs: 1, sin: 1, cos: 1, tan: 1, arctan: 1, atan: 1, arcsin: 1, asin: 1, arccos: 1, acos: 1, sinh: 1, cosh: 1, tanh: 1 }), 'pi', 'e', 'x', 'inf', 'infinito', 'infinity'];
+const PAROLE = [...Object.keys({ sqrt: 1, cbrt: 1, ln: 1, log: 1, exp: 1, abs: 1, sin: 1, cos: 1, tan: 1, arctan: 1, atan: 1, arcsin: 1, asin: 1, arccos: 1, acos: 1, sinh: 1, cosh: 1, tanh: 1 }), 'pi', 'e', 'inf', 'infinito', 'infinity'];
+// Lettere greche: nelle chiavi di correzione (\theta, \omega) e in ciò che scrive lo studente (θ, theta).
+const GRECHE = { alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', theta: 'θ', lambda: 'λ', mu: 'μ', rho: 'ρ', sigma: 'σ', tau: 'τ', phi: 'φ', omega: 'ω' };
 const LATEX_FUNZ = { sqrt: '\\sqrt', cbrt: '\\sqrt[3]', ln: '\\ln', log: '\\ln', exp: '\\exp', abs: '', sin: '\\sin', cos: '\\cos', tan: '\\tan', arctan: '\\arctan', atan: '\\arctan', arcsin: '\\arcsin', asin: '\\arcsin', arccos: '\\arccos', acos: '\\arccos', sinh: '\\sinh', cosh: '\\cosh', tanh: '\\tanh' };
 
 // ---------- testo scritto dallo studente → albero ----------
-function pezzi(src) {
-  const s = String(src)
-    .replace(/[−–—]/g, '-').replace(/[×·⋅]/g, '*').replace(/[÷:]/g, '/').replace(/π/g, 'pi').replace(/∞/g, 'inf').replace(/√/g, 'sqrt')
+function pezzi(src, vars = ['x']) {
+  const parole = [...PAROLE, ...vars];
+  let s0 = String(src);
+  for (const [nome, segno] of Object.entries(GRECHE)) s0 = s0.split(segno).join(` ${nome} `);
+  const s = s0
+    .replace(/ϑ/g, ' theta ').replace(/ϕ/g, ' phi ').replace(/[−–—]/g, '-').replace(/[×·⋅]/g, '*').replace(/[÷:]/g, '/').replace(/π/g, 'pi').replace(/∞/g, 'inf').replace(/√/g, 'sqrt')
     .replace(/\*\*/g, '^').replace(/(\d),(\d)/g, '$1.$2').replace(/\s+/g, ' ').trim().toLowerCase()
     .replace(/\|([^|]*)\|/g, ' abs($1) ');
   const t = s.match(/\d*\.\d+|\d+|[a-z]+|[-+*/^()]|\S/g) || [];
   // Lettere attaccate (sinx, xsinx, 2pix, ex): si separano nelle parole note, scegliendo ogni volta la più lunga.
   return t.flatMap((x) => {
-    if (!/^[a-z]+$/.test(x) || PAROLE.includes(x)) return [x];
+    if (!/^[a-z]+$/.test(x) || parole.includes(x)) return [x];
     const out = [];
     let r = x;
     while (r) {
-      const p = PAROLE.filter((w) => r.startsWith(w)).sort((a, b) => b.length - a.length)[0];
+      const p = parole.filter((w) => r.startsWith(w)).sort((a, b) => b.length - a.length)[0];
       if (!p) return [x];
       out.push(p); r = r.slice(p.length);
     }
     return out;
   });
 }
-// Variabile ammessa nelle risposte che sono funzioni (primitive, derivate): x.
-export function leggi(src) {
-  const t = pezzi(src);
+// Variabili ammesse nelle risposte che sono funzioni (primitive, derivate): x, oppure quelle indicate dalla chiave.
+export function leggi(src, vars = ['x']) {
+  const t = pezzi(src, vars);
   if (!t.length || t.length > 120) return null;
   let i = 0;
   const vedi = () => t[i];
@@ -72,7 +77,7 @@ export function leggi(src) {
     if (x === 'pi') return { cost: 'pi' };
     if (x === 'e') return { cost: 'e' };
     if (x === 'inf' || x === 'infinito' || x === 'infinity') return { cost: 'inf' };
-    if (x === 'x') return { v: 'x' };
+    if (vars.includes(x)) return { v: x };
     if (FUNZIONI[x]) {
       // sqrt(2), ln 2, sin(pi/6)
       const arg = vedi() === '(' ? (prendi(), (() => { const n = somma(); if (prendi() !== ')') throw new Error('parentesi'); return n; })()) : potenza();
@@ -89,7 +94,7 @@ export function leggi(src) {
 export function valore(n, x = NaN) {
   if (!n) return NaN;
   if ('num' in n) return n.num;
-  if (n.v) return x;
+  if (n.v) return typeof x === 'number' ? x : (x?.[n.v] ?? NaN);
   if (n.cost) return n.cost === 'pi' ? Math.PI : n.cost === 'e' ? Math.E : Infinity;
   if (n.f) return FUNZIONI[n.f](valore(n.a, x));
   const a = valore(n.a, x), b = n.b ? valore(n.b, x) : 0;
@@ -109,7 +114,7 @@ export function valore(n, x = NaN) {
 export function latex(n) {
   if (!n) return '';
   if ('num' in n) return n.testo.replace('.', '{,}');
-  if (n.v) return n.v;
+  if (n.v) return GRECHE[n.v] ? `\\${n.v}` : n.v;
   if (n.cost) return n.cost === 'pi' ? '\\pi' : n.cost === 'e' ? 'e' : '\\infty';
   if (n.f) {
     if (n.f === 'abs') return `\\left| ${latex(n.a)} \\right|`;
@@ -150,6 +155,8 @@ export function daLatex(tex) {
     .replace(/\\infty/g, ' inf ').replace(/\\pi(?![a-zA-Z])/g, ' pi ')
     .replace(/\\(ln|log|sin|cos|tan|arctan|arcsin|arccos|sinh|cosh|tanh|exp)(?![a-zA-Z])/g, ' $1 ')
     .replace(/\\mathrm\{e\}/g, ' e ')
+    .replace(/\\var(theta|phi)(?![a-zA-Z])/g, ' $1 ')
+    .replace(/\\(alpha|beta|gamma|delta|theta|lambda|mu|rho|sigma|tau|phi|omega)(?![a-zA-Z])/g, ' $1 ')
     .replace(/\|([^|]*)\|/g, ' abs($1) ');
   // \dfrac{a}{b}, \frac, \tfrac → ((a)/(b)); \sqrt[n]{a} → ((a)^(1/(n))); \sqrt{a} → sqrt(a); ^{…} → ^(…)
   let out = '';
@@ -309,7 +316,7 @@ function haNodo(n, prova) {
   if (prova(n)) return true;
   return haNodo(n.a, prova) || haNodo(n.b, prova);
 }
-const conX = (n) => haNodo(n, (m) => m.v === 'x');
+const conX = (n) => haNodo(n, (m) => m.v !== undefined);
 export function inForma(n, forma) {
   if (!n) return false;
   if (forma === 'prodotto') {
@@ -382,4 +389,294 @@ export function confronta(scritta, giusta) {
   const decimale = /\d[.,]\d/.test(String(scritta));
   if (decimale && Math.abs(v - g) <= Math.max(1e-2 * Math.abs(g), 1e-9)) return 'vicina';
   return 'sbagliata';
+}
+
+// ---------- Chiavi di correzione con più caselle ----------
+// Per gli esercizi con più risultati la soluzione non basta: una chiave scritta a mano (src/data/chiavi/<materia>.json)
+// dice quali caselle mostrare e che cosa contiene ciascuna. Tipi di casella:
+//   numero      { v: "0{,}528", u?: "m", esatto?: true }                 un numero (unità facoltativa)
+//   funzione    { v: "2x e^{x}", var?: ["x"], primitiva?, forma? }        un'espressione nelle variabili indicate
+//   equazione   { v: "y = 2x - 1", var: ["x","y"] }                       un'equazione, a meno di un fattore non nullo
+//   valori      { v: ["2","-3"], ordine?: false }                         più numeri: con ordine (punto, vettore) o senza (soluzioni)
+//   intervallo  { v: "(-\\infty, 1) \\cup [3, +\\infty)", var?: "x" }     un sottoinsieme di ℝ (unione di intervalli)
+//   matrice     { v: [["1","0"],["0","1"]] }                              una matrice
+//   scelta      { opzioni: ["debole","forte"], v: "debole" }              una voce di un menu (classificazioni, sì/no)
+// Ogni casella ha un'etichetta e (testo con $…$). La chiave compilata contiene i valori, quella pubblica solo la forma delle caselle.
+const UNITA_ESATTE = /^(?:euro|€|%|°|gradi|anni|anno|rad)$/;
+function numeroDaChiave(c) {
+  const tex = String(c.v);
+  const r = risultatoDaSoluzione(`$${tex}$`);
+  if (!r || r.tipo !== 'numero') throw new Error(`numero non leggibile: ${tex}`);
+  const out = { t: 'numero', v: r.v };
+  if (r.d !== undefined) out.d = r.d;
+  const u = c.u || r.u;
+  if (u) out.u = u;
+  if (c.esatto) delete out.d;
+  else if (out.d === undefined && c.u && !UNITA_ESATTE.test(c.u)) out.d = 0;
+  if (Number.isInteger(c.cifre)) out.d = c.cifre;
+  return out;
+}
+function punti(vars) {
+  return Array.from({ length: 12 }, (_, i) => Object.fromEntries(vars.map((v, j) => [v, PUNTI[(i * 5 + j * 7) % 12] + 0.13 * j])));
+}
+function espressioneDaLatex(tex, vars) {
+  const e = daLatex(String(tex).replace(/\+\s*[cC]\s*$/, ''));
+  const n = leggi(e, vars);
+  if (!n) throw new Error(`espressione non leggibile: ${tex}`);
+  const buoni = punti(vars).map((p) => valore(n, p)).filter(Number.isFinite);
+  if (buoni.length < 4) throw new Error(`espressione non definita nei punti di prova: ${tex}`);
+  return e;
+}
+// Insieme di numeri reali: unione di intervalli { a, b, ca, cb } (ca, cb: estremi compresi).
+const PIU_INF = Infinity;
+function normalizza(iv) {
+  const v = iv.filter((x) => x.a < x.b || (x.a === x.b && x.ca && x.cb)).sort((p, q) => p.a - q.a || (q.ca - p.ca));
+  const out = [];
+  for (const x of v) {
+    const u = out[out.length - 1];
+    if (u && (u.b > x.a || (u.b === x.a && (u.cb || x.ca)))) {
+      if (x.b > u.b || (x.b === u.b && x.cb)) { u.b = x.b; u.cb = x.cb; }
+    } else out.push({ ...x });
+  }
+  return out;
+}
+function estremo(src, vars) {
+  const t = String(src).trim();
+  const n = leggi(t, vars);
+  if (!n) throw new Error('estremo');
+  const v = valore(n);
+  if (Number.isNaN(v)) throw new Error('estremo');
+  return v;
+}
+function intervallo(pezzo, opz) {
+  const m = pezzo.match(/^([[\](])(.*)([[\])])$/s);
+  if (!m) return null;
+  const dentro = m[2];
+  let a, b;
+  if (dentro.includes(';')) [a, b] = dentro.split(';');
+  else {
+    // virgole fuori dalle parentesi: con la virgola decimale (1,5) servono il punto e virgola o il punto
+    const virg = []; let d = 0;
+    for (let i = 0; i < dentro.length; i++) { const ch = dentro[i]; if (ch === '(') d++; else if (ch === ')') d--; else if (ch === ',' && d === 0) virg.push(i); }
+    let k;
+    if (opz.virgola || virg.length === 1) k = virg[0];
+    else if (virg.length === 3) k = virg[1];
+    else throw new Error('separatore');
+    a = dentro.slice(0, k); b = dentro.slice(k + 1);
+  }
+  return { a: estremo(a, opz.vars), b: estremo(b, opz.vars), ca: m[1] === '[', cb: m[3] === ']' };
+}
+function disuguaglianza(pezzo, v, opz) {
+  const s = pezzo.replace(/≤|=</g, '<=').replace(/≥|=>/g, '>=').replace(/≠|<>/g, '!=');
+  const x = v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const OP = '(<=|>=|<|>)';
+  let m = s.match(new RegExp(`^(.+?)${OP}\\s*${x}\\s*${OP}(.+)$`));
+  if (m) {
+    const [, l, o1, o2, r] = m;
+    const p = estremo(l, opz.vars), q = estremo(r, opz.vars);
+    if (o1[0] === '<' && o2[0] === '<') return [{ a: p, b: q, ca: o1 === '<=', cb: o2 === '<=' }];
+    if (o1[0] === '>' && o2[0] === '>') return [{ a: q, b: p, ca: o2 === '>=', cb: o1 === '>=' }];
+    throw new Error('disuguaglianza');
+  }
+  m = s.match(new RegExp(`^${x}\\s*(<=|>=|<|>|!=|=)\\s*(.+)$`));
+  if (m) {
+    const c = estremo(m[2], opz.vars);
+    switch (m[1]) {
+      case '<': return [{ a: -PIU_INF, b: c, ca: false, cb: false }];
+      case '<=': return [{ a: -PIU_INF, b: c, ca: false, cb: true }];
+      case '>': return [{ a: c, b: PIU_INF, ca: false, cb: false }];
+      case '>=': return [{ a: c, b: PIU_INF, ca: true, cb: false }];
+      case '!=': return [{ a: -PIU_INF, b: c, ca: false, cb: false }, { a: c, b: PIU_INF, ca: false, cb: false }];
+      default: return [{ a: c, b: c, ca: true, cb: true }];
+    }
+  }
+  m = s.match(new RegExp(`^(.+?)\\s*(<=|>=|<|>)\\s*${x}$`));
+  if (m) {
+    const giro = { '<': '>', '<=': '>=', '>': '<', '>=': '<=' }[m[2]];
+    return disuguaglianza(`${v}${giro}${m[1]}`, v, opz);
+  }
+  return null;
+}
+export function leggiInsieme(src, v = 'x', opz = {}) {
+  const o = { vars: [], ...opz };
+  const s = String(src).trim().toLowerCase().replace(/\s+/g, ' ').replace(/^\{\s*([^}]*)\s*\}$/, (_, d) => (/[<>≤≥]/.test(d) ? d.replace(/^[^|:]*[|:]\s*/, '') : `{${d}}`));
+  if (/^(?:r|ℝ|tutti i (?:numeri )?reali|ogni x|per ogni x|all real numbers|\(-inf[;,] ?\+?inf\))$/.test(s)) return [{ a: -PIU_INF, b: PIU_INF, ca: false, cb: false }];
+  if (/^(?:∅|ø|vuoto|insieme vuoto|nessuna(?: soluzione)?|empty|\{\s*\})$/.test(s)) return [];
+  const parti = s.split(/\s*(?:∪|\bu\b|\bor\b|\bo\b|\bvel\b|∨|\|\|)\s*/).filter(Boolean);
+  let out = [];
+  for (const p0 of parti) {
+    const p = p0.trim();
+    const pt = p.match(/^\{(.+)\}$/);
+    if (pt) { for (const e of pt[1].split(opz.virgola ? ',' : /;|, /)) { const c = estremo(e, o.vars); out.push({ a: c, b: c, ca: true, cb: true }); } continue; }
+    const i = intervallo(p, o);
+    if (i) { out.push(i); continue; }
+    const d = disuguaglianza(p, v, o);
+    if (d) { out.push(...d); continue; }
+    throw new Error('insieme');
+  }
+  return normalizza(out);
+}
+function insiemeDaLatex(tex, v) {
+  const s = String(tex)
+    .replace(/\\(left|right|big|Big)(?![a-zA-Z])/g, '')
+    .replace(/\\cup/g, ' U ').replace(/\\mathbb\s*\{?R\}?/g, 'R').replace(/\\(emptyset|varnothing)/g, '∅')
+    .replace(/\\(leq|le|leqslant)(?![a-zA-Z])/g, '<=').replace(/\\(geq|ge|geqslant)(?![a-zA-Z])/g, '>=')
+    .replace(/\\(neq|ne)(?![a-zA-Z])/g, '!=').replace(/\\lt(?![a-zA-Z])/g, '<').replace(/\\gt(?![a-zA-Z])/g, '>')
+    .replace(/\\\{/g, '{').replace(/\\\}/g, '}');
+  const pezziU = s.split(' U ').map((p) => p.trim()).map((p) => (/^[R∅]$/.test(p) ? p : p.replace(/^([[\](])(.*)([[\])])$/s, (_, a, d, b) => `${a}${d.split(',').map((e) => daLatex(e)).join(',')}${b}`)));
+  const tradotti = pezziU.map((p) => (/^[[\](]/.test(p) || /^[R∅]$/.test(p) || /^\{/.test(p) ? p : daLatex(p)));
+  return leggiInsieme(tradotti.join(' U '), v, { virgola: true });
+}
+export function compilaChiave(k) {
+  if (!k || !Array.isArray(k.campi) || !k.campi.length) throw new Error('chiave senza caselle');
+  const campi = k.campi.map((c) => {
+    const base = { e: String(c.e || '') };
+    switch (c.t) {
+      case 'numero': return { ...base, ...numeroDaChiave(c) };
+      case 'funzione': {
+        const vars = c.var || ['x'];
+        const out = { ...base, t: 'funzione', e2: espressioneDaLatex(c.v, vars), vars };
+        if (c.primitiva) out.primitiva = true;
+        if (c.forma) out.forma = c.forma;
+        return out;
+      }
+      case 'equazione': {
+        const vars = c.var || ['x', 'y'];
+        const [l, r, resto] = String(c.v).split('=');
+        if (r === undefined || resto !== undefined) throw new Error(`equazione senza un solo «=»: ${c.v}`);
+        return { ...base, t: 'equazione', e2: `(${espressioneDaLatex(l, vars)})-(${espressioneDaLatex(r, vars)})`, vars };
+      }
+      case 'valori': {
+        if (!Array.isArray(c.v) || c.v.length < 2) throw new Error('valori: servono almeno due valori');
+        return { ...base, t: 'valori', v: c.v.map((x) => numeroDaChiave({ v: x }).v), ordine: c.ordine !== false && c.ordine !== undefined ? true : !!c.ordine };
+      }
+      case 'intervallo': return { ...base, t: 'intervallo', v: insiemeDaLatex(c.v, c.var || 'x'), var: c.var || 'x' };
+      case 'matrice': {
+        if (!Array.isArray(c.v) || !c.v.length || !c.v.every((r) => Array.isArray(r) && r.length === c.v[0].length)) throw new Error('matrice non rettangolare');
+        return { ...base, t: 'matrice', v: c.v.map((r) => r.map((x) => numeroDaChiave({ v: x }).v)) };
+      }
+      case 'scelta': {
+        const opzioni = (c.opzioni || []).map(String);
+        const i = typeof c.v === 'number' ? c.v : opzioni.indexOf(String(c.v));
+        if (opzioni.length < 2 || i < 0 || i >= opzioni.length) throw new Error(`scelta: «${c.v}» non è tra le opzioni`);
+        return { ...base, t: 'scelta', opzioni, v: i };
+      }
+      default: throw new Error(`tipo di casella sconosciuto: ${c.t}`);
+    }
+  });
+  return { tipo: 'multi', campi };
+}
+// Forma delle caselle senza i risultati: è ciò che arriva alla pagina.
+export function chiavePubblica(r) {
+  return r.campi.map((c) => {
+    const o = { e: c.e, t: c.t };
+    if (c.u) o.u = c.u;
+    if (c.vars) o.vars = c.vars;
+    if (c.primitiva) o.primitiva = true;
+    if (c.t === 'valori') { o.n = c.v.length; o.ordine = c.ordine; }
+    if (c.t === 'matrice') { o.righe = c.v.length; o.colonne = c.v[0].length; }
+    if (c.t === 'scelta') o.opzioni = c.opzioni;
+    if (c.t === 'intervallo') o.var = c.var;
+    return o;
+  });
+}
+function confrontaEspressione(scritta, e2, vars, { primitiva = false, forma } = {}) {
+  const n = leggi(scritta, vars);
+  if (!n) return 'illeggibile';
+  const g = leggi(e2, vars);
+  const coppie = punti(vars).map((p) => [valore(n, p), valore(g, p)]).filter(([a, b]) => Number.isFinite(a) && Number.isFinite(b));
+  if (coppie.length < 4) return 'sbagliata';
+  const d0 = primitiva ? coppie[0][0] - coppie[0][1] : 0;
+  const ok = coppie.every(([a, b]) => Math.abs(a - b - d0) <= 1e-7 * Math.max(1, Math.abs(b)));
+  if (ok && forma && !inForma(n, forma)) return 'forma-' + forma;
+  return ok ? 'giusta' : 'sbagliata';
+}
+function confrontaEquazione(scritta, e2, vars) {
+  const [l, r, resto] = String(scritta).split('=');
+  if (resto !== undefined) return 'illeggibile';
+  const ns = leggi(r === undefined ? l : `(${l})-(${r})`, vars);
+  if (!ns) return 'illeggibile';
+  const g = leggi(e2, vars);
+  const rapporti = [];
+  for (const p of punti(vars)) {
+    const a = valore(ns, p), b = valore(g, p);
+    if (!Number.isFinite(a) || !Number.isFinite(b)) continue;
+    if (Math.abs(b) < 1e-9) { if (Math.abs(a) > 1e-7) return 'sbagliata'; continue; }
+    rapporti.push(a / b);
+  }
+  if (rapporti.length < 4) return 'sbagliata';
+  const k = rapporti[0];
+  if (Math.abs(k) < 1e-9) return 'sbagliata';
+  return rapporti.every((x) => Math.abs(x - k) <= 1e-7 * Math.max(1, Math.abs(k))) ? 'giusta' : 'sbagliata';
+}
+// Più numeri in una casella: «2; -3», «(1, 2)», «x = 1, x = 4».
+export function dividiValori(src, n) {
+  let s = String(src).trim().replace(/^[[({]\s*/, '').replace(/\s*[\])}]$/, '');
+  let parti;
+  if (s.includes(';')) parti = s.split(';');
+  else {
+    const virg = []; let d = 0;
+    for (let i = 0; i < s.length; i++) { const ch = s[i]; if ('([{'.includes(ch)) d++; else if (')]}'.includes(ch)) d--; else if (ch === ',' && d === 0) virg.push(i); }
+    const conSpazio = virg.filter((i) => s[i + 1] === ' ');
+    const tagli = virg.length === n - 1 ? virg : conSpazio.length === n - 1 ? conSpazio : virg.length === 2 * n - 1 ? virg.filter((_, j) => j % 2 === 1) : virg;
+    parti = []; let a = 0;
+    for (const i of tagli) { parti.push(s.slice(a, i)); a = i + 1; }
+    parti.push(s.slice(a));
+  }
+  return parti.map((x) => x.trim()).filter(Boolean);
+}
+function confrontaNumero(scritta, v, extra = {}) {
+  return confronta(scritta, { tipo: 'numero', v, ...extra });
+}
+export function confrontaCampo(risposta, c) {
+  const vuota = (x) => x === undefined || x === null || (typeof x === 'string' && !x.trim());
+  if (c.t === 'matrice') {
+    if (!Array.isArray(risposta) || risposta.length !== c.v.length) return 'illeggibile';
+    const esiti = c.v.flatMap((riga, i) => riga.map((g, j) => (vuota(risposta[i]?.[j]) ? 'illeggibile' : confrontaNumero(String(risposta[i][j]), g))));
+    if (esiti.includes('illeggibile')) return 'illeggibile';
+    return esiti.every((e) => e === 'giusta') ? 'giusta' : esiti.every((e) => e === 'giusta' || e === 'vicina') ? 'vicina' : 'sbagliata';
+  }
+  if (vuota(risposta)) return 'illeggibile';
+  const s = String(risposta);
+  switch (c.t) {
+    case 'numero': return confrontaNumero(s, c.v, { u: c.u, d: c.d });
+    case 'funzione': return confrontaEspressione(s.includes('=') ? s.slice(s.lastIndexOf('=') + 1) : s, c.e2, c.vars, c);
+    case 'equazione': return confrontaEquazione(s, c.e2, c.vars);
+    case 'scelta': return Number(s) === c.v ? 'giusta' : /^\d+$/.test(s) ? 'sbagliata' : 'illeggibile';
+    case 'intervallo': {
+      let ins;
+      try { ins = leggiInsieme(s, c.var || 'x'); } catch { return 'illeggibile'; }
+      if (ins.length !== c.v.length) return 'sbagliata';
+      const uguale = (p, q) => (p === q) || Math.abs(p - q) <= 1e-7 * Math.max(1, Math.abs(q));
+      return ins.every((x, i) => {
+        const g = c.v[i];
+        return uguale(x.a, g.a) && uguale(x.b, g.b) && (!Number.isFinite(g.a) || x.ca === g.ca) && (!Number.isFinite(g.b) || x.cb === g.cb);
+      }) ? 'giusta' : 'sbagliata';
+    }
+    case 'valori': {
+      const parti = dividiValori(s, c.v.length);
+      if (parti.length !== c.v.length) return parti.every((x) => leggi(senzaUnitaScritta(x))) ? 'sbagliata' : 'illeggibile';
+      if (!parti.every((x) => leggi(senzaUnitaScritta(x)))) return 'illeggibile';
+      if (c.ordine) {
+        const e = parti.map((x, i) => confrontaNumero(x, c.v[i]));
+        return e.every((x) => x === 'giusta') ? 'giusta' : e.every((x) => x === 'giusta' || x === 'vicina') ? 'vicina' : 'sbagliata';
+      }
+      const rimasti = [...c.v]; let vicina = false;
+      for (const x of parti) {
+        let k = rimasti.findIndex((g) => confrontaNumero(x, g) === 'giusta');
+        if (k < 0) { k = rimasti.findIndex((g) => confrontaNumero(x, g) === 'vicina'); if (k >= 0) vicina = true; }
+        if (k < 0) return 'sbagliata';
+        rimasti.splice(k, 1);
+      }
+      return vicina ? 'vicina' : 'giusta';
+    }
+    default: return 'illeggibile';
+  }
+}
+export function confrontaMulti(risposte, chiave) {
+  if (!Array.isArray(risposte) || risposte.length !== chiave.campi.length) return { esito: 'illeggibile', campi: [] };
+  const campi = chiave.campi.map((c, i) => confrontaCampo(risposte[i], c));
+  const giuste = campi.filter((e) => e === 'giusta').length;
+  const esito = giuste === campi.length ? 'giusta' : campi.includes('illeggibile') ? 'illeggibile' : giuste ? 'parziale' : 'sbagliata';
+  return { esito, campi, giuste };
 }

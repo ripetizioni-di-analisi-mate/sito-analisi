@@ -1,0 +1,511 @@
+{
+ "profili-e-risalto/1": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}742",
+    "u": "m"
+   },
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "1{,}454",
+    "u": "m"
+   },
+   {
+    "e": "$i_c$",
+    "t": "numero",
+    "v": "0{,}00507",
+    "cifre": 5
+   },
+   {
+    "e": "Profilo",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "M1"
+   },
+   {
+    "e": "Verso di tracciamento",
+    "t": "scelta",
+    "opzioni": [
+     "da monte verso valle",
+     "da valle verso monte"
+    ],
+    "v": "da valle verso monte"
+   }
+  ]
+ },
+ "profili-e-risalto/2": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}593",
+    "u": "m"
+   },
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "1{,}290",
+    "u": "m"
+   },
+   {
+    "e": "$i_c$",
+    "t": "numero",
+    "v": "0{,}00851",
+    "cifre": 5
+   },
+   {
+    "e": "Sezione di controllo",
+    "t": "scelta",
+    "opzioni": [
+     "sezione di sbocco sul salto di fondo",
+     "sezione iniziale del canale",
+     "nessuna: moto uniforme in tutto il canale"
+    ],
+    "v": "sezione di sbocco sul salto di fondo"
+   },
+   {
+    "e": "Profilo a monte della sezione di controllo",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "M2"
+   }
+  ]
+ },
+ "profili-e-risalto/3": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}528",
+    "u": "m"
+   },
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "1{,}145",
+    "u": "m"
+   },
+   {
+    "e": "Profilo subito a valle della paratoia",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "M3"
+   },
+   {
+    "e": "Verso di tracciamento",
+    "t": "scelta",
+    "opzioni": [
+     "da monte verso valle",
+     "da valle verso monte"
+    ],
+    "v": "da monte verso valle"
+   },
+   {
+    "e": "Il risalto si forma",
+    "t": "scelta",
+    "opzioni": [
+     "contro la paratoia",
+     "più a valle (allontanato)"
+    ],
+    "v": "più a valle (allontanato)"
+   }
+  ]
+ },
+ "profili-e-risalto/4": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}742",
+    "u": "m"
+   },
+   {
+    "e": "$i_c$",
+    "t": "numero",
+    "v": "0{,}00634",
+    "cifre": 5
+   },
+   {
+    "e": "$h_{01}$",
+    "t": "numero",
+    "v": "1{,}512",
+    "u": "m"
+   },
+   {
+    "e": "$h_{02}$",
+    "t": "numero",
+    "v": "0{,}473",
+    "u": "m"
+   },
+   {
+    "e": "Sezione di controllo",
+    "t": "scelta",
+    "opzioni": [
+     "sezione di cambio di pendenza",
+     "sezione iniziale del tratto di monte",
+     "sezione finale del tratto di valle"
+    ],
+    "v": "sezione di cambio di pendenza"
+   },
+   {
+    "e": "Profilo nel tratto di monte",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "M2"
+   },
+   {
+    "e": "Profilo nel tratto di valle",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "S2"
+   }
+  ]
+ },
+ "profili-e-risalto/5": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}742",
+    "u": "m"
+   },
+   {
+    "e": "Profilo a valle della paratoia",
+    "t": "scelta",
+    "opzioni": [
+     "H2",
+     "H3",
+     "M2",
+     "M3",
+     "A3"
+    ],
+    "v": "H3"
+   },
+   {
+    "e": "Verso di tracciamento",
+    "t": "scelta",
+    "opzioni": [
+     "da monte verso valle",
+     "da valle verso monte"
+    ],
+    "v": "da monte verso valle"
+   },
+   {
+    "e": "Altezza coniugata di $h_1$",
+    "t": "numero",
+    "v": "1{,}36",
+    "u": "m"
+   }
+  ]
+ },
+ "profili-e-risalto/6": {
+  "campi": [
+   {
+    "e": "$v_1$",
+    "t": "numero",
+    "v": "5{,}83",
+    "u": "m/s"
+   },
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "2{,}40",
+    "cifre": 2
+   },
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "1{,}76",
+    "u": "m"
+   },
+   {
+    "e": "Spinta totale $S$",
+    "t": "numero",
+    "v": "133",
+    "u": "kN"
+   }
+  ]
+ },
+ "profili-e-risalto/7": {
+  "campi": [
+   {
+    "e": "$Fr_2$",
+    "t": "numero",
+    "v": "0{,}397",
+    "cifre": 3
+   },
+   {
+    "e": "$h_1$",
+    "t": "numero",
+    "v": "0{,}453",
+    "u": "m"
+   },
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "3{,}15",
+    "cifre": 2
+   }
+  ]
+ },
+ "profili-e-risalto/8": {
+  "campi": [
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "3{,}02",
+    "cifre": 2
+   },
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "7{,}18",
+    "u": "m^3/s"
+   }
+  ]
+ },
+ "profili-e-risalto/9": {
+  "campi": [
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "1{,}84",
+    "u": "m"
+   },
+   {
+    "e": "Perdita di carico $\\Delta E$",
+    "t": "numero",
+    "v": "0{,}654",
+    "u": "m"
+   },
+   {
+    "e": "Potenza dissipata $P$",
+    "t": "numero",
+    "v": "83{,}4",
+    "u": "kW"
+   },
+   {
+    "e": "Lunghezza del risalto $L$",
+    "t": "numero",
+    "v": "8{,}04",
+    "u": "m"
+   }
+  ]
+ },
+ "profili-e-risalto/10": {
+  "campi": [
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "3{,}11",
+    "cifre": 2
+   },
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "1{,}18",
+    "u": "m"
+   },
+   {
+    "e": "Perdita di carico $\\Delta E$",
+    "t": "numero",
+    "v": "0{,}478",
+    "u": "m"
+   },
+   {
+    "e": "Lunghezza del risalto $L$",
+    "t": "numero",
+    "v": "5{,}26",
+    "u": "m"
+   },
+   {
+    "e": "Tipo di risalto",
+    "t": "scelta",
+    "opzioni": [
+     "ondulato",
+     "debole",
+     "oscillante",
+     "stazionario",
+     "forte"
+    ],
+    "v": "oscillante"
+   }
+  ]
+ },
+ "profili-e-risalto/11": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}860",
+    "u": "m"
+   },
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "1{,}880",
+    "u": "m"
+   },
+   {
+    "e": "Altezza coniugata di $h_1$",
+    "t": "numero",
+    "v": "1{,}74",
+    "u": "m"
+   },
+   {
+    "e": "Posizione del risalto",
+    "t": "scelta",
+    "opzioni": [
+     "contro la paratoia (paratoia annegata)",
+     "più a valle (risalto allontanato)"
+    ],
+    "v": "contro la paratoia (paratoia annegata)"
+   }
+  ]
+ },
+ "profili-e-risalto/12": {
+  "campi": [
+   {
+    "e": "Distanza fra le due sezioni",
+    "t": "numero",
+    "v": "65{,}3",
+    "u": "m"
+   },
+   {
+    "e": "Profilo",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "M2"
+   }
+  ]
+ },
+ "profili-e-risalto/13": {
+  "campi": [
+   {
+    "e": "Area bagnata $A_1$",
+    "t": "numero",
+    "v": "1{,}204",
+    "u": "m^2"
+   },
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "3{,}10",
+    "cifre": 2
+   },
+   {
+    "e": "Spinta totale $S(h_1)$",
+    "t": "numero",
+    "v": "43{,}1",
+    "u": "kN"
+   },
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "1{,}44",
+    "u": "m"
+   }
+  ]
+ },
+ "profili-e-risalto/14": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}860",
+    "u": "m"
+   },
+   {
+    "e": "$i_c$",
+    "t": "numero",
+    "v": "0{,}00665",
+    "cifre": 5
+   },
+   {
+    "e": "$h_{01}$",
+    "t": "numero",
+    "v": "0{,}521",
+    "u": "m"
+   },
+   {
+    "e": "$h_{02}$",
+    "t": "numero",
+    "v": "1{,}450",
+    "u": "m"
+   },
+   {
+    "e": "Altezza coniugata di $h_{01}$",
+    "t": "numero",
+    "v": "1{,}33",
+    "u": "m"
+   },
+   {
+    "e": "Il risalto si forma",
+    "t": "scelta",
+    "opzioni": [
+     "sul tratto di monte, a forte pendenza",
+     "sul tratto di valle, a debole pendenza"
+    ],
+    "v": "sul tratto di monte, a forte pendenza"
+   },
+   {
+    "e": "Profilo che segue il risalto",
+    "t": "scelta",
+    "opzioni": [
+     "M1",
+     "M2",
+     "M3",
+     "S1",
+     "S2",
+     "S3"
+    ],
+    "v": "S1"
+   }
+  ]
+ }
+}

@@ -1,8 +1,15 @@
 ---
 // La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
-interface Props { id: string; tipo?: 'numero' | 'funzione' | 'scelta'; primitiva?: boolean; unita?: string; lingua: Lingua; mostraIndizio?: boolean }
-const { id, tipo, primitiva = false, unita, lingua, mostraIndizio = true } = Astro.props;
+import katex from 'katex';
+type Casella = { e: string; t: string; u?: string; vars?: string[]; primitiva?: boolean; n?: number; ordine?: boolean; righe?: number; colonne?: number; opzioni?: string[]; var?: string };
+interface Props { id: string; tipo?: 'numero' | 'funzione' | 'scelta' | 'multi'; primitiva?: boolean; unita?: string; campi?: Casella[]; lingua: Lingua; mostraIndizio?: boolean }
+const { id, tipo, primitiva = false, unita, campi = [], lingua, mostraIndizio = true } = Astro.props;
+// Testo con formule $…$ → HTML (etichette delle caselle e voci dei menu).
+const conFormule = (t: string) => t.split(/(\$[^$]+\$)/g).map((x) => (/^\$[^$]+\$$/.test(x)
+  ? katex.renderToString(x.slice(1, -1), { throwOnError: false, strict: false, output: 'html' })
+  : x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!))).join('');
+const leggibile = (u?: string) => u?.replace(/\^2/g, '²').replace(/\^3/g, '³').replace(/\^-1/g, '⁻¹').replace(/\^-2/g, '⁻²');
 // Unità di misura del risultato, scritta come la leggerebbe uno studente (m/s^2 → m/s²).
 const unitaLeggibile = unita?.replace(/\^2/g, '²').replace(/\^3/g, '³').replace(/\^-1/g, '⁻¹').replace(/\^-2/g, '⁻²');
 const en = lingua === 'en';
@@ -22,8 +29,70 @@ const tasti = [
   { simbolo: 'ln(□)', modello: 'ln(|)', nome: en ? 'Natural logarithm' : es ? 'Logaritmo natural' : 'Logaritmo naturale' },
 ];
 ---
-<form class="verifica zona-libera" data-id={id} data-tipo={tipo} data-senza-indizio={mostraIndizio ? undefined : ''} novalidate>
-  {tipo === 'scelta' ? (
+<form class="verifica zona-libera" data-id={id} data-tipo={tipo} data-senza-indizio={mostraIndizio ? undefined : ''} data-campi={tipo === 'multi' ? JSON.stringify(campi.map((c) => ({ t: c.t, vars: c.vars, var: c.var, n: c.n, righe: c.righe, colonne: c.colonne }))) : undefined} novalidate>
+  {tipo === 'multi' ? (
+    <>
+      <p class="verifica-titolo">{en ? 'Write your results' : es ? 'Escribe tus resultados' : 'Scrivi i risultati'}</p>
+      <div class="vm">
+        {campi.map((c, i) => {
+          const idc = `${campo}-${i}`;
+          const v = (c.vars ?? ['x']).join(', ');
+          const esempio = c.t === 'numero' ? (en ? 'e.g. 3/2, sqrt(2)' : es ? 'p. ej., 3/2, sqrt(2)' : 'es. 3/2, sqrt(2)')
+            : c.t === 'funzione' ? `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} ${c.vars?.length === 1 && c.vars[0] !== 'x' ? `2${c.vars[0]}^2` : '2x^2 + 1'}`
+            : c.t === 'equazione' ? `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} ${c.vars?.includes('z') ? 'x + y - z = 1' : 'y = 2x - 1'}`
+            : c.t === 'valori' ? (c.ordine ? `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} (1; 2${c.n! > 2 ? '; 0' : ''})` : `${en ? 'e.g.' : es ? 'p. ej.,' : 'es.'} 2; -3`)
+            : c.t === 'intervallo' ? (en ? `e.g. ${c.var ?? 'x'} < 1 or ${c.var ?? 'x'} >= 3` : es ? `p. ej., ${c.var ?? 'x'} < 1 o ${c.var ?? 'x'} >= 3` : `es. ${c.var ?? 'x'} < 1 o ${c.var ?? 'x'} >= 3`) : '';
+          const etichetta = c.e ? conFormule(c.e) : `${en ? 'Result' : es ? 'Resultado' : 'Risultato'} ${i + 1}`;
+          return (
+            <div class="vm-riga" data-i={i} data-t={c.t}>
+              {c.t === 'scelta' || c.t === 'matrice'
+                ? <span class="vm-etichetta" id={`${idc}-et`} set:html={etichetta} />
+                : <label class="vm-etichetta" for={idc} set:html={etichetta} />}
+              <div class="vm-campo">
+                {c.t === 'scelta' ? (
+                  <div class="vm-opzioni" role="radiogroup" aria-labelledby={`${idc}-et`}>
+                    {c.opzioni!.map((o, j) => <button type="button" role="radio" aria-checked="false" data-v={j} set:html={conFormule(o)} />)}
+                  </div>
+                ) : c.t === 'matrice' ? (
+                  <div class="vm-matrice" role="group" aria-labelledby={`${idc}-et`} style={`--colonne:${c.colonne}`}>
+                    {Array.from({ length: c.righe! }, (_, r) => Array.from({ length: c.colonne! }, (_, k) => (
+                      <input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="40" data-r={r} data-c={k} aria-label={`${en ? 'Row' : es ? 'Fila' : 'Riga'} ${r + 1}, ${en ? 'column' : es ? 'columna' : 'colonna'} ${k + 1}`} />
+                    )))}
+                  </div>
+                ) : (
+                  <input id={idc} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
+                )}
+                {c.u && <span class="vm-unita">{leggibile(c.u)}</span>}
+                <span class="vm-segno" aria-hidden="true"></span>
+              </div>
+              {c.primitiva && <small class="vm-nota">{en ? 'The constant c can be left out.' : es ? 'Puedes omitir la constante c.' : 'La costante c si può tralasciare.'}</small>}
+              <p class="vm-lettura" aria-live="polite"></p>
+            </div>
+          );
+        })}
+      </div>
+      {campi.some((c) => c.t === 'valori' || c.t === 'intervallo') && (
+        <p class="vm-aiuto">{en ? 'Separate several values with a semicolon; join intervals with “or” or U.' : es ? 'Separa varios valores con punto y coma; une intervalos con «o» o U.' : 'Più valori si separano con il punto e virgola; gli intervalli si uniscono con «o» oppure U.'}</p>
+      )}
+      <div class="vm-invia"><button type="submit">{en ? 'Submit' : es ? 'Enviar' : 'Invia'}</button></div>
+      {campi.some((c) => !['scelta'].includes(c.t)) && (
+        <details class="verifica-tastiera">
+          <summary>{en ? 'Math keyboard' : es ? 'Teclado matemático' : 'Tastiera matematica'}</summary>
+          <div class="verifica-tasti">
+            {[...tasti, { simbolo: '≤', modello: '<=', nome: '≤' }, { simbolo: '≥', modello: '>=', nome: '≥' }, { simbolo: ';', modello: '; ', nome: ';' }].map(({ simbolo, modello, nome, accoda }: any) => (
+              <button type="button" data-modello={modello} data-accoda={accoda ? '' : undefined} aria-label={nome} title={nome}>
+                <span aria-hidden="true">
+                  {modello === '/(|)' ? <span class="verifica-frazione"><span>□</span><span>□</span></span>
+                    : modello === '^(|)' ? <>□<sup>□</sup></> : simbolo}
+                </span>
+              </button>
+            ))}
+          </div>
+        </details>
+      )}
+      <p class="verifica-esito" role="status" aria-live="polite"></p>
+    </>
+  ) : tipo === 'scelta' ? (
     <>
       <p class="verifica-titolo" id={`${campo}-scelta`}>{en ? 'Choose your answer' : es ? 'Elige tu respuesta' : 'Scegli la tua risposta'}</p>
       <div class="verifica-lettere" role="group" aria-labelledby={`${campo}-scelta`}>
@@ -88,6 +157,38 @@ const tasti = [
   :global(ul.quiz-lettere) { list-style: none; padding-left: 0.2rem; counter-reset: quiz; }
   :global(ul.quiz-lettere > li) { counter-increment: quiz; padding-left: 1.7rem; text-indent: -1.7rem; }
   :global(ul.quiz-lettere > li)::before { content: counter(quiz, upper-alpha) ")"; display: inline-block; width: 1.7rem; text-indent: 0; font-weight: 600; }
+  /* Più caselle: etichetta a sinistra, casella e segno dell'esito a destra; al telefono una sotto l'altra. */
+  .vm { display: grid; gap: 0.55rem; }
+  .vm-riga { display: grid; grid-template-columns: minmax(7rem, max-content) 1fr; column-gap: 0.75rem; align-items: center; }
+  .vm-etichetta { font-size: 0.92rem; font-weight: 600; margin: 0; overflow-x: auto; }
+  .vm-campo { display: flex; align-items: center; gap: 0.45rem; min-width: 0; }
+  .vm-campo > input { flex: 1; min-width: 0; font: 0.98rem/1.3 ui-monospace, 'SFMono-Regular', Menlo, monospace; padding: 0.45rem 0.6rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); }
+  .vm-campo input:focus { outline: 2px solid color-mix(in srgb, var(--accento) 40%, transparent); border-color: var(--accento); background: #fff; }
+  .vm-unita { font-size: 0.9rem; color: var(--inchiostro-2); white-space: nowrap; }
+  .vm-segno { flex: none; width: 1.2rem; text-align: center; font-weight: 700; }
+  .vm-riga[data-esito="giusta"] .vm-segno::before { content: '✓'; color: #2f7d4f; }
+  .vm-riga[data-esito="sbagliata"] .vm-segno::before, .vm-riga[data-esito^="forma"] .vm-segno::before { content: '✗'; color: #a3412f; }
+  .vm-riga[data-esito="vicina"] .vm-segno::before, .vm-riga[data-esito="illeggibile"] .vm-segno::before { content: '?'; color: #8a6420; }
+  .vm-riga[data-esito="giusta"] input { border-color: color-mix(in srgb, #2f7d4f 60%, transparent); }
+  .vm-riga[data-esito="sbagliata"] input, .vm-riga[data-esito^="forma"] input { border-color: color-mix(in srgb, #a3412f 60%, transparent); }
+  .vm-opzioni { display: flex; flex-wrap: wrap; gap: 0.35rem; flex: 1; }
+  .vm-opzioni button { min-height: 40px; padding: 0.3rem 0.75rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); font: 500 0.92rem/1.2 var(--ui); cursor: pointer; }
+  .vm-opzioni button:hover { border-color: var(--accento); }
+  .vm-opzioni button[aria-checked="true"] { border-color: var(--accento); background: color-mix(in srgb, var(--accento) 10%, #fff); color: var(--accento); font-weight: 600; }
+  .vm-matrice { display: inline-grid; grid-template-columns: repeat(var(--colonne), minmax(3.2rem, 5rem)); gap: 0.3rem; padding: 0.25rem 0.45rem; border-left: 2px solid var(--inchiostro-2); border-right: 2px solid var(--inchiostro-2); border-radius: 6px; }
+  .vm-matrice input { width: 100%; text-align: center; font: 0.95rem/1.3 ui-monospace, 'SFMono-Regular', Menlo, monospace; padding: 0.35rem 0.2rem; border: 1px solid var(--riga); border-radius: 6px; background: var(--carta); }
+  .vm-nota { grid-column: 2; color: var(--inchiostro-2); font-size: 0.8rem; }
+  .vm-lettura { grid-column: 2; margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .vm-lettura:empty { display: none; }
+  .vm-lettura > span:first-child { margin-right: 0.35rem; }
+  .vm-aiuto { margin: 0.45rem 0 0; font-size: 0.8rem; color: var(--inchiostro-2); }
+  .vm-invia { margin-top: 0.55rem; }
+  .vm-invia button { min-height: 44px; font: 600 0.92rem var(--ui); color: #fff; background: var(--accento); border: 0; border-radius: 8px; padding: 0 1.2rem; cursor: pointer; }
+  .vm-invia button:disabled { opacity: 0.6; }
+  @media (max-width: 30rem) {
+    .vm-riga { grid-template-columns: 1fr; row-gap: 0.25rem; }
+    .vm-nota, .vm-lettura { grid-column: 1; }
+  }
   @media (max-width: 30rem) {
     .verifica-riga { flex-wrap: wrap; }
     .verifica-riga input, .verifica-riga textarea { flex-basis: 100%; }
@@ -96,7 +197,7 @@ const tasti = [
 
 <script>
   import katex from 'katex';
-  import { leggi, latex, senzaUnitaScritta } from '../../worker/valuta.mjs';
+  import { leggi, latex, senzaUnitaScritta, leggiInsieme, dividiValori } from '../../worker/valuta.mjs';
   const inglese = document.documentElement.lang === 'en';
   const T = document.documentElement.lang === 'es' ? {
     leggo: 'Interpretado como', illeggibile: 'No se ha podido interpretar la respuesta. Prueba con 3/2, sqrt(2), e^6, pi/4, inf o x^2 + ln|x|.',
@@ -108,6 +209,7 @@ const tasti = [
     riservata: 'Desbloquea la materia para comparar tu respuesta con la solución.',
     senzaSoluzione: 'La solución no está disponible en esta página.',
     'forma-prodotto': 'El valor es correcto, pero el resultado debe escribirse como producto de factores.', 'forma-sviluppata': 'El valor es correcto, pero el resultado debe escribirse sin paréntesis, como suma de términos.', 'forma-razionale': 'El valor es correcto, pero el denominador no debe contener raíces.',
+    parziale: 'Resultados correctos: {g} de {n}. Revisa las casillas marcadas.', vuote: 'Completa todas las casillas antes de enviar.', illeggibiliMulti: 'Algunas casillas no se pueden interpretar: revisa las marcadas con ?.', vicinaMulti: 'Un valor se aproxima al resultado: escribe el valor exacto.',
     noScelta: 'No es la respuesta correcta. Puedes intentarlo de nuevo o pedir una pista a Pi debajo del ejercicio.', noSceltaBreve: 'No es la respuesta correcta. Inténtalo de nuevo.',
   } : inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
@@ -118,6 +220,7 @@ const tasti = [
     riservata: 'Unlock the subject to compare your answer with the solution.',
     senzaSoluzione: 'The solution is not available on this page.',
     'forma-prodotto': 'The value is right, but the result must be written as a product of factors.', 'forma-sviluppata': 'The value is right, but the result must be written without brackets, as a sum of terms.', 'forma-razionale': 'The value is right, but the denominator must not contain roots.',
+    parziale: '{g} of {n} results are correct. Check the marked boxes.', vuote: 'Fill in every box before submitting.', illeggibiliMulti: 'Some boxes cannot be read: check the ones marked with ?.', vicinaMulti: 'A value approximates the result: write the exact value.',
     noScelta: 'That is not the correct answer. You can try again or ask Pi for a hint below the exercise.', noSceltaBreve: 'That is not the correct answer. Try again.',
   } : {
     leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
@@ -128,6 +231,7 @@ const tasti = [
     riservata: 'Sblocca la materia per confrontare la tua risposta con la soluzione.',
     senzaSoluzione: 'La soluzione non è disponibile in questa pagina.',
     'forma-prodotto': 'Il valore è giusto, ma il risultato va scritto come prodotto di fattori.', 'forma-sviluppata': 'Il valore è giusto, ma il risultato va scritto senza parentesi, come somma di termini.', 'forma-razionale': 'Il valore è giusto, ma il denominatore va scritto senza radici.',
+    parziale: 'Risultati giusti: {g} su {n}. Controlla le caselle segnate.', vuote: 'Completa tutte le caselle prima di inviare.', illeggibiliMulti: 'Alcune caselle non si leggono: controlla quelle segnate con ?.', vicinaMulti: 'Un valore approssima il risultato: scrivi il valore esatto.',
     noScelta: 'Non è la risposta giusta. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', noSceltaBreve: 'Non è la risposta giusta. Riprova.',
   };
   // Quiz a risposta multipla: un tasto per lettera, la risposta parte al tocco.
@@ -169,6 +273,117 @@ const tasti = [
       if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
     });
   }
+  // Tasti della tastiera matematica: il simbolo entra nella casella indicata, al posto della selezione.
+  function inserisci(campo: HTMLInputElement | HTMLTextAreaElement, tasto: HTMLButtonElement) {
+    const fine = campo.selectionEnd ?? campo.value.length;
+    const inizio = campo.selectionStart ?? fine;
+    const selezione = campo.value.slice(inizio, fine);
+    const accoda = tasto.hasAttribute('data-accoda');
+    let modello = tasto.dataset.modello!;
+    if (accoda && !selezione && !/[\p{L}\p{N})\]∞]$/u.test(campo.value.slice(0, inizio).trimEnd())) {
+      modello = `(|)${modello.replace('|', '')}`;
+    }
+    const [apri, chiudi = ''] = modello.split('|');
+    const prima = (accoda && selezione ? `(${selezione})` : '') + apri;
+    const dentro = !accoda && chiudi ? selezione : '';
+    const testo = prima + dentro + chiudi;
+    if (campo.maxLength >= 0 && campo.value.length - (fine - inizio) + testo.length > campo.maxLength) return;
+    const cursore = inizio + (dentro ? testo.length : prima.length);
+    campo.setRangeText(testo, inizio, fine);
+    campo.focus({ preventScroll: true });
+    campo.setSelectionRange(cursore, cursore);
+    campo.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+  // Esercizi con più caselle: una risposta per casella, un solo invio, l'esito casella per casella.
+  function multi(f: HTMLFormElement) {
+    const forme = JSON.parse(f.dataset.campi || '[]') as { t: string; vars?: string[]; var?: string; n?: number }[];
+    const righe = [...f.querySelectorAll<HTMLElement>('.vm-riga')];
+    const esito = f.querySelector<HTMLElement>('.verifica-esito')!;
+    const bottone = f.querySelector<HTMLButtonElement>('.vm-invia button')!;
+    let ultima: HTMLInputElement | null = f.querySelector('.vm input');
+    const azzera = (riga: HTMLElement) => { delete riga.dataset.esito; esito.textContent = ''; f.dataset.esito = ''; };
+    righe.forEach((riga, i) => {
+      const c = forme[i];
+      riga.querySelectorAll<HTMLButtonElement>('.vm-opzioni button').forEach((b, _j, tutti) => b.addEventListener('click', () => {
+        tutti.forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+        azzera(riga);
+      }));
+      riga.querySelectorAll<HTMLInputElement>('input').forEach((inp) => {
+        inp.addEventListener('focus', () => { ultima = inp; });
+        inp.addEventListener('input', () => {
+          azzera(riga);
+          const lettura = riga.querySelector<HTMLElement>('.vm-lettura')!;
+          const v = inp.value.trim();
+          if (!v || !['numero', 'funzione'].includes(c.t)) { lettura.textContent = ''; return; }
+          const n = c.t === 'numero' ? leggi(senzaUnitaScritta(v)) : leggi(v.includes('=') ? v.slice(v.lastIndexOf('=') + 1) : v, c.vars ?? ['x']);
+          if (!n) { lettura.textContent = ''; return; }
+          try { lettura.innerHTML = `<span>${T.leggo}</span> ${katex.renderToString(latex(n), { throwOnError: false, strict: false, output: 'html' })}`; } catch { lettura.textContent = ''; }
+        });
+      });
+    });
+    f.querySelector('.verifica-tasti')?.addEventListener('click', (e) => {
+      const tasto = (e.target as Element).closest<HTMLButtonElement>('button[data-modello]');
+      if (tasto && ultima) inserisci(ultima, tasto);
+    });
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const risposte = righe.map((riga, i) => {
+        const c = forme[i];
+        if (c.t === 'scelta') return riga.querySelector<HTMLElement>('[aria-checked="true"]')?.dataset.v ?? '';
+        if (c.t === 'matrice') {
+          const m: string[][] = [];
+          riga.querySelectorAll<HTMLInputElement>('input').forEach((x) => { (m[Number(x.dataset.r)] ??= [])[Number(x.dataset.c)] = x.value.trim(); });
+          return m;
+        }
+        return riga.querySelector<HTMLInputElement>('input')!.value.trim();
+      });
+      const vuota = (x: string | string[][]) => (Array.isArray(x) ? x.some((r) => r.some((y) => !y)) : !x);
+      if (risposte.some(vuota)) {
+        esito.textContent = T.vuote;
+        righe.forEach((r, i) => { if (vuota(risposte[i])) r.dataset.esito = 'illeggibile'; });
+        return;
+      }
+      // Caselle che non si leggono: si segnalano subito, senza inviare.
+      let illeggibili = false;
+      righe.forEach((riga, i) => {
+        const c = forme[i]; const v = risposte[i] as string;
+        let ok = true;
+        try {
+          if (c.t === 'numero') ok = !!leggi(senzaUnitaScritta(v));
+          else if (c.t === 'funzione') ok = !!leggi(v.includes('=') ? v.slice(v.lastIndexOf('=') + 1) : v, c.vars ?? ['x']);
+          else if (c.t === 'valori') ok = dividiValori(v, c.n ?? 2).every((x: string) => !!leggi(senzaUnitaScritta(x)));
+          else if (c.t === 'intervallo') leggiInsieme(v, c.var ?? 'x');
+        } catch { ok = false; }
+        if (!ok) { riga.dataset.esito = 'illeggibile'; illeggibili = true; }
+      });
+      if (illeggibili) { esito.textContent = T.illeggibiliMulti; f.dataset.esito = 'illeggibile'; return; }
+      bottone.disabled = true;
+      const r = await fetch('/api/verifica', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: f.dataset.id, risposta: risposte, lingua: inglese ? 'en' : 'it' }),
+      }).catch(() => null);
+      bottone.disabled = false;
+      const d = r ? await r.json().catch(() => null) : null;
+      if (!r || !d) { esito.textContent = T.rete; return; }
+      if (d.errore) { esito.textContent = d.errore; return; }
+      (d.campi as string[] || []).forEach((x, i) => { if (righe[i]) righe[i].dataset.esito = x; });
+      f.dataset.esito = d.esito === 'parziale' ? 'sbagliata' : d.esito;
+      const forma = (d.campi as string[] || []).find((x) => x.startsWith('forma-'));
+      esito.textContent = d.esito === 'giusta' ? T.giusta
+        : d.esito === 'illeggibile' ? T.illeggibiliMulti
+        : forma ? (T as Record<string, string>)[forma]
+        : (d.campi as string[] || []).includes('vicina') ? T.vicinaMulti
+        : d.esito === 'parziale' ? T.parziale.replace('{g}', String(d.giuste)).replace('{n}', String(righe.length))
+        : (f.hasAttribute('data-senza-indizio') ? T.riprova : T.sbagliata);
+      if (d.esito === 'giusta' && d.punti) {
+        const b = document.createElement('strong');
+        b.textContent = ` +${d.punti} ${T.exp}`;
+        esito.append(b);
+      }
+      if (d.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
+      if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
+    });
+  }
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
     if (f.dataset.pronto) continue;
     f.dataset.pronto = '1';
@@ -177,6 +392,7 @@ const tasti = [
     const corpo = f.previousElementSibling;
     corpo?.querySelector(':scope > .blocco-soluzione, :scope > .soluzione-riservata, :scope > .velo-blocco')?.before(f);
     if (f.dataset.tipo === 'scelta') { scelta(f, corpo); continue; }
+    if (f.dataset.tipo === 'multi') { multi(f); continue; }
     const campo = f.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
     // Tab passa al denominatore o all'esponente quando entrambi gli spazi sono stati inseriti insieme.
     campo.addEventListener('keydown', (e) => {

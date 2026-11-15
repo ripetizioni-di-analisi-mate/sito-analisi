@@ -9,6 +9,7 @@ import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { vicini, perArgomento, numero, disponibilitaStudio } from '../lib/nav';
 import { catalogoDomande } from '../lib/domande';
 import { risultatoDi } from '../lib/risposte';
+import { chiavePubblica } from '../../worker/valuta.mjs';
 import VerificaRisposta from '../components/VerificaRisposta.astro';
 interface Props { lingua: Lingua; materia: string; argomento: string }
 const { lingua, materia, argomento } = Astro.props;
@@ -44,7 +45,7 @@ const conDomande = ((await catalogoDomande(lingua))[materia] ?? []).includes(arg
     <section class="traccia" id={`esercizio-${numero(v.id)}`}>
       <h2><a href={link(lingua, `${base}/esercizi/${numero(v.id)}`)}><span class="numero">{numero(v.id)}.</span> {v.data.titolo}</a></h2>
       <div class="testo-studio"><Content /></div>
-      <VerificaRisposta id={v.id} tipo={risultati[v.id]?.tipo} primitiva={risultati[v.id]?.primitiva} lingua={lingua} />
+      <VerificaRisposta id={v.id} tipo={risultati[v.id]?.tipo} primitiva={risultati[v.id]?.primitiva} unita={risultati[v.id]?.u} campi={risultati[v.id]?.tipo === 'multi' ? chiavePubblica(risultati[v.id]) : undefined} lingua={lingua} />
     </section>
   ))}
   {conDomande && (

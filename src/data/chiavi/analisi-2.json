@@ -1,0 +1,439 @@
+{
+ "massimi-e-minimi/1": {
+  "campi": [
+   {
+    "e": "Punto critico",
+    "t": "valori",
+    "v": [
+     "2",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "minimo locale"
+   },
+   {
+    "e": "Valore di $f$ nel punto critico",
+    "t": "numero",
+    "v": "-3"
+   }
+  ]
+ },
+ "massimi-e-minimi/2": {
+  "campi": [
+   {
+    "e": "Numero dei punti critici",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Natura dell'origine",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "punto di sella"
+   },
+   {
+    "e": "Punto critico con $x > 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico con $x > 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "minimo locale"
+   },
+   {
+    "e": "Punto critico con $x < 0$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico con $x < 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "minimo locale"
+   },
+   {
+    "e": "Valore di $f$ nei punti di minimo locale",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "massimi-e-minimi/3": {
+  "campi": [
+   {
+    "e": "Punto critico con $y > 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico con $y > 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "minimo locale"
+   },
+   {
+    "e": "Valore di $f$ nel punto critico con $y > 0$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Punto critico con $y < 0$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico con $y < 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo locale",
+     "massimo locale",
+     "punto di sella",
+     "non classificabile"
+    ],
+    "v": "punto di sella"
+   }
+  ]
+ },
+ "massimi-e-minimi/4": {
+  "campi": [
+   {
+    "e": "Insieme dei punti critici",
+    "t": "scelta",
+    "opzioni": [
+     "solo l'origine",
+     "i punti dell'asse $x$",
+     "i punti dei due assi",
+     "i punti delle bisettrici"
+    ],
+    "v": "i punti dei due assi"
+   },
+   {
+    "e": "Natura dei punti critici",
+    "t": "scelta",
+    "opzioni": [
+     "minimi assoluti non stretti",
+     "minimi locali stretti",
+     "punti di sella",
+     "non classificabili, perché la Hessiana è degenere"
+    ],
+    "v": "minimi assoluti non stretti"
+   }
+  ]
+ },
+ "massimi-e-minimi/5": {
+  "campi": [
+   {
+    "e": "Punto critico",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto critico",
+    "t": "scelta",
+    "opzioni": [
+     "minimo assoluto",
+     "minimo locale non assoluto",
+     "punto di sella",
+     "non classificabile, perché la Hessiana è degenere"
+    ],
+    "v": "minimo assoluto"
+   },
+   {
+    "e": "Valore di $f$ nel punto critico",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "massimi-e-minimi/6": {
+  "campi": [
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "valori",
+    "v": [
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "massimi-e-minimi/7": {
+  "campi": [
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "valori",
+    "v": [
+     "0",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "massimi-e-minimi/8": {
+  "campi": [
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Punto di massimo con $x > 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto di massimo con $y > 0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "0",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "massimi-e-minimi/9": {
+  "campi": [
+   {
+    "e": "Massimo vincolato",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "valori",
+    "v": [
+     "4",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo vincolato",
+    "t": "numero",
+    "v": "-10"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "-4",
+     "-2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "massimi-e-minimi/10": {
+  "campi": [
+   {
+    "e": "Punto a distanza minima con $x > 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto a distanza minima con $x < 0$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Distanza minima $d$",
+    "t": "numero",
+    "v": "2\\sqrt{2}"
+   }
+  ]
+ },
+ "massimi-e-minimi/11": {
+  "campi": [
+   {
+    "e": "Massimo vincolato",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "valori",
+    "v": [
+     "2",
+     "2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo vincolato",
+    "t": "numero",
+    "v": "-6"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "-2",
+     "-2",
+     "-2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "massimi-e-minimi/12": {
+  "campi": [
+   {
+    "e": "Base del rettangolo",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Altezza del rettangolo",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Perimetro minimo",
+    "t": "numero",
+    "v": "24"
+   }
+  ]
+ },
+ "massimi-e-minimi/13": {
+  "campi": [
+   {
+    "e": "Lato della base $x$",
+    "t": "numero",
+    "v": "2",
+    "u": "dm"
+   },
+   {
+    "e": "Altezza $h$",
+    "t": "numero",
+    "v": "1",
+    "u": "dm"
+   },
+   {
+    "e": "Superficie minima",
+    "t": "numero",
+    "v": "12",
+    "u": "dm^2"
+   }
+  ]
+ }
+}

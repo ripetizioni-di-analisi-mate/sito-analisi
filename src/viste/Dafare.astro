@@ -9,6 +9,7 @@ import Base from '../layouts/Base.astro';
 import { argomentoL, materiaL, link, voceL, T, type Lingua } from '../i18n';
 import { numero, perArgomento, vicini, disponibilitaStudio } from '../lib/nav';
 import { risultatoDi } from '../lib/risposte';
+import { chiavePubblica } from '../../worker/valuta.mjs';
 import VerificaRisposta from '../components/VerificaRisposta.astro';
 interface Props { lingua: Lingua; materia: string; argomento: string; n: string }
 const { lingua, materia, argomento, n } = Astro.props;
@@ -62,5 +63,5 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
     <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
   )}
   <div class="testo-studio"><Content /></div>
-  <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} unita={risultato?.u} lingua={lingua} />
+  <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} unita={risultato?.u} campi={risultato?.tipo === 'multi' ? chiavePubblica(risultato) : undefined} lingua={lingua} />
 </Base>

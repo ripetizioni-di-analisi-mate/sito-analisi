@@ -1,0 +1,94 @@
+{
+ "irrazionali/2": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "irrazionali/3": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-9",
+     "4"
+    ]
+   }
+  ]
+ },
+ "irrazionali/5": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-1",
+     "4"
+    ]
+   }
+  ]
+ },
+ "irrazionali/7": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-3, 6)"
+   }
+  ]
+ },
+ "irrazionali/8": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[5, +\\infty)"
+   }
+  ]
+ },
+ "irrazionali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(8, +\\infty)"
+   }
+  ]
+ },
+ "irrazionali/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-6, 3)"
+   }
+  ]
+ },
+ "irrazionali/11": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione $\\sqrt[3]{3x - 5} = 1$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Soluzioni della disequazione $\\sqrt[3]{x + 4} < 2$",
+    "t": "intervallo",
+    "v": "(-\\infty, 4)"
+   }
+  ]
+ },
+ "irrazionali/12": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, 0] \\cup [4, +\\infty)"
+   }
+  ]
+ }
+}
