@@ -1,5 +1,5 @@
 // Prova dell'API dello Studio guidato con il Worker vero e un archivio SQLite in memoria.
-// Richiede una build con le materie del test: SOLO_MATERIE="analisi-1,analisi-2,analisi-3,precorso,fisica-1,logica-concorsi" npx astro build
+// Richiede una build con le materie del test: SOLO_MATERIE="analisi-1,analisi-2,analisi-3,precorso,fisica-1,logica-concorsi,meccanica-razionale,idraulica" npx astro build
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
@@ -23,7 +23,7 @@ const dati = (m) => {
   for (let k = 2; k <= (d.parti ?? 1); k++) Object.assign(d.argomenti, JSON.parse(readFileSync(join(root, 'dist/dati-domande', `${m}--${k}.json`), 'utf8')).argomenti);
   return d;
 };
-const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi'].map((m) => [m, dati(m)]));
+const DATI = Object.fromEntries(['analisi-1', 'analisi-2', 'analisi-3', 'precorso', 'fisica-1', 'logica-concorsi', 'meccanica-razionale', 'idraulica'].map((m) => [m, dati(m)]));
 const corretta = (id, m) => DATI[m].argomenti[id.split('/')[0]].find((q) => q.id === id).corretta;
 
 function banco(t) {
@@ -175,5 +175,19 @@ test('Logica per concorsi: test completo e «Non so da dove iniziare» sugli ott
   assert.equal(esito.lacune[0].teoria[0].href, '/logica-concorsi/insiemi-e-venn/teoria#relazioni-tra-categorie');
   const tutto = await giro(b, tok, { materia: 'logica-concorsi' }, []);
   assert.equal(tutto.n, 8);
+  assert.equal(tutto.esito.lacune.length, 0);
+});
+
+// Meccanica razionale e Idraulica (15/11/2026): file dei dati divisi in pezzi, basi in Fisica 1 e nei capitoli precedenti.
+test('Meccanica razionale e Idraulica: test completo con basi in Fisica 1 e in un capitolo precedente', async (t) => {
+  const b = banco(t);
+  const tok = await b.utente('gm-ingegneria@test.invalid', true);
+  const mr = await giro(b, tok, { materia: 'meccanica-razionale', argomento: 'vettori-applicati' }, ['meccanica-razionale/vettori-applicati#0', 'fisica-1/grandezze-e-vettori#6']);
+  assert.ok(mr.etichette.some(([m, base, nome]) => m === 'fisica-1' && base === true && nome === 'Fisica 1'));
+  assert.equal(mr.esito.lacune[0].k, 'fisica-1/grandezze-e-vettori#6');
+  const id = await giro(b, tok, { materia: 'idraulica', argomento: 'spinte-idrostatiche' }, ['idraulica/spinte-idrostatiche#0', 'idraulica/idrostatica#4']);
+  assert.equal(id.esito.lacune[0].k, 'idraulica/idrostatica#4');
+  assert.ok(id.esito.lacune.every((l) => l.teoria.every((x) => x.titolo)));
+  const tutto = await giro(b, tok, { materia: 'idraulica' }, []);
   assert.equal(tutto.esito.lacune.length, 0);
 });

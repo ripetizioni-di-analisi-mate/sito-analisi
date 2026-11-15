@@ -9,8 +9,8 @@ const CLASSI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-livel
 const TITOLI = JSON.parse(readFileSync(new URL('../src/data/studio-guidato-rimandi.json', import.meta.url), 'utf8'));
 const titoli = { 'analisi-1': Object.fromEntries(capitoli('analisi-1').map((a) => [a, a])), precorso: {}, nomeMateria: 'Analisi 1', nomi: { 'analisi-1': 'Analisi 1', precorso: 'Precorso' } };
 // Materie aggiunte il 14/11/2026 notte (Logica per concorsi, Analisi 3): nomi come in titoliGuidati del Worker.
-const NOMI = { 'analisi-1': 'Analisi 1', 'analisi-2': 'Analisi 2', 'analisi-3': 'Analisi 3', 'logica-concorsi': 'Logica per concorsi', precorso: 'Precorso' };
-const TITOLI_ALTRE = Object.fromEntries(['logica-concorsi', 'analisi-3'].map((m) => [m, { [m]: Object.fromEntries(capitoli(m).map((a) => [a, a])), 'analisi-1': {}, 'analisi-2': {}, precorso: {}, nomi: NOMI }]));
+const NOMI = { 'analisi-1': 'Analisi 1', 'analisi-2': 'Analisi 2', 'analisi-3': 'Analisi 3', 'logica-concorsi': 'Logica per concorsi', 'fisica-1': 'Fisica 1', 'meccanica-razionale': 'Meccanica razionale', idraulica: 'Idraulica', precorso: 'Precorso' };
+const TITOLI_ALTRE = Object.fromEntries(['logica-concorsi', 'analisi-3', 'meccanica-razionale', 'idraulica'].map((m) => [m, { [m]: Object.fromEntries(capitoli(m).map((a) => [a, a])), 'analisi-1': {}, 'analisi-2': {}, 'fisica-1': {}, precorso: {}, nomi: NOMI }]));
 const titoliFisica = { 'fisica-1': Object.fromEntries(capitoli('fisica-1').map((a) => [a, a])), 'analisi-1': {}, precorso: {}, nomi: { 'fisica-1': 'Fisica 1', 'analisi-1': 'Analisi 1', precorso: 'Precorso' } };
 
 // Studente simulato: sa(k, livello) dice se risponde bene a una domanda dell'abilità k («materia/argomento#i»).
@@ -193,7 +193,7 @@ test('Fisica 1: ricontrollo con domande nuove', () => {
 });
 
 // ---------- Logica per concorsi e Analisi 3 (14/11/2026 notte) ----------
-for (const [materia, n] of [['logica-concorsi', 8], ['analisi-3', 11]]) {
+for (const [materia, n] of [['logica-concorsi', 8], ['analisi-3', 11], ['meccanica-razionale', 12], ['idraulica', 11]]) {
   test(`${materia}: ${n} capitoli, ogni abilità con domande medie e semplici e basi esistenti`, () => {
     assert.equal(capitoli(materia).length, n);
     for (const a of capitoli(materia)) {
@@ -243,4 +243,21 @@ test('Logica per concorsi: la base in un capitolo precedente viene verificata e 
   assert.equal(e.lacune[0].k, base);
   assert.ok(e.lacune.some((l) => l.k === k));
   assert.equal(e.lacune[0].teoria[0].href, '/logica-concorsi/insiemi-e-venn/teoria#relazioni-tra-categorie');
+});
+
+// ---------- Meccanica razionale e Idraulica (15/11/2026) ----------
+test('Meccanica razionale: la base in Fisica 1 va per prima con il nome della materia', () => {
+  const k = 'meccanica-razionale/vettori-applicati#0', base = 'fisica-1/grandezze-e-vettori#6';
+  const { e } = simula((q) => q !== k && q !== base, { argomento: 'vettori-applicati' }, 'meccanica-razionale');
+  assert.equal(e.lacune[0].k, base);
+  assert.equal(e.lacune[0].materia, 'Fisica 1');
+  assert.ok(e.lacune.some((l) => l.k === k));
+});
+
+test('Idraulica: la base in un capitolo precedente resta in Idraulica', () => {
+  const k = 'idraulica/spinte-idrostatiche#0', base = 'idraulica/idrostatica#4';
+  const { e } = simula((q) => q !== k && q !== base, { argomento: 'spinte-idrostatiche' }, 'idraulica');
+  assert.equal(e.lacune[0].k, base);
+  assert.equal(e.lacune[0].materia, 'Idraulica');
+  assert.ok(e.lacune[0].teoria[0].href.startsWith('/idraulica/idrostatica/teoria#'));
 });
