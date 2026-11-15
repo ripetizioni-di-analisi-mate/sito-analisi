@@ -16,7 +16,8 @@ const t = T(lingua);
 const id = `${materia}/${argomento}/${n}`;
 const eserciziMateria = (await getCollection(lingua === 'es' ? 'dafare_es' : 'dafare')).filter((v) => v.id.startsWith(`${materia}/`));
 const fratelli = perArgomento(eserciziMateria, materia, argomento);
-const risultato = risultatoDi(fratelli.find((x) => x.id === id));
+// Il risultato si legge sempre dalla soluzione italiana: è la stessa che usa il Worker per la verifica.
+const risultato = risultatoDi(lingua === 'es' ? (await getCollection('dafare')).find((x) => x.id === id) : fratelli.find((x) => x.id === id));
 const i = fratelli.findIndex((x) => x.id === id);
 const { voce, tradotta } = await voceL(lingua, 'dafare', id);
 const titolo = async (v?: { id: string }) => v && (await voceL(lingua, 'dafare', v.id)).voce.data.titolo;
@@ -61,5 +62,5 @@ const fineEsercizi = vicini(materia, argomento, 'esercizi', lingua, await dispon
     <p class="collegamenti">{t.teoriaUsata}: {voce.data.teoria.map((x: string) => <a href={link(lingua, `${base}/teoria#${x}`)}>{ancore[x] ?? x.replace(/-/g, ' ')}</a>)}</p>
   )}
   <div class="testo-studio"><Content /></div>
-  <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} lingua={lingua} />
+  <VerificaRisposta id={id} tipo={risultato?.tipo} primitiva={risultato?.primitiva} unita={risultato?.u} lingua={lingua} />
 </Base>
