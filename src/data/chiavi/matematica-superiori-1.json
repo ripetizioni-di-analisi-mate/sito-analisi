@@ -1,0 +1,480 @@
+{
+ "disequazioni-primo-grado/1": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(11, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/2": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[-11, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/3": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 14)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/4": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[11, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/5": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 21]"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/6": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(66, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/7": {
+  "campi": [
+   {
+    "e": "Intervallo",
+    "t": "intervallo",
+    "v": "(11, 15]"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/8": {
+  "campi": [
+   {
+    "e": "Insieme",
+    "t": "intervallo",
+    "v": "(-\\infty, -11) \\cup (11, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/12": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, -11)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/13": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[11, 13)"
+   }
+  ]
+ },
+ "equazioni-primo-grado/6": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathbb R$",
+     "$\\varnothing$",
+     "$\\{11\\}$",
+     "$\\{1\\}$"
+    ],
+    "v": "$\\varnothing$"
+   }
+  ]
+ },
+ "equazioni-primo-grado/7": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "$\\varnothing$",
+     "$\\{11\\}$",
+     "$\\mathbb R$",
+     "$\\{0\\}$"
+    ],
+    "v": "$\\mathbb R$"
+   }
+  ]
+ },
+ "frazioni-algebriche/1": {
+  "campi": [
+   {
+    "e": "Condizione di esistenza",
+    "t": "scelta",
+    "opzioni": [
+     "$x\\ne 11$",
+     "$x\\ne -1$",
+     "$x>11$",
+     "$x\\ne -11$"
+    ],
+    "v": "$x\\ne 11$"
+   }
+  ]
+ },
+ "frazioni-algebriche/2": {
+  "campi": [
+   {
+    "e": "Valori esclusi",
+    "t": "valori",
+    "v": [
+     "-11",
+     "11"
+    ]
+   }
+  ]
+ },
+ "frazioni-algebriche/12": {
+  "campi": [
+   {
+    "e": "Affermazione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "Vale $1$ per ogni reale, compreso $x=11$",
+     "Vale $0$ per $x=11$",
+     "È definita soltanto per $x>11$",
+     "Vale $1$ per ogni $x\\ne 11$"
+    ],
+    "v": "Vale $1$ per ogni $x\\ne 11$"
+   }
+  ]
+ },
+ "geometria-piano-triangoli/11": {
+  "campi": [
+   {
+    "e": "Misure ammesse per il terzo lato (cm)",
+    "t": "intervallo",
+    "v": "(2, 24)"
+   }
+  ]
+ },
+ "geometria-piano-triangoli/13": {
+  "campi": [
+   {
+    "e": "Criterio",
+    "t": "scelta",
+    "opzioni": [
+     "Lato-angolo-lato",
+     "Lato-lato-lato",
+     "Angolo-lato-angolo",
+     "Nessun criterio"
+    ],
+    "v": "Lato-angolo-lato"
+   }
+  ]
+ },
+ "geometria-piano-triangoli/14": {
+  "campi": [
+   {
+    "e": "Criterio",
+    "t": "scelta",
+    "opzioni": [
+     "Lato-lato-lato",
+     "Angolo-lato-angolo",
+     "Lato-angolo-lato",
+     "I dati non garantiscono la congruenza"
+    ],
+    "v": "Angolo-lato-angolo"
+   }
+  ]
+ },
+ "insiemi-e-logica/1": {
+  "campi": [
+   {
+    "e": "$A\\cup B$",
+    "t": "valori",
+    "v": [
+     "11",
+     "12",
+     "13",
+     "14"
+    ]
+   }
+  ]
+ },
+ "insiemi-e-logica/2": {
+  "campi": [
+   {
+    "e": "$A\\cap B$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\{13\\}$",
+     "$\\{11, 12, 13, 14\\}$",
+     "$\\{11, 12\\}$",
+     "$\\varnothing$"
+    ],
+    "v": "$\\{13\\}$"
+   }
+  ]
+ },
+ "insiemi-e-logica/3": {
+  "campi": [
+   {
+    "e": "$A\\setminus B$",
+    "t": "valori",
+    "v": [
+     "11",
+     "12"
+    ]
+   }
+  ]
+ },
+ "insiemi-e-logica/4": {
+  "campi": [
+   {
+    "e": "Complementare di $A$ rispetto a $U$",
+    "t": "valori",
+    "v": [
+     "14",
+     "15",
+     "16"
+    ]
+   }
+  ]
+ },
+ "insiemi-e-logica/5": {
+  "campi": [
+   {
+    "e": "Relazione che è una funzione da $A$ a $B$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\{(11;1),(12;2),(13;2)\\}$",
+     "$\\{(11;1),(11;2),(12;2),(13;3)\\}$",
+     "$\\{(11;1),(12;2)\\}$",
+     "$\\{(11;1),(12;2),(13;4)\\}$"
+    ],
+    "v": "$\\{(11;1),(12;2),(13;2)\\}$"
+   }
+  ]
+ },
+ "insiemi-e-logica/10": {
+  "campi": [
+   {
+    "e": "Affermazione vera",
+    "t": "scelta",
+    "opzioni": [
+     "$14\\in A$",
+     "$12\\in A$",
+     "$11\\notin A$",
+     "$13\\notin A$"
+    ],
+    "v": "$12\\in A$"
+   }
+  ]
+ },
+ "insiemi-e-logica/11": {
+  "campi": [
+   {
+    "e": "Relazione vera",
+    "t": "scelta",
+    "opzioni": [
+     "$D\\subseteq C$",
+     "$C=D$",
+     "$C\\subsetneq D$",
+     "$C\\cap D=\\varnothing$"
+    ],
+    "v": "$C\\subsetneq D$"
+   }
+  ]
+ },
+ "insiemi-e-logica/12": {
+  "campi": [
+   {
+    "e": "Valore di verità di $p\\land q$",
+    "t": "scelta",
+    "opzioni": [
+     "Vero",
+     "Falso",
+     "Non determinabile"
+    ],
+    "v": "Falso"
+   }
+  ]
+ },
+ "insiemi-e-logica/13": {
+  "campi": [
+   {
+    "e": "Negazione di $x>11$",
+    "t": "scelta",
+    "opzioni": [
+     "$x\\le 11$",
+     "$x<11$",
+     "$x\\ge 11$",
+     "$x\\ne 11$"
+    ],
+    "v": "$x\\le 11$"
+   }
+  ]
+ },
+ "insiemi-e-logica/14": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "Nessuno studente del gruppo ha consegnato",
+     "Almeno uno studente del gruppo non ha consegnato",
+     "Tutti gli studenti hanno consegnato in ritardo",
+     "Esattamente uno studente del gruppo ha consegnato"
+    ],
+    "v": "Almeno uno studente del gruppo non ha consegnato"
+   }
+  ]
+ },
+ "monomi-e-polinomi/2": {
+  "campi": [
+   {
+    "e": "Prodotto",
+    "t": "funzione",
+    "v": "- 22 x^{10} y^{3}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/3": {
+  "campi": [
+   {
+    "e": "Quoziente",
+    "t": "funzione",
+    "v": "3 x^{9} y^{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/4": {
+  "campi": [
+   {
+    "e": "Quadrato del monomio",
+    "t": "funzione",
+    "v": "121 x^{18} y^{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/13": {
+  "campi": [
+   {
+    "e": "Perimetro",
+    "t": "funzione",
+    "v": "22 x + 22 y",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "parallele-e-quadrilateri/4": {
+  "campi": [
+   {
+    "e": "Conclusione",
+    "t": "scelta",
+    "opzioni": [
+     "Le rette sono necessariamente perpendicolari",
+     "Le due rette coincidono necessariamente",
+     "La trasversale è parallela a entrambe",
+     "Le due rette sono parallele"
+    ],
+    "v": "Le due rette sono parallele"
+   }
+  ]
+ },
+ "prodotti-notevoli/11": {
+  "campi": [
+   {
+    "e": "Sviluppo di $(x+y+11)^2$",
+    "t": "funzione",
+    "v": "x^{2} + 2 x y + 22 x + y^{2} + 22 y + 121",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "scomposizioni/7": {
+  "campi": [
+   {
+    "e": "Scomposizione di $xy+11x+2y+22$",
+    "t": "funzione",
+    "v": "\\left(x + 2\\right) \\left(y + 11\\right)",
+    "var": [
+     "x",
+     "y"
+    ],
+    "forma": "prodotto"
+   }
+  ]
+ },
+ "scomposizioni/9": {
+  "campi": [
+   {
+    "e": "Scomposizione di $4x^2-121y^2$",
+    "t": "funzione",
+    "v": "\\left(2 x - 11 y\\right) \\left(2 x + 11 y\\right)",
+    "var": [
+     "x",
+     "y"
+    ],
+    "forma": "prodotto"
+   }
+  ]
+ },
+ "scomposizioni/13": {
+  "campi": [
+   {
+    "e": "MCD di $66x^3y^2$ e $99x^2y^4$",
+    "t": "funzione",
+    "v": "33 x^{2} y^{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "scomposizioni/14": {
+  "campi": [
+   {
+    "e": "mcm di $22x^2y$ e $33xy^3$",
+    "t": "funzione",
+    "v": "66 x^{2} y^{3}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ }
+}

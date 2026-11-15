@@ -1,0 +1,56 @@
+{
+ "rendite-costanti/12": {
+  "campi": [
+   {
+    "e": "Date di pagamento delle rate",
+    "t": "valori",
+    "v": [
+     "3",
+     "4",
+     "5",
+     "6"
+    ]
+   }
+  ]
+ },
+ "valutazione-investimenti/4": {
+  "campi": [
+   {
+    "e": "TIR annui, in percentuale",
+    "t": "valori",
+    "v": [
+     "20",
+     "30"
+    ]
+   }
+  ]
+ },
+ "valutazione-investimenti/10": {
+  "campi": [
+   {
+    "e": "Numero di TIR annui ammissibili",
+    "t": "scelta",
+    "opzioni": [
+     "nessuno",
+     "uno",
+     "due"
+    ],
+    "v": "nessuno"
+   }
+  ]
+ },
+ "valutazione-investimenti/12": {
+  "campi": [
+   {
+    "e": "Progetto con VAN maggiore al $20\\%$ annuo",
+    "t": "scelta",
+    "opzioni": [
+     "$A$",
+     "$B$",
+     "i due VAN coincidono"
+    ],
+    "v": "$A$"
+   }
+  ]
+ }
+}

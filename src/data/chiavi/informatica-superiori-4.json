@@ -1,0 +1,68 @@
+{
+ "modello-relazionale/1": {
+  "campi": [
+   {
+    "e": "Tabella che contiene la chiave esterna",
+    "t": "scelta",
+    "opzioni": [
+     "Laboratori",
+     "Sedi",
+     "In entrambe le tabelle",
+     "In una tabella ponte Sedi_Laboratori"
+    ],
+    "v": "Laboratori"
+   }
+  ]
+ },
+ "progetto-dati/1": {
+  "campi": [
+   {
+    "e": "Numero di righe restituite",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Conteggio del sensore A",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Conteggio del sensore B",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "sql-filtri-e-join/1": {
+  "campi": [
+   {
+    "e": "Query",
+    "t": "scelta",
+    "opzioni": [
+     "SELECT voto FROM Verifiche ORDER BY voto DESC",
+     "SELECT voto FROM Verifiche ORDER BY voto ASC",
+     "SELECT voto FROM Verifiche ORDER BY voto",
+     "SELECT voto FROM Verifiche GROUP BY voto DESC",
+     "SELECT MAX(voto) FROM Verifiche"
+    ],
+    "v": "SELECT voto FROM Verifiche ORDER BY voto DESC"
+   }
+  ]
+ },
+ "sql-gruppi-e-modifiche/1": {
+  "campi": [
+   {
+    "e": "Query",
+    "t": "scelta",
+    "opzioni": [
+     "SELECT classe, AVG(voto) FROM Verifiche GROUP BY classe",
+     "SELECT classe, AVG(voto) FROM Verifiche",
+     "SELECT classe, AVG(voto) FROM Verifiche ORDER BY classe",
+     "SELECT classe, SUM(voto) FROM Verifiche GROUP BY classe",
+     "SELECT AVG(voto) FROM Verifiche GROUP BY voto"
+    ],
+    "v": "SELECT classe, AVG(voto) FROM Verifiche GROUP BY classe"
+   }
+  ]
+ }
+}

@@ -1,4 +1,779 @@
 {
+ "equazioni-polinomiali/2": {
+  "campi": [
+   {
+    "e": "Soluzioni di $x^2 - 7x + 10 = 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "5"
+    ]
+   },
+   {
+    "e": "Soluzioni di $2x^2 + 5x - 3 = 0$",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{2}",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/3": {
+  "campi": [
+   {
+    "e": "Soluzioni di $5x^2 - 20 = 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-2"
+    ]
+   },
+   {
+    "e": "Soluzioni di $3x^2 + 7x = 0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "-\\frac{7}{3}"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/4": {
+  "campi": [
+   {
+    "e": "Soluzione di $9x^2 - 6x + 1 = 0$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Insieme delle soluzioni reali di $x^2 - 3x + 5 = 0$",
+    "t": "intervallo",
+    "v": "\\emptyset"
+   }
+  ]
+ },
+ "equazioni-polinomiali/5": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ]
+   },
+   {
+    "e": "Scomposizione di $x^2 - 7x + 12$",
+    "t": "scelta",
+    "opzioni": [
+     "$(x - 3)(x - 4)$",
+     "$(x + 3)(x + 4)$",
+     "$(x - 3)(x + 4)$",
+     "$(x + 3)(x - 4)$"
+    ],
+    "v": "$(x - 3)(x - 4)$"
+   }
+  ]
+ },
+ "equazioni-polinomiali/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "3",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/7": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/8": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-3",
+     "2",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni di $x^4 - 10x^2 + 9 = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "3",
+     "-3"
+    ]
+   },
+   {
+    "e": "Soluzioni di $x^4 - 3x^2 - 4 = 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, 2]"
+   }
+  ]
+ },
+ "equazioni-polinomiali/11": {
+  "campi": [
+   {
+    "e": "Soluzioni di $x^2 - 4x + 3 > 0$",
+    "t": "intervallo",
+    "v": "(-\\infty, 1) \\cup (3, +\\infty)"
+   },
+   {
+    "e": "Soluzioni di $-x^2 + x + 6 \\geq 0$",
+    "t": "intervallo",
+    "v": "[-2, 3]"
+   }
+  ]
+ },
+ "equazioni-polinomiali/12": {
+  "campi": [
+   {
+    "e": "Soluzioni di $x^2 - 6x + 9 > 0$",
+    "t": "intervallo",
+    "v": "x \\neq 3"
+   },
+   {
+    "e": "Soluzioni di $x^2 + 2x + 2 < 0$",
+    "t": "intervallo",
+    "v": "\\emptyset"
+   }
+  ]
+ },
+ "equazioni-polinomiali/13": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, -1] \\cup [0, 1]"
+   }
+  ]
+ },
+ "equazioni-polinomiali/14": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione fratta",
+    "t": "intervallo",
+    "v": "[-2, 3)"
+   },
+   {
+    "e": "Soluzioni del sistema",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{1}{2}, 2\\right]"
+   }
+  ]
+ },
+ "equazioni-polinomiali/15": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-polinomiali/16": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-1, 0] \\cup (1, +\\infty)"
+   }
+  ]
+ },
+ "esponenziali/1": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "esponenziali/2": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "esponenziali/3": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "\\frac{3}{5}"
+   }
+  ]
+ },
+ "esponenziali/4": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "\\frac{\\ln 2}{\\ln 5}"
+   }
+  ]
+ },
+ "esponenziali/5": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "\\frac{1}{3}\\left(1 + \\frac{\\ln 6}{\\ln 2}\\right)"
+   }
+  ]
+ },
+ "esponenziali/6": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "\\frac{\\ln 4 - \\ln 7}{\\ln 3}"
+   }
+  ]
+ },
+ "esponenziali/7": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   }
+  ]
+ },
+ "esponenziali/8": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "1"
+    ]
+   }
+  ]
+ },
+ "esponenziali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   }
+  ]
+ },
+ "esponenziali/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[1, +\\infty)"
+   }
+  ]
+ },
+ "esponenziali/11": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{1}{2}, +\\infty\\right)"
+   }
+  ]
+ },
+ "esponenziali/12": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "\\left[0, \\frac{\\ln 3}{\\ln 2}\\right]"
+   }
+  ]
+ },
+ "geometria-analitica/1": {
+  "campi": [
+   {
+    "e": "$\\overline{AB}$",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "Punto medio $M$ del segmento $AB$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "5"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/3": {
+  "campi": [
+   {
+    "e": "Equazione della retta perpendicolare",
+    "t": "equazione",
+    "v": "y = -2x + 5",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/5": {
+  "campi": [
+   {
+    "e": "Vertice $V$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "-4"
+    ]
+   },
+   {
+    "e": "Asse di simmetria",
+    "t": "equazione",
+    "v": "x = 3",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Ascisse delle intersezioni con l'asse $x$",
+    "t": "valori",
+    "v": [
+     "1",
+     "5"
+    ]
+   },
+   {
+    "e": "Ordinata dell'intersezione con l'asse $y$",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "geometria-analitica/6": {
+  "campi": [
+   {
+    "e": "Vertice $V$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "4"
+    ]
+   },
+   {
+    "e": "Concavità",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Ascisse delle intersezioni con l'asse $x$",
+    "t": "valori",
+    "v": [
+     "0",
+     "4"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/7": {
+  "campi": [
+   {
+    "e": "Equazione in forma canonica",
+    "t": "equazione",
+    "v": "(x + 1)^2 + (y - 3)^2 = 4",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Equazione in forma generale",
+    "t": "equazione",
+    "v": "x^2 + y^2 + 2x - 6y + 6 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/8": {
+  "campi": [
+   {
+    "e": "Centro $C$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "-3"
+    ]
+   },
+   {
+    "e": "Raggio $r$",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "geometria-analitica/9": {
+  "campi": [
+   {
+    "e": "Semiasse $a$ (sull'asse $x$)",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Semiasse $b$ (sull'asse $y$)",
+    "t": "numero",
+    "v": "\\sqrt{7}"
+   },
+   {
+    "e": "Vertice sull'asse $x$ con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "0"
+    ]
+   },
+   {
+    "e": "Vertice sull'asse $y$ con ordinata positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "\\sqrt{7}"
+    ]
+   },
+   {
+    "e": "Fuoco con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "0"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/10": {
+  "campi": [
+   {
+    "e": "Vertice con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "0"
+    ]
+   },
+   {
+    "e": "Fuoco con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "5",
+     "0"
+    ]
+   },
+   {
+    "e": "Coefficienti angolari degli asintoti",
+    "t": "valori",
+    "v": [
+     "\\frac{3}{4}",
+     "-\\frac{3}{4}"
+    ]
+   }
+  ]
+ },
+ "geometria-analitica/11": {
+  "campi": [
+   {
+    "e": "Tipo di conica",
+    "t": "scelta",
+    "opzioni": [
+     "circonferenza",
+     "ellisse",
+     "parabola",
+     "iperbole"
+    ],
+    "v": "circonferenza"
+   },
+   {
+    "e": "Centro $C$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "1"
+    ]
+   },
+   {
+    "e": "Raggio $r$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "geometria-analitica/12": {
+  "campi": [
+   {
+    "e": "Tipo di conica",
+    "t": "scelta",
+    "opzioni": [
+     "circonferenza",
+     "ellisse",
+     "parabola",
+     "iperbole"
+    ],
+    "v": "iperbole"
+   },
+   {
+    "e": "Forma canonica",
+    "t": "equazione",
+    "v": "(x - 1)^2 - \\frac{(y + 2)^2}{4} = 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Centro",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "-2"
+    ]
+   },
+   {
+    "e": "Vertice con ascissa minore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-2"
+    ]
+   },
+   {
+    "e": "Vertice con ascissa maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-2"
+    ]
+   },
+   {
+    "e": "Coefficienti angolari degli asintoti",
+    "t": "valori",
+    "v": [
+     "2",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "goniometriche/1": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{5\\pi}{6}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/2": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{11\\pi}{6}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/3": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{3}",
+     "\\frac{4\\pi}{3}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/4": {
+  "campi": [
+   {
+    "e": "L'equazione",
+    "t": "scelta",
+    "opzioni": [
+     "ha infinite soluzioni",
+     "ha due soluzioni in $[0, 2\\pi)$",
+     "non ha soluzioni"
+    ],
+    "v": "non ha soluzioni"
+   }
+  ]
+ },
+ "goniometriche/5": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{\\pi}{2}",
+     "\\pi",
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/6": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{4}",
+     "\\frac{11\\pi}{12}",
+     "\\frac{19\\pi}{12}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/7": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{5\\pi}{6}",
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/8": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{3}",
+     "\\frac{5\\pi}{3}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/9": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{4}",
+     "\\frac{5\\pi}{4}",
+     "\\arctan\\frac{1}{3}",
+     "\\pi + \\arctan\\frac{1}{3}"
+    ]
+   }
+  ]
+ },
+ "goniometriche/10": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{2}",
+     "\\pi"
+    ]
+   }
+  ]
+ },
+ "goniometriche/11": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]"
+   }
+  ]
+ },
+ "goniometriche/12": {
+  "campi": [
+   {
+    "e": "Soluzioni in $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left[0, \\frac{2\\pi}{3}\\right) \\cup \\left(\\frac{4\\pi}{3}, 2\\pi\\right)"
+   }
+  ]
+ },
  "irrazionali/2": {
   "campi": [
    {
@@ -88,6 +863,751 @@
     "e": "Soluzioni della disequazione",
     "t": "intervallo",
     "v": "(-\\infty, 0] \\cup [4, +\\infty)"
+   }
+  ]
+ },
+ "logaritmiche/1": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "logaritmiche/2": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "6"
+    ]
+   }
+  ]
+ },
+ "logaritmiche/3": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "29"
+   }
+  ]
+ },
+ "logaritmiche/4": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "logaritmiche/5": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "\\frac{1}{5}"
+   }
+  ]
+ },
+ "logaritmiche/6": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "8"
+    ]
+   }
+  ]
+ },
+ "logaritmiche/7": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "7"
+   }
+  ]
+ },
+ "logaritmiche/8": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "3",
+     "27"
+    ]
+   }
+  ]
+ },
+ "logaritmiche/9": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "2",
+     "\\frac{1}{4}"
+    ]
+   }
+  ]
+ },
+ "logaritmiche/10": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(3, +\\infty)"
+   }
+  ]
+ },
+ "logaritmiche/11": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(2, 5]"
+   }
+  ]
+ },
+ "logaritmiche/12": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "\\left(\\frac{3}{2}, 4\\right)"
+   }
+  ]
+ },
+ "logica/1": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\exists x \\in \\mathbb{R} : x^2 < 1$",
+     "$\\forall x \\in \\mathbb{R} : x^2 < 1$",
+     "$\\exists x \\in \\mathbb{R} : x^2 \\leq 1$",
+     "$\\forall x \\in \\mathbb{R} : x^2 \\leq 1$"
+    ],
+    "v": "$\\exists x \\in \\mathbb{R} : x^2 < 1$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la negazione"
+   }
+  ]
+ },
+ "logica/2": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\forall n \\in \\mathbb{N} : n^2 \\neq 10$",
+     "$\\exists n \\in \\mathbb{N} : n^2 \\neq 10$",
+     "$\\forall n \\in \\mathbb{N} : n^2 = 10$",
+     "$\\nexists n \\in \\mathbb{N} : n^2 \\neq 10$"
+    ],
+    "v": "$\\forall n \\in \\mathbb{N} : n^2 \\neq 10$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la negazione"
+   }
+  ]
+ },
+ "logica/3": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\exists x \\in \\mathbb{R} : x < 0 \\lor x^2 < 0$",
+     "$\\exists x \\in \\mathbb{R} : x < 0 \\land x^2 < 0$",
+     "$\\forall x \\in \\mathbb{R} : x < 0 \\lor x^2 < 0$",
+     "$\\forall x \\in \\mathbb{R} : x < 0 \\land x^2 < 0$"
+    ],
+    "v": "$\\exists x \\in \\mathbb{R} : x < 0 \\lor x^2 < 0$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la negazione"
+   }
+  ]
+ },
+ "logica/4": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\forall y \\in \\mathbb{R} \\ \\exists x \\in \\mathbb{R} : x^2 < y$",
+     "$\\exists y \\in \\mathbb{R} \\ \\forall x \\in \\mathbb{R} : x^2 < y$",
+     "$\\forall y \\in \\mathbb{R} \\ \\forall x \\in \\mathbb{R} : x^2 < y$",
+     "$\\exists y \\in \\mathbb{R} \\ \\exists x \\in \\mathbb{R} : x^2 < y$"
+    ],
+    "v": "$\\forall y \\in \\mathbb{R} \\ \\exists x \\in \\mathbb{R} : x^2 < y$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la proposizione"
+   }
+  ]
+ },
+ "logica/5": {
+  "campi": [
+   {
+    "e": "La condizione è",
+    "t": "scelta",
+    "opzioni": [
+     "necessaria e non sufficiente",
+     "sufficiente e non necessaria",
+     "necessaria e sufficiente",
+     "né necessaria né sufficiente"
+    ],
+    "v": "sufficiente e non necessaria"
+   }
+  ]
+ },
+ "logica/6": {
+  "campi": [
+   {
+    "e": "La condizione è",
+    "t": "scelta",
+    "opzioni": [
+     "necessaria e non sufficiente",
+     "sufficiente e non necessaria",
+     "necessaria e sufficiente",
+     "né necessaria né sufficiente"
+    ],
+    "v": "necessaria e non sufficiente"
+   }
+  ]
+ },
+ "logica/7": {
+  "campi": [
+   {
+    "e": "La condizione è",
+    "t": "scelta",
+    "opzioni": [
+     "necessaria e non sufficiente",
+     "sufficiente e non necessaria",
+     "necessaria e sufficiente",
+     "né necessaria né sufficiente"
+    ],
+    "v": "necessaria e sufficiente"
+   }
+  ]
+ },
+ "logica/8": {
+  "campi": [
+   {
+    "e": "Contronominale",
+    "t": "scelta",
+    "opzioni": [
+     "se $n$ non è multiplo di $4$, allora $n$ non è multiplo di $8$",
+     "se $n$ è multiplo di $4$, allora $n$ è multiplo di $8$",
+     "se $n$ non è multiplo di $8$, allora $n$ non è multiplo di $4$",
+     "$n$ è multiplo di $8$ e non è multiplo di $4$"
+    ],
+    "v": "se $n$ non è multiplo di $4$, allora $n$ non è multiplo di $8$"
+   },
+   {
+    "e": "Valore di verità della contronominale",
+    "t": "scelta",
+    "opzioni": [
+     "vera",
+     "falsa"
+    ],
+    "v": "vera"
+   },
+   {
+    "e": "Inversa",
+    "t": "scelta",
+    "opzioni": [
+     "se $n$ non è multiplo di $4$, allora $n$ non è multiplo di $8$",
+     "se $n$ è multiplo di $4$, allora $n$ è multiplo di $8$",
+     "se $n$ non è multiplo di $8$, allora $n$ non è multiplo di $4$",
+     "$n$ è multiplo di $8$ e non è multiplo di $4$"
+    ],
+    "v": "se $n$ è multiplo di $4$, allora $n$ è multiplo di $8$"
+   },
+   {
+    "e": "Valore di verità dell'inversa",
+    "t": "scelta",
+    "opzioni": [
+     "vera",
+     "falsa"
+    ],
+    "v": "falsa"
+   }
+  ]
+ },
+ "logica/9": {
+  "campi": [
+   {
+    "e": "Negazione",
+    "t": "scelta",
+    "opzioni": [
+     "$\\exists x \\in \\mathbb{R} : x > 0 \\land x + 1 \\leq 2$",
+     "$\\exists x \\in \\mathbb{R} : x > 0 \\Longrightarrow x + 1 \\leq 2$",
+     "$\\forall x \\in \\mathbb{R} : x > 0 \\Longrightarrow x + 1 \\leq 2$",
+     "$\\exists x \\in \\mathbb{R} : x \\leq 0 \\land x + 1 > 2$"
+    ],
+    "v": "$\\exists x \\in \\mathbb{R} : x > 0 \\land x + 1 \\leq 2$"
+   },
+   {
+    "e": "È vera",
+    "t": "scelta",
+    "opzioni": [
+     "la proposizione",
+     "la negazione"
+    ],
+    "v": "la negazione"
+   }
+  ]
+ },
+ "logica/10": {
+  "campi": [
+   {
+    "e": "Se $1 + \\sqrt{2} = q$ con $q$ razionale, allora $\\sqrt{2}$ sarebbe uguale a",
+    "t": "scelta",
+    "opzioni": [
+     "$q - 1$",
+     "$q + 1$",
+     "$1 - q$",
+     "$q^2 - 1$"
+    ],
+    "v": "$q - 1$"
+   },
+   {
+    "e": "Il numero $1 + \\sqrt{2}$ è",
+    "t": "scelta",
+    "opzioni": [
+     "razionale",
+     "irrazionale"
+    ],
+    "v": "irrazionale"
+   }
+  ]
+ },
+ "polinomi/1": {
+  "campi": [
+   {
+    "e": "$(2x - 5)^2$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "sviluppata",
+    "v": "4x^2 - 20x + 25"
+   },
+   {
+    "e": "$(x + 3)^3$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "sviluppata",
+    "v": "x^3 + 9x^2 + 27x + 27"
+   }
+  ]
+ },
+ "polinomi/2": {
+  "campi": [
+   {
+    "e": "Scomposizione di $9x^2 - 16$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(3x - 4)(3x + 4)"
+   },
+   {
+    "e": "Scomposizione di $x^4 - 81$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x - 3)(x + 3)(x^2 + 9)"
+   }
+  ]
+ },
+ "polinomi/3": {
+  "campi": [
+   {
+    "e": "Scomposizione di $x^3 + 8$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x + 2)(x^2 - 2x + 4)"
+   },
+   {
+    "e": "Scomposizione di $27x^3 - 1$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(3x - 1)(9x^2 + 3x + 1)"
+   }
+  ]
+ },
+ "polinomi/4": {
+  "campi": [
+   {
+    "e": "Scomposizione",
+    "t": "funzione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "forma": "prodotto",
+    "v": "6x^2 y^2 (2x - 3y + 1)"
+   }
+  ]
+ },
+ "polinomi/5": {
+  "campi": [
+   {
+    "e": "Quoziente $Q(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x^2 - 2x - 3"
+   },
+   {
+    "e": "Resto $R$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "polinomi/6": {
+  "campi": [
+   {
+    "e": "Quoziente $Q(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "2x^2 + x - 5"
+   },
+   {
+    "e": "Resto $R$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "polinomi/7": {
+  "campi": [
+   {
+    "e": "Resto della divisione per $x - 1$",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "Resto della divisione per $x + 2$",
+    "t": "numero",
+    "v": "-22"
+   }
+  ]
+ },
+ "polinomi/8": {
+  "campi": [
+   {
+    "e": "$k$",
+    "t": "numero",
+    "v": "11"
+   }
+  ]
+ },
+ "polinomi/10": {
+  "campi": [
+   {
+    "e": "Candidati razionali",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "2",
+     "-2",
+     "\\frac{1}{3}",
+     "-\\frac{1}{3}",
+     "\\frac{2}{3}",
+     "-\\frac{2}{3}"
+    ]
+   },
+   {
+    "e": "Scomposizione",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x - 1)(x + 1)(3x - 2)"
+   }
+  ]
+ },
+ "potenze-e-radici/1": {
+  "campi": [
+   {
+    "e": "Risultato",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "potenze-e-radici/2": {
+  "campi": [
+   {
+    "e": "Risultato",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "potenze-e-radici/3": {
+  "campi": [
+   {
+    "e": "Espressione semplificata",
+    "t": "funzione",
+    "var": [
+     "a",
+     "b"
+    ],
+    "v": "\\frac{a^3}{b^6}"
+   }
+  ]
+ },
+ "potenze-e-radici/4": {
+  "campi": [
+   {
+    "e": "Risultato",
+    "t": "numero",
+    "v": "3\\sqrt{3}"
+   }
+  ]
+ },
+ "potenze-e-radici/5": {
+  "campi": [
+   {
+    "e": "Insieme di definizione",
+    "t": "intervallo",
+    "v": "[4, 10)"
+   }
+  ]
+ },
+ "potenze-e-radici/6": {
+  "campi": [
+   {
+    "e": "Il numero maggiore è",
+    "t": "scelta",
+    "opzioni": [
+     "$2^{60}$",
+     "$5^{20}$",
+     "sono uguali"
+    ],
+    "v": "$2^{60}$"
+   }
+  ]
+ },
+ "potenze-e-radici/10": {
+  "campi": [
+   {
+    "e": "Il minore",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt[3]{2}$",
+     "$\\sqrt[4]{3}$",
+     "$\\sqrt{2}$"
+    ],
+    "v": "$\\sqrt[3]{2}$"
+   },
+   {
+    "e": "Quello intermedio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt[3]{2}$",
+     "$\\sqrt[4]{3}$",
+     "$\\sqrt{2}$"
+    ],
+    "v": "$\\sqrt[4]{3}$"
+   },
+   {
+    "e": "Il maggiore",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt[3]{2}$",
+     "$\\sqrt[4]{3}$",
+     "$\\sqrt{2}$"
+    ],
+    "v": "$\\sqrt{2}$"
+   }
+  ]
+ },
+ "valore-assoluto/1": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-\\frac{5}{3}",
+     "3"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/2": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "2",
+     "3"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/3": {
+  "campi": [
+   {
+    "e": "Soluzioni di $|x + 4| = -3$",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna soluzione",
+     "$x = -7$",
+     "$x = -1$",
+     "$x = -7$ e $x = -1$"
+    ],
+    "v": "nessuna soluzione"
+   },
+   {
+    "e": "Soluzione di $|7x - 21| = 0$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "valore-assoluto/4": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-3",
+     "1"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/5": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "\\frac{4}{3}",
+     "6"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto/7": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-3, 7)"
+   }
+  ]
+ },
+ "valore-assoluto/8": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-3, -1] \\cup [1, 3]"
+   }
+  ]
+ },
+ "valore-assoluto/9": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, -2) \\cup (5, +\\infty)"
+   }
+  ]
+ },
+ "valore-assoluto/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, 3]"
+   }
+  ]
+ },
+ "valore-assoluto/11": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(2, +\\infty)"
+   }
+  ]
+ },
+ "valore-assoluto/12": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, -3] \\cup [5, +\\infty)"
    }
   ]
  }

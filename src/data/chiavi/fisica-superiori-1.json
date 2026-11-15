@@ -1,0 +1,956 @@
+{
+ "archimede-galleggiamento/1": {
+  "campi": [
+   {
+    "e": "Spinta di Archimede",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "archimede-galleggiamento/2": {
+  "campi": [
+   {
+    "e": "Volume immerso",
+    "t": "numero",
+    "v": "0{,}008",
+    "u": "m^3"
+   }
+  ]
+ },
+ "archimede-galleggiamento/4": {
+  "campi": [
+   {
+    "e": "Lettura del dinamometro",
+    "t": "numero",
+    "v": "180",
+    "u": "N"
+   }
+  ]
+ },
+ "archimede-galleggiamento/5": {
+  "campi": [
+   {
+    "e": "Spinta del liquido",
+    "t": "numero",
+    "v": "72",
+    "u": "N"
+   }
+  ]
+ },
+ "archimede-galleggiamento/6": {
+  "campi": [
+   {
+    "e": "Spinta di Archimede",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "archimede-galleggiamento/8": {
+  "campi": [
+   {
+    "e": "Volume immerso",
+    "t": "numero",
+    "v": "27",
+    "u": "L"
+   }
+  ]
+ },
+ "archimede-galleggiamento/9": {
+  "campi": [
+   {
+    "e": "Volume emerso",
+    "t": "numero",
+    "v": "16",
+    "u": "L"
+   }
+  ]
+ },
+ "archimede-galleggiamento/11": {
+  "campi": [
+   {
+    "e": "Aumento del volume immerso",
+    "t": "numero",
+    "v": "0{,}008",
+    "u": "m^3"
+   }
+  ]
+ },
+ "archimede-galleggiamento/12": {
+  "campi": [
+   {
+    "e": "La spinta in acqua salata",
+    "t": "scelta",
+    "opzioni": [
+     "Resta uguale al peso della barca",
+     "Aumenta perché il liquido è più denso",
+     "Diminuisce perché diminuisce il volume immerso",
+     "Diventa nulla in acqua salata"
+    ],
+    "v": "Resta uguale al peso della barca"
+   }
+  ]
+ },
+ "archimede-galleggiamento/13": {
+  "campi": [
+   {
+    "e": "Confronto fra le spinte",
+    "t": "scelta",
+    "opzioni": [
+     "Sono uguali",
+     "È maggiore sul corpo più pesante",
+     "È maggiore sul corpo più largo qualunque sia la forma",
+     "È maggiore sul corpo con densità maggiore"
+    ],
+    "v": "Sono uguali"
+   }
+  ]
+ },
+ "archimede-galleggiamento/14": {
+  "campi": [
+   {
+    "e": "La spinta dopo l'abbassamento",
+    "t": "scelta",
+    "opzioni": [
+     "Resta invariata",
+     "Aumenta nella stessa proporzione della pressione assoluta",
+     "Diminuisce perché il peso cresce",
+     "Diventa nulla se il corpo non galleggia"
+    ],
+    "v": "Resta invariata"
+   }
+  ]
+ },
+ "densita/2": {
+  "campi": [
+   {
+    "e": "Massa",
+    "t": "numero",
+    "v": "207",
+    "u": "g"
+   }
+  ]
+ },
+ "densita/6": {
+  "campi": [
+   {
+    "e": "Massa dell'oggetto",
+    "t": "numero",
+    "v": "110",
+    "u": "g"
+   }
+  ]
+ },
+ "densita/8": {
+  "campi": [
+   {
+    "e": "Differenza di massa",
+    "t": "numero",
+    "v": "162",
+    "u": "g"
+   }
+  ]
+ },
+ "densita/11": {
+  "campi": [
+   {
+    "e": "Massa della lastra",
+    "t": "numero",
+    "v": "40",
+    "u": "g"
+   }
+  ]
+ },
+ "densita/12": {
+  "campi": [
+   {
+    "e": "Massa del cubo",
+    "t": "numero",
+    "v": "1024",
+    "u": "g"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/2": {
+  "campi": [
+   {
+    "e": "Forza",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/3": {
+  "campi": [
+   {
+    "e": "Braccio",
+    "t": "numero",
+    "v": "0{,}3",
+    "u": "m"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/6": {
+  "campi": [
+   {
+    "e": "Forza sul lato opposto",
+    "t": "numero",
+    "v": "32",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/7": {
+  "campi": [
+   {
+    "e": "Braccio della seconda forza",
+    "t": "numero",
+    "v": "0{,}4",
+    "u": "m"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/9": {
+  "campi": [
+   {
+    "e": "Descrizione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "Risultante nulla, momento totale diverso da zero",
+     "Equilibrio perché la risultante è nulla",
+     "Momento nullo perché le forze sono opposte",
+     "Risultante uguale alla somma dei moduli"
+    ],
+    "v": "Risultante nulla, momento totale diverso da zero"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/10": {
+  "campi": [
+   {
+    "e": "Reazione in ciascun appoggio",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/11": {
+  "campi": [
+   {
+    "e": "Reazione in B",
+    "t": "numero",
+    "v": "32",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/12": {
+  "campi": [
+   {
+    "e": "Reazione in ciascun appoggio",
+    "t": "numero",
+    "v": "48",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-corpo-rigido/13": {
+  "campi": [
+   {
+    "e": "Posizione $x$ del baricentro",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "equilibrio-punto/1": {
+  "campi": [
+   {
+    "e": "Modulo della terza forza",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/2": {
+  "campi": [
+   {
+    "e": "Forza che equilibra le due forze",
+    "t": "scelta",
+    "opzioni": [
+     "$(-27;-36)\\,\\mathrm N$",
+     "$(27;36)\\,\\mathrm N$",
+     "$(-27;36)\\,\\mathrm N$",
+     "$(36;-27)\\,\\mathrm N$"
+    ],
+    "v": "$(-27;-36)\\,\\mathrm N$"
+   }
+  ]
+ },
+ "equilibrio-punto/3": {
+  "campi": [
+   {
+    "e": "Tensione della corda",
+    "t": "numero",
+    "v": "90",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/4": {
+  "campi": [
+   {
+    "e": "Tensione di ciascuna corda",
+    "t": "numero",
+    "v": "48",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/5": {
+  "campi": [
+   {
+    "e": "Tensione della seconda corda",
+    "t": "numero",
+    "v": "56",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/6": {
+  "campi": [
+   {
+    "e": "Allungamento della molla",
+    "t": "numero",
+    "v": "0{,}1",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "equilibrio-punto/7": {
+  "campi": [
+   {
+    "e": "Componente del peso lungo il piano",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/8": {
+  "campi": [
+   {
+    "e": "Reazione normale",
+    "t": "numero",
+    "v": "32",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/9": {
+  "campi": [
+   {
+    "e": "Tensione della corda",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/10": {
+  "campi": [
+   {
+    "e": "Modulo dell'attrito statico effettivo",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/11": {
+  "campi": [
+   {
+    "e": "Il blocco può restare fermo?",
+    "t": "scelta",
+    "opzioni": [
+     "No, il massimo attrito statico è insufficiente",
+     "Sì, perché l’attrito assume qualunque valore necessario",
+     "Sì, perché la normale annulla sempre tutto il peso",
+     "Sì, perché il massimo attrito è diverso da zero"
+    ],
+    "v": "No, il massimo attrito statico è insufficiente"
+   }
+  ]
+ },
+ "equilibrio-punto/13": {
+  "campi": [
+   {
+    "e": "Tensione di una corda",
+    "t": "numero",
+    "v": "40",
+    "u": "N"
+   }
+  ]
+ },
+ "equilibrio-punto/14": {
+  "campi": [
+   {
+    "e": "Modulo dell'equilibrante",
+    "t": "numero",
+    "v": "45",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/1": {
+  "campi": [
+   {
+    "e": "Peso dell'oggetto",
+    "t": "numero",
+    "v": "90",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/4": {
+  "campi": [
+   {
+    "e": "Modulo della forza elastica",
+    "t": "numero",
+    "v": "32",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/5": {
+  "campi": [
+   {
+    "e": "Modulo dell'allungamento",
+    "t": "numero",
+    "v": "0{,}05",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "forze/7": {
+  "campi": [
+   {
+    "e": "Modulo della forza elastica",
+    "t": "numero",
+    "v": "16",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/8": {
+  "campi": [
+   {
+    "e": "Verso della forza della molla sull'estremità destra",
+    "t": "scelta",
+    "opzioni": [
+     "Verso destra",
+     "Verso sinistra",
+     "Sempre verso l’alto",
+     "La forza è nulla perché la molla è compressa"
+    ],
+    "v": "Verso destra"
+   }
+  ]
+ },
+ "forze/9": {
+  "campi": [
+   {
+    "e": "Massimo modulo dell'attrito statico",
+    "t": "numero",
+    "v": "54",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/10": {
+  "campi": [
+   {
+    "e": "Modulo dell'attrito effettivo",
+    "t": "numero",
+    "v": "27",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/11": {
+  "campi": [
+   {
+    "e": "Modulo dell'attrito",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/12": {
+  "campi": [
+   {
+    "e": "Reazione normale",
+    "t": "numero",
+    "v": "96",
+    "u": "N"
+   }
+  ]
+ },
+ "forze/13": {
+  "campi": [
+   {
+    "e": "Reazione normale",
+    "t": "numero",
+    "v": "56",
+    "u": "N"
+   }
+  ]
+ },
+ "grandezze-e-unita/1": {
+  "campi": [
+   {
+    "e": "Lunghezza in metri",
+    "t": "numero",
+    "v": "3{,}3",
+    "u": "m"
+   }
+  ]
+ },
+ "grandezze-e-unita/2": {
+  "campi": [
+   {
+    "e": "Lunghezza in metri",
+    "t": "numero",
+    "v": "4300",
+    "u": "m"
+   }
+  ]
+ },
+ "grandezze-e-unita/3": {
+  "campi": [
+   {
+    "e": "Area in metri quadrati",
+    "t": "numero",
+    "v": "0{,}005",
+    "u": "m^2"
+   }
+  ]
+ },
+ "grandezze-e-unita/4": {
+  "campi": [
+   {
+    "e": "Volume in metri cubi",
+    "t": "numero",
+    "v": "0{,}000065",
+    "u": "m^3"
+   }
+  ]
+ },
+ "grandezze-e-unita/5": {
+  "campi": [
+   {
+    "e": "Volume in metri cubi",
+    "t": "numero",
+    "v": "0{,}0045",
+    "u": "m^3"
+   }
+  ]
+ },
+ "grandezze-e-unita/7": {
+  "campi": [
+   {
+    "e": "Durata in secondi",
+    "t": "numero",
+    "v": "31500",
+    "u": "s"
+   }
+  ]
+ },
+ "grandezze-e-unita/8": {
+  "campi": [
+   {
+    "e": "Durata in secondi",
+    "t": "numero",
+    "v": "0{,}03",
+    "u": "s",
+    "esatto": true
+   }
+  ]
+ },
+ "grandezze-e-unita/12": {
+  "campi": [
+   {
+    "e": "Volume in litri",
+    "t": "numero",
+    "v": "0{,}008",
+    "u": "L"
+   }
+  ]
+ },
+ "grandezze-e-unita/13": {
+  "campi": [
+   {
+    "e": "Unità SI della grandezza",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{kg/m^3}$",
+     "$\\mathrm{kg\\,m^3}$",
+     "$\\mathrm{m^3/kg}$",
+     "$\\mathrm{kg/m^2}$"
+    ],
+    "v": "$\\mathrm{kg/m^3}$"
+   }
+  ]
+ },
+ "grandezze-e-unita/14": {
+  "campi": [
+   {
+    "e": "Espressione con le dimensioni di un'area",
+    "t": "scelta",
+    "opzioni": [
+     "$(9\\,\\mathrm m)(2\\,\\mathrm m)$",
+     "$(9\\,\\mathrm m)+(2\\,\\mathrm m)$",
+     "$(9\\,\\mathrm m)\\div(2\\,\\mathrm m)$",
+     "$(9\\,\\mathrm m)(2\\,\\mathrm s)$"
+    ],
+    "v": "$(9\\,\\mathrm m)(2\\,\\mathrm m)$"
+   }
+  ]
+ },
+ "misure-e-incertezze/5": {
+  "campi": [
+   {
+    "e": "Incertezza assoluta",
+    "t": "numero",
+    "v": "4{,}95",
+    "u": "g"
+   }
+  ]
+ },
+ "misure-e-incertezze/7": {
+  "campi": [
+   {
+    "e": "Valore di una divisione",
+    "t": "numero",
+    "v": "5",
+    "u": "N"
+   }
+  ]
+ },
+ "misure-e-incertezze/14": {
+  "campi": [
+   {
+    "e": "Descrizione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "È presente uno scarto sistematico positivo",
+     "Le misure sono esatte perché lo scarto si ripete",
+     "La media di molte letture elimina certamente lo scarto",
+     "Lo scarto è necessariamente casuale"
+    ],
+    "v": "È presente uno scarto sistematico positivo"
+   }
+  ]
+ },
+ "pressione-fluidi/2": {
+  "campi": [
+   {
+    "e": "Forza perpendicolare $F$",
+    "t": "numero",
+    "v": "270",
+    "u": "N"
+   }
+  ]
+ },
+ "pressione-fluidi/3": {
+  "campi": [
+   {
+    "e": "Area $A$",
+    "t": "numero",
+    "v": "0{,}02",
+    "u": "m^2"
+   }
+  ]
+ },
+ "pressione-fluidi/7": {
+  "campi": [
+   {
+    "e": "Profondità $h$",
+    "t": "numero",
+    "v": "9",
+    "u": "m"
+   }
+  ]
+ },
+ "pressione-fluidi/10": {
+  "campi": [
+   {
+    "e": "Confronto fra le pressioni nei due punti",
+    "t": "scelta",
+    "opzioni": [
+     "Sono uguali",
+     "È maggiore nel recipiente più largo",
+     "È maggiore nel recipiente di volume totale maggiore",
+     "La forma basta per decidere quale è maggiore"
+    ],
+    "v": "Sono uguali"
+   }
+  ]
+ },
+ "pressione-fluidi/11": {
+  "campi": [
+   {
+    "e": "Forza aggiuntiva sul pistone grande",
+    "t": "numero",
+    "v": "80",
+    "u": "N"
+   }
+  ]
+ },
+ "pressione-fluidi/12": {
+  "campi": [
+   {
+    "e": "Forza aggiuntiva sul pistone piccolo",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "pressione-fluidi/14": {
+  "campi": [
+   {
+    "e": "Modulo della forza risultante",
+    "t": "numero",
+    "v": "160",
+    "u": "N"
+   }
+  ]
+ },
+ "proporzionalita-e-grafici/2": {
+  "campi": [
+   {
+    "e": "Volume $V$",
+    "t": "numero",
+    "v": "80",
+    "u": "L"
+   }
+  ]
+ },
+ "proporzionalita-e-grafici/3": {
+  "campi": [
+   {
+    "e": "Allungamento $x$",
+    "t": "numero",
+    "v": "0{,}2",
+    "u": "m"
+   }
+  ]
+ },
+ "proporzionalita-e-grafici/9": {
+  "campi": [
+   {
+    "e": "Volume dopo $3\\,\\mathrm{min}$",
+    "t": "numero",
+    "v": "38",
+    "u": "L"
+   }
+  ]
+ },
+ "proporzionalita-e-grafici/14": {
+  "campi": [
+   {
+    "e": "Unità della pendenza",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{g/cm^3}$",
+     "$\\mathrm{cm^3/g}$",
+     "$\\mathrm{g\\,cm^3}$",
+     "$\\mathrm g$"
+    ],
+    "v": "$\\mathrm{g/cm^3}$"
+   }
+  ]
+ },
+ "vettori/1": {
+  "campi": [
+   {
+    "e": "Componente orizzontale della somma",
+    "t": "numero",
+    "v": "20",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori/2": {
+  "campi": [
+   {
+    "e": "Componente verticale della somma",
+    "t": "numero",
+    "v": "-2",
+    "u": "N",
+    "esatto": true
+   }
+  ]
+ },
+ "vettori/3": {
+  "campi": [
+   {
+    "e": "Componente $x$ di $u-v$",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori/4": {
+  "campi": [
+   {
+    "e": "Componenti di $-u$",
+    "t": "scelta",
+    "opzioni": [
+     "$(-9;11)\\,\\mathrm N$",
+     "$(9;11)\\,\\mathrm N$",
+     "$(-9;-11)\\,\\mathrm N$",
+     "$(11;-9)\\,\\mathrm N$"
+    ],
+    "v": "$(-9;11)\\,\\mathrm N$"
+   }
+  ]
+ },
+ "vettori/5": {
+  "campi": [
+   {
+    "e": "Componenti del vettore moltiplicato per 3",
+    "t": "scelta",
+    "opzioni": [
+     "$(27;33)\\,\\mathrm m$",
+     "$(12;14)\\,\\mathrm m$",
+     "$(27;11)\\,\\mathrm m$",
+     "$(9;33)\\,\\mathrm m$"
+    ],
+    "v": "$(27;33)\\,\\mathrm m$"
+   }
+  ]
+ },
+ "vettori/6": {
+  "campi": [
+   {
+    "e": "Modulo del vettore",
+    "t": "numero",
+    "v": "45",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori/7": {
+  "campi": [
+   {
+    "e": "Modulo della componente verticale",
+    "t": "numero",
+    "v": "32",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori/8": {
+  "campi": [
+   {
+    "e": "Modulo della risultante",
+    "t": "numero",
+    "v": "40",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori/9": {
+  "campi": [
+   {
+    "e": "Modulo della risultante",
+    "t": "numero",
+    "v": "24",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori/10": {
+  "campi": [
+   {
+    "e": "Risultato di $-2u$",
+    "t": "scelta",
+    "opzioni": [
+     "$(-16;20)\\,\\mathrm N$",
+     "$(16;-20)\\,\\mathrm N$",
+     "$(-8;10)\\,\\mathrm N$",
+     "$(6;-12)\\,\\mathrm N$"
+    ],
+    "v": "$(-16;20)\\,\\mathrm N$"
+   }
+  ]
+ },
+ "vettori/11": {
+  "campi": [
+   {
+    "e": "Spostamento totale con segno",
+    "t": "numero",
+    "v": "24",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori/12": {
+  "campi": [
+   {
+    "e": "Componenti del vettore da A a B",
+    "t": "scelta",
+    "opzioni": [
+     "$(24;10)\\,\\mathrm m$",
+     "$(-24;-10)\\,\\mathrm m$",
+     "$(40;30)\\,\\mathrm m$",
+     "$(32;20)\\,\\mathrm m$"
+    ],
+    "v": "$(24;10)\\,\\mathrm m$"
+   }
+  ]
+ },
+ "vettori/13": {
+  "campi": [
+   {
+    "e": "I vettori $u$ e $v$ sono",
+    "t": "scelta",
+    "opzioni": [
+     "Perpendicolari, con lo stesso modulo",
+     "Uguali",
+     "Opposti",
+     "Paralleli, con lo stesso verso"
+    ],
+    "v": "Perpendicolari, con lo stesso modulo"
+   }
+  ]
+ },
+ "vettori/14": {
+  "campi": [
+   {
+    "e": "Secondo vettore",
+    "t": "scelta",
+    "opzioni": [
+     "$(-9;-11)\\,\\mathrm N$",
+     "$(9;11)\\,\\mathrm N$",
+     "$(9;-11)\\,\\mathrm N$",
+     "$(-9;11)\\,\\mathrm N$"
+    ],
+    "v": "$(-9;-11)\\,\\mathrm N$"
+   }
+  ]
+ }
+}

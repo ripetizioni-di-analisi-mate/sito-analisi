@@ -1,0 +1,2325 @@
+{
+ "campo-elettrico/1": {
+  "campi": [
+   {
+    "e": "Modulo di $E$",
+    "t": "numero",
+    "v": "1{,}3 \\cdot 10^{3}",
+    "u": "N/C"
+   },
+   {
+    "e": "Verso del campo",
+    "t": "scelta",
+    "opzioni": [
+     "uscente dalla carica",
+     "entrante nella carica"
+    ],
+    "v": "uscente dalla carica"
+   }
+  ]
+ },
+ "campo-elettrico/2": {
+  "campi": [
+   {
+    "e": "$r$",
+    "t": "numero",
+    "v": "0{,}19",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "campo-elettrico/3": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "4{,}8 \\cdot 10^{-16}",
+    "u": "N"
+   },
+   {
+    "e": "Modulo dell'accelerazione $a$",
+    "t": "numero",
+    "v": "5{,}3 \\cdot 10^{14}",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Verso della forza rispetto al campo",
+    "t": "scelta",
+    "opzioni": [
+     "concorde al campo",
+     "opposto al campo",
+     "perpendicolare al campo"
+    ],
+    "v": "opposto al campo"
+   }
+  ]
+ },
+ "campo-elettrico/4": {
+  "campi": [
+   {
+    "e": "Ascissa $x$ del punto di campo nullo",
+    "t": "numero",
+    "v": "10",
+    "u": "cm"
+   }
+  ]
+ },
+ "campo-elettrico/5": {
+  "campi": [
+   {
+    "e": "Modulo di $\\vec{E}$ in $P$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{4}",
+    "u": "N/C"
+   },
+   {
+    "e": "Direzione e verso di $\\vec{E}$ in $P$",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\hat{\\imath}$",
+     "$-\\hat{\\imath}$",
+     "$+\\hat{\\jmath}$",
+     "$-\\hat{\\jmath}$"
+    ],
+    "v": "$+\\hat{\\jmath}$"
+   }
+  ]
+ },
+ "campo-elettrico/6": {
+  "campi": [
+   {
+    "e": "Modulo di $E$ nel terzo vertice",
+    "t": "numero",
+    "v": "4{,}7 \\cdot 10^{3}",
+    "u": "N/C"
+   },
+   {
+    "e": "Direzione del campo",
+    "t": "scelta",
+    "opzioni": [
+     "lungo la bisettrice, verso l'esterno del triangolo",
+     "lungo la bisettrice, verso l'interno del triangolo",
+     "parallela al lato opposto"
+    ],
+    "v": "lungo la bisettrice, verso l'esterno del triangolo"
+   }
+  ]
+ },
+ "campo-elettrico/7": {
+  "campi": [
+   {
+    "e": "Momento di dipolo $p$",
+    "t": "numero",
+    "v": "1{,}5 \\cdot 10^{-12}",
+    "u": "C*m"
+   },
+   {
+    "e": "Modulo di $E$ sull'asse",
+    "t": "numero",
+    "v": "2{,}2 \\cdot 10^{2}",
+    "u": "N/C"
+   },
+   {
+    "e": "Verso di $\\vec{E}$ rispetto a $\\vec{p}$",
+    "t": "scelta",
+    "opzioni": [
+     "concorde a $\\vec{p}$",
+     "opposto a $\\vec{p}$",
+     "perpendicolare a $\\vec{p}$"
+    ],
+    "v": "concorde a $\\vec{p}$"
+   }
+  ]
+ },
+ "campo-elettrico/8": {
+  "campi": [
+   {
+    "e": "$\\tau_{\\max}$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{-7}",
+    "u": "N*m"
+   },
+   {
+    "e": "$W_{\\text{est}}$",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^{-7}",
+    "u": "J"
+   }
+  ]
+ },
+ "campo-elettrico/9": {
+  "campi": [
+   {
+    "e": "Modulo di $E_z$",
+    "t": "numero",
+    "v": "1{,}7 \\cdot 10^{4}",
+    "u": "N/C"
+   },
+   {
+    "e": "Verso del campo sull'asse",
+    "t": "scelta",
+    "opzioni": [
+     "uscente dall'anello",
+     "verso il centro dell'anello"
+    ],
+    "v": "uscente dall'anello"
+   }
+  ]
+ },
+ "campo-elettrico/10": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "-5{,}0 \\cdot 10^{-9}",
+    "u": "C/m"
+   }
+  ]
+ },
+ "campo-elettrico/11": {
+  "campi": [
+   {
+    "e": "$E_z$",
+    "t": "numero",
+    "v": "2{,}3 \\cdot 10^{4}",
+    "u": "N/C"
+   }
+  ]
+ },
+ "campo-elettrico/12": {
+  "campi": [
+   {
+    "e": "Modulo di $E$ tra i piani",
+    "t": "numero",
+    "v": "3{,}4 \\cdot 10^{2}",
+    "u": "N/C"
+   },
+   {
+    "e": "Verso del campo tra i piani",
+    "t": "scelta",
+    "opzioni": [
+     "dal piano positivo al negativo",
+     "dal piano negativo al positivo"
+    ],
+    "v": "dal piano positivo al negativo"
+   },
+   {
+    "e": "Modulo di $E$ all'esterno",
+    "t": "numero",
+    "v": "0",
+    "u": "N/C",
+    "esatto": true
+   }
+  ]
+ },
+ "campo-elettrico/13": {
+  "campi": [
+   {
+    "e": "Spostamento laterale $y_u$",
+    "t": "numero",
+    "v": "1{,}9 \\cdot 10^{-3}",
+    "u": "m"
+   }
+  ]
+ },
+ "campo-magnetico/3": {
+  "campi": [
+   {
+    "e": "Raggio $r$",
+    "t": "numero",
+    "v": "4{,}2 \\cdot 10^{-2}",
+    "u": "m"
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "1{,}3 \\cdot 10^{-7}",
+    "u": "s"
+   }
+  ]
+ },
+ "campo-magnetico/4": {
+  "campi": [
+   {
+    "e": "Frequenza di ciclotrone $f$",
+    "t": "numero",
+    "v": "2{,}8 \\cdot 10^9",
+    "u": "Hz"
+   },
+   {
+    "e": "Dipendenza dalla velocità",
+    "t": "scelta",
+    "opzioni": [
+     "$f$ non dipende dalla velocità",
+     "$f$ cresce con la velocità",
+     "$f$ diminuisce con la velocità"
+    ],
+    "v": "$f$ non dipende dalla velocità"
+   }
+  ]
+ },
+ "campo-magnetico/5": {
+  "campi": [
+   {
+    "e": "Raggio $r$",
+    "t": "numero",
+    "v": "7{,}5 \\cdot 10^{-2}",
+    "u": "m"
+   }
+  ]
+ },
+ "campo-magnetico/6": {
+  "campi": [
+   {
+    "e": "Raggio $r$ dell'elica",
+    "t": "numero",
+    "v": "5{,}4 \\cdot 10^{-2}",
+    "u": "m"
+   },
+   {
+    "e": "Passo $p$ dell'elica",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "campo-magnetico/8": {
+  "campi": [
+   {
+    "e": "Massa in chilogrammi",
+    "t": "numero",
+    "v": "4{,}6 \\cdot 10^{-26}",
+    "u": "kg"
+   },
+   {
+    "e": "Massa in unità di massa atomica",
+    "t": "numero",
+    "v": "28",
+    "u": "u"
+   }
+  ]
+ },
+ "campo-magnetico/9": {
+  "campi": [
+   {
+    "e": "Densità dei portatori $n$",
+    "t": "numero",
+    "v": "1{,}8 \\cdot 10^{29}",
+    "u": "m^-3"
+   }
+  ]
+ },
+ "campo-magnetico/10": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "0{,}42",
+    "u": "N",
+    "cifre": 2
+   }
+  ]
+ },
+ "campo-magnetico/11": {
+  "campi": [
+   {
+    "e": "Corrente $I$",
+    "t": "numero",
+    "v": "1{,}2",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "campo-magnetico/12": {
+  "campi": [
+   {
+    "e": "Momento delle forze $\\tau$",
+    "t": "numero",
+    "v": "5{,}1 \\cdot 10^{-2}",
+    "u": "N*m"
+   }
+  ]
+ },
+ "carica-e-coulomb/1": {
+  "campi": [
+   {
+    "e": "Numero di elettroni ricevuti",
+    "t": "numero",
+    "v": "2{,}5 \\cdot 10^{10}",
+    "u": "elettroni"
+   },
+   {
+    "e": "Carica finale del panno",
+    "t": "numero",
+    "v": "+4{,}0",
+    "u": "nC",
+    "cifre": 1
+   }
+  ]
+ },
+ "carica-e-coulomb/2": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "2{,}2 \\cdot 10^{-4}",
+    "u": "N"
+   },
+   {
+    "e": "La forza è",
+    "t": "scelta",
+    "opzioni": [
+     "attrattiva",
+     "repulsiva"
+    ],
+    "v": "attrattiva"
+   }
+  ]
+ },
+ "carica-e-coulomb/3": {
+  "campi": [
+   {
+    "e": "Distanza $r$",
+    "t": "numero",
+    "v": "9{,}5 \\cdot 10^{-2}",
+    "u": "m"
+   }
+  ]
+ },
+ "carica-e-coulomb/4": {
+  "campi": [
+   {
+    "e": "Modulo della forza elettrica $F_e$",
+    "t": "numero",
+    "v": "58",
+    "u": "N"
+   },
+   {
+    "e": "$\\dfrac{F_e}{F_g}$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{36}",
+    "cifre": 1
+   }
+  ]
+ },
+ "carica-e-coulomb/5": {
+  "campi": [
+   {
+    "e": "$q_A'$",
+    "t": "numero",
+    "v": "+2{,}0",
+    "u": "nC",
+    "cifre": 1
+   },
+   {
+    "e": "$q_B'$",
+    "t": "numero",
+    "v": "+2{,}0",
+    "u": "nC",
+    "cifre": 1
+   },
+   {
+    "e": "Numero di elettroni trasferiti",
+    "t": "numero",
+    "v": "3{,}1 \\cdot 10^{10}",
+    "u": "elettroni"
+   },
+   {
+    "e": "Verso del passaggio degli elettroni",
+    "t": "scelta",
+    "opzioni": [
+     "da $A$ a $B$",
+     "da $B$ ad $A$"
+    ],
+    "v": "da $B$ ad $A$"
+   }
+  ]
+ },
+ "carica-e-coulomb/6": {
+  "campi": [
+   {
+    "e": "$\\frac{F'}{F}$",
+    "t": "numero",
+    "v": "\\frac{1}{8}"
+   }
+  ]
+ },
+ "carica-e-coulomb/7": {
+  "campi": [
+   {
+    "e": "Modulo della forza totale",
+    "t": "numero",
+    "v": "4{,}0",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "Verso della forza",
+    "t": "scelta",
+    "opzioni": [
+     "verso $q_1$",
+     "verso $q_2$"
+    ],
+    "v": "verso $q_1$"
+   }
+  ]
+ },
+ "carica-e-coulomb/8": {
+  "campi": [
+   {
+    "e": "Modulo della forza totale",
+    "t": "numero",
+    "v": "0{,}64",
+    "u": "N",
+    "cifre": 2
+   },
+   {
+    "e": "Direzione e verso della forza",
+    "t": "scelta",
+    "opzioni": [
+     "a $45^\\circ$ dall'asse $x$, nel primo quadrante",
+     "a $45^\\circ$ dall'asse $x$, nel terzo quadrante",
+     "lungo l'asse $x$",
+     "lungo l'asse $y$"
+    ],
+    "v": "a $45^\\circ$ dall'asse $x$, nel primo quadrante"
+   }
+  ]
+ },
+ "carica-e-coulomb/9": {
+  "campi": [
+   {
+    "e": "Ascissa $x_0$ del punto di equilibrio",
+    "t": "numero",
+    "v": "0{,}10",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "carica-e-coulomb/10": {
+  "campi": [
+   {
+    "e": "Ascissa $x$ del punto di equilibrio",
+    "t": "numero",
+    "v": "-0{,}30",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "carica-e-coulomb/11": {
+  "campi": [
+   {
+    "e": "$|q|$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{-7}",
+    "u": "C"
+   }
+  ]
+ },
+ "carica-e-coulomb/12": {
+  "campi": [
+   {
+    "e": "Distanza $h$ tra le cariche",
+    "t": "numero",
+    "v": "4{,}3 \\cdot 10^{-2}",
+    "u": "m"
+   }
+  ]
+ },
+ "carica-e-coulomb/13": {
+  "campi": [
+   {
+    "e": "$Q$ in funzione di $q$",
+    "t": "funzione",
+    "v": "-\\frac{q}{\\sqrt{3}}",
+    "var": [
+     "q"
+    ]
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/1": {
+  "campi": [
+   {
+    "e": "Frequenza delle oscillazioni $f_0$",
+    "t": "numero",
+    "v": "5{,}0",
+    "u": "kHz",
+    "cifre": 1
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/3": {
+  "campi": [
+   {
+    "e": "Capacità $C$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "µF",
+    "cifre": 1
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/4": {
+  "campi": [
+   {
+    "e": "Valore efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "1{,}8",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "50",
+    "u": "Hz"
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/5": {
+  "campi": [
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "3{,}4",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/6": {
+  "campi": [
+   {
+    "e": "Reattanza induttiva $X_L$",
+    "t": "numero",
+    "v": "57",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "2{,}1",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/7": {
+  "campi": [
+   {
+    "e": "Impedenza $Z$",
+    "t": "numero",
+    "v": "124",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "1{,}9",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Sfasamento $\\varphi$ (in valore assoluto)",
+    "t": "numero",
+    "v": "50",
+    "u": "°",
+    "cifre": 0
+   },
+   {
+    "e": "La corrente, rispetto alla tensione, è",
+    "t": "scelta",
+    "opzioni": [
+     "in ritardo",
+     "in anticipo",
+     "in fase"
+    ],
+    "v": "in ritardo"
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/8": {
+  "campi": [
+   {
+    "e": "Impedenza $Z$",
+    "t": "numero",
+    "v": "130",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Sfasamento $\\varphi$ (in valore assoluto)",
+    "t": "numero",
+    "v": "67",
+    "u": "°",
+    "cifre": 0
+   },
+   {
+    "e": "La corrente, rispetto alla tensione, è",
+    "t": "scelta",
+    "opzioni": [
+     "in ritardo",
+     "in anticipo",
+     "in fase"
+    ],
+    "v": "in ritardo"
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/9": {
+  "campi": [
+   {
+    "e": "Frequenza di risonanza $f_0$",
+    "t": "numero",
+    "v": "50",
+    "u": "Hz"
+   },
+   {
+    "e": "Corrente efficace alla risonanza",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "A",
+    "cifre": 2
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/11": {
+  "campi": [
+   {
+    "e": "Pulsazione di risonanza $\\omega_0$",
+    "t": "numero",
+    "v": "3{,}2 \\cdot 10^5",
+    "u": "rad/s"
+   },
+   {
+    "e": "Fattore di qualità $Q$",
+    "t": "numero",
+    "v": "32",
+    "cifre": 0
+   },
+   {
+    "e": "Banda passante $\\Delta\\omega$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^4",
+    "u": "rad/s"
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/12": {
+  "campi": [
+   {
+    "e": "Tensione efficace al secondario $V_2$",
+    "t": "numero",
+    "v": "1150",
+    "u": "V"
+   },
+   {
+    "e": "Corrente efficace nel primario $I_1$",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "circuiti-in-corrente-alternata/13": {
+  "campi": [
+   {
+    "e": "Pulsazione delle oscillazioni smorzate $\\omega_s$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^3",
+    "u": "rad/s"
+   },
+   {
+    "e": "Tempo di riduzione dell'energia di un fattore $e$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "ms",
+    "cifre": 2
+   }
+  ]
+ },
+ "conduttori-e-condensatori/1": {
+  "campi": [
+   {
+    "e": "Modulo del campo $E$",
+    "t": "numero",
+    "v": "5{,}6 \\cdot 10^{5}",
+    "u": "V/m"
+   },
+   {
+    "e": "Direzione del campo",
+    "t": "scelta",
+    "opzioni": [
+     "perpendicolare alla superficie, uscente dal conduttore",
+     "perpendicolare alla superficie, entrante nel conduttore",
+     "tangente alla superficie"
+    ],
+    "v": "perpendicolare alla superficie, uscente dal conduttore"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/2": {
+  "campi": [
+   {
+    "e": "Carica massima $Q_{\\max}$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "µC",
+    "cifre": 1
+   },
+   {
+    "e": "Potenziale $V_{\\max}$",
+    "t": "numero",
+    "v": "4{,}5 \\cdot 10^{5}",
+    "u": "V"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/3": {
+  "campi": [
+   {
+    "e": "Carica sulla superficie interna",
+    "t": "numero",
+    "v": "-5{,}0",
+    "u": "nC",
+    "cifre": 1
+   },
+   {
+    "e": "Carica sulla superficie esterna",
+    "t": "numero",
+    "v": "5{,}0",
+    "u": "nC",
+    "cifre": 1
+   },
+   {
+    "e": "Modulo del campo a $20\\,\\mathrm{cm}$ dal centro",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^{3}",
+    "u": "V/m"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/4": {
+  "campi": [
+   {
+    "e": "Area delle armature $A$",
+    "t": "numero",
+    "v": "45",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/5": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "0{,}14",
+    "u": "N",
+    "cifre": 2
+   }
+  ]
+ },
+ "conduttori-e-condensatori/6": {
+  "campi": [
+   {
+    "e": "Capacità equivalente $C_{\\text{eq}}$",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "µF",
+    "cifre": 1
+   },
+   {
+    "e": "Carica $Q_1$",
+    "t": "numero",
+    "v": "60",
+    "u": "µC"
+   },
+   {
+    "e": "Carica $Q_2$",
+    "t": "numero",
+    "v": "60",
+    "u": "µC"
+   },
+   {
+    "e": "Carica $Q_3$",
+    "t": "numero",
+    "v": "120",
+    "u": "µC"
+   },
+   {
+    "e": "$\\Delta V_1$",
+    "t": "numero",
+    "v": "10",
+    "u": "V"
+   },
+   {
+    "e": "$\\Delta V_2$",
+    "t": "numero",
+    "v": "20",
+    "u": "V"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/7": {
+  "campi": [
+   {
+    "e": "Collegamento",
+    "t": "scelta",
+    "opzioni": [
+     "tutti e quattro in serie",
+     "tutti e quattro in parallelo",
+     "due rami in parallelo, ciascuno con due condensatori in serie",
+     "tre in serie, con il quarto in parallelo alla serie"
+    ],
+    "v": "due rami in parallelo, ciascuno con due condensatori in serie"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/8": {
+  "campi": [
+   {
+    "e": "Capacità $C$",
+    "t": "numero",
+    "v": "67",
+    "u": "pF"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/9": {
+  "campi": [
+   {
+    "e": "Capacità per unità di lunghezza $\\frac{C}{\\ell}$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{2}",
+    "u": "pF/m"
+   },
+   {
+    "e": "Capacità del tratto di $25\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "2{,}6",
+    "u": "nF",
+    "cifre": 1
+   }
+  ]
+ },
+ "conduttori-e-condensatori/10": {
+  "campi": [
+   {
+    "e": "Energia immagazzinata $U$",
+    "t": "numero",
+    "v": "8{,}0",
+    "u": "µJ",
+    "cifre": 1
+   },
+   {
+    "e": "Densità di energia $u$",
+    "t": "numero",
+    "v": "1{,}6",
+    "u": "J/m^3",
+    "cifre": 1
+   }
+  ]
+ },
+ "conduttori-e-condensatori/11": {
+  "campi": [
+   {
+    "e": "Differenza di potenziale finale",
+    "t": "numero",
+    "v": "100",
+    "u": "V"
+   },
+   {
+    "e": "Energia prima dell'inserimento $U_0$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "µJ",
+    "cifre": 1
+   },
+   {
+    "e": "Energia dopo l'inserimento $U$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "µJ",
+    "cifre": 2
+   }
+  ]
+ },
+ "conduttori-e-condensatori/12": {
+  "campi": [
+   {
+    "e": "Capacità $C$",
+    "t": "numero",
+    "v": "126",
+    "u": "pF"
+   }
+  ]
+ },
+ "conduttori-e-condensatori/13": {
+  "campi": [
+   {
+    "e": "Differenza di potenziale finale",
+    "t": "numero",
+    "v": "12",
+    "u": "V"
+   },
+   {
+    "e": "Energia dissipata",
+    "t": "numero",
+    "v": "3{,}8",
+    "u": "mJ",
+    "cifre": 1
+   }
+  ]
+ },
+ "corrente-e-circuiti/1": {
+  "campi": [
+   {
+    "e": "Carica $Q$",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^{2}",
+    "u": "C"
+   },
+   {
+    "e": "Numero di elettroni $N$",
+    "t": "numero",
+    "v": "1{,}5 \\cdot 10^{21}",
+    "u": "elettroni"
+   }
+  ]
+ },
+ "corrente-e-circuiti/2": {
+  "campi": [
+   {
+    "e": "Densità di corrente $J$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{6}",
+    "u": "A/m^2"
+   },
+   {
+    "e": "Velocità di deriva $v_d$",
+    "t": "numero",
+    "v": "1{,}4 \\cdot 10^{-4}",
+    "u": "m/s",
+    "cifre": 5
+   }
+  ]
+ },
+ "corrente-e-circuiti/3": {
+  "campi": [
+   {
+    "e": "Lunghezza del filo $\\ell$",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   }
+  ]
+ },
+ "corrente-e-circuiti/5": {
+  "campi": [
+   {
+    "e": "Resistenza equivalente $R_{\\text{eq}}$",
+    "t": "numero",
+    "v": "8{,}0",
+    "u": "Ω",
+    "cifre": 1
+   },
+   {
+    "e": "Corrente erogata $I$",
+    "t": "numero",
+    "v": "3{,}0",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Corrente nel resistore da $12\\,\\Omega$",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "corrente-e-circuiti/6": {
+  "campi": [
+   {
+    "e": "Corrente assorbita $I$",
+    "t": "numero",
+    "v": "9{,}6",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Resistenza $R$",
+    "t": "numero",
+    "v": "24",
+    "u": "Ω"
+   },
+   {
+    "e": "Energia consumata in chilowattora",
+    "t": "numero",
+    "v": "6{,}6",
+    "u": "kWh",
+    "cifre": 1
+   },
+   {
+    "e": "Energia consumata in joule",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^{7}",
+    "u": "J"
+   }
+  ]
+ },
+ "corrente-e-circuiti/7": {
+  "campi": [
+   {
+    "e": "In serie: $P_1$",
+    "t": "numero",
+    "v": "10",
+    "u": "W"
+   },
+   {
+    "e": "In serie: $P_2$",
+    "t": "numero",
+    "v": "20",
+    "u": "W"
+   },
+   {
+    "e": "In parallelo: $P_1$",
+    "t": "numero",
+    "v": "90",
+    "u": "W"
+   },
+   {
+    "e": "In parallelo: $P_2$",
+    "t": "numero",
+    "v": "45",
+    "u": "W"
+   }
+  ]
+ },
+ "corrente-e-circuiti/8": {
+  "campi": [
+   {
+    "e": "Corrente $I$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Tensione ai morsetti $\\Delta V$",
+    "t": "numero",
+    "v": "11{,}2",
+    "u": "V",
+    "cifre": 1
+   },
+   {
+    "e": "Potenza dissipata nella batteria",
+    "t": "numero",
+    "v": "1{,}6",
+    "u": "W",
+    "cifre": 1
+   }
+  ]
+ },
+ "corrente-e-circuiti/9": {
+  "campi": [
+   {
+    "e": "Resistenza interna $r$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "Ω",
+    "cifre": 1
+   },
+   {
+    "e": "Resistenza del carico $R$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "Ω",
+    "cifre": 1
+   },
+   {
+    "e": "Potenza massima $P_{\\max}$",
+    "t": "numero",
+    "v": "4{,}5",
+    "u": "W",
+    "cifre": 1
+   }
+  ]
+ },
+ "corrente-e-circuiti/10": {
+  "campi": [
+   {
+    "e": "Corrente nel ramo di $\\mathcal{E}_1$",
+    "t": "numero",
+    "v": "3{,}0",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Verso nel ramo di $\\mathcal{E}_1$",
+    "t": "scelta",
+    "opzioni": [
+     "da $A$ verso $B$",
+     "da $B$ verso $A$"
+    ],
+    "v": "da $B$ verso $A$"
+   },
+   {
+    "e": "Corrente in $R_3$",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Verso in $R_3$",
+    "t": "scelta",
+    "opzioni": [
+     "da $A$ verso $B$",
+     "da $B$ verso $A$"
+    ],
+    "v": "da $A$ verso $B$"
+   },
+   {
+    "e": "Corrente nel ramo di $\\mathcal{E}_2$",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "A",
+    "cifre": 1
+   },
+   {
+    "e": "Verso nel ramo di $\\mathcal{E}_2$",
+    "t": "scelta",
+    "opzioni": [
+     "da $A$ verso $B$",
+     "da $B$ verso $A$"
+    ],
+    "v": "da $A$ verso $B$"
+   }
+  ]
+ },
+ "corrente-e-circuiti/12": {
+  "campi": [
+   {
+    "e": "Costante di tempo $\\tau$",
+    "t": "numero",
+    "v": "0{,}47",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Tempo $t$",
+    "t": "numero",
+    "v": "0{,}43",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "corrente-e-circuiti/13": {
+  "campi": [
+   {
+    "e": "Corrente iniziale $i(0)$",
+    "t": "numero",
+    "v": "20",
+    "u": "mA"
+   },
+   {
+    "e": "Tensione sul condensatore dopo $1{,}0\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "2{,}4",
+    "u": "V",
+    "cifre": 1
+   },
+   {
+    "e": "Energia dissipata nel resistore",
+    "t": "numero",
+    "v": "94",
+    "u": "mJ"
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/1": {
+  "campi": [
+   {
+    "e": "Corrente di spostamento $i_s$",
+    "t": "numero",
+    "v": "0{,}18",
+    "u": "A",
+    "cifre": 2
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/2": {
+  "campi": [
+   {
+    "e": "Corrente di spostamento $i_s$",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "mA",
+    "cifre": 1
+   },
+   {
+    "e": "$\\dfrac{dV}{dt}$",
+    "t": "numero",
+    "v": "3{,}8 \\cdot 10^{5}",
+    "u": "V/s",
+    "cifre": -4
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/4": {
+  "campi": [
+   {
+    "e": "$B$ a $r = 8{,}0\\,\\mathrm{cm}$",
+    "t": "numero",
+    "v": "3{,}5 \\cdot 10^{-7}",
+    "u": "T",
+    "cifre": 8
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/5": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda $\\lambda$",
+    "t": "numero",
+    "v": "3{,}1",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/6": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda $\\lambda$",
+    "t": "numero",
+    "v": "12{,}2",
+    "u": "cm",
+    "cifre": 1
+   },
+   {
+    "e": "Banda dello spettro",
+    "t": "scelta",
+    "opzioni": [
+     "onde radio",
+     "microonde",
+     "infrarosso",
+     "luce visibile"
+    ],
+    "v": "microonde"
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/8": {
+  "campi": [
+   {
+    "e": "Intensità $I$",
+    "t": "numero",
+    "v": "4{,}8",
+    "u": "W/m^2",
+    "cifre": 1
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/9": {
+  "campi": [
+   {
+    "e": "Intensità $I$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-5}",
+    "u": "W/m^2",
+    "cifre": 6
+   },
+   {
+    "e": "Ampiezza $E_0$",
+    "t": "numero",
+    "v": "0{,}17",
+    "u": "V/m",
+    "cifre": 2
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/10": {
+  "campi": [
+   {
+    "e": "Forza $F$",
+    "t": "numero",
+    "v": "6{,}7 \\cdot 10^{-9}",
+    "u": "N",
+    "cifre": 10
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/11": {
+  "campi": [
+   {
+    "e": "Densità media di energia $\\langle u \\rangle$",
+    "t": "numero",
+    "v": "4{,}5 \\cdot 10^{-6}",
+    "u": "J/m^3",
+    "cifre": 7
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/12": {
+  "campi": [
+   {
+    "e": "Tempo di ritorno $t$",
+    "t": "numero",
+    "v": "2{,}56",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "equazioni-di-maxwell-e-onde/13": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda $\\lambda$",
+    "t": "numero",
+    "v": "6{,}3 \\cdot 10^{-7}",
+    "u": "m",
+    "cifre": 8
+   },
+   {
+    "e": "Pulsazione $\\omega$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^{15}",
+    "u": "rad/s",
+    "cifre": -14
+   },
+   {
+    "e": "Ampiezza di $\\vec{B}$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-7}",
+    "u": "T",
+    "cifre": 8
+   },
+   {
+    "e": "Direzione e verso di $\\vec{B}$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\hat{\\imath}$",
+     "$\\hat{\\jmath}$",
+     "$\\hat{k}$",
+     "$-\\hat{k}$"
+    ],
+    "v": "$\\hat{k}$"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/2": {
+  "campi": [
+   {
+    "e": "Carica $|q|$",
+    "t": "numero",
+    "v": "2{,}5 \\cdot 10^{-2}",
+    "u": "C",
+    "cifre": 3
+   }
+  ]
+ },
+ "induzione-elettromagnetica/3": {
+  "campi": [
+   {
+    "e": "F.e.m. indotta $\\mathcal{E}$",
+    "t": "numero",
+    "v": "0{,}45",
+    "u": "V",
+    "cifre": 2
+   },
+   {
+    "e": "Corrente $I$",
+    "t": "numero",
+    "v": "0{,}30",
+    "u": "A",
+    "cifre": 2
+   }
+  ]
+ },
+ "induzione-elettromagnetica/4": {
+  "campi": [
+   {
+    "e": "Forza $F$",
+    "t": "numero",
+    "v": "0{,}60",
+    "u": "N",
+    "cifre": 2
+   },
+   {
+    "e": "Potenza $P$",
+    "t": "numero",
+    "v": "3{,}6",
+    "u": "W",
+    "cifre": 1
+   }
+  ]
+ },
+ "induzione-elettromagnetica/5": {
+  "campi": [
+   {
+    "e": "Velocità limite $v_{\\text{lim}}$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "induzione-elettromagnetica/6": {
+  "campi": [
+   {
+    "e": "$\\mathcal{E}_{\\max}$",
+    "t": "numero",
+    "v": "31",
+    "u": "V",
+    "cifre": 0
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "50",
+    "u": "Hz",
+    "cifre": 0
+   }
+  ]
+ },
+ "induzione-elettromagnetica/7": {
+  "campi": [
+   {
+    "e": "Induttanza $L$",
+    "t": "numero",
+    "v": "4{,}3 \\cdot 10^{-3}",
+    "u": "H",
+    "cifre": 4
+   }
+  ]
+ },
+ "induzione-elettromagnetica/8": {
+  "campi": [
+   {
+    "e": "$|\\mathcal{E}_L|_{\\max}$",
+    "t": "numero",
+    "v": "13",
+    "u": "V",
+    "cifre": 0
+   }
+  ]
+ },
+ "induzione-elettromagnetica/9": {
+  "campi": [
+   {
+    "e": "Costante di tempo $\\tau$",
+    "t": "numero",
+    "v": "0{,}050",
+    "u": "s",
+    "cifre": 3
+   },
+   {
+    "e": "Corrente $i$ a $t = 0{,}10\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "2{,}6",
+    "u": "A",
+    "cifre": 1
+   }
+  ]
+ },
+ "induzione-elettromagnetica/10": {
+  "campi": [
+   {
+    "e": "Tempo di dimezzamento $t$",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "ms",
+    "cifre": 1
+   }
+  ]
+ },
+ "induzione-elettromagnetica/11": {
+  "campi": [
+   {
+    "e": "Densità di energia $u_B$",
+    "t": "numero",
+    "v": "2{,}5 \\cdot 10^5",
+    "u": "J/m^3",
+    "cifre": -4
+   },
+   {
+    "e": "Energia $U$",
+    "t": "numero",
+    "v": "0{,}76",
+    "u": "J",
+    "cifre": 2
+   }
+  ]
+ },
+ "induzione-elettromagnetica/12": {
+  "campi": [
+   {
+    "e": "Mutua induttanza $M$",
+    "t": "numero",
+    "v": "2{,}6 \\cdot 10^{-4}",
+    "u": "H",
+    "cifre": 5
+   },
+   {
+    "e": "$|\\mathcal{E}_2|$",
+    "t": "numero",
+    "v": "2{,}0 \\cdot 10^{-2}",
+    "u": "V",
+    "cifre": 3
+   }
+  ]
+ },
+ "induzione-elettromagnetica/13": {
+  "campi": [
+   {
+    "e": "$E$ a $1{,}0\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "2{,}0 \\cdot 10^{-3}",
+    "u": "V/m",
+    "cifre": 4
+   },
+   {
+    "e": "$E$ a $6{,}0\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^{-3}",
+    "u": "V/m",
+    "cifre": 4
+   }
+  ]
+ },
+ "legge-di-gauss/2": {
+  "campi": [
+   {
+    "e": "Flusso $\\Phi_E$",
+    "t": "numero",
+    "v": "6{,}3 \\cdot 10^2",
+    "u": "N m^2/C",
+    "cifre": -1
+   }
+  ]
+ },
+ "legge-di-gauss/3": {
+  "campi": [
+   {
+    "e": "Carica $q_{\\text{int}}$",
+    "t": "numero",
+    "v": "-4{,}0 \\cdot 10^{-8}",
+    "u": "C",
+    "cifre": 9
+   }
+  ]
+ },
+ "legge-di-gauss/4": {
+  "campi": [
+   {
+    "e": "Flusso $\\Phi_E$ uscente da una faccia",
+    "t": "numero",
+    "v": "56",
+    "u": "N m^2/C",
+    "cifre": 0
+   }
+  ]
+ },
+ "legge-di-gauss/5": {
+  "campi": [
+   {
+    "e": "$E$ a $1{,}0\\,\\mathrm{cm}$ dal centro",
+    "t": "numero",
+    "v": "1{,}7 \\cdot 10^4",
+    "u": "N/C",
+    "cifre": -3
+   },
+   {
+    "e": "$E$ a $6{,}0\\,\\mathrm{cm}$ dal centro",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^4",
+    "u": "N/C",
+    "cifre": -3
+   }
+  ]
+ },
+ "legge-di-gauss/6": {
+  "campi": [
+   {
+    "e": "$E$ a $5{,}0\\,\\mathrm{cm}$ dal centro",
+    "t": "numero",
+    "v": "0",
+    "u": "N/C",
+    "esatto": true
+   },
+   {
+    "e": "$E$ a $20\\,\\mathrm{cm}$ dal centro",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   }
+  ]
+ },
+ "legge-di-gauss/7": {
+  "campi": [
+   {
+    "e": "Densità lineare $\\lambda$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-8}",
+    "u": "C/m",
+    "cifre": 9
+   }
+  ]
+ },
+ "legge-di-gauss/8": {
+  "campi": [
+   {
+    "e": "$E$ a $1{,}5\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "1{,}7 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   },
+   {
+    "e": "$E$ a $9{,}0\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   }
+  ]
+ },
+ "legge-di-gauss/9": {
+  "campi": [
+   {
+    "e": "Campo $E$",
+    "t": "numero",
+    "v": "2{,}8 \\cdot 10^2",
+    "u": "N/C",
+    "cifre": -1
+   },
+   {
+    "e": "Accelerazione $a$",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^{13}",
+    "u": "m/s^2",
+    "cifre": -12
+   },
+   {
+    "e": "Verso dell'accelerazione",
+    "t": "scelta",
+    "opzioni": [
+     "verso il piano",
+     "lontano dal piano",
+     "parallelo al piano"
+    ],
+    "v": "verso il piano"
+   }
+  ]
+ },
+ "legge-di-gauss/10": {
+  "campi": [
+   {
+    "e": "$\\sigma$",
+    "t": "numero",
+    "v": "1{,}8 \\cdot 10^{-7}",
+    "u": "C/m^2",
+    "cifre": 8
+   },
+   {
+    "e": "Campo all'esterno dei piani",
+    "t": "numero",
+    "v": "0",
+    "u": "N/C",
+    "esatto": true
+   }
+  ]
+ },
+ "legge-di-gauss/11": {
+  "campi": [
+   {
+    "e": "$E_{\\text{est}}$",
+    "t": "numero",
+    "v": "2{,}3 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   },
+   {
+    "e": "$E$ a $1{,}0\\,\\mathrm{cm}$ dal piano medio",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   }
+  ]
+ },
+ "legge-di-gauss/12": {
+  "campi": [
+   {
+    "e": "Densità di carica $\\rho$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-7}",
+    "u": "C/m^3",
+    "cifre": 8
+   }
+  ]
+ },
+ "legge-di-gauss/13": {
+  "campi": [
+   {
+    "e": "Carica totale $Q$",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^{-9}",
+    "u": "C",
+    "cifre": 10
+   },
+   {
+    "e": "Campo $E(r)$ per $r \\le R$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R}$",
+     "$\\dfrac{\\rho_0 r^2}{3\\varepsilon_0 R}$",
+     "$\\dfrac{\\rho_0 r}{3\\varepsilon_0}$",
+     "$\\dfrac{\\rho_0 R^3}{4\\varepsilon_0 r^2}$"
+    ],
+    "v": "$\\dfrac{\\rho_0 r^2}{4\\varepsilon_0 R}$"
+   },
+   {
+    "e": "$E(R)$",
+    "t": "numero",
+    "v": "5{,}6 \\cdot 10^3",
+    "u": "N/C",
+    "cifre": -2
+   }
+  ]
+ },
+ "ottica/2": {
+  "campi": [
+   {
+    "e": "Velocità $v$ nel vetro",
+    "t": "numero",
+    "v": "2{,}00 \\cdot 10^{8}",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "Frequenza $\\nu$",
+    "t": "numero",
+    "v": "6{,}25 \\cdot 10^{14}",
+    "u": "Hz",
+    "cifre": 2
+   },
+   {
+    "e": "Lunghezza d'onda $\\lambda_n$ nel vetro",
+    "t": "numero",
+    "v": "320",
+    "u": "nm"
+   }
+  ]
+ },
+ "ottica/5": {
+  "campi": [
+   {
+    "e": "Posizione dell'immagine $q$",
+    "t": "numero",
+    "v": "-30",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $m$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "L'immagine è",
+    "t": "scelta",
+    "opzioni": [
+     "reale",
+     "virtuale"
+    ],
+    "v": "virtuale"
+   }
+  ]
+ },
+ "ottica/6": {
+  "campi": [
+   {
+    "e": "Posizione dell'immagine $q$",
+    "t": "numero",
+    "v": "-12",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $m$",
+    "t": "numero",
+    "v": "0{,}40"
+   }
+  ]
+ },
+ "ottica/7": {
+  "campi": [
+   {
+    "e": "Distanza $p$ della lente dall'oggetto, posizione più vicina all'oggetto",
+    "t": "numero",
+    "v": "30",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $m$ in quella posizione",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Distanza $p$ della lente dall'oggetto, posizione più vicina allo schermo",
+    "t": "numero",
+    "v": "60",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $m$ in quella posizione",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   }
+  ]
+ },
+ "ottica/8": {
+  "campi": [
+   {
+    "e": "Posizione dell'immagine $q$",
+    "t": "numero",
+    "v": "-10",
+    "u": "cm"
+   },
+   {
+    "e": "Altezza dell'immagine $y'$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "cm",
+    "cifre": 1
+   }
+  ]
+ },
+ "ottica/10": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta_2$ del secondo minimo",
+    "t": "numero",
+    "v": "1{,}4",
+    "u": "°",
+    "cifre": 1
+   },
+   {
+    "e": "Distanza $y_2$ dal centro dello schermo",
+    "t": "numero",
+    "v": "2{,}4",
+    "u": "cm",
+    "cifre": 1
+   }
+  ]
+ },
+ "ottica/11": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda $\\lambda$",
+    "t": "numero",
+    "v": "570",
+    "u": "nm"
+   },
+   {
+    "e": "Ordine massimo osservabile",
+    "t": "numero",
+    "v": "2",
+    "esatto": true
+   }
+  ]
+ },
+ "ottica/13": {
+  "campi": [
+   {
+    "e": "Angolo di incidenza $\\theta_B$",
+    "t": "numero",
+    "v": "56{,}3",
+    "u": "°",
+    "cifre": 1
+   },
+   {
+    "e": "Angolo di rifrazione $\\theta_2$",
+    "t": "numero",
+    "v": "33{,}7",
+    "u": "°",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/1": {
+  "campi": [
+   {
+    "e": "Potenziale $V$",
+    "t": "numero",
+    "v": "-1{,}8 \\cdot 10^2",
+    "u": "V",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/3": {
+  "campi": [
+   {
+    "e": "Velocità finale $v$",
+    "t": "numero",
+    "v": "9{,}4 \\cdot 10^6",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/4": {
+  "campi": [
+   {
+    "e": "Energia cinetica $K$ in joule",
+    "t": "numero",
+    "v": "3{,}2 \\cdot 10^{-16}",
+    "u": "J",
+    "cifre": 17
+   },
+   {
+    "e": "Velocità $v$ del protone",
+    "t": "numero",
+    "v": "6{,}2 \\cdot 10^5",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/5": {
+  "campi": [
+   {
+    "e": "Lavoro esterno $W_{\\text{est}}$",
+    "t": "numero",
+    "v": "0{,}30",
+    "u": "J",
+    "cifre": 2
+   }
+  ]
+ },
+ "potenziale-elettrico/6": {
+  "campi": [
+   {
+    "e": "Potenziale $V$",
+    "t": "numero",
+    "v": "7{,}2",
+    "u": "V",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/7": {
+  "campi": [
+   {
+    "e": "Potenziale $V$ nel punto dell'asse",
+    "t": "numero",
+    "v": "6{,}9 \\cdot 10^2",
+    "u": "V",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/8": {
+  "campi": [
+   {
+    "e": "Potenziale $V(0)$ nel centro",
+    "t": "numero",
+    "v": "5{,}4 \\cdot 10^2",
+    "u": "V",
+    "cifre": 1
+   }
+  ]
+ },
+ "potenziale-elettrico/9": {
+  "campi": [
+   {
+    "e": "Componente $E_x$ in $(1{,}0;\\ 1{,}0)\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "-120",
+    "u": "V/m"
+   },
+   {
+    "e": "Componente $E_y$ in $(1{,}0;\\ 1{,}0)\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "0",
+    "u": "V/m",
+    "esatto": true
+   }
+  ]
+ },
+ "potenziale-elettrico/10": {
+  "campi": [
+   {
+    "e": "Energia elettrostatica $U$",
+    "t": "numero",
+    "v": "-0{,}18",
+    "u": "J",
+    "cifre": 2
+   }
+  ]
+ },
+ "potenziale-elettrico/11": {
+  "campi": [
+   {
+    "e": "Distanza minima $r_{\\min}$",
+    "t": "numero",
+    "v": "3{,}1 \\cdot 10^{-14}",
+    "u": "m",
+    "cifre": 15
+   }
+  ]
+ },
+ "potenziale-elettrico/12": {
+  "campi": [
+   {
+    "e": "$V(2{,}0\\,\\mathrm{cm}) - V(8{,}0\\,\\mathrm{cm})$",
+    "t": "numero",
+    "v": "50",
+    "u": "V"
+   }
+  ]
+ },
+ "potenziale-elettrico/13": {
+  "campi": [
+   {
+    "e": "Modulo del campo $E$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^3",
+    "u": "V/m",
+    "cifre": 1
+   },
+   {
+    "e": "Lavoro $W$ del campo sull'elettrone",
+    "t": "numero",
+    "v": "6{,}4 \\cdot 10^{-18}",
+    "u": "J",
+    "cifre": 19
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/1": {
+  "campi": [
+   {
+    "e": "Campo $B$ a $4{,}0\\,\\mathrm{cm}$ dal filo",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-5}",
+    "u": "T",
+    "cifre": 6
+   },
+   {
+    "e": "Distanza $d'$ a cui il campo vale $1{,}0 \\cdot 10^{-5}\\,\\mathrm{T}$",
+    "t": "numero",
+    "v": "0{,}16",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/2": {
+  "campi": [
+   {
+    "e": "Flusso $\\Phi_{\\text{lat}}$ attraverso la superficie laterale",
+    "t": "numero",
+    "v": "-1{,}5 \\cdot 10^{-3}",
+    "u": "Wb",
+    "cifre": 4
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/3": {
+  "campi": [
+   {
+    "e": "Campo $B$ nel centro della bobina",
+    "t": "numero",
+    "v": "7{,}9 \\cdot 10^{-4}",
+    "u": "T",
+    "cifre": 5
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/4": {
+  "campi": [
+   {
+    "e": "Campo $B$ nel punto medio",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^{-4}",
+    "u": "T",
+    "cifre": 5
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/5": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^{-2}",
+    "u": "N",
+    "cifre": 3
+   },
+   {
+    "e": "La forza è",
+    "t": "scelta",
+    "opzioni": [
+     "attrattiva",
+     "repulsiva"
+    ],
+    "v": "attrattiva"
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/6": {
+  "campi": [
+   {
+    "e": "Campo $B$ nel centro $C$",
+    "t": "numero",
+    "v": "4{,}7 \\cdot 10^{-5}",
+    "u": "T",
+    "cifre": 6
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/7": {
+  "campi": [
+   {
+    "e": "Distanza $z$ dal centro lungo l'asse",
+    "t": "numero",
+    "v": "5{,}2",
+    "u": "cm",
+    "cifre": 1
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/8": {
+  "campi": [
+   {
+    "e": "Campo massimo $B_{\\max}$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^{-3}",
+    "u": "T",
+    "cifre": 4
+   },
+   {
+    "e": "Distanza dall'asse interna al filo",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "mm",
+    "cifre": 1
+   },
+   {
+    "e": "Distanza dall'asse esterna al filo",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "mm",
+    "cifre": 1
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/9": {
+  "campi": [
+   {
+    "e": "Spire per unità di lunghezza $n$",
+    "t": "numero",
+    "v": "3{,}2 \\cdot 10^{3}",
+    "u": "m^{-1}",
+    "cifre": 1
+   },
+   {
+    "e": "Numero totale di spire $N$",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^{3}",
+    "u": "spire",
+    "cifre": 1
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/10": {
+  "campi": [
+   {
+    "e": "Campo massimo $B_{\\max}$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{-3}",
+    "u": "T",
+    "cifre": 4
+   },
+   {
+    "e": "Campo minimo $B_{\\min}$",
+    "t": "numero",
+    "v": "9{,}6 \\cdot 10^{-4}",
+    "u": "T",
+    "cifre": 5
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/11": {
+  "campi": [
+   {
+    "e": "Flusso $\\Phi_B$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-2}",
+    "u": "Wb",
+    "cifre": 3
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/12": {
+  "campi": [
+   {
+    "e": "$B$ a $1{,}0\\,\\mathrm{mm}$ dall'asse",
+    "t": "numero",
+    "v": "2{,}0 \\cdot 10^{-3}",
+    "u": "T",
+    "cifre": 4
+   },
+   {
+    "e": "$B$ a $4{,}0\\,\\mathrm{mm}$ dall'asse",
+    "t": "numero",
+    "v": "0",
+    "u": "T",
+    "esatto": true
+   }
+  ]
+ },
+ "sorgenti-del-campo-magnetico/13": {
+  "campi": [
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{-17}",
+    "u": "N",
+    "cifre": 18
+   },
+   {
+    "e": "La forza è rivolta",
+    "t": "scelta",
+    "opzioni": [
+     "verso il filo",
+     "in verso opposto al filo",
+     "parallela al filo"
+    ],
+    "v": "verso il filo"
+   }
+  ]
+ }
+}

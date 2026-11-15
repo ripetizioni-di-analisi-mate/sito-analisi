@@ -1,0 +1,936 @@
+{
+ "de-saint-venant/13": {
+  "campi": [
+   {
+    "e": "$|\\tau|_{\\max}$",
+    "t": "numero",
+    "v": "30",
+    "u": "MPa"
+   }
+  ]
+ },
+ "geometria-sezioni/11": {
+  "campi": [
+   {
+    "e": "Coefficiente angolare dell'asse principale di inerzia minima",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "iperstatiche/1": {
+  "campi": [
+   {
+    "e": "Freccia verso il basso in punta",
+    "t": "numero",
+    "v": "13",
+    "u": "mm"
+   }
+  ]
+ },
+ "iperstatiche/3": {
+  "campi": [
+   {
+    "e": "Spostamento di $C$ (positivo verso destra)",
+    "t": "numero",
+    "v": "7",
+    "u": "mm"
+   }
+  ]
+ },
+ "iperstatiche/4": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/5": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "5",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/6": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/8": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "20",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/9": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "48",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/10": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "16{,}5",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/11": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/12": {
+  "campi": [
+   {
+    "e": "$N$ (positivo a trazione)",
+    "t": "numero",
+    "v": "-30",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/13": {
+  "campi": [
+   {
+    "e": "$N$ (positivo a trazione)",
+    "t": "numero",
+    "v": "-25",
+    "u": "kN"
+   }
+  ]
+ },
+ "iperstatiche/14": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ },
+ "lastre-piane/12": {
+  "campi": [
+   {
+    "e": "$\\dfrac{W_{21}}{W_{11}}$",
+    "t": "numero",
+    "v": "\\frac{4}{25}"
+   }
+  ]
+ },
+ "linea-elastica/1": {
+  "campi": [
+   {
+    "e": "$v_B$ (positivo verso il basso)",
+    "t": "numero",
+    "v": "9",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/3": {
+  "campi": [
+   {
+    "e": "$v(B)$ (positivo verso il basso)",
+    "t": "numero",
+    "v": "-9",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/4": {
+  "campi": [
+   {
+    "e": "Freccia di mezzeria (positiva verso il basso)",
+    "t": "numero",
+    "v": "\\frac{8}{3}",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/5": {
+  "campi": [
+   {
+    "e": "Freccia in mezzeria (positiva verso il basso)",
+    "t": "numero",
+    "v": "5{,}625",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/6": {
+  "campi": [
+   {
+    "e": "$v(C)$ (positivo verso il basso)",
+    "t": "numero",
+    "v": "\\frac{16}{3}",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/7": {
+  "campi": [
+   {
+    "e": "$v(B)$ (positivo verso il basso)",
+    "t": "numero",
+    "v": "24",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/8": {
+  "campi": [
+   {
+    "e": "Freccia in mezzeria (positiva verso il basso)",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/9": {
+  "campi": [
+   {
+    "e": "Freccia centrale (positiva verso il basso)",
+    "t": "numero",
+    "v": "\\frac{13}{3}",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/12": {
+  "campi": [
+   {
+    "e": "Freccia all'estremità libera (positiva verso il basso)",
+    "t": "numero",
+    "v": "\\frac{25}{3}",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/13": {
+  "campi": [
+   {
+    "e": "Freccia all'estremità libera (positiva verso il basso)",
+    "t": "numero",
+    "v": "4{,}455",
+    "u": "mm"
+   }
+  ]
+ },
+ "linea-elastica/14": {
+  "campi": [
+   {
+    "e": "Spostamento di mezzeria (positivo verso il basso)",
+    "t": "numero",
+    "v": "\\frac{13}{3}",
+    "u": "mm"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/2": {
+  "campi": [
+   {
+    "e": "Spostamento della punta, in modulo",
+    "t": "numero",
+    "v": "30",
+    "u": "mm"
+   },
+   {
+    "e": "Verso dello spostamento",
+    "t": "scelta",
+    "opzioni": [
+     "verso il basso",
+     "verso l'alto"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/4": {
+  "campi": [
+   {
+    "e": "$\\varphi_B$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "0{,}010",
+    "u": "rad"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/6": {
+  "campi": [
+   {
+    "e": "$u_C$ (positivo verso destra)",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "mm"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/8": {
+  "campi": [
+   {
+    "e": "Freccia in punta, in modulo",
+    "t": "numero",
+    "v": "2",
+    "u": "mm"
+   },
+   {
+    "e": "Verso della freccia",
+    "t": "scelta",
+    "opzioni": [
+     "verso il basso",
+     "verso l'alto"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/9": {
+  "campi": [
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "5",
+    "u": "kN"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/10": {
+  "campi": [
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/11": {
+  "campi": [
+   {
+    "e": "$m_A$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN m"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/12": {
+  "campi": [
+   {
+    "e": "$\\varphi_B$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "0{,}002",
+    "u": "rad"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/13": {
+  "campi": [
+   {
+    "e": "$F_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   }
+  ]
+ },
+ "metodi-energetici-spostamenti/14": {
+  "campi": [
+   {
+    "e": "$m_A$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN m"
+   }
+  ]
+ },
+ "stabilita/13": {
+  "campi": [
+   {
+    "e": "Ascissa $x$ del nodo interno",
+    "t": "numero",
+    "v": "4",
+    "u": "m"
+   }
+  ]
+ },
+ "stabilita/14": {
+  "campi": [
+   {
+    "e": "$L_{\\mathrm{eff}}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m"
+   }
+  ]
+ },
+ "statica-vincoli/1": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-7",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/2": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{19}{2}",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{17}{2}",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/3": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "28",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/4": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{54}{5}",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{66}{5}",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/5": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "40",
+    "u": "kN m"
+   }
+  ]
+ },
+ "statica-vincoli/6": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "20",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "46",
+    "u": "kN m"
+   }
+  ]
+ },
+ "statica-vincoli/7": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "28",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/8": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{3}{2}",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{37}{2}",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/9": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$R_B$ (positiva nel verso della normale)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/10": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$R_B$ (positiva nel verso della normale)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/11": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "52",
+    "u": "kN m"
+   }
+  ]
+ },
+ "statica-vincoli/12": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-16",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/13": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "20",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   }
+  ]
+ },
+ "statica-vincoli/14": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "5",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "25",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "68",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ },
+ "tensioni-deformazioni/1": {
+  "campi": [
+   {
+    "e": "$\\sigma_n$",
+    "t": "numero",
+    "v": "41{,}84",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\tau_{nt}$",
+    "t": "numero",
+    "v": "-45{,}12",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/2": {
+  "campi": [
+   {
+    "e": "$\\sigma_n$",
+    "t": "numero",
+    "v": "-30",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\tau_{nt}$",
+    "t": "numero",
+    "v": "-15",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/3": {
+  "campi": [
+   {
+    "e": "$b_x$",
+    "t": "numero",
+    "v": "1",
+    "u": "MN/m^3"
+   },
+   {
+    "e": "$b_y$",
+    "t": "numero",
+    "v": "-7",
+    "u": "MN/m^3"
+   }
+  ]
+ },
+ "tensioni-deformazioni/4": {
+  "campi": [
+   {
+    "e": "$\\varepsilon_x$",
+    "t": "numero",
+    "v": "200\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\varepsilon_y$",
+    "t": "numero",
+    "v": "-100\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\gamma_{xy}$",
+    "t": "numero",
+    "v": "40\\cdot10^{-6}"
+   }
+  ]
+ },
+ "tensioni-deformazioni/6": {
+  "campi": [
+   {
+    "e": "$\\sigma_1$ (maggiore tensione principale nel piano)",
+    "t": "numero",
+    "v": "75",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\sigma_2$ (minore tensione principale nel piano)",
+    "t": "numero",
+    "v": "25",
+    "u": "MPa"
+   },
+   {
+    "e": "Massimo modulo del taglio nello spazio",
+    "t": "numero",
+    "v": "37{,}5",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/7": {
+  "campi": [
+   {
+    "e": "$\\sigma_1$",
+    "t": "numero",
+    "v": "36",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\theta_1$",
+    "t": "numero",
+    "v": "-45",
+    "u": "°"
+   }
+  ]
+ },
+ "tensioni-deformazioni/8": {
+  "campi": [
+   {
+    "e": "$\\varepsilon_x$",
+    "t": "numero",
+    "v": "525\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\varepsilon_y$",
+    "t": "numero",
+    "v": "150\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\varepsilon_z$",
+    "t": "numero",
+    "v": "-225\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\gamma_{xy}$",
+    "t": "numero",
+    "v": "375\\cdot10^{-6}"
+   }
+  ]
+ },
+ "tensioni-deformazioni/9": {
+  "campi": [
+   {
+    "e": "$\\sigma_x$",
+    "t": "numero",
+    "v": "100",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\sigma_y$",
+    "t": "numero",
+    "v": "0",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\tau_{xy}$",
+    "t": "numero",
+    "v": "-20",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/10": {
+  "campi": [
+   {
+    "e": "$\\sigma_z$",
+    "t": "numero",
+    "v": "60",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\varepsilon_x$",
+    "t": "numero",
+    "v": "\\frac{13}{35\\,000}"
+   }
+  ]
+ },
+ "tensioni-deformazioni/11": {
+  "campi": [
+   {
+    "e": "$\\sigma_x$",
+    "t": "numero",
+    "v": "100",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\sigma_y$",
+    "t": "numero",
+    "v": "12",
+    "u": "MPa"
+   },
+   {
+    "e": "$\\sigma_z$",
+    "t": "numero",
+    "v": "28",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/12": {
+  "campi": [
+   {
+    "e": "$\\gamma_{xy}$",
+    "t": "numero",
+    "v": "360\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\tau_{xy}$",
+    "t": "numero",
+    "v": "28{,}8",
+    "u": "MPa"
+   }
+  ]
+ },
+ "tensioni-deformazioni/13": {
+  "campi": [
+   {
+    "e": "$\\varepsilon_1$",
+    "t": "numero",
+    "v": "(50+100\\sqrt{5})\\cdot10^{-6}"
+   },
+   {
+    "e": "$\\theta_1$",
+    "t": "numero",
+    "v": "31{,}72",
+    "u": "°"
+   }
+  ]
+ }
+}

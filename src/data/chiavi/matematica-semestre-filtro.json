@@ -1,0 +1,193 @@
+{
+ "equazioni-e-formule/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-formule/7": {
+  "campi": [
+   {
+    "e": "Soluzione $(x, y)$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "5",
+     "7"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-formule/9": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni reali",
+    "t": "intervallo",
+    "v": "x \\neq 3"
+   }
+  ]
+ },
+ "esponenziali-e-logaritmi/10": {
+  "campi": [
+   {
+    "e": "Dominio",
+    "t": "intervallo",
+    "v": "(1, 7)"
+   }
+  ]
+ },
+ "esponenziali-e-logaritmi/14": {
+  "campi": [
+   {
+    "e": "Tempo di dimezzamento",
+    "t": "numero",
+    "v": "3",
+    "u": "h"
+   }
+  ]
+ },
+ "funzioni-e-grafici/9": {
+  "campi": [
+   {
+    "e": "Concentrazione ammessa che produce $A=0{,}60$",
+    "t": "scelta",
+    "opzioni": [
+     "$c=0{,}20\\,\\mathrm{mol/L}$",
+     "$c=0{,}25\\,\\mathrm{mol/L}$",
+     "$c=0{,}35\\,\\mathrm{mol/L}$",
+     "Nessuna concentrazione ammessa"
+    ],
+    "v": "Nessuna concentrazione ammessa"
+   }
+  ]
+ },
+ "unita-di-misura/8": {
+  "campi": [
+   {
+    "e": "Dimensione",
+    "t": "scelta",
+    "opzioni": [
+     "$MLT^{-1}$",
+     "$MLT^{-2}$",
+     "$ML^{2}T^{-2}$",
+     "$ML^{-1}T^{-2}$"
+    ],
+    "v": "$MLT^{-2}$"
+   }
+  ]
+ },
+ "unita-di-misura/14": {
+  "campi": [
+   {
+    "e": "Dimensione di $k$",
+    "t": "scelta",
+    "opzioni": [
+     "$MLT^{-2}$",
+     "$MT^{-2}$",
+     "$MT^{-1}$",
+     "$ML^{-1}T^{-2}$"
+    ],
+    "v": "$MT^{-2}$"
+   }
+  ]
+ },
+ "vettori-e-componenti/2": {
+  "campi": [
+   {
+    "e": "$\\vec A+\\vec B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "3"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/3": {
+  "campi": [
+   {
+    "e": "$\\vec A-\\vec B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-3",
+     "5"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/4": {
+  "campi": [
+   {
+    "e": "$-3\\vec A$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "-12"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/7": {
+  "campi": [
+   {
+    "e": "$\\vec A\\times\\vec B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "0",
+     "12"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/8": {
+  "campi": [
+   {
+    "e": "Versore di $\\vec A$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{5}{13}",
+     "\\frac{12}{13}"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/9": {
+  "campi": [
+   {
+    "e": "Componenti $(F_x, F_y)$ in $\\mathrm{N}$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-5\\sqrt{3}",
+     "5"
+    ]
+   }
+  ]
+ },
+ "vettori-e-componenti/13": {
+  "campi": [
+   {
+    "e": "$\\vec A\\times\\vec B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "-7",
+     "-1"
+    ]
+   }
+  ]
+ }
+}

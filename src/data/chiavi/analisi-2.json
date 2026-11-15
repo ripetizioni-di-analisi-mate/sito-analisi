@@ -1,4 +1,1559 @@
 {
+ "calcolo-differenziale/1": {
+  "campi": [
+   {
+    "e": "$\\nabla f(1, 1)$",
+    "t": "valori",
+    "v": [
+     "5",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "calcolo-differenziale/2": {
+  "campi": [
+   {
+    "e": "$\\nabla f(2, 0)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "calcolo-differenziale/3": {
+  "campi": [
+   {
+    "e": "$f_x(x, y)$",
+    "t": "funzione",
+    "v": "2xy \\cos\\left( x^2 y \\right)",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$f_y(x, y)$",
+    "t": "funzione",
+    "v": "x^2 \\cos\\left( x^2 y \\right)",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "calcolo-differenziale/4": {
+  "campi": [
+   {
+    "e": "$f_x(0, 0)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$f_y(0, 0)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "In $(0, 0)$ la funzione $f$",
+    "t": "scelta",
+    "opzioni": [
+     "è differenziabile",
+     "non è differenziabile"
+    ],
+    "v": "non è differenziabile"
+   }
+  ]
+ },
+ "calcolo-differenziale/5": {
+  "campi": [
+   {
+    "e": "In $(0, 0)$ la funzione $f$",
+    "t": "scelta",
+    "opzioni": [
+     "è differenziabile",
+     "non è differenziabile"
+    ],
+    "v": "è differenziabile"
+   }
+  ]
+ },
+ "calcolo-differenziale/6": {
+  "campi": [
+   {
+    "e": "$D_{\\mathbf{v}} f(2, 1)$",
+    "t": "numero",
+    "v": "\\frac{7\\sqrt{2}}{2}"
+   }
+  ]
+ },
+ "calcolo-differenziale/7": {
+  "campi": [
+   {
+    "e": "Versore della direzione di massima crescita",
+    "t": "valori",
+    "v": [
+     "4\\sqrt{17}/17",
+     "\\sqrt{17}/17"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Valore massimo della derivata direzionale",
+    "t": "numero",
+    "v": "\\sqrt{17}"
+   }
+  ]
+ },
+ "calcolo-differenziale/8": {
+  "campi": [
+   {
+    "e": "Piano tangente",
+    "t": "equazione",
+    "v": "z = 4x - 4y - 2",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "calcolo-differenziale/9": {
+  "campi": [
+   {
+    "e": "Punto del grafico",
+    "t": "valori",
+    "v": [
+     "2",
+     "-3",
+     "-13"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Piano tangente",
+    "t": "equazione",
+    "v": "z = -13",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "calcolo-differenziale/10": {
+  "campi": [
+   {
+    "e": "$F'(0)$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "calcolo-differenziale/11": {
+  "campi": [
+   {
+    "e": "$\\dfrac{\\partial F}{\\partial s}(2, 1)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$\\dfrac{\\partial F}{\\partial t}(2, 1)$",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "calcolo-differenziale/12": {
+  "campi": [
+   {
+    "e": "$H_f(1, 1)$",
+    "t": "matrice",
+    "v": [
+     [
+      "12",
+      "-4"
+     ],
+     [
+      "-4",
+      "12"
+     ]
+    ]
+   }
+  ]
+ },
+ "calcolo-differenziale/13": {
+  "campi": [
+   {
+    "e": "$f_{xy}(x, y)$",
+    "t": "funzione",
+    "v": "6x^2 e^{2y}",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Confronto con $f_{yx}$",
+    "t": "scelta",
+    "opzioni": [
+     "$f_{xy} = f_{yx}$",
+     "$f_{xy} \\neq f_{yx}$"
+    ],
+    "v": "$f_{xy} = f_{yx}$"
+   }
+  ]
+ },
+ "calcolo-differenziale/14": {
+  "campi": [
+   {
+    "e": "$T_2(x, y)$",
+    "t": "funzione",
+    "v": "y + xy - \\frac{y^2}{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "campi-vettoriali/1": {
+  "campi": [
+   {
+    "e": "Su $\\mathbb{R}^2$ il campo",
+    "t": "scelta",
+    "opzioni": [
+     "è conservativo",
+     "non è conservativo"
+    ],
+    "v": "è conservativo"
+   },
+   {
+    "e": "Potenziale $U(x, y)$",
+    "t": "funzione",
+    "v": "x^3 + 2xy - y^5",
+    "var": [
+     "x",
+     "y"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "campi-vettoriali/2": {
+  "campi": [
+   {
+    "e": "Su $\\mathbb{R}^2$ il campo",
+    "t": "scelta",
+    "opzioni": [
+     "è conservativo",
+     "non è conservativo"
+    ],
+    "v": "non è conservativo"
+   }
+  ]
+ },
+ "campi-vettoriali/3": {
+  "campi": [
+   {
+    "e": "Su $\\mathbb{R}^2$ il campo",
+    "t": "scelta",
+    "opzioni": [
+     "è conservativo",
+     "non è conservativo"
+    ],
+    "v": "è conservativo"
+   },
+   {
+    "e": "Potenziale $U(x, y)$",
+    "t": "funzione",
+    "v": "x^2 e^y - y^2",
+    "var": [
+     "x",
+     "y"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "campi-vettoriali/4": {
+  "campi": [
+   {
+    "e": "Lavoro",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "campi-vettoriali/5": {
+  "campi": [
+   {
+    "e": "Lavoro",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "campi-vettoriali/6": {
+  "campi": [
+   {
+    "e": "Circuitazione",
+    "t": "numero",
+    "v": "\\pi"
+   }
+  ]
+ },
+ "campi-vettoriali/7": {
+  "campi": [
+   {
+    "e": "Lavoro",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "campi-vettoriali/8": {
+  "campi": [
+   {
+    "e": "Circuitazione",
+    "t": "numero",
+    "v": "18\\pi"
+   }
+  ]
+ },
+ "campi-vettoriali/9": {
+  "campi": [
+   {
+    "e": "Circuitazione",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   }
+  ]
+ },
+ "campi-vettoriali/10": {
+  "campi": [
+   {
+    "e": "Area",
+    "t": "numero",
+    "v": "10\\pi"
+   }
+  ]
+ },
+ "campi-vettoriali/11": {
+  "campi": [
+   {
+    "e": "Area",
+    "t": "numero",
+    "v": "9"
+   }
+  ]
+ },
+ "campi-vettoriali/12": {
+  "campi": [
+   {
+    "e": "Su $\\mathbb{R}^3$ il campo",
+    "t": "scelta",
+    "opzioni": [
+     "è conservativo",
+     "non è conservativo"
+    ],
+    "v": "è conservativo"
+   },
+   {
+    "e": "Potenziale $U(x, y, z)$",
+    "t": "funzione",
+    "v": "x^2 z + y^3 z^2",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "campi-vettoriali/13": {
+  "campi": [
+   {
+    "e": "Lavoro",
+    "t": "numero",
+    "v": "7"
+   }
+  ]
+ },
+ "campi-vettoriali/14": {
+  "campi": [
+   {
+    "e": "Su $A$ il campo",
+    "t": "scelta",
+    "opzioni": [
+     "è conservativo",
+     "non è conservativo, perché $A$ non è semplicemente connesso",
+     "non è conservativo, perché il campo non è irrotazionale"
+    ],
+    "v": "è conservativo"
+   },
+   {
+    "e": "Potenziale $U(x, y)$",
+    "t": "funzione",
+    "v": "\\frac{1}{2} \\ln (x^2 + y^2)",
+    "var": [
+     "x",
+     "y"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/1": {
+  "campi": [
+   {
+    "e": "La curva $\\gamma$ su $[1, 2]$ è",
+    "t": "scelta",
+    "opzioni": [
+     "regolare",
+     "regolare a tratti, ma non regolare",
+     "non regolare"
+    ],
+    "v": "regolare"
+   },
+   {
+    "e": "Vettore tangente $\\gamma'(1)$",
+    "t": "valori",
+    "v": [
+     "2",
+     "6"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/2": {
+  "campi": [
+   {
+    "e": "La curva $\\gamma$ su $[-1, 1]$ è",
+    "t": "scelta",
+    "opzioni": [
+     "regolare",
+     "regolare a tratti, ma non regolare",
+     "né regolare né regolare a tratti"
+    ],
+    "v": "regolare a tratti, ma non regolare"
+   },
+   {
+    "e": "Sostegno di $\\gamma$",
+    "t": "scelta",
+    "opzioni": [
+     "arco di parabola $y = x^2$ con $x \\in [-1, 1]$",
+     "arco di parabola $y = x^2$ con $x \\in [0, 1]$",
+     "arco della curva $y = x^3$ con $x \\in [-1, 1]$",
+     "segmento di estremi $(-1, 1)$ e $(1, 1)$"
+    ],
+    "v": "arco di parabola $y = x^2$ con $x \\in [-1, 1]$"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/3": {
+  "campi": [
+   {
+    "e": "Retta tangente in $\\gamma\\!\\left(\\frac{\\pi}{4}\\right)$",
+    "t": "equazione",
+    "v": "y = -\\frac{x}{2} + \\sqrt{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/4": {
+  "campi": [
+   {
+    "e": "$L(\\gamma)$",
+    "t": "numero",
+    "v": "\\frac{\\pi^2}{2}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/5": {
+  "campi": [
+   {
+    "e": "$L(\\gamma)$",
+    "t": "numero",
+    "v": "12\\pi"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/6": {
+  "campi": [
+   {
+    "e": "Lunghezza del grafico",
+    "t": "numero",
+    "v": "\\frac{14}{3}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/7": {
+  "campi": [
+   {
+    "e": "Ascissa curvilinea $s(t)$",
+    "t": "funzione",
+    "v": "5t",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "Prima componente di $\\tilde{\\gamma}(s)$",
+    "t": "funzione",
+    "v": "\\frac{3s}{5}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Seconda componente di $\\tilde{\\gamma}(s)$",
+    "t": "funzione",
+    "v": "\\frac{4s}{5}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Estremo superiore dell'intervallo di $s$",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/8": {
+  "campi": [
+   {
+    "e": "$\\int_\\gamma xy \\, ds$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{2}}{3}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/9": {
+  "campi": [
+   {
+    "e": "$\\int_\\gamma z^2 \\, ds$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{2}\\, \\pi^3}{3}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/10": {
+  "campi": [
+   {
+    "e": "Massa $m$ del filo",
+    "t": "numero",
+    "v": "\\frac{15}{2}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/11": {
+  "campi": [
+   {
+    "e": "Ascissa $\\bar{x}$ del baricentro",
+    "t": "numero",
+    "v": "\\frac{2}{\\pi}"
+   },
+   {
+    "e": "Ordinata $\\bar{y}$ del baricentro",
+    "t": "numero",
+    "v": "\\frac{2}{\\pi}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/12": {
+  "campi": [
+   {
+    "e": "Lavoro $\\int_\\gamma F \\cdot d\\gamma$",
+    "t": "numero",
+    "v": "\\frac{13}{15}"
+   }
+  ]
+ },
+ "curve-e-integrali-di-linea/13": {
+  "campi": [
+   {
+    "e": "Lavoro in senso antiorario",
+    "t": "numero",
+    "v": "8\\pi"
+   }
+  ]
+ },
+ "equazioni-differenziali/1": {
+  "campi": [
+   {
+    "e": "Integrale generale",
+    "t": "scelta",
+    "opzioni": [
+     "$y = C e^{x^2}$",
+     "$y = e^{x^2} + C$",
+     "$y = C e^{\\frac{x^2}{2}}$",
+     "$y = C e^{2x}$"
+    ],
+    "v": "$y = C e^{x^2}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/2": {
+  "campi": [
+   {
+    "e": "Integrale generale",
+    "t": "scelta",
+    "opzioni": [
+     "$y = C e^{\\sin x}$",
+     "$y = e^{\\sin x} + C$",
+     "$y = C e^{-\\sin x}$",
+     "$y = C e^{\\cos x}$"
+    ],
+    "v": "$y = C e^{\\sin x}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/3": {
+  "campi": [
+   {
+    "e": "Soluzione $y(x)$",
+    "t": "funzione",
+    "v": "\\frac{1}{1 - x^2}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Intervallo di esistenza",
+    "t": "intervallo",
+    "v": "(-1, 1)"
+   }
+  ]
+ },
+ "equazioni-differenziali/4": {
+  "campi": [
+   {
+    "e": "Soluzione $y(x)$",
+    "t": "funzione",
+    "v": "\\sqrt{x + 1}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Intervallo di esistenza",
+    "t": "intervallo",
+    "v": "(-1, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-differenziali/5": {
+  "campi": [
+   {
+    "e": "Integrale generale",
+    "t": "scelta",
+    "opzioni": [
+     "$y = 2 + C e^{-3x}$",
+     "$y = C e^{-3x}$",
+     "$y = 2 + C e^{3x}$",
+     "$y = 6 + C e^{-3x}$"
+    ],
+    "v": "$y = 2 + C e^{-3x}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/6": {
+  "campi": [
+   {
+    "e": "Integrale generale per $x > 0$",
+    "t": "scelta",
+    "opzioni": [
+     "$y = \\frac{\\ln x + C}{x}$",
+     "$y = \\frac{\\ln x}{x} + C$",
+     "$y = \\frac{C}{x} - \\frac{1}{x^2}$",
+     "$y = C x + \\frac{\\ln x}{x}$"
+    ],
+    "v": "$y = \\frac{\\ln x + C}{x}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/7": {
+  "campi": [
+   {
+    "e": "Soluzione $y(x)$",
+    "t": "funzione",
+    "v": "2 + e^{-2x}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/8": {
+  "campi": [
+   {
+    "e": "Soluzioni non nulle",
+    "t": "scelta",
+    "opzioni": [
+     "$y = \\frac{e^{-x}}{C - x}$",
+     "$y = \\frac{e^{x}}{C - x}$",
+     "$y = \\frac{e^{-x}}{C + x}$",
+     "$y = C e^{-x}$"
+    ],
+    "v": "$y = \\frac{e^{-x}}{C - x}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni non nulle",
+    "t": "scelta",
+    "opzioni": [
+     "$y = \\frac{2}{1 + C e^{-2x}}$",
+     "$y = \\frac{1}{1 + C e^{-2x}}$",
+     "$y = \\frac{2}{1 + C e^{2x}}$",
+     "$y = 2 + C e^{-2x}$"
+    ],
+    "v": "$y = \\frac{2}{1 + C e^{-2x}}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/10": {
+  "campi": [
+   {
+    "e": "Radici dell'equazione caratteristica",
+    "t": "valori",
+    "v": [
+     "2",
+     "-2"
+    ]
+   },
+   {
+    "e": "Soluzione particolare polinomiale",
+    "t": "funzione",
+    "v": "-2x^2 - 1",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/11": {
+  "campi": [
+   {
+    "e": "Radici dell'equazione caratteristica",
+    "t": "valori",
+    "v": [
+     "2",
+     "3"
+    ]
+   },
+   {
+    "e": "Integrale generale",
+    "t": "scelta",
+    "opzioni": [
+     "$y = C_1 e^{2x} + C_2 e^{3x}$",
+     "$y = C_1 e^{-2x} + C_2 e^{-3x}$",
+     "$y = (C_1 + C_2 x) e^{2x}$",
+     "$y = C_1 \\cos(2x) + C_2 \\sin(3x)$"
+    ],
+    "v": "$y = C_1 e^{2x} + C_2 e^{3x}$"
+   }
+  ]
+ },
+ "equazioni-differenziali/12": {
+  "campi": [
+   {
+    "e": "Integrale generale",
+    "t": "scelta",
+    "opzioni": [
+     "$y = e^{-x} \\left( C_1 \\cos x + C_2 \\sin x \\right)$",
+     "$y = e^{x} \\left( C_1 \\cos x + C_2 \\sin x \\right)$",
+     "$y = C_1 e^{-x} + C_2 e^{x}$",
+     "$y = e^{-x} \\left( C_1 \\cos(2x) + C_2 \\sin(2x) \\right)$"
+    ],
+    "v": "$y = e^{-x} \\left( C_1 \\cos x + C_2 \\sin x \\right)$"
+   }
+  ]
+ },
+ "equazioni-differenziali/13": {
+  "campi": [
+   {
+    "e": "Soluzione particolare della forma $x\\left(a \\cos(2x) + b \\sin(2x)\\right)$",
+    "t": "funzione",
+    "v": "-2x \\cos(2x)",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/14": {
+  "campi": [
+   {
+    "e": "Soluzione $y(x)$",
+    "t": "funzione",
+    "v": "(1 + 2x) e^{x}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/15": {
+  "campi": [
+   {
+    "e": "Prima componente di $Y(x)$",
+    "t": "funzione",
+    "v": "2e^{5x} + e^{3x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Seconda componente di $Y(x)$",
+    "t": "funzione",
+    "v": "2e^{5x} - e^{3x}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/16": {
+  "campi": [
+   {
+    "e": "Prima componente di $Y(x)$",
+    "t": "funzione",
+    "v": "e^{x-2}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Seconda componente di $Y(x)$",
+    "t": "funzione",
+    "v": "4e^{-2(x-2)}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/17": {
+  "campi": [
+   {
+    "e": "Elemento di posto $(1,1)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "e^{2x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(1,2)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "x e^{2x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2,1)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2,2)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "e^{2x}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/18": {
+  "campi": [
+   {
+    "e": "Elemento di posto $(1,1)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "\\cos x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(1,2)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "-\\sin x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2,1)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "\\sin x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2,2)$ di $e^{xA}$",
+    "t": "funzione",
+    "v": "\\cos x",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/1": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "disco chiuso di centro l'origine e raggio $3$",
+     "disco aperto di centro l'origine e raggio $3$",
+     "disco chiuso di centro l'origine e raggio $9$",
+     "circonferenza di centro l'origine e raggio $3$",
+     "esterno del disco di centro l'origine e raggio $3$"
+    ],
+    "v": "disco chiuso di centro l'origine e raggio $3$"
+   },
+   {
+    "e": "Il dominio è compatto?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/2": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "semipiano sopra la retta $y = 1 - x$, retta esclusa",
+     "semipiano sopra la retta $y = 1 - x$, retta inclusa",
+     "semipiano sotto la retta $y = 1 - x$, retta esclusa",
+     "semipiano sotto la retta $y = 1 - x$, retta inclusa"
+    ],
+    "v": "semipiano sopra la retta $y = 1 - x$, retta esclusa"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "aperto",
+     "chiuso",
+     "né aperto né chiuso"
+    ],
+    "v": "aperto"
+   },
+   {
+    "e": "Il dominio è limitato?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/3": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "regione sopra la parabola $y = x^2$, parabola inclusa, privata dei punti della circonferenza $x^2 + y^2 = 4$",
+     "regione sopra la parabola $y = x^2$, parabola esclusa, privata dei punti della circonferenza $x^2 + y^2 = 4$",
+     "regione sopra la parabola $y = x^2$, parabola inclusa, intersecata con il disco $x^2 + y^2 < 4$",
+     "regione sotto la parabola $y = x^2$, parabola inclusa, privata dei punti della circonferenza $x^2 + y^2 = 4$"
+    ],
+    "v": "regione sopra la parabola $y = x^2$, parabola inclusa, privata dei punti della circonferenza $x^2 + y^2 = 4$"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/4": {
+  "campi": [
+   {
+    "e": "Centro delle curve di livello circolari",
+    "t": "valori",
+    "v": [
+     "0",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Raggio della curva di livello $k$, in funzione di $k$",
+    "t": "funzione",
+    "v": "\\sqrt{k + 1}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Valore di $k$ per cui la curva di livello è un solo punto",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Valori di $k$ per cui la curva di livello è vuota",
+    "t": "intervallo",
+    "v": "(-\\infty, -1)",
+    "var": "k"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/5": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui l'insieme di livello è vuoto",
+    "t": "intervallo",
+    "v": "(-\\infty, 0]",
+    "var": "k"
+   },
+   {
+    "e": "Curva di livello per $k = 1$",
+    "t": "scelta",
+    "opzioni": [
+     "l'unione dei due assi",
+     "un'iperbole equilatera",
+     "il solo punto $(0, 0)$",
+     "vuota"
+    ],
+    "v": "l'unione dei due assi"
+   },
+   {
+    "e": "Quadranti dei rami per $k > 1$",
+    "t": "scelta",
+    "opzioni": [
+     "primo e terzo",
+     "secondo e quarto"
+    ],
+    "v": "primo e terzo"
+   },
+   {
+    "e": "Quadranti dei rami per $0 < k < 1$",
+    "t": "scelta",
+    "opzioni": [
+     "primo e terzo",
+     "secondo e quarto"
+    ],
+    "v": "secondo e quarto"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/6": {
+  "campi": [
+   {
+    "e": "Limite della restrizione all'asse $x$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Limite della restrizione all'asse $y$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Il limite in $(0, 0)$",
+    "t": "scelta",
+    "opzioni": [
+     "esiste",
+     "non esiste"
+    ],
+    "v": "non esiste"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/7": {
+  "campi": [
+   {
+    "e": "Limite lungo le rette per l'origine",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Limite lungo la curva $y = x^3$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Il limite in $(0, 0)$",
+    "t": "scelta",
+    "opzioni": [
+     "esiste e vale $0$",
+     "esiste e vale $\\frac{1}{2}$",
+     "non esiste"
+    ],
+    "v": "non esiste"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/8": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/9": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/10": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/11": {
+  "campi": [
+   {
+    "e": "Continuità di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "continua in tutto $\\mathbb{R}^2$",
+     "continua fuori dall'origine, non continua in $(0, 0)$",
+     "non continua in nessun punto dell'asse $x$"
+    ],
+    "v": "continua in tutto $\\mathbb{R}^2$"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/12": {
+  "campi": [
+   {
+    "e": "Limite della restrizione all'asse $x$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Limite della restrizione alla retta $y = -x$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Continuità di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "continua in tutto $\\mathbb{R}^2$",
+     "continua fuori dall'origine, non continua in $(0, 0)$"
+    ],
+    "v": "continua fuori dall'origine, non continua in $(0, 0)$"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/13": {
+  "campi": [
+   {
+    "e": "La funzione si prolunga per continuità nell'origine?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$\\tilde{f}(0, 0)$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "funzioni-di-piu-variabili/14": {
+  "campi": [
+   {
+    "e": "Su $K$ la funzione $f$ ammette",
+    "t": "scelta",
+    "opzioni": [
+     "massimo e minimo assoluti",
+     "solo il massimo assoluto",
+     "solo il minimo assoluto",
+     "né massimo né minimo assoluti"
+    ],
+    "v": "massimo e minimo assoluti"
+   }
+  ]
+ },
+ "funzioni-implicite/1": {
+  "campi": [
+   {
+    "e": "$F_y(1, 1)$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$\\varphi'(1)$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "funzioni-implicite/2": {
+  "campi": [
+   {
+    "e": "$F_y(1, 0)$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\varphi'(1)$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   }
+  ]
+ },
+ "funzioni-implicite/3": {
+  "campi": [
+   {
+    "e": "Retta tangente in $(1, 1)$",
+    "t": "equazione",
+    "v": "y = -\\frac{1}{2}x + \\frac{3}{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-implicite/4": {
+  "campi": [
+   {
+    "e": "Retta tangente in $(0, 1)$",
+    "t": "equazione",
+    "v": "y = 1 - 2x",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-implicite/5": {
+  "campi": [
+   {
+    "e": "Punto a tangente orizzontale con $x > 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto a tangente orizzontale con $x < 0$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "funzioni-implicite/6": {
+  "campi": [
+   {
+    "e": "$\\varphi'(1)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$\\varphi''(1)$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   }
+  ]
+ },
+ "funzioni-implicite/7": {
+  "campi": [
+   {
+    "e": "$\\varphi'(1)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\varphi''(1)$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Natura di $x_0 = 1$ per $\\varphi$",
+    "t": "scelta",
+    "opzioni": [
+     "punto di minimo locale",
+     "punto di massimo locale",
+     "né massimo né minimo"
+    ],
+    "v": "punto di minimo locale"
+   }
+  ]
+ },
+ "funzioni-implicite/8": {
+  "campi": [
+   {
+    "e": "$g_x(1, 1)$",
+    "t": "numero",
+    "v": "-\\frac{2}{5}"
+   },
+   {
+    "e": "$g_y(1, 1)$",
+    "t": "numero",
+    "v": "\\frac{2}{5}"
+   }
+  ]
+ },
+ "funzioni-implicite/9": {
+  "campi": [
+   {
+    "e": "Piano tangente in $(1, 1, 1)$",
+    "t": "equazione",
+    "v": "2x + 2y + 3z = 7",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "funzioni-implicite/10": {
+  "campi": [
+   {
+    "e": "Ascisse dei punti in cui Dini non si applica rispetto a $y$",
+    "t": "valori",
+    "v": [
+     "\\sqrt{3}",
+     "-\\sqrt{3}",
+     "0"
+    ]
+   },
+   {
+    "e": "Ordinata di tali punti",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Vicino a ciascuno di questi punti",
+    "t": "scelta",
+    "opzioni": [
+     "la curva è il grafico di una funzione $x = \\psi(y)$ e la tangente è verticale",
+     "la curva è il grafico di una funzione $x = \\psi(y)$ e la tangente è orizzontale",
+     "il teorema di Dini non si applica neanche rispetto a $x$"
+    ],
+    "v": "la curva è il grafico di una funzione $x = \\psi(y)$ e la tangente è verticale"
+   }
+  ]
+ },
+ "funzioni-implicite/11": {
+  "campi": [
+   {
+    "e": "$F_y(0, 0)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$\\varphi'(0)$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Retta tangente nell'origine",
+    "t": "equazione",
+    "v": "y = -x",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-implicite/12": {
+  "campi": [
+   {
+    "e": "Determinante Jacobiano rispetto a $(y, z)$ nel punto",
+    "t": "numero",
+    "v": "-10"
+   },
+   {
+    "e": "$y'(1)$",
+    "t": "numero",
+    "v": "-\\frac{3}{5}"
+   },
+   {
+    "e": "$z'(1)$",
+    "t": "numero",
+    "v": "-\\frac{1}{5}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/1": {
+  "campi": [
+   {
+    "e": "$\\iint_R y \\sin x \\, dx\\, dy$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/2": {
+  "campi": [
+   {
+    "e": "$\\iint_R x\\, e^{xy}\\, dx\\, dy$",
+    "t": "numero",
+    "v": "\\frac{e^2 - 3}{2}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/3": {
+  "campi": [
+   {
+    "e": "$\\iint_T x \\, dx\\, dy$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/4": {
+  "campi": [
+   {
+    "e": "$\\iint_D (x + y)\\, dx\\, dy$",
+    "t": "numero",
+    "v": "\\frac{7}{20}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/5": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale iterato",
+    "t": "numero",
+    "v": "\\frac{\\sin 1}{2}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/6": {
+  "campi": [
+   {
+    "e": "$\\iint_D \\frac{1}{1 + x^2 + y^2}\\, dx\\, dy$",
+    "t": "numero",
+    "v": "\\pi \\ln 2"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/7": {
+  "campi": [
+   {
+    "e": "Ascissa $x_G$ del baricentro",
+    "t": "numero",
+    "v": "\\frac{4}{3\\pi}"
+   },
+   {
+    "e": "Ordinata $y_G$ del baricentro",
+    "t": "numero",
+    "v": "\\frac{4}{3\\pi}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/8": {
+  "campi": [
+   {
+    "e": "Area della regione",
+    "t": "numero",
+    "v": "\\ln 2"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/9": {
+  "campi": [
+   {
+    "e": "$\\iint_D \\left( \\frac{x^2}{9} + \\frac{y^2}{4} \\right) dx\\, dy$",
+    "t": "numero",
+    "v": "3\\pi"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/10": {
+  "campi": [
+   {
+    "e": "$\\iint_D \\left( x^3 + 5y + 2 \\right) dx\\, dy$",
+    "t": "numero",
+    "v": "8\\pi"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/11": {
+  "campi": [
+   {
+    "e": "$\\iiint_T z \\, dx\\, dy\\, dz$",
+    "t": "numero",
+    "v": "\\frac{2}{3}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/12": {
+  "campi": [
+   {
+    "e": "$\\iiint_E z \\, dx\\, dy\\, dz$",
+    "t": "numero",
+    "v": "\\frac{64\\pi}{3}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/13": {
+  "campi": [
+   {
+    "e": "$\\iiint_E z \\sqrt{x^2 + y^2}\\, dx\\, dy\\, dz$",
+    "t": "numero",
+    "v": "\\frac{4\\pi}{3}"
+   }
+  ]
+ },
+ "integrali-doppi-e-tripli/14": {
+  "campi": [
+   {
+    "e": "$\\iiint_E \\left( x^2 + y^2 + z^2 \\right) dx\\, dy\\, dz$",
+    "t": "numero",
+    "v": "\\frac{128\\pi}{5}"
+   }
+  ]
+ },
  "massimi-e-minimi/1": {
   "campi": [
    {
@@ -433,6 +1988,921 @@
     "t": "numero",
     "v": "12",
     "u": "dm^2"
+   }
+  ]
+ },
+ "serie-di-fourier/1": {
+  "campi": [
+   {
+    "e": "$a_n$ per $n \\geq 0$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{8}{n\\pi}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "serie-di-fourier/2": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$a_n$ per $n \\geq 1$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{4}{n\\pi}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "serie-di-fourier/3": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "\\pi"
+   },
+   {
+    "e": "$a_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{4}{\\pi n^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$a_n$ per $n \\geq 2$ pari",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n \\geq 1$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "serie-di-fourier/4": {
+  "campi": [
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "-\\frac{1}{4}"
+   },
+   {
+    "e": "Coefficienti diversi da $b_1$ e $b_3$",
+    "t": "scelta",
+    "opzioni": [
+     "tutti nulli",
+     "non tutti nulli"
+    ],
+    "v": "tutti nulli"
+   }
+  ]
+ },
+ "serie-di-fourier/5": {
+  "campi": [
+   {
+    "e": "$a_n$ per $n \\geq 0$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{1}{n}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "funzione",
+    "v": "-\\frac{1}{n}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "serie-di-fourier/6": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "\\frac{2\\pi^2}{3} + 2"
+   },
+   {
+    "e": "$a_n$ per $n$ pari",
+    "t": "funzione",
+    "v": "\\frac{4}{n^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$a_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "-\\frac{4}{n^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "funzione",
+    "v": "\\frac{4}{n}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "-\\frac{4}{n}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "serie-di-fourier/7": {
+  "campi": [
+   {
+    "e": "Somma della serie in $x = 0$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Somma della serie in $x = \\pi$",
+    "t": "numero",
+    "v": "\\frac{1 + \\pi^2}{2}"
+   }
+  ]
+ },
+ "serie-di-fourier/8": {
+  "campi": [
+   {
+    "e": "Somma della serie in $x = 0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Somma della serie in $x = \\pi$",
+    "t": "numero",
+    "v": "\\frac{e^{\\pi} + e^{-\\pi}}{2}"
+   }
+  ]
+ },
+ "serie-di-fourier/9": {
+  "campi": [
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{4}{n\\pi}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\sum_{k=0}^{\\infty} \\frac{(-1)^k}{2k+1}$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "serie-di-fourier/10": {
+  "campi": [
+   {
+    "e": "$\\sum_{n=1}^{\\infty} \\frac{1}{n^6}$",
+    "t": "numero",
+    "v": "\\frac{\\pi^6}{945}"
+   }
+  ]
+ },
+ "serie-di-fourier/11": {
+  "campi": [
+   {
+    "e": "$a_n$ per $n \\geq 0$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "\\frac{4}{n\\pi}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$b_n$ per $n$ pari",
+    "t": "funzione",
+    "v": "-\\frac{4}{n\\pi}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "serie-di-fourier/12": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$a_n$ per $n$ dispari",
+    "t": "funzione",
+    "v": "-\\frac{4}{n^2\\pi^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$a_n$ per $n \\geq 2$ pari",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_n$ per $n \\geq 1$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Convergenza della serie su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme",
+     "non converge ovunque"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "serie-di-potenze/1": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-2, 2]"
+   }
+  ]
+ },
+ "serie-di-potenze/2": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{1}{3}, \\frac{1}{3}\\right)"
+   }
+  ]
+ },
+ "serie-di-potenze/3": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-2, 2)"
+   }
+  ]
+ },
+ "serie-di-potenze/4": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/5": {
+  "campi": [
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-1, 3)"
+   }
+  ]
+ },
+ "serie-di-potenze/6": {
+  "campi": [
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-5, 1]"
+   }
+  ]
+ },
+ "serie-di-potenze/7": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/8": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-2, 2)"
+   }
+  ]
+ },
+ "serie-di-potenze/9": {
+  "campi": [
+   {
+    "e": "Coefficiente di $x^2$ nello sviluppo",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Coefficiente di $x^5$ nello sviluppo",
+    "t": "numero",
+    "v": "\\frac{2}{3}"
+   },
+   {
+    "e": "Regione di validità",
+    "t": "scelta",
+    "opzioni": [
+     "$x \\in \\mathbb{R}$",
+     "$|x| < 1$",
+     "$|x| < 2$",
+     "$|x| < \\frac{1}{2}$"
+    ],
+    "v": "$x \\in \\mathbb{R}$"
+   }
+  ]
+ },
+ "serie-di-potenze/10": {
+  "campi": [
+   {
+    "e": "Termine noto dello sviluppo",
+    "t": "numero",
+    "v": "\\frac{1}{5}"
+   },
+   {
+    "e": "Coefficiente di $x^3$ nello sviluppo",
+    "t": "numero",
+    "v": "-\\frac{1}{625}"
+   },
+   {
+    "e": "Regione di validità",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/11": {
+  "campi": [
+   {
+    "e": "Coefficiente di $x^3$ nello sviluppo",
+    "t": "numero",
+    "v": "-\\frac{1}{18}"
+   },
+   {
+    "e": "Coefficiente di $x^5$ nello sviluppo",
+    "t": "numero",
+    "v": "\\frac{1}{600}"
+   }
+  ]
+ },
+ "serie-di-potenze/12": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\frac{5}{16}"
+   }
+  ]
+ },
+ "serie-di-potenze/13": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\ln \\frac{3}{2}"
+   }
+  ]
+ },
+ "serie-di-potenze/14": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/1": {
+  "campi": [
+   {
+    "e": "$f(x)$ per $0 \\leq x < 1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$f(1)$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "$f(x)$ per $x > 1$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/2": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/3": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Convergenza su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/4": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\sup_{[0, +\\infty)} |f_n - f|$",
+    "t": "funzione",
+    "v": "\\frac{4}{n^2 e^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Convergenza su $[0, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/5": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\sup_{\\mathbb{R}} |f_n - f|$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Convergenza su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "solo puntuale"
+   },
+   {
+    "e": "Convergenza su $[\\delta, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/6": {
+  "campi": [
+   {
+    "e": "$f(0)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$f(x)$ per $0 < x \\leq 1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Convergenza su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "solo puntuale"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/7": {
+  "campi": [
+   {
+    "e": "$\\sup_{\\mathbb{R}} |f_n|$",
+    "t": "funzione",
+    "v": "\\frac{1}{\\sqrt{n}}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$f_n'(0)$",
+    "t": "funzione",
+    "v": "\\sqrt{n}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "La successione $f_n'(0)$",
+    "t": "scelta",
+    "opzioni": [
+     "converge a $0$",
+     "converge a $1$",
+     "diverge a $+\\infty$",
+     "è indeterminata"
+    ],
+    "v": "diverge a $+\\infty$"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/8": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/9": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\ln 2"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/10": {
+  "campi": [
+   {
+    "e": "$\\int_0^1 n^2 x (1 - x)^n \\, dx$",
+    "t": "funzione",
+    "v": "\\frac{n^2}{(n+1)(n+2)}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Convergenza di $f_n$ su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "solo puntuale"
+    ],
+    "v": "solo puntuale"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/11": {
+  "campi": [
+   {
+    "e": "$\\sup_{\\mathbb{R}} |f_n|$",
+    "t": "funzione",
+    "v": "\\frac{1}{n^2 + 1}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Convergenza totale su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/12": {
+  "campi": [
+   {
+    "e": "$M_n = \\sup_{[0, +\\infty)} x^2 e^{-nx}$",
+    "t": "funzione",
+    "v": "\\frac{4}{n^2 e^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Convergenza totale su $[0, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/13": {
+  "campi": [
+   {
+    "e": "$\\sup_{\\mathbb{R}} \\left| \\frac{(-1)^n}{2n + x^2} \\right|$",
+    "t": "funzione",
+    "v": "\\frac{1}{2n}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Su $\\mathbb{R}$ la serie converge",
+    "t": "scelta",
+    "opzioni": [
+     "totalmente e uniformemente",
+     "uniformemente ma non totalmente",
+     "solo puntualmente"
+    ],
+    "v": "uniformemente ma non totalmente"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/14": {
+  "campi": [
+   {
+    "e": "$\\sup_{\\mathbb{R}}$ del modulo della derivata del termine $n$-esimo",
+    "t": "funzione",
+    "v": "\\frac{1}{n^3}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$f'(x)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sum_{n=1}^{\\infty} \\frac{\\cos(nx)}{n^3}$",
+     "$\\sum_{n=1}^{\\infty} \\frac{\\cos(nx)}{n^4}$",
+     "$-\\sum_{n=1}^{\\infty} \\frac{\\cos(nx)}{n^3}$",
+     "$\\sum_{n=1}^{\\infty} \\frac{\\sin(nx)}{n^3}$"
+    ],
+    "v": "$\\sum_{n=1}^{\\infty} \\frac{\\cos(nx)}{n^3}$"
+   }
+  ]
+ },
+ "superfici-e-flussi/1": {
+  "campi": [
+   {
+    "e": "Vettore normale $\\mathbf{N} = \\mathbf{r}_u \\wedge \\mathbf{r}_v$ in $(1, 1)$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "-2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Piano tangente",
+    "t": "equazione",
+    "v": "x + 2y - 2z = 1",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "superfici-e-flussi/2": {
+  "campi": [
+   {
+    "e": "Piano tangente",
+    "t": "equazione",
+    "v": "z = x + 2y",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "superfici-e-flussi/3": {
+  "campi": [
+   {
+    "e": "Area",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "superfici-e-flussi/4": {
+  "campi": [
+   {
+    "e": "Area",
+    "t": "numero",
+    "v": "9\\pi"
+   }
+  ]
+ },
+ "superfici-e-flussi/5": {
+  "campi": [
+   {
+    "e": "Area",
+    "t": "numero",
+    "v": "\\frac{\\pi}{6} \\left( 17\\sqrt{17} - 1 \\right)"
+   }
+  ]
+ },
+ "superfici-e-flussi/6": {
+  "campi": [
+   {
+    "e": "$\\iint_\\Sigma z^2 \\, d\\sigma$",
+    "t": "numero",
+    "v": "\\frac{4\\pi}{3}"
+   }
+  ]
+ },
+ "superfici-e-flussi/7": {
+  "campi": [
+   {
+    "e": "$\\iint_\\Sigma y^2 \\, d\\sigma$",
+    "t": "numero",
+    "v": "2\\pi"
+   }
+  ]
+ },
+ "superfici-e-flussi/8": {
+  "campi": [
+   {
+    "e": "$\\operatorname{div} \\mathbf{F}(1, 1, 1)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$\\operatorname{rot} \\mathbf{F}(1, 1, 1)$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "1",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "superfici-e-flussi/9": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "-4"
+   }
+  ]
+ },
+ "superfici-e-flussi/10": {
+  "campi": [
+   {
+    "e": "Flusso $\\Phi$",
+    "t": "numero",
+    "v": "8\\pi"
+   }
+  ]
+ },
+ "superfici-e-flussi/11": {
+  "campi": [
+   {
+    "e": "Flusso uscente $\\Phi$",
+    "t": "numero",
+    "v": "\\frac{12\\pi}{5}"
+   }
+  ]
+ },
+ "superfici-e-flussi/12": {
+  "campi": [
+   {
+    "e": "Flusso uscente $\\Phi$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "superfici-e-flussi/13": {
+  "campi": [
+   {
+    "e": "Circuitazione",
+    "t": "numero",
+    "v": "9\\pi"
    }
   ]
  }

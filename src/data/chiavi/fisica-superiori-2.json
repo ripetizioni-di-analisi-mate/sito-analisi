@@ -1,0 +1,1401 @@
+{
+ "calore/1": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "37800",
+    "u": "J"
+   }
+  ]
+ },
+ "calore/2": {
+  "campi": [
+   {
+    "e": "$\\Delta T$",
+    "t": "numero",
+    "v": "12",
+    "u": "K"
+   }
+  ]
+ },
+ "calore/3": {
+  "campi": [
+   {
+    "e": "$C$",
+    "t": "numero",
+    "v": "900",
+    "u": "J/K"
+   }
+  ]
+ },
+ "calore/4": {
+  "campi": [
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "228{,}571",
+    "u": "J/(kg K)"
+   }
+  ]
+ },
+ "calore/5": {
+  "campi": [
+   {
+    "e": "$T_e$",
+    "t": "numero",
+    "v": "41{,}8182",
+    "u": "°C"
+   }
+  ]
+ },
+ "calore/6": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "315",
+    "u": "s"
+   }
+  ]
+ },
+ "calore/7": {
+  "campi": [
+   {
+    "e": "$\\mathcal{P}$",
+    "t": "numero",
+    "v": "86{,}4",
+    "u": "W"
+   }
+  ]
+ },
+ "calore/8": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "302400",
+    "u": "J"
+   }
+  ]
+ },
+ "calore/9": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "50400",
+    "u": "J"
+   }
+  ]
+ },
+ "calore/10": {
+  "campi": [
+   {
+    "e": "$\\Delta T$",
+    "t": "numero",
+    "v": "11{,}6667",
+    "u": "K"
+   }
+  ]
+ },
+ "calore/11": {
+  "campi": [
+   {
+    "e": "$C$",
+    "t": "numero",
+    "v": "1080",
+    "u": "J/K"
+   }
+  ]
+ },
+ "calore/12": {
+  "campi": [
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "200",
+    "u": "J/(kg K)"
+   }
+  ]
+ },
+ "calore/13": {
+  "campi": [
+   {
+    "e": "$T_e$",
+    "t": "numero",
+    "v": "41{,}5385",
+    "u": "°C"
+   }
+  ]
+ },
+ "calore/14": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "441",
+    "u": "s"
+   }
+  ]
+ },
+ "cambiamenti-stato/1": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "167000",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/2": {
+  "campi": [
+   {
+    "e": "$m$",
+    "t": "numero",
+    "v": "0{,}05",
+    "u": "kg"
+   }
+  ]
+ },
+ "cambiamenti-stato/3": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "113000",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/4": {
+  "campi": [
+   {
+    "e": "$Q$ (positivo se assorbito)",
+    "t": "numero",
+    "v": "-167000",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/5": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "215300",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/6": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "417{,}5",
+    "u": "s"
+   }
+  ]
+ },
+ "cambiamenti-stato/7": {
+  "campi": [
+   {
+    "e": "$m_{\\mathrm{fusa}}$",
+    "t": "numero",
+    "v": "0{,}0628743",
+    "u": "kg"
+   }
+  ]
+ },
+ "cambiamenti-stato/8": {
+  "campi": [
+   {
+    "e": "$|Q|$",
+    "t": "numero",
+    "v": "113000",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/9": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "200400",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/10": {
+  "campi": [
+   {
+    "e": "$m$",
+    "t": "numero",
+    "v": "0{,}06",
+    "u": "kg"
+   }
+  ]
+ },
+ "cambiamenti-stato/11": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "135600",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/12": {
+  "campi": [
+   {
+    "e": "$Q$ (positivo se assorbito)",
+    "t": "numero",
+    "v": "-200400",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/13": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "263400",
+    "u": "J"
+   }
+  ]
+ },
+ "cambiamenti-stato/14": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "445{,}333",
+    "u": "s"
+   }
+  ]
+ },
+ "lavoro-energia/1": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "90",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/2": {
+  "campi": [
+   {
+    "e": "$K$",
+    "t": "numero",
+    "v": "147",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/3": {
+  "campi": [
+   {
+    "e": "$W_{\\mathrm{tot}}$",
+    "t": "numero",
+    "v": "399",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/4": {
+  "campi": [
+   {
+    "e": "$U_g$",
+    "t": "numero",
+    "v": "300",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/5": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "22{,}3607",
+    "u": "m/s"
+   }
+  ]
+ },
+ "lavoro-energia/6": {
+  "campi": [
+   {
+    "e": "$U_e$",
+    "t": "numero",
+    "v": "5{,}625",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/7": {
+  "campi": [
+   {
+    "e": "$\\mathcal P$",
+    "t": "numero",
+    "v": "175",
+    "u": "W"
+   }
+  ]
+ },
+ "lavoro-energia/8": {
+  "campi": [
+   {
+    "e": "$\\eta$",
+    "t": "numero",
+    "v": "68",
+    "u": "%"
+   }
+  ]
+ },
+ "lavoro-energia/9": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "122{,}5",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/10": {
+  "campi": [
+   {
+    "e": "$K$",
+    "t": "numero",
+    "v": "224",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/11": {
+  "campi": [
+   {
+    "e": "$W_{\\mathrm{tot}}$",
+    "t": "numero",
+    "v": "616",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/12": {
+  "campi": [
+   {
+    "e": "$U_g$",
+    "t": "numero",
+    "v": "420",
+    "u": "J"
+   }
+  ]
+ },
+ "lavoro-energia/13": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "24{,}4949",
+    "u": "m/s"
+   }
+  ]
+ },
+ "lavoro-energia/14": {
+  "campi": [
+   {
+    "e": "$U_e$",
+    "t": "numero",
+    "v": "9",
+    "u": "J"
+   }
+  ]
+ },
+ "luce-riflessione/1": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "1500",
+    "u": "m"
+   }
+  ]
+ },
+ "luce-riflessione/2": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "5\\cdot10^{-6}",
+    "u": "s"
+   }
+  ]
+ },
+ "luce-riflessione/3": {
+  "campi": [
+   {
+    "e": "$h$",
+    "t": "numero",
+    "v": "9",
+    "u": "cm"
+   }
+  ]
+ },
+ "luce-riflessione/4": {
+  "campi": [
+   {
+    "e": "$\\theta_r$",
+    "t": "numero",
+    "v": "60",
+    "u": "°"
+   }
+  ]
+ },
+ "luce-riflessione/5": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "luce-riflessione/6": {
+  "campi": [
+   {
+    "e": "$f$",
+    "t": "numero",
+    "v": "30",
+    "u": "cm"
+   }
+  ]
+ },
+ "luce-riflessione/7": {
+  "campi": [
+   {
+    "e": "$q$",
+    "t": "numero",
+    "v": "13{,}5",
+    "u": "cm"
+   }
+  ]
+ },
+ "luce-riflessione/8": {
+  "campi": [
+   {
+    "e": "$q$",
+    "t": "numero",
+    "v": "-6{,}75",
+    "u": "cm"
+   }
+  ]
+ },
+ "luce-riflessione/9": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "1800",
+    "u": "m"
+   }
+  ]
+ },
+ "luce-riflessione/10": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "6\\cdot10^{-6}",
+    "u": "s"
+   }
+  ]
+ },
+ "luce-riflessione/11": {
+  "campi": [
+   {
+    "e": "$h$",
+    "t": "numero",
+    "v": "10",
+    "u": "cm"
+   }
+  ]
+ },
+ "luce-riflessione/12": {
+  "campi": [
+   {
+    "e": "$\\theta_r$",
+    "t": "numero",
+    "v": "55",
+    "u": "°"
+   }
+  ]
+ },
+ "luce-riflessione/13": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "2{,}4",
+    "u": "m"
+   }
+  ]
+ },
+ "luce-riflessione/14": {
+  "campi": [
+   {
+    "e": "$f$",
+    "t": "numero",
+    "v": "35",
+    "u": "cm"
+   }
+  ]
+ },
+ "moti-nel-piano/1": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "25",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moti-nel-piano/2": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "65",
+    "u": "m"
+   }
+  ]
+ },
+ "moti-nel-piano/3": {
+  "campi": [
+   {
+    "e": "$R$",
+    "t": "numero",
+    "v": "30",
+    "u": "m"
+   }
+  ]
+ },
+ "moti-nel-piano/4": {
+  "campi": [
+   {
+    "e": "$|v_y|$",
+    "t": "numero",
+    "v": "25",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moti-nel-piano/5": {
+  "campi": [
+   {
+    "e": "$f$",
+    "t": "numero",
+    "v": "10",
+    "u": "Hz"
+   }
+  ]
+ },
+ "moti-nel-piano/6": {
+  "campi": [
+   {
+    "e": "$T$",
+    "t": "numero",
+    "v": "0{,}2",
+    "u": "s"
+   }
+  ]
+ },
+ "moti-nel-piano/7": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "15{,}708",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moti-nel-piano/8": {
+  "campi": [
+   {
+    "e": "$a_c$",
+    "t": "numero",
+    "v": "8{,}16667",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "moti-nel-piano/9": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "30",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moti-nel-piano/10": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "78",
+    "u": "m"
+   }
+  ]
+ },
+ "moti-nel-piano/11": {
+  "campi": [
+   {
+    "e": "$R$",
+    "t": "numero",
+    "v": "42",
+    "u": "m"
+   }
+  ]
+ },
+ "moti-nel-piano/12": {
+  "campi": [
+   {
+    "e": "$|v_y|$",
+    "t": "numero",
+    "v": "30",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moti-nel-piano/13": {
+  "campi": [
+   {
+    "e": "$f$",
+    "t": "numero",
+    "v": "12",
+    "u": "Hz"
+   }
+  ]
+ },
+ "moti-nel-piano/14": {
+  "campi": [
+   {
+    "e": "$T$",
+    "t": "numero",
+    "v": "0{,}166667",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-accelerato/1": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "2{,}66667",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "moto-accelerato/2": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "37",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-accelerato/3": {
+  "campi": [
+   {
+    "e": "$\\Delta x$",
+    "t": "numero",
+    "v": "126",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/4": {
+  "campi": [
+   {
+    "e": "$t_a$",
+    "t": "numero",
+    "v": "4{,}66667",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-accelerato/5": {
+  "campi": [
+   {
+    "e": "$s_f$",
+    "t": "numero",
+    "v": "65{,}3333",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/6": {
+  "campi": [
+   {
+    "e": "$s_{\\mathrm{tot}}$",
+    "t": "numero",
+    "v": "117",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/7": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "5",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-accelerato/8": {
+  "campi": [
+   {
+    "e": "$\\Delta h$",
+    "t": "numero",
+    "v": "45",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/9": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "2{,}57143",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "moto-accelerato/10": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "50",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-accelerato/11": {
+  "campi": [
+   {
+    "e": "$\\Delta x$",
+    "t": "numero",
+    "v": "196",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/12": {
+  "campi": [
+   {
+    "e": "$t_a$",
+    "t": "numero",
+    "v": "4{,}57143",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-accelerato/13": {
+  "campi": [
+   {
+    "e": "$s_f$",
+    "t": "numero",
+    "v": "73{,}1429",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-accelerato/14": {
+  "campi": [
+   {
+    "e": "$s_{\\mathrm{tot}}$",
+    "t": "numero",
+    "v": "157{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-uniforme/1": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "60",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-uniforme/2": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "38{,}8889",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-uniforme/3": {
+  "campi": [
+   {
+    "e": "$v_m$",
+    "t": "numero",
+    "v": "-7",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-uniforme/4": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "30",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-uniforme/5": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "15{,}3846",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-uniforme/6": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "14",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-uniforme/7": {
+  "campi": [
+   {
+    "e": "$\\Delta x$",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-uniforme/8": {
+  "campi": [
+   {
+    "e": "$v_{\\mathrm{media}}$",
+    "t": "numero",
+    "v": "7{,}2",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-uniforme/9": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "85",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-uniforme/10": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "40",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-uniforme/11": {
+  "campi": [
+   {
+    "e": "$v_m$",
+    "t": "numero",
+    "v": "-6{,}66667",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-uniforme/12": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "35",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-uniforme/13": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "14{,}6667",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-uniforme/14": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "16",
+    "u": "s"
+   }
+  ]
+ },
+ "principi-dinamica/1": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "9{,}5",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "principi-dinamica/2": {
+  "campi": [
+   {
+    "e": "$F_R$",
+    "t": "numero",
+    "v": "18",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/3": {
+  "campi": [
+   {
+    "e": "$P$",
+    "t": "numero",
+    "v": "24{,}525",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/4": {
+  "campi": [
+   {
+    "e": "$F_e$",
+    "t": "numero",
+    "v": "9",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/5": {
+  "campi": [
+   {
+    "e": "$F_a$",
+    "t": "numero",
+    "v": "15",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/6": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "5",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "principi-dinamica/7": {
+  "campi": [
+   {
+    "e": "$F_c$",
+    "t": "numero",
+    "v": "40{,}8333",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/8": {
+  "campi": [
+   {
+    "e": "$F_s$",
+    "t": "numero",
+    "v": "6",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/9": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "9{,}28571",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "principi-dinamica/10": {
+  "campi": [
+   {
+    "e": "$F_R$",
+    "t": "numero",
+    "v": "24{,}5",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/11": {
+  "campi": [
+   {
+    "e": "$P$",
+    "t": "numero",
+    "v": "29{,}43",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/12": {
+  "campi": [
+   {
+    "e": "$F_e$",
+    "t": "numero",
+    "v": "12",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/13": {
+  "campi": [
+   {
+    "e": "$F_a$",
+    "t": "numero",
+    "v": "21",
+    "u": "N"
+   }
+  ]
+ },
+ "principi-dinamica/14": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "5{,}73576",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "rifrazione-lenti/1": {
+  "campi": [
+   {
+    "e": "Velocità della luce nel mezzo",
+    "t": "numero",
+    "v": "1{,}875\\cdot10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "rifrazione-lenti/2": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda nel vetro",
+    "t": "numero",
+    "v": "346{,}667",
+    "u": "nm"
+   }
+  ]
+ },
+ "rifrazione-lenti/3": {
+  "campi": [
+   {
+    "e": "Angolo rifratto $\\theta_2$",
+    "t": "numero",
+    "v": "22{,}4814",
+    "u": "°"
+   }
+  ]
+ },
+ "rifrazione-lenti/4": {
+  "campi": [
+   {
+    "e": "Angolo limite $\\theta_c$",
+    "t": "numero",
+    "v": "33{,}749",
+    "u": "°"
+   }
+  ]
+ },
+ "rifrazione-lenti/5": {
+  "campi": [
+   {
+    "e": "Distanza con segno dell'immagine $q$",
+    "t": "numero",
+    "v": "14",
+    "u": "cm"
+   }
+  ]
+ },
+ "rifrazione-lenti/6": {
+  "campi": [
+   {
+    "e": "Distanza con segno dell'immagine $q$",
+    "t": "numero",
+    "v": "-6{,}75",
+    "u": "cm"
+   }
+  ]
+ },
+ "rifrazione-lenti/7": {
+  "campi": [
+   {
+    "e": "Ingrandimento trasversale $M$",
+    "t": "numero",
+    "v": "-0{,}45"
+   }
+  ]
+ },
+ "rifrazione-lenti/8": {
+  "campi": [
+   {
+    "e": "Potere diottrico $D$",
+    "t": "numero",
+    "v": "3{,}33333",
+    "u": "m^-1"
+   }
+  ]
+ },
+ "rifrazione-lenti/9": {
+  "campi": [
+   {
+    "e": "Velocità della luce nel mezzo",
+    "t": "numero",
+    "v": "1{,}76471\\cdot10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "rifrazione-lenti/10": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda nel vetro",
+    "t": "numero",
+    "v": "366{,}667",
+    "u": "nm"
+   }
+  ]
+ },
+ "rifrazione-lenti/11": {
+  "campi": [
+   {
+    "e": "Angolo rifratto $\\theta_2$",
+    "t": "numero",
+    "v": "25{,}374",
+    "u": "°"
+   }
+  ]
+ },
+ "rifrazione-lenti/12": {
+  "campi": [
+   {
+    "e": "Angolo limite $\\theta_c$",
+    "t": "numero",
+    "v": "31{,}7569",
+    "u": "°"
+   }
+  ]
+ },
+ "rifrazione-lenti/13": {
+  "campi": [
+   {
+    "e": "Distanza con segno dell'immagine $q$",
+    "t": "numero",
+    "v": "15",
+    "u": "cm"
+   }
+  ]
+ },
+ "rifrazione-lenti/14": {
+  "campi": [
+   {
+    "e": "Distanza con segno dell'immagine $q$",
+    "t": "numero",
+    "v": "-7{,}5",
+    "u": "cm"
+   }
+  ]
+ },
+ "temperatura-dilatazione/1": {
+  "campi": [
+   {
+    "e": "Temperatura $T$",
+    "t": "numero",
+    "v": "303{,}15",
+    "u": "K"
+   }
+  ]
+ },
+ "temperatura-dilatazione/2": {
+  "campi": [
+   {
+    "e": "Temperatura $t_C$",
+    "t": "numero",
+    "v": "40",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-dilatazione/3": {
+  "campi": [
+   {
+    "e": "Aumento di temperatura $\\Delta T$",
+    "t": "numero",
+    "v": "43",
+    "u": "K"
+   }
+  ]
+ },
+ "temperatura-dilatazione/4": {
+  "campi": [
+   {
+    "e": "Allungamento $\\Delta L$",
+    "t": "numero",
+    "v": "3{,}6",
+    "u": "mm"
+   }
+  ]
+ },
+ "temperatura-dilatazione/5": {
+  "campi": [
+   {
+    "e": "Coefficiente di dilatazione lineare $\\alpha$",
+    "t": "numero",
+    "v": "1{,}4\\cdot10^{-5}",
+    "u": "K^-1"
+   }
+  ]
+ },
+ "temperatura-dilatazione/6": {
+  "campi": [
+   {
+    "e": "Aumento di area $\\Delta A$",
+    "t": "numero",
+    "v": "0{,}01",
+    "u": "m^2"
+   }
+  ]
+ },
+ "temperatura-dilatazione/7": {
+  "campi": [
+   {
+    "e": "Aumento di volume $\\Delta V$",
+    "t": "numero",
+    "v": "0{,}486",
+    "u": "cm^3"
+   }
+  ]
+ },
+ "temperatura-dilatazione/8": {
+  "campi": [
+   {
+    "e": "Dilatazione apparente $\\Delta V_{\\mathrm{app}}$",
+    "t": "numero",
+    "v": "3{,}618",
+    "u": "mL"
+   }
+  ]
+ },
+ "temperatura-dilatazione/9": {
+  "campi": [
+   {
+    "e": "Temperatura $T$",
+    "t": "numero",
+    "v": "313{,}15",
+    "u": "K"
+   }
+  ]
+ },
+ "temperatura-dilatazione/10": {
+  "campi": [
+   {
+    "e": "Temperatura $t_C$",
+    "t": "numero",
+    "v": "50",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-dilatazione/11": {
+  "campi": [
+   {
+    "e": "Aumento di temperatura $\\Delta T$",
+    "t": "numero",
+    "v": "45",
+    "u": "K"
+   }
+  ]
+ },
+ "temperatura-dilatazione/12": {
+  "campi": [
+   {
+    "e": "Allungamento $\\Delta L$",
+    "t": "numero",
+    "v": "5{,}04",
+    "u": "mm"
+   }
+  ]
+ },
+ "temperatura-dilatazione/13": {
+  "campi": [
+   {
+    "e": "Coefficiente di dilatazione lineare $\\alpha$",
+    "t": "numero",
+    "v": "1{,}5\\cdot10^{-5}",
+    "u": "K^-1"
+   }
+  ]
+ },
+ "temperatura-dilatazione/14": {
+  "campi": [
+   {
+    "e": "Aumento di area $\\Delta A$",
+    "t": "numero",
+    "v": "0{,}0144",
+    "u": "m^2"
+   }
+  ]
+ }
+}

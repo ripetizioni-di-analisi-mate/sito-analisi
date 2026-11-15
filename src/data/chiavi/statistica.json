@@ -1,0 +1,224 @@
+{
+ "distribuzioni-congiunte/1": {
+  "campi": [
+   {
+    "e": "$P(X=1)$",
+    "t": "numero",
+    "v": "\\frac{7}{10}"
+   }
+  ]
+ },
+ "distribuzioni-congiunte/4": {
+  "campi": [
+   {
+    "e": "$P(X=1,Y=1)$",
+    "t": "numero",
+    "v": "\\frac{9}{20}"
+   }
+  ]
+ },
+ "intervalli-di-confidenza/1": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "38{,}04"
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "41{,}96"
+   }
+  ]
+ },
+ "intervalli-di-confidenza/3": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "27{,}869"
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "32{,}131"
+   }
+  ]
+ },
+ "intervalli-di-confidenza/5": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "0{,}40"
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "0{,}60"
+   }
+  ]
+ },
+ "intervalli-di-confidenza/8": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "2",
+    "u": "mm"
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "5",
+    "u": "mm"
+   }
+  ]
+ },
+ "probabilita-e-combinatoria/1": {
+  "campi": [
+   {
+    "e": "Esiti in cui si verifica $B$ e non $A$",
+    "t": "valori",
+    "v": [
+     "4",
+     "6"
+    ]
+   }
+  ]
+ },
+ "regressione-e-correlazione/9": {
+  "campi": [
+   {
+    "e": "Statistica $T$",
+    "t": "numero",
+    "v": "-3"
+   },
+   {
+    "e": "Decisione su $H_0$",
+    "t": "scelta",
+    "opzioni": [
+     "Si rifiuta $H_0$",
+     "Non si rifiuta $H_0$"
+    ],
+    "v": "Si rifiuta $H_0$"
+   }
+  ]
+ },
+ "regressione-e-correlazione/10": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "1{,}1"
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "3{,}1"
+   }
+  ]
+ },
+ "regressione-e-correlazione/14": {
+  "campi": [
+   {
+    "e": "Problema suggerito dai residui",
+    "t": "scelta",
+    "opzioni": [
+     "Andamento curvo della risposta media",
+     "Varianza non costante",
+     "Un valore anomalo isolato",
+     "Nessun problema evidente"
+    ],
+    "v": "Andamento curvo della risposta media"
+   }
+  ]
+ },
+ "stima-puntuale/13": {
+  "campi": [
+   {
+    "e": "Insieme delle stime di massima verosimiglianza di $\\theta$",
+    "t": "intervallo",
+    "v": "[5, 7]",
+    "var": "theta"
+   }
+  ]
+ },
+ "variabili-continue/3": {
+  "campi": [
+   {
+    "e": "Estremo inferiore del supporto",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Estremo superiore del supporto",
+    "t": "numero",
+    "v": "11"
+   }
+  ]
+ },
+ "variabili-continue/4": {
+  "campi": [
+   {
+    "e": "$P(4\\,\\mathrm{min}<T<12\\,\\mathrm{min})$",
+    "t": "numero",
+    "v": "e^{-1}-e^{-3}"
+   }
+  ]
+ },
+ "variabili-continue/7": {
+  "campi": [
+   {
+    "e": "Quantile di ordine $0{,}05$",
+    "t": "numero",
+    "v": "51{,}775"
+   }
+  ]
+ },
+ "variabili-continue/14": {
+  "campi": [
+   {
+    "e": "Probabilità richiesta",
+    "t": "numero",
+    "v": "e^{-\\frac{1}{2}}"
+   }
+  ]
+ },
+ "variabili-discrete/5": {
+  "campi": [
+   {
+    "e": "Probabilità di zero arrivi in mezz'ora",
+    "t": "numero",
+    "v": "e^{-2}"
+   }
+  ]
+ },
+ "variabili-discrete/6": {
+  "campi": [
+   {
+    "e": "Probabilità che il primo successo sia alla quarta prova",
+    "t": "numero",
+    "v": "\\frac{1}{16}"
+   }
+  ]
+ },
+ "variabili-discrete/12": {
+  "campi": [
+   {
+    "e": "Varianza dell'indicatore",
+    "t": "numero",
+    "v": "\\frac{6}{25}"
+   }
+  ]
+ },
+ "variabili-discrete/13": {
+  "campi": [
+   {
+    "e": "Probabilità che il secondo successo sia alla quarta prova",
+    "t": "numero",
+    "v": "\\frac{3}{16}"
+   }
+  ]
+ }
+}

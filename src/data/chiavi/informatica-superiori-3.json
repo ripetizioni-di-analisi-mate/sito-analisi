@@ -1,0 +1,69 @@
+{
+ "algoritmi-su-dati/1": {
+  "campi": [
+   {
+    "e": "Numero di campi della riga",
+    "t": "numero",
+    "v": "3",
+    "esatto": true
+   }
+  ]
+ },
+ "oggetti-e-classi/1": {
+  "campi": [
+   {
+    "e": "Coppia di attributi adatta alla classe",
+    "t": "scelta",
+    "opzioni": [
+     "valore e istante di misura",
+     "valore e conversione in centimetri",
+     "metri e centimetri",
+     "istante di misura e stampa del valore"
+    ],
+    "v": "valore e istante di misura"
+   },
+   {
+    "e": "Metodo adatto alla classe",
+    "t": "scelta",
+    "opzioni": [
+     "restituire il valore convertito in centimetri",
+     "il valore in metri",
+     "l'istante di misura",
+     "il nome della classe"
+    ],
+    "v": "restituire il valore convertito in centimetri"
+   }
+  ]
+ },
+ "strutture-dati/1": {
+  "campi": [
+   {
+    "e": "Campi necessari",
+    "t": "scelta",
+    "opzioni": [
+     "identificativo del sensore, data e ora, valore della temperatura",
+     "solo il valore della temperatura",
+     "data e ora, valore della temperatura",
+     "identificativo del sensore, valore della temperatura"
+    ],
+    "v": "identificativo del sensore, data e ora, valore della temperatura"
+   }
+  ]
+ },
+ "web-e-formati/1": {
+  "campi": [
+   {
+    "e": "Selettore CSS",
+    "t": "scelta",
+    "opzioni": [
+     ".avviso",
+     "#avviso",
+     "avviso",
+     "[avviso]",
+     "*avviso"
+    ],
+    "v": ".avviso"
+   }
+  ]
+ }
+}

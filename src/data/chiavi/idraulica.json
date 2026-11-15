@@ -1,4 +1,2342 @@
 {
+ "cinematica-dei-fluidi/1": {
+  "campi": [
+   {
+    "e": "Area $A$ della sezione",
+    "t": "numero",
+    "v": "0{,}0491",
+    "u": "m^2"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}22",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata massica $Q_m$",
+    "t": "numero",
+    "v": "60{,}0",
+    "u": "kg/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "3{,}06 \\cdot 10^5",
+    "cifre": -3
+   },
+   {
+    "e": "Regime di moto",
+    "t": "scelta",
+    "opzioni": [
+     "laminare",
+     "di transizione",
+     "turbolento"
+    ],
+    "v": "turbolento"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/2": {
+  "campi": [
+   {
+    "e": "Diametro minimo teorico",
+    "t": "numero",
+    "v": "0{,}376",
+    "u": "m"
+   },
+   {
+    "e": "Diametro commerciale",
+    "t": "scelta",
+    "opzioni": [
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$",
+     "$400\\,\\mathrm{mm}$",
+     "$500\\,\\mathrm{mm}$"
+    ],
+    "v": "$400\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Velocità media effettiva $v$",
+    "t": "numero",
+    "v": "1{,}59",
+    "u": "m/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/3": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}0691",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$v_1$",
+    "t": "numero",
+    "v": "0{,}978",
+    "u": "m/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/4": {
+  "campi": [
+   {
+    "e": "$v_1$",
+    "t": "numero",
+    "v": "1{,}63",
+    "u": "m/s"
+   },
+   {
+    "e": "$v_2$",
+    "t": "numero",
+    "v": "2{,}55",
+    "u": "m/s"
+   },
+   {
+    "e": "$v_3$",
+    "t": "numero",
+    "v": "1{,}13",
+    "u": "m/s"
+   },
+   {
+    "e": "Tratto con la velocità massima",
+    "t": "scelta",
+    "opzioni": [
+     "primo tratto",
+     "secondo tratto",
+     "terzo tratto"
+    ],
+    "v": "secondo tratto"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/5": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}41",
+    "u": "m/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "2{,}12 \\cdot 10^5",
+    "cifre": -3
+   },
+   {
+    "e": "Regime di moto",
+    "t": "scelta",
+    "opzioni": [
+     "laminare",
+     "di transizione",
+     "turbolento"
+    ],
+    "v": "turbolento"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/6": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "0{,}500",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "3{,}93 \\cdot 10^{-3}",
+    "u": "m^3/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/7": {
+  "campi": [
+   {
+    "e": "$Q_3$",
+    "t": "numero",
+    "v": "0{,}0850",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$v_3$",
+    "t": "numero",
+    "v": "1{,}73",
+    "u": "m/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/8": {
+  "campi": [
+   {
+    "e": "Velocità media comune $v$",
+    "t": "numero",
+    "v": "1{,}83",
+    "u": "m/s"
+   },
+   {
+    "e": "$Q_1$",
+    "t": "numero",
+    "v": "90{,}0",
+    "u": "L/s"
+   },
+   {
+    "e": "$Q_2$",
+    "t": "numero",
+    "v": "57{,}6",
+    "u": "L/s"
+   },
+   {
+    "e": "$Q_3$",
+    "t": "numero",
+    "v": "32{,}4",
+    "u": "L/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/9": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}00",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "2{,}25",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$\\alpha$",
+    "t": "numero",
+    "v": "1{,}54",
+    "cifre": 2
+   },
+   {
+    "e": "$\\beta$",
+    "t": "numero",
+    "v": "1{,}20",
+    "cifre": 2
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/10": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "2{,}35",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "0{,}940",
+    "u": "m/s"
+   },
+   {
+    "e": "$\\alpha$",
+    "t": "numero",
+    "v": "1{,}13",
+    "cifre": 2
+   },
+   {
+    "e": "$\\beta$",
+    "t": "numero",
+    "v": "1{,}04",
+    "cifre": 2
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/11": {
+  "campi": [
+   {
+    "e": "Velocità di innalzamento del pelo libero",
+    "t": "numero",
+    "v": "5{,}31 \\cdot 10^{-4}",
+    "u": "m/s"
+   },
+   {
+    "e": "Tempo $t$",
+    "t": "numero",
+    "v": "3390",
+    "u": "s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/12": {
+  "campi": [
+   {
+    "e": "Volume estratto $V$",
+    "t": "numero",
+    "v": "124",
+    "u": "m^3"
+   },
+   {
+    "e": "Tempo $t$",
+    "t": "numero",
+    "v": "2060",
+    "u": "s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/13": {
+  "campi": [
+   {
+    "e": "Portata massica $Q_m$",
+    "t": "numero",
+    "v": "1{,}57",
+    "u": "kg/s"
+   },
+   {
+    "e": "$v_2$",
+    "t": "numero",
+    "v": "12{,}3",
+    "u": "m/s"
+   },
+   {
+    "e": "$Q_1$",
+    "t": "numero",
+    "v": "1{,}26",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$Q_2$",
+    "t": "numero",
+    "v": "0{,}873",
+    "u": "m^3/s"
+   }
+  ]
+ },
+ "cinematica-dei-fluidi/14": {
+  "campi": [
+   {
+    "e": "$\\operatorname{div}\\vec{v}$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Linea di corrente per $P$",
+    "t": "equazione",
+    "v": "x^2 - y^2 = 8",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$v_x$ in $P$",
+    "t": "numero",
+    "v": "0{,}500",
+    "u": "m/s"
+   },
+   {
+    "e": "$v_y$ in $P$",
+    "t": "numero",
+    "v": "1{,}50",
+    "u": "m/s"
+   },
+   {
+    "e": "Modulo della velocità in $P$",
+    "t": "numero",
+    "v": "1{,}58",
+    "u": "m/s"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/1": {
+  "campi": [
+   {
+    "e": "Area bagnata $A$",
+    "t": "numero",
+    "v": "3{,}30",
+    "u": "m^2"
+   },
+   {
+    "e": "Contorno bagnato $C$",
+    "t": "numero",
+    "v": "5{,}20",
+    "u": "m"
+   },
+   {
+    "e": "Raggio idraulico $R$",
+    "t": "numero",
+    "v": "0{,}635",
+    "u": "m"
+   },
+   {
+    "e": "Larghezza del pelo libero $B$",
+    "t": "numero",
+    "v": "3{,}00",
+    "u": "m"
+   },
+   {
+    "e": "Altezza media $h_m$",
+    "t": "numero",
+    "v": "1{,}10",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/2": {
+  "campi": [
+   {
+    "e": "Area bagnata $A$",
+    "t": "numero",
+    "v": "5{,}88",
+    "u": "m^2"
+   },
+   {
+    "e": "Contorno bagnato $C$",
+    "t": "numero",
+    "v": "7{,}87",
+    "u": "m"
+   },
+   {
+    "e": "Raggio idraulico $R$",
+    "t": "numero",
+    "v": "0{,}747",
+    "u": "m"
+   },
+   {
+    "e": "Larghezza del pelo libero $B$",
+    "t": "numero",
+    "v": "7{,}30",
+    "u": "m"
+   },
+   {
+    "e": "Altezza media $h_m$",
+    "t": "numero",
+    "v": "0{,}805",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/3": {
+  "campi": [
+   {
+    "e": "Angolo al centro $\\theta$",
+    "t": "numero",
+    "v": "2{,}636",
+    "u": "rad"
+   },
+   {
+    "e": "Area bagnata $A$",
+    "t": "numero",
+    "v": "0{,}172",
+    "u": "m^2"
+   },
+   {
+    "e": "Contorno bagnato $C$",
+    "t": "numero",
+    "v": "1{,}054",
+    "u": "m"
+   },
+   {
+    "e": "Raggio idraulico $R$",
+    "t": "numero",
+    "v": "0{,}163",
+    "u": "m"
+   },
+   {
+    "e": "Larghezza del pelo libero $B$",
+    "t": "numero",
+    "v": "0{,}775",
+    "u": "m"
+   },
+   {
+    "e": "Altezza media $h_m$",
+    "t": "numero",
+    "v": "0{,}222",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/4": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}53",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "2{,}75",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}515",
+    "cifre": 3
+   },
+   {
+    "e": "La corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "lenta",
+     "critica",
+     "veloce"
+    ],
+    "v": "lenta"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/5": {
+  "campi": [
+   {
+    "e": "Area bagnata $A$",
+    "t": "numero",
+    "v": "9{,}38",
+    "u": "m^2"
+   },
+   {
+    "e": "Raggio idraulico $R$",
+    "t": "numero",
+    "v": "0{,}996",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "8{,}37",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "0{,}892",
+    "u": "m/s"
+   },
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}271",
+    "cifre": 3
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/6": {
+  "campi": [
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "0{,}924",
+    "u": "m"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}30",
+    "u": "m/s"
+   },
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}431",
+    "cifre": 3
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/7": {
+  "campi": [
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "1{,}29",
+    "u": "m"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}08",
+    "u": "m/s"
+   },
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}347",
+    "cifre": 3
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/8": {
+  "campi": [
+   {
+    "e": "Portata per unità di larghezza $q$",
+    "t": "numero",
+    "v": "2{,}40",
+    "u": "m^2/s"
+   },
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}837",
+    "u": "m"
+   },
+   {
+    "e": "$v_c$",
+    "t": "numero",
+    "v": "2{,}87",
+    "u": "m/s"
+   },
+   {
+    "e": "$E_{\\min}$",
+    "t": "numero",
+    "v": "1{,}26",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/9": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}934",
+    "u": "m"
+   },
+   {
+    "e": "$v_c$",
+    "t": "numero",
+    "v": "2{,}72",
+    "u": "m/s"
+   },
+   {
+    "e": "$E_{\\min}$",
+    "t": "numero",
+    "v": "1{,}31",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/10": {
+  "campi": [
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}385",
+    "cifre": 3
+   },
+   {
+    "e": "La corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "lenta",
+     "critica",
+     "veloce"
+    ],
+    "v": "lenta"
+   },
+   {
+    "e": "Altezza alternata",
+    "t": "numero",
+    "v": "0{,}437",
+    "u": "m"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/11": {
+  "campi": [
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "2{,}06",
+    "cifre": 2
+   },
+   {
+    "e": "La corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "lenta",
+     "critica",
+     "veloce"
+    ],
+    "v": "veloce"
+   },
+   {
+    "e": "Altezza alternata",
+    "t": "numero",
+    "v": "1{,}72",
+    "u": "m"
+   },
+   {
+    "e": "Verso di propagazione delle due perturbazioni",
+    "t": "scelta",
+    "opzioni": [
+     "una verso monte e una verso valle",
+     "entrambe verso valle",
+     "entrambe verso monte"
+    ],
+    "v": "entrambe verso valle"
+   },
+   {
+    "e": "Velocità della perturbazione più rapida",
+    "t": "numero",
+    "v": "7{,}43",
+    "u": "m/s"
+   },
+   {
+    "e": "Velocità della perturbazione più lenta",
+    "t": "numero",
+    "v": "2{,}57",
+    "u": "m/s"
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/12": {
+  "campi": [
+   {
+    "e": "$h_c$",
+    "t": "numero",
+    "v": "0{,}860",
+    "u": "m"
+   },
+   {
+    "e": "$i_c$",
+    "t": "numero",
+    "v": "0{,}00295",
+    "cifre": 5
+   },
+   {
+    "e": "Tipo di alveo",
+    "t": "scelta",
+    "opzioni": [
+     "a debole pendenza",
+     "a forte pendenza"
+    ],
+    "v": "a forte pendenza"
+   },
+   {
+    "e": "$h_0$",
+    "t": "numero",
+    "v": "0{,}678",
+    "u": "m"
+   },
+   {
+    "e": "$Fr$ del moto uniforme",
+    "t": "numero",
+    "v": "1{,}43",
+    "cifre": 2
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/13": {
+  "campi": [
+   {
+    "e": "Altezza d'acqua $h$",
+    "t": "numero",
+    "v": "1{,}05",
+    "u": "m"
+   },
+   {
+    "e": "Larghezza del fondo $b$",
+    "t": "numero",
+    "v": "2{,}10",
+    "u": "m"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}35",
+    "u": "m/s"
+   },
+   {
+    "e": "$Fr$",
+    "t": "numero",
+    "v": "0{,}422",
+    "cifre": 3
+   }
+  ]
+ },
+ "correnti-a-pelo-libero/14": {
+  "campi": [
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "1{,}311",
+    "u": "m"
+   },
+   {
+    "e": "Il pelo libero sopra il gradino",
+    "t": "scelta",
+    "opzioni": [
+     "si alza",
+     "si abbassa",
+     "resta alla stessa quota"
+    ],
+    "v": "si abbassa"
+   },
+   {
+    "e": "Variazione della quota del pelo libero, in valore assoluto",
+    "t": "numero",
+    "v": "0{,}039",
+    "u": "m"
+   },
+   {
+    "e": "$\\Delta z_{\\max}$",
+    "t": "numero",
+    "v": "0{,}567",
+    "u": "m"
+   }
+  ]
+ },
+ "equazione-globale/1": {
+  "campi": [
+   {
+    "e": "$F_x$ (componente lungo l'asse di ingresso)",
+    "t": "numero",
+    "v": "14{,}86",
+    "u": "kN"
+   },
+   {
+    "e": "$F_y$ (componente lungo l'asse di uscita)",
+    "t": "numero",
+    "v": "14{,}86",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo $F$",
+    "t": "numero",
+    "v": "21{,}0",
+    "u": "kN"
+   }
+  ]
+ },
+ "equazione-globale/2": {
+  "campi": [
+   {
+    "e": "$F_x$ (componente lungo l'asse di ingresso)",
+    "t": "numero",
+    "v": "2{,}33",
+    "u": "kN"
+   },
+   {
+    "e": "$F_y$ (componente normale all'asse di ingresso)",
+    "t": "numero",
+    "v": "5{,}63",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo $F$",
+    "t": "numero",
+    "v": "6{,}10",
+    "u": "kN"
+   },
+   {
+    "e": "Angolo di $F$ con l'asse di ingresso",
+    "t": "numero",
+    "v": "67{,}5",
+    "u": "°"
+   }
+  ]
+ },
+ "equazione-globale/3": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "192{,}2",
+    "u": "kPa"
+   },
+   {
+    "e": "$F_x$ (componente orizzontale)",
+    "t": "numero",
+    "v": "10{,}02",
+    "u": "kN"
+   },
+   {
+    "e": "$F_z$ (componente verticale)",
+    "t": "numero",
+    "v": "9{,}98",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F_z$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Modulo $F$",
+    "t": "numero",
+    "v": "14{,}1",
+    "u": "kN"
+   }
+  ]
+ },
+ "equazione-globale/4": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "273{,}9",
+    "u": "kPa"
+   },
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "13{,}1",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F$",
+    "t": "scelta",
+    "opzioni": [
+     "verso valle",
+     "verso monte"
+    ],
+    "v": "verso valle"
+   }
+  ]
+ },
+ "equazione-globale/5": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "73{,}6",
+    "u": "L/s"
+   },
+   {
+    "e": "Velocità del getto $v_2$",
+    "t": "numero",
+    "v": "19{,}1",
+    "u": "m/s"
+   },
+   {
+    "e": "Modulo della forza $F$ sull'ugello",
+    "t": "numero",
+    "v": "4{,}42",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F$",
+    "t": "scelta",
+    "opzioni": [
+     "verso valle",
+     "verso monte"
+    ],
+    "v": "verso valle"
+   }
+  ]
+ },
+ "equazione-globale/6": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "22{,}6",
+    "u": "L/s"
+   },
+   {
+    "e": "Forza $F$ sulla piastra",
+    "t": "numero",
+    "v": "407",
+    "u": "N"
+   }
+  ]
+ },
+ "equazione-globale/7": {
+  "campi": [
+   {
+    "e": "Forza $F$ sulla piastra",
+    "t": "numero",
+    "v": "355",
+    "u": "N"
+   },
+   {
+    "e": "Portata della lamina maggiore $Q_1$",
+    "t": "numero",
+    "v": "26{,}8",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata della lamina minore $Q_2$",
+    "t": "numero",
+    "v": "4{,}60",
+    "u": "L/s"
+   }
+  ]
+ },
+ "equazione-globale/8": {
+  "campi": [
+   {
+    "e": "$F_x$ (componente lungo il getto entrante)",
+    "t": "numero",
+    "v": "1314",
+    "u": "N"
+   },
+   {
+    "e": "$F_y$ (componente normale al getto entrante)",
+    "t": "numero",
+    "v": "544",
+    "u": "N"
+   },
+   {
+    "e": "Modulo $F$",
+    "t": "numero",
+    "v": "1422",
+    "u": "N"
+   },
+   {
+    "e": "Angolo di $F$ con la direzione del getto entrante",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "°"
+   }
+  ]
+ },
+ "equazione-globale/9": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "179{,}2",
+    "u": "kPa"
+   },
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "25{,}9",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F$",
+    "t": "scelta",
+    "opzioni": [
+     "come la velocità in ingresso",
+     "opposto alla velocità in ingresso",
+     "normale all'asse della condotta"
+    ],
+    "v": "come la velocità in ingresso"
+   }
+  ]
+ },
+ "equazione-globale/10": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "16{,}8",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Forza $S$ sulla paratoia",
+    "t": "numero",
+    "v": "75{,}3",
+    "u": "kN"
+   },
+   {
+    "e": "$Fr_1$",
+    "t": "numero",
+    "v": "0{,}26",
+    "cifre": 2
+   },
+   {
+    "e": "$Fr_2$",
+    "t": "numero",
+    "v": "2{,}89",
+    "cifre": 2
+   }
+  ]
+ },
+ "equazione-globale/11": {
+  "campi": [
+   {
+    "e": "$h_2$",
+    "t": "numero",
+    "v": "0{,}329",
+    "u": "m"
+   },
+   {
+    "e": "Forza $S$ sulla paratoia",
+    "t": "numero",
+    "v": "18{,}3",
+    "u": "kN"
+   }
+  ]
+ },
+ "equazione-globale/12": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "163{,}8",
+    "u": "kPa"
+   },
+   {
+    "e": "Modulo della forza $F$",
+    "t": "numero",
+    "v": "10{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F$",
+    "t": "scelta",
+    "opzioni": [
+     "verso valle",
+     "verso monte"
+    ],
+    "v": "verso monte"
+   }
+  ]
+ },
+ "equazione-globale/13": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "151{,}6",
+    "u": "kPa"
+   },
+   {
+    "e": "Spinta assiale sulla corona",
+    "t": "numero",
+    "v": "5{,}89",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della spinta sulla corona",
+    "t": "scelta",
+    "opzioni": [
+     "verso valle",
+     "verso monte"
+    ],
+    "v": "verso monte"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "0{,}102",
+    "u": "m"
+   }
+  ]
+ },
+ "equazione-globale/14": {
+  "campi": [
+   {
+    "e": "$F_x$ (componente lungo il ramo rettilineo)",
+    "t": "numero",
+    "v": "4{,}01",
+    "u": "kN"
+   },
+   {
+    "e": "$F_y$ (componente lungo il ramo laterale)",
+    "t": "numero",
+    "v": "4{,}01",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo $F$",
+    "t": "numero",
+    "v": "5{,}67",
+    "u": "kN"
+   }
+  ]
+ },
+ "foronomia/1": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "48{,}3",
+    "u": "L/s"
+   }
+  ]
+ },
+ "foronomia/2": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "17{,}4",
+    "u": "L/s"
+   }
+  ]
+ },
+ "foronomia/3": {
+  "campi": [
+   {
+    "e": "Coefficiente di contrazione $C_c$",
+    "t": "numero",
+    "v": "0{,}620",
+    "cifre": 3
+   },
+   {
+    "e": "Coefficiente di portata $\\mu$",
+    "t": "numero",
+    "v": "0{,}593",
+    "cifre": 3
+   },
+   {
+    "e": "Coefficiente di velocità $C_v$",
+    "t": "numero",
+    "v": "0{,}957",
+    "cifre": 3
+   }
+  ]
+ },
+ "foronomia/4": {
+  "campi": [
+   {
+    "e": "Coefficiente di velocità $C_v$",
+    "t": "numero",
+    "v": "0{,}953",
+    "cifre": 3
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "0{,}222",
+    "u": "m"
+   }
+  ]
+ },
+ "foronomia/5": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Scarto della formula per le luci piccole rispetto a $Q$",
+    "t": "numero",
+    "v": "0{,}86",
+    "u": "%"
+   }
+  ]
+ },
+ "foronomia/6": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "5{,}59",
+    "u": "m^3/s"
+   },
+   {
+    "e": "$Fr_c$",
+    "t": "numero",
+    "v": "4{,}14",
+    "cifre": 2
+   }
+  ]
+ },
+ "foronomia/7": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "65{,}5",
+    "u": "L/s"
+   }
+  ]
+ },
+ "foronomia/8": {
+  "campi": [
+   {
+    "e": "Portata iniziale $Q_0$",
+    "t": "numero",
+    "v": "50{,}3",
+    "u": "L/s"
+   },
+   {
+    "e": "Tempo di svuotamento $t$",
+    "t": "numero",
+    "v": "1113",
+    "u": "s"
+   }
+  ]
+ },
+ "foronomia/9": {
+  "campi": [
+   {
+    "e": "Tempo $t$",
+    "t": "numero",
+    "v": "867",
+    "u": "s"
+   }
+  ]
+ },
+ "foronomia/10": {
+  "campi": [
+   {
+    "e": "Tempo $t$ perché i livelli si eguaglino",
+    "t": "numero",
+    "v": "505",
+    "u": "s"
+   },
+   {
+    "e": "Volume travasato $V$",
+    "t": "numero",
+    "v": "18{,}75",
+    "u": "m^3"
+   }
+  ]
+ },
+ "foronomia/11": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}505",
+    "u": "m^3/s"
+   }
+  ]
+ },
+ "foronomia/12": {
+  "campi": [
+   {
+    "e": "Carico $h$ sul vertice",
+    "t": "numero",
+    "v": "0{,}220",
+    "u": "m"
+   },
+   {
+    "e": "Errore relativo sulla portata",
+    "t": "numero",
+    "v": "1{,}1",
+    "u": "%"
+   }
+  ]
+ },
+ "foronomia/13": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "1{,}03",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Altezza critica $h_c$",
+    "t": "numero",
+    "v": "0{,}30",
+    "u": "m"
+   }
+  ]
+ },
+ "foronomia/14": {
+  "campi": [
+   {
+    "e": "Velocità del getto $v$",
+    "t": "numero",
+    "v": "31{,}9",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "50{,}7",
+    "u": "L/s"
+   },
+   {
+    "e": "Potenza del getto $P$",
+    "t": "numero",
+    "v": "25{,}7",
+    "u": "kW"
+   }
+  ]
+ },
+ "idrostatica/1": {
+  "campi": [
+   {
+    "e": "Pressione relativa sul fondo",
+    "t": "numero",
+    "v": "60{,}8",
+    "u": "kPa"
+   },
+   {
+    "e": "Pressione assoluta sul fondo",
+    "t": "numero",
+    "v": "162{,}1",
+    "u": "kPa"
+   },
+   {
+    "e": "Pressione relativa a $2{,}00\\,\\mathrm{m}$ di profondità",
+    "t": "numero",
+    "v": "19{,}6",
+    "u": "kPa"
+   }
+  ]
+ },
+ "idrostatica/2": {
+  "campi": [
+   {
+    "e": "Distanza del piano dei carichi idrostatici dal pelo libero",
+    "t": "numero",
+    "v": "4{,}08",
+    "u": "m"
+   },
+   {
+    "e": "Pressione sul fondo",
+    "t": "numero",
+    "v": "67{,}5",
+    "u": "kPa"
+   }
+  ]
+ },
+ "idrostatica/3": {
+  "campi": [
+   {
+    "e": "Pressione sul fondo",
+    "t": "numero",
+    "v": "6{,}34",
+    "u": "kPa"
+   },
+   {
+    "e": "Profondità sotto il pelo libero alla quale la pressione relativa si annulla",
+    "t": "numero",
+    "v": "2{,}85",
+    "u": "m"
+   }
+  ]
+ },
+ "idrostatica/4": {
+  "campi": [
+   {
+    "e": "Carico piezometrico $h$",
+    "t": "numero",
+    "v": "70{,}9",
+    "u": "m"
+   },
+   {
+    "e": "Quota del piano dei carichi idrostatici",
+    "t": "numero",
+    "v": "70{,}9",
+    "u": "m"
+   },
+   {
+    "e": "Pressione in $B$",
+    "t": "numero",
+    "v": "97{,}4",
+    "u": "kPa"
+   }
+  ]
+ },
+ "idrostatica/5": {
+  "campi": [
+   {
+    "e": "Densità $\\rho$",
+    "t": "numero",
+    "v": "1260",
+    "u": "kg/m^3"
+   },
+   {
+    "e": "Peso specifico $\\gamma$",
+    "t": "numero",
+    "v": "12{,}4",
+    "u": "kN/m^3"
+   },
+   {
+    "e": "Viscosità cinematica $\\nu$",
+    "t": "numero",
+    "v": "7{,}54 \\cdot 10^{-4}",
+    "u": "m^2/s"
+   },
+   {
+    "e": "Massa del volume contenuto",
+    "t": "numero",
+    "v": "1008",
+    "u": "kg"
+   },
+   {
+    "e": "Peso del volume contenuto",
+    "t": "numero",
+    "v": "9{,}89",
+    "u": "kN"
+   }
+  ]
+ },
+ "idrostatica/6": {
+  "campi": [
+   {
+    "e": "Riduzione di volume $\\Delta V$",
+    "t": "numero",
+    "v": "2{,}38",
+    "u": "L"
+   },
+   {
+    "e": "Celerità $c$",
+    "t": "numero",
+    "v": "1449",
+    "u": "m/s"
+   }
+  ]
+ },
+ "idrostatica/7": {
+  "campi": [
+   {
+    "e": "Sforzo tangenziale $\\tau$",
+    "t": "numero",
+    "v": "150",
+    "u": "Pa"
+   },
+   {
+    "e": "Forza $F$",
+    "t": "numero",
+    "v": "60{,}0",
+    "u": "N"
+   },
+   {
+    "e": "Potenza dissipata $P$",
+    "t": "numero",
+    "v": "72{,}0",
+    "u": "W"
+   }
+  ]
+ },
+ "idrostatica/9": {
+  "campi": [
+   {
+    "e": "Pressione relativa nell'asse della condotta",
+    "t": "numero",
+    "v": "152",
+    "u": "kPa"
+   },
+   {
+    "e": "Carico piezometrico $h$",
+    "t": "numero",
+    "v": "27{,}90",
+    "u": "m"
+   }
+  ]
+ },
+ "idrostatica/10": {
+  "campi": [
+   {
+    "e": "Pressione relativa $p_A$",
+    "t": "numero",
+    "v": "111",
+    "u": "kPa"
+   },
+   {
+    "e": "Altezza piezometrica in $A$",
+    "t": "numero",
+    "v": "11{,}4",
+    "u": "m"
+   }
+  ]
+ },
+ "idrostatica/11": {
+  "campi": [
+   {
+    "e": "$h_A - h_B$",
+    "t": "numero",
+    "v": "3{,}53",
+    "u": "m"
+   },
+   {
+    "e": "$p_A - p_B$",
+    "t": "numero",
+    "v": "5{,}18",
+    "u": "kPa"
+   }
+  ]
+ },
+ "idrostatica/12": {
+  "campi": [
+   {
+    "e": "Pressione sull'interfaccia",
+    "t": "numero",
+    "v": "12{,}7",
+    "u": "kPa"
+   },
+   {
+    "e": "Pressione sul fondo",
+    "t": "numero",
+    "v": "34{,}2",
+    "u": "kPa"
+   },
+   {
+    "e": "Quota del piano dei carichi idrostatici dell'acqua sul fondo",
+    "t": "numero",
+    "v": "3{,}49",
+    "u": "m"
+   }
+  ]
+ },
+ "idrostatica/13": {
+  "campi": [
+   {
+    "e": "Inclinazione $\\theta$ del pelo libero",
+    "t": "numero",
+    "v": "10{,}4",
+    "u": "°"
+   },
+   {
+    "e": "Dislivello fra le pareti estreme",
+    "t": "numero",
+    "v": "1{,}28",
+    "u": "m"
+   },
+   {
+    "e": "Pressione sul fondo alla parete posteriore",
+    "t": "numero",
+    "v": "20{,}0",
+    "u": "kPa"
+   }
+  ]
+ },
+ "idrostatica/14": {
+  "campi": [
+   {
+    "e": "Dislivello fra bordo e vertice",
+    "t": "numero",
+    "v": "0{,}503",
+    "u": "m"
+   },
+   {
+    "e": "Quota del vertice sul fondo",
+    "t": "numero",
+    "v": "0{,}198",
+    "u": "m"
+   },
+   {
+    "e": "Quota del bordo sul fondo",
+    "t": "numero",
+    "v": "0{,}702",
+    "u": "m"
+   },
+   {
+    "e": "Pressione sul fondo al bordo",
+    "t": "numero",
+    "v": "6{,}88",
+    "u": "kPa"
+   }
+  ]
+ },
+ "lunghe-condotte/1": {
+  "campi": [
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}0150"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}68",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}0826",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "4{,}2 \\cdot 10^{5}",
+    "cifre": -4
+   }
+  ]
+ },
+ "lunghe-condotte/2": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}70",
+    "u": "m/s"
+   },
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}01102",
+    "cifre": 5
+   },
+   {
+    "e": "Resistenza idraulica $r$",
+    "t": "numero",
+    "v": "1377",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Perdita di carico complessiva $\\Delta H$",
+    "t": "numero",
+    "v": "19{,}8",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/3": {
+  "campi": [
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "4{,}58 \\cdot 10^{5}",
+    "cifre": -3
+   },
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0183",
+    "cifre": 4
+   },
+   {
+    "e": "Perdita di carico complessiva $\\Delta H$",
+    "t": "numero",
+    "v": "17{,}6",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/4": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}142",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$ ricalcolato",
+    "t": "numero",
+    "v": "6{,}0 \\cdot 10^{5}",
+    "cifre": -4
+   }
+  ]
+ },
+ "lunghe-condotte/5": {
+  "campi": [
+   {
+    "e": "Diametro teorico",
+    "t": "numero",
+    "v": "0{,}316",
+    "u": "m"
+   },
+   {
+    "e": "Diametro commerciale",
+    "t": "scelta",
+    "opzioni": [
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$",
+     "$400\\,\\mathrm{mm}$",
+     "$500\\,\\mathrm{mm}$"
+    ],
+    "v": "$400\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Perdita effettiva $\\Delta H_{\\mathrm{eff}}$",
+    "t": "numero",
+    "v": "7{,}93",
+    "u": "m"
+   },
+   {
+    "e": "Carico residuo",
+    "t": "numero",
+    "v": "20{,}1",
+    "u": "m"
+   },
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "1{,}03",
+    "u": "m/s"
+   }
+  ]
+ },
+ "lunghe-condotte/6": {
+  "campi": [
+   {
+    "e": "Diametro teorico",
+    "t": "numero",
+    "v": "0{,}213",
+    "u": "m"
+   },
+   {
+    "e": "Diametro commerciale",
+    "t": "scelta",
+    "opzioni": [
+     "$200\\,\\mathrm{mm}$",
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$"
+    ],
+    "v": "$250\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Perdita effettiva $\\Delta H_{\\mathrm{eff}}$",
+    "t": "numero",
+    "v": "7{,}93",
+    "u": "m"
+   },
+   {
+    "e": "Carico residuo",
+    "t": "numero",
+    "v": "10{,}1",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/7": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}132",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Carico piezometrico a $800\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "60{,}8",
+    "u": "m"
+   },
+   {
+    "e": "Pressione relativa $\\frac{p}{\\gamma}$",
+    "t": "numero",
+    "v": "-5{,}20",
+    "u": "m"
+   },
+   {
+    "e": "Pressione relativa $p$",
+    "t": "numero",
+    "v": "-51{,}0",
+    "u": "kPa"
+   }
+  ]
+ },
+ "lunghe-condotte/8": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}0972",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Quota massima dell'asse $z_{\\max}$",
+    "t": "numero",
+    "v": "61{,}0",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/9": {
+  "campi": [
+   {
+    "e": "$\\frac{p}{\\gamma}$ nel colmo a condotta libera",
+    "t": "numero",
+    "v": "-9{,}20",
+    "u": "m"
+   },
+   {
+    "e": "Portata massima $Q$",
+    "t": "numero",
+    "v": "0{,}128",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Coefficiente della saracinesca $\\xi$",
+    "t": "numero",
+    "v": "48",
+    "cifre": 0
+   }
+  ]
+ },
+ "lunghe-condotte/10": {
+  "campi": [
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "7{,}65",
+    "u": "m"
+   },
+   {
+    "e": "Prevalenza $H_p$",
+    "t": "numero",
+    "v": "43{,}7",
+    "u": "m"
+   },
+   {
+    "e": "Potenza utile $P_u$",
+    "t": "numero",
+    "v": "23{,}6",
+    "u": "kW"
+   },
+   {
+    "e": "Potenza assorbita $P$",
+    "t": "numero",
+    "v": "31{,}8",
+    "u": "kW"
+   }
+  ]
+ },
+ "lunghe-condotte/11": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}0510",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Prevalenza di esercizio $H_p$",
+    "t": "numero",
+    "v": "32{,}1",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/12": {
+  "campi": [
+   {
+    "e": "Resistenza idraulica $r$",
+    "t": "numero",
+    "v": "2902",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "0{,}0774",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Prevalenza $H$",
+    "t": "numero",
+    "v": "55{,}4",
+    "u": "m"
+   },
+   {
+    "e": "Potenza assorbita $P$",
+    "t": "numero",
+    "v": "56{,}1",
+    "u": "kW"
+   }
+  ]
+ },
+ "lunghe-condotte/13": {
+  "campi": [
+   {
+    "e": "Perdita nel tronco aspirante $\\Delta H_a$",
+    "t": "numero",
+    "v": "0{,}284",
+    "u": "m"
+   },
+   {
+    "e": "Quota massima della pompa sul pelo libero $z_a$",
+    "t": "numero",
+    "v": "6{,}80",
+    "u": "m"
+   }
+  ]
+ },
+ "lunghe-condotte/14": {
+  "campi": [
+   {
+    "e": "Perdita di carico con $D = 300\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "24{,}5",
+    "u": "m"
+   },
+   {
+    "e": "Potenza assorbita con $D = 300\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "76{,}7",
+    "u": "kW"
+   },
+   {
+    "e": "Costo annuo complessivo (€/anno) con $D = 300\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "118000",
+    "u": "€",
+    "cifre": -3
+   },
+   {
+    "e": "Perdita di carico con $D = 400\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "5{,}81",
+    "u": "m"
+   },
+   {
+    "e": "Potenza assorbita con $D = 400\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "47{,}7",
+    "u": "kW"
+   },
+   {
+    "e": "Costo annuo complessivo (€/anno) con $D = 400\\,\\mathrm{mm}$",
+    "t": "numero",
+    "v": "97500",
+    "u": "€",
+    "cifre": -2
+   },
+   {
+    "e": "Diametro che conviene",
+    "t": "scelta",
+    "opzioni": [
+     "$300\\,\\mathrm{mm}$",
+     "$400\\,\\mathrm{mm}$"
+    ],
+    "v": "$400\\,\\mathrm{mm}$"
+   }
+  ]
+ },
+ "perdite-di-carico/1": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}43",
+    "u": "m/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "3{,}57 \\cdot 10^5"
+   },
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0186"
+   },
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}00769"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "perdite-di-carico/2": {
+  "campi": [
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "12{,}0",
+    "u": "m"
+   },
+   {
+    "e": "Pressione relativa a valle $p_2$",
+    "t": "numero",
+    "v": "383",
+    "u": "kPa"
+   }
+  ]
+ },
+ "perdite-di-carico/3": {
+  "campi": [
+   {
+    "e": "Regime di moto",
+    "t": "scelta",
+    "opzioni": [
+     "laminare",
+     "di transizione",
+     "turbolento"
+    ],
+    "v": "laminare"
+   },
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0635"
+   },
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}0231"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "5{,}78",
+    "u": "m"
+   },
+   {
+    "e": "Velocità sull'asse $v_{\\max}$",
+    "t": "numero",
+    "v": "1{,}51",
+    "u": "m/s"
+   },
+   {
+    "e": "Sforzo tangenziale alla parete $\\tau_0$",
+    "t": "numero",
+    "v": "4{,}08",
+    "u": "Pa"
+   }
+  ]
+ },
+ "perdite-di-carico/4": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "8{,}74",
+    "u": "L/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "927"
+   },
+   {
+    "e": "Ipotesi di moto laminare",
+    "t": "scelta",
+    "opzioni": [
+     "soddisfatta",
+     "non soddisfatta"
+    ],
+    "v": "soddisfatta"
+   }
+  ]
+ },
+ "perdite-di-carico/5": {
+  "campi": [
+   {
+    "e": "Perdita localizzata complessiva $\\Delta H_{\\mathrm{loc}}$",
+    "t": "numero",
+    "v": "0{,}393",
+    "u": "m"
+   }
+  ]
+ },
+ "perdite-di-carico/6": {
+  "campi": [
+   {
+    "e": "Perdita continua $\\Delta H_{\\mathrm{cont}}$",
+    "t": "numero",
+    "v": "1{,}32",
+    "u": "m"
+   },
+   {
+    "e": "Perdita localizzata $\\Delta H_{\\mathrm{loc}}$",
+    "t": "numero",
+    "v": "0{,}282",
+    "u": "m"
+   },
+   {
+    "e": "Quota della perdita localizzata sul totale",
+    "t": "numero",
+    "v": "17{,}6",
+    "u": "%"
+   }
+  ]
+ },
+ "perdite-di-carico/7": {
+  "campi": [
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "0{,}0897",
+    "u": "m"
+   },
+   {
+    "e": "Coefficiente $\\xi$ riferito a $v_1$",
+    "t": "numero",
+    "v": "0{,}309"
+   },
+   {
+    "e": "$p_2 - p_1$",
+    "t": "numero",
+    "v": "1{,}41",
+    "u": "kPa"
+   }
+  ]
+ },
+ "perdite-di-carico/8": {
+  "campi": [
+   {
+    "e": "Velocità nella sezione contratta $v_c$",
+    "t": "numero",
+    "v": "4{,}04",
+    "u": "m/s"
+   },
+   {
+    "e": "Coefficiente $\\xi$ riferito a $v_2$",
+    "t": "numero",
+    "v": "0{,}345"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "0{,}114",
+    "u": "m"
+   }
+  ]
+ },
+ "perdite-di-carico/9": {
+  "campi": [
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0195"
+   },
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}59",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "78",
+    "u": "L/s"
+   }
+  ]
+ },
+ "perdite-di-carico/10": {
+  "campi": [
+   {
+    "e": "Diametro di calcolo $D$",
+    "t": "numero",
+    "v": "265",
+    "u": "mm"
+   },
+   {
+    "e": "Diametro commerciale adottato",
+    "t": "scelta",
+    "opzioni": [
+     "$200\\,\\mathrm{mm}$",
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$",
+     "$400\\,\\mathrm{mm}$"
+    ],
+    "v": "$300\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Cadente $J$ con il diametro adottato",
+    "t": "numero",
+    "v": "0{,}00214"
+   }
+  ]
+ },
+ "perdite-di-carico/11": {
+  "campi": [
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}00633"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "7{,}59",
+    "u": "m"
+   },
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0230"
+   },
+   {
+    "e": "Coefficiente di Chézy $\\chi$",
+    "t": "numero",
+    "v": "58{,}4",
+    "u": "m^(1/2)/s"
+   }
+  ]
+ },
+ "perdite-di-carico/12": {
+  "campi": [
+   {
+    "e": "Coefficiente di Strickler $k_s$",
+    "t": "numero",
+    "v": "85{,}6",
+    "u": "m^(1/3)/s"
+   },
+   {
+    "e": "Coefficiente di Chézy $\\chi$",
+    "t": "numero",
+    "v": "52{,}0",
+    "u": "m^(1/2)/s"
+   },
+   {
+    "e": "Indice di resistenza $\\lambda$",
+    "t": "numero",
+    "v": "0{,}0290"
+   }
+  ]
+ },
+ "perdite-di-carico/13": {
+  "campi": [
+   {
+    "e": "Lunghezza equivalente dell'imbocco",
+    "t": "numero",
+    "v": "3{,}26",
+    "u": "m"
+   },
+   {
+    "e": "Lunghezza equivalente di una curva",
+    "t": "numero",
+    "v": "1{,}96",
+    "u": "m"
+   },
+   {
+    "e": "Lunghezza equivalente della valvola di ritegno",
+    "t": "numero",
+    "v": "13{,}0",
+    "u": "m"
+   },
+   {
+    "e": "Lunghezza equivalente dello sbocco",
+    "t": "numero",
+    "v": "6{,}52",
+    "u": "m"
+   },
+   {
+    "e": "Lunghezza equivalente complessiva $L_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "26{,}7",
+    "u": "m"
+   },
+   {
+    "e": "Aumento percentuale della lunghezza",
+    "t": "numero",
+    "v": "22{,}3",
+    "u": "%"
+   }
+  ]
+ },
+ "perdite-di-carico/14": {
+  "campi": [
+   {
+    "e": "Cadente $J$",
+    "t": "numero",
+    "v": "0{,}0106"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "6{,}37",
+    "u": "m"
+   },
+   {
+    "e": "Sforzo tangenziale alla parete $\\tau_0$",
+    "t": "numero",
+    "v": "10{,}4",
+    "u": "Pa"
+   },
+   {
+    "e": "Forza tangenziale sulla parete $F$",
+    "t": "numero",
+    "v": "7{,}86",
+    "u": "kN"
+   }
+  ]
+ },
  "profili-e-risalto/1": {
   "campi": [
    {
@@ -505,6 +2843,1008 @@
      "S3"
     ],
     "v": "S1"
+   }
+  ]
+ },
+ "sistemi-di-condotte/1": {
+  "campi": [
+   {
+    "e": "Resistenza $r_1$",
+    "t": "numero",
+    "v": "898",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Resistenza $r_2$",
+    "t": "numero",
+    "v": "1751",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "97{,}1",
+    "u": "L/s"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H_1$",
+    "t": "numero",
+    "v": "8{,}47",
+    "u": "m"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H_2$",
+    "t": "numero",
+    "v": "16{,}53",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-condotte/2": {
+  "campi": [
+   {
+    "e": "Resistenza equivalente $r_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "5672",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Diametro equivalente $D_e$",
+    "t": "numero",
+    "v": "225",
+    "u": "mm"
+   }
+  ]
+ },
+ "sistemi-di-condotte/3": {
+  "campi": [
+   {
+    "e": "Resistenza equivalente $r_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "668",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$ fra $M$ e $V$",
+    "t": "numero",
+    "v": "9{,}62",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q_1$",
+    "t": "numero",
+    "v": "71{,}9",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_2$",
+    "t": "numero",
+    "v": "48{,}1",
+    "u": "L/s"
+   }
+  ]
+ },
+ "sistemi-di-condotte/4": {
+  "campi": [
+   {
+    "e": "Resistenza $r$ di una condotta",
+    "t": "numero",
+    "v": "8908",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Resistenza equivalente $r_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "990",
+    "u": "s^2/m^5"
+   },
+   {
+    "e": "Diametro equivalente $D_e$",
+    "t": "numero",
+    "v": "310",
+    "u": "mm"
+   }
+  ]
+ },
+ "sistemi-di-condotte/5": {
+  "campi": [
+   {
+    "e": "Portata prima dell'intervento $Q_0$",
+    "t": "numero",
+    "v": "130",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata dopo il raddoppio $Q$",
+    "t": "numero",
+    "v": "175",
+    "u": "L/s"
+   },
+   {
+    "e": "Aumento percentuale",
+    "t": "numero",
+    "v": "35",
+    "u": "%"
+   }
+  ]
+ },
+ "sistemi-di-condotte/6": {
+  "campi": [
+   {
+    "e": "Portata complessiva $Q$",
+    "t": "numero",
+    "v": "139",
+    "u": "L/s"
+   },
+   {
+    "e": "Perdita del tratto comune",
+    "t": "numero",
+    "v": "8{,}32",
+    "u": "m"
+   },
+   {
+    "e": "Perdita del fascio in parallelo",
+    "t": "numero",
+    "v": "13{,}68",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q_1$",
+    "t": "numero",
+    "v": "85{,}7",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_2$",
+    "t": "numero",
+    "v": "53{,}7",
+    "u": "L/s"
+   }
+  ]
+ },
+ "sistemi-di-condotte/7": {
+  "campi": [
+   {
+    "e": "Portata distribuita per unità di lunghezza $p$",
+    "t": "numero",
+    "v": "0{,}0450",
+    "u": "L/(s m)"
+   },
+   {
+    "e": "Portata equivalente $Q_e$",
+    "t": "numero",
+    "v": "98{,}5",
+    "u": "L/s"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "14{,}51",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-condotte/8": {
+  "campi": [
+   {
+    "e": "Portata equivalente $Q_e$",
+    "t": "numero",
+    "v": "41{,}6",
+    "u": "L/s"
+   },
+   {
+    "e": "Diametro minimo",
+    "t": "numero",
+    "v": "216",
+    "u": "mm"
+   },
+   {
+    "e": "Diametro commerciale adottato",
+    "t": "scelta",
+    "opzioni": [
+     "$200\\,\\mathrm{mm}$",
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$"
+    ],
+    "v": "$250\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Perdita effettiva $\\Delta H$",
+    "t": "numero",
+    "v": "3{,}86",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-condotte/9": {
+  "campi": [
+   {
+    "e": "Verso della portata nel ramo $B$",
+    "t": "scelta",
+    "opzioni": [
+     "dal serbatoio $B$ verso il nodo",
+     "dal nodo verso il serbatoio $B$"
+    ],
+    "v": "dal serbatoio $B$ verso il nodo"
+   },
+   {
+    "e": "Carico nel nodo $h_N$",
+    "t": "numero",
+    "v": "65{,}35",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q_A$",
+    "t": "numero",
+    "v": "182",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_B$",
+    "t": "numero",
+    "v": "36{,}1",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_C$",
+    "t": "numero",
+    "v": "218",
+    "u": "L/s"
+   }
+  ]
+ },
+ "sistemi-di-condotte/10": {
+  "campi": [
+   {
+    "e": "$Q_A$ nella prova con $h_N = z_B$",
+    "t": "numero",
+    "v": "345",
+    "u": "L/s"
+   },
+   {
+    "e": "$Q_C$ nella prova con $h_N = z_B$",
+    "t": "numero",
+    "v": "59{,}8",
+    "u": "L/s"
+   },
+   {
+    "e": "Verso della portata nel ramo $B$",
+    "t": "scelta",
+    "opzioni": [
+     "dal serbatoio $B$ verso il nodo",
+     "dal nodo verso il serbatoio $B$"
+    ],
+    "v": "dal nodo verso il serbatoio $B$"
+   },
+   {
+    "e": "Carico nel nodo $h_N$",
+    "t": "numero",
+    "v": "61{,}51",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q_A$",
+    "t": "numero",
+    "v": "166",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_B$",
+    "t": "numero",
+    "v": "78{,}6",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata $Q_C$",
+    "t": "numero",
+    "v": "87{,}8",
+    "u": "L/s"
+   }
+  ]
+ },
+ "sistemi-di-condotte/11": {
+  "campi": [
+   {
+    "e": "Quota piezometrica $h_A$",
+    "t": "numero",
+    "v": "100{,}20",
+    "u": "m"
+   },
+   {
+    "e": "Quota piezometrica $h_B$",
+    "t": "numero",
+    "v": "92{,}78",
+    "u": "m"
+   },
+   {
+    "e": "Quota piezometrica $h_C$",
+    "t": "numero",
+    "v": "86{,}63",
+    "u": "m"
+   },
+   {
+    "e": "Pressione in $B$, $\\dfrac{p_B}{\\gamma}$",
+    "t": "numero",
+    "v": "12{,}78",
+    "u": "m"
+   },
+   {
+    "e": "Pressione in $C$, $\\dfrac{p_C}{\\gamma}$",
+    "t": "numero",
+    "v": "11{,}63",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-condotte/12": {
+  "campi": [
+   {
+    "e": "Perdita disponibile",
+    "t": "numero",
+    "v": "6{,}00",
+    "u": "m"
+   },
+   {
+    "e": "Diametro minimo",
+    "t": "numero",
+    "v": "294",
+    "u": "mm"
+   },
+   {
+    "e": "Diametro commerciale adottato",
+    "t": "scelta",
+    "opzioni": [
+     "$200\\,\\mathrm{mm}$",
+     "$250\\,\\mathrm{mm}$",
+     "$300\\,\\mathrm{mm}$"
+    ],
+    "v": "$300\\,\\mathrm{mm}$"
+   },
+   {
+    "e": "Pressione in $B$, $\\dfrac{p_B}{\\gamma}$",
+    "t": "numero",
+    "v": "20{,}55",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-condotte/13": {
+  "campi": [
+   {
+    "e": "Correzione della prima iterazione $\\Delta Q_1$",
+    "t": "numero",
+    "v": "-9{,}85",
+    "u": "L/s"
+   },
+   {
+    "e": "Correzione della seconda iterazione $\\Delta Q_2$",
+    "t": "numero",
+    "v": "-0{,}19",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata finale $Q_{12}$",
+    "t": "numero",
+    "v": "60{,}0",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata finale $Q_{23}$",
+    "t": "numero",
+    "v": "20{,}0",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata finale $Q_{43}$",
+    "t": "numero",
+    "v": "30{,}0",
+    "u": "L/s"
+   },
+   {
+    "e": "Portata finale $Q_{14}$",
+    "t": "numero",
+    "v": "60{,}0",
+    "u": "L/s"
+   }
+  ]
+ },
+ "sistemi-di-condotte/14": {
+  "campi": [
+   {
+    "e": "Perdita del primo tratto $\\Delta H_1$",
+    "t": "numero",
+    "v": "11{,}51",
+    "u": "m"
+   },
+   {
+    "e": "Perdita del secondo tratto $\\Delta H_2$",
+    "t": "numero",
+    "v": "7{,}27",
+    "u": "m"
+   },
+   {
+    "e": "Prevalenza della pompa $H_p$",
+    "t": "numero",
+    "v": "63{,}78",
+    "u": "m"
+   },
+   {
+    "e": "Potenza assorbita $P$",
+    "t": "numero",
+    "v": "76{,}1",
+    "u": "kW"
+   }
+  ]
+ },
+ "spinte-idrostatiche/1": {
+  "campi": [
+   {
+    "e": "Spinta $S$",
+    "t": "numero",
+    "v": "55{,}2",
+    "u": "kN"
+   },
+   {
+    "e": "Profondità del centro di spinta",
+    "t": "numero",
+    "v": "1{,}67",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/2": {
+  "campi": [
+   {
+    "e": "Spinta $S$",
+    "t": "numero",
+    "v": "135",
+    "u": "kN"
+   },
+   {
+    "e": "Profondità del centro di spinta",
+    "t": "numero",
+    "v": "2{,}94",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/3": {
+  "campi": [
+   {
+    "e": "Spinta netta $S$",
+    "t": "numero",
+    "v": "96{,}2",
+    "u": "kN"
+   },
+   {
+    "e": "Quota della retta d'azione sopra il fondo",
+    "t": "numero",
+    "v": "1{,}11",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/4": {
+  "campi": [
+   {
+    "e": "Spinta $S$",
+    "t": "numero",
+    "v": "64{,}9",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza del centro di spinta dal bordo inferiore, sul piano della paratoia",
+    "t": "numero",
+    "v": "0{,}796",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/5": {
+  "campi": [
+   {
+    "e": "Spinta $S$",
+    "t": "numero",
+    "v": "23{,}1",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza del centro di spinta dal centro della paratoia",
+    "t": "numero",
+    "v": "20{,}8",
+    "u": "mm"
+   }
+  ]
+ },
+ "spinte-idrostatiche/6": {
+  "campi": [
+   {
+    "e": "Spinta $S$",
+    "t": "numero",
+    "v": "15{,}0",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza del centro di spinta dal centro, sul piano della paratoia",
+    "t": "numero",
+    "v": "16{,}2",
+    "u": "mm"
+   }
+  ]
+ },
+ "spinte-idrostatiche/7": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "36{,}8",
+    "u": "kN"
+   }
+  ]
+ },
+ "spinte-idrostatiche/8": {
+  "campi": [
+   {
+    "e": "Momento $M$ attorno alla cerniera",
+    "t": "numero",
+    "v": "67{,}0",
+    "u": "kN m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/9": {
+  "campi": [
+   {
+    "e": "$S_x$",
+    "t": "numero",
+    "v": "102",
+    "u": "kN"
+   },
+   {
+    "e": "$S_z$",
+    "t": "numero",
+    "v": "121",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo della risultante $S$",
+    "t": "numero",
+    "v": "158",
+    "u": "kN"
+   },
+   {
+    "e": "Inclinazione della risultante sull'orizzontale",
+    "t": "numero",
+    "v": "49{,}7",
+    "u": "°"
+   }
+  ]
+ },
+ "spinte-idrostatiche/10": {
+  "campi": [
+   {
+    "e": "$S_x$",
+    "t": "numero",
+    "v": "92{,}0",
+    "u": "kN"
+   },
+   {
+    "e": "$S_z$",
+    "t": "numero",
+    "v": "144",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo della risultante $S$",
+    "t": "numero",
+    "v": "171",
+    "u": "kN"
+   },
+   {
+    "e": "Inclinazione della risultante sull'orizzontale",
+    "t": "numero",
+    "v": "57{,}5",
+    "u": "°"
+   }
+  ]
+ },
+ "spinte-idrostatiche/11": {
+  "campi": [
+   {
+    "e": "$F_r$ (ribaltamento)",
+    "t": "numero",
+    "v": "3{,}72",
+    "cifre": 2
+   },
+   {
+    "e": "$F_s$ (scorrimento)",
+    "t": "numero",
+    "v": "2{,}05",
+    "cifre": 2
+   },
+   {
+    "e": "Distanza della risultante dal paramento di monte, sul piano di posa",
+    "t": "numero",
+    "v": "1{,}78",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/12": {
+  "campi": [
+   {
+    "e": "$F_r$ (ribaltamento)",
+    "t": "numero",
+    "v": "5{,}27",
+    "cifre": 2
+   },
+   {
+    "e": "$F_s$ (scorrimento)",
+    "t": "numero",
+    "v": "1{,}81",
+    "cifre": 2
+   },
+   {
+    "e": "Distanza della risultante dal tallone, sul piano di posa",
+    "t": "numero",
+    "v": "2{,}44",
+    "u": "m"
+   }
+  ]
+ },
+ "spinte-idrostatiche/13": {
+  "campi": [
+   {
+    "e": "Volume $V$",
+    "t": "numero",
+    "v": "21{,}4",
+    "u": "L"
+   },
+   {
+    "e": "Densità del sasso",
+    "t": "numero",
+    "v": "2570",
+    "u": "kg/m^3"
+   }
+  ]
+ },
+ "spinte-idrostatiche/14": {
+  "campi": [
+   {
+    "e": "Immersione $d$",
+    "t": "numero",
+    "v": "0{,}765",
+    "u": "m"
+   },
+   {
+    "e": "Raggio metacentrico $r$",
+    "t": "numero",
+    "v": "1{,}74",
+    "u": "m"
+   },
+   {
+    "e": "Altezza metacentrica $\\overline{GM}$",
+    "t": "numero",
+    "v": "1{,}33",
+    "u": "m"
+   },
+   {
+    "e": "Equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile",
+     "indifferente"
+    ],
+    "v": "stabile"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/1": {
+  "campi": [
+   {
+    "e": "Velocità media $v$",
+    "t": "numero",
+    "v": "1{,}63",
+    "u": "m/s"
+   },
+   {
+    "e": "Altezza cinetica $\\dfrac{v^2}{2g}$",
+    "t": "numero",
+    "v": "0{,}135",
+    "u": "m"
+   },
+   {
+    "e": "Carico piezometrico $h$",
+    "t": "numero",
+    "v": "18{,}73",
+    "u": "m"
+   },
+   {
+    "e": "Carico totale $H$",
+    "t": "numero",
+    "v": "18{,}87",
+    "u": "m"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/2": {
+  "campi": [
+   {
+    "e": "$H_1$",
+    "t": "numero",
+    "v": "37{,}26",
+    "u": "m"
+   },
+   {
+    "e": "$H_2$",
+    "t": "numero",
+    "v": "35{,}00",
+    "u": "m"
+   },
+   {
+    "e": "Perdita di carico $\\Delta H$",
+    "t": "numero",
+    "v": "2{,}26",
+    "u": "m"
+   },
+   {
+    "e": "Verso del moto",
+    "t": "scelta",
+    "opzioni": [
+     "dalla sezione $1$ alla sezione $2$",
+     "dalla sezione $2$ alla sezione $1$"
+    ],
+    "v": "dalla sezione $1$ alla sezione $2$"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/3": {
+  "campi": [
+   {
+    "e": "$v_1$",
+    "t": "numero",
+    "v": "1{,}43",
+    "u": "m/s"
+   },
+   {
+    "e": "$v_2$",
+    "t": "numero",
+    "v": "3{,}96",
+    "u": "m/s"
+   },
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "193",
+    "u": "kPa"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/4": {
+  "campi": [
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "317",
+    "u": "kPa"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/5": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "88{,}2",
+    "u": "L/s"
+   },
+   {
+    "e": "Velocità del getto $v_2$",
+    "t": "numero",
+    "v": "17{,}5",
+    "u": "m/s"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/6": {
+  "campi": [
+   {
+    "e": "Velocità di efflusso $v$",
+    "t": "numero",
+    "v": "7{,}92",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "39{,}8",
+    "u": "L/s"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/7": {
+  "campi": [
+   {
+    "e": "Velocità di efflusso $v$",
+    "t": "numero",
+    "v": "7{,}92",
+    "u": "m/s"
+   },
+   {
+    "e": "Distanza $x$ dalla parete",
+    "t": "numero",
+    "v": "4{,}80",
+    "u": "m"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/8": {
+  "campi": [
+   {
+    "e": "Carico totale $H$ del pelo libero",
+    "t": "numero",
+    "v": "9{,}65",
+    "u": "m"
+   },
+   {
+    "e": "Velocità di efflusso $v$",
+    "t": "numero",
+    "v": "13{,}8",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "27{,}0",
+    "u": "L/s"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/9": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "84{,}8",
+    "u": "L/s"
+   },
+   {
+    "e": "$v_1$",
+    "t": "numero",
+    "v": "1{,}20",
+    "u": "m/s"
+   },
+   {
+    "e": "$v_2$",
+    "t": "numero",
+    "v": "4{,}80",
+    "u": "m/s"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/10": {
+  "campi": [
+   {
+    "e": "Differenza dei carichi piezometrici $\\Delta h$",
+    "t": "numero",
+    "v": "1{,}89",
+    "u": "m"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "49{,}4",
+    "u": "L/s"
+   },
+   {
+    "e": "$p_1 - p_2$",
+    "t": "numero",
+    "v": "18{,}5",
+    "u": "kPa"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/11": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "2{,}63",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "129",
+    "u": "L/s"
+   },
+   {
+    "e": "Numero di Reynolds $Re$",
+    "t": "numero",
+    "v": "6{,}6 \\cdot 10^5"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/12": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "1{,}88",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "6{,}77",
+    "u": "m^3/s"
+   },
+   {
+    "e": "Numero di Froude $Fr$",
+    "t": "numero",
+    "v": "0{,}548",
+    "cifre": 3
+   },
+   {
+    "e": "La corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "lenta",
+     "veloce",
+     "critica"
+    ],
+    "v": "lenta"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/13": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "1{,}98",
+    "u": "m/s"
+   },
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "140",
+    "u": "L/s"
+   },
+   {
+    "e": "Carico totale $H$ nella sezione indicata",
+    "t": "numero",
+    "v": "6{,}00",
+    "u": "m"
+   },
+   {
+    "e": "Carico piezometrico $h$ nella sezione indicata",
+    "t": "numero",
+    "v": "5{,}80",
+    "u": "m"
+   }
+  ]
+ },
+ "teorema-di-bernoulli/14": {
+  "campi": [
+   {
+    "e": "Pressione assoluta $p^{\\mathrm{ass}}$",
+    "t": "numero",
+    "v": "41{,}6",
+    "u": "kPa"
+   },
+   {
+    "e": "Pressione relativa $p$",
+    "t": "numero",
+    "v": "-59{,}7",
+    "u": "kPa"
+   },
+   {
+    "e": "Margine rispetto alla tensione di vapore",
+    "t": "numero",
+    "v": "4{,}00",
+    "u": "m"
    }
   ]
  }

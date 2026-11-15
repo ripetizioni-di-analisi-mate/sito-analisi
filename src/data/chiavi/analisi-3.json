@@ -1,0 +1,2176 @@
+{
+ "banach-e-operatori/2": {
+  "campi": [
+   {
+    "e": "$\\|T\\|$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Funzione di norma uno che realizza la norma",
+    "t": "scelta",
+    "opzioni": [
+     "$f(x)=1$",
+     "$f(x)=x$",
+     "$f(x)=x^2$"
+    ],
+    "v": "$f(x)=1$"
+   }
+  ]
+ },
+ "banach-e-operatori/6": {
+  "campi": [
+   {
+    "e": "$\\|\\ell\\|$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Funzione che realizza la norma",
+    "t": "scelta",
+    "opzioni": [
+     "la costante $f=1$",
+     "la spezzata che interpola $(0,1)$, $(\\frac{1}{2},-1)$ e $(1,1)$",
+     "la spezzata che interpola $(0,1)$, $(\\frac{1}{2},1)$ e $(1,-1)$",
+     "$f(x)=1-2x$"
+    ],
+    "v": "la spezzata che interpola $(0,1)$, $(\\frac{1}{2},-1)$ e $(1,1)$"
+   }
+  ]
+ },
+ "banach-e-operatori/8": {
+  "campi": [
+   {
+    "e": "$T([0,1])$",
+    "t": "intervallo",
+    "v": "[\\frac{1}{3}, \\frac{1}{2}]"
+   },
+   {
+    "e": "Costante di contrazione $\\sup_{[0,1]}|T'(x)|$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   },
+   {
+    "e": "Punto fisso",
+    "t": "numero",
+    "v": "\\sqrt{2}-1"
+   }
+  ]
+ },
+ "banach-e-operatori/9": {
+  "campi": [
+   {
+    "e": "Stima a posteriori: $|x_*-x_n|\\le$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "banach-e-operatori/10": {
+  "campi": [
+   {
+    "e": "Stima a posteriori: $|x_*-x_n|\\le$",
+    "t": "numero",
+    "v": "\\frac{1}{25}"
+   },
+   {
+    "e": "Intervallo che contiene $x_*$",
+    "t": "intervallo",
+    "v": "[\\frac{8}{5}, \\frac{42}{25}]"
+   }
+  ]
+ },
+ "banach-e-operatori/12": {
+  "campi": [
+   {
+    "e": "Matrice di $(I-A)^{-1}$ nella base canonica",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "1",
+      "1"
+     ],
+     [
+      "0",
+      "1",
+      "1"
+     ],
+     [
+      "0",
+      "0",
+      "1"
+     ]
+    ]
+   },
+   {
+    "e": "$\\|A\\|$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "L'ipotesi $\\|A\\|<1$ è",
+    "t": "scelta",
+    "opzioni": [
+     "soddisfatta",
+     "non soddisfatta"
+    ],
+    "v": "non soddisfatta"
+   }
+  ]
+ },
+ "banach-e-operatori/13": {
+  "campi": [
+   {
+    "e": "L'operatore $T$ è",
+    "t": "scelta",
+    "opzioni": [
+     "compatto",
+     "non compatto"
+    ],
+    "v": "compatto"
+   },
+   {
+    "e": "$\\|T\\|$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "banach-e-operatori/14": {
+  "campi": [
+   {
+    "e": "$\\|D\\|$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "L'operatore $D$ è",
+    "t": "scelta",
+    "opzioni": [
+     "compatto",
+     "non compatto"
+    ],
+    "v": "non compatto"
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/1": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "e^{-(x-3t)^2}",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/2": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "e^{-(x-4t)^2}",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/3": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "e^{-9t}\\sin(3x)",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/4": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "e^{-16t}\\sin(4x)",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/5": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "\\cos(3t)\\sin(3x)",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/6": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "\\cos(4t)\\sin(4x)",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/7": {
+  "campi": [
+   {
+    "e": "$u(x,y)$",
+    "t": "funzione",
+    "v": "\\frac{\\sinh(3y)}{\\sinh(3)}\\sin(3x)",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/8": {
+  "campi": [
+   {
+    "e": "$u(x,y)$",
+    "t": "funzione",
+    "v": "\\frac{\\sinh(4y)}{\\sinh(4)}\\sin(4x)",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/11": {
+  "campi": [
+   {
+    "e": "L'equazione è",
+    "t": "scelta",
+    "opzioni": [
+     "ellittica",
+     "parabolica",
+     "iperbolica"
+    ],
+    "v": "ellittica"
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/12": {
+  "campi": [
+   {
+    "e": "L'equazione è",
+    "t": "scelta",
+    "opzioni": [
+     "ellittica",
+     "parabolica",
+     "iperbolica"
+    ],
+    "v": "ellittica"
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/13": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "x^2+9t^2",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/14": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "x^2+16t^2",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/15": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "(x-3t)^2+tx-t^2",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/16": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "2\\left(1-\\frac{x}{\\pi}\\right)+e^{-9t}\\sin(3x)",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/17": {
+  "campi": [
+   {
+    "e": "$u(t,x)$",
+    "t": "funzione",
+    "v": "tx^2+\\frac{4}{3}t^3",
+    "var": [
+     "t",
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-derivate-parziali/18": {
+  "campi": [
+   {
+    "e": "$u(x)$",
+    "t": "funzione",
+    "v": "x-x^3",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Valore massimo di $u$",
+    "t": "numero",
+    "v": "\\frac{2}{3\\sqrt{3}}"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "numero",
+    "v": "\\frac{1}{\\sqrt{3}}"
+   }
+  ]
+ },
+ "funzioni-complesse/3": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "funzioni-complesse/4": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "funzioni-complesse/5": {
+  "campi": [
+   {
+    "e": "$v(x,y)$",
+    "t": "funzione",
+    "v": "6xy",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-complesse/6": {
+  "campi": [
+   {
+    "e": "$v(x,y)$",
+    "t": "funzione",
+    "v": "8xy",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-complesse/7": {
+  "campi": [
+   {
+    "e": "Parte reale delle soluzioni",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Parti immaginarie delle soluzioni ($m\\in\\mathbb Z$)",
+    "t": "scelta",
+    "opzioni": [
+     "$2m\\pi$",
+     "$(2m+1)\\pi$",
+     "$m\\pi$",
+     "$\\pi$ soltanto"
+    ],
+    "v": "$(2m+1)\\pi$"
+   }
+  ]
+ },
+ "funzioni-complesse/8": {
+  "campi": [
+   {
+    "e": "Parte reale delle soluzioni",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Parti immaginarie delle soluzioni ($m\\in\\mathbb Z$)",
+    "t": "scelta",
+    "opzioni": [
+     "$2m\\pi$",
+     "$(2m+1)\\pi$",
+     "$m\\pi$",
+     "$\\pi$ soltanto"
+    ],
+    "v": "$(2m+1)\\pi$"
+   }
+  ]
+ },
+ "funzioni-complesse/9": {
+  "campi": [
+   {
+    "e": "$\\operatorname{Log}\\left(e^{3}e^{\\frac{3\\pi i}{4}}\\right)$: parte reale; parte immaginaria",
+    "t": "valori",
+    "v": [
+     "3",
+     "\\frac{3}{4}\\pi"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "funzioni-complesse/10": {
+  "campi": [
+   {
+    "e": "$\\operatorname{Log}\\left(e^{4}e^{\\frac{3\\pi i}{4}}\\right)$: parte reale; parte immaginaria",
+    "t": "valori",
+    "v": [
+     "4",
+     "\\frac{3}{4}\\pi"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "funzioni-complesse/12": {
+  "campi": [
+   {
+    "e": "In $z=0$ la funzione $f$ è",
+    "t": "scelta",
+    "opzioni": [
+     "continua",
+     "non continua"
+    ],
+    "v": "continua"
+   },
+   {
+    "e": "In $z=0$ la funzione $f$ è",
+    "t": "scelta",
+    "opzioni": [
+     "derivabile in senso complesso",
+     "non derivabile in senso complesso"
+    ],
+    "v": "non derivabile in senso complesso"
+   }
+  ]
+ },
+ "funzioni-complesse/13": {
+  "campi": [
+   {
+    "e": "Angolo di rotazione",
+    "t": "numero",
+    "v": "\\frac{\\pi}{2}"
+   },
+   {
+    "e": "Fattore di dilatazione",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Fattore d'area",
+    "t": "numero",
+    "v": "36"
+   }
+  ]
+ },
+ "funzioni-complesse/14": {
+  "campi": [
+   {
+    "e": "Immagine del semipiano $\\operatorname{Im}z<0$",
+    "t": "scelta",
+    "opzioni": [
+     "il disco unitario aperto $|w|<1$",
+     "l'esterno del disco unitario $|w|>1$",
+     "il semipiano $\\operatorname{Re}w>0$",
+     "il semipiano $\\operatorname{Re}w<0$"
+    ],
+    "v": "il disco unitario aperto $|w|<1$"
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/3": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "9\\pi"
+    ]
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/4": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "16\\pi"
+    ]
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/5": {
+  "campi": [
+   {
+    "e": "Residuo in $z=3i$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-1/6"
+    ]
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/6": {
+  "campi": [
+   {
+    "e": "Residuo in $z=4i$ (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-1/8"
+    ]
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/9": {
+  "campi": [
+   {
+    "e": "Coefficiente di $z^{-1}$",
+    "t": "numero",
+    "v": "-\\frac{1}{4}"
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/10": {
+  "campi": [
+   {
+    "e": "Coefficiente di $z^{-1}$",
+    "t": "numero",
+    "v": "-\\frac{1}{5}"
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/11": {
+  "campi": [
+   {
+    "e": "Residuo in $z=0$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Tipo di singolarità in $z=0$",
+    "t": "scelta",
+    "opzioni": [
+     "singolarità eliminabile",
+     "polo semplice",
+     "polo doppio",
+     "polo triplo",
+     "singolarità essenziale"
+    ],
+    "v": "polo semplice"
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/13": {
+  "campi": [
+   {
+    "e": "Numero di zeri in $1<|z|<2$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "integrali-complessi-e-residui/14": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale (parte reale; parte immaginaria)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "4\\pi"
+    ]
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/5": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/6": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{5}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/7": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/8": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/9": {
+  "campi": [
+   {
+    "e": "$\\lim_n\\int f_n$; $\\int\\lim_n f_n$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "0"
+    ]
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/10": {
+  "campi": [
+   {
+    "e": "$\\lim_n\\int f_n$; $\\int\\lim_n f_n$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "0"
+    ]
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/11": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{12}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/12": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{20}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/13": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{9}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/14": {
+  "campi": [
+   {
+    "e": "Valore dell'integrale",
+    "t": "numero",
+    "v": "\\frac{1}{16}"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/15": {
+  "campi": [
+   {
+    "e": "$\\int f^+\\,dm$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "$\\int f^-\\,dm$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "$\\int f\\,dm$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/16": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\log 2"
+   },
+   {
+    "e": "Teorema che giustifica lo scambio",
+    "t": "scelta",
+    "opzioni": [
+     "teorema della convergenza monotona",
+     "lemma di Fatou",
+     "teorema di Fubini-Tonelli",
+     "nessuno: lo scambio non è lecito"
+    ],
+    "v": "teorema della convergenza monotona"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/17": {
+  "campi": [
+   {
+    "e": "Somma iterata, prima in $j$ e poi in $i$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Somma iterata, prima in $i$ e poi in $j$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "La serie doppia",
+    "t": "scelta",
+    "opzioni": [
+     "è assolutamente convergente",
+     "non è assolutamente convergente"
+    ],
+    "v": "non è assolutamente convergente"
+   }
+  ]
+ },
+ "misura-e-integrale-di-lebesgue/18": {
+  "campi": [
+   {
+    "e": "$G'(0)$",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "serie-di-fourier/1": {
+  "campi": [
+   {
+    "e": "$a_n$ per $n\\geq 0$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{8}{\\pi}"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "\\frac{8}{3\\pi}"
+   }
+  ]
+ },
+ "serie-di-fourier/2": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{4}{\\pi}"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "\\frac{4}{3\\pi}"
+   }
+  ]
+ },
+ "serie-di-fourier/3": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "\\pi"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "\\frac{4}{\\pi}"
+   },
+   {
+    "e": "$a_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$a_3$",
+    "t": "numero",
+    "v": "\\frac{4}{9\\pi}"
+   },
+   {
+    "e": "$b_n$ per $n\\geq 1$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "serie-di-fourier/4": {
+  "campi": [
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "-\\frac{1}{4}"
+   }
+  ]
+ },
+ "serie-di-fourier/5": {
+  "campi": [
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "serie-di-fourier/6": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "\\frac{2\\pi^2}{3}+2"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "$a_2$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "serie-di-fourier/7": {
+  "campi": [
+   {
+    "e": "Somma della serie in $x=0$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Somma della serie in $x=\\pi$",
+    "t": "numero",
+    "v": "\\frac{1+\\pi^2}{2}"
+   }
+  ]
+ },
+ "serie-di-fourier/8": {
+  "campi": [
+   {
+    "e": "Somma della serie in $x=0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Somma della serie in $x=\\pi$",
+    "t": "numero",
+    "v": "\\frac{e^{\\pi}+e^{-\\pi}}{2}"
+   }
+  ]
+ },
+ "serie-di-fourier/9": {
+  "campi": [
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{4}{\\pi}"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "\\frac{4}{3\\pi}"
+   },
+   {
+    "e": "$\\sum_{k=0}^{\\infty}\\frac{(-1)^k}{2k+1}$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "serie-di-fourier/10": {
+  "campi": [
+   {
+    "e": "$\\sum_{n=1}^{\\infty}\\frac{1}{n^6}$",
+    "t": "numero",
+    "v": "\\frac{\\pi^6}{945}"
+   }
+  ]
+ },
+ "serie-di-fourier/11": {
+  "campi": [
+   {
+    "e": "$b_1$",
+    "t": "numero",
+    "v": "\\frac{4}{\\pi}"
+   },
+   {
+    "e": "$b_2$",
+    "t": "numero",
+    "v": "-\\frac{2}{\\pi}"
+   },
+   {
+    "e": "$b_3$",
+    "t": "numero",
+    "v": "\\frac{4}{3\\pi}"
+   }
+  ]
+ },
+ "serie-di-fourier/12": {
+  "campi": [
+   {
+    "e": "$a_0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "-\\frac{4}{\\pi^2}"
+   },
+   {
+    "e": "$a_2$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$a_3$",
+    "t": "numero",
+    "v": "-\\frac{4}{9\\pi^2}"
+   },
+   {
+    "e": "Convergenza della serie su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "serie-di-potenze/1": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-2, 2]"
+   }
+  ]
+ },
+ "serie-di-potenze/2": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{1}{3}, \\frac{1}{3}\\right)"
+   }
+  ]
+ },
+ "serie-di-potenze/3": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-2, 2)"
+   }
+  ]
+ },
+ "serie-di-potenze/4": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/5": {
+  "campi": [
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-1, 3)"
+   }
+  ]
+ },
+ "serie-di-potenze/6": {
+  "campi": [
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "[-5, 1]"
+   }
+  ]
+ },
+ "serie-di-potenze/7": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/8": {
+  "campi": [
+   {
+    "e": "Raggio di convergenza $R$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Insieme di convergenza $E$",
+    "t": "intervallo",
+    "v": "(-2, 2)"
+   }
+  ]
+ },
+ "serie-di-potenze/9": {
+  "campi": [
+   {
+    "e": "Sviluppo di MacLaurin di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-2)^n x^{n+1}}{n!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-2)^n x^{n}}{n!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n 2 x^{n+1}}{n!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-2)^n x^{n+1}}{(n+1)!}$"
+    ],
+    "v": "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-2)^n x^{n+1}}{n!}$"
+   },
+   {
+    "e": "Regione di validità",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathbb{R}$",
+     "$\\left(-\\frac{1}{2}, \\frac{1}{2}\\right)$",
+     "$(-2, 2)$",
+     "$(-1, 1)$"
+    ],
+    "v": "$\\mathbb{R}$"
+   }
+  ]
+ },
+ "serie-di-potenze/10": {
+  "campi": [
+   {
+    "e": "Sviluppo di MacLaurin di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^n}{5^{n+1}}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^n}{5^{n}}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{x^n}{5^{n+1}}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} (-1)^n 5^{n} x^n$"
+    ],
+    "v": "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^n}{5^{n+1}}$"
+   },
+   {
+    "e": "Regione di validità",
+    "t": "intervallo",
+    "v": "(-5, 5)"
+   }
+  ]
+ },
+ "serie-di-potenze/11": {
+  "campi": [
+   {
+    "e": "Sviluppo di MacLaurin di $F$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)\\,(2n+1)!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n+1)!}$",
+     "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+2}}{(2n+2)\\,(2n+1)!}$"
+    ],
+    "v": "$\\displaystyle\\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)\\,(2n+1)!}$"
+   },
+   {
+    "e": "Regione di validità",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathbb{R}$",
+     "$(-1, 1)$",
+     "$[-1, 1]$",
+     "$\\mathbb{R} \\setminus \\{0\\}$"
+    ],
+    "v": "$\\mathbb{R}$"
+   }
+  ]
+ },
+ "serie-di-potenze/12": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\frac{5}{16}"
+   }
+  ]
+ },
+ "serie-di-potenze/13": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\ln \\frac{3}{2}"
+   }
+  ]
+ },
+ "serie-di-potenze/14": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/1": {
+  "campi": [
+   {
+    "e": "$\\|x^{3}\\|_{L^2(0,1)}$",
+    "t": "numero",
+    "v": "\\frac{1}{\\sqrt{7}}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/2": {
+  "campi": [
+   {
+    "e": "$\\|x^{4}\\|_{L^2(0,1)}$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/3": {
+  "campi": [
+   {
+    "e": "Valori di $p$",
+    "t": "intervallo",
+    "v": "[1, 5)",
+    "var": "p"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/4": {
+  "campi": [
+   {
+    "e": "Valori di $p$",
+    "t": "intervallo",
+    "v": "[1, 6)",
+    "var": "p"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/7": {
+  "campi": [
+   {
+    "e": "$Pf$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/8": {
+  "campi": [
+   {
+    "e": "$Pf$",
+    "t": "numero",
+    "v": "\\frac{1}{5}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/9": {
+  "campi": [
+   {
+    "e": "Quadrato della distanza",
+    "t": "numero",
+    "v": "\\frac{9}{112}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/11": {
+  "campi": [
+   {
+    "e": "$\\|\\ell\\|$",
+    "t": "numero",
+    "v": "\\frac{1}{\\sqrt{7}}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/12": {
+  "campi": [
+   {
+    "e": "$\\|\\ell\\|$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/15": {
+  "campi": [
+   {
+    "e": "$f \\in L^1(1,\\infty)$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "$\\|f\\|_2$",
+    "t": "numero",
+    "v": "\\sqrt{5}"
+   },
+   {
+    "e": "$\\|f\\|_\\infty$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/16": {
+  "campi": [
+   {
+    "e": "$P_M f$",
+    "t": "funzione",
+    "v": "\\frac{1}{5}+\\frac{3}{5}x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Quadrato della distanza",
+    "t": "numero",
+    "v": "\\frac{296}{1575}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/17": {
+  "campi": [
+   {
+    "e": "Rappresentante di $\\ell$ nello spazio intero",
+    "t": "scelta",
+    "opzioni": [
+     "$2+ix$",
+     "$2-ix$",
+     "$ix$",
+     "$-ix$"
+    ],
+    "v": "$2+ix$"
+   },
+   {
+    "e": "Norma di $\\ell$ sulle funzioni dispari",
+    "t": "numero",
+    "v": "\\sqrt{\\frac{2}{3}}"
+   }
+  ]
+ },
+ "spazi-lp-e-hilbert/18": {
+  "campi": [
+   {
+    "e": "Limite debole",
+    "t": "scelta",
+    "opzioni": [
+     "$0$",
+     "$2e_1$",
+     "$e_1$",
+     "non esiste"
+    ],
+    "v": "$2e_1$"
+   },
+   {
+    "e": "La convergenza in norma",
+    "t": "scelta",
+    "opzioni": [
+     "avviene",
+     "non avviene"
+    ],
+    "v": "non avviene"
+   },
+   {
+    "e": "$\\|u_n - 2e_1\\|$",
+    "t": "numero",
+    "v": "\\sqrt{2}"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/1": {
+  "campi": [
+   {
+    "e": "$f(x)$ per $0 \\leq x < 1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$f(1)$",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "$f(x)$ per $x > 1$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/2": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/3": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Convergenza su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/4": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\sup_{[0, +\\infty)} |f_n - f|$",
+    "t": "funzione",
+    "v": "\\frac{4}{n^2 e^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Convergenza su $[0, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/5": {
+  "campi": [
+   {
+    "e": "Limite puntuale $f(x)$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Convergenza su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "puntuale ma non uniforme"
+   },
+   {
+    "e": "Convergenza su $[\\delta, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/6": {
+  "campi": [
+   {
+    "e": "$f(0)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$f(x)$ per $0 < x \\leq 1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Convergenza su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "puntuale ma non uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/7": {
+  "campi": [
+   {
+    "e": "$\\sup_{\\mathbb{R}} |f_n|$",
+    "t": "funzione",
+    "v": "\\frac{1}{\\sqrt{n}}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$f_n'(0)$",
+    "t": "funzione",
+    "v": "\\sqrt{n}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/8": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/9": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\ln 2"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/10": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Convergenza di $f_n$ su $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "uniforme",
+     "puntuale ma non uniforme"
+    ],
+    "v": "puntuale ma non uniforme"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/11": {
+  "campi": [
+   {
+    "e": "Convergenza della serie su $\\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "totale",
+     "uniforme ma non totale",
+     "solo puntuale"
+    ],
+    "v": "totale"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/12": {
+  "campi": [
+   {
+    "e": "$M_n = \\sup_{[0, +\\infty)} x^2 e^{-nx}$",
+    "t": "funzione",
+    "v": "\\frac{4}{n^2 e^2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Convergenza della serie su $[0, +\\infty)$",
+    "t": "scelta",
+    "opzioni": [
+     "totale",
+     "uniforme ma non totale",
+     "solo puntuale"
+    ],
+    "v": "totale"
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/13": {
+  "campi": [
+   {
+    "e": "Maggiorazione uniforme del resto $|f(x) - s_n(x)|$",
+    "t": "funzione",
+    "v": "\\frac{1}{2n+2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$\\sup_{\\mathbb{R}} \\left| \\frac{(-1)^n}{2n + x^2} \\right|$",
+    "t": "funzione",
+    "v": "\\frac{1}{2n}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "successioni-e-serie-di-funzioni/14": {
+  "campi": [
+   {
+    "e": "Maggiorante $M_n$ della serie delle derivate",
+    "t": "funzione",
+    "v": "\\frac{1}{n^3}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "$f'(x)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\displaystyle\\sum_{n=1}^{\\infty} \\frac{\\cos(n x)}{n^3}$",
+     "$\\displaystyle\\sum_{n=1}^{\\infty} -\\frac{\\cos(n x)}{n^3}$",
+     "$\\displaystyle\\sum_{n=1}^{\\infty} \\frac{\\cos(n x)}{n^4}$",
+     "$\\displaystyle\\sum_{n=1}^{\\infty} \\frac{\\cos(n x)}{n^5}$"
+    ],
+    "v": "$\\displaystyle\\sum_{n=1}^{\\infty} \\frac{\\cos(n x)}{n^3}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/1": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{6}{9+\\xi^2}$",
+     "$\\dfrac{3}{9+\\xi^2}$",
+     "$\\dfrac{2}{9+\\xi^2}$",
+     "$\\dfrac{6}{3+\\xi^2}$"
+    ],
+    "v": "$\\dfrac{6}{9+\\xi^2}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/2": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{1}{1+(\\xi-2)^2}+\\dfrac{1}{1+(\\xi+2)^2}$",
+     "$\\dfrac{2}{1+(\\xi-2)^2}+\\dfrac{2}{1+(\\xi+2)^2}$",
+     "$\\dfrac{1}{1+(\\xi-2)^2}-\\dfrac{1}{1+(\\xi+2)^2}$",
+     "$\\dfrac{2}{1+\\xi^2}\\cos(2\\xi)$"
+    ],
+    "v": "$\\dfrac{1}{1+(\\xi-2)^2}+\\dfrac{1}{1+(\\xi+2)^2}$"
+   },
+   {
+    "e": "Il risultato è",
+    "t": "scelta",
+    "opzioni": [
+     "reale e pari",
+     "reale e dispari",
+     "immaginario puro e dispari",
+     "complesso, né pari né dispari"
+    ],
+    "v": "reale e pari"
+   }
+  ]
+ },
+ "trasformata-di-fourier/3": {
+  "campi": [
+   {
+    "e": "$\\widehat{\\mathbf1_{[-3,3]}}(\\xi)$ per $\\xi \\neq 0$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{2\\sin(3\\xi)}{\\xi}$",
+     "$\\dfrac{\\sin(3\\xi)}{\\xi}$",
+     "$\\dfrac{2\\sin(3\\xi)}{3\\xi}$",
+     "$\\dfrac{2\\sin \\xi}{\\xi}$"
+    ],
+    "v": "$\\dfrac{2\\sin(3\\xi)}{\\xi}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/4": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$ per $\\xi \\neq 0$",
+    "t": "scelta",
+    "opzioni": [
+     "$e^{-\\frac{5}{2} i\\xi}\\,\\dfrac{2\\sin(\\frac{3}{2}\\xi)}{\\xi}$",
+     "$e^{\\frac{5}{2} i\\xi}\\,\\dfrac{2\\sin(\\frac{3}{2}\\xi)}{\\xi}$",
+     "$e^{-\\frac{5}{2} i\\xi}\\,\\dfrac{2\\sin(3\\xi)}{\\xi}$",
+     "$e^{-i\\xi}\\,\\dfrac{2\\sin(\\frac{3}{2}\\xi)}{\\xi}$"
+    ],
+    "v": "$e^{-\\frac{5}{2} i\\xi}\\,\\dfrac{2\\sin(\\frac{3}{2}\\xi)}{\\xi}$"
+   },
+   {
+    "e": "$\\widehat f(0)$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "trasformata-di-fourier/5": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$e^{-3i\\xi}\\,\\dfrac{2}{1+\\xi^2}$",
+     "$e^{3i\\xi}\\,\\dfrac{2}{1+\\xi^2}$",
+     "$e^{-3i\\xi}\\,\\dfrac{1}{1+\\xi^2}$",
+     "$\\dfrac{2}{1+(\\xi-3)^2}$"
+    ],
+    "v": "$e^{-3i\\xi}\\,\\dfrac{2}{1+\\xi^2}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/6": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{\\sqrt{\\pi}}{2}\\,e^{i\\xi}e^{-\\frac{\\xi^2}{16}}$",
+     "$\\dfrac{\\sqrt{\\pi}}{2}\\,e^{-i\\xi}e^{-\\frac{\\xi^2}{16}}$",
+     "$\\dfrac{\\sqrt{\\pi}}{2}\\,e^{i\\xi}e^{-\\frac{\\xi^2}{4}}$",
+     "$\\sqrt{\\pi}\\,e^{i\\xi}e^{-\\frac{\\xi^2}{16}}$"
+    ],
+    "v": "$\\dfrac{\\sqrt{\\pi}}{2}\\,e^{i\\xi}e^{-\\frac{\\xi^2}{16}}$"
+   },
+   {
+    "e": "Fattore di fase",
+    "t": "scelta",
+    "opzioni": [
+     "$e^{i\\xi}$",
+     "$e^{-i\\xi}$",
+     "$e^{4i\\xi}$",
+     "$e^{-4i\\xi}$"
+    ],
+    "v": "$e^{i\\xi}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/7": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{\\dfrac{\\pi}{3}}\\,e^{-\\frac{\\xi^2}{12}}$",
+     "$\\sqrt{\\dfrac{\\pi}{3}}\\,e^{-\\frac{\\xi^2}{3}}$",
+     "$\\sqrt{3\\pi}\\,e^{-\\frac{\\xi^2}{12}}$",
+     "$\\sqrt{\\dfrac{\\pi}{3}}\\,e^{-3\\xi^2}$"
+    ],
+    "v": "$\\sqrt{\\dfrac{\\pi}{3}}\\,e^{-\\frac{\\xi^2}{12}}$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/8": {
+  "campi": [
+   {
+    "e": "$\\widehat f(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{\\sqrt{\\pi}}{2i}\\left(e^{-\\frac{(\\xi-1)^2}{4}}-e^{-\\frac{(\\xi+1)^2}{4}}\\right)$",
+     "$\\dfrac{\\sqrt{\\pi}}{2}\\left(e^{-\\frac{(\\xi-1)^2}{4}}+e^{-\\frac{(\\xi+1)^2}{4}}\\right)$",
+     "$\\dfrac{\\sqrt{\\pi}}{2i}\\left(e^{-\\frac{(\\xi+1)^2}{4}}-e^{-\\frac{(\\xi-1)^2}{4}}\\right)$",
+     "$\\dfrac{\\sqrt{\\pi}}{2i}\\left(e^{-(\\xi-1)^2}-e^{-(\\xi+1)^2}\\right)$"
+    ],
+    "v": "$\\dfrac{\\sqrt{\\pi}}{2i}\\left(e^{-\\frac{(\\xi-1)^2}{4}}-e^{-\\frac{(\\xi+1)^2}{4}}\\right)$"
+   },
+   {
+    "e": "Parità di $\\widehat f$",
+    "t": "scelta",
+    "opzioni": [
+     "pari",
+     "dispari",
+     "né pari né dispari"
+    ],
+    "v": "dispari"
+   }
+  ]
+ },
+ "trasformata-di-fourier/12": {
+  "campi": [
+   {
+    "e": "Supporto di $f*g$",
+    "t": "intervallo",
+    "v": "[-1, 4]"
+   },
+   {
+    "e": "$(f*g)\\left(\\frac{5}{2}\\right)$",
+    "t": "numero",
+    "v": "\\frac{3}{2}"
+   }
+  ]
+ },
+ "trasformata-di-fourier/13": {
+  "campi": [
+   {
+    "e": "$\\widehat{f^{(3)}}(\\xi)$",
+    "t": "scelta",
+    "opzioni": [
+     "$(i\\xi)^{3}\\widehat f(\\xi)$",
+     "$(-i\\xi)^{3}\\widehat f(\\xi)$",
+     "$\\xi^{3}\\widehat f(\\xi)$",
+     "$i^{3}\\,\\widehat f^{\\,(3)}(\\xi)$"
+    ],
+    "v": "$(i\\xi)^{3}\\widehat f(\\xi)$"
+   }
+  ]
+ },
+ "trasformata-di-fourier/14": {
+  "campi": [
+   {
+    "e": "Trasformata della derivata distribuzionale",
+    "t": "scelta",
+    "opzioni": [
+     "$e^{-2i\\xi}-e^{-5i\\xi}$",
+     "$e^{2i\\xi}-e^{5i\\xi}$",
+     "$e^{-5i\\xi}-e^{-2i\\xi}$",
+     "$\\dfrac{e^{-2i\\xi}-e^{-5i\\xi}}{i\\xi}$"
+    ],
+    "v": "$e^{-2i\\xi}-e^{-5i\\xi}$"
+   }
+  ]
+ },
+ "trasformata-di-laplace/1": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[t^{3}](s)$",
+    "t": "funzione",
+    "v": "\\frac{6}{s^{4}}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Semipiano $\\operatorname{Re}s>\\sigma$: valore di $\\sigma$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "trasformata-di-laplace/2": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[t^{4}](s)$",
+    "t": "funzione",
+    "v": "\\frac{24}{s^{5}}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Semipiano $\\operatorname{Re}s>\\sigma$: valore di $\\sigma$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "trasformata-di-laplace/3": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[t e^{-3t}](s)$",
+    "t": "funzione",
+    "v": "\\frac{1}{(s+3)^2}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Semipiano $\\operatorname{Re}s>\\sigma$: valore di $\\sigma$",
+    "t": "numero",
+    "v": "-3"
+   }
+  ]
+ },
+ "trasformata-di-laplace/4": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[t e^{-4t}](s)$",
+    "t": "funzione",
+    "v": "\\frac{1}{(s+4)^2}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Semipiano $\\operatorname{Re}s>\\sigma$: valore di $\\sigma$",
+    "t": "numero",
+    "v": "-4"
+   }
+  ]
+ },
+ "trasformata-di-laplace/5": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[e^{-t}\\sin(3t)](s)$",
+    "t": "funzione",
+    "v": "\\frac{3}{(s+1)^2+9}",
+    "var": [
+     "s"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/6": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[e^{-t}\\sin(4t)](s)$",
+    "t": "funzione",
+    "v": "\\frac{4}{(s+1)^2+16}",
+    "var": [
+     "s"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/7": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[H(t-3)(t-3)^2](s)$",
+    "t": "funzione",
+    "v": "\\frac{2e^{-3s}}{s^3}",
+    "var": [
+     "s"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/8": {
+  "campi": [
+   {
+    "e": "$\\mathcal L[H(t-4)(t-4)^2](s)$",
+    "t": "funzione",
+    "v": "\\frac{2e^{-4s}}{s^3}",
+    "var": [
+     "s"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/9": {
+  "campi": [
+   {
+    "e": "$f(t)$ per $t\\ge0$",
+    "t": "funzione",
+    "v": "e^{-3t}-e^{-4t}",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/10": {
+  "campi": [
+   {
+    "e": "$f(t)$ per $t\\ge0$",
+    "t": "funzione",
+    "v": "e^{-4t}-e^{-5t}",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/11": {
+  "campi": [
+   {
+    "e": "$y(t)$",
+    "t": "funzione",
+    "v": "\\frac{1-e^{-3t}}{3}",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/12": {
+  "campi": [
+   {
+    "e": "$y(t)$",
+    "t": "funzione",
+    "v": "\\frac{1-e^{-4t}}{4}",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/13": {
+  "campi": [
+   {
+    "e": "$y(t)$",
+    "t": "funzione",
+    "v": "\\cos(3t)",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/14": {
+  "campi": [
+   {
+    "e": "$y(t)$",
+    "t": "funzione",
+    "v": "\\cos(4t)",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/15": {
+  "campi": [
+   {
+    "e": "$F(s)$",
+    "t": "funzione",
+    "v": "\\frac{e^{-s}-e^{-3s}}{s(1-e^{-4s})}",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "Semipiano $\\operatorname{Re}s>\\sigma$: valore di $\\sigma$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "trasformata-di-laplace/16": {
+  "campi": [
+   {
+    "e": "$F(s)$",
+    "t": "funzione",
+    "v": "e^{-2s}\\left(\\frac{1}{s^2}+\\frac{3}{s}\\right)",
+    "var": [
+     "s"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/17": {
+  "campi": [
+   {
+    "e": "$f(t)$ per $t\\ge0$",
+    "t": "funzione",
+    "v": "\\frac{e^{-t}-e^{-3t}}{4}-\\frac{t}{2}e^{-3t}",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "trasformata-di-laplace/18": {
+  "campi": [
+   {
+    "e": "$y(t)$",
+    "t": "funzione",
+    "v": "e^{-t}\\left(1+t+\\frac{t^2}{2}\\right)",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ }
+}

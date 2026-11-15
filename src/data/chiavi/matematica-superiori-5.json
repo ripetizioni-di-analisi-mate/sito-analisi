@@ -1,0 +1,2147 @@
+{
+ "continuita-e-asintoti/1": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 2^-} f(x)$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 2^+} f(x)$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "In $x_0 = 2$ la funzione $f$",
+    "t": "scelta",
+    "opzioni": [
+     "è continua",
+     "non è continua"
+    ],
+    "v": "è continua"
+   }
+  ]
+ },
+ "continuita-e-asintoti/2": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 0} \\frac{e^{2x} - 1}{x}$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "In $x_0 = 0$ la funzione $f$",
+    "t": "scelta",
+    "opzioni": [
+     "è continua",
+     "non è continua"
+    ],
+    "v": "è continua"
+   }
+  ]
+ },
+ "continuita-e-asintoti/3": {
+  "campi": [
+   {
+    "e": "Punti di discontinuità",
+    "t": "valori",
+    "v": [
+     "0",
+     "3"
+    ]
+   },
+   {
+    "e": "Specie della discontinuità in $x = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "prima specie",
+     "seconda specie",
+     "terza specie (eliminabile)"
+    ],
+    "v": "seconda specie"
+   },
+   {
+    "e": "Specie della discontinuità in $x = 3$",
+    "t": "scelta",
+    "opzioni": [
+     "prima specie",
+     "seconda specie",
+     "terza specie (eliminabile)"
+    ],
+    "v": "terza specie (eliminabile)"
+   },
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 3} f(x)$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "continuita-e-asintoti/4": {
+  "campi": [
+   {
+    "e": "Specie della discontinuità in $x = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "prima specie",
+     "seconda specie",
+     "terza specie (eliminabile)"
+    ],
+    "v": "prima specie"
+   },
+   {
+    "e": "Salto",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "continuita-e-asintoti/5": {
+  "campi": [
+   {
+    "e": "Specie della discontinuità in $x = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "prima specie",
+     "seconda specie",
+     "terza specie (eliminabile)"
+    ],
+    "v": "prima specie"
+   },
+   {
+    "e": "Salto",
+    "t": "numero",
+    "v": "\\pi"
+   }
+  ]
+ },
+ "continuita-e-asintoti/6": {
+  "campi": [
+   {
+    "e": "Il teorema di Weierstrass in $[0, 1]$",
+    "t": "scelta",
+    "opzioni": [
+     "si applica",
+     "non si applica"
+    ],
+    "v": "si applica"
+   },
+   {
+    "e": "Massimo di $f$ in $[0, 1]$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   },
+   {
+    "e": "Minimo di $f$ in $[0, 1]$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "continuita-e-asintoti/7": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = -1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto orizzontale",
+    "t": "equazione",
+    "v": "y = 3",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "continuita-e-asintoti/8": {
+  "campi": [
+   {
+    "e": "Ascisse degli asintoti verticali",
+    "t": "valori",
+    "v": [
+     "-1",
+     "2"
+    ]
+   },
+   {
+    "e": "Asintoto orizzontale",
+    "t": "equazione",
+    "v": "y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "continuita-e-asintoti/9": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = 2",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto obliquo",
+    "t": "equazione",
+    "v": "y = 2x + 3",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "continuita-e-asintoti/10": {
+  "campi": [
+   {
+    "e": "Asintoto obliquo destro (per $x \\to +\\infty$)",
+    "t": "equazione",
+    "v": "y = x - 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto obliquo sinistro (per $x \\to -\\infty$)",
+    "t": "equazione",
+    "v": "y = -x + 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoti verticali",
+    "t": "scelta",
+    "opzioni": [
+     "nessuno",
+     "$x = 1$",
+     "$x = -1$",
+     "$x = 1$ e $x = -1$"
+    ],
+    "v": "nessuno"
+   }
+  ]
+ },
+ "continuita-e-asintoti/12": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "continuita-e-asintoti/13": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni reali dell'equazione",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Estremo sinistro dell'intervallo dopo due passi",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   },
+   {
+    "e": "Estremo destro dell'intervallo dopo due passi",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "continuita-e-asintoti/14": {
+  "campi": [
+   {
+    "e": "Estremo sinistro dell'intervallo dopo tre passi",
+    "t": "numero",
+    "v": "2{,}625"
+   },
+   {
+    "e": "Estremo destro dell'intervallo dopo tre passi",
+    "t": "numero",
+    "v": "2{,}75"
+   },
+   {
+    "e": "Numero di passi per un'ampiezza minore di $0{,}001$",
+    "t": "numero",
+    "v": "10"
+   }
+  ]
+ },
+ "derivate/1": {
+  "campi": [
+   {
+    "e": "$f'(-1)$",
+    "t": "numero",
+    "v": "-3"
+   }
+  ]
+ },
+ "derivate/2": {
+  "campi": [
+   {
+    "e": "$f'(1)$",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "derivate/4": {
+  "campi": [
+   {
+    "e": "Punto di tangenza con $x > 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Tangente nel punto con $x > 0$",
+    "t": "equazione",
+    "v": "y = 9x - 16",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Punto di tangenza con $x < 0$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Tangente nel punto con $x < 0$",
+    "t": "equazione",
+    "v": "y = 9x + 16",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "derivate/6": {
+  "campi": [
+   {
+    "e": "$f'(x)$",
+    "t": "funzione",
+    "v": "2 e^{x} \\sin x",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "derivate/9": {
+  "campi": [
+   {
+    "e": "$\\left( f^{-1} \\right)'(3)$",
+    "t": "numero",
+    "v": "\\frac{1}{8}"
+   }
+  ]
+ },
+ "derivate/10": {
+  "campi": [
+   {
+    "e": "$f'(x)$",
+    "t": "funzione",
+    "v": "(1 - x) e^{-x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$f''(x)$",
+    "t": "funzione",
+    "v": "(x - 2) e^{-x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$f''(x) + 2f'(x) + f(x)$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "derivate/11": {
+  "campi": [
+   {
+    "e": "Punti di non derivabilità",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ]
+   },
+   {
+    "e": "Natura del punto $x = 1$",
+    "t": "scelta",
+    "opzioni": [
+     "punto angoloso",
+     "cuspide",
+     "flesso a tangente verticale"
+    ],
+    "v": "punto angoloso"
+   },
+   {
+    "e": "$f'_-(1)$",
+    "t": "numero",
+    "v": "-\\frac{2}{3}"
+   },
+   {
+    "e": "$f'_+(1)$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   },
+   {
+    "e": "Natura del punto $x = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "punto angoloso",
+     "cuspide",
+     "flesso a tangente verticale"
+    ],
+    "v": "flesso a tangente verticale"
+   }
+  ]
+ },
+ "derivate/12": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "derivate/13": {
+  "campi": [
+   {
+    "e": "$dV$",
+    "t": "numero",
+    "v": "31{,}4",
+    "u": "cm^3"
+   }
+  ]
+ },
+ "derivate/14": {
+  "campi": [
+   {
+    "e": "$v(1)$",
+    "t": "numero",
+    "v": "10",
+    "u": "m/s"
+   },
+   {
+    "e": "Istante della massima altezza",
+    "t": "numero",
+    "v": "2",
+    "u": "s"
+   },
+   {
+    "e": "Massima altezza",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   },
+   {
+    "e": "Accelerazione",
+    "t": "numero",
+    "v": "-10",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "equazioni-differenziali/1": {
+  "campi": [
+   {
+    "e": "$y'$",
+    "t": "funzione",
+    "v": "-e^{-x} + 1",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "La funzione $y = e^{-x} + x - 1$",
+    "t": "scelta",
+    "opzioni": [
+     "è soluzione dell'equazione",
+     "non è soluzione dell'equazione"
+    ],
+    "v": "è soluzione dell'equazione"
+   }
+  ]
+ },
+ "equazioni-differenziali/2": {
+  "campi": [
+   {
+    "e": "Integrale generale (una primitiva di $2x + \\cos x$)",
+    "t": "funzione",
+    "v": "x^2 + \\sin x",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   },
+   {
+    "e": "Soluzione con $y(0) = 3$",
+    "t": "funzione",
+    "v": "x^2 + \\sin x + 3",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/4": {
+  "campi": [
+   {
+    "e": "$y(x)$",
+    "t": "funzione",
+    "v": "\\frac{1}{1 - \\sin x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Intervallo in cui è definita la soluzione",
+    "t": "intervallo",
+    "v": "\\left( -\\frac{3\\pi}{2}, \\frac{\\pi}{2} \\right)"
+   }
+  ]
+ },
+ "equazioni-differenziali/5": {
+  "campi": [
+   {
+    "e": "$y(x)$",
+    "t": "funzione",
+    "v": "\\sqrt{x^2 + 4}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/6": {
+  "campi": [
+   {
+    "e": "$y(x)$",
+    "t": "funzione",
+    "v": "2 - 2 e^{-3x}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\displaystyle\\lim_{x \\to +\\infty} y(x)$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "equazioni-differenziali/7": {
+  "campi": [
+   {
+    "e": "$y(x)$",
+    "t": "funzione",
+    "v": "\\frac{x^4 + x^2}{2}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/9": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "intervallo",
+    "v": "(1, +\\infty)",
+    "var": "k"
+   },
+   {
+    "e": "Integrale generale per $k = 10$",
+    "t": "scelta",
+    "opzioni": [
+     "$y = e^{-x} \\left( c_1 \\cos 3x + c_2 \\sin 3x \\right)$",
+     "$y = e^{x} \\left( c_1 \\cos 3x + c_2 \\sin 3x \\right)$",
+     "$y = e^{-x} \\left( c_1 \\cos 9x + c_2 \\sin 9x \\right)$",
+     "$y = c_1 \\cos 3x + c_2 \\sin 3x$"
+    ],
+    "v": "$y = e^{-x} \\left( c_1 \\cos 3x + c_2 \\sin 3x \\right)$"
+   }
+  ]
+ },
+ "equazioni-differenziali/10": {
+  "campi": [
+   {
+    "e": "Integrale generale dell'equazione omogenea associata",
+    "t": "scelta",
+    "opzioni": [
+     "$c_1 \\cos 2x + c_2 \\sin 2x$",
+     "$c_1 e^{2x} + c_2 e^{-2x}$",
+     "$c_1 \\cos 4x + c_2 \\sin 4x$",
+     "$e^{2x} \\left( c_1 \\cos x + c_2 \\sin x \\right)$"
+    ],
+    "v": "$c_1 \\cos 2x + c_2 \\sin 2x$"
+   },
+   {
+    "e": "Soluzione particolare polinomiale $\\bar{y}$",
+    "t": "funzione",
+    "v": "2x^2 - 1",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/11": {
+  "campi": [
+   {
+    "e": "Radici dell'equazione caratteristica",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ]
+   },
+   {
+    "e": "Forma della soluzione particolare $\\bar{y}$",
+    "t": "scelta",
+    "opzioni": [
+     "$A\\,e^{x}$",
+     "$A\\,x\\,e^{x}$",
+     "$A\\,x^2\\,e^{x}$"
+    ],
+    "v": "$A\\,x\\,e^{x}$"
+   },
+   {
+    "e": "$A$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "equazioni-differenziali/12": {
+  "campi": [
+   {
+    "e": "Radici dell'equazione caratteristica",
+    "t": "valori",
+    "v": [
+     "0",
+     "-1"
+    ]
+   },
+   {
+    "e": "Soluzione particolare $\\bar{y} = a \\cos x + b \\sin x$",
+    "t": "funzione",
+    "v": "\\sin x - \\cos x",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "equazioni-differenziali/13": {
+  "campi": [
+   {
+    "e": "$k$",
+    "t": "numero",
+    "v": "\\frac{\\ln 2}{2}",
+    "u": "h^{-1}"
+   },
+   {
+    "e": "$P(t)$",
+    "t": "funzione",
+    "v": "500 \\cdot 2^{\\frac{t}{2}}",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "Istante in cui i batteri sono $8000$",
+    "t": "numero",
+    "v": "8",
+    "u": "h"
+   }
+  ]
+ },
+ "equazioni-differenziali/14": {
+  "campi": [
+   {
+    "e": "$x(t)$ (in metri, con $t$ in secondi)",
+    "t": "funzione",
+    "v": "\\frac{1}{10} \\cos(10t)",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "Periodo",
+    "t": "numero",
+    "v": "\\frac{\\pi}{5}",
+    "u": "s"
+   },
+   {
+    "e": "Velocità massima",
+    "t": "numero",
+    "v": "1",
+    "u": "m/s"
+   }
+  ]
+ },
+ "funzioni/1": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "\\mathbb{R}\\setminus\\{0, 4\\}"
+   }
+  ]
+ },
+ "funzioni/2": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-\\infty, -2] \\cup [3, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/3": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-2, -1) \\cup (-1, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/4": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-3, 0) \\cup (0, 3)"
+   }
+  ]
+ },
+ "funzioni/5": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "x \\neq 2"
+   },
+   {
+    "e": "Ascisse dei punti di intersezione con l'asse $x$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1"
+    ]
+   },
+   {
+    "e": "Punto di intersezione con l'asse $y$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "\\frac{1}{2}"
+    ]
+   },
+   {
+    "e": "Insieme in cui $f(x) > 0$",
+    "t": "intervallo",
+    "v": "(-1, 1) \\cup (2, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/6": {
+  "campi": [
+   {
+    "e": "$f(x) = x^4 - 3x^2 + 1$",
+    "t": "scelta",
+    "opzioni": [
+     "pari",
+     "dispari",
+     "né pari né dispari"
+    ],
+    "v": "pari"
+   },
+   {
+    "e": "$g(x) = \\dfrac{x^3}{x^2 - 1}$",
+    "t": "scelta",
+    "opzioni": [
+     "pari",
+     "dispari",
+     "né pari né dispari"
+    ],
+    "v": "dispari"
+   },
+   {
+    "e": "$h(x) = e^{x} + x$",
+    "t": "scelta",
+    "opzioni": [
+     "pari",
+     "dispari",
+     "né pari né dispari"
+    ],
+    "v": "né pari né dispari"
+   }
+  ]
+ },
+ "funzioni/7": {
+  "campi": [
+   {
+    "e": "Periodo di $f$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Periodo di $g$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "funzioni/9": {
+  "campi": [
+   {
+    "e": "$f$ è iniettiva?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "$f$ è suriettiva?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "Insieme immagine di $f$",
+    "t": "intervallo",
+    "var": "y",
+    "v": "[-1, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/10": {
+  "campi": [
+   {
+    "e": "$f^{-1}(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\frac{2x + 1}{3 - x}"
+   },
+   {
+    "e": "Dominio di $f^{-1}$",
+    "t": "intervallo",
+    "v": "x \\neq 3"
+   }
+  ]
+ },
+ "funzioni/11": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(2, +\\infty)"
+   },
+   {
+    "e": "Insieme immagine di $f$",
+    "t": "intervallo",
+    "var": "y",
+    "v": "\\mathbb{R}"
+   },
+   {
+    "e": "$f^{-1}(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "2 + e^{x - 1}"
+   }
+  ]
+ },
+ "funzioni/12": {
+  "campi": [
+   {
+    "e": "$(f \\circ g)(x)$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{x^2 - 9}$",
+     "$\\sqrt{x} - 9$",
+     "$x - 9$",
+     "$\\sqrt{x^2} - 9$"
+    ],
+    "v": "$\\sqrt{x^2 - 9}$"
+   },
+   {
+    "e": "Dominio di $f \\circ g$",
+    "t": "intervallo",
+    "v": "(-\\infty, -3] \\cup [3, +\\infty)"
+   },
+   {
+    "e": "$(g \\circ f)(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x - 9"
+   },
+   {
+    "e": "Dominio di $g \\circ f$",
+    "t": "intervallo",
+    "v": "[0, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/13": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni per $k < 0$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Numero di soluzioni per $k = 0$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Numero di soluzioni per $0 < k < 4$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Numero di soluzioni per $k = 4$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Numero di soluzioni per $k > 4$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "funzioni/14": {
+  "campi": [
+   {
+    "e": "$A(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x\\,(10 - x)"
+   },
+   {
+    "e": "Dominio di $A$ nel contesto del problema",
+    "t": "intervallo",
+    "v": "(0, 10)"
+   },
+   {
+    "e": "Insieme immagine di $A$",
+    "t": "intervallo",
+    "var": "A",
+    "v": "(0, 25]"
+   }
+  ]
+ },
+ "geometria-spazio/1": {
+  "campi": [
+   {
+    "e": "$\\overline{AB}$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Punto medio di $AB$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "0",
+     "2"
+    ]
+   }
+  ]
+ },
+ "geometria-spazio/2": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ tra $\\vec{u}$ e $\\vec{v}$ (in radianti)",
+    "t": "numero",
+    "v": "\\frac{2}{3}\\pi"
+   }
+  ]
+ },
+ "geometria-spazio/3": {
+  "campi": [
+   {
+    "e": "Area del triangolo $ABC$",
+    "t": "numero",
+    "v": "\\sqrt{6}"
+   }
+  ]
+ },
+ "geometria-spazio/7": {
+  "campi": [
+   {
+    "e": "Punto della retta con $z = 0$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "1",
+     "0"
+    ]
+   },
+   {
+    "e": "Un vettore direzione della retta",
+    "t": "scelta",
+    "opzioni": [
+     "$(1, 1, -2)$",
+     "$(1, -1, 0)$",
+     "$(1, 1, 1)$",
+     "$(1, 1, 2)$"
+    ],
+    "v": "$(1, 1, -2)$"
+   }
+  ]
+ },
+ "geometria-spazio/8": {
+  "campi": [
+   {
+    "e": "Punto di intersezione",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "3",
+     "3"
+    ]
+   }
+  ]
+ },
+ "geometria-spazio/9": {
+  "campi": [
+   {
+    "e": "Posizione reciproca di $r$ e $s$",
+    "t": "scelta",
+    "opzioni": [
+     "incidenti e perpendicolari",
+     "incidenti, non perpendicolari",
+     "parallele",
+     "sghembe"
+    ],
+    "v": "incidenti e perpendicolari"
+   },
+   {
+    "e": "Punto di intersezione",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "1",
+     "1"
+    ]
+   }
+  ]
+ },
+ "geometria-spazio/10": {
+  "campi": [
+   {
+    "e": "Posizione reciproca di $r$ e $s$",
+    "t": "scelta",
+    "opzioni": [
+     "incidenti",
+     "parallele",
+     "coincidenti",
+     "sghembe"
+    ],
+    "v": "sghembe"
+   }
+  ]
+ },
+ "geometria-spazio/11": {
+  "campi": [
+   {
+    "e": "$d(P, \\pi)$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Proiezione ortogonale $H$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "3",
+     "-1"
+    ]
+   },
+   {
+    "e": "Simmetrico $P'$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-1",
+     "5",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "geometria-spazio/12": {
+  "campi": [
+   {
+    "e": "Distanza di $P$ da $r$",
+    "t": "numero",
+    "v": "\\sqrt{11}"
+   }
+  ]
+ },
+ "geometria-spazio/13": {
+  "campi": [
+   {
+    "e": "Equazione della superficie sferica",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ],
+    "v": "x^2 + y^2 + z^2 - 2x + 4y - 4z = 0"
+   },
+   {
+    "e": "Punto di tangenza $T$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "0",
+     "0"
+    ]
+   }
+  ]
+ },
+ "geometria-spazio/14": {
+  "campi": [
+   {
+    "e": "Centro della circonferenza",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "0",
+     "6"
+    ]
+   },
+   {
+    "e": "Raggio della circonferenza",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "integrali-definiti/3": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "16",
+    "u": "J"
+   }
+  ]
+ },
+ "integrali-definiti/6": {
+  "campi": [
+   {
+    "e": "Area della regione",
+    "t": "numero",
+    "v": "\\frac{32}{3}"
+   }
+  ]
+ },
+ "integrali-definiti/7": {
+  "campi": [
+   {
+    "e": "Area della regione",
+    "t": "numero",
+    "v": "\\frac{9}{2}"
+   }
+  ]
+ },
+ "integrali-definiti/9": {
+  "campi": [
+   {
+    "e": "Valore medio di $f$ in $[0, \\pi]$",
+    "t": "numero",
+    "v": "\\frac{2}{\\pi}"
+   },
+   {
+    "e": "Punti $c$",
+    "t": "valori",
+    "v": [
+     "\\arcsin \\frac{2}{\\pi}",
+     "\\pi - \\arcsin \\frac{2}{\\pi}"
+    ]
+   }
+  ]
+ },
+ "integrali-definiti/10": {
+  "campi": [
+   {
+    "e": "Insieme in cui $F$ è crescente",
+    "t": "intervallo",
+    "v": "(-\\infty, 1] \\cup [3, +\\infty)"
+   },
+   {
+    "e": "Intervallo in cui $F$ è decrescente",
+    "t": "intervallo",
+    "v": "[1, 3]"
+   },
+   {
+    "e": "Punto di massimo relativo",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "integrali-definiti/12": {
+  "campi": [
+   {
+    "e": "$V$",
+    "t": "numero",
+    "v": "\\frac{\\pi^2}{2}"
+   }
+  ]
+ },
+ "integrali-definiti/13": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\int_0^{+\\infty} \\frac{1}{x^2 + 4}\\,dx$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "integrali-definiti/14": {
+  "campi": [
+   {
+    "e": "$v(t)$",
+    "t": "funzione",
+    "var": [
+     "t"
+    ],
+    "v": "6t - t^2",
+    "u": "m/s"
+   },
+   {
+    "e": "Spazio percorso nei primi $6$ secondi",
+    "t": "numero",
+    "v": "36",
+    "u": "m"
+   }
+  ]
+ },
+ "integrali-indefiniti/4": {
+  "campi": [
+   {
+    "e": "Una primitiva di $\\frac{6x + 2}{3x^2 + 2x + 5}$",
+    "t": "funzione",
+    "v": "\\ln \\left( 3x^2 + 2x + 5 \\right)",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/5": {
+  "campi": [
+   {
+    "e": "Una primitiva di $x^2 e^{x^3}$",
+    "t": "funzione",
+    "v": "\\frac{1}{3}e^{x^3}",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/6": {
+  "campi": [
+   {
+    "e": "Una primitiva di $\\frac{\\sin x}{\\cos^3 x}$",
+    "t": "funzione",
+    "v": "\\frac{1}{2(\\cos x)^2}",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/7": {
+  "campi": [
+   {
+    "e": "Legge oraria $s(t)$",
+    "t": "funzione",
+    "v": "t^3 + t^2 + 2",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "$s(3)$",
+    "t": "numero",
+    "v": "38",
+    "u": "m"
+   }
+  ]
+ },
+ "integrali-indefiniti/9": {
+  "campi": [
+   {
+    "e": "Una primitiva di $x\\,e^{-x}$",
+    "t": "funzione",
+    "v": "-(x + 1)e^{-x}",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/11": {
+  "campi": [
+   {
+    "e": "Una primitiva di $\\frac{x^2 + x + 1}{x + 2}$",
+    "t": "funzione",
+    "v": "\\frac{x^2}{2} - x + 3 \\ln |x + 2|",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/12": {
+  "campi": [
+   {
+    "e": "Una primitiva di $\\frac{3x + 4}{x^2 + 3x + 2}$",
+    "t": "funzione",
+    "v": "\\ln |x + 1| + 2 \\ln |x + 2|",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali-indefiniti/13": {
+  "campi": [
+   {
+    "e": "Una primitiva di $\\frac{x + 3}{x^2 - 6x + 9}$",
+    "t": "funzione",
+    "v": "\\ln |x - 3| - \\frac{6}{x - 3}",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "limiti/1": {
+  "campi": [
+   {
+    "e": "Dominio $D$",
+    "t": "intervallo",
+    "v": "\\{0\\} \\cup [3, +\\infty)"
+   },
+   {
+    "e": "Punti isolati di $D$",
+    "t": "valori",
+    "v": [
+     "0"
+    ]
+   }
+  ]
+ },
+ "limiti/2": {
+  "campi": [
+   {
+    "e": "$\\delta$ per $\\varepsilon = 0{,}02$",
+    "t": "numero",
+    "v": "0{,}01"
+   }
+  ]
+ },
+ "limiti/3": {
+  "campi": [
+   {
+    "e": "Valore di $x$ oltre il quale $\\left| f(x) - \\frac{1}{2} \\right| < 0{,}01$",
+    "t": "numero",
+    "v": "150"
+   }
+  ]
+ },
+ "limiti/5": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 0^+} f(x)$",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\infty$",
+     "$-\\infty$",
+     "$0$",
+     "non esiste"
+    ],
+    "v": "$+\\infty$"
+   },
+   {
+    "e": "$\\displaystyle\\lim_{x \\to 0^-} f(x)$",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\infty$",
+     "$-\\infty$",
+     "$0$",
+     "non esiste"
+    ],
+    "v": "$-\\infty$"
+   }
+  ]
+ },
+ "limiti/11": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "e^{-6}"
+   }
+  ]
+ },
+ "limiti/12": {
+  "campi": [
+   {
+    "e": "Ordine dell'infinitesimo",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "limiti/14": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\lim_{n \\to +\\infty} a_n$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\displaystyle\\lim_{n \\to +\\infty} S_n$",
+    "t": "numero",
+    "v": "\\frac{9}{2}"
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/1": {
+  "campi": [
+   {
+    "e": "Probabilità che il prodotto sia pari",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/6": {
+  "campi": [
+   {
+    "e": "$P(A_2 \\mid A_1)$",
+    "t": "numero",
+    "v": "\\frac{1}{13}"
+   },
+   {
+    "e": "$P(A_1 \\cap A_2)$",
+    "t": "numero",
+    "v": "\\frac{1}{130}"
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/7": {
+  "campi": [
+   {
+    "e": "$P(M \\mid +)$",
+    "t": "numero",
+    "v": "0{,}162",
+    "cifre": 3
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/8": {
+  "campi": [
+   {
+    "e": "Valore medio $M(X)$",
+    "t": "numero",
+    "v": "1{,}1"
+   },
+   {
+    "e": "Varianza $\\operatorname{var}(X)$",
+    "t": "numero",
+    "v": "3{,}09"
+   },
+   {
+    "e": "Deviazione standard $\\sigma$",
+    "t": "numero",
+    "v": "1{,}76",
+    "cifre": 2
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/9": {
+  "campi": [
+   {
+    "e": "$v$ (euro)",
+    "t": "numero",
+    "v": "27"
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/11": {
+  "campi": [
+   {
+    "e": "$P(X = 0)$",
+    "t": "numero",
+    "v": "0{,}607",
+    "cifre": 3
+   },
+   {
+    "e": "$P(X \\geq 2)$",
+    "t": "numero",
+    "v": "0{,}090",
+    "cifre": 3
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/12": {
+  "campi": [
+   {
+    "e": "$k$",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   },
+   {
+    "e": "$P\\left( X \\leq \\frac{1}{2} \\right)$",
+    "t": "numero",
+    "v": "\\frac{5}{32}"
+   },
+   {
+    "e": "Valore medio $M(X)$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "probabilita-e-distribuzioni/13": {
+  "campi": [
+   {
+    "e": "$P(X > 10)$",
+    "t": "numero",
+    "v": "0{,}135",
+    "cifre": 3
+   }
+  ]
+ },
+ "studio-di-funzione/1": {
+  "campi": [
+   {
+    "e": "Intervalli di crescenza",
+    "t": "intervallo",
+    "v": "(-\\infty, -2] \\cup [2, +\\infty)"
+   },
+   {
+    "e": "Intervallo di decrescenza",
+    "t": "intervallo",
+    "v": "[-2, 2]"
+   },
+   {
+    "e": "Punto di massimo relativo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "17"
+    ]
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-15"
+    ]
+   }
+  ]
+ },
+ "studio-di-funzione/2": {
+  "campi": [
+   {
+    "e": "Punto di massimo relativo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "3"
+    ]
+   },
+   {
+    "e": "Punto di minimo con $x<0$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "-13"
+    ]
+   },
+   {
+    "e": "Punto di minimo con $x>0$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-13"
+    ]
+   },
+   {
+    "e": "I punti di minimo sono",
+    "t": "scelta",
+    "opzioni": [
+     "minimi assoluti",
+     "minimi solo relativi"
+    ],
+    "v": "minimi assoluti"
+   },
+   {
+    "e": "Massimo assoluto di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$3$",
+     "non esiste",
+     "$-13$"
+    ],
+    "v": "non esiste"
+   }
+  ]
+ },
+ "studio-di-funzione/3": {
+  "campi": [
+   {
+    "e": "Punto di massimo relativo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-4",
+     "-8"
+    ]
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "0"
+    ]
+   }
+  ]
+ },
+ "studio-di-funzione/4": {
+  "campi": [
+   {
+    "e": "Intervallo di decrescenza",
+    "t": "intervallo",
+    "v": "(-\\infty, -\\frac{1}{2}]"
+   },
+   {
+    "e": "Intervallo di crescenza",
+    "t": "intervallo",
+    "v": "[-\\frac{1}{2}, +\\infty)"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   },
+   {
+    "e": "Valore minimo di $f$",
+    "t": "numero",
+    "v": "-\\frac{1}{2e}"
+   }
+  ]
+ },
+ "studio-di-funzione/5": {
+  "campi": [
+   {
+    "e": "Punto di flesso",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-6"
+    ]
+   },
+   {
+    "e": "Tangente inflessionale",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y = -7x + 8"
+   }
+  ]
+ },
+ "studio-di-funzione/6": {
+  "campi": [
+   {
+    "e": "Intervallo in cui $f$ volge la concavità verso l'alto",
+    "t": "intervallo",
+    "v": "[-2, 2]"
+   },
+   {
+    "e": "Ascisse dei punti di flesso",
+    "t": "valori",
+    "v": [
+     "-2",
+     "2"
+    ]
+   },
+   {
+    "e": "Ordinata dei punti di flesso",
+    "t": "numero",
+    "v": "3\\ln 2"
+   }
+  ]
+ },
+ "studio-di-funzione/7": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "-3"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "studio-di-funzione/8": {
+  "campi": [
+   {
+    "e": "Punto di minimo assoluto",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3}"
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3} - \\sqrt{3}"
+   },
+   {
+    "e": "Punto di massimo assoluto",
+    "t": "numero",
+    "v": "\\pi"
+   },
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "\\pi"
+   }
+  ]
+ },
+ "studio-di-funzione/9": {
+  "campi": [
+   {
+    "e": "Il rettangolo di area massima è",
+    "t": "scelta",
+    "opzioni": [
+     "un quadrato",
+     "un rettangolo con un lato doppio dell'altro",
+     "un rettangolo con un lato uguale al raggio"
+    ],
+    "v": "un quadrato"
+   },
+   {
+    "e": "Lato",
+    "t": "numero",
+    "v": "5\\sqrt{2}",
+    "u": "cm"
+   },
+   {
+    "e": "Area massima",
+    "t": "numero",
+    "v": "50",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "studio-di-funzione/10": {
+  "campi": [
+   {
+    "e": "Lato di base",
+    "t": "numero",
+    "v": "4",
+    "u": "dm"
+   },
+   {
+    "e": "Altezza",
+    "t": "numero",
+    "v": "2",
+    "u": "dm"
+   },
+   {
+    "e": "Superficie minima",
+    "t": "numero",
+    "v": "48",
+    "u": "dm^2"
+   }
+  ]
+ },
+ "studio-di-funzione/11": {
+  "campi": [
+   {
+    "e": "Velocità massima",
+    "t": "numero",
+    "v": "24",
+    "u": "m/s"
+   },
+   {
+    "e": "Istante della velocità massima",
+    "t": "numero",
+    "v": "0",
+    "u": "s"
+   },
+   {
+    "e": "Velocità minima",
+    "t": "numero",
+    "v": "-3",
+    "u": "m/s"
+   },
+   {
+    "e": "Istante della velocità minima",
+    "t": "numero",
+    "v": "3",
+    "u": "s"
+   }
+  ]
+ },
+ "studio-di-funzione/12": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni per $k<-1$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Numero di soluzioni per $k=-1$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Numero di soluzioni per $-1<k<0$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Numero di soluzioni per $k=0$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Numero di soluzioni per $k>0$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "studio-di-funzione/13": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni reali",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$x_1$",
+    "t": "numero",
+    "v": "\\frac{7}{5}"
+   },
+   {
+    "e": "$x_2$",
+    "t": "numero",
+    "v": "\\frac{437}{370}"
+   }
+  ]
+ },
+ "studio-di-funzione/14": {
+  "campi": [
+   {
+    "e": "Intervallo di decrescenza",
+    "t": "intervallo",
+    "v": "(-\\infty, -2]"
+   },
+   {
+    "e": "Intervallo di crescenza",
+    "t": "intervallo",
+    "v": "[-2, +\\infty)"
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Il punto $x=1$ è",
+    "t": "scelta",
+    "opzioni": [
+     "un punto di massimo relativo",
+     "un punto di minimo relativo",
+     "un punto di flesso orizzontale"
+    ],
+    "v": "un punto di flesso orizzontale"
+   },
+   {
+    "e": "Ascisse dei punti di flesso",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1"
+    ]
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/1": {
+  "campi": [
+   {
+    "e": "Punti $c$",
+    "t": "valori",
+    "v": [
+     "-\\frac{2\\sqrt{3}}{3}",
+     "\\frac{2\\sqrt{3}}{3}"
+    ]
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/2": {
+  "campi": [
+   {
+    "e": "Punti $c$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{4}",
+     "\\frac{3}{4}\\pi"
+    ]
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/3": {
+  "campi": [
+   {
+    "e": "Il teorema di Rolle si applica",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "Esiste un punto di $(-1, 1)$ in cui $f'$ si annulla",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/4": {
+  "campi": [
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "\\frac{2\\sqrt{3}}{3}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/5": {
+  "campi": [
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "\\sqrt{3}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/6": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "\\frac{5}{6}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/7": {
+  "campi": [
+   {
+    "e": "Intervallo di crescenza",
+    "t": "intervallo",
+    "v": "(0, e]"
+   },
+   {
+    "e": "Intervallo di decrescenza",
+    "t": "intervallo",
+    "v": "[e, +\\infty)"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/8": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "intervallo",
+    "var": "k",
+    "v": "(-\\infty, 1]"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/9": {
+  "campi": [
+   {
+    "e": "Valore della costante",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/10": {
+  "campi": [
+   {
+    "e": "Punto di minimo di $g(x) = x - 1 - \\ln x$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Valore minimo di $g(x) = x - 1 - \\ln x$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/11": {
+  "campi": [
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "\\frac{2}{3}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/12": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{1}{6}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/13": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   }
+  ]
+ },
+ "teoremi-calcolo-differenziale/14": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "e^{-2}"
+   }
+  ]
+ }
+}

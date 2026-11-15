@@ -1,0 +1,1933 @@
+{
+ "atomo-e-onde-di-materia/1": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "410",
+    "u": "nm"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/2": {
+  "campi": [
+   {
+    "e": "$\\lambda_\\infty$",
+    "t": "numero",
+    "v": "820",
+    "u": "nm"
+   },
+   {
+    "e": "Zona dello spettro",
+    "t": "scelta",
+    "opzioni": [
+     "ultravioletto",
+     "visibile",
+     "infrarosso"
+    ],
+    "v": "infrarosso"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/3": {
+  "campi": [
+   {
+    "e": "$r_4$",
+    "t": "numero",
+    "v": "8{,}5 \\cdot 10^{-10}",
+    "u": "m"
+   },
+   {
+    "e": "$\\dfrac{v_4}{v_1}$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/4": {
+  "campi": [
+   {
+    "e": "$E_{\\text{ion}}$",
+    "t": "numero",
+    "v": "1{,}51",
+    "u": "eV"
+   },
+   {
+    "e": "$f_{\\min}$",
+    "t": "numero",
+    "v": "3{,}65 \\cdot 10^{14}",
+    "u": "Hz"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/5": {
+  "campi": [
+   {
+    "e": "Energia del fotone",
+    "t": "numero",
+    "v": "0{,}967",
+    "u": "eV"
+   },
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "1{,}29 \\cdot 10^{-6}",
+    "u": "m"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/6": {
+  "campi": [
+   {
+    "e": "Distanza minima $d$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^{-14}",
+    "u": "m"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/7": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "186",
+    "u": "nm"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/8": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "2{,}0 \\cdot 10^{-10}",
+    "u": "m"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/9": {
+  "campi": [
+   {
+    "e": "Differenza di potenziale $V$",
+    "t": "numero",
+    "v": "603",
+    "u": "V"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/10": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ dalla normale",
+    "t": "numero",
+    "v": "35",
+    "u": "°"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/11": {
+  "campi": [
+   {
+    "e": "$\\Delta v_x$ minima",
+    "t": "numero",
+    "v": "5{,}8 \\cdot 10^{4}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/12": {
+  "campi": [
+   {
+    "e": "$\\Delta E$ minima in joule",
+    "t": "numero",
+    "v": "2{,}6 \\cdot 10^{-26}",
+    "u": "J"
+   },
+   {
+    "e": "$\\Delta E$ minima in elettronvolt",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^{-7}",
+    "u": "eV"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/13": {
+  "campi": [
+   {
+    "e": "$E_3$",
+    "t": "numero",
+    "v": "3{,}4",
+    "u": "eV"
+   }
+  ]
+ },
+ "atomo-e-onde-di-materia/14": {
+  "campi": [
+   {
+    "e": "$\\lambda_3$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-9}",
+    "u": "m"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/2": {
+  "campi": [
+   {
+    "e": "$\\mathcal{E}_L$",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "V"
+   },
+   {
+    "e": "Verso della f.e.m. autoindotta",
+    "t": "scelta",
+    "opzioni": [
+     "stesso verso della corrente",
+     "verso opposto alla corrente"
+    ],
+    "v": "stesso verso della corrente"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/4": {
+  "campi": [
+   {
+    "e": "Numero di spire $N$",
+    "t": "numero",
+    "v": "563"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/5": {
+  "campi": [
+   {
+    "e": "$\\tau$",
+    "t": "numero",
+    "v": "20",
+    "u": "ms"
+   },
+   {
+    "e": "Corrente di regime $I$",
+    "t": "numero",
+    "v": "3{,}0",
+    "u": "A"
+   },
+   {
+    "e": "$i(30\\,\\mathrm{ms})$",
+    "t": "numero",
+    "v": "2{,}3",
+    "u": "A"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/8": {
+  "campi": [
+   {
+    "e": "$\\tau$",
+    "t": "numero",
+    "v": "8{,}7",
+    "u": "ms"
+   },
+   {
+    "e": "$L$",
+    "t": "numero",
+    "v": "0{,}22",
+    "u": "H"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/9": {
+  "campi": [
+   {
+    "e": "$R$",
+    "t": "numero",
+    "v": "5{,}0",
+    "u": "Ω"
+   },
+   {
+    "e": "$L$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-2}",
+    "u": "H"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/11": {
+  "campi": [
+   {
+    "e": "Energia immagazzinata $U$",
+    "t": "numero",
+    "v": "0{,}60",
+    "u": "J"
+   },
+   {
+    "e": "Tempo di dimezzamento dell'energia",
+    "t": "numero",
+    "v": "6{,}9",
+    "u": "ms"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/12": {
+  "campi": [
+   {
+    "e": "$u_B$",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^4",
+    "u": "J/m^3"
+   },
+   {
+    "e": "$U$",
+    "t": "numero",
+    "v": "0{,}80",
+    "u": "J"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/13": {
+  "campi": [
+   {
+    "e": "$M$",
+    "t": "numero",
+    "v": "3{,}8 \\cdot 10^{-5}",
+    "u": "H"
+   },
+   {
+    "e": "$|\\mathcal{E}_2|$",
+    "t": "numero",
+    "v": "5{,}7 \\cdot 10^{-3}",
+    "u": "V"
+   }
+  ]
+ },
+ "autoinduzione-circuiti-rl/14": {
+  "campi": [
+   {
+    "e": "$\\tau$",
+    "t": "numero",
+    "v": "15",
+    "u": "ms"
+   },
+   {
+    "e": "Energia a regime $U$",
+    "t": "numero",
+    "v": "0{,}30",
+    "u": "J"
+   },
+   {
+    "e": "$V_{\\max}$",
+    "t": "numero",
+    "v": "60",
+    "u": "V"
+   }
+  ]
+ },
+ "campo-magnetico/4": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "1{,}6 \\cdot 10^{-17}",
+    "u": "N"
+   },
+   {
+    "e": "Direzione e verso della forza",
+    "t": "scelta",
+    "opzioni": [
+     "orizzontale verso est",
+     "orizzontale verso ovest",
+     "orizzontale verso sud",
+     "verticale verso l'alto",
+     "verticale verso il basso"
+    ],
+    "v": "orizzontale verso ovest"
+   }
+  ]
+ },
+ "campo-magnetico/6": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "8{,}0 \\cdot 10^{-16}",
+    "u": "N"
+   },
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "8{,}8 \\cdot 10^{14}",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "campo-magnetico/8": {
+  "campi": [
+   {
+    "e": "$v$ all'ingresso nel campo",
+    "t": "numero",
+    "v": "6{,}2 \\cdot 10^5",
+    "u": "m/s"
+   },
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "9{,}9 \\cdot 10^{-15}",
+    "u": "N"
+   },
+   {
+    "e": "Modulo della velocità all'uscita dal campo",
+    "t": "numero",
+    "v": "6{,}2 \\cdot 10^5",
+    "u": "m/s"
+   }
+  ]
+ },
+ "campo-magnetico/9": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "1{,}6",
+    "u": "A"
+   }
+  ]
+ },
+ "campo-magnetico/11": {
+  "campi": [
+   {
+    "e": "$\\mu$",
+    "t": "numero",
+    "v": "1{,}7 \\cdot 10^{-2}",
+    "u": "A m^2"
+   },
+   {
+    "e": "$M$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^{-3}",
+    "u": "N m"
+   }
+  ]
+ },
+ "campo-magnetico/12": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "2{,}3 \\cdot 10^{-4}",
+    "u": "A"
+   }
+  ]
+ },
+ "campo-magnetico/13": {
+  "campi": [
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "0{,}30",
+    "u": "N m"
+   },
+   {
+    "e": "$M_{\\text{medio}}$",
+    "t": "numero",
+    "v": "0{,}19",
+    "u": "N m"
+   }
+  ]
+ },
+ "campo-magnetico/14": {
+  "campi": [
+   {
+    "e": "Angoli possibili $\\theta$ (in gradi)",
+    "t": "valori",
+    "v": [
+     "30",
+     "150"
+    ]
+   },
+   {
+    "e": "Angolo dell'equilibrio stabile",
+    "t": "scelta",
+    "opzioni": [
+     "$0^\\circ$",
+     "$30^\\circ$",
+     "$90^\\circ$",
+     "$150^\\circ$",
+     "$180^\\circ$"
+    ],
+    "v": "$0^\\circ$"
+   }
+  ]
+ },
+ "cariche-nei-campi/1": {
+  "campi": [
+   {
+    "e": "Velocità finale $v$",
+    "t": "numero",
+    "v": "9{,}4 \\cdot 10^6",
+    "u": "m/s"
+   }
+  ]
+ },
+ "cariche-nei-campi/2": {
+  "campi": [
+   {
+    "e": "Energia cinetica $K$ in joule",
+    "t": "numero",
+    "v": "8{,}4 \\cdot 10^{-16}",
+    "u": "J"
+   },
+   {
+    "e": "Energia cinetica $K$ in elettronvolt",
+    "t": "numero",
+    "v": "5{,}2 \\cdot 10^3",
+    "u": "eV"
+   },
+   {
+    "e": "Differenza di potenziale $\\Delta V$",
+    "t": "numero",
+    "v": "5{,}2",
+    "u": "kV"
+   }
+  ]
+ },
+ "cariche-nei-campi/3": {
+  "campi": [
+   {
+    "e": "Campo elettrico $E$",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^4",
+    "u": "V/m"
+   },
+   {
+    "e": "Accelerazione $a$ dell'elettrone",
+    "t": "numero",
+    "v": "4{,}2 \\cdot 10^{15}",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "cariche-nei-campi/4": {
+  "campi": [
+   {
+    "e": "Spostamento $y_L$ all'uscita",
+    "t": "numero",
+    "v": "1{,}4",
+    "u": "mm"
+   },
+   {
+    "e": "Angolo di deviazione $\\theta$",
+    "t": "numero",
+    "v": "2{,}7",
+    "u": "°"
+   }
+  ]
+ },
+ "cariche-nei-campi/5": {
+  "campi": [
+   {
+    "e": "Raggio $r$ della traiettoria",
+    "t": "numero",
+    "v": "6{,}5 \\cdot 10^{-2}",
+    "u": "m"
+   }
+  ]
+ },
+ "cariche-nei-campi/6": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "1{,}8 \\cdot 10^7",
+    "u": "m/s"
+   },
+   {
+    "e": "Energia cinetica $K$ in elettronvolt",
+    "t": "numero",
+    "v": "8{,}8 \\cdot 10^2",
+    "u": "eV"
+   }
+  ]
+ },
+ "cariche-nei-campi/7": {
+  "campi": [
+   {
+    "e": "Frequenza di ciclotrone $f$",
+    "t": "numero",
+    "v": "2{,}8 \\cdot 10^9",
+    "u": "Hz"
+   },
+   {
+    "e": "Se la velocità raddoppia, la frequenza",
+    "t": "scelta",
+    "opzioni": [
+     "non cambia",
+     "raddoppia",
+     "si dimezza",
+     "quadruplica"
+    ],
+    "v": "non cambia"
+   }
+  ]
+ },
+ "cariche-nei-campi/8": {
+  "campi": [
+   {
+    "e": "Verso della forza di Lorentz",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso",
+     "verso sinistra",
+     "entrante nel foglio",
+     "uscente dal foglio"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Verso di percorrenza della circonferenza",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "cariche-nei-campi/9": {
+  "campi": [
+   {
+    "e": "Raggio $r$ dell'elica",
+    "t": "numero",
+    "v": "5{,}7",
+    "u": "mm"
+   },
+   {
+    "e": "Passo $p$ dell'elica",
+    "t": "numero",
+    "v": "6{,}2",
+    "u": "cm"
+   }
+  ]
+ },
+ "cariche-nei-campi/11": {
+  "campi": [
+   {
+    "e": "$\\frac{e}{m_e}$",
+    "t": "numero",
+    "v": "1{,}76 \\cdot 10^{11}",
+    "u": "C/kg"
+   }
+  ]
+ },
+ "cariche-nei-campi/12": {
+  "campi": [
+   {
+    "e": "Raggio $r_{39}$",
+    "t": "numero",
+    "v": "8{,}71",
+    "u": "cm"
+   },
+   {
+    "e": "Raggio $r_{41}$",
+    "t": "numero",
+    "v": "8{,}93",
+    "u": "cm"
+   },
+   {
+    "e": "Distanza tra i punti di impatto",
+    "t": "numero",
+    "v": "4{,}4",
+    "u": "mm"
+   }
+  ]
+ },
+ "cariche-nei-campi/13": {
+  "campi": [
+   {
+    "e": "Frequenza $f$ della tensione alternata",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^7",
+    "u": "Hz"
+   },
+   {
+    "e": "Energia cinetica massima $K_{\\max}$",
+    "t": "numero",
+    "v": "17",
+    "u": "MeV"
+   }
+  ]
+ },
+ "cariche-nei-campi/14": {
+  "campi": [
+   {
+    "e": "Tensione di Hall $\\Delta V_H$",
+    "t": "numero",
+    "v": "9{,}4 \\cdot 10^{-3}",
+    "u": "V"
+   }
+  ]
+ },
+ "corrente-alternata/1": {
+  "campi": [
+   {
+    "e": "F.e.m. massima $\\mathcal{E}_0$",
+    "t": "numero",
+    "v": "38",
+    "u": "V"
+   }
+  ]
+ },
+ "corrente-alternata/2": {
+  "campi": [
+   {
+    "e": "Campo magnetico $B$",
+    "t": "numero",
+    "v": "0{,}16",
+    "u": "T"
+   }
+  ]
+ },
+ "corrente-alternata/3": {
+  "campi": [
+   {
+    "e": "Valore efficace $V_{\\text{eff}}$",
+    "t": "numero",
+    "v": "230",
+    "u": "V"
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "50",
+    "u": "Hz"
+   }
+  ]
+ },
+ "corrente-alternata/4": {
+  "campi": [
+   {
+    "e": "Corrente massima $I_0$",
+    "t": "numero",
+    "v": "0{,}61",
+    "u": "A"
+   },
+   {
+    "e": "Resistenza $R$",
+    "t": "numero",
+    "v": "529",
+    "u": "Ω"
+   }
+  ]
+ },
+ "corrente-alternata/5": {
+  "campi": [
+   {
+    "e": "Reattanza induttiva $X_L$",
+    "t": "numero",
+    "v": "62{,}8",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "3{,}66",
+    "u": "A"
+   }
+  ]
+ },
+ "corrente-alternata/6": {
+  "campi": [
+   {
+    "e": "Reattanza capacitiva $X_C$",
+    "t": "numero",
+    "v": "96{,}5",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "2{,}38",
+    "u": "A"
+   },
+   {
+    "e": "Rispetto alla tensione, la corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "in anticipo di $\\frac{\\pi}{2}$",
+     "in ritardo di $\\frac{\\pi}{2}$",
+     "in fase"
+    ],
+    "v": "in anticipo di $\\frac{\\pi}{2}$"
+   }
+  ]
+ },
+ "corrente-alternata/7": {
+  "campi": [
+   {
+    "e": "Corrente $I$ nella linea",
+    "t": "numero",
+    "v": "20",
+    "u": "A"
+   },
+   {
+    "e": "Potenza dissipata nei fili",
+    "t": "numero",
+    "v": "800",
+    "u": "W"
+   }
+  ]
+ },
+ "corrente-alternata/8": {
+  "campi": [
+   {
+    "e": "Impedenza $Z$",
+    "t": "numero",
+    "v": "100",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "A"
+   },
+   {
+    "e": "Sfasamento $\\varphi$",
+    "t": "numero",
+    "v": "53",
+    "u": "°"
+   },
+   {
+    "e": "Rispetto alla tensione, la corrente è",
+    "t": "scelta",
+    "opzioni": [
+     "in anticipo",
+     "in ritardo",
+     "in fase"
+    ],
+    "v": "in ritardo"
+   }
+  ]
+ },
+ "corrente-alternata/9": {
+  "campi": [
+   {
+    "e": "Impedenza $Z$",
+    "t": "numero",
+    "v": "127",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente efficace $I_{\\text{eff}}$",
+    "t": "numero",
+    "v": "1{,}82",
+    "u": "A"
+   },
+   {
+    "e": "Sfasamento $\\varphi$",
+    "t": "numero",
+    "v": "38",
+    "u": "°"
+   },
+   {
+    "e": "Il circuito è",
+    "t": "scelta",
+    "opzioni": [
+     "induttivo",
+     "capacitivo",
+     "in risonanza"
+    ],
+    "v": "induttivo"
+   }
+  ]
+ },
+ "corrente-alternata/10": {
+  "campi": [
+   {
+    "e": "Frequenza di risonanza $f_0$",
+    "t": "numero",
+    "v": "277",
+    "u": "Hz"
+   }
+  ]
+ },
+ "corrente-alternata/11": {
+  "campi": [
+   {
+    "e": "Capacità $C$",
+    "t": "numero",
+    "v": "1{,}3 \\cdot 10^{-5}",
+    "u": "F"
+   }
+  ]
+ },
+ "corrente-alternata/12": {
+  "campi": [
+   {
+    "e": "Potenza media $P$",
+    "t": "numero",
+    "v": "587",
+    "u": "W"
+   }
+  ]
+ },
+ "corrente-alternata/13": {
+  "campi": [
+   {
+    "e": "Tensione efficace $V_2$ al secondario",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "V"
+   },
+   {
+    "e": "Corrente efficace $I_1$ nel primario",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "A"
+   }
+  ]
+ },
+ "corrente-alternata/14": {
+  "campi": [
+   {
+    "e": "Frequenza delle oscillazioni $f_0$",
+    "t": "numero",
+    "v": "5{,}0",
+    "u": "kHz"
+   },
+   {
+    "e": "Corrente massima $I_0$",
+    "t": "numero",
+    "v": "63",
+    "u": "mA"
+   }
+  ]
+ },
+ "crisi-fisica-classica/1": {
+  "campi": [
+   {
+    "e": "$T$",
+    "t": "numero",
+    "v": "6{,}04 \\cdot 10^{3}",
+    "u": "K"
+   }
+  ]
+ },
+ "crisi-fisica-classica/2": {
+  "campi": [
+   {
+    "e": "$P$",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^{2}",
+    "u": "W"
+   }
+  ]
+ },
+ "crisi-fisica-classica/3": {
+  "campi": [
+   {
+    "e": "Fattore per cui si moltiplica la potenza emessa",
+    "t": "numero",
+    "v": "16"
+   },
+   {
+    "e": "Fattore per cui si divide $\\lambda_{\\max}$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "crisi-fisica-classica/4": {
+  "campi": [
+   {
+    "e": "$\\lambda_{\\max}$",
+    "t": "numero",
+    "v": "1{,}1 \\cdot 10^{-3}",
+    "u": "m"
+   },
+   {
+    "e": "Banda dello spettro",
+    "t": "scelta",
+    "opzioni": [
+     "onde radio",
+     "microonde",
+     "infrarosso",
+     "visibile",
+     "ultravioletto"
+    ],
+    "v": "microonde"
+   }
+  ]
+ },
+ "crisi-fisica-classica/5": {
+  "campi": [
+   {
+    "e": "$E$ in joule",
+    "t": "numero",
+    "v": "4{,}42 \\cdot 10^{-19}",
+    "u": "J"
+   },
+   {
+    "e": "$E$ in elettronvolt",
+    "t": "numero",
+    "v": "2{,}76",
+    "u": "eV"
+   }
+  ]
+ },
+ "crisi-fisica-classica/6": {
+  "campi": [
+   {
+    "e": "$N$",
+    "t": "numero",
+    "v": "3{,}1 \\cdot 10^{18}",
+    "u": "fotoni"
+   }
+  ]
+ },
+ "crisi-fisica-classica/7": {
+  "campi": [
+   {
+    "e": "$hf$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-20}",
+    "u": "J"
+   },
+   {
+    "e": "$E_3$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{-19}",
+    "u": "J"
+   }
+  ]
+ },
+ "crisi-fisica-classica/8": {
+  "campi": [
+   {
+    "e": "$K_{\\max}$",
+    "t": "numero",
+    "v": "0{,}86",
+    "u": "eV"
+   }
+  ]
+ },
+ "crisi-fisica-classica/9": {
+  "campi": [
+   {
+    "e": "$f_0$",
+    "t": "numero",
+    "v": "1{,}13 \\cdot 10^{15}",
+    "u": "Hz"
+   },
+   {
+    "e": "$\\lambda_0$",
+    "t": "numero",
+    "v": "264",
+    "u": "nm"
+   }
+  ]
+ },
+ "crisi-fisica-classica/10": {
+  "campi": [
+   {
+    "e": "$V_0$",
+    "t": "numero",
+    "v": "1{,}24",
+    "u": "V"
+   }
+  ]
+ },
+ "crisi-fisica-classica/11": {
+  "campi": [
+   {
+    "e": "$h$",
+    "t": "numero",
+    "v": "6{,}64 \\cdot 10^{-34}",
+    "u": "J s"
+   },
+   {
+    "e": "$W_0$",
+    "t": "numero",
+    "v": "1{,}98",
+    "u": "eV"
+   }
+  ]
+ },
+ "crisi-fisica-classica/12": {
+  "campi": [
+   {
+    "e": "$p$",
+    "t": "numero",
+    "v": "2{,}65 \\cdot 10^{-27}",
+    "u": "kg m/s"
+   }
+  ]
+ },
+ "crisi-fisica-classica/13": {
+  "campi": [
+   {
+    "e": "$\\Delta\\lambda$",
+    "t": "numero",
+    "v": "1{,}21",
+    "u": "pm"
+   },
+   {
+    "e": "$\\lambda'$",
+    "t": "numero",
+    "v": "21{,}2",
+    "u": "pm"
+   }
+  ]
+ },
+ "crisi-fisica-classica/14": {
+  "campi": [
+   {
+    "e": "$\\lambda'$",
+    "t": "numero",
+    "v": "9{,}85",
+    "u": "pm"
+   },
+   {
+    "e": "$K$",
+    "t": "numero",
+    "v": "122",
+    "u": "keV"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/4": {
+  "campi": [
+   {
+    "e": "Verso della corrente indotta, visto dal lato del magnete",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   },
+   {
+    "e": "L'anello",
+    "t": "scelta",
+    "opzioni": [
+     "attira il magnete",
+     "respinge il magnete",
+     "non esercita forze sul magnete"
+    ],
+    "v": "attira il magnete"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/5": {
+  "campi": [
+   {
+    "e": "$\\mathcal{E}(t)$ in volt",
+    "t": "funzione",
+    "v": "-0{,}018 t",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "$\\mathcal{E}(4{,}0\\,\\mathrm{s})$",
+    "t": "numero",
+    "v": "-0{,}072",
+    "u": "V"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/6": {
+  "campi": [
+   {
+    "e": "$\\mathcal{E}(t)$ in volt",
+    "t": "funzione",
+    "v": "4{,}0 \\cdot 10^{-3} e^{-\\frac{t}{2}}",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "$\\mathcal{E}(2{,}0\\,\\mathrm{s})$",
+    "t": "numero",
+    "v": "1{,}5 \\cdot 10^{-3}",
+    "u": "V"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/8": {
+  "campi": [
+   {
+    "e": "$q$",
+    "t": "numero",
+    "v": "6{,}3 \\cdot 10^{-3}",
+    "u": "C"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/10": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "A"
+   },
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "0{,}075",
+    "u": "N"
+   },
+   {
+    "e": "$P$",
+    "t": "numero",
+    "v": "0{,}45",
+    "u": "W"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/11": {
+  "campi": [
+   {
+    "e": "$v_{\\text{lim}}$",
+    "t": "numero",
+    "v": "1{,}6",
+    "u": "m/s"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/12": {
+  "campi": [
+   {
+    "e": "$i$",
+    "t": "numero",
+    "v": "0{,}90",
+    "u": "A"
+   },
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "5{,}4 \\cdot 10^{-2}",
+    "u": "N"
+   }
+  ]
+ },
+ "induzione-elettromagnetica/14": {
+  "campi": [
+   {
+    "e": "$\\mathcal{E}_1$",
+    "t": "numero",
+    "v": "-30",
+    "u": "mV"
+   },
+   {
+    "e": "$i_1$ (intensità)",
+    "t": "numero",
+    "v": "10",
+    "u": "mA"
+   },
+   {
+    "e": "$\\mathcal{E}_2$",
+    "t": "numero",
+    "v": "0",
+    "u": "mV"
+   },
+   {
+    "e": "$i_2$ (intensità)",
+    "t": "numero",
+    "v": "0",
+    "u": "mA"
+   },
+   {
+    "e": "$\\mathcal{E}_3$",
+    "t": "numero",
+    "v": "70",
+    "u": "mV"
+   },
+   {
+    "e": "$i_3$ (intensità)",
+    "t": "numero",
+    "v": "23",
+    "u": "mA"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/1": {
+  "campi": [
+   {
+    "e": "$|\\Gamma(\\vec{E})|$",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^{-3}",
+    "u": "V"
+   },
+   {
+    "e": "$E$ sul bordo",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-2}",
+    "u": "V/m"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/4": {
+  "campi": [
+   {
+    "e": "$\\dfrac{dE}{dt}$",
+    "t": "numero",
+    "v": "6{,}8 \\cdot 10^{11}",
+    "u": "V/(m s)"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/5": {
+  "campi": [
+   {
+    "e": "$B(r_1)$",
+    "t": "numero",
+    "v": "6{,}7 \\cdot 10^{-6}",
+    "u": "T"
+   },
+   {
+    "e": "$B(r_2)$",
+    "t": "numero",
+    "v": "6{,}7 \\cdot 10^{-6}",
+    "u": "T"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/6": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "300",
+    "u": "m"
+   },
+   {
+    "e": "$T$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-6}",
+    "u": "s"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/7": {
+  "campi": [
+   {
+    "e": "$E_0$",
+    "t": "numero",
+    "v": "12",
+    "u": "V/m"
+   },
+   {
+    "e": "$E_{\\text{eff}}$",
+    "t": "numero",
+    "v": "8{,}5",
+    "u": "V/m"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/8": {
+  "campi": [
+   {
+    "e": "$\\lambda$",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-7}",
+    "u": "m"
+   },
+   {
+    "e": "$f$",
+    "t": "numero",
+    "v": "7{,}5 \\cdot 10^{14}",
+    "u": "Hz"
+   },
+   {
+    "e": "Banda dello spettro",
+    "t": "scelta",
+    "opzioni": [
+     "microonde",
+     "infrarosso",
+     "luce visibile",
+     "ultravioletto",
+     "raggi X"
+    ],
+    "v": "luce visibile"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/9": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "53",
+    "u": "W/m^2"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/10": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "0{,}51",
+    "u": "W/m^2"
+   },
+   {
+    "e": "$E_{\\text{eff}}$",
+    "t": "numero",
+    "v": "14",
+    "u": "V/m"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/11": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "6{,}7 \\cdot 10^{-8}",
+    "u": "N"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/13": {
+  "campi": [
+   {
+    "e": "$\\theta$",
+    "t": "numero",
+    "v": "30",
+    "u": "°"
+   }
+  ]
+ },
+ "maxwell-onde-elettromagnetiche/14": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "1{,}2 \\cdot 10^{3}",
+    "u": "W/m^2"
+   },
+   {
+    "e": "$E_{\\text{eff}}$",
+    "t": "numero",
+    "v": "6{,}7 \\cdot 10^{2}",
+    "u": "V/m"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/1": {
+  "campi": [
+   {
+    "e": "Quantità di moto relativistica $p$",
+    "t": "numero",
+    "v": "6{,}68 \\cdot 10^{-19}",
+    "u": "kg·m/s"
+   },
+   {
+    "e": "Rapporto $\\dfrac{p}{m_p v}$",
+    "t": "numero",
+    "v": "1{,}67",
+    "cifre": 2
+   }
+  ]
+ },
+ "relativita-dinamica-energia/2": {
+  "campi": [
+   {
+    "e": "Fattore di Lorentz $\\gamma$",
+    "t": "numero",
+    "v": "5{,}03",
+    "cifre": 2
+   },
+   {
+    "e": "Energia totale $E$",
+    "t": "numero",
+    "v": "2{,}57",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/3": {
+  "campi": [
+   {
+    "e": "Energia cinetica relativistica $K$",
+    "t": "numero",
+    "v": "145",
+    "u": "MeV"
+   },
+   {
+    "e": "Energia cinetica classica $\\dfrac{1}{2} m_p v^2$",
+    "t": "numero",
+    "v": "117",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/4": {
+  "campi": [
+   {
+    "e": "Velocità finale $v$",
+    "t": "numero",
+    "v": "2{,}82 \\cdot 10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/5": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "2{,}90 \\cdot 10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/6": {
+  "campi": [
+   {
+    "e": "Diminuzione di massa $\\Delta m$ in un giorno",
+    "t": "numero",
+    "v": "2{,}9 \\cdot 10^{-3}",
+    "u": "kg"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/7": {
+  "campi": [
+   {
+    "e": "Energia totale $E$",
+    "t": "numero",
+    "v": "1063",
+    "u": "MeV"
+   },
+   {
+    "e": "Energia cinetica $K$",
+    "t": "numero",
+    "v": "125",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/8": {
+  "campi": [
+   {
+    "e": "Quantità di moto $p$",
+    "t": "numero",
+    "v": "5{,}33 \\cdot 10^{-22}",
+    "u": "kg·m/s"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/9": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "1{,}09 \\cdot 10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/10": {
+  "campi": [
+   {
+    "e": "Energia di ciascun fotone $E_\\gamma$",
+    "t": "numero",
+    "v": "938",
+    "u": "MeV"
+   },
+   {
+    "e": "Quantità di moto di ciascun fotone $p$",
+    "t": "numero",
+    "v": "5{,}00 \\cdot 10^{-19}",
+    "u": "kg·m/s"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/11": {
+  "campi": [
+   {
+    "e": "Energia cinetica del protone $K_p$",
+    "t": "numero",
+    "v": "5{,}4",
+    "u": "MeV"
+   },
+   {
+    "e": "Energia cinetica del pione $K_\\pi$",
+    "t": "numero",
+    "v": "32{,}4",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/12": {
+  "campi": [
+   {
+    "e": "Energia di legame $B$",
+    "t": "numero",
+    "v": "92{,}2",
+    "u": "MeV"
+   },
+   {
+    "e": "Energia di legame per nucleone $\\dfrac{B}{A}$",
+    "t": "numero",
+    "v": "7{,}68",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/13": {
+  "campi": [
+   {
+    "e": "Energia liberata $Q$",
+    "t": "numero",
+    "v": "26{,}7",
+    "u": "MeV"
+   }
+  ]
+ },
+ "relativita-dinamica-energia/14": {
+  "campi": [
+   {
+    "e": "Anticipo dell'orologio più alto in un anno $\\Delta t$",
+    "t": "numero",
+    "v": "3{,}4 \\cdot 10^{-6}",
+    "u": "s"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/1": {
+  "campi": [
+   {
+    "e": "Intervallo $\\Delta t$ tra i due arrivi (sistema della banchina)",
+    "t": "numero",
+    "v": "1{,}9 \\cdot 10^{-7}",
+    "u": "s"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/3": {
+  "campi": [
+   {
+    "e": "Velocità $v$ dell'orologio",
+    "t": "numero",
+    "v": "2{,}60 \\cdot 10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/5": {
+  "campi": [
+   {
+    "e": "Velocità $v$ dell'astronave",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^{8}",
+    "u": "m/s"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/6": {
+  "campi": [
+   {
+    "e": "Vita media misurata sulla Terra",
+    "t": "numero",
+    "v": "16",
+    "u": "μs"
+   },
+   {
+    "e": "Distanza media percorsa $d$",
+    "t": "numero",
+    "v": "4{,}6",
+    "u": "km"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/7": {
+  "campi": [
+   {
+    "e": "Velocità $u$ della navetta rispetto alla Terra",
+    "t": "numero",
+    "v": "0{,}88",
+    "u": "c"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/8": {
+  "campi": [
+   {
+    "e": "Modulo della velocità di un protone rispetto all'altro",
+    "t": "numero",
+    "v": "0{,}94",
+    "u": "c"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/9": {
+  "campi": [
+   {
+    "e": "$x'$",
+    "t": "numero",
+    "v": "375",
+    "u": "m"
+   },
+   {
+    "e": "$t'$",
+    "t": "numero",
+    "v": "3{,}25",
+    "u": "μs"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/10": {
+  "campi": [
+   {
+    "e": "Modulo dell'intervallo $\\Delta t'$ nel sistema del razzo",
+    "t": "numero",
+    "v": "2{,}7",
+    "u": "μs"
+   },
+   {
+    "e": "Per il razzo scocca prima",
+    "t": "scelta",
+    "opzioni": [
+     "il lampo con l'ascissa maggiore",
+     "il lampo con l'ascissa minore",
+     "nessuno: i lampi sono simultanei"
+    ],
+    "v": "il lampo con l'ascissa maggiore"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/11": {
+  "campi": [
+   {
+    "e": "$(\\Delta s)^2$",
+    "t": "numero",
+    "v": "-8{,}1 \\cdot 10^{5}",
+    "u": "m^2"
+   },
+   {
+    "e": "Tipo dell'intervallo",
+    "t": "scelta",
+    "opzioni": [
+     "di tipo tempo",
+     "di tipo spazio",
+     "di tipo luce"
+    ],
+    "v": "di tipo spazio"
+   },
+   {
+    "e": "Il primo evento può essere la causa del secondo?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "Velocità del sistema in cui gli eventi sono simultanei",
+    "t": "numero",
+    "v": "0{,}80",
+    "u": "c"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/12": {
+  "campi": [
+   {
+    "e": "Intervallo $\\Delta s$",
+    "t": "numero",
+    "v": "1200",
+    "u": "m"
+   },
+   {
+    "e": "Tempo proprio $\\Delta t_0$",
+    "t": "numero",
+    "v": "4{,}0",
+    "u": "μs"
+   }
+  ]
+ },
+ "relativita-spazio-tempo/14": {
+  "campi": [
+   {
+    "e": "Durata del viaggio per il gemello sulla Terra",
+    "t": "numero",
+    "v": "20",
+    "u": "anni"
+   },
+   {
+    "e": "Durata del viaggio per l'astronauta",
+    "t": "numero",
+    "v": "12",
+    "u": "anni"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/3": {
+  "campi": [
+   {
+    "e": "Posizione del punto di campo nullo",
+    "t": "scelta",
+    "opzioni": [
+     "tra i due fili",
+     "fuori dai fili, dalla parte del filo da $3{,}0\\,\\mathrm{A}$",
+     "fuori dai fili, dalla parte del filo da $9{,}0\\,\\mathrm{A}$"
+    ],
+    "v": "tra i due fili"
+   },
+   {
+    "e": "Distanza dal filo percorso da $3{,}0\\,\\mathrm{A}$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "cm"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/4": {
+  "campi": [
+   {
+    "e": "Campo $B$ nel punto medio",
+    "t": "numero",
+    "v": "3{,}3 \\cdot 10^{-5}",
+    "u": "T"
+   },
+   {
+    "e": "Nel punto medio i campi dei due fili hanno",
+    "t": "scelta",
+    "opzioni": [
+     "lo stesso verso",
+     "versi opposti",
+     "direzioni perpendicolari"
+    ],
+    "v": "lo stesso verso"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/5": {
+  "campi": [
+   {
+    "e": "Campo $B$ nel centro della spira",
+    "t": "numero",
+    "v": "4{,}7 \\cdot 10^{-5}",
+    "u": "T"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/6": {
+  "campi": [
+   {
+    "e": "Campo $B$ all'interno del solenoide",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-2}",
+    "u": "T"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/7": {
+  "campi": [
+   {
+    "e": "Forza per unità di lunghezza $\\dfrac{F}{\\ell}$",
+    "t": "numero",
+    "v": "1{,}0 \\cdot 10^{-3}",
+    "u": "N/m"
+   },
+   {
+    "e": "La forza è",
+    "t": "scelta",
+    "opzioni": [
+     "attrattiva",
+     "repulsiva"
+    ],
+    "v": "attrattiva"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/8": {
+  "campi": [
+   {
+    "e": "Corrente $I$",
+    "t": "numero",
+    "v": "6{,}7",
+    "u": "A"
+   },
+   {
+    "e": "Le due correnti hanno",
+    "t": "scelta",
+    "opzioni": [
+     "lo stesso verso",
+     "versi opposti"
+    ],
+    "v": "versi opposti"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/10": {
+  "campi": [
+   {
+    "e": "Flusso attraverso la superficie laterale $\\Phi_{\\text{lat}}$",
+    "t": "numero",
+    "v": "2{,}1 \\cdot 10^{-4}",
+    "u": "Wb"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/11": {
+  "campi": [
+   {
+    "e": "Circuitazione $\\Gamma(\\vec{B})$",
+    "t": "numero",
+    "v": "-6{,}3 \\cdot 10^{-6}",
+    "u": "T·m"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/12": {
+  "campi": [
+   {
+    "e": "Campo a $2{,}0\\,\\mathrm{mm}$ dall'asse",
+    "t": "numero",
+    "v": "4{,}0 \\cdot 10^{-4}",
+    "u": "T"
+   },
+   {
+    "e": "Campo a $1{,}0\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^{-4}",
+    "u": "T"
+   }
+  ]
+ },
+ "sorgenti-campo-magnetico/14": {
+  "campi": [
+   {
+    "e": "Campo $B_0$ con il solenoide vuoto",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^{-4}",
+    "u": "T"
+   },
+   {
+    "e": "Campo $B$ con il nucleo di ferro",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "T"
+   },
+   {
+    "e": "Il ferro è una sostanza",
+    "t": "scelta",
+    "opzioni": [
+     "diamagnetica",
+     "paramagnetica",
+     "ferromagnetica"
+    ],
+    "v": "ferromagnetica"
+   }
+  ]
+ }
+}

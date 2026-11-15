@@ -1,0 +1,5156 @@
+{
+ "analisi-cinematica/1": {
+  "campi": [
+   {
+    "e": "Grado di labilità $l$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "analisi-cinematica/2": {
+  "campi": [
+   {
+    "e": "Classificazione della trave",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "labile",
+     "iperstatica",
+     "labile e iperstatica"
+    ],
+    "v": "isostatica"
+   }
+  ]
+ },
+ "analisi-cinematica/3": {
+  "campi": [
+   {
+    "e": "Classificazione del telaio",
+    "t": "scelta",
+    "opzioni": [
+     "isostatico",
+     "labile",
+     "iperstatico",
+     "labile e iperstatico"
+    ],
+    "v": "labile e iperstatico"
+   },
+   {
+    "e": "Grado di labilità $l$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "analisi-cinematica/4": {
+  "campi": [
+   {
+    "e": "Classificazione della trave",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "labile",
+     "iperstatica",
+     "labile e iperstatica"
+    ],
+    "v": "labile e iperstatica"
+   },
+   {
+    "e": "Spostamento possibile della trave",
+    "t": "scelta",
+    "opzioni": [
+     "traslazione orizzontale",
+     "traslazione verticale",
+     "rotazione attorno ad $A$",
+     "rotazione attorno a $B$"
+    ],
+    "v": "traslazione orizzontale"
+   }
+  ]
+ },
+ "analisi-cinematica/5": {
+  "campi": [
+   {
+    "e": "Classificazione della trave",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "labile",
+     "iperstatica",
+     "labile e iperstatica"
+    ],
+    "v": "isostatica"
+   },
+   {
+    "e": "Ordine in cui i tratti risultano fermi",
+    "t": "scelta",
+    "opzioni": [
+     "$AC$, poi $CD$, poi $DE$",
+     "$DE$, poi $CD$, poi $AC$",
+     "$CD$, poi $AC$, poi $DE$",
+     "$AC$, poi $DE$, poi $CD$"
+    ],
+    "v": "$AC$, poi $CD$, poi $DE$"
+   }
+  ]
+ },
+ "analisi-cinematica/6": {
+  "campi": [
+   {
+    "e": "Classificazione del portale",
+    "t": "scelta",
+    "opzioni": [
+     "isostatico",
+     "labile",
+     "iperstatico",
+     "labile e iperstatico"
+    ],
+    "v": "isostatico"
+   }
+  ]
+ },
+ "analisi-cinematica/7": {
+  "campi": [
+   {
+    "e": "Grado di labilità $l$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "analisi-cinematica/8": {
+  "campi": [
+   {
+    "e": "$h$",
+    "t": "numero",
+    "v": "1",
+    "u": "m"
+   }
+  ]
+ },
+ "analisi-cinematica/9": {
+  "campi": [
+   {
+    "e": "Inclinazione $\\alpha$ del piano sull'orizzontale",
+    "t": "numero",
+    "v": "53{,}13",
+    "u": "°"
+   },
+   {
+    "e": "Verso del piano di scorrimento",
+    "t": "scelta",
+    "opzioni": [
+     "scende verso destra",
+     "sale verso destra"
+    ],
+    "v": "scende verso destra"
+   }
+  ]
+ },
+ "analisi-cinematica/10": {
+  "campi": [
+   {
+    "e": "Grado di labilità $l$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Centro $C_2$ dell'asta $CD$ (in metri)",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "8"
+    ]
+   },
+   {
+    "e": "$\\varphi_2$ come multiplo di $\\varphi_1$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "$\\varphi_3$ come multiplo di $\\varphi_1$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "analisi-cinematica/11": {
+  "campi": [
+   {
+    "e": "Grado di labilità $l$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "analisi-cinematica/12": {
+  "campi": [
+   {
+    "e": "Grado di iperstaticità $i$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "analisi-cinematica/13": {
+  "campi": [
+   {
+    "e": "Classificazione della struttura",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "labile",
+     "iperstatica",
+     "labile e iperstatica"
+    ],
+    "v": "isostatica"
+   }
+  ]
+ },
+ "analisi-cinematica/14": {
+  "campi": [
+   {
+    "e": "Classificazione della trave",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "labile",
+     "iperstatica",
+     "labile e iperstatica"
+    ],
+    "v": "labile e iperstatica"
+   },
+   {
+    "e": "Spostamento del tratto $AC$",
+    "t": "scelta",
+    "opzioni": [
+     "traslazione verticale",
+     "traslazione orizzontale",
+     "rotazione attorno ad $A$",
+     "rotazione attorno a $C$"
+    ],
+    "v": "traslazione verticale"
+   },
+   {
+    "e": "Centro di rotazione del tratto $CB$",
+    "t": "scelta",
+    "opzioni": [
+     "$A$",
+     "$B$",
+     "$C$",
+     "punto improprio verticale"
+    ],
+    "v": "$B$"
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/1": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "5",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$T$ nel tratto $CD$",
+    "t": "numero",
+    "v": "-1",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_C$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_D$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN m",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/2": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "7",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "5",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_C$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_D$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "12{,}25",
+    "u": "kN m"
+   },
+   {
+    "e": "Ascissa di $M_{\\max}$",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/3": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "-3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_A$",
+    "t": "numero",
+    "v": "21",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$N$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$T(x)$",
+    "t": "funzione",
+    "v": "10 - 2x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$",
+    "t": "funzione",
+    "v": "-(3 - x)^2 - 4(3 - x)",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/4": {
+  "campi": [
+   {
+    "e": "$T(x)$",
+    "t": "funzione",
+    "v": "-\\frac{2x^2}{3}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$",
+    "t": "funzione",
+    "v": "-\\frac{2x^3}{9}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$H_B$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_B$",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN m",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/5": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$M_C$",
+    "t": "numero",
+    "v": "5",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_B$",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "Ascissa della sezione di momento nullo fra $C$ e $B$",
+    "t": "numero",
+    "v": "2{,}91",
+    "u": "m"
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/6": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_A$",
+    "t": "numero",
+    "v": "-10",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "Momento in mezzeria",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M(x)$ su $AB$, con $x$ da $C$",
+    "t": "funzione",
+    "v": "-10 + 4(x - 2) - (x - 2)^2",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/7": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "-2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$T$",
+    "t": "numero",
+    "v": "2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M(x)$",
+    "t": "funzione",
+    "v": "2x - 8",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/8": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "5",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "7",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M(x)$",
+    "t": "funzione",
+    "v": "5x - x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "6{,}25",
+    "u": "kN m"
+   },
+   {
+    "e": "Ascissa di $M_{\\max}$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "m"
+   },
+   {
+    "e": "Ascissa in cui $M$ si annulla fra $A$ e $B$",
+    "t": "numero",
+    "v": "5",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/9": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "-2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_D$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_B$",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_C$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_E$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN m",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/10": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "7",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_A$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_B$",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "Momento massimo positivo",
+    "t": "numero",
+    "v": "2{,}25",
+    "u": "kN m"
+   },
+   {
+    "e": "Ascissa del momento massimo positivo",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/11": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "1",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_D$",
+    "t": "numero",
+    "v": "7",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_B$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "Momento massimo nel traverso",
+    "t": "numero",
+    "v": "12{,}25",
+    "u": "kN m"
+   },
+   {
+    "e": "Ascissa del massimo, da $B$",
+    "t": "numero",
+    "v": "0{,}5",
+    "u": "m"
+   },
+   {
+    "e": "$N$ nel pilastro $CD$",
+    "t": "numero",
+    "v": "-7",
+    "u": "kN",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/12": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "-3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_A$",
+    "t": "numero",
+    "v": "16",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$N$ nel pilastro",
+    "t": "numero",
+    "v": "-2",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M(s)$ nel pilastro",
+    "t": "funzione",
+    "v": "-16 + 3s",
+    "var": [
+     "s"
+    ]
+   },
+   {
+    "e": "$N$ nel traverso",
+    "t": "numero",
+    "v": "3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M(x)$ nel traverso",
+    "t": "funzione",
+    "v": "-2(2 - x)",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/13": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "-3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$H_B$",
+    "t": "numero",
+    "v": "-3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$V_B$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_D$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$M_E$",
+    "t": "numero",
+    "v": "-12",
+    "u": "kN m",
+    "esatto": true
+   },
+   {
+    "e": "$N$ nel traverso",
+    "t": "numero",
+    "v": "-3",
+    "u": "kN",
+    "esatto": true
+   }
+  ]
+ },
+ "caratteristiche-della-sollecitazione/14": {
+  "campi": [
+   {
+    "e": "$V_A$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "3{,}75",
+    "u": "kN"
+   },
+   {
+    "e": "$H_B$",
+    "t": "numero",
+    "v": "-3{,}75",
+    "u": "kN"
+   },
+   {
+    "e": "$N$ nel tratto $AD$",
+    "t": "numero",
+    "v": "-10{,}25",
+    "u": "kN"
+   },
+   {
+    "e": "$N$ nel tratto $DB$",
+    "t": "numero",
+    "v": "-2{,}25",
+    "u": "kN"
+   },
+   {
+    "e": "$T$ nel tratto $AD$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN",
+    "esatto": true
+   },
+   {
+    "e": "$M_D$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN m"
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/1": {
+  "campi": [
+   {
+    "e": "$u_P$",
+    "t": "numero",
+    "v": "0",
+    "u": "mm"
+   },
+   {
+    "e": "$v_P$",
+    "t": "numero",
+    "v": "4",
+    "u": "mm"
+   },
+   {
+    "e": "Centro di rotazione $C$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/2": {
+  "campi": [
+   {
+    "e": "Rotazione $\\varphi$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "-0{,}002",
+    "u": "rad"
+   },
+   {
+    "e": "$u_B$",
+    "t": "numero",
+    "v": "2",
+    "u": "mm"
+   },
+   {
+    "e": "Centro di rotazione $C$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "1{,}5",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/3": {
+  "campi": [
+   {
+    "e": "Centro di rotazione $C$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Rotazione $\\varphi$ (positiva se antioraria)",
+    "t": "numero",
+    "v": "0{,}002",
+    "u": "rad"
+   },
+   {
+    "e": "$u_A$ (positivo verso destra)",
+    "t": "numero",
+    "v": "8",
+    "u": "mm"
+   },
+   {
+    "e": "$v_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "mm"
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/4": {
+  "campi": [
+   {
+    "e": "Centro di rotazione $C$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "0",
+     "-4"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\vec{s}_A$ (componenti in mm)",
+    "t": "valori",
+    "v": [
+     "-4",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\vec{s}_B$ (componenti in mm)",
+    "t": "valori",
+    "v": [
+     "-4",
+     "4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/5": {
+  "campi": [
+   {
+    "e": "Centro $C_2$",
+    "t": "scelta",
+    "opzioni": [
+     "$A$",
+     "$B$",
+     "$C$",
+     "$D$"
+    ],
+    "v": "$C$"
+   },
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-2",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_B}{\\varphi_1}$",
+    "t": "numero",
+    "v": "6",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_D}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-4",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/6": {
+  "campi": [
+   {
+    "e": "Centro $C_2$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "6",
+     "6"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-2",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{\\vec{s}_D}{\\varphi_1}$ (componenti in m)",
+    "t": "valori",
+    "v": [
+     "-4",
+     "-4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/7": {
+  "campi": [
+   {
+    "e": "Centro $C_2$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "5",
+     "5"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-4",
+    "esatto": true
+   },
+   {
+    "e": "$\\vec{s}_B$ (componenti in mm)",
+    "t": "valori",
+    "v": [
+     "-20",
+     "-20"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/8": {
+  "campi": [
+   {
+    "e": "Centro $C_2$",
+    "t": "scelta",
+    "opzioni": [
+     "$D$",
+     "$B$",
+     "punto improprio della direzione orizzontale",
+     "punto improprio della direzione verticale"
+    ],
+    "v": "punto improprio della direzione verticale"
+   },
+   {
+    "e": "Spostamento orizzontale $u$ del corpo $2$ (positivo verso destra)",
+    "t": "numero",
+    "v": "12",
+    "u": "mm"
+   },
+   {
+    "e": "Spostamento verticale $v$ del corpo $2$",
+    "t": "numero",
+    "v": "0",
+    "u": "mm"
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/9": {
+  "campi": [
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "1",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_B^{(1)}}{\\varphi_1}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_B^{(2)}}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-5",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "Salto $\\dfrac{v_B^{(2)} - v_B^{(1)}}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-8",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/10": {
+  "campi": [
+   {
+    "e": "Centro $C_2$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "3",
+     "12"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Centro $C_{13}$",
+    "t": "scelta",
+    "opzioni": [
+     "$(3, 0)\\,\\mathrm{m}$",
+     "$(3, 12)\\,\\mathrm{m}$",
+     "punto improprio della direzione orizzontale",
+     "punto improprio della direzione verticale"
+    ],
+    "v": "punto improprio della direzione orizzontale"
+   },
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{\\varphi_3}{\\varphi_1}$",
+    "t": "numero",
+    "v": "1",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/11": {
+  "campi": [
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-\\frac{3}{2}",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{\\varphi_3}{\\varphi_1}$",
+    "t": "numero",
+    "v": "\\frac{1}{2}",
+    "esatto": true
+   },
+   {
+    "e": "Centro $C_{13}$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "-9",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\dfrac{v_B}{\\varphi_1}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_C}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-\\frac{3}{2}",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/12": {
+  "campi": [
+   {
+    "e": "$\\dfrac{v(x)}{\\varphi_1}$ su $DB$ ($x$ in metri da $D$)",
+    "t": "funzione",
+    "v": "x - 2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\dfrac{v(x)}{\\varphi_1}$ su $BE$ ($x$ in metri da $D$)",
+    "t": "funzione",
+    "v": "-(x - 8)",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\dfrac{v_D}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-2",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_B}{\\varphi_1}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_E}{\\varphi_1}$",
+    "t": "numero",
+    "v": "-2",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/13": {
+  "campi": [
+   {
+    "e": "Centro $C_2$ (coordinate in m)",
+    "t": "valori",
+    "v": [
+     "2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\dfrac{\\varphi_2}{\\varphi_1}$",
+    "t": "numero",
+    "v": "2",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{u}{\\varphi_1}$ del traverso",
+    "t": "numero",
+    "v": "-4",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{u_F}{\\varphi_1}$",
+    "t": "numero",
+    "v": "0",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "$\\dfrac{v_F}{\\varphi_1}$",
+    "t": "numero",
+    "v": "8",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-dei-rigidi/14": {
+  "campi": [
+   {
+    "e": "$\\vec{s}_D$ (componenti in mm)",
+    "t": "valori",
+    "v": [
+     "0",
+     "10"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componente di $\\vec{s}_D$ nella direzione e nel verso di $F$",
+    "t": "numero",
+    "v": "-8",
+    "u": "mm"
+   }
+  ]
+ },
+ "equazioni-indefinite/1": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "12 - 3x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "12x - \\frac{3}{2}x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "4",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/2": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "4(2{,}5 - x)",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "-2(2{,}5 - x)^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "kN m"
+   },
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   }
+  ]
+ },
+ "equazioni-indefinite/3": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "24 - 12x + x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "24x - 6x^2 + \\frac{x^3}{3}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "6 - 2\\sqrt{3}",
+    "u": "m"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "16\\sqrt{3}",
+    "u": "kN m"
+   }
+  ]
+ },
+ "equazioni-indefinite/4": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "14",
+    "u": "kN"
+   },
+   {
+    "e": "$T(4^-)$",
+    "t": "numero",
+    "v": "2",
+    "u": "kN"
+   },
+   {
+    "e": "$T(4^+)$",
+    "t": "numero",
+    "v": "-10",
+    "u": "kN"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "4",
+    "u": "m"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   }
+  ]
+ },
+ "equazioni-indefinite/5": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "4",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "4x - 3",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "3",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione in cui $M = 0$",
+    "t": "numero",
+    "v": "0{,}75",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/6": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "8 - 4x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "8x - 2x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Momento massimo positivo $M_{\\max}$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo positivo $x$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/7": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "15",
+    "u": "kN m"
+   },
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$M$ a $1\\,\\mathrm{m}$ dall'incastro",
+    "t": "numero",
+    "v": "-\\frac{52}{9}",
+    "u": "kN m"
+   }
+  ]
+ },
+ "equazioni-indefinite/8": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "\\frac{12}{\\pi}\\cos\\frac{\\pi x}{4}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "\\frac{48}{\\pi^2}\\sin\\frac{\\pi x}{4}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{12}{\\pi}",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "\\frac{12}{\\pi}",
+    "u": "kN"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "\\frac{48}{\\pi^2}",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/9": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Momento sull'appoggio $M(8)$",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN m"
+   },
+   {
+    "e": "Momento massimo in campata $M_{\\max}$",
+    "t": "numero",
+    "v": "\\frac{225}{16}",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "3{,}75",
+    "u": "m"
+   },
+   {
+    "e": "Punto di nullo del momento in campata, diverso da $A$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/10": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "7 - 2x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "-10 + 7x - x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "7",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "Momento massimo positivo $M_{\\max}$",
+    "t": "numero",
+    "v": "2{,}25",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo positivo $x$",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/11": {
+  "campi": [
+   {
+    "e": "$q(x)$ in kN/m",
+    "t": "funzione",
+    "v": "3x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "\\frac{64\\sqrt{3}}{9}",
+    "u": "kN m"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "\\frac{4}{\\sqrt{3}}",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/12": {
+  "campi": [
+   {
+    "e": "$N(x)$ in kN",
+    "t": "funzione",
+    "v": "-3x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$H_B$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-12",
+    "u": "kN"
+   }
+  ]
+ },
+ "equazioni-indefinite/13": {
+  "campi": [
+   {
+    "e": "$T(x)$ in kN",
+    "t": "funzione",
+    "v": "4 - 3x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M(x)$ in kN m",
+    "t": "funzione",
+    "v": "6x - \\frac{3}{2}x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Sezione in cui $T = 0$",
+    "t": "numero",
+    "v": "\\frac{4}{3}",
+    "u": "m"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "equazioni-indefinite/14": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Sezione del momento massimo $x$",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "m"
+   },
+   {
+    "e": "$M_{\\max}$",
+    "t": "numero",
+    "v": "18{,}375",
+    "u": "kN m"
+   },
+   {
+    "e": "$M$ in $C$",
+    "t": "numero",
+    "v": "18",
+    "u": "kN m"
+   },
+   {
+    "e": "$M$ in $D$",
+    "t": "numero",
+    "v": "15",
+    "u": "kN m"
+   }
+  ]
+ },
+ "geometria-delle-masse/1": {
+  "campi": [
+   {
+    "e": "$x_G$",
+    "t": "numero",
+    "v": "0",
+    "u": "cm"
+   },
+   {
+    "e": "$y_G$, distanza dal lembo inferiore",
+    "t": "numero",
+    "v": "5{,}5",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-delle-masse/2": {
+  "campi": [
+   {
+    "e": "$x_G$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "cm"
+   },
+   {
+    "e": "$y_G$",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-delle-masse/3": {
+  "campi": [
+   {
+    "e": "$x_G$, distanza dal lato sinistro",
+    "t": "numero",
+    "v": "14{,}25",
+    "u": "cm"
+   },
+   {
+    "e": "$y_G$, distanza dal lato inferiore",
+    "t": "numero",
+    "v": "10",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-delle-masse/4": {
+  "campi": [
+   {
+    "e": "$y_G$, distanza dal lato inferiore",
+    "t": "numero",
+    "v": "5{,}70",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-delle-masse/5": {
+  "campi": [
+   {
+    "e": "$y_G$, distanza dal lembo inferiore",
+    "t": "numero",
+    "v": "8",
+    "u": "cm"
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "533{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "173{,}33",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/6": {
+  "campi": [
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "21565{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "11125{,}33",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/7": {
+  "campi": [
+   {
+    "e": "$y_G$, distanza dal lembo inferiore",
+    "t": "numero",
+    "v": "10",
+    "u": "cm"
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "6805{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "781{,}33",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/8": {
+  "campi": [
+   {
+    "e": "$x_G$",
+    "t": "numero",
+    "v": "2",
+    "u": "cm"
+   },
+   {
+    "e": "$y_G$",
+    "t": "numero",
+    "v": "8",
+    "u": "cm"
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "1472",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "128",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/9": {
+  "campi": [
+   {
+    "e": "Area $A$",
+    "t": "numero",
+    "v": "62{,}83",
+    "u": "cm^2"
+   },
+   {
+    "e": "Momento d'inerzia rispetto a un diametro $I_{x_G}$",
+    "t": "numero",
+    "v": "816{,}81",
+    "u": "cm^4"
+   },
+   {
+    "e": "Momento polare $I_p$",
+    "t": "numero",
+    "v": "1633{,}63",
+    "u": "cm^4"
+   },
+   {
+    "e": "Raggio d'inerzia $\\rho$",
+    "t": "numero",
+    "v": "3{,}61",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-delle-masse/10": {
+  "campi": [
+   {
+    "e": "Baricentro $G = (x_G;\\ y_G)$, in $\\mathrm{cm}$",
+    "t": "valori",
+    "v": [
+     "3{,}5",
+     "4{,}5"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "884",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "596",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{x_G y_G}$",
+    "t": "numero",
+    "v": "-420",
+    "u": "cm^4"
+   },
+   {
+    "e": "Momento principale massimo $I_1$",
+    "t": "numero",
+    "v": "1184",
+    "u": "cm^4"
+   },
+   {
+    "e": "Momento principale minimo $I_2$",
+    "t": "numero",
+    "v": "296",
+    "u": "cm^4"
+   },
+   {
+    "e": "Angolo fra $x_G$ e l'asse di $I_1$, in valore assoluto",
+    "t": "numero",
+    "v": "35{,}54",
+    "u": "°"
+   },
+   {
+    "e": "Verso della rotazione da $x_G$ all'asse di $I_1$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "geometria-delle-masse/11": {
+  "campi": [
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "689{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "977{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{x_G y_G}$",
+    "t": "numero",
+    "v": "640",
+    "u": "cm^4"
+   },
+   {
+    "e": "Momento principale massimo $I_1$",
+    "t": "numero",
+    "v": "1489{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "Momento principale minimo $I_2$",
+    "t": "numero",
+    "v": "177{,}33",
+    "u": "cm^4"
+   },
+   {
+    "e": "Angolo fra $x_G$ e l'asse di $I_1$, in valore assoluto",
+    "t": "numero",
+    "v": "51{,}34",
+    "u": "°"
+   },
+   {
+    "e": "Verso della rotazione da $x_G$ all'asse di $I_1$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "orario"
+   }
+  ]
+ },
+ "geometria-delle-masse/12": {
+  "campi": [
+   {
+    "e": "Baricentro $G = (x_G;\\ y_G)$, in $\\mathrm{cm}$",
+    "t": "valori",
+    "v": [
+     "4",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "72",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "288",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{x_G y_G}$",
+    "t": "numero",
+    "v": "-72",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_x$",
+    "t": "numero",
+    "v": "216",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_y$",
+    "t": "numero",
+    "v": "864",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{xy}$",
+    "t": "numero",
+    "v": "216",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/13": {
+  "campi": [
+   {
+    "e": "$I_\\xi$",
+    "t": "numero",
+    "v": "672",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_\\eta$",
+    "t": "numero",
+    "v": "992",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{\\xi\\eta}$",
+    "t": "numero",
+    "v": "277{,}13",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "geometria-delle-masse/14": {
+  "campi": [
+   {
+    "e": "Area $A$",
+    "t": "numero",
+    "v": "21{,}33",
+    "u": "cm^2"
+   },
+   {
+    "e": "Baricentro $G = (x_G;\\ y_G)$, in $\\mathrm{cm}$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1{,}6"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$I_x$",
+    "t": "numero",
+    "v": "78{,}02",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{x_G}$",
+    "t": "numero",
+    "v": "23{,}41",
+    "u": "cm^4"
+   },
+   {
+    "e": "$I_{y_G}$",
+    "t": "numero",
+    "v": "68{,}27",
+    "u": "cm^4"
+   }
+  ]
+ },
+ "lavori-virtuali/1": {
+  "campi": [
+   {
+    "e": "Modulo di $R_B$",
+    "t": "numero",
+    "v": "29",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $R_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "11",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "lavori-virtuali/2": {
+  "campi": [
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "20",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "lavori-virtuali/3": {
+  "campi": [
+   {
+    "e": "Valore assoluto di $M_S$",
+    "t": "numero",
+    "v": "27",
+    "u": "kN m"
+   },
+   {
+    "e": "Fibre tese in $S$",
+    "t": "scelta",
+    "opzioni": [
+     "inferiori",
+     "superiori"
+    ],
+    "v": "inferiori"
+   }
+  ]
+ },
+ "lavori-virtuali/5": {
+  "campi": [
+   {
+    "e": "Modulo di $R_C$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $R_C$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "lavori-virtuali/6": {
+  "campi": [
+   {
+    "e": "Modulo di $R_B$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $R_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "2",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "lavori-virtuali/7": {
+  "campi": [
+   {
+    "e": "Modulo di $H_B$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "lavori-virtuali/8": {
+  "campi": [
+   {
+    "e": "Valore assoluto di $N_{EB}$",
+    "t": "numero",
+    "v": "13",
+    "u": "kN"
+   },
+   {
+    "e": "Il ritto $EB$ è",
+    "t": "scelta",
+    "opzioni": [
+     "teso",
+     "compresso",
+     "scarico"
+    ],
+    "v": "compresso"
+   }
+  ]
+ },
+ "lavori-virtuali/9": {
+  "campi": [
+   {
+    "e": "Modulo di $R_B$",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   }
+  ]
+ },
+ "lavori-virtuali/10": {
+  "campi": [
+   {
+    "e": "Valore assoluto di $M_B$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN m"
+   },
+   {
+    "e": "Fibre tese in $B$",
+    "t": "scelta",
+    "opzioni": [
+     "inferiori",
+     "superiori"
+    ],
+    "v": "superiori"
+   }
+  ]
+ },
+ "lavori-virtuali/12": {
+  "campi": [
+   {
+    "e": "Modulo di $F_D$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $F_D$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "lavori-virtuali/13": {
+  "campi": [
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "50",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "orario"
+   },
+   {
+    "e": "Modulo di $R_B$",
+    "t": "numero",
+    "v": "20",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $R_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "lavori-virtuali/14": {
+  "campi": [
+   {
+    "e": "Valore assoluto del momento in mezzeria",
+    "t": "numero",
+    "v": "11",
+    "u": "kN m"
+   },
+   {
+    "e": "Fibre tese in mezzeria",
+    "t": "scelta",
+    "opzioni": [
+     "inferiori",
+     "superiori"
+    ],
+    "v": "superiori"
+   }
+  ]
+ },
+ "linee-di-influenza/1": {
+  "campi": [
+   {
+    "e": "$\\eta_{V_A}(\\xi)$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{5 - x}{5}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{x}{5}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_A}$ per $\\xi = 2\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "\\frac{3}{5}"
+   },
+   {
+    "e": "$\\eta_{V_B}$ per $\\xi = 2\\,\\mathrm{m}$",
+    "t": "numero",
+    "v": "\\frac{2}{5}"
+   }
+  ]
+ },
+ "linee-di-influenza/2": {
+  "campi": [
+   {
+    "e": "$\\eta_{V_A}(\\xi)$, per $0 \\le \\xi \\le 8\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{6 - x}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$, per $0 \\le \\xi \\le 8\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{x}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_A}$ con il carico in $C$",
+    "t": "numero",
+    "v": "-\\frac{1}{3}"
+   },
+   {
+    "e": "$\\eta_{V_B}$ con il carico in $C$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   }
+  ]
+ },
+ "linee-di-influenza/3": {
+  "campi": [
+   {
+    "e": "$\\eta_{V_A}(\\xi)$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "1",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{M_A}(\\xi)$ in $\\mathrm{m}$, $M_A$ antiorario positivo (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "30",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "linee-di-influenza/4": {
+  "campi": [
+   {
+    "e": "$\\eta_M(\\xi)$ per $0 \\le \\xi \\le 4\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{3}{5}x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_M(\\xi)$ per $4 \\le \\xi \\le 10\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{2}{5}(10 - x)",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Ordinata massima",
+    "t": "numero",
+    "v": "2{,}4",
+    "u": "m"
+   }
+  ]
+ },
+ "linee-di-influenza/5": {
+  "campi": [
+   {
+    "e": "$\\eta_T(\\xi)$ per $0 \\le \\xi < 1{,}5\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "-\\frac{x}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_T(\\xi)$ per $1{,}5 < \\xi \\le 6\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{6 - x}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Ordinata subito a sinistra di $S$",
+    "t": "numero",
+    "v": "-\\frac{1}{4}"
+   },
+   {
+    "e": "Ordinata subito a destra di $S$",
+    "t": "numero",
+    "v": "\\frac{3}{4}"
+   }
+  ]
+ },
+ "linee-di-influenza/6": {
+  "campi": [
+   {
+    "e": "$\\eta_M(\\xi)$ per $0 \\le \\xi < 6\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_M(\\xi)$ per $6 < \\xi \\le 7\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "-(x - 6)",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_T(\\xi)$ per $0 \\le \\xi < 6\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_T(\\xi)$ per $6 < \\xi \\le 7\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "1",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "linee-di-influenza/7": {
+  "campi": [
+   {
+    "e": "$\\eta_{V_A}(\\xi)$, con $\\xi$ misurata da $E$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{7 - x}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_A}$ in $E$",
+    "t": "numero",
+    "v": "\\frac{7}{6}"
+   },
+   {
+    "e": "$\\eta_{V_A}$ in $F$",
+    "t": "numero",
+    "v": "-\\frac{1}{3}"
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$, con $\\xi$ misurata da $E$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{x - 1}{6}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}$ in $E$",
+    "t": "numero",
+    "v": "-\\frac{1}{6}"
+   },
+   {
+    "e": "$\\eta_{V_B}$ in $F$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   }
+  ]
+ },
+ "linee-di-influenza/8": {
+  "campi": [
+   {
+    "e": "$\\eta_{M_A}(\\xi)$ per $0 \\le \\xi \\le 2\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{M_A}(\\xi)$ per $2 \\le \\xi \\le 6\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{6 - x}{2}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$ per $0 \\le \\xi \\le 2\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$ per $2 \\le \\xi \\le 6\\,\\mathrm{m}$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{x - 2}{4}",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "linee-di-influenza/9": {
+  "campi": [
+   {
+    "e": "$\\eta_{V_B}(\\xi)$ su $AC$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{x}{4}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{V_B}(\\xi)$ su $CD$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "\\frac{5}{4} \\cdot \\frac{8 - x}{3}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{M_B}(\\xi)$ su $AB$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{M_B}(\\xi)$ su $BC$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "-(x - 4)",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$\\eta_{M_B}(\\xi)$ su $CD$ (scrivi $x$ al posto di $\\xi$)",
+    "t": "funzione",
+    "v": "-\\frac{8 - x}{3}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "$M_{B,\\min}$",
+    "t": "numero",
+    "v": "-32",
+    "u": "kN m"
+   }
+  ]
+ },
+ "linee-di-influenza/10": {
+  "campi": [
+   {
+    "e": "$M_S$",
+    "t": "numero",
+    "v": "40",
+    "u": "kN m"
+   },
+   {
+    "e": "$T_S$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   }
+  ]
+ },
+ "linee-di-influenza/11": {
+  "campi": [
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "45",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "linee-di-influenza/12": {
+  "campi": [
+   {
+    "e": "$M_{S,\\max}$",
+    "t": "numero",
+    "v": "160",
+    "u": "kN m"
+   },
+   {
+    "e": "$M_{S,\\min}$",
+    "t": "numero",
+    "v": "-50",
+    "u": "kN m"
+   }
+  ]
+ },
+ "linee-di-influenza/13": {
+  "campi": [
+   {
+    "e": "Distanza da $A$ dell'estremo sinistro del carico",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   },
+   {
+    "e": "Distanza da $A$ dell'estremo destro del carico",
+    "t": "numero",
+    "v": "8",
+    "u": "m"
+   },
+   {
+    "e": "$M_{S,\\max}$",
+    "t": "numero",
+    "v": "120",
+    "u": "kN m"
+   }
+  ]
+ },
+ "linee-di-influenza/14": {
+  "campi": [
+   {
+    "e": "Momento massimo in mezzeria",
+    "t": "numero",
+    "v": "105",
+    "u": "kN m"
+   },
+   {
+    "e": "Forza che si trova in mezzeria",
+    "t": "scelta",
+    "opzioni": [
+     "$P_1$",
+     "$P_2$"
+    ],
+    "v": "$P_1$"
+   },
+   {
+    "e": "Distanza di $P_2$ da $A$",
+    "t": "numero",
+    "v": "7",
+    "u": "m"
+   }
+  ]
+ },
+ "reazioni-vincolari/1": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "19",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/2": {
+  "campi": [
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "32{,}5",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "reazioni-vincolari/3": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "31",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/4": {
+  "campi": [
+   {
+    "e": "$V_A$ in kN, in funzione di $F$ in kN",
+    "t": "funzione",
+    "v": "12 - \\frac{f}{3}",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "Valore di $F$ per cui $V_A = 0$",
+    "t": "numero",
+    "v": "36",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "60",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/5": {
+  "campi": [
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "10{,}75",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "11{,}25",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/6": {
+  "campi": [
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/7": {
+  "campi": [
+   {
+    "e": "Risultante del carico",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza della risultante da $A$",
+    "t": "numero",
+    "v": "\\frac{7}{3}",
+    "u": "m"
+   },
+   {
+    "e": "$H_A$",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "56",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "reazioni-vincolari/8": {
+  "campi": [
+   {
+    "e": "Modulo di $R_B$",
+    "t": "numero",
+    "v": "8\\sqrt{3}",
+    "u": "kN"
+   },
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "4\\sqrt{3}",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/9": {
+  "campi": [
+   {
+    "e": "Modulo della reazione del pendolo $R_B$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "Il pendolo è",
+    "t": "scelta",
+    "opzioni": [
+     "teso",
+     "compresso"
+    ],
+    "v": "compresso"
+   },
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "1",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/10": {
+  "campi": [
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "17{,}25",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "21{,}75",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/11": {
+  "campi": [
+   {
+    "e": "Modulo di $H_A$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "9",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/12": {
+  "campi": [
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Modulo di $H_B$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "reazioni-vincolari/13": {
+  "campi": [
+   {
+    "e": "Modulo di $H_B$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $H_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $M_A$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_A$",
+    "t": "scelta",
+    "opzioni": [
+     "antiorario",
+     "orario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "reazioni-vincolari/14": {
+  "campi": [
+   {
+    "e": "La trave è in equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "per ogni valore di $H$",
+     "solo per $H = 0$",
+     "per nessun valore di $H$"
+    ],
+    "v": "solo per $H = 0$"
+   },
+   {
+    "e": "Modulo di $V_A$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Modulo di $V_B$",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "Verso di $V_B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "sistemi-di-forze/1": {
+  "campi": [
+   {
+    "e": "Intensità del momento rispetto a $O$",
+    "t": "numero",
+    "v": "30",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di rotazione rispetto a $O$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   },
+   {
+    "e": "Intensità del momento rispetto a $Q$",
+    "t": "numero",
+    "v": "45",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di rotazione rispetto a $Q$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "sistemi-di-forze/2": {
+  "campi": [
+   {
+    "e": "Intensità di $M_O$",
+    "t": "numero",
+    "v": "32",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_O$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "antiorario"
+   },
+   {
+    "e": "Distanza di $O$ dalla retta d'azione",
+    "t": "numero",
+    "v": "3{,}2",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/3": {
+  "campi": [
+   {
+    "e": "Intensità del momento rispetto all'origine",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso del momento rispetto all'origine",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   },
+   {
+    "e": "Intensità del momento rispetto a $P$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso del momento rispetto a $P$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   }
+  ]
+ },
+ "sistemi-di-forze/4": {
+  "campi": [
+   {
+    "e": "Intensità di $M_P$",
+    "t": "numero",
+    "v": "21",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso di $M_P$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "sistemi-di-forze/5": {
+  "campi": [
+   {
+    "e": "Intensità della forza risultante",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza risultante",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Distanza da $A$ della retta d'azione",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/6": {
+  "campi": [
+   {
+    "e": "Intensità della risultante $Q$",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della risultante",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Distanza da $A$ della retta d'azione",
+    "t": "numero",
+    "v": "\\frac{10}{3}",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/7": {
+  "campi": [
+   {
+    "e": "Intensità della risultante $Q$",
+    "t": "numero",
+    "v": "36",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza da $A$ della retta d'azione",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   },
+   {
+    "e": "Intensità del momento rispetto a $B$",
+    "t": "numero",
+    "v": "144",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso del momento rispetto a $B$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "antiorario"
+   }
+  ]
+ },
+ "sistemi-di-forze/8": {
+  "campi": [
+   {
+    "e": "Intensità della risultante $Q$",
+    "t": "numero",
+    "v": "42",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza da $A$ della retta d'azione",
+    "t": "numero",
+    "v": "\\frac{24}{7}",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/9": {
+  "campi": [
+   {
+    "e": "Intensità della risultante $Q$",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "Distanza da $A$ della retta d'azione",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/10": {
+  "campi": [
+   {
+    "e": "Intensità della forza applicata in $A$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza applicata in $A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   },
+   {
+    "e": "Intensità della coppia di trasporto $\\mathcal{M}_t$",
+    "t": "numero",
+    "v": "32",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso della coppia di trasporto",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   }
+  ]
+ },
+ "sistemi-di-forze/11": {
+  "campi": [
+   {
+    "e": "Intensità della forza in $A$",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza in $A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Intensità della forza in $B$",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza in $B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "sistemi-di-forze/12": {
+  "campi": [
+   {
+    "e": "$R_x$ (positiva verso destra)",
+    "t": "numero",
+    "v": "5",
+    "u": "kN"
+   },
+   {
+    "e": "$R_y$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-10",
+    "u": "kN"
+   },
+   {
+    "e": "Retta d'azione della risultante ($x$ e $y$ in metri)",
+    "t": "equazione",
+    "v": "2x + y = 5{,}2",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "sistemi-di-forze/13": {
+  "campi": [
+   {
+    "e": "Intensità della risultante $R$",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della risultante",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   },
+   {
+    "e": "Distanza da $A$ del centro delle forze parallele",
+    "t": "numero",
+    "v": "\\frac{5}{3}",
+    "u": "m"
+   }
+  ]
+ },
+ "sistemi-di-forze/14": {
+  "campi": [
+   {
+    "e": "Intensità della forza in $B$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza in $B$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   },
+   {
+    "e": "Intensità della forza in $A$",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della componente orizzontale della forza in $A$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della componente orizzontale in $A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   },
+   {
+    "e": "Intensità della componente verticale della forza in $A$",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della componente verticale in $A$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "strutture-composte/1": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "22",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "48",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza trasmessa dalla cerniera $C$",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza della cerniera sul tratto $CB$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "strutture-composte/2": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "$V_D$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $C$",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/3": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "11",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "14",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_C$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "27",
+    "u": "kN"
+   },
+   {
+    "e": "$V_E$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $B$",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $D$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/4": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "48",
+    "u": "kN"
+   },
+   {
+    "e": "$V_E$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "48",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "19{,}2",
+    "u": "kN"
+   },
+   {
+    "e": "$H_E$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-19{,}2",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $C$",
+    "t": "numero",
+    "v": "19{,}2",
+    "u": "kN"
+   },
+   {
+    "e": "Direzione della forza nella cerniera $C$",
+    "t": "scelta",
+    "opzioni": [
+     "orizzontale",
+     "verticale",
+     "inclinata"
+    ],
+    "v": "orizzontale"
+   }
+  ]
+ },
+ "strutture-composte/5": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$H_E$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_E$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$X_C$, componente orizzontale della forza su $CDE$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$Y_C$, componente verticale della forza su $CDE$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/6": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "60",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "60",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "60",
+    "u": "kN"
+   },
+   {
+    "e": "$H_B$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-60",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della spinta $H$",
+    "t": "numero",
+    "v": "60",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/7": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$H_B$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-10",
+    "u": "kN"
+   },
+   {
+    "e": "$X_C$, componente orizzontale della forza su $CB$ (positiva verso destra)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$Y_C$, componente verticale della forza su $CB$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/8": {
+  "campi": [
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "21",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "3",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "9",
+    "u": "kN"
+   },
+   {
+    "e": "$H_B$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-9",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/9": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-10",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "2",
+    "u": "kN"
+   },
+   {
+    "e": "$H_D$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_D$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità dello sforzo normale nel ritto $CD$",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Il ritto $CD$ è",
+    "t": "scelta",
+    "opzioni": [
+     "teso",
+     "compresso"
+    ],
+    "v": "compresso"
+   }
+  ]
+ },
+ "strutture-composte/10": {
+  "campi": [
+   {
+    "e": "Intensità dello sforzo normale nel puntone $ED$",
+    "t": "numero",
+    "v": "37{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "Il puntone $ED$ è",
+    "t": "scelta",
+    "opzioni": [
+     "teso",
+     "compresso"
+    ],
+    "v": "compresso"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-30",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$H_E$ (positiva verso destra)",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "$V_E$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "kN"
+   }
+  ]
+ },
+ "strutture-composte/11": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "25",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "25",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità dello sforzo nella catena",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "La catena è",
+    "t": "scelta",
+    "opzioni": [
+     "tesa",
+     "compressa"
+    ],
+    "v": "tesa"
+   }
+  ]
+ },
+ "strutture-composte/12": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "8",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "-6",
+    "u": "kN m"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della coppia trasmessa dal doppio pendolo",
+    "t": "numero",
+    "v": "18",
+    "u": "kN m"
+   },
+   {
+    "e": "Verso della coppia trasmessa sul tratto $CB$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   }
+  ]
+ },
+ "strutture-composte/13": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-12",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "36",
+    "u": "kN"
+   },
+   {
+    "e": "$V_D$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza trasmessa dalla cerniera $C$",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   },
+   {
+    "e": "Verso della forza della cerniera sul tratto $CD$",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "strutture-composte/14": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-8",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "$M_A$ (positivo se antiorario)",
+    "t": "numero",
+    "v": "16",
+    "u": "kN m"
+   },
+   {
+    "e": "$H_D$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_D$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $B$",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Intensità della forza nella cerniera $C$",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   },
+   {
+    "e": "Direzione delle forze nelle cerniere $B$ e $C$",
+    "t": "scelta",
+    "opzioni": [
+     "orizzontale",
+     "verticale",
+     "inclinata"
+    ],
+    "v": "verticale"
+   }
+  ]
+ },
+ "travature-reticolari/1": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-48",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-32",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "32",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "40",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-40",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/2": {
+  "campi": [
+   {
+    "e": "Aste scariche",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "$AB$",
+     "$AC$",
+     "$AB$ e $AC$",
+     "$AC$ e $BC$"
+    ],
+    "v": "$AB$ e $AC$"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-24",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_B$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "24",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/3": {
+  "campi": [
+   {
+    "e": "Numero dei nodi $n$",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Numero delle aste $a$",
+    "t": "numero",
+    "v": "12"
+   },
+   {
+    "e": "Numero dei vincoli semplici $v$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "La travatura è",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "iperstatica",
+     "labile",
+     "labile e iperstatica"
+    ],
+    "v": "labile"
+   }
+  ]
+ },
+ "travature-reticolari/4": {
+  "campi": [
+   {
+    "e": "Aste scariche",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "$AF$ e $EL$",
+     "$FG$ e $IL$",
+     "$AF$, $FG$, $EL$, $IL$",
+     "$AF$, $FG$, $EL$, $IL$, $CH$"
+    ],
+    "v": "$AF$, $FG$, $EL$, $IL$"
+   },
+   {
+    "e": "$N_{CH}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "40",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{CD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/5": {
+  "campi": [
+   {
+    "e": "$N_{FG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-45",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{FC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "18{,}75",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "33{,}75",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/6": {
+  "campi": [
+   {
+    "e": "$N_{AF}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-37{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BF}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "10",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{FG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-22{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-12{,}5",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/7": {
+  "campi": [
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "13{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AE}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-22{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{EB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{EG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-18",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-7{,}5",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/8": {
+  "campi": [
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "80",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{CE}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "40",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-32",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{DE}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-32",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{CD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-60",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "36",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/9": {
+  "campi": [
+   {
+    "e": "$N_{FG}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-25",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{FC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-12{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/10": {
+  "campi": [
+   {
+    "e": "$R_B$ (positiva nel verso del versore assegnato)",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "-7",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "7",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-20",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/11": {
+  "campi": [
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "-4",
+    "u": "kN"
+   },
+   {
+    "e": "$V_D$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "16",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{IL}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "15",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{DL}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-9",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{DI}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-15",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{HI}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "18",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/12": {
+  "campi": [
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "0",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-20",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BE}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-20",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{DE}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{DB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "kN"
+   }
+  ]
+ },
+ "travature-reticolari/13": {
+  "campi": [
+   {
+    "e": "La travatura è",
+    "t": "scelta",
+    "opzioni": [
+     "isostatica",
+     "iperstatica",
+     "labile",
+     "labile e iperstatica"
+    ],
+    "v": "labile e iperstatica"
+   },
+   {
+    "e": "Con la forza verticale $P$ in $C$ la travatura",
+    "t": "scelta",
+    "opzioni": [
+     "è in equilibrio",
+     "non è in equilibrio"
+    ],
+    "v": "non è in equilibrio"
+   }
+  ]
+ },
+ "travature-reticolari/14": {
+  "campi": [
+   {
+    "e": "$N_{AB}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-18",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BC}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-18",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{BD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "12",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{CD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "30",
+    "u": "kN"
+   },
+   {
+    "e": "$N_{AD}$ (positivo se di trazione)",
+    "t": "numero",
+    "v": "-7{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$R_D$ (positiva nel verso del versore assegnato)",
+    "t": "numero",
+    "v": "37{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$H_A$ (positiva verso destra)",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "kN"
+   },
+   {
+    "e": "$V_A$ (positiva verso l'alto)",
+    "t": "numero",
+    "v": "6",
+    "u": "kN"
+   }
+  ]
+ }
+}

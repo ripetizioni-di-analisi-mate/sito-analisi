@@ -12,7 +12,7 @@ const FUNZIONI = {
 };
 const PAROLE = [...Object.keys({ sqrt: 1, cbrt: 1, ln: 1, log: 1, exp: 1, abs: 1, sin: 1, cos: 1, tan: 1, arctan: 1, atan: 1, arcsin: 1, asin: 1, arccos: 1, acos: 1, sinh: 1, cosh: 1, tanh: 1 }), 'pi', 'e', 'inf', 'infinito', 'infinity'];
 // Lettere greche: nelle chiavi di correzione (\theta, \omega) e in ciò che scrive lo studente (θ, theta).
-const GRECHE = { alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', theta: 'θ', lambda: 'λ', mu: 'μ', rho: 'ρ', sigma: 'σ', tau: 'τ', phi: 'φ', omega: 'ω' };
+const GRECHE = { alpha: 'α', beta: 'β', gamma: 'γ', delta: 'δ', theta: 'θ', lambda: 'λ', mu: 'μ', rho: 'ρ', sigma: 'σ', tau: 'τ', phi: 'φ', omega: 'ω', xi: 'ξ', eta: 'η', psi: 'ψ', chi: 'χ', nu: 'ν', kappa: 'κ', epsilon: 'ε' };
 const LATEX_FUNZ = { sqrt: '\\sqrt', cbrt: '\\sqrt[3]', ln: '\\ln', log: '\\ln', exp: '\\exp', abs: '', sin: '\\sin', cos: '\\cos', tan: '\\tan', arctan: '\\arctan', atan: '\\arctan', arcsin: '\\arcsin', asin: '\\arcsin', arccos: '\\arccos', acos: '\\arccos', sinh: '\\sinh', cosh: '\\cosh', tanh: '\\tanh' };
 
 // ---------- testo scritto dallo studente → albero ----------
@@ -21,8 +21,8 @@ function pezzi(src, vars = ['x']) {
   let s0 = String(src);
   for (const [nome, segno] of Object.entries(GRECHE)) s0 = s0.split(segno).join(` ${nome} `);
   const s = s0
-    .replace(/ϑ/g, ' theta ').replace(/ϕ/g, ' phi ').replace(/[−–—]/g, '-').replace(/[×·⋅]/g, '*').replace(/[÷:]/g, '/').replace(/π/g, 'pi').replace(/∞/g, 'inf').replace(/√/g, 'sqrt')
-    .replace(/\*\*/g, '^').replace(/(\d),(\d)/g, '$1.$2').replace(/\s+/g, ' ').trim().toLowerCase()
+    .replace(/ℓ/g, ' l ').replace(/ϑ/g, ' theta ').replace(/ϕ/g, ' phi ').replace(/[−–—]/g, '-').replace(/[×·⋅]/g, '*').replace(/[÷:]/g, '/').replace(/π/g, 'pi').replace(/∞/g, 'inf').replace(/√/g, 'sqrt')
+    .replace(/\*\*/g, '^').replace(/(\d),(\d)/g, '$1.$2').replace(/(\d)[eE]([+-]?\d+)(?![\d.])/g, '$1*10^($2)').replace(/\s+/g, ' ').trim().toLowerCase()
     .replace(/\|([^|]*)\|/g, ' abs($1) ');
   const t = s.match(/\d*\.\d+|\d+|[a-z]+|[-+*/^()]|\S/g) || [];
   // Lettere attaccate (sinx, xsinx, 2pix, ex): si separano nelle parole note, scegliendo ogni volta la più lunga.
@@ -79,9 +79,15 @@ export function leggi(src, vars = ['x']) {
     if (x === 'inf' || x === 'infinito' || x === 'infinity') return { cost: 'inf' };
     if (vars.includes(x)) return { v: x };
     if (FUNZIONI[x]) {
-      // sqrt(2), ln 2, sin(pi/6)
+      // sqrt(2), ln 2, sin(pi/6); anche log_5(2) e cos^2(x)
+      let base = null, esp = null;
+      if ((x === 'log' || x === 'ln') && vedi() === '_') { prendi(); base = primario(); }
+      if (vedi() === '^' && x !== 'sqrt') { prendi(); esp = vedi() === '-' ? (prendi(), { op: 'neg', a: primario() }) : primario(); }
       const arg = vedi() === '(' ? (prendi(), (() => { const n = somma(); if (prendi() !== ')') throw new Error('parentesi'); return n; })()) : potenza();
-      return { f: x, a: arg };
+      let n = { f: x, a: arg };
+      if (base) n = { op: '()', a: { op: '/', a: n, b: { f: 'ln', a: base } } };
+      if (esp) n = { op: '^', a: { op: '()', a: n }, b: esp };
+      return n;
     }
     throw new Error('sconosciuto');
   }
@@ -149,15 +155,17 @@ function gruppo(s, i) {
 }
 export function daLatex(tex) {
   let s = String(tex)
-    .replace(/\\(left|right|displaystyle|textstyle|,|;|!|quad|qquad)(?![a-zA-Z])/g, ' ')
+    .replace(/\\(left|right|displaystyle|textstyle|,|;|!|quad|qquad|bigl|bigr|Bigl|Bigr|biggl|biggr|big|Big|bigg)(?![a-zA-Z])/g, ' ')
     .replace(/\{,\}/g, '.')
     .replace(/\\(cdot|times)(?![a-zA-Z])/g, '*')
     .replace(/\\infty/g, ' inf ').replace(/\\pi(?![a-zA-Z])/g, ' pi ')
     .replace(/\\(ln|log|sin|cos|tan|arctan|arcsin|arccos|sinh|cosh|tanh|exp)(?![a-zA-Z])/g, ' $1 ')
     .replace(/\\mathrm\{e\}/g, ' e ')
-    .replace(/\\var(theta|phi)(?![a-zA-Z])/g, ' $1 ')
-    .replace(/\\(alpha|beta|gamma|delta|theta|lambda|mu|rho|sigma|tau|phi|omega)(?![a-zA-Z])/g, ' $1 ')
+    .replace(/\\var(theta|phi|epsilon)(?![a-zA-Z])/g, ' $1 ')
+    .replace(/\\(alpha|beta|gamma|delta|theta|lambda|mu|rho|sigma|tau|phi|omega|xi|eta|psi|chi|nu|kappa|epsilon)(?![a-zA-Z])/g, ' $1 ')
     .replace(/\|([^|]*)\|/g, ' abs($1) ');
+  s = s.replace(/\\([dt]?frac)\s*(\d)\s*(\d)/g, '\\$1{$2}{$3}'); // \frac23
+  s = s.replace(/\\sqrt\s*(\d)/g, '\\sqrt{$1}'); // \sqrt3
   // \dfrac{a}{b}, \frac, \tfrac → ((a)/(b)); \sqrt[n]{a} → ((a)^(1/(n))); \sqrt{a} → sqrt(a); ^{…} → ^(…)
   let out = '';
   for (let i = 0; i < s.length;) {
@@ -268,15 +276,25 @@ export function risultatoDaSoluzione(md) {
   const out = { tipo: 'numero', v };
   if (unita) out.u = unita;
   // Valore arrotondato: cifre decimali scritte (7{,}5 → 1), oppure quelle del valore dopo «≈».
-  const dec = (t) => { const m2 = String(t).match(/\d\{,\}(\d+)|\d\.(\d+)/); return m2 ? (m2[1] || m2[2]).length : 0; };
+  const dec = cifreScritte;
   if (approssimato !== undefined) {
     try { const va = valore(leggi(daLatex(approssimato))); if (Number.isFinite(va)) out.d = dec(approssimato); } catch { /* resta il valore esatto */ }
   } else if (approx.length === 2 && dec(destra)) out.d = dec(destra);
   else if (/^-?\d+(?:\{,\}|\.)\d+\\cdot10\^\{?-?\d+\}?$/.test(destra.replace(/\s/g, ''))) out.d = dec(destra); // notazione scientifica: sempre arrotondata
   else if (dec(destra) && (unita || dec(destra) >= 3) && /^-?\d+\{,\}\d+$|^-?\d+\.\d+$/.test(destra.replace(/\s/g, ''))) out.d = dec(destra);
   // Grandezze fisiche (unità scritta nella formula, non euro, percentuali o angoli): il valore è sempre arrotondato.
-  if (out.d === undefined && unitaInFormula && !/^(?:euro|€|%|°|gradi|anni|anno|euro·anno.*|rad)$/.test(unita)) out.d = 0;
+  if (out.d === undefined && unitaInFormula && !/^(?:euro|€|%|°|gradi|anni|anno|euro·anno.*|rad)$/.test(unita)) out.d = dec(destra);
+  if (v === 0) delete out.d; // lo zero è esatto
   return out;
+}
+// Posizione dell'ultima cifra scritta, come numero di decimali: 7{,}85 → 2, 0{,}20 → 2, 706 → 0,
+// 4{,}6 \cdot 10^{-4} → 5, 1{,}18 \cdot 10^{5} → -3. Serve per accettare i valori arrotondati.
+function cifreScritte(t) {
+  const s = String(t).replace(/\s/g, '');
+  const m = s.match(/(\d+)(?:\{,\}|[.,])(\d+)/) ;
+  const decimali = m ? m[2].length : 0;
+  const e = s.match(/\\(?:cdot|times)10\^\{?(-?\d+)\}?/);
+  return decimali - (e ? Number(e[1]) : 0);
 }
 // Esercizio intero (traccia e soluzione): esclusi quelli in cui conta la forma del risultato
 // (scomporre, razionalizzare, semplificare…), perché anche l'espressione di partenza ha lo stesso valore.
@@ -405,15 +423,21 @@ export function confronta(scritta, giusta) {
 const UNITA_ESATTE = /^(?:euro|€|%|°|gradi|anni|anno|rad)$/;
 function numeroDaChiave(c) {
   const tex = String(c.v);
-  const r = risultatoDaSoluzione(`$${tex}$`);
-  if (!r || r.tipo !== 'numero') throw new Error(`numero non leggibile: ${tex}`);
+  let r = risultatoDaSoluzione(`$${tex}$`);
+  if (!r || r.tipo !== 'numero') {
+    // valori come «e», «e^{-1/2}», «\pi»: lettura diretta del LaTeX
+    let v = NaN;
+    try { v = valore(leggi(daLatex(tex.replace(/\\mathrm\{e\}/g, 'e')))); } catch { /* resta NaN */ }
+    if (Number.isNaN(v)) throw new Error(`numero non leggibile: ${tex}`);
+    r = { tipo: 'numero', v };
+  }
   const out = { t: 'numero', v: r.v };
   if (r.d !== undefined) out.d = r.d;
   const u = c.u || r.u;
   if (u) out.u = u;
-  if (c.esatto) delete out.d;
-  else if (out.d === undefined && c.u && !UNITA_ESATTE.test(c.u)) out.d = 0;
+  if (c.u && !UNITA_ESATTE.test(c.u) && r.v !== 0) out.d = cifreScritte(tex);
   if (Number.isInteger(c.cifre)) out.d = c.cifre;
+  if (c.esatto || r.v === 0) delete out.d;
   return out;
 }
 function punti(vars) {
@@ -497,11 +521,20 @@ function disuguaglianza(pezzo, v, opz) {
   }
   return null;
 }
-export function leggiInsieme(src, v = 'x', opz = {}) {
+export function leggiInsieme(src, v0 = 'x', opz = {}) {
+  const v = String(v0).toLowerCase();
   const o = { vars: [], ...opz };
   const s = String(src).trim().toLowerCase().replace(/\s+/g, ' ').replace(/^\{\s*([^}]*)\s*\}$/, (_, d) => (/[<>≤≥]/.test(d) ? d.replace(/^[^|:]*[|:]\s*/, '') : `{${d}}`));
   if (/^(?:r|ℝ|tutti i (?:numeri )?reali|ogni x|per ogni x|all real numbers|\(-inf[;,] ?\+?inf\))$/.test(s)) return [{ a: -PIU_INF, b: PIU_INF, ca: false, cb: false }];
   if (/^(?:∅|ø|vuoto|insieme vuoto|nessuna(?: soluzione)?|empty|\{\s*\})$/.test(s)) return [];
+  const meno = s.match(/^(?:r|ℝ)\s*(?:\\setminus|\\|∖|-)\s*\{(.+)\}$/);
+  if (meno) {
+    const punti = meno[1].split(opz.virgola ? ',' : /;|,(?!\d)|, /).map((e) => estremo(e.trim(), o.vars)).sort((p, q) => p - q);
+    const out = []; let a = -PIU_INF;
+    for (const c of punti) { out.push({ a, b: c, ca: false, cb: false }); a = c; }
+    out.push({ a, b: PIU_INF, ca: false, cb: false });
+    return normalizza(out);
+  }
   const parti = s.split(/\s*(?:∪|\bu\b|\bor\b|\bo\b|\bvel\b|∨|\|\|)\s*/).filter(Boolean);
   let out = [];
   for (const p0 of parti) {
@@ -519,13 +552,24 @@ export function leggiInsieme(src, v = 'x', opz = {}) {
 function insiemeDaLatex(tex, v) {
   const s = String(tex)
     .replace(/\\(left|right|big|Big)(?![a-zA-Z])/g, '')
-    .replace(/\\cup/g, ' U ').replace(/\\mathbb\s*\{?R\}?/g, 'R').replace(/\\(emptyset|varnothing)/g, '∅')
+    .replace(/\\cup/g, ' U ').replace(/\\mathbb\s*\{?R\}?\s*\\setminus\s*/g, 'R∖').replace(/\\mathbb\s*\{?R\}?/g, 'R').replace(/\\(emptyset|varnothing)/g, '∅')
     .replace(/\\(leq|le|leqslant)(?![a-zA-Z])/g, '<=').replace(/\\(geq|ge|geqslant)(?![a-zA-Z])/g, '>=')
     .replace(/\\(neq|ne)(?![a-zA-Z])/g, '!=').replace(/\\lt(?![a-zA-Z])/g, '<').replace(/\\gt(?![a-zA-Z])/g, '>')
     .replace(/\\\{/g, '{').replace(/\\\}/g, '}');
+  const m = s.match(/^R∖\s*\{(.+)\}$/s);
+  if (m) return leggiInsieme(`R∖{${m[1].split(',').map((e) => daLatex(e)).join(',')}}`, v, { virgola: true });
   const pezziU = s.split(' U ').map((p) => p.trim()).map((p) => (/^[R∅]$/.test(p) ? p : p.replace(/^([[\](])(.*)([[\])])$/s, (_, a, d, b) => `${a}${d.split(',').map((e) => daLatex(e)).join(',')}${b}`)));
-  const tradotti = pezziU.map((p) => (/^[[\](]/.test(p) || /^[R∅]$/.test(p) || /^\{/.test(p) ? p : daLatex(p)));
+  const tradotti = pezziU.map((p) => (/^\{.*\}$/s.test(p) ? `{${p.slice(1, -1).split(',').map((e) => daLatex(e)).join(',')}}`
+    : /^[[\](]/.test(p) || /^[R∅]$/.test(p) ? p : daLatex(p)));
   return leggiInsieme(tradotti.join(' U '), v, { virgola: true });
+}
+function mescola(n, seme) {
+  let h = 2166136261;
+  for (const ch of seme) { h ^= ch.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; }
+  const r = () => { h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0; return h / 4294967296; };
+  const a = [...Array(n).keys()];
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
 }
 export function compilaChiave(k) {
   if (!k || !Array.isArray(k.campi) || !k.campi.length) throw new Error('chiave senza caselle');
@@ -547,7 +591,7 @@ export function compilaChiave(k) {
         return { ...base, t: 'equazione', e2: `(${espressioneDaLatex(l, vars)})-(${espressioneDaLatex(r, vars)})`, vars };
       }
       case 'valori': {
-        if (!Array.isArray(c.v) || c.v.length < 2) throw new Error('valori: servono almeno due valori');
+        if (!Array.isArray(c.v) || c.v.length < 1) throw new Error('valori: serve almeno un valore');
         return { ...base, t: 'valori', v: c.v.map((x) => numeroDaChiave({ v: x }).v), ordine: c.ordine !== false && c.ordine !== undefined ? true : !!c.ordine };
       }
       case 'intervallo': return { ...base, t: 'intervallo', v: insiemeDaLatex(c.v, c.var || 'x'), var: c.var || 'x' };
@@ -556,10 +600,12 @@ export function compilaChiave(k) {
         return { ...base, t: 'matrice', v: c.v.map((r) => r.map((x) => numeroDaChiave({ v: x }).v)) };
       }
       case 'scelta': {
-        const opzioni = (c.opzioni || []).map(String);
-        const i = typeof c.v === 'number' ? c.v : opzioni.indexOf(String(c.v));
-        if (opzioni.length < 2 || i < 0 || i >= opzioni.length) throw new Error(`scelta: «${c.v}» non è tra le opzioni`);
-        return { ...base, t: 'scelta', opzioni, v: i };
+        const date = (c.opzioni || []).map(String);
+        const i0 = typeof c.v === 'number' ? c.v : date.indexOf(String(c.v));
+        if (date.length < 2 || i0 < 0 || i0 >= date.length) throw new Error(`scelta: «${c.v}» non è tra le opzioni`);
+        // Le opzioni si mescolano sempre allo stesso modo (seme dal testo), così la giusta non è quasi sempre la prima.
+        const ordine = c.fisso ? date.map((_, j) => j) : mescola(date.length, `${base.e}|${date.join('|')}`);
+        return { ...base, t: 'scelta', opzioni: ordine.map((j) => date[j]), v: ordine.indexOf(i0) };
       }
       default: throw new Error(`tipo di casella sconosciuto: ${c.t}`);
     }
@@ -611,7 +657,16 @@ function confrontaEquazione(scritta, e2, vars) {
 }
 // Più numeri in una casella: «2; -3», «(1, 2)», «x = 1, x = 4».
 export function dividiValori(src, n) {
-  let s = String(src).trim().replace(/^[[({]\s*/, '').replace(/\s*[\])}]$/, '');
+  let s = String(src).trim();
+  // Si tolgono le parentesi esterne solo se racchiudono tutta la risposta: «(1; 2)», non «(2)/(3); 1».
+  if (/^[[({]/.test(s) && /[\])}]$/.test(s)) {
+    let d = 0, esterne = true;
+    for (let i = 0; i < s.length; i++) {
+      if ('([{'.includes(s[i])) d++;
+      else if (')]}'.includes(s[i])) { d--; if (d === 0 && i < s.length - 1) { esterne = false; break; } }
+    }
+    if (esterne) s = s.slice(1, -1).trim();
+  }
   let parti;
   if (s.includes(';')) parti = s.split(';');
   else {
@@ -639,7 +694,7 @@ export function confrontaCampo(risposta, c) {
   if (vuota(risposta)) return 'illeggibile';
   const s = String(risposta);
   switch (c.t) {
-    case 'numero': return confrontaNumero(s, c.v, { u: c.u, d: c.d });
+    case 'numero': return confrontaNumero(s.replace(/(\d)[ \u202f\u2009\u00a0](?=\d{3}(?!\d))/g, '$1'), c.v, { u: c.u, d: c.d });
     case 'funzione': return confrontaEspressione(s.includes('=') ? s.slice(s.lastIndexOf('=') + 1) : s, c.e2, c.vars, c);
     case 'equazione': return confrontaEquazione(s, c.e2, c.vars);
     case 'scelta': return Number(s) === c.v ? 'giusta' : /^\d+$/.test(s) ? 'sbagliata' : 'illeggibile';
@@ -647,7 +702,7 @@ export function confrontaCampo(risposta, c) {
       let ins;
       try { ins = leggiInsieme(s, c.var || 'x'); } catch { return 'illeggibile'; }
       if (ins.length !== c.v.length) return 'sbagliata';
-      const uguale = (p, q) => (p === q) || Math.abs(p - q) <= 1e-7 * Math.max(1, Math.abs(q));
+      const uguale = (p, q) => p === q || (Number.isFinite(p) && Number.isFinite(q) && Math.abs(p - q) <= 1e-7 * Math.max(1, Math.abs(q)));
       return ins.every((x, i) => {
         const g = c.v[i];
         return uguale(x.a, g.a) && uguale(x.b, g.b) && (!Number.isFinite(g.a) || x.ca === g.ca) && (!Number.isFinite(g.b) || x.cb === g.cb);

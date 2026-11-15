@@ -1,0 +1,2431 @@
+{
+ "derivate/1": {
+  "campi": [
+   {
+    "e": "$f'(1)$",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "derivate/5": {
+  "campi": [
+   {
+    "e": "$f'(x)$",
+    "t": "funzione",
+    "v": "e^{x} \\left( \\ln x + \\frac{1}{x} \\right)",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "derivate/8": {
+  "campi": [
+   {
+    "e": "Costo marginale $C'(50)$",
+    "t": "numero",
+    "v": "20",
+    "u": "euro"
+   },
+   {
+    "e": "Costo effettivo della cinquantunesima unità",
+    "t": "numero",
+    "v": "20{,}05",
+    "u": "euro"
+   }
+  ]
+ },
+ "derivate/9": {
+  "campi": [
+   {
+    "e": "$R'(q)$",
+    "t": "funzione",
+    "v": "60 - 0{,}6 q",
+    "var": [
+     "q"
+    ]
+   },
+   {
+    "e": "Quantità per cui $R'(q) = 0$",
+    "t": "numero",
+    "v": "100"
+   }
+  ]
+ },
+ "derivate/10": {
+  "campi": [
+   {
+    "e": "$\\varepsilon(30)$",
+    "t": "numero",
+    "v": "-1{,}5"
+   },
+   {
+    "e": "Con un aumento del prezzo il ricavo",
+    "t": "scelta",
+    "opzioni": [
+     "cresce",
+     "diminuisce",
+     "resta invariato"
+    ],
+    "v": "diminuisce"
+   }
+  ]
+ },
+ "derivate/11": {
+  "campi": [
+   {
+    "e": "Elasticità della domanda",
+    "t": "numero",
+    "v": "-0{,}8"
+   }
+  ]
+ },
+ "derivate/13": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{9}{2}"
+   }
+  ]
+ },
+ "derivate/14": {
+  "campi": [
+   {
+    "e": "Intervallo su cui $f$ è crescente",
+    "t": "intervallo",
+    "v": "(-\\infty, 1]"
+   },
+   {
+    "e": "Intervallo su cui $f$ è decrescente",
+    "t": "intervallo",
+    "v": "[1, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/1": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-\\infty, 2) \\cup (2, 3) \\cup (3, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/2": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "[-3, 3]"
+   }
+  ]
+ },
+ "funzioni/3": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-1, 3)"
+   }
+  ]
+ },
+ "funzioni/4": {
+  "campi": [
+   {
+    "e": "$f^{-1}(y)$",
+    "t": "funzione",
+    "v": "\\frac{5y + 3}{2}",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "$f(1)$",
+    "t": "numero",
+    "v": "-\\frac{1}{5}"
+   }
+  ]
+ },
+ "funzioni/5": {
+  "campi": [
+   {
+    "e": "$f^{-1}(y)$",
+    "t": "funzione",
+    "v": "2 + e^{y - 1}",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Dominio di $f^{-1}$",
+    "t": "intervallo",
+    "v": "\\mathbb{R}",
+    "var": "y"
+   }
+  ]
+ },
+ "funzioni/6": {
+  "campi": [
+   {
+    "e": "$(g \\circ f)(x)$",
+    "t": "funzione",
+    "v": "\\sqrt{x^2 - 1}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Dominio di $g \\circ f$",
+    "t": "intervallo",
+    "v": "(-\\infty, -1] \\cup [1, +\\infty)"
+   },
+   {
+    "e": "$(f \\circ g)(x)$",
+    "t": "funzione",
+    "v": "x - 1",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Dominio di $f \\circ g$",
+    "t": "intervallo",
+    "v": "[2, +\\infty)"
+   }
+  ]
+ },
+ "funzioni/7": {
+  "campi": [
+   {
+    "e": "$f(x)$",
+    "t": "funzione",
+    "v": "2x + 6",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Pendenza",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Intercetta",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "funzioni/8": {
+  "campi": [
+   {
+    "e": "Costo fisso",
+    "t": "numero",
+    "v": "1000",
+    "u": "euro"
+   },
+   {
+    "e": "Costo unitario variabile",
+    "t": "numero",
+    "v": "20",
+    "u": "euro"
+   }
+  ]
+ },
+ "funzioni/10": {
+  "campi": [
+   {
+    "e": "$p^*$",
+    "t": "numero",
+    "v": "30",
+    "u": "euro"
+   },
+   {
+    "e": "$q^*$",
+    "t": "numero",
+    "v": "50"
+   }
+  ]
+ },
+ "funzioni/12": {
+  "campi": [
+   {
+    "e": "Vertice della parabola",
+    "t": "valori",
+    "v": [
+     "2",
+     "-5"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Valore minimo di $f$",
+    "t": "numero",
+    "v": "-5"
+   }
+  ]
+ },
+ "funzioni/13": {
+  "campi": [
+   {
+    "e": "Quantità che rende massimo il profitto",
+    "t": "numero",
+    "v": "40"
+   },
+   {
+    "e": "Profitto massimo",
+    "t": "numero",
+    "v": "1100",
+    "u": "euro"
+   },
+   {
+    "e": "Punti di pareggio",
+    "t": "valori",
+    "v": [
+     "40 - 10\\sqrt{11}",
+     "40 + 10\\sqrt{11}"
+    ]
+   }
+  ]
+ },
+ "funzioni/14": {
+  "campi": [
+   {
+    "e": "Valore dopo $5$ anni",
+    "t": "numero",
+    "v": "3649{,}96",
+    "u": "euro",
+    "cifre": 2
+   },
+   {
+    "e": "Tempo di raddoppio",
+    "t": "numero",
+    "v": "17{,}7",
+    "u": "anni",
+    "cifre": 1
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/1": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$x \\geq y^2$",
+     "$x > y^2$",
+     "$y \\geq x^2$",
+     "$x \\leq y^2$"
+    ],
+    "v": "$x \\geq y^2$"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "aperto",
+     "chiuso",
+     "né aperto né chiuso"
+    ],
+    "v": "chiuso"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "limitato",
+     "non limitato"
+    ],
+    "v": "non limitato"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/2": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$x^2 + y^2 > 9$",
+     "$x^2 + y^2 \\geq 9$",
+     "$x^2 + y^2 < 9$",
+     "$x^2 + y^2 > 3$"
+    ],
+    "v": "$x^2 + y^2 > 9$"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "aperto",
+     "chiuso",
+     "né aperto né chiuso"
+    ],
+    "v": "aperto"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "limitato",
+     "non limitato"
+    ],
+    "v": "non limitato"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/3": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "$x^2 + y^2 \\leq 4$ e $y \\neq x$",
+     "$x^2 + y^2 < 4$ e $y \\neq x$",
+     "$x^2 + y^2 \\leq 4$",
+     "$x^2 + y^2 \\leq 4$ e $y \\neq -x$"
+    ],
+    "v": "$x^2 + y^2 \\leq 4$ e $y \\neq x$"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "aperto",
+     "chiuso",
+     "né aperto né chiuso"
+    ],
+    "v": "né aperto né chiuso"
+   },
+   {
+    "e": "Il dominio è",
+    "t": "scelta",
+    "opzioni": [
+     "limitato",
+     "non limitato"
+    ],
+    "v": "limitato"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/4": {
+  "campi": [
+   {
+    "e": "Le curve di livello sono",
+    "t": "scelta",
+    "opzioni": [
+     "parabole",
+     "rette",
+     "circonferenze",
+     "iperboli"
+    ],
+    "v": "parabole"
+   },
+   {
+    "e": "Livello $k$ della curva per $(2, 1)$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Curva di livello per $(2, 1)$",
+    "t": "equazione",
+    "v": "y = x^2 - 3",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/5": {
+  "campi": [
+   {
+    "e": "$f_x(x, y)$",
+    "t": "funzione",
+    "v": "3x^2 - 8xy^2",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$f_y(x, y)$",
+    "t": "funzione",
+    "v": "-8x^2 y + 2",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/6": {
+  "campi": [
+   {
+    "e": "$\\nabla f(1, 1)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/7": {
+  "campi": [
+   {
+    "e": "$f_{xx}(x, y)$",
+    "t": "funzione",
+    "v": "2e^{y}",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$f_{xy}(x, y)$",
+    "t": "funzione",
+    "v": "2x e^{y}",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$f_{yy}(x, y)$",
+    "t": "funzione",
+    "v": "x^2 e^{y}",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$H(1, 0)$",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "2"
+     ],
+     [
+      "2",
+      "1"
+     ]
+    ]
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/8": {
+  "campi": [
+   {
+    "e": "Piano tangente",
+    "t": "equazione",
+    "v": "z = 3x - 3y - 1",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/9": {
+  "campi": [
+   {
+    "e": "Variazione stimata $dQ$",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "Stima di $Q(102, 396)$",
+    "t": "numero",
+    "v": "2010"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/10": {
+  "campi": [
+   {
+    "e": "$g'(1)$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/11": {
+  "campi": [
+   {
+    "e": "Valore di $f$ sulla retta $y = mx$, $x \\neq 0$",
+    "t": "funzione",
+    "v": "\\frac{1 - m^2}{1 + m^2}",
+    "var": [
+     "m"
+    ]
+   },
+   {
+    "e": "Il limite",
+    "t": "scelta",
+    "opzioni": [
+     "esiste e vale $1$",
+     "esiste e vale $0$",
+     "non esiste"
+    ],
+    "v": "non esiste"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/12": {
+  "campi": [
+   {
+    "e": "$Q(32, 32)$",
+    "t": "numero",
+    "v": "160"
+   },
+   {
+    "e": "$Q_K(32, 32)$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$Q_L(32, 32)$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/13": {
+  "campi": [
+   {
+    "e": "Curva di indifferenza per $(4, 2)$",
+    "t": "equazione",
+    "v": "x y^2 = 16",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Saggio marginale di sostituzione in $(4, 2)$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "funzioni-di-due-variabili/14": {
+  "campi": [
+   {
+    "e": "Rendimenti di scala",
+    "t": "scelta",
+    "opzioni": [
+     "crescenti",
+     "costanti",
+     "decrescenti"
+    ],
+    "v": "crescenti"
+   },
+   {
+    "e": "Fattore che moltiplica la produzione",
+    "t": "numero",
+    "v": "2^{\\frac{5}{4}}"
+   }
+  ]
+ },
+ "integrali/1": {
+  "campi": [
+   {
+    "e": "Una primitiva della funzione integranda",
+    "t": "funzione",
+    "v": "x^4 - 4x^{\\frac{3}{2}} + 2\\ln x",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali/5": {
+  "campi": [
+   {
+    "e": "Una primitiva della funzione integranda",
+    "t": "funzione",
+    "v": "\\frac{x^2}{2} + x + 2\\ln|x - 1|",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali/6": {
+  "campi": [
+   {
+    "e": "Una primitiva della funzione integranda",
+    "t": "funzione",
+    "v": "2\\ln|x - 1| - \\ln|x + 3|",
+    "var": [
+     "x"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "integrali/8": {
+  "campi": [
+   {
+    "e": "Prezzo medio su $[0, 4]$",
+    "t": "numero",
+    "v": "24",
+    "u": "euro"
+   }
+  ]
+ },
+ "integrali/9": {
+  "campi": [
+   {
+    "e": "$F'(x)$",
+    "t": "funzione",
+    "v": "4 - x^2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Punto di massimo relativo",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "$F(2)$",
+    "t": "numero",
+    "v": "\\frac{16}{3}"
+   }
+  ]
+ },
+ "integrali/11": {
+  "campi": [
+   {
+    "e": "$\\displaystyle\\int_0^{+\\infty} x\\,e^{-2x}\\,dx$",
+    "t": "numero",
+    "v": "\\frac{1}{4}"
+   }
+  ]
+ },
+ "integrali/12": {
+  "campi": [
+   {
+    "e": "$C(q)$",
+    "t": "funzione",
+    "v": "q^3 - 12q^2 + 60q + 200",
+    "var": [
+     "q"
+    ]
+   },
+   {
+    "e": "Costo aggiuntivo da $4$ a $10$ unità",
+    "t": "numero",
+    "v": "288",
+    "u": "euro"
+   }
+  ]
+ },
+ "integrali/13": {
+  "campi": [
+   {
+    "e": "$q^*$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$p^*$",
+    "t": "numero",
+    "v": "36",
+    "u": "euro"
+   },
+   {
+    "e": "$S_C$",
+    "t": "numero",
+    "v": "\\frac{128}{3}",
+    "u": "euro"
+   },
+   {
+    "e": "$S_P$",
+    "t": "numero",
+    "v": "48",
+    "u": "euro"
+   }
+  ]
+ },
+ "integrali/14": {
+  "campi": [
+   {
+    "e": "Valore attuale per $4$ anni",
+    "t": "numero",
+    "v": "18126{,}92",
+    "u": "euro"
+   },
+   {
+    "e": "Valore attuale senza termine",
+    "t": "numero",
+    "v": "100000",
+    "u": "euro"
+   }
+  ]
+ },
+ "limiti-e-continuita/1": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{6}"
+   }
+  ]
+ },
+ "limiti-e-continuita/2": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "limiti-e-continuita/3": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "limiti-e-continuita/4": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "limiti-e-continuita/5": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\infty$",
+     "$-\\infty$",
+     "$0$",
+     "non esiste"
+    ],
+    "v": "$+\\infty$"
+   }
+  ]
+ },
+ "limiti-e-continuita/6": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "limiti-e-continuita/7": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{5}{2}"
+   }
+  ]
+ },
+ "limiti-e-continuita/8": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "e^{3}"
+   }
+  ]
+ },
+ "limiti-e-continuita/9": {
+  "campi": [
+   {
+    "e": "Valore del limite",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "limiti-e-continuita/10": {
+  "campi": [
+   {
+    "e": "Limite destro per $x \\to 3$",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\infty$",
+     "$-\\infty$",
+     "$0$",
+     "non esiste"
+    ],
+    "v": "$-\\infty$"
+   },
+   {
+    "e": "Limite sinistro per $x \\to 3$",
+    "t": "scelta",
+    "opzioni": [
+     "$+\\infty$",
+     "$-\\infty$",
+     "$0$",
+     "non esiste"
+    ],
+    "v": "$+\\infty$"
+   }
+  ]
+ },
+ "limiti-e-continuita/11": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = -2",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto orizzontale",
+    "t": "equazione",
+    "v": "y = 3",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "limiti-e-continuita/12": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto obliquo",
+    "t": "equazione",
+    "v": "y = 2x + 2",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "limiti-e-continuita/14": {
+  "campi": [
+   {
+    "e": "Valore di $x^3 - 3x + 1$ in $x = 0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Valore di $x^3 - 3x + 1$ in $x = 1$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Teorema che garantisce la soluzione in $(0, 1)$",
+    "t": "scelta",
+    "opzioni": [
+     "teorema degli zeri",
+     "teorema di Weierstrass",
+     "teorema di Rolle",
+     "teorema di Lagrange"
+    ],
+    "v": "teorema degli zeri"
+   }
+  ]
+ },
+ "matematica-finanziaria/2": {
+  "campi": [
+   {
+    "e": "Montante $M$",
+    "t": "numero",
+    "v": "3906{,}78",
+    "u": "euro"
+   },
+   {
+    "e": "Interesse $I$",
+    "t": "numero",
+    "v": "906{,}78",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/4": {
+  "campi": [
+   {
+    "e": "Valore attuale $V$",
+    "t": "numero",
+    "v": "1970",
+    "u": "euro"
+   },
+   {
+    "e": "Sconto $D$",
+    "t": "numero",
+    "v": "30",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/5": {
+  "campi": [
+   {
+    "e": "$i_{12}$",
+    "t": "numero",
+    "v": "0{,}5654",
+    "u": "%"
+   },
+   {
+    "e": "Confronto di $i_{12}$ con il tasso proporzionale $\\frac{7\\%}{12}$",
+    "t": "scelta",
+    "opzioni": [
+     "$i_{12}$ è minore",
+     "$i_{12}$ è uguale",
+     "$i_{12}$ è maggiore"
+    ],
+    "v": "$i_{12}$ è minore"
+   }
+  ]
+ },
+ "matematica-finanziaria/7": {
+  "campi": [
+   {
+    "e": "$\\delta$",
+    "t": "numero",
+    "v": "2{,}956",
+    "u": "%"
+   },
+   {
+    "e": "Montante dopo $4$ anni",
+    "t": "numero",
+    "v": "1125{,}51",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/8": {
+  "campi": [
+   {
+    "e": "Durata $t$",
+    "t": "numero",
+    "v": "11{,}27",
+    "u": "anni"
+   }
+  ]
+ },
+ "matematica-finanziaria/10": {
+  "campi": [
+   {
+    "e": "Valore attuale $V$",
+    "t": "numero",
+    "v": "13820{,}89",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/11": {
+  "campi": [
+   {
+    "e": "Rata $R$",
+    "t": "numero",
+    "v": "5396{,}47",
+    "u": "euro"
+   },
+   {
+    "e": "Quota interessi $I_1$",
+    "t": "numero",
+    "v": "2400",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/12": {
+  "campi": [
+   {
+    "e": "$Q_4$",
+    "t": "numero",
+    "v": "4000",
+    "u": "euro"
+   },
+   {
+    "e": "$I_4$",
+    "t": "numero",
+    "v": "600",
+    "u": "euro"
+   },
+   {
+    "e": "$R_4$",
+    "t": "numero",
+    "v": "4600",
+    "u": "euro"
+   },
+   {
+    "e": "$S_4$",
+    "t": "numero",
+    "v": "8000",
+    "u": "euro"
+   }
+  ]
+ },
+ "matematica-finanziaria/14": {
+  "campi": [
+   {
+    "e": "$\\operatorname{VAN}(0{,}1)$",
+    "t": "numero",
+    "v": "140{,}50",
+    "u": "euro"
+   },
+   {
+    "e": "TIR $i^*$",
+    "t": "numero",
+    "v": "20",
+    "u": "%"
+   }
+  ]
+ },
+ "matrici-e-sistemi/1": {
+  "campi": [
+   {
+    "e": "$AB$",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "3"
+     ],
+     [
+      "8",
+      "8"
+     ]
+    ]
+   },
+   {
+    "e": "$BA$",
+    "t": "matrice",
+    "v": [
+     [
+      "5",
+      "-3",
+      "2"
+     ],
+     [
+      "-3",
+      "-1",
+      "-2"
+     ],
+     [
+      "10",
+      "1",
+      "6"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici-e-sistemi/2": {
+  "campi": [
+   {
+    "e": "Matrice $Q$ delle quantità",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "1",
+      "3"
+     ],
+     [
+      "0",
+      "4",
+      "1"
+     ]
+    ]
+   },
+   {
+    "e": "Vettore $p$ dei prezzi",
+    "t": "matrice",
+    "v": [
+     [
+      "5"
+     ],
+     [
+      "3"
+     ],
+     [
+      "2"
+     ]
+    ]
+   },
+   {
+    "e": "Spesa del primo cliente",
+    "t": "numero",
+    "v": "19",
+    "u": "euro"
+   },
+   {
+    "e": "Spesa del secondo cliente",
+    "t": "numero",
+    "v": "14",
+    "u": "euro"
+   }
+  ]
+ },
+ "matrici-e-sistemi/3": {
+  "campi": [
+   {
+    "e": "Determinante",
+    "t": "numero",
+    "v": "-10"
+   }
+  ]
+ },
+ "matrici-e-sistemi/4": {
+  "campi": [
+   {
+    "e": "Determinante",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "matrici-e-sistemi/5": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "-2",
+      "3"
+     ],
+     [
+      "3",
+      "-4"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici-e-sistemi/6": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "-1",
+      "-2",
+      "2"
+     ],
+     [
+      "-1",
+      "0",
+      "1"
+     ],
+     [
+      "1",
+      "1",
+      "-1"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici-e-sistemi/7": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "funzione",
+    "v": "k(k-2)",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Valori di $k$ per cui $A$ è invertibile",
+    "t": "intervallo",
+    "v": "(-\\infty, 0) \\cup (0, 2) \\cup (2, +\\infty)",
+    "var": "k"
+   }
+  ]
+ },
+ "matrici-e-sistemi/8": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "funzione",
+    "v": "(k-2)^{2}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "$\\operatorname{rk} A$ per $k \\neq 2$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "$\\operatorname{rk} A$ per $k = 2$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "matrici-e-sistemi/9": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "numero",
+    "v": "-10"
+   },
+   {
+    "e": "Soluzione $(x, y, z)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "matrici-e-sistemi/10": {
+  "campi": [
+   {
+    "e": "$\\operatorname{rk} A$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\operatorname{rk}(A \\mid b)$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Il sistema",
+    "t": "scelta",
+    "opzioni": [
+     "ha una sola soluzione",
+     "ha $\\infty^{1}$ soluzioni",
+     "ha $\\infty^{2}$ soluzioni",
+     "è incompatibile"
+    ],
+    "v": "ha $\\infty^{1}$ soluzioni"
+   },
+   {
+    "e": "Soluzione $(x, y, z)$ con $z = 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "matrici-e-sistemi/11": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $\\det A = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-3"
+    ]
+   },
+   {
+    "e": "$x$ per $k \\neq 1$ e $k \\neq -3$",
+    "t": "funzione",
+    "v": "\\frac{3}{k+3}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "$y$ per $k \\neq 1$ e $k \\neq -3$",
+    "t": "funzione",
+    "v": "\\frac{3}{k+3}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "$z$ per $k \\neq 1$ e $k \\neq -3$",
+    "t": "funzione",
+    "v": "-\\frac{2k}{k+3}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Per $k = 1$ il sistema",
+    "t": "scelta",
+    "opzioni": [
+     "è determinato",
+     "è indeterminato",
+     "è incompatibile"
+    ],
+    "v": "è indeterminato"
+   },
+   {
+    "e": "$z$ per $k = 1$",
+    "t": "numero",
+    "v": "-\\frac{1}{2}"
+   },
+   {
+    "e": "Per $k = -3$ il sistema",
+    "t": "scelta",
+    "opzioni": [
+     "è determinato",
+     "è indeterminato",
+     "è incompatibile"
+    ],
+    "v": "è incompatibile"
+   }
+  ]
+ },
+ "matrici-e-sistemi/12": {
+  "campi": [
+   {
+    "e": "$p_1$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$q_1$",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "$q_2$",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "matrici-e-sistemi/13": {
+  "campi": [
+   {
+    "e": "$\\det(I_2 - A)$",
+    "t": "numero",
+    "v": "0{,}4"
+   },
+   {
+    "e": "Produzione $x$",
+    "t": "matrice",
+    "v": [
+     [
+      "50"
+     ],
+     [
+      "75"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici-e-sistemi/14": {
+  "campi": [
+   {
+    "e": "Determinante del sistema",
+    "t": "numero",
+    "v": "11"
+   },
+   {
+    "e": "Quantità dei tre articoli",
+    "t": "valori",
+    "v": [
+     "20",
+     "30",
+     "10"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "ottimizzazione/1": {
+  "campi": [
+   {
+    "e": "Punto stazionario",
+    "t": "valori",
+    "v": [
+     "2",
+     "-3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto stazionario",
+    "t": "scelta",
+    "opzioni": [
+     "minimo",
+     "massimo",
+     "sella",
+     "il test non permette di concludere"
+    ],
+    "v": "minimo"
+   },
+   {
+    "e": "Valore di $f$ nel punto stazionario",
+    "t": "numero",
+    "v": "-13"
+   }
+  ]
+ },
+ "ottimizzazione/2": {
+  "campi": [
+   {
+    "e": "Punto stazionario",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\det H$ nel punto stazionario",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Natura del punto stazionario",
+    "t": "scelta",
+    "opzioni": [
+     "minimo",
+     "massimo",
+     "sella",
+     "il test non permette di concludere"
+    ],
+    "v": "minimo"
+   },
+   {
+    "e": "Valore di $f$ nel punto stazionario",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "ottimizzazione/3": {
+  "campi": [
+   {
+    "e": "Punto stazionario con $x > 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto stazionario con $x > 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo relativo",
+     "massimo relativo",
+     "sella"
+    ],
+    "v": "minimo relativo"
+   },
+   {
+    "e": "Valore di $f$ nel punto stazionario con $x > 0$",
+    "t": "numero",
+    "v": "-16"
+   },
+   {
+    "e": "Punto stazionario con $x < 0$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto stazionario con $x < 0$",
+    "t": "scelta",
+    "opzioni": [
+     "minimo relativo",
+     "massimo relativo",
+     "sella"
+    ],
+    "v": "sella"
+   }
+  ]
+ },
+ "ottimizzazione/4": {
+  "campi": [
+   {
+    "e": "Natura dell'origine",
+    "t": "scelta",
+    "opzioni": [
+     "minimo relativo",
+     "massimo relativo",
+     "sella"
+    ],
+    "v": "sella"
+   },
+   {
+    "e": "Punto stazionario diverso dall'origine",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto stazionario diverso dall'origine",
+    "t": "scelta",
+    "opzioni": [
+     "minimo relativo",
+     "massimo relativo",
+     "sella"
+    ],
+    "v": "minimo relativo"
+   },
+   {
+    "e": "Valore di $f$ nel punto stazionario diverso dall'origine",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "ottimizzazione/5": {
+  "campi": [
+   {
+    "e": "Punto stazionario",
+    "t": "valori",
+    "v": [
+     "-1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Natura del punto stazionario",
+    "t": "scelta",
+    "opzioni": [
+     "minimo relativo",
+     "massimo relativo",
+     "sella"
+    ],
+    "v": "minimo relativo"
+   },
+   {
+    "e": "Valore di $f$ nel punto stazionario",
+    "t": "numero",
+    "v": "-\\frac{1}{e}"
+   }
+  ]
+ },
+ "ottimizzazione/6": {
+  "campi": [
+   {
+    "e": "$\\det H(0, 0)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Natura dell'origine",
+    "t": "scelta",
+    "opzioni": [
+     "minimo assoluto",
+     "massimo assoluto",
+     "sella",
+     "non si può classificare"
+    ],
+    "v": "minimo assoluto"
+   }
+  ]
+ },
+ "ottimizzazione/7": {
+  "campi": [
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Punto di minimo assoluto",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Punto di massimo assoluto",
+    "t": "valori",
+    "v": [
+     "3",
+     "3"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "ottimizzazione/8": {
+  "campi": [
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Punto di massimo assoluto con $x > 0$",
+    "t": "valori",
+    "v": [
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "Punto di minimo assoluto con $y > 0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "ottimizzazione/9": {
+  "campi": [
+   {
+    "e": "Massimo",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Punto di massimo",
+    "t": "valori",
+    "v": [
+     "4",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Minimo",
+    "t": "numero",
+    "v": "-5"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "-4",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "ottimizzazione/10": {
+  "campi": [
+   {
+    "e": "Minimo",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Punto di minimo",
+    "t": "valori",
+    "v": [
+     "2",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Sulla retta $f$",
+    "t": "scelta",
+    "opzioni": [
+     "ha un massimo",
+     "non ha massimo"
+    ],
+    "v": "non ha massimo"
+   }
+  ]
+ },
+ "ottimizzazione/11": {
+  "campi": [
+   {
+    "e": "$q_1$",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "$q_2$",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "$p_1$",
+    "t": "numero",
+    "v": "30",
+    "u": "euro"
+   },
+   {
+    "e": "$p_2$",
+    "t": "numero",
+    "v": "40",
+    "u": "euro"
+   },
+   {
+    "e": "Profitto massimo",
+    "t": "numero",
+    "v": "400",
+    "u": "euro"
+   }
+  ]
+ },
+ "ottimizzazione/12": {
+  "campi": [
+   {
+    "e": "$q_1$",
+    "t": "numero",
+    "v": "14"
+   },
+   {
+    "e": "$q_2$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Profitto massimo",
+    "t": "numero",
+    "v": "268",
+    "u": "euro"
+   }
+  ]
+ },
+ "ottimizzazione/13": {
+  "campi": [
+   {
+    "e": "Paniere ottimo $(x, y)$",
+    "t": "valori",
+    "v": [
+     "10",
+     "10"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Utilità massima",
+    "t": "numero",
+    "v": "1000"
+   }
+  ]
+ },
+ "ottimizzazione/14": {
+  "campi": [
+   {
+    "e": "$L$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$K$",
+    "t": "numero",
+    "v": "9"
+   },
+   {
+    "e": "Costo minimo",
+    "t": "numero",
+    "v": "72",
+    "u": "euro"
+   }
+  ]
+ },
+ "studio-di-funzione/1": {
+  "campi": [
+   {
+    "e": "Punto di massimo relativo",
+    "t": "numero",
+    "v": "-3"
+   },
+   {
+    "e": "Valore del massimo relativo",
+    "t": "numero",
+    "v": "58"
+   },
+   {
+    "e": "Punto di minimo relativo",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Valore del minimo relativo",
+    "t": "numero",
+    "v": "-50"
+   }
+  ]
+ },
+ "studio-di-funzione/2": {
+  "campi": [
+   {
+    "e": "Intervallo su cui $f$ è crescente",
+    "t": "intervallo",
+    "v": "(-\\infty, 1]"
+   },
+   {
+    "e": "Intervallo su cui $f$ è decrescente",
+    "t": "intervallo",
+    "v": "[1, +\\infty)"
+   },
+   {
+    "e": "Punto di massimo assoluto",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Massimo assoluto di $f$",
+    "t": "numero",
+    "v": "\\frac{1}{e}"
+   },
+   {
+    "e": "Minimo assoluto di $f$",
+    "t": "scelta",
+    "opzioni": [
+     "esiste ed è $0$",
+     "esiste ed è in $x = 0$",
+     "non esiste"
+    ],
+    "v": "non esiste"
+   }
+  ]
+ },
+ "studio-di-funzione/3": {
+  "campi": [
+   {
+    "e": "Intervallo su cui $f$ è concava",
+    "t": "intervallo",
+    "v": "(-\\infty, 2]"
+   },
+   {
+    "e": "Intervallo su cui $f$ è convessa",
+    "t": "intervallo",
+    "v": "[2, +\\infty)"
+   },
+   {
+    "e": "Punto di flesso",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "-14"
+    ]
+   }
+  ]
+ },
+ "studio-di-funzione/4": {
+  "campi": [
+   {
+    "e": "Ascisse dei punti di flesso",
+    "t": "valori",
+    "v": [
+     "-\\frac{\\sqrt{2}}{2}",
+     "\\frac{\\sqrt{2}}{2}"
+    ]
+   },
+   {
+    "e": "Ordinata dei punti di flesso",
+    "t": "numero",
+    "v": "\\frac{1}{\\sqrt{e}}"
+   },
+   {
+    "e": "Intervallo su cui $f$ è concava",
+    "t": "intervallo",
+    "v": "\\left[ -\\frac{\\sqrt{2}}{2}, \\frac{\\sqrt{2}}{2} \\right]"
+   }
+  ]
+ },
+ "studio-di-funzione/5": {
+  "campi": [
+   {
+    "e": "Punti stazionari di $f$",
+    "t": "valori",
+    "v": [
+     "0",
+     "3"
+    ]
+   },
+   {
+    "e": "Natura del punto stazionario $x = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "massimo relativo",
+     "minimo relativo",
+     "flesso orizzontale"
+    ],
+    "v": "flesso orizzontale"
+   },
+   {
+    "e": "Natura del punto stazionario $x = 3$",
+    "t": "scelta",
+    "opzioni": [
+     "massimo relativo",
+     "minimo relativo",
+     "flesso orizzontale"
+    ],
+    "v": "minimo relativo"
+   },
+   {
+    "e": "$f(3)$",
+    "t": "numero",
+    "v": "-27"
+   }
+  ]
+ },
+ "studio-di-funzione/6": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto obliquo",
+    "t": "equazione",
+    "v": "y = x",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Punto di massimo relativo $(x, f(x))$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-3",
+     "-6"
+    ]
+   },
+   {
+    "e": "Punto di minimo relativo $(x, f(x))$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "6"
+    ]
+   }
+  ]
+ },
+ "studio-di-funzione/7": {
+  "campi": [
+   {
+    "e": "Asintoto verticale",
+    "t": "equazione",
+    "v": "x = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto orizzontale",
+    "t": "equazione",
+    "v": "y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Punto di massimo assoluto",
+    "t": "numero",
+    "v": "\\sqrt{e}"
+   },
+   {
+    "e": "Valore del massimo assoluto",
+    "t": "numero",
+    "v": "\\frac{1}{2e}"
+   },
+   {
+    "e": "Ascissa del punto di flesso",
+    "t": "numero",
+    "v": "e^{\\frac{5}{6}}"
+   }
+  ]
+ },
+ "studio-di-funzione/8": {
+  "campi": [
+   {
+    "e": "Massimo assoluto",
+    "t": "numero",
+    "v": "16"
+   },
+   {
+    "e": "Punto di massimo assoluto",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Minimo assoluto",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "Punti di minimo assoluto",
+    "t": "valori",
+    "v": [
+     "-1",
+     "2"
+    ]
+   }
+  ]
+ },
+ "studio-di-funzione/9": {
+  "campi": [
+   {
+    "e": "Profitto massimo",
+    "t": "numero",
+    "v": "10",
+    "u": "euro"
+   },
+   {
+    "e": "$q$ del profitto massimo",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Profitto minimo",
+    "t": "numero",
+    "v": "-17",
+    "u": "euro"
+   },
+   {
+    "e": "$q$ del profitto minimo",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "studio-di-funzione/10": {
+  "campi": [
+   {
+    "e": "Lato perpendicolare al muro",
+    "t": "numero",
+    "v": "5",
+    "u": "m"
+   },
+   {
+    "e": "Lato parallelo al muro",
+    "t": "numero",
+    "v": "10",
+    "u": "m"
+   }
+  ]
+ },
+ "studio-di-funzione/11": {
+  "campi": [
+   {
+    "e": "Raggio",
+    "t": "numero",
+    "v": "3",
+    "u": "cm"
+   },
+   {
+    "e": "Altezza",
+    "t": "numero",
+    "v": "6",
+    "u": "cm"
+   }
+  ]
+ },
+ "studio-di-funzione/12": {
+  "campi": [
+   {
+    "e": "Quantità di profitto massimo",
+    "t": "numero",
+    "v": "9"
+   },
+   {
+    "e": "Profitto massimo",
+    "t": "numero",
+    "v": "132",
+    "u": "euro"
+   }
+  ]
+ },
+ "studio-di-funzione/13": {
+  "campi": [
+   {
+    "e": "Quantità di costo medio minimo",
+    "t": "numero",
+    "v": "10"
+   },
+   {
+    "e": "Costo medio minimo",
+    "t": "numero",
+    "v": "48",
+    "u": "euro"
+   }
+  ]
+ },
+ "studio-di-funzione/14": {
+  "campi": [
+   {
+    "e": "Prezzo di ricavo massimo",
+    "t": "numero",
+    "v": "6",
+    "u": "euro"
+   },
+   {
+    "e": "Ricavo massimo",
+    "t": "numero",
+    "v": "432",
+    "u": "euro"
+   },
+   {
+    "e": "Elasticità della domanda a quel prezzo",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "successioni-e-serie/1": {
+  "campi": [
+   {
+    "e": "$a_{15}$",
+    "t": "numero",
+    "v": "102"
+   },
+   {
+    "e": "$S_{15}$",
+    "t": "numero",
+    "v": "795"
+   }
+  ]
+ },
+ "successioni-e-serie/2": {
+  "campi": [
+   {
+    "e": "Ragione $d$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$S_{10}$",
+    "t": "numero",
+    "v": "220"
+   }
+  ]
+ },
+ "successioni-e-serie/3": {
+  "campi": [
+   {
+    "e": "Somma",
+    "t": "numero",
+    "v": "10000"
+   }
+  ]
+ },
+ "successioni-e-serie/4": {
+  "campi": [
+   {
+    "e": "$a_{10}$",
+    "t": "numero",
+    "v": "1536"
+   },
+   {
+    "e": "$S_{10}$",
+    "t": "numero",
+    "v": "3069"
+   }
+  ]
+ },
+ "successioni-e-serie/5": {
+  "campi": [
+   {
+    "e": "Ragione $q$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "successioni-e-serie/6": {
+  "campi": [
+   {
+    "e": "$a_{n+1} - a_n$",
+    "t": "funzione",
+    "v": "\\frac{7}{(n + 2)(n + 3)}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "La successione è",
+    "t": "scelta",
+    "opzioni": [
+     "crescente",
+     "decrescente",
+     "non monotona"
+    ],
+    "v": "crescente"
+   },
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "successioni-e-serie/7": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{5}{2}"
+   }
+  ]
+ },
+ "successioni-e-serie/8": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "successioni-e-serie/9": {
+  "campi": [
+   {
+    "e": "Limite",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "successioni-e-serie/10": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "successioni-e-serie/11": {
+  "campi": [
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\frac{1}{6}"
+   }
+  ]
+ },
+ "successioni-e-serie/12": {
+  "campi": [
+   {
+    "e": "$0{,}\\overline{45}$ come frazione",
+    "t": "numero",
+    "v": "\\frac{5}{11}",
+    "esatto": true
+   }
+  ]
+ },
+ "successioni-e-serie/13": {
+  "campi": [
+   {
+    "e": "$S_n$",
+    "t": "funzione",
+    "v": "\\frac{1}{2} - \\frac{1}{n + 2}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Somma della serie",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   }
+  ]
+ },
+ "successioni-e-serie/14": {
+  "campi": [
+   {
+    "e": "Saldo dopo l'ultimo versamento",
+    "t": "numero",
+    "v": "3284{,}92",
+    "u": "euro"
+   },
+   {
+    "e": "Valore attuale della rendita perpetua",
+    "t": "numero",
+    "v": "32000",
+    "u": "euro"
+   }
+  ]
+ }
+}

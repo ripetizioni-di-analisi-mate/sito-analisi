@@ -1,0 +1,80 @@
+{
+ "architettura-e-sistemi/1": {
+  "campi": [
+   {
+    "e": "Scanner",
+    "t": "scelta",
+    "opzioni": [
+     "ingresso",
+     "uscita",
+     "ingresso e uscita"
+    ],
+    "v": "ingresso"
+   },
+   {
+    "e": "Monitor",
+    "t": "scelta",
+    "opzioni": [
+     "ingresso",
+     "uscita",
+     "ingresso e uscita"
+    ],
+    "v": "uscita"
+   },
+   {
+    "e": "Schermo tattile",
+    "t": "scelta",
+    "opzioni": [
+     "ingresso",
+     "uscita",
+     "ingresso e uscita"
+    ],
+    "v": "ingresso e uscita"
+   }
+  ]
+ },
+ "dati-e-codifica/1": {
+  "campi": [
+   {
+    "e": "Numero di valori distinti con sei bit",
+    "t": "numero",
+    "v": "64"
+   },
+   {
+    "e": "Valore massimo senza segno",
+    "t": "numero",
+    "v": "63"
+   }
+  ]
+ },
+ "documenti-e-foglio/1": {
+  "campi": [
+   {
+    "e": "Che cosa si deve verificare sull'asse orizzontale",
+    "t": "scelta",
+    "opzioni": [
+     "I tempi sono su una scala numerica, con distanze proporzionali agli intervalli",
+     "I tempi sono categorie disposte a distanze uguali",
+     "L'asse parte dal primo tempo misurato",
+     "I tempi sono in ordine decrescente"
+    ],
+    "v": "I tempi sono su una scala numerica, con distanze proporzionali agli intervalli"
+   }
+  ]
+ },
+ "internet-e-fonti/1": {
+  "campi": [
+   {
+    "e": "Servizio Internet distinto dalla consultazione di pagine Web",
+    "t": "scelta",
+    "opzioni": [
+     "Posta elettronica",
+     "Navigazione con il browser",
+     "Lettura di un sito di notizie",
+     "Collegamenti ipertestuali"
+    ],
+    "v": "Posta elettronica"
+   }
+  ]
+ }
+}

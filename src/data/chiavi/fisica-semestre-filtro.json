@@ -1,0 +1,821 @@
+{
+ "elettricita-e-magnetismo/1": {
+  "campi": [
+   {
+    "e": "$q$",
+    "t": "numero",
+    "v": "-1{,}60\\cdot10^{-13}",
+    "u": "C",
+    "cifre": 20
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/2": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "N",
+    "cifre": 2
+   },
+   {
+    "e": "La forza è",
+    "t": "scelta",
+    "opzioni": [
+     "attrattiva",
+     "repulsiva"
+    ],
+    "v": "repulsiva"
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/3": {
+  "campi": [
+   {
+    "e": "$F_x$",
+    "t": "numero",
+    "v": "-2{,}0\\cdot10^{-3}",
+    "u": "N",
+    "cifre": 20
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/4": {
+  "campi": [
+   {
+    "e": "$V$",
+    "t": "numero",
+    "v": "90",
+    "u": "V"
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/5": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "1{,}8\\cdot10^{-4}",
+    "u": "J",
+    "cifre": 20
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/6": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "A",
+    "cifre": 2
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/7": {
+  "campi": [
+   {
+    "e": "$I$",
+    "t": "numero",
+    "v": "0{,}40",
+    "u": "A",
+    "cifre": 2
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/9": {
+  "campi": [
+   {
+    "e": "$P$",
+    "t": "numero",
+    "v": "40",
+    "u": "W"
+   },
+   {
+    "e": "$E$",
+    "t": "numero",
+    "v": "1200",
+    "u": "J"
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/10": {
+  "campi": [
+   {
+    "e": "$q$",
+    "t": "numero",
+    "v": "20",
+    "u": "μC"
+   },
+   {
+    "e": "$U_C$",
+    "t": "numero",
+    "v": "50",
+    "u": "μJ"
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/11": {
+  "campi": [
+   {
+    "e": "$C_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "3",
+    "u": "μF"
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/12": {
+  "campi": [
+   {
+    "e": "$F_B$",
+    "t": "numero",
+    "v": "10^{-3}",
+    "u": "N",
+    "cifre": 20
+   }
+  ]
+ },
+ "elettricita-e-magnetismo/14": {
+  "campi": [
+   {
+    "e": "$|\\mathcal E_{\\mathrm m}|$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "V",
+    "cifre": 1
+   }
+  ]
+ },
+ "fluidi/4": {
+  "campi": [
+   {
+    "e": "$F_2$",
+    "t": "numero",
+    "v": "200",
+    "u": "N"
+   }
+  ]
+ },
+ "fluidi/5": {
+  "campi": [
+   {
+    "e": "$F_A$",
+    "t": "numero",
+    "v": "10",
+    "u": "N"
+   },
+   {
+    "e": "Verso della spinta",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso l'alto"
+   }
+  ]
+ },
+ "fluidi/8": {
+  "campi": [
+   {
+    "e": "La velocità media",
+    "t": "scelta",
+    "opzioni": [
+     "raddoppia",
+     "quadruplica",
+     "si dimezza",
+     "si riduce a un quarto",
+     "resta uguale"
+    ],
+    "v": "quadruplica"
+   }
+  ]
+ },
+ "fluidi/10": {
+  "campi": [
+   {
+    "e": "$\\dfrac{Q_2}{Q_1}$",
+    "t": "numero",
+    "v": "\\frac{1}{16}"
+   }
+  ]
+ },
+ "meccanica/1": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "42",
+    "u": "m"
+   }
+  ]
+ },
+ "meccanica/3": {
+  "campi": [
+   {
+    "e": "$t$",
+    "t": "numero",
+    "v": "2",
+    "u": "s"
+   },
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "20",
+    "u": "m/s"
+   }
+  ]
+ },
+ "meccanica/4": {
+  "campi": [
+   {
+    "e": "Tempo di volo $t$",
+    "t": "numero",
+    "v": "1",
+    "u": "s"
+   },
+   {
+    "e": "Gittata $R$",
+    "t": "numero",
+    "v": "5\\sqrt3",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "meccanica/5": {
+  "campi": [
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "0{,}8\\pi",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "$a_c$",
+    "t": "numero",
+    "v": "3{,}2\\pi^2",
+    "u": "m/s^2",
+    "cifre": 1
+   }
+  ]
+ },
+ "meccanica/7": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "1",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Verso dell'accelerazione",
+    "t": "scelta",
+    "opzioni": [
+     "nel verso del moto",
+     "opposto al moto"
+    ],
+    "v": "nel verso del moto"
+   },
+   {
+    "e": "$F_d$",
+    "t": "numero",
+    "v": "10",
+    "u": "N"
+   },
+   {
+    "e": "Verso dell'attrito",
+    "t": "scelta",
+    "opzioni": [
+     "nel verso del moto",
+     "opposto al moto"
+    ],
+    "v": "opposto al moto"
+   }
+  ]
+ },
+ "meccanica/8": {
+  "campi": [
+   {
+    "e": "$F$",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "N",
+    "cifre": 1
+   }
+  ]
+ },
+ "meccanica/10": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "50",
+    "u": "J"
+   }
+  ]
+ },
+ "meccanica/11": {
+  "campi": [
+   {
+    "e": "$K_f$",
+    "t": "numero",
+    "v": "100",
+    "u": "J"
+   },
+   {
+    "e": "$v$",
+    "t": "numero",
+    "v": "10",
+    "u": "m/s"
+   }
+  ]
+ },
+ "meccanica/12": {
+  "campi": [
+   {
+    "e": "$J_x$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "N s",
+    "cifre": 1
+   },
+   {
+    "e": "$F_{\\mathrm m,x}$",
+    "t": "numero",
+    "v": "50",
+    "u": "N"
+   }
+  ]
+ },
+ "meccanica/13": {
+  "campi": [
+   {
+    "e": "$x_{\\mathrm{CM}}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m"
+   }
+  ]
+ },
+ "meccanica/14": {
+  "campi": [
+   {
+    "e": "$F_m$",
+    "t": "numero",
+    "v": "150",
+    "u": "N"
+   }
+  ]
+ },
+ "metodi-della-fisica/2": {
+  "campi": [
+   {
+    "e": "Massa in chilogrammi",
+    "t": "numero",
+    "v": "2{,}5\\cdot10^{-5}",
+    "u": "kg",
+    "cifre": 20
+   },
+   {
+    "e": "Massa in microgrammi",
+    "t": "numero",
+    "v": "2{,}5\\cdot10^4",
+    "u": "μg"
+   }
+  ]
+ },
+ "metodi-della-fisica/6": {
+  "campi": [
+   {
+    "e": "Ordine di grandezza",
+    "t": "scelta",
+    "opzioni": [
+     "$10^{-9}\\,\\mathrm m$",
+     "$10^{-8}\\,\\mathrm m$",
+     "$10^{-7}\\,\\mathrm m$",
+     "$10^{-6}\\,\\mathrm m$"
+    ],
+    "v": "$10^{-7}\\,\\mathrm m$"
+   }
+  ]
+ },
+ "metodi-della-fisica/7": {
+  "campi": [
+   {
+    "e": "$[p]$",
+    "t": "scelta",
+    "opzioni": [
+     "$MLT^{-2}$",
+     "$ML^{-1}T^{-2}$",
+     "$ML^{-2}T^{-2}$",
+     "$ML^{2}T^{-2}$",
+     "$ML^{-1}T^{-1}$"
+    ],
+    "v": "$ML^{-1}T^{-2}$"
+   }
+  ]
+ },
+ "metodi-della-fisica/8": {
+  "campi": [
+   {
+    "e": "Energia interna",
+    "t": "scelta",
+    "opzioni": [
+     "estensiva",
+     "intensiva"
+    ],
+    "v": "estensiva"
+   },
+   {
+    "e": "Massa",
+    "t": "scelta",
+    "opzioni": [
+     "estensiva",
+     "intensiva"
+    ],
+    "v": "estensiva"
+   },
+   {
+    "e": "Temperatura",
+    "t": "scelta",
+    "opzioni": [
+     "estensiva",
+     "intensiva"
+    ],
+    "v": "intensiva"
+   },
+   {
+    "e": "Densità",
+    "t": "scelta",
+    "opzioni": [
+     "estensiva",
+     "intensiva"
+    ],
+    "v": "intensiva"
+   }
+  ]
+ },
+ "metodi-della-fisica/10": {
+  "campi": [
+   {
+    "e": "Angolo in gradi",
+    "t": "numero",
+    "v": "45",
+    "u": "°"
+   },
+   {
+    "e": "Seno dell'angolo",
+    "t": "numero",
+    "v": "\\dfrac{\\sqrt2}{2}"
+   }
+  ]
+ },
+ "metodi-della-fisica/11": {
+  "campi": [
+   {
+    "e": "$F_x$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "$F_y$",
+    "t": "numero",
+    "v": "\\dfrac{5\\sqrt3}{2}",
+    "u": "N",
+    "cifre": 2
+   }
+  ]
+ },
+ "metodi-della-fisica/12": {
+  "campi": [
+   {
+    "e": "$\\vec a+\\vec b$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "6"
+    ]
+   }
+  ]
+ },
+ "metodi-della-fisica/14": {
+  "campi": [
+   {
+    "e": "$\\vec a\\times\\vec b$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "0",
+     "6"
+    ]
+   }
+  ]
+ },
+ "onde-meccaniche/1": {
+  "campi": [
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "25",
+    "u": "Hz"
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "0{,}040",
+    "u": "s"
+   }
+  ]
+ },
+ "onde-meccaniche/3": {
+  "campi": [
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "0{,}314",
+    "u": "s"
+   }
+  ]
+ },
+ "onde-meccaniche/4": {
+  "campi": [
+   {
+    "e": "Lunghezza d'onda $\\lambda$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "m"
+   }
+  ]
+ },
+ "onde-meccaniche/5": {
+  "campi": [
+   {
+    "e": "Ampiezza $A$",
+    "t": "numero",
+    "v": "4",
+    "u": "mm"
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "10",
+    "u": "Hz"
+   },
+   {
+    "e": "Velocità di propagazione $v$",
+    "t": "numero",
+    "v": "10",
+    "u": "m/s"
+   }
+  ]
+ },
+ "onde-meccaniche/6": {
+  "campi": [
+   {
+    "e": "Verso di propagazione",
+    "t": "scelta",
+    "opzioni": [
+     "verso $+x$",
+     "verso $-x$",
+     "onda stazionaria"
+    ],
+    "v": "verso $-x$"
+   }
+  ]
+ },
+ "onde-meccaniche/8": {
+  "campi": [
+   {
+    "e": "Spostamento risultante nel punto",
+    "t": "scelta",
+    "opzioni": [
+     "nullo in ogni istante",
+     "doppio dell'ampiezza di un'onda",
+     "uguale all'ampiezza di un'onda",
+     "nullo solo in alcuni istanti"
+    ],
+    "v": "nullo in ogni istante"
+   }
+  ]
+ },
+ "onde-meccaniche/14": {
+  "campi": [
+   {
+    "e": "Frequenza percepita rispetto a quella emessa",
+    "t": "scelta",
+    "opzioni": [
+     "aumenta",
+     "diminuisce",
+     "resta uguale"
+    ],
+    "v": "aumenta"
+   }
+  ]
+ },
+ "radiazioni-e-ottica/4": {
+  "campi": [
+   {
+    "e": "Ordine per energia crescente del fotone",
+    "t": "scelta",
+    "opzioni": [
+     "onde radio, infrarosso, visibile, raggi gamma",
+     "raggi gamma, visibile, infrarosso, onde radio",
+     "onde radio, visibile, infrarosso, raggi gamma",
+     "infrarosso, onde radio, visibile, raggi gamma"
+    ],
+    "v": "onde radio, infrarosso, visibile, raggi gamma"
+   }
+  ]
+ },
+ "radiazioni-e-ottica/9": {
+  "campi": [
+   {
+    "e": "$A$ del nucleo figlio",
+    "t": "numero",
+    "v": "206",
+    "esatto": true
+   },
+   {
+    "e": "$Z$ del nucleo figlio",
+    "t": "numero",
+    "v": "82",
+    "esatto": true
+   }
+  ]
+ },
+ "radiazioni-e-ottica/10": {
+  "campi": [
+   {
+    "e": "$A$ del nucleo figlio",
+    "t": "numero",
+    "v": "32",
+    "esatto": true
+   },
+   {
+    "e": "$Z$ del nucleo figlio",
+    "t": "numero",
+    "v": "16",
+    "esatto": true
+   }
+  ]
+ },
+ "radiazioni-e-ottica/11": {
+  "campi": [
+   {
+    "e": "Il fotone può ionizzare il bersaglio con un solo assorbimento?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "radiazioni-e-ottica/13": {
+  "campi": [
+   {
+    "e": "Distanza dell'immagine $q$",
+    "t": "numero",
+    "v": "15",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $M$",
+    "t": "numero",
+    "v": "-0{,}50",
+    "esatto": true
+   }
+  ]
+ },
+ "radiazioni-e-ottica/14": {
+  "campi": [
+   {
+    "e": "Distanza dell'immagine $q$",
+    "t": "numero",
+    "v": "-10",
+    "u": "cm"
+   },
+   {
+    "e": "Ingrandimento $M$",
+    "t": "numero",
+    "v": "2",
+    "esatto": true
+   }
+  ]
+ },
+ "termodinamica/1": {
+  "campi": [
+   {
+    "e": "Temperatura in kelvin",
+    "t": "numero",
+    "v": "310{,}15",
+    "u": "K"
+   }
+  ]
+ },
+ "termodinamica/2": {
+  "campi": [
+   {
+    "e": "$\\Delta T$",
+    "t": "numero",
+    "v": "15",
+    "u": "K"
+   }
+  ]
+ },
+ "termodinamica/3": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "8400",
+    "u": "J"
+   }
+  ]
+ },
+ "termodinamica/5": {
+  "campi": [
+   {
+    "e": "$T_f$",
+    "t": "numero",
+    "v": "40",
+    "u": "°C"
+   }
+  ]
+ },
+ "termodinamica/6": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "3{,}34\\cdot10^4",
+    "u": "J"
+   }
+  ]
+ },
+ "termodinamica/8": {
+  "campi": [
+   {
+    "e": "$\\Delta U$",
+    "t": "numero",
+    "v": "300",
+    "u": "J"
+   }
+  ]
+ },
+ "termodinamica/9": {
+  "campi": [
+   {
+    "e": "$W$",
+    "t": "numero",
+    "v": "400",
+    "u": "J"
+   }
+  ]
+ },
+ "termodinamica/10": {
+  "campi": [
+   {
+    "e": "$\\Delta U$",
+    "t": "numero",
+    "v": "150",
+    "u": "J"
+   }
+  ]
+ },
+ "termodinamica/11": {
+  "campi": [
+   {
+    "e": "Lavoro prodotto $W$",
+    "t": "numero",
+    "v": "350",
+    "u": "J"
+   },
+   {
+    "e": "Rendimento $\\eta$",
+    "t": "numero",
+    "v": "0{,}35",
+    "esatto": true
+   }
+  ]
+ },
+ "termodinamica/14": {
+  "campi": [
+   {
+    "e": "Potenza condotta $P$",
+    "t": "numero",
+    "v": "200",
+    "u": "W"
+   }
+  ]
+ }
+}

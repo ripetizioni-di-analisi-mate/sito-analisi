@@ -1,0 +1,1825 @@
+{
+ "decimali-e-percentuali/4": {
+  "campi": [
+   {
+    "e": "$12{,}4951$ arrotondato ai decimi",
+    "t": "numero",
+    "v": "12{,}5",
+    "cifre": 1
+   },
+   {
+    "e": "$12{,}4951$ arrotondato ai centesimi",
+    "t": "numero",
+    "v": "12{,}50",
+    "cifre": 2
+   }
+  ]
+ },
+ "decimali-e-percentuali/5": {
+  "campi": [
+   {
+    "e": "$\\frac{7}{25}$ in forma decimale",
+    "t": "numero",
+    "v": "0{,}28"
+   },
+   {
+    "e": "Il decimale di $\\frac{7}{25}$ è",
+    "t": "scelta",
+    "opzioni": [
+     "limitato",
+     "periodico semplice",
+     "periodico misto"
+    ],
+    "v": "limitato"
+   },
+   {
+    "e": "Il decimale di $\\frac{4}{9}$ è",
+    "t": "scelta",
+    "opzioni": [
+     "$0{,}4$",
+     "$0{,}\\overline{4}$",
+     "$0{,}\\overline{49}$",
+     "$0{,}4\\overline{9}$"
+    ],
+    "v": "$0{,}\\overline{4}$"
+   },
+   {
+    "e": "Tipo di decimale di $\\frac{4}{9}$",
+    "t": "scelta",
+    "opzioni": [
+     "limitato",
+     "periodico semplice",
+     "periodico misto"
+    ],
+    "v": "periodico semplice"
+   }
+  ]
+ },
+ "decimali-e-percentuali/8": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "\\frac{5}{4}"
+   }
+  ]
+ },
+ "decimali-e-percentuali/10": {
+  "campi": [
+   {
+    "e": "Il $12\\%$ di $350$",
+    "t": "numero",
+    "v": "42"
+   },
+   {
+    "e": "$0{,}045$ in forma di percentuale",
+    "t": "numero",
+    "v": "4{,}5",
+    "u": "%"
+   }
+  ]
+ },
+ "decimali-e-percentuali/11": {
+  "campi": [
+   {
+    "e": "Percentuale delle famiglie con l'automobile",
+    "t": "numero",
+    "v": "75",
+    "u": "%"
+   }
+  ]
+ },
+ "decimali-e-percentuali/13": {
+  "campi": [
+   {
+    "e": "Tempo con tre rubinetti",
+    "t": "numero",
+    "v": "30",
+    "u": "min"
+   }
+  ]
+ },
+ "decimali-e-percentuali/14": {
+  "campi": [
+   {
+    "e": "Prezzo finale",
+    "t": "numero",
+    "v": "39{,}10",
+    "u": "€"
+   },
+   {
+    "e": "Rispetto al prezzo iniziale il prezzo finale",
+    "t": "scelta",
+    "opzioni": [
+     "è aumentato",
+     "è diminuito",
+     "è invariato"
+    ],
+    "v": "è diminuito"
+   },
+   {
+    "e": "Variazione percentuale (in valore assoluto)",
+    "t": "numero",
+    "v": "2{,}25",
+    "u": "%"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/1": {
+  "campi": [
+   {
+    "e": "Disuguaglianza ottenuta",
+    "t": "scelta",
+    "opzioni": [
+     "$-8 < -14$",
+     "$-8 > -14$",
+     "$8 > 14$",
+     "$-8 < 14$"
+    ],
+    "v": "$-8 > -14$"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/2": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(4, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/3": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, -3]"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/4": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "\\left( \\frac{19}{3}, +\\infty \\right)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/5": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "\\emptyset"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/6": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "\\mathbb{R}"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/7": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni del sistema",
+    "t": "intervallo",
+    "v": "(2, 6]"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/8": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni del sistema",
+    "t": "intervallo",
+    "v": "[-3, -2)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/9": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-5, 1)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/10": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[-4, 3)"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/11": {
+  "campi": [
+   {
+    "e": "Numeri interi cercati",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ]
+   }
+  ]
+ },
+ "disequazioni-primo-grado/12": {
+  "campi": [
+   {
+    "e": "Numero minimo di fotocopie al mese",
+    "t": "numero",
+    "v": "101"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/13": {
+  "campi": [
+   {
+    "e": "Chilometri al massimo",
+    "t": "numero",
+    "v": "14",
+    "u": "km"
+   }
+  ]
+ },
+ "disequazioni-primo-grado/14": {
+  "campi": [
+   {
+    "e": "Misura massima del lato più corto",
+    "t": "numero",
+    "v": "8",
+    "u": "m"
+   }
+  ]
+ },
+ "divisibilita/1": {
+  "campi": [
+   {
+    "e": "Divisori di $30$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "3",
+     "5",
+     "6",
+     "10",
+     "15",
+     "30"
+    ]
+   }
+  ]
+ },
+ "divisibilita/2": {
+  "campi": [
+   {
+    "e": "Numeri divisibili per $4$",
+    "t": "valori",
+    "v": [
+     "1236",
+     "3960"
+    ]
+   }
+  ]
+ },
+ "divisibilita/3": {
+  "campi": [
+   {
+    "e": "$7\\,821$ è divisibile per $3$",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$7\\,821$ è divisibile per $9$",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$7\\,821$ è divisibile per $11$",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "divisibilita/4": {
+  "campi": [
+   {
+    "e": "Il numero $113$",
+    "t": "scelta",
+    "opzioni": [
+     "è primo",
+     "non è primo"
+    ],
+    "v": "è primo"
+   }
+  ]
+ },
+ "divisibilita/5": {
+  "campi": [
+   {
+    "e": "Scomposizione di $252$",
+    "t": "scelta",
+    "opzioni": [
+     "$2^2 \\cdot 3^2 \\cdot 7$",
+     "$2^2 \\cdot 3 \\cdot 21$",
+     "$2 \\cdot 3^2 \\cdot 14$",
+     "$2^3 \\cdot 3 \\cdot 7$",
+     "$4 \\cdot 9 \\cdot 7$"
+    ],
+    "v": "$2^2 \\cdot 3^2 \\cdot 7$"
+   }
+  ]
+ },
+ "divisibilita/6": {
+  "campi": [
+   {
+    "e": "Scomposizione di $1\\,050$",
+    "t": "scelta",
+    "opzioni": [
+     "$2 \\cdot 3 \\cdot 5^2 \\cdot 7$",
+     "$2 \\cdot 3 \\cdot 5 \\cdot 35$",
+     "$2 \\cdot 3 \\cdot 25 \\cdot 7$",
+     "$2 \\cdot 3^2 \\cdot 5 \\cdot 7$",
+     "$2^2 \\cdot 3 \\cdot 5^2 \\cdot 7$"
+    ],
+    "v": "$2 \\cdot 3 \\cdot 5^2 \\cdot 7$"
+   }
+  ]
+ },
+ "divisibilita/9": {
+  "campi": [
+   {
+    "e": "$\\operatorname{MCD}(36, 60, 90)$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "$\\operatorname{mcm}(36, 60, 90)$",
+    "t": "numero",
+    "v": "180"
+   }
+  ]
+ },
+ "divisibilita/10": {
+  "campi": [
+   {
+    "e": "$35$ e $72$",
+    "t": "scelta",
+    "opzioni": [
+     "sono primi tra loro",
+     "non sono primi tra loro"
+    ],
+    "v": "sono primi tra loro"
+   },
+   {
+    "e": "$\\operatorname{mcm}(35, 72)$",
+    "t": "numero",
+    "v": "2520"
+   }
+  ]
+ },
+ "divisibilita/11": {
+  "campi": [
+   {
+    "e": "Numero di mazzi",
+    "t": "numero",
+    "v": "24"
+   },
+   {
+    "e": "Rose in ogni mazzo",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Tulipani in ogni mazzo",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "divisibilita/12": {
+  "campi": [
+   {
+    "e": "Distanza tra due pali vicini",
+    "t": "numero",
+    "v": "6",
+    "u": "m"
+   },
+   {
+    "e": "Numero di pali",
+    "t": "numero",
+    "v": "24"
+   }
+  ]
+ },
+ "divisibilita/13": {
+  "campi": [
+   {
+    "e": "Secondi dopo cui lampeggiano di nuovo insieme",
+    "t": "numero",
+    "v": "56",
+    "u": "s"
+   }
+  ]
+ },
+ "divisibilita/14": {
+  "campi": [
+   {
+    "e": "Numero minimo di salsicce",
+    "t": "numero",
+    "v": "24"
+   },
+   {
+    "e": "Confezioni di salsicce",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Confezioni di panini",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "equazioni-primo-grado/1": {
+  "campi": [
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "equazioni-primo-grado/2": {
+  "campi": [
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "equazioni-primo-grado/3": {
+  "campi": [
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "equazioni-primo-grado/4": {
+  "campi": [
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "equazioni-primo-grado/5": {
+  "campi": [
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "equazioni-primo-grado/6": {
+  "campi": [
+   {
+    "e": "L'equazione è",
+    "t": "scelta",
+    "opzioni": [
+     "determinata",
+     "impossibile",
+     "indeterminata"
+    ],
+    "v": "indeterminata"
+   }
+  ]
+ },
+ "equazioni-primo-grado/7": {
+  "campi": [
+   {
+    "e": "L'equazione è",
+    "t": "scelta",
+    "opzioni": [
+     "determinata",
+     "impossibile",
+     "indeterminata"
+    ],
+    "v": "impossibile"
+   }
+  ]
+ },
+ "equazioni-primo-grado/8": {
+  "campi": [
+   {
+    "e": "Condizioni di esistenza",
+    "t": "intervallo",
+    "v": "(-\\infty, -1) \\cup (-1, 1) \\cup (1, +\\infty)"
+   },
+   {
+    "e": "Soluzione $x$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "equazioni-primo-grado/9": {
+  "campi": [
+   {
+    "e": "Condizione di esistenza",
+    "t": "intervallo",
+    "v": "x \\neq 3"
+   },
+   {
+    "e": "L'equazione è",
+    "t": "scelta",
+    "opzioni": [
+     "determinata, con soluzione $x = 3$",
+     "impossibile",
+     "indeterminata"
+    ],
+    "v": "impossibile"
+   }
+  ]
+ },
+ "equazioni-primo-grado/10": {
+  "campi": [
+   {
+    "e": "$C$ in funzione di $F$",
+    "t": "funzione",
+    "v": "\\frac{5}{9}(f - 32)",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "$C$ quando $F = 77$",
+    "t": "numero",
+    "v": "25"
+   }
+  ]
+ },
+ "equazioni-primo-grado/11": {
+  "campi": [
+   {
+    "e": "I tre numeri",
+    "t": "valori",
+    "v": [
+     "28",
+     "29",
+     "30"
+    ]
+   }
+  ]
+ },
+ "equazioni-primo-grado/12": {
+  "campi": [
+   {
+    "e": "Età di Sara oggi",
+    "t": "numero",
+    "v": "36"
+   },
+   {
+    "e": "Età di Paolo oggi",
+    "t": "numero",
+    "v": "12"
+   }
+  ]
+ },
+ "equazioni-primo-grado/13": {
+  "campi": [
+   {
+    "e": "Prezzo prima dello sconto",
+    "t": "numero",
+    "v": "120",
+    "u": "euro"
+   }
+  ]
+ },
+ "equazioni-primo-grado/14": {
+  "campi": [
+   {
+    "e": "Tempo dopo cui si incontrano",
+    "t": "numero",
+    "v": "2",
+    "u": "h"
+   },
+   {
+    "e": "Strada percorsa dal primo ciclista",
+    "t": "numero",
+    "v": "36",
+    "u": "km"
+   },
+   {
+    "e": "Strada percorsa dal secondo ciclista",
+    "t": "numero",
+    "v": "24",
+    "u": "km"
+   }
+  ]
+ },
+ "frazioni/1": {
+  "campi": [
+   {
+    "e": "Parte intera",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Frazione propria",
+    "t": "numero",
+    "v": "\\frac{5}{6}"
+   },
+   {
+    "e": "Interi consecutivi fra cui si trova $\\frac{23}{6}$",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "frazioni/2": {
+  "campi": [
+   {
+    "e": "Numeratore della frazione ridotta",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Denominatore della frazione ridotta",
+    "t": "numero",
+    "v": "7"
+   }
+  ]
+ },
+ "frazioni/3": {
+  "campi": [
+   {
+    "e": "Numeratore",
+    "t": "numero",
+    "v": "25"
+   }
+  ]
+ },
+ "frazioni/4": {
+  "campi": [
+   {
+    "e": "La frazione maggiore è",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{7}{10}$",
+     "$\\frac{8}{11}$",
+     "sono uguali"
+    ],
+    "v": "$\\frac{8}{11}$"
+   }
+  ]
+ },
+ "frazioni/5": {
+  "campi": [
+   {
+    "e": "Frazioni in ordine crescente",
+    "t": "valori",
+    "v": [
+     "\\frac{7}{12}",
+     "\\frac{2}{3}",
+     "\\frac{3}{4}",
+     "\\frac{5}{6}"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "frazioni/11": {
+  "campi": [
+   {
+    "e": "Pagine lette",
+    "t": "numero",
+    "v": "200"
+   },
+   {
+    "e": "Pagine che restano",
+    "t": "numero",
+    "v": "120"
+   }
+  ]
+ },
+ "frazioni/12": {
+  "campi": [
+   {
+    "e": "Prezzo dopo lo sconto",
+    "t": "numero",
+    "v": "300",
+    "u": "euro"
+   }
+  ]
+ },
+ "frazioni/13": {
+  "campi": [
+   {
+    "e": "Lunghezza del sentiero",
+    "t": "numero",
+    "v": "108",
+    "u": "km"
+   }
+  ]
+ },
+ "frazioni/14": {
+  "campi": [
+   {
+    "e": "Frazione dello stipendio che resta",
+    "t": "numero",
+    "v": "\\frac{9}{20}"
+   },
+   {
+    "e": "Euro che restano",
+    "t": "numero",
+    "v": "900",
+    "u": "euro"
+   }
+  ]
+ },
+ "geometria-di-base/1": {
+  "campi": [
+   {
+    "e": "Complementare",
+    "t": "numero",
+    "v": "52",
+    "u": "°"
+   },
+   {
+    "e": "Supplementare",
+    "t": "numero",
+    "v": "142",
+    "u": "°"
+   }
+  ]
+ },
+ "geometria-di-base/2": {
+  "campi": [
+   {
+    "e": "Angolo opposto al vertice a quello dato",
+    "t": "numero",
+    "v": "65",
+    "u": "°"
+   },
+   {
+    "e": "Ciascuno dei due angoli adiacenti a quello dato",
+    "t": "numero",
+    "v": "115",
+    "u": "°"
+   }
+  ]
+ },
+ "geometria-di-base/3": {
+  "campi": [
+   {
+    "e": "Terzo angolo",
+    "t": "numero",
+    "v": "65",
+    "u": "°"
+   },
+   {
+    "e": "Il triangolo è",
+    "t": "scelta",
+    "opzioni": [
+     "acutangolo",
+     "rettangolo",
+     "ottusangolo"
+    ],
+    "v": "acutangolo"
+   }
+  ]
+ },
+ "geometria-di-base/4": {
+  "campi": [
+   {
+    "e": "Ciascun angolo alla base",
+    "t": "numero",
+    "v": "65",
+    "u": "°"
+   }
+  ]
+ },
+ "geometria-di-base/5": {
+  "campi": [
+   {
+    "e": "Quarto angolo",
+    "t": "numero",
+    "v": "85",
+    "u": "°"
+   }
+  ]
+ },
+ "geometria-di-base/6": {
+  "campi": [
+   {
+    "e": "Area del trapezio",
+    "t": "numero",
+    "v": "50",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "geometria-di-base/7": {
+  "campi": [
+   {
+    "e": "Area in centimetri quadrati",
+    "t": "numero",
+    "v": "2000",
+    "u": "cm^2"
+   },
+   {
+    "e": "Area in metri quadrati",
+    "t": "numero",
+    "v": "0{,}2",
+    "u": "m^2"
+   }
+  ]
+ },
+ "geometria-di-base/8": {
+  "campi": [
+   {
+    "e": "Ipotenusa",
+    "t": "numero",
+    "v": "15",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-di-base/9": {
+  "campi": [
+   {
+    "e": "Altro cateto",
+    "t": "numero",
+    "v": "15",
+    "u": "cm"
+   }
+  ]
+ },
+ "geometria-di-base/10": {
+  "campi": [
+   {
+    "e": "Circonferenza $C$ (con $\\pi$)",
+    "t": "numero",
+    "v": "10\\pi",
+    "u": "cm"
+   },
+   {
+    "e": "Circonferenza $C$ (con $\\pi \\approx 3{,}14$)",
+    "t": "numero",
+    "v": "31{,}4",
+    "u": "cm"
+   },
+   {
+    "e": "Area $A$ (con $\\pi$)",
+    "t": "numero",
+    "v": "25\\pi",
+    "u": "cm^2"
+   },
+   {
+    "e": "Area $A$ (con $\\pi \\approx 3{,}14$)",
+    "t": "numero",
+    "v": "78{,}5",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "geometria-di-base/11": {
+  "campi": [
+   {
+    "e": "$3{,}2\\ \\text{m}^2$ in centimetri quadrati",
+    "t": "numero",
+    "v": "32000",
+    "u": "cm^2"
+   },
+   {
+    "e": "$45\\,000\\ \\text{cm}^2$ in metri quadrati",
+    "t": "numero",
+    "v": "4{,}5",
+    "u": "m^2"
+   }
+  ]
+ },
+ "geometria-di-base/12": {
+  "campi": [
+   {
+    "e": "Metri percorsi",
+    "t": "numero",
+    "v": "184",
+    "u": "m"
+   }
+  ]
+ },
+ "geometria-di-base/13": {
+  "campi": [
+   {
+    "e": "Numero di piastrelle",
+    "t": "numero",
+    "v": "80"
+   }
+  ]
+ },
+ "geometria-di-base/14": {
+  "campi": [
+   {
+    "e": "Capacità dell'acquario",
+    "t": "numero",
+    "v": "72",
+    "u": "L"
+   }
+  ]
+ },
+ "monomi-e-polinomi/1": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "19"
+   }
+  ]
+ },
+ "monomi-e-polinomi/2": {
+  "campi": [
+   {
+    "e": "Costo di una corsa di $k$ chilometri (in euro)",
+    "t": "funzione",
+    "v": "4 + 2k",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Costo di una corsa di $7$ chilometri",
+    "t": "numero",
+    "v": "18",
+    "u": "€"
+   }
+  ]
+ },
+ "monomi-e-polinomi/3": {
+  "campi": [
+   {
+    "e": "Polinomio ridotto e ordinato",
+    "t": "funzione",
+    "v": "x^3 + 4x^2 - 2x - 7",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Grado del polinomio",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "monomi-e-polinomi/4": {
+  "campi": [
+   {
+    "e": "Prodotto",
+    "t": "funzione",
+    "v": "-\\frac{2}{3}a^4b^3",
+    "var": [
+     "a",
+     "b"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/5": {
+  "campi": [
+   {
+    "e": "Espressione semplificata",
+    "t": "funzione",
+    "v": "-3xy",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/6": {
+  "campi": [
+   {
+    "e": "Spesa complessiva (in euro)",
+    "t": "funzione",
+    "v": "8a + 3b",
+    "var": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "e": "Spesa per $a = 3$ e $b = 2$",
+    "t": "numero",
+    "v": "30",
+    "u": "€"
+   }
+  ]
+ },
+ "monomi-e-polinomi/7": {
+  "campi": [
+   {
+    "e": "Risultato",
+    "t": "funzione",
+    "v": "6a^2 - 5ab + 6b^2",
+    "var": [
+     "a",
+     "b"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/8": {
+  "campi": [
+   {
+    "e": "Area $A$ (in cm²)",
+    "t": "funzione",
+    "v": "6x^2 + x - 2",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Perimetro $2p$ (in cm)",
+    "t": "funzione",
+    "v": "10x + 2",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/9": {
+  "campi": [
+   {
+    "e": "$(4x - 3y)^2$",
+    "t": "funzione",
+    "v": "16x^2 - 24xy + 9y^2",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/10": {
+  "campi": [
+   {
+    "e": "Espressione semplificata",
+    "t": "funzione",
+    "v": "2ab - 5b^2",
+    "var": [
+     "a",
+     "b"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/11": {
+  "campi": [
+   {
+    "e": "$(x - 2y + 1)^2$",
+    "t": "funzione",
+    "v": "x^2 + 4y^2 + 1 - 4xy + 2x - 4y",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/13": {
+  "campi": [
+   {
+    "e": "Quoziente",
+    "t": "funzione",
+    "v": "4x^2 - 2xy + 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "monomi-e-polinomi/14": {
+  "campi": [
+   {
+    "e": "Differenza tra l'area del quadrato e l'area del rettangolo",
+    "t": "numero",
+    "v": "9",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "numeri-naturali/1": {
+  "campi": [
+   {
+    "e": "Numeri in ordine crescente",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2059",
+     "2095",
+     "2509",
+     "2590"
+    ]
+   }
+  ]
+ },
+ "numeri-naturali/3": {
+  "campi": [
+   {
+    "e": "$1\\,000 - 387$",
+    "t": "numero",
+    "v": "613"
+   }
+  ]
+ },
+ "numeri-naturali/4": {
+  "campi": [
+   {
+    "e": "Confezioni complete",
+    "t": "numero",
+    "v": "27"
+   },
+   {
+    "e": "Uova che restano fuori",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "numeri-naturali/5": {
+  "campi": [
+   {
+    "e": "Dividendo",
+    "t": "numero",
+    "v": "126"
+   }
+  ]
+ },
+ "numeri-naturali/12": {
+  "campi": [
+   {
+    "e": "Soldi che restano a Luca",
+    "t": "numero",
+    "v": "24",
+    "u": "€"
+   }
+  ]
+ },
+ "numeri-naturali/13": {
+  "campi": [
+   {
+    "e": "Penne alla fine della settimana",
+    "t": "numero",
+    "v": "187"
+   }
+  ]
+ },
+ "numeri-naturali/14": {
+  "campi": [
+   {
+    "e": "Tavoli che servono",
+    "t": "numero",
+    "v": "26"
+   },
+   {
+    "e": "Posti che restano liberi",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "numeri-relativi/1": {
+  "campi": [
+   {
+    "e": "Temperature in ordine crescente",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-11",
+     "-6",
+     "-1",
+     "0",
+     "3",
+     "8"
+    ]
+   },
+   {
+    "e": "Temperatura più bassa",
+    "t": "numero",
+    "v": "-11",
+    "u": "°C",
+    "esatto": true
+   }
+  ]
+ },
+ "numeri-relativi/2": {
+  "campi": [
+   {
+    "e": "$|-9| + |+4| - |-6|$",
+    "t": "numero",
+    "v": "7"
+   },
+   {
+    "e": "Opposto del risultato",
+    "t": "numero",
+    "v": "-7"
+   }
+  ]
+ },
+ "numeri-relativi/4": {
+  "campi": [
+   {
+    "e": "$(-9) - (-14)$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "$(+5) - (+12)$",
+    "t": "numero",
+    "v": "-7"
+   },
+   {
+    "e": "$(-3) - (+8)$",
+    "t": "numero",
+    "v": "-11"
+   }
+  ]
+ },
+ "numeri-relativi/7": {
+  "campi": [
+   {
+    "e": "$(-3) \\cdot (+2) \\cdot (-5) \\cdot (-2)$",
+    "t": "numero",
+    "v": "-60"
+   }
+  ]
+ },
+ "numeri-relativi/9": {
+  "campi": [
+   {
+    "e": "$(-5)^2$",
+    "t": "numero",
+    "v": "25"
+   },
+   {
+    "e": "$-5^2$",
+    "t": "numero",
+    "v": "-25"
+   },
+   {
+    "e": "$(-2)^5$",
+    "t": "numero",
+    "v": "-32"
+   },
+   {
+    "e": "$-(-1)^{8}$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "numeri-relativi/12": {
+  "campi": [
+   {
+    "e": "Temperatura alle $13$",
+    "t": "numero",
+    "v": "5",
+    "u": "°C",
+    "esatto": true
+   },
+   {
+    "e": "Temperatura alle $22$",
+    "t": "numero",
+    "v": "-4",
+    "u": "°C",
+    "esatto": true
+   },
+   {
+    "e": "Differenza tra la temperatura delle $13$ e quella delle $6$",
+    "t": "numero",
+    "v": "12",
+    "u": "°C",
+    "esatto": true
+   }
+  ]
+ },
+ "numeri-relativi/13": {
+  "campi": [
+   {
+    "e": "Saldo alla fine del mese",
+    "t": "numero",
+    "v": "55",
+    "u": "euro",
+    "esatto": true
+   }
+  ]
+ },
+ "numeri-relativi/14": {
+  "campi": [
+   {
+    "e": "Dislivello tra la grotta e il relitto",
+    "t": "numero",
+    "v": "122",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/1": {
+  "campi": [
+   {
+    "e": "Posizione di $A(-4, 2)$",
+    "t": "scelta",
+    "opzioni": [
+     "I quadrante",
+     "II quadrante",
+     "III quadrante",
+     "IV quadrante",
+     "asse $x$",
+     "asse $y$"
+    ],
+    "v": "II quadrante"
+   },
+   {
+    "e": "Posizione di $B(3, -5)$",
+    "t": "scelta",
+    "opzioni": [
+     "I quadrante",
+     "II quadrante",
+     "III quadrante",
+     "IV quadrante",
+     "asse $x$",
+     "asse $y$"
+    ],
+    "v": "IV quadrante"
+   },
+   {
+    "e": "Posizione di $C(0, -2)$",
+    "t": "scelta",
+    "opzioni": [
+     "I quadrante",
+     "II quadrante",
+     "III quadrante",
+     "IV quadrante",
+     "asse $x$",
+     "asse $y$"
+    ],
+    "v": "asse $y$"
+   },
+   {
+    "e": "Posizione di $D(-1, -1)$",
+    "t": "scelta",
+    "opzioni": [
+     "I quadrante",
+     "II quadrante",
+     "III quadrante",
+     "IV quadrante",
+     "asse $x$",
+     "asse $y$"
+    ],
+    "v": "III quadrante"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/3": {
+  "campi": [
+   {
+    "e": "Coordinate di $B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "7",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/4": {
+  "campi": [
+   {
+    "e": "Punto medio $M$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "2"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/5": {
+  "campi": [
+   {
+    "e": "$f(-1)$",
+    "t": "numero",
+    "v": "-5"
+   },
+   {
+    "e": "$f(0)$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "$f(2)$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Il punto $P(2, 5)$",
+    "t": "scelta",
+    "opzioni": [
+     "appartiene al grafico di $f$",
+     "non appartiene al grafico di $f$"
+    ],
+    "v": "non appartiene al grafico di $f$"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/6": {
+  "campi": [
+   {
+    "e": "Forma esplicita della retta",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y = -2x + 3"
+   },
+   {
+    "e": "Coefficiente angolare $m$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "Ordinata all'origine $q$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/7": {
+  "campi": [
+   {
+    "e": "Intersezione con l'asse $x$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "0"
+    ]
+   },
+   {
+    "e": "Intersezione con l'asse $y$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/11": {
+  "campi": [
+   {
+    "e": "Punto di intersezione",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/12": {
+  "campi": [
+   {
+    "e": "Costo $y$ per $x$ ore",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y = \\frac{3}{2}x + 3"
+   },
+   {
+    "e": "Costo di un noleggio di $8$ ore",
+    "t": "numero",
+    "v": "15",
+    "u": "euro",
+    "esatto": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/13": {
+  "campi": [
+   {
+    "e": "Numero di lavaggi",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Spesa in quel caso",
+    "t": "numero",
+    "v": "135",
+    "u": "euro",
+    "esatto": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/14": {
+  "campi": [
+   {
+    "e": "Biglietti interi",
+    "t": "numero",
+    "v": "17"
+   },
+   {
+    "e": "Biglietti ridotti",
+    "t": "numero",
+    "v": "13"
+   }
+  ]
+ },
+ "potenze-e-radici/6": {
+  "campi": [
+   {
+    "e": "Risultato in notazione scientifica",
+    "t": "numero",
+    "v": "3 \\cdot 10^{-2}"
+   }
+  ]
+ },
+ "potenze-e-radici/7": {
+  "campi": [
+   {
+    "e": "$0{,}00034$ in notazione scientifica",
+    "t": "numero",
+    "v": "3{,}4 \\cdot 10^{-4}"
+   },
+   {
+    "e": "Ordine di grandezza di $0{,}00034$",
+    "t": "numero",
+    "v": "10^{-4}"
+   },
+   {
+    "e": "$0{,}0062$ in notazione scientifica",
+    "t": "numero",
+    "v": "6{,}2 \\cdot 10^{-3}"
+   },
+   {
+    "e": "Ordine di grandezza di $0{,}0062$",
+    "t": "numero",
+    "v": "10^{-2}"
+   }
+  ]
+ },
+ "potenze-e-radici/11": {
+  "campi": [
+   {
+    "e": "Lato della terrazza",
+    "t": "numero",
+    "v": "14",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "Metri di ringhiera",
+    "t": "numero",
+    "v": "56",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "potenze-e-radici/12": {
+  "campi": [
+   {
+    "e": "Il lato è maggiore di",
+    "t": "numero",
+    "v": "11{,}4",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "Il lato è minore di",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "potenze-e-radici/13": {
+  "campi": [
+   {
+    "e": "Spigolo del cubo",
+    "t": "numero",
+    "v": "8",
+    "u": "cm",
+    "esatto": true
+   },
+   {
+    "e": "Area totale delle sei facce",
+    "t": "numero",
+    "v": "384",
+    "u": "cm^2",
+    "esatto": true
+   }
+  ]
+ },
+ "potenze-e-radici/14": {
+  "campi": [
+   {
+    "e": "Altezza della risma in metri",
+    "t": "numero",
+    "v": "5 \\cdot 10^{-2}",
+    "u": "m",
+    "esatto": true
+   },
+   {
+    "e": "Altezza della risma in centimetri",
+    "t": "numero",
+    "v": "5",
+    "u": "cm",
+    "esatto": true
+   }
+  ]
+ },
+ "scomposizione/2": {
+  "campi": [
+   {
+    "e": "Scomposizione di $x^3 + 4x^2 + 3x + 12$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x + 4)(x^2 + 3)"
+   }
+  ]
+ },
+ "scomposizione/6": {
+  "campi": [
+   {
+    "e": "Scomposizione di $x^3 + 64$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x + 4)(x^2 - 4x + 16)"
+   }
+  ]
+ },
+ "scomposizione/8": {
+  "campi": [
+   {
+    "e": "$\\operatorname{MCD}$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x + 1"
+   },
+   {
+    "e": "$\\operatorname{mcm}$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "forma": "prodotto",
+    "v": "(x - 1)(x + 1)^2"
+   }
+  ]
+ },
+ "scomposizione/9": {
+  "campi": [
+   {
+    "e": "Condizioni di esistenza",
+    "t": "intervallo",
+    "v": "(-\\infty, 0) \\cup (0, 2) \\cup (2, +\\infty)"
+   },
+   {
+    "e": "Frazione semplificata",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\frac{x + 2}{x}"
+   }
+  ]
+ },
+ "scomposizione/10": {
+  "campi": [
+   {
+    "e": "Condizioni di esistenza",
+    "t": "intervallo",
+    "v": "(-\\infty, -2) \\cup (-2, 2) \\cup (2, +\\infty)"
+   },
+   {
+    "e": "$\\frac{3}{x + 2} - \\frac{1}{x - 2}$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\frac{2(x - 4)}{(x + 2)(x - 2)}"
+   }
+  ]
+ },
+ "scomposizione/12": {
+  "campi": [
+   {
+    "e": "Misura del lato",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x + 4"
+   },
+   {
+    "e": "Perimetro per $x = 6$",
+    "t": "numero",
+    "v": "40",
+    "u": "m",
+    "esatto": true
+   }
+  ]
+ },
+ "scomposizione/13": {
+  "campi": [
+   {
+    "e": "Misura dell'altro lato",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "x + 5"
+   },
+   {
+    "e": "Perimetro per $x = 7$",
+    "t": "numero",
+    "v": "32",
+    "u": "cm",
+    "esatto": true
+   }
+  ]
+ },
+ "scomposizione/14": {
+  "campi": [
+   {
+    "e": "Differenza delle quote come una sola frazione",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\frac{1500}{x(x + 5)}"
+   },
+   {
+    "e": "Differenza per $x = 20$",
+    "t": "numero",
+    "v": "3",
+    "u": "euro",
+    "esatto": true
+   }
+  ]
+ }
+}

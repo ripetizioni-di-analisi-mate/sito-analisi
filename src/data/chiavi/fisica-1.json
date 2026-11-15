@@ -1,0 +1,2086 @@
+{
+ "cinematica-1d/1": {
+  "campi": [
+   {
+    "e": "Velocità scalare media",
+    "t": "numero",
+    "v": "48",
+    "u": "km/h",
+    "cifre": 0
+   },
+   {
+    "e": "Velocità media",
+    "t": "numero",
+    "v": "0",
+    "u": "km/h",
+    "esatto": true
+   }
+  ]
+ },
+ "cinematica-1d/2": {
+  "campi": [
+   {
+    "e": "Tempo dopo il quale i treni si incrociano",
+    "t": "numero",
+    "v": "60",
+    "u": "s",
+    "cifre": 0
+   },
+   {
+    "e": "Distanza da $P$ del punto d'incrocio",
+    "t": "numero",
+    "v": "1{,}8",
+    "u": "km",
+    "cifre": 1
+   }
+  ]
+ },
+ "cinematica-1d/3": {
+  "campi": [
+   {
+    "e": "Istante in cui il secondo raggiunge il primo",
+    "t": "numero",
+    "v": "25",
+    "u": "s",
+    "cifre": 0
+   },
+   {
+    "e": "Distanza da $O$",
+    "t": "numero",
+    "v": "200",
+    "u": "m",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/4": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "m/s^2",
+    "cifre": 1
+   },
+   {
+    "e": "Spazio percorso",
+    "t": "numero",
+    "v": "180",
+    "u": "m",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/5": {
+  "campi": [
+   {
+    "e": "Modulo della decelerazione",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "m/s^2",
+    "cifre": 1
+   },
+   {
+    "e": "Durata della frenata",
+    "t": "numero",
+    "v": "30",
+    "u": "s",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/6": {
+  "campi": [
+   {
+    "e": "Spazio di arresto",
+    "t": "numero",
+    "v": "45",
+    "u": "m",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/7": {
+  "campi": [
+   {
+    "e": "Tempo di caduta",
+    "t": "numero",
+    "v": "4{,}04",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Modulo della velocità al suolo",
+    "t": "numero",
+    "v": "39{,}6",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "cinematica-1d/8": {
+  "campi": [
+   {
+    "e": "Altezza massima $h_{\\max}$",
+    "t": "numero",
+    "v": "7{,}34",
+    "u": "m",
+    "cifre": 2
+   },
+   {
+    "e": "Tempo dopo il quale la palla torna al suolo",
+    "t": "numero",
+    "v": "2{,}45",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "cinematica-1d/9": {
+  "campi": [
+   {
+    "e": "Modulo della velocità al suolo",
+    "t": "numero",
+    "v": "20{,}4",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Tempo impiegato",
+    "t": "numero",
+    "v": "1{,}57",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "cinematica-1d/10": {
+  "campi": [
+   {
+    "e": "Spazio percorso",
+    "t": "numero",
+    "v": "150",
+    "u": "m",
+    "cifre": 0
+   },
+   {
+    "e": "Velocità media",
+    "t": "numero",
+    "v": "7{,}5",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "cinematica-1d/11": {
+  "campi": [
+   {
+    "e": "Istante di inversione del moto",
+    "t": "numero",
+    "v": "3",
+    "u": "s",
+    "cifre": 0
+   },
+   {
+    "e": "Posizione in quell'istante",
+    "t": "numero",
+    "v": "-23",
+    "u": "m",
+    "cifre": 0
+   },
+   {
+    "e": "Accelerazione in quell'istante",
+    "t": "numero",
+    "v": "12",
+    "u": "m/s^2",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/12": {
+  "campi": [
+   {
+    "e": "Legge oraria $x(t)$ (in metri)",
+    "t": "funzione",
+    "v": "t^3 - 3t + 1",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "Posizione all'istante $t = 2\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "3",
+    "u": "m",
+    "cifre": 0
+   },
+   {
+    "e": "Velocità all'istante $t = 2\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "9",
+    "u": "m/s",
+    "cifre": 0
+   }
+  ]
+ },
+ "cinematica-1d/13": {
+  "campi": [
+   {
+    "e": "Tempo necessario",
+    "t": "numero",
+    "v": "2{,}77",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Spazio percorso",
+    "t": "numero",
+    "v": "30",
+    "u": "m",
+    "cifre": 0
+   }
+  ]
+ },
+ "corpo-rigido/1": {
+  "campi": [
+   {
+    "e": "Momento d'inerzia rispetto all'asse per il centro",
+    "t": "numero",
+    "v": "0{,}16",
+    "u": "kg m^2",
+    "cifre": 2
+   },
+   {
+    "e": "Momento d'inerzia rispetto all'asse per un vertice",
+    "t": "numero",
+    "v": "0{,}32",
+    "u": "kg m^2",
+    "cifre": 2
+   }
+  ]
+ },
+ "corpo-rigido/3": {
+  "campi": [
+   {
+    "e": "Tempo di arresto",
+    "t": "numero",
+    "v": "7{,}85",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Numero di giri compiuti",
+    "t": "numero",
+    "v": "5{,}89",
+    "cifre": 2
+   }
+  ]
+ },
+ "corpo-rigido/4": {
+  "campi": [
+   {
+    "e": "Accelerazione del blocco",
+    "t": "numero",
+    "v": "1{,}96",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "Tensione del filo",
+    "t": "numero",
+    "v": "7{,}85",
+    "u": "N",
+    "cifre": 2
+   }
+  ]
+ },
+ "corpo-rigido/5": {
+  "campi": [
+   {
+    "e": "Accelerazione dei blocchi",
+    "t": "numero",
+    "v": "2{,}18",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "Tensione sul lato del blocco di $5{,}0\\,\\mathrm{kg}$",
+    "t": "numero",
+    "v": "38{,}2",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "Tensione sul lato del blocco di $3{,}0\\,\\mathrm{kg}$",
+    "t": "numero",
+    "v": "36{,}0",
+    "u": "N",
+    "cifre": 1
+   }
+  ]
+ },
+ "corpo-rigido/6": {
+  "campi": [
+   {
+    "e": "Velocità angolare $\\omega$ alla verticale",
+    "t": "numero",
+    "v": "5{,}72",
+    "u": "rad/s",
+    "cifre": 2
+   },
+   {
+    "e": "Velocità dell'estremo libero",
+    "t": "numero",
+    "v": "5{,}15",
+    "u": "m/s",
+    "cifre": 2
+   }
+  ]
+ },
+ "corpo-rigido/7": {
+  "campi": [
+   {
+    "e": "Velocità angolare dopo $4{,}0\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "60",
+    "u": "rad/s",
+    "cifre": 0
+   },
+   {
+    "e": "Energia cinetica della ruota",
+    "t": "numero",
+    "v": "1{,}44 \\cdot 10^3",
+    "u": "J",
+    "cifre": -1
+   },
+   {
+    "e": "Potenza erogata dal motore",
+    "t": "numero",
+    "v": "720",
+    "u": "W",
+    "cifre": 0
+   }
+  ]
+ },
+ "corpo-rigido/11": {
+  "campi": [
+   {
+    "e": "Velocità angolare subito dopo l'urto",
+    "t": "numero",
+    "v": "4{,}90",
+    "u": "rad/s",
+    "cifre": 2
+   }
+  ]
+ },
+ "corpo-rigido/12": {
+  "campi": [
+   {
+    "e": "Reazione $R_A$",
+    "t": "numero",
+    "v": "907",
+    "u": "N",
+    "cifre": 0
+   },
+   {
+    "e": "Reazione $R_B$",
+    "t": "numero",
+    "v": "564",
+    "u": "N",
+    "cifre": 0
+   }
+  ]
+ },
+ "corpo-rigido/13": {
+  "campi": [
+   {
+    "e": "Angolo minimo con il pavimento",
+    "t": "numero",
+    "v": "55{,}0",
+    "u": "°",
+    "cifre": 1
+   }
+  ]
+ },
+ "fluidi/1": {
+  "campi": [
+   {
+    "e": "Pressione relativa",
+    "t": "numero",
+    "v": "1{,}18 \\cdot 10^5",
+    "u": "Pa",
+    "cifre": -3
+   },
+   {
+    "e": "Pressione assoluta",
+    "t": "numero",
+    "v": "2{,}19 \\cdot 10^5",
+    "u": "Pa",
+    "cifre": -3
+   }
+  ]
+ },
+ "fluidi/2": {
+  "campi": [
+   {
+    "e": "Modulo della forza risultante sul tappo",
+    "t": "numero",
+    "v": "4{,}9",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "Verso della forza",
+    "t": "scelta",
+    "opzioni": [
+     "verso il basso",
+     "verso l'alto"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "fluidi/6": {
+  "campi": [
+   {
+    "e": "Densità della plastica",
+    "t": "numero",
+    "v": "750",
+    "u": "kg/m^3",
+    "cifre": 0
+   },
+   {
+    "e": "Frazione del volume immersa nell'olio",
+    "t": "numero",
+    "v": "\\frac{5}{6}",
+    "cifre": 2
+   }
+  ]
+ },
+ "fluidi/7": {
+  "campi": [
+   {
+    "e": "Volume del sasso",
+    "t": "numero",
+    "v": "4{,}6 \\cdot 10^{-4}",
+    "u": "m^3",
+    "cifre": 5
+   },
+   {
+    "e": "Densità del sasso",
+    "t": "numero",
+    "v": "2{,}7 \\cdot 10^3",
+    "u": "kg/m^3",
+    "cifre": -2
+   }
+  ]
+ },
+ "fluidi/9": {
+  "campi": [
+   {
+    "e": "Velocità nel tubo",
+    "t": "numero",
+    "v": "0{,}95",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "Velocità all'uscita dell'ugello",
+    "t": "numero",
+    "v": "15",
+    "u": "m/s",
+    "cifre": 0
+   }
+  ]
+ },
+ "fluidi/10": {
+  "campi": [
+   {
+    "e": "Velocità nel tratto stretto",
+    "t": "numero",
+    "v": "4{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Pressione nel tratto stretto",
+    "t": "numero",
+    "v": "1{,}74 \\cdot 10^5",
+    "u": "Pa",
+    "cifre": -3
+   }
+  ]
+ },
+ "fluidi/12": {
+  "campi": [
+   {
+    "e": "Velocità nel tratto largo",
+    "t": "numero",
+    "v": "0{,}77",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "Portata",
+    "t": "numero",
+    "v": "9{,}3 \\cdot 10^{-4}",
+    "u": "m^3/s",
+    "cifre": 5
+   }
+  ]
+ },
+ "fluidi/13": {
+  "campi": [
+   {
+    "e": "Portata $Q$",
+    "t": "numero",
+    "v": "7{,}9 \\cdot 10^{-7}",
+    "u": "m^3/s",
+    "cifre": 8
+   },
+   {
+    "e": "Numero di Reynolds",
+    "t": "numero",
+    "v": "500",
+    "cifre": 0
+   }
+  ]
+ },
+ "grandezze-e-vettori/1": {
+  "campi": [
+   {
+    "e": "Velocità del treno",
+    "t": "numero",
+    "v": "20",
+    "u": "m/s",
+    "cifre": 0
+   },
+   {
+    "e": "Velocità del corridore",
+    "t": "numero",
+    "v": "54",
+    "u": "km/h",
+    "cifre": 0
+   }
+  ]
+ },
+ "grandezze-e-vettori/2": {
+  "campi": [
+   {
+    "e": "Densità $\\rho$",
+    "t": "numero",
+    "v": "1{,}03 \\cdot 10^{3}",
+    "u": "kg/m^3"
+   },
+   {
+    "e": "Massa di $2{,}5\\,\\mathrm{L}$",
+    "t": "numero",
+    "v": "2{,}6",
+    "u": "kg",
+    "cifre": 1
+   }
+  ]
+ },
+ "grandezze-e-vettori/3": {
+  "campi": [
+   {
+    "e": "$V$",
+    "t": "numero",
+    "v": "3{,}50 \\cdot 10^{-4}",
+    "u": "m^3",
+    "cifre": 6
+   },
+   {
+    "e": "$A$",
+    "t": "numero",
+    "v": "2{,}4 \\cdot 10^{-6}",
+    "u": "m^2",
+    "cifre": 7
+   },
+   {
+    "e": "Concentrazione",
+    "t": "numero",
+    "v": "72",
+    "u": "kg/m^3",
+    "cifre": 0
+   }
+  ]
+ },
+ "grandezze-e-vettori/5": {
+  "campi": [
+   {
+    "e": "Volume $V$",
+    "t": "numero",
+    "v": "1{,}08 \\cdot 10^{21}",
+    "u": "m^3"
+   },
+   {
+    "e": "Ordine di grandezza",
+    "t": "scelta",
+    "opzioni": [
+     "$10^{18}\\,\\mathrm{m^3}$",
+     "$10^{20}\\,\\mathrm{m^3}$",
+     "$10^{21}\\,\\mathrm{m^3}$",
+     "$10^{22}\\,\\mathrm{m^3}$"
+    ],
+    "v": "$10^{21}\\,\\mathrm{m^3}$"
+   }
+  ]
+ },
+ "grandezze-e-vettori/6": {
+  "campi": [
+   {
+    "e": "Dimensioni di $\\beta$",
+    "t": "scelta",
+    "opzioni": [
+     "$[M\\,L^{-1}]$",
+     "$[M\\,L]$",
+     "$[M\\,L^{-2}]$",
+     "$[M\\,L\\,T^{-2}]$",
+     "$[M\\,T^{-1}]$"
+    ],
+    "v": "$[M\\,L^{-1}]$"
+   },
+   {
+    "e": "Unità SI di $\\beta$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{kg/m}$",
+     "$\\mathrm{kg\\cdot m}$",
+     "$\\mathrm{kg/m^2}$",
+     "$\\mathrm{N\\cdot s/m}$",
+     "$\\mathrm{kg/s}$"
+    ],
+    "v": "$\\mathrm{kg/m}$"
+   }
+  ]
+ },
+ "grandezze-e-vettori/7": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "\\frac{1}{2}",
+    "esatto": true
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "\\frac{1}{2}",
+    "esatto": true
+   }
+  ]
+ },
+ "grandezze-e-vettori/8": {
+  "campi": [
+   {
+    "e": "$F_x$",
+    "t": "numero",
+    "v": "-21{,}7",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "$F_y$",
+    "t": "numero",
+    "v": "-12{,}5",
+    "u": "N",
+    "cifre": 1
+   }
+  ]
+ },
+ "grandezze-e-vettori/9": {
+  "campi": [
+   {
+    "e": "Modulo $v$",
+    "t": "numero",
+    "v": "10",
+    "u": "m/s",
+    "cifre": 0
+   },
+   {
+    "e": "Angolo $\\theta$",
+    "t": "numero",
+    "v": "126{,}9",
+    "u": "°",
+    "cifre": 1
+   }
+  ]
+ },
+ "grandezze-e-vettori/10": {
+  "campi": [
+   {
+    "e": "Modulo $R$",
+    "t": "numero",
+    "v": "30{,}3",
+    "u": "N",
+    "cifre": 1
+   },
+   {
+    "e": "Angolo $\\theta$",
+    "t": "numero",
+    "v": "31{,}5",
+    "u": "°",
+    "cifre": 1
+   }
+  ]
+ },
+ "grandezze-e-vettori/11": {
+  "campi": [
+   {
+    "e": "Lavoro $L$",
+    "t": "numero",
+    "v": "7{,}0",
+    "u": "J",
+    "cifre": 1
+   },
+   {
+    "e": "Angolo $\\theta$",
+    "t": "numero",
+    "v": "74{,}9",
+    "u": "°",
+    "cifre": 1
+   }
+  ]
+ },
+ "grandezze-e-vettori/12": {
+  "campi": [
+   {
+    "e": "$\\tau_x$",
+    "t": "numero",
+    "v": "8{,}0",
+    "u": "N m",
+    "cifre": 1
+   },
+   {
+    "e": "$\\tau_y$",
+    "t": "numero",
+    "v": "-6{,}0",
+    "u": "N m",
+    "cifre": 1
+   },
+   {
+    "e": "$\\tau_z$",
+    "t": "numero",
+    "v": "-5{,}5",
+    "u": "N m",
+    "cifre": 1
+   },
+   {
+    "e": "Modulo $\\tau$",
+    "t": "numero",
+    "v": "11",
+    "u": "N m",
+    "cifre": 0
+   }
+  ]
+ },
+ "grandezze-e-vettori/13": {
+  "campi": [
+   {
+    "e": "$v_x$",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "$v_y$",
+    "t": "numero",
+    "v": "18",
+    "u": "m/s",
+    "cifre": 0
+   },
+   {
+    "e": "Modulo $v$",
+    "t": "numero",
+    "v": "19",
+    "u": "m/s",
+    "cifre": 0
+   },
+   {
+    "e": "$a_x$",
+    "t": "numero",
+    "v": "3{,}0",
+    "u": "m/s^2",
+    "cifre": 1
+   },
+   {
+    "e": "$a_y$",
+    "t": "numero",
+    "v": "24",
+    "u": "m/s^2",
+    "cifre": 0
+   },
+   {
+    "e": "Modulo $a$",
+    "t": "numero",
+    "v": "24",
+    "u": "m/s^2",
+    "cifre": 0
+   }
+  ]
+ },
+ "gravitazione/2": {
+  "campi": [
+   {
+    "e": "$g_L$",
+    "t": "numero",
+    "v": "1{,}62",
+    "u": "m/s^2",
+    "cifre": 2
+   }
+  ]
+ },
+ "gravitazione/4": {
+  "campi": [
+   {
+    "e": "Distanza del punto da $m_1$",
+    "t": "numero",
+    "v": "0{,}60",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "gravitazione/5": {
+  "campi": [
+   {
+    "e": "Profondità $d$",
+    "t": "numero",
+    "v": "6{,}37 \\cdot 10^5",
+    "u": "m"
+   }
+  ]
+ },
+ "gravitazione/6": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "7{,}35 \\cdot 10^3",
+    "u": "m/s"
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "6{,}30 \\cdot 10^3",
+    "u": "s"
+   }
+  ]
+ },
+ "gravitazione/10": {
+  "campi": [
+   {
+    "e": "Quota massima $h$",
+    "t": "numero",
+    "v": "4{,}26 \\cdot 10^6",
+    "u": "m"
+   }
+  ]
+ },
+ "gravitazione/11": {
+  "campi": [
+   {
+    "e": "Energia meccanica $E$",
+    "t": "numero",
+    "v": "-1{,}99 \\cdot 10^{10}",
+    "u": "J"
+   },
+   {
+    "e": "Lavoro minimo",
+    "t": "numero",
+    "v": "1{,}99 \\cdot 10^{10}",
+    "u": "J"
+   }
+  ]
+ },
+ "gravitazione/12": {
+  "campi": [
+   {
+    "e": "Velocità all'afelio $v_a$",
+    "t": "numero",
+    "v": "4{,}4",
+    "u": "km/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "gravitazione/13": {
+  "campi": [
+   {
+    "e": "Semiasse maggiore $a$ (in UA)",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "lavoro-ed-energia/2": {
+  "campi": [
+   {
+    "e": "Lavoro del peso $L_P$",
+    "t": "numero",
+    "v": "49",
+    "u": "J",
+    "cifre": 0
+   },
+   {
+    "e": "Lavoro della reazione normale $L_N$",
+    "t": "numero",
+    "v": "0",
+    "u": "J",
+    "esatto": true
+   },
+   {
+    "e": "Velocità finale $v$",
+    "t": "numero",
+    "v": "4{,}4",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "lavoro-ed-energia/4": {
+  "campi": [
+   {
+    "e": "Lavoro $L$",
+    "t": "numero",
+    "v": "20",
+    "u": "J",
+    "cifre": 0
+   }
+  ]
+ },
+ "lavoro-ed-energia/6": {
+  "campi": [
+   {
+    "e": "Spazio di frenata $d$",
+    "t": "numero",
+    "v": "46",
+    "u": "m",
+    "cifre": 0
+   }
+  ]
+ },
+ "lavoro-ed-energia/7": {
+  "campi": [
+   {
+    "e": "Altezza massima dal suolo",
+    "t": "numero",
+    "v": "8{,}8",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "lavoro-ed-energia/8": {
+  "campi": [
+   {
+    "e": "Velocità minima nel punto più basso",
+    "t": "numero",
+    "v": "4{,}0",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "lavoro-ed-energia/9": {
+  "campi": [
+   {
+    "e": "Velocità dopo il distacco $v$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Altezza massima $h$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "lavoro-ed-energia/10": {
+  "campi": [
+   {
+    "e": "Energia dissipata $E_{\\text{diss}}$",
+    "t": "numero",
+    "v": "23",
+    "u": "J",
+    "cifre": 0
+   }
+  ]
+ },
+ "lavoro-ed-energia/11": {
+  "campi": [
+   {
+    "e": "Velocità alla base $v$",
+    "t": "numero",
+    "v": "3{,}1",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "lavoro-ed-energia/12": {
+  "campi": [
+   {
+    "e": "Potenza $P$",
+    "t": "numero",
+    "v": "3{,}3 \\cdot 10^2",
+    "u": "W"
+   }
+  ]
+ },
+ "lavoro-ed-energia/13": {
+  "campi": [
+   {
+    "e": "Posizioni di equilibrio (in m)",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   },
+   {
+    "e": "Equilibrio con l'ascissa minore",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile",
+     "indifferente"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "Equilibrio con l'ascissa maggiore",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile",
+     "indifferente"
+    ],
+    "v": "instabile"
+   },
+   {
+    "e": "Valori di $E$ (in J) per cui il moto vicino a $x = 0$ è confinato",
+    "t": "intervallo",
+    "v": "[0, 4]",
+    "var": "E"
+   }
+  ]
+ },
+ "leggi-di-newton/3": {
+  "campi": [
+   {
+    "e": "Tempo $t$",
+    "t": "numero",
+    "v": "1{,}54",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "leggi-di-newton/8": {
+  "campi": [
+   {
+    "e": "Tensione $T$",
+    "t": "numero",
+    "v": "18{,}4",
+    "u": "N",
+    "cifre": 1
+   }
+  ]
+ },
+ "leggi-di-newton/9": {
+  "campi": [
+   {
+    "e": "Tensione $T$",
+    "t": "numero",
+    "v": "7{,}85",
+    "u": "N",
+    "cifre": 2
+   }
+  ]
+ },
+ "leggi-di-newton/10": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "17{,}8",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "leggi-di-newton/12": {
+  "campi": [
+   {
+    "e": "Modulo dell'accelerazione",
+    "t": "numero",
+    "v": "0{,}81",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "Verso dell'accelerazione",
+    "t": "scelta",
+    "opzioni": [
+     "verso l'alto",
+     "verso il basso"
+    ],
+    "v": "verso il basso"
+   }
+  ]
+ },
+ "leggi-di-newton/13": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ con la verticale",
+    "t": "numero",
+    "v": "17",
+    "u": "°",
+    "cifre": 0
+   }
+  ]
+ },
+ "moto-nel-piano/1": {
+  "campi": [
+   {
+    "e": "$v_0$",
+    "t": "numero",
+    "v": "2{,}97",
+    "u": "m/s",
+    "cifre": 2
+   }
+  ]
+ },
+ "moto-nel-piano/2": {
+  "campi": [
+   {
+    "e": "Tempo di volo $T$",
+    "t": "numero",
+    "v": "5{,}30",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Altezza massima $H$",
+    "t": "numero",
+    "v": "34{,}4",
+    "u": "m",
+    "cifre": 1
+   },
+   {
+    "e": "Gittata $R$",
+    "t": "numero",
+    "v": "79{,}5",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "moto-nel-piano/3": {
+  "campi": [
+   {
+    "e": "Velocità minima di lancio",
+    "t": "numero",
+    "v": "22{,}1",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Angolo di lancio $\\theta$",
+    "t": "numero",
+    "v": "45",
+    "u": "°"
+   }
+  ]
+ },
+ "moto-nel-piano/4": {
+  "campi": [
+   {
+    "e": "Tempo di volo",
+    "t": "numero",
+    "v": "2{,}32",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Distanza dalla base del balcone",
+    "t": "numero",
+    "v": "16{,}4",
+    "u": "m",
+    "cifre": 1
+   },
+   {
+    "e": "Modulo della velocità all'impatto",
+    "t": "numero",
+    "v": "17{,}2",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "moto-nel-piano/5": {
+  "campi": [
+   {
+    "e": "Angolo fra la prua e il nord",
+    "t": "numero",
+    "v": "11{,}5",
+    "u": "°",
+    "cifre": 1
+   },
+   {
+    "e": "Verso in cui la prua è ruotata rispetto al nord",
+    "t": "scelta",
+    "opzioni": [
+     "verso ovest",
+     "verso est"
+    ],
+    "v": "verso ovest"
+   },
+   {
+    "e": "Velocità rispetto al suolo",
+    "t": "numero",
+    "v": "196",
+    "u": "km/h"
+   },
+   {
+    "e": "Durata del viaggio",
+    "t": "numero",
+    "v": "1{,}53",
+    "u": "h",
+    "cifre": 2
+   }
+  ]
+ },
+ "moto-nel-piano/7": {
+  "campi": [
+   {
+    "e": "$\\omega$",
+    "t": "numero",
+    "v": "14{,}3",
+    "u": "rad/s",
+    "cifre": 1
+   },
+   {
+    "e": "Giri al minuto",
+    "t": "numero",
+    "v": "136",
+    "cifre": 0
+   }
+  ]
+ },
+ "moto-nel-piano/8": {
+  "campi": [
+   {
+    "e": "Modulo dell'accelerazione",
+    "t": "numero",
+    "v": "6{,}67",
+    "u": "m/s^2",
+    "cifre": 2
+   }
+  ]
+ },
+ "moto-nel-piano/9": {
+  "campi": [
+   {
+    "e": "Velocità scalare $v$",
+    "t": "numero",
+    "v": "7{,}66 \\cdot 10^3",
+    "u": "m/s"
+   },
+   {
+    "e": "Accelerazione centripeta $a_n$",
+    "t": "numero",
+    "v": "8{,}65",
+    "u": "m/s^2",
+    "cifre": 2
+   }
+  ]
+ },
+ "moto-nel-piano/10": {
+  "campi": [
+   {
+    "e": "Accelerazione angolare $\\alpha$",
+    "t": "numero",
+    "v": "15{,}7",
+    "u": "rad/s^2",
+    "cifre": 1
+   },
+   {
+    "e": "Giri compiuti",
+    "t": "numero",
+    "v": "105"
+   }
+  ]
+ },
+ "moto-nel-piano/11": {
+  "campi": [
+   {
+    "e": "$a_t$",
+    "t": "numero",
+    "v": "0{,}80",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "$a_n$",
+    "t": "numero",
+    "v": "12{,}8",
+    "u": "m/s^2",
+    "cifre": 1
+   },
+   {
+    "e": "$|\\vec{a}|$",
+    "t": "numero",
+    "v": "12{,}8",
+    "u": "m/s^2",
+    "cifre": 1
+   }
+  ]
+ },
+ "moto-nel-piano/12": {
+  "campi": [
+   {
+    "e": "Modulo della velocità $v$",
+    "t": "numero",
+    "v": "12{,}6",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "$a_t$",
+    "t": "numero",
+    "v": "5{,}69",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "$a_n$",
+    "t": "numero",
+    "v": "1{,}90",
+    "u": "m/s^2",
+    "cifre": 2
+   },
+   {
+    "e": "Raggio di curvatura $\\rho$",
+    "t": "numero",
+    "v": "84{,}3",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "moto-nel-piano/13": {
+  "campi": [
+   {
+    "e": "Velocità rispetto alla riva",
+    "t": "numero",
+    "v": "1{,}3",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Tempo di attraversamento",
+    "t": "numero",
+    "v": "25",
+    "u": "s"
+   },
+   {
+    "e": "Spostamento a valle",
+    "t": "numero",
+    "v": "12{,}5",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "oscillazioni/1": {
+  "campi": [
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "s",
+    "cifre": 2
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "5{,}0",
+    "u": "Hz",
+    "cifre": 1
+   },
+   {
+    "e": "$v_{\\max}$",
+    "t": "numero",
+    "v": "2{,}51",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "$a_{\\max}$",
+    "t": "numero",
+    "v": "79{,}0",
+    "u": "m/s^2",
+    "cifre": 1
+   }
+  ]
+ },
+ "oscillazioni/2": {
+  "campi": [
+   {
+    "e": "Ampiezza $A$",
+    "t": "numero",
+    "v": "0{,}10",
+    "u": "m",
+    "cifre": 2
+   },
+   {
+    "e": "Fase iniziale $\\varphi$ (fra $0$ e $2\\pi$)",
+    "t": "numero",
+    "v": "0{,}927",
+    "u": "rad",
+    "cifre": 3
+   }
+  ]
+ },
+ "oscillazioni/7": {
+  "campi": [
+   {
+    "e": "Energia meccanica $E$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "J",
+    "cifre": 2
+   },
+   {
+    "e": "$|v|$ in $x = 2{,}0\\,\\mathrm{cm}$",
+    "t": "numero",
+    "v": "1{,}73",
+    "u": "m/s",
+    "cifre": 2
+   }
+  ]
+ },
+ "oscillazioni/8": {
+  "campi": [
+   {
+    "e": "Compressione massima",
+    "t": "numero",
+    "v": "0{,}0949",
+    "u": "m",
+    "cifre": 4
+   },
+   {
+    "e": "Durata del contatto",
+    "t": "numero",
+    "v": "0{,}199",
+    "u": "s",
+    "cifre": 3
+   }
+  ]
+ },
+ "oscillazioni/10": {
+  "campi": [
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "1{,}42",
+    "u": "s",
+    "cifre": 2
+   }
+  ]
+ },
+ "oscillazioni/11": {
+  "campi": [
+   {
+    "e": "$\\gamma$",
+    "t": "numero",
+    "v": "0{,}173",
+    "u": "s^{-1}",
+    "cifre": 3
+   },
+   {
+    "e": "Frazione dell'energia iniziale che resta",
+    "t": "numero",
+    "v": "\\frac{1}{4}",
+    "esatto": true
+   }
+  ]
+ },
+ "oscillazioni/13": {
+  "campi": [
+   {
+    "e": "Pulsazione di risonanza $\\Omega_r$",
+    "t": "numero",
+    "v": "19{,}9",
+    "u": "rad/s",
+    "cifre": 1
+   },
+   {
+    "e": "$A_{\\max}$",
+    "t": "numero",
+    "v": "0{,}100",
+    "u": "m",
+    "cifre": 3
+   }
+  ]
+ },
+ "primo-principio/1": {
+  "campi": [
+   {
+    "e": "Temperatura in gradi Celsius (e Fahrenheit)",
+    "t": "numero",
+    "v": "-40",
+    "u": "°C"
+   },
+   {
+    "e": "Temperatura in kelvin",
+    "t": "numero",
+    "v": "233{,}15",
+    "u": "K",
+    "cifre": 2
+   }
+  ]
+ },
+ "primo-principio/3": {
+  "campi": [
+   {
+    "e": "$\\Delta V$",
+    "t": "numero",
+    "v": "0{,}95",
+    "u": "L",
+    "cifre": 2
+   }
+  ]
+ },
+ "primo-principio/4": {
+  "campi": [
+   {
+    "e": "Calore necessario $Q$",
+    "t": "numero",
+    "v": "5{,}34 \\cdot 10^5",
+    "u": "J"
+   },
+   {
+    "e": "Tempo impiegato",
+    "t": "numero",
+    "v": "267",
+    "u": "s"
+   }
+  ]
+ },
+ "primo-principio/5": {
+  "campi": [
+   {
+    "e": "$T_e$",
+    "t": "numero",
+    "v": "24{,}7",
+    "u": "°C",
+    "cifre": 1
+   }
+  ]
+ },
+ "primo-principio/6": {
+  "campi": [
+   {
+    "e": "Massa di ghiaccio $m_g$",
+    "t": "numero",
+    "v": "0{,}071",
+    "u": "kg",
+    "cifre": 3
+   }
+  ]
+ },
+ "primo-principio/7": {
+  "campi": [
+   {
+    "e": "$Q$",
+    "t": "numero",
+    "v": "1{,}30 \\cdot 10^6",
+    "u": "J"
+   }
+  ]
+ },
+ "primo-principio/9": {
+  "campi": [
+   {
+    "e": "Numero di moli $n$",
+    "t": "numero",
+    "v": "2{,}49 \\cdot 10^3",
+    "u": "mol"
+   },
+   {
+    "e": "Massa dell'aria",
+    "t": "numero",
+    "v": "72",
+    "u": "kg"
+   }
+  ]
+ },
+ "primo-principio/10": {
+  "campi": [
+   {
+    "e": "Calore assorbito $Q$",
+    "t": "numero",
+    "v": "4{,}36 \\cdot 10^3",
+    "u": "J"
+   },
+   {
+    "e": "Lavoro fatto dal gas $L$",
+    "t": "numero",
+    "v": "1{,}25 \\cdot 10^3",
+    "u": "J"
+   },
+   {
+    "e": "$\\Delta U$",
+    "t": "numero",
+    "v": "3{,}12 \\cdot 10^3",
+    "u": "J"
+   }
+  ]
+ },
+ "primo-principio/11": {
+  "campi": [
+   {
+    "e": "Lavoro fatto dal gas $L$",
+    "t": "numero",
+    "v": "-1{,}73 \\cdot 10^3",
+    "u": "J"
+   },
+   {
+    "e": "Calore $Q$ assorbito dal gas",
+    "t": "numero",
+    "v": "-1{,}73 \\cdot 10^3",
+    "u": "J"
+   }
+  ]
+ },
+ "primo-principio/12": {
+  "campi": [
+   {
+    "e": "$T_f$",
+    "t": "numero",
+    "v": "252",
+    "u": "K"
+   },
+   {
+    "e": "$\\dfrac{p_f}{p_i}$",
+    "t": "numero",
+    "v": "0{,}315",
+    "cifre": 3
+   }
+  ]
+ },
+ "primo-principio/13": {
+  "campi": [
+   {
+    "e": "Lavoro totale $L$",
+    "t": "numero",
+    "v": "200",
+    "u": "J"
+   },
+   {
+    "e": "Calore totale $Q$",
+    "t": "numero",
+    "v": "200",
+    "u": "J"
+   }
+  ]
+ },
+ "quantita-di-moto/1": {
+  "campi": [
+   {
+    "e": "Modulo dell'impulso $J$",
+    "t": "numero",
+    "v": "12",
+    "u": "N·s"
+   },
+   {
+    "e": "Forza media $F_m$",
+    "t": "numero",
+    "v": "8{,}0 \\cdot 10^{3}",
+    "u": "N"
+   }
+  ]
+ },
+ "quantita-di-moto/2": {
+  "campi": [
+   {
+    "e": "Impulso $J$",
+    "t": "numero",
+    "v": "12",
+    "u": "N·s"
+   },
+   {
+    "e": "Velocità $v$ a $t = 2{,}0\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "3{,}0",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "quantita-di-moto/3": {
+  "campi": [
+   {
+    "e": "$x_{cm}$",
+    "t": "numero",
+    "v": "2{,}2",
+    "u": "m",
+    "cifre": 1
+   },
+   {
+    "e": "$y_{cm}$",
+    "t": "numero",
+    "v": "2{,}6",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "quantita-di-moto/4": {
+  "campi": [
+   {
+    "e": "Distanza del centro di massa dall'estremo libero",
+    "t": "numero",
+    "v": "0{,}80",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "quantita-di-moto/5": {
+  "campi": [
+   {
+    "e": "Modulo della velocità di rinculo",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Verso del rinculo",
+    "t": "scelta",
+    "opzioni": [
+     "stesso verso del proiettile",
+     "verso opposto al proiettile"
+    ],
+    "v": "verso opposto al proiettile"
+   }
+  ]
+ },
+ "quantita-di-moto/6": {
+  "campi": [
+   {
+    "e": "Spostamento della zattera (modulo)",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "m",
+    "cifre": 1
+   },
+   {
+    "e": "Verso dello spostamento della zattera",
+    "t": "scelta",
+    "opzioni": [
+     "stesso verso della persona",
+     "verso opposto alla persona"
+    ],
+    "v": "verso opposto alla persona"
+   },
+   {
+    "e": "Spostamento della persona rispetto all'acqua",
+    "t": "numero",
+    "v": "4{,}0",
+    "u": "m",
+    "cifre": 1
+   }
+  ]
+ },
+ "quantita-di-moto/7": {
+  "campi": [
+   {
+    "e": "Velocità $V$ dopo l'aggancio",
+    "t": "numero",
+    "v": "1{,}2",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Frazione di energia cinetica dissipata",
+    "t": "numero",
+    "v": "40",
+    "u": "%"
+   }
+  ]
+ },
+ "quantita-di-moto/8": {
+  "campi": [
+   {
+    "e": "Velocità $V$ del blocco subito dopo l'urto",
+    "t": "numero",
+    "v": "1{,}99",
+    "u": "m/s",
+    "cifre": 2
+   },
+   {
+    "e": "Altezza massima $h$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "m",
+    "cifre": 2
+   }
+  ]
+ },
+ "quantita-di-moto/9": {
+  "campi": [
+   {
+    "e": "Modulo di $v_1'$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Verso di $v_1'$",
+    "t": "scelta",
+    "opzioni": [
+     "verso iniziale",
+     "verso opposto"
+    ],
+    "v": "verso iniziale"
+   },
+   {
+    "e": "Modulo di $v_2'$",
+    "t": "numero",
+    "v": "6{,}0",
+    "u": "m/s",
+    "cifre": 1
+   }
+  ]
+ },
+ "quantita-di-moto/10": {
+  "campi": [
+   {
+    "e": "Coefficiente di restituzione $e$",
+    "t": "numero",
+    "v": "0{,}80",
+    "cifre": 2
+   },
+   {
+    "e": "Frazione di energia cinetica dissipata",
+    "t": "numero",
+    "v": "36",
+    "u": "%"
+   }
+  ]
+ },
+ "quantita-di-moto/11": {
+  "campi": [
+   {
+    "e": "Modulo di $\\vec{V}$",
+    "t": "numero",
+    "v": "1{,}7",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Angolo di $\\vec{V}$ con l'asse $x$",
+    "t": "numero",
+    "v": "45",
+    "u": "°"
+   }
+  ]
+ },
+ "quantita-di-moto/12": {
+  "campi": [
+   {
+    "e": "$v_{cm}$",
+    "t": "numero",
+    "v": "1{,}0",
+    "u": "m/s",
+    "cifre": 1
+   },
+   {
+    "e": "Energia cinetica nel sistema del centro di massa $K^{*}$",
+    "t": "numero",
+    "v": "10",
+    "u": "J"
+   },
+   {
+    "e": "Massima energia dissipabile",
+    "t": "numero",
+    "v": "10",
+    "u": "J"
+   }
+  ]
+ },
+ "quantita-di-moto/13": {
+  "campi": [
+   {
+    "e": "$\\dfrac{M_i}{M_f}$",
+    "t": "numero",
+    "v": "7{,}4",
+    "cifre": 1
+   },
+   {
+    "e": "Frazione della massa iniziale costituita dal combustibile",
+    "t": "numero",
+    "v": "0{,}86",
+    "cifre": 2
+   }
+  ]
+ },
+ "secondo-principio/1": {
+  "campi": [
+   {
+    "e": "Calore assorbito $Q_{\\text{ass}}$",
+    "t": "numero",
+    "v": "2{,}0",
+    "u": "kJ",
+    "cifre": 1
+   },
+   {
+    "e": "Calore ceduto $Q_{\\text{ced}}$",
+    "t": "numero",
+    "v": "1{,}3",
+    "u": "kJ",
+    "cifre": 1
+   }
+  ]
+ },
+ "secondo-principio/2": {
+  "campi": [
+   {
+    "e": "Lavoro speso $|L|$",
+    "t": "numero",
+    "v": "5{,}0 \\cdot 10^3",
+    "u": "J"
+   },
+   {
+    "e": "Calore ceduto all'ambiente $|Q_1|$",
+    "t": "numero",
+    "v": "3{,}0 \\cdot 10^4",
+    "u": "J"
+   }
+  ]
+ },
+ "secondo-principio/3": {
+  "campi": [
+   {
+    "e": "Rendimento $\\eta_C$",
+    "t": "numero",
+    "v": "0{,}333",
+    "cifre": 3
+   },
+   {
+    "e": "Lavoro $L$ in un ciclo",
+    "t": "numero",
+    "v": "300",
+    "u": "J"
+   }
+  ]
+ },
+ "secondo-principio/5": {
+  "campi": [
+   {
+    "e": "Efficienza $\\varepsilon_{\\text{pc}}$",
+    "t": "numero",
+    "v": "13{,}4",
+    "cifre": 1
+   },
+   {
+    "e": "Potenza meccanica minima $P_{\\min}$",
+    "t": "numero",
+    "v": "3{,}7 \\cdot 10^2",
+    "u": "W"
+   }
+  ]
+ },
+ "secondo-principio/6": {
+  "campi": [
+   {
+    "e": "La dichiarazione è",
+    "t": "scelta",
+    "opzioni": [
+     "compatibile con il secondo principio",
+     "non compatibile con il secondo principio"
+    ],
+    "v": "non compatibile con il secondo principio"
+   },
+   {
+    "e": "Efficienza massima $\\varepsilon_C$",
+    "t": "numero",
+    "v": "6{,}4",
+    "cifre": 1
+   }
+  ]
+ },
+ "secondo-principio/8": {
+  "campi": [
+   {
+    "e": "$\\Delta S_{\\text{u}}$",
+    "t": "numero",
+    "v": "8{,}3",
+    "u": "J/K",
+    "cifre": 1
+   }
+  ]
+ },
+ "secondo-principio/10": {
+  "campi": [
+   {
+    "e": "$\\Delta S$ del gas",
+    "t": "numero",
+    "v": "15{,}2",
+    "u": "J/K",
+    "cifre": 1
+   },
+   {
+    "e": "Calore assorbito $Q$",
+    "t": "numero",
+    "v": "5{,}33",
+    "u": "kJ",
+    "cifre": 2
+   }
+  ]
+ },
+ "secondo-principio/12": {
+  "campi": [
+   {
+    "e": "Lavoro $L$ per ciclo",
+    "t": "numero",
+    "v": "300",
+    "u": "J"
+   },
+   {
+    "e": "Rendimento $\\eta$",
+    "t": "numero",
+    "v": "0{,}154",
+    "cifre": 3
+   }
+  ]
+ },
+ "secondo-principio/13": {
+  "campi": [
+   {
+    "e": "Temperatura finale (in °C)",
+    "t": "numero",
+    "v": "50",
+    "u": "°C"
+   },
+   {
+    "e": "$\\Delta S_{\\text{u}}$",
+    "t": "numero",
+    "v": "65",
+    "u": "J/K"
+   }
+  ]
+ }
+}

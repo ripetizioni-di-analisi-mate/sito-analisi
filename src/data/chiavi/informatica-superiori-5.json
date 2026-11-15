@@ -1,0 +1,1602 @@
+{
+ "automi-e-computabilita/1": {
+  "campi": [
+   {
+    "e": "La parola è accettata se lo stato raggiunto",
+    "t": "scelta",
+    "opzioni": [
+     "appartiene all'insieme degli stati finali",
+     "coincide con lo stato iniziale",
+     "è diverso dallo stato iniziale",
+     "non ha transizioni uscenti"
+    ],
+    "v": "appartiene all'insieme degli stati finali"
+   }
+  ]
+ },
+ "automi-e-computabilita/2": {
+  "campi": [
+   {
+    "e": "Parola accettata",
+    "t": "scelta",
+    "opzioni": [
+     "`10100`",
+     "`0111`",
+     "`010`",
+     "`1000`"
+    ],
+    "v": "`10100`"
+   }
+  ]
+ },
+ "automi-e-computabilita/3": {
+  "campi": [
+   {
+    "e": "$\\varepsilon$ è accettata se",
+    "t": "scelta",
+    "opzioni": [
+     "lo stato iniziale appartiene all'insieme degli stati finali",
+     "l'insieme degli stati finali è vuoto",
+     "lo stato iniziale non è finale",
+     "esiste una transizione dallo stato iniziale a uno finale"
+    ],
+    "v": "lo stato iniziale appartiene all'insieme degli stati finali"
+   }
+  ]
+ },
+ "automi-e-computabilita/5": {
+  "campi": [
+   {
+    "e": "Il problema dell'arresto è",
+    "t": "scelta",
+    "opzioni": [
+     "decidibile",
+     "indecidibile",
+     "decidibile in tempo lineare",
+     "riconoscibile da un automa finito"
+    ],
+    "v": "indecidibile"
+   }
+  ]
+ },
+ "automi-e-computabilita/6": {
+  "campi": [
+   {
+    "e": "Componente che conserva i dati",
+    "t": "scelta",
+    "opzioni": [
+     "il nastro leggibile e scrivibile",
+     "lo stato corrente",
+     "la funzione di transizione",
+     "la testina"
+    ],
+    "v": "il nastro leggibile e scrivibile"
+   }
+  ]
+ },
+ "automi-e-computabilita/8": {
+  "campi": [
+   {
+    "e": "Effetto della lettura di `0` sullo stato",
+    "t": "scelta",
+    "opzioni": [
+     "lo stato resta invariato",
+     "lo stato si scambia con l'altro",
+     "l'automa torna allo stato iniziale",
+     "l'automa va in uno stato di rifiuto"
+    ],
+    "v": "lo stato resta invariato"
+   }
+  ]
+ },
+ "automi-e-computabilita/9": {
+  "campi": [
+   {
+    "e": "Parola che termina con `01`",
+    "t": "scelta",
+    "opzioni": [
+     "`010`",
+     "`1101`",
+     "`11`",
+     "`100`"
+    ],
+    "v": "`1101`"
+   }
+  ]
+ },
+ "automi-e-computabilita/10": {
+  "campi": [
+   {
+    "e": "Il procedimento accetta la parola",
+    "t": "scelta",
+    "opzioni": [
+     "appena legge un `B`",
+     "solo se l'ultimo simbolo è `B`",
+     "solo se il primo simbolo è `B`",
+     "solo se tutti i simboli sono `B`"
+    ],
+    "v": "appena legge un `B`"
+   },
+   {
+    "e": "Massimo numero di simboli esaminati",
+    "t": "funzione",
+    "v": "n",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "automi-e-computabilita/11": {
+  "campi": [
+   {
+    "e": "Da `A` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "B"
+   },
+   {
+    "e": "Da `A` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "A"
+   },
+   {
+    "e": "Da `B` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "B"
+   },
+   {
+    "e": "Da `B` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "C"
+   },
+   {
+    "e": "Da `C` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "B"
+   },
+   {
+    "e": "Da `C` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "A"
+   },
+   {
+    "e": "Esito di `1001`",
+    "t": "scelta",
+    "opzioni": [
+     "accettata",
+     "rifiutata"
+    ],
+    "v": "accettata"
+   },
+   {
+    "e": "Esito di `1010`",
+    "t": "scelta",
+    "opzioni": [
+     "accettata",
+     "rifiutata"
+    ],
+    "v": "rifiutata"
+   }
+  ]
+ },
+ "automi-e-computabilita/12": {
+  "campi": [
+   {
+    "e": "Da `A` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "B"
+   },
+   {
+    "e": "Da `A` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "A"
+   },
+   {
+    "e": "Da `B` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "C"
+   },
+   {
+    "e": "Da `B` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "A"
+   },
+   {
+    "e": "Da `C` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "C"
+   },
+   {
+    "e": "Da `C` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "C"
+   },
+   {
+    "e": "Stato raggiunto dopo `1001`",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "B",
+     "C"
+    ],
+    "v": "C"
+   }
+  ]
+ },
+ "automi-e-computabilita/13": {
+  "campi": [
+   {
+    "e": "Stato iniziale",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "P"
+   },
+   {
+    "e": "Stato finale",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "D"
+   },
+   {
+    "e": "Da `P` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "D"
+   },
+   {
+    "e": "Da `P` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "P"
+   },
+   {
+    "e": "Da `D` con `0`",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "P"
+   },
+   {
+    "e": "Da `D` con `1`",
+    "t": "scelta",
+    "opzioni": [
+     "P",
+     "D"
+    ],
+    "v": "D"
+   },
+   {
+    "e": "Esito di `010`",
+    "t": "scelta",
+    "opzioni": [
+     "accettata",
+     "rifiutata"
+    ],
+    "v": "rifiutata"
+   },
+   {
+    "e": "Esito di `101`",
+    "t": "scelta",
+    "opzioni": [
+     "accettata",
+     "rifiutata"
+    ],
+    "v": "accettata"
+   }
+  ]
+ },
+ "automi-e-computabilita/14": {
+  "campi": [
+   {
+    "e": "La parola si accetta se a fine lettura il contatore",
+    "t": "scelta",
+    "opzioni": [
+     "vale zero",
+     "è positivo",
+     "è pari",
+     "è uguale alla lunghezza della parola"
+    ],
+    "v": "vale zero"
+   },
+   {
+    "e": "Valore finale del contatore su `010011`",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "complessita-algoritmi/1": {
+  "campi": [
+   {
+    "e": "Proprietà dell'array",
+    "t": "scelta",
+    "opzioni": [
+     "è ordinato secondo il criterio di confronto",
+     "ha lunghezza pari",
+     "non contiene valori ripetuti",
+     "ha lunghezza uguale a una potenza di $2$"
+    ],
+    "v": "è ordinato secondo il criterio di confronto"
+   }
+  ]
+ },
+ "complessita-algoritmi/2": {
+  "campi": [
+   {
+    "e": "Quando $n$ raddoppia, le esecuzioni del corpo interno",
+    "t": "scelta",
+    "opzioni": [
+     "raddoppiano",
+     "triplicano",
+     "quadruplicano",
+     "restano invariate"
+    ],
+    "v": "quadruplicano"
+   }
+  ]
+ },
+ "complessita-algoritmi/5": {
+  "campi": [
+   {
+    "e": "Ordine di crescita",
+    "t": "scelta",
+    "opzioni": [
+     "$\\Theta(n)$",
+     "$\\Theta(n^2)$",
+     "$\\Theta(n^3)$",
+     "$\\Theta(4n^2)$",
+     "$\\Theta(\\log n)$"
+    ],
+    "v": "$\\Theta(n^2)$"
+   }
+  ]
+ },
+ "complessita-algoritmi/8": {
+  "campi": [
+   {
+    "e": "Celle visitate nel caso peggiore",
+    "t": "scelta",
+    "opzioni": [
+     "$\\Theta(1)$",
+     "$\\Theta(\\log n)$",
+     "$\\Theta(n)$",
+     "$\\Theta(n\\log n)$",
+     "$\\Theta(n^2)$"
+    ],
+    "v": "$\\Theta(\\log n)$"
+   }
+  ]
+ },
+ "complessita-algoritmi/10": {
+  "campi": [
+   {
+    "e": "Valore fissato nella prima posizione",
+    "t": "scelta",
+    "opzioni": [
+     "il minimo globale",
+     "il massimo globale",
+     "il primo valore originale",
+     "il valore centrale"
+    ],
+    "v": "il minimo globale"
+   }
+  ]
+ },
+ "complessita-algoritmi/11": {
+  "campi": [
+   {
+    "e": "Valori visitati dalla ricerca lineare",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "4",
+     "8",
+     "10",
+     "12",
+     "14",
+     "18",
+     "20"
+    ]
+   },
+   {
+    "e": "Visite della ricerca lineare",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Valori visitati dalla ricerca binaria",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "10",
+     "14",
+     "12"
+    ]
+   },
+   {
+    "e": "Visite della ricerca binaria",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "complessita-algoritmi/12": {
+  "campi": [
+   {
+    "e": "Confronti dell'ordinamento per selezione",
+    "t": "numero",
+    "v": "66"
+   },
+   {
+    "e": "Celle visitate dalla ricerca lineare",
+    "t": "numero",
+    "v": "12"
+   }
+  ]
+ },
+ "complessita-algoritmi/13": {
+  "campi": [
+   {
+    "e": "Operazioni per $n=10$",
+    "t": "numero",
+    "v": "320"
+   },
+   {
+    "e": "Operazioni per $n=20$",
+    "t": "numero",
+    "v": "1240"
+   },
+   {
+    "e": "Ordine di crescita",
+    "t": "scelta",
+    "opzioni": [
+     "$\\Theta(n)$",
+     "$\\Theta(n^2)$",
+     "$\\Theta(3n^2)$",
+     "$\\Theta(n^3)$"
+    ],
+    "v": "$\\Theta(n^2)$"
+   }
+  ]
+ },
+ "complessita-algoritmi/14": {
+  "campi": [
+   {
+    "e": "Indici visitati",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "errori-e-zeri/2": {
+  "campi": [
+   {
+    "e": "Conclusione sugli zeri",
+    "t": "scelta",
+    "opzioni": [
+     "almeno uno zero appartiene a $(1,4)$",
+     "esattamente uno zero appartiene a $(1,4)$",
+     "nessuno zero appartiene a $(1,4)$",
+     "non si può dire nulla"
+    ],
+    "v": "almeno uno zero appartiene a $(1,4)$"
+   }
+  ]
+ },
+ "errori-e-zeri/6": {
+  "campi": [
+   {
+    "e": "La formula di Newton è indefinita se",
+    "t": "scelta",
+    "opzioni": [
+     "$f'(x_0)=0$",
+     "$f'(x_0)<0$",
+     "$f(x_0)>0$",
+     "$f''(x_0)=0$"
+    ],
+    "v": "$f'(x_0)=0$"
+   }
+  ]
+ },
+ "errori-e-zeri/8": {
+  "campi": [
+   {
+    "e": "Metà conservata",
+    "t": "scelta",
+    "opzioni": [
+     "$[a,m]$",
+     "$[m,b]$"
+    ],
+    "v": "$[m,b]$"
+   }
+  ]
+ },
+ "errori-e-zeri/9": {
+  "campi": [
+   {
+    "e": "L'errore relativo è indefinito se",
+    "t": "scelta",
+    "opzioni": [
+     "il valore di riferimento è zero",
+     "il valore approssimato è zero",
+     "l'errore assoluto è zero",
+     "il valore di riferimento è negativo"
+    ],
+    "v": "il valore di riferimento è zero"
+   }
+  ]
+ },
+ "errori-e-zeri/11": {
+  "campi": [
+   {
+    "e": "Il ciclo prosegue finché",
+    "t": "scelta",
+    "opzioni": [
+     "$b-a>2\\cdot10^{-3}$",
+     "$|f(m)|>10^{-3}$",
+     "$|f(b)-f(a)|>10^{-3}$",
+     "$a<b$"
+    ],
+    "v": "$b-a>2\\cdot10^{-3}$"
+   },
+   {
+    "e": "Se $f(m)=0$",
+    "t": "scelta",
+    "opzioni": [
+     "si restituisce $m$",
+     "si restituisce $a$",
+     "si sostituisce $b$ con $m$",
+     "si continua il ciclo"
+    ],
+    "v": "si restituisce $m$"
+   },
+   {
+    "e": "Estremo sostituito con $m$",
+    "t": "scelta",
+    "opzioni": [
+     "quello con lo stesso segno di $f(m)$",
+     "quello con segno opposto a $f(m)$",
+     "sempre $a$",
+     "sempre $b$"
+    ],
+    "v": "quello con lo stesso segno di $f(m)$"
+   },
+   {
+    "e": "Valore restituito al termine del ciclo",
+    "t": "scelta",
+    "opzioni": [
+     "il medio dell'intervallo rimasto",
+     "l'estremo $a$",
+     "l'estremo $b$",
+     "il valore $f(m)$"
+    ],
+    "v": "il medio dell'intervallo rimasto"
+   }
+  ]
+ },
+ "errori-e-zeri/12": {
+  "campi": [
+   {
+    "e": "Intervallo dopo due passi di bisezione",
+    "t": "intervallo",
+    "v": "[2, \\frac{9}{4}]"
+   },
+   {
+    "e": "$x_1$ di Newton",
+    "t": "numero",
+    "v": "2{,}25"
+   }
+  ]
+ },
+ "errori-e-zeri/14": {
+  "campi": [
+   {
+    "e": "Il teorema degli zeri non si applica perché",
+    "t": "scelta",
+    "opzioni": [
+     "$f$ non è continua su $[-1,1]$, perché non è definita in $0$",
+     "$f$ non è derivabile in $1$",
+     "$f(-1)$ e $f(1)$ hanno lo stesso segno",
+     "l'intervallo è simmetrico"
+    ],
+    "v": "$f$ non è continua su $[-1,1]$, perché non è definita in $0$"
+   }
+  ]
+ },
+ "integrazione-numerica/6": {
+  "campi": [
+   {
+    "e": "La somma dei rettangoli sinistri è",
+    "t": "scelta",
+    "opzioni": [
+     "minore dell'integrale",
+     "maggiore dell'integrale",
+     "uguale all'integrale",
+     "non confrontabile in generale"
+    ],
+    "v": "minore dell'integrale"
+   }
+  ]
+ },
+ "integrazione-numerica/7": {
+  "campi": [
+   {
+    "e": "Ascisse usate",
+    "t": "valori",
+    "v": [
+     "3",
+     "5"
+    ]
+   }
+  ]
+ },
+ "integrazione-numerica/10": {
+  "campi": [
+   {
+    "e": "Modifica che dimezza $h$",
+    "t": "scelta",
+    "opzioni": [
+     "raddoppiare il numero di intervalli",
+     "dimezzare il numero di intervalli",
+     "raddoppiare l'ampiezza di $[a,b]$",
+     "aggiungere un solo nodo"
+    ],
+    "v": "raddoppiare il numero di intervalli"
+   }
+  ]
+ },
+ "integrazione-numerica/11": {
+  "campi": [
+   {
+    "e": "$T_4$",
+    "t": "numero",
+    "v": "23",
+    "u": "m"
+   },
+   {
+    "e": "$S_4$",
+    "t": "numero",
+    "v": "\\frac{68}{3}",
+    "u": "m"
+   }
+  ]
+ },
+ "integrazione-numerica/12": {
+  "campi": [
+   {
+    "e": "$L_2$",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "$T_2$",
+    "t": "numero",
+    "v": "24"
+   },
+   {
+    "e": "$S_2$",
+    "t": "numero",
+    "v": "\\frac{64}{3}"
+   }
+  ]
+ },
+ "integrazione-numerica/13": {
+  "campi": [
+   {
+    "e": "$L_2$",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Integrale esatto",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "La stima è",
+    "t": "scelta",
+    "opzioni": [
+     "in eccesso",
+     "in difetto",
+     "esatta"
+    ],
+    "v": "in eccesso"
+   }
+  ]
+ },
+ "integrazione-numerica/14": {
+  "campi": [
+   {
+    "e": "$T_2$",
+    "t": "numero",
+    "v": "18"
+   },
+   {
+    "e": "$S_2$",
+    "t": "numero",
+    "v": "\\frac{52}{3}"
+   }
+  ]
+ },
+ "internet-e-protocolli/1": {
+  "campi": [
+   {
+    "e": "Tipo di record DNS",
+    "t": "scelta",
+    "opzioni": [
+     "A",
+     "AAAA",
+     "MX",
+     "CNAME",
+     "PTR"
+    ],
+    "v": "AAAA"
+   }
+  ]
+ },
+ "internet-e-protocolli/2": {
+  "campi": [
+   {
+    "e": "Protocollo di trasporto",
+    "t": "scelta",
+    "opzioni": [
+     "TCP",
+     "UDP",
+     "IP",
+     "ICMP"
+    ],
+    "v": "TCP"
+   }
+  ]
+ },
+ "internet-e-protocolli/3": {
+  "campi": [
+   {
+    "e": "Protocollo",
+    "t": "scelta",
+    "opzioni": [
+     "DHCP",
+     "DNS",
+     "ARP",
+     "NAT",
+     "ICMP"
+    ],
+    "v": "DHCP"
+   }
+  ]
+ },
+ "internet-e-protocolli/5": {
+  "campi": [
+   {
+    "e": "Informazione che fissa la validità in cache",
+    "t": "scelta",
+    "opzioni": [
+     "Il TTL del record",
+     "Il tipo del record",
+     "Il TTL del pacchetto IP",
+     "La porta sorgente della risposta"
+    ],
+    "v": "Il TTL del record"
+   }
+  ]
+ },
+ "internet-e-protocolli/6": {
+  "campi": [
+   {
+    "e": "Proprietà offerte da HTTPS",
+    "t": "scelta",
+    "opzioni": [
+     "Confidenzialità e integrità",
+     "Solo confidenzialità",
+     "Solo integrità",
+     "Anonimato del client",
+     "Consegna garantita più veloce"
+    ],
+    "v": "Confidenzialità e integrità"
+   }
+  ]
+ },
+ "internet-e-protocolli/7": {
+  "campi": [
+   {
+    "e": "Livello del modello TCP/IP",
+    "t": "scelta",
+    "opzioni": [
+     "Applicazione",
+     "Trasporto",
+     "Internet",
+     "Accesso alla rete"
+    ],
+    "v": "Applicazione"
+   }
+  ]
+ },
+ "internet-e-protocolli/8": {
+  "campi": [
+   {
+    "e": "Valore che distingue le due connessioni",
+    "t": "scelta",
+    "opzioni": [
+     "La porta sorgente",
+     "La porta destinazione",
+     "L'IP destinazione",
+     "Il MAC sorgente"
+    ],
+    "v": "La porta sorgente"
+   }
+  ]
+ },
+ "internet-e-protocolli/9": {
+  "campi": [
+   {
+    "e": "Campo applicativo",
+    "t": "scelta",
+    "opzioni": [
+     "Un numero progressivo in ciascun datagramma",
+     "La porta sorgente UDP",
+     "Il checksum UDP",
+     "Il TTL del pacchetto IP"
+    ],
+    "v": "Un numero progressivo in ciascun datagramma"
+   }
+  ]
+ },
+ "internet-e-protocolli/10": {
+  "campi": [
+   {
+    "e": "Tipo di record DNS",
+    "t": "scelta",
+    "opzioni": [
+     "MX",
+     "A",
+     "AAAA",
+     "CNAME",
+     "NS"
+    ],
+    "v": "MX"
+   }
+  ]
+ },
+ "internet-e-protocolli/11": {
+  "campi": [
+   {
+    "e": "Ordine delle fasi",
+    "t": "scelta",
+    "opzioni": [
+     "DNS, TCP, TLS, HTTP",
+     "TCP, DNS, TLS, HTTP",
+     "DNS, TLS, TCP, HTTP",
+     "DNS, TCP, HTTP, TLS"
+    ],
+    "v": "DNS, TCP, TLS, HTTP"
+   }
+  ]
+ },
+ "internet-e-protocolli/12": {
+  "campi": [
+   {
+    "e": "Fase che produce l'esito di A",
+    "t": "scelta",
+    "opzioni": [
+     "DNS",
+     "TCP",
+     "TLS",
+     "HTTP"
+    ],
+    "v": "DNS"
+   },
+   {
+    "e": "Fase che produce l'esito di B",
+    "t": "scelta",
+    "opzioni": [
+     "DNS",
+     "TCP",
+     "TLS",
+     "HTTP"
+    ],
+    "v": "HTTP"
+   }
+  ]
+ },
+ "internet-e-protocolli/13": {
+  "campi": [
+   {
+    "e": "Fasi successive, nell'ordine",
+    "t": "scelta",
+    "opzioni": [
+     "TCP, TLS, HTTP",
+     "DNS, TCP, TLS, HTTP",
+     "TLS, TCP, HTTP",
+     "TCP, HTTP"
+    ],
+    "v": "TCP, TLS, HTTP"
+   }
+  ]
+ },
+ "internet-e-protocolli/14": {
+  "campi": [
+   {
+    "e": "Protocollo di trasporto",
+    "t": "scelta",
+    "opzioni": [
+     "TCP",
+     "UDP"
+    ],
+    "v": "UDP"
+   },
+   {
+    "e": "Campo applicativo che distingue i campioni nuovi",
+    "t": "scelta",
+    "opzioni": [
+     "Un progressivo crescente in ogni misura",
+     "La porta sorgente",
+     "Il checksum UDP",
+     "La lunghezza del datagramma"
+    ],
+    "v": "Un progressivo crescente in ogni misura"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/1": {
+  "campi": [
+   {
+    "e": "Maschera",
+    "t": "scelta",
+    "opzioni": [
+     "255.255.255.128",
+     "255.255.255.0",
+     "255.255.255.192",
+     "255.255.128.0",
+     "255.255.255.254"
+    ],
+    "v": "255.255.255.128"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/2": {
+  "campi": [
+   {
+    "e": "Indirizzo di rete",
+    "t": "scelta",
+    "opzioni": [
+     "192.168.7.192",
+     "192.168.7.128",
+     "192.168.7.0",
+     "192.168.7.196",
+     "192.168.7.255"
+    ],
+    "v": "192.168.7.192"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/3": {
+  "campi": [
+   {
+    "e": "Indirizzo di broadcast",
+    "t": "scelta",
+    "opzioni": [
+     "172.16.0.47",
+     "172.16.0.48",
+     "172.16.0.31",
+     "172.16.0.63",
+     "172.16.0.255"
+    ],
+    "v": "172.16.0.47"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/5": {
+  "campi": [
+   {
+    "e": "MAC destinazione del frame",
+    "t": "scelta",
+    "opzioni": [
+     "Il MAC di B",
+     "Il MAC del gateway",
+     "Il MAC di broadcast",
+     "Il MAC di A"
+    ],
+    "v": "Il MAC di B"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/6": {
+  "campi": [
+   {
+    "e": "Lunghezza del prefisso, in bit",
+    "t": "numero",
+    "v": "28"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/7": {
+  "campi": [
+   {
+    "e": "Lunghezza del prefisso, in bit",
+    "t": "numero",
+    "v": "28"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/8": {
+  "campi": [
+   {
+    "e": "Via usata",
+    "t": "scelta",
+    "opzioni": [
+     "Via A",
+     "Via B",
+     "Via C"
+    ],
+    "v": "Via B"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/9": {
+  "campi": [
+   {
+    "e": "Primo indirizzo host",
+    "t": "scelta",
+    "opzioni": [
+     "192.168.8.129",
+     "192.168.8.128",
+     "192.168.8.130",
+     "192.168.8.1",
+     "192.168.8.191"
+    ],
+    "v": "192.168.8.129"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/10": {
+  "campi": [
+   {
+    "e": "IP destinazione nel pacchetto",
+    "t": "scelta",
+    "opzioni": [
+     "172.16.2.10",
+     "172.16.1.1",
+     "172.16.1.10",
+     "172.16.2.255"
+    ],
+    "v": "172.16.2.10"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/11": {
+  "campi": [
+   {
+    "e": "Prima rete: lunghezza del prefisso",
+    "t": "numero",
+    "v": "26"
+   },
+   {
+    "e": "Prima rete: ultimo ottetto dell'ultimo host",
+    "t": "numero",
+    "v": "62"
+   },
+   {
+    "e": "Seconda rete: ultimo ottetto dell'indirizzo di rete",
+    "t": "numero",
+    "v": "64"
+   },
+   {
+    "e": "Seconda rete: lunghezza del prefisso",
+    "t": "numero",
+    "v": "27"
+   },
+   {
+    "e": "Seconda rete: ultimo ottetto dell'ultimo host",
+    "t": "numero",
+    "v": "94"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/12": {
+  "campi": [
+   {
+    "e": "Problema della configurazione",
+    "t": "scelta",
+    "opzioni": [
+     "Il gateway è fuori dalla sottorete del PC",
+     "L'IP del PC è l'indirizzo di rete",
+     "L'IP del PC è l'indirizzo di broadcast",
+     "Il prefisso /28 non è ammesso"
+    ],
+    "v": "Il gateway è fuori dalla sottorete del PC"
+   },
+   {
+    "e": "IP utilizzabile come gateway",
+    "t": "scelta",
+    "opzioni": [
+     "192.168.5.33",
+     "192.168.5.49",
+     "192.168.5.32",
+     "192.168.5.47",
+     "192.168.5.46"
+    ],
+    "v": "192.168.5.33"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/13": {
+  "campi": [
+   {
+    "e": "Rete per 60 host: lunghezza del prefisso",
+    "t": "numero",
+    "v": "26"
+   },
+   {
+    "e": "Rete per 60 host: ultimo ottetto del broadcast",
+    "t": "numero",
+    "v": "63"
+   },
+   {
+    "e": "Rete per 28 host: lunghezza del prefisso",
+    "t": "numero",
+    "v": "27"
+   },
+   {
+    "e": "Rete per 28 host: ultimo ottetto del broadcast",
+    "t": "numero",
+    "v": "95"
+   },
+   {
+    "e": "Rete per 12 host: lunghezza del prefisso",
+    "t": "numero",
+    "v": "28"
+   },
+   {
+    "e": "Rete per 12 host: ultimo ottetto del broadcast",
+    "t": "numero",
+    "v": "111"
+   }
+  ]
+ },
+ "ipv4-e-sottoreti/14": {
+  "campi": [
+   {
+    "e": "Indirizzo di rete",
+    "t": "scelta",
+    "opzioni": [
+     "172.22.16.0",
+     "172.22.23.0",
+     "172.22.0.0",
+     "172.22.20.0",
+     "172.22.23.192"
+    ],
+    "v": "172.22.16.0"
+   },
+   {
+    "e": "Indirizzo di broadcast",
+    "t": "scelta",
+    "opzioni": [
+     "172.22.23.255",
+     "172.22.31.255",
+     "172.22.23.207",
+     "172.22.255.255"
+    ],
+    "v": "172.22.23.255"
+   },
+   {
+    "e": "Primo host",
+    "t": "scelta",
+    "opzioni": [
+     "172.22.16.1",
+     "172.22.23.1",
+     "172.22.16.0",
+     "172.22.23.193"
+    ],
+    "v": "172.22.16.1"
+   },
+   {
+    "e": "Ultimo host",
+    "t": "scelta",
+    "opzioni": [
+     "172.22.23.254",
+     "172.22.31.254",
+     "172.22.23.255",
+     "172.22.23.206"
+    ],
+    "v": "172.22.23.254"
+   }
+  ]
+ },
+ "reti-e-modelli/1": {
+  "campi": [
+   {
+    "e": "Effetto sugli altri terminali",
+    "t": "scelta",
+    "opzioni": [
+     "Mantengono il collegamento locale",
+     "Perdono tutti il collegamento",
+     "Perdono solo l'accesso a Internet",
+     "Rallentano fino al ripristino del cavo"
+    ],
+    "v": "Mantengono il collegamento locale"
+   }
+  ]
+ },
+ "reti-e-modelli/2": {
+  "campi": [
+   {
+    "e": "Associazione appresa",
+    "t": "scelta",
+    "opzioni": [
+     "C sulla porta $7$",
+     "D sulla porta $7$",
+     "C e D sulla porta $7$",
+     "Nessuna associazione"
+    ],
+    "v": "C sulla porta $7$"
+   }
+  ]
+ },
+ "reti-e-modelli/3": {
+  "campi": [
+   {
+    "e": "Unità di dati",
+    "t": "scelta",
+    "opzioni": [
+     "Frame",
+     "Pacchetto",
+     "Segmento",
+     "Datagramma",
+     "Bit"
+    ],
+    "v": "Frame"
+   }
+  ]
+ },
+ "reti-e-modelli/6": {
+  "campi": [
+   {
+    "e": "Porte usate per l'inoltro",
+    "t": "scelta",
+    "opzioni": [
+     "Le altre porte idonee della stessa VLAN",
+     "Solo la porta di ingresso",
+     "Tutte le porte di tutte le VLAN",
+     "Nessuna: il frame viene scartato",
+     "Solo la porta verso il router"
+    ],
+    "v": "Le altre porte idonee della stessa VLAN"
+   }
+  ]
+ },
+ "reti-e-modelli/7": {
+  "campi": [
+   {
+    "e": "Guasto",
+    "t": "scelta",
+    "opzioni": [
+     "Spegnimento dello switch centrale",
+     "Guasto del cavo di un terminale",
+     "Guasto del router verso Internet",
+     "Guasto della scheda di rete di un PC"
+    ],
+    "v": "Spegnimento dello switch centrale"
+   }
+  ]
+ },
+ "reti-e-modelli/9": {
+  "campi": [
+   {
+    "e": "Campo del pacchetto IP",
+    "t": "scelta",
+    "opzioni": [
+     "IP di destinazione",
+     "IP sorgente",
+     "MAC di destinazione",
+     "Porta di destinazione",
+     "TTL"
+    ],
+    "v": "IP di destinazione"
+   }
+  ]
+ },
+ "reti-e-modelli/10": {
+  "campi": [
+   {
+    "e": "Classificazione della rete dell'operatore",
+    "t": "scelta",
+    "opzioni": [
+     "LAN",
+     "MAN",
+     "WAN",
+     "PAN"
+    ],
+    "v": "WAN"
+   }
+  ]
+ },
+ "reti-e-modelli/11": {
+  "campi": [
+   {
+    "e": "MAC destinazione prima del router",
+    "t": "scelta",
+    "opzioni": [
+     "R1",
+     "R2",
+     "A",
+     "B"
+    ],
+    "v": "R1"
+   },
+   {
+    "e": "MAC destinazione dopo il router",
+    "t": "scelta",
+    "opzioni": [
+     "R1",
+     "R2",
+     "A",
+     "B"
+    ],
+    "v": "B"
+   }
+  ]
+ },
+ "reti-e-modelli/13": {
+  "campi": [
+   {
+    "e": "Uscite del frame da X per Y",
+    "t": "scelta",
+    "opzioni": [
+     "Porte $2$, $3$ e $4$",
+     "Solo la porta $3$",
+     "Porte $1$, $2$, $3$ e $4$",
+     "Nessuna porta"
+    ],
+    "v": "Porte $2$, $3$ e $4$"
+   },
+   {
+    "e": "Uscite della risposta da Y per X",
+    "t": "scelta",
+    "opzioni": [
+     "Solo la porta $1$",
+     "Porte $1$, $2$ e $4$",
+     "Porte $1$, $2$, $3$ e $4$",
+     "Solo la porta $3$"
+    ],
+    "v": "Solo la porta $1$"
+   },
+   {
+    "e": "Stato finale della tabella",
+    "t": "scelta",
+    "opzioni": [
+     "X sulla porta $1$ e Y sulla porta $3$",
+     "Solo X sulla porta $1$",
+     "Solo Y sulla porta $3$",
+     "X sulla porta $3$ e Y sulla porta $1$"
+    ],
+    "v": "X sulla porta $1$ e Y sulla porta $3$"
+   }
+  ]
+ },
+ "simulazione-scientifica/1": {
+  "campi": [
+   {
+    "e": "Condizione iniziale",
+    "t": "scelta",
+    "opzioni": [
+     "La temperatura del corpo al tempo $t=0$",
+     "La temperatura dell'ambiente $T_a$",
+     "La costante di raffreddamento $k$",
+     "Il passo temporale $h$"
+    ],
+    "v": "La temperatura del corpo al tempo $t=0$"
+   }
+  ]
+ },
+ "simulazione-scientifica/6": {
+  "campi": [
+   {
+    "e": "Dati da confrontare con le previsioni",
+    "t": "scelta",
+    "opzioni": [
+     "Misure indipendenti da quelle di calibrazione, agli stessi istanti e nelle stesse unità delle previsioni",
+     "Le stesse misure usate per stimare i parametri",
+     "Le previsioni ottenute con un passo più piccolo",
+     "Misure raccolte a istanti qualsiasi, anche in unità diverse"
+    ],
+    "v": "Misure indipendenti da quelle di calibrazione, agli stessi istanti e nelle stesse unità delle previsioni"
+   }
+  ]
+ },
+ "simulazione-scientifica/8": {
+  "campi": [
+   {
+    "e": "Unità di $k$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{s}^{-1}$",
+     "$\\mathrm{s}$",
+     "adimensionale",
+     "$\\mathrm{s}^{2}$"
+    ],
+    "v": "$\\mathrm{s}^{-1}$"
+   }
+  ]
+ },
+ "simulazione-scientifica/9": {
+  "campi": [
+   {
+    "e": "Temperatura dopo il primo passo",
+    "t": "scelta",
+    "opzioni": [
+     "Rimane uguale a $T_a$",
+     "Diminuisce",
+     "Aumenta",
+     "Diventa zero"
+    ],
+    "v": "Rimane uguale a $T_a$"
+   }
+  ]
+ },
+ "simulazione-scientifica/11": {
+  "campi": [
+   {
+    "e": "Prima previsione",
+    "t": "numero",
+    "v": "50",
+    "u": "°C"
+   },
+   {
+    "e": "Seconda previsione",
+    "t": "numero",
+    "v": "42{,}5",
+    "u": "°C"
+   },
+   {
+    "e": "Terza previsione",
+    "t": "numero",
+    "v": "36{,}875",
+    "u": "°C"
+   },
+   {
+    "e": "Primo residuo",
+    "t": "numero",
+    "v": "1",
+    "u": "°C"
+   },
+   {
+    "e": "Secondo residuo",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "°C"
+   },
+   {
+    "e": "Terzo residuo",
+    "t": "numero",
+    "v": "0{,}125",
+    "u": "°C"
+   },
+   {
+    "e": "MAE",
+    "t": "numero",
+    "v": "0{,}875",
+    "u": "°C"
+   }
+  ]
+ },
+ "simulazione-scientifica/12": {
+  "campi": [
+   {
+    "e": "Errore assoluto con un passo da $1$",
+    "t": "numero",
+    "v": "1{,}47"
+   },
+   {
+    "e": "Errore assoluto con due passi da $0{,}5$",
+    "t": "numero",
+    "v": "0{,}47"
+   }
+  ]
+ },
+ "simulazione-scientifica/13": {
+  "campi": [
+   {
+    "e": "$x_2$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   },
+   {
+    "e": "Differenza fra la posizione esatta e la stima",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   }
+  ]
+ },
+ "simulazione-scientifica/14": {
+  "campi": [
+   {
+    "e": "Formula in B3",
+    "t": "scelta",
+    "opzioni": [
+     "`=B2-$F$1*$E$1*(B2-$D$1)`",
+     "`=B2-F1*E1*(B2-D1)`",
+     "`=B2+$F$1*$E$1*(B2-$D$1)`",
+     "`=$B$2-$F$1*$E$1*($B$2-$D$1)`"
+    ],
+    "v": "`=B2-$F$1*$E$1*(B2-$D$1)`"
+   }
+  ]
+ }
+}

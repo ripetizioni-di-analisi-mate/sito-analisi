@@ -77,3 +77,15 @@ Alla fine scrivi nel file `/home/claude/chiavi-lavoro/<materia>__<argomento>.not
 - `errori_soluzione`: gli errori che hai trovato nelle soluzioni del sito (esercizio, che cosa c'è scritto, che cosa dovrebbe esserci, conto che lo dimostra).
 
 Nella risposta finale riporta solo questi tre punti, in breve.
+
+## Aggiornamenti dello strumento
+
+- Le caselle `valori` ora tolgono le parentesi esterne solo se racchiudono tutta la risposta: frazioni e radici in fondo all'elenco si leggono bene. Scrivi i valori come nella soluzione (anche `\frac{2}{3}`).
+- Gli intervalli con estremi infiniti ($\mathbb{R}$, $(-\infty, 1)$) ora si confrontano correttamente: usa pure la casella `intervallo`.
+- La casella `matrice` contiene solo numeri; per matrici di funzioni usa una casella `funzione` per elemento. Le caselle `funzione` non conoscono l'unità immaginaria $i$.
+- Valori arrotondati con unità: il sito ora calcola da solo la tolleranza dall'ultima cifra scritta (anche in notazione scientifica: $4{,}6 \cdot 10^{-4}$ accetta gli arrotondamenti della quarta cifra significativa), con un minimo dell'1%. Non serve più `cifre`, salvo casi particolari. Lo zero è sempre esatto.
+- Lo studente può scrivere anche `1.6e-4`. Gli intervalli con variabile maiuscola (`var: "E"`) e le disuguaglianze doppie (`0 <= E <= 4`) si leggono.
+- Insiemi: $\mathbb{R}\setminus\{a\}$ non si legge; scrivilo come unione di intervalli o con `x \neq a`.
+- Ora si leggono anche: `\mathbb{R}\setminus\{a, b\}` nelle chiavi (e «R\{a;b}», «R-{a}» scritti dallo studente); casella `valori` con un solo valore (array di un elemento); migliaia con lo spazio scritte dallo studente («32 000»).
+- Limiti infiniti: usa una casella `scelta` (+∞, −∞, 0, non esiste) invece di `numero`.
+- Ora si leggono anche i logaritmi con base (`\log_5 4` nelle chiavi, `log_5(4)` dallo studente), le potenze di funzioni (`\cos^2 x`, `cos^2(x)`) e il simbolo ℓ scritto dallo studente (vale come `l`).

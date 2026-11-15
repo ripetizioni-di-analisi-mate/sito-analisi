@@ -1,0 +1,3002 @@
+{
+ "applicazioni-lineari/1": {
+  "campi": [
+   {
+    "e": "Matrice di $f$ rispetto alle basi canoniche",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "-1"
+     ],
+     [
+      "1",
+      "1"
+     ],
+     [
+      "0",
+      "3"
+     ]
+    ]
+   },
+   {
+    "e": "$f(1, -2)$",
+    "t": "valori",
+    "v": [
+     "4",
+     "-1",
+     "-6"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "applicazioni-lineari/2": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $f_k$ è lineare",
+    "t": "intervallo",
+    "v": "\\{0\\}",
+    "var": "k"
+   }
+  ]
+ },
+ "applicazioni-lineari/3": {
+  "campi": [
+   {
+    "e": "$\\ker f$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\{(0, 0, 0)\\}$",
+     "una retta per l'origine",
+     "un piano per l'origine",
+     "$\\mathbb{R}^3$"
+    ],
+    "v": "$\\{(0, 0, 0)\\}$"
+   },
+   {
+    "e": "$\\operatorname{Im} f$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\{(0, 0, 0)\\}$",
+     "una retta per l'origine",
+     "un piano per l'origine",
+     "$\\mathbb{R}^3$"
+    ],
+    "v": "$\\mathbb{R}^3$"
+   }
+  ]
+ },
+ "applicazioni-lineari/4": {
+  "campi": [
+   {
+    "e": "Determinante della matrice di $f$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Prima componente di $f^{-1}(x, y, z)$",
+    "t": "funzione",
+    "v": "x - y + 2z",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Seconda componente di $f^{-1}(x, y, z)$",
+    "t": "funzione",
+    "v": "y - 2z",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Terza componente di $f^{-1}(x, y, z)$",
+    "t": "funzione",
+    "v": "z",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/5": {
+  "campi": [
+   {
+    "e": "Vettore di base di $\\ker f$ con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Equazione cartesiana di $\\operatorname{Im} f$",
+    "t": "equazione",
+    "v": "x + y - z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/6": {
+  "campi": [
+   {
+    "e": "$f$ è suriettiva?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$\\dim \\ker f$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "applicazioni-lineari/7": {
+  "campi": [
+   {
+    "e": "Prima componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "-3x + 2y",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Seconda componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "-2x + y",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Terza componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "3x - y",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/8": {
+  "campi": [
+   {
+    "e": "Matrice di $T$ rispetto alla base $(1, x, x^2)$",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "1",
+      "0"
+     ],
+     [
+      "0",
+      "1",
+      "2"
+     ],
+     [
+      "0",
+      "0",
+      "1"
+     ]
+    ]
+   },
+   {
+    "e": "$T$ è un isomorfismo?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$p(x)$ tale che $T(p) = x^2$",
+    "t": "funzione",
+    "v": "x^2 - 2x + 2",
+    "var": [
+     "x"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/9": {
+  "campi": [
+   {
+    "e": "Le matrici $A$ e $B$",
+    "t": "scelta",
+    "opzioni": [
+     "sono simili",
+     "non sono simili"
+    ],
+    "v": "non sono simili"
+   }
+  ]
+ },
+ "applicazioni-lineari/10": {
+  "campi": [
+   {
+    "e": "$M^{\\mathcal{B}}_{\\mathcal{C}}(f)$",
+    "t": "matrice",
+    "v": [
+     [
+      "0",
+      "2"
+     ],
+     [
+      "-1",
+      "-1"
+     ],
+     [
+      "2",
+      "0"
+     ]
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/11": {
+  "campi": [
+   {
+    "e": "Prima componente di $(g \\circ f)(x, y)$",
+    "t": "funzione",
+    "v": "2x + 2y",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Seconda componente di $(g \\circ f)(x, y)$",
+    "t": "funzione",
+    "v": "2x",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$g \\circ f$ è un isomorfismo?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "Prima componente di $(g \\circ f)^{-1}(x, y)$",
+    "t": "funzione",
+    "v": "\\frac{y}{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Seconda componente di $(g \\circ f)^{-1}(x, y)$",
+    "t": "funzione",
+    "v": "\\frac{x - y}{2}",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/12": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $f_k$ non è un isomorfismo",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ]
+   },
+   {
+    "e": "Vettore di base di $\\ker f_0$ con terza componente $-1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Equazione cartesiana di $\\operatorname{Im} f_0$",
+    "t": "equazione",
+    "v": "x - z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Vettore di base di $\\ker f_1$ con terza componente $-1$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Equazione cartesiana di $\\operatorname{Im} f_1$",
+    "t": "equazione",
+    "v": "x - y = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "applicazioni-lineari/13": {
+  "campi": [
+   {
+    "e": "L'applicazione lineare $f$",
+    "t": "scelta",
+    "opzioni": [
+     "non esiste",
+     "esiste ed è unica",
+     "esiste ma non è unica"
+    ],
+    "v": "esiste ed è unica"
+   },
+   {
+    "e": "Prima componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "x",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Seconda componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "x - y",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Terza componente di $f(x, y)$",
+    "t": "funzione",
+    "v": "y",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "$f$ è iniettiva?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "autovalori/1": {
+  "campi": [
+   {
+    "e": "Autovalori di $A$",
+    "t": "valori",
+    "v": [
+     "1",
+     "4"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore minore",
+    "t": "equazione",
+    "v": "2x + y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore maggiore",
+    "t": "equazione",
+    "v": "x - y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "autovalori/2": {
+  "campi": [
+   {
+    "e": "$k$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Autovalori di $A$",
+    "t": "valori",
+    "v": [
+     "5",
+     "-1"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore maggiore",
+    "t": "equazione",
+    "v": "x - y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore minore",
+    "t": "equazione",
+    "v": "x + 2y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "autovalori/3": {
+  "campi": [
+   {
+    "e": "Autovalori di $A$",
+    "t": "valori",
+    "v": [
+     "1",
+     "3"
+    ]
+   },
+   {
+    "e": "Molteplicità algebrica dell'autovalore maggiore",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Molteplicità geometrica dell'autovalore maggiore",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Molteplicità algebrica dell'autovalore minore",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Molteplicità geometrica dell'autovalore minore",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore maggiore",
+    "t": "equazione",
+    "v": "x - y = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Vettore di base dell'autospazio dell'autovalore minore, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "autovalori/4": {
+  "campi": [
+   {
+    "e": "Autovalore relativo all'autovettore $v$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Autovalori di $A$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ]
+   },
+   {
+    "e": "$A$ è diagonalizzabile?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "autovalori/5": {
+  "campi": [
+   {
+    "e": "Elementi diagonali di $D$ (autovalori di $A$)",
+    "t": "valori",
+    "v": [
+     "2",
+     "3"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore minore",
+    "t": "equazione",
+    "v": "x - y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore maggiore",
+    "t": "equazione",
+    "v": "x - 2y = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "autovalori/6": {
+  "campi": [
+   {
+    "e": "Elementi diagonali di $D$ (autovalori di $A$)",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "3"
+    ]
+   },
+   {
+    "e": "Autovettore dell'autovalore minore, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Autovettore dell'autovalore intermedio, con terza componente $1$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Autovettore dell'autovalore maggiore, con terza componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "autovalori/7": {
+  "campi": [
+   {
+    "e": "Autovalori di $A$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "2"
+    ]
+   },
+   {
+    "e": "Molteplicità geometrica dell'autovalore doppio",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$A$ è diagonalizzabile?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "autovalori/8": {
+  "campi": [
+   {
+    "e": "Autovalore reale di $A$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Vettore di base del relativo autospazio, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$A$ è diagonalizzabile su $\\mathbb{R}$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "autovalori/9": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $A$ è diagonalizzabile",
+    "t": "intervallo",
+    "v": "(0, +\\infty)",
+    "var": "k"
+   }
+  ]
+ },
+ "autovalori/10": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $A$ è diagonalizzabile",
+    "t": "intervallo",
+    "v": "\\{0\\}",
+    "var": "k"
+   }
+  ]
+ },
+ "autovalori/11": {
+  "campi": [
+   {
+    "e": "Elemento di posto $(1, 1)$ di $A^n$, con $n$ pari",
+    "t": "funzione",
+    "v": "2 - 2^n",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(1, 2)$ di $A^n$, con $n$ pari",
+    "t": "funzione",
+    "v": "2^n - 1",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2, 1)$ di $A^n$, con $n$ pari",
+    "t": "funzione",
+    "v": "2 - 2^{n+1}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2, 2)$ di $A^n$, con $n$ pari",
+    "t": "funzione",
+    "v": "2^{n+1} - 1",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(1, 1)$ di $A^n$, con $n$ dispari",
+    "t": "funzione",
+    "v": "-2 - 2^n",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(1, 2)$ di $A^n$, con $n$ dispari",
+    "t": "funzione",
+    "v": "2^n + 1",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2, 1)$ di $A^n$, con $n$ dispari",
+    "t": "funzione",
+    "v": "-2 - 2^{n+1}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "Elemento di posto $(2, 2)$ di $A^n$, con $n$ dispari",
+    "t": "funzione",
+    "v": "2^{n+1} + 1",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "autovalori/12": {
+  "campi": [
+   {
+    "e": "Autovalori di $f$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Molteplicità algebrica dell'autovalore",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Autospazio dell'autovalore",
+    "t": "scelta",
+    "opzioni": [
+     "i polinomi costanti",
+     "i polinomi di grado al più $1$",
+     "i multipli di $x$",
+     "tutto $\\mathbb{R}_2[x]$"
+    ],
+    "v": "i polinomi costanti"
+   },
+   {
+    "e": "$f$ è diagonalizzabile?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "autovalori/13": {
+  "campi": [
+   {
+    "e": "Autovalori di $f$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore maggiore",
+    "t": "equazione",
+    "v": "x - y + z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Vettore di base dell'autospazio dell'autovalore minore, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$f$ è diagonalizzabile?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "Matrice di $f$ rispetto alla base canonica",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "1",
+      "-1"
+     ],
+     [
+      "0",
+      "2",
+      "0"
+     ],
+     [
+      "-1",
+      "1",
+      "1"
+     ]
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/1": {
+  "campi": [
+   {
+    "e": "Tipo di conica",
+    "t": "scelta",
+    "opzioni": [
+     "ellisse reale",
+     "ellisse immaginaria",
+     "iperbole",
+     "iperbole equilatera",
+     "parabola",
+     "conica degenere"
+    ],
+    "v": "iperbole"
+   }
+  ]
+ },
+ "coniche-e-quadriche/2": {
+  "campi": [
+   {
+    "e": "Tipo di conica",
+    "t": "scelta",
+    "opzioni": [
+     "ellisse reale",
+     "ellisse immaginaria",
+     "iperbole",
+     "iperbole equilatera",
+     "parabola",
+     "conica degenere"
+    ],
+    "v": "ellisse reale"
+   }
+  ]
+ },
+ "coniche-e-quadriche/3": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica nelle coordinate $X$, $Y$",
+    "t": "equazione",
+    "v": "x^2 - \\frac{y^2}{4} = 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/4": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica nelle coordinate $X$, $Y$",
+    "t": "equazione",
+    "v": "\\frac{x^2}{2} + y^2 = 1",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Semiassi",
+    "t": "valori",
+    "v": [
+     "\\sqrt{2}",
+     "1"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/5": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Asintoto con coefficiente angolare negativo",
+    "t": "equazione",
+    "v": "x + y - 1 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Asintoto con coefficiente angolare positivo",
+    "t": "equazione",
+    "v": "x - 3y + 3 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/6": {
+  "campi": [
+   {
+    "e": "Asse",
+    "t": "equazione",
+    "v": "2x - y - 1 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Vertice",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica nelle coordinate $X$, $Y$",
+    "t": "equazione",
+    "v": "y^2 = 2\\sqrt{5}\\, x",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/7": {
+  "campi": [
+   {
+    "e": "Asse",
+    "t": "equazione",
+    "v": "x + y - 2 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Vertice",
+    "t": "valori",
+    "v": [
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica nelle coordinate $X$, $Y$",
+    "t": "equazione",
+    "v": "y^2 = 4\\sqrt{2}\\, x",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/8": {
+  "campi": [
+   {
+    "e": "Valore di $k$ per cui la conica è degenere",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Per questo valore di $k$ la conica è formata da",
+    "t": "scelta",
+    "opzioni": [
+     "due rette incidenti",
+     "due rette parallele distinte",
+     "una retta contata due volte",
+     "un solo punto reale"
+    ],
+    "v": "due rette incidenti"
+   },
+   {
+    "e": "Valore di $k$ per cui la conica è una parabola",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Valori di $k$ per cui la conica è un'ellisse reale",
+    "t": "intervallo",
+    "v": "(4, +\\infty)",
+    "var": "k"
+   },
+   {
+    "e": "Valori di $k$ per cui la conica è un'iperbole",
+    "t": "intervallo",
+    "v": "(-\\infty, 0) \\cup (0, 4)",
+    "var": "k"
+   },
+   {
+    "e": "Valore di $k$ per cui l'iperbole è equilatera",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "coniche-e-quadriche/9": {
+  "campi": [
+   {
+    "e": "Valore di $k$ per cui la conica è degenere",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Per questo valore di $k$ la conica è formata da",
+    "t": "scelta",
+    "opzioni": [
+     "due rette incidenti",
+     "due rette parallele distinte",
+     "una retta contata due volte",
+     "un solo punto reale"
+    ],
+    "v": "due rette parallele distinte"
+   },
+   {
+    "e": "Valori di $k$ per cui la conica è un'ellisse reale",
+    "t": "intervallo",
+    "v": "(1, +\\infty)",
+    "var": "k"
+   },
+   {
+    "e": "Valori di $k$ per cui la conica è un'iperbole",
+    "t": "intervallo",
+    "v": "(-\\infty, 1)",
+    "var": "k"
+   },
+   {
+    "e": "Valore di $k$ per cui l'iperbole è equilatera",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "coniche-e-quadriche/10": {
+  "campi": [
+   {
+    "e": "La conica è formata da",
+    "t": "scelta",
+    "opzioni": [
+     "due rette incidenti",
+     "due rette parallele distinte",
+     "una retta contata due volte",
+     "un solo punto reale"
+    ],
+    "v": "due rette parallele distinte"
+   },
+   {
+    "e": "Retta che interseca l'asse $x$ nel punto di ascissa negativa",
+    "t": "equazione",
+    "v": "x - 2y + 3 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   },
+   {
+    "e": "Retta che interseca l'asse $x$ nel punto di ascissa positiva",
+    "t": "equazione",
+    "v": "x - 2y - 1 = 0",
+    "var": [
+     "x",
+     "y"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/11": {
+  "campi": [
+   {
+    "e": "Tipo di quadrica",
+    "t": "scelta",
+    "opzioni": [
+     "ellissoide",
+     "iperboloide a una falda",
+     "iperboloide a due falde",
+     "paraboloide ellittico",
+     "paraboloide iperbolico",
+     "cono"
+    ],
+    "v": "iperboloide a una falda"
+   },
+   {
+    "e": "Centro",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Forma canonica nelle coordinate $X$, $Y$, $Z$",
+    "t": "equazione",
+    "v": "\\frac{x^2}{2} + \\frac{y^2}{2} - z^2 = 1",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "coniche-e-quadriche/12": {
+  "campi": [
+   {
+    "e": "Tipo di quadrica",
+    "t": "scelta",
+    "opzioni": [
+     "ellissoide",
+     "iperboloide a una falda",
+     "iperboloide a due falde",
+     "paraboloide ellittico",
+     "paraboloide iperbolico",
+     "cono"
+    ],
+    "v": "paraboloide ellittico"
+   }
+  ]
+ },
+ "coniche-e-quadriche/13": {
+  "campi": [
+   {
+    "e": "Per $k > 0$ la quadrica è",
+    "t": "scelta",
+    "opzioni": [
+     "ellissoide",
+     "iperboloide a una falda",
+     "iperboloide a due falde",
+     "paraboloide ellittico",
+     "paraboloide iperbolico",
+     "cono"
+    ],
+    "v": "ellissoide"
+   },
+   {
+    "e": "Per $k = 0$ la quadrica è",
+    "t": "scelta",
+    "opzioni": [
+     "ellissoide",
+     "iperboloide a una falda",
+     "iperboloide a due falde",
+     "paraboloide ellittico",
+     "paraboloide iperbolico",
+     "cono"
+    ],
+    "v": "paraboloide ellittico"
+   },
+   {
+    "e": "Per $k < 0$ la quadrica è",
+    "t": "scelta",
+    "opzioni": [
+     "ellissoide",
+     "iperboloide a una falda",
+     "iperboloide a due falde",
+     "paraboloide ellittico",
+     "paraboloide iperbolico",
+     "cono"
+    ],
+    "v": "iperboloide a due falde"
+   }
+  ]
+ },
+ "determinanti/2": {
+  "campi": [
+   {
+    "e": "Determinante",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "determinanti/6": {
+  "campi": [
+   {
+    "e": "Area del triangolo $PQR$",
+    "t": "numero",
+    "v": "\\frac{15}{2}"
+   }
+  ]
+ },
+ "determinanti/7": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "-7"
+     ],
+     [
+      "-1",
+      "4"
+     ]
+    ]
+   }
+  ]
+ },
+ "determinanti/8": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "\\frac{5}{2}",
+      "-\\frac{3}{2}",
+      "\\frac{1}{2}"
+     ],
+     [
+      "-\\frac{3}{2}",
+      "\\frac{3}{2}",
+      "-\\frac{1}{2}"
+     ],
+     [
+      "\\frac{1}{2}",
+      "-\\frac{1}{2}",
+      "\\frac{1}{2}"
+     ]
+    ]
+   }
+  ]
+ },
+ "determinanti/9": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $A_k$ è invertibile",
+    "t": "intervallo",
+    "v": "(-\\infty, -\\sqrt{2}) \\cup (-\\sqrt{2}, 0) \\cup (0, \\sqrt{2}) \\cup (\\sqrt{2}, +\\infty)",
+    "var": "k"
+   }
+  ]
+ },
+ "determinanti/10": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $A_k$ è invertibile",
+    "t": "intervallo",
+    "v": "(-\\infty, -2) \\cup (-2, -1) \\cup (-1, 1) \\cup (1, 2) \\cup (2, +\\infty)",
+    "var": "k"
+   }
+  ]
+ },
+ "determinanti/12": {
+  "campi": [
+   {
+    "e": "$X$",
+    "t": "matrice",
+    "v": [
+     [
+      "-1",
+      "1"
+     ],
+     [
+      "-3",
+      "2"
+     ]
+    ]
+   }
+  ]
+ },
+ "determinanti/13": {
+  "campi": [
+   {
+    "e": "Valori possibili di $\\det A$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "matrici/1": {
+  "campi": [
+   {
+    "e": "$2A - 3B$",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "-3",
+      "-5"
+     ],
+     [
+      "1",
+      "9",
+      "-4"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/2": {
+  "campi": [
+   {
+    "e": "$X$",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "0"
+     ],
+     [
+      "1",
+      "1"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/3": {
+  "campi": [
+   {
+    "e": "Prodotti definiti",
+    "t": "scelta",
+    "opzioni": [
+     "solo $AB$",
+     "solo $BA$",
+     "entrambi",
+     "nessuno dei due"
+    ],
+    "v": "entrambi"
+   },
+   {
+    "e": "$AB$",
+    "t": "matrice",
+    "v": [
+     [
+      "4",
+      "-2",
+      "1"
+     ],
+     [
+      "-1",
+      "1",
+      "0"
+     ],
+     [
+      "7",
+      "-1",
+      "3"
+     ]
+    ]
+   },
+   {
+    "e": "$BA$",
+    "t": "matrice",
+    "v": [
+     [
+      "5",
+      "5"
+     ],
+     [
+      "1",
+      "3"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/4": {
+  "campi": [
+   {
+    "e": "Le matrici $A$ e $B$",
+    "t": "scelta",
+    "opzioni": [
+     "commutano",
+     "non commutano"
+    ],
+    "v": "commutano"
+   },
+   {
+    "e": "$AB$",
+    "t": "matrice",
+    "v": [
+     [
+      "3",
+      "0"
+     ],
+     [
+      "0",
+      "3"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/5": {
+  "campi": [
+   {
+    "e": "Numero dei pivot",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Colonne dei pivot",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ]
+   }
+  ]
+ },
+ "matrici/6": {
+  "campi": [
+   {
+    "e": "Forma a scala ridotta di $A$",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "2",
+      "0",
+      "1"
+     ],
+     [
+      "0",
+      "0",
+      "1",
+      "2"
+     ],
+     [
+      "0",
+      "0",
+      "0",
+      "0"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/7": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "3",
+      "-5"
+     ],
+     [
+      "-1",
+      "2"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/8": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "-1",
+      "2",
+      "-2"
+     ],
+     [
+      "-1",
+      "0",
+      "1"
+     ],
+     [
+      "1",
+      "-1",
+      "1"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/9": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $A_k$ è invertibile",
+    "t": "intervallo",
+    "v": "(-\\infty, -2) \\cup (-2, 1) \\cup (1, +\\infty)",
+    "var": "k"
+   }
+  ]
+ },
+ "matrici/10": {
+  "campi": [
+   {
+    "e": "$A^n$ per $n$ pari",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "0"
+     ],
+     [
+      "0",
+      "1"
+     ]
+    ]
+   },
+   {
+    "e": "$A^n$ per $n$ dispari",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "1"
+     ],
+     [
+      "0",
+      "-1"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/11": {
+  "campi": [
+   {
+    "e": "$X$",
+    "t": "matrice",
+    "v": [
+     [
+      "1",
+      "-1"
+     ],
+     [
+      "-1",
+      "2"
+     ]
+    ]
+   }
+  ]
+ },
+ "matrici/12": {
+  "campi": [
+   {
+    "e": "Forma delle matrici $X$ che commutano con $A$, con $a, b \\in \\mathbb{R}$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\begin{pmatrix} a & b \\\\ -b & a \\end{pmatrix}$",
+     "$\\begin{pmatrix} a & b \\\\ b & a \\end{pmatrix}$",
+     "$\\begin{pmatrix} a & b \\\\ 0 & a \\end{pmatrix}$",
+     "$\\begin{pmatrix} a & 0 \\\\ 0 & a \\end{pmatrix}$"
+    ],
+    "v": "$\\begin{pmatrix} a & b \\\\ -b & a \\end{pmatrix}$"
+   }
+  ]
+ },
+ "matrici/13": {
+  "campi": [
+   {
+    "e": "$A^{-1}$",
+    "t": "matrice",
+    "v": [
+     [
+      "\\frac{2}{3}",
+      "-\\frac{1}{3}"
+     ],
+     [
+      "-\\frac{1}{3}",
+      "\\frac{2}{3}"
+     ]
+    ]
+   }
+  ]
+ },
+ "prodotto-scalare/1": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ fra $u$ e $v$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "prodotto-scalare/2": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-5"
+    ]
+   }
+  ]
+ },
+ "prodotto-scalare/3": {
+  "campi": [
+   {
+    "e": "$\\operatorname{pr}_u(v)$",
+    "t": "valori",
+    "v": [
+     "2",
+     "4",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componente di $v$ ortogonale a $u$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/4": {
+  "campi": [
+   {
+    "e": "I vettori $e_1, e_2, e_3$",
+    "t": "scelta",
+    "opzioni": [
+     "formano una base ortonormale",
+     "sono ortogonali ma non tutti versori",
+     "non sono a due a due ortogonali"
+    ],
+    "v": "formano una base ortonormale"
+   },
+   {
+    "e": "Coordinate di $v$ rispetto a $e_1, e_2, e_3$",
+    "t": "valori",
+    "v": [
+     "5",
+     "1",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/5": {
+  "campi": [
+   {
+    "e": "$e_1$",
+    "t": "valori",
+    "v": [
+     "\\sqrt{2}/2",
+     "0",
+     "\\sqrt{2}/2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$e_2$",
+    "t": "valori",
+    "v": [
+     "-\\sqrt{6}/6",
+     "\\sqrt{6}/3",
+     "\\sqrt{6}/6"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/6": {
+  "campi": [
+   {
+    "e": "$e_1$",
+    "t": "valori",
+    "v": [
+     "1/2",
+     "1/2",
+     "1/2",
+     "1/2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$e_2$",
+    "t": "valori",
+    "v": [
+     "1/2",
+     "1/2",
+     "-1/2",
+     "-1/2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$e_3$",
+    "t": "valori",
+    "v": [
+     "\\sqrt{2}/2",
+     "-\\sqrt{2}/2",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/7": {
+  "campi": [
+   {
+    "e": "$e_1$",
+    "t": "valori",
+    "v": [
+     "\\sqrt{3}/3",
+     "\\sqrt{3}/3",
+     "\\sqrt{3}/3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$e_2$, scelto con prima coordinata positiva",
+    "t": "valori",
+    "v": [
+     "\\sqrt{2}/2",
+     "0",
+     "-\\sqrt{2}/2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/8": {
+  "campi": [
+   {
+    "e": "$\\dim W^\\perp$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Vettore di $W^\\perp$ della forma $(a, b, 1, 0)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vettore di $W^\\perp$ della forma $(a, b, 0, 1)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/9": {
+  "campi": [
+   {
+    "e": "$\\dim W$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Vettore di $W^\\perp$ della forma $(1, b, 0, d)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "0",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vettore di $W^\\perp$ della forma $(0, b, 1, d)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/10": {
+  "campi": [
+   {
+    "e": "$P_W(v)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$d(v, W)$",
+    "t": "numero",
+    "v": "\\sqrt{3}"
+   }
+  ]
+ },
+ "prodotto-scalare/11": {
+  "campi": [
+   {
+    "e": "$(a, b, c)$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "2",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/12": {
+  "campi": [
+   {
+    "e": "Autovalori di $A$ (elementi diagonali di $D$)",
+    "t": "valori",
+    "v": [
+     "10",
+     "-5"
+    ]
+   },
+   {
+    "e": "Colonna di $P$ relativa all'autovalore maggiore, con prima coordinata positiva",
+    "t": "valori",
+    "v": [
+     "2\\sqrt{5}/5",
+     "\\sqrt{5}/5"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Colonna di $P$ relativa all'autovalore minore, con prima coordinata positiva",
+    "t": "valori",
+    "v": [
+     "\\sqrt{5}/5",
+     "-2\\sqrt{5}/5"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "prodotto-scalare/13": {
+  "campi": [
+   {
+    "e": "Autovalore doppio",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Autovalore semplice",
+    "t": "numero",
+    "v": "-4"
+   },
+   {
+    "e": "Equazione cartesiana dell'autospazio dell'autovalore doppio",
+    "t": "equazione",
+    "v": "2x + y + 2z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Colonna di $P$ relativa all'autovalore semplice, con prima coordinata positiva",
+    "t": "valori",
+    "v": [
+     "2/3",
+     "1/3",
+     "2/3"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/1": {
+  "campi": [
+   {
+    "e": "Equazione del piano per $A$, $B$, $C$",
+    "t": "equazione",
+    "v": "x + 3y + 4z - 7 = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "rette-e-piani/2": {
+  "campi": [
+   {
+    "e": "Equazione del piano",
+    "t": "equazione",
+    "v": "x - y - z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "rette-e-piani/3": {
+  "campi": [
+   {
+    "e": "Vettore direttore $\\overrightarrow{AB}$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-1",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Equazione cartesiana della retta che non contiene $z$",
+    "t": "equazione",
+    "v": "x + 2y - 4 = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   },
+   {
+    "e": "Equazione cartesiana della retta che non contiene $x$",
+    "t": "equazione",
+    "v": "2y + z - 1 = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "rette-e-piani/4": {
+  "campi": [
+   {
+    "e": "Vettore direttore con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2",
+     "-3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto di $r$ con $z = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/5": {
+  "campi": [
+   {
+    "e": "Valore di $k$ per cui $r$ e $\\pi_k$ non sono incidenti",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Per quel valore di $k$ la retta",
+    "t": "scelta",
+    "opzioni": [
+     "è parallela al piano e non ha punti comuni",
+     "è contenuta nel piano",
+     "è perpendicolare al piano"
+    ],
+    "v": "è parallela al piano e non ha punti comuni"
+   },
+   {
+    "e": "Punto comune per $k = 0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/6": {
+  "campi": [
+   {
+    "e": "Le rette $r$ e $s$ sono",
+    "t": "scelta",
+    "opzioni": [
+     "incidenti",
+     "parallele distinte",
+     "sghembe",
+     "coincidenti"
+    ],
+    "v": "incidenti"
+   },
+   {
+    "e": "Punto comune",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/7": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ fra $\\pi_1$ e $\\pi_2$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "rette-e-piani/8": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ fra $r$ e $\\pi$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{6}"
+   }
+  ]
+ },
+ "rette-e-piani/10": {
+  "campi": [
+   {
+    "e": "Distanza di $P$ da $r$",
+    "t": "numero",
+    "v": "2\\sqrt{2}"
+   },
+   {
+    "e": "Proiezione ortogonale di $P$ su $r$",
+    "t": "valori",
+    "v": [
+     "2",
+     "3",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/11": {
+  "campi": [
+   {
+    "e": "$H$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$P'$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "rette-e-piani/12": {
+  "campi": [
+   {
+    "e": "Equazione del piano",
+    "t": "equazione",
+    "v": "3x - y + z - 3 = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "rette-e-piani/13": {
+  "campi": [
+   {
+    "e": "Distanza fra $r$ e $s$",
+    "t": "numero",
+    "v": "2\\sqrt{3}"
+   },
+   {
+    "e": "Punto di minima distanza su $r$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Punto di minima distanza su $s$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-1",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/1": {
+  "campi": [
+   {
+    "e": "Soluzione $(x, y, z)$",
+    "t": "valori",
+    "v": [
+     "3",
+     "-1",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/2": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una sola",
+     "$\\infty^1$",
+     "$\\infty^2$"
+    ],
+    "v": "$\\infty^1$"
+   },
+   {
+    "e": "Soluzione $(x, y, z)$ con $z = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/3": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una sola",
+     "$\\infty^1$",
+     "$\\infty^2$"
+    ],
+    "v": "$\\infty^2$"
+   },
+   {
+    "e": "Soluzione $(x_1, x_2, x_3, x_4)$ con $x_2 = x_4 = 0$",
+    "t": "valori",
+    "v": [
+     "-3",
+     "0",
+     "2",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/4": {
+  "campi": [
+   {
+    "e": "Il sistema",
+    "t": "scelta",
+    "opzioni": [
+     "ha una sola soluzione",
+     "ha infinite soluzioni",
+     "non ha soluzioni"
+    ],
+    "v": "non ha soluzioni"
+   }
+  ]
+ },
+ "sistemi-lineari/6": {
+  "campi": [
+   {
+    "e": "Valore di $k$ per cui $\\operatorname{rk} A < 3$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\operatorname{rk} A$ per tali valori di $k$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\operatorname{rk} A$ per gli altri valori di $k$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "sistemi-lineari/7": {
+  "campi": [
+   {
+    "e": "$\\operatorname{rk} A$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\operatorname{rk} (A \\mid b)$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Numero di soluzioni",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una sola",
+     "$\\infty^1$",
+     "$\\infty^2$"
+    ],
+    "v": "$\\infty^2$"
+   },
+   {
+    "e": "Soluzione $(x_1, x_2, x_3, x_4)$ con $x_3 = x_4 = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/8": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "numero",
+    "v": "7"
+   },
+   {
+    "e": "Soluzione $(x, y, z)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/9": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "-\\frac{1}{3}"
+   }
+  ]
+ },
+ "sistemi-lineari/10": {
+  "campi": [
+   {
+    "e": "Dimensione dello spazio delle soluzioni",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Soluzione con $x_3 = 2$, $x_4 = 0$",
+    "t": "valori",
+    "v": [
+     "-3",
+     "1",
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Soluzione con $x_3 = 0$, $x_4 = 2$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "-1",
+     "0",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/11": {
+  "campi": [
+   {
+    "e": "Soluzione particolare con $y = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Soluzione del sistema omogeneo associato con $y = 1$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/12": {
+  "campi": [
+   {
+    "e": "$\\det A$",
+    "t": "funzione",
+    "v": "-k(k - 2)",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Valori di $k$ per cui $\\det A = 0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   },
+   {
+    "e": "Soluzione per gli altri valori di $k$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Numero di soluzioni per $k = 2$",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una sola",
+     "$\\infty^1$",
+     "$\\infty^2$"
+    ],
+    "v": "$\\infty^1$"
+   },
+   {
+    "e": "Soluzione per $k = 2$ con $z = 1$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Numero di soluzioni per $k = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una sola",
+     "$\\infty^1$",
+     "$\\infty^2$"
+    ],
+    "v": "$\\infty^1$"
+   },
+   {
+    "e": "Soluzione per $k = 0$ con $z = 1$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "2",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/13": {
+  "campi": [
+   {
+    "e": "Valore di $k$ per cui il sistema è compatibile",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Soluzione $(x, y)$",
+    "t": "valori",
+    "v": [
+     "3",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/1": {
+  "campi": [
+   {
+    "e": "$W$ è un sottospazio di $\\mathbb{R}^3$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "$\\dim W$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Vettore di $W$ con $y = 1$",
+    "t": "valori",
+    "v": [
+     "3",
+     "1",
+     "4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/2": {
+  "campi": [
+   {
+    "e": "$W$ è un sottospazio di $\\mathbb{R}^2$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no, perché non contiene il vettore nullo",
+     "no, perché non è chiuso rispetto alla somma",
+     "no, perché non è chiuso rispetto al prodotto per uno scalare"
+    ],
+    "v": "no, perché non è chiuso rispetto alla somma"
+   }
+  ]
+ },
+ "spazi-vettoriali/3": {
+  "campi": [
+   {
+    "e": "Una base di $W$",
+    "t": "scelta",
+    "opzioni": [
+     "$(1, x^2)$",
+     "$(x, x^3)$",
+     "$(1, x^2, x^3)$",
+     "$(1, x, x^2)$"
+    ],
+    "v": "$(1, x^2)$"
+   },
+   {
+    "e": "$\\dim W$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "spazi-vettoriali/4": {
+  "campi": [
+   {
+    "e": "I vettori sono",
+    "t": "scelta",
+    "opzioni": [
+     "linearmente indipendenti",
+     "linearmente dipendenti"
+    ],
+    "v": "linearmente dipendenti"
+   },
+   {
+    "e": "Coefficienti $(a, b)$ con $v_3 = a\\,v_1 + b\\,v_2$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/5": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui i vettori sono indipendenti",
+    "t": "intervallo",
+    "v": "k \\neq -1",
+    "var": "k"
+   }
+  ]
+ },
+ "spazi-vettoriali/6": {
+  "campi": [
+   {
+    "e": "Le matrici formano una base di $M_2(\\mathbb{R})$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   },
+   {
+    "e": "Dimensione del sottospazio generato",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "spazi-vettoriali/7": {
+  "campi": [
+   {
+    "e": "$\\dim W$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Vettore di $W$ con $x_2 = 1$, $x_3 = 0$, $x_4 = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vettore di $W$ con $x_2 = 0$, $x_3 = 1$, $x_4 = 0$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vettore di $W$ con $x_2 = 0$, $x_3 = 0$, $x_4 = 1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/8": {
+  "campi": [
+   {
+    "e": "Coordinate di $p$ rispetto a $\\mathcal{B}$",
+    "t": "valori",
+    "v": [
+     "5",
+     "-7",
+     "5"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/9": {
+  "campi": [
+   {
+    "e": "$\\dim W$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Equazione cartesiana di $W$",
+    "t": "equazione",
+    "v": "x + 3y - 2z = 0",
+    "var": [
+     "x",
+     "y",
+     "z"
+    ]
+   }
+  ]
+ },
+ "spazi-vettoriali/10": {
+  "campi": [
+   {
+    "e": "Colonne dei pivot nella riduzione a scala delle righe $v_2$, $v_1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "3"
+    ]
+   },
+   {
+    "e": "Numero di vettori della base canonica da aggiungere",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "spazi-vettoriali/11": {
+  "campi": [
+   {
+    "e": "Coefficienti $(a_1, a_2, a_3, a_4)$ dell'equazione $a_1 x_1 + a_2 x_2 + a_3 x_3 + a_4 x_4 = 0$ di $W$ con $a_4 = 0$ e $a_1 = 1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Coefficienti $(a_1, a_2, a_3, a_4)$ dell'equazione di $W$ con $a_1 = a_2 = 0$ e $a_3 = 1$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0",
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "spazi-vettoriali/12": {
+  "campi": [
+   {
+    "e": "$\\dim (U \\cap W)$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Vettore di $U \\cap W$ con $x_1 = 1$, $x_3 = 0$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Vettore di $U \\cap W$ con $x_1 = 0$, $x_3 = 1$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0",
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\dim (U + W)$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "spazi-vettoriali/13": {
+  "campi": [
+   {
+    "e": "Valori di $k$ per cui $\\mathbb{R}^3 = U \\oplus W_k$",
+    "t": "intervallo",
+    "v": "k \\neq 0",
+    "var": "k"
+   }
+  ]
+ },
+ "vettori/1": {
+  "campi": [
+   {
+    "e": "$3\\vec{u} - 2\\vec{v}$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "12",
+     "-4",
+     "3"
+    ]
+   },
+   {
+    "e": "$\\lvert 3\\vec{u} - 2\\vec{v} \\rvert$",
+    "t": "numero",
+    "v": "13"
+   }
+  ]
+ },
+ "vettori/2": {
+  "campi": [
+   {
+    "e": "$d(A, B)$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Punto medio del segmento $AB$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "0",
+     "4"
+    ]
+   },
+   {
+    "e": "Versore di $\\overrightarrow{AB}$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2/3",
+     "1/3",
+     "2/3"
+    ]
+   }
+  ]
+ },
+ "vettori/3": {
+  "campi": [
+   {
+    "e": "Coefficiente di $\\vec{u}$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Coefficiente di $\\vec{v}$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "vettori/4": {
+  "campi": [
+   {
+    "e": "Angolo $\\theta$ (in radianti)",
+    "t": "numero",
+    "v": "\\frac{5\\pi}{6}"
+   }
+  ]
+ },
+ "vettori/5": {
+  "campi": [
+   {
+    "e": "Angolo in $A$ (in radianti)",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3}"
+   },
+   {
+    "e": "Angolo in $B$ (in radianti)",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3}"
+   },
+   {
+    "e": "Angolo in $C$ (in radianti)",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3}"
+   }
+  ]
+ },
+ "vettori/6": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-4"
+    ]
+   }
+  ]
+ },
+ "vettori/7": {
+  "campi": [
+   {
+    "e": "$\\vec{v}_{\\parallel}$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "4",
+     "4"
+    ]
+   },
+   {
+    "e": "$\\vec{v}_{\\perp}$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "0",
+     "1"
+    ]
+   }
+  ]
+ },
+ "vettori/8": {
+  "campi": [
+   {
+    "e": "Versore con la prima componente positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2/3",
+     "1/3",
+     "2/3"
+    ]
+   },
+   {
+    "e": "Versore con la prima componente negativa",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2/3",
+     "-1/3",
+     "-2/3"
+    ]
+   }
+  ]
+ },
+ "vettori/9": {
+  "campi": [
+   {
+    "e": "Area del triangolo $ABC$",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "vettori/10": {
+  "campi": [
+   {
+    "e": "Distanza di $O$ dalla retta $AB$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "vettori/11": {
+  "campi": [
+   {
+    "e": "Valore di $k$",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "vettori/12": {
+  "campi": [
+   {
+    "e": "Volume del tetraedro $ABCD$",
+    "t": "numero",
+    "v": "\\frac{3}{2}"
+   }
+  ]
+ },
+ "vettori/13": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2"
+    ]
+   }
+  ]
+ }
+}

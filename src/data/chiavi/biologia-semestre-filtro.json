@@ -1,0 +1,1451 @@
+{
+ "ciclo-cellulare/1": {
+  "campi": [
+   {
+    "e": "Significato di MOMP",
+    "t": "scelta",
+    "opzioni": [
+     "Permeabilizzazione della membrana mitocondriale esterna",
+     "Permeabilizzazione della membrana mitocondriale interna",
+     "Depolarizzazione della membrana plasmatica",
+     "Rottura dell'involucro nucleare"
+    ],
+    "v": "Permeabilizzazione della membrana mitocondriale esterna"
+   }
+  ]
+ },
+ "ciclo-cellulare/2": {
+  "campi": [
+   {
+    "e": "Complesso che si assembla",
+    "t": "scelta",
+    "opzioni": [
+     "Apoptosoma",
+     "DISC",
+     "Proteasoma",
+     "Inflammasoma",
+     "Complesso ciclina-CDK"
+    ],
+    "v": "Apoptosoma"
+   }
+  ]
+ },
+ "ciclo-cellulare/3": {
+  "campi": [
+   {
+    "e": "Significato di G0",
+    "t": "scelta",
+    "opzioni": [
+     "Stato esterno al ciclo proliferativo, con reversibilità dipendente dal tipo cellulare",
+     "Stato esterno al ciclo, sempre irreversibile",
+     "Prima parte della fase G1, attraversata da ogni cellula che si divide",
+     "Fase di sintesi del DNA"
+    ],
+    "v": "Stato esterno al ciclo proliferativo, con reversibilità dipendente dal tipo cellulare"
+   }
+  ]
+ },
+ "ciclo-cellulare/4": {
+  "campi": [
+   {
+    "e": "Funzione generale dei punti di controllo",
+    "t": "scelta",
+    "opzioni": [
+     "Coordinare la progressione con requisiti come integrità del DNA e attacco al fuso",
+     "Riparare direttamente i danni al DNA",
+     "Sintetizzare le cicline necessarie a ogni fase",
+     "Indurre sempre l'apoptosi delle cellule danneggiate"
+    ],
+    "v": "Coordinare la progressione con requisiti come integrità del DNA e attacco al fuso"
+   }
+  ]
+ },
+ "ciclo-cellulare/5": {
+  "campi": [
+   {
+    "e": "Modi in cui varia l'attività dei complessi ciclina-CDK",
+    "t": "scelta",
+    "opzioni": [
+     "Sintesi o degradazione di cicline, fosforilazioni e inibitori",
+     "Solo variazione della quantità di CDK",
+     "Solo legame di inibitori",
+     "Solo variazione della trascrizione dei geni delle CDK"
+    ],
+    "v": "Sintesi o degradazione di cicline, fosforilazioni e inibitori"
+   }
+  ]
+ },
+ "ciclo-cellulare/6": {
+  "campi": [
+   {
+    "e": "Il punto di restrizione coincide necessariamente con ogni controllo del danno al DNA?",
+    "t": "scelta",
+    "opzioni": [
+     "Sì",
+     "No"
+    ],
+    "v": "No"
+   }
+  ]
+ },
+ "ciclo-cellulare/7": {
+  "campi": [
+   {
+    "e": "La stabilizzazione di p53 determina sempre e soltanto apoptosi immediata?",
+    "t": "scelta",
+    "opzioni": [
+     "Sì",
+     "No"
+    ],
+    "v": "No"
+   }
+  ]
+ },
+ "ciclo-cellulare/8": {
+  "campi": [
+   {
+    "e": "Via bersaglio di E6",
+    "t": "scelta",
+    "opzioni": [
+     "p53",
+     "Rb",
+     "E2F",
+     "Ras",
+     "APC/C"
+    ],
+    "v": "p53"
+   },
+   {
+    "e": "Via bersaglio di E7",
+    "t": "scelta",
+    "opzioni": [
+     "p53",
+     "Rb",
+     "E2F",
+     "Ras",
+     "APC/C"
+    ],
+    "v": "Rb"
+   }
+  ]
+ },
+ "ciclo-cellulare/9": {
+  "campi": [
+   {
+    "e": "Evento che accompagna la rottura dell'involucro",
+    "t": "scelta",
+    "opzioni": [
+     "Disassemblaggio regolato della lamina nucleare",
+     "Degradazione della ciclina B",
+     "Duplicazione dei centrosomi",
+     "Separazione dei cromatidi fratelli",
+     "Formazione dell'anello contrattile"
+    ],
+    "v": "Disassemblaggio regolato della lamina nucleare"
+   }
+  ]
+ },
+ "ciclo-cellulare/10": {
+  "campi": [
+   {
+    "e": "Biorientazione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "I cinetocori fratelli sono collegati a poli opposti",
+     "I cinetocori fratelli sono collegati allo stesso polo",
+     "Un solo cinetocoro è collegato al fuso",
+     "Un cinetocoro è collegato a entrambi i poli"
+    ],
+    "v": "I cinetocori fratelli sono collegati a poli opposti"
+   }
+  ]
+ },
+ "ciclo-cellulare/11": {
+  "campi": [
+   {
+    "e": "Struttura che sostiene il solco di divisione",
+    "t": "scelta",
+    "opzioni": [
+     "Anello di actina e miosina",
+     "Fuso mitotico di microtubuli",
+     "Fragmoplasto",
+     "Lamina nucleare",
+     "Filamenti intermedi"
+    ],
+    "v": "Anello di actina e miosina"
+   }
+  ]
+ },
+ "ciclo-cellulare/12": {
+  "campi": [
+   {
+    "e": "Evento a cui contribuisce la degradazione della ciclina B",
+    "t": "scelta",
+    "opzioni": [
+     "Uscita dalla mitosi",
+     "Ingresso in mitosi",
+     "Ingresso in fase S",
+     "Superamento del punto di restrizione"
+    ],
+    "v": "Uscita dalla mitosi"
+   }
+  ]
+ },
+ "ciclo-cellulare/13": {
+  "campi": [
+   {
+    "e": "Numero di fasi S",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "ciclo-cellulare/14": {
+  "campi": [
+   {
+    "e": "Stato dopo S e prima della meiosi I",
+    "t": "scelta",
+    "opzioni": [
+     "2n, 2C",
+     "2n, 4C",
+     "4n, 4C",
+     "n, 2C",
+     "n, C"
+    ],
+    "v": "2n, 4C"
+   }
+  ]
+ },
+ "flusso-informazione/1": {
+  "campi": [
+   {
+    "e": "Requisito della DNA polimerasi",
+    "t": "scelta",
+    "opzioni": [
+     "Un innesco con estremità 3′-OH",
+     "Un promotore a monte",
+     "Un'estremità 5′-fosfato libera",
+     "Uno stampo a singolo filamento di RNA"
+    ],
+    "v": "Un innesco con estremità 3′-OH"
+   }
+  ]
+ },
+ "flusso-informazione/2": {
+  "campi": [
+   {
+    "e": "Motivo della sintesi in frammenti",
+    "t": "scelta",
+    "opzioni": [
+     "I due stampi sono antiparalleli e la sintesi del DNA procede sempre 5′ → 3′",
+     "I due stampi sono antiparalleli e la sintesi del DNA procede sempre 3′ → 5′",
+     "La primasi può sintetizzare solo inneschi brevi",
+     "L'elicasi apre il DNA a tratti discontinui"
+    ],
+    "v": "I due stampi sono antiparalleli e la sintesi del DNA procede sempre 5′ → 3′"
+   }
+  ]
+ },
+ "flusso-informazione/3": {
+  "campi": [
+   {
+    "e": "Enzima",
+    "t": "scelta",
+    "opzioni": [
+     "DNA ligasi",
+     "Primasi",
+     "Elicasi",
+     "Topoisomerasi",
+     "DNA polimerasi I"
+    ],
+    "v": "DNA ligasi"
+   }
+  ]
+ },
+ "flusso-informazione/4": {
+  "campi": [
+   {
+    "e": "Attività usata nel proofreading",
+    "t": "scelta",
+    "opzioni": [
+     "Esonucleasi 3′ → 5′",
+     "Esonucleasi 5′ → 3′",
+     "Endonucleasi",
+     "Polimerasi 3′ → 5′"
+    ],
+    "v": "Esonucleasi 3′ → 5′"
+   }
+  ]
+ },
+ "flusso-informazione/5": {
+  "campi": [
+   {
+    "e": "Filamento complementare scritto 5′ → 3′",
+    "t": "scelta",
+    "opzioni": [
+     "5′-GCAT-3′",
+     "5′-TACG-3′",
+     "5′-CGTA-3′",
+     "5′-ATGC-3′",
+     "5′-GCAU-3′"
+    ],
+    "v": "5′-GCAT-3′"
+   }
+  ]
+ },
+ "flusso-informazione/6": {
+  "campi": [
+   {
+    "e": "RNA sintetizzato",
+    "t": "scelta",
+    "opzioni": [
+     "5′-AUGCCU-3′",
+     "5′-UCCGUA-3′",
+     "5′-ATGCCT-3′",
+     "5′-UACGGA-3′",
+     "5′-AGGCAU-3′"
+    ],
+    "v": "5′-AUGCCU-3′"
+   }
+  ]
+ },
+ "flusso-informazione/7": {
+  "campi": [
+   {
+    "e": "Affermazione corretta sugli esoni",
+    "t": "scelta",
+    "opzioni": [
+     "Possono comprendere regioni non tradotte",
+     "Sono sempre interamente tradotti",
+     "Vengono rimossi durante lo splicing",
+     "Si trovano solo nei geni procariotici"
+    ],
+    "v": "Possono comprendere regioni non tradotte"
+   }
+  ]
+ },
+ "flusso-informazione/8": {
+  "campi": [
+   {
+    "e": "Modo in cui l'enhancer influenza il promotore",
+    "t": "scelta",
+    "opzioni": [
+     "Contatti favoriti dal ripiegamento del DNA e da proteine regolative",
+     "Spostamento fisico dell'enhancer accanto al promotore",
+     "Trascrizione di un RNA che sostituisce il promotore",
+     "Solo se si trova entro poche basi dal promotore"
+    ],
+    "v": "Contatti favoriti dal ripiegamento del DNA e da proteine regolative"
+   }
+  ]
+ },
+ "flusso-informazione/9": {
+  "campi": [
+   {
+    "e": "Precisazione corretta sulla TATA box",
+    "t": "scelta",
+    "opzioni": [
+     "È presente in alcuni promotori, mentre altri usano organizzazioni differenti",
+     "È presente in tutti i promotori eucariotici",
+     "Si trova solo nei promotori procariotici",
+     "È il sito di legame della RNA polimerasi I"
+    ],
+    "v": "È presente in alcuni promotori, mentre altri usano organizzazioni differenti"
+   }
+  ]
+ },
+ "flusso-informazione/10": {
+  "campi": [
+   {
+    "e": "Formazione della coda poli-A",
+    "t": "scelta",
+    "opzioni": [
+     "Aggiunta enzimatica dopo taglio dell'estremità 3′",
+     "Trascrizione di una sequenza di T presente nel gene",
+     "Aggiunta all'estremità 5′ prima dello splicing",
+     "Aggiunta nel citoplasma durante la traduzione"
+    ],
+    "v": "Aggiunta enzimatica dopo taglio dell'estremità 3′"
+   }
+  ]
+ },
+ "flusso-informazione/11": {
+  "campi": [
+   {
+    "e": "Funzione del cap 5′",
+    "t": "scelta",
+    "opzioni": [
+     "Contribuire a stabilità, esportazione e inizio della traduzione",
+     "Segnalare la fine della trascrizione",
+     "Rimuovere gli introni",
+     "Determinare il codone di stop"
+    ],
+    "v": "Contribuire a stabilità, esportazione e inizio della traduzione"
+   }
+  ]
+ },
+ "flusso-informazione/12": {
+  "campi": [
+   {
+    "e": "Componente a RNA dello spliceosoma",
+    "t": "scelta",
+    "opzioni": [
+     "snRNA",
+     "snoRNA",
+     "tRNA",
+     "miRNA",
+     "rRNA"
+    ],
+    "v": "snRNA"
+   }
+  ]
+ },
+ "flusso-informazione/13": {
+  "campi": [
+   {
+    "e": "Molecola modificata dall'editing",
+    "t": "scelta",
+    "opzioni": [
+     "Il trascritto",
+     "Il gene sul DNA",
+     "La proteina tradotta",
+     "Il tRNA che legge il codone"
+    ],
+    "v": "Il trascritto"
+   }
+  ]
+ },
+ "flusso-informazione/14": {
+  "campi": [
+   {
+    "e": "Effetto della deadenilazione",
+    "t": "scelta",
+    "opzioni": [
+     "La sua destabilizzazione e degradazione",
+     "La sua stabilizzazione",
+     "Il suo esporto dal nucleo",
+     "L'aumento della sua traduzione"
+    ],
+    "v": "La sua destabilizzazione e degradazione"
+   }
+  ]
+ },
+ "genetica-mutazioni/1": {
+  "campi": [
+   {
+    "e": "Classificazione della sostituzione",
+    "t": "scelta",
+    "opzioni": [
+     "Sinonima",
+     "Missenso",
+     "Nonsenso",
+     "Con scorrimento della cornice di lettura"
+    ],
+    "v": "Sinonima"
+   }
+  ]
+ },
+ "genetica-mutazioni/2": {
+  "campi": [
+   {
+    "e": "Proprietà mantenuta",
+    "t": "scelta",
+    "opzioni": [
+     "La cornice di lettura a valle",
+     "La sequenza amminoacidica completa",
+     "La lunghezza della proteina",
+     "La sequenza nucleotidica originale"
+    ],
+    "v": "La cornice di lettura a valle"
+   }
+  ]
+ },
+ "genetica-mutazioni/3": {
+  "campi": [
+   {
+    "e": "Fenomeno descritto",
+    "t": "scelta",
+    "opzioni": [
+     "Anticipazione",
+     "Penetranza incompleta",
+     "Espressività variabile",
+     "Imprinting genomico",
+     "Mosaicismo germinale"
+    ],
+    "v": "Anticipazione"
+   }
+  ]
+ },
+ "genetica-mutazioni/4": {
+  "campi": [
+   {
+    "e": "Via di riparazione",
+    "t": "scelta",
+    "opzioni": [
+     "Riparazione per escissione di nucleotidi",
+     "Riparazione per escissione di basi",
+     "Riparazione dei mismatch",
+     "Ricombinazione omologa",
+     "Giunzione delle estremità non omologhe"
+    ],
+    "v": "Riparazione per escissione di nucleotidi"
+   }
+  ]
+ },
+ "genetica-mutazioni/5": {
+  "campi": [
+   {
+    "e": "Esito possibile",
+    "t": "scelta",
+    "opzioni": [
+     "Piccole inserzioni o delezioni nel sito riparato",
+     "Ripristino sempre esatto della sequenza originale",
+     "Duplicazione dell'intero cromosoma",
+     "Correzione basata sul cromatidio fratello"
+    ],
+    "v": "Piccole inserzioni o delezioni nel sito riparato"
+   }
+  ]
+ },
+ "genetica-mutazioni/9": {
+  "campi": [
+   {
+    "e": "Genotipo del genitore di gruppo A",
+    "t": "scelta",
+    "opzioni": [
+     "$I^AI^A$",
+     "$I^Ai$",
+     "$I^AI^B$",
+     "$ii$"
+    ],
+    "v": "$I^Ai$"
+   }
+  ]
+ },
+ "genetica-mutazioni/10": {
+  "campi": [
+   {
+    "e": "Rapporto fenotipico atteso",
+    "t": "scelta",
+    "opzioni": [
+     "1 : 2 : 1",
+     "3 : 1",
+     "1 : 1",
+     "9 : 3 : 3 : 1"
+    ],
+    "v": "1 : 2 : 1"
+   }
+  ]
+ },
+ "genetica-mutazioni/11": {
+  "campi": [
+   {
+    "e": "Distanza genetica",
+    "t": "numero",
+    "v": "5",
+    "u": "cM"
+   }
+  ]
+ },
+ "genetica-mutazioni/12": {
+  "campi": [
+   {
+    "e": "Motivo",
+    "t": "scelta",
+    "opzioni": [
+     "Loci molto distanti sullo stesso cromosoma possono comportarsi come non associati",
+     "Il 50% indica sempre loci strettamente associati",
+     "La ricombinazione non avviene mai tra loci sullo stesso cromosoma",
+     "Il 50% dipende solo da errori di conteggio della progenie"
+    ],
+    "v": "Loci molto distanti sullo stesso cromosoma possono comportarsi come non associati"
+   }
+  ]
+ },
+ "genetica-mutazioni/13": {
+  "campi": [
+   {
+    "e": "Proprietà caratteristica",
+    "t": "scelta",
+    "opzioni": [
+     "L'espressione di un allele dipende dalla sua origine parentale",
+     "L'allele dominante si esprime sempre, qualunque sia l'origine",
+     "La sequenza del DNA dell'allele viene modificata",
+     "Il carattere si manifesta solo in una parte dei portatori"
+    ],
+    "v": "L'espressione di un allele dipende dalla sua origine parentale"
+   }
+  ]
+ },
+ "genetica-mutazioni/14": {
+  "campi": [
+   {
+    "e": "Descrizione del carattere",
+    "t": "scelta",
+    "opzioni": [
+     "Poligenico e multifattoriale",
+     "Monogenico mendeliano",
+     "Legato al cromosoma X",
+     "Mitocondriale"
+    ],
+    "v": "Poligenico e multifattoriale"
+   }
+  ]
+ },
+ "genoma-cromatina/1": {
+  "campi": [
+   {
+    "e": "Ploidia dopo la fase S",
+    "t": "scelta",
+    "opzioni": [
+     "Resta diploide",
+     "Diventa tetraploide",
+     "Diventa aploide",
+     "Diventa triploide"
+    ],
+    "v": "Resta diploide"
+   }
+  ]
+ },
+ "genoma-cromatina/2": {
+  "campi": [
+   {
+    "e": "Che cosa distingue i cromatidi fratelli",
+    "t": "scelta",
+    "opzioni": [
+     "I fratelli derivano dalla replicazione dello stesso cromosoma",
+     "I fratelli provengono uno dal padre e uno dalla madre",
+     "I fratelli portano sempre alleli diversi",
+     "I fratelli non condividono il centromero"
+    ],
+    "v": "I fratelli derivano dalla replicazione dello stesso cromosoma"
+   }
+  ]
+ },
+ "genoma-cromatina/3": {
+  "campi": [
+   {
+    "e": "Variante istonica",
+    "t": "scelta",
+    "opzioni": [
+     "CENP-A",
+     "H2A.Z",
+     "H3.3",
+     "macroH2A",
+     "H1"
+    ],
+    "v": "CENP-A"
+   }
+  ]
+ },
+ "genoma-cromatina/4": {
+  "campi": [
+   {
+    "e": "Ripetizione telomerica umana",
+    "t": "scelta",
+    "opzioni": [
+     "TTAGGG",
+     "TTGGGG",
+     "CCCTAA",
+     "TATAAA",
+     "CAG"
+    ],
+    "v": "TTAGGG"
+   }
+  ]
+ },
+ "genoma-cromatina/5": {
+  "campi": [
+   {
+    "e": "Stampo usato dalla telomerasi",
+    "t": "scelta",
+    "opzioni": [
+     "Un RNA contenuto nel proprio complesso",
+     "Il filamento di DNA complementare",
+     "Un primer di RNA sintetizzato dalla primasi",
+     "Un mRNA citoplasmatico"
+    ],
+    "v": "Un RNA contenuto nel proprio complesso"
+   }
+  ]
+ },
+ "genoma-cromatina/6": {
+  "campi": [
+   {
+    "e": "Ruolo dell'istone H1",
+    "t": "scelta",
+    "opzioni": [
+     "Si associa al DNA di collegamento e favorisce la compattazione",
+     "Forma il nucleo dell'ottamero istonico",
+     "Acetila le lisine degli altri istoni",
+     "Definisce l'identità del centromero"
+    ],
+    "v": "Si associa al DNA di collegamento e favorisce la compattazione"
+   }
+  ]
+ },
+ "genoma-cromatina/7": {
+  "campi": [
+   {
+    "e": "Componente aggiuntiva",
+    "t": "scelta",
+    "opzioni": [
+     "DNA di collegamento",
+     "Ottamero istonico",
+     "DNA telomerico",
+     "RNA ribosomiale"
+    ],
+    "v": "DNA di collegamento"
+   }
+  ]
+ },
+ "genoma-cromatina/8": {
+  "campi": [
+   {
+    "e": "Complesso",
+    "t": "scelta",
+    "opzioni": [
+     "Coesina",
+     "Condensina",
+     "Separasi",
+     "Cinetocore",
+     "Topoisomerasi II"
+    ],
+    "v": "Coesina"
+   }
+  ]
+ },
+ "genoma-cromatina/9": {
+  "campi": [
+   {
+    "e": "Regione ricca di eterocromatina costitutiva",
+    "t": "scelta",
+    "opzioni": [
+     "Una regione pericentromerica con sequenze ripetute",
+     "Un promotore di un gene costitutivo attivo",
+     "Una regione codificante di un gene molto trascritto",
+     "Un'origine di replicazione attiva in fase S precoce"
+    ],
+    "v": "Una regione pericentromerica con sequenze ripetute"
+   }
+  ]
+ },
+ "genoma-cromatina/10": {
+  "campi": [
+   {
+    "e": "Conclusione",
+    "t": "scelta",
+    "opzioni": [
+     "L'accessibilità è favorita, ma la trascrizione di ogni gene non è garantita",
+     "Ogni gene della regione è trascritto",
+     "Nessun gene della regione è trascritto",
+     "La regione è eterocromatina costitutiva"
+    ],
+    "v": "L'accessibilità è favorita, ma la trascrizione di ogni gene non è garantita"
+   }
+  ]
+ },
+ "genoma-cromatina/11": {
+  "campi": [
+   {
+    "e": "Effetto chimico diretto",
+    "t": "scelta",
+    "opzioni": [
+     "Riduce la carica positiva della catena laterale",
+     "Aumenta la carica positiva della catena laterale",
+     "Introduce una carica negativa di un gruppo fosfato",
+     "Rompe il legame peptidico dell'istone"
+    ],
+    "v": "Riduce la carica positiva della catena laterale"
+   }
+  ]
+ },
+ "genoma-cromatina/12": {
+  "campi": [
+   {
+    "e": "Affermazione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "Il significato dipende dal residuo modificato e dallo stato di metilazione",
+     "La metilazione degli istoni attiva sempre la trascrizione",
+     "La metilazione degli istoni reprime sempre la trascrizione",
+     "La metilazione degli istoni neutralizza la carica delle lisine"
+    ],
+    "v": "Il significato dipende dal residuo modificato e dallo stato di metilazione"
+   }
+  ]
+ },
+ "genoma-cromatina/13": {
+  "campi": [
+   {
+    "e": "Enzima",
+    "t": "scelta",
+    "opzioni": [
+     "Deacetilasi istonica",
+     "Acetiltransferasi istonica",
+     "Metiltransferasi istonica",
+     "DNA metiltransferasi",
+     "Demetilasi istonica"
+    ],
+    "v": "Deacetilasi istonica"
+   }
+  ]
+ },
+ "genoma-cromatina/14": {
+  "campi": [
+   {
+    "e": "Livello modificato direttamente",
+    "t": "scelta",
+    "opzioni": [
+     "L'organizzazione della cromatina",
+     "La sequenza nucleotidica del DNA",
+     "La struttura primaria delle proteine codificate",
+     "Il numero di cromosomi"
+    ],
+    "v": "L'organizzazione della cromatina"
+   }
+  ]
+ },
+ "organizzazione-biologica/1": {
+  "campi": [
+   {
+    "e": "Processo anabolico",
+    "t": "scelta",
+    "opzioni": [
+     "Sintesi di una macromolecola da precursori con apporto energetico",
+     "Demolizione di una macromolecola con liberazione di energia",
+     "Ossidazione del glucosio a CO$_2$ e acqua",
+     "Idrolisi di un polisaccaride nei suoi monomeri"
+    ],
+    "v": "Sintesi di una macromolecola da precursori con apporto energetico"
+   }
+  ]
+ },
+ "organizzazione-biologica/2": {
+  "campi": [
+   {
+    "e": "Ruolo dell'acqua nell'idrolisi",
+    "t": "scelta",
+    "opzioni": [
+     "Interviene nella scissione di un legame",
+     "Viene liberata dalla formazione di un legame",
+     "Fa solo da solvente, senza reagire",
+     "Fornisce l'energia per formare un legame"
+    ],
+    "v": "Interviene nella scissione di un legame"
+   }
+  ]
+ },
+ "organizzazione-biologica/3": {
+  "campi": [
+   {
+    "e": "Attività necessaria",
+    "t": "scelta",
+    "opzioni": [
+     "RNA polimerasi RNA-dipendente",
+     "Trascrittasi inversa",
+     "DNA polimerasi DNA-dipendente",
+     "RNA polimerasi DNA-dipendente",
+     "Integrasi"
+    ],
+    "v": "RNA polimerasi RNA-dipendente"
+   }
+  ]
+ },
+ "organizzazione-biologica/4": {
+  "campi": [
+   {
+    "e": "Percorso di un retrovirus",
+    "t": "scelta",
+    "opzioni": [
+     "RNA virale, DNA provirale, trascrizione di RNA",
+     "DNA virale, RNA provirale, traduzione",
+     "RNA virale, traduzione diretta, replicazione dell'RNA",
+     "DNA provirale, RNA virale, retrotrascrizione"
+    ],
+    "v": "RNA virale, DNA provirale, trascrizione di RNA"
+   }
+  ]
+ },
+ "organizzazione-biologica/5": {
+  "campi": [
+   {
+    "e": "Funzione delle fimbrie",
+    "t": "scelta",
+    "opzioni": [
+     "Adesione a superfici",
+     "Locomozione",
+     "Sintesi proteica",
+     "Protezione dalla disidratazione",
+     "Produzione di energia"
+    ],
+    "v": "Adesione a superfici"
+   }
+  ]
+ },
+ "organizzazione-biologica/6": {
+  "campi": [
+   {
+    "e": "Componente",
+    "t": "scelta",
+    "opzioni": [
+     "Capsula",
+     "Ribosoma",
+     "Nucleoide",
+     "Plasmide",
+     "Flagello"
+    ],
+    "v": "Capsula"
+   }
+  ]
+ },
+ "organizzazione-biologica/7": {
+  "campi": [
+   {
+    "e": "Processo",
+    "t": "scelta",
+    "opzioni": [
+     "Coniugazione",
+     "Trasformazione",
+     "Trasduzione",
+     "Scissione binaria"
+    ],
+    "v": "Coniugazione"
+   }
+  ]
+ },
+ "organizzazione-biologica/8": {
+  "campi": [
+   {
+    "e": "Tipo di trasferimento",
+    "t": "scelta",
+    "opzioni": [
+     "Verticale",
+     "Orizzontale",
+     "Per coniugazione",
+     "Per trasduzione"
+    ],
+    "v": "Verticale"
+   }
+  ]
+ },
+ "organizzazione-biologica/9": {
+  "campi": [
+   {
+    "e": "Motivo",
+    "t": "scelta",
+    "opzioni": [
+     "Possiedono regioni polari e regioni idrofobe",
+     "Sono interamente idrofobi",
+     "Sono interamente polari",
+     "Formano legami covalenti con l'acqua"
+    ],
+    "v": "Possiedono regioni polari e regioni idrofobe"
+   }
+  ]
+ },
+ "organizzazione-biologica/10": {
+  "campi": [
+   {
+    "e": "Legame",
+    "t": "scelta",
+    "opzioni": [
+     "Legame peptidico",
+     "Legame glicosidico",
+     "Legame fosfodiesterico",
+     "Legame estere",
+     "Ponte disolfuro"
+    ],
+    "v": "Legame peptidico"
+   }
+  ]
+ },
+ "organizzazione-biologica/11": {
+  "campi": [
+   {
+    "e": "Proprietà",
+    "t": "scelta",
+    "opzioni": [
+     "Il ripiegamento tridimensionale della catena",
+     "La sequenza lineare degli amminoacidi",
+     "La presenza di legami peptidici",
+     "La direzione N-terminale verso C-terminale della catena"
+    ],
+    "v": "Il ripiegamento tridimensionale della catena"
+   }
+  ]
+ },
+ "organizzazione-biologica/12": {
+  "campi": [
+   {
+    "e": "Che cosa viene aggiunto",
+    "t": "scelta",
+    "opzioni": [
+     "Un gruppo o una catena glucidica",
+     "Un gruppo fosfato",
+     "Una molecola di ubiquitina",
+     "Un gruppo acetile",
+     "Una catena lipidica"
+    ],
+    "v": "Un gruppo o una catena glucidica"
+   }
+  ]
+ },
+ "organizzazione-biologica/13": {
+  "campi": [
+   {
+    "e": "Effetto della fosforilazione",
+    "t": "scelta",
+    "opzioni": [
+     "Attivarla o inibirla secondo il sito e il contesto",
+     "Attivarla sempre",
+     "Inibirla sempre",
+     "Avviarla sempre alla degradazione"
+    ],
+    "v": "Attivarla o inibirla secondo il sito e il contesto"
+   }
+  ]
+ },
+ "organizzazione-biologica/14": {
+  "campi": [
+   {
+    "e": "Attività",
+    "t": "scelta",
+    "opzioni": [
+     "Deubiquitinasi",
+     "Ubiquitina ligasi E3",
+     "Enzima attivante E1",
+     "Proteasoma",
+     "Chinasi"
+    ],
+    "v": "Deubiquitinasi"
+   }
+  ]
+ },
+ "segnalazione-cellulare/1": {
+  "campi": [
+   {
+    "e": "Sequenza della via",
+    "t": "scelta",
+    "opzioni": [
+     "Recettore attivato, adattatori e SOS, Ras-GTP, Raf-MEK-ERK",
+     "Recettore attivato, Ras-GDP, SOS, ERK-MEK-Raf",
+     "Recettore attivato, proteina G, adenilato ciclasi, PKA",
+     "Recettore attivato, PI3K, PIP3, Akt"
+    ],
+    "v": "Recettore attivato, adattatori e SOS, Ras-GTP, Raf-MEK-ERK"
+   }
+  ]
+ },
+ "segnalazione-cellulare/2": {
+  "campi": [
+   {
+    "e": "Conseguenza",
+    "t": "scelta",
+    "opzioni": [
+     "Persistenza dello stato attivo e del segnale a valle",
+     "Ras resta legata al GDP e inattiva",
+     "Arresto del segnale a valle",
+     "Nessun effetto sul segnale"
+    ],
+    "v": "Persistenza dello stato attivo e del segnale a valle"
+   }
+  ]
+ },
+ "segnalazione-cellulare/3": {
+  "campi": [
+   {
+    "e": "Reazione catalizzata da PI3K",
+    "t": "scelta",
+    "opzioni": [
+     "Conversione di PIP2 in PIP3",
+     "Conversione di PIP3 in PIP2",
+     "Idrolisi di PIP2 in IP3 e DAG",
+     "Conversione di ATP in cAMP"
+    ],
+    "v": "Conversione di PIP2 in PIP3"
+   }
+  ]
+ },
+ "segnalazione-cellulare/4": {
+  "campi": [
+   {
+    "e": "Effetto insulinico",
+    "t": "scelta",
+    "opzioni": [
+     "Aumento dell'esposizione di GLUT4 alla membrana",
+     "Aumento della glicogenolisi",
+     "Aumento della gluconeogenesi",
+     "Riduzione della captazione di glucosio"
+    ],
+    "v": "Aumento dell'esposizione di GLUT4 alla membrana"
+   }
+  ]
+ },
+ "segnalazione-cellulare/5": {
+  "campi": [
+   {
+    "e": "Componenti",
+    "t": "scelta",
+    "opzioni": [
+     "Proteoglicani e glicosamminoglicani",
+     "Collagene e fibre elastiche",
+     "Fibronectina e laminina",
+     "Integrine e caderine"
+    ],
+    "v": "Proteoglicani e glicosamminoglicani"
+   }
+  ]
+ },
+ "segnalazione-cellulare/6": {
+  "campi": [
+   {
+    "e": "Processo",
+    "t": "scelta",
+    "opzioni": [
+     "Rimodellamento e migrazione cellulare",
+     "Replicazione del DNA",
+     "Sintesi delle proteine di membrana",
+     "Formazione delle giunzioni comunicanti"
+    ],
+    "v": "Rimodellamento e migrazione cellulare"
+   }
+  ]
+ },
+ "segnalazione-cellulare/7": {
+  "campi": [
+   {
+    "e": "Sistema",
+    "t": "scelta",
+    "opzioni": [
+     "Citoscheletro di actina",
+     "Filamenti intermedi",
+     "Microtubuli",
+     "Lamina nucleare"
+    ],
+    "v": "Citoscheletro di actina"
+   }
+  ]
+ },
+ "segnalazione-cellulare/8": {
+  "campi": [
+   {
+    "e": "Segnalazione dall'interno verso l'esterno",
+    "t": "scelta",
+    "opzioni": [
+     "Sì, può modificare l'affinità e l'organizzazione del recettore",
+     "No, procede solo dall'esterno verso l'interno",
+     "Sì, ma solo modificando l'espressione genica",
+     "No, le integrine non trasmettono segnali"
+    ],
+    "v": "Sì, può modificare l'affinità e l'organizzazione del recettore"
+   }
+  ]
+ },
+ "segnalazione-cellulare/9": {
+  "campi": [
+   {
+    "e": "Giunzione",
+    "t": "scelta",
+    "opzioni": [
+     "Desmosoma",
+     "Emidesmosoma",
+     "Giunzione aderente",
+     "Giunzione occludente",
+     "Giunzione comunicante"
+    ],
+    "v": "Desmosoma"
+   }
+  ]
+ },
+ "segnalazione-cellulare/10": {
+  "campi": [
+   {
+    "e": "Giunzione",
+    "t": "scelta",
+    "opzioni": [
+     "Emidesmosoma",
+     "Desmosoma",
+     "Giunzione comunicante",
+     "Giunzione aderente",
+     "Giunzione occludente"
+    ],
+    "v": "Emidesmosoma"
+   }
+  ]
+ },
+ "segnalazione-cellulare/11": {
+  "campi": [
+   {
+    "e": "Funzione",
+    "t": "scelta",
+    "opzioni": [
+     "Regolare il passaggio paracellulare e contribuire alla polarità",
+     "Permettere il passaggio diretto di ioni tra cellule adiacenti",
+     "Collegare i filamenti intermedi tra cellule adiacenti",
+     "Ancorare la cellula alla lamina basale"
+    ],
+    "v": "Regolare il passaggio paracellulare e contribuire alla polarità"
+   }
+  ]
+ },
+ "segnalazione-cellulare/12": {
+  "campi": [
+   {
+    "e": "Modalità",
+    "t": "scelta",
+    "opzioni": [
+     "Paracrina",
+     "Endocrina",
+     "Autocrina",
+     "Iuxtacrina",
+     "Sinaptica"
+    ],
+    "v": "Paracrina"
+   }
+  ]
+ },
+ "segnalazione-cellulare/13": {
+  "campi": [
+   {
+    "e": "Spiegazione",
+    "t": "scelta",
+    "opzioni": [
+     "Recettori e apparati intracellulari differenti",
+     "Il ligando cambia struttura in ogni tessuto",
+     "Uno dei due tipi cellulari non ha membrana plasmatica",
+     "Il ligando agisce solo per via endocrina"
+    ],
+    "v": "Recettori e apparati intracellulari differenti"
+   }
+  ]
+ },
+ "segnalazione-cellulare/14": {
+  "campi": [
+   {
+    "e": "Subunità",
+    "t": "scelta",
+    "opzioni": [
+     "Alfa, beta e gamma",
+     "Alfa e beta",
+     "Alfa, beta, gamma e delta",
+     "Due alfa e due beta"
+    ],
+    "v": "Alfa, beta e gamma"
+   }
+  ]
+ },
+ "strutture-cellulari/1": {
+  "campi": [
+   {
+    "e": "Evento che accompagna l'apoptosi",
+    "t": "scelta",
+    "opzioni": [
+     "Esposizione della fosfatidilserina sul foglietto esterno",
+     "Spostamento della fosfatidilcolina sul foglietto interno",
+     "Aumento del colesterolo nel foglietto esterno",
+     "Perdita dei glicolipidi dal foglietto esterno"
+    ],
+    "v": "Esposizione della fosfatidilserina sul foglietto esterno"
+   }
+  ]
+ },
+ "strutture-cellulari/2": {
+  "campi": [
+   {
+    "e": "Fonte usata direttamente dal cotrasportatore",
+    "t": "scelta",
+    "opzioni": [
+     "Il gradiente elettrochimico del Na⁺",
+     "L'idrolisi diretta di ATP",
+     "Il gradiente di concentrazione del glucosio",
+     "Il gradiente elettrochimico del K⁺",
+     "Il gradiente protonico"
+    ],
+    "v": "Il gradiente elettrochimico del Na⁺"
+   }
+  ]
+ },
+ "strutture-cellulari/3": {
+  "campi": [
+   {
+    "e": "Precisazione corretta su CFTR",
+    "t": "scelta",
+    "opzioni": [
+     "Canale del cloruro della famiglia ABC, regolato da ATP e fosforilazione",
+     "Pompa che usa ATP per trasportare attivamente il cloruro",
+     "Canale del sodio regolato dal voltaggio",
+     "Cotrasportatore Na⁺-K⁺-2Cl⁻ indipendente dall'ATP"
+    ],
+    "v": "Canale del cloruro della famiglia ABC, regolato da ATP e fosforilazione"
+   }
+  ]
+ },
+ "strutture-cellulari/4": {
+  "campi": [
+   {
+    "e": "Segnale riconosciuto dalle importine",
+    "t": "scelta",
+    "opzioni": [
+     "NLS",
+     "NES",
+     "PTS1",
+     "KDEL",
+     "Peptide segnale N-terminale"
+    ],
+    "v": "NLS"
+   }
+  ]
+ },
+ "strutture-cellulari/5": {
+  "campi": [
+   {
+    "e": "Evento favorito dalla degradazione di IκB",
+    "t": "scelta",
+    "opzioni": [
+     "Ingresso nucleare di NF-κB",
+     "Esportazione nucleare di NF-κB",
+     "Degradazione proteasomica di NF-κB",
+     "Arresto della trascrizione dei geni infiammatori"
+    ],
+    "v": "Ingresso nucleare di NF-κB"
+   }
+  ]
+ },
+ "strutture-cellulari/6": {
+  "campi": [
+   {
+    "e": "Precisazione sull'esportazione di molti mRNA",
+    "t": "scelta",
+    "opzioni": [
+     "Usa apparati come NXF1 e non è identica al ciclo classico Ran-importine",
+     "Segue lo stesso ciclo Ran-importine delle proteine con NLS",
+     "Avviene per diffusione libera attraverso i pori",
+     "Richiede la rottura dell'involucro nucleare"
+    ],
+    "v": "Usa apparati come NXF1 e non è identica al ciclo classico Ran-importine"
+   }
+  ]
+ },
+ "strutture-cellulari/7": {
+  "campi": [
+   {
+    "e": "Direzione del pompaggio dei protoni",
+    "t": "scelta",
+    "opzioni": [
+     "Dalla matrice verso lo spazio intermembrana",
+     "Dallo spazio intermembrana verso la matrice",
+     "Dal citosol verso lo spazio intermembrana",
+     "Dalla matrice verso il citosol"
+    ],
+    "v": "Dalla matrice verso lo spazio intermembrana"
+   }
+  ]
+ },
+ "strutture-cellulari/8": {
+  "campi": [
+   {
+    "e": "Bilancio ATP per glucosio",
+    "t": "scelta",
+    "opzioni": [
+     "Circa 30–32",
+     "Esattamente 38",
+     "Circa 2",
+     "Circa 15"
+    ],
+    "v": "Circa 30–32"
+   }
+  ]
+ },
+ "strutture-cellulari/9": {
+  "campi": [
+   {
+    "e": "Associazione corretta",
+    "t": "scelta",
+    "opzioni": [
+     "DRP1 contribuisce alla fissione",
+     "DRP1 contribuisce alla fusione della membrana interna",
+     "Le mitofusine contribuiscono alla fissione",
+     "OPA1 contribuisce alla fissione"
+    ],
+    "v": "DRP1 contribuisce alla fissione"
+   }
+  ]
+ },
+ "strutture-cellulari/10": {
+  "campi": [
+   {
+    "e": "Dove è codificata la maggior parte delle proteine mitocondriali",
+    "t": "scelta",
+    "opzioni": [
+     "Nel genoma nucleare",
+     "Nel DNA mitocondriale",
+     "In parti uguali nei due genomi",
+     "Nei plasmidi citoplasmatici"
+    ],
+    "v": "Nel genoma nucleare"
+   }
+  ]
+ },
+ "strutture-cellulari/11": {
+  "campi": [
+   {
+    "e": "Recettore dei segnali PTS1",
+    "t": "scelta",
+    "opzioni": [
+     "PEX5",
+     "PEX7",
+     "PEX19",
+     "Importina α",
+     "TOM20"
+    ],
+    "v": "PEX5"
+   }
+  ]
+ },
+ "strutture-cellulari/12": {
+  "campi": [
+   {
+    "e": "Condizione collegata ai difetti dei geni PEX",
+    "t": "scelta",
+    "opzioni": [
+     "Disturbi dello spettro di Zellweger",
+     "Fibrosi cistica",
+     "Malattia di Tay-Sachs",
+     "Malattia di Huntington"
+    ],
+    "v": "Disturbi dello spettro di Zellweger"
+   }
+  ]
+ },
+ "strutture-cellulari/13": {
+  "campi": [
+   {
+    "e": "Risposta attivata",
+    "t": "scelta",
+    "opzioni": [
+     "UPR",
+     "ERAD",
+     "Risposta da shock termico citosolica",
+     "Autofagia selettiva dei perossisomi"
+    ],
+    "v": "UPR"
+   }
+  ]
+ },
+ "strutture-cellulari/14": {
+  "campi": [
+   {
+    "e": "Destino delle proteine persistentemente difettose",
+    "t": "scelta",
+    "opzioni": [
+     "Retrotraslocazione e degradazione proteasomica",
+     "Secrezione per esocitosi costitutiva",
+     "Trasporto al Golgi e accumulo nei lisosomi",
+     "Degradazione all'interno del lume del reticolo"
+    ],
+    "v": "Retrotraslocazione e degradazione proteasomica"
+   }
+  ]
+ }
+}

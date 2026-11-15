@@ -1,0 +1,2377 @@
+{
+ "calcolo-combinatorio/5": {
+  "campi": [
+   {
+    "e": "Numero degli anagrammi di $NUMERO$",
+    "t": "numero",
+    "v": "720"
+   },
+   {
+    "e": "Anagrammi che iniziano con una vocale",
+    "t": "numero",
+    "v": "360"
+   }
+  ]
+ },
+ "calcolo-combinatorio/9": {
+  "campi": [
+   {
+    "e": "Numero dei lati del poligono",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "calcolo-combinatorio/12": {
+  "campi": [
+   {
+    "e": "Sviluppo di $(a - 2b)^5$",
+    "t": "funzione",
+    "var": [
+     "a",
+     "b"
+    ],
+    "v": "a^5 - 10a^4 b + 40a^3 b^2 - 80a^2 b^3 + 80ab^4 - 32b^5"
+   }
+  ]
+ },
+ "calcolo-combinatorio/13": {
+  "campi": [
+   {
+    "e": "Coefficiente di $x^4$",
+    "t": "numero",
+    "v": "2916"
+   },
+   {
+    "e": "Termine indipendente da $x$",
+    "t": "numero",
+    "v": "4320"
+   }
+  ]
+ },
+ "calcolo-combinatorio/14": {
+  "campi": [
+   {
+    "e": "Commissioni possibili",
+    "t": "numero",
+    "v": "330"
+   },
+   {
+    "e": "Commissioni con $2$ ragazzi e $2$ ragazze",
+    "t": "numero",
+    "v": "150"
+   },
+   {
+    "e": "Commissioni con almeno un ragazzo",
+    "t": "numero",
+    "v": "315"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/1": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left[\\frac{4\\pi}{3}, \\frac{5\\pi}{3}\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/2": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi]$",
+    "t": "intervallo",
+    "v": "\\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/3": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{3}\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/4": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, \\pi)$",
+    "t": "intervallo",
+    "v": "\\left(0, \\frac{\\pi}{3}\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/5": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $(-2\\pi, 2\\pi]$",
+    "t": "intervallo",
+    "v": "\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/6": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left[\\frac{\\pi}{6}, \\frac{5\\pi}{6}\\right] \\cup \\left\\{\\frac{3\\pi}{2}\\right\\}"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/7": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)$",
+    "t": "intervallo",
+    "v": "\\left(-\\frac{\\pi}{3}, \\frac{\\pi}{3}\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/8": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\{0\\} \\cup \\left[\\frac{2\\pi}{3}, \\frac{4\\pi}{3}\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/9": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left(\\frac{\\pi}{2}, \\frac{11\\pi}{6}\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/10": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, \\pi)$",
+    "t": "intervallo",
+    "v": "\\left(\\frac{\\pi}{3}, \\frac{2\\pi}{3}\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/11": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left(\\frac{\\pi}{3}, \\pi\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/12": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left(0, \\frac{5\\pi}{6}\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/13": {
+  "campi": [
+   {
+    "e": "Dominio di $f$ nell'intervallo $[0, 2\\pi)$",
+    "t": "intervallo",
+    "v": "\\left(\\frac{\\pi}{3}, \\pi\\right]"
+   }
+  ]
+ },
+ "disequazioni-goniometriche/14": {
+  "campi": [
+   {
+    "e": "Base del rettangolo",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "2\\cos x"
+   },
+   {
+    "e": "Altezza del rettangolo",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "2\\sin x"
+   },
+   {
+    "e": "Area",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "2\\sin 2x"
+   },
+   {
+    "e": "Perimetro",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "4(\\sin x + \\cos x)"
+   },
+   {
+    "e": "Valori di $x$ con area maggiore o uguale a $1$",
+    "t": "intervallo",
+    "v": "\\left[\\frac{\\pi}{12}, \\frac{5\\pi}{12}\\right]"
+   },
+   {
+    "e": "Valori di $x$ con perimetro maggiore o uguale a $2\\sqrt{6}$",
+    "t": "intervallo",
+    "v": "\\left[\\frac{\\pi}{12}, \\frac{5\\pi}{12}\\right]"
+   }
+  ]
+ },
+ "equazioni-goniometriche/1": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{7\\pi}{6}",
+     "\\frac{11\\pi}{6}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/2": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/3": {
+  "campi": [
+   {
+    "e": "Condizioni di esistenza",
+    "t": "scelta",
+    "opzioni": [
+     "$x \\neq \\pi + 2k\\pi$",
+     "$x \\neq \\frac{\\pi}{2} + k\\pi$",
+     "$x \\neq \\frac{\\pi}{2} + 2k\\pi$",
+     "$x \\neq 2k\\pi$"
+    ],
+    "v": "$x \\neq \\pi + 2k\\pi$"
+   },
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/4": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{\\pi}{2}",
+     "\\pi",
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/5": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{2\\pi}{9}",
+     "\\frac{8\\pi}{9}",
+     "\\frac{14\\pi}{9}",
+     "\\frac{5\\pi}{3}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/6": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{2\\pi}{3}",
+     "\\frac{4\\pi}{3}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/7": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{2\\pi}{3}",
+     "\\frac{4\\pi}{3}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/8": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{\\pi}{2}",
+     "\\frac{5\\pi}{6}",
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/9": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/10": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\frac{3\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/11": {
+  "campi": [
+   {
+    "e": "Soluzioni nell'intervallo $[0, \\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{4}",
+     "\\arctan\\frac{1}{3}"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/12": {
+  "campi": [
+   {
+    "e": "Valori di $m$ per cui l'equazione ha soluzioni",
+    "t": "intervallo",
+    "var": "m",
+    "v": "[0, 1]"
+   },
+   {
+    "e": "Numero di soluzioni in $[0, 2\\pi)$ per $0 < m < 1$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Numero di soluzioni in $[0, 2\\pi)$ per $m = 0$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Numero di soluzioni in $[0, 2\\pi)$ per $m = 1$",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "equazioni-goniometriche/13": {
+  "campi": [
+   {
+    "e": "Istanti in cui $s = \\frac{3}{2}\\,\\mathrm{cm}$ (in secondi)",
+    "t": "valori",
+    "v": [
+     "\\frac{4}{3}",
+     "\\frac{20}{3}"
+    ]
+   },
+   {
+    "e": "Istanti in cui $s = 0$ (in secondi)",
+    "t": "valori",
+    "v": [
+     "2",
+     "6"
+    ]
+   }
+  ]
+ },
+ "equazioni-goniometriche/14": {
+  "campi": [
+   {
+    "e": "Soluzione $(x, y)$ con $x < y$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{5\\pi}{6}"
+    ]
+   },
+   {
+    "e": "Soluzione $(x, y)$ con $x > y$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{5\\pi}{6}",
+     "\\frac{\\pi}{6}"
+    ]
+   }
+  ]
+ },
+ "esponenziali/1": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "9"
+   }
+  ]
+ },
+ "esponenziali/2": {
+  "campi": [
+   {
+    "e": "I quattro numeri in ordine crescente",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4^{0{,}8}",
+     "2^{1{,}7}",
+     "2^{\\sqrt{3}}",
+     "\\left( \\frac{1}{2} \\right)^{-2}"
+    ]
+   }
+  ]
+ },
+ "esponenziali/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "3"
+    ]
+   }
+  ]
+ },
+ "esponenziali/7": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ]
+   }
+  ]
+ },
+ "esponenziali/8": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "\\frac{\\ln 4}{\\ln 5}"
+   }
+  ]
+ },
+ "esponenziali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[1, 2]"
+   }
+  ]
+ },
+ "esponenziali/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, 0) \\cup (2, +\\infty)"
+   }
+  ]
+ },
+ "esponenziali/11": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "\\mathbb{R}"
+   },
+   {
+    "e": "Immagine di $f$",
+    "t": "intervallo",
+    "var": "y",
+    "v": "(-1, +\\infty)"
+   },
+   {
+    "e": "Asintoto orizzontale",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "y = -1"
+   },
+   {
+    "e": "Intersezione con l'asse $y$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "2"
+    ]
+   },
+   {
+    "e": "Intersezione con l'asse $x$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-1",
+     "0"
+    ]
+   }
+  ]
+ },
+ "esponenziali/12": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "intervallo",
+    "var": "k",
+    "v": "(0, 1)"
+   }
+  ]
+ },
+ "esponenziali/13": {
+  "campi": [
+   {
+    "e": "$N(n)$",
+    "t": "funzione",
+    "var": [
+     "n"
+    ],
+    "v": "2000 \\cdot 1{,}1^n"
+   },
+   {
+    "e": "$N(3)$",
+    "t": "numero",
+    "v": "2662"
+   },
+   {
+    "e": "Numero di anni",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "esponenziali/14": {
+  "campi": [
+   {
+    "e": "$c(t)$",
+    "t": "funzione",
+    "var": [
+     "t"
+    ],
+    "v": "80 \\cdot \\left( \\frac{1}{2} \\right)^{\\frac{t}{4}}"
+   },
+   {
+    "e": "$c(10)$",
+    "t": "numero",
+    "v": "10\\sqrt{2}",
+    "u": "mg/l"
+   },
+   {
+    "e": "Tempo dopo cui la concentrazione è $5$ mg/l",
+    "t": "numero",
+    "v": "16",
+    "u": "h"
+   }
+  ]
+ },
+ "formule-goniometriche/3": {
+  "campi": [
+   {
+    "e": "$\\sin(\\alpha - \\beta)$",
+    "t": "numero",
+    "v": "\\frac{16}{65}"
+   },
+   {
+    "e": "$\\cos(\\alpha + \\beta)$",
+    "t": "numero",
+    "v": "\\frac{33}{65}"
+   }
+  ]
+ },
+ "formule-goniometriche/4": {
+  "campi": [
+   {
+    "e": "$\\tan(\\alpha + \\beta)$",
+    "t": "numero",
+    "v": "-7"
+   },
+   {
+    "e": "$\\tan(\\alpha - \\beta)$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Angolo acuto fra le due rette (in radianti)",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "formule-goniometriche/5": {
+  "campi": [
+   {
+    "e": "$\\sin 2\\alpha$",
+    "t": "numero",
+    "v": "\\frac{4\\sqrt{2}}{9}"
+   },
+   {
+    "e": "$\\cos 2\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{7}{9}"
+   },
+   {
+    "e": "$\\tan 2\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{4\\sqrt{2}}{7}"
+   }
+  ]
+ },
+ "formule-goniometriche/6": {
+  "campi": [
+   {
+    "e": "$\\cos 3\\alpha$ con $\\cos\\alpha = \\frac{1}{3}$",
+    "t": "numero",
+    "v": "-\\frac{23}{27}"
+   }
+  ]
+ },
+ "formule-goniometriche/7": {
+  "campi": [
+   {
+    "e": "$\\sin\\frac{\\pi}{12}$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{6} - \\sqrt{2}}{4}"
+   }
+  ]
+ },
+ "formule-goniometriche/8": {
+  "campi": [
+   {
+    "e": "$\\sin\\frac{\\alpha}{2}$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "$\\cos\\frac{\\alpha}{2}$",
+    "t": "numero",
+    "v": "-\\frac{2\\sqrt{2}}{3}"
+   },
+   {
+    "e": "$\\tan\\frac{\\alpha}{2}$",
+    "t": "numero",
+    "v": "-\\frac{\\sqrt{2}}{4}"
+   }
+  ]
+ },
+ "formule-goniometriche/9": {
+  "campi": [
+   {
+    "e": "$\\sin x$",
+    "t": "numero",
+    "v": "-\\frac{4}{5}"
+   },
+   {
+    "e": "$\\cos x$",
+    "t": "numero",
+    "v": "-\\frac{3}{5}"
+   },
+   {
+    "e": "$\\tan x$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   }
+  ]
+ },
+ "formule-goniometriche/10": {
+  "campi": [
+   {
+    "e": "$\\cos 5x - \\cos x$ scritto come prodotto",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "-2\\sin 3x \\sin 2x"
+   },
+   {
+    "e": "$\\cos 75^\\circ + \\cos 15^\\circ$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{6}}{2}"
+   }
+  ]
+ },
+ "formule-goniometriche/11": {
+  "campi": [
+   {
+    "e": "L'identità vale per",
+    "t": "scelta",
+    "opzioni": [
+     "$x \\neq k\\frac{\\pi}{2}$",
+     "$x \\neq k\\pi$",
+     "$x \\neq \\frac{\\pi}{2} + k\\pi$",
+     "$x \\neq \\frac{\\pi}{4} + k\\frac{\\pi}{2}$",
+     "ogni $x$ reale"
+    ],
+    "v": "$x \\neq k\\frac{\\pi}{2}$"
+   }
+  ]
+ },
+ "formule-goniometriche/12": {
+  "campi": [
+   {
+    "e": "$2\\cos 3x\\cos x$ scritto come somma",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "\\cos 4x + \\cos 2x"
+   },
+   {
+    "e": "$\\sin\\frac{\\pi}{8}\\cos\\frac{3\\pi}{8}$",
+    "t": "numero",
+    "v": "\\frac{2 - \\sqrt{2}}{4}"
+   }
+  ]
+ },
+ "formule-goniometriche/13": {
+  "campi": [
+   {
+    "e": "$r$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\varphi$, con $-\\pi < \\varphi \\leq \\pi$",
+    "t": "numero",
+    "v": "-\\frac{\\pi}{6}"
+   },
+   {
+    "e": "Massimo di $f$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Punto di massimo in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\frac{2\\pi}{3}"
+   },
+   {
+    "e": "Minimo di $f$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Punto di minimo in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\frac{5\\pi}{3}"
+   }
+  ]
+ },
+ "formule-goniometriche/14": {
+  "campi": [
+   {
+    "e": "$S(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "8\\sin 2x"
+   },
+   {
+    "e": "$p(x)$",
+    "t": "funzione",
+    "var": [
+     "x"
+    ],
+    "v": "8\\sin x + 8\\cos x"
+   },
+   {
+    "e": "Area massima",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Perimetro massimo",
+    "t": "numero",
+    "v": "8\\sqrt{2}"
+   },
+   {
+    "e": "Valore di $x$ in cui sono assunti",
+    "t": "numero",
+    "v": "\\frac{\\pi}{4}"
+   }
+  ]
+ },
+ "funzioni-goniometriche/1": {
+  "campi": [
+   {
+    "e": "$300^\\circ$ in radianti",
+    "t": "numero",
+    "v": "\\frac{5\\pi}{3}"
+   },
+   {
+    "e": "$\\frac{11\\pi}{12}$ in gradi",
+    "t": "numero",
+    "v": "165",
+    "u": "°"
+   }
+  ]
+ },
+ "funzioni-goniometriche/2": {
+  "campi": [
+   {
+    "e": "Lunghezza dell'arco",
+    "t": "numero",
+    "v": "5\\pi",
+    "u": "cm"
+   },
+   {
+    "e": "Area del settore",
+    "t": "numero",
+    "v": "30\\pi",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "funzioni-goniometriche/3": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "\\frac{7}{2}"
+   }
+  ]
+ },
+ "funzioni-goniometriche/4": {
+  "campi": [
+   {
+    "e": "$\\cos\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{\\sqrt{5}}{3}"
+   },
+   {
+    "e": "$\\tan\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{2\\sqrt{5}}{5}"
+   },
+   {
+    "e": "$\\cot\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{\\sqrt{5}}{2}"
+   }
+  ]
+ },
+ "funzioni-goniometriche/5": {
+  "campi": [
+   {
+    "e": "$\\sin\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{3}{5}"
+   },
+   {
+    "e": "$\\cos\\alpha$",
+    "t": "numero",
+    "v": "-\\frac{4}{5}"
+   }
+  ]
+ },
+ "funzioni-goniometriche/6": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "funzioni-goniometriche/7": {
+  "campi": [
+   {
+    "e": "$\\cos\\frac{25\\pi}{6}$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{3}}{2}"
+   },
+   {
+    "e": "$\\sin\\frac{31\\pi}{3}$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{3}}{2}"
+   },
+   {
+    "e": "$\\tan\\left(-\\frac{13\\pi}{4}\\right)$",
+    "t": "numero",
+    "v": "-1"
+   }
+  ]
+ },
+ "funzioni-goniometriche/9": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione semplificata",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "funzioni-goniometriche/10": {
+  "campi": [
+   {
+    "e": "Periodo",
+    "t": "numero",
+    "v": "6\\pi"
+   },
+   {
+    "e": "Insieme immagine",
+    "t": "intervallo",
+    "v": "[-5,3]",
+    "var": "y"
+   },
+   {
+    "e": "Ascisse dei punti di massimo nell'intervallo $[0, 12\\pi]$",
+    "t": "valori",
+    "v": [
+     "\\frac{3\\pi}{2}",
+     "\\frac{15\\pi}{2}"
+    ]
+   }
+  ]
+ },
+ "funzioni-goniometriche/11": {
+  "campi": [
+   {
+    "e": "Valori di $k$",
+    "t": "valori",
+    "v": [
+     "3",
+     "-1"
+    ]
+   },
+   {
+    "e": "Periodo",
+    "t": "numero",
+    "v": "\\pi"
+   }
+  ]
+ },
+ "funzioni-goniometriche/12": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "-\\frac{\\pi}{12}"
+   }
+  ]
+ },
+ "funzioni-goniometriche/13": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "[0,4]"
+   },
+   {
+    "e": "Insieme immagine di $f$",
+    "t": "intervallo",
+    "v": "[0,\\pi]",
+    "var": "y"
+   },
+   {
+    "e": "$f(1)$",
+    "t": "numero",
+    "v": "\\frac{\\pi}{3}"
+   },
+   {
+    "e": "$f(4)$",
+    "t": "numero",
+    "v": "\\pi"
+   }
+  ]
+ },
+ "funzioni-goniometriche/14": {
+  "campi": [
+   {
+    "e": "Ampiezza $A$",
+    "t": "numero",
+    "v": "8",
+    "u": "cm"
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "numero",
+    "v": "6",
+    "u": "s"
+   },
+   {
+    "e": "Frequenza $f$",
+    "t": "numero",
+    "v": "\\frac{1}{6}",
+    "u": "Hz",
+    "esatto": true
+   },
+   {
+    "e": "$x(1)$",
+    "t": "numero",
+    "v": "4",
+    "u": "cm"
+   },
+   {
+    "e": "$x(4{,}5)$",
+    "t": "numero",
+    "v": "0",
+    "u": "cm"
+   },
+   {
+    "e": "Primo istante $t>0$ con $x=-8\\ \\text{cm}$",
+    "t": "numero",
+    "v": "3",
+    "u": "s"
+   }
+  ]
+ },
+ "geometria-solida/1": {
+  "campi": [
+   {
+    "e": "Spigolo",
+    "t": "numero",
+    "v": "5",
+    "u": "cm"
+   },
+   {
+    "e": "Diagonale",
+    "t": "numero",
+    "v": "5\\sqrt{3}",
+    "u": "cm"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "125",
+    "u": "cm^3"
+   }
+  ]
+ },
+ "geometria-solida/2": {
+  "campi": [
+   {
+    "e": "Dimensioni",
+    "t": "valori",
+    "v": [
+     "4",
+     "8",
+     "8"
+    ]
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "256"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "256"
+   }
+  ]
+ },
+ "geometria-solida/3": {
+  "campi": [
+   {
+    "e": "Area totale $A_t$",
+    "t": "numero",
+    "v": "90+18\\sqrt{3}"
+   },
+   {
+    "e": "Volume $V$",
+    "t": "numero",
+    "v": "45\\sqrt{3}"
+   }
+  ]
+ },
+ "geometria-solida/4": {
+  "campi": [
+   {
+    "e": "Altezza",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "384"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "384"
+   }
+  ]
+ },
+ "geometria-solida/5": {
+  "campi": [
+   {
+    "e": "Altezza",
+    "t": "numero",
+    "v": "2\\sqrt{6}"
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "36\\sqrt{3}"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "18\\sqrt{2}"
+   }
+  ]
+ },
+ "geometria-solida/6": {
+  "campi": [
+   {
+    "e": "Numero degli spigoli",
+    "t": "numero",
+    "v": "24"
+   },
+   {
+    "e": "Prisma con questi numeri di facce e vertici",
+    "t": "scelta",
+    "opzioni": [
+     "prisma a base esagonale",
+     "prisma a base ottagonale",
+     "prisma a base decagonale",
+     "prisma a base dodecagonale"
+    ],
+    "v": "prisma a base ottagonale"
+   }
+  ]
+ },
+ "geometria-solida/8": {
+  "campi": [
+   {
+    "e": "Distanza di $P$ da $r$",
+    "t": "numero",
+    "v": "13"
+   }
+  ]
+ },
+ "geometria-solida/9": {
+  "campi": [
+   {
+    "e": "Raggio",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "66\\pi"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "72\\pi"
+   }
+  ]
+ },
+ "geometria-solida/10": {
+  "campi": [
+   {
+    "e": "Altezza",
+    "t": "numero",
+    "v": "12"
+   },
+   {
+    "e": "Apotema",
+    "t": "numero",
+    "v": "13"
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "90\\pi"
+   }
+  ]
+ },
+ "geometria-solida/11": {
+  "campi": [
+   {
+    "e": "Apotema",
+    "t": "numero",
+    "v": "5"
+   },
+   {
+    "e": "Area totale",
+    "t": "numero",
+    "v": "42\\pi"
+   },
+   {
+    "e": "Volume",
+    "t": "numero",
+    "v": "28\\pi"
+   }
+  ]
+ },
+ "geometria-solida/12": {
+  "campi": [
+   {
+    "e": "Raggio",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "Area della superficie sferica",
+    "t": "numero",
+    "v": "144\\pi"
+   },
+   {
+    "e": "Distanza del piano dal centro",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "geometria-solida/13": {
+  "campi": [
+   {
+    "e": "Altezza del cono",
+    "t": "numero",
+    "v": "18"
+   },
+   {
+    "e": "Volume del cono",
+    "t": "numero",
+    "v": "864\\pi"
+   }
+  ]
+ },
+ "geometria-solida/14": {
+  "campi": [
+   {
+    "e": "Altezza $h(x)$",
+    "t": "funzione",
+    "v": "2\\sqrt{25-x^2}",
+    "var": [
+     "x"
+    ]
+   },
+   {
+    "e": "Volume per $x=3$",
+    "t": "numero",
+    "v": "72\\pi"
+   },
+   {
+    "e": "$x$ per il cilindro equilatero",
+    "t": "numero",
+    "v": "\\frac{5\\sqrt{2}}{2}"
+   },
+   {
+    "e": "Volume del cilindro equilatero",
+    "t": "numero",
+    "v": "\\frac{125\\sqrt{2}}{2}\\pi"
+   }
+  ]
+ },
+ "logaritmi/1": {
+  "campi": [
+   {
+    "e": "$\\log_{\\sqrt{2}} 8$",
+    "t": "numero",
+    "v": "6"
+   },
+   {
+    "e": "$\\log_{\\frac{1}{5}} 125$",
+    "t": "numero",
+    "v": "-3"
+   }
+  ]
+ },
+ "logaritmi/2": {
+  "campi": [
+   {
+    "e": "Valore dell'espressione",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "logaritmi/3": {
+  "campi": [
+   {
+    "e": "a) $\\log_3 72$",
+    "t": "funzione",
+    "v": "3a + 2",
+    "var": [
+     "a"
+    ]
+   },
+   {
+    "e": "b) $\\log_{12} 3$",
+    "t": "funzione",
+    "v": "\\frac{1}{2a + 1}",
+    "var": [
+     "a"
+    ]
+   }
+  ]
+ },
+ "logaritmi/4": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-\\infty, -3) \\cup (1, +\\infty)"
+   }
+  ]
+ },
+ "logaritmi/5": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-3, -1]"
+   }
+  ]
+ },
+ "logaritmi/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3"
+    ]
+   }
+  ]
+ },
+ "logaritmi/7": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "4"
+    ]
+   }
+  ]
+ },
+ "logaritmi/8": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "\\sqrt{e}",
+     "\\frac{1}{e}"
+    ]
+   }
+  ]
+ },
+ "logaritmi/9": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "scelta",
+    "opzioni": [
+     "$x = \\log_5 3$",
+     "$x = \\log_5 3$ e $x = \\log_5 (-2)$",
+     "$x = \\log_5 2$ e $x = \\log_5 3$",
+     "$x = \\log_3 5$"
+    ],
+    "v": "$x = \\log_5 3$"
+   }
+  ]
+ },
+ "logaritmi/11": {
+  "campi": [
+   {
+    "e": "a) Soluzioni di $\\log_{\\frac{1}{2}} (2x - 3) > -1$",
+    "t": "intervallo",
+    "v": "\\left(\\frac{3}{2}, \\frac{5}{2}\\right)"
+   },
+   {
+    "e": "b) Soluzioni di $\\left( \\frac{1}{2} \\right)^x < 5$",
+    "t": "scelta",
+    "opzioni": [
+     "$x > -\\log_2 5$",
+     "$x < -\\log_2 5$",
+     "$x > \\log_2 5$",
+     "$x < \\log_2 5$"
+    ],
+    "v": "$x > -\\log_2 5$"
+   }
+  ]
+ },
+ "logaritmi/12": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "\\left(\\frac{1}{e}, e\\right]"
+   }
+  ]
+ },
+ "logaritmi/14": {
+  "campi": [
+   {
+    "e": "a) Rapporto tra le ampiezze",
+    "t": "numero",
+    "v": "100"
+   },
+   {
+    "e": "b) Rapporto tra le energie",
+    "t": "numero",
+    "v": "1000"
+   }
+  ]
+ },
+ "numeri-complessi/2": {
+  "campi": [
+   {
+    "e": "Parte reale del risultato",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Parte immaginaria del risultato",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "numeri-complessi/3": {
+  "campi": [
+   {
+    "e": "Parte reale del quoziente",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Parte immaginaria del quoziente",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Modulo del quoziente",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "numeri-complessi/4": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$y$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "numeri-complessi/5": {
+  "campi": [
+   {
+    "e": "$|z|$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "$\\arg z$ in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\frac{5\\pi}{6}"
+   }
+  ]
+ },
+ "numeri-complessi/6": {
+  "campi": [
+   {
+    "e": "Parte reale di $z$",
+    "t": "numero",
+    "v": "-3\\sqrt{2}"
+   },
+   {
+    "e": "Parte immaginaria di $z$",
+    "t": "numero",
+    "v": "3\\sqrt{2}"
+   },
+   {
+    "e": "Parte reale di $\\bar z$",
+    "t": "numero",
+    "v": "-3\\sqrt{2}"
+   },
+   {
+    "e": "Parte immaginaria di $\\bar z$",
+    "t": "numero",
+    "v": "-3\\sqrt{2}"
+   }
+  ]
+ },
+ "numeri-complessi/7": {
+  "campi": [
+   {
+    "e": "Parte reale di $z$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Parte immaginaria di $z$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "numeri-complessi/8": {
+  "campi": [
+   {
+    "e": "a) L'insieme è",
+    "t": "scelta",
+    "opzioni": [
+     "una circonferenza",
+     "un cerchio",
+     "una retta",
+     "un punto"
+    ],
+    "v": "una circonferenza"
+   },
+   {
+    "e": "a) Centro (coordinate nel piano di Gauss)",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "a) Raggio",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "b) Il numero $4 - 2i$ appartiene all'insieme?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "numeri-complessi/9": {
+  "campi": [
+   {
+    "e": "Modulo di $z$",
+    "t": "numero",
+    "v": "2\\sqrt{2}"
+   },
+   {
+    "e": "Argomento di $z$ in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\frac{5\\pi}{4}"
+   },
+   {
+    "e": "Parte reale di $z^8$",
+    "t": "numero",
+    "v": "4096"
+   },
+   {
+    "e": "Parte immaginaria di $z^8$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "numeri-complessi/10": {
+  "campi": [
+   {
+    "e": "Parte reale di $z w$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Parte immaginaria di $z w$",
+    "t": "numero",
+    "v": "12"
+   },
+   {
+    "e": "Parte reale di $\\frac{z}{w}$",
+    "t": "numero",
+    "v": "\\frac{3}{2}"
+   },
+   {
+    "e": "Parte immaginaria di $\\frac{z}{w}$",
+    "t": "numero",
+    "v": "\\frac{3\\sqrt{3}}{2}"
+   }
+  ]
+ },
+ "numeri-complessi/11": {
+  "campi": [
+   {
+    "e": "Radice reale",
+    "t": "numero",
+    "v": "-3"
+   },
+   {
+    "e": "Parte reale delle radici non reali",
+    "t": "numero",
+    "v": "\\frac{3}{2}"
+   },
+   {
+    "e": "Parti immaginarie delle radici non reali",
+    "t": "valori",
+    "v": [
+     "\\frac{3\\sqrt{3}}{2}",
+     "-\\frac{3\\sqrt{3}}{2}"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/12": {
+  "campi": [
+   {
+    "e": "a) Modulo delle soluzioni",
+    "t": "numero",
+    "v": "\\sqrt{2}"
+   },
+   {
+    "e": "a) Argomenti delle soluzioni in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{4}",
+     "\\frac{3\\pi}{4}",
+     "\\frac{5\\pi}{4}",
+     "\\frac{7\\pi}{4}"
+    ]
+   },
+   {
+    "e": "b) Area del poligono",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "numeri-complessi/13": {
+  "campi": [
+   {
+    "e": "Parte reale delle soluzioni",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Parti immaginarie delle soluzioni",
+    "t": "valori",
+    "v": [
+     "3",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "numeri-complessi/14": {
+  "campi": [
+   {
+    "e": "a) $k$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "b) Parte reale dell'altra soluzione",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "b) Parte immaginaria dell'altra soluzione",
+    "t": "numero",
+    "v": "-2"
+   }
+  ]
+ },
+ "probabilita/1": {
+  "campi": [
+   {
+    "e": "Probabilità",
+    "t": "numero",
+    "v": "\\frac{5}{6}"
+   }
+  ]
+ },
+ "probabilita/4": {
+  "campi": [
+   {
+    "e": "a) Probabilità di almeno due croci",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "b) Probabilità di esattamente una testa",
+    "t": "numero",
+    "v": "\\frac{3}{8}"
+   }
+  ]
+ },
+ "probabilita/5": {
+  "campi": [
+   {
+    "e": "a) Con reimmissione",
+    "t": "numero",
+    "v": "\\frac{29}{50}"
+   },
+   {
+    "e": "b) Senza reimmissione",
+    "t": "numero",
+    "v": "\\frac{8}{15}"
+   }
+  ]
+ },
+ "probabilita/8": {
+  "campi": [
+   {
+    "e": "$P(A \\cap B)$",
+    "t": "numero",
+    "v": "\\frac{1}{12}"
+   },
+   {
+    "e": "$P(A \\mid B)$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Gli eventi $A$ e $B$ sono",
+    "t": "scelta",
+    "opzioni": [
+     "indipendenti",
+     "non indipendenti"
+    ],
+    "v": "indipendenti"
+   }
+  ]
+ },
+ "probabilita/10": {
+  "campi": [
+   {
+    "e": "a) Colpito esattamente una volta",
+    "t": "numero",
+    "v": "0{,}38"
+   },
+   {
+    "e": "b) Colpito almeno una volta",
+    "t": "numero",
+    "v": "0{,}88"
+   }
+  ]
+ },
+ "probabilita/11": {
+  "campi": [
+   {
+    "e": "$P(R)$",
+    "t": "numero",
+    "v": "\\frac{2}{3}"
+   },
+   {
+    "e": "$P(A \\mid R)$",
+    "t": "numero",
+    "v": "\\frac{1}{5}"
+   }
+  ]
+ },
+ "probabilita/12": {
+  "campi": [
+   {
+    "e": "$P(L_1 \\mid D)$",
+    "t": "numero",
+    "v": "\\frac{10}{21}"
+   }
+  ]
+ },
+ "probabilita/13": {
+  "campi": [
+   {
+    "e": "a) Esattamente $2$ volte pari",
+    "t": "numero",
+    "v": "\\frac{5}{16}"
+   },
+   {
+    "e": "b) Almeno una volta pari",
+    "t": "numero",
+    "v": "\\frac{31}{32}"
+   }
+  ]
+ },
+ "probabilita/14": {
+  "campi": [
+   {
+    "e": "a) $n$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "b) Probabilità di due palline nere",
+    "t": "numero",
+    "v": "\\frac{1}{15}"
+   }
+  ]
+ },
+ "successioni-e-progressioni/1": {
+  "campi": [
+   {
+    "e": "$a_1, a_2, a_3, a_4$",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{2}",
+     "1",
+     "\\frac{5}{4}",
+     "\\frac{7}{5}"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$a_{n+1} - a_n$",
+    "t": "funzione",
+    "v": "\\frac{3}{(n+1)(n+2)}",
+    "var": [
+     "n"
+    ]
+   },
+   {
+    "e": "La successione è",
+    "t": "scelta",
+    "opzioni": [
+     "strettamente crescente",
+     "strettamente decrescente",
+     "costante",
+     "non monotona"
+    ],
+    "v": "strettamente crescente"
+   },
+   {
+    "e": "Minimo della successione",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "$2 - a_n$",
+    "t": "funzione",
+    "v": "\\frac{3}{n+1}",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "successioni-e-progressioni/2": {
+  "campi": [
+   {
+    "e": "$a_1, a_2, a_3, a_4, a_5$",
+    "t": "valori",
+    "v": [
+     "1",
+     "4",
+     "9",
+     "16",
+     "25"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$a_{n+1}$ in funzione di $n$",
+    "t": "funzione",
+    "v": "(n+1)^2",
+    "var": [
+     "n"
+    ]
+   }
+  ]
+ },
+ "successioni-e-progressioni/5": {
+  "campi": [
+   {
+    "e": "Ragione $d$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$a_{30}$",
+    "t": "numero",
+    "v": "88"
+   },
+   {
+    "e": "$S_{30}$",
+    "t": "numero",
+    "v": "1335"
+   }
+  ]
+ },
+ "successioni-e-progressioni/8": {
+  "campi": [
+   {
+    "e": "$a_8$",
+    "t": "numero",
+    "v": "640"
+   },
+   {
+    "e": "$S_8$",
+    "t": "numero",
+    "v": "1275"
+   }
+  ]
+ },
+ "successioni-e-progressioni/9": {
+  "campi": [
+   {
+    "e": "Ragione $q$",
+    "t": "numero",
+    "v": "-2"
+   },
+   {
+    "e": "$a_1$",
+    "t": "numero",
+    "v": "-6"
+   },
+   {
+    "e": "Primi sei termini",
+    "t": "valori",
+    "v": [
+     "-6",
+     "12",
+     "-24",
+     "48",
+     "-96",
+     "192"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$S_6$",
+    "t": "numero",
+    "v": "126"
+   }
+  ]
+ },
+ "successioni-e-progressioni/10": {
+  "campi": [
+   {
+    "e": "Ragione $q$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Numeri inseriti, in ordine",
+    "t": "valori",
+    "v": [
+     "1",
+     "3",
+     "9",
+     "27"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "successioni-e-progressioni/11": {
+  "campi": [
+   {
+    "e": "$k$ (progressione aritmetica)",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "$k$ (progressione geometrica)",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "successioni-e-progressioni/12": {
+  "campi": [
+   {
+    "e": "Montante dopo $10$ anni",
+    "t": "numero",
+    "v": "6094{,}97",
+    "u": "€"
+   },
+   {
+    "e": "Numero di anni",
+    "t": "numero",
+    "v": "10"
+   }
+  ]
+ },
+ "successioni-e-progressioni/13": {
+  "campi": [
+   {
+    "e": "Frazione generatrice di $0{,}\\overline{27}$",
+    "t": "numero",
+    "v": "\\frac{3}{11}"
+   },
+   {
+    "e": "$6 + 2 + \\frac{2}{3} + \\frac{2}{9} + \\dots$",
+    "t": "numero",
+    "v": "9"
+   }
+  ]
+ },
+ "successioni-e-progressioni/14": {
+  "campi": [
+   {
+    "e": "Ragione $q$ dei perimetri",
+    "t": "numero",
+    "v": "\\frac{1}{2}"
+   },
+   {
+    "e": "Somma dei perimetri dei primi cinque triangoli",
+    "t": "numero",
+    "v": "\\frac{279}{8}",
+    "u": "cm"
+   },
+   {
+    "e": "Somma delle aree di tutti i triangoli",
+    "t": "numero",
+    "v": "12\\sqrt{3}",
+    "u": "cm^2"
+   }
+  ]
+ },
+ "trigonometria/1": {
+  "campi": [
+   {
+    "e": "$\\gamma$",
+    "t": "numero",
+    "v": "30",
+    "u": "°"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "8\\sqrt{3}"
+   },
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "8"
+   }
+  ]
+ },
+ "trigonometria/2": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "17"
+   },
+   {
+    "e": "$\\beta$",
+    "t": "numero",
+    "v": "28{,}07",
+    "u": "°"
+   },
+   {
+    "e": "$\\gamma$",
+    "t": "numero",
+    "v": "61{,}93",
+    "u": "°"
+   }
+  ]
+ },
+ "trigonometria/3": {
+  "campi": [
+   {
+    "e": "Area $S$",
+    "t": "numero",
+    "v": "15\\sqrt{2}"
+   },
+   {
+    "e": "Altezza relativa al lato $a$",
+    "t": "numero",
+    "v": "3\\sqrt{2}"
+   }
+  ]
+ },
+ "trigonometria/4": {
+  "campi": [
+   {
+    "e": "Area dell'ottagono",
+    "t": "numero",
+    "v": "32\\sqrt{2}"
+   },
+   {
+    "e": "Lato dell'ottagono",
+    "t": "numero",
+    "v": "4\\sqrt{2 - \\sqrt{2}}"
+   }
+  ]
+ },
+ "trigonometria/5": {
+  "campi": [
+   {
+    "e": "$AB$",
+    "t": "numero",
+    "v": "8"
+   },
+   {
+    "e": "Angoli alla circonferenza che insistono su $AB$ (in gradi)",
+    "t": "valori",
+    "v": [
+     "30",
+     "150"
+    ]
+   }
+  ]
+ },
+ "trigonometria/6": {
+  "campi": [
+   {
+    "e": "$\\gamma$",
+    "t": "numero",
+    "v": "75",
+    "u": "°"
+   },
+   {
+    "e": "$b$",
+    "t": "numero",
+    "v": "4\\sqrt{6}"
+   },
+   {
+    "e": "$c$",
+    "t": "numero",
+    "v": "6\\sqrt{2} + 2\\sqrt{6}"
+   },
+   {
+    "e": "Raggio $R$ della circonferenza circoscritta",
+    "t": "numero",
+    "v": "4\\sqrt{3}"
+   }
+  ]
+ },
+ "trigonometria/7": {
+  "campi": [
+   {
+    "e": "$a$",
+    "t": "numero",
+    "v": "2\\sqrt{19}"
+   },
+   {
+    "e": "Raggio $R$ della circonferenza circoscritta",
+    "t": "numero",
+    "v": "\\frac{2\\sqrt{57}}{3}"
+   }
+  ]
+ },
+ "trigonometria/8": {
+  "campi": [
+   {
+    "e": "Esiste un triangolo con lati $6$, $8$, $11$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "Il triangolo è",
+    "t": "scelta",
+    "opzioni": [
+     "acutangolo",
+     "rettangolo",
+     "ottusangolo"
+    ],
+    "v": "ottusangolo"
+   },
+   {
+    "e": "Angolo maggiore",
+    "t": "numero",
+    "v": "102{,}64",
+    "u": "°"
+   }
+  ]
+ },
+ "trigonometria/9": {
+  "campi": [
+   {
+    "e": "Numero di triangoli",
+    "t": "scelta",
+    "opzioni": [
+     "nessuno",
+     "uno",
+     "due",
+     "infiniti"
+    ],
+    "v": "nessuno"
+   }
+  ]
+ },
+ "trigonometria/10": {
+  "campi": [
+   {
+    "e": "Numero di triangoli",
+    "t": "scelta",
+    "opzioni": [
+     "nessuno",
+     "uno",
+     "due"
+    ],
+    "v": "due"
+   },
+   {
+    "e": "Triangolo con $\\beta$ acuto: $\\beta$",
+    "t": "numero",
+    "v": "48{,}59",
+    "u": "°"
+   },
+   {
+    "e": "Triangolo con $\\beta$ acuto: $\\gamma$",
+    "t": "numero",
+    "v": "101{,}41",
+    "u": "°"
+   },
+   {
+    "e": "Triangolo con $\\beta$ acuto: $c$",
+    "t": "numero",
+    "v": "3\\sqrt{3} + \\sqrt{7}"
+   },
+   {
+    "e": "Triangolo con $\\beta$ ottuso: $\\beta$",
+    "t": "numero",
+    "v": "131{,}41",
+    "u": "°"
+   },
+   {
+    "e": "Triangolo con $\\beta$ ottuso: $\\gamma$",
+    "t": "numero",
+    "v": "18{,}59",
+    "u": "°"
+   },
+   {
+    "e": "Triangolo con $\\beta$ ottuso: $c$",
+    "t": "numero",
+    "v": "3\\sqrt{3} - \\sqrt{7}"
+   }
+  ]
+ },
+ "trigonometria/12": {
+  "campi": [
+   {
+    "e": "$AP$",
+    "t": "numero",
+    "v": "109{,}28",
+    "u": "m"
+   },
+   {
+    "e": "$BP$",
+    "t": "numero",
+    "v": "97{,}98",
+    "u": "m"
+   }
+  ]
+ },
+ "trigonometria/13": {
+  "campi": [
+   {
+    "e": "$P_\\parallel$",
+    "t": "numero",
+    "v": "58{,}8",
+    "u": "N"
+   },
+   {
+    "e": "$P_\\perp$",
+    "t": "numero",
+    "v": "101{,}8",
+    "u": "N"
+   },
+   {
+    "e": "Intensità della risultante $R$",
+    "t": "numero",
+    "v": "11{,}36",
+    "u": "N"
+   }
+  ]
+ },
+ "trigonometria/14": {
+  "campi": [
+   {
+    "e": "Limitazioni per $x$",
+    "t": "intervallo",
+    "v": "\\left(0, \\frac{\\pi}{2}\\right)"
+   },
+   {
+    "e": "$AB$",
+    "t": "funzione",
+    "v": "2r\\cos x",
+    "var": [
+     "x",
+     "r"
+    ]
+   },
+   {
+    "e": "$BC$",
+    "t": "funzione",
+    "v": "2r\\sin x",
+    "var": [
+     "x",
+     "r"
+    ]
+   },
+   {
+    "e": "Valori di $x$ con area $\\sqrt{3}\\,r^2$",
+    "t": "valori",
+    "v": [
+     "\\frac{\\pi}{6}",
+     "\\frac{\\pi}{3}"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,1332 @@
+{
+ "acidi-basi-redox/1": {
+  "campi": [
+   {
+    "e": "Base coniugata di $\\mathrm{H_2PO_4^-}$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{HPO_4^{2-}}$",
+     "$\\mathrm{H_3PO_4}$",
+     "$\\mathrm{PO_4^{3-}}$",
+     "$\\mathrm{H_2PO_4^{2-}}$"
+    ],
+    "v": "$\\mathrm{HPO_4^{2-}}$"
+   },
+   {
+    "e": "Acido coniugato di $\\mathrm{H_2PO_4^-}$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{H_3PO_4}$",
+     "$\\mathrm{HPO_4^{2-}}$",
+     "$\\mathrm{H_3PO_4^{+}}$",
+     "$\\mathrm{H_4PO_4^{+}}$"
+    ],
+    "v": "$\\mathrm{H_3PO_4}$"
+   }
+  ]
+ },
+ "acidi-basi-redox/2": {
+  "campi": [
+   {
+    "e": "Base di Lewis",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{NH_3}$",
+     "$\\mathrm{BF_3}$",
+     "$\\mathrm{F_3B\\!\\leftarrow\\!NH_3}$"
+    ],
+    "v": "$\\mathrm{NH_3}$"
+   },
+   {
+    "e": "Ragione",
+    "t": "scelta",
+    "opzioni": [
+     "dona una coppia elettronica",
+     "accetta una coppia elettronica",
+     "cede un protone",
+     "accetta un protone"
+    ],
+    "v": "dona una coppia elettronica"
+   }
+  ]
+ },
+ "acidi-basi-redox/3": {
+  "campi": [
+   {
+    "e": "pH",
+    "t": "numero",
+    "v": "2{,}70",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/4": {
+  "campi": [
+   {
+    "e": "pH",
+    "t": "numero",
+    "v": "11{,}60",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/5": {
+  "campi": [
+   {
+    "e": "pH",
+    "t": "numero",
+    "v": "3{,}20",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/6": {
+  "campi": [
+   {
+    "e": "$K_b$",
+    "t": "numero",
+    "v": "1{,}01\\cdot10^{-6}"
+   }
+  ]
+ },
+ "acidi-basi-redox/7": {
+  "campi": [
+   {
+    "e": "pH",
+    "t": "numero",
+    "v": "5{,}48",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/8": {
+  "campi": [
+   {
+    "e": "Intervallo di viraggio",
+    "t": "scelta",
+    "opzioni": [
+     "$1{,}0$–$2{,}0$",
+     "$3{,}1$–$4{,}4$",
+     "$6{,}0$–$7{,}0$",
+     "$8{,}2$–$10{,}0$"
+    ],
+    "v": "$8{,}2$–$10{,}0$"
+   }
+  ]
+ },
+ "acidi-basi-redox/9": {
+  "campi": [
+   {
+    "e": "pH",
+    "t": "numero",
+    "v": "5{,}06",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/10": {
+  "campi": [
+   {
+    "e": "pH finale",
+    "t": "numero",
+    "v": "4{,}94",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/11": {
+  "campi": [
+   {
+    "e": "$\\dfrac{[\\mathrm{HPO_4^{2-}}]}{[\\mathrm{H_2PO_4^-}]}$",
+    "t": "numero",
+    "v": "1{,}58",
+    "cifre": 2
+   }
+  ]
+ },
+ "acidi-basi-redox/12": {
+  "campi": [
+   {
+    "e": "Effetto della protonazione sulla dissoluzione",
+    "t": "scelta",
+    "opzioni": [
+     "la favorisce",
+     "la riduce",
+     "non ha effetto"
+    ],
+    "v": "la favorisce"
+   }
+  ]
+ },
+ "acidi-basi-redox/13": {
+  "campi": [
+   {
+    "e": "Trasformazione del ferro",
+    "t": "scelta",
+    "opzioni": [
+     "ossidazione da ferro(II) a ferro(III)",
+     "riduzione da ferro(III) a ferro(II)",
+     "riduzione da ferro(II) a ferro metallico",
+     "nessuna variazione del numero di ossidazione"
+    ],
+    "v": "ossidazione da ferro(II) a ferro(III)"
+   },
+   {
+    "e": "Specie radicalica prodotta",
+    "t": "scelta",
+    "opzioni": [
+     "${}^\\bullet\\mathrm{OH}$",
+     "$\\mathrm{OH^-}$",
+     "${}^\\bullet\\mathrm{OOH}$",
+     "$\\mathrm{O_2^{\\bullet-}}$"
+    ],
+    "v": "${}^\\bullet\\mathrm{OH}$"
+   }
+  ]
+ },
+ "acidi-basi-redox/14": {
+  "campi": [
+   {
+    "e": "$E$",
+    "t": "numero",
+    "v": "1{,}159",
+    "u": "V"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/1": {
+  "campi": [
+   {
+    "e": "Protoni",
+    "t": "numero",
+    "v": "20"
+   },
+   {
+    "e": "Neutroni",
+    "t": "numero",
+    "v": "20"
+   },
+   {
+    "e": "Elettroni",
+    "t": "numero",
+    "v": "18"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/2": {
+  "campi": [
+   {
+    "e": "Configurazione di $\\mathrm{K^+}$",
+    "t": "scelta",
+    "opzioni": [
+     "$1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6$",
+     "$1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6\\,4s^1$",
+     "$1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^5$",
+     "$1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6\\,4s^2$"
+    ],
+    "v": "$1s^2\\,2s^2\\,2p^6\\,3s^2\\,3p^6$"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/3": {
+  "campi": [
+   {
+    "e": "Valori di $m_l$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "0",
+     "1"
+    ]
+   },
+   {
+    "e": "Numero di orbitali",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Massimo numero di elettroni",
+    "t": "numero",
+    "v": "6"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/4": {
+  "campi": [
+   {
+    "e": "$n$",
+    "t": "numero",
+    "v": "0{,}100",
+    "u": "mol"
+   },
+   {
+    "e": "Numero di unità formula",
+    "t": "numero",
+    "v": "6{,}02\\cdot10^{22}"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/5": {
+  "campi": [
+   {
+    "e": "Disposizione dei domini",
+    "t": "scelta",
+    "opzioni": [
+     "lineare",
+     "trigonale planare",
+     "tetraedrica",
+     "trigonale bipiramidale"
+    ],
+    "v": "trigonale planare"
+   },
+   {
+    "e": "Geometria molecolare",
+    "t": "scelta",
+    "opzioni": [
+     "lineare",
+     "angolare",
+     "trigonale planare",
+     "piramidale"
+    ],
+    "v": "angolare"
+   },
+   {
+    "e": "Polarità",
+    "t": "scelta",
+    "opzioni": [
+     "polare",
+     "apolare"
+    ],
+    "v": "polare"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/6": {
+  "campi": [
+   {
+    "e": "Geometria molecolare",
+    "t": "scelta",
+    "opzioni": [
+     "tetraedrica",
+     "quadrata planare",
+     "piramidale",
+     "trigonale planare"
+    ],
+    "v": "tetraedrica"
+   },
+   {
+    "e": "Ibridazione del carbonio",
+    "t": "scelta",
+    "opzioni": [
+     "$sp$",
+     "$sp^2$",
+     "$sp^3$",
+     "$sp^3d$"
+    ],
+    "v": "$sp^3$"
+   },
+   {
+    "e": "Legami $\\sigma$",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "Legami $\\pi$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/7": {
+  "campi": [
+   {
+    "e": "Estremità rivolta verso lo ione",
+    "t": "scelta",
+    "opzioni": [
+     "l'ossigeno, parzialmente negativo",
+     "gli idrogeni, parzialmente positivi"
+    ],
+    "v": "l'ossigeno, parzialmente negativo"
+   },
+   {
+    "e": "Interazione",
+    "t": "scelta",
+    "opzioni": [
+     "ione-dipolo",
+     "legame a idrogeno",
+     "dipolo-dipolo",
+     "legame ionico",
+     "forze di dispersione"
+    ],
+    "v": "ione-dipolo"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/8": {
+  "campi": [
+   {
+    "e": "Numero di ossidazione del ferro",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Nome di Stock",
+    "t": "scelta",
+    "opzioni": [
+     "cloruro di ferro(III)",
+     "cloruro di ferro(II)",
+     "tricloruro di ferro(I)",
+     "cloruro ferroso"
+    ],
+    "v": "cloruro di ferro(III)"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/10": {
+  "campi": [
+   {
+    "e": "$V_2$",
+    "t": "numero",
+    "v": "4{,}00",
+    "u": "L"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/11": {
+  "campi": [
+   {
+    "e": "$V$",
+    "t": "numero",
+    "v": "6{,}15",
+    "u": "L"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/12": {
+  "campi": [
+   {
+    "e": "Curva di fusione a pendenza negativa",
+    "t": "scelta",
+    "opzioni": [
+     "acqua",
+     "CO2",
+     "entrambe",
+     "nessuna delle due"
+    ],
+    "v": "acqua"
+   },
+   {
+    "e": "Solido che sublima a pressione atmosferica",
+    "t": "scelta",
+    "opzioni": [
+     "acqua",
+     "CO2",
+     "entrambe",
+     "nessuna delle due"
+    ],
+    "v": "CO2"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/13": {
+  "campi": [
+   {
+    "e": "$\\Delta U$",
+    "t": "numero",
+    "v": "300",
+    "u": "J"
+   }
+  ]
+ },
+ "atomo-legami-termodinamica/14": {
+  "campi": [
+   {
+    "e": "$\\Delta G$ a $350\\,\\mathrm K$",
+    "t": "numero",
+    "v": "-3{,}00",
+    "u": "kJ/mol"
+   },
+   {
+    "e": "Temperatura per cui $\\Delta G=0$",
+    "t": "numero",
+    "v": "300",
+    "u": "K"
+   }
+  ]
+ },
+ "biomolecole/1": {
+  "campi": [
+   {
+    "e": "Amminoacido con catena $\\mathrm{CH_2CONH_2}$",
+    "t": "scelta",
+    "opzioni": [
+     "asparagina",
+     "glutammina",
+     "aspartato",
+     "glutammato"
+    ],
+    "v": "asparagina"
+   },
+   {
+    "e": "Carica della catena $\\mathrm{CH_2CONH_2}$ a pH 7",
+    "t": "scelta",
+    "opzioni": [
+     "$0$",
+     "$-1$",
+     "$+1$"
+    ],
+    "v": "$0$"
+   },
+   {
+    "e": "Amminoacido con catena $\\mathrm{CH_2COO^-}$",
+    "t": "scelta",
+    "opzioni": [
+     "asparagina",
+     "glutammina",
+     "aspartato",
+     "glutammato"
+    ],
+    "v": "aspartato"
+   },
+   {
+    "e": "Carica della catena $\\mathrm{CH_2COO^-}$ a pH 7",
+    "t": "scelta",
+    "opzioni": [
+     "$0$",
+     "$-1$",
+     "$+1$"
+    ],
+    "v": "$-1$"
+   }
+  ]
+ },
+ "biomolecole/2": {
+  "campi": [
+   {
+    "e": "Serie della cisteina",
+    "t": "scelta",
+    "opzioni": [
+     "D",
+     "L"
+    ],
+    "v": "L"
+   },
+   {
+    "e": "Configurazione del carbonio α",
+    "t": "scelta",
+    "opzioni": [
+     "$R$",
+     "$S$"
+    ],
+    "v": "$R$"
+   },
+   {
+    "e": "Numero di stereocentri della glicina",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "biomolecole/4": {
+  "campi": [
+   {
+    "e": "Massa molare di Ala-Ala-Ala",
+    "t": "numero",
+    "v": "231{,}23",
+    "u": "g/mol"
+   },
+   {
+    "e": "Numero di legami peptidici",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "biomolecole/5": {
+  "campi": [
+   {
+    "e": "Numero di ponti disolfuro",
+    "t": "numero",
+    "v": "4"
+   },
+   {
+    "e": "La sola riduzione dei ponti modifica la sequenza?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "biomolecole/6": {
+  "campi": [
+   {
+    "e": "Relazione stereochimica tra D-glucosio e D-galattosio",
+    "t": "scelta",
+    "opzioni": [
+     "enantiomeri",
+     "epimeri al C4, quindi diastereoisomeri",
+     "anomeri",
+     "isomeri costituzionali"
+    ],
+    "v": "epimeri al C4, quindi diastereoisomeri"
+   }
+  ]
+ },
+ "biomolecole/7": {
+  "campi": [
+   {
+    "e": "Anomero con OH al C1 sopra l'anello",
+    "t": "scelta",
+    "opzioni": [
+     "α",
+     "β"
+    ],
+    "v": "β"
+   },
+   {
+    "e": "Trasformazione che interconverte gli anomeri",
+    "t": "scelta",
+    "opzioni": [
+     "apertura dell'emiacetale alla forma carbonilica e richiusura dell'anello",
+     "rotazione attorno al legame C1-O dell'anello chiuso",
+     "inversione di configurazione al C5",
+     "idrolisi di un legame glicosidico"
+    ],
+    "v": "apertura dell'emiacetale alla forma carbonilica e richiusura dell'anello"
+   }
+  ]
+ },
+ "biomolecole/8": {
+  "campi": [
+   {
+    "e": "Prodotto dell'ossidazione",
+    "t": "scelta",
+    "opzioni": [
+     "acido D-gluconico",
+     "acido D-glucarico",
+     "acido D-glucuronico",
+     "D-sorbitolo"
+    ],
+    "v": "acido D-gluconico"
+   },
+   {
+    "e": "Classe del nuovo gruppo al C1",
+    "t": "scelta",
+    "opzioni": [
+     "carbossilico",
+     "aldeidico",
+     "alcolico",
+     "chetonico"
+    ],
+    "v": "carbossilico"
+   }
+  ]
+ },
+ "biomolecole/9": {
+  "campi": [
+   {
+    "e": "Disaccaride riducente prima dell'idrolisi",
+    "t": "scelta",
+    "opzioni": [
+     "lattosio",
+     "saccarosio",
+     "entrambi",
+     "nessuno dei due"
+    ],
+    "v": "lattosio"
+   },
+   {
+    "e": "Monosaccaridi prodotti dall'idrolisi del saccarosio",
+    "t": "scelta",
+    "opzioni": [
+     "glucosio e fruttosio",
+     "glucosio e galattosio",
+     "due molecole di glucosio",
+     "galattosio e fruttosio"
+    ],
+    "v": "glucosio e fruttosio"
+   }
+  ]
+ },
+ "biomolecole/10": {
+  "campi": [
+   {
+    "e": "Legame tra residui adiacenti nella cellulosa",
+    "t": "scelta",
+    "opzioni": [
+     "$\\alpha(1\\to4)$",
+     "$\\beta(1\\to4)$",
+     "$\\alpha(1\\to6)$",
+     "$\\beta(1\\to6)$"
+    ],
+    "v": "$\\beta(1\\to4)$"
+   },
+   {
+    "e": "Legami del glicogeno",
+    "t": "scelta",
+    "opzioni": [
+     "$\\alpha(1\\to4)$ e $\\alpha(1\\to6)$",
+     "$\\beta(1\\to4)$ e $\\beta(1\\to6)$",
+     "$\\alpha(1\\to4)$ e $\\beta(1\\to6)$",
+     "$\\beta(1\\to4)$ e $\\alpha(1\\to6)$"
+    ],
+    "v": "$\\alpha(1\\to4)$ e $\\alpha(1\\to6)$"
+   },
+   {
+    "e": "Classificazione di cellulosa e glicogeno",
+    "t": "scelta",
+    "opzioni": [
+     "entrambi omopolisaccaridi",
+     "entrambi eteropolisaccaridi",
+     "cellulosa omopolisaccaride, glicogeno eteropolisaccaride",
+     "cellulosa eteropolisaccaride, glicogeno omopolisaccaride"
+    ],
+    "v": "entrambi omopolisaccaridi"
+   }
+  ]
+ },
+ "biomolecole/11": {
+  "campi": [
+   {
+    "e": "$n(\\mathrm{NaOH})$",
+    "t": "numero",
+    "v": "0{,}180",
+    "u": "mol"
+   },
+   {
+    "e": "$n(\\mathrm{glicerolo})$",
+    "t": "numero",
+    "v": "0{,}060",
+    "u": "mol"
+   }
+  ]
+ },
+ "biomolecole/12": {
+  "campi": [
+   {
+    "e": "Molecola ottenuta dalla sfingosina",
+    "t": "scelta",
+    "opzioni": [
+     "ceramide",
+     "sfingomielina",
+     "cerebroside",
+     "fosfatidilcolina"
+    ],
+    "v": "ceramide"
+   },
+   {
+    "e": "Classe strutturale del colesterolo",
+    "t": "scelta",
+    "opzioni": [
+     "sterolo",
+     "acido grasso",
+     "triacilglicerolo",
+     "fosfolipide"
+    ],
+    "v": "sterolo"
+   }
+  ]
+ },
+ "biomolecole/13": {
+  "campi": [
+   {
+    "e": "Filamento complementare, da 5′ a 3′",
+    "t": "scelta",
+    "opzioni": [
+     "5′-TACGT-3′",
+     "5′-TGCAT-3′",
+     "5′-UACGU-3′",
+     "5′-ACGTA-3′"
+    ],
+    "v": "5′-TACGT-3′"
+   },
+   {
+    "e": "Collegamenti fosfodiestere per filamento",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "biomolecole/14": {
+  "campi": [
+   {
+    "e": "Prodotto della deaminazione della citosina",
+    "t": "scelta",
+    "opzioni": [
+     "uracile",
+     "timina",
+     "5-metilcitosina",
+     "ipoxantina"
+    ],
+    "v": "uracile"
+   },
+   {
+    "e": "$n(\\mathrm{GSSG})$",
+    "t": "numero",
+    "v": "0{,}020",
+    "u": "mol"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/1": {
+  "campi": [
+   {
+    "e": "Numero di legami $\\sigma$",
+    "t": "numero",
+    "v": "3"
+   },
+   {
+    "e": "Numero di legami $\\pi$",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/2": {
+  "campi": [
+   {
+    "e": "Nome IUPAC",
+    "t": "scelta",
+    "opzioni": [
+     "3-metilpentano",
+     "2-etilbutano",
+     "2-metilpentano",
+     "3-etilbutano"
+    ],
+    "v": "3-metilpentano"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/3": {
+  "campi": [
+   {
+    "e": "Numero di centri stereogenici",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/4": {
+  "campi": [
+   {
+    "e": "Configurazione del doppio legame",
+    "t": "scelta",
+    "opzioni": [
+     "$E$",
+     "$Z$",
+     "non assegnabile"
+    ],
+    "v": "$E$"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/5": {
+  "campi": [
+   {
+    "e": "Priorità CIP dalla maggiore alla minore",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{Br>Cl>O>H}$",
+     "$\\mathrm{O>Cl>Br>H}$",
+     "$\\mathrm{Cl>Br>O>H}$",
+     "$\\mathrm{Br>O>Cl>H}$"
+    ],
+    "v": "$\\mathrm{Br>Cl>O>H}$"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/6": {
+  "campi": [
+   {
+    "e": "Configurazione",
+    "t": "scelta",
+    "opzioni": [
+     "$R$",
+     "$S$",
+     "non assegnabile"
+    ],
+    "v": "$S$"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/7": {
+  "campi": [
+   {
+    "e": "Eccesso enantiomerico",
+    "t": "numero",
+    "v": "30",
+    "u": "%"
+   },
+   {
+    "e": "Enantiomero in eccesso",
+    "t": "scelta",
+    "opzioni": [
+     "R",
+     "S"
+    ],
+    "v": "R"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/9": {
+  "campi": [
+   {
+    "e": "Specie che si formano",
+    "t": "scelta",
+    "opzioni": [
+     "due radicali $\\mathrm{Cl}^{\\boldsymbol{\\cdot}}$",
+     "uno ione $\\mathrm{Cl^+}$ e uno ione $\\mathrm{Cl^-}$",
+     "due ioni $\\mathrm{Cl^-}$",
+     "un radicale $\\mathrm{Cl}^{\\boldsymbol{\\cdot}}$ e uno ione $\\mathrm{Cl^-}$"
+    ],
+    "v": "due radicali $\\mathrm{Cl}^{\\boldsymbol{\\cdot}}$"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/11": {
+  "campi": [
+   {
+    "e": "Alchene ottenuto",
+    "t": "scelta",
+    "opzioni": [
+     "etene",
+     "propene",
+     "etino",
+     "etano"
+    ],
+    "v": "etene"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/12": {
+  "campi": [
+   {
+    "e": "Sequenza con due doppi legami coniugati",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{C{=}C{-}C{=}C}$",
+     "$\\mathrm{C{=}C{=}C{-}C}$",
+     "$\\mathrm{C{=}C{-}C{-}C}$"
+    ],
+    "v": "$\\mathrm{C{=}C{-}C{=}C}$"
+   }
+  ]
+ },
+ "carbonio-idrocarburi-stereochimica/14": {
+  "campi": [
+   {
+    "e": "Effetto del cloro sulla reattività dell'anello",
+    "t": "scelta",
+    "opzioni": [
+     "attiva",
+     "disattiva",
+     "nessun effetto"
+    ],
+    "v": "disattiva"
+   },
+   {
+    "e": "Orientamento della sostituzione successiva",
+    "t": "scelta",
+    "opzioni": [
+     "orto e para",
+     "meta",
+     "nessuna preferenza"
+    ],
+    "v": "orto e para"
+   }
+  ]
+ },
+ "gruppi-funzionali/1": {
+  "campi": [
+   {
+    "e": "Classe dell'alcol $\\mathrm{CH_3CH_2CH_2OH}$",
+    "t": "scelta",
+    "opzioni": [
+     "primario",
+     "secondario",
+     "terziario"
+    ],
+    "v": "primario"
+   }
+  ]
+ },
+ "gruppi-funzionali/2": {
+  "campi": [
+   {
+    "e": "Prodotto dell'ossidazione del propan-2-olo",
+    "t": "scelta",
+    "opzioni": [
+     "propanale, $\\mathrm{CH_3CH_2CHO}$",
+     "propanone, $\\mathrm{CH_3COCH_3}$",
+     "acido propanoico, $\\mathrm{CH_3CH_2COOH}$",
+     "propene, $\\mathrm{CH_3CH{=}CH_2}$"
+    ],
+    "v": "propanone, $\\mathrm{CH_3COCH_3}$"
+   }
+  ]
+ },
+ "gruppi-funzionali/3": {
+  "campi": [
+   {
+    "e": "Gruppi SH consumati per un legame S-S",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "gruppi-funzionali/4": {
+  "campi": [
+   {
+    "e": "Classe di $\\mathrm{CH_3OCH_2CH_3}$",
+    "t": "scelta",
+    "opzioni": [
+     "alcol",
+     "etere",
+     "estere",
+     "chetone",
+     "aldeide"
+    ],
+    "v": "etere"
+   }
+  ]
+ },
+ "gruppi-funzionali/5": {
+  "campi": [
+   {
+    "e": "Specie protonata",
+    "t": "scelta",
+    "opzioni": [
+     "$\\mathrm{(CH_3)_2NH_2^+}$",
+     "$\\mathrm{(CH_3)_2N^-}$",
+     "$\\mathrm{(CH_3)_3NH^+}$",
+     "$\\mathrm{CH_3NH_3^+}$"
+    ],
+    "v": "$\\mathrm{(CH_3)_2NH_2^+}$"
+   }
+  ]
+ },
+ "gruppi-funzionali/6": {
+  "campi": [
+   {
+    "e": "Alcol ottenuto",
+    "t": "scelta",
+    "opzioni": [
+     "butan-1-olo, $\\mathrm{CH_3CH_2CH_2CH_2OH}$",
+     "butan-2-olo, $\\mathrm{CH_3CH_2CH(OH)CH_3}$",
+     "propan-1-olo, $\\mathrm{CH_3CH_2CH_2OH}$",
+     "2-metilpropan-2-olo, $\\mathrm{(CH_3)_3COH}$"
+    ],
+    "v": "butan-1-olo, $\\mathrm{CH_3CH_2CH_2CH_2OH}$"
+   }
+  ]
+ },
+ "gruppi-funzionali/7": {
+  "campi": [
+   {
+    "e": "Gruppo funzionale",
+    "t": "scelta",
+    "opzioni": [
+     "emiacetale",
+     "acetale",
+     "etere",
+     "estere",
+     "alcol"
+    ],
+    "v": "emiacetale"
+   }
+  ]
+ },
+ "gruppi-funzionali/8": {
+  "campi": [
+   {
+    "e": "Gruppo funzionale del prodotto",
+    "t": "scelta",
+    "opzioni": [
+     "immina",
+     "ammide",
+     "ammina",
+     "enammina",
+     "nitrile"
+    ],
+    "v": "immina"
+   }
+  ]
+ },
+ "gruppi-funzionali/9": {
+  "campi": [
+   {
+    "e": "Prodotto dell'addizione aldolica",
+    "t": "scelta",
+    "opzioni": [
+     "3-idrossibutanale, $\\mathrm{CH_3CH(OH)CH_2CHO}$",
+     "but-2-enale, $\\mathrm{CH_3CH{=}CHCHO}$",
+     "butanale, $\\mathrm{CH_3CH_2CH_2CHO}$",
+     "4-idrossibutan-2-one, $\\mathrm{CH_3COCH_2CH_2OH}$"
+    ],
+    "v": "3-idrossibutanale, $\\mathrm{CH_3CH(OH)CH_2CHO}$"
+   }
+  ]
+ },
+ "gruppi-funzionali/10": {
+  "campi": [
+   {
+    "e": "Moli di elettroni",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "mol",
+    "cifre": 2
+   }
+  ]
+ },
+ "gruppi-funzionali/11": {
+  "campi": [
+   {
+    "e": "Estere ottenuto",
+    "t": "scelta",
+    "opzioni": [
+     "etanoato di metile, $\\mathrm{CH_3COOCH_3}$",
+     "metanoato di etile, $\\mathrm{HCOOCH_2CH_3}$",
+     "etanoato di etile, $\\mathrm{CH_3COOCH_2CH_3}$",
+     "metossietano, $\\mathrm{CH_3OCH_2CH_3}$"
+    ],
+    "v": "etanoato di metile, $\\mathrm{CH_3COOCH_3}$"
+   }
+  ]
+ },
+ "gruppi-funzionali/12": {
+  "campi": [
+   {
+    "e": "Prodotto che deriva dalla parte acilica",
+    "t": "scelta",
+    "opzioni": [
+     "acido etanoico",
+     "ione etanoato",
+     "etanale",
+     "etanolo"
+    ],
+    "v": "ione etanoato"
+   },
+   {
+    "e": "Prodotto che deriva dalla parte alcossilica",
+    "t": "scelta",
+    "opzioni": [
+     "etanolo",
+     "ione etossido",
+     "etanale",
+     "metanolo"
+    ],
+    "v": "etanolo"
+   }
+  ]
+ },
+ "gruppi-funzionali/13": {
+  "campi": [
+   {
+    "e": "Atomi dell'anello",
+    "t": "numero",
+    "v": "5"
+   }
+  ]
+ },
+ "gruppi-funzionali/14": {
+  "campi": [
+   {
+    "e": "Prodotto della decarbossilazione",
+    "t": "scelta",
+    "opzioni": [
+     "propanone, $\\mathrm{CH_3COCH_3}$",
+     "acido propanoico, $\\mathrm{CH_3CH_2COOH}$",
+     "propanale, $\\mathrm{CH_3CH_2CHO}$",
+     "acido acetico, $\\mathrm{CH_3COOH}$"
+    ],
+    "v": "propanone, $\\mathrm{CH_3COCH_3}$"
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/1": {
+  "campi": [
+   {
+    "e": "Coefficiente di $\\mathrm{O_2}$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/2": {
+  "campi": [
+   {
+    "e": "$n(\\mathrm{NH_3})$",
+    "t": "numero",
+    "v": "0{,}20",
+    "u": "mol",
+    "cifre": 2
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/7": {
+  "campi": [
+   {
+    "e": "$\\dfrac{k(310\\,\\mathrm K)}{k(300\\,\\mathrm K)}$",
+    "t": "numero",
+    "v": "1{,}91",
+    "cifre": 2
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/9": {
+  "campi": [
+   {
+    "e": "$K$",
+    "t": "numero",
+    "v": "3{,}0"
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/10": {
+  "campi": [
+   {
+    "e": "Verso favorito",
+    "t": "scelta",
+    "opzioni": [
+     "verso diretto",
+     "verso inverso",
+     "nessuno, il sistema è all'equilibrio"
+    ],
+    "v": "verso inverso"
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/12": {
+  "campi": [
+   {
+    "e": "La costante di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "aumenta",
+     "diminuisce",
+     "resta costante"
+    ],
+    "v": "aumenta"
+   }
+  ]
+ },
+ "reazioni-cinetica-equilibrio/14": {
+  "campi": [
+   {
+    "e": "$s$",
+    "t": "numero",
+    "v": "1{,}0\\cdot10^{-8}",
+    "u": "mol/L",
+    "cifre": 9
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/1": {
+  "campi": [
+   {
+    "e": "Percentuale in massa",
+    "t": "numero",
+    "v": "6{,}00",
+    "u": "%",
+    "cifre": 2
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/2": {
+  "campi": [
+   {
+    "e": "Percentuale massa-volume",
+    "t": "numero",
+    "v": "2{,}50",
+    "u": "%",
+    "cifre": 2
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/3": {
+  "campi": [
+   {
+    "e": "Percentuale in volume",
+    "t": "numero",
+    "v": "6{,}00",
+    "u": "%",
+    "cifre": 2
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/5": {
+  "campi": [
+   {
+    "e": "Molalità $b$",
+    "t": "numero",
+    "v": "0{,}250",
+    "u": "mol/kg",
+    "cifre": 3
+   },
+   {
+    "e": "Osmolalità $b_{\\mathrm{osm}}$",
+    "t": "numero",
+    "v": "0{,}250",
+    "u": "Osm/kg",
+    "cifre": 3
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/6": {
+  "campi": [
+   {
+    "e": "Volume di soluzione madre",
+    "t": "numero",
+    "v": "15{,}0",
+    "u": "mL",
+    "cifre": 1
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/11": {
+  "campi": [
+   {
+    "e": "$p$ della soluzione",
+    "t": "numero",
+    "v": "29{,}4",
+    "u": "kPa",
+    "cifre": 1
+   },
+   {
+    "e": "$\\Delta p$",
+    "t": "numero",
+    "v": "0{,}600",
+    "u": "kPa",
+    "cifre": 3
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/12": {
+  "campi": [
+   {
+    "e": "$T_f$",
+    "t": "numero",
+    "v": "-0{,}186",
+    "u": "°C",
+    "cifre": 3
+   }
+  ]
+ },
+ "soluzioni-proprieta-colligative/14": {
+  "campi": [
+   {
+    "e": "La soluzione è isotonica nel tempo?",
+    "t": "scelta",
+    "opzioni": [
+     "sì, perché le osmolarità iniziali sono uguali",
+     "no, perché l'urea attraversa la membrana",
+     "non si può stabilire senza conoscere la temperatura"
+    ],
+    "v": "no, perché l'urea attraversa la membrana"
+   }
+  ]
+ }
+}

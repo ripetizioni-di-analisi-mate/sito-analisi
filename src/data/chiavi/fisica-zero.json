@@ -1,0 +1,971 @@
+{
+ "accelerazione-e-caduta/2": {
+  "campi": [
+   {
+    "e": "$a_m$",
+    "t": "numero",
+    "v": "4",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Dall'istante iniziale a quello finale la rapidità",
+    "t": "scelta",
+    "opzioni": [
+     "aumenta",
+     "diminuisce",
+     "resta uguale"
+    ],
+    "v": "diminuisce"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/5": {
+  "campi": [
+   {
+    "e": "Posizione $x$ dopo $3\\,\\mathrm{s}$",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   },
+   {
+    "e": "Spostamento $\\Delta x$",
+    "t": "numero",
+    "v": "15",
+    "u": "m"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/8": {
+  "campi": [
+   {
+    "e": "Tempo di arresto",
+    "t": "numero",
+    "v": "6",
+    "u": "s"
+   },
+   {
+    "e": "Spazio di arresto",
+    "t": "numero",
+    "v": "36",
+    "u": "m"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/9": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$",
+    "t": "numero",
+    "v": "-3",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Spazio di frenata",
+    "t": "numero",
+    "v": "37{,}5",
+    "u": "m"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/10": {
+  "campi": [
+   {
+    "e": "Distanza di caduta $h$",
+    "t": "numero",
+    "v": "11{,}25",
+    "u": "m"
+   },
+   {
+    "e": "Modulo della velocità finale",
+    "t": "numero",
+    "v": "15",
+    "u": "m/s"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/11": {
+  "campi": [
+   {
+    "e": "Tempo di caduta",
+    "t": "numero",
+    "v": "2",
+    "u": "s"
+   },
+   {
+    "e": "Modulo della velocità all'arrivo",
+    "t": "numero",
+    "v": "20",
+    "u": "m/s"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/12": {
+  "campi": [
+   {
+    "e": "Tempo di salita",
+    "t": "numero",
+    "v": "3",
+    "u": "s"
+   },
+   {
+    "e": "Altezza massima $h_{\\max}$",
+    "t": "numero",
+    "v": "45",
+    "u": "m"
+   }
+  ]
+ },
+ "accelerazione-e-caduta/13": {
+  "campi": [
+   {
+    "e": "Durata del volo",
+    "t": "numero",
+    "v": "2",
+    "u": "s"
+   },
+   {
+    "e": "Spostamento totale $\\Delta y$",
+    "t": "numero",
+    "v": "0",
+    "u": "m"
+   },
+   {
+    "e": "Distanza percorsa",
+    "t": "numero",
+    "v": "10",
+    "u": "m"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/1": {
+  "campi": [
+   {
+    "e": "$R_x$",
+    "t": "numero",
+    "v": "9",
+    "u": "N"
+   },
+   {
+    "e": "$a_x$",
+    "t": "numero",
+    "v": "3",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/2": {
+  "campi": [
+   {
+    "e": "Modulo della risultante $R$",
+    "t": "numero",
+    "v": "10",
+    "u": "N"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/4": {
+  "campi": [
+   {
+    "e": "Modulo della forza di traino",
+    "t": "numero",
+    "v": "9",
+    "u": "N"
+   },
+   {
+    "e": "Risultante orizzontale",
+    "t": "numero",
+    "v": "0",
+    "u": "N"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/5": {
+  "campi": [
+   {
+    "e": "Modulo della forza sul secondo carrello",
+    "t": "numero",
+    "v": "12",
+    "u": "N"
+   },
+   {
+    "e": "Verso della forza sul secondo carrello",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   },
+   {
+    "e": "Modulo dell'accelerazione del primo carrello",
+    "t": "numero",
+    "v": "4",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Modulo dell'accelerazione del secondo carrello",
+    "t": "numero",
+    "v": "2",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/10": {
+  "campi": [
+   {
+    "e": "Massimo attrito statico $F_{s,\\max}$",
+    "t": "numero",
+    "v": "20",
+    "u": "N"
+   },
+   {
+    "e": "Modulo dell'attrito statico effettivo",
+    "t": "numero",
+    "v": "8",
+    "u": "N"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/11": {
+  "campi": [
+   {
+    "e": "La cassa",
+    "t": "scelta",
+    "opzioni": [
+     "inizia a scorrere",
+     "resta ferma"
+    ],
+    "v": "inizia a scorrere"
+   },
+   {
+    "e": "Modulo dell'accelerazione dopo l'avvio",
+    "t": "numero",
+    "v": "3{,}5",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/12": {
+  "campi": [
+   {
+    "e": "Modulo del traino $F$",
+    "t": "numero",
+    "v": "12",
+    "u": "N"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/13": {
+  "campi": [
+   {
+    "e": "Velocità finale $v$",
+    "t": "numero",
+    "v": "12",
+    "u": "m/s"
+   },
+   {
+    "e": "Distanza percorsa $s$",
+    "t": "numero",
+    "v": "24",
+    "u": "m"
+   }
+  ]
+ },
+ "dinamica-ed-equilibrio/14": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$",
+    "t": "numero",
+    "v": "-4",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Tempo di arresto",
+    "t": "numero",
+    "v": "2",
+    "u": "s"
+   },
+   {
+    "e": "Spazio di arresto",
+    "t": "numero",
+    "v": "8",
+    "u": "m"
+   }
+  ]
+ },
+ "elettricita-e-circuiti/9": {
+  "campi": [
+   {
+    "e": "Corrente $I$",
+    "t": "numero",
+    "v": "0{,}80",
+    "u": "A"
+   },
+   {
+    "e": "$V_1$",
+    "t": "numero",
+    "v": "4",
+    "u": "V"
+   },
+   {
+    "e": "$V_2$",
+    "t": "numero",
+    "v": "8",
+    "u": "V"
+   }
+  ]
+ },
+ "elettricita-e-circuiti/10": {
+  "campi": [
+   {
+    "e": "$R_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "3",
+    "u": "Ω"
+   },
+   {
+    "e": "$I_1$",
+    "t": "numero",
+    "v": "3",
+    "u": "A"
+   },
+   {
+    "e": "$I_2$",
+    "t": "numero",
+    "v": "1",
+    "u": "A"
+   },
+   {
+    "e": "Corrente totale $I$",
+    "t": "numero",
+    "v": "4",
+    "u": "A"
+   }
+  ]
+ },
+ "elettricita-e-circuiti/11": {
+  "campi": [
+   {
+    "e": "Resistenza totale $R_{\\mathrm{eq}}$",
+    "t": "numero",
+    "v": "8",
+    "u": "Ω"
+   },
+   {
+    "e": "Corrente totale $I$",
+    "t": "numero",
+    "v": "1{,}5",
+    "u": "A"
+   },
+   {
+    "e": "Corrente nel ramo da $12\\,\\Omega$",
+    "t": "numero",
+    "v": "0{,}50",
+    "u": "A"
+   },
+   {
+    "e": "Corrente nel ramo da $6\\,\\Omega$",
+    "t": "numero",
+    "v": "1",
+    "u": "A"
+   }
+  ]
+ },
+ "elettricita-e-circuiti/14": {
+  "campi": [
+   {
+    "e": "Potenza dissipata $P_e$",
+    "t": "numero",
+    "v": "12",
+    "u": "W"
+   },
+   {
+    "e": "Energia assorbita $E$",
+    "t": "numero",
+    "v": "0{,}024",
+    "u": "kWh"
+   }
+  ]
+ },
+ "grandezze-e-unita/5": {
+  "campi": [
+   {
+    "e": "Ore",
+    "t": "numero",
+    "v": "2",
+    "u": "h",
+    "esatto": true
+   },
+   {
+    "e": "Minuti",
+    "t": "numero",
+    "v": "24",
+    "u": "min",
+    "esatto": true
+   }
+  ]
+ },
+ "grandezze-e-unita/8": {
+  "campi": [
+   {
+    "e": "Volume in litri",
+    "t": "numero",
+    "v": "1{,}250",
+    "u": "L"
+   },
+   {
+    "e": "Volume in centimetri cubi",
+    "t": "numero",
+    "v": "1250",
+    "u": "cm^3"
+   }
+  ]
+ },
+ "grandezze-e-unita/10": {
+  "campi": [
+   {
+    "e": "$560\\,000\\,\\mathrm{m}$ in notazione scientifica",
+    "t": "numero",
+    "v": "5{,}6\\cdot10^5",
+    "u": "m"
+   },
+   {
+    "e": "$0{,}0036\\,\\mathrm{kg}$ in notazione scientifica",
+    "t": "numero",
+    "v": "3{,}6\\cdot10^{-3}",
+    "u": "kg"
+   }
+  ]
+ },
+ "lavoro-ed-energia/14": {
+  "campi": [
+   {
+    "e": "Energia assorbita $E_{\\mathrm{ass}}$",
+    "t": "numero",
+    "v": "1500",
+    "u": "J"
+   },
+   {
+    "e": "Energia trasferita in forme non utili",
+    "t": "numero",
+    "v": "600",
+    "u": "J"
+   }
+  ]
+ },
+ "misure-formule-e-grafici/2": {
+  "campi": [
+   {
+    "e": "Estremo inferiore",
+    "t": "numero",
+    "v": "18{,}4",
+    "u": "cm",
+    "esatto": true
+   },
+   {
+    "e": "Estremo superiore",
+    "t": "numero",
+    "v": "18{,}8",
+    "u": "cm",
+    "esatto": true
+   }
+  ]
+ },
+ "misure-formule-e-grafici/3": {
+  "campi": [
+   {
+    "e": "Valore della misura $V$",
+    "t": "numero",
+    "v": "7{,}2",
+    "u": "mL",
+    "esatto": true
+   },
+   {
+    "e": "Incertezza",
+    "t": "numero",
+    "v": "0{,}2",
+    "u": "mL",
+    "esatto": true
+   }
+  ]
+ },
+ "misure-formule-e-grafici/7": {
+  "campi": [
+   {
+    "e": "Incertezza relativa di $(40\\pm1)\\,\\mathrm{cm}$",
+    "t": "numero",
+    "v": "2{,}5",
+    "u": "%"
+   },
+   {
+    "e": "Incertezza relativa di $(100\\pm2)\\,\\mathrm{cm}$",
+    "t": "numero",
+    "v": "2",
+    "u": "%"
+   },
+   {
+    "e": "Incertezza relativa minore",
+    "t": "scelta",
+    "opzioni": [
+     "la prima misura",
+     "la seconda misura",
+     "sono uguali"
+    ],
+    "v": "la seconda misura"
+   }
+  ]
+ },
+ "misure-formule-e-grafici/9": {
+  "campi": [
+   {
+    "e": "Valore della misura $m$",
+    "t": "numero",
+    "v": "8{,}74",
+    "u": "g",
+    "esatto": true
+   },
+   {
+    "e": "Incertezza",
+    "t": "numero",
+    "v": "0{,}02",
+    "u": "g",
+    "esatto": true
+   }
+  ]
+ },
+ "misure-formule-e-grafici/13": {
+  "campi": [
+   {
+    "e": "Massa totale $m$",
+    "t": "numero",
+    "v": "8{,}5",
+    "u": "g"
+   },
+   {
+    "e": "Intercetta sull'asse delle masse",
+    "t": "numero",
+    "v": "4",
+    "u": "g"
+   }
+  ]
+ },
+ "moto-rettilineo/1": {
+  "campi": [
+   {
+    "e": "Spostamento $\\Delta x$",
+    "t": "numero",
+    "v": "-8",
+    "u": "m"
+   },
+   {
+    "e": "Modulo dello spostamento",
+    "t": "numero",
+    "v": "8",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-rettilineo/2": {
+  "campi": [
+   {
+    "e": "Spostamento $\\Delta x$",
+    "t": "numero",
+    "v": "2",
+    "u": "m"
+   },
+   {
+    "e": "Distanza percorsa $s$",
+    "t": "numero",
+    "v": "14",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-rettilineo/3": {
+  "campi": [
+   {
+    "e": "Durata",
+    "t": "numero",
+    "v": "45",
+    "u": "s"
+   }
+  ]
+ },
+ "moto-rettilineo/6": {
+  "campi": [
+   {
+    "e": "$72\\,\\mathrm{km/h}$ in metri al secondo",
+    "t": "numero",
+    "v": "20",
+    "u": "m/s"
+   },
+   {
+    "e": "$12\\,\\mathrm{m/s}$ in chilometri all'ora",
+    "t": "numero",
+    "v": "43{,}2",
+    "u": "km/h"
+   }
+  ]
+ },
+ "moto-rettilineo/10": {
+  "campi": [
+   {
+    "e": "Velocità $v$",
+    "t": "numero",
+    "v": "3",
+    "u": "m/s"
+   },
+   {
+    "e": "Legge oraria $x(t)$ (in metri, con $t$ in secondi)",
+    "t": "funzione",
+    "v": "4+3t",
+    "var": [
+     "t"
+    ]
+   }
+  ]
+ },
+ "moto-rettilineo/12": {
+  "campi": [
+   {
+    "e": "Rapidità media $u_m$",
+    "t": "numero",
+    "v": "1{,}2",
+    "u": "m/s"
+   },
+   {
+    "e": "Velocità media $v_m$",
+    "t": "numero",
+    "v": "0",
+    "u": "m/s"
+   }
+  ]
+ },
+ "moto-rettilineo/13": {
+  "campi": [
+   {
+    "e": "Istante dell'incontro",
+    "t": "numero",
+    "v": "5",
+    "u": "s"
+   },
+   {
+    "e": "Posizione dell'incontro",
+    "t": "numero",
+    "v": "5",
+    "u": "m"
+   }
+  ]
+ },
+ "moto-rettilineo/14": {
+  "campi": [
+   {
+    "e": "Istante in cui $B$ raggiunge $A$",
+    "t": "numero",
+    "v": "10",
+    "u": "s"
+   },
+   {
+    "e": "Posizione comune",
+    "t": "numero",
+    "v": "20",
+    "u": "m"
+   }
+  ]
+ },
+ "pressione-e-fluidi/3": {
+  "campi": [
+   {
+    "e": "Forza $F$ sulla faccia",
+    "t": "numero",
+    "v": "90",
+    "u": "N"
+   }
+  ]
+ },
+ "pressione-e-fluidi/11": {
+  "campi": [
+   {
+    "e": "Spinta di Archimede $F_A$",
+    "t": "numero",
+    "v": "15",
+    "u": "N"
+   }
+  ]
+ },
+ "pressione-e-fluidi/13": {
+  "campi": [
+   {
+    "e": "Percentuale del volume immerso",
+    "t": "numero",
+    "v": "75",
+    "u": "%"
+   }
+  ]
+ },
+ "temperatura-e-calore/2": {
+  "campi": [
+   {
+    "e": "Temperatura in gradi Celsius",
+    "t": "numero",
+    "v": "27",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-e-calore/5": {
+  "campi": [
+   {
+    "e": "Calore scambiato dal blocco $Q$ (con il segno)",
+    "t": "numero",
+    "v": "-21600",
+    "u": "J"
+   },
+   {
+    "e": "Il blocco",
+    "t": "scelta",
+    "opzioni": [
+     "assorbe calore",
+     "cede calore"
+    ],
+    "v": "cede calore"
+   }
+  ]
+ },
+ "temperatura-e-calore/6": {
+  "campi": [
+   {
+    "e": "Temperatura finale",
+    "t": "numero",
+    "v": "35",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-e-calore/9": {
+  "campi": [
+   {
+    "e": "Temperatura finale",
+    "t": "numero",
+    "v": "40",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-e-calore/10": {
+  "campi": [
+   {
+    "e": "Temperatura finale",
+    "t": "numero",
+    "v": "38",
+    "u": "°C"
+   }
+  ]
+ },
+ "temperatura-e-calore/11": {
+  "campi": [
+   {
+    "e": "Temperatura finale",
+    "t": "numero",
+    "v": "60",
+    "u": "°C"
+   }
+  ]
+ },
+ "vettori-e-forze/1": {
+  "campi": [
+   {
+    "e": "Lunghezza della freccia",
+    "t": "numero",
+    "v": "5",
+    "u": "cm"
+   }
+  ]
+ },
+ "vettori-e-forze/2": {
+  "campi": [
+   {
+    "e": "Componente $A_x$ dello spostamento",
+    "t": "numero",
+    "v": "-9",
+    "u": "m"
+   },
+   {
+    "e": "Componente del vettore opposto",
+    "t": "numero",
+    "v": "9",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori-e-forze/3": {
+  "campi": [
+   {
+    "e": "Modulo della risultante",
+    "t": "numero",
+    "v": "12",
+    "u": "N"
+   },
+   {
+    "e": "Verso della risultante",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso destra"
+   }
+  ]
+ },
+ "vettori-e-forze/4": {
+  "campi": [
+   {
+    "e": "Componente $R_x$",
+    "t": "numero",
+    "v": "-5",
+    "u": "N"
+   },
+   {
+    "e": "Modulo della risultante",
+    "t": "numero",
+    "v": "5",
+    "u": "N"
+   },
+   {
+    "e": "Verso della risultante",
+    "t": "scelta",
+    "opzioni": [
+     "verso destra",
+     "verso sinistra"
+    ],
+    "v": "verso sinistra"
+   }
+  ]
+ },
+ "vettori-e-forze/5": {
+  "campi": [
+   {
+    "e": "Modulo dello spostamento complessivo",
+    "t": "numero",
+    "v": "15",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori-e-forze/6": {
+  "campi": [
+   {
+    "e": "Modulo della risultante",
+    "t": "numero",
+    "v": "25",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori-e-forze/7": {
+  "campi": [
+   {
+    "e": "$R_x$",
+    "t": "numero",
+    "v": "3",
+    "u": "m"
+   },
+   {
+    "e": "$R_y$",
+    "t": "numero",
+    "v": "4",
+    "u": "m"
+   },
+   {
+    "e": "Modulo $R$",
+    "t": "numero",
+    "v": "5",
+    "u": "m"
+   }
+  ]
+ },
+ "vettori-e-forze/8": {
+  "campi": [
+   {
+    "e": "$R_x$",
+    "t": "numero",
+    "v": "0",
+    "u": "N"
+   },
+   {
+    "e": "$R_y$",
+    "t": "numero",
+    "v": "0",
+    "u": "N"
+   },
+   {
+    "e": "Modulo $R$",
+    "t": "numero",
+    "v": "0",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori-e-forze/9": {
+  "campi": [
+   {
+    "e": "Valore indicato",
+    "t": "numero",
+    "v": "3{,}4",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori-e-forze/10": {
+  "campi": [
+   {
+    "e": "Peso $P$",
+    "t": "numero",
+    "v": "11{,}8",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori-e-forze/12": {
+  "campi": [
+   {
+    "e": "Allungamento $\\Delta\\ell$",
+    "t": "numero",
+    "v": "5",
+    "u": "cm"
+   },
+   {
+    "e": "Modulo della forza elastica $F_e$",
+    "t": "numero",
+    "v": "6",
+    "u": "N"
+   }
+  ]
+ },
+ "vettori-e-forze/13": {
+  "campi": [
+   {
+    "e": "Lunghezza finale",
+    "t": "numero",
+    "v": "20",
+    "u": "cm"
+   }
+  ]
+ },
+ "vettori-e-forze/14": {
+  "campi": [
+   {
+    "e": "$k_1$",
+    "t": "numero",
+    "v": "200",
+    "u": "N/m"
+   },
+   {
+    "e": "$k_2$",
+    "t": "numero",
+    "v": "80",
+    "u": "N/m"
+   }
+  ]
+ }
+}

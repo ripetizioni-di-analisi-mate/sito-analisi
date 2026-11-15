@@ -1,0 +1,5344 @@
+{
+ "cinematica-del-punto/1": {
+  "campi": [
+   {
+    "e": "Traiettoria",
+    "t": "scelta",
+    "opzioni": [
+     "ellisse di semiassi $\\ell$ e $2\\ell$",
+     "circonferenza di raggio $\\ell$",
+     "ellisse di semiassi $\\ell$ e $\\frac{\\ell}{2}$",
+     "circonferenza di raggio $2\\ell$"
+    ],
+    "v": "ellisse di semiassi $\\ell$ e $2\\ell$"
+   },
+   {
+    "e": "L'accelerazione $\\vec{a}_P$ è",
+    "t": "scelta",
+    "opzioni": [
+     "diretta verso $O$",
+     "diretta in verso opposto a $O$",
+     "tangente alla traiettoria",
+     "costante"
+    ],
+    "v": "diretta verso $O$"
+   },
+   {
+    "e": "Valore massimo di $|\\vec{v}_P|$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "2l\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Punti in cui $|\\vec{v}_P|$ è massimo",
+    "t": "scelta",
+    "opzioni": [
+     "$(\\pm\\ell,\\,0)$",
+     "$(0,\\,\\pm 2\\ell)$",
+     "$(\\pm\\ell,\\,\\pm 2\\ell)$"
+    ],
+    "v": "$(\\pm\\ell,\\,0)$"
+   },
+   {
+    "e": "Valore minimo di $|\\vec{v}_P|$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "l\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Punti in cui $|\\vec{v}_P|$ è minimo",
+    "t": "scelta",
+    "opzioni": [
+     "$(\\pm\\ell,\\,0)$",
+     "$(0,\\,\\pm 2\\ell)$",
+     "$(\\pm\\ell,\\,\\pm 2\\ell)$"
+    ],
+    "v": "$(0,\\,\\pm 2\\ell)$"
+   }
+  ]
+ },
+ "cinematica-del-punto/2": {
+  "campi": [
+   {
+    "e": "$|\\vec{v}_P|$",
+    "t": "funzione",
+    "v": "\\omega\\sqrt{R^2 + h^2}",
+    "var": [
+     "r",
+     "h",
+     "omega"
+    ]
+   },
+   {
+    "e": "$s(t)$",
+    "t": "funzione",
+    "v": "\\omega t\\sqrt{R^2 + h^2}",
+    "var": [
+     "r",
+     "h",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Raggio di curvatura $\\rho$",
+    "t": "funzione",
+    "v": "\\frac{R^2 + h^2}{R}",
+    "var": [
+     "r",
+     "h"
+    ]
+   },
+   {
+    "e": "$\\cos\\gamma$",
+    "t": "funzione",
+    "v": "\\frac{h}{\\sqrt{R^2 + h^2}}",
+    "var": [
+     "r",
+     "h"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/3": {
+  "campi": [
+   {
+    "e": "$a_t(0)$",
+    "t": "funzione",
+    "v": "-g\\sin\\alpha",
+    "var": [
+     "g",
+     "alpha"
+    ]
+   },
+   {
+    "e": "Istante $t^*$ della quota massima (scrivi $v$ per $v_0$)",
+    "t": "funzione",
+    "v": "\\frac{v\\sin\\alpha}{g}",
+    "var": [
+     "v",
+     "alpha",
+     "g"
+    ]
+   },
+   {
+    "e": "Raggio di curvatura nel punto di quota massima (scrivi $v$ per $v_0$)",
+    "t": "funzione",
+    "v": "\\frac{v^2(\\cos\\alpha)^2}{g}",
+    "var": [
+     "v",
+     "alpha",
+     "g"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/4": {
+  "campi": [
+   {
+    "e": "$\\rho_A$",
+    "t": "funzione",
+    "v": "\\frac{b^2}{a}",
+    "var": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "e": "$\\rho_B$",
+    "t": "funzione",
+    "v": "\\frac{a^2}{b}",
+    "var": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "e": "I raggi di curvatura dipendono da $\\omega$?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "cinematica-del-punto/5": {
+  "campi": [
+   {
+    "e": "$a_t$",
+    "t": "funzione",
+    "v": "R\\alpha",
+    "var": [
+     "r",
+     "alpha"
+    ]
+   },
+   {
+    "e": "$a_n$",
+    "t": "funzione",
+    "v": "R\\alpha^2 t^2",
+    "var": [
+     "r",
+     "alpha",
+     "t"
+    ]
+   },
+   {
+    "e": "Istante $t^*$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt[4]{3}}{\\sqrt{\\alpha}}",
+    "var": [
+     "alpha"
+    ]
+   },
+   {
+    "e": "$\\vartheta(t^*)$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{3}}{2}",
+    "u": "rad"
+   }
+  ]
+ },
+ "cinematica-del-punto/6": {
+  "campi": [
+   {
+    "e": "Componente radiale della velocità",
+    "t": "funzione",
+    "v": "c",
+    "var": [
+     "c",
+     "beta",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente trasversa della velocità",
+    "t": "funzione",
+    "v": "c\\beta t^2",
+    "var": [
+     "c",
+     "beta",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente radiale dell'accelerazione",
+    "t": "funzione",
+    "v": "-c\\beta^2 t^3",
+    "var": [
+     "c",
+     "beta",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente trasversa dell'accelerazione",
+    "t": "funzione",
+    "v": "3c\\beta t",
+    "var": [
+     "c",
+     "beta",
+     "t"
+    ]
+   },
+   {
+    "e": "Velocità areolare $\\dfrac{dA}{dt}$",
+    "t": "funzione",
+    "v": "\\frac{1}{2}c^2\\beta t^3",
+    "var": [
+     "c",
+     "beta",
+     "t"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/7": {
+  "campi": [
+   {
+    "e": "$\\dot{\\vartheta}(t)$ (scrivi $k$ per $r_0$)",
+    "t": "funzione",
+    "v": "\\frac{2c}{k^2}e^{-2\\omega t}",
+    "var": [
+     "c",
+     "k",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "$\\vartheta(t)$ (scrivi $k$ per $r_0$)",
+    "t": "funzione",
+    "v": "\\frac{c}{\\omega k^2}\\left(1 - e^{-2\\omega t}\\right)",
+    "var": [
+     "c",
+     "k",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente trasversa dell'accelerazione",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "c",
+     "k",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente radiale dell'accelerazione, in funzione di $r$",
+    "t": "funzione",
+    "v": "\\omega^2 r - \\frac{4c^2}{r^3}",
+    "var": [
+     "omega",
+     "r",
+     "c"
+    ]
+   },
+   {
+    "e": "$\\lim_{t \\to +\\infty} \\vartheta(t)$ (scrivi $k$ per $r_0$)",
+    "t": "funzione",
+    "v": "\\frac{c}{\\omega k^2}",
+    "var": [
+     "c",
+     "k",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/8": {
+  "campi": [
+   {
+    "e": "$x(t)$ (scrivi $x$ per $x_0$ e $v$ per $v_0$)",
+    "t": "funzione",
+    "v": "x\\cos(\\omega t) - \\frac{v}{\\omega}\\sin(\\omega t)",
+    "var": [
+     "x",
+     "v",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Ampiezza $A$ (scrivi $x$ per $x_0$ e $v$ per $v_0$)",
+    "t": "funzione",
+    "v": "\\sqrt{x^2 + \\frac{v^2}{\\omega^2}}",
+    "var": [
+     "x",
+     "v",
+     "omega"
+    ]
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "funzione",
+    "v": "\\frac{2\\pi}{\\omega}",
+    "var": [
+     "omega"
+    ]
+   },
+   {
+    "e": "Primo istante $t_1$ di passaggio per l'origine (scrivi $x$ per $x_0$ e $v$ per $v_0$)",
+    "t": "funzione",
+    "v": "\\frac{1}{\\omega}\\left(\\frac{\\pi}{2} - \\arctan\\frac{v}{\\omega x}\\right)",
+    "var": [
+     "x",
+     "v",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/9": {
+  "campi": [
+   {
+    "e": "Traiettoria",
+    "t": "scelta",
+    "opzioni": [
+     "segmento della retta $y = \\frac{B}{A}\\,x$",
+     "ellisse di semiassi $A$ e $B$",
+     "segmento della retta $y = \\frac{A}{B}\\,x$",
+     "circonferenza di raggio $\\sqrt{A^2 + B^2}$"
+    ],
+    "v": "segmento della retta $y = \\frac{B}{A}\\,x$"
+   },
+   {
+    "e": "$|\\vec{v}_P|$ in funzione di $t$",
+    "t": "funzione",
+    "v": "\\omega\\sqrt{a^2 + b^2}\\left|\\sin(\\omega t)\\right|",
+    "var": [
+     "a",
+     "b",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Valore massimo di $|\\vec{v}_P|$",
+    "t": "funzione",
+    "v": "\\omega\\sqrt{a^2 + b^2}",
+    "var": [
+     "a",
+     "b",
+     "omega"
+    ]
+   },
+   {
+    "e": "Tipo di moto",
+    "t": "scelta",
+    "opzioni": [
+     "armonico lungo una retta",
+     "circolare uniforme",
+     "ellittico",
+     "rettilineo uniforme"
+    ],
+    "v": "armonico lungo una retta"
+   }
+  ]
+ },
+ "cinematica-del-punto/10": {
+  "campi": [
+   {
+    "e": "$|\\vec{v}_P|$ per $\\omega t = \\pi$",
+    "t": "funzione",
+    "v": "2R\\omega",
+    "var": [
+     "r",
+     "omega"
+    ]
+   },
+   {
+    "e": "Arco percorso $s$ per $\\omega t = \\pi$",
+    "t": "funzione",
+    "v": "4R",
+    "var": [
+     "r"
+    ]
+   },
+   {
+    "e": "$a_t$ per $\\omega t = \\pi$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "r",
+     "omega"
+    ]
+   },
+   {
+    "e": "$a_n$ per $\\omega t = \\pi$",
+    "t": "funzione",
+    "v": "R\\omega^2",
+    "var": [
+     "r",
+     "omega"
+    ]
+   },
+   {
+    "e": "$\\rho$ per $\\omega t = \\pi$",
+    "t": "funzione",
+    "v": "4R",
+    "var": [
+     "r"
+    ]
+   },
+   {
+    "e": "Lunghezza dell'intero arco",
+    "t": "funzione",
+    "v": "8R",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/11": {
+  "campi": [
+   {
+    "e": "$|\\vec{v}_P|$",
+    "t": "funzione",
+    "v": "\\alpha t\\sqrt{R^2 + h^2}",
+    "var": [
+     "r",
+     "h",
+     "alpha",
+     "t"
+    ]
+   },
+   {
+    "e": "$s(t)$",
+    "t": "funzione",
+    "v": "\\frac{1}{2}\\alpha t^2\\sqrt{R^2 + h^2}",
+    "var": [
+     "r",
+     "h",
+     "alpha",
+     "t"
+    ]
+   },
+   {
+    "e": "$a_t$",
+    "t": "funzione",
+    "v": "\\alpha\\sqrt{R^2 + h^2}",
+    "var": [
+     "r",
+     "h",
+     "alpha",
+     "t"
+    ]
+   },
+   {
+    "e": "$a_n$",
+    "t": "funzione",
+    "v": "R\\alpha^2 t^2",
+    "var": [
+     "r",
+     "h",
+     "alpha",
+     "t"
+    ]
+   },
+   {
+    "e": "Raggio di curvatura $\\rho$",
+    "t": "funzione",
+    "v": "\\frac{R^2 + h^2}{R}",
+    "var": [
+     "r",
+     "h",
+     "alpha",
+     "t"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/12": {
+  "campi": [
+   {
+    "e": "Componente $x$ di $\\vec{v}_A$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "v - l\\omega\\sin(\\omega t)",
+    "var": [
+     "v",
+     "l",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\vec{v}_A$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "l\\omega\\cos(\\omega t)",
+    "var": [
+     "v",
+     "l",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Valore di $V$ per cui $\\vec{v}_A$ si annulla in qualche istante (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "l\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Configurazione in cui $\\vec{v}_A = \\vec{0}$",
+    "t": "scelta",
+    "opzioni": [
+     "asta ortogonale al moto, $A$ nella posizione più alta",
+     "asta ortogonale al moto, $A$ nella posizione più bassa",
+     "asta parallela al moto, $A$ davanti a $\\Omega$",
+     "asta parallela al moto, $A$ dietro $\\Omega$"
+    ],
+    "v": "asta ortogonale al moto, $A$ nella posizione più alta"
+   }
+  ]
+ },
+ "cinematica-del-punto/13": {
+  "campi": [
+   {
+    "e": "Componente di $\\vec{v}_a$ lungo $\\hat{e}_1$ (scrivi $a$ per $a_0$)",
+    "t": "funzione",
+    "v": "a t",
+    "var": [
+     "a",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente di $\\vec{v}_a$ lungo $\\hat{e}_2$ (scrivi $a$ per $a_0$)",
+    "t": "funzione",
+    "v": "\\frac{1}{2}\\omega a t^2",
+    "var": [
+     "a",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "$\\vec{a}_r$",
+    "t": "scelta",
+    "opzioni": [
+     "$a_0\\,\\hat{e}_1$",
+     "$a_0\\,\\hat{e}_2$",
+     "$\\vec{0}$",
+     "$-a_0\\,\\hat{e}_1$"
+    ],
+    "v": "$a_0\\,\\hat{e}_1$"
+   },
+   {
+    "e": "$\\vec{a}_\\tau$",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\frac{1}{2}\\,\\omega^2 a_0 t^2\\,\\hat{e}_1$",
+     "$\\frac{1}{2}\\,\\omega^2 a_0 t^2\\,\\hat{e}_1$",
+     "$-\\frac{1}{2}\\,\\omega^2 a_0 t^2\\,\\hat{e}_2$",
+     "$\\vec{0}$"
+    ],
+    "v": "$-\\frac{1}{2}\\,\\omega^2 a_0 t^2\\,\\hat{e}_1$"
+   },
+   {
+    "e": "$\\vec{a}_c$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,\\omega\\,a_0 t\\,\\hat{e}_2$",
+     "$-2\\,\\omega\\,a_0 t\\,\\hat{e}_2$",
+     "$\\omega\\,a_0 t\\,\\hat{e}_2$",
+     "$2\\,\\omega\\,a_0 t\\,\\hat{e}_1$"
+    ],
+    "v": "$2\\,\\omega\\,a_0 t\\,\\hat{e}_2$"
+   },
+   {
+    "e": "Componente di $\\vec{a}_a$ lungo $\\hat{e}_1$ (scrivi $a$ per $a_0$)",
+    "t": "funzione",
+    "v": "a\\left(1 - \\frac{\\omega^2 t^2}{2}\\right)",
+    "var": [
+     "a",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente di $\\vec{a}_a$ lungo $\\hat{e}_2$ (scrivi $a$ per $a_0$)",
+    "t": "funzione",
+    "v": "2\\omega a t",
+    "var": [
+     "a",
+     "omega",
+     "t"
+    ]
+   },
+   {
+    "e": "Istante $t^*$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{2}}{\\omega}",
+    "var": [
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-punto/14": {
+  "campi": [
+   {
+    "e": "$\\vec{v}_r$",
+    "t": "scelta",
+    "opzioni": [
+     "$u\\,\\hat{e}_2$",
+     "$u\\,\\hat{e}_1$",
+     "$u t\\,\\hat{e}_2$",
+     "$\\omega\\,u t\\,\\hat{e}_3$"
+    ],
+    "v": "$u\\,\\hat{e}_2$"
+   },
+   {
+    "e": "$\\vec{v}_\\tau$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\omega\\,u t\\,\\hat{e}_3$",
+     "$-\\omega\\,u t\\,\\hat{e}_3$",
+     "$\\omega\\,u t\\,\\hat{e}_2$",
+     "$\\vec{0}$"
+    ],
+    "v": "$\\omega\\,u t\\,\\hat{e}_3$"
+   },
+   {
+    "e": "Componente di $\\vec{v}_a$ lungo $\\hat{e}_3$",
+    "t": "funzione",
+    "v": "\\omega u t",
+    "var": [
+     "omega",
+     "u",
+     "t"
+    ]
+   },
+   {
+    "e": "$\\vec{a}_r$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\vec{0}$",
+     "$u\\,\\hat{e}_2$",
+     "$\\omega\\,u\\,\\hat{e}_3$"
+    ],
+    "v": "$\\vec{0}$"
+   },
+   {
+    "e": "$\\vec{a}_\\tau$",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\omega^2 u t\\,\\hat{e}_2$",
+     "$\\omega^2 u t\\,\\hat{e}_2$",
+     "$-\\omega^2 u t\\,\\hat{e}_3$",
+     "$\\vec{0}$"
+    ],
+    "v": "$-\\omega^2 u t\\,\\hat{e}_2$"
+   },
+   {
+    "e": "$\\vec{a}_c$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,\\omega\\,u\\,\\hat{e}_3$",
+     "$-2\\,\\omega\\,u\\,\\hat{e}_3$",
+     "$\\omega\\,u\\,\\hat{e}_3$",
+     "$2\\,\\omega\\,u\\,\\hat{e}_2$"
+    ],
+    "v": "$2\\,\\omega\\,u\\,\\hat{e}_3$"
+   },
+   {
+    "e": "Componente di $\\vec{a}_a$ lungo $\\hat{e}_2$",
+    "t": "funzione",
+    "v": "-\\omega^2 u t",
+    "var": [
+     "omega",
+     "u",
+     "t"
+    ]
+   },
+   {
+    "e": "Componente di $\\vec{a}_a$ lungo $\\hat{e}_3$",
+    "t": "funzione",
+    "v": "2\\omega u",
+    "var": [
+     "omega",
+     "u",
+     "t"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/1": {
+  "campi": [
+   {
+    "e": "Componente $x$ di $\\vec{v}_B$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "-\\frac{\\sqrt{2}}{2}\\omega l",
+    "var": [
+     "v",
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\vec{v}_B$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "v + \\frac{\\sqrt{2}}{2}\\omega l",
+    "var": [
+     "v",
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{a}_B$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "-\\frac{\\sqrt{2}}{2}\\omega^2 l",
+    "var": [
+     "v",
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\vec{a}_B$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "-\\frac{\\sqrt{2}}{2}\\omega^2 l",
+    "var": [
+     "v",
+     "l",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/2": {
+  "campi": [
+   {
+    "e": "I dati sono compatibili con un moto rigido?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   },
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare",
+    "t": "numero",
+    "v": "-1",
+    "u": "rad/s",
+    "esatto": true
+   },
+   {
+    "e": "$\\vec{v}_C$ in $\\mathrm{m/s}$",
+    "t": "valori",
+    "v": [
+     "4",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Centro di istantanea rotazione (coordinate in $\\mathrm{m}$)",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-del-rigido/3": {
+  "campi": [
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare (scrivi $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "-\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ascissa del centro di istantanea rotazione (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{2}l",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ordinata del centro di istantanea rotazione (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{l}{2}",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_M$ ($l$ per $\\ell$, $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "-\\frac{l\\omega}{4}",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\vec{v}_M$ ($l$ per $\\ell$, $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{4}l\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/4": {
+  "campi": [
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare (scrivi $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "\\omega",
+    "var": [
+     "h",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_A$ (scrivi $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "\\frac{4}{3}h\\omega",
+    "var": [
+     "h",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ascissa del centro di istantanea rotazione",
+    "t": "funzione",
+    "v": "-\\frac{\\sqrt{3}}{3}h",
+    "var": [
+     "h",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ordinata del centro di istantanea rotazione",
+    "t": "funzione",
+    "v": "\\frac{4}{3}h",
+    "var": [
+     "h",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/5": {
+  "campi": [
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare",
+    "t": "funzione",
+    "v": "-\\frac{v}{R}",
+    "var": [
+     "v",
+     "r"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_T$",
+    "t": "funzione",
+    "v": "2v",
+    "var": [
+     "v",
+     "r"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\vec{a}_C$",
+    "t": "funzione",
+    "v": "\\frac{v^2}{R}",
+    "var": [
+     "v",
+     "r"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/6": {
+  "campi": [
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare",
+    "t": "funzione",
+    "v": "\\frac{u - v}{R}",
+    "var": [
+     "u",
+     "v",
+     "r"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_T$",
+    "t": "funzione",
+    "v": "2v - u",
+    "var": [
+     "u",
+     "v",
+     "r"
+    ]
+   },
+   {
+    "e": "Valore di $u$ per cui l'atto di moto è traslatorio",
+    "t": "funzione",
+    "v": "v",
+    "var": [
+     "v",
+     "r"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/7": {
+  "campi": [
+   {
+    "e": "$|\\vec{v}_G|$",
+    "t": "scelta",
+    "opzioni": [
+     "$(R - r)\\,\\dot{\\varphi}$",
+     "$(R + r)\\,\\dot{\\varphi}$",
+     "$R\\,\\dot{\\varphi}$",
+     "$r\\,\\dot{\\varphi}$"
+    ],
+    "v": "$(R - r)\\,\\dot{\\varphi}$"
+   },
+   {
+    "e": "$\\vec{\\omega}$ del disco",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\frac{(R-r)\\,\\dot{\\varphi}}{r}\\,\\hat{k}$",
+     "$\\frac{(R-r)\\,\\dot{\\varphi}}{r}\\,\\hat{k}$",
+     "$-\\frac{R\\,\\dot{\\varphi}}{r}\\,\\hat{k}$",
+     "$\\dot{\\varphi}\\,\\hat{k}$"
+    ],
+    "v": "$-\\frac{(R-r)\\,\\dot{\\varphi}}{r}\\,\\hat{k}$"
+   },
+   {
+    "e": "Angolo di cui ruota il disco in un giro di $G$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{R-r}{r}\\,2\\pi$",
+     "$\\frac{R}{r}\\,2\\pi$",
+     "$\\frac{R+r}{r}\\,2\\pi$",
+     "$2\\pi$"
+    ],
+    "v": "$\\frac{R-r}{r}\\,2\\pi$"
+   }
+  ]
+ },
+ "cinematica-del-rigido/8": {
+  "campi": [
+   {
+    "e": "$|\\vec{v}_B|$",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "omega",
+     "r"
+    ]
+   },
+   {
+    "e": "$\\dfrac{\\omega_{AB}}{\\Omega}$, con $\\vec{\\omega}_{AB} = \\omega_{AB}\\,\\hat{k}$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   }
+  ]
+ },
+ "cinematica-del-rigido/9": {
+  "campi": [
+   {
+    "e": "Componente $\\omega_z$ della velocità angolare di $AB$ (scrivi $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "-\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_B$ ($l$ per $\\ell$, $\\omega$ per $\\omega_0$)",
+    "t": "funzione",
+    "v": "-\\sqrt{3}l\\omega",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ascissa del centro di istantanea rotazione di $AB$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "l",
+    "var": [
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Ordinata del centro di istantanea rotazione di $AB$ (scrivi $l$ per $\\ell$)",
+    "t": "funzione",
+    "v": "\\sqrt{3}l",
+    "var": [
+     "l",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/10": {
+  "campi": [
+   {
+    "e": "Base",
+    "t": "scelta",
+    "opzioni": [
+     "circonferenza di centro $O$ e raggio $R$",
+     "circonferenza di centro $O$ e raggio $R - r$",
+     "circonferenza di centro $G$ e raggio $r$",
+     "circonferenza di centro $O$ e raggio $R + r$"
+    ],
+    "v": "circonferenza di centro $O$ e raggio $R$"
+   },
+   {
+    "e": "Rulletta",
+    "t": "scelta",
+    "opzioni": [
+     "circonferenza di centro $G$ e raggio $r$",
+     "circonferenza di centro $O$ e raggio $R$",
+     "circonferenza di centro $O$ e raggio $R - r$",
+     "circonferenza di centro $G$ e raggio $R - r$"
+    ],
+    "v": "circonferenza di centro $G$ e raggio $r$"
+   },
+   {
+    "e": "Arco di rulletta percorso per una variazione $\\Delta\\varphi$",
+    "t": "scelta",
+    "opzioni": [
+     "$R\\,\\Delta\\varphi$",
+     "$r\\,\\Delta\\varphi$",
+     "$(R - r)\\,\\Delta\\varphi$",
+     "$(R + r)\\,\\Delta\\varphi$"
+    ],
+    "v": "$R\\,\\Delta\\varphi$"
+   }
+  ]
+ },
+ "cinematica-del-rigido/11": {
+  "campi": [
+   {
+    "e": "Atto di moto",
+    "t": "scelta",
+    "opzioni": [
+     "traslatorio",
+     "rotatorio",
+     "elicoidale"
+    ],
+    "v": "elicoidale"
+   },
+   {
+    "e": "$|\\vec{\\omega}|$",
+    "t": "funzione",
+    "v": "3\\omega",
+    "var": [
+     "v",
+     "omega"
+    ]
+   },
+   {
+    "e": "Coordinata $y$ del punto dell'asse di Mozzi con $x = 0$",
+    "t": "funzione",
+    "v": "\\frac{2v}{9\\omega}",
+    "var": [
+     "v",
+     "omega"
+    ]
+   },
+   {
+    "e": "Coordinata $z$ del punto dell'asse di Mozzi con $x = 0$",
+    "t": "funzione",
+    "v": "-\\frac{2v}{9\\omega}",
+    "var": [
+     "v",
+     "omega"
+    ]
+   },
+   {
+    "e": "$|\\vec{v}_{\\min}|$",
+    "t": "funzione",
+    "v": "\\frac{v}{3}",
+    "var": [
+     "v",
+     "omega"
+    ]
+   },
+   {
+    "e": "Passo $p$",
+    "t": "funzione",
+    "v": "\\frac{v}{9\\omega}",
+    "var": [
+     "v",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "cinematica-del-rigido/12": {
+  "campi": [
+   {
+    "e": "$\\vec{\\omega}$ in $\\mathrm{rad/s}$",
+    "t": "valori",
+    "v": [
+     "2",
+     "1",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Invariante cinematico $I$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Atto di moto",
+    "t": "scelta",
+    "opzioni": [
+     "traslatorio",
+     "rotatorio",
+     "elicoidale"
+    ],
+    "v": "rotatorio"
+   },
+   {
+    "e": "Punto dell'asse di Mozzi con $x = 0$ (coordinate in $\\mathrm{m}$)",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "cinematica-del-rigido/13": {
+  "campi": [
+   {
+    "e": "$\\dfrac{\\omega_\\xi}{\\Omega}$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$\\dfrac{\\omega_\\eta}{\\Omega}$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{2}}{2}"
+   },
+   {
+    "e": "$\\dfrac{\\omega_\\zeta}{\\Omega}$",
+    "t": "numero",
+    "v": "1 + \\frac{\\sqrt{2}}{2}"
+   },
+   {
+    "e": "$\\dfrac{|\\vec{\\omega}|}{\\Omega}$",
+    "t": "numero",
+    "v": "\\sqrt{2 + \\sqrt{2}}"
+   },
+   {
+    "e": "Semiapertura $\\alpha$ del cono fisso",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "°"
+   },
+   {
+    "e": "Semiapertura $\\beta$ del cono mobile",
+    "t": "numero",
+    "v": "22{,}5",
+    "u": "°"
+   }
+  ]
+ },
+ "cinematica-del-rigido/14": {
+  "campi": [
+   {
+    "e": "Atto di moto dell'asta",
+    "t": "scelta",
+    "opzioni": [
+     "traslatorio",
+     "rotatorio attorno a $G_1$",
+     "rotatorio attorno a $G_2$",
+     "elicoidale"
+    ],
+    "v": "traslatorio"
+   },
+   {
+    "e": "Componente $x$ di $\\vec{v}_{G_2}$",
+    "t": "funzione",
+    "v": "v",
+    "var": [
+     "v"
+    ]
+   },
+   {
+    "e": "$\\vec{\\omega}_1$",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\frac{v}{R_1}\\,\\hat{k}$",
+     "$\\frac{v}{R_1}\\,\\hat{k}$",
+     "$-\\frac{v}{R_2}\\,\\hat{k}$",
+     "$\\vec{0}$"
+    ],
+    "v": "$-\\frac{v}{R_1}\\,\\hat{k}$"
+   },
+   {
+    "e": "$\\vec{\\omega}_2$",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\frac{v}{R_2}\\,\\hat{k}$",
+     "$\\frac{v}{R_2}\\,\\hat{k}$",
+     "$-\\frac{v}{R_1}\\,\\hat{k}$",
+     "$\\vec{0}$"
+    ],
+    "v": "$-\\frac{v}{R_2}\\,\\hat{k}$"
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/1": {
+  "campi": [
+   {
+    "e": "Coordinate $(x_G, y_G)$ del centro di massa, in unità di $\\ell$",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{2}",
+     "\\frac{1}{2}"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti $(Q_x, Q_y)$ della quantità di moto, in unità di $m\\,v$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti di $\\vec{v}_G$, in unità di $v$",
+    "t": "valori",
+    "v": [
+     "-\\frac{1}{2}",
+     "\\frac{1}{2}"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/2": {
+  "campi": [
+   {
+    "e": "Spostamento del carrello (positivo verso destra)",
+    "t": "funzione",
+    "v": "-\\frac{d}{6}",
+    "var": [
+     "d"
+    ]
+   },
+   {
+    "e": "Spostamento del punto rispetto alla guida (positivo verso destra)",
+    "t": "funzione",
+    "v": "\\frac{5d}{6}",
+    "var": [
+     "d"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/3": {
+  "campi": [
+   {
+    "e": "Componente $K_{O,z}$ del momento angolare (scrivere $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "m v l",
+    "var": [
+     "m",
+     "v",
+     "l"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/4": {
+  "campi": [
+   {
+    "e": "Componente $z$ di $\\vec{K}_A$ (scrivere $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{8}{3} m l^2 \\omega",
+    "var": [
+     "m",
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $z$ di $\\vec{K}_G$",
+    "t": "funzione",
+    "v": "\\frac{2}{3} m l^2 \\omega",
+    "var": [
+     "m",
+     "l",
+     "omega"
+    ]
+   },
+   {
+    "e": "Componente $z$ del termine di trasporto $(G - A) \\wedge 2m\\,\\vec{v}_G$",
+    "t": "funzione",
+    "v": "2 m l^2 \\omega",
+    "var": [
+     "m",
+     "l",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/5": {
+  "campi": [
+   {
+    "e": "Energia cinetica $T$, in unità di $m\\,\\ell^2\\,\\dot{\\vartheta}^2$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/6": {
+  "campi": [
+   {
+    "e": "Energia cinetica $T$ divisa per $m\\,R^2\\,\\dot{\\varphi}^2$, in funzione di $\\varphi$",
+    "t": "funzione",
+    "v": "\\frac{7}{4}-\\cos\\varphi",
+    "var": [
+     "phi"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/7": {
+  "campi": [
+   {
+    "e": "Quadrato $v_1^2$ della velocità del corpo di massa $m$ (scrivere $E$ al posto di $E_0$)",
+    "t": "funzione",
+    "v": "\\frac{8 e}{5 m}",
+    "var": [
+     "e",
+     "m"
+    ]
+   },
+   {
+    "e": "Quadrato $v_2^2$ della velocità del corpo di massa $4m$",
+    "t": "funzione",
+    "v": "\\frac{e}{10 m}",
+    "var": [
+     "e",
+     "m"
+    ]
+   },
+   {
+    "e": "Versi delle due velocità",
+    "t": "scelta",
+    "opzioni": [
+     "opposti",
+     "concordi"
+    ],
+    "v": "opposti"
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/8": {
+  "campi": [
+   {
+    "e": "Quadrato della velocità del punto",
+    "t": "funzione",
+    "v": "\\frac{4 g h}{3}",
+    "var": [
+     "g",
+     "h"
+    ]
+   },
+   {
+    "e": "Quadrato della velocità del carrello",
+    "t": "funzione",
+    "v": "\\frac{g h}{3}",
+    "var": [
+     "g",
+     "h"
+    ]
+   },
+   {
+    "e": "Versi delle due velocità",
+    "t": "scelta",
+    "opzioni": [
+     "opposti",
+     "concordi"
+    ],
+    "v": "opposti"
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/9": {
+  "campi": [
+   {
+    "e": "Velocità angolare finale $\\omega_f$ (scrivere $\\omega$ al posto di $\\omega_0$)",
+    "t": "funzione",
+    "v": "2\\omega",
+    "var": [
+     "omega"
+    ]
+   },
+   {
+    "e": "Variazione dell'energia cinetica $\\Delta T$",
+    "t": "funzione",
+    "v": "\\frac{3}{2} m r^2 \\omega^2",
+    "var": [
+     "m",
+     "r",
+     "omega"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/10": {
+  "campi": [
+   {
+    "e": "Velocità finale $v_f$ (scrivere $v$ al posto di $v_0$)",
+    "t": "funzione",
+    "v": "3v",
+    "var": [
+     "v"
+    ]
+   },
+   {
+    "e": "Lavoro compiuto sul filo",
+    "t": "funzione",
+    "v": "4 m v^2",
+    "var": [
+     "m",
+     "v"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/11": {
+  "campi": [
+   {
+    "e": "Quadrato $\\dot{\\vartheta}^2$ della velocità angolare (scrivere $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{3 g}{l}",
+    "var": [
+     "g",
+     "l"
+    ]
+   },
+   {
+    "e": "Quadrato della velocità dell'estremo $B$",
+    "t": "funzione",
+    "v": "3 g l",
+    "var": [
+     "g",
+     "l"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/12": {
+  "campi": [
+   {
+    "e": "Quadrato $v^2$ della velocità dei due corpi",
+    "t": "funzione",
+    "v": "\\frac{2 g h}{3}",
+    "var": [
+     "g",
+     "h"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/13": {
+  "campi": [
+   {
+    "e": "Componente orizzontale $\\Phi_{A,x}$ della reazione",
+    "t": "funzione",
+    "v": "0",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Componente verticale $\\Phi_{A,y}$ della reazione (positiva verso l'alto)",
+    "t": "funzione",
+    "v": "\\frac{5}{2} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-dei-sistemi/14": {
+  "campi": [
+   {
+    "e": "Modulo della velocità angolare subito dopo l'urto (scrivere $v$ al posto di $v_0$ e $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{3 v}{5 l}",
+    "var": [
+     "v",
+     "l"
+    ]
+   },
+   {
+    "e": "Energia cinetica perduta nell'urto",
+    "t": "funzione",
+    "v": "\\frac{1}{5} m v^2",
+    "var": [
+     "m",
+     "v"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/1": {
+  "campi": [
+   {
+    "e": "Spazio percorso prima di fermarsi (scrivere $v$ al posto di $v_0$)",
+    "t": "funzione",
+    "v": "\\frac{m v^2}{2 f}",
+    "var": [
+     "m",
+     "v",
+     "f"
+    ]
+   },
+   {
+    "e": "Tempo impiegato a fermarsi",
+    "t": "funzione",
+    "v": "\\frac{m v}{f}",
+    "var": [
+     "m",
+     "v",
+     "f"
+    ]
+   },
+   {
+    "e": "Istante del ritorno in $O$",
+    "t": "funzione",
+    "v": "\\frac{2 m v}{f}",
+    "var": [
+     "m",
+     "v",
+     "f"
+    ]
+   },
+   {
+    "e": "Componente $\\dot{x}$ della velocità al ritorno in $O$",
+    "t": "funzione",
+    "v": "-v",
+    "var": [
+     "v"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/2": {
+  "campi": [
+   {
+    "e": "$\\dot{x}(t)$",
+    "t": "funzione",
+    "v": "\\frac{f \\tau}{m}\\left(1-e^{-\\frac{t}{\\tau}}\\right)",
+    "var": [
+     "f",
+     "t",
+     "m",
+     "tau"
+    ]
+   },
+   {
+    "e": "$\\displaystyle\\lim_{t \\to +\\infty} \\dot{x}(t)$",
+    "t": "funzione",
+    "v": "\\frac{f \\tau}{m}",
+    "var": [
+     "f",
+     "m",
+     "tau"
+    ]
+   },
+   {
+    "e": "$x(t)$ (scrivere $F$ al posto di $F_0$)",
+    "t": "funzione",
+    "v": "\\frac{f \\tau}{m}\\left(t-\\tau+\\tau e^{-\\frac{t}{\\tau}}\\right)",
+    "var": [
+     "f",
+     "t",
+     "m",
+     "tau"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/3": {
+  "campi": [
+   {
+    "e": "Velocità limite $v_\\ell$",
+    "t": "numero",
+    "v": "19{,}62",
+    "u": "m/s"
+   },
+   {
+    "e": "$v(t)$ in m/s, con $t$ in secondi",
+    "t": "funzione",
+    "v": "19{,}62\\left(1-e^{-\\frac{t}{2}}\\right)",
+    "var": [
+     "t"
+    ]
+   },
+   {
+    "e": "Istante $t_m$",
+    "t": "numero",
+    "v": "1{,}39",
+    "u": "s"
+   }
+  ]
+ },
+ "dinamica-del-punto/4": {
+  "campi": [
+   {
+    "e": "Periodo $T$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\dfrac{m}{k}}$",
+     "$2\\pi\\sqrt{\\dfrac{k}{m}}$",
+     "$\\sqrt{\\dfrac{m}{k}}$",
+     "$\\dfrac{1}{2\\pi}\\sqrt{\\dfrac{k}{m}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\dfrac{m}{k}}$"
+   },
+   {
+    "e": "Ampiezza $A$ (scrivere $v$ al posto di $v_0$)",
+    "t": "funzione",
+    "v": "v\\sqrt{\\frac{m}{k}}",
+    "var": [
+     "m",
+     "v",
+     "k"
+    ]
+   },
+   {
+    "e": "Modulo massimo della forza elastica",
+    "t": "funzione",
+    "v": "v\\sqrt{m k}",
+    "var": [
+     "m",
+     "v",
+     "k"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/5": {
+  "campi": [
+   {
+    "e": "Allungamento statico $\\delta$",
+    "t": "funzione",
+    "v": "\\frac{m g}{k}",
+    "var": [
+     "m",
+     "g",
+     "k"
+    ]
+   },
+   {
+    "e": "Periodo $T$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\dfrac{m}{k}}$",
+     "$2\\pi\\sqrt{\\dfrac{k}{m}}$",
+     "$2\\pi\\sqrt{\\dfrac{\\ell_0}{g}}$",
+     "$2\\pi\\sqrt{\\dfrac{m g}{k}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\dfrac{m}{k}}$"
+   },
+   {
+    "e": "Velocità massima",
+    "t": "funzione",
+    "v": "a\\sqrt{\\frac{k}{m}}",
+    "var": [
+     "k",
+     "a",
+     "m"
+    ]
+   },
+   {
+    "e": "Tensione massima della molla",
+    "t": "funzione",
+    "v": "m g + k a",
+    "var": [
+     "m",
+     "g",
+     "k",
+     "a"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/6": {
+  "campi": [
+   {
+    "e": "Costante elastica equivalente $k_{\\text{eq}}$",
+    "t": "funzione",
+    "v": "\\frac{2k}{3}",
+    "var": [
+     "k"
+    ]
+   },
+   {
+    "e": "Periodo delle piccole oscillazioni",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\dfrac{3m}{2k}}$",
+     "$2\\pi\\sqrt{\\dfrac{m}{3k}}$",
+     "$2\\pi\\sqrt{\\dfrac{2m}{3k}}$",
+     "$2\\pi\\sqrt{\\dfrac{m}{k}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\dfrac{3m}{2k}}$"
+   }
+  ]
+ },
+ "dinamica-del-punto/7": {
+  "campi": [
+   {
+    "e": "Tipo di smorzamento",
+    "t": "scelta",
+    "opzioni": [
+     "debole",
+     "critico",
+     "forte"
+    ],
+    "v": "debole"
+   },
+   {
+    "e": "Pseudopulsazione $\\omega_s$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{1}{2}\\sqrt{\\dfrac{k}{m}}$",
+     "$\\dfrac{\\sqrt{3}}{2}\\sqrt{\\dfrac{k}{m}}$",
+     "$\\sqrt{\\dfrac{k}{m}}$",
+     "$\\dfrac{1}{4}\\sqrt{\\dfrac{k}{m}}$"
+    ],
+    "v": "$\\dfrac{1}{2}\\sqrt{\\dfrac{k}{m}}$"
+   },
+   {
+    "e": "Pseudoperiodo $T_s$",
+    "t": "scelta",
+    "opzioni": [
+     "$4\\pi\\sqrt{\\dfrac{m}{k}}$",
+     "$2\\pi\\sqrt{\\dfrac{m}{k}}$",
+     "$\\pi\\sqrt{\\dfrac{m}{k}}$",
+     "$\\dfrac{4\\pi}{\\sqrt{3}}\\sqrt{\\dfrac{m}{k}}$"
+    ],
+    "v": "$4\\pi\\sqrt{\\dfrac{m}{k}}$"
+   },
+   {
+    "e": "Rapporto fra due massimi successivi",
+    "t": "numero",
+    "v": "1{,}9 \\cdot 10^{-5}",
+    "cifre": 6
+   }
+  ]
+ },
+ "dinamica-del-punto/8": {
+  "campi": [
+   {
+    "e": "$\\dfrac{\\Omega_r}{\\omega_0}$",
+    "t": "numero",
+    "v": "\\frac{\\sqrt{14}}{4}"
+   },
+   {
+    "e": "Ampiezza massima, in unità di $\\dfrac{F_0}{k}$",
+    "t": "numero",
+    "v": "\\frac{8\\sqrt{15}}{15}"
+   }
+  ]
+ },
+ "dinamica-del-punto/9": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile (scrivere $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "l",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "Configurazione di equilibrio instabile",
+    "t": "funzione",
+    "v": "-l",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "Quadrato $\\omega^2$ della pulsazione delle piccole oscillazioni",
+    "t": "funzione",
+    "v": "\\frac{2 c l}{m}",
+    "var": [
+     "c",
+     "l",
+     "m"
+    ]
+   },
+   {
+    "e": "Punti di inversione, in unità di $\\ell$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\sqrt{3}"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/10": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio $r_e$",
+    "t": "funzione",
+    "v": "\\frac{2b}{a}",
+    "var": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "e": "Natura dell'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "Valore minimo dell'energia potenziale",
+    "t": "funzione",
+    "v": "-\\frac{a^2}{4b}",
+    "var": [
+     "a",
+     "b"
+    ]
+   },
+   {
+    "e": "Pulsazione $\\omega$ delle piccole oscillazioni",
+    "t": "funzione",
+    "v": "\\frac{a^2}{2b\\sqrt{2 m b}}",
+    "var": [
+     "b",
+     "a",
+     "m"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/11": {
+  "campi": [
+   {
+    "e": "$\\cos\\vartheta_{\\max}$ (scrivere $v$ al posto di $v_0$ e $l$ al posto di $\\ell$)",
+    "t": "funzione",
+    "v": "1-\\frac{v^2}{2 g l}",
+    "var": [
+     "v",
+     "g",
+     "l"
+    ]
+   },
+   {
+    "e": "Tensione del filo nella posizione più bassa",
+    "t": "funzione",
+    "v": "m\\left(g+\\frac{v^2}{l}\\right)",
+    "var": [
+     "m",
+     "g",
+     "v",
+     "l"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-punto/12": {
+  "campi": [
+   {
+    "e": "$\\cos\\vartheta_d$ (scrivere $v$ al posto di $v_0$)",
+    "t": "funzione",
+    "v": "\\frac{2}{3}+\\frac{v^2}{3 g r}",
+    "var": [
+     "v",
+     "g",
+     "r"
+    ]
+   },
+   {
+    "e": "Il distacco avviene nel vertice se",
+    "t": "scelta",
+    "opzioni": [
+     "$v_0^2 \\geq g R$",
+     "$v_0^2 \\geq 2 g R$",
+     "$v_0^2 \\geq \\dfrac{2}{3}\\,g R$",
+     "$v_0^2 \\leq g R$"
+    ],
+    "v": "$v_0^2 \\geq g R$"
+   }
+  ]
+ },
+ "dinamica-del-punto/13": {
+  "campi": [
+   {
+    "e": "Natura dell'equilibrio $\\vartheta = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "instabile"
+   },
+   {
+    "e": "Natura dell'equilibrio $\\vartheta = \\pi$",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "instabile"
+   },
+   {
+    "e": "Configurazione di equilibrio con $0 < \\vartheta < \\pi$ (in gradi)",
+    "t": "numero",
+    "v": "48{,}19",
+    "u": "°",
+    "cifre": 2
+   },
+   {
+    "e": "Natura delle configurazioni $\\vartheta \\neq 0$, $\\vartheta \\neq \\pi$",
+    "t": "scelta",
+    "opzioni": [
+     "stabili",
+     "instabili"
+    ],
+    "v": "stabili"
+   }
+  ]
+ },
+ "dinamica-del-punto/14": {
+  "campi": [
+   {
+    "e": "Componente radiale $F_r$ della forza",
+    "t": "funzione",
+    "v": "-\\frac{3 m a c^2}{r^4}",
+    "var": [
+     "m",
+     "a",
+     "c",
+     "r"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/1": {
+  "campi": [
+   {
+    "e": "Accelerazione del centro del disco $a_G$",
+    "t": "numero",
+    "v": "3{,}27",
+    "u": "m/s^2"
+   },
+   {
+    "e": "Forza d'attrito $F_a$ (in funzione di $m$ e $g$)",
+    "t": "funzione",
+    "v": "\\frac{m g}{6}",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Minimo coefficiente d'attrito statico $f_s$",
+    "t": "numero",
+    "v": "0{,}19",
+    "cifre": 2
+   },
+   {
+    "e": "Accelerazione del centro della sfera $a_G$",
+    "t": "numero",
+    "v": "3{,}50",
+    "u": "m/s^2"
+   }
+  ]
+ },
+ "dinamica-del-rigido/2": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$ del corpo appeso (in funzione di $g$)",
+    "t": "funzione",
+    "v": "\\frac{g}{2}",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Tensione della fune $S$",
+    "t": "funzione",
+    "v": "\\frac{m g}{2}",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Modulo della reazione dell'asse $\\Phi_O$",
+    "t": "funzione",
+    "v": "\\frac{5}{2} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/3": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$ dei corpi (in funzione di $g$)",
+    "t": "funzione",
+    "v": "\\frac{g}{3}",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Tensione nel ramo del corpo di massa $3m$",
+    "t": "funzione",
+    "v": "2 m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Tensione nel ramo del corpo di massa $m$",
+    "t": "funzione",
+    "v": "\\frac{4}{3} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/4": {
+  "campi": [
+   {
+    "e": "Accelerazione $a$ del centro (in funzione di $g$)",
+    "t": "funzione",
+    "v": "\\frac{2 g}{11}",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Tensione del filo $S$",
+    "t": "funzione",
+    "v": "\\frac{9}{11} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/5": {
+  "campi": [
+   {
+    "e": "Accelerazione angolare iniziale $\\ddot{\\vartheta}_0$ (in funzione di $g$ e $\\ell$, scritto $l$)",
+    "t": "funzione",
+    "v": "\\frac{3 g}{2 l}",
+    "var": [
+     "g",
+     "l"
+    ]
+   },
+   {
+    "e": "Velocità angolare $\\omega$ nella posizione verticale, come multiplo di $\\sqrt{\\dfrac{g}{\\ell}}$",
+    "t": "numero",
+    "v": "\\sqrt{3}"
+   },
+   {
+    "e": "Modulo della reazione $\\Phi_A$ nella posizione verticale",
+    "t": "funzione",
+    "v": "\\frac{5}{2} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/6": {
+  "campi": [
+   {
+    "e": "Momento d'inerzia $I_A$ (in funzione di $m$ e $\\ell$, scritto $l$)",
+    "t": "funzione",
+    "v": "\\frac{115}{48} m l^2",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "Lunghezza ridotta $\\ell_r$",
+    "t": "funzione",
+    "v": "\\frac{23}{24} l",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$ delle piccole oscillazioni, come multiplo di $\\sqrt{\\dfrac{\\ell}{g}}$",
+    "t": "numero",
+    "v": "2\\pi\\sqrt{\\frac{23}{24}}"
+   }
+  ]
+ },
+ "dinamica-del-rigido/7": {
+  "campi": [
+   {
+    "e": "Momento d'inerzia $I_O$ (in funzione di $m$ e $R$)",
+    "t": "funzione",
+    "v": "\\frac{3}{2} m r^2",
+    "var": [
+     "m",
+     "r"
+    ]
+   },
+   {
+    "e": "Lunghezza ridotta $\\ell_r$",
+    "t": "funzione",
+    "v": "\\frac{3}{2} r",
+    "var": [
+     "r"
+    ]
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$ delle piccole oscillazioni, come multiplo di $\\sqrt{\\dfrac{R}{g}}$",
+    "t": "numero",
+    "v": "2\\pi\\sqrt{\\frac{3}{2}}"
+   },
+   {
+    "e": "Velocità angolare $\\omega$ con $G$ sotto $O$, come multiplo di $\\sqrt{\\dfrac{g}{R}}$",
+    "t": "numero",
+    "v": "\\sqrt{\\frac{4}{3}}"
+   },
+   {
+    "e": "Modulo della reazione $\\Phi_O$ con $G$ sotto $O$",
+    "t": "funzione",
+    "v": "\\frac{7}{3} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/8": {
+  "campi": [
+   {
+    "e": "Modulo delle reazioni trasversali (in funzione di $m$, $\\ell$ scritto $l$, $\\omega$ e $h$)",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3} m l^2 \\omega^2}{48 h}",
+    "var": [
+     "m",
+     "l",
+     "omega",
+     "h"
+    ]
+   },
+   {
+    "e": "Il sistema è bilanciato",
+    "t": "scelta",
+    "opzioni": [
+     "staticamente e dinamicamente",
+     "solo staticamente",
+     "solo dinamicamente",
+     "né staticamente né dinamicamente"
+    ],
+    "v": "solo staticamente"
+   }
+  ]
+ },
+ "dinamica-del-rigido/9": {
+  "campi": [
+   {
+    "e": "$|\\Phi_A|$",
+    "t": "numero",
+    "v": "667",
+    "u": "N"
+   },
+   {
+    "e": "$|\\Phi_B|$",
+    "t": "numero",
+    "v": "333",
+    "u": "N"
+   },
+   {
+    "e": "$m_1 e_1$",
+    "t": "numero",
+    "v": "0{,}0667",
+    "u": "kg m"
+   },
+   {
+    "e": "$m_2 e_2$",
+    "t": "numero",
+    "v": "0{,}0333",
+    "u": "kg m"
+   },
+   {
+    "e": "$m_1$ a $10\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "0{,}67",
+    "u": "kg"
+   },
+   {
+    "e": "$m_2$ a $10\\,\\mathrm{cm}$ dall'asse",
+    "t": "numero",
+    "v": "0{,}33",
+    "u": "kg"
+   }
+  ]
+ },
+ "dinamica-del-rigido/10": {
+  "campi": [
+   {
+    "e": "Velocità angolare $\\omega$ all'arrivo sul piano, come multiplo di $\\sqrt{\\dfrac{g}{\\ell}}$",
+    "t": "numero",
+    "v": "\\sqrt{\\frac{3\\sqrt{3}}{2}}"
+   },
+   {
+    "e": "Reazione del piano $N$ in quell'istante",
+    "t": "funzione",
+    "v": "\\frac{m g}{4}",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/11": {
+  "campi": [
+   {
+    "e": "Angolo $\\vartheta^*$ di distacco dalla parete",
+    "t": "numero",
+    "v": "70{,}5",
+    "u": "°"
+   },
+   {
+    "e": "Velocità angolare $\\dot{\\vartheta}^*$, come multiplo di $\\sqrt{\\dfrac{g}{\\ell}}$",
+    "t": "numero",
+    "v": "\\sqrt{\\frac{1}{2}}"
+   },
+   {
+    "e": "Reazione del pavimento $N_A$",
+    "t": "funzione",
+    "v": "\\frac{m g}{4}",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/12": {
+  "campi": [
+   {
+    "e": "Accelerazione del centro del disco (in funzione di $g$)",
+    "t": "funzione",
+    "v": "\\frac{4 g}{11}",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Accelerazione del corpo appeso",
+    "t": "funzione",
+    "v": "\\frac{8 g}{11}",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Tensione della fune $S$",
+    "t": "funzione",
+    "v": "\\frac{3}{11} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "dinamica-del-rigido/13": {
+  "campi": [
+   {
+    "e": "Momento principale $A$ (asse $\\xi$, in funzione di $m$ e $\\ell$ scritto $l$)",
+    "t": "funzione",
+    "v": "\\frac{m l^2}{12}",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "Momento principale $B$ (asse $\\eta$)",
+    "t": "funzione",
+    "v": "\\frac{m l^2}{3}",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "Momento principale $C$ (asse $\\zeta$)",
+    "t": "funzione",
+    "v": "\\frac{5 m l^2}{12}",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "Rotazioni permanenti stabili",
+    "t": "scelta",
+    "opzioni": [
+     "attorno a $\\xi$ e a $\\zeta$",
+     "attorno a $\\eta$",
+     "attorno a $\\xi$, $\\eta$ e $\\zeta$",
+     "solo attorno a $\\zeta$"
+    ],
+    "v": "attorno a $\\xi$ e a $\\zeta$"
+   },
+   {
+    "e": "Rapporto $\\dfrac{\\lambda}{q_0}$ nel caso instabile",
+    "t": "numero",
+    "v": "\\sqrt{\\frac{3}{5}}"
+   }
+  ]
+ },
+ "dinamica-del-rigido/14": {
+  "campi": [
+   {
+    "e": "Velocità di precessione $\\Omega$",
+    "t": "numero",
+    "v": "0{,}87",
+    "u": "rad/s"
+   },
+   {
+    "e": "Periodo della precessione $\\mathcal{T}$",
+    "t": "numero",
+    "v": "7{,}21",
+    "u": "s"
+   },
+   {
+    "e": "$|\\vec{K}_O|$",
+    "t": "numero",
+    "v": "9{,}0",
+    "u": "kg m^2/s"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/1": {
+  "campi": [
+   {
+    "e": "Equazione del moto",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{7}{3}\\,m\\,\\ell^2\\,\\ddot{\\vartheta} = \\mathcal{M} - \\dfrac{5}{2}\\,m\\,g\\,\\ell\\sin\\vartheta$",
+     "$\\dfrac{7}{3}\\,m\\,\\ell^2\\,\\ddot{\\vartheta} = \\mathcal{M} - \\dfrac{3}{2}\\,m\\,g\\,\\ell\\sin\\vartheta$",
+     "$\\dfrac{4}{3}\\,m\\,\\ell^2\\,\\ddot{\\vartheta} = \\mathcal{M} - \\dfrac{5}{2}\\,m\\,g\\,\\ell\\sin\\vartheta$",
+     "$\\dfrac{7}{3}\\,m\\,\\ell^2\\,\\ddot{\\vartheta} = -\\mathcal{M} - \\dfrac{5}{2}\\,m\\,g\\,\\ell\\sin\\vartheta$"
+    ],
+    "v": "$\\dfrac{7}{3}\\,m\\,\\ell^2\\,\\ddot{\\vartheta} = \\mathcal{M} - \\dfrac{5}{2}\\,m\\,g\\,\\ell\\sin\\vartheta$"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/2": {
+  "campi": [
+   {
+    "e": "$\\ddot{x}$ (in funzione di $k$, $m$ e $x$)",
+    "t": "funzione",
+    "v": "-\\frac{k}{3 m} x",
+    "var": [
+     "k",
+     "m",
+     "x"
+    ]
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$, come multiplo di $\\sqrt{\\dfrac{m}{k}}$",
+    "t": "numero",
+    "v": "2\\pi\\sqrt{3}"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/3": {
+  "campi": [
+   {
+    "e": "Funzione di dissipazione $\\mathcal{D}$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{1}{2}\\,h\\,\\dot{x}^2$",
+     "$h\\,\\dot{x}^2$",
+     "$-\\dfrac{1}{2}\\,h\\,\\dot{x}^2$",
+     "$\\dfrac{1}{2}\\,h\\,\\dot{x}$"
+    ],
+    "v": "$\\dfrac{1}{2}\\,h\\,\\dot{x}^2$"
+   },
+   {
+    "e": "Equazione del moto",
+    "t": "scelta",
+    "opzioni": [
+     "$m\\,\\ddot{x} + h\\,\\dot{x} + k\\,x = 0$",
+     "$m\\,\\ddot{x} - h\\,\\dot{x} + k\\,x = 0$",
+     "$m\\,\\ddot{x} + 2\\,h\\,\\dot{x} + k\\,x = 0$",
+     "$m\\,\\ddot{x} + \\dfrac{1}{2}\\,h\\,\\dot{x} + k\\,x = 0$"
+    ],
+    "v": "$m\\,\\ddot{x} + h\\,\\dot{x} + k\\,x = 0$"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/4": {
+  "campi": [
+   {
+    "e": "Accelerazione di $P$ verso il basso (in funzione di $g$)",
+    "t": "funzione",
+    "v": "\\frac{2}{5} g",
+    "var": [
+     "g"
+    ]
+   },
+   {
+    "e": "Velocità $v$ dopo la discesa $d$, come multiplo di $\\sqrt{g\\,d}$",
+    "t": "numero",
+    "v": "2\\sqrt{\\frac{1}{5}}"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/5": {
+  "campi": [
+   {
+    "e": "$\\ddot{s}$ (in funzione di $g$ e $\\alpha$)",
+    "t": "funzione",
+    "v": "\\frac{5}{7} g \\sin\\alpha",
+    "var": [
+     "g",
+     "alpha"
+    ]
+   }
+  ]
+ },
+ "equazioni-di-lagrange/6": {
+  "campi": [
+   {
+    "e": "$\\ddot{\\vartheta}$ (in funzione di $m$, $g$, $k$, $\\ell$ scritto $l$ e $\\vartheta$)",
+    "t": "funzione",
+    "v": "\\frac{3 (m g + 4 k l \\cos\\vartheta)}{4 m l} \\sin\\vartheta",
+    "var": [
+     "m",
+     "g",
+     "k",
+     "l",
+     "theta"
+    ]
+   }
+  ]
+ },
+ "equazioni-di-lagrange/7": {
+  "campi": [
+   {
+    "e": "Equazione associata a $x$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,m\\,\\ddot{x} + m\\,\\ell\\,\\ddot{\\vartheta}\\cos\\vartheta - m\\,\\ell\\,\\dot{\\vartheta}^2\\sin\\vartheta = 0$",
+     "$2\\,m\\,\\ddot{x} + m\\,\\ell\\,\\ddot{\\vartheta}\\cos\\vartheta + m\\,\\ell\\,\\dot{\\vartheta}^2\\sin\\vartheta = 0$",
+     "$m\\,\\ddot{x} + m\\,\\ell\\,\\ddot{\\vartheta}\\cos\\vartheta - m\\,\\ell\\,\\dot{\\vartheta}^2\\sin\\vartheta = 0$",
+     "$2\\,m\\,\\ddot{x} + m\\,\\ell\\,\\ddot{\\vartheta}\\cos\\vartheta = 0$"
+    ],
+    "v": "$2\\,m\\,\\ddot{x} + m\\,\\ell\\,\\ddot{\\vartheta}\\cos\\vartheta - m\\,\\ell\\,\\dot{\\vartheta}^2\\sin\\vartheta = 0$"
+   },
+   {
+    "e": "Equazione associata a $\\vartheta$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\ell\\,\\ddot{\\vartheta} + \\ddot{x}\\cos\\vartheta + g\\sin\\vartheta = 0$",
+     "$\\ell\\,\\ddot{\\vartheta} - \\ddot{x}\\cos\\vartheta + g\\sin\\vartheta = 0$",
+     "$\\ell\\,\\ddot{\\vartheta} + \\ddot{x}\\sin\\vartheta + g\\cos\\vartheta = 0$",
+     "$\\ell\\,\\ddot{\\vartheta} + g\\sin\\vartheta = 0$"
+    ],
+    "v": "$\\ell\\,\\ddot{\\vartheta} + \\ddot{x}\\cos\\vartheta + g\\sin\\vartheta = 0$"
+   },
+   {
+    "e": "Integrale primo della coordinata ciclica",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,m\\,\\dot{x} + m\\,\\ell\\,\\dot{\\vartheta}\\cos\\vartheta$",
+     "$2\\,m\\,\\dot{x}$",
+     "$m\\,\\dot{x} + m\\,\\ell\\,\\dot{\\vartheta}\\cos\\vartheta$",
+     "$m\\,\\ell^2\\,\\dot{\\vartheta} + m\\,\\ell\\,\\dot{x}\\cos\\vartheta$"
+    ],
+    "v": "$2\\,m\\,\\dot{x} + m\\,\\ell\\,\\dot{\\vartheta}\\cos\\vartheta$"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/8": {
+  "campi": [
+   {
+    "e": "Equazione associata a $\\vartheta_1$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,\\ell\\,\\ddot{\\vartheta}_1 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_2 + \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_2^2 + 2\\,g\\sin\\vartheta_1 = 0$",
+     "$2\\,\\ell\\,\\ddot{\\vartheta}_1 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_2 - \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_2^2 + 2\\,g\\sin\\vartheta_1 = 0$",
+     "$\\ell\\,\\ddot{\\vartheta}_1 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_2 + \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_2^2 + g\\sin\\vartheta_1 = 0$",
+     "$2\\,\\ell\\,\\ddot{\\vartheta}_1 + \\ell\\,\\ddot{\\vartheta}_2 + 2\\,g\\sin\\vartheta_1 = 0$"
+    ],
+    "v": "$2\\,\\ell\\,\\ddot{\\vartheta}_1 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_2 + \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_2^2 + 2\\,g\\sin\\vartheta_1 = 0$"
+   },
+   {
+    "e": "Equazione associata a $\\vartheta_2$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\ell\\,\\ddot{\\vartheta}_2 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_1 - \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_1^2 + g\\sin\\vartheta_2 = 0$",
+     "$\\ell\\,\\ddot{\\vartheta}_2 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_1 + \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_1^2 + g\\sin\\vartheta_2 = 0$",
+     "$\\ell\\,\\ddot{\\vartheta}_2 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_1 - \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_1^2 + 2\\,g\\sin\\vartheta_2 = 0$",
+     "$\\ell\\,\\ddot{\\vartheta}_2 + g\\sin\\vartheta_2 = 0$"
+    ],
+    "v": "$\\ell\\,\\ddot{\\vartheta}_2 + \\ell\\cos(\\vartheta_1 - \\vartheta_2)\\,\\ddot{\\vartheta}_1 - \\ell\\sin(\\vartheta_1 - \\vartheta_2)\\,\\dot{\\vartheta}_1^2 + g\\sin\\vartheta_2 = 0$"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/9": {
+  "campi": [
+   {
+    "e": "$\\ddot{r}$ (in funzione di $\\omega$, $r$, $g$ e $t$)",
+    "t": "funzione",
+    "v": "\\omega^2 r - g \\sin(\\omega t)",
+    "var": [
+     "omega",
+     "r",
+     "g",
+     "t"
+    ]
+   },
+   {
+    "e": "La funzione di Jacobi è un integrale primo?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/10": {
+  "campi": [
+   {
+    "e": "$\\ddot{\\vartheta}$ (in funzione di $g$, $R$ e $\\vartheta$)",
+    "t": "funzione",
+    "v": "-\\frac{2 g}{3 r} \\sin\\vartheta",
+    "var": [
+     "g",
+     "r",
+     "theta"
+    ]
+   },
+   {
+    "e": "$|\\dot{\\vartheta}|$ in $\\vartheta = 0$, come multiplo di $\\sqrt{\\dfrac{g}{R}}$",
+    "t": "numero",
+    "v": "2\\sqrt{\\frac{1}{3}}"
+   },
+   {
+    "e": "Verso di rotazione in $\\vartheta = 0$",
+    "t": "scelta",
+    "opzioni": [
+     "orario",
+     "antiorario"
+    ],
+    "v": "orario"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/11": {
+  "campi": [
+   {
+    "e": "Equazione associata a $r$",
+    "t": "scelta",
+    "opzioni": [
+     "$m\\,\\ddot{r} - m\\,r\\,\\dot{\\varphi}^2 = -k\\,r$",
+     "$m\\,\\ddot{r} + m\\,r\\,\\dot{\\varphi}^2 = -k\\,r$",
+     "$m\\,\\ddot{r} = -k\\,r$",
+     "$m\\,\\ddot{r} - 2\\,m\\,\\dot{r}\\,\\dot{\\varphi} = -k\\,r$"
+    ],
+    "v": "$m\\,\\ddot{r} - m\\,r\\,\\dot{\\varphi}^2 = -k\\,r$"
+   },
+   {
+    "e": "Integrale primo $p_\\varphi$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}$",
+     "$\\left( \\dfrac{1}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}$",
+     "$m\\,r^2\\,\\dot{\\varphi}$",
+     "$\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi} + m\\,\\dot{r}$"
+    ],
+    "v": "$\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}$"
+   },
+   {
+    "e": "Secondo integrale primo",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{1}{2}\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}^2 + \\dfrac{1}{2}\\,m\\,\\dot{r}^2 + \\dfrac{1}{2}\\,k\\,r^2$",
+     "$\\dfrac{1}{2}\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}^2 + \\dfrac{1}{2}\\,m\\,\\dot{r}^2 - \\dfrac{1}{2}\\,k\\,r^2$",
+     "$\\dfrac{1}{2}\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}^2 + \\dfrac{1}{2}\\,m\\,\\dot{r}^2$",
+     "$\\dfrac{1}{2}\\,m\\,r^2\\,\\dot{\\varphi}^2 + \\dfrac{1}{2}\\,m\\,\\dot{r}^2 + \\dfrac{1}{2}\\,k\\,r^2$"
+    ],
+    "v": "$\\dfrac{1}{2}\\left( \\dfrac{2}{3}\\,m\\,\\ell^2 + m\\,r^2 \\right) \\dot{\\varphi}^2 + \\dfrac{1}{2}\\,m\\,\\dot{r}^2 + \\dfrac{1}{2}\\,k\\,r^2$"
+   }
+  ]
+ },
+ "equazioni-di-lagrange/12": {
+  "campi": [
+   {
+    "e": "$\\ddot{\\vartheta}$ (in funzione di $g$, $\\ell$ scritto $l$ e $\\vartheta$)",
+    "t": "funzione",
+    "v": "-\\frac{g}{2 l} (\\sin\\vartheta + 2\\cos\\vartheta)",
+    "var": [
+     "g",
+     "l",
+     "theta"
+    ]
+   }
+  ]
+ },
+ "equazioni-di-lagrange/14": {
+  "campi": [
+   {
+    "e": "Equazione associata a $\\vartheta$",
+    "t": "scelta",
+    "opzioni": [
+     "$m\\,R^2\\,\\ddot{\\vartheta} = m\\,R^2\\sin\\vartheta\\cos\\vartheta\\,\\dot{\\varphi}^2 - m\\,g\\,R\\sin\\vartheta$",
+     "$m\\,R^2\\,\\ddot{\\vartheta} = -m\\,R^2\\sin\\vartheta\\cos\\vartheta\\,\\dot{\\varphi}^2 - m\\,g\\,R\\sin\\vartheta$",
+     "$m\\,R^2\\,\\ddot{\\vartheta} = m\\,R^2\\sin^2\\vartheta\\,\\dot{\\varphi}^2 - m\\,g\\,R\\sin\\vartheta$",
+     "$m\\,R^2\\,\\ddot{\\vartheta} = -m\\,g\\,R\\sin\\vartheta$"
+    ],
+    "v": "$m\\,R^2\\,\\ddot{\\vartheta} = m\\,R^2\\sin\\vartheta\\cos\\vartheta\\,\\dot{\\varphi}^2 - m\\,g\\,R\\sin\\vartheta$"
+   },
+   {
+    "e": "Integrale primo $p_\\varphi$",
+    "t": "scelta",
+    "opzioni": [
+     "$m\\,R^2\\sin^2\\vartheta\\,\\dot{\\varphi}$",
+     "$m\\,R^2\\,\\dot{\\varphi}$",
+     "$m\\,R^2\\sin\\vartheta\\,\\dot{\\varphi}$",
+     "$m\\,R^2\\cos^2\\vartheta\\,\\dot{\\varphi}$"
+    ],
+    "v": "$m\\,R^2\\sin^2\\vartheta\\,\\dot{\\varphi}$"
+   },
+   {
+    "e": "Energia meccanica $E$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{1}{2}\\,m\\,R^2\\,\\big( \\dot{\\vartheta}^2 + \\sin^2\\vartheta\\,\\dot{\\varphi}^2 \\big) - m\\,g\\,R\\cos\\vartheta$",
+     "$\\dfrac{1}{2}\\,m\\,R^2\\,\\big( \\dot{\\vartheta}^2 + \\sin^2\\vartheta\\,\\dot{\\varphi}^2 \\big) + m\\,g\\,R\\cos\\vartheta$",
+     "$\\dfrac{1}{2}\\,m\\,R^2\\,\\big( \\dot{\\vartheta}^2 + \\dot{\\varphi}^2 \\big) - m\\,g\\,R\\cos\\vartheta$",
+     "$\\dfrac{1}{2}\\,m\\,R^2\\,\\big( \\dot{\\vartheta}^2 + \\sin^2\\vartheta\\,\\dot{\\varphi}^2 \\big) - m\\,g\\,R\\sin\\vartheta$"
+    ],
+    "v": "$\\dfrac{1}{2}\\,m\\,R^2\\,\\big( \\dot{\\vartheta}^2 + \\sin^2\\vartheta\\,\\dot{\\varphi}^2 \\big) - m\\,g\\,R\\cos\\vartheta$"
+   },
+   {
+    "e": "$\\dot{\\varphi}$ sulla circonferenza di colatitudine $\\vartheta_0$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{\\dfrac{g}{R\\cos\\vartheta_0}}$",
+     "$\\sqrt{\\dfrac{g}{R\\sin\\vartheta_0}}$",
+     "$\\sqrt{\\dfrac{g\\cos\\vartheta_0}{R}}$",
+     "$\\sqrt{\\dfrac{g}{R}}$"
+    ],
+    "v": "$\\sqrt{\\dfrac{g}{R\\cos\\vartheta_0}}$"
+   }
+  ]
+ },
+ "geometria-delle-masse/1": {
+  "campi": [
+   {
+    "e": "$x_G$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{5}{6} l",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "$y_G$",
+    "t": "funzione",
+    "v": "\\frac{2}{3} l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/2": {
+  "campi": [
+   {
+    "e": "$x_G$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{l}{2}",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "$y_G$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{6} l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/3": {
+  "campi": [
+   {
+    "e": "$\\dfrac{M}{\\lambda_0\\,\\ell}$",
+    "t": "numero",
+    "v": "\\frac{4}{3}"
+   },
+   {
+    "e": "$s_G$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{9}{16} l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/4": {
+  "campi": [
+   {
+    "e": "$x_G$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{(32 - \\pi) l}{2(16 - \\pi)}",
+    "var": [
+     "l"
+    ]
+   },
+   {
+    "e": "$y_G$",
+    "t": "funzione",
+    "v": "\\frac{(32 - \\pi) l}{2(16 - \\pi)}",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/5": {
+  "campi": [
+   {
+    "e": "$x_G$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "$y_G$",
+    "t": "funzione",
+    "v": "-\\frac{2R}{3\\pi + 12}",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/6": {
+  "campi": [
+   {
+    "e": "$x_G$ del settore",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{\\pi} R",
+    "var": [
+     "r"
+    ]
+   },
+   {
+    "e": "$x_G$ dell'arco",
+    "t": "funzione",
+    "v": "\\frac{3\\sqrt{3}}{2\\pi} R",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/7": {
+  "campi": [
+   {
+    "e": "$z_G$",
+    "t": "funzione",
+    "v": "-\\frac{R}{16}",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/8": {
+  "campi": [
+   {
+    "e": "$I_Q$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{m l^2}{9}",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "$\\rho_Q$",
+    "t": "funzione",
+    "v": "\\frac{l}{3}",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/9": {
+  "campi": [
+   {
+    "e": "Momento d'inerzia rispetto all'asse ortogonale per il centro",
+    "t": "funzione",
+    "v": "m R^2",
+    "var": [
+     "m",
+     "r"
+    ]
+   },
+   {
+    "e": "Momento d'inerzia rispetto a un diametro",
+    "t": "funzione",
+    "v": "\\frac{m R^2}{2}",
+    "var": [
+     "m",
+     "r"
+    ]
+   },
+   {
+    "e": "Momento d'inerzia rispetto all'asse ortogonale per un punto dell'anello",
+    "t": "funzione",
+    "v": "2 m R^2",
+    "var": [
+     "m",
+     "r"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/10": {
+  "campi": [
+   {
+    "e": "$I_O$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{131}{96} m l^2",
+    "var": [
+     "m",
+     "l"
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/11": {
+  "campi": [
+   {
+    "e": "$\\mathbb{I}_O$ in unità di $m\\ell^2$",
+    "t": "matrice",
+    "v": [
+     [
+      "3",
+      "-2",
+      "0"
+     ],
+     [
+      "-2",
+      "3",
+      "0"
+     ],
+     [
+      "0",
+      "0",
+      "6"
+     ]
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/12": {
+  "campi": [
+   {
+    "e": "$\\mathbb{I}_O$ in unità di $m\\ell^2$",
+    "t": "matrice",
+    "v": [
+     [
+      "\\frac{1}{6}",
+      "-\\frac{1}{6}",
+      "0"
+     ],
+     [
+      "-\\frac{1}{6}",
+      "\\frac{2}{3}",
+      "0"
+     ],
+     [
+      "0",
+      "0",
+      "\\frac{5}{6}"
+     ]
+    ]
+   }
+  ]
+ },
+ "geometria-delle-masse/13": {
+  "campi": [
+   {
+    "e": "$\\mathbb{I}_O$ in unità di $m\\ell^2$",
+    "t": "matrice",
+    "v": [
+     [
+      "2",
+      "-2",
+      "0"
+     ],
+     [
+      "-2",
+      "5",
+      "0"
+     ],
+     [
+      "0",
+      "0",
+      "7"
+     ]
+    ]
+   },
+   {
+    "e": "Momenti principali d'inerzia in unità di $m\\ell^2$",
+    "t": "valori",
+    "v": [
+     "1",
+     "6",
+     "7"
+    ]
+   },
+   {
+    "e": "Direzione dell'asse principale con il momento minimo",
+    "t": "scelta",
+    "opzioni": [
+     "$(2, 1, 0)$",
+     "$(1, -2, 0)$",
+     "$(1, 1, 0)$",
+     "$(1, 2, 0)$"
+    ],
+    "v": "$(2, 1, 0)$"
+   }
+  ]
+ },
+ "geometria-delle-masse/14": {
+  "campi": [
+   {
+    "e": "$I_u$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{m l^2}{12}",
+    "var": [
+     "m",
+     "l"
+    ]
+   },
+   {
+    "e": "$\\rho_u$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{6} l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "lavori-virtuali/1": {
+  "campi": [
+   {
+    "e": "Lavoro lungo il segmento $AB$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Lavoro lungo la spezzata per $(\\ell, 0)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Un potenziale $U(x, y)$",
+    "t": "funzione",
+    "v": "F(2x - y)",
+    "var": [
+     "f",
+     "x",
+     "y"
+    ],
+    "primitiva": true
+   }
+  ]
+ },
+ "lavori-virtuali/2": {
+  "campi": [
+   {
+    "e": "Lavoro della forza elastica (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "k l^2",
+    "var": [
+     "k",
+     "l"
+    ]
+   },
+   {
+    "e": "Il lavoro dipende dal cammino?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "lavori-virtuali/3": {
+  "campi": [
+   {
+    "e": "Lavoro lungo l'arco (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "-\\frac{\\pi c l^2}{2}",
+    "var": [
+     "c",
+     "l"
+    ]
+   },
+   {
+    "e": "Lavoro lungo la spezzata",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "La forza è conservativa?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "lavori-virtuali/4": {
+  "campi": [
+   {
+    "e": "$U(\\vartheta)$, a meno di una costante (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "m g l\\cos\\vartheta + 4 k l^2\\sin\\vartheta",
+    "var": [
+     "m",
+     "g",
+     "l",
+     "k",
+     "theta"
+    ],
+    "primitiva": true
+   },
+   {
+    "e": "$\\tan\\vartheta$ nelle configurazioni di equilibrio",
+    "t": "funzione",
+    "v": "\\frac{4 k l}{m g}",
+    "var": [
+     "m",
+     "g",
+     "l",
+     "k"
+    ]
+   },
+   {
+    "e": "Numero di configurazioni di equilibrio in $[0, 2\\pi)$",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una",
+     "due",
+     "quattro"
+    ],
+    "v": "due"
+   }
+  ]
+ },
+ "lavori-virtuali/5": {
+  "campi": [
+   {
+    "e": "$U(\\vartheta, \\varphi)$, a meno di una costante",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{3}{2}\\,m g \\ell\\cos\\vartheta + \\dfrac{1}{2}\\,m g \\ell\\cos\\varphi + \\mathcal{M}\\,\\varphi$",
+     "$\\dfrac{3}{2}\\,m g \\ell\\cos\\vartheta + \\dfrac{1}{2}\\,m g \\ell\\cos\\varphi - \\mathcal{M}\\,\\varphi$",
+     "$\\dfrac{1}{2}\\,m g \\ell\\cos\\vartheta + \\dfrac{1}{2}\\,m g \\ell\\cos\\varphi + \\mathcal{M}\\,\\varphi$",
+     "$m g \\ell\\cos\\vartheta + \\dfrac{1}{2}\\,m g \\ell\\cos\\varphi + \\mathcal{M}\\,\\varphi$"
+    ],
+    "v": "$\\dfrac{3}{2}\\,m g \\ell\\cos\\vartheta + \\dfrac{1}{2}\\,m g \\ell\\cos\\varphi + \\mathcal{M}\\,\\varphi$"
+   },
+   {
+    "e": "Valori di $\\vartheta$ all'equilibrio in $[0, 2\\pi)$",
+    "t": "valori",
+    "v": [
+     "0",
+     "\\pi"
+    ]
+   },
+   {
+    "e": "$\\sin\\varphi$ all'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{2\\,\\mathcal{M}}{m g \\ell}$",
+     "$\\dfrac{\\mathcal{M}}{m g \\ell}$",
+     "$\\dfrac{\\mathcal{M}}{2\\,m g \\ell}$",
+     "$\\dfrac{2\\,\\mathcal{M}}{3\\,m g \\ell}$"
+    ],
+    "v": "$\\dfrac{2\\,\\mathcal{M}}{m g \\ell}$"
+   },
+   {
+    "e": "Condizione perché esistano configurazioni di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\,\\mathcal{M} \\leq m g \\ell$",
+     "$\\mathcal{M} \\leq m g \\ell$",
+     "$\\mathcal{M} \\leq 2\\,m g \\ell$",
+     "esistono per ogni valore dei dati"
+    ],
+    "v": "$2\\,\\mathcal{M} \\leq m g \\ell$"
+   }
+  ]
+ },
+ "lavori-virtuali/6": {
+  "campi": [
+   {
+    "e": "$\\tan\\vartheta$ nelle configurazioni di equilibrio (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{2 k l}{m g}",
+    "var": [
+     "m",
+     "g",
+     "l",
+     "k"
+    ]
+   },
+   {
+    "e": "Numero di configurazioni di equilibrio in $[0, 2\\pi)$",
+    "t": "scelta",
+    "opzioni": [
+     "nessuna",
+     "una",
+     "due",
+     "quattro"
+    ],
+    "v": "due"
+   }
+  ]
+ },
+ "lavori-virtuali/7": {
+  "campi": [
+   {
+    "e": "$\\vartheta$ della configurazione di equilibrio che esiste per ogni valore dei dati",
+    "t": "numero",
+    "v": "\\frac{\\pi}{2}"
+   },
+   {
+    "e": "$\\sin\\vartheta^*$ dell'altra configurazione di equilibrio (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{m g}{4 k l}",
+    "var": [
+     "m",
+     "g",
+     "k",
+     "l"
+    ]
+   },
+   {
+    "e": "Condizione perché esista più di una configurazione",
+    "t": "scelta",
+    "opzioni": [
+     "$m g < 4\\,k\\,\\ell$",
+     "$m g > 4\\,k\\,\\ell$",
+     "$m g < 2\\,k\\,\\ell$",
+     "per ogni valore dei dati"
+    ],
+    "v": "$m g < 4\\,k\\,\\ell$"
+   }
+  ]
+ },
+ "lavori-virtuali/8": {
+  "campi": [
+   {
+    "e": "$Q_s$",
+    "t": "funzione",
+    "v": "F",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "$Q_\\vartheta$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "l(m g\\cos\\vartheta - 2F\\sin\\vartheta)",
+    "var": [
+     "l",
+     "m",
+     "g",
+     "f",
+     "theta"
+    ]
+   },
+   {
+    "e": "Esistono configurazioni di equilibrio?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "lavori-virtuali/9": {
+  "campi": [
+   {
+    "e": "$Q_s$",
+    "t": "funzione",
+    "v": "-F\\sin\\vartheta",
+    "var": [
+     "f",
+     "theta"
+    ]
+   },
+   {
+    "e": "$Q_\\vartheta$ (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{F l}{2}",
+    "var": [
+     "f",
+     "l"
+    ]
+   },
+   {
+    "e": "La sollecitazione ammette un potenziale?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "no"
+   }
+  ]
+ },
+ "lavori-virtuali/10": {
+  "campi": [
+   {
+    "e": "$M$",
+    "t": "funzione",
+    "v": "m\\sin\\alpha",
+    "var": [
+     "m",
+     "alpha"
+    ]
+   }
+  ]
+ },
+ "lavori-virtuali/11": {
+  "campi": [
+   {
+    "e": "$x$",
+    "t": "funzione",
+    "v": "\\frac{2F}{k}",
+    "var": [
+     "f",
+     "k"
+    ]
+   }
+  ]
+ },
+ "lavori-virtuali/12": {
+  "campi": [
+   {
+    "e": "$y_1$",
+    "t": "funzione",
+    "v": "-\\frac{2 m g}{k}",
+    "var": [
+     "m",
+     "g",
+     "k"
+    ]
+   },
+   {
+    "e": "$y_2$",
+    "t": "funzione",
+    "v": "-\\frac{5 m g}{2 k}",
+    "var": [
+     "m",
+     "g",
+     "k"
+    ]
+   }
+  ]
+ },
+ "lavori-virtuali/13": {
+  "campi": [
+   {
+    "e": "Reazione del carrello $\\Phi_B$ (positiva verso l'alto)",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dfrac{m g}{2} - \\dfrac{\\mathcal{M}}{3\\,\\ell}$",
+     "$\\dfrac{m g}{2} + \\dfrac{\\mathcal{M}}{3\\,\\ell}$",
+     "$\\dfrac{m g}{2} - \\dfrac{\\mathcal{M}}{\\ell}$",
+     "$m g - \\dfrac{\\mathcal{M}}{3\\,\\ell}$"
+    ],
+    "v": "$\\dfrac{m g}{2} - \\dfrac{\\mathcal{M}}{3\\,\\ell}$"
+   },
+   {
+    "e": "$\\mathcal{M}$ per cui la reazione si annulla (scrivi $\\ell$ come l)",
+    "t": "funzione",
+    "v": "\\frac{3 m g l}{2}",
+    "var": [
+     "m",
+     "g",
+     "l"
+    ]
+   }
+  ]
+ },
+ "lavori-virtuali/14": {
+  "campi": [
+   {
+    "e": "Condizione perché l'asta resti appoggiata in $A$",
+    "t": "scelta",
+    "opzioni": [
+     "$F \\leq \\dfrac{m g}{2}$",
+     "$F \\leq m g$",
+     "$F \\leq \\dfrac{m g}{4}$",
+     "$F \\geq \\dfrac{m g}{2}$"
+    ],
+    "v": "$F \\leq \\dfrac{m g}{2}$"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/1": {
+  "campi": [
+   {
+    "e": "Allungamento della molla all'equilibrio, $s_0 - \\ell_0$",
+    "t": "funzione",
+    "v": "\\frac{m g \\sin\\alpha}{k}",
+    "var": [
+     "m",
+     "g",
+     "k",
+     "alpha"
+    ]
+   },
+   {
+    "e": "Natura dell'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "$\\omega^2$, quadrato della pulsazione delle piccole oscillazioni",
+    "t": "funzione",
+    "v": "\\frac{k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/2": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile $\\vartheta_1$, in $[0, 2\\pi)$",
+    "t": "funzione",
+    "v": "\\arctan\\frac{F}{m g}",
+    "var": [
+     "f",
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Configurazione di equilibrio instabile $\\vartheta_2$, in $[0, 2\\pi)$",
+    "t": "funzione",
+    "v": "\\arctan\\frac{F}{m g} + \\pi",
+    "var": [
+     "f",
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/3": {
+  "campi": [
+   {
+    "e": "Ascissa di equilibrio $s_0$ del centro $C$",
+    "t": "funzione",
+    "v": "\\frac{m g \\sin\\alpha}{k}",
+    "var": [
+     "m",
+     "g",
+     "k",
+     "alpha"
+    ]
+   },
+   {
+    "e": "Natura dell'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "$\\omega^2$, quadrato della pulsazione delle piccole oscillazioni",
+    "t": "funzione",
+    "v": "\\frac{2k}{3m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/4": {
+  "campi": [
+   {
+    "e": "Momento d'inerzia $I_A$",
+    "t": "funzione",
+    "v": "\\frac{3}{2} m R^2",
+    "var": [
+     "m",
+     "r"
+    ]
+   },
+   {
+    "e": "$\\omega^2$, quadrato della pulsazione delle piccole oscillazioni",
+    "t": "funzione",
+    "v": "\\frac{2g}{3R}",
+    "var": [
+     "g",
+     "r"
+    ]
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\frac{R}{g}}$",
+     "$2\\pi\\sqrt{\\frac{3R}{2g}}$",
+     "$2\\pi\\sqrt{\\frac{2R}{3g}}$",
+     "$2\\pi\\sqrt{\\frac{2R}{g}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\frac{3R}{2g}}$"
+   },
+   {
+    "e": "Lunghezza $L$ del pendolo semplice con lo stesso periodo",
+    "t": "funzione",
+    "v": "\\frac{3R}{2}",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/5": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile $\\vartheta$, in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Configurazione di equilibrio instabile $\\vartheta$, in $[0, 2\\pi)$",
+    "t": "numero",
+    "v": "\\pi"
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$ delle piccole oscillazioni",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\frac{R}{g}}$",
+     "$2\\pi\\sqrt{\\frac{R\\,(M + m)}{m g}}$",
+     "$2\\pi\\sqrt{\\frac{R\\,(M + 2m)}{2 m g}}$",
+     "$2\\pi\\sqrt{\\frac{R\\,(M + 2m)}{2 (M + m) g}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\frac{R\\,(M + 2m)}{2 m g}}$"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/6": {
+  "campi": [
+   {
+    "e": "$\\omega_1^2$, pulsazione propria minore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "Modo normale di $\\omega_1$, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\omega_2^2$, pulsazione propria maggiore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{7k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "Modo normale di $\\omega_2$, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/7": {
+  "campi": [
+   {
+    "e": "Natura della configurazione $(0, 0)$ per $2k\\ell < m g$",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "Natura della configurazione $(0, 0)$ per $2k\\ell > m g$",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "instabile"
+   },
+   {
+    "e": "Natura della configurazione $(\\pi, 0)$",
+    "t": "scelta",
+    "opzioni": [
+     "sempre stabile",
+     "sempre instabile",
+     "stabile solo per $2k\\ell > m g$",
+     "stabile solo per $2k\\ell < m g$"
+    ],
+    "v": "sempre instabile"
+   },
+   {
+    "e": "Condizione di esistenza delle configurazioni oblique",
+    "t": "scelta",
+    "opzioni": [
+     "$2k\\ell > m g$",
+     "$2k\\ell < m g$",
+     "$k\\ell > m g$",
+     "esistono per ogni $k$"
+    ],
+    "v": "$2k\\ell > m g$"
+   },
+   {
+    "e": "$\\cos\\vartheta$ nelle configurazioni oblique",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{m g}{2 k \\ell}$",
+     "$\\frac{m g}{k \\ell}$",
+     "$\\frac{2 m g}{k \\ell}$",
+     "$\\frac{2 k \\ell}{m g}$"
+    ],
+    "v": "$\\frac{m g}{2 k \\ell}$"
+   },
+   {
+    "e": "Natura delle configurazioni oblique",
+    "t": "scelta",
+    "opzioni": [
+     "stabili",
+     "instabili"
+    ],
+    "v": "stabili"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/8": {
+  "campi": [
+   {
+    "e": "Quota di equilibrio $y_0$ del baricentro",
+    "t": "funzione",
+    "v": "-\\frac{3 m g}{8 k}",
+    "var": [
+     "m",
+     "g",
+     "k"
+    ]
+   },
+   {
+    "e": "Rotazione di equilibrio $\\vartheta_0$",
+    "t": "scelta",
+    "opzioni": [
+     "$0$",
+     "$\\frac{m g}{4 k \\ell}$",
+     "$-\\frac{m g}{4 k \\ell}$",
+     "$\\frac{m g}{2 k \\ell}$"
+    ],
+    "v": "$\\frac{m g}{4 k \\ell}$"
+   },
+   {
+    "e": "Natura dell'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "$\\omega_1^2$, pulsazione propria minore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{2\\left(3 - \\sqrt{3}\\right)k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "$\\omega_2^2$, pulsazione propria maggiore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{2\\left(3 + \\sqrt{3}\\right)k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/9": {
+  "campi": [
+   {
+    "e": "Valore di $y$ all'equilibrio",
+    "t": "funzione",
+    "v": "-\\frac{m g}{k}",
+    "var": [
+     "m",
+     "g",
+     "k"
+    ]
+   },
+   {
+    "e": "Valore di $\\vartheta$ all'equilibrio",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Natura dell'equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "stabile",
+     "instabile"
+    ],
+    "v": "stabile"
+   },
+   {
+    "e": "$\\omega_1^2$, traslazione del manicotto",
+    "t": "funzione",
+    "v": "\\frac{k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "$\\omega_2^2$, rotazione dell'asta",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{g}{\\ell}$",
+     "$\\frac{3g}{2\\ell}$",
+     "$\\frac{2g}{3\\ell}$",
+     "$\\frac{3g}{\\ell}$"
+    ],
+    "v": "$\\frac{3g}{2\\ell}$"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/10": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile",
+    "t": "scelta",
+    "opzioni": [
+     "$\\arctan\\frac{2k\\ell}{m g}$",
+     "$\\arctan\\frac{2k\\ell}{m g} + \\pi$",
+     "$\\arctan\\frac{m g}{2k\\ell}$",
+     "$\\arctan\\frac{k\\ell}{m g}$"
+    ],
+    "v": "$\\arctan\\frac{2k\\ell}{m g}$"
+   },
+   {
+    "e": "Configurazione di equilibrio instabile",
+    "t": "scelta",
+    "opzioni": [
+     "$\\arctan\\frac{2k\\ell}{m g}$",
+     "$\\arctan\\frac{2k\\ell}{m g} + \\pi$",
+     "$\\arctan\\frac{m g}{2k\\ell} + \\pi$",
+     "$\\arctan\\frac{k\\ell}{m g} + \\pi$"
+    ],
+    "v": "$\\arctan\\frac{2k\\ell}{m g} + \\pi$"
+   },
+   {
+    "e": "$\\omega^2$ attorno alla configurazione stabile",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{3g}{2\\ell}$",
+     "$\\frac{3g}{2\\ell} + \\frac{3k}{m}$",
+     "$\\frac{3\\sqrt{m^2g^2 + 4k^2\\ell^2}}{2\\,m\\,\\ell}$",
+     "$\\frac{3\\sqrt{m^2g^2 + 4k^2\\ell^2}}{m\\,\\ell}$"
+    ],
+    "v": "$\\frac{3\\sqrt{m^2g^2 + 4k^2\\ell^2}}{2\\,m\\,\\ell}$"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/11": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile $\\vartheta$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Periodo $\\mathcal{T}$ delle piccole oscillazioni",
+    "t": "scelta",
+    "opzioni": [
+     "$2\\pi\\sqrt{\\frac{R - r}{g}}$",
+     "$2\\pi\\sqrt{\\frac{3\\,(R - r)}{2g}}$",
+     "$2\\pi\\sqrt{\\frac{3R}{2g}}$",
+     "$2\\pi\\sqrt{\\frac{7\\,(R - r)}{5g}}$"
+    ],
+    "v": "$2\\pi\\sqrt{\\frac{3\\,(R - r)}{2g}}$"
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/12": {
+  "campi": [
+   {
+    "e": "Smorzamento critico $h_c$",
+    "t": "numero",
+    "v": "24",
+    "u": "N s/m"
+   },
+   {
+    "e": "Pseudo-pulsazione $\\omega$",
+    "t": "numero",
+    "v": "2{,}60",
+    "u": "rad/s"
+   },
+   {
+    "e": "Pseudo-periodo $\\mathcal{T}$",
+    "t": "numero",
+    "v": "2{,}42",
+    "u": "s"
+   },
+   {
+    "e": "Rapporto fra due ampiezze massime successive",
+    "t": "numero",
+    "v": "37{,}6",
+    "cifre": 1
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/13": {
+  "campi": [
+   {
+    "e": "$\\omega_1^2$, pulsazione propria minore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{2k}{3m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "Modo normale di $\\omega_1$, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\omega_2^2$, pulsazione propria maggiore al quadrato",
+    "t": "funzione",
+    "v": "\\frac{2k}{m}",
+    "var": [
+     "k",
+     "m"
+    ]
+   },
+   {
+    "e": "Modo normale di $\\omega_2$, con prima componente $1$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "stabilita-e-oscillazioni/14": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio stabile $(\\vartheta_1, \\vartheta_2)$, in $[0, 2\\pi)^2$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Numero di configurazioni di equilibrio instabili in $[0, 2\\pi)^2$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "statica-dei-sistemi/1": {
+  "campi": [
+   {
+    "e": "Distanza $s$ di $P$ da $O$ all'equilibrio",
+    "t": "numero",
+    "v": "0{,}14",
+    "u": "m"
+   },
+   {
+    "e": "Modulo della reazione della guida $\\Phi$",
+    "t": "numero",
+    "v": "20{,}81",
+    "u": "N"
+   }
+  ]
+ },
+ "statica-dei-sistemi/2": {
+  "campi": [
+   {
+    "e": "Tensione $T_A$ del filo $PA$",
+    "t": "numero",
+    "v": "35{,}91",
+    "u": "N"
+   },
+   {
+    "e": "Tensione $T_B$ del filo $PB$",
+    "t": "numero",
+    "v": "43{,}98",
+    "u": "N"
+   },
+   {
+    "e": "Filo più sollecitato",
+    "t": "scelta",
+    "opzioni": [
+     "$PA$",
+     "$PB$"
+    ],
+    "v": "$PB$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/3": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio $\\vartheta_1$, in $\\left(0, \\frac{\\pi}{2}\\right)$",
+    "t": "funzione",
+    "v": "\\arctan\\frac{F}{m g}",
+    "var": [
+     "f",
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Configurazione di equilibrio $\\vartheta_2$, in $\\left(\\pi, \\frac{3\\pi}{2}\\right)$",
+    "t": "funzione",
+    "v": "\\arctan\\frac{F}{m g} + \\pi",
+    "var": [
+     "f",
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Modulo $\\Phi$ della reazione, uguale nelle due configurazioni",
+    "t": "funzione",
+    "v": "\\sqrt{m^2 g^2 + F^2}",
+    "var": [
+     "m",
+     "g",
+     "f"
+    ]
+   },
+   {
+    "e": "Verso della reazione in $\\vartheta_1$",
+    "t": "scelta",
+    "opzioni": [
+     "verso il centro",
+     "verso l'esterno"
+    ],
+    "v": "verso il centro"
+   },
+   {
+    "e": "Verso della reazione in $\\vartheta_2$",
+    "t": "scelta",
+    "opzioni": [
+     "verso il centro",
+     "verso l'esterno"
+    ],
+    "v": "verso l'esterno"
+   }
+  ]
+ },
+ "statica-dei-sistemi/4": {
+  "campi": [
+   {
+    "e": "Equazione delle configurazioni di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\tan\\vartheta = \\frac{F}{(m + m_1)\\,g}$",
+     "$\\tan\\vartheta = \\frac{2 F}{(m + 2\\,m_1)\\,g}$",
+     "$\\tan\\vartheta = \\frac{F}{(m + 2\\,m_1)\\,g}$",
+     "$\\tan\\vartheta = \\frac{2 F}{(2m + m_1)\\,g}$"
+    ],
+    "v": "$\\tan\\vartheta = \\frac{2 F}{(m + 2\\,m_1)\\,g}$"
+   },
+   {
+    "e": "Componente orizzontale $\\Phi_{Ox}$ della reazione della cerniera",
+    "t": "funzione",
+    "v": "-F",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "Componente verticale $\\Phi_{Oy}$ della reazione della cerniera",
+    "t": "scelta",
+    "opzioni": [
+     "$m g$",
+     "$(m + m_1)\\,g$",
+     "$(m + 2\\,m_1)\\,g$",
+     "$\\frac{(m + m_1)\\,g}{2}$"
+    ],
+    "v": "$(m + m_1)\\,g$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/5": {
+  "campi": [
+   {
+    "e": "Equazione della configurazione di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\tan\\vartheta = \\frac{m g}{2\\,k\\,\\ell}$",
+     "$\\tan\\vartheta = \\frac{m g}{k\\,\\ell}$",
+     "$\\tan\\vartheta = \\frac{2\\,k\\,\\ell}{m g}$",
+     "$\\sin\\vartheta = \\frac{m g}{2\\,k\\,\\ell}$"
+    ],
+    "v": "$\\tan\\vartheta = \\frac{m g}{2\\,k\\,\\ell}$"
+   },
+   {
+    "e": "Componente $\\Phi_{Ax}$ della reazione della cerniera",
+    "t": "scelta",
+    "opzioni": [
+     "$-\\,k\\,\\ell\\,(1 - \\cos\\vartheta)$",
+     "$k\\,\\ell\\,(1 - \\cos\\vartheta)$",
+     "$-\\,k\\,\\ell\\cos\\vartheta$",
+     "$-\\,k\\,\\ell\\sin\\vartheta$"
+    ],
+    "v": "$-\\,k\\,\\ell\\,(1 - \\cos\\vartheta)$"
+   },
+   {
+    "e": "Componente $\\Phi_{Ay}$ della reazione della cerniera",
+    "t": "scelta",
+    "opzioni": [
+     "$m g$",
+     "$m g - k\\,\\ell\\sin\\vartheta$",
+     "$m g + k\\,\\ell\\sin\\vartheta$",
+     "$\\frac{m g}{2}$"
+    ],
+    "v": "$m g - k\\,\\ell\\sin\\vartheta$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/6": {
+  "campi": [
+   {
+    "e": "Tensione $T$ del filo",
+    "t": "numero",
+    "v": "29{,}43",
+    "u": "N"
+   },
+   {
+    "e": "Componente orizzontale $\\Phi_{Ax}$, positiva verso destra",
+    "t": "numero",
+    "v": "29{,}43",
+    "u": "N"
+   },
+   {
+    "e": "Componente verticale $\\Phi_{Ay}$, positiva verso l'alto",
+    "t": "numero",
+    "v": "58{,}86",
+    "u": "N"
+   }
+  ]
+ },
+ "statica-dei-sistemi/7": {
+  "campi": [
+   {
+    "e": "Momento $\\mathcal{M}$ della coppia, in verso antiorario",
+    "t": "scelta",
+    "opzioni": [
+     "$m g R$",
+     "$m_1 g R$",
+     "$\\frac{m_1 g R}{2}$",
+     "$(m + m_1)\\,g R$"
+    ],
+    "v": "$m_1 g R$"
+   },
+   {
+    "e": "Reazione dell'asse $\\vec{\\Phi}_O$",
+    "t": "scelta",
+    "opzioni": [
+     "$m g\\,\\hat{\\jmath}$",
+     "$m_1 g\\,\\hat{\\jmath}$",
+     "$(m + m_1)\\,g\\,\\hat{\\jmath}$",
+     "$-(m + m_1)\\,g\\,\\hat{\\jmath}$"
+    ],
+    "v": "$(m + m_1)\\,g\\,\\hat{\\jmath}$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/8": {
+  "campi": [
+   {
+    "e": "Configurazione di equilibrio che esiste per ogni valore dei parametri",
+    "t": "numero",
+    "v": "\\frac{\\pi}{2}"
+   },
+   {
+    "e": "$\\sin\\vartheta$ nell'altra configurazione di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{m g}{4\\,k\\,\\ell}$",
+     "$\\frac{m g}{2\\,k\\,\\ell}$",
+     "$\\frac{m g}{k\\,\\ell}$",
+     "$\\frac{4\\,k\\,\\ell}{m g}$"
+    ],
+    "v": "$\\frac{m g}{4\\,k\\,\\ell}$"
+   },
+   {
+    "e": "Condizione di esistenza dell'altra configurazione",
+    "t": "scelta",
+    "opzioni": [
+     "$m g \\le 4\\,k\\,\\ell$",
+     "$m g \\le 2\\,k\\,\\ell$",
+     "$m g \\ge 4\\,k\\,\\ell$",
+     "nessuna condizione"
+    ],
+    "v": "$m g \\le 4\\,k\\,\\ell$"
+   },
+   {
+    "e": "Reazione interna orizzontale $X_B$ nell'altra configurazione",
+    "t": "scelta",
+    "opzioni": [
+     "$k\\,\\ell\\cos\\vartheta$",
+     "$2\\,k\\,\\ell\\cos\\vartheta$",
+     "$2\\,k\\,\\ell\\sin\\vartheta$",
+     "$4\\,k\\,\\ell\\cos\\vartheta$"
+    ],
+    "v": "$2\\,k\\,\\ell\\cos\\vartheta$"
+   },
+   {
+    "e": "Reazione interna verticale $Y_B$ nell'altra configurazione",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Reazione del carrello $\\Phi_C$",
+    "t": "funzione",
+    "v": "m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   }
+  ]
+ },
+ "statica-dei-sistemi/9": {
+  "campi": [
+   {
+    "e": "Reazione dell'appoggio in $A$, $\\Phi_A$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{g\\,(m + m_1)}{3}$",
+     "$\\frac{g\\,(m - m_1)}{3}$",
+     "$\\frac{g\\,(m - m_1)}{2}$",
+     "$\\frac{g\\,(2m - m_1)}{3}$"
+    ],
+    "v": "$\\frac{g\\,(m - m_1)}{3}$"
+   },
+   {
+    "e": "Reazione dell'appoggio in $C$, $\\Phi_C$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\frac{2\\,g\\,(m + 2\\,m_1)}{3}$",
+     "$\\frac{2\\,g\\,(m + m_1)}{3}$",
+     "$\\frac{g\\,(2m + m_1)}{3}$",
+     "$\\frac{g\\,(m + 4\\,m_1)}{3}$"
+    ],
+    "v": "$\\frac{2\\,g\\,(m + 2\\,m_1)}{3}$"
+   },
+   {
+    "e": "L'asta si solleva in $A$ per",
+    "t": "scelta",
+    "opzioni": [
+     "$m_1 > \\frac{m}{3}$",
+     "$m_1 > \\frac{m}{2}$",
+     "$m_1 > m$",
+     "$m_1 > 2m$"
+    ],
+    "v": "$m_1 > m$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/10": {
+  "campi": [
+   {
+    "e": "Equazione della configurazione di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\tan\\vartheta = \\frac{F_1}{m g - F_2}$",
+     "$\\tan\\vartheta = \\frac{F_1}{m g + F_2}$",
+     "$\\tan\\vartheta = \\frac{F_1}{m g}$",
+     "$\\tan\\vartheta = \\frac{m g - F_2}{F_1}$"
+    ],
+    "v": "$\\tan\\vartheta = \\frac{F_1}{m g - F_2}$"
+   },
+   {
+    "e": "Modulo $\\Phi$ della reazione della guida",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{F_1^2 + (m g - F_2)^2}$",
+     "$\\sqrt{F_1^2 + (m g + F_2)^2}$",
+     "$\\sqrt{F_1^2 + F_2^2}$",
+     "$m g - F_2$"
+    ],
+    "v": "$\\sqrt{F_1^2 + (m g - F_2)^2}$"
+   },
+   {
+    "e": "Condizioni perché l'equilibrio sia possibile",
+    "t": "scelta",
+    "opzioni": [
+     "$F_2 < m g$",
+     "$F_2 < m g$ e $F_1 \\le m g - F_2$",
+     "$F_2 < m g$ e $F_1 \\le m g$",
+     "$F_1 \\le F_2$"
+    ],
+    "v": "$F_2 < m g$ e $F_1 \\le m g - F_2$"
+   }
+  ]
+ },
+ "statica-dei-sistemi/11": {
+  "campi": [
+   {
+    "e": "Reazione normale del pavimento $N_A$",
+    "t": "funzione",
+    "v": "m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Reazione della parete $N_B$",
+    "t": "funzione",
+    "v": "\\frac{m g}{2\\tan\\vartheta}",
+    "var": [
+     "m",
+     "g",
+     "theta"
+    ]
+   },
+   {
+    "e": "Intensità della forza di attrito in $A$, $T_A$",
+    "t": "funzione",
+    "v": "\\frac{m g}{2\\tan\\vartheta}",
+    "var": [
+     "m",
+     "g",
+     "theta"
+    ]
+   },
+   {
+    "e": "Angolo minimo $\\vartheta_{\\min}$",
+    "t": "numero",
+    "v": "59{,}04",
+    "u": "°",
+    "cifre": 2
+   }
+  ]
+ },
+ "statica-dei-sistemi/12": {
+  "campi": [
+   {
+    "e": "Valore minimo di $m_2$",
+    "t": "numero",
+    "v": "1{,}70",
+    "u": "kg"
+   },
+   {
+    "e": "Valore massimo di $m_2$",
+    "t": "numero",
+    "v": "4{,}30",
+    "u": "kg"
+   }
+  ]
+ },
+ "statica-dei-sistemi/13": {
+  "campi": [
+   {
+    "e": "$\\Phi_{Ax}$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{6} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "$\\Phi_{Ay}$",
+    "t": "funzione",
+    "v": "m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "$\\Phi_{Cx}$",
+    "t": "funzione",
+    "v": "-\\frac{\\sqrt{3}}{6} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "$\\Phi_{Cy}$",
+    "t": "funzione",
+    "v": "m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Intensità della reazione interna orizzontale $X_B$",
+    "t": "funzione",
+    "v": "\\frac{\\sqrt{3}}{6} m g",
+    "var": [
+     "m",
+     "g"
+    ]
+   },
+   {
+    "e": "Reazione interna verticale $Y_B$",
+    "t": "numero",
+    "v": "0"
+   }
+  ]
+ },
+ "statica-dei-sistemi/14": {
+  "campi": [
+   {
+    "e": "Equazione delle configurazioni di equilibrio",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sin\\varphi = \\frac{F}{m_1 g}$",
+     "$\\sin\\varphi = \\frac{2 F}{m_1 g}$",
+     "$\\sin\\varphi = \\frac{2 F}{(m + m_1)\\,g}$",
+     "$\\tan\\varphi = \\frac{2 F}{m_1 g}$"
+    ],
+    "v": "$\\sin\\varphi = \\frac{2 F}{m_1 g}$"
+   },
+   {
+    "e": "Reazione normale $N$ del contatto",
+    "t": "scelta",
+    "opzioni": [
+     "$m g$",
+     "$m_1 g$",
+     "$(m + m_1)\\,g$",
+     "$(m + m_1)\\,g - F$"
+    ],
+    "v": "$(m + m_1)\\,g$"
+   },
+   {
+    "e": "Intensità della forza di attrito",
+    "t": "scelta",
+    "opzioni": [
+     "$0$",
+     "$\\frac{F}{2}$",
+     "$F$",
+     "$2F$"
+    ],
+    "v": "$F$"
+   },
+   {
+    "e": "Condizioni perché l'equilibrio sia possibile",
+    "t": "scelta",
+    "opzioni": [
+     "$2 F \\le m_1 g$",
+     "$2 F \\le m_1 g$ e $F \\le f\\,(m + m_1)\\,g$",
+     "$F \\le m_1 g$ e $F \\le f\\,(m + m_1)\\,g$",
+     "$2 F \\le m_1 g$ e $F \\le f\\,m_1 g$"
+    ],
+    "v": "$2 F \\le m_1 g$ e $F \\le f\\,(m + m_1)\\,g$"
+   }
+  ]
+ },
+ "vettori-applicati/1": {
+  "campi": [
+   {
+    "e": "Componente $z$ di $\\vec{M}_O$",
+    "t": "funzione",
+    "v": "-7av",
+    "var": [
+     "a",
+     "v"
+    ]
+   },
+   {
+    "e": "Braccio $b$ rispetto a $O$",
+    "t": "funzione",
+    "v": "\\frac{7\\sqrt{5}}{5}a",
+    "var": [
+     "a"
+    ]
+   },
+   {
+    "e": "Componente $z$ di $\\vec{M}_{O'}$",
+    "t": "funzione",
+    "v": "-4av",
+    "var": [
+     "a",
+     "v"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/2": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{M}_O$, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "0",
+     "3",
+     "-3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Momento assiale $M_z$",
+    "t": "funzione",
+    "v": "-3aF",
+    "var": [
+     "a",
+     "f"
+    ]
+   },
+   {
+    "e": "Momento assiale $M_r$",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Motivo del valore di $M_r$",
+    "t": "scelta",
+    "opzioni": [
+     "la retta d'azione di $\\vec{v}$ incontra l'asse $r$",
+     "la retta d'azione di $\\vec{v}$ è sghemba rispetto a $r$",
+     "il momento $\\vec{M}_O$ è parallelo a $r$"
+    ],
+    "v": "la retta d'azione di $\\vec{v}$ incontra l'asse $r$"
+   }
+  ]
+ },
+ "vettori-applicati/3": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{R}$, in multipli di $F$",
+    "t": "valori",
+    "v": [
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Momento risultante $M_O$ (componente $z$)",
+    "t": "funzione",
+    "v": "5aF",
+    "var": [
+     "a",
+     "f"
+    ]
+   },
+   {
+    "e": "Retta d'azione della risultante",
+    "t": "equazione",
+    "v": "x - y = 5a",
+    "var": [
+     "x",
+     "y",
+     "a"
+    ]
+   },
+   {
+    "e": "Distanza della retta d'azione da $O$",
+    "t": "funzione",
+    "v": "\\frac{5\\sqrt{2}}{2}a",
+    "var": [
+     "a"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/4": {
+  "campi": [
+   {
+    "e": "Componente $y$ di $\\vec{R}$",
+    "t": "funzione",
+    "v": "-F",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "Componente $z$ di $\\vec{M}_A$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "-Fl",
+    "var": [
+     "f",
+     "l"
+    ]
+   },
+   {
+    "e": "Ascissa del punto in cui la retta d'azione incontra l'asta (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/5": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{M}_1$, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti di $\\vec{M}_2$, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti del momento del sistema, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "0",
+     "2",
+     "2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Modulo del momento del sistema",
+    "t": "funzione",
+    "v": "2\\sqrt{2}aF",
+    "var": [
+     "a",
+     "f"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/6": {
+  "campi": [
+   {
+    "e": "Componenti del vettore applicato in $A$, in multipli di $F$",
+    "t": "valori",
+    "v": [
+     "1",
+     "-2"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componente $z$ della coppia di trasporto (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "-7Fl",
+    "var": [
+     "f",
+     "l"
+    ]
+   },
+   {
+    "e": "Retta d'azione del vettore unico (scrivi l per $\\ell$)",
+    "t": "equazione",
+    "v": "2x + y = 7l",
+    "var": [
+     "x",
+     "y",
+     "l"
+    ]
+   },
+   {
+    "e": "Distanza della retta d'azione da $A$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{7\\sqrt{5}}{5}l",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/7": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{R}$, in multipli di $F$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti di $\\vec{M}_O$, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "-4",
+     "0",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Invariante scalare $I$",
+    "t": "funzione",
+    "v": "-4aF^2",
+    "var": [
+     "a",
+     "f"
+    ]
+   },
+   {
+    "e": "Coordinate del punto $Q$ dell'asse centrale più vicino a $O$, in multipli di $a$",
+    "t": "valori",
+    "v": [
+     "0",
+     "0",
+     "\\frac{8}{5}"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti del momento minimo, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "-\\frac{4}{5}",
+     "-\\frac{8}{5}",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "vettori-applicati/8": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{R}$, in multipli di $F$",
+    "t": "valori",
+    "v": [
+     "2",
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti di $\\vec{M}_O$, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Invariante scalare $I$",
+    "t": "funzione",
+    "v": "aF^2",
+    "var": [
+     "a",
+     "f"
+    ]
+   },
+   {
+    "e": "Coordinate del punto $Q$ dell'asse centrale più vicino a $O$, in multipli di $a$",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{5}",
+     "-\\frac{2}{5}",
+     "\\frac{2}{5}"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti del momento minimo, in multipli di $aF$",
+    "t": "valori",
+    "v": [
+     "\\frac{2}{5}",
+     "\\frac{1}{5}",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "vettori-applicati/9": {
+  "campi": [
+   {
+    "e": "Valore di $\\lambda$",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "Coordinate del punto $Q$ dell'asse centrale più vicino a $O$, in multipli di $a$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Direzione dell'asse centrale",
+    "t": "scelta",
+    "opzioni": [
+     "$\\hat{\\imath}$",
+     "$\\hat{\\jmath}$",
+     "$\\hat{k}$",
+     "$\\hat{\\imath} + \\hat{k}$"
+    ],
+    "v": "$\\hat{\\jmath}$"
+   }
+  ]
+ },
+ "vettori-applicati/10": {
+  "campi": [
+   {
+    "e": "Componente $y$ di $\\vec{R}$",
+    "t": "funzione",
+    "v": "8F",
+    "var": [
+     "f"
+    ]
+   },
+   {
+    "e": "Coordinate del centro $C$, in multipli di $a$",
+    "t": "valori",
+    "v": [
+     "\\frac{5}{4}",
+     "\\frac{3}{2}"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "vettori-applicati/11": {
+  "campi": [
+   {
+    "e": "$\\mu$ per cui il centro ha ascissa $7a$",
+    "t": "numero",
+    "v": "-\\frac{9}{2}"
+   },
+   {
+    "e": "$\\mu$ per cui il centro non esiste",
+    "t": "numero",
+    "v": "-1"
+   },
+   {
+    "e": "In quel caso il sistema è equivalente a",
+    "t": "scelta",
+    "opzioni": [
+     "una coppia",
+     "un solo vettore applicato",
+     "un sistema nullo"
+    ],
+    "v": "una coppia"
+   },
+   {
+    "e": "Componente $z$ del momento in quel caso",
+    "t": "funzione",
+    "v": "-7aF",
+    "var": [
+     "a",
+     "f"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/12": {
+  "campi": [
+   {
+    "e": "Intensità della risultante, in multipli di $q_0\\,\\ell$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Ascissa $s_C$ della retta d'azione (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{13l}{12}",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/13": {
+  "campi": [
+   {
+    "e": "Intensità della risultante, in multipli di $q_0\\,\\ell$",
+    "t": "numero",
+    "v": "\\frac{1}{3}"
+   },
+   {
+    "e": "Ascissa $s_C$ della retta d'azione (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{3l}{4}",
+    "var": [
+     "l"
+    ]
+   }
+  ]
+ },
+ "vettori-applicati/14": {
+  "campi": [
+   {
+    "e": "Componenti di $\\vec{v}_B$, in multipli di $F$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "$\\mathcal{M}$",
+    "t": "funzione",
+    "v": "-6aF",
+    "var": [
+     "a",
+     "f"
+    ]
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/1": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "2"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/2": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "1"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/3": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Direzione della reazione vincolare",
+    "t": "scelta",
+    "opzioni": [
+     "normale all'ellisse",
+     "tangente all'ellisse",
+     "diretta verso il centro $O$",
+     "parallela all'asse $y$"
+    ],
+    "v": "normale all'ellisse"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/4": {
+  "campi": [
+   {
+    "e": "$\\dfrac{x_B}{r}$ in funzione di $\\vartheta$",
+    "t": "funzione",
+    "v": "\\cos(\\theta)+\\sqrt{8+(\\cos(\\theta))^2}",
+    "var": [
+     "theta"
+    ]
+   },
+   {
+    "e": "$x_B$ per $\\vartheta = \\dfrac{\\pi}{2}$",
+    "t": "funzione",
+    "v": "2\\sqrt{2}r",
+    "var": [
+     "r"
+    ]
+   },
+   {
+    "e": "Corsa del piede di biella",
+    "t": "funzione",
+    "v": "2r",
+    "var": [
+     "r"
+    ]
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/5": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Coordinate lagrangiane",
+    "t": "scelta",
+    "opzioni": [
+     "l'angolo $\\varphi$ attorno all'asse e la quota $z$",
+     "le coordinate $x$ e $y$",
+     "l'angolo $\\varphi$ e la distanza $R$ dall'asse"
+    ],
+    "v": "l'angolo $\\varphi$ attorno all'asse e la quota $z$"
+   },
+   {
+    "e": "$|\\vec{v}_P|$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sqrt{R^2\\dot{\\varphi}^2 + \\dot{z}^2}$",
+     "$R\\dot{\\varphi} + \\dot{z}$",
+     "$\\sqrt{\\dot{\\varphi}^2 + \\dot{z}^2}$",
+     "$R\\sqrt{\\dot{\\varphi}^2 + \\dot{z}^2}$"
+    ],
+    "v": "$\\sqrt{R^2\\dot{\\varphi}^2 + \\dot{z}^2}$"
+   },
+   {
+    "e": "Direzione della reazione vincolare",
+    "t": "scelta",
+    "opzioni": [
+     "radiale, ortogonale all'asse del cilindro",
+     "parallela all'asse $z$",
+     "tangente alla circonferenza orizzontale per $P$",
+     "diretta verso l'origine $O$"
+    ],
+    "v": "radiale, ortogonale all'asse del cilindro"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/6": {
+  "campi": [
+   {
+    "e": "Velocità del punto opposto al contatto, componenti in multipli di $R\\dot{\\vartheta}$",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Velocità del punto alla destra del centro, componenti in multipli di $R\\dot{\\vartheta}$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Velocità del punto alla sinistra del centro, componenti in multipli di $R\\dot{\\vartheta}$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "-1"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Modulo della velocità del punto opposto al contatto, in multipli di $R\\,|\\dot{\\vartheta}|$",
+    "t": "numero",
+    "v": "2"
+   },
+   {
+    "e": "Modulo della velocità dei punti alla quota del centro, in multipli di $R\\,|\\dot{\\vartheta}|$",
+    "t": "numero",
+    "v": "\\sqrt{2}"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/7": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Relazione fra $\\vartheta$ e $\\varphi$",
+    "t": "scelta",
+    "opzioni": [
+     "$\\dot{\\vartheta} = \\dfrac{R + r}{r}\\,\\dot{\\varphi}$",
+     "$\\dot{\\vartheta} = \\dfrac{R - r}{r}\\,\\dot{\\varphi}$",
+     "$\\dot{\\vartheta} = \\dfrac{R}{r}\\,\\dot{\\varphi}$",
+     "$\\dot{\\vartheta} = -\\dfrac{R + r}{r}\\,\\dot{\\varphi}$"
+    ],
+    "v": "$\\dot{\\vartheta} = \\dfrac{R + r}{r}\\,\\dot{\\varphi}$"
+   },
+   {
+    "e": "$\\dfrac{\\dot{\\vartheta}}{\\dot{\\varphi}}$ per $R = 2r$",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/8": {
+  "campi": [
+   {
+    "e": "Numero di gradi di libertà",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "$s$ in funzione di $\\vartheta$",
+    "t": "funzione",
+    "v": "-r\\theta",
+    "var": [
+     "r",
+     "theta"
+    ]
+   },
+   {
+    "e": "Tipo di vincolo",
+    "t": "scelta",
+    "opzioni": [
+     "olonomo e fisso",
+     "olonomo e mobile",
+     "anolonomo"
+    ],
+    "v": "olonomo e fisso"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/9": {
+  "campi": [
+   {
+    "e": "Componente $x$ di $\\delta B$ divisa per $\\delta\\vartheta$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "-l\\sin(\\theta)",
+    "var": [
+     "l",
+     "theta"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\delta B$ divisa per $\\delta\\vartheta$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "l\\cos(\\theta)",
+    "var": [
+     "l",
+     "theta"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\delta C$ divisa per $\\delta\\vartheta$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "-2l\\sin(\\theta)",
+    "var": [
+     "l",
+     "theta"
+    ]
+   },
+   {
+    "e": "Componente $x$ di $\\delta G_2$ divisa per $\\delta\\vartheta$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "-\\frac{3}{2}l\\sin(\\theta)",
+    "var": [
+     "l",
+     "theta"
+    ]
+   },
+   {
+    "e": "Componente $y$ di $\\delta G_2$ divisa per $\\delta\\vartheta$ (scrivi l per $\\ell$)",
+    "t": "funzione",
+    "v": "\\frac{1}{2}l\\cos(\\theta)",
+    "var": [
+     "l",
+     "theta"
+    ]
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/10": {
+  "campi": [
+   {
+    "e": "Componenti di $\\delta P$ divise per $\\delta s$",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{2}",
+     "\\frac{\\sqrt{3}}{2}"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Componenti del termine di $dP$ proporzionale a $dt$, divise per $dt$ (in m/s)",
+    "t": "valori",
+    "v": [
+     "-3\\sqrt{3}",
+     "3"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Modulo di $dP - \\delta P$ diviso per $dt$",
+    "t": "numero",
+    "v": "6",
+    "u": "m/s"
+   },
+   {
+    "e": "Direzione di $dP - \\delta P$",
+    "t": "scelta",
+    "opzioni": [
+     "ortogonale alla guida",
+     "parallela alla guida",
+     "parallela all'asse $x$"
+    ],
+    "v": "ortogonale alla guida"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/11": {
+  "campi": [
+   {
+    "e": "Reazioni esplicate dal manicotto",
+    "t": "scelta",
+    "opzioni": [
+     "una forza normale alla guida e un momento",
+     "una forza normale alla guida",
+     "una forza parallela alla guida e un momento",
+     "una forza di direzione qualsiasi e un momento"
+    ],
+    "v": "una forza normale alla guida e un momento"
+   },
+   {
+    "e": "Componenti di $\\delta A$ divise per $\\delta x_A$",
+    "t": "valori",
+    "v": [
+     "1",
+     "0"
+    ],
+    "ordine": true
+   },
+   {
+    "e": "Lavoro virtuale delle reazioni",
+    "t": "numero",
+    "v": "0"
+   },
+   {
+    "e": "Il vincolo è ideale?",
+    "t": "scelta",
+    "opzioni": [
+     "sì",
+     "no"
+    ],
+    "v": "sì"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/12": {
+  "campi": [
+   {
+    "e": "Il corpo",
+    "t": "scelta",
+    "opzioni": [
+     "resta in equilibrio",
+     "scivola lungo il piano"
+    ],
+    "v": "scivola lungo il piano"
+   },
+   {
+    "e": "$f_{s,\\min}$",
+    "t": "numero",
+    "v": "0{,}70",
+    "cifre": 2
+   },
+   {
+    "e": "Angolo d'attrito $\\rho$",
+    "t": "numero",
+    "v": "30{,}96",
+    "u": "°",
+    "cifre": 2
+   },
+   {
+    "e": "Confronto fra inclinazione del piano e angolo d'attrito",
+    "t": "scelta",
+    "opzioni": [
+     "l'inclinazione è maggiore di $\\rho$",
+     "l'inclinazione è minore di $\\rho$",
+     "l'inclinazione è uguale a $\\rho$"
+    ],
+    "v": "l'inclinazione è maggiore di $\\rho$"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/13": {
+  "campi": [
+   {
+    "e": "Valore minimo di $\\gamma$",
+    "t": "numero",
+    "v": "73{,}30",
+    "u": "°",
+    "cifre": 2
+   },
+   {
+    "e": "Angolo d'attrito $\\rho$",
+    "t": "numero",
+    "v": "16{,}70",
+    "u": "°",
+    "cifre": 2
+   },
+   {
+    "e": "Interpretazione con il cono d'attrito",
+    "t": "scelta",
+    "opzioni": [
+     "la forza cade dentro il cono d'attrito",
+     "la forza cade fuori dal cono d'attrito",
+     "la forza è tangente al piano"
+    ],
+    "v": "la forza cade dentro il cono d'attrito"
+   }
+  ]
+ },
+ "vincoli-e-coordinate-lagrangiane/14": {
+  "campi": [
+   {
+    "e": "Vincolo nella coordinata lagrangiana",
+    "t": "scelta",
+    "opzioni": [
+     "$\\sin\\vartheta \\geq -\\dfrac{\\sqrt{2}}{2}$",
+     "$\\cos\\vartheta \\geq -\\dfrac{\\sqrt{2}}{2}$",
+     "$\\sin\\vartheta \\leq \\dfrac{\\sqrt{2}}{2}$",
+     "$\\sin\\vartheta = -\\dfrac{\\sqrt{2}}{2}$"
+    ],
+    "v": "$\\sin\\vartheta \\geq -\\dfrac{\\sqrt{2}}{2}$"
+   },
+   {
+    "e": "Valori ammissibili di $\\vartheta$",
+    "t": "intervallo",
+    "v": "\\left[-\\frac{\\pi}{4}, \\frac{5\\pi}{4}\\right]",
+    "var": "theta"
+   },
+   {
+    "e": "Configurazioni di confine (valori di $\\vartheta$)",
+    "t": "valori",
+    "v": [
+     "-\\frac{\\pi}{4}",
+     "\\frac{5\\pi}{4}"
+    ]
+   },
+   {
+    "e": "Reazione del pavimento nelle configurazioni di confine",
+    "t": "scelta",
+    "opzioni": [
+     "verticale verso l'alto, con $\\Phi_n \\geq 0$",
+     "verticale verso il basso",
+     "orizzontale",
+     "nulla"
+    ],
+    "v": "verticale verso l'alto, con $\\Phi_n \\geq 0$"
+   }
+  ]
+ }
+}

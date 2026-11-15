@@ -1,0 +1,686 @@
+{
+ "disequazioni-secondo-grado/1": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[1, 3]"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/2": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 1) \\cup (3, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/3": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[1, 3]"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/4": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "x \\neq 1"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/5": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 1] \\cup (3, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/6": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(2, 3]"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/7": {
+  "campi": [
+   {
+    "e": "Dominio",
+    "t": "intervallo",
+    "v": "(-\\infty, 1] \\cup [3, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/8": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "\\mathbb{R}"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/9": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[2, 4]"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/10": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 2) \\cup (4, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/11": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "[2, 4]"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/12": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "x \\neq 2"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/13": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 2] \\cup (4, +\\infty)"
+   }
+  ]
+ },
+ "disequazioni-secondo-grado/14": {
+  "campi": [
+   {
+    "e": "Insieme delle soluzioni",
+    "t": "intervallo",
+    "v": "(3, 4]"
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/1": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-3",
+     "-2",
+     "2",
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/2": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/3": {
+  "campi": [
+   {
+    "e": "Soluzione",
+    "t": "numero",
+    "v": "7"
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/4": {
+  "campi": [
+   {
+    "e": "Soluzione",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/5": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-1",
+     "5"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/6": {
+  "campi": [
+   {
+    "e": "Soluzione con $x$ minore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "3"
+    ]
+   },
+   {
+    "e": "Soluzione con $x$ maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/7": {
+  "campi": [
+   {
+    "e": "Soluzione con $x$ minore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "3"
+    ]
+   },
+   {
+    "e": "Soluzione con $x$ maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/8": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/9": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-4",
+     "-3",
+     "3",
+     "4"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/10": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-3",
+     "0",
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/11": {
+  "campi": [
+   {
+    "e": "Soluzione",
+    "t": "numero",
+    "v": "13"
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/12": {
+  "campi": [
+   {
+    "e": "Soluzione",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-1",
+     "7"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-sistemi-non-lineari/14": {
+  "campi": [
+   {
+    "e": "Soluzione con $x$ minore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "4"
+    ]
+   },
+   {
+    "e": "Soluzione con $x$ maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/1": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-2",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/2": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/3": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "2",
+     "4"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/4": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "intervallo",
+    "v": "\\{2\\}"
+   }
+  ]
+ },
+ "equazioni-secondo-grado/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "intervallo",
+    "v": "\\{4\\}"
+   }
+  ]
+ },
+ "equazioni-secondo-grado/9": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-3",
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/10": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "0",
+     "3"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/11": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3",
+     "5"
+    ]
+   }
+  ]
+ },
+ "equazioni-secondo-grado/12": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "intervallo",
+    "v": "\\{3\\}"
+   }
+  ]
+ },
+ "equazioni-secondo-grado/14": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "intervallo",
+    "v": "\\{5\\}"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/2": {
+  "campi": [
+   {
+    "e": "Punto medio $M$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/7": {
+  "campi": [
+   {
+    "e": "Punto di intersezione",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/10": {
+  "campi": [
+   {
+    "e": "Punto medio $M$",
+    "t": "valori",
+    "v": [
+     "1",
+     "3"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "radicali/1": {
+  "campi": [
+   {
+    "e": "$\\sqrt{12}$ semplificato",
+    "t": "numero",
+    "v": "2\\sqrt{3}",
+    "esatto": true
+   }
+  ]
+ },
+ "radicali/2": {
+  "campi": [
+   {
+    "e": "$4\\sqrt2-\\sqrt8$ ridotto",
+    "t": "numero",
+    "v": "2\\sqrt{2}",
+    "esatto": true
+   }
+  ]
+ },
+ "radicali/6": {
+  "campi": [
+   {
+    "e": "Valori di $x$ per cui $\\sqrt{x-2}$ è definita",
+    "t": "intervallo",
+    "v": "[2, +\\infty)"
+   }
+  ]
+ },
+ "radicali/9": {
+  "campi": [
+   {
+    "e": "$\\sqrt{48}$ semplificato",
+    "t": "numero",
+    "v": "4\\sqrt{3}",
+    "esatto": true
+   }
+  ]
+ },
+ "radicali/10": {
+  "campi": [
+   {
+    "e": "$5\\sqrt2-\\sqrt8$ ridotto",
+    "t": "numero",
+    "v": "3\\sqrt{2}",
+    "esatto": true
+   }
+  ]
+ },
+ "radicali/14": {
+  "campi": [
+   {
+    "e": "Valori di $x$ per cui $\\sqrt{x-3}$ è definita",
+    "t": "intervallo",
+    "v": "[3, +\\infty)"
+   }
+  ]
+ },
+ "sistemi-lineari/1": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "1",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/2": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "2",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/3": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "2",
+     "6"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/4": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "3",
+     "1"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/5": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni del sistema",
+    "t": "scelta",
+    "opzioni": [
+     "Nessuna soluzione",
+     "Una sola soluzione",
+     "Infinite soluzioni"
+    ],
+    "v": "Nessuna soluzione"
+   }
+  ]
+ },
+ "sistemi-lineari/7": {
+  "campi": [
+   {
+    "e": "Numero dei ragazzi",
+    "t": "numero",
+    "v": "4"
+   }
+  ]
+ },
+ "sistemi-lineari/9": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "2",
+     "3"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/10": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "3",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/11": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "4",
+     "9"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/12": {
+  "campi": [
+   {
+    "e": "Soluzione $(x;\\,y)$",
+    "t": "valori",
+    "v": [
+     "4",
+     "2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "sistemi-lineari/13": {
+  "campi": [
+   {
+    "e": "Numero di soluzioni del sistema",
+    "t": "scelta",
+    "opzioni": [
+     "Nessuna soluzione",
+     "Una sola soluzione",
+     "Infinite soluzioni"
+    ],
+    "v": "Nessuna soluzione"
+   }
+  ]
+ },
+ "statistica/6": {
+  "campi": [
+   {
+    "e": "Frequenza percentuale",
+    "t": "numero",
+    "v": "30",
+    "u": "%"
+   }
+  ]
+ },
+ "statistica/14": {
+  "campi": [
+   {
+    "e": "Frequenza percentuale",
+    "t": "numero",
+    "v": "\\frac{100}{3}",
+    "u": "%"
+   }
+  ]
+ }
+}

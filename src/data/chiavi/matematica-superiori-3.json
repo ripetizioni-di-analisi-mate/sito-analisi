@@ -1,0 +1,1095 @@
+{
+ "circonferenza/1": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "circonferenza/3": {
+  "campi": [
+   {
+    "e": "Valori di $t$",
+    "t": "intervallo",
+    "var": "t",
+    "v": "(-2, 4)"
+   }
+  ]
+ },
+ "circonferenza/5": {
+  "campi": [
+   {
+    "e": "Punto comune con ordinata minore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "-4"
+    ]
+   },
+   {
+    "e": "Punto comune con ordinata maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "2"
+    ]
+   }
+  ]
+ },
+ "circonferenza/9": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "1"
+    ]
+   }
+  ]
+ },
+ "circonferenza/10": {
+  "campi": [
+   {
+    "e": "Valori di $q$",
+    "t": "valori",
+    "v": [
+     "-4",
+     "6"
+    ]
+   }
+  ]
+ },
+ "circonferenza/11": {
+  "campi": [
+   {
+    "e": "Valori di $s$",
+    "t": "valori",
+    "v": [
+     "-1",
+     "5"
+    ]
+   }
+  ]
+ },
+ "circonferenza/12": {
+  "campi": [
+   {
+    "e": "Numero di punti in comune",
+    "t": "numero",
+    "v": "1"
+   },
+   {
+    "e": "Disposizione",
+    "t": "scelta",
+    "opzioni": [
+     "tangenti internamente",
+     "tangenti esternamente",
+     "secanti",
+     "una interna all'altra senza punti comuni",
+     "esterne"
+    ],
+    "v": "tangenti internamente"
+   }
+  ]
+ },
+ "ellisse/2": {
+  "campi": [
+   {
+    "e": "Fuoco con ordinata maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "0",
+     "4"
+    ]
+   }
+  ]
+ },
+ "ellisse/4": {
+  "campi": [
+   {
+    "e": "Punto con ascissa negativa",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-\\frac{12}{5}",
+     "3"
+    ]
+   },
+   {
+    "e": "Punto con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{12}{5}",
+     "3"
+    ]
+   }
+  ]
+ },
+ "ellisse/5": {
+  "campi": [
+   {
+    "e": "Fuoco con ascissa maggiore",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "6",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "ellisse/8": {
+  "campi": [
+   {
+    "e": "Luogo dei punti",
+    "t": "scelta",
+    "opzioni": [
+     "un'ellisse con fuochi $F_1$ e $F_2$",
+     "il segmento chiuso $F_1F_2$",
+     "la circonferenza di centro l'origine e raggio $4$",
+     "l'insieme vuoto",
+     "l'asse del segmento $F_1F_2$"
+    ],
+    "v": "il segmento chiuso $F_1F_2$"
+   }
+  ]
+ },
+ "ellisse/10": {
+  "campi": [
+   {
+    "e": "Valori di $t$",
+    "t": "intervallo",
+    "var": "t",
+    "v": "(-4, 2)"
+   }
+  ]
+ },
+ "ellisse/12": {
+  "campi": [
+   {
+    "e": "Vertice più a destra",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "2"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/1": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "4",
+     "7"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/2": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "-2",
+     "1"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/3": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 4] \\cup [7, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/4": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(-\\infty, 4) \\cup (7, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/5": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "[-4, 4) \\cup (4, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/6": {
+  "campi": [
+   {
+    "e": "Soluzioni del sistema",
+    "t": "intervallo",
+    "v": "(5, 7]"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/8": {
+  "campi": [
+   {
+    "e": "Lati, dal più corto al più lungo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "7"
+    ],
+    "u": "cm"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/9": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "x \\neq 2"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/10": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "0",
+     "4"
+    ]
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/11": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(-1, 3)"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/12": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(1, +\\infty)"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "\\left(-2, -\\frac{1}{2}\\right]"
+   }
+  ]
+ },
+ "equazioni-e-disequazioni/14": {
+  "campi": [
+   {
+    "e": "Soluzioni del sistema",
+    "t": "intervallo",
+    "v": "(-3, 3) \\cup (3, 4]"
+   }
+  ]
+ },
+ "esponenziali/2": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "esponenziali/3": {
+  "campi": [
+   {
+    "e": "Soluzioni di $3^{2x-2}\\leq81$",
+    "t": "intervallo",
+    "v": "(-\\infty,3]"
+   }
+  ]
+ },
+ "esponenziali/4": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty,3)"
+   }
+  ]
+ },
+ "esponenziali/5": {
+  "campi": [
+   {
+    "e": "Soluzioni di $9^x-4\\cdot3^x+3=0$",
+    "t": "valori",
+    "v": [
+     "0",
+     "1"
+    ]
+   }
+  ]
+ },
+ "esponenziali/8": {
+  "campi": [
+   {
+    "e": "Immagine di $g$",
+    "t": "intervallo",
+    "v": "(-\\infty,5)",
+    "var": "y"
+   }
+  ]
+ },
+ "esponenziali/10": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "esponenziali/11": {
+  "campi": [
+   {
+    "e": "Soluzioni di $3^{\\frac{1}{x+1}}\\geq9$",
+    "t": "intervallo",
+    "v": "\\left(-1,-\\frac{1}{2}\\right]"
+   }
+  ]
+ },
+ "esponenziali/12": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty,-2]\\cup[2,+\\infty)"
+   }
+  ]
+ },
+ "esponenziali/13": {
+  "campi": [
+   {
+    "e": "Soluzione dell'equazione",
+    "t": "numero",
+    "v": "3"
+   }
+  ]
+ },
+ "funzioni/2": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "[-2,3)"
+   }
+  ]
+ },
+ "funzioni/3": {
+  "campi": [
+   {
+    "e": "Zero di $f$",
+    "t": "numero",
+    "v": "-3"
+   }
+  ]
+ },
+ "funzioni/4": {
+  "campi": [
+   {
+    "e": "La funzione $f$ è",
+    "t": "scelta",
+    "opzioni": [
+     "solo pari",
+     "solo dispari",
+     "pari e dispari",
+     "né pari né dispari"
+    ],
+    "v": "solo pari"
+   }
+  ]
+ },
+ "funzioni/6": {
+  "campi": [
+   {
+    "e": "$f^{-1}(y)$",
+    "t": "funzione",
+    "v": "\\frac{3-y}{2}",
+    "var": [
+     "y"
+    ]
+   },
+   {
+    "e": "Dominio di $f^{-1}$",
+    "t": "intervallo",
+    "v": "[-1,3]",
+    "var": "y"
+   }
+  ]
+ },
+ "funzioni/7": {
+  "campi": [
+   {
+    "e": "Punto corrispondente su $g$",
+    "t": "valori",
+    "v": [
+     "2",
+     "-4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "funzioni/8": {
+  "campi": [
+   {
+    "e": "Immagine di $f$ su $(-2,1]$",
+    "t": "intervallo",
+    "v": "[0,4)",
+    "var": "y"
+   }
+  ]
+ },
+ "funzioni/9": {
+  "campi": [
+   {
+    "e": "Insieme in cui $f(x)<0$",
+    "t": "intervallo",
+    "v": "(-2,1)"
+   }
+  ]
+ },
+ "funzioni/10": {
+  "campi": [
+   {
+    "e": "Controimmagini di $5$",
+    "t": "valori",
+    "v": [
+     "-3",
+     "1"
+    ]
+   }
+  ]
+ },
+ "funzioni/11": {
+  "campi": [
+   {
+    "e": "Dominio di $g\\circ f$",
+    "t": "intervallo",
+    "v": "[0,+\\infty)"
+   }
+  ]
+ },
+ "funzioni/12": {
+  "campi": [
+   {
+    "e": "La funzione $f(x)=0$ è",
+    "t": "scelta",
+    "opzioni": [
+     "solo pari",
+     "solo dispari",
+     "pari e dispari",
+     "né pari né dispari"
+    ],
+    "v": "pari e dispari"
+   }
+  ]
+ },
+ "iperbole/2": {
+  "campi": [
+   {
+    "e": "Vertice superiore",
+    "t": "valori",
+    "v": [
+     "0",
+     "3"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "iperbole/7": {
+  "campi": [
+   {
+    "e": "Punto in comune",
+    "t": "valori",
+    "v": [
+     "-2",
+     "0"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "iperbole/8": {
+  "campi": [
+   {
+    "e": "Quadranti dei rami di $xy=-15$",
+    "t": "scelta",
+    "opzioni": [
+     "primo e terzo",
+     "secondo e quarto",
+     "primo e secondo",
+     "terzo e quarto"
+    ],
+    "v": "secondo e quarto"
+   }
+  ]
+ },
+ "iperbole/10": {
+  "campi": [
+   {
+    "e": "Centro dell'iperbole",
+    "t": "valori",
+    "v": [
+     "3",
+     "-2"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "iperbole/12": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "x \\neq 4"
+   }
+  ]
+ },
+ "iperbole/13": {
+  "campi": [
+   {
+    "e": "Punto escluso",
+    "t": "valori",
+    "v": [
+     "3",
+     "4"
+    ],
+    "ordine": true
+   }
+  ]
+ },
+ "logaritmi/4": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-\\infty, -1) \\cup (4, +\\infty)"
+   }
+  ]
+ },
+ "logaritmi/5": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "6"
+    ]
+   }
+  ]
+ },
+ "logaritmi/6": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "[-3, -1) \\cup (1, 3]"
+   }
+  ]
+ },
+ "logaritmi/7": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(4, 6]"
+   }
+  ]
+ },
+ "logaritmi/10": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "3"
+    ]
+   }
+  ]
+ },
+ "logaritmi/12": {
+  "campi": [
+   {
+    "e": "Dominio di $f$",
+    "t": "intervallo",
+    "v": "(-1, 0) \\cup (0, 3)"
+   }
+  ]
+ },
+ "logaritmi/13": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "valori",
+    "v": [
+     "\\frac{1}{9}",
+     "3"
+    ]
+   }
+  ]
+ },
+ "logaritmi/14": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "(1, 4]"
+   }
+  ]
+ },
+ "parabola/1": {
+  "campi": [
+   {
+    "e": "Vertice $V$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "4",
+     "-3"
+    ]
+   },
+   {
+    "e": "Asse",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "x = 4"
+   }
+  ]
+ },
+ "parabola/2": {
+  "campi": [
+   {
+    "e": "Valori di $x$",
+    "t": "intervallo",
+    "v": "(-\\infty, 2) \\cup (6, +\\infty)"
+   }
+  ]
+ },
+ "parabola/4": {
+  "campi": [
+   {
+    "e": "Equazione della parabola",
+    "t": "equazione",
+    "var": [
+     "x",
+     "y"
+    ],
+    "v": "(x-3)^2 = 8(y-2)"
+   }
+  ]
+ },
+ "parabola/5": {
+  "campi": [
+   {
+    "e": "Punto con ascissa negativa",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-1",
+     "-1"
+    ]
+   },
+   {
+    "e": "Punto con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "2"
+    ]
+   }
+  ]
+ },
+ "parabola/10": {
+  "campi": [
+   {
+    "e": "Soluzioni",
+    "t": "intervallo",
+    "v": "[-3, 1]"
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/2": {
+  "campi": [
+   {
+    "e": "Punto medio",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "\\frac{3}{2}",
+     "\\frac{3}{2}"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/6": {
+  "campi": [
+   {
+    "e": "Punto di intersezione",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "5"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/8": {
+  "campi": [
+   {
+    "e": "Estremo $B$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "5",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/11": {
+  "campi": [
+   {
+    "e": "Punto sull'asse $x$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-3",
+     "0"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/13": {
+  "campi": [
+   {
+    "e": "Valori di $t$",
+    "t": "valori",
+    "v": [
+     "-3",
+     "5"
+    ]
+   }
+  ]
+ },
+ "piano-cartesiano-e-retta/14": {
+  "campi": [
+   {
+    "e": "Piede della perpendicolare",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "3"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/1": {
+  "campi": [
+   {
+    "e": "Immagine di $P$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-1",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/3": {
+  "campi": [
+   {
+    "e": "Vettore di traslazione",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-3",
+     "9"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/5": {
+  "campi": [
+   {
+    "e": "Simmetrico del punto",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "8",
+     "-1"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/6": {
+  "campi": [
+   {
+    "e": "Immagine di $P$",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "-3"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/8": {
+  "campi": [
+   {
+    "e": "Centro",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "1"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/9": {
+  "campi": [
+   {
+    "e": "Il luogo è",
+    "t": "scelta",
+    "opzioni": [
+     "un'ellisse",
+     "un solo punto",
+     "l'insieme vuoto",
+     "una coppia di rette"
+    ],
+    "v": "un solo punto"
+   },
+   {
+    "e": "Punto del luogo",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "1",
+     "-2"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/10": {
+  "campi": [
+   {
+    "e": "Vertice",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "3",
+     "2"
+    ]
+   }
+  ]
+ },
+ "trasformazioni-e-coniche/11": {
+  "campi": [
+   {
+    "e": "Punto con ascissa negativa",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "-2",
+     "5"
+    ]
+   },
+   {
+    "e": "Punto con ascissa positiva",
+    "t": "valori",
+    "ordine": true,
+    "v": [
+     "2",
+     "5"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/1": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "-2",
+     "6"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/2": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-2, 3]"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/3": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\infty, 1) \\cup (3, +\\infty)"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/4": {
+  "campi": [
+   {
+    "e": "Dominio",
+    "t": "intervallo",
+    "v": "(-\\infty, 2)"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/5": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "5"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/6": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "3"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/7": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-1, 3]"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/8": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "intervallo",
+    "v": "[2, 5]"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/9": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "1"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/10": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "(-\\sqrt{5}, -\\sqrt{3}) \\cup (\\sqrt{3}, \\sqrt{5})"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/11": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "\\mathbb{R}\\setminus\\{-3, 3\\}"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/12": {
+  "campi": [
+   {
+    "e": "Dominio",
+    "t": "intervallo",
+    "v": "[-3, 2)"
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/13": {
+  "campi": [
+   {
+    "e": "Soluzioni dell'equazione",
+    "t": "valori",
+    "v": [
+     "5"
+    ]
+   }
+  ]
+ },
+ "valore-assoluto-e-irrazionali/14": {
+  "campi": [
+   {
+    "e": "Soluzioni della disequazione",
+    "t": "intervallo",
+    "v": "[-2, 2)"
+   }
+  ]
+ }
+}
