@@ -18,7 +18,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'biologia-semestre-filtro': {
     titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
-    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and 315 explained questions. Study materials are in Italian.',
+    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with illustrated theory, worked examples, practice exercises and 630 explained questions. Complete study materials in English and Italian.',
     argomenti: {
       'organizzazione-biologica': { titolo: 'Biological and molecular organisation of life', breve: 'Cells and biomolecules' },
       'genoma-cromatina': { titolo: 'Genome, chromatin and epigenetics', breve: 'Genome and chromatin' },

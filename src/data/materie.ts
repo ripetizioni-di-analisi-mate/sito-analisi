@@ -863,7 +863,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'biologia-semestre-filtro',
     titolo: 'Biologia per il semestre filtro',
     breve: 'Biologia semestre filtro',
-    descrizione: 'Biologia per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dalla cellula alla genetica e al controllo della proliferazione. Teoria, schede svolte, esercizi con soluzione e 315 quiz spiegati.',
+    descrizione: 'Biologia per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dalla cellula alla genetica e al controllo della proliferazione. Teoria illustrata, schede svolte, esercizi con soluzione e 630 quiz spiegati, in italiano e inglese.',
     colore: '#3e7460',
     gruppo: 'Semestre filtro',
     attiva: true,

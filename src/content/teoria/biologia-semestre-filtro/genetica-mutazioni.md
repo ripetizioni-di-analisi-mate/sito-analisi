@@ -1,84 +1,147 @@
 ---
 titolo: "Mutazioni, ereditarietà e caratteri"
-sommario: "Variazioni del DNA, riparazione, leggi di Mendel, associazione genica, cariotipo e interpretazione degli alberi genealogici."
+sommario: "Dal cambiamento del DNA al fenotipo: riparazione, incroci, probabilità, mappe genetiche, anomalie cromosomiche e pedigree ragionati."
 ---
 
-## Mutazioni e riparazione
+## Cambiamenti del DNA e loro conseguenze
 
-:::definizione{#mutazioni titolo="Sostituzioni, inserzioni e delezioni"}
-Una **mutazione** è una variazione della sequenza del DNA. Una sostituzione può essere sinonima, missenso o nonsenso rispetto alla sequenza codificante considerata. Un'inserzione o delezione nella regione tradotta produce uno spostamento della cornice di lettura quando il numero di nucleotidi coinvolti non è multiplo di tre. Variazioni di promotori, siti di splicing e altre regioni regolative possono alterare quantità o forma del prodotto.
+:::definizione{#mutazioni titolo="Sequenza, prodotto e linea cellulare"}
+Una **mutazione** è un cambiamento stabile della sequenza del DNA. Per descriverne l'effetto si confrontano tre livelli: la sequenza modificata, il prodotto del gene e il carattere osservabile. Una sostituzione cambia una base; un'inserzione aggiunge nucleotidi; una delezione li elimina. La posizione della variante determina quali passaggi possono risentirne.
 
-L'espansione di sequenze ripetute può interferire con espressione o funzione del gene. In alcune malattie il numero delle ripetizioni tende ad aumentare nelle generazioni e si osserva anticipazione, cioè esordio più precoce o maggiore gravità. Una mutazione somatica riguarda una linea cellulare dell'individuo; una variante presente nella linea germinale può essere trasmessa alla progenie.
+In una sequenza tradotta, una sostituzione può essere sinonima, se conserva l'amminoacido, missenso, se lo cambia, oppure nonsenso, se introduce uno stop anticipato. La degenerazione del codice spiega perché codoni diversi possano specificare lo stesso amminoacido. Il termine *sinonima* descrive questo livello: una variante sinonima può comunque modificare lo splicing o la stabilità dell'RNA. La classificazione della sequenza, da sola, lascia quindi aperta la valutazione funzionale.
+
+Il ribosoma legge triplette consecutive a partire dalla cornice stabilita all'inizio della traduzione. Un'inserzione o delezione interna alla regione tradotta provoca **frameshift** quando la sua lunghezza non è multipla di tre. Da quel punto cambiano i raggruppamenti dei nucleotidi e può comparire uno stop. Una delezione di tre basi conserva la cornice a valle; può comunque rimuovere un amminoacido indispensabile. Se interessa il confine tra due codoni, può anche modificare un amminoacido vicino alla giunzione.
+
+![Cornice di lettura prima e dopo la delezione di una base](/figure/biologia-semestre-filtro/genetica-mutazioni/cornice-it.svg)
+
+Varianti del promotore possono alterare la quantità di trascritto; varianti nei siti di splicing possono cambiare gli esoni presenti nell'RNA maturo. Un'espansione di ripetizioni può modificare la proteina, la regolazione o la tossicità dell'RNA, secondo il locus. In alcune malattie da espansione si osserva anticipazione: nelle generazioni successive il carattere può comparire prima o essere più grave, in relazione all'instabilità della ripetizione.
+
+Una variante somatica si propaga alle cellule discendenti di quella cellula e può produrre mosaicismo. La trasmissione alla generazione successiva richiede invece il coinvolgimento della linea germinale. L'effetto sulla salute dipende da funzione, dose, tessuto e ambiente: il solo numero di basi cambiate non misura la gravità.
 :::
 
-:::definizione{#riparazione titolo="Correzione degli appaiamenti e dei danni"}
-Il **mismatch repair** corregge appaiamenti errati sfuggiti alla replicazione. La riparazione per escissione di basi elimina basi alterate mediante glicosilasi; quella per escissione di nucleotidi rimuove tratti contenenti lesioni che deformano l'elica, come molti fotoprodotti da UV. Nei tagli a singolo filamento si coordinano riconoscimento, ripristino della sequenza e ligazione.
+## Danno, riparazione e stabilità del genoma
 
-Le rotture a doppio filamento possono essere riparate mediante ricombinazione omologa, che usa uno stampo omologo e frequentemente il cromatidio fratello, oppure mediante giunzione delle estremità, che può introdurre piccole inserzioni o delezioni. La scelta dipende anche dalla fase del ciclo. Una via di riparazione riduce il rischio di mutazione; la riparazione non garantisce in ogni caso il ripristino esatto.
+:::definizione{#riparazione titolo="Riconoscere il problema prima della via"}
+Il **danno al DNA** è un'alterazione chimica o strutturale, come una base ossidata o una rottura. Può essere rimosso prima che diventi una variazione ereditaria della sequenza. Il proofreading delle polimerasi corregge molti errori durante la sintesi; il mismatch repair riconosce appaiamenti errati e piccoli slittamenti sfuggiti a questa prima correzione.
+
+Nella riparazione per escissione di basi, una glicosilasi riconosce una base alterata e rompe il suo legame con lo zucchero. Altri enzimi trattano il sito privo di base, sintetizzano il tratto mancante usando il filamento opposto e chiudono l'interruzione. Nella riparazione per escissione di nucleotidi viene rimosso un breve tratto attorno a una lesione che distorce l'elica, come molti fotoprodotti da UV. In entrambi i casi la complementarità fornisce l'informazione per riscrivere il tratto.
+
+![Tipi di lesione e vie di riparazione](/figure/biologia-semestre-filtro/genetica-mutazioni/riparazione-it.svg)
+
+Una rottura a doppio filamento interrompe entrambe le catene. La ricombinazione omologa può usare il cromatidio fratello come stampo; la sua disponibilità dopo la replicazione rende questa via particolarmente adatta alle fasi S e G2. La giunzione delle estremità può riunire i capi senza uno stampo omologo esteso. Se i capi richiedono processamento, il prodotto può contenere inserzioni o delezioni. La giunzione di capi compatibili può anche ripristinare esattamente la sequenza.
+
+Per interpretare un esperimento si separano la lesione iniziale e l'esito osservato. Una cellula esposta a UV con ridotta escissione di nucleotidi conserva più fotoprodotti, mentre un difetto di mismatch repair favorisce la persistenza di errori di appaiamento. Nessuna via garantisce che ogni evento sia corretto senza conseguenze; la stabilità del genoma deriva da più controlli coordinati.
 :::
 
-## Alleli, genotipo e fenotipo
+## Alleli e segregazione
 
-:::definizione{#alleli titolo="Varianti di un locus"}
-Gli **alleli** sono forme alternative di una regione genetica. Un diploide può essere omozigote, con due copie uguali al locus considerato, oppure eterozigote, con alleli diversi. Nell'eterozigosi composta due varianti patogene diverse interessano le due copie di uno stesso gene, in trans. Due varianti sulla medesima copia, in cis, rappresentano una situazione differente.
+:::definizione{#alleli titolo="Locus, genotipo e fenotipo"}
+Un **locus** è una posizione o regione del genoma; gli alleli sono sue varianti. In un organismo diploide, un locus autosomico è rappresentato normalmente da due copie, una per ciascun cromosoma omologo. Con due alleli uguali il genotipo è omozigote; con alleli diversi è eterozigote. L'insieme degli alleli considerati costituisce il genotipo, mentre il fenotipo è il carattere osservato nelle condizioni specificate.
 
-Il **genotipo** descrive la costituzione genetica considerata; il fenotipo è il carattere osservabile in un contesto. La dominanza descrive il rapporto tra alleli nel fenotipo dell'eterozigote: non determina da sola frequenza, vantaggio evolutivo o gravità della variante.
+Due varianti diverse dello stesso gene possono trovarsi sulle due copie omologhe, *in trans*, oppure sulla stessa copia, *in cis*. Nell'eterozigosi composta le due varianti sono in trans. Questa distinzione conta per una funzione recessiva: due copie compromesse e una sola copia compromessa possono produrre esiti diversi. La fase delle varianti richiede dati familiari o molecolari aggiuntivi.
+
+La dominanza riguarda il fenotipo dell'eterozigote. Un allele dominante può essere raro o comune; la lettera maiuscola usata negli esercizi non esprime frequenza, beneficio o gravità. Il rapporto può cambiare secondo il livello osservato, per esempio attività enzimatica e carattere dell'organismo. Una sola copia integra può fornire abbastanza prodotto, rendendo recessiva una perdita di funzione. Un prodotto mutato che interferisce con quello normale può invece esercitare un effetto dominante negativo, per esempio in un complesso di subunità. Una variante con guadagno di funzione può conferire attività in condizioni in cui la proteina ordinaria è inattiva.
 :::
 
-## Segregazione e assortimento
+:::definizione{#mendel titolo="Dai gameti alle probabilità"}
+Durante la meiosi le copie alleliche segregano. Nel modello mendeliano, un individuo Aa produce gameti A e a con probabilità $\dfrac12$ ciascuno. Con fecondazione casuale, i gameti dei due genitori si combinano indipendentemente. Nell'incrocio Aa × Aa, la probabilità di AA è dunque $\dfrac12\cdot\dfrac12=\dfrac14$. Aa si ottiene in due modi disgiunti, A materno con a paterno oppure a materno con A paterno; le probabilità si sommano e danno $\dfrac12$.
 
-:::definizione{#mendel titolo="Leggi di Mendel e probabilità"}
-La **segregazione** separa le copie alleliche durante la formazione dei gameti. Un eterozigote Aa produce, nel modello mendeliano senza distorsioni, gameti A e a con uguale probabilità. L'incrocio Aa × Aa genera proporzioni genotipiche attese di un quarto AA, metà Aa e un quarto aa. Con dominanza completa e penetranza completa il rapporto fenotipico è tre a uno.
+![Quadrato di Punnett per due eterozigoti](/figure/biologia-semestre-filtro/genetica-mutazioni/punnett-it.svg)
 
-L'assortimento indipendente si applica a loci che si comportano come non associati. Un doppio eterozigote AaBb produce allora quattro tipi di gameti equiprobabili. La probabilità di eventi indipendenti si moltiplica; quella di alternative disgiunte si somma. I rapporti sono attese probabilistiche: una famiglia piccola può discostarsene.
+Con dominanza completa e penetranza completa, AA e Aa condividono il fenotipo dominante, che ha probabilità $\dfrac34$. Se un figlio è già noto come fenotipicamente dominante, si esclude aa e si rinormalizzano gli esiti rimasti. Indicando quel fenotipo con D:
+
+$$
+P(\mathrm{Aa}\mid D)=\frac{P(\mathrm{Aa})}{P(D)}
+=\frac{\frac12}{\frac34}=\frac23.
+$$
+
+Per loci che assortiscono indipendentemente si moltiplicano le probabilità relative ai singoli loci. In AaBb × AaBb si ha $P(\mathrm{aaBb})=\dfrac14\cdot\dfrac12=\dfrac18$. I rapporti descrivono attese su molte osservazioni. In una famiglia con quattro figli possono comparire quattro genotipi uguali; ogni nuova fecondazione conserva le probabilità del modello, indipendentemente dai figli precedenti.
 :::
 
-:::esempio{titolo="Probabilità condizionata in un incrocio recessivo"}
-Due genitori Aa hanno un figlio con fenotipo dominante e penetranza completa. I genotipi compatibili sono AA, Aa e aA, equiprobabili tra i tre esiti rimasti. La probabilità che il figlio sia eterozigote è quindi $\frac{2}{3}$. Prima di conoscere il fenotipo sarebbe stata $\frac{1}{2}$.
+## Dominanza e interazioni tra geni
+
+:::definizione{#dominanza-ab0 titolo="Alleli multipli e sistema AB0"}
+Con **dominanza incompleta**, l'eterozigote ha un valore intermedio del carattere considerato. Con codominanza sono riconoscibili entrambi i contributi allelici. Il rapporto genotipico uno a due a uno di un incrocio tra eterozigoti resta valido; cambia il raggruppamento dei genotipi in classi fenotipiche.
+
+Nel modello classico AB0, $I^A$ e $I^B$ producono attività che determinano antigeni differenti, mentre $i$ è recessivo rispetto a entrambi. $I^AI^B$ determina gruppo AB; $I^Ai$ determina gruppo A; $I^Bi$ determina gruppo B; $ii$ determina gruppo 0. I problemi qui assumono espressione ordinaria degli antigeni, senza fenotipi rari come Bombay.
+
+Un genitore A e uno B possono avere un figlio 0 se entrambi trasmettono i. I genotipi parentali sono quindi $I^Ai$ e $I^Bi$; le quattro combinazioni AB, A, B e 0 hanno uguale probabilità. Un genitore AB, invece, produce gameti $I^A$ oppure $I^B$ e nel modello dichiarato non può fornire i. La presenza di tre alleli nella popolazione resta compatibile con due copie per individuo diploide.
 :::
 
-## Relazioni tra alleli e tra geni
+:::definizione{#epistasi-pleiotropia titolo="Una via, più loci"}
+La **pleiotropia** si ha quando un gene influenza più caratteri. L'epistasi riguarda l'interazione tra loci: il genotipo a un locus modifica l'effetto fenotipico di un altro. Per ricavare un rapporto è necessario conoscere la relazione funzionale.
 
-:::definizione{#dominanza-ab0 titolo="Dominanza incompleta, codominanza e alleli multipli"}
-Nella **dominanza incompleta** il fenotipo dell'eterozigote è intermedio nel carattere considerato. Nella codominanza si riconoscono entrambi i contributi allelici. Nel sistema AB0, gli alleli $I^A$ e $I^B$ sono codominanti, mentre $i$ è recessivo rispetto a ciascuno. Il gruppo A può quindi corrispondere a $I^AI^A$ o $I^Ai$; il gruppo AB a $I^AI^B$.
+Si consideri una via in cui A consente la produzione di un precursore colorato e B ne cambia il colore. Il genotipo aa blocca la produzione del precursore, indipendentemente da B. Con loci indipendenti e dominanza completa all'interno di ciascun locus, AaBb × AaBb dà $\dfrac9{16}$ A_B_, $\dfrac3{16}$ A_bb e $\dfrac4{16}$ aa__. La somma vale uno e il rapporto fenotipico è nove a tre a quattro.
 
-Una popolazione può possedere più di due alleli di uno stesso locus; un singolo individuo diploide ne porta normalmente al massimo due. I problemi AB0 qui usano il modello classico, senza fenotipi rari che alterano l'espressione degli antigeni.
+![Raggruppamento delle classi nell'epistasi recessiva](/figure/biologia-semestre-filtro/genetica-mutazioni/epistasi-it.svg)
+
+Il trattino basso indica che l'altro allele può assumere qualunque valore compatibile. Il gruppo aa__ riunisce aaBB, aaBb e aabb perché tutti bloccano lo stesso passaggio. L'assortimento indipendente degli alleli resta valido anche quando i prodotti dei geni interagiscono.
 :::
 
-:::definizione{#epistasi-pleiotropia titolo="Interazioni genetiche"}
-La **pleiotropia** indica che un gene influenza più caratteri. L'epistasi si verifica quando il genotipo a un locus modifica o maschera il contributo di un altro locus. I rapporti fenotipici possono allora differire dal nove a tre a tre a uno del modello diibrido con dominanza completa e assenza di interazioni.
+## Associazione, crossing over e mappe
 
-In un modello di epistasi recessiva, aa impedisce la produzione del pigmento indipendentemente dal locus B. Nell'incrocio AaBb × AaBb con loci indipendenti, A_B_ occupa nove sedicesimi, A_bb tre sedicesimi e aa__ quattro sedicesimi: il rapporto atteso è nove a tre a quattro. Il rapporto dipende dal meccanismo dichiarato nel problema.
+:::definizione{#associazione titolo="Dalla fase cromosomica ai ricombinanti"}
+Loci sullo stesso cromosoma possono essere **associati**: alcune combinazioni alleliche si trasmettono insieme più spesso di quanto previsto dall'indipendenza. La fase specifica quali alleli stanno sullo stesso omologo. Nell'assetto AB/ab le combinazioni parentali sono AB e ab; nell'assetto Ab/aB sono Ab e aB. La scrittura AaBb da sola omette questa informazione.
+
+Il crossing over avviene tra cromatidi non fratelli di omologhi appaiati durante la profase I. Un singolo scambio nell'intervallo tra i due loci modifica due dei quattro cromatidi. Il prodotto riconosciuto come ricombinante dipende quindi dalla posizione dello scambio e dalla fase iniziale.
+
+![Fase in associazione e classi gametiche con ricombinazione del 20 per cento](/figure/biologia-semestre-filtro/genetica-mutazioni/linkage-it.svg)
+
+Nel testcross AB/ab × ab/ab, il genitore recessivo produce solo gameti ab. Il genotipo dei figli permette perciò di riconoscere il gamete del doppio eterozigote. Con frequenza di ricombinazione $r=0{,}20$, nel modello con classi reciproche ugualmente vitali, ogni classe ricombinante ha probabilità $\dfrac r2=0{,}10$ e ogni parentale $\dfrac{1-r}{2}=0{,}40$.
+
+$$
+r=\frac{R}{N}.
+$$
+
+Qui R conta i ricombinanti e N tutti i figli osservati. Con associazione completa, nel modello privo di ricombinazione nell’intervallo, AB/ab produce soltanto AB e ab. Con associazione incompleta compaiono anche Ab e aB, con frequenza complessiva inferiore al 50%. La classificazione riguarda il comportamento dei due marcatori nelle meiosi considerate.
+
+Per intervalli brevi, l'1% di ricombinazione corrisponde approssimativamente a un centimorgan. Scambi multipli possono ricostituire la combinazione parentale tra i marcatori esterni, quindi il conteggio a due loci sottostima distanze grandi. La frequenza attesa massima del modello è 50%; un valore vicino a questo limite è compatibile sia con cromosomi diversi sia con loci molto distanti sullo stesso cromosoma. Le distanze fisiche in basi richiedono informazioni differenti dalle mappe di ricombinazione.
 :::
 
-## Associazione e mappe genetiche
+## Penetranza, ambiente e origine parentale
 
-:::definizione{#associazione titolo="Loci associati e ricombinazione"}
-Due loci sullo stesso cromosoma possono essere **associati**. Il crossing over tra cromatidi non fratelli di omologhi può generare combinazioni ricombinanti. In un doppio eterozigote AB/ab, AB e ab sono combinazioni parentali; Ab e aB sono ricombinanti. L'assetto Ab/aB inverte questa classificazione.
+:::definizione{#penetranza-imprinting titolo="Genotipo presente e carattere osservato"}
+La **penetranza** è la proporzione di individui con un genotipo definito che manifesta un fenotipo definito, all'età e nelle condizioni considerate. Se 80 di 100 portatori presentano il carattere, la penetranza osservata è 80%. L'espressività descrive intensità e modalità del carattere in chi lo manifesta. Una stessa penetranza può accompagnarsi a espressività molto variabile.
 
-La frequenza di ricombinazione è il numero di ricombinanti diviso il totale. Per intervalli brevi una frequenza dell'1% corrisponde approssimativamente a un centimorgan. Le mappe genetiche misurano ricombinazione; le mappe fisiche misurano distanze in basi. Eventi multipli possono non essere riconosciuti dal conteggio a due loci, quindi la frequenza osservata tende al massimo al 50% e non dà direttamente distanze grandi.
+Per un eterozigote con variante autosomica dominante, la probabilità di trasmettere la variante a un figlio resta $\dfrac12$ nel modello mendeliano. Se la penetranza del genotipo nel figlio è 80%, il partner è non portatore e il fenotipo è assente nei non portatori, la probabilità di manifestazione è $\dfrac12\cdot0{,}80=0{,}40$. Il fattore di penetranza riguarda l'espressione dopo l'eredità della variante.
+
+Caratteri poligenici dipendono da più loci, spesso insieme a fattori ambientali. Una distribuzione continua, per esempio di un valore misurato, non permette di ricavare un rapporto mendeliano unico. Anche in un carattere monogenico, età, geni modificatori e ambiente possono cambiare l'espressione.
+
+Nell'**imprinting genomico**, l'espressione dipende dall'origine materna o paterna dell'allele. Le marcature epigenetiche vengono cancellate e ristabilite nella linea germinale secondo il sesso dell'individuo che produce i gameti. Una variante trasmessa da una donna assume pertanto l'origine materna nel figlio, anche quando quella donna l'aveva ricevuta dal padre.
+
+![Origine parentale e allele espresso in un modello di imprinting](/figure/biologia-semestre-filtro/genetica-mutazioni/imprinting-it.svg)
+
+In un modello con allele materno silenziato, una variante inattivante sulla copia paterna può compromettere la funzione perché interessa la copia espressa. Lo stesso gene segue il modello opposto se è la copia paterna a essere silenziata. L'ipotesi deve quindi indicare quale copia è attiva. Eredità mitocondriale e imprinting descrivono meccanismi distinti.
 :::
 
-## Ambiente ed espressione dei caratteri
+## Numero e struttura dei cromosomi
 
-:::definizione{#penetranza-imprinting titolo="Penetranza, espressività e imprinting"}
-La **penetranza** è la quota di portatori di un genotipo che manifesta il fenotipo definito, nelle condizioni considerate. L'espressività descrive grado e modalità di manifestazione in chi esprime il carattere. Età, ambiente, altri geni e criteri di osservazione possono influenzare entrambe.
+:::definizione{#cariotipo titolo="Cariotipo e risoluzione dell'osservazione"}
+Il **cariotipo** descrive numero e morfologia dei cromosomi. In una cellula somatica umana tipica si contano 46 cromosomi. Dopo la fase S ciascuno comprende due cromatidi fratelli uniti; prima della loro separazione il conteggio rimane 46 cromosomi, mentre le molecole di DNA nucleare sono 92. Gli omologhi hanno gli stessi loci; i fratelli derivano dalla replicazione di una copia.
 
-I caratteri poligenici dipendono da più loci e spesso anche dall'ambiente; la loro distribuzione quantitativa può essere continua. Nell'**imprinting genomico** l'espressione di un allele dipende dall'origine parentale, attraverso marcature epigenetiche. Le marcature vengono riorganizzate nella linea germinale secondo il sesso dell'individuo che produce i gameti. L'origine materna o paterna può quindi essere decisiva anche a parità di variante.
+L'euploidia riguarda multipli interi del corredo aploide; la poliploidia comprende più di due corredi completi. L'aneuploidia comporta invece eccesso o difetto di singoli cromosomi. Una trisomia 21 libera contiene tre cromosomi 21 e normalmente 47 cromosomi totali. Il termine trisomia descrive la dose del materiale considerato: forme da traslocazione richiedono una descrizione del riarrangiamento e possono avere un numero totale differente.
+
+La non-disgiunzione è una mancata separazione. In meiosi I riguarda gli omologhi; in meiosi II i cromatidi fratelli. Con un solo evento in meiosi I si formano quattro prodotti aneuploidi per il cromosoma coinvolto. Con un solo evento in una delle due cellule di meiosi II, due prodotti restano normali, uno ha una copia in più e uno una in meno.
+
+Un’inserzione cromosomica introduce un tratto in una nuova posizione; la dose dipende dal fatto che quel tratto sia stato spostato oppure copiato. Un’inversione paracentrica esclude il centromero, mentre una pericentrica lo comprende. Il bandeggio confronta l’ordine delle bande, rendendo riconoscibili molti riarrangiamenti abbastanza estesi.
+
+Una delezione riduce la dose di un tratto, una duplicazione la aumenta, un'inversione ne cambia l'orientamento. Una traslocazione trasferisce materiale tra cromosomi; nel riarrangiamento bilanciato manca uno squilibrio netto rilevabile alla risoluzione considerata. Restano possibili interruzione di geni, effetti di posizione e produzione di gameti sbilanciati.
+
+Il cariotipo con bandeggio rileva anomalie abbastanza grandi. Una sostituzione di una base può lasciare invariata l'immagine cromosomica; il suo studio richiede analisi della sequenza. Un risultato normale va quindi interpretato insieme al tipo di alterazione che la tecnica può osservare.
 :::
 
-## Cariotipo e anomalie cromosomiche
+## Deduzioni dagli alberi genealogici
 
-:::definizione{#cariotipo titolo="Numero e struttura dei cromosomi"}
-Il **cariotipo** descrive numero e morfologia dei cromosomi. Il bandeggio permette di riconoscere cromosomi e grandi riarrangiamenti, ma una variante di poche basi richiede tecniche con risoluzione diversa. Gli omologhi portano gli stessi loci, pur potendo contenere alleli diversi; i cromatidi fratelli derivano dalla replicazione di un singolo cromosoma.
+:::definizione{#pedigree titolo="Trasmissione e ipotesi del modello"}
+Un **pedigree** registra relazioni familiari, sesso e fenotipo. Quadrati e cerchi indicano rispettivamente maschi e femmine nella convenzione usata; il riempimento segnala il carattere definito. L'interpretazione confronta i dati con modelli espliciti di penetranza, frequenza allelica ed eventuali nuove mutazioni.
 
-L'euploidia riguarda corredi costituiti da multipli interi del numero aploide. La poliploidia aumenta interi corredi; l'aneuploidia altera il numero di singoli cromosomi. Una trisomia 21 libera comporta tre copie del cromosoma 21 e normalmente 47 cromosomi. Delezioni, duplicazioni, inversioni, inserzioni e traslocazioni modificano la struttura. Un portatore di traslocazione bilanciata può non avere perdita netta rilevabile di DNA e produrre gameti sbilanciati.
-:::
+![Pedigree compatibile con trasmissione autosomica recessiva](/figure/biologia-semestre-filtro/genetica-mutazioni/pedigree-it.svg)
 
-## Alberi genealogici
+Con eredità autosomica recessiva e penetranza completa, due genitori non affetti con un figlio aa sono entrambi Aa, se si escludono nuove mutazioni. Un fratello non affetto ha probabilità $\dfrac23$ di essere portatore. Con eredità autosomica dominante, un genitore Aa e uno aa producono metà figli con la variante; con penetranza incompleta anche un portatore può apparire non affetto.
 
-:::definizione{#pedigree titolo="Modelli di trasmissione"}
-In un **pedigree** si confrontano modelli genetici con sesso, fenotipo e relazioni familiari. Nel modello autosomico recessivo due portatori non affetti possono avere figli affetti; in quello autosomico dominante un eterozigote e un non portatore hanno, con penetranza completa, probabilità di un mezzo di trasmettere il carattere a ciascun figlio.
+Nel modello legato all'X, un padre trasmette X alle figlie e Y ai figli. Un padre con una variante dell'X la trasmette quindi a tutte le figlie e a nessun figlio maschio tramite il proprio X. Per una madre portatrice eterozigote di un carattere recessivo legato all'X e un padre non affetto, metà dei figli maschi è attesa affetta. La probabilità riferita a una gravidanza di sesso ancora ignoto richiede anche il fattore $\dfrac12$ per il sesso, se si assume uguale probabilità dei due sessi.
 
-Un padre trasmette il cromosoma X alle figlie e il cromosoma Y ai figli. Un carattere legato all'X non passa quindi direttamente da padre a figlio maschio nel modello usuale. I caratteri legati all'Y si trasmettono lungo la linea maschile. L'eredità mitocondriale è generalmente materna; eteroplasmia e soglie funzionali possono produrre gravità variabile. Un pedigree piccolo può essere compatibile con più modelli, quindi le conclusioni devono esplicitare le ipotesi e distinguere i dati dalle possibilità.
+Per un carattere dominante legato all’X con penetranza completa, un padre affetto e una madre non portatrice hanno tutte le figlie affette e tutti i figli maschi non affetti. Una madre eterozigote può invece trasmettere la variante a metà dei figli di ciascun sesso. Sono probabilità condizionate al sesso, ottenute seguendo separatamente il cromosoma di ogni genitore. L’assenza di trasmissione padre-figlio maschio è coerente con l’associazione all’X, ma da sola non dimostra quel modello in una famiglia piccola.
+
+Un carattere legato all'Y segue la linea maschile. Il DNA mitocondriale è trasmesso tipicamente dalla madre; la miscela di molecole normali e varianti, detta eteroplasmia, può differire tra tessuti e figli. Il superamento di soglie funzionali contribuisce alla variabilità della manifestazione. Un piccolo pedigree può essere compatibile con più modelli: una ricorrenza familiare suggerisce ipotesi, mentre la dimostrazione richiede ulteriori dati.
 :::
