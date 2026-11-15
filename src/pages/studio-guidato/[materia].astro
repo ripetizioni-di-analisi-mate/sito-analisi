@@ -19,19 +19,21 @@ const nome = m.breve || m.titolo;
   seo={{ titolo: `Studio guidato · ${m.titolo}`, noindex: true, soloQuestaLingua: true, senzaInglese: true }}>
   <div class="sg-pagina" id="studio-guidato" data-materia={materia} data-nome={nome}>
     <section data-sg-intro>
-      <header class="sg-testa"><h1>Studio guidato</h1><p>Su che cosa ti sei bloccato?</p></header>
-      <form class="sg-blocco" data-sg-blocco>
-        <label for="sg-frase"><i aria-hidden="true">π</i><span><b>Scrivilo in una frase</b><small>Pi sceglie il capitolo e le domande da cui partire.</small></span></label>
-        <div class="sg-blocco-riga"><textarea id="sg-frase" rows="2" maxlength="400" placeholder="Per esempio: non capisco quando si può usare il teorema di De l’Hôpital"></textarea>
-          <button type="submit" class="sg-btn">Inizia</button></div>
-        <p class="sg-blocco-nota" data-sg-blocco-nota role="status"></p>
-      </form>
-      <p class="sg-oppure"><span>oppure scegli il capitolo</span></p>
+      <header class="sg-testa"><h1>Studio guidato</h1><p>Scegli il capitolo su cui ti sei bloccato.</p></header>
       <div class="sg-righe">
         <button type="button" data-sg-arg="">
           <svg class="sg-bers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
           <span><b>Non so da dove iniziare</b><small>Una domanda per capitolo, poi il test sul primo capitolo da riprendere.</small></span><svg class="sg-fr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
         {argomenti.map((a, n) => <button type="button" data-sg-arg={a.slug}><i>{String(n + 1).padStart(2, '0')}</i><span><b>{a.titolo}</b></span><svg class="sg-fr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>)}
+        <div class="sg-parole" data-sg-parole>
+          <button type="button" class="sg-parole-apri" data-sg-parole-apri aria-expanded="false" aria-controls="sg-blocco"><i class="sg-pi-ic" aria-hidden="true">π</i><span><b>Descrivilo a parole</b><small>Scrivi che cosa non ti è chiaro: Pi sceglie il capitolo e le domande.</small></span><svg class="sg-fr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <form class="sg-blocco" id="sg-blocco" data-sg-blocco hidden>
+            <label for="sg-frase" class="sg-vis">Che cosa non ti è chiaro?</label>
+            <div class="sg-blocco-riga"><textarea id="sg-frase" rows="2" maxlength="400" placeholder="Per esempio: non capisco quando si può usare il teorema di De l’Hôpital"></textarea>
+              <button type="submit" class="sg-btn">Inizia</button></div>
+            <p class="sg-blocco-nota" data-sg-blocco-nota role="status"></p>
+          </form>
+        </div>
       </div>
       <p class="sg-nota">Il test parte appena scegli. Al massimo 12 domande, senza limite di tempo.</p>
       <div class="sg-ripresa" data-sg-ripresa hidden></div>
@@ -62,8 +64,8 @@ const nome = m.breve || m.titolo;
     .sg-testa h1{margin:0 0 .35rem;font-size:2.1rem;line-height:1.15}
     .sg-testa p{margin:0;font-size:1.06rem;line-height:1.45;color:var(--inchiostro-2)}
     .sg-righe{display:flex;flex-direction:column;border-bottom:1px solid var(--riga)}
-    .sg-righe button{display:grid;grid-template-columns:2.25rem minmax(0,1fr) 1rem;align-items:center;gap:0 .9rem;min-height:3.5rem;padding:.4rem 0;border:0;border-top:1px solid var(--riga);background:none;color:var(--inchiostro);text-align:left;cursor:pointer;font-family:var(--ui)}
-    .sg-righe button:hover b{color:var(--azione)}
+    .sg-righe>button,.sg-righe .sg-parole-apri{display:grid;grid-template-columns:2.25rem minmax(0,1fr) 1rem;align-items:center;gap:0 .9rem;min-height:3.5rem;padding:.4rem 0;border:0;border-top:1px solid var(--riga);background:none;color:var(--inchiostro);text-align:left;cursor:pointer;font-family:var(--ui)}
+    .sg-righe>button:hover b,.sg-righe .sg-parole-apri:hover b{color:var(--azione)}
     .sg-righe i{font:700 1.2rem var(--titoli);color:#7d765c}
     .sg-righe span{display:flex;flex-direction:column;gap:.05rem}
     .sg-righe b{font:700 1.12rem/1.3 var(--titoli)}
@@ -109,22 +111,24 @@ const nome = m.breve || m.titolo;
     .sg-nav{display:flex;flex-wrap:wrap-reverse;align-items:center;justify-content:space-between;gap:.6rem 1rem}
     .sg-conf{display:flex;flex-wrap:wrap;gap:.5rem}
     .sg-conf>.sg-btn.sg-btn{height:2.75rem;padding:0 1.2rem;font-size:.95rem}
-    .sg-blocco[hidden]{display:none}
-    .sg-blocco{display:flex;flex-direction:column;gap:.6rem;padding:1rem 1.1rem;background:rgba(255,255,255,.7);border:1px solid var(--riga);border-radius:14px}
-    .sg-blocco label{display:flex;align-items:center;gap:.7rem}
-    .sg-blocco label span{display:flex;flex-direction:column}
-    .sg-blocco label b{font:700 1.05rem var(--titoli)}
-    .sg-blocco label small{font-size:.86rem;color:var(--inchiostro-2)}
-    .sg-pagina i[aria-hidden]{font:italic 700 .95rem var(--titoli);width:1.6rem;height:1.6rem;flex:none;border-radius:50%;display:grid;place-items:center;background:#e6efec;color:#1f5a4f}
+    .sg-blocco[hidden],.sg-parole[hidden]{display:none}
+    .sg-parole{border-top:1px solid var(--riga)}
+    .sg-righe .sg-parole-apri{width:100%;border-top:0}
+    .sg-pi-ic{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;border:1px solid var(--riga);background:#fff;font:italic 700 .9rem var(--titoli)!important;color:var(--inchiostro)!important}
+    .sg-parole-apri .sg-fr{transition:transform .2s}
+    .sg-parole-apri[aria-expanded="true"] .sg-fr{transform:rotate(180deg)}
+    .sg-parole .sg-blocco{margin:0 0 .9rem 3.15rem}
+    .sg-vis{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    .sg-blocco{display:flex;flex-direction:column;gap:.6rem;padding:.9rem 1rem;background:rgba(255,255,255,.7);border:1px solid var(--riga);border-radius:12px}
+    .sg-blocco label{font-size:.9rem;color:var(--inchiostro-2)}
     .sg-blocco-riga{display:flex;gap:.6rem;align-items:flex-end}
     .sg-blocco textarea{flex:1;min-width:0;resize:vertical;min-height:2.9rem;padding:.6rem .8rem;border:1px solid var(--riga);border-radius:10px;font:1rem/1.4 var(--ui);color:var(--inchiostro);background:#fff}
     .sg-blocco textarea:focus{outline:2px solid var(--azione);outline-offset:-1px;border-color:transparent}
-    .sg-blocco-nota{margin:0;font-size:.9rem;color:var(--inchiostro-2)}
+    .sg-blocco.vuoto textarea{border-color:#c98a6c}
+    .sg-blocco-nota{margin:0;font-size:.88rem;color:var(--inchiostro-2)}
+    .sg-blocco.vuoto .sg-blocco-nota{color:#9b2c1c}
     .sg-blocco-nota:empty{display:none}
     .sg-blocco.pensa .sg-btn{opacity:.5;pointer-events:none}
-    .sg-oppure[hidden]{display:none}
-    .sg-oppure{display:flex;align-items:center;gap:.8rem;margin:0 0 -.6rem;font-size:.84rem;color:var(--inchiostro-2)}
-    .sg-oppure::before,.sg-oppure::after{content:'';flex:1;height:1px;background:var(--riga)}
     .sg-pi{display:flex;align-items:flex-start;gap:.6rem;margin:0;font-size:.92rem;line-height:1.45;color:var(--inchiostro-2)}
     .sg-pi[hidden]{display:none}
     .sg-pi span{padding-top:.12rem}
@@ -191,6 +195,7 @@ const nome = m.breve || m.titolo;
     .sg-foglio .sg-accedi a{color:var(--inchiostro)}
     .sg-dopo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:.85rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem}
     @media(max-width:640px){
+      .sg-parole .sg-blocco{margin-left:0}
       .sg-testa h1{font-size:1.7rem}
       .sg-dom .q{font-size:1.06rem}
       .sg-scelta{font-size:.98rem}
@@ -278,7 +283,8 @@ const nome = m.breve || m.titolo;
     blocco.addEventListener('submit', async (e) => {
       e.preventDefault();
       const testo = (blocco.querySelector('textarea') as HTMLTextAreaElement).value.trim();
-      if (testo.length < 4 || blocco.classList.contains('pensa')) { notaBlocco.textContent = 'Scrivi in una frase che cosa ti blocca.'; return; }
+      if (blocco.classList.contains('pensa')) return;
+      if (testo.length < 4) { blocco.classList.add('vuoto'); notaBlocco.textContent = 'Scrivi almeno qualche parola prima di premere Inizia.'; (blocco.querySelector('textarea') as HTMLTextAreaElement).focus(); return; }
       blocco.classList.add('pensa');
       notaBlocco.textContent = 'Pi sta leggendo la frase…';
       try {
@@ -289,6 +295,16 @@ const nome = m.breve || m.titolo;
         await avanza('/api/studio-guidato/inizia', { materia, argomento: d.argomento, priorita: d.priorita || [] });
       } catch (x: any) { notaBlocco.textContent = x.message; }
       finally { blocco.classList.remove('pensa'); }
+    });
+    const apri = $<HTMLButtonElement>('[data-sg-parole-apri]');
+    apri.addEventListener('click', () => {
+      const aperto = blocco.hidden;
+      blocco.hidden = !aperto;
+      apri.setAttribute('aria-expanded', String(aperto));
+      if (aperto) (blocco.querySelector('textarea') as HTMLTextAreaElement).focus();
+    });
+    blocco.querySelector('textarea')!.addEventListener('input', () => {
+      if (blocco.classList.contains('vuoto')) { blocco.classList.remove('vuoto'); notaBlocco.textContent = ''; }
     });
     blocco.querySelector('textarea')!.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); blocco.requestSubmit(); }
@@ -409,7 +425,7 @@ const nome = m.breve || m.titolo;
     chiama(`/api/studio-guidato?materia=${encodeURIComponent(materia)}`).then(async (d) => {
       if (d.ospite) {
         // L'ospite sceglie il capitolo e fa il test; «Scrivilo in una frase» (Pi) è per gli iscritti.
-        blocco.hidden = true; radice.querySelector<HTMLElement>('.sg-oppure')!.hidden = true;
+        radice.querySelector<HTMLElement>('[data-sg-parole]')!.hidden = true;
         $('.sg-nota').textContent = 'Il test parte appena scegli. Al massimo 12 domande, senza limite di tempo. Il risultato completo si vede con un account gratuito.';
         return;
       }
@@ -428,7 +444,7 @@ const nome = m.breve || m.titolo;
       r.hidden = false;
     }).catch((e) => {
       righe.forEach((b) => { b.disabled = true; });
-      blocco.hidden = true; radice.querySelector<HTMLElement>('.sg-oppure')!.hidden = true;
+      radice.querySelector<HTMLElement>('[data-sg-parole]')!.hidden = true;
       if (e.codice === 'iscrizione') radice.querySelectorAll<HTMLElement>('.sg-righe, .sg-nota').forEach((x) => { x.hidden = true; });
       if (e.codice === 'iscrizione') {
         const dopo = encodeURIComponent(location.pathname);
