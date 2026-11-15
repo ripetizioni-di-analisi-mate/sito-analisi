@@ -686,6 +686,17 @@ const regoleStato = (usa ? materieUsa : MATERIE).filter((x) => x.prezzo).map((x)
   <script is:inline>
     // Percorso d'acquisto: solo conteggi anonimi (fine dell'anteprima vista, tasto di acquisto premuto), mostrati nella dashboard.
     (() => {
+      // Studio guidato: clic sui link che aprono il test (una volta al giorno per browser e materia, quindi circa le persone).
+      if (navigator.sendBeacon && !/^\/studio-guidato\//.test(location.pathname)) {
+        document.addEventListener('click', (ev) => {
+          const a = ev.target.closest && ev.target.closest('a[href*="/studio-guidato/"]');
+          const m = a && (a.getAttribute('href').match(/\/studio-guidato\/([a-z0-9-]+)/) || [])[1];
+          if (!m) return;
+          const chiave = 'sg-clic-' + new Date().toISOString().slice(0, 10) + '-' + m;
+          try { if (localStorage.getItem(chiave)) return; localStorage.setItem(chiave, '1'); } catch (_) {}
+          try { navigator.sendBeacon('/api/evento', new Blob([JSON.stringify({ e: 'sg-clic', m })], { type: 'application/json' })); } catch (_) {}
+        }, true);
+      }
       const pezzi = location.pathname.replace(/^\/en(?=\/)/, '').split('/');
       const materia = pezzi[1] === 'videocorsi' ? (pezzi[2] ? 'video-' + pezzi[2].replace(/\.html$/, '') : '') : pezzi[1];
       if (!materia || !navigator.sendBeacon) return;

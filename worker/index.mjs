@@ -552,7 +552,7 @@ export class Archivio {
         const percorsoAcquisto = (giorni) => {
           const da = `date('now', '-${giorni - 1} days')`;
           const pagine = this.righe(`SELECT sezione, SUM(n) AS n FROM pagine WHERE giorno >= ${da} GROUP BY sezione`);
-          const ev = this.righe(`SELECT evento, materia, SUM(n) AS n FROM eventi WHERE giorno >= ${da} AND evento != 'campagna' GROUP BY evento, materia`);
+          const ev = this.righe(`SELECT evento, materia, SUM(n) AS n FROM eventi WHERE giorno >= ${da} AND evento IN ('fine-anteprima', 'tasto') GROUP BY evento, materia`);
           const pag = this.righe(`SELECT materia, COUNT(*) AS n FROM acquisti WHERE substr(creato, 1, 10) >= ${da} GROUP BY materia`);
           const r = {};
           const voce = (m) => (r[m] ??= { materia: m, pagine: 0, fine: 0, sblocca: 0, tasto: 0, pagati: 0 });
@@ -576,6 +576,7 @@ export class Archivio {
           sezioni: { 7: sezioni(7), 30: sezioni(30), 90: sezioni(90) },
           percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
           campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
+          studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE evento LIKE 'sg-%' AND giorno >= date('now', '-179 days') ORDER BY giorno`),
           ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`),
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
@@ -1128,8 +1129,8 @@ export default {
     if (p === '/api/evento' && POST) {
       const ua = req.headers.get('user-agent') || '';
       const { e, m } = await req.json().catch(() => ({}));
-      const materiaValida = typeof m === 'string' && (Object.hasOwn(PREZZI, m) || VIDEOCORSI.some((v) => 'video-' + v.slug === m));
-      if (ua && !ROBOT.test(ua) && (e === 'fine-anteprima' || e === 'tasto') && materiaValida) {
+      const materiaValida = typeof m === 'string' && (e === 'sg-clic' ? materieGuidate().includes(m) : (Object.hasOwn(PREZZI, m) || VIDEOCORSI.some((v) => 'video-' + v.slug === m)));
+      if (ua && !ROBOT.test(ua) && (e === 'fine-anteprima' || e === 'tasto' || e === 'sg-clic') && materiaValida) {
         ctx.waitUntil(aDO(env, '/evento', { giorno: new Date().toISOString().slice(0, 10), evento: e, materia: m }).catch(() => {}));
       }
       return new Response(null, { status: 204 });
@@ -1200,7 +1201,9 @@ export default {
       if (!io && !ospite) return json({ errore: 'Lo Studio guidato è riservato agli iscritti: crea un account gratuito o accedi.', codice: 'iscrizione' }, 401, nessunaCache);
       if (io && !io.gm && env.STUDIO_GUIDATO_TUTTI !== '1') return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, nessunaCache);
       const titoli = titoliGuidati();
-      const chi = io ? io.email : 'ospite';
+      // conteggi anonimi per la dashboard (tabella eventi): test iniziati, finiti, risultati sbloccati creando l'account
+      const contaSg = (evento, materia) => ctx.waitUntil(aDO(env, '/evento', { giorno: new Date().toISOString().slice(0, 10), evento, materia }).catch(() => {}));
+      const chi =io ? io.email : 'ospite';
       if (ospite && p === '/api/studio-guidato') return json({ ospite: true, ultimo: null }, 200, nessunaCache);
       if (p === '/api/studio-guidato/rivendica') {
         // Dopo l'iscrizione: il test fatto da ospite (stato firmato, valido 48 ore) diventa un esito dell'account.
@@ -1210,6 +1213,7 @@ export default {
         if (!tok?.fine || tok.e !== 'ospite' || !tok.s?.m || Date.now() - (tok.t || 0) > 48 * 3600 * 1000) return json({ errore: 'Il test non è più disponibile. Puoi rifarlo.' }, 400, nessunaCache);
         if (!materieGuidate().includes(tok.s.m)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
         const e = esitoGuidato(tok.s, titoli);
+        contaSg('sg-rivendica', tok.s.m);
         if (e.domande) await aDO(env, '/sg-salva', { email: io.email, materia: tok.s.m, esito: e });
         const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia: tok.s.m });
         delete e.viste; delete e.risposte;
@@ -1256,6 +1260,7 @@ export default {
         const argomento = typeof corpo.argomento === 'string' ? corpo.argomento : null;
         const { storico } = io ? await aDO(env, '/sg-storico', { email: io.email, materia }) : { storico: [] };
         const viste = storico.slice(0, 3).flatMap((e) => e.viste || []);
+        contaSg(io ? 'sg-inizia' : 'sg-inizia-ospite', materia);
         stato = creaStato({ materia, argomento, ricontrollo: Boolean(io) && corpo.ricontrollo === true, precedente: storico[0] || null, viste, priorita: io && Array.isArray(corpo.priorita) ? corpo.priorita.slice(0, 3) : [] });
       } else {
         const tok = typeof corpo.token === 'string' ? await leggiToken(env, corpo.token) : null;
@@ -1268,6 +1273,7 @@ export default {
         registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta), d ? scelta : null, scelta === null ? null : corpo.sicuro === true ? true : corpo.sicuro === false ? false : null);
       }
       const q = prossima(stato);
+      if (!q) contaSg(io ? 'sg-fine' : 'sg-fine-ospite', stato.m);
       if (!q && !io) {
         // Ospite: solo quanti punti sono emersi e il primo capitolo; il resto dopo l'iscrizione (/rivendica).
         const e = esitoGuidato(stato, titoli);
