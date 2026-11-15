@@ -4279,11 +4279,11 @@
     "t": "scelta",
     "opzioni": [
      "$F_2 < m g$",
-     "$F_2 < m g$ e $F_1 \\le m g - F_2$",
+     "$F_2 < m g$ e $|F_1| \\le m g - F_2$",
      "$F_2 < m g$ e $F_1 \\le m g$",
      "$F_1 \\le F_2$"
     ],
-    "v": "$F_2 < m g$ e $F_1 \\le m g - F_2$"
+    "v": "$F_2 < m g$ e $|F_1| \\le m g - F_2$"
    }
   ]
  },
