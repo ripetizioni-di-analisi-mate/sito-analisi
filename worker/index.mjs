@@ -27,6 +27,7 @@ import { anteprimaBiologia } from '../src/data/semestre-filtro.mjs';
 import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
+import { ROBOT, fonteIngresso, fonteStorica, cookieAttribuzione, fonteIscrizione, riepilogoFonti } from './provenienza.mjs';
 import { MATERIE } from '../src/data/materie.ts';
 import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
 import { raccontaInStreaming, capisciBlocco, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
@@ -113,35 +114,6 @@ function leggiCookie(req, nome) {
   return m ? decodeURIComponent(m[1]) : null;
 }
 
-// ---------- provenienza dei visitatori ----------
-// Un "ingresso" è una pagina aperta arrivando da fuori dal sito (referer esterno o assente).
-// Il browser interno di Instagram si riconosce dallo user agent anche quando il referer manca.
-const ROBOT = /bot|crawl|spider|slurp|preview|facebookexternalhit|meta-externalagent|headless|lighthouse|curl|wget|python|httpclient/i;
-const FONTI = [
-  [/(^|\.)instagram\.com$/, 'Instagram'], [/(^|\.)google\./, 'Google'], [/(^|\.)bing\.com$/, 'Bing'],
-  [/(^|\.)(facebook\.com|fb\.com|fb\.me)$/, 'Facebook'], [/(^|\.)tiktok\.com$/, 'TikTok'],
-  [/(^|\.)(whatsapp\.com|wa\.me)$/, 'WhatsApp'], [/(^|\.)(t\.co|x\.com|twitter\.com)$/, 'X'],
-  [/(^|\.)(youtube\.com|youtu\.be)$/, 'YouTube'], [/(^|\.)duckduckgo\.com$/, 'DuckDuckGo'],
-  [/(^|\.)(chatgpt\.com|openai\.com)$/, 'ChatGPT'], [/(^|\.)perplexity\.ai$/, 'Perplexity'], [/(^|\.)claude\.ai$/, 'Claude'],
-  [/(^|\.)(t\.me|telegram\.org)$/, 'Telegram'], [/(^|\.)ripetizioni-di-analisi-matematica\.it$/, 'Altro sito di Carmine'],
-];
-function fonteIngresso(req, url) {
-  const ua = req.headers.get('user-agent') || '';
-  if (!ua || ROBOT.test(ua)) return null;
-  let host = '';
-  try { host = new URL(req.headers.get('referer') || '').hostname.replace(/^www\./, ''); } catch { /* nessun referer */ }
-  if (host && host === url.hostname.replace(/^www\./, '')) return null; // navigazione interna
-  const utm = (url.searchParams.get('utm_source') || '').toLowerCase();
-  // annunci Google Ads: parametro gclid aggiunto da Google, oppure utm_source=google-ads nel suffisso dell'URL finale
-  if (url.searchParams.has('gclid') || /^(google-ads|adwords)$/.test(utm)) return 'Google Ads';
-  if (/^(ig|instagram)$/.test(utm) || /Instagram/.test(ua)) return 'Instagram';
-  if (/FBAN|FBAV|FB_IAB/.test(ua)) return 'Facebook';
-  if (utm) return utm.slice(0, 30);
-  if (!host) return 'Diretto o app';
-  for (const [re, nome] of FONTI) if (re.test(host)) return nome;
-  return host.slice(0, 60);
-}
-
 // ---------- password ----------
 async function hashPassword(password, saleB64, iterazioni = ITERAZIONI_PBKDF2) {
   const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
@@ -189,6 +161,7 @@ export class Archivio {
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN nome TEXT'); } catch { /* già presente */ }
     // e la provenienza della prima visita (Instagram, Google, …)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte TEXT'); } catch { /* già presente */ }
+    try { this.sql.exec('ALTER TABLE utenti ADD COLUMN fonte_conversione TEXT'); } catch { /* già presente */ }
     // il corso di gruppo già seguito con Carmine, dichiarato all'iscrizione (facoltativo)
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN corso TEXT'); } catch { /* già presente */ }
     try { this.sql.exec('ALTER TABLE utenti ADD COLUMN premium_manuale TEXT'); } catch { /* già presente */ }
@@ -324,8 +297,8 @@ export class Archivio {
 
       case '/utente-crea': {
         if (this.riga('SELECT email FROM utenti WHERE email = ?', c.email)) return Response.json({ ok: false, esiste: true });
-        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)',
-          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.corso || null, Date.now(), linguaEmail(c.lingua));
+        this.sql.exec('INSERT INTO utenti (email, hash, sale, iterazioni, versione, creato, ultimo_accesso, nome, fonte, fonte_conversione, corso, attivo, lingua) VALUES (?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?)',
+          c.email, c.hash, c.sale, c.iterazioni, ora, ora, c.nome || null, c.fonte || null, c.fonteConversione || null, c.corso || null, Date.now(), linguaEmail(c.lingua));
         return Response.json({ ok: true, versione: 1 });
       }
       case '/utente-esito-login':
@@ -580,7 +553,9 @@ export class Archivio {
           percorsoAcquisto: { 7: percorsoAcquisto(7), 30: percorsoAcquisto(30), 90: percorsoAcquisto(90) },
           campagne: { 7: campagne(7), 30: campagne(30), 90: campagne(90) },
           studioGuidato: this.righe(`SELECT giorno, evento, materia, n FROM eventi WHERE evento LIKE 'sg-%' AND giorno >= date('now', '-179 days') ORDER BY giorno`),
-          ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`),
+          ingressi: this.righe(`SELECT giorno, fonte, n FROM ingressi WHERE giorno >= date('now', '-179 days') ORDER BY giorno`)
+            .map((r) => ({ ...r, fonte: fonteStorica(r.fonte, r.giorno) })),
+          provenienze: { 7: riepilogoFonti(this, 7), 30: riepilogoFonti(this, 30), 90: riepilogoFonti(this, 90) },
           fontiIscritti: this.righe(`SELECT COALESCE(u.fonte, 'Non registrata') AS fonte, COUNT(*) AS iscritti,
                               COUNT(DISTINCT a.email) AS paganti FROM utenti u
                               LEFT JOIN (SELECT DISTINCT email FROM acquisti) a ON a.email = u.email
@@ -589,7 +564,7 @@ export class Archivio {
           totali: this.righe('SELECT materia, COUNT(*) AS vendite, SUM(importo) AS incasso FROM acquisti GROUP BY materia'),
           // livello e studio di ogni studente (EXP totali in utenti.exp; minuti e risposte dalle tabelle dei livelli)
           // attivita = ultima volta che lo studente ha usato il sito con l'account (pagine, studio, domande), in millisecondi
-          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.corso, u.creato, u.ultimo_accesso, u.premium_manuale, u.gm_manuale, GROUP_CONCAT(a.materia, ', ') AS materie,
+          utenti: this.righe(`SELECT u.email, u.nome, u.fonte, u.fonte_conversione, u.corso, u.creato, u.ultimo_accesso, u.premium_manuale, u.gm_manuale, GROUP_CONCAT(a.materia, ', ') AS materie,
                               MAX(COALESCE(u.attivo, 0), COALESCE((SELECT MAX(ultimo_uso) FROM dispositivi d WHERE d.email = u.email), 0),
                                   COALESCE((SELECT MAX(ultimo) FROM sessioni s WHERE s.email = u.email), 0),
                                   COALESCE((SELECT MAX(ultimo) FROM studio x WHERE x.email = u.email), 0),
@@ -601,7 +576,8 @@ export class Archivio {
                               LEFT JOIN (SELECT email, COUNT(*) AS risposte, SUM(corretta) AS corrette FROM risposte GROUP BY email) rs ON rs.email = u.email
                               GROUP BY u.email ORDER BY u.creato DESC LIMIT 1000`).map((u) => {
             const l = livelloDa(u.exp);
-            return { ...u, livello: l.livello, fascia: l.fascia, perc: l.perc, mancano: l.mancano, rango: rangoDi(l.livello) };
+            return { ...u, primaFonte: fonteStorica(u.fonte, u.creato), fonte: fonteStorica(u.fonte_conversione || u.fonte, u.creato),
+              livello: l.livello, fascia: l.fascia, perc: l.perc, mancano: l.mancano, rango: rangoDi(l.livello) };
           }),
           // uno stemma per rango (pieno), per la colonna Livello e la scheda dello studente
           stemmi: Array.from({ length: 10 }, (_, i) => stemmaSVG(i + 1, { perc: 100, id: 'adm' })),
@@ -1092,7 +1068,8 @@ export default {
       const sale = nuovoSale();
       const hash = await hashPassword(password, sale);
       const fonte = (leggiCookie(req, 'fonte') || '').slice(0, 60) || null;
-      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, corso, lingua });
+      const fonteConversione = fonteIscrizione(req, fonte);
+      const r = await aDO(env, '/utente-crea', { email, hash, sale, iterazioni: ITERAZIONI_PBKDF2, nome: pulisciNome(nome), fonte, fonteConversione, corso, lingua });
       if (!r.ok) return json({ errore: lingua === 'fr' ? 'Un compte est déjà associé à cette adresse. Connecte-toi.' : lingua === 'es' ? 'Ya existe una cuenta con este correo. Inicia sesión.' : lingua === 'de' ? 'Es gibt bereits ein Konto mit dieser E-Mail-Adresse. Melde dich an.' : 'Esiste già un account con questa email. Accedi.' }, 409);
       // arrivato con il link d'invito di un altro studente: 15% sul primo acquisto di una materia
       const invito = leggiCookie(req, 'invito');
@@ -1665,7 +1642,7 @@ export default {
       200, { 'cache-control': 'no-store' });
 
     // ===== dashboard =====
-    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(usaProducts.map(v => v.slug), Object.keys(VIDEO)), MATERIE.concat(usaProducts.map(v => ({ ...v, breve: v.titolo, colore: '#2e6b63', argomenti: [] })), VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] })))), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
+    if (p === '/admin') return new Response(paginaAdmin(A_PAGAMENTO.concat(usaProducts.map(v => v.slug), Object.keys(VIDEO)), MATERIE.concat(usaProducts.map(v => ({ ...v, breve: v.titolo, colore: '#2e6b63', argomenti: [] })), VIDEOCORSI.map((v) => ({ slug: chiaveVideo(v.slug), titolo: v.titolo, breve: `Videocorso ${v.breve}`, colore: v.colore, prezzo: v.prezzo, argomenti: [] }))), url.searchParams.get('lang') === 'en' ? 'en' : 'it'), { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store', 'x-robots-tag': 'noindex' } });
     if (p.startsWith('/admin/api/')) {
       const pwGiusta = env.ADMIN_PASSWORD || 'cambiami';
       if (p === '/admin/api/login' && POST) {
@@ -1980,6 +1957,8 @@ export default {
       if (fonte && !leggiCookie(req, 'fonte')) {
         try { risposta.headers.append('set-cookie', `fonte=${encodeURIComponent(fonte)}; Path=/; Max-Age=7776000; HttpOnly; Secure; SameSite=Lax`); } catch { /* intestazioni bloccate */ }
       }
+      const attribuzione = cookieAttribuzione(fonte);
+      if (attribuzione) risposta.headers.append('set-cookie', attribuzione);
     }
     return risposta;
   },
