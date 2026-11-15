@@ -291,3 +291,31 @@ test('errori tipici: le risposte sbagliate diagnosticate compaiono nell\'esito e
   assert.ok(e.lacune.some((l) => l.errori.length), 'errori assenti dalle lacune');
   if (e.errori[0].volte >= 2) assert.equal(e.ricorrente.k, e.errori[0].k);
 });
+
+// «Quanto sei sicuro?» (P4) e «Cosa ti blocca?» (P2), 15/11/2026.
+test('giusta tirando a indovinare: seconda domanda e niente «ok» se anche la seconda è a caso', () => {
+  const s = creaStato({ materia: 'analisi-1', argomento: 'limiti' });
+  const q1 = prossima(s); registra(s, true, 0, false);
+  const q2 = prossima(s);
+  assert.equal(q2.k, q1.k, 'serve una seconda domanda sulla stessa abilità');
+  registra(s, true, 0, false);
+  assert.equal(s.u[0].st, 'incerta');
+  const s2 = creaStato({ materia: 'analisi-1', argomento: 'limiti' });
+  prossima(s2); registra(s2, true, 0, false); prossima(s2); registra(s2, true, 0, true);
+  assert.equal(s2.u[0].st, 'ok');
+});
+test('sbagliata con sicurezza: convinzione e prima nel percorso', () => {
+  const s = creaStato({ materia: 'analisi-1', argomento: 'limiti' });
+  let q, n = 0;
+  while ((q = prossima(s))) { registra(s, false, 0, n === 3); n++; }
+  const e = esito(s, titoli);
+  assert.ok(e.lacune.some((l) => l.convinzione));
+  const prime = e.lacune.filter((l) => l.tipo === 'abilita');
+  assert.ok(prime[0].convinzione || e.lacune.findIndex((l) => l.convinzione) <= e.lacune.findIndex((l) => l.tipo === 'abilita' && !l.convinzione));
+});
+test('priorità di «Cosa ti blocca?»: le abilità scelte vengono chieste per prime', () => {
+  const s = creaStato({ materia: 'analisi-1', argomento: 'limiti', priorita: [3, 99, 1] });
+  assert.equal(prossima(s).k, 'analisi-1/limiti#3');
+  registra(s, true, 0, true);
+  assert.equal(prossima(s).k, 'analisi-1/limiti#1');
+});

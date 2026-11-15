@@ -41,6 +41,7 @@ export function banca(materia) {
 // Chiave di un'abilità: «materia/argomento#indice».
 const chiave = (m, a, i) => `${m}/${a}#${i}`;
 const parti = (k) => { const [ma, i] = k.split('#'); const [m, a] = ma.split('/'); return { m, a, i: Number(i), ma }; };
+export const abilitaDi = (m, a) => CLASSI.abilita?.[`${m}/${a}`] || [];
 export const nomeAbilita = (k) => { const p = parti(k); return CLASSI.abilita?.[p.ma]?.[p.i] ?? null; };
 const basiDi = (k) => { const p = parti(k); return (RIMANDI[p.ma]?.[p.i] || '||').split('|')[2].split(',').filter(Boolean); };
 
@@ -48,12 +49,17 @@ const basiDi = (k) => { const p = parti(k); return (RIMANDI[p.ma]?.[p.i] || '||'
 const unita = (k, tipo, padre = null) => ({ k, tipo, r: [], st: null, padre });
 
 // Stato iniziale. argomento = capitolo scelto (null: lo cerca il test); ricontrollo = solo le lacune di «precedente».
-export function creaStato({ materia, argomento = null, ricontrollo = false, precedente = null, viste = [] }) {
+// priorita = indici delle abilità da verificare per prime (scelte da «Cosa ti blocca?», worker/studio-guidato-ia.mjs).
+export function creaStato({ materia, argomento = null, ricontrollo = false, precedente = null, viste = [], priorita = [] }) {
   const base = { v: VERSIONE_SG, m: materia, a: null, modo: 'cerca', c: 0, u: [], i: 0, n: 0, n0: 0, cerca: [], viste: viste.slice(-300), usate: [], q: null, t: Date.now() };
   if (ricontrollo && precedente?.v === VERSIONE_SG && precedente.lacune?.length) {
     return { ...base, modo: 'ricontrollo', a: precedente.capitolo || null, u: precedente.lacune.slice(0, REGOLE_SG.maxDomandeTest).map((l) => unita(l.k, 'ric', l.tipo)) };
   }
-  if (argomento && capitoli(materia).includes(argomento)) return { ...base, modo: 'capitolo', a: argomento, u: unitaDelCapitolo(materia, argomento) };
+  if (argomento && capitoli(materia).includes(argomento)) {
+    const u = unitaDelCapitolo(materia, argomento);
+    const prime = [...new Set(priorita)].filter((i) => Number.isInteger(i) && i >= 0 && i < u.length).slice(0, 3);
+    return { ...base, modo: 'capitolo', a: argomento, u: [...prime.map((i) => u[i]), ...u.filter((_, i) => !prime.includes(i))] };
+  }
   return base;
 }
 const unitaDelCapitolo = (m, a) => (CLASSI.abilita?.[`${m}/${a}`] || []).map((_, i) => unita(chiave(m, a, i), 'ab'));
@@ -103,7 +109,8 @@ export function prossima(stato) {
       const p = parti(u.k);
       const prima = REGOLE_SG.livelloPrima;
       // Seconda domanda: più semplice della prima, se esiste; altrimenti dello stesso livello.
-      const livelli = u.r.length ? [1, 2, 3].filter((l) => l <= u.r[0][1]).sort((x, y) => (x === u.r[0][1]) - (y === u.r[0][1]) || y - x) : [prima, 1, 3];
+      // Dopo una risposta giusta data tirando a indovinare: una domanda dello stesso livello, per conferma.
+      const livelli = u.dubbio ? [u.r[0][1], 1, 3] : u.r.length ? [1, 2, 3].filter((l) => l <= u.r[0][1]).sort((x, y) => (x === u.r[0][1]) - (y === u.r[0][1]) || y - x) : [prima, 1, 3];
       const q = scegli(stato, u.k, livelli);
       if (q) { stato.q = { m: p.m, id: q.id, liv: q.livello, k: u.k }; return stato.q; }
       u.st = u.r.length ? 'incerta' : 'nv';
@@ -130,7 +137,11 @@ const datiErrore = (chiaveErrore) => {
 
 // Registra la risposta alla domanda corrente (ok = true/false; «Non lo so» vale false).
 // scelta = indice della risposta scelta (null per «Non lo so»): serve alla diagnosi dell'errore.
-export function registra(stato, ok, scelta = null) {
+// sicuro = true «Sono sicuro», false «Sto tirando a indovinare», null se lo studente non l'ha indicato (P4, 15/11/2026).
+// Giusta tirando a indovinare: l'abilità non è ancora verificata (seconda domanda dello stesso livello).
+// Sbagliata con sicurezza: convinzione errata, che va per prima nel percorso.
+export function registra(stato, ok, scelta = null, sicuro = null) {
+  const sic = sicuro === true ? 1 : sicuro === false ? 0 : null;
   const q = stato.q;
   if (!q) return;
   stato.usate.push(`${q.m}:${q.id}`);
@@ -146,7 +157,8 @@ export function registra(stato, ok, scelta = null) {
     stato.u = unitaDelCapitolo(stato.m, a);
     const j = stato.u.findIndex((u) => u.k === q.k);
     const [u] = stato.u.splice(j, 1);
-    u.r.push([q.id, q.liv, 0, erroreDi(q.m, q.id, scelta)]);
+    u.r.push([q.id, q.liv, 0, erroreDi(q.m, q.id, scelta), sic]);
+    if (sic === 1) u.conv = true;
     stato.u.unshift(u);
     stato.i = 0;
     if (scorta(stato) <= 0) u.st = 'incerta';
@@ -154,14 +166,17 @@ export function registra(stato, ok, scelta = null) {
   }
   const u = stato.u[stato.i];
   if (!u) return;
-  u.r.push([q.id, q.liv, ok ? 1 : 0, ok ? null : erroreDi(q.m, q.id, scelta)]);
-  if (u.tipo !== 'ab') { u.st = ok ? 'ok' : 'lacuna'; return; }
+  u.r.push([q.id, q.liv, ok ? 1 : 0, ok ? null : erroreDi(q.m, q.id, scelta), sic]);
+  if (!ok && sic === 1) u.conv = true;
+  if (u.tipo !== 'ab') { u.st = ok ? (sic === 0 ? 'incerta' : 'ok') : 'lacuna'; return; }
   if (u.r.length === 1) {
-    if (ok) u.st = 'ok';
+    if (ok && sic !== 0) u.st = 'ok';
     else if (scorta(stato) <= 0) u.st = 'incerta';
+    else if (ok) u.dubbio = true;
     return;
   }
-  if (ok) { u.st = 'incerta'; return; }
+  if (ok) { u.st = u.dubbio && sic !== 0 ? 'ok' : 'incerta'; return; }
+  // Anche una risposta giusta data tirando a indovinare seguita da una sbagliata è una lacuna.
   u.st = 'lacuna';
   // Lacuna: si verifica la base da cui dipende, se non è già nel test e resta una domanda di scorta.
   const nuove = [];
@@ -199,7 +214,8 @@ export function esito(stato, titoli) {
     const p = parti(u.k);
     return { k: u.k, m: p.m, a: p.a, nome: nomeAbilita(u.k), capitolo: tit(p.m, p.a), materia: nomeMateria(p.m), stato: statoVoce };
   };
-  const chiuse = stato.u.filter((u) => u.r.length);
+  // Le abilità con una risposta sbagliata data con sicurezza vengono prima, a parità di gruppo.
+  const chiuse = stato.u.filter((u) => u.r.length).sort((x, y) => Boolean(y.conv) - Boolean(x.conv));
   const statoDi = (u) => u.st ?? (u.r.at(-1)?.[2] ? 'ok' : 'incerta');
   const abilita = stato.u.filter((u) => u.tipo !== 'base').map((u) => voce(u, u.r.length ? statoDi(u) : 'nv'));
   const lacune = [];
@@ -207,7 +223,7 @@ export function esito(stato, titoli) {
     if (lacune.some((l) => l.k === u.k)) return;
     // «per»: le abilità del capitolo che dipendono da questa e sono risultate lacune.
     const per = stato.u.filter((x) => x.st === 'lacuna' && x.k !== u.k && basiDi(x.k).includes(u.k)).map((x) => nomeAbilita(x.k));
-    lacune.push({ ...voce(u, statoDi(u)), tipo, per, sbagliate: u.r.filter((r) => !r[2]).length, chieste: u.r.length, errori: erroriDi([u]), ...rimandi(u.k) });
+    lacune.push({ ...voce(u, statoDi(u)), tipo, per, sbagliate: u.r.filter((r) => !r[2]).length, chieste: u.r.length, errori: erroriDi([u]), convinzione: Boolean(u.conv), indovinate: u.r.filter((r) => r[2] && r[4] === 0).length, ...rimandi(u.k) });
   };
   // 1. Basi sbagliate (fuori dal capitolo). 2. Abilità del capitolo che sono base di altre lacune.
   // 3. Le altre lacune nell'ordine del programma. 4. Le abilità incerte.
@@ -238,6 +254,8 @@ export function esito(stato, titoli) {
     const altri = lacune.length - 1;
     if (altri) sintesi += ` ${altri === 1 ? 'C’è un altro punto' : `Ci sono altri ${altri} punti`} da riprendere${gravi.length ? '' : ', tutti da consolidare'}.`;
   }
+  const convinta = lacune.find((l) => l.convinzione);
+  if (convinta && stato.modo !== 'ricontrollo') sintesi += ` In «${convinta.nome}» hai sbagliato una risposta data con sicurezza.`;
   if (ricorrente && !ricorrente.nome.includes('$')) sintesi += ` L’errore che ricorre nelle risposte è «${ricorrente.nome[0].toLowerCase()}${ricorrente.nome.slice(1)}».`;
   return {
     v: VERSIONE_SG, materia: stato.m, modo: stato.modo, capitolo: stato.a, titoloCapitolo: cap, quando: Date.now(), domande: stato.n,
@@ -281,6 +299,24 @@ export function archivioStudioGuidato(ar, pathname, c) {
   return null;
 }
 
+// Perché il test propone questa domanda (riga sopra la domanda, P «più dinamico» del 15/11/2026).
+function motivo(stato, q, titoli) {
+  const nome = (k) => `«${nomeAbilita(k)}»`;
+  if (stato.modo === 'cerca') {
+    const a = capitoli(stato.m)[stato.c];
+    return stato.n ? `Il capitolo precedente non ha dato problemi. Ora una domanda su ${`«${titoli?.[stato.m]?.[a] || a}»`}.` : 'Una domanda per ogni capitolo, in ordine, fino al primo da riprendere.';
+  }
+  const u = stato.u[stato.i];
+  if (!u) return null;
+  if (u.tipo === 'ric') return `Ricontrollo di ${nome(u.k)}, una lacuna del test precedente.`;
+  if (u.tipo === 'base') return `Questa domanda verifica ${nome(u.k)}, che serve per ${nome(u.padre)}.`;
+  if (u.r.length && u.dubbio) return `La risposta su ${nome(u.k)} era stata data tirando a indovinare, quindi una seconda domanda dello stesso livello la verifica.`;
+  if (u.r.length) return `La risposta su ${nome(u.k)} non era corretta, quindi questa domanda è più semplice.`;
+  const fatte = stato.u.filter((x) => x.tipo === 'ab' && x.r.length).length;
+  const tot = stato.u.filter((x) => x.tipo === 'ab').length;
+  return `Abilità ${Math.min(fatte + 1, tot)} di ${tot} · ${nome(u.k)}`;
+}
+
 // Domanda pronta per il browser: testo e risposte (la corretta resta nel Worker).
 export function domandaPubblica(q, dati, titoli, stato) {
   const [argomento] = q.id.split('/');
@@ -292,5 +328,6 @@ export function domandaPubblica(q, dati, titoli, stato) {
     // base: domanda di un'altra materia (Precorso, oppure Analisi 1 per Analisi 2).
     argomento: titoli?.[q.m]?.[argomento] || argomento, base: q.m !== stato.m, materiaBase: q.m !== stato.m ? (titoli?.nomi?.[q.m] || q.m) : null,
     fase: stato.modo === 'cerca' ? 'cerca' : stato.modo === 'ricontrollo' ? 'ricontrollo' : stato.u[stato.i]?.tipo === 'base' ? 'base' : 'capitolo',
+    abilita: nomeAbilita(q.k), motivo: motivo(stato, q, titoli),
   };
 }

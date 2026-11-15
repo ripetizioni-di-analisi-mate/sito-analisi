@@ -20,6 +20,7 @@ Contenuto
 - Se un errore compare in almeno due risposte («volte» ≥ 2), indicalo come errore ricorrente e riporta il fatto corretto in una frase.
 - Se non ci sono lacune, dillo in due frasi e indica la simulazione d'esame come passo successivo.
 - Se lo studente ha risposto «Non lo so», non inventare un errore: di' soltanto che l'abilità va ripresa.
+- Se una lacuna ha «sbagliataConSicurezza»: true, lo studente era convinto della risposta sbagliata, quindi indicalo come il primo punto da chiarire. Se ci sono risposte giuste date tirando a indovinare («giusteTirandoAIndovinare»), dillo in poche parole, perché quelle risposte non contano come abilità acquisite.
 
 Stile (regole del docente, obbligatorie)
 - Italiano matematico da manuale universitario, frasi complete con soggetto e verbo, lessico tecnico canonico (un'ipotesi è soddisfatta, un teorema si applica).
@@ -41,6 +42,7 @@ export function datiRacconto(e) {
       capitolo: l.capitolo, materia: l.materia, base: l.tipo === 'base', baseDi: l.per || [],
       risposteSbagliate: l.sbagliate, domandeChieste: l.chieste,
       errori: (l.errori || []).map((x) => ({ errore: x.nome, fatto: x.fatto, volte: x.volte })),
+      sbagliataConSicurezza: Boolean(l.convinzione), giusteTirandoAIndovinare: l.indovinate || 0,
       paragrafi: (l.teoria || []).map((t) => t.titolo),
     })),
     erroreRicorrente: e.ricorrente ? { errore: e.ricorrente.nome, fatto: e.ricorrente.fatto, volte: e.ricorrente.volte } : null,
@@ -139,6 +141,61 @@ export function raccontaInStreaming(env, esito, { salva, conta, fetchFn = fetch 
   return new Response(readable, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store', 'x-accel-buffering': 'no' } });
 }
 const corto = (m) => m.split('/').pop();
+
+// ---------- «Cosa ti blocca?» (P2) ----------
+export const ISTRUZIONI_BLOCCO = `Sei Pi, l'assistente del sito ripetizionidianalisi.com. Uno studente descrive in una frase che cosa lo blocca in una materia. Ricevi la frase e l'elenco dei capitoli della materia, ciascuno con le sue abilità numerate da 0. Scegli il capitolo in cui sta la difficoltà e da 1 a 3 abilità di quel capitolo da verificare per prime, nell'ordine in cui conviene verificarle (prima quella più vicina alla causa del problema).
+
+Rispondi SOLO con un oggetto JSON, senza altro testo:
+{"capitolo":"<slug del capitolo>","abilita":[<indici>],"frase":"<una o due frasi per lo studente>"}
+
+La frase dice in modo preciso che cosa hai capito del problema e che cosa verificherà il test, in seconda persona singolare, in italiano matematico corretto, con tono calmo. Esempio: «La difficoltà riguarda il riconoscimento delle forme indeterminate. Il test parte dalle forme 0/0 e poi verifica i limiti notevoli.» Niente consigli, niente frasi di riempimento («Ottima domanda», «Capisco»), niente formule, niente lineette lunghe, niente punti esclamativi. Non promettere risultati.
+Se la frase non riguarda la materia o non si capisce, rispondi {"capitolo":null,"abilita":[],"frase":"<una frase che chiede di scegliere il capitolo dall'elenco>"}.
+Usa soltanto slug e indici presenti nell'elenco.`;
+
+// Restituisce { argomento, priorita, frase } oppure { argomento: null, frase } se la frase non si capisce; null se nessun modello risponde.
+export async function capisciBlocco(env, testo, catalogo, { conta, fetchFn = fetch } = {}) {
+  const elenco = catalogo.map((c) => `${c.slug} (${c.titolo}): ${c.abilita.map((a, i) => `${i} ${a}`).join('; ')}`).join('\n');
+  const messaggio = `Capitoli:\n${elenco}\n\nFrase dello studente: «${String(testo).replace(/[«»]/g, '"')}»`;
+  const valida = (t) => {
+    const m = String(t || '').match(/\{[\s\S]*\}/);
+    if (!m) return null;
+    let d; try { d = JSON.parse(m[0]); } catch { return null; }
+    const frase = pulisci(d.frase || '').trim().slice(0, 400);
+    const c = catalogo.find((x) => x.slug === d.capitolo);
+    if (!c) return frase ? { argomento: null, priorita: [], frase } : null;
+    const priorita = [...new Set((Array.isArray(d.abilita) ? d.abilita : []).filter((i) => Number.isInteger(i) && i >= 0 && i < c.abilita.length))].slice(0, 3);
+    return { argomento: c.slug, titolo: c.titolo, priorita, frase };
+  };
+  if (env.ANTHROPIC_API_KEY) {
+    for (const modello of MODELLI_CLAUDE) {
+      try {
+        const r = await fetchFn('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'x-api-key': env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+          body: JSON.stringify({ model: modello, max_tokens: 300, system: ISTRUZIONI_BLOCCO, messages: [{ role: 'user', content: messaggio }] }),
+        });
+        if (!r.ok) { console.log('sg-capisci', modello, r.status); continue; }
+        const d = await r.json();
+        await conta?.(modello, d.usage?.input_tokens || 0, d.usage?.output_tokens || 0);
+        const v = valida((d.content || []).map((x) => x.text || '').join(''));
+        if (v) return v;
+      } catch (e) { console.log('sg-capisci', modello, String(e?.message || e).slice(0, 200)); }
+    }
+  }
+  if (env.AI) {
+    for (const modello of MODELLI_GRATUITI) {
+      try {
+        const param = { messages: [{ role: 'system', content: ISTRUZIONI_BLOCCO }, { role: 'user', content: messaggio }], max_tokens: 300 };
+        const r = await env.AI.run(modello, /gemma/.test(modello) ? { ...param, chat_template_kwargs: { enable_thinking: false } } : param).catch(() => env.AI.run(modello, param));
+        const t = senzaRagionamento(testoAI(r));
+        await conta?.(corto(modello), Math.ceil((ISTRUZIONI_BLOCCO.length + messaggio.length) / 4), Math.ceil(t.length / 4));
+        const v = valida(t);
+        if (v) return v;
+      } catch (e) { console.log('sg-capisci', modello, String(e?.message || e).slice(0, 200)); }
+    }
+  }
+  return null;
+}
 
 // ---------- archivio (Durable Object) ----------
 export function creaTabelleIA(sql) {

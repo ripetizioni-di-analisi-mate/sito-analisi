@@ -28,8 +28,8 @@ import PREZZI from '../src/data/prezzi.json';
 import { schedeLibere } from '../src/data/schede-libere.mjs';
 import { paginaAdmin } from './admin.mjs';
 import { MATERIE } from '../src/data/materie.ts';
-import { materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
-import { raccontaInStreaming, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
+import { capitoli, abilitaDi, materieGuidate, materieDelleBasi, creaStato, prossima, registra, esito as esitoGuidato, progresso as progressoGuidato, creaTabelleStudioGuidato, archivioStudioGuidato, domandaPubblica } from './studio-guidato.mjs';
+import { raccontaInStreaming, capisciBlocco, creaTabelleIA, archivioIA } from './studio-guidato-ia.mjs';
 import { VIDEOCORSI, chiaveVideo } from '../src/data/videocorsi.ts';
 import { rispondiAssistente } from './assistente.mjs';
 import { eseguiBanco, paginaProve, provaSubito } from './pi-prove.mjs';
@@ -1189,10 +1189,12 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
     // ===== Studio guidato (test adattivo sulle lacune, anteprima riservata ai GM: worker/studio-guidato.mjs) =====
-    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi' || p === '/api/studio-guidato/racconto') {
+    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi' || p === '/api/studio-guidato/racconto' || p === '/api/studio-guidato/capisci') {
       const io = await utenteCollegato(env, req).catch(() => null);
-      if (!io) return json({ errore: 'Accedi con il tuo account per usare lo Studio guidato.' }, 401, { 'cache-control': 'no-store' });
-      if (!io.gm) return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, { 'cache-control': 'no-store' });
+      // Solo per chi ha un account, anche gratuito (scelta di Carmine del 15/11/2026). Finché STUDIO_GUIDATO_TUTTI non vale "1"
+      // resta un'anteprima per i GM; quando si apre, basta l'iscrizione.
+      if (!io) return json({ errore: 'Lo Studio guidato è riservato agli iscritti: crea un account gratuito o accedi.', codice: 'iscrizione' }, 401, { 'cache-control': 'no-store' });
+      if (!io.gm && env.STUDIO_GUIDATO_TUTTI !== '1') return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, { 'cache-control': 'no-store' });
       const titoli = titoliGuidati();
       const nessunaCache = { 'cache-control': 'no-store' };
       if (p === '/api/studio-guidato') {
@@ -1205,6 +1207,16 @@ export default {
       }
       if (!POST) return json({ errore: 'Metodo non consentito.' }, 405);
       const corpo = await req.json().catch(() => ({}));
+      if (p === '/api/studio-guidato/capisci') {
+        // «Cosa ti blocca?» (P2): la frase dello studente → capitolo e abilità da verificare per prime. La frase non si salva.
+        const materia = corpo.materia;
+        const testo = typeof corpo.testo === 'string' ? corpo.testo.trim().slice(0, 400) : '';
+        if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
+        if (testo.length < 4) return json({ errore: 'Scrivi in una frase che cosa ti blocca.' }, 400, nessunaCache);
+        const catalogo = capitoli(materia).map((a) => ({ slug: a, titolo: titoli[materia]?.[a] || a, abilita: abilitaDi(materia, a) }));
+        const r = await capisciBlocco(env, testo, catalogo, { conta: (modello, tin, tout) => aDO(env, '/sg-ia-conta', { modello, tin, tout }) });
+        return json(r || { errore: 'Non sono riuscito a interpretare la frase. Scegli il capitolo dall’elenco.' }, r ? 200 : 503, nessunaCache);
+      }
       if (p === '/api/studio-guidato/racconto') {
         // Commento dell'IA sull'ultimo esito salvato (worker/studio-guidato-ia.mjs). Una volta per esito: poi si rilegge.
         const materia = corpo.materia;
@@ -1226,7 +1238,7 @@ export default {
         const argomento = typeof corpo.argomento === 'string' ? corpo.argomento : null;
         const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
         const viste = storico.slice(0, 3).flatMap((e) => e.viste || []);
-        stato = creaStato({ materia, argomento, ricontrollo: corpo.ricontrollo === true, precedente: storico[0] || null, viste });
+        stato = creaStato({ materia, argomento, ricontrollo: corpo.ricontrollo === true, precedente: storico[0] || null, viste, priorita: Array.isArray(corpo.priorita) ? corpo.priorita.slice(0, 3) : [] });
       } else {
         const tok = typeof corpo.token === 'string' ? await leggiToken(env, corpo.token) : null;
         if (!tok?.s || tok.e !== io.email || !tok.s.q) return json({ errore: 'Il test è scaduto. Ricomincia dalla pagina della materia.' }, 400, nessunaCache);
@@ -1235,7 +1247,7 @@ export default {
         const dati = await domandeDi(env, q.m, 'it');
         const d = dati?.argomenti?.[q.id.split('/')[0]]?.find((x) => x.id === q.id);
         const scelta = Number.isInteger(corpo.scelta) ? corpo.scelta : null;
-        registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta), d ? scelta : null);
+        registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta), d ? scelta : null, scelta === null ? null : corpo.sicuro === true ? true : corpo.sicuro === false ? false : null);
       }
       const q = prossima(stato);
       if (!q) {

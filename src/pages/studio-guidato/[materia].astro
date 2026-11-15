@@ -20,6 +20,13 @@ const nome = m.breve || m.titolo;
   <div class="sg-pagina" id="studio-guidato" data-materia={materia} data-nome={nome}>
     <section data-sg-intro>
       <header class="sg-testa"><h1>Studio guidato</h1><p>Su che cosa ti sei bloccato?</p></header>
+      <form class="sg-blocco" data-sg-blocco>
+        <label for="sg-frase"><i aria-hidden="true">π</i><span><b>Scrivilo in una frase</b><small>Pi sceglie il capitolo e le domande da cui partire.</small></span></label>
+        <div class="sg-blocco-riga"><textarea id="sg-frase" rows="2" maxlength="400" placeholder="Per esempio: non capisco quando si può usare il teorema di De l’Hôpital"></textarea>
+          <button type="submit" class="sg-btn">Inizia</button></div>
+        <p class="sg-blocco-nota" data-sg-blocco-nota role="status"></p>
+      </form>
+      <p class="sg-oppure"><span>oppure scegli il capitolo</span></p>
       <div class="sg-righe">
         <button type="button" data-sg-arg="">
           <svg class="sg-bers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
@@ -28,15 +35,21 @@ const nome = m.breve || m.titolo;
       </div>
       <p class="sg-nota">Il test parte appena scegli. Al massimo 12 domande, senza limite di tempo.</p>
       <div class="sg-ripresa" data-sg-ripresa hidden></div>
+      <div class="sg-iscriviti" data-sg-iscriviti hidden>
+        <p><b>Lo Studio guidato è riservato agli iscritti.</b> Basta un account gratuito.</p>
+        <p><a class="sg-btn" data-sg-nuovo href="/accedi?nuovo=1">Crea un account gratuito</a> <a class="sg-link" data-sg-accedi href="/accedi">Accedi</a></p>
+      </div>
       <p class="sg-errore" data-sg-errore role="alert"></p>
     </section>
 
     <section data-sg-test hidden aria-label="Test in corso">
       <div class="sg-avanz"><div class="sg-barra" data-sg-barra aria-hidden="true"><span></span></div>
         <div class="sg-sopra"><span class="sg-arg"><b data-sg-argomento></b><em data-sg-provenienza hidden></em></span><span data-sg-numero></span></div></div>
+      <p class="sg-pi" data-sg-pi hidden><i aria-hidden="true">π</i><span data-sg-pi-testo></span></p>
       <form class="sg-dom" data-sg-form>
         <fieldset><legend class="q" data-sg-testo tabindex="-1"></legend><div class="sg-scelte" data-sg-scelte></div></fieldset>
-        <div class="sg-nav"><button type="button" class="sg-link" data-sg-nonso>Non lo so</button><button type="submit" class="sg-btn" data-sg-conferma disabled>Conferma</button></div>
+        <div class="sg-nav"><button type="button" class="sg-link" data-sg-nonso>Non lo so</button>
+          <div class="sg-conf"><button type="submit" class="sg-btn sec" data-sg-sicuro="0" disabled>Sto tirando a indovinare</button><button type="submit" class="sg-btn" data-sg-sicuro="1" disabled>Sono sicuro</button></div></div>
       </form>
     </section>
 
@@ -64,6 +77,11 @@ const nome = m.breve || m.titolo;
     .sg-errore{color:#9b2c1c;font-weight:600;margin:0}
     .sg-errore:empty{display:none}
     .sg-ripresa[hidden]{display:none}
+    .sg-iscriviti{padding:1rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px}
+    .sg-iscriviti[hidden],.sg-righe[hidden],.sg-nota[hidden]{display:none}
+    .sg-iscriviti p{margin:0 0 .7rem;font-size:.98rem}
+    .sg-iscriviti p:last-child{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.2rem}
+    .sg-iscriviti .sg-link{align-self:center}
     .sg-ripresa a{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.2rem 1rem;padding:.8rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem;color:var(--inchiostro);text-decoration:none}
     .sg-ripresa a:hover{border-color:var(--azione)}
     .sg-ripresa b{font-weight:600;color:var(--azione);white-space:nowrap}
@@ -78,17 +96,43 @@ const nome = m.breve || m.titolo;
     .sg-arg b{font-weight:400}
     .sg-dom{display:flex;flex-direction:column;gap:1.25rem}
     .sg-dom fieldset{border:0;margin:0;padding:0;min-width:0}
-    .sg-dom .q{font:700 1.55rem/1.35 var(--titoli);padding:.9rem 0 .2rem;margin:0 0 1rem;overflow-x:auto;max-width:100%}
+    .sg-dom .q{font:600 1.2rem/1.45 var(--titoli);padding:.9rem 0 .2rem;margin:0 0 1rem;overflow-x:auto;max-width:100%}
     .sg-dom .q p{margin:0 0 .5rem}
     .sg-scelte{display:flex;flex-direction:column;border-bottom:1px solid var(--riga);counter-reset:sc}
-    .sg-scelta{counter-increment:sc;position:relative;display:flex;align-items:center;gap:1rem;min-height:3.5rem;padding:.35rem .75rem;border-top:1px solid var(--riga);font:1.18rem var(--testo);cursor:pointer;overflow-x:auto}
-    .sg-scelta::before{content:counter(sc,upper-alpha);font:700 1.05rem var(--titoli);color:var(--azione);width:1rem;flex:none}
+    .sg-scelta{counter-increment:sc;position:relative;display:flex;align-items:center;gap:1rem;min-height:3.1rem;padding:.35rem .75rem;border-top:1px solid var(--riga);font:1.02rem var(--testo);cursor:pointer;overflow-x:auto}
+    .sg-scelta::before{content:counter(sc,upper-alpha);font:700 .95rem var(--titoli);color:var(--azione);width:1rem;flex:none}
     .sg-scelta input{position:absolute;opacity:0;pointer-events:none}
     .sg-scelta:hover{background:#fbf9f3}
     .sg-scelta:has(input:checked){background:#f4efe1;box-shadow:inset 3px 0 0 var(--azione)}
     .sg-scelta:has(input:focus-visible){outline:2px solid var(--azione);outline-offset:-2px}
     .sg-scelta p{margin:0}
-    .sg-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .sg-nav{display:flex;flex-wrap:wrap-reverse;align-items:center;justify-content:space-between;gap:.6rem 1rem}
+    .sg-conf{display:flex;flex-wrap:wrap;gap:.5rem}
+    .sg-conf>.sg-btn.sg-btn{height:2.75rem;padding:0 1.2rem;font-size:.95rem}
+    .sg-blocco{display:flex;flex-direction:column;gap:.6rem;padding:1rem 1.1rem;background:rgba(255,255,255,.7);border:1px solid var(--riga);border-radius:14px}
+    .sg-blocco label{display:flex;align-items:center;gap:.7rem}
+    .sg-blocco label span{display:flex;flex-direction:column}
+    .sg-blocco label b{font:700 1.05rem var(--titoli)}
+    .sg-blocco label small{font-size:.86rem;color:var(--inchiostro-2)}
+    .sg-pagina i[aria-hidden]{font:italic 700 .95rem var(--titoli);width:1.6rem;height:1.6rem;flex:none;border-radius:50%;display:grid;place-items:center;background:#e6efec;color:#1f5a4f}
+    .sg-blocco-riga{display:flex;gap:.6rem;align-items:flex-end}
+    .sg-blocco textarea{flex:1;min-width:0;resize:vertical;min-height:2.9rem;padding:.6rem .8rem;border:1px solid var(--riga);border-radius:10px;font:1rem/1.4 var(--ui);color:var(--inchiostro);background:#fff}
+    .sg-blocco textarea:focus{outline:2px solid var(--azione);outline-offset:-1px;border-color:transparent}
+    .sg-blocco-nota{margin:0;font-size:.9rem;color:var(--inchiostro-2)}
+    .sg-blocco-nota:empty{display:none}
+    .sg-blocco.pensa .sg-btn{opacity:.5;pointer-events:none}
+    .sg-oppure[hidden]{display:none}
+    .sg-oppure{display:flex;align-items:center;gap:.8rem;margin:0 0 -.6rem;font-size:.84rem;color:var(--inchiostro-2)}
+    .sg-oppure::before,.sg-oppure::after{content:'';flex:1;height:1px;background:var(--riga)}
+    .sg-pi{display:flex;align-items:flex-start;gap:.6rem;margin:0;font-size:.92rem;line-height:1.45;color:var(--inchiostro-2)}
+    .sg-pi[hidden]{display:none}
+    .sg-pi span{padding-top:.12rem}
+    [data-sg-test].sg-attesa .sg-dom{opacity:.35;transition:opacity .2s}
+    [data-sg-test].sg-attesa .sg-pi span::after{content:'';display:inline-block;width:1.2em;text-align:left;animation:sg-punti 1.2s steps(4) infinite}
+    @keyframes sg-punti{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+    .sg-entra{animation:sg-entra .32s ease-out}
+    @keyframes sg-entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @media(prefers-reduced-motion:reduce){.sg-entra{animation:none}}
     .sg-nav .sg-link{color:var(--inchiostro-2);align-self:center}
     .sg-sintesi{margin:0;padding-left:1rem;border-left:3px solid var(--azione);font:1.12rem/1.5 var(--testo)}
     .sg-commento{display:flex;flex-direction:column;gap:.4rem}
@@ -127,7 +171,11 @@ const nome = m.breve || m.titolo;
     .sg-dopo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:.85rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem}
     @media(max-width:640px){
       .sg-testa h1{font-size:1.7rem}
-      .sg-dom .q{font-size:1.3rem}
+      .sg-dom .q{font-size:1.06rem}
+      .sg-scelta{font-size:.98rem}
+      .sg-conf{width:100%}
+      .sg-conf .sg-btn{flex:1 1 auto;padding:0 .8rem}
+      .sg-blocco-riga{flex-direction:column;align-items:stretch}
       .sg-tappe li{grid-template-columns:2rem minmax(0,1fr);gap:.6rem}
       .sg-filo b{width:2rem;height:2rem;font-size:.95rem;border-radius:8px}
       .sg-tit{flex-direction:column;gap:.1rem}
@@ -142,13 +190,14 @@ const nome = m.breve || m.titolo;
     const errore = $('[data-sg-errore]');
     let token = '';
     let occupato = false;
+    let fraseIniziale = '';
 
     const esc = (t: string) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as any)[c]);
     async function chiama(percorso: string, corpo?: unknown) {
       const r = await fetch(percorso, corpo === undefined ? { credentials: 'same-origin', cache: 'no-store' }
         : { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(corpo) });
       const d = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(d.errore || 'Errore di collegamento. Riprova.');
+      if (!r.ok) throw Object.assign(new Error(d.errore || 'Errore di collegamento. Riprova.'), { codice: d.codice });
       return d;
     }
 
@@ -158,22 +207,34 @@ const nome = m.breve || m.titolo;
       $('[data-sg-barra]').classList.toggle('senza', !d.massimo);
       if (d.massimo) $('[data-sg-barra] span').style.width = `${Math.round(100 * d.numero / d.massimo)}%`;
       $('[data-sg-argomento]').textContent = d.argomento;
+      const pi = (fraseIniziale || d.motivo || '').trim();
+      fraseIniziale = '';
+      $('[data-sg-pi-testo]').textContent = pi;
+      $('[data-sg-pi]').hidden = !pi;
+      test.classList.remove('sg-attesa');
+      const f = $('[data-sg-form]');
+      f.classList.remove('sg-entra'); void f.offsetWidth; f.classList.add('sg-entra');
       const etichetta = d.base ? `Basi · ${d.materiaBase || 'Precorso'}` : d.fase === 'base' ? 'Base di un altro capitolo' : d.fase === 'cerca' ? 'Ricerca del capitolo' : d.fase === 'ricontrollo' ? 'Ricontrollo' : '';
       $('[data-sg-provenienza]').textContent = etichetta;
       $('[data-sg-provenienza]').hidden = !etichetta;
       $('[data-sg-testo]').innerHTML = d.testo;
       $('[data-sg-scelte]').innerHTML = d.scelte.map((s: string, i: number) =>
         `<label class="sg-scelta"><input type="radio" name="scelta" value="${i}" /><span>${s}</span></label>`).join('');
-      $<HTMLButtonElement>('[data-sg-conferma]').disabled = true;
+      radice.querySelectorAll<HTMLButtonElement>('[data-sg-sicuro]').forEach((b) => { b.disabled = true; });
       $('[data-sg-testo]').focus({ preventScroll: true });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    $('[data-sg-scelte]').addEventListener('change', () => { $<HTMLButtonElement>('[data-sg-conferma]').disabled = false; });
+    $('[data-sg-scelte]').addEventListener('change', () => { radice.querySelectorAll<HTMLButtonElement>('[data-sg-sicuro]').forEach((b) => { b.disabled = false; }); });
 
     async function avanza(percorso: string, corpo: unknown) {
       if (occupato) return;
       occupato = true;
       errore.textContent = '';
+      if (!test.hidden) {
+        test.classList.add('sg-attesa');
+        $('[data-sg-pi-testo]').textContent = 'Pi sceglie la prossima domanda';
+        $('[data-sg-pi]').hidden = false;
+      }
       try {
         const d = await chiama(percorso, corpo);
         if (d.fine) mostraEsito(d.esito, d.progresso);
@@ -181,13 +242,35 @@ const nome = m.breve || m.titolo;
       } catch (e: any) {
         if (test.hidden) errore.textContent = e.message;
         else alertInline(e.message);
-      } finally { occupato = false; }
+      } finally { occupato = false; test.classList.remove('sg-attesa'); }
     }
     function alertInline(msg: string) {
       let p = test.querySelector<HTMLElement>('.sg-errore');
       if (!p) { p = document.createElement('p'); p.className = 'sg-errore'; p.setAttribute('role', 'alert'); test.append(p); }
       p.textContent = msg;
     }
+
+    // «Cosa ti blocca?»: Pi sceglie capitolo e abilità da verificare per prime (POST /api/studio-guidato/capisci).
+    const blocco = $<HTMLFormElement>('[data-sg-blocco]');
+    const notaBlocco = $('[data-sg-blocco-nota]');
+    blocco.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const testo = (blocco.querySelector('textarea') as HTMLTextAreaElement).value.trim();
+      if (testo.length < 4 || blocco.classList.contains('pensa')) { notaBlocco.textContent = 'Scrivi in una frase che cosa ti blocca.'; return; }
+      blocco.classList.add('pensa');
+      notaBlocco.textContent = 'Pi sta leggendo la frase…';
+      try {
+        const d = await chiama('/api/studio-guidato/capisci', { materia, testo });
+        if (!d.argomento) { notaBlocco.textContent = d.frase || 'Scegli il capitolo dall’elenco.'; return; }
+        notaBlocco.textContent = '';
+        fraseIniziale = d.frase || '';
+        await avanza('/api/studio-guidato/inizia', { materia, argomento: d.argomento, priorita: d.priorita || [] });
+      } catch (x: any) { notaBlocco.textContent = x.message; }
+      finally { blocco.classList.remove('pensa'); }
+    });
+    blocco.querySelector('textarea')!.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); blocco.requestSubmit(); }
+    });
 
     const righe = [...radice.querySelectorAll<HTMLButtonElement>('[data-sg-arg]')];
     righe.forEach((b) => b.addEventListener('click', () => {
@@ -197,7 +280,8 @@ const nome = m.breve || m.titolo;
     $('[data-sg-form]').addEventListener('submit', (e) => {
       e.preventDefault();
       const s = radice.querySelector<HTMLInputElement>('input[name="scelta"]:checked');
-      if (s) avanza('/api/studio-guidato/rispondi', { token, scelta: Number(s.value) });
+      const b = (e as SubmitEvent).submitter as HTMLButtonElement | null;
+      if (s) avanza('/api/studio-guidato/rispondi', { token, scelta: Number(s.value), sicuro: b?.dataset.sgSicuro === '1' });
     });
     $('[data-sg-nonso]').addEventListener('click', () => avanza('/api/studio-guidato/rispondi', { token, scelta: null }));
 
@@ -211,7 +295,8 @@ const nome = m.breve || m.titolo;
         const dove = l.m !== materia ? `${esc(l.materia)} · ${esc(l.capitolo)}` : esc(l.capitolo);
         const perche = [
           `${dove}.`,
-          l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : 'Sbagliata la domanda di livello medio.',
+          l.stato === 'lacuna' ? `${l.sbagliate === 1 ? 'Una risposta sbagliata' : `${l.sbagliate} risposte sbagliate`} su ${l.chieste}.` : l.indovinate ? 'Risposta giusta, data tirando a indovinare.' : 'Sbagliata la domanda di livello medio.',
+          l.convinzione ? 'La risposta sbagliata era data con sicurezza.' : '',
           l.per?.length ? `È la base di ${l.per.map((x: string) => `«${minuscola(x)}»`).join(', ')}.` : '',
         ].filter(Boolean).join(' ');
         const vai = [
@@ -280,6 +365,16 @@ const nome = m.breve || m.titolo;
       const quando = new Date(d.ultimo.quando).toLocaleDateString('it-IT', { day: 'numeric', month: 'long' });
       r.innerHTML = `<a href="?esito"><span>Ultimo test: ${quando}${d.ultimo.titoloCapitolo ? `, ${esc(d.ultimo.titoloCapitolo)}` : ''} · ${n ? `${n === 1 ? 'un punto' : `${n} punti`} da riprendere` : 'nessun punto da riprendere'}</span><b>Rivedi il risultato</b></a>`;
       r.hidden = false;
-    }).catch((e) => { errore.textContent = e.message; righe.forEach((b) => { b.disabled = true; }); });
+    }).catch((e) => {
+      righe.forEach((b) => { b.disabled = true; });
+      blocco.hidden = true; radice.querySelector<HTMLElement>('.sg-oppure')!.hidden = true;
+      if (e.codice === 'iscrizione') radice.querySelectorAll<HTMLElement>('.sg-righe, .sg-nota').forEach((x) => { x.hidden = true; });
+      if (e.codice === 'iscrizione') {
+        const dopo = encodeURIComponent(location.pathname);
+        $<HTMLAnchorElement>('[data-sg-nuovo]').href = `/accedi?nuovo=1&dopo=${dopo}`;
+        $<HTMLAnchorElement>('[data-sg-accedi]').href = `/accedi?dopo=${dopo}`;
+        $('[data-sg-iscriviti]').hidden = false;
+      } else errore.textContent = e.message;
+    });
   </script>
 </Base>
