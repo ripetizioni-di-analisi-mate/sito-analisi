@@ -1,8 +1,10 @@
 ---
 // La verifica del Worker è disponibile solo per i risultati che il sito riconosce.
 import { type Lingua } from '../i18n';
-interface Props { id: string; tipo?: 'numero' | 'funzione'; primitiva?: boolean; lingua: Lingua; mostraIndizio?: boolean }
-const { id, tipo, primitiva = false, lingua, mostraIndizio = true } = Astro.props;
+interface Props { id: string; tipo?: 'numero' | 'funzione' | 'scelta'; primitiva?: boolean; unita?: string; lingua: Lingua; mostraIndizio?: boolean }
+const { id, tipo, primitiva = false, unita, lingua, mostraIndizio = true } = Astro.props;
+// Unità di misura del risultato, scritta come la leggerebbe uno studente (m/s^2 → m/s²).
+const unitaLeggibile = unita?.replace(/\^2/g, '²').replace(/\^3/g, '³').replace(/\^-1/g, '⁻¹').replace(/\^-2/g, '⁻²');
 const en = lingua === 'en';
 const es = lingua === 'es';
 const campo = `verifica-${id.replace(/[^a-z0-9]+/gi, '-')}`;
@@ -21,7 +23,16 @@ const tasti = [
 ];
 ---
 <form class="verifica zona-libera" data-id={id} data-tipo={tipo} data-senza-indizio={mostraIndizio ? undefined : ''} novalidate>
-  <label for={campo}>{en ? 'Write your answer' : es ? 'Escribe tu respuesta' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : es ? ' (puedes omitir la constante c)' : ' (la costante c si può tralasciare)'}</small>}</label>
+  {tipo === 'scelta' ? (
+    <>
+      <p class="verifica-titolo" id={`${campo}-scelta`}>{en ? 'Choose your answer' : es ? 'Elige tu respuesta' : 'Scegli la tua risposta'}</p>
+      <div class="verifica-lettere" role="group" aria-labelledby={`${campo}-scelta`}>
+        {['A', 'B', 'C', 'D', 'E'].map((l) => <button type="submit" name="lettera" value={l}>{l}</button>)}
+      </div>
+      <p class="verifica-esito" role="status" aria-live="polite"></p>
+    </>
+  ) : (<>
+  <label for={campo}>{en ? 'Write your answer' : es ? 'Escribe tu respuesta' : 'Scrivi la tua risposta'}{primitiva && <small>{en ? ' (the constant c can be left out)' : es ? ' (puedes omitir la constante c)' : ' (la costante c si può tralasciare)'}</small>}{unitaLeggibile && <small class="verifica-unita">{en ? ` · in ${unitaLeggibile}` : es ? ` · en ${unitaLeggibile}` : ` · in ${unitaLeggibile}`}</small>}</label>
   <div class="verifica-riga">
     {tipo ? (
       <input id={campo} type="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" placeholder={esempio} />
@@ -49,6 +60,7 @@ const tasti = [
     <p id={`${campo}-confronto`} class="verifica-confronto">{en ? 'Submit your answer to compare it with the solution.' : es ? 'Envía tu respuesta para compararla con la solución.' : 'Premi «Invia» per confrontare la tua risposta con la soluzione.'}</p>
   )}
   <p class="verifica-esito" role="status" aria-live="polite"></p>
+  </>)}
 </form>
 
 <style>
@@ -64,6 +76,18 @@ const tasti = [
   .verifica-frazione { display: inline-grid; font-size: 0.77rem; }
   .verifica-frazione > :first-child { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
   .verifica-confronto { margin: 0.35rem 0 0; font-size: 0.85rem; color: var(--inchiostro-2); }
+  .verifica-unita { color: var(--inchiostro-2); font-weight: 400; }
+  .verifica-titolo { margin: 0 0 0.4rem; font: 600 0.92rem/1.3 var(--ui); }
+  .verifica-lettere { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .verifica-lettere button { min-width: 44px; min-height: 44px; padding: 0 0.9rem; border: 1px solid var(--riga); border-radius: 8px; background: var(--carta); color: var(--inchiostro); font: 600 1rem/1 var(--ui); cursor: pointer; }
+  .verifica-lettere button:hover { border-color: var(--accento); color: var(--accento); }
+  .verifica-lettere button[aria-pressed="true"] { border-color: var(--accento); background: color-mix(in srgb, var(--accento) 10%, #fff); color: var(--accento); }
+  .verifica[data-esito="giusta"] .verifica-lettere button[aria-pressed="true"] { border-color: var(--verde); background: color-mix(in srgb, var(--verde) 12%, #fff); color: var(--verde); }
+  .verifica-lettere button[hidden] { display: none; }
+  /* Opzioni dei quiz scritte come elenco puntato: si mostrano le lettere a cui si riferiscono i tasti. */
+  :global(ul.quiz-lettere) { list-style: none; padding-left: 0.2rem; counter-reset: quiz; }
+  :global(ul.quiz-lettere > li) { counter-increment: quiz; padding-left: 1.7rem; text-indent: -1.7rem; }
+  :global(ul.quiz-lettere > li)::before { content: counter(quiz, upper-alpha) ")"; display: inline-block; width: 1.7rem; text-indent: 0; font-weight: 600; }
   @media (max-width: 30rem) {
     .verifica-riga { flex-wrap: wrap; }
     .verifica-riga input, .verifica-riga textarea { flex-basis: 100%; }
@@ -72,7 +96,7 @@ const tasti = [
 
 <script>
   import katex from 'katex';
-  import { leggi, latex } from '../../worker/valuta.mjs';
+  import { leggi, latex, senzaUnitaScritta } from '../../worker/valuta.mjs';
   const inglese = document.documentElement.lang === 'en';
   const T = document.documentElement.lang === 'es' ? {
     leggo: 'Interpretado como', illeggibile: 'No se ha podido interpretar la respuesta. Prueba con 3/2, sqrt(2), e^6, pi/4, inf o x^2 + ln|x|.',
@@ -83,6 +107,8 @@ const tasti = [
     confronto: 'Compara tu respuesta con la solución. Este ejercicio requiere una comprobación manual.',
     riservata: 'Desbloquea la materia para comparar tu respuesta con la solución.',
     senzaSoluzione: 'La solución no está disponible en esta página.',
+    'forma-prodotto': 'El valor es correcto, pero el resultado debe escribirse como producto de factores.', 'forma-sviluppata': 'El valor es correcto, pero el resultado debe escribirse sin paréntesis, como suma de términos.', 'forma-razionale': 'El valor es correcto, pero el denominador no debe contener raíces.',
+    noScelta: 'No es la respuesta correcta. Puedes intentarlo de nuevo o pedir una pista a Pi debajo del ejercicio.', noSceltaBreve: 'No es la respuesta correcta. Inténtalo de nuevo.',
   } : inglese ? {
     leggo: 'Read as', illeggibile: 'The answer cannot be read. Examples: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Correct answer.', sbagliata: 'The result is different. You can try again or ask Pi for a hint below the exercise.', vicina: 'The value approximates the result; the check accepts the exact value, written with fractions, roots, π or e.',
@@ -91,6 +117,8 @@ const tasti = [
     confronto: 'Compare your answer with the solution. This exercise requires a manual check.',
     riservata: 'Unlock the subject to compare your answer with the solution.',
     senzaSoluzione: 'The solution is not available on this page.',
+    'forma-prodotto': 'The value is right, but the result must be written as a product of factors.', 'forma-sviluppata': 'The value is right, but the result must be written without brackets, as a sum of terms.', 'forma-razionale': 'The value is right, but the denominator must not contain roots.',
+    noScelta: 'That is not the correct answer. You can try again or ask Pi for a hint below the exercise.', noSceltaBreve: 'That is not the correct answer. Try again.',
   } : {
     leggo: 'Letta come', illeggibile: 'La risposta non si legge. Esempi di scrittura: 3/2, sqrt(2), e^6, pi/4, inf, x^2 + ln|x|.',
     giusta: 'Risposta corretta.', sbagliata: 'Il risultato è diverso. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', vicina: 'Il valore approssima il risultato; la verifica accetta il valore esatto, scritto con frazioni, radici, π o e.',
@@ -99,15 +127,57 @@ const tasti = [
     confronto: 'Confronta la tua risposta con la soluzione. Per questo esercizio la verifica è manuale.',
     riservata: 'Sblocca la materia per confrontare la tua risposta con la soluzione.',
     senzaSoluzione: 'La soluzione non è disponibile in questa pagina.',
+    'forma-prodotto': 'Il valore è giusto, ma il risultato va scritto come prodotto di fattori.', 'forma-sviluppata': 'Il valore è giusto, ma il risultato va scritto senza parentesi, come somma di termini.', 'forma-razionale': 'Il valore è giusto, ma il denominatore va scritto senza radici.',
+    noScelta: 'Non è la risposta giusta. Puoi riprovare o chiedere un indizio a Pi sotto l’esercizio.', noSceltaBreve: 'Non è la risposta giusta. Riprova.',
   };
+  // Quiz a risposta multipla: un tasto per lettera, la risposta parte al tocco.
+  function scelta(f: HTMLFormElement, corpo: Element | null) {
+    const esito = f.querySelector<HTMLElement>('.verifica-esito')!;
+    const tasti = [...f.querySelectorAll<HTMLButtonElement>('.verifica-lettere button')];
+    // Le opzioni sono l'ultimo elenco della traccia: se non hanno già le lettere, si aggiungono.
+    const elenchi = corpo ? [...corpo.querySelectorAll<HTMLUListElement>(':scope > ul, :scope > ol')] : [];
+    const opzioni = elenchi.at(-1);
+    const quante = opzioni?.children.length ?? 0;
+    if (opzioni && quante >= 2 && quante <= 5) {
+      if (opzioni.tagName === 'UL' && !opzioni.classList.contains('risposte-quiz')) opzioni.classList.add('quiz-lettere');
+      tasti.forEach((t, i) => { t.hidden = i >= quante; });
+    }
+    let inviata = '';
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tasto = (e as SubmitEvent).submitter as HTMLButtonElement | null;
+      const lettera = tasto?.value;
+      if (!lettera || lettera === inviata) return;
+      tasti.forEach((t) => { t.setAttribute('aria-pressed', String(t === tasto)); t.disabled = true; });
+      const r = await fetch('/api/verifica', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: f.dataset.id, risposta: lettera, lingua: inglese ? 'en' : 'it' }),
+      }).catch(() => null);
+      tasti.forEach((t) => { t.disabled = false; });
+      const d = r ? await r.json().catch(() => null) : null;
+      if (!r || !d) { esito.textContent = T.rete; return; }
+      if (d.errore) { esito.textContent = d.errore; return; }
+      inviata = lettera;
+      f.dataset.esito = d.esito;
+      esito.textContent = d.esito === 'giusta' ? T.giusta : (f.hasAttribute('data-senza-indizio') ? T.noSceltaBreve : T.noScelta);
+      if (d.esito === 'giusta' && d.punti) {
+        const b = document.createElement('strong');
+        b.textContent = ` +${d.punti} ${T.exp}`;
+        esito.append(b);
+      }
+      if (d.stato) dispatchEvent(new CustomEvent('livello', { detail: d.stato }));
+      if (d.nuovi?.length) dispatchEvent(new CustomEvent('premi', { detail: d.nuovi }));
+    });
+  }
   for (const f of document.querySelectorAll<HTMLFormElement>('form.verifica')) {
     if (f.dataset.pronto) continue;
     f.dataset.pronto = '1';
-    const campo = f.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
     // Il riferimento resta quello dell'esercizio anche dopo lo spostamento del modulo.
     const esercizio = f.closest('.traccia') ?? f.parentElement;
     const corpo = f.previousElementSibling;
     corpo?.querySelector(':scope > .blocco-soluzione, :scope > .soluzione-riservata, :scope > .velo-blocco')?.before(f);
+    if (f.dataset.tipo === 'scelta') { scelta(f, corpo); continue; }
+    const campo = f.querySelector<HTMLInputElement | HTMLTextAreaElement>('input, textarea')!;
     // Tab passa al denominatore o all'esponente quando entrambi gli spazi sono stati inseriti insieme.
     campo.addEventListener('keydown', (e) => {
       const posizione = campo.selectionEnd ?? 0;
@@ -146,7 +216,7 @@ const tasti = [
       esito.textContent = ''; f.dataset.esito = '';
       if (!lettura) return;
       if (!v) { lettura.textContent = ''; return; }
-      const n = leggi(v);
+      const n = leggi(f.dataset.tipo === 'numero' ? senzaUnitaScritta(v) : v);
       if (!n) { lettura.textContent = ''; return; }
       try { lettura.innerHTML = `<span>${T.leggo}</span>${katex.renderToString(latex(n), { throwOnError: false, strict: false, output: 'html' })}`; } catch { lettura.textContent = ''; }
     };
@@ -168,7 +238,7 @@ const tasti = [
         (soluzione ?? riservata)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         return;
       }
-      if (!leggi(risposta)) { esito.textContent = T.illeggibile; f.dataset.esito = 'illeggibile'; return; }
+      if (!leggi(f.dataset.tipo === 'numero' ? senzaUnitaScritta(risposta) : risposta)) { esito.textContent = T.illeggibile; f.dataset.esito = 'illeggibile'; return; }
       bottone.disabled = true;
       const r = await fetch('/api/verifica', {
         method: 'POST', headers: { 'content-type': 'application/json' },

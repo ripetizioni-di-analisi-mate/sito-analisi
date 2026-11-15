@@ -38,7 +38,7 @@ import { creaTabelleLivelli, battito, risposta, riepilogo, percorso, statoDi } f
 import { livelloDa, PUNTI, DOMANDE_SESSIONE, RIPASSO, RIPASSO_OGGI } from '../src/data/livelli.ts';
 import { nomeDallEmail } from './nomi.mjs';
 import { confronta } from './valuta.mjs';
-import { esercizioRisolto, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
+import { esercizioRisolto, quizSbagliato, ripassoOggi, registraVista, progressi, salvaEsame } from './livelli.mjs';
 import { inviaCodaPromemoria, provaPromemoria, inviaATutti, statoPromemoria, PAGINA_DISATTIVATO } from './promemoria.mjs';
 import { creaTabellePrenotazioni, archivioPrenotazioni, gestisciPrenotazioni, avvisiLezioni } from './prenotazioni.mjs';
 import { creaTabelleGruppi, archivioGruppi, archivioFileGruppi, gestisciGruppi } from './gruppi.mjs';
@@ -430,6 +430,7 @@ export class Archivio {
       case '/liv-riepilogo': return Response.json(riepilogo(this, c));
       case '/liv-percorso': return Response.json(percorso(this, c));
       case '/liv-esercizio': return Response.json(esercizioRisolto(this, c));
+      case '/liv-quiz-sbagliato': return Response.json(quizSbagliato(this, c));
       case '/liv-ripasso': return Response.json(ripassoOggi(this, c));
       case '/liv-vista': return Response.json(registraVista(this, c));
       case '/liv-progressi': return Response.json(progressi(this, c));
@@ -1176,8 +1177,10 @@ export default {
       const giorno = new Date().toISOString().slice(0, 10);
       if (!(await aDO(env, '/verifiche-conta', { giorno, chi })).ok) return json({ errore: en ? 'Too many attempts today.' : 'Troppi tentativi oggi.' }, 429);
       const esito = confronta(risposta, giusta);
+      const scelta = giusta.tipo === 'scelta';
+      if (scelta && esito === 'sbagliata' && io) await aDO(env, '/liv-quiz-sbagliato', { email: io.email, id: `${materia}/${argomento}/${n}` });
       if (esito !== 'giusta' || !io) return json({ esito }, 200, { 'cache-control': 'no-store' });
-      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) });
+      const r = await aDO(env, '/liv-esercizio', { email: io.email, id: `${materia}/${argomento}/${n}`, materia, argomento, scelta, lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) });
       return json({ esito, ...r }, 200, { 'cache-control': 'no-store' });
     }
     if (p === '/api/studio' && POST) { // un minuto di studio attivo

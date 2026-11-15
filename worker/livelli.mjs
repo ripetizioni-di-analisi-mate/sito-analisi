@@ -92,6 +92,8 @@ export function creaTabelleLivelli(sql) {
   try { sql.exec('ALTER TABLE sessioni ADD COLUMN punti_studio INTEGER'); } catch { /* già presente */ }
   // esercizi da fare risolti con la verifica della risposta (una riga per esercizio: i punti si danno una volta sola)
   sql.exec('CREATE TABLE IF NOT EXISTS esercizi (email TEXT, id TEXT, materia TEXT, argomento TEXT, quando INTEGER, PRIMARY KEY (email, id))');
+  // quiz a risposta multipla sbagliati almeno una volta: la lettera giusta trovata dopo non dà EXP (niente punti provando tutte le lettere)
+  sql.exec('CREATE TABLE IF NOT EXISTS quiz_sbagliati (email TEXT, id TEXT, PRIMARY KEY (email, id))');
   // ripasso dilazionato delle domande sbagliate: casella 0, 1, 2 (intervalli 1, 3, 7 giorni) e giorno in cui la domanda torna
   sql.exec('CREATE TABLE IF NOT EXISTS ripasso (email TEXT, domanda TEXT, materia TEXT, casella INTEGER, scadenza TEXT, PRIMARY KEY (email, domanda))');
   // progressi per argomento: pagine di studio aperte per intero (teoria, schede svolte) e data dell'esame di ogni materia
@@ -336,12 +338,20 @@ export function salvaEsame(ar, c) {
   return { ok: true };
 }
 
+// Quiz a risposta multipla sbagliato: si ricorda, così la lettera giusta trovata dopo non dà EXP.
+export function quizSbagliato(ar, c) {
+  ar.sql.exec('INSERT OR IGNORE INTO quiz_sbagliati (email, id) VALUES (?, ?)', c.email, c.id);
+  return { ok: true };
+}
+
 // Esercizio da fare risolto (risposta verificata dal Worker): EXP la prima volta, poi nulla.
 export function esercizioRisolto(ar, c) {
   const { email } = c;
   if (ar.riga('SELECT id FROM esercizi WHERE email = ? AND id = ?', email, c.id)) return { punti: 0, motivo: 'gia-risolto', nuovi: [], stato: statoDi(ar, email, c.lingua) };
   const ora = Date.now();
   ar.sql.exec('INSERT INTO esercizi (email, id, materia, argomento, quando) VALUES (?, ?, ?, ?, ?)', email, c.id, c.materia, c.argomento, ora);
+  if (c.scelta && ar.riga('SELECT id FROM quiz_sbagliati WHERE email = ? AND id = ?', email, c.id))
+    return { punti: 0, motivo: 'dopo-errore', nuovi: [], stato: statoDi(ar, email, c.lingua) };
   aggiungi(ar, email, PUNTI.esercizio, 'esercizio', c.id);
   const sid = sessioneCorrente(ar, email, c.materia, c.argomento);
   ar.sql.exec('UPDATE sessioni SET punti = punti + ?, ultimo = ? WHERE id = ?', PUNTI.esercizio, ora, sid);

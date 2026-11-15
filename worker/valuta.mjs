@@ -174,42 +174,187 @@ export function daLatex(tex) {
 }
 
 // Risultato di una soluzione, se si può verificare:
-//  - { tipo: 'numero', v }   una sola uguaglianza con un numero reale (o ±∞) a destra dell'ultimo "=";
-//  - { tipo: 'funzione', e, primitiva }   un'espressione nella sola variabile x (derivata, funzione), oppure una primitiva "… + c".
-// null se la soluzione è testo, un insieme, una disequazione, più risultati, altre variabili…
-export function risultatoDaSoluzione(md) {
-  const corpo = String(md || '').trim();
-  const m = corpo.match(/^\$\$([\s\S]+?)\$\$$/) || corpo.match(/^\$([^$]+)\$\.?$/);
+//  - { tipo: 'numero', v, u?, d? }   un numero reale (o ±∞), con l'eventuale unità di misura u;
+//                                    d = cifre decimali scritte nella soluzione, se il risultato è arrotondato;
+//  - { tipo: 'funzione', e, primitiva }   un'espressione nella sola variabile x (derivata, funzione), oppure una primitiva "… + c";
+//  - { tipo: 'scelta', v: 'A'…'E' }   la lettera giusta di un quiz a risposta multipla.
+// null se la soluzione è un testo, un insieme, una disequazione, più risultati, altre variabili…
+const PAROLE_UNITA = /^(?:gradi|grado|cm|mm|m|km|dm|cm²|m²|cm³|m³|g|kg|mg|l|ml|s|euro|€|anni|anno|mesi|giorni|ore|minuti|secondi|persone|studenti|modi|porzioni|unità|pezzi|volte|metri|centimetri|litri|chilogrammi|grammi|punti|casi|numeri|cifre|lati|diagonali|vertici|triangoli|rette|parole|anagrammi|squadre|gruppi|combinazioni|disposizioni|permutazioni|sequenze|codici|colori|libri|palline|carte|biglietti|monete)$/i;
+const VIRGOLETTE = /[«»“”]/g;
+// Toglie dalla formula l'unità di misura scritta in coda ($7{,}5\,\mathrm{m/s}$, $30^\circ$, $20\%$); restituisce [formula, unità].
+function senzaUnita(tex) {
+  let f = String(tex).replace(/\\mathrm\{e\}/g, 'e').replace(/\\(?:big|Big|bigg|Bigg)[lrm]?(?![a-zA-Z])/g, '').trim();
+  // L'unità comincia con un simbolo di unità (\mathrm{…}, °, %, Ω); dopo possono venire prodotti, quozienti e potenze di unità.
+  const UNITA = String.raw`\\(?:mathrm|text|textrm|mathit)\{(?:[^{}]|\{[^{}]*\})*\}|\^\{?\\circ\}?|\\circ|\\%|%|\\(?:Omega|degree)(?![a-zA-Z])|°`;
+  const coda = new RegExp(String.raw`(?:\s|\\[,;:!]|~)*(?:${UNITA})(?:\s|\\[,;:!]|~|${UNITA}|\\(?:mu|cdot)(?![a-zA-Z])|\/|\^\{?-?\d+\}?)*$`);
+  const m = f.match(coda);
+  if (!m) return [f, ''];
+  const resto = f.slice(0, m.index).trim();
+  if (!/[\d}a-zA-Z)]$/.test(resto)) return [f, ''];
+  const u = m[0].replace(/\\(?:mathrm|text|textrm|mathit)\{((?:[^{}]|\{[^{}]*\})*)\}/g, '$1').replace(/\\[,;:!]|~/g, ' ').replace(/\^\{?\\circ\}?|\\circ|\\degree/g, '°')
+    .replace(/\\%/g, '%').replace(/\\Omega/g, 'Ω').replace(/\\mu/g, 'µ').replace(/\\cdot/g, '·').replace(/\^\{?(-?\d+)\}?/g, '^$1').replace(/[{}]/g, '').replace(/\s+/g, ' ').trim();
+  return [resto, u];
+}
+function formulaUnica(corpo) {
+  // L'intera soluzione è una formula ($…$ o $$…$$), con al più qualche parola di unità dopo («$15$ gradi», «$4$ porzioni»).
+  const m = corpo.match(/^\$\$([\s\S]+?)\$\$\s*([^$]*)$/) || corpo.match(/^\$([^$]+)\$\s*([^$]*)$/);
   if (!m) return null;
-  const formula = m[1].trim().replace(/[.,;]\s*$/, '');
-  const parti = formula.split('=');
+  const dopo = m[2].replace(/[.;,]\s*$/, '').trim();
+  if (!dopo) return { f: m[1], parole: '' };
+  // Formula in display seguita da una giustificazione («perché …», «poiché …»): conta la formula.
+  if (/^(?:perché|poiché|in quanto|infatti|dato che)\b/i.test(dopo) && !/\$\$/.test(dopo)) return { f: m[1], parole: '' };
+  const parole = dopo.split(/\s+/);
+  if (parole.length <= 2 && parole.every((w) => PAROLE_UNITA.test(w.replace(/[.,;]$/, '')))) return { f: m[1], parole: dopo };
+  return null;
+}
+export function risultatoDaSoluzione(md) {
+  const corpo = String(md || '').trim().replace(VIRGOLETTE, '');
+  // Quiz: «Risposta A: …», «**Risposta corretta: B.** …», «Risposta corretta: (C)».
+  const q = corpo.match(/^\**\s*(?:la\s+)?risposta(?:\s+(?:corretta|giusta|esatta))?\s*(?:è\s*)?:?\s*\(?\**\s*([A-E])\b/i);
+  if (q) return { tipo: 'scelta', v: q[1].toUpperCase() };
+  const unica = formulaUnica(corpo);
+  if (!unica) return null;
+  // Separatore delle migliaia (1\,485) e spazi sottili (4\,(x^2 - 3x)^3): non separano risultati.
+  let formula = unica.f.trim().replace(/[.,;]\s*$/, '').replace(/(\d)\\,(?=\d{3}(?!\d))/g, '$1').replace(/\\[,;:!](?![a-zA-Z])/g, ' ');
+  // Più risultati nella stessa formula: «x = 1 \text{ oppure } x = 2», «a = 2, \quad b = 3», sistemi, ±.
+  if (/\\q?quad(?![a-zA-Z])|\\\\|\\begin|\\(?:cup|vee|lor|land|wedge|pm|mp|lor|implies|iff|Rightarrow|Leftrightarrow)(?![a-zA-Z])|(?<!\\);/.test(formula)) return null;
+  if (/\\(?:text|mbox|textrm)\{[^{}]*\b(?:e|o|oppure|and|or|per|con|se|quando|dove|cioè|ovvero|quindi|mentre)\b[^{}]*\}/.test(formula)) return null;
+  // Con «≈» si tiene il valore esatto prima del simbolo; se manca, il valore approssimato.
+  const approx = formula.split(/\\approx|\\simeq/);
+  if (approx.length > 2) return null;
+  const parti = approx[0].split('=');
   let destra = parti[parti.length - 1].trim();
+  let approssimato = approx[1]?.trim();
+  if (approssimato !== undefined && !destra) { destra = approssimato; approssimato = undefined; }
+  let unita = '';
+  [destra, unita] = senzaUnita(destra);
+  if (approssimato !== undefined) { const [a, u2] = senzaUnita(approssimato); approssimato = a; unita = unita || u2; }
+  // Gradi dentro una funzione goniometrica (\cos 40^\circ): il valore esatto non si legge, resta quello dopo «≈».
+  if (/\\(?:sin|cos|tan|cot)(?![a-zA-Z])/.test(destra) && /°|\\circ/.test(unita + destra)) {
+    if (approssimato === undefined) return null;
+    [destra, unita] = senzaUnita(approx[1].trim()); approssimato = undefined;
+    unita = unita || unica.parole;
+  }
+  if (parti.slice(1, -1).some((t) => /,\s*[-\d(\\a-z]/i.test(t.replace(/\{,\}/g, '')))) return null;
+  const unitaInFormula = Boolean(unita);
+  unita = unita || unica.parole;
   if (/\\(qquad|quad|text|mbox|operatorname|lim|int|sum|in|cup|cap|le|ge|leq|geq|pm|mp|neq|approx|lt|gt|mathbb|to|cdots|dots|ldots|begin)(?![a-zA-Z])|[<>&]|\\\\/.test(destra)) return null;
   const primitiva = /\+\s*[cC]\s*$/.test(destra);
   if (primitiva) destra = destra.replace(/\+\s*[cC]\s*$/, '').trim();
   const lettere = destra.replace(/\\[a-zA-Z]+/g, '').replace(/\b(inf|pi)\b/g, '');
   if (!destra || /[a-df-wyzA-Z]/.test(lettere)) return null; // solo e, x e i comandi riconosciuti
-  if (parti.length < 2 && !/x/.test(lettere)) return null;   // senza "=" solo espressioni in x (primitive scritte da sole)
+  if (/,\s*[-\d(\\]/.test(destra.replace(/\{,\}/g, ''))) return null;   // più valori separati da virgole: (5, 2), x = 1, 2
   let espr;
   try { espr = daLatex(destra); } catch { return null; }
   const n = leggi(espr);
   if (!n) return null;
   if (/x/.test(lettere)) {
+    if (unita) return null;
     const punti = PUNTI.map((x) => valore(n, x)).filter(Number.isFinite);
     if (punti.length < 4) return null;
     return { tipo: 'funzione', e: espr, primitiva };
   }
   if (primitiva) return null;
+  if (parti.length < 2 && approssimato === undefined && /^[a-z]/i.test(unica.f.trim()) && !/^\\/.test(unica.f.trim())) return null;
   const v = valore(n);
   if (Number.isNaN(v)) return null;
-  return { tipo: 'numero', v };
+  const out = { tipo: 'numero', v };
+  if (unita) out.u = unita;
+  // Valore arrotondato: cifre decimali scritte (7{,}5 → 1), oppure quelle del valore dopo «≈».
+  const dec = (t) => { const m2 = String(t).match(/\d\{,\}(\d+)|\d\.(\d+)/); return m2 ? (m2[1] || m2[2]).length : 0; };
+  if (approssimato !== undefined) {
+    try { const va = valore(leggi(daLatex(approssimato))); if (Number.isFinite(va)) out.d = dec(approssimato); } catch { /* resta il valore esatto */ }
+  } else if (approx.length === 2 && dec(destra)) out.d = dec(destra);
+  else if (/^-?\d+(?:\{,\}|\.)\d+\\cdot10\^\{?-?\d+\}?$/.test(destra.replace(/\s/g, ''))) out.d = dec(destra); // notazione scientifica: sempre arrotondata
+  else if (dec(destra) && (unita || dec(destra) >= 3) && /^-?\d+\{,\}\d+$|^-?\d+\.\d+$/.test(destra.replace(/\s/g, ''))) out.d = dec(destra);
+  // Grandezze fisiche (unità scritta nella formula, non euro, percentuali o angoli): il valore è sempre arrotondato.
+  if (out.d === undefined && unitaInFormula && !/^(?:euro|€|%|°|gradi|anni|anno|euro·anno.*|rad)$/.test(unita)) out.d = 0;
+  return out;
+}
+// Esercizio intero (traccia e soluzione): esclusi quelli in cui conta la forma del risultato
+// (scomporre, razionalizzare, semplificare…), perché anche l'espressione di partenza ha lo stesso valore.
+// Per scomporre, sviluppare, ridurre e razionalizzare si controlla anche la forma della risposta (forma: …);
+// gli altri esercizi in cui conta la forma restano senza verifica.
+const FORME = [
+  [/\b(?:scomponi|scomporre|fattorizza|fattorizzare)\b/i, 'prodotto'],
+  [/\b(?:sviluppa|sviluppare|espandi|espandere|riduci|ridurre)\b/i, 'sviluppata'],
+  [/\b(?:semplifica|semplificare)\b/i, 'sviluppata'],
+  [/\b(?:razionalizza|razionalizzare)\b/i, 'razionale'],
+];
+const SOLO_FORMA = /\b(?:raccogli|raccogliere|scrivi in forma|scrivere in forma|esprimi in forma|esprimere in forma|scrivi come|scrivere come)\b/i;
+export function risultatoDaEsercizio(md) {
+  const testo = String(md || '');
+  const sol = testo.match(/:::soluzione\s*\n([\s\S]*?)\n:::/)?.[1] ?? '';
+  const r = risultatoDaSoluzione(sol);
+  if (!r || r.tipo === 'scelta') return r;
+  const traccia = testo.split(/:::soluzione/)[0].replace(/^---[\s\S]*?\n---/, '');
+  if (SOLO_FORMA.test(traccia)) return null;
+  const forme = FORME.filter(([re]) => re.test(traccia)).map(([, f]) => f);
+  if (forme.length > 1) return null;
+  if (forme.length === 1) {
+    const albero = leggi(r.tipo === 'funzione' ? r.e : '');
+    // La forma attesa deve essere quella della soluzione: «semplifica» con un risultato frazionario resta senza verifica.
+    if (forme[0] === 'sviluppata' && (r.tipo !== 'funzione' || !inForma(albero, 'sviluppata'))) return null;
+    if (forme[0] === 'prodotto' && r.tipo === 'funzione' && !inForma(albero, 'prodotto')) return null;
+    if (forme[0] === 'razionale' && r.tipo !== 'numero') return null;
+    if (forme[0] === 'prodotto' && r.tipo === 'numero') return null; // fattori primi: la forma della soluzione non si legge dal valore
+    return { ...r, forma: forme[0] };
+  }
+  return r;
+}
+// Forma di una risposta già letta: prodotto (scomposta), sviluppata (somma di monomi, senza parentesi né frazioni con x),
+// razionale (nessun denominatore con radici).
+function haNodo(n, prova) {
+  if (!n || typeof n !== 'object') return false;
+  if (prova(n)) return true;
+  return haNodo(n.a, prova) || haNodo(n.b, prova);
+}
+const conX = (n) => haNodo(n, (m) => m.v === 'x');
+export function inForma(n, forma) {
+  if (!n) return false;
+  if (forma === 'prodotto') {
+    let t = n;
+    while (t.op === 'neg' || t.op === '()') t = t.a;
+    if (t.op === '^') return t.a.op === '()' || t.a.f !== undefined || t.a.v === 'x';
+    if (t.op !== '*') return false;
+    // almeno un fattore non costante che sia una somma fra parentesi o una potenza di x
+    const fattori = []; const raccogli = (m) => { if (m.op === '*') { raccogli(m.a); raccogli(m.b); } else fattori.push(m); };
+    raccogli(t);
+    return fattori.filter((f) => conX(f)).length >= 2 || fattori.some((f) => f.op === '()' && conX(f));
+  }
+  if (forma === 'sviluppata') return !haNodo(n, (m) => (m.op === '()' && conX(m)) || (m.op === '/' && conX(m.b)) || (m.op === '^' && m.a.op === '()'));
+  if (forma === 'razionale') return !haNodo(n, (m) => m.op === '/' && haNodo(m.b, (k) => k.f === 'sqrt' || k.f === 'cbrt' || (k.op === '^' && k.b && !Number.isInteger(valore(k.b)))));
+  return true;
 }
 const PUNTI = [-2.31, -1.73, -1.17, -0.61, -0.29, 0.37, 0.83, 1.29, 1.87, 2.43, 3.19, 4.07];
 
 // Confronto con il risultato della soluzione.
 //  numero: valore esatto (piccola tolleranza numerica), ±∞ con lo stesso segno; "vicina" = decimale che approssima il risultato esatto;
-//  funzione: stessi valori in almeno 4 punti di prova (per una primitiva basta che la differenza sia costante).
+//          se la soluzione è arrotondata (d cifre decimali), è giusto ogni valore che arrotondato dà lo stesso risultato (o entro lo 0,5%);
+//          l'unità di misura scritta dallo studente si ignora, «x = 3» vale come «3», «10%» come 10 (o 0,1 se il risultato è in %);
+//  funzione: stessi valori in almeno 4 punti di prova (per una primitiva basta che la differenza sia costante);
+//  scelta: la lettera.
+export function senzaUnitaScritta(src) {
+  let t = String(src).trim();
+  if (t.includes('=')) t = t.slice(t.lastIndexOf('=') + 1).trim();
+  if (leggi(t)) return t;
+  // Dalla fine: il prefisso più lungo che si legge, se il resto sembra un'unità di misura (m/s^2, cm², euro, °, %).
+  for (let k = t.length - 1; k > 0; k--) {
+    const resto = t.slice(k);
+    if (!/^\s*[a-zA-Zµ°%Ω€'"²³][a-zA-Zµ°%Ω€'"²³/·*^.\s\d-]*$/.test(resto)) continue;
+    // Il taglio cade fra un numero e l'unità, oppure prima di uno spazio o di un simbolo (°, %, €); mai dentro una parola.
+    if (!/[\d).]$/.test(t.slice(0, k)) && !/^\s/.test(resto) && !/^[°%€'"²³]/.test(resto)) continue;
+    const prima = t.slice(0, k).trim();
+    if (prima && leggi(prima)) return prima;
+  }
+  return t;
+}
 export function confronta(scritta, giusta) {
+  if (giusta.tipo === 'scelta') {
+    const l = String(scritta).trim().replace(/^\(?\s*/, '').charAt(0).toUpperCase();
+    return /^[A-E]$/.test(l) ? (l === giusta.v ? 'giusta' : 'sbagliata') : 'illeggibile';
+  }
+  if (giusta.tipo !== 'funzione') scritta = senzaUnitaScritta(scritta);
   const n = leggi(scritta);
   if (!n) return 'illeggibile';
   const conX = /(^|[^a-z])x/i.test(String(scritta).replace(/\b(exp|max)\b/gi, ''));
@@ -219,6 +364,7 @@ export function confronta(scritta, giusta) {
     if (coppie.length < 4) return conX ? 'sbagliata' : 'illeggibile';
     const d0 = giusta.primitiva ? coppie[0][0] - coppie[0][1] : 0;
     const ok = coppie.every(([a, b]) => Math.abs(a - b - d0) <= 1e-7 * Math.max(1, Math.abs(b)));
+    if (ok && giusta.forma && !inForma(n, giusta.forma)) return 'forma-' + giusta.forma;
     return ok ? 'giusta' : 'sbagliata';
   }
   if (conX) return 'sbagliata';
@@ -226,9 +372,14 @@ export function confronta(scritta, giusta) {
   if (Number.isNaN(v)) return 'illeggibile';
   const g = giusta.v;
   if (!Number.isFinite(g) || !Number.isFinite(v)) return v === g ? 'giusta' : 'sbagliata';
-  const scala = Math.max(1, Math.abs(g));
-  if (Math.abs(v - g) <= 1e-9 * scala) return 'giusta';
+  const vicino = (a) => {
+    const scala = Math.max(1, Math.abs(g));
+    if (Math.abs(a - g) <= 1e-9 * scala) return true;
+    if (giusta.d !== undefined) return Math.abs(a - g) < Math.max(0.5 * 10 ** -giusta.d + 1e-12, 0.01 * Math.abs(g));
+    return false;
+  };
+  if (vicino(v) || (giusta.u === '%' && vicino(v * 100))) return giusta.forma && !inForma(n, giusta.forma) ? 'forma-' + giusta.forma : 'giusta';
   const decimale = /\d[.,]\d/.test(String(scritta));
-  if (decimale && Math.abs(v - g) <= 5e-3 * scala) return 'vicina';
+  if (decimale && Math.abs(v - g) <= Math.max(1e-2 * Math.abs(g), 1e-9)) return 'vicina';
   return 'sbagliata';
 }
