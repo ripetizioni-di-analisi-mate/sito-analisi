@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="it">
+<title id="title">Diagramma di corpo libero</title><desc id="desc">Blocco4kg, trazione24N a30°, peso39,24N e normale27,24N; frecce in scala.</desc>
+<defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
+<rect width="780" height="520" fill="#fff"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Diagramma di corpo libero</text>
+<line x1="350.000" y1="240.000" x2="350.000" y2="396.960" stroke="#b35112" stroke-width="4" marker-end="url(#a-orange)"/>
+<line x1="350.000" y1="240.000" x2="350.000" y2="131.040" stroke="#087f75" stroke-width="4" marker-end="url(#a-green)"/>
+<line x1="350.000" y1="240.000" x2="433.138" y2="192.000" stroke="#1767a5" stroke-width="4" marker-end="url(#a-blue)"/>
+<line x1="350.000" y1="240.000" x2="495.000" y2="240.000" stroke="#526574" stroke-width="1" stroke-dasharray="6 5"/>
+<line x1="433.138" y1="192.000" x2="433.138" y2="240.000" stroke="#526574" stroke-width="1" stroke-dasharray="6 5"/>
+<path d="M 405 240 A 55 55 0 0 0 397.631 212.500" stroke="#17324d" stroke-width="2" fill="none"/>
+<circle cx="350.000" cy="240.000" r="7.000" fill="#17324d" stroke="#17324d" stroke-width="2"/>
+<text x="460.00" y="222.00" font-size="23" text-anchor="start" fill="#17324d" font-weight="normal">30°</text>
+<text x="330.00" y="118.00" font-size="25" text-anchor="end" fill="#087f75" font-weight="normal">N = 27,24 N</text>
+<text x="455.00" y="180.00" font-size="25" text-anchor="start" fill="#1767a5" font-weight="normal">F = 24 N</text>
+<text x="375.00" y="397.00" font-size="25" text-anchor="start" fill="#b35112" font-weight="normal">P = 39,24 N</text>
+<text x="390.00" y="478.00" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">N + F sin 30° − mg = 0</text>
+</g></svg>

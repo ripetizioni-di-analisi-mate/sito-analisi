@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="it">
+<title id="title">Incontro di due automobili</title><desc id="desc">xA=25t e xB=1200−20t. Incontro a26,67s e666,67m.</desc>
+<defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
+<rect width="780" height="520" fill="#fff"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Incontro di due automobili</text>
+<line x1="100.000" y1="90.000" x2="100.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="100.00" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">0</text>
+<line x1="242.857" y1="90.000" x2="242.857" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="242.86" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">10</text>
+<line x1="385.714" y1="90.000" x2="385.714" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="385.71" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">20</text>
+<line x1="671.429" y1="90.000" x2="671.429" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="671.43" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">40</text>
+<line x1="100.000" y1="420.000" x2="700.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="427.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">0</text>
+<line x1="100.000" y1="318.462" x2="700.000" y2="318.462" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="325.46" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">400</text>
+<line x1="100.000" y1="216.923" x2="700.000" y2="216.923" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="223.92" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">800</text>
+<line x1="100.000" y1="115.385" x2="700.000" y2="115.385" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="122.38" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">1200</text>
+<line x1="100.000" y1="420.000" x2="720.000" y2="420.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
+<line x1="100.000" y1="425.000" x2="100.000" y2="75.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
+<text x="728.00" y="450.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">t (s)</text>
+<text x="90.00" y="62.00" font-size="22" text-anchor="start" fill="#17324d" font-weight="normal">x (m)</text>
+<line x1="100.000" y1="420.000" x2="671.429" y2="166.154" stroke="#1767a5" stroke-width="4"/>
+<line x1="100.000" y1="115.385" x2="671.429" y2="318.462" stroke="#b35112" stroke-width="4"/>
+<line x1="480.952" y1="420.000" x2="480.952" y2="250.769" stroke="#526574" stroke-width="2" stroke-dasharray="6 5"/>
+<line x1="100.000" y1="250.769" x2="480.952" y2="250.769" stroke="#526574" stroke-width="2" stroke-dasharray="6 5"/>
+<circle cx="480.952" cy="250.769" r="6.000" fill="#1767a5" stroke="#1767a5" stroke-width="2"/>
+<text x="585.71" y="151.15" font-size="25" text-anchor="middle" fill="#1767a5" font-weight="normal">A</text>
+<text x="585.71" y="343.46" font-size="25" text-anchor="middle" fill="#b35112" font-weight="normal">B</text>
+<text x="492.95" y="234.77" font-size="24" text-anchor="start" fill="#17324d" font-weight="normal">667 m</text>
+<text x="480.95" y="455.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">26,7</text>
+<text x="390.00" y="495.00" font-size="24" text-anchor="middle" fill="#17324d" font-weight="normal">Stessa posizione, velocità diverse</text>
+</g></svg>

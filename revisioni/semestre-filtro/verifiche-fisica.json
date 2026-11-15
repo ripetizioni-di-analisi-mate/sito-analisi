@@ -1,0 +1,431 @@
+{
+  "subject": "fisica-semestre-filtro",
+  "baseline_commit": "d516418c61b768d2d6030439421f6e2cc18457a4",
+  "renderer": {
+    "materia": "fisica-semestre-filtro",
+    "fileResi": 1610,
+    "formule": 14512,
+    "capitoli": [
+      {
+        "capitolo": "elettricita-e-magnetismo",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3466,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 44,
+            "medianaParoleEsercizio": 369
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3353,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 40,
+            "medianaParoleEsercizio": 331
+          }
+        }
+      },
+      {
+        "capitolo": "fluidi",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 23,
+            "paroleTeoria": 3289,
+            "figureTeoria": 9,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 43,
+            "medianaParoleEsercizio": 218
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 23,
+            "paroleTeoria": 3248,
+            "figureTeoria": 9,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 40,
+            "medianaParoleEsercizio": 214
+          }
+        }
+      },
+      {
+        "capitolo": "meccanica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 25,
+            "paroleTeoria": 4082,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 41,
+            "medianaParoleEsercizio": 318
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 25,
+            "paroleTeoria": 4020,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 40,
+            "medianaParoleEsercizio": 298
+          }
+        }
+      },
+      {
+        "capitolo": "metodi-della-fisica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3390,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 49,
+            "medianaParoleEsercizio": 267
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3230,
+            "figureTeoria": 8,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 45,
+            "medianaParoleEsercizio": 258
+          }
+        }
+      },
+      {
+        "capitolo": "onde-meccaniche",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3071,
+            "figureTeoria": 9,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 45,
+            "medianaParoleEsercizio": 261
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 2918,
+            "figureTeoria": 9,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 41,
+            "medianaParoleEsercizio": 253
+          }
+        }
+      },
+      {
+        "capitolo": "radiazioni-e-ottica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3499,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 45,
+            "medianaParoleEsercizio": 229
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 20,
+            "paroleTeoria": 3505,
+            "figureTeoria": 10,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 42,
+            "medianaParoleEsercizio": 217
+          }
+        }
+      },
+      {
+        "capitolo": "termodinamica",
+        "lingue": {
+          "it": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 22,
+            "paroleTeoria": 2808,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 39,
+            "medianaParoleEsercizio": 248
+          },
+          "en": {
+            "teoria": 1,
+            "svolti": 10,
+            "dafare": 14,
+            "domande": 90,
+            "esercizi": 22,
+            "paroleTeoria": 2709,
+            "figureTeoria": 7,
+            "distribuzione": [
+              23,
+              23,
+              22,
+              22
+            ],
+            "medianaParoleQuiz": 36,
+            "medianaParoleEsercizio": 241
+          }
+        }
+      }
+    ],
+    "avvisi": [],
+    "errori": []
+  },
+  "built_pages": {
+    "subject": "fisica-semestre-filtro",
+    "pages": 532,
+    "localAssets": 177,
+    "theoryAnchorLinks": 618,
+    "quiz": {
+      "it": 630,
+      "en": 630
+    },
+    "unchangedMathematicsFiles": 904,
+    "errors": []
+  },
+  "localized_svg_files": 166,
+  "independent_review": "All seven chapters read in full by a reviewer different from the author; every option and explanation checked, all 166 SVGs inspected at 390 and 780 px. Chapter reports record independent calculations and corrections.",
+  "reviewed_file_hash_checks": [
+    {
+      "review": "meccanica/root-review/reviewed-hashes.json",
+      "files": 255,
+      "changed_since_review": []
+    },
+    {
+      "review": "onde-meccaniche/root-review/reviewed-hashes.json",
+      "files": 254,
+      "changed_since_review": []
+    },
+    {
+      "review": "fluidi/independent-review/final-freeze-sha256.json",
+      "files": 251,
+      "changed_since_review": []
+    },
+    {
+      "review": "termodinamica/review/final-freeze-sha256.json",
+      "files": 247,
+      "changed_since_review": []
+    },
+    {
+      "review": "radiazioni-e-ottica/review/final-hashes.json",
+      "files": 255,
+      "changed_since_review": []
+    },
+    {
+      "review": "metodi-della-fisica/reviewer-bio_strutture/freeze-comparison.json",
+      "files": 260,
+      "changed_since_review": []
+    },
+    {
+      "review": "elettricita-e-magnetismo/independent-review/final-hashes.json",
+      "files": 258,
+      "changed_since_review": []
+    }
+  ],
+  "crosscheck": {
+    "subject": "fisica-semestre-filtro",
+    "pairs_checked": 805,
+    "original_anchors_preserved": 142,
+    "numeric_flags_reviewed": [
+      {
+        "file": "domande/fisica-semestre-filtro/termodinamica/30.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/elettricita-e-magnetismo/1.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/elettricita-e-magnetismo/10.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/elettricita-e-magnetismo/5.md",
+        "status": "PASS",
+        "reason": "Grouped R_1/R_2 references and omitted repeated R_23/R_3 labels change extracted subscript counts. Component values, currents, voltages and displayed formulas independently verified identical by bio_organizzazione."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/elettricita-e-magnetismo/2.md",
+        "status": "PASS",
+        "reason": "Equivalent TeX forms for one half; prose does not repeat already defined delta-x and v_0. Every worked solution and all displayed equations independently read and compared by bio_organizzazione."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/onde-meccaniche/7.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/onde-meccaniche/8.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/metodi-della-fisica/6.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/metodi-della-fisica/2.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "svolti/fisica-semestre-filtro/termodinamica/2.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      },
+      {
+        "file": "teoria/fisica-semestre-filtro/metodi-della-fisica.md",
+        "status": "PASS",
+        "reason": "Same numeric multiset; order changes follow translated syntax. Full chapter read in both languages by the independent reviewer; formulas and results verified equivalent."
+      }
+    ],
+    "near_prompt_pairs_reviewed": [
+      {
+        "a": "src/content/domande/fisica-semestre-filtro/elettricita-e-magnetismo/87.md",
+        "b": "src/content/domande/fisica-semestre-filtro/elettricita-e-magnetismo/88.md",
+        "similarity": 0.93,
+        "status": "PASS",
+        "reason": "Deliberate Lenz contrast: increasing versus decreasing inward flux. Different current direction and explanation test opposition to change rather than opposition to the external field. Independently read by reviewer and coordinator."
+      },
+      {
+        "a": "src/content/domande/fisica-semestre-filtro/metodi-della-fisica/12.md",
+        "b": "src/content/domande/fisica-semestre-filtro/metodi-della-fisica/63.md",
+        "similarity": 0.915,
+        "status": "PASS",
+        "reason": "Vector addition versus subtraction. Second requires reversing both components and distinguishes reversed operand order; not a numerical reskin. Independently read by reviewer and coordinator."
+      },
+      {
+        "a": "src/content-en/domande/fisica-semestre-filtro/elettricita-e-magnetismo/87.md",
+        "b": "src/content-en/domande/fisica-semestre-filtro/elettricita-e-magnetismo/88.md",
+        "similarity": 0.912,
+        "status": "PASS",
+        "reason": "Deliberate Lenz contrast: increasing versus decreasing inward flux. Different current direction and explanation test opposition to change rather than opposition to the external field. Independently read by reviewer and coordinator."
+      },
+      {
+        "a": "src/content-en/domande/fisica-semestre-filtro/metodi-della-fisica/12.md",
+        "b": "src/content-en/domande/fisica-semestre-filtro/metodi-della-fisica/63.md",
+        "similarity": 0.9,
+        "status": "PASS",
+        "reason": "Vector addition versus subtraction. Second requires reversing both components and distinguishes reversed operand order; not a numerical reskin. Independently read by reviewer and coordinator."
+      }
+    ],
+    "unresolved_findings": []
+  },
+  "interactive_browser_check": "Not completed: no permitted local preview surface available. Real HTML, KaTeX, Astro build and rasterized SVG checks were performed."
+}

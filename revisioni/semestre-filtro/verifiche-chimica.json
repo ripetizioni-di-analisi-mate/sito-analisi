@@ -15,8 +15,8 @@
             "dafare": 14,
             "domande": 90,
             "esercizi": 20,
-            "paroleTeoria": 4161,
-            "figureTeoria": 11,
+            "paroleTeoria": 4244,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -32,8 +32,8 @@
             "dafare": 14,
             "domande": 90,
             "esercizi": 20,
-            "paroleTeoria": 3976,
-            "figureTeoria": 11,
+            "paroleTeoria": 4059,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -55,7 +55,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 4237,
-            "figureTeoria": 11,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -72,7 +72,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 3958,
-            "figureTeoria": 11,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -133,7 +133,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 3402,
-            "figureTeoria": 10,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -150,7 +150,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 3245,
-            "figureTeoria": 10,
+            "figureTeoria": 9,
             "distribuzione": [
               23,
               23,
@@ -172,7 +172,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 3587,
-            "figureTeoria": 11,
+            "figureTeoria": 10,
             "distribuzione": [
               23,
               23,
@@ -189,7 +189,7 @@
             "domande": 90,
             "esercizi": 20,
             "paroleTeoria": 3591,
-            "figureTeoria": 11,
+            "figureTeoria": 10,
             "distribuzione": [
               23,
               23,
@@ -249,7 +249,7 @@
             "dafare": 14,
             "domande": 90,
             "esercizi": 20,
-            "paroleTeoria": 3739,
+            "paroleTeoria": 3791,
             "figureTeoria": 8,
             "distribuzione": [
               23,
@@ -266,7 +266,7 @@
             "dafare": 14,
             "domande": 90,
             "esercizi": 20,
-            "paroleTeoria": 3378,
+            "paroleTeoria": 3426,
             "figureTeoria": 8,
             "distribuzione": [
               23,
@@ -275,7 +275,7 @@
               22
             ],
             "medianaParoleQuiz": 44,
-            "medianaParoleEsercizio": 191
+            "medianaParoleEsercizio": 192
           }
         }
       }
@@ -297,5 +297,10 @@
   },
   "localized_svg_files": 138,
   "independent_review": "All seven chapters read in full by a reviewer different from the author; chapter reports record evidence.",
-  "interactive_browser_check": "Not completed: unavailable permitted local preview surface. Figures were rasterized and visually inspected at mobile and desktop widths."
+  "interactive_browser_check": "Not completed: unavailable permitted local preview surface. Figures were rasterized and visually inspected at mobile and desktop widths.",
+  "final_format_review": {
+    "acidi-basi-redox": "bio_flusso: semantic equivalence of 70 formula edits, 13 new containers per language, all 230 files compared against prior reviewed content. PASS.",
+    "soluzioni-proprieta-colligative": "bio_strutture: semantic equivalence of 42 formula edits in 32 files, eight new containers per language. PASS.",
+    "renderer_and_build_repeated": true
+  }
 }

@@ -3,9 +3,11 @@ titolo: "Acidi, basi, tamponi e reazioni di ossidoriduzione"
 sommario: "Equilibri acido-base, calcolo del pH, tamponi biologici, bilanciamento redox e potenziali elettrochimici."
 ---
 
+:::osservazione{titolo="Composizione e trasformazioni"}
 Aggiungere poche gocce di acido a due soluzioni inizialmente allo stesso pH può produrre variazioni molto diverse. Una contiene soltanto acqua e una piccola quantità di soluto; l'altra contiene una coppia tampone. Il pH iniziale descrive l'attività dell'idronio, ma non indica quanta sostanza possa ancora reagire. Per risolvere il problema servono anche composizione, quantità e condizioni del sistema.
 
 In questo capitolo si distinguono due tipi di trasformazione: trasferimento di protoni negli equilibri acido-base e trasferimento di elettroni nelle ossidoriduzioni. Alcune reazioni coinvolgono entrambi, ma i due bilanci restano distinti. Nei problemi si parte dalle specie presenti, si esegue l'eventuale reazione stechiometrica e soltanto dopo si sceglie l'equilibrio da risolvere. Il risultato va confrontato con la direzione del cambiamento prevista: una base forte aggiunta a un tampone non deve farne diminuire il pH nel modello chiuso considerato.
+:::
 
 ## Le definizioni di acido e di base
 
@@ -25,11 +27,13 @@ Un **acido di Lewis** accetta una coppia di elettroni per formare un legame; una
 Una specie **anfiprotica** può sia cedere sia acquistare un protone. Lo ione $\mathrm{H_2PO_4^-}$ può diventare $\mathrm{HPO_4^{2-}}$ cedendo un protone, oppure $\mathrm{H_3PO_4}$ acquistandolo. L'acqua presenta entrambe le possibilità.
 :::
 
+:::esempio{titolo="Riconoscere le coppie coniugate"}
 Per riconoscere una coppia coniugata conviene confrontare formule e cariche. Togliere $\mathrm{H^+}$ rimuove un idrogeno e diminuisce la carica di una unità; togliere un atomo di idrogeno neutro sarebbe una trasformazione diversa. Una coppia coniugata non è una coppia di specie che semplicemente compaiono ai due lati della freccia. Nel trasferimento tra ammoniaca e acqua, $\mathrm{NH_3}$ e $\mathrm{OH^-}$ sono due basi, non una coppia coniugata.
 
 ![Trasferimenti di un protone fra le quattro forme del fosfato](/figure/chimica-semestre-filtro/acidi-basi-redox/coppie-it.svg)
 
 La sequenza mostra cambiamenti possibili della composizione, senza affermare che le quattro specie abbiano la stessa abbondanza a un dato pH.
+:::
 
 ## Autoprotolisi dell'acqua e pH
 
@@ -51,11 +55,13 @@ A $25\,^\circ\mathrm C$, $K_w\simeq10^{-14}$ e $pK_w\simeq14$. Nel modello ideal
 Un indicatore è una coppia coniugata le cui due forme hanno colori diversi. Per $\mathrm{HIn\rightleftharpoons H^++In^-}$, il rapporto tra le forme dipende dal pH e dal $pK_a$ dell'indicatore. Il cambiamento di colore è normalmente distribuito su un intervallo di circa due unità di pH centrato sul $pK_a$. L'indicatore usato in una titolazione deve cambiare colore nel tratto ripido della curva vicino all'equivalenza.
 :::
 
+:::osservazione{titolo="Leggere la scala del pH"}
 La scala è logaritmica: passare da pH $4$ a pH $3$ significa aumentare di dieci volte l'attività protonica, non aggiungere una quantità fissa di acido. In particolare non si possono mediare i pH per trovare il pH di una miscela. Si devono prima combinare le quantità delle specie e considerare le reazioni che avvengono. Anche l'intervallo $0$–$14$ è familiare, non un limite matematico universale della definizione di pH.
 
 ![pH di un acido forte molto diluito, includendo l'autoprotolisi dell'acqua](/figure/chimica-semestre-filtro/acidi-basi-redox/diluizione-it.svg)
 
 Il grafico assume soluzione ideale e $25\,^\circ\mathrm C$. Quando l'acido diventa estremamente diluito, il pH si avvicina a $7$ dal lato acido; la previsione $-\log C$ da sola diventa inadeguata.
+:::
 
 ## Acidi e basi forti o deboli
 
@@ -83,9 +89,11 @@ Qui la consueta scrittura numerica sottintende la concentrazione standard. Se $x
 Se la concentrazione dell'acido forte è confrontabile con quella dell'idronio dell'acqua, l'autoprotolisi va inclusa. Per esempio un acido forte monoprotico a concentrazione $C$ soddisfa $h=C+\dfrac{K_w}{h}$ nel modello ideale, dove $h$ è la concentrazione numerica dell'idronio.
 :::
 
-Le approssimazioni si controllano dopo il calcolo. Per l'acido acetico dell'esempio, $x/C\simeq0{,}0415$: la dissociazione è circa il $4{,}15\%$. La radice quadrata fornisce una buona stima, mentre l'equazione quadratica mantiene il consumo di acido nel denominatore. Se invece $K_a=10^{-3}$ e $C=0{,}010$, la frazione dissociata è circa il $27\%$: sostituire $C-x$ con $C$ non è giustificato. Dire "acido debole" non basta per scegliere una formula.
+:::osservazione{titolo="Controllare la dissociazione trascurata"}
+Le approssimazioni si controllano dopo il calcolo. Per l'acido acetico dell'esempio, $\dfrac{x}{C}\simeq0{,}0415$: la dissociazione è circa il $4{,}15\%$. La radice quadrata fornisce una buona stima, mentre l'equazione quadratica mantiene il consumo di acido nel denominatore. Se invece $K_a=10^{-3}$ e $C=0{,}010$, la frazione dissociata è circa il $27\%$: sostituire $C-x$ con $C$ non è giustificato. Dire "acido debole" non basta per scegliere una formula.
 
 Per concentrazioni molto basse o quando più specie reagiscono contemporaneamente, la via generale combina bilancio di materia, elettroneutralità e costanti di equilibrio. Le formule semplificate sono conseguenze di questi vincoli, non regole alternative che possano violare la conservazione della carica.
+:::
 
 ## Acidi poliprotici, neutralizzazione e sali
 
@@ -107,16 +115,18 @@ Per bicarbonato con $pK_{a1}=6{,}37$ e $pK_{a2}=10{,}33$ si stima quindi $\mathr
 :::osservazione{#neutralizzazione-sali titolo="Neutralizzazione, equivalenza e idrolisi"}
 Nella neutralizzazione, $\mathrm{H_3O^++OH^-\rightarrow2H_2O}$. Prima si confrontano le moli reagenti, poi si calcola la concentrazione dell'eventuale eccesso nel volume totale. L'equivalenza corrisponde al rapporto stechiometrico tra acido e base.
 
-I sali liberano ioni che possono reagire con l'acqua. L'acetato, base coniugata di un acido debole, dà $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$; la sua costante basica è $K_w/K_a$. Lo ione ammonio è invece un acido con $K_a=K_w/K_b(\mathrm{NH_3})$. Perciò una soluzione di acetato di sodio è basica e una di cloruro di ammonio è acida. NaCl è pressoché neutro nel modello diluito perché gli ioni hanno idrolisi trascurabile.
+I sali liberano ioni che possono reagire con l'acqua. L'acetato, base coniugata di un acido debole, dà $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$; la sua costante basica è $\dfrac{K_w}{K_a}$. Lo ione ammonio è invece un acido con $K_a=\dfrac{K_w}{K_b(\mathrm{NH_3})}$. Perciò una soluzione di acetato di sodio è basica e una di cloruro di ammonio è acida. NaCl è pressoché neutro nel modello diluito perché gli ioni hanno idrolisi trascurabile.
 
 All'equivalenza di un acido debole titolato con una base forte rimane il sale della base coniugata; il pH è quindi basico a $25\,^\circ\mathrm C$. Se entrambi gli ioni del sale reagiscono con l'acqua, l'esito dipende dalle costanti dei due equilibri.
 :::
 
+:::esempio{titolo="Seguire una titolazione"}
 Durante la titolazione di HA con una base forte si attraversano situazioni chimiche diverse. All'inizio è presente soprattutto l'acido debole; prima dell'equivalenza coesistono HA e la base coniugata; all'equivalenza prevale il sale; oltre l'equivalenza domina l'idrossido aggiunto in eccesso. Applicare Henderson-Hasselbalch quando una delle componenti è esaurita produce un rapporto privo di significato. Alla semiequivalenza le quantità stechiometriche di HA e $\mathrm{A^-}$ coincidono, mentre all'equivalenza coincidono le moli di acido iniziali e di base forte aggiunta.
 
 ![Curva di titolazione di un acido debole con semiequivalenza ed equivalenza distinte](/figure/chimica-semestre-filtro/acidi-basi-redox/titolazione-it.svg)
 
 Il grafico risolve i bilanci di un modello ideale a $25\,^\circ\mathrm C$: $25\,\mathrm{mL}$ di HA $0{,}10\,\mathrm{mol\,L^{-1}}$, $pK_a=4{,}76$, titolati con NaOH della stessa concentrazione. L'equivalenza a $25\,\mathrm{mL}$ è basica per l'idrolisi di $\mathrm{A^-}$.
+:::
 
 ## Tamponi e capacità tamponante
 
@@ -131,11 +141,13 @@ $$
 La forma con le concentrazioni di equilibrio richiede attività approssimabili con le concentrazioni ridotte. Per sostituire a queste le quantità ricavate dal bilancio stechiometrico occorre inoltre che il successivo riequilibrio le modifichi poco. Per componenti nella stessa soluzione il volume si semplifica e si può usare il rapporto tra le moli, aggiornate dopo l'eventuale reazione con l'acido o la base aggiunti. Con $0{,}030\,\mathrm{mol}$ di acetato e $0{,}020\,\mathrm{mol}$ di acido acetico, assumendo $pK_a=4{,}76$, si ottiene $\mathrm{pH}=4{,}94$.
 :::
 
+:::esempio{titolo="Tampone ammoniaca e ammonio"}
 Una coppia tampone può essere descritta anche partendo da una base debole. Per ammoniaca e ammonio, a $25\,^\circ\mathrm C$ con $K_b=1{,}80\cdot10^{-5}$, si usa
 $$
 \mathrm{pOH}=pK_b+\log_{10}\dfrac{[\mathrm{NH_4^+}]}{[\mathrm{NH_3}]}.
 $$
 Se nel modello ideale le concentrazioni della coppia sono approssimativamente $0{,}020\,\mathrm{mol\,L^{-1}}$ di ammonio e $0{,}010\,\mathrm{mol\,L^{-1}}$ di ammoniaca, si ottengono $\mathrm{pOH}\simeq4{,}745+\log_{10}2=5{,}046$ e $\mathrm{pH}\simeq8{,}95$, usando $pK_w=14{,}00$. Il rapporto nella formula del pOH è acido coniugato/base. L'ammoniaca consuma acido aggiunto, mentre l'ammonio può neutralizzare base aggiunta.
+:::
 
 :::osservazione{#capacita-tampone titolo="Efficienza del tampone"}
 Il rapporto tra base e acido determina il pH, mentre la loro quantità totale determina quanta aggiunta può essere assorbita. La **capacità tamponante** misura le moli di acido o base forte, per litro, necessarie per una variazione unitaria di pH nelle condizioni considerate.
@@ -143,11 +155,13 @@ Il rapporto tra base e acido determina il pH, mentre la loro quantità totale de
 Per una coppia monoprotica chiusa, a concentrazione totale fissata, la capacità dovuta alla coppia è massima vicino a $\mathrm{pH}=pK_a$. L'intervallo $pK_a\pm1$ corrisponde a un rapporto base/acido tra $0{,}1$ e $10$. Due tamponi con identico rapporto ma concentrazioni totali $0{,}10$ e $0{,}010\,\mathrm{mol\,L^{-1}}$ hanno circa lo stesso pH; quello più concentrato sopporta una maggiore aggiunta prima di subire una grande variazione.
 :::
 
+:::osservazione{titolo="Diluizione e capacità tampone"}
 Una diluizione moderata mantiene approssimativamente il rapporto base/acido e quindi il pH, ma riduce la capacità per litro. Il numero di moli totali presenti nello stesso recipiente resta invece invariato se si aggiunge solo solvente: è necessario distinguere una proprietà riferita al volume dalla quantità complessiva. Diluizioni estreme, modifiche dei coefficienti di attività e contributo dell'acqua possono rendere insufficiente la semplice invarianza del rapporto.
 
 ![Bilancio delle moli di acido e base coniugata prima e dopo aggiunta di acido forte](/figure/chimica-semestre-filtro/acidi-basi-redox/tampone-it.svg)
 
 Nel caso illustrato $5\,\mathrm{mmol}$ di HCl trasformano acetato in acido acetico. Il totale della coppia resta $50\,\mathrm{mmol}$, mentre il rapporto che determina il pH cambia.
+:::
 
 ## I sistemi tampone nei fluidi biologici
 
@@ -165,7 +179,9 @@ La coppia fosfato $\mathrm{H_2PO_4^-/HPO_4^{2-}}$ scambia un protone ed è prese
 L'acidosi descrive un processo che tende ad abbassare il pH; l'alcalosi descrive un processo che tende ad aumentarlo. La direzione di questi processi si interpreta con gli equilibri e con gli scambi del sistema.
 :::
 
+:::esempio{titolo="Variabili nel modello bicarbonato"}
 Nel modello bicarbonato, raddoppiare la pressione della $\mathrm{CO_2}$ mantenendo fisso il bicarbonato raddoppia il denominatore e riduce il pH di $\log_{10}2\simeq0{,}30$. Questo confronto serve a leggere il ruolo delle variabili; non descrive automaticamente la risposta di un organismo, nel quale altri processi possono cambiare contemporaneamente le concentrazioni. Un tampone chimico e la regolazione fisiologica del bilancio acido-base sono livelli di descrizione diversi.
+:::
 
 ## Solubilità ed equilibrio acido-base
 
@@ -180,9 +196,11 @@ Aggiungere acido favorisce $\mathrm{C_2O_4^{2-}+H^+\rightleftharpoons HC_2O_4^-}
 Nel sistema acido urico/urato, diminuire il pH aumenta la frazione di acido urico neutro; la bassa solubilità di questa forma può favorirne la precipitazione. Il comportamento dell'urato di sodio dipende inoltre da temperatura, attività ioniche e composizione della soluzione. Perciò il solo nome del sale non permette di stabilire l'andamento della solubilità al variare del pH. Questi equilibri sono esempi della chimica dei depositi e dei calcoli.
 :::
 
+:::osservazione{titolo="Specie libere e concentrazione totale"}
 Il prodotto di solubilità non contiene tutte le forme analitiche dell'ossalato sommate insieme: contiene lo ione libero nella specifica reazione di dissoluzione. Se una misura fornisce "ossalato totale", occorre distinguere la frazione protonata da quella libera prima di calcolare il prodotto ionico. La temperatura e la fase solida devono essere definite; una diversa forma cristallina o la presenza di complessanti introduce ulteriori equilibri.
 
 ![Equilibrio di dissoluzione accoppiato alla protonazione dell'ossalato libero](/figure/chimica-semestre-filtro/acidi-basi-redox/solubilita-it.svg)
+:::
 
 ## Ossidazione, riduzione e bilanciamento
 
@@ -207,9 +225,11 @@ $$
 La carica totale vale $+17$ da entrambi i lati. In ambiente basico si può completare il bilanciamento acido, poi aggiungere a entrambi i membri tanti idrossidi quanti sono i protoni. I protoni e gli idrossidi diventano acqua, che si semplifica quando compare nei due membri.
 :::
 
+:::osservazione{titolo="Controllare atomi e carica"}
 Gli elettroni delle semireazioni sono strumenti di contabilità: nella reazione globale devono cancellarsi completamente. Una reazione può avere tutti gli atomi bilanciati e una carica totale diversa nei due membri; in quel caso il bilanciamento è ancora incompleto. L'ambiente acido o basico determina quali specie utilizzare per compensare idrogeno e ossigeno e può influenzare anche il prodotto effettivamente ottenuto dal reagente.
 
 ![Cinque ossidazioni del ferro bilanciano la riduzione di uno ione permanganato](/figure/chimica-semestre-filtro/acidi-basi-redox/redox-it.svg)
+:::
 
 ## Celle elettrochimiche, energia e potenziale
 
@@ -223,9 +243,11 @@ $$
 I pedici $c$ e $a$ indicano catodo e anodo; entrambi i valori sono potenziali di riduzione. Per $E^\circ(\mathrm{Cu^{2+}/Cu})=0{,}34\,\mathrm V$ ed $E^\circ(\mathrm{Zn^{2+}/Zn})=-0{,}76\,\mathrm V$, si ottiene $1{,}10\,\mathrm V$. Moltiplicare una semireazione per bilanciare gli elettroni lascia invariato il suo potenziale.
 :::
 
+:::esempio{titolo="Elettrodi e conduzione nella pila"}
 Il nome dell'elettrodo dipende dalla reazione, non dal segno elettrico: ossidazione all'anodo e riduzione al catodo valgono anche in una cella elettrolitica, dove un generatore esterno forza la trasformazione e i segni sono differenti. Nella pila zinco-rame, il ponte salino non è una strada per gli elettroni: fornisce conduzione ionica. L'accumulo di carica arresterebbe rapidamente il processo se i compartimenti fossero collegati soltanto dal filo.
 
 ![Pila zinco-rame: elettroni nel filo e ioni nel ponte salino](/figure/chimica-semestre-filtro/acidi-basi-redox/pila-it.svg)
+:::
 
 :::osservazione{#nernst-gibbs titolo="Equazione di Nernst e lavoro elettrico"}
 Nelle condizioni effettive, il potenziale dipende dal quoziente di reazione adimensionale $Q$:
@@ -241,9 +263,11 @@ Per $\mathrm{Zn+Cu^{2+}\rightarrow Zn^{2+}+Cu}$, $Q=\dfrac{a_{\mathrm{Zn^{2+}}}}
 La variazione di energia libera per la reazione è $\Delta_rG=-nFE$, e in condizioni standard $\Delta_rG^\circ=-nFE^\circ$. Quindi $E>0$ corrisponde a una reazione spontanea nel verso scritto. A temperatura e pressione costanti, se l'unico lavoro diverso da quello di espansione è elettrico, il massimo lavoro elettrico erogabile reversibilmente per mole di reazione è $-\Delta_rG$. All'equilibrio $E=0$ e $Q=K$, perciò $\ln K=\dfrac{nFE^\circ}{RT}$. Un potenziale biochimico standard trasformato, indicato spesso con un apice primo, si riferisce a condizioni specificate, per esempio pH fissato a $7$; va distinto dal potenziale standard chimico con attività protonica unitaria.
 :::
 
-Il potenziale è una grandezza intensiva. Raddoppiare l'equazione raddoppia il numero di elettroni e la variazione di energia libera, ma lascia invariato il rapporto $-\Delta_rG/(nF)$. Per questo i potenziali non si moltiplicano per i coefficienti stechiometrici. Inoltre $E^\circ>0$ descrive le condizioni standard: in una composizione diversa un quoziente abbastanza grande può rendere $E$ negativo. Il verso favorito dipende dalle condizioni effettive.
+:::osservazione{titolo="Potenziale e condizioni effettive"}
+Il potenziale è una grandezza intensiva. Raddoppiare l'equazione raddoppia il numero di elettroni e la variazione di energia libera, ma lascia invariato il rapporto $-\dfrac{\Delta_rG}{nF}$. Per questo i potenziali non si moltiplicano per i coefficienti stechiometrici. Inoltre $E^\circ>0$ descrive le condizioni standard: in una composizione diversa un quoziente abbastanza grande può rendere $E$ negativo. Il verso favorito dipende dalle condizioni effettive.
 
 ![Dipendenza del potenziale della pila zinco-rame dal logaritmo del quoziente di reazione](/figure/chimica-semestre-filtro/acidi-basi-redox/nernst-it.svg)
+:::
 
 ## Ossigeno, respirazione e specie radicaliche
 
@@ -273,6 +297,8 @@ $$
 Questo bilancio descrive un ciclo mediato dal metallo; la reazione diretta tra superossido e perossido è lenta. La speciazione del ferro e l'ambiente chimico influenzano gli intermedi e la velocità. Il modello spiega perché una trasformazione globalmente possibile richieda anche un percorso cineticamente accessibile.
 :::
 
+:::osservazione{titolo="Distinguere radicali e ioni"}
 Il punto vicino a un simbolo indica un elettrone spaiato. $\mathrm{OH^-}$ e ${}^\bullet\mathrm{OH}$ non sono intercambiabili: differiscono per carica e struttura elettronica. Anche il perossido di idrogeno è una specie reattiva dell'ossigeno, ma non è esso stesso un radicale nella struttura usuale. Una prova in cui un chelante riduce l'ossidazione di una molecola suggerisce un ruolo della disponibilità del metallo; da sola non identifica ogni intermedio né dimostra che tutti i chelanti abbiano lo stesso effetto.
 
 ![Riciclo del ferro nel modello radicalico di Fenton e nel bilancio catalizzato di Haber-Weiss](/figure/chimica-semestre-filtro/acidi-basi-redox/fenton-it.svg)
+:::

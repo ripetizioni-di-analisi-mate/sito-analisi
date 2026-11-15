@@ -19,9 +19,11 @@ In una **sospensione** le particelle disperse sono abbastanza grandi da poter se
 Il latte è un'emulsione colloidale di goccioline lipidiche in acqua; il sangue intero contiene cellule sospese nel plasma, che a sua volta contiene sali disciolti e proteine colloidali. Un **aerosol** è una dispersione di goccioline liquide o particelle solide in un gas, come la nebbia o il fumo. La classificazione permette di scegliere un modello di miscela prima di applicare una legge delle soluzioni.
 :::
 
+:::esempio{titolo="Fasi e particelle disperse"}
 Il numero di sostanze non coincide con il numero di fasi. In una soluzione salina, cationi, anioni e acqua condividono la stessa fase; nel sangue intero non è corretto trattare cellule e plasma come un'unica soluzione molecolare. Anche l'aspetto limpido è un indizio da interpretare, non una definizione: osservazione a scala diversa, sedimentazione e diffusione della luce forniscono informazioni complementari.
 
 ![Soluzione con molecole disperse, colloide con aggregati e sospensione sedimentata](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/miscele-it.svg)
+:::
 
 ## Acqua, dissoluzione ed elettroliti
 
@@ -42,9 +44,11 @@ $$
 Nel limite ideale una mole di cloruro di sodio dà due moli di particelle e una mole di cloruro di calcio ne dà tre. Sodio, potassio, calcio, cloruro e bicarbonato contribuiscono alla composizione ionica dei fluidi biologici. La concentrazione del sale e quella dei singoli ioni sono grandezze differenti; da $0{,}10\,\mathrm{mol\,L^{-1}}$ di $\mathrm{CaCl_2}$ si ottengono idealmente $0{,}10\,\mathrm{mol\,L^{-1}}$ di calcio e $0{,}20\,\mathrm{mol\,L^{-1}}$ di cloruro.
 :::
 
+:::osservazione{titolo="Idratazione, solubilità e ionizzazione"}
 Nell'idratazione di un catione è favorito l'orientamento dell'ossigeno parzialmente negativo verso lo ione; per un anione sono favoriti gli idrogeni parzialmente positivi. Queste interazioni sono dinamiche. Essere molto solubile non significa essere un elettrolita forte: il glucosio interagisce bene con l'acqua senza produrre una coppia di ioni. «Forte» descrive l'estensione della ionizzazione, «concentrato» la quantità per unità di soluzione.
 
 ![Una molecola di glucosio e le particelle prodotte da NaCl e CaCl2 nel limite ideale](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/particelle-it.svg)
+:::
 
 ## Esprimere la concentrazione
 
@@ -64,9 +68,11 @@ Nella percentuale massa-volume si specificano le unità perché il rapporto tra 
 La molarità varia se cambia il volume per effetto della temperatura. La molalità dipende dalle masse, quindi è adatta alle relazioni che coinvolgono variazioni di temperatura. Per passare dalla percentuale in massa alla molarità occorrono anche la densità della soluzione e la massa molare del soluto.
 :::
 
+:::osservazione{titolo="Identificare il denominatore"}
 Prima di sostituire numeri, identificare il denominatore: soluzione intera, solvente oppure moli totali. Poi convertire grammi in moli e millilitri in litri quando necessario. Un valore percentuale senza la convenzione è incompleto. Se una soluzione è al dieci per cento in massa, un litro contiene cento grammi di soluto soltanto nell'ulteriore caso in cui quel litro di soluzione pesi un chilogrammo.
 
 ![Molarità riferita al volume finale e molalità riferita alla sola massa di acqua](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/denominatori-it.svg)
+:::
 
 :::definizione{#frazione-molare titolo="Frazione molare"}
 La **frazione molare** del componente $j$ è il rapporto tra le sue moli e le moli totali della miscela:
@@ -88,9 +94,11 @@ Per ottenere $100\,\mathrm{mL}$ di soluzione $0{,}20\,\mathrm{mol\,L^{-1}}$ da u
 Mescolando soluzioni dello stesso soluto senza reazione si sommano le moli. Il volume finale va misurato oppure dichiarato additivo nell'approssimazione adottata.
 :::
 
+:::osservazione{titolo="Bilancio del soluto nel mescolamento"}
 La concentrazione finale di un mescolamento non è in generale la media aritmetica delle due concentrazioni. Ogni prelievo va pesato per il proprio volume e le moli totali vanno divise per il volume finale effettivo. Se invece il soluto reagisce, precipita o si perde, serve un bilancio della specie interessata: la conservazione della materia non garantisce che tutte le moli iniziali rimangano nella stessa forma disciolta.
 
 ![Diluizione con quattro particelle prima e dopo: aumenta il volume, non la quantità di soluto](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/diluizione-it.svg)
+:::
 
 :::definizione{#equivalenti titolo="Equivalenti chimici e carica ionica"}
 Un **equivalente** esprime una quantità capace di scambiare una mole di protoni, una mole di elettroni oppure una mole di cariche, secondo il processo dichiarato. Se $z$ è il numero di equivalenti per mole nel processo considerato, si ha $n_{\mathrm{eq}}=z n$. La concentrazione equivalente vale quindi $c_{\mathrm{eq}}=zc$.
@@ -134,9 +142,11 @@ $c$ è la concentrazione del gas disciolto, $p$ è la sua pressione parziale sop
 Raddoppiando la pressione parziale a temperatura costante, la concentrazione di equilibrio raddoppia nel campo di validità della legge. Nell'ossigeno trasportato dal sangue si distingue la quota fisicamente disciolta da quella legata all'emoglobina; la formula descrive direttamente soltanto la prima. Per l'anidride carbonica le reazioni con l'acqua e i tamponi richiedono ulteriori equilibri.
 :::
 
-Nella convenzione inversa $p=k'_Hc$, usando le stesse unità, vale $k'_H=1/k_H$. Una costante grande indica quindi maggiore solubilità nella prima convenzione e minore solubilità nella seconda. Un'altra distinzione riguarda la pressione totale: aggiungere un gas inerte a volume e temperatura costanti aumenta la pressione totale ma non quella parziale del gas già presente, se le sue moli non cambiano.
+:::osservazione{titolo="Convenzioni della legge di Henry"}
+Nella convenzione inversa $p=k'_Hc$, usando le stesse unità, vale $k'_H=\dfrac{1}{k_H}$. Una costante grande indica quindi maggiore solubilità nella prima convenzione e minore solubilità nella seconda. Un'altra distinzione riguarda la pressione totale: aggiungere un gas inerte a volume e temperatura costanti aumenta la pressione totale ma non quella parziale del gas già presente, se le sue moli non cambiano.
 
 ![Concentrazione di equilibrio proporzionale alla pressione parziale a temperatura costante](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/henry-it.svg)
+:::
 
 ## Pressione di vapore delle soluzioni
 
@@ -152,9 +162,11 @@ $$
 Un soluto non volatile riduce la frazione molare del solvente e quindi la pressione di vapore. Per esempio, con $x_{w}=0{,}98$ si ottiene $p=0{,}98p^\ast$. Se entrambi i componenti sono volatili, si sommano i rispettivi contributi; il vapore può avere una composizione diversa da quella del liquido.
 :::
 
+:::osservazione{titolo="Equilibrio fra liquido e vapore"}
 L'abbassamento non va spiegato come una semplice barriera di soluto che copre la superficie. Il mescolamento modifica il potenziale chimico del solvente e quindi l'equilibrio con il vapore. In una soluzione reale compare l'attività del solvente al posto della sola frazione molare. Una miscela con due componenti volatili richiede inoltre di distinguere le frazioni nel liquido da quelle nel vapore, ricavabili con Dalton.
 
 ![Pressione relativa del solvente uguale alla sua frazione molare nel modello ideale](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/raoult-it.svg)
+:::
 
 ## Ebollizione e congelamento
 
@@ -200,9 +212,11 @@ $$
 $T$ è la temperatura assoluta e $R$ la costante dei gas; le unità di $R$ vanno scelte in modo coerente. Con $c$ in $\mathrm{mol\,L^{-1}}$ e $R=0{,}082057\,\mathrm{L\,atm\,mol^{-1}\,K^{-1}}$, la pressione è in atmosfere. Tra due soluzioni ideali diluite alla stessa temperatura, una membrana che trattiene tutti i soluti consente di confrontare $\Delta\pi=RT\Delta c_{\mathrm{osm}}$.
 :::
 
+:::osservazione{titolo="Flusso netto e pressione osmotica"}
 La pressione osmotica è una pressione di confronto, non la pressione idrostatica che una cellula deve necessariamente possedere. Due compartimenti possono arrestare il flusso netto con concentrazioni diverse se una differenza idrostatica compensa il contributo osmotico. Le molecole d'acqua continuano ad attraversare nei due versi all'equilibrio; ciò che si annulla è il trasferimento netto. Una pressione esterna sufficiente può anche invertire il flusso: è il principio dell'osmosi inversa.
 
 ![Flusso iniziale di acqua verso più particelle trattenute, a pressioni iniziali uguali](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/osmosi-it.svg)
+:::
 
 :::definizione{#osmolarita titolo="Osmolarità e osmolalità"}
 L'**osmolarità** è la quantità di particelle osmoticamente attive per litro di soluzione; l'**osmolalità** è la stessa quantità per chilogrammo di solvente. Nel limite ideale,
@@ -222,9 +236,11 @@ L'uguaglianza dell'osmolarità totale definisce invece l'**isoosmolarità**. Un 
 Un'eccessiva entrata d'acqua può condurre all'emolisi degli eritrociti, mentre un mezzo ipertonico può provocarne il raggrinzimento. L'edema è un accumulo di liquido negli spazi interstiziali; pressioni idrostatiche, proteine plasmatiche, permeabilità capillare e drenaggio linfatico concorrono al suo sviluppo. Un semplice confronto tra osmolarità totali non descrive quindi tutti gli scambi tra plasma e interstizio.
 :::
 
+:::osservazione{titolo="Ipotesi del modello cellulare"}
 In un modello con grande serbatoio esterno, soluti intracellulari non permeanti conservati e pressione idrostatica trascurabile, il volume può essere stimato eguagliando le concentrazioni efficaci finali. Questo richiede di trascurare il volume cellulare non osmotico e i trasporti attivi. Per una cellula reale tali ipotesi hanno limiti: un cambiamento iniziale di volume può essere seguito da permeazione, metabolismo o regolazione, quindi la scala temporale va sempre dichiarata.
 
 ![Risposte cellulari a soluti trattenuti e a urea permeante: stesso totale non implica stessa tonicità](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/tonicita-it.svg)
+:::
 
 :::esempio{#fisiologica-glucosata titolo="Soluzione fisiologica e soluzione glucosata"}
 Una soluzione di $\mathrm{NaCl}$ allo $0{,}9\%$ massa-volume contiene $9{,}0\,\mathrm{g\,L^{-1}}$. Con massa molare $58{,}5\,\mathrm{g\,mol^{-1}}$,

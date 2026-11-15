@@ -3,9 +3,11 @@ titolo: "Acids, bases, buffers and oxidation–reduction reactions"
 sommario: "Acid–base equilibria, pH calculations, biological buffers, redox balancing and electrochemical potentials."
 ---
 
+:::osservazione{titolo="Composition and transformations"}
 Adding a few drops of acid to two solutions that initially have the same pH can produce very different changes. One contains only water and a small amount of solute; the other contains a buffer pair. The initial pH describes hydronium activity, but does not tell us how much substance remains available to react. We also need the composition, amounts and conditions of the system.
 
 This chapter distinguishes two kinds of change: proton transfer in acid–base equilibria and electron transfer in redox reactions. Some reactions involve both, but the two balances remain distinct. Start a problem by identifying the species present, carry out any stoichiometric reaction, and only then choose the equilibrium to solve. Compare the result with the predicted direction of change: adding a strong base to the closed buffer model considered here should not lower its pH.
+:::
 
 ## Definitions of acids and bases
 
@@ -25,11 +27,13 @@ A **Lewis acid** accepts an electron pair to form a bond; a Lewis base supplies 
 An **amphiprotic** species can either donate or accept a proton. The ion $\mathrm{H_2PO_4^-}$ can become $\mathrm{HPO_4^{2-}}$ by donating a proton, or $\mathrm{H_3PO_4}$ by accepting one. Water can also behave in both ways.
 :::
 
+:::esempio{titolo="Recognising conjugate pairs"}
 To recognise a conjugate pair, compare formulas and charges. Removing $\mathrm{H^+}$ removes one hydrogen and lowers the charge by one unit; removing a neutral hydrogen atom would be a different transformation. Species are not a conjugate pair merely because they occur on opposite sides of a reaction arrow. In proton transfer between ammonia and water, $\mathrm{NH_3}$ and $\mathrm{OH^-}$ are two bases, not a conjugate pair.
 
 ![Transfers of one proton between the four phosphate forms](/figure/chimica-semestre-filtro/acidi-basi-redox/coppie-en.svg)
 
 The sequence shows possible changes in composition, without implying that the four species have equal abundances at a given pH.
+:::
 
 ## Water autoprotolysis and pH
 
@@ -51,11 +55,13 @@ At $25\,^\circ\mathrm C$, $K_w\simeq10^{-14}$ and $pK_w\simeq14$. In the dilute 
 An indicator is a conjugate pair whose two forms have different colours. For $\mathrm{HIn\rightleftharpoons H^++In^-}$, the ratio of the forms depends on pH and the indicator's $pK_a$. The colour change usually spans approximately two pH units centred on $pK_a$. A titration indicator should change colour within the steep part of the curve near equivalence.
 :::
 
+:::osservazione{titolo="Reading the pH scale"}
 The scale is logarithmic: moving from pH $4$ to pH $3$ means increasing proton activity tenfold, not adding a fixed amount of acid. In particular, averaging two pH values does not give the pH of a mixture. First combine the amounts of the species and account for their reactions. The familiar interval $0$–$14$ is not a universal mathematical limit of the pH definition.
 
 ![pH of a very dilute strong acid, including water autoprotolysis](/figure/chimica-semestre-filtro/acidi-basi-redox/diluizione-en.svg)
 
 The graph assumes an ideal solution at $25\,^\circ\mathrm C$. As the acid becomes extremely dilute, pH approaches $7$ from the acidic side; the prediction $-\log C$ alone becomes inadequate.
+:::
 
 ## Strong and weak acids and bases
 
@@ -83,9 +89,11 @@ This customary numerical notation leaves the standard concentration implicit. If
 When the strong acid concentration is comparable to hydronium concentration in water, autoprotolysis must be included. A strong monoprotic acid of concentration $C$ satisfies $h=C+\dfrac{K_w}{h}$ in the ideal model, where $h$ is the numerical hydronium concentration.
 :::
 
-Check the approximations after calculating. For the acetic acid example, $x/C\simeq0.0415$: about $4.15\%$ is dissociated. The square-root approximation provides a good estimate, while the quadratic equation retains the consumption of acid in the denominator. If instead $K_a=10^{-3}$ and $C=0.010$, about $27\%$ is dissociated: replacing $C-x$ with $C$ is unjustified. Calling an acid “weak” is not enough to choose a formula.
+:::osservazione{titolo="Checking the neglected dissociation"}
+Check the approximations after calculating. For the acetic acid example, $\dfrac{x}{C}\simeq0.0415$: about $4.15\%$ is dissociated. The square-root approximation provides a good estimate, while the quadratic equation retains the consumption of acid in the denominator. If instead $K_a=10^{-3}$ and $C=0.010$, about $27\%$ is dissociated: replacing $C-x$ with $C$ is unjustified. Calling an acid “weak” is not enough to choose a formula.
 
 At very low concentrations, or when several species react at once, the general approach combines material balance, electroneutrality and equilibrium constants. Simplified formulas follow from these constraints; they are not alternative rules that may violate charge conservation.
+:::
 
 ## Polyprotic acids, neutralisation and salts
 
@@ -107,16 +115,18 @@ For bicarbonate with $pK_{a1}=6.37$ and $pK_{a2}=10.33$, this gives $\mathrm{pH}
 :::osservazione{#neutralizzazione-sali titolo="Neutralisation, equivalence and hydrolysis"}
 Neutralisation follows $\mathrm{H_3O^++OH^-\rightarrow2H_2O}$. First compare the reacting mole amounts; then divide any excess by the total volume. Equivalence corresponds to the stoichiometric ratio between acid and base.
 
-Salts release ions that may react with water. Acetate, the conjugate base of a weak acid, follows $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$; its basic constant is $K_w/K_a$. Ammonium is an acid with $K_a=K_w/K_b(\mathrm{NH_3})$. Sodium acetate solution is therefore basic, whereas ammonium chloride solution is acidic. NaCl is approximately neutral in the dilute model because hydrolysis of its ions is negligible.
+Salts release ions that may react with water. Acetate, the conjugate base of a weak acid, follows $\mathrm{CH_3COO^-+H_2O\rightleftharpoons CH_3COOH+OH^-}$; its basic constant is $\dfrac{K_w}{K_a}$. Ammonium is an acid with $K_a=\dfrac{K_w}{K_b(\mathrm{NH_3})}$. Sodium acetate solution is therefore basic, whereas ammonium chloride solution is acidic. NaCl is approximately neutral in the dilute model because hydrolysis of its ions is negligible.
 
 At equivalence in a weak-acid/strong-base titration, the conjugate-base salt remains, so pH is basic at $25\,^\circ\mathrm C$. If both ions of a salt react with water, the outcome depends on the constants of both equilibria.
 :::
 
+:::esempio{titolo="Following a titration"}
 Titrating HA with a strong base passes through different chemical situations. Initially the weak acid predominates; before equivalence HA and its conjugate base coexist; at equivalence the salt predominates; beyond equivalence excess added hydroxide dominates. Applying Henderson–Hasselbalch after one component is exhausted gives a meaningless ratio. At half-equivalence, the stoichiometric amounts of HA and $\mathrm{A^-}$ are equal; at equivalence, the initial acid amount equals the added strong-base amount.
 
 ![Weak-acid titration curve distinguishing half-equivalence from equivalence](/figure/chimica-semestre-filtro/acidi-basi-redox/titolazione-en.svg)
 
 The graph solves the balances for an ideal model at $25\,^\circ\mathrm C$: $25\,\mathrm{mL}$ of $0.10\,\mathrm{mol\,L^{-1}}$ HA, $pK_a=4.76$, titrated with NaOH of the same concentration. Equivalence at $25\,\mathrm{mL}$ is basic because $\mathrm{A^-}$ undergoes hydrolysis.
+:::
 
 ## Buffers and buffer capacity
 
@@ -131,11 +141,13 @@ $$
 The equilibrium-concentration form requires activities approximated by reduced concentrations. Replacing these with amounts from a stoichiometric balance additionally requires that subsequent re-equilibration changes them only slightly. For components in the same solution, volume cancels and the mole ratio can be used after updating the amounts for any reaction with added acid or base. With $0.030\,\mathrm{mol}$ of acetate and $0.020\,\mathrm{mol}$ of acetic acid, assuming $pK_a=4.76$, the result is $\mathrm{pH}=4.94$.
 :::
 
+:::esempio{titolo="Ammonia and ammonium buffer"}
 A buffer pair can also be described starting from a weak base. For ammonia and ammonium at $25\,^\circ\mathrm C$, with $K_b=1.80\cdot10^{-5}$, use
 $$
 \mathrm{pOH}=pK_b+\log_{10}\dfrac{[\mathrm{NH_4^+}]}{[\mathrm{NH_3}]}.
 $$
 If the ideal-model concentrations are approximately $0.020\,\mathrm{mol\,L^{-1}}$ ammonium and $0.010\,\mathrm{mol\,L^{-1}}$ ammonia, the results are $\mathrm{pOH}\simeq4.745+\log_{10}2=5.046$ and $\mathrm{pH}\simeq8.95$, using $pK_w=14.00$. The pOH formula uses conjugate acid/base as its ratio. Ammonia consumes added acid, while ammonium can neutralise added base.
+:::
 
 :::osservazione{#capacita-tampone titolo="How effectively a buffer resists change"}
 The base-to-acid ratio determines pH, whereas the total amount determines how much added reagent can be absorbed. **Buffer capacity** measures the moles of strong acid or base per litre required for a unit change in pH under the stated conditions.
@@ -143,11 +155,13 @@ The base-to-acid ratio determines pH, whereas the total amount determines how mu
 For a closed monoprotic pair at fixed total concentration, the contribution of that pair to buffer capacity is greatest near $\mathrm{pH}=pK_a$. The interval $pK_a\pm1$ corresponds to base-to-acid ratios from $0.1$ to $10$. Buffers with the same ratio but total concentrations of $0.10$ and $0.010\,\mathrm{mol\,L^{-1}}$ have approximately the same pH; the more concentrated buffer withstands a larger addition before a large change.
 :::
 
+:::osservazione{titolo="Dilution and buffer capacity"}
 Moderate dilution approximately preserves the base-to-acid ratio and therefore pH, but reduces capacity per litre. The total number of moles in the same vessel remains unchanged if only solvent is added: distinguish a volume-based property from the total amount. Extreme dilution, changing activity coefficients and the contribution of water can invalidate simple ratio invariance.
 
 ![Mole balance of acid and conjugate base before and after adding strong acid](/figure/chimica-semestre-filtro/acidi-basi-redox/tampone-en.svg)
 
 In the illustrated case, $5\,\mathrm{mmol}$ of HCl convert acetate into acetic acid. The total pair remains $50\,\mathrm{mmol}$, while the ratio governing pH changes.
+:::
 
 ## Buffer systems in biological fluids
 
@@ -165,7 +179,9 @@ The phosphate pair $\mathrm{H_2PO_4^-/HPO_4^{2-}}$ exchanges one proton and is e
 Acidosis describes a process tending to lower pH; alkalosis describes a process tending to raise it. Their direction is interpreted through the equilibria and exchanges of the system.
 :::
 
+:::esempio{titolo="Variables in the bicarbonate model"}
 In the bicarbonate model, doubling $\mathrm{CO_2}$ pressure while holding bicarbonate fixed doubles the denominator and lowers pH by $\log_{10}2\simeq0.30$. This comparison helps interpret the variables; it does not automatically describe an organism's response, where other processes may change concentrations at the same time. A chemical buffer and physiological acid–base regulation are different levels of description.
+:::
 
 ## Solubility and acid–base equilibrium
 
@@ -180,9 +196,11 @@ Adding acid favours $\mathrm{C_2O_4^{2-}+H^+\rightleftharpoons HC_2O_4^-}$. Lowe
 In the uric-acid/urate system, lowering pH increases the fraction of neutral uric acid; its low solubility may favour precipitation. Sodium urate behaviour also depends on temperature, ionic activities and solution composition. The salt's name alone therefore does not determine how solubility varies with pH. These equilibria illustrate the chemistry of deposits and stones.
 :::
 
+:::osservazione{titolo="Free species and total concentration"}
 The solubility product does not contain the sum of all analytical forms of oxalate: it contains the free ion in the specified dissolution reaction. A measurement of “total oxalate” requires distinguishing protonated and free fractions before calculating the ion product. Temperature and the solid phase must be defined; a different crystal form or the presence of complexing agents introduces further equilibria.
 
 ![Dissolution equilibrium coupled to protonation of free oxalate](/figure/chimica-semestre-filtro/acidi-basi-redox/solubilita-en.svg)
+:::
 
 ## Oxidation, reduction and balancing
 
@@ -207,9 +225,11 @@ $$
 The total charge is $+17$ on each side. In basic medium, one approach is to complete the acidic balancing and add as many hydroxide ions to both sides as there are protons. Protons and hydroxide form water, which is cancelled where it occurs on both sides.
 :::
 
+:::osservazione{titolo="Checking atoms and charge"}
 Half-reaction electrons are bookkeeping devices: they must cancel completely in the overall equation. An equation may balance every atom yet have different total charges on its sides; it is still incomplete. Acidic or basic conditions determine which species are used to balance hydrogen and oxygen, and may also influence the actual product obtained from a reagent.
 
 ![Five iron oxidations balance the reduction of one permanganate ion](/figure/chimica-semestre-filtro/acidi-basi-redox/redox-en.svg)
+:::
 
 ## Electrochemical cells, energy and potential
 
@@ -223,9 +243,11 @@ $$
 Subscripts $c$ and $a$ denote cathode and anode; both values are reduction potentials. Using $E^\circ(\mathrm{Cu^{2+}/Cu})=0.34\,\mathrm V$ and $E^\circ(\mathrm{Zn^{2+}/Zn})=-0.76\,\mathrm V$ gives $1.10\,\mathrm V$. Multiplying a half-reaction to balance electrons leaves its potential unchanged.
 :::
 
+:::esempio{titolo="Electrodes and conduction in a cell"}
 An electrode's name depends on its reaction, not its electrical sign: oxidation at the anode and reduction at the cathode also hold in an electrolytic cell, where an external power source drives the change and the signs differ. In the zinc–copper cell, the salt bridge is not a route for electrons: it provides ionic conduction. Charge accumulation would quickly stop the process if the compartments were joined only by a wire.
 
 ![Zinc–copper cell: electrons in the wire and ions in the salt bridge](/figure/chimica-semestre-filtro/acidi-basi-redox/pila-en.svg)
+:::
 
 :::osservazione{#nernst-gibbs titolo="The Nernst equation and electrical work"}
 Under actual conditions, potential depends on the dimensionless reaction quotient $Q$:
@@ -241,9 +263,11 @@ For $\mathrm{Zn+Cu^{2+}\rightarrow Zn^{2+}+Cu}$, $Q=\dfrac{a_{\mathrm{Zn^{2+}}}}
 The reaction Gibbs energy is $\Delta_rG=-nFE$, and under standard conditions $\Delta_rG^\circ=-nFE^\circ$. Thus $E>0$ corresponds to a spontaneous reaction in the written direction. At constant temperature and pressure, when electrical work is the only non-expansion work, the maximum electrical work delivered reversibly per mole of reaction is $-\Delta_rG$. At equilibrium $E=0$ and $Q=K$, giving $\ln K=\dfrac{nFE^\circ}{RT}$. A transformed biochemical standard potential, often denoted by a prime, refers to specified conditions such as fixed pH $7$; distinguish it from the chemical standard potential with unit proton activity.
 :::
 
-Potential is intensive. Doubling an equation doubles both the electron count and Gibbs energy change, but leaves $-\Delta_rG/(nF)$ unchanged. This is why potentials are not multiplied by stoichiometric coefficients. Furthermore, $E^\circ>0$ describes standard conditions: a sufficiently large quotient at another composition can make $E$ negative. The favoured direction depends on the actual conditions.
+:::osservazione{titolo="Potential and actual conditions"}
+Potential is intensive. Doubling an equation doubles both the electron count and Gibbs energy change, but leaves $-\dfrac{\Delta_rG}{nF}$ unchanged. This is why potentials are not multiplied by stoichiometric coefficients. Furthermore, $E^\circ>0$ describes standard conditions: a sufficiently large quotient at another composition can make $E$ negative. The favoured direction depends on the actual conditions.
 
 ![Dependence of zinc–copper cell potential on the logarithm of the reaction quotient](/figure/chimica-semestre-filtro/acidi-basi-redox/nernst-en.svg)
+:::
 
 ## Oxygen, respiration and radical species
 
@@ -273,6 +297,8 @@ $$
 This balance describes a metal-mediated cycle; the direct reaction between superoxide and peroxide is slow. Iron speciation and the chemical environment influence intermediates and rates. The model illustrates why an overall feasible transformation also needs a kinetically accessible pathway.
 :::
 
+:::osservazione{titolo="Distinguishing radicals and ions"}
 A dot beside a symbol denotes an unpaired electron. $\mathrm{OH^-}$ and ${}^\bullet\mathrm{OH}$ are not interchangeable: their charge and electronic structure differ. Hydrogen peroxide is a reactive oxygen species, but is not itself a radical in its usual structure. A test in which a chelator reduces oxidation of a molecule suggests a role for metal availability; alone it neither identifies every intermediate nor proves that all chelators have the same effect.
 
 ![Iron recycling in the radical Fenton model and the catalysed Haber–Weiss balance](/figure/chimica-semestre-filtro/acidi-basi-redox/fenton-en.svg)
+:::

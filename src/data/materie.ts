@@ -827,7 +827,7 @@ const ELENCO: Omit<Materia, 'prezzo'>[] = [
     slug: 'fisica-semestre-filtro',
     titolo: 'Fisica per il semestre filtro di Medicina',
     breve: 'Fisica semestre filtro',
-    descrizione: "Fisica per il semestre filtro di Medicina, Odontoiatria e Veterinaria: sette unità dal syllabus MUR 2026/2027, con teoria, esercizi svolti, esercizi con soluzione e quiz a tempo.",
+    descrizione: 'Fisica per Medicina, Odontoiatria e Veterinaria: sette unità basate sul programma MUR 2026/2027, dai metodi di misura alla meccanica, ai fluidi, alle onde, alla termodinamica, all’elettromagnetismo e all’ottica. Teoria illustrata, schede svolte, esercizi con soluzione e 630 quiz spiegati, in italiano e inglese.',
     colore: '#3f6976',
     gruppo: 'Semestre filtro',
     attiva: true,

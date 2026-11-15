@@ -19,9 +19,11 @@ In a **suspension**, dispersed particles are large enough to settle under the st
 Milk is a colloidal emulsion of lipid droplets in water; whole blood contains cells suspended in plasma, which in turn contains dissolved salts and colloidal proteins. An **aerosol** is a dispersion of liquid droplets or solid particles in a gas, such as fog or smoke. Classification helps select a mixture model before applying a solution law.
 :::
 
+:::esempio{titolo="Phases and dispersed particles"}
 Substance count is not phase count. In saline, cations, anions and water share one phase; in whole blood, cells and plasma cannot be treated as one molecular solution. Even a clear appearance is evidence to interpret rather than a definition: observation at different scales, settling and light scattering supply complementary information.
 
 ![Solution with dispersed molecules, colloid with aggregates and settled suspension](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/miscele-en.svg)
+:::
 
 ## Water, dissolution and electrolytes
 
@@ -42,9 +44,11 @@ $$
 In the ideal limit, one mole of sodium chloride produces two moles of particles and one mole of calcium chloride produces three. Sodium, potassium, calcium, chloride and bicarbonate contribute to the ionic composition of biological fluids. Salt concentration and individual-ion concentration are different quantities; $0.10\,\mathrm{mol\,L^{-1}}$ of $\mathrm{CaCl_2}$ ideally gives $0.10\,\mathrm{mol\,L^{-1}}$ calcium and $0.20\,\mathrm{mol\,L^{-1}}$ chloride.
 :::
 
+:::osservazione{titolo="Hydration, solubility and ionisation"}
 Cation hydration favours the partially negative oxygen pointing towards the ion; anion hydration favours the partially positive hydrogens. These interactions are dynamic. High solubility does not imply a strong electrolyte: glucose interacts favourably with water without producing an ion pair. ‘Strong’ describes ionisation extent, whereas ‘concentrated’ describes amount per unit of solution.
 
 ![One glucose molecule and the particles produced by NaCl and CaCl2 in the ideal limit](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/particelle-en.svg)
+:::
 
 ## Expressing concentration
 
@@ -64,9 +68,11 @@ Mass–volume percentage specifies units because a mass-to-volume ratio is not d
 Molarity changes when thermal expansion changes volume. Molality depends on masses and is therefore useful in relations involving temperature changes. Converting mass percentage to molarity also requires solution density and solute molar mass.
 :::
 
+:::osservazione{titolo="Identifying the denominator"}
 Before inserting numbers, identify the denominator: whole solution, solvent or total moles. Then convert grams into moles and millilitres into litres where needed. A percentage without its convention is incomplete. If a solution is ten percent solute by mass, one litre contains one hundred grams of solute only in the additional case where that litre of solution weighs one kilogram.
 
 ![Molarity using final volume and molality using water mass alone](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/denominatori-en.svg)
+:::
 
 :::definizione{#frazione-molare titolo="Mole fraction"}
 Component $j$'s **mole fraction** is its amount divided by the total amount in the mixture:
@@ -88,9 +94,11 @@ To obtain $100\,\mathrm{mL}$ of $0.20\,\mathrm{mol\,L^{-1}}$ solution from a $1.
 Mixing solutions of the same solute without reaction requires adding their solute amounts. Final volume must be measured or declared additive within the chosen approximation.
 :::
 
+:::osservazione{titolo="Solute balance during mixing"}
 Final mixing concentration is not generally the arithmetic mean of the two concentrations. Each aliquot must be weighted by its volume and total moles divided by actual final volume. If solute reacts, precipitates or is lost, a balance for the relevant species is needed: matter conservation does not guarantee that all initial moles remain in the same dissolved form.
 
 ![Dilution retaining four particles before and after: volume increases, solute amount does not](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/diluizione-en.svg)
+:::
 
 :::definizione{#equivalenti titolo="Chemical equivalents and ionic charge"}
 An **equivalent** expresses an amount capable of transferring one mole of protons, one mole of electrons or one mole of charges, according to the stated process. If $z$ is the number of equivalents per mole in that process, then $n_{\mathrm{eq}}=z n$. Equivalent concentration is therefore $c_{\mathrm{eq}}=zc$.
@@ -134,9 +142,11 @@ $c$ is dissolved gas concentration, $p$ is its partial pressure above the liquid
 Doubling partial pressure at constant temperature doubles equilibrium concentration within the law's validity range. For oxygen carried in blood, physically dissolved and haemoglobin-bound fractions are distinguished; the formula directly describes only the former. For carbon dioxide, reactions with water and buffers require additional equilibria.
 :::
 
-In the reciprocal convention $p=k'_Hc$, using the same units, $k'_H=1/k_H$. A larger constant therefore indicates greater solubility in the first convention and lower solubility in the second. Total pressure is another distinction: adding inert gas at constant volume and temperature raises total pressure but not the partial pressure of a pre-existing gas if its mole amount stays unchanged.
+:::osservazione{titolo="Henry law conventions"}
+In the reciprocal convention $p=k'_Hc$, using the same units, $k'_H=\dfrac{1}{k_H}$. A larger constant therefore indicates greater solubility in the first convention and lower solubility in the second. Total pressure is another distinction: adding inert gas at constant volume and temperature raises total pressure but not the partial pressure of a pre-existing gas if its mole amount stays unchanged.
 
 ![Equilibrium concentration proportional to partial pressure at constant temperature](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/henry-en.svg)
+:::
 
 ## Solution vapour pressure
 
@@ -152,9 +162,11 @@ $$
 A non-volatile solute reduces solvent mole fraction and therefore vapour pressure. For example, $x_{w}=0.98$ gives $p=0.98p^\ast$. If both components are volatile, their contributions are added; vapour composition can differ from liquid composition.
 :::
 
+:::osservazione{titolo="Liquid–vapour equilibrium"}
 The lowering should not be explained as a simple solute barrier covering the surface. Mixing changes solvent chemical potential and hence equilibrium with vapour. A real solution uses solvent activity rather than mole fraction alone. A mixture with two volatile components also requires distinguishing liquid fractions from vapour fractions, which can be obtained using Dalton's law.
 
 ![Solvent relative vapour pressure equal to its mole fraction in the ideal model](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/raoult-en.svg)
+:::
 
 ## Boiling and freezing
 
@@ -200,9 +212,11 @@ $$
 $T$ is absolute temperature and $R$ the gas constant; the units of $R$ must be chosen consistently. With $c$ in $\mathrm{mol\,L^{-1}}$ and $R=0.082057\,\mathrm{L\,atm\,mol^{-1}\,K^{-1}}$, pressure is in atmospheres. For two ideal dilute solutions at equal temperature, a membrane retaining all solutes permits comparison through $\Delta\pi=RT\Delta c_{\mathrm{osm}}$.
 :::
 
+:::osservazione{titolo="Net flow and osmotic pressure"}
 Osmotic pressure is a comparison pressure, not necessarily a cell's actual hydrostatic pressure. Two compartments can reach zero net flow at different concentrations if a hydrostatic difference balances the osmotic contribution. Water molecules continue crossing both ways at equilibrium; net transfer vanishes. Sufficient external pressure can also reverse the flow, the principle of reverse osmosis.
 
 ![Initial water flow towards more retained particles at equal initial pressures](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/osmosi-en.svg)
+:::
 
 :::definizione{#osmolarita titolo="Osmolarity and osmolality"}
 **Osmolarity** is the amount of osmotically active particles per litre of solution; **osmolality** uses kilograms of solvent instead. In the ideal limit,
@@ -222,9 +236,11 @@ Equal total osmolarity instead defines **isoosmolarity**. A permeating solute co
 Excessive water entry can cause red-cell haemolysis, whereas a hypertonic medium can cause shrinkage. Oedema is fluid accumulation in interstitial spaces; hydrostatic pressures, plasma proteins, capillary permeability and lymphatic drainage all contribute to its development. A simple total-osmolarity comparison therefore does not describe every exchange between plasma and interstitium.
 :::
 
+:::osservazione{titolo="Assumptions of the cell model"}
 In a model with a large external reservoir, conserved non-permeating intracellular solutes and negligible hydrostatic difference, volume can be estimated by equating final effective concentrations. This neglects non-osmotic cell volume and active transport. These assumptions have limits for real cells: initial volume change can be followed by permeation, metabolism or regulation, so the observation timescale must always be stated.
 
 ![Cell responses to retained solutes and permeating urea: equal totals do not imply equal tonicity](/figure/chimica-semestre-filtro/soluzioni-proprieta-colligative/tonicita-en.svg)
+:::
 
 :::esempio{#fisiologica-glucosata titolo="Saline and glucose solutions"}
 A $\mathrm{NaCl}$ solution at $0.9\%$ mass–volume contains $9.0\,\mathrm{g\,L^{-1}}$. With molar mass $58.5\,\mathrm{g\,mol^{-1}}$,

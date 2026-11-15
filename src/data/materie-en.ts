@@ -571,7 +571,19 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
   'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
-  'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
+  'fisica-semestre-filtro': {
+    titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics',
+    descrizione: 'Physics for Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, covering measurement, mechanics, fluids, waves, thermodynamics, electromagnetism and optics. Illustrated theory, worked examples, practice exercises with solutions and 630 explained questions, in Italian and English.',
+    argomenti: {
+      'metodi-della-fisica': { titolo: 'Methods of physics, quantities and vectors', breve: 'Methods and vectors' },
+      'meccanica': { titolo: 'Mechanics of particles and systems', breve: 'Mechanics' },
+      'fluidi': { titolo: 'Fluid mechanics and models of circulation', breve: 'Fluids' },
+      'onde-meccaniche': { titolo: 'Mechanical waves and acoustics', breve: 'Waves and acoustics' },
+      'termodinamica': { titolo: 'Temperature, heat and thermodynamics', breve: 'Thermodynamics' },
+      'elettricita-e-magnetismo': { titolo: 'Electricity, circuits and magnetism', breve: 'Electricity and magnetism' },
+      'radiazioni-e-ottica': { titolo: 'Radiation, radioactivity and optics', breve: 'Radiation and optics' },
+    },
+  },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics', 'Informatica': 'Computer science' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'Semestre filtro': 'Filter semester', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };

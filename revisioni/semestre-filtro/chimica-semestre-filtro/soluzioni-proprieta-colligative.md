@@ -85,3 +85,7 @@ Esito: **230 file, 1.406 formule, zero errori, zero avvisi**. Conteggio finale d
 Riscontri autonomi del revisore: [IUPAC, costante di Henry c/p](https://goldbook.iupac.org/terms/view/09024), [IUPAC, costanti reciproche di Henry](https://goldbook.iupac.org/terms/view/09020) e [IUPAC, pressione osmotica](https://goldbook.iupac.org/terms/view/O04344), oltre al programma MUR fornito. Il controllo usa le definizioni termodinamiche e dimensionali; la terminologia osmolarità/osmolalità resta quella richiesta dal syllabus.
 
 Evidenze riproducibili in `qa/chimica-semestre-filtro/soluzioni-proprieta-colligative/reviewer-bio_strutture/`: inventario iniziale con hash, copie anteriori dei file corretti, registro delle modifiche, ricalcoli, confronto di parità, rese PNG e HTML, esito del validatore. Nessuna modifica ad altri capitoli durante questa revisione, né build, commit o pubblicazione.
+
+## Controllo finale dell’impaginazione
+
+Il coordinatore ha aggiunto otto blocchi per lingua alla teoria e convertito le divisioni matematiche inline in frazioni in colonna. Il revisore indipendente `bio_strutture` ha riletto i 42 cambi di formula in 32 Markdown e tutti i 16 titoli/nuovi blocchi. Il confronto di tutti i 230 file con il commit precedente, invertendo soltanto le sostituzioni registrate e ignorando i delimitatori aggiunti, conferma prosa scientifica, dati, chiavi e ancore invariati. Il renderer aggiornato restituisce 230 file, 1.406 formule, zero errori e zero avvisi. Evidenza: `reviewer-bio_strutture/format-final-review.json`.

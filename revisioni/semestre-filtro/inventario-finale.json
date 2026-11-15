@@ -1,0 +1,81 @@
+{
+  "biologia-semestre-filtro": {
+    "languages": {
+      "content": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 140,
+        "dafare": 98,
+        "domande": 630
+      },
+      "content-en": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 140,
+        "dafare": 98,
+        "domande": 630
+      }
+    },
+    "figures": {
+      "localized_svg_files": 108,
+      "distinct_diagrams": 54,
+      "referenced": 108,
+      "unreferenced": [],
+      "missing": []
+    }
+  },
+  "chimica-semestre-filtro": {
+    "languages": {
+      "content": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 140,
+        "dafare": 98,
+        "domande": 630
+      },
+      "content-en": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 140,
+        "dafare": 98,
+        "domande": 630
+      }
+    },
+    "figures": {
+      "localized_svg_files": 138,
+      "distinct_diagrams": 69,
+      "referenced": 138,
+      "unreferenced": [],
+      "missing": []
+    }
+  },
+  "fisica-semestre-filtro": {
+    "languages": {
+      "content": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 150,
+        "dafare": 98,
+        "domande": 630
+      },
+      "content-en": {
+        "teoria": 7,
+        "svolti": 70,
+        "exercises": 150,
+        "dafare": 98,
+        "domande": 630
+      }
+    },
+    "figures": {
+      "localized_svg_files": 166,
+      "distinct_diagrams": 83,
+      "referenced": 166,
+      "unreferenced": [],
+      "missing": []
+    }
+  },
+  "mathematics": {
+    "checked_files": 904,
+    "changed": []
+  }
+}
