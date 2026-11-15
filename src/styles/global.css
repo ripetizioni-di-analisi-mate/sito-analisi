@@ -154,8 +154,8 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 .indice .in-preparazione { color: var(--inchiostro-2); }
 .indice .in-preparazione small { font-weight: 400; font-size: 0.75rem; }
 .indice ol { list-style: none; padding: 0; margin: 0; }
-.indice > ol > li { margin: 0.15rem 0; }
-.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; text-align: left; font: 400 0.9rem/1.35 var(--ui); padding: 0.55rem 0.65rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
+.indice-blocco-materia > ol > li, .indice > ol > li { margin: 0.15rem 0; }
+.indice > ol > li > span, .indice > ol > li > a.argomento, .indice > ol > li > button.argomento, .indice-blocco-materia > ol > li > span, .indice-blocco-materia > ol > li > a.argomento, .indice-blocco-materia > ol > li > button.argomento { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; width: 100%; min-height: 2.75rem; text-align: left; font: 400 0.9rem/1.35 var(--ui); padding: 0.55rem 0.65rem; border: 0; border-radius: var(--raggio); color: var(--inchiostro); background: none; text-decoration: none; cursor: pointer; }
 .indice button.argomento::after { content: ''; width: var(--apertura-lato); height: var(--apertura-lato); border-right: var(--apertura-tratto) solid var(--inchiostro-2); border-bottom: var(--apertura-tratto) solid var(--inchiostro-2); opacity: var(--apertura-opacita); transform: rotate(-45deg); transition: transform 0.15s; flex: none; margin-right: 0.3rem; }
 .indice button.argomento[aria-expanded="true"]::after { transform: rotate(45deg); }
 .indice button.argomento:hover { background: var(--carta-2); }
@@ -164,6 +164,12 @@ html.collegato .bottone-account { border-color: var(--accento); color: var(--acc
 .indice a.attiva { color: var(--accento); border-left-color: var(--accento); font-weight: 600; }
 .indice li.corrente > button.argomento { background: color-mix(in srgb, var(--verde) 8%, var(--carta)); color: var(--inchiostro); box-shadow: inset 3px 0 var(--verde); }
 .indice ol ol:not(.aperta) { display: none; }
+/* Tasto per tornare indietro nell'indice: dagli argomenti di una materia all'elenco dei percorsi, e viceversa. */
+.indice-indietro { display: flex; align-items: center; gap: 0.45rem; width: 100%; min-height: 2.5rem; margin: 0.6rem 0 0.5rem; padding: 0.4rem 0.6rem; border: 0; border-radius: 7px; background: transparent; color: var(--verde); font: 600 0.88rem/1.3 var(--ui); text-align: left; text-decoration: none; cursor: pointer; }
+.indice-indietro::before { content: ''; flex: none; width: 0.42rem; height: 0.42rem; margin-left: 0.15rem; border-left: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; transform: rotate(45deg); }
+.indice-indietro:hover, .indice-indietro:focus-visible { background: color-mix(in srgb, var(--verde) 7%, var(--carta)); }
+.indice-indietro[aria-busy="true"] { opacity: 0.6; cursor: progress; }
+.indice-catalogo > .indice-percorsi-titolo { margin-top: 0.6rem; }
 /* In cima all'indice: la scritta «Indice» e la casella di ricerca */
 .indice-testa { display: flex; justify-content: space-between; align-items: center; margin: 0 0.5rem 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--riga); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inchiostro-2); }
 .indice-cerca { display: flex; align-items: center; gap: 0.45rem; margin: 0 0.5rem 1.1rem; padding: 0 0.75rem; height: 2.4rem; background: #fff; border: 1px solid var(--riga); border-radius: 999px; }
@@ -699,6 +705,8 @@ html.sbloccato .materia-corrente .dicitura-sbloccata { display: inline; font-wei
 .indice-materie .voce-materia { display: flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; padding: 0.55rem 0.65rem; border-radius: var(--raggio); text-decoration: none; color: var(--inchiostro); transition: background 150ms ease, box-shadow 150ms ease; }
 .indice-gruppo .indice-materie > li + li { border-top: 1px solid color-mix(in srgb, var(--riga) 55%, transparent); }
 .indice-gruppo > .indice-materie { padding: 0.2rem 0 0.35rem; }
+/* Ogni percorso dell'indice apre le sue voci come Università e Superiori: rientrate, con il filo a sinistra. */
+details.indice-gruppo > .indice-materie { margin: 0.1rem 0 0.25rem 0.55rem; padding: 0 0 0 0.2rem; border-left: 1px solid var(--riga); }
 /* La freccia con asta indica una pagina; i chevron che ruotano restano riservati agli elenchi apribili. */
 .indice-gruppo a.voce-materia::after {
   content: ''; width: 0.72rem; height: 0.72rem; flex: none; margin-right: 0.15rem;

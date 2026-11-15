@@ -90,16 +90,19 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
   </div>}
   {m && localizzato ? (
     <>
-      <p class="indice-materia indice-materia-corrente"><a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a><a class="cambia-materia" href={link(lingua, '/')}>{fr ? 'Toutes les matières' : es ? 'Todas las asignaturas' : 'Alle Fächer'}</a></p>
-      <ol class="indice-materie">
-        {m.argomenti.map((a) => <li><a class="voce-materia" href={link(lingua, `/${m.slug}#${a.slug}`)}>{a.titolo}</a></li>)}
-      </ol>
+      <div class="indice-blocco-materia" data-indice-materia={m.slug}>
+        <a class="indice-indietro" href={link(lingua, '/')} data-indice-catalogo data-torna={fr ? `Retour à ${m.titolo}` : es ? `Volver a ${m.titolo}` : `Zurück zu ${m.titolo}`}>{fr ? 'Toutes les matières' : es ? 'Todas las asignaturas' : 'Alle Fächer'}</a>
+        <p class="indice-materia indice-materia-corrente"><a href={link(lingua, `/${m.slug}`)}>{m.titolo}</a></p>
+        <ol class="indice-materie">
+          {m.argomenti.map((a) => <li><a class="voce-materia" href={link(lingua, `/${m.slug}#${a.slug}`)}>{a.titolo}</a></li>)}
+        </ol>
+      </div>
     </>
   ) : m ? (
-    <>
+    <div class="indice-blocco-materia" data-indice-materia={m.slug}>
+      <a class="indice-indietro" href={home} data-indice-catalogo data-torna={lingua === 'en' ? `Back to ${m.titolo}` : `Torna a ${m.titolo}`}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       <p class="indice-materia indice-materia-corrente">
         <a href={hrefMateria(m.slug)}>{m.titolo}</a>
-        <a class="cambia-materia" href={home}>{lingua === 'en' ? 'All subjects' : 'Tutte le materie'}</a>
       </p>
       <ol data-usa-course-nav={usa || undefined}>
         {m.argomenti.map((a) => {
@@ -141,7 +144,7 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
           </li>
         )}
       </ol>
-    </>
+    </div>
   ) : (
     <>
       <p class="indice-percorsi-titolo">{fr ? 'Choisis ton parcours' : es ? 'Elige tu itinerario' : de ? 'Wähle deinen Lernbereich' : lingua === 'en' ? 'Choose your study path' : 'Scegli il tuo percorso'}</p>
@@ -149,19 +152,19 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
         <details class:list={['indice-gruppo', { 'indice-percorsi-studio': ['Università', 'University', 'Superiori', 'High school', GRUPPI_DE['Università'], GRUPPI_DE.Superiori, GRUPPI_ES.Università, GRUPPI_ES.Superiori, GRUPPI_FR.Università, GRUPPI_FR.Superiori].includes(g) }]}>
           <summary class="indice-materia indice-percorso"><PercorsoIndice lingua={lingua} gruppo={g} /></summary>
           {usa && g === highSchoolName && <p><a href={url(highSchoolPath)}>High school catalog</a></p>}
-          {lingua === 'it' && g === 'Concorsi' && (
-            <ol class="indice-materie">
+          {(() => {
+            // La guida gratuita dei concorsi apre lo stesso elenco delle materie del gruppo.
+            const guida = lingua === 'it' && g === 'Concorsi' ? (
               <li style="--colore-materia: #6d5a8a">
                 <a class="voce-materia" href="/concorsi" aria-current={qui === '/concorsi' ? 'page' : undefined}>
                   <span class="materia-testo"><span class="materia-nome">Che cosa studiare</span></span>
                   <small class="materia-prossima">guida gratuita</small>
                 </a>
               </li>
-            </ol>
-          )}
-          {(() => {
-            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[]) => (
+            ) : null;
+            const lista = (voci: { m: (typeof MATERIE)[number]; nome: string }[], prima: unknown = null) => (
               <ol class="indice-materie">
+                {prima}
                 {voci.map(({ m: x, nome }) => {
                   const dentro = (
                     <>
@@ -179,12 +182,12 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
                 })}
               </ol>
             );
-            return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b) => b.sotto ? (
+            return (usa ? blocchiUsa.filter(block => block.gruppo === g) : blocchiGruppo(MATERIE, g)).map((b, i) => b.sotto ? (
               <details class="indice-sottogruppo">
                 <summary>{b.sotto}</summary>
                 {lista(b.materie)}
               </details>
-            ) : lista(b.materie));
+            ) : lista(b.materie, i === 0 ? guida : null));
           })()}
         </details>
       ))}
@@ -215,6 +218,67 @@ const regoleVideo = VIDEOCORSI.map((v) => `html[data-materie~="${chiaveVideo(v.s
       const ol = b.nextElementSibling as HTMLElement;
       const aperto = ol.classList.toggle('aperta');
       b.setAttribute('aria-expanded', String(aperto));
+    });
+  });
+
+  // «Tutte le materie» nelle pagine di una materia: l'indice torna all'elenco dei percorsi senza cambiare pagina,
+  // con il percorso della materia già aperto; «Torna a …» riporta agli argomenti della materia.
+  // L'elenco si prende dall'indice della home (stessa lingua), letto una volta sola e solo quando serve.
+  const cataloghi = new Map<string, Promise<string | null>>();
+  const catalogo = (href: string) => {
+    if (!cataloghi.has(href)) {
+      cataloghi.set(href, fetch(href, { credentials: 'same-origin' }).then((r) => (r.ok ? r.text() : null)).then((html) => {
+        if (!html) return null;
+        const nav = new DOMParser().parseFromString(html, 'text/html').querySelector('nav.indice');
+        const inizio = nav?.querySelector('.indice-percorsi-titolo');
+        if (!nav || !inizio) return null;
+        const pezzi: string[] = [];
+        for (let n: Element | null = inizio; n && !n.classList.contains('indice-contatti'); n = n.nextElementSibling) pezzi.push(n.outerHTML);
+        return pezzi.join('');
+      }).catch(() => null));
+    }
+    return cataloghi.get(href)!;
+  };
+  document.querySelectorAll<HTMLAnchorElement>('[data-indice-catalogo]').forEach((a) => {
+    const blocco = a.closest<HTMLElement>('.indice-blocco-materia');
+    if (!blocco) return;
+    const prepara = () => { void catalogo(a.href); };
+    a.addEventListener('pointerenter', prepara, { once: true });
+    a.addEventListener('focus', prepara, { once: true });
+    a.addEventListener('click', async (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      let vista = blocco.nextElementSibling as HTMLElement | null;
+      if (!vista?.classList.contains('indice-catalogo')) {
+        a.setAttribute('aria-busy', 'true');
+        const html = await catalogo(a.href);
+        a.removeAttribute('aria-busy');
+        if (!html) { location.href = a.href; return; }
+        vista = document.createElement('div');
+        vista.className = 'indice-catalogo';
+        const torna = document.createElement('button');
+        torna.type = 'button';
+        torna.className = 'indice-indietro';
+        torna.textContent = a.dataset.torna || '';
+        vista.append(torna);
+        vista.insertAdjacentHTML('beforeend', html);
+        blocco.after(vista);
+        // Il percorso della materia aperto, con la materia evidenziata.
+        const qui = vista.querySelector<HTMLElement>(`[data-materia="${CSS.escape(blocco.dataset.indiceMateria || '')}"]`);
+        qui?.querySelector('.voce-materia')?.setAttribute('aria-current', 'page');
+        for (let d = qui?.closest('details'); d; d = d.parentElement?.closest('details')) d.open = true;
+        torna.addEventListener('click', () => {
+          vista!.hidden = true;
+          blocco.hidden = false;
+          (blocco.querySelector('.indice-indietro') as HTMLElement | null)?.focus({ preventScroll: true });
+          blocco.scrollIntoView({ block: 'nearest' });
+        });
+      }
+      blocco.hidden = true;
+      vista.hidden = false;
+      const evidenziata = vista.querySelector<HTMLElement>('[aria-current="page"]');
+      (vista.querySelector('.indice-indietro') as HTMLElement).focus({ preventScroll: true });
+      (evidenziata ?? vista).scrollIntoView({ block: 'center' });
     });
   });
 </script>
