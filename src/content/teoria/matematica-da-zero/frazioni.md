@@ -146,6 +146,8 @@ $$
 :::teorema{#confronto-frazioni titolo="Confronto tra frazioni con denominatori diversi"}
 Due frazioni con denominatori diversi si confrontano riducendole al minimo comune denominatore e confrontando i numeratori. Le frazioni $\dfrac{5}{6}$ e $\dfrac{3}{4}$ diventano $\dfrac{10}{12}$ e $\dfrac{9}{12}$, e $10 > 9$, quindi $\dfrac{5}{6} > \dfrac{3}{4}$. Sulla retta dei numeri la frazione maggiore si trova più a destra.
 
+::grafico{assi=0 uguale=1 poligoni="0,1.6 10,1.6 10,2.6 0,2.6;0,0 9,0 9,1 0,1" linee="0,1.6 12,1.6 12,2.6 0,2.6 0,1.6;2,1.6 2,2.6;4,1.6 4,2.6;6,1.6 6,2.6;8,1.6 8,2.6;10,1.6 10,2.6;0,0 12,0 12,1 0,1 0,0;3,0 3,1;6,0 6,1;9,0 9,1" etichette="12.6,2.1,5 sesti = 10 su 12;12.6,0.5,3 quarti = 9 su 12" xmin=-0.3 xmax=22 ymin=-0.3 ymax=2.9 titolo="Con lo stesso intero diviso in $12$ parti, i $\dfrac{5}{6}$ ne occupano $10$ e i $\dfrac{3}{4}$ ne occupano $9$"}
+
 Con denominatori positivi si possono anche confrontare i **prodotti in croce**: $\dfrac{a}{b} > \dfrac{c}{d}$ quando $a \cdot d > b \cdot c$. La regola deriva dal confronto con il denominatore comune $b \cdot d$, perché $\dfrac{a}{b} = \dfrac{a \cdot d}{b \cdot d}$ e $\dfrac{c}{d} = \dfrac{b \cdot c}{b \cdot d}$. Per esempio $\dfrac{4}{7} > \dfrac{5}{9}$, perché $4 \cdot 9 = 36$ è maggiore di $7 \cdot 5 = 35$.
 :::
 
@@ -261,6 +263,8 @@ Quando l'esponente riguarda tutta la frazione, la frazione si scrive con le pare
 Calcolare i $\dfrac{a}{b}$ di una quantità $N$ vuol dire dividere $N$ in $b$ parti uguali e prenderne $a$. Il risultato è il prodotto $\dfrac{a}{b} \cdot N$, che si calcola in due passaggi. La divisione $\dfrac{N}{b}$ dà il valore di una parte, e questo valore moltiplicato per $a$ dà la quantità cercata.
 
 Per esempio i $\dfrac{2}{5}$ di $350$ euro si calcolano così. Una parte vale $\dfrac{350}{5} = 70$ euro, e due parti valgono $70 \cdot 2 = 140$ euro. Una frazione propria di una quantità è minore della quantità stessa, e una frazione impropria è maggiore.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 2,0 2,1 0,1" linee="0,0 5,0 5,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1;4,0 4,1" etichette="0.1,-0.55,2 parti = 140 euro;0.1,-1.15,5 parti = 350 euro" xmin=-0.3 xmax=11 ymin=-1.5 ymax=1.4 titolo="Le $5$ parti hanno valore totale $350$ euro e ogni parte vale $70$ euro, quindi le $2$ parti colorate valgono $140$ euro"}
 :::
 
 :::esempio{titolo="Uno sconto espresso con una frazione"}
@@ -273,6 +277,8 @@ Lo stesso risultato si ottiene osservando che si paga la parte restante del prez
 Se si conosce la parte e si cerca l'intero, le operazioni si eseguono al contrario. Si divide la parte per il numeratore, e si ottiene il valore di una parte da $\dfrac{1}{b}$; poi si moltiplica questo valore per il denominatore. Il calcolo equivale a dividere la parte per la frazione.
 
 Per esempio i $\dfrac{2}{7}$ di un tragitto misurano $18$ km. Un settimo del tragitto misura $\dfrac{18}{2} = 9$ km, quindi l'intero tragitto misura $9 \cdot 7 = 63$ km. Con la divisione per la frazione si ottiene lo stesso numero, perché $18 : \dfrac{2}{7} = 18 \cdot \dfrac{7}{2} = 63$.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 2,0 2,1 0,1" linee="0,0 7,0 7,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1;4,0 4,1;5,0 5,1;6,0 6,1" etichette="0.2,-0.55,2 parti = 18 km;0.2,-1.15,7 parti = 63 km" xmin=-0.3 xmax=14 ymin=-1.5 ymax=1.4 titolo="Le $2$ parti colorate misurano $18$ km, quindi ogni parte misura $9$ km e il tragitto di $7$ parti misura $63$ km"}
 :::
 
 :::esempio{titolo="Frazione di ciò che resta"}

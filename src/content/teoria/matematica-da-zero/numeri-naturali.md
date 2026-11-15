@@ -147,7 +147,7 @@ Un gruppo di $58$ persone deve salire su alcuni pulmini da $8$ posti. Si esegue 
 $$
 58 = 8 \cdot 7 + 2 .
 $$
-Sette pulmini si riempiono e restano $2$ persone. Per portare anche queste due persone serve un altro pulmino, perciò i pulmini necessari sono $8$. Perciò, a seconda della domanda, la risposta a un problema di questo tipo è il quoziente oppure il quoziente aumentato di $1$.
+Sette pulmini si riempiono e restano $2$ persone. Per portare anche queste due persone serve un altro pulmino, perciò i pulmini necessari sono $8$. A seconda della domanda, la risposta a un problema di questo tipo è il quoziente oppure il quoziente aumentato di $1$.
 :::
 
 ## Proprietà delle operazioni
@@ -243,6 +243,8 @@ La potenza $2^3$ si legge "due alla terza". Una potenza con esponente $2$ si chi
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,3 0,3;5,0 9,0 9,4 5,4" linee="0,0 3,0 3,3 0,3 0,0;1,0 1,3;2,0 2,3;0,1 3,1;0,2 3,2;5,0 9,0 9,4 5,4 5,0;6,0 6,4;7,0 7,4;8,0 8,4;5,1 9,1;5,2 9,2;5,3 9,3" etichette="0.6,-0.7,3² = 9;6.1,-0.7,4² = 16" xmin=-0.5 xmax=9.5 ymin=-1.3 ymax=4.4 titolo="Un quadrato con $3$ quadretti per lato ne contiene $3^2 = 9$, uno con $4$ quadretti per lato ne contiene $4^2 = 16$"}
 
+::grafico{assi=0 uguale=1 poligoni="0,5.2 2,5.2 2,6.2 0,6.2;0,3.9000000000000004 4,3.9000000000000004 4,4.9 0,4.9;0,2.6 8,2.6 8,3.6 0,3.6;0,1.3 16,1.3 16,2.3 0,2.3;0,0.0 32,0.0 32,1.0 0,1.0" linee="0,5.2 2,5.2 2,6.2 0,6.2 0,5.2;1,5.2 1,6.2;0,3.9000000000000004 4,3.9000000000000004 4,4.9 0,4.9 0,3.9000000000000004;1,3.9000000000000004 1,4.9;2,3.9000000000000004 2,4.9;3,3.9000000000000004 3,4.9;0,2.6 8,2.6 8,3.6 0,3.6 0,2.6;1,2.6 1,3.6;2,2.6 2,3.6;3,2.6 3,3.6;4,2.6 4,3.6;5,2.6 5,3.6;6,2.6 6,3.6;7,2.6 7,3.6;0,1.3 16,1.3 16,2.3 0,2.3 0,1.3;1,1.3 1,2.3;2,1.3 2,2.3;3,1.3 3,2.3;4,1.3 4,2.3;5,1.3 5,2.3;6,1.3 6,2.3;7,1.3 7,2.3;8,1.3 8,2.3;9,1.3 9,2.3;10,1.3 10,2.3;11,1.3 11,2.3;12,1.3 12,2.3;13,1.3 13,2.3;14,1.3 14,2.3;15,1.3 15,2.3;0,0.0 32,0.0 32,1.0 0,1.0 0,0.0;1,0.0 1,1.0;2,0.0 2,1.0;3,0.0 3,1.0;4,0.0 4,1.0;5,0.0 5,1.0;6,0.0 6,1.0;7,0.0 7,1.0;8,0.0 8,1.0;9,0.0 9,1.0;10,0.0 10,1.0;11,0.0 11,1.0;12,0.0 12,1.0;13,0.0 13,1.0;14,0.0 14,1.0;15,0.0 15,1.0;16,0.0 16,1.0;17,0.0 17,1.0;18,0.0 18,1.0;19,0.0 19,1.0;20,0.0 20,1.0;21,0.0 21,1.0;22,0.0 22,1.0;23,0.0 23,1.0;24,0.0 24,1.0;25,0.0 25,1.0;26,0.0 26,1.0;27,0.0 27,1.0;28,0.0 28,1.0;29,0.0 29,1.0;30,0.0 30,1.0;31,0.0 31,1.0" etichette="2.8,5.5,2¹ = 2;4.8,4.2,2² = 4;8.8,2.9,2³ = 8;16.8,1.6,2⁴ = 16;32.8,0.3,2⁵ = 32" xmin=-0.5 xmax=42 ymin=-0.5 ymax=6.3 titolo="Aumentando di $1$ l'esponente di $2$ il numero di quadretti raddoppia: $2^1 = 2$, $2^2 = 4$, $2^3 = 8$, $2^4 = 16$, $2^5 = 32$"}
+
 Le proprietà delle potenze, l'esponente $0$ e gli esponenti negativi si studiano nell'argomento sulle potenze e radici.
 :::
 
@@ -280,6 +282,8 @@ $$
 &= 2 + 2 = 4 .
 \end{aligned}
 $$
+
+::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,1 0,1;4,0 9,0 9,2 4,2" linee="0,0 3,0 3,1 0,1 0,0;1,0 1,1;2,0 2,1;4,0 9,0 9,2 4,2 4,0;5,0 5,2;6,0 6,2;7,0 7,2;8,0 8,2;4,1 9,1" etichette="0.9,-0.7,3;5.2,-0.7,5 · 2 = 10" xmin=-0.5 xmax=9.5 ymin=-1.3 ymax=2.6 titolo="L'espressione $3 + 5 \cdot 2$ conta $3$ quadretti più $5$ gruppi da $2$ quadretti, cioè $3 + 10 = 13$ quadretti"}
 :::
 
 :::attenzione

@@ -11,6 +11,9 @@ $$
 \frac{12}{18} = \frac{2}{3},
 $$
 cioè ci sono $2$ uomini ogni $3$ donne. Il rapporto tra uomini e totale delle persone è invece $\dfrac{12}{30} = \dfrac{2}{5}$. I due rapporti sono diversi, quindi il risultato di un quesito dipende da quali grandezze si confrontano.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 12,0 12,2 0,2" linee="0,0 30,0 30,2 0,2 0,0;12,0 12,2" etichette="6,0.8,12 uomini;21,0.8,18 donne;15,3.2,30 persone" xmin=-1 xmax=31 ymin=-1 ymax=4.5 titolo="Un gruppo di $30$ persone: il rapporto tra uomini e donne è $\dfrac{12}{18} = \dfrac{2}{3}$, quello tra uomini e totale è $\dfrac{12}{30} = \dfrac{2}{5}$"}
+
 :::
 
 :::esempio{titolo="Scala di una carta geografica"}
@@ -88,6 +91,9 @@ x : a = y : b = z : c
 x + y + z = S .
 $$
 Si divide $S$ per la somma $a + b + c$, ottenendo il valore di una parte, e lo si moltiplica per ciascun numero: $x = \dfrac{S}{a + b + c} \cdot a$, e allo stesso modo per $y$ e $z$. Per ripartire $900$ euro in parti proporzionali a $2$, $3$ e $4$ si calcola $\dfrac{900}{9} = 100$, quindi le parti sono $200$, $300$ e $400$ euro. Come controllo, la somma delle parti deve essere $S$.
+
+::grafico{assi=0 uguale=1 poligoni="2,0 5,0 5,2 2,2" linee="0,0 9,0 9,2 0,2 0,0;2,0 2,2;5,0 5,2" etichette="1,0.8,200 €;3.5,0.8,300 €;7,0.8,400 €;1,2.8,2 parti;3.5,2.8,3 parti;7,2.8,4 parti" xmin=-1 xmax=10 ymin=-1 ymax=4 titolo="$900$ euro ripartiti in parti direttamente proporzionali a $2$, $3$ e $4$: nove parti uguali da $100$ euro"}
+
 :::
 
 :::definizione{#ripartizione-inversa titolo="Ripartizione in parti inversamente proporzionali"}
@@ -100,6 +106,9 @@ $$
 \frac{1}{6} = \frac{1}{6},
 $$
 quindi la ripartizione è in parti direttamente proporzionali a $3$, $2$ e $1$. Poiché $\dfrac{600}{6} = 100$, le parti sono $300$, $200$ e $100$ euro, e la parte maggiore va a chi corrisponde il numero minore.
+
+::grafico{assi=0 uguale=1 poligoni="6,0 10,0 10,2 6,2" linee="0,0 12,0 12,2 0,2 0,0;6,0 6,2;10,0 10,2" etichette="3,0.8,300 €;8,0.8,200 €;10.3,0.8,100 €;3,2.6,numero 2;8,2.6,numero 3;10.5,2.6,numero 6" xmin=-1 xmax=13 ymin=-1 ymax=4 titolo="$600$ euro ripartiti in parti inversamente proporzionali a $2$, $3$ e $6$: sei parti uguali da $100$ euro, tre al numero $2$, due al numero $3$, una al numero $6$"}
+
 :::
 
 ## Percentuali
@@ -116,6 +125,9 @@ I quesiti sulle percentuali chiedono una delle tre quantità $p$, $N$ e la parte
 - $30$ è il $12\%$ di $N = \dfrac{30 \cdot 100}{12} = 250$.
 
 Le tre formule sono la stessa proporzione $P : N = p : 100$, risolta ogni volta rispetto al termine incognito.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 12,0 12,2 0,2" linee="0,0 80,0 80,2 0,2 0,0" etichette="6,3.2,12;40,0.8,80 (100%);6,-1.2,15%" xmin=-5 xmax=85 ymin=-2.5 ymax=4.5 titolo="Il $15\%$ di $80$ è la parte colorata: $\dfrac{15}{100} \cdot 80 = 12$"}
+
 :::
 
 :::osservazione{#percentuali-e-frazioni titolo="Percentuali e frazioni"}
@@ -157,6 +169,9 @@ $$
 150 \cdot 1{,}22 = 183 \text{ euro} .
 $$
 Il calcolo inverso, detto **scorporo**, parte dal prezzo con IVA e trova l'imponibile dividendo per il fattore moltiplicativo. Un prezzo di $244$ euro IVA inclusa ha imponibile $\dfrac{244}{1{,}22} = 200$ euro, e l'IVA vale $44$ euro. L'imponibile non si ottiene togliendo il $22\%$ dal prezzo finale, perché il $22\%$ è calcolato sull'imponibile e non sul prezzo con IVA: togliendo il $22\%$ da $244$ euro si otterrebbero $190{,}32$ euro, che è sbagliato.
+
+::grafico{assi=0 uguale=1 poligoni="200,0 244,0 244,2 200,2" linee="0,0 244,0 244,2 0,2 0,0;200,0 200,2" etichette="100,0.8,imponibile 200;222,3.2,IVA 44;122,-1.2,prezzo con IVA 244" xmin=-10 xmax=254 ymin=-2.5 ymax=4.5 titolo="Un prezzo di $244$ euro con IVA al $22\%$: l'imponibile è $\dfrac{244}{1{,}22} = 200$ euro e l'IVA, calcolata sull'imponibile, è $44$ euro"}
+
 :::
 
 ## Variazioni percentuali
@@ -179,6 +194,9 @@ La seconda variazione si calcola sul valore già modificato dalla prima, perciò
 
 :::attenzione
 Un aumento e una diminuzione della stessa percentuale *non* si compensano. Un prezzo di $100$ euro aumentato del $20\%$ diventa $120$ euro; diminuito poi del $20\%$ diventa $120 \cdot 0{,}8 = 96$ euro, perché il secondo $20\%$ è calcolato su $120$ e non su $100$. Il fattore complessivo è $1{,}2 \cdot 0{,}8 = 0{,}96$, quindi il prezzo finale è il $4\%$ in meno di quello iniziale.
+
+::grafico{assi=0 uguale=1 poligoni="0,4 100,4 100,5.4 0,5.4;0,2 120,2 120,3.4 0,3.4;0,0 96,0 96,1.4 0,1.4" etichette="50,4.5,100 euro (prezzo iniziale);60,2.5,120 euro (dopo +20%);48,0.5,96 euro (dopo −20%)" xmin=-5 xmax=130 ymin=-1 ymax=6.5 titolo="Un prezzo di $100$ euro aumentato del $20\%$ e poi diminuito del $20\%$: $100 \cdot 1{,}2 \cdot 0{,}8 = 96$ euro"}
+
 :::
 
 :::osservazione{#punti-percentuali titolo="Punti percentuali"}

@@ -12,6 +12,8 @@ I **numeri naturali** sono i numeri che servono a contare, cioè $0, 1, 2, 3, \l
 :::definizione{#numeri-razionali titolo="Numeri razionali"}
 Un **numero razionale** è un numero che si può scrivere come frazione $\dfrac{a}{b}$, con $a$ e $b$ interi e $b \neq 0$. Il loro insieme si indica con $\mathbb{Q}$. Ogni intero è razionale, perché per esempio $5 = \dfrac{5}{1}$, e ogni numero con un numero finito di cifre dopo la virgola è razionale, perché per esempio $0{,}75 = \dfrac{75}{100} = \dfrac{3}{4}$. Su una retta orientata ogni numero razionale occupa un punto, e tra due numeri è maggiore quello che si trova più a destra.
 
+::grafico{assi=0 uguale=1 curve="1.2*cos(t),1.2*sin(t),0,6.2832;2.4*cos(t),2.4*sin(t),0,6.2832;3.6*cos(t),3.6*sin(t),0,6.2832" etichette="-0.3,0,ℕ;-0.4,1.8,ℤ;-0.4,3,ℚ;0.4,0.3,0;0.7,-0.6,5;-1.9,-0.6,−3;1.5,-2.9,0,75" punti="0.4,0,pieno;0.6,-0.5,pieno;-1.3,-0.9,pieno;1.4,-2.6,pieno" xmin=-4.2 xmax=4.2 ymin=-4 ymax=4 titolo="Gli insiemi numerici sono contenuti uno nell'altro: $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q}$"}
+
 ::grafico{assi=0 uguale=1 linee="-3.5,0 3.5,0;3.3,0.1 3.5,0 3.3,-0.1;-3,-0.08 -3,0.08;-2,-0.08 -2,0.08;-1,-0.08 -1,0.08;0,-0.08 0,0.08;1,-0.08 1,0.08;2,-0.08 2,0.08;3,-0.08 3,0.08" punti="-2,0,pieno;-0.5,0,pieno;0.75,0,pieno;2,0,pieno" etichette="-3.12,-0.4,−3;-2.12,-0.4,−2;-1.12,-0.4,−1;-0.05,-0.4,0;0.95,-0.4,1;1.95,-0.4,2;2.95,-0.4,3;-0.82,0.25,−0,5;0.5,0.25,0,75" xmin=-3.8 xmax=3.8 ymin=-0.7 ymax=0.6 titolo="Sulla retta orientata il numero più a destra è il maggiore, quindi $-2 < -0{,}5 < 0{,}75 < 2$"}
 
 :::
@@ -29,6 +31,8 @@ Nel prodotto e nel quoziente di due numeri interi il segno del risultato dipende
 - Se i due numeri hanno segni diversi, il risultato è negativo: $(-3) \cdot 4 = -12$ e $\dfrac{12}{-4} = -3$.
 
 Moltiplicare per $-1$ porta ogni numero nel suo simmetrico rispetto allo zero, e ripetere due volte l'operazione riporta al numero di partenza; per questo $(-1) \cdot (-1) = 1$ e il prodotto di due numeri negativi è positivo. In un prodotto di più fattori il risultato è negativo se i fattori negativi sono in numero dispari, perciò $(-1) \cdot (-2) \cdot (-3) = -6$. Nella somma di due numeri di segno diverso si sottraggono i valori assoluti, e il risultato ha il segno del numero con valore assoluto maggiore, come in $-7 + 3 = -4$. Il segno meno davanti a un'espressione cambia il segno di tutti i suoi termini, quindi $10 - (3 - 8) = 10 - 3 + 8 = 15$.
+
+::grafico{assi=0 uguale=1 linee="-8.5,0 3.5,0;3.3,0.15 3.5,0 3.3,-0.15;-8,-0.1 -8,0.1;-7,-0.1 -7,0.1;-6,-0.1 -6,0.1;-5,-0.1 -5,0.1;-4,-0.1 -4,0.1;-3,-0.1 -3,0.1;-2,-0.1 -2,0.1;-1,-0.1 -1,0.1;0,-0.1 0,0.1;1,-0.1 1,0.1;2,-0.1 2,0.1;3,-0.1 3,0.1" vettori="0,0.9,-7,0.9,−7;-7,1.8,-4,1.8,+3" segmenti="-7,0,-7,1.8;-4,0,-4,1.8" punti="-4,0,pieno" etichette="-7.2,-0.5,−7;-4.2,-0.5,−4;-0.05,-0.5,0" xmin=-9 xmax=4 ymin=-1 ymax=2.4 titolo="La somma $-7 + 3$ sulla retta: si parte da $0$, ci si sposta di $7$ posti a sinistra e poi di $3$ a destra, e si arriva in $-4$"}
 :::
 
 :::teorema{#ordine-operazioni titolo="Ordine delle operazioni"}
@@ -166,6 +170,8 @@ $$
 \frac{350}{5} \cdot 3 = 70 \cdot 3 = 210 \text{ euro} .
 $$
 Una frazione propria di un numero positivo è minore del numero, perciò nei quiz le opzioni maggiori del numero di partenza si possono scartare.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,1 0,1" linee="0,0 5,0 5,1 0,1 0,0;1,0 1,1;2,0 2,1;3,0 3,1;4,0 4,1" etichette="0.3,0.4,70;1.3,0.4,70;2.3,0.4,70;3.3,0.4,70;4.3,0.4,70;1.2,1.4,210 euro;5.3,0.4,350 euro" xmin=-0.5 xmax=7.5 ymin=-0.4 ymax=2 titolo="I $\dfrac{3}{5}$ di $350$ euro: l'intero è diviso in $5$ parti da $70$ euro e se ne prendono $3$"}
 :::
 
 :::teorema{#problemi-inversi titolo="Problema inverso"}
@@ -247,6 +253,8 @@ a^0 = 1,
 a^{-n} = \frac{1}{a^n} .
 $$
 Le due definizioni sono scelte in modo che la proprietà del quoziente valga per ogni coppia di esponenti. Per esempio $\dfrac{a^3}{a^3} = 1$ e, per la proprietà, $\dfrac{a^3}{a^3} = a^0$, perciò $a^0 = 1$. Una potenza con esponente negativo si calcola con il reciproco della base, quindi $2^{-3} = \dfrac{1}{8}$ e $\left(\dfrac{3}{5}\right)^{-2} = \left(\dfrac{5}{3}\right)^2 = \dfrac{25}{9}$. Con le potenze di $10$ a esponente negativo si scrivono i numeri piccoli, come $10^{-3} = \dfrac{1}{1000} = 0{,}001$.
+
+::grafico{f="2^x" punti="-2,0.25,pieno;-1,0.5,pieno;0,1,pieno;3,8,pieno" xmin=-3 xmax=4 ymin=0 ymax=18 etichette="-2.9,2.2,2⁻² = 0,25;-2.9,4.2,2⁻¹ = 0,5;1.6,10.5,2³ = 8" titolo="Il grafico di $2^x$ è sempre sopra l'asse delle $x$: $2^0 = 1$ e $2^{-n} = \dfrac{1}{2^n}$ è positivo ma sempre più piccolo"}
 :::
 
 :::attenzione

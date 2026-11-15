@@ -98,6 +98,8 @@ Un'equazione di primo grado contiene l'incognita solo con esponente $1$. Per ris
 - Se $a \neq 0$ l'equazione è **determinata** e ha l'unica soluzione $x = \dfrac{b}{a}$.
 - Se $a = 0$ e $b \neq 0$ l'equazione è **impossibile**, perché $0 \cdot x = b$ non è vera per nessun valore di $x$. Per esempio $2x + 1 = 2x + 5$ si riduce a $0 \cdot x = 4$.
 - Se $a = 0$ e $b = 0$ l'equazione è **indeterminata** e ogni numero è soluzione. Per esempio $2\,(x + 1) = 2x + 2$ si riduce a $0 \cdot x = 0$.
+
+::grafico{f="2*x+1;2*x+5" xmin=-4 xmax=4 ymin=-8 ymax=12 legenda="y = 2x + 1;y = 2x + 5" titolo="I due membri di $2x + 1 = 2x + 5$ sono rette parallele, che non hanno punti in comune, quindi l'equazione è impossibile"}
 :::
 
 :::esempio{titolo="Equazione con i denominatori"}

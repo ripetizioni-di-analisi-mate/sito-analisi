@@ -201,6 +201,8 @@ $$
 $$
 cioè ci sono $3$ adulti ogni $2$ bambini. Il rapporto si può semplificare come una frazione.
 
+::grafico{assi=0 uguale=1 punti="0,1.2,pieno;1,1.2,pieno;2,1.2,pieno;0.5,0,vuoto;1.5,0,vuoto;4,1.2,pieno;5,1.2,pieno;6,1.2,pieno;4.5,0,vuoto;5.5,0,vuoto;8,1.2,pieno;9,1.2,pieno;10,1.2,pieno;8.5,0,vuoto;9.5,0,vuoto;12,1.2,pieno;13,1.2,pieno;14,1.2,pieno;12.5,0,vuoto;13.5,0,vuoto" segmenti="3,-0.5,3,1.7;7,-0.5,7,1.7;11,-0.5,11,1.7" etichette="-3.4,1.2,adulti;-3.4,0,bambini" xmin=-3.6 xmax=15 ymin=-0.8 ymax=2 titolo="I $12$ adulti (punti pieni) e gli $8$ bambini (punti vuoti) formano $4$ gruppi uguali, ciascuno con $3$ adulti e $2$ bambini; perciò il rapporto fra adulti e bambini è $\dfrac{3}{2}$"}
+
 Se le due grandezze sono dello stesso tipo, come due lunghezze, prima si scrivono nella stessa unità di misura. Il rapporto fra $30$ cm e $2$ m è $\dfrac{30}{200} = \dfrac{3}{20}$, perché $2$ m sono $200$ cm. Se le grandezze sono di tipo diverso, il rapporto è una nuova grandezza. Per esempio $150$ km percorsi in $2$ ore danno $\dfrac{150}{2} = 75$ km all'ora, cioè la velocità media.
 :::
 
@@ -210,6 +212,8 @@ $$
 50\,000 \text{ cm} = \frac{50\,000}{100} \text{ m} = 500 \text{ m} .
 $$
 Due paesi che sulla carta distano $6$ cm sono quindi lontani $6 \cdot 500 = 3000$ m, cioè $3$ km. La scala serve a ricavare le distanze vere da quelle misurate sulla carta, e viceversa.
+
+::grafico{assi=0 uguale=1 linee="-0.3,1.5 6.6,1.5;-0.3,0 6.6,0;0,1.35 0,1.65;1,1.35 1,1.65;2,1.35 2,1.65;3,1.35 3,1.65;4,1.35 4,1.65;5,1.35 5,1.65;6,1.35 6,1.65;0,-0.15 0,0.15;1,-0.15 1,0.15;2,-0.15 2,0.15;3,-0.15 3,0.15;4,-0.15 4,0.15;5,-0.15 5,0.15;6,-0.15 6,0.15" punti="0,1.5,pieno;6,1.5,pieno;0,0,pieno;6,0,pieno" segmenti="0,0.2,0,1.3;6,0.2,6,1.3" etichette="-0.1,2.1,0;0.9,2.1,1;1.9,2.1,2;2.9,2.1,3;3.9,2.1,4;4.9,2.1,5;5.7,2.1,6 cm;-0.2,-0.75,0;1.8,-0.75,1;3.8,-0.75,2;5.6,-0.75,3 km;-2.9,1.5,carta;-2.9,0,realtà" xmin=-3.2 xmax=7.2 ymin=-1.3 ymax=2.6 titolo="Nella scala $1 : 50\,000$ ogni centimetro sulla carta corrisponde a $500$ m nella realtà, quindi i $6$ cm fra i due paesi corrispondono a $3$ km"}
 :::
 
 ## Proporzioni
@@ -377,4 +381,6 @@ Il fattore complessivo è $0{,}8 \cdot 0{,}9 = 0{,}72$, quindi lo sconto comples
 
 :::attenzione
 Due percentuali successive non si sommano. Nell'esempio dei due sconti la somma $20\% + 10\% = 30\%$ darebbe un prezzo finale di $70$ euro, mentre il prezzo vero è $72$ euro, perché il $10\%$ è calcolato su $80$ euro e vale $8$ euro. Per lo stesso motivo un aumento e uno sconto della stessa percentuale non si compensano. Per esempio $100$ euro aumentati del $10\%$ diventano $110$ euro, e scontati poi del $10\%$ diventano $110 \cdot 0{,}9 = 99$ euro.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 2,0 2,5 0,5;3,0 5,0 5,5.5 3,5.5;6,0 8,0 8,4.95 6,4.95" linee="-0.5,0 8.5,0" segmenti="-0.5,5,8.5,5" etichette="0.3,5.4,100 €;3.3,5.9,110 €;6.45,5.35,99 €;0.4,-0.7,inizio;3.4,-0.7,+ 10%;6.4,-0.7,− 10%" xmin=-1 xmax=9 ymin=-1.3 ymax=6.6 titolo="L'aumento del $10\%$ porta $100$ euro a $110$ euro; lo sconto del $10\%$ si calcola su $110$ euro e porta il prezzo a $99$ euro, sotto la linea tratteggiata dei $100$ euro"}
 :::

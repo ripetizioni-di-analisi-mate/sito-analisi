@@ -8,7 +8,7 @@ sommario: Che cosa sono i numeri relativi e dove si usano, come si rappresentano
 :::definizione{#numeri-relativi titolo="Numeri relativi"}
 Con i numeri naturali $0, 1, 2, 3, \ldots$ la sottrazione $3 - 5$ è impossibile, perché da $3$ oggetti non se ne possono togliere $5$. Molte grandezze, però, possono scendere sotto lo zero, come la temperatura. Per descriverle si usano i numeri con il segno.
 
-Un **numero relativo** è un numero naturale diverso da zero preceduto dal segno $+$ oppure dal segno $-$; anche lo zero è un numero relativo. I numeri con il segno $+$ si chiamano **positivi** e i numeri con il segno $-$ si chiamano **negativi**, mentre lo zero è privo di segno. In parole semplici, un numero relativo dice quanto si è lontani da un livello di riferimento e da quale parte.
+Un **numero relativo** è un numero naturale diverso da zero preceduto dal segno $+$ oppure dal segno $-$; anche lo zero è un numero relativo. I numeri con il segno $+$ si chiamano **positivi** e i numeri con il segno $-$ si chiamano **negativi**, mentre lo zero è privo di segno. Un numero relativo dice quanto si è lontani da un livello di riferimento e da quale parte.
 
 L'insieme dei numeri interi relativi si indica con $\mathbb{Z}$:
 $$
@@ -22,6 +22,8 @@ Il numero $+5$ si legge "più cinque" e il numero $-5$ si legge "meno cinque". I
 - Il **saldo** di un conto corrente è la somma di denaro presente sul conto. Con $200$ euro sul conto il saldo è $+200$ euro. Se dal conto si pagano $250$ euro, si resta con un debito di $50$ euro, e il saldo diventa $-50$ euro.
 - La **quota** di un punto è la sua altezza rispetto al livello del mare. La cima di una collina alta $300$ m ha quota $+300$ m, e un sub che nuota $15$ m sotto la superficie del mare si trova a quota $-15$ m.
 - In un palazzo il piano terra è il piano $0$. I piani sopra sono $+1$, $+2$, $+3$, e i piani interrati, come il garage, sono $-1$, $-2$.
+
+::grafico{assi=0 uguale=1 linee="-6.7,0 13.9,0;13.55,0.16 13.9,0 13.55,-0.16;-6,-0.12 -6,0.12;-5,-0.12 -5,0.12;-4,-0.12 -4,0.12;-3,-0.12 -3,0.12;-2,-0.12 -2,0.12;-1,-0.12 -1,0.12;0,-0.22 0,0.22;1,-0.12 1,0.12;2,-0.12 2,0.12;3,-0.12 3,0.12;4,-0.12 4,0.12;5,-0.12 5,0.12;6,-0.12 6,0.12;7,-0.12 7,0.12;8,-0.12 8,0.12;9,-0.12 9,0.12;10,-0.12 10,0.12;11,-0.12 11,0.12;12,-0.12 12,0.12;13,-0.12 13,0.12" punti="-4,0,pieno;12,0,pieno" etichette="-6.26,-0.6,−6;-4.26,-0.6,−4;-2.26,-0.6,−2;-0.1,-0.6,0;1.9,-0.6,+2;3.9,-0.6,+4;5.9,-0.6,+6;7.9,-0.6,+8;9.9,-0.6,+10;11.9,-0.6,+12;-5.0,0.65,−4 °C;10.9,0.65,+12 °C" xmin=-7 xmax=14.2 ymin=-1 ymax=1.4 titolo="Le temperature $-4$ °C e $+12$ °C sulla retta orientata: la prima è a sinistra dello zero, la seconda a destra"}
 
 In tutti questi casi lo zero è il livello di riferimento, e il segno indica da quale parte dello zero ci si trova.
 :::
@@ -174,7 +176,7 @@ $$
 \qquad
 -(-3) = +3 .
 $$
-In parole semplici, con il segno $+$ davanti il numero mantiene il suo segno, e con il segno $-$ davanti il numero cambia segno. Per esempio
+Con il segno $+$ davanti il numero mantiene il suo segno, e con il segno $-$ davanti il numero cambia segno. Per esempio
 $$
 7 - (-2) + (-5) - (+1) = 7 + 2 - 5 - 1 = 3 .
 $$
@@ -282,6 +284,8 @@ $$
 (-2)^4 = +16 .
 $$
 Con la stessa regola $(-1)^{10} = +1$, perché $10$ è pari, e $(-1)^{7} = -1$, perché $7$ è dispari. Il segno di una potenza dipende quindi soltanto dal segno della base e dalla parità dell'esponente.
+
+::grafico{assi=0 uguale=1 linee="-9.4,0 17.4,0;17.05,0.16 17.4,0 17.05,-0.16;-8,-0.2 -8,0.2;-6,-0.2 -6,0.2;-4,-0.2 -4,0.2;-2,-0.2 -2,0.2;0,-0.3 0,0.3;2,-0.2 2,0.2;4,-0.2 4,0.2;6,-0.2 6,0.2;8,-0.2 8,0.2;10,-0.2 10,0.2;12,-0.2 12,0.2;14,-0.2 14,0.2;16,-0.2 16,0.2" punti="-2,0,pieno;4,0,pieno;-8,0,pieno;16,0,pieno" etichette="-0.3,-0.9,0;-2.3,-0.9,−2;3.7,-0.9,+4;-8.3,-0.9,−8;15.55,-0.9,+16;-3.6,0.8,(−2)¹;2.4,0.8,(−2)²;-9.6,0.8,(−2)³;14.4,0.8,(−2)⁴" xmin=-10 xmax=18.2 ymin=-1.5 ymax=1.8 titolo="Le potenze di $-2$ con esponente $1$, $2$, $3$, $4$ stanno a destra e a sinistra dello zero in modo alternato"}
 :::
 
 :::attenzione{#meno-davanti-alla-potenza}

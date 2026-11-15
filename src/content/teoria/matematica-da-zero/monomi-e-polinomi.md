@@ -263,6 +263,10 @@ dove $6x = 2 \cdot x \cdot 3$ e $-20y = 2 \cdot 2y \cdot (-5)$. Nella figura il 
 
 ::grafico{assi=0 uguale=1 poligoni="0,0 4,0 4,4 0,4;4,4 6,4 6,6 4,6" linee="0,0 6,0 6,6 0,6 0,0;4,0 4,6;0,4 6,4" etichette="1.65,1.85,a²;4.75,1.85,ab;1.65,4.85,ab;4.75,4.85,b²;1.9,-0.55,a;4.9,-0.55,b;-0.55,1.85,a;-0.55,4.85,b" xmin=-1 xmax=7 ymin=-1 ymax=7 titolo="Il quadrato di lato $a + b$ è formato dai quadrati $a^2$ e $b^2$ e da due rettangoli di area $ab$, quindi $(a + b)^2 = a^2 + 2ab + b^2$; con $a = 4$ e $b = 2$ le parti valgono $16$, $8$, $8$ e $4$, e la loro somma è $36 = 6^2$"}
 
+Il quadrato di lato $a - b$ si legge togliendo da un quadrato di lato $a$ due rettangoli di lati $a$ e $b$, e il quadrato di lato $b$, che è stato tolto due volte, si rimette una volta.
+
+::grafico{assi=0 uguale=1 poligoni="0,0 3,0 3,3 0,3" linee="0,0 5,0 5,5 0,5 0,0;3,0 3,5;0,3 5,3" etichette="0.2,1.4,(a−b)²;3.3,1.4,b(a−b);0.2,3.9,b(a−b);3.7,3.9,b²;1.1,-0.6,a−b;3.8,-0.6,b;-1.2,1.4,a−b;-0.6,3.9,b" xmin=-2 xmax=6 ymin=-1 ymax=6 titolo="Il quadrato di lato $a$ è formato dal quadrato di lato $a - b$, da due rettangoli di lati $b$ e $a - b$ e dal quadrato di lato $b$; con $a = 5$ e $b = 2$ le aree valgono $9$, $6$, $6$ e $4$, e $9 = 25 - 2 \cdot 10 + 4$"}
+
 :::dimostrazione
 Il quadrato di un binomio è il prodotto del binomio per sé stesso, quindi si applica la regola del prodotto di polinomi:
 $$

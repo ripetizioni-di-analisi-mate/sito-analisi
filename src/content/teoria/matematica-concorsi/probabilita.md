@@ -47,6 +47,9 @@ $$
 0 \leq P(E) \leq 1 .
 $$
 Infatti i casi favorevoli sono almeno $0$ e al massimo quanti i casi possibili. L'evento impossibile ha probabilità $0$ e l'evento certo ha probabilità $1$. La proprietà offre un primo controllo sui risultati, perché un valore maggiore di $1$, come $\dfrac{7}{6}$, oppure negativo indica un errore nel conteggio.
+
+::grafico{assi=0 uguale=1 linee="0,0 10,0;0,-0.2 0,0.2;2.5,-0.2 2.5,0.2;5,-0.2 5,0.2;7.5,-0.2 7.5,0.2;10,-0.2 10,0.2" punti="0,0,pieno;1.67,0,pieno;5,0,pieno;10,0,pieno" etichette="0,-0.8,0;1.67,0.8,esce 6;5,0.8,testa;10,-0.8,1;0,1.5,impossibile;10,0.8,certo;5,-0.8,0,5;1.67,-0.8,0,17" xmin=-1.5 xmax=11.5 ymin=-1.6 ymax=1.6 titolo="Scala delle probabilità da $0$ a $1$: l'uscita del $6$ in un dado ha probabilità $\dfrac{1}{6} \approx 0{,}17$, l'uscita di testa in una moneta ha probabilità $\dfrac{1}{2}$"}
+
 :::
 
 :::attenzione
@@ -97,6 +100,8 @@ $$
 P(\text{almeno un } 6) = 1 - \frac{25}{36} = \frac{11}{36} .
 $$
 Il conteggio diretto richiederebbe di distinguere i casi con un solo $6$ da quello con due $6$, mentre per l'evento contrario basta un solo prodotto.
+
+::grafico{punti="1,1,vuoto;1,2,vuoto;1,3,vuoto;1,4,vuoto;1,5,vuoto;1,6,pieno;2,1,vuoto;2,2,vuoto;2,3,vuoto;2,4,vuoto;2,5,vuoto;2,6,pieno;3,1,vuoto;3,2,vuoto;3,3,vuoto;3,4,vuoto;3,5,vuoto;3,6,pieno;4,1,vuoto;4,2,vuoto;4,3,vuoto;4,4,vuoto;4,5,vuoto;4,6,pieno;5,1,vuoto;5,2,vuoto;5,3,vuoto;5,4,vuoto;5,5,vuoto;5,6,pieno;6,1,pieno;6,2,pieno;6,3,pieno;6,4,pieno;6,5,pieno;6,6,pieno" segmenti="0.5,5.5,5.5,5.5;5.5,0.5,5.5,5.5" xmin=0 xmax=6.8 ymin=0 ymax=6.8 uguale=1 nomi="a,b" titolo="Le $36$ coppie del lancio di due dadi: i $11$ punti pieni, sulla riga e sulla colonna del $6$, sono i casi con almeno un $6$; i $25$ punti vuoti, con entrambi i numeri da $1$ a $5$, sono i casi dell'evento contrario"}
 :::
 
 :::definizione{#eventi-incompatibili titolo="Eventi incompatibili"}
@@ -149,6 +154,8 @@ $$
 P(T \text{ e } 6) = \frac{1}{12} = \frac{1}{2} \cdot \frac{1}{6} .
 $$
 La regola vale anche per più eventi indipendenti; la probabilità di ottenere tre teste in tre lanci di una moneta è $\left( \dfrac{1}{2} \right)^{3} = \dfrac{1}{8}$.
+
+::grafico{assi=0 uguale=1 linee="0,0 6,0 6,6 0,6 0,0;3,0 3,6;0,1 6,1" poligoni="0,0 3,0 3,1 0,1" etichette="1.5,-0.7,T;4.5,-0.7,C;-1.6,0.5,esce 6;-1.6,3.5,altro;1.5,0.5,T e 6" xmin=-3 xmax=7 ymin=-1.5 ymax=7 titolo="Il quadrato rappresenta tutti i casi: la base è divisa in $\dfrac{1}{2}$ e $\dfrac{1}{2}$ per la moneta, l'altezza in $\dfrac{1}{6}$ e $\dfrac{5}{6}$ per il dado. Il rettangolo colorato, di area $\dfrac{1}{2} \cdot \dfrac{1}{6} = \dfrac{1}{12}$, corrisponde a testa e $6$"}
 :::
 
 :::esempio{titolo="Nessuno, entrambi, almeno uno, esattamente uno"}
@@ -193,6 +200,8 @@ P(A \mid B) = \frac{\text{casi favorevoli ad } A \text{ e a } B}{\text{casi favo
 \qquad P(B) > 0 .
 $$
 Lanciando un dado, la probabilità che sia uscito $6$ sapendo che è uscito un numero pari è $\dfrac{1}{3}$, perché i casi possibili si riducono a $2$, $4$ e $6$. Nell'albero delle estrazioni senza reimmissione le probabilità sui rami del secondo livello sono probabilità condizionate.
+
+::venn{tipo="incluso" zone="ab" nomi="pari,6" universo=1 elementi="a:2,4;ab:6;u:1,3,5" titolo="Dado: sapendo che è uscito un numero pari, i casi possibili si riducono a $2$, $4$ e $6$ e il caso favorevole al $6$ è uno solo, quindi la probabilità condizionata è $\dfrac{1}{3}$"}
 :::
 
 :::teorema{#regola-del-prodotto-generale titolo="Regola del prodotto per eventi qualsiasi"}
