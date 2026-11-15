@@ -18,7 +18,7 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'biologia-semestre-filtro': {
     titolo: 'Biology for the filter semester', breve: 'Filter semester biology',
-    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and 315 explained questions. Study materials are in Italian.',
+    descrizione: 'Biology for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with illustrated theory, worked examples, practice exercises and 630 explained questions. Complete study materials in English and Italian.',
     argomenti: {
       'organizzazione-biologica': { titolo: 'Biological and molecular organisation of life', breve: 'Cells and biomolecules' },
       'genoma-cromatina': { titolo: 'Genome, chromatin and epigenetics', breve: 'Genome and chromatin' },
@@ -31,7 +31,20 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   },
   'tolc-s': { titolo: 'TOLC-S (Science)', breve: 'TOLC-S', descrizione: 'Preparation for the TOLC-S: mathematics, reasoning and reading, biology, chemistry, physics, Earth science and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
   'tolc-i': { titolo: 'TOLC-I (Engineering)', breve: 'TOLC-I', descrizione: 'Preparation for the TOLC-I: mathematics, logic, physics, chemistry, verbal comprehension and English. An initial collection of theory, worked examples, five-option questions and section-timed simulations. Study materials and simulations are in Italian.', argomenti: {} },
-  'chimica-semestre-filtro': { titolo: 'Chemistry and introductory biochemistry for the filter semester', breve: 'Filter semester chemistry', descrizione: 'Chemistry and introductory biochemistry for admission to Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, with theory, worked examples, practice exercises and timed questions. Study materials are in Italian.', argomenti: {} },
+  'chimica-semestre-filtro': {
+    titolo: 'Chemistry and introductory biochemistry for the filter semester',
+    breve: 'Filter semester chemistry',
+    descrizione: 'Chemistry and introductory biochemistry for Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, from atoms to biomolecules. Illustrated theory, worked examples, practice exercises with solutions and 630 explained questions, in Italian and English.',
+    argomenti: {
+      'atomo-legami-termodinamica': { titolo: 'Atoms, bonds, states of matter and thermodynamics', breve: 'Atoms, bonds and thermodynamics' },
+      'soluzioni-proprieta-colligative': { titolo: 'Mixtures, solutions and colligative properties', breve: 'Solutions and colligative properties' },
+      'reazioni-cinetica-equilibrio': { titolo: 'Chemical reactions, kinetics and equilibrium', breve: 'Reactions and equilibrium' },
+      'acidi-basi-redox': { titolo: 'Acids, bases, buffers, redox and electrochemistry', breve: 'Acids, bases and redox' },
+      'carbonio-idrocarburi-stereochimica': { titolo: 'Carbon, hydrocarbons and stereochemistry', breve: 'Carbon and stereochemistry' },
+      'gruppi-funzionali': { titolo: 'Functional groups and reactions of organic compounds', breve: 'Functional groups' },
+      'biomolecole': { titolo: 'Amino acids, proteins, carbohydrates, lipids and nucleic acids', breve: 'Biomolecules' },
+    },
+  },
   'matematica-semestre-filtro': {
     titolo: 'Mathematics foundations for the filter semester',
     breve: 'Mathematics foundations',
@@ -558,7 +571,19 @@ export const MATERIE_EN: Record<string, { titolo: string; breve: string; descriz
   'tolc-s': { titolo: 'TOLC-S (Sciences)', breve: 'TOLC-S', descrizione: 'The basic mathematics, reasoning and science of the TOLC-S, the CISIA test for science degree programmes.', argomenti: {} },
   'tol-politecnico': { titolo: 'TOL of Politecnico di Milano', breve: 'TOL Politecnico', descrizione: 'The mathematics, logic and physics of the TOL, the admission test for Engineering at Politecnico di Milano.', argomenti: {} },
   'ofa-matematica': { titolo: 'Making up maths OFA', breve: 'Maths OFA', descrizione: 'The basic mathematics to review in order to clear the additional learning requirements (OFA) assigned after the admission test.', argomenti: {} },
-  'fisica-semestre-filtro': { titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics', descrizione: 'The physics exam of the filter semester for admission to Medicine and Surgery, Dentistry and Veterinary Medicine.', argomenti: {} },
+  'fisica-semestre-filtro': {
+    titolo: 'Physics for the Medicine filter semester', breve: 'Filter semester physics',
+    descrizione: 'Physics for Medicine, Dentistry and Veterinary Medicine: seven units based on the MUR 2026/2027 syllabus, covering measurement, mechanics, fluids, waves, thermodynamics, electromagnetism and optics. Illustrated theory, worked examples, practice exercises with solutions and 630 explained questions, in Italian and English.',
+    argomenti: {
+      'metodi-della-fisica': { titolo: 'Methods of physics, quantities and vectors', breve: 'Methods and vectors' },
+      'meccanica': { titolo: 'Mechanics of particles and systems', breve: 'Mechanics' },
+      'fluidi': { titolo: 'Fluid mechanics and models of circulation', breve: 'Fluids' },
+      'onde-meccaniche': { titolo: 'Mechanical waves and acoustics', breve: 'Waves and acoustics' },
+      'termodinamica': { titolo: 'Temperature, heat and thermodynamics', breve: 'Thermodynamics' },
+      'elettricita-e-magnetismo': { titolo: 'Electricity, circuits and magnetism', breve: 'Electricity and magnetism' },
+      'radiazioni-e-ottica': { titolo: 'Radiation, radioactivity and optics', breve: 'Radiation and optics' },
+    },
+  },
 };
 export const SOTTOGRUPPI_EN: Record<string, string> = { 'Matematica': 'Mathematics', 'Fisica': 'Physics', 'Informatica': 'Computer science' };
 export const GRUPPI_EN: Record<string, string> = { 'Università': 'University', 'Superiori': 'High school', 'Concorsi': 'Public exams', 'Percorso per principianti': 'Beginners', 'Semestre filtro': 'Filter semester', 'TOLC, OFA e test di ingresso': 'TOLC, OFA and admission tests' };

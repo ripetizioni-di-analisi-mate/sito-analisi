@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
+<title id="title">Work by a variable force</title><desc id="desc">F=4x with x in metres. Area from0to3m18J, from2to3m10J.</desc>
+<defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
+<rect width="780" height="520" fill="#fff"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Work by a variable force</text>
+<line x1="100.000" y1="90.000" x2="100.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="100.00" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">0</text>
+<line x1="281.818" y1="90.000" x2="281.818" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="281.82" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">1</text>
+<line x1="463.636" y1="90.000" x2="463.636" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="463.64" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">2</text>
+<line x1="645.455" y1="90.000" x2="645.455" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="645.45" y="450.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">3</text>
+<line x1="100.000" y1="420.000" x2="700.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="427.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">0</text>
+<line x1="100.000" y1="325.714" x2="700.000" y2="325.714" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="332.71" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">4</text>
+<line x1="100.000" y1="231.429" x2="700.000" y2="231.429" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="238.43" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">8</text>
+<line x1="100.000" y1="137.143" x2="700.000" y2="137.143" stroke="#dce5eb" stroke-width="1"/>
+<text x="85.00" y="144.14" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">12</text>
+<line x1="100.000" y1="420.000" x2="720.000" y2="420.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
+<line x1="100.000" y1="425.000" x2="100.000" y2="75.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
+<text x="728.00" y="450.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">x (m)</text>
+<text x="90.00" y="62.00" font-size="22" text-anchor="start" fill="#17324d" font-weight="normal">Fₓ (N)</text>
+<polygon points="100.000,420.000 645.455,137.143 645.455,420.000" stroke="#087f75" stroke-width="1" fill="#dcf1e9" stroke-linejoin="round"/>
+<line x1="100.000" y1="420.000" x2="645.455" y2="137.143" stroke="#1767a5" stroke-width="4"/>
+<line x1="463.636" y1="420.000" x2="463.636" y2="231.429" stroke="#526574" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="445.45" y="346.93" font-size="25" text-anchor="middle" fill="#087f75" font-weight="normal">W₀→₃ = 18 J</text>
+<text x="390.00" y="490.00" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">Fₓ = (4 N/m) x</text>
+</g></svg>

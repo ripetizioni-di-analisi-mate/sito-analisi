@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="520" viewBox="0 0 780 520" role="img" aria-labelledby="title desc" xml:lang="en">
+<title id="title">Mechanical energy and dissipation</title><desc id="desc">Initial30J potential energy becomes20J kinetic and10J internal energy.</desc>
+<defs><marker id="a-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#17324d"/></marker><marker id="a-blue" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#1767a5"/></marker><marker id="a-green" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#087f75"/></marker><marker id="a-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#b35112"/></marker><marker id="a-grid" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#dce5eb"/></marker><marker id="a-muted" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L8,4 L0,8 Z" fill="#526574"/></marker></defs>
+<rect width="780" height="520" fill="#fff"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#17324d">
+<text x="390.00" y="40.00" font-size="26" text-anchor="middle" fill="#17324d" font-weight="bold">Mechanical energy and dissipation</text>
+<line x1="100.000" y1="420.000" x2="690.000" y2="420.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="80.00" y="427.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">0</text>
+<line x1="100.000" y1="340.000" x2="690.000" y2="340.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="80.00" y="347.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">10</text>
+<line x1="100.000" y1="260.000" x2="690.000" y2="260.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="80.00" y="267.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">20</text>
+<line x1="100.000" y1="180.000" x2="690.000" y2="180.000" stroke="#dce5eb" stroke-width="1"/>
+<text x="80.00" y="187.00" font-size="22" text-anchor="end" fill="#17324d" font-weight="normal">30</text>
+<line x1="100.000" y1="430.000" x2="100.000" y2="115.000" stroke="#17324d" stroke-width="2" marker-end="url(#a-ink)"/>
+<text x="75.00" y="95.00" font-size="22" text-anchor="start" fill="#17324d" font-weight="normal">E (J)</text>
+<rect x="170" y="180" width="150" height="240" fill="#e6edf8" stroke="#1767a5" stroke-width="2"/>
+<rect x="500" y="260" width="150" height="160" fill="#d8f0e8" stroke="#087f75" stroke-width="2"/>
+<rect x="500" y="180" width="150" height="80" fill="#fbe4ce" stroke="#b35112" stroke-width="2"/>
+<text x="245.00" y="290.00" font-size="25" text-anchor="middle" fill="#1767a5" font-weight="normal">Ug = 30 J</text>
+<text x="575.00" y="345.00" font-size="25" text-anchor="middle" fill="#087f75" font-weight="normal">K = 20 J</text>
+<text x="575.00" y="227.00" font-size="24" text-anchor="middle" fill="#b35112" font-weight="normal">ΔEᵢ = 10 J</text>
+<text x="245.00" y="457.00" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">initial</text>
+<text x="575.00" y="457.00" font-size="25" text-anchor="middle" fill="#17324d" font-weight="normal">final</text>
+<text x="390.00" y="500.00" font-size="22" text-anchor="middle" fill="#17324d" font-weight="normal">Eᵢ: internal energy of block and plane</text>
+</g></svg>

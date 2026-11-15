@@ -1,171 +1,211 @@
 ---
 titolo: "Reazioni chimiche, cinetica ed equilibrio"
-sommario: "Bilanciamento e stechiometria, velocità delle reazioni, catalisi, equilibri chimici e precipitazione nelle soluzioni."
+sommario: "Conservazioni, velocità e direzione delle trasformazioni: bilanci, meccanismi, catalisi, attività, equilibri e precipitazione, con esperimenti e modelli biomedici."
 ---
 
-## Reazioni chimiche e quantità di sostanza
+## Bilanciare una trasformazione e prevederne le quantità
 
-:::definizione{#bilanciamento titolo="Equazioni chimiche e conservazioni"}
-Una **reazione chimica** trasforma i reagenti in prodotti mediante una diversa distribuzione degli atomi e degli elettroni. Nell'equazione chimica le formule indicano le specie e i coefficienti stechiometrici indicano i rapporti tra le loro quantità di sostanza. Il bilanciamento conserva il numero di atomi di ciascun elemento e la carica elettrica totale.
+:::definizione{#bilanciamento titolo="Atomi, carica ed energia"}
+Nella combustione dell'etanolo il carbonio passa a diossido di carbonio e l'idrogeno ad acqua. Il numero di atomi di ciascun elemento permette di stabilire quante molecole partecipano. Si conservano prima carbonio e idrogeno, poi si completa il conteggio dell'ossigeno:
 $$
-2\mathrm{H_2}+\mathrm{O_2}\longrightarrow2\mathrm{H_2O}.
+\mathrm{C_2H_5OH}+3\mathrm{O_2}\longrightarrow2\mathrm{CO_2}+3\mathrm{H_2O}.
 $$
-Per ogni $2\,\mathrm{mol}$ di idrogeno che reagiscono si consuma $1\,\mathrm{mol}$ di ossigeno e si formano $2\,\mathrm{mol}$ di acqua. Gli indici delle formule restano quelli delle sostanze; modificare $\mathrm{H_2O}$ in $\mathrm{H_2O_2}$ descriverebbe una sostanza diversa.
+I coefficienti indicano rapporti fra quantità di sostanza; gli indici appartengono alla formula della specie. Cambiare l'indice dell'acqua produrrebbe un'altra sostanza. Il **bilanciamento** conserva atomi e carica totale. Nell'equazione ionica
+$$
+\mathrm{Ca^{2+}}+\mathrm{CO_3^{2-}}\longrightarrow\mathrm{CaCO_3(s)}
+$$
+la somma delle cariche è zero in entrambi i membri. Gli ioni spettatori, presenti senza variazioni nei due membri dell'equazione completa, si possono eliminare per ottenere l'equazione ionica netta.
 
-Per un'equazione ionica anche la somma delle cariche deve coincidere nei due membri. Per esempio $\mathrm{Ag^+}+\mathrm{Cl^-}\longrightarrow\mathrm{AgCl(s)}$ ha carica totale zero in entrambi. La massa si conserva nella descrizione chimica ordinaria; l'energia totale del sistema e dell'ambiente si conserva anche quando la reazione scambia calore o compie lavoro.
+La conservazione della massa riguarda l'insieme delle sostanze coinvolte. Una soluzione in recipiente aperto può perdere massa quando libera un gas che esce dal recipiente. Anche l'energia si conserva considerando sistema e ambiente: una reazione esotermica trasferisce energia all'ambiente e modifica l'energia del sistema. Il bilanciamento della sola materia non determina né il calore scambiato né la velocità della trasformazione.
 :::
 
-:::definizione{#stechiometria titolo="Avanzamento e reagente limitante"}
-Per una reazione $a\mathrm A+b\mathrm B\longrightarrow c\mathrm C$, un avanzamento $\xi$, espresso in moli, produce le variazioni
+:::definizione{#stechiometria titolo="Avanzamento, limitante e resa"}
+Per $a\mathrm A+b\mathrm B\longrightarrow c\mathrm C$, l'avanzamento $\xi$ misura in moli quanto è progredita la reazione:
 $$
-\Delta n_A=-a\xi,\qquad \Delta n_B=-b\xi,\qquad\Delta n_C=c\xi.
+\Delta n_A=-a\xi,\qquad\Delta n_B=-b\xi,\qquad\Delta n_C=c\xi.
 $$
-Se la reazione procede fino a consumare uno dei reagenti, l'avanzamento massimo è
+Ogni reagente disponibile impone un limite. Se la trasformazione può arrivare a completamento,
 $$
-\xi_{\max}=\min\left\{\frac{n_{A,0}}{a},\frac{n_{B,0}}{b}\right\}.
+\xi_{\max}=\min\left\{\dfrac{n_{A,0}}{a},\dfrac{n_{B,0}}{b}\right\}.
 $$
-Il reagente che determina questo minimo è il **reagente limitante**. Il rapporto tra le moli disponibili e il proprio coefficiente permette quindi di confrontare reagenti con coefficienti diversi. Prima del confronto, una massa $m$ si converte in moli con $n=\dfrac{m}{M}$, dove $M$ è la massa molare. La quantità teorica così calcolata presuppone che la trasformazione considerata sia completa e priva di reazioni secondarie.
+Il **reagente limitante** esaurisce per primo la disponibilità rispetto al rapporto richiesto. Per confrontare masse si calcola prima $n=\dfrac{m}{M}$, con $M$ massa molare. Il reagente di massa minore può essere in eccesso quando massa molare e coefficiente sono diversi.
+
+Con $3\,\mathrm{mol}$ di idrogeno e $1\,\mathrm{mol}$ di ossigeno, la reazione $2\mathrm{H_2}+\mathrm{O_2}\longrightarrow2\mathrm{H_2O}$ ha $\xi_{\max}=1\,\mathrm{mol}$. Si possono formare $2\,\mathrm{mol}$ di acqua e resta $1\,\mathrm{mol}$ di idrogeno. La previsione è una quantità teorica: equilibrio sfavorevole, reazioni secondarie o perdite di recupero possono ridurre il prodotto isolato. La resa percentuale è $\dfrac{n_{\mathrm{isolato}}}{n_{\mathrm{teorico}}}\cdot100\%$ per lo stesso prodotto puro. Una resa apparente superiore al cento per cento suggerisce di controllare purezza, acqua residua e dati iniziali.
+
+![Tre moli di idrogeno e una di ossigeno producono al massimo due moli di acqua, lasciando una mole di idrogeno.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/bilancio-it.svg)
 :::
 
-:::esempio{titolo="Un reagente in eccesso"}
-Si fanno reagire $3{,}0\,\mathrm{mol}$ di $\mathrm{H_2}$ con $1{,}0\,\mathrm{mol}$ di $\mathrm{O_2}$. I rapporti stechiometrici valgono $\dfrac{3{,}0}{2}=1{,}5\,\mathrm{mol}$ e $\dfrac{1{,}0}{1}=1{,}0\,\mathrm{mol}$, quindi l'ossigeno è limitante. Per $\xi=1{,}0\,\mathrm{mol}$ si formano $2{,}0\,\mathrm{mol}$ di acqua e rimane $1{,}0\,\mathrm{mol}$ di idrogeno.
+## Misurare la velocità e ricostruire una legge cinetica
+
+:::definizione{#velocita titolo="Variazione di una specie e velocità normalizzata"}
+Una misura di concentrazione ripetuta nel tempo descrive la cinetica. In una miscela omogenea a volume costante, con una sola reazione $a\mathrm A+b\mathrm B\longrightarrow c\mathrm C$, la velocità normalizzata è
+$$
+v=-\dfrac{1}{a}\dfrac{d[A]}{dt}=-\dfrac{1}{b}\dfrac{d[B]}{dt}=\dfrac{1}{c}\dfrac{d[C]}{dt}.
+$$
+Dividere per i coefficienti produce lo stesso valore qualunque specie si osservi. La velocità media usa variazioni finite di concentrazione e tempo; quella istantanea corrisponde alla pendenza della tangente. L'unità usuale è $\mathrm{mol\,L^{-1}\,s^{-1}}$.
+
+Per $2\mathrm{H_2O_2}\longrightarrow2\mathrm{H_2O}+\mathrm{O_2}$, una formazione di ossigeno di $0{,}010\,\mathrm{mol\,L^{-1}\,s^{-1}}$ corrisponde a un consumo di perossido doppio. Se il volume cambia, anche una semplice diluizione modifica la concentrazione: occorre separare questo contributo da quello chimico, oppure lavorare con l'avanzamento e la velocità $\dfrac{1}{V}\dfrac{d\xi}{dt}$.
 :::
 
-## Velocità di reazione
+:::definizione{#ordine titolo="Ordine sperimentale e stadi elementari"}
+Una legge osservata può essere $v=k[A]^\alpha[B]^\beta$. Gli esponenti sono gli **ordini parziali**; la loro somma è l'ordine complessivo. Si ricavano variando una concentrazione alla volta, mantenendo temperatura e altre condizioni. Se raddoppiare $[A]$ quadruplica la velocità, allora $2^\alpha=4$ e $\alpha=2$. Se una specie è in grande eccesso, la sua concentrazione può restare quasi costante: in $v=k[A][B]$, il prodotto $k[B]$ diventa una costante osservata e la cinetica appare di primo ordine rispetto ad A.
 
-:::definizione{#velocita titolo="Velocità media e istantanea"}
-In una miscela omogenea a volume costante, la **velocità di reazione** si ricava dalla variazione di concentrazione divisa per il coefficiente stechiometrico. Per $a\mathrm A+b\mathrm B\longrightarrow c\mathrm C$ si definisce
-$$
-v=-\frac{1}{a}\frac{d[A]}{dt}
-=-\frac{1}{b}\frac{d[B]}{dt}
-=\frac{1}{c}\frac{d[C]}{dt}.
-$$
-I segni rendono positiva la velocità per il processo nel verso scritto. L'unità usuale è $\mathrm{mol\,L^{-1}\,s^{-1}}$. Per una velocità media su un intervallo si sostituisce la derivata con il rapporto tra la variazione di concentrazione e l'intervallo di tempo.
+Gli ordini possono essere zero, frazionari o negativi nell'intervallo sperimentale studiato. Un ordine negativo esprime una diminuzione della velocità all'aumentare di quella specie, compatibile con un effetto inibitorio. Le unità di $k$ si ricavano dalla legge: per ordine complessivo $n$ sono $\mathrm{(mol\,L^{-1})^{1-n}\,s^{-1}}$.
 
-Nella decomposizione $2\mathrm{H_2O_2}\longrightarrow2\mathrm{H_2O}+\mathrm{O_2}$, la formazione di ossigeno a $0{,}010\,\mathrm{mol\,L^{-1}\,s^{-1}}$ corrisponde a una scomparsa di perossido di idrogeno a $0{,}020\,\mathrm{mol\,L^{-1}\,s^{-1}}$. Il consumo di un reagente e la velocità normalizzata della reazione sono dunque quantità diverse quando il coefficiente è diverso da uno.
+La **molecolarità** conta le entità reagenti di un singolo evento elementare. È un intero positivo: uno per uno stadio unimolecolare, due per uno bimolecolare. Per lo stadio elementare $\mathrm A+\mathrm B\longrightarrow\mathrm P$ la dipendenza è $k[A][B]$. Una reazione globale comprende invece anche intermedi, stadi successivi e preequilibri; i suoi coefficienti non bastano a ricavare gli ordini. Un intermedio viene prodotto in uno stadio e consumato in un altro, quindi scompare dal bilancio globale. Anche uno stadio rapido può influenzare la velocità osservata se determina la concentrazione dell'intermedio che reagisce nello stadio successivo.
 :::
 
-## Leggi cinetiche, ordini e molecolarità
+:::osservazione{#leggi-integrate titolo="Come cambia la concentrazione nel tempo"}
+Le leggi integrate seguenti descrivono la scomparsa di A con $k$ costante, a volume costante e senza un contributo inverso apprezzabile:
 
-:::definizione{#ordine titolo="Legge di velocità e ordine di reazione"}
-Una legge cinetica sperimentale può avere la forma
-$$
-v=k[A]^\alpha[B]^\beta.
-$$
-$k$ è la costante cinetica alla temperatura considerata; $\alpha$ e $\beta$ sono gli ordini parziali e la loro somma è l'**ordine complessivo**. Gli esponenti si determinano dai dati. Se, lasciando invariata $[B]$, il raddoppio di $[A]$ quadruplica $v$, allora $2^\alpha=4$, quindi $\alpha=2$. Le unità di $k$ dipendono dall'ordine complessivo; per un ordine due sono $\mathrm{L\,mol^{-1}\,s^{-1}}$.
+| Legge di scomparsa | Relazione integrata | Tempo di dimezzamento |
+| --- | --- | --- |
+| $-\dfrac{d[A]}{dt}=k$ | $[A]=[A]_0-kt$ | $\dfrac{[A]_0}{2k}$ |
+| $-\dfrac{d[A]}{dt}=k[A]$ | $\ln\dfrac{[A]}{[A]_0}=-kt$ | $\dfrac{\ln2}{k}$ |
+| $-\dfrac{d[A]}{dt}=k[A]^2$ | $\dfrac{1}{[A]}=\dfrac{1}{[A]_0}+kt$ | $\dfrac{1}{k[A]_0}$ |
 
-Per un singolo **stadio elementare**, la molecolarità conta le entità reagenti coinvolte in quell'evento ed è un intero positivo. Per uno stadio elementare bimolecolare $\mathrm A+\mathrm B\longrightarrow\mathrm P$ vale $v=k[A][B]$. Una reazione globale può procedere in più stadi, perciò i suoi coefficienti stechiometrici, da soli, non determinano gli ordini sperimentali. Lo stadio lento e gli eventuali preequilibri concorrono alla legge osservata.
+Nel primo ordine si perde la stessa *frazione* in intervalli uguali; nell'ordine zero si perde la stessa *quantità per volume*. La legge di ordine zero cessa di descrivere il sistema prima di prevedere concentrazioni negative. I grafici di $[A]$, $\ln\dfrac{[A]}{[A]_0}$ o $\dfrac{1}{[A]}$ rispetto al tempo permettono di confrontare i modelli, tenendo conto dell'errore di misura. Le formule della tabella usano il coefficiente della legge di scomparsa: per una specie con coefficiente stechiometrico due, esso può differire da quello della velocità normalizzata.
+
+Nel grafico si confrontano modelli con la stessa concentrazione iniziale e la stessa velocità iniziale di scomparsa $v_0$. Il tempo normalizzato è $\tau=\dfrac{v_0t}{[A]_0}$: così le differenze fra le curve mostrano come la velocità cambia durante il consumo.
+
+![Curve di concentrazione normalizzata: diminuzione lineare nell'ordine zero, esponenziale nel primo e iperbolica nel secondo, con uguale pendenza iniziale.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/cinetiche-it.svg)
 :::
 
-:::osservazione{#leggi-integrate titolo="Evoluzione della concentrazione"}
-Per una scomparsa di primo ordine, con legge $-\dfrac{d[A]}{dt}=k[A]$ e $k$ costante, l'integrazione dà
+## Barriere, temperatura e catalisi
+
+:::definizione{#arrhenius titolo="Urti efficaci e stato di transizione"}
+Aumentare la concentrazione può aumentare la frequenza degli incontri; la trasformazione richiede anche orientazione e condizioni energetiche appropriate. Nelle reazioni eterogenee conta la superficie accessibile del solido: una polvere e un blocco della stessa massa possono reagire a velocità diverse. La temperatura modifica distribuzione delle energie e costanti cinetiche.
+
+La legge di Arrhenius collega la costante alla temperatura assoluta:
 $$
-[A](t)=[A]_0e^{-kt},\qquad
-\ln\frac{[A](t)}{[A]_0}=-kt,\qquad
- t_{1/2}=\frac{\ln2}{k}.
+k=Ae^{-\dfrac{E_a}{RT}},\qquad
+\ln\dfrac{k_2}{k_1}=-\dfrac{E_a}{R}\left(\dfrac{1}{T_2}-\dfrac{1}{T_1}\right).
 $$
-Il tempo di dimezzamento è indipendente dalla concentrazione iniziale. Se invece $-\dfrac{d[A]}{dt}=k$, l'ordine è zero e $[A](t)=[A]_0-kt$ nell'intervallo in cui la legge è valida; il tempo di dimezzamento vale $\dfrac{[A]_0}{2k}$. Queste formule riguardano la velocità di scomparsa della specie scritta; un coefficiente stechiometrico diverso da uno richiede di distinguere tale velocità da $v$.
+$A$ è il fattore preesponenziale; $R=8{,}314\,\mathrm{J\,mol^{-1}\,K^{-1}}$. La seconda espressione assume $A$ ed $E_a$ circa costanti. Per $E_a>0$, il riscaldamento aumenta $k$. Nel grafico di $\ln k$ contro $\dfrac{1}{T}$ la pendenza è $-\dfrac{E_a}{R}$, quindi una pendenza più negativa corrisponde a maggiore sensibilità alla temperatura. Le energie espresse in kilojoule vanno convertite quando si usa questo valore di $R$. Nei grafici logaritmici di $k$ si intende il suo valore numerico in una unità fissata: cambiare tale unità sposta l’intercetta, non la pendenza.
+
+Lo **stato di transizione** corrisponde alla regione di massima energia libera lungo un passaggio del percorso. Un intermedio occupa invece un minimo locale e può avere una durata misurabile. La barriera $\Delta G^\ddagger$ si misura dal livello di partenza al massimo pertinente. L'energia di attivazione di Arrhenius e la barriera di energia libera hanno definizioni diverse; nessuna delle due coincide in generale con la variazione di Gibbs tra reagenti e prodotti. Una trasformazione favorevole può quindi essere lenta.
+
+La **teoria dello stato di transizione** collega la velocità alla popolazione di configurazioni attivate in un particolare equilibrio statistico con i reagenti e al loro passaggio verso i prodotti. Una barriera libera maggiore riduce questa popolazione. Il complesso attivato non è un intermedio isolabile collocato in un minimo.
 :::
 
-## Temperatura ed energia di attivazione
+:::definizione{#catalisi titolo="Percorsi alternativi ed enzimi"}
+Un catalizzatore partecipa agli stadi del meccanismo ed è rigenerato nel bilancio. Il percorso catalizzato presenta barriere cinetiche più favorevoli e permette di raggiungere prima l'equilibrio. A temperatura invariata conserva l'energia libera standard della trasformazione e il valore di $K$. Anche il processo inverso viene accelerato in modo compatibile con lo stesso rapporto di equilibrio.
 
-:::definizione{#arrhenius titolo="Urti efficaci e legge di Arrhenius"}
-Un urto conduce alla trasformazione quando l'orientazione e l'energia delle entità coinvolte consentono il processo. L'**energia di attivazione** $E_a$ caratterizza la dipendenza della costante cinetica dalla temperatura secondo la legge di Arrhenius
-$$
-k=Ae^{-\frac{E_a}{RT}},\qquad
-\ln\frac{k_2}{k_1}=-\frac{E_a}{R}\left(\frac{1}{T_2}-\frac{1}{T_1}\right).
-$$
-$A$ è il fattore preesponenziale, $R=8{,}314\,\mathrm{J\,mol^{-1}\,K^{-1}}$ e $T$ è la temperatura assoluta. La seconda relazione vale assumendo $A$ ed $E_a$ circa costanti nell'intervallo. Per $E_a>0$, un aumento di temperatura aumenta $k$.
+Gli enzimi sono catalizzatori biologici, in prevalenza proteici; esistono anche RNA catalitici. Il riconoscimento dei substrati e la stabilizzazione dello stato di transizione contribuiscono alla selettività. Quando i siti attivi sono quasi tutti occupati, aumentare il substrato ha effetti progressivamente minori sulla velocità: l'ordine osservato può cambiare con l'intervallo di concentrazione. Aggiungere enzima attivo può aumentare la capacità catalitica. Un aumento di temperatura può invece accelerare passaggi chimici e contemporaneamente ridurre l'enzima funzionante per alterazione strutturale.
 
-Nella teoria dello stato di transizione, reagenti e prodotti sono collegati da configurazioni di massima energia libera lungo un percorso di reazione. La barriera di energia libera di attivazione $\Delta G^\ddagger$ descrive il costo di accesso a queste configurazioni. $E_a$ e $\Delta G^\ddagger$ sono grandezze collegate ma definite in modo diverso. La variazione di energia libera tra reagenti e prodotti determina invece la direzione termodinamica, quindi una trasformazione favorevole può procedere lentamente se la barriera è elevata.
+L'accoppiamento a un'altra reazione, per esempio l'idrolisi dell'ATP, cambia il bilancio della trasformazione complessiva perché aggiunge reagenti e prodotti. La catalisi, da sola, conserva il bilancio della reazione considerata.
+
+![Due profili di energia libera con gli stessi livelli iniziale e finale e diverse barriere; il percorso catalizzato mantiene invariata la differenza tra reagenti e prodotti.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/barriere-it.svg)
 :::
 
-## Catalizzatori ed enzimi
-
-:::definizione{#catalisi titolo="Catalisi e meccanismo di reazione"}
-Un **catalizzatore** partecipa al meccanismo e viene rigenerato nel bilancio complessivo. Offre un percorso con barriera cinetica minore e aumenta la velocità con cui si raggiunge l'equilibrio. Agisce sulle velocità dei due versi in modo coerente con lo stesso equilibrio; a temperatura invariata lascia invariati $\Delta G^\circ$ e la costante di equilibrio.
-
-Gli **enzimi** sono catalizzatori biologici, in prevalenza proteine. Il legame del substrato e la stabilizzazione dello stato di transizione possono favorire un percorso specifico. Quando i siti attivi sono quasi tutti occupati, l'aumento di substrato produce incrementi di velocità sempre minori. Temperatura e pH possono modificare attività e struttura dell'enzima. L'accoppiamento con un'altra reazione, come l'idrolisi dell'ATP, può rendere favorevole un processo complessivo; il solo catalizzatore non cambia il bilancio di energia libera di una reazione.
-:::
-
-:::esempio{titolo="Barriera ed energia della trasformazione"}
-Due percorsi hanno gli stessi reagenti e prodotti. Nel primo la barriera dal lato dei reagenti è $80\,\mathrm{kJ\,mol^{-1}}$; nel secondo è $45\,\mathrm{kJ\,mol^{-1}}$. Se la differenza di energia tra prodotti e reagenti è $-20\,\mathrm{kJ\,mol^{-1}}$, essa resta uguale nei due percorsi. Le barriere del verso inverso sono rispettivamente $100$ e $65\,\mathrm{kJ\,mol^{-1}}$, perché entrambe si misurano a partire dal livello energetico dei prodotti.
-:::
-
-## Equilibrio chimico e costanti
+## Riconoscere l'equilibrio e scrivere la costante
 
 :::definizione{#equilibrio titolo="Equilibrio dinamico e stato stazionario"}
-Per una reazione reversibile in un sistema chiuso all'equilibrio, le velocità dei due versi coincidono e la composizione macroscopica rimane costante. L'equilibrio è **dinamico**, perché continuano i processi microscopici in entrambi i versi. Una trasformazione detta irreversibile nelle condizioni sperimentali ha invece una conversione inversa trascurabile nei tempi e nelle condizioni considerati.
+In un sistema chiuso, la composizione può diventare costante mentre continuano trasformazioni nei due versi. All'**equilibrio chimico** le velocità diretta e inversa si compensano e manca un avanzamento netto. Le concentrazioni di reagenti e prodotti possono essere diverse. Una marcatura isotopica può rivelare lo scambio microscopico anche quando la composizione macroscopica resta costante.
 
-In uno **stato stazionario** le concentrazioni restano costanti perché produzione, consumo ed eventuali flussi si compensano. Un sistema biologico alimentato continuamente può trovarsi in stato stazionario e mantenere flussi netti di materia ed energia. La costanza della concentrazione, da sola, non implica equilibrio chimico.
+Una trasformazione si descrive come praticamente irreversibile quando il processo inverso è trascurabile nei tempi e nelle condizioni osservati. Il simbolo a freccia singola non dimostra da solo l'impossibilità fisica del processo inverso.
+
+In uno **stato stazionario**, invece, si compensano produzione, consumo e flussi attraverso i confini. Una cellula alimentata può mantenere costante un metabolita mentre lo produce e lo consuma con un flusso netto continuo. La sola concentrazione stabile non identifica l'equilibrio: servono informazioni sui processi che la mantengono.
+
+![Confronto fra reazione reversibile con velocità opposte uguali e sistema aperto mantenuto costante da ingresso e consumo.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/stazionario-it.svg)
 :::
 
-:::definizione{#costante-equilibrio titolo="Legge di azione di massa e attività"}
-Per $a\mathrm A+b\mathrm B\rightleftharpoons c\mathrm C+d\mathrm D$, la costante termodinamica di equilibrio è
+:::definizione{#costante-equilibrio titolo="Attività e stati standard"}
+Per $a\mathrm A+b\mathrm B\rightleftharpoons c\mathrm C+d\mathrm D$ il rapporto di equilibrio è
 $$
-K=\frac{a_C^c a_D^d}{a_A^a a_B^b}\quad\text{all'equilibrio}.
+K=\dfrac{a_C^c a_D^d}{a_A^a a_B^b}.
 $$
-Le $a_i$ sono **attività**, quantità adimensionali riferite a uno stato standard. In una soluzione sufficientemente diluita e ideale si approssima $a_i\simeq\dfrac{[i]}{c^\circ}$, con $c^\circ=1\,\mathrm{mol\,L^{-1}}$. Per gas ideali si usa $a_i\simeq\dfrac{p_i}{p^\circ}$, con $p^\circ=1\,\mathrm{bar}$. Per un solido puro o un liquido puro presente nella fase considerata, l'attività è approssimata a uno. Perciò un solido puro non compare nell'espressione operativa di $K$.
+Questa è la **legge d'azione di massa all'equilibrio**: i coefficienti della reazione diventano esponenti delle attività. L'uso dei coefficienti in questa relazione termodinamica non autorizza a usarli come ordini di una legge cinetica globale.
 
-Nei calcoli introduttivi si scrive spesso $K_c$ inserendo direttamente le concentrazioni in $\mathrm{mol\,L^{-1}}$. Se le concentrazioni non sono normalizzate, tale espressione può avere unità formali; nelle relazioni con $\ln K$ si usa sempre la costante termodinamica adimensionale. Negli esempi di questo capitolo i rapporti con $c^\circ$ sono sottintesi quando si usano i valori numerici delle concentrazioni nel modello ideale.
+Le attività $a_i$ sono adimensionali. In una soluzione si può scrivere $a_i=\gamma_i\dfrac{[i]}{c^\circ}$, dove $\gamma_i$ corregge la non idealità e $c^\circ=1\,\mathrm{mol\,L^{-1}}$. Nel modello ideale diluito si assume $\gamma_i\simeq1$. Per gas ideali si usa $a_i=\dfrac{p_i}{p^\circ}$ con $p^\circ=1\,\mathrm{bar}$. Solidi e liquidi puri hanno attività unitaria nel consueto modello riferito alla fase pura.
+
+Un solido puro presente non compare quindi come concentrazione variabile in $K$. Aggiungerne altro può cambiare superficie e velocità di raggiungimento dell'equilibrio, mantenendo la stessa composizione satura. Questa conclusione richiede che la fase solida sia effettivamente presente: se tutto il solido si dissolve prima della saturazione, l'uguaglianza di equilibrio di dissoluzione non può essere imposta.
+
+Le forme introduttive $K_c$ e $K_p$ spesso utilizzano concentrazioni o pressioni senza esplicitare la normalizzazione. Per collegarle all'energia libera occorre una costante adimensionale e uno stato standard coerente. Nei calcoli ideali di solubilità si useranno i valori numerici delle concentrazioni in $\mathrm{mol\,L^{-1}}$, sottintendendo la divisione per $c^\circ$.
 :::
 
-:::esempio{titolo="Un equilibrio omogeneo"}
-Per $\mathrm A\rightleftharpoons\mathrm B$, all'equilibrio si misurano $[A]=0{,}20\,\mathrm{mol\,L^{-1}}$ e $[B]=0{,}80\,\mathrm{mol\,L^{-1}}$. Nel modello ideale
-$$
-K=\frac{[B]}{[A]}=4.
-$$
-Il rapporto quattro descrive la composizione di equilibrio a quella temperatura. Una miscela preparata inizialmente con lo stesso rapporto è già all'equilibrio rispetto a questa reazione.
-:::
+## Stabilire il verso con Q e l'energia libera
 
-## Quoziente di reazione ed energia libera
-
-:::definizione{#quoziente-gibbs titolo="Confronto tra Q e K"}
-Il **quoziente di reazione** $Q$ ha la stessa espressione di $K$, ma contiene le attività nella composizione attuale, che può essere lontana dall'equilibrio. A temperatura e pressione fissate,
+:::definizione{#quoziente-gibbs titolo="Composizione attuale e composizione di equilibrio"}
+Il **quoziente di reazione** $Q$ usa la stessa espressione della costante, inserendo le attività attuali. Per una trasformazione a temperatura e pressione fissate,
 $$
-\Delta_rG=\Delta_rG^\circ+RT\ln Q,\qquad
+\Delta_rG=\Delta_rG^\circ+RT\ln Q,
+$$
+$$
 \Delta_rG^\circ=-RT\ln K,\qquad
-\Delta_rG=RT\ln\frac{Q}{K}.
+\Delta_rG=RT\ln\dfrac{Q}{K}.
 $$
-$\Delta_rG$ è la variazione di energia libera per mole di avanzamento. Se $Q<K$, essa è negativa e il processo è favorito nel verso scritto. Se $Q>K$, è favorito il verso inverso. Se $Q=K$, $\Delta_rG=0$ e la composizione soddisfa la condizione di equilibrio per la reazione.
+$\Delta_rG$ è la derivata dell'energia libera rispetto all'avanzamento, nelle condizioni specificate. Il confronto determina il verso inizialmente favorito: con $Q<K$ si ha $\Delta_rG<0$ e avanzamento diretto; con $Q>K$ è favorito quello inverso; con $Q=K$ la variazione è nulla per la reazione considerata.
 
-$K>1$ implica $\Delta_rG^\circ<0$, quindi favorisce i prodotti rispetto ai reagenti nello specifico riferimento standard. La direzione di evoluzione di una miscela reale si determina però dal confronto di $Q$ con $K$. Il valore di $K$ non determina il tempo necessario per raggiungere l'equilibrio.
+Per $\mathrm A\rightleftharpoons\mathrm B$ con $K=4$, una miscela ideale con $[A]=0{,}80\,\mathrm{mol\,L^{-1}}$ e $[B]=0{,}20\,\mathrm{mol\,L^{-1}}$ ha $Q=0{,}25$. La conversione verso B aumenta il rapporto fino a quattro. Partendo invece da $Q=20$, si forma A anche se $K>1$. Il valore della costante indica una preferenza relativa nel riferimento standard; la direzione attuale dipende anche dalla composizione.
+
+Per calcolare le concentrazioni finali si scrive un bilancio: per $\mathrm A\rightleftharpoons\mathrm B$, $[A]=[A]_0-x$ e $[B]=[B]_0+x$ a volume costante. Si sostituisce in $K$ e si sceglie una soluzione compatibile con concentrazioni non negative. Per coefficienti diversi, anche le variazioni sono diverse. La sola indicazione del verso non fornisce la quantità trasformata e il valore di $K$ non fornisce il tempo necessario.
+
+![Segno di delta G diviso RT rispetto al logaritmo di Q su K: negativo verso i prodotti, zero all'equilibrio, positivo verso i reagenti.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/quoziente-it.svg)
 :::
 
-## Perturbazioni ed equilibri collegati
+## Perturbare concentrazione, pressione e temperatura
 
-:::osservazione{#le-chatelier titolo="Concentrazione, pressione e temperatura"}
-Il **principio di Le Chatelier** descrive la variazione della composizione verso un nuovo equilibrio dopo una perturbazione. A temperatura costante, aggiungere un reagente o sottrarre un prodotto modifica $Q$; il confronto con $K$ stabilisce il verso iniziale di evoluzione. Una compressione di una miscela di gas ideali, a temperatura costante, favorisce il verso con meno moli gassose se i due membri ne contengono quantità diverse. Per $\mathrm{N_2}+3\mathrm{H_2}\rightleftharpoons2\mathrm{NH_3}$ favorisce quindi la formazione di ammoniaca.
+:::osservazione{#le-chatelier titolo="Equilibrio mobile con condizioni esplicite"}
+Il principio di Le Chatelier descrive la variazione verso un nuovo equilibrio dopo una perturbazione. Il confronto tra $Q$ e $K$ rende quantitativo il ragionamento. A temperatura costante, aggiungere un reagente modifica subito $Q$; la composizione cambia successivamente mediante la reazione. Il valore di $K$ resta quello della temperatura considerata.
 
-A temperatura invariata, variazioni di concentrazione o pressione non modificano $K$. La temperatura può modificarlo. Nell'approssimazione in cui l'entalpia standard di reazione $\Delta_rH^\circ$ varia poco,
+Per una miscela ideale di gas, moltiplicare tutte le pressioni parziali per $\lambda$ moltiplica $Q$ per $\lambda^{\Delta\nu}$, dove $\Delta\nu$ è il numero stechiometrico di moli gassose dei prodotti meno quello dei reagenti. La compressione favorisce quindi il lato con meno moli gassose. Se $\Delta\nu=0$, questa perturbazione uniforme lascia invariato $Q$.
+
+L'aggiunta di un gas inerte richiede di specificare il vincolo. A volume e temperatura costanti, $p_i=\dfrac{n_iRT}{V}$ resta invariata per ogni specie reagente: aumenta la pressione totale, mentre $Q$ non cambia. A pressione totale e temperatura costanti, il recipiente si espande e le pressioni parziali diminuiscono; se $\Delta\nu\ne0$, l'equilibrio può spostarsi. Queste conclusioni assumono gas ideali e assenza di interazioni o reazioni dell'inerte.
+
+La temperatura modifica invece la costante. Nell'intervallo in cui l'entalpia standard $\Delta_rH^\circ$ è circa costante,
 $$
-\frac{d\ln K}{dT}=\frac{\Delta_rH^\circ}{RT^2}.
+\ln\dfrac{K_2}{K_1}=-\dfrac{\Delta_rH^\circ}{R}\left(\dfrac{1}{T_2}-\dfrac{1}{T_1}\right).
 $$
-Per una reazione endotermica nel verso scritto, $K$ aumenta all'aumentare di $T$; per una esotermica diminuisce. Aggiungere un gas inerte a volume e temperatura costanti lascia invariate le pressioni parziali dei reagenti ideali, quindi lascia invariato il loro equilibrio. A pressione totale costante, l'aggiunta di gas inerte aumenta invece il volume e può modificare l'equilibrio.
+Per il verso endotermico, il riscaldamento aumenta $K$; per quello esotermico lo diminuisce. Una maggiore velocità al caldo può accompagnarsi a una minore resa di equilibrio per una sintesi esotermica. Arrhenius descrive la velocità, mentre questa relazione descrive la composizione di equilibrio.
+
+![Per N2O4 in equilibrio con due NO2, la compressione aumenta Q, il gas inerte a volume costante lascia Q invariato e quello a pressione costante lo riduce.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/gas-inerte-it.svg)
 :::
 
-:::osservazione{#equilibri-multipli titolo="Somma e inversione di reazioni"}
-Invertire una reazione cambia il segno di $\Delta_rG^\circ$, quindi sostituisce $K$ con $\dfrac{1}{K}$. Moltiplicare tutti i coefficienti per un numero $n$ moltiplica $\Delta_rG^\circ$ per $n$, quindi porta a $K^n$. Sommando reazioni, le energie libere standard si sommano e le costanti si moltiplicano.
+## Collegare più reazioni
 
-Per $\mathrm A\rightleftharpoons\mathrm B$ con $K_1=3$ e $\mathrm B\rightleftharpoons\mathrm C$ con $K_2=5$, l'equilibrio complessivo $\mathrm A\rightleftharpoons\mathrm C$ ha $K=K_1K_2=15$. Tutte le costanti devono riferirsi alla stessa temperatura e a stati standard coerenti. Negli equilibri multipli le concentrazioni si determinano soddisfacendo anche i bilanci di materia e di carica; una specie che partecipa a più equilibri compare contemporaneamente nelle rispettive espressioni.
+:::osservazione{#equilibri-multipli titolo="Costanti e bilanci simultanei"}
+Le energie libere standard si sommano quando si sommano equazioni chimiche. Dalla relazione con $\ln K$ seguono tre regole:
+
+| Operazione sull'equazione | Nuova costante |
+| --- | --- |
+| Inversione | $\dfrac{1}{K}$ |
+| Coefficienti moltiplicati per $n$ | $K^n$ |
+| Somma di due equazioni | $K_1K_2$ |
+
+Per $\mathrm A\rightleftharpoons\mathrm B$ con $K_1=3$ e $\mathrm B\rightleftharpoons\mathrm C$ con $K_2=5$, la reazione complessiva $\mathrm A\rightleftharpoons\mathrm C$ ha $K=15$. Il rapporto fra C e A dipende da entrambe le trasformazioni. Un catalizzatore della seconda reazione modifica il tempo di rilassamento, conservando questo prodotto di costanti.
+
+Le regole richiedono stessa temperatura, specie chimiche corrispondenti e stati standard coerenti. Nell'accoppiamento biochimico occorre inoltre che un meccanismo colleghi effettivamente le trasformazioni; sommare due equazioni sulla carta non garantisce l'accoppiamento fisico. Per equilibri simultanei si impongono tutte le relazioni insieme ai bilanci di materia e di carica. La quantità totale di un elemento può distribuirsi fra ione libero, complessi e specie protonate: sostituire indiscriminatamente il totale all'attività libera altera il quoziente.
+
+![Le costanti di A in B e di B in C si moltiplicano per ottenere quella di A in C; la reazione inversa ha costante reciproca.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/costanti-it.svg)
 :::
 
-## Solubilità e precipitazione
+## Dissoluzione, precipitazione e sistemi biologici
 
-:::definizione{#prodotto-solubilita titolo="Prodotto di solubilità"}
-Per il sale poco solubile $\mathrm{MX(s)}\rightleftharpoons\mathrm{M^+(aq)}+\mathrm{X^-(aq)}$, il **prodotto di solubilità** è
+:::definizione{#prodotto-solubilita titolo="Solubilità, saturazione e nucleazione"}
+Un sale poco solubile può lasciare in soluzione una quantità misurabile di ioni. Per una fase solida definita,
 $$
+\mathrm{MX(s)}\rightleftharpoons\mathrm{M^+(aq)}+\mathrm{X^-(aq)},\qquad
 K_{\mathrm{ps}}=a_{M^+}a_{X^-}.
 $$
-In acqua pura, trascurando reazioni collaterali e non idealità, la solubilità molare $s$ dà $[M^+]=[X^-]=s$, quindi numericamente $K_{\mathrm{ps}}\simeq s^2$ quando $s$ è espresso in $\mathrm{mol\,L^{-1}}$ con riferimento $c^\circ$. Per $\mathrm{MX_2(s)}\rightleftharpoons\mathrm{M^{2+}}+2\mathrm{X^-}$ si ha invece $[M^{2+}]=s$ e $[X^-]=2s$, perciò $K_{\mathrm{ps}}\simeq4s^3$.
+In acqua pura, con idealità e assenza di altri equilibri, la solubilità molare $s$ dà $[M^+]=[X^-]=s$. Usando valori numerici normalizzati a $c^\circ$, si ottiene $K_{\mathrm{ps}}\simeq s^2$. Per $\mathrm{MX_2}$ si ha invece $[M^{2+}]=s$ e $[X^-]=2s$, quindi $K_{\mathrm{ps}}\simeq4s^3$. Costanti di sali con stechiometrie diverse non si possono ordinare automaticamente come solubilità molari.
 
-Il prodotto ionico $Q_{\mathrm{ps}}$ si calcola con le attività attuali. Se $Q_{\mathrm{ps}}>K_{\mathrm{ps}}$, la soluzione è sovrasatura e la precipitazione è termodinamicamente favorita; la formazione effettiva del solido può richiedere la nucleazione. Se $Q_{\mathrm{ps}}<K_{\mathrm{ps}}$, ulteriore solido può dissolversi se presente. Se $Q_{\mathrm{ps}}=K_{\mathrm{ps}}$, la soluzione è satura.
+Il prodotto ionico attuale $Q_{\mathrm{ps}}$ distingue tre situazioni. Sotto $K_{\mathrm{ps}}$, altro solido presente può dissolversi; all'uguaglianza si ha saturazione; sopra $K_{\mathrm{ps}}$, la precipitazione è termodinamicamente favorita. Una soluzione sovrasatura può restare temporaneamente limpida perché la formazione di un nucleo cristallino richiede di superare una barriera. Aggiungere un piccolo cristallo può abbreviare il tempo di comparsa del precipitato senza modificare la costante.
+
+Quando si mescolano soluzioni, il prodotto ionico iniziale si calcola dopo la diluizione nel volume totale, prima di un'apprezzabile precipitazione. L'eventuale quantità precipitata richiede poi un bilancio e le concentrazioni residue di equilibrio.
+
+![Tre rapporti fra prodotto ionico e prodotto di solubilità: dissoluzione possibile, saturazione e precipitazione favorita con possibile ritardo di nucleazione.](/figure/chimica-semestre-filtro/reazioni-cinetica-equilibrio/solubilita-it.svg)
 :::
 
-:::osservazione{#ione-comune titolo="Ione comune ed equilibri biologici"}
-Aggiungere uno ione già prodotto dalla dissoluzione aumenta il prodotto ionico e riduce la quantità di sale che può sciogliersi prima della saturazione. Se per $\mathrm{MX}$ la concentrazione iniziale di $X^-$ è $c_0$, nel modello ideale si impone $K_{\mathrm{ps}}\simeq s(c_0+s)$; quando $s\ll c_0$, si ottiene $s\simeq\dfrac{K_{\mathrm{ps}}}{c_0}$ usando valori numerici riferiti a $c^\circ$.
+:::osservazione{#ione-comune titolo="Specie libere, ione comune e rilevanza biomedica"}
+Se una soluzione contiene già X, la dissoluzione di MX raggiunge la saturazione con meno sale aggiunto. Nel modello ideale, indicando con $c_0$ la concentrazione iniziale dello ione comune,
+$$
+K_{\mathrm{ps}}\simeq s(c_0+s),\qquad
+s\simeq\dfrac{K_{\mathrm{ps}}}{c_0}\quad\text{se }s\ll c_0.
+$$
+Dopo il calcolo si controlla che $\dfrac{s}{c_0}$ sia piccolo. Il valore di $K_{\mathrm{ps}}$ resta invariato a temperatura costante; cambia la solubilità nelle nuove condizioni. Una forte complessazione o una variazione importante dei coefficienti di attività può richiedere un modello più completo.
 
-Negli equilibri di sali contenenti specie acide o basiche, il pH modifica la frazione presente nella forma ionica che compare in $K_{\mathrm{ps}}$. La protonazione dell'ossalato, per esempio, riduce l'ossalato libero e può favorire la dissoluzione dell'ossalato di calcio. Anche complessazione e forza ionica possono modificare la solubilità osservata.
+Nell'ossalato di calcio compaiono le attività di calcio libero e ossalato libero. Legare calcio in un complesso o protonare ossalato riduce una delle attività e può favorire la dissoluzione della fase considerata. Per prevedere l'esito servono anche gli equilibri che determinano queste frazioni libere. Una misura di calcio totale, da sola, non è una misura del prodotto ionico.
 
-La formazione di precipitati di ossalato di calcio o di urati nei liquidi biologici si studia considerando attività ioniche, pH e più equilibri simultanei. La concentrazione totale di un elemento comprende tutte le sue forme chimiche e può quindi differire dalla concentrazione dello ione libero richiesta nell'espressione del prodotto di solubilità.
+Urato e acido urico richiedono una distinzione delle specie e dei solidi. Un equilibrio semplificato di urato monosodico coinvolge sodio e anione urato; l'acido urico neutro può formare una fase solida diversa. Ridurre il pH aumenta la frazione protonata e può favorire cristalli di acido urico nelle urine, anche mentre diminuisce l'anione urato libero. Non esiste quindi una previsione universale ottenuta usando lo stesso prodotto di solubilità per entrambi i solidi. La formazione dei calcoli renali dipende da composizione, attività, volume, pH e cinetica della cristallizzazione; il modello termodinamico individua la tendenza rispetto a una fase specificata.
 :::
