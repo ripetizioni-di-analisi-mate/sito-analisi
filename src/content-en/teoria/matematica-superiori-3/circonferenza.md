@@ -28,6 +28,13 @@ For $C(1,-2)$ and $r=3$, the difference between the vertical coordinates is $y-(
 In the equation $(x-1)^2+(y+2)^2=9$, the $y$-coordinate of the centre is $-2$. Indeed, $y=-2$ makes $y+2$ zero. The number $9$ is the square of the radius, so the radius is $3$.
 :::
 
+:::osservazione{titolo="Reading translations and reflections from the centre"}
+If the curve is translated by vector $(u,v)$, the centre becomes $(h+u,k+v)$. Indeed, the coordinate differences between a point and the centre stay the same because both undergo the same displacement. Reflection across a coordinate axis also preserves distance from the centre. Across the $y$-axis, only the sign of the horizontal coordinate changes. For the circle $(x-2)^2+(y-1)^2=4$, the centre $(2,1)$ therefore becomes $(-2,1)$, and the reflected equation is $(x+2)^2+(y-1)^2=4$. The point $(2,3)$ reflects to $(-2,3)$, which is still two units above the new centre.
+
+::grafico{curve="2+2*cos(t),1+2*sin(t),0,6.283185307;-2+2*cos(t),1+2*sin(t),0,6.283185307" xmin=-5 xmax=5 ymin=-3 ymax=5 uguale=1 punti="2,1,pieno,C;-2,1,pieno,C';2,3,pieno,P;-2,3,pieno,P'" segmenti="-2,3,2,3;-2,1,2,1" legenda="(x-2)^2+(y-1)^2=4;(x+2)^2+(y-1)^2=4" titolo="Reflection across the $y$-axis keeps the vertical coordinates and the radius the same."}
+
+:::
+
 ## General form and degenerate cases
 
 ::::teorema{#generale titolo="Completing the squares"}
@@ -64,6 +71,17 @@ The centre is $C(1,-2)$ and the radius is $3$. In the family $x^2+y^2-2x+4y+m=0$
 
 :::osservazione
 To recognise the general form, the coefficients of $x^2$ and $y^2$ must be equal and nonzero, and the coefficient of $xy$ must be zero. For example, in $2x^2+2y^2-8x+6=0$, divide the whole equation by $2$ before reading off $D=-4$ and $F=3$. Here $q=1$ and the centre is $(2,0)$. The sign of $q$ still needs to be checked after division.
+:::
+
+:::esempio{titolo="The constant term in a family of circles"}
+Consider $x^2+y^2-4x-2y+F=0$. Completing the squares adds $4$ and $1$, giving
+$$
+(x-2)^2+(y-1)^2=5-F .
+$$
+The centre $(2,1)$ remains fixed. For $F=-4$ the radius is $3$, while for $F=4$ it is $1$. As $F$ increases from $-4$ to $5$, the squared radius decreases from $9$ to $0$. The larger circle encloses the smaller one because every point of the latter is $1<3$ units from the common centre. At $F=5$ both squares must be zero, leaving just point $C$.
+
+::grafico{curve="2+3*cos(t),1+3*sin(t),0,6.283185307;2+cos(t),1+sin(t),0,6.283185307" xmin=-3 xmax=7 ymin=-3 ymax=5 uguale=1 punti="2,1,pieno,C;3,1;5,1" segmenti="2,1,5,1" legenda="F=-4;F=4" titolo="The circles share their centre. At $F=5$ only the centre $C$ remains."}
+
 :::
 
 ## Points on, inside and outside a circle
@@ -137,6 +155,20 @@ $$
 Since $r=CQ=4-\dfrac32=\dfrac52$, the equation is $(x-2)^2+\left(y-\dfrac32\right)^2=\dfrac{25}{4}$. The midpoint of $AB$ has $y$-coordinate $0$, while the centre has $y$-coordinate $\dfrac32$. The chord $AB$ is not a diameter.
 :::
 
+:::esempio{titolo="The centre at the intersection of two bisectors"}
+Let $A(0,0)$, $B(4,0)$ and $Q(0,2)$. For $CA=CB$, the centre's horizontal coordinate must be $2$. For $CA=CQ$, its vertical coordinate must be $1$. This gives $C(2,1)$ and $r^2=2^2+1^2=5$. The other two squared distances are
+$$
+\begin{aligned}
+CB^2&=(4-2)^2+(0-1)^2=5,\\
+CQ^2&=(0-2)^2+(2-1)^2=5 .
+\end{aligned}
+$$
+The equation is therefore $(x-2)^2+(y-1)^2=5$. Here triangle $ABQ$ is right-angled at $A$. The centre lies on segment $BQ$, making $BQ$ a diameter. The three given points let us identify both the equation and which pairs are diametrically opposite.
+
+::grafico{curve="2+sqrt(5)*cos(t),1+sqrt(5)*sin(t),0,6.283185307" xmin=-1 xmax=5 ymin=-2 ymax=4 uguale=1 punti="0,0,pieno,A;4,0,pieno,B;0,2,pieno,Q;2,1,pieno,C" segmenti="2,-1,2,3;-0.5,1,4.5,1" linee="0,0 4,0 0,2 0,0" legenda="(x-2)^2+(y-1)^2=5" titolo="The bisectors of $AB$ and $AQ$ fix different coordinates of the centre."}
+
+:::
+
 ## Intersections with a line
 
 :::teorema{#intersezioni titolo="Substitution and the discriminant"}
@@ -160,6 +192,31 @@ The $x$-coordinates are $-4$ and $3$. To recover the $y$-coordinates, use the eq
 
 :::esempio{titolo="Comparing three vertical lines"}
 For $(x-1)^2+(y+2)^2=9$ and $x=t$, we obtain $(y+2)^2=9-(t-1)^2$. When $t=1$, the right-hand side is $9$, so $y=-5$ or $y=1$. When $t=4$, it is $0$, so the only $y$-coordinate is $-2$. When $t=5$, it is $-7$, so no real point lies on both curves.
+:::
+
+::::teorema{#distanza-retta titolo="Projection along the normal to a line"}
+For a line $\ell\colon ax+by+c=0$ with $(a,b)\ne(0,0)$, the normal vector is $(a,b)$. The distance from $C(h,k)$ to the line is
+$$
+d(C,\ell)=\frac{|ah+bk+c|}{\sqrt{a^2+b^2}} .
+$$
+The numerator comes from substituting the centre's coordinates. The denominator corrects for the scale of the coefficients. Multiplying the equation of the same line by a nonzero number therefore gives the same distance.
+
+:::dimostrazione
+The foot of the perpendicular is on the line through $C$ in direction $(a,b)$. It can be written as $H=(h+ta,k+tb)$ for some $t\in\mathbb R$. Requiring $H$ to lie on $\ell$ gives
+$$
+a(h+ta)+b(k+tb)+c=0
+\quad\Longrightarrow\quad
+t=-\frac{ah+bk+c}{a^2+b^2}.
+$$
+The vector from $C$ to $H$ is $t(a,b)$, with length $|t|\sqrt{a^2+b^2}$. Substituting for $t$ gives the formula.
+:::
+::::
+
+:::esempio{titolo="Three parallel lines and three intersection counts"}
+For $x^2+y^2=16$, the distance from the centre to $y=q$ is $|q|$. Substitution gives $x^2=16-q^2$. At $q=2$ the square is $12$, so the line meets the circle twice. At $q=4$ only $(0,4)$ remains. At $q=5$ we have $x^2=-9$, so the line misses the circle. The geometric test gives the same three cases by comparing $|q|$ with the radius $4$.
+
+::grafico{f="2;4;5" curve="4*cos(t),4*sin(t),0,6.283185307" xmin=-5 xmax=5 ymin=-5 ymax=6 uguale=1 punti="-3.464101615,2,pieno,A;3.464101615,2,pieno,B;0,4,pieno,T" legenda="y=2;y=4;y=5;x^2+y^2=16" titolo="The secant passes through $A$ and $B$, the tangent through $T$, and the last line misses the circle."}
+
 :::
 
 ## Tangents at a point and parallel tangents
@@ -206,6 +263,13 @@ $$
 The contact coordinates give the two tangents $9x+12y=45$ and $9x-12y=45$. They are symmetric about the $x$-axis. In each right triangle $CTP_0$, the hypotenuse $CT$ has length $5$ and the radius $CP_0$ has length $3$. Thus the segment from $T$ to either contact point has length $\sqrt{5^2-3^2}=4$.
 :::
 
+:::osservazione{titolo="How many tangents pass through a point"}
+If $T$ is the point through which the tangents must pass, in coordinates with origin $C$ the contact points $P_0$ satisfy both $CP_0=r$ and $\overrightarrow{CP_0}\cdot\overrightarrow{CT}=r^2$. Aligning the horizontal axis with $CT$ and setting $d=CT>0$, the second equation becomes $dx_0=r^2$. The vertical line $x_0=\dfrac{r^2}{d}$ meets the circle twice if $d>r$, once if $d=r$, and not at all if $0<d<r$. No tangent passes through $C$, because every line through the centre cuts out a diameter.
+
+::grafico{f="(45-9*x)/12;(9*x-45)/12" curve="3*cos(t),3*sin(t),0,6.283185307" xmin=-4 xmax=6 ymin=-5 ymax=5 uguale=1 punti="0,0,pieno,C;5,0,pieno,T;1.8,2.4,pieno,P;1.8,-2.4,pieno,Q" segmenti="0,0,1.8,2.4;0,0,1.8,-2.4;1.8,-2.4,1.8,2.4" legenda="9x+12y=45;9x-12y=45;x^2+y^2=9" titolo="The contacts $P$ and $Q$ share horizontal coordinate $\dfrac95$ and are symmetric about $CT$."}
+
+:::
+
 ## Chords and distances from the centre
 
 :::teorema{#corde titolo="Finding a chord length with a right triangle"}
@@ -220,6 +284,27 @@ If the chord length $L$ is given, the same equation yields $d=\sqrt{r^2-\left(\d
 A horizontal line cuts a chord of length $8$ in a circle with centre $(0,0)$ and radius $5$. The half-chord measures $4$, so $d^2=25-16=9$. The distance from the origin to $y=q$ is $|q|$, so $q=3$ or $q=-3$. The two chords are congruent and symmetric about the $x$-axis.
 
 ::grafico{f="3;-3" curve="5*cos(t),5*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-6 ymax=6 uguale=1 punti="0,0,pieno,C;0,3,pieno,H;4,3,pieno,B;-4,3,pieno,A;-4,-3;4,-3" segmenti="0,0,0,3;0,0,4,3" legenda="y=3;y=-3;x^2+y^2=25" titolo="Triangle $CHB$ has hypotenuse $5$ and legs $3$ and $4$."}
+
+:::
+
+::::teorema{#corde-e-distanza titolo="Comparing two chords without finding their lengths"}
+Let $L_1,L_2$ be the lengths of two chords of the same circle, and let $d_1,d_2$ be the distances of their lines from the centre. If $d_1<d_2$, then $L_1>L_2$. If $d_1=d_2$, the chords have equal length. The test applies to chords in any direction.
+
+:::dimostrazione
+For each chord the squared half-length plus the squared distance equals $r^2$. If $d_1<d_2$, then $d_1^2<d_2^2$ because distances are non-negative. Subtracting from $r^2$ gives
+$$
+\left(\frac{L_1}{2}\right)^2=r^2-d_1^2
+>
+r^2-d_2^2=\left(\frac{L_2}{2}\right)^2 .
+$$
+The half-lengths are positive, so the order of their squares is the order of the lengths. For $d_1=d_2$, the calculation gives equality instead.
+:::
+::::
+
+:::esempio{titolo="Comparing a sloping chord with a horizontal one"}
+For $x^2+y^2=25$ consider $y=3$ and $3x+4y=20$. The respective distances from the origin are $3$ and $\dfrac{20}{5}=4$. The first chord is therefore longer. Indeed, the legs along the lines measure $\sqrt{25-9}=4$ and $\sqrt{25-16}=3$, so the chords have lengths $8$ and $6$.
+
+::grafico{f="3;(20-3*x)/4" curve="5*cos(t),5*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-6 ymax=6 uguale=1 punti="0,0,pieno,C;0,3,pieno,H_1;2.4,3.2,pieno,H_2" segmenti="0,0,0,3;0,0,2.4,3.2" legenda="y=3;3x+4y=20;x^2+y^2=25" titolo="The line closer to $C$ cuts the longer chord, even though the two directions differ."}
 
 :::
 
@@ -245,4 +330,17 @@ For distinct centres, let $d>0$ be their distance apart and let $r_1,r_2>0$ be t
 - If $d>r_1+r_2$ or $d<|r_1-r_2|$, the triangle cannot close and the curves are disjoint.
 
 For coinciding centres, equal radii give coincident circles and unequal radii give disjoint circles. In these cases subtracting the equations gives a constant and therefore fails to define a line.
+:::
+
+:::esempio{titolo="From the radius of one circle to the number of intersections"}
+Fix $x^2+y^2=16$ and the second centre $D(6,0)$. Subtraction for second radius $s>0$ gives
+$$
+-12x+36=s^2-16
+\quad\Longrightarrow\quad
+x=\frac{52-s^2}{12}.
+$$
+For $s=2$ the radical axis is $x=4$ and contains just the point $(4,0)$ of the first circle. The centres are separated by the sum of the radii, giving external tangency. For $s=4$ the axis becomes $x=3$. The two vertical coordinates are $\pm\sqrt{16-9}=\pm\sqrt7$. For $s=10$ the axis becomes $x=-4$, and the second circle encloses the first and touches it at $(-4,0)$. The contact points in the two tangent cases therefore lie on opposite sides of the first centre.
+
+::grafico{curve="4*cos(t),4*sin(t),0,6.283185307;6+2*cos(t),2*sin(t),0,6.283185307;6+4*cos(t),4*sin(t),0,6.283185307" xmin=-5 xmax=11 ymin=-5 ymax=5 uguale=1 punti="0,0,pieno,C;6,0,pieno,D;4,0,pieno,T;3,2.645751311,pieno,A;3,-2.645751311,pieno,B" legenda="x^2+y^2=16;(x-6)^2+y^2=4;(x-6)^2+y^2=16" titolo="For $s=2$ there is one contact at $T$. For $s=4$ the intersections are $A$ and $B$."}
+
 :::

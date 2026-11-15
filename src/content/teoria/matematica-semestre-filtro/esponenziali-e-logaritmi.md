@@ -124,6 +124,22 @@ Poiché $a\ne1$, il denominatore è diverso da zero. Per esempio,
 $\log_8 4=\dfrac{\ln 4}{\ln 8}=\dfrac{2\ln 2}{3\ln 2}=\dfrac23$. Il cambio di base permette anche di passare alla base disponibile sulla calcolatrice, mantenendo la stessa base al numeratore e al denominatore.
 :::
 
+::::teorema{#scambio-base titolo="Scambio di base e argomento"}
+Siano $a$ e $b$ due numeri positivi diversi da uno. Allora
+$$
+\log_a b\cdot\log_b a=1,\qquad \log_a b=\frac{1}{\log_b a}.
+$$
+La relazione serve quando base e argomento sono scambiati rispetto a un logaritmo noto. Per esempio, $\log_8 2=\dfrac{1}{\log_2 8}=\dfrac13$, poiché $\log_2 8=3$. Analogamente, dato $\log_2 3\approx1{,}585$, si ricava $\log_3 2\approx0{,}631$.
+
+:::dimostrazione
+Si applica il cambio di base a $\log_a b$, scegliendo come nuova base $b$. Poiché $\log_b b=1$, si ottiene
+$$
+\log_a b=\frac{\log_b b}{\log_b a}=\frac{1}{\log_b a}.
+$$
+Il denominatore è diverso da zero perché $a\ne1$. Moltiplicando i due membri per $\log_b a$ si ottiene la prima uguaglianza.
+:::
+::::
+
 :::attenzione{titolo="Somme all'interno del logaritmo"}
 La proprietà del prodotto non vale per una somma di argomenti. Per esempio, $\log_{10}(1+9)=1$, mentre $\log_{10}1+\log_{10}9=\log_{10}9<1$. La prima espressione richiede il logaritmo di dieci. La seconda è il logaritmo del prodotto fra uno e nove.
 :::
@@ -287,6 +303,27 @@ T_{\frac12}=\frac{\ln 2}{k}.
 $$
 Il rapporto $\dfrac{N(t+T_{\frac12})}{N(t)}=e^{-kT_{\frac12}}=\dfrac12$ vale per ogni $t\ge0$. Dunque il tempo di dimezzamento è lo stesso anche se il conteggio parte dopo l'istante iniziale.
 :::
+
+::::teorema{#frazione-residua titolo="Frazione residua dopo un tempo assegnato"}
+Nel modello $N(t)=N_0e^{-kt}$, con $N_0>0$, $k>0$ e tempo di dimezzamento $T_{\frac12}$, per ogni $t\ge0$ vale
+$$
+\frac{N(t)}{N_0}=\left(\frac12\right)^{\frac{t}{T_{\frac12}}}.
+$$
+L'esponente $\dfrac{t}{T_{\frac12}}$ conta i dimezzamenti trascorsi, anche quando non sono interi. Con questa formula un problema di decadimento si risolve a partire da $T_{\frac12}$, senza calcolare $k$. Per esempio, con $T_{\frac12}=4\,\mathrm h$, dopo $12\,\mathrm h$ resta $\left(\dfrac12\right)^3=\dfrac18$ della quantità iniziale, mentre dopo $2\,\mathrm h$ ne resta $\left(\dfrac12\right)^{\frac12}=\dfrac{1}{\sqrt2}\approx0{,}71$.
+
+:::dimostrazione
+Si esprime $k$ con il tempo di dimezzamento e si riscrive $e^{-kt}$ come potenza di un mezzo. Dalla relazione $T_{\frac12}=\dfrac{\ln 2}{k}$ segue $k=\dfrac{\ln 2}{T_{\frac12}}$. Quindi
+$$
+\begin{aligned}
+\frac{N(t)}{N_0}=e^{-kt}&=e^{-\frac{t}{T_{\frac12}}\ln 2}\\[6pt]
+&=\left(e^{\ln 2}\right)^{-\frac{t}{T_{\frac12}}}\\[6pt]
+&=2^{-\frac{t}{T_{\frac12}}}\\[6pt]
+&=\left(\frac12\right)^{\frac{t}{T_{\frac12}}}.
+\end{aligned}
+$$
+Il secondo passaggio usa la regola della potenza di una potenza. Il terzo usa l'uguaglianza $e^{\ln 2}=2$, che vale per la definizione di logaritmo naturale.
+:::
+::::
 
 :::esempio{titolo="Quantità dopo intervalli uguali"}
 Con quantità iniziale $80\,\mathrm{mg}$ e tempo di dimezzamento di $3\,\mathrm{h}$, agli istanti $0$, $3$, $6$ e $9\,\mathrm{h}$ corrispondono rispettivamente $80$, $40$, $20$ e $10\,\mathrm{mg}$. La quantità che scompare durante ciascun intervallo è la metà di quella presente al suo inizio. Perciò la perdita assoluta è di $40\,\mathrm{mg}$ nel primo intervallo, $20\,\mathrm{mg}$ nel secondo e $10\,\mathrm{mg}$ nel terzo. Intervalli uguali danno rapporti uguali.

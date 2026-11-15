@@ -1,6 +1,7 @@
 // Dashboard riservata (/admin): pagina unica con viste a schede.
 // I dati arrivano da /admin/api/*; il codice del browser è la funzione `cliente`, inserita nella pagina come sorgente.
 import { TIPI_EMAIL } from './storico-email.mjs';
+import { FONTI_CHATGPT, TESTI_PROVENIENZA } from './provenienza.mjs';
 
 const ICONE = {
   panoramica: '<path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 7h6V4h-6z"/>',
@@ -19,11 +20,11 @@ const ICONE = {
 };
 const icona = (n) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONE[n]}</svg>`;
 
-export function paginaAdmin(aPagamento, materie) {
+export function paginaAdmin(aPagamento, materie, lingua = 'it') {
   const info = materie.map((m) => ({ slug: m.slug, titolo: m.titolo, breve: m.breve, colore: m.colore, prezzo: m.prezzo, argomenti: Object.fromEntries(m.argomenti.map((a) => [a.slug, a.breve])) }));
   const viste = [['panoramica', 'Panoramica'], ['studenti', 'Studenti'], ['leghe', 'Leghe'], ['vendite', 'Vendite'], ['traffico', 'Traffico'], ['email', 'Email automatiche'], ['strumenti', 'Strumenti']];
   const nav = viste.map(([id, t]) => `<a href="#${id}" data-vista="${id}">${icona(id)}<span>${t}</span></a>`).join('');
-  return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  return `<!doctype html><html lang="${lingua === 'en' ? 'en' : 'it'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex"><meta name="theme-color" content="#1c2625">
 <title>Dashboard · Ripetizioni di Analisi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,14 +319,14 @@ td.destra,th.destra{text-align:right}
 <aside class="cassetto" id="cassetto" aria-hidden="true" role="dialog" aria-label="Scheda dello studente"></aside>
 <div class="toast" id="toast" role="status"></div>
 <script>var __name = function (f) { return f; };
-(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)});</script>
+(${cliente.toString()})(${JSON.stringify(info)}, ${JSON.stringify(aPagamento)}, ${JSON.stringify(TIPI_EMAIL)}, ${JSON.stringify(FONTI_CHATGPT)}, ${JSON.stringify(TESTI_PROVENIENZA)});</script>
 </body></html>`;
 }
 
 // ---------------------------------------------------------------------------
 // Codice eseguito nel browser. Non usa variabili esterne: riceve i dati come argomenti.
 // Il bundler di Wrangler può inserire chiamate a __name nel sorgente: la pagina ne definisce una versione vuota.
-function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
+function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL, FONTI_CHATGPT, TESTI_PROVENIENZA) {
   const M = Object.fromEntries(MATERIE.map((m) => [m.slug, m]));
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -334,7 +335,13 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
   const eur = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
   const VISTE = { panoramica: 'Panoramica', studenti: 'Studenti', leghe: 'Leghe', vendite: 'Vendite', traffico: 'Traffico', email: 'Email automatiche', strumenti: 'Strumenti' };
   const COL = { acc: 'var(--acc)', avviso: 'var(--avviso)', su: 'var(--su)', ink3: 'var(--ink-3)' };
-  const COLORI_FONTI = { Instagram: 'var(--c6)', Google: '#4285f4', 'Diretto o app': '#8b9593', WhatsApp: '#25a35a', Facebook: '#1877f2', TikTok: '#111', Bing: '#00809d', ChatGPT: '#10a37f' };
+  const COLORI_FONTI = { Instagram: 'var(--c6)', Google: '#4285f4', 'Diretto o app': '#8b9593', WhatsApp: '#25a35a', Facebook: '#1877f2', TikTok: '#111', Bing: '#00809d',
+    [FONTI_CHATGPT.organico]: '#10a37f', [FONTI_CHATGPT.ads]: '#3b5f8f', [FONTI_CHATGPT.incerto]: '#a8762b' };
+  const testiFonti = TESTI_PROVENIENZA[document.documentElement.lang === 'en' ? 'en' : 'it'];
+  const nomeFonte = (fonte) => {
+    const tipo = Object.keys(FONTI_CHATGPT).find((k) => FONTI_CHATGPT[k] === fonte);
+    return tipo ? testiFonti[tipo] : fonte;
+  };
 
   let D = null, giorni = 30, vista = 'panoramica', aggiornato = null, inCorso = false;
   const stato = { cerca: '', filtro: 'tutti', fonte: '', ordina: 'creato', verso: -1, aperto: null };
@@ -660,12 +667,12 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     return Object.entries(F).sort((a, b) => b[1] - a[1]);
   }
   function barreFonti(lim) {
-    const f = fontiPeriodo(); const righe = f.slice(0, lim).map(([k, n]) => ({ nome: k, valore: n, colore: COLORI_FONTI[k] || '#7a8a87' }));
+    const f = fontiPeriodo(); const righe = f.slice(0, lim).map(([k, n]) => ({ nome: nomeFonte(k), valore: n, colore: COLORI_FONTI[k] || '#7a8a87' }));
     return barre(righe, { totale: somma(f.map((x) => x[1])), vuoto: 'Nessun ingresso registrato in questo periodo' });
   }
   function attivita(lim) {
     const ev = [];
-    D.utenti.forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(u.fonte) + '</span>' : '') + (u.corso ? ' <span class="chip corso">' + esc(u.corso) + '</span>' : ''), email: u.email }));
+    S.studenti.filter((u) => u.registrato).forEach((u) => ev.push({ t: u.creato, tipo: 'iscrizione', s: '+', txt: '<b>' + esc(u.nome || u.email) + '</b> si è iscritto' + (u.fonte ? ' <span class="nota">da ' + esc(nomeFonte(u.fonte)) + '</span>' : '') + (u.corso ? ' <span class="chip corso">' + esc(u.corso) + '</span>' : ''), email: u.email }));
     D.acquisti.forEach((a) => ev.push({ t: a.creato, tipo: 'pagamento', s: '€', txt: '<b>' + esc(a.email) + '</b> ha comprato ' + esc(breveMateria(a.materia)) + ' · ' + eur.format(a.importo), email: a.email }));
     D.abilitazioni.filter((a) => a.origine === 'manuale').forEach((a) => ev.push({ t: a.creato, tipo: 'manuale', s: '✓', txt: 'Attivata ' + esc(breveMateria(a.materia)) + ' a <b>' + esc(a.email) + '</b>', email: a.email }));
     ev.sort((a, b) => String(b.t).localeCompare(String(a.t)));
@@ -679,7 +686,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     const filtri = [['tutti', 'Tutti'], ['pagante', 'Paganti'], ['manuale', 'Attivati a mano'], ['gratis', 'Solo gratis'], ['attesa', 'Da registrare'], ['corso', 'Dai miei corsi']];
     $('#vista').innerHTML = '<section class="card"><div class="strumenti-tab">' +
       '<label class="cerca"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cerca" placeholder="Cerca per nome o email" value="' + esc(stato.cerca) + '" aria-label="Cerca studenti"><kbd>/</kbd></label>' +
-      '<select class="scelta" id="sel-fonte" aria-label="Provenienza"><option value="">Tutte le provenienze</option>' + fonti.map((f) => '<option' + (f === stato.fonte ? ' selected' : '') + '>' + esc(f) + '</option>').join('') + '</select>' +
+      '<select class="scelta" id="sel-fonte" aria-label="Provenienza"><option value="">Tutte le provenienze</option>' + fonti.map((f) => '<option value="' + esc(f) + '"' + (f === stato.fonte ? ' selected' : '') + '>' + esc(nomeFonte(f)) + '</option>').join('') + '</select>' +
       '<button class="bottone" id="csv" type="button">Esporta CSV</button></div>' +
       '<div class="strumenti-tab" style="padding-top:0"><div class="filtri">' + filtri.map(([k, t]) => '<button type="button" class="filtro" data-filtro="' + k + '" aria-pressed="' + (stato.filtro === k) + '">' + t + '<small>' + conta(k) + '</small></button>').join('') + '</div></div>' +
       '<div class="tabella"><table><thead><tr>' +
@@ -710,7 +717,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     corpo.innerHTML = r.map((s) => '<tr class="cliccabile" data-email="' + esc(s.email) + '" tabindex="0">' +
       '<td><div class="persona"><span class="avatar" style="background:' + coloreDa(s.email) + '">' + esc(iniziali(s)) + '</span><span class="chi"><b>' + esc(s.nome || s.email.split('@')[0]) + '</b><span class="mail">' + esc(s.email) + '</span></span></div></td>' +
       '<td>' + cellaLivello(s) + '</td>' +
-      '<td class="solo-largo">' + (s.fonte ? '<span class="chip' + (s.fonte === 'Instagram' ? ' fonte-instagram' : '') + '">' + esc(s.fonte) + '</span>' : '<span class="nota">—</span>') + '</td>' +
+      '<td class="solo-largo">' + (s.fonte ? '<span class="chip' + (s.fonte === 'Instagram' ? ' fonte-instagram' : '') + '">' + esc(nomeFonte(s.fonte)) + '</span>' : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.creato)) + '">' + (s.registrato ? fa(s.creato) : '<span class="nota">—</span>') + '</td>' +
       '<td class="solo-largo" title="' + esc(dataOra(s.ultima)) + '">' + fa(s.ultima) + '</td>' +
       '<td><div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap"><span class="puntini">' + s.abil.map((a) => '<i class="punto" title="' + esc(nomeMateria(a.materia)) + '" style="background:' + (M[a.materia] || {}).colore + '"></i>').join('') + '</span>' + chipStato(s) + (s.corso ? '<span class="chip corso" title="Corso seguito: ' + esc(s.corso) + '">' + esc(s.corso.length > 34 ? s.corso.slice(0, 33) + '…' : s.corso) + '</span>' : '') + '</div></td>' +
@@ -739,7 +746,7 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     c.innerHTML = '<header><span class="avatar" style="background:' + coloreDa(s.email) + '">' + esc(iniziali(s)) + '</span><div><h2>' + esc(s.nome || s.email.split('@')[0]) + '</h2><p>' + esc(s.email) + '</p><div style="margin-top:.35rem">' + chipStato(s) + '</div></div><button class="chiudi" type="button" aria-label="Chiudi">×</button></header>' +
       '<div class="dentro">' +
       (s.corso ? '<section class="corso-dichiarato"><h3>È già un tuo studente</h3><p><b>' + esc(s.corso) + '</b></p><p class="nota">Lo ha indicato all\u2019iscrizione. Se è corretto, attiva qui sotto le materie da sbloccare gratis.</p></section>' : '') +
-      '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultima attività</dt><dd>' + dataOra(s.ultima) + '</dd><dt>Ultimo accesso con password</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(s.fonte || '—') + '</dd><dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
+      '<section><h3>Dati</h3><dl class="dati"><dt>Iscritto</dt><dd>' + (s.registrato ? dataOra(s.creato) : 'non ancora registrato') + '</dd><dt>Ultima attività</dt><dd>' + dataOra(s.ultima) + '</dd><dt>Ultimo accesso con password</dt><dd>' + dataOra(s.ultimo_accesso) + '</dd><dt>Arrivato da</dt><dd>' + esc(nomeFonte(s.fonte || '—')) + '</dd>' + (s.primaFonte && s.primaFonte !== s.fonte ? '<dt>' + esc(testiFonti.prima) + '</dt><dd>' + esc(nomeFonte(s.primaFonte)) + '</dd>' : '') + '<dt>Corso seguito</dt><dd>' + esc(s.corso || '—') + '</dd><dt>Speso</dt><dd>' + eur.format(s.spesa) + '</dd></dl></section>' +
       (s.registrato ? '<section><h3>Livello e studio</h3><div class="liv-grande">' + stemma(s) + '<div><b>Livello ' + (s.livello || 1) + ' · ' + esc(s.fascia || '') + '</b><span class="nota">Rango ' + esc((D.ranghi || [])[(s.rango || 1) - 1] || '') + ' · ' + nf.format(s.exp || 0) + ' EXP' + (s.mancano ? ' · ne mancano ' + nf.format(s.mancano) + ' al livello ' + ((s.livello || 1) + 1) : '') + '</span><div class="barra-liv"><i style="width:' + (s.perc || 0) + '%"></i></div></div></div>' +
         '<dl class="dati"><dt>Tempo di studio</dt><dd>' + oreMinuti(s.minuti) + '</dd><dt>Domande a tempo</dt><dd>' + (s.risposte ? nf.format(s.risposte) + ' risposte, ' + nf.format(s.corrette || 0) + ' corrette (' + Math.round(100 * (s.corrette || 0) / s.risposte) + '%)' : 'nessuna') + '</dd><dt>Ultimo studio</dt><dd>' + (s.ultimo_studio ? esc(s.ultimo_studio.split('-').reverse().join('/')) : '—') + '</dd></dl></section>' : '') +
       (s.registrato ? '<section><h3>Accesso Premium</h3><p class="nota">' + (s.premium_manuale ? 'Attivo dal ' + esc(dataOra(s.premium_manuale)) + ' · Senza scadenza' : 'Sblocca il materiale scritto di tutte le materie pubblicate.') + '</p>' +
@@ -904,13 +911,34 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
     grafico($('#g-incasso'), g, [{ nome: 'Incasso', valori: inc, colore: 'var(--c5)', formato: (x) => eur.format(x) }], { id: 'inc', euro: true, titolo: 'Incasso giornaliero' });
   }
 
+  function tabellaProvenienze(voci, riepilogo, totale = null) {
+    const colonne = [testiFonti.fonte, testiFonti.ingressi, ...(totale === null ? [] : [testiFonti.quota]),
+      testiFonti.iscritti, testiFonti.paganti, testiFonti.incasso];
+    return '<div class="tabella"><table><thead><tr>' + colonne.map((nome, i) =>
+      '<th' + (i ? ' class="destra"' : '') + '>' + esc(nome) + '</th>').join('') + '</tr></thead><tbody>' +
+      voci.map(([fonte, ingressi]) => {
+        const r = riepilogo[fonte] || {};
+        return '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' +
+          (COLORI_FONTI[fonte] || '#7a8a87') + '"></i>' + esc(nomeFonte(fonte)) + '</span></td>' +
+          '<td class="destra"><b>' + nf.format(ingressi) + '</b></td>' +
+          (totale === null ? '' : '<td class="destra">' + Math.round(ingressi / (totale || 1) * 100) + '%</td>') +
+          '<td class="destra">' + nf.format(r.iscritti || 0) + '</td>' +
+          '<td class="destra">' + nf.format(r.paganti || 0) + '</td>' +
+          '<td class="destra">' + eur.format(r.incasso || 0) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+
   function traffico() {
     const g = elencoGiorni(giorni), v = serie('visitatori', giorni), pv = serie('visite', giorni);
     const andamento = andamentoTraffico(true);
     const [storicoVisitatori, storicoPagine] = andamento.serieG;
     const inizio = g[0]; const vis = D.visitatori.filter((r) => r.giorno >= inizio); const tot = somma(vis.map((r) => r.n)), mob = somma(vis.map((r) => r.mobile || 0));
-    const f = fontiPeriodo(); const totF = somma(f.map((x) => x[1])) || 1;
-    const isc = {}; (D.fontiIscritti || []).forEach((r) => { isc[r.fonte] = r; });
+    const ingressi = Object.fromEntries(fontiPeriodo());
+    const isc = Object.fromEntries(((D.provenienze || {})[giorni] || []).map((r) => [r.fonte, r]));
+    const f = [...new Set([...Object.keys(ingressi), ...Object.keys(isc)])]
+      .map((fonte) => [fonte, ingressi[fonte] || 0]).sort((a, b) => b[1] - a[1]);
+    const totF = somma(f.map((x) => x[1]));
+    const chatgpt = Object.values(FONTI_CHATGPT).map((fonte) => [fonte, ingressi[fonte] || 0]);
     const sez = (D.sezioni && D.sezioni[giorni]) || [];
     $('#vista').innerHTML =
       '<div class="kpi-riga">' +
@@ -920,10 +948,12 @@ function cliente(MATERIE, A_PAGAMENTO, TIPI_EMAIL) {
       '<div class="card kpi"><span class="etichetta">Da telefono</span><b>' + (tot ? Math.round((mob / tot) * 100) + '%' : '—') + '</b><span class="delta pari">' + (tot ? nf.format(tot - mob) + ' da computer' : 'nessun dato') + '</span></div></div>' +
       '<section class="card" style="margin-bottom:1rem"><header><h2>Visite</h2><span class="nota">Giorni conclusi · robot e anteprime esclusi</span></header>' + legenda(andamento.serieG) +
       '<div class="corpo">' + andamento.parziale + '<div class="grafico" id="g-visite"></div></div></section>' +
-      '<div class="due pari"><section class="card"><header><h2>Provenienza</h2><span class="nota">' + giorni + ' giorni</span></header><div class="tabella"><table><thead><tr><th>Fonte</th><th class="destra">Ingressi</th><th class="destra">Quota</th><th class="destra" title="Iscritti da sempre con questa provenienza">Iscritti</th><th class="destra">Paganti</th></tr></thead><tbody>' +
-      (f.length ? f.map(([k, n]) => '<tr><td><span style="display:flex;align-items:center;gap:.45rem"><i class="punto" style="background:' + (COLORI_FONTI[k] || '#7a8a87') + '"></i>' + esc(k) + '</span></td><td class="destra"><b>' + nf.format(n) + '</b></td><td class="destra">' + Math.round((n / totF) * 100) + '%</td><td class="destra">' + ((isc[k] || {}).iscritti || 0) + '</td><td class="destra">' + ((isc[k] || {}).paganti || 0) + '</td></tr>').join('') :
-        '<tr><td colspan="5"><div class="vuoto">Nessun ingresso registrato in questo periodo</div></td></tr>') +
-      '</tbody></table></div><p class="nota" style="padding:0 1.2rem 1rem;margin:.6rem 0 0">Instagram comprende bio, storie e DM aperti nell’app. “Diretto o app”: indirizzi scritti a mano, preferiti e link da WhatsApp, Telegram o email, che non dicono la provenienza.</p></section>' +
+      '<section class="card" style="margin-bottom:1rem"><header><h2>' + esc(testiFonti.titolo) + '</h2><span class="nota">' + giorni + ' ' + esc(testiFonti.giorni) + '</span></header>' +
+      tabellaProvenienze(chatgpt, isc) + '<div class="corpo"><p class="nota">' + esc(testiFonti.periodo) + '</p><p class="nota">' +
+      esc(testiFonti.criterio) + '</p><p class="nota">' + esc(testiFonti.storico) + '</p></div></section>' +
+      '<div class="due pari"><section class="card"><header><h2>Provenienza</h2><span class="nota">' + giorni + ' giorni</span></header>' +
+      tabellaProvenienze(f, isc, totF) +
+      '<div class="corpo"><p class="nota">' + esc(testiFonti.conteggio) + '</p><p class="nota">' + esc(testiFonti.diretto) + '</p></div></section>' +
       '<section class="card"><header><h2>Pagine più viste</h2><span class="nota">' + giorni + ' giorni</span></header><div class="corpo">' +
       barre(sez.map((r) => { const m = r.sezione.split('/')[0]; return { nome: nomeSezione(r.sezione), valore: r.n, colore: (M[m] || {}).colore || '#7a8a87' }; }), { quota: false, vuoto: 'Nessuna visita nel periodo' }) + '</div></section></div>' +
       percorsoAcquisto();

@@ -29,6 +29,13 @@ La differenza è $\dfrac{34}{3}-\dfrac{16}{3}=6$, dunque $R$ e $P$ soddisfano la
 La differenza in valore assoluto è al più $2c$, per la disuguaglianza triangolare applicata ai tre punti $P,F_1,F_2$. Se $2a>2c$, il luogo è vuoto. Nel caso $2a=2c$ si ottengono le due semirette della retta dei fuochi esterne al segmento, compresi i loro estremi. Con $a=0$ si ottiene invece la perpendicolare nel punto medio dei fuochi. Questi casi di uguaglianza motivano l’ipotesi $0<a<c$.
 :::
 
+:::esempio{titolo="Lettura di una differenza orientata"}
+Sulla retta dei fuochi $F_1=(-5,0)$ e $F_2=(5,0)$, un punto di ascissa $-5\leq x\leq5$ ha distanze $x+5$ e $5-x$. Pertanto la loro differenza, presa nell’ordine $PF_1-PF_2$, è $2x$. La condizione $|2x|=6$ dà i due punti $(-3,0)$ e $(3,0)$. Fuori dal segmento fra i fuochi la stessa differenza in valore assoluto vale sempre $10$, perché il segmento che va al fuoco più lontano contiene tutto il segmento $F_1F_2$. Si spiegano così sia l’origine dei due vertici sia il limite imposto alla costante $2a$. Le due osservazioni si usano anche nel problema inverso. Se una curva con quei fuochi ha un vertice di ascissa $4$, allora il semiasse trasverso è $4$ e la costante della definizione è $8$.
+
+::grafico{xmin=-7 xmax=7 ymin=-1.5 ymax=2 uguale=1 punti="-5,0,pieno,F_1;5,0,pieno,F_2;-3,0,pieno,V_1;3,0,pieno,V_2" segmenti="3,0,-5,0;3,0,5,0" titolo="Sulla retta focale, da $V_2$ a $F_1$ si contano $8$ unità e da $V_2$ a $F_2$ se ne contano $2$."}
+
+:::
+
 ## Equazioni canoniche e vertici
 
 ::::teorema{#assi titolo="Equazione con centro nell’origine"}
@@ -70,6 +77,23 @@ Le due espressioni al quadrato sono positive prima di essere elevate al quadrato
 Nell’equazione $9y^2-4x^2=36$, la divisione per $36$ dà $\dfrac{y^2}{4}-\dfrac{x^2}{9}=1$. Quindi $a=2$, $b=3$ e i vertici sono $(0,2)$ e $(0,-2)$. La sostituzione $x\mapsto -x$ conserva l’equazione e lascia ogni ramo al proprio posto. La sostituzione $y\mapsto -y$ scambia i due rami. La composizione delle due riflessioni è la simmetria centrale rispetto all’origine.
 :::
 
+:::esempio{titolo="Forma verticale e fascia senza punti"}
+Per l’esempio $9y^2-4x^2=36$ si può esplicitare l’ordinata in funzione di $x$. Si ottiene un valore positivo e uno negativo per ogni ascissa.
+
+$$
+\begin{aligned}
+9y^2&=36+4x^2\\
+y^2&=4+\frac{4x^2}{9}\\
+y&=\pm2\sqrt{1+\frac{x^2}{9}}.
+\end{aligned}
+$$
+
+Poiché $y^2\geq4$, i due rami si trovano interamente nei semipiani $y\geq2$ e $y\leq-2$. Il segno di $y$ basta quindi a riconoscere il ramo. Per esempio, a $x=3$ si ottengono i punti $(3,2\sqrt2)$ e $(3,-2\sqrt2)$, su rami diversi. Il punto $(3,0)$ è il punto medio del lato destro del rettangolo di riferimento, ma sostituendolo il primo membro vale $-36$ anziché $36$. Questo calcolo distingue i punti di costruzione del rettangolo dai vertici della curva.
+
+::grafico{f="2*sqrt(1+x^2/9);-2*sqrt(1+x^2/9)" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="0,2,pieno,V_1;0,-2,pieno,V_2;3,2.8284271247,pieno,P;3,-2.8284271247,pieno,Q;3,0,vuoto" segmenti="3,-2.8284271247,3,2.8284271247" legenda="y=2\sqrt{1+\dfrac{x^2}{9}};y=-2\sqrt{1+\dfrac{x^2}{9}}" titolo="La verticale $x=3$ incontra i due rami, mentre la fascia fra le quote $-2$ e $2$ rimane vuota."}
+
+:::
+
 ## Fuochi ed eccentricità
 
 :::teorema{#fuochi titolo="Distanza focale ed eccentricità"}
@@ -90,6 +114,23 @@ Il termine in $y$ è positivo perché i fuochi sono sull’asse verticale. Il nu
 
 :::osservazione
 Poiché $c^2=a^2+b^2$, vale $e^2=1+\dfrac{b^2}{a^2}$. A parità di $a$, aumentando $e$ si aumenta $b$ e cambia la pendenza degli asintoti. Per esempio, con $a=3$ ed $e=\sqrt2$ si ha $b^2=9$, mentre con $a=3$ ed $e=\dfrac53$ si ha $b^2=16$. Dalla stessa distanza dei vertici dal centro si ottengono quindi forme diverse.
+:::
+
+:::esempio{titolo="Corda passante per un fuoco"}
+Nell’iperbole orizzontale la verticale per il fuoco destro ha equazione $x=c$. Sostituendo la relazione $c^2=a^2+b^2$, si ottengono le ordinate della corda passante per il fuoco.
+
+$$
+\begin{aligned}
+\frac{y^2}{b^2}&=\frac{c^2}{a^2}-1
+=\frac{b^2}{a^2}\\
+y&=\pm\frac{b^2}{a}.
+\end{aligned}
+$$
+
+La corda è lunga $\dfrac{2b^2}{a}$. Per $a=4$ e $b=3$, il fuoco è $F=(5,0)$ e le due ordinate sono $\pm\dfrac94$. Il fuoco sta a metà della corda, quindi ciascun estremo è a distanza $\dfrac94$ da $F$. L’estremo superiore dista $\sqrt{10^2+(\dfrac94)^2}=\dfrac{41}{4}$ dal fuoco sinistro. La differenza delle due distanze è $\dfrac{41}{4}-\dfrac94=8=2a$, che verifica anche la definizione focale. Quindi la differenza focale è una lunghezza diversa da quella della corda, che in questo esempio è $\dfrac92$.
+
+::grafico{f="3*sqrt(x^2-16)/4;-3*sqrt(x^2-16)/4" xmin=-7 xmax=8 ymin=-5 ymax=5 uguale=1 punti="-4,0;4,0;5,0,pieno,F;5,2.25,pieno,A;5,-2.25,pieno,B" segmenti="5,-2.25,5,2.25" legenda="y=\dfrac34\sqrt{x^2-16};y=-\dfrac34\sqrt{x^2-16}" titolo="Il fuoco $F$ è il punto medio della corda verticale con estremi di ordinate $\pm\dfrac94$."}
+
 :::
 
 ## Asintoti e rettangolo di riferimento
@@ -114,6 +155,15 @@ Quando $x$ cresce senza limite, il denominatore cresce senza limite e la differe
 Per $\dfrac{x^2}{9}-\dfrac{y^2}{4}=1$ il rettangolo si estende da $x=-3$ a $x=3$ e da $y=-2$ a $y=2$. La diagonale crescente passa per il centro e per $(3,2)$, quindi ha pendenza $\dfrac{2}{3}$. I vertici della curva sono $(\pm3,0)$ e da lì i rami si avvicinano alle diagonali prolungate. A $x=6$ il punto superiore ha ordinata $2\sqrt3$, mentre la retta crescente ha ordinata $4$. La distanza verticale è ancora positiva, come previsto dall’espressione razionalizzata.
 
 ::grafico{f="2*sqrt(x^2-9)/3;-2*sqrt(x^2-9)/3;2*x/3;-2*x/3" xmin=-8 xmax=8 ymin=-6 ymax=6 uguale=1 punti="-3,0,pieno,V_1;3,0,pieno,V_2" segmenti="-3,-2,3,-2;3,-2,3,2;3,2,-3,2;-3,2,-3,-2;6,3.464101615,6,4" legenda="y=\dfrac{2}{3}\sqrt{x^2-9};y=-\dfrac{2}{3}\sqrt{x^2-9};y=\dfrac23x;y=-\dfrac23x" titolo="Il rettangolo determina le pendenze delle diagonali, mentre i vertici appartengono ai rami."}
+
+:::
+
+:::esempio{titolo="Stessi asintoti e apertura su assi diversi"}
+Consideriamo $\dfrac{x^2}{9}-\dfrac{y^2}{4}=1$ e $\dfrac{y^2}{4}-\dfrac{x^2}{9}=1$. I due denominatori rimangono associati alle stesse coordinate, perciò il rettangolo di riferimento è lo stesso. Per entrambe le equazioni le diagonali sono $y=\pm\dfrac23x$. Nella prima, il termine positivo è quello in $x$ e i vertici giacciono sull’asse $x$ a distanza $3$ dal centro. Nella seconda, il termine positivo è quello in $y$ e i vertici sono sull’asse $y$ a distanza $2$.
+
+La stessa coppia di rette delimita perciò due coppie diverse di zone. Per ricostruire l’iperbole dai soli asintoti rimangono da determinare l’orientamento e una misura. Per esempio, nel caso orizzontale la pendenza $\dfrac23$ fissa il rapporto $\dfrac ba$, ma $a=3$, $b=2$ e $a=6$, $b=4$ producono le stesse rette. Un vertice o un punto noto permette di fissare la scala.
+
+::grafico{f="2*sqrt(x^2-9)/3;-2*sqrt(x^2-9)/3;2*sqrt(1+x^2/9);-2*sqrt(1+x^2/9)" xmin=-7 xmax=7 ymin=-6 ymax=6 uguale=1 punti="-3,0;3,0;0,2;0,-2" segmenti="-7,-4.666666667,7,4.666666667;-7,4.666666667,7,-4.666666667" legenda="y=\dfrac23\sqrt{x^2-9};y=-\dfrac23\sqrt{x^2-9};y=2\sqrt{1+\dfrac{x^2}{9}};y=-2\sqrt{1+\dfrac{x^2}{9}}" titolo="Le stesse diagonali delimitano i rami orizzontali e verticali."}
 
 :::
 
@@ -148,6 +198,24 @@ I punti hanno la stessa ascissa, perciò la loro distanza è la differenza delle
 Per una retta obliqua si sostituisce $y=mx+q$ e si controlla il grado dell’equazione ottenuta. Ad esempio, con $x^2-y^2=1$ e $y=x+1$, i termini in $x^2$ si cancellano e resta $-2x-1=1$. L’unico punto è $(-1,0)$. La retta è parallela a un asintoto e la sua unica intersezione viene da un’equazione di primo grado. La tangente nel vertice $(-1,0)$ è invece la verticale $x=-1$.
 :::
 
+::::teorema{titolo="Secanti per il centro"}
+Una retta $y=mx$ per il centro dell’iperbole orizzontale incontra i rami in due punti se $|m|<\dfrac ba$. Se $|m|\geq\dfrac ba$ non ha punti comuni. Il criterio permette di classificare le rette che passano per l’origine senza calcolare prima le coordinate.
+
+:::dimostrazione
+Inserendo l’ordinata della retta nell’equazione si ricava
+$$
+x^2\left(\frac{1}{a^2}-\frac{m^2}{b^2}\right)=1.
+$$
+Il coefficiente di $x^2$ deve essere positivo per avere un quadrato uguale a un numero positivo. Questo equivale a $m^2<\dfrac{b^2}{a^2}$. Le due radici sono opposte e danno punti su rami diversi. In caso di uguaglianza il primo membro è zero per ogni $x$, quindi le due rette asintotiche non incontrano la curva. Per le pendenze di valore assoluto maggiore il primo membro è sempre non positivo.
+:::
+::::
+
+:::esempio{titolo="Una secante e una retta esterna"}
+Per $x^2-y^2=4$, la retta $y=\dfrac{x}{2}$ dà $\dfrac34x^2=4$, quindi $x=\pm\dfrac{4}{\sqrt3}$ e $y=\pm\dfrac{2}{\sqrt3}$, con segni concordi. La retta $y=2x$ dà invece $-3x^2=4$, che non ammette soluzioni reali. Si ritrova lo stesso risultato confrontando le due pendenze con quelle degli asintoti, che hanno valore assoluto $1$.
+
+::grafico{f="sqrt(x^2-4);-sqrt(x^2-4);x/2;2*x" xmin=-5 xmax=5 ymin=-5 ymax=5 uguale=1 punti="-2,0;2,0;-2.309401077,-1.154700538,pieno,A;2.309401077,1.154700538,pieno,B" legenda="y=\sqrt{x^2-4};y=-\sqrt{x^2-4};y=\dfrac x2;y=2x" titolo="La retta meno inclinata incontra entrambi i rami."}
+:::
+
 ## Iperbole equilatera
 
 :::definizione{#equilatera titolo="Asintoti perpendicolari e prodotto costante"}
@@ -160,6 +228,12 @@ In coordinate $x,y$ riferite agli asintoti, la forma $xy=K$ equivale a $y=\dfrac
 
 :::esempio{titolo="Un punto determina il prodotto"}
 Per un’iperbole equilatera con asintoti gli assi, il punto $P=(-2,3)$ determina $K=(-2)\cdot3=-6$. Di conseguenza la curva è $xy=-6$. La proiezione di $P$ sui due assi individua un rettangolo di lati $2$ e $3$. Per un qualsiasi altro punto della curva, i lati sono $|x|$ e $|y|$ e l’area resta $|xy|=6$. Si può così interpretare l’equazione come condizione di area costante.
+:::
+
+:::osservazione
+Per $xy=-6$, i punti $(-2,3)$ e $(-3,2)$ hanno lo stesso prodotto e si trovano sullo stesso ramo. I rispettivi rettangoli con lati paralleli agli assi hanno area $6$. La distanza dall’origine, invece, varia. Per esempio il punto $(-1,6)$ verifica ancora l’equazione ma dista $\sqrt{1+36}=\sqrt{37}$ dall’origine, mentre $(-2,3)$ dista $\sqrt{13}$. La condizione di prodotto costante impone l’area dei rettangoli, lasciando libere le distanze dall’origine. La semiretta $y=-x$ incontra quel ramo per $x=-\sqrt6$, dove entrambi i lati del rettangolo misurano $\sqrt6$. Il rettangolo in questo punto è un quadrato.
+
+::grafico{f="-6/x" xmin=-6 xmax=6 ymin=-5 ymax=6 uguale=1 punti="-2,3,pieno,P;-3,2,pieno,Q" segmenti="-2,0,-2,3;-2,3,0,3;-3,0,-3,2;-3,2,0,2" legenda="y=-\dfrac6x" titolo="I rettangoli individuati da $P$ e $Q$ hanno lati scambiati e area uguale."}
 :::
 
 ## Iperboli con centro traslato
@@ -185,6 +259,18 @@ $$
 \end{aligned}
 $$
 Si ottengono $C=(1,-2)$ e $a=3$. I vertici sono $(-2,-2)$ e $(4,-2)$. Gli asintoti sono $y+2=\pm\dfrac23(x-1)$, quindi traslando il centro si modificano le intercette delle rette e si conservano le pendenze.
+:::
+
+:::esempio{titolo="Ricostruire il centro dall’incrocio degli asintoti"}
+Consideriamo un’iperbole orizzontale con asintoti $y=2x+1$ e $y=-2x+9$. Le rette si incontrano dove $2x+1=-2x+9$. Si ricavano $x=2$ e $y=5$, dunque il centro è $(2,5)$. Il coefficiente angolare in valore assoluto dà $\dfrac ba=2$. Supponiamo inoltre che l’iperbole passi per $P=(5,5)$. Poiché $P$ ha la stessa ordinata del centro, il termine negativo si annulla e $P$ è un vertice. La differenza di ascisse è $3$, quindi $a=3$ e $b=6$.
+
+$$
+\frac{(x-2)^2}{9}-\frac{(y-5)^2}{36}=1 .
+$$
+
+La condizione sul punto fissa la scala delle due lunghezze. Per verificare entrambe le pendenze, si scrive $y-5=\pm2(x-2)$ e si sviluppano i due casi. Si ottengono proprio le rette iniziali, entrambe passanti per $(2,5)$.
+
+::grafico{f="5+2*sqrt((x-2)^2-9);5-2*sqrt((x-2)^2-9);2*x+1;-2*x+9" xmin=-5 xmax=9 ymin=-7 ymax=16 uguale=1 punti="2,5,vuoto,C;-1,5;5,5,pieno,P" legenda="y=5+2\sqrt{(x-2)^2-9};y=5-2\sqrt{(x-2)^2-9};y=2x+1;y=-2x+9" titolo="Il centro è l’intersezione delle rette. La distanza orizzontale da $C$ a $P$ determina la scala."}
 :::
 
 ## Funzione omografica
@@ -219,4 +305,16 @@ Per $f(x)=\dfrac{2x+3}{x-1}$, la relazione $2x+3=2(x-1)+5$ dà $f(x)=2+\dfrac{5}
 
 :::attenzione
 Se $ad-bc=0$, il termine reciproco scompare. Per esempio $\dfrac{6x-12}{3x-6}=2$ vale per $x\ne2$, perché la semplificazione del fattore $x-2$ si esegue sul dominio iniziale. Il grafico è la retta orizzontale $y=2$ con il punto $(2,2)$ escluso. In questo caso l’esclusione dal dominio produce un buco, mentre con $K\ne0$ produce un asintoto verticale.
+:::
+
+:::esempio{titolo="Leggere il segno e le quote di una funzione omografica"}
+Per $f(x)=3-\dfrac4{x+2}$ il grafico è definito per $x\ne-2$ e il valore $3$ è escluso dall’immagine. Le differenze $x+2$ e $f(x)-3$ hanno segni opposti. Quindi per $x<-2$ il grafico sta sopra $y=3$, mentre per $x>-2$ sta sotto. La posizione rispetto all’asse $x$ è invece determinata dal segno di $f(x)$, che richiede un calcolo distinto.
+
+$$
+f(x)=\frac{3(x+2)-4}{x+2}=\frac{3x+2}{x+2}.
+$$
+
+Numeratore e denominatore cambiano segno in $-\dfrac23$ e in $-2$. Tra questi valori il numeratore è negativo e il denominatore positivo, quindi $f(x)<0$ esattamente per $-2<x<-\dfrac23$. Per trovare dove il grafico ha quota $1$, si risolve $3-\dfrac4{x+2}=1$, da cui $x+2=2$ e $x=0$. Il punto $(0,1)$ appartiene al ramo destro, sotto la quota esclusa $3$.
+
+::grafico{f="3-4/(x+2)" xmin=-6 xmax=5 ymin=-5 ymax=9 uguale=1 asintoti="x=-2;y=3" punti="-2,3,vuoto,C;-0.666666667,0,pieno,Z;0,1,pieno,P" titolo="Il ramo destro è sempre sotto $y=3$. Solo il tratto tra l’asintoto verticale e $Z$ è sotto l’asse $x$."}
 :::

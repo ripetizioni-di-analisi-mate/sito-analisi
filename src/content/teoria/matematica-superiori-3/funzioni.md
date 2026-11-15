@@ -48,6 +48,17 @@ Per cercare le controimmagini di $1$ si risolve un'equazione per ciascun tratto.
 
 :::
 
+:::esempio{titolo="Curva, dominio e lettura di una verticale"}
+La relazione $x^2+y^2=4$ permette di leggere, a ogni ascissa, le ordinate che soddisfano l'equazione. Per $x=1$ si ha $y^2=3$ e quindi la verticale $x=1$ incontra la curva in due punti. Il segmento tratteggiato mette in evidenza che gli ingressi coincidono mentre le ordinate sono diverse. Se si conserva il solo semipiano $y\geq0$, nella stessa ascissa rimane la sola ordinata $\sqrt3$. Nell'ascissa $2$, invece, i due candidati coincidono in $y=0$, quindi il punto di confine appartiene anche al grafico della semicirconferenza superiore. A destra di $2$ la verticale non incontra nemmeno la circonferenza, perché l'equazione richiederebbe un quadrato negativo. Da questa lettura si ricava l'estremo destro del dominio della funzione.
+
+::grafico{curve="2*cos(t),2*sin(t),0,6.28318530718" legenda="x^2+y^2=4" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 segmenti="1,-1.732051,1,1.732051" punti="1,1.732051,pieno,A;1,-1.732051,pieno,B;2,0" titolo="Sulla verticale $x=1$ compaiono entrambe le ordinate della circonferenza."}
+
+:::
+
+:::osservazione{titolo="Una restrizione conserva un tratto di grafico"}
+Data $f$ su $A$, la restrizione di $f$ a un sottoinsieme $S\subseteq A$ usa la stessa legge in ogni punto di $S$ e assume soltanto gli ingressi di $S$. Per esempio, il tratto di $x\mapsto x^2$ su $[0,2]$ ha la stessa ordinata del grafico intero dove le due funzioni sono entrambe definite. L'ordinata $9$ è raggiunta sul grafico intero e assente nella restrizione. L'ordinata $1$ rimane nell'immagine, benché perda una delle due controimmagini. Questo spiega perché restringere il dominio può cambiare l'immagine e il numero di soluzioni di un'equazione $f(x)=c$.
+:::
+
 ## Il dominio reale di una formula
 
 :::teorema{#dominio titolo="Condizioni di esistenza"}
@@ -82,6 +93,17 @@ Per $x\neq 2$ vale $\dfrac{x^2-4}{x-2}=x+2$. Nella formula iniziale il numero $2
 
 :::
 
+:::esempio{titolo="Radici nella stessa somma"}
+Sia $f(x)=\sqrt{x+2}+\sqrt{4-x}$. Entrambe le radici devono esistere, quindi $x+2\geq0$ e $4-x\geq0$. La prima condizione dà $x\geq-2$ e la seconda $x\leq4$. Il dominio è l'intervallo chiuso $[-2,4]$. All'estremo sinistro, la prima radice vale zero e la seconda vale $\sqrt6$. All'estremo destro accade il contrario, quindi entrambe le estremità hanno la stessa ordinata. Il caso di una radice al denominatore darebbe invece un vincolo stretto nel relativo estremo. Per esempio, con $\dfrac{\sqrt{x+2}}{\sqrt{4-x}}$ il punto $4$ sarebbe escluso, mentre $-2$ resterebbe ammesso.
+:::
+
+:::esempio{titolo="Radice di una frazione e test sui confini"}
+Per $h(x)=\sqrt{\dfrac{x-2}{x+1}}$, gli intervalli si delimitano con $-1$ e $2$. Nel tratto intermedio, per esempio in $x=0$, il rapporto è $-2$, quindi nessun punto di quel tratto è ammesso. Nel tratto sinistro, in $x=-2$ si ottiene il rapporto $4$, mentre nel tratto destro, in $x=3$ si ottiene $\dfrac14$. I fattori mantengono il proprio segno all'interno di ciascun tratto, quindi i due risultati positivi identificano entrambi i rami. Il confine $2$ è incluso perché il rapporto vale zero. Il confine $-1$ è escluso perché il denominatore è zero.
+
+::grafico{f="sqrt((x-2)/(x+1))" legenda="y=\sqrt{\dfrac{x-2}{x+1}}" xmin=-5 xmax=5 ymin=-1 ymax=5 punti="-2,2;2,0;3,0.5" asintoti="x=-1" titolo="La radice ha punti nei due intervalli di dominio e comprende l'ascissa $2$."}
+
+:::
+
 ## Zeri, intersezioni e segno
 
 :::definizione{#zeri titolo="Intersezioni con gli assi"}
@@ -107,6 +129,13 @@ Il quoziente è positivo dove il numeratore e il denominatore hanno lo stesso se
 Per $f(x)=(x-2)^2$, l'equazione $f(x)=0$ ha la sola soluzione $2$. Poiché il quadrato è positivo per ogni $x\neq 2$, il grafico raggiunge l'asse orizzontale in $(2,0)$ e rimane sopra l'asse ai due lati del punto. Il passaggio per uno zero comporta un cambio di segno soltanto se i valori hanno segni opposti ai suoi due lati.
 :::
 
+:::esempio{titolo="Uno zero in cui il segno resta uguale"}
+Per $h(x)=(x-1)^2(x+2)$, il fattore quadratico si annulla soltanto in $1$ e ha segno positivo in ogni altra ascissa. Il fattore lineare si annulla in $-2$ e cambia segno passando attraverso quel valore. Di conseguenza $h$ è negativa in $(-\infty,-2)$ e positiva in $(-2,1)\cup(1,+\infty)$. Le due ascisse $-2$ e $1$ sono zeri, ma hanno effetti distinti. Vicino a $-2$ il grafico attraversa l'asse, mentre vicino a $1$ resta sopra e tocca l'asse nel punto $(1,0)$. Con la condizione $h(x)\geq0$ le parti positive si uniscono attraverso $1$ e si include anche $-2$.
+
+::grafico{f="(x-1)^2*(x+2)" xmin=-3 xmax=3 ymin=-7 ymax=7 punti="-2,0,pieno,A;1,0,pieno,B" titolo="Il grafico attraversa l'asse in $A$ e lo tocca in $B$."}
+
+:::
+
 ## Simmetrie rispetto all'asse e all'origine
 
 :::definizione{#simmetrie titolo="Funzioni pari e funzioni dispari"}
@@ -129,6 +158,29 @@ La funzione è quindi dispari. Per $g(x)=x^3-x+2$, si hanno invece $g(1)=2$, $g(
 
 :::attenzione{titolo="La simmetria richiede anche il dominio"}
 Sia $f(x)=x^2$ con $D=[0,2]$. Per esempio $1\in D$ e $-1\notin D$, quindi $D$ non è simmetrico rispetto a $0$. La funzione assegnata non è pari, anche se la formula $x^2$ soddisfa $(-x)^2=x^2$ quando è considerata su tutto $\mathbb R$.
+:::
+
+::::teorema{#prodotto-dispari titolo="Due funzioni dispari e il loro prodotto"}
+Siano $f$ e $g$ dispari sullo stesso dominio simmetrico $D$. La funzione prodotto $h(x)=f(x)g(x)$ è pari su $D$.
+
+:::dimostrazione
+Si scelga $x\in D$. Anche $-x$ appartiene a $D$, quindi in quell'ascissa si possono calcolare entrambi i fattori. Per la disparità si ottiene
+$$
+\begin{aligned}
+h(-x)&=f(-x)g(-x)\\[4pt]
+&=(-f(x))(-g(x))\\[4pt]
+&=f(x)g(x)=h(x).
+\end{aligned}
+$$
+L'uguaglianza vale per ogni $x\in D$, che è la condizione di parità. Per esempio $f(x)=x^3$ e $g(x)=x$ sono dispari su $\mathbb R$, mentre il prodotto è $x^4$, che assegna la stessa ordinata alle ascisse opposte.
+:::
+::::
+
+:::esempio{titolo="Confrontare due simmetrie dallo stesso punto"}
+I grafici di $f(x)=x^2$ e $g(x)=x^3$ contengono entrambi il punto $P(1,1)$. Nell'ascissa $-1$, la prima funzione mantiene l'ordinata e la seconda la cambia di segno. Si ottengono rispettivamente $A(-1,1)$ e $B(-1,-1)$. I segmenti $AP$ e $BP$ permettono due letture geometriche. Il primo è orizzontale e il suo punto medio giace sull'asse $y$, mentre il secondo ha come punto medio l'origine. Si riconoscono così la simmetria assiale e la simmetria centrale.
+
+::grafico{f="x^2;x^3" xmin=-2 xmax=2 ymin=-3 ymax=3 uguale=1 punti="1,1,pieno,P;-1,1,pieno,A;-1,-1,pieno,B" segmenti="-1,1,1,1;-1,-1,1,1" titolo="Da $P$ la parità porta ad $A$ e la disparità a $B$."}
+
 :::
 
 ## Comporre due funzioni
@@ -159,6 +211,17 @@ I due estremi $\pm 2$ sono ammessi. In ciascuno di essi la funzione interna rest
 
 :::attenzione{titolo="Il quadrato esterno non estende il dominio"}
 Se $f(x)=\sqrt{x}$ e $g(t)=t^2$, allora $(g\circ f)(x)=(\sqrt{x})^2=x$ solo per $x\geq 0$. Per $x=-1$ il valore intermedio $f(-1)$ non esiste nei reali, quindi la composizione in quell'ascissa non è definita.
+:::
+
+:::esempio{titolo="Un punto assente dal dominio della composta"}
+Siano $f(x)=x^2-1$ e $g(t)=\dfrac1t$. La composta si calcola mediante la formula
+$$
+(g\circ f)(x)=\frac1{x^2-1}.
+$$
+L'ingresso vietato per la funzione esterna è $0$. Per sapere dove questa limitazione agisce sulla composta, si cerca quando la funzione interna vale zero. Le soluzioni di $x^2-1=0$ sono $-1$ e $1$, quindi il dominio è $\mathbb R\setminus\{-1,1\}$. Il punto $x=0$ è ammesso perché $f(0)=-1$ e $g(-1)=-1$. Questo distingue l'ingresso vietato per $g$ dalle ascisse vietate nella composizione.
+
+::grafico{f="x^2-1" xmin=-3 xmax=3 ymin=-2 ymax=6 punti="-1,0,pieno,A;1,0,pieno,B;0,-1" titolo="Gli zeri della funzione interna indicano dove la composta è indefinita."}
+
 :::
 
 ## Risalire all'argomento con la funzione inversa
@@ -241,4 +304,34 @@ L'altezza $H(t)=9-(t-2)^2$ di un oggetto, in metri, è osservata per $t\in[0,4]$
 
 :::osservazione{titolo="La monotonia può garantire l'iniettività"}
 Se $f$ è strettamente crescente o strettamente decrescente su un intervallo, per $x_1<x_2$ le immagini sono diverse. Quindi $f$ è iniettiva su quell'intervallo. Per $f(x)=(x-1)^2$ ciò vale separatamente a sinistra e a destra di $1$. I due intervalli danno due inverse diverse, perché la prima restituisce $1-\sqrt y$ e la seconda $1+\sqrt y$.
+:::
+
+::::teorema{#monotonia-iniettiva titolo="Dalla monotonia all'invertibilità sul ramo"}
+Una funzione strettamente crescente o strettamente decrescente su un intervallo è iniettiva su quell'intervallo. La condizione di monotonia stretta permette di scegliere un dominio sul quale l'equazione $f(x)=y$ ha al più una soluzione.
+
+:::dimostrazione
+Siano $x_1$ e $x_2$ ascisse distinte dell'intervallo. Scambiando i nomi se necessario, si può supporre $x_1<x_2$. Se $f$ è strettamente crescente, vale $f(x_1)<f(x_2)$. Se è strettamente decrescente, vale $f(x_1)>f(x_2)$. In entrambi i casi le immagini sono distinte. Applicando il criterio per l'inversa sull'immagine, a ogni ordinata raggiunta si associa quindi una sola ascissa del ramo.
+:::
+::::
+
+:::esempio{titolo="Monotonia senza derivate"}
+Per $f(x)=(x-2)^2$ si può confrontare direttamente il valore in $x_1$ e in $x_2$, supponendo $x_1<x_2$. Si ha
+$$
+\begin{aligned}
+f(x_2)-f(x_1)
+&=(x_2-2)^2-(x_1-2)^2\\[4pt]
+&=(x_2-x_1)(x_1+x_2-4).
+\end{aligned}
+$$
+Il primo fattore è positivo. Se $x_2\leq2$, allora $x_1+x_2<4$, quindi la differenza è negativa. Se $x_1\geq2$, allora $x_1+x_2>4$, quindi è positiva. La parabola è strettamente decrescente fino a $2$ e strettamente crescente da $2$ in poi. L'orizzontale $y=1$ incontra il grafico in $(1,1)$ e $(3,1)$. Su ciascun ramo si conserva soltanto una delle due intersezioni, perciò l'inversa dipende dal ramo scelto.
+
+::grafico{f="(x-2)^2;1" xmin=-1 xmax=5 ymin=-1 ymax=7 punti="1,1,pieno,A;2,0,pieno,V;3,1,pieno,B" titolo="L'orizzontale incontra un punto su ciascun ramo della parabola."}
+
+:::
+
+:::esempio{titolo="Un'immagine discreta"}
+Un biglietto costa $4$ euro e ogni ingresso aggiuntivo costa $2$ euro. Se sono previsti da zero a tre ingressi aggiuntivi, il modello è $C(n)=4+2n$ con $n\in\{0,1,2,3\}$. Le quote possibili sono $\{4,6,8,10\}$. La richiesta di un costo di $7$ euro porterebbe a $n=\dfrac32$, che non appartiene al dominio. Le quote $4$ e $10$ sono minimo e massimo, ma l'immagine non comprende tutti i valori fra i due estremi. Sul grafico ci sono quattro punti isolati, perché il numero degli ingressi è intero.
+
+::grafico{xmin=-1 xmax=4 ymin=-1 ymax=12 punti="0,4;1,6;2,8;3,10" segmenti="-1,7,4,7" titolo="L'orizzontale di quota $7$ passa fra due punti del grafico."}
+
 :::

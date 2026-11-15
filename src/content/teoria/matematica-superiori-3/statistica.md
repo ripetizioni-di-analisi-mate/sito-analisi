@@ -43,6 +43,13 @@ La tabella riassume il numero di assenze di $20$ studenti in un mese.
 Hanno al più un'assenza $13$ studenti, quindi la relativa quota è $\dfrac{13}{20}=65\,\%$. Poiché chi ha più di un'assenza appartiene al gruppo complementare, gli studenti con due o tre assenze sono $20-13=7$.
 :::
 
+:::esempio{titolo="Le frequenze cumulate in un grafico a gradini"}
+Per la tabella delle assenze, a una soglia compresa tra $1$ e $2$ corrisponde la stessa cumulata della soglia $1$. Infatti l'osservazione successiva ha due assenze e viene contata solo raggiungendo $2$. In quel punto il grafico passa da $13$ a $17$, quindi il salto di ampiezza $4$ restituisce la frequenza assoluta di due assenze. Alla soglia $3$ il grafico arriva a $20$ e da lì resta costante perché tutti gli studenti sono già contati. Per una variabile discreta i salti indicano dunque le frequenze e i tratti orizzontali indicano soglie tra le quali nessuna nuova osservazione viene inclusa.
+
+::grafico{xmin=-0.7 xmax=4.05 ymin=-1.1 ymax=22.4 nomi="x,F" linee="-0.7,0 0,0;0,5 1,5;1,13 2,13;2,17 3,17;3,20 3.89,20" punti="0,0,vuoto;0,5,pieno;1,5,vuoto;1,13,pieno;2,13,vuoto;2,17,pieno;3,17,vuoto;3,20,pieno" etichette="1.44,14.4,13;2.48,18.35,17" titolo="In $x=2$ si include il gruppo con due assenze e la frequenza cumulata sale da $13$ a $17$."}
+
+:::
+
 ## Grafici per valori e per intervalli
 
 :::osservazione{#grafici titolo="Barre per categorie e valori discreti"}
@@ -105,6 +112,25 @@ La media complessiva è più vicina a $6$ perché il secondo gruppo conta il dop
 Se una tabella riporta soltanto classi di valori, i dati all'interno di ogni classe restano incogniti. Usare il punto medio della classe in luogo di ciascun suo dato fornisce una **stima**. Per esempio, due misure in $[0,10)$ potrebbero essere $1$ e $3$ oppure $7$ e $9$. Il punto medio è $5$, mentre le due medie effettive sono $2$ e $8$.
 :::
 
+::::teorema{#bilancio-media titolo="Gli scarti dalla media sommano a zero"}
+Per osservazioni $x_1,\ldots,x_N$ con $N>0$, la media è l'unico numero $m$ che rende nulla la somma degli scarti con segno $\sum_i(x_i-m)$. Si può usare questa proprietà per controllare un calcolo della media o ricavare un'osservazione mancante conoscendo il centro.
+
+:::dimostrazione
+Sommando gli scarti si sottrae $m$ una volta per ciascuna osservazione, quindi
+$$
+\sum_i(x_i-m)=\sum_i x_i-Nm=N(\bar x-m).
+$$
+Poiché $N>0$, il prodotto vale zero precisamente per $m=\bar x$.
+:::
+::::
+
+:::esempio{titolo="La media come punto di equilibrio"}
+Per i dati $2,3,7$ la media è $4$, perché gli scarti $-2,-1,3$ hanno somma nulla. L'osservazione $7$ compensa le due osservazioni al di sotto della media anche se sul lato destro c'è un solo dato. La mediana è invece $3$, che occupa il secondo posto e lascia un'osservazione su ciascun lato. Con tre dati, media e mediana coincidono quando gli estremi distano ugualmente dal dato centrale.
+
+::grafico{xmin=-0.4 xmax=8.7 ymin=-0.4 ymax=3.5 nomi="x," punti="2,1;3,1;7,1" asintoti="x=4" segmenti="2,1.8,4,1.8;3,2.4,4,2.4;4,1.8,7,1.8" etichette="2.7,1.95,−2;3.22,2.56,−1;5.3,1.95,+3" titolo="Le distanze dalla media hanno somma zero quando si usa il segno di ciascuno scarto."}
+
+:::
+
 ## Mediana, moda e quartili
 
 :::definizione{#mediana titolo="Posizione centrale e valore più frequente"}
@@ -121,6 +147,17 @@ I **quartili** individuano posizioni nella successione ordinata. Con almeno due 
 
 :::esempio{titolo="Un valore lontano aumenta la media"}
 Nei dati ordinati $2,3,4,5,6$, la mediana è $4$ e i quartili sono $\dfrac52$ e $\dfrac{11}{2}$. Sostituendo $6$ con $36$, la mediana resta $4$ perché la posizione centrale è occupata dallo stesso dato. La somma cresce di $30$, quindi la media aumenta di $\dfrac{30}{5}=6$ e passa da $4$ a $10$. La mediana descrive il centro per posizione, mentre la media tiene conto anche della distanza dei valori estremi.
+:::
+
+:::esempio{titolo="Cinque posizioni in un diagramma a scatola"}
+Consideriamo i dati ordinati $1,2,4,4,6,8,9,12$. La mediana è $\dfrac{4+6}{2}=5$. Con la convenzione delle mediane delle due metà si trova $Q_1=\dfrac{2+4}{2}=3$ e $Q_3=\dfrac{8+9}{2}=\dfrac{17}{2}$. Si riportano queste tre posizioni su un asse. Nel diagramma a scatola più semplice, i due segmenti esterni arrivano al minimo $1$ e al massimo $12$. La scatola ha larghezza $\dfrac{17}{2}-3=\dfrac{11}{2}$, cioè l'ampiezza interquartile. La linea interna individua la mediana. L'ampiezza totale è invece $12-1=11$.
+
+::grafico{xmin=-0.45 xmax=14 ymin=-0.5 ymax=2.7 nomi="x," poligoni="3,0.65 8.5,0.65 8.5,1.65 3,1.65" linee="1,1.15 3,1.15;8.5,1.15 12,1.15;1,0.88 1,1.43;12,0.88 12,1.43;5,0.65 5,1.65" etichette="2.8,1.96,Q_1;4.8,1.96,Me;8.3,1.96,Q_3" titolo="La scatola va da $3$ a $\dfrac{17}{2}$ e il segmento interno indica la mediana $5$."}
+
+:::
+
+:::attenzione
+Con una numerosità dispari, alcune convenzioni includono il dato centrale in entrambe le metà oppure interpolano tra posizioni adiacenti. Per $1,3,7,11,15$, escludere il $7$ dà $Q_1=2$ e $Q_3=13$. Includerlo dà $Q_1=3$ e $Q_3=11$. Cambiare convenzione può dunque cambiare anche l'ampiezza interquartile. Quando il metodo è assegnato, lo si applica allo stesso modo a entrambe le metà.
 :::
 
 ## Dispersione e unità di misura
@@ -278,7 +315,7 @@ Per $x=2$ la retta prevede $3$, mentre l'osservazione vale $4$. Il residuo è po
 :::osservazione{#lettura titolo="Intervallo osservato e fattori comuni"}
 Una previsione in corrispondenza di un'ascissa compresa tra la più piccola e la più grande osservata è un'**interpolazione**. Una previsione esterna è un'**estrapolazione**. In entrambi i casi si applica la stessa equazione, ma per l'estrapolazione bisogna assumere che la relazione osservata prosegua oltre i dati.
 
-La covarianza e la correlazione sono simmetriche rispetto allo scambio di $x$ e $y$. La regressione di $y$ su $x$ minimizza gli scarti verticali. Scambiando le variabili, la nuova regressione minimizza gli scarti lungo l'asse orizzontale del grafico iniziale.
+La covarianza e la correlazione sono simmetriche rispetto allo scambio di $x$ e $y$. La regressione di $y$ su $x$ minimizza la somma dei quadrati degli scarti verticali. Scambiando le variabili, la nuova regressione minimizza la somma dei quadrati degli scarti lungo l'asse orizzontale del grafico iniziale.
 :::
 
 :::esempio{titolo="Previsione entro i dati e fuori scala"}
@@ -306,4 +343,11 @@ La nuova pendenza è negativa. L’ascissa $8$ è lontana dal gruppo iniziale e 
 
 :::attenzione
 Un'associazione osservata da sola lascia aperta la questione della causalità. Un chiosco può vendere più gelati nei giorni in cui la piscina ha più ingressi. Una temperatura più alta può aumentare sia gli ingressi sia le vendite, quindi le due serie possono crescere insieme anche senza un effetto degli ingressi sulle decisioni di acquisto. Per valutare l'associazione occorre conoscere il contesto in cui sono stati rilevati i dati.
+:::
+
+:::esempio{titolo="Residui con un andamento riconoscibile"}
+La retta di regressione per i punti $(1,6)$, $(2,4)$, $(3,6)$ e $(4,12)$ è $\hat y=2x+2$. I residui corrispondenti sono $2,-2,-2,2$. La loro somma vale zero e la somma dei residui pesati per le ascisse è $1\cdot2+2(-2)+3(-2)+4\cdot2=0$. Le due uguaglianze confermano il bilancio verticale e quello legato alla pendenza. Nel grafico dei residui, però, i due estremi sono sopra il livello zero e i due punti centrali sotto. La risposta è dunque sottostimata agli estremi e sovrastimata nel mezzo. Un andamento di questo tipo suggerisce di verificare se un modello curvo descrive meglio la relazione.
+
+::grafico{xmin=-0.5 xmax=5 ymin=-3.5 ymax=3.75 nomi="x,residuo" punti="1,2;2,-2;3,-2;4,2" segmenti="1,0,1,2;2,0,2,-2;3,0,3,-2;4,0,4,2" titolo="I residui positivi ai due estremi e negativi al centro si compensano, ma seguono un andamento regolare."}
+
 :::

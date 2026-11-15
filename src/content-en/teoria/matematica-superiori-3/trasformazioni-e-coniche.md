@@ -40,6 +40,12 @@ The circle $u^2+v^2=9$ is translated by $(2,-1)$. Its center moves from $(0,0)$ 
 A translation preserves distances because differences between the coordinates of two points stay the same. For instance, the difference of the abscissas after translation is $(u_2+h)-(u_1+h)=u_2-u_1$. The same cancellation holds for the ordinates. Therefore a translation preserves a circle's radius, a parabola's opening, and the slopes of lines moved with the curve.
 :::
 
+:::esempio{titolo="Recovering a translation from a vertex"}
+The parabolas $y=2x^2$ and $y=2(x+3)^2-4$ have the same squared-term coefficient and vertices $(0,0)$ and $(-3,-4)$, respectively. The vector joining the vertices is $(-3,-4)$, so translating the first parabola by that vector gives the second. A point other than the vertex provides a check. The point $P=(1,2)$ moves to $P'=(-2,-2)$, and substitution into the image equation gives $2(-2+3)^2-4=-2$. The positive sign in $x+3$ indicates that recovering the original abscissa requires adding $3$. The point itself has moved $3$ units left. The coefficient $2$ measures the change in ordinate one horizontal unit from the vertex and is the same for both parabolas.
+
+::grafico{f="2*x^2;2*(x+3)^2-4" xmin=-5 xmax=3 ymin=-5 ymax=6 uguale=1 punti="0,0,pieno,V;-3,-4,pieno,V';1,2,pieno,P;-2,-2,pieno,P'" vettori="0,0,-3,-4;1,2,-2,-2" titolo="Vertex $V$ and point $P$ both move three units left and four down."}
+:::
+
 ## Line and point reflections
 
 :::teorema{#simmetrie titolo="Reflecting coordinates"}
@@ -64,6 +70,18 @@ Reflect $v=u^2$ across $y=x$. An image point has coordinates $x=v$ and $y=u$, so
 The circle $(u-1)^2+(v+2)^2=4$ is centered at $(1,-2)$. Reflecting it across $x=3$ moves the center to $(5,-2)$ because $3$ is the average of $1$ and $5$. The radius stays $2$. The substitution $u=6-x$, $v=y$ indeed gives $(5-x)^2+(y+2)^2=4$. Since $(5-x)^2=(x-5)^2$, the center can be read from the usual form.
 :::
 
+::::teorema{titolo="Composing reflection and translation"}
+Reflecting across the $x$-axis and then translating by $(0,k)$ produces reflection across the line $y=\dfrac k2$. Reversing the order gives reflection across the line $y=-\dfrac k2$. The two transformations agree when $k=0$.
+
+:::dimostrazione
+The abscissa stays the same in both operations. With reflection first, the final ordinate is $-y+k$, and the midpoint between the original and final ordinates has height $\dfrac{y-y+k}{2}=\dfrac k2$. The two points are vertically aligned and therefore reflected across that horizontal line. In the reverse order, the final ordinate is $-(y+k)$, giving midpoint height $-\dfrac k2$.
+:::
+::::
+
+:::esempio
+For $P=(1,2)$ and $k=4$, reflecting first gives $(1,-2)$, which translation sends back to $(1,2)$. The starting point is thus on $y=\dfrac42=2$, where the combined reflection fixes every point. Translating first instead gives $(1,6)$ and then $(1,-6)$. The average of ordinates $2$ and $-6$ is $-2$, as expected for the second reflection line.
+:::
+
 ## Dilations and scale factors
 
 :::definizione{#omotetie titolo="Dilation about a given center"}
@@ -85,6 +103,20 @@ A circle with center $A=(4,1)$ and radius $2$ is dilated about $C=(1,1)$ with sc
 For a dilation about the origin with scale factor $2$, an image point $(x,y)$ comes from $(\dfrac{x}{2},\dfrac{y}{2})$. Substitution into $v=u^2$ gives $\dfrac{y}{2}=\left(\dfrac{x}{2}\right)^2$, or $y=\dfrac{x^2}{2}$. The point $(1,1)$ moves to $(2,2)$, satisfying the new equation. The factor $2$ multiplies the coordinates of points. After substitution in the equation, the coefficient of $x^2$ is instead $\dfrac12$.
 :::
 
+::::teorema{titolo="Inverse dilation and a check on the center"}
+For a dilation about $C$ with scale factor $\lambda\ne0$, the inverse has the same center and factor $\dfrac1\lambda$. This rule recovers the original point from its image and helps write the image equation of a locus.
+
+:::dimostrazione
+By definition, $\overrightarrow{CP'}=\lambda\overrightarrow{CP}$. Dividing by the nonzero $\lambda$ gives $\overrightarrow{CP}=\dfrac1\lambda\overrightarrow{CP'}$. Applying factors $\lambda$ and $\mu$ in succession about the same center multiplies the vector from that center by $\mu\lambda$. In particular, $\mu=\dfrac1\lambda$ restores the original vector.
+:::
+::::
+
+:::esempio
+For $C=(1,1)$, $\lambda=2$, and $P'=(7,5)$, the vector from $C$ to $P'$ is $(6,4)$. Halving it gives $(3,2)$, so the original point is $P=(4,3)$. This checks because $P-C=(3,2)$, and doubling that vector returns to $P'$. Halving $(7,5)$ directly would use the origin as the center. The figure checks the order of the points for a positive factor greater than $1$. Point $P$ is between $C$ and $P'$.
+
+::grafico{xmin=-1 xmax=9 ymin=-1 ymax=7 uguale=1 punti="1,1,pieno,C;4,3,pieno,P;7,5,pieno,P'" segmenti="1,1,7,5" titolo="The vector from $C$ to $P'$ is twice the vector from $C$ to $P$."}
+:::
+
 ## Recognizing conics with no mixed term
 
 :::teorema{#riconoscimento titolo="Signs and degenerate cases"}
@@ -103,6 +135,21 @@ $$
 \big(x-1-2(y+2)\big)\big(x-1+2(y+2)\big)=0 .
 $$
 The two lines pass through $(1,-2)$ and have slopes $\pm\dfrac12$. They are also the asymptotes of the family members with $t\ne0$.
+:::
+
+:::esempio{titolo="A family with two parallel lines"}
+In the family $x^2-4x+3+ty=0$, the only squared term is the $x$ term. If $t\ne0$, the variable $y$ can be isolated, giving a parabola. If $t=0$, the equation reduces to a constraint on the abscissa alone.
+
+$$
+\begin{aligned}
+(x-2)^2-1+ty&=0\\
+ty&=1-(x-2)^2 .
+\end{aligned}
+$$
+
+For $t\ne0$ the vertex is $\left(2,\dfrac1t\right)$. The parabola opens downward for $t>0$ and upward for $t<0$. At $t=0$ the equation becomes $(x-2)^2=1$, so $x=1$ or $x=3$ at every ordinate. The members at $t=1$ and $t=-1$ are reflections across the $x$-axis and each meets it at the same two points. The vertical lines for $t=0$ pass through just those two points.
+
+::grafico{f="1-(x-2)^2;(x-2)^2-1" xmin=-1 xmax=5 ymin=-5 ymax=5 uguale=1 segmenti="1,-4,1,4;3,-4,3,4" punti="1,0;3,0;2,1;2,-1" legenda="y=1-(x-2)^2;y=(x-2)^2-1" titolo="The two parabolas correspond to $t=1$ and $t=-1$. At $t=0$ the locus consists of the two dashed vertical lines."}
 :::
 
 ## Completing the square
@@ -144,6 +191,10 @@ $$
 The vertex is $(2,2)$ and the parabola opens downward. The abscissa $2$ makes the square vanish and hence gives the largest value of $y$.
 :::
 
+:::esempio{titolo="The right-hand side determines whether the curve exists"}
+In the family $x^2+y^2-4x+2y+t=0$, completing the squares gives corrections $-4$ and $-1$. The result is $(x-2)^2+(y+1)^2=5-t$. The pair $(2,-1)$ makes both squares vanish at every parameter value and is the center when a circle exists. For $t=1$ the right-hand side is $4$ and the radius is $2$. For $t=4$ it is $1$, so the radius is halved. At $t=5$ only $(2,-1)$ remains, and at $t=6$ the equation would require a negative sum of squares. This example shows why completing the squares comes before division by the right-hand side. With $t=5$ that step would divide by zero and lose the isolated-point case.
+:::
+
 ## Intersections of two curves
 
 :::teorema{#intersezioni titolo="Common points as solutions of a system"}
@@ -159,6 +210,19 @@ For $y=x^2$ and $y=2-x^2$, equating the ordinates gives $x^2=2-x^2$. This simpli
 
 :::esempio{titolo="Eliminating squares between two circles"}
 For $x^2+y^2=5$ and $(x-2)^2+y^2=5$, expand the second equation as $x^2-4x+4+y^2=5$. Subtracting the first gives $-4x+4=0$. Thus every common point has $x=1$. Substituting into the first equation leaves $y^2=4$ and gives $(1,2)$ and $(1,-2)$. The line $x=1$ contains both points, but the system also imposes the circle equation and selects just those two ordinates.
+:::
+
+:::esempio{titolo="Intersections of a circle and a hyperbola"}
+Find the common points of $x^2+y^2=5$ and $x^2-y^2=3$. The equations have the same squared terms, with opposite signs for the $y$ term. Their sum and difference determine the squares of the coordinates separately.
+$$
+\begin{aligned}
+2x^2&=5+3=8,\qquad x^2=4,\\
+2y^2&=5-3=2,\qquad y^2=1 .
+\end{aligned}
+$$
+The abscissa can be $-2$ or $2$, and the ordinate $-1$ or $1$. The signs are independent, since substituting any pair gives $4+1=5$ and $4-1=3$. There are four intersections, two per hyperbola branch. Keeping only pairs with matching signs would lose $(2,-1)$ and $(-2,1)$, though both satisfy the same conditions. The figure checks the count by showing symmetry across both axes.
+
+::grafico{f="sqrt(x^2-3);-sqrt(x^2-3)" curve="sqrt(5)*cos(t),sqrt(5)*sin(t),0,6.283185307" xmin=-3.5 xmax=3.5 ymin=-3.5 ymax=3.5 uguale=1 punti="-2,1,pieno,A;2,1,pieno,B;-2,-1,pieno,C;2,-1,pieno,D" legenda="y=\sqrt{x^2-3};y=-\sqrt{x^2-3};x^2+y^2=5" titolo="The four common points form a rectangle with sides parallel to the axes."}
 :::
 
 ## Tangency and parameters
@@ -178,6 +242,24 @@ At this value the equation becomes $(x-1)^2=0$. The contact point is $(1,1)$ and
 
 :::attenzione
 The condition $\Delta=0$ requires a nonzero quadratic coefficient. For $x^2-y^2=1$ and $y=x+1$, the quadratic term cancels, leaving $-2x-1=1$. The sole intersection is $(-1,0)$, but the line has slope $1$ and is parallel to an asymptote. The tangent at the vertex is the vertical line $x=-1$. It is therefore necessary to determine the degree of the equation before counting roots.
+:::
+
+::::teorema{titolo="Tangency to a parabola by completing the square"}
+For the parabola $y=x^2$ and a fixed slope $m$, the tangent is $y=mx-\dfrac{m^2}{4}$ and touches the curve at abscissa $\dfrac m2$. This formula gives the line without calculating the discriminant.
+
+:::dimostrazione
+The difference between the ordinates of $y=x^2$ and $y=mx+q$ can be written as
+$$
+x^2-mx-q=\left(x-\frac m2\right)^2-\left(q+\frac{m^2}{4}\right).
+$$
+A single common point with a repeated root occurs when the term subtracted from the square is zero. Hence $q=-\dfrac{m^2}{4}$ and the root is $x=\dfrac m2$. If $q+\dfrac{m^2}{4}$ is positive, there are two distinct roots. If it is negative, the ordinate difference remains positive and the line stays below the parabola.
+:::
+::::
+
+:::esempio
+For $m=2$ the tangent is $y=2x-1$. Raising the intercept from $-1$ to $0$ gives $(0,0)$ and $(2,4)$. Lowering it from $-1$ to $-2$ gives no common points because the square $(x-1)^2$ would have to equal $-1$. The three lines are parallel, so only their vertical shift determines the number of intersections.
+
+::grafico{f="x^2;2*x-1;2*x" xmin=-2 xmax=3.5 ymin=-3 ymax=6 uguale=1 punti="1,1,pieno,T;0,0;2,4" segmenti="-0.5,-3,3.5,5" legenda="y=x^2;y=2x-1;y=2x" titolo="The tangent passes through $T=(1,1)$. The upper parallel line is a secant, and the lower dashed line misses the curve."}
 :::
 
 ## Loci and distances
@@ -212,4 +294,17 @@ This is the parabola with vertex $(0,0)$ and a vertical axis. The point $(4,2)$ 
 
 ::grafico{f="x^2/8;-2" xmin=-6 xmax=6 ymin=-4 ymax=6 uguale=1 punti="0,0,pieno,V;0,2,pieno,F;4,2,pieno,P;4,-2,pieno,H" segmenti="0,2,4,2;4,2,4,-2" legenda="y=\dfrac{x^2}{8};y=-2" titolo="The segments $FP$ and $PH$ both have length $4$."}
 
+:::
+
+:::esempio{titolo="Equidistance from two parallel lines"}
+Let $r$ and $s$ be the lines $y=1$ and $y=5$. A point $P=(x,y)$ has distances $|y-1|$ and $|y-5|$, because the perpendicular segments to those lines are vertical. Since both distances are nonnegative, squaring their equality preserves the solutions.
+$$
+\begin{aligned}
+(y-1)^2&=(y-5)^2\\
+y^2-2y+1&=y^2-10y+25\\
+8y&=24\\
+y&=3 .
+\end{aligned}
+$$
+The abscissa stays free, so the locus is the entire horizontal line halfway between them. Every point on that line is indeed $2$ units from each given line. The same reasoning applies to distinct horizontal lines $y=u$ and $y=v$ by changing the constants. The locus always has ordinate $\dfrac{u+v}{2}$. For distinct vertical lines the same relationship holds between the abscissas.
 :::

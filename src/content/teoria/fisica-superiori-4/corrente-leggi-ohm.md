@@ -1,119 +1,175 @@
 ---
 titolo: Corrente elettrica, leggi di Ohm ed effetto Joule
-sommario: Intensità e verso della corrente, resistenza e resistività, dipendenza dalla temperatura, potenza elettrica e consumo energetico.
+sommario: Verso e intensità della corrente, resistenza, temperatura, potenza elettrica,
+  misure e consumo.
 ---
 
-## Intensità della corrente
+## Intensità e verso della corrente
 
 :::definizione{#corrente titolo="Carica che attraversa una sezione"}
-La **corrente elettrica** è il moto ordinato di cariche. L'intensità media attraverso una sezione del conduttore è
-$$
-I=\frac{\Delta q}{\Delta t}.
-$$
-Si misura in ampere, con $1\,\mathrm A=1\,\mathrm{C/s}$. In regime continuo stazionario il valore è costante nel tempo, quindi $q=I\Delta t$. Una corrente da $0{,}50\,\mathrm A$ trasporta $30\,\mathrm C$ in un minuto. Questo è il valore netto della carica che attraversa la sezione, non la carica contenuta in tutto il filo.
+Si considera una sezione trasversale del filo e si fissa un verso positivo lungo il conduttore e si indica con $\Delta q$ il saldo algebrico della carica che attraversa la sezione nel tempo $\Delta t$. Una carica positiva nel verso fissato dà contributo positivo. Una carica negativa con la stessa direzione di moto dà contributo negativo. La **corrente media** è
 
-Il verso convenzionale della corrente è quello del moto delle cariche positive. Nei metalli gli elettroni di conduzione si muovono mediamente nel verso opposto. Se $1{,}0\,\mathrm C$ attraversa una sezione, il numero di elettroni corrispondente è $N=\dfrac{1{,}0}{1{,}60\cdot10^{-19}}\simeq6{,}25\cdot10^{18}$. L'intensità si riferisce al trasferimento di carica per tempo, mentre il numero di elettroni è una quantità totale.
+$$
+I_{\mathrm{media}}=\frac{\Delta q}{\Delta t},\qquad 1\,\mathrm{A}=1\,\mathrm{C/s}.
+$$
+
+L'ampere misura coulomb al secondo. Se la corrente è costante, $\Delta q=I\Delta t$. Per esempio $0{,}50\,\mathrm{A}$ per un minuto corrispondono a $30\,\mathrm{C}$. La corrente riguarda il passaggio attraverso la sezione durante una misura. La carica presente nel metallo in un singolo istante è un'altra grandezza.
+
+Il **verso convenzionale** della corrente è il verso in cui si muoverebbero cariche positive. In un filo metallico gli elettroni hanno carica negativa, quindi la loro deriva media è opposta a quel verso. Se si inverte l'orientazione di riferimento, si inverte il segno attribuito a $I$, mentre il flusso fisico attraverso la sezione resta lo stesso.
 :::
 
-## Modello microscopico
+:::esempio{titolo="Corrente che cambia durante la misura"}
+Una corrente vale $1{,}2\,\mathrm{A}$ per $5\,\mathrm{s}$ e $0{,}30\,\mathrm{A}$ per i $15\,\mathrm{s}$ successivi, sempre nello stesso verso. La carica totale si ricava sommando la carica che passa in ciascun tratto.
 
-:::teorema{#deriva titolo="Velocità media di deriva"}
-In un conduttore con portatori tutti dello stesso tipo, la corrente in modulo è
 $$
-I=n|q|Av_d,
+\Delta q=(1{,}2\cdot 5+0{,}30\cdot 15)\,\mathrm{C}=10{,}5\,\mathrm{C},\qquad I_{\mathrm{media}}=\frac{10{,}5}{20}\,\mathrm{A}=0{,}525\,\mathrm{A}.
 $$
-dove $n$ è il numero di portatori per unità di volume, $A$ l'area della sezione e $v_d$ il modulo della velocità media di deriva. Nel tempo $\Delta t$ i portatori contenuti nel cilindro di volume $Av_d\Delta t$ attraversano la sezione. Moltiplicando quel volume per $n|q|$ e dividendo per $\Delta t$ si ottiene la formula.
 
-Con $n=8{,}0\cdot10^{28}\,\mathrm{m^{-3}}$, $|q|=1{,}60\cdot10^{-19}\,\mathrm C$, $A=1{,}0\cdot10^{-6}\,\mathrm{m^2}$ e $I=1{,}0\,\mathrm A$, si trova $v_d\simeq7{,}81\cdot10^{-5}\,\mathrm{m/s}$. La velocità di deriva è piccola. Il rapido effetto della chiusura di un circuito è legato alla propagazione del campo elettromagnetico nel circuito, non al viaggio di un singolo elettrone dal generatore alla lampadina.
+Il secondo tratto dura tre volte il primo, quindi ha un peso maggiore nella media. Se invece la corrente del secondo tratto è opposta, al termine $4{,}5\,\mathrm{C}$ va assegnato segno negativo e il saldo diventa $1{,}5\,\mathrm{C}$. Il modulo della carica transitata nei due versi complessivamente vale ancora $10{,}5\,\mathrm{C}$.
 :::
 
-## Resistenza e prima legge di Ohm
+## Portatori e velocità di deriva
 
-:::teorema{#ohm titolo="Conduttori ohmici"}
-Un componente è **ohmico**, nell'intervallo e nelle condizioni considerati, se la tensione ai suoi capi è proporzionale alla corrente che lo attraversa,
-$$
-\Delta V=RI.
-$$
-La costante $R$ è la resistenza e si misura in ohm, con $1\,\Omega=1\,\mathrm{V/A}$. Un resistore da $12\,\Omega$ collegato a $6{,}0\,\mathrm V$ è attraversato da $0{,}50\,\mathrm A$. Se la tensione raddoppia e la temperatura resta la stessa, la corrente raddoppia.
+:::teorema{#deriva titolo="Corrente di un tipo di portatore"}
+In un tratto uniforme con un solo tipo di portatore, sia $n$ il numero di portatori per unità di volume, $q$ la carica di ciascuno, $A$ l'area della sezione e $v_d$ il modulo della velocità di deriva. Nel tempo $\Delta t$ il moto di deriva porta attraverso la sezione i portatori contenuti mediamente in un volume $Av_d\Delta t$. Moltiplicando per $n|q|$ si ottiene il modulo della carica transitata e dividendo per il tempo segue
 
-Nel grafico $\Delta V$ in funzione di $I$ un resistore ohmico ha una retta per l'origine con pendenza $R$. Nel grafico $I$ in funzione di $\Delta V$ la pendenza è invece $\dfrac1R$. La legge di Ohm è sperimentale e dipende dal materiale e dalle condizioni. Un diodo o una lampadina con filamento che si riscalda possono avere una caratteristica non lineare. Il rapporto fra tensione e corrente in un singolo punto non dimostra da solo che il componente sia ohmico su tutto l'intervallo.
+$$
+|I|=n|q|Av_d.
+$$
+
+La densità $n$ si misura in $\mathrm{m^{-3}}$ e la sezione in $\mathrm{m^2}$. Il prodotto con $v_d$ dà il numero di portatori che passano in un secondo. Il moto casuale degli elettroni contribuisce in entrambi i versi. La deriva dovuta al campo elettrico determina il saldo.
 :::
 
-::grafico{f="2*x;4*x" xmin=0 xmax=3 ymin=0 ymax=13 nomi="I,V" legenda="R = 2 Ω;R = 4 Ω" titolo="Caratteristiche tensione-corrente di due resistori ohmici: la retta più inclinata corrisponde alla resistenza maggiore"}
+:::esempio{titolo="Ordine di grandezza della deriva"}
+Consideriamo $n=8{,}0\cdot10^{28}\,\mathrm{m^{-3}}$, $|q|=1{,}60\cdot10^{-19}\,\mathrm{C}$, $A=1{,}0\,\mathrm{mm^2}=1{,}0\cdot10^{-6}\,\mathrm{m^2}$ e $I=1{,}0\,\mathrm{A}$. La velocità di deriva segue isolando $v_d$.
 
-## Resistività e forma del conduttore
+$$
+v_d=\frac{I}{n|q|A}=\frac{1{,}0}{8{,}0\cdot10^{28}\cdot1{,}60\cdot10^{-19}\cdot10^{-6}}\,\mathrm{m/s}\simeq7{,}81\cdot10^{-5}\,\mathrm{m/s}.
+$$
+
+In un secondo la deriva media è dunque circa $0{,}078\,\mathrm{mm}$. La rapida risposta del circuito alla chiusura di un interruttore dipende dalla propagazione della variazione del campo elettromagnetico nel circuito. Gli elettroni già presenti vicino al dispositivo partecipano al moto di deriva.
+:::
+
+## Resistenza e caratteristica tensione-corrente
+
+:::teorema{#ohm titolo="Conduttore ohmico a condizioni fissate"}
+Un componente è **ohmico** nell'intervallo di misura se la tensione ai suoi capi è proporzionale alla corrente, mantenendo costanti le condizioni, in particolare la temperatura. Scriviamo $V$ per la caduta di tensione nel verso della corrente convenzionale attraverso un resistore.
+
+$$
+V=RI,\qquad 1\,\Omega=1\,\mathrm{V/A}.
+$$
+
+Se l'asse orizzontale è $I$ e quello verticale è $V$, la pendenza della retta è $R$. Dati due punti, si divide la variazione verticale per la variazione orizzontale. Se gli assi sono scambiati, il grafico di $I$ in funzione di $V$ ha pendenza $\dfrac{1}{R}$ in $\mathrm{A/V}$. La lettura delle unità identifica quale rapporto fornisce il grafico.
+:::
+
+:::esempio{titolo="Gli stessi resistori nei due grafici"}
+Per il resistore da $2\,\Omega$, a $I=1\,\mathrm{A}$ si ha $V=2\,\mathrm{V}$, mentre a $I=2\,\mathrm{A}$ si ha $V=4\,\mathrm{V}$. Nel grafico $V$ in funzione di $I$ la pendenza è quindi $\dfrac{4-2}{2-1}\,\mathrm{V/A}=2\,\Omega$. Per $R=4\,\Omega$ si ha una pendenza doppia. Nel grafico con gli assi scambiati, a $V=4\,\mathrm{V}$ il primo resistore assorbe $2\,\mathrm{A}$ e il secondo $1\,\mathrm{A}$. Ora la retta più inclinata corrisponde alla resistenza minore.
+
+::grafico{f="2*x;4*x" xmin=0 xmax=3 ymin=0 ymax=13 nomi="I,V" legenda="R=2\,\Omega; R=4\,\Omega" punti="1,2,pieno;2,4,pieno" titolo="Tensione in volt e corrente in ampere. La pendenza misura la resistenza."}
+
+::grafico{f="x/2;x/4" xmin=0 xmax=8 ymin=0 ymax=5 nomi="V,I" legenda="R=2\,\Omega; R=4\,\Omega" punti="4,2,pieno;4,1,pieno" titolo="Corrente in ampere e tensione in volt. La pendenza è il reciproco della resistenza."}
+:::
+
+:::attenzione
+Il rapporto $\dfrac{V}{I}$ in un solo punto si può misurare per qualsiasi caratteristica con $I\neq0$. Per verificare la legge di Ohm occorre controllare che resti costante nell'intervallo. Un componente che assorbe $0{,}10\,\mathrm{A}$ a $2\,\mathrm{V}$ e $0{,}15\,\mathrm{A}$ a $4\,\mathrm{V}$ dà rapporti di $20\,\Omega$ e circa $26{,}7\,\Omega$. Se le condizioni di misura sono le stesse, una sola resistenza costante non descrive i due dati. Un filamento che si scalda può dare proprio una caratteristica che cambia pendenza.
+:::
+
+## Resistività, lunghezza e sezione
 
 :::teorema{#resistivita titolo="Seconda legge di Ohm"}
-Per un filo omogeneo uniforme di lunghezza $L$ e area della sezione $A$, a temperatura fissata,
-$$
-R=\rho\frac LA.
-$$
-$\rho$ è la resistività del materiale e si misura in $\Omega\,\mathrm m$. La resistenza dipende quindi sia dal materiale sia dalla geometria. Un filo più lungo oppone una resistenza maggiore; uno con sezione maggiore oppone una resistenza minore.
+A temperatura fissata, per un filo omogeneo e uniforme, di lunghezza $L$ e area della sezione $A$, si ha
 
-Con $\rho=1{,}7\cdot10^{-8}\,\Omega\,\mathrm m$, $L=10\,\mathrm m$ e $A=1{,}0\,\mathrm{mm^2}=1{,}0\cdot10^{-6}\,\mathrm{m^2}$, si ottiene $R=0{,}17\,\Omega$. Raddoppiare il diametro di un filo circolare quadruplica la sezione e divide la resistenza per quattro. Se il filo viene allungato mantenendo costante il volume e senza cambiare la resistività, una lunghezza doppia comporta sezione dimezzata e resistenza quadrupla.
+$$
+R=\rho\frac{L}{A}.
+$$
 
-Le unità di area richiedono il quadrato del fattore di conversione. Un millimetro quadrato è un milionesimo di metro quadrato; convertire usando solo $10^{-3}$ darebbe una resistenza mille volte troppo piccola.
+La **resistività** $\rho$ descrive il materiale e ha unità $\Omega\,\mathrm{m}$. Raddoppiando la lunghezza allo stesso materiale e alla stessa sezione si ottiene resistenza doppia. Raddoppiando il diametro circolare, invece, $A=\dfrac{\pi d^2}{4}$ quadruplica e la resistenza diventa un quarto.
+
+Se il filo si allunga a volume costante $\mathcal V=LA$ e la resistività rimane la stessa, la sezione diminuisce. Sostituendo $A=\dfrac{\mathcal V}{L}$ si trova $R=\rho\dfrac{L^2}{\mathcal V}$. In queste ipotesi lunghezza doppia significa resistenza quadrupla, perché cambiano sia il numeratore sia il denominatore della legge originale.
 :::
 
-## Effetto della temperatura
+:::esempio{titolo="Conversione della sezione di un filo"}
+Un filo di resistività $1{,}7\cdot10^{-8}\,\Omega\,\mathrm{m}$ è lungo $10\,\mathrm{m}$ e ha sezione $1{,}0\,\mathrm{mm^2}$. Poiché $1\,\mathrm{mm}=10^{-3}\,\mathrm{m}$, il fattore di conversione si eleva al quadrato per ottenere $1\,\mathrm{mm^2}=10^{-6}\,\mathrm{m^2}$.
 
-:::teorema{#temperatura-resistenza titolo="Variazione approssimativamente lineare"}
-In un intervallo limitato, la resistenza di molti metalli si può descrivere con
 $$
-R(T)=R_0[1+\alpha(T-T_0)],
+R=\frac{1{,}7\cdot10^{-8}\cdot10}{1{,}0\cdot10^{-6}}\,\Omega=0{,}17\,\Omega.
 $$
-dove $R_0$ è la resistenza a $T_0$ e $\alpha$ il coefficiente termico riferito a quella temperatura. La variazione di temperatura può essere espressa in kelvin o in gradi Celsius, perché le differenze coincidono.
 
-Un filo con $R_0=10\,\Omega$ a $20\,{}^\circ\mathrm C$ e $\alpha=4{,}0\cdot10^{-3}\,\mathrm{K^{-1}}$, portato a $70\,{}^\circ\mathrm C$, ha $R=12\,\Omega$. A tensione costante la corrente diminuisce da $\dfrac{\Delta V}{10\,\Omega}$ a $\dfrac{\Delta V}{12\,\Omega}$. Il modello lineare richiede l'intervallo in cui $\alpha$ è approssimativamente costante. Semiconduttori e altri materiali possono mostrare dipendenze differenti; il segno positivo del coefficiente non è universale.
+Se si deve progettare un filo della stessa sezione con $R=0{,}34\,\Omega$, si isola $L$ e si trova $20\,\mathrm{m}$. Questo controllo è coerente con il raddoppio della resistenza a materiale e sezione fissati.
 :::
 
-::grafico{f="10*(1+0.004*(x-20))" xmin=20 xmax=120 ymin=8 ymax=16 nomi="t,R" titolo="Resistenza del filo dell'esempio: da $10\,\Omega$ a $20\,{}^\circ\mathrm C$ a $12\,\Omega$ a $70\,{}^\circ\mathrm C$ nel modello lineare"}
+## Resistenza e temperatura
+
+:::teorema{#temperatura-resistenza titolo="Modello lineare attorno a una temperatura"}
+Per molti metalli, in un intervallo limitato intorno a una temperatura di riferimento $T_0$, la resistenza si può approssimare con
+
+$$
+R(T)=R_0[1+\alpha(T-T_0)].
+$$
+
+$R_0$ è la resistenza misurata a $T_0$ e $\alpha$ è il coefficiente termico riferito a quel valore. Il prodotto $\alpha(T-T_0)$ è la variazione relativa di resistenza, senza unità. Una differenza di $50\,{}^\circ\mathrm{C}$ è anche $50\,\mathrm{K}$. La costante $273{,}15$ delle scale assoluta e Celsius si elimina quando si sottraggono due temperature.
+
+Per $R_0=10\,\Omega$ a $20\,{}^\circ\mathrm{C}$, $\alpha=4{,}0\cdot10^{-3}\,\mathrm{K^{-1}}$ e temperatura finale di $70\,{}^\circ\mathrm{C}$, il fattore di variazione è $1+0{,}004\cdot50=1{,}20$ e $R=12\,\Omega$. A tensione fissa, la corrente si riduce al rapporto $\dfrac{10}{12}$ del valore iniziale. Il calo della corrente è circa il $17\%$, mentre la crescita della resistenza è il $20\%$, perché la corrente è inversamente proporzionale alla resistenza.
+
+::grafico{f="10*(1+0.004*(x-20))" xmin=20 xmax=100 ymin=9 ymax=14 nomi="T,R (Ω)" punti="20,10,pieno;70,12,pieno" titolo="Temperatura in gradi Celsius. La retta descrive l'intervallo per cui vale il modello."}
+:::
+
+:::attenzione
+Il modello lineare si usa dove $\alpha$ rimane circa costante. Se una sua estrapolazione produce una resistenza negativa per un filo metallico passivo, il risultato segnala che l'estrapolazione non è fisicamente valida. Altri materiali possono anche presentare una dipendenza decrescente dalla temperatura. Il segno e l'intervallo validi si determinano dai dati del materiale e dalle condizioni di misura.
+:::
 
 ## Potenza elettrica ed effetto Joule
 
-::::teorema{#joule titolo="Energia trasferita a un componente"}
-In corrente continua un componente attraversato dalla corrente $I$ e con caduta di tensione $\Delta V$ assorbe potenza
-$$
-P=\Delta V\,I.
-$$
-Per un resistore ohmico,
-$$
-P=RI^2=\frac{(\Delta V)^2}{R}.
-$$
-L'energia elettrica viene trasformata in energia interna del resistore e può essere ceduta come calore all'ambiente. Un resistore da $12\,\Omega$ a $6{,}0\,\mathrm V$ dissipa $3{,}0\,\mathrm W$. In $20\,\mathrm s$ riceve $60\,\mathrm J$.
+:::teorema{#joule titolo="Potenza assorbita da un resistore"}
+Nel verso della corrente attraverso il resistore, ciascun coulomb attraversa una caduta di potenziale $V$ e trasferisce $V$ joule per coulomb. In un tempo $\Delta t$ passa la carica $\Delta q$. Poiché l'energia trasferita è $V\Delta q$, la potenza è
 
-:::dimostrazione
-Una carica $\Delta q$ che attraversa una caduta di potenziale $\Delta V$ trasferisce energia $\Delta E=\Delta q\,\Delta V$. Dividendo per il tempo si ottiene $P=\dfrac{\Delta q}{\Delta t}\Delta V=I\Delta V$. Sostituendo $\Delta V=RI$ si ricava $RI^2$; sostituendo $I=\dfrac{\Delta V}{R}$ si ricava l'altra espressione.
-:::
-::::
+$$
+P=\frac{V\Delta q}{\Delta t}=VI.
+$$
 
-:::attenzione
-L'effetto di un cambiamento della resistenza dipende da quale grandezza resta costante. A corrente costante $P=RI^2$ cresce con $R$. A tensione costante $P=\dfrac{(\Delta V)^2}{R}$ diminuisce con $R$. Le due affermazioni riguardano condizioni diverse e non sono in contraddizione.
+Per un resistore ohmico si possono sostituire $V=RI$ o $I=\dfrac{V}{R}$, ottenendo
+
+$$
+P=RI^2=\frac{V^2}{R}.
+$$
+
+La potenza è energia trasferita per unità di tempo, in watt. Nel resistore l'energia elettrica si trasforma in energia interna e viene in parte o interamente ceduta come calore, a seconda delle condizioni.
 :::
 
-## Energia e kilowattora
+:::esempio{titolo="Una sostituzione sotto due condizioni diverse"}
+Un resistore da $12\,\Omega$ a $6\,\mathrm{V}$ assorbe $0{,}50\,\mathrm{A}$ e dissipa $3\,\mathrm{W}$. Si aumenta la resistenza a $24\,\Omega$. Se un generatore ideale mantiene $6\,\mathrm{V}$, la corrente scende a $0{,}25\,\mathrm{A}$ e la potenza diventa $1{,}5\,\mathrm{W}$. Se invece una sorgente mantiene $0{,}50\,\mathrm{A}$, la caduta di tensione sale a $12\,\mathrm{V}$ e la potenza diventa $6\,\mathrm{W}$. Perciò il significato del confronto dipende dalla grandezza mantenuta costante.
 
-:::definizione{#energia-consumo titolo="Energia consumata a potenza costante"}
-Per un dispositivo con potenza media costante,
-$$
-E=P\Delta t.
-$$
-Il joule si ottiene usando watt e secondi. In ambito domestico si usa il kilowattora,
-$$
-1\,\mathrm{kWh}=1000\,\mathrm W\cdot3600\,\mathrm s
-=3{,}6\cdot10^6\,\mathrm J.
-$$
-Un apparecchio da $1{,}5\,\mathrm{kW}$ acceso per $2{,}0\,\mathrm h$ assorbe $3{,}0\,\mathrm{kWh}$, cioè $1{,}08\cdot10^7\,\mathrm J$. Il kilowatt misura potenza, mentre il kilowattora misura energia. Se un problema assegna un costo unitario, il costo energetico è quel valore moltiplicato per l'energia espressa in kilowattora.
-
-Per un riscaldatore che trasferisce all'acqua soltanto una frazione $\eta$ dell'energia elettrica, il bilancio è $mc\Delta T=\eta P\Delta t$. Con $m=1{,}0\,\mathrm{kg}$, $c=4180\,\mathrm{J/(kg\,K)}$, $\Delta T=20\,\mathrm K$, $P=1000\,\mathrm W$ e $\eta=0{,}80$, il tempo è circa $105\,\mathrm s$. La frazione restante viene trasferita al recipiente e all'ambiente nel modello del problema.
+::grafico{f="36/x;0.25*x" xmin=6 xmax=30 ymin=0 ymax=9 nomi="R,P (W)" legenda="V=6\,\mathrm{V};I=0{,}50\,\mathrm{A}" punti="12,3,pieno;24,1.5,pieno;24,6,pieno" titolo="Resistenza in ohm. In R = 12 Ω le curve si incontrano. In R = 24 Ω danno potenze diverse."}
 :::
 
-## Generatori e misure elettriche
+## Energia, kilowattora e rendimento
 
-:::definizione{#misure titolo="Amperometro, voltmetro e generatore"}
-Un generatore mantiene una differenza di potenziale trasformando altre forme di energia in energia elettrica. In un circuito stazionario la carica non viene consumata dal resistore; viene trasferita energia. Il generatore ideale mantiene una tensione fissata indipendentemente dalla corrente richiesta entro il modello. Un generatore reale ha anche una resistenza interna, trattata nel capitolo sui circuiti.
+:::definizione{#energia-consumo titolo="Energia trasferita in un intervallo"}
+Se la potenza è costante, l'energia trasferita nell'intervallo $\Delta t$ è $E=P\Delta t$. Per un apparecchio che cambia potenza durante l'uso si sommano le energie dei singoli intervalli o si moltiplica la potenza media per il tempo totale.
 
-Un amperometro misura la corrente ed è inserito in serie nel ramo. Nel modello ideale ha resistenza nulla, così non modifica la corrente. Un voltmetro misura una differenza di potenziale e si collega in parallelo al componente; idealmente ha resistenza infinita e non assorbe corrente. Gli strumenti reali introducono piccoli cambiamenti che dipendono dalle loro resistenze.
+$$
+1\,\mathrm{kWh}=1000\,\mathrm{W}\cdot3600\,\mathrm{s}=3{,}6\cdot10^6\,\mathrm{J}.
+$$
 
-Nella lettura di uno schema, la corrente si riferisce a un ramo mentre la tensione si riferisce a due nodi. Scrivere entrambe senza indicare dove si misurano può confondere le grandezze totali del circuito con quelle del singolo resistore. Le associazioni e le leggi di Kirchhoff permettono di collegarle in modo sistematico.
+Un dispositivo da $1{,}5\,\mathrm{kW}$ acceso per $2\,\mathrm{h}$ assorbe $3\,\mathrm{kWh}$, pari a $1{,}08\cdot10^7\,\mathrm{J}$. Il kilowatt indica quanto rapidamente si trasferisce energia, mentre il kilowattora indica quanta energia è stata trasferita. Con un costo unitario in euro per kilowattora, si moltiplicano il costo unitario e l'energia in $\mathrm{kWh}$.
+:::
+
+:::esempio{titolo="Calore utile durante il riscaldamento"}
+Un riscaldatore da $1000\,\mathrm{W}$ trasferisce all'acqua la frazione $\eta=0{,}80$ dell'energia elettrica assorbita. Si devono scaldare $1{,}0\,\mathrm{kg}$ d'acqua di $20\,\mathrm{K}$, con calore specifico $4180\,\mathrm{J/(kg\,K)}$. La potenza utile è $\eta P=800\,\mathrm{W}$, perciò si divide il calore richiesto per $800\,\mathrm{J/s}$.
+
+$$
+\Delta t=\frac{mc\Delta T}{\eta P}=\frac{1{,}0\cdot4180\cdot20}{0{,}80\cdot1000}\,\mathrm{s}\simeq105\,\mathrm{s}.
+$$
+
+Usare $1000\,\mathrm{J/s}$ al denominatore darebbe circa $84\,\mathrm{s}$ e presupporrebbe il trasferimento integrale dell'energia elettrica all'acqua. Con lo stesso obiettivo termico, la presenza di perdite aumenta il tempo richiesto.
+:::
+
+## Generatori e strumenti di misura
+
+:::definizione{#misure titolo="Amperometro, voltmetro e generatore ideale"}
+Una sorgente di tensione ideale mantiene la differenza di potenziale assegnata ai morsetti nel modello. La corrente dipende dal carico: un resistore da $12\,\Omega$ collegato a una sorgente da $6\,\mathrm{V}$ assorbe $0{,}50\,\mathrm{A}$, mentre un resistore da $24\,\Omega$ ne assorbe $0{,}25\,\mathrm{A}$. Il generatore trasferisce energia al circuito. In regime stazionario la stessa carica che entra in un resistore ne esce nel tempo considerato.
+
+L'**amperometro** interrompe il percorso del ramo e si inserisce in serie, così la carica che passa nel ramo passa anche nello strumento. La resistenza ideale dello strumento è nulla, perciò la caduta di tensione ai suoi capi è nulla. Il **voltmetro** si collega ai due nodi che definiscono la tensione, quindi è in parallelo al componente. La sua resistenza ideale è infinita, così nel ramo di misura non passa corrente.
+
+Se il voltmetro reale ha resistenza comparabile a quella del carico, introduce un ramo attraversato da una corrente apprezzabile. Per ridurre la perturbazione si usa una resistenza d'ingresso molto maggiore di quella del carico. Le associazioni e le leggi di Kirchhoff consentono di analizzare quantitativamente queste situazioni nel capitolo sui circuiti.
 :::

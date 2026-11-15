@@ -33,6 +33,8 @@ Il risultato è più vicino a $16$ perché le osservazioni del secondo gruppo so
 
 :::osservazione
 Se le osservazioni sono raccolte in classi di intervalli, la frequenza di ciascuna classe è nota, mentre i singoli valori della classe in genere sono ignoti. Sostituirli tutti con il punto medio produce una **media approssimata**. Per sei dati in $[0,10)$ e quattro in $[10,30)$, la media dei centri di classe ponderata per le frequenze vale $\dfrac{6\cdot5+4\cdot20}{10}=11$. Se però tutti i dati sono appena sopra gli estremi inferiori, la media effettiva è vicina a $4$. La precisione dell'approssimazione dipende dalla larghezza delle classi e dalla distribuzione dei valori al loro interno.
+
+::grafico{xmin=-0.5 xmax=33 ymin=-0.07 ymax=0.78 nomi="x,densità" poligoni="0,0 10,0 10,0.6 0,0.6;10,0 30,0 30,0.2 10,0.2" linee="0,0.6 10,0.6 10,0;10,0.2 30,0.2 30,0" segmenti="11,0,11,0.7" punti="5,0,pieno;20,0,pieno" etichette="3.2,0.66,6 dati;17.2,0.26,4 dati;11.6,0.73,media 11" titolo="Istogramma delle due classi. Le altezze sono le densità $\dfrac{6}{10}$ e $\dfrac{4}{20}$, le aree sono le frequenze $6$ e $4$. I punti sull'asse sono i centri $5$ e $20$; la verticale indica la media approssimata $11$."}
 :::
 
 :::osservazione
@@ -78,10 +80,14 @@ Una **moda** è una modalità di frequenza massima. È l'indice di posizione che
 
 :::osservazione
 Per un quantile calcolato al rango superiore, la quota di osservazioni strettamente inferiori a $q_p$ è minore di $p$ e la quota di osservazioni minori o uguali a $q_p$ è almeno $p$. Infatti, se $k=\lceil np\rceil$, al più $k-1$ dati sono strettamente inferiori al valore al posto $k$, mentre almeno $k$ dati gli sono minori o uguali. Le due quote possono essere molto diverse in presenza di valori ripetuti. Nella serie $1,2,4,4,4,4,6,9$ il rango del terzo quartile è $6$ e il quartile vale $4$. Solo due dati sono strettamente inferiori a $4$, mentre sei sono minori o uguali. La frase «il terzo quartile lascia il settantacinque per cento dei dati sotto di sé» va quindi precisata distinguendo le due disuguaglianze.
+
+::grafico{xmin=-1 xmax=10.5 ymin=-0.08 ymax=1.16 nomi="x,Fₙ(x)" linee="-0.6,0 1,0;1,0.125 2,0.125;2,0.25 4,0.25;4,0.75 6,0.75;6,0.875 9,0.875;9,1 10,1" punti="1,0,vuoto;1,0.125,pieno;2,0.125,vuoto;2,0.25,pieno;4,0.25,vuoto;4,0.75,pieno;6,0.75,vuoto;6,0.875,pieno;9,0.875,vuoto;9,1,pieno" segmenti="-0.6,0.75,4,0.75;4,0,4,0.25" etichette="-0.95,0.79,0,75;-0.95,0.29,0,25" titolo="Funzione di ripartizione empirica di $1,2,4,4,4,4,6,9$. Il salto in $4$ va da $\dfrac{2}{8}$ a $\dfrac{6}{8}$ e raggiunge il livello $\dfrac{3}{4}$, quindi $Q_3=4$."}
 :::
 
 ::::teorema{#centro-assoluto titolo="Minimo della somma delle distanze assolute"}
 Per $n\ge1$ dati reali ordinati, la somma $\sum_i |x_i-c|$ è minima quando $c$ è la mediana. Se $n$ è pari, ogni valore fra i due dati centrali è un minimo. Questa proprietà caratterizza un centro ottenuto da distanze assolute e chiarisce perché in un campione pari la scelta della media dei due valori centrali è una convenzione. Per i dati $1,2,9$, la mediana $2$ dà una somma di distanze pari a $8$, mentre la media $4$ dà una somma pari a $10$.
+
+::grafico{f="abs(x-1)+abs(x-2)+abs(x-9)" xmin=-0.8 xmax=11 ymin=-1 ymax=23 nomi="c,S(c)" legenda=0 punti="2,8,pieno;4,10,pieno" segmenti="2,0,2,8;4,0,4,10" etichette="2.2,6.2,(2, 8);4.2,11.6,(4, 10)" titolo="Grafico di $S(c)=|1-c|+|2-c|+|9-c|$. La funzione è lineare a tratti e ha il minimo $8$ nella mediana $c=2$; nella media $c=4$ vale $10$."}
 
 :::dimostrazione
 Si accoppia il dato più piccolo con il più grande, il secondo con il penultimo e così via. Per una coppia $a\le b$, la somma $|a-c|+|b-c|$ è almeno $b-a$ e raggiunge questo valore per $c\in[a,b]$. Gli intervalli delle coppie sono annidati, quindi per minimizzare tutti i contributi basta che $c$ appartenga all'intervallo della coppia centrale. Per $n$ pari questo è l'intervallo fra i due dati centrali. Per $n$ dispari rimane anche il contributo della sola osservazione centrale, che è minimo quando $c$ coincide con quel valore.
@@ -166,6 +172,8 @@ Per ricavare l'identità si scrive lo scarto dalla media complessiva come somma 
 ::::teorema{#centro-quadratico titolo="Minimo della somma degli scarti quadratici"}
 Siano $x_1,\ldots,x_n$ dati reali con $n\ge1$. Fra tutti i numeri reali $c$, la somma $\sum_i(x_i-c)^2$ assume il minimo in $c=\bar x$. La media è quindi il centro che meglio approssima tutti i dati con un solo valore se si misura l'errore come somma dei quadrati.
 
+::grafico{f="x^2+(x-1)^2+(x-5)^2" xmin=-0.8 xmax=5 ymin=-0.5 ymax=45 nomi="c,Q(c)" legenda=0 punti="2,14,pieno;1,17,pieno" segmenti="2,0,2,14;1,0,1,17" etichette="2.2,10,(2, 14);0.15,12.5,(1, 17)" titolo="Grafico di $Q(c)=c^2+(c-1)^2+(c-5)^2$ per i dati $0,1,5$. La parabola ha il vertice nella media $c=2$, dove vale $D=14$; nella mediana $c=1$ vale $17$."}
+
 :::dimostrazione
 Si scrive $x_i-c=(x_i-\bar x)+(\bar x-c)$ e si sviluppa il quadrato. La somma dei prodotti misti è zero, perché $2(\bar x-c)$ è costante e $\sum_i(x_i-\bar x)=0$. Si ottiene
 $$
@@ -219,6 +227,8 @@ La lunghezza della scatola indica l'ampiezza interquartile. La posizione della m
 
 :::esempio{titolo="Confronto fra due box plot"}
 Due reparti producono lotti misurati nella stessa unità. Nel primo si osservano $Q_1=12$, mediana $14$ e $Q_3=18$. Nel secondo si osservano $Q_1=16$, mediana $18$ e $Q_3=20$. La mediana del secondo coincide con il terzo quartile del primo, quindi il centro e il quartile superiore delle due distribuzioni occupano posizioni diverse sulla stessa scala. L'intervallo interquartile del secondo vale $4$, contro $6$ del primo. Questo confronto riguarda la dispersione centrale. Per stabilire in quale reparto il massimo è più lontano dal minimo servono anche gli estremi osservati, compresi gli eventuali punti isolati. Inoltre, le lunghezze delle due scatole non indicano quanti lotti sono stati misurati.
+
+::grafico{xmin=0 xmax=23 ymin=-0.3 ymax=3.3 nomi="x,y" poligoni="12,0.6 18,0.6 18,1.4 12,1.4;16,1.9 20,1.9 20,2.7 16,2.7" linee="12,0.6 18,0.6 18,1.4 12,1.4 12,0.6;14,0.6 14,1.4;16,1.9 20,1.9 20,2.7 16,2.7 16,1.9;18,1.9 18,2.7" segmenti="18,1.4,18,1.9" etichette="2,1,reparto 1;2,2.3,reparto 2" titolo="Scatole dei due reparti sulla stessa scala, senza baffi perché gli estremi non sono noti. La tratteggiata collega il terzo quartile del primo reparto alla mediana del secondo, entrambi uguali a $18$."}
 :::
 
 ## Standardizzazione e forma della distribuzione
@@ -241,4 +251,6 @@ La standardizzazione è un cambio affine con coefficiente positivo $b=\dfrac{1}{
 
 :::osservazione
 L'uso di media e deviazione standard è adatto quando interessa riassumere il livello medio e quantificare gli scarti quadratici. Mediana e intervallo interquartile descrivono il centro e la dispersione centrale tramite i ranghi, quindi risentono meno del valore numerico di pochi estremi. Nei due insiemi $2,3,4,5,6$ e $2,3,4,5,26$, mediana e quartili coincidono. Le medie valgono invece $4$ e $8$, e anche la dispersione quadratica è maggiore nel secondo insieme. Una descrizione che affianchi i due tipi di indici rende esplicito il contributo dell'osservazione più alta.
+
+::grafico{xmin=0 xmax=28 ymin=-0.2 ymax=3 nomi="x,y" punti="2,2;3,2;4,2;5,2;6,2;2,1;3,1;4,1;5,1;26,1" linee="4,1.7 4,2.3;8,0.7 8,1.3" segmenti="4,0.75,4,1.25" etichette="3.4,2.55,media e mediana 4;8.4,1.5,media 8;3.4,0.4,mediana 4" titolo="I due insiemi $2,3,4,5,6$ (in alto) e $2,3,4,5,26$ (in basso). Le linee continue indicano le medie $4$ e $8$; la tratteggiata indica la mediana $4$ del secondo insieme."}
 :::

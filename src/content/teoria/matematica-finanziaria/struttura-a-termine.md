@@ -17,6 +17,9 @@ Il fattore è un rapporto tra importi nella stessa valuta. Si può quindi moltip
 
 :::esempio{titolo="Prezzi espressi in euro e fattori unitari"}
 Un titolo paga $250\,\mathrm{euro}$ fra due anni e oggi ne costa $230$. Il fattore biennale vale $\dfrac{230}{250}=0{,}92$. Due titoli identici pagano insieme $500\,\mathrm{euro}$ alla stessa data, quindi costano $2\cdot230=460\,\mathrm{euro}$. Per lo stesso pagamento biennale si trova anche $500\cdot0{,}92=460\,\mathrm{euro}$. Il numero di titoli cambia quando cambia il pagamento promesso. Il fattore resta lo stesso perché il confronto si riferisce sempre a un euro da incassare fra due anni.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=3 ymin=-1.25 ymax=1.3 linee="-0.3,0 2.6,0;2.5,0.05 2.6,0 2.5,-0.05;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04" vettori="0,0,0,-0.92;2,0,2,1" etichette="0,-1.08,230;2,1.14,250;-0.12,0.12,0;1,-0.14,1;2.13,-0.14,2;2.75,0,t" titolo="Flussi dello zero coupon per chi lo acquista, in euro, con il tempo $t$ in anni. La freccia verso il basso è l'esborso di $230$ oggi, quella verso l'alto l'incasso di $250$ alla data $2$. Il rapporto $\dfrac{230}{250}=0{,}92$ è il fattore $v(0,2)$."}
+
 :::
 
 :::attenzione
@@ -42,6 +45,9 @@ Un pagamento biennale di $121\,\mathrm{euro}$ costa $100\,\mathrm{euro}$. Sul bi
 
 :::osservazione
 A scadenze diverse si possono osservare tassi spot uguali, crescenti o decrescenti. Per esempio, se $s_1=s_2=5\%$, allora $v(0,2)=(1{,}05)^{-2}<v(0,1)=(1{,}05)^{-1}$. Una curva piatta dei tassi positivi genera quindi fattori decrescenti perché la durata dell'attualizzazione aumenta. Il rendimento a scadenza di un titolo con cedole, trattato nell'argomento sulle obbligazioni, è invece il tasso unico che riproduce un prezzo assegnato attualizzando tutti i flussi del titolo. Il suo valore dipende dalle cedole e dal rimborso perché questi importi entrano nell'equazione del prezzo.
+
+::grafico{f="1.05^(-x)" xmin=0 xmax=6 ymin=0 ymax=1.2 nomi="T,v" punti="0,1,pieno;1,0.9524,pieno;2,0.907,pieno" segmenti="1,0,1,0.9524;2,0,2,0.907" legenda="v(0,T)=1{,}05^{-T}" titolo="Struttura dei fattori di sconto con tasso spot costante del $5\%$. I fattori decrescono con la scadenza $T$, in anni: $v(0,1)=\dfrac{1}{1{,}05}\approx0{,}952$ e $v(0,2)=\dfrac{1}{1{,}05^2}\approx0{,}907$."}
+
 :::
 
 ## Tassi a termine
@@ -62,6 +68,9 @@ Si costruiscono i due flussi del prestito mediante zero coupon. Dal punto di vis
 
 :::esempio{titolo="Tasso implicito fra il primo e il terzo anno"}
 Siano $v(0,1)=0{,}968$ e $v(0,3)=0{,}8$. Il fattore di montante fra le due date è $\dfrac{0{,}968}{0{,}8}=1{,}21$. L'intervallo dura due anni, perciò il fattore annuo è $\sqrt{1{,}21}=1{,}1$ e $f_{1,3}=10\%$. Il medesimo rapporto confronta i prezzi attuali di un euro alle due date. Si ricava infatti $1{,}21\cdot0{,}8=0{,}968$, quindi il valore attuale del rimborso uguaglia il valore attuale del capitale prestato.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=4 ymin=-1.1 ymax=1.3 linee="-0.3,0 3.6,0;3.5,0.05 3.6,0 3.5,-0.05;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04;3,-0.04 3,0.04" vettori="1,0,1,-0.826;3,0,3,1" etichette="1,-0.97,100;3,1.14,121;-0.12,0.12,0;0.87,0.12,1;2,-0.14,2;2.87,-0.14,3;3.75,0,t" titolo="Prestito a termine di $100$ euro dal primo al terzo anno, per chi presta, con il tempo $t$ in anni: esborso di $100$ alla data $1$ e rimborso di $121$ alla data $3$. Oggi i due importi valgono entrambi $96{,}8$ euro, perché $100\cdot0{,}968=121\cdot0{,}8$."}
+
 :::
 
 :::osservazione
@@ -91,7 +100,7 @@ Si osservano $z(1)=2\%$ e $z(3)=4\%$. I due logaritmi dei fattori sono $-0{,}02$
 Quando $T\mapsto v(0,T)>0$ è derivabile, il forward **istantaneo** alla data $T$ è $g(T)=-\dfrac{\mathrm d}{\mathrm dT}\log v(0,T)$. È il limite del forward continuo medio mentre l'ampiezza dell'intervallo tende a zero. Se la derivata è continua, il teorema fondamentale del calcolo dà $\log v(0,s)-\log v(0,t)=\int_s^t g(u)\,\mathrm du$. Il forward continuo medio è quindi la media integrale di $g$ sull'intervallo. Poiché $-\log v(0,T)=Tz(T)$, quando $z$ è derivabile vale anche $g(T)=z(T)+Tz'(T)$.
 :::
 
-::grafico{f="2+x;2+2*x" xmin=0 xmax=4.3 ymin=0 ymax=11.2 nomi="T,tasso (%)" legenda="z(T);g(T)" punti="2,4,pieno;2,6,pieno" titolo="Con spot continuo z(T) = 0,02 + 0,01T, il forward istantaneo g(T) vale 0,02 + 0,02T. Al secondo anno i tassi sono 4% e 6%."}
+::grafico{f="2+x;2+2*x" xmin=0 xmax=4.3 ymin=0 ymax=11.2 nomi="T,tasso (%)" legenda="z(T);g(T)" punti="2,4,pieno;2,6,pieno" titolo="Spot continuo $z(T)=0{,}02+0{,}01T$ e forward istantaneo $g(T)=0{,}02+0{,}02T$, con $T$ in anni e i tassi in punti percentuali sull'asse verticale. Al secondo anno i tassi valgono $4\%$ e $6\%$."}
 
 ## Bootstrap
 
@@ -117,6 +126,9 @@ v(0,2)=\frac{99{,}30-4{,}80}{105}=0{,}9.
 $$
 
 Se si dispone ora di un titolo triennale con pagamenti nei tre anni, si possono calcolare i primi due contributi con $0{,}96$ e $0{,}9$. Il contributo residuo determina il fattore del terzo anno.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=3 ymin=-1.2 ymax=1.3 linee="-0.3,0 2.6,0;2.5,0.05 2.6,0 2.5,-0.05;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04" vettori="0,0,0,-0.946;1,0,1,0.25;2,0,2,1" etichette="0,-1.1,99,30;1,0.36,5;2,1.14,105;-0.12,0.12,0;1.07,-0.14,1;2.07,-0.14,2;2.75,0,t" titolo="Flussi del titolo biennale per chi lo acquista, in euro, con il tempo $t$ in anni: prezzo di $99{,}30$ oggi, cedola di $5$ alla data $1$, cedola e rimborso per $105$ alla data $2$. La freccia della cedola non è in scala."}
+
 :::
 
 :::attenzione
@@ -154,6 +166,9 @@ Un pagamento può cadere fra due nodi della curva. Se si assume un'interpolazion
 
 :::esempio{titolo="Cedola che porta il prezzo alla pari"}
 Per un titolo con nominale $100\,\mathrm{euro}$ e cedola annua costante $c$, le date di pagamento sono il primo e il secondo anno. Con $v(0,1)=0{,}96$ e $v(0,2)=0{,}9$, il rimborso finale vale oggi $90\,\mathrm{euro}$. Per arrivare a un prezzo di $100\,\mathrm{euro}$, le due cedole devono dunque contribuire per $10\,\mathrm{euro}$ in valore attuale. Poiché $0{,}96c+0{,}9c=10$, si trova $c=\dfrac{10}{1{,}86}\approx 5{,}38\,\mathrm{euro}$. Questa è la cedola di parità. Divisa per il nominale dà un tasso cedolare di circa $5{,}38\%$. I due spot si ricavano invece dai singoli fattori di sconto. Il primo vale circa $4{,}17\%$ e il secondo circa $5{,}41\%$. La cedola di parità risolve un'equazione che dipende da entrambe le date.
+
+::grafico{f="5.376" xmin=0 xmax=2.7 ymin=0 ymax=7 nomi="T,tasso (%)" punti="1,4.167,pieno,s₁;2,5.409,pieno,s₂" segmenti="1,0,1,4.167;2,0,2,5.409;1,4.167,2,5.409" legenda="\text{cedola di parità}\approx5{,}38\%" titolo="Tassi spot ricavati da $v(0,1)=0{,}96$ e $v(0,2)=0{,}9$, in punti percentuali: $s_1\approx4{,}17\%$ e $s_2\approx5{,}41\%$. La retta orizzontale è il tasso cedolare di parità del titolo biennale, compreso fra i due spot."}
+
 :::
 
 :::osservazione
@@ -168,6 +183,9 @@ In un modello deterministico, un **arbitraggio** è una strategia realizzabile c
 
 :::esempio{titolo="Stesso rimborso, due prezzi"}
 Due strumenti pagano entrambi $100\,\mathrm{euro}$ fra un anno, senza altri flussi. Il primo costa $96\,\mathrm{euro}$ e il secondo $97\,\mathrm{euro}$. Se è possibile vendere il secondo allo scoperto al prezzo indicato, la vendita dà un incasso iniziale di $97\,\mathrm{euro}$. L'acquisto del primo ne richiede $96$, quindi rimane un incasso immediato di $1\,\mathrm{euro}$. Fra un anno il primo strumento paga $100\,\mathrm{euro}$, esattamente quanto si deve alla controparte della vendita. Il flusso futuro netto è zero. I due prezzi violano quindi la **legge del prezzo unico** sotto le ipotesi di mercato dichiarate.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=2.2 ymin=-0.78 ymax=0.82 linee="-0.4,0 1.8,0;1.72,0.035 1.8,0 1.72,-0.035;0,-0.03 0,0.03;1,-0.03 1,0.03" vettori="-0.1,0,-0.1,0.582;0.1,0,0.1,-0.576;0.9,0,0.9,0.6;1.1,0,1.1,-0.6" etichette="-0.2,0.68,97;0.04,-0.68,96;0.8,0.7,100;1.04,-0.7,100;-0.22,-0.09,0;0.97,0.09,1;1.9,0,t" titolo="Flussi della strategia in euro, con il tempo $t$ in anni. Alla data $0$ la vendita allo scoperto incassa $97$ e l'acquisto costa $96$. Alla data $1$ il rimborso di $100$ ricevuto è uguale ai $100$ dovuti, quindi resta soltanto l'incasso iniziale di $1$ euro."}
+
 :::
 
 :::attenzione
@@ -196,6 +214,9 @@ P&=0{,}5\cdot96+108{,}60=156{,}60\,\mathrm{euro}.
 $$
 
 Se l'obiettivo fosse incassare soltanto $110\,\mathrm{euro}$ al secondo anno, si dovrebbe eliminare la cedola del primo anno vendendo $0{,}1$ unità di $A$ allo scoperto. Una quantità negativa rappresenta quella posizione. Il flusso del primo anno è infatti $10-0{,}1\cdot100=0$.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 xmin=-0.6 xmax=3 ymin=-1.2 ymax=1.3 linee="-0.3,0 2.6,0;2.5,0.05 2.6,0 2.5,-0.05;0,-0.04 0,0.04;1,-0.04 1,0.04;2,-0.04 2,0.04" vettori="0,0,0,-1;0.9,0,0.9,0.5;1.1,0,1.1,0.2;2,0,2,1" etichette="0,-1.12,156,60;0.62,0.62,50 da A;1.1,0.32,10 da B;2,1.14,110 da B;-0.12,0.12,0;1,-0.14,1;2.07,-0.14,2;2.75,0,t" titolo="Portafoglio replicante, in euro, con il tempo $t$ in anni: costo di $156{,}60$ oggi. Alla data $1$ mezza unità di $A$ paga $50$ e l'unità di $B$ paga $10$, per un totale di $60$; alla data $2$ l'unità di $B$ paga $110$. Le frecce non sono in scala."}
+
 :::
 
 

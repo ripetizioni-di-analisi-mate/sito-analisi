@@ -27,10 +27,16 @@ La temperatura ambiente può variare durante una prova. Se la sua variazione è 
 Una simulazione a passo costante $h>0$ costruisce una successione di stati agli istanti $t_j=t_0+jh$, dove l'indice $j$ conta gli aggiornamenti già eseguiti. La riga con indice $0$ contiene la condizione iniziale. Se la durata $D=t_f-t_0$ è un multiplo esatto di $h$, gli aggiornamenti sono $N=\dfrac{D}{h}$ e gli stati registrati sono $N+1$.
 
 Per una prova da $0$ a $6\,\mathrm{s}$ con $h=0{,}5\,\mathrm{s}$, il programma esegue $12$ aggiornamenti. Registra $13$ stati perché include quello al tempo iniziale. Se si confronta una misura raccolta a $3\,\mathrm{s}$, occorre leggere lo stato con indice $6$. L'indice di riga coincide con il tempo in secondi solo quando $t_0=0$ e $h=1\,\mathrm{s}$.
+
+::grafico{assi=0 xmin=-0.6 xmax=6.6 ymin=-1.2 ymax=1.2 linee="0,0 6,0" punti="0,0;0.5,0;1,0;1.5,0;2,0;2.5,0;3,0;3.5,0;4,0;4.5,0;5,0;5.5,0;6,0" etichette="-0.2,-0.7,0 s;2.8,-0.7,3 s;5.8,-0.7,6 s;-0.3,0.5,j = 0;2.7,0.5,j = 6;5.6,0.5,j = 12" titolo="Griglia da $0$ a $6\,\mathrm{s}$ con $h=0{,}5\,\mathrm{s}$. I $13$ nodi sono gli stati registrati e l'istante $3\,\mathrm{s}$ corrisponde all'indice $j=6$."}
+
 :::
 
 :::esempio{titolo="Raggiungere un tempo finale fra due nodi"}
 Con passo nominale $0{,}3\,\mathrm{s}$ e durata $1\,\mathrm{s}$, tre passi portano a $0{,}9\,\mathrm{s}$. Per terminare esattamente a $1\,\mathrm{s}$ si può eseguire un ultimo aggiornamento da $0{,}1\,\mathrm{s}$. In quell'aggiornamento si moltiplica il tasso di variazione per la lunghezza effettiva dell'ultimo intervallo. Usare ancora $0{,}3\,\mathrm{s}$ darebbe uno stato a $1{,}2\,\mathrm{s}$ e quindi una previsione riferita a un istante diverso.
+
+::grafico{assi=0 xmin=-0.1 xmax=1.35 ymin=-0.5 ymax=0.5 linee="0,0 1,0" segmenti="1,0,1.2,0" punti="0,0;0.3,0;0.6,0;0.9,0;1,0;1.2,0,vuoto" etichette="-0.03,-0.25,0;0.25,-0.25,0,3;0.55,-0.25,0,6;0.85,-0.25,0,9;0.97,0.2,1;1.15,-0.25,1,2" titolo="Nodi della griglia in secondi. Dopo tre passi da $0{,}3\,\mathrm{s}$ l'ultimo passo da $0{,}1\,\mathrm{s}$ termina a $1\,\mathrm{s}$, mentre un quarto passo da $0{,}3\,\mathrm{s}$ porterebbe al punto vuoto a $1{,}2\,\mathrm{s}$."}
+
 :::
 
 :::osservazione{titolo="Unità dello stato e dei tassi"}
@@ -62,6 +68,9 @@ Prima si determinano entrambi i nuovi valori. Poi si sostituiscono quelli vecchi
 Con $x_0=0\,\mathrm m$, $v_0=0\,\mathrm{m/s}$, $a=2\,\mathrm{m/s^2}$ e $h=1\,\mathrm s$, il primo incremento di posizione è zero, perché la velocità all'inizio è zero. La velocità raggiunge $2\,\mathrm{m/s}$ al termine del primo passo. Il secondo incremento di posizione vale quindi $2\,\mathrm m$. Si ottiene $x_2=2\,\mathrm m$ e $v_2=4\,\mathrm{m/s}$.
 
 Il moto esatto ha posizione $x(t)=x_0+v_0t+\dfrac{at^2}{2}$ e in questo caso dà $4\,\mathrm m$ a $t=2\,\mathrm s$. La velocità numerica è esatta ai nodi, perché la sua pendenza è costante. Per la posizione, invece, il metodo approssima la velocità variabile sull'intervallo con quella iniziale.
+
+::grafico{f="x^2" xmin=0 xmax=2.5 ymin=-0.5 ymax=5 nomi="t,x" punti="0,0,pieno;1,0,pieno;2,2,pieno;2,4,vuoto" segmenti="0,0,1,0;1,0,2,2;2,2,2,4" legenda="x = t^2" titolo="La curva è il moto esatto $x=t^2$ con $a=2\,\mathrm{m/s^2}$. I punti pieni sono le stime di Eulero con $h=1\,\mathrm{s}$, e a $t=2\,\mathrm{s}$ la stima di $2\,\mathrm{m}$ resta sotto la posizione esatta di $4\,\mathrm{m}$."}
+
 :::
 
 :::attenzione
@@ -111,11 +120,49 @@ La soluzione continua a $1\,\mathrm s$ vale circa $51{,}152\,{}^\circ\mathrm C$.
 
 :::
 
+::::teorema{#eulero-sottostima titolo="Scarto di Eulero nel raffreddamento"}
+Siano $k>0$ e $h>0$ con $hk<1$, e sia $s_0\neq0$ lo scarto iniziale. Per ogni $j\ge1$ lo scarto di Eulero $s_j=(1-hk)^js_0$ ha lo stesso segno dello scarto del modello continuo $s(t_j)=s_0e^{-kjh}$, e vale
+$$
+|s_j|<|s(t_j)|.
+$$
+Con $0<hk<1$ la temperatura calcolata con Eulero è quindi sempre più vicina alla temperatura ambiente di quella del modello continuo. Nel raffreddamento da $60\,{}^\circ\mathrm C$ con $hk=0{,}25$, la stima a $1\,\mathrm s$ vale $50\,{}^\circ\mathrm C$ ed è minore di $51{,}152\,{}^\circ\mathrm C$. Il risultato fornisce anche un controllo sul codice, perché una stima che risulta più lontana dall'ambiente rispetto alla soluzione esatta indica un errore di programmazione.
+
+:::dimostrazione
+Si confrontano i fattori applicati in un passo, $1-hk$ per Eulero ed $e^{-hk}$ per il modello continuo. Sia $g(u)=e^{-u}-(1-u)$ per $u\ge0$. Si ha $g(0)=0$ e $g'(u)=1-e^{-u}>0$ per $u>0$, quindi $g$ è strettamente crescente e $g(u)>0$ per ogni $u>0$. Con $u=hk$ si ottiene $1-hk<e^{-hk}$. Poiché $hk<1$, entrambi i fattori sono positivi, perciò elevando i due membri alla potenza $j$ la disuguaglianza si conserva e si ottiene $(1-hk)^j<e^{-kjh}$. Moltiplicando per $|s_0|>0$ si ricava $|s_j|<|s(t_j)|$. I segni di $s_j$ e $s(t_j)$ coincidono con quello di $s_0$, perché i due fattori sono positivi.
+:::
+::::
+
 :::esempio{titolo="Errore sulla posizione con accelerazione costante"}
 Su ogni intervallo la velocità esatta cresce di $ah$. Lo spostamento esatto sull'intervallo vale quindi $h(v_j+\dfrac{ah}{2})$, perché la velocità è una funzione affine del tempo e la sua media è la semisomma dei valori agli estremi. Eulero usa invece $hv_j$. La differenza tra i due incrementi è $\dfrac{ah^2}{2}$. La velocità ai nodi coincide con quella esatta, quindi dopo $N$ intervalli tutti questi scarti si sommano. Se $D=Nh$ è la durata, la differenza finale fra posizione esatta e stima è $\dfrac{aDh}{2}$.
 
 Per $a=2\,\mathrm{m/s^2}$ e $D=2\,\mathrm s$, l'errore finale vale $2\,\mathrm m$ con $h=1\,\mathrm s$ e $1\,\mathrm m$ con $h=0{,}5\,\mathrm s$. Questo dimezzamento segue dal calcolo per il caso ad accelerazione costante. Il singolo scarto di un passo si riduce invece a un quarto, poiché contiene $h^2$.
+
+::grafico{f="1+2*x" xmin=0 xmax=2.5 ymin=0 ymax=6 nomi="t,v" area="1;0;0;1|3;0;1;2" legenda="v = 1 + 2t" titolo="Con $v_0=1\,\mathrm{m/s}$, $a=2\,\mathrm{m/s^2}$ e $h=1\,\mathrm{s}$, l'area sotto la retta è lo spostamento esatto in $2\,\mathrm{s}$, pari a $6\,\mathrm{m}$. I rettangoli colorati sono gli incrementi di Eulero, per un totale di $4\,\mathrm{m}$, e ciascuno dei due triangoli rimasti ha area $\dfrac{ah^2}{2}=1\,\mathrm{m}$."}
+
 :::
+
+::::teorema{#errore-posizione titolo="Posizione di Eulero con accelerazione costante"}
+Si considerino il moto $x'=v$, $v'=a$ con $a$ costante, lo stato iniziale $(x_0,v_0)$ e il passo $h>0$. Dopo $N$ aggiornamenti di Eulero esplicito, posto $D=Nh$, la posizione calcolata è
+$$
+x_N=x_0+v_0D+\frac{aD(D-h)}{2},
+$$
+quindi la differenza fra la posizione esatta e la stima vale
+$$
+x(D)-x_N=\frac{aDh}{2}.
+$$
+La formula permette di conoscere in anticipo il risultato che il programma deve restituire. Con $x_0=1\,\mathrm m$, $v_0=2\,\mathrm{m/s}$, $a=2\,\mathrm{m/s^2}$, $D=2\,\mathrm s$ e $h=0{,}5\,\mathrm s$ si ottiene $x_4=1+4+\dfrac{2\cdot2\cdot1{,}5}{2}=8\,\mathrm m$, e un test automatico può confrontare questo valore con l'uscita del codice. Per $a=0$ la differenza è nulla, perciò Eulero riproduce esattamente il moto a velocità costante.
+
+:::dimostrazione
+Si scrivono le velocità ai nodi e si sommano gli incrementi di posizione. La velocità aumenta di $ah$ a ogni passo, quindi $v_j=v_0+jah$. Ogni aggiornamento aggiunge $hv_j$ alla posizione, perciò, usando la somma $0+1+\cdots+(N-1)=\dfrac{N(N-1)}{2}$, si ottiene
+$$
+\begin{aligned}
+x_N&=x_0+h\sum_{j=0}^{N-1}(v_0+jah)\\[6pt]
+&=x_0+Nhv_0+ah^2\,\frac{N(N-1)}{2}.
+\end{aligned}
+$$
+Poiché $Nh=D$, si ha $h^2N(N-1)=Nh(Nh-h)=D(D-h)$, e quindi $x_N=x_0+v_0D+\dfrac{aD(D-h)}{2}$. La posizione esatta è $x(D)=x_0+v_0D+\dfrac{aD^2}{2}$, perciò la differenza vale $\dfrac{aD^2}{2}-\dfrac{aD(D-h)}{2}=\dfrac{aDh}{2}$.
+:::
+::::
 
 :::definizione{#stabilita titolo="Stabilità del raffreddamento discreto"}
 Sia $s_0\neq0$ lo scarto iniziale. L'ampiezza dello scarto al passo successivo si ottiene moltiplicando quella corrente per $|1-hk|$. Il segno del fattore stabilisce da quale parte dell'equilibrio cade la nuova temperatura.
@@ -127,10 +174,16 @@ Sia $s_0\neq0$ lo scarto iniziale. L'ampiezza dello scarto al passo successivo s
 - Con $hk>2$ il fattore è minore di $-1$, quindi il segno alterna e l'ampiezza cresce.
 
 Per $s_0=0$, lo scarto resta zero in tutti i casi perché ogni aggiornamento moltiplica lo zero. Un test eseguito soltanto all'equilibrio lascia quindi inosservata la crescita degli scarti quando $hk>2$.
+
+::grafico{f="1-x" xmin=0 xmax=3.3 ymin=-2.5 ymax=1.5 nomi="hk,y" asintoti="y=1;y=-1" punti="1,0,pieno;2,-1,pieno" etichette="0.1,0.25,stesso segno;1.1,0.55,segno alterno;2.15,-1.9,ampiezza crescente" legenda="y = 1 - hk" titolo="Il fattore $1-hk$ al variare di $hk$. Il suo valore assoluto è minore di $1$ per $0<hk<2$, quindi in quell'intervallo l'ampiezza dello scarto diminuisce."}
+
 :::
 
 :::attenzione
 Per $hk=1{,}5$, una temperatura iniziale di $40\,{}^\circ\mathrm C$ in un ambiente a $20\,{}^\circ\mathrm C$ produce $10\,{}^\circ\mathrm C$ al primo passo e $25\,{}^\circ\mathrm C$ al secondo. Il modello continuo con le stesse ipotesi conserva il segno dello scarto, perché $e^{-kt}>0$. L'attraversamento dell'equilibrio nei dati calcolati dipende quindi dal passo. La stabilità, intesa come riduzione dell'ampiezza dello scarto, da sola lascia ancora possibile questa oscillazione numerica.
+
+::grafico{f="20;20+20*exp(-1.5*x)" xmin=0 xmax=4.5 ymin=0 ymax=45 nomi="t,T" punti="0,40,pieno;1,10,pieno;2,25,pieno;3,17.5,pieno;4,21.25,pieno" segmenti="0,40,1,10;1,10,2,25;2,25,3,17.5;3,17.5,4,21.25" legenda="T = T_a = 20;T = 20+20e^{-1{,}5t}" titolo="Con $h=1\,\mathrm{s}$ e $k=1{,}5\,\mathrm{s}^{-1}$ i punti di Eulero passano a ogni passo da una parte all'altra della temperatura ambiente, mentre la curva del modello continuo resta sopra $20\,{}^\circ\mathrm C$."}
+
 :::
 
 ## Confrontare previsioni e misure
@@ -195,6 +248,9 @@ assert mae == 0.875
 ```
 
 Nel primo giro la temperatura scende a $50\,{}^\circ\mathrm C$. La misura è $51\,{}^\circ\mathrm C$, perciò il primo residuo vale $1\,{}^\circ\mathrm C$. Il secondo giro riparte dalla previsione di $50\,{}^\circ\mathrm C$. Se ripartisse da $51\,{}^\circ\mathrm C$, il programma incorporerebbe la misura nel nuovo stato e il confronto riguarderebbe previsioni di un solo passo. Conservare separatamente previsioni e misure permette di controllare una simulazione libera sull'intera durata.
+
+::grafico{f="0.875" xmin=0 xmax=3.5 ymin=-0.5 ymax=2 nomi="t,r" punti="1,1,pieno;2,1.5,pieno;3,0.125,pieno" segmenti="1,0,1,1;2,0,2,1.5;3,0,3,0.125" legenda="r = \mathrm{MAE} = 0{,}875" titolo="Residui della prova agli istanti $1$, $2$ e $3\,\mathrm{s}$, in gradi Celsius. Sono tutti positivi, quindi la simulazione prevede temperature più basse di quelle misurate, e la retta indica il loro MAE."}
+
 :::
 
 :::esempio{titolo="Righe di un foglio elettronico"}

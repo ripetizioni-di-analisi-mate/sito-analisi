@@ -18,6 +18,21 @@ Per $y=|x-2|$, l'argomento $x-2$ è negativo a sinistra di $2$ e non negativo a 
 
 :::
 
+::::teorema{#distanza-proprieta titolo="Simmetria della distanza e fattori costanti"}
+Per ogni coppia di numeri reali $u,v$ valgono $|-u|=|u|$ e $|uv|=|u||v|$. Di conseguenza, se $a\neq0$, il modulo di $ax+b$ è $|a|\left|x+\dfrac ba\right|$. La distanza si misura quindi dal punto $-\dfrac ba$ e viene moltiplicata per $|a|$.
+
+:::dimostrazione
+Per ogni numero reale $u$, il prodotto $u^2$ è non negativo e la sua radice quadrata è la distanza di $u$ da zero. Poiché $(-u)^2=u^2$, si ha $|-u|=|u|$. Inoltre $|u||v|$ è non negativo e il suo quadrato vale $u^2v^2=(uv)^2$, quindi coincide con $|uv|$. Per il caso affine si raccoglie $a$, ottenendo $ax+b=a\left(x+\dfrac ba\right)$, e si applica il risultato sul prodotto.
+:::
+::::
+
+:::esempio{titolo="Leggere centro e ampiezza dalla stessa formula"}
+Scriviamo $|6-2x|=2|x-3|$. Il fattore $2$ moltiplica la distanza da $3$. Pertanto la quota $4$ corrisponde a una distanza orizzontale di $2$ da quel centro. Si ottengono le ascisse $1$ e $5$. Per verificare, in $x=1$ l’argomento vale $4$ e in $x=5$ vale $-4$. La curva ha pendenze $-2$ e $2$ nei due tratti. Dall’ascissa $3$ alle due ascisse trovate si percorrono due unità orizzontali e si sale di quattro unità verticali.
+
+::grafico{f="abs(6-2*x);4" xmin=-0.3 xmax=6.3 ymin=-1 ymax=7 punti="1,4,pieno;3,0,pieno,V;5,4,pieno" titolo="Il fattore $2$ trasforma una distanza orizzontale di $2$ in un’ordinata di $4$"}
+
+:::
+
 ## Equazioni con valore assoluto
 
 :::teorema{#equazioni titolo="Due possibilità per la distanza"}
@@ -46,6 +61,24 @@ Per esempio, $k=0$ dà quota $2$ e soluzioni $-1$ e $3$. Il grafico mostra perch
 
 :::
 
+:::esempio{titolo="Due distanze uguali richiedono un punto medio"}
+In $|x+2|=|x-6|$ si cercano punti equidistanti da $-2$ e da $6$. Il loro punto medio è $2$. Per verificare che sia l'unica soluzione si possono elevare al quadrato i membri, che sono entrambi non negativi.
+
+$$
+\begin{aligned}
+(x+2)^2&=(x-6)^2\\[4pt]
+x^2+4x+4&=x^2-12x+36\\[4pt]
+16x&=32\\[4pt]
+x&=2.
+\end{aligned}
+$$
+
+I due polinomi hanno lo stesso termine in $x^2$, che si elimina. Sostituendo si ottiene $|2+2|=|2-6|=4$. Le due curve sono simmetriche rispetto alla verticale del punto medio. Per esempio in $x=0$ le distanze sono $2$ e $6$, mentre in $x=4$ sono $6$ e $2$.
+
+::grafico{f="abs(x+2);abs(x-6)" xmin=-4 xmax=8 ymin=-1 ymax=8 punti="-2,0,pieno;6,0,pieno;2,4,pieno,P" titolo="Le distanze da $-2$ e da $6$ sono uguali in $x=2$"}
+
+:::
+
 ## Distanze inferiori a una soglia
 
 :::teorema{#interne titolo="Distanza minore di un raggio"}
@@ -54,6 +87,27 @@ Per $r>0$ la condizione $|f(x)|<r$ equivale a $-r<f(x)<r$. Il numero $f(x)$ deve
 
 :::esempio{titolo="Segno del coefficiente dell'incognita"}
 In $|5-2x|<3$ la doppia disuguaglianza è $-3<5-2x<3$. Sottraendo $5$ si ottiene $-8<-2x<-2$. Dividendo per $-2$, entrambi i versi si invertono e si ha $4>x>1$. L'insieme delle soluzioni è $(1,4)$. Il punto $x=4$ dà $|5-8|=3$, quindi resta escluso. Il punto $x=2$ è interno e dà $|5-4|=1<3$.
+:::
+
+::::teorema{#modulo-minore-variabile titolo="Un limite che dipende dall’incognita"}
+Siano $f$ e $g$ definite nello stesso punto. La condizione $|f(x)|\leq g(x)$ equivale alle due disuguaglianze $-g(x)\leq f(x)$ e $f(x)\leq g(x)$ soddisfatte insieme. Per il confronto stretto occorrono entrambe le disuguaglianze strette. La sola presenza di questi due limiti impone che $g(x)$ sia non negativo nel primo caso e positivo nel secondo.
+
+:::dimostrazione
+Se $|f(x)|\leq g(x)$, sia $f(x)$ sia $-f(x)$ sono al più $g(x)$, perché il modulo è il maggiore dei due. Moltiplicando $-f(x)\leq g(x)$ per $-1$ si ha $f(x)\geq-g(x)$. Viceversa, dalle due disuguaglianze segue che sia $f(x)$ sia $-f(x)$ sono al più $g(x)$, quindi lo è anche il loro massimo. Nel caso stretto lo stesso ragionamento vale con entrambe le disuguaglianze strette.
+:::
+::::
+
+:::esempio{titolo="Il confronto si riduce a due condizioni lineari"}
+Per $|2x-1|\leq x+2$ si impongono $-x-2\leq2x-1$ e $2x-1\leq x+2$. La prima dà $-1\leq3x$, ossia $x\geq-\dfrac13$. La seconda dà $x\leq3$. Il risultato è $\left[-\dfrac13,3\right]$. In tutto questo intervallo il secondo membro $x+2$ è positivo. Nel punto $x=-\dfrac13$ il modulo e la retta hanno ordinata $\dfrac53$. Nel punto $x=3$ hanno ordinata $5$. Tra queste due ascisse il grafico del modulo è al più all'altezza della retta, anche se la soglia varia con $x$.
+
+::grafico{f="abs(2*x-1);x+2" xmin=-2 xmax=4.5 ymin=-1 ymax=8 punti="-0.3333333333,1.6666666667,pieno;3,5,pieno" titolo="La soglia cresce con $x$ e incontra entrambi i rami del modulo"}
+
+:::
+
+:::esempio{titolo="Due tolleranze sulla stessa misura"}
+Un pezzo di lunghezza $x$ in millimetri è ammesso dal primo controllo quando dista al più $2$ da $50$. Un secondo controllo chiede una distanza strettamente minore di $2$ da $51$. Le condizioni sono $|x-50|\leq2$ e $|x-51|<2$. La prima dà $[48,52]$. La seconda dà $(49,53)$. Per superare i due controlli si prende l'intersezione, quindi $x\in(49,52]$.
+
+Il valore $49$ verifica il primo controllo perché lo scarto è $1$. Nel secondo lo scarto è $2$, quindi $49$ è escluso. In $52$ lo scarto dal primo centro è $2$ e quello dal secondo è $1$, entrambi ammessi. Se bastasse superare almeno uno dei controlli, si prenderebbe l'unione $[48,53)$. Cambia così quali estremi si conservano quando cambia la richiesta.
 :::
 
 ## Distanze superiori a una soglia
@@ -69,6 +123,13 @@ La disequazione $|x+1|\geq2$ chiede i punti a distanza almeno $2$ da $-1$. Il pr
 
 :::
 
+:::esempio{titolo="L’esterno di un intervallo con un punto aggiunto"}
+Per $|x^2-9|\geq9$, si richiede che il quadrato differisca da $9$ di almeno $9$. Un primo caso è $x^2-9\leq-9$. Aggiungendo $9$ si ottiene $x^2\leq0$ e quindi il solo valore $x=0$. L'altro caso è $x^2-9\geq9$, che equivale a $x^2\geq18$. Poiché $\sqrt{18}=3\sqrt2$, si ottengono le semirette con $x\leq-3\sqrt2$ e $x\geq3\sqrt2$. La soluzione è l'unione di queste semirette con il punto $0$. In $x=1$ il modulo vale $8$, quindi si comprende perché il punto centrale resta separato dal ramo di destra. Per la simmetria del quadrato, lo stesso vale a sinistra.
+
+::grafico{f="abs(x^2-9);9" xmin=-5.2 xmax=5.2 ymin=-1 ymax=18 punti="-4.2426406871,9,pieno;0,9,pieno;4.2426406871,9,pieno" titolo="La quota $9$ è raggiunta anche in $x=0$, che è una soluzione isolata"}
+
+:::
+
 ## Radicali e dominio
 
 :::definizione{#radicali titolo="Radice quadrata reale"}
@@ -79,6 +140,15 @@ Una radice di indice pari impone un radicando maggiore o uguale a zero. Una radi
 
 :::esempio{titolo="Due condizioni di esistenza"}
 Nell'espressione $\dfrac{\sqrt{x+2}}{\sqrt{5-x}}$, il numeratore esiste per $x+2\geq0$. Il denominatore deve esistere e avere valore positivo, quindi $5-x>0$. Le due condizioni impongono rispettivamente $x\geq-2$ e $x<5$. Il dominio è $[-2,5)$. In $-2$ il numeratore vale zero e il rapporto è definito. In $5$ si annulla il denominatore, quindi il rapporto è indefinito.
+:::
+
+:::esempio{titolo="Un quoziente sotto la radice"}
+Per trovare il dominio di $\sqrt{\dfrac{x-1}{x+2}}$, il rapporto deve essere definito e non negativo. Il suo denominatore è zero in $-2$ e il numeratore è zero in $1$. I due punti dividono la retta in tre intervalli. Per $x<-2$ sia $x-1$ sia $x+2$ sono negativi, quindi il rapporto è positivo. Per $-2<x<1$ il numeratore è negativo e il denominatore positivo. Per $x>1$ sono entrambi positivi. In $x=1$ il rapporto vale zero ed è ammesso. Si ottiene così $(-\infty,-2)\cup[1,+\infty)$.
+
+Se la radice fosse a sua volta al denominatore, occorrerebbe stretta positività del radicando e si escluderebbe anche $1$. Per esempio, in $x=0$ il rapporto vale $-\dfrac12$ e nessuna delle due funzioni sarebbe reale. In $x=1$ la funzione con la sola radice vale invece zero e quella con il reciproco resta indefinita.
+
+::grafico{f="sqrt((x-1)/(x+2))" xmin=-6 xmax=6 ymin=-0.5 ymax=4 asintoti="x=-2" punti="1,0,pieno" titolo="Il ramo di destra inizia nel punto $x=1$, dove il radicando vale zero"}
+
 :::
 
 ## Equazioni con una radice
@@ -123,6 +193,37 @@ Per $x=0$ entrambi i membri iniziali valgono $2$. Per ogni $x>0$ del dominio, $\
 
 :::
 
+::::teorema{#uguaglianza-di-radici titolo="Due radici quadrate nella stessa equazione"}
+Siano $f$ e $g$ definite in un insieme $D$. L'equazione $\sqrt{f(x)}=\sqrt{g(x)}$ equivale a $f(x)=g(x)$ per tutti e soli i valori in cui i due radicandi sono non negativi. Il controllo del dominio resta necessario anche quando i radicandi, dopo un calcolo, risultano uguali.
+
+:::dimostrazione
+Se le radici sono uguali, sono definite e ciascuna è non negativa. Il loro quadrato restituisce rispettivamente $f(x)$ e $g(x)$, da cui l'uguaglianza dei radicandi. Viceversa, se i radicandi sono uguali e non negativi, per definizione hanno la stessa radice quadrata. Le due direzioni dimostrano l'equivalenza sul dominio comune.
+:::
+::::
+
+:::esempio{titolo="Il candidato comune può essere fuori dal dominio"}
+Consideriamo $\sqrt{x+1}=\sqrt{2x-1}$. Il dominio comune è $x\geq\dfrac12$. Uguagliando i radicandi si ottiene $x+1=2x-1$, quindi $x=2$. Il candidato appartiene al dominio e dà $\sqrt3$ in entrambi i membri.
+
+Se si confrontano invece $\sqrt{x-5}$ e $\sqrt{2x-6}$, il dominio comune è $x\geq5$. L'uguaglianza dei radicandi conduce a $x-5=2x-6$, da cui $x=1$. In quella ascissa entrambi i radicandi valgono $-4$, quindi nessuna delle due radici è reale. I due grafici esistono entrambi da $5$ in poi e il secondo rimane più alto, poiché $2x-6-(x-5)=x-1>0$ su quel tratto.
+
+::grafico{f="sqrt(x-5);sqrt(2*x-6)" xmin=0 xmax=10 ymin=-1 ymax=4 punti="5,0,pieno;3,0,pieno;5,2,pieno" titolo="Dove esistono entrambe, le radici hanno ordinate diverse"}
+
+:::
+
+:::esempio{titolo="Differenza fra due radici e somma coniugata"}
+In $\sqrt{x+16}-\sqrt x=2$, entrambe le radici esistono per $x\geq0$. Poniamo $u=\sqrt{x+16}$ e $v=\sqrt x$. Dalla richiesta $u-v=2$ si può ricavare anche la somma. Infatti la differenza dei quadrati vale $16$, indipendentemente dall'ascissa.
+
+$$
+\begin{aligned}
+u^2-v^2&=(x+16)-x=16,\\[4pt]
+(u-v)(u+v)&=16,\\[4pt]
+u+v&=8.
+\end{aligned}
+$$
+
+Si può dividere per $u-v$ perché, in una soluzione, vale $2$. Sottraendo $u-v=2$ da $u+v=8$ si trova $2v=6$, quindi $\sqrt x=3$ e $x=9$. La verifica nella traccia originale dà $\sqrt{25}-\sqrt9=5-3=2$. In questo caso basta risolvere un sistema lineare nelle due radici. Il controllo finale conferma che i valori $u=5$ e $v=3$ vengono effettivamente dallo stesso $x$.
+:::
+
 ## Disequazioni con una radice
 
 :::teorema{#confronti titolo="Confrontare quantità non negative"}
@@ -144,6 +245,13 @@ $$
 Intersecando il secondo caso con $x\geq0$ si ottiene $[0,2)$. Unendo i due casi, la soluzione è $[-2,2)$. Si include $-2$ perché $0>-2$, mentre $2$ è escluso perché le ordinate sono uguali.
 :::
 
+:::esempio{titolo="Una soglia fra zero e uno"}
+Per $\sqrt{x}\leq x$, il dominio è $[0,+\infty)$. Anche il secondo membro è non negativo, quindi il quadrato conserva l'inequazione. Si ottiene $x\leq x^2$, cioè $x(x-1)\geq0$. Il prodotto è positivo per $x<0$ oppure per $x>1$. Vale zero in $0$ e in $1$. Intersecando con il dominio si trova $\{0\}\cup[1,+\infty)$. Il punto $0$ è isolato nell'insieme soluzione, perché tra $0$ e $1$ la radice supera il proprio radicando. Per esempio, in $x=\dfrac14$ il primo membro vale $\dfrac12$, maggiore di $\dfrac14$. In $x=4$ la radice vale invece $2$ e il confronto è vero.
+
+::grafico{f="sqrt(x);x" xmin=-0.5 xmax=4 ymin=-0.5 ymax=4 punti="0,0,pieno;1,1,pieno;0.25,0.5,pieno" titolo="La radice e la retta si incontrano in $0$ e in $1$"}
+
+:::
+
 ## Espressioni definite a tratti
 
 :::esempio{#tratti titolo="Una somma di distanze"}
@@ -157,4 +265,13 @@ Per risolvere $|x-1|+|x-4|=5$, nel primo tratto si ottiene $5-2x=5$, quindi $x=0
 
 :::osservazione
 Se due valori assoluti cambiano formula in punti diversi, si divide la retta in corrispondenza degli zeri di tutti gli argomenti. Ogni tratto fornisce una formula valida su quel tratto. Dopo avere risolto l'equazione o la disequazione del tratto, si interseca la soluzione con il tratto stesso prima di unire i risultati. Il controllo impedisce a una formula usata fuori dal proprio intervallo di produrre soluzioni estranee.
+:::
+
+:::esempio{titolo="Due distanze con pesi diversi"}
+Consideriamo $F(x)=|x|+2|x-3|$. I cambi di espressione avvengono dove si annullano gli argomenti, cioè in $0$ e in $3$. Per $x<0$ la formula è $-x+2(3-x)=6-3x$. Per $0\leq x\leq3$ è $x+2(3-x)=6-x$. Per $x>3$ diventa $x+2(x-3)=3x-6$. In $x=0$ le due prime formule danno $6$, mentre in $x=3$ le due ultime danno $3$. Nei due tratti a sinistra di $3$ il valore diminuisce. Nel tratto destro aumenta. Il minimo è quindi $F(3)=3$, quando si annulla la distanza che pesa il doppio.
+
+Per risolvere $F(x)\leq5$ il primo tratto non fornisce valori, perché $6-3x>6$ per $x<0$. Nel tratto centrale occorre $6-x\leq5$, quindi $x\geq1$ entro $[0,3]$. Sul tratto destro, $3x-6\leq5$ dà $x\leq\dfrac{11}{3}$ entro $x>3$. I tratti utili si uniscono in $\left[1,\dfrac{11}{3}\right]$. Per verificare il confine sinistro si ottiene $1+2\cdot2=5$. Sul confine destro il valore è $3\cdot\dfrac{11}{3}-6=5$. Entrambi gli estremi sono inclusi.
+
+::grafico{f="abs(x)+2*abs(x-3);5" xmin=-1.5 xmax=5 ymin=-1 ymax=10 punti="0,6,pieno;1,5,pieno;3,3,pieno;3.6666666667,5,pieno" titolo="Le due distanze pesate hanno minimo in $x=3$ e restano sotto la soglia tra i due punti di incontro"}
+
 :::

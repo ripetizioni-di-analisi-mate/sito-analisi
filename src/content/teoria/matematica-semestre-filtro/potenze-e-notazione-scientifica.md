@@ -151,6 +151,24 @@ $$
 I litri si semplificano, quindi rimane l'unità di massa. Poiché il coefficiente intermedio $24$ vale $2{,}4\cdot10$, l'esponente aumenta da $-5$ a $-4$.
 :::
 
+::::teorema{#esponente-del-prodotto titolo="Esponente di un prodotto e di un quoziente normalizzati"}
+Siano $x=a\cdot10^m$ e $y=b\cdot10^n$ due numeri positivi in notazione scientifica, con $1\le a<10$ e $1\le b<10$. Allora valgono le scritture seguenti, nelle quali il coefficiente è sempre maggiore o uguale a $1$ e minore di $10$.
+
+- Se $ab<10$, allora $xy=ab\cdot10^{m+n}$.
+- Se $ab\ge10$, allora $xy=\dfrac{ab}{10}\cdot10^{m+n+1}$.
+- Se $a\ge b$, allora $\dfrac{x}{y}=\dfrac{a}{b}\cdot10^{m-n}$.
+- Se $a<b$, allora $\dfrac{x}{y}=\dfrac{10a}{b}\cdot10^{m-n-1}$.
+
+Dopo un prodotto o un quoziente la normalizzazione richiede quindi al più uno spostamento dell'esponente di un'unità. Per esempio, in $(3\cdot10^4)(4\cdot10^{-2})$ si ha $ab=12\ge10$, perciò l'esponente del risultato è $4-2+1=3$ e il prodotto vale $1{,}2\cdot10^3$.
+
+:::dimostrazione
+L'idea è stimare il prodotto e il quoziente dei coefficienti con le disuguaglianze che li definiscono. Poiché $1\le a<10$ e $1\le b<10$, moltiplicando membro a membro disuguaglianze fra numeri positivi si ottiene $1\le ab<100$. Se $ab<10$, il coefficiente $ab$ è già normalizzato. Se $10\le ab<100$, dividendo per $10$ si ottiene $1\le\dfrac{ab}{10}<10$, e il fattore $10$ tolto al coefficiente passa all'esponente, che diventa $m+n+1$.
+
+Per il quoziente, poiché $a\ge1$ e $b<10$ si ha $\dfrac{a}{b}>\dfrac{1}{10}$, e poiché $a<10$ e $b\ge1$ si ha $\dfrac{a}{b}<10$. Se $a\ge b$, allora $\dfrac{a}{b}\ge1$ e il coefficiente è normalizzato. Se $a<b$, allora $\dfrac{1}{10}<\dfrac{a}{b}<1$, quindi $1<\dfrac{10a}{b}<10$, e il fattore $10$ aggiunto al coefficiente si compensa con l'esponente $m-n-1$.
+:::
+
+::::
+
 :::esempio{titolo="Normalizzazione con coefficiente minore di uno"}
 Si consideri il quoziente di $2\cdot10^{-6}$ e $8\cdot10^{-4}$.
 $$
@@ -213,6 +231,27 @@ Per $x>0$, $p$ intero e $q\ge2$, vale $x^{\frac{p}{q}}=\left(\sqrt[q]{x}\right)^
 
 :::
 
+::::teorema{#radice-prodotto titolo="Radice di un prodotto"}
+Siano $a\ge0$, $b\ge0$ e $q\ge2$ un intero. Allora
+$$
+\sqrt[q]{ab}=\sqrt[q]{a}\,\sqrt[q]{b}.
+$$
+Se l'indice $q$ è dispari, l'uguaglianza vale per ogni coppia di numeri reali $a$ e $b$. La proprietà permette di separare il coefficiente dalla potenza di dieci quando si estrae una radice da un numero in notazione scientifica. Per esempio, $\sqrt{4\cdot10^{-6}}=\sqrt{4}\,\sqrt{10^{-6}}=2\cdot10^{-3}$, perché $\left(10^{-3}\right)^2=10^{-6}$.
+
+:::dimostrazione
+L'idea è verificare che il secondo membro possiede le due proprietà che definiscono la radice $q$-esima di $ab$. Per la potenza di un prodotto,
+$$
+\left(\sqrt[q]{a}\,\sqrt[q]{b}\right)^q=\left(\sqrt[q]{a}\right)^q\left(\sqrt[q]{b}\right)^q=ab.
+$$
+Se $a\ge0$ e $b\ge0$, le due radici sono non negative, quindi anche il loro prodotto è non negativo. Il numero $\sqrt[q]{a}\,\sqrt[q]{b}$ è perciò il numero non negativo la cui potenza $q$-esima vale $ab$, cioè $\sqrt[q]{ab}$. Se $q$ è dispari, la radice reale di $ab$ è unica, quindi coincide con l'unico numero la cui potenza $q$-esima vale $ab$, e il calcolo precedente basta senza condizioni sul segno.
+:::
+
+::::
+
+:::attenzione
+La radice di una somma è in generale diversa dalla somma delle radici. Per esempio, $\sqrt{9+16}=\sqrt{25}=5$, mentre $\sqrt{9}+\sqrt{16}=3+4=7$. Per questo motivo, in $\sqrt{2{,}5\cdot10^{-7}+1{,}1\cdot10^{-7}}$ si sommano prima i due termini del radicando e solo dopo si estrae la radice.
+:::
+
 :::esempio{titolo="Radice quadrata con esponente decimale dispari"}
 Si consideri $\sqrt{3{,}6\cdot10^{-5}}$. Per applicare la radice quadrata alla potenza di dieci si può riscrivere il radicando con esponente pari.
 $$
@@ -229,7 +268,7 @@ Il passaggio da $3{,}6$ a $36$ è compensato dalla diminuzione dell'esponente di
 :::osservazione{#esponente-della-radice titolo="Scomposizione del radicando"}
 Se $x=a\cdot10^n$ con $a>0$ e $n$ è multiplo dell'indice $q$, allora $\sqrt[q]{x}=\sqrt[q]{a}\cdot10^{\frac{n}{q}}$. Infatti, elevando il prodotto a $q$ si ottiene $a\cdot10^n$. La stessa scomposizione vale per $a<0$ se l'indice $q$ è dispari. Per esempio, in $\sqrt[3]{-64\cdot10^{-9}}$ si ottiene $\sqrt[3]{-64}=-4$ e il quoziente tra l'esponente $-9$ e l'indice tre vale $-3$. La radice è quindi $-4\cdot10^{-3}$.
 
-Se $n$ non è un multiplo di $q$, si può scegliere un altro esponente e compensare la variazione nel coefficiente. Per la radice cubica di $2{,}7\cdot10^{-5}$ conviene riscrivere il radicando come $27\cdot10^{-6}$. L'esponente $-6$ è multiplo di tre e la radice cubica di $27$ vale tre. Si ottiene quindi $3\cdot10^{-2}$.
+Se $n$ non è un multiplo di $q$, si può scegliere un altro esponente e compensare la variazione nel coefficiente. Per la radice cubica di $2{,}7\cdot10^{-5}$ si riscrive il radicando come $27\cdot10^{-6}$. L'esponente $-6$ è multiplo di tre e la radice cubica di $27$ vale tre. Si ottiene quindi $3\cdot10^{-2}$.
 :::
 
 ## Stime e ordini di grandezza

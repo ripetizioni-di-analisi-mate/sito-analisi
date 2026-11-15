@@ -82,11 +82,17 @@ $$
 $$
 La formula segue isolando la soglia standardizzata nella formula di $\pi(\mu_0+\delta)$ e usando la simmetria della normale. Quando il membro destro è positivo, si eleva al quadrato dopo aver isolato $\sqrt n$ e si arrotonda all'intero superiore. Per esempio, con $\delta=4$, $\sigma=10$, $\alpha=0{,}05$ e potenza minima $0{,}80$, si ottiene $n\ge(2{,}487\cdot 2{,}5)^2\approx38{,}66$, quindi servono almeno $39$ osservazioni. Se la differenza da rilevare si dimezza e gli altri dati restano fissi, la soglia teorica su $n$ quadruplica.
 
+Con $n=39$ la potenza in $\mu=54$ è $1-\Phi\!\left(1{,}645-\dfrac{4\sqrt{39}}{10}\right)=1-\Phi(-0{,}853)\approx0{,}803$, mentre con $n=25$ è circa $0{,}639$. Le due funzioni di potenza valgono entrambe $0{,}05$ in $\mu=50$, perché la soglia è fissata dal livello.
+
+::grafico{f="1/(1+exp(1.5976*(1.6449-(x-50)/2)*(1+0.04417*(1.6449-(x-50)/2)^2)));1/(1+exp(1.5976*(1.6449-(x-50)*0.6245)*(1+0.04417*(1.6449-(x-50)*0.6245)^2)))" punti="50,0.05,pieno;54,0.639,pieno;54,0.803,pieno" segmenti="54,0,54,0.803;44,0.8,54,0.8" etichette="54.5,0.58,0,639;51.7,0.87,0,803" xmin=43.3 xmax=62 ymin=-0.1 ymax=1.12 nomi="μ,π" legenda="n=25;n=39" titolo="Funzioni di potenza del test con $\mu_0=50$, $\sigma=10$ e $\alpha=0{,}05$. In $\mu=54$ la potenza passa da $0{,}639$ con $n=25$ a $0{,}803$ con $n=39$."}
+
 :::
 
 :::esempio{titolo="Livello effettivo con un conteggio discreto"}
 
 Sia $X$ il numero di successi in cinque prove indipendenti. Sotto $H_0:p=\dfrac12$ il test superiore rifiuta se $X=5$. Il rischio di rifiuto sotto $H_0$ è $\dfrac1{32}$, cioè $0{,}03125$. Estendendo il rifiuto a quattro successi, il rischio salirebbe a $\dfrac6{32}=0{,}1875$, perché si aggiungerebbero le cinque sequenze con un solo insuccesso. Fra le due regioni considerate, soltanto la prima ha livello al più $0{,}05$. Sotto l'alternativa $p=\dfrac34$, la stessa regione ha potenza $\left(\dfrac34\right)^5\approx0{,}2373$. In entrambi i calcoli si sommano le probabilità della stessa regione critica usando la legge del conteggio per il parametro indicato.
+
+::grafico{xmin=-0.7 xmax=5.8 ymin=-0.045 ymax=0.45 nomi="x,P" poligoni="4.62,0 4.62,0.03125 4.98,0.03125 4.98,0;5.02,0 5.02,0.2373 5.38,0.2373 5.38,0" linee="-0.38,0 -0.38,0.03125 -0.02,0.03125 -0.02,0;0.62,0 0.62,0.15625 0.98,0.15625 0.98,0;1.62,0 1.62,0.3125 1.98,0.3125 1.98,0;2.62,0 2.62,0.3125 2.98,0.3125 2.98,0;3.62,0 3.62,0.15625 3.98,0.15625 3.98,0;4.62,0 4.62,0.03125 4.98,0.03125 4.98,0;0.02,0 0.02,0.00098 0.38,0.00098 0.38,0;1.02,0 1.02,0.01465 1.38,0.01465 1.38,0;2.02,0 2.02,0.08789 2.38,0.08789 2.38,0;3.02,0 3.02,0.26367 3.38,0.26367 3.38,0;4.02,0 4.02,0.39551 4.38,0.39551 4.38,0;5.02,0 5.02,0.2373 5.38,0.2373 5.38,0" etichette="4.5,0.065,0,031;4.95,0.27,0,237" titolo="Per ogni valore di $X$, a sinistra la probabilità con $p=\dfrac{1}{2}$ e a destra quella con $p=\dfrac{3}{4}$. Le barre colorate formano la regione critica $X=5$, con probabilità $0{,}031$ sotto $H_0$ e $0{,}237$ sotto l'alternativa."}
 
 :::
 
@@ -203,6 +209,8 @@ $$
 $$
 Il quantile di ordine $0{,}975$ del riferimento t è circa $2{,}184$, quindi il valore osservato conduce al rifiuto al livello $0{,}05$. La maggiore incertezza della prima media pesa anche nel calcolo dei gradi di libertà, che qui sono inferiori a $9+9-2=16$.
 
+::grafico{f="0.3905641*(1+x^2/11.7647)^(-6.382353)" area="0.3905641*(1+x^2/11.7647)^(-6.382353);0;-4.5;-2.184|0.3905641*(1+x^2/11.7647)^(-6.382353);0;2.184;4.5" segmenti="-2.184,0,-2.184,0.0445;2.184,0,2.184,0.0445" punti="2.236,0,pieno" etichette="2.5,0.09,2,236" xmin=-4.5 xmax=4.5 ymin=-0.06 ymax=0.45 nomi="t,f" legenda="t_{11{,}765}" titolo="Densità t con $\nu\approx11{,}765$ gradi di libertà. Le code oltre $-2{,}184$ e $2{,}184$ hanno area $0{,}025$ ciascuna e il valore osservato $2{,}236$ si trova nella coda destra."}
+
 :::
 
 ## Adattamento e indipendenza
@@ -233,6 +241,8 @@ La statistica di Pearson si ottiene sommando gli addendi su tutte le celle. Con 
 :::esempio{titolo="Indipendenza in una tabella due per due"}
 
 Per due gruppi di $40$ unità si osservano rispettivamente $30$ e $10$ successi. La colonna dei successi totalizza $40$ su $80$, quindi l'atteso dei successi in ciascuna riga è $\dfrac{40\cdot40}{80}=20$. Anche l'atteso dei mancati successi vale $20$ in ciascuna riga. Tutti e quattro gli scostamenti assoluti sono $10$, perciò $Q=4\cdot\dfrac{100}{20}=20$. I gradi di libertà sono $(2-1)(2-1)=1$. Poiché il quantile di ordine $0{,}95$ è circa $3{,}841$, si rifiuta l'indipendenza al livello $0{,}05$.
+
+::grafico{f="exp(-x/2)/sqrt(2*PI*x)" area="exp(-x/2)/sqrt(2*PI*x);0;3.841;22" segmenti="3.841,0,3.841,0.0298" punti="20,0,pieno" etichette="3.2,0.1,3,841;19.2,0.06,Q = 20" xmin=-0.6 xmax=22 ymin=-0.06 ymax=0.62 nomi="q,f" legenda="\chi^2_{1}" titolo="Densità chi quadrato con un grado di libertà. La regione di rifiuto comincia a $3{,}841$ e ha area $0{,}05$. Il valore osservato $Q=20$ si trova molto oltre la soglia."}
 
 :::
 
@@ -279,6 +289,10 @@ Per esempio, con cinque test e rischio familiare $0{,}05$, ogni decisione si pre
 Si consideri una famiglia di test di livello $\alpha$ per ogni valore $\theta_0$ del parametro. L'insieme dei valori $\theta_0$ che il test non rifiuta è un insieme di confidenza di livello almeno $1-\alpha$. Infatti, se il parametro vale $\theta$, la probabilità che $\theta$ appartenga all'insieme coincide con la probabilità di mancato rifiuto sotto l'ipotesi vera, che è almeno $1-\alpha$.
 
 Nel caso della media normale con varianza ignota, la condizione $|t_{\mathrm{oss}}|<t_{n-1,1-\frac{\alpha}{2}}$ equivale a richiedere che $\mu_0$ sia tra i due estremi $\bar x\pm t_{n-1,1-\frac{\alpha}{2}}\dfrac{s}{\sqrt n}$. Per la regola $p\le\alpha$, i valori esattamente agli estremi sono rifiutati. La convenzione di includerli nell'intervallo chiuso ha lo stesso livello di copertura nel modello continuo. La corrispondenza si usa con intervallo e test costruiti dallo stesso modello e dalla stessa statistica.
+
+Per esempio, con $\bar x=96$, $s=8$ e $n=16$ si ha $\dfrac{s}{\sqrt n}=2$ e $t_{15,0{,}975}\approx2{,}131$, quindi l'intervallo al $95\%$ è $96\pm4{,}262$, cioè $[91{,}738;\ 100{,}262]$. Il valore $\mu_0=100$ è interno all'intervallo, perciò il test bilatero al livello $0{,}05$ non rifiuta $H_0:\mu=100$.
+
+::grafico{f="abs(96-x)/2;2.131" segmenti="91.738,0,91.738,2.131;100.262,0,100.262,2.131" linee="91.738,0 100.262,0" punti="91.738,0,pieno;100.262,0,pieno;100,2,pieno" etichette="100.4,1.6,μ₀ = 100" xmin=86.3 xmax=105 ymin=-0.5 ymax=4.6 nomi="μ₀,|t|" legenda="|t_{\mathrm{oss}}(\mu_0)|;t_{15,0{,}975}" titolo="Valore assoluto della statistica t in funzione del valore nullo $\mu_0$, con $\bar x=96$, $s=8$ e $n=16$. I valori di $\mu_0$ non rifiutati formano l'intervallo $[91{,}738;\ 100{,}262]$."}
 
 Per l'alternativa inferiore, invertire il test t dà invece un insieme illimitato inferiormente. Il suo estremo superiore è $\bar x+t_{n-1,1-\alpha}\dfrac{s}{\sqrt n}$. Un valore nullo sopra l'estremo è rifiutato perché la media osservata si trova troppo a sinistra. Si usa qui il quantile di ordine $1-\alpha$, perché tutta la probabilità di rifiuto al confine nullo è assegnata a una sola coda.
 

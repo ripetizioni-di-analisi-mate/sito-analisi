@@ -29,6 +29,13 @@ The difference is $\dfrac{34}{3}-\dfrac{16}{3}=6$, so $R$ and $P$ meet the same 
 The absolute difference is at most $2c$, by the triangle inequality applied to $P,F_1,F_2$. If $2a>2c$, the locus is empty. When $2a=2c$, the locus consists of two rays on the line through the foci, extending outward from the segment and including its endpoints. When $a=0$, the locus is the perpendicular bisector of the segment between the foci. These boundary cases explain why the definition requires $0<a<c$.
 :::
 
+:::esempio{titolo="Reading a signed difference"}
+On the line through the foci $F_1=(-5,0)$ and $F_2=(5,0)$, a point with abscissa $-5\leq x\leq5$ has distances $x+5$ and $5-x$. Their difference, taken in the order $PF_1-PF_2$, is therefore $2x$. The condition $|2x|=6$ gives the points $(-3,0)$ and $(3,0)$. Outside the segment joining the foci, the absolute difference is always $10$, because the segment to the farther focus contains the entire segment $F_1F_2$. This accounts for both vertices and explains the restriction on the constant $2a$. These observations also help with the inverse problem. If a curve with those foci has a vertex of abscissa $4$, its transverse semiaxis is $4$ and the constant in its definition is $8$.
+
+::grafico{xmin=-7 xmax=7 ymin=-1.5 ymax=2 uguale=1 punti="-5,0,pieno,F_1;5,0,pieno,F_2;-3,0,pieno,V_1;3,0,pieno,V_2" segmenti="3,0,-5,0;3,0,5,0" titolo="Along the focal line, $V_2$ is $8$ units from $F_1$ and $2$ units from $F_2$."}
+
+:::
+
 ## Standard equations and vertices
 
 ::::teorema{#assi titolo="Equation of an origin-centered hyperbola"}
@@ -70,6 +77,23 @@ The two expressions being squared are positive, so the distances are $\dfrac{cx}
 Dividing $9y^2-4x^2=36$ by $36$ gives $\dfrac{y^2}{4}-\dfrac{x^2}{9}=1$. Hence $a=2$, $b=3$, and the vertices are $(0,2)$ and $(0,-2)$. The substitution $x\mapsto -x$ preserves the equation and maps each branch to itself. The substitution $y\mapsto -y$ swaps the two branches. Combining the two reflections gives symmetry through the origin.
 :::
 
+:::esempio{titolo="Vertical form and the empty strip"}
+For the example $9y^2-4x^2=36$, solve for the ordinate as a function of $x$. At every abscissa this gives one positive and one negative value.
+
+$$
+\begin{aligned}
+9y^2&=36+4x^2\\
+y^2&=4+\frac{4x^2}{9}\\
+y&=\pm2\sqrt{1+\frac{x^2}{9}}.
+\end{aligned}
+$$
+
+Since $y^2\geq4$, the two branches lie entirely in the half-planes $y\geq2$ and $y\leq-2$. The sign of $y$ therefore identifies the branch. For example, at $x=3$ the points are $(3,2\sqrt2)$ and $(3,-2\sqrt2)$, on different branches. The point $(3,0)$ is the midpoint of the right side of the reference rectangle, but substituting it gives $-36$ instead of $36$ on the left-hand side. This calculation distinguishes points used to construct the rectangle from vertices of the curve.
+
+::grafico{f="2*sqrt(1+x^2/9);-2*sqrt(1+x^2/9)" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="0,2,pieno,V_1;0,-2,pieno,V_2;3,2.8284271247,pieno,P;3,-2.8284271247,pieno,Q;3,0,vuoto" segmenti="3,-2.8284271247,3,2.8284271247" legenda="y=2\sqrt{1+\dfrac{x^2}{9}};y=-2\sqrt{1+\dfrac{x^2}{9}}" titolo="The vertical line $x=3$ meets both branches, while the strip between heights $-2$ and $2$ contains no points of the curve."}
+
+:::
+
 ## Foci and eccentricity
 
 :::teorema{#fuochi titolo="Focal distance and eccentricity"}
@@ -90,6 +114,23 @@ The $y$ term is positive because the foci are on the vertical axis. The number $
 
 :::osservazione
 Since $c^2=a^2+b^2$, we have $e^2=1+\dfrac{b^2}{a^2}$. With $a$ fixed, increasing $e$ increases $b$ and changes the slopes of the asymptotes. For example, $a=3$ and $e=\sqrt2$ give $b^2=9$, while $a=3$ and $e=\dfrac53$ give $b^2=16$. The same distance from the vertices to the center can therefore give different shapes.
+:::
+
+:::esempio{titolo="Chord through a focus"}
+For a horizontal hyperbola, the vertical line through the right focus is $x=c$. Substituting the relation $c^2=a^2+b^2$ gives the ordinates of the chord through that focus.
+
+$$
+\begin{aligned}
+\frac{y^2}{b^2}&=\frac{c^2}{a^2}-1
+=\frac{b^2}{a^2}\\
+y&=\pm\frac{b^2}{a}.
+\end{aligned}
+$$
+
+The chord is $\dfrac{2b^2}{a}$ units long. For $a=4$ and $b=3$, the focus is $F=(5,0)$ and the two ordinates are $\pm\dfrac94$. The focus is at the midpoint of the chord, so each endpoint is $\dfrac94$ units from $F$. The upper endpoint is $\sqrt{10^2+(\dfrac94)^2}=\dfrac{41}{4}$ units from the left focus. The difference in distances is $\dfrac{41}{4}-\dfrac94=8=2a$, which checks the focal definition as well. The focal difference is therefore distinct from the chord length, which is $\dfrac92$ in this example.
+
+::grafico{f="3*sqrt(x^2-16)/4;-3*sqrt(x^2-16)/4" xmin=-7 xmax=8 ymin=-5 ymax=5 uguale=1 punti="-4,0;4,0;5,0,pieno,F;5,2.25,pieno,A;5,-2.25,pieno,B" segmenti="5,-2.25,5,2.25" legenda="y=\dfrac34\sqrt{x^2-16};y=-\dfrac34\sqrt{x^2-16}" titolo="Focus $F$ is the midpoint of the vertical chord whose endpoints have ordinates $\pm\dfrac94$."}
+
 :::
 
 ## Asymptotes and the reference rectangle
@@ -114,6 +155,15 @@ As $x$ grows without bound, the denominator grows without bound and the gap appr
 For $\dfrac{x^2}{9}-\dfrac{y^2}{4}=1$, the rectangle extends from $x=-3$ to $x=3$ and from $y=-2$ to $y=2$. The rising diagonal passes through the center and $(3,2)$, so its slope is $\dfrac{2}{3}$. The vertices are $(\pm3,0)$, and from there the branches approach the extended diagonals. At $x=6$ the upper point has ordinate $2\sqrt3$, while the rising line has ordinate $4$. The vertical gap is still positive, as the rationalized expression predicts.
 
 ::grafico{f="2*sqrt(x^2-9)/3;-2*sqrt(x^2-9)/3;2*x/3;-2*x/3" xmin=-8 xmax=8 ymin=-6 ymax=6 uguale=1 punti="-3,0,pieno,V_1;3,0,pieno,V_2" segmenti="-3,-2,3,-2;3,-2,3,2;3,2,-3,2;-3,2,-3,-2;6,3.464101615,6,4" legenda="y=\dfrac{2}{3}\sqrt{x^2-9};y=-\dfrac{2}{3}\sqrt{x^2-9};y=\dfrac23x;y=-\dfrac23x" titolo="The rectangle gives the slopes of the diagonals, while the vertices lie on the branches."}
+
+:::
+
+:::esempio{titolo="Same asymptotes and different transverse axes"}
+Consider $\dfrac{x^2}{9}-\dfrac{y^2}{4}=1$ and $\dfrac{y^2}{4}-\dfrac{x^2}{9}=1$. The two denominators stay with the same coordinates, so the reference rectangle stays the same. For both equations the diagonals are $y=\pm\dfrac23x$. In the first, the positive term is the $x$ term, and the vertices lie on the $x$-axis $3$ units from the center. In the second, the positive term is the $y$ term, and the vertices lie on the $y$-axis $2$ units from the center.
+
+The same pair of lines therefore bounds two distinct pairs of regions. Reconstructing the hyperbola from its asymptotes alone still leaves its orientation and scale to be determined. For example, in the horizontal case the slope $\dfrac23$ fixes the ratio $\dfrac ba$, but $a=3$, $b=2$ and $a=6$, $b=4$ give the same lines. A vertex or another known point can determine the scale.
+
+::grafico{f="2*sqrt(x^2-9)/3;-2*sqrt(x^2-9)/3;2*sqrt(1+x^2/9);-2*sqrt(1+x^2/9)" xmin=-7 xmax=7 ymin=-6 ymax=6 uguale=1 punti="-3,0;3,0;0,2;0,-2" segmenti="-7,-4.666666667,7,4.666666667;-7,4.666666667,7,-4.666666667" legenda="y=\dfrac23\sqrt{x^2-9};y=-\dfrac23\sqrt{x^2-9};y=2\sqrt{1+\dfrac{x^2}{9}};y=-2\sqrt{1+\dfrac{x^2}{9}}" titolo="The same diagonals separate the horizontal and vertical branches."}
 
 :::
 
@@ -148,6 +198,24 @@ The points have the same abscissa, so their distance is the difference between t
 For a slanted line, substitute $y=mx+q$ and check the degree of the resulting equation. For example, with $x^2-y^2=1$ and $y=x+1$, the $x^2$ terms cancel and $-2x-1=1$ remains. The only point is $(-1,0)$. The line is parallel to an asymptote and its sole intersection comes from a linear equation. The tangent at the vertex $(-1,0)$ is the vertical line $x=-1$.
 :::
 
+::::teorema{titolo="Secants through the center"}
+A line $y=mx$ through the center of a horizontal hyperbola meets the branches at two points if $|m|<\dfrac ba$. When $|m|\geq\dfrac ba$ there are no common points. This criterion classifies lines through the origin without first finding any coordinates.
+
+:::dimostrazione
+Substituting the ordinate of the line in the hyperbola equation gives
+$$
+x^2\left(\frac{1}{a^2}-\frac{m^2}{b^2}\right)=1.
+$$
+The coefficient of $x^2$ must be positive for a square to equal a positive number. This is equivalent to $m^2<\dfrac{b^2}{a^2}$. The two roots have opposite signs and give points on different branches. At equality the left-hand side is zero for every $x$, so neither asymptote meets the curve. For slopes of greater magnitude the left-hand side is always nonpositive.
+:::
+::::
+
+:::esempio{titolo="A secant and a line that misses the curve"}
+For $x^2-y^2=4$, the line $y=\dfrac{x}{2}$ gives $\dfrac34x^2=4$, so $x=\pm\dfrac{4}{\sqrt3}$ and $y=\pm\dfrac{2}{\sqrt3}$, with matching signs. The line $y=2x$ instead gives $-3x^2=4$, which has no real solutions. The same result follows by comparing the two slopes with the absolute asymptote slope of $1$.
+
+::grafico{f="sqrt(x^2-4);-sqrt(x^2-4);x/2;2*x" xmin=-5 xmax=5 ymin=-5 ymax=5 uguale=1 punti="-2,0;2,0;-2.309401077,-1.154700538,pieno,A;2.309401077,1.154700538,pieno,B" legenda="y=\sqrt{x^2-4};y=-\sqrt{x^2-4};y=\dfrac x2;y=2x" titolo="The line with the smaller slope meets both branches."}
+:::
+
 ## Rectangular hyperbolas
 
 :::definizione{#equilatera titolo="Perpendicular asymptotes and constant product"}
@@ -160,6 +228,12 @@ In coordinates $x,y$ based on the asymptotes, the form $xy=K$ is equivalent to $
 
 :::esempio{titolo="One point determines the product"}
 For a rectangular hyperbola with the coordinate axes as asymptotes, the point $P=(-2,3)$ gives $K=(-2)\cdot3=-6$. The curve is therefore $xy=-6$. Projecting $P$ onto the two axes gives a rectangle with side lengths $2$ and $3$. For any other point on the curve the side lengths are $|x|$ and $|y|$, and the area remains $|xy|=6$. The equation can therefore be read as a constant-area condition.
+:::
+
+:::osservazione
+For $xy=-6$, the points $(-2,3)$ and $(-3,2)$ have the same product and lie on the same branch. The corresponding rectangles with sides parallel to the axes both have area $6$. The distance from the origin varies. For example, $(-1,6)$ still satisfies the equation but is $\sqrt{1+36}=\sqrt{37}$ units from the origin, whereas $(-2,3)$ is $\sqrt{13}$ units away. A constant product fixes the area of the rectangles while allowing the distances from the origin to vary. The ray along $y=-x$ meets that branch at $x=-\sqrt6$, where both sides of the rectangle have length $\sqrt6$. At this point the rectangle is a square.
+
+::grafico{f="-6/x" xmin=-6 xmax=6 ymin=-5 ymax=6 uguale=1 punti="-2,3,pieno,P;-3,2,pieno,Q" segmenti="-2,0,-2,3;-2,3,0,3;-3,0,-3,2;-3,2,0,2" legenda="y=-\dfrac6x" titolo="The rectangles determined by $P$ and $Q$ have interchanged side lengths and equal area."}
 :::
 
 ## Translated hyperbolas
@@ -185,6 +259,18 @@ $$
 \end{aligned}
 $$
 This gives $C=(1,-2)$ and $a=3$. The vertices are $(-2,-2)$ and $(4,-2)$. The asymptotes are $y+2=\pm\dfrac23(x-1)$, so moving the center changes the intercepts of the lines and preserves their slopes.
+:::
+
+:::esempio{titolo="Recovering the center from the asymptotes"}
+Consider a horizontal hyperbola with asymptotes $y=2x+1$ and $y=-2x+9$. The lines meet where $2x+1=-2x+9$. This gives $x=2$ and $y=5$, so the center is $(2,5)$. The absolute slope gives $\dfrac ba=2$. Suppose the hyperbola also passes through $P=(5,5)$. Because $P$ has the same ordinate as the center, the negative term vanishes and $P$ is a vertex. Its abscissa differs by $3$, so $a=3$ and $b=6$.
+
+$$
+\frac{(x-2)^2}{9}-\frac{(y-5)^2}{36}=1 .
+$$
+
+The point condition fixes the scale of both lengths. To check both slopes, write $y-5=\pm2(x-2)$ and expand each case. This reproduces the original two lines, both through $(2,5)$.
+
+::grafico{f="5+2*sqrt((x-2)^2-9);5-2*sqrt((x-2)^2-9);2*x+1;-2*x+9" xmin=-5 xmax=9 ymin=-7 ymax=16 uguale=1 punti="2,5,vuoto,C;-1,5;5,5,pieno,P" legenda="y=5+2\sqrt{(x-2)^2-9};y=5-2\sqrt{(x-2)^2-9};y=2x+1;y=-2x+9" titolo="The center is the intersection of the lines. The horizontal distance from $C$ to $P$ determines the scale."}
 :::
 
 ## Linear fractional functions
@@ -219,4 +305,16 @@ For $f(x)=\dfrac{2x+3}{x-1}$, the identity $2x+3=2(x-1)+5$ gives $f(x)=2+\dfrac{
 
 :::attenzione
 If $ad-bc=0$, the reciprocal term vanishes. For example, $\dfrac{6x-12}{3x-6}=2$ holds for $x\ne2$ because the factor $x-2$ is canceled on the original domain. The graph is the horizontal line $y=2$ with the point $(2,2)$ removed. In this case the domain restriction gives a hole, whereas with $K\ne0$ it gives a vertical asymptote.
+:::
+
+:::esempio{titolo="Reading the sign and levels of a linear fractional function"}
+For $f(x)=3-\dfrac4{x+2}$, the graph is defined for $x\ne-2$ and the range excludes the value $3$. The differences $x+2$ and $f(x)-3$ have opposite signs. Thus for $x<-2$ the graph is above $y=3$, while for $x>-2$ it is below. Its position relative to the $x$-axis depends on the sign of $f(x)$, which requires a separate calculation.
+
+$$
+f(x)=\frac{3(x+2)-4}{x+2}=\frac{3x+2}{x+2}.
+$$
+
+The numerator and denominator change sign at $-\dfrac23$ and $-2$. Between those values the numerator is negative and the denominator is positive, so $f(x)<0$ exactly when $-2<x<-\dfrac23$. To find where the graph is at height $1$, solve $3-\dfrac4{x+2}=1$. This gives $x+2=2$ and $x=0$. The point $(0,1)$ lies on the right branch, below the excluded height $3$.
+
+::grafico{f="3-4/(x+2)" xmin=-6 xmax=5 ymin=-5 ymax=9 uguale=1 asintoti="x=-2;y=3" punti="-2,3,vuoto,C;-0.666666667,0,pieno,Z;0,1,pieno,P" titolo="The right branch is always below $y=3$. Only the part between the vertical asymptote and $Z$ is below the $x$-axis."}
 :::

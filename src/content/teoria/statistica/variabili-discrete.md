@@ -78,6 +78,8 @@ E[X^2]&=0^2\cdot\frac12+4^2\cdot\frac14+8^2\cdot\frac14=20,\\[6pt]
 \end{aligned}
 $$
 La media vale $3\,\mathrm{EUR}$, anche se il premio effettivo assume soltanto i tre importi indicati. La varianza vale $11\,\mathrm{EUR}^2$. Con un biglietto da $3\,\mathrm{EUR}$ il guadagno netto atteso è zero, mentre il guadagno effettivo dipende dall'esito.
+
+::grafico{xmin=-0.8 xmax=9.3 ymin=-0.07 ymax=0.66 nomi="x,p_X(x)" legenda=0 linee="0,0 0,0.5;4,0 4,0.25;8,0 8,0.25" punti="0,0.5,pieno;4,0.25,pieno;8,0.25,pieno" segmenti="3,0,3,0.56" etichette="3,0.61,E[X] = 3;0.35,0.54,½;4.35,0.29,¼;8.35,0.29,¼" titolo="Masse del premio in euro. La media $E[X]=3$ cade fra i valori possibili $0$ e $4$ e non è un valore assunto da $X$."}
 :::
 
 ::::teorema{#momenti-affini titolo="Momenti di una trasformazione affine"}
@@ -123,7 +125,9 @@ Si lanciano quattro dadi indipendenti e si conta quante volte compare il $6$. Og
 $$
 P(X\ge 1)=1-P(X=0)=1-\left(\frac56\right)^4.
 $$
-Per calcolare $P(X\ge2)$ conviene sottrarre invece le due masse $P(X=0)$ e $P(X=1)$. Il valore di soglia determina quali conteggi appartengono al complementare.
+Per calcolare $P(X\ge2)$ si sottraggono invece da $1$ le due masse $P(X=0)$ e $P(X=1)$. Il valore di soglia determina quali conteggi appartengono al complementare. Numericamente $P(X=0)=\dfrac{625}{1296}$, quindi $P(X\ge1)=\dfrac{671}{1296}\approx0{,}518$.
+
+::grafico{xmin=-0.7 xmax=4.8 ymin=-0.06 ymax=0.6 nomi="k,P(X = k)" legenda=0 linee="0,0 0,0.482253;1,0 1,0.385802;2,0 2,0.115741;3,0 3,0.015432;4,0 4,0.000772" punti="0,0.482253,pieno;1,0.385802,pieno;2,0.115741,pieno;3,0.015432,pieno;4,0.000772,pieno" segmenti="0.5,0,0.5,0.52" etichette="2.4,0.47,X ≥ 1" titolo="Masse di $\operatorname{Bin}\left(4,\dfrac16\right)$. A destra della linea stanno i conteggi dell'evento «almeno un $6$», a sinistra il suo complementare."}
 :::
 
 :::attenzione
@@ -151,6 +155,8 @@ Il passaggio dalla somma per valori alla somma per soglie è lecito perché i te
 
 :::esempio{titolo="Probabilità puntuale e probabilità di coda"}
 Sia $p=\dfrac14$. La probabilità che il primo successo cada alla quarta prova è $\left(\dfrac34\right)^3\dfrac14$. La probabilità che cada dopo la quarta prova è $\left(\dfrac34\right)^4$. Nel primo calcolo la quarta prova riesce, mentre nel secondo fallisce. Se il successo deve arrivare entro la quarta prova, il complementare fornisce $1-\left(\dfrac34\right)^4$.
+
+::grafico{xmin=-0.6 xmax=9.5 ymin=-0.035 ymax=0.31 nomi="k,P(T = k)" legenda=0 linee="1,0 1,0.25;2,0 2,0.1875;3,0 3,0.140625;4,0 4,0.105469;5,0 5,0.079102;6,0 6,0.059326;7,0 7,0.044495;8,0 8,0.033371" punti="1,0.25,pieno;2,0.1875,pieno;3,0.140625,pieno;4,0.105469,pieno;5,0.079102,pieno;6,0.059326,pieno;7,0.044495,pieno;8,0.033371,pieno" segmenti="4.5,0,4.5,0.27" etichette="2.5,0.29,T ≤ 4;6.7,0.29,T > 4" titolo="Prime otto masse della geometrica con $p=\dfrac14$. Le masse a destra della linea, prolungate all'infinito, sommano a $\left(\dfrac34\right)^4$."}
 :::
 
 ::::teorema{#geometrica-memoria titolo="Assenza di memoria"}
@@ -206,6 +212,8 @@ $$
 \left(1-\frac{\lambda}{n}\right)^{n-k}\longrightarrow e^{-\lambda}.
 $$
 Per $n=100$ e $p=0{,}02$ la probabilità esatta di zero successi è $0{,}98^{100}$, mentre l'approssimazione è $e^{-2}$. La prima legge assegna massa zero ai conteggi maggiori di $100$. Questo limite di supporto distingue le due leggi anche quando le masse per i conteggi piccoli sono vicine.
+
+::grafico{xmin=-0.7 xmax=5.8 ymin=-0.035 ymax=0.33 nomi="k,massa" legenda=0 linee="-0.1,0 -0.1,0.13262;0.9,0 0.9,0.270652;1.9,0 1.9,0.273414;2.9,0 2.9,0.182276;3.9,0 3.9,0.090208;4.9,0 4.9,0.035347" punti="-0.1,0.13262,pieno;0.9,0.270652,pieno;1.9,0.273414,pieno;2.9,0.182276,pieno;3.9,0.090208,pieno;4.9,0.035347,pieno;0.1,0.135335,vuoto;1.1,0.270671,vuoto;2.1,0.270671,vuoto;3.1,0.180447,vuoto;4.1,0.090224,vuoto;5.1,0.036089,vuoto" segmenti="0.1,0,0.1,0.135335;1.1,0,1.1,0.270671;2.1,0,2.1,0.270671;3.1,0,3.1,0.180447;4.1,0,4.1,0.090224;5.1,0,5.1,0.036089" titolo="Masse di $\operatorname{Bin}(100;\,0{,}02)$ a tratto pieno e di Poisson con $\lambda=2$ tratteggiate, per $k$ da $0$ a $5$. Le differenze sono minori di $0{,}003$."}
 :::
 
 ::::teorema{#momenti-poisson titolo="Calcolo dei momenti di Poisson"}
@@ -244,7 +252,9 @@ $$
 P(X=1)=\frac{\binom31\binom77}{\binom{10}8}
 =\frac{3}{45}=\frac1{15}.
 $$
-L'evento richiede tutti e sette i conformi, quindi i tre campioni favorevoli differiscono soltanto per il pezzo difettoso estratto.
+L'evento richiede tutti e sette i conformi, quindi i tre campioni favorevoli differiscono soltanto per il pezzo difettoso estratto. Con lo stesso conteggio si trova $P(X=2)=P(X=3)=\dfrac{21}{45}=\dfrac7{15}$, perché $\binom32\binom76=\binom33\binom75=21$.
+
+::grafico{xmin=-0.6 xmax=4.3 ymin=-0.06 ymax=0.6 nomi="k,P(X = k)" legenda=0 linee="1,0 1,0.066667;2,0 2,0.466667;3,0 3,0.466667" punti="1,0.066667,pieno;2,0.466667,pieno;3,0.466667,pieno" etichette="1.3,0.11,1⁄15;2.3,0.51,7⁄15;3.3,0.51,7⁄15" titolo="Numero di difettosi fra $8$ pezzi estratti da $7$ conformi e $3$ difettosi. Il valore $0$ ha massa nulla perché i conformi sono soltanto $7$."}
 :::
 
 :::osservazione

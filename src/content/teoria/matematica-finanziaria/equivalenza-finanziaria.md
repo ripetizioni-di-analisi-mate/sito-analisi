@@ -64,6 +64,8 @@ Si confrontano un pagamento di $1000$ euro oggi e un pagamento di $1210$ euro fr
 
 :::attenzione
 L'indipendenza dalla data richiede una legge scindibile. Si consideri l'interesse semplice al $10\%$ annuo con fattore $1+i(t-s)$ fra le date $s$ e $t$. Un pagamento di $100$ euro oggi e uno di $120$ euro fra due anni hanno entrambi valore $120$ euro al tempo $2$. Al tempo $1$ il primo vale $110$ euro, mentre il secondo vale $\dfrac{120}{1{,}1}\approx109{,}09$ euro. I due risultati differiscono perché $1{,}1^2=1{,}21$ mentre il fattore semplice di due anni è $1{,}2$.
+
+::grafico{f="100*(1+0.1*x)" curve="t,120/(1+0.1*(2-t)),0,2" xmin=0 xmax=2.3 ymin=94 ymax=124 nomi="t,euro" legenda="100(1+0{,}1t);\dfrac{120}{1+0{,}1(2-t)}" punti="0,100,pieno;2,120,pieno;1,110,pieno;1,109.09,vuoto" segmenti="1,94,1,110" titolo="Valori alla data $t$, in interesse semplice al 10%, di 100 euro disponibili oggi e di 120 euro esigibili al tempo 2. Le due curve si incontrano in $t=0$ e in $t=2$; in $t=1$ i valori sono 110 euro e 109,09 euro."}
 :::
 
 :::osservazione
@@ -94,6 +96,8 @@ X&=q(1210-500q)\\[6pt]
 $$
 
 Al secondo anno l'acconto rappresenta $550$ euro, quindi il residuo in quella data è $660$ euro. Un anno dopo questo residuo vale $726$ euro. Alla data iniziale il valore del piano originario è $1210q^{-2}=1000$ euro. Il nuovo piano ha lo stesso valore perché $500q^{-1}+726q^{-3}=1000$ euro.
+
+::grafico{assi=0 uguale=1 xmin=-0.4 xmax=4.6 ymin=-2.6 ymax=0.45 linee="-0.2,0 4.2,0;0,-0.07 0,0.07;1,-0.07 1,0.07;2,-0.07 2,0.07;3,-0.07 3,0.07;4,-0.07 4,0.07;-0.2,-1.7 4.2,-1.7;0,-1.77 0,-1.63;1,-1.77 1,-1.63;2,-1.77 2,-1.63;3,-1.77 3,-1.63;4,-1.77 4,-1.63" vettori="4.1,0,4.45,0;4.1,-1.7,4.45,-1.7;2,0,2,-1.21,1210;1,-1.7,1,-2.2,500;3,-1.7,3,-2.426,726" unicolore=1 etichette="4.3,0.15,t;-0.05,0.15,0;0.95,0.15,1;1.95,0.15,2;2.95,0.15,3;3.95,0.15,4;4.3,-1.55,t;-0.05,-1.55,0;0.95,-1.55,1;1.95,-1.55,2;2.95,-1.55,3;3.95,-1.55,4" titolo="Pagamenti del debitore, in euro, con le frecce verso il basso. In alto il piano originario con 1210 euro al tempo 2, in basso il piano sostitutivo con 500 euro al tempo 1 e 726 euro al tempo 3."}
 :::
 
 :::osservazione
@@ -109,6 +113,8 @@ Con due pagamenti uguali i coefficienti sono entrambi $1$. Se il secondo deve va
 
 :::esempio{titolo="Valutazione di un piano con quote proporzionali"}
 Un debito di $310$ euro al tempo $1$ è sostituito da due versamenti. Il primo, al tempo $0$, è $X$ e il secondo, al tempo $2$, è $2X$. Al $10\%$ composto annuo l'equazione al tempo $1$ è $310=qX+2q^{-1}X$. Il coefficiente di $X$ è $\dfrac{321}{110}$, quindi il primo pagamento è $\dfrac{34100}{321}\approx106{,}23$ euro e il secondo è il doppio di tale valore esatto. Nei contratti con importi ai centesimi l'eventuale differenza di arrotondamento si gestisce nel saldo.
+
+::grafico{assi=0 uguale=1 xmin=-0.4 xmax=3.6 ymin=-2.9 ymax=0.45 linee="-0.2,0 3.2,0;0,-0.07 0,0.07;1,-0.07 1,0.07;2,-0.07 2,0.07;3,-0.07 3,0.07;-0.2,-1.6 3.2,-1.6;0,-1.67 0,-1.53;1,-1.67 1,-1.53;2,-1.67 2,-1.53;3,-1.67 3,-1.53" vettori="3.1,0,3.45,0;3.1,-1.6,3.45,-1.6;1,0,1,-1.24,310;0,-1.6,0,-2.025,X;2,-1.6,2,-2.45,2X" unicolore=1 etichette="3.3,0.15,t;-0.05,0.15,0;0.95,0.15,1;1.95,0.15,2;2.95,0.15,3;3.3,-1.45,t;-0.05,-1.45,0;0.95,-1.45,1;1.95,-1.45,2;2.95,-1.45,3" titolo="Pagamenti del debitore, con le frecce verso il basso. In alto il debito di 310 euro al tempo 1, in basso i versamenti $X$ al tempo 0 e $2X$ al tempo 2, con $X\approx106{,}23$ euro."}
 :::
 
 ## Determinazione della scadenza comune
@@ -124,7 +130,11 @@ Poiché $\log q\ne0$, la soluzione reale è unica. Per $i>0$ la condizione $T\ge
 :::
 
 :::esempio{titolo="Una scadenza ricavata da potenze note"}
-Il valore attuale di un piano è $400$ euro. Il capitale concordato è $576$ euro e il tasso composto annuo è il $20\%$. Poiché $\dfrac{576}{400}=1{,}44=1{,}2^2$, il pagamento di $576$ euro è equivalente al secondo anno. Il rapporto fra importo concordato e valore attuale è il fattore di montante richiesto. Se il contratto ammette soltanto scadenze annuali intere, una soluzione fra due anniversari è incompatibile con quella restrizione e si può ricalcolare il pagamento a una data ammessa.
+Il valore attuale di un piano è $400$ euro. Il capitale concordato è $576$ euro e il tasso composto annuo è il $20\%$. Poiché $\dfrac{576}{400}=1{,}44=1{,}2^2$, il pagamento di $576$ euro è equivalente al secondo anno.
+
+::grafico{f="576*1.2^(-x);400" xmin=0 xmax=4.2 ymin=200 ymax=600 nomi="T,euro" legenda="576\cdot1{,}2^{-T};V=400" punti="2,400,pieno" segmenti="2,200,2,400" titolo="Valore attuale del capitale di 576 euro al variare della scadenza $T$, al 20% composto. La curva incontra il livello $V=400$ in $T=2$."}
+
+Il rapporto fra importo concordato e valore attuale è il fattore di montante richiesto. Se il contratto ammette soltanto scadenze annuali intere, una soluzione fra due anniversari è incompatibile con quella restrizione e si può ricalcolare il pagamento a una data ammessa.
 :::
 
 ## Scadenza media finanziaria
@@ -150,6 +160,8 @@ Il fattore $q^{-T}$ è una media ponderata dei fattori $q^{-t_k}$, quindi è com
 
 :::esempio{titolo="Differenza rispetto alla media aritmetica"}
 Si sostituiscono $100$ euro oggi e $100$ euro fra due anni con $200$ euro alla scadenza media. Al $10\%$ composto si ha $q^{-T}=\dfrac{1+q^{-2}}{2}=\dfrac{221}{242}$. Ne segue $T=\dfrac{\log\!\left(\frac{242}{221}\right)}{\log(1{,}1)}\approx0{,}9524$ anni. In sconto commerciale al $10\%$, il valore attuale è invece $100+100(1-0{,}1\cdot2)=180$ euro. L'equazione $200(1-0{,}1T)=180$ dà $T=1$ anno.
+
+::grafico{f="1.1^(-x)" xmin=-0.15 xmax=2.3 ymin=0.78 ymax=1.04 nomi="t,fattore" legenda="1{,}1^{-t}" segmenti="0,1,2,0.82645;0.9524,0.78,0.9524,0.91322;1,0.78,1,0.91322" punti="0,1,pieno;2,0.82645,pieno;1,0.91322,vuoto;0.9524,0.91322,pieno" etichette="0.84,0.795,T;1.03,0.795,1" titolo="La corda congiunge i fattori di sconto delle due scadenze. Il suo punto medio ha ordinata $\dfrac{221}{242}$ e ascissa 1; la curva raggiunge la stessa ordinata in $T\approx0{,}9524$."}
 :::
 
 :::osservazione
@@ -178,6 +190,8 @@ Il primo fattore è $q_{s+1}$ perché il capitale è disponibile alla fine del p
 
 :::esempio{titolo="Versamento intermedio in un conto"}
 Un conto parte con $1000$ euro. Alla fine del primo anno si aggiungono $200$ euro. I tassi effettivi dei primi due anni sono rispettivamente il $5\%$ e il $10\%$. Prima del versamento il saldo è $1050$ euro, quindi il saldo dopo il versamento è $1250$ euro. Al secondo anno vale $1250\cdot1{,}1=1375$ euro. Lo stesso calcolo si può svolgere per origine degli importi. Il capitale iniziale produce $1000\cdot1{,}05\cdot1{,}1=1155$ euro, mentre il versamento al tempo $1$ produce $200\cdot1{,}1=220$ euro.
+
+::grafico{curve="t,1000*1.05^t,0,1;t,1250*1.1^(t-1),1,2" xmin=0 xmax=2.3 ymin=900 ymax=1400 nomi="t,euro" legenda="\text{Primo anno, }5\%;\text{Secondo anno, }10\%" punti="0,1000,pieno;1,1050,vuoto;1,1250,pieno;2,1375,pieno" segmenti="1,1050,1,1250" titolo="Saldo del conto. Il tratto verticale al tempo 1 è il versamento di 200 euro, che porta il saldo da 1050 a 1250 euro; alla fine del secondo anno il saldo è 1375 euro."}
 :::
 
 :::osservazione
@@ -231,6 +245,8 @@ Per confrontare due piani si fissa lo stesso soggetto, si usa la stessa legge fi
 
 :::esempio{titolo="Soglia di indifferenza tra due pagamenti"}
 Un fornitore chiede $500$ euro oggi oppure $550$ euro fra un anno. Al tasso composto annuo del $10\%$ il pagamento differito vale oggi $550q^{-1}=500$ euro, quindi i due piani sono equivalenti. Al $5\%$ il pagamento differito vale circa $523{,}81$ euro e quello immediato costa meno. Al $15\%$ il pagamento differito vale circa $478{,}26$ euro e costa meno di quello immediato. La soglia dipende dal rapporto fra i due importi, mentre il costo attuale del pagamento differito diminuisce al crescere del tasso.
+
+::grafico{f="550/(1+x/100);500" xmin=0 xmax=20 ymin=400 ymax=600 nomi="i,euro" legenda="\dfrac{550}{1+i};500" punti="10,500,pieno;5,523.81,vuoto;15,478.26,vuoto" segmenti="10,400,10,500" titolo="Costo attuale del pagamento differito di 550 euro al variare del tasso annuo $i$, letto sull'asse in percentuale, e costo del pagamento immediato. Le due linee si incontrano al 10%."}
 :::
 
 :::osservazione

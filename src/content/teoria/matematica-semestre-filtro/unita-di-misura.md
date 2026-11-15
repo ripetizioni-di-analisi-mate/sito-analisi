@@ -113,6 +113,22 @@ Ogni centimetro cubo corrisponde a un millilitro, quindi la capacità è $120\,\
 Una piastra rettangolare ha base $0{,}4\,\mathrm{m}$ e altezza $50\,\mathrm{cm}$. Per calcolare l’area in metri quadrati si esprimono entrambi i lati in metri. Si ha $50\,\mathrm{cm}=0{,}50\,\mathrm{m}$, quindi l’area è $0{,}20\,\mathrm{m^2}$. Si può anche convertire il primo lato in centimetri. I lati diventano $40\,\mathrm{cm}$ e $50\,\mathrm{cm}$ e l’area vale $2000\,\mathrm{cm^2}$. Poiché un metro quadrato contiene diecimila centimetri quadrati, $2000\,\mathrm{cm^2}$ sono ancora $0{,}20\,\mathrm{m^2}$. I due percorsi rendono esplicita la differenza tra convertire ciascuna lunghezza e convertire un’area già calcolata.
 :::
 
+::::teorema{#potenze-unita titolo="Conversione di un’unità elevata a potenza"}
+Siano $u$ e $u'$ due unità della stessa grandezza, legate dall’uguaglianza $1\,u=k\,u'$ con $k>0$. Allora, per ogni intero positivo $n$,
+$$
+1\,u^n=k^n\,u'^n.
+$$
+Il caso $n=2$ riguarda le aree e il caso $n=3$ i volumi. Per esempio, poiché $1\,\mathrm{mm}=10^{-3}\,\mathrm{m}$, si ha $1\,\mathrm{mm^3}=(10^{-3})^3\,\mathrm{m^3}=10^{-9}\,\mathrm{m^3}$. Una goccia di $50\,\mathrm{mm^3}$ occupa perciò $50\cdot10^{-9}\,\mathrm{m^3}=5\cdot10^{-8}\,\mathrm{m^3}$. Con $n=3$ e $k=10$ si ottiene anche $1\,\mathrm{m^3}=10^3\,\mathrm{dm^3}=10^3\,\mathrm{L}$.
+
+:::dimostrazione
+Il simbolo $u^n$ indica il prodotto di $n$ fattori uguali a $u$. Sostituendo in ciascun fattore l’uguaglianza $1\,u=k\,u'$ si ottiene
+$$
+1\,u^n=\underbrace{(k\,u')\cdot(k\,u')\cdots(k\,u')}_{n\ \text{fattori}}.
+$$
+Il prodotto è commutativo e associativo, quindi i fattori numerici e le unità si possono raggruppare separatamente. Il prodotto dei numeri vale $k^n$ e il prodotto delle unità vale $u'^n$, perciò $1\,u^n=k^n\,u'^n$.
+:::
+::::
+
 ## Velocità, densità e portata
 
 :::osservazione{#composte titolo="Conversione di un quoziente di unità"}
@@ -298,3 +314,29 @@ c_{\mathrm{finale}}=\frac{c_1V_1+c_2V_2}{V_1+V_2}.
 $$
 È una media ponderata delle due concentrazioni. Perciò una porzione più grande pesa di più nel risultato. Mescolando $100\,\mathrm{mL}$ a $0{,}20\,\mathrm{mol/L}$ con $300\,\mathrm{mL}$ a $0{,}60\,\mathrm{mol/L}$, si ottengono $0{,}020\,\mathrm{mol}+0{,}180\,\mathrm{mol}=0{,}200\,\mathrm{mol}$. Il volume finale è $0{,}400\,\mathrm{L}$ e la concentrazione è $0{,}50\,\mathrm{mol/L}$. Il valore è compreso tra quelli iniziali ed è più vicino alla concentrazione della porzione di volume maggiore.
 :::
+
+::::teorema{#miscela-compresa titolo="Concentrazione della miscela fra le concentrazioni iniziali"}
+Si mescolano due soluzioni dello stesso soluto, di volumi $V_1>0$ e $V_2>0$ e concentrazioni $c_1\leq c_2$. Se i volumi sono additivi e il soluto si conserva, la concentrazione finale soddisfa
+$$
+c_1\leq c_{\mathrm{finale}}\leq c_2,
+\qquad
+\frac{c_{\mathrm{finale}}-c_1}{c_2-c_{\mathrm{finale}}}=\frac{V_2}{V_1}\quad (c_1<c_2).
+$$
+Il risultato serve come controllo dei calcoli sulle miscele. Un valore fuori dall’intervallo $[c_1,c_2]$ indica un errore nelle quantità di soluto o nei volumi. Mescolando $100\,\mathrm{mL}$ a $0{,}20\,\mathrm{mol/L}$ con $300\,\mathrm{mL}$ a $0{,}60\,\mathrm{mol/L}$ si ottiene $0{,}50\,\mathrm{mol/L}$. Le distanze dalle concentrazioni iniziali sono $0{,}30$ e $0{,}10\,\mathrm{mol/L}$, e il loro rapporto $3$ è uguale a $\dfrac{300}{100}$.
+
+:::dimostrazione
+Si sottrae $c_1$ dalla concentrazione finale, scrivendo $c_1$ con denominatore $V_1+V_2$.
+$$
+\begin{aligned}
+c_{\mathrm{finale}}-c_1
+&=\frac{c_1V_1+c_2V_2-c_1(V_1+V_2)}{V_1+V_2}\\[6pt]
+&=\frac{V_2\,(c_2-c_1)}{V_1+V_2}.
+\end{aligned}
+$$
+I volumi sono positivi e $c_2-c_1\geq0$, quindi la differenza è maggiore o uguale a zero e $c_{\mathrm{finale}}\geq c_1$. Con lo stesso procedimento si ottiene
+$$
+c_2-c_{\mathrm{finale}}=\frac{V_1\,(c_2-c_1)}{V_1+V_2}\geq0,
+$$
+perciò $c_{\mathrm{finale}}\leq c_2$. Se $c_1<c_2$, il quoziente delle due differenze vale $\dfrac{V_2}{V_1}$, perché il fattore $\dfrac{c_2-c_1}{V_1+V_2}$ si semplifica. Ne segue che la concentrazione finale è più vicina a quella della soluzione di volume maggiore.
+:::
+::::

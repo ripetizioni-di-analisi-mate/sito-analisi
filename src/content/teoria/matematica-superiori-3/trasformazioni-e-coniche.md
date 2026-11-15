@@ -40,6 +40,12 @@ La circonferenza $u^2+v^2=9$ viene traslata del vettore $(2,-1)$. Il centro va d
 Una traslazione conserva le distanze perché le differenze tra le coordinate di due punti restano uguali. Per esempio la differenza delle ascisse dopo la traslazione è $(u_2+h)-(u_1+h)=u_2-u_1$. La stessa cancellazione vale per le ordinate. Perciò una traslazione conserva il raggio di una circonferenza, l’apertura di una parabola e le pendenze delle rette che vengono spostate con la curva.
 :::
 
+:::esempio{titolo="Traslazione ricavata da un vertice"}
+Le parabole $y=2x^2$ e $y=2(x+3)^2-4$ hanno lo stesso coefficiente del quadrato e vertici rispettivamente $(0,0)$ e $(-3,-4)$. Il vettore che collega i vertici è $(-3,-4)$, quindi si può ottenere la seconda traslando la prima di quel vettore. Si verifica la traslazione anche su un punto diverso dal vertice. Dal punto $P=(1,2)$ si ricava $P'=(-2,-2)$ e nell’equazione immagine si trova $2(-2+3)^2-4=-2$. Il segno positivo in $x+3$ indica che per risalire all’ascissa originaria si sommano $3$ unità. Sul piano, invece, il punto si è mosso di $3$ unità a sinistra. Il coefficiente $2$ misura la variazione di ordinata a distanza orizzontale unitaria dal vertice e resta lo stesso in entrambe.
+
+::grafico{f="2*x^2;2*(x+3)^2-4" xmin=-5 xmax=3 ymin=-5 ymax=6 uguale=1 punti="0,0,pieno,V;-3,-4,pieno,V';1,2,pieno,P;-2,-2,pieno,P'" vettori="0,0,-3,-4;1,2,-2,-2" titolo="Il vertice $V$ e il punto $P$ si spostano entrambi di tre unità a sinistra e quattro in basso."}
+:::
+
 ## Simmetrie assiali e centrali
 
 :::teorema{#simmetrie titolo="Riflettere le coordinate"}
@@ -64,6 +70,18 @@ Si riflette $v=u^2$ rispetto a $y=x$. Un punto immagine ha coordinate $x=v$ e $y
 La circonferenza $(u-1)^2+(v+2)^2=4$ ha centro $(1,-2)$. Riflettendo rispetto a $x=3$ il centro va in $(5,-2)$, perché $3$ è la media di $1$ e $5$. Il raggio resta $2$. Dalla sostituzione $u=6-x$, $v=y$ si ottiene infatti $(5-x)^2+(y+2)^2=4$. Essendo $(5-x)^2=(x-5)^2$, si legge il centro dalla forma usuale.
 :::
 
+::::teorema{titolo="Comporre riflessione e traslazione"}
+Riflettere rispetto all’asse $x$ e poi traslare di $(0,k)$ produce la riflessione rispetto alla retta $y=\dfrac k2$. Se si inverte l’ordine, la retta di riflessione è $y=-\dfrac k2$. Le due trasformazioni coincidono per $k=0$.
+
+:::dimostrazione
+L’ascissa resta la stessa in entrambe le operazioni. Se la riflessione viene eseguita per prima, l’ordinata finale è $-y+k$ e il punto medio tra quella iniziale e quella finale ha quota $\dfrac{y-y+k}{2}=\dfrac k2$. I due punti sono sulla stessa verticale e quindi sono simmetrici rispetto a quella retta orizzontale. Nell’ordine inverso l’ordinata finale è $-(y+k)$, quindi il punto medio ha quota $-\dfrac k2$.
+:::
+::::
+
+:::esempio
+Con $P=(1,2)$ e $k=4$, riflettendo prima si ottiene $(1,-2)$, che la traslazione rimanda a $(1,2)$. Il punto di partenza sta dunque sulla retta $y=\dfrac42=2$, dove la riflessione composta lascia fissi i punti. Traslando prima si ottiene invece $(1,6)$, e poi $(1,-6)$. La media delle ordinate $2$ e $-6$ è $-2$, in accordo con la seconda retta di riflessione.
+:::
+
 ## Omotetie e rapporti di scala
 
 :::definizione{#omotetie titolo="Omotetia di centro assegnato"}
@@ -85,6 +103,20 @@ La circonferenza di centro $A=(4,1)$ e raggio $2$ è sottoposta a un’omotetia 
 Per un’omotetia di centro l’origine e rapporto $2$, un punto immagine $(x,y)$ proviene da $(\dfrac{x}{2},\dfrac{y}{2})$. Sostituendo in $v=u^2$ si ha $\dfrac{y}{2}=\left(\dfrac{x}{2}\right)^2$, ossia $y=\dfrac{x^2}{2}$. Il punto $(1,1)$ si sposta in $(2,2)$, che verifica la nuova equazione. Il fattore $2$ moltiplica le coordinate dei punti. Dopo la sostituzione nell’equazione il coefficiente di $x^2$ vale invece $\dfrac12$.
 :::
 
+::::teorema{titolo="Omotetia inversa e controllo del centro"}
+Per un’omotetia di centro $C$ e rapporto $\lambda\ne0$, l’inversa ha lo stesso centro e rapporto $\dfrac1\lambda$. La regola permette di risalire da un punto immagine a quello di partenza e di scrivere l’equazione immagine di un luogo.
+
+:::dimostrazione
+Per definizione $\overrightarrow{CP'}=\lambda\overrightarrow{CP}$. Si divide per $\lambda$, che è diverso da zero, e si ottiene $\overrightarrow{CP}=\dfrac1\lambda\overrightarrow{CP'}$. Se si applicano in successione rapporti $\lambda$ e $\mu$ dallo stesso centro, il vettore relativo al centro è moltiplicato per $\mu\lambda$. Il caso $\mu=\dfrac1\lambda$ restituisce quindi il vettore iniziale.
+:::
+::::
+
+:::esempio
+Per $C=(1,1)$, $\lambda=2$ e $P'=(7,5)$, il vettore da $C$ a $P'$ è $(6,4)$. Dimezzandolo si trova $(3,2)$, perciò il punto iniziale è $P=(4,3)$. Si verifica perché $P-C=(3,2)$ e raddoppiare quel vettore riporta a $P'$. Dimezzare direttamente $(7,5)$ sceglierebbe l’origine come centro. Il disegno permette di controllare l’ordine dei punti nel caso di rapporto positivo maggiore di $1$. Il punto $P$ è fra $C$ e $P'$.
+
+::grafico{xmin=-1 xmax=9 ymin=-1 ymax=7 uguale=1 punti="1,1,pieno,C;4,3,pieno,P;7,5,pieno,P'" segmenti="1,1,7,5" titolo="Il vettore da $C$ a $P'$ è due volte quello da $C$ a $P$."}
+:::
+
 ## Riconoscere le coniche senza termine misto
 
 :::teorema{#riconoscimento titolo="Segni e casi degeneri"}
@@ -103,6 +135,21 @@ $$
 \big(x-1-2(y+2)\big)\big(x-1+2(y+2)\big)=0 .
 $$
 Le due rette passano per $(1,-2)$ e hanno pendenze $\pm\dfrac12$. Sono anche le rette asintotiche dei membri della famiglia con $t\ne0$.
+:::
+
+:::esempio{titolo="Una famiglia con due rette parallele"}
+Nella famiglia $x^2-4x+3+ty=0$ l’unico termine quadratico è quello in $x$. Se $t\ne0$, la variabile $y$ si può isolare, quindi la forma ottenuta è una parabola. Se $t=0$, l’equazione si riduce a un vincolo sulla sola ascissa.
+
+$$
+\begin{aligned}
+(x-2)^2-1+ty&=0\\
+ty&=1-(x-2)^2 .
+\end{aligned}
+$$
+
+Per $t\ne0$ il vertice è $\left(2,\dfrac1t\right)$. La parabola si apre verso il basso quando $t>0$ e verso l’alto quando $t<0$. Per $t=0$ resta $(x-2)^2=1$, quindi $x=1$ oppure $x=3$ a ogni ordinata. I due membri $t=1$ e $t=-1$ sono simmetrici rispetto all’asse $x$ e lo intersecano negli stessi due punti. Le verticali del caso $t=0$ passano esattamente per quei due punti.
+
+::grafico{f="1-(x-2)^2;(x-2)^2-1" xmin=-1 xmax=5 ymin=-5 ymax=5 uguale=1 segmenti="1,-4,1,4;3,-4,3,4" punti="1,0;3,0;2,1;2,-1" legenda="y=1-(x-2)^2;y=(x-2)^2-1" titolo="Le due parabole corrispondono a $t=1$ e $t=-1$. Per $t=0$ il luogo è formato dalle due verticali tratteggiate."}
 :::
 
 ## Completare i quadrati
@@ -144,6 +191,10 @@ $$
 Il vertice è $(2,2)$ e la parabola si apre verso il basso. L’ascissa $2$ annulla il quadrato e dà quindi il valore più grande di $y$.
 :::
 
+:::esempio{titolo="Il secondo membro decide se esiste la curva"}
+Nella famiglia $x^2+y^2-4x+2y+t=0$, le due compensazioni del completamento sono $-4$ e $-1$. Quindi si ottiene $(x-2)^2+(y+1)^2=5-t$. La coppia $(2,-1)$ annulla entrambi i quadrati per ogni valore del parametro e rappresenta il centro nei casi in cui esiste una circonferenza. Per $t=1$ il secondo membro è $4$ e il raggio è $2$. Per $t=4$ è $1$, quindi il raggio si dimezza. Con $t=5$ rimane soltanto il punto $(2,-1)$ e per $t=6$ l’uguaglianza richiede una somma di quadrati negativa. Questo esempio mostra perché conviene completare i quadrati prima di dividere per il secondo membro. Per $t=5$ si tenterebbe una divisione per zero e si perderebbe proprio il caso del punto isolato.
+:::
+
 ## Intersezioni fra due curve
 
 :::teorema{#intersezioni titolo="Punti comuni come soluzioni di un sistema"}
@@ -159,6 +210,19 @@ Per $y=x^2$ e $y=2-x^2$, uguagliando le ordinate si trova $x^2=2-x^2$. Si ottien
 
 :::esempio{titolo="Eliminare i quadrati fra due circonferenze"}
 Per $x^2+y^2=5$ e $(x-2)^2+y^2=5$, la seconda equazione si sviluppa in $x^2-4x+4+y^2=5$. Sottraendo la prima si ottiene $-4x+4=0$. Perciò ogni punto comune ha $x=1$. Sostituendo nella prima equazione resta $y^2=4$ e si ottengono $(1,2)$ e $(1,-2)$. La retta $x=1$ contiene entrambi i punti, ma il sistema impone anche la circonferenza e seleziona solo quelle due ordinate.
+:::
+
+:::esempio{titolo="Intersezioni fra circonferenza e iperbole"}
+Cerchiamo i punti comuni a $x^2+y^2=5$ e $x^2-y^2=3$. Le equazioni hanno gli stessi termini quadratici, con segno opposto per quello in $y$. La somma e la differenza consentono di determinare i quadrati delle coordinate separatamente.
+$$
+\begin{aligned}
+2x^2&=5+3=8,\qquad x^2=4,\\
+2y^2&=5-3=2,\qquad y^2=1 .
+\end{aligned}
+$$
+L’ascissa può essere $-2$ oppure $2$ e l’ordinata $-1$ oppure $1$. I segni sono indipendenti, perché sostituendo ciascuna coppia le equazioni restituiscono sempre $4+1=5$ e $4-1=3$. Ci sono quindi quattro intersezioni, due per ogni ramo dell’iperbole. Tenere soltanto le coppie con segni concordi scarterebbe $(2,-1)$ e $(-2,1)$, che soddisfano le stesse due condizioni. Il disegno permette di controllare il conteggio sfruttando la simmetria rispetto a entrambi gli assi.
+
+::grafico{f="sqrt(x^2-3);-sqrt(x^2-3)" curve="sqrt(5)*cos(t),sqrt(5)*sin(t),0,6.283185307" xmin=-3.5 xmax=3.5 ymin=-3.5 ymax=3.5 uguale=1 punti="-2,1,pieno,A;2,1,pieno,B;-2,-1,pieno,C;2,-1,pieno,D" legenda="y=\sqrt{x^2-3};y=-\sqrt{x^2-3};x^2+y^2=5" titolo="I quattro punti comuni formano un rettangolo con lati paralleli agli assi."}
 :::
 
 ## Tangenza e parametri
@@ -178,6 +242,24 @@ Con questo valore l’equazione diventa $(x-1)^2=0$. Il contatto è $(1,1)$ e la
 
 :::attenzione
 La condizione $\Delta=0$ richiede che il coefficiente di secondo grado sia diverso da zero. Per $x^2-y^2=1$ e $y=x+1$, il termine quadratico si cancella, quindi resta $-2x-1=1$. La sola intersezione è $(-1,0)$, ma la retta ha pendenza $1$ ed è parallela a un asintoto. La tangente nel vertice è la verticale $x=-1$. Prima di contare le radici è quindi necessario stabilire il grado dell’equazione.
+:::
+
+::::teorema{titolo="Tangenza a una parabola per completamento del quadrato"}
+Per la parabola $y=x^2$ e una pendenza fissata $m$, la tangente è $y=mx-\dfrac{m^2}{4}$ e tocca la curva all’ascissa $\dfrac m2$. La formula permette di trovare la retta anche senza calcolare il discriminante.
+
+:::dimostrazione
+La differenza fra le ordinate di $y=x^2$ e $y=mx+q$ si può scrivere
+$$
+x^2-mx-q=\left(x-\frac m2\right)^2-\left(q+\frac{m^2}{4}\right).
+$$
+Un solo punto comune con radice doppia si ottiene quando il termine sottratto al quadrato è zero. Quindi $q=-\dfrac{m^2}{4}$ e la radice è $x=\dfrac m2$. Per un valore positivo di $q+\dfrac{m^2}{4}$ il quadrato ha due radici distinte. Per un valore negativo la differenza delle ordinate rimane positiva e la retta resta sempre sotto la parabola.
+:::
+::::
+
+:::esempio
+Per $m=2$, la retta tangente è $y=2x-1$. Alzando l’intercetta da $-1$ a $0$ si ottengono $(0,0)$ e $(2,4)$. Abbassandola da $-1$ a $-2$ non si ottengono punti comuni perché il quadrato $(x-1)^2$ dovrebbe valere $-1$. Le tre rette sono parallele, quindi a decidere il numero di intersezioni è soltanto il loro spostamento verticale.
+
+::grafico{f="x^2;2*x-1;2*x" xmin=-2 xmax=3.5 ymin=-3 ymax=6 uguale=1 punti="1,1,pieno,T;0,0;2,4" segmenti="-0.5,-3,3.5,5" legenda="y=x^2;y=2x-1;y=2x" titolo="La tangente passa per $T=(1,1)$. La parallela superiore è secante, la parallela inferiore tratteggiata non incontra la curva."}
 :::
 
 ## Luoghi geometrici e distanze
@@ -212,4 +294,17 @@ Si ottiene la parabola di vertice $(0,0)$ e asse verticale. Il punto $(4,2)$ app
 
 ::grafico{f="x^2/8;-2" xmin=-6 xmax=6 ymin=-4 ymax=6 uguale=1 punti="0,0,pieno,V;0,2,pieno,F;4,2,pieno,P;4,-2,pieno,H" segmenti="0,2,4,2;4,2,4,-2" legenda="y=\dfrac{x^2}{8};y=-2" titolo="I segmenti $FP$ e $PH$ hanno entrambi lunghezza $4$."}
 
+:::
+
+:::esempio{titolo="Equidistanza da due rette parallele"}
+Siano $r$ e $s$ le rette $y=1$ e $y=5$. Un punto $P=(x,y)$ ha distanze $|y-1|$ e $|y-5|$, perché i segmenti perpendicolari alle rette sono verticali. Poiché le distanze sono non negative, l’uguaglianza si può elevare al quadrato senza cambiare le soluzioni.
+$$
+\begin{aligned}
+(y-1)^2&=(y-5)^2\\
+y^2-2y+1&=y^2-10y+25\\
+8y&=24\\
+y&=3 .
+\end{aligned}
+$$
+L’ascissa resta libera, quindi si ottiene l’intera retta orizzontale intermedia. Un punto di quella retta dista infatti $2$ unità da ciascuna. Lo stesso ragionamento vale per due rette orizzontali distinte $y=u$ e $y=v$, sostituendo le costanti. L’ordinata del luogo è sempre $\dfrac{u+v}{2}$. Per due rette verticali distinte vale la relazione corrispondente tra le ascisse.
 :::

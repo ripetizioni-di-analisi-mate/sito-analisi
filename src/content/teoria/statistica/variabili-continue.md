@@ -103,6 +103,9 @@ Per $a<b$, la notazione $X\sim U(a,b)$ indica che $X$ ha densità costante $\dfr
 
 :::esempio{titolo="Intervallo che supera il supporto"}
 Una consegna arriva tra le ore $8$ e le ore $12$ con orario uniforme in quell'intervallo. L'evento «dopo le $10$ e prima delle $13$» ha la stessa probabilità dell'arrivo tra le $10$ e le $12$. La parte utile dell'intervallo dura due ore, quindi la probabilità vale $\dfrac24=\dfrac12$. Il calcolo riguarda il modello uniforme dato nell'esercizio, che assegna la stessa probabilità a finestre della stessa durata entro il supporto.
+
+::grafico{linee="0,0 8,0;8,0.25 12,0.25;12,0 14.4,0" area="0.25;0;10;12" segmenti="8,0,8,0.25;12,0,12,0.25;13,0,13,0.12;0,0.25,8,0.25" etichette="13,0.15,13;0.9,0.27,0,25" xmin=-0.6 xmax=14.6 ymin=-0.04 ymax=0.34 nomi="x,f_X" legenda=0 titolo="Densità di $U(8,12)$, alta $\dfrac14$. Dell'intervallo da $10$ a $13$ conta solo la parte fino a $12$, che ha area $2\cdot\dfrac14=\dfrac12$"}
+
 :::
 
 ::::teorema{#parametri-uniforme titolo="Quantili e momenti dell'uniforme"}
@@ -134,6 +137,9 @@ $$
 q_p=-\frac{\log(1-p)}{\lambda}.
 $$
 Qui $\log$ indica il logaritmo naturale. Se il tasso è $\dfrac14\,\mathrm{min}^{-1}$, la media vale $4\,\mathrm{min}$ e la mediana vale $4\log 2\,\mathrm{min}$. La mediana è più piccola della media perché $\log 2<1$.
+
+::grafico{curve="t,exp(-t/4)/4,0,16" area="exp(-x/4)/4;0;0;2.7726" segmenti="2.7726,0,2.7726,0.125;4,0,4,0.09197" etichette="3.9,0.14,mediana;5.1,0.105,media" xmin=-0.6 xmax=16.5 ymin=-0.025 ymax=0.3 nomi="x,f_X" legenda="f_X(x)=\dfrac14e^{-x/4}" titolo="Densità esponenziale con tasso $\dfrac14$. L'area colorata vale $\dfrac12$ e termina nella mediana $4\log 2\approx2{,}77$, a sinistra della media $4$"}
+
 :::
 
 ::::teorema{#assenza-di-memoria titolo="Assenza di memoria"}
@@ -192,6 +198,9 @@ Per $X\sim N(40,25)$, la deviazione standard è $5$. Le soglie $35$ e $45$ corri
 
 :::osservazione{titolo="Quantili e limiti di tolleranza"}
 Sia $z_p$ il quantile di ordine $p$ della normale standard. Se $X\sim N(\mu,\sigma^2)$, allora $q_p=\mu+\sigma z_p$, perché standardizzando quella soglia si ottiene proprio $z_p$. Un intervallo centrale al $95\%$ lascia il $2{,}5\%$ in ogni coda, quindi si usano gli ordini $0{,}025$ e $0{,}975$. Una sola soglia superiore che lascia a destra il $5\%$ richiede invece il quantile di ordine $0{,}95$.
+
+::grafico{f="exp(-x*x/2)/sqrt(2*PI)" area="exp(-x*x/2)/sqrt(2*PI);0;-4;-1.96|exp(-x*x/2)/sqrt(2*PI);0;1.96;4" segmenti="-1.96,0,-1.96,0.05844;1.96,0,1.96,0.05844" etichette="-1.96,0.1,−1,96;1.96,0.1,1,96" xmin=-4 xmax=4 ymin=-0.045 ymax=0.46 nomi="z,f_Z" legenda="f_Z(z)" titolo="Le due code colorate oltre $z_{0{,}025}\approx-1{,}96$ e $z_{0{,}975}\approx1{,}96$ hanno area $0{,}025$ ciascuna"}
+
 :::
 
 ## Gamma, chi quadrato, Student e Fisher
@@ -203,6 +212,9 @@ f_X(x)=\frac{\lambda^k}{\Gamma(k)}x^{k-1}e^{-\lambda x}
 \qquad\text{per }x>0,
 $$
 e densità zero altrove. La funzione gamma è $\Gamma(k)=\int_0^\infty t^{k-1}e^{-t}\,dt$. Il cambio di variabile $t=\lambda x$ mostra che l'integrale della densità è uno. Con $k=1$ si ottiene l'esponenziale, perché $\Gamma(1)=1$. In questa parametrizzazione, $E[X]=\dfrac{k}{\lambda}$ e $\operatorname{Var}(X)=\dfrac{k}{\lambda^2}$. Se la forma vale $3$ e il tasso vale $2$, la media è $\dfrac32$ e la varianza $\dfrac34$.
+
+::grafico{curve="t,4*t*t*exp(-2*t),0,5" segmenti="1.5,0,1.5,0.44808" punti="1,0.54134,pieno" etichette="1.85,0.5,media 1,5;0.7,0.6,moda 1" xmin=-0.25 xmax=5.2 ymin=-0.06 ymax=0.68 nomi="x,f_X" legenda="f_X(x)=4x^2e^{-2x}" titolo="Densità gamma con forma $3$ e tasso $2$. Il massimo è in $x=1$, la media in $x=\dfrac32$"}
+
 :::
 
 :::osservazione{titolo="Momenti della gamma"}
@@ -216,6 +228,9 @@ Se $Z_1,\ldots,Z_\nu$ sono normali standard indipendenti, con $\nu$ intero posit
 - Se $U\sim\chi^2_r$ e $V\sim\chi^2_s$ sono indipendenti, la variabile $\dfrac{\frac{U}{r}}{\frac{V}{s}}$ ha legge $F_{r,s}$ di Fisher.
 
 Le distribuzioni chi quadrato e Fisher assumono valori non negativi. La t di Student assume valori di entrambi i segni ed è simmetrica perché il numeratore è simmetrico e indipendente dal denominatore positivo. Nei capitoli sugli intervalli e sui test si useranno i loro quantili. Per una legge $F_{r,s}$, il primo indice si riferisce alla variabile al numeratore.
+
+::grafico{f="0.367553*(1+x^2/3)^(-2);exp(-x^2/2)/sqrt(2*PI)" area="0.367553*(1+x^2/3)^(-2);0;-4.5;-1.96|0.367553*(1+x^2/3)^(-2);0;1.96;4.5" segmenti="-1.96,0,-1.96,0.07067;1.96,0,1.96,0.07067" xmin=-4.5 xmax=4.5 ymin=-0.04 ymax=0.46 nomi="t,f" legenda="t_3;N(0,1)" titolo="Densità della $t_3$ e della normale standard. Oltre $\pm1{,}96$ la normale lascia il $5\%$, mentre le code colorate della $t_3$ hanno area complessiva $0{,}145$ circa"}
+
 :::
 
 ## Trasformazioni monotone
