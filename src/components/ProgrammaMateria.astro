@@ -26,6 +26,7 @@ const { materia, titolo, argomenti, prezzo, anteprima, sblocca, compatibilita, s
 const ic = (corpo: string, tratto = 1.7) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${tratto}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${corpo}</svg>`;
 const I = {
   bersaglio: ic('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>'),
+  info: ic('<circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5"/><path d="M12 7.6v.1"/>'),
   mirino: ic('<circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.6"/>'),
   matita: ic('<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/>'),
   lente: ic('<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/>'),
@@ -47,30 +48,33 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   <section class="pm-sg">
     <span class="pm-sg-ic" set:html={I.mirino} />
     <h2>Studio guidato</h2>
+    <button type="button" class="pm-info" aria-expanded="false" aria-controls="pm-sg-info" aria-label="Come funziona lo Studio guidato" title="Come funziona" data-pm-info set:html={I.info}></button>
     <p>Il livello delle domande si adatta alle tue risposte.</p>
     {studioGuidato
       ? <a class="pm-btn" href={`/studio-guidato/${materia}`}>Inizia il test<span set:html={I.freccia} /></a>
       : <span class="pm-btn pm-btn-off">In preparazione</span>}
+    <ol class="pm-sg2" id="pm-sg-info" hidden>
+      <li><span set:html={I.matita} /><span class="pm-lungo">Rispondi alle domande</span><span class="pm-corto">Domande</span></li>
+      <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
+      <li><span set:html={I.lente} /><span class="pm-lungo">Trovi le tue lacune e la loro causa</span><span class="pm-corto">Lacune</span></li>
+      <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
+      <li><span set:html={I.percorso} /><span class="pm-lungo">Segui il percorso</span><span class="pm-corto">Percorso</span></li>
+    </ol>
   </section>
-  <ol class="pm-sg2">
-    <li><span set:html={I.matita} /><span class="pm-lungo">Rispondi alle domande</span><span class="pm-corto">Domande</span></li>
-    <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-    <li><span set:html={I.lente} /><span class="pm-lungo">Trovi le tue lacune e la loro causa</span><span class="pm-corto">Lacune</span></li>
-    <li class="pm-fr" aria-hidden="true" set:html={I.freccia} />
-    <li><span set:html={I.percorso} /><span class="pm-lungo">Segui il percorso</span><span class="pm-corto">Percorso</span></li>
-  </ol>
 
   <div class="pm-az" data-materia={prezzo ? materia : undefined}>
     <div class="pm-link">
       {prezzo && <a class="stato-bloccata" href={anteprima}><span set:html={I.occhio} />Prova gratis</a>}
       {prezzo && compatibilita && <a class="stato-bloccata" href={compatibilita}><span set:html={I.foglio} /><span class="pm-lungo">Copre il tuo esame?</span><span class="pm-corto">Copre l’esame?</span></a>}
       {prezzo && <span class="stato-sbloccata"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9.5" fill="currentColor"/><path d="M6 10.4l2.7 2.6L14 7.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Accesso completo attivo</span>}
-      <span class="pm-esame" data-pm-esame></span>
     </div>
     {prezzo && <a class="pm-sblocca stato-bloccata" href={sblocca} data-pm-apri><span set:html={I.lucchetto} /><span class="pm-sblocca-t">Sblocca tutto · {prezzo} €</span></a>}
   </div>
 
-  <h2 class="pm-ph">Programma</h2>
+  <div class="pm-ph-riga">
+    <h2 class="pm-ph">Programma</h2>
+    <span class="pm-esame" data-pm-esame></span>
+  </div>
   <ol class="pm-perc">
     {argomenti.map((a, i) => (
       <li data-arg={a.pronto ? a.slug : undefined} data-schede={a.svolti} data-verificabili={a.verificabili} data-domande={a.domande} class:list={{ 'pm-prep': !a.pronto }}>
@@ -144,7 +148,10 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   a.pm-btn:hover { background: color-mix(in srgb, var(--azione) 7%, transparent); color: var(--azione); }
   .pm-btn svg { font-size: .9rem; stroke-width: 1.7; }
   .pm-btn-off { color: var(--inchiostro-2); border-color: var(--riga); font-weight: 500; }
-  .pm-sg2 { list-style: none; margin: .5rem 0 0; padding: 0 0 0 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .6rem; font-size: .84rem; line-height: 1.3; color: var(--inchiostro-2); }
+  .pm-info { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2rem; height: 2rem; margin: 0 -.3rem; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--pm-icona); font-size: 1.1rem; cursor: pointer; }
+  .pm-info:hover, .pm-info[aria-expanded='true'] { color: var(--azione); background: color-mix(in srgb, var(--azione) 8%, transparent); }
+  .pm-sg2[hidden] { display: none; }
+  .pm-sg2 { list-style: none; flex: 1 0 100%; margin: .15rem 0 0; padding: .5rem 0 .15rem; border-top: 1px solid var(--pm-filo); display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .6rem; font-size: .84rem; line-height: 1.3; color: var(--inchiostro-2); }
   .pm-sg2 li { display: inline-flex; align-items: center; gap: .4rem; }
   .pm-sg2 li svg { color: var(--pm-icona); font-size: .95rem; }
   .pm-sg2 .pm-fr svg { color: #a9b7b4; font-size: .8rem; }
@@ -181,7 +188,9 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   .pm-oro-largo { justify-content: center; width: 100%; height: 3.2rem; padding: 0 1rem; font-size: 1.05rem; box-sizing: border-box; }
   @keyframes pm-luce { 0% { background-position: 160% 0; } 55%, 100% { background-position: -60% 0; } }
 
-  .pm-ph { font: 700 1.6rem var(--titoli); margin: 1.9rem 0 .5rem; }
+  .pm-ph-riga { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 1rem; margin: 1.6rem 0 .2rem; }
+  .pm-ph { font: 700 1.6rem var(--titoli); margin: 0; }
+  .pm-ph-riga .esame-materia:has(.esame-modulo:not([hidden])) { flex: 1 0 100%; }
   .pm-perc { list-style: none; padding: 0; margin: 0; border-bottom: 1px solid var(--riga); }
   .pm-perc > li { display: grid; grid-template-columns: 2.3rem minmax(0, 1fr) 13.5rem; gap: .2rem 1.4rem; padding: 1rem 0; border-top: 1px solid var(--riga); }
   .pm-num { font: 700 1.3rem var(--titoli); color: #7d765c; font-variant-numeric: tabular-nums; }
@@ -233,14 +242,14 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
   @media (max-width: 640px) {
     /* Telefono: stessi blocchi del computer in forma ridotta (richiesta di Carmine del 14/11). */
     .pm-lungo { display: none; } .pm-corto { display: inline; }
-    .pm-sg { flex-wrap: nowrap; gap: .55rem; padding: .4rem .45rem .4rem .8rem; }
+    .pm-sg { gap: .3rem .55rem; padding: .4rem .45rem .4rem .8rem; }
     .pm-sg-ic { font-size: 1.15rem; }
     .pm-sg h2 { flex: 1 1 auto; min-width: 0; font-size: 1.05rem; } .pm-sg p { display: none; }
     .pm-btn { height: 2.5rem; padding: 0 .9rem; font-size: .88rem; }
-    .pm-sg2 { flex-wrap: nowrap; gap: .45rem; margin-top: .4rem; padding-left: .8rem; font-size: .8rem; }
+    .pm-sg2 { flex-wrap: nowrap; gap: .45rem; padding: .45rem 0 .1rem; font-size: .8rem; }
     .pm-sg2 li { gap: .3rem; }
     .pm-az { flex-direction: column; align-items: stretch; gap: 0; margin-top: .25rem; font-size: .82rem; }
-    .pm-link { flex: none; flex-wrap: nowrap; justify-content: space-between; gap: 0 .5rem; }
+    .pm-link { flex: none; flex-wrap: nowrap; gap: 0 1.1rem; }
     .pm-link a { min-height: 2.5rem; gap: .3rem; }
     .pm-az .pm-sblocca { align-self: flex-start; min-height: 2.5rem; }
     .pm-esame .esame-materia { font-size: .82rem; min-height: 2.5rem; flex-wrap: nowrap; gap: .3rem; }
@@ -255,7 +264,8 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
     .pm-link:has(.esame-modulo:not([hidden])) { flex-wrap: wrap; justify-content: flex-start; gap: 0 .9rem; }
     .pm-link:has(.esame-modulo:not([hidden])) .esame-materia { flex: 1 0 100%; flex-wrap: wrap; white-space: normal; gap: .3rem .45rem; padding-bottom: .5rem; }
     .pm-esame .con-data .esame-titolo { cursor: auto; }
-    .pm-ph { font-size: 1.35rem; margin: 1.2rem 0 .4rem; }
+    .pm-ph-riga { margin: 1rem 0 .1rem; }
+    .pm-ph { font-size: 1.35rem; }
     .pm-perc > li { position: relative; grid-template-columns: 1.8rem minmax(0, 1fr); gap: .45rem .6rem; padding: .85rem 0; }
     .pm-num { font-size: 1.05rem; padding-top: .1rem; }
     .pm-perc h3 { font-size: 1.08rem; padding-right: 5.2rem; }
@@ -287,6 +297,10 @@ const href = (slug: string, sezione: string) => `/${materia}/${slug}/${sezione}`
       dlg.querySelector('[data-pm-chiudi]')?.addEventListener('click', () => dlg.close());
       dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
     }
+    // «Info»: i tre passi dello Studio guidato si aprono e si chiudono con il tasto accanto al titolo.
+    const info = box.querySelector<HTMLButtonElement>('[data-pm-info]');
+    const passi = box.querySelector<HTMLElement>('.pm-sg2');
+    info?.addEventListener('click', () => { if (!passi) return; passi.hidden = !passi.hidden; info.setAttribute('aria-expanded', String(!passi.hidden)); });
     // La riga della data d'esame (Materia.astro) sta dopo la vista classica: nella pagina nuova va
     // nella riga dell'anteprima, accanto ai link.
     const spostaEsame = () => {
