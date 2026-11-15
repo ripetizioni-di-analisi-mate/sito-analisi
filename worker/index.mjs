@@ -1189,14 +1189,32 @@ export default {
       return json(await aDO(env, '/liv-battito', { email: io.email, materia: pulito(materia), argomento: pulito(argomento), lingua: linguaDi(lingua), catalogo: await catalogoPremi(env) }));
     }
     // ===== Studio guidato (test adattivo sulle lacune, anteprima riservata ai GM: worker/studio-guidato.mjs) =====
-    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi' || p === '/api/studio-guidato/racconto' || p === '/api/studio-guidato/capisci') {
+    if (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi' || p === '/api/studio-guidato/racconto' || p === '/api/studio-guidato/capisci' || p === '/api/studio-guidato/rivendica') {
       const io = await utenteCollegato(env, req).catch(() => null);
-      // Solo per chi ha un account, anche gratuito (scelta di Carmine del 15/11/2026). Finché STUDIO_GUIDATO_TUTTI non vale "1"
-      // resta un'anteprima per i GM; quando si apre, basta l'iscrizione.
-      if (!io) return json({ errore: 'Lo Studio guidato è riservato agli iscritti: crea un account gratuito o accedi.', codice: 'iscrizione' }, 401, { 'cache-control': 'no-store' });
-      if (!io.gm && env.STUDIO_GUIDATO_TUTTI !== '1') return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, { 'cache-control': 'no-store' });
-      const titoli = titoliGuidati();
       const nessunaCache = { 'cache-control': 'no-store' };
+      // Gerarchia «Porta socchiusa» (scelta di Carmine del 15/11/2026): l'ospite fa il test (inizia, rispondi),
+      // ma diagnosi e percorso si vedono solo con un account, anche gratuito. «Cosa ti blocca?» (Claude), commento di Pi
+      // e ricontrollo restano agli iscritti. Con STUDIO_GUIDATO_OSPITI diverso da "1" si torna al test solo per iscritti.
+      const ospiteAmmesso = env.STUDIO_GUIDATO_OSPITI === '1' && env.STUDIO_GUIDATO_TUTTI === '1';
+      const ospite = !io && ospiteAmmesso && (p === '/api/studio-guidato' || p === '/api/studio-guidato/inizia' || p === '/api/studio-guidato/rispondi');
+      if (!io && !ospite) return json({ errore: 'Lo Studio guidato è riservato agli iscritti: crea un account gratuito o accedi.', codice: 'iscrizione' }, 401, nessunaCache);
+      if (io && !io.gm && env.STUDIO_GUIDATO_TUTTI !== '1') return json({ errore: 'Lo Studio guidato è in anteprima riservata.', codice: 'riservato-gm' }, 403, nessunaCache);
+      const titoli = titoliGuidati();
+      const chi = io ? io.email : 'ospite';
+      if (ospite && p === '/api/studio-guidato') return json({ ospite: true, ultimo: null }, 200, nessunaCache);
+      if (p === '/api/studio-guidato/rivendica') {
+        // Dopo l'iscrizione: il test fatto da ospite (stato firmato, valido 48 ore) diventa un esito dell'account.
+        if (!POST) return json({ errore: 'Metodo non consentito.' }, 405);
+        const corpo = await req.json().catch(() => ({}));
+        const tok = typeof corpo.chiave === 'string' ? await leggiToken(env, corpo.chiave) : null;
+        if (!tok?.fine || tok.e !== 'ospite' || !tok.s?.m || Date.now() - (tok.t || 0) > 48 * 3600 * 1000) return json({ errore: 'Il test non è più disponibile. Puoi rifarlo.' }, 400, nessunaCache);
+        if (!materieGuidate().includes(tok.s.m)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
+        const e = esitoGuidato(tok.s, titoli);
+        if (e.domande) await aDO(env, '/sg-salva', { email: io.email, materia: tok.s.m, esito: e });
+        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia: tok.s.m });
+        delete e.viste; delete e.risposte;
+        return json({ fine: true, esito: e, progresso: progressoGuidato(storico) }, 200, nessunaCache);
+      }
       if (p === '/api/studio-guidato') {
         const materia = url.searchParams.get('materia');
         if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
@@ -1236,12 +1254,12 @@ export default {
         if (!materieGuidate().includes(materia)) return json({ errore: 'Materia non disponibile.' }, 404, nessunaCache);
         // argomento = capitolo scelto dallo studente (assente: «Non so da dove iniziare»); ricontrollo = solo le lacune dell'ultimo test.
         const argomento = typeof corpo.argomento === 'string' ? corpo.argomento : null;
-        const { storico } = await aDO(env, '/sg-storico', { email: io.email, materia });
+        const { storico } = io ? await aDO(env, '/sg-storico', { email: io.email, materia }) : { storico: [] };
         const viste = storico.slice(0, 3).flatMap((e) => e.viste || []);
-        stato = creaStato({ materia, argomento, ricontrollo: corpo.ricontrollo === true, precedente: storico[0] || null, viste, priorita: Array.isArray(corpo.priorita) ? corpo.priorita.slice(0, 3) : [] });
+        stato = creaStato({ materia, argomento, ricontrollo: Boolean(io) && corpo.ricontrollo === true, precedente: storico[0] || null, viste, priorita: io && Array.isArray(corpo.priorita) ? corpo.priorita.slice(0, 3) : [] });
       } else {
         const tok = typeof corpo.token === 'string' ? await leggiToken(env, corpo.token) : null;
-        if (!tok?.s || tok.e !== io.email || !tok.s.q) return json({ errore: 'Il test è scaduto. Ricomincia dalla pagina della materia.' }, 400, nessunaCache);
+        if (!tok?.s || tok.fine || tok.e !== chi || !tok.s.q) return json({ errore: 'Il test è scaduto. Ricomincia dalla pagina della materia.' }, 400, nessunaCache);
         stato = tok.s;
         const q = stato.q;
         const dati = await domandeDi(env, q.m, 'it');
@@ -1250,6 +1268,13 @@ export default {
         registra(stato, Boolean(d) && scelta !== null && scelta + 1 === Number(d.corretta), d ? scelta : null, scelta === null ? null : corpo.sicuro === true ? true : corpo.sicuro === false ? false : null);
       }
       const q = prossima(stato);
+      if (!q && !io) {
+        // Ospite: solo quanti punti sono emersi e il primo capitolo; il resto dopo l'iscrizione (/rivendica).
+        const e = esitoGuidato(stato, titoli);
+        const chiave = await firmaToken(env, { s: stato, e: 'ospite', fine: true, t: Date.now() });
+        const primo = e.lacune[0];
+        return json({ fine: true, ospite: true, chiave, anteprima: { domande: e.domande, punti: e.lacune.length, capitolo: primo ? (primo.m !== stato.m ? `${primo.materia} · ${primo.capitolo}` : primo.capitolo) : null } }, 200, nessunaCache);
+      }
       if (!q) {
         const e = esitoGuidato(stato, titoli);
         if (e.domande) await aDO(env, '/sg-salva', { email: io.email, materia: stato.m, esito: e });
@@ -1259,7 +1284,7 @@ export default {
       }
       const domanda = domandaPubblica(q, await domandeDi(env, q.m, 'it'), titoli, stato);
       if (!domanda) return json({ errore: 'Domanda non disponibile. Riprova.' }, 500, nessunaCache);
-      const token = await firmaToken(env, { s: stato, e: io.email });
+      const token = await firmaToken(env, { s: stato, e: chi });
       return json({ token, domanda }, 200, nessunaCache);
     }
     if (p === '/api/domande/prossima' && POST) {

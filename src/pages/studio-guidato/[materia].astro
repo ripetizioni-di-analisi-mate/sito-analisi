@@ -109,6 +109,7 @@ const nome = m.breve || m.titolo;
     .sg-nav{display:flex;flex-wrap:wrap-reverse;align-items:center;justify-content:space-between;gap:.6rem 1rem}
     .sg-conf{display:flex;flex-wrap:wrap;gap:.5rem}
     .sg-conf>.sg-btn.sg-btn{height:2.75rem;padding:0 1.2rem;font-size:.95rem}
+    .sg-blocco[hidden]{display:none}
     .sg-blocco{display:flex;flex-direction:column;gap:.6rem;padding:1rem 1.1rem;background:rgba(255,255,255,.7);border:1px solid var(--riga);border-radius:14px}
     .sg-blocco label{display:flex;align-items:center;gap:.7rem}
     .sg-blocco label span{display:flex;flex-direction:column}
@@ -168,6 +169,13 @@ const nome = m.breve || m.titolo;
     .sg-chip.nv span{background:#efebe2;color:var(--inchiostro-2);padding-left:.75rem}
     .sg-chip svg{width:14px;height:14px;flex:none}
     .sg-etich{margin:0 0 -.7rem;font-size:.82rem;color:var(--inchiostro-2)}
+    .sg-chiuso{display:flex;flex-direction:column;gap:.9rem;padding:1.1rem 1.2rem;background:#fff;border:1px solid var(--riga);border-radius:14px}
+    .sg-chiuso p{margin:0;font-size:1rem;line-height:1.5}
+    .sg-chiuso .sg-azioni{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.2rem}
+    .sg-chiuso .sg-link{align-self:center}
+    .sg-velo{display:flex;flex-direction:column;gap:.6rem;filter:blur(3px);opacity:.55;pointer-events:none;user-select:none}
+    .sg-velo span{display:block;height:3.4rem;border-radius:12px;background:linear-gradient(90deg,#efe9da,#f7f3ea);border:1px solid var(--riga)}
+    .sg-velo span:first-child{background:#f4efe1}
     .sg-dopo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem 1rem;padding:.85rem 1.1rem;background:#fff;border:1px solid var(--riga);border-radius:14px;font-size:.94rem}
     @media(max-width:640px){
       .sg-testa h1{font-size:1.7rem}
@@ -237,7 +245,8 @@ const nome = m.breve || m.titolo;
       }
       try {
         const d = await chiama(percorso, corpo);
-        if (d.fine) mostraEsito(d.esito, d.progresso);
+        if (d.fine && d.ospite) mostraChiuso(d);
+        else if (d.fine) mostraEsito(d.esito, d.progresso);
         else { token = d.token; mostraDomanda(d.domanda); }
       } catch (e: any) {
         if (test.hidden) errore.textContent = e.message;
@@ -330,6 +339,26 @@ const nome = m.breve || m.titolo;
       if (!e.racconto && e.domande) racconta();
     }
 
+    // Ospite: il test è finito, la diagnosi si apre con un account gratuito. Lo stato firmato resta nel browser
+    // (48 ore) e dopo l'iscrizione diventa un esito dell'account (/api/studio-guidato/rivendica).
+    const CHIAVE_OSPITE = `sg-ospite-${materia}`;
+    function mostraChiuso(d: any) {
+      try { localStorage.setItem(CHIAVE_OSPITE, d.chiave); } catch {}
+      test.hidden = true; intro.hidden = true; ris.hidden = false;
+      const a = d.anteprima || {};
+      const dopo = encodeURIComponent(`${location.pathname}?esito`);
+      const frase = a.punti
+        ? `Sono emersi ${a.punti === 1 ? 'un punto' : `${a.punti} punti`} da riprendere. Il primo è in «${esc(a.capitolo || '')}».`
+        : 'Non sono emersi punti da riprendere.';
+      ris.innerHTML = `<header class="sg-testa"><h1>Il test è finito</h1><p>${a.domande || 0} domande</p></header>
+        <div class="sg-chiuso"><p><b>${frase}</b></p>
+          <p>Con un account gratuito vedi ${a.punti ? 'quali sono, gli errori che hai fatto e i paragrafi e le schede da cui ripartire' : 'il dettaglio del risultato'}. Il test resta salvato nell’account.</p>
+          <p class="sg-azioni"><a class="sg-btn" href="/accedi?nuovo=1&dopo=${dopo}">Crea un account gratuito</a><a class="sg-link" href="/accedi?dopo=${dopo}">Accedi</a></p></div>
+        ${a.punti ? `<div class="sg-velo" aria-hidden="true">${'<span></span>'.repeat(Math.min(a.punti, 3))}</div>` : ''}`;
+      ris.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Commento di Pi sull'esito (Claude dal Worker, testo a pezzi). Se non arriva resta la frase di sintesi.
     async function racconta() {
       const p = ris.querySelector<HTMLElement>('[data-sg-commento]');
@@ -357,7 +386,19 @@ const nome = m.breve || m.titolo;
     }
 
     // All'apertura: se c'è un test precedente si mostra il risultato (?esito) oppure la riga di ripresa.
-    chiama(`/api/studio-guidato?materia=${encodeURIComponent(materia)}`).then((d) => {
+    chiama(`/api/studio-guidato?materia=${encodeURIComponent(materia)}`).then(async (d) => {
+      if (d.ospite) {
+        // L'ospite sceglie il capitolo e fa il test; «Scrivilo in una frase» (Pi) è per gli iscritti.
+        blocco.hidden = true; radice.querySelector<HTMLElement>('.sg-oppure')!.hidden = true;
+        $('.sg-nota').textContent = 'Il test parte appena scegli. Al massimo 12 domande, senza limite di tempo. Il risultato completo si vede con un account gratuito.';
+        return;
+      }
+      let chiave = '';
+      try { chiave = localStorage.getItem(CHIAVE_OSPITE) || ''; } catch {}
+      if (chiave) {
+        try { localStorage.removeItem(CHIAVE_OSPITE); } catch {}
+        try { const r = await chiama('/api/studio-guidato/rivendica', { chiave }); mostraEsito(r.esito, r.progresso); return; } catch {}
+      }
       if (!d.ultimo) return;
       if (new URLSearchParams(location.search).has('esito')) { mostraEsito(d.ultimo, d.progresso); return; }
       const r = $('[data-sg-ripresa]');
