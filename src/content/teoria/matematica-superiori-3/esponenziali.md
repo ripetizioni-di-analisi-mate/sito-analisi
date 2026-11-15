@@ -47,6 +47,21 @@ Poiché $u$ è positivo, è proprio la radice $kn$-esima di $a^{km}$. Questo giu
 Gli esponenti si sommano quando si moltiplicano potenze con la stessa base. In una somma, una potenza comune si può raccogliere come fattore. Per esempio $2^x+2^{x+1}=2^x(1+2)=3\cdot2^x$. Con $x=1$, la somma vale $6$, mentre $2^{x+x+1}$ darebbe $8$.
 :::
 
+::::teorema{titolo="Base reciproca e segno dell'esponente"}
+Se $a>0$ e $u\in\mathbb R$, allora $\left(\dfrac1a\right)^u=a^{-u}$. Il passaggio permette di riscrivere una potenza di base frazionaria nella base reciproca. Se, per esempio, $a=3$, si può studiare $\left(\dfrac13\right)^{2-x}$ con la funzione crescente $3^v$ dopo aver scritto correttamente il nuovo esponente $x-2$.
+
+:::dimostrazione
+Si sostituisce $\dfrac1a=a^{-1}$ e si applica la potenza di potenza. Il prodotto degli esponenti è $(-1)u=-u$, quindi il risultato è $a^{-u}$.
+:::
+::::
+
+:::esempio{titolo="Una potenza nell'ascissa e una nell'ordinata"}
+Nella funzione $y=2^x$ l'incognita occupa il posto dell'esponente. Nella funzione $y=x^2$ occupa il posto della base. Entrambe passano per $(2,4)$ e $(4,16)$, ma il loro andamento è diverso. A $x=3$, fra quelle ascisse, si ha $2^3=8<9=3^2$. A $x=5$ si ha invece $2^5=32>25=5^2$. Le intersezioni indicate sono punti in cui coincidono le due quote e non implicano che le leggi delle due funzioni siano uguali.
+
+::grafico{f="2^x;x^2" xmin=-0.15 xmax=5.3 ymin=-1 ymax=35 punti="2,4,pieno,A;4,16,pieno,B" legenda="2^x;x^2" titolo="La crescita di $2^x$ e di $x^2$ si confronta alle stesse ascisse"}
+
+:::
+
 ## Funzione esponenziale e grafico
 
 :::definizione{#funzione titolo="Base positiva diversa da uno"}
@@ -82,6 +97,21 @@ a&=3,\\[4pt]
 \end{aligned}
 $$
 Le ascisse differiscono di due unità. Il rapporto $9$ tra le ordinate è quindi il fattore complessivo di due passi. Il fattore per un solo passo è la radice quadrata positiva $3$. La funzione cercata è $y=2\cdot3^x$.
+:::
+
+::::teorema{titolo="Confronto fra due basi positive"}
+Siano $a>b>0$. Per $x>0$ vale $a^x>b^x$, mentre per $x<0$ vale $a^x<b^x$. Per $x=0$ si ottiene $a^0=b^0=1$. Il risultato confronta potenze con lo stesso esponente e basi diverse.
+
+:::dimostrazione
+Poiché $b^x>0$, l'ordine fra le potenze si può leggere confrontando il rapporto con $1$. Si ha $\dfrac{a^x}{b^x}=\left(\dfrac ab\right)^x$ e la base del rapporto è maggiore di $1$. Risulta quindi un rapporto maggiore di $1$ se $x>0$, minore se $x<0$ e uguale a $1$ se $x=0$. Moltiplicando per il denominatore positivo si ottiene il confronto cercato.
+:::
+::::
+
+:::esempio{titolo="Potenze di due e tre"}
+Per $x=1$ le quote sono $2$ e $3$. Per $x=-1$ si ottengono i reciproci $\dfrac12$ e $\dfrac13$, il cui ordine è opposto. Le due curve hanno in comune solo $(0,1)$, perché alla stessa ascissa non nulla il rapporto $\left(\dfrac32\right)^x$ è diverso da $1$.
+
+::grafico{f="2^x;3^x" xmin=-2.5 xmax=1.9 ymin=-0.35 ymax=7.8 punti="0,1,pieno,P;1,2;1,3" legenda="2^x;3^x" titolo="La curva di $3^x$ è sopra quella di $2^x$ a destra di $P$ e sotto a sinistra"}
+
 :::
 
 ## Equazioni con base comune
@@ -121,6 +151,21 @@ Dal confronto degli esponenti segue $x=2$. In un'equazione come $3^x=5$, in cui 
 
 :::attenzione{titolo="Un logaritmo richiede un secondo membro positivo"}
 L'equazione $2^x=k$ ha senso per ogni numero reale $k$. Per risolverla, si verifica prima che $k$ appartenga all'immagine dell'esponenziale. Se $k>0$, c'è una soluzione ed è $\log_2 k$. Se $k\leq0$, l'insieme delle soluzioni è vuoto. Per esempio $2^x+3=1$ porterebbe a $2^x=-2$, impossibile per ogni $x$ reale. Il tasto del logaritmo non è necessario per riconoscere questo caso.
+:::
+
+:::esempio{titolo="Un esponente con un denominatore"}
+Per risolvere $2^{\frac1{x-2}}=\dfrac12$, si esclude prima $x=2$, dove l'esponente è indefinito. La soglia è $2^{-1}$. L'iniettività di $2^u$ dà
+$$
+\frac1{x-2}=-1
+\quad\Longleftrightarrow\quad
+1=-(x-2)
+\quad\Longleftrightarrow\quad
+x=1.
+$$
+Il passaggio si può invertire perché sul dominio $x-2\ne0$. Si controlla la soluzione sostituendo $x=1$, che dà esponente $-1$. Per $x>2$ l'esponente è positivo, quindi la curva ha quota maggiore di $1$ e non può incontrare la retta di quota $\dfrac12$. La posizione dei due rami fornisce così un controllo geometrico del risultato.
+
+::grafico{f="2^(1/(x-2));0.5" xmin=-0.5 xmax=4.5 ymin=-0.2 ymax=4.2 asintoti="x=2" punti="1,0.5,pieno,P;3,2" legenda="2^{\frac1{x-2}};\frac12" titolo="L'intersezione $P$ si trova sul ramo a sinistra dell'ascissa esclusa $2$"}
+
 :::
 
 ## Disequazioni con base maggiore di uno
@@ -173,6 +218,21 @@ In $x=3$ si ha uguaglianza. Per $x=2$ il valore è $\dfrac14$, che supera la sog
 
 :::
 
+:::esempio{titolo="Una disequazione con due inversioni del verso"}
+Nella disequazione $\left(\dfrac12\right)^{4-2x}\geq\dfrac14$ la soglia è $\left(\dfrac12\right)^2$. La base frazionaria inverte il verso nel confronto tra gli esponenti. Quando si isola $x$, la divisione per il coefficiente negativo inverte nuovamente il verso.
+$$
+\begin{aligned}
+4-2x&\leq 2,\\
+-2x&\leq -2,\\
+x&\geq 1.
+\end{aligned}
+$$
+Il risultato è coerente con il grafico. Al crescere di $x$ diminuisce l'esponente $4-2x$. Una base minore di $1$ associa un valore maggiore a un esponente minore, quindi la funzione composta è crescente. In $x=0$ la quota è $\dfrac1{16}$ e in $x=2$ è $1$. L'intersezione avviene in $x=1$, incluso dalla disuguaglianza.
+
+::grafico{f="0.5^(4-2*x);0.25" xmin=-0.5 xmax=2.7 ymin=-0.1 ymax=1.9 punti="0,0.0625;1,0.25,pieno,P;2,1" legenda="\left(\frac12\right)^{4-2x};\frac14" titolo="La funzione cresce e raggiunge la soglia $\dfrac14$ in $P$"}
+
+:::
+
 ## Sostituzione con una potenza positiva
 
 :::teorema{#sostituzione titolo="Quadratiche nell'esponenziale"}
@@ -204,6 +264,21 @@ Nell'ultimo passaggio si usa la crescita dell'esponenziale. I valori $1$ e $3$ s
 
 :::osservazione{titolo="Coefficienti e numero di soluzioni"}
 Per $4^x-c\cdot2^x+1=0$ si cerca il numero di radici *positive* di $u^2-cu+1=0$. Il discriminante è $c^2-4$ e il prodotto delle radici, quando sono reali, è $1$. Per $c>2$ le radici sono distinte, hanno lo stesso segno e somma $c>0$, quindi sono entrambe positive. Per $c=2$ la radice doppia $u=1$ corrisponde a un solo $x$. Se $|c|<2$ le radici non sono reali. Se $c\leq-2$, hanno somma negativa e prodotto positivo, quindi sono entrambe negative, anche nel caso della radice doppia $u=-1$.
+:::
+
+:::esempio{titolo="Ritornare a x con una sostituzione decrescente"}
+Si consideri $4^{-x}-5\cdot2^{-x}+4\leq0$. Ponendo $u=2^{-x}=\left(\dfrac12\right)^x$ si ottiene il prodotto $(u-1)(u-4)\leq0$. Perciò $1\leq u\leq4$. I due estremi sono positivi, quindi rientrano nell'immagine della funzione scelta per la sostituzione.
+$$
+2^0\leq2^{-x}\leq2^2
+\quad\Longleftrightarrow\quad
+0\leq-x\leq2
+\quad\Longleftrightarrow\quad
+-2\leq x\leq0.
+$$
+Alla quota $1$ corrisponde l'ascissa $0$, mentre alla quota $4$ corrisponde $-2$. L'ordine nell'intervallo cambia perché la sostituzione è decrescente. Ad esempio, per $x=-1$ risulta $u=2$ e il prodotto vale $(2-1)(2-4)=-2$. Per $x=1$ si ha invece $u=\dfrac12$ e il prodotto è positivo.
+
+::grafico{f="4^(-x)-5*2^(-x)+4" xmin=-2.4 xmax=1.4 ymin=-3 ymax=8 punti="-2,0,pieno,A;0,0,pieno,B;-1,-2" legenda="4^{-x}-5\cdot2^{-x}+4" titolo="Il primo membro è non positivo tra le ascisse di $A$ e $B$, estremi inclusi"}
+
 :::
 
 ## Grafici traslati e riscalati
@@ -242,6 +317,21 @@ $$
 Il primo caso fornisce il punto $(0,4)$. Nel secondo nessuna ascissa reale soddisfa l'equazione. Il fatto che la curva si avvicini alla retta di asintoto non permette di includere la sua quota nell'immagine.
 :::
 
+::::teorema{titolo="Immagine dopo una riflessione e una traslazione"}
+Siano $a>0$, $a\ne1$, $C\ne0$, e $h,k\in\mathbb R$. Per $G(x)=C a^{x-h}+k$ l'immagine è $(k,+\infty)$ se $C>0$ e $(-\infty,k)$ se $C<0$. La quota $k$ non appartiene all'immagine in nessuno dei due casi.
+
+:::dimostrazione
+Per trovare se la quota $y$ è raggiunta, si risolve $a^{x-h}=\dfrac{y-k}{C}$. Dato che l'immagine di $a^u$ è $(0,+\infty)$, esiste un'ascissa esattamente quando il rapporto è positivo. Con $C>0$ si richiede $y>k$, mentre con $C<0$ si richiede $y<k$. In $y=k$ il rapporto vale zero, che è fuori dall'immagine dell'esponenziale.
+:::
+::::
+
+:::esempio{titolo="Curve sui due lati dello stesso asintoto"}
+Le funzioni $2+2^x$ e $2-2^x$ hanno lo stesso asintoto $y=2$. Alla stessa ascissa si trovano a distanza $2^x$ dalla retta, una sopra e l'altra sotto. Il grafico della seconda è quindi il riflesso del primo rispetto a $y=2$. In $x=0$ le quote valgono $3$ e $1$, mentre a $x=1$ diventano $4$ e $0$.
+
+::grafico{f="2+2^x;2-2^x" xmin=-3.5 xmax=2 ymin=-2.4 ymax=6.7 asintoti="y=2" punti="0,3;0,1;1,4;1,0" segmenti="1,0,1,4" legenda="2+2^x;2-2^x" titolo="Le due curve sono simmetriche rispetto a $y=2$"}
+
+:::
+
 ## Crescita e decadimento
 
 :::definizione{#modelli titolo="Fattore moltiplicativo costante"}
@@ -275,4 +365,26 @@ Al primo giorno i due incrementi coincidono. In seguito la crescita percentuale 
 
 :::osservazione{titolo="Ricavare il fattore per un periodo più breve"}
 Un modello con fattore mensile costante passa da $100$ a $121$ in due mesi. Per trovare il fattore di un mese si risolve $q^2=\dfrac{121}{100}$ scegliendo la radice positiva, cioè $q=\dfrac{11}{10}$. L'aumento mensile è quindi del $10\%$. Per una variazione da $100$ a $81$ in due mesi la stessa procedura dà $q=\dfrac9{10}$, quindi si perde il $10\%$ ogni mese. In questo secondo caso, la perdita di $19$ unità si scompone in $10$ unità del primo mese e $9$ del secondo.
+:::
+
+:::esempio{titolo="Raffreddamento verso la temperatura ambiente"}
+Una bevanda ha inizialmente temperatura $80\,\mathrm{^\circ C}$ e si trova in una stanza a $20\,\mathrm{^\circ C}$. Nel modello, ogni $5$ minuti si dimezza la differenza fra la temperatura della bevanda e quella ambiente. La differenza iniziale è $60\,\mathrm{^\circ C}$, quindi dopo $t$ minuti vale
+$$
+T(t)-20=60\left(\frac12\right)^{\frac t5}.
+$$
+Dopo $5$ minuti la differenza è $30$ e la temperatura è $50\,\mathrm{^\circ C}$. Dopo $10$ minuti la differenza è $15$ e la temperatura è $35\,\mathrm{^\circ C}$. Il rapporto fra le temperature complete in questi due istanti non è $\dfrac12$. Il dimezzamento si applica solo alla differenza dalla temperatura ambiente. Il valore di $T$ resta sopra $20\,\mathrm{^\circ C}$ e si avvicina a quella quota, che è l'asintoto del modello.
+
+::grafico{f="20+60*0.5^(x/5)" xmin=-0.5 xmax=22 ymin=0 ymax=86 asintoti="y=20" nomi="t,T" punti="0,80;5,50,pieno,A;10,35,pieno,B" segmenti="5,20,5,50;10,20,10,35" legenda="20+60\left(\frac12\right)^{\frac{t}{5}}" titolo="Le distanze da $20$ nei punti $A$ e $B$ sono $30$ e $15$, una metà dell'altra"}
+
+:::
+
+:::esempio{titolo="Scegliere il modello dai rapporti"}
+Una misura assume i valori $24$, $36$ e $54$ a intervalli di due ore. I due rapporti consecutivi sono uguali a $\dfrac32$, mentre le differenze sono $12$ e $18$. Un modello esponenziale con periodo di due ore che riproduce i dati è
+$$
+M(t)=24\left(\frac32\right)^{\frac t2}.
+$$
+Calcolare $M(1)$ significa usare metà periodo. Il fattore orario è $\sqrt{\dfrac32}$ e il modello prevede $M(1)=24\sqrt{\dfrac32}$. La retta che interpola i primi due dati darebbe invece $30$ a un'ora e resterebbe sotto il terzo dato. La lettura a intervalli uguali consente di riconoscere il fattore esponenziale. Il valore tra due misure è una previsione del modello e dipende dalla scelta di applicare la legge fra i tempi di misura.
+
+::grafico{f="24*1.5^(x/2);24+6*x" xmin=-0.35 xmax=5.3 ymin=0 ymax=73 nomi="t,M" punti="0,24;2,36;4,54,pieno,P;4,48" legenda="24\left(\frac32\right)^{\frac{t}{2}};24+6t" titolo="A quattro ore il modello esponenziale riproduce il dato $54$, mentre la retta dà $48$"}
+
 :::

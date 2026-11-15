@@ -30,6 +30,19 @@ Se la base è minore di $1$, una potenza con esponente positivo può dare un arg
 Da $a^0=1$ e $a^1=a$ seguono $\log_a1=0$ e $\log_a a=1$. Se la base è $e$ si scrive $\ln$, mentre per la base dieci si può scrivere $\log_{10}$. In base dieci, $0{,}001=10^{-3}$ e quindi $\log_{10}(0{,}001)=-3$.
 :::
 
+:::esempio{titolo="Un valore compreso tra due esponenti interi"}
+Per capire l'ordine di grandezza di $\log_3 20$ si cercano due potenze consecutive di $3$ che contengano l'argomento. Si ha $3^2=9$ e $3^3=27$, quindi
+$$
+3^2<20<3^3
+\quad\Longleftrightarrow\quad
+2<\log_3 20<3.
+$$
+Il passaggio conserva il verso perché la base è maggiore di $1$. Se la base è $\dfrac13$, il valore cercato diventa $-\log_3 20$ e si trova fra $-3$ e $-2$. Infatti $\left(\dfrac13\right)^{-3}=27$ e $\left(\dfrac13\right)^{-2}=9$. Il confronto individua l'intervallo anche quando nessuno degli esponenti interi produce esattamente l'argomento.
+
+::grafico{f="3^x;20" xmin=0 xmax=3.3 ymin=-1 ymax=33 punti="2,9;2.72683303,20,pieno,P;3,27" segmenti="2,0,2,9;3,0,3,27" legenda="3^x;20" titolo="L'ascissa di $P$ si trova fra $2$ e $3$, perché $20$ è fra le quote $9$ e $27$"}
+
+:::
+
 ## Proprietà delle operazioni
 
 ::::teorema{#proprieta titolo="Prodotto, quoziente e potenza"}
@@ -77,6 +90,17 @@ $$
 \ln\bigl((x-2)^2\bigr)=\ln\bigl(|x-2|^2\bigr)=2\ln|x-2|.
 $$
 Il valore assoluto rende positiva la base della potenza dentro il logaritmo. A $x=1$ si ottiene $2\ln1=0$. Il termine $\ln(x-2)$, preso da solo, in quello stesso punto sarebbe indefinito.
+:::
+
+:::esempio{titolo="Uno spostamento verticale prodotto da un fattore"}
+Per $x>0$, passare dall'argomento $x$ all'argomento $4x$ aggiunge la stessa quantità al logaritmo in base $2$, qualunque sia $x$. Infatti $4$ è una potenza della base e
+$$
+\log_2(4x)=\log_2 4+\log_2 x=2+\log_2 x.
+$$
+La seconda curva passa per $(1,2)$ perché il grafico di partenza passa per $(1,0)$. A $x=2$ le ordinate sono $1$ e $3$. La distanza verticale vale sempre $2$. Se si usa invece l'argomento $x+4$, l'incremento è $\log_2\left(1+\dfrac4x\right)$ e dipende dall'ascissa. Il fattore costante è la condizione che rende costante l'incremento.
+
+::grafico{f="log(x)/log(2);log(4*x)/log(2)" xmin=-0.35 xmax=5 ymin=-3.2 ymax=4.5 punti="1,0;1,2;2,1;2,3" segmenti="1,0,1,2;2,1,2,3" legenda="\log_2x;\log_2(4x)" titolo="I segmenti alle ascisse $1$ e $2$ hanno entrambi altezza $2$"}
+
 :::
 
 ## Cambio di base
@@ -152,6 +176,23 @@ Si ottiene $(3,4)\cup(4,+\infty)$. I due punti esclusi hanno motivi diversi. In 
 In $\log_2(\log_3 x)$, l'argomento esterno è il valore del logaritmo interno. Si parte da $x>0$, dove $\log_3 x$ esiste. Il logaritmo esterno chiede inoltre $\log_3 x>0$. Dato che quello interno cresce e si annulla in $1$, il dominio è $(1,+\infty)$. Per controllarlo basta confrontare due valori. In $x=\dfrac13$ il logaritmo interno vale $-1$ e quello esterno è indefinito. In $x=9$ il logaritmo interno vale $2$ e l'espressione composta vale $\log_2 2=1$.
 :::
 
+:::esempio{titolo="La base attraversa il valore uno"}
+Nell'espressione $\log_{x-1}(4-x)$ si controllano separatamente la positività di $x-1$, la sua differenza da $1$ e la positività di $4-x$. L'insieme risultante è $(1,2)\cup(2,4)$. Le prime e le ultime ascisse sono determinate dagli zeri delle espressioni lineari. Il punto interno $2$ è escluso anche se entrambe sono positive.
+$$
+\left.
+\begin{aligned}
+x-1=1\\
+4-x=2
+\end{aligned}
+\right\}
+\quad (x=2).
+$$
+Si giustifica l'esclusione perché qualunque esponente di base $1$ dà $1$, mentre qui l'argomento vale $2$. In $x=3$ le condizioni sono invece soddisfatte e il valore è $\log_2 1=0$. L'argomento deve essere positivo, mentre il valore del logaritmo può essere zero.
+
+::grafico{f="x-1;4-x;1" xmin=0 xmax=4.5 ymin=-0.6 ymax=4.2 punti="1,0;2,1,vuoto;4,0" segmenti="2,0,2,1" legenda="x-1;4-x;1" titolo="La base $x-1$ raggiunge la quota esclusa $1$ in $x=2$"}
+
+:::
+
 ## Grafico e funzione inversa
 
 :::definizione{#funzione titolo="Inversa dell'esponenziale"}
@@ -190,6 +231,25 @@ $$
 $$
 
 ::grafico{f="log(x-2)/log(2)-1" xmin=0 xmax=8 ymin=-4 ymax=2.5 asintoti="x=2" punti="3,-1;4,0" titolo="L'asintoto è $x=2$ e l'intercetta orizzontale è $(4,0)$"}
+
+:::
+
+::::teorema{titolo="Perché il logaritmo conserva la monotonia dell'esponenziale"}
+Siano $0<u<v$ e $a>0$ con $a\ne1$. Se $a>1$, allora $\log_a u<\log_a v$. Se $0<a<1$, allora $\log_a u>\log_a v$.
+
+:::dimostrazione
+Si scrivano $u=a^p$ e $v=a^q$. Per $a>1$, la condizione $p\geq q$ darebbe $a^p\geq a^q$, in contrasto con $u<v$, quindi $p<q$. Per $0<a<1$, la condizione $p\leq q$ darebbe $a^p\geq a^q$ perché l'esponenziale è decrescente. Dunque $p>q$. I numeri $p$ e $q$ sono proprio $\log_a u$ e $\log_a v$.
+:::
+::::
+
+:::esempio{titolo="Verso di variazione con argomento decrescente"}
+Si studi $g(x)=\log_{\frac12}(4-x)$ per $x<4$. Sia $x_1<x_2<4$. Sottraendo le ascisse da $4$ si ottiene $4-x_1>4-x_2>0$. Il logaritmo con base $\dfrac12$ inverte ancora il confronto, quindi
+$$
+\log_{\frac12}(4-x_1)<\log_{\frac12}(4-x_2).
+$$
+La funzione composta è dunque crescente. Il suo zero è in $x=3$, poiché $4-3=1$. Quando $x$ si avvicina a $4$ da sinistra, l'argomento si avvicina a zero da valori positivi e il logaritmo cresce senza limite. L'asintoto si trova quindi a destra del dominio, sulla retta $x=4$.
+
+::grafico{f="log(4-x)/log(0.5)" xmin=-0.5 xmax=4.8 ymin=-3 ymax=3.8 asintoti="x=4" punti="2,-1;3,0,pieno,P;3.5,1" legenda="\log_{\frac12}(4-x)" titolo="La curva cresce sul dominio e si avvicina alla retta $x=4$ da sinistra"}
 
 :::
 
@@ -233,6 +293,23 @@ $$
 \end{aligned}
 $$
 I due addendi iniziali valgono $\log_9 9=1$ e $\log_3 9=2$. Quindi la loro somma verifica l'equazione. La formula di prodotto dei logaritmi si applica solo dopo aver scritto gli addendi nella stessa base.
+:::
+
+:::esempio{titolo="Un parametro determina il numero delle soluzioni"}
+Nell'equazione $\ln(x^2+1)=k$ l'argomento è positivo per ogni $x$. Il secondo membro rappresenta l'ordinata della retta orizzontale da confrontare con il grafico. Passando alla forma esponenziale,
+$$
+x^2+1=e^k
+\quad\Longleftrightarrow\quad
+x^2=e^k-1 .
+$$
+- Se $k<0$, il secondo membro è negativo, quindi la retta si trova sotto il grafico e l'equazione è impossibile.
+- Se $k=0$, il secondo membro vale zero e si ottiene la sola soluzione $x=0$.
+- Se $k>0$, si ottengono le due soluzioni opposte $-\sqrt{e^k-1}$ e $\sqrt{e^k-1}$.
+
+Ad esempio, per $k=\ln 2$ il secondo membro è $1$ e la quota richiesta si incontra nelle ascisse $-1$ e $1$. La simmetria segue da $( -x)^2=x^2$.
+
+::grafico{f="log(x^2+1);log(2)" xmin=-3 xmax=3 ymin=-0.45 ymax=2.6 punti="-1,0.69314718;0,0;1,0.69314718" legenda="\ln(x^2+1);\ln 2" titolo="La retta di quota $\ln 2$ incontra la curva nelle ascisse opposte $-1$ e $1$"}
+
 :::
 
 ## Disequazioni
@@ -282,6 +359,19 @@ Nella disequazione $\log_{x+1}4\geq2$ la base dipende da $x$. Per esistere deve 
 L'insieme delle soluzioni è $(0,1]$. In $x=1$ la base è $2$ e vale $\log_2 4=2$, perciò l'ultimo estremo è incluso.
 :::
 
+:::esempio{titolo="Risolvere una disequazione con due limiti di livello"}
+Per trovare dove $-1\leq\log_2(x+2)<2$, si esprimono i livelli come $\log_2(\frac12)$ e $\log_2 4$. Poiché il logaritmo è crescente, i confronti sugli argomenti conservano lo stesso verso.
+$$
+\frac12\leq x+2<4
+\quad\Longleftrightarrow\quad
+-\frac32\leq x<2.
+$$
+L'argomento è positivo su tutto l'intervallo ottenuto, dato che è almeno $\dfrac12$. Il punto all'estremo sinistro soddisfa l'uguaglianza con il limite inferiore. Il punto all'estremo destro ha quota $2$ e rimane escluso. In presenza di un limite inferiore positivo sull'argomento, la condizione del dominio può quindi essere già soddisfatta dal risultato.
+
+::grafico{f="log(x+2)/log(2);-1;2" xmin=-2.5 xmax=4 ymin=-3 ymax=3 punti="-1.5,-1,pieno,A;2,2,vuoto,B" segmenti="-1.5,-1,-1.5,0;2,0,2,2" asintoti="x=-2" legenda="\log_2(x+2);-1;2" titolo="Il tratto fra $A$ incluso e $B$ escluso ha quota fra i due livelli richiesti"}
+
+:::
+
 ## Soglie e scale logaritmiche
 
 :::esempio{#modelli titolo="Tempo reale e prima osservazione"}
@@ -311,3 +401,29 @@ Quando l'intensità viene moltiplicata per $100$, il livello cresce di $10\log_{
 :::osservazione{titolo="Una soglia in un modello decrescente"}
 Per una quantità che si dimezza a ogni ora, il modello $Q(t)=80\left(\dfrac12\right)^t$ passa esattamente per $10$ a $t=3$. La condizione $Q(t)<10$ richiede invece $t>3$. La base è minore di $1$, perciò le quantità sotto la soglia si ottengono ai tempi maggiori. Se si osserva la quantità a ore intere, l'ora $3$ produce ancora $10$ e la prima osservazione utile è alla quarta ora.
 :::
+
+:::esempio{titolo="Tempo di attesa con valore di fondo"}
+Un display parte da una luminosità di $50$ unità. Il modello $L(t)=2+48\left(\dfrac12\right)^{\frac t4}$, con $t$ in ore, descrive una parte variabile che si dimezza ogni quattro ore e una luminosità di fondo pari a $2$. Si cerca il primo istante in cui il valore è al più $8$. Si sottrae il fondo prima di dividere per il valore iniziale della parte variabile.
+$$
+\begin{aligned}
+L(t)\leq 8
+ &\quad\Longleftrightarrow\quad
+ \left(\frac12\right)^{\frac t4}\leq \frac{8-2}{48} \\[4pt]
+ &\quad\Longleftrightarrow\quad
+ \left(\frac12\right)^{\frac t4}\leq \left(\frac12\right)^3\\[4pt]
+ &\quad\Longleftrightarrow\quad t\geq 12.
+\end{aligned}
+$$
+L'ultimo confronto inverte il verso perché la base è minore di $1$. Il valore in $t=12$ è $2+48\cdot\dfrac18=8$, quindi il primo istante richiesto è la dodicesima ora. Una soglia uguale al fondo $2$ richiederebbe invece che l'esponenziale fosse zero. Il modello si avvicina a quel livello e rimane sempre al di sopra per ogni tempo finito.
+
+::grafico{f="2+48*0.5^(x/4);8" xmin=-0.5 xmax=22 ymin=-1 ymax=53 nomi="t,L" asintoti="y=2" punti="0,50;8,14;12,8,pieno,P;16,5" segmenti="12,0,12,8" legenda="2+48\left(\frac12\right)^{\frac{t}{4}};8" titolo="Il valore raggiunge la soglia $8$ in $P$ e si avvicina al fondo $2$"}
+
+:::
+
+::::teorema{titolo="Prima osservazione intera di una soglia crescente"}
+Siano $N_0>0$, $a>1$ e $S>N_0$. Per il modello $N(t)=N_0a^t$ con $t\geq0$, il tempo esatto per raggiungere $S$ è $\tau=\log_a\dfrac{S}{N_0}$. Se si osserva ai soli tempi interi, il primo con $N(t)\geq S$ è $\lceil\tau\rceil$, cioè il più piccolo intero maggiore o uguale a $\tau$. Il primo con $N(t)>S$ è invece $\lfloor\tau\rfloor+1$, dove $\lfloor\tau\rfloor$ è il più grande intero minore o uguale a $\tau$.
+
+:::dimostrazione
+Poiché la base $a$ supera $1$, dal confronto $N_0a^t\geq S$ si ricava $t\geq\tau$ applicando il logaritmo al rapporto. Con il confronto stretto si ottiene invece $t>\tau$. Nei due casi si sceglie il primo intero ammesso. Se $\tau$ è intero, la prima disuguaglianza ammette proprio $\tau$, mentre la seconda richiede l'intero successivo. Se $\tau$ non è intero, entrambe danno lo stesso primo istante.
+:::
+::::

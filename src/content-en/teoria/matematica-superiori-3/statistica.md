@@ -43,6 +43,13 @@ The table summarises the number of absences recorded for $20$ students in one mo
 At most one absence was recorded for $13$ students, so the proportion is $\dfrac{13}{20}=65\,\%$. Students with more than one absence form the complementary group, so $20-13=7$ students had two or three absences.
 :::
 
+:::esempio{titolo="Cumulative frequencies on a step chart"}
+In the absence table a threshold between $1$ and $2$ has the same cumulative frequency as threshold $1$. The next observation has two absences and is counted only when the threshold reaches $2$. At that point the chart rises from $13$ to $17$, so the jump of size $4$ recovers the absolute frequency of two absences. At threshold $3$ the chart reaches $20$ and then stays constant because every student has been counted. For a discrete variable, the jumps therefore give the frequencies and the horizontal stretches show intervals of thresholds at which no new observation is counted.
+
+::grafico{xmin=-0.7 xmax=4.05 ymin=-1.1 ymax=22.4 nomi="x,F" linee="-0.7,0 0,0;0,5 1,5;1,13 2,13;2,17 3,17;3,20 3.89,20" punti="0,0,vuoto;0,5,pieno;1,5,vuoto;1,13,pieno;2,13,vuoto;2,17,pieno;3,17,vuoto;3,20,pieno" etichette="1.44,14.4,13;2.48,18.35,17" titolo="At $x=2$ the students with two absences enter the count and the cumulative frequency rises from $13$ to $17$."}
+
+:::
+
 ## Charts for values and intervals
 
 :::osservazione{#grafici titolo="Bars for categories and discrete values"}
@@ -105,6 +112,25 @@ The combined mean is closer to $6$ because the second group has twice as many st
 When a table gives only class intervals, the individual observations within each class are unknown. Replacing the observations by their class midpoints gives an **estimate**. For example, two measurements in $[0,10)$ might be $1$ and $3$, or $7$ and $9$. The midpoint is $5$, while the actual means would be $2$ and $8$.
 :::
 
+::::teorema{#bilancio-media titolo="Deviations from the mean sum to zero"}
+For observations $x_1,\ldots,x_N$ with $N>0$, the mean is the only number $m$ for which the signed deviations $\sum_i(x_i-m)$ sum to zero. This property checks a calculated mean or recovers a missing observation when the centre is known.
+
+:::dimostrazione
+Summing the deviations subtracts $m$ once for every observation, so
+$$
+\sum_i(x_i-m)=\sum_i x_i-Nm=N(\bar x-m).
+$$
+Since $N>0$, the product is zero exactly when $m=\bar x$.
+:::
+::::
+
+:::esempio{titolo="The mean as a balance point"}
+For the data $2,3,7$ the mean is $4$ because the deviations $-2,-1,3$ add to zero. The observation $7$ balances the two below the mean even though there is only one observation on the right. The median is $3$, the second position with one observation on either side. For three observations the mean and median coincide when both endpoints lie at equal distances from the middle value.
+
+::grafico{xmin=-0.4 xmax=8.7 ymin=-0.4 ymax=3.5 nomi="x," punti="2,1;3,1;7,1" asintoti="x=4" segmenti="2,1.8,4,1.8;3,2.4,4,2.4;4,1.8,7,1.8" etichette="2.7,1.95,−2;3.22,2.56,−1;5.3,1.95,+3" titolo="Distances from the mean sum to zero when each deviation is taken with its sign."}
+
+:::
+
 ## Median, mode and quartiles
 
 :::definizione{#mediana titolo="Middle position and most frequent value"}
@@ -121,6 +147,17 @@ In a distribution of $12$ scores, the values $4$, $6$ and $9$ have frequencies $
 
 :::esempio{titolo="An extreme value raises the mean"}
 For the ordered observations $2,3,4,5,6$, the median is $4$ and the quartiles are $\dfrac52$ and $\dfrac{11}{2}$. Replacing $6$ by $36$ leaves the median at $4$, since the same observation occupies the middle position. The sum increases by $30$, so the mean increases by $\dfrac{30}{5}=6$, from $4$ to $10$. The median describes the centre by position, while the mean also reflects how far the extreme values lie from it.
+:::
+
+:::esempio{titolo="Five positions in a box plot"}
+Consider the sorted observations $1,2,4,4,6,8,9,12$. Their median is $\dfrac{4+6}{2}=5$. Using the medians of the two halves gives $Q_1=\dfrac{2+4}{2}=3$ and $Q_3=\dfrac{8+9}{2}=\dfrac{17}{2}$. Plot these three values on an axis. In the simplest box plot, the outer segments extend to the minimum $1$ and maximum $12$. The box has width $\dfrac{17}{2}-3=\dfrac{11}{2}$, the interquartile range. Its interior line marks the median. By comparison, the full range is $12-1=11$.
+
+::grafico{xmin=-0.45 xmax=14 ymin=-0.5 ymax=2.7 nomi="x," poligoni="3,0.65 8.5,0.65 8.5,1.65 3,1.65" linee="1,1.15 3,1.15;8.5,1.15 12,1.15;1,0.88 1,1.43;12,0.88 12,1.43;5,0.65 5,1.65" etichette="2.8,1.96,Q_1;4.8,1.96,Me;8.3,1.96,Q_3" titolo="The box runs from $3$ to $\dfrac{17}{2}$ and the line inside marks the median $5$."}
+
+:::
+
+:::attenzione
+For an odd number of data points, some conventions include the central observation in both halves or interpolate between adjacent positions. For $1,3,7,11,15$, excluding $7$ gives $Q_1=2$ and $Q_3=13$. Including it gives $Q_1=3$ and $Q_3=11$. A different convention can therefore change the interquartile range as well. When a method is specified, apply it consistently to both halves.
 :::
 
 ## Spread and units of measurement
@@ -278,7 +315,7 @@ At $x=2$ the line predicts $3$, while the observed value is $4$. The residual is
 :::osservazione{#lettura titolo="The observed range and common factors"}
 A prediction for an input between the smallest and largest observed input values is an **interpolation**. A prediction outside that range is an **extrapolation**. Both use the same equation, but extrapolation assumes that the observed relationship extends beyond the data.
 
-Covariance and correlation are symmetric when $x$ and $y$ are interchanged. The regression of $y$ on $x$ minimises vertical residuals. After interchanging the variables, the new regression minimises residuals along the horizontal axis of the original plot.
+Covariance and correlation are symmetric when $x$ and $y$ are interchanged. The regression of $y$ on $x$ minimises the sum of squared vertical residuals. After interchanging the variables, the new regression minimises the sum of squared residuals along the horizontal axis of the original plot.
 :::
 
 :::esempio{titolo="Prediction within and beyond the data"}
@@ -306,4 +343,11 @@ The new slope is negative. The x-coordinate $8$ is far from the original group a
 
 :::attenzione
 An observed association alone leaves the question of causation open. A stand may sell more ice creams on days when more people visit the swimming pool. Warmer days may increase both visits and sales, so the two series can rise together even if visits have no effect on purchasing decisions. Assessing the association requires knowing the context in which the data were collected.
+:::
+
+:::esempio{titolo="Residuals with a recognisable pattern"}
+The regression line for the points $(1,6)$, $(2,4)$, $(3,6)$ and $(4,12)$ is $\hat y=2x+2$. Their residuals are $2,-2,-2,2$. Their sum is zero, and weighting them by the x-coordinates also gives $1\cdot2+2(-2)+3(-2)+4\cdot2=0$. The two equations confirm the vertical balance and the balance associated with the slope. In the residual plot, however, the outer points are above zero and the two middle points below. The response is underestimated at the ends and overestimated in the middle. Such a pattern suggests checking whether a curved model describes the relationship better.
+
+::grafico{xmin=-0.5 xmax=5 ymin=-3.5 ymax=3.75 nomi="x,residual" punti="1,2;2,-2;3,-2;4,2" segmenti="1,0,1,2;2,0,2,-2;3,0,3,-2;4,0,4,2" titolo="Positive residuals at the ends and negative ones in the middle cancel, but show a systematic pattern."}
+
 :::

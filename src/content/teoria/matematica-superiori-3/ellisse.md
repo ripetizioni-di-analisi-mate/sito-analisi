@@ -33,6 +33,13 @@ Lo stesso intervallo vale per $d_2$. Per un fuoco fissato, il valore minore si r
 Per $a=6$ e $c=4$, una coppia di distanze $11$ e $1$ ha somma $12$, come richiesto. Tuttavia ogni distanza deve stare fra $a-c=2$ e $a+c=10$. Infatti se un punto distasse $1$ da un fuoco, la sua distanza dall’altro non potrebbe superare $1+8=9$. La coppia $9$ e $3$ ha invece somma $12$ e differenza $6<8$. Si può costruire un triangolo di lati $3$, $8$ e $9$ e scegliere come lato di lunghezza $8$ il segmento tra i fuochi, ottenendo così un punto dell’ellisse.
 :::
 
+:::esempio{titolo="Tre valori della somma con gli stessi fuochi"}
+Fissiamo i fuochi $F_1(-3,0)$ e $F_2(3,0)$. La distanza diretta tra loro vale $6$. Se la somma richiesta è $5$, ogni spezzata da $F_1$ a $F_2$ che passa per $P$ ha lunghezza maggiore di $5$ e il luogo è vuoto. Se la somma è $6$, il cammino di lunghezza minima si ottiene con i punti $P$ del segmento fra i fuochi. Per una somma di $10$, si ha $a=5$ e $c=3$. Il punto $(0,4)$ appartiene al luogo perché dista $\sqrt{3^2+4^2}=5$ da ciascun fuoco. La somma $10$ permette dunque anche posizioni fuori dall’asse focale.
+
+::grafico{curve="5*cos(t),4*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="-3,0,pieno,F_1;3,0,pieno,F_2;0,4,pieno,P" linee="-3,0 3,0" segmenti="-3,0,0,4;3,0,0,4" legenda="\dfrac{x^2}{25}+\dfrac{y^2}{16}=1" titolo="Il segmento $F_1F_2$ corrisponde alla somma $6$, mentre l’ellisse per $P$ corrisponde alla somma $10$."}
+
+:::
+
 ## Equazione canonica e assi
 
 ::::teorema{#assi titolo="Dai fuochi ai semiassi"}
@@ -66,6 +73,25 @@ Viceversa, dall’ultima equazione segue $|x|\leq a$. Sostituendola nelle formul
 Per $\dfrac{x^2}{25}+\dfrac{y^2}{9}=1$, ponendo $y=0$ si ha $x^2=25$, quindi $x=\pm5$. Ponendo $x=0$ si ottiene $y=\pm3$. L’asse maggiore misura $10$, quello minore $6$. Poiché le coordinate compaiono al quadrato, cambiare il segno di una sola coordinata conserva l’equazione. La curva è quindi simmetrica rispetto a entrambi gli assi e, cambiando entrambi i segni, rispetto al centro.
 :::
 
+::::teorema{#riscalamento titolo="Dalla circonferenza unitaria all’ellisse"}
+Date due lunghezze positive $p$ e $q$, la trasformazione $(u,v)\mapsto(pu,qv)$ manda la circonferenza unitaria nell’ellisse con semiassi orizzontale $p$ e verticale $q$. Porta inoltre il disco unitario aperto nei punti che soddisfano $\dfrac{x^2}{p^2}+\dfrac{y^2}{q^2}<1$. In questo modo la stessa trasformazione descrive sia la curva sia la regione interna.
+
+:::dimostrazione
+Le nuove coordinate sono $x=pu$ e $y=qv$. Poiché $p$ e $q$ sono positivi, si può risalire univocamente a $u=\dfrac{x}{p}$ e $v=\dfrac{y}{q}$. Sostituendo in $u^2+v^2=1$ si trova
+$$
+\frac{x^2}{p^2}+\frac{y^2}{q^2}=1 .
+$$
+Lo stesso passaggio applicato a $u^2+v^2<1$ dà la condizione per i punti interni. I valori estremi $\pm1$ di $u$ e $v$ diventano rispettivamente $\pm p$ e $\pm q$. È questa corrispondenza a fissare il significato geometrico dei due denominatori.
+:::
+::::
+
+:::esempio{titolo="Coordinate relative e coordinate effettive"}
+Consideriamo $u=\dfrac35$ e $v=\dfrac45$. Il punto $U$ è sulla circonferenza unitaria poiché $\dfrac9{25}+\dfrac{16}{25}=1$. Riscalando di $5$ in orizzontale e di $3$ in verticale, il punto diventa $P\left(3,\dfrac{12}{5}\right)$. La sua ascissa occupa i tre quinti della semilarghezza e la sua ordinata i quattro quinti della semialtezza. I due rapporti si conservano sotto questo cambiamento di scala, mentre le distanze euclidee cambiano.
+
+::grafico{curve="cos(t),sin(t),0,6.283185307;5*cos(t),3*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-4 ymax=4 uguale=1 punti="0.6,0.8,pieno,U;3,2.4,pieno,P" segmenti="0.6,0.8,0.6,0;3,2.4,3,0" legenda="u^2+v^2=1;\dfrac{x^2}{25}+\dfrac{y^2}{9}=1" titolo="Il punto $U$ della circonferenza va in $P$ moltiplicando le due coordinate per fattori diversi."}
+
+:::
+
 ## Orientazione e posizione dei fuochi
 
 :::teorema{#fuochi titolo="Il denominatore maggiore indica i fuochi"}
@@ -78,6 +104,13 @@ Nell’ellisse $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$ l’asse maggiore è verticale
 
 :::attenzione
 La lettera $a$ indica qui il **semiasse maggiore**. Nell’equazione $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$ il semiasse orizzontale misura $3$, mentre $a=5$. Per scegliere l’asse dei fuochi si confrontano i due denominatori e si guarda sotto quale quadrato compare il maggiore.
+:::
+
+:::esempio{titolo="Fuochi ed estremi dell’asse verticale"}
+In $\dfrac{x^2}{9}+\dfrac{y^2}{25}=1$ il punto laterale $P(3,0)$ è allineato orizzontalmente con il centro. Il triangolo formato da $P$, dal centro e da $F_2(0,4)$ ha cateti $3$ e $4$. L’ipotenusa è quindi $5$. Anche $PF_1$ vale $5$, perché $F_1(0,-4)$ è il riflesso di $F_2$ rispetto all’asse $x$. Nel passare da $P$ al vertice superiore, le due distanze passano da $5$ e $5$ a $9$ e $1$, mentre la somma resta $10$.
+
+::grafico{curve="3*cos(t),5*sin(t),0,6.283185307" xmin=-5 xmax=5 ymin=-6 ymax=6 uguale=1 punti="0,4,pieno,F_2;0,-4,pieno,F_1;0,5,pieno,V;3,0,pieno,P" segmenti="0,4,3,0;0,-4,3,0" legenda="\dfrac{x^2}{9}+\dfrac{y^2}{25}=1" titolo="Le distanze focali di $P$ sono uguali. Al vertice $V$ valgono $9$ e $1$."}
+
 :::
 
 ## Eccentricità e forma
@@ -94,6 +127,17 @@ A semiasse maggiore fissato, aumentando $e$ diminuisce $b$ e la curva diventa pi
 Due ellissi orizzontali con $a=5$ hanno rispettivamente eccentricità $\dfrac35$ e $\dfrac45$. Nel primo caso $c=3$, quindi $b=\sqrt{25-9}=4$. Nel secondo $c=4$, quindi $b=\sqrt{25-16}=3$. Entrambe hanno larghezza $10$, ma le altezze sono rispettivamente $8$ e $6$. L’ellisse con eccentricità maggiore ha i fuochi più lontani dal centro ed è più bassa.
 
 ::grafico{curve="5*cos(t),4*sin(t),0,6.283185307;5*cos(t),3*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-5 ymax=5 uguale=1 punti="-5,0;5,0;0,4;0,3" legenda="e=\dfrac{3}{5};e=\dfrac{4}{5}" titolo="A larghezza fissata, l’eccentricità maggiore corrisponde al semiasse verticale minore."}
+
+:::
+
+:::esempio{titolo="Stessa eccentricità e scale diverse"}
+Un’ellisse orizzontale ha $a=5$ e $b=3$. Un’altra, con lo stesso centro, ha semiassi $a=\dfrac52$ e $b=\dfrac32$. La prima ha distanza focale dal centro $c=\sqrt{25-9}=4$. Per la seconda tale distanza è $2$, perché entrambi i quadrati dei semiassi sono un quarto dei precedenti. Ne segue che il rapporto focale è comune:
+$$
+e_1=\frac45,\qquad e_2=\frac{2}{\frac52}=\frac45 .
+$$
+La curva più piccola si ottiene dalla maggiore dimezzando le due coordinate. Il rapporto fra altezza e larghezza resta $\dfrac35$, mentre entrambe le misure effettive si dimezzano.
+
+::grafico{curve="5*cos(t),3*sin(t),0,6.283185307;2.5*cos(t),1.5*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-4 ymax=4 uguale=1 punti="5,0;2.5,0;0,3;0,1.5" legenda="a=5,\ b=3;a=\dfrac52,\ b=\dfrac32" titolo="Una dilatazione uniforme cambia i semiassi e conserva l’eccentricità."}
 
 :::
 
@@ -130,6 +174,17 @@ $$
 Le intersezioni stanno alla stessa distanza orizzontale dal centro e hanno ascisse opposte. La larghezza alla quota data è quindi la differenza delle ascisse, $\dfrac{8\sqrt5}{3}\,\mathrm m$. Questa misura è minore della luce alla base, perché il taglio si trova a quota positiva.
 :::
 
+:::osservazione{titolo="L’intervallo delle quote utili in una sezione"}
+Nell’esempio dell’arco la formula dell’altezza è $y=3\sqrt{1-\dfrac{x^2}{16}}$. Il radicando è non negativo per $|x|\leq4$. La larghezza della sezione a quota $t$ è
+$$
+L(t)=8\sqrt{1-\frac{t^2}{9}}, \qquad 0\leq t\leq3 .
+$$
+Alla base si ha $L(0)=8$, mentre in cima $L(3)=0$. Tra questi valori, all’aumentare di $t$ il radicando diminuisce. Se un oggetto ha larghezza $6$ e viene centrato rispetto alla base, i suoi estremi orizzontali sono $\pm3$. L’arco a tali ascisse è alto $3\sqrt{1-\dfrac9{16}}=\dfrac{3\sqrt7}{4}$, che è l’altezza massima di un rettangolo di quella larghezza.
+
+::grafico{f="3*sqrt(1-x^2/16);2" xmin=-5 xmax=5 ymin=-1 ymax=4 uguale=1 punti="-4,0;4,0;0,3;-2.981423970,2,pieno,A;2.981423970,2,pieno,B" segmenti="-2.981423970,0,-2.981423970,2;2.981423970,0,2.981423970,2" legenda="y=3\sqrt{1-\dfrac{x^2}{16}};y=2" titolo="La sezione $AB$ è più corta della base perché si trova a quota $2$."}
+
+:::
+
 ## Ellissi traslate
 
 :::teorema{#traslata titolo="Coordinate misurate dal centro"}
@@ -144,6 +199,21 @@ Si ottengono i vertici principali $(h\pm a,k)$ e i fuochi $(h\pm c,k)$. Se l’a
 Per $\dfrac{(x-2)^2}{25}+\dfrac{(y+1)^2}{9}=1$ il centro è $(2,-1)$. L’asse maggiore è orizzontale e $c=\sqrt{25-9}=4$. I fuochi sono quindi $(-2,-1)$ e $(6,-1)$, mentre gli estremi dell’asse maggiore sono $(-3,-1)$ e $(7,-1)$. Il fuoco di destra ha ascissa $6$, inferiore a $7$, perché $c<a$. Gli estremi dell’asse minore si ottengono tenendo $x=2$ e ponendo $y=-1\pm3$.
 
 ::grafico{curve="2+5*cos(t),-1+3*sin(t),0,6.283185307" xmin=-4 xmax=8 ymin=-5 ymax=3 uguale=1 punti="2,-1,pieno,C;-2,-1,pieno,F_1;6,-1,pieno,F_2;-3,-1;7,-1;2,2;2,-4" segmenti="-3,-1,7,-1;2,-4,2,2" legenda="\dfrac{(x-2)^2}{25}+\dfrac{(y+1)^2}{9}=1" titolo="Sia i fuochi sia i vertici principali hanno l’ordinata del centro $C$."}
+
+:::
+
+:::esempio{titolo="Completare i quadrati quando i coefficienti sono diversi"}
+L’equazione $9x^2+4y^2+18x-16y-11=0$ ha coefficienti quadratici diversi. Perciò si raccoglie il coefficiente di ciascuna variabile prima del completamento.
+$$
+\begin{aligned}
+9(x^2+2x)+4(y^2-4y)&=11,\\
+9(x^2+2x+1)+4(y^2-4y+4)&=11+9+16,\\
+9(x+1)^2+4(y-2)^2&=36 .
+\end{aligned}
+$$
+È necessario aggiungere $9$ e $16$ al membro destro, perché i termini $1$ e $4$ sono aggiunti dentro espressioni moltiplicate rispettivamente per $9$ e $4$. Dividendo per $36$ si ottiene $\dfrac{(x+1)^2}{4}+\dfrac{(y-2)^2}{9}=1$. Il centro è $(-1,2)$ e l’asse maggiore è verticale, con vertici $(-1,-1)$ e $(-1,5)$. Se dopo il completamento il membro destro fosse stato zero, sarebbe rimasto il solo centro. Con membro destro negativo non ci sarebbe stato alcun punto reale, perché entrambi i termini a sinistra sono non negativi.
+
+::grafico{curve="-1+2*cos(t),2+3*sin(t),0,6.283185307" xmin=-5 xmax=4 ymin=-2 ymax=6 uguale=1 punti="-1,2,pieno,C;-1,-1,pieno,V_1;-1,5,pieno,V_2;-3,2;1,2" segmenti="-1,-1,-1,5;-3,2,1,2" legenda="\dfrac{(x+1)^2}{4}+\dfrac{(y-2)^2}{9}=1" titolo="La forma centrata dà il centro $C$ e i due estremi verticali dell’asse maggiore."}
 
 :::
 
@@ -217,4 +287,35 @@ A differenza della circonferenza, in questo caso la tangente non è perpendicola
 
 :::osservazione
 Se è assegnata una retta $y=mx+q$ e si cerca la sua posizione rispetto all’ellisse, si sostituisce l’intera espressione $mx+q$ al posto di $y$. Il coefficiente di $x^2$ è $\dfrac1{a^2}+\dfrac{m^2}{b^2}>0$. Quindi il discriminante classifica i casi di due punti, un punto o nessun punto. Per una verticale $x=t$, basta confrontare $|t|$ con il semiasse orizzontale. Il caso di uguaglianza dà la tangenza.
+:::
+
+::::teorema{#tangenti-parallele titolo="Due tangenti di pendenza assegnata"}
+Per l’ellisse centrata $\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$ con $a,b>0$, le due rette di pendenza $m$ tangenti alla curva hanno intercette
+$$
+q=\pm\sqrt{a^2m^2+b^2}.
+$$
+Per $|q|$ minore di questa soglia la retta è secante, mentre per $|q|$ maggiore è esterna. La soglia dipende da entrambi i semiassi quando $m\ne0$. Per $m=0$ si ritrovano $y=\pm b$.
+
+:::dimostrazione
+La sostituzione $x=au$ e $y=bv$ porta l’ellisse nella circonferenza unitaria e la retta $y=mx+q$ in $-ma u+bv-q=0$. Nel piano delle coordinate $u,v$, la distanza della retta dall’origine è
+$$
+d=\frac{|q|}{\sqrt{a^2m^2+b^2}} .
+$$
+Qui il raggio è $1$. Se $d<1$, la retta incontra la circonferenza in due punti. Con $d=1$ la tocca in un punto. Con $d>1$ resta esterna. La trasformazione è invertibile e conserva il numero di intersezioni, dunque i tre casi valgono anche per la curva di partenza.
+:::
+::::
+
+:::esempio{titolo="Trovare i due contatti a partire dall’inclinazione"}
+Per $\dfrac{x^2}{9}+\dfrac{y^2}{16}=1$ e $m=1$ si ottiene $q=\pm\sqrt{9+16}=\pm5$. I contatti si possono ricavare senza risolvere due sistemi distinti. Sostituendo $y=x+5$ nella prima equazione si ottiene
+$$
+\begin{aligned}
+16x^2+9(x+5)^2 &=144,\\
+25x^2+90x+81&=0,\\
+(5x+9)^2&=0.
+\end{aligned}
+$$
+Il contatto con $y=x+5$ è quindi $\left(-\dfrac95,\dfrac{16}{5}\right)$. Riflettendo rispetto all’origine, il contatto con $y=x-5$ è $\left(\dfrac95,-\dfrac{16}{5}\right)$. Le due rette sono parallele, mentre ciascun punto passa dalla parte opposta del centro.
+
+::grafico{f="x+5;x-5" curve="3*cos(t),4*sin(t),0,6.283185307" xmin=-6 xmax=6 ymin=-6 ymax=6 uguale=1 punti="-1.8,3.2,pieno,P;1.8,-3.2,pieno,Q;0,0,pieno,C" segmenti="-1.8,3.2,1.8,-3.2" legenda="y=x+5;y=x-5;\dfrac{x^2}{9}+\dfrac{y^2}{16}=1" titolo="I punti di tangenza $P$ e $Q$ sono simmetrici rispetto al centro."}
+
 :::

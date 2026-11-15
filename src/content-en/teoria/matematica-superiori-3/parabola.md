@@ -37,6 +37,14 @@ Let $F(0,1)$ and $d:y=-1$. The vertex is halfway between $F$ and the point $D(0,
 ::grafico{f="x^2/4;-1" legenda="y=\dfrac{x^2}{4};y=-1" xmin=-4 xmax=5 ymin=-2 ymax=4.5 uguale=1 punti="0,1,pieno,F;0,0,pieno,V;0,-1,pieno,D;2,1,pieno,P;2,-1,pieno,H" segmenti="0,1,2,1;2,-1,2,1" titolo="The distances PF and PH are equal because P is on the parabola"}
 :::
 
+:::esempio{titolo="The directrix above the focus"}
+Let $F(1,-2)$ and $d:y=2$. The axis is the vertical line through the focus, so $x=1$. It meets the directrix at $D(1,2)$. The vertex is equally far from $F$ and $D$ along that axis, so its height is the average of $-2$ and $2$. This gives $V(1,0)$. The parameter $p$ is the signed displacement from the vertex to the focus, so here it is $-2$ and the equation is $(x-1)^2=-8y$.
+
+To check which way the parabola opens, find a point at the height of the focus. Setting $y=-2$ gives $(x-1)^2=16$, so the possible x-coordinates are $-3$ and $5$. For $P(5,-2)$, the horizontal segment to $F$ has length $5-1=4$. The vertical segment from $P$ to the directrix has length $2-(-2)=4$. The curve therefore passes through $P$ on the focus side. The same equation rules out positive heights because for $y>0$ its right-hand side would be negative.
+
+::grafico{f="-(x-1)^2/8;2" legenda="y=-\dfrac{(x-1)^2}{8};y=2" xmin=-4 xmax=7 ymin=-4 ymax=3 uguale=1 segmenti="1,-2,5,-2;5,-2,5,2" punti="1,-2,pieno,F;1,0,pieno,V;1,2,pieno,D;5,-2,pieno,P;5,2,pieno,H; -3,-2" titolo="The focus is below the vertex. Both segments from P to the focus and the directrix have length 4"}
+:::
+
 ## From the quadratic to vertex form
 
 ::::teorema{#vertice titolo="Completing the square"}
@@ -82,6 +90,34 @@ It follows that $V=(2,3)$. At distance $1$ from the axis, that is at $x=1$ and $
 The parabolas $y=x^2$ and $y=4x^2$ both have vertex at the origin and open upwards. At height $y=1$, the first meets the horizontal line at x-coordinates $-1$ and $1$. For the second, $4x^2=1$, so the x-coordinates are $-\dfrac12$ and $\dfrac12$. At the same height the second chord is half as wide. The coefficient of $x^2$ is positive in both equations. The difference in aperture comes from its absolute value.
 :::
 
+:::osservazione
+In $f(x)=a(x-h)^2+k$, the quantity $(x-h)^2$ is the square of the distance from the axis. To the left of the axis, this distance decreases as $x$ moves up towards $h$. To the right, it increases as $x$ moves away from $h$. With $a>0$ the ordinates follow the same pattern, so the function decreases for $x\le h$ and increases for $x\ge h$. With $a<0$, multiplication by $a$ reverses the comparison and gives the opposite monotonicity.
+
+For example, for $f(x)=-3(x-4)^2+2$, the points at x-coordinates $3$ and $5$ are both $1$ unit from the axis. Their ordinates are $-1$, and $f(4)=2$. The ordinate rises between $3$ and $4$ and falls between $4$ and $5$. The equal ordinates at the endpoints of $[3,5]$ reflect symmetry, even though the ordinate varies inside the interval. This helps identify when it is enough to compare the endpoints and when the vertex also needs to be evaluated.
+:::
+
+::::teorema{#punti-stessa-ordinata titolo="The axis from two points at the same height"}
+Let $f(x)=ax^2+bx+c$ with $a\ne0$. If $u$ and $v$ are distinct x-coordinates and $f(u)=f(v)$, the axis of symmetry is at $\dfrac{u+v}{2}$. This locates the vertex when a graph or a table shows two points at the same height, even if both lie off the x-axis.
+
+:::dimostrazione
+Subtract the two values of $f$ to isolate the factor $v-u$.
+$$
+\begin{aligned}
+0 &= f(v)-f(u)\\
+  &= a(v^2-u^2)+b(v-u)\\
+  &= (v-u)\bigl(a(u+v)+b\bigr).
+\end{aligned}
+$$
+Since $v-u\ne0$, the second factor is zero. Thus $\dfrac{u+v}{2}=-\dfrac{b}{2a}$, which is the x-coordinate of the axis.
+:::
+::::
+
+:::esempio{titolo="Finding the quadratic coefficient from three values"}
+Suppose $f(0)=f(4)=1$ and $f(2)=-3$. The first two values give the axis $x=2$. The third is the ordinate on the axis itself, so the most direct form is $f(x)=a(x-2)^2-3$. The condition $f(0)=1$ gives $1=4a-3$, so $a=1$. Substituting the other x-coordinate gives $f(4)=(4-2)^2-3=1$, as required. The points at $0$ and $4$ are two units from the axis. In the formula, the square of that distance is $4$, equal to the rise from $-3$ to $1$.
+
+::grafico{f="(x-2)^2-3;1" xmin=-1 xmax=5 ymin=-4.1 ymax=5.3 asintoti="x=2" punti="0,1,pieno,A;4,1,pieno,B;2,-3,pieno,V" titolo="The horizontal chord AB determines the axis through its midpoint"}
+:::
+
 ## Roots, intercept and sign
 
 :::teorema{#zeri titolo="Intersections with the coordinate axes"}
@@ -102,6 +138,18 @@ The x-coordinate of the vertex is the midpoint of the two roots, namely $2$. Sub
 
 :::attenzione
 The equation $(x-2)^2=0$ has the single solution $2$, which is a double root. The graph of $y=(x-2)^2$ touches the axis at $(2,0)$. Since the square is positive on either side, the sign stays positive for $x\ne2$.
+:::
+
+:::esempio{titolo="Counting intersections as a parameter varies"}
+Consider $f_q(x)=(x-1)^2+q$, with $q$ real. The parameter $q$ is the minimum ordinate of the parabola. Shifting it up or down therefore changes the number of zeros, while the axis remains $x=1$. Solving $f_q(x)=0$ gives $(x-1)^2=-q$. The distance from the axis at a solution depends on $-q$.
+
+- If $q=-1$, the distance is $1$, giving x-coordinates $0$ and $2$. Between them the square is less than $1$, so $f_{-1}(x)<0$.
+- If $q=0$, the distance is zero. The only common point is $V(1,0)$ and the x-axis is tangent.
+- If $q=2$, the square would have to equal $-2$. The graph stays above the axis and every ordinate is at least $2$.
+
+Expanding and calculating the discriminant gives the same three cases because $b=-2$, $a=1$ and $c=1+q$ give $\Delta=-4q$. Vertex form shows the effect of the vertical translation directly.
+
+::grafico{f="(x-1)^2-1;(x-1)^2;(x-1)^2+2" xmin=-2 xmax=4 ymin=-2.4 ymax=6.5 punti="0,0;2,0;1,0" titolo="With the same vertical axis, the curves have two roots, one point of tangency or no intersection with the x-axis"}
 :::
 
 ## Finding the equation from given data
@@ -144,6 +192,20 @@ $$
 Subtracting the second equation in the system on the right from the third gives $2a=2$, so $a=1$ and $b=-2$. The result is $y=x^2-2x+1$. The coefficient $a$ is nonzero, and the values at $x=0,1,3$ are $1,0,4$, respectively.
 
 In general, three points with distinct x-coordinates determine at most one polynomial of degree at most two. If two polynomials of that degree passed through the same points, their difference would have three distinct roots and would have to be the zero polynomial. If the three points are collinear, the polynomial obtained has degree at most one, so the data do not determine a parabola.
+:::
+
+:::esempio{titolo="Two roots and a point of known height"}
+Find the parabola with roots $-1$ and $3$ through $P(1,4)$. The roots fix the factors $x+1$ and $x-3$. It remains to find the coefficient that scales the ordinates vertically.
+$$
+\begin{aligned}
+y&=a(x+1)(x-3),\\
+4&=a(1+1)(1-3)=-4a,\\
+a&=-1,\qquad y=-(x+1)(x-3).
+\end{aligned}
+$$
+Since $1$ is the midpoint between the roots, $P$ is the vertex. Its height is positive and $a<0$, so the curve is above the axis between the roots and below the axis outside them. Choosing $a=1$ would preserve both intercepts, but at $x=1$ the ordinate would be $-4$. The third point distinguishes two parabolas with the same roots.
+
+::grafico{f="-(x+1)*(x-3);(x+1)*(x-3)" xmin=-2.3 xmax=4.3 ymin=-6 ymax=6 punti="-1,0;3,0;1,4,pieno,P" titolo="Both parabolas pass through the given roots. The curve through P opens downward"}
 :::
 
 ## Secant lines, tangents and lines that miss the parabola
@@ -220,6 +282,40 @@ For the first line, the difference $x^2-(4x-4)$ is $(x-2)^2$. For the second it 
 For a tangent parallel to a given line, the slope $m$ is already known. Find $t$ from $2at+b=m$. For example, a horizontal tangent has $m=0$, so $t=-\dfrac{b}{2a}$. The point of tangency is the vertex and the line has equation $y=k$.
 :::
 
+::::teorema{#corda-tangente-parallela titolo="A chord and its parallel tangent"}
+Let $f(x)=ax^2+bx+c$ with $a\ne0$. The tangent parallel to the chord joining the points at distinct x-coordinates $u$ and $v$ touches at $t=\dfrac{u+v}{2}$. The tangent passes through $(t,f(t))$, while the midpoint of the chord generally has a different ordinate.
+
+:::dimostrazione
+Divide the change in ordinates by $v-u$ to get the chord's slope.
+$$
+\begin{aligned}
+m_{\mathrm{corda}}&=\frac{f(v)-f(u)}{v-u}\\[4pt]
+&=\frac{(v-u)\bigl(a(v+u)+b\bigr)}{v-u}\\[4pt]
+&=a(v+u)+b.
+\end{aligned}
+$$
+The slope of the tangent at $t$ is $2at+b$. Since the two lines are parallel, their slopes are equal. Subtracting $b$ and dividing by $2a$ gives the average of the two x-coordinates.
+:::
+::::
+
+:::esempio{titolo="The tangent parallel to a sloping chord"}
+On $f(x)=x^2+1$, the points at x-coordinates $0$ and $4$ are $A(0,1)$ and $B(4,17)$. The chord has slope $\dfrac{17-1}{4-0}=4$ and lies on $y=4x+1$. The parallel tangent touches at $x=2$. Since $f(2)=5$, the tangent is $y=4(x-2)+5=4x-3$. The chord has ordinate $9$ at $x=2$. The two lines have the same slope, so their ordinates differ by $4$ at every x-coordinate. To check tangency, $x^2+1-(4x-3)=(x-2)^2$, which is zero only at the point of contact.
+
+::grafico{f="x^2+1;4*x+1;4*x-3" xmin=-1 xmax=5 ymin=-4.5 ymax=20 punti="0,1,pieno,A;4,17,pieno,B;2,5,pieno,T;2,9,pieno,M" segmenti="2,5,2,9" titolo="The point of tangency T has the same x-coordinate as the chord midpoint M. The lines are parallel"}
+:::
+
+:::osservazione
+To count the tangents through $P(u,v)$, substitute that point into the formula for the tangent at $t$. Using $f$ for the quadratic again, the condition can be written as a square.
+$$
+\begin{aligned}
+v&=(2at+b)u+c-at^2\\
+ &=f(u)-a(t-u)^2,\\[3pt]
+(t-u)^2&=\frac{f(u)-v}{a}.
+\end{aligned}
+$$
+The sign of the final right-hand side determines the number of points of tangency. If it is positive, there are two values of $t$, hence two lines of different slopes. If it is zero, $P$ lies on the parabola and the tangent touches there. If it is negative, there are no real tangents through $P$. For example, for $f(x)=4-x^2$ and $P(0,5)$, the ratio is $\dfrac{4-5}{-1}=1$, so $t=\pm1$. The quadratic coefficient is negative, so in this case the point giving two tangents is above the curve at the same x-coordinate. The two lines are $y=5+2x$ and $y=5-2x$.
+:::
+
 ## Parabolas with a horizontal axis
 
 :::definizione{#orizzontale titolo="Swapping the coordinates"}
@@ -238,6 +334,20 @@ For $x=(y-1)^2-2$, the vertex is $(-2,1)$. Setting $x=2$ gives $(y-1)^2=4$, so $
 The curve is the graph of $x$ as a function of $y$. A single x-coordinate can, however, correspond to two y-coordinates, as shown by the vertical line through the two points. The graph of a function $y=f(x)$ assigns exactly one y-coordinate to each x-coordinate in its domain.
 
 ::grafico{curve="(t-1)^2-2,t,-2,4.3" legenda="x=(y-1)^2-2" xmin=-3.5 xmax=6 ymin=-2.5 ymax=4.5 asintoti="y=1" segmenti="2,-1,2,3" punti="-2,1,pieno,V;2,-1,pieno,A;2,3,pieno,B" titolo="A and B have the same x-coordinate and are symmetric about y = 1"}
+:::
+
+:::esempio{titolo="The upper and lower branches of a horizontal parabola"}
+Consider $x=5-2(y-1)^2$. The vertex is $(5,1)$ and the graph lies to the left of the vertical line through it. To express the ordinate as a function of the x-coordinate, first isolate the square.
+$$
+\begin{aligned}
+(y-1)^2 &= \frac{5-x}{2},\\[4pt]
+y_+(x) &= 1+\sqrt{\frac{5-x}{2}},\\[4pt]
+y_-(x) &= 1-\sqrt{\frac{5-x}{2}} .
+\end{aligned}
+$$
+Both square roots require $x\le5$. The function $y_+$ describes the points above the horizontal axis and $y_-$ the points below. For $x<5$ they give two distinct heights, and at $x=5$ both give $1$. When $x=3$ the ordinates are $2$ and $0$, and the vertical chord has length $2$. The coefficient $2$ in the square root comes from the division that isolates the square, so it stays inside the root after substituting for $x$.
+
+::grafico{curve="5-2*(t-1)^2,t,1,3.5;5-2*(t-1)^2,t,-1.5,1" legenda="y_+;y_-" xmin=-4 xmax=6 ymin=-1.6 ymax=3.6 segmenti="3,0,3,2;-4,1,5,1" punti="5,1,pieno,V;3,2,pieno,A;3,0,pieno,B" titolo="Both functions share the vertex V. The vertical chord AB joins one point from each branch"}
 :::
 
 ## Extreme values under constraints
@@ -265,4 +375,15 @@ y(4)=9-1^2=8,
 y(6)=9-3^2=0 .
 $$
 On the specified section the maximum is $8$ and the minimum is $0$. The maximum of the full graph would be $9$, but that point is outside the walkway.
+:::
+
+:::esempio{titolo="Choosing a whole-number price"}
+A school offers a workshop and can set the ticket price at a whole number of euros from $4$ to $12$. The predicted number of tickets at price $p$ is $30-2p$. Revenue in euros is the price times the number of tickets, so the model gives
+$$
+\begin{aligned}
+R(p)&=30p-2p^2\\
+    &=\frac{225}{2}-2\left(p-\frac{15}{2}\right)^2 .
+\end{aligned}
+$$
+For real prices the vertex would have x-coordinate $\dfrac{15}{2}$, between $7$ and $8$. The price, however, must be a whole number. To maximize $R$, find the permitted price closest to $\dfrac{15}{2}$. Both $7$ and $8$ are at distance $\dfrac12$, so they give the same revenue. Direct calculation gives $R(7)=7\cdot16=112$ and $R(8)=8\cdot14=112$. Every other permitted price is farther from the vertex and yields less revenue. The restriction to whole-number prices changes both the maximum value and the number of prices that produce it.
 :::

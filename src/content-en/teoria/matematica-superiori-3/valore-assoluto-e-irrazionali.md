@@ -18,6 +18,21 @@ For $y=|x-2|$, the argument $x-2$ is negative to the left of $2$ and nonnegative
 
 :::
 
+::::teorema{#distanza-proprieta titolo="Symmetry of distance and constant factors"}
+For any real numbers $u,v$, we have $|-u|=|u|$ and $|uv|=|u||v|$. It follows that when $a\neq0$, the absolute value of $ax+b$ is $|a|\left|x+\dfrac ba\right|$. Thus distance is measured from $-\dfrac ba$ and multiplied by $|a|$.
+
+:::dimostrazione
+For every real number $u$, the product $u^2$ is nonnegative and its square root is the distance of $u$ from zero. Since $(-u)^2=u^2$, we have $|-u|=|u|$. Also, $|u||v|$ is nonnegative and its square is $u^2v^2=(uv)^2$, so it equals $|uv|$. In the affine case, factor out $a$ to get $ax+b=a\left(x+\dfrac ba\right)$ and apply the product rule.
+:::
+::::
+
+:::esempio{titolo="Reading the center and scale from one formula"}
+Write $|6-2x|=2|x-3|$. The factor $2$ multiplies the distance from $3$. Hence height $4$ corresponds to a horizontal distance of $2$ from that center. The x-coordinates are $1$ and $5$. To check, the argument is $4$ at $x=1$ and $-4$ at $x=5$. The curve has slopes $-2$ and $2$ on its two branches. From $3$ to either of the two x-coordinates, we move two units horizontally and rise four units vertically.
+
+::grafico{f="abs(6-2*x);4" xmin=-0.3 xmax=6.3 ymin=-1 ymax=7 punti="1,4,pieno;3,0,pieno,V;5,4,pieno" titolo="The factor $2$ turns a horizontal distance of $2$ into a height of $4$"}
+
+:::
+
 ## Absolute value equations
 
 :::teorema{#equazioni titolo="Two possibilities for the distance"}
@@ -46,6 +61,24 @@ For example, $k=0$ gives height $2$ and solutions $-1$ and $3$. The graph shows 
 
 :::
 
+:::esempio{titolo="Equal distances give a midpoint"}
+The equation $|x+2|=|x-6|$ asks for points equidistant from $-2$ and $6$. Their midpoint is $2$. To verify that it is the only solution, square both sides, which are nonnegative.
+
+$$
+\begin{aligned}
+(x+2)^2&=(x-6)^2\\[4pt]
+x^2+4x+4&=x^2-12x+36\\[4pt]
+16x&=32\\[4pt]
+x&=2.
+\end{aligned}
+$$
+
+The polynomials have the same $x^2$ term, which cancels. Substitution gives $|2+2|=|2-6|=4$. The two graphs are symmetric about the vertical line through the midpoint. For example, at $x=0$ the distances are $2$ and $6$, while at $x=4$ they are $6$ and $2$.
+
+::grafico{f="abs(x+2);abs(x-6)" xmin=-4 xmax=8 ymin=-1 ymax=8 punti="-2,0,pieno;6,0,pieno;2,4,pieno,P" titolo="The distances from $-2$ and $6$ are equal at $x=2$"}
+
+:::
+
 ## Distances below a threshold
 
 :::teorema{#interne titolo="Distance smaller than a radius"}
@@ -54,6 +87,27 @@ For $r>0$, the condition $|f(x)|<r$ is equivalent to $-r<f(x)<r$. The number $f(
 
 :::esempio{titolo="The sign of the coefficient of the unknown"}
 In $|5-2x|<3$, the compound inequality is $-3<5-2x<3$. Subtracting $5$ gives $-8<-2x<-2$. Dividing by $-2$ reverses both inequalities and gives $4>x>1$. The solution set is $(1,4)$. At $x=4$ we get $|5-8|=3$, so that point is excluded. The value $x=2$ is inside the interval and gives $|5-4|=1<3$.
+:::
+
+::::teorema{#modulo-minore-variabile titolo="A bound that depends on the unknown"}
+Suppose $f$ and $g$ are defined at the same point. The condition $|f(x)|\leq g(x)$ is equivalent to both $-g(x)\leq f(x)$ and $f(x)\leq g(x)$. A strict comparison requires both inequalities to be strict. These two bounds themselves imply that $g(x)$ is nonnegative in the first case and positive in the second.
+
+:::dimostrazione
+If $|f(x)|\leq g(x)$, both $f(x)$ and $-f(x)$ are at most $g(x)$ because the absolute value is the larger of the two. Multiplying $-f(x)\leq g(x)$ by $-1$ gives $f(x)\geq-g(x)$. Conversely, the two inequalities imply that both $f(x)$ and $-f(x)$ are at most $g(x)$, so their maximum is as well. The same reasoning applies when both inequalities are strict.
+:::
+::::
+
+:::esempio{titolo="The comparison reduces to two linear conditions"}
+For $|2x-1|\leq x+2$, impose $-x-2\leq2x-1$ and $2x-1\leq x+2$. The first gives $-1\leq3x$, or $x\geq-\dfrac13$. The second gives $x\leq3$. The result is $\left[-\dfrac13,3\right]$. Throughout this interval the right-hand side $x+2$ is positive. At $x=-\dfrac13$ the absolute value and the line have height $\dfrac53$. At $x=3$ they have height $5$. Between the two x-coordinates, the absolute value graph is at or below the line even though the bound changes with $x$.
+
+::grafico{f="abs(2*x-1);x+2" xmin=-2 xmax=4.5 ymin=-1 ymax=8 punti="-0.3333333333,1.6666666667,pieno;3,5,pieno" titolo="The bound increases with $x$ and meets both branches of the absolute value graph"}
+
+:::
+
+:::esempio{titolo="Two tolerances on the same measurement"}
+A part of length $x$ in millimeters passes the first inspection when it is at most $2$ units from $50$. A second inspection requires a distance strictly less than $2$ from $51$. The conditions are $|x-50|\leq2$ and $|x-51|<2$. The first gives $[48,52]$. The second gives $(49,53)$. To pass both inspections, take the intersection, so $x\in(49,52]$.
+
+The value $49$ passes the first inspection because its deviation is $1$. Its deviation from the second center is $2$, so $49$ is excluded. At $52$, the deviations from the first and second centers are $2$ and $1$, both allowed. If passing at least one inspection were enough, the union would instead be $[48,53)$. Changing the requirement changes which endpoints are retained.
 :::
 
 ## Distances above a threshold
@@ -69,6 +123,13 @@ The inequality $|x+1|\geq2$ asks for points at least $2$ units from $-1$. The fi
 
 :::
 
+:::esempio{titolo="Outside an interval, with one additional point"}
+The inequality $|x^2-9|\geq9$ requires the square to differ from $9$ by at least $9$. One case is $x^2-9\leq-9$. Adding $9$ gives $x^2\leq0$, and hence only $x=0$. The other case is $x^2-9\geq9$, equivalent to $x^2\geq18$. Since $\sqrt{18}=3\sqrt2$, this yields the rays $x\leq-3\sqrt2$ and $x\geq3\sqrt2$. The solution is the union of these rays and the point $0$. At $x=1$, the absolute value is $8$, showing why the middle point remains separate from the right branch. By symmetry of the square, the same holds on the left.
+
+::grafico{f="abs(x^2-9);9" xmin=-5.2 xmax=5.2 ymin=-1 ymax=18 punti="-4.2426406871,9,pieno;0,9,pieno;4.2426406871,9,pieno" titolo="Height $9$ is also reached at $x=0$, which is an isolated solution"}
+
+:::
+
 ## Radicals and the domain
 
 :::definizione{#radicali titolo="Real square root"}
@@ -79,6 +140,15 @@ An even-indexed root requires a radicand greater than or equal to zero. An odd-i
 
 :::esempio{titolo="Two domain conditions"}
 In the expression $\dfrac{\sqrt{x+2}}{\sqrt{5-x}}$, the numerator exists when $x+2\geq0$. The denominator must exist and be positive, so $5-x>0$. The two conditions require $x\geq-2$ and $x<5$, respectively. The domain is $[-2,5)$. At $-2$, the numerator is zero and the quotient is defined. At $5$, the denominator is zero, so the quotient is undefined.
+:::
+
+:::esempio{titolo="A quotient under the square root"}
+To find the domain of $\sqrt{\dfrac{x-1}{x+2}}$, the quotient must be defined and nonnegative. Its denominator is zero at $-2$ and its numerator is zero at $1$. The two points divide the number line into three intervals. For $x<-2$, both $x-1$ and $x+2$ are negative, so the quotient is positive. For $-2<x<1$, the numerator is negative and the denominator positive. For $x>1$, both are positive. At $x=1$ the quotient is zero and is allowed. This gives $(-\infty,-2)\cup[1,+\infty)$.
+
+If the square root were itself in the denominator, the radicand would have to be strictly positive, so $1$ would also be excluded. For example, at $x=0$ the quotient is $-\dfrac12$ and neither function is real. At $x=1$, however, the function with just the square root equals zero while the one with the reciprocal is undefined.
+
+::grafico{f="sqrt((x-1)/(x+2))" xmin=-6 xmax=6 ymin=-0.5 ymax=4 asintoti="x=-2" punti="1,0,pieno" titolo="The right branch begins at $x=1$, where the radicand equals zero"}
+
 :::
 
 ## Equations with a square root
@@ -123,6 +193,37 @@ At $x=0$, both original sides equal $2$. For every $x>0$ in the domain, $\sqrt{x
 
 :::
 
+::::teorema{#uguaglianza-di-radici titolo="Two square roots in the same equation"}
+Let $f$ and $g$ be defined on a set $D$. The equation $\sqrt{f(x)}=\sqrt{g(x)}$ is equivalent to $f(x)=g(x)$ precisely at values for which both radicands are nonnegative. The domain check is still necessary when the two radicands turn out to be equal after calculation.
+
+:::dimostrazione
+If the roots are equal, they are defined and each is nonnegative. Squaring them gives $f(x)$ and $g(x)$ respectively, so the radicands are equal. Conversely, if the radicands are equal and nonnegative, by definition they have the same square root. This proves both directions on the common domain.
+:::
+::::
+
+:::esempio{titolo="The shared candidate can fall outside the domain"}
+Consider $\sqrt{x+1}=\sqrt{2x-1}$. The common domain is $x\geq\dfrac12$. Setting the radicands equal gives $x+1=2x-1$, so $x=2$. The candidate is in the domain and gives $\sqrt3$ on both sides.
+
+If we instead compare $\sqrt{x-5}$ and $\sqrt{2x-6}$, the common domain is $x\geq5$. Equating their radicands gives $x-5=2x-6$, so $x=1$. At that x-coordinate both radicands equal $-4$, so neither root is real. Both graphs exist from $5$ onward, and the second stays above the first because $2x-6-(x-5)=x-1>0$ throughout that interval.
+
+::grafico{f="sqrt(x-5);sqrt(2*x-6)" xmin=0 xmax=10 ymin=-1 ymax=4 punti="5,0,pieno;3,0,pieno;5,2,pieno" titolo="Where both roots exist, their ordinates differ"}
+
+:::
+
+:::esempio{titolo="Difference of two roots and the conjugate sum"}
+In $\sqrt{x+16}-\sqrt x=2$, both square roots exist for $x\geq0$. Let $u=\sqrt{x+16}$ and $v=\sqrt x$. The requirement $u-v=2$ can also be used to recover the sum. Indeed, the difference of the squares is $16$, regardless of the x-coordinate.
+
+$$
+\begin{aligned}
+u^2-v^2&=(x+16)-x=16,\\[4pt]
+(u-v)(u+v)&=16,\\[4pt]
+u+v&=8.
+\end{aligned}
+$$
+
+Division by $u-v$ is valid because its value at a solution is $2$. Subtracting $u-v=2$ from $u+v=8$ gives $2v=6$, so $\sqrt x=3$ and $x=9$. The check in the original equation gives $\sqrt{25}-\sqrt9=5-3=2$. In this case, a linear system in the two square roots is sufficient. The final check confirms that $u=5$ and $v=3$ both come from the same value of $x$.
+:::
+
 ## Inequalities with a square root
 
 :::teorema{#confronti titolo="Comparing nonnegative quantities"}
@@ -144,6 +245,13 @@ $$
 Intersecting the second case with $x\geq0$ gives $[0,2)$. Taking the union of the two cases, the solution set is $[-2,2)$. We include $-2$ because $0>-2$, and exclude $2$ because the y-coordinates are equal.
 :::
 
+:::esempio{titolo="A threshold between zero and one"}
+The domain of $\sqrt{x}\leq x$ is $[0,+\infty)$. The right-hand side is also nonnegative, so squaring preserves the inequality. We get $x\leq x^2$, or $x(x-1)\geq0$. The product is positive for $x<0$ or $x>1$. It equals zero at $0$ and $1$. Intersecting with the domain gives $\{0\}\cup[1,+\infty)$. The point $0$ is isolated in the solution set because between $0$ and $1$ the root exceeds its radicand. For example, at $x=\dfrac14$ the left side is $\dfrac12$, greater than $\dfrac14$. At $x=4$, the square root is $2$ and the comparison holds.
+
+::grafico{f="sqrt(x);x" xmin=-0.5 xmax=4 ymin=-0.5 ymax=4 punti="0,0,pieno;1,1,pieno;0.25,0.5,pieno" titolo="The square root and the line intersect at $0$ and $1$"}
+
+:::
+
 ## Piecewise expressions
 
 :::esempio{#tratti titolo="A sum of distances"}
@@ -157,4 +265,13 @@ To solve $|x-1|+|x-4|=5$, the first piece gives $5-2x=5$, so $x=0$. The middle p
 
 :::osservazione
 If two absolute values change formulas at different points, split the number line at the zeros of all the arguments. Each piece gives a formula valid on that piece. After solving the equation or inequality for a piece, intersect its solution with that piece before taking the union of the results. This check prevents a formula used outside its own interval from producing extraneous solutions.
+:::
+
+:::esempio{titolo="Two distances with different weights"}
+Consider $F(x)=|x|+2|x-3|$. The formula changes where the arguments are zero, at $0$ and $3$. For $x<0$ it is $-x+2(3-x)=6-3x$. For $0\leq x\leq3$ it is $x+2(3-x)=6-x$. For $x>3$ it becomes $x+2(x-3)=3x-6$. At $x=0$ the first two formulas give $6$, and at $x=3$ the last two give $3$. On the two portions to the left of $3$, the value decreases. On the right portion it increases. The minimum is therefore $F(3)=3$, where the distance with twice the weight is zero.
+
+To solve $F(x)\leq5$, the first branch gives no values, because $6-3x>6$ for $x<0$. The middle branch requires $6-x\leq5$, so $x\geq1$ within $[0,3]$. On the right branch, $3x-6\leq5$ gives $x\leq\dfrac{11}{3}$ within $x>3$. The allowed portions combine to form $\left[1,\dfrac{11}{3}\right]$. The left boundary gives $1+2\cdot2=5$. At the right boundary, the value is $3\cdot\dfrac{11}{3}-6=5$. Both endpoints are included.
+
+::grafico{f="abs(x)+2*abs(x-3);5" xmin=-1.5 xmax=5 ymin=-1 ymax=10 punti="0,6,pieno;1,5,pieno;3,3,pieno;3.6666666667,5,pieno" titolo="The weighted distances have a minimum at $x=3$ and stay below the threshold between the intersections"}
+
 :::

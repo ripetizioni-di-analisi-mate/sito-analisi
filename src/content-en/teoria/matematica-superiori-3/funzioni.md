@@ -48,6 +48,17 @@ To find the preimages of $1$, solve an equation for each piece. The first gives 
 
 :::
 
+:::esempio{titolo="A curve, its domain and a vertical line"}
+The relation $x^2+y^2=4$ gives the vertical coordinates satisfying the equation at each input. At $x=1$ we get $y^2=3$, so the line $x=1$ meets the curve at two points. The dashed segment highlights that the inputs agree and the outputs differ. If we keep only the half-plane $y\geq0$, the same input retains just the value $\sqrt3$. At input $2$, however, the two candidates coincide at $y=0$, so the boundary point also belongs to the upper semicircle. To the right of $2$, a vertical line does not even meet the circle, since the equation would require a negative square. This reading gives the right endpoint of the function's domain.
+
+::grafico{curve="2*cos(t),2*sin(t),0,6.28318530718" legenda="x^2+y^2=4" xmin=-3 xmax=3 ymin=-3 ymax=3 uguale=1 segmenti="1,-1.732051,1,1.732051" punti="1,1.732051,pieno,A;1,-1.732051,pieno,B;2,0" titolo="The line $x=1$ contains both outputs of the circle at that input."}
+
+:::
+
+:::osservazione{titolo="A restriction keeps part of the graph"}
+Given $f$ on $A$, the restriction of $f$ to a subset $S\subseteq A$ uses the same rule at every point of $S$ and permits only the inputs in $S$. For example, $x\mapsto x^2$ on $[0,2]$ has the same output as the full graph wherever both are defined. The output $9$ is attained on the full graph and absent from the restricted one. The output $1$ remains in the range, although it loses one of its two preimages. Thus restricting the domain can change the range and the number of solutions to an equation $f(x)=c$.
+:::
+
 ## The real domain of a formula
 
 :::teorema{#dominio titolo="Conditions for a formula to be defined"}
@@ -82,6 +93,17 @@ For $x\neq 2$, $\dfrac{x^2-4}{x-2}=x+2$. In the original formula, $2$ makes the 
 
 :::
 
+:::esempio{titolo="Square roots in the same sum"}
+Let $f(x)=\sqrt{x+2}+\sqrt{4-x}$. Both square roots must exist, so $x+2\geq0$ and $4-x\geq0$. The first condition gives $x\geq-2$ and the second gives $x\leq4$. The domain is the closed interval $[-2,4]$. At the left endpoint, the first square root is zero and the second is $\sqrt6$. The reverse happens at the right endpoint, so both ends have the same output. A square root in the denominator would impose a strict condition at the corresponding endpoint. For example, for $\dfrac{\sqrt{x+2}}{\sqrt{4-x}}$, the point $4$ would be excluded, while $-2$ would remain in the domain.
+:::
+
+:::esempio{titolo="Square root of a fraction and boundary checks"}
+For $h(x)=\sqrt{\dfrac{x-2}{x+1}}$, the intervals are bounded by $-1$ and $2$. In the middle piece, for instance at $x=0$, the quotient is $-2$, so no point in that piece is allowed. On the left, at $x=-2$ the quotient is $4$, while on the right, at $x=3$ it is $\dfrac14$. Each factor keeps its sign within each interval, so the two positive results identify both branches. The boundary $2$ is included because the quotient is zero. The boundary $-1$ is excluded because the denominator is zero.
+
+::grafico{f="sqrt((x-2)/(x+1))" legenda="y=\sqrt{\dfrac{x-2}{x+1}}" xmin=-5 xmax=5 ymin=-1 ymax=5 punti="-2,2;2,0;3,0.5" asintoti="x=-1" titolo="The square root has points in both domain intervals and includes input $2$."}
+
+:::
+
 ## Zeros, intercepts and sign
 
 :::definizione{#zeri titolo="Intercepts with the axes"}
@@ -107,6 +129,13 @@ The quotient is positive where the numerator and denominator have the same sign.
 For $f(x)=(x-2)^2$, the only solution of $f(x)=0$ is $2$. The square is positive for every $x\neq 2$, so the graph reaches the horizontal axis at $(2,0)$ and remains above it on both sides of that point. Passing through a zero changes the sign only if the values on either side have opposite signs.
 :::
 
+:::esempio{titolo="A zero where the sign stays the same"}
+For $h(x)=(x-1)^2(x+2)$, the squared factor vanishes only at $1$ and is positive at every other input. The linear factor vanishes at $-2$ and changes sign there. It follows that $h$ is negative on $(-\infty,-2)$ and positive on $(-2,1)\cup(1,+\infty)$. The inputs $-2$ and $1$ are both zeros, but they have different effects. Near $-2$ the graph crosses the axis, whereas near $1$ it stays above it and touches the axis at $(1,0)$. Under the condition $h(x)\geq0$, the positive pieces join through $1$, and $-2$ is included too.
+
+::grafico{f="(x-1)^2*(x+2)" xmin=-3 xmax=3 ymin=-7 ymax=7 punti="-2,0,pieno,A;1,0,pieno,B" titolo="The graph crosses the axis at $A$ and touches it at $B$."}
+
+:::
+
 ## Symmetry about the axis and the origin
 
 :::definizione{#simmetrie titolo="Even and odd functions"}
@@ -129,6 +158,29 @@ The function is therefore odd. For $g(x)=x^3-x+2$, the values are $g(1)=2$, $g(-
 
 :::attenzione{titolo="Symmetry also requires a symmetric domain"}
 Let $f(x)=x^2$ with $D=[0,2]$. For example, $1\in D$ and $-1\notin D$, so $D$ is not symmetric about $0$. The given function is not even, although the formula $x^2$ satisfies $(-x)^2=x^2$ when considered on all of $\mathbb R$.
+:::
+
+::::teorema{#prodotto-dispari titolo="Two odd functions and their product"}
+Let $f$ and $g$ be odd on the same symmetric domain $D$. Their product $h(x)=f(x)g(x)$ is even on $D$.
+
+:::dimostrazione
+Choose $x\in D$. Then $-x$ also lies in $D$, so both factors can be evaluated there. By oddness,
+$$
+\begin{aligned}
+h(-x)&=f(-x)g(-x)\\[4pt]
+&=(-f(x))(-g(x))\\[4pt]
+&=f(x)g(x)=h(x).
+\end{aligned}
+$$
+The equality holds for every $x\in D$, which is the condition for evenness. For instance, $f(x)=x^3$ and $g(x)=x$ are odd on $\mathbb R$, while their product is $x^4$, which gives the same output at opposite inputs.
+:::
+::::
+
+:::esempio{titolo="Comparing two symmetries from the same point"}
+The graphs of $f(x)=x^2$ and $g(x)=x^3$ both contain $P(1,1)$. At the input $-1$, the first function preserves the output and the second changes its sign. The resulting points are $A(-1,1)$ and $B(-1,-1)$, respectively. The segments $AP$ and $BP$ give two geometric readings. The first is horizontal, with midpoint on the $y$-axis, while the second has the origin as its midpoint. This shows reflection across the axis and point symmetry, respectively.
+
+::grafico{f="x^2;x^3" xmin=-2 xmax=2 ymin=-3 ymax=3 uguale=1 punti="1,1,pieno,P;-1,1,pieno,A;-1,-1,pieno,B" segmenti="-1,1,1,1;-1,-1,1,1" titolo="From $P$, even symmetry leads to $A$ and odd symmetry leads to $B$."}
+
 :::
 
 ## Composing two functions
@@ -159,6 +211,17 @@ Both endpoints $\pm 2$ are allowed. At each endpoint, the inner function returns
 
 :::attenzione{titolo="Squaring on the outside leaves the domain unchanged"}
 If $f(x)=\sqrt{x}$ and $g(t)=t^2$, then $(g\circ f)(x)=(\sqrt{x})^2=x$ only for $x\geq 0$. At $x=-1$, the intermediate value $f(-1)$ does not exist in the real numbers, so the composition is undefined at that input.
+:::
+
+:::esempio{titolo="An excluded input in the composition"}
+Let $f(x)=x^2-1$ and $g(t)=\dfrac1t$. The composition has the rule
+$$
+(g\circ f)(x)=\frac1{x^2-1}.
+$$
+The forbidden input to the outer function is $0$. To see where this restriction affects the composition, find where the inner function gives zero. The solutions of $x^2-1=0$ are $-1$ and $1$, so the domain is $\mathbb R\setminus\{-1,1\}$. The input $x=0$ is allowed because $f(0)=-1$ and $g(-1)=-1$. This distinguishes the forbidden input to $g$ from the forbidden inputs of the composition.
+
+::grafico{f="x^2-1" xmin=-3 xmax=3 ymin=-2 ymax=6 punti="-1,0,pieno,A;1,0,pieno,B;0,-1" titolo="The zeros of the inner function show where the composition is undefined."}
+
 :::
 
 ## Recovering the input with the inverse function
@@ -241,4 +304,34 @@ An object's height $H(t)=9-(t-2)^2$, in metres, is observed for $t\in[0,4]$, wit
 
 :::osservazione{titolo="Monotonicity can guarantee injectivity"}
 If $f$ is strictly increasing or strictly decreasing on an interval, the outputs for $x_1<x_2$ are different. Thus $f$ is injective on that interval. For $f(x)=(x-1)^2$, this holds separately to the left and to the right of $1$. The two intervals give different inverses because the first returns $1-\sqrt y$ and the second returns $1+\sqrt y$.
+:::
+
+::::teorema{#monotonia-iniettiva titolo="From monotonicity to invertibility on a branch"}
+A function that is strictly increasing or strictly decreasing on an interval is injective on that interval. Strict monotonicity gives a domain on which the equation $f(x)=y$ has at most one solution.
+
+:::dimostrazione
+Let $x_1$ and $x_2$ be distinct inputs in the interval. Swapping their names if necessary, assume $x_1<x_2$. If $f$ is strictly increasing, then $f(x_1)<f(x_2)$. If it is strictly decreasing, then $f(x_1)>f(x_2)$. The outputs differ in either case. Applying the criterion for an inverse on the range therefore assigns each attained output to exactly one input on the branch.
+:::
+::::
+
+:::esempio{titolo="Monotonicity without derivatives"}
+For $f(x)=(x-2)^2$, compare the outputs at $x_1$ and $x_2$ directly, assuming $x_1<x_2$. We get
+$$
+\begin{aligned}
+f(x_2)-f(x_1)
+&=(x_2-2)^2-(x_1-2)^2\\[4pt]
+&=(x_2-x_1)(x_1+x_2-4).
+\end{aligned}
+$$
+The first factor is positive. If $x_2\leq2$, then $x_1+x_2<4$, so the difference is negative. If $x_1\geq2$, then $x_1+x_2>4$, so it is positive. The parabola is strictly decreasing up to $2$ and strictly increasing from $2$ on. The horizontal line $y=1$ meets the graph at $(1,1)$ and $(3,1)$. Each branch keeps just one intersection, so the inverse depends on the selected branch.
+
+::grafico{f="(x-2)^2;1" xmin=-1 xmax=5 ymin=-1 ymax=7 punti="1,1,pieno,A;2,0,pieno,V;3,1,pieno,B" titolo="The horizontal line meets one point on each branch of the parabola."}
+
+:::
+
+:::esempio{titolo="A discrete range"}
+A ticket costs $4$ euros and each additional visit costs $2$ euros. If zero to three additional visits are allowed, the model is $C(n)=4+2n$ with $n\in\{0,1,2,3\}$. The possible outputs are $\{4,6,8,10\}$. A charge of $7$ euros would give $n=\dfrac32$, which is outside the domain. The outputs $4$ and $10$ are the minimum and maximum, but the range does not contain every value between them. The graph has four isolated points because the number of visits is an integer.
+
+::grafico{xmin=-1 xmax=4 ymin=-1 ymax=12 punti="0,4;1,6;2,8;3,10" segmenti="-1,7,4,7" titolo="The horizontal line at height $7$ passes between two points of the graph."}
+
 :::

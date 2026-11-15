@@ -27,6 +27,19 @@ Per $A(-2,3)$ e $B(1,-1)$, gli spostamenti sono $1-(-2)=3$ e $-1-3=-4$. Il primo
 
 :::
 
+:::esempio{titolo="Distanza dal centro come condizione sulle coordinate"}
+Si cercano i punti $P(x,1)$ a distanza $5$ da $A(2,4)$. La seconda coordinata di $P$ è fissata, perciò lo spostamento verticale da $A$ a $P$ è $1-4=-3$. Il teorema di Pitagora dà
+$$
+AP^2=(x-2)^2+9.
+$$
+Poiché $AP$ è una lunghezza, la condizione $AP=5$ equivale a $AP^2=25$. Si ricava dunque $(x-2)^2=16$. La differenza $x-2$ può valere $4$ oppure $-4$, così si ottiene $x=6$ oppure $x=-2$. Le due soluzioni appartengono alla stessa orizzontale e si trovano a quattro unità a destra e a sinistra dell'ascissa di $A$.
+
+Se la distanza richiesta fosse $3$, l'unico punto sarebbe $(2,1)$, direttamente sotto $A$. Una distanza minore di $3$ sarebbe impossibile, perché al quadrato dello spostamento verticale si aggiunge sempre un quadrato non negativo. Geometricamente, la retta incontra in due punti la circonferenza di raggio $5$, mentre tocca in un solo punto quella di raggio $3$.
+
+::grafico{f="1" curve="2+5*cos(t),4+5*sin(t),0,6.28318530718" legenda="y=1;(x-2)^2+(y-4)^2=25" xmin=-4 xmax=8 ymin=-2 ymax=10 uguale=1 punti="2,4,pieno,A;-2,1,pieno,P_1;6,1,pieno,P_2" segmenti="2,4,-2,1;2,4,6,1" titolo="Entrambi i punti d'intersezione distano $5$ da $A$."}
+
+:::
+
 ## Punti medi e simmetria centrale
 
 ::::teorema{#medio titolo="Metà dello spostamento"}
@@ -49,6 +62,19 @@ In questo modo gli spostamenti da $A$ a $M$ e da $M$ a $B$ sono uguali in entram
 
 :::esempio{titolo="Ricostruire l'estremo dalla metà del segmento"}
 Per $A(-2,1)$ e $B(4,5)$, le medie danno $M(1,3)$. Se si conoscono invece $A(-2,1)$ e $M(1,3)$, il passaggio da $A$ a $M$ aggiunge $3$ all'ascissa e $2$ all'ordinata. Ripetendo lo spostamento si ricava $B(4,5)$. Algebricamente si risolvono $x_B=2x_M-x_A$ e $y_B=2y_M-y_A$. I punti $A$ e $B$ sono uno il simmetrico dell'altro rispetto al centro $M$.
+:::
+
+:::esempio{titolo="Punto medio di un segmento e centro di un rettangolo"}
+Un rettangolo con lati paralleli agli assi ha vertici opposti $A(-2,-1)$ e $C(4,3)$. Gli altri due vertici sono $B(4,-1)$ e $D(-2,3)$, perché ciascun lato orizzontale conserva l'ordinata e ciascun lato verticale conserva l'ascissa. La diagonale $AC$ ha punto medio
+$$
+M\left(\frac{-2+4}{2},\frac{-1+3}{2}\right)=(1,1).
+$$
+Calcolando il punto medio di $BD$ si trovano le stesse coordinate, perché gli addendi delle medie sono gli stessi in ordine diverso. Il punto $M$ appartiene quindi a entrambe le diagonali e ne è il punto d'intersezione.
+
+Il centro distingue le coppie di vertici opposti. Per esempio il simmetrico di $A$ rispetto a $M$ si trova ripetendo lo spostamento $(3,2)$ da $A$ a $M$, e porta proprio a $C$. Riflettere soltanto l'ascissa attorno a $x=1$ porterebbe invece a $B$, lasciando invariata l'ordinata. Si vede così la differenza fra una simmetria centrale e una riflessione rispetto a una retta.
+
+::grafico{linee="-2,-1 4,-1 4,3 -2,3 -2,-1" segmenti="-2,-1,4,3;4,-1,-2,3" punti="-2,-1,pieno,A;4,-1,pieno,B;4,3,pieno,C;-2,3,pieno,D;1,1,pieno,M" xmin=-4 xmax=6 ymin=-3 ymax=5 uguale=1 titolo="Le due diagonali hanno in comune il loro punto medio $M$."}
+
 :::
 
 ## Equazioni delle rette
@@ -74,6 +100,19 @@ La retta passa per $(0,2)$ e, a ogni incremento di $2$ dell'ascissa, l'ordinata 
 
 :::osservazione{titolo="Equazioni equivalenti"}
 Moltiplicare tutta l'equazione per un numero diverso da zero conserva l'insieme delle soluzioni. Per esempio, $2x+4y-8=0$ e $x+2y-4=0$ descrivono la stessa retta. L'equazione $4x-8=0$ descrive invece la verticale $x=2$. Ogni valore di $y$ soddisfa l'equazione quando $x=2$, quindi questa retta ha infinite ordinate per la stessa ascissa.
+:::
+
+:::esempio{titolo="Intercette e forma implicita"}
+La retta $3x+2y=6$ incontra l'asse orizzontale in un punto con $y=0$. Sostituendo si ottiene $x=2$, quindi l'intercetta orizzontale è il punto $(2,0)$. Per l'asse verticale si pone invece $x=0$ e si trova il punto $(0,3)$. La forma esplicita
+$$
+y=-\frac32x+3
+$$
+conferma l'ordinata all'origine $3$. La pendenza è negativa, perché fra $(0,3)$ e $(2,0)$ si avanza di due unità e si scende di tre unità. In senso opposto si sale di tre unità andando a sinistra di due, e il rapporto $\dfrac3{-2}$ rimane lo stesso.
+
+Per le rette verticali e orizzontali le intercette vanno lette direttamente dall'equazione. La verticale $x=2$ incontra l'asse $x$ in $(2,0)$ e rimane parallela all'asse $y$. L'orizzontale $y=3$ incontra l'asse $y$ in $(0,3)$ e rimane parallela all'asse $x$. Se la retta è un asse, l'intersezione con quell'asse è la retta stessa.
+
+::grafico{f="-1.5*x+3;3" curve="2,t,-2,5" legenda="3x+2y=6;y=3;x=2" punti="0,3,pieno,B;2,0,pieno,A" xmin=-2 xmax=5 ymin=-2 ymax=5 uguale=1 titolo="La retta obliqua incontra entrambi gli assi."}
+
 :::
 
 ## La retta che passa per due punti
@@ -102,6 +141,19 @@ $$
 Si controlla che in $x=-1$ l'ordinata sia $4$ e in $x=2$ sia $-2$. Nel rapporto si possono scambiare i due punti, purché si cambi l'ordine in entrambe le differenze. In quel caso sia il numeratore sia il denominatore cambiano segno e il rapporto resta uguale.
 :::
 
+:::esempio{titolo="Tre punti sulla stessa retta"}
+I primi due punti $A(-2,1)$ e $B(2,3)$, avendo ascisse diverse, determinano la retta di pendenza $\dfrac{3-1}{2-(-2)}=\dfrac12$. La forma passante per $A$ è
+$$
+y-1=\frac12(x+2).
+$$
+Per stabilire se $C(6,5)$ è allineato con $A$ e $B$, si impone $x=6$. Si ottiene $y-1=4$ e dunque $y=5$, che coincide con l'ordinata di $C$. Per confronto, il punto $(6,4)$, pur avendo la stessa ascissa di $C$, rimane un'unità sotto la retta.
+
+Lo stesso criterio si può formulare confrontando gli spostamenti. Da $A$ a $B$ si aggiunge $(4,2)$ e da $B$ a $C$ si aggiunge ancora $(4,2)$. Quindi i tre punti sono collineari e $B$ è il punto medio di $AC$. Se i primi due punti avessero la stessa ascissa, il criterio diventerebbe che anche il terzo punto deve avere quell'ascissa. In quel caso la retta è verticale e il rapporto dei due spostamenti non si calcola.
+
+::grafico{f="0.5*x+2" legenda="y=\dfrac12x+2" xmin=-4 xmax=8 ymin=-1 ymax=7 punti="-2,1,pieno,A;2,3,pieno,B;6,5,pieno,C;6,4,vuoto" titolo="Il punto $C(6,5)$ appartiene alla retta e $(6,4)$ rimane sotto."}
+
+:::
+
 ## Parallelismo e coincidenza
 
 :::teorema{#parallele titolo="Rette con la stessa direzione"}
@@ -114,6 +166,20 @@ Per costruire la parallela a $2x-y+3=0$ passante per $P(2,-1)$ si mantiene la pa
 
 :::osservazione{titolo="Verificare la direzione senza isolare y"}
 Per le rette $a_1x+b_1y+c_1=0$ e $a_2x+b_2y+c_2=0$, la stessa direzione equivale a $a_1b_2-a_2b_1=0$. Se entrambi i coefficienti di $y$ sono diversi da zero, l'uguaglianza si ottiene confrontando $-\dfrac{a_1}{b_1}$ e $-\dfrac{a_2}{b_2}$. Se una retta è verticale, il criterio impone che anche l'altra sia verticale. Per stabilire se coincidono, si può prendere un punto di una retta e verificare se appartiene all'altra.
+:::
+
+:::esempio{titolo="Separazione verticale e distanza fra due rette"}
+Le rette $r:y=2x+1$ e $s:y=2x+6$ hanno lo stesso coefficiente angolare e intercette diverse. Fissando un'ascissa, la differenza fra le ordinate è sempre $(2x+6)-(2x+1)=5$. Per esempio, i punti $(0,1)$ e $(0,6)$ sono separati da cinque unità lungo l'asse verticale. Il segmento che li unisce misura quindi la separazione a parità di ascissa.
+
+La distanza fra le due rette è però la lunghezza di un segmento perpendicolare a entrambe. Per calcolarla si può prendere $(0,1)$ su $r$ e usare l'equazione $2x-y+6=0$ per $s$. Si ottiene
+$$
+d=\frac{|2\cdot0-1+6|}{\sqrt{2^2+(-1)^2}}
+=\frac5{\sqrt5}=\sqrt5 .
+$$
+Il valore è inferiore a $5$, perché il segmento verticale non forma un angolo retto con le due rette oblique. La separazione verticale e la distanza perpendicolare coincidono quando le rette sono orizzontali.
+
+::grafico{f="2*x+1;2*x+6" xmin=-4 xmax=3 ymin=-3 ymax=8 uguale=1 punti="0,1,pieno,P;0,6,pieno,Q;-2,2,pieno,H" segmenti="0,1,0,6;0,1,-2,2" titolo="Il segmento $PQ$ è verticale, mentre $PH$ è perpendicolare alle rette."}
+
 :::
 
 ## Retta perpendicolare
@@ -141,6 +207,21 @@ $$
 Il punto $P(2,0)$ appartiene all'asse. Applicando la formula della distanza si trova $PA=\sqrt{3^2+(-1)^2}=\sqrt{10}$ e $PB=\sqrt{(-1)^2+(-3)^2}=\sqrt{10}$. Anche $M$ è equidistante da $A$ e $B$ perché è il punto medio. Preso un punto dell'asse diverso da $M$, l'uguaglianza segue dai due triangoli rettangoli costruiti come $PMA$ e $PMB$, con $MA$ e $MB$ della stessa lunghezza e $PM$ in comune.
 :::
 
+:::esempio{titolo="L'altezza di un triangolo a partire da un lato"}
+Siano $A(0,0)$, $B(4,2)$ e $C(2,4)$ i vertici di un triangolo. Il lato $AB$ appartiene alla retta $y=\dfrac12x$. L'altezza relativa ad $AB$ esce da $C$ e ha pendenza $-2$, quindi la sua retta è $y-4=-2(x-2)$, ovvero $y=-2x+8$. Il piede $H$ deve appartenere a entrambe le rette, dunque
+$$
+\begin{aligned}
+\frac12x&=-2x+8,\\[4pt]
+\frac52x&=8,\\[4pt]
+x_H&=\frac{16}{5},\qquad y_H=\frac85.
+\end{aligned}
+$$
+L'ascissa del piede è compresa fra quelle di $A$ e $B$, quindi qui il piede cade sul lato effettivo. La base misura $AB=2\sqrt5$. La distanza di $C$ da $x-2y=0$ vale $\dfrac{|2-8|}{\sqrt5}=\dfrac6{\sqrt5}$. Pertanto l'area è $\dfrac12\cdot2\sqrt5\cdot\dfrac6{\sqrt5}=6$. La stessa formula dell'area usa la distanza dalla retta del lato anche quando il piede cade sul suo prolungamento.
+
+::grafico{f="0.5*x" legenda="y=\dfrac12x" linee="0,0 4,2 2,4 0,0" segmenti="2,4,3.2,1.6" punti="0,0,pieno,A;4,2,pieno,B;2,4,pieno,C;3.2,1.6,pieno,H" xmin=-1 xmax=5 ymin=-1 ymax=5 uguale=1 titolo="L'altezza da $C$ incontra il lato $AB$ nel piede $H$."}
+
+:::
+
 ## Intersezioni come soluzioni di un sistema
 
 :::teorema{#intersezioni titolo="Punti comuni a due rette"}
@@ -164,6 +245,15 @@ Il punto è $P(1,3)$. Si verifica anche l'altra equazione, poiché $-1+4=3$.
 
 :::esempio{titolo="Riconoscere un sistema impossibile"}
 Per $2x-y=1$ e $4x-2y=3$, il doppio del primo membro della prima equazione è uguale al primo membro della seconda. Per questo, un punto che soddisfa la prima darebbe $4x-2y=2$ e non potrebbe dare $3$. Le rette sono parallele distinte. Se nella seconda equazione il termine noto fosse $2$, le due equazioni sarebbero equivalenti e le rette coinciderebbero.
+:::
+
+:::esempio{titolo="Un'intersezione per confrontare due tariffe"}
+Due tariffe danno un costo in euro $C_1(n)=3n+2$ e $C_2(n)=2n+6$ per un numero intero non negativo $n$ di ingressi. In un primo momento si confrontano le rette che prolungano i due grafici, ponendo $3n+2=2n+6$. Si trova $n=4$ e il costo comune è $14$ euro. Poiché $4$ è un ingresso ammesso, nel punto di intersezione coincidono davvero i due costi.
+
+Per trovare anche quale tariffa è minore si considera la differenza $C_1(n)-C_2(n)=n-4$. Per $0\leq n<4$ la prima costa meno, mentre per $n>4$ costa meno la seconda. Sul grafico la prima retta parte più in basso, perché il suo costo fisso è $2$ e quello della seconda è $6$. La pendenza maggiore la porta a superare l'altra dopo l'intersezione. Se dall'uguaglianza si fosse ottenuto un numero non intero, le rette si sarebbero comunque incontrate, ma nessun numero effettivo di ingressi avrebbe prodotto un costo uguale.
+
+::grafico{f="3*x+2;2*x+6" legenda="C_1(n)=3n+2;C_2(n)=2n+6" nomi="n,C" xmin=-1 xmax=8 ymin=-2 ymax=28 punti="0,2;0,6;4,14,pieno,P" segmenti="4,0,4,14;0,14,4,14" titolo="In corrispondenza di quattro ingressi le due tariffe danno lo stesso costo."}
+
 :::
 
 ## Distanza di un punto da una retta
@@ -204,4 +294,30 @@ d=\frac{|3x_0+4y_0-18|}{\sqrt{3^2+4^2}}
 =\frac{|8-18|}{5}=2.
 $$
 La distanza è la stessa qualunque punto della prima retta si scelga perché il valore $3x_0+4y_0$ è costante su quella retta. Se nelle due equazioni i coefficienti di $x$ e $y$ sono proporzionali, si possono prima riscrivere le equazioni con la stessa coppia di coefficienti.
+:::
+
+:::esempio{titolo="I punti alla stessa distanza dagli assi"}
+La distanza di $P(x,y)$ dall'asse verticale $x=0$ è $|x|$, mentre la distanza dall'asse orizzontale $y=0$ è $|y|$. Per descrivere i punti equidistanti si risolve $|x|=|y|$. I membri sono non negativi, quindi elevare al quadrato porta a un'equazione equivalente.
+$$
+\begin{aligned}
+x^2&=y^2,\\[4pt]
+(x-y)(x+y)&=0.
+\end{aligned}
+$$
+Almeno un fattore deve valere zero, perciò si ottengono le rette $y=x$ e $y=-x$. Per esempio $P(-2,2)$ dista due unità da entrambi gli assi e appartiene alla seconda retta. Il punto $Q(2,2)$ ha le stesse distanze e appartiene alla prima. Considerare soltanto l'uguaglianza $x=y$ lascerebbe fuori tutti i punti con coordinate opposte e non nulle. Il punto comune alle due rette è l'origine, che ha distanza zero da entrambi gli assi.
+
+::grafico{f="x;-x" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="-2,2,pieno,P;2,2,pieno,Q" segmenti="-2,0,-2,2;-2,2,0,2" titolo="Le due bisettrici sono formate dai punti equidistanti dagli assi."}
+
+:::
+
+:::esempio{titolo="Come trovare due parallele a distanza fissata"}
+Si cercano tutte le rette parallele a $3x+4y=0$ che ne distano $2$. Ogni parallela può essere scritta $3x+4y=c$, perché i due coefficienti fissano la direzione, mentre $c$ ne modifica la posizione. L'origine appartiene alla prima retta. Usandola nella formula della distanza, si ottiene
+$$
+\frac{|c|}{\sqrt{3^2+4^2}}=2
+\qquad\Longleftrightarrow\qquad |c|=10.
+$$
+Le due soluzioni sono $c=10$ e $c=-10$. I segni opposti portano a due rette su lati opposti di quella di partenza. Per verificare la differenza fra queste due condizioni basta guardare dove le parallele incontrano l'asse $y$. Le intercette sono $\dfrac52$ e $-\dfrac52$, maggiori di $2$ in valore assoluto. Questo è compatibile con la distanza richiesta, perché quei due segmenti seguono l'asse verticale e non la direzione perpendicolare alle rette.
+
+::grafico{f="-0.75*x;2.5-0.75*x;-2.5-0.75*x" legenda="3x+4y=0;3x+4y=10;3x+4y=-10" xmin=-4 xmax=4 ymin=-4 ymax=4 uguale=1 punti="0,0,pieno,O;1.2,1.6,pieno,H_1;-1.2,-1.6,pieno,H_2" segmenti="-1.2,-1.6,1.2,1.6" titolo="Le due parallele stanno da parti opposte e distano entrambe $2$ dalla retta centrale."}
+
 :::
