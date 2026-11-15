@@ -89,6 +89,8 @@ Siano $A$ l'evento «una richiesta è urgente» e $B$ l'evento «la richiesta ar
 | Totale | $0{,}4$ | $0{,}6$ | $1$ |
 
 Sapendo che una richiesta è allo sportello, la probabilità che sia urgente è $\dfrac{0{,}1}{0{,}4}=\dfrac14$. Il valore $0{,}1$ indica invece una probabilità congiunta riferita a tutte le richieste. La ricostruzione chiarisce da quale riga o colonna ricavare ogni denominatore.
+
+::grafico{assi=0 xmin=-0.6 xmax=10.6 ymin=-1.4 ymax=10.6 poligoni="0,0 6,0 6,5 0,5;6,0 10,0 10,2.5 6,2.5" linee="0,0 10,0 10,10 0,10 0,0;6,0 6,10;0,5 6,5;6,2.5 10,2.5" etichette="1.3,2.3,urgenti 0,3;1,7.3,non urgenti 0,3;6.6,1,urgenti 0,1;6.4,6,non urgenti 0,3;2.2,-0.9,Online;7,-0.9,Sportello" titolo="Le basi delle due colonne sono $P(B)=0{,}6$ e $P(B^c)=0{,}4$. Le parti colorate hanno altezze $P(A\mid B)=\dfrac{1}{2}$ e $P(A\mid B^c)=\dfrac{1}{4}$, quindi l’area di ogni rettangolo è la probabilità congiunta scritta al suo interno."}
 :::
 
 ## Regola del prodotto e alberi
@@ -173,6 +175,8 @@ L'indipendenza vale pur trattandosi di eventi relativi allo stesso lancio. Saper
 
 ::::teorema{#indipendenza-complementari titolo="Indipendenza e complementari"}
 Se $A$ e $B$ sono indipendenti, sono indipendenti anche le coppie $(A^c,B)$, $(A,B^c)$ e $(A^c,B^c)$. Questo permette di calcolare, per esempio, la probabilità che un dispositivo funzioni e un altro sia guasto quando i rispettivi eventi di funzionamento sono indipendenti.
+
+::grafico{assi=0 xmin=-1.4 xmax=6.4 ymin=-1 ymax=6.4 poligoni="0,0 3,0 3,2 0,2" linee="0,0 6,0 6,6 0,6 0,0;3,0 3,6;0,2 6,2" etichette="0.6,0.9,A∩B  ⅙;3.5,0.9,Aᶜ∩B  ⅙;0.6,3.9,A∩Bᶜ  ⅓;3.5,3.9,Aᶜ∩Bᶜ  ⅓;1.3,-0.6,A  ½;4.3,-0.6,Aᶜ  ½;-1.2,0.9,B  ⅓;-1.2,3.9,Bᶜ  ⅔" titolo="Rettangolo di area $1$ per il lancio di un dado, con $A=\{2,4,6\}$ e $B=\{3,6\}$. Le basi sono $P(A)$ e $P(A^c)$, le altezze sono $P(B)$ e $P(B^c)$. Poiché $A$ e $B$ sono indipendenti, ogni rettangolo ha area uguale al prodotto della sua base per la sua altezza."}
 
 :::dimostrazione
 Si sottrae il peso di $A\cap B$ da quello di $B$. Poiché $A$ e $B$ sono indipendenti,
@@ -261,6 +265,8 @@ P(B_3\mid S)=\frac{0{,}020}{0{,}045}=\frac{4}{9}.
 $$
 
 La terza linea fornisce un quinto della produzione, ma il suo tasso di scarto supera quello complessivo. Per questo il suo peso tra gli scarti, $\dfrac{4}{9}$, supera la quota di produzione.
+
+::grafico{xmin=-0.2 xmax=3.8 ymin=0 ymax=50 nomi="i,%" poligoni="0.6,0 0.95,0 0.95,50 0.6,50;1.6,0 1.95,0 1.95,30 1.6,30;2.6,0 2.95,0 2.95,20 2.6,20" linee="1.05,0 1.05,22.22 1.4,22.22 1.4,0;2.05,0 2.05,33.33 2.4,33.33 2.4,0;3.05,0 3.05,44.44 3.4,44.44 3.4,0" etichette="0.6,46,50;1.06,24,22;1.6,32,30;2.06,35,33;2.6,22,20;3.06,46,44" titolo="Per ogni linea $i$ la barra colorata è la quota di produzione $P(B_i)$ e la barra vuota è la quota tra gli scarti $P(B_i\mid S)$, entrambe in percentuale. Le quote a posteriori sono $\dfrac{2}{9}$, $\dfrac{1}{3}$ e $\dfrac{4}{9}$."}
 :::
 
 :::osservazione
@@ -280,6 +286,10 @@ P(B_1\mid R_1\cap R_2)
 $$
 
 Dopo una sola rossa, il rapporto tra i pesi delle due urne è $3$ a $1$ e la prima ha probabilità a posteriori $\dfrac34$. La seconda rossa porta il rapporto a $9$ a $1$. I due risultati riguardano la stessa urna, quindi l'informazione sulla prima estrazione modifica la probabilità attribuita alla scelta dell'urna e di conseguenza quella della seconda estrazione.
+
+Dopo $n$ rosse consecutive il rapporto tra i pesi delle due urne è $\left(\dfrac34\right)^n$ a $\left(\dfrac14\right)^n$, cioè $3^n$ a $1$. La probabilità a posteriori della prima urna è perciò $\dfrac{3^n}{3^n+1}$.
+
+::grafico{xmin=-0.3 xmax=4.6 ymin=0 ymax=100 nomi="n,%" punti="0,50;1,75;2,90;3,96.43;4,98.78" segmenti="1,0,1,75;2,0,2,90;3,0,3,96.43;4,0,4,98.78" etichette="0.15,45,50%;1.15,70,75%;2.15,85,90%" titolo="Probabilità a posteriori della prima urna, in percentuale, dopo $n$ rosse consecutive. I valori sono $\dfrac{3^n}{3^n+1}$ per $n=0,1,2,3,4$."}
 :::
 
 ## Classificatori e probabilità di base
@@ -352,6 +362,8 @@ Anche l'intersezione tripla contiene soltanto testa-testa, quindi ha probabilit�
 Tre componenti funzionano indipendentemente con probabilità $p_1$, $p_2$ e $p_3$. Se il sistema funziona solo quando tutti sono operativi, l'affidabilità è $p_1p_2p_3$. Se è sufficiente un componente operativo, il sistema si guasta quando tutti si guastano, quindi l'affidabilità è $1-(1-p_1)(1-p_2)(1-p_3)$. La fattorizzazione per i tre guasti si ottiene espandendo il complementare comune per inclusione-esclusione e usando l'indipendenza mutua per tutte le intersezioni.
 
 Con $p_1=0{,}9$, $p_2=0{,}8$ e $p_3=0{,}7$, la configurazione in serie ha affidabilità $0{,}504$. Nella configurazione in parallelo la probabilità di guasto totale è $0{,}1\cdot0{,}2\cdot0{,}3=0{,}006$, quindi l'affidabilità è $0{,}994$.
+
+::grafico{assi=0 xmin=-0.4 xmax=9 ymin=-0.3 ymax=6.6 poligoni="1.4,5.2 3,5.2 3,6 1.4,6;3.8,5.2 5.4,5.2 5.4,6 3.8,6;6.2,5.2 7.8,5.2 7.8,6 6.2,6;3.4,0 5,0 5,0.8 3.4,0.8;3.4,1.4 5,1.4 5,2.2 3.4,2.2;3.4,2.8 5,2.8 5,3.6 3.4,3.6" linee="0.6,5.6 1.4,5.6;3,5.6 3.8,5.6;5.4,5.6 6.2,5.6;7.8,5.6 8.6,5.6;0.6,1.8 2.2,1.8;2.2,0.4 2.2,3.2;2.2,0.4 3.4,0.4;2.2,1.8 3.4,1.8;2.2,3.2 3.4,3.2;5,0.4 6.2,0.4;5,1.8 6.2,1.8;5,3.2 6.2,3.2;6.2,0.4 6.2,3.2;6.2,1.8 7.8,1.8" etichette="1.65,5.5,C₁ · 0,9;4.05,5.5,C₂ · 0,8;6.45,5.5,C₃ · 0,7;3.65,3.1,C₁ · 0,9;3.65,1.7,C₂ · 0,8;3.65,0.3,C₃ · 0,7;0.6,6.25,in serie;0.6,4.1,in parallelo" titolo="Gli stessi tre componenti collegati in serie, in alto, e in parallelo, in basso. Accanto al nome è indicata la probabilità di funzionamento. Le affidabilità sono $0{,}504$ e $0{,}994$."}
 :::
 
 :::esempio{titolo="Esattamente due componenti operativi"}

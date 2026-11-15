@@ -166,6 +166,28 @@ Dato $\vec B\ne\vec 0$, la **proiezione scalare** di $\vec A$ sul verso di $\vec
 ::grafico{uguale=1 xmin=-3.7 xmax=5.5 ymin=-1.5 ymax=4.6 vettori="0,0,-2,3,A;0,0,4,0,B;0,-0.32,-2,-0.32" segmenti="-2,0,-2,3" punti="-2,0;-2,3" etichette="-2.95,-0.8,−2" titolo="La proiezione di $A$ lungo il verso di $B$ è negativa perché il piede della perpendicolare ha ascissa $-2$."}
 :::
 
+::::teorema{#scomposizione titolo="Scomposizione rispetto a una direzione"}
+Siano $\vec B\ne\vec0$ e $\widehat B$ il suo versore. Ogni vettore $\vec A$ si scrive come somma $\vec A=\vec A_{\parallel}+\vec A_{\perp}$, con
+$$
+\vec A_{\parallel}=(\vec A\cdot\widehat B)\,\widehat B,
+\qquad
+\vec A_{\perp}=\vec A-\vec A_{\parallel}.
+$$
+Vale $\vec A_{\perp}\cdot\vec B=0$, quindi $\vec A_{\perp}$, quando non è nullo, è perpendicolare a $\vec B$. Questa scomposizione permette di separare il peso di un corpo appoggiato su un piano inclinato in una parte lungo il piano e in una parte perpendicolare al piano. Per $\vec A=(1,3)$ e $\vec B=(2,0)$ si ha $\widehat B=(1,0)$, quindi $\vec A_{\parallel}=(1,0)$ e $\vec A_{\perp}=(0,3)$.
+
+:::dimostrazione
+Si calcola il prodotto scalare di $\vec A_{\perp}$ con $\widehat B$. Il versore ha modulo uno, quindi $\widehat B\cdot\widehat B=1$. Per la proprietà distributiva del prodotto scalare si ottiene
+$$
+\begin{aligned}
+\vec A_{\perp}\cdot\widehat B
+&=\vec A\cdot\widehat B-(\vec A\cdot\widehat B)\,(\widehat B\cdot\widehat B)\\[6pt]
+&=\vec A\cdot\widehat B-\vec A\cdot\widehat B=0.
+\end{aligned}
+$$
+Poiché $\vec B=|\vec B|\,\widehat B$, anche $\vec A_{\perp}\cdot\vec B=|\vec B|\,(\vec A_{\perp}\cdot\widehat B)$ vale zero.
+:::
+::::
+
 :::esempio{titolo="Angolo ricavato dalle componenti"}
 I vettori $\vec A=(2,0)$ e $\vec B=(1,\sqrt3)$ hanno entrambi modulo $2$. Il prodotto scalare vale $2$, quindi
 $$
@@ -173,6 +195,30 @@ $$
 $$
 L’angolo tra i vettori appartiene all’intervallo da zero a centottanta gradi, quindi $\theta=60^\circ$. L’angolo è acuto perché il prodotto scalare è positivo. Un prodotto negativo darebbe un coseno negativo e un angolo ottuso. Questo controllo del segno è utile quando una calcolatrice restituisce l’angolo in radianti e si vuole confrontarlo con un disegno in gradi.
 :::
+
+::::teorema{#modulo-somma titolo="Modulo della somma di due vettori"}
+Per due vettori $\vec A$ e $\vec B$ vale
+$$
+|\vec A+\vec B|^2=|\vec A|^2+|\vec B|^2+2\,\vec A\cdot\vec B.
+$$
+Se entrambi sono non nulli e $\theta$ è l’angolo tra loro, il doppio prodotto vale $2|\vec A|\,|\vec B|\cos\theta$. Per $\theta=90^\circ$ questo termine è nullo e la formula si riduce al teorema di Pitagora. La formula dà il modulo della risultante di due forze di cui si conoscono i moduli e l’angolo compreso, senza calcolare le componenti. Per esempio, due forze di $3\,\mathrm{N}$ e $5\,\mathrm{N}$ che formano un angolo di $60^\circ$ hanno una risultante di modulo
+$$
+|\vec F_{\mathrm{ris}}|
+=\sqrt{9+25+2\cdot3\cdot5\cdot\frac12}\,\mathrm{N}
+=\sqrt{49}\,\mathrm{N}=7\,\mathrm{N}.
+$$
+
+:::dimostrazione
+L’idea è scrivere il quadrato del modulo come prodotto scalare di un vettore per sé stesso. Per ogni vettore $\vec V$ si ha $\vec V\cdot\vec V=V_x^2+V_y^2+V_z^2=|\vec V|^2$. Si applica questa uguaglianza a $\vec V=\vec A+\vec B$ e si usa la proprietà distributiva, che segue dal calcolo per componenti:
+$$
+\begin{aligned}
+|\vec A+\vec B|^2&=(\vec A+\vec B)\cdot(\vec A+\vec B)\\[6pt]
+&=\vec A\cdot\vec A+\vec A\cdot\vec B+\vec B\cdot\vec A+\vec B\cdot\vec B.
+\end{aligned}
+$$
+Il prodotto scalare è commutativo, perché $A_xB_x=B_xA_x$ e lo stesso vale per le altre componenti. I due termini centrali sono quindi uguali e la loro somma è $2\,\vec A\cdot\vec B$. Poiché $\vec A\cdot\vec A=|\vec A|^2$ e $\vec B\cdot\vec B=|\vec B|^2$, si ottiene la tesi. La seconda forma del doppio prodotto segue dalla formula geometrica del prodotto scalare.
+:::
+::::
 
 :::esempio{titolo="Componente lungo una direzione obliqua"}
 Siano $\vec A=(7,1)$ e $\vec B=(3,4)$. Il modulo di $\vec B$ vale $5$, quindi il versore è $\left(\dfrac35,\dfrac45\right)$. La proiezione scalare è

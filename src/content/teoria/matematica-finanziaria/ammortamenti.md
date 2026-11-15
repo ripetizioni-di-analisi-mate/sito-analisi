@@ -75,6 +75,8 @@ Siano $D_0=2100\,\mathrm{euro}$, $i=10\%$ e $n=2$. Il valore attuale di una rata
 | 2 | 1100 | 110 | 1100 | 1210 | 0 |
 
 L'interesse scende da $210$ a $110\,\mathrm{euro}$ perché la seconda rata remunera soltanto i $1100\,\mathrm{euro}$ rimasti in prestito. Le quote capitale sommano $2100\,\mathrm{euro}$ e il saldo finale è nullo.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 linee="-0.52,0 3.51,0;3.38,0.08 3.51,0 3.38,-0.08;0,-0.05 0,0.05;1.3,-0.05 1.3,0.05;2.6,-0.05 2.6,0.05" vettori="0,0,0,1.4,2100;1.3,0,1.3,-0.807,1210;2.6,0,2.6,-0.807,1210" etichette="-0.16,-0.22,0;1.14,-0.22,1;2.44,-0.22,2;3.55,-0.04,t" xmin=-0.78 xmax=3.86 ymin=-1.007 ymax=1.6 titolo="Flussi del prestito per il debitore, in euro. La freccia verso l'alto è il capitale di $2100$ ricevuto alla data $0$; le frecce verso il basso sono le due rate di $1210$ pagate alle date $1$ e $2$. Il tempo $t$ è misurato in anni."}
 :::
 
 :::osservazione
@@ -85,6 +87,16 @@ D_0=R a_{\overline n|i}+Bv^n.
 $$
 
 Si sottrae quindi dal capitale il valore attuale di $B$ prima di dividere per il fattore di rendita. Per esempio, con $D_0=2200\,\mathrm{euro}$, $i=10\%$, $n=2$ e $B=1210\,\mathrm{euro}$, il versamento aggiuntivo ha valore attuale di $1000\,\mathrm{euro}$. Le due rate ordinarie coprono i restanti $1200\,\mathrm{euro}$ in valore attuale, quindi ciascuna è di $\dfrac{4840}{7}\,\mathrm{euro}$, circa $691{,}43\,\mathrm{euro}$. Il pagamento totale dell'ultima data è di circa $1901{,}43\,\mathrm{euro}$.
+:::
+
+:::esempio{titolo="Quote di un piano francese di tre rate"}
+Siano $D_0=3000\,\mathrm{euro}$, $i=5\%$ e $n=3$. Il fattore di rendita è
+$$
+a_{\overline 3|0{,}05}=\frac{1-1{,}05^{-3}}{0{,}05}\approx2{,}72325,
+$$
+quindi la rata è $R=\dfrac{3000}{2{,}72325}\approx1101{,}63\,\mathrm{euro}$. Nel primo periodo l'interesse matura sull'intero capitale ed è $0{,}05\cdot3000=150\,\mathrm{euro}$, perciò la prima quota capitale è $C_1\approx951{,}63\,\mathrm{euro}$. Per la relazione $C_{k+1}=1{,}05\,C_k$ si ottengono $C_2\approx999{,}21\,\mathrm{euro}$ e $C_3\approx1049{,}17\,\mathrm{euro}$. Le quote interesse sono le differenze fra la rata e le quote capitale, cioè circa $150$, $102{,}42$ e $52{,}46\,\mathrm{euro}$. Il debito dopo la prima rata è quindi $3000-951{,}63=2048{,}37\,\mathrm{euro}$.
+
+::grafico{curve="t,1101.625694+0*t,1,3;t,951.625694*1.05^(t-1),1,3;t,1101.625694-951.625694*1.05^(t-1),1,3" xmin=0 xmax=3.6 ymin=0 ymax=1500 nomi="k,euro" punti="1,1101.63;2,1101.63;3,1101.63;1,951.63;2,999.21;3,1049.17;1,150;2,102.42;3,52.46" legenda="R;C_k;I_k" titolo="Rata, quote capitale e quote interesse del piano francese con $D_0=3000$ euro, $i=5\%$ e $n=3$. Le quote capitale crescono con fattore $1{,}05$ e a ogni data $C_k+I_k=R$."}
 :::
 
 ## Ammortamento italiano
@@ -105,6 +117,8 @@ Per $D_0=3000\,\mathrm{euro}$, $n=3$ e $i=5\%$ si rimborsano $1000\,\mathrm{euro
 $$
 \sum_{k=1}^n I_k=iD_0\frac{n+1}{2}.
 $$
+
+::grafico{curve="t,1200-50*t,1,3;t,1000+0*t,1,3;t,200-50*t,1,3" xmin=0 xmax=3.6 ymin=0 ymax=1500 nomi="k,euro" punti="1,1150;2,1100;3,1050;1,1000;2,1000;3,1000;1,150;2,100;3,50" legenda="R_k;C;I_k" titolo="Piano italiano con $D_0=3000$ euro, $i=5\%$ e $n=3$. La quota capitale resta di $1000$ euro, mentre la rata e la quota interesse diminuiscono di $50$ euro a ogni data."}
 :::
 
 :::osservazione
@@ -130,6 +144,8 @@ La rata verso il creditore e il versamento al fondo appartengono a rapporti dist
 
 :::esempio{titolo="Interesse del prestito e rendimento del fondo"}
 Un capitale di $2100\,\mathrm{euro}$ va restituito dopo due anni. Il prestito costa il $5\%$ annuo, perciò il creditore riceve $105\,\mathrm{euro}$ di interesse a ogni fine anno. Il fondo rende il $10\%$ annuo. Il primo accantonamento matura un anno di interesse e il secondo entra nel fondo alla data in cui serve il capitale. Perciò $Q(1{,}1+1)=2100\,\mathrm{euro}$ e ogni accantonamento vale $1000\,\mathrm{euro}$. L'esborso del debitore è di $1105\,\mathrm{euro}$ all'anno. Dopo il primo pagamento il fondo contiene $1000\,\mathrm{euro}$, mentre il capitale ancora dovuto al creditore è di $2100\,\mathrm{euro}$.
+
+::grafico{curve="t,2100+0*t,0,2;t,1000*1.1^(t-1),1,2" segmenti="1,0,1,1000;2,1100,2,2100" punti="0,0;1,1000;2,2100;2,1100,vuoto" xmin=-0.2 xmax=2.5 ymin=0 ymax=2500 nomi="t,euro" legenda="\text{Capitale dovuto al creditore};\text{Saldo del fondo}" titolo="Capitale dovuto al creditore e saldo del fondo al $10\%$, in euro. Il fondo riceve $1000$ euro alle date $1$ e $2$; il punto vuoto è il saldo di $1100$ euro subito prima del secondo versamento."}
 :::
 
 :::osservazione
@@ -171,6 +187,8 @@ Sottraendo la prima somma si ottiene la forma retrospettiva. La somma rimasta co
 
 :::esempio{titolo="Due calcoli allo stesso istante"}
 Nel prestito di $2100\,\mathrm{euro}$ al $10\%$ con due rate da $1210\,\mathrm{euro}$, subito dopo la prima rata resta un solo pagamento da scontare. Il metodo prospettivo dà $\dfrac{1210}{1{,}1}=1100\,\mathrm{euro}$. Il metodo retrospettivo dà $2100\cdot1{,}1-1210=1100\,\mathrm{euro}$. La prima rata compare nella sottrazione retrospettiva, perché al momento della valutazione è stata appena pagata. Nel caso francese con $n-k$ rate residue uguali si può scrivere $D_k=R a_{\overline{n-k}|i}$, ponendo $a_{\overline 0|i}=0$.
+
+::grafico{curve="t,t<1.002?2100*1.1^t:(t<1.004?0/0:1100*1.1^(t-1)),0,2" segmenti="1,2310,1,1100;2,1210,2,0" punti="0,2100;1,2310,vuoto;1,1100;2,1210,vuoto;2,0" etichette="1.06,2380,2310;1.06,1000,1100;2.06,1280,1210" xmin=-0.2 xmax=2.5 ymin=0 ymax=2500 nomi="t,euro" legenda=0 titolo="Debito del prestito di $2100$ euro al $10\%$ rimborsato con due rate di $1210$ euro. Fra due scadenze il debito matura interessi al $10\%$ annuo; i punti vuoti sono i debiti prima delle rate, $2310$ e $1210$ euro, i punti pieni i debiti dopo le rate, $1100$ e $0$ euro."}
 :::
 
 ## Estinzione anticipata
@@ -189,6 +207,8 @@ Se $j=i$, il valore coincide con $D_k$. Se ogni rata residua è positiva e ne ri
 
 :::esempio{titolo="Saldo dopo la rata e prezzo del credito"}
 Subito dopo una rata, l'unico pagamento residuo è di $1210\,\mathrm{euro}$ fra un anno. Il tasso contrattuale è il $10\%$, quindi il saldo per estinguere in quella data è $1100\,\mathrm{euro}$ in assenza di costi. Se il tasso di valutazione è il $21\%$, il valore di mercato è $\dfrac{1210}{1{,}21}=1000\,\mathrm{euro}$. Lo stesso pagamento compare in entrambi i calcoli, con il fattore di sconto proprio di ciascuna valutazione. Se la chiusura avviene subito *prima* di pagare la rata corrente, occorre invece comprendere anche il pagamento dovuto in quella data.
+
+::grafico{f="1210/(1+x/100)" xmin=0 xmax=32 ymin=0 ymax=1400 nomi="j,euro" punti="10,1100;21,1000" segmenti="10,0,10,1100;21,0,21,1000" etichette="11,1180,1100;22,1080,1000" legenda="V_k(j)" titolo="Valore alla data $k$ dell'unico pagamento residuo di $1210$ euro, $V_k(j)=\dfrac{1210}{1+j}$; in ascissa il tasso $j$ è espresso in percentuale. Al tasso contrattuale del $10\%$ il valore coincide con il debito residuo di $1100$ euro; al $21\%$ scende a $1000$ euro."}
 :::
 
 ## Usufrutto e nuda proprietà

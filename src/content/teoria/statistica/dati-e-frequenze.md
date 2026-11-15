@@ -133,6 +133,8 @@ Per classi di durata $[0,5)$, $[5,10)$ e $[10,20]$ misurate in minuti, una durat
 
 :::esempio{titolo="Che cosa si può recuperare da una tabella"}
 Supponiamo che le classi $[0,5)$, $[5,10)$ e $[10,20]$ contengano 8, 12 e 5 tempi di attesa. Dalla tabella si ricava esattamente che $8+12=20$ attese sono strettamente inferiori a $10\,\mathrm{min}$. Una soglia di $8\,\mathrm{min}$ attraversa invece la seconda classe. Sappiamo che le prime otto osservazioni sono sotto la soglia e che le cinque dell'ultima classe sono sopra. Il conteggio strettamente sotto $8\,\mathrm{min}$ è quindi compreso tra 8 e 20. Qualsiasi stima più precisa richiede informazioni sulla distribuzione dei valori all'interno della seconda classe.
+
+::grafico{assi=0 xmin=-1.5 xmax=22.5 ymin=-1.3 ymax=2.3 vettori="-0.5,0,21.8,0" poligoni="0,0.3 5,0.3 5,1.2 0,1.2;5,0.3 10,0.3 10,1.2 5,1.2;10,0.3 20,0.3 20,1.2 10,1.2" linee="0,0.12 0,-0.12;5,0.12 5,-0.12;10,0.12 10,-0.12;20,0.12 20,-0.12" segmenti="8,-0.1,8,1.75" etichette="-0.2,-0.55,0;4.8,-0.55,5;9.6,-0.55,10;19.6,-0.55,20;21.3,-0.6,t;2.2,0.65,8;6.0,0.65,12;14.8,0.65,5;7.3,2.0,soglia 8" titolo="Classi di attesa con 8, 12 e 5 osservazioni. La soglia di 8 minuti cade dentro la classe $[5,10)$, quindi le sue 12 attese possono stare da entrambe le parti."}
 :::
 
 :::osservazione
@@ -157,8 +159,20 @@ Su 20 attese, 8 cadono in $[0,2)$ minuti e 12 in $[2,8)$ minuti. Le frequenze re
 ::grafico{xmin=-0.99 xmax=8.99 ymin=-0.023 ymax=0.253 nomi="t,d_i" poligoni="0,0 2,0 2,0.2 0,0.2;2,0 8,0 8,0.1 2,0.1" linee="0,0.2 2,0.2 2,0 8,0 8,0.1 2,0.1" etichette="-0.78,0.19,0,20;-0.78,0.09,0,10;0.62,0.12,0,40;4.64,0.055,0,60" titolo="Aree relative delle due classi"}
 :::
 
+:::attenzione
+Con classi di ampiezze diverse, altezze proporzionali ai conteggi attribuiscono alle classi larghe un'area eccessiva. Si considerino 30 attese nelle classi $[0,5)$, $[5,10)$ e $[10,20)$ minuti, con 8, 12 e 10 osservazioni. Se tutte le altezze si ottengono dividendo il conteggio per la stessa ampiezza $5\,\mathrm{min}$, l'ultimo rettangolo ha altezza $\dfrac{10}{5}=2$ osservazioni per minuto e area $2\cdot10=20$, cioè il doppio delle 10 osservazioni che contiene. Le densità assolute corrette sono $\dfrac{8}{5}=1{,}6$, $\dfrac{12}{5}=2{,}4$ e $\dfrac{10}{10}=1$ osservazioni per minuto. Con queste altezze ogni area coincide con il conteggio della classe e la somma delle aree vale 30.
+
+::grafico{assi=0 xmin=-2.6 xmax=22.8 ymin=-0.45 ymax=3.05 vettori="-0.6,0,22,0;-0.6,0,-0.6,2.85" poligoni="0,0 5,0 5,1.6 0,1.6;5,0 10,0 10,2.4 5,2.4;10,0 20,0 20,1 10,1" linee="0,1.6 5,1.6 5,0;5,2.4 10,2.4 10,0;10,1 20,1 20,0;-0.75,1 -0.45,1;-0.75,2 -0.45,2" segmenti="10,1,10,2;10,2,20,2;20,2,20,1" etichette="-1.9,0.95,1;-1.9,1.95,2;-0.4,2.95,densità;-0.2,-0.22,0;4.8,-0.22,5;9.6,-0.22,10;19.6,-0.22,20;21.4,-0.25,t;2.2,0.75,8;7.2,1.15,12;14.6,0.45,10;13.4,2.18,area 20" titolo="Densità assolute corrette delle tre classi. Il contorno tratteggiato è il rettangolo alto $\dfrac{10}{5}$, la cui area 20 non corrisponde alle 10 osservazioni della classe $[10,20)$."}
+:::
+
 :::osservazione
 In un **diagramma a barre** i rettangoli sono separati e l'altezza rappresenta il conteggio o la proporzione della modalità. La larghezza è grafica. In un istogramma, invece, la base misura l'ampiezza della classe sull'asse quantitativo. In un **grafico a settori** la quota $f_i$ è rappresentata da un angolo di ampiezza $360^\circ f_i$. Un settore di $90^\circ$ corrisponde a un quarto del totale. In tutti i casi l'etichetta dell'asse o della legenda indica se si stanno leggendo conteggi, proporzioni o densità.
+:::
+
+:::esempio{titolo="Angoli di un grafico a settori"}
+Tre modalità A, B e C contano 13, 17 e 10 osservazioni su 40. Gli angoli dei settori sono $360^\circ\cdot\dfrac{13}{40}=117^\circ$, $360^\circ\cdot\dfrac{17}{40}=153^\circ$ e $360^\circ\cdot\dfrac{10}{40}=90^\circ$. La loro somma è $360^\circ$, poiché le frequenze relative sommano a 1. La modalità C occupa un quarto del cerchio, perché $\dfrac{10}{40}=\dfrac14$. Il rapporto fra due angoli coincide con il rapporto fra i conteggi, per esempio $\dfrac{153}{117}=\dfrac{17}{13}$, quindi il grafico conserva i confronti fra le modalità.
+
+::grafico{assi=0 uguale=1 xmin=-1.35 xmax=1.35 ymin=-1.25 ymax=1.25 curve="cos(t),sin(t),0,6.2832" poligoni="0,0 0,-1 0.174,-0.985 0.342,-0.940 0.500,-0.866 0.643,-0.766 0.766,-0.643 0.866,-0.500 0.940,-0.342 0.985,-0.174 1,0" linee="0,0 1,0;0,0 -0.454,0.891;0,0 0,-1" etichette="0.22,0.47,A 117°;-0.72,-0.13,B 153°;0.30,-0.40,C 90°" titolo="Settori di ampiezza $360^\circ\cdot\dfrac{n_i}{40}$ per le tre modalità"}
 :::
 
 ## Tabelle a doppia entrata
@@ -186,6 +200,8 @@ Un corso offre un turno diurno e uno serale. L'esito di 80 iscritti è riassunto
 La quota di iscritti serali e idonei sul totale è $\dfrac{21}{80}=0{,}2625$. Tra i serali, la quota degli idonei è $\dfrac{21}{30}=0{,}70$. Tra gli idonei, la quota dei serali è $\dfrac{21}{51}=\dfrac7{17}$. I tre numeratori coincidono perché contano la stessa cella. Il denominatore cambia perché la domanda riguarda, rispettivamente, tutti gli iscritti, il solo turno serale o i soli idonei.
 
 Per confrontare la quota di idonei tra i due turni si usano i totali delle due righe, ottenendo $0{,}60$ per il diurno e $0{,}70$ per il serale. I 30 idonei del diurno sono più numerosi dei 21 del serale perché il diurno comprende 50 iscritti. I conteggi da soli rispondono a una domanda sulla numerosità, mentre il confronto delle quote tiene conto dell'ampiezza dei turni.
+
+::grafico{assi=0 xmin=-0.7 xmax=4.4 ymin=-16 ymax=112 vettori="0,0,4.1,0;0,0,0,108" poligoni="0.7,0 1.5,0 1.5,60 0.7,60;2.4,0 3.2,0 3.2,70 2.4,70" linee="0.7,60 0.7,100 1.5,100 1.5,60;2.4,70 2.4,100 3.2,100 3.2,70;-0.08,50 0.08,50;-0.08,100 0.08,100" etichette="-0.5,48,50;-0.6,98,100;0.1,108,quota (%);0.82,28,idonei 60;0.82,78,non 40;2.52,33,idonei 70;2.52,83,non 30;0.85,-8,Diurno;2.6,-8,Serale" titolo="Frequenze relative degli esiti entro ciascun turno. Ogni barra usa come denominatore il totale della propria riga, $\dfrac{n_{ij}}{n_{i\cdot}}$."}
 :::
 
 ## Selezione e dati mancanti

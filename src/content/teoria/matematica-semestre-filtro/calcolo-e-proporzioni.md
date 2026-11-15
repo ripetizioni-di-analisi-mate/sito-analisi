@@ -61,7 +61,7 @@ $$
 $$
 Questo ordine è utile, per esempio, quando una posizione viene indicata con una coordinata negativa rispetto a un'origine.
 
-::grafico{assi=0 uguale=1 xmin=-1.23 xmax=1.42 ymin=-0.32 ymax=0.34 vettori="-1.13,0,1.21,0,x" punti="-0.833333333333,0;-0.666666666667,0;0,0;0.666666666667,0;0.833333333333,0" etichette="-0.88,0.14,−⅚;-0.61,-0.16,−⅔;0,-0.16,0;0.60,0.14,⅔;0.88,-0.16,⅚" titolo="Le frazioni con segno sono ordinate sulla retta orientata."}
+::grafico{assi=0 uguale=1 xmin=-1.23 xmax=1.42 ymin=-0.32 ymax=0.34 vettori="-1.13,0,1.21,0,x" punti="-0.833333333333,0;-0.666666666667,0;0,0;0.666666666667,0;0.833333333333,0" etichette="-0.88,0.14,A;-0.61,-0.16,B;0,-0.16,0;0.60,0.14,C;0.88,-0.16,D" titolo="I punti $A$, $B$, $C$ e $D$ rappresentano $-\dfrac{5}{6}$, $-\dfrac{2}{3}$, $\dfrac{2}{3}$ e $\dfrac{5}{6}$ sulla retta orientata."}
 :::
 
 :::attenzione{titolo="L'unità cambia il confronto tra quantità"}
@@ -255,6 +255,22 @@ $$
 La massa del solvente è $150\,\mathrm{g}-18\,\mathrm{g}=132\,\mathrm{g}$ se la soluzione contiene soltanto il soluto e il solvente. La differenza usa quindi come base la massa totale appena calcolata.
 :::
 
+::::teorema{#frazione-dal-rapporto titolo="Frazione del totale dal rapporto tra due componenti"}
+Una miscela binaria contiene due componenti di masse $a>0$ e $b>0$, il cui rapporto è $\dfrac{a}{b}=\dfrac{h}{k}$ con $h,k>0$. Allora la frazione in massa del primo componente è
+$$
+\frac{a}{a+b}=\frac{h}{h+k}.
+$$
+Il risultato serve quando il testo assegna il rapporto fra soluto e solvente al posto della composizione. Per esempio, se soluto e solvente sono nel rapporto $\dfrac{3}{17}$, il soluto è $\dfrac{3}{3+17}=\dfrac{3}{20}$ della massa totale, cioè il $15\%$.
+
+:::dimostrazione
+Si esprime la massa totale tramite $b$. Dalla proporzione segue $a=\dfrac{h}{k}\,b$, quindi $a+b=\dfrac{h}{k}\,b+b=\dfrac{h+k}{k}\,b$. Il totale è positivo, perciò si può dividere $a$ per $a+b$, e si ottiene
+$$
+\frac{a}{a+b}=\frac{\frac{h}{k}\,b}{\frac{h+k}{k}\,b}=\frac{h}{h+k}.
+$$
+Nell'ultimo passaggio si sono semplificati i fattori $b$ e $\dfrac{1}{k}$, entrambi diversi da zero.
+:::
+::::
+
 :::attenzione{titolo="Rapporto tra componenti e frazione del totale"}
 Se in una miscela binaria il rapporto tra massa del soluto e massa del solvente è $\dfrac{2}{3}$, la massa totale corrisponde a cinque parti. Il soluto rappresenta allora $\dfrac{2}{5}=40\%$ del totale. La frazione $\dfrac{2}{3}$ ha per denominatore la sola massa del solvente.
 :::
@@ -285,6 +301,25 @@ Il secondo passo sottrae $24\,\mathrm{L}$, perché il suo valore di riferimento 
 
 ::grafico{assi=0 uguale=1 xmin=-0.65 xmax=3.55 ymin=-0.4 ymax=4.75 vettori="-0.2,0,3.35,0;-0.2,0,-0.2,4.55" unicolore=1 punti="0,2;1.4,4;2.8,1.6" linee="0,2 1.4,4 2.8,1.6" segmenti="-0.2,1,3.1,1;-0.2,2,3.1,2;-0.2,3,3.1,3;-0.2,4,3.1,4" etichette="-0.58,0,80;-0.58,1,90;-0.62,2,100;-0.62,3,110;-0.62,4,120;-0.18,4.61,V (L);-0.10,-0.27,Inizio;1.27,-0.27,Aumento;2.52,-0.27,Diminuzione;2.94,1.58,96 L" titolo="La scala verticale parte da $80\,\mathrm{L}$. I segmenti collegano i tre volumi calcolati."}
 :::
+
+::::teorema{#variazioni-successive titolo="Composizione di due variazioni percentuali"}
+Un valore $x_0>0$ subisce prima una variazione relativa $r_1$, con $r_1>-1$, e poi una variazione relativa $r_2$ calcolata rispetto al valore raggiunto. L'ipotesi $r_1>-1$ assicura che il valore intermedio sia positivo e possa fare da base. Il valore finale è $x_2=x_0(1+r_1)(1+r_2)$ e la variazione relativa complessiva è
+$$
+r=r_1+r_2+r_1r_2.
+$$
+La formula dà la variazione complessiva senza conoscere il valore iniziale. Per esempio, un aumento del $20\%$ seguito da una diminuzione del $20\%$ dà $r=\dfrac{1}{5}-\dfrac{1}{5}-\dfrac{1}{25}=-\dfrac{4}{100}$, cioè una diminuzione del $4\%$ per qualunque valore iniziale. Quando $r_1$ e $r_2$ sono entrambi diversi da zero, il termine $r_1r_2$ è diverso da zero, perciò la variazione complessiva è diversa dalla somma $r_1+r_2$.
+
+:::dimostrazione
+Si applica due volte la definizione di fattore di variazione. Il primo passo dà $x_1=x_0(1+r_1)$, che è positivo perché $x_0>0$ e $1+r_1>0$. Il secondo passo usa come base $x_1$, quindi $x_2=x_1(1+r_2)=x_0(1+r_1)(1+r_2)$. Poiché $x_0>0$, si può dividere per $x_0$ e si ottiene
+$$
+\begin{aligned}
+r&=\frac{x_2-x_0}{x_0}=(1+r_1)(1+r_2)-1\\[6pt]
+&=1+r_1+r_2+r_1r_2-1\\[6pt]
+&=r_1+r_2+r_1r_2.
+\end{aligned}
+$$
+:::
+::::
 
 :::esempio{titolo="Diminuzione che annulla un aumento"}
 Una misura passa da $40$ a $50$. L'aumento relativo è $\dfrac{50-40}{40}=\dfrac{1}{4}$, quindi l'aumento è del $25\%$. Per tornare a $40$ occorre sottrarre $10$ a partire da $50$. La diminuzione relativa è quindi $\dfrac{10}{50}=\dfrac{1}{5}$, ossia il $20\%$. In termini di fattori, $\dfrac{5}{4}\cdot\dfrac{4}{5}=1$. Per annullare un cambiamento con fattore positivo, il fattore successivo deve essere la sua reciproca.

@@ -25,6 +25,8 @@ V(2)=110\cdot1{,}1+110+\frac{110}{1{,}1}=331\,\mathrm{euro}.
 $$
 
 Al tempo $2$ subito dopo la seconda riscossione, resta invece da incassare solo la rata al tempo $3$, che vale $100$ euro. La prima somma valuta il contratto completo alla data scelta, mentre il secondo valore riguarda i flussi che restano da ricevere. La distinzione ricompare nel capitolo sul debito residuo.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 linee="-0.35,0 3.7,0;3.57,0.08 3.7,0 3.57,-0.08;0,-0.05 0,0.05;1,-0.05 1,0.05;2,-0.05 2,0.05;3,-0.05 3,0.05" vettori="1,0,1,1;2,0,2,1;3,0,3,1" etichette="-0.039,-0.25,0;1.052,-0.25,1;2.052,-0.25,2;3.052,-0.25,3;3.76,-0.05,t;0.883,1.12,110;1.883,1.12,110;2.883,1.12,110" xmin=-0.6 xmax=4.25 ymin=-0.65 ymax=1.35 titolo="Rate da $110$ euro alle date $1$, $2$ e $3$, valutate alla data $\tau=2$. Al $10\%$ la prima rata vale $121$ euro a quella data, la seconda $110$ euro e la terza $100$ euro."}
 :::
 
 :::osservazione
@@ -85,6 +87,8 @@ Tre rate anticipate da $288$ euro hanno scadenze $0,1,2$. Al tasso del $20\%$, i
 
 :::osservazione
 Due calendari con la stessa rata e la stessa durata contrattuale possono differire di un periodo. Tre quote annuali pagate all'inizio dell'anno scadono alle date $0,1,2$. Pagate alla fine dell'anno scadono invece alle date $1,2,3$. Al tasso positivo il primo calendario ha valore attuale maggiore, poiché il rapporto fra i valori è $q>1$. Se il tasso è negativo, il rapporto è $q<1$ e l'ordine dei valori si inverte.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 linee="-0.35,2 3.7,2;3.57,2.08 3.7,2 3.57,1.92;0,1.95 0,2.05;1,1.95 1,2.05;2,1.95 2,2.05;3,1.95 3,2.05;-0.35,0 3.7,0;3.57,0.08 3.7,0 3.57,-0.08;0,-0.05 0,0.05;1,-0.05 1,0.05;2,-0.05 2,0.05;3,-0.05 3,0.05" vettori="0,2,0,3;1,2,1,3;2,2,2,3;1,0,1,1;2,0,2,1;3,0,3,1" etichette="0.06,1.75,0;1.06,1.75,1;2.06,1.75,2;2.955,1.75,3;3.76,1.95,t;-0.045,-0.25,0;1.06,-0.25,1;2.06,-0.25,2;3.06,-0.25,3;3.76,-0.05,t;-0.045,3.12,R;0.955,3.12,R;1.955,3.12,R;0.955,1.12,R;1.955,1.12,R;2.955,1.12,R;3.9,2.45,anticipata;3.9,0.45,posticipata" xmin=-0.6 xmax=5.0 ymin=-0.45 ymax=3.45 titolo="Tre rate uguali di importo $R$. Nella rendita anticipata scadono alle date $0$, $1$, $2$, nella posticipata alle date $1$, $2$, $3$. Ogni rata del primo calendario precede di un periodo la corrispondente rata del secondo, perciò i valori attuali stanno nel rapporto $q$."}
 :::
 
 ## Montante alla fine del piano
@@ -113,6 +117,8 @@ In un piano anticipato ogni rata rimane investita un periodo in più rispetto al
 
 :::esempio{titolo="Data dell'ultimo versamento e fine del piano"}
 Tre versamenti annui anticipati da $100$ euro scadono ai tempi $0,1,2$. Al tasso annuo del $10\%$ il montante al tempo $2$, subito dopo l'ultima rata, è $121+110+100=331$ euro. Se il capitale rimane investito fino al tempo $3$, il montante diventa $331\cdot1{,}1=364{,}10$ euro. Quest'ultimo importo è $100q s_{\overline 3|i}$. Il tempo di valutazione distingue le due risposte, poiché la data dell'ultima rata di una rendita anticipata è $n-1$.
+
+::grafico{curve="t,t<1?100*1.1^t:(t<1.004?0/0:(t<2?210*1.1^(t-1):(t<2.004?0/0:331*1.1^(t-2)))),0,3" segmenti="1,110,1,210;2,231,2,331" punti="0,100;1,110,vuoto;1,210;2,231,vuoto;2,331;3,364.1" etichette="0.08,70,100;1.08,85,110;0.62,225,210;2.08,205,231;1.62,345,331;2.62,395,364,10" xmin=-0.2 xmax=3.5 ymin=0 ymax=400 nomi="t,euro" legenda=0 titolo="Saldo del conto con versamenti di $100$ euro alle date $0$, $1$, $2$ al $10\%$ annuo. Fra due versamenti il saldo cresce con fattore $1{,}1$ all'anno; i punti vuoti sono i saldi subito prima dei versamenti, i punti pieni quelli subito dopo. Alla data $2$ il saldo è $331$ euro, alla data $3$ è $364{,}10$ euro."}
 :::
 
 ## Differimento
@@ -150,6 +156,8 @@ $$
 
 Se la prima rata è al tempo $0$, al valore $\dfrac Ri$ si aggiunge la rata iniziale $R$. Se la prima rata è al tempo $m+1$, il valore attuale è $v^m\dfrac Ri$. La formula $\dfrac Ri$ dà dunque il valore della perpetuità misurato un periodo prima del primo pagamento.
 
+::grafico{f="(1-1.2^(-x))/0.2" xmin=0 xmax=21 ymin=0 ymax=6 nomi="n,a" asintoti="y=5" punti="1,0.8333;2,1.5278;5,2.9906;10,4.1925;20,4.8696" legenda=0 titolo="Fattore $a_{\overline n|i}=\dfrac{1-v^n}{i}$ al tasso $i=20\%$ in funzione del numero di rate $n$; i punti sono i valori per $n=1$, $2$, $5$, $10$, $20$. Il fattore cresce con $n$ e tende a $\dfrac{1}{i}=5$, valore della perpetuità di rata unitaria."}
+
 :::dimostrazione
 Si parte dalle prime $n$ rate, che valgono $R\dfrac{1-v^n}{i}$. Dall'ipotesi $i>0$ segue $0<v<1$, quindi $v^n\to0$ per $n\to\infty$. Il limite delle somme parziali è $\dfrac Ri$. Se $i=0$, ogni termine vale $R$ e le somme parziali crescono senza limite. Se $-1<i<0$, ogni contributo vale più di $R$, quindi anche in questo caso le somme parziali divergono a $+\infty$.
 :::
@@ -157,6 +165,8 @@ Si parte dalle prime $n$ rate, che valgono $R\dfrac{1-v^n}{i}$. Dall'ipotesi $i>
 
 :::esempio{titolo="Perpetuità con attesa iniziale"}
 Una rendita paga $144$ euro l'anno a partire dal tempo $3$. Al tasso annuo del $20\%$, un periodo prima della prima rata il valore è $\dfrac{144}{0{,}2}=720$ euro. Si tratta del valore al tempo $2$, perciò oggi vale $720\cdot\left(\dfrac56\right)^2=500$ euro. Si può controllare l'importo seguendo il capitale. Cinquecento euro diventano $720$ in due anni e da quel momento producono ogni anno $144$ euro di interessi, lasciando intatto il capitale.
+
+::grafico{assi=0 uguale=1 unicolore=1 legenda=0 linee="-0.35,0 6.7,0;6.57,0.08 6.7,0 6.57,-0.08;0,-0.05 0,0.05;1,-0.05 1,0.05;2,-0.05 2,0.05;3,-0.05 3,0.05;4,-0.05 4,0.05;5,-0.05 5,0.05;6,-0.05 6,0.05" vettori="3,0,3,1;4,0,4,1;5,0,5,1;6,0,6,1" punti="0,0,pieno;2,0,pieno" etichette="-0.063,-0.25,0;0.937,-0.25,1;1.937,-0.25,2;3.084,-0.25,3;4.084,-0.25,4;5.084,-0.25,5;6.084,-0.25,6;6.76,-0.05,t;2.811,1.12,144;3.811,1.12,144;4.811,1.12,144;5.811,1.12,144;6.25,0.3,…;-0.45,0.45,V(0) = 500;1.55,0.45,V(2) = 720" xmin=-0.6 xmax=7.25 ymin=-0.65 ymax=1.35 titolo="Perpetuità di $144$ euro l'anno con prima rata alla data $3$, al $20\%$. La formula $\dfrac{R}{i}$ dà $720$ euro alla data $2$; attualizzando di due anni si ottengono $500$ euro alla data $0$."}
 :::
 
 :::osservazione
@@ -197,6 +207,8 @@ La formula fornisce una durata teorica. Quando $n$ è intero, descrive un piano 
 
 :::esempio{titolo="Saldo alla scadenza successiva"}
 Si rimborsano $150$ euro con rate da $100$ euro e tasso annuo del $10\%$. Dopo un anno il debito prima del versamento vale $165$ euro, quindi dopo la prima rata restano $65$ euro. Alla seconda scadenza il saldo è $65\cdot1{,}1=71{,}50$ euro. La durata teorica è compresa fra uno e due anni, poiché il valore attuale di una rata è minore di $150$ euro e quello di due rate è maggiore di $150$ euro. Il saldo si calcola capitalizzando il residuo per un anno intero, dato che la seconda scadenza è al tempo $2$.
+
+::grafico{curve="t,t<1?150*1.1^t:(t<1.004?0/0:65*1.1^(t-1)),0,2" segmenti="1,165,1,65;2,71.5,2,0" punti="0,150;1,165,vuoto;1,65;2,71.5,vuoto;2,0" etichette="0.08,128,150;1.08,172,165;1.08,45,65;2.08,80,71,50" xmin=-0.2 xmax=2.6 ymin=0 ymax=200 nomi="t,euro" legenda=0 titolo="Debito di $150$ euro al $10\%$ con rate da $100$ euro. Il debito cresce a $165$ euro, scende a $65$ euro con la prima rata e alla data $2$ vale $71{,}50$ euro, che è il saldo finale; i punti vuoti sono i debiti prima dei pagamenti."}
 :::
 
 ## Tasso incognito
@@ -225,4 +237,6 @@ In una rendita anticipata con almeno due rate, l'addendo iniziale $R$ è costant
 
 :::esempio{titolo="Intervallo per il tasso cercato"}
 Due rate posticipate da $100$ euro hanno prezzo $175$ euro. Al tasso del $10\%$ valgono circa $173{,}55$ euro, quindi il tasso cercato è inferiore al $10\%$. Al tasso zero valgono $200$ euro, perciò il tasso cercato appartiene all'intervallo tra zero e il $10\%$. Il punto medio è il $5\%$ e a quel tasso il valore è circa $185{,}94$ euro. Dopo una iterazione l'intervallo si riduce a quello tra il $5\%$ e il $10\%$. Una stima del tasso si può accompagnare con gli estremi dell'ultimo intervallo, così si indica anche la precisione raggiunta.
+
+::grafico{f="100/(1+x/100)+100/(1+x/100)^2;175" xmin=0 xmax=15 ymin=160 ymax=210 nomi="i,V" punti="0,200,vuoto;5,185.94,vuoto;10,173.55,vuoto;9.38,175,pieno" segmenti="9.38,160,9.38,175" etichette="0.4,203,200;5.3,189,185,94;10.3,169,173,55;7.4,163,i ≈ 9,38" legenda="V(i);C=175" titolo="Valore attuale di due rate posticipate da $100$ euro in funzione del tasso $i$, in punti percentuali, e prezzo $C=175$ euro. I punti vuoti sono le prove al $0\%$, al $5\%$ e al $10\%$; l'intersezione, al tasso di circa il $9{,}38\%$, è il tasso implicito."}
 :::

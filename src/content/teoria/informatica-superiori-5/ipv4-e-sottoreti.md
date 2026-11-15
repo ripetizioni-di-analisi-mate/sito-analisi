@@ -19,6 +19,8 @@ La scrittura `/p`, con $0\leq p\leq 32$, indica la lunghezza del **prefisso**. I
 Per `/26` i primi tre ottetti contengono $24$ bit a uno. Ne rimangono due nel quarto ottetto, il cui valore è $128+64=192$. La maschera è quindi `255.255.255.192`.
 
 Per leggere la maschera si contano prima gli ottetti interamente a uno. Se segue un ottetto parziale, si aggiunge il numero di uno iniziali che contiene. I valori ammessi in una maschera contigua sono $255$ per un ottetto pieno, $128$, $192$, $224$, $240$, $248$, $252$ e $254$ per un ottetto parziale e $0$ per un ottetto interamente a zero.
+
+::grafico{xmin=-1 xmax=33 ymin=-1.6 ymax=2.4 assi=0 uguale=1 poligoni="0,0 26,0 26,1 0,1" linee="0,0 32,0 32,1 0,1 0,0" segmenti="8,0,8,1;16,0,16,1;24,0,24,1" etichette="13,1.6,26 bit di prefisso;29,1.6,6 bit host;4,-0.6,255;12,-0.6,255;20,-0.6,255;28,-0.6,192" titolo="Maschera /26: i primi $26$ bit valgono uno, gli ultimi $6$ valgono zero"}
 :::
 
 :::attenzione
@@ -123,7 +125,7 @@ Il blocco `192.168.40.0/24` deve ospitare LAN con $58$, $25$ e $9$ interfacce, g
 
 I primi tre blocchi consumano $64+32+16=112$ indirizzi complessivi. Il resto va da `.112` a `.255`. Il resto è un intervallo contiguo di $144$ indirizzi. Poiché $144$ non è una potenza di due, l’intervallo non corrisponde a un solo prefisso CIDR. Si può scrivere come due blocchi. Il primo va da `.112` a `.127` e ha prefisso `/28`. Il secondo va da `.128` a `.255` e ha prefisso `/25`. Le due basi sono rispettivamente multipli di $16$ e $128$.
 
-::grafico{xmin=-8 xmax=264 ymin=-1 ymax=3 assi=0 poligoni="0,0 63,0 63,1 0,1;64,0 95,0 95,1 64,1;96,0 111,0 111,1 96,1" etichette="31,1.55,/26;77,1.55,/27;107,2.1,/28;188,0.5,Spazio libero" segmenti="111,0.5,255,0.5;107,1.1,107,1.7" titolo="Ripartizione del blocco /24 in ordine decrescente di capacità"}
+::grafico{xmin=-8 xmax=264 ymin=-1 ymax=3 assi=0 poligoni="0,0 63,0 63,1 0,1;64,0 95,0 95,1 64,1;96,0 111,0 111,1 96,1" etichette="31,1.55,/26;77,1.55,/27;107,2.1,/28;188,1.0,Spazio libero" segmenti="111,0.5,255,0.5;107,1.1,107,1.7" titolo="Ripartizione del blocco /24 in ordine decrescente di capacità"}
 :::
 
 :::attenzione
@@ -183,6 +185,8 @@ Si considerino `10.0.0.0/8` via A, `10.6.0.0/16` via B, `10.6.12.0/24` via D e `
 - Per `172.16.2.4` corrisponde solo `/0`, quindi si usa C.
 
 L’ordine in cui sono scritte le rotte dell’esempio è irrilevante. La decisione dipende dai bit del prefisso e dalla sua lunghezza.
+
+::grafico{xmin=-0.5 xmax=12.5 ymin=-0.5 ymax=11.5 assi=0 uguale=1 linee="0,0 12,0 12,11 0,11 0,0;0.6,1.4 11.4,1.4 11.4,9.6 0.6,9.6 0.6,1.4;1.2,2.8 10.8,2.8 10.8,8.2 1.2,8.2 1.2,2.8;1.8,4 7.7,4 7.7,6.8 1.8,6.8 1.8,4" etichette="6,10.4,0.0.0.0/0 via C;6,9,10.0.0.0/8 via A;6,7.6,10.6.0.0/16 via B;4.4,6.1,10.6.12.0/24 via D" punti="4,4.8,pieno,10.6.12.90;8.5,5.2,pieno,10.6.10.7;6,2.1,pieno,10.7.10.7;6,0.7,pieno,172.16.2.4" titolo="Rotte annidate (scala non proporzionale): ogni indirizzo usa il riquadro più interno che lo contiene"}
 :::
 
 :::osservazione
@@ -193,6 +197,8 @@ La lunghezza del prefisso separa una corrispondenza specifica da una più genera
 Consideriamo due rotte adiacenti che usano lo stesso prossimo salto e nessun’altra voce che possa modificare la scelta nella loro unione. Se i blocchi hanno uguale dimensione e insieme formano un blocco CIDR allineato, si possono sostituire con una sola rotta per quel blocco. Per esempio, `10.6.10.0/24` e `10.6.11.0/24` differiscono nell’ultimo bit del terzo ottetto. Poiché il primo blocco parte dal valore pari $10$ e quello successivo termina al valore $11$, la loro unione è esattamente `10.6.10.0/23`.
 
 I blocchi `10.6.11.0/24` e `10.6.12.0/24` sono consecutivi. Il primo inizia con il terzo ottetto dispari $11$. Nessun `/23` comincia in `.11.0`, quindi le due reti non possono essere descritte insieme con un solo `/23`. Un prefisso aggregato che includesse anche reti estranee cambierebbe l’insieme delle destinazioni inoltrate lungo quella rotta. La verifica dell’allineamento serve a mantenere esattamente la copertura originale.
+
+::grafico{xmin=9.3 xmax=13.7 ymin=-1.4 ymax=2.4 assi=0 uguale=1 poligoni="10,0 12,0 12,1 10,1" linee="10,0 13,0 13,1 10,1 10,0" segmenti="11,0,11,1;12,-0.3,12,1.9;10,-0.3,10,1.9" etichette="10.5,0.5,.10;11.5,0.5,.11;12.5,0.5,.12;11,1.5,10.6.10.0/23;10,-0.7,10;12,-0.7,12" titolo="Terzo ottetto: i /23 iniziano nei valori pari, perciò i blocchi $10$ e $11$ formano un /23, mentre $11$ e $12$ stanno in due /23 diversi"}
 :::
 
 ## Controllare una configurazione
@@ -201,6 +207,8 @@ I blocchi `10.6.11.0/24` e `10.6.12.0/24` sono consecutivi. Il primo inizia con 
 Due computer sono sullo stesso segmento Ethernet. A usa `192.168.2.10/24` e B usa `192.168.2.130/25`. A ricava la rete `192.168.2.0/24`, che include l’IP di B. Perciò A considera B raggiungibile direttamente. B ricava la propria rete `192.168.2.128/25`, che esclude l’IP di A, quindi considera A esterno e consulta la tabella per trovare un router.
 
 La decisione di invio si calcola dalla configurazione del mittente. La verifica di entrambi i versi mette in evidenza una maschera incoerente anche se i due indirizzi, presi separatamente, sembrano appartenere allo stesso gruppo.
+
+::grafico{xmin=-20 xmax=280 ymin=-1.6 ymax=4 assi=0 vettori="-10,0,272,0" poligoni="0,2.2 255,2.2 255,2.8 0,2.8;128,1 255,1 255,1.6 128,1.6" segmenti="10,0,10,2.2;130,0,130,1" punti="10,0,pieno;130,0,pieno" etichette="127,3.3,rete secondo A: 192.168.2.0/24;35,1.3,rete secondo B: .128/25;10,-0.7,A .10;130,-0.7,B .130;255,-0.7,255" titolo="Ultimo ottetto: A include B nella propria rete, B esclude A dalla propria"}
 :::
 
 :::osservazione

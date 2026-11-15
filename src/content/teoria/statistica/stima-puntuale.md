@@ -66,6 +66,8 @@ MSE_\theta(T)=5+0^2=5,\qquad
 MSE_\theta(U)=3+(-1)^2=4.
 $$
 In questo punto dello spazio dei parametri, la diminuzione della varianza è maggiore del contributo della distorsione al quadrato. Per affermare che $U$ è preferibile in tutta la famiglia, occorrerebbe ripetere il confronto per ogni valore ammissibile di $\theta$.
+
+::grafico{f="exp(-x*x/10)/sqrt(10*PI);exp(-(x+1)^2/6)/sqrt(6*PI)" xmin=-8 xmax=7 ymin=-0.03 ymax=0.29 nomi="t,y" punti="0,0,pieno,θ" segmenti="-1,0,-1,0.2303" legenda="f_T;f_U" titolo="Densità di $T$ e $U$ supposte normali, per $\theta=0$. La densità di $T$ è centrata in $0$ con varianza $5$; quella di $U$ è centrata in $-1$, più stretta, con varianza $3$."}
 :::
 
 ## Media e varianza campionarie
@@ -77,6 +79,8 @@ E[\bar X]=\frac{1}{n}\sum_{i=1}^nE[X_i]=\mu,\qquad
 \operatorname{Var}(\bar X)=\frac{\sigma^2}{n}.
 $$
 La formula per l'attesa segue dalla linearità. Quella per la varianza segue dall'indipendenza, che rende nulle le covarianze fra osservazioni distinte. Con $n=16$ e $\sigma^2=36$, l'errore standard di $\bar X$, cioè la sua deviazione standard, vale $\sqrt{\dfrac{36}{16}}=1{,}5$.
+
+::grafico{f="exp(-(x-20)^2/72)/(6*sqrt(2*PI));exp(-(x-20)^2/18)/(3*sqrt(2*PI));exp(-(x-20)^2/4.5)/(1.5*sqrt(2*PI))" xmin=0 xmax=41 ymin=-0.03 ymax=0.31 nomi="x̄,y" legenda="n=1;n=4;n=16" titolo="Densità di $\bar X$ per una popolazione normale con $\mu=20$ e $\sigma^2=36$. Con $n=1$, $4$ e $16$ le deviazioni standard valgono $6$, $3$ e $1{,}5$."}
 :::
 
 ::::teorema{#varianza-corretta titolo="Correttezza della varianza campionaria"}
@@ -156,6 +160,10 @@ L\!\left(\frac12\right)=\left(\frac12\right)^3=\frac18 .
 $$
 
 Poiché $\dfrac18>\dfrac{3}{64}$, il valore di massima verosimiglianza è $\dfrac12$. Se si osservasse solo il numero di successi, ciascuno dei due valori sarebbe moltiplicato per $3$, cioè per il numero di sequenze con due successi. Il confronto resterebbe lo stesso.
+
+Se il modello ammettesse ogni $p\in[0,1]$, il massimo sarebbe invece in $\dfrac23$, cioè nella proporzione di successi osservata.
+
+::grafico{curve="t,t*t*(1-t),0,1" xmin=-0.1 xmax=1.12 ymin=-0.02 ymax=0.19 nomi="p,L" punti="0.25,0.046875,pieno;0.5,0.125,pieno;0.666667,0.148148,vuoto" segmenti="0.25,0,0.25,0.046875;0.5,0,0.5,0.125;0.666667,0,0.666667,0.148148" etichette="0.21,-0.012,¼;0.47,-0.012,½;0.64,-0.012,⅔" legenda="L(p)=p^2(1-p)" titolo="Verosimiglianza dei dati osservati. Nei valori ammessi vale $\dfrac{3}{64}$ in $\dfrac14$ e $\dfrac18$ in $\dfrac12$; su tutto $[0,1]$ il massimo $\dfrac{4}{27}$ si trova in $\dfrac23$."}
 :::
 
 :::osservazione{#invarianza-mle titolo="Stima dopo un cambio di parametro"}
@@ -179,6 +187,8 @@ Il denominatore è positivo, quindi la derivata è positiva prima di $\dfrac{k}{
 
 :::esempio{titolo="Stima di un tasso esponenziale"}
 Per osservazioni indipendenti di legge esponenziale di tasso $\lambda>0$, sia $s=\sum_i x_i$ e si supponga $s>0$. La log-verosimiglianza vale $\ell(\lambda)=n\log\lambda-\lambda s$. Si ricava $\ell'(\lambda)=\dfrac{n}{\lambda}-s$. L'unico zero è $\widehat\lambda=\dfrac ns$ e la derivata passa da positiva a negativa. Per $2,3,7$ minuti si ha $\widehat\lambda=\dfrac{3}{12}=\dfrac14\,\mathrm{min}^{-1}$. L'inverso della media osservata coincide in questo modello con la stima per momenti.
+
+::grafico{f="3*log(x)-12*x" xmin=-0.06 xmax=0.9 ymin=-12.5 ymax=1.3 nomi="λ,ℓ" punti="0.25,-7.1589,pieno" segmenti="0.25,0,0.25,-7.1589" etichette="0.27,0.6,¼" legenda="\ell(\lambda)=3\log\lambda-12\lambda" titolo="Log-verosimiglianza dei tempi $2$, $3$ e $7$ minuti. Il massimo è in $\lambda=\dfrac14$, dove vale $3\log\dfrac14-3\approx-7{,}16$."}
 :::
 
 :::osservazione{#mle-poisson titolo="Stima dell'intensità di Poisson"}
@@ -220,6 +230,8 @@ Per $x_1=1$ e $x_2=2$, la verosimiglianza vale zero prima di $2$ e vale $\theta^
 
 ::::teorema{#massimo-corretto titolo="Correzione del massimo uniforme"}
 Per un campione indipendente di numerosità $n$ da $U(0,\theta)$, il massimo $M=\max_i X_i$ ha attesa $E[M]=\dfrac{n}{n+1}\theta$. La correzione $\dfrac{n+1}{n}M$ è quindi corretta per $\theta$. La stima per momenti $2\bar x$ deriva invece dalla media teorica $\dfrac{\theta}{2}$. Le due regole usano informazioni diverse del campione.
+
+::grafico{curve="t,4*t^3/10000,0,10" xmin=-0.8 xmax=12 ymin=-0.04 ymax=0.46 nomi="m,y" segmenti="10,0,10,0.4;8,0,8,0.2048" punti="8,0.2048,pieno;10,0.4,pieno" etichette="7.3,0.25,E[M] = 8" legenda="f_M(m)=\dfrac{4m^3}{10^4}" titolo="Densità del massimo di quattro osservazioni da $U(0,10)$. Si concentra vicino all'estremo $10$, ma la sua attesa vale $\dfrac45\cdot10=8$."}
 
 :::dimostrazione
 L'evento $\{M\le m\}$ coincide con l'evento in cui tutte le osservazioni sono minori o uguali a $m$. Per $0\le m\le\theta$, l'indipendenza dà
@@ -277,6 +289,8 @@ P_\theta(|M_n-\theta|>\varepsilon)
 =\left(1-\frac{\varepsilon}{\theta}\right)^n.
 $$
 La base è compresa tra zero e uno, quindi la potenza tende a zero. Per $\varepsilon\ge\theta$ la probabilità è già nulla. Il massimo campionario è dunque consistente anche senza correzione.
+
+::grafico{xmin=-0.8 xmax=21.5 ymin=-0.08 ymax=1.1 nomi="n,P" punti="1,0.9;2,0.81;3,0.729;4,0.6561;5,0.5905;6,0.5314;7,0.4783;8,0.4305;9,0.3874;10,0.3487;11,0.3138;12,0.2824;13,0.2542;14,0.2288;15,0.2059;16,0.1853;17,0.1668;18,0.1501;19,0.1351;20,0.1216" titolo="Valori di $\left(1-\dfrac{\varepsilon}{\theta}\right)^n$ con $\dfrac{\varepsilon}{\theta}=\dfrac{1}{10}$, per $n$ da $1$ a $20$. Per $n=20$ la probabilità di un errore maggiore di $\varepsilon$ è circa $0{,}12$."}
 :::
 
 :::attenzione

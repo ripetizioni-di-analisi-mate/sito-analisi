@@ -33,10 +33,14 @@ I PC A e B e una stampante sono collegati allo switch S. Se si interrompe il cav
 
 :::osservazione
 Nel **bus** più stazioni condividono un mezzo comune. In un **anello** ogni stazione è collegata ai suoi due vicini e i collegamenti formano un percorso chiuso. Una **maglia** collega alcuni o tutti i nodi attraverso percorsi ridondanti. Un percorso alternativo è utilizzabile se i dispositivi prevedono un meccanismo che lo selezioni. In una rete di switch, un collegamento fisico aggiuntivo può formare un anello. I protocolli di prevenzione dei cicli possono tenere temporaneamente inattivo un collegamento ridondante e riattivarlo quando serve.
+
+::grafico{assi=0 uguale=1 xmin=-0.6 xmax=9.1 ymin=-1 ymax=1.7 linee="0,0 3,0;0.5,0 0.5,0.7;1.5,0 1.5,0.7;2.5,0 2.5,0.7;4.5,0 5.5,0 5.5,1 4.5,1 4.5,0;7.5,0 8.5,0 8.5,1 7.5,1 7.5,0;7.5,0 8.5,1" punti="0.5,0.7;1.5,0.7;2.5,0.7;4.5,0;5.5,0;5.5,1;4.5,1;7.5,0;8.5,0;8.5,1;7.5,1" etichette="1.31,-0.6,Bus;4.62,-0.6,Anello;7.62,-0.6,Maglia" titolo="Bus con un mezzo comune, anello chiuso e maglia parziale con un collegamento ridondante."}
 :::
 
 :::esempio{titolo="Il collegamento condiviso tra due aule"}
 Ogni aula ha uno switch e le due aule condividono un cavo di dorsale. Il guasto della dorsale interrompe gli scambi tra aule, mentre ciascuna stella può ancora sostenere gli scambi tra i propri terminali. La dorsale è il solo percorso fra le due aule. Se un secondo collegamento viene predisposto come riserva, il recupero dipende sia dalla presenza del cavo sia dal funzionamento del protocollo che abilita il percorso alternativo.
+
+::grafico{assi=0 uguale=1 xmin=-0.3 xmax=7.3 ymin=-0.9 ymax=2.6 linee="1.5,1.5 5.5,1.5;1.5,1.5 0.5,0.3;1.5,1.5 1.5,0.3;1.5,1.5 2.5,0.3;5.5,1.5 4.5,0.3;5.5,1.5 5.5,0.3;5.5,1.5 6.5,0.3" punti="1.5,1.5;5.5,1.5;0.5,0.3;1.5,0.3;2.5,0.3;4.5,0.3;5.5,0.3;6.5,0.3" etichette="1.4,2.05,S1;5.4,2.05,S2;3.15,1.8,dorsale;1.2,-0.4,Aula 1;5.2,-0.4,Aula 2" titolo="Due stelle unite dalla dorsale fra S1 e S2, unico percorso fra le aule."}
 :::
 
 ## Modelli OSI e TCP/IP
@@ -51,6 +55,8 @@ Il modello **OSI** distingue sette livelli. Dal mezzo trasmissivo verso il progr
 
 :::osservazione
 Nel modello **TCP/IP** a quattro livelli si distinguono accesso alla rete, Internet, trasporto e applicazione. L'accesso alla rete comprende i compiti che OSI distingue fra fisico e collegamento. Il livello Internet comprende IP. Il trasporto comprende TCP e UDP. Il livello applicativo comprende protocolli come HTTP e DNS. La corrispondenza è per funzioni, perché i due modelli organizzano alcuni compiti in modo diverso. Nei corsi che adottano cinque livelli, il fisico e il collegamento vengono mostrati separatamente anche nella rappresentazione della pila Internet.
+
+::grafico{assi=0 uguale=1 xmin=-0.3 xmax=8.1 ymin=-0.3 ymax=5.6 linee="0,0 3.4,0 3.4,4.9 0,4.9 0,0;0,0.7 3.4,0.7;0,1.4 3.4,1.4;0,2.1 3.4,2.1;0,2.8 3.4,2.8;0,3.5 3.4,3.5;0,4.2 3.4,4.2;4.4,0 7.8,0 7.8,4.9 4.4,4.9 4.4,0;4.4,1.4 7.8,1.4;4.4,2.1 7.8,2.1;4.4,2.8 7.8,2.8" etichette="1.35,0.25,Fisico;1.01,0.95,Collegamento;1.47,1.65,Rete;1.18,2.35,Trasporto;1.24,3.05,Sessione;0.95,3.75,Presentazione;1.01,4.45,Applicazione;5.12,0.6,Accesso alla rete;5.64,1.65,Internet;5.58,2.35,Trasporto;5.41,3.75,Applicazione;1.53,5.2,OSI;5.75,5.2,TCP/IP" titolo="Corrispondenza per funzioni fra i sette livelli OSI e i quattro livelli TCP/IP."}
 :::
 
 :::esempio{titolo="Tre indirizzi in una richiesta"}
@@ -85,6 +91,8 @@ Le intestazioni contengono anche informazioni che indicano come interpretare il 
 
 :::definizione{#frame-ethernet titolo="Campi del frame Ethernet"}
 In un frame Ethernet II senza tag si incontrano, nell'ordine, il MAC di destinazione, il MAC sorgente, l'EtherType, i dati con eventuale riempimento e la **FCS**, una sequenza usata per il controllo degli errori. Gli indirizzi occupano $6$ byte ciascuno, l'EtherType $2$ byte e la FCS $4$ byte. Il riempimento permette di raggiungere la lunghezza minima quando i dati utili sono corti. Questi campi permettono di consegnare il contenuto sulla LAN e di riconoscere molte alterazioni dei bit ricevuti.
+
+::grafico{assi=0 uguale=1 xmin=-0.3 xmax=10.9 ymin=-0.9 ymax=1.7 linee="0,0 10.6,0 10.6,1.4 0,1.4 0,0;2,0 2,1.4;4,0 4,1.4;5.3,0 5.3,1.4;9.3,0 9.3,1.4" etichette="0.33,0.85,MAC dest.;0.93,0.3,6;2.33,0.85,MAC sorg.;2.92,0.3,6;4.35,0.85,Tipo;4.58,0.3,2;5.95,0.85,Dati e riempimento;6.4,0.3,da 46 a 1500;9.72,0.85,FCS;9.88,0.3,4;4.03,-0.5,lunghezze in byte" titolo="Campi del frame Ethernet II senza tag. Il campo Tipo è l’EtherType; il frame va da $64$ a $1518$ byte."}
 :::
 
 :::esempio{titolo="Un pacchetto corto nel frame"}
@@ -117,6 +125,8 @@ Per una destinazione **unicast nota** su un'altra porta, il frame esce da quella
 Uno switch ha quattro porte nella stessa VLAN e la sua tabella è vuota. Entra sulla porta $1$ un frame da A per B. Lo switch associa A alla $1$ e, poiché B è ancora sconosciuto, usa le porte $2$, $3$ e $4$. B è sulla porta $3$ e invia una risposta per A. Lo switch apprende B sulla $3$ e trova già A sulla $1$, quindi invia la risposta soltanto sulla $1$.
 
 Nella prima trasmissione le copie hanno ancora il MAC unicast di B. Il flooding descrive la scelta delle uscite e lascia invariata la destinazione scritta nel frame. Il PC collegato alla porta $2$ può ricevere una copia sul collegamento, ma la sua interfaccia riconosce che è indirizzata a B.
+
+::grafico{assi=0 uguale=1 xmin=-0.3 xmax=6.3 ymin=-0.7 ymax=3.4 poligoni="0.5,2 5.5,2 5.5,3 0.5,3" linee="1,2 1,0.3;2.33,2 2.33,0.3;3.67,2 3.67,0.3;5,2 5,0.3" punti="1,0.3;2.33,0.3;3.67,0.3;5,0.3" vettori="0.75,0.5,0.75,1.85;2.58,1.85,2.58,0.5;3.92,1.85,3.92,0.5;5.25,1.85,5.25,0.5" unicolore=1 etichette="2.74,2.75,Switch;0.96,2.25,1;2.29,2.25,2;3.63,2.25,3;4.96,2.25,4;0.96,-0.25,A;2.24,-0.25,PC;3.63,-0.25,B;4.91,-0.25,PC" titolo="Il frame da A per B entra dalla porta $1$. Con la tabella vuota lo switch lo replica sulle porte $2$, $3$ e $4$."}
 :::
 
 :::osservazione
@@ -169,10 +179,48 @@ t_{\mathrm{tot}} &= 0{,}4\,\mathrm{ms}+0{,}25\,\mathrm{ms}
 \end{aligned}
 $$
 Il primo bit arriva dopo $0{,}25\,\mathrm{ms}$, mentre i successivi bit raggiungono il destinatario al ritmo del collegamento. Dalla prima all'ultima parte del frame in arrivo passano quindi $0{,}4\,\mathrm{ms}$, cioè il tempo di immissione.
+
+::grafico{xmin=-0.2 xmax=0.95 ymin=-0.12 ymax=0.68 nomi="t,d" poligoni="0,0 0.4,0 0.65,0.5 0.25,0.5" linee="0,0 0.25,0.5;0.4,0 0.65,0.5" segmenti="0.25,0.5,0.25,0;0.65,0.5,0.65,0;0,0.5,0.25,0.5" punti="0.25,0.5;0.65,0.5" etichette="0.22,-0.06,0,25;0.38,-0.06,0,4;0.62,-0.06,0,65;-0.17,0.5,50 km;0.03,0.42,primo bit;0.7,0.15,ultimo bit" titolo="Tempo e distanza percorsa dal frame da $1\,200\,\mathrm{byte}$ sul tratto di $50\,\mathrm{km}$, con il tempo $t$ in millisecondi."}
 :::
 
 :::osservazione
 Su più tratti con ricezione completa prima dell'inoltro (*store and forward*), per un solo frame si sommano i contributi di trasmissione e propagazione di ciascun tratto. Se sono noti anche ritardi di elaborazione o di coda, si aggiungono nei nodi in cui si verificano. Per più frame consecutivi su collegamenti separati, il nodo può trasmettere il primo sul secondo collegamento mentre riceve il secondo sul primo. In quel caso si costruisce una sequenza temporale e si rispetta, per ogni uscita, sia il completamento della ricezione sia la disponibilità del collegamento.
+:::
+
+::::teorema{#ritardo-piu-frame titolo="Più frame su tratti uguali in store and forward"}
+Un percorso è formato da $N$ tratti con lo stesso tempo di trasmissione $t_{\mathrm{tx}}$ per frame e lo stesso tempo di propagazione $t_{\mathrm{prop}}$. La sorgente invia $P$ frame uguali uno dopo l'altro, ogni nodo inoltra un frame dopo averlo ricevuto per intero, elaborazione e code sono trascurabili. Allora l'ultimo bit dell'ultimo frame arriva a destinazione all'istante
+$$
+T=(N+P-1)\,t_{\mathrm{tx}}+N\,t_{\mathrm{prop}},
+$$
+misurato dall'inizio dell'invio. La formula permette di calcolare il ritardo di un trasferimento diviso in più frame senza costruire la sequenza temporale nodo per nodo.
+
+:::dimostrazione
+Si indica con $F_{k,j}$ l'istante in cui termina la trasmissione del frame $k$ sul tratto $j$. Si dimostra per induzione che $F_{k,j}=(j+k-1)\,t_{\mathrm{tx}}+(j-1)\,t_{\mathrm{prop}}$.
+
+Sul primo tratto la sorgente trasmette i frame senza pause, quindi $F_{k,1}=k\,t_{\mathrm{tx}}$, che è la formula con $j=1$.
+
+Il nodo alla fine del tratto $j$ inizia a trasmettere il frame $k$ sul tratto $j+1$ quando ha ricevuto per intero quel frame e ha finito di trasmettere il frame $k-1$. Perciò l'inizio è $\max\left(F_{k,j}+t_{\mathrm{prop}},\,F_{k-1,j+1}\right)$, e per il primo frame conta soltanto il primo termine. Si suppone la formula vera sul tratto $j$ per ogni frame e sul tratto $j+1$ per il frame $k-1$. Allora i due termini valgono
+$$
+\begin{aligned}
+F_{k,j}+t_{\mathrm{prop}} &= (j+k-1)\,t_{\mathrm{tx}}+j\,t_{\mathrm{prop}} \\[4pt]
+F_{k-1,j+1} &= (j+k-1)\,t_{\mathrm{tx}}+j\,t_{\mathrm{prop}}.
+\end{aligned}
+$$
+I due istanti coincidono, quindi il frame $k$ parte senza attesa e $F_{k,j+1}=(j+k)\,t_{\mathrm{tx}}+j\,t_{\mathrm{prop}}$, che è la formula sul tratto $j+1$. Per $k=1$ si ottiene lo stesso valore dal solo primo termine.
+
+L'ultimo frame termina la trasmissione sul tratto $N$ all'istante $F_{P,N}=(N+P-1)\,t_{\mathrm{tx}}+(N-1)\,t_{\mathrm{prop}}$. Il suo ultimo bit arriva dopo un'ulteriore propagazione, perciò l'istante di arrivo è $T$.
+:::
+::::
+
+:::esempio{titolo="Tre frame su due tratti"}
+Un file viene diviso in $P=3$ frame. Ciascuno richiede $t_{\mathrm{tx}}=0{,}4\,\mathrm{ms}$ su ognuno degli $N=2$ tratti, e ogni tratto ha $t_{\mathrm{prop}}=0{,}25\,\mathrm{ms}$.
+$$
+\begin{aligned}
+T &= (2+3-1)\cdot 0{,}4\,\mathrm{ms}+2\cdot 0{,}25\,\mathrm{ms} \\[4pt]
+&= 1{,}6\,\mathrm{ms}+0{,}5\,\mathrm{ms}=2{,}1\,\mathrm{ms}.
+\end{aligned}
+$$
+Se gli stessi dati viaggiassero in un solo frame, trascurando le intestazioni in più dei frame separati, il tempo di trasmissione per tratto sarebbe $3\cdot 0{,}4=1{,}2\,\mathrm{ms}$. Con $P=1$ la formula dà allora $2\cdot 1{,}2+2\cdot 0{,}25=2{,}9\,\mathrm{ms}$. Il nodo intermedio inoltra il primo frame mentre riceve il secondo, quindi la divisione in frame riduce il ritardo di $0{,}8\,\mathrm{ms}$.
 :::
 
 :::esempio{titolo="Collegamento più veloce e percorso più lungo"}
