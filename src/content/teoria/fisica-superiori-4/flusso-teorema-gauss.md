@@ -1,126 +1,193 @@
 ---
 titolo: Flusso elettrico e teorema di Gauss
-sommario: Superfici orientate, flusso elettrico, carica racchiusa e applicazioni del teorema di Gauss a sfere, fili, piani e conduttori.
+sommario: Come si orienta una superficie, come si sommano i flussi e quando la simmetria permette di calcolare il campo elettrico.
 ---
 
-## Superficie e normale
+## Superficie orientata e componente normale
 
 :::definizione{#superficie-orientata titolo="Area orientata"}
-Per descrivere quanto campo attraversa una superficie piana si associa alla sua area $A$ un vettore $\vec A=A\hat n$. Il versore $\hat n$ è perpendicolare al piano e ha uno dei due versi possibili. Scegliere il verso significa **orientare** la superficie.
+Una superficie piana di area $A$ ha due possibili versori normali, entrambi perpendicolari al piano e di verso opposto. Scelto il versore $\hat n$, il vettore area è $\vec A=A\hat n$. Cambiare orientazione sostituisce $\vec A$ con $-\vec A$.
 
-Per una superficie chiusa si adotta la normale rivolta verso l'esterno del volume racchiuso. In un cubo, per esempio, le due facce opposte hanno normali opposte. Per una superficie curva si suddivide idealmente l'area in piccoli elementi, ognuno con la propria normale.
-
-L'angolo usato nel calcolo del flusso è quello fra campo e normale. Un campo perpendicolare al piano forma angolo zero o $180^\circ$ con la normale; un campo parallelo al piano forma $90^\circ$. Questa scelta rende il flusso positivo per il campo uscente e negativo per quello entrante attraverso una superficie chiusa.
+Una superficie chiusa delimita un volume, quindi si sceglie in ogni punto la normale rivolta **verso l'esterno**. Su due facce opposte di un cubo i versori normali sono opposti. Su una sfera centrata nell'origine, il versore normale in un punto coincide con il versore radiale $\hat r$ che va dal centro al punto. Per una superficie curva, la normale si riferisce al piano tangente nel punto considerato.
 :::
 
-## Flusso del campo uniforme
+:::esempio{titolo="Componente normale su una faccia"}
+Un campo $\vec E$ forma un angolo $\theta$ con $\hat n$. La sua componente con segno lungo la normale è $E_n=\vec E\cdot\hat n=E\cos\theta$, dove $E$ è il modulo. Se il campo attraversa la faccia verso l'esterno, $E_n>0$. Se la attraversa in senso opposto a $\hat n$, $E_n<0$. Un campo parallelo alla faccia ha $E_n=0$.
 
-:::definizione{#flusso titolo="Flusso attraverso una superficie piana"}
-Se il campo è uniforme su una superficie piana,
+::grafico{assi=0 uguale=1 linee="-2.1,0 2.6,0" vettori="0,0,0,2,n;0,0,2.08,1.2,E" etichette="0.47,0.79,60°;0.76,-0.35,piano" xmin=-2.7 xmax=3 ymin=-0.75 ymax=2.25 titolo="Sezione della superficie piana. Il campo forma un angolo di $60^\circ$ con la normale e di $30^\circ$ con il piano."}
+
+:::
+
+## Flusso elettrico attraverso una superficie
+
+:::definizione{#flusso titolo="Flusso del campo elettrico"}
+Se $\vec E$ è uniforme su una superficie piana, il **flusso** è il prodotto della componente normale per l'area,
 $$
 \Phi_E=\vec E\cdot\vec A=EA\cos\theta.
 $$
-Il **flusso elettrico** si misura in $\mathrm{N\,m^2/C}$. Con $E=200\,\mathrm{N/C}$, $A=0{,}030\,\mathrm{m^2}$ e $\theta=60^\circ$, si ottiene $\Phi_E=3{,}0\,\mathrm{N\,m^2/C}$. Invertire la normale cambia il segno del flusso. Se il campo è parallelo al piano, il flusso è nullo anche quando il campo ha modulo elevato.
-
-Per un campo non uniforme o una superficie curva si sommano i contributi $\vec E\cdot\Delta\vec A$ di elementi abbastanza piccoli. Il flusso totale considera quindi orientamento e valore del campo su ogni parte. Il conteggio qualitativo delle linee di campo può aiutare a visualizzare il segno, ma il valore fisico deriva dalla formula e non dal numero arbitrario di linee disegnate.
+L'unità è $\mathrm{N\,m^2/C}$. Quando si gira la normale, l'angolo diventa $180^\circ-\theta$ e il coseno cambia segno, quindi il flusso diventa $-\Phi_E$. Il campo nello spazio rimane lo stesso.
 :::
 
-::grafico{assi=0 uguale=1 linee="-2,0 2,0" vettori="0,0,0,2,n;0,0,2,2,E" xmin=-3 xmax=3 ymin=-1 ymax=3 titolo="La superficie è rappresentata di taglio: l'angolo del flusso è quello tra il campo e la normale, non quello tra campo e piano"}
+:::esempio{titolo="Angolo dato rispetto al piano"}
+Un campo di modulo $200\,\mathrm{N/C}$ forma $30^\circ$ con un piano di area $0{,}030\,\mathrm{m^2}$. La normale è scelta dalla parte verso cui punta il campo. L'angolo con la normale è $60^\circ$. Poiché $\cos60^\circ=\dfrac12$, si ha
+$$
+\Phi_E=200\cdot0{,}030\cdot\frac12\,\mathrm{N\,m^2/C}
+=3\,\mathrm{N\,m^2/C}.
+$$
+Con la normale opposta l'angolo è $120^\circ$ e il flusso è $-3\,\mathrm{N\,m^2/C}$.
+:::
+
+:::osservazione
+Su una superficie curva o quando il campo varia, si prendono elementi di area abbastanza piccoli da poter considerare campo e normale costanti su ciascuno. Un elemento orientato di area $\Delta A$ contribuisce con $\vec E\cdot\hat n\,\Delta A$. Sommando i contributi con segno e passando al limite si ottiene $\Phi_E=\int_S\vec E\cdot\hat n\,\mathrm{d}A$.
+:::
 
 ## Teorema di Gauss
 
 :::teorema{#gauss titolo="Flusso totale e carica racchiusa"}
-Il **teorema di Gauss** stabilisce che il flusso totale attraverso una superficie chiusa nel vuoto è
+Per ogni superficie chiusa orientata con le normali uscenti, il flusso elettrico totale è
 $$
 \Phi_{E,\mathrm{chiusa}}=\frac{Q_{\mathrm{int}}}{\varepsilon_0},
-\qquad\varepsilon_0=8{,}85\cdot10^{-12}\,\mathrm{C^2/(N\,m^2)}.
+\qquad
+\varepsilon_0=8{,}85\cdot10^{-12}\,\mathrm{C^2/(N\,m^2)}.
 $$
-$Q_{\mathrm{int}}$ è la somma algebrica delle cariche racchiuse. Una carica interna $+2{,}0\,\mathrm{nC}$ produce flusso totale di circa $226\,\mathrm{N\,m^2/C}$, indipendentemente dalla forma della superficie. Se dentro sono presenti anche $-2{,}0\,\mathrm{nC}$, il flusso totale è zero.
+$Q_{\mathrm{int}}$ è la **somma algebrica** delle cariche racchiuse. Le cariche esattamente sul contorno si evitano scegliendo una superficie gaussiana leggermente spostata. Una carica esterna modifica il campo locale, mentre il suo contributo al flusso netto è nullo.
+:::
 
-Le cariche esterne contribuiscono al campo nei punti della superficie, ma il loro contributo al flusso totale chiuso è nullo. Il campo prodotto da una carica esterna può quindi essere diverso da zero su tutta la superficie pur avendo flusso netto nullo. Il teorema riguarda una superficie *chiusa*; per una singola faccia aperta non basta conoscere la carica racchiusa da un'altra superficie.
+:::esempio{titolo="Carica netta con segno"}
+Una superficie chiusa racchiude cariche $+4\,\mathrm{nC}$ e $-6\,\mathrm{nC}$. La loro somma è $-2\,\mathrm{nC}$. Poiché $1\,\mathrm{nC}=10^{-9}\,\mathrm{C}$, il flusso totale vale
+$$
+\Phi_{E,\mathrm{chiusa}}=
+\frac{-2\cdot10^{-9}}{8{,}85\cdot10^{-12}}\,\mathrm{N\,m^2/C}
+\simeq -226\,\mathrm{N\,m^2/C}.
+$$
+Il flusso negativo indica che i contributi entranti prevalgono sulla somma di tutta la superficie. Il campo può uscire da singole zone.
 :::
 
 :::attenzione
-Flusso nullo non significa campo nullo. Un campo uniforme che attraversa un cubo entra da una faccia ed esce da quella opposta con contributi uguali e contrari. Sulle altre quattro facce il campo è tangente, quindi il flusso è nullo. Il totale è zero, mentre il campo è presente.
+Un cubo in un campo uniforme può avere **flusso netto nullo con campo non nullo**. Supponiamo che il campo di modulo $E$ sia parallelo a uno spigolo. Esce da una faccia di area $A$ e entra attraverso quella opposta, con contributi $+EA$ e $-EA$. È tangente alle quattro facce rimanenti. La somma è zero, in accordo con l'assenza di carica netta interna.
+
+::grafico{assi=0 uguale=1 linee="-1.6,-1.35 1.6,-1.35 1.6,1.35 -1.6,1.35 -1.6,-1.35" vettori="-2.65,0.57,2.65,0.57,E;-1.63,0,-2.45,0,n₁;1.63,0,2.45,0,n₂" etichette="-2.45,-0.85,−EA;1.88,-0.85,+EA" xmin=-3.2 xmax=3.2 ymin=-1.72 ymax=1.72 titolo="Sezione del cubo. Le due facce attraversate dal campo hanno normali opposte e flussi che si compensano."}
+
 :::
 
 ## Simmetria sferica
 
-::::teorema{#sfera titolo="Campo esterno di una distribuzione sferica"}
-Per una distribuzione di carica sfericamente simmetrica, il campo è radiale e ha lo stesso modulo in tutti i punti alla stessa distanza $r$ dal centro. Una superficie gaussiana sferica permette di scrivere
+::::teorema{#sfera titolo="Campo di una distribuzione sfericamente simmetrica"}
+Per una distribuzione di carica sfericamente simmetrica, il campo è radiale. La componente radiale con segno $E_r=\vec E\cdot\hat r$ ha lo stesso valore in tutti i punti alla stessa distanza $r>0$ dal centro. Una superficie gaussiana sferica con quel centro dà
 $$
-E\,4\pi r^2=\frac{|Q_{\mathrm{int}}|}{\varepsilon_0},
-\qquad E=\frac{|Q_{\mathrm{int}}|}{4\pi\varepsilon_0r^2}.
+E_r=\frac{Q_{\mathrm{int}}(r)}{4\pi\varepsilon_0r^2}.
 $$
-Fuori da una sfera di carica totale $Q$ si ritrova quindi il campo di una carica puntiforme nel centro. Il verso è uscente per $Q>0$ ed entrante per $Q<0$. Con $Q=1{,}0\,\mathrm{nC}$ e $r=0{,}20\,\mathrm m$, il modulo è circa $225\,\mathrm{N/C}$.
+Fuori dalla distribuzione si ha $Q_{\mathrm{int}}(r)=Q$, la carica totale. Perciò il campo esterno coincide con quello di una carica puntiforme $Q$ al centro. Il campo è uscente per $E_r>0$ ed entrante per $E_r<0$. Il modulo vale $E=|E_r|$.
 
 :::dimostrazione
-Per simmetria ogni elemento della sfera ha il campo lungo la normale. Il modulo costante si può raccogliere nella somma dei contributi di flusso, ottenendo il prodotto del campo per l'area totale $4\pi r^2$. Il teorema di Gauss fornisce allora l'equazione scritta. Se la carica è negativa il flusso è negativo e il campo è diretto verso il centro; il modulo resta positivo.
+La simmetria di rotazione attorno alla direzione radiale esclude componenti tangenziali. Una rotazione attorno al centro può inoltre portare qualsiasi punto della superficie in qualsiasi altro. La componente radiale ha quindi lo stesso valore sull'intera sfera. Poiché la normale uscente è $\hat r$, la somma del flusso è $E_r$ per l'area $4\pi r^2$. Il teorema di Gauss dà $4\pi r^2E_r=\dfrac{Q_{\mathrm{int}}(r)}{\varepsilon_0}$.
 :::
 ::::
 
-:::teorema{#sfera-uniforme titolo="Interno di una sfera isolante uniformemente carica"}
-Per una sfera isolante di raggio $R$ con densità volumica uniforme e carica totale $Q$, una sfera interna di raggio $r<R$ racchiude $Q_{\mathrm{int}}=Q\dfrac{r^3}{R^3}$. Il campo interno ha quindi modulo
+:::esempio{titolo="Campo esterno orientato verso il centro"}
+Una distribuzione sferica di carica totale $-1\,\mathrm{nC}$ è tutta contenuta entro un raggio di $0{,}10\,\mathrm{m}$. A distanza $r=0{,}20\,\mathrm{m}$ è racchiusa tutta la carica. Si ottiene
 $$
-E=\frac{|Q|r}{4\pi\varepsilon_0R^3}.
+E_r=\frac{-10^{-9}}{4\pi\cdot8{,}85\cdot10^{-12}\cdot(0{,}20)^2}\,\mathrm{N/C}
+\simeq-225\,\mathrm{N/C}.
 $$
-Cresce linearmente dal centro fino alla superficie e poi decresce come l'inverso del quadrato della distanza. Con $r=\dfrac R2$ il campo è metà del valore sulla superficie. Questa distribuzione riguarda un isolante con carica uniforme nel volume; un conduttore in equilibrio ha una distribuzione diversa.
+Il segno individua il verso verso il centro. Raddoppiando la distanza, la sfera gaussiana racchiude ancora la stessa carica. L'area quadruplica, quindi il modulo del campo diventa un quarto e il flusso totale resta invariato.
 :::
 
-::grafico{f="x<=1?x:1/(x^2)" xmin=0 xmax=3 ymin=0 ymax=2 nomi="r/R,E/Es" titolo="Campo normalizzato di una sfera isolante uniformemente carica: cresce linearmente dentro e decresce all'esterno"}
-
-## Filo indefinito
-
-::::teorema{#filo titolo="Distribuzione lineare uniforme"}
-Un filo rettilineo idealmente indefinito con densità lineare di carica $\lambda_q$, misurata in $\mathrm{C/m}$, produce a distanza $r$ un campo di modulo
+:::teorema{#sfera-uniforme titolo="Campo interno di una sfera isolante carica"}
+Sia $R$ il raggio di una sfera isolante con carica totale $Q$ distribuita con densità volumica uniforme. La sfera interna di raggio $r<R$ racchiude la frazione di carica uguale alla frazione di volume,
 $$
-E=\frac{|\lambda_q|}{2\pi\varepsilon_0r}.
+Q_{\mathrm{int}}(r)
+=Q\frac{\frac43\pi r^3}{\frac43\pi R^3}
+=Q\left(\frac{r}{R}\right)^3.
 $$
-Il simbolo $\lambda_q$ indica carica per unità di lunghezza, distinta dalla lunghezza d'onda. Con $\lambda_q=1{,}0\cdot10^{-9}\,\mathrm{C/m}$ e $r=0{,}10\,\mathrm m$, si ottiene circa $180\,\mathrm{N/C}$. Il modello approssima il tratto centrale di un filo lungo rispetto alla distanza osservata.
+Inserendola nella formula di Gauss si trova $E_r=\dfrac{Qr}{4\pi\varepsilon_0R^3}$. Nel centro il campo è nullo per simmetria e il modulo cresce linearmente fino a $r=R$. Il valore interno tende a quello esterno per $r\to R$, perché nel modello la densità è volumica e sulla superficie manca una carica superficiale separata.
+
+::grafico{f="x<=1?x:1/(x^2)" xmin=0 xmax=3 ymin=0 ymax=1.25 punti="1,1,pieno;0.5,0.5,pieno;2,0.25,pieno" nomi="r/R,E/Eₛ" legenda="\dfrac{E}{E_s}" titolo="Modulo normalizzato per la sfera isolante, con $E_s$ modulo alla superficie. A $r=\dfrac R2$ si ha $E=\dfrac{E_s}2$, a $r=2R$ si ha $E=\dfrac{E_s}4$."}
+
+:::
+
+## Simmetria cilindrica e filo indefinito
+
+::::teorema{#filo titolo="Campo di un filo rettilineo indefinito"}
+Un filo indefinito con densità lineare uniforme $\lambda_q$ ha carica $\lambda_q L$ in un tratto di lunghezza $L$. Il campo a distanza $r$ dall'asse è radiale nel piano perpendicolare al filo e la sua componente uscente è
+$$
+E_r=\frac{\lambda_q}{2\pi\varepsilon_0r}.
+$$
+Il verso è verso il filo se $\lambda_q<0$. Il modello descrive il tratto centrale di un filo finito quando il punto di osservazione è molto più vicino all'asse che agli estremi del filo.
 
 :::dimostrazione
-Si sceglie un cilindro gaussiano coassiale, di raggio $r$ e lunghezza $L$. Sulla superficie laterale il campo è normale e ha modulo costante. Sulle basi è tangente e non produce flusso. La carica interna è $\lambda_qL$, quindi $E\,2\pi rL=\dfrac{|\lambda_q|L}{\varepsilon_0}$. La lunghezza si semplifica e si ottiene la formula.
+Le traslazioni lungo il filo e le rotazioni attorno all'asse rendono equivalente ogni punto del mantello di un cilindro coassiale. La riflessione nel piano perpendicolare al filo che passa per il punto esclude la componente assiale. La riflessione nel piano che contiene il filo e il punto esclude la componente tangenziale attorno all'asse. Il campo risulta normale al mantello e tangente alle basi. Quindi
+$$
+\begin{aligned}
+\Phi_{\mathrm{basi}} &=0,\\[6pt]
+\Phi_{\mathrm{mantello}}&=E_r\,2\pi rL
+=\frac{\lambda_qL}{\varepsilon_0}.
+\end{aligned}
+$$
+Il fattore $L$ si semplifica. Il campo dipende dalla distanza radiale, mentre la lunghezza del cilindro è una scelta di calcolo.
 :::
 ::::
 
-## Piano indefinito e condensatore
+:::esempio{titolo="Contributi di mantello e basi"}
+Per un filo con $\lambda_q=1\,\mathrm{nC/m}$ e $r=0{,}10\,\mathrm{m}$ si ottiene $E\simeq180\,\mathrm{N/C}$. Raddoppiando $r$, a parità di $L$, la carica racchiusa resta la stessa e il mantello raddoppia la propria area. Il campo si dimezza a circa $90\,\mathrm{N/C}$.
 
-::::teorema{#piano titolo="Distribuzione piana uniforme"}
-Un piano idealmente indefinito con densità superficiale $\sigma_q$ produce su ciascun lato un campo uniforme di modulo
+::grafico{assi=0 uguale=1 linee="-2.4,-1.12 2.4,-1.12 2.4,1.12 -2.4,1.12 -2.4,-1.12" segmenti="-3.12,0,3.12,0;0,-1.12,0,0;-2.4,-1.46,2.4,-1.46" vettori="-1.5,1.13,-1.5,1.71,E;1.2,-1.13,1.2,-1.72,E;0.85,0.24,0.85,0.84,E" etichette="-0.32,-0.59,r;-0.04,-1.6,L;2.58,-0.13,filo" xmin=-3.5 xmax=3.75 ymin=-1.95 ymax=1.95 titolo="Sezione lungo l'asse del cilindro gaussiano. Il campo attraversa il mantello e rimane tangente alle basi a sinistra e destra."}
+
+:::
+
+## Piano carico e due armature
+
+::::teorema{#piano titolo="Campo di un piano uniforme indefinito"}
+Per un piano indefinito di densità superficiale uniforme $\sigma_q$, il campo è perpendicolare al piano e ha lo stesso modulo sui due lati. Il modulo è
 $$
 E=\frac{|\sigma_q|}{2\varepsilon_0}.
 $$
-Il campo è perpendicolare al piano, uscente se la carica è positiva. Con $\sigma_q=8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$ il modulo è $500\,\mathrm{N/C}$ per lato.
+Con $\sigma_q>0$ i campi puntano via dal piano. Con $\sigma_q<0$ puntano verso il piano. In questo modello il modulo è indipendente dalla distanza dal piano.
 
 :::dimostrazione
-Una superficie cilindrica sottile attraversa il piano con due basi uguali di area $A$. Il campo è perpendicolare a entrambe le basi ed è tangente alla parte laterale. Il flusso è quindi $2EA$. La carica racchiusa è $\sigma_qA$, da cui $2EA=\dfrac{|\sigma_q|A}{\varepsilon_0}$ e la formula.
+Una superficie gaussiana a cilindro corto attraversa il piano. Le basi uguali hanno area $A$ e sono parallele al piano. Il campo è tangente al mantello, quindi il mantello ha flusso nullo. Con carica positiva i flussi attraverso entrambe le basi sono uscenti e la somma è $2EA$. La carica racchiusa è $\sigma_qA$, quindi $2EA=\dfrac{\sigma_q A}{\varepsilon_0}$. Per carica negativa entrambi i flussi sono entranti e il calcolo del modulo usa $|\sigma_q|$.
 :::
 ::::
 
-:::teorema{#due-piani titolo="Campo tra due armature opposte"}
-Due piani paralleli con densità uguali in modulo e opposte producono, per sovrapposizione, un campo nullo all'esterno e un campo uniforme fra essi,
+:::esempio{titolo="Superficie a cilindro corto"}
+Il piano ha $\sigma_q=8{,}85\cdot10^{-9}\,\mathrm{C/m^2}$. La formula dà $E=500\,\mathrm{N/C}$ su ciascun lato. Con basi di area $0{,}10\,\mathrm{m^2}$, il flusso uscente da ciascuna base è $50\,\mathrm{N\,m^2/C}$ e il flusso chiuso è $100\,\mathrm{N\,m^2/C}$.
+
+::grafico{assi=0 uguale=1 linee="-2.55,0 2.55,0;-1.15,-0.65 1.15,-0.65 1.15,0.65 -1.15,0.65 -1.15,-0.65" vettori="-0.42,0.68,-0.42,1.48,E;0.42,-0.68,0.42,-1.48,E" etichette="-1.99,0.18,+σ;0.34,0.78,A;-0.5,-0.82,A" xmin=-2.85 xmax=2.85 ymin=-1.65 ymax=1.65 titolo="Il piano carico taglia il cilindro gaussiano. Entrambe le basi danno lo stesso contributo uscente."}
+
+:::
+
+:::teorema{#due-piani titolo="Campo fra armature opposte"}
+Due piani paralleli indefiniti, di densità $+\sigma_q$ e $-\sigma_q$ con $\sigma_q>0$, producono per sovrapposizione un campo nullo all'esterno e un campo uniforme all'interno. Nell'intercapedine ciascun contributo punta dal piano positivo verso quello negativo e ha modulo $\dfrac{\sigma_q}{2\varepsilon_0}$. Perciò
 $$
-E=\frac{|\sigma_q|}{\varepsilon_0}.
+E_{\mathrm{int}}=\frac{\sigma_q}{\varepsilon_0}.
 $$
-Il verso va dall'armatura positiva alla negativa. Il risultato approssima un condensatore piano lontano dai bordi quando la separazione è molto minore delle dimensioni delle armature. Con le densità dell'esempio precedente, il campo interno è $1000\,\mathrm{N/C}$.
+Nelle regioni esterne i due moduli sono uguali e i versi opposti. Per lastre finite il risultato vale in buona approssimazione nella regione centrale quando la distanza fra le lastre è molto minore delle dimensioni trasversali.
 :::
 
 ## Conduttori in equilibrio elettrostatico
 
-:::teorema{#conduttore titolo="Campo nel metallo e sulla superficie"}
-In un conduttore in equilibrio elettrostatico il campo all'interno del materiale è nullo. Un campo non nullo muoverebbe le cariche libere, in contrasto con l'equilibrio. L'eventuale carica netta in eccesso si distribuisce sulla superficie. Il campo appena fuori è perpendicolare alla superficie, perché una componente tangenziale produrrebbe moto delle cariche.
+:::teorema{#conduttore titolo="Campo nel metallo e appena fuori"}
+Nel materiale di un conduttore in equilibrio elettrostatico il campo è nullo. Un campo interno eserciterebbe una forza sulle cariche libere e le metterebbe in moto. Una superficie gaussiana interamente immersa nel metallo ha perciò flusso nullo. L'eventuale carica in eccesso si trova sulle superfici.
 
-Un piccolo cilindro gaussiano che attraversa la superficie, con una base nel metallo e una appena fuori, dà
+Il campo appena fuori dal metallo è normale alla superficie. Una componente tangenziale farebbe scorrere carica lungo il metallo. Per una piccola superficie gaussiana cilindrica che attraversa il confine, la base interna ha flusso nullo. Nel limite di un cilindro sottile il mantello dà un contributo trascurabile. Se $\sigma_q$ è la densità superficiale locale e $A$ l'area della base esterna, si ha
 $$
-E_{\mathrm{est}}=\frac{|\sigma_q|}{\varepsilon_0}.
+E_{n,\mathrm{est}}A=\frac{\sigma_q A}{\varepsilon_0}
+\quad\Longrightarrow\quad
+E_{n,\mathrm{est}}=\frac{\sigma_q}{\varepsilon_0}.
 $$
-Il fattore è diverso da quello del singolo piano isolante, perché nel metallo il campo è zero. Per una sfera conduttrice isolata di raggio $R$, con distribuzione simmetrica di carica $Q$, il campo interno è nullo e quello esterno è quello di una carica puntiforme. Una cavità vuota completamente racchiusa da un conduttore in equilibrio è schermata dai campi elettrostatici esterni; una cavità contenente cariche richiede invece di considerare anche le cariche indotte.
+Per una sfera conduttrice isolata e carica, il modulo passa da zero appena dentro al valore $\dfrac{|Q|}{4\pi\varepsilon_0R^2}$ appena fuori. Qui la carica sta sulla superficie e i limiti dai due lati sono diversi.
 :::
 
-## Quando Gauss permette di trovare il campo
+:::esempio{titolo="Carica indotta sulla parete di una cavità"}
+Una cavità chiusa dentro un conduttore contiene una carica puntiforme $+3\,\mathrm{nC}$. Una superficie chiusa tracciata nel metallo attorno alla cavità ha flusso zero, dato che giace dove $\vec E=0$. La carica puntiforme e la carica indotta sulla parete interna devono quindi avere somma zero. La parete interna porta in totale $-3\,\mathrm{nC}$. Se il conduttore era neutro, la sua superficie esterna porta in totale $+3\,\mathrm{nC}$.
 
-:::osservazione{#uso-simmetria titolo="Legge generale e metodo di calcolo"}
-Il teorema di Gauss vale anche senza simmetria. Per ricavare facilmente il campo occorre però una superficie su cui il modulo sia costante e la direzione rispetto alla normale sia nota. Una superficie sferica attorno a una carica fuori centro ha lo stesso flusso totale di una che la racchiude al centro, ma il campo non è uniforme sulla superficie.
+In assenza di cariche nella cavità, tutta la parete interna è allo stesso potenziale. Per la soluzione elettrostatica con questo contorno il potenziale è costante anche nella cavità, quindi il campo vi è nullo.
+:::
 
-Il flusso totale di $+1{,}0\,\mathrm{nC}$ è circa $113\,\mathrm{N\,m^2/C}$ per ogni superficie chiusa che racchiuda la carica. Dividere questo valore per l'area fornisce il campo solo quando la simmetria giustifica il raccoglimento di $E$. Nei problemi con poche cariche puntiformi e senza simmetria si usa invece la somma vettoriale dei campi del capitolo precedente.
+## Quando il flusso permette di ricavare il campo
+
+:::osservazione{#uso-simmetria titolo="Scelta della superficie gaussiana"}
+Il teorema di Gauss vale per tutte le superfici chiuse. Per isolare il campo nell'equazione, la simmetria della distribuzione deve permettere di determinare la componente normale su parti della superficie. Su una sfera concentrica $E_r$ è costante. Su un cilindro attorno al filo è costante sul mantello e nulla sulle basi. Sul cilindro corto che attraversa un piano risulta costante sulle basi e nulla sul mantello.
+
+Se si sposta una carica puntiforme dal centro di una sfera gaussiana a un altro punto interno, la carica racchiusa resta la stessa. Il campo vicino alla carica diventa più intenso e le direzioni non sono tutte radiali rispetto al centro della sfera. Dividere il flusso totale per l'area dà la media della componente normale, mentre per conoscere i valori puntuali occorre il campo di Coulomb.
 :::
